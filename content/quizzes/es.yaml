@@ -264,7 +264,7 @@ levels:
             -   option: "Hola mi Hedy es nombre"
                 feedback: "El nombre de la variable se reemplaza por Hedy"
             -   option: "Hola mi Hedy es Hedy"
-                feedback: "Correcto, ¡este error se va arreglar en el tercer nivel!"
+                feedback: "¡Correcto, este error se solucionará en el nivel 4!"
             correct_answer: "D"
             hint: "'nombre' se está reemplazando con 'Hedy' en los dos lugares"
             question_score: '10'
@@ -1253,7 +1253,7 @@ levels:
             -   option: "infinito"
                 feedback: "En este nivel sólo puedes repetir una línea cada vez"
             correct_answer: "B"
-            hint: "Sólo puedes repetir 1 línea cada vez"
+            hint: "Sólo se puede repetir una línea a la vez"
             question_score: '10'
         2:
             question_text: "¿Qué código es correcto?"
@@ -1279,7 +1279,7 @@ levels:
                     ```
                 feedback: "¡Eso es!"
             correct_answer: "D"
-            hint: "Primero el comando repetir, después el comando `{print}`"
+            hint: "Primero el comando `{repeat}`, luego el comando `{print}`"
             question_score: '10'
         3:
             question_text: "¿Este código está bien o mal?"
@@ -1317,7 +1317,7 @@ levels:
                     `{times}`
                 feedback: "`{times}` está mal escrito"
             correct_answer: "A"
-            hint: "Yo soy es incorrecto, no puedes usar apóstrofes"
+            hint: "Estoy equivocado, no puedes usar apóstrofes en una oración"
             question_score: '10'
         5:
             question_text: "¿Este código está bien o mal?"
@@ -1478,8 +1478,8 @@ levels:
                 feedback: "Esto no está en el orden correcto."
             -   option: |
                     ```
-                    {repeat} 4 {times} 'si estás feliz y lo sabes'
-                    {repeat} 2 veces 'aplaude'
+                    {repeat} 4 {times} 'si eres feliz y lo sabes'
+                    {repeat} 2 {times} 'aplaude'
                     {print} 'y realmente quieres mostrarlo'
                     {print} 'aplaude'
                     ```
@@ -1517,7 +1517,7 @@ levels:
             -   option: "Este comando `{print}` se tiene que eliminar."
                 feedback: "No, lo necesitas."
             -   option: "Hay una falta de ortografía en el comando `{repeat}`."
-                feedback: "No, la ortografía correcta es repetir"
+                feedback: "No, `{repeat}` es la ortografía correcta"
             -   option: "La segunda línea tiene que empezar con 4 espacios de sangría."
                 feedback: "¡Correcto!"
             correct_answer: "D"
@@ -1539,7 +1539,7 @@ levels:
             -   option: "Baby shark tututudutudu\nBaby shark\nBaby shark\nBaby shark\n"
                 feedback: "Qué se repite y qué no."
             correct_answer: "C"
-            hint: "¿Qué se repite y qué no?."
+            hint: "¿Qué se está repitiendo y qué no?"
             question_score: '10'
         4:
             question_text: "¿Qué resultado es correcto?"
@@ -1619,11 +1619,11 @@ levels:
                 salsa = {ask} '¿Qué salsa quieres?'
                     {print} 'Unas patatas fritas con ' salsa
                 {if} comida {is} pizza
-                    ingrediente = {ask} '¿Qué ingrediente le gustaría?'
+                    ingrediente = {ask} '¿Qué ingrediente te gustaría?'
                     {print} 'Una pizza con ' ingrediente
-                {print} 'Gracias por su pedido'
+                {print} 'Gracias por tu pedido'
             mp_choice_options:
-            -   option: "¡Nada de este código es correcto!"
+            -   option: "Nada. ¡Este código es correcto!"
                 feedback: "¡Algo falla!"
             -   option: "No se permite usar un comando `{if}` tras un comando `{ask}`."
                 feedback: "¡Lo eres!"
@@ -1769,20 +1769,20 @@ levels:
         3:
             question_text: "¿Qué caso deberías elegir para ganar un millón de dólares?"
             code: |-
-                {print} '¡Elige la caja correcta y gana!'
-                caja = {ask} '¿Qué caja elegirás? 1 o 2?'
-                {if} caja {is} 1
-                     acción = {ask} '¿La abres o la vendes?'
-                         {if} acción {is} vender
-                             {print} 'Vendes tu caja por 10 dólares'
-                         {if} acción {is} abrir
-                             {print} 'Abres la caja y ganas una tarta de manzana'
-                {if} caja {is} 2
-                     acción = {ask} '¿La abres o la vendes?'
-                         {if} acción {is} vender
-                             {print} 'Vendes la caja por 500 dólares'
-                         {if} acción {is} abrir
-                             {print} '¡Abres la caja y ganas un millón de dólares!'
+                {print} '¡Elige el caso correcto y gana!'
+                caso = {ask} '¿Qué caso escogerás? 1 o 2?'
+                {if} caso {is} 1
+                     acción = {ask} '¿Abrirlo o venderlo?'
+                     {if} acción {is} vender
+                         {print} 'Vendes tu caso por 10 dólares'
+                     {if} acción {is} abierta
+                         {print} 'Abres el caso y ganas una tarta de manzana'
+                {if} caso {is} 2
+                     acción = {ask} '¿Abrirlo o venderlo?'
+                     {if} acción {is} vender
+                         {print} 'Vendes el estuche por 500 dólares'
+                     {if} acción {is} abierta
+                         {print} '¡Abre el caso y gana un millón de dólares!'
             mp_choice_options:
             -   option: "caso 1, vende"
                 feedback: "¡No ganas un millón!"
@@ -1869,7 +1869,7 @@ levels:
             -   option: "`{if}` `{else}` `{repeat}`"
                 feedback: "¡Sigue así!"
             -   option: "`{if}` `{else}` `{repeat}` `{print}`"
-                feedback: "No con imprimir"
+                feedback: "No con {print}"
             correct_answer: "C"
             hint: "La sangría ocurre en la línea inferior de algunos comandos"
             question_score: '10'
@@ -1917,7 +1917,7 @@ levels:
             hint: "Tras cada comando `{if}`, la línea de debajo debe tener sangría"
             question_score: '10'
         8:
-            question_text: "¿Qué falla en este código?"
+            question_text: "¿Qué es lo que falla en este código?"
             code: |-
                 edad = {ask} '¡Feliz cumpleaños! ¿Qué edad tienes?'
                 cantar = {ask} '¿Quieres que cantemos?'
@@ -1929,7 +1929,7 @@ levels:
                 feedback: "Sí puedes."
             -   option: "La variable llamada 'edad' se usa después como 'años'"
                 feedback: "¡Buen ojo! ¡Buen trabajo!"
-            -   option: "No está permitido empezar con 8 espacios, como pasa en las líneas 4 y 5"
+            -   option: "No puedes empezar con 8 espacios, como la línea 5"
                 feedback: "De hecho debes empezar así."
             -   option: "Un código siempre debe empezar con un comando `{print}` en la primera línea"
                 feedback: "Eso no es cierto."
@@ -1970,7 +1970,7 @@ levels:
             question_score: '10'
     11:
         1:
-            question_text: "¿Qué palabra debería ir en el lugar del interrogante?"
+            question_text: "¿Qué palabra debe ir en el lugar del espacio en blanco?"
             code: |-
                 {for} i {in} _ 1 {to} 10
                     {print} i
@@ -2073,7 +2073,7 @@ levels:
                 feedback: "Ahora Hedy imprime los números del 0 al 10 en vez de de 10 a 0."
             -   option: |
                     ```
-                    {for} i {in} {range} 0 to 10
+                    {for} i {in} {range} 0 {to} 10
                         {print} - i
                     ```
                 feedback: "Hedy imprimiría números negativos en este caso."
@@ -2127,7 +2127,7 @@ levels:
             hint: "0 también cuenta. Así que 0,1,2 son 3 veces."
             question_score: '10'
         7:
-            question_text: "¿Qué debería ir en lugar del interrogante?"
+            question_text: "¿Qué debe haber en el lugar del espacio en blanco?"
             code: |-
                 {print} 'Bienvenido a la cena de Hedys'
                 gente = {ask} '¿Cuántas personas comerán aquí esta noche?'
@@ -2458,15 +2458,15 @@ levels:
                 premios = 1 millón dólares, coche, sandwich
                 nombres = Bob, Patrick, Sandy, Larry
                 {for} premio {in} premios
-                    {print} 'El ' premio 'lo gana ' nombres {at} {random}
+                	{print} 'El ' premio 'lo gana ' nombres {at} {random}
             mp_choice_options:
             -   option: "Todo el mundo siempre ganará un premio."
                 feedback: "Eso no es cierto, puede que acabes sin llevarte un premio."
             -   option: "Todos los premios siempre van a la misma persona."
                 feedback: "Eso no es cierto. Todos los premios se reparten, pero a gente al azar"
-            -   option: "Larry nunca ganará con un premio"
+            -   option: "Larry nunca ganará un premio"
                 feedback: "Eso no es cierto. Larry tiene las mismas probabilidades que los otros"
-            -   option: "Alguno podría ganar con dos premios"
+            -   option: "Alguno podría ganar dos premios"
                 feedback: "¡Lo conseguiste!"
             correct_answer: "D"
             hint: "Intenta imaginar el resultado de este código."
@@ -2497,7 +2497,7 @@ levels:
                 feedback: Todos los diferentes valores de sabores deberían estar entre comillas.
             -   option: "```\nsabores = 'vainilla, fresa, chocolate'\n{print} 'Me gustaría tomar una tarta de ' sabores {at} {random}\n```"
                 feedback: ¡Muy bien!
-            -   option: "\n```\nsabores = 'vainilla, fresa, chocolate'\n{print} 'Me gustaría tomar una tarta de ' sabores {at} {random} \n```\n"
+            -   option: "\n              ```\n              sabores = 'vainilla, fresa, chocolate'\n              {print} 'Me gustaría un pastel de ' sabores {at} {random} '.'\n              ```\n"
                 feedback: Todos los diferentes valores de sabores deberían estar entre comillas.
             correct_answer: C
             hint: La segunda línea es la misma en cada código, presta atención a la primera línea
@@ -2519,7 +2519,7 @@ levels:
         5:
             correct_answer: B
             question_text: ¿Qué resultado tendrá el Agente007 cuando pongan la contraseña correcta?
-            code: "nombre {is} {ask} '¿Cuál es su nombre?'\n{if} nombre {is} 'Agente007'\n    a {is} 'Ir al aeropuerto '\nsino\n    a {is} 'Ir a la estación de tren '\ncontraseña {is} {ask} '¿Cuál es la contraseña?'\n{if} contraseña {is} 'TOPSECRET'\n    b {is} 'mañana a las 02.00'\nsino\n    b {is} 'hoy a las 10.00'\nimprimir a + b"
+            code: "nombre {is} {ask} ¿Cuál es tu nombre?\n{if} nombre {is} 'Agente007'\n    a {is} 'Ve al aeropuerto '\nsi no\n    a {is} 'Ve a la estación de tren'\ncontraseña {is} {ask} ¿Cuál es la contraseña?\n{if} contraseña {is} 'ALTO SECRETO'\n    b {is} 'mañana a las 02.00'\n{else}\n    b {is} 'hoy a las 10.00'\n{print} a + b"
             mp_choice_options:
             -   option: Ve a la estación de trenes hoy a las 10.00
                 feedback: El agente no atrapará a ningún malo aquí
@@ -2602,13 +2602,13 @@ levels:
             -   option: "```\npremios = 'un millón de dólares', 'nada'\n```"
                 feedback: ¡Ganador!
             -   option: "```\n'premios' = 'un millón de dólares', 'nada'\n```"
-                feedback: Tú nada
+                feedback: No ganaste nada
             correct_answer: C
             hint: Los objetos de la lista deben ir entre comillas
             question_score: '10'
         10:
             question_text: ¿Qué línea de código debe rellenarse en ??? para completar la canción ?
-            code: "acciones = 'aplaude', 'pisa fuerte', 'grita ¡Hurra!'\n???\n    {for} i {in} rango 0 {to} 1\n        {print} 'si estás feliz y lo sabes'\n        {print} accion\n    {print} 'si estás feliz y lo sabes y realmente quieres mostrarlo'\n    {print} 'si estás feliz y lo sabes'\n    {print} accion"
+            code: "acciones = 'aplaude', 'pisa fuerte', 'grita ¡Hurra!'\n???\n    {for} i {in} {range} 0 {to} 1\n        {print} 'si estás feliz y lo sabes'\n        {print} accion\n    {print} 'si estás feliz y lo sabes y realmente quieres mostrarlo'\n    {print} 'si estás feliz y lo sabes'\n    {print} accion"
             mp_choice_options:
             -   option: "```\n{for} i {in} {range} 1 {to} 3\n```"
                 feedback: ¡Esta es difícil! En la canción deben aparecer todas las acciones de la lista.
@@ -2804,7 +2804,7 @@ levels:
             question_score: '10'
         4:
             correct_answer: B
-            code: "precio = 10\ndinero = {ask} ¿Cuánto dinero tienes?\ncomprar = {ask} '¿Quieres comprar este osito de peluche?'\n{if} dinero >= precio y comprar == 'sí'\n    {print} '¡Puedes comprar el oso!'\n{else}\n    {print} '¡No puedes comprar el oso!'\n"
+            code: "precio = 10\ndinero = {ask} ¿Cuánto dinero tienes?\ncomprar = {ask} '¿Quieres comprar este osito de peluche?'\n{if} dinero >= precio {and} comprar == 'sí'\n    {print} '¡Puedes comprar el oso!'\n{else}\n    {print} '¡No puedes comprar el oso!'\n"
             mp_choice_options:
             -   option: En la línea 1 se debería haber usado == en vez de =
                 feedback: No, no es eso
@@ -2829,7 +2829,7 @@ levels:
                 feedback: Se para tras 2 veces
             -   option: 2 veces
                 feedback: Eso es correcto
-            code: "vidas = 2\n{repeat} 10 veces\n    {if} vidas != 0\n        respuesta = {ask} '¿Ya estás enfadado?'\n    {if} respuesta == 'sí'\n        vidas = vidas - 1\n"
+            code: "vidas = 2\n{repeat} 10 {times}\n    {if}¡ vidas != 0\n        respuesta = {ask} '¿Ya estás enfadado?'\n    {if} respuesta == 'sí'\n        vidas = vidas - 1\n"
             correct_answer: D
             hint: "!= significa 'no es'"
         9:
@@ -2842,7 +2842,7 @@ levels:
                 option: 8 o más
             -   feedback: ¡Genial!
                 option: 9 o más
-            code: "chocolate = {ask} '¿Cuántos trozos de chocolate te has comido?'\n  {if} chocolate <= 2\n      {print} 'Eso es una cantidad sana'\n  {if} chocolate > 2 y chocolate =< 8\n      {print} 'Eso es demasiado'\n  {if} chocolate > 8\n      {print} '¡Te va a doler el estómago!'\n"
+            code: "chocolate = {ask} ¿Cuántos trozos de chocolate has comido?\n  {if} chocolate <= 2\n      {print} 'Es una cantidad saludable'\n  {if} chocolate > 2 {and} chocolate =< 8\n      {print} 'Es demasiado'.\n  {if} chocolate > 8\n      {print} '¡Te dolerá el estómago!\n"
             question_text: ¿Cuántas porciones de chocolate harán que te duela el estómago de acuerdo a este fitbit?
             question_score: '10'
             correct_answer: D
@@ -2879,7 +2879,7 @@ levels:
             question_score: '10'
         5:
             question_text: '¿Qué símbolo debe rellenarse en los espacios en blanco si la película es apta para niños a partir de 12 años? '
-            code: "edad = {ask} '¿Cuántos años tienes?'\nentrada = {ask} '¿Tienes una entrada?'\n{if} edad _ y entrada == 'sí'\n    {print} 'Puedes entrar al cine.'\n{else}\n    {print} '¡No puedes entrar!'\n"
+            code: "edad = {ask} '¿Cuántos años tienes?'\nentrada = {ask} '¿Tienes una entrada?'\n{if} edad _ {and} entrada == 'sí'\n    {print} 'Puedes entrar al cine.'\n{else}\n    {print} '¡No puedes entrar!'\n"
             mp_choice_options:
             -   option: '`> 12`'
                 feedback: También se admite a los de 12 años
@@ -2925,7 +2925,7 @@ levels:
     15:
         1:
             question_text: '¿Qué símbolo debería usarse en el espacio en blanco? Consejo: Debes seguir adivinando hasta que lo consigas.'
-            code: "respuesta = 0\nwhile respuesta _ 'Amsterdam'\n    respuesta = ask '¿Cuál es la capital de Paises Bajos?'\nprint 'Has dado la respuesta correcta'\n"
+            code: "respuesta = 0\n{while} respuesta _ 'Amsterdam'\n    respuesta = {ask} ¿Cuál es la capital de los Países Bajos?\n{print} 'Has dado la respuesta correcta'\n"
             mp_choice_options:
             -   option: '`=!`'
                 feedback: Eso no es correcto.
@@ -2953,8 +2953,8 @@ levels:
             hint: Cuando comparas dos respuestas debes usar ==
             question_score: '10'
         3:
-            question_text: ¿Qué comando debe rellenarse en los dos espacios en blanco?
-            code: "_ edad >= 18\n  print 'no se te permite entrar en este bar'\n"
+            question_text: ¿Qué comando debe completar los espacio en blanco?
+            code: "_age < 18\n  {print} 'no tienes permitido entrar en este bar'\n"
             mp_choice_options:
             -   option: '`{in}`'
                 feedback: No es eso
@@ -2969,13 +2969,13 @@ levels:
             hint: No puedes entrar al bar si tienes 17 años o menos
         4:
             question_text: ¿Qué le pasa a este código?
-            code: "opciones = 1, 2, 3, 4, 5, 6\nprint '¡Lanza un 6 lo antes posible!'\nlanzamientos = 0\nintentos = 0\nwhile lanzamientos == 6\n    lanzamientos = opciones at random\n    print 'Lanzaste ' thrown\n    intentos = intentos + 1\nprint '¡Sí! Has lanzado 6 en ' intentos ' intentos.'\n"
+            code: "opciones = 1, 2, 3, 4, 5, 6\n{print} '¡Lanza 6 tan rápido como puedas!'\nlanzado = 0\nintentos = 0\n{while} lanzado == 6\n    lanzado = opciones {at} {random}\n    {print} 'Has lanzado ' lanzado\n    intentos = intentos + 1\n{print} '¡Sí! Has lanzado 6 veces en ' intentos.'\n"
             mp_choice_options:
             -   option: En la línea 1 debe utilizarse == en vez de =
                 feedback: No es eso
             -   option: Faltan comillas en la línea 2
                 feedback: Eso no está bien
-            -   option: En la línea 5 se debería haber usado if en vez de while
+            -   option: En la línea 5 debería haberse utilizado {if} en lugar de {while}
                 feedback: No es eso
             -   option: En la línea 5 se debería haber usado != en vez de ==
                 feedback: Tienes razón
@@ -2984,7 +2984,7 @@ levels:
             correct_answer: D
         5:
             question_text: ¿Qué hay que poner en el espacio en blanco para hacer que este programa funcione correctamente?
-            code: "humedad = 10\nwhile humedad != 0\n    print 'Tu pelo sigue mojado, ¡secador activado!'\n    sleep 1\n    clear\n    humedad _\n\nprint '¡Todo seco!'\n"
+            code: "humedad = 10\n{while} ¡ humedad != 0\n    {print} 'Tu pelo sigue mojado, ¡el secador está encendido!'\n    {sleep} 1\n    {clear}\n    humedad _\n\n{print} \"¡Todo seco!\n"
             mp_choice_options:
             -   option: = humedad
                 feedback: Eso no cambiará nada
@@ -2999,11 +2999,11 @@ levels:
             question_score: '10'
         6:
             question_text: ¿Qué le pasa a este código?
-            code: "vidas = 100\n    {while} vidas != 0\n    respuesta = {ask} '¿Ya estás enfadado?'\n{if} respuesta == 'sí'\n    vidas = vidas - 1\n"
+            code: "vidas = 100\n    {while} ¡ vidas != 0\n    respuesta = {ask} '¿Ya estás enfadado?'\n    {if} respuesta == 'sí\n        vidas = vidas - 1\n"
             mp_choice_options:
-            -   option: while debe ser if
+            -   option: '{while} debería ser {if}'
                 feedback: No, eso no es correcto
-            -   option: if debe ser while
+            -   option: '{if} debería ser {while}'
                 feedback: No, eso no es correcto
             -   option: La línea 3 debe empezar con más sangría
                 feedback: No, eso no es correcto
@@ -3013,7 +3013,7 @@ levels:
             hint: Presta atención a la sangría
             question_score: '10'
         7:
-            question_text: ¿Cómo se debe cambiar este programa para que funcione?
+            question_text: ¿Cómo debería modificarse este programa para que funcione?
             code: "{print} 'Adivina el número'\nnúmeros = 1, 2, 3, 4, 5, 6, 7, 8, 9, 10\nnúmero = números {at} {random}\njuego = 'encendido'\n{if} juego == 'encendido'\n    respuesta = {ask} 'Which número do you think it is?'\n    {if} respuesta < número\n        {print} _\n    {if} respuesta > número\n        {print} _\n    {if} respuesta == número\n        {print} _\n        juego = 'acabado'\n"
             mp_choice_options:
             -   option: '... cambia el primer {if} por un {while}'
@@ -3029,7 +3029,7 @@ levels:
             question_score: '10'
         8:
             question_text: ¿Qué sentencia es cierta sobre este sistema de baño automático?
-            code: "while baño == 'ocupado'\n    luces = 'encendido'\n    pulverizar_ambientados = 'sí'\n    sleep 60\nelse\n    luces = 'apagado'\n"
+            code: "{while} aseo == 'ocupado'\n    luces = 'encendidas'\n    air_freshener_sprays = 'yes'\n    {sleep} 60\n{else}\n    luces = 'apagadas'\n"
             mp_choice_options:
             -   option: Las luces y el ambientador se apagarán tras 1 minuto
                 feedback: ¡Falso!
@@ -3043,7 +3043,7 @@ levels:
             hint: El bloque después del comando while sigue ocurriendo mientras el baño está ocupado.
             question_score: '10'
         9:
-            code: "calorías = {ask} '¿Cuántas calorías has comido hoy?'\n  {while} calorías <= 1000\n      {print} 'Puedes comer más'\n  {while} calorías > 1000 and calorias =< 2000\n      {print} 'Está bien'\n  {while} calorías > 2000\n      {print} 'Ya has comido suficiente hoy'\n"
+            code: "calorías = {ask} '¿Cuántas calorías has comido hoy?'\n  {while} calorías <= 1000\n      {print} 'Podrías comer un poco más'\n  {while} calorías > 1000 {and} calorías =< 2000\n      {print} 'Está bien'\n  {while} calorías > 2000\n      {print} 'Ya has comido suficiente por hoy'\n"
             mp_choice_options:
             -   option: Nada. 1600 no está programado en la aplicación.
                 feedback: No

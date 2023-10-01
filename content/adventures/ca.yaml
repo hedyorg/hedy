@@ -7,8 +7,8 @@ adventures:
                 start_code: '{print} hola món!'
                 story_text: "Benvingut a Hedy!\n\nPer provar el codi tan sols has de fer clic al botó 'Executa' sota el bloc de programació.\n\nEstàs llest?, ves a la següent pestanya per aprendre la teva primera comanda.\n"
             18:
-                start_code: "nom = 'Hedy'\n{print}('Em dic ', nom)"
-                story_text: "We arrived at real Python code! That means we need to use parentheses with {print} and {range} from now on."
+                start_code: "{print} ('Bona feina!!!')"
+                story_text: "L'enhorabona! Has assolit l'últim nivell de Hedy! El codi has creat aquí pot ser copiat a entorns reals de Python com replit o PyCharm, i pots continuar aprenent allà!\nTingues en compte que aquell Python només pot llegir comandes en anglès, així que si has estat utilitzant altres llengües, ara les hauràs de posar en anglès.\n"
             2:
                 story_text: "Enhorabona! Has arribat al nivell 2. Segurament ja has fet codis genials!\nDurant el primer nivell t'hauràs adonat que la comanda `{echo}` només pot guardar una peça d'informació cada vegada.\nPer exemple, a l'aventura del restaurant podies repetir el que el client volia menjar, o el que volia beure, però no tot d'una vegada.\n"
                 example_code: "**Alerta! Aquest codi no funciona!**\nA Hedy les comandes van canviant. Per exemple la comanda `{echo}` només funciona al nivell 1. En aquest nivell aprendràs una millor manera de respondre.\n\n```\n{print} Benvingut a Hedy\n{ask} Què voldria per menjar?\n{echo} Vosté vol\n{ask} Què voldria per beure?\n{echo} Vosté vol\n```\n"
@@ -18,7 +18,7 @@ adventures:
                 story_text: "Al nivell anterior has après què és una variable i com la pots utilitzar per fer les teves aventures de forma més interactiva.\nPerò... Hi ha moltes més coses a fer amb les variables! També pots utilitzar les variables per fer llistes.\nFins i tot pots deixar que Hedy esculli una paraula aleatòria d'una llista, permetent-nos fer jocs reals!\nFes-hi una ullada a la següent pestanya!\n"
                 start_code: '{print} hola món!'
             4:
-                start_code: "{print} 'Hola món'"
+                start_code: "nom {is} Sofia\n{print} El meu nom és nom\n"
                 story_text: "Als nivells anteriors has estat practicant amb les variables, i segurament t'has trobat amb el següent problema.\nEn intentar executar un codi com aquest:\n\nSegurament volies imprimir\n\n`My name is Sophie`\n\nperò Hedy ha imprès\n\n`My Sophie is Sophie`.\n\nEn aquest nivell se soluciona aquest problema fent servir les cometes.\n"
                 example_code: "```\nnom {is} Sofia\n{print} El meu nom és nom\n```\n"
             5:
@@ -53,24 +53,24 @@ adventures:
                 story_text: "Potser has provat d'utilitzar números en decimal a l'aventura del restaurant. Si ho has fet, probablement hauràs notat que Hedy no els entenia i ho arrodonia.\nA partir d'ara pots utilitzar nombres decimals.\n"
                 example_code: "```\nhamburguesa = 5\nbeguda = 2\ntotal = hamburguesa + beguda\nprint 'Has demanat una hamburguesa i una beguda '\nprint 'Costa ' total ' euros, siusplau'\n```\n"
             13:
-                start_code: "name = {ask} 'what is your name?'\nage = {ask} 'what is your age?'\n{if} name {is} 'Hedy' {and} age {is} 2\n    {print} 'You are the real Hedy!'"
-                story_text: "We are now going to learn `{and}` and `{or}`! If you want to check two statements, you don't have to use two {if}'s but can use `{and}` and `{or}`. If you use `{and}`, both statements, left and right of the `{and}` need to be true. We can also use `{or}`. Then only one statement needs to be correct."
-                example_code: "```\nname = {ask} 'what is your name?'\nage = {ask} 'what is your age?'\n{if} name {is} 'Hedy' {and} age {is} 2\n    {print} 'You are the real Hedy!'\n```\n"
+                start_code: "{print} 'Som-hi!, ves a la següent pestanya!'"
+                story_text: "Als nivells anteriors has après a posar dues comandes `{if}`, una dins d'una altra. Això funciona bé, però fa que els codis siguin llargs i poc pràctics com aquest:\n\nAquí, hauràs d'introduir tant el nom d'usuari com la contrasenya correcta.\nEn aquest nivell aprendràs a fer servir la comanda `{and}` que ens permetrà reduir considerablement la mida del codi i fer-lo més entenedor.\nComprova-ho!\n"
+                example_code: "```\nusuari = {ask} 'Quin és el teu nom d'usuari?'\ncontrassenya = {ask} 'Quina és la teva contrassenya?'\n{if} usuari {is} 'Hedy'\n    {if} contrassenya {is} 'secreta'\n        {print} 'Benvingut/da Hedy!'\n    {else}\n        {print} 'Accés denegat'\n{else}\n    {print} 'Accés denegat!'\n```\n"
             14:
-                start_code: "age = {ask} 'How old are you?'\n{if} age < 13\n    {print} 'You are younger than me!'\n{else}\n    {print} 'You are older than me!'"
-                story_text: "We are going to learn more new items. You might know them already from mathematics, the `<` and `>`.\nThe `<` checks if the first number is smaller than the second, for example age `<` 12 checks if age is smaller than 12.\nIf you want to check if the first number is smaller or equal to the second, you can use `<=`, for example age `<=` 11.\nThe `>` checks if the first number is bigger than the second, for example points `>` 10 checks if points is larger than 10.\nIf you want to check if the first number is bigger or equal to the second, you can use `>=`, for example points `>=` 11.\nYou use these comparisons in an `{if}`, like this:\n"
-                example_code: "```\nage = {ask} 'How old are you?'\n{if} age > 12\n    {print} 'You are older than I am!'\n```\n"
+                start_code: "resposta = {ask} 'Vols aprendre més?'\n{if} resposta == 'sí'\n    {print} 'Continua amb la següent aventura!'\n{if} resposta != 'sí'\n    {print} 'Oh.. quina pena!'\n"
+                story_text: "Amb el programa següent pots calcular si has aprovat una assignatura (per tant, una nota superior o igual a 5).\nPots observar que aquest codi és extremadament ineficient, a causa de la longitud excessiva de la línia 5.\nTotes les notes de l'1 al 5 s'han programat per separat. Estàs de sort, ja que en aquest nivell aprendràs a fer-ho molt més curt!\n"
+                example_code: "```\nprimera_nota= {ask} 'Quina nota has tret al primer examen?'\nsegona_nota= {ask} 'Quina nota has tret al segon examen?'\nsuma = primera_nota + segona_nota\nmitjana_nota = suma / 2\n{if} mitjana_nota = 0 {or} mitjana_nota = 1 {or} mitjana_nota = 2 {or} mitjana_nota = 3 {or} mitjana_nota = 4\n    {print} 'Oh no! Has suspés l'assignatura...'\n{else}\n    {print} 'Perfecte! Has aprovat l'assignatura!'\n```\n"
             15:
-                story_text: "We are going to learn a new loop, the `{while}` loop! We continue the loop as long as the statement is true.\nSo don't forget to change the value in the loop.\n\nIn the example code, we continue until a correct answer has been given.\nIf the correct answer is never given, the loop never ends!"
-                start_code: "answer = 0\n{while} answer != 25\n    answer = {ask} 'What is 5 times 5?'\n{print} 'A correct answer has been given'"
-                example_code: "```\nanswer = 0\n{while} answer != 25\n    answer = {ask} 'What is 5 times 5?'\n{print} 'A correct answer has been given'\n```\n"
+                story_text: "Pel joc de baix s'ha preparat el codi per assegurar-se que el jugador pot jugar tanta estona com vulgui ...\nEl codi, però és massa llarg i ineficaç. A més, què passa si el jugador vol jugar 101 partides en lloc de 100?\nNo es pot jugar fins a l'infinit?\nDurant aquest nivell aprendràs una comanda que fa la vida fàcil amb tot això!\n"
+                start_code: "{print} 'Som-hi!, cap a la següent pestanya!'"
+                example_code: "```\njoc {is} 'en curs'\n{for} i {in} {range} 1 {to} 100\n    {if} joc {is} 'en curs'\n        resposta = {ask} 'Vols continuar?'\n        {if} resposta {is} 'no'\n            joc {is} 'acabat'\n        {if} resposta {is} 'si'\n            {print} D'acord continuem'\n```\n"
             16:
-                start_code: "fruita = ['poma', 'plàtan', 'cirera']\n{print} fruita"
-                story_text: "We are going to make lists the Python way, with square brackets around the lists! We also keep the quotation marks around each item like we have learned in previous levels.\nYou can use the square brackets as well to point out a place in the lists."
-                example_code: "```\nfriends = ['Ahmed', 'Ben', 'Cayden']\nlucky_numbers = [15, 18, 6]\n{for} i {in} {range} 1 {to} 3\n    {print} 'the lucky number of ' friends[i]\n    {print} 'is ' lucky_numbers[i]\n```\n"
+                start_code: "{print} 'Som-hi!, cap a la següent pestanya!'"
+                story_text: "En aquest nivell avançarem una mica més cap al codi Python real. També aprendràs com combinar dues llistes.\nD'aquesta manera pots programar com l'animal correcte s'associa al so correcte.\nPerquè els dos codis d'aquí sota... Evidentment, no tenen cap sentit!\n"
+                example_code: "```\nanimals = 'gallina', 'burra', 'vaca'\nsons = 'cocococ', 'ii-ah', 'muuu'\n{for} animal {in} animals\n    {print} 'Una ' animal ' fa ' sons {at} {random}\n```\nTambé pots provar-ho d'aquesta manera, però...\n```\nanimals = 'gallina', 'burra', 'vaca'\nsons = 'cocococ', 'ii-ah', 'muuu'\n{for} animal {in} animals\n    {for} sound {in} sons\n        {print} 'Una ' animal ' fa ' sound\n```\nNota: Aquests codis no funcionaran així en aquest nivell. Ves a la següent pestanya per veure quines parts has de corregir."
             17:
-                start_code: "{for} i {in} {range} 1 {to} 10:\n    {print} i\n{print} 'Ready or not, here I come!'"
-                story_text: "Now we are going to change indentation a little bit. Every time that we need an indentation, we need `:` at the line before the indentation.\n\nIn this level you can also use a new command: `{elif}`. `{elif}` is short for {else} {if} and you need it when you want to make 3 (or more!) options.\nCheck it out!"
+                start_code: "{print} 'Endavant!, cap a la següent pestanya!'"
+                story_text: "Ara canviarem com funciona la indentació una mica. Cada cop que necessitem una sagnia, necessitem `:` a la línia abans de la sagnia.\n\nEn aquest nivell també pots utilitzar una comanda nova: `{ elif }`. `{elif}` és una abreviatura de {else} {if} i és molt útil per a quan vols fer 3 (o més!) opcions.\nComprova-ho!\n"
         name: Introducció
     story:
         name: Història
@@ -138,7 +138,7 @@ adventures:
                 example_code_2: "```\nnaam = {input}(\"What's your name?\")\n{print}('Welcome to this story!')\n```\n"
                 start_code: '# Schrijf jouw code hier'
     parrot:
-        name: Parrot
+        name: Lloro
         default_save_name: Parrot
         levels:
             4:
@@ -666,24 +666,24 @@ adventures:
                 start_code: '# place your code here'
         name: Key presses
     print_command:
-        description: Introduction print command
+        description: Introducció a la comanda imprimir
         name: "{print}"
         default_save_name: print
         levels:
             1:
-                story_text: "## The print command\nYou can print text to the screen using the `{print}` command.\n"
-                story_text_2: "### Exercise\nIn Hedy you will find exercises in every adventure. An exercise allows you to practise the new commands and concepts, and lets you give your own twist to the example codes.\nIn this exercise you will see a pink blank space. You have to fill something in the place of the blank space before the code can be ran.\n\nFill in the `{print}` command in the blank space and then add five more lines of code. Each line has to start with a `{print}` command.\nHave fun!\n"
-                example_code: "```\n{print} Hi there, programmer!\n{print} Welcome to Hedy!\n```\n"
-                example_code_2: "```\n_ Hello!\n```\n"
-                start_code: "{print} Welcome to Hedy!\n"
+                story_text: "## La comanda imprimir\nPots imprimir un text a la pantalla utilitzant la comanda `{print}` .\n"
+                story_text_2: "### Exercici\nA Hedy trobaràs exercicis a cada aventura. Un exercici et permet per practicar les comandes noves, diferents conceptes, i et permet jugar amb els codis d'exemple.\nEn aquest exercici veureu un espai buit rosa. Has d'omplir l'espai en blanc si vols que el codi pugui funcionar.\n\nOmple la comanda `{print}` a l'espai blanc i després afegeix cinc línies més al codi. Cada línia ha de començar amb la comanda `{print}`.\nGaudeix-ho!\n"
+                example_code: "```\n{print} Ei programador!\n{print} Benvingut a Hedy!\n```\n"
+                example_code_2: "```\n_ Hola!\n```\n"
+                start_code: "{print} Benvingut a Hedy!\n"
             18:
-                start_code: "name = 'Hedy'\n{print}('My name is ', name)"
-                story_text: "We arrived at real Python code! That means we need to use parentheses with `{print}` and `{range}` from now on.\nIt also means you can use Hedy code from this level in any Python environment as long as you use the English commands. If you haven't until now, you can switch the toggle in the commands menu to do so."
-                example_code: "```\n{print}('Hello!')\n{for} i {in} {range}(1, 10):\n    {print}('This is line ', i)\n```\n"
-                story_text_2: If you want to print more than one item, you need to separate them by commas.
-                example_code_2: "```\ntemperature = 25\n{print}('It is ', temperature, ' degrees outside')\n```\n"
-                story_text_3: The final change we will need to make to get Python code is changing `{ask}` into `{input}`.
-                example_code_3: "```\n{print}('My name is Hedy!')\nname = {input}('What is your name?')\n{print}('So your name is ', name)\n```\n"
+                start_code: "nom = 'Hedy'\n{print}('Em dic ', nom)"
+                story_text: "Hem arribat al codi Python real! Això vol dir que hem d'utilitzar parèntesis amb `{print}` i `{range}` d'ara endavant.\nAixò també significa que podeu utilitzar a partir d'aquest nivell el codi d'Hedy en qualsevol entorn Python sempre que utilitzeu les comandes angleses. Si no has fet encara, pots canviar-ho la pestanya del menú de comandes per fer-ho."
+                example_code: "```\n{print}('Hola!')\n{for} i {in} {range}(1, 10):\n    {print}('Aquesta és la línia ', i)\n```\n"
+                story_text_2: Si vols imprimir més d'un element, necessites separar-los per comes.
+                example_code_2: "```\ntemperatura = 25\n{print}('Fa ', temperatura , \" graus a l'exterior\")\n```\n"
+                story_text_3: L'últim canvi que ens falta per aconseguir que el codi sigui Python és canviar `{ask}` per `{input}`.
+                example_code_3: "```\n{print}(' El meu nom és Hedy!')\nnom = {input}('Quin és el teu nom?')\n{print}('El teu nom és ', nom)\n```\n"
     for_command:
         name: "{for}"
         description: for command
@@ -694,9 +694,20 @@ adventures:
                 story_text: "## For\nIn this level we learn a new code called `{for}`. With `{for}` you can make a list and use all elements.\n`{for}` creates a block, like `{repeat}` and `{if}` so all lines in the block need to start with 4 spaces."
                 example_code: "```\nanimals {is} dog, cat, blobfish\n{for} animal {in} animals\n    {print} 'I love ' animal\n```\n"
             11:
-                start_code: "{for} counter {in} {range} 1 {to} 5\n    {print} counter"
-                story_text: "In this level, we add a new form of the `{for}`. In earlier levels, we used `{for}` with a list, but we can also use `{for}` with numbers.\nWe do that by adding a variable name, followed by  `{in}` `{range}`. We then write the number to start at, `{to}` and the number to end at.\n\nTry the example to see what happens! In this level again, you will need to use indentations in lines below the `{for}` statements."
-                example_code: "```\n{for} counter {in} {range} 1 {to} 5\n    {print} counter\n```\n"
+                start_code: |-
+                    {for} counter {in} {range} 1 {to} 10
+                        {print} counter
+                    {print} 'Ready or not. Here I come!'
+                story_text: |-
+                    In this level, we add a new form of the `{for}`. In earlier levels, we used `{for}` with a list, but we can also use `{for}` with numbers.
+                    We do that by adding a variable name, followed by  `{in}` `{range}`. We then write the number to start at, `{to}` and the number to end at.
+                    Try the example to see what happens! In this level again, you will need to use indentations in lines below the `{for}` statements.
+                example_code: |
+                    ```
+                    {for} counter {in} {range} 1 {to} 10
+                        {print} counter
+                    {print} 'Ready or not. Here I come!'
+                    ```
             17:
                 start_code: "{for} i {in} {range} 1 {to} 10:\n    {print} i\n{print} 'Ready or not, here I come!'"
                 story_text: "Now we are going to change indentation a little bit. Every time that we need an indentation, we need `:` at the line before the indentation.\n"
@@ -710,8 +721,6 @@ adventures:
                 start_code: "{print} '5 times 5 is ' 5 * 5"
                 story_text: "## 1 + 1\nIn this level you learn something new: you can now also calculate.\n\nThe plus is easy, you write it like with math: `5 + 5` for example. The minus also works fine, it is `5 - 5`.\n\nThe times is a bit different, because there is no times symbol on your keyboard. Just search, there really isn't!\nThat is why we multiply with the asterisk above 8: `5 * 5`. Read that as \"5 times 5\" that helps you remember it best.\n"
                 example_code: "```\n{print} '5 plus 5 is ' 5 + 5\n{print} '5 minus 5 is ' 5 - 5\n{print} '5 times 5 is ' 5 * 5\n```\n"
-                story_text_2: "We also make a change in storing a word in a variable! You may now use `=` instead of  `{is}` when we store a name or a number in a variable, like this:\n"
-                example_code_2: "```\nname = Hedy\nanswer = 20 + 4\n```\n"
             12:
                 story_text: "**Decimal numbers**\nSo far, Hedy did not allow for decimal numbers like 1.5, but now we do allow that. Note that computers use the `.` for decimal numbers."
                 example_code: "```\n{print} 'Two and a half plus two and a half is...'\n{print} 2.5 + 2.5\n```\n"
@@ -745,34 +754,34 @@ adventures:
                 example_code: "```\nhouses = Gryffindor, Slytherin, Hufflepuff, Ravenclaw\nsubjects = potions, defence against the dark arts, charms, transfiguration\nfears = Voldemort, spiders, failing your OWL test\nnames = Harry, Ron, Hermione\n_\n_ {print} name ' is placed in ' houses {at} {random}\n_ {print} name ' is great at ' subjects {at} {random}\n_ {print} name 's greatest fear is ' fears {at} {random}\n```\n"
     ask_command:
         name: "{ask}"
-        description: Introduction ask command
+        description: Introducció a la comanda preguntar
         default_save_name: ask_command
         levels:
             1:
-                story_text: "## The ask command\nNow that you can use the `{print}` command, you are ready to learn the next command: `{ask}`. With the `{ask}` command, you can ask a question. Check it out:\n"
-                example_code: "```\n{print} Hello!\n{ask} What is your name?\n```\n"
+                story_text: "## La comanda pregunta\nAra que ja saps utilitzar la comanda`{print}`, estàs preparat per aprendre la següent comanda: `{ask}`. Amb `{ask}`, pots fer una pregunta. Comprova-ho:\n"
+                example_code: "```\n{print} Hola!\n{ask} Com et dius?\n```\n"
                 story_text_2: "## The echo command\nIf you want the computer to repeat the answer, you can use the `{echo}` command. The answer will then be echoed back at the end of the sentence, so in this example after hello.\n"
-                story_text_3: "### Exercise\nTry out the `{ask}` and `{echo}` commands. Firstly, fill in the blanks to make this program work.\nThen ask 2 more questions using the `{ask}` command, after each `{ask}` use an `{echo}` to print the answer on the screen.\n"
-                example_code_2: "```\n{print} Hello!\n{ask} What is your name?\n{echo} hello\n```\n"
-                example_code_3: "```\n_ How are you doing?\n_\n```\n"
-                start_code: "{print} Hello!\n{ask} What is your name?\n{echo} hello\n"
+                story_text_3: "### Exercici\nProveu les comandes `{ask}` i `{echo}`. Abans de res, ompliu els buits perquè aquest programa funcioni.\nA continuació, feu 2 preguntes més utilitzant la comanda `{ask}`, després de cada `{ask}` utilitzeu `{echo}` per imprimir la resposta a la pantalla.\n"
+                example_code_2: "```\n{print} Hola!\n{ask} Com et dius?\n{echo} Hola\n```\n"
+                example_code_3: "```\n_ Com vas?\n_\n```\n"
+                start_code: "{print} Hola!\n{ask} Com et dius?\n{echo} Hola\n"
             2:
-                story_text: "## The ask command\nNow that we can use **variables** in our codes, we no longer need the `{echo}` command.\nWe can use variables to store the answers to our questions and this way we can use the answer to multiple questions in our codes.\nCheck it out:\n\nThis way your code is becoming interactive!\n"
-                example_code: "```\nname {is} {ask} What is your name?\n{print} Hello name\nage {is} {ask} How old are you?\n{print} name is age years old.\n```\n"
-                story_text_2: "### Exercise\nIn the previous tab you have practised with setting variables with the `{is}` command.\nYou have created at least 3 variables and used them with a print command.\nNow, instead of setting the variables we want you to make the variables interactive, like we did in our example.\n\nCopy your code from the previous tab and make the variables interactive by using `{ask}` commands.\n"
-                example_code_2: "```\nfavorite_animals is ask What is your favorite animal?\nprint I like favorite_animals\n```\n"
-                start_code: "name {is} {ask} What is your name?\n{print} Hello name\nage {is} {ask} How old are you?\n{print} name is age years old."
+                story_text: "## La comanda pregunta\nAra que sabem utilitzar **variables** als nostres codis, ja no necessitem la comanda `{echo}`.\nPodem utilitzar variables per emmagatzemar les respostes a les nostres preguntes i podem respondre múltiples preguntes en els nostres codis.\nComprova-ho:\n\nD'aquesta manera, el teu codi es torna interactiu!\n"
+                example_code: "```\nnom {is} {ask} Com et dius?\n{print} Hola nom\nedat {is} {ask} Quants anys tens?\n{print} nom té edat anys.\n```\n"
+                story_text_2: "### Exercici\nA la pestanya anterior heu practicat a establir variables amb la comanda `{is}`.\nHas creat almenys 3 variables i les has utilitzat amb una comanda d'impressió.\nAra, en lloc d'establir les variables, volem que les facis interactives, com hem fet al nostre exemple.\n\nCopia el teu codi de la pestanya anterior i fes que les variables siguin interactives mitjançant la comanda `{ask}`.\n"
+                example_code_2: "```\nanimals_preferits {is} {ask} Quin són els teus animals preferits?\n{print} M'agrada els/les animals_preferits\n```\n"
+                start_code: "nom {is} {ask} Com et dius?\n{print} Hola nom\nedat {is} {ask} Quants anys tens?\n{print} nom té edat anys."
     is_command:
         name: "{is}"
-        description: introducing is command
-        default_save_name: is_command
+        description: Introducció a la comanda és
+        default_save_name: comanda_es
         levels:
             2:
-                story_text: "## Variables\nYou can name a word with `{is}`. This is called a **variable**. In this example we made a variable called name and a variable called age. You can use the word name anywhere in your code and it will be replaced by Hedy, like this:\n"
-                example_code: "```\nname {is} Hedy\nage {is} 15\n{print} name is age years old\n```\n"
-                story_text_2: "### Exercise\nTime to make your own variables!\nIn the example code we made an example of the variable `favorite_animals`. In line 1 the variable is set, and in line 2 we haved used the variable in a print command.\nFirstly, finish our example by filling in your favorite animal in the blanks. Then make at least 3 of these codes yourself. Pick a variable, and set the variable with the {is} command. Then use it with a {print} command, just like we did.\n"
-                example_code_2: "```\nfavorite_animals is _\n{print} I like favorite_animals\n```\n"
-                start_code: "name {is} Hedy\nage {is} 15\n{print} name is age years old"
+                story_text: "## Variables\nPots anomenar una paraula amb `{is}`. Això s'anomena **variable**. En aquest exemple hem fet una variable anomenada nom i una variable anomenada edat. Podeu utilitzar la paraula nom a qualsevol part del vostre codi i serà substituït per Hedy així:\n"
+                example_code: "```\nnom {is} Hedy\nedat {is} 15\n{print} nom té edat anys\n```\n"
+                story_text_2: "### Exercici\nÉs hora de crear les teves pròpies variables!\nEn el codi d'exemple hem fet un exemple de la variable `animals_preferits`. A la línia 1 es defineix la variable, i a la línia 2 hem utilitzat la variable dins una comanda d'impressió.\nEn primer lloc, acabeu el nostre exemple omplint el vostre animal preferit als espais en blanc. A continuació, feu vosaltres mateixos almenys 3 d'aquests codis. Trieu una variable i configureu-la amb la comanda {is}. A continuació, utilitzeu-lo amb una comanda {print}, tal com hem fet abans.\n"
+                example_code_2: "```\nanimals_preferits {is} _\n{print} M'agraden els/les animals_preferits \n```\n"
+                start_code: "nom {is} Hedy\nedat {is} 15\n{print} nom té edat anys"
             14:
                 start_code: "age = {ask} 'How old are you?'\n{if} age < 13\n    {print} 'You are younger than me!'\n{else}\n    {print} 'You are older than me!'"
                 story_text: "We are going to learn more new items. You might know them already from mathematics, the `<` and `>`.\nThe `<` checks if the first number is smaller than the second, for example age `<` 12 checks if age is smaller than 12.\nIf you want to check if the first number is smaller or equal to the second, you can use `<=`, for example age `<=` 11.\nThe `>` checks if the first number is bigger than the second, for example points `>` 10 checks if points is larger than 10.\nIf you want to check if the first number is bigger or equal to the second, you can use `>=`, for example points `>=` 11.\nYou use these comparisons in an `{if}`, like this:\n"
@@ -781,6 +790,10 @@ adventures:
                 example_code_2: "```\nname = {ask} 'What is your name?'\n{if} name == 'Hedy'\n    {print} 'You are cool!'\n```\n"
                 story_text_3: "You can also compare if something is *not* equal to something else using `!=` like this:\n"
                 example_code_3: "```\nname = {ask} 'What is your name?'\n{if} name != 'Hedy'\n    {print} 'You are not Hedy'\n```\n"
+            6:
+                story_text: "We also make a change in storing a word in a variable! You may now use `=` instead of  `{is}` when we store a name or a number in a variable, like this:\n"
+                example_code: "```\nname = Hedy\nanswer = 20 + 4\n```\n"
+                start_code: "name = Hedy\nanswer = 20 + 4\n"
     random_command:
         name: "{random}"
         description: introducing at random command
@@ -848,6 +861,10 @@ adventures:
                 start_code: "name {is} {ask} 'What is your name?'\n{if} name {is} Hedy\n    {print} 'Welcome Hedy'\n    {print} 'You can play on your computer!'\n"
                 example_code: "```\nname {is} {ask} 'What is your name?'\n{if} name {is} Hedy\n    {print} 'Welcome Hedy'\n    {print} 'You can play on your computer!'\n```\n"
                 story_text: "## If... Else...\nYou have learned to repeat a block of lines of code after a `{repeat}` command.\nNow you can also use indentation to make blocks after a {if} or {else} command.\nCheck out the example code.\n\n### Exercise\nAdd an {else} command to the example code. Make a block of line using indentation. You do this by starting each line with 4 spaces.\n"
+            9:
+                start_code: "continue = ask 'Do you want to continue?'\nif continue = yes\n    sure = ask 'Are you sure?'\n    if sure is yes\n        print 'We will continue'\n    else\n        print 'You are not sure'\nelse\n    print 'You do not want to continue'\n"
+                story_text: "In this level you can also put an {if} command inside another {if} command.\n"
+                example_code: "continue = ask 'Do you want to continue?'\nif continue = yes\n    sure = ask 'Are you sure?'\n    if sure is yes\n        print 'We will continue'\n    else\n        print 'You are not sure'\nelse\n    print 'You do not want to continue'\n"
     quotation_marks:
         name: "'quotation marks'"
         description: Introduction quotation marks

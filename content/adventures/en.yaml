@@ -42,7 +42,9 @@ adventures:
                     Take a quick look at the next tab!
                 start_code: "{print} hello world!"
             4:
-                start_code: "{print} 'Hello world'"
+                start_code: |
+                    name {is} Sophie
+                    {print} My name is name
                 story_text: |
                     In the previous levels you've been practising with variables, but you may have come across this problem.
                     You might have tried to run a code like this:
@@ -194,7 +196,7 @@ adventures:
                     {else}
                         {print} 'Access denied!'
                     ```
-                start_code: "{print} 'Lets go to the next level!'"
+                start_code: "{print} 'Lets go to the next tab!'"
             14:
                 story_text: |
                     With the program below you can calculate if you've passed a subject at school (so, a grade of six or higher).
@@ -211,7 +213,12 @@ adventures:
                     {else}
                         {print} 'Great! You have passed the subject!'
                     ```
-                start_code: "{print} 'Lets go to the next tab'"
+                start_code: |
+                    answer = {ask} 'Do you want to learn more?'
+                    {if} answer == 'yes'
+                        {print} 'Go to the next adventure!'
+                    {if} answer != 'yes'
+                        {print} 'That is a shame!'
             15:
                 story_text: |
                     In this game below a code has been made to make sure the player can play on as long as they want...
@@ -229,7 +236,7 @@ adventures:
                             {if} answer {is} 'yes'
                                 {print} 'Ok we will continue'
                     ```
-                start_code: "{print} 'Lets go to the next level!'"
+                start_code: "{print} 'Lets go to the next tab!'"
             16:
                 story_text: |
                     In this level we will grow a bit more towards real Python code. You will also learn how to match two lists together.
@@ -258,7 +265,7 @@ adventures:
 
                     In this level you can also use a new command: `{ elif }`. `{elif}` is short for {else} {if} and you need it when you want to make 3 (or more!) options.
                     Check it out!
-                start_code: "{print} 'Lets go to the next level!'"
+                start_code: "{print} 'Lets go to the next tab!'"
             18:
                 story_text: |
                     Congratulations! You have reached the last level of Hedy! The code you have created here can be copied to real Python environments like replit or PyCharm, and you can continue learning there!
@@ -418,6 +425,17 @@ adventures:
                     name {is} Hedy
                     age {is} 15
                     {print} name is age years old
+            6:
+                story_text: |
+                    We also make a change in storing a word in a variable! You may now use `=` instead of  `{is}` when we store a name or a number in a variable, like this:
+                example_code: |
+                    ```
+                    name = Hedy
+                    answer = 20 + 4
+                    ```
+                start_code: |
+                    name = Hedy
+                    answer = 20 + 4
             14:
                 start_code: |-
                     age = {ask} 'How old are you?'
@@ -493,8 +511,11 @@ adventures:
 
             16:
                 start_code: |-
-                    fruit = ['apple', 'banana', 'cherry']
-                    {print} fruit[random]
+                    friends = ['Ahmed', 'Ben', 'Cayden']
+                    lucky_numbers = [15, 18, 6]
+                    {for} i {in} {range} 1 {to} 3
+                        {print} 'the lucky number of ' friends[i]
+                        {print} 'is ' lucky_numbers[i]
                 story_text: |-
                     We are going to make lists the Python way, with square brackets around the lists! We also keep the quotation marks around each item like we have learned in previous levels.
                     We use square brackets to point out a place in a list. The {at} {random} command can not be used anymore.
@@ -631,6 +652,29 @@ adventures:
 
                     ### Exercise
                     Add an {else} command to the example code. Make a block of line using indentation. You do this by starting each line with 4 spaces.
+            9:
+                start_code: |
+                    continue = {ask} 'Do you want to continue?'
+                    {if} continue = yes
+                        sure = {ask} 'Are you sure?'
+                        {if} sure {is} yes
+                            {print} 'We will continue'
+                        {else}
+                            {print} 'You are not sure'
+                    {else}
+                        {print} 'You do not want to continue'
+                example_code: |
+                    continue = {ask} 'Do you want to continue?'
+                    {if} continue = yes
+                        sure = {ask} 'Are you sure?'
+                        {if} sure {is} yes
+                            {print} 'We will continue'
+                        {else}
+                            {print} 'You are not sure'
+                    {else}
+                        {print} 'You do not want to continue'
+                story_text: |
+                    In this level you can also put an {if} command inside another {if} command.
     in_command:
         name: "{in}"
         description: "Introducing the in command"
@@ -696,7 +740,7 @@ adventures:
                 start_code: |-
                     {print} 'You need to use quotation marks from now on!'
                     answer {is} {ask} 'What do we need to use from now on?'
-                    {print} 'We need to use ' answer
+                    {print} 'We need to use ' answer 'from now on'
             12:
                 story_text: |
                     **All texts need to be in quotation marks**
@@ -867,8 +911,9 @@ adventures:
                     ```
             11:
                 start_code: |-
-                    {for} counter {in} {range} 1 {to} 5
+                    {for} counter {in} {range} 1 {to} 10
                         {print} counter
+                    {print} 'Ready or not. Here I come!'
                 story_text: |-
                     In this level, we add a new form of the `{for}`. In earlier levels, we used `{for}` with a list, but we can also use `{for}` with numbers.
                     We do that by adding a variable name, followed by  `{in}` `{range}`. We then write the number to start at, `{to}` and the number to end at.
@@ -876,8 +921,9 @@ adventures:
                     Try the example to see what happens! In this level again, you will need to use indentations in lines below the `{for}` statements.
                 example_code: |
                     ```
-                    {for} counter {in} {range} 1 {to} 5
+                    {for} counter {in} {range} 1 {to} 10
                         {print} counter
+                    {print} 'Ready or not. Here I come!'
                     ```
             17:
                 start_code: |-
@@ -898,7 +944,11 @@ adventures:
         default_save_name: "maths"
         levels:
             6:
-                start_code: "{print} '5 times 5 is ' 5 * 5"
+                start_code: |
+                    {print} '5 plus 5 is ' 5 + 5
+                    {print} '5 minus 5 is ' 5 - 5
+                    {print} '5 times 5 is ' 5 * 5
+                    {print} '5 devided by 5 is ' 5 / 5
                 story_text: |
                     ## 1 + 1
                     In this level you learn something new: you can now also calculate.
@@ -912,13 +962,7 @@ adventures:
                     {print} '5 plus 5 is ' 5 + 5
                     {print} '5 minus 5 is ' 5 - 5
                     {print} '5 times 5 is ' 5 * 5
-                    ```
-                story_text_2: |
-                    We also make a change in storing a word in a variable! You may now use `=` instead of  `{is}` when we store a name or a number in a variable, like this:
-                example_code_2: |
-                    ```
-                    name = Hedy
-                    answer = 20 + 4
+                    {print} '5 devided by 5 is ' 5 / 5
                     ```
             12:
                 start_code: |-
@@ -1019,7 +1063,6 @@ adventures:
                         {print} 'Lovely, an apple pie!'
                     {else}:
                         {print} 'Better luck next time..'
-
     clear_command:
         name: "{clear}"
         description: clear command
@@ -1053,7 +1096,6 @@ adventures:
                     {clear}
                     {print} 'SURPRISE!'
                     ```
-
     story:
         name: "Story"
         description: "Story"
@@ -1098,7 +1140,7 @@ adventures:
                     This code won't work in this level, because you have not used variables yet.
                     Change the `{ask}` commands and `{echo}` commands in your code to the correct form that you've learned in this level.
 
-                    **Extra** Add a {sleep} command to your code to build up tension in your story.
+                    **Extra** Add a `{sleep}` command to your code to build up tension in your story.
                 example_code: |-
                     ```
                     name {is} {ask} What is the name of the main character?
@@ -1990,7 +2032,11 @@ adventures:
                     {for} day {in} days
                         {print} names {at} {random} ' does the dishes on ' day
                     ```
-                start_code: "# place your code here"
+                start_code: |
+                    days = Monday, Tuesday, Wednesday, Thursday, Friday, Saturday, Sunday
+                    names = mom, dad, Emma, Sophie
+                    {for} day {in} days
+                        {print} names {at} {random} ' does the dishes on ' day
     dice:
         name: "Dice"
         description: "Make your own dice"
@@ -2007,7 +2053,7 @@ adventures:
                 example_code: |
                     ```
                     choices {is} 1, 2, 3, 4, 5, earthworm
-                    {print} You threw _ {at} {random}
+                    {print} You threw _ {at} {random} !
                     ```
                 story_text_2: |
                     ### Exercise
@@ -2017,7 +2063,9 @@ adventures:
                     ```
                     choices {is} _
                     ```
-                start_code: "{print} What will the die indicate this time?"
+                start_code: |
+                    choices {is} 1, 2, 3, 4, 5, earthworm
+                    {print} You threw _ {at} {random} !
             4:
                 story_text: |
                     In this level you can also create dice. But this time you can try it yourself, without an example code!
@@ -2176,7 +2224,7 @@ adventures:
         levels:
             2:
                 story_text: |
-                    Now that you have learned how to use the `{ask}` command, you can make your rock, paper, scissors code interavtive too!
+                    Now that you have learned how to use the `{ask}` command, you can make your rock, paper, scissors code interactive too!
 
                     ### Exercise
                     Make the rock, paper, scissors code interactive by adding the `{ask}` command and a question to your rock, paper, scissors code.
@@ -2369,8 +2417,8 @@ adventures:
                     Now that you can do maths, you can make a calculator yourself!
                 example_code: |
                     ```
-                    number_1 {is} {ask} 'Fill in the first number:'
-                    number_2 {is} {ask} 'Fill in the second number:'
+                    number_1 = {ask} 'Fill in the first number:'
+                    number_2 = {ask} 'Fill in the second number:'
                     correct_answer = number_1 * number_2
                     {print} number_1 ' times ' number_2 ' is ' correct_answer
                     ```
@@ -2389,7 +2437,11 @@ adventures:
                     **Extra** You can also let the computer do random sums on its own using random.
 
                     This is how you choose a number of tables to practice, and from that you always get a different sum:
-                start_code: "{print} 'Welcome to this calculator!'"
+                start_code: |
+                    number_1 = {ask} 'Fill in the first number:'
+                    number_2 = {ask} 'Fill in the second number:'
+                    correct_answer = number_1 * number_2
+                    {print} number_1 ' times ' number_2 ' is ' correct_answer
             9:
                 story_text: |
                     In level 6 you created a calculator, in this level you can expand that code so it asks multiple questions.
@@ -2445,10 +2497,13 @@ adventures:
                 example_code: |
                     ```
                     number = 10
-                    {for} i {in} {range} 1 to 10
+                    {for} i {in} {range} 1 {to} 10
                         {print} i * number
                     ```
-                start_code: "# place your code here"
+                start_code: |
+                    number = 10
+                    {for} i {in} {range} 1 {to} 10
+                        {print} i * number
             12:
                 story_text: |
                     In this level, you can make a calculator that works for decimal numbers.
@@ -3880,7 +3935,7 @@ adventures:
 #                    ```
 #                    password {is} {ask} 'What is the correct password?'
 #                    ```
-#                start_code: "{print} 'Lets go to the next level!'"
+#                start_code: "{print} 'Lets go to the next tab!'"
 #            5:
 #                story_text: |
 ##                    Now you've reached the end of this level, so you have learned `{ask}` and `{if}`. For example you can ask guests what they would like to eat.
@@ -3925,7 +3980,7 @@ adventures:
 #                    {repeat} 5 {times} {print} 'In the next level you can repeat multiple lines of code at once!'
 #                    ```
 #
-#                start_code: "{print} 'Lets go to the next level!'"
+#                start_code: "{print} 'Lets go to the next tab!'"
 #            8:
 #                story_text: |
 ##                    Great job! You've reached the end of another level! In this level you've learned to use multiple lines of code in an {if} or {repeat} command. But you can't yet combine the two...
@@ -3941,7 +3996,7 @@ adventures:
 #                    {else}
 #                        {print} 'Okay, you can stay here for a little longer!'
 #                    ```
-#                start_code: "{print} 'Lets go to the next level!'"
+#                start_code: "{print} 'Lets go to the next tab!'"
 #            9:
 #                story_text: |
 ##                    You're doing great! In this level we still face a small problem. You have learned to repeat lines, but what if you'd want to slightly change the line.
@@ -3957,12 +4012,12 @@ adventures:
 #                    {print} 'if youre happy and you know it and you really want to show it'
 #                    {print} 'if youre happy and you know it clap your hands'
 #                    ```
-#                start_code: "{print} 'Lets go to the next level!'"
+#                start_code: "{print} 'Lets go to the next tab!'"
 #            10:
 #                story_text: |
 ##                    You have reached the end of this level, you're doing great! You are about to go to the next level. In the higher levels, Hedy is focussing more and more on teaching you the programming language Python.
 #                    In Python there is no `{repeat}` command, but there is a command that works like {repeat}. Are you curious to find out how to say `{repeat}` in Python language? Quickly go on to find out!
-#                start_code: "{print} 'Lets go to the next level!'"
+#                start_code: "{print} 'Lets go to the next tab!'"
 #            11:
 #                story_text: |
 ##                    Maybe you have tried using decimal numbers in your restaurant adventure. If you did, you probably noticed that Hedy didn't understand them yet and always rounded off.
@@ -3985,7 +4040,7 @@ adventures:
 #                    print 'That costs ' total ' dollars please'
 #                    ```
 #                    Go to the next level to make this code work!
-#                start_code: "{print} 'Lets go to the next level!'"
+#                start_code: "{print} 'Lets go to the next tab!'"
 #            12:
 #                story_text: |
 ##                    In the previous levels you learned how to put two `{if}`commands inside each other. This works fine, but it does give you very long and unhandy codes like this one:
@@ -4005,7 +4060,7 @@ adventures:
 #                    {else}
 #                        {print} 'Access denied!'
 #                    ```
-#                start_code: "{print} 'Lets go to the next level!'"
+#                start_code: "{print} 'Lets go to the next tab!'"
 #            13:
 #                story_text: |
 ##                    With the program below you can calculate if you've passed a subject at school (so, a grade of six or higher).
@@ -4022,7 +4077,7 @@ adventures:
 #                    {else}
 #                        {print} 'Great! You have passed the subject!'
 #                    ```
-#                start_code: "{print} 'Lets go to the next level!'"
+#                start_code: "{print} 'Lets go to the next tab!'"
 #            14:
 #                story_text: |
 ##                    In this game below a code has been made to make sure the player can play on as long as he/she wants...
@@ -4040,7 +4095,7 @@ adventures:
 #                            {if} answer {is} 'yes'
 #                                {print} 'Ok we will continue'
 #                    ```
-#                start_code: "{print} 'Lets go to the next level!'"
+#                start_code: "{print} 'Lets go to the next tab!'"
 #            15:
 #                story_text: |
 ##                    In the next level we will grow a bit more towards real Python code. You will also learn how to match two lists together.
@@ -4061,7 +4116,7 @@ adventures:
 #                        {for} sound {in} sounds
 #                            {print} 'A ' animal ' says ' sound
 #                    ```
-#                start_code: "{print} 'Lets go to the next level!'"
+#                start_code: "{print} 'Lets go to the next tab!'"
 #            16:
 #                story_text: |
 ##                    In the next level it's time for a new command. You might have noticed in the previous levels that `{if}` and `{else}` sometimes aren't enough.
@@ -4077,11 +4132,11 @@ adventures:
 #                        {print} 'Yikes...'
 #                    ```
 #                story_text_2: In this code it would be great to have 2x an `{else}` so you could have one option for the broccoli and one for the green beans. The next level comes with the new command `{elif}` that makes this possible! So check out the next level now!
-#                start_code: "{print} 'Lets go to the next level!'"
+#                start_code: "{print} 'Lets go to the next tab!'"
 #            17:
 #                story_text: |
 ##                    In the next level you will learn a real Python way to use `{print}`.
-#                start_code: "{print} 'Lets go to the next level!'"
+#                start_code: "{print} 'Lets go to the next tab!'"
 #            18:
 #                story_text: |
 ##                    Congratulations! You have reached the last level of Hedy! The code you have created here can be copied to real Python environments like replit or PyCharm, and you can continue learning there!
