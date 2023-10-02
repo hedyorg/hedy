@@ -1,4 +1,6 @@
 import os
+
+import utils
 from tests.Tester import HedyTester, Snippet
 from app import translate_error, app
 from flask_babel import force_locale
@@ -6,6 +8,12 @@ import exceptions
 from parameterized import parameterized
 import hedy
 from website.yaml_file import YamlFile
+
+# set this to True to revert broken snippets to their en counterpart automatically
+# this is useful for large Weblate PRs that need to go through, this fixes broken snippets
+fix_error = False
+if os.getenv('fix_for_weblate'):
+    fix_error = True
 
 # Set the current directory to the root Hedy folder
 os.chdir(os.path.join(os.getcwd(), __file__.replace(os.path.basename(__file__), '')))
@@ -40,8 +48,11 @@ def collect_snippets(path):
     return Hedy_snippets
 
 
-Hedy_snippets = [(s.name, s) for s in collect_snippets(
-    path='../../content/parsons')]
+Hedy_snippets = [(s.name, s) for s in collect_snippets(path='../../content/parsons')]
+
+level = 1
+if level:
+    Hedy_snippets = [(name, snippet) for (name, snippet) in Hedy_snippets if snippet.level == level]
 
 Hedy_snippets = HedyTester.translate_keywords_in_snippets(Hedy_snippets)
 
@@ -65,18 +76,30 @@ class TestsParsonsPrograms(HedyTester):
             except OSError:
                 return None  # programs with ask cannot be tested with output :(
             except exceptions.HedyException as E:
-                try:
-                    location = E.error_location
-                except BaseException:
-                    location = 'No Location Found'
+                if fix_error:
+                    # Read English yaml file
+                    original_yaml = YamlFile.for_file('../../content/parsons/en.yaml')
+                    original_text = original_yaml['levels'][snippet.level][int(snippet.field_name)]
 
-                # Must run this in the context of the Flask app, because FlaskBabel requires that.
-                with app.app_context():
-                    with force_locale('en'):
-                        error_message = translate_error(E.error_code, E.arguments, 'en')
-                        error_message = error_message.replace('<span class="command-highlighted">', '`')
-                        error_message = error_message.replace('</span>', '`')
-                        print(f'\n----\n{snippet.code}\n----')
-                        print(f'in language {snippet.language} from level {snippet.level} gives error:')
-                        print(f'{error_message} at line {location}')
-                        raise E
+                    # Read broken yaml file
+                    broken_yaml = utils.load_yaml_rt(snippet.filename)
+                    broken_yaml['levels'][snippet.level][int(snippet.field_name)] = original_text
+
+                    with open(snippet.filename, 'w') as file:
+                        file.write(utils.dump_yaml_rt(broken_yaml))
+                else:
+                    try:
+                        location = E.error_location
+                    except BaseException:
+                        location = 'No Location Found'
+
+                    # Must run this in the context of the Flask app, because FlaskBabel requires that.
+                    with app.app_context():
+                        with force_locale('en'):
+                            error_message = translate_error(E.error_code, E.arguments, 'en')
+                            error_message = error_message.replace('<span class="command-highlighted">', '`')
+                            error_message = error_message.replace('</span>', '`')
+                            print(f'\n----\n{snippet.code}\n----')
+                            print(f'in language {snippet.language} from level {snippet.level} gives error:')
+                            print(f'{error_message} at line {location}')
+                            raise E
