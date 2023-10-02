@@ -1,10 +1,14 @@
 import { HedyEditor, EditorType, HedyEditorCreator, EditorEvent, SourceRange } from "./editor";
-import { basicSetup } from 'codemirror';
-import { EditorView, ViewUpdate } from '@codemirror/view'
+import { EditorView, ViewUpdate, drawSelection, dropCursor, highlightActiveLine, 
+        highlightActiveLineGutter, highlightSpecialChars, keymap, lineNumbers } from '@codemirror/view'
 import { EditorState, Compartment, StateEffect, Prec } from '@codemirror/state'
 import { oneDark } from '@codemirror/theme-one-dark';
 import { EventEmitter } from "./event-emitter";
-import { deleteTrailingWhitespace } from '@codemirror/commands'
+import { deleteTrailingWhitespace, defaultKeymap, historyKeymap } from '@codemirror/commands'
+import { history } from "@codemirror/commands"
+import { indentOnInput, defaultHighlightStyle, syntaxHighlighting, bracketMatching } from "@codemirror/language"
+import { closeBrackets, closeBracketsKeymap } from "@codemirror/autocomplete"
+import { highlightSelectionMatches, searchKeymap } from "@codemirror/search";
 import { 
     errorLineField, debugLineField, decorationsTheme, addDebugLine, 
     addErrorLine, addErrorWord, removeDebugLine, removeErrorMarkers, 
@@ -91,9 +95,27 @@ export class HedyCodeMirrorEditor implements HedyEditor {
         const state = EditorState.create({
             doc: '',
             extensions: [
-                breakpointGutter,
-                basicSetup,
                 EditorView.theme(cursorStyle),
+                breakpointGutter,
+                lineNumbers(),
+                highlightActiveLineGutter(),
+                highlightSpecialChars(),
+                history(),
+                drawSelection(),
+                dropCursor(),                
+                // When we finish doing the language package for Hedy, we need to add a configuration for this field to work
+                indentOnInput(),
+                syntaxHighlighting(defaultHighlightStyle, {fallback: true}),
+                bracketMatching(),
+                closeBrackets(),
+                highlightActiveLine(),
+                highlightSelectionMatches(),
+                keymap.of([
+                    ...closeBracketsKeymap,
+                    ...defaultKeymap,
+                    ...searchKeymap, // we need to replace this with our own search widget
+                    ...historyKeymap,
+                ]),
                 oneDark,
                 this.theme.of(mainEditorStyling),
                 this.readMode.of(EditorState.readOnly.of(isReadOnly)),
