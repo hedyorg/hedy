@@ -221,13 +221,13 @@ class LiveStatisticsModule(WebsiteModule):
         * Use of blanks in programs: when the kids uses blanks in the programs (_)
         * Use of nested functions: nested functions are not allowed in Hedy
         * Incorrect use of types: this encompass errors that involve using the wrong type for a
-          built-in function or a matemathical operation
+          built-in function or a mathemathical operation
         * Invalid command: We list here parse exception when the command used is wrong and we dont know it
         * Incomplete command: when the command have several parts, and the user forgot one.
-        * Command not correct anymore: When a command changes sintax or is removed
+        * Command not correct anymore: When a command changes syntax or is removed
         * Command not available yet: for commands that will be available in the following levels, but not yet
-        * Incorect use of variable: When a variable is used before being assigned or is undefined.
-        * Incorrect Indentation: the user put a space where it didnt belong or the indentation doesnt match
+        * Incorrect use of variable: When a variable is used before being assigned or is undefined.
+        * Incorrect Indentation: the user put a space where it didn't belong or the indentation doesnt match
         * Echo and ask mismatch: when an echo is used without an ask
         * Incorrect handling of quotes: any scenario where text is not handled correctly
         """
@@ -742,6 +742,7 @@ class LiveStatisticsModule(WebsiteModule):
         class_ = self.db.get_class(class_id)
         exceptions_per_user = {}
         students = sorted(class_.get("students", []))
+        # this operation is very inefficient, first grab all programs and then only last weeks!
         for student_username in students:
             program_stats = self.db.get_program_stats([student_username], None, None)
             if program_stats:
