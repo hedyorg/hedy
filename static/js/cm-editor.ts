@@ -6,8 +6,7 @@ import { oneDark } from '@codemirror/theme-one-dark';
 import { EventEmitter } from "./event-emitter";
 import { deleteTrailingWhitespace, defaultKeymap, historyKeymap } from '@codemirror/commands'
 import { history } from "@codemirror/commands"
-import { indentOnInput, defaultHighlightStyle, syntaxHighlighting, bracketMatching } from "@codemirror/language"
-import { closeBrackets, closeBracketsKeymap } from "@codemirror/autocomplete"
+import { indentOnInput, defaultHighlightStyle, syntaxHighlighting } from "@codemirror/language"
 import { highlightSelectionMatches, searchKeymap } from "@codemirror/search";
 import { 
     errorLineField, debugLineField, decorationsTheme, addDebugLine, 
