@@ -105,13 +105,10 @@ export class HedyCodeMirrorEditor implements HedyEditor {
                 dropCursor(),                
                 // When we finish doing the language package for Hedy, we need to add a configuration for this field to work
                 indentOnInput(),
-                syntaxHighlighting(defaultHighlightStyle, {fallback: true}),
-                bracketMatching(),
-                closeBrackets(),
+                syntaxHighlighting(defaultHighlightStyle, {fallback: true}),                
                 highlightActiveLine(),
                 highlightSelectionMatches(),
                 keymap.of([
-                    ...closeBracketsKeymap,
                     ...defaultKeymap,
                     ...searchKeymap, // we need to replace this with our own search widget
                     ...historyKeymap,
