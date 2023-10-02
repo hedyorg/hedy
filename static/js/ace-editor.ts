@@ -50,7 +50,8 @@ export class HedyAceEditor implements HedyEditor {
   private editorEvent = new EventEmitter<EditorEvent>({
     change: true,
     guttermousedown: true,
-    changeBreakpoint: true
+    changeBreakpoint: true,
+    click: true
   });
   private markerClasses = new Map<number, string>();
   private currentLineMarker?: MarkerLocation;
