@@ -2382,13 +2382,13 @@ def merge_grammars(grammar_text_1, grammar_text_2, level):
         parts = s.split(':')
         # get part before and after : (this is a join because there can be : in the rule)
         if len(parts) <= 1:
-            return False
+            return s, s
         return parts[0], ''.join(parts[1])
 
     rules_grammar_1 = grammar_text_1.split('\n')
     remaining_rules_grammar_2 = grammar_text_2.split('\n')
     for line_1 in rules_grammar_1:
-        if line_1 == '' or line_1[0] == '/'  or line_1[0] == '%':  # skip comments and empty lines:
+        if line_1 == '' or line_1[0] == '/':  # skip comments and empty lines:
             continue
 
         name_1, definition_1 = get_rule_from_string(line_1)
@@ -2396,7 +2396,7 @@ def merge_grammars(grammar_text_1, grammar_text_2, level):
         rules_grammar_2 = grammar_text_2.split('\n')
         override_found = False
         for line_2 in rules_grammar_2:
-            if line_2 == '' or line_2[0] == '/' or line_2[0] == '%':  # skip comments and empty lines:
+            if line_2 == '' or line_2[0] == '/':  # skip comments and empty lines:
                 continue
 
             needs_preprocessing = re.match(r'((\w|_)+)<((\w|_)+)>', line_2)
@@ -2418,12 +2418,9 @@ def merge_grammars(grammar_text_1, grammar_text_2, level):
                     warnings.warn(warn_message)
                 # Used to compute the rules that use the merge operators in the grammar
                 # namely +=, -= and >
-                new_rule, deletable = merge_rules_operator(definition_1, definition_2, name_1, line_2_processed)
-                if deletable:
-                    if type(deletable) == list:
-                        deletables += deletable
-                    else:
-                        deletables.append(deletable)
+                new_rule, new_deletables = merge_rules_operator(definition_1, definition_2, name_1, line_2_processed)
+                if new_deletables:
+                    deletables += new_deletables
                 # Already processed, so remove it
                 remaining_rules_grammar_2.remove(line_2)
                 break
@@ -2448,26 +2445,28 @@ def merge_grammars(grammar_text_1, grammar_text_2, level):
 def merge_rules_operator(prev_definition, new_definition, name, complete_line):
     # Check if the rule is adding or substracting new rules
     has_add_op = new_definition.startswith('+=')
-    has_sub_op = has_add_op and '-=' in new_definition
+    has_remove_op = has_add_op and '-=' in new_definition
     has_last_op = has_add_op and '>' in new_definition
-    deletable = None
-    if has_sub_op:
+    deletables = None
+    if has_remove_op:
         # Get the rules we need to substract
         part_list = new_definition.split('-=')
-        add_list, sub_list = (part_list[0], part_list[1]) if has_sub_op else (part_list[0], '')
+        add_list, commands_after_minus = (part_list[0], part_list[1]) if has_remove_op else (part_list[0], '')
         add_list = add_list[3:]
+        
         # Get the rules that need to be last
-        sub_list = sub_list.split('>')
-        sub_list, last_list = (sub_list[0], sub_list[1]) if has_last_op else (sub_list[0], '')
-        sub_list = sub_list + '|' + last_list
-        result_cmd_list, deletable = get_remaining_and_deletable_rules(prev_definition, sub_list)
+        split_on_greater_than = commands_after_minus.split('>')
+        commands_to_be_removed, last_list = (split_on_greater_than[0], split_on_greater_than[1]) if has_last_op else (split_on_greater_than[0], '')
+        commands_after_minus = commands_to_be_removed + '|' + last_list
+        result_cmd_list = get_remaining_rules(prev_definition, commands_after_minus)
+        deletables = commands_to_be_removed.strip().split('|')
     elif has_add_op:
         # Get the rules that need to be last
         part_list = new_definition.split('>')
-        add_list, sub_list = (part_list[0], part_list[1]) if has_last_op else (part_list[0], '')
+        add_list, commands_after_minus = (part_list[0], part_list[1]) if has_last_op else (part_list[0], '')
         add_list = add_list[3:]
-        last_list = sub_list
-        result_cmd_list, deletable = get_remaining_and_deletable_rules(prev_definition, sub_list)
+        last_list = commands_after_minus
+        result_cmd_list = get_remaining_rules(prev_definition, commands_after_minus)
     else:
         result_cmd_list = prev_definition
 
@@ -2477,15 +2476,16 @@ def merge_rules_operator(prev_definition, new_definition, name, complete_line):
         new_rule = f"{name}: {result_cmd_list} | {add_list}"
     else:
         new_rule = complete_line
-    return new_rule, deletable
+
+    return new_rule, deletables
 
 
-def get_remaining_and_deletable_rules(orig_def, sub_def):
+def get_remaining_rules(orig_def, sub_def):
     original_commands = [command.strip() for command in orig_def.split('|')]
-    deletable_commands = [command.strip() for command in sub_def.split('|')]
-    remaining_commands = [cmd for cmd in original_commands if cmd not in deletable_commands]
+    commands_after_minus = [command.strip() for command in sub_def.split('|')]
+    remaining_commands = [cmd for cmd in original_commands if cmd not in commands_after_minus]
     remaining_commands = ' | '.join(remaining_commands)  # turn the result list into a string
-    return remaining_commands, deletable_commands
+    return remaining_commands
 
 
 def create_grammar(level, lang="en"):
