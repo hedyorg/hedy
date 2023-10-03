@@ -381,6 +381,8 @@ class LiveStatisticsModule(WebsiteModule):
         # identifies common errors in the class
         common_errors = self.common_exception_detection(class_['id'], user)
 
+        # Surprisingly, these lines also seem to be very slow!
+        # the adventures seem als to be fetched multiple times, which is not needed I think
         students = self.__all_students(class_)
         adventures = self.__get_adventures_for_overview(user, class_['id'])
 
