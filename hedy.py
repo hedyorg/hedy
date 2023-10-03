@@ -2369,7 +2369,7 @@ class ConvertToPython_18(ConvertToPython_17):
         return self.print(meta, args)
 
 
-def merge_grammars(grammar_text_1, grammar_text_2, level):
+def merge_grammars(grammar_text_1, grammar_text_2):
     # this function takes two grammar files and merges them into one
     # rules that are redefined in the second file are overridden
     # rules that are new in the second file are added (remaining_rules_grammar_2)
@@ -2414,7 +2414,7 @@ def merge_grammars(grammar_text_1, grammar_text_2, level):
                 else:
                     line_2_processed = line_2
                 if definition_1.strip() == definition_2.strip():
-                    warn_message = f"The rule {name_1} is duplicated on level {level}. Please check!"
+                    warn_message = f"The rule {name_1} is duplicated: {definition_1} and {definition_2}. Please check!"
                     warnings.warn(warn_message)
                 # Used to compute the rules that use the merge operators in the grammar
                 # namely +=, -= and >
@@ -2490,14 +2490,15 @@ def get_remaining_rules(orig_def, sub_def):
 
 def create_grammar(level, lang="en"):
     # start with creating the grammar for level 1
-    result = get_full_grammar_for_level(1)
-    keywords = get_keywords_for_language(lang)
+    merged_grammars = get_full_grammar_for_level(1)
 
-    result = merge_grammars(result, keywords, 1)
     # then keep merging new grammars in
     for i in range(2, level + 1):
         grammar_text_i = get_additional_rules_for_level(i)
-        result = merge_grammars(result, grammar_text_i, i)
+        merged_grammars = merge_grammars(merged_grammars, grammar_text_i)
+
+    keywords = get_keywords_for_language(lang)
+    result = merge_grammars(merged_grammars, keywords)
 
     # Change the grammar if skipping faulty is enabled
     if source_map.skip_faulty:
