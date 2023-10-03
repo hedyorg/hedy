@@ -2453,10 +2453,11 @@ def merge_rules_operator(prev_definition, new_definition, name, complete_line):
         part_list = new_definition.split('-=')
         add_list, commands_after_minus = (part_list[0], part_list[1]) if has_remove_op else (part_list[0], '')
         add_list = add_list[3:]
-        
+
         # Get the rules that need to be last
         split_on_greater_than = commands_after_minus.split('>')
-        commands_to_be_removed, last_list = (split_on_greater_than[0], split_on_greater_than[1]) if has_last_op else (split_on_greater_than[0], '')
+        commands_to_be_removed, last_list = (
+            split_on_greater_than[0], split_on_greater_than[1]) if has_last_op else (split_on_greater_than[0], '')
         commands_after_minus = commands_to_be_removed + '|' + last_list
         result_cmd_list = get_remaining_rules(prev_definition, commands_after_minus)
         deletables = commands_to_be_removed.strip().split('|')
