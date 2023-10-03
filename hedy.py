@@ -11,6 +11,7 @@ from os import path, getenv
 import warnings
 import hedy
 import hedy_translation
+from utils import atomic_write_file
 from hedy_content import ALL_KEYWORD_LANGUAGES
 from collections import namedtuple
 import re
@@ -2641,13 +2642,10 @@ def _save_parser_to_file(lark, pickle_file):
     lark.parser.parser.lexer_conf.re_module = None
     lark.parser.lexer_conf.re_module = None
 
-    with open(full_path + ".tmp", "wb") as fp:
-        pickle.dump(lark, fp)
     try:
-        # atomically rename the temporary file to the final one
-        # to avoid race conditions
-        os.rename(full_path + ".tmp", full_path)
-    except (FileNotFoundError, FileExistsError):
+        with atomic_write_file(full_path) as fp:
+            pickle.dump(lark, fp)
+    except OSError:
         # Ignore errors if another process already moved the file
         # or if the destination already exist.
         # These scenarios can happen under concurrent execution.
