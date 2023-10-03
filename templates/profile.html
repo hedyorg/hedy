@@ -59,10 +59,6 @@
                         </select>
                      </div>
                  {% endif %}
-                 <div class="flex flex-row gap-4 items-center border-gray-400 border p-4 rounded-lg">
-                    <input type="checkbox" name="agree_terms" id="agree_terms" required class="" {% if public_settings %}checked{% endif %}>
-                    <label for="agree_terms" class="cursor-pointer w-full">{{_('public_profile_info')}}</label>
-                 </div>
                  <div class="flex flex-row">
                     <button type="submit" class="green-btn">{{_('update_public')}}</button>
                     {% if public_settings %}
