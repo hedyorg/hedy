@@ -2378,7 +2378,7 @@ def merge_grammars(grammar_text_1, grammar_text_2):
     deletables = []   # this list collects rules we no longer need,
     # they will be removed when we encounter them
 
-    def get_rule_from_string(s):
+    def get_rule_from_string(s): # todo, FH, move out before merging the PR!
         parts = s.split(':')
         # get part before and after : (this is a join because there can be : in the rule)
         if len(parts) <= 1:
