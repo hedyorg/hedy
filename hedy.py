@@ -2511,7 +2511,7 @@ def create_grammar(level, lang="en"):
         if len(error_invalid_rules) > 0:
             error_invalid_rule = error_invalid_rules[0]
             error_invalid_rule_changed = 'error_invalid.-100: textwithoutspaces _SPACE* text?\n'
-            result = merged_grammars.replace(error_invalid_rule, error_invalid_rule_changed)
+            merged_grammars = merged_grammars.replace(error_invalid_rule, error_invalid_rule_changed)
 
         # from level 12:
         # Make sure that all keywords in the language are added to the rules:
@@ -2529,7 +2529,7 @@ def create_grammar(level, lang="en"):
                 textwithoutspaces_rule_changed = (
                     r'textwithoutspaces: /(?:[^#\n،,，、 *+\-\/eiіиలేไamfnsbअ否אو]|SKIP2)+/ -> text' + '\n'
                 )
-                result = merged_grammars.replace(textwithoutspaces_rule, textwithoutspaces_rule_changed)
+                merged_grammars = merged_grammars.replace(textwithoutspaces_rule, textwithoutspaces_rule_changed)
 
             non_allowed_words = re.findall(r'".*?"', keywords)
             non_allowed_words = list(set(non_allowed_words))
