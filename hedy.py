@@ -2371,6 +2371,7 @@ class ConvertToPython_18(ConvertToPython_17):
     def print_empty_brackets(self, meta, args):
         return self.print(meta, args)
 
+
 def get_rule_from_string(s):
     parts = s.split(':')
     # get part before and after : (this is a join because there can be : in the rule)
