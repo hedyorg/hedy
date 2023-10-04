@@ -1087,6 +1087,9 @@ class IsValid(Filter):
     # this function is used to generate more informative error messages
     # tree is transformed to a node of [Bool, args, command number]
 
+    def __init__(self, level):
+        self.level = level
+
     def error_invalid_space(self, meta, args):
         # return space to indicate that line starts in a space
         return False, InvalidInfo(" ", line=args[0][2].line, column=args[0][2].column), meta
@@ -3062,8 +3065,7 @@ def parse_input(input_string, level, lang):
 
 def is_program_valid(program_root, input_string, level, lang):
     # IsValid returns (True,) or (False, args)
-    instance = IsValid()
-    instance.level = level  # TODO: could be done in a constructor once we are sure we will go this way
+    instance = IsValid(level)
     is_valid = instance.transform(program_root)
 
     if not is_valid[0]:
