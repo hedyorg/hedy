@@ -2498,43 +2498,45 @@ def create_grammar(level, lang="en"):
         grammar_text_i = get_additional_rules_for_level(i)
         merged_grammars = merge_grammars(merged_grammars, grammar_text_i)
 
+    # keyword and other terminals never have mergable rules, so we can just add them at the end
     keywords = get_keywords_for_language(lang)
-    result = merge_grammars(merged_grammars, keywords)
+    terminals = get_terminals()
+    merged_grammars = merged_grammars + '\n' + keywords + '\n' + terminals
 
     # Change the grammar if skipping faulty is enabled
     if source_map.skip_faulty:
         # Make sure to change the meaning of error_invalid
         # this way more text will be 'catched'
-        error_invalid_rules = re.findall(r'^error_invalid.-100:.*?\n', result, re.MULTILINE)
+        error_invalid_rules = re.findall(r'^error_invalid.-100:.*?\n', merged_grammars, re.MULTILINE)
         if len(error_invalid_rules) > 0:
             error_invalid_rule = error_invalid_rules[0]
             error_invalid_rule_changed = 'error_invalid.-100: textwithoutspaces _SPACE* text?\n'
-            result = result.replace(error_invalid_rule, error_invalid_rule_changed)
+            result = merged_grammars.replace(error_invalid_rule, error_invalid_rule_changed)
 
         # from level 12:
         # Make sure that all keywords in the language are added to the rules:
         # textwithspaces & textwithoutspaces, so that these do not fall into the error_invalid rule
         if level > 12:
-            textwithspaces_rules = re.findall(r'^textwithspaces:.*?\n', result, re.MULTILINE)
+            textwithspaces_rules = re.findall(r'^textwithspaces:.*?\n', merged_grammars, re.MULTILINE)
             if len(textwithspaces_rules) > 0:
                 textwithspaces_rule = textwithspaces_rules[0]
                 textwithspaces_rule_changed = r'textwithspaces: /(?:[^#\n،,，、 ]| (?!SKIP1))+/ -> text' + '\n'
-                result = result.replace(textwithspaces_rule, textwithspaces_rule_changed)
+                merged_grammars = merged_grammars.replace(textwithspaces_rule, textwithspaces_rule_changed)
 
-            textwithoutspaces_rules = re.findall(r'^textwithoutspaces:.*?\n', result, re.MULTILINE)
+            textwithoutspaces_rules = re.findall(r'^textwithoutspaces:.*?\n', merged_grammars, re.MULTILINE)
             if len(textwithoutspaces_rules) > 0:
                 textwithoutspaces_rule = textwithoutspaces_rules[0]
                 textwithoutspaces_rule_changed = (
                     r'textwithoutspaces: /(?:[^#\n،,，、 *+\-\/eiіиలేไamfnsbअ否אو]|SKIP2)+/ -> text' + '\n'
                 )
-                result = result.replace(textwithoutspaces_rule, textwithoutspaces_rule_changed)
+                result = merged_grammars.replace(textwithoutspaces_rule, textwithoutspaces_rule_changed)
 
             non_allowed_words = re.findall(r'".*?"', keywords)
             non_allowed_words = list(set(non_allowed_words))
 
             non_allowed_words = [x.replace('"', '') for x in non_allowed_words]
             non_allowed_words_with_space = '|'.join(non_allowed_words)
-            result = result.replace('SKIP1', non_allowed_words_with_space)
+            result = merged_grammars.replace('SKIP1', non_allowed_words_with_space)
 
             letters_done = []
             string_words = ''
@@ -2551,38 +2553,38 @@ def create_grammar(level, lang="en"):
             string_words = string_words.replace('|)', ')')  # remove empty regex expressions
             string_words = string_words[1:]  # remove first |
 
-            result = result.replace('SKIP2', string_words)
+            merged_grammars = merged_grammars.replace('SKIP2', string_words)
 
         # Make sure that the error_invalid is added to the command rule
         # to function as a 'bucket' for faulty text
-        command_rules = re.findall(r'^command:.*?\n', result, re.MULTILINE)
+        command_rules = re.findall(r'^command:.*?\n', merged_grammars, re.MULTILINE)
         if len(command_rules) > 0:
             command_rule = command_rules[0]
             command_rule_with_error_invalid = command_rule.replace('\n', '') + " | error_invalid\n"
-            result = result.replace(command_rule, command_rule_with_error_invalid)
+            merged_grammars = merged_grammars.replace(command_rule, command_rule_with_error_invalid)
 
         # Make sure that the error_invalid is added to the if_less_command rule
         # to function as a 'bucket' for faulty if body commands
-        if_less_command_rules = re.findall(r'^_if_less_command:.*?\n', result, re.MULTILINE)
+        if_less_command_rules = re.findall(r'^_if_less_command:.*?\n', merged_grammars, re.MULTILINE)
         if len(if_less_command_rules) > 0:
             if_less_command_rule = if_less_command_rules[0]
             if_less_command_rule_with_error_invalid = if_less_command_rule.replace('\n', '') + " | error_invalid\n"
-            result = result.replace(if_less_command_rule, if_less_command_rule_with_error_invalid)
+            merged_grammars = merged_grammars.replace(if_less_command_rule, if_less_command_rule_with_error_invalid)
 
         # Make sure that the _non_empty_program rule does not contain error_invalid rules
         # so that all errors will be catches by error_invalid instead of _non_empty_program_skipping
-        non_empty_program_rules = re.findall(r'^_non_empty_program:.*?\n', result, re.MULTILINE)
+        non_empty_program_rules = re.findall(r'^_non_empty_program:.*?\n', merged_grammars, re.MULTILINE)
         if len(non_empty_program_rules) > 0:
             non_empty_program_rule = non_empty_program_rules[0]
             non_empty_program_rule_changed = (
                 '_non_empty_program: _EOL* (command) _SPACE* (_EOL+ command _SPACE*)* _EOL*\n'
             )
-            result = result.replace(non_empty_program_rule, non_empty_program_rule_changed)
+            merged_grammars = merged_grammars.replace(non_empty_program_rule, non_empty_program_rule_changed)
 
     # ready? Save to file to ease debugging
     # this could also be done on each merge for performance reasons
-    save_total_grammar_file(level, result, lang)
-    return result
+    save_total_grammar_file(level, merged_grammars, lang)
+    return merged_grammars
 
 
 def save_total_grammar_file(level, grammar, lang):
@@ -2630,6 +2632,12 @@ def get_keywords_for_language(language):
         with open(path.join(script_dir, "grammars", filename), "r", encoding="utf-8") as file:
             keywords = file.read()
     return keywords
+
+def get_terminals():
+    script_dir = path.abspath(path.dirname(__file__))
+    with open(path.join(script_dir, "grammars", "terminals.lark"), "r", encoding="utf-8") as file:
+        terminals = file.read()
+    return terminals
 
 
 PARSER_CACHE = {}
