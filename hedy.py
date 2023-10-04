@@ -25,6 +25,7 @@ import os
 import pickle
 import sys
 import tempfile
+import utils
 
 # Some useful constants
 from hedy_content import KEYWORDS
@@ -2678,7 +2679,7 @@ def _restore_parser_from_file_if_present(pickle_file):
     return None
 
 
-@lru_cache(maxsize=100)
+@lru_cache(maxsize=0 if utils.is_production() else 100)
 def get_parser(level, lang="en", keep_all_tokens=False, skip_faulty=False):
     """Return the Lark parser for a given level.
     Parser generation takes about 0.5 seconds depending on the level so
@@ -2694,9 +2695,6 @@ def get_parser(level, lang="en", keep_all_tokens=False, skip_faulty=False):
 
     This is not implemented by Lark natively for the Earley parser.
     See https://github.com/lark-parser/lark/issues/1348.
-
-    For now this runs everywhere but we can enable it only in specific
-    environments if desired.
     """
     grammar = create_grammar(level, lang, skip_faulty)
     parser_opts = {
