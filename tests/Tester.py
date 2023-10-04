@@ -66,6 +66,7 @@ class HedyTester(unittest.TestCase):
         ROOT_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
         directory = os.path.join(ROOT_DIR, 'grammars')
 
+        # should be kept in sync with .github/workflows/generate-snippet-hashes.yml
         files_affecting_parsing = (
             [os.path.join(directory, filename) for filename in os.listdir(directory)] +
             [os.path.join(ROOT_DIR, 'hedy.py')]

@@ -1,7 +1,9 @@
 import { Chart, registerables } from 'chart.js';
 import {modal} from "./modal";
 import {showAchievements} from "./app";
-Chart.register(...registerables);
+if (registerables) {
+  Chart.register(...registerables);
+}
 
 
 export function resolve_student(class_id: string, error_id: string, prompt: string) {

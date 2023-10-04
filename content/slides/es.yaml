@@ -1,432 +1,603 @@
 levels:
     0:
-        4:
-            header: Programación
-            text: "Si sabes programar, puedes hacer muchas cosas chulas:\n* Construir historias interactivas\n* Crear dibujos por ordenador y dibujarlos en papel o tela.\n* Construir tus propias aplicaciones para usarlas en tu teléfono.\n"
         1:
+            text: Hedy es un lenguaje de programación.
             header: ¡Bienvenido a Hedy!
-            text: "Hedy es un lenguaje de programación.\n"
         2:
+            text: |-
+                Programar es dar instrucciones a un ordenador, utilizando el lenguaje del ordenador.
+
+                Dicho lenguaje se denomina "lenguaje de programación".
             header: Programación
-            text: "Programar es dar instrucciones a un ordenador, utilizando el lenguaje del ordenador.\n\nDicho lenguaje se denomina \"lenguaje de programación\".\n"
         3:
+            text: |-
+                ¿Quizá ya conoces algunos lenguajes de programación?
+                Algunos ejemplos son:
+                * Scratch
+                * Python
+                * HTML
             header: Lenguaje de programación
-            text: "¿Quizá ya conoces algunos lenguajes de programación?\nAlgunos ejemplos son:\n* Scratch\n* Python\n* HTML\n"
+        4:
+            text: |-
+                Si sabes programar, puedes hacer muchas cosas chulas:
+                * Construir historias interactivas
+                * Crear dibujos por ordenador y dibujarlos en papel o tela.
+                * Construir tus propias aplicaciones para usarlas en tu teléfono.
+            header: Programación
         5:
+            text: |-
+                En Hedy usamos códigos especiales, como `{print}`.
+                <iframe class="embedded-hedy" src="/adventure/story/1/raw"></iframe>
             header: Programar en Hedy
-            text: "En Hedy usamos códigos especiales, como `{print}`.\n<iframe class=\"embedded-hedy\" src=\"/adventure/story/1/raw\"></iframe>\n"
         6:
+            text: |-
+                Las palabras del código se mostrarán en rosa.
+                <iframe class="embedded-hedy" src="/adventure/story/1/raw"></iframe>
             header: Programar en Hedy
-            text: "Las palabras del código se mostrarán en rosa.\n<iframe class=\"embedded-hedy\" src=\"/adventure/story/1/raw\"></iframe>\n"
         7:
+            text: |-
+                Iniciamos el código con el botón Ejecutar código debajo del código.
+                <iframe class="embedded-hedy" src="/adventure/story/1/raw"></iframe>.
             header: Programar en Hedy
-            text: "Iniciamos el código con el botón Ejecutar código debajo del código.\n<iframe class=\"embedded-hedy\" src=\"/adventure/story/1/raw\"></iframe>.\n"
         8:
+            text: |-
+                El resultado aparece en el lado derecho.
+                <iframe class="embedded-hedy" src="/adventure/story/1/raw"></iframe>
             header: Programar en Hedy
-            text: "El resultado aparece en el lado derecho.\n<iframe class=\"embedded-hedy\" src=\"/adventure/story/1/raw\"></iframe>\n"
         9:
+            text: |-
+                La salida también puede ser un dibujo.
+                <iframe class="embedded-hedy" src="/adventure/turtle/1/raw"></iframe>
             header: Programar en Hedy
-            text: "La salida también puede ser un dibujo.\n<iframe class=\"embedded-hedy\" src=\"/adventure/turtle/1/raw\"></iframe>\n"
     1:
-        7:
-            header: ¡Programando!
-            text: "Las aventuras se muestran en pestañas.\n"
-            editor: "<iframe class=\"fragment\" src=\"/hedy/1\"></iframe>\n"
         1:
+            text: |-
+                ¡Empezaremos el nivel 1 creando historias en Hedy!
+
+                Necesitamos tres códigos de texto para crear historias interactivas.
             header: ¡Bienvenido al nivel 1!
-            text: "¡Empezaremos el nivel 1 creando historias en Hedy!\n\nNecesitamos tres códigos de texto para crear historias interactivas.\n"
         2:
+            text: |-
+                El primer código que puede utilizar en el nivel 1 es `{print}`.
+
+                `{print}` se utiliza para mostrar texto en la pantalla.
+            editor: <iframe class="fragment" src="/adventure/print_command/1/raw"></iframe>
             header: '{print}'
-            text: "El primer código que puede utilizar en el nivel 1 es `{print}`.\n\n`{print}` se utiliza para mostrar texto en la pantalla.\n"
-            editor: "<iframe class=\"fragment\" src=\"/adventure/print_command/1/raw\"></iframe>\n"
         3:
-            header: 'El comando {print}'
-            text: "Puedes cambiar el texto después del comando imprimir al que tu quieras.\n\nO puedes imprimir varias líneas añadiendo otra línea de código que también empiece con `{print}`.\n"
-            editor: "<iframe class=\"fragment\" src=\"/adventure/print_command/1/raw\"></iframe>\n"
+            text: |-
+                Puedes cambiar el texto después del comando imprimir al que tu quieras.
+
+                O puedes imprimir varias líneas añadiendo otra línea de código que también empiece con `{print}`.
+            editor: <iframe class="fragment" src="/adventure/print_command/1/raw"></iframe>
+            header: El comando {print}
         4:
-            header: '{ask} '
-            text: "El segundo código que puedes usar en el nivel 1 es `{ask}`.\n\n`{ask}` se usa para hacer una pregunta que se puede responder.\n"
-            editor: "<iframe class=\"fragment\" src=\"/adventure/rock/1/raw\"></iframe>\n"
+            text: |-
+                El segundo código que puedes usar en el nivel 1 es `{ask}`.
+
+                `{ask}` se usa para hacer una pregunta que se puede responder.
+            editor: <iframe class="fragment" src="/adventure/rock/1/raw"></iframe>
+            header: '{ask}'
         5:
+            text: |-
+                Como puedes ver en el ejemplo anterior. Si usas el comando `{ask}`, puedes hacer una pregunta.
+
+                En cambio, la respuesta no se muestra en la pantalla de salida.
+
+                Si quieres que la respuesta se muestre, puedes usar el último comando de este nivel: `{echo}`.
+
+                `{echo}` se usa para repetir la respuesta de una `{ask}`.
+            editor: <iframe class="fragment" src="/adventure/ask_command/1/raw"></iframe>
             header: '{echo}'
-            text: "Como puedes ver en el ejemplo anterior. Si usas el comando `{ask}`, puedes hacer una pregunta.\n\nEn cambio, la respuesta no se muestra en la pantalla de salida.\n\nSi quieres que la respuesta se muestre, puedes usar el último comando de este nivel: `{echo}`.\n\n`{echo}` se usa para repetir la respuesta de una `{ask}`.\n"
-            editor: "<iframe class=\"fragment\" src=\"/adventure/ask_command/1/raw\"></iframe>\n"
         6:
+            text: |-
+                Con `{print}`, `{ask}` y `{echo}` ya puedes crear una pequeña historia.
+                Este es un buen momento para probar las aventuras Loro, Cuento y Piedra, papel o tijera.
             header: ¡Programando!
-            text: "Con `{print}`, `{ask}` y `{echo}` ya puedes crear una pequeña historia.\nEste es un buen momento para probar las aventuras Loro, Cuento y Piedra, papel o tijera.\n"
+        7:
+            text: Las aventuras se muestran en pestañas.
+            editor: <iframe class="fragment" src="/hedy/1"></iframe>
+            header: ¡Programando!
         8:
+            text: |-
+                Los botones de flecha amarillos se pueden utilizar para copiar ejemplos.
+                <iframe class="fragment" src="/hedy/1"></iframe>
             header: ¡Programación!
-            text: "Los botones de flecha amarillos se pueden utilizar para copiar ejemplos.\n<iframe class=\"fragment\" src=\"/hedy/1\"></iframe>\n"
         9:
-            header: 'Dibuja con la tortuga'
-            text: "Ahora que ya hemos visto los códigos de texto, veremos a continuación los códigos de dibujo.\n"
+            text: Ahora que ya hemos visto los códigos de texto, veremos a continuación los códigos de dibujo.
+            header: Dibuja con la tortuga
         10:
+            text: '`{forward}` se utiliza para mover la tortuga hacia adelante.'
+            editor: <iframe class="fragment" src="/adventure/turtle/1/raw"></iframe>
             header: 'Dibujando con la tortuga: {forward}'
-            text: "`{forward}` se utiliza para mover la tortuga hacia adelante.\n"
-            editor: "<iframe class=\"fragment\" src=\"/adventure/turtle/1/raw\"></iframe>\n"
         11:
+            text: '`{turn}` se utiliza para hacer que la tortuga gire a la izquierda o a la derecha.'
+            editor: <iframe class="fragment" src="/adventure/turtle/1/raw"></iframe>
             header: 'Dibuja con la tortuga: {turn}'
-            text: "`{turn}` se utiliza para hacer que la tortuga gire a la izquierda o a la derecha.\n"
-            editor: "<iframe class=\"fragment\" src=\"/adventure/turtle/1/raw\"></iframe>\n"
-    7:
-        5:
-            header: ¡Preparado Listo Ya!
-            text: "¡Disfruta las aventuras en el nivel 7!\n"
-        1:
-            text: "En este nivel aprenderás a cómo repetir una línea de código tantas veces como quieras.\n"
-            header: Bienvenido al nivel 7
-        2:
-            header: repetir 3 veces
-            text: "Si quieres repetir una línea de código, puedes usar el código `{repeat}` 3 `{times}`.\nSi quieres repetir la línea más veces, simplemente cambia el número.\n\nPor ejemplo: Si estás programando una historia donde tu personaje pide ayuda 5 veces, podría ser así:\n"
-            editor: "<iframe class=\"fragment\" src=\"/adventure/story/7/raw\"></iframe>\n"
-        3:
-            header: No te olvides el comando imprimir
-            text: "Al usar el comando repetir, no te olvides el comando `{print}`.\n"
-            editor: "<iframe class=\"fragment\" src=\"/adventure/print/7/raw\"></iframe>\n"
-        4:
-            header: Repetir un comando preguntar
-            text: "También puedes repetir un comando `{ask}`, `{if}` or `{else}` varias veces.\n"
-            editor: "<iframe class=\"fragment\" src=\"/adventure/repeat_command_2/7/raw\"></iframe>\n"
     2:
         1:
-            text: "En este nivel aprenderás a usar las variables.\n\nUna variable es una palabra que se usa para almacenar información.\n\nPor ejemplo: un nombre, edad o equipo de deportes favorito.\n"
+            text: |-
+                En este nivel aprenderás a usar las variables.
+
+                Una variable es una palabra que se usa para almacenar información.
+
+                Por ejemplo: un nombre, edad o equipo de deportes favorito.
             header: Bienvenido al nivel 2
-        3:
-            header: Interactivo
-            text: "También podemos establecer una variable haciendo preguntas.\n\nLa respuesta a esta pregunta se guarda en la variable.\n\nDe esta manera no hace falta el comando `{echo}`.\n"
-            editor: "<iframe class=\"fragment\" src=\"/adventure/ask_command/2/raw\"></iframe>\n"
-        6:
-            header: Dormir 5
-            text: "Puedes añadir un número tras el comando `{sleep}` si quieres que la pausa sea más larga.\n\nSi quieres, incluso podrías usar una variable en vez de un número para decidir la duración del comando dormir.\n"
-            editor: "<iframe class=\"fragment\" src=\"/adventure/sleep_command/2/raw\"></iframe>\n"
-        7:
-            text: "¡Disfruta las aventuras en el nivel 3!\n"
-            header: ¡Que empiece la diversión de programar!
         2:
+            text: Para crear o 'establecer' una variable usamos el comando `{is}`
+            editor: <iframe class="fragment" src="/adventure/is_command/2/raw"></iframe>
             header: Variables
-            text: "Para crear o 'establecer' una variable usamos el comando `{is}`\n"
-            editor: "<iframe class=\"fragment\" src=\"/adventure/is_command/2/raw\"></iframe>\n"
+        3:
+            text: |-
+                También podemos establecer una variable haciendo preguntas.
+
+                La respuesta a esta pregunta se guarda en la variable.
+
+                De esta manera no hace falta el comando `{echo}`.
+            editor: <iframe class="fragment" src="/adventure/ask_command/2/raw"></iframe>
+            header: Interactivo
         4:
+            text: Ahora que usamos variables, podemos usar varias variables en vez de sólo un comando `{echo}`.
+            editor: <iframe class="fragment" src="/adventure/ask_command/2/raw"></iframe>
             header: Multiples variables
-            text: "Ahora que usamos variables, podemos usar varias variables en vez de sólo un comando `{echo}`.\n"
-            editor: "<iframe class=\"fragment\" src=\"/adventure/ask_command/2/raw\"></iframe>\n"
         5:
+            text: También puedes usar el comando `{sleep}` para pausar el código durante un rato.
+            editor: <iframe class="fragment" src="/adventure/sleep_command/2/raw"></iframe>
             header: Dormir
-            text: "También puedes usar el comando `{sleep}` para pausar el código durante un rato.\n"
-            editor: "<iframe class=\"fragment\" src=\"/adventure/sleep_command/2/raw\"></iframe>\n"
-    6:
-        1:
-            text: "En este nivel añadimos las matemáticas a nuestros códigos.\n"
-            header: Bienvenido al nivel 6
-        2:
-            header: Suma
-            text: "Si quieres calcular una suma, simplemente usa el signo más.\n"
-            editor: "<iframe class=\"fragment\" src=\"/adventure/maths/6/raw\"></iframe>\n"
-        5:
-            text: "Puedes usar la barra para dividir.\n"
-            editor: "<iframe class=\"fragment\" src=\"/adventure/maths/6/raw\"></iframe>\n"
-            header: División
         6:
-            header: Resumen
-            text: "En resumen, puedes usar +, -, * y / para hacer cálculos.\n"
-            editor: "<iframe class=\"fragment\" src=\"/adventure/maths/6/raw\"></iframe>\n"
+            text: |-
+                Puedes añadir un número tras el comando `{sleep}` si quieres que la pausa sea más larga.
+
+                Si quieres, incluso podrías usar una variable en vez de un número para decidir la duración del comando dormir.
+            editor: <iframe class="fragment" src="/adventure/sleep_command/2/raw"></iframe>
+            header: Dormir 5
         7:
-            header: El símbolo =
-            text: "Desde ahora puedes usar también el símbolo = en vez del comando `{is}`.\nEsto ocurre tanto para números y palabras, y también ocurre tras los comandos `{if}` o `{else}`.\n"
-            editor: "<iframe class=\"fragment\" src=\"/adventure/is_command/6/raw\"></iframe>\n"
-        3:
-            header: Resta
-            text: "Si quieres restar, puedes usar el signo menos.\n"
-            editor: "<iframe class=\"fragment\" src=\"/adventure/maths/6/raw\"></iframe>\n"
-        4:
-            header: Multiplicación
-            text: "Si quieres hacer multiplicaciones, puedes usar el asterisco.\n"
-            editor: "<iframe class=\"fragment\" src=\"/adventure/maths/6/raw\"></iframe>\n"
-        8:
-            header: Cálculos con variables
-            text: "Puedes usar cálculos con números, pero también puedes usar variables para hacer cálculos, tal que así:\n"
-            editor: "<iframe class=\"fragment\" src=\"/adventure/calculator/6/raw\"></iframe>\n"
-        9:
-            header: ¡Manos a la obra!
-            text: "¡Disfruta las aventuras en el nivel 6!\n"
-    4:
-        6:
-            editor: "<iframe class=\"fragment\" src=\"/adventure/quotation_marks/4/raw\"></iframe>\n"
-            header: Comillas y variables
-            text: "No quieres que se impriman nombres de variables en la pantalla.\nEsto es por lo que las variables deben dejarse fuera de las comillas, tal que así:\n"
-        7:
-            header: Comillas y variables
-            text: "Cuando los nombres de variables se usan en medio de una frase, tienes que dejar las variables fuera de las comillas.\nEl resto de la frase en cambio, necesita comillas. Que se parece a esto:\n"
-            editor: "<iframe class=\"fragment\" src=\"/adventure/quotation_marks/4/raw\"></iframe>\n"
-        1:
-            header: Bienvenido al nivel 4
-            text: "En este nivel aprenderás a cómo usar las comillas.\n"
-            editor: "<iframe class=\"fragment\" src=\"/adventure/quotation_marks/4/raw\"></iframe>\n"
-        2:
-            header: Problema
-            text: "En los niveles anteriores, quizá te hayas encontrado este problema:\n"
-            editor: "<iframe class=\"fragment\" src=\"/adventure/default/4/raw\"></iframe>\n"
-        3:
-            header: Arreglarlo con comillas
-            text: "En este nivel arreglaremos este problema usando las comillas.\n\nEsto tambiém hace que nuestro código se parezca más a un código 'real' de Python.\n"
-        4:
-            header: Comillas con imprimir
-            text: "Cada vez que uses el comando `{print}` necesitas poner el texto que quieras con comillas para que aparezca en la pantalla.\n"
-            editor: "<iframe class=\"fragment\" src=\"/adventure/quotation_marks/4/raw\"></iframe>\n"
-        5:
-            header: Comillas con preguntar
-            text: "Esto también ocurre para el comando `{ask}`.\n"
-            editor: "<iframe class=\"fragment\" src=\"/adventure/quotation_marks/4/raw\"></iframe>\n"
-        8:
-            header: Comillas y contracciones
-            text: "¡Cuidado! Ahora que estás usando comillas, no puedes usar apóstrofes en las abreviaturas.\n\nPor favor intenta imprimir una contracción como \"you're\" o \"I'm\" en la pantalla de abajo y verás que sucede....\n"
-            editor: "<iframe class=\"fragment\" src=\"/adventure/rock/4/raw\"></iframe>\n"
-        9:
-            header: Limpiar
-            text: "En este nivel también aprenderás el comando {clear}.\nCon este comando puedes limpiar todo el texto de tu pantalla de salida.\n\nTen cuidado si siempre también usas un comando dormir. Si no lo haces el ordenador ¡limpiará todo el texto antes de que lo puedas leer!\n"
-            editor: "<iframe class=\"fragment\" src=\"/adventure/clear_command/4/raw\"></iframe>\n"
-        10:
-            header: ¡Preparados, Listos, Ya!
-            text: "¡Disfruta las aventuras en el nivel 4!\n"
-    15:
-        2:
-            editor: "<iframe class=\"fragment\" src=\"/adventure/while_command/15/raw\"></iframe>\n"
-            header: '{while}'
-            text: "Vamos a aprender un nuevo bucle, ¡el bucle mientras! El bucle continua tanto que la sentencia sea verdadera. Así que no te olvides de cambiar el valor en el bucle.\n\nEn el código de ejemplo, continuamos hasta que se da una respuesta correcta. Si nunca se da la respuesta correcta, ¡el bucle nunca acabará!\n"
-        3:
-            header: ¡Vamos a probarlo!
-            text: "¡Disfruta las aventuras en el nivel 15!\n"
-        1:
-            header: Bienvenido al nivel 15
-            text: "En este nivel aprenderás sobre el bucle `{while}`.\n"
-    16:
-        1:
-            header: Bienvenido al nivel 16
-            text: "En este nivel aprenderás sobre los [corchetes] y cómo se usan.\n"
-        2:
-            header: Corchetes
-            text: "Vamos a hacer listas a la manera de Python, ¡con corchetes alrededor de las listas! También mantendremos las comillas alrededor de cada objeto como hemos aprendido en los niveles anteriores. Usamos corchetes para apuntar a un lugar en una lista. El comando en aleatorio ya no se puede usar nunca más.\n"
-            editor: "<iframe class=\"fragment\" src=\"/adventure/random_command/16/raw\"></iframe>\n"
-        3:
-            header: ¡Vamos a probarlo!
-            text: "¡Disfruta las aventuras en el nivel 16!\n"
+            text: ¡Disfruta las aventuras en el nivel 3!
+            header: ¡Que empiece la diversión de programar!
     3:
         1:
+            text: En este nivel aprenderás como hacer un lista, añadir y eliminar objetos de tus listas y elegir un objeto al azar de esa lista.
             header: Bienvenido al nivel 3
-            text: "En este nivel aprenderás como hacer un lista, añadir y eliminar objetos de tus listas y elegir un objeto al azar de esa lista.\n"
         2:
+            text: |-
+                Creas una lista con `{is}`.
+
+                Separa tus objetos en tu lista con una coma.
+            editor: <iframe class="fragment" src="/adventure/random_command/3/raw"></iframe>
             header: Hacer una lista
-            text: "Creas una lista con `{is}`.\n\nSepara tus objetos en tu lista con una coma.\n"
-            editor: "<iframe class=\"fragment\" src=\"/adventure/random_command/3/raw\"></iframe>\n"
         3:
+            text: |-
+                Puedes usar la lista con el comando `{at}` `{random}`.
+                El ordenador elegirá al azar un objeto de la lista.
+                Cada vez que ejecutes este código el resultado será diferente.
+            editor: <iframe class="fragment" src="/adventure/dice/3/raw"></iframe>
             header: En aleatorio
-            text: "Puedes usar la lista con el comando `{at}` `{random}`.\nEl ordenador elegirá al azar un objeto de la lista.\nCada vez que ejecutes este código el resultado será diferente.\n"
-            editor: "<iframe class=\"fragment\" src=\"/adventure/dice/3/raw\"></iframe>\n"
         4:
+            text: También puedes usar el comando `{at}` `{random}` en una frase.
+            editor: <iframe class="fragment" src="/adventure/random_command/3/raw"></iframe>
             header: En aleatorio en una frase
-            text: "También puedes usar el comando `{at}` `{random}` en una frase.\n"
-            editor: "<iframe class=\"fragment\" src=\"/adventure/random_command/3/raw\"></iframe>\n"
         5:
+            text: |-
+                Puedes añadir objetos a una lista con el comando `{add}` `{to}`.
+
+                Puedes elegir qué añadir a la lista o puedes usar el comando `{add}` `{to}` en combinación con el comando `{ask}`.
+                De esta manera puedes dejar que el jugador elija qué añadir a la lista.
+            editor: <iframe class="fragment" src="/adventure/add_remove_command/3/raw"></iframe>
             header: Añadir a
-            text: "Puedes añadir objetos a una lista con el comando `{add}` `{to}`.\n\nPuedes elegir qué añadir a la lista o puedes usar el comando `{add}` `{to}` en combinación con el comando `{ask}`.\nDe esta manera puedes dejar que el jugador elija qué añadir a la lista.\n"
-            editor: "<iframe class=\"fragment\" src=\"/adventure/add_remove_command/3/raw\"></iframe>\n"
         6:
+            text: |-
+                Lo contrario del comando `{add}` `{to}` es el comando `{remove}` `{from}`.
+                Este comando elimina un objeto de una lista.
+            editor: <iframe class="fragment" src="/adventure/add_remove_command/3/raw"></iframe>
             header: Eliminar de
-            text: "Lo contrario del comando `{add}` `{to}` es el comando `{remove}` `{from}`.\nEste comando elimina un objeto de una lista.\n"
-            editor: "<iframe class=\"fragment\" src=\"/adventure/add_remove_command/3/raw\"></iframe>\n"
         9:
+            text: ¡Disfruta las aventuras en el nivel 3!
             header: ¡Manos a la obra!
-            text: "¡Disfruta las aventuras en el nivel 3!\n"
-    8:
+    4:
+        1:
+            text: En este nivel aprenderás a cómo usar las comillas.
+            editor: <iframe class="fragment" src="/adventure/quotation_marks/4/raw"></iframe>
+            header: Bienvenido al nivel 4
+        2:
+            text: 'En los niveles anteriores, quizá te hayas encontrado este problema:'
+            editor: <iframe class="fragment" src="/adventure/default/4/raw"></iframe>
+            header: Problema
+        3:
+            text: |-
+                En este nivel arreglaremos este problema usando las comillas.
+
+                Esto tambiém hace que nuestro código se parezca más a un código 'real' de Python.
+            header: Arreglarlo con comillas
         4:
-            editor: "<iframe class=\"fragment\" src=\"/adventure/repeat_command_2/8/raw\"></iframe>\n"
-            text: "Si quieres, puedes continur tras el comando `{repeat}` sin sangría.\nLas líneas que no empiecen con sangría no se repetirán.\n"
-            header: 'comandos {repeat} ahora'
+            text: Cada vez que uses el comando `{print}` necesitas poner el texto que quieras con comillas para que aparezca en la pantalla.
+            editor: <iframe class="fragment" src="/adventure/quotation_marks/4/raw"></iframe>
+            header: Comillas con imprimir
         5:
-            header: antes si y sino
-            text: "Lo mismo ocurre para los comandos `{if}` y `{else}`.\nAntes estos eran los comandos:\n"
-            editor: "<iframe class=\"fragment\" src=\"/adventure/if_command/5/raw\"></iframe>\n"
+            text: Esto también ocurre para el comando `{ask}`.
+            editor: <iframe class="fragment" src="/adventure/quotation_marks/4/raw"></iframe>
+            header: Comillas con preguntar
         6:
-            text: "Ahora estos son los comandos `{if}` y `{else}`.\nCada línea tras los comandos `{if}` y `{else}` empieza con sangría.\n"
+            text: |-
+                No quieres que se impriman nombres de variables en la pantalla.
+                Esto es por lo que las variables deben dejarse fuera de las comillas, tal que así:
+            editor: <iframe class="fragment" src="/adventure/quotation_marks/4/raw"></iframe>
+            header: Comillas y variables
+        7:
+            text: |-
+                Cuando los nombres de variables se usan en medio de una frase, tienes que dejar las variables fuera de las comillas.
+                El resto de la frase en cambio, necesita comillas. Que se parece a esto:
+            editor: <iframe class="fragment" src="/adventure/quotation_marks/4/raw"></iframe>
+            header: Comillas y variables
+        8:
+            text: |-
+                ¡Cuidado! Ahora que estás usando comillas, no puedes usar apóstrofes en las abreviaturas.
+
+                Por favor intenta imprimir una contracción como "you're" o "I'm" en la pantalla de abajo y verás que sucede....
+            editor: <iframe class="fragment" src="/adventure/rock/4/raw"></iframe>
+            header: Comillas y contracciones
+        9:
+            text: |-
+                En este nivel también aprenderás el comando {clear}.
+                Con este comando puedes limpiar todo el texto de tu pantalla de salida.
+
+                Ten cuidado si siempre también usas un comando dormir. Si no lo haces el ordenador ¡limpiará todo el texto antes de que lo puedas leer!
+            editor: <iframe class="fragment" src="/adventure/clear_command/4/raw"></iframe>
+            header: Limpiar
+        10:
+            text: ¡Disfruta las aventuras en el nivel 4!
+            header: ¡Preparados, Listos, Ya!
+    5:
+        1:
+            text: 'En este nivel aprenderás a usar 3 comandos nuevos: `{if}`, `{else}` y `{in}`.'
+            header: Bienvenido al nivel 5
+        2:
+            text: |-
+                El comando `{if}` permite elegir entre dos opciones.
+                En este ejemplo el ordenador imprimirá 'bien' si la respuesta dad es Hedy.
+                Si la respuesta no es Hedy, el ordenador no hará nada.
+            editor: <iframe class="fragment" src="/adventure/if_command/5/raw"></iframe>
+            header: si
+        3:
+            text: Al usar el comando `{if}`, no te olvides de usar el comando `{print}`.
+            editor: <iframe class="fragment" src="/adventure/if_command/5/raw"></iframe>
+            header: No te olvides imprimir
+        4:
+            text: |-
+                Al usar el comando `{if}`, también puedes añadir el comando `{else}`.
+                Si la respuesta es Hedy, el ordenador imprimirá 'bien'.
+                Pero si la respuesta es otra cosa el ordenador imprimirá 'boo'
+            editor: <iframe class="fragment" src="/adventure/if_command/5/raw"></iframe>
+            header: sino
+        5:
+            text: |-
+                Quizás te hayas dado cuenta que tus líneas pueden hacerse muy largas cuando tienes ambos comandos `{if}` y `{else}`.
+
+                Puedes elegir separar los comandos y ponerlos en 2 líneas, tal que así:
+            editor: <iframe class="fragment" src="/adventure/if_command/5/raw"></iframe>
+            header: Líneas largas
+        6:
+            text: |-
+                Si has practicado con los comandos `{if}` y `{else}`, también puedes intentar el comando `{in}`.
+
+                Con `{in}` puedes dejar que el ordenador compruebe si un objeto está en una lista, por ejemplo:
+
+                Por favor ten en cuenta que Hedy distingue entre mayúsculas y minúsculas. Esto significa que tu respuesta "Verde" en vez de "verde", Hedy imprimirá "meh".
+            editor: <iframe class="fragment" src="/adventure/in_command/5/raw"></iframe>
+            header: Otro comando nuevo
+        7:
+            text: ¡Disfruta las aventuras en el nivel 5!
+            header: ¡Vamos!
+    6:
+        1:
+            text: En este nivel añadimos las matemáticas a nuestros códigos.
+            header: Bienvenido al nivel 6
+        2:
+            text: Si quieres calcular una suma, simplemente usa el signo más.
+            editor: <iframe class="fragment" src="/adventure/maths/6/raw"></iframe>
+            header: Suma
+        3:
+            text: Si quieres restar, puedes usar el signo menos.
+            editor: <iframe class="fragment" src="/adventure/maths/6/raw"></iframe>
+            header: Resta
+        4:
+            text: Si quieres hacer multiplicaciones, puedes usar el asterisco.
+            editor: <iframe class="fragment" src="/adventure/maths/6/raw"></iframe>
+            header: Multiplicación
+        5:
+            text: Puedes usar la barra para dividir.
+            editor: <iframe class="fragment" src="/adventure/maths/6/raw"></iframe>
+            header: División
+        6:
+            text: En resumen, puedes usar +, -, * y / para hacer cálculos.
+            editor: <iframe class="fragment" src="/adventure/maths/6/raw"></iframe>
+            header: Resumen
+        7:
+            text: |-
+                Desde ahora puedes usar también el símbolo = en vez del comando `{is}`.
+                Esto ocurre tanto para números y palabras, y también ocurre tras los comandos `{if}` o `{else}`.
+            editor: <iframe class="fragment" src="/adventure/is_command/6/raw"></iframe>
+            header: El símbolo =
+        8:
+            text: 'Puedes usar cálculos con números, pero también puedes usar variables para hacer cálculos, tal que así:'
+            editor: <iframe class="fragment" src="/adventure/calculator/6/raw"></iframe>
+            header: Cálculos con variables
+        9:
+            text: ¡Disfruta las aventuras en el nivel 6!
+            header: ¡Manos a la obra!
+    7:
+        1:
+            text: En este nivel aprenderás a cómo repetir una línea de código tantas veces como quieras.
+            header: Bienvenido al nivel 7
+        2:
+            text: |-
+                Si quieres repetir una línea de código, puedes usar el código `{repeat}` 3 `{times}`.
+                Si quieres repetir la línea más veces, simplemente cambia el número.
+
+                Por ejemplo: Si estás programando una historia donde tu personaje pide ayuda 5 veces, podría ser así:
+            editor: <iframe class="fragment" src="/adventure/story/7/raw"></iframe>
+            header: repetir 3 veces
+        3:
+            text: Al usar el comando repetir, no te olvides el comando `{print}`.
+            editor: <iframe class="fragment" src="/adventure/print/7/raw"></iframe>
+            header: No te olvides el comando imprimir
+        4:
+            text: También puedes repetir un comando `{ask}`, `{if}` or `{else}` varias veces.
+            editor: <iframe class="fragment" src="/adventure/repeat_command_2/7/raw"></iframe>
+            header: Repetir un comando preguntar
+        5:
+            text: ¡Disfruta las aventuras en el nivel 7!
+            header: ¡Preparado Listo Ya!
+    8:
+        1:
+            text: En este nivel aprenderás a usar la sangría para hacer funcionar los comandos `{repeat}`, `{if}` and `{else}` para varias líneas de código.
+            header: Bienvenido al nivel 8
+        2:
+            text: |-
+                En los niveles anteriores, el comando `{repeat}` se parecía a esto:
+
+                Sólo podías repetir una línea de código.
+            editor: <iframe class="fragment" src="/adventure/story/7/raw"></iframe>
+            header: comandos {repeat} antes
+        3:
+            text: |-
+                En este nivel puedes repetir carias líneas de código. Para hacerlo debes decirle al ordenador que líneas van juntas y deberían repetirse.
+                Esto lo haces usando la sangría.
+
+                Usa 4 espacios (o una tabulación) al principio de cada línea que quieras repetir, tal que así:
+            editor: <iframe class="fragment" src="/adventure/repeat_command/8/raw"></iframe>
+            header: comandos {repeat} ahora
+        4:
+            text: |-
+                Si quieres, puedes continur tras el comando `{repeat}` sin sangría.
+                Las líneas que no empiecen con sangría no se repetirán.
+            editor: <iframe class="fragment" src="/adventure/repeat_command_2/8/raw"></iframe>
+            header: comandos {repeat} ahora
+        5:
+            text: |-
+                Lo mismo ocurre para los comandos `{if}` y `{else}`.
+                Antes estos eran los comandos:
+            editor: <iframe class="fragment" src="/adventure/if_command/5/raw"></iframe>
+            header: antes si y sino
+        6:
+            text: |-
+                Ahora estos son los comandos `{if}` y `{else}`.
+                Cada línea tras los comandos `{if}` y `{else}` empieza con sangría.
             editor: <iframe class="fragment" src="/adventure/if_command/8/raw"></iframe>
             header: ahora si y sino
         7:
+            text: Al igual que con el comando `{repeat}`, puedes dejar de usar sangría y las líneas siempre se mostrarán. No sólo si la sentencia es verdadera.
+            editor: <iframe class="fragment" src="/adventure/if_command/8/raw"></iframe>
             header: detener la sangría
-            text: "Al igual que con el comando `{repeat}`, puedes dejar de usar sangría y las líneas siempre se mostrarán. No sólo si la sentencia es verdadera.\n"
-            editor: "<iframe class=\"fragment\" src=\"/adventure/if_command/8/raw\"></iframe>\n"
         8:
+            text: |-
+                Quizás hayas pensado en intentar poner un comando si dentro de un comando repetir, o dentro de otro comando si.
+                Por ahora, esto todavía no es posible. En niveles superiores, esto se permitirá, pero por ahora centrémosnos primero en practicar los comandos `{if}` `{else}` y `{repeat}` con la sangría adecuada.
             header: sentencias si dentro de sentencias si
-            text: "Quizás hayas pensado en intentar poner un comando si dentro de un comando repetir, o dentro de otro comando si.\nPor ahora, esto todavía no es posible. En niveles superiores, esto se permitirá, pero por ahora centrémosnos primero en practicar los comandos `{if}` `{else}` y `{repeat}` con la sangría adecuada.\n"
-        3:
-            text: "En este nivel puedes repetir carias líneas de código. Para hacerlo debes decirle al ordenador que líneas van juntas y deberían repetirse.\nEsto lo haces usando la sangría.\n\nUsa 4 espacios (o una tabulación) al principio de cada línea que quieras repetir, tal que así:\n"
-            editor: "<iframe class=\"fragment\" src=\"/adventure/repeat_command/8/raw\"></iframe>\n"
-            header: 'comandos {repeat} ahora'
-        1:
-            header: Bienvenido al nivel 8
-            text: "En este nivel aprenderás a usar la sangría para hacer funcionar los comandos `{repeat}`, `{if}` and `{else}` para varias líneas de código.\n"
-        2:
-            header: 'comandos {repeat} antes'
-            text: "En los niveles anteriores, el comando `{repeat}` se parecía a esto:\n\nSólo podías repetir una línea de código.\n"
-            editor: "<iframe class=\"fragment\" src=\"/adventure/story/7/raw\"></iframe>\n"
         9:
+            text: ¡Disfruta las aventuras en el nivel 8!
             header: ¡Vamos a ver las aventuras!
-            text: "¡Disfruta las aventuras en el nivel 8!\n"
-    17:
-        2:
-            text: "Ahora vamos a cambiar la sangría un poco. Cada vez que necesitemos una sangría, necesitamos : en la línea de antes de la sangría.\n"
-            editor: "<iframe class=\"fragment\" src=\"/adventure/print_command/17/raw\"></iframe>\n"
-            header: Dos puntos
-        3:
-            header: Sino
-            text: "En este nivel también puedes usar un nuevo comando: sino. sino es la abreviatura para si no si y lo necesitas cuando quieras hacer 3 ('o más!) opciones. ¡Compruébalo!\n"
-            editor: "<iframe class=\"fragment\" src=\"/adventure/elif_command/17/raw\"></iframe>\n"
-        1:
-            header: Bienvenido al nivel 17
-            text: "en este nivel aprenderás a como usar los dos puntos y aprenderás el comando sino.\n"
-        4:
-            header: ¡Vamos a probarlo!
-            text: "¡Disfruta las aventuras en el nivel 17!\n"
-    14:
-        1:
-            header: Bienvenido al nivel 14
-            text: "En este nivel aprenderás algunos símbolos nuevos que pueden ayudarte a mejorar tus programas, como >.\n"
-        2:
-            header: Símbolos
-            text: "Estos son los nuevos símbolos que puedes usar:\n\n  El >  significa mayor que...\n\n  El >= significa mayor o igual que...\n\n  El <  significa menor que...\n\n  El <= significa menor o igual que...\n\nPuedes usarlos así:\n"
-            editor: "<iframe class=\"fragment\" src=\"/adventure/is_command/14/raw\"></iframe>\n"
-        3:
-            header: Símbolos
-            text: "También puedes usar:\n\n== is igual que.\n\n!= no es\n\n== se usa en sentencias `{if}`.\n"
-            editor: "<iframe class=\"fragment\" src=\"/adventure/default/14/raw\"></iframe>\n"
-        4:
-            header: ¡Manos a la obra!
-            text: "¡Disfruta las aventuras en el nivel 14!\n"
     9:
-        7:
-            editor: "<iframe class=\"fragment\" src=\"/adventure/repeat_command/9/raw\"></iframe>\n"
-            header: Cuidado con la sangría
-            text: "Cuidado que la cuarta y sexta línea de este código empieza con 8 espacios de sangría.\n"
-        8:
-            header: ¡Vamos!
-            text: "¡Disfruta las aventuras en el nivel 9!\n"
         1:
+            text: |-
+                En este nivel puedes usar varias líneas de código tras un comando `{if}` o tras un `{repeat}`.
+
+                Incluso puedes poner un comando `{repeat}` dentro de otro comando `{repeat}`.
             header: Bienvenido al nivel 9
-            text: "En este nivel puedes usar varias líneas de código tras un comando `{if}` o tras un `{repeat}`.\n\nIncluso puedes poner un comando `{repeat}` dentro de otro comando `{repeat}`.\n"
         2:
+            text: Tienes permitido usar varias líneas después de `{repeat}`.
+            editor: <iframe class="fragment" src="/adventure/repeat_command/9/raw"></iframe>
             header: Varias líneas después de `{repeat}`
-            text: "Tienes permitido usar varias líneas después de `{repeat}`.\n"
-            editor: "<iframe class=\"fragment\" src=\"/adventure/repeat_command/9/raw\"></iframe>\n"
         3:
+            text: La sangría es muy importante para decirle al ordenador qué líneas deberían repetirse y qué líneas deberían ejecutarse una vez.
+            editor: <iframe class="fragment" src="/adventure/repeat_command_2/8/raw"></iframe>
             header: ¡La sangría importa!
-            text: "La sangría es muy importante para decirle al ordenador qué líneas deberían repetirse y qué líneas deberían ejecutarse una vez.\n"
-            editor: "<iframe class=\"fragment\" src=\"/adventure/repeat_command_2/8/raw\"></iframe>\n"
         4:
+            text: Puedes usar varias líneas después de `{if}`
+            editor: <iframe class="fragment" src="/adventure/if_command/9/raw"></iframe>
             header: Varias líneas después de `{if}`
-            text: "Puedes usar varias líneas después de `{if}`\n"
-            editor: "<iframe class=\"fragment\" src=\"/adventure/if_command/9/raw\"></iframe>\n"
         5:
+            text: De nuevo, la sangría es todavía muy importante y puede hacer una gran diferencia en el código.
+            editor: <iframe class="fragment" src="/adventure/if_command/9/raw"></iframe>
             header: La sangría importa
-            text: "De nuevo, la sangría es todavía muy importante y puede hacer una gran diferencia en el código.\n"
-            editor: "<iframe class=\"fragment\" src=\"/adventure/if_command/9/raw\"></iframe>\n"
         6:
+            text: |-
+                Ahora que puedes usar varias líneas de código tras estos comandos, también puedes ponerlos dentro de otros.
+                Compruébalo:
+            editor: <iframe class="fragment" src="/adventure/repeat_command/9/raw"></iframe>
             header: Un `{if}` dentro de un `{repeat}`
-            text: "Ahora que puedes usar varias líneas de código tras estos comandos, también puedes ponerlos dentro de otros.\nCompruébalo:\n"
-            editor: "<iframe class=\"fragment\" src=\"/adventure/repeat_command/9/raw\"></iframe>\n"
+        7:
+            text: Cuidado que la cuarta y sexta línea de este código empieza con 8 espacios de sangría.
+            editor: <iframe class="fragment" src="/adventure/repeat_command/9/raw"></iframe>
+            header: Cuidado con la sangría
+        8:
+            text: ¡Disfruta las aventuras en el nivel 9!
+            header: ¡Vamos!
     10:
         1:
+            text: 'En este nivel aprenderás un nuevo comando: `{for}`.'
             header: Bienvenido al nivel 10
-            text: "En este nivel aprenderás un nuevo comando: `{for}`.\n"
         2:
+            text: Con para puedes hacer una lista y usar todos los objectos de esa lista. `{for}` crea un bloque, como repetir y si así que todas las líneas del bloque tienen que empezar con sangría (4 espacios).
+            editor: <iframe class="fragment" src="/adventure/for_command/10/raw"></iframe>
             header: El comando para
-            text: "Con para puedes hacer una lista y usar todos los objectos de esa lista. `{for}` crea un bloque, como repetir y si así que todas las líneas del bloque tienen que empezar con sangría (4 espacios).\n"
-            editor: "<iframe class=\"fragment\" src=\"/adventure/for_command/10/raw\"></iframe>\n"
         3:
+            text: 'Aquí puedes ver otro ejemplo del comando `{for}`:'
+            editor: <iframe class="fragment" src="/adventure/dishes/10/raw"></iframe>
             header: El comando para
-            text: "Aquí puedes ver otro ejemplo del comando `{for}`:\n"
-            editor: "<iframe class=\"fragment\" src=\"/adventure/dishes/10/raw\"></iframe>\n"
         4:
+            text: ¡Disfruta las aventuras en el nivel 10!
             header: ¡Hora de programar!
-            text: "¡Disfruta las aventuras en el nivel 10!\n"
-    5:
-        1:
-            header: Bienvenido al nivel 5
-            text: "En este nivel aprenderás a usar 3 comandos nuevos: `{if}`, `{else}` y `{in}`.\n"
-        2:
-            header: si
-            text: "El comando `{if}` permite elegir entre dos opciones.\nEn este ejemplo el ordenador imprimirá 'bien' si la respuesta dad es Hedy.\nSi la respuesta no es Hedy, el ordenador no hará nada.\n"
-            editor: "<iframe class=\"fragment\" src=\"/adventure/if_command/5/raw\"></iframe>\n"
-        3:
-            header: No te olvides imprimir
-            text: "Al usar el comando `{if}`, no te olvides de usar el comando `{print}`.\n"
-            editor: "<iframe class=\"fragment\" src=\"/adventure/if_command/5/raw\"></iframe>\n"
-        4:
-            header: sino
-            text: "Al usar el comando `{if}`, también puedes añadir el comando `{else}`.\nSi la respuesta es Hedy, el ordenador imprimirá 'bien'.\nPero si la respuesta es otra cosa el ordenador imprimirá 'boo'\n"
-            editor: "<iframe class=\"fragment\" src=\"/adventure/if_command/5/raw\"></iframe>\n"
-        5:
-            header: Líneas largas
-            text: "Quizás te hayas dado cuenta que tus líneas pueden hacerse muy largas cuando tienes ambos comandos `{if}` y `{else}`.\n\nPuedes elegir separar los comandos y ponerlos en 2 líneas, tal que así:\n"
-            editor: "<iframe class=\"fragment\" src=\"/adventure/if_command/5/raw\"></iframe>\n"
-        6:
-            header: Otro comando nuevo
-            text: "Si has practicado con los comandos `{if}` y `{else}`, también puedes intentar el comando `{in}`.\n\nCon `{in}` puedes dejar que el ordenador compruebe si un objeto está en una lista, por ejemplo:\n\nPor favor ten en cuenta que Hedy distingue entre mayúsculas y minúsculas. Esto significa que tu respuesta \"Verde\" en vez de \"verde\", Hedy imprimirá \"meh\".\n"
-            editor: "<iframe class=\"fragment\" src=\"/adventure/in_command/5/raw\"></iframe>\n"
-        7:
-            header: ¡Vamos!
-            text: "¡Disfruta las aventuras en el nivel 5!\n"
     11:
         1:
+            text: |-
+                En este nivel, añadimos una nueva forma del comando `{for}`. En niveles anteriores, usamos para con una lista, pero también podemos usar para con números.
+
+                De esta manera no necesitamos el comando `{repeat}` nunca más.
             header: Bienvenido al nivel 11
-            text: "En este nivel, añadimos una nueva forma del comando `{for}`. En niveles anteriores, usamos para con una lista, pero también podemos usar para con números.\n\nDe esta manera no necesitamos el comando `{repeat}` nunca más.\n"
         2:
+            text: 'Así es el nuevo comando para:'
+            editor: <iframe class="fragment" src="/adventure/for_command/11/raw"></iframe>
             header: El comando para
-            text: "Así es el nuevo comando para:\n"
-            editor: "<iframe class=\"fragment\" src=\"/adventure/for_command/11/raw\"></iframe>\n"
         3:
+            text: |-
+                En la diapositiva anterior la variable se llamó 'contador', porque because era la cuenta atrás.
+                Por supuesto puedes usar cualquier nombre que quieras para la variable.
+                En esta situación el nombre estándar para las variables que se usan en lenguajes de programación como Python es 'i'.
+                Se parece a esto:
+            editor: <iframe class="fragment" src="/adventure/calculator/11/raw"></iframe>
             header: la variable i
-            text: "En la diapositiva anterior la variable se llamó 'contador', porque because era la cuenta atrás.\nPor supuesto puedes usar cualquier nombre que quieras para la variable.\nEn esta situación el nombre estándar para las variables que se usan en lenguajes de programación como Python es 'i'.\nSe parece a esto:\n"
-            editor: "<iframe class=\"fragment\" src=\"/adventure/calculator/11/raw\"></iframe>\n"
         4:
+            text: ¡Disfruta las aventuras en el nivel 11!
             header: ¡Comencemos a programar!
-            text: "¡Disfruta las aventuras en el nivel 11!\n"
     12:
         1:
+            text: Desde este nivel en adelante se permite que uses números decimales y hay algunos cambios a las comillas.
             header: Bienvenido al nivel 12
-            text: "Desde este nivel en adelante se permite que uses números decimales y hay algunos cambios a las comillas.\n"
         2:
+            text: |-
+                Este nivel trae algunos cambios al uso de las comillas.
+                De ahora en adelante, **todos los textos** tienen que tener comillas. Esto incluye los valores de las variables, objetos en listas y texto tras comandos {if}.
+            editor: <iframe class="fragment" src="/adventure/quotation_marks/12/raw"></iframe>
             header: Comillas
-            text: "Este nivel trae algunos cambios al uso de las comillas.\nDe ahora en adelante, **todos los textos** tienen que tener comillas. Esto incluye los valores de las variables, objetos en listas y texto tras comandos {if}.\n"
-            editor: "<iframe class=\"fragment\" src=\"/adventure/quotation_marks/12/raw\"></iframe>\n"
         3:
+            text: |-
+                Desde este nivel en adelante también se permite que uses números decimales. ¡Esto puede hacer programas como tu restaurante incluso mejor!
+
+                Los números no llevan comillas.
+            editor: <iframe class="fragment" src="/adventure/maths/12/raw"></iframe>
             header: Números decimales
-            text: "Desde este nivel en adelante también se permite que uses números decimales. ¡Esto puede hacer programas como tu restaurante incluso mejor!\n\nLos números no llevan comillas.\n"
-            editor: "<iframe class=\"fragment\" src=\"/adventure/maths/12/raw\"></iframe>\n"
         4:
+            text: ¡Disfruta las aventuras en el nivel 12!
             header: ¿Preparado para probarlo?
-            text: "¡Disfruta las aventuras en el nivel 12!\n"
     13:
         1:
+            text: ¡Ahora vamos a aprender `{and}` y `{or}`! Si quieres comprobar dos sentencias, no tienes que usar dos si sino que se puede utilizar y y o.
             header: Bienvenido al nivel 13
-            text: "¡Ahora vamos a aprender `{and}` y `{or}`! Si quieres comprobar dos sentencias, no tienes que usar dos si sino que se puede utilizar y y o.\n"
         2:
+            text: |-
+                El comando `{and}` siempre se usa en una combinación con el comando {if}.
+                De esta manera puedes comprobar si 2 sentencias son verdaderas. Por ejemplo:
+            editor: <iframe class="fragment" src="/adventure/and_or_command/13/raw"></iframe>
             header: El comando y
-            text: "El comando `{and}` siempre se usa en una combinación con el comando {if}.\nDe esta manera puedes comprobar si 2 sentencias son verdaderas. Por ejemplo:\n"
-            editor: "<iframe class=\"fragment\" src=\"/adventure/and_or_command/13/raw\"></iframe>\n"
         3:
+            text: |-
+                El `{or}` funciona de la misma manera que el comando `{and}`, pero sólo 1 de las dos sentencias tiene que ser verdadero.
+
+                Veamos que ocurre cuando cambias el `{and}` por `{or}`.
+            editor: <iframe class="fragment" src="/adventure/and_or_command/13/raw"></iframe>
             header: El comando o
-            text: "El `{or}` funciona de la misma manera que el comando `{and}`, pero sólo 1 de las dos sentencias tiene que ser verdadero.\n\nVeamos que ocurre cuando cambias el `{and}` por `{or}`.\n"
-            editor: "<iframe class=\"fragment\" src=\"/adventure/and_or_command/13/raw\"></iframe>\n"
         4:
+            text: ¡Disfruta las aventuras en el nivel 13!
             header: ¡Vamos!
-            text: "¡Disfruta las aventuras en el nivel 13!\n"
+    14:
+        1:
+            text: En este nivel aprenderás algunos símbolos nuevos que pueden ayudarte a mejorar tus programas, como >.
+            header: Bienvenido al nivel 14
+        2:
+            text: |-
+                Estos son los nuevos símbolos que puedes usar:
+
+                  El >  significa mayor que...
+
+                  El >= significa mayor o igual que...
+
+                  El <  significa menor que...
+
+                  El <= significa menor o igual que...
+
+                Puedes usarlos así:
+            editor: <iframe class="fragment" src="/adventure/is_command/14/raw"></iframe>
+            header: Símbolos
+        3:
+            text: |-
+                También puedes usar:
+
+                == is igual que.
+
+                != no es
+
+                == se usa en sentencias `{if}`.
+            editor: <iframe class="fragment" src="/adventure/default/14/raw"></iframe>
+            header: Símbolos
+        4:
+            text: ¡Disfruta las aventuras en el nivel 14!
+            header: ¡Manos a la obra!
+    15:
+        1:
+            text: En este nivel aprenderás sobre el bucle `{while}`.
+            header: Bienvenido al nivel 15
+        2:
+            text: |-
+                Vamos a aprender un nuevo bucle, ¡el bucle mientras! El bucle continua tanto que la sentencia sea verdadera. Así que no te olvides de cambiar el valor en el bucle.
+
+                En el código de ejemplo, continuamos hasta que se da una respuesta correcta. Si nunca se da la respuesta correcta, ¡el bucle nunca acabará!
+            editor: <iframe class="fragment" src="/adventure/while_command/15/raw"></iframe>
+            header: '{while}'
+        3:
+            text: ¡Disfruta las aventuras en el nivel 15!
+            header: ¡Vamos a probarlo!
+    16:
+        1:
+            text: En este nivel aprenderás sobre los [corchetes] y cómo se usan.
+            header: Bienvenido al nivel 16
+        2:
+            text: Vamos a hacer listas a la manera de Python, ¡con corchetes alrededor de las listas! También mantendremos las comillas alrededor de cada objeto como hemos aprendido en los niveles anteriores. Usamos corchetes para apuntar a un lugar en una lista. El comando en aleatorio ya no se puede
+                usar nunca más.
+            editor: <iframe class="fragment" src="/adventure/random_command/16/raw"></iframe>
+            header: Corchetes
+        3:
+            text: ¡Disfruta las aventuras en el nivel 16!
+            header: ¡Vamos a probarlo!
+    17:
+        1:
+            text: en este nivel aprenderás a como usar los dos puntos y aprenderás el comando sino.
+            header: Bienvenido al nivel 17
+        2:
+            text: 'Ahora vamos a cambiar la sangría un poco. Cada vez que necesitemos una sangría, necesitamos : en la línea de antes de la sangría.'
+            editor: <iframe class="fragment" src="/adventure/print_command/17/raw"></iframe>
+            header: Dos puntos
+        3:
+            text: 'En este nivel también puedes usar un nuevo comando: sino. sino es la abreviatura para si no si y lo necesitas cuando quieras hacer 3 (''o más!) opciones. ¡Compruébalo!'
+            editor: <iframe class="fragment" src="/adventure/elif_command/17/raw"></iframe>
+            header: Sino
+        4:
+            text: ¡Disfruta las aventuras en el nivel 17!
+            header: ¡Vamos a probarlo!
     18:
         1:
+            text: ¡Enhorabuena! ¡Has alcanzado el último nivel de Hedy! El código que has creado se puede copiar a un entorno de Python como replit o PyCharm, ¡y puedes continuar aprendiendo allí! Sin embargo ten en cuenta que Python sólo puede ller comandos en inglés, así que si has usado otros lenguajes,
+                tendrás ahora que cambiar a inglés.
             header: Bienvenido al nivel 18
-            text: "¡Enhorabuena! ¡Has alcanzado el último nivel de Hedy! El código que has creado se puede copiar a un entorno de Python como replit o PyCharm, ¡y puedes continuar aprendiendo allí! Sin embargo ten en cuenta que Python sólo puede ller comandos en inglés, así que si has usado otros lenguajes, tendrás ahora que cambiar a inglés.\n"
         2:
+            text: |-
+                ¡Hemos llegado la código real de Python! Esto significa que tenemos que usar paréntesis con imprimir y rango de ahora en adelante.
+
+                También, si quieres imprimir más de un objeto, necesitas separarlos por comas.
+
+                El cambio final que tenemos que hacer para conseguir el código Python es cambiar ask por entrada.
+
+                Haz clic en la pestaña 'imprimir' para todos los ejemplos.
+            editor: <iframe class="fragment" src="/hedy/18"></iframe>
             header: Al estilo Python
-            text: "¡Hemos llegado la código real de Python! Esto significa que tenemos que usar paréntesis con imprimir y rango de ahora en adelante.\n\nTambién, si quieres imprimir más de un objeto, necesitas separarlos por comas.\n\nEl cambio final que tenemos que hacer para conseguir el código Python es cambiar ask por entrada.\n\nHaz clic en la pestaña 'imprimir' para todos los ejemplos.\n"
-            editor: "<iframe class=\"fragment\" src=\"/hedy/18\"></iframe>\n"
         3:
+            text: ¡Disfruta las últimas aventuras en el nivel 18!
             header: ¡Las últimas aventuras!
-            text: "¡Disfruta las últimas aventuras en el nivel 18!\n"

@@ -1071,6 +1071,10 @@ class AllCommands(Transformer):
 
 
 def all_commands(input_string, level, lang='en'):
+    """Return the commands used in a program string.
+
+    This function is still used in the web frontend, and some tests, but no longer by 'transpile'.
+    """
     input_string = process_input_string(input_string, level, lang)
     program_root = parse_input(input_string, level, lang)
 
@@ -3187,8 +3191,7 @@ def transpile_inner(input_string, level, lang="en", populate_source_map=False):
         convertToPython = TRANSPILER_LOOKUP[level]
         python = convertToPython(lookup_table, numerals_language).transform(abstract_syntax_tree)
 
-        # note to self, we still parse twice, we can also pass all_commands the ast!
-        commands = all_commands(input_string, level, lang)
+        commands = AllCommands(level).transform(program_root)
 
         has_turtle = "forward" in commands or "turn" in commands or "color" in commands
         has_pygame = "ifpressed" in commands or "ifpressed_else" in commands or "assign_button" in commands

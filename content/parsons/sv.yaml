@@ -1,73 +1,113 @@
 levels:
     1:
         1:
-            story: "Du är kund hos bageriet Hedy.\nDu går in på bageriet och välkomnas av bagaren.\nHan frågar vilken sorts paj du vill beställa.\nSedan förbereds din order.\n"
+            story: |-
+                Du är kund hos bageriet Hedy.
+                Du går in på bageriet och välkomnas av bagaren.
+                Han frågar vilken sorts paj du vill beställa.
+                Sedan förbereds din order.
             code: |-
                 {print} Välkommen till bageriet Hedy!
                 {ask} Vilken typ av paj vill du beställa?
                 {echo} Så du vill ha
                 {print} Din beställning görs i ordning nu!
         2:
-            story: "Du står vid DJ-båset och ber om en låt. Skapa ett program som frågar om du är redo att festa och sedan frågar vilken låt du vill höra.\n"
+            story: Du står vid DJ-båset och ber om en låt. Skapa ett program som frågar om du är redo att festa och sedan frågar vilken låt du vill höra.
             code: |-
                 {print} Det här är DJ Hedy
                 {ask} Är du redo att festa?
                 {ask} Vilken sång vill du höra?
                 {echo} Bra val! Jag älskar
-    3:
-        2:
-            code: |-
-                mat {is} pizza, glass, sallad, macka
-                tillbehör {is} choklad, ost, tonfisk, strössel
-                {print} Din slumpade måltid för dagen är...
-                {sleep} 2
-                {print} mat {at} {random} med tillbehör {at} {random}
-            story: "Gör ett program som väljer en slumpmässig måltid åt dig. Gör en lista med mat och en lista med tillbehör och låt programmet bestämma vad du ska äta!\n"
+    2:
         1:
-            story: "Det nya skolåret på Hogwarts har börjat! \nDet är sorteringshattens uppgift att sortera in dig i ett av husen.\nVilket hus kommer du att sorteras in i?\nÄr du en Gryffindor, Hufflepuf, Ravenclaw eller Slytherin.\nLåt programmet vänta en kort stund innan det avslöjar ditt hus.\n"
+            story: |-
+                Du och dina vänner ska titta på Netflix.
+                Visa vilken film du ska titta på och önska tittarna mycket roligt!
+            code: |-
+                {print} Det är dags för en Netflixkväll
+                filmen {is} Sonic the Hedgehog 2
+                {print} Vi ska se film
+                {print} Ha det så roligt!
+        2:
+            story: Detta är webbshoppen för en leksaksbutik. Gör ett program där kunder kan lägga till en vara i sin kundvagn.
+            code: |-
+                {print} Välkommen till vår leksaksaffär
+                leksak {is} {ask} Vad vill du köpa?
+                {print} Leksaken är tillagd i din kundvagn.
+                {print} Tack för att du handlar hos oss!
+    3:
+        1:
+            story: "Det nya skolåret på Hogwarts har börjat! \nDet är sorteringshattens uppgift att sortera in dig i ett av husen.\nVilket hus kommer du att sorteras in i?\nÄr du en Gryffindor, Hufflepuf, Ravenclaw eller Slytherin.\nLåt programmet vänta en kort stund innan det avslöjar ditt hus."
             code: |-
                 {print} Det nya skolåret på Hogwarts börjar!
                 {print} Sorteringshatten är redo att sortera.
                 elevhem {is} Gryffindor, Hufflepuff, Ravenclaw, Slytherin
                 {sleep} 2
                 {print} Och det blir elevhem {at} {random}
+        2:
+            story: Gör ett program som väljer en slumpmässig måltid åt dig. Gör en lista med mat och en lista med tillbehör och låt programmet bestämma vad du ska äta!
+            code: |-
+                mat {is} pizza, glass, sallad, macka
+                tillbehör {is} choklad, ost, tonfisk, strössel
+                {print} Din slumpade måltid för dagen är...
+                {sleep} 2
+                {print} mat {at} {random} med tillbehör {at} {random}
         3:
-            story: "In a chess tournament there are three players left.\nCreate a program that decides which two players have to play against each other first.\nStart by printing the two players who play the first match, then print against which player the winner will play.\n"
-            code: "players {is} Liam, Noah, Sophie\nplayer_1 {is} players {at} {random}\n{remove} player_1 {from} players\nplayer_2 {is} players {at} {random}\n{print} player_1 ' first plays against ' player_2\n{remove} player_2 {from} players\n{print} 'The winner plays against ' players {at} {random}"
+            story: |-
+                In a chess tournament there are three players left.
+                Create a program that decides which two players have to play against each other first.
+                Start by printing the two players who play the first match, then print against which player the winner will play.
+            code: |-
+                players {is} Liam, Noah, Sophie
+                player_1 {is} players {at} {random}
+                {remove} player_1 {from} players
+                player_2 {is} players {at} {random}
+                {print} player_1 ' first plays against ' player_2
+                {remove} player_2 {from} players
+                {print} 'The winner plays against ' players {at} {random}
     4:
         1:
-            story: "Du är den nyaste Pokémon-tränaren från Pallet Town!\nGör ett program som väljer din första Pokémon.\nLåt programmet vänta en minut innan det avslöjar din första Pokémon.\n"
+            story: |-
+                Du är den nyaste Pokémon-tränaren från Pallet Town!
+                Gör ett program som väljer din första Pokémon.
+                Låt programmet vänta en minut innan det avslöjar din första Pokémon.
             code: |-
                 pokemon {is} Pikachu, Charmander, Bulbasaur, Squirtle
                 {print} 'Det här blir din första Pokémon!'
                 {sleep}
                 {print} pokemon {at} {random}
         2:
-            story: "Skapa ett lotteri där du kan välja ett pris som du kan vinna.\n"
+            story: Skapa ett lotteri där du kan välja ett pris som du kan vinna.
             code: |-
                 priser {is} bil, hamster, miljon kronor
                 pris {is} {ask} 'Vad vill du vinna?'
                 {add} pris {to_list} priser
                 {print} 'Du vann en ' priser {at} {random}
     5:
-        2:
-            code: |-
-                {print} 'Lös det här problemet'
-                svar {is} {ask} '88 - 16 = ?'
-                {if} svar {is} 72 {print} 'Rätt!'
-                {else} {print} 'Fel! Svaret var 72'
-            story: "Gör ett mattespel.\n"
         1:
+            story: |-
+                Gör ett program som kollar om din favoritfilm redan är med i datorns lista.
+                Om så är fallet, skriv att du har god smak, annars lägg till filmen till i listan.
             code: |-
                 favoritfilmer {is} Batman, Spiderman, The Avengers, Jurassic Park
                 film {is} {ask} 'Vad är din favoritfilm'
                 {if} film {in} favoritfilmer {print} 'Du har bra smak'
                 {else} {print} 'Synd att din favoritfilm inte finns i listan. Vi lägger till den direkt!'
                 {add} film {to_list} favoritfilmer
-            story: "Gör ett program som kollar om din favoritfilm redan är med i datorns lista.\nOm så är fallet, skriv att du har god smak, annars lägg till filmen till i listan.\n"
+        2:
+            story: Gör ett mattespel.
+            code: |-
+                {print} 'Lös det här problemet'
+                svar {is} {ask} '88 - 16 = ?'
+                {if} svar {is} 72 {print} 'Rätt!'
+                {else} {print} 'Fel! Svaret var 72'
     6:
         1:
-            story: "Gör ett program som räknar ut hur gammal du är i hund- och kattår.\nFråga först efter användarens ålder och börja beräkna.\nBeräkna först hundår och sedan kattår.\nVisa användaren de olika åldrarna.\n"
+            story: |-
+                Gör ett program som räknar ut hur gammal du är i hund- och kattår.
+                Fråga först efter användarens ålder och börja beräkna.
+                Beräkna först hundår och sedan kattår.
+                Visa användaren de olika åldrarna.
             code: |-
                 ålder = {ask} 'Hur gammal är du?'
                 hundålder = ålder * 7
@@ -75,7 +115,7 @@ levels:
                 {print} 'I hundår är du ' hundålder ' år gammal.'
                 {print} 'I kattår är du ' kattålder ' år gammal.'
         2:
-            story: "Gör ett program som hjälper dig beräkna hur många tårtor du ska köpa till ditt födelsedagskalas.\n"
+            story: Gör ett program som hjälper dig beräkna hur många tårtor du ska köpa till ditt födelsedagskalas.
             code: |-
                 {print} 'Det är din födelsedag!'
                 personer = {ask} 'Hur många personer vill du ge en tårtbit?'
@@ -83,7 +123,10 @@ levels:
                 {print} 'Då behöver du köpa' tårtmängd ' tårtor'
     7:
         1:
-            story: "I en schackturnering är det tre spelare kvar.\nGör ett program som bestämmer vilka två spelare som ska möta varann först.\nSkriv först ut vilka två spelare som möts i den första matchen, skriv sedan ut vilken spelare vinnaren kommer att möta.\n"
+            story: |-
+                I en schackturnering är det tre spelare kvar.
+                Gör ett program som bestämmer vilka två spelare som ska möta varann först.
+                Skriv först ut vilka två spelare som möts i den första matchen, skriv sedan ut vilken spelare vinnaren kommer att möta.
             code: |-
                 spelare = Liam, Noah, Sophie
                 spelare1 = spelare {at} {random}
@@ -93,30 +136,17 @@ levels:
                 {remove} spelare2 {from} spelare
                 {print} 'Vinnaren spelar mot ' spelare {at} {random}
         2:
-            story: "Skapa låten \"Hjulen på bussen går runt runt runt\"\n"
+            story: Skapa låten "Hjulen på bussen går runt runt runt"
             code: |-
                 {print} 'hjulen på bussen snurrar'
                 {repeat} 3 {times} {print} 'runt, runt, runt'
                 {print} 'hjulen på bussen snurrar runt, runt, runt'
                 {print} 'genom hela staden '
-    2:
-        1:
-            story: "Du och dina vänner ska titta på Netflix.\nVisa vilken film du ska titta på och önska tittarna mycket roligt!\n"
-            code: |-
-                {print} Det är dags för en Netflixkväll
-                filmen {is} Sonic the Hedgehog 2
-                {print} Vi ska se film
-                {print} Ha det så roligt!
-        2:
-            story: "Detta är webbshoppen för en leksaksbutik. Gör ett program där kunder kan lägga till en vara i sin kundvagn.\n"
-            code: |-
-                {print} Välkommen till vår leksaksaffär
-                leksak {is} {ask} Vad vill du köpa?
-                {print} Leksaken är tillagd i din kundvagn.
-                {print} Tack för att du handlar hos oss!
     8:
         1:
-            story: "Du och fyra andra vänner spelar Pokémon Go! Gör ett program som bestämmer vilket lag var och en av er ska spela i.\nAntingen rött, gult eller blått! Gör en liten paus efter att du har meddelat ett lag.\n"
+            story: |-
+                Du och fyra andra vänner spelar Pokémon Go! Gör ett program som bestämmer vilket lag var och en av er ska spela i.
+                Antingen rött, gult eller blått! Gör en liten paus efter att du har meddelat ett lag.
             code: |-
                 lag = röd, gul, blå
                 {print} 'Röd, Gul eller Blå?'
@@ -125,7 +155,7 @@ levels:
                     {print} lag {at} {random}
                     sleep 2
         2:
-            story: "Skriv ut nedräkningen för att leka kurragömma.\n"
+            story: Skriv ut nedräkningen för att leka kurragömma.
             code: |-
                 räknare = 11
                 {repeat} 10 {times}
@@ -133,31 +163,108 @@ levels:
                     {print} räknare
                     {sleep} 1
                 {print} 'Nu kommer jag!'
-    10:
-        2:
-            story: "This make-over robot will decide your new hairstyle for you. If you do not agree with the first choice, you can try again.\n**Mind** The variable people is defined in the first line. The variable hairstyles in the second.\n"
-            code: "people = Betty, Amanda, Marc\nhairstyles = a bald head, a mohawk, a ponytail, spikes\n{for} person {in} people\n    {print} person ' will get ' hairstyles {at} {random}\n    happy = {ask} person ', are you happy with this choice?'\n    {if} happy {is} yes\n        {print} 'Great'\n    {else}\n        {print} 'Lets try again... Then 'person ' will get ' hairstyles {at} {random}\n"
-        1:
-            story: "Help this family out by creating a schedule of who is cooking and what they should be making this week. The remove commands make sure nobody has to cook twice and they have a differnet dinner every day.\n**Mind!** the variable order should be first days, then people, and lastly dinner_options. This goes for the lines with the remove commands too.\n"
-            code: "days = Monday, Tuesday, Wednesday, Thursday, Friday\npeople = mom, dad, Martin, Abby, Jesse\ndinner_options = pizza, tacos, pancakes, a salad, lasagne\n{for} day {in} days\n    chosen_person = people {at} {random}\n    chosen_dinner = dinner_options {at} {random}\n    {print} 'On ' day ' ' chosen_person ' is making ' chosen_dinner\n    {remove} chosen_person {from} people\n    {remove} chosen_dinner {from} dinner_options\n"
     9:
-        2:
-            story: "This code asks the costumers in a restaurant if they would like to order dessert. If they do, it asks them what kind of dessert. If they order tiramisu they are told that the tiramisu is sold out.\nCan you get the code to work?\n"
-            code: "order = {ask} 'Would you like to order dessert?'\n{if} order = yes\n    dessert = {ask} 'What kind of dessert would you like?'\n    {if} dessert = tiramisu\n        {print} 'Sorry, we are out of tiramisu.'\n    {else}\n        {print} 'One ' dessert ' coming right up!'\n{else}\n    {print} 'You dont want a dessert. No problem!'\n"
         1:
-            story: "This game will give you three maths assignments. Each time the question is different. Can you figure out the order?\n"
-            code: "numbers = 1, 2, 3, 4, 5, 6, 7, 8, 9, 10\n{repeat} 3 {times}\n    number = numbers {at} {random}\n    correct_answer = 5 * number\n    answer = {ask} 'What is 5 times' number '?'\n    {if} answer = correct_answer\n        {print} 'Good job!'\n    {else}\n        {print} 'No! The correct answer is ' correct_answer\n"
-    12:
-        1:
-            code: "verses = 'What will we do with the drunken sailor', 'Way hey and up she rises'\n{for} verse {in} verses\n    {for} count {in} {range} 1 {to} 3\n        {print} verse\n    {print} 'Early in the morning'\n"
-            story: "Sing the song 'What shall we do with the drunken sailor'. In case you don't know it, the song goed like this:\n\nWhat will we do with the drunken sailor\nWhat will we do with the drunken sailor\nWhat will we do with the drunken sailor\nEarly in the morning\nWay hey and up she rises\nWay hey and up she rises\nWay hey and up she rises\nEarly in the morning\n"
+            story: This game will give you three maths assignments. Each time the question is different. Can you figure out the order?
+            code: |-
+                numbers = 1, 2, 3, 4, 5, 6, 7, 8, 9, 10
+                {repeat} 3 {times}
+                    number = numbers {at} {random}
+                    correct_answer = 5 * number
+                    answer = {ask} 'What is 5 times' number '?'
+                    {if} answer = correct_answer
+                        {print} 'Good job!'
+                    {else}
+                        {print} 'No! The correct answer is ' correct_answer
         2:
-            story: "Play a game of Twister with us! First define the variable people, then limbs, then colors.\n"
-            code: "people = 'Jess', 'Nick', 'Winston'\nlimbs = 'left hand', 'left foot', 'right hand', 'right foot'\ncolors = 'red', 'blue', 'green', 'yellow'\n{for} person {in} people\n    {print} person ', put your ' limbs {at} {random} ' on ' colors {at} {random}\n"
+            story: |-
+                This code asks the costumers in a restaurant if they would like to order dessert. If they do, it asks them what kind of dessert. If they order tiramisu they are told that the tiramisu is sold out.
+                Can you get the code to work?
+            code: |-
+                order = {ask} 'Would you like to order dessert?'
+                {if} order = yes
+                    dessert = {ask} 'What kind of dessert would you like?'
+                    {if} dessert = tiramisu
+                        {print} 'Sorry, we are out of tiramisu.'
+                    {else}
+                        {print} 'One ' dessert ' coming right up!'
+                {else}
+                    {print} 'You dont want a dessert. No problem!'
+    10:
+        1:
+            story: |-
+                Help this family out by creating a schedule of who is cooking and what they should be making this week. The remove commands make sure nobody has to cook twice and they have a differnet dinner every day.
+                **Mind!** the variable order should be first days, then people, and lastly dinner_options. This goes for the lines with the remove commands too.
+            code: |-
+                days = Monday, Tuesday, Wednesday, Thursday, Friday
+                people = mom, dad, Martin, Abby, Jesse
+                dinner_options = pizza, tacos, pancakes, a salad, lasagne
+                {for} day {in} days
+                    chosen_person = people {at} {random}
+                    chosen_dinner = dinner_options {at} {random}
+                    {print} 'On ' day ' ' chosen_person ' is making ' chosen_dinner
+                    {remove} chosen_person {from} people
+                    {remove} chosen_dinner {from} dinner_options
+        2:
+            story: |-
+                This make-over robot will decide your new hairstyle for you. If you do not agree with the first choice, you can try again.
+                **Mind** The variable people is defined in the first line. The variable hairstyles in the second.
+            code: |-
+                people = Betty, Amanda, Marc
+                hairstyles = a bald head, a mohawk, a ponytail, spikes
+                {for} person {in} people
+                    {print} person ' will get ' hairstyles {at} {random}
+                    happy = {ask} person ', are you happy with this choice?'
+                    {if} happy {is} yes
+                        {print} 'Great'
+                    {else}
+                        {print} 'Lets try again... Then 'person ' will get ' hairstyles {at} {random}
     11:
         1:
-            story: "Create the count down clock for New Year's eve! The program should show the numbers from 10 to 1 for a second and then wish you a happy new year.\n"
-            code: "{for} number {in} {range} 10 {to} 1\n    {print} number\n    {sleep}\n    {clear}\n{print} 'Happy New Year!'\n"
+            story: Create the count down clock for New Year's eve! The program should show the numbers from 10 to 1 for a second and then wish you a happy new year.
+            code: |-
+                {for} number {in} {range} 10 {to} 1
+                    {print} number
+                    {sleep}
+                    {clear}
+                {print} 'Happy New Year!'
         2:
-            story: "Create a program that tells us the final results of the science fair. Firstly define the variable contestants, then the variable place.\n**Hint** Line 5 should be the sleep command, and you should end with saying congratulations.\n"
-            code: "{print} 'And now we will reveal the results of the science fair'\ncontestants = Vivienne, Paul, Trixy, Bianca, Katya\nplace = 5\n{for} contestant {in} contestants\n    {sleep} 2\n    {print} 'On number ' place ' has ended... ' contestant\n    place = place - 1\n{print} 'Congratulations!'\n"
+            story: |-
+                Create a program that tells us the final results of the science fair. Firstly define the variable contestants, then the variable place.
+                **Hint** Line 5 should be the sleep command, and you should end with saying congratulations.
+            code: |-
+                {print} 'And now we will reveal the results of the science fair'
+                contestants = Vivienne, Paul, Trixy, Bianca, Katya
+                place = 5
+                {for} contestant {in} contestants
+                    {sleep} 2
+                    {print} 'On number ' place ' has ended... ' contestant
+                    place = place - 1
+                {print} 'Congratulations!'
+    12:
+        1:
+            story: |-
+                Sing the song 'What shall we do with the drunken sailor'. In case you don't know it, the song goed like this:
+
+                What will we do with the drunken sailor
+                What will we do with the drunken sailor
+                What will we do with the drunken sailor
+                Early in the morning
+                Way hey and up she rises
+                Way hey and up she rises
+                Way hey and up she rises
+                Early in the morning
+            code: |-
+                verses = 'What will we do with the drunken sailor', 'Way hey and up she rises'
+                {for} verse {in} verses
+                    {for} count {in} {range} 1 {to} 3
+                        {print} verse
+                    {print} 'Early in the morning'
+        2:
+            story: Play a game of Twister with us! First define the variable people, then limbs, then colors.
+            code: |-
+                people = 'Jess', 'Nick', 'Winston'
+                limbs = 'left hand', 'left foot', 'right hand', 'right foot'
+                colors = 'red', 'blue', 'green', 'yellow'
+                {for} person {in} people
+                    {print} person ', put your ' limbs {at} {random} ' on ' colors {at} {random}
