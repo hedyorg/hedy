@@ -28,6 +28,11 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v4
+      with:
+        # We _really_ need to pass the token here -- the commit action below
+        # will not overwrite the token to push. We removed it in
+        # 82fd39a9e215246a37f652aef416bb1600d849db and it failed badly.
+        token: ${{ secrets.HEDY_BOT_TOKEN }}
     - uses: actions/setup-python@v3
       with:
         python-version: 3.9
