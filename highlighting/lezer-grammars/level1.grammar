@@ -1,0 +1,66 @@
+@top Program { Command+ }
+Command {
+    Print | Ask | Echo | Turtle | ErrorInvalid
+}
+Print { kw<"print"> (Text) }
+Ask { kw<"ask"> (Text) }
+Echo { kw<"echo"> (Text) }
+Turtle[@isGroup=turtle] {
+    Forward |
+    Turn |
+    Color
+}
+
+Forward {
+    kw<"forward"> (Text)
+}
+
+Turn {
+    kw<"turn"> ((kw<"left"> | kw<"right">))
+}
+
+Color {
+    kw<"color"> Text
+}
+
+ErrorInvalid { TextWithoutSpaces Text? }
+
+kw<term> { @specialize[@name={term}]<TextWithoutSpaces, term> }
+
+@tokens {
+    @precedence { TextWithoutSpaces, Text}
+    Comment { "#" ![\n]* }
+    // PrintToken {  "print" }
+    // AskToken {  "ask" }
+    // EchoToken {  "echo" }
+    // ForwardToken {  "forward" }
+    // TurnToken {  "turn" }
+    // ColorToken {  "color" }
+    eol { "\n" }
+    // minus { "-" }
+    // black { "black" }
+    // blue { "blue" }
+    // brown { "brown" }
+    // gray {  "gray" }
+    // green {  "green" }
+    // left {  "left" }
+    // orange {  "orange" }
+    // pink {  "pink" }
+    // purple {  "purple" }
+    // red {  "red" }
+    // right {  "right" }
+    // white {  "white" }
+    // yellow {  "yellow" }
+    // Number { Negative_number | Positive_number  }
+    // Negative_number { minus $[0-9]+ ("." $[0-9]+)? }
+    // Positive_number { $[0-9]+ ("." $[0-9]+)? }
+    TextWithoutSpaces { ![\n #]+ }
+    Text { (![\n#ـ\r])(![\n#\r]*) }
+    Name { LetterOrUnderscore LetterOrNumeral*}
+    identifierChar { @asciiLetter | $[_$\u{a1}-\u{10ffff}] }
+    Identifier { identifierChar (identifierChar | @digit)* }
+    LetterOrUnderscore { ($[\p{L}_])+ }
+    LetterOrNumeral { LetterOrUnderscore | ($[\p{N}])+ }    
+}
+
+@skip { Comment | eol }

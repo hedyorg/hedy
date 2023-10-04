@@ -2,11 +2,11 @@ import { HedyEditor, EditorType, HedyEditorCreator, EditorEvent, SourceRange } f
 import { EditorView, ViewUpdate, drawSelection, dropCursor, highlightActiveLine, 
         highlightActiveLineGutter, highlightSpecialChars, keymap, lineNumbers } from '@codemirror/view'
 import { EditorState, Compartment, StateEffect, Prec } from '@codemirror/state'
-import { oneDark } from '@codemirror/theme-one-dark';
+import { oneDark, oneDarkTheme } from '@codemirror/theme-one-dark';
 import { EventEmitter } from "./event-emitter";
 import { deleteTrailingWhitespace, defaultKeymap, historyKeymap } from '@codemirror/commands'
 import { history } from "@codemirror/commands"
-import { indentOnInput, defaultHighlightStyle, syntaxHighlighting } from "@codemirror/language"
+import { indentOnInput, defaultHighlightStyle, syntaxHighlighting, HighlightStyle ,LanguageSupport } from "@codemirror/language"
 import { highlightSelectionMatches, searchKeymap } from "@codemirror/search";
 import { 
     errorLineField, debugLineField, decorationsTheme, addDebugLine, 
@@ -15,6 +15,11 @@ import {
     incorrectLineField,
     removeIncorrectLineEffect
 } from "./cm-decorations";
+
+
+import { parser } from "./level1-parser.js"
+import { styleTags, tags as t } from "@lezer/highlight";
+import {LRLanguage} from "@codemirror/language"
 
 export class HedyCodeMirrorEditorCreator implements HedyEditorCreator {
     /**
@@ -90,10 +95,37 @@ export class HedyCodeMirrorEditor implements HedyEditor {
         const cursorStyle = { ".cm-cursor, .cm-dropCursor": {borderLeftColor: "white", borderLeftWidth: "2px"} }
 
         const mainEditorStyling = EditorView.theme(this.themeStyles);
+        let parserWithMetadata = parser.configure({
+            props: [
+                styleTags({
+                    "print ask echo forward turn color": t.keyword,
+                    Text: t.string,        
+                    Comment: t.lineComment,
+                    "Command/ErrorInvalid/Text Command/ErrorInvalid/TextWithoutSpaces": t.invalid,
+                })
+            ]
+        })
+
+        const highlight = HighlightStyle.define([
+            {tag: t.invalid,
+             textDecoration: "red wavy underline"}
+        ])
+        
+        const level1Language = LRLanguage.define({
+            parser: parserWithMetadata,
+            languageData: {
+                commentTokens: {line: "#"}
+            }
+        })
+
+        function hedyLevel1() {
+            return new LanguageSupport(level1Language)
+        }
 
         const state = EditorState.create({
             doc: '',
             extensions: [
+                syntaxHighlighting(highlight),
                 EditorView.theme(cursorStyle),
                 breakpointGutter,
                 lineNumbers(),
@@ -119,6 +151,7 @@ export class HedyCodeMirrorEditor implements HedyEditor {
                 debugLineField,
                 incorrectLineField,
                 Prec.high(decorationsTheme),
+                hedyLevel1()
             ]
         });
         this.view = new EditorView({
@@ -248,6 +281,7 @@ export class HedyCodeMirrorEditor implements HedyEditor {
             const transaction = this.view.state.update({
                 effects: StateEffect.appendConfig.of(EditorView.updateListener.of((v: ViewUpdate) => {                
                     if (v.docChanged) {
+                        console.log(parser.parse(v.state.doc.toString()).toString());
                         handler();
                     }
                 }))
