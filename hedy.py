@@ -2633,6 +2633,7 @@ def get_keywords_for_language(language):
             keywords = file.read()
     return keywords
 
+
 def get_terminals():
     script_dir = path.abspath(path.dirname(__file__))
     with open(path.join(script_dir, "grammars", "terminals.lark"), "r", encoding="utf-8") as file:
