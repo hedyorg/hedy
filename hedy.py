@@ -2368,6 +2368,13 @@ class ConvertToPython_18(ConvertToPython_17):
     def print_empty_brackets(self, meta, args):
         return self.print(meta, args)
 
+def get_rule_from_string(s):
+    parts = s.split(':')
+    # get part before and after : (this is a join because there can be : in the rule)
+    if len(parts) <= 1:
+        return s, s
+    return parts[0], ''.join(parts[1])
+
 
 def merge_grammars(grammar_text_1, grammar_text_2):
     # this function takes two grammar files and merges them into one
@@ -2377,13 +2384,6 @@ def merge_grammars(grammar_text_1, grammar_text_2):
 
     deletables = []   # this list collects rules we no longer need,
     # they will be removed when we encounter them
-
-    def get_rule_from_string(s):  # todo, FH, move out before merging the PR!
-        parts = s.split(':')
-        # get part before and after : (this is a join because there can be : in the rule)
-        if len(parts) <= 1:
-            return s, s
-        return parts[0], ''.join(parts[1])
 
     rules_grammar_1 = grammar_text_1.split('\n')
     remaining_rules_grammar_2 = grammar_text_2.split('\n')
