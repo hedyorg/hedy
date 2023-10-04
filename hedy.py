@@ -2536,7 +2536,7 @@ def create_grammar(level, lang="en"):
 
             non_allowed_words = [x.replace('"', '') for x in non_allowed_words]
             non_allowed_words_with_space = '|'.join(non_allowed_words)
-            result = merged_grammars.replace('SKIP1', non_allowed_words_with_space)
+            merged_grammars = merged_grammars.replace('SKIP1', non_allowed_words_with_space)
 
             letters_done = []
             string_words = ''
