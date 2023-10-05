@@ -42,7 +42,8 @@ KEYWORDS_ADVENTURES = set([
     'and_or_command',
     'while_command',
     'elif_command',
-    'clear_command'
+    'clear_command',
+    'pressit'
 ])
 
 ADVENTURE_ORDER_PER_LEVEL = {
