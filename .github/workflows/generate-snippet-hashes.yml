@@ -1,37 +1,47 @@
+# Every PR that contains a change to the hash we use in tests/Tester.py
+# should update the hashes file to speed up the unit test CI run.
+
+# We do not do this on PRs as we can not/ do not want to push commits to
+# forked repositories.
+
+# After we merge a PR to main, and it had one of the files affecting
+# snippet generating updated, we make a separate commit that updates the
+# snippet hashes file.
+
 env:
   save_snippet_hashes: True
 
-name: Periodically generate hashes
+name: Generate hashes after every push to main that affects hedy core
 on:
-  schedule:
-    - cron: "0 3 * * *" # Run this job every day at 3am
-  workflow_dispatch: {} # Allow running the workflow on-demand
+  push:
+    branches: ["main"]
+    # these paths should be kept in sync with tests/Tester.py
+    # variable "files_affecting_parsing"
+    paths:
+      - 'grammars/**'
+      - 'hedy.py'
+
 jobs:
   build:
-
+    # Only run this on the main repository where we have HEDY_BOT_TOKEN setup
+    if: github.repository == 'hedyorg/hedy'
     runs-on: ubuntu-latest
-
     steps:
-    - name: Remove existing snippets file # So it does not grow indefinitely
-      uses: JesseTG/rm@v1.0.3
+    - uses: actions/checkout@v4
       with:
-        path: all_snippet_hashes.pkl 
-
-    - name: Checkout branch (with token)
-      uses: actions/checkout@v3
-      with:
-        fetch-depth: 0    
-        
-        # We need to pass the token here -- the commit action below will not overwrite the token to push.
+        # We _really_ need to pass the token here -- the commit action below
+        # will not overwrite the token to push. We removed it in
+        # 82fd39a9e215246a37f652aef416bb1600d849db and it failed badly.
         token: ${{ secrets.HEDY_BOT_TOKEN }}
-    - name: Set up Python 3.9
-      uses: actions/setup-python@v1
+    - uses: actions/setup-python@v3
       with:
         python-version: 3.9
-    - name: Install Python dependencies
-      run: |
-        python3 -m pip install --upgrade pip
-        pip3 install -r requirements.txt
+        cache: 'pip'
+    - uses: actions/setup-node@v3
+      with:
+        node-version: 16
+        cache: 'npm'
+    - run: pip install -r requirements.txt
     - name: Install Nodejs dependencies
       run: |
         npm ci
@@ -41,16 +51,18 @@ jobs:
     - name: Compiling Babel translations
       run: |
         pybabel compile -f -d translations
+    - name: Remove existing snippet file
+      run: |
+        rm all_snippet_hashes.pkl
     - name: Run all tests
       run: |
         build-tools/github/validate --all
-        
-    - name: Commit changed files
+    - name: Commit update snippet file
       uses: stefanzweifel/git-auto-commit-action@v4.16.0
       with:
         commit_message: Updating hash files
         commit_author: hedybot <noreply@hedy.org>
-        branch: main
+        file_pattern: all_snippet_hashes.pkl
       env:
         # This is necessary to bypass branch protection (which will disallow non-reviewed pushes otherwise)
         GITHUB_TOKEN: ${{ secrets.HEDY_BOT_TOKEN }}

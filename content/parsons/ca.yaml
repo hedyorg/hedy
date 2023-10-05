@@ -1,88 +1,277 @@
 levels:
-    5:
-        2:
-            story: "Crea un joc de matemàtiques.\n"
-            code: "{print} 'Resol aquest problema'\nrespon {is} {ask} '88 - 16 = ?'\n{if} resposta {is} 72 {print} 'Correcte!'\n{else} {print} 'Incorrecte! La resposta era 72'"
-        1:
-            story: "Feu un programa que comprove si la vostra pel·lícula preferida ja és a la llista de l'ordinador.\nSi és així, imprimiu que teniu un bon gust, en cas contrari, afegiu la pel·lícula a la llista.\n"
-            code: "pelicules_preferides {is} Batman, Spiderman, The Avengers, Jurassic Park\npel·lícula {is} {ask} \"Quina és la teva pel·lícula preferida?\"\n{if} pel·lícula {in} pelicules_preferides {print} \"Teniu molt bon gust!\"\n{else} {print} \"Llàstima que la teva pel·lícula preferida no estigui a la llista, l'afegirem de seguida!\"\n{add} pel·lícula {to_list} pelicules_preferides"
-    6:
-        1:
-            code: "edat = {ask} \"Quants anys tens?\"\nedat_gos = edat * 7\nedat_gat = edat * 5\n{print} 'En anys de gossos, tens ' edat_gos ' anys.'\n{print} 'En anys de gat tens 'edat_gat' anys.'"
-            story: "Fes un programa que calculi quants anys tens en anys de gossos i gats.\nPrimer demaneu l'edat de l'usuari i comenceu a calcular.\nCalculeu primer els anys canins i després els catyears.\nMostra a l'usuari les diferents edats.\n"
-        2:
-            story: "Creeu un programa que us ajudi a calcular quants pastissos hauríeu de comprar per a la vostra festa d'aniversari.\n"
-            code: "{print} 'És el teu aniversari!'\npersones = {ask} 'A quantes persones vols donar una llesca de pastís?'\nnombre_pastissos {is} persones/8\n{print} 'Haureu de comprar 'nombre_pastissos' pastissos'"
-    8:
-        2:
-            story: "Imprimeix el compte enrere per a un joc d'amagatalls.\n"
-            code: "comptador = 11\n{repeat} 10 {times}\n     comptador = comptador - 1\n     {print} comptador\n     {sleep} 1\n{print} 'A punt o no, aquí vinc!'"
-        1:
-            story: "Tu i quatre amics més esteu jugant a Pokémon Go! Creeu un programa que decideixi en quin equip jugarà cadascun de vosaltres.\nJa sigui vermell, groc o blau! Feu una petita pausa després d'anunciar un equip.\n"
-            code: "equips = vermell, groc, blau\n{print} \"Vermell, groc o blau?\"\n{repeat} 5 {times}\n     {print} \"Esteu seleccionat a l'equip...\"\n     {print} equips {at} {random}\n     dormir 2"
     1:
         1:
-            story: "Ets client de la fleca Hedy.\nEntres a la fleca i ets benvingut pel forner.\nLi pregunta quin tipus de pastís voleu demanar.\nA continuació, s'està preparant la teva comanda.\n"
-            code: "{print} Benvingut a la fleca Hedy!\n{ask} Quin tipus de pastís voleu demanar?\n{echo} Així que vols\n{print} La teva comanda s'està preparant!"
+            story: |-
+                Els puzles són exercicis en què les línies de codi ja estan escrites per a tu. Només heu de col·locar les línies en l'ordre correcte. Arrossegueu les línies de codi a la pantalla d'entrada i executeu el codi. Pots fer que el programa funcioni?
+
+                Ets client de la fleca Hedy.
+                Entres a la fleca i el forner et dona la benvinguda.
+                Et pregunta quin tipus de pastís vols demanar.
+                Aleshores et repeteix la teva resposta.
+                Finalment, la teva comanda es prepara.
+            code: |-
+                {print} Benvingut a la fleca Hedy!
+                {ask} Quin pastís vols?
+                {echo} Doncs, tu vols
+                {print} La teva comanda s'està preparant!
         2:
-            story: "Ets a la cabina de DJ demanant una cançó. Creeu un programa que us demani si esteu preparats per a la festa i, a continuació, us pregunti quina cançó us agradaria escoltar.\n"
-            code: "{print} Aquest és DJ Hedy\n{ask} Esteu preparats per a la festa?\n{ask} Quina cançó t'agradaria escoltar?\n{echo} Bona elecció! estimo"
+            story: Ets a la cabina de DJ demanant una cançó. Creeu un programa que us demani si esteu preparats per a la festa i, a continuació, us pregunti quina cançó us agradaria escoltar.
+            code: |-
+                {print} Aquest és DJ Hedy
+                {ask} Esteu preparats per a la festa?
+                {ask} Quina cançó t'agradaria escoltar?
+                {echo} Bona elecció! m'encanta la cançó.
     2:
         1:
-            story: "Tu i els teus amics veureu Netflix.\nMostra quina pel·lícula estàs a punt de veure i desitja molta diversió als espectadors!\n"
-            code: "{print} És hora d'una nit de Netflix\npeli {is} Sonic the Hedgehog 2\n{print} Veurem peli\n{print} Gaudeix-la!"
+            story: |-
+                Tu i els teus amics veureu Netflix.
+                Mostra quina pel·lícula estàs a punt de veure i desitja molta diversió als espectadors!
+            code: |-
+                {print} És hora d'una nit de Netflix
+                peli {is} Sonic the Hedgehog 2
+                {print} Veurem peli
+                {print} Gaudeix-la!
         2:
-            story: "Aquesta és la botiga web d'una botiga de joguines. Creeu un programa on els clients puguin afegir un article al seu carretó de la compra.\n"
-            code: "{print} Benvingut a la nostra botiga de joguines\njoguina {is} {ask} Què t'agradaria comprar?\n{print} La joguina s'afegeix a la cistella de la compra.\n{print} Gràcies per comprar amb nosaltres!"
+            story: Aquesta és la botiga web d'una botiga de joguines. Creeu un programa on els clients puguin afegir un article al seu carretó de la compra.
+            code: |-
+                {print} Benvingut a la nostra botiga de joguines
+                joguina {is} {ask} Què t'agradaria comprar?
+                {print} joguina s'ha afegit a la teva cistella.
+                {print} Gràcies per comprar amb nosaltres!
     3:
         1:
-            story: "Comença el nou curs escolar a Hogwarts!\nLa feina del barret de classificació és classificar-te en una de les cases.\nA quina casa us ubicaran?\nEts Gryffindor, Hufflepuff, Ravenclaw o Slytherin?\nDeixeu que el programa esperi un breu període abans de revelar la vostra casa.\n"
-            code: "{print} El nou curs escolar a Hogwarts comença!\n{print} El barret de classificació està llest per classificar-vos a una casa de Hogwarts.\ncases {is} Gryffindor, Hufflepuf, Ravenclaw, Slytherin\n{sleep} 2\n{print} I són cases {at} {random}"
+            story: |-
+                Comença el nou curs escolar a Hogwarts!
+                La feina del barret que tria és classificar-te en una de les cases.
+                A quina casa us ubicaran? Ets un Gryffindor, un Hufflepuff, un Ravenclaw o un Slytherin?
+                Abans que el barret que tria reveli la vostra casa, podeu demanar-li que no triï una de les cases.
+            code: |-
+                {print} El barret que tria està llest per classificar-vos a una casa de Hogwarts.
+                cases {is} Gryffindor, Hufflepuf, Ravenclaw, Slytherin
+                desagrada {is} {ask} Hi ha alguna casa de la qual no en vulguis formar part?
+                {remove} desagrada {from} cases
+                {print} No desagrada, eh? Doncs que sigui... cases {at} {random}
         2:
-            story: "Creeu un programa que esculli un àpat a l'atzar per a vosaltres. Fes una llista de menjar i una llista de complements i deixa que el programa decideixi què tindràs!\n"
-            code: "el_menjar {is} pizza, gelat, amanida, sandvitx\nla_cobertura {is} xocolata, formatge, tonyina, ruixats\n{print} El vostre àpat aleatori d'avui és...\n{sleep} 2\n{print} el_menjar {at} {random} amb la_cobertura {at} {random}"
+            story: Creeu un programa que esculli un àpat a l'atzar per a vosaltres. Fes una llista de menjar i una llista de complements i deixa que el programa decideixi què tindràs!
+            code: |-
+                el_menjar {is} pizza, gelat, amanida, sandvitx
+                la_cobertura {is} xocolata, formatge, tonyina, ruixats
+                {print} El vostre àpat aleatori d'avui és...
+                {sleep} 2
+                {print} el_menjar {at} {random} amb la_cobertura {at} {random}
         3:
-            story: "In a chess tournament there are three players left.\nCreate a program that decides which two players have to play against each other first.\nStart by printing the two players who play the first match, then print against which player the winner will play.\n"
-            code: "players {is} Liam, Noah, Sophie\nplayer_1 {is} players {at} {random}\n{remove} player_1 {from} players\nplayer_2 {is} players {at} {random}\n{print} player_1 ' first plays against ' player_2\n{remove} player_2 {from} players\n{print} 'The winner plays against ' players {at} {random}"
+            story: |-
+                In a chess tournament there are three players left.
+                Create a program that decides which two players have to play against each other first.
+                Start by printing the two players who play the first match, then print against which player the winner will play.
+            code: |-
+                players {is} Liam, Noah, Sophie
+                player_1 {is} players {at} {random}
+                {remove} player_1 {from} players
+                player_2 {is} players {at} {random}
+                {print} player_1 ' first plays against ' player_2
+                {remove} player_2 {from} players
+                {print} 'The winner plays against ' players {at} {random}
     4:
         1:
-            story: "Ets l'entrenador Pokémon més nou de Pallet Town!\nFes un programa que seleccioni el teu primer Pokémon.\nDeixa que el programa esperi un minut abans de revelar el teu primer pokémon.\n"
-            code: "pokemons {is} Pikachu, Charmander, Bulbasaur, Squirtle\n{print} 'Aquest serà el teu primer Pokémon!'\n{sleep}\n{print} pokemons {at} {random}"
+            story: |-
+                Ets l'entrenador Pokémon més nou de Pallet Town!
+                Fes un programa que seleccioni el teu primer Pokémon.
+                Deixa que el programa esperi un minut abans de revelar el teu primer pokémon.
+            code: |-
+                pokemons {is} Pikachu, Charmander, Bulbasaur, Squirtle
+                {print} 'Aquest serà el teu primer Pokémon!'
+                {sleep}
+                {print} pokemons {at} {random}
         2:
-            story: "Creeu una loteria que us permeti triar un preu addicional que podríeu guanyar.\n"
-            code: "preus {is} cotxe, hàmster, 1 milió d'euros\npreu {is} {ask} \"Què t'agradaria guanyar?\"\n{add} preu {to_list} preus\n{print} \"Has guanyat un\" preus {at} {random}"
+            story: Creeu una loteria que us permeti triar un preu addicional que podríeu guanyar.
+            code: |-
+                preus {is} cotxe, hàmster, 1 milió d'euros
+                preu {is} {ask} "Què t'agradaria guanyar?"
+                {add} preu {to_list} preus
+                {print} "Has guanyat un" preus {at} {random}
+    5:
+        1:
+            story: |-
+                Feu un programa que comprove si la vostra pel·lícula preferida ja és a la llista de l'ordinador.
+                Si és així, imprimiu que teniu un bon gust, en cas contrari, afegiu la pel·lícula a la llista.
+            code: |-
+                pelicules_preferides {is} Batman, Spiderman, The Avengers, Jurassic Park
+                pel·lícula {is} {ask} "Quina és la teva pel·lícula preferida?"
+                {if} pel·lícula {in} pelicules_preferides {print} "Teniu molt bon gust!"
+                {else} {print} "Llàstima que la teva pel·lícula preferida no estigui a la llista, l'afegirem de seguida!"
+                {add} pel·lícula {to_list} pelicules_preferides
+        2:
+            story: Crea un joc de matemàtiques.
+            code: |-
+                {print} 'Resol aquest problema'
+                respon {is} {ask} '88 - 16 = ?'
+                {if} resposta {is} 72 {print} 'Correcte!'
+                {else} {print} 'Incorrecte! La resposta era 72'
+    6:
+        1:
+            story: |-
+                Fes un programa que calculi quants anys tens en anys de gossos i gats.
+                Primer demaneu l'edat de l'usuari i comenceu a calcular.
+                Calculeu primer els anys canins i després els catyears.
+                Mostra a l'usuari les diferents edats.
+            code: |-
+                edat = {ask} "Quants anys tens?"
+                edat_gos = edat * 7
+                edat_gat = edat * 5
+                {print} 'En anys de gossos, tens ' edat_gos ' anys.'
+                {print} 'En anys de gat tens 'edat_gat' anys.'
+        2:
+            story: Creeu un programa que us ajudi a calcular quants pastissos hauríeu de comprar per a la vostra festa d'aniversari.
+            code: |-
+                {print} 'És el teu aniversari!'
+                persones = {ask} 'A quantes persones vols donar una llesca de pastís?'
+                nombre_pastissos {is} persones/8
+                {print} 'Haureu de comprar 'nombre_pastissos' pastissos'
     7:
         1:
-            story: "En un torneig d'escacs queden tres jugadors.\nCreeu un programa que decideixi quins dos jugadors juguen primer l'un contra l'altre.\nPrimer imprimiu els dos jugadors que juguen el primer partit, després imprimiu contra quin jugador jugarà el guanyador.\n"
-            code: "jugadors = Liam, Noah, Sophie\njugador1 = jugadors {at} {random}\n{remove} jugador1 {from} jugadors\njugador2 = jugadors {at} {random}\n{print} jugador1 ' juga primer contra ' jugador2\n{remove} jugador2 {from} jugadors\n{print} 'El guanyador juga contra ' jugadors {at} {random}"
+            story: |-
+                En un torneig d'escacs queden tres jugadors.
+                Creeu un programa que decideixi quins dos jugadors juguen primer l'un contra l'altre.
+                Primer imprimiu els dos jugadors que juguen el primer partit, després imprimiu contra quin jugador jugarà el guanyador.
+            code: |-
+                jugadors = Liam, Noah, Sophie
+                jugador1 = jugadors {at} {random}
+                {remove} jugador1 {from} jugadors
+                jugador2 = jugadors {at} {random}
+                {print} jugador1 ' juga primer contra ' jugador2
+                {remove} jugador2 {from} jugadors
+                {print} 'El guanyador juga contra ' jugadors {at} {random}
         2:
-            story: "Crea la cançó \"Les rodes de l'autobús fan voltes i voltes\"\n"
-            code: "{print} \"les rodes de l'autobús van\"\n{repeat} 3 {times} {print} \"volt i rodó\"\n{print} \"les rodes de l'autobús fan voltes\"\n{print} \"per tota la ciutat\""
-    10:
-        2:
-            story: "This make-over robot will decide your new hairstyle for you. If you do not agree with the first choice, you can try again.\n**Mind** The variable people is defined in the first line. The variable hairstyles in the second.\n"
-            code: "people = Betty, Amanda, Marc\nhairstyles = a bald head, a mohawk, a ponytail, spikes\n{for} person {in} people\n    {print} person ' will get ' hairstyles {at} {random}\n    happy = {ask} person ', are you happy with this choice?'\n    {if} happy {is} yes\n        {print} 'Great'\n    {else}\n        {print} 'Lets try again... Then 'person ' will get ' hairstyles {at} {random}\n"
+            story: Crea la cançó "Les rodes de l'autobús fan voltes i voltes"
+            code: |-
+                {print} "les rodes de l'autobús van"
+                {repeat} 3 {times} {print} "volt i rodó"
+                {print} "les rodes de l'autobús fan voltes"
+                {print} "per tota la ciutat"
+    8:
         1:
-            story: "Help this family out by creating a schedule of who is cooking and what they should be making this week. The remove commands make sure nobody has to cook twice and they have a differnet dinner every day.\n**Mind!** the variable order should be first days, then people, and lastly dinner_options. This goes for the lines with the remove commands too.\n"
-            code: "days = Monday, Tuesday, Wednesday, Thursday, Friday\npeople = mom, dad, Martin, Abby, Jesse\ndinner_options = pizza, tacos, pancakes, a salad, lasagne\n{for} day {in} days\n    chosen_person = people {at} {random}\n    chosen_dinner = dinner_options {at} {random}\n    {print} 'On ' day ' ' chosen_person ' is making ' chosen_dinner\n    {remove} chosen_person {from} people\n    {remove} chosen_dinner {from} dinner_options\n"
+            story: |-
+                Tu i quatre amics més esteu jugant a Pokémon Go! Creeu un programa que decideixi en quin equip jugarà cadascun de vosaltres.
+                Ja sigui vermell, groc o blau! Feu una petita pausa després d'anunciar un equip.
+            code: |-
+                equips = vermell, groc, blau
+                {print} "Vermell, groc o blau?"
+                {repeat} 5 {times}
+                     {print} "Esteu seleccionat a l'equip..."
+                     {print} equips {at} {random}
+                     dormir 2
+        2:
+            story: Imprimeix el compte enrere per a un joc d'amagatalls.
+            code: |-
+                comptador = 11
+                {repeat} 10 {times}
+                     comptador = comptador - 1
+                     {print} comptador
+                     {sleep} 1
+                {print} 'A punt o no, aquí vinc!'
     9:
-        2:
-            story: "This code asks the costumers in a restaurant if they would like to order dessert. If they do, it asks them what kind of dessert. If they order tiramisu they are told that the tiramisu is sold out.\nCan you get the code to work?\n"
-            code: "order = {ask} 'Would you like to order dessert?'\n{if} order = yes\n    dessert = {ask} 'What kind of dessert would you like?'\n    {if} dessert = tiramisu\n        {print} 'Sorry, we are out of tiramisu.'\n    {else}\n        {print} 'One ' dessert ' coming right up!'\n{else}\n    {print} 'You dont want a dessert. No problem!'\n"
         1:
-            story: "This game will give you three maths assignments. Each time the question is different. Can you figure out the order?\n"
-            code: "numbers = 1, 2, 3, 4, 5, 6, 7, 8, 9, 10\n{repeat} 3 {times}\n    number = numbers {at} {random}\n    correct_answer = 5 * number\n    answer = {ask} 'What is 5 times' number '?'\n    {if} answer = correct_answer\n        {print} 'Good job!'\n    {else}\n        {print} 'No! The correct answer is ' correct_answer\n"
-    12:
-        1:
-            code: "verses = 'What will we do with the drunken sailor', 'Way hey and up she rises'\n{for} verse {in} verses\n    {for} count {in} {range} 1 {to} 3\n        {print} verse\n    {print} 'Early in the morning'\n"
-            story: "Sing the song 'What shall we do with the drunken sailor'. In case you don't know it, the song goed like this:\n\nWhat will we do with the drunken sailor\nWhat will we do with the drunken sailor\nWhat will we do with the drunken sailor\nEarly in the morning\nWay hey and up she rises\nWay hey and up she rises\nWay hey and up she rises\nEarly in the morning\n"
+            story: This game will give you three maths assignments. Each time the question is different. Can you figure out the order?
+            code: |-
+                numbers = 1, 2, 3, 4, 5, 6, 7, 8, 9, 10
+                {repeat} 3 {times}
+                    number = numbers {at} {random}
+                    correct_answer = 5 * number
+                    answer = {ask} 'What is 5 times' number '?'
+                    {if} answer = correct_answer
+                        {print} 'Good job!'
+                    {else}
+                        {print} 'No! The correct answer is ' correct_answer
         2:
-            story: "Play a game of Twister with us! First define the variable people, then limbs, then colors.\n"
-            code: "people = 'Jess', 'Nick', 'Winston'\nlimbs = 'left hand', 'left foot', 'right hand', 'right foot'\ncolors = 'red', 'blue', 'green', 'yellow'\n{for} person {in} people\n    {print} person ', put your ' limbs {at} {random} ' on ' colors {at} {random}\n"
+            story: |-
+                This code asks the costumers in a restaurant if they would like to order dessert. If they do, it asks them what kind of dessert. If they order tiramisu they are told that the tiramisu is sold out.
+                Can you get the code to work?
+            code: |-
+                order = {ask} 'Would you like to order dessert?'
+                {if} order = yes
+                    dessert = {ask} 'What kind of dessert would you like?'
+                    {if} dessert = tiramisu
+                        {print} 'Sorry, we are out of tiramisu.'
+                    {else}
+                        {print} 'One ' dessert ' coming right up!'
+                {else}
+                    {print} 'You dont want a dessert. No problem!'
+    10:
+        1:
+            story: |-
+                Help this family out by creating a schedule of who is cooking and what they should be making this week. The remove commands make sure nobody has to cook twice and they have a differnet dinner every day.
+                **Mind!** the variable order should be first days, then people, and lastly dinner_options. This goes for the lines with the remove commands too.
+            code: |-
+                days = Monday, Tuesday, Wednesday, Thursday, Friday
+                people = mom, dad, Martin, Abby, Jesse
+                dinner_options = pizza, tacos, pancakes, a salad, lasagne
+                {for} day {in} days
+                    chosen_person = people {at} {random}
+                    chosen_dinner = dinner_options {at} {random}
+                    {print} 'On ' day ' ' chosen_person ' is making ' chosen_dinner
+                    {remove} chosen_person {from} people
+                    {remove} chosen_dinner {from} dinner_options
+        2:
+            story: |-
+                This make-over robot will decide your new hairstyle for you. If you do not agree with the first choice, you can try again.
+                **Mind** The variable people is defined in the first line. The variable hairstyles in the second.
+            code: |-
+                people = Betty, Amanda, Marc
+                hairstyles = a bald head, a mohawk, a ponytail, spikes
+                {for} person {in} people
+                    {print} person ' will get ' hairstyles {at} {random}
+                    happy = {ask} person ', are you happy with this choice?'
+                    {if} happy {is} yes
+                        {print} 'Great'
+                    {else}
+                        {print} 'Lets try again... Then 'person ' will get ' hairstyles {at} {random}
     11:
         1:
-            story: "Create the count down clock for New Year's eve! The program should show the numbers from 10 to 1 for a second and then wish you a happy new year.\n"
-            code: "{for} number {in} {range} 10 {to} 1\n    {print} number\n    {sleep}\n    {clear}\n{print} 'Happy New Year!'\n"
+            story: Create the count down clock for New Year's eve! The program should show the numbers from 10 to 1 for a second and then wish you a happy new year.
+            code: |-
+                {for} number {in} {range} 10 {to} 1
+                    {print} number
+                    {sleep}
+                    {clear}
+                {print} 'Happy New Year!'
         2:
-            story: "Create a program that tells us the final results of the science fair. Firstly define the variable contestants, then the variable place.\n**Hint** Line 5 should be the sleep command, and you should end with saying congratulations.\n"
-            code: "{print} 'And now we will reveal the results of the science fair'\ncontestants = Vivienne, Paul, Trixy, Bianca, Katya\nplace = 5\n{for} contestant {in} contestants\n    {sleep} 2\n    {print} 'On number ' place ' has ended... ' contestant\n    place = place - 1\n{print} 'Congratulations!'\n"
+            story: |-
+                Create a program that tells us the final results of the science fair. Firstly define the variable contestants, then the variable place.
+                **Hint** Line 5 should be the sleep command, and you should end with saying congratulations.
+            code: |-
+                {print} 'And now we will reveal the results of the science fair'
+                contestants = Vivienne, Paul, Trixy, Bianca, Katya
+                place = 5
+                {for} contestant {in} contestants
+                    {sleep} 2
+                    {print} 'On number ' place ' has ended... ' contestant
+                    place = place - 1
+                {print} 'Congratulations!'
+    12:
+        1:
+            story: |-
+                Sing the song 'What shall we do with the drunken sailor'. In case you don't know it, the song goed like this:
+
+                What will we do with the drunken sailor
+                What will we do with the drunken sailor
+                What will we do with the drunken sailor
+                Early in the morning
+                Way hey and up she rises
+                Way hey and up she rises
+                Way hey and up she rises
+                Early in the morning
+            code: |-
+                verses = 'What will we do with the drunken sailor', 'Way hey and up she rises'
+                {for} verse {in} verses
+                    {for} count {in} {range} 1 {to} 3
+                        {print} verse
+                    {print} 'Early in the morning'
+        2:
+            story: Play a game of Twister with us! First define the variable people, then limbs, then colors.
+            code: |-
+                people = 'Jess', 'Nick', 'Winston'
+                limbs = 'left hand', 'left foot', 'right hand', 'right foot'
+                colors = 'red', 'blue', 'green', 'yellow'
+                {for} person {in} people
+                    {print} person ', put your ' limbs {at} {random} ' on ' colors {at} {random}
