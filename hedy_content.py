@@ -25,6 +25,7 @@ CUSTOM_BABEL_LANGUAGES = {'pa_PK': 'pa_Arab_PK', 'kmr': 'ku_TR', 'tn': 'en', 'tl
 CUSTOM_LANGUAGE_TRANSLATIONS = {'kmr': 'Kurdî (Tirkiye)', 'tn': 'Setswana', 'tl': 'ᜆᜄᜎᜓᜄ᜔'}
 customize_babel_locale(CUSTOM_BABEL_LANGUAGES)
 
+# This changes the color of the adventure tab to pink
 KEYWORDS_ADVENTURES = set([
     'print_command',
     'ask_command',
@@ -42,7 +43,8 @@ KEYWORDS_ADVENTURES = set([
     'and_or_command',
     'while_command',
     'elif_command',
-    'clear_command'
+    'clear_command',
+    'functions_command'
 ])
 
 ADVENTURE_ORDER_PER_LEVEL = {
@@ -217,8 +219,9 @@ ADVENTURE_ORDER_PER_LEVEL = {
         'haunted',
         'functions',
         'functions_2',
-        'functions_3',
+        'hotel',
         'calculator',
+        'calculator_2',
         'piggybank',
         'quizmaster',
         'tic'
