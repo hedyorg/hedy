@@ -3551,6 +3551,16 @@ adventures:
                     {print} 'Up above the world so high'
                     {print} 'Like a diamond in the sky'
                     {call} _
+                    ```
+                start_code: |
+                    {define} twinkle
+                        {print} 'Twinkle'
+                        {print} '...'
+
+                    {call} twinkle
+                    {print} 'Up above the world so high'
+                    {print} 'Like a diamond in the sky'
+                    {call} _
     tic:
         name: Tic Tac Toe
         default_save_name: Tic
@@ -4029,6 +4039,16 @@ adventures:
                     {forward} 50
                     {call} square
                     ```
+                start_code: |
+                    {define} square
+                        {repeat} 4 {times}
+                            {turn} _
+                            {forward} _
+                    {call} square
+                    {forward} 50
+                    {call} square
+                    {forward} 50
+                    {call} square
     while_command:
         name: '{while}'
         default_save_name: while_command
