@@ -670,6 +670,32 @@ adventures:
                     {print} 'You win!'
                     ```
                 start_code: '# place your code here'
+    calculator_2:
+        name: Calculator 2
+        default_save_name: Calculator 2
+        description: Calculator 2
+        levels:
+            14:
+                example_code: |
+                    ```
+                    # Use your own code from the previous adventure.
+                    ```
+                start_code: |
+                    # Use your own code from the previous adventure.
+                story_text: |
+                    ## Exercise 2
+                    **This is the second part of this adventure.** The adventure starts in the previous tab.
+                    Of course, you don't always want to calculate the mean of 4 tests. You might want to calculate the mean of 10 tests or only 2...
+                    We can fix this problem by adding the argument and variable 'amount_of_tests'.
+                    * Start a new line on line 3. Set the amount_of_tests argument by asking the student how many tests they have made.
+                    * Change the 4 in line 4 to the new argument amount_of_tests.
+                    * Lastly, change the 4 in line 6 to amount_of_tests
+
+                    Try out your new program. Does it work?
+
+                    ## Exercise 3
+                    Did you want to make your program even better? Great! In the previous program you could only calculate the mean grade of 1 subject, but it would be better if you could calculate the mean grade for all subjects you want!
+                    We won't tell you how to do it, but we will give you one tip: Start your code in line 1 with: define calculate_mean_grade with subject.
     clear_command:
         name: '{clear}'
         default_save_name: clear_command
