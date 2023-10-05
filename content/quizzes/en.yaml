@@ -3562,7 +3562,7 @@ levels:
               friends = ['Wesley', 'Eric', 'Kaylee']
               chore = [the cooking, the cleaning, nothing]
               {for} i {in} {range} 1 {to} 3
-                  {print}  friends[i] has to do chores[i]
+                  {print}  friends[i] ' has to do ' chores[i]
             mp_choice_options:
             -   option: |
                   ```
@@ -3616,57 +3616,68 @@ levels:
             hint: "There's nothing wrong with line 4"
             question_score: "10"
       5:
-            question_text: "test"
+            question_text: "Which line should be filled in in the blank?"
             code: |
-              test
+              animals = ['dog', 'cow', 'horse']
+              _
+              {for} i {in} {range} 1 {to} 3
+                  {print} 'the ' animals[i] ' says ' sounds[i]
             mp_choice_options:
-            -   option: "test"
-                feedback: "That is not right."
-            -   option: "test"
-                feedback: "You don't have to keep guessing if you've given the right answer."
-            -   option: "test"
-                feedback: "Correct"
-            -   option: "test"
-                feedback: "That's not it"
-            correct_answer: "C"
-            hint: "test"
+            -   option: "noises = ['moo', 'woof', 'neigh']"
+                feedback: "Mind the variable name and the order of the sounds."
+            -   option: "sounds = '[woof], [moo], [neigh]'. "
+                feedback: "Look at line one to see how brackets are supposed to be used."
+            -   option: "sounds = [woof, moo, neigh]"
+                feedback: "Don't forget the quotation marks!"
+            -   option: "sounds = ['woof', 'moo', 'neigh']"
+                feedback: "Great job!"
+            correct_answer: "D"
+            hint: "Look at line 1 to see proper use of brackets and quotation marks."
             question_score: "10"
       6:
-            question_text: "test"
+            question_text: "Which statement is true?"
             code: |
-              test
+              people = ['Chris', 'Jaylino', 'Ryan']
+              games = ['fortnite', 'minecraft', 'fifa']
+              {for} o {in} {range} 1 {to} 3
+                {print} people[o] ' likes ' games[o]
             mp_choice_options:
-            -   option: "test"
-                feedback: "That is not right."
-            -   option: "test"
-                feedback: "You don't have to keep guessing if you've given the right answer."
-            -   option: "test"
+            -   option: "You are not allowed to use the variable o. It should be named i."
+                feedback: "i is the most commonly used variable name in this case, but it's not mandatory to use i."
+            -   option: "The output will say that Jaylino likes fortnite."
+                feedback: "No, he likes minecraft."
+            -   option: "The output will say that Ryan likes fifa"
                 feedback: "Correct"
-            -   option: "test"
-                feedback: "That's not it"
+            -   option: "This code will not work. It will give and error."
+                feedback: "No, the code is correct."
             correct_answer: "C"
-            hint: "test"
+            hint: "There is nothing wrong with this code."
             question_score: "10"
       7:
-            question_text: "test"
+            question_text: "What's wrong with this code?"
             code: |
-              test
+              people = ['Savi', 'Senna', 'Fayenne']
+              transportation = ['bike', 'train', 'car']
+              {for} i {in} {range} 1 {to} 3
+                {print} people[i] goes to school by transportation[i]
             mp_choice_options:
-            -   option: "test"
+            -   option: "Line 1 needs less quotation marks"
                 feedback: "That is not right."
-            -   option: "test"
-                feedback: "You don't have to keep guessing if you've given the right answer."
-            -   option: "test"
-                feedback: "Correct"
-            -   option: "test"
-                feedback: "That's not it"
-            correct_answer: "C"
-            hint: "test"
+            -   option: "Line 3 should start with indentation"
+                feedback: "It should not!"
+            -   option: "Line 4 should start without indentation"
+                feedback: "It should not"
+            -   option: "Line 4 needs more quotation marks."
+                feedback: "Amazing!"
+            correct_answer: "D"
+            hint: "There is a mistake made in the usage of quotation marks."
             question_score: "10"
       8:
-            question_text: "test"
+            question_text: "What is a possible output for this code?"
             code: |
-              test
+              countries = ['Canada', 'Zimbabwe', 'New Zealand']
+              {for} i {in} {range} 0 {to} 1
+                {print} 'I will travel to ' countries[random]
             mp_choice_options:
             -   option: "test"
                 feedback: "That is not right."
