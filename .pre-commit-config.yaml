@@ -7,3 +7,15 @@ repos:
     rev: 6.1.0
     hooks:
     -   id: flake8
+
+# NOTE: The below hook is disabled, because it fights with Weblate's YAML formatting rules.
+# Weblate serializes YAML in a particular format, then this hook updates it, then weblate pushes its own version again, and so on.
+#  INSTRUCTIONS: after enabling this, run `pre-commit run --all` to clean up all content files
+#  - repo: local
+#    hooks:
+#    -   id: content_yaml_autoformat
+#        name: content yaml autoformatting
+#        entry: tools/rewrite-content-yaml.py
+#        files: 'content/.*\.ya?ml'
+#        language: python
+#        additional_dependencies: ['PyYAML==6.0.1', 'ruamel.yaml==0.17.4']
