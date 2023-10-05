@@ -2727,6 +2727,10 @@ adventures:
                     with fries and pancakes. Or something completely different of course!
                 example_code: |
                     ```
+                    price = 10
+                    food = {ask} 'What would you like to eat?'
+                    drinks = {ask} 'What would you like to drink?'
+                    {if} food {is} 'sandwich' _ drinks {is} 'juice'
                         {print} 'That is our discount menu'
                         price = price - 3
                     {if} drinks {is} 'water' _ drinks {is} 'juice'
