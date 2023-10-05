@@ -649,25 +649,38 @@ adventures:
                 start_code: '# Write your code here'
             14:
                 story_text: |
-                    In this level you can program the game 'Guess which number'
+                    In this adventure you will build a calculator that calculates your mean grade for you. If you get your calculator to work, you can move on to the next adventure, which allows you to add two extra features.
+
+                    ## Exercise 1
+                    Fill in the blanks to get the calculator to work.
+                    * Start with the fourth line, add a question to figure out what grade the student got.
+                    * In the fifth line you'll want to calculate the total of all grades, so the total = total + grade.
+                    * Then we get to set the return value. We want to return the mean, so the total devided by the amount of tests (4).
+                    * Lastly we finish the code by calling the function in line 8.
+
+                    Did you get it? Awesome! Would you like to add even more to your calculator? **This adventure continues in the next tab!**
                 example_code: |
                     ```
-                    {print} 'Guess which number'
-                    numbers = 1, 2, 3, 4, 5, 6, 7, 8, 9, 10
-                    number = numbers {at} {random}
-                    game = 'on'
-                    {for} i {in} {range} 1 {to} 10
-                        {if} game == 'on'
-                            guess = {ask} 'Which number do you think it is?'
-                            {if} guess > number
-                                {print} 'Lower!'
-                            {if} guess < number
-                                {print} 'Higher!'
-                            {if} guess == number
-                                {print} 'You win!'
-                                game = 'over'
+                    define calculate_mean_grade
+                        total = 0
+                        for i in range 1 to 4
+                            grade = ask _
+                            total = total + _
+                            return _ / 4
+
+                    mean_grade = call _
+                    print 'Your mean grade is ' mean_grade
                     ```
-                start_code: '# place your code here'
+                start_code: |
+                    define calculate_mean_grade
+                        total = 0
+                        for i in range 1 to 4
+                            grade = ask _
+                            total = total + _
+                            return _ / 4
+
+                    mean_grade = call _
+                    print 'Your mean grade is ' mean_grade
             15:
                 story_text: |
                     You can add the `{while}` loop to the calculator game you've learned to make in a previous level.
@@ -1632,45 +1645,35 @@ adventures:
 
                     new_price = _ calculate_new_price with old_price, _
                     print 'The new price is ' new_price ' dollar'
-    functions_2:
-        name: "functions 2"
-        description: functions 2
-        default_save_name: functions_2
+    guess_my_number:
+        name: Guess my number
+        description: guess my number
+        default_save_name: guess my number
         levels:
             14:
                 story_text: |
-                    In this adventure you will build a calculator that calculates your mean grade for you. If you get your calculator to work, you can move on to the next adventure, which allows you to add two extra features.
+                    In this level you can program the game 'Guess my number'
 
-                    ## Exercise 1
-                    Fill in the blanks to get the calculator to work.
-                    * Start with the fourth line, add a question to figure out what grade the student got.
-                    * In the fifth line you'll want to calculate the total of all grades, so the total = total + grade.
-                    * Then we get to set the return value. We want to return the mean, so the total devided by the amount of tests (4).
-                    * Lastly we finish the code by calling the function in line 8.
-
-                    Did you get it? Awesome! Would you like to add even more to your calculator? **This adventure continues in the next tab!**
+                    ### Exercise
+                    Fill in the correct symbols on the blanks to get the game to work.
                 example_code: |
                     ```
-                    define calculate_mean_grade
-                        total = 0
-                        for i in range 1 to 4
-                            grade = ask _
-                            total = total + _
-                            return _ / 4
-
-                    mean_grade = call _
-                    print 'Your mean grade is ' mean_grade
+                    {print} 'Guess my number'
+                    numbers = 1, 2, 3, 4, 5, 6, 7, 8, 9, 10
+                    number = numbers {at} {random}
+                    game = 'on'
+                    {for} i {in} {range} 1 {to} 10
+                        {if} game == 'on'
+                            guess = {ask} 'Which number do you think it is?'
+                            {if} guess _ number
+                                {print} 'Lower!'
+                            {if} guess _ number
+                                {print} 'Higher!'
+                            {if} guess _ number
+                                {print} 'You win!'
+                                game = 'over'
                     ```
-                start_code: |
-                    define calculate_mean_grade
-                        total = 0
-                        for i in range 1 to 4
-                            grade = ask _
-                            total = total + _
-                            return _ / 4
-
-                    mean_grade = call _
-                    print 'Your mean grade is ' mean_grade
+                start_code: '# place your code here'
     harry_potter:
         name: Harry Potter
         default_save_name: Harry Potter

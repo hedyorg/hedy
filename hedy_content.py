@@ -44,7 +44,7 @@ KEYWORDS_ADVENTURES = set([
     'while_command',
     'elif_command',
     'clear_command',
-    'functions_command'
+    'functions'
 ])
 
 ADVENTURE_ORDER_PER_LEVEL = {
@@ -218,9 +218,9 @@ ADVENTURE_ORDER_PER_LEVEL = {
     14: [
         'default',
         'is_command',
+        'guess_my_number',
         'haunted',
         'functions',
-        'functions_2',
         'hotel',
         'calculator',
         'calculator_2',
