@@ -614,24 +614,38 @@ adventures:
                 start_code: '# Schrijf jouw code hier'
             14:
                 story_text: |
-                    In this level you can programm the game 'Guess which number'
+                    In this adventure you will build a calculator that calculates your mean grade for you. If you get your calculator to work, you can move on to the next adventure, which allows you to add two extra features.
+
+                    ## Exercise 1
+                    Fill in the blanks to get the calculator to work.
+                    * Start with the fourth line, add a question to figure out what grade the student got.
+                    * In the fifth line you'll want to calculate the total of all grades, so the total = total + grade.
+                    * Then we get to set the return value. We want to return the mean, so the total devided by the amount of tests (4).
+                    * Lastly we finish the code by calling the function in line 8.
+
+                    Did you get it? Awesome! Would you like to add even more to your calculator? **This adventure continues in the next tab!**
                 example_code: |
                     ```
-                    {print} 'Guess which number'
-                    numbers = 1, 2, 3, 4, 5, 6, 7, 8, 9, 10
-                    number = numbers {at} {random}
-                    game = 'on'
-                    {for} i {in} {range} 1 {to} 10
-                        {if} game == 'on'
-                            guess = {ask} 'Which number do you think it is?'
-                            {if} guess > number
-                                {print} 'Lower!'
-                            {if} guess < number
-                                {print} 'Higher!'
-                            {if} guess == number
-                                {print} 'You win!'
-                                game = 'over'
-                start_code: '# place your code here'
+                    define calculate_mean_grade
+                        total = 0
+                        for i in range 1 to 4
+                            grade = ask _
+                            total = total + _
+                            return _ / 4
+
+                    mean_grade = call _
+                    print 'Your mean grade is ' mean_grade
+                    ```
+                start_code: |
+                    define calculate_mean_grade
+                        total = 0
+                        for i in range 1 to 4
+                            grade = ask _
+                            total = total + _
+                            return _ / 4
+
+                    mean_grade = call _
+                    print 'Your mean grade is ' mean_grade
             15:
                 story_text: |
                     You can add the `{while}` loop to the calculator game you've learned to make in a previous level.

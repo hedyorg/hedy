@@ -613,46 +613,38 @@ adventures:
                 start_code: '# Schrijf jouw code hier'
             14:
                 story_text: |
-                    En ĉi tiu nivelo, vi povas programi la ludon «Divenu la nombron»
+                    In this adventure you will build a calculator that calculates your mean grade for you. If you get your calculator to work, you can move on to the next adventure, which allows you to add two extra features.
+
+                    ## Exercise 1
+                    Fill in the blanks to get the calculator to work.
+                    * Start with the fourth line, add a question to figure out what grade the student got.
+                    * In the fifth line you'll want to calculate the total of all grades, so the total = total + grade.
+                    * Then we get to set the return value. We want to return the mean, so the total devided by the amount of tests (4).
+                    * Lastly we finish the code by calling the function in line 8.
+
+                    Did you get it? Awesome! Would you like to add even more to your calculator? **This adventure continues in the next tab!**
                 example_code: |
                     ```
-                    {print} 'Divenu la nombron'
-                    nombroj = 1, 2, 3, 4, 5, 6, 7, 8, 9, 10
-                    nombro = nombroj {at} {random}
-                    ludo = 'daŭranta'
-                    {for} i {in} {range} 1 {to} 10
-                        {if} ludo == 'daŭranta'
-                            diveno = {ask} 'Kiun nombron viaopinie ĝi estas?'
-                            {if} diveno > nombro
-                                {print} 'Pli malgrande!'
-                            {if} diveno < nombro
-                                {print} 'Pli grande!'
-                            {if} diveno == nombro
-                                {print} 'Vi gajnas!'
-                                ludo = 'finita'
+                    define calculate_mean_grade
+                        total = 0
+                        for i in range 1 to 4
+                            grade = ask _
+                            total = total + _
+                            return _ / 4
+
+                    mean_grade = call _
+                    print 'Your mean grade is ' mean_grade
                     ```
-                start_code: '# via kodo ĉi tie'
-            15:
-                story_text: |
-                    Vi povas aldoni la iteracion `{while}` al la kalkulilo, kiun vi verkis en antaŭa nivelo.
-                    Tio certigas, ke la ludanto ne povas daŭrigi al la sekva demando, se ili respondas malĝuste.<!--{if}-->
-                example_code: |
-                    ```
-                    poentaro = 0
-                    {for} i {in} {range} 0 {to} 9
-                        nombroj = 1, 2, 3, 4, 5, 6, 7, 8, 9, 10
-                        nombro1 = nombroj {at} {random}
-                        nombro2 = nombroj {at} {random}
-                        ĝusta = nombro1 * nombro2
-                        respondo = 0
-                        {while} respondo != ĝusta
-                            {print} 'Kiom estas ' nombro1 ' multiplikite per ' nombro2 '?'
-                            respondo = {ask} 'Tajpu vian respondon:'
-                            {print} 'Via respondo estas ' respondo
-                        {print} 'Bonege!'
-                    {print} 'Vi gajnas!'
-                    ```
-                start_code: '# via kodo ĉi tie'
+                start_code: |
+                    define calculate_mean_grade
+                        total = 0
+                        for i in range 1 to 4
+                            grade = ask _
+                            total = total + _
+                            return _ / 4
+
+                    mean_grade = call _
+                    print 'Your mean grade is ' mean_grade
     calculator_2:
         name: Calculator 2
         default_save_name: Calculator 2
