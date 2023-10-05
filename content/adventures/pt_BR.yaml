@@ -3383,6 +3383,32 @@ adventures:
                         {print} ação
                     ```
                 start_code: '# coloque o seu código aqui'
+            13:
+                story_text: |
+                    In the previous adventure you have learned how to use an argument in a function, but did you know that you could combine them with {ask} commands as well?
+                    In this example we have changed the 'My Bonnie' program and made it interactive. You are now asked where Bonnie is.
+                example_code: |
+                    ```
+                    define song with place
+                        print 'My Bonnie is ' place
+
+                    chosen_place = {ask} 'Where do you want Bonnie to be?'
+                    synonym = {ask} 'What is another word for that?'
+
+                    call song with chosen_place
+                    call song with synonym
+                    call song with chosen_place
+                    ```
+                start_code: |
+                    define song with place
+                        print 'My Bonnie is ' place
+
+                    chosen_place = {ask} 'Where do you want Bonnie to be?'
+                    synonym = {ask} 'What is another word for that?'
+
+                    call song with chosen_place
+                    call song with synonym
+                    call song with chosen_place
             16:
                 story_text: |
                     Neste nível, você pode programar uma música como Velho MacDonald ainda mais rapidamente. Você pode conectar o animal certo ao som certo simplesmente colocando-os no mesmo lugar na lista.

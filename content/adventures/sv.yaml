@@ -3438,6 +3438,32 @@ adventures:
                     _ {print} 'om du är riktigt glad'
                     ```
                 start_code: '# placera din kod här'
+            13:
+                story_text: |
+                    In the previous adventure you have learned how to use an argument in a function, but did you know that you could combine them with {ask} commands as well?
+                    In this example we have changed the 'My Bonnie' program and made it interactive. You are now asked where Bonnie is.
+                example_code: |
+                    ```
+                    define song with place
+                        print 'My Bonnie is ' place
+
+                    chosen_place = {ask} 'Where do you want Bonnie to be?'
+                    synonym = {ask} 'What is another word for that?'
+
+                    call song with chosen_place
+                    call song with synonym
+                    call song with chosen_place
+                    ```
+                start_code: |
+                    define song with place
+                        print 'My Bonnie is ' place
+
+                    chosen_place = {ask} 'Where do you want Bonnie to be?'
+                    synonym = {ask} 'What is another word for that?'
+
+                    call song with chosen_place
+                    call song with synonym
+                    call song with chosen_place
             16:
                 story_text: |
                     På den här nivån kan du programmera en sång som OldMacDonald ännu snabbare. Du kan koppla rätt djur till rätt ljud genom att helt enkelt placera dem på samma plats i listan.

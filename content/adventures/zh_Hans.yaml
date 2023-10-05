@@ -3233,6 +3233,32 @@ adventures:
                     _ {print} 动作
                     ```
                 start_code: '# 把你的代码放在这里'
+            13:
+                story_text: |
+                    In the previous adventure you have learned how to use an argument in a function, but did you know that you could combine them with {ask} commands as well?
+                    In this example we have changed the 'My Bonnie' program and made it interactive. You are now asked where Bonnie is.
+                example_code: |
+                    ```
+                    define song with place
+                        print 'My Bonnie is ' place
+
+                    chosen_place = {ask} 'Where do you want Bonnie to be?'
+                    synonym = {ask} 'What is another word for that?'
+
+                    call song with chosen_place
+                    call song with synonym
+                    call song with chosen_place
+                    ```
+                start_code: |
+                    define song with place
+                        print 'My Bonnie is ' place
+
+                    chosen_place = {ask} 'Where do you want Bonnie to be?'
+                    synonym = {ask} 'What is another word for that?'
+
+                    call song with chosen_place
+                    call song with synonym
+                    call song with chosen_place
             16:
                 story_text: |
                     在这一级中，你可以更快速地编排一首像《老麦当劳》这样的歌曲。你可以把正确的动物和正确的声音联系起来，只要把它们放在列表的同一位置。
