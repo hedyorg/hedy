@@ -3941,6 +3941,40 @@ adventures:
                         {color} {black}
                     ```
                 start_code: '# place your code here'
+            12:
+                story_text: |
+                    We can use functions to draw more complex figures with less code.
+                    ### Exercise 1
+                    Fill the function so that three squares are created. If you want the image to look nicer, you can make the lines between the squares white.
+
+                    ### Exercise 2
+                    The code can be made even shorter. Place the final lines into a `{repeat}` so the figure remains the same.
+
+                    ### Exercise 3
+                    Create your own drawing with different figures.
+                    Change both the number of figures with the `{repeat}` and the shape of the figures in the `{define}`
+                example_code: |
+                    ```
+                    {define} square
+                        {repeat} 4 {times}
+                            {turn} _
+                            {forward} _
+                    {call} square
+                    {forward} 50
+                    {call} square
+                    {forward} 50
+                    {call} square
+                    ```
+                start_code: |
+                    {define} square
+                        {repeat} 4 {times}
+                            {turn} _
+                            {forward} _
+                    {call} square
+                    {forward} 50
+                    {call} square
+                    {forward} 50
+                    {call} square
     while_command:
         name: '{while}'
         default_save_name: while_command
