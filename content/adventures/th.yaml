@@ -3379,6 +3379,36 @@ adventures:
                         {print} 'early in the morning'
                     ```
                 start_code: '# Schrijf jouw code hier'
+    songs_2:
+        name: Sing a song! 2
+        default_save_name: Song 2
+        description: Sing a song 2
+        levels:
+            12:
+                story_text: |
+                    Songs contain a lot of repetition. We can capture it with a function!
+                    ### Exercise
+                    Look at the example code with the function. Fill out the two lines so the full song is printed.
+                example_code: |
+                    ```
+                    {define} twinkle
+                        {print} 'Twinkle'
+                        {print} '...'
+
+                    {call} twinkle
+                    {print} 'Up above the world so high'
+                    {print} 'Like a diamond in the sky'
+                    {call} _
+                    ```
+                start_code: |
+                    {define} twinkle
+                        {print} 'Twinkle'
+                        {print} '...'
+
+                    {call} twinkle
+                    {print} 'Up above the world so high'
+                    {print} 'Like a diamond in the sky'
+                    {call} _
     tic:
         name: Tic Tac Toe
         default_save_name: Tic
