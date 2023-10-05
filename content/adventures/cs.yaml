@@ -1876,6 +1876,53 @@ adventures:
                         {print} 'GAME OVER'
                     ```
                 start_code: '# place your code here'
+    hotel:
+        name: "hotel"
+        description: hotel
+        default_save_name: hotel
+        levels:
+            13:
+                story_text: |
+                    In the previous adventure you have learned how to use an argument in a function, and you've learned how to combine it with an {ask}.
+                    You might have wondered why you would use functions, because the functions in the example were only one line of code.
+                    Now we will show you what a bigger function looks like and we will use multiple agruments now as well. You'll see how much better it is to use a function once the function gets bigger.
+                    Here is an example of a function with arguments combined with {ask} commands.
+                example_code: |
+                    ```
+                    {define} welcome_message {with} title, last_name, country, room_number
+                        {print} 'Welcome to Hotel Hedy, ' title ' ' last_name
+                        nice_trip {is} {ask} 'Did you have a nice trip from, ' country '?'
+                        {if} nice_trip {is} 'yes'
+                            {print} 'Lovely!'
+                        {else}
+                            {print} 'Sorry to hear that.'
+                            {print} 'Hopefully you can take a nice rest in you room.'
+                        {print} 'Your room number is ' room_number
+
+                    {print} 'Hello. Please fill in your information to check in.'
+                    title = {ask} 'What is your title (mr, mrs, ms, dr, etc.)?'
+                    name = {ask} 'What is you last name?'
+                    homecountry = {ask} 'What country do you come from?'
+
+                    {call} welcome_message {with} title, name, homecountry, 105
+                    ```
+                start_code: |
+                    {define} welcome_message {with} title, last_name, country, room_number
+                        {print} 'Welcome to Hotel Hedy, ' title ' ' last_name
+                        nice_trip {is} {ask} 'Did you have a nice trip from, ' country '?'
+                        {if} nice_trip {is} 'yes'
+                            {print} 'Lovely!'
+                        {else}
+                            {print} 'Sorry to hear that.'
+                            {print} 'Hopefully you can take a nice rest in you room.'
+                        {print} 'Your room number is ' room_number
+
+                    {print} 'Hello. Please fill in your information to check in.'
+                    title = {ask} 'What is your title (mr, mrs, ms, dr, etc.)?'
+                    name = {ask} 'What is you last name?'
+                    homecountry = {ask} 'What country do you come from?'
+
+                    {call} welcome_message {with} title, name, homecountry, 105
     if_command:
         name: '{if} & {else}'
         default_save_name: if_command
