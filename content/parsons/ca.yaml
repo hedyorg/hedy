@@ -17,10 +17,10 @@ levels:
         2:
             story: Ets a la cabina de DJ demanant una cançó. Creeu un programa que us demani si esteu preparats per a la festa i, a continuació, us pregunti quina cançó us agradaria escoltar.
             code: |-
-                {print} Aquest és DJ Hedy
+                {print} Soc DJ Hedy
                 {ask} Esteu preparats per a la festa?
                 {ask} Quina cançó t'agradaria escoltar?
-                {echo} Bona elecció! m'encanta la cançó.
+                {echo} Bona elecció!, m'encanta la cançó.
     2:
         1:
             story: |-
@@ -28,11 +28,11 @@ levels:
                 Mostra quina pel·lícula estàs a punt de veure i desitja molta diversió als espectadors!
             code: |-
                 {print} És hora d'una nit de Netflix
-                peli {is} Sonic the Hedgehog 2
+                peli {is} Sonic 2
                 {print} Veurem peli
-                {print} Gaudeix-la!
+                {print} A gaudir-la!
         2:
-            story: Aquesta és la botiga web d'una botiga de joguines. Creeu un programa on els clients puguin afegir un article al seu carretó de la compra.
+            story: Aquesta és la botiga web d'una botiga de joguines. Crea un programa on els clients puguin afegir un article a la cistella de la compra.
             code: |-
                 {print} Benvingut a la nostra botiga de joguines
                 joguina {is} {ask} Què t'agradaria comprar?
@@ -43,7 +43,7 @@ levels:
             story: |-
                 Comença el nou curs escolar a Hogwarts!
                 La feina del barret que tria és classificar-te en una de les cases.
-                A quina casa us ubicaran? Ets un Gryffindor, un Hufflepuff, un Ravenclaw o un Slytherin?
+                A quina casa t'ubicaran? Ets un Gryffindor, un Hufflepuff, un Ravenclaw o un Slytherin?
                 Abans que el barret que tria reveli la vostra casa, podeu demanar-li que no triï una de les cases.
             code: |-
                 {print} El barret que tria està llest per classificar-vos a una casa de Hogwarts.
@@ -52,7 +52,7 @@ levels:
                 {remove} desagrada {from} cases
                 {print} No desagrada, eh? Doncs que sigui... cases {at} {random}
         2:
-            story: Creeu un programa que esculli un àpat a l'atzar per a vosaltres. Fes una llista de menjar i una llista de complements i deixa que el programa decideixi què tindràs!
+            story: Crea un programa que esculli un àpat a l'atzar per tu. Prepara una llista de menjar i una llista de complements i fes que el programa decideixi què et tocarà!
             code: |-
                 el_menjar {is} pizza, gelat, amanida, sandvitx
                 la_cobertura {is} xocolata, formatge, tonyina, ruixats
@@ -84,21 +84,21 @@ levels:
                 {sleep}
                 {print} pokemons {at} {random}
         2:
-            story: Creeu una loteria que us permeti triar un preu addicional que podríeu guanyar.
+            story: Crea un sorteig de loteria que us permeti triar quin premi addicional podríeu guanyar.
             code: |-
-                preus {is} cotxe, hàmster, 1 milió d'euros
-                preu {is} {ask} "Què t'agradaria guanyar?"
-                {add} preu {to_list} preus
-                {print} "Has guanyat un" preus {at} {random}
+                premis {is} cotxe, hàmster, 1 milió d'euros
+                premi {is} {ask} "Què t'agradaria guanyar?"
+                {add} premi {to_list} premis
+                {print} "Has guanyat un" premis {at} {random}
     5:
         1:
             story: |-
-                Feu un programa que comprove si la vostra pel·lícula preferida ja és a la llista de l'ordinador.
-                Si és així, imprimiu que teniu un bon gust, en cas contrari, afegiu la pel·lícula a la llista.
+                Fes un programa que comprovi si la vostra pel·lícula preferida ja és a la llista de l'ordinador.
+                Si és així, imprimeix un missatge que digui que tens bon gust, en cas contrari, afegeix la pel·lícula a la llista.
             code: |-
                 pelicules_preferides {is} Batman, Spiderman, The Avengers, Jurassic Park
-                pel·lícula {is} {ask} "Quina és la teva pel·lícula preferida?"
-                {if} pel·lícula {in} pelicules_preferides {print} "Teniu molt bon gust!"
+                peli {is} {ask} "Quina és la teva pel·lícula preferida?"
+                {if} peli {in} pelicules_preferides {print} "Teniu molt bon gust!"
                 {else} {print} "Llàstima que la teva pel·lícula preferida no estigui a la llista, l'afegirem de seguida!"
                 {add} pel·lícula {to_list} pelicules_preferides
         2:
@@ -111,18 +111,18 @@ levels:
     6:
         1:
             story: |-
-                Fes un programa que calculi quants anys tens en anys de gossos i gats.
-                Primer demaneu l'edat de l'usuari i comenceu a calcular.
-                Calculeu primer els anys canins i després els catyears.
-                Mostra a l'usuari les diferents edats.
+                Fes un programa que calculi quina edat tens en anys de gos i de gat.
+                En primer lloc, demana l'edat a l'usuari. Després ja pots començar a calcular.
+                Calcula primer els anys de gos i després els de gat.
+                Mostra finalment a l'usuari les diferents edats calculades.
             code: |-
                 edat = {ask} "Quants anys tens?"
                 edat_gos = edat * 7
                 edat_gat = edat * 5
-                {print} 'En anys de gossos, tens ' edat_gos ' anys.'
-                {print} 'En anys de gat tens 'edat_gat' anys.'
+                {print} 'En anys de gos, tens ' edat_gos ' anys.'
+                {print} 'En anys de gat tens ' edat_gat ' anys.'
         2:
-            story: Creeu un programa que us ajudi a calcular quants pastissos hauríeu de comprar per a la vostra festa d'aniversari.
+            story: Crea un programa que us ajudi a calcular quants pastissos hauries de comprar per a la teva festa d'aniversari.
             code: |-
                 {print} 'És el teu aniversari!'
                 persones = {ask} 'A quantes persones vols donar una llesca de pastís?'
@@ -130,10 +130,7 @@ levels:
                 {print} 'Haureu de comprar 'nombre_pastissos' pastissos'
     7:
         1:
-            story: |-
-                En un torneig d'escacs queden tres jugadors.
-                Creeu un programa que decideixi quins dos jugadors juguen primer l'un contra l'altre.
-                Primer imprimiu els dos jugadors que juguen el primer partit, després imprimiu contra quin jugador jugarà el guanyador.
+            story: Completa la cançó del Baby shark. Primer comença amb el Baby shark, després la mare (mommy shark) i finalment el pare (daddy shark).
             code: |-
                 jugadors = Liam, Noah, Sophie
                 jugador1 = jugadors {at} {random}
@@ -152,24 +149,24 @@ levels:
     8:
         1:
             story: |-
-                Tu i quatre amics més esteu jugant a Pokémon Go! Creeu un programa que decideixi en quin equip jugarà cadascun de vosaltres.
-                Ja sigui vermell, groc o blau! Feu una petita pausa després d'anunciar un equip.
+                Tu i quatre amics més esteu jugant a Pokémon Go! Crea un programa que decideixi en quin equip jugarà cadascun de vosaltres.
+                Pot ser vermell, groc o blau! Feu una petita pausa després d'anunciar cada equip.
             code: |-
                 equips = vermell, groc, blau
                 {print} "Vermell, groc o blau?"
                 {repeat} 5 {times}
-                     {print} "Esteu seleccionat a l'equip..."
-                     {print} equips {at} {random}
-                     dormir 2
+                    {print} "Has sigut seleccionat a l'equip..."
+                    {print} equips {at} {random}
+                    dormir 2
         2:
-            story: Imprimeix el compte enrere per a un joc d'amagatalls.
+            story: Imprimeix el compte enrere per al joc de l'amagatall.
             code: |-
                 comptador = 11
                 {repeat} 10 {times}
                      comptador = comptador - 1
                      {print} comptador
                      {sleep} 1
-                {print} 'A punt o no, aquí vinc!'
+                {print} 'Llest o no, ves que vinc!'
     9:
         1:
             story: This game will give you three maths assignments. Each time the question is different. Can you figure out the order?

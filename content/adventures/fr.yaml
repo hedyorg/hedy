@@ -198,7 +198,7 @@ adventures:
             10:
                 story_text: |
                     In this level you can use the {for} command in your story. In this way you could easily program the children's book 'brown bear, brown bear, what do you see'.
-                example_code: "```\nanimaux = _ , _ , _ \n{print} 'Ours brun, Ours brun'\n{print} 'Que vois-tu?'\n```\n"
+                example_code: "```\nanimaux = _ , _ , _ \n{print} 'Ours brun, Ours brun'\n {print} 'Que vois-tu?'\n```\n"
                 start_code: '# écrit ton code ici'
             12:
                 story_text: In this level you can use the quotation marks to save multiple words in a variable.
@@ -3626,6 +3626,23 @@ adventures:
                         {color} {black}
                     ```
                 start_code: '# écrit ton code ici'
+            10:
+                story_text: |
+                    In this level you can make the turtle draw a figure.
+                    The turtle will travel the distances in the list, one by one, making bigger and bigger steps.
+                    ### Exercise 1
+                    Add a 90 degree turn in the loop, so that a spiral is drawn.
+                    Add at least 5 numbers to the list, so the spiral grows larger.
+                     **(extra)** can you change the spiral into another shape? Experiment with numbers for the turn!
+                    ### Exercise 2
+                    The spiral is drawn outwards, make it go inwards?
+                example_code: |
+                    ```
+                    {turn} 90
+                    distances = 10, 20, 30, 40, 50, 60
+                    {for} distance {in} distances
+                        {forward} distance
+                start_code: '# Write your code here'
     while_command:
         name: '{while}'
         default_save_name: while_command
