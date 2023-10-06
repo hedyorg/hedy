@@ -12,7 +12,7 @@ home-sections:
         2. Hedy es gradual, para que puedas aprender un concepto y su sintaxis a la vez
         3. Hedy está construido para el aula, permitiendo a los profesores personalizar completamente la experiencia de sus alumnos
 -   title: Programación multilingüe
-    text: Mientras que la mayoría de los lenguajes de programación textual tienen palabras clave en inglés, como `for` o `repeat`, ¡Hedy puede usarse en cualquier lenguaje! Ahora mismo admitimos 39 idiomas distintos, incluyendo español, árabe, chino simplificado e hindú. Si tu idioma no está disponible
+    text: Mientras que casi todos los lenguajes de programación tienen palabras clave en inglés, como `for` o `repeat`, ¡Hedy puede utilizarse en cualquier idioma! Actualmente soportamos 47 idiomas diferentes, incluyendo holandés, español, árabe, turco, chino e hindi. Si tu idioma no está disponible,
         siempre puedes iniciar una nueva traducción.
 -   title: Aprendizaje paso a paso
     text: Aprender un lenguaje de programación puede ser agobiante, ya que los alumnos tienen que aprender los conceptos (por ejemplo condicionales si-sino o bucles) y la sintaxis (como comillas y paréntesis) a la vez. En Hedy, los conceptos se introducen primero con muy poca sintaxis y después se perfeccionan.
@@ -325,7 +325,7 @@ sections:
             example:
                 error_text: El comando Echo se utiliza para repetir una respuesta después de un comando ask. Sin ask, echo no hará nada.
                 error_code: ecoo Tu nombre es
-                solution_text: Agrega un comando preguntar para hacerlo funcionar
+                solution_text: Añade un comando ask para que funcione.
                 solution_code: |-
                     preguntar ¿Cómo te llamas?
                     eco Tu nombre es
@@ -362,18 +362,18 @@ sections:
                 error_text: Hedy no puede reconocer un comando mal escrito.
                 error_code: imprimir No hagas errores de escritura!
                 solution_text: Enseña a tus estudiantes a leer los mensajes de error. De esta forma ellos pueden encontrar por sí solos que es lo que está mal.
-                solution_code: imprimir No hagas errores de escritura
+                solution_code: imprimir ¡No cometas errores tipográficos!
         -   title: Los estudiantes olvidan que el comando preguntar ha cambiado
             example:
                 error_text: En este nivel, los estudiantes aprender sobre variables. El comando preguntar requiere variables también, peroo los estudiantes olvidan esto.
                 error_code: preguntar ¿Qué te gustaría comer?
                 solution_text: En este nivel tienes que decirle a Hedy dónde debe guardar tu respuesta para ser usada luego. Esto se llama una variable.
                 solution_code: pedir es preguntar ¿Qué te gustaría comer?
-        -   title: Los estudiantes intentan usar el comando `{echo}`.
+        -   title: Los alumnos intentan utilizar el comando `{echo}`
             example:
                 error_text: Para algunos estudiantes, puede ser frustrante aprender que el comando `{echo}` ya no funciona. Por eso es muy importante explicar las ventajas de usar variables. ¡Por ejemplo, puedes usar múltiples variables en un código y ponerlas donde quieras en una frase!
                 error_code: |-
-                    respuesta {is} {ask} ¡¿Por qué ya no funciona {echo}?!
+                    responder {is} {ask} ¡¿Por qué {echo} ya no funciona?!
                     {echo}
                 solution_text: En su lugar, utiliza una variable.
                 solution_code: |-
@@ -1068,3 +1068,16 @@ sections:
         Tu puedes aprender de tus errores, especialmente programando!
         Errar es inevitable y una gran oportunidad para aprender, pero para los profesores puede ser difícil encontrar la solución correcta a un error!
         Especialmente mientras el código crece junto a al progreso de los niveles. Es por esto que hemos hecho una lista de los errores frecuentes en cada nivel y sus soluciones.
+start-sections:
+-   title: Primeros pasos con Hedy
+    text: '*Algo sobre las cuentas de los profesores, las diapositivas, etc*'
+-   title: Lo que opinan otros profesores
+    text: "Hace un tiempo hicimos unas breves encuestas a los profesores de Hedy. \nLas preguntas se extienden entre las sugerencias de mejora y las mejores características de Hedy. \nA continuación se muestra un testimonio de sus pensamientos:\n\nInterfaz sencilla y buenos ejemplos. *Profesor: 3o - 6o\
+        \ grados (primaria)*\n\nProgramación multilingüe y sólo el propio concepto de programación gradual. - *Estados Unidos: escuela secundaria, 6o-8o grado*\n\nEl carácter gradual de la introducción de la programación. *Australia: Escuela secundaria*\n\nLa construcción es tan buena. *Países Bajos:\
+        \ Escuela secundaria inferior HAVO-VWO*\n\nPuedo mantener el ritmo de la clase. *Países Bajos: grupo 7 en 8* \n\nContinúa automáticamente. *Países Bajos: 2 HAVO-VWO*\n\nTanto que la explicación puede estar en holandés (y el código en inglés), como que se construye con más \ny más posibilidades.\
+        \ *Países Bajos: Plus clase grupo 7*\n\nLa 'realidad' de la programación, se parece a lo que es en realidad. *Países Bajos: grupo Plus clase 4 a 8*\n\nActividades paso a paso. Actividades divertidas. *Países Bajos: 1e Todos los niveles, 2e VWO/HAVO 2e VWO +, 3e HAVO 3e VWO*\n\nPero Hedy y sus\
+        \ niveles graduales... qué idea, \nQuería agradecerle personalmente por crear esto. No puedo agradecerte lo suficiente. Además, nunca he visto el nivel de compromiso y entusiasmo de mi \nestudiantes, como he visto con Hedy. Hemos cubierto hasta el nivel 5, y planeamos pasar una semana más en él\
+        \ en clases y laboratorios, \nantes de iniciar Python.  *Pakistán*\n\nMe gusta mucho Hedy y también está muy bien configurado, lo que lo hace bueno para usar en la escuela primaria. \nEl enfoque gradual de Hedy funciona muy bien. \nLa breve explicación al comienzo de cada nivel y los programas\
+        \ de ejemplo cortos ayudan a dar a los niños una idea rápida de lo que es nuevo en el nivel elegido. \nLas diferentes tareas que los niños pueden elegir también funcionan muy bien. \nVes a los niños elegir tareas que les atraen y luego llegan a trabajar con ellos, \na través de los niveles. Hedy\
+        \ es muy divertido para los niños que son buenos en la programación y quieren \nsabor de un verdadero lenguaje de programación. Es una buena preparación para la escuela secundaria en cuanto más TIC \nla educación que se imparte allí. *Países Bajos: Escuela Montessori de Oegstgeest*\n\n<img width=\"\
+        500px\" src=\"static/images/teacherfeedback/Fkids1.JPG\"></img>"
