@@ -1,283 +1,4 @@
 adventures:
-  story:
-    name: Story
-    default_save_name: Story
-    description: Story
-    levels:
-      1:
-        story_text: |
-          In level 1 you can make a story with a different main character that you enter yourself.
-
-          In the first line, use `{ask}` and ask who the main character of the story will be.
-
-          After that first line, start with `{print}` if the sentence needs to be printed.
-          You use `{echo}` if you want your main character to be at the end of the sentence.
-        example_code: |
-          ```
-          {ask} The main character of this story is
-          {print} The main character is now going to walk in the forest
-          {echo} He's a bit scared,
-          {print} He hears crazy noises everywhere
-          {print} He's afraid this is a haunted forest
-          ```
-        story_text_2: |
-          ### Exercise
-          Can you make your own story in Hedy now by using `{print}` , `{ask}` and `{echo}`?
-        start_code: '{print} Your story starts here'
-      2:
-        story_text: |
-          In level 2 you can make your story more fun. Your main character's name can now be anywhere in the sentence.
-
-          You do have to program a little bit extra for that. You must now name your main character first.
-
-          You can then put that name anywhere in a sentence.
-
-          ### Exercise
-          Can you make a story using a variable yourself? Can you add even more variables?
-        example_code: |-
-          ```
-          name {is} {ask} What is the name of the main character?
-          {print} name is now going to run in the woods
-          {print} name is a bit scared
-          {print} Suddenly he hears a crazy noise...
-          {sleep}
-          {print} name is afraid this is a haunted forest
-          ```
-        story_text_2: |
-          ### Exercise
-          Now it's time to add variables to your own story that you've made in the previous level.
-          Go to 'My programs', look for your level 1 story adventure and copy the code. Paste the code in your input screen in this level.
-
-          This code won't work in this level, because you have not used variables yet.
-          Change the `{ask}` commands and `{echo}` commands in your code to the correct form that you've learned in this level.
-
-          **Extra** Add a sleep command to your code to build up tension in your story.
-        start_code: '{print} Your story'
-      3:
-        story_text: |
-          In level 3 you can make your story more fun. You can use randomness for any monster, animal or other obstacle, like this:
-        example_code: |
-          ```
-          animals {is} 🦔, 🐿, 🦉, 🦇
-          {print} He now hears the sound of an animals {at} {random}
-          ```
-        story_text_2: |
-          The command `{add}` can also come in handy in your story.
-        example_code_2: |
-          ```
-          {print} He hears a sound
-          animals {is} 🐿, 🦔, 🦇, 🦉
-          animal {is} {ask} What do you think it is?
-          {add} animal {to_list} animals
-          {print} it was an animals {at} {random}
-          ```
-        story_text_3: |
-          This is an example of the `{remove}` command in your story
-
-          ### Exercise
-          Can you use the 3 new commands `{at} {random}` , `{add} {to}` and `{remove} {from}` in your own story?
-        example_code_3: |
-          ```
-          {print} His backpack got way too heavy.
-          {print} Inside were a bottle of water, a flashlight and a brick.
-          bag {is} water, flashlight, brick
-          dump {is} {ask} Which item should he dump?
-          {remove} dump {from} bag
-          ```
-        start_code: '{print} Your story'
-      4:
-        story_text: |
-          You may have noticed that there is still a problem in the previous levels. Did you try to print a sentence that contained the word name? i.e. `{print}` my name is name.
-          You can solve that in this level. You must use quotation marks for everything that you are going to print.
-        example_code: |
-          ```
-          name {is} Hans
-          {print}  _ The name of the main character is _ name
-          {print} name  _ is now going to walk in the woods _
-          {print} name _ is a bit scared _
-          animals {is} 🦔, 🐿, 🦉, 🦇
-          {print} _ He hears the sound of a _ animals {at} {random}
-          {print} name _ is afraid this is a haunted forest _
-          ```
-        start_code: '{print} ''Your story will be printed here!'''
-      5:
-        story_text: |
-          In this level you can program different endings, which will make your story even more fun.
-
-          ### Exercise
-          Think of two endings for your story, for example:
-
-          - The princess is walking through the forest
-          - She runs into a monster
-
-          - Happy ending: She takes her sword and the monster quickly runs away
-          - Bad Ending: The monster eats the princess
-
-          You can also ensure that a name can be entered again. That works just like in the previous levels. You can combine that with an `{if}`, and then you have already made a whole program!
-        example_code: |
-          ```
-          name {is} {ask} 'Who is walking in the forest?'
-          {print} name ' walks through the forest'
-          {print} name ' encounters a monster'
-          end {is} {ask} 'Would you like a good or a bad ending?'
-          {if} end {is} good {print} name ' takes the sword and the monster quickly runs away'
-          {else} {print} 'The monster eats ' name
-          ```
-        start_code: '{print} ''Here your story will start!'''
-      7:
-        story_text: |
-          In a story, someone says words several times. For example, when someone calls for help or sings a song.
-          You can put such repetitions in your story, in this level with `{repeat}`.
-
-          ### Exercise
-          Can you make your own story with repitition?
-        example_code: |
-          ```
-          {print} 'The prince kept calling for help'
-          {repeat} 5 {times} {print} 'Help!'
-          {print} 'Why is nobody helping me?'
-          ```
-        start_code: '{repeat} 5 {times} {print} ''Help!'''
-      8:
-        story_text: |
-          In this level you can use multiple lines in your {if} commands, this way you can upgrade your happy or sad ending!
-
-          ### Exercise
-          Can you make your own story with two different endings?
-        example_code: |
-          ```
-          {print} 'OH NO! The T-rex is closing in!'
-          end = {ask} 'Do you want a happy or a sad ending?'
-          {if} end {is} happy
-              {print} 'Just in time Richard jumps back into the time machine!'
-              {print} 'Michael types in the code and...'
-              {print} '💥ZAP!💥'
-              {print} 'They are back in their garage'
-          {else}
-              {print} 'Michael yells COME ON RICHARD! RUN FASTER!'
-              {print} 'But Richard is too slow...'
-              {print} 'The T-rex closes in and eats him in one big bite!🦖'
-          ```
-        start_code: '# place your code here'
-      9:
-        story_text: |
-          In this level you can use nesting to put `{if}`, `{repeat}` or `{for}` commands inside other `{if}`, `{repeat}` or `{for}` commands. This gives you many options and really helps you to make your story interactive.
-        example_code: |
-          ```
-          {print} 'Robin is walking downtown'
-          location = {ask} 'Is Robin going into a shop, or does she go home?'
-          {if} location {is} shop
-              {print} 'She enters the shop.'
-              {print} 'Robin sees an interesting looking book'
-              book = {ask} 'Does Robin buy the book?'
-              {if} book {is} yes
-                  {print} 'Robin buys the book and goes home'
-              {else}
-                  {print} 'Robin leaves the shop and goes home'
-          {else}
-              {print} 'Robin goes home'
-          ```
-        start_code: '# place your code here'
-      10:
-        story_text: |
-          In this level you can use the {for} command in your story. In this way you could easily program the children's book 'brown bear, brown bear, what do you see'.
-        example_code: |
-          ```
-          animals = red bird, black sheep, green frog, yellow duck, little child
-          {print} 'brown bear'
-          {print} 'brown bear'
-          {print} 'What do you see?'
-          {for} animal {in} animals
-              {print} 'I see a ' animal ' looking at me'
-              {print} animal
-              {print} animal
-              {print} 'What do you see?'
-          {print} 'I see all the animals looking at me!'
-          ```
-        start_code: '# place your code here'
-      12:
-        story_text: In this level you can use the quotation marks to save multiple
-          words in a variable.
-        example_code: |
-          ```
-          name = 'The Queen of England'
-          {print} name ' was eating a piece of cake, when suddenly...'
-          ```
-        start_code: '# place your code here'
-      13:
-        story_text: |
-          By using the `{and}` and `{or}` commands, you can shorten your stories. For example, check out the dragon story.
-
-          ### Exercise
-          Can you make your own adventure minigame like this?
-        example_code: |
-          ```
-          sword = 'lost'
-          game = 'on'
-          {print} 'Our hero is walking through the forest'
-          {print} 'The path splits two ways'
-          {for} i {in} {range} 0 {to} 2
-              {if} game {is} 'on'
-                  path = {ask} 'Which path should she choose?'
-                  {if} path {is} 'left' {and} sword {is} 'found'
-                      {print} 'Our hero comes across a dragon!'
-                      {print} 'Luckily our hero has a sword to defeat the beast!'
-                      game = 'over'
-                  {if} path {is} 'left' {and} sword {is} 'lost'
-                      {print} 'Our hero finds a dragon, but she doesnt have any weapons!'
-                      {print} 'Our hero is beaten by the dragon...'
-                      {print} 'Try again'
-                      game = 'over'
-                  {if} path {is} 'right' {and} sword {is} 'found'
-                      {print} 'You have already found the sword. There is nothing left here.'
-                      {print} 'She walks back'
-                  {if} path {is} 'right' {and} sword {is} 'lost'
-                      {print} 'Our hero finds a sword'
-                      {print} 'This could come in very handy'
-                      sword = 'found'
-          ```
-        start_code: '# place your code here'
-      15:
-        story_text: |
-          Using the `{while}` loop can make your stories more interesting. For example, you can use `{while} game {is} 'on'` so you can play until the game is over.
-          Or you can use `{while} sword {is} 'lost'` so the player can't continu the game until they have found something.
-        example_code: |
-          ```
-          keys = 'lost'
-          {print} 'You are standing in your garden and you have lost your keys.'
-          {print} 'Where do you want to look for them?'
-          {print} 'You can choose: tree, flowerbed, rock, postbox'
-          {while} keys == 'lost'
-              location = {ask} 'Where do you want to look?'
-              {if} location == 'flowerbed'
-                  {print} 'Here they are!'
-                  keys = 'found'
-              {else}
-                  {print} 'Nope they are not at the ' location
-          {print} 'Now you can enter the house!'
-          ```
-        start_code: '# place your code here'
-      18:
-        story_text: |
-          We are going to print another story, but now we have to use brackets with `{print}`.
-
-          ### Exercise 1
-          Create a story of at least 5 sentences. You don't have to use 'name' just yet.
-        example_code: |
-          ```
-          {print}('Welcome to this story!')
-          ```
-        story_text_2: |
-          ### Exercise 2
-          We have already prepared an `{input}` for you. First, use the `name` variable in your story.
-          Then add a second `{ask}` and use that variable as well.
-          Tip: Remember the commas in a `{print}` between text and variables!
-        example_code_2: |
-          ```
-          naam = {input}("What's your name?")
-          {print}('Welcome to this story!')
-          ```
-        start_code: '# Schrijf jouw code hier'
   add_remove_command:
     name: '{add} {to} & {remove} {from}'
     default_save_name: add_remove_command
@@ -3238,6 +2959,285 @@ adventures:
               {for} i {in} {range} 1 {to} 3
                   {print} 'way hay and up she rises'
               {print} 'early in the morning'
+          ```
+        start_code: '# Schrijf jouw code hier'
+  story:
+    name: Story
+    default_save_name: Story
+    description: Story
+    levels:
+      1:
+        story_text: |
+          In level 1 you can make a story with a different main character that you enter yourself.
+
+          In the first line, use `{ask}` and ask who the main character of the story will be.
+
+          After that first line, start with `{print}` if the sentence needs to be printed.
+          You use `{echo}` if you want your main character to be at the end of the sentence.
+        example_code: |
+          ```
+          {ask} The main character of this story is
+          {print} The main character is now going to walk in the forest
+          {echo} He's a bit scared,
+          {print} He hears crazy noises everywhere
+          {print} He's afraid this is a haunted forest
+          ```
+        story_text_2: |
+          ### Exercise
+          Can you make your own story in Hedy now by using `{print}` , `{ask}` and `{echo}`?
+        start_code: '{print} Your story starts here'
+      2:
+        story_text: |
+          In level 2 you can make your story more fun. Your main character's name can now be anywhere in the sentence.
+
+          You do have to program a little bit extra for that. You must now name your main character first.
+
+          You can then put that name anywhere in a sentence.
+
+          ### Exercise
+          Can you make a story using a variable yourself? Can you add even more variables?
+        example_code: |-
+          ```
+          name {is} {ask} What is the name of the main character?
+          {print} name is now going to run in the woods
+          {print} name is a bit scared
+          {print} Suddenly he hears a crazy noise...
+          {sleep}
+          {print} name is afraid this is a haunted forest
+          ```
+        story_text_2: |
+          ### Exercise
+          Now it's time to add variables to your own story that you've made in the previous level.
+          Go to 'My programs', look for your level 1 story adventure and copy the code. Paste the code in your input screen in this level.
+
+          This code won't work in this level, because you have not used variables yet.
+          Change the `{ask}` commands and `{echo}` commands in your code to the correct form that you've learned in this level.
+
+          **Extra** Add a sleep command to your code to build up tension in your story.
+        start_code: '{print} Your story'
+      3:
+        story_text: |
+          In level 3 you can make your story more fun. You can use randomness for any monster, animal or other obstacle, like this:
+        example_code: |
+          ```
+          animals {is} 🦔, 🐿, 🦉, 🦇
+          {print} He now hears the sound of an animals {at} {random}
+          ```
+        story_text_2: |
+          The command `{add}` can also come in handy in your story.
+        example_code_2: |
+          ```
+          {print} He hears a sound
+          animals {is} 🐿, 🦔, 🦇, 🦉
+          animal {is} {ask} What do you think it is?
+          {add} animal {to_list} animals
+          {print} it was an animals {at} {random}
+          ```
+        story_text_3: |
+          This is an example of the `{remove}` command in your story
+
+          ### Exercise
+          Can you use the 3 new commands `{at} {random}` , `{add} {to}` and `{remove} {from}` in your own story?
+        example_code_3: |
+          ```
+          {print} His backpack got way too heavy.
+          {print} Inside were a bottle of water, a flashlight and a brick.
+          bag {is} water, flashlight, brick
+          dump {is} {ask} Which item should he dump?
+          {remove} dump {from} bag
+          ```
+        start_code: '{print} Your story'
+      4:
+        story_text: |
+          You may have noticed that there is still a problem in the previous levels. Did you try to print a sentence that contained the word name? i.e. `{print}` my name is name.
+          You can solve that in this level. You must use quotation marks for everything that you are going to print.
+        example_code: |
+          ```
+          name {is} Hans
+          {print}  _ The name of the main character is _ name
+          {print} name  _ is now going to walk in the woods _
+          {print} name _ is a bit scared _
+          animals {is} 🦔, 🐿, 🦉, 🦇
+          {print} _ He hears the sound of a _ animals {at} {random}
+          {print} name _ is afraid this is a haunted forest _
+          ```
+        start_code: '{print} ''Your story will be printed here!'''
+      5:
+        story_text: |
+          In this level you can program different endings, which will make your story even more fun.
+
+          ### Exercise
+          Think of two endings for your story, for example:
+
+          - The princess is walking through the forest
+          - She runs into a monster
+
+          - Happy ending: She takes her sword and the monster quickly runs away
+          - Bad Ending: The monster eats the princess
+
+          You can also ensure that a name can be entered again. That works just like in the previous levels. You can combine that with an `{if}`, and then you have already made a whole program!
+        example_code: |
+          ```
+          name {is} {ask} 'Who is walking in the forest?'
+          {print} name ' walks through the forest'
+          {print} name ' encounters a monster'
+          end {is} {ask} 'Would you like a good or a bad ending?'
+          {if} end {is} good {print} name ' takes the sword and the monster quickly runs away'
+          {else} {print} 'The monster eats ' name
+          ```
+        start_code: '{print} ''Here your story will start!'''
+      7:
+        story_text: |
+          In a story, someone says words several times. For example, when someone calls for help or sings a song.
+          You can put such repetitions in your story, in this level with `{repeat}`.
+
+          ### Exercise
+          Can you make your own story with repitition?
+        example_code: |
+          ```
+          {print} 'The prince kept calling for help'
+          {repeat} 5 {times} {print} 'Help!'
+          {print} 'Why is nobody helping me?'
+          ```
+        start_code: '{repeat} 5 {times} {print} ''Help!'''
+      8:
+        story_text: |
+          In this level you can use multiple lines in your {if} commands, this way you can upgrade your happy or sad ending!
+
+          ### Exercise
+          Can you make your own story with two different endings?
+        example_code: |
+          ```
+          {print} 'OH NO! The T-rex is closing in!'
+          end = {ask} 'Do you want a happy or a sad ending?'
+          {if} end {is} happy
+              {print} 'Just in time Richard jumps back into the time machine!'
+              {print} 'Michael types in the code and...'
+              {print} '💥ZAP!💥'
+              {print} 'They are back in their garage'
+          {else}
+              {print} 'Michael yells COME ON RICHARD! RUN FASTER!'
+              {print} 'But Richard is too slow...'
+              {print} 'The T-rex closes in and eats him in one big bite!🦖'
+          ```
+        start_code: '# place your code here'
+      9:
+        story_text: |
+          In this level you can use nesting to put `{if}`, `{repeat}` or `{for}` commands inside other `{if}`, `{repeat}` or `{for}` commands. This gives you many options and really helps you to make your story interactive.
+        example_code: |
+          ```
+          {print} 'Robin is walking downtown'
+          location = {ask} 'Is Robin going into a shop, or does she go home?'
+          {if} location {is} shop
+              {print} 'She enters the shop.'
+              {print} 'Robin sees an interesting looking book'
+              book = {ask} 'Does Robin buy the book?'
+              {if} book {is} yes
+                  {print} 'Robin buys the book and goes home'
+              {else}
+                  {print} 'Robin leaves the shop and goes home'
+          {else}
+              {print} 'Robin goes home'
+          ```
+        start_code: '# place your code here'
+      10:
+        story_text: |
+          In this level you can use the {for} command in your story. In this way you could easily program the children's book 'brown bear, brown bear, what do you see'.
+        example_code: |
+          ```
+          animals = red bird, black sheep, green frog, yellow duck, little child
+          {print} 'brown bear'
+          {print} 'brown bear'
+          {print} 'What do you see?'
+          {for} animal {in} animals
+              {print} 'I see a ' animal ' looking at me'
+              {print} animal
+              {print} animal
+              {print} 'What do you see?'
+          {print} 'I see all the animals looking at me!'
+          ```
+        start_code: '# place your code here'
+      12:
+        story_text: In this level you can use the quotation marks to save multiple
+          words in a variable.
+        example_code: |
+          ```
+          name = 'The Queen of England'
+          {print} name ' was eating a piece of cake, when suddenly...'
+          ```
+        start_code: '# place your code here'
+      13:
+        story_text: |
+          By using the `{and}` and `{or}` commands, you can shorten your stories. For example, check out the dragon story.
+
+          ### Exercise
+          Can you make your own adventure minigame like this?
+        example_code: |
+          ```
+          sword = 'lost'
+          game = 'on'
+          {print} 'Our hero is walking through the forest'
+          {print} 'The path splits two ways'
+          {for} i {in} {range} 0 {to} 2
+              {if} game {is} 'on'
+                  path = {ask} 'Which path should she choose?'
+                  {if} path {is} 'left' {and} sword {is} 'found'
+                      {print} 'Our hero comes across a dragon!'
+                      {print} 'Luckily our hero has a sword to defeat the beast!'
+                      game = 'over'
+                  {if} path {is} 'left' {and} sword {is} 'lost'
+                      {print} 'Our hero finds a dragon, but she doesnt have any weapons!'
+                      {print} 'Our hero is beaten by the dragon...'
+                      {print} 'Try again'
+                      game = 'over'
+                  {if} path {is} 'right' {and} sword {is} 'found'
+                      {print} 'You have already found the sword. There is nothing left here.'
+                      {print} 'She walks back'
+                  {if} path {is} 'right' {and} sword {is} 'lost'
+                      {print} 'Our hero finds a sword'
+                      {print} 'This could come in very handy'
+                      sword = 'found'
+          ```
+        start_code: '# place your code here'
+      15:
+        story_text: |
+          Using the `{while}` loop can make your stories more interesting. For example, you can use `{while} game {is} 'on'` so you can play until the game is over.
+          Or you can use `{while} sword {is} 'lost'` so the player can't continu the game until they have found something.
+        example_code: |
+          ```
+          keys = 'lost'
+          {print} 'You are standing in your garden and you have lost your keys.'
+          {print} 'Where do you want to look for them?'
+          {print} 'You can choose: tree, flowerbed, rock, postbox'
+          {while} keys == 'lost'
+              location = {ask} 'Where do you want to look?'
+              {if} location == 'flowerbed'
+                  {print} 'Here they are!'
+                  keys = 'found'
+              {else}
+                  {print} 'Nope they are not at the ' location
+          {print} 'Now you can enter the house!'
+          ```
+        start_code: '# place your code here'
+      18:
+        story_text: |
+          We are going to print another story, but now we have to use brackets with `{print}`.
+
+          ### Exercise 1
+          Create a story of at least 5 sentences. You don't have to use 'name' just yet.
+        example_code: |
+          ```
+          {print}('Welcome to this story!')
+          ```
+        story_text_2: |
+          ### Exercise 2
+          We have already prepared an `{input}` for you. First, use the `name` variable in your story.
+          Then add a second `{ask}` and use that variable as well.
+          Tip: Remember the commas in a `{print}` between text and variables!
+        example_code_2: |
+          ```
+          naam = {input}("What's your name?")
+          {print}('Welcome to this story!')
           ```
         start_code: '# Schrijf jouw code hier'
   tic:

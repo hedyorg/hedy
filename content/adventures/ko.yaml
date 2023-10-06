@@ -1,287 +1,4 @@
 adventures:
-  story:
-    name: 스토리
-    default_save_name: 스토리
-    description: 스토리
-    levels:
-      1:
-        story_text: |
-          In level 1 you can make a story with a different main character that you enter yourself.
-
-          In the first line, use `{ask}` and ask who the main character of the story will be.
-
-          After that first line, start with `{print}` if the sentence needs to be printed.
-          You use `{echo}` if you want your main character to be at the end of the sentence.
-        example_code: |
-          ```
-          {ask} The main character of this story is
-          {print} The main character is now going to walk in the forest
-          {echo} He's a bit scared,
-          {print} He hears crazy noises everywhere
-          {print} He's afraid this is a haunted forest
-          ```
-        story_text_2: |
-          ### 연습문제
-          이제 최소 6줄의 코드로 된 자신만의 이야기를 만들어 보세요.
-          이 스토리는 예제 코드와 같을 수 없습니다.
-          적어도 하나의 `{ask}` 명령과 하나의 `{echo}` 명령을 사용합니다.
-          당신은 당신이 좋아하는 어떤 주제에 대해서도 그것을 만들 수 있다.
-          주제가 생각나지 않는다면, 우리가 선택한 것 중 하나를 이용해 보세요: 영화를 보러 가거나, 스포츠 경기를 하거나, 동물원에서 하루를 보내거나.
-        start_code: '{print} Your story starts here'
-      2:
-        story_text: |
-          In level 2 you can make your story more fun. Your main character's name can now be anywhere in the sentence.
-
-          You do have to program a little bit extra for that. You must now name your main character first.
-
-          You can then put that name anywhere in a sentence.
-        example_code: |-
-          ```
-          name {is} {ask} What is the name of the main character?
-          {print} name is now going to run in the woods
-          {print} name is a bit scared
-          {print} Suddenly he hears a crazy noise...
-          {sleep}
-          {print} name is afraid this is a haunted forest
-          ```
-        story_text_2: |
-          ### 연습문제
-          이제 이전 레벨에서 만들었던 자신의 스토리에 변수를 추가해야 할 때입니다.
-          내 프로그램'으로 이동하여 레벨 1 스토리 모험을 찾아 코드를 복사한다. 이 레벨에서 입력 화면에 코드를 붙여넣는다.
-
-          아직 변수를 사용하지 않았기 때문에 이 레벨에서는 이 코드가 작동하지 않습니다.
-          코드에 있는 `{ask}`명령어와 `{echo}` 명령어를 이 수준에서 배운 올바른 형태로 변경합니다.
-
-          **추가** 코드에 {sleep} 명령을 추가하여 스토리에 긴장감을 조성합니다.
-        start_code: '{print} Your story'
-      3:
-        story_text: |
-          레벨 3 에서 더 재미있게 만들 수 있습니다.괴물, 동물 또는 다른 장애에 대한 랜덤성을 사용할 수 있습니다.
-        example_code: |
-          ```
-          animals {is} 🦔, 🐿, 🦉, 🦇
-          {print} He now hears the sound of an animals {at} {random}
-          ```
-        story_text_2: |
-          `{add}`라는 명령어는 당신의 스토리에도 도움이 될 것이다.
-        example_code_2: |
-          ```
-          {print} He hears a sound
-          animals {is} 🐿, 🦔, 🦇, 🦉
-          animal {is} {ask} What do you think it is?
-          {add} animal {to_list} animals
-          {print} it was a animals {at} {random}
-          ```
-        story_text_3: |
-          This is an example of the `{remove}` command in your story
-
-          ### 연습문제
-          이전 레벨에서 이 레벨로 스토리를 복사합니다.
-          이 레벨에서는 `{at} {random}`, `{add} {to}` 및 `{remove} {from}` 명령 3개를 새로 배웠습니다.
-          스토리에 새 코드 줄을 추가하여 모든 새 명령이 스토리에 한 번 이상 포함되도록 합니다.
-        example_code_3: |
-          ```
-          {print} His backpack got way too heavy.
-          {print} Inside were a bottle of water, a flashlight and a brick.
-          bag {is} water, flashlight, brick
-          dump {is} {ask} Which item should he dump?
-          {remove} dump {from} bag
-          ```
-        start_code: '{print} 너의 스토리'
-      4:
-        story_text: |
-          이전 레벨에서 여전히 문제가 있다는 것을 알아차렸을 수도 있다. 당신은 단어 이름을 포함하는 문장을 인쇄하려고 노력하였는가? 즉, `{print}` 내 이름은 name이다.
-          이 레벨에서 해결할 수 있습니다. 인쇄할 모든 내용에 따옴표를 사용해야 합니다.
-
-          ### 연습문제1
-          예제 코드를 복사한 후 1행과 2행의 빈칸에 따옴표를 붙여서 마무리한다.
-          3번과 4번의 빈칸은 따옴표가 아니라 `{sleep}`과 `{clear}`명령어로 대체해야 하는데, 할 수 있을까요?
-
-          ### 연습문제2
-          이전 레벨로 돌아가서 스토리 코드를 복사하세요. 올바른 자리에 따옴표를 추가하여 코드가 이 레벨에서 작동하도록 하세요.
-          주의: 당신 자신의 스토리에 나오는 변수들은 따옴표 밖에 있어야 한다. 예제 코드의 두 번째 줄처럼. 그 줄에서 변수 이름은 따옴표 밖에 놓여 있다.
-        example_code: |
-          ```
-          name {is} {ask} _ What is your name? _
-          {print}  _ The main character is called _ name
-          _
-          _
-          {print} name  _ is now going to walk in the woods _
-          {print} name _ is a bit scared _
-          animals {is} 🦔, 🐿, 🦉, 🦇
-          {print} _ He hears the sound of a _ animals {at} {random}
-          {print} name _ is afraid this is a haunted forest _
-          ```
-        start_code: '{print} ''너의 스토리는 여기에 출력될거야'''
-      5:
-        story_text: |
-          이 레벨에서 다른 엔딩을 프로그래밍할 수 있으므로 스토리가 더욱 재미있을 것입니다.
-          예제 코드에서 두 가지 다른 엔딩을 만드는 방법을 볼 수 있습니다.
-
-          ### 연습문제 1
-          당신이 선택한 주제에 대해 최소 6줄의 코드로 된 새로운 단편 소설을 쓰시오.
-          영감이 없다고요? 다음 주제들 중 하나를 고르세요: 슈퍼히어로, 지루한 학교생활, 무인도에 발이 묶인 것들.
-
-          이제 예제 코드와 같이 플레이어에게 해피엔드 또는 배드엔드를 선택할 수 있는 변화를 줍니다.
-          양쪽 끝을 모두 프로그래밍합니다.
-
-          ### 연습문제 2
-          자신의 스토리 모험에서 만든 스토리를 이전 레벨에 복사합니다.
-          스토리에 최소한 두 개의 `{if}` 명령과 `{else}` 명령을 추가하는 방법을 찾으십시오.
-          이것은 행복한 결말일 수도 있고 나쁜 결말일 수도 있지만 명령어를 통합하는 다른 방법을 찾을 수도 있습니다.
-        example_code: |
-          ```
-          name {is} {ask} 'Who is walking in the forest?'
-          {print} name 'walks through the forest'
-          {print} name 'encounter a monster'
-          end {is} {ask} 'Would you like a good or a bad ending?'
-          {if} end {is} good {print} name 'takes the sword and the monster quickly runs away'
-          {else} {print} 'The monster eats' name
-          ```
-        start_code: '{print} ''Here your story will start!'''
-      7:
-        story_text: |
-          스토리에서, 어떤 사람은 여러 번 말을 합니다. 예를 들어, 누군가가 도움을 요청하거나 노래를 부를 때 말입니다.
-          이런 반복을 스토리에 넣을 수 있습니다. `{repeat}`과(와) 같은 레벨이다.
-
-          ### 연습문제
-          자신의 스토리를 반복해 보세요. 저장된 프로그램으로 돌아가서 6레벨에서 자신의 이야기 프로그램을 선택하고
-          `{print}`가 포함된 행을 찾아서 반복합니다!
-        example_code: |
-          ```
-          {print} 'The prince kept calling for help'
-          {repeat} 5 {times} {print} 'Help!'
-          {print} 'Why is nobody helping me?'
-          ```
-        start_code: '{repeat} 5 {times} {print} ''Help!'''
-      8:
-        story_text: |
-          이 레벨에서는 `{if}` 명령에 여러 줄을 사용할 수 있으며, 이렇게 하면 해피엔딩이나 새드엔딩을 업그레이드할 수 있습니다!
-
-          ### ### 연습문제 1
-          예제 코드는 두 개의 다른 엔딩을 보여주는데, 하나는 캐릭터가 타임머신에 뛰어드는 것이고, 다른 하나는 그렇지 않은 것이다.
-          빈칸을 한 문장씩 이상 완성하세요.
-          **Extra** 스토리를 길게 만들어 보세요. 스토리에서 무슨 일이 일어날까요? 다른 옵션이 있는 두 번째 `{ask}`를 추가할 수도 있습니다.
-
-          ### ### 연습문제 2
-          저장된 프로그램으로 돌아가서 5단계에서 스토리 프로그램을 선택하세요. 이제 각각 최소 세 줄의 좋은 결말과 나쁜 결말을 쓰세요!
-        example_code: |
-          ```
-          {print} 'OH NO! The T-rex is closing in!'
-          end = {ask} 'Do you want a happy or a sad ending?'
-          {if} end {is} happy
-              {print} 'Just in time Richard jumps back into the time machine!'
-              {print} _
-          {else}
-              {print} 'Oh no! Richard is too slow...'
-              {print} _
-          ```
-        start_code: '# 코드를 여기에 입력하세요'
-      9:
-        story_text: "이 레벨에서는 다른 `{if}` 및 `{repeat}` 명령어 내에서 {if} 및 {repeat} 명령어를 사용할
-          수 있습니다. \n이것은 여러분에게 많은 선택권을 주고 여러분의 이야기를 상호작용적으로 만드는 데 정말로 도움을 줍니다.\n\n
-          ### 연습문제 1\n코드를 완료하여 `{if}`가 올바르게 작동하도록 하십시오.\n\n### 연습문제 2\n로빈이 집에 가는 스토리의
-          부분도 `{if}`와 `{else}`를 붙인다.\n\n### 연습문제 3\n레벨 8 스토리로 돌아가서 다른 `{if}` 안에 최소한
-          두 개의 `{if}`을 사용합니다.\n"
-        example_code: |
-          ```
-          {print} 'Robin is walking downtown'
-          location = {ask} 'Is Robin going into a shop, or does she go home?'
-          {if} location {is} shop
-              {print} 'She enters the shop.'
-              {print} 'Robin sees an interesting looking book'
-              book = {ask} 'Does Robin buy the book?'
-              {if} book {is} yes
-                  {print} 'Robin buys the book and goes home'
-              {else}
-                  {print} 'Robin leaves the shop and goes home'
-          {else}
-              {print} 'Robin goes home'
-          ```
-        start_code: '# 코드를 여기에 입력하세요'
-      10:
-        story_text: |
-          이 레벨에서 스토리에서 {for} 명령을 사용할 수 있다. 이렇게 하면 어린이 책 '갈색 곰, 갈색곰, 무엇이 보이니'를 쉽게 프로그래밍할 수 있다.
-
-          ### 연습 문제
-
-          <a href="https://www.yonkerspublicschools.org/cms/lib/NY01814060/Centricity/Domain/1621/Brown%20Bear%20Book.pdf">스토리</a> 를 보고, 책에서처럼 인쇄되어 있는지 확인한다.
-        example_code: "```\nanimals = _ , _ , _ \n{print} 'Brown bear, Brown bear'\n
-          {print} 'What do you see?'\n```\n"
-        start_code: '# 코드를 여기에 입력하세요'
-      12:
-        story_text: |-
-          이 레벨에서는 변수에 여러 단어를 저장하기 위해 따옴표가 필요할 것입니다.
-
-          ### ### 연습문제
-
-          이전 레벨의 이야기를 찾으세요. 어느 레벨이든 괜찮습니다. 이제 따옴표가 올바른 위치에 추가되었는지 확인하세요.
-        example_code: |
-          ```
-          name = 'The Queen of England'
-          {print} name ' was eating a piece of cake, when suddenly...'
-          ```
-        start_code: '# 코드를 여기에 입력하세요'
-      13:
-        story_text: |
-          `{and}` 명령어와 `{or}` 명령어를 사용하면 자신의 이야기를 보다 다재다능하게 만들 수 있다. 두 가지 질문을 하고 대답의 조합에 응답할 수 있다.
-
-          ### 연습문제 1
-          예제 코드를 보고 끝내라. 그런 다음 `{and}` 또는 `{or}`로 `{if}` 코드를 최소 2개 더 추가한다.
-
-          ### 연습문제 2
-          이전 레벨의 이야기를 찾고 `{and}` 또는 `{or}` 중 하나를 추가한다.
-        example_code: |
-          ```
-          {print} 'Our hero is walking through the forest'
-          {print} 'The path splits two ways'
-          path = {ask} 'Which path should she choose?'
-          weapon = {ask} 'What weapon does she draw?'
-          {if} path {is} 'left' {and} weapon {is} 'sword'
-              _
-          ```
-        start_code: '# 코드를 여기에 입력하세요'
-      15:
-        story_text: |
-          Using the `{while}` loop can make your stories more interesting. For example, you can use `{while} game {is} 'on'` so you can play until the game is over.
-          Or you can use `{while} sword {is} 'lost'` so the player can't continu the game until they have found something.
-        example_code: |
-          ```
-          keys = 'lost'
-          {print} 'You are standing in your garden and you have lost your keys.'
-          {print} 'Where do you want to look for them?'
-          {print} 'You can choose: tree, flowerbed, rock, postbox'
-          {while} keys == 'lost'
-              location = {ask} 'Where do you want to look?'
-              {if} location == 'flowerbed'
-                  {print} 'Here they are!'
-                  keys = 'found'
-              {else}
-                  {print} 'Nope they are not at the ' location
-          {print} 'Now you can enter the house!'
-          ```
-        start_code: '# 코드를 여기에 입력하세요'
-      18:
-        story_text: |
-          다른 이야기를 인쇄할 건데 이제는 `{print}`가 붙은 괄호를 써야 해요.
-
-          ### ### 연습문제 1
-          최소 5문장 이상의 이야기를 만들어 보세요. 아직 '이름'을 사용하지 않아도 됩니다.
-        example_code: |
-          ```
-          {print}('Welcome to this story!')
-          ```
-        story_text_2: |
-          ### 연습문제 2
-          우리는 이미 당신을 위해 `{input}`을 준비했습니다. 먼저 당신의 이야기에 `name` 변수를 사용하세요.
-          그런 다음 두 번째 `{ask}`를 추가하고 그 변수도 사용합니다.
-          팁: 텍스트와 변수 사이의 `{print}`에 있는 쉼표를 기억하세요!
-        example_code_2: |
-          ```
-          naam = {input}("What's your name?")
-          {print}('Welcome to this story!')
-          ```
-        start_code: '# 코드를 여기에 입력하세요'
   add_remove_command:
     name: '{add} {to} & {remove} {from}'
     default_save_name: add_remove_command
@@ -3265,6 +2982,289 @@ adventures:
               {print} 'early in the morning'
           ```
         start_code: '# Schrijf jouw code hier'
+  story:
+    name: 스토리
+    default_save_name: 스토리
+    description: 스토리
+    levels:
+      1:
+        story_text: |
+          In level 1 you can make a story with a different main character that you enter yourself.
+
+          In the first line, use `{ask}` and ask who the main character of the story will be.
+
+          After that first line, start with `{print}` if the sentence needs to be printed.
+          You use `{echo}` if you want your main character to be at the end of the sentence.
+        example_code: |
+          ```
+          {ask} The main character of this story is
+          {print} The main character is now going to walk in the forest
+          {echo} He's a bit scared,
+          {print} He hears crazy noises everywhere
+          {print} He's afraid this is a haunted forest
+          ```
+        story_text_2: |
+          ### 연습문제
+          이제 최소 6줄의 코드로 된 자신만의 이야기를 만들어 보세요.
+          이 스토리는 예제 코드와 같을 수 없습니다.
+          적어도 하나의 `{ask}` 명령과 하나의 `{echo}` 명령을 사용합니다.
+          당신은 당신이 좋아하는 어떤 주제에 대해서도 그것을 만들 수 있다.
+          주제가 생각나지 않는다면, 우리가 선택한 것 중 하나를 이용해 보세요: 영화를 보러 가거나, 스포츠 경기를 하거나, 동물원에서 하루를 보내거나.
+        start_code: '{print} Your story starts here'
+      2:
+        story_text: |
+          In level 2 you can make your story more fun. Your main character's name can now be anywhere in the sentence.
+
+          You do have to program a little bit extra for that. You must now name your main character first.
+
+          You can then put that name anywhere in a sentence.
+        example_code: |-
+          ```
+          name {is} {ask} What is the name of the main character?
+          {print} name is now going to run in the woods
+          {print} name is a bit scared
+          {print} Suddenly he hears a crazy noise...
+          {sleep}
+          {print} name is afraid this is a haunted forest
+          ```
+        story_text_2: |
+          ### 연습문제
+          이제 이전 레벨에서 만들었던 자신의 스토리에 변수를 추가해야 할 때입니다.
+          내 프로그램'으로 이동하여 레벨 1 스토리 모험을 찾아 코드를 복사한다. 이 레벨에서 입력 화면에 코드를 붙여넣는다.
+
+          아직 변수를 사용하지 않았기 때문에 이 레벨에서는 이 코드가 작동하지 않습니다.
+          코드에 있는 `{ask}`명령어와 `{echo}` 명령어를 이 수준에서 배운 올바른 형태로 변경합니다.
+
+          **추가** 코드에 {sleep} 명령을 추가하여 스토리에 긴장감을 조성합니다.
+        start_code: '{print} Your story'
+      3:
+        story_text: |
+          레벨 3 에서 더 재미있게 만들 수 있습니다.괴물, 동물 또는 다른 장애에 대한 랜덤성을 사용할 수 있습니다.
+        example_code: |
+          ```
+          animals {is} 🦔, 🐿, 🦉, 🦇
+          {print} He now hears the sound of an animals {at} {random}
+          ```
+        story_text_2: |
+          `{add}`라는 명령어는 당신의 스토리에도 도움이 될 것이다.
+        example_code_2: |
+          ```
+          {print} He hears a sound
+          animals {is} 🐿, 🦔, 🦇, 🦉
+          animal {is} {ask} What do you think it is?
+          {add} animal {to_list} animals
+          {print} it was a animals {at} {random}
+          ```
+        story_text_3: |
+          This is an example of the `{remove}` command in your story
+
+          ### 연습문제
+          이전 레벨에서 이 레벨로 스토리를 복사합니다.
+          이 레벨에서는 `{at} {random}`, `{add} {to}` 및 `{remove} {from}` 명령 3개를 새로 배웠습니다.
+          스토리에 새 코드 줄을 추가하여 모든 새 명령이 스토리에 한 번 이상 포함되도록 합니다.
+        example_code_3: |
+          ```
+          {print} His backpack got way too heavy.
+          {print} Inside were a bottle of water, a flashlight and a brick.
+          bag {is} water, flashlight, brick
+          dump {is} {ask} Which item should he dump?
+          {remove} dump {from} bag
+          ```
+        start_code: '{print} 너의 스토리'
+      4:
+        story_text: |
+          이전 레벨에서 여전히 문제가 있다는 것을 알아차렸을 수도 있다. 당신은 단어 이름을 포함하는 문장을 인쇄하려고 노력하였는가? 즉, `{print}` 내 이름은 name이다.
+          이 레벨에서 해결할 수 있습니다. 인쇄할 모든 내용에 따옴표를 사용해야 합니다.
+
+          ### 연습문제1
+          예제 코드를 복사한 후 1행과 2행의 빈칸에 따옴표를 붙여서 마무리한다.
+          3번과 4번의 빈칸은 따옴표가 아니라 `{sleep}`과 `{clear}`명령어로 대체해야 하는데, 할 수 있을까요?
+
+          ### 연습문제2
+          이전 레벨로 돌아가서 스토리 코드를 복사하세요. 올바른 자리에 따옴표를 추가하여 코드가 이 레벨에서 작동하도록 하세요.
+          주의: 당신 자신의 스토리에 나오는 변수들은 따옴표 밖에 있어야 한다. 예제 코드의 두 번째 줄처럼. 그 줄에서 변수 이름은 따옴표 밖에 놓여 있다.
+        example_code: |
+          ```
+          name {is} {ask} _ What is your name? _
+          {print}  _ The main character is called _ name
+          _
+          _
+          {print} name  _ is now going to walk in the woods _
+          {print} name _ is a bit scared _
+          animals {is} 🦔, 🐿, 🦉, 🦇
+          {print} _ He hears the sound of a _ animals {at} {random}
+          {print} name _ is afraid this is a haunted forest _
+          ```
+        start_code: '{print} ''너의 스토리는 여기에 출력될거야'''
+      5:
+        story_text: |
+          이 레벨에서 다른 엔딩을 프로그래밍할 수 있으므로 스토리가 더욱 재미있을 것입니다.
+          예제 코드에서 두 가지 다른 엔딩을 만드는 방법을 볼 수 있습니다.
+
+          ### 연습문제 1
+          당신이 선택한 주제에 대해 최소 6줄의 코드로 된 새로운 단편 소설을 쓰시오.
+          영감이 없다고요? 다음 주제들 중 하나를 고르세요: 슈퍼히어로, 지루한 학교생활, 무인도에 발이 묶인 것들.
+
+          이제 예제 코드와 같이 플레이어에게 해피엔드 또는 배드엔드를 선택할 수 있는 변화를 줍니다.
+          양쪽 끝을 모두 프로그래밍합니다.
+
+          ### 연습문제 2
+          자신의 스토리 모험에서 만든 스토리를 이전 레벨에 복사합니다.
+          스토리에 최소한 두 개의 `{if}` 명령과 `{else}` 명령을 추가하는 방법을 찾으십시오.
+          이것은 행복한 결말일 수도 있고 나쁜 결말일 수도 있지만 명령어를 통합하는 다른 방법을 찾을 수도 있습니다.
+        example_code: |
+          ```
+          name {is} {ask} 'Who is walking in the forest?'
+          {print} name 'walks through the forest'
+          {print} name 'encounter a monster'
+          end {is} {ask} 'Would you like a good or a bad ending?'
+          {if} end {is} good {print} name 'takes the sword and the monster quickly runs away'
+          {else} {print} 'The monster eats' name
+          ```
+        start_code: '{print} ''Here your story will start!'''
+      7:
+        story_text: |
+          스토리에서, 어떤 사람은 여러 번 말을 합니다. 예를 들어, 누군가가 도움을 요청하거나 노래를 부를 때 말입니다.
+          이런 반복을 스토리에 넣을 수 있습니다. `{repeat}`과(와) 같은 레벨이다.
+
+          ### 연습문제
+          자신의 스토리를 반복해 보세요. 저장된 프로그램으로 돌아가서 6레벨에서 자신의 이야기 프로그램을 선택하고
+          `{print}`가 포함된 행을 찾아서 반복합니다!
+        example_code: |
+          ```
+          {print} 'The prince kept calling for help'
+          {repeat} 5 {times} {print} 'Help!'
+          {print} 'Why is nobody helping me?'
+          ```
+        start_code: '{repeat} 5 {times} {print} ''Help!'''
+      8:
+        story_text: |
+          이 레벨에서는 `{if}` 명령에 여러 줄을 사용할 수 있으며, 이렇게 하면 해피엔딩이나 새드엔딩을 업그레이드할 수 있습니다!
+
+          ### ### 연습문제 1
+          예제 코드는 두 개의 다른 엔딩을 보여주는데, 하나는 캐릭터가 타임머신에 뛰어드는 것이고, 다른 하나는 그렇지 않은 것이다.
+          빈칸을 한 문장씩 이상 완성하세요.
+          **Extra** 스토리를 길게 만들어 보세요. 스토리에서 무슨 일이 일어날까요? 다른 옵션이 있는 두 번째 `{ask}`를 추가할 수도 있습니다.
+
+          ### ### 연습문제 2
+          저장된 프로그램으로 돌아가서 5단계에서 스토리 프로그램을 선택하세요. 이제 각각 최소 세 줄의 좋은 결말과 나쁜 결말을 쓰세요!
+        example_code: |
+          ```
+          {print} 'OH NO! The T-rex is closing in!'
+          end = {ask} 'Do you want a happy or a sad ending?'
+          {if} end {is} happy
+              {print} 'Just in time Richard jumps back into the time machine!'
+              {print} _
+          {else}
+              {print} 'Oh no! Richard is too slow...'
+              {print} _
+          ```
+        start_code: '# 코드를 여기에 입력하세요'
+      9:
+        story_text: "이 레벨에서는 다른 `{if}` 및 `{repeat}` 명령어 내에서 {if} 및 {repeat} 명령어를 사용할
+          수 있습니다. \n이것은 여러분에게 많은 선택권을 주고 여러분의 이야기를 상호작용적으로 만드는 데 정말로 도움을 줍니다.\n\n
+          ### 연습문제 1\n코드를 완료하여 `{if}`가 올바르게 작동하도록 하십시오.\n\n### 연습문제 2\n로빈이 집에 가는 스토리의
+          부분도 `{if}`와 `{else}`를 붙인다.\n\n### 연습문제 3\n레벨 8 스토리로 돌아가서 다른 `{if}` 안에 최소한
+          두 개의 `{if}`을 사용합니다.\n"
+        example_code: |
+          ```
+          {print} 'Robin is walking downtown'
+          location = {ask} 'Is Robin going into a shop, or does she go home?'
+          {if} location {is} shop
+              {print} 'She enters the shop.'
+              {print} 'Robin sees an interesting looking book'
+              book = {ask} 'Does Robin buy the book?'
+              {if} book {is} yes
+                  {print} 'Robin buys the book and goes home'
+              {else}
+                  {print} 'Robin leaves the shop and goes home'
+          {else}
+              {print} 'Robin goes home'
+          ```
+        start_code: '# 코드를 여기에 입력하세요'
+      10:
+        story_text: |
+          이 레벨에서 스토리에서 {for} 명령을 사용할 수 있다. 이렇게 하면 어린이 책 '갈색 곰, 갈색곰, 무엇이 보이니'를 쉽게 프로그래밍할 수 있다.
+
+          ### 연습 문제
+
+          <a href="https://www.yonkerspublicschools.org/cms/lib/NY01814060/Centricity/Domain/1621/Brown%20Bear%20Book.pdf">스토리</a> 를 보고, 책에서처럼 인쇄되어 있는지 확인한다.
+        example_code: "```\nanimals = _ , _ , _ \n{print} 'Brown bear, Brown bear'\n
+          {print} 'What do you see?'\n```\n"
+        start_code: '# 코드를 여기에 입력하세요'
+      12:
+        story_text: |-
+          이 레벨에서는 변수에 여러 단어를 저장하기 위해 따옴표가 필요할 것입니다.
+
+          ### ### 연습문제
+
+          이전 레벨의 이야기를 찾으세요. 어느 레벨이든 괜찮습니다. 이제 따옴표가 올바른 위치에 추가되었는지 확인하세요.
+        example_code: |
+          ```
+          name = 'The Queen of England'
+          {print} name ' was eating a piece of cake, when suddenly...'
+          ```
+        start_code: '# 코드를 여기에 입력하세요'
+      13:
+        story_text: |
+          `{and}` 명령어와 `{or}` 명령어를 사용하면 자신의 이야기를 보다 다재다능하게 만들 수 있다. 두 가지 질문을 하고 대답의 조합에 응답할 수 있다.
+
+          ### 연습문제 1
+          예제 코드를 보고 끝내라. 그런 다음 `{and}` 또는 `{or}`로 `{if}` 코드를 최소 2개 더 추가한다.
+
+          ### 연습문제 2
+          이전 레벨의 이야기를 찾고 `{and}` 또는 `{or}` 중 하나를 추가한다.
+        example_code: |
+          ```
+          {print} 'Our hero is walking through the forest'
+          {print} 'The path splits two ways'
+          path = {ask} 'Which path should she choose?'
+          weapon = {ask} 'What weapon does she draw?'
+          {if} path {is} 'left' {and} weapon {is} 'sword'
+              _
+          ```
+        start_code: '# 코드를 여기에 입력하세요'
+      15:
+        story_text: |
+          Using the `{while}` loop can make your stories more interesting. For example, you can use `{while} game {is} 'on'` so you can play until the game is over.
+          Or you can use `{while} sword {is} 'lost'` so the player can't continu the game until they have found something.
+        example_code: |
+          ```
+          keys = 'lost'
+          {print} 'You are standing in your garden and you have lost your keys.'
+          {print} 'Where do you want to look for them?'
+          {print} 'You can choose: tree, flowerbed, rock, postbox'
+          {while} keys == 'lost'
+              location = {ask} 'Where do you want to look?'
+              {if} location == 'flowerbed'
+                  {print} 'Here they are!'
+                  keys = 'found'
+              {else}
+                  {print} 'Nope they are not at the ' location
+          {print} 'Now you can enter the house!'
+          ```
+        start_code: '# 코드를 여기에 입력하세요'
+      18:
+        story_text: |
+          다른 이야기를 인쇄할 건데 이제는 `{print}`가 붙은 괄호를 써야 해요.
+
+          ### ### 연습문제 1
+          최소 5문장 이상의 이야기를 만들어 보세요. 아직 '이름'을 사용하지 않아도 됩니다.
+        example_code: |
+          ```
+          {print}('Welcome to this story!')
+          ```
+        story_text_2: |
+          ### 연습문제 2
+          우리는 이미 당신을 위해 `{input}`을 준비했습니다. 먼저 당신의 이야기에 `name` 변수를 사용하세요.
+          그런 다음 두 번째 `{ask}`를 추가하고 그 변수도 사용합니다.
+          팁: 텍스트와 변수 사이의 `{print}`에 있는 쉼표를 기억하세요!
+        example_code_2: |
+          ```
+          naam = {input}("What's your name?")
+          {print}('Welcome to this story!')
+          ```
+        start_code: '# 코드를 여기에 입력하세요'
   tic:
     name: Tic Tac Toe
     default_save_name: Tic
