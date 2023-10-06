@@ -2656,6 +2656,7 @@ def get_terminals():
 
 PARSER_CACHE = {}
 
+
 def _get_parser_cache_directory():
     # TODO we should maybe store this to .test-cache so we can
     # re-use them in github actions caches for faster CI.
@@ -2711,6 +2712,7 @@ def _restore_parser_from_file_if_present(pickle_file):
             except Exception:
                 pass
     return None
+
 
 @lru_cache(maxsize=0 if utils.is_production() else 100)
 def get_parser(level, lang="en", keep_all_tokens=False, skip_faulty=False):
