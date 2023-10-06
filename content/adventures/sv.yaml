@@ -213,7 +213,7 @@ adventures:
                     ### Övning
 
                     Titta på <a href="https://www.yonkerspublicschools.org/cms/lib/NY01814060/Centricity/Domain/1621/Brown%20Bear%20Book.pdf"> berättelsen</a> om du inte känner till den, och se till att den skrivs ut som i boken.
-                example_code: "```\ndjur = _ , _ , _ , _ \n{print} 'Brunbjörn, brunbjörn'\n{print} 'Vad ser du?'\n```\n"
+                example_code: "```\ndjur = _ , _ , _ , _ \n{print} 'Brunbjörn, brunbjörn'\n {print} 'Vad ser du?'\n```\n"
                 start_code: '# placera din kod här'
             12:
                 story_text: |-
@@ -1622,7 +1622,7 @@ adventures:
                 start_code: '# skriv din kod här'
             9:
                 story_text: "På den här nivån kan du använda dig av nästlade satser, vilket gör spökhuset ännu mer interaktivt!\n\n### Övning\nNu är det väldigt svårt att vinna det här spelet; kan du göra det lättare att vinna?\nÄndra din kod så att den bara har en felaktig dörr och två korrekta dörrar\
-                    \ istället för en korrekt dörr och två felaktiga? \nTips: Detta innebär att du ändrar variabeln korrekt_dörr till fel_dörr och byter ut koden `{if}` och `{else}`.\nOch naturligtvis kan du också ändra berättelsen och göra den mer personlig. Ändra monstren eller gör det till en glad\
+                    \ istället för en korrekt dörr och två felaktiga? \nTips: Detta innebär att du ändrar variabeln korrekt_dörr till fel_dörr och byter ut koden `{if}` och `{else}`.\n Och naturligtvis kan du också ändra berättelsen och göra den mer personlig. Ändra monstren eller gör det till en glad\
                     \ spelshow där du får en gåva!\n"
                 example_code: |
                     ```
@@ -2912,7 +2912,7 @@ adventures:
                     Fyll i rätt kod i tomrummen för att se om det är oavgjort.
                 start_code: '{print} ''Välkommen till ditt eget sten, sax, påse!'''
             9:
-                story_text: "På den här nivån kan du programmera hela spelet sten, sax, påse genom att nästla `{if}` -kommandon. \n\n### Övning\nKan du göra klart koden? Programmet behöver berätta vem som har vunnit för varje kombination.\n\n**Extrauppgift** Vill du spela mer än en omgång? Bygg ut koden\
+                story_text: "På den här nivån kan du programmera hela spelet sten, sax, påse genom att nästla `{if}` -kommandon. \n\n### Övning\nKan du göra klart koden? Programmet behöver berätta vem som har vunnit för varje kombination.\n\n **Extrauppgift** Vill du spela mer än en omgång? Bygg ut koden\
                     \ så att du kan spela flera omgångar. Du kan till och med använda en `{ask}` för att fråga användaren hur många rundor hen vill spela.\n"
                 example_code: |
                     ```
@@ -3669,8 +3669,8 @@ adventures:
                     ```
                 start_code: '{print} ''Rita figurer'''
             8:
-                story_text: "Nu när vi kan upprepa flera rader kan vi lättare skapa figurer.\nVi behöver bara ställa in vinkeln en gång och sedan använda den variabeln i `{repeat}`.\n\n### Övning 1\nExempelkoden skapar en kvadrat. Ändra koden så att den skapar en annan figur, till exempel en triangel\
-                    \ eller en sexhörning. \nDetta kräver en ändring av två kodrader.\nTips: En hel cirkel är 360 grader.\n\n### Övning 2\nSkapa nu en ritning som består av minst två polygoner.\n"
+                story_text: "Nu när vi kan upprepa flera rader kan vi lättare skapa figurer.\n Vi behöver bara ställa in vinkeln en gång och sedan använda den variabeln i `{repeat}`.\n\n### Övning 1\nExempelkoden skapar en kvadrat. Ändra koden så att den skapar en annan figur, till exempel en triangel\
+                    \ eller en sexhörning. \nDetta kräver en ändring av två kodrader.\nTips: En hel cirkel är 360 grader.\n \n### Övning 2\nSkapa nu en ritning som består av minst två polygoner.\n"
                 example_code: |
                     ```
                     vinkel = 90
@@ -3709,6 +3709,23 @@ adventures:
                         {color} {black}
                     ```
                 start_code: '# skriv din kod här'
+            10:
+                story_text: |
+                    In this level you can make the turtle draw a figure.
+                    The turtle will travel the distances in the list, one by one, making bigger and bigger steps.
+                    ### Exercise 1
+                    Add a 90 degree turn in the loop, so that a spiral is drawn.
+                    Add at least 5 numbers to the list, so the spiral grows larger.
+                     **(extra)** can you change the spiral into another shape? Experiment with numbers for the turn!
+                    ### Exercise 2
+                    The spiral is drawn outwards, make it go inwards?
+                example_code: |
+                    ```
+                    {turn} 90
+                    distances = 10, 20, 30, 40, 50, 60
+                    {for} distance {in} distances
+                        {forward} distance
+                start_code: '# Write your code here'
     while_command:
         name: '{while}'
         default_save_name: kommandot_så_länge

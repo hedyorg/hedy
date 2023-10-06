@@ -1907,7 +1907,7 @@ adventures:
         description: Maak je eigen programma om woordjes te leren in een vreemde taal
         levels:
             5:
-                story_text: "Maak een programma om woordjes mee te leren in een andere taal.\n\n### Opdracht\nVoeg minstens 3 nieuwe woorden om te leren toe aan het programma.\n**Extra** Je kunt natuurlijk ook een andere taal kiezen dan Frans. Verander de code in de taal die jij graag zou willen leren.\
+                story_text: "Maak een programma om woordjes mee te leren in een andere taal.\n \n### Opdracht\nVoeg minstens 3 nieuwe woorden om te leren toe aan het programma.\n **Extra** Je kunt natuurlijk ook een andere taal kiezen dan Frans. Verander de code in de taal die jij graag zou willen leren.\
                     \ \n"
                 example_code: |
                     ```
@@ -3015,7 +3015,7 @@ adventures:
         description: Maak je eigen spionnencode
         levels:
             12:
-                story_text: "In dit avontuur kun je jouw eigen geheim agent code maken. Maak een bericht dat alleen de juiste agent kan ontcijferen.\nAls je vijand probeert de code te kraken krijgen ze valse informatie om hun tijd te verspillen.\n\n### Opdracht 1\nMaak je eigen code voor jouw geheime\
+                story_text: "In dit avontuur kun je jouw eigen geheim agent code maken. Maak een bericht dat alleen de juiste agent kan ontcijferen.\nAls je vijand probeert de code te kraken krijgen ze valse informatie om hun tijd te verspillen.\n \n### Opdracht 1\nMaak je eigen code voor jouw geheime\
                     \ agent. Laat beiden onderdelen zien aan de echte spion.\n### Opdracht 2\nVoeg nog een derde vraag toe en maak jouw wachtwoord langer met bijv een kledingstuk of een voorwerp!                 \n"
                 example_code: |
                     ```
@@ -3260,8 +3260,8 @@ adventures:
         levels:
             13:
                 story_text: "In dit avontuur kun je het spelletje Boter Kaas en Eieren programmeren. \nJe speelt met twee personen. Kies om de beurt een plekje op het speelbord (1 - 9) waar je jouw teken op wil zetten (x of o). \nDe speler die als eerst 3 op een rij heeft (horizontaal, verticaal of diagonaal)\
-                    \ wint!\n\n### Opdracht 1\nDit spel doet het wel maar er zijn een paar problemen! Je kan zomaar een veld van de andere speler pakken. Kijk eerst met een `{if}` of er wel een punt staat in het gekozen veld. Zo niet, waarschuw de speler dan.\n\n### Opdracht 2\nHet spel kan ook niet zelf\
-                    \ besluiten of er al een winnaar is. Kijk steeds of er al drie dezelfde tekens op een rij zijn en vertel dan wie er gewonnen heeft.\n\n### Opdracht 3 (extra)\nSpelen met een vriend(innet)je kan niet altijd! Programmeer jij een computertegenstander om tegen te spelen?\n"
+                    \ wint!\n\n### Opdracht 1\nDit spel doet het wel maar er zijn een paar problemen! Je kan zomaar een veld van de andere speler pakken. Kijk eerst met een `{if}` of er wel een punt staat in het gekozen veld. Zo niet, waarschuw de speler dan.\n\n ### Opdracht 2\nHet spel kan ook niet\
+                    \ zelf besluiten of er al een winnaar is. Kijk steeds of er al drie dezelfde tekens op een rij zijn en vertel dan wie er gewonnen heeft.\n\n### Opdracht 3 (extra)\nSpelen met een vriend(innet)je kan niet altijd! Programmeer jij een computertegenstander om tegen te spelen?\n"
                 example_code: |
                     ```
                     speler = 'x'
@@ -3644,7 +3644,7 @@ adventures:
                     ```
                 start_code: '{print} ''Figuren tekenen'''
             8:
-                story_text: "Nu we meerdere regels kunnen herhalen, kunnen we makkelijker figuren maken.\nWant we hoeven maar één keer in te stellen wat de hoek is, en die variabele steeds gebruiken in de `{repeat}`.\n\n### Opdracht 1\nDe voorbeeldcode tekent een vierkant. Verander dat in een ander figuur\
+                story_text: "Nu we meerdere regels kunnen herhalen, kunnen we makkelijker figuren maken.\nWant we hoeven maar één keer in te stellen wat de hoek is, en die variabele steeds gebruiken in de `{repeat}`.\n\n### Opdracht 1\n De voorbeeldcode tekent een vierkant. Verander dat in een ander figuur\
                     \ zoals een driehoek of zeshoek. Je moet daarvoor twee regels veranderen!\nTip: een heel rondje is 360 graden.                   \n\n### Opdracht 2\nMaak nu een tekening naar je eigen inzicht, met minstens twee verschillende veelhoeken.\n"
                 example_code: |
                     ```
@@ -3685,6 +3685,23 @@ adventures:
                         {color} {black}
                     ```
                 start_code: '# place your code here'
+            10:
+                story_text: |
+                    In this level you can make the turtle draw a figure.
+                    The turtle will travel the distances in the list, one by one, making bigger and bigger steps.
+                    ### Exercise 1
+                    Add a 90 degree turn in the loop, so that a spiral is drawn.
+                    Add at least 5 numbers to the list, so the spiral grows larger.
+                     **(extra)** can you change the spiral into another shape? Experiment with numbers for the turn!
+                    ### Exercise 2
+                    The spiral is drawn outwards, make it go inwards?
+                example_code: |
+                    ```
+                    {turn} 90
+                    distances = 10, 20, 30, 40, 50, 60
+                    {for} distance {in} distances
+                        {forward} distance
+                start_code: '# Write your code here'
     while_command:
         name: '{while}'
         default_save_name: while_command
