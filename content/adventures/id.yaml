@@ -1247,7 +1247,7 @@ adventures:
                     Pada level-level berikutnya kamu dapat belajar bagaimana membuat mesin peramal kamu sendiri!
                     Di level 1 kamu dapat mudah memulainya dengan meminta Hedy mengenalkan dirinya sebagai peramal dan mengulang jawaban pengguna.
                     Seperti ini:
-                example_code: "```\nprint Halo, aku Hedy sang peramal!\nask Siapa kamu?\n print Ijinkan aku melihat bola kristal ku\nprint Aku lihat... Aku lihat...\n echo Nama kamu adalah \n```\n\nHedy sekarang hanya memberitahukan nama kamu. Dapatkah kamu membuat Hedy dapat memberitahukan hal-hal lain\
+                example_code: "```\nprint Halo, aku Hedy sang peramal!\nask Siapa kamu?\nprint Ijinkan aku melihat bola kristal ku\nprint Aku lihat... Aku lihat...\necho Nama kamu adalah \n```\n\nHedy sekarang hanya memberitahukan nama kamu. Dapatkah kamu membuat Hedy dapat memberitahukan hal-hal lain\
                     \ tentang masa depan kamu?\n\nTentu saja, Hedy bukan peramal yang baik, karena dia hanya bisa mengulang jawaban yang diberikan oleh pengguna!\nLihatlah level 2 dan tingkatkan kemampuan peramal kamu.\n"
                 story_text_2: |
                     ### Exercise
@@ -1336,7 +1336,7 @@ adventures:
                 start_code: print 'Halo, aku Hedy sang peramal!'
             7:
                 story_text: Pada level 6 kamu dapat menggunakan perintah `repeat` untuk membuat mesin kamu meramal beberapa kali
-                example_code: "```\nprint 'Aku Hedy sang peramal!'\nprint 'Kamu dapat bertanya 3 pertanyaan!'\nrepeat 3 times pertanyaan is ask 'Apa yang ingin kamu tahu?'\n jawaban is ya, tidak, mungkin\nrepeat 3 times print 'Bola kristal saya mengatakan... ' jawaban at random\n```\n\nSeperti yang kamu\
+                example_code: "```\nprint 'Aku Hedy sang peramal!'\nprint 'Kamu dapat bertanya 3 pertanyaan!'\nrepeat 3 times pertanyaan is ask 'Apa yang ingin kamu tahu?'\njawaban {is} ya, tidak, mungkin\nrepeat 3 times print 'Bola kristal saya mengatakan... 'jawaban {at} {random}\n```\n\nSeperti yang kamu\
                     \ lihat, pertanyaan-pertanyaan yang diberikan tidak ditampilkan pada contoh. Ini karena variabel 'pertanyaan' telah diulang tiga kali.\nSetiap kali pemain memberikan pertanyaan baru, Hedy menimpa pertanyaan sebelumnya. \nArtinya kamu tidak bisa menanyakan dengan cara seperti ini.\n\
                     \nDengan menggunakan tiga variabel (misal 'pertanyaan1', 'pertanyaan2' dan 'pertanyaan3') kamu dapat memecahkan masalah ini dan menampilkan semua pertanyaan.\nIni berarti kamu hanya dapat menggunakan perintah `repeat` untuk jawaban. Kamu harus menanyakan dan menampilkan semua pertanyaan\
                     \ secara terpisah.\nDapatkah kamu melakukannya?\n\nPada level 7 tampilan perintah `repeat` akan berubah, memungkinkan kamu untuk mengulang beberapa baris sekaligus.\n"
@@ -1348,13 +1348,13 @@ adventures:
                     Pada contoh berikut kamu dapat membuat sang peramal menanyakan 3 pertanyaan dan juga menampilkannya sekaligus!
                 example_code: |
                     ```
-                    print 'Aku Hedy sang peramal!'
-                    print 'Kamu dapat bertanya 3 pertanyaan!'
-                    jawaban is ya, tidak, mungkin
-                    repeat 3 times
-                       pertanyaan is ask 'Apa yang ingin kamu tahu?'
-                       print pertanyaan
-                       print 'Bola kristal saya menyatakan...' jawaban at random
+                    {print} 'Aku Hedy sang peramal!'
+                    {print} 'Kamu dapat bertanya 3 pertanyaan!'
+                    jawaban {is} ya, tidak, mungkin
+                    {repeat} 3 {times}
+                        pertanyaan {is} {ask} 'Apa yang ingin kamu tahu?'
+                        {print} pertanyaan
+                        {print} 'Bola kristal saya menyatakan...' jawaban {at} {random}
                     ```
                 start_code: print 'Halo, aku Hedy sang peramal!'
             10:
@@ -1418,8 +1418,8 @@ adventures:
                     Jika kamu memilih pintu yang benar kamu akan bertahan hidup, tapi kalau tidak seekor monster akan...
 
                     Pada level 1 kita memulai permainan rumah berhantu dengan membuat cerita menyeramkan dan menanyakan monster apa yang pemain akan lihat di rumah berhantu.
-                example_code: "```\nprint Kenapa aku ada disini?\nprint Aku ingat temanku menyarankan untuk tidak ke rumah besar tua itu...\nprint dan tiba-tiba semuanya menjadi gelap.\nprint Tapi bagaimana caranya aku tergeletak di lantai...?\n print Kepalaku sakit seperti telah dipukul dengan tongkat\
-                    \ pemukul basebal!\n print Suara apa itu?\nprint Oh tidak! Aku merasa kalau aku tidak sendiri di rumah ini!\nprint Aku perlu keluar dari sini!\nprint Ada 3 pintu didepanku...\n ask Pintu mana yang harus kupilih?\necho Aku memilih pintu \nprint ...?\n ```\n\nDapatkah kamu menyelesaikan\
+                example_code: "```\nprint Kenapa aku ada disini?\nprint Aku ingat temanku menyarankan untuk tidak ke rumah besar tua itu...\nprint dan tiba-tiba semuanya menjadi gelap.\nprint Tapi bagaimana caranya aku tergeletak di lantai...?\nprint Kepalaku sakit seperti telah dipukul dengan tongkat\
+                    \ pemukul basebal!\nprint Suara apa itu?\nprint Oh tidak! Aku merasa kalau aku tidak sendiri di rumah ini!\nprint Aku perlu keluar dari sini!\nprint Ada 3 pintu didepanku...\n{ask} Pintu mana yang harus kupilih?\necho Aku memilih pintu \nprint ...?\n ```\n\nDapatkah kamu menyelesaikan\
                     \ cerita menyeramkan ini dengan menanyakan monster apa yang akan muncul? Atau membuat cerita rumah berhantu milik kamu sendiri?\n"
                 story_text_2: |
                     ### Exercise
@@ -1512,9 +1512,9 @@ adventures:
                     monster is werewolf, mumi, vampir, zombie
                     pintuterpilih is ask 'Pintu mana yang mau kamu pilih?'
                     print 'Kamu memilih pintu... ' pintuterpilih
-                    pintutepat is pintu at random
+                    pintutepat is pintu {at} {random}
                     if pintuterpilih is pintutepat print 'Bagus! Kamu berhasil kabur!'
-                    else print 'Oh tidak! Kamu dimakan oleh ... ' monster at random
+                    else print 'Oh tidak! Kamu dimakan oleh ... ' monster {at} {random}
                     ```
                 start_code: print 'Kenapa aku ada disini?'
             9:
@@ -1527,13 +1527,13 @@ adventures:
                     monster is zombie, vampir, laba-laba besar
                     repeat 3 times
                         if pemain is hidup
-                            pintubenar is pintu at random
+                            pintubenar is pintu {at} {random}
                             print 'Ada 3 pintu di depan kamu...'
                             pintuterpilih is ask 'Pintu mana yang mau kamu pilih?'
                             if pintuterpilih is pintubenar
                                 print 'Tidak ada monster disini!'
                             else
-                                print 'Kamu dimakan oleh ' monster at random
+                                print 'Kamu dimakan oleh ' monster {at} {random}
                                 pemain is meninggal
                         else
                             print 'PERMAINAN BERAKHIR'
@@ -1554,14 +1554,14 @@ adventures:
                     monster is zombie, vampir, laba-laba besar
                     for i in range 1 to 3
                         if pemain is hidup
-                            pintubenar is pintu at random
+                            pintubenar is pintu {at} {random}
                             print 'Ruangan ' i
                             print 'Ada 3 pintu di depan kamu...'
                             pintuterpilih is ask 'Pintu mana yang mau kamu pilih?'
                             if pintuterpilih is pintubenar
                                 print 'Tidak ada monster disini!'
                             else
-                                print 'Kamu dimakan oleh ' monster at random
+                                print 'Kamu dimakan oleh ' monster {at} {random}
                                 pemain is meninggal
                         else
                             print 'PERMAINAN BERAKHIR'
