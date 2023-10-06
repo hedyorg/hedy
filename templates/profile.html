@@ -59,6 +59,10 @@
                         </select>
                      </div>
                  {% endif %}
+                 <div class="flex flex-row gap-4 items-center border-gray-400 border p-4 rounded-lg">
+                    <input type="checkbox" name="agree_terms" id="agree_terms" required class="" {% if public_settings %}checked{% endif %}>
+                    <label for="agree_terms" class="cursor-pointer w-full">{{_('public_profile_info')}}</label>
+                 </div>
                  <div class="flex flex-row">
                     <button type="submit" class="green-btn">{{_('update_public')}}</button>
                     {% if public_settings %}
@@ -137,10 +141,6 @@
                         <option value="{{ alpha }}" {% if alpha == user_data['country'] %}selected{% endif %}>{{ name }}</option>
                     {% endfor %}
                 </select>
-            </div>
-            <div class="flex flex-row items-center mt-4 gap-4">
-                <input type="checkbox" id="agree_third_party" name="agree_third_party" {% if user_data['third_party'] %}checked{% endif %}>
-                <label class="text-center" for="agree_third_party">{{_('agree_third_party')}}</label>
             </div>
             <div class="mb-4">
                 <button type="submit" class="green-btn mt-4">{{_('update_profile')}}</button>
