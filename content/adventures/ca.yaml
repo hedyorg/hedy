@@ -70,7 +70,7 @@ adventures:
                     animals {is} 🐿, 🦔, 🦇, 🦉
                     animal {is} {ask} Què creus que és?
                     {add} animal {to_list} animals
-                    {print} era un {at} {random}
+                    {print} era un animals {at} {random}
                     ```
                 story_text_3: |
                     Aquest és un exemple de la comanda `{remove}` a la teva història
@@ -133,7 +133,7 @@ adventures:
                     {print} nom ' camina pel bosc'
                     {print} nom ' troba un monstre'
                     final {is} {ask} 'Vols un final bo o dolent?'
-                    {if} final {is} bo {print} nom ' agafa l'espasa i el monstre fuig ràpidament'
+                    {if} final {is} bo {print} nom " agafa l'espasa i el monstre fuig ràpidament"
                     {else} {print} 'El monstre menja ' nom ' per sopar'
                     ```
                 start_code: '{print} ''Aquí comença la teva història! '''
