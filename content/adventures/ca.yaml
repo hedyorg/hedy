@@ -6,138 +6,152 @@ adventures:
         levels:
             1:
                 story_text: |
-                    In level 1 you can make a story with a different main character that you enter yourself.
+                    Al nivell 1 pots fer una història amb un protagonista diferent cada vegada a la teva elecció.
 
-                    In the first line, use `{ask}` and ask who the main character of the story will be.
+                    A la primera línia, utilitza `{ask}` per preguntar qui serà el protagonista de la història.
 
-                    After that first line, start with `{print}` if the sentence needs to be printed.
-                    You use `{echo}` if you want your main character to be at the end of the sentence.
+                    Després d'aquesta primera línia, comença amb `{print}` quan calgui imprimir la frase.
+                    Feu servir `{echo}` quan vulguis que el nom del protagonista estigui al final de la frase.
                 example_code: |
                     ```
-                    {ask} The main character of this story is
-                    {print} The main character is now going to walk in the forest
-                    {echo} He's a bit scared,
-                    {print} He hears crazy noises everywhere
-                    {print} He's afraid this is a haunted forest
+                    {ask} El protagonista de l'història és...
+                    {print} El protagonista ha anat a fer un tomb al bosc
+                    {echo} Està una mica espantat,
+                    {print} Sent sorolls extranys per tot arreu
+                    {print} Li fa por que estigui a un bosc encantat
                     ```
                 story_text_2: |
-                    ### Exercise
-                    Can you make your own story in Hedy now by using `{print}` , `{ask}` and `{echo}`?
-                start_code: '{print} Your story starts here'
+                    ### Exercici
+                    Ara crea la teva pròpia història d'almenys 6 línies de codi.
+                    Aquesta història no pot ser la mateixa que el codi d'exemple.
+                    Utilitzeu almenys una ordre `{ask}` i una `{echo}`.
+                    Podeu fer-ho sobre qualsevol tema que us agradi.
+                    Si no se t'acut un tema, pots fes servir una de les nostres opcions: anar al cinema, un partit esportiu o un dia al zoo.
+                start_code: '{print} La teva història comença aquí'
             2:
                 story_text: |
-                    In level 2 you can make your story more fun. Your main character's name can now be anywhere in the sentence.
+                    Al nivell 2 pots fer que la teva història sigui més divertida. El nom del teu protagonista ara pot estar en qualsevol part de la frase.
 
-                    You do have to program a little bit extra for that. You must now name your main character first.
+                    Hauràs de programar una mica més per fer-ho. Primer has de posar primer nom al teu protagonista.
 
-                    You can then put that name anywhere in a sentence.
-
-                    ### Exercise
-                    Can you make a story using a variable yourself? Can you add even more variables?
+                    A continuació, pots posar aquest nom a qualsevol part d'una frase.
                 example_code: |-
                     ```
-                    name {is} {ask} What is the name of the main character?
-                    {print} name is now going to run in the woods
-                    {print} name is a bit scared
-                    {print} Suddenly he hears a crazy noise...
+                    nom {is} {ask} Quin és el nom del protagonista?
+                    {print} nom s'en va a correr pel bosc
+                    {print} nom està una mica espantat
+                    {print} De sobte sent un soroll extrany...
                     {sleep}
-                    {print} name is afraid this is a haunted forest
+                    {print} nom li fa por que estigui en un bosc encantat
                     ```
                 story_text_2: |
-                    ### Exercise
-                    Now it's time to add variables to your own story that you've made in the previous level.
-                    Go to 'My programs', look for your level 1 story adventure and copy the code. Paste the code in your input screen in this level.
+                    ### Exercici
+                    Ara és el moment d'afegir variables a la història que has fet al nivell anterior.
+                    Ves a "Els meus programes", busca la teva aventura d'història de nivell 1 i copia'n el codi. Enganxa'l la pantalla d'entrada en aquest nivell.
 
-                    This code won't work in this level, because you have not used variables yet.
-                    Change the `{ask}` commands and `{echo}` commands in your code to the correct form that you've learned in this level.
+                    Aquest codi no funcionarà en aquest nivell, perquè encara no has utilitzat variables.
+                    Canvia les ordres `{ask}` i les ordres `{echo}` del teu codi a la forma correcta que heu après en aquest nivell.
 
-                    **Extra** Add a sleep command to your code to build up tension in your story.
+                    **Extra** Afegeix una ordre `{sleep}` al teu codi per afegir tensió a la teva història.
                 start_code: '{print} La teva història'
             3:
                 story_text: |
-                    In level 3 you can make your story more fun. You can use randomness for any monster, animal or other obstacle, like this:
+                    Al nivell 3 pots fer que la teva història sigui més divertida. Podeu utilitzar l'aleatorietat per a qualsevol monstre, animal o altre obstacle, com aquí:
                 example_code: |
                     ```
                     animals {is} 🦔, 🐿, 🦉, 🦇
-                    {print} He now hears the sound of an animals {at} {random}
+                    {print} De cop sent el soroll de un animals {at} {random}
                     ```
                 story_text_2: |
-                    The command `{add}` can also come in handy in your story.
+                    La comanda  `{add}` també pot ser útil a la vostra història.
                 example_code_2: |
                     ```
-                    {print} He hears a sound
+                    {print} De cop se sent un soroll.
                     animals {is} 🐿, 🦔, 🦇, 🦉
-                    animal {is} {ask} What do you think it is?
+                    animal {is} {ask} Què creus que és?
                     {add} animal {to_list} animals
-                    {print} it was an animals {at} {random}
+                    {print} era un animals {at} {random}
                     ```
                 story_text_3: |
-                    This is an example of the `{remove}` command in your story
+                    Aquest és un exemple de la comanda `{remove}` a la teva història
 
-                    ### Exercise
-                    Can you use the 3 new commands `{at} {random}` , `{add} {to}` and `{remove} {from}` in your own story?
+                    ### Exercici
+                    Copia la teva història dels nivells anteriors a aquest nivell.
+                    En aquest nivell has après 3 noves comandes: `{at} {random}`, `{add} {to}` i `{remove} {from}`.
+                    Afegeix noves línies de codi a la vostra història, de manera que totes les comandes noves hi apareguin almenys una vegada.
                 example_code_3: |
                     ```
-                    {print} His backpack got way too heavy.
-                    {print} Inside were a bottle of water, a flashlight and a brick.
-                    bag {is} water, flashlight, brick
-                    dump {is} {ask} Which item should he dump?
-                    {remove} dump {from} bag
+                    {print} La seva motxilla es va fer massa pesada.
+                    {print} A dins hi havia una ampolla d'aigua, una llanterna i un maó.
+                    bossa {is} aigua, llanterna, maó
+                    tirar {is} {ask} Quin element hauria de tirar?
+                    {remove} tirar {from} bossa
                     ```
                 start_code: '{print} La teva història'
             4:
                 story_text: |
-                    You may have noticed that there is still a problem in the previous levels. Did you try to print a sentence that contained the word name? i.e. `{print}` my name is name.
-                    You can solve that in this level. You must use quotation marks for everything that you are going to print.
+                    Potser has notat que hi ha un problema als nivells anteriors. Has intentat imprimir una frase que contingui la paraula nom? Per exemple, `{print}` el meu nom és nom.
+                    Pots resoldre-ho en aquest nivell. Has d'utilitzar cometes per a tot el que vulguis imprimir.
+
+                    ### Exercici
+                    Copia el codi d'exemple i acaba'l afegint cometes als espais en blanc de les línies 1 i 2.
+                    Els espais en blanc de la línia 3 i 4 no s'han de substituir per cometes, sinó per una comanda `{sleep}` i una comanda `{clear}`. Pots fer-ho funcionar?
+
+                    ### Exercici 2
+                    Torna als nivells anteriors i copia el teu codi de la història. Fes funcionar el codi en aquest nivell afegint cometes als llocs adequats.
+                    Recorda: Les variables de la teva pròpia història han d'estar fora de les cometes. Igual que a la segona línia de l'exemple de codi. En aquesta línia, la variable nom es col·loca fora de les cometes.
                 example_code: |
-                    ```
-                    name {is} Hans
-                    {print}  _ The name of the main character is _ name
-                    {print} name  _ is now going to walk in the woods _
-                    {print} name _ is a bit scared _
+                    nom {is} {ask} _ Com et dius? _
+                    {print}  _ El protagonista es diu _ nom
+                    _
+                    _
+                    {print} nom  _ ha anat a fer un tomb al bosc _
+                    {print} nom_ està una mica espantat _
                     animals {is} 🦔, 🐿, 🦉, 🦇
-                    {print} _ He hears the sound of a _ animals {at} {random}
-                    {print} name _ is afraid this is a haunted forest _
-                    ```
-                start_code: '{print} ''Your story will be printed here!'''
+                    {print} _ Sent el so de _ animals {at} {random}
+                    {print} name _ li fa por que estigui en un bosc encantat _
+                start_code: '{print} ''La teva història es mostrarà aquí!'''
             5:
                 story_text: |
-                    In this level you can program different endings, which will make your story even more fun.
+                    En aquest nivell, pots programar diferents finals, cosa que farà que la teva història sigui encara més divertida.
+                    En el codi d'exemple pots veure com es programen 2 finals diferents.
 
-                    ### Exercise
-                    Think of two endings for your story, for example:
+                    ### Exercici 1
+                    Escriu una nova història curta de com a mínim 6 línies de codi sobre un tema triat per tu.
+                    No estàs inspirat? Tria un dels temes següents: un superheroi, un dia avorrit a l'escola, naufragar en una illa deserta.
 
-                    - The princess is walking through the forest
-                    - She runs into a monster
+                    Ara, dona l'opció al jugador de triar un final feliç o dolent, com en el codi d'exemple.
+                    Programa ambdós finals.
 
-                    - Happy ending: She takes her sword and the monster quickly runs away
-                    - Bad Ending: The monster eats the princess
-
-                    You can also ensure that a name can be entered again. That works just like in the previous levels. You can combine that with an `{if}`, and then you have already made a whole program!
+                    ### Exercici 2
+                    Copia la teva història creada en la teva pròpia aventura d'història dels nivells anteriors.
+                    Troba una manera d'afegir com a mínim 2 comandes d'`{if}` i `{else}` a la teva història.
+                    Això pot ser amb un final feliç o dolent, però també pots provar d'utilitzar altres maneres d'incorporar les comandes.
                 example_code: |
                     ```
-                    name {is} {ask} 'Who is walking in the forest?'
-                    {print} name ' walks through the forest'
-                    {print} name ' encounters a monster'
-                    end {is} {ask} 'Would you like a good or a bad ending?'
-                    {if} end {is} good {print} name ' takes the sword and the monster quickly runs away'
-                    {else} {print} 'The monster eats ' name
+                    nom {is} {ask} 'Qui camina pel bosc?'
+                    {print} nom ' camina pel bosc'
+                    {print} nom ' troba un monstre'
+                    final {is} {ask} 'Vols un final bo o dolent?'
+                    {if} final {is} bo {print} nom " agafa l'espasa i el monstre fuig ràpidament"
+                    {else} {print} 'El monstre menja ' nom ' per sopar'
                     ```
-                start_code: '{print} ''Here your story will start!'''
+                start_code: '{print} ''Aquí comença la teva història! '''
             7:
                 story_text: |
-                    In a story, someone says words several times. For example, when someone calls for help or sings a song.
-                    You can put such repetitions in your story, in this level with `{repeat}`.
+                    En una història, sovint es repeteixen paraules diverses vegades. Per exemple, quan algú demana ajuda o canta una cançó.
+                    En aquest nivell, pots crear aquestes repeticions amb `{repeat}`.
 
-                    ### Exercise
-                    Can you make your own story with repitition?
+                    ### Exercici
+                    Afegeix una repetició a la vostra pròpia història. Torna als teus programes desats, tria el teu programa d'història del nivell 6 i
+                    quan trobis una línia que contingui `{print}` i repeteix-la!
                 example_code: |
                     ```
-                    {print} 'The prince kept calling for help'
-                    {repeat} 5 {times} {print} 'Help!'
-                    {print} 'Why is nobody helping me?'
+                    {print} "El príncep no parava de demanar ajuda"
+                    {repeat} 5 {times} {print} "Ajuda!"
+                    {print} "Per què ningú m'ajuda?"
                     ```
-                start_code: '{repeat} 5 {times} {print} ''Help!'''
+                start_code: '{repeat} 5 {times} {print} ''Ajuda!'''
             8:
                 story_text: |
                     In this level you can use multiple lines in your {if} commands, this way you can upgrade your happy or sad ending!
@@ -610,12 +624,11 @@ adventures:
                     ```
                 start_code: '# place your code here'
             13:
-                story_text: |4
-
+                story_text: |
                     ### Exercise 1
                     Let's make the practice program a bit harder. The player now has to answers two questions correctly. Fill out the blanks to complete the program.
 
-                    ### Exercise 2 (extra)
+                    ### Exercise 2 Extra
                     Sometimes, calculations have multiple correct answers. For example, 10 can be divided by 5 and by 2. So the question 'What number divides 10?' can be answered by 2 and by 5.
                     Ask for a calculation that has multiple correct answers, ask the player to answer it, and determine if it is correct using `{or}`.
                     Empty the programming field and create your own solution.
@@ -769,7 +782,7 @@ adventures:
                     {print} El meu nom és nom
             5:
                 story_text: |
-                    Als nivells anteriors has après a fer servir `{at} {random}` que fia que els jocs fossin diferents a cada execució.
+                    Als nivells anteriors has après a fer servir `{at} {random}` que feia que els jocs fossin diferents a cada execució.
                     Però realment no era interactiu, el jugador no tenia cap influència amb el que passava al joc.
 
                     En aquest nivell aprendràs la comanda `{if}`, que et permet donar respostes diferents. D'aquesta manera per exemple podràs programar una contrasenya secreta pel teu ordinador.
@@ -792,7 +805,7 @@ adventures:
                     Descobreix-ho tu mateix!
                 example_code: |
                     ```
-                    preu_menjar{is} 0
+                    preu_menjar {is} 0
                     preu_beguda {is} 0
                     preu_total {is} 0
                     {print} 'Benvinguts a McHedy'
@@ -808,10 +821,10 @@ adventures:
                 start_code: '# situa el teu codi aquí'
             7:
                 story_text: |
-                    Bona feina! Has superat el nivell. Significa que has practicat amb les comandes `{if}` i `{else}`. Probablement hauràs notat que el teu codi és cada vegada més llarg.
-                    Per exemple si vols programar el 'Per molts anys'.
+                    Bona feina! Has superat el nivell. Significa que has practicat amb les comandes `{if}` i `{else}`. Probablement, hauràs notat que el teu codi és cada vegada més llarg.
+                    Per exemple quan vols programar la cançó de 'Moltes felicitats'.
 
-                    Allà hi ha molt de codi on repetim les mateixes paraules una vegada i una altra. Per sort a la següent pestanya aprendràs una solució amb la comanda `{repeat}`. La comanda et permet repetir una línia de codi moltes vegades.
+                    Hi ha molt de codi on repetim les mateixes paraules una vegada i una altra. Per sort a la següent pestanya aprendràs una solució amb la comanda `{repeat}`. La comanda et permet repetir una línia de codi moltes vegades.
                 example_code: |
                     ```
                     {print} 'moltes felicitats'
@@ -841,7 +854,7 @@ adventures:
                     ```
                     resposta = {ask} 'Estàs llest per aprendre una cosa nova?'
                     {if} resposta {is} si
-                    {print} 'Perfecte!, pots aprendre a fer servir la comanda repeteix dins d'un si!'
+                    {print} 'Genial!, pots aprendre a fer servir la comanda repeteix dins la comanda si!'
                         {print} 'Hurra!'
                         {print} 'Hurra!'
                         {print} 'Hurra!'
@@ -891,7 +904,7 @@ adventures:
                     Comprova-ho!
                 example_code: |
                     ```
-                    usuari = {ask} 'Quin és el teu nom d'usuari?'
+                    usuari = {ask} 'Quin és el teu usuari?'
                     contrassenya = {ask} 'Quina és la teva contrassenya?'
                     {if} usuari {is} 'Hedy'
                         {if} contrassenya {is} 'secreta'
@@ -914,9 +927,9 @@ adventures:
                     suma = primera_nota + segona_nota
                     mitjana_nota = suma / 2
                     {if} mitjana_nota = 0 {or} mitjana_nota = 1 {or} mitjana_nota = 2 {or} mitjana_nota = 3 {or} mitjana_nota = 4
-                        {print} 'Oh no! Has suspés l'assignatura...'
+                        {print} 'Oh no! Has suspés....'
                     {else}
-                        {print} 'Perfecte! Has aprovat l'assignatura!'
+                        {print} 'Perfecte! Has aprovat!'
                     ```
                 start_code: |
                     resposta = {ask} 'Vols aprendre més?'
@@ -1039,8 +1052,7 @@ adventures:
                     {if} throw {is} earthworm points = points + 5 {else} points = points + throw
                     {print} 'those are' points ' point'
                     ```
-                example_code_2: |4
-
+                example_code_2: |
                     Did you manage to calculate the score for 8 dice? That required a lot of cutting and pasting, right? We are going to make that easier in level 7!
                 start_code: '{print} ''What will the die indicate this time?'''
             7:
@@ -1289,9 +1301,7 @@ adventures:
                 story_text: |
                     In the previous levels you've created your first fortune telling machine, but Hedy couldn't really predict anything, only {echo}.
                     In this level you can use a variable and the `{at} {random}` command to really let Hedy choose an answer for you. Check out this code for instance:
-                example_code: |4
-
-                    In this example the player can {ask} Hedy a yes-no question and Hedy will pick a random answer for you.
+                example_code: |
                     ```
                     {print} I’m Hedy the fortune teller!
                     question {is} {ask} What do you want to know?
@@ -2185,7 +2195,7 @@ adventures:
             18:
                 story_text: |-
                     Hem arribat al codi Python real! Això vol dir que hem d'utilitzar parèntesis amb `{print}` i `{range}` d'ara endavant.
-                    Això també significa que podeu utilitzar a partir d'aquest nivell el codi d'Hedy en qualsevol entorn Python sempre que utilitzeu les comandes angleses. Si no has fet encara, pots canviar-ho la pestanya del menú de comandes per fer-ho.
+                    Això també significa que podeu utilitzar a partir d'aquest nivell el codi d'Hedy en qualsevol entorn Python sempre que utilitzeu les comandes angleses. Si no has fet encara, pots canviar-ho la pestanya del menú de comandes.
                 example_code: |
                     ```
                     {print}('Hola!')
@@ -2263,9 +2273,9 @@ adventures:
                     Check out the example code to see the wrong way of using apostrophes.
                 example_code_2: |
                     ```
-                    _ This is the wrong way of using apostrophes _
-                    {print} 'I'm babysitting my sister's kids'
-                    {print} 'What's more fun than that?'
+                    _ Aquesta és la manera incorrecta d'apostrofar _
+                    {print} 'Amb l'Anna hem d'anar a fer de cangur als meus nebots'
+                    {print} 'M'encanta! la meva germana n'estarà orgullosa'
                     ```
                 start_code: |-
                     {print} 'You need to use quotation marks from now on!'
@@ -2476,8 +2486,8 @@ adventures:
         description: Create your own virtual restaurant
         levels:
             1:
-                story_text: |4
-                     In level 1 you can make your own virtual restaurant and take your guests' orders.
+                story_text: |
+                    In level 1 you can make your own virtual restaurant and take your guests' orders.
                 example_code: |
                     ```
                     {print} Welcome to Hedy's restaurant 🍟
@@ -2585,11 +2595,10 @@ adventures:
             6:
                 story_text: |
                     In this level you can use maths to calculate the total price of your customer's order, which can make your virtual restaurant more realistic.
-                example_code: |4
-
+                example_code: |
                     You can make a simple restaurant code, like this:
                     ```
-                    {print} 'Welcome to Hedys restaurant'
+                    {print} 'Welcome to Restaurant Chez Hedy'
                     {print} 'Here is our menu:'
                     {print} 'Our main courses are pizza, lasagne, or spaghetti'
                     main = {ask} 'Which main course would you like?'
@@ -2806,11 +2815,11 @@ adventures:
                     ```
                 start_code: '# place your code here'
             3:
-                story_text: |4
+                story_text: |
+                    You can use the `{at} {random}` command to let the computer pick rock, paper or scissors!
 
-                    In this level we can enter lists and choose things from them.
-                    You first make a list with `{is}`. Then you can let the computer choose something from the list with `{at} {random}`.
-                    For example, you can let the computer pick from rock, paper and scissors.
+                    ### Exercise
+                    Finish the code by using the `{at} {random}` command.
                 example_code: |
                     ```
                     choices {is} rock, paper, scissors
