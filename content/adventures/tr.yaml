@@ -742,7 +742,7 @@ adventures:
                     Programlama alanının altındaki yeşil 'Kodu çalıştır' düğmesini kullanarak kodu kendiniz deneyin.
 
                     Hazır mısınız? O zaman ilk komutunuzu öğrenmek için bir sonraki sekmeye gidin!
-                start_code: '`{print}` Merhaba Dünya!'
+                start_code: '{print} Merhaba Dünya!'
             2:
                 story_text: |
                     Tebrikler! Seviye 2'ye ulaştınız. Umarım şimdiden bazı harika kodlar yapmışsınızdır!
@@ -827,7 +827,7 @@ adventures:
                     {if} sipariş {is} kızartma yemek_ücreti {is} 2
                     içecek {is} {ask} 'Ne içmek istersiniz?'
                     {if} içecek {is} su içecek_ücreti {is} 0
-                    değilse içecek_ücreti {is} 3
+                    {else} içecek_ücreti {is} 3
                     toplam_ücret {is} yemek_ücreti + içecek_ücreti
                     {print} 'Toplamda 'toplam_ücret ' lira ödeyin, lütfen'
                     ```
