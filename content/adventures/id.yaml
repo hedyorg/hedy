@@ -734,9 +734,9 @@ adventures:
                     ```
                 start_code: '{print} ''Halo dunia'''
             5:
-                story_text: "Perintah `ask` dan `print` tetap sama seperti pada level 4.\n\nPada level 5, ada hal baru, `if`! Dengan `if` kamu bisa memilih antara dua pilihan.\n\n```\nnama is ask 'siapa nama kamu?'\nif nama is Hedy print 'keren' else print 'boo'\n```\n\nKode ini menampilkan keren jika\
+                story_text: "Perintah `ask` dan `print` tetap sama seperti pada level 4.\n \nPada level 5, ada hal baru, `if`! Dengan `if` kamu bisa memilih antara dua pilihan.\n\n```\nnama is ask 'siapa nama kamu?'\nif nama is Hedy print 'keren' else print 'boo'\n```\n\nKode ini menampilkan keren jika\
                     \ kamu memasukkan Hedy sebagai nama, dan boo jika kamu memasukkan yang lain.\n\nTerkadang kode dengan `if` bisa menjadi sangat panjang dan tidak cukup menggunakan satu baris <br> \nKamu dapat memisah kodenya menjadi dua baris; baris kedua dimulai dengan `else` seperti ini:\n```\nnama\
-                    \ is ask 'siapa nama kamu?'\nif nama is Hedy print 'keren' \nelse print 'boo'\n```\n\n\nPada level 5, tugas-tugas yang ada pada tab-tab terlampir akan menjadi makin kompleks semakin posisi tabnya ke kanan. Jadi, pastikan untuk mengerjakan mulai dari kiri ke kanan."
+                    \ is ask 'siapa nama kamu?'\n if nama is Hedy print 'keren' \nelse print 'boo'\n```\n\n\nPada level 5, tugas-tugas yang ada pada tab-tab terlampir akan menjadi makin kompleks semakin posisi tabnya ke kanan. Jadi, pastikan untuk mengerjakan mulai dari kiri ke kanan."
                 example_code: |
                     ```
                     name {is} {ask} 'what is your name?'
@@ -783,7 +783,7 @@ adventures:
                     ```
                 start_code: repeat 3 times print 'Hedy itu menyenangkan!'
             8:
-                story_text: "`ask` dan `print` tetap berfungsi sama seperti sebelumnya. Tapi `if` dan `repeat` berubah. \nKamu sekarang dapat mengeksekusi kumpulan kode secara bersamaan, tapi kamu harus memberikan indentasi pada kode tersebut.\nIndentasi berarti memberikan empat spasi diawal baris. Ini\
+                story_text: "`ask` dan `print` tetap berfungsi sama seperti sebelumnya. Tapi `if` dan `repeat` berubah. \nKamu sekarang dapat mengeksekusi kumpulan kode secara bersamaan, tapi kamu harus memberikan indentasi pada kode tersebut.\n Indentasi berarti memberikan empat spasi diawal baris. Ini\
                     \ juga berlaku ketika kamu hanya mau mengeksekusi satu baris kode saja.\n\n```\nrepeat 5 times\n    print 'halo semua'\n    print 'Ini akan ditampilkan lima kali'\n```"
                 example_code: |
                     Ini adalah cara perintah `{repeat}` bekerja:
@@ -1336,8 +1336,8 @@ adventures:
                 start_code: print 'Halo, aku Hedy sang peramal!'
             7:
                 story_text: Pada level 6 kamu dapat menggunakan perintah `repeat` untuk membuat mesin kamu meramal beberapa kali
-                example_code: "```\nprint 'Aku Hedy sang peramal!'\nprint 'Kamu dapat bertanya 3 pertanyaan!'\nrepeat 3 times pertanyaan is ask 'Apa yang ingin kamu tahu?'\njawaban is ya, tidak, mungkin\nrepeat 3 times print 'Bola kristal saya mengatakan... ' jawaban at random\n```\n\nSeperti yang kamu\
-                    \ lihat, pertanyaan-pertanyaan yang diberikan tidak ditampilkan pada contoh. Ini karena variabel 'pertanyaan' telah diulang tiga kali.\nSetiap kali pemain memberikan pertanyaan baru, Hedy menimpa pertanyaan sebelumnya. \nArtinya kamu tidak bisa menanyakan dengan cara seperti ini.\n\
+                example_code: "```\nprint 'Aku Hedy sang peramal!'\nprint 'Kamu dapat bertanya 3 pertanyaan!'\nrepeat 3 times pertanyaan is ask 'Apa yang ingin kamu tahu?'\njawaban {is} ya, tidak, mungkin\nrepeat 3 times print 'Bola kristal saya mengatakan... 'jawaban {at} {random}\n```\n\nSeperti yang\
+                    \ kamu lihat, pertanyaan-pertanyaan yang diberikan tidak ditampilkan pada contoh. Ini karena variabel 'pertanyaan' telah diulang tiga kali.\nSetiap kali pemain memberikan pertanyaan baru, Hedy menimpa pertanyaan sebelumnya. \nArtinya kamu tidak bisa menanyakan dengan cara seperti ini.\n\
                     \nDengan menggunakan tiga variabel (misal 'pertanyaan1', 'pertanyaan2' dan 'pertanyaan3') kamu dapat memecahkan masalah ini dan menampilkan semua pertanyaan.\nIni berarti kamu hanya dapat menggunakan perintah `repeat` untuk jawaban. Kamu harus menanyakan dan menampilkan semua pertanyaan\
                     \ secara terpisah.\nDapatkah kamu melakukannya?\n\nPada level 7 tampilan perintah `repeat` akan berubah, memungkinkan kamu untuk mengulang beberapa baris sekaligus.\n"
                 start_code: print 'Halo, aku Hedy sang peramal!'
@@ -1348,13 +1348,13 @@ adventures:
                     Pada contoh berikut kamu dapat membuat sang peramal menanyakan 3 pertanyaan dan juga menampilkannya sekaligus!
                 example_code: |
                     ```
-                    print 'Aku Hedy sang peramal!'
-                    print 'Kamu dapat bertanya 3 pertanyaan!'
-                    jawaban is ya, tidak, mungkin
-                    repeat 3 times
-                       pertanyaan is ask 'Apa yang ingin kamu tahu?'
-                       print pertanyaan
-                       print 'Bola kristal saya menyatakan...' jawaban at random
+                    {print} 'Aku Hedy sang peramal!'
+                    {print} 'Kamu dapat bertanya 3 pertanyaan!'
+                    jawaban {is} ya, tidak, mungkin
+                    {repeat} 3 {times}
+                        pertanyaan {is} {ask} 'Apa yang ingin kamu tahu?'
+                        {print} pertanyaan
+                        {print} 'Bola kristal saya menyatakan...' jawaban {at} {random}
                     ```
                 start_code: print 'Halo, aku Hedy sang peramal!'
             10:
@@ -1419,7 +1419,7 @@ adventures:
 
                     Pada level 1 kita memulai permainan rumah berhantu dengan membuat cerita menyeramkan dan menanyakan monster apa yang pemain akan lihat di rumah berhantu.
                 example_code: "```\nprint Kenapa aku ada disini?\nprint Aku ingat temanku menyarankan untuk tidak ke rumah besar tua itu...\nprint dan tiba-tiba semuanya menjadi gelap.\nprint Tapi bagaimana caranya aku tergeletak di lantai...?\nprint Kepalaku sakit seperti telah dipukul dengan tongkat\
-                    \ pemukul basebal!\nprint Suara apa itu?\nprint Oh tidak! Aku merasa kalau aku tidak sendiri di rumah ini!\nprint Aku perlu keluar dari sini!\nprint Ada 3 pintu didepanku...\nask Pintu mana yang harus kupilih?\necho Aku memilih pintu \nprint ...?\n```\n\nDapatkah kamu menyelesaikan\
+                    \ pemukul basebal!\nprint Suara apa itu?\nprint Oh tidak! Aku merasa kalau aku tidak sendiri di rumah ini!\nprint Aku perlu keluar dari sini!\nprint Ada 3 pintu didepanku...\n{ask} Pintu mana yang harus kupilih?\necho Aku memilih pintu \nprint ...?\n ```\n\nDapatkah kamu menyelesaikan\
                     \ cerita menyeramkan ini dengan menanyakan monster apa yang akan muncul? Atau membuat cerita rumah berhantu milik kamu sendiri?\n"
                 story_text_2: |
                     ### Exercise
@@ -1512,9 +1512,9 @@ adventures:
                     monster is werewolf, mumi, vampir, zombie
                     pintuterpilih is ask 'Pintu mana yang mau kamu pilih?'
                     print 'Kamu memilih pintu... ' pintuterpilih
-                    pintutepat is pintu at random
+                    pintutepat is pintu {at} {random}
                     if pintuterpilih is pintutepat print 'Bagus! Kamu berhasil kabur!'
-                    else print 'Oh tidak! Kamu dimakan oleh ... ' monster at random
+                    else print 'Oh tidak! Kamu dimakan oleh ... ' monster {at} {random}
                     ```
                 start_code: print 'Kenapa aku ada disini?'
             9:
@@ -1527,13 +1527,13 @@ adventures:
                     monster is zombie, vampir, laba-laba besar
                     repeat 3 times
                         if pemain is hidup
-                            pintubenar is pintu at random
+                            pintubenar is pintu {at} {random}
                             print 'Ada 3 pintu di depan kamu...'
                             pintuterpilih is ask 'Pintu mana yang mau kamu pilih?'
                             if pintuterpilih is pintubenar
                                 print 'Tidak ada monster disini!'
                             else
-                                print 'Kamu dimakan oleh ' monster at random
+                                print 'Kamu dimakan oleh ' monster {at} {random}
                                 pemain is meninggal
                         else
                             print 'PERMAINAN BERAKHIR'
@@ -1554,14 +1554,14 @@ adventures:
                     monster is zombie, vampir, laba-laba besar
                     for i in range 1 to 3
                         if pemain is hidup
-                            pintubenar is pintu at random
+                            pintubenar is pintu {at} {random}
                             print 'Ruangan ' i
                             print 'Ada 3 pintu di depan kamu...'
                             pintuterpilih is ask 'Pintu mana yang mau kamu pilih?'
                             if pintuterpilih is pintubenar
                                 print 'Tidak ada monster disini!'
                             else
-                                print 'Kamu dimakan oleh ' monster at random
+                                print 'Kamu dimakan oleh ' monster {at} {random}
                                 pemain is meninggal
                         else
                             print 'PERMAINAN BERAKHIR'
@@ -2784,7 +2784,7 @@ adventures:
             5:
                 story_text: "Pada level 4 kamu bisa menentukan siapa yang menang. \nUntuk hal itu, kamu memerlukan perintah `if`\n\nSimpan pilihan kamu dengan sebuah nama favoritmu dan pilihan komputer dengan nama pilihan komputer.\nLalu kamu bisa menggunakan `if` untuk melihat apakah kedua pilihan tersebut\
                     \ sama atau berbeda.\nDapatkah kamu menyelesaikan kode ini?"
-                example_code: "```\npilihan is batu, gunting, kertas\npil_komputer is _\npil_kamu is ask Apa yang kamu pilih?\nprint 'kamu memilih ' _\nprint 'komputer memilih ' _\nif _ is _ print 'seri' else print 'tidak seri'\nif pil_kamu is batu and pil_komputer is kertas print 'komputer menang'\n\
+                example_code: "```\npilihan is batu, gunting, kertas\npil_komputer is _\n pil_kamu is ask Apa yang kamu pilih?\nprint 'kamu memilih ' _\nprint 'komputer memilih ' _\nif _ is _ print 'seri' else print 'tidak seri'\nif pil_kamu is batu and pil_komputer is kertas print 'komputer menang'\n\
                     ```\n\nPertama-tama, kamu perlu mengisi kotak kosong yang tersedia dengan kode yang benar untuk melihat apakah hasil permainan seri. \n"
                 start_code: print 'Selamat datang di permainan batu guning kertas mu sendiri!'
             9:
@@ -3648,6 +3648,23 @@ adventures:
                         {color} {black}
                     ```
                 start_code: '# place your code here'
+            10:
+                story_text: |
+                    In this level you can make the turtle draw a figure.
+                    The turtle will travel the distances in the list, one by one, making bigger and bigger steps.
+                    ### Exercise 1
+                    Add a 90 degree turn in the loop, so that a spiral is drawn.
+                    Add at least 5 numbers to the list, so the spiral grows larger.
+                     **(extra)** can you change the spiral into another shape? Experiment with numbers for the turn!
+                    ### Exercise 2
+                    The spiral is drawn outwards, make it go inwards?
+                example_code: |
+                    ```
+                    {turn} 90
+                    distances = 10, 20, 30, 40, 50, 60
+                    {for} distance {in} distances
+                        {forward} distance
+                start_code: '# Write your code here'
     while_command:
         name: '{while}'
         default_save_name: while_command
