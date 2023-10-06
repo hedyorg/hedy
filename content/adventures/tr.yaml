@@ -3766,20 +3766,21 @@ adventures:
                 start_code: '# kodunuzu buraya yazın'
             10:
                 story_text: |
-                    Bu seviyede kaplumbağanın bir şekil çizmesini sağlayabilirsiniz.
-                     Kaplumbağa listedeki verilen mesafeleri, birbiri ardına, giderek daha büyük adımlar atarak kat edecektir.
-                    ### Alıştırma 1
-                    Bir spiral çizmek için döngüye 90 derecelik bir dönüş ekleyin.
-                    Spirali daha da büyütmek için listeye en az 5 tane daha sayı ekleyin.
-                    **Ekleme** spirali başka bir şekle dönüştürebilir misiniz? Döndürmek için sayılarla denemeler yapın!
-                    ### Alıştırma 2
-                    Spiralimiz dışarıya doğru genişliyor, bunu içeri doğru daraltabilir misiniz?
+                    In this level you can make the turtle draw a figure.
+                    The turtle will travel the distances in the list, one by one, making bigger and bigger steps.
+                    ### Exercise 1
+                    Add a 90 degree turn in the loop, so that a spiral is drawn.
+                    Add at least 5 numbers to the list, so the spiral grows larger.
+                     **(extra)** can you change the spiral into another shape? Experiment with numbers for the turn!
+                    ### Exercise 2
+                    The spiral is drawn outwards, make it go inwards?
                 example_code: |
                     ```
                     {turn} 90
-                    mesafeler = 10, 20, 30, 40, 50, 60
-                    {for} mesafe {in} mesafeler
-                        {forward} mesafe
+                    distances = 10, 20, 30, 40, 50, 60
+                    {for} distance {in} distances
+                        {forward} distance
+                start_code: '# Write your code here'
     while_command:
         name: '{while}'
         default_save_name: iken_komutu
