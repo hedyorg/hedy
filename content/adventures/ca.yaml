@@ -624,15 +624,15 @@ adventures:
                     ```
                 start_code: '# place your code here'
             13:
-                story_text: |2
+                story_text: |4
 
-                          ### Exercise 1
-                          Let's make the practice program a bit harder. The player now has to answers two questions correctly. Fill out the blanks to complete the program.
+                            ### Exercise 1
+                            Let's make the practice program a bit harder. The player now has to answers two questions correctly. Fill out the blanks to complete the program.
 
-                          ### Exercise 2 (extra)
-                          Sometimes, calculations have multiple correct answers. For example, 10 can be divided by 5 and by 2. So the question 'What number divides 10?' can be answered by 2 and by 5.
-                          Ask for a calculation that has multiple correct answers, ask the player to answer it, and determine if it is correct using `{or}`.
-                          Empty the programming field and create your own solution.
+                            ### Exercise 2 (extra)
+                            Sometimes, calculations have multiple correct answers. For example, 10 can be divided by 5 and by 2. So the question 'What number divides 10?' can be answered by 2 and by 5.
+                            Ask for a calculation that has multiple correct answers, ask the player to answer it, and determine if it is correct using `{or}`.
+                            Empty the programming field and create your own solution.
                 example_code: |
                     ```
                     answer1 = {ask} 'What is 10 times 7?'
@@ -1053,9 +1053,9 @@ adventures:
                     {if} throw {is} earthworm points = points + 5 {else} points = points + throw
                     {print} 'those are' points ' point'
                     ```
-                example_code_2: |2
+                example_code_2: |4
 
-                          Did you manage to calculate the score for 8 dice? That required a lot of cutting and pasting, right? We are going to make that easier in level 7!
+                            Did you manage to calculate the score for 8 dice? That required a lot of cutting and pasting, right? We are going to make that easier in level 7!
                 start_code: '{print} ''What will the die indicate this time?'''
             7:
                 story_text: |
@@ -1303,18 +1303,18 @@ adventures:
                 story_text: |
                     In the previous levels you've created your first fortune telling machine, but Hedy couldn't really predict anything, only {echo}.
                     In this level you can use a variable and the `{at} {random}` command to really let Hedy choose an answer for you. Check out this code for instance:
-                example_code: |2
+                example_code: |4
 
-                          In this example the player can {ask} Hedy a yes-no question and Hedy will pick a random answer for you.
-                          ```
-                          {print} I’m Hedy the fortune teller!
-                          question {is} {ask} What do you want to know?
-                          {print} This is what you want to know: question
-                          answers {is} yes, no, maybe
-                          {print} My crystal ball says...
-                          {sleep} 2
-                          {print} answers {at} {random}
-                          ```
+                            In this example the player can {ask} Hedy a yes-no question and Hedy will pick a random answer for you.
+                            ```
+                            {print} I’m Hedy the fortune teller!
+                            question {is} {ask} What do you want to know?
+                            {print} This is what you want to know: question
+                            answers {is} yes, no, maybe
+                            {print} My crystal ball says...
+                            {sleep} 2
+                            {print} answers {at} {random}
+                            ```
                 story_text_2: |
                     ### Exercise
                     Now, Hedy can only answer yes, no or maybe. Can you give Hedy more answer options, like 'definitely' or 'ask again'.
@@ -2490,8 +2490,8 @@ adventures:
         description: Create your own virtual restaurant
         levels:
             1:
-                story_text: |2
-                           In level 1 you can make your own virtual restaurant and take your guests' orders.
+                story_text: |4
+                             In level 1 you can make your own virtual restaurant and take your guests' orders.
                 example_code: |
                     ```
                     {print} Welcome to Hedy's restaurant 🍟
@@ -2599,22 +2599,22 @@ adventures:
             6:
                 story_text: |
                     In this level you can use maths to calculate the total price of your customer's order, which can make your virtual restaurant more realistic.
-                example_code: |2
+                example_code: |4
 
-                          You can make a simple restaurant code, like this:
-                          ```
-                          {print} 'Welcome to Hedys restaurant'
-                          {print} 'Here is our menu:'
-                          {print} 'Our main courses are pizza, lasagne, or spaghetti'
-                          main = {ask} 'Which main course would you like?'
-                          price = 0
-                          {if} main {is} pizza price = 10
-                          {if} main {is} lasagne price = 12
-                          {if} main {is} spaghetti price = 8
-                          {print} 'You have ordered ' main
-                          {print} 'That will be ' price ' dollars, please'
-                          {print} 'Thank you, enjoy your meal!'
-                          ```
+                            You can make a simple restaurant code, like this:
+                            ```
+                            {print} 'Welcome to Hedys restaurant'
+                            {print} 'Here is our menu:'
+                            {print} 'Our main courses are pizza, lasagne, or spaghetti'
+                            main = {ask} 'Which main course would you like?'
+                            price = 0
+                            {if} main {is} pizza price = 10
+                            {if} main {is} lasagne price = 12
+                            {if} main {is} spaghetti price = 8
+                            {print} 'You have ordered ' main
+                            {print} 'That will be ' price ' dollars, please'
+                            {print} 'Thank you, enjoy your meal!'
+                            ```
                 start_code: '# place your code here'
             7:
                 story_text: |
@@ -2820,11 +2820,11 @@ adventures:
                     ```
                 start_code: '# place your code here'
             3:
-                story_text: |2
+                story_text: |4
 
-                          In this level we can enter lists and choose things from them.
-                          You first make a list with `{is}`. Then you can let the computer choose something from the list with `{at} {random}`.
-                          For example, you can let the computer pick from rock, paper and scissors.
+                            In this level we can enter lists and choose things from them.
+                            You first make a list with `{is}`. Then you can let the computer choose something from the list with `{at} {random}`.
+                            For example, you can let the computer pick from rock, paper and scissors.
                 example_code: |
                     ```
                     choices {is} rock, paper, scissors
