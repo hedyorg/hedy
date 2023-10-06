@@ -719,7 +719,7 @@ adventures:
                     Prueba el código por ti mismo con el botón verde 'Ejecutar código' bajo el bloque de programación.
 
                     ¿Preparado? ¡Entonces ve a la siguiente pestaña para aprender tu primer comando!
-                start_code: '`{print}` ¡hola mundo!'
+                start_code: '{print} ¡hola mundo!'
             2:
                 story_text: |
                     ¡Enhorabuena! Has alcanzado el nivel 2. ¡Espero que ya hayas hecho algunos códigos increíbles!
@@ -804,7 +804,7 @@ adventures:
                     {if} pedido {is} precio_comida patatas fritas {is} 2
                     bebida {is} {ask} '¿Qué le gustaría beber?'
                     {if} bebida {is} precio_bebida agua {is} 0
-                    demás precio_bebida {is} 3
+                    {else} precio_bebida {is} 3
                     precio_total {is} precio_comida + precio_bebida
                     {print} 'Serán ' precio_total ' dólares, por favor'
                     ```
