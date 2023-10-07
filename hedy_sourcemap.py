@@ -102,7 +102,6 @@ class SourceMap:
     level = 0
 
     skip_faulty = False
-    amount_of_mistakes = 0
 
     exceptions_not_to_skip = (
         exceptions.UnsupportedStringValue,
@@ -160,9 +159,6 @@ class SourceMap:
 
             python_code_mapped.append(python_source_code.code)
 
-    def get_amount_of_mistakes(self):
-        return self.amount_of_mistakes
-
     def get_grammar_rules(self):
         script_dir = path.abspath(path.dirname(__file__))
 
@@ -183,7 +179,6 @@ class SourceMap:
     def clear(self):
         self.map.clear()
         self.level = 0
-        self.amount_of_mistakes = 0
         self.language = 'en'
         self.hedy_code = ''
         self.python_code = ''
@@ -277,7 +272,6 @@ def source_map_rule(source_map: SourceMap):
                 except Exception as e:
                     # If an exception is found, we set the Python code to pass (null operator)
                     # we also map the error
-                    source_map.amount_of_mistakes += 1
                     generated_python = 'pass'
                     error = e
 
