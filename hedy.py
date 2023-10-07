@@ -2827,6 +2827,10 @@ def transpile(input_string, level, lang="en", skip_faulty=True):
             try:
                 source_map.set_skip_faulty(True)
                 transpile_result = transpile_inner_with_skipping_faulty(input_string, level, lang)
+
+                if source_map.get_amount_of_mistakes() == 1:
+                    raise original_error  # raise original exception if only 1 mistake
+
             except Exception:
                 raise original_error  # we could not skip faulty code, raise original exception
         else:
