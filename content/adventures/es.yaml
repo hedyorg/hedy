@@ -2769,11 +2769,15 @@ adventures:
                     con sus patatas y tortitas. ¡O por supuesto algo completamente diferente!
                 example_code: |
                     ```
-                        {print} 'Ese es nuestro menú de descuentos'
+                    precio = 10
+                    comida = {ask} ¿Qué te gustaría comer?
+                    bebidas = {ask} ¿Qué quieres beber?
+                    {if} comida {is} 'sandwich' _ bebida {is} 'zumo'
+                        {print} 'Este es nuestro menú de descuentos'
                         precio = precio - 3
                     {if} bebidas {is} 'agua' _ bebidas {is} 'zumo'
-                        {print} 'Esa es una opción sana'
-                    {print} 'Serán ' precio ' dólares'
+                        {print} 'Esa es una opción saludable'
+                    {print} 'Eso será ' precio ' dólares'
                     ```
                 start_code: '# pon tú código aquí'
             15:
@@ -3690,9 +3694,9 @@ adventures:
                 example_code: |
                     ```
                     {turn} 90
-                    distances = 10, 20, 30, 40, 50, 60
-                    {for} distance {in} distances
-                        {forward} distance
+                    distancias = 10, 20, 30, 40, 50, 60
+                    {for} distancia {in} distancias
+                        {forward} distancia
                 start_code: '# Write your code here'
     while_command:
         name: '{while}'
