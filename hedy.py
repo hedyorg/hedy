@@ -2821,7 +2821,9 @@ def transpile(input_string, level, lang="en", skip_faulty=True):
         transpile_result = transpile_inner(input_string, level, lang, populate_source_map=True)
 
     except Exception as original_error:
-        if getenv('ENABLE_SKIP_FAULTY', False) and skip_faulty:
+        hedy_amount_lines = len(input_string.split('\n'))
+
+        if getenv('ENABLE_SKIP_FAULTY', False) and skip_faulty and hedy_amount_lines > 1:
             if isinstance(original_error, source_map.exceptions_not_to_skip):
                 raise original_error
             try:
