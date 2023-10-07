@@ -27,7 +27,7 @@ from ruamel import yaml as ruamel_yaml
 # until we integratie with json schema
 
 PREFERRED_KEY_ORDER = [
-    "header", # slide header to come before its text
+    "header",  # slide header to come before its text
     # achievements
     "title",
     "text",
@@ -80,7 +80,7 @@ PREFERRED_KEY_ORDER = [
     "option",
     "feedback"
     # slides
-    "header", # add this to the beginning, else text comes first from achievements
+    "header",  # add this to the beginning, else text comes first from achievements
     "text",
     "editor",
 ]
