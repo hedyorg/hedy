@@ -1,4 +1,5 @@
 import textwrap
+from functools import lru_cache, cache
 
 import lark
 from flask_babel import gettext
@@ -10,8 +11,8 @@ from os import path, getenv
 import warnings
 import hedy
 import hedy_translation
+from utils import atomic_write_file
 from hedy_content import ALL_KEYWORD_LANGUAGES
-import utils
 from collections import namedtuple
 import re
 import regex
@@ -19,6 +20,12 @@ from dataclasses import dataclass, field
 import exceptions
 import program_repair
 import yaml
+import hashlib
+import os
+import pickle
+import sys
+import tempfile
+import utils
 
 # Some useful constants
 from hedy_content import KEYWORDS
@@ -1086,6 +1093,9 @@ class IsValid(Filter):
     # all rules are valid except for the "Invalid" production rule
     # this function is used to generate more informative error messages
     # tree is transformed to a node of [Bool, args, command number]
+
+    def __init__(self, level):
+        self.level = level
 
     def error_invalid_space(self, meta, args):
         # return space to indicate that line starts in a space
@@ -2369,20 +2379,30 @@ class ConvertToPython_18(ConvertToPython_17):
         return self.print(meta, args)
 
 
-def merge_grammars(grammar_text_1, grammar_text_2, level):
+def get_rule_from_string(s):
+    parts = s.split(':')
+    # get part before and after : (this is a join because there can be : in the rule)
+    if len(parts) <= 1:
+        return s, s
+    return parts[0], ''.join(parts[1])
+
+
+def merge_grammars(grammar_text_1, grammar_text_2):
     # this function takes two grammar files and merges them into one
     # rules that are redefined in the second file are overridden
     # rules that are new in the second file are added (remaining_rules_grammar_2)
     merged_grammar = []
+
+    deletables = []   # this list collects rules we no longer need,
+    # they will be removed when we encounter them
 
     rules_grammar_1 = grammar_text_1.split('\n')
     remaining_rules_grammar_2 = grammar_text_2.split('\n')
     for line_1 in rules_grammar_1:
         if line_1 == '' or line_1[0] == '/':  # skip comments and empty lines:
             continue
-        parts = line_1.split(':')
-        # get part before are after : (this is a join because there can be : in the rule)
-        name_1, definition_1 = parts[0], ''.join(parts[1:])
+
+        name_1, definition_1 = get_rule_from_string(line_1)
 
         rules_grammar_2 = grammar_text_2.split('\n')
         override_found = False
@@ -2395,8 +2415,7 @@ def merge_grammars(grammar_text_1, grammar_text_2, level):
                 name_2 = f'{needs_preprocessing.group(1)}'
                 processor = needs_preprocessing.group(3)
             else:
-                parts = line_2.split(':')
-                name_2, definition_2 = parts[0], ''.join(parts[1])  # get part before are after :
+                name_2, definition_2 = get_rule_from_string(line_2)
 
             if name_1 == name_2:
                 override_found = True
@@ -2406,14 +2425,17 @@ def merge_grammars(grammar_text_1, grammar_text_2, level):
                 else:
                     line_2_processed = line_2
                 if definition_1.strip() == definition_2.strip():
-                    warn_message = f"The rule {name_1} is duplicated on level {level}. Please check!"
+                    warn_message = f"The rule {name_1} is duplicated: {definition_1} and {definition_2}. Please check!"
                     warnings.warn(warn_message)
                 # Used to compute the rules that use the merge operators in the grammar
                 # namely +=, -= and >
-                new_rule = merge_rules_operator(definition_1, definition_2, name_1, line_2_processed)
-                # Already procesed so remove it
+                new_rule, new_deletables = merge_rules_operator(definition_1, definition_2, name_1, line_2_processed)
+                if new_deletables:
+                    deletables += new_deletables
+                # Already processed, so remove it
                 remaining_rules_grammar_2.remove(line_2)
                 break
+
         # new rule found? print that. nothing found? print org rule
         if override_found:
             merged_grammar.append(new_rule)
@@ -2426,31 +2448,37 @@ def merge_grammars(grammar_text_1, grammar_text_2, level):
             merged_grammar.append(rule)
 
     merged_grammar = sorted(merged_grammar)
-    return '\n'.join(merged_grammar)
+    # filter deletable rules
+    rules_to_keep = [rule for rule in merged_grammar if get_rule_from_string(rule)[0] not in deletables]
+    return '\n'.join(rules_to_keep)
 
 
 def merge_rules_operator(prev_definition, new_definition, name, complete_line):
     # Check if the rule is adding or substracting new rules
     has_add_op = new_definition.startswith('+=')
-    has_sub_op = has_add_op and '-=' in new_definition
+    has_remove_op = has_add_op and '-=' in new_definition
     has_last_op = has_add_op and '>' in new_definition
-    if has_sub_op:
+    deletables = None
+    if has_remove_op:
         # Get the rules we need to substract
         part_list = new_definition.split('-=')
-        add_list, sub_list = (part_list[0], part_list[1]) if has_sub_op else (part_list[0], '')
+        add_list, commands_after_minus = (part_list[0], part_list[1]) if has_remove_op else (part_list[0], '')
         add_list = add_list[3:]
+
         # Get the rules that need to be last
-        sub_list = sub_list.split('>')
-        sub_list, last_list = (sub_list[0], sub_list[1]) if has_last_op else (sub_list[0], '')
-        sub_list = sub_list + '|' + last_list
-        result_cmd_list = get_remaining_rules(prev_definition, sub_list)
+        split_on_greater_than = commands_after_minus.split('>')
+        commands_to_be_removed, last_list = (
+            split_on_greater_than[0], split_on_greater_than[1]) if has_last_op else (split_on_greater_than[0], '')
+        commands_after_minus = commands_to_be_removed + '|' + last_list
+        result_cmd_list = get_remaining_rules(prev_definition, commands_after_minus)
+        deletables = commands_to_be_removed.strip().split('|')
     elif has_add_op:
         # Get the rules that need to be last
         part_list = new_definition.split('>')
-        add_list, sub_list = (part_list[0], part_list[1]) if has_last_op else (part_list[0], '')
+        add_list, commands_after_minus = (part_list[0], part_list[1]) if has_last_op else (part_list[0], '')
         add_list = add_list[3:]
-        last_list = sub_list
-        result_cmd_list = get_remaining_rules(prev_definition, sub_list)
+        last_list = commands_after_minus
+        result_cmd_list = get_remaining_rules(prev_definition, commands_after_minus)
     else:
         result_cmd_list = prev_definition
 
@@ -2460,62 +2488,68 @@ def merge_rules_operator(prev_definition, new_definition, name, complete_line):
         new_rule = f"{name}: {result_cmd_list} | {add_list}"
     else:
         new_rule = complete_line
-    return new_rule
+
+    return new_rule, deletables
 
 
 def get_remaining_rules(orig_def, sub_def):
-    orig_cmd_list = [command.strip() for command in orig_def.split('|')]
-    unwanted_cmd_list = [command.strip() for command in sub_def.split('|')]
-    result_cmd_list = [cmd for cmd in orig_cmd_list if cmd not in unwanted_cmd_list]
-    result_cmd_list = ' | '.join(result_cmd_list)  # turn the result list into a string
-    return result_cmd_list
+    original_commands = [command.strip() for command in orig_def.split('|')]
+    commands_after_minus = [command.strip() for command in sub_def.split('|')]
+    remaining_commands = [cmd for cmd in original_commands if cmd not in commands_after_minus]
+    remaining_commands = ' | '.join(remaining_commands)  # turn the result list into a string
+    return remaining_commands
 
 
-def create_grammar(level, lang="en"):
+# this is only a couple of MB in total, safe to cache
+@cache
+def create_grammar(level, lang, skip_faulty):
     # start with creating the grammar for level 1
-    result = get_full_grammar_for_level(1)
-    keywords = get_keywords_for_language(lang)
+    merged_grammars = get_full_grammar_for_level(1)
 
-    result = merge_grammars(result, keywords, 1)
     # then keep merging new grammars in
     for i in range(2, level + 1):
         grammar_text_i = get_additional_rules_for_level(i)
-        result = merge_grammars(result, grammar_text_i, i)
+        merged_grammars = merge_grammars(merged_grammars, grammar_text_i)
+
+    # keyword and other terminals never have mergable rules, so we can just add them at the end
+    keywords = get_keywords_for_language(lang)
+    terminals = get_terminals()
+    merged_grammars = merged_grammars + '\n' + keywords + '\n' + terminals
 
     # Change the grammar if skipping faulty is enabled
-    if source_map.skip_faulty:
+    if skip_faulty:
         # Make sure to change the meaning of error_invalid
         # this way more text will be 'catched'
-        error_invalid_rules = re.findall(r'^error_invalid.-100:.*?\n', result, re.MULTILINE)
+        error_invalid_rules = re.findall(r'^error_invalid.-100:.*?\n', merged_grammars, re.MULTILINE)
         if len(error_invalid_rules) > 0:
             error_invalid_rule = error_invalid_rules[0]
             error_invalid_rule_changed = 'error_invalid.-100: textwithoutspaces _SPACE* text?\n'
-            result = result.replace(error_invalid_rule, error_invalid_rule_changed)
+            merged_grammars = merged_grammars.replace(error_invalid_rule, error_invalid_rule_changed)
 
         # from level 12:
         # Make sure that all keywords in the language are added to the rules:
         # textwithspaces & textwithoutspaces, so that these do not fall into the error_invalid rule
         if level > 12:
-            textwithspaces_rules = re.findall(r'^textwithspaces:.*?\n', result, re.MULTILINE)
+            textwithspaces_rules = re.findall(r'^textwithspaces:.*?\n', merged_grammars, re.MULTILINE)
             if len(textwithspaces_rules) > 0:
                 textwithspaces_rule = textwithspaces_rules[0]
                 textwithspaces_rule_changed = r'textwithspaces: /(?:[^#\n،,，、 ]| (?!SKIP1))+/ -> text' + '\n'
-                result = result.replace(textwithspaces_rule, textwithspaces_rule_changed)
+                merged_grammars = merged_grammars.replace(textwithspaces_rule, textwithspaces_rule_changed)
 
-            textwithoutspaces_rules = re.findall(r'^textwithoutspaces:.*?\n', result, re.MULTILINE)
+            textwithoutspaces_rules = re.findall(r'^textwithoutspaces:.*?\n', merged_grammars, re.MULTILINE)
             if len(textwithoutspaces_rules) > 0:
                 textwithoutspaces_rule = textwithoutspaces_rules[0]
                 textwithoutspaces_rule_changed = (
                     r'textwithoutspaces: /(?:[^#\n،,，、 *+\-\/eiіиలేไamfnsbअ否אو]|SKIP2)+/ -> text' + '\n'
                 )
-                result = result.replace(textwithoutspaces_rule, textwithoutspaces_rule_changed)
+                merged_grammars = merged_grammars.replace(textwithoutspaces_rule, textwithoutspaces_rule_changed)
 
             non_allowed_words = re.findall(r'".*?"', keywords)
             non_allowed_words = list(set(non_allowed_words))
 
             non_allowed_words = [x.replace('"', '') for x in non_allowed_words]
             non_allowed_words_with_space = '|'.join(non_allowed_words)
-            result = result.replace('SKIP1', non_allowed_words_with_space)
+            merged_grammars = merged_grammars.replace('SKIP1', non_allowed_words_with_space)
 
             letters_done = []
             string_words = ''
@@ -2532,38 +2566,38 @@ def create_grammar(level, lang="en"):
             string_words = string_words.replace('|)', ')')  # remove empty regex expressions
             string_words = string_words[1:]  # remove first |
 
-            result = result.replace('SKIP2', string_words)
+            merged_grammars = merged_grammars.replace('SKIP2', string_words)
 
         # Make sure that the error_invalid is added to the command rule
         # to function as a 'bucket' for faulty text
-        command_rules = re.findall(r'^command:.*?\n', result, re.MULTILINE)
+        command_rules = re.findall(r'^command:.*?\n', merged_grammars, re.MULTILINE)
         if len(command_rules) > 0:
             command_rule = command_rules[0]
             command_rule_with_error_invalid = command_rule.replace('\n', '') + " | error_invalid\n"
-            result = result.replace(command_rule, command_rule_with_error_invalid)
+            merged_grammars = merged_grammars.replace(command_rule, command_rule_with_error_invalid)
 
         # Make sure that the error_invalid is added to the if_less_command rule
         # to function as a 'bucket' for faulty if body commands
-        if_less_command_rules = re.findall(r'^_if_less_command:.*?\n', result, re.MULTILINE)
+        if_less_command_rules = re.findall(r'^_if_less_command:.*?\n', merged_grammars, re.MULTILINE)
         if len(if_less_command_rules) > 0:
             if_less_command_rule = if_less_command_rules[0]
             if_less_command_rule_with_error_invalid = if_less_command_rule.replace('\n', '') + " | error_invalid\n"
-            result = result.replace(if_less_command_rule, if_less_command_rule_with_error_invalid)
+            merged_grammars = merged_grammars.replace(if_less_command_rule, if_less_command_rule_with_error_invalid)
 
         # Make sure that the _non_empty_program rule does not contain error_invalid rules
         # so that all errors will be catches by error_invalid instead of _non_empty_program_skipping
-        non_empty_program_rules = re.findall(r'^_non_empty_program:.*?\n', result, re.MULTILINE)
+        non_empty_program_rules = re.findall(r'^_non_empty_program:.*?\n', merged_grammars, re.MULTILINE)
         if len(non_empty_program_rules) > 0:
             non_empty_program_rule = non_empty_program_rules[0]
             non_empty_program_rule_changed = (
                 '_non_empty_program: _EOL* (command) _SPACE* (_EOL+ command _SPACE*)* _EOL*\n'
             )
-            result = result.replace(non_empty_program_rule, non_empty_program_rule_changed)
+            merged_grammars = merged_grammars.replace(non_empty_program_rule, non_empty_program_rule_changed)
 
     # ready? Save to file to ease debugging
     # this could also be done on each merge for performance reasons
-    save_total_grammar_file(level, result, lang)
-    return result
+    save_total_grammar_file(level, merged_grammars, lang)
+    return merged_grammars
 
 
 def save_total_grammar_file(level, grammar, lang):
@@ -2613,20 +2647,114 @@ def get_keywords_for_language(language):
     return keywords
 
 
+def get_terminals():
+    script_dir = path.abspath(path.dirname(__file__))
+    with open(path.join(script_dir, "grammars", "terminals.lark"), "r", encoding="utf-8") as file:
+        terminals = file.read()
+    return terminals
+
+
 PARSER_CACHE = {}
 
 
-def get_parser(level, lang="en", keep_all_tokens=False):
+def _get_parser_cache_directory():
+    # TODO we should maybe store this to .test-cache so we can
+    # re-use them in github actions caches for faster CI.
+    # We can do this after #4574 is merged.
+    return tempfile.gettempdir()
+
+
+def _save_parser_to_file(lark, pickle_file):
+    # Store the parser to a file, a bit hacky because it is not
+    # pickle-able out of the box
+    # See https://github.com/lark-parser/lark/issues/1348
+
+    # Note that if Lark ever implements the cache for Earley parser
+    # or if we switch to a LALR parser we don't need this hack anymore
+
+    full_path = os.path.join(_get_parser_cache_directory(), pickle_file)
+
+    # These attributes can not be pickled as they are a module
+    lark.parser.parser.lexer_conf.re_module = None
+    lark.parser.lexer_conf.re_module = None
+
+    try:
+        with atomic_write_file(full_path) as fp:
+            pickle.dump(lark, fp)
+    except OSError:
+        # Ignore errors if another process already moved the file
+        # or if the destination already exist.
+        # These scenarios can happen under concurrent execution.
+        pass
+
+    # Restore the unpickle-able bits.
+    # Keep this in sync with the restore method!
+    lark.parser.parser.lexer_conf.re_module = regex
+    lark.parser.lexer_conf.re_module = regex
+
+
+def _restore_parser_from_file_if_present(pickle_file):
+    full_path = os.path.join(_get_parser_cache_directory(), pickle_file)
+    if os.path.isfile(full_path):
+        try:
+            with open(full_path, "rb") as fp:
+                lark = pickle.load(fp)
+            # Restore the unpickle-able bits.
+            # Keep this in sync with the save method!
+            lark.parser.parser.lexer_conf.re_module = regex
+            lark.parser.lexer_conf.re_module = regex
+            return lark
+        except Exception:
+            # If anything goes wrong try to remove the file
+            # and we will try again in the next cycle
+            try:
+                os.unlink(full_path)
+            except Exception:
+                pass
+    return None
+
+
+@lru_cache(maxsize=0 if utils.is_production() else 100)
+def get_parser(level, lang="en", keep_all_tokens=False, skip_faulty=False):
     """Return the Lark parser for a given level.
+    Parser generation takes about 0.5 seconds depending on the level so
+    we want to cache it, or we have latency of 500ms on the calculations
+    and a high server load, and CI runs of 5+ hours.
+
+    We used to cache this to RAM but because of all the permutations we
+    had 1000s of parsers and got into out-of-memory issue in the
+    production environment.
+
+    Now we cache a limited number of the parsers to RAM, but introduce
+    a second tier of cache to disk.
+
+    This is not implemented by Lark natively for the Earley parser.
+    See https://github.com/lark-parser/lark/issues/1348.
     """
-    key = str(level) + "." + lang + '.' + str(keep_all_tokens) + '.' + str(source_map.skip_faulty)
-    existing = PARSER_CACHE.get(key)
-    if existing and not utils.is_debug_mode():
-        return existing
-    grammar = create_grammar(level, lang)
-    ret = Lark(grammar, regex=True, propagate_positions=True, keep_all_tokens=keep_all_tokens)  # ambiguity='explicit'
-    PARSER_CACHE[key] = ret
-    return ret
+    grammar = create_grammar(level, lang, skip_faulty)
+    parser_opts = {
+        "regex": True,
+        "propagate_positions": True,
+        "keep_all_tokens": keep_all_tokens,
+    }
+    unique_parser_hash = hashlib.sha1("_".join((
+        grammar,
+        str(sys.version_info[:2]),
+        str(parser_opts),
+    )).encode()).hexdigest()
+
+    cached_parser_file = f"cached-parser-{level}-{lang}-{unique_parser_hash}.pkl"
+
+    use_cache = True
+    lark = None
+    if use_cache:
+        lark = _restore_parser_from_file_if_present(cached_parser_file)
+    if lark is None:
+        lark = Lark(grammar, **parser_opts)  # ambiguity='explicit'
+        if use_cache:
+            _save_parser_to_file(lark, cached_parser_file)
+
+    return lark
 
 
 ParseResult = namedtuple('ParseResult', ['code', 'source_map', 'has_turtle', 'has_pygame', 'commands'])
@@ -3004,7 +3132,7 @@ def process_input_string(input_string, level, lang, escape_backslashes=True, pre
 
 
 def parse_input(input_string, level, lang):
-    parser = get_parser(level, lang)
+    parser = get_parser(level, lang, skip_faulty=source_map.skip_faulty)
     try:
         parse_result = parser.parse(input_string + '\n')
         return parse_result.children[0]  # getting rid of the root could also be done in the transformer would be nicer
@@ -3034,8 +3162,7 @@ def parse_input(input_string, level, lang):
 
 def is_program_valid(program_root, input_string, level, lang):
     # IsValid returns (True,) or (False, args)
-    instance = IsValid()
-    instance.level = level  # TODO: could be done in a constructor once we are sure we will go this way
+    instance = IsValid(level)
     is_valid = instance.transform(program_root)
 
     if not is_valid[0]:

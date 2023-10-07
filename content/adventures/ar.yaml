@@ -854,7 +854,7 @@ adventures:
                     {else}
                         {print} "أنت أكبر مني!"
             15:
-                story_text: "سنتعلم نوعا جديداً من دورات التكرار، التكرار باستخدام الأمر `{while}`! يستمر تنفيذ الكود طالما لا تزال نتيجة الفحص الذي نقوم به صالحة/صحيحة. \nلذلك يجب علينا ألا ننسى أن نغير قيمة المتغير الذي نفحصه في داخل دورة التكرار. \n\nفي المثال التوضيحي، يستمر الكود في التنفيذ (سؤال\
+                story_text: "سنتعلم نوعا جديداً من دورات التكرار، التكرار باستخدام الأمر `{while}`! يستمر تنفيذ الكود طالما لا تزال نتيجة الفحص الذي نقوم به صالحة/صحيحة. \n لذلك يجب علينا ألا ننسى أن نغير قيمة المتغير الذي نفحصه في داخل دورة التكرار. \n\nفي المثال التوضيحي، يستمر الكود في التنفيذ (سؤال\
                     \ نتيجة الضرب) حتى نحصل على اجابة صحيحة.\nاذا لم يتم اعطاء اجابة صحيحة فتستمر دورة التكرار (والبرنامج ككل) في التتنفيذ الى الأبد!"
                 example_code: "```\nالاجابة = ٠ \n{while} الاجابة != ٢٥\n    الاجابة = {ask} \"ما ناتج ٥ ضرب ٥؟\"\n{print} \"تم الاجابة بشكل صحيح\"\n```\n"
                 start_code: |-
@@ -1441,7 +1441,7 @@ adventures:
                     في هذا المستوى ، يمكنك الفوز باللعبة فقط باختيار نفس الباب الذي اختاره هيدي عشوائيًا.
 
                     هل يمكنك العثور على الكلمات الأربع المفقودة لإكمال الكود؟
-                example_code: "```\n{print} 'اهرب من بيت الأشباح !'\n{print} 'أمامك 3 أبواب ...'\nالأبواب {is}  ۱ ، ۲، ۳ \nالوحوش {is} مستذئب، مومياء، مصاص دماء، زومبي\nالباب_الذي_إخترته {is} {ask} 'أي باب تختار؟'\n{print} 'انت إخترت باب ..' الباب_الذي_إخترته\n{sleep}\nالباب_الصحيح  {is} الأبواب {at}\
+                example_code: "```\n{print} 'اهرب من بيت الأشباح !'\n{print} 'أمامك 3 أبواب ...'\nالأبواب {is}  ۱ ، ۲، ۳ \nالوحوش {is} مستذئب، مومياء، مصاص دماء، زومبي\n الباب_الذي_إخترته {is} {ask} 'أي باب تختار؟'\n{print} 'انت إخترت باب ..' الباب_الذي_إخترته\n{sleep}\nالباب_الصحيح  {is} الأبواب {at}\
                     \ {random}\n____  {print} 'رائعة! لقد نجوت!'\n{else} {print} 'أوه لا! لقد تم أكلك من قبل ... \"الوحوش {at} {random}\n```\n"
                 start_code: '# place your code here'
             9:
@@ -3541,6 +3541,23 @@ adventures:
                         {color} {black}
                     ```
                 start_code: '# place your code here'
+            10:
+                story_text: |
+                    In this level you can make the turtle draw a figure.
+                    The turtle will travel the distances in the list, one by one, making bigger and bigger steps.
+                    ### Exercise 1
+                    Add a 90 degree turn in the loop, so that a spiral is drawn.
+                    Add at least 5 numbers to the list, so the spiral grows larger.
+                     **(extra)** can you change the spiral into another shape? Experiment with numbers for the turn!
+                    ### Exercise 2
+                    The spiral is drawn outwards, make it go inwards?
+                example_code: |
+                    ```
+                    {turn} 90
+                    distances = 10, 20, 30, 40, 50, 60
+                    {for} distance {in} distances
+                        {forward} distance
+                start_code: '# Write your code here'
     while_command:
         name: '{while}'
         default_save_name: while_command

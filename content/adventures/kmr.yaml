@@ -153,8 +153,8 @@ adventures:
                 start_code: '{repeat} 5 {times} {print} ''Help!'''
             8:
                 story_text: "In this level you can use multiple lines in your {if} commands, this way you can upgrade your happy or sad ending!\n\n### Exercise 1\nThe example code shows two different endings; one where the characters jump in a time machine and one where they do not.\nComplete the blanks\
-                    \ with at least one sentence per ending. \n**(extra)** Make the story longer. What happens in the story? You can also add a second `{ask}` with different options.\n\n### Exercise 2\nGo back to your saved programs, choose your story program from level 5. Now write a good and a bad ending\
-                    \ of at least three lines long each! \n"
+                    \ with at least one sentence per ending. \n**(extra)** Make the story longer. What happens in the story? You can also add a second `{ask}` with different options.\n \n### Exercise 2\nGo back to your saved programs, choose your story program from level 5. Now write a good and a bad\
+                    \ ending of at least three lines long each! \n"
                 example_code: |
                     ```
                     {print} 'OH NO! The T-rex is closing in!'
@@ -193,7 +193,7 @@ adventures:
                     ### Exercise
 
                     Look at <a href="https://www.yonkerspublicschools.org/cms/lib/NY01814060/Centricity/Domain/1621/Brown%20Bear%20Book.pdf"> the story</a> if you do not know it, and make sure it is printed as in the book.
-                example_code: "```\nanimals = _ , _ , _ \n{print} 'Brown bear, Brown bear'\n{print} 'What do you see?'\n```\n"
+                example_code: "```\nanimals = _ , _ , _ \n{print} 'Brown bear, Brown bear'\n {print} 'What do you see?'\n```\n"
                 start_code: '# place your code here'
             12:
                 story_text: In this level you can use the quotation marks to save multiple words in a variable.
@@ -1604,7 +1604,7 @@ adventures:
                 start_code: '{print} ''Escape from the haunted house!'''
             11:
                 story_text: "In this level we've changed the `{for}` command so we can tell the player where they are. \n\n### Exercise 1\nFinish the program so the player knows which room they are in.\n\n### Exercise 2\nMake the program into an adventure by following these steps:\n\n1. Make a list of\
-                    \ choices (like: fight or flight)\n2. Make sure the player can choose an option with `{ask}`\n3. Is answer correct? Then they may proceed to the next monster. Do they give a wrong answer? Let the player know with a `{print}`. \n\n**(extra)** If you make a wrong choice, a monster is\
+                    \ choices (like: fight or flight)\n2. Make sure the player can choose an option with `{ask}`\n3. Is answer correct? Then they may proceed to the next monster. Do they give a wrong answer? Let the player know with a `{print}`. \n\n **(extra)** If you make a wrong choice, a monster is\
                     \ still shown! How could you change that?\n"
                 example_code: |
                     ```
@@ -3669,6 +3669,23 @@ adventures:
                         {color} {black}
                     ```
                 start_code: '# place your code here'
+            10:
+                story_text: |
+                    In this level you can make the turtle draw a figure.
+                    The turtle will travel the distances in the list, one by one, making bigger and bigger steps.
+                    ### Exercise 1
+                    Add a 90 degree turn in the loop, so that a spiral is drawn.
+                    Add at least 5 numbers to the list, so the spiral grows larger.
+                     **(extra)** can you change the spiral into another shape? Experiment with numbers for the turn!
+                    ### Exercise 2
+                    The spiral is drawn outwards, make it go inwards?
+                example_code: |
+                    ```
+                    {turn} 90
+                    distances = 10, 20, 30, 40, 50, 60
+                    {for} distance {in} distances
+                        {forward} distance
+                start_code: '# Write your code here'
     while_command:
         name: '{while}'
         default_save_name: while_command

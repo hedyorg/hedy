@@ -431,7 +431,6 @@ class AuthModule(WebsiteModule):
             "keyword_language": account["keyword_language"],
             "created": timems(),
             "teacher_request": True if account.get("is_teacher") else None,
-            "third_party": True if account.get("agree_third_party") else None,
             "verification_pending": hashed_token,
             "last_login": timems(),
         }
