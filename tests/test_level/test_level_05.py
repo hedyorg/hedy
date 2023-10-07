@@ -980,17 +980,21 @@ class TestsLevel5(HedyTester):
         )
 
     def test_if_equality_print_backtick_text_gives_error(self):
-        code = "if 1 is 1 print `yay!` else print `nay`"
+        code = textwrap.dedent("""\
+        prind skipping
+        if 1 is 1 print `yay!` else print `nay`""")
 
         expected = textwrap.dedent("""\
+        pass
         if '1' == '1':
           pass
         else:
           pass""")
 
         skipped_mappings = [
-            SkippedMapping(SourceRange(1, 11, 1, 23), hedy.exceptions.UnquotedTextException),
-            SkippedMapping(SourceRange(1, 29, 1, 40), hedy.exceptions.UnquotedTextException),
+            SkippedMapping(SourceRange(1, 1, 1, 15), hedy.exceptions.InvalidCommandException),
+            SkippedMapping(SourceRange(2, 11, 2, 23), hedy.exceptions.UnquotedTextException),
+            SkippedMapping(SourceRange(2, 29, 2, 40), hedy.exceptions.UnquotedTextException),
         ]
 
         self.multi_level_tester(

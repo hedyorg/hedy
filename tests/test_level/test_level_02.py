@@ -784,11 +784,17 @@ class TestsLevel2(HedyTester):
         )
 
     def test_ask_without_var_gives_error(self):
-        code = "ask is de papier goed?"
-        expected = "pass"
+        code = textwrap.dedent("""\
+        prind skipping
+        ask is de papier goed?""")
+
+        expected = textwrap.dedent("""\
+        pass
+        pass""")
 
         skipped_mappings = [
-            SkippedMapping(SourceRange(1, 1, 1, 23), hedy.exceptions.WrongLevelException),
+            SkippedMapping(SourceRange(1, 1, 1, 15), hedy.exceptions.InvalidCommandException),
+            SkippedMapping(SourceRange(2, 1, 2, 23), hedy.exceptions.WrongLevelException),
         ]
 
         self.multi_level_tester(

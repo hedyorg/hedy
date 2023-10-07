@@ -204,12 +204,17 @@ class TestsLevel7(HedyTester):
 
     def test_repeat_with_missing_times_gives_error(self):
         code = textwrap.dedent("""\
-        repeat 3 print 'n'""")
+        prind skipping
+        repeat 3 print 'n'
+        """)
 
-        expected = "pass"
+        expected = textwrap.dedent("""\
+        pass
+        pass""")
 
         skipped_mappings = [
-            SkippedMapping(SourceRange(1, 1, 1, 19), hedy.exceptions.IncompleteRepeatException),
+            SkippedMapping(SourceRange(1, 1, 1, 15), hedy.exceptions.InvalidCommandException),
+            SkippedMapping(SourceRange(2, 1, 2, 19), hedy.exceptions.IncompleteRepeatException),
         ]
 
         self.single_level_tester(
