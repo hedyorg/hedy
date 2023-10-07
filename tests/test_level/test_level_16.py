@@ -633,15 +633,18 @@ class TestsLevel16(HedyTester):
 
     def test_at_random_express_sleep(self):
         code = textwrap.dedent(f"""\
+            prind skipping
             numbers is [1, 2, 3]
             sleep numbers at random""")
 
         expected = textwrap.dedent(f"""\
+        pass
         numbers = [1, 2, 3]
         pass""")
 
         skipped_mappings = [
-            SkippedMapping(SourceRange(2, 1, 2, 24), hedy.exceptions.InvalidAtCommandException),
+            SkippedMapping(SourceRange(1, 1, 1, 15), hedy.exceptions.InvalidCommandException),
+            SkippedMapping(SourceRange(3, 1, 3, 24), hedy.exceptions.InvalidAtCommandException)
         ]
 
         self.single_level_tester(

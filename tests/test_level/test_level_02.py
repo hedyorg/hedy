@@ -369,14 +369,17 @@ class TestsLevel2(HedyTester):
     def test_access_before_assign_not_allowed(self):
         code = textwrap.dedent("""\
         print the name program
+        prind skipping
         name is Hedy""")
 
         expected = textwrap.dedent("""\
         pass
+        pass
         name = 'Hedy'""")
 
         skipped_mappings = [
-            SkippedMapping(SourceRange(1, 1, 1, 23), hedy.exceptions.AccessBeforeAssignException)
+            SkippedMapping(SourceRange(1, 1, 1, 23), hedy.exceptions.AccessBeforeAssignException),
+            SkippedMapping(SourceRange(2, 1, 2, 15), hedy.exceptions.InvalidCommandException)
         ]
 
         self.multi_level_tester(
@@ -416,11 +419,17 @@ class TestsLevel2(HedyTester):
 
     # issue #792
     def test_turn_right_number_gives_type_error(self):
-        code = "turn right 90"
-        expected = "pass"
+        code = textwrap.dedent("""\
+        turn right 90
+        prind skipping""")
+
+        expected = textwrap.dedent("""\
+        pass
+        pass""")
 
         skipped_mappings = [
-            SkippedMapping(SourceRange(1, 1, 1, 15), hedy.exceptions.InvalidArgumentException),
+            SkippedMapping(SourceRange(1, 1, 1, 14), hedy.exceptions.InvalidArgumentException),
+            SkippedMapping(SourceRange(2, 1, 2, 15), hedy.exceptions.InvalidCommandException)
         ]
 
         self.multi_level_tester(
@@ -559,11 +568,17 @@ class TestsLevel2(HedyTester):
     #
 
     def test_assign_with_space_gives_invalid(self):
-        code = " naam is Hedy"
-        expected = "pass"
+        code = textwrap.dedent("""\
+         naam is Hedy
+        prind skipping""")
+
+        expected = textwrap.dedent("""\
+        pass
+        pass""")
 
         skipped_mappings = [
             SkippedMapping(SourceRange(1, 1, 1, 14), hedy.exceptions.InvalidSpaceException),
+            SkippedMapping(SourceRange(2, 1, 2, 15), hedy.exceptions.InvalidCommandException)
         ]
 
         self.multi_level_tester(
