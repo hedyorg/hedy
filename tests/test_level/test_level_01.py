@@ -680,6 +680,15 @@ class TestsLevel1(HedyTester):
             skipped_mappings=skipped_mappings
         )
 
+    def test_one_mistake_not_skipped(self):
+        code = "prind wrong"
+
+        self.multi_level_tester(
+            code=code,
+            exception=hedy.exceptions.InvalidCommandException,
+            max_level=3
+        )
+
     def test_lonely_echo_gives_LonelyEcho(self):
         code = "echo wat dan?"
         self.single_level_tester(code, exception=hedy.exceptions.LonelyEchoException)

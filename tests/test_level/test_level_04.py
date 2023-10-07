@@ -276,6 +276,15 @@ class TestsLevel4(HedyTester):
             exception=hedy.exceptions.UnquotedTextException,
         )
 
+    def test_one_mistake_not_skipped(self):
+        code = "prind 'wrong'"
+
+        self.multi_level_tester(
+            code=code,
+            exception=hedy.exceptions.InvalidCommandException,
+            max_level=17
+        )
+
     def test_print_similar_var_gives_error(self):
         # continuing: is this unquoted? or did we forget an initialization of a variable?
 
