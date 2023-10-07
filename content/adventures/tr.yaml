@@ -2842,11 +2842,15 @@ adventures:
                     Ya da tabii ki tamamen farklı bir şey de olabilir!
                 example_code: |
                     ```
+                    ücret = 10
+                    yemek = {ask} 'Ne yemek istersiniz?'
+                    içecek = {ask} 'Ne içmek istersiniz?'
+                    {if} yemek {is} 'sandviç' _ içecek {is} 'meyve suyu'
                         {print} 'Bu bizim indirim menümüz'
-                        fiyat = fiyat - 3
-                    {if} içecekler {is} 'su' _ içecekler {is} 'meyve suyu'
+                        ücret = ücret - 3
+                    {if} içecek {is} 'su' _ içecek {is} 'meyve suyu'
                         {print} 'Bu sağlıklı bir seçim'
-                    {print} 'Toplam ' fiyat' lira ediyor'
+                    {print} 'Toplam ' ücret ' lira ediyor'
                     ```
                 start_code: '# kodunuzu buraya yazın'
             15:
