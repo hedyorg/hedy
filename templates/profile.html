@@ -142,10 +142,6 @@
                     {% endfor %}
                 </select>
             </div>
-            <div class="flex flex-row items-center mt-4 gap-4">
-                <input type="checkbox" id="agree_third_party" name="agree_third_party" {% if user_data['third_party'] %}checked{% endif %}>
-                <label class="text-center" for="agree_third_party">{{_('agree_third_party')}}</label>
-            </div>
             <div class="mb-4">
                 <button type="submit" class="green-btn mt-4">{{_('update_profile')}}</button>
             </div>

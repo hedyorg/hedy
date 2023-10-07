@@ -72,7 +72,6 @@ class AdminModule(WebsiteModule):
             "experience_languages",
             "language",
             "keyword_language",
-            "third_party",
         ]
 
         for user in users:
@@ -80,7 +79,6 @@ class AdminModule(WebsiteModule):
             data["email_verified"] = not bool(data["verification_pending"])
             data["is_teacher"] = bool(data["is_teacher"])
             data["teacher_request"] = True if data["teacher_request"] else None
-            data["third_party"] = True if data["third_party"] else None
             data["created"] = utils.timestamp_to_date(data["created"])
             data["last_login"] = utils.timestamp_to_date(data["last_login"]) if data.get("last_login") else None
             if category == "language":
