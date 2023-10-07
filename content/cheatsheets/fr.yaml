@@ -25,17 +25,17 @@
         {turn} {right}
 2:
 -   name: '{is}'
-    explanation: Donne un nom à un mot que tu peux utiliser dans le programme avec `{is}`.
+    explanation: Donne à un mot, un nom à utiliser dans le programme avec `{is}`. Tu peux choisir le nom toi-même.
     demo_code: |-
         nom {is} Hedy
         {print} bienvenue nom
 -   name: '{ask}'
-    explanation: Demande quelque chose avec `{ask}`. Attention ! Tu dois donner à la réponse un nom avec `{is}`.
+    explanation: Demande quelque chose avec `{ask}`. Attention ! Tu dois donner à la réponse un nom avec `{is}`.
     demo_code: |-
         couleur {is} {ask} Quelle est ta couleur préférée ?
         {print} couleur est ton préféré !
 -   name: '{sleep}'
-    explanation: '`{sleep}` Laissez Hedy faire une pause d''une (ou deux) seconde(s).'
+    explanation: 'Avec `{sleep}`, tu peux demander à Hedy de faire une pause d''une (ou plusieurs) seconde(s).'
     demo_code: |-
         {print} Laissez-moi réfléchir une seconde...
         {sleep}
@@ -43,7 +43,7 @@
         {sleep} 3
         {print} Eureka ! Je l'ai eu !
 -   name: '{is}  avec tortue'
-    explanation: Donnez un nom à un numéro en utilisant `{is}`. Tu peux choisir le nom toi-même.
+    explanation: Donnez un nom à un nombre en utilisant `{is}`. Tu peux choisir le nom toi-même.
     demo_code: |-
         angle {is} 90
         {turn} angle
