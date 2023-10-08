@@ -1496,6 +1496,8 @@ class ConvertToPython_1(ConvertToPython):
         exception_text_template = gettext('catch_index_exception')
         for i, list_name in enumerate(lists_names):
             exception_text = exception_text_template.replace('{list_name}', style_command(list_name))
+            if "'" in exception_text:
+                exception_text = exception_text.replace("'", "\\'")
             code += textwrap.dedent(f"""\
             try:
               {list_args[i]}
