@@ -1,0 +1,32 @@
+@top Program { eol* (Command eol+)* Command? }
+Command {
+    Assign  | Ask | ErrorInvalid
+}
+
+Assign { Var IsToken Text }
+Ask { Var IsToken AskToken Text }
+ErrorInvalid { TextWithoutSpaces Text? }
+
+Var { Name }
+
+@tokens {
+    @precedence { 
+        AskToken, 
+        IsToken,     
+        Name,
+        Text,
+        TextWithoutSpaces
+    }
+    
+    Comment { "#" ![\n]* }
+    AskToken { " "* "ask" " "* }
+    IsToken {  " "* "is" " "* }
+    eol { "\n" }
+    TextWithoutSpaces { ![\n #]+ }
+    Text { (![\n#ـ\r])(![\n#\r]*) }
+    Name { letterOrUnderscore letterOrNumeral*}
+    letterOrUnderscore { (@asciiLetter | $[_\u{a1}-\u{10ffff}])+ }
+    letterOrNumeral { letterOrUnderscore | (@digit | letterOrUnderscore)* }    
+}
+
+@skip { Comment }

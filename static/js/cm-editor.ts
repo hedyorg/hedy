@@ -2,11 +2,11 @@ import { HedyEditor, EditorType, HedyEditorCreator, EditorEvent, SourceRange } f
 import { EditorView, ViewUpdate, drawSelection, dropCursor, highlightActiveLine, 
         highlightActiveLineGutter, highlightSpecialChars, keymap, lineNumbers } from '@codemirror/view'
 import { EditorState, Compartment, StateEffect, Prec } from '@codemirror/state'
-import { oneDark, oneDarkTheme } from '@codemirror/theme-one-dark';
+import { oneDark } from '@codemirror/theme-one-dark';
 import { EventEmitter } from "./event-emitter";
 import { deleteTrailingWhitespace, defaultKeymap, historyKeymap } from '@codemirror/commands'
 import { history } from "@codemirror/commands"
-import { indentOnInput, defaultHighlightStyle, syntaxHighlighting, HighlightStyle ,LanguageSupport } from "@codemirror/language"
+import { indentOnInput, defaultHighlightStyle, syntaxHighlighting ,LanguageSupport } from "@codemirror/language"
 import { highlightSelectionMatches, searchKeymap } from "@codemirror/search";
 import { 
     errorLineField, debugLineField, decorationsTheme, addDebugLine, 
@@ -17,7 +17,9 @@ import {
 } from "./cm-decorations";
 
 
-import { parser } from "./level1-parser.js"
+import { parser as level1Parser } from "./lezer-parsers/level1-parser.js"
+import { parser as level2Parser } from "./lezer-parsers/level2-parser.js"
+
 import { styleTags, tags as t } from "@lezer/highlight";
 import {LRLanguage} from "@codemirror/language"
 
@@ -95,21 +97,40 @@ export class HedyCodeMirrorEditor implements HedyEditor {
         const cursorStyle = { ".cm-cursor, .cm-dropCursor": {borderLeftColor: "white", borderLeftWidth: "2px"} }
 
         const mainEditorStyling = EditorView.theme(this.themeStyles);
-        let parserWithMetadata = parser.configure({
+        
+        let parserWithMetadata = level1Parser.configure({
             props: [
                 styleTags({
-                    "print ask echo forward turn color": t.keyword,
+                    "PrintToken ask echo forward turn color": t.keyword,
                     Text: t.string,        
                     Comment: t.lineComment,
                     "Command/ErrorInvalid/Text Command/ErrorInvalid/TextWithoutSpaces": t.invalid,
                 })
             ]
         })
+        
+        let parserWithMetadata2 = level2Parser.configure({
+            props: [
+                styleTags({
+                    "PrintToken AskToken SleepToken ForwardToken TurnToken ColorToken IsToken": t.keyword,
+                    "Text": t.string,        
+                    Comment: t.lineComment,
+                    "Name": t.name,
+                    "Command/ErrorInvalid/Text Command/ErrorInvalid/TextWithoutSpaces": t.invalid,
+                })
+            ]
+        })
+        
+        const level2Language = LRLanguage.define({
+            parser: parserWithMetadata2,
+            languageData: {
+                commentTokens: {line: "#"}
+            }
+        })
 
-        const highlight = HighlightStyle.define([
-            {tag: t.invalid,
-             textDecoration: "red wavy underline"}
-        ])
+        function hedyLevel2() {
+            return new LanguageSupport(level2Language)
+        }
         
         const level1Language = LRLanguage.define({
             parser: parserWithMetadata,
@@ -124,8 +145,7 @@ export class HedyCodeMirrorEditor implements HedyEditor {
 
         const state = EditorState.create({
             doc: '',
-            extensions: [
-                syntaxHighlighting(highlight),
+            extensions: [                
                 EditorView.theme(cursorStyle),
                 breakpointGutter,
                 lineNumbers(),
@@ -151,7 +171,7 @@ export class HedyCodeMirrorEditor implements HedyEditor {
                 debugLineField,
                 incorrectLineField,
                 Prec.high(decorationsTheme),
-                hedyLevel1()
+                hedyLevel2()
             ]
         });
         this.view = new EditorView({
@@ -281,7 +301,7 @@ export class HedyCodeMirrorEditor implements HedyEditor {
             const transaction = this.view.state.update({
                 effects: StateEffect.appendConfig.of(EditorView.updateListener.of((v: ViewUpdate) => {                
                     if (v.docChanged) {
-                        console.log(parser.parse(v.state.doc.toString()).toString());
+                        console.log(level2Parser.parse(v.state.doc.toString()).toString());
                         handler();
                     }
                 }))
