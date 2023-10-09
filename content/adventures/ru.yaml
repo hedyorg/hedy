@@ -1551,7 +1551,7 @@ adventures:
                     ```
                 start_code: '# разместите здесь свой код'
             9:
-                story_text: "В этом уровне вы можете использовать вложенность, которая позволяет сделать дом с привидениями еще более интерактивным!\n\n### Упражнение\nСейчас очень трудно выиграть в этой игре, можете ли вы сделать так, чтобы выиграть было легче?\nИзмените свой код так, чтобы в нем была\
+                story_text: "В этом уровне вы можете использовать вложенность, которая позволяет сделать дом с привидениями еще более интерактивным!\n\n### Упражнение\n Сейчас очень трудно выиграть в этой игре, можете ли вы сделать так, чтобы выиграть было легче?\nИзмените свой код так, чтобы в нем была\
                     \ только одна неправильная дверь и две правильные, а не одна правильная дверь и две неправильные? \nПодсказка: Это означает замену переменной correct_door на wrong_door, а также изменение кода `{if}` и `{else}`.\nИ, конечно, вы можете изменить историю и сделать ее своей. Измените монстров\
                     \ или сделайте это счастливым игровым шоу, в котором вы получаете подарок!\n"
                 example_code: |
@@ -3683,6 +3683,23 @@ adventures:
                         {color} {black}
                     ```
                 start_code: '# place your code here'
+            10:
+                story_text: |
+                    In this level you can make the turtle draw a figure.
+                    The turtle will travel the distances in the list, one by one, making bigger and bigger steps.
+                    ### Exercise 1
+                    Add a 90 degree turn in the loop, so that a spiral is drawn.
+                    Add at least 5 numbers to the list, so the spiral grows larger.
+                     **(extra)** can you change the spiral into another shape? Experiment with numbers for the turn!
+                    ### Exercise 2
+                    The spiral is drawn outwards, make it go inwards?
+                example_code: |
+                    ```
+                    {turn} 90
+                    distances = 10, 20, 30, 40, 50, 60
+                    {for} distance {in} distances
+                        {forward} distance
+                start_code: '# Write your code here'
     while_command:
         name: '{while}'
         default_save_name: while_command

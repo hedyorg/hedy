@@ -116,10 +116,6 @@ class ProfileModule(WebsiteModule):
                 updates[field] = body[field]
             else:
                 updates[field] = None
-        if body.get("agree_third_party"):
-            updates["third_party"] = True
-        else:
-            updates["third_party"] = None
 
         if updates:
             self.db.update_user(username, updates)
@@ -146,7 +142,7 @@ class ProfileModule(WebsiteModule):
         user = self.db.user_by_username(user["username"])
 
         output = {"username": user["username"], "email": user["email"], "language": user.get("language", "en")}
-        for field in ["birth_year", "country", "gender", "prog_experience", "experience_languages", "third_party"]:
+        for field in ["birth_year", "country", "gender", "prog_experience", "experience_languages"]:
             if field in user:
                 output[field] = user[field]
         if "verification_pending" in user:

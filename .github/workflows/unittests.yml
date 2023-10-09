@@ -6,9 +6,7 @@ name: Unit tests
 
 on:
   push:
-    branches: [ main ]
   pull_request:
-    branches: [ main ]
   workflow_dispatch: {} # Allow running the workflow on-demand
 
 jobs:
@@ -18,13 +16,17 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - uses: actions/checkout@v3
-      with:
-        fetch-depth: 0
+    - uses: actions/checkout@v4
     - name: Set up Python 3.9
-      uses: actions/setup-python@v1
+      uses: actions/setup-python@v4
       with:
         python-version: 3.9
+        cache: 'pip'
+    - name: Set up NodeJS 16
+      uses: actions/setup-node@v3
+      with:
+        node-version: 16
+        cache: 'npm'
     - name: Install Python dependencies
       run: |
         python3 -m pip install --upgrade pip
@@ -32,12 +34,21 @@ jobs:
     - name: Install Nodejs dependencies
       run: |
         npm ci
-    - name: Generate grammar files
-      run: |
-        python ./content/yaml_to_lark_utils.py
+    # we already run this in build-tools/github/validate-tests
+    #- name: Generate grammar files
+    #  run: |
+    #    python ./content/yaml_to_lark_utils.py
     - name: Compiling Babel translations
       run: |
         pybabel compile -f -d translations
+    - name: Calculate hedy cache key
+      run: "echo value=$(ls -1 hedy.py grammars/* | sort | xargs tail -n 99999999 | sha256sum | cut -f 1 -d ' ') >> $GITHUB_OUTPUT"
+      id: hedy_cache_key
+    - name: Cache hedy test runs
+      uses: actions/cache@v3
+      with:
+        path: .test-cache
+        key: "hedy-test-cache-${{ steps.hedy_cache_key.outputs.value }}"
     - name: Run weblate tests
       shell: pwsh
       id: weblate_tests

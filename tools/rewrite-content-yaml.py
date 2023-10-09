@@ -27,14 +27,15 @@ from ruamel import yaml as ruamel_yaml
 # until we integratie with json schema
 
 PREFERRED_KEY_ORDER = [
+    "header",  # slide header to come before its text
     # achievements
     "title",
-    "story",
+    "text",
     # adventures
     "name",
     "default_save_name",
     "description",
-    "levels",
+    # "levels", # comment out, else pages push key&intro down the file for common mistakes
     "intro_text",
     "story_text",
     "example_code",
@@ -59,6 +60,7 @@ PREFERRED_KEY_ORDER = [
     "text",
     "key",
     "intro",
+    "levels",
     "subsections",
     "error_text",
     "error_code",
@@ -66,7 +68,7 @@ PREFERRED_KEY_ORDER = [
     "solution_code",
     # parsons
     "story",
-    "code",
+    # "code", #comment out, else quiz code comes before question text
     # quizzes
     "question_text",
     "code",
@@ -75,6 +77,12 @@ PREFERRED_KEY_ORDER = [
     "hint",
     "correct_answer",
     "question_score",
+    "option",
+    "feedback"
+    # slides
+    "header",  # add this to the beginning, else text comes first from achievements
+    "text",
+    "editor",
 ]
 
 

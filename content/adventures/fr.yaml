@@ -198,7 +198,7 @@ adventures:
             10:
                 story_text: |
                     In this level you can use the {for} command in your story. In this way you could easily program the children's book 'brown bear, brown bear, what do you see'.
-                example_code: "```\nanimaux = _ , _ , _ \n{print} 'Ours brun, Ours brun'\n{print} 'Que vois-tu?'\n```\n"
+                example_code: "```\nanimaux = _ , _ , _ \n{print} 'Ours brun, Ours brun'\n {print} 'Que vois-tu?'\n```\n"
                 start_code: '# écrit ton code ici'
             12:
                 story_text: In this level you can use the quotation marks to save multiple words in a variable.
@@ -527,8 +527,7 @@ adventures:
                     {if} answer {is} correct_answer {print} 'okay'
                     {else} {print} 'mistake! it was ' correct_answer
                     ```
-                story_text_3: |4
-
+                story_text_3: |
                     **Extra** Vous pouvez également laisser l'ordinateur faire des additions aléatoires de lui-même en utilisant random.
 
                     C'est ainsi que vous choisissez un certain nombre de tables pour vous entraîner, et que vous obtenez toujours une somme différente :
@@ -597,12 +596,11 @@ adventures:
                     ```
                 start_code: '# écrit ton code ici'
             13:
-                story_text: |4
-
-                    ### Exercice 1
+                story_text: |
+                    ### Exercise 1
                     Let's make the practice program a bit harder. The player now has to answers two questions correctly. Fill out the blanks to complete the program.
 
-                    ### Exercice 2 (extra)
+                    ### Exercise 2 (extra)
                     Sometimes, calculations have multiple correct answers. For example, 10 can be divided by 5 and by 2. So the question 'What number divides 10?' can be answered by 2 and by 5.
                     Ask for a calculation that has multiple correct answers, ask the player to answer it, and determine if it is correct using `{or}`.
                     Empty the programming field and create your own solution.
@@ -1308,8 +1306,8 @@ adventures:
                 example_code: |
                     ```
                     amis {is} Jonathan, Lucile, David
-                    {print} 'Je peux prédire si tu vas gagner à la loterie demain !'
-                    personne {is} {ask} 'Qui es-tu ?'
+                    {print} "Je peux prédire si tu vas gagner à la loterie demain !"
+                    personne {is} {ask} "Qui es-tu ?"
                     bonnes_réponses {is} Hourra ! Tu as gagné !, Tu vas certainement gagner !, Nous avons un gagnant !
                     mauvaises_réponses {is} Pas de chance ! Essaye encore !, C`est une autre personne qui gagnera, Tu as perdu !
                     {if} personne {in} amis {print} bonnes_réponses {at} {random}
@@ -1799,7 +1797,7 @@ adventures:
                     ### Exercice
                     Il est temps de faire tes propres variables !
                     Dans le code d'exemple, nous avons défini la variable `animaux_favoris`. En ligne 1, la variable reçoit une valeur, et en ligne 2 nous avons utilisé la variable dans une commande `{print}`.
-                    Pour commencer, termine notre exemple en remplissant l'espace blanc avec le nom de ton animal favori. Ensuite, essaye d'écrire 3 autres codes toi-même. Choisi un mot, donne-lui une valeur avec la commande `{is}`. Ensuite, utilise ta nouvelle variable dans une commande `{print}`, comme nous venons de le faire.
+                    Pour commencer, termine notre exemple en remplissant l'espace vide rose avec le nom de ton animal favori. Ensuite, essaye d'écrire 3 autres codes toi-même. Choisi un mot, donne-lui une valeur avec la commande `{is}`. Ensuite, utilise ta nouvelle variable dans une commande `{print}`, comme nous venons de le faire.
                 example_code_2: |
                     ```
                     animaux_préférés {is} _
@@ -2491,7 +2489,7 @@ adventures:
                 story_text_2: |
                     ### Exercice
                     Copie ton code du restaurant du niveau précédent dans la zone de programmation ci-dessous.
-                    Corrige le code en remplaçant les commandes `{ask}`et `{echo}`et en utilisant des variables comme tu viens de l'apprendre à ce niveau.
+                    Corrige le code en remplaçant les commandes `{ask}` et `{echo}` et en utilisant des variables comme tu viens de l'apprendre à ce niveau.
 
                     Maintenant que ton code fonctionne à nouveau, c'est le moment d'ajouter quelquechose en plus.
                     Regarde la dernière ligne du code d'exemple : `{print} nouriture avec accompagnement sont en route !`
@@ -2900,7 +2898,7 @@ adventures:
         levels:
             2:
                 story_text: |
-                    Maintenant que tu as appris comment utiliser la commande `{ask}, tu peux rendre ton code de pierre, papier, ciseaux interactif !
+                    Maintenant que tu as appris comment utiliser la commande `{ask}`, tu peux rendre ton code de pierre, papier, ciseaux interactif !
 
                     ### Exercice
                     Rend le code de pierre, papier, ciseaux interactif en ajoutant la commande `{ask}`et une question à ton code de pierre, papier, ciseaux.
@@ -3626,6 +3624,23 @@ adventures:
                         {color} {black}
                     ```
                 start_code: '# écrit ton code ici'
+            10:
+                story_text: |
+                    In this level you can make the turtle draw a figure.
+                    The turtle will travel the distances in the list, one by one, making bigger and bigger steps.
+                    ### Exercise 1
+                    Add a 90 degree turn in the loop, so that a spiral is drawn.
+                    Add at least 5 numbers to the list, so the spiral grows larger.
+                     **(extra)** can you change the spiral into another shape? Experiment with numbers for the turn!
+                    ### Exercise 2
+                    The spiral is drawn outwards, make it go inwards?
+                example_code: |
+                    ```
+                    {turn} 90
+                    distances = 10, 20, 30, 40, 50, 60
+                    {for} distance {in} distances
+                        {forward} distance
+                start_code: '# Write your code here'
     while_command:
         name: '{while}'
         default_save_name: while_command

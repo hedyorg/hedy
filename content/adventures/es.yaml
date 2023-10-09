@@ -141,7 +141,7 @@ adventures:
                 start_code: '{print} ''¡Aquí viene tu historia!'''
             7:
                 story_text: "En una historia, a veces es necesario repetir algo. Por ejemplo, si alguien pide ayuda, o si se canta una canción.\nEso lo puedes hacer ahora en el nivel 6 usando `{repeat}`.\n\n### Desafío\nAñade repetición a tu propia historia. En tu carpeta de historias guardadas, abre\
-                    \ la del Nivel 6, \nencuentra una línea que contenga `{print}` y repítela.\n"
+                    \ la del Nivel 6, \n encuentra una línea que contenga `{print}` y repítela.\n"
                 example_code: |
                     ```
                     {print} 'La princesa grita pidiendo ayuda'
@@ -150,7 +150,7 @@ adventures:
                     ```
                 start_code: '{repeat} 5 {times} {print} ''¡Ayuda!'''
             8:
-                story_text: "En este nivel puedes usar varias líneas en tus comandos `{if}`, ¡de esta manera puedes mejorar tu final malo o bueno!\n\n### Ejercicio 1\nEl código de ejemplo muestra dos finales diferentes; uno donde los personajes usan una máquina del tiempo y otro en el que no.\nCompleta\
+                story_text: "En este nivel puedes usar varias líneas en tus comandos `{if}`, ¡de esta manera puedes mejorar tu final malo o bueno!\n\n### Ejercicio 1\n El código de ejemplo muestra dos finales diferentes; uno donde los personajes usan una máquina del tiempo y otro en el que no.\nCompleta\
                     \ los espacios en blanco con al menos una frase por cada final. \n**Extra** Haz que la historia dure más. ¿Qué ocurre en la historia? Puedes también añadir un segundo `{ask}` con diferentes opciones.\n\n### Ejercicio 2\nVuelve a tus historias guardadas, escoge la historia del nivel\
                     \ 5. Escribe un final bueno y uno malo de al menos tres líneas cada uno.\n"
                 example_code: |
@@ -201,7 +201,7 @@ adventures:
                     ### Ejercicio
 
                     Mira en <a href="https://www.yonkerspublicschools.org/cms/lib/NY01814060/Centricity/Domain/1621/Brown%20Bear%20Book.pdf"> la historia </a> si no la conoces, asegúrate que este igual que el libro.
-                example_code: "```\nanimales = _ , _ , _ \n{print} 'Oso pardo, Oso pardo'\n{print} '¿Qué ves?'\n```\n"
+                example_code: "```\nanimales = _ , _ , _ \n{print} 'Oso pardo, Oso pardo'\n {print} '¿Qué ves?'\n```\n"
                 start_code: '# coloca tu código aquí'
             12:
                 story_text: |-
@@ -719,7 +719,7 @@ adventures:
                     Prueba el código por ti mismo con el botón verde 'Ejecutar código' bajo el bloque de programación.
 
                     ¿Preparado? ¡Entonces ve a la siguiente pestaña para aprender tu primer comando!
-                start_code: '`{print}` ¡hola mundo!'
+                start_code: '{print} ¡hola mundo!'
             2:
                 story_text: |
                     ¡Enhorabuena! Has alcanzado el nivel 2. ¡Espero que ya hayas hecho algunos códigos increíbles!
@@ -804,7 +804,7 @@ adventures:
                     {if} pedido {is} precio_comida patatas fritas {is} 2
                     bebida {is} {ask} '¿Qué le gustaría beber?'
                     {if} bebida {is} precio_bebida agua {is} 0
-                    demás precio_bebida {is} 3
+                    {else} precio_bebida {is} 3
                     precio_total {is} precio_comida + precio_bebida
                     {print} 'Serán ' precio_total ' dólares, por favor'
                     ```
@@ -2769,11 +2769,15 @@ adventures:
                     con sus patatas y tortitas. ¡O por supuesto algo completamente diferente!
                 example_code: |
                     ```
-                        {print} 'Ese es nuestro menú de descuentos'
+                    precio = 10
+                    comida = {ask} ¿Qué te gustaría comer?
+                    bebidas = {ask} ¿Qué quieres beber?
+                    {if} comida {is} 'sandwich' _ bebida {is} 'zumo'
+                        {print} 'Este es nuestro menú de descuentos'
                         precio = precio - 3
                     {if} bebidas {is} 'agua' _ bebidas {is} 'zumo'
-                        {print} 'Esa es una opción sana'
-                    {print} 'Serán ' precio ' dólares'
+                        {print} 'Esa es una opción saludable'
+                    {print} 'Eso será ' precio ' dólares'
                     ```
                 start_code: '# pon tú código aquí'
             15:
@@ -2880,7 +2884,7 @@ adventures:
                     Rellena el código correcto en los huecos en blanco para ver si es un empate.
                 start_code: '{print} ''Bienvenido a tu propio piedra, papel o tijera!'''
             9:
-                story_text: "En este nivel puedes programar el juego completo de piedra, papel, tijeras anidando los comandos `{if}`. \n\n### Ejercicio\n¿Puedes completar el código? El programa debe decir quien ha ganado para cada combinación.\n\n**Extra** ¿Quieres jugar más de una partida? Amplia el\
+                story_text: "En este nivel puedes programar el juego completo de piedra, papel, tijeras anidando los comandos `{if}`. \n\n### Ejercicio\n¿Puedes completar el código? El programa debe decir quien ha ganado para cada combinación.\n \n**Extra** ¿Quieres jugar más de una partida? Amplia el\
                     \ código para que puedas jugar varias rondas. Incluso puedes usar un `{ask}` para preguntar al usuario cuantas rondas quieren jugar.\n"
                 example_code: |
                     ```
@@ -3677,6 +3681,23 @@ adventures:
                         {color} {black}
                     ```
                 start_code: '# pon tu código aquí'
+            10:
+                story_text: |
+                    In this level you can make the turtle draw a figure.
+                    The turtle will travel the distances in the list, one by one, making bigger and bigger steps.
+                    ### Exercise 1
+                    Add a 90 degree turn in the loop, so that a spiral is drawn.
+                    Add at least 5 numbers to the list, so the spiral grows larger.
+                     **(extra)** can you change the spiral into another shape? Experiment with numbers for the turn!
+                    ### Exercise 2
+                    The spiral is drawn outwards, make it go inwards?
+                example_code: |
+                    ```
+                    {turn} 90
+                    distancias = 10, 20, 30, 40, 50, 60
+                    {for} distancia {in} distancias
+                        {forward} distancia
+                start_code: '# Write your code here'
     while_command:
         name: '{while}'
         default_save_name: comando_mientras
