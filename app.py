@@ -1406,7 +1406,7 @@ def get_embedded_code_editor(level):
     # - We only require the code editor and output, minimize dependencies as much as possible
     # - For simplicity, allow a variable to disable 'extras' such as hiding the editor and debug mode
 
-    return render_template("embedded-editor.html", raw=True, embedded=True,
+    return render_template("embedded-editor.html", embedded=True,
                            level=level, program=program, javascript_page_options=dict(
                                page='code',
                                lang=g.lang,

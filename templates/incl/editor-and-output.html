@@ -1,5 +1,5 @@
 <script src="https://cdn.jsdelivr.net/npm/js-confetti@latest/dist/js-confetti.browser.js"></script>
-    {% if raw %}
+    {% if raw or embedded %}
         <div id="editor-area" class="relative grid grid-cols-1 md:grid-cols-2 md:grid-flow-row-dense gap-4 mt-0 mb-0">
     {% else %}
         <div id="editor-area" class="relative grid grid-cols-1 md:grid-cols-2 md:grid-flow-row-dense gap-4 mt-5">
@@ -123,7 +123,7 @@
         {% endif %}
       </div>
     </div>
-    <div class="w-full flex flex-col order-3 relative" id="code_output" {% if raw %} style="height: 14rem;" {% else %} style="height: 22rem;" {% endif %}>
+    <div class="w-full flex flex-col order-3 relative" id="code_output" {% if raw %} style="height: 14rem;" {% elif not embedded %} style="height: 22rem;" {% endif %}>
         {% if not embedded %}
             <div class="inline-block ltr:right-0 rtl:left-0 absolute z-10 mx-2 mt-2 text-white" id="variables_container">
                 <button id="variable_button" class="inline-flex items-center text-xl px-2 bg-blue-600 rounded-lg" onclick="hedyApp.showVariableView()">
@@ -198,7 +198,7 @@
                 <button onclick="hedyApp.delete_program('{{ program_id }}', {{ 0 }}, '{{_('delete_confirm')}}')" class="red-btn">{{_('delete')}}</button>
         {% endif %}
       </div>
-      {% if not raw %}
+      {% if not raw and not embedded %}
       <div id="speak_container" class="hidden mt-4 flex flex-row items-center w-max overflow-visible">
           <label for="speak_dropdown" id="speak_aloud_label" class="ltr:mr-2 rtl:ml-2">{{_('read_code_label')}}:</label>
           <select id="speak_dropdown" class="appearance-none w-40 bg-gray-200 border border-gray-600 text-gray-700 py-1 px-4 rounded">
@@ -237,7 +237,7 @@
             {% endif %}
           </div>
       {% else %}
-           {% if not raw %}
+           {% if not raw and not embedded %}
                   <div class="flex {% if prev_level %}justify-between{% else %}justify-end{%endif%}">
                     {% if prev_level %}
                       <a class="green-btn" href="/adventure/{{ adventures[0].short_name}}/{{prev_level}}">{{_('regress_button')|replace("{level}", prev_level)}}</a>
@@ -251,7 +251,7 @@
     </div>
   </div>
 <!-- developer mode toggle -->
-{% if not raw %}
+{% if not raw and not embedded %}
 <div class="mx-auto mt-4 w-64 border-gray-400 border-2 rounded-full py-2 px-4{% if editor_readonly or enforce_developers_mode %} hidden{% endif %}" id="developers_toggle_container">
   <label for="developers_toggle" class="flex flex-row items-center justify-center cursor-pointer">
     <div class="relative">
