@@ -1395,12 +1395,14 @@ def get_specific_adventure(name, level, mode):
 
 @app.route('/embedded/<int:level>', methods=['GET'], defaults={'level': 1})
 def get_embedded_code_editor(level):
+    run = True if request.args.get('run') else False
     encoded_program = request.args.get('program')
+
     program = '# Welcome to Hedy!'
     if encoded_program:
         program = base64.b64decode(encoded_program)
 
-    return render_template("embedded-editor.html", embedded=True, run=True,
+    return render_template("embedded-editor.html", embedded=True, run=run,
                            level=level, program=program, javascript_page_options=dict(
                                page='code',
                                lang=g.lang,
