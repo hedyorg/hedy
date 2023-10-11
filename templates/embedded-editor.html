@@ -128,7 +128,8 @@
         <script>
             function sendRunEvent() {
               window.parent.postMessage({
-                  'run': true
+                  'run': true,
+                  'program': hedyApp.get_active_and_trimmed_code()
               }, '*');
             }
 
