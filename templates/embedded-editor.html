@@ -133,6 +133,18 @@
               }, '*');
             }
 
+            function sendChangeEvent() {
+                window.parent.postMessage({
+                    'change': true,
+                    'program': hedyApp.get_active_and_trimmed_code()
+                }, '*')
+            }
+
+            // Todo: Might be useful to implement a debounce to prevent spamming messages
+            hedyApp.theGlobalEditor.on('change', function() {
+               sendChangeEvent();
+            });
+
             $('#runit').on('click', function() {
                 sendRunEvent();
             });
