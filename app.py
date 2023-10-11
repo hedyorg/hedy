@@ -1,5 +1,6 @@
 # coding=utf-8
 import base64
+import binascii
 import collections
 import copy
 import logging
@@ -1398,9 +1399,14 @@ def get_embedded_code_editor(level):
     run = True if request.args.get('run') == 'true' else False
     encoded_program = request.args.get('program')
 
+    print(encoded_program)
+
     program = '# Welcome to Hedy!'
     if encoded_program:
-        program = base64.b64decode(encoded_program)
+        try:
+            program = base64.b64decode(encoded_program)
+        except binascii.Error:
+            program = '# You provided an invalid program, please try again'
 
     return render_template("embedded-editor.html", embedded=True, run=run,
                            level=level, program=program, javascript_page_options=dict(
