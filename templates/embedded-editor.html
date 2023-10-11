@@ -1,38 +1,128 @@
 <!doctype html>
 <html class="notranslate" translate="no">
-  <head>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Balsamiq+Sans:ital,wght@0,400;0,700;1,400;1,700&display=swap">
-    <link rel="stylesheet" href="{{static(generated_css_file)}}">
-    <link rel="stylesheet" href="{{static('/css/additional.css')}}">
-    <link rel="stylesheet" href="{{static('/fontawesome/css/all.min.css')}}"/>
-  </head>
-  <body>
-    {% include "incl/editor-and-output.html" %}
-    {% block scripts %}
-        <script src="{{static('/vendor/jquery.min.js')}}" type="text/javascript" crossorigin="anonymous"></script>
-        <script src="{{static('/vendor/htmx-1.8.5.min.js')}}" type="text/javascript" crossorigin="anonymous"></script>
-        <script src="{{static('/vendor/hyperscript-0.9.8.min.js')}}" type="text/javascript" crossorigin="anonymous"></script>
-        <script src="{{static('/vendor/js-confetti.browser.js')}}" type="text/javascript" crossorigin="anonymous"></script>
-        <script src="{{static('/vendor/skulpt.min.js')}}" type="text/javascript" crossorigin="anonymous"></script>
-        <script src="{{static('/vendor/skulpt-stdlib.js')}}" type="text/javascript" crossorigin="anonymous"></script>
-        <script src="{{static('/vendor/ace.js')}}" type="text/javascript" charset="utf-8" crossorigin="anonymous"></script>
-        <script src="{{static('/vendor/ext-whitespace.js')}}" type="text/javascript" charset="utf-8" crossorigin="anonymous"></script>
-        <script src="{{static('/vendor/ext-rtl.js')}}" type="text/javascript" charset="utf-8" crossorigin="anonymous"></script>
-        <script src="{{static('/js/appbundle.js')}}" type="text/javascript" crossorigin="anonymous"></script>
-    {% block additional_scripts %}{% endblock %}
-    {# We must mark the JSON safe -- in script tags HTML entities are not allowed #}
-    <script>
-        hedyApp.initialize({
-          lang: 'nl',
-          level: 1,
-          keyword_language: 'en',
-          staticRoot: {{ static('')|tojson|safe }},
-          javascriptPageOptions: {{ javascript_page_options|tojson|safe }},
-        })
-    </script>
-    {% endblock %}
-  </body>
+    <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Balsamiq+Sans:ital,wght@0,400;0,700;1,400;1,700&display=swap">
+        <link rel="stylesheet" href="{{static(generated_css_file)}}">
+        <link rel="stylesheet" href="{{static('/css/additional.css')}}">
+        <link rel="stylesheet" href="{{static('/fontawesome/css/all.min.css')}}"/>
+    </head>
+    <body class="flex flex-col gap-2 min-h-screen">
+        <div id="editor-area" class="w-full flex flex-grow gap-4 mt-0 mb-0">
+            <div class="flex flex-col w-full" id="code_editor">
+                <div class="w-full flex-1 flex flex-col">
+                    <div id="editor" style="background: #272822; font-size:0.95em; color: white" lang="en" blurred='false'class="w-full flex-1 text-lg rounded">
+                        {{program}}
+                    </div>
+                    <div id="errorbox"
+                      class="flex-0 z-20 mt-0 bg-red-100 border-t-4 border-red-500 rounded-b text-red-900 px-4 py-3 shadow-md" role="alert"
+                      style="display: none;">
+                      <p class="close-dialog" onclick="hedyApp.error.hide ()"><i class="fa-solid fa-xmark"></i></p>
+                      <div class="flex">
+                        <div class="py-1">
+                          <svg class="fill-current h-6 w-6 text-red-500 ltr:mr-4 rtl:ml-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
+                            <path
+                              d="M2.93 17.07A10 10 0 1 1 17.07 2.93 10 10 0 0 1 2.93 17.07zm12.73-1.41A8 8 0 1 0 4.34 4.34a8 8 0 0 0 11.32 11.32zM9 11V9h2v6H9v-4zm0-6h2v2H9V5z" />
+                          </svg>
+                        </div>
+                        <div>
+                          <p class="caption font-bold">Oops</p>
+                          <p class="details text-sm" data-cy="error_details">An error occurred.</p>
+                        </div>
+                      </div>
+                    </div>
+                    <div id="warningbox"
+                      class="flex-0 z-20 mt-0 bg-yellow-100 border-t-4 border-yellow-500 rounded-b text-yellow-900 px-4 py-3 shadow-md"
+                      role="alert" style="display: none;">
+                      <p class="close-dialog" onclick="hedyApp.error.hide ()"><i class="fa-solid fa-xmark"></i></p>
+                      <div class="flex">
+                        <div class="py-1">
+                            <div id="warningbox_icon">
+                                <svg class="fill-current h-6 w-6 text-yellow-500 ltr:mr-4 rtl:ml-4" xmlns="http://www.w3.org/2000/svg"
+                            viewBox="0 0 20 20">
+                            <path d="M2.93 17.07A10 10 0 1 1 17.07 2.93 10 10 0 0 1 2.93 17.07zm12.73-1.41A8 8 0 1 0 4.34 4.34a8 8 0 0 0 11.32 11.32zM9 11V9h2v6H9v-4zm0-6h2v2H9V5z" />
+                          </svg>
+                            </div>
+                        </div>
+                        <div>
+                          <p class="caption font-bold">Oops</p>
+                          <p class="details text-sm">An error occurred.</p>
+                        </div>
+                      </div>
+                    </div>
+                    <div id="okbox"
+                      class="flex-0 z-20 mt-0 bg-green-100 border-t-4 border-green-500 rounded-b text-green-900 px-4 py-3 shadow-md"
+                      role="alert" style="display: none;">
+                      <div class="flex">
+                        <div class="flex w-full justify-between items-center">
+                          <p class="caption font-bold">Success</p>
+                        </div>
+                      </div>
+                    </div>
+                </div>
+            </div>
+            <div class="w-full flex flex-col order-2 relative" id="code_output">
+                  <!-- tabindex=0 makes the div focusable -->
+                  <div id="output" tabindex=0 class="flex-1 rounded p-2 px-3 bg-gray-900 color-white w-full text-lg overflow-auto {% if raw %} max-h-56 {% endif %}" style="min-height: 3rem;"></div>
+                  <div id="turtlecanvas" class="flex-0 ltr:pl-4 rtl:pr-4"  raw="yes"></div>
+                  <div id="inline-modal" class="flex-0">
+                    <div id="ask-modal" class="py-2 text-left px-3 border-4 border-teal-500 mt-3 rounded bg-green-100" style="display: none">
+                    <!--Title-->
+                        <div class="flex justify-between items-center">
+                        <p class="text-2xl font-bold caption">Header</p>
+                    </div>
+                    <!--Body-->
+                    <!--Body-->
+                    <form>
+                        <div class="my-2 flex">
+                            <input type="text" class="border border-green-400 rounded p-2 px-3 flex-1" placeholder="{{_('enter_text')}}">
+                            <input type="submit" class="flex-0 green-btn ltr:ml-3 rtl:mr-3" value="{{_('enter')}}"></p>
+                        </div>
+                    </form>
+                </div>
+                <div id="pygame-modal" class="py-2 text-left px-3 border-4 border-teal-500 mt-3 rounded bg-green-100" style="display: none;z-index: 99;">
+                  <!--Title-->
+                  <div class="flex justify-between items-center">
+                    <p class="text-2xl font-bold caption">{{_('pygame_waiting_for_input')}}</p>
+                  </div>
+                </div>
+              </div>
+              <div id="dynamic-buttons" class="flex mt-3 gap-2 overflow-auto border-4 border-blue-600 rounded bg-blue-300 py-2 px-3" style="display: none">
+              </div>
+            </div>
+        </div>
+        <div class="h-12" id="code_related_buttons">
+          <div class="flex justify-between gap-2 items-start h-12 overflow-visible">
+            <div id="runButtonContainer">
+              <button id="runit" class="green-btn" onclick='hedyApp.runit({{ level }}, "{{ g.lang }}", {{_('already_program_running')|default(None)|tojson}})'>{{_('run_code_button')}} </button>
+              <button id="stopit" class="red-btn" onclick="hedyApp.stopit()" style="display: none;">{{_('stop_code_button')}}</button>
+            </div>
+          </div>
+        </div>
+        {% block scripts %}
+            <script src="{{static('/vendor/jquery.min.js')}}" type="text/javascript" crossorigin="anonymous"></script>
+            <script src="{{static('/vendor/htmx-1.8.5.min.js')}}" type="text/javascript" crossorigin="anonymous"></script>
+            <script src="{{static('/vendor/hyperscript-0.9.8.min.js')}}" type="text/javascript" crossorigin="anonymous"></script>
+            <script src="{{static('/vendor/js-confetti.browser.js')}}" type="text/javascript" crossorigin="anonymous"></script>
+            <script src="{{static('/vendor/skulpt.min.js')}}" type="text/javascript" crossorigin="anonymous"></script>
+            <script src="{{static('/vendor/skulpt-stdlib.js')}}" type="text/javascript" crossorigin="anonymous"></script>
+            <script src="{{static('/vendor/ace.js')}}" type="text/javascript" charset="utf-8" crossorigin="anonymous"></script>
+            <script src="{{static('/vendor/ext-whitespace.js')}}" type="text/javascript" charset="utf-8" crossorigin="anonymous"></script>
+            <script src="{{static('/vendor/ext-rtl.js')}}" type="text/javascript" charset="utf-8" crossorigin="anonymous"></script>
+            <script src="{{static('/js/appbundle.js')}}" type="text/javascript" crossorigin="anonymous"></script>
+        {% block additional_scripts %}{% endblock %}
+        {# We must mark the JSON safe -- in script tags HTML entities are not allowed #}
+        <script>
+            hedyApp.initialize({
+              lang: 'nl',
+              level: 1,
+              keyword_language: 'en',
+              staticRoot: {{ static('')|tojson|safe }},
+              javascriptPageOptions: {{ javascript_page_options|tojson|safe }},
+            })
+        </script>
+        {% endblock %}
+    </body>
 </html>
