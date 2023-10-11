@@ -1399,12 +1399,11 @@ def get_embedded_code_editor(level):
     run = True if request.args.get('run') == 'true' else False
     encoded_program = request.args.get('program')
 
-    print(encoded_program)
-
-    program = '# Welcome to Hedy!'
+    program = '# Welcome to Hedy! (No program provided)'
     if encoded_program:
         try:
             program = base64.b64decode(encoded_program)
+            program = program.decode('utf-8')
         except binascii.Error:
             program = '# You provided an invalid program, please try again'
 

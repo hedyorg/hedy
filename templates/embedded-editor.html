@@ -13,9 +13,7 @@
         <div id="editor-area" class="w-full flex flex-grow gap-4 mt-0 mb-0">
             <div class="flex flex-col w-full" id="code_editor">
                 <div class="w-full flex-1 flex flex-col">
-                    <div id="editor" style="background: #272822; font-size:0.95em; color: white" lang="en" blurred='false'class="w-full flex-1 text-lg rounded">
-                        {{program}}
-                    </div>
+                    <div id="editor" style="background: #272822; font-size:0.95em; color: white" lang="en" blurred='false'class="w-full flex-1 text-lg rounded">{{program}}</div>
                     <div id="errorbox"
                       class="flex-0 z-20 mt-0 bg-red-100 border-t-4 border-red-500 rounded-b text-red-900 px-4 py-3 shadow-md" role="alert"
                       style="display: none;">
@@ -103,7 +101,7 @@
                   <button id="stopit" class="red-btn" onclick="hedyApp.stopit()" style="display: none;">{{_('stop_code_button')}}</button>
                 </div>
               </div>
-
+            </div>
         {% endif %}
         {% block scripts %}
             <script src="{{static('/vendor/jquery.min.js')}}" type="text/javascript" crossorigin="anonymous"></script>
@@ -125,6 +123,18 @@
               staticRoot: {{ static('')|tojson|safe }},
               javascriptPageOptions: {{ javascript_page_options|tojson|safe }},
             })
+        </script>
+        <!-- We need a special approach to allow listening to the run button click from outside the embedded editor -->
+        <script>
+            function sendRunEvent() {
+              window.parent.postMessage({
+                  'run': true
+              }, '*');
+            }
+
+            $('#runit').on('click', function() {
+                sendRunEvent();
+            });
         </script>
         {% endblock %}
     </body>
