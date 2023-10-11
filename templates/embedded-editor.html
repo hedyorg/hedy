@@ -124,7 +124,7 @@
               javascriptPageOptions: {{ javascript_page_options|tojson|safe }},
             })
         </script>
-        <!-- We need a special approach to allow listening to the run button click from outside the embedded editor -->
+        <!-- We need a special approach to allow listening to events from outside the embedded editor -->
         <script>
             function sendRunEvent() {
               window.parent.postMessage({
