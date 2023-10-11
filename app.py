@@ -1396,17 +1396,11 @@ def get_specific_adventure(name, level, mode):
 @app.route('/embedded/<int:level>', methods=['GET'], defaults={'level': 1})
 def get_embedded_code_editor(level):
     encoded_program = request.args.get('program')
-    program = 'print hello, welcome to the embedded Hedy editor!'
+    program = '# Welcome to Hedy!'
     if encoded_program:
         program = base64.b64decode(encoded_program)
 
-    # We want to implement a routing to allow embedding the hedy code editor anywhere
-    # The following aspects are to be kept in mind:
-    # - A program can be provided as a parameter (base64 encoded)
-    # - We only require the code editor and output, minimize dependencies as much as possible
-    # - For simplicity, allow a variable to disable 'extras' such as hiding the editor and debug mode
-
-    return render_template("embedded-editor.html", embedded=True,
+    return render_template("embedded-editor.html", embedded=True, run=True,
                            level=level, program=program, javascript_page_options=dict(
                                page='code',
                                lang=g.lang,
