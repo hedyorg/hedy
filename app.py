@@ -1409,9 +1409,16 @@ def get_embedded_code_editor(level):
     run = True if request.args.get('run') == 'true' else False
     encoded_program = request.args.get('program')
 
-    # Set a fallback for most default use: nl interface and en keywords
+    # Set a fallback for most default use: nl interface and en keywords -> provide feedback if invalid
     language = request.args.get('lang', 'nl')
+    if language not in ALL_LANGUAGES.keys():
+        language = 'nl'
+        program = '# Gekozen taal is ongeldig, Hedy staat nu op Nederlands'
+
     keyword_language = request.args.get('keyword', 'en')
+    if keyword_language not in ALL_KEYWORD_LANGUAGES.keys():
+        language = 'en'
+        program = '# Gekozen commando\'s taal is ongeldig, Hedy staat nu op Engels commando\'s'
 
     # Make sure to set the session lang to enforce the correct translated strings to be rendered
     session['lang'] = language
