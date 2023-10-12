@@ -114,7 +114,6 @@
             <script src="{{static('/vendor/ext-rtl.js')}}" type="text/javascript" charset="utf-8" crossorigin="anonymous"></script>
             <script src="{{static('/js/appbundle.js')}}" type="text/javascript" crossorigin="anonymous"></script>
         {% block additional_scripts %}{% endblock %}
-        {# We must mark the JSON safe -- in script tags HTML entities are not allowed #}
         <script>
             hedyApp.initialize({
               lang: 'nl',
@@ -123,11 +122,16 @@
               staticRoot: {{ static('')|tojson|safe }},
               javascriptPageOptions: {{ javascript_page_options|tojson|safe }},
             })
-        </script>
-        <!-- We need a special approach to allow listening to events from outside the embedded editor -->
-        <script>
+
             // Remove all console logs as these messages might clutter the log of the parent site
             console.log = function () {};
+            console.dir = function () {};
+            console.debug = function () {};
+            $(document).ready(function() {
+                console.clear();
+            });
+
+            // We need a work-around to allow listening to events from outside the embedded editor
             function sendRunEvent() {
               window.parent.postMessage({
                   'run': true,
@@ -142,7 +146,6 @@
                 }, '*')
             }
 
-            // Todo: Might be useful to implement a debounce to prevent spamming messages
             hedyApp.theGlobalEditor.on('change', function() {
                sendChangeEvent();
             });
