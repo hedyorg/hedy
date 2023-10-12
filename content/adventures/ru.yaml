@@ -648,26 +648,26 @@ adventures:
                     Did you get it? Awesome! Would you like to add even more to your calculator? **This adventure continues in the next tab!**
                 example_code: |
                     ```
-                    define calculate_mean_grade
+                    {define} calculate_mean_grade
                         total = 0
-                        for i in range 1 to 4
-                            grade = ask _
+                        {for} i {in} {range} 1 {to} 4
+                            grade = {ask} _
                             total = total + _
                             return _ / 4
 
-                    mean_grade = call _
-                    print 'Your mean grade is ' mean_grade
+                    mean_grade = {call} _
+                    {print} 'Your mean grade is ' mean_grade
                     ```
                 start_code: |
-                    define calculate_mean_grade
+                    {define} calculate_mean_grade
                         total = 0
-                        for i in range 1 to 4
-                            grade = ask _
+                        {for} i {in} {range} 1 {to} 4
+                            grade = {ask} _
                             total = total + _
                             return _ / 4
 
-                    mean_grade = call _
-                    print 'Your mean grade is ' mean_grade
+                    mean_grade = {call} _
+                    {print} 'Your mean grade is ' mean_grade
             15:
                 story_text: |
                     Вы можете добавить цикл `{while}` в игру-калькулятор, которую вы научились делать в предыдущем уровне.
@@ -1529,20 +1529,20 @@ adventures:
                     Can you program this verse in the same way as the example?
                 example_code: |
                     ```
-                    define song with place
-                        print 'My Bonnie is over the ' place
+                    {define} song {with} place
+                        {print} 'My Bonnie is over the ' place
 
-                    call song with 'ocean'
-                    call song with 'sea'
-                    call song with 'ocean'
+                    {call} song {with} 'ocean'
+                    {call} song {with} 'sea'
+                    {call} song {with} 'ocean'
                     ```
                 start_code: |
-                    define song with place
-                        print 'My Bonnie is over the ' place
+                    {define} song {with} place
+                        {print} 'My Bonnie is over the ' place
 
-                    call song with 'ocean'
-                    call song with 'sea'
-                    call song with 'ocean'
+                    {call} song {with} 'ocean'
+                    {call} song {with} 'sea'
+                    {call} song {with} 'ocean'
             14:
                 story_text: |
                     In the previous levels you have learned to create functions and use arguments with them. Another great use of a function is to let it calculate something for you.
@@ -1555,28 +1555,28 @@ adventures:
                     You should finish the line of code by calling the function that calculates the new price.
                 example_code: |
                     ```
-                    define calculate_new_price with amount, percentage
+                    {define} calculate_new_price {with} amount, percentage
                         percentage = percentage / 100
                         discount_amount = amount * percentage
                         return amount - discount_amount
 
-                    old_price = ask 'How much is on the price tag?'
-                    discount = ask 'What percentage is the discount?'
+                    old_price = {ask} 'How much is on the price tag?'
+                    discount = {ask} 'What percentage is the discount?'
 
-                    new_price = _ calculate_new_price with old_price, _
-                    print 'The new price is ' new_price ' dollar'
+                    new_price = _ calculate_new_price {with} old_price, _
+                    {print} 'The new price is ' new_price ' dollar'
                     ```
                 start_code: |
-                    define calculate_new_price with amount, percentage
+                    {define} calculate_new_price {with} amount, percentage
                         percentage = percentage / 100
                         discount_amount = amount * percentage
                         return amount - discount_amount
 
-                    old_price = ask 'How much is on the price tag?'
-                    discount = ask 'What percentage is the discount?'
+                    old_price = {ask} 'How much is on the price tag?'
+                    discount = {ask} 'What percentage is the discount?'
 
-                    new_price = _ calculate_new_price with old_price, _
-                    print 'The new price is ' new_price ' dollar'
+                    new_price = _ calculate_new_price {with} old_price, _
+                    {print} 'The new price is ' new_price ' dollar'
     guess_my_number:
         name: Guess my number
         description: guess my number
@@ -3385,26 +3385,26 @@ adventures:
                     In this example we have changed the 'My Bonnie' program and made it interactive. You are now asked where Bonnie is.
                 example_code: |
                     ```
-                    define song with place
-                        print 'My Bonnie is ' place
+                    {define} song {with} place
+                        {print} 'My Bonnie is ' place
 
                     chosen_place = {ask} 'Where do you want Bonnie to be?'
                     synonym = {ask} 'What is another word for that?'
 
-                    call song with chosen_place
-                    call song with synonym
-                    call song with chosen_place
+                    {call} song {with} chosen_place
+                    {call} song {with} synonym
+                    {call} song {with} chosen_place
                     ```
                 start_code: |
-                    define song with place
-                        print 'My Bonnie is ' place
+                    {define} song {with} place
+                        {print} 'My Bonnie is ' place
 
                     chosen_place = {ask} 'Where do you want Bonnie to be?'
                     synonym = {ask} 'What is another word for that?'
 
-                    call song with chosen_place
-                    call song with synonym
-                    call song with chosen_place
+                    {call} song {with} chosen_place
+                    {call} song {with} synonym
+                    {call} song {with} chosen_place
             16:
                 story_text: |
                     На этом уровне вы сможете еще быстрее запрограммировать песню типа OldMacDonald. Вы можете соединить нужное животное с нужным звуком, просто поместив их в одно и то же место в списке.
