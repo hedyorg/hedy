@@ -1,5 +1,5 @@
 <!doctype html>
-<html class="notranslate" translate="no">
+<html lang="{{ language }}" class="notranslate" translate="no">
     <head>
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -13,7 +13,7 @@
         <div id="editor-area" class="w-full flex flex-grow gap-4 mt-0 mb-0">
             <div class="flex flex-col w-full" id="code_editor">
                 <div class="w-full flex-1 flex flex-col">
-                    <div id="editor" style="background: #272822; font-size:0.95em; color: white" lang="en" blurred='false'class="w-full flex-1 text-lg rounded">{{program}}</div>
+                    <div id="editor" style="background: #272822; font-size:0.95em; color: white" blurred='false'class="w-full flex-1 text-lg rounded">{{program}}</div>
                     <div id="errorbox"
                       class="flex-0 z-20 mt-0 bg-red-100 border-t-4 border-red-500 rounded-b text-red-900 px-4 py-3 shadow-md" role="alert"
                       style="display: none;">
@@ -97,7 +97,7 @@
             <div class="h-12" id="code_related_buttons">
               <div class="flex justify-between gap-2 items-start h-12 overflow-visible">
                 <div id="runButtonContainer">
-                  <button id="runit" class="green-btn" onclick='hedyApp.runit({{ level }}, "{{ g.lang }}", {{_('already_program_running')|default(None)|tojson}})'>{{_('run_code_button')}} </button>
+                  <button id="runit" class="green-btn" onclick='hedyApp.runit({{ level }}, "{{ language }}", {{_('already_program_running')|default(None)|tojson}})'>{{_('run_code_button')}} </button>
                   <button id="stopit" class="red-btn" onclick="hedyApp.stopit()" style="display: none;">{{_('stop_code_button')}}</button>
                 </div>
               </div>
@@ -116,7 +116,7 @@
         {% block additional_scripts %}{% endblock %}
         <script>
             hedyApp.initialize({
-              lang: '{{ lang }}',
+              lang: '{{ language }}',
               level:  '{{  level }}',
               keyword_language: '{{ keyword_language }}',
               staticRoot: {{ static('')|tojson|safe }},
