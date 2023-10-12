@@ -1396,6 +1396,9 @@ def get_specific_adventure(name, level, mode):
 
 @app.route('/embedded/<int:level>', methods=['GET'])
 def get_embedded_code_editor(level):
+    # Start with an empty program
+    program = ''
+
     # If for any reason the level is invalid, set to level 1
     try:
         level = int(level)
