@@ -116,9 +116,9 @@
         {% block additional_scripts %}{% endblock %}
         <script>
             hedyApp.initialize({
-              lang: 'nl',
-              level: 1,
-              keyword_language: 'en',
+              lang: '{{ lang }}',
+              level:  '{{  level }}',
+              keyword_language: '{{ keyword_language }}',
               staticRoot: {{ static('')|tojson|safe }},
               javascriptPageOptions: {{ javascript_page_options|tojson|safe }},
             })
@@ -139,10 +139,11 @@
               }, '*');
             }
 
+            // When sending a change event, persist with removing trailing space to fix weird behaviour
             function sendChangeEvent() {
                 window.parent.postMessage({
                     'change': true,
-                    'program': hedyApp.get_active_and_trimmed_code()
+                    'program': hedyApp.returnLinesWithoutBreakpoints(hedyApp.theGlobalEditor)
                 }, '*')
             }
 

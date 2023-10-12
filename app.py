@@ -1397,6 +1397,7 @@ def get_specific_adventure(name, level, mode):
 @app.route('/embedded/<int:level>', methods=['GET'], defaults={'level': 1})
 def get_embedded_code_editor(level):
     run = True if request.args.get('run') == 'true' else False
+    language = request.args.get('lang', 'en')
     encoded_program = request.args.get('program')
 
     program = '# Welcome to Hedy! (No program provided)'
@@ -1407,10 +1408,10 @@ def get_embedded_code_editor(level):
         except binascii.Error:
             program = '# You provided an invalid program, please try again'
 
-    return render_template("embedded-editor.html", embedded=True, run=run,
+    return render_template("embedded-editor.html", embedded=True, run=run, keyword_language=language,
                            level=level, program=program, javascript_page_options=dict(
                                page='code',
-                               lang=g.lang,
+                               lang=language,
                                level=level
                            ))
 
