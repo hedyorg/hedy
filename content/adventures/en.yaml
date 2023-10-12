@@ -735,12 +735,6 @@ adventures:
 
                     ### Exercise
                     Debug this code. Good luck!
-                start_code: |
-                    {print} I love programming
-                    Do you love programming too?
-                    {echo}
-                    {print} What are your hobbies?
-                    {echo} Your hobbies are
                 example_code: |
                     **Warning! This code needs to be debugged!**
                     ```
@@ -750,6 +744,12 @@ adventures:
                     {print} What are your hobbies?
                     {echo} Your hobbies are
                     ```
+                start_code: |
+                    {print} I love programming
+                    Do you love programming too?
+                    {echo}
+                    {print} What are your hobbies?
+                    {echo} Your hobbies are
             2:
                 story_text: |-
                     Welcome to a debugging adventure. Debugging a code means getting rid of mistakes in the code.
@@ -758,14 +758,6 @@ adventures:
 
                     ### Exercise
                     Debug this code. Good luck!
-                start_code: |
-                    destination {ask} Where are you going on holidays?
-                    {print} The flight to dstination leaves at 3 pm.
-                    {ask} Did you check in your luggage yet?
-                    {echo}
-                    {print} Let me print your boarding pass for you.
-                    {sleep}
-                    Here you go! Have a nice trip!
                 example_code: |
                     **Warning! This code needs to be debugged!**
                     ```
@@ -777,6 +769,14 @@ adventures:
                     {sleep}
                     Here you go! Have a nice trip!
                     ```
+                start_code: |
+                    destination {ask} Where are you going on holidays?
+                    {print} The flight to dstination leaves at 3 pm.
+                    {ask} Did you check in your luggage yet?
+                    {echo}
+                    {print} Let me print your boarding pass for you.
+                    {sleep}
+                    Here you go! Have a nice trip!
             3:
                 story_text: |-
                     Welcome to a debugging adventure. Debugging a code means getting rid of mistakes in the code.
@@ -785,16 +785,6 @@ adventures:
 
                     ### Exercise
                     Debug this code. Good luck!
-                start_code: |
-                    movie_choices {is} dracula, fast and furious, home alone, barbie
-                    chosen_movie {is} movies {at} {random}
-                    {print} Tonight we will watch chosen _movies
-                    like {ask} Do you like that movie?
-                    {print} Tomorrow we will watch something else.
-                    {add} chosen_movie {to} movie_choices
-                    {print} Tomorrow we will watch tomorrows_movie
-                    tomorrows_movie {is} movie_choices {at} {random}
-                    I'll go get the popcorn! {print}
                 example_code: |
                     **Warning! This code needs to be debugged!**
                     ```
@@ -808,17 +798,20 @@ adventures:
                     tomorrows_movie {is} movie_choices {at} {random}
                     I'll go get the popcorn! {print}
                     ```
+                start_code: |
+                    movie_choices {is} dracula, fast and furious, home alone, barbie
+                    chosen_movie {is} movies {at} {random}
+                    {print} Tonight we will watch chosen _movies
+                    like {ask} Do you like that movie?
+                    {print} Tomorrow we will watch something else.
+                    {add} chosen_movie {to} movie_choices
+                    {print} Tomorrow we will watch tomorrows_movie
+                    tomorrows_movie {is} movie_choices {at} {random}
+                    I'll go get the popcorn! {print}
             4:
                 story_text: |-
                     ### Exercise
                     Debug this code. Good luck!
-                start_code: |
-                    {print} 'Welcome to the online library!
-                    {ask} What genre of books do you like?
-                    {print} You like genre
-                    author {is} {ask} 'Who's your favorite author?'
-                    {print} 'author is your favorite author'
-                    {print} Hmmm... I think you should try... books {at} {random}
                 example_code: |
                     **Warning! This code needs to be debugged!**
                     ```
@@ -829,25 +822,17 @@ adventures:
                     {print} 'author is your favorite author'
                     {print} Hmmm... i think you should try... books {at} {random}
                     ```
+                start_code: |
+                    {print} 'Welcome to the online library!
+                    {ask} What genre of books do you like?
+                    {print} You like genre
+                    author {is} {ask} 'Who's your favorite author?'
+                    {print} 'author is your favorite author'
+                    {print} Hmmm... I think you should try... books {at} {random}
             5:
                 story_text: |-
                     ### Exercise
                     Debug this code. Good luck!
-                start_code: |
-                    {print} Welcome to Swimming Pool Hedy!
-                    class {is} {ask} 'Are you here to join a class today?'
-                    {if} class yes
-                        {print} 'Great! You are joining a class!'
-                        {print} {else} 'You will not be joining a class'
-                    discount {is} {ask} 'Do you have a discount code?'
-                    {if} discount {is} yes
-                    discount_answer {is} {ask} 'What is your discount code?'
-                    discount_codes = Senior4231, Student8786, NewMember6709
-                    {if} discount_answer {is} {in} discount_codes
-                        {print} 'That will be $3,50'
-                            {else} 'That code is not valid'
-                    {else} 'That will be $5,50'
-                    {print} 'Have a nice swim!'
                 example_code: |
                     **Warning! This code needs to be debugged!**
                     ```
@@ -866,26 +851,25 @@ adventures:
                     {else} 'That will be $5,50'
                     {print} 'Have a nice swim!'
                     ```
+                start_code: |
+                    {print} Welcome to Swimming Pool Hedy!
+                    class {is} {ask} 'Are you here to join a class today?'
+                    {if} class yes
+                        {print} 'Great! You are joining a class!'
+                        {print} {else} 'You will not be joining a class'
+                    discount {is} {ask} 'Do you have a discount code?'
+                    {if} discount {is} yes
+                    discount_answer {is} {ask} 'What is your discount code?'
+                    discount_codes = Senior4231, Student8786, NewMember6709
+                    {if} discount_answer {is} {in} discount_codes
+                        {print} 'That will be $3,50'
+                            {else} 'That code is not valid'
+                    {else} 'That will be $5,50'
+                    {print} 'Have a nice swim!'
             6:
                 story_text: |-
                     ### Exercise
                     Debug this code. Good luck!
-                start_code: |
-                    {print} 'Vending machine'
-                        chosen_product = {ask} 'Please select a product'
-                    1_dollar_products = coke orange juice water
-                    2_dollar_products = chocolate, cookie, museli bar
-                    3_dollar_prodcuts = potato chips, beef jerky, banana bread
-                    {if} chosen {in} 1_dollar_products
-                    price = 1
-                    {if} chosen_product {is} 2_dollar_products
-                        price = 2
-                        {if} chosen_product {in} 3_dollar_products
-                            price = 3
-                    amount_of_products = '{ask} How many of ' chosen_product would you like to have?'
-                    total = price + amount_of_products
-                    {print} 'That will be $' price 'please'
-
                 example_code: |
                     **Warning! This code needs to be debugged!**
                     ```
@@ -904,16 +888,26 @@ adventures:
                     total = price + amount_of_products
                     {print} 'That will be $' price 'please'
                     ```
+                start_code: |
+                    {print} 'Vending machine'
+                        chosen_product = {ask} 'Please select a product'
+                    1_dollar_products = coke orange juice water
+                    2_dollar_products = chocolate, cookie, museli bar
+                    3_dollar_prodcuts = potato chips, beef jerky, banana bread
+                    {if} chosen {in} 1_dollar_products
+                    price = 1
+                    {if} chosen_product {is} 2_dollar_products
+                        price = 2
+                        {if} chosen_product {in} 3_dollar_products
+                            price = 3
+                    amount_of_products = '{ask} How many of ' chosen_product would you like to have?'
+                    total = price + amount_of_products
+                    {print} 'That will be $' price 'please'
             7:
                 story_text: |-
                     ### Exercise
                     Surprise! The program in this debugging adventure actually doesn't give an error. And yet, this is not what we want the code to do.
                     Fix this program to turn it into the nursery rhyme 'Brother John (Frère Jaques)' by using the {repeat} command of course!.
-                start_code: |
-                    Are you sleeping?
-                    Brother John!
-                    Morning bells are ringing!
-                    Ding, dang, dong!
                 example_code: |
                     **Warning! This code needs to be debugged!**
                     ```
@@ -922,11 +916,18 @@ adventures:
                     Morning bells are ringing!
                     Ding, dang, dong!
                     ```
+                start_code: |
+                    Are you sleeping?
+                    Brother John!
+                    Morning bells are ringing!
+                    Ding, dang, dong!
             8:
                 story_text: |-
                     ### Exercise
                     Debug this code. Good luck!
-                start_code: |
+                example_code: |
+                    **Warning! This code needs to be debugged!**
+                    ```
                     {print} 'Welcome to Manicures and Pedicures by Hedy'
                     bodypart = {ask} 'Are you getting your fingernails or toenails done today? Or both?'
                     {if} bodyparts {is} both
@@ -944,9 +945,7 @@ adventures:
                     {sleep} 5
                     {print} 'All done! That will be $' price ' please!'
                     {print} 'Thank you! Byebye!'
-                example_code: |
-                    **Warning! This code needs to be debugged!**
-                    ```
+                start_code: |
                     {print} 'Welcome to Manicures and Pedicures by Hedy'
                     bodypart = {ask} 'Are you getting your fingernails or toenails done today? Or both?'
                     {if} bodyparts {is} both
@@ -968,21 +967,6 @@ adventures:
                 story_text: |-
                     ### Exercise
                     Debug this code. Good luck!
-                start_code: |
-                    {print} 'Welcome to our sandwich shop'
-                    amount 'How many sandwiches would you like to buy?'
-                    {repeat} amount {times}
-                    {ask} {is} {ask} 'What kind or bread would you like your sandwich to be?'
-                    types_of_bread {is} white, wheat, rye, garlic, gluten free
-                    {if} chosen_bread in types_of_bread
-                    {print} 'Lovely!'
-                    {else}
-                    'I'm sorry we don't sell that'
-                    topping {is} {ask} 'What kind of topping would you like?'
-                    sauce {is} {ask} 'What kind of sauce would you like?'
-                    {print} One chosen_bread with topping and sauce.
-                    price = amount * 6
-                    {print} 'That will be 'price dollar' please'
                 example_code: |
                     **Warning! This code needs to be debugged!**
                     ```
@@ -1001,15 +985,25 @@ adventures:
                     price = amount * 6
                     {print} 'That will be 'price dollar' please'
                     ```
+                start_code: |
+                    {print} 'Welcome to our sandwich shop'
+                    amount 'How many sandwiches would you like to buy?'
+                    {repeat} amount {times}
+                    {ask} {is} {ask} 'What kind or bread would you like your sandwich to be?'
+                    types_of_bread {is} white, wheat, rye, garlic, gluten free
+                    {if} chosen_bread in types_of_bread
+                    {print} 'Lovely!'
+                    {else}
+                    'I'm sorry we don't sell that'
+                    topping {is} {ask} 'What kind of topping would you like?'
+                    sauce {is} {ask} 'What kind of sauce would you like?'
+                    {print} One chosen_bread with topping and sauce.
+                    price = amount * 6
+                    {print} 'That will be 'price dollar' please'
             10:
                 story_text: |-
                     ### Exercise
                     Debug this code. Good luck!
-                start_code: |
-                    names = Muad Hasan Samira Noura
-                    activities = fly a kite, go swimming, go hiking, catch tan in the sun
-                    {for} name {is} names
-                    {print} At the beach name loves to activity at random
                 example_code: |
                     **Warning! This code needs to be debugged!**
                     ```
@@ -1018,6 +1012,11 @@ adventures:
                     {for} name {is} names
                     {print} At the beach name loves to activity at random
                     ```
+                start_code: |
+                    names = Muad Hasan Samira Noura
+                    activities = fly a kite, go swimming, go hiking, catch tan in the sun
+                    {for} name {is} names
+                    {print} At the beach name loves to activity at random
     default:
         name: Introduction
         default_save_name: intro
