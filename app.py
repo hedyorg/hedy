@@ -1396,6 +1396,16 @@ def get_specific_adventure(name, level, mode):
 
 @app.route('/embedded/<int:level>', methods=['GET'])
 def get_embedded_code_editor(level):
+    # If for any reason the level is invalid, set to level 1
+    try:
+        level = int(level)
+        if level < 1 or level > hedy.HEDY_MAX_LEVEL:
+            program = '# Gekozen leven is ongeldig, Hedy staat nu op level 1'
+            level = 1
+    except ValueError:
+        program = '# Gekozen leven is ongeldig, Hedy staat nu op level 1'
+        level = 1
+
     run = True if request.args.get('run') == 'true' else False
     encoded_program = request.args.get('program')
 
@@ -1406,8 +1416,7 @@ def get_embedded_code_editor(level):
     # Make sure to set the session lang to enforce the correct translated strings to be rendered
     session['lang'] = language
 
-    program = '# Welkom bij Hedy!'
-    if encoded_program:
+    if encoded_program and not program:
         try:
             program = base64.b64decode(encoded_program)
             program = program.decode('utf-8')
