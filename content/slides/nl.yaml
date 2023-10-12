@@ -476,6 +476,22 @@ levels:
             editor: <iframe class="fragment" src="/adventure/maths/12/raw"></iframe>
             header: Decimale getallen
         4:
+            text: |-
+                In dit level leer je functies te gebruiken. Een fucntie is een blokje code dat je gemakkelijk meerdere keren kunt gebruiken. Functies helpen je de code te organiseren en stuken steeds opnieuw te gebruiken. Gebruik {define} om een functie te maken en een naam te geven. Typ daarna alle regels die je in de functie wil hebben in een ingesprongen blokje onder de regel met {define}. Laat een regel leeg om je code er netjes uit te laten zien. Fantastisch! Je hebt een functie gemaakt!
+
+                Nu kun je dit blokje code meermaals gebruiken. Je roept de functie op met {call}! Je hoeft de code dan niet helemaal opnieuw te typen.
+            header: Functies!
+        5:
+            text: |-
+                In dit programma zie je een voorbeeld van een functie.
+                Laten we kijken wat er gebeurt als je de rest van het lied aanvult!
+            header: Twinkle Twinkle little star!
+            editor: <iframe class="fragment" src="/adventure/songs_2/12/raw"></iframe>
+        6:
+            text: |-
+                Zoals je kunt zien in de voobeelden is een functie een blokje code dat je vaker kunt oproepen. Je gebruikt `{define}` om de functie te maken en `{call}` om hem te gebruiken.
+            header: Functies
+        7:
             text: Veel plezier met de avonturen in level 12!
             header: Klaar om het te gaan proberen?
     13:
@@ -496,6 +512,46 @@ levels:
             editor: <iframe class="fragment" src="/adventure/and_or_command/13/raw"></iframe>
             header: '{or}'
         4:
+            text: |-
+                In het vorige level heb je geleerd om functies te gebruiken. Nu leer je functies te gebruiken met **argumenten**. Een argument is een variabele die je alleen gebruikt in een functie.Daarbuiten wordt de variabele niet gebruikt.
+            header: Functies met argumenten
+        5:
+            text: |-
+                In dit voorbeeld zie je hoe het argument 'plaats' gebruikt wortd bij een functie.
+                Voer de code uit en verander 'ocean' en 'sea' naar iets anders en zie wat er gebeurt...
+            header: Voorbeeld
+            editor: <iframe class="fragment" src="/adventure/functions/13/raw"></iframe>
+        6:
+            text: |-
+                Nu je hebt gezien hoe argumenten werken, kun je ze ook combineren met een vraag.
+
+                Wat gebeurt er als je deze aanpassingen maakt?
+                ```
+                define lied with plaats
+                    print 'My Bonnie is ' plaats
+
+                antwoord = ask 'Waar is Bonnie?'
+                call song with antwoord
+                ```
+            header: Voorbeeld met variabele
+            editor: <iframe class="fragment" src="/adventure/functions/13/raw"></iframe>
+        7:
+            text: |-
+                Je kunt zelfs meerdere vragen combineren met de fucnties. Type deze code en kijk maar wat er gebeurt.
+
+                Let op! Zie je hoe de variabele en de argumenetn nu dezelfde naam hebben. Dat mag!
+                Raak je hiervan in de war? Gebruik dan verschillende namen, want dat mag ook gewoon.
+                ```
+                define lied with naam, plaats
+                    print 'My ' naam ' is ' plaats
+
+                naam = ask 'Wie?'
+                place = ask 'Waar is diegene?'
+                call lied with naam, plaats
+                ```
+            header: Nog meer vragen!
+            editor: <iframe class="fragment" src="/adventure/functions/13/raw"></iframe>
+        8:
             text: Veel plezier met de avonturen in level 13!
             header: Let's go!
     14:
@@ -529,6 +585,15 @@ levels:
             editor: <iframe class="fragment" src="/adventure/default/14/raw"></iframe>
             header: Symbolen
         4:
+            text: |-
+                In de vorige levels heb je over functies met argumenten geleerd. Waar je functies ook goed voor kunt gebruiken is om ze iets uit te laten rekenen. Je kunt de fucntie een som geven en de fucntie berekent dan het antwoord voor je. Het antwoord dat je terugkrijgt noem je de **return value**.
+            header: "Return value"
+        5:
+            text: |-
+                Bijvoorbeeld, in deze code wordt de nieuwe prijs van een item berekend door de functie bereken_nieuwe_prijs. De nieuwe prijs is hierbij dus de return value.
+            editor: <iframe class="fragment" src="/adventure/functions/14/raw"></iframe>
+            header: "Return value"
+        6:
             text: Veel plezier met de avonturen in level 14!
             header: Aan de slag!
     15:
