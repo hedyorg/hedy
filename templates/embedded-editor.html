@@ -136,7 +136,7 @@
               }, '*');
             }
 
-            // When sending a change event, persist with removing trailing space to fix weird behaviour
+            // When sending a change event, send without removing trailing space to fix weird behaviour
             function sendChangeEvent() {
                 window.parent.postMessage({
                     'change': true,
