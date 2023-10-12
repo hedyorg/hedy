@@ -1397,21 +1397,27 @@ def get_specific_adventure(name, level, mode):
 @app.route('/embedded/<int:level>', methods=['GET'])
 def get_embedded_code_editor(level):
     run = True if request.args.get('run') == 'true' else False
-    language = request.args.get('lang', 'nl')
     encoded_program = request.args.get('program')
 
-    program = ''
+    # Set a fallback for most default use: nl interface and en keywords
+    language = request.args.get('lang', 'nl')
+    keyword_language = request.args.get('keyword', 'en')
+
+    # Make sure to set the session lang to enforce the correct translated strings to be rendered
+    session['lang'] = language
+
+    program = '# Welkom bij Hedy!'
     if encoded_program:
         try:
             program = base64.b64decode(encoded_program)
             program = program.decode('utf-8')
         except binascii.Error:
-            program = ''
+            program = '# Het gegeven programma is niet geldig'
 
-    return render_template("embedded-editor.html", embedded=True, run=run, language='nl', keyword_language=language,
+    return render_template("embedded-editor.html", embedded=True, run=run, language=language, keyword_language=keyword_language,
                            level=level, program=program, javascript_page_options=dict(
                                page='code',
-                               lang='nl',
+                               lang=language,
                                level=level
                            ))
 
