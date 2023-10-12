@@ -627,16 +627,16 @@ adventures:
                 start_code: '# Schrijf jouw code hier'
             14:
                 story_text: |
-                    In this adventure you will build a calculator that calculates your mean grade for you. If you get your calculator to work, you can move on to the next adventure, which allows you to add two extra features.
+                    In dit avontuur leer je een rekenmachine bouwen die het gemiddelde cijfer voor jou berekent. Als je de rekenmachine aan de praat krijgt, kun je doorgaan naar het volgende avontuur. Daar leer je hoe je extra features toevoegt aan je rekenmachine.
 
-                    ## Exercise 1
-                    Fill in the blanks to get the calculator to work.
-                    * Start with the fourth line, add a question to figure out what grade the student got.
-                    * In the fifth line you'll want to calculate the total of all grades, so the total = total + grade.
-                    * Then we get to set the return value. We want to return the mean, so the total devided by the amount of tests (4).
-                    * Lastly we finish the code by calling the function in line 8.
+                    ## Opdracht 1
+                    Vul de lege lijntjes in om de rekenmachine aan de praat te krijgen.
+                    * Start op regel 4, voeg een vraag toe om uit te vinden welk cijfer de leerling heeft gekregen.
+                    * Op regel 5 wil je vervolgens het totaal berekenen van alle cijfers, dus totaal = totaal + cijfer.
+                    * Daarna zorgen we voor een return value. We willen het gemiddelde als return value, dus het totaal gedeeld door de hoeveelheid toetsen (oftewel gedeeld door 4).
+                    * Tot slot roepen we de functie op in regel line 8.
 
-                    Did you get it? Awesome! Would you like to add even more to your calculator? **This adventure continues in the next tab!**
+                    Heb je het voor elkaar gekregen? Geweldig! Wil je nog meer opties bouwen voor de rekenmachine? **Kijk in het volgende tabje, daar gaat het avontuur verder!**
                 example_code: |
                     ```
                     {define} bereken_gemiddelde_cijfer
@@ -1486,18 +1486,18 @@ adventures:
                     ```
                 start_code: '# Schrijf jouw code hier'
     functions:
-        name: functions
+        name: Functies
         description: functions
         default_save_name: functions
         levels:
             12:
                 story_text: |
                     In dit level leer je hoe je **functies** gebruikt. Een functie is een blokje code dat je meerdere keren kunt gebruiken. Functies helpen je de code te ordenen.
-                    Om een fucntie te maken, gebruik je `{define}` en geef je de fucntie een naam. Daarna zet je er regels code onder in een ingesprongen blokje.
+                    Om een functie te maken, gebruik je `{define}` en geef je de functie een naam. Daarna zet je er regels code onder in een ingesprongen blokje.
                     Sla daarna een regel over om je code mooi en overzichtelijk te houden. Goed werk! Je hebt een functie gemaakt!
 
                     Als je nu dit blokje wil gebruikne, dan gebruik je  <code>{call}</code>  en de naam van de functie. Zo hieven we de code niet vaker te typen.
-                    Kijk maar eens naar ons Twistervoorbeeld. De fucntie 'draai' bevat een blok code dat een kleur en een ledemaat kiest.
+                    Kijk maar eens naar ons Twistervoorbeeld. De functie 'draai' bevat een blok code dat een kleur en een ledemaat kiest.
 
                     ### Opdracht
                     Maak de code af door de 2 variabelen gekozen_ledemaat en gekozen_kleur in te stellen.
@@ -1540,11 +1540,11 @@ adventures:
                         {sleep} 2
             13:
                 story_text: |
-                    nu je hebt geleerd om fucnties te gebruiken, leer je dit level hoe je functies kunt gebruiken met argumenten.
-                    Een **argument** is een variabele die in een fucntie gebruikt wordt. Het wordt daarbuiten niet gebruikt.
+                    Nu je hebt geleerd om functies te gebruiken, leer je dit level hoe je functies kunt gebruiken met argumenten.
+                    Een **argument** is een variabele die in een functie gebruikt wordt. Het wordt daarbuiten niet gebruikt.
 
                     In deze code hebben we bijvoorbeeld het eerste stukje van het liedje 'My Bonnie is over the ocean' geprogrammeerd.
-                    In dit voorbeeld hebben we het argument 'plaats' gebruikt. plaats is een variabele die alleen in de fucntie gebruikt wordt, een argument dus.
+                    In dit voorbeeld hebben we het argument 'plaats' gebruikt. plaats is een variabele die alleen in de functie gebruikt wordt, een argument dus.
                     Om 'plaats' te gebruiken hebben zetten we `{with} place` achter `{define} lied`.
                     Als de functie geroepen wordt vervangt de computer het argument 'plaats' met de text die na `{call} song {with}` staat.
 
@@ -1575,14 +1575,14 @@ adventures:
                     {call} lied {with} 'ocean'
             14:
                 story_text: |
-                    In de vorige levels heb je geleerd om fucnties met argumenten te maken. Je kunt functies ook goed gebruiken om iets uit te rekenen.
+                    In de vorige levels heb je geleerd om functies met argumenten te maken. Je kunt functies ook goed gebruiken om iets uit te rekenen.
                     Je kunt de functie een som geven en de functie geeft jou dan het antwoord. Dit antwoord noem je de **return value**.
 
-                    Bijboorbeeld, in deze code geeft de fucntie bereken_nieuwe_prijd de nieuwe prijs van een item. Het geeft je de nieuwe prijs als return value.
+                    Bijboorbeeld, in deze code geeft de functie bereken_nieuwe_prijd de nieuwe prijs van een item. Het geeft je de nieuwe prijs als return value.
 
                     ## Opdracht
                     Maak deze code af. We hebben de nieuwe variabele nieuwe_prijs al voor je gemaakt, maar jij moet hem nog instellen.
-                    Maak de regel af door de fucntie te roepen en de nieuwe prijs te berekenen.
+                    Maak de regel af door de functie te roepen en de nieuwe prijs te berekenen.
                 example_code: |
                     ```
                     {define} bereken_nieuwe_prijs {with} bedrag, percentage
@@ -1908,8 +1908,8 @@ adventures:
         levels:
             13:
                 story_text: |
-                    In het vorige avontuur heb je geleerd om een argument te gebruiken bij een fucntie, en hoe je dit kan combineren met een `{ask}`.
-                    Je hebt je wellicht afgevraagd waarom je deze functie zou gebruiken, want de fucnties zijn steeds maar een regel of een paar regeltjes code.
+                    In het vorige avontuur heb je geleerd om een argument te gebruiken bij een functie, en hoe je dit kan combineren met een `{ask}`.
+                    Je hebt je wellicht afgevraagd waarom je deze functie zou gebruiken, want de functies zijn steeds maar een regel of een paar regeltjes code.
                     In dit voorbeeld laten we je zien hoe een grotere functie eruit ziet en we zullen meerdere argumenten gebruiken. Je zult zien hoe fijn het dan is om een functie te kunnen gebruiken.
                     Hier is een voorbeeld van een functie met argumenten en een {ask} commando.
                 example_code: |
@@ -3437,7 +3437,7 @@ adventures:
                 start_code: '# Schrijf jouw code hier'
             13:
                 story_text: |
-                    In het vorige avontuur heb je geleerd hoe je een argument kunt gebruiken in een fucntie, maar wist je ook dat je dit kunt combineren met een `{ask}`?
+                    In het vorige avontuur heb je geleerd hoe je een argument kunt gebruiken in een functie, maar wist je ook dat je dit kunt combineren met een `{ask}`?
                     In dit voorbeeld hebben we het 'My Bonnie' programma aangepast en interactief gemaakt. Er wordt nu gevraagd waar Bonnie is.
                 example_code: |
                     ```
@@ -3525,7 +3525,7 @@ adventures:
                 story_text: |
                     Liedjes bevatten vaak veel herhaling. We kunnen daarvoor een functie gebruiken!
                     ### Opdracht
-                    Kijk naar de voorbeeldcode met de fucntie. Vul het lied aan tot het compleet is.
+                    Kijk naar de voorbeeldcode met de functie. Vul het lied aan tot het compleet is.
                 example_code: |
                     ```
                     {define} slaap
