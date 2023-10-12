@@ -126,6 +126,8 @@
         </script>
         <!-- We need a special approach to allow listening to events from outside the embedded editor -->
         <script>
+            // Remove all console logs as these messages might clutter the log of the parent site
+            console.log = function () {};
             function sendRunEvent() {
               window.parent.postMessage({
                   'run': true,
