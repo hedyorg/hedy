@@ -1414,7 +1414,8 @@ def get_embedded_code_editor(level):
         except binascii.Error:
             program = '# Het gegeven programma is niet geldig'
 
-    return render_template("embedded-editor.html", embedded=True, run=run, language=language, keyword_language=keyword_language,
+    return render_template("embedded-editor.html", embedded=True, run=run, language=language,
+                           keyword_language=keyword_language,
                            level=level, program=program, javascript_page_options=dict(
                                page='code',
                                lang=language,
