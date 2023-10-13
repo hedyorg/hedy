@@ -20,8 +20,8 @@ adventures:
                     {print} Aude tot felul de zgomote oriunde
                     {print} Ii este frica de o pădure bântuita
                     ```
-                story_text_2: "### Exercițiu\nCrează acum povestea ta cu cel puțin 6 line de cod.\nAceastă poveste nu poate fi la fel ca si codul din examplu. \n Utilizează cel puțin o dată comanda `{ask}` și o comandă `{echo}` .\nPoți scrie ceva despre ceea ce iți place ție. \nDacă nu ai idei, alege\
-                    \ unul din următoarele subiecte: cinema, meci de fotbal sau o zi la grădina zoologică.\n"
+                story_text_2: "### Exercițiu\nCrează acum povestea ta cu cel puțin 6 line de cod.\nAceastă poveste nu poate fi la fel ca si codul din examplu. \nUtilizează cel puțin o dată comanda `{ask}` și o comandă `{echo}` .\nPoți scrie ceva despre ceea ce iți place ție. \nDacă nu ai idei, alege unul\
+                    \ din următoarele subiecte: cinema, meci de fotbal sau o zi la grădina zoologică.\n"
                 start_code: '{print} Povestea ta începe aici'
             2:
                 story_text: "In nivelul 2 poți face o poveste mai frumoasă și interesantă. Numele personajului principal poate fi oriunde în propoziție.\n\nPentru a crea asta trebuie să programezi un pic mai mult de data asta. Trebuie să decizi numele personajului principal. \n\nPoți pune acum numele\
@@ -166,7 +166,7 @@ adventures:
                     ```
                 start_code: '# place your code here'
             9:
-                story_text: "In acest nivel poți folosi comenzile  `{if}` și `{repeat}` in interiorul altor `{if}` și `{repeat}` comenzi. \nAceasta posibilitate iți oferă mai multe opțiuni si te ajută sa creezi o poveste interactivă.\n\n ### Exercițiu 1\nCompletează programul astfel incât comanda `{if}`\
+                story_text: "In acest nivel poți folosi comenzile  `{if}` și `{repeat}` in interiorul altor `{if}` și `{repeat}` comenzi. \nAceasta posibilitate iți oferă mai multe opțiuni si te ajută sa creezi o poveste interactivă.\n\n### Exercițiu 1\nCompletează programul astfel incât comanda `{if}`\
                     \ funcționează corect.\n\n### Exercițiul 2\nAdaugă `{if}` și `{else}` in partea din poveste in care Robin merge acasă.\n\n### Exercițiul 3\nIntoarce-te la povestea de la nivelul și folosește cel puțin de două ori comanda `{if}`s în interiorul altei comenzi `{if}`.\n"
                 example_code: |
                     ```
@@ -191,7 +191,7 @@ adventures:
                     ### Exercise
 
                     Look at <a href="https://www.yonkerspublicschools.org/cms/lib/NY01814060/Centricity/Domain/1621/Brown%20Bear%20Book.pdf"> the story</a> if you do not know it, and make sure it is printed as in the book.
-                example_code: "```\nanimals = _ , _ , _ \n{print} 'Brown bear, Brown bear'\n {print} 'What do you see?'\n```\n"
+                example_code: "```\nanimals = _ , _ , _ \n{print} 'Brown bear, Brown bear'\n{print} 'What do you see?'\n```\n"
                 start_code: '# place your code here'
             12:
                 story_text: |-
@@ -613,12 +613,11 @@ adventures:
                     ```
                 start_code: '# place your code here'
             13:
-                story_text: |4
-
+                story_text: |
                     ### Exercise 1
                     Let's make the practice program a bit harder. The player now has to answers two questions correctly. Fill out the blanks to complete the program.
 
-                    ### Exercise 2 (extra)
+                    ### Exercise 2 Extra
                     Sometimes, calculations have multiple correct answers. For example, 10 can be divided by 5 and by 2. So the question 'What number divides 10?' can be answered by 2 and by 5.
                     Ask for a calculation that has multiple correct answers, ask the player to answer it, and determine if it is correct using `{or}`.
                     Empty the programming field and create your own solution.
@@ -711,8 +710,12 @@ adventures:
         description: Explicația nivelului
         levels:
             1:
-                story_text: "În Nivelul 1 poți folosi comenzile `{print}`, `{ask}` și `{echo}`.\n Introdu codul tău în câmpul de programare. Sau apasă butonul verde din blocul de cod de exemplu, și codul va fi introdus pentru tine!\nÎncearcă singur codul cu butonul verde 'Rulează codul' sub câmpul de\
-                    \ programare.\n\nPoți afișa text pe ecran folosind comanda `{print}`.     \n"
+                story_text: |
+                    În Nivelul 1 poți folosi comenzile `{print}`, `{ask}` și `{echo}`.
+                    Introdu codul tău în câmpul de programare. Sau apasă butonul verde din blocul de cod de exemplu, și codul va fi introdus pentru tine!
+                    Încearcă singur codul cu butonul verde 'Rulează codul' sub câmpul de programare.
+
+                    Poți afișa text pe ecran folosind comanda `{print}`.
                 start_code: '{print} salutări!'
             2:
                 story_text: |
@@ -1016,8 +1019,7 @@ adventures:
                     {if} throw {is} earthworm points = points + 5 {else} points = points + throw
                     {print} 'those are' points ' point'
                     ```
-                example_code_2: |4
-
+                example_code_2: |
                     Did you manage to calculate the score for 8 dice? That required a lot of cutting and pasting, right? We are going to make that easier in level 7!
                 start_code: '{print} ''What will the die indicate this time?'''
             7:
@@ -1266,9 +1268,7 @@ adventures:
                 story_text: |
                     In the previous levels you've created your first fortune telling machine, but Hedy couldn't really predict anything, only {echo}.
                     In this level you can use a variable and the `{at} {random}` command to really let Hedy choose an answer for you. Check out this code for instance:
-                example_code: |4
-
-                    In this example the player can {ask} Hedy a yes-no question and Hedy will pick a random answer for you.
+                example_code: |
                     ```
                     {print} I’m Hedy the fortune teller!
                     question {is} {ask} What do you want to know?
@@ -1520,15 +1520,16 @@ adventures:
                     Can you make your Haunted House level 4 proof?
                 example_code: |
                     ```
-                    {print} _ Escape from the haunted house! _
-                    {print} _ There are 3 doors in front of you... _
-                    choice {is} {ask} _ Which door do you choose? _
-                    {print} _ You picked door ... _ choice
+                    _ Add quotation marks to this code _
+                    {print} Escape from the haunted house!
+                    {print} There are 3 doors in front of you...
+                    choice {is} {ask} Which door do you choose?
+                    {print} You picked door ... choice
                     monsters {is} a zombie, a vampire, NOTHING YOUVE ESCAPED
-                    {print} _ You see... _
+                    {print} You see...
                     {sleep}
                     {print} monsters {at} {random}
-                     ```
+                    ```
                 start_code: '# place your code here'
             5:
                 story_text: |
@@ -2457,8 +2458,8 @@ adventures:
         description: Create your own virtual restaurant
         levels:
             1:
-                story_text: |4
-                     In level 1 you can make your own virtual restaurant and take your guests' orders.
+                story_text: |
+                    In level 1 you can make your own virtual restaurant and take your guests' orders.
                 example_code: |
                     ```
                     {print} Welcome to Hedy's restaurant 🍟
@@ -2566,11 +2567,10 @@ adventures:
             6:
                 story_text: |
                     In this level you can use maths to calculate the total price of your customer's order, which can make your virtual restaurant more realistic.
-                example_code: |4
-
+                example_code: |
                     You can make a simple restaurant code, like this:
                     ```
-                    {print} 'Welcome to Hedys restaurant'
+                    {print} 'Welcome to Restaurant Chez Hedy'
                     {print} 'Here is our menu:'
                     {print} 'Our main courses are pizza, lasagne, or spaghetti'
                     main = {ask} 'Which main course would you like?'
@@ -2787,11 +2787,11 @@ adventures:
                     ```
                 start_code: '# place your code here'
             3:
-                story_text: |4
+                story_text: |
+                    You can use the `{at} {random}` command to let the computer pick rock, paper or scissors!
 
-                    In this level we can enter lists and choose things from them.
-                    You first make a list with `{is}`. Then you can let the computer choose something from the list with `{at} {random}`.
-                    For example, you can let the computer pick from rock, paper and scissors.
+                    ### Exercise
+                    Finish the code by using the `{at} {random}` command.
                 example_code: |
                     ```
                     choices {is} rock, paper, scissors
@@ -2961,7 +2961,7 @@ adventures:
                         {print} 'Go to the airport at 02.00'
                     {else}
                         {print} 'Go to the trainstation at 10.00'
-                     ```
+                    ```
                 start_code: '# place your code here'
     sleep_command:
         name: '{sleep}'
@@ -3649,7 +3649,7 @@ adventures:
                     ### Exercise 1
                     This code creates three black triangles, change that into five pink squares.
 
-                     **(extra)** Create a figure of your own choosing consisting of at least two different shapes types.
+                    **Extra** Create a figure of your own choosing consisting of at least two different shapes types.
                 example_code: |
                     ```
                     {color} {black}
@@ -3669,7 +3669,7 @@ adventures:
                     ### Exercise 1
                     Add a 90 degree turn in the loop, so that a spiral is drawn.
                     Add at least 5 numbers to the list, so the spiral grows larger.
-                     **(extra)** can you change the spiral into another shape? Experiment with numbers for the turn!
+                    **(extra)** can you change the spiral into another shape? Experiment with numbers for the turn!
                     ### Exercise 2
                     The spiral is drawn outwards, make it go inwards?
                 example_code: |

@@ -617,12 +617,11 @@ adventures:
                     ```
                 start_code: '# разместите здесь свой код'
             13:
-                story_text: |4
-
+                story_text: |
                     ### Exercise 1
                     Let's make the practice program a bit harder. The player now has to answers two questions correctly. Fill out the blanks to complete the program.
 
-                    ### Exercise 2 (extra)
+                    ### Exercise 2 Extra
                     Sometimes, calculations have multiple correct answers. For example, 10 can be divided by 5 and by 2. So the question 'What number divides 10?' can be answered by 2 and by 5.
                     Ask for a calculation that has multiple correct answers, ask the player to answer it, and determine if it is correct using `{or}`.
                     Empty the programming field and create your own solution.
@@ -771,13 +770,13 @@ adventures:
                     имя {is} {ask} 'как тебя зовут?'
                     {if} имя {is} Хеди {print} 'круто!' {else} {print} 'meh'
             6:
-                story_text: |4
-                     На этом уровне вы узнаете кое-что новое: теперь вы также можете вычислять.
+                story_text: |
+                    На этом уровне вы узнаете кое-что новое: теперь вы также можете вычислять.
 
-                     Плюс - это просто, вы пишете его как в математике: `5 + 5`, например. Минус также работает хорошо, это `5 - 5`.
+                    Плюс - это просто, вы пишете его как в математике: `5 + 5`, например. Минус также работает хорошо, это `5 - 5`.
 
-                     Со временем все немного иначе, потому что на клавиатуре нет символа времени. Просто поищите, его действительно нет!
-                     Поэтому мы умножаем со звездочкой над 8: `5 * 5`. Читайте это как "5 умножить на 5", это поможет вам лучше запомнить.
+                    Со временем все немного иначе, потому что на клавиатуре нет символа времени. Просто поищите, его действительно нет!
+                    Поэтому мы умножаем со звездочкой над 8: `5 * 5`. Читайте это как "5 умножить на 5", это поможет вам лучше запомнить.
                 example_code: |
                     ```
                     {print} '5 plus 5 is ' 5 + 5
@@ -1021,8 +1020,7 @@ adventures:
                     {if} бросок {is} земляной очки = очки + 5 {else} очки = очки + бросок
                     {print} 'это' очки ' точка'
                     ```
-                example_code_2: |4
-
+                example_code_2: |
                     Удалось ли вам рассчитать счет для 8 кубиков? Это потребовало много вырезания и вставки, верно? В 7 уровне мы сделаем это еще проще!
                 start_code: '{print} ''Что покажет кубик на этот раз?'''
             7:
@@ -1047,7 +1045,7 @@ adventures:
                     варианты = 1, 2, 3, 4, 5, 6
                     _
                         {print} игрок ' бросает ' выбор {at} {random}
-                       {sleep}
+                        {sleep}
                     ```
                 start_code: '# разместите здесь свой код'
             15:
@@ -1270,9 +1268,7 @@ adventures:
                 story_text: |
                     В предыдущих уровнях вы создали свою первую машину для гадания, но Хеди не могла ничего предсказать, только {echo}.
                     В этом уровне вы можете использовать переменную и команду `{at} {random}`{random}`, чтобы позволить Хеди действительно выбрать ответ за вас. Посмотрите, например, этот код:
-                example_code: |4
-
-                    In this example the player can {ask} Hedy a yes-no question and Hedy will pick a random answer for you.
+                example_code: |
                     ```
                     {print} I’m Hedy the fortune teller!
                     question {is} {ask} What do you want to know?
@@ -2570,8 +2566,7 @@ adventures:
             6:
                 story_text: |
                     В этом уровне вы можете использовать математику для подсчета общей стоимости заказа клиента, что может сделать ваш виртуальный ресторан более реалистичным.
-                example_code: |4
-
+                example_code: |
                     Вы можете сделать простой код ресторана, например, такой:
                     ```
                     {print} 'Добро пожаловать в ресторан Hedys'
@@ -2783,8 +2778,7 @@ adventures:
                     ```
                 start_code: '# разместите здесь свой код'
             3:
-                story_text: |4
-
+                story_text: |
                     В этом уровне мы можем вводить списки и выбирать из них предметы.
                     Сначала вы составляете список с помощью `{is}`. Затем вы можете позволить компьютеру выбрать что-то из списка с помощью `{at} {random}`{random}`.
                     Например, вы можете позволить компьютеру выбрать из списка "камень, бумага и ножницы"

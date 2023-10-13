@@ -1,6 +1,6 @@
 adventures:
     story:
-        name: Story
+        name: కథ
         default_save_name: Story
         description: Story
         levels:
@@ -23,83 +23,90 @@ adventures:
                 story_text_2: |
                     ### Exercise
                     Can you make your own story in Hedy now by using `{print}` , `{ask}` and `{echo}`?
-                start_code: '{print} Your story starts here'
+                start_code: '{print} మీ కథనం ఇక్కడ ప్రారంభమవుతుంది'
             2:
                 story_text: |
-                    In level 2 you can make your story more fun. Your main character's name can now be anywhere in the sentence.
+                    స్థాయి 2లో మీరు మీ కథనాన్ని మరింత సరదాగా చేయవచ్చు. మీ ప్రధాన పాత్ర పేరు ఇప్పుడు వాక్యంలో ఎక్కడైనా ఉండవచ్చు.
 
-                    You do have to program a little bit extra for that. You must now name your main character first.
+                    మీరు దాని కోసం కొంచెం అదనంగా ప్రోగ్రామ్ చేయాలి. మీరు ఇప్పుడు మీ ప్రధాన పాత్రకు ముందుగా పేరు పెట్టాలి.
 
-                    You can then put that name anywhere in a sentence.
-
-                    ### Exercise
-                    Can you make a story using a variable yourself? Can you add even more variables?
+                    మీరు ఆ పేరును వాక్యంలో ఎక్కడైనా ఉంచవచ్చు.
                 example_code: |-
-                    ```
-                    name {is} {ask} What is the name of the main character?
-                    {print} name is now going to run in the woods
-                    {print} name is a bit scared
-                    {print} Suddenly he hears a crazy noise...
-                    {sleep}
-                    {print} name is afraid this is a haunted forest
-                    ```
+                    పేరు {is} {ask} ప్రధాన పాత్ర పేరు ఏమిటి?
+                    {print} పేరు ఇప్పుడు అడవుల్లో అమలు కానుంది
+                    {print} పేరు కొంచెం భయంగా ఉంది
+                    {print} అకస్మాత్తుగా అతనికి వెర్రి శబ్దం వినబడింది...
+                    {నిద్ర}
+                    ఇది హాంటెడ్ ఫారెస్ట్ అని {print} పేరు భయపడుతోంది
                 story_text_2: |
-                    ### Exercise
-                    Now it's time to add variables to your own story that you've made in the previous level.
-                    Go to 'My programs', look for your level 1 story adventure and copy the code. Paste the code in your input screen in this level.
+                    ### వ్యాయామం
+                    ఇప్పుడు మీరు మునుపటి స్థాయిలో చేసిన మీ స్వంత కథనానికి వేరియబుల్‌లను జోడించాల్సిన సమయం వచ్చింది.
+                    'నా ప్రోగ్రామ్‌లు'కి వెళ్లి, మీ లెవల్ 1 స్టోరీ అడ్వెంచర్ కోసం వెతకండి మరియు కోడ్‌ను కాపీ చేయండి. ఈ స్థాయిలో మీ ఇన్‌పుట్ స్క్రీన్‌లో కోడ్‌ను అతికించండి.
 
-                    This code won't work in this level, because you have not used variables yet.
-                    Change the `{ask}` commands and `{echo}` commands in your code to the correct form that you've learned in this level.
+                    మీరు ఇంకా వేరియబుల్‌లను ఉపయోగించనందున ఈ కోడ్ ఈ స్థాయిలో పని చేయదు.
+                    మీ కోడ్‌లోని `{ask}` ఆదేశాలు మరియు `{echo}` ఆదేశాలను మీరు ఈ స్థాయిలో నేర్చుకున్న సరైన ఫారమ్‌కి మార్చండి.
 
-                    **Extra** Add a sleep command to your code to build up tension in your story.
+                    **అదనపు** మీ కథనంలో ఉద్రిక్తతను పెంచడానికి మీ కోడ్‌కి `{sleep}` ఆదేశాన్ని జోడించండి.
                 start_code: '{print} Your story'
             3:
                 story_text: |
-                    In level 3 you can make your story more fun. You can use randomness for any monster, animal or other obstacle, like this:
+                    స్థాయి 3లో మీరు మీ కథనాన్ని మరింత సరదాగా చేయవచ్చు. మీరు ఇలాంటి ఏదైనా రాక్షసుడు, జంతువు లేదా ఇతర అడ్డంకి కోసం యాదృచ్ఛికతను ఉపయోగించవచ్చు:
                 example_code: |
                     ```
-                    animals {is} 🦔, 🐿, 🦉, 🦇
-                    {print} He now hears the sound of an animals {at} {random}
+                    జంతువులు {is} 🦔, 🐿, 🦉, 🦇
+                    {print} అతను ఇప్పుడు శబ్దాన్ని వింటాడు: జంతువులు {at} {random}
                     ```
                 story_text_2: |
-                    The command `{add}` can also come in handy in your story.
+                    మీ కథనంలో `{add}` కమాండ్ కూడా ఉపయోగపడుతుంది.
                 example_code_2: |
                     ```
-                    {print} He hears a sound
-                    animals {is} 🐿, 🦔, 🦇, 🦉
-                    animal {is} {ask} What do you think it is?
-                    {add} animal {to_list} animals
-                    {print} it was an animals {at} {random}
+                    {print} అతనికి శబ్దం వినిపిస్తుంది
+                    జంతువులు {is} 🐿, 🦔, 🦇, 🦉
+                    జంతువు {is} {ask} అది ఏమిటి అని మీరు అనుకుంటున్నారు?
+                    {add} జంతువు {to_list} జంతువులు
+                    {print} ఇది ఒక జంతువులు {at} {random}
                     ```
                 story_text_3: |
-                    This is an example of the `{remove}` command in your story
+                    ఇది మీ కథనంలోని `{తొలగించు}` కమాండ్‌కి ఉదాహరణ
 
-                    ### Exercise
-                    Can you use the 3 new commands `{at} {random}` , `{add} {to}` and `{remove} {from}` in your own story?
+                    ### వ్యాయామం
+                    మీ కథనాన్ని మునుపటి స్థాయిల నుండి ఈ స్థాయికి కాపీ చేయండి.
+                    ఈ స్థాయిలో మీరు 3 కొత్త ఆదేశాలను `{at} {random}` , `{add} {to}` మరియు `{remove} {from}` నేర్చుకున్నారు.
+                    మీ కథనానికి కొత్త లైన్ కోడ్‌లను జోడించండి, తద్వారా అన్ని కొత్త ఆదేశాలు మీ కథనంలో కనీసం ఒక్కసారైనా ప్రదర్శించబడతాయి.
                 example_code_3: |
                     ```
-                    {print} His backpack got way too heavy.
-                    {print} Inside were a bottle of water, a flashlight and a brick.
-                    bag {is} water, flashlight, brick
-                    dump {is} {ask} Which item should he dump?
-                    {remove} dump {from} bag
+                    {print} అతని బ్యాక్‌ప్యాక్ చాలా బరువుగా ఉంది.
+                    {print} లోపల వాటర్ బాటిల్, ఫ్లాష్‌లైట్ మరియు ఇటుక ఉన్నాయి.
+                    బ్యాగ్ {is} నీరు, ఫ్లాష్‌లైట్, ఇటుక
+                    డంప్ {is} {ask} అతను ఏ వస్తువును డంప్ చేయాలి?
+                    {remove} డంప్ {from} బ్యాగ్
                     ```
                 start_code: '{print} Your story'
             4:
                 story_text: |
-                    You may have noticed that there is still a problem in the previous levels. Did you try to print a sentence that contained the word name? i.e. `{print}` my name is name.
-                    You can solve that in this level. You must use quotation marks for everything that you are going to print.
+                    మునుపటి స్థాయిలలో ఇంకా సమస్య ఉందని మీరు గమనించి ఉండవచ్చు. మీరు పేరు అనే పదాన్ని కలిగి ఉన్న వాక్యాన్ని ముద్రించడానికి ప్రయత్నించారా? అంటే `{print}` నా పేరు.
+                    మీరు దానిని ఈ స్థాయిలో పరిష్కరించవచ్చు. మీరు ప్రింట్ చేయబోయే ప్రతిదానికీ కొటేషన్ మార్కులను తప్పనిసరిగా ఉపయోగించాలి.
+
+                    ### వ్యాయామం
+                    ఉదాహరణ కోడ్‌ను కాపీ చేసి, 1 మరియు 2 పంక్తులలోని ఖాళీలపై కొటేషన్ గుర్తులను జోడించడం ద్వారా దాన్ని పూర్తి చేయండి.
+                    లైన్ 3 మరియు 4లోని ఖాళీలను కొటేషన్ గుర్తులతో భర్తీ చేయకూడదు, కానీ `{స్లీప్}` మరియు `{క్లియర్}` ఆదేశం. మీరు దీన్ని పని చేయగలరా?
+
+                    ### వ్యాయామం 2
+                    మునుపటి స్థాయికి తిరిగి వెళ్లి, మీ స్టోరీ కోడ్‌ని కాపీ చేయండి. సరైన స్పాట్‌లలో కొటేషన్ మార్కులను జోడించడం ద్వారా కోడ్ ఈ స్థాయిలో పని చేసేలా చేయండి.
+                    మనస్సు: మీ స్వంత కథలోని వేరియబుల్స్ కొటేషన్ మార్కులకు వెలుపల ఉండాలి. ఉదాహరణ కోడ్ యొక్క రెండవ పంక్తి వలె. ఆ లైన్‌లో వేరియబుల్ పేరు కొటేషన్ మార్కుల వెలుపల ఉంచబడుతుంది.
                 example_code: |
                     ```
-                    name {is} Hans
-                    {print}  _ The name of the main character is _ name
+                    name {is} {ask} _ What is your name? _
+                    {print}  _ The main character is called _ name
+                    _
+                    _
                     {print} name  _ is now going to walk in the woods _
                     {print} name _ is a bit scared _
                     animals {is} 🦔, 🐿, 🦉, 🦇
                     {print} _ He hears the sound of a _ animals {at} {random}
                     {print} name _ is afraid this is a haunted forest _
                     ```
-                start_code: '{print} ''Your story will be printed here!'''
+                start_code: '{print} ''మీ కథ ఇక్కడ ముద్రించబడుతుంది!'''
             5:
                 story_text: |
                     In this level you can program different endings, which will make your story even more fun.
@@ -123,14 +130,15 @@ adventures:
                     {if} end {is} good {print} name ' takes the sword and the monster quickly runs away'
                     {else} {print} 'The monster eats ' name
                     ```
-                start_code: '{print} ''Here your story will start!'''
+                start_code: '{print} ''ఇక్కడ మీ కథ ప్రారంభమవుతుంది!'''
             7:
                 story_text: |
-                    In a story, someone says words several times. For example, when someone calls for help or sings a song.
-                    You can put such repetitions in your story, in this level with `{repeat}`.
+                    ఒక కథలో, ఎవరైనా చాలాసార్లు మాటలు చెబుతారు. ఉదాహరణకు, ఎవరైనా సహాయం కోసం పిలిచినప్పుడు లేదా పాట పాడినప్పుడు.
+                    మీరు మీ కథనంలో ఇటువంటి పునరావృత్తులు, ఈ స్థాయిలో `{repeat}`తో ఉంచవచ్చు.
 
-                    ### Exercise
-                    Can you make your own story with repitition?
+                    ### వ్యాయామం
+                    మీ స్వంత కథకు పునరావృతతను జోడించండి. మీరు సేవ్ చేసిన ప్రోగ్రామ్‌లకు తిరిగి వెళ్లండి, లెవల్ 6 నుండి మీ స్టోరీ ప్రోగ్రామ్‌ని ఎంచుకోండి మరియు
+                    `{print}`ని కలిగి ఉన్న పంక్తిని కనుగొని దాన్ని పునరావృతం చేయండి!
                 example_code: |
                     ```
                     {print} 'The prince kept calling for help'
@@ -610,12 +618,11 @@ adventures:
                     ```
                 start_code: '# place your code here'
             13:
-                story_text: |4
-
+                story_text: |
                     ### Exercise 1
                     Let's make the practice program a bit harder. The player now has to answers two questions correctly. Fill out the blanks to complete the program.
 
-                    ### Exercise 2 (extra)
+                    ### Exercise 2 Extra
                     Sometimes, calculations have multiple correct answers. For example, 10 can be divided by 5 and by 2. So the question 'What number divides 10?' can be answered by 2 and by 5.
                     Ask for a calculation that has multiple correct answers, ask the player to answer it, and determine if it is correct using `{or}`.
                     Empty the programming field and create your own solution.
@@ -760,13 +767,13 @@ adventures:
                     name {is} {ask} 'what is your name?'
                     {if} name {is} Hedy {print} 'cool!' {else} {print} 'meh'
             6:
-                story_text: |4
-                     In this level you learn something new: you can now also calculate.
+                story_text: |
+                    In the previous level you have practiced with `{ask}` and `{if}`. For example you can ask guests what they would like to eat.
+                    What you can't yet do though, is calculate the price for everyone's dinner.
 
-                     The plus is easy, you write it like with math: `5 + 5` for example. The minus also works fine, it is `5 - 5`.
-
-                     The times is a bit different, because there is no times symbol on your keyboard. Just search, there really isn't!
-                     That is why we multiply with the asterisk above 8: `5 * 5`. Read that as "5 times 5" that helps you remember it best.
+                    The next level makes it possible to use addition, subtraction and multiplication in your programs. This way you can calculate the prices in your restaurant, but you could also add a secret code to give your friends and family a discount.
+                    Another option in the next level is programming your own maths game, for your little brother or sister to practice their multiplications.
+                    Go see for yourself!
                 example_code: |
                     ```
                     {print} '5 plus 5 is ' 5 + 5
@@ -1010,8 +1017,7 @@ adventures:
                     {if} throw {is} earthworm points = points + 5 {else} points = points + throw
                     {print} 'those are' points ' point'
                     ```
-                example_code_2: |4
-
+                example_code_2: |
                     Did you manage to calculate the score for 8 dice? That required a lot of cutting and pasting, right? We are going to make that easier in level 7!
                 start_code: '{print} ''What will the die indicate this time?'''
             7:
@@ -1260,9 +1266,7 @@ adventures:
                 story_text: |
                     In the previous levels you've created your first fortune telling machine, but Hedy couldn't really predict anything, only {echo}.
                     In this level you can use a variable and the `{at} {random}` command to really let Hedy choose an answer for you. Check out this code for instance:
-                example_code: |4
-
-                    In this example the player can {ask} Hedy a yes-no question and Hedy will pick a random answer for you.
+                example_code: |
                     ```
                     {print} I’m Hedy the fortune teller!
                     question {is} {ask} What do you want to know?
@@ -2447,8 +2451,8 @@ adventures:
         description: Create your own virtual restaurant
         levels:
             1:
-                story_text: |4
-                     In level 1 you can make your own virtual restaurant and take your guests' orders.
+                story_text: |
+                    In level 1 you can make your own virtual restaurant and take your guests' orders.
                 example_code: |
                     ```
                     {print} Welcome to Hedy's restaurant 🍟
@@ -2556,11 +2560,10 @@ adventures:
             6:
                 story_text: |
                     In this level you can use maths to calculate the total price of your customer's order, which can make your virtual restaurant more realistic.
-                example_code: |4
-
+                example_code: |
                     You can make a simple restaurant code, like this:
                     ```
-                    {print} 'Welcome to Hedys restaurant'
+                    {print} 'Welcome to Restaurant Chez Hedy'
                     {print} 'Here is our menu:'
                     {print} 'Our main courses are pizza, lasagne, or spaghetti'
                     main = {ask} 'Which main course would you like?'
@@ -2775,11 +2778,11 @@ adventures:
                     ```
                 start_code: '# place your code here'
             3:
-                story_text: |4
+                story_text: |
+                    You can use the `{at} {random}` command to let the computer pick rock, paper or scissors!
 
-                    In this level we can enter lists and choose things from them.
-                    You first make a list with `{is}`. Then you can let the computer choose something from the list with `{at} {random}`.
-                    For example, you can let the computer pick from rock, paper and scissors.
+                    ### Exercise
+                    Finish the code by using the `{at} {random}` command.
                 example_code: |
                     ```
                     choices {is} rock, paper, scissors
