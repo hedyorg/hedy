@@ -112,7 +112,7 @@ adventures:
                     {print} _ Il entend le bruit d'un _ animaux {at} {random}
                     {print} nom _ craint que la forêt ne soit hantée _
                     ```
-                start_code: '{print} "ton histoire sera écrite ici !"'
+                start_code: '{print} "ton histoire va s''écrire ici !"'
             5:
                 story_text: |
                     Dans ce niveau, différentes fins peuvent être programmées afin de rendre ton histoire encore plus amusante.
@@ -175,7 +175,7 @@ adventures:
                         {print} "Oh non ! Richard est trop lent…"
                         {print} _
                     ```
-                start_code: '# écrit ton code ici'
+                start_code: '# écris ton code ici'
             9:
                 story_text: |
                     In this level you can use nesting to put {if}, {repeat} or {for} commands inside other {if}, {repeat} or {for} commands. This gives you many options and really helps you to make your story interactive.
@@ -194,12 +194,12 @@ adventures:
                     {else}
                         {print} 'Robin goes home'
                     ```
-                start_code: '# écrit ton code ici'
+                start_code: '# écris ton code ici'
             10:
                 story_text: |
                     In this level you can use the {for} command in your story. In this way you could easily program the children's book 'brown bear, brown bear, what do you see'.
                 example_code: "```\nanimaux = _ , _ , _ \n{print} 'Ours brun, Ours brun'\n {print} 'Que vois-tu?'\n```\n"
-                start_code: '# écrit ton code ici'
+                start_code: '# écris ton code ici'
             12:
                 story_text: In this level you can use the quotation marks to save multiple words in a variable.
                 example_code: |
@@ -207,7 +207,7 @@ adventures:
                     name = 'The Queen of England'
                     {print} name ' was eating a piece of cake, when suddenly...'
                     ```
-                start_code: '# écrit ton code ici'
+                start_code: '# écris ton code ici'
             13:
                 story_text: |
                     By using the `{and}` and `{or}` commands, you can shorten your stories. For example, check out the dragon story.
@@ -240,7 +240,7 @@ adventures:
                             {print} 'Nope they are not at the ' location
                     {print} 'Now you can enter the house!'
                     ```
-                start_code: '# écrit ton code ici'
+                start_code: '# écris ton code ici'
             18:
                 story_text: |
                     We are going to print another story, but now we have to use brackets with `{print}`.
@@ -261,7 +261,7 @@ adventures:
                     naam = {input}("What's your name?")
                     {print}('Welcome to this story!')
                     ```
-                start_code: '# écrit ton code ici'
+                start_code: '# écris ton code ici'
     add_remove_command:
         name: '{add} {to} & {remove} {from}'
         default_save_name: add_remove_command
@@ -497,7 +497,7 @@ adventures:
                     {elif} points > dealer_points {and} points < 21:
                         {print} 'You win!'
                     ```
-                start_code: '# écrit ton code ici'
+                start_code: '# écris ton code ici'
     calculator:
         name: Calculatrice
         default_save_name: Calculator
@@ -567,7 +567,7 @@ adventures:
                             {else}
                                 {print} 'Thats wrong. The right answer is ' correct
                     ```
-                start_code: '# écrit ton code ici'
+                start_code: '# écris ton code ici'
             11:
                 story_text: |
                     With a `{for}` you can simplify tables of multiplication practise program.
@@ -583,7 +583,7 @@ adventures:
                     {for} i {in} {range} 1 to 10
                         {print} i * number
                     ```
-                start_code: '# écrit ton code ici'
+                start_code: "nombre = 10\n{for} i {in} {range} 1 {to} 10\n    {print} i * nombre\n"
             12:
                 story_text: |
                     Now you can make a calculator that works for decimal numbers.
@@ -594,7 +594,7 @@ adventures:
                     answer = number1 + number2
                     {print} number1 ' plus ' number2 ' is ' answer
                     ```
-                start_code: '# écrit ton code ici'
+                start_code: '# écris ton code ici'
             13:
                 story_text: |
                     ### Exercise 1
@@ -632,7 +632,7 @@ adventures:
                                 {print} 'You win!'
                                 game = 'over'
                     ```
-                start_code: '# écrit ton code ici'
+                start_code: '# écris ton code ici'
             15:
                 story_text: |
                     You can add the `{while}` loop to the calculator game you've learned to make in a previous level.
@@ -653,7 +653,7 @@ adventures:
                         {print} 'Good job!'
                     {print} 'You win!'
                     ```
-                start_code: '# écrit ton code ici'
+                start_code: '# écris ton code ici'
     clear_command:
         name: '{clear}'
         default_save_name: clear_command
@@ -781,7 +781,7 @@ adventures:
                     prix_total {is} prix_plat + prix_boisson
                     {print} "Ça fera " prix_total " euros, s'il vous plait"
                     ```
-                start_code: '# écrit ton code ici'
+                start_code: '# écris ton code ici'
             7:
                 story_text: |
                     Bon travail ! Vous avez atteint le niveau suivant, ce qui signifie que vous avez pratiqué avec `{if}` et `{else}`. Vous avez probablement remarqué que vos codes deviennent de plus en plus longs.
@@ -953,26 +953,30 @@ adventures:
         levels:
             3:
                 story_text: |
-                    In this level we can choose from a list. With that we can let the computer choose one side of the die.
-                    Take a look at the games you have in your closet at home.
-                    Are there games with a (special) die? You can also copy it with this code.
-                    For example, the dice of the game Earthworms with the numbers 1 to 5 and an earthworm on it.
+                    À ce niveau, nous pouvons choisir dans une liste. Avec ça, nous pouvons demander à l'ordinateur de choisir une face d'un dé.
+                    Regarde dans les jeux que tu as dans ton placard à la maison.
+                    Y a-t-il des jeux avec un dé (spécial) ? Tu peux refaire ce dé avec ce code.
+                    Par exemple, le dé du jeu Earthworms avec les chiffres de 1 à 5 et un ver de terre sur la dernière face.
 
                     ![Die of earthworms with 1 to 5 and an earthworm on it](https://cdn.jsdelivr.net/gh/felienne/hedy@24f19e9ac16c981517e7243120bc714912407eb5/coursedata/img/dobbelsteen.jpeg)
                 example_code: |
                     ```
-                    choices {is} 1, 2, 3, 4, 5, earthworm
-                    {print} choices {at} {random}
+                    choix {is} 1, 2, 3, 4, 5, ver de terre
+                    {print} choix {at} {random}
                     ```
                 story_text_2: |
                     ### Exercice
-                    The dice in the example above are dice for a specific game. Can you make normal dice?
-                    Or other special dice from a different game?
+                    Le dé de l'exemple ci-dessus est le dé d'un jeu en particulier. Peux-tu faire un dé normal ?
+                    Ou le dé spécial d'un autre jeu ?
                 example_code_2: |
                     ```
-                    choices {is} _
+                    choix {is} _
                     ```
-                start_code: '{print} What will the die indicate this time?'
+                start_code: 'choix {is} 1, 2, 3, 4, 5, ver de terre
+
+                    {print} Tu as jeté un _ {at} {random}
+
+                    '
             4:
                 story_text: |
                     Dans ce niveau, tu peux aussi créer un dé. Mais cette fois, tu peux essayer par toi-même sans un exemple de code !
@@ -1036,7 +1040,7 @@ adventures:
                         {print} player ' throws ' choices {at} {random}
                         {sleep}
                     ```
-                start_code: '# écrit ton code ici'
+                start_code: '# écris ton code ici'
             15:
                 story_text: |
                     In this game you have to throw 6 in as little tries as possible.
@@ -1052,7 +1056,7 @@ adventures:
                         tries = tries + 1
                     {print} 'Yes! You have thrown 6 in ' tries ' tries.'
                     ```
-                start_code: '# écrit ton code ici'
+                start_code: '# écris ton code ici'
     dishes:
         name: Vaisselle ?
         default_save_name: Dishes
@@ -1151,7 +1155,7 @@ adventures:
                     {for} day {in} days
                         {print} names {at} {random} ' does the dishes on ' day
                     ```
-                start_code: '# écrit ton code ici'
+                start_code: "jours = lundi, mardi, mercredi, jeudi, vendredi, samedi, dimanche\nnom = maman, papa, Emma, Sophie\n{for} jour {in} jours\n    {print} nom {at} {random} \" fait la vaisselle le \" jour\n"
     elif_command:
         name: '{elif}'
         default_save_name: elif
@@ -1255,11 +1259,11 @@ adventures:
                     ### Exercice
                     Copie l'exemple de code dans la zone de programmation et complète les espaces vides roses pour faire marcher le code.
                     **En plus** Change le code pour que la voyante, non seulement prédise ton nom, mais également ton âge, ton équipe de sport favori et quelque chose d'autre à ton sujet.
-                start_code: '# écrit ton code ici'
+                start_code: '# écris ton code ici'
             3:
                 story_text: |
-                    In the previous levels you've created your first fortune telling machine, but Hedy couldn't really predict anything, only {echo}.
-                    In this level you can use a variable and the `{at} {random}` command to really let Hedy choose an answer for you. Check out this code for instance:
+                    Au niveau précédent, tu as créé ta première machine de voyance, mais Hedy ne pouvait pas vraiment prédire quelque chose, seulement répéter avec la commande `{echo}`.
+                    À ce niveau, tu peux utiliser une variable et la commande `{at} {random}` pour vraiment laisser Hedy choisir une réponse pour toi. Prends ce code par exemple :
                 example_code: |
                     ```
                     {print} Je suis Hedy la voyante
@@ -1271,8 +1275,9 @@ adventures:
                     {print} réponses {at} {random}
                     ```
                 story_text_2: |
-                    Now, Hedy can only answer yes, no or maybe. Can you give Hedy more answer options, like 'definitely' or '{ask} again'.
-                start_code: '# écrit ton code ici'
+                    ### Exercice
+                    Bon, Hedy peut seulement répondre oui, non ou peut-être. Peux-tu donner à Hedy plus de réponses possibles, comme « certainement », ou « peux-tu répéter la question ? ».
+                start_code: '# écris ton code ici'
             4:
                 story_text: |
                     Ce niveau n'ajoute pas de nouvelles fonctions, mais te permet de t'entrainer à utiliser les guillemets.
@@ -1297,7 +1302,7 @@ adventures:
                     {sleep} 2
                     {print} réponses {at} {random}
                     ```
-                start_code: '# écrit ton code ici'
+                start_code: '# écris ton code ici'
             5:
                 story_text: |
                     In this level you'll learn to (secretly) tip the odds in your favor, when using the fortune teller!
@@ -1313,7 +1318,7 @@ adventures:
                     {if} personne {in} amis {print} bonnes_réponses {at} {random}
                     {else} {print} mauvaises_réponses {at} {random}
                     ```
-                start_code: '# écrit ton code ici'
+                start_code: '# écris ton code ici'
             6:
                 story_text: |
                     In this level you can use math in your predictions as a fortune teller. This allows you to make up (silly) formulas to calculate the future.
@@ -1344,7 +1349,7 @@ adventures:
                     result = result * football
                     {print} 'You are ' result ' percent smart.'
                     ```
-                start_code: '# écrit ton code ici'
+                start_code: '# écris ton code ici'
             7:
                 story_text: |
                     In this level you can use the `{repeat}` command to make your machine tell multiple fortunes at once.
@@ -1356,7 +1361,7 @@ adventures:
                     answer = yes, no, maybe
                     {repeat} 3 {times} {print} 'My crystal ball says... ' answer {at} {random}
                     ```
-                start_code: '# écrit ton code ici'
+                start_code: '# écris ton code ici'
             8:
                 story_text: |
                     In the previous levels you've learned how to use repeat to make the fortune teller answer 3 questions in a row, but we had a problem with printing the questions.
@@ -1373,7 +1378,7 @@ adventures:
                        {sleep}
                        {print} 'My crystal ball says...' answers {at} {random}
                     ```
-                start_code: '# écrit ton code ici'
+                start_code: '# écris ton code ici'
             10:
                 story_text: |
                     In this level you'll learn how to program the game MASH (mansion, apartement, shack, house). In this game you can predict for all the players at once, what their future will look like.
@@ -1404,7 +1409,7 @@ adventures:
                     {sleep}
                     {print} fortunes {at} {random}
                     ```
-                start_code: '# écrit ton code ici'
+                start_code: '# écris ton code ici'
     harry_potter:
         name: Harry Potter
         default_save_name: Harry Potter
@@ -1426,7 +1431,7 @@ adventures:
                     _ {print} name ' is great at ' subjects {at} {random}
                     _ {print} name 's greatest fear is ' fears {at} {random}
                     ```
-                start_code: '# écrit ton code ici'
+                start_code: '# écris ton code ici'
     haunted:
         name: La maison hantée
         default_save_name: La maison hantée
@@ -1507,7 +1512,7 @@ adventures:
                     {sleep}
                     _ _ _ _
                     ```
-                start_code: '# écrit ton code ici'
+                start_code: '# écris ton code ici'
             4:
                 story_text: |
                     Dans ce niveau, tu vas apprendre comment utiliser les guillemets dans tes jeux.
@@ -1529,7 +1534,7 @@ adventures:
                     {sleep}
                     {print} monstres {at} {random}
                      ```
-                start_code: '# écrit ton code ici'
+                start_code: '# écris ton code ici'
             5:
                 story_text: |
                     Up until this level the haunted house game always asked the player to choose a door, but as you might have noticed, they didn't really have to answer correctly.
@@ -1548,7 +1553,7 @@ adventures:
                     {if} chosen_door {is} correct_door {print} 'Great! Youve escaped!'
                     {else} {print} 'Oh no! You are being eaten by a...' monsters {at} {random}
                     ```
-                start_code: '# écrit ton code ici'
+                start_code: '# écris ton code ici'
             9:
                 story_text: |
                     In this level you can use nesting, which allows you to make the haunted house even more interactive!
@@ -1629,7 +1634,7 @@ adventures:
                         {else}
                             {print} 'GAME OVER'
                     ```
-                start_code: '# écrit ton code ici'
+                start_code: '# écris ton code ici'
             16:
                 story_text: |
                     This haunted house game uses the connection between the lists you can use in this level.
@@ -1662,7 +1667,7 @@ adventures:
                         {print} bad_fate[i]
                         {print} 'GAME OVER'
                     ```
-                start_code: '# écrit ton code ici'
+                start_code: '# écris ton code ici'
     if_command:
         name: '{if} & {else}'
         default_save_name: if_command
@@ -1872,7 +1877,7 @@ adventures:
                     {if} frog {is} grenouille {print} 'Super!'
                     {else} {print} 'No, frog is grenouille'
                     ```
-                start_code: '# écrit ton code ici'
+                start_code: '# écris ton code ici'
             16:
                 story_text: |
                     Make your own program to practice your vocabulary in a new language.
@@ -1891,7 +1896,7 @@ adventures:
                             {print} 'Wrong, ' french_words[i] ' means ' translation[i]
                     {print} 'You gave ' score ' correct answers.'
                     ```
-                start_code: '# écrit ton code ici'
+                start_code: '# écris ton code ici'
     maths:
         name: maths
         default_save_name: maths
@@ -2001,7 +2006,7 @@ adventures:
                     {print} 🧒 Dit nouveau_mot , Hedy !
                     {print} 🦜 mots {at} {random}
                     ```
-                start_code: '# écrit ton code ici'
+                start_code: '# écris ton code ici'
             4:
                 story_text: |
                     Dans ce niveau nous devons utiliser les guillemets avec les commandes `{ask}` et `{print}`.
@@ -2016,7 +2021,7 @@ adventures:
                     {print} _ 🧒 Dis _ nouveau_mot _, Hedy !_
                     {print} _ 🦜 _ mots {at} {random}
                     ```
-                start_code: '# Écrit ton code ici'
+                start_code: '# écris ton code ici'
             5:
                 story_text: |
                     Récompense ton perroquet s'il dit le bon mots !
@@ -2032,7 +2037,7 @@ adventures:
                     _ mot_dit {is} nouveau_mot _ "🧒 Bien joué, Hedy ! 🍪"
                     _ _ "🧒 Non, Hedy ! Dis " nouveau_mot
                     ```
-                start_code: '# écrit ton code ici'
+                start_code: '# écris ton code ici'
     piggybank:
         name: Piggy Bank
         default_save_name: Piggy Bank
@@ -2052,7 +2057,7 @@ adventures:
                     weeks = to_save / allowance
                     {print} 'You can buy a ' wish ' in ' weeks ' weeks.'
                     ```
-                start_code: '# écrit ton code ici'
+                start_code: '# écris ton code ici'
             14:
                 story_text: |
                     Dans ce niveau, tu peux laisser Hedy te dire {if} tu as économisé assez d'argent !
@@ -2070,7 +2075,7 @@ adventures:
                         {print} 'Great! You have enough'
                         {print} 'Lets go shopping!'
                     ```
-                start_code: '# écrit ton code ici'
+                start_code: '# écris ton code ici'
     pressit:
         name: Presse une touche
         default_save_name: Pressed
@@ -2099,7 +2104,7 @@ adventures:
                     {if} y {is} {pressed} {forward} 15
                     {else} {turn} 90
                     ```
-                start_code: '# écrit ton code ici'
+                start_code: '# écris ton code ici'
             7:
                 story_text: |
                     Now that you have learned about `{repeat}`, we can press keys multiple times.
@@ -2112,7 +2117,7 @@ adventures:
                     ```
                     {if} x {is} {pressed} {forward} 15 {else} {turn} 90
                     ```
-                start_code: '# écrit ton code ici'
+                start_code: '# écris ton code ici'
             9:
                 story_text: |
                     Now that you know how to combine statements, you can create a touch type tool with `{pressed}`.
@@ -2132,7 +2137,7 @@ adventures:
                         _
                         _
                     ```
-                start_code: '# écrit ton code ici'
+                start_code: '# écris ton code ici'
     print_command:
         name: '{print}'
         default_save_name: affiche
@@ -2215,7 +2220,7 @@ adventures:
                     {if} points_b > points_a
                         {print} 'You belong to the B club'
                     ```
-                start_code: '# écrit ton code ici'
+                start_code: '# écris ton code ici'
     quotation_marks:
         name: '"Les guillemets"'
         default_save_name: quotation_marks
@@ -2314,9 +2319,9 @@ adventures:
                     Sauras-tu le faire ? Nous avons déjà écrit les premières lignes dans le code d'exemple.
                 example_code_3: |
                     ```
-                    {print} Le grand jeu concours !
+                    {print} Le grand jeu concours !
                     {print} Voyez ces 3 valises devant vous…
-                    choix {is} {ask} Quelle valise choisissez-vous ?
+                    choix {is} {ask} Quelle valise choisissez-vous ?
                     les_prix {is} _
                     _
                     ```
@@ -2472,7 +2477,7 @@ adventures:
                     Ensuite, ajoute au moins 4 lignes de code supplémentaires au programme du restaurant.
                     Demande au client ce qu'il désire boire et demande-lui s'il veut payer en liquide ou avec la carte.
                     Enfin, pense à une façon sympa de dire au revoir à ton client.
-                start_code: '# Écrit ton code ici'
+                start_code: '# écris ton code ici'
             2:
                 story_text: |
                     Au niveau 2 tu pourrais étendre ton restaurant en utilisant des variables. Au niveau 1, Hedy pouvait seulement `{echo}` les commandes et seulement retenir la dernière chose commandée.
@@ -2497,39 +2502,35 @@ adventures:
                     Maintenant ajoute ton propre résumé de la nourriture et de la boisson commandé par le client.
 
                     **En plus** Maintenant que tu as appris comment utiliser les variables, tu peux utiliser autant de variables sur une ligne que tu le désires. Peux-tu ajouter plus de variables dans ton code, pour demander « sur place » ou « à emporter », « en liquide » ou « en carte », « avec ou sans paille », etc. ?
-                start_code: '# écrit ton code ici'
+                start_code: '# écris ton code ici'
             3:
                 story_text: |
-                    Having trouble to decide what you wanna have for dinner? You can let Hedy choose for you!
-                    Simply add lists of your favorite (or least favorite) meals and Hedy can randomly choose your dinner.
-                    You can also have a bit of fun, by letting Hedy choose the price for your dinner as well! What will you get?
+                    As-tu du mal à décider ce que tu voudras manger pour dîner ? Tu peux laisser Hedy décider pour toi !
+                    Ajoute simplement une liste de tes plats préférés (ou ceux que tu détestes le plus) et Hedy pourra choisir ton dîner pour toi.
+                    Tu peux aussi t'amuser, en laissant Hedy choisir, en plus, le prix de ton repas ! Que vas-tu obtenir ?
                 example_code: |
                     ```
-                    {print} Welcome to Hedy's Random Restaurant!
-                    {print} The only restaurant that will randomly choose your meal and its price for you!
-                    starters {is} salad, soup, carpaccio
-                    mains {is} pizza, brussels sprouts, spaghetti
-                    desserts {is} brownies, ice cream, french cheeses
-                    drinks {is} cola, beer, water
-                    prices {is} 1 dollar, 10 dollars, 100 dollars
-                    {print} You will start with: starters {at} {random}
-                    {print} Then we'll serve: mains {at} {random}
-                    {print} And as dessert: desserts {at} {random}
-                    {print} You will get a drinks {at} {random} to drink
-                    {print} That will be: prices {at} {random}
-                    {print} Thank you and enjoy your meal!
+                    plats {is} spaghetti, choux de Bruxelles, Hamburgers
+                    {print} Tu prendra plats {at} {random} ce soir !
+                    prix {is} 1 euro, 10 euros, 100 euros
+                    {print} Ça fera prix {at} {random} s'il vous plait.
                     ```
                 story_text_2: |
-                    Does your costumer have any allergies or do they dislike certain dishes? Then you can use the `{remove}`command to remove it from your menu.
+                    ### Exercice
+                    Maintenant, fait ta propre version du restaurant aléatoire.
+                    Fait ta propre liste d'entrée, plats, desserts, boisson et prix.
+                    Ensuite, utilise les commandes `{print}` et `{at} {random}` pour dire au client son menu pour ce soir.
                 example_code_2: |
                     ```
-                    {print} Mystery milkshake
-                    flavors {is} strawberry, chocolate, vanilla
-                    allergies {is} {ask} Are you allergic to any falvors?
-                    {remove} allergies {from} flavors
-                    {print} You get a flavors {at} {random} milkshake
+                    {print} Bienvenue dans le restaurant aléatoire !
+                    entrées {is} _
+                    plat {is} _
+                    dessert {is} _
+                    boisson {is} _
+                    prix {is} _
+                    _
                     ```
-                start_code: '# écrit ton code ici'
+                start_code: '# écris ton code ici'
             4:
                 story_text: |
                     Dans ce niveau, tu dois utiliser les guillemets lorsque tu utilises les commandes `{print}` ou `{ask}`.
@@ -2552,7 +2553,7 @@ adventures:
                     {print} Merci pour ta commande.
                     {print} Tes  plat  et  boisson  vont être servis !
                     ```
-                start_code: '# écrit ton code ici'
+                start_code: '# écris ton code ici'
             5:
                 story_text: |
                     In this level the {if} command allows you to {ask} your customers questions and give different responses to the answers.
@@ -2573,7 +2574,7 @@ adventures:
                     {if} anything {is} no {print} 'Thats it!' {else} {print} 'One ' anything
                     {print} 'Thank you for your order and enjoy your meal!'
                     ```
-                start_code: '# écrit ton code ici'
+                start_code: '# écris ton code ici'
             6:
                 story_text: |
                     In this level you can use maths to calculate the total price of your customer's order, which can make your virtual restaurant more realistic.
@@ -2592,7 +2593,7 @@ adventures:
                     {print} "Ce sera " prix " euros, s'il vous plaît"
                     {print} "Merci, bon appétit !"
                     ```
-                start_code: '# écrit ton code ici'
+                start_code: '# écris ton code ici'
             7:
                 story_text: |
                     In this level you've learned how to use the {repeat} command to repeat a line of code a certain amount of times.
@@ -2602,7 +2603,7 @@ adventures:
                     {print} "Bienvenu au restaurant Chez Hedy"
                     personnes = {ask} "Combien de personnes vont nous rejoindre aujourd'hui ?"
                     ```
-                start_code: '# écrit ton code ici'
+                start_code: '# écris ton code ici'
             8:
                 story_text: |
                     In this level you can make your virtual restaurant more elaborate by repeating multiple lines of code. Like this:
@@ -2619,7 +2620,7 @@ adventures:
                     ```
                 story_text_2: |
                     Of course, this code can be expanded with more items on the menu, offering drinks, and/or multiple courses, so feel free to add as many options as you like!
-                start_code: '# écrit ton code ici'
+                start_code: '# écris ton code ici'
             9:
                 story_text: |
                     In this level you can use nesting to make your restaurant more realistic and more fun!
@@ -2647,7 +2648,7 @@ adventures:
                     {print} "Cela fera " prix " euros"
                     {print} "Bon appétit !"
                     ```
-                start_code: '# écrit ton code ici'
+                start_code: '# écris ton code ici'
             10:
                 story_text: |
                     In this level you'll learn how to easily {ask} your guests' orders in a short code.
@@ -2683,7 +2684,7 @@ adventures:
                     {print} 'Vous voulez donc commander pour ' nombre_personnes ' personnes.'
                     {print} "Allons-y !"
                     ```
-                start_code: '# écrit ton code ici'
+                start_code: '# écris ton code ici'
             12:
                 story_text: |
                     From this level on you can use decimal numbers to make you menu more realistic.
@@ -2702,7 +2703,7 @@ adventures:
                         price = price + 2.35
                     {print} 'That will be ' price ' dollar, please'
                     ```
-                start_code: '# écrit ton code ici'
+                start_code: '# écris ton code ici'
             13:
                 story_text: |
                     In this level we can use the new commands to upgrade our restaurant.
@@ -2717,7 +2718,7 @@ adventures:
                         price = price - 3
                     {print} 'That will be ' price ' dollars'
                     ```
-                start_code: '# écrit ton code ici'
+                start_code: '# écris ton code ici'
             15:
                 story_text: |
                     With the `{while}` you can make sure your costumers can keep adding orders until they are done.
@@ -2731,7 +2732,7 @@ adventures:
                         more = {ask} 'Would you like to order anything {else}?'
                     {print} 'Thank you!'
                     ```
-                start_code: '# écrit ton code ici'
+                start_code: '# écris ton code ici'
     rock:
         name: Pierre, papier, ciseaux
         default_save_name: Rock
@@ -2772,29 +2773,27 @@ adventures:
                     choix {is} pierre
                     {print} Je choisis _
                     ```
-                start_code: '# écrit ton code ici'
+                start_code: '# écris ton code ici'
             3:
                 story_text: |
-                    You can use the `{at} {random}` command to let the computer pick rock, paper or scissors!
+                    Tu peux utiliser la commande `{at} {random}` pour faire choisir à l'ordinateur la pierre, le papier ou les ciseaux !
 
                     ### Exercice
-                    Finish the code by using the `{at} {random}` command.
+                    Termine le code en utilisant la commande `{at} {random}`.
                 example_code: |
                     ```
-                    choices {is} rock, paper, scissors
-                    {print} choices {at} {random}
+                    choix {is} pierre, papier, ciseaux
+                    {print} choix {at} {random}
                     ```
                 story_text_2: |
-                    ### Exercice
-                    Now you only have one player, so can you add a second player?
-                    You can even use variables to name player 1 and player 2.
+                    **En plus** fait un jeu pour deux joueurs. En premier, demande aux deux joueurs leurs noms. Ensuite, laisse l'ordinateur tirer leur réponse au hasard.
                 example_code_2: |
                     ```
-                    choices {is} rock, paper, scissors
-                    {print} player 1 chooses... choices {at} {random}
-                    {print} player 2 _
+                    choix {is} pierre, papier, ciseaux
+                    joueur_1 {is} {ask} Nom du joueur 1 :
+                    _
                     ```
-                start_code: '{print} Welcome to your own rock scissors paper!'
+                start_code: '{print} Bienvenue à ton propre pierre papier ciseaux !'
             4:
                 story_text: |
                     À ce niveau nous pouvons continuer le programme pierre, papier, ciseaux. Mais si tu veux ajouter du texte, tu dois utiliser les guillemets ici aussi.
@@ -2840,7 +2839,7 @@ adventures:
                             {print} 'You lose!'
                     # finish this code
                     ```
-                start_code: '# écrit ton code ici'
+                start_code: '# écris ton code ici'
             10:
                 story_text: |
                     ### Exercice
@@ -2851,7 +2850,7 @@ adventures:
                     joueurs = _
                     {for} _
                     ```
-                start_code: '# écrit ton code ici'
+                start_code: '# écris ton code ici'
             13:
                 story_text: |
                     With the `{and}` command you can shorten your rock, paper, scissors code! Check out the example code below and try to finish it.
@@ -2869,7 +2868,7 @@ adventures:
                     {if} computer_choice {is} 'rock' {and} your_choice {is} 'scissors'
                         {print} 'The computer wins!'
                     ```
-                start_code: '# écrit ton code ici'
+                start_code: '# écris ton code ici'
             15:
                 story_text: |
                     Play until you beat the computer! But first, finish the example code...
@@ -2890,7 +2889,7 @@ adventures:
                             {print} 'You win!'
                             won = 'yes'
                     ```
-                start_code: '# écrit ton code ici'
+                start_code: '# écris ton code ici'
     rock_2:
         name: Pierre, papier, ciseaux 2
         default_save_name: rock_2
@@ -2907,7 +2906,7 @@ adventures:
                     choix {is} _
                     {print} Je choisi choix
                     ```
-                start_code: '# écrit ton code ici'
+                start_code: '# écris ton code ici'
     secret:
         name: SuperEspion
         default_save_name: SuperSpy
@@ -2931,7 +2930,7 @@ adventures:
                         b is 'today at 10.00'
                     print a + b
                     ```
-                start_code: '# écrit ton code ici'
+                start_code: '# écris ton code ici'
             13:
                 story_text: |
                     The code you made in the previous level can be made a lot easier in this one with the `{and}` command.
@@ -2944,7 +2943,7 @@ adventures:
                     else
                         print 'Go to the trainstation at 10.00'
                      ```
-                start_code: '# écrit ton code ici'
+                start_code: '# écris ton code ici'
     sleep_command:
         name: '{sleep}'
         default_save_name: sleep_command
@@ -3034,7 +3033,7 @@ adventures:
                         couplet = couplet - 1
                         {print} couplet ' bouteilles de bière sur le mur'
                     ```
-                start_code: '# écrit ton code ici'
+                start_code: '# écris ton code ici'
             10:
                 story_text: |
                     In this level you can easily make the childrens' song 'Five little monkeys'. Can you make the last chorus?
@@ -3050,7 +3049,7 @@ adventures:
                     ```
                     monkeys = 5, 4, 3, 2, 1
                     ```
-                start_code: '# écrit ton code ici'
+                start_code: '# écris ton code ici'
             11:
                 story_text: |
                     In this level you can use the `{for} i {in} {range}` command to make songs that use counting.
@@ -3065,7 +3064,7 @@ adventures:
                         {else}
                             {print} 'NO MORE MONKEYS JUMPING ON THE BED!'
                     ```
-                start_code: '# écrit ton code ici'
+                start_code: '# écris ton code ici'
             12:
                 story_text: |
                     In this song we can make it even easier to program '{if} you're happy and you know it, clap your hands'. Because we can put all of the actions in a variable, check it out:
@@ -3080,7 +3079,7 @@ adventures:
                         {print} 'if youre happy and you know it'
                         {print} action
                     ```
-                start_code: '# écrit ton code ici'
+                start_code: '# écris ton code ici'
             16:
                 story_text: |
                     In this level, you can program a song like OldMacDonald even more quickly. You can connect the right animal to the right sound by simply putting them in the same place in the list.
@@ -3113,7 +3112,7 @@ adventures:
                             {print} 'way hay and up she rises'
                         {print} 'early in the morning'
                     ```
-                start_code: '# écrit ton code ici'
+                start_code: '# écris ton code ici'
             18:
                 story_text: |
                     In level 16 we made songs using lists. These programs however are no longer working properly in this level. The colons from level 17 and the brackets from level 18 still need to be added.
@@ -3135,7 +3134,7 @@ adventures:
                             {print} 'way hay and up she rises'
                         {print} 'early in the morning'
                     ```
-                start_code: '# écrit ton code ici'
+                start_code: '# écris ton code ici'
     tic:
         name: Tic Tac Toe
         default_save_name: Tic
@@ -3203,7 +3202,7 @@ adventures:
                                 {else}
                                     sign = 'x'
                     ```
-                start_code: '# écrit ton code ici'
+                start_code: '# écris ton code ici'
             14:
                 story_text: |
                     In the previous levels you've made a tic tac toe game. Now you've learned how to use the = sign, the == sign and the != sign.
@@ -3266,7 +3265,7 @@ adventures:
                                 {else}
                                     sign = 'x'
                     ```
-                start_code: '# écrit ton code ici'
+                start_code: '# écris ton code ici'
             15:
                 story_text: |
                     In this level you can improve your Tic Tac Toe game with the {while} loop. With this loop you can combine the `{if} game != 'over'` and the `{for} i {in} {range} 1 to 9` into one simple line.
@@ -3328,7 +3327,7 @@ adventures:
                             {else}
                                 sign = 'x'
                     ```
-                start_code: '# écrit ton code ici'
+                start_code: '# écris ton code ici'
             17:
                 story_text: |
                     In the previous levels the tic tac toe game had an annoying feature. After every move, you had to fill in yourself if you had won or not.
@@ -3415,7 +3414,7 @@ adventures:
                             {else}:
                                 sign = 'x'
                     ```
-                start_code: '# écrit ton code ici'
+                start_code: '# écris ton code ici'
     turtle:
         name: Tortue
         default_save_name: Tortue
@@ -3623,7 +3622,7 @@ adventures:
                         {forward} 50
                         {color} {black}
                     ```
-                start_code: '# écrit ton code ici'
+                start_code: '# écris ton code ici'
             10:
                 story_text: |
                     In this level you can make the turtle draw a figure.
