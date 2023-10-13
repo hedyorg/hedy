@@ -174,8 +174,7 @@ adventures:
                     ```
                 start_code: '# розмістіть свій код тут'
             9:
-                story_text: "У цьому рівні ви можете використовувати команди `{if}` і `{repeat}` всередині інших команд `{if}` і `{repeat}`. \nЦе дає вам багато можливостей і дійсно допомагає зробити вашу історію інтерактивною.\n\n### Вправа 1\n Закінчіть код, щоб `{if}` працював коректно.\n\n### Вправа\
-                    \ 2\nДодайте `{if}` та `{else}` для тієї частини історії, де Робін також повертається додому.\n \n### Вправа 3\nПоверніться до своєї історії 8-го рівня і використайте принаймні два `{if}` всередині іншого `{if}`.\n"
+                story_text: "У цьому рівні ви можете використовувати команди `{if}` і `{repeat}` всередині інших команд `{if}` і `{repeat}`. \nЦе дає вам багато можливостей і дійсно допомагає зробити вашу історію інтерактивною.\n\n### Вправа 1\n Закінчіть код, щоб `{if}` працював коректно.\n\n### Вправа 2\nДодайте `{if}` та `{else}` для тієї частини історії, де Робін також повертається додому.\n \n### Вправа 3\nПоверніться до своєї історії 8-го рівня і використайте принаймні два `{if}` всередині іншого `{if}`.\n"
                 example_code: |
                     ```
                     {print} 'Робін йде центром міста'
@@ -612,12 +611,11 @@ adventures:
                     ```
                 start_code: '# place your code here'
             13:
-                story_text: |4
-
+                story_text: |
                     ### Exercise 1
                     Let's make the practice program a bit harder. The player now has to answers two questions correctly. Fill out the blanks to complete the program.
 
-                    ### Exercise 2 (extra)
+                    ### Exercise 2 Extra
                     Sometimes, calculations have multiple correct answers. For example, 10 can be divided by 5 and by 2. So the question 'What number divides 10?' can be answered by 2 and by 5.
                     Ask for a calculation that has multiple correct answers, ask the player to answer it, and determine if it is correct using `{or}`.
                     Empty the programming field and create your own solution.
@@ -710,8 +708,7 @@ adventures:
         description: Пояснення рівнів
         levels:
             1:
-                story_text: "На першому рівні ви можете використовувати команди `{print}`, `{ask}` та `{echo}`.\nНаберіть свій код у полі для програмування. Або натисніть зелену кнопку в блоці прикладу коду, і код буде набраний за вас!\nСпробуйте код самостійно, натиснувши зелену кнопку \"Запустити код\"\
-                    \ під полем програмування.\n \nВивести текст на екран можна за допомогою команди `{print}`.     \n"
+                story_text: "На першому рівні ви можете використовувати команди `{print}`, `{ask}` та `{echo}`.\nНаберіть свій код у полі для програмування. Або натисніть зелену кнопку в блоці прикладу коду, і код буде набраний за вас!\nСпробуйте код самостійно, натиснувши зелену кнопку \"Запустити код\" під полем програмування.\n \nВивести текст на екран можна за допомогою команди `{print}`.     \n"
                 start_code: '{print} привіт світе!'
             2:
                 story_text: |
@@ -759,13 +756,13 @@ adventures:
                     імʼя {is} {ask} 'як тебе звати?'
                     {if} імʼя {is} Хейді {print} 'круто!' {else} {print} 'пф'
             6:
-                story_text: |4
-                     У цьому рівні ви дізнаєтесь дещо нове: тепер ви вмієте ще й рахувати.
+                story_text: |
+                    У цьому рівні ви дізнаєтесь дещо нове: тепер ви вмієте ще й рахувати.
 
-                     Плюс - це просто, ви пишете, як у математиці: `5 + 5`, наприклад. Мінус також працює добре, це `5 - 5`.
+                    Плюс - це просто, ви пишете, як у математиці: `5 + 5`, наприклад. Мінус також працює добре, це `5 - 5`.
 
-                     З часом трохи інакше, адже на клавіатурі немає символу часу. Просто пошукайте, його дійсно немає!
-                     Ось чому ми множимо зірочкою над 8: `5 * 5`. Прочитайте це як "5 на 5", що допоможе вам запам'ятати це найкраще.
+                    З часом трохи інакше, адже на клавіатурі немає символу часу. Просто пошукайте, його дійсно немає!
+                    Ось чому ми множимо зірочкою над 8: `5 * 5`. Прочитайте це як "5 на 5", що допоможе вам запам'ятати це найкраще.
                 example_code: |
                     ```
                     {print} '5 plus 5 is ' 5 + 5
@@ -865,8 +862,7 @@ adventures:
                     {print} 'decimal numbers now need to use a dot'
                     {print} 2.5 + 2.5
             13:
-                story_text: "Зараз ми будемо вивчати `{and}` та `{or}`! Якщо ви хочете перевірити два оператори, вам не обов'язково використовувати два `{if}`, ви можете використовувати `{and}` і `{or}`. \n\nЯкщо ви використовуєте `{and}`, обидва оператори, зліва і справа від `{and}`, повинні бути істинними.\
-                    \ Ми також можемо використовувати `{or}`. Тоді лише одне твердження має бути правильним."
+                story_text: "Зараз ми будемо вивчати `{and}` та `{or}`! Якщо ви хочете перевірити два оператори, вам не обов'язково використовувати два `{if}`, ви можете використовувати `{and}` і `{or}`. \n\nЯкщо ви використовуєте `{and}`, обидва оператори, зліва і справа від `{and}`, повинні бути істинними. Ми також можемо використовувати `{or}`. Тоді лише одне твердження має бути правильним."
                 example_code: |
                     ```
                     name = {ask} 'what is your name?'
@@ -1011,8 +1007,7 @@ adventures:
                     {print} 'those are' points ' point'
                     ```
                     Can you make the code so that you get the total score for 8 dice? To do that, you have to cut and paste some lines of the code.
-                example_code_2: |4
-
+                example_code_2: |
                     Did you manage to calculate the score for 8 dice? That required a lot of cutting and pasting, right? We are going to make that easier in level 7!
                 start_code: '{print} ''What will the die indicate this time?'''
             7:
@@ -1260,9 +1255,7 @@ adventures:
                 story_text: |
                     In the previous levels you've created your first fortune telling machine, but Hedy couldn't really predict anything, only {echo}.
                     In this level you can use a variable and the `{at} {random}` command to really let Hedy choose an answer for you. Check out this code for instance:
-                example_code: |4
-
-                    In this example the player can {ask} Hedy a yes-no question and Hedy will pick a random answer for you.
+                example_code: |
                     ```
                     {print} I’m Hedy the fortune teller!
                     question {is} {ask} What do you want to know?
@@ -2430,8 +2423,8 @@ adventures:
         description: Create your own virtual restaurant
         levels:
             1:
-                story_text: |4
-                     In level 1 you can make your own virtual restaurant and take your guests' orders.
+                story_text: |
+                    In level 1 you can make your own virtual restaurant and take your guests' orders.
                 example_code: |
                     ```
                     {print} Welcome to Hedy's restaurant 🍟
@@ -2540,11 +2533,10 @@ adventures:
             6:
                 story_text: |
                     In this level you can use maths to calculate the total price of your customer's order, which can make your virtual restaurant more realistic.
-                example_code: |4
-
+                example_code: |
                     You can make a simple restaurant code, like this:
                     ```
-                    {print} 'Welcome to Hedys restaurant'
+                    {print} 'Welcome to Restaurant Chez Hedy'
                     {print} 'Here is our menu:'
                     {print} 'Our main courses are pizza, lasagne, or spaghetti'
                     main = {ask} 'Which main course would you like?'
@@ -2745,11 +2737,11 @@ adventures:
                     ```
                 start_code: '# place your code here'
             3:
-                story_text: |4
+                story_text: |
+                    You can use the `{at} {random}` command to let the computer pick rock, paper or scissors!
 
-                    In this level we can enter lists and choose things from them.
-                    You first make a list with `{is}`. Then you can let the computer choose something from the list with `{at} {random}`.
-                    For example, you can let the computer pick from rock, paper and scissors.
+                    ### Exercise
+                    Finish the code by using the `{at} {random}` command.
                 example_code: |
                     ```
                     choices {is} rock, paper, scissors

@@ -6,8 +6,7 @@ adventures:
         levels:
             1:
                 story_text: "På nivå 1 kan du lage en fortelling med en hovedperson som du velger selv.\n\nSom første linje, bruk denne koden:\n\n```\n{ask} hvem er stjernen i fortellingen din?\n```\n\nEtter den første linjen, start med `{print}` hvis du vil at setningen skal skrives ut. \nDu bruker `{echo}` hvis du vil ha hovedpersonen din skal være på slutten av setningen.\n"
-                example_code: |2
-
+                example_code: |
                     ```
                     {ask} Hovedpersonen i fortellingen er
                     {print} Hovedpersonen skal nå på tur i skogen
@@ -26,8 +25,7 @@ adventures:
                     Du må programmere litt ekstra for det. Du må nå navngi hovedpersonen din først.
 
                     Da kan du bruke navnet hvor som helst i en setning.
-                example_code: |2
-
+                example_code: |-
                     ```
                     navn {is} {ask} Hva heter hovedpersonen?
                     {print} navn skal nå løpe i skogen
@@ -181,8 +179,7 @@ adventures:
             12:
                 story_text: |
                     På dette nivået kan du bruke hermetegn for å lagre flere ord i en variabel.
-                example_code: |2
-
+                example_code: |
                     ```
                     navn = 'Dronningen av England'
                     {print} navn ' spiste kake, da plutselig ...'
@@ -592,12 +589,11 @@ adventures:
                     ```
                 start_code: '# skriv koden din her'
             13:
-                story_text: |2
-
+                story_text: |
                     ### Exercise 1
                     Let's make the practice program a bit harder. The player now has to answers two questions correctly. Fill out the blanks to complete the program.
 
-                    ### Exercise 2 (extra)
+                    ### Exercise 2 Extra
                     Sometimes, calculations have multiple correct answers. For example, 10 can be divided by 5 and by 2. So the question 'What number divides 10?' can be answered by 2 and by 5.
                     Ask for a calculation that has multiple correct answers, ask the player to answer it, and determine if it is correct using `{or}`.
                     Empty the programming field and create your own solution.
@@ -990,8 +986,7 @@ adventures:
                     {print} 'det er' poeng ' poeng'
                     ```
                     Kan du gjøre det slik at koden gir deg den totale poengsummen for 8 terningkast? For å gjøre det må du kopiere og lime inn et par linjer kode.
-                example_code_2: |2
-
+                example_code_2: |
                     Klarte du å beregne poeng for 8 terninger? Det krevde mye kopiering og liming, sant? Vi skal gjøre det lettere på nivå 7!
                 start_code: '{print} ''Hva vil terningen vise denne gangen?'''
             7:
@@ -1417,8 +1412,7 @@ adventures:
                     If you pick the right door you'll survive, but {if} not a terrible monster might...
 
                     In level 1 we start our haunted house game by making up a scary story and {ask} the player what monster they'll see in the haunted house.
-                example_code: |2
-
+                example_code: |
                     ```
                     {print} How did I get here?
                     {print} I remember my friend telling me to go into the old mansion...
@@ -2693,8 +2687,7 @@ adventures:
                     På nivå 1 kan du starte med spillet stein, saks, papir.
 
                     Med `{ask}` kan du ta et valg og med `{echo}` kan du gjenta det valget.
-                example_code: |2
-
+                example_code: |
                     ```
                     {print} hva velger du?
                     {ask} velg mellom stein, saks, papir
@@ -2722,16 +2715,14 @@ adventures:
                     ```
                 start_code: '# skriv koden din her'
             3:
-                story_text: |2
-
+                story_text: |
                     På dette nivået kan vi lage lister og velge ting fra de.
                     Du kan først lage en liste med `{is}`. Så kan du la datamaskinen velge noe annet fra listen med `{at} {random}`.
                     For eksempel så kan du la datamaskinen velge mellom stein, saks og papir.
-                example_code: |2
-
+                example_code: |
                     ```
                     valgene {is} stein, saks, papir
-                    {print} valgene {at} {random}
+                    {print} valgene _
                     ```
                 story_text_2: |
                     ### Exercise
@@ -3425,8 +3416,7 @@ adventures:
 
                     Bruk 90 til å snu en kvart omdreining. Vi kalle dette grader. En full rotasjon er 360 grader.
                     Kan du lage en liten figur med denne koden? Kanskje et triangel eller en sirkel?
-                example_code: |2
-
+                example_code: |
                     ```
                     {print} Tegner figurer
                     vinkel {is} 90
@@ -3459,8 +3449,7 @@ adventures:
                 story_text: |
                     På dette nivået kan du bruke `{at} {random}` med den tegnende skilpadden. Et tilfeldig valg gjør at skilpadden går en ny rute hver gang.
                     Bruk `{at} {random}` for å velge en verdi fra listen. Du kan kopiere og lime inn line 2 og 3 for å lage en lenger tilfeldig sti.
-                example_code: |2
-
+                example_code: |
                     ```
                     vinkler {is} 10, 50, 90, 150, 250
                     {turn} vinkler {at} {random}

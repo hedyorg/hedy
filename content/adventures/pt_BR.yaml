@@ -505,28 +505,22 @@ adventures:
             6:
                 story_text: |
                     Now that you can calculate, you can also create a program to practice maths calculations. You can make up the calculations yourself, for example:
-                example_code: |4
-
+                example_code: |
                     ```
-                    correct_answer = 11 * 27
-                    answer = {ask} 'How much is 11 times 27?'
-                    {if} answer {is} correct_answer {print} 'good job!'
-                    {else} {print} 'Wrong! It was ' correct_answer
+                    number_1 = {ask} 'Fill in the first number:'
+                    number_2 = {ask} 'Fill in the second number:'
+                    correct_answer = number_1 * number_2
+                    {print} number_1 ' times ' number_2 ' is ' correct_answer
                     ```
                 story_text_2: |
                     You can also let the computer do random sums on its own using random.
                     This is how you choose a number of tables to practice, and from that you always get a different sum:
-                example_code_2: |4
-
+                example_code_2: |
                     ```
-                    tables = 4, 5, 6, 8
-                    numbers = 1, 2, 3, 4, 5, 6, 7, 8, 9, 10
-                    table = tables {at} {random}
-                    number = numbers {at} {random}
-                    correct_answer = table * number
-                    answer = {ask} 'how much is ' table ' times ' number '?'
-                    {if} answer {is} correct_answer {print} 'okay'
-                    {else} {print} 'mistake! it was ' correct_answer
+                    correct_answer = 11 * 27
+                    answer = {ask} 'How much is 11 times 27?'
+                    {if} answer {is} _ {print} 'good job!'
+                    {else} {print} 'Wrong! It was ' _
                     ```
                 story_text_3: |
                     You can also let the computer do random sums on its own using random.
@@ -535,8 +529,7 @@ adventures:
             9:
                 story_text: |
                     In previous levels you've learned how to make a calculator, in this level you can expand that code and make it into a little maths game. Like this...
-                example_code: |4
-
+                example_code: |
                     ```
                     score = 0
                     {repeat} 10 {times}
@@ -547,7 +540,7 @@ adventures:
                         {print} 'What is ' number1 ' times ' number2 '?'
                         answer = {ask} 'Type your answer here...'
                         {print} 'Your answer is' answer
-                        {if} answer {is} correct_answer
+                        {if} _ {is} _
                             score = score + 1
                     {print} 'Great job! Your score is... ' score ' out of 10!'
                     ```
@@ -556,8 +549,7 @@ adventures:
                 story_text: |
                     This calculator game helps you practise your tables of multiplication!
                     If you add more numbers to the list, you can practise all the multiplications.
-                example_code: |4
-
+                example_code: |
                     ```
                     numbers = 1, 2, 3
                     {for} number1 {in} numbers
@@ -567,7 +559,7 @@ adventures:
                             {if} answer {is} correct
                                 {print} 'Great job!'
                             {else}
-                                {print} 'Thats wrong. The right answer is ' correct
+                                {print} 'That is wrong. The right answer is ' correct
                     ```
                 start_code: '# coloque o seu código aqui'
             11:
@@ -589,21 +581,20 @@ adventures:
             12:
                 story_text: |
                     Now you can make a calculator that works for decimal numbers.
-                example_code: |4
-
+                example_code: |
                     ```
                     number1 = {ask} 'What is the first number?'
                     number2 = {ask} 'What is the second number?'
-                    answer = number1 + number2
-                    {print} number1 ' plus ' number2 ' is ' answer
+                    answer = _
+                    {print} number1 ' plus ' number2 ' is ' _
+                    ```
                 start_code: '# coloque o seu código aqui'
             13:
-                story_text: |4
-
+                story_text: |
                     ### Exercise 1
                     Let's make the practice program a bit harder. The player now has to answers two questions correctly. Fill out the blanks to complete the program.
 
-                    ### Exercise 2 (extra)
+                    ### Exercise 2 Extra
                     Sometimes, calculations have multiple correct answers. For example, 10 can be divided by 5 and by 2. So the question 'What number divides 10?' can be answered by 2 and by 5.
                     Ask for a calculation that has multiple correct answers, ask the player to answer it, and determine if it is correct using `{or}`.
                     Empty the programming field and create your own solution.
@@ -618,8 +609,7 @@ adventures:
             14:
                 story_text: |
                     In this level you can programm the game 'Guess which number'
-                example_code: |4
-
+                example_code: |
                     ```
                     {print} 'Guess which number'
                     numbers = 1, 2, 3, 4, 5, 6, 7, 8, 9, 10
@@ -635,13 +625,13 @@ adventures:
                             {if} guess == number
                                 {print} 'You win!'
                                 game = 'over'
+                    ```
                 start_code: '# coloque o seu código aqui'
             15:
                 story_text: |
                     You can add the `{while}` loop to the calculator game you've learned to make in a previous level.
                     This makes sure the player can't continue to the next question {if} they answer incorrectly.
-                example_code: |4
-
+                example_code: |
                     ```
                     score = 0
                     {for} i {in} {range} 0 {to} 9
@@ -866,8 +856,7 @@ adventures:
                     {print} 'números decimais agora precisam de um ponto'
                     {print} 2.5 + 2.5
             13:
-                story_text: Agora vamos aprender `{and}` e `{or}`! Se você quiser verificar duas declarações, você não precisa usar dois `{if}`s, mas pode usar `{and}` e `{or}`. Se você usar `{and}`, ambas as declarações, à esquerda e à direita de `{and}` precisam ser verdadeiras. Também podemos usar
-                    `{or}`. Então, apenas uma afirmação precisa estar correta.
+                story_text: Agora vamos aprender `{and}` e `{or}`! Se você quiser verificar duas declarações, você não precisa usar dois `{if}`s, mas pode usar `{and}` e `{or}`. Se você usar `{and}`, ambas as declarações, à esquerda e à direita de `{and}` precisam ser verdadeiras. Também podemos usar `{or}`. Então, apenas uma afirmação precisa estar correta.
                 example_code: |
                     ```
                     nome = {ask} 'qual o seu nome?'
@@ -962,11 +951,10 @@ adventures:
                     For example, the dice of the game Earthworms with the numbers 1 to 5 and an earthworm on it.
 
                     ![Die of earthworms with 1 to 5 and an earthworm on it](https://cdn.jsdelivr.net/gh/felienne/hedy@24f19e9ac16c981517e7243120bc714912407eb5/coursedata/img/dobbelsteen.jpeg)
-                example_code: |4
-
+                example_code: |
                     ```
                     choices {is} 1, 2, 3, 4, 5, earthworm
-                    {print} choices {at} {random}
+                    {print} You threw _ {at} {random} !
                     ```
                 story_text_2: |
                     ### Exercise
@@ -988,13 +976,13 @@ adventures:
                     Complete the sample code so that the code says "You can stop throwing" once you have thrown an earthworm.
 
                     But maybe you want to recreate a die from a completely different game. That's fine too! Then make up your own reaction. Eg 'yes' for 6 and 'pity' for something {else}.
-                example_code: |4
-
+                example_code: |
                     ```
                     choices {is} 1, 2, 3, 4, 5, earthworm
-                    throw {is} _
-                    {print} 'you have' _ 'thrown'
-                    {if} _ {is} earthworm {print} 'You can stop throwing.' _ {print} 'You have to hear it again!'
+                    throw {is} choices {at} {random}
+                    {print} 'you have thrown ' throw
+                    _ throw {is} earthworm {print} 'You can stop throwing.'
+                    _ {print} 'You have to throw it again!'
                     ```
                 start_code: '{print} ''What will the die indicate this time?'''
             6:
@@ -1002,19 +990,16 @@ adventures:
                     You can also make an Earthworm die again in this, but now you can also calculate how many points have been rolled.
                     You may know that the worm counts 5 points for Earthworms. Now after a roll you can immediately calculate how many points you have thrown.
                     This is the code to calculate points for one die:
-                example_code: |4
-
+                example_code: |
                     ```
                     choices = 1, 2, 3, 4, 5, earthworm
                     points = 0
                     throw = choices {at} {random}
-                    {print} 'you threw' throw
+                    {print} 'you threw ' throw
                     {if} throw {is} earthworm points = points + 5 {else} points = points + throw
-                    {print} 'those are' points ' point'
+                    {print} 'those are ' points ' points'
                     ```
-                    Can you make the code so that you get the total score for 8 dice? To do that, you have to cut and paste some lines of the code.
-                example_code_2: |4
-
+                example_code_2: |
                     Did you manage to calculate the score for 8 dice? That required a lot of cutting and pasting, right? We are going to make that easier in level 7!
                 start_code: '{print} ''What will the die indicate this time?'''
             7:
@@ -1023,22 +1008,20 @@ adventures:
                     Try to finish the sample code! The dashes should contain multiple commands and characters.
 
                     But maybe you want to make a completely different die. Of course you can!
-                example_code: |4
-
+                example_code: |
                     ```
-                    choices = 1, 2, 3, 4, 5, earthworm
-                    {repeat} _ _ {print} _ _ _
+                    choices = 1, 2, 3, 4, 5, 6
+                    _ _ _ _ _ _ _
                     ```
                 start_code: '{print} ''What will the die indicate this time?'''
             10:
                 story_text: |
                     Is everybody taking too long throwing the dice? In this level you can let Hedy throw all the dice at once!
-                example_code: |4
-
+                example_code: |
                     ```
                     players = Ann, John, Jesse
                     choices = 1, 2, 3, 4, 5, 6
-                    {for} player {in} players
+                    _ _ _ _
                         {print} player ' throws ' choices {at} {random}
                         {sleep}
                     ```
@@ -1046,8 +1029,7 @@ adventures:
             15:
                 story_text: |
                     In this game you have to throw 6 in as little tries as possible.
-                example_code: |4
-
+                example_code: |
                     ```
                     options = 1, 2, 3, 4, 5, 6
                     {print} 'Throw 6 as fast as you can!'
@@ -1110,8 +1092,7 @@ adventures:
             6:
                 story_text: |
                     Quantas vezes todo mundo vai lavar a louça? Isso é justo? Você pode contá-lo neste nível.
-                example_code: |4
-
+                example_code: |
                     ```
                     people = mom, dad, Emma, Sophie
                     emma_washes = 0
@@ -1144,11 +1125,10 @@ adventures:
             7:
                 story_text: |
                     With the `{repeat}` you can repeat pieces of code. You can use this to calculate who will be washing dishes for the entire week.
-                example_code: |4
-
+                example_code: |
                     ```
                     people = mom, dad, Emma, Sophie
-                    {repeat} _ _ {print} 'the dishwasher is' _
+                    {repeat} _ _ {print} 'Dishwashing will be done by ' _ _ _
                     ```
                 start_code: '{print} ''Who does the dishes?'''
             10:
@@ -1271,9 +1251,7 @@ adventures:
                 story_text: |
                     In the previous levels you've created your first fortune telling machine, but Hedy couldn't really predict anything, only {echo}.
                     In this level you can use a variable and the `{at} {random}` command to really let Hedy choose an answer for you. Check out this code for instance:
-                example_code: |4
-
-                    In this example the player can {ask} Hedy a yes-no question and Hedy will pick a random answer for you.
+                example_code: |
                     ```
                     {print} I’m Hedy the fortune teller!
                     question {is} {ask} What do you want to know?
@@ -1283,9 +1261,6 @@ adventures:
                     {sleep} 2
                     {print} answers {at} {random}
                     ```
-
-                    ### Exercises
-                    Now, Hedy can only answer yes, no or maybe. Can you give Hedy more answer options, like 'definitely' or '{ask} again'.
                 story_text_2: |
                     ### Exercises
                     Now, Hedy can only answer yes, no or maybe. Can you give Hedy more answer options, like 'definitely' or '{ask} again'.
@@ -1300,14 +1275,14 @@ adventures:
 
                     Important! Mind that now that we're using quotation marks, Hedy will get confused when you use the apostrophe for contractions like I'm or What's.
                     Make sure to remove those apostrophes and change the spelling to Im or Whats.
-                example_code: |4
-
+                example_code: |
                     ```
-                    {print} 'Im Hedy the fortune teller!'
-                    question {is} {ask} 'What do you want to know?'
-                    {print} 'This is your question: ' question
+                    _ Add the quotation marks to this code _
+                    {print} Im Hedy the fortune teller!
+                    question {is} {ask} What do you want to know?
+                    {print} This is your question:  question
                     answers {is} yes, no, maybe
-                    {print} 'My crystal ball says...'
+                    {print} My crystal ball says...
                     {sleep} 2
                     {print} answers {at} {random}
                     ```
@@ -1317,21 +1292,22 @@ adventures:
                     In this level you'll learn to (secretly) tip the odds in your favor, when using the fortune teller!
                     By using `{if}` and `{else}` you can make sure that you will always get a good fotune, while other people might not.
                     Check out this example to find out how.
-                example_code: |4
-
+                example_code: |
                     ```
-                    {print} 'Im Hedy the fortune teller!'
-                    {print} 'I can predict {if} youll win the lottery tomorrow!'
+                    friends {is} Jordan, Lucy, Dave
+                    {print} 'I can predict if you will win the lottery tomorrow!'
                     person {is} {ask} 'Who are you?'
-                    {if} person {is} Hedy {print} 'You will definitely win!🤩' {else} {print} 'Bad luck! Someone {else} will win!😭'
+                    good_answer {is} Hurray! You win!, You will definitely win!, We have a winner!
+                    bad_answer {is} Bad luck! Try again!, Another person will win, You lose!
+                    {if} person {in} friends {print} good_answer {at} {random}
+                    {else} {print} bad_answer {at} {random}
                     ```
                 start_code: '# coloque o seu código aqui'
             6:
                 story_text: |
                     In this level you can use math in your predictions as a fortune teller. This allows you to make up (silly) formulas to calculate the future.
                     For example you could calculate how rich you'll get or how many kids you will have when you grow up.
-                example_code: |4
-
+                example_code: |
                     ```
                     {print} 'I am Hedy the fortune teller!'
                     {print} 'I can predict how many kids youll get when you grow up!'
@@ -1344,56 +1320,30 @@ adventures:
                     {sleep}
                     {print} kids ' kids!'
                     ```
-
-                    If the previous example wasn't silly enough for you, take a look at this one!
-
-                    ```
-                    {print} 'Im Hedy the silly fortune teller!'
-                    {print} 'I will predict how smart you are!'
-                    football = {ask} 'On a scale 1-10 how much do you love football?'
-                    bananas = {ask} 'How many bananas did you eat this week?'
-                    hygiene = {ask} 'How many times did you wash your hands today?'
-                    result = bananas + hygiene
-                    result = result * football
-                    {print} 'You are ' result ' percent smart.'
-                    ```
                 start_code: '# coloque o seu código aqui'
             7:
                 story_text: |
                     In this level you can use the `{repeat}` command to make your machine tell multiple fortunes at once.
-                example_code: |4
-
+                example_code: |
                     ```
-                    {print} 'Im Hedy the fortune teller!'
-                    {print} 'You can {ask} 3 questions!'
-                    {repeat} 3 {times} question = {ask} 'What do you want to know?'
-                    answer = yes, no, maybe
-                    {repeat} 3 {times} {print} 'My crystal ball says... ' answer {at} {random}
+                    {print} 'I have a flower with magic petals'
+                    {print} 'If you pick the petals the flower will tell you if your crush loves you back'
+                    amount = {ask} 'How many petals do you want to pick?'
+                    options = they love you, they love you not
+                    _ _ _ _ options {at} {random}
                     ```
-
-                    ### Exercise
-                    As you can see, the questions aren't printed in this example. That's because the variable `question` was changed 3 times.
-                    Every time the player fills in the new answer, Hedy overwrites the previous one, so the first answer the player gave is forgotten.
-                    This means you can't print all the questions this way.
-
-                    By using 3 different variables instead of 1 (for example `question1` , `question2` and `question3`), you could solve the problem and print the questions.
-                    This does mean that you can only use `{repeat}` for the answers, and you will have to ask and print all the questions separately.
-                    Can you do it?
-
-                    In the upcoming levels the layout of {repeat} command will change, which enables you to repeat multiple lines at once.
                 start_code: '# coloque o seu código aqui'
             8:
                 story_text: |
                     In the previous levels you've learned how to use repeat to make the fortune teller answer 3 questions in a row, but we had a problem with printing the questions.
                     Now that problem is solved, because of the new way of using the repeat command.
                     In the next example you can have your fortune teller {ask} 3 questions and also print them!
-                example_code: |4
-
+                example_code: |
                     ```
                     {print} 'I am Hedy the fortune teller!'
-                    {print} 'You can {ask} me 3 questions.'
+                    {print} 'You can ask me 3 questions.'
                     answers = yes, no, maybe
-                    {repeat} 3 {times}
+                    _ _ _
                        question = {ask} 'What do you want to know?'
                        {print} question
                        {sleep}
@@ -1403,14 +1353,13 @@ adventures:
             10:
                 story_text: |
                     In this level you'll learn how to program the game MASH (mansion, apartement, shack, house). In this game you can predict for all the players at once, what their future will look like.
-                example_code: |4
-
+                example_code: |
                     ```
                     houses = mansion, apartment, shack, house
                     loves = nobody, a royal, their neighbour, their true love
                     pets = dog, cat, elephant
                     names = Jenna, Ryan, Jim
-                    {for} name {in} names
+                    _
                         {print} name ' lives in a ' houses {at} {random}
                         {print} name ' will marry ' loves {at} {random}
                         {print} name ' will get a ' pets {at} {random} ' as their pet.'
@@ -1420,11 +1369,10 @@ adventures:
             12:
                 story_text: |
                     In this level you can make your fortunes multiple words. Like in this example below:
-                example_code: |4
-
+                example_code: |
                     ```
-                    fortunes = 'you will be rich', 'you will fall in love', 'you will slip on a banana peel'
-                    {print} 'I will take a look in my crystall ball for your future.'
+                    fortunes = 'you will slip on a banana peel', _
+                    {print} 'I will take a look in my crystal ball for your future.'
                     {print} 'I see... I see...'
                     {sleep}
                     {print} fortunes {at} {random}
@@ -1560,8 +1508,7 @@ adventures:
                     Up until this level the haunted house game always asked the player to choose a door, but as you might have noticed, they didn't really have to answer correctly.
                     If the player filled in a completely random answer, the game would still work and the player might even win (despite not picking a door).
                     In this level you can only win the game by picking the same door Hedy picked randomly.
-                example_code: |4
-
+                example_code: |
                     ```
                     {print} 'Escape from the haunted house!'
                     {print} 'There are 3 doors in front of you...'
@@ -1571,15 +1518,14 @@ adventures:
                     {print} 'You chose door...' chosen_door
                     {sleep}
                     correct_door {is} doors {at} {random}
-                    {if} chosen_door {is} correct_door {print} 'Great! Youve escaped!'
+                    _ _ _ _ {print} 'Great! Youve escaped!'
                     {else} {print} 'Oh no! You are being eaten by a...' monsters {at} {random}
                     ```
                 start_code: '# coloque o seu código aqui'
             9:
                 story_text: |
                     In this level you can use nesting, which allows you to make the haunted house even more interactive!
-                example_code: |4
-
+                example_code: |
                     ```
                     {print} 'Escape from the Haunted House!'
                     player = alive
@@ -1600,42 +1546,23 @@ adventures:
                     {if} player {is} alive
                         {print} 'Great! You survived!'
                     ```
-                    ### Exercise
-                    Now it's very hard to win this game, can you make it easier to win?
-                    For example by only having 1 wrong door and 2 correct doors instead of 1 correct door en 2 wrong ones?
                 start_code: '{print} ''Escape from the haunted house!'''
             11:
                 story_text: |
                     In this level we've changed the repeat command and we've added a line to our haunted house that tells the player in which room they are.
-                example_code: |4
-
+                example_code: |
                     ```
                     {print} 'Escape from the Haunted House!'
-                    player {is} alive
-                    doors = 1, 2, 3
                     monsters = zombie, vampire, giant spider
-                    {for} i {in} {range} 1 {to} 3
-                        {if} player {is} alive
-                            correct_door = doors {at} {random}
-                            {print} 'Room ' i
-                            {print} 'There are 3 doors in front of you...'
-                            chosendoor = {ask} 'Which door do you choose?'
-                            {if} chosendoor {is} correct_door
-                                {print} 'No monsters here!'
-                            {else}
-                                {print} 'You are eaten by a ' monsters {at} {random}
-                                player = dead
-                        {else}
-                            {print} 'GAME OVER'
-                    {if} player {is} alive
-                        {print} 'Great! You survived!'
+                    _
+                        {print} 'Room ' i
+                        monster = monsters {at} {random}
                     ```
                 start_code: '{print} ''Escape from the haunted house!'''
             14:
                 story_text: |
                     In this level you can use the `<` and `>` symbol to introduce lives to your game.
-                example_code: |4
-
+                example_code: |
                     ```
                     {print} 'Escape from the haunted house'
                     lives = 3
@@ -1664,21 +1591,20 @@ adventures:
                     This haunted house game uses the connection between the lists you can use in this level.
                     For example: all the properties that belong to the zombie are first in all the lists, witch second and vampire third.
                     Check out the code!
-                example_code: |4
-
+                example_code: |
                     ```
                     numbers = [1, 2, 3]
-                    i = numbers[random]
+                    i = numbers[{random}]
                     hint = ['growling', 'a cackling laugh', 'fluttering batwings']
                     monsters = ['zombie', 'witch', 'vampire']
                     bad_fate = ['Your brain is eaten', 'You are forever cursed', 'You are bitten']
                     good_fate = ['You throw the ham. The zombie is distracted and starts eating it.', 'You set the curtains on fire. The witch flees out of fear for the fire', 'The vampire hates garlic and flees']
                     weapons = ['ham', 'lighter', 'garlic']
-                    {print} 'You are standing in front of an old mension'
+                    {print} 'You are standing in front of an old mansion'
                     {print} 'Something is not right here'
                     {print} 'You hear ' hint[i]
                     {print} 'You are going to explore it'
-                    {print} 'You enter the kitchen en see a lighter, a raw ham and a garlic.'
+                    {print} 'You enter the kitchen and see a lighter, a raw ham and a garlic.'
                     your_weapon = {ask} 'What do you bring with you?'
                     {print} 'With your ' your_weapon ' you enter the living room'
                     {print} 'There you find a ' monsters[i]
@@ -2056,8 +1982,7 @@ adventures:
             12:
                 story_text: |
                     In this adventure you learn how to make a digital piggy bank, to calculate how much money you have and how long you need to save up to buy what you want!
-                example_code: |4
-
+                example_code: |
                     ```
                     {print} 'The digital piggy bank'
                     wish = {ask} 'What would you like to buy?'
@@ -2066,13 +1991,13 @@ adventures:
                     allowance = {ask} 'How much pocket money do you get per week?'
                     to_save = price - saved
                     weeks = to_save / allowance
-                    {print} 'You can buy a ' wish ' in ' weeks ' weeks.'
+                    {print} 'You can buy a ' _ ' in ' _ ' weeks.'
+                    ```
                 start_code: '# coloque o seu código aqui'
             14:
                 story_text: |
                     In this level you can let Hedy tell you {if} you have saved up enough money!
-                example_code: |4
-
+                example_code: |
                     ```
                     money = {ask} 'How much money have you saved?'
                     wish = {ask} 'How much money do you need?'
@@ -2081,7 +2006,7 @@ adventures:
                     weeks = to_save / allowance
                     {if} wish > money
                         {print} 'You need to save up some more!'
-                        {print} 'Youll need ' weeks ' more weeks.'
+                        {print} "You'll need ' weeks ' more weeks."
                     {else}
                         {print} 'Great! You have enough'
                         {print} 'Lets go shopping!'
@@ -2211,8 +2136,7 @@ adventures:
                 story_text: |
                     In this adventure you can make your own quiz! Fill in the blanks, add more questions and enjoy your own quiz!
                     You can make a quiz about anything you like: your hobby, your favorite animal, your favorite book or anything at all!
-                example_code: |4
-
+                example_code: |
                     ```
                     {print} 'Make your own quiz'
                     points_a = 0
@@ -2471,8 +2395,8 @@ adventures:
         description: Create your own virtual restaurant
         levels:
             1:
-                story_text: |4
-                      No nível 1 você pode fazer seu próprio restaurante virtual e receber os pedidos de seus convidados.
+                story_text: |
+                    No nível 1 você pode fazer seu próprio restaurante virtual e receber os pedidos de seus convidados.
                 example_code: |
                     ```
                     {print} Bem-vindo ao restaurante da Hedy 🍟
@@ -2509,22 +2433,12 @@ adventures:
                     Having trouble to decide what you wanna have for dinner? You can let Hedy choose for you!
                     Simply add lists of your favorite (or least favorite) meals and Hedy can randomly choose your dinner.
                     You can also have a bit of fun, by letting Hedy choose the price for your dinner as well! What will you get?
-                example_code: |4
-
+                example_code: |
                     ```
-                    {print} Welcome to Hedy's Random Restaurant!
-                    {print} The only restaurant that will randomly choose your meal and its price for you!
-                    starters {is} salad, soup, carpaccio
-                    mains {is} pizza, brussels sprouts, spaghetti
-                    desserts {is} brownies, ice cream, french cheeses
-                    drinks {is} cola, beer, water
-                    prices {is} 1 dollar, 10 dollars, 100 dollars
-                    {print} You will start with: starters {at} {random}
-                    {print} Then we'll serve: mains {at} {random}
-                    {print} And as dessert: desserts {at} {random}
-                    {print} You will get a drinks {at} {random} to drink
-                    {print} That will be: prices {at} {random}
-                    {print} Thank you and enjoy your meal!
+                    dishes {is} spaghetti, brussels sprouts, hamburgers
+                    {print} You will have dishes {at} {random} tonight!
+                    prices {is} 1 euro, 10 euros, 100 euros
+                    {print} That will be prices {at} {random} please.
                     ```
                 story_text_2: |
                     Does your costumer have any allergies or do they dislike certain dishes? Then you can use the `{remove}`command to remove it from your menu.
@@ -2561,26 +2475,13 @@ adventures:
                 story_text: |
                     In this level the {if} command allows you to {ask} your customers questions and give different responses to the answers.
                     In the example below, you see that you can {ask} the customer {if} they want to hear the specials and Hedy can respond accordingly.
-                example_code: |4
-
+                example_code: |
                     ```
-                    {print} 'Welcome to Hedys restaurant!'
-                    special {is} {ask} 'Would you like to hear our specials today?'
-                    {if} special {is} yes {print} 'Todays special is chicken piri piri and rice.' {else} {print} 'No problem.'
-                    food {is} {ask} 'What would you like to eat?'
-                    {print} 'One ' food ', coming right up!'
-                    drink {is} {ask} 'What would you like to drink with that?'
-                    {if} drink {is} cola {print} 'Im sorry, we are out of cola!' {else} {print} 'Great choice!'
-                    anything {is} {ask} 'Would you like anything {else}?'
-                    {print} 'Let me repeat your order...'
-                    {print} 'One ' food
-                    {if} drink {is} cola {print} 'and...' {else} {print} 'One ' drink
-                    {if} anything {is} no {print} 'Thats it!' {else} {print} 'One ' anything
-                    {print} 'Thank you for your order and enjoy your meal!'
+                    drinks_in_stock {is} water, lemonade, cola, orange juice
+                    drink {is} {ask} 'What would you like to drink?'
+                    {if} drink {in} drinks_in_stock {print} 'One ' drink 'coming up!'
+                    {else} {print} 'Sorry, we do not sell that'
                     ```
-
-                    ### Exercise
-                    Can you think of more questions to {ask} the customers when they are ordering, and make up different responses to their answers by using the {if} command?
                 start_code: '# coloque o seu código aqui'
             6:
                 story_text: |
@@ -2646,26 +2547,25 @@ adventures:
                     In this level you can use nesting to make your restaurant more realistic and more fun!
                     For example you would {ask} for sauce {if} somebody orders fries, but you wouldn't {if} someone orders pizza!
                     Check out the example, and try this at your own virtual restaurant!
-                example_code: |4
-
+                example_code: |
                     ```
-                    {print} 'Welcome to Hedys restaurant!'
+                    {print} 'Welcome to Restaurant Chez Hedy!'
                     people = {ask} 'How many people will be joining us today?'
                     {print} 'Great!'
                     price = 0
                     {repeat} people {times}
-                        food = {ask} 'What would you like to order?'
-                        {print} food
-                        {if} food {is} fries
-                            price = price + 3
-                            sauce = {ask} 'What kind of sauce would you like with your fries?'
-                            {if} sauce {is} no
-                                {print} 'no sauce'
-                            {else}
-                                price = price + 1
-                                {print} 'with ' sauce
-                        {if} food {is} pizza
-                            price = price + 4
+                    _ food = {ask} 'What would you like to order?'
+                    _ {print} food
+                    _ {if} food {is} fries
+                    _ price = price + 3
+                    _ sauce = {ask} 'What kind of sauce would you like with your fries?'
+                    _ {if} sauce {is} no
+                    _ {print} 'no sauce'
+                    _ {else}
+                    _ price = price + 1
+                    _ {print} 'with ' sauce
+                    _ {if} food {is} pizza
+                    _ price = price + 4
                     {print} 'That will be ' price ' dollar'
                     {print} 'Enjoy your meal!'
                     ```
@@ -2673,17 +2573,19 @@ adventures:
             10:
                 story_text: |
                     In this level you'll learn how to easily {ask} your guests' orders in a short code.
-                example_code: |4
-
+                example_code: |
                     ```
                     courses = appetizer, main course, dessert
                     {for} course {in} courses
-                        food = {ask} 'What would you like to eat as your ' course '?'
-                        {print} food ' will be your ' course
+                        {print} 'What is your order for ' course '?'
+                        _ 
+                        _
                     ```
-                story_text_2: |4
-
+                story_text_2: |
+                    ### Exercise
                     Of course, you could also order for multiple people!
+                    Can you add the correct amount of indentation before each line to make the code work properly?
+                    Tip: some lines don't need any indentation at all.
                 example_code_2: |
                     ```
                     courses = appetizer, main course, dessert
@@ -2697,40 +2599,29 @@ adventures:
             11:
                 story_text: |
                     We can use the `{for} i {in} {range} 1 {to} 5` to {print} the orders from multiple customers in an orderly manner.
-                example_code: |4
-
+                example_code: |
                     ```
                     {print} 'Welcome to Restaurant Hedy!'
                     people = {ask} 'For how many people would you like to order?'
-                    {for} i {in} {range} 1 {to} people
-                        {print} 'Order number ' i
-                        food = {ask} 'What would you like to eat?'
-                        {print} food
-                        {if} food {is} fries
-                            sauce = {ask} 'What kind of sauce would you like with that?'
-                            {print} sauce
-                        drinks = {ask} 'What would you like to drink?'
-                        {print} drinks
-                    price = 4 * people
-                    {print} 'That will be ' price ' dollars, please!'
+                    {print} 'So you want to order for ' people ' people.'
+                    {print} "Let's go!"
                     ```
                 start_code: '# coloque o seu código aqui'
             12:
                 story_text: |
                     From this level on you can use decimal numbers to make you menu more realistic.
-                example_code: |4
-
+                example_code: |
                     ```
-                    price = 0
+                    price = 0.0
                     food = {ask} 'What would you like to order?'
-                    drinks = {ask} 'What would you like to drink?'
+                    drink = {ask} 'What would you like to drink?'
                     {if} food {is} 'hamburger'
                         price = price + 6.50
                     {if} food {is} 'pizza'
                         price = price + 5.75
-                    {if} drinks {is} 'water'
+                    {if} drink {is} 'water'
                         price = price + 1.20
-                    {if} drinks {is} 'soda'
+                    {if} drink {is} 'soda'
                         price = price + 2.35
                     {print} 'That will be ' price ' dollar, please'
                     ```
@@ -2753,16 +2644,16 @@ adventures:
             15:
                 story_text: |
                     With the `{while}` you can make sure your costumers can keep adding orders until they are done.
-                example_code: |4
-
+                example_code: |
                     ```
                     {print} 'Welcome at McHedy'
                     more = 'yes'
                     {while} more == 'yes'
                         order = {ask} 'What would you like to order?'
                         {print} order
-                        more = {ask} 'Would you like to order anything {else}?'
+                        more = {ask} 'Would you like to order anything else?'
                     {print} 'Thank you!'
+                    ```
                 start_code: '# coloque o seu código aqui'
     rock:
         name: Pedra, papel, tesoura
@@ -2795,25 +2686,22 @@ adventures:
             2:
                 story_text: |
                     In this level you can practise using the variables, so that you can make the rock, paper, scissors game in the next level!
-                example_code: |4
-
+                example_code: |-
                     ```
-                    choice {is} _
-                    {print} I choose choice
+                    choice {is} rock
+                    {print} I choose _
                     ```
                 start_code: '# coloque o seu código aqui'
             3:
-                story_text: |4
+                story_text: |
+                    You can use the `{at} {random}` command to let the computer pick rock, paper or scissors!
 
-                    In this level we can enter lists and choose things from them.
-                    You first make a list with `{is}`. Then you can let the computer choose something from the list with `{at} {random}`.
-                    For example, you can let the computer pick from rock, paper and scissors.
-                example_code: |4
-
-
+                    ### Exercise
+                    Finish the code by using the `{at} {random}` command.
+                example_code: |
                     ```
                     choices {is} rock, paper, scissors
-                    {print} choices {at} {random}
+                    {print} choices _
                     ```
                 story_text_2: |
                     ### Exercise
@@ -2839,56 +2727,52 @@ adventures:
                     Save your choice with the name of choice and the choice of computer as computer choice.
                     Then you can use `{if}` to see {if} they are the same or different.
                     Will you finish the code?
-                example_code: |4
-
+                example_code: |
                     ```
                     options {is} rock, paper, scissors
                     computer_choice {is} _
-                    choice {is} {ask} What do you choose?
+                    choice {is} _
                     {print} 'you chose ' _
                     {print} 'computer chose ' _
                     {if} _ {is} _ {print} 'tie!' {else} {print} 'no tie'
                     ```
 
-                    Fill in the correct code on the blanks to see {if} it is a draw.
+                    Fill in the correct code on the blanks to see if it is a draw.
                 start_code: '{print} ''Welcome to your own rock scissors paper!'''
             9:
                 story_text: |
                     In this level you can program the whole rock, paper, scissors game by nesting the {if}-commands. Can you finish the code?
-                example_code: |4
-
+                example_code: |
                     ```
-                    choices {is} rock, paper, scisscors
+                    choices {is} rock, paper, scissors
                     your_choice {is} {ask} 'What do you choose?'
                     {print} 'You choose ' your_choice
                     computer_choice {is} choices {at} {random}
                     {print} 'The computer chooses ' computer_choice
                     {if} computer_choice {is} your_choice
                         {print} 'Tie'
-                    {if} computer_choice {is} 'rock'
-                        {if} your_choice {is} 'paper'
+                    {if} computer_choice {is} rock
+                        {if} your_choice {is} paper
                             {print} 'You win!'
-                        {if} your_choice {is} 'scissors'
+                        {if} your_choice {is} scissors
                             {print} 'You lose!'
+                    # finish this code
                     ```
                 start_code: '# coloque o seu código aqui'
             10:
                 story_text: |
                     Feeling too lazy to play the game yourself? Let Hedy play it for you!
-                example_code: |4
-
+                example_code: |
                     ```
-                    choices = rock, paper, scissors
-                    players = Marleen, Michael
-                    {for} player {in} players
-                         {print} player ' chooses ' choices {at} {random}
+                    choices = _
+                    players = _
+                    {for} _
                     ```
                 start_code: '# coloque o seu código aqui'
             13:
                 story_text: |
                     With the `{and}` command you can shorten your rock, paper, scissors code! Check out the example code below and try to finish it.
-                example_code: |4
-
+                example_code: |
                     ```
                     options = 'rock', 'paper', 'scissors'
                     your_choice = {ask} 'What do you choose?'
@@ -2901,13 +2785,13 @@ adventures:
                         {print} 'You win!'
                     {if} computer_choice {is} 'rock' {and} your_choice {is} 'scissors'
                         {print} 'The computer wins!'
+                    _
                     ```
                 start_code: '# coloque o seu código aqui'
             15:
                 story_text: |
                     Play until you beat the computer! But first, finish the example code...
-                example_code: |4
-
+                example_code: |
                     ```
                     won = 'no'
                     options = 'rock', 'paper', 'scissors'
@@ -2923,6 +2807,8 @@ adventures:
                         {if} computer_choice == 'rock' {and} your_choice == 'paper'
                             {print} 'You win!'
                             won = 'yes'
+                    _
+                    ```
                 start_code: '# coloque o seu código aqui'
     rock_2:
         name: Rock, paper, scissors 2

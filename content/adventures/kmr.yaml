@@ -152,9 +152,7 @@ adventures:
                     ```
                 start_code: '{repeat} 5 {times} {print} ''Help!'''
             8:
-                story_text: "In this level you can use multiple lines in your {if} commands, this way you can upgrade your happy or sad ending!\n\n### Exercise 1\nThe example code shows two different endings; one where the characters jump in a time machine and one where they do not.\nComplete the blanks\
-                    \ with at least one sentence per ending. \n**(extra)** Make the story longer. What happens in the story? You can also add a second `{ask}` with different options.\n \n### Exercise 2\nGo back to your saved programs, choose your story program from level 5. Now write a good and a bad\
-                    \ ending of at least three lines long each! \n"
+                story_text: "In this level you can use multiple lines in your {if} commands, this way you can upgrade your happy or sad ending!\n\n### Exercise 1\nThe example code shows two different endings; one where the characters jump in a time machine and one where they do not.\nComplete the blanks with at least one sentence per ending. \n**(extra)** Make the story longer. What happens in the story? You can also add a second `{ask}` with different options.\n \n### Exercise 2\nGo back to your saved programs, choose your story program from level 5. Now write a good and a bad ending of at least three lines long each! \n"
                 example_code: |
                     ```
                     {print} 'OH NO! The T-rex is closing in!'
@@ -168,8 +166,7 @@ adventures:
                     ```
                 start_code: '# place your code here'
             9:
-                story_text: "In this level you can use `{if}` and `{repeat}` commands inside other `{if}` and `{repeat}` commands. \nThis gives you many options and really helps you to make your story interactive.\n\n### Exercise 1\nFinish the code so the `{if}` works correctly.\n\n### Exercise 2\nAdd\
-                    \ an `{if}` and `{else}` for the part of the story where Robin goes home too.\n\n### Exercise 3\nGo back to your level 8 story and use at least two `{if}`s inside another `{if}`.\n"
+                story_text: "In this level you can use `{if}` and `{repeat}` commands inside other `{if}` and `{repeat}` commands. \nThis gives you many options and really helps you to make your story interactive.\n\n### Exercise 1\nFinish the code so the `{if}` works correctly.\n\n### Exercise 2\nAdd an `{if}` and `{else}` for the part of the story where Robin goes home too.\n\n### Exercise 3\nGo back to your level 8 story and use at least two `{if}`s inside another `{if}`.\n"
                 example_code: |
                     ```
                     {print} 'Robin is walking downtown'
@@ -614,12 +611,11 @@ adventures:
                     ```
                 start_code: '# place your code here'
             13:
-                story_text: |4
-
+                story_text: |
                     ### Exercise 1
                     Let's make the practice program a bit harder. The player now has to answers two questions correctly. Fill out the blanks to complete the program.
 
-                    ### Exercise 2 (extra)
+                    ### Exercise 2 Extra
                     Sometimes, calculations have multiple correct answers. For example, 10 can be divided by 5 and by 2. So the question 'What number divides 10?' can be answered by 2 and by 5.
                     Ask for a calculation that has multiple correct answers, ask the player to answer it, and determine if it is correct using `{or}`.
                     Empty the programming field and create your own solution.
@@ -766,13 +762,13 @@ adventures:
                     nav {is} {ask} 'navê te çi ye?'
                     {if} nav {is} Hedy {print} 'xweş!' {else} {print} 'meh'
             6:
-                story_text: |4
-                     In this level you learn something new: you can now also calculate.
+                story_text: |
+                    In the previous level you have practiced with `{ask}` and `{if}`. For example you can ask guests what they would like to eat.
+                    What you can't yet do though, is calculate the price for everyone's dinner.
 
-                     The plus is easy, you write it like with math: `5 + 5` for example. The minus also works fine, it is `5 - 5`.
-
-                     The times is a bit different, because there is no times symbol on your keyboard. Just search, there really isn't!
-                     That is why we multiply with the asterisk above 8: `5 * 5`. Read that as "5 times 5" that helps you remember it best.
+                    The next level makes it possible to use addition, subtraction and multiplication in your programs. This way you can calculate the prices in your restaurant, but you could also add a secret code to give your friends and family a discount.
+                    Another option in the next level is programming your own maths game, for your little brother or sister to practice their multiplications.
+                    Go see for yourself!
                 example_code: |
                     ```
                     {print} '5 biserve 5  {is}  ' 5 + 5
@@ -873,8 +869,7 @@ adventures:
                     {print} 'decimal numbers now need to use a dot'
                     {print} 2.5 + 2.5
             13:
-                story_text: We are now going to learn `{and}` and `{or}`! If you want to check two statements, you don't have to use two {if}'s but can use `{and}` and `{or}`. If you use `{and}`, both statements, left and right of the `{and}` need to be true. We can also use `{or}`. Then only one statement
-                    needs to be correct.
+                story_text: We are now going to learn `{and}` and `{or}`! If you want to check two statements, you don't have to use two {if}'s but can use `{and}` and `{or}`. If you use `{and}`, both statements, left and right of the `{and}` need to be true. We can also use `{or}`. Then only one statement needs to be correct.
                 example_code: |
                     ```
                     name = {ask} 'what is your name?'
@@ -1024,8 +1019,7 @@ adventures:
                     {if} throw {is} earthworm points = points + 5 {else} points = points + throw
                     {print} 'those are' points ' point'
                     ```
-                example_code_2: |4
-
+                example_code_2: |
                     Did you manage to calculate the score for 8 dice? That required a lot of cutting and pasting, right? We are going to make that easier in level 7!
                 start_code: '{print} ''What will the die indicate this time?'''
             7:
@@ -1280,9 +1274,7 @@ adventures:
                 story_text: |
                     In the previous levels you've created your first fortune telling machine, but Hedy couldn't really predict anything, only {echo}.
                     In this level you can use a variable and the `{at} {random}` command to really let Hedy choose an answer for you. Check out this code for instance:
-                example_code: |4
-
-                    In this example the player can {ask} Hedy a yes-no question and Hedy will pick a random answer for you.
+                example_code: |
                     ```
                     {print} I’m Hedy the fortune teller!
                     question {is} {ask} What do you want to know?
@@ -1578,8 +1570,7 @@ adventures:
                     ```
                 start_code: '# place your code here'
             9:
-                story_text: "In this level you can use nesting, which allows you to make the haunted house even more interactive!\n\n### Exercise\nNow it's very hard to win this game, can you make it easier to win?\nChange your code so it only has one wrong door and two correct doors instead of one correct\
-                    \ door and two wrong ones? \nTip: This means changing the variable correct_door into wrong_door, and switching the `{if}` and `{else}` code.\nAnd of course you may also change the story and make it your own. Change the monsters or make it a happy game show where you get a gift!\n"
+                story_text: "In this level you can use nesting, which allows you to make the haunted house even more interactive!\n\n### Exercise\nNow it's very hard to win this game, can you make it easier to win?\nChange your code so it only has one wrong door and two correct doors instead of one correct door and two wrong ones? \nTip: This means changing the variable correct_door into wrong_door, and switching the `{if}` and `{else}` code.\nAnd of course you may also change the story and make it your own. Change the monsters or make it a happy game show where you get a gift!\n"
                 example_code: |
                     ```
                     {print} 'Escape from the Haunted House!'
@@ -1603,9 +1594,7 @@ adventures:
                     ```
                 start_code: '{print} ''Escape from the haunted house!'''
             11:
-                story_text: "In this level we've changed the `{for}` command so we can tell the player where they are. \n\n### Exercise 1\nFinish the program so the player knows which room they are in.\n\n### Exercise 2\nMake the program into an adventure by following these steps:\n\n1. Make a list of\
-                    \ choices (like: fight or flight)\n2. Make sure the player can choose an option with `{ask}`\n3. Is answer correct? Then they may proceed to the next monster. Do they give a wrong answer? Let the player know with a `{print}`. \n\n **(extra)** If you make a wrong choice, a monster is\
-                    \ still shown! How could you change that?\n"
+                story_text: "In this level we've changed the `{for}` command so we can tell the player where they are. \n\n### Exercise 1\nFinish the program so the player knows which room they are in.\n\n### Exercise 2\nMake the program into an adventure by following these steps:\n\n1. Make a list of choices (like: fight or flight)\n2. Make sure the player can choose an option with `{ask}`\n3. Is answer correct? Then they may proceed to the next monster. Do they give a wrong answer? Let the player know with a `{print}`. \n\n **(extra)** If you make a wrong choice, a monster is still shown! How could you change that?\n"
                 example_code: |
                     ```
                     {print} 'Escape from the Haunted House!'
@@ -2466,8 +2455,8 @@ adventures:
         description: Create your own virtual restaurant
         levels:
             1:
-                story_text: |4
-                     In level 1 you can make your own virtual restaurant and take your guests' orders.
+                story_text: |
+                    In level 1 you can make your own virtual restaurant and take your guests' orders.
                 example_code: |
                     ```
                     {print} Welcome to Hedy's restaurant 🍟
@@ -2584,8 +2573,7 @@ adventures:
             6:
                 story_text: |
                     In this level you can use maths to calculate the total price of your customer's order, which can make your virtual restaurant more realistic.
-                example_code: |4
-
+                example_code: |
                     You can make a simple restaurant code, like this:
                     ```
                     {print} 'Welcome to Restaurant Chez Hedy'
@@ -2635,9 +2623,7 @@ adventures:
                     **(extra)** Add even more items, as many options as you like!
                 start_code: '# place your code here'
             9:
-                story_text: "In this level you can use nesting to make your restaurant more realistic and more fun!\n\n### Exercise\nThe indentation was removed in the example code. \nCan you figure out how much indentation each line needs in order for the code to work properly?\nIf the customer orders\
-                    \ pizza, Hedy shouldn't ask what sauce the costumer wants.\n\n**(extra)** A restaurant does not stock all sauces. Make a list of available sauces and give a reply with each order whether you sell it. <br>\n**(extra)** Pizzas have toppings. Ask customers what they want.<br>\n**(extra)**\
-                    \ Do customers want a drink? Ask them too! <br>                    \n"
+                story_text: "In this level you can use nesting to make your restaurant more realistic and more fun!\n\n### Exercise\nThe indentation was removed in the example code. \nCan you figure out how much indentation each line needs in order for the code to work properly?\nIf the customer orders pizza, Hedy shouldn't ask what sauce the costumer wants.\n\n**(extra)** A restaurant does not stock all sauces. Make a list of available sauces and give a reply with each order whether you sell it. <br>\n**(extra)** Pizzas have toppings. Ask customers what they want.<br>\n**(extra)** Do customers want a drink? Ask them too! <br>                    \n"
                 example_code: |
                     ```
                     {print} 'Welcome to Restaurant Chez Hedy!'
@@ -2795,11 +2781,11 @@ adventures:
                     ```
                 start_code: '# place your code here'
             3:
-                story_text: |4
+                story_text: |
+                    You can use the `{at} {random}` command to let the computer pick rock, paper or scissors!
 
-                    In this level we can enter lists and choose things from them.
-                    You first make a list with `{is}`. Then you can let the computer choose something from the list with `{at} {random}`.
-                    For example, you can let the computer pick from rock, paper and scissors.
+                    ### Exercise
+                    Finish the code by using the `{at} {random}` command.
                 example_code: |
                     ```
                     choices {is} rock, paper, scissors
@@ -2845,8 +2831,7 @@ adventures:
                     Fill in the correct code on the blanks to see {if} it is a draw.
                 start_code: '{print} ''Welcome to your own rock scissors paper!'''
             9:
-                story_text: "In this level you can program the whole rock, paper, scissors game by nesting the `{if}` commands. \n\n### Exercise\nCan you finish the code? The program must tell who has won for every combination.\n\n**(extra)** Want to play more than one game? Expand the code so that you\
-                    \ can play multiple rounds. You can even use an `{ask}` to ask the user how many rounds they want to play.\n"
+                story_text: "In this level you can program the whole rock, paper, scissors game by nesting the `{if}` commands. \n\n### Exercise\nCan you finish the code? The program must tell who has won for every combination.\n\n**(extra)** Want to play more than one game? Expand the code so that you can play multiple rounds. You can even use an `{ask}` to ask the user how many rounds they want to play.\n"
                 example_code: |
                     ```
                     choices {is} rock, paper, scissors
@@ -3629,8 +3614,7 @@ adventures:
                     ```
                 start_code: '{print} ''Drawing figures'''
             8:
-                story_text: "Now that we can repeat several lines, we can make figures more easily.\nWe only have to set the angle once and then use that variable in the `{repeat}`.\n\n### Exercise 1\nThe example code creates a square. Change the code so that it create another figure, such as a triangle\
-                    \ or a hexagon. \nThis requires a change to two lines of code.\nTip: An entire circle is 360 degrees.\n\n### Exercise 2\nNow create a drawing consisting of at least two polygons.\n"
+                story_text: "Now that we can repeat several lines, we can make figures more easily.\nWe only have to set the angle once and then use that variable in the `{repeat}`.\n\n### Exercise 1\nThe example code creates a square. Change the code so that it create another figure, such as a triangle or a hexagon. \nThis requires a change to two lines of code.\nTip: An entire circle is 360 degrees.\n\n### Exercise 2\nNow create a drawing consisting of at least two polygons.\n"
                 example_code: |
                     ```
                     angle = 90

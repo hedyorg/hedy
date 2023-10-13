@@ -550,8 +550,7 @@ adventures:
                     {if} svar {is} _ {print} 'Bra jobbat!'
                     {else} {print} 'Fel! Det var ' _
                     ```
-                story_text_3: |4
-
+                story_text_3: |
                     **Extrauppgift** Du kan också låta datorn göra slumpmässiga summor på egen hand med random.
 
                     Så här väljer du ett antal tabeller att öva på och av det får du alltid en annan summa:
@@ -635,8 +634,7 @@ adventures:
                     ```
                 start_code: '# skriv din kod här'
             13:
-                story_text: |4
-
+                story_text: |
                     ### Övning 1
                     Vi gör övningsprogrammet lite svårare. Spelaren måste nu svara rätt på två frågor. Fyll i de tomma fälten för att göra klart programmet.
 
@@ -1054,8 +1052,7 @@ adventures:
                     {if} kast {is} daggmask poäng = poäng + 5 {else} poäng = poäng + kast
                     {print} 'det är ' poäng ' poäng'
                     ```
-                example_code_2: |4
-
+                example_code_2: |
                     Lyckades du räkna ut poängen för åtta tärningar? Det behövdes en hel del klippande och klistrande, eller hur? Vi kommer att göra det enklare på nivå 7!
                 start_code: '{print} ''Vad kommer tärningen att visa den här gången?'''
             7:
@@ -1498,8 +1495,7 @@ adventures:
         description: Flykten från spökhuset
         levels:
             1:
-                story_text: "I det här äventyret jobbar du med att skapa ett spel där du måste fly från ett hemsökt hus genom att välja rätt dörr.\nOm du väljer rätt dörr kommer du att överleva, men om du inte gör det kan ett hemskt monster...\n \nPå nivå 1 börjar vi vårt spökhusspel med att hitta på\
-                    \ en skrämmande historia och frågar spelaren vilket monster de kommer att se i spökhuset.\n"
+                story_text: "I det här äventyret jobbar du med att skapa ett spel där du måste fly från ett hemsökt hus genom att välja rätt dörr.\nOm du väljer rätt dörr kommer du att överleva, men om du inte gör det kan ett hemskt monster...\n \nPå nivå 1 börjar vi vårt spökhusspel med att hitta på en skrämmande historia och frågar spelaren vilket monster de kommer att se i spökhuset.\n"
                 example_code: |
                     ```
                     {print} Hur kom jag hit?
@@ -1621,9 +1617,7 @@ adventures:
                     ```
                 start_code: '# skriv din kod här'
             9:
-                story_text: "På den här nivån kan du använda dig av nästlade satser, vilket gör spökhuset ännu mer interaktivt!\n\n### Övning\nNu är det väldigt svårt att vinna det här spelet; kan du göra det lättare att vinna?\nÄndra din kod så att den bara har en felaktig dörr och två korrekta dörrar\
-                    \ istället för en korrekt dörr och två felaktiga? \nTips: Detta innebär att du ändrar variabeln korrekt_dörr till fel_dörr och byter ut koden `{if}` och `{else}`.\n Och naturligtvis kan du också ändra berättelsen och göra den mer personlig. Ändra monstren eller gör det till en glad\
-                    \ spelshow där du får en gåva!\n"
+                story_text: "På den här nivån kan du använda dig av nästlade satser, vilket gör spökhuset ännu mer interaktivt!\n\n### Övning\nNu är det väldigt svårt att vinna det här spelet; kan du göra det lättare att vinna?\nÄndra din kod så att den bara har en felaktig dörr och två korrekta dörrar istället för en korrekt dörr och två felaktiga? \nTips: Detta innebär att du ändrar variabeln korrekt_dörr till fel_dörr och byter ut koden `{if}` och `{else}`.\n Och naturligtvis kan du också ändra berättelsen och göra den mer personlig. Ändra monstren eller gör det till en glad spelshow där du får en gåva!\n"
                 example_code: |
                     ```
                     {print} 'Fly från spökhuset!'
@@ -1647,9 +1641,7 @@ adventures:
                     ```
                 start_code: '{print} ''Fly från spökhuset!'''
             11:
-                story_text: "På den här nivån har vi ändrat kommandot `{for}` så att vi kan berätta för spelaren var den befinner sig. \n\n### Övning 1\nAvsluta programmet så att spelaren vet vilket rum den befinner sig i.\n\n### Övning 2\nGör programmet till ett äventyr genom att följa dessa steg:\n\n\
-                    1. Gör en lista med valmöjligheter (till exempel: slåss eller fly).\n2. Se till att spelaren kan välja ett alternativ med `{ask}`\n3. Är svaret rätt? Då får den gå vidare till nästa monster. Ger den fel svar? Låt spelaren veta det med en `{print}`. \n\n**Extrauppgift** Om du väljer\
-                    \ fel visas ändå ett monster! Hur kan man ändra på det?\n"
+                story_text: "På den här nivån har vi ändrat kommandot `{for}` så att vi kan berätta för spelaren var den befinner sig. \n\n### Övning 1\nAvsluta programmet så att spelaren vet vilket rum den befinner sig i.\n\n### Övning 2\nGör programmet till ett äventyr genom att följa dessa steg:\n\n1. Gör en lista med valmöjligheter (till exempel: slåss eller fly).\n2. Se till att spelaren kan välja ett alternativ med `{ask}`\n3. Är svaret rätt? Då får den gå vidare till nästa monster. Ger den fel svar? Låt spelaren veta det med en `{print}`. \n\n**Extrauppgift** Om du väljer fel visas ändå ett monster! Hur kan man ändra på det?\n"
                 example_code: |
                     ```
                     {print} "Escape from the Haunted House!"
@@ -2643,8 +2635,7 @@ adventures:
                     - ge folk rabatt när de anger en (hemlig) kupongkod?
                     - lägga till en barnmeny?
                     - komma på andra roliga saker att lägga till?
-                example_code: |4
-
+                example_code: |
                     Du kan skapa en enkel restaurangkod, så här:
                     ```
                     {print} 'Välkommen till restaurang Chez Hedy'
@@ -2694,9 +2685,7 @@ adventures:
                     **Extrauppgift** Lägg till ännu fler artiklar, så många alternativ du vill!
                 start_code: '# skriv din kod här'
             9:
-                story_text: "På den här nivån kan du använda dig av nästlad kod för att göra din restaurang mer realistisk och roligare!\n\n### Övning\nIndragen (mellanslagen) togs bort i exempelkoden. \nKan du räkna ut hur mycket indrag varje rad behöver för att koden ska fungera korrekt?\nOm kunden\
-                    \ beställer pizza ska Hedy inte fråga vilken sås kunden vill ha.\n\n**Extrauppgift** En restaurang har inte alla såser i lager. Gör en lista över tillgängliga såser och ge ett svar vid varje beställning om ni säljer den. <br>\n**Extrauppgift** Pizzor har en fyllning. Fråga kunderna\
-                    \ vad de vill ha.<br>\n**Extrauppgift** Vill kunderna ha något att dricka? Fråga dem också! <br>\n"
+                story_text: "På den här nivån kan du använda dig av nästlad kod för att göra din restaurang mer realistisk och roligare!\n\n### Övning\nIndragen (mellanslagen) togs bort i exempelkoden. \nKan du räkna ut hur mycket indrag varje rad behöver för att koden ska fungera korrekt?\nOm kunden beställer pizza ska Hedy inte fråga vilken sås kunden vill ha.\n\n**Extrauppgift** En restaurang har inte alla såser i lager. Gör en lista över tillgängliga såser och ge ett svar vid varje beställning om ni säljer den. <br>\n**Extrauppgift** Pizzor har en fyllning. Fråga kunderna vad de vill ha.<br>\n**Extrauppgift** Vill kunderna ha något att dricka? Fråga dem också! <br>\n"
                 example_code: |
                     ```
                     {print} 'Välkommen till restaurang Chez Hedy!'
@@ -2912,8 +2901,7 @@ adventures:
                     Fyll i rätt kod i tomrummen för att se om det är oavgjort.
                 start_code: '{print} ''Välkommen till ditt eget sten, sax, påse!'''
             9:
-                story_text: "På den här nivån kan du programmera hela spelet sten, sax, påse genom att nästla `{if}` -kommandon. \n\n### Övning\nKan du göra klart koden? Programmet behöver berätta vem som har vunnit för varje kombination.\n\n **Extrauppgift** Vill du spela mer än en omgång? Bygg ut koden\
-                    \ så att du kan spela flera omgångar. Du kan till och med använda en `{ask}` för att fråga användaren hur många rundor hen vill spela.\n"
+                story_text: "På den här nivån kan du programmera hela spelet sten, sax, påse genom att nästla `{if}` -kommandon. \n\n### Övning\nKan du göra klart koden? Programmet behöver berätta vem som har vunnit för varje kombination.\n\n **Extrauppgift** Vill du spela mer än en omgång? Bygg ut koden så att du kan spela flera omgångar. Du kan till och med använda en `{ask}` för att fråga användaren hur många rundor hen vill spela.\n"
                 example_code: |
                     ```
                     val {is} sten, sax, påse
@@ -3669,8 +3657,7 @@ adventures:
                     ```
                 start_code: '{print} ''Rita figurer'''
             8:
-                story_text: "Nu när vi kan upprepa flera rader kan vi lättare skapa figurer.\n Vi behöver bara ställa in vinkeln en gång och sedan använda den variabeln i `{repeat}`.\n\n### Övning 1\nExempelkoden skapar en kvadrat. Ändra koden så att den skapar en annan figur, till exempel en triangel\
-                    \ eller en sexhörning. \nDetta kräver en ändring av två kodrader.\nTips: En hel cirkel är 360 grader.\n \n### Övning 2\nSkapa nu en ritning som består av minst två polygoner.\n"
+                story_text: "Nu när vi kan upprepa flera rader kan vi lättare skapa figurer.\n Vi behöver bara ställa in vinkeln en gång och sedan använda den variabeln i `{repeat}`.\n\n### Övning 1\nExempelkoden skapar en kvadrat. Ändra koden så att den skapar en annan figur, till exempel en triangel eller en sexhörning. \nDetta kräver en ändring av två kodrader.\nTips: En hel cirkel är 360 grader.\n \n### Övning 2\nSkapa nu en ritning som består av minst två polygoner.\n"
                 example_code: |
                     ```
                     vinkel = 90
