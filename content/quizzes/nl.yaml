@@ -686,7 +686,7 @@ levels:
             correct_answer: A
             question_score: '10'
         2:
-            question_text: Waar worden de juiste aanhalingstekens gebruikt bij het `{print}` commando?
+            question_text: Waar worden op de juiste manier aanhalingstekens gebruikt?
             mp_choice_options:
             -   option: |-
                     ```
@@ -2653,8 +2653,7 @@ levels:
             question_score: '10'
         5:
             question_text: Welke uitvoer krijgt Agent007 als hij het juiste wachtwoord invoert?
-            code: "naam {is} {ask} 'Wat is je naam?'\n{if} naam {is} 'Agent007'\n\ta {is} 'Ga naar het vliegveld '\n{else}\n\ta {is} 'Ga naar het station  '\nwachtwoord {is} {ask} 'Wat is het wachtwoord'\n{if} wachtwoord {is} 'GEHEIM'\n\tb {is} 'morgen om 02.00'\nelse\n\tb {is} 'vandaag om 10.00'\nprint\
-                \ a + b"
+            code: "naam {is} {ask} 'Wat is je naam?'\n{if} naam {is} 'Agent007'\n\ta {is} 'Ga naar het vliegveld '\n{else}\n\ta {is} 'Ga naar het station  '\nwachtwoord {is} {ask} 'Wat is het wachtwoord'\n{if} wachtwoord {is} 'GEHEIM'\n\tb {is} 'morgen om 02.00'\nelse\n\tb {is} 'vandaag om 10.00'\nprint a + b"
             mp_choice_options:
             -   option: Ga naar het station vandaag om 10.00
                 feedback: Daar zal de agent geen schurken vangen
@@ -2669,8 +2668,7 @@ levels:
             question_score: '10'
         6:
             question_text: Welke regel hoort op de _ ?
-            code: "{print} 'Welkom bij McHedy!'\nbestelling = {ask} 'Wil je een hamburger of friet?'\n{if} bestelling = 'hamburger'\n\tprijs = 12\n{if} bestelling = 'friet'\n\tprijs = 4\ndrankje = {ask} 'Wil je daar een drankje bij voor 2 euro?'\n{if} drankje = 'ja'\n\t_\n{print} 'Dat is dan ' prijs '\
-                \ euro, alstublieft'"
+            code: "{print} 'Welkom bij McHedy!'\nbestelling = {ask} 'Wil je een hamburger of friet?'\n{if} bestelling = 'hamburger'\n\tprijs = 12\n{if} bestelling = 'friet'\n\tprijs = 4\ndrankje = {ask} 'Wil je daar een drankje bij voor 2 euro?'\n{if} drankje = 'ja'\n\t_\n{print} 'Dat is dan ' prijs ' euro, alstublieft'"
             mp_choice_options:
             -   option: |-
                     ```
@@ -2697,8 +2695,7 @@ levels:
             question_score: '10'
         7:
             question_text: Welke uitvoer krijgt een vegan?
-            code: "menu = 'koekjes', 'kaas', 'druiven'\n{print} \"Ik ben jarig! Ik trakteer!\"\ndieet = {ask} 'Heb je dieetwensen?'\n{if} dieet = 'glutenvrij'\n\t{remove} 'koekjes' {from} menu\n{if} dieet = 'vegan'\n\t{remove} 'kaas' {from} menu\n{print} 'Voor jou heb ik: '\n{for} snack {in} menu\n\t\
-                {print} snack"
+            code: "menu = 'koekjes', 'kaas', 'druiven'\n{print} \"Ik ben jarig! Ik trakteer!\"\ndieet = {ask} 'Heb je dieetwensen?'\n{if} dieet = 'glutenvrij'\n\t{remove} 'koekjes' {from} menu\n{if} dieet = 'vegan'\n\t{remove} 'kaas' {from} menu\n{print} 'Voor jou heb ik: '\n{for} snack {in} menu\n\t{print} snack"
             mp_choice_options:
             -   option: |-
                     Ik ben jarig! Ik trakteer!
@@ -2784,8 +2781,7 @@ levels:
             question_score: '10'
         10:
             question_text: Welke regel code moet ingevuld worden op de _ ?
-            code: "acties = 'clap your hands', 'stomp your feet', 'shout Hurray!'\n???\n\t{for} i {in} range 0 {to} 1\n\t\t{print} 'if youre happy and you know it'\n\t\t{print} actie\n\t{print} 'if youre happy and you know it and you really want to show it'\n\t{print} 'if youre happy and you know it'\n\
-                \t{print} actie"
+            code: "acties = 'clap your hands', 'stomp your feet', 'shout Hurray!'\n???\n\t{for} i {in} range 0 {to} 1\n\t\t{print} 'if youre happy and you know it'\n\t\t{print} actie\n\t{print} 'if youre happy and you know it and you really want to show it'\n\t{print} 'if youre happy and you know it'\n\t{print} actie"
             mp_choice_options:
             -   option: '{for} i {in} {range} 1 {to} 3'
                 feedback: Deze is lastig! Alle acties op de lijst moeten worden ingevuld in het lied.
