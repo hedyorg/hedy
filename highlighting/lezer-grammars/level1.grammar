@@ -2,7 +2,7 @@
 Command {
     Print | Ask | Echo | Turtle | ErrorInvalid
 }
-Print { PrintToken Text }
+Print { kw<"print"> Text }
 Ask { kw<"ask"> (Text) }
 Echo { kw<"echo"> (Text) }
 
@@ -32,11 +32,11 @@ kw<term> { @specialize[@name={term}]<TextWithoutSpaces, term> }
     @precedence { PrintToken, TextWithoutSpaces, Text}
     Comment { "#" ![\n]* }
     PrintToken {  ( "ـ"* "ق" "ـ"* "و" "ـ"* "ل" "ـ"*  | "print") }
-    // AskToken {  "ask" }
-    // EchoToken {  "echo" }
-    // ForwardToken {  "forward" }
-    // TurnToken {  "turn" }
-    // ColorToken {  "color" }
+    AskToken {  "ask" }
+    EchoToken {  "echo" }
+    ForwardToken {  "forward" }
+    TurnToken {  "turn" }
+    ColorToken {  "color" }
     eol { "\n" }
     // minus { "-" }
     // black { "black" }

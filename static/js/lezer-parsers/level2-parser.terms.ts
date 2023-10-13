@@ -4,11 +4,9 @@ export const
   Program = 2,
   Command = 3,
   Assign = 4,
-  Var = 5,
-  Name = 6,
-  IsToken = 7,
-  Text = 8,
-  Ask = 9,
-  AskToken = 10,
-  ErrorInvalid = 11,
-  TextWithoutSpaces = 12
+  TextWithoutSpaces = 5,
+  Ask = 7,
+  Print = 9,
+  Turtle = 11,
+  Sleep = 18,
+  ErrorInvalid = 20

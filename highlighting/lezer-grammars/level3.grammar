@@ -1,0 +1,36 @@
+@top Program { eol* (Command eol+)* Command? }
+Command {
+    Assign | AssignList | Ask | Print | Turtle | Sleep | Add | Remove | ErrorInvalid
+}
+
+Print { skw<"print"> ( Text | ListAccess )+ }
+
+AssignList { Text skw<"is"> Text+ (Comma Text+)+ } // comma doesn't really parse well if it is not separated by spaces
+Assign { Text skw<"is"> (Text+ | ListAccess) }
+Ask { Text skw<"is"> kw<"ask"> (Text)+ }
+Sleep { skw<"sleep"> (Text | ListAccess) }
+
+ListAccess { Text kw<"at"> (kw<"random"> | Text) }
+Turtle[@isGroup=turtle] {
+    Forward { skw<"forward"> (Text | ListAccess ) } |
+    Turn { skw<"turn"> (Text | ListAccess ) } |
+    Color { skw<"color"> (Text | ListAccess)  }
+}
+
+Add { skw<"add"> Text skw<"to"> Text }
+Remove { skw<"remove"> Text skw<"from"> Text }
+
+ErrorInvalid[@dynamicPrecedence=-10] { Text+ }
+
+kw<term> { @specialize[@name={term}]<Text, term> }
+skw<term> { @extend[@name={term}]<Text, term> }
+Comma { "," }
+
+@tokens {
+    Comment { "#" ![\n]* }
+    eol { "\n" }
+    Text { ![^\n,،，、 #]+ } // a little bit of a hack not to parse commas never, but lezer adds them as error nodes, so it still
+    space { " " }
+}
+
+@skip { Comment | space }
