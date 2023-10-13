@@ -1,32 +1,28 @@
 @top Program { eol* (Command eol+)* Command? }
 Command {
-    Assign  | Ask | ErrorInvalid
+    Assign  | Ask | Print | Turtle | Sleep |ErrorInvalid
 }
 
-Assign { Var IsToken Text }
-Ask { Var IsToken AskToken Text }
-ErrorInvalid { TextWithoutSpaces Text? }
+Assign { TextWithoutSpaces " "* kw<"is"> " "* (TextWithoutSpaces)+ }
+Ask { TextWithoutSpaces " "* kw<"is"> " "* kw<"ask"> " "* (TextWithoutSpaces)+ }
+Print { kw<"print"> " "* (TextWithoutSpaces)+ }
+Sleep { kw<"sleep"> " "* TextWithoutSpaces }
 
-Var { Name }
+Turtle[@isGroup=turtle] {
+    Forward { kw<"forward"> " "* (TextWithoutSpaces) } |
+    Turn { kw<"turn"> " "* (TextWithoutSpaces) } |
+    Color { kw<"color"> " "* TextWithoutSpaces }
+}
 
-@tokens {
-    @precedence { 
-        AskToken, 
-        IsToken,     
-        Name,
-        Text,
-        TextWithoutSpaces
-    }
-    
+
+ErrorInvalid { TextWithoutSpaces (TextWithoutSpaces)? }
+
+kw<term> { @specialize[@name={term}]<TextWithoutSpaces, term> }
+
+@tokens {    
     Comment { "#" ![\n]* }
-    AskToken { " "* "ask" " "* }
-    IsToken {  " "* "is" " "* }
     eol { "\n" }
-    TextWithoutSpaces { ![\n #]+ }
-    Text { (![\n#ـ\r])(![\n#\r]*) }
-    Name { letterOrUnderscore letterOrNumeral*}
-    letterOrUnderscore { (@asciiLetter | $[_\u{a1}-\u{10ffff}])+ }
-    letterOrNumeral { letterOrUnderscore | (@digit | letterOrUnderscore)* }    
+    TextWithoutSpaces { ![\n #]+ }  
 }
 
 @skip { Comment }
