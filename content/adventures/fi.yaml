@@ -1,282 +1,294 @@
 adventures:
     story:
-        name: Story
-        default_save_name: Story
-        description: Story
+        name: Tarina
+        default_save_name: Tarina
+        description: Tarina
         levels:
             1:
                 story_text: |
-                    In level 1 you can make a story with a different main character that you enter yourself.
+                    Tasolla 1 voit luoda tarinan, jonka päähahmon voit nimetä itse.
 
-                    In the first line, use `{ask}` and ask who the main character of the story will be.
+                    Ensimmäisellä rivillä, käytä `{ask}` ja kysy mikä tarinan päähahmon nimi on.
 
-                    After that first line, start with `{print}` if the sentence needs to be printed.
-                    You use `{echo}` if you want your main character to be at the end of the sentence.
+                    Ensimmäisen rivin jälkeen, aloita rivi `{print}` komennolla jos haluat, että lause tulostetaan.
+                    Voit käyttää myös `{echo}` komentoa jos haluat, että päähahmon nimi tulostetaan lauseen lisäksi lauseen loppuun.
                 example_code: |
                     ```
-                    {ask} The main character of this story is
-                    {print} The main character is now going to walk in the forest
-                    {echo} He's a bit scared,
-                    {print} He hears crazy noises everywhere
-                    {print} He's afraid this is a haunted forest
+                    {ask} Tarinan päähahmon nimi on
+                    {print} Päähahmo kävelee metsässä
+                    {echo} Häntä pelottaa vähän,
+                    {print} Hän kuulee kammottavia ääniä kaikkialta
+                    {print} Häntä pelottaa, että metsässä kummittelee
                     ```
                 story_text_2: |
-                    ### Exercise
-                    Can you make your own story in Hedy now by using `{print}` , `{ask}` and `{echo}`?
-                start_code: '{print} Your story starts here'
+                    ### Harjoitus
+                    Luo oma tarinasi jossa on vähintään 6 riviä koodia.
+                    Tämä tarina ei voi olla sama kuin esimerkissä.
+                    Käytä ainakin yden kerran `{ask}` ja `{echo}` komentoja.
+                    Tarinan aiheena voi olla mitä vain.
+                    Jos et keksi tarinalle aihetta, käytä vaikka jotain näistä: menossa elokuviin, urheiluottelu, tai päivä eläintarhassa.
+                start_code: '{print} Tarinasi alkaa tästä'
             2:
                 story_text: |
-                    In level 2 you can make your story more fun. Your main character's name can now be anywhere in the sentence.
+                    Tasolla 2 voit tehdä tarinastasi vieläkin hauskemman. Päähahmosi nimi voi nyt olla missä tahansa kohtaa lausetta.
 
-                    You do have to program a little bit extra for that. You must now name your main character first.
+                    Sinun täytyy ohjelmoida vähän enemmän, jotta se on mahdollista. Sinun täytyy nyt nimetä päähahmosi ensin.
 
-                    You can then put that name anywhere in a sentence.
-
-                    ### Exercise
-                    Can you make a story using a variable yourself? Can you add even more variables?
+                    Sen jälkeen voit laittaa nimen mihin tahansa lauseessa.
                 example_code: |-
                     ```
-                    name {is} {ask} What is the name of the main character?
-                    {print} name is now going to run in the woods
-                    {print} name is a bit scared
-                    {print} Suddenly he hears a crazy noise...
+                    nimi {is} {ask} Mikä on päähahmon nimi?
+                    {print} nimi aikoo nyt juosta metsään
+                    {print} nimi on vähän peloissaan
+                    {print} Yhtäkkiä hän kuulee kammottavan äänen...
                     {sleep}
-                    {print} name is afraid this is a haunted forest
+                    {print} nimi pelkää, että metsässä kummittelee
                     ```
                 story_text_2: |
-                    ### Exercise
-                    Now it's time to add variables to your own story that you've made in the previous level.
-                    Go to 'My programs', look for your level 1 story adventure and copy the code. Paste the code in your input screen in this level.
+                    ### Harjoitus
+                    Nyt on aika lisätä muuttujia omaan tarinaasi, jonka teit aiemmalla tasolla.
 
-                    This code won't work in this level, because you have not used variables yet.
-                    Change the `{ask}` commands and `{echo}` commands in your code to the correct form that you've learned in this level.
+                    Mene 'Minun ohjelmani', etsi sinun taso 1 tarina seikkailu ja kopioi koodi. Liitä koodi tämän tason ruudulle.
 
-                    **Extra** Add a sleep command to your code to build up tension in your story.
-                start_code: '{print} Your story'
+                    Koodi ei toimi tällä tasolla, koska et ole käyttänyt muuttujia vielä.
+                    Muuta `{ask}` komennot ja `{echo}` komennot koodissasi oikeaan muotoon, jonka olet oppinut tällä tasolla.
+
+                    **Lisätehtävä** Lisää `{sleep}` komento koodiin lisätäksesi jännitystä tarinaasi.
+                start_code: '{print} Sinun tarinasi'
             3:
                 story_text: |
-                    In level 3 you can make your story more fun. You can use randomness for any monster, animal or other obstacle, like this:
+                    Tasolla 3 voit tehdä tarinastasi vieläkin hauskemman. Voit käyttää satunnaisuutta mille tahansa hirviölle, eläimelle tai muulle esteelle, tällä tavalla:
                 example_code: |
                     ```
-                    animals {is} 🦔, 🐿, 🦉, 🦇
-                    {print} He now hears the sound of an animals {at} {random}
+                    eläimet {is} 🦔, 🐿, 🦉, 🦇
+                    {print} Nyt hän kuulee eläinten ääniä {at} {random}
                     ```
                 story_text_2: |
-                    The command `{add}` can also come in handy in your story.
+                    Komento `{add}` voi olla myös hyödyllinen tarinassasi.
                 example_code_2: |
                     ```
-                    {print} He hears a sound
-                    animals {is} 🐿, 🦔, 🦇, 🦉
-                    animal {is} {ask} What do you think it is?
-                    {add} animal {to_list} animals
-                    {print} it was an animals {at} {random}
+                    {print} Hän kuulee äänen
+                    eläimet {is} 🐿, 🦔, 🦇, 🦉
+                    eläimet {is} {ask} Mikä se mahtaa olla?
+                    {add} eläin {to_list} eläimet
+                    {print} se oli eläimet {at} {random}
                     ```
                 story_text_3: |
-                    This is an example of the `{remove}` command in your story
+                    Tämä on esimerkki `{remove}` komennon käyttämisestä tarinassasi
 
-                    ### Exercise
-                    Can you use the 3 new commands `{at} {random}` , `{add} {to}` and `{remove} {from}` in your own story?
+                    ### Harjoitus
+                    Kopioi tarinasi aiemmalta tasolta tälle tasolle.
+                    Tällä tasolla olet oppinut 3 uutta komentoa `{at} {random}` , `{add} {to}` ja `{remove} {from}`.
+                    Lisää uusia koodirivejä tarinaasi niin, että kaikki uudet komennot esiintyvät vähintään kerran tarinassasi.
                 example_code_3: |
                     ```
-                    {print} His backpack got way too heavy.
-                    {print} Inside were a bottle of water, a flashlight and a brick.
-                    bag {is} water, flashlight, brick
-                    dump {is} {ask} Which item should he dump?
-                    {remove} dump {from} bag
+                    {print} Hänen reppunsa oli aivan liian raskas.
+                    {print} Siellä oli vesipullo, taskulamppu ja tiiliskivi.
+                    laukku {is} vesipullo, taskulamppu, tiiliskivi
+                    poista {is} {ask} Mikä esine hänen kannattaisi poistaa?
+                    {remove} poista {from} laukku
                     ```
-                start_code: '{print} Your story'
+                start_code: '{print} Sinun tarinasi'
             4:
                 story_text: |
-                    You may have noticed that there is still a problem in the previous levels. Did you try to print a sentence that contained the word name? i.e. `{print}` my name is name.
-                    You can solve that in this level. You must use quotation marks for everything that you are going to print.
+                    Saatoit muokata, että aiemmissa tasoissa on edelleen ongelma. Yrititkö tulostaa lauseen, joka sisälsi sanan nimi? Eli `{print}` minun nimi on nimi.
+                    Voit ratkaista tämän ongelman tässä tasossa. Sinun on käytettävä lainausmerkkejä kaikelle, mitä aiot tulostaa.
+
+                    ### Harjoitus
+                    Kopioi esimerkkikoodi ja viimeistele se lisäämällä lainausmerkit rivien 1 ja 2 tyhjiin kohtiin.
+                    Rivin 3 ja 4 tyhjiä kohtia ei tule korvata lainausmerkeillä, vaan `{sleep}` ja `{clear}` komennoilla. Saatko sen toimimaan?
+
+                    ### Harjoitus 2
+                    Palaa edelliselle tasolle ja kopioi tarinakoodisi. Tee koodi toimivaksi tässä tasossa lisäämällä lainausmerkit oikeisiin kohtiin.
+                    Huom: Oman tarinasi muuttujien tulee olla lainausmerkkien ulkopuolella. Aivan kuten esimerkkikoodin toisella rivillä. Sillä rivillä muuttuja nimi on lainausmerkkien ulkopuolella.
                 example_code: |
                     ```
-                    name {is} Hans
-                    {print}  _ The name of the main character is _ name
-                    {print} name  _ is now going to walk in the woods _
-                    {print} name _ is a bit scared _
-                    animals {is} 🦔, 🐿, 🦉, 🦇
-                    {print} _ He hears the sound of a _ animals {at} {random}
-                    {print} name _ is afraid this is a haunted forest _
+                    nimi {is} {ask} _ Mikä sinun nimi on? _
+                    {print}  _ Päähahmo on nimeltään _ nimi
+                    _
+                    _
+                    {print} nimi _ on nyt lähdössä metsään kävelylle _
+                    {print} nimi _ on vähän peloissaan _
+                    eläimet {is} 🦔, 🐿, 🦉, 🦇
+                    {print} _ Hän kuulee _ animals _ äänen _ {at} {random}
+                    {print} name _ pelkää, että metsässä kummittelee _
                     ```
-                start_code: '{print} ''Your story will be printed here!'''
+                start_code: '{print} ''Tarinasi tulostetaan tänne!'''
             5:
                 story_text: |
-                    In this level you can program different endings, which will make your story even more fun.
+                    Tällä tasolla voit ohjelmoita erilaisia loppuja, jotka tekevät tarinastasi vieläkin hauskemman.
+                    Esimerkkikoodissa voit nähdä, kuinka voit tehdä 2 erilaista loppua.
 
-                    ### Exercise
-                    Think of two endings for your story, for example:
+                    ### Harjoitus 1
+                    Kirjoita uusi lyhyt tarina, jossa on vähintään 6 koodiriviä valitsemastasi aiheesta.
+                    Etkö keksi mistä kirjoittaa? Valitse jokin näistä aiheista: supersankari, tylsä koulupäivä, autio saarelle joutuminen.
 
-                    - The princess is walking through the forest
-                    - She runs into a monster
+                    Anna pelaajalle nyt mahdollisuus valita onnellinen vai huono loppu, kuten esimerkkikoodissa.
+                    Ohjelmoi molemmat loput.
 
-                    - Happy ending: She takes her sword and the monster quickly runs away
-                    - Bad Ending: The monster eats the princess
-
-                    You can also ensure that a name can be entered again. That works just like in the previous levels. You can combine that with an `{if}`, and then you have already made a whole program!
+                    ### Harjoitus 2
+                    Kopioi tarina, jonka olet luonut omaan tarinaseikkailuusi aiemmilla tasoilla.
+                    Keksi tapa lisätä ainakin 2 `{if}` ja `{else}` komentoa tarinaasi.
+                    Tämä voi olla onnellisella tai huonolla lopulla, mutta voit myös yrittää löytää muita tapoja sisällyttää komennot.
                 example_code: |
                     ```
-                    name {is} {ask} 'Who is walking in the forest?'
-                    {print} name 'walks through the forest'
-                    {print} name 'encounter a monster'
-                    end {is} {ask} 'Would you like a good or a bad ending?'
-                    {if} end {is} good {print} name 'takes the sword and the monster quickly runs away'
-                    {else} {print} 'The monster eats' name
+                    nimi {is} {ask} 'Kuka kävelee metsässä?'
+                    {print} nimi 'kävelee metsän halki'
+                    {print} nimi 'kohtaa hirviön'
+                    loppu {is} {ask} 'Haluatko, että loppu on hyvä vai huono?'
+                    {if} loppu {is} hyvä {print} nimi 'tarttuu miekkaan ja hirviö juoksee vikkelään pois'
+                    {else} {print} nimi 'joutuu hirviön syömäksi'
                     ```
-                start_code: '{print} ''Here your story will start!'''
+                start_code: '{print} ''Tästä tarinasi alkaa!'''
             7:
                 story_text: |
-                    In a story, someone says words several times. For example, when someone calls for help or sings a song.
-                    You can put such repetitions in your story, in this level with `{repeat}`.
+                    Tarinassa joku sanoo sanan monta kertaa. Esimerkiksi, kun joku huutaa apua tai laulaa laulun.
+                    Voit laittaa sellaisia toistoja tarinaasi tällä tasolla käyttämällä `{repeat}` komentoa.
 
-                    ### Exercise
-                    Can you make your own story with repitition?
+                    ### Harjoitus
+                    Lisää toistoja tarinaasi. Mene takaisin tallennettuihin ohjelmiisi, valitse tarinaohjelmasi tasolta 6 ja etsi rivi, joka sisältää `{print}` ja toista se!
                 example_code: |
                     ```
-                    {print} 'The prince kept calling for help'
-                    {repeat} 5 {times} {print} 'Help!'
-                    {print} 'Why is nobody helping me?'
+                    {print} 'Prinssi huusi apua pitkään'
+                    {repeat} 5 {times} {print} 'Apua!'
+                    {print} 'Miksei kukaan auta minua?'
                     ```
-                start_code: '{repeat} 5 {times} {print} ''Help!'''
+                start_code: '{repeat} 5 {times} {print} ''Apua!'''
             8:
                 story_text: |
-                    In this level you can use multiple lines in your {if} commands, this way you can upgrade your happy or sad ending!
+                    Tällä tasolla voit käyttää useita rivejä `{if}` komennoissasi, tällä tavoin voit päivittää hyvän tai huonon loppusi!
 
-                    ### Exercise
-                    Can you make your own story with two different endings?
+                    ### Harjoitus 1
+                    Esimerkkikoodi näyttää kaksi erilaista loppua; yhden, jossa hahmot hyppäävät aikakoneeseen ja yhden, jossa he eivät tee niin.
+
+                    Täydennä tyhjät kohdat vähintään yhdellä lauseella per loppu.
+                    **Lisätehtävä** Tee tarinasta pidempi. Mitä tarinassa tapahtuu? Voit myös lisätä toisen `{ask}` eri vaihtoehdoilla.
+
+                    ### Harjoitus 2
+                    Mene takaisin tallennettuihin ohjelmiin, valitse tarinaohjelmasi tasolta 5. Nyt kirjoita hyvä ja huono loppu joista kumpikin on vähintään 3 riviä pitkä!
                 example_code: |
                     ```
-                    {print} 'OH NO! The T-rex is closing in!'
-                    end = {ask} 'Do you want a happy or a sad ending?'
-                    {if} end {is} happy
-                        {print} 'Just in time Richard jumps back into the time machine!'
-                        {print} 'Michael types in the code and...'
-                        {print} '💥ZAP!💥'
-                        {print} 'They are back in their garage'
+                    {print} 'VOI EI! Tyrannosaurus rex lähestyy!'
+                    loppu = {ask} 'Haluatko, että loppu on hyvä vai huono?'
+                    {if} loppu {is} hyvä
+                        {print} 'Juuri viime hetkellä, Riku hyppää takaisin aikakoneeseen!'
+                        {print} _
                     {else}
-                        {print} 'Michael yells COME ON RICHARD! RUN FASTER!'
-                        {print} 'But Richard is too slow...'
-                        {print} 'The T-rex closes in and eats him in one big bite!🦖'
+                        {print} 'Voi ei! Riku on liian hidas...'
+                        {print} _
                     ```
-                start_code: '# place your code here'
+                start_code: '# kirjoita koodisi tähän'
             9:
                 story_text: |
-                    In this level you can use nesting to put `{if}`, `{repeat}` or `{for}` commands inside other `{if}`, `{repeat}` or `{for}` commands. This gives you many options and really helps you to make your story interactive.
+                    Tällä tasolla voit käyttää `{if}` ja `{repeat}` komentoja muiden `{if}` ja `{repeat}` komentojen sisällä.
+                    Tämä avaa sinulle monia eri mahdollisuuksia ja auttaa tekemään tarinastasi vuorovaikutteisen.
+
+                    ### Harjoitus 1
+                    Viimeistele koodi niin, että `{if}` toimii kunnolla.
+
+                    ### Harjoitus 2
+                    Lisää `{if}` ja `{else}` tarinan osaan, jossa Roosa palaa kotiin myös.
+
+                    ### Harjoitus 3
+                    Mene takaisin tason 8 tarinaasi ja käytä vähintään kahta `{if}` lausekette toissen `{if}` sisällä.
                 example_code: |
                     ```
-                    {print} 'Robin is walking downtown'
-                    location = {ask} 'Is Robin going into a shop, or does she go home?'
-                    {if} location {is} shop
-                        {print} 'She enters the shop.'
-                        {print} 'Robin sees an interesting looking book'
-                        book = {ask} 'Does Robin buy the book?'
-                        {if} book {is} yes
-                            {print} 'Robin buys the book and goes home'
+                    {print} 'Roosa kävelee kaupungilla'
+                    sijainti = {ask} 'Onko Roosan määränpäänä kauppa vai koti?'
+                    {if} sijainti {is} kauppa
+                        {print} 'Hän menee kauppaan.'
+                        {print} 'Roosa näkee mielenkiintoisen kirjan'
+                        kirja = {ask} 'Ostaako Roosa kirjan?'
+                        {if} kirja {is} joo
+                            {print} 'Roosa ostaa kirjan ja lähtee kotiin'
                         {else}
-                            {print} 'Robin leaves the shop and goes home'
+                            {print} 'Roosa poistuu kaupasta ja lähtee kotiin'
                     {else}
-                        {print} 'Robin goes home'
+                        {print} 'Roosa lähtee kotiin'
                     ```
-                start_code: '# place your code here'
+                start_code: '# kirjoita koodisi tähän'
             10:
                 story_text: |
-                    In this level you can use the {for} command in your story. In this way you could easily program the children's book 'brown bear, brown bear, what do you see'.
+                    Tällä tasolla voit käyttää `{for}` komentoa tarinassasi. Tällä tavalla pystyt helposti ohjelmoimaan lasten kirjan 'Brown bear, Brown bear, what do you see'.
+
+                    ### Harjoitus
+
+                    Vilkaise <a href="https://www.yonkerspublicschools.org/cms/lib/NY01814060/Centricity/Domain/1621/Brown%20Bear%20Book.pdf"> tarinaa</a> jos et tunne sitä, ja varmista, että tulostat sen kuten se on kirjassa.
                 example_code: |
                     ```
-                    animals = red bird, black sheep, green frog, yellow duck, little child
-                    {print} 'brown bear'
-                    {print} 'brown bear'
+                    eläimet = _ , _ , _ 
+                    {print} 'Brown bear, Brown bear'
                     {print} 'What do you see?'
-                    {for} animal {in} animals
-                        {print} 'I see a ' animal ' looking at me'
-                        {print} animal
-                        {print} animal
-                        {print} 'What do you see?'
-                    {print} 'I see all the animals looking at me!'
                     ```
-                start_code: '# place your code here'
+                start_code: '# kirjoita koodisi tähän'
             12:
-                story_text: In this level you can use the quotation marks to save multiple words in a variable.
+                story_text: "Tällä tasolla lainausmerkkejä tarvitaan tallentamaan useita sanoja muuttujaan.\n\n### Harjoitus\n\nEtsi tarina aiemmalta tasolta, mikä tahansa taso käy. Nyt, varmista, että lainausmerkit lisätään oikeisiin paikkoihin."
                 example_code: |
                     ```
-                    name = 'The Queen of England'
-                    {print} name ' was eating a piece of cake, when suddenly...'
+                    nimi = 'Englannin kuningatar'
+                    {print} nimi ' söi palan kakkua, kun yhtäkkiä...'
                     ```
-                start_code: '# place your code here'
+                start_code: '# kirjoita koodisi tähän'
             13:
                 story_text: |
-                    By using the `{and}` and `{or}` commands, you can shorten your stories. For example, check out the dragon story.
+                    Käyttämällä `{and}` ja `{or}` komentoja voit tehdä tarinoistasi monipuolisempia. Voit kysyä kaksi kysymystä ja reagoida vastausyhdistelmään.
 
-                    ### Exercise
-                    Can you make your own adventure minigame like this?
+                    ### Harjoitus 1
+                    Katso esimerkkikoodia ja viimeistele se. Sitten lisää vähintään 2 `{if}` koodia `{and}` ja `{or}` kanssa.
+
+                    ### Harjoitus 2
+                    Etsi tarina aiemmasta tasosta ja lisää yksi `{and}` tai `{or}`.
                 example_code: |
                     ```
-                    sword = 'lost'
-                    game = 'on'
-                    {print} 'Our hero is walking through the forest'
-                    {print} 'The path splits two ways'
-                    {for} i {in} {range} 0 {to} 2
-                        {if} game {is} 'on'
-                            path = {ask} 'Which path should she choose?'
-                            {if} path {is} 'left' {and} sword {is} 'found'
-                                {print} 'Our hero comes across a dragon!'
-                                {print} 'Luckily our hero has a sword to defeat the beast!'
-                                game = 'over'
-                            {if} path {is} 'left' {and} sword {is} 'lost'
-                                {print} 'Our hero finds a dragon, but she doesnt have any weapons!'
-                                {print} 'Our hero is beaten by the dragon...'
-                                {print} 'Try again'
-                                game = 'over'
-                            {if} path {is} 'right' {and} sword {is} 'found'
-                                {print} 'You have already found the sword. There is nothing left here.'
-                                {print} 'She walks back'
-                            {if} path {is} 'right' {and} sword {is} 'lost'
-                                {print} 'Our hero finds a sword'
-                                {print} 'This could come in very handy'
-                                sword = 'found'
+                    {print} 'Sankarimme kävelee metsän halki'
+                    {print} 'Polku haarautuu'
+                    polku = {ask} 'Kumman polun hän valitsee?'
+                    ase = {ask} 'Minkä aseen hän vetää?'
+                    {if} polku {is} 'vasen' {and} ase {is} 'miekka'
+                        _
                     ```
-                start_code: '# place your code here'
+                start_code: '# kirjoita koodisi tähän'
             15:
                 story_text: |
-                    Using the `{while}` loop can make your stories more interesting. For example, you can use `{while} game {is} 'on'` so you can play until the game is over.
-                    Or you can use `{while} sword {is} 'lost'` so the player can't continu the game until they have found something.
+                    Jos käytät `{while}` looppia voit tehdä tarinoistasi mielenkiintoisempia. Esimerkiksi, voit käyttää `{while} game {is} 'on'` jolloin voit pelata kunnes peli päättyy.
+                    Tai voit käyttää `{while} sword {is} 'lost'` jolloin pelaaja ei voi jatkaa peliä ennenkuin hän on löytänyt jotain.
                 example_code: |
                     ```
-                    keys = 'lost'
-                    {print} 'You are standing in your garden and you have lost your keys.'
-                    {print} 'Where do you want to look for them?'
-                    {print} 'You can choose: tree, flowerbed, rock, postbox'
-                    {while} keys == 'lost'
-                        location = {ask} 'Where do you want to look?'
-                        {if} location == 'flowerbed'
-                            {print} 'Here they are!'
-                            keys = 'found'
+                    avaimet = 'kateissa'
+                    {print} 'Seisot puutarhassasi ja olet hukannut avaimesi.'
+                    {print} 'Mistä haluat etsiä niitä?'
+                    {print} 'Voit valita: puu, kukkapenkki, kivi, postilaatikko'
+                    {while} avaimet == 'kateissa'
+                        sijainti = {ask} 'Mistä haluat etsiä?'
+                        {if} sijainti == 'kukkapenkki'
+                            {print} 'Täällä ne ovat!'
+                            avaimet = 'löydetty'
                         {else}
-                            {print} 'Nope they are not at the ' location
-                    {print} 'Now you can enter the house!'
+                            {print} sijainti ' - Ne eivät olleet siellä.'
+                    {print} 'Nyt voit mennä taloon!'
                     ```
-                start_code: '# place your code here'
+                start_code: '# kirjoita koodisi tähän'
             18:
                 story_text: |
-                    We are going to print another story, but now we have to use brackets with `{print}`.
+                    Nyt tulostamme uuden tarinan, mutta tällä kertaa meidän täytyy käyttää sulkeita `{print}` komennon kanssa.
 
-                    ### Exercise 1
-                    Create a story of at least 5 sentences. You don't have to use 'name' just yet.
+                    ### Harjoitus 1
+                    Luo tarina jossa on ainakin 5 lausetta. Sinun ei tarvitse käyttää 'nimi' vielä.
                 example_code: |
                     ```
-                    {print}('Welcome to this story!')
+                    {print}('Tervetuloa tähän tarinaan!')
                     ```
                 story_text_2: |
-                    ### Exercise 2
-                    We have already prepared an `{input}` for you. First, use the `name` variable in your story.
-                    Then add a second `{ask}` and use that variable as well.
-                    Tip: Remember the commas in a `{print}` between text and variables!
+                    ### Harjoitus 2
+                    Me olemme valmistelleet `{input}` sinua varten. Ensin, käytä `name` muuttujaa tarinassasi.
+                    Sitten lisää toinen `{ask}` ja käytä sitä muuttujaa myös.
+                    Vinkki: Muista pilkut `{print}` komennossa tekstin ja muuttujien välillä!
                 example_code_2: |
                     ```
-                    naam = {input}("What's your name?")
-                    {print}('Welcome to this story!')
+                    nimi = {input}("Mikä on nimesi?")
+                    {print}('Tervetuloa tähän tarinaan!')
                     ```
-                start_code: '# Schrijf jouw code hier'
+                start_code: '# kirjoita koodisi tähän'
     add_remove_command:
         name: '{add} {to} & {remove} {from}'
         default_save_name: add_remove_command
@@ -610,7 +622,7 @@ adventures:
                     ```
                 start_code: '# place your code here'
             13:
-                story_text: |4
+                story_text: |2
 
                     ### Exercise 1
                     Let's make the practice program a bit harder. The player now has to answers two questions correctly. Fill out the blanks to complete the program.
@@ -708,8 +720,7 @@ adventures:
         description: Tason selitys
         levels:
             1:
-                story_text: "Tasolla 1 voit käyttää komentoja `{print}`, `{ask}` ja `{echo}`.\n Kirjoita koodisi ohjelmointikenttään. Voit myös painaa vihreää painiketta esimerkkikoodilohkossa, niin koodi kirjoitetaan puolestasi!\nKokeile koodia itse ohjelmointikentän alla olevalla vihreällä \"Suorita\
-                    \ koodi\" -painikkeella.\n \nVoit tulostaa tekstiä näytölle komennolla `{print}`.     \n"
+                story_text: "Tasolla 1 voit käyttää komentoja `{print}`, `{ask}` ja `{echo}`.\n Kirjoita koodisi ohjelmointikenttään. Voit myös painaa vihreää painiketta esimerkkikoodilohkossa, niin koodi kirjoitetaan puolestasi!\nKokeile koodia itse ohjelmointikentän alla olevalla vihreällä \"Suorita koodi\" -painikkeella.\n \nVoit tulostaa tekstiä näytölle komennolla `{print}`.     \n"
                 start_code: '{print} Hei maailma!'
             2:
                 story_text: |
@@ -760,7 +771,7 @@ adventures:
                     nimi {is} {ask} 'Mikä on nimesi?'
                     {if} nimi {is} Hedy {print} 'hienoa!' {else} {print} 'plääh'
             6:
-                story_text: |4
+                story_text: |2
                      Tällä tasolla opit jotain uutta: voit nyt myös suorittaa laskutoimituksia.
 
                      Yhteenlaskut ovat helppoja, voit kirjoittaa ne kuten matematiikassa, esimerkiksi `5 + 5`. Vähennyslaskut toimivat samalla tavalla, esimerkiksi `5 - 5`.
@@ -866,8 +877,7 @@ adventures:
                     {print} 'desimaalinumeroissa on nyt käytettävä pistettä'
                     {print} 2.5 + 2.5
             13:
-                story_text: We are now going to learn `{and}` and `{or}`! If you want to check two statements, you don't have to use two {if}'s but can use `{and}` and `{or}`. If you use `{and}`, both statements, left and right of the `{and}` need to be true. We can also use `{or}`. Then only one statement
-                    needs to be correct.
+                story_text: We are now going to learn `{and}` and `{or}`! If you want to check two statements, you don't have to use two {if}'s but can use `{and}` and `{or}`. If you use `{and}`, both statements, left and right of the `{and}` need to be true. We can also use `{or}`. Then only one statement needs to be correct.
                 example_code: |
                     ```
                     name = {ask} 'what is your name?'
@@ -1012,7 +1022,7 @@ adventures:
                     {if} throw {is} earthworm points = points + 5 {else} points = points + throw
                     {print} 'those are' points ' point'
                     ```
-                example_code_2: |4
+                example_code_2: |2
 
                     Did you manage to calculate the score for 8 dice? That required a lot of cutting and pasting, right? We are going to make that easier in level 7!
                 start_code: '{print} ''What will the die indicate this time?'''
@@ -1263,7 +1273,7 @@ adventures:
                 story_text: |
                     In the previous levels you've created your first fortune telling machine, but Hedy couldn't really predict anything, only {echo}.
                     In this level you can use a variable and the `{at} {random}` command to really let Hedy choose an answer for you. Check out this code for instance:
-                example_code: |4
+                example_code: |2
 
                     In this example the player can {ask} Hedy a yes-no question and Hedy will pick a random answer for you.
                     ```
@@ -2450,7 +2460,7 @@ adventures:
         description: Create your own virtual restaurant
         levels:
             1:
-                story_text: |4
+                story_text: |2
                      In level 1 you can make your own virtual restaurant and take your guests' orders.
                 example_code: |
                     ```
@@ -2559,7 +2569,7 @@ adventures:
             6:
                 story_text: |
                     In this level you can use maths to calculate the total price of your customer's order, which can make your virtual restaurant more realistic.
-                example_code: |4
+                example_code: |2
 
                     You can make a simple restaurant code, like this:
                     ```
@@ -2778,7 +2788,7 @@ adventures:
                     ```
                 start_code: '# place your code here'
             3:
-                story_text: |4
+                story_text: |2
 
                     In this level we can enter lists and choose things from them.
                     You first make a list with `{is}`. Then you can let the computer choose something from the list with `{at} {random}`.
