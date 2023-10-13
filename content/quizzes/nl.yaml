@@ -3457,10 +3457,10 @@ levels:
             code: |-
                 {while} toilet == 'bezet'
                     licht = 'aan'
-                    lucgtverfrisser_sprayt = 'ja'
+                    luchtverfrisser_sprayt = 'ja'
                     {sleep} 60
-                else
-                    licht = 'uit'
+                licht = 'uit'
+                luchtverfrisser_sprayt = 'nee'
             mp_choice_options:
             -   option: De lichten en luchtverfrisser gaan uit na 1 minuut
                 feedback: Fout!
