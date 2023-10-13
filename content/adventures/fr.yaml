@@ -11,7 +11,7 @@ adventures:
                     À la première ligne, utilise `{ask}` pour demander le nom du personnage de ton histoire.
 
                     Après la première ligne, commence avec `{print}` si la phrase a besoin d'être affichée.
-                    Où utilise `{echo}` si tu veux que le nom de ton personnage principal soit à la fin de la phrase.
+                    Ou utilise `{echo}` si tu veux que le nom de ton personnage principal soit ajouté à la fin de la phrase.
                 example_code: |
                     ```
                     {ask} Le nom du personnage principal de cette histoire est
@@ -338,15 +338,15 @@ adventures:
             1:
                 story_text: |
                     ## La commande `{ask}`
-                    Maintenant que tu sais utiliser la commande `{print}`, tu es prêt pour apprendre la commande suivante : `{ask}`. Avec la commande `{ask}`, tu peux poser une question. Fais un essai :
+                    Maintenant que tu sais utiliser la commande `{print}`, passons à la commande suivante : `{ask}`. Avec la commande `{ask}`, tu peux poser une question. Fais un essai :
                 example_code: |
                     ```
                     {print} Salut !
-                    {ask} quel est ton nom ?
+                    {ask} Quel est ton nom ?
                     ```
                 story_text_2: |
                     ## La commande `{echo}`
-                    Si tu veux que l'ordinateur te répète ta réponse, tu peux utiliser la commande `{echo}`. Attention, car la réponse est ajoutée à la fin de la phrase, soit, dans cet exemple, après salut.
+                    Si tu veux que l'ordinateur te répète ta réponse, tu peux utiliser la commande `{echo}`. La réponse sera ajoutée à la fin de la phrase, soit dans cet exemple, après Salut.
                 example_code_2: |
                     ```
                     {print} Salut !
@@ -355,7 +355,7 @@ adventures:
                     ```
                 story_text_3: |
                     ### Exercice
-                    Essayer les commandes `{ask}` et `{echo}`. Tout d'abord, complète les blancs pour faire fonctionner ce programme.
+                    Essaie les commandes `{ask}` et `{echo}`. Tout d'abord, complète les espaces vides pour faire fonctionner ce programme.
                     Ensuite pose 2 autres questions avec la commande `{ask}`, après chaque `{ask}` utilise `{echo}` pour afficher la réponse à l'écran.
                 example_code_3: |
                     ```
@@ -693,7 +693,7 @@ adventures:
         description: Explication du niveau
         levels:
             1:
-                story_text: "Bienvenue chez Hedy ! \n\nAu niveau 1, tu peux commencer à raconter une histoire.\nEssaye toi-même le code ci-dessous avec le bouton vert « Exécuter le code » en dessous la zone de programmation.\n\nPrêt ? Ensuite, rends-toi à l'onglet suivant pour apprendre ta première commande !\n"
+                story_text: "Bienvenue chez Hedy ! Au niveau 1, tu peux commencer par afficher une histoire.\n\nEssaye toi-même le code ci-dessous avec le bouton vert « Exécuter le code » en-dessous de la zone de programmation.\n\nOn y va ? Rends-toi à l'onglet suivant pour apprendre ta première commande !\n"
                 start_code: '{print} bonjour le monde !'
             2:
                 story_text: |
@@ -1241,24 +1241,24 @@ adventures:
         levels:
             1:
                 story_text: |
-                    As-tu déjà été à un carnaval et u ton futur prédit par une voyante ? Ou déjà joué avec une boule de cristal ?
+                    As-tu déjà été à une fête foraine et eu ton futur prédit par une voyante ? Ou as-tu déjà joué avec une boule de cristal ?
                     Alors tu sais probablement qu'elles ne peuvent pas réellement prédire ton futur, mais que c'est quand même amusant d'y jouer !
 
-                    Dans les nivaux à venir tu pourras apprendre comment créer ta propre machine à prédire l'avenir.
-                    Au niveau 1 tu peux commencer en douceur en laissant Hedy se présenter elle-même comme une voyante et la laisser `{echo}` les réponses des joueurs.
+                    Dans les niveaux à venir tu pourras apprendre comment créer ta propre machine à prédire l'avenir.
+                    Au niveau 1 tu peux commencer en douceur en laissant Hedy se présenter elle-même comme une voyante qui `{echo}` les réponses qu'on lui donne.
                     Comme ceci :
                 example_code: |
                     ```
                     _ Bonjour, je suis Hedy la voyante
                     _ Qui es-tu ?
-                    _ Laisse moi regarder dans ma boule de cristal
-                    _ Je vois… je vois…
-                    _ ton nom est
+                    _ Laisse-moi regarder dans ma boule de cristal
+                    _ Je vois… Je vois…
+                    _ Ton nom est
                     ```
                 story_text_2: |
                     ### Exercice
-                    Copie l'exemple de code dans la zone de programmation et complète les espaces vides roses pour faire marcher le code.
-                    **En plus** Change le code pour que la voyante, non seulement prédise ton nom, mais également ton âge, ton équipe de sport favori et quelque chose d'autre à ton sujet.
+                    Copie l'exemple de code dans la zone de programmation et complète les espaces vides pour faire marcher le code.
+                    **Bonus** Change le code pour que la voyante prédise non seulement ton nom, mais aussi ton âge, ton équipe de sport favorite ou quelque chose d'autre à ton sujet.
                 start_code: '# écris ton code ici'
             3:
                 story_text: |
@@ -1440,30 +1440,30 @@ adventures:
             1:
                 story_text: |
                     Dans cette aventure, tu vas essayer de faire un jeu dans lequel tu dois t'échapper d'une maison hantée en choisissant la bonne porte.
-                    Si tu choisis la bonne porte, tu survis, sinon un terrible monstre pourrait...
+                    Si tu choisis la bonne porte, tu survivras, sinon un terrible monstre pourrait…
 
-                    Au premier niveau, on commence notre jeu de la maison hantée en créant une histoire d'épouvante et en demandant au joueur quel monstre il imaginerait dans cette maison.
+                    Au premier niveau, on commence notre jeu de la maison hantée en créant une histoire d'épouvante et en demandant à la joueuse ou au joueur quel monstre doit apparaître dans cette maison.
                 example_code: |
                     ```
-                    {print} Comme suis-je arrivé ici ?
+                    {print} Qu'est-ce que je fais ici ?
                     {print} Je me souviens de mon ami me disant d'entrer dans ce vieux manoir…
                     {print} et soudain, tout est devenu noir.
-                    {print} Mais comment me suis-je retrouvé sur le sol… ?
-                    {print} Ma tête me fait mal comme si j'avais été frappé par une batte de baseball
-                    {print} Quel est ce bruit ?
-                    {print} Oh non ! J'ai l'impression que je ne suis pas seul dans cette maison !
-                    {print} Il faut que je m'échappe d'ici !
+                    {print} Mais comment est-ce que j'ai atterri sur le sol… ?
+                    {print} Ma tête me fait mal comme si j'avais pris un coup de batte de baseball !
+                    {print} Quel est ce bruit ?
+                    {print} Oh non ! J'ai l'impression qu'il n'y a pas que moi dans cette maison !
+                    {print} Il faut que je m'échappe d'ici !
                     {print} Il y a 3 portes devant moi…
-                    {ask} Quel porte choisis-tu ?
+                    {ask} Quel porte choisis-tu ?
                     {echo} Je choisis la porte
-                    {print} … ?
+                    {print} … ?
                     ```
                 story_text_2: |
                     ### Exercice
                     Copie le code d'exemple dans la zone de programmation en cliquant sur le bouton jaune.
                     Maintenant finis l'histoire en ajoutant au moins 5 lignes de code.
                     Rappelle-toi de commencer chaque ligne de code avec la commande `{print}`.
-                start_code: '{print} Comment suis-je arrivé ici ?'
+                start_code: '{print} Qu''est-ce que je fais ici ?'
             2:
                 story_text: |
                     Dans cette maison hantée tu peux choisir tes monstres avec des emojis. Bien sûr tu peux aussi utiliser des mots.
@@ -1956,10 +1956,10 @@ adventures:
                     ```
                 story_text_2: |
                     ### Exercice
-                    Copies l'exemple de code dans la zone de programmation en cliquant sur le bouton jaune.
-                    Fais dire au perroquet une question différente en écrivant quelque chose dans l'espace vide de l'exemple !
+                    Copie l'exemple de code dans la zone de programmation en cliquant sur le bouton jaune.
+                    Fais poser au perroquet une question différente en écrivant quelque chose dans l'espace vide de l'exemple !
 
-                    **En plus** Tu peux aussi faire poser plusieurs questions au perroquet. Écrits plusieurs autres lignes de code à la suite de ce que tu as déjà écrit.
+                    **Bonus** Tu peux aussi faire poser plusieurs questions au perroquet. Écris plusieurs autres lignes de code à la suite de ce que tu as déjà écrit.
                 example_code_2: |
                     ```
                     {print} Je suis Hedy le perroquet
@@ -2154,7 +2154,7 @@ adventures:
                     ```
                 story_text_2: |
                     ### Exercice
-                    Dans Hedy tu as des exercices pour chaque aventure. Un exercice te permet de t'entrainer aux nouvelles commandes et concepts, et te permet de jouer avec les codes d'exemple.
+                    Dans Hedy tu as des exercices pour chaque aventure. Un exercice te permet de t'entraîner aux nouvelles commandes et concepts, et te permet de jouer avec les codes d'exemple.
                     Dans cet exercice, tu verras un espace vide rose. Tu dois écrire quelque chose à la place de cet espace vide pour que ton code fonctionne.
 
                     Complète l'espace vide en écrivant la commande `{print}` et ajoute cinq autres lignes de code. Chaque ligne doit commencer par la commande `{print}`.
@@ -2468,12 +2468,12 @@ adventures:
                     _ Que voulez-vous commander ?
                     {echo} Ainsi vous voulez commander
                     {print} Merci pour votre commande !
-                    {print} c'est bientôt prêt !
+                    {print} C'est bientôt prêt !
                     ```
                 story_text_2: |
                     ### Exercice
                     Copie l'exemple de code dans la zone de programmation en cliquant sur le bouton jaune.
-                    Pour commencer, complète avec la bonne commande dans l'espace vide rose pour faire marcher le code.
+                    Pour commencer, complète avec la bonne commande dans l'espace vide pour faire marcher le code.
                     Ensuite, ajoute au moins 4 lignes de code supplémentaires au programme du restaurant.
                     Demande au client ce qu'il désire boire et demande-lui s'il veut payer en liquide ou avec la carte.
                     Enfin, pense à une façon sympa de dire au revoir à ton client.
@@ -2517,16 +2517,16 @@ adventures:
                     ```
                 story_text_2: |
                     ### Exercice
-                    Maintenant, fait ta propre version du restaurant aléatoire.
-                    Fait ta propre liste d'entrée, plats, desserts, boisson et prix.
+                    Maintenant, fais ta propre version du restaurant aléatoire.
+                    Fais ta propre liste d'entrées, plats, desserts, boissons et prix.
                     Ensuite, utilise les commandes `{print}` et `{at} {random}` pour dire au client son menu pour ce soir.
                 example_code_2: |
                     ```
                     {print} Bienvenue dans le restaurant aléatoire !
                     entrées {is} _
-                    plat {is} _
-                    dessert {is} _
-                    boisson {is} _
+                    plats {is} _
+                    desserts {is} _
+                    boissons {is} _
                     prix {is} _
                     _
                     ```
@@ -2537,9 +2537,10 @@ adventures:
 
                     ### Exercice
                     Ajoute les guillemets à ce code pour le faire fonctionner ! Attention : les variables ne doivent pas être entourées de guillemets.
+                    Ensuite, utilise la commande `{clear}` pour ne montrer qu'une ligne à la fois dans ton écran de sortie.
 
                     ### Exercice 2
-                    Retourne au niveau précédent et copie ton code du restaurant. Fais fonctionner ce code en utilisant les guillemets aux bons endroits.
+                    Retourne au niveau précédent et copie ton code du restaurant. Fais fonctionner ce code dans ce niveau en ajoutant des guillemets aux bons endroits et ajoute des commandes  `{clear}`.
                 example_code: |
                     ```
                     _ Ajoute les guillemets à ce code _
@@ -2751,7 +2752,7 @@ adventures:
                     ```
                 story_text_2: |
                     ### Exercice
-                    Au lieu d'utiliser des mots, tu peux aussi utiliser les emojis : ✊✋✌️
+                    Au lieu d'utiliser des mots, tu peux aussi utiliser des emojis : ✊✋✌️
                     Peux-tu écrire un code utilisant des emojis ?
                 example_code_2: |
                     ```
