@@ -856,7 +856,8 @@ adventures:
                     {print} 'números decimais agora precisam de um ponto'
                     {print} 2.5 + 2.5
             13:
-                story_text: Agora vamos aprender `{and}` e `{or}`! Se você quiser verificar duas declarações, você não precisa usar dois `{if}`s, mas pode usar `{and}` e `{or}`. Se você usar `{and}`, ambas as declarações, à esquerda e à direita de `{and}` precisam ser verdadeiras. Também podemos usar `{or}`. Então, apenas uma afirmação precisa estar correta.
+                story_text: Agora vamos aprender `{and}` e `{or}`! Se você quiser verificar duas declarações, você não precisa usar dois `{if}`s, mas pode usar `{and}` e `{or}`. Se você usar `{and}`, ambas as declarações, à esquerda e à direita de `{and}` precisam ser verdadeiras. Também podemos usar
+                    `{or}`. Então, apenas uma afirmação precisa estar correta.
                 example_code: |
                     ```
                     nome = {ask} 'qual o seu nome?'
@@ -2573,14 +2574,7 @@ adventures:
             10:
                 story_text: |
                     In this level you'll learn how to easily {ask} your guests' orders in a short code.
-                example_code: |
-                    ```
-                    courses = appetizer, main course, dessert
-                    {for} course {in} courses
-                        {print} 'What is your order for ' course '?'
-                        _ 
-                        _
-                    ```
+                example_code: "```\ncourses = appetizer, main course, dessert\n{for} course {in} courses\n    {print} 'What is your order for ' course '?'\n    _ \n    _\n```\n"
                 story_text_2: |
                     ### Exercise
                     Of course, you could also order for multiple people!

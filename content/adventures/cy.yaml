@@ -719,7 +719,8 @@ adventures:
         description: Esboniad lefel
         levels:
             1:
-                story_text: "In Level 1 you can use the commands `{print}`, `{ask}` and `{echo}`.\n Type your code in the programming field. Or press the green button in the example code block, and the code will be typed for you!\nTry the code yourself with the green 'Run code' button under the programming field.\n\nYou can print text to the screen using the `{print}` command.     \n"
+                story_text: "In Level 1 you can use the commands `{print}`, `{ask}` and `{echo}`.\n Type your code in the programming field. Or press the green button in the example code block, and the code will be typed for you!\nTry the code yourself with the green 'Run code' button under the programming\
+                    \ field.\n\nYou can print text to the screen using the `{print}` command.     \n"
                 start_code: '{print} helo byd!'
             2:
                 story_text: |
@@ -874,7 +875,8 @@ adventures:
                     {print} 'decimal numbers now need to use a dot'
                     {print} 2.5 + 2.5
             13:
-                story_text: We are now going to learn `{and}` and `{or}`! If you want to check two statements, you don't have to use two {if}'s but can use `{and}` and `{or}`. If you use `{and}`, both statements, left and right of the `{and}` need to be true. We can also use `{or}`. Then only one statement needs to be correct.
+                story_text: We are now going to learn `{and}` and `{or}`! If you want to check two statements, you don't have to use two {if}'s but can use `{and}` and `{or}`. If you use `{and}`, both statements, left and right of the `{and}` need to be true. We can also use `{or}`. Then only one statement
+                    needs to be correct.
                 example_code: |
                     ```
                     name = {ask} 'what is your name?'
@@ -1569,7 +1571,8 @@ adventures:
                     ```
                 start_code: '# place your code here'
             9:
-                story_text: "In this level you can use nesting, which allows you to make the haunted house even more interactive!\n\n### Exercise\nNow it's very hard to win this game, can you make it easier to win?\nChange your code so it only has one wrong door and two correct doors instead of one correct door and two wrong ones? \nTip: This means changing the variable correct_door into wrong_door, and switching the `{if}` and `{else}` code.\nAnd of course you may also change the story and make it your own. Change the monsters or make it a happy game show where you get a gift!\n"
+                story_text: "In this level you can use nesting, which allows you to make the haunted house even more interactive!\n\n### Exercise\nNow it's very hard to win this game, can you make it easier to win?\nChange your code so it only has one wrong door and two correct doors instead of one correct\
+                    \ door and two wrong ones? \nTip: This means changing the variable correct_door into wrong_door, and switching the `{if}` and `{else}` code.\nAnd of course you may also change the story and make it your own. Change the monsters or make it a happy game show where you get a gift!\n"
                 example_code: |
                     ```
                     {print} 'Escape from the Haunted House!'
@@ -1593,7 +1596,9 @@ adventures:
                     ```
                 start_code: '{print} ''Escape from the haunted house!'''
             11:
-                story_text: "In this level we've changed the `{for}` command so we can tell the player where they are. \n\n### Exercise 1\nFinish the program so the player knows which room they are in.\n\n### Exercise 2\nMake the program into an adventure by following these steps:\n\n1. Make a list of choices (like: fight or flight)\n2. Make sure the player can choose an option with `{ask}`\n3. Is answer correct? Then they may proceed to the next monster. Do they give a wrong answer? Let the player know with a `{print}`. \n\n **(extra)** If you make a wrong choice, a monster is still shown! How could you change that?\n"
+                story_text: "In this level we've changed the `{for}` command so we can tell the player where they are. \n\n### Exercise 1\nFinish the program so the player knows which room they are in.\n\n### Exercise 2\nMake the program into an adventure by following these steps:\n\n1. Make a list of\
+                    \ choices (like: fight or flight)\n2. Make sure the player can choose an option with `{ask}`\n3. Is answer correct? Then they may proceed to the next monster. Do they give a wrong answer? Let the player know with a `{print}`. \n\n **(extra)** If you make a wrong choice, a monster is\
+                    \ still shown! How could you change that?\n"
                 example_code: |
                     ```
                     {print} 'Escape from the Haunted House!'
@@ -2617,7 +2622,9 @@ adventures:
                     **(extra)** Add even more items, as many options as you like!
                 start_code: '# place your code here'
             9:
-                story_text: "In this level you can use nesting to make your restaurant more realistic and more fun!\n\n### Exercise\nThe indentation was removed in the example code. \nCan you figure out how much indentation each line needs in order for the code to work properly?\nIf the customer orders pizza, Hedy shouldn't ask what sauce the costumer wants.\n\n**(extra)** A restaurant does not stock all sauces. Make a list of available sauces and give a reply with each order whether you sell it. <br>\n**(extra)** Pizzas have toppings. Ask customers what they want.<br>\n**(extra)** Do customers want a drink? Ask them too! <br>                    \n"
+                story_text: "In this level you can use nesting to make your restaurant more realistic and more fun!\n\n### Exercise\nThe indentation was removed in the example code. \nCan you figure out how much indentation each line needs in order for the code to work properly?\nIf the customer orders\
+                    \ pizza, Hedy shouldn't ask what sauce the costumer wants.\n\n**(extra)** A restaurant does not stock all sauces. Make a list of available sauces and give a reply with each order whether you sell it. <br>\n**(extra)** Pizzas have toppings. Ask customers what they want.<br>\n**(extra)**\
+                    \ Do customers want a drink? Ask them too! <br>                    \n"
                 example_code: |
                     ```
                     {print} 'Welcome to Restaurant Chez Hedy!'

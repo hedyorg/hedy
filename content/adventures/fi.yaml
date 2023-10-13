@@ -214,15 +214,15 @@ adventures:
                     ### Harjoitus
 
                     Vilkaise <a href="https://www.yonkerspublicschools.org/cms/lib/NY01814060/Centricity/Domain/1621/Brown%20Bear%20Book.pdf"> tarinaa</a> jos et tunne sitä, ja varmista, että tulostat sen kuten se on kirjassa.
-                example_code: |
-                    ```
-                    eläimet = _ , _ , _ 
-                    {print} 'Brown bear, Brown bear'
-                    {print} 'What do you see?'
-                    ```
+                example_code: "```\neläimet = _ , _ , _ \n{print} 'Brown bear, Brown bear'\n{print} 'What do you see?'\n```\n"
                 start_code: '# kirjoita koodisi tähän'
             12:
-                story_text: "Tällä tasolla lainausmerkkejä tarvitaan tallentamaan useita sanoja muuttujaan.\n\n### Harjoitus\n\nEtsi tarina aiemmalta tasolta, mikä tahansa taso käy. Nyt, varmista, että lainausmerkit lisätään oikeisiin paikkoihin."
+                story_text: |-
+                    Tällä tasolla lainausmerkkejä tarvitaan tallentamaan useita sanoja muuttujaan.
+
+                    ### Harjoitus
+
+                    Etsi tarina aiemmalta tasolta, mikä tahansa taso käy. Nyt, varmista, että lainausmerkit lisätään oikeisiin paikkoihin.
                 example_code: |
                     ```
                     nimi = 'Englannin kuningatar'
@@ -719,7 +719,8 @@ adventures:
         description: Tason selitys
         levels:
             1:
-                story_text: "Tasolla 1 voit käyttää komentoja `{print}`, `{ask}` ja `{echo}`.\n Kirjoita koodisi ohjelmointikenttään. Voit myös painaa vihreää painiketta esimerkkikoodilohkossa, niin koodi kirjoitetaan puolestasi!\nKokeile koodia itse ohjelmointikentän alla olevalla vihreällä \"Suorita koodi\" -painikkeella.\n \nVoit tulostaa tekstiä näytölle komennolla `{print}`.     \n"
+                story_text: "Tasolla 1 voit käyttää komentoja `{print}`, `{ask}` ja `{echo}`.\n Kirjoita koodisi ohjelmointikenttään. Voit myös painaa vihreää painiketta esimerkkikoodilohkossa, niin koodi kirjoitetaan puolestasi!\nKokeile koodia itse ohjelmointikentän alla olevalla vihreällä \"Suorita\
+                    \ koodi\" -painikkeella.\n \nVoit tulostaa tekstiä näytölle komennolla `{print}`.     \n"
                 start_code: '{print} Hei maailma!'
             2:
                 story_text: |
@@ -876,7 +877,8 @@ adventures:
                     {print} 'desimaalinumeroissa on nyt käytettävä pistettä'
                     {print} 2.5 + 2.5
             13:
-                story_text: We are now going to learn `{and}` and `{or}`! If you want to check two statements, you don't have to use two {if}'s but can use `{and}` and `{or}`. If you use `{and}`, both statements, left and right of the `{and}` need to be true. We can also use `{or}`. Then only one statement needs to be correct.
+                story_text: We are now going to learn `{and}` and `{or}`! If you want to check two statements, you don't have to use two {if}'s but can use `{and}` and `{or}`. If you use `{and}`, both statements, left and right of the `{and}` need to be true. We can also use `{or}`. Then only one statement
+                    needs to be correct.
                 example_code: |
                     ```
                     name = {ask} 'what is your name?'

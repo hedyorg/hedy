@@ -583,7 +583,10 @@ adventures:
                     {for} i {in} {range} 1 to 10
                         {print} i * number
                     ```
-                start_code: "nombre = 10\n{for} i {in} {range} 1 {to} 10\n    {print} i * nombre\n"
+                start_code: |
+                    nombre = 10
+                    {for} i {in} {range} 1 {to} 10
+                        {print} i * nombre
             12:
                 story_text: |
                     Now you can make a calculator that works for decimal numbers.
@@ -693,7 +696,12 @@ adventures:
         description: Explication du niveau
         levels:
             1:
-                story_text: "Bienvenue chez Hedy ! Au niveau 1, tu peux commencer par afficher une histoire.\n\nEssaye toi-même le code ci-dessous avec le bouton vert « Exécuter le code » en-dessous de la zone de programmation.\n\nOn y va ? Rends-toi à l'onglet suivant pour apprendre ta première commande !\n"
+                story_text: |
+                    Bienvenue chez Hedy ! Au niveau 1, tu peux commencer par afficher une histoire.
+
+                    Essaye toi-même le code ci-dessous avec le bouton vert « Exécuter le code » en-dessous de la zone de programmation.
+
+                    On y va ? Rends-toi à l'onglet suivant pour apprendre ta première commande !
                 start_code: '{print} bonjour le monde !'
             2:
                 story_text: |
@@ -972,11 +980,9 @@ adventures:
                     ```
                     choix {is} _
                     ```
-                start_code: 'choix {is} 1, 2, 3, 4, 5, ver de terre
-
+                start_code: |
+                    choix {is} 1, 2, 3, 4, 5, ver de terre
                     {print} Tu as jeté un _ {at} {random}
-
-                    '
             4:
                 story_text: |
                     Dans ce niveau, tu peux aussi créer un dé. Mais cette fois, tu peux essayer par toi-même sans un exemple de code !
@@ -1155,7 +1161,11 @@ adventures:
                     {for} day {in} days
                         {print} names {at} {random} ' does the dishes on ' day
                     ```
-                start_code: "jours = lundi, mardi, mercredi, jeudi, vendredi, samedi, dimanche\nnom = maman, papa, Emma, Sophie\n{for} jour {in} jours\n    {print} nom {at} {random} \" fait la vaisselle le \" jour\n"
+                start_code: |
+                    jours = lundi, mardi, mercredi, jeudi, vendredi, samedi, dimanche
+                    nom = maman, papa, Emma, Sophie
+                    {for} jour {in} jours
+                        {print} nom {at} {random} " fait la vaisselle le " jour
     elif_command:
         name: '{elif}'
         default_save_name: elif

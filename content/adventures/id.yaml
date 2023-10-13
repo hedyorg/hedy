@@ -690,10 +690,12 @@ adventures:
         description: Penjelasan level
         levels:
             1:
-                story_text: "Pada level 1 kamu dapat menggunakan perintah `{print}`, `{ask}` dan `{echo}`.\nTulis kodingan kamu di bagian tampilan kode. Atau tekan tombol hijau di contoh kode, dan kode akan dituliskan sendiri!\nCoba jalankan kodenya dengan menekan tombol 'Run code' di bawah tampilan kode.\n\nAnda dapat print text di tampilan dengan menggunakan perintah `{print}` .     \n"
+                story_text: "Pada level 1 kamu dapat menggunakan perintah `{print}`, `{ask}` dan `{echo}`.\nTulis kodingan kamu di bagian tampilan kode. Atau tekan tombol hijau di contoh kode, dan kode akan dituliskan sendiri!\nCoba jalankan kodenya dengan menekan tombol 'Run code' di bawah tampilan kode.\n\
+                    \nAnda dapat print text di tampilan dengan menggunakan perintah `{print}` .     \n"
                 start_code: '{print} hallo dunia!'
             2:
-                story_text: "Pada level 2 kita akan belajar perintah baru yaitu: `{is}` dan `{sleep}`.\nKamu bisa menamakan kata dengan `{is}`. Ini disebut dengan variabel. Dalam contoh variabel yang kami buat, variabel nama dan variabel umur. Kamu bisa gunakan kata nama dimana saja dalam kode kamu dan mengganti kata Hedy, seperti ini \n\nDisini kamu tidak perlu lagi  menggunakan perintah `{echo}`\n"
+                story_text: "Pada level 2 kita akan belajar perintah baru yaitu: `{is}` dan `{sleep}`.\nKamu bisa menamakan kata dengan `{is}`. Ini disebut dengan variabel. Dalam contoh variabel yang kami buat, variabel nama dan variabel umur. Kamu bisa gunakan kata nama dimana saja dalam kode kamu dan\
+                    \ mengganti kata Hedy, seperti ini \n\nDisini kamu tidak perlu lagi  menggunakan perintah `{echo}`\n"
                 example_code: |
                     ```
                     nama {is} Hedy
@@ -731,7 +733,9 @@ adventures:
                     ```
                 start_code: '{print} ''Halo dunia'''
             5:
-                story_text: "Perintah `ask` dan `print` tetap sama seperti pada level 4.\n \nPada level 5, ada hal baru, `if`! Dengan `if` kamu bisa memilih antara dua pilihan.\n\n```\nnama is ask 'siapa nama kamu?'\nif nama is Hedy print 'keren' else print 'boo'\n```\n\nKode ini menampilkan keren jika kamu memasukkan Hedy sebagai nama, dan boo jika kamu memasukkan yang lain.\n\nTerkadang kode dengan `if` bisa menjadi sangat panjang dan tidak cukup menggunakan satu baris <br> \nKamu dapat memisah kodenya menjadi dua baris; baris kedua dimulai dengan `else` seperti ini:\n```\nnama is ask 'siapa nama kamu?'\n if nama is Hedy print 'keren' \nelse print 'boo'\n```\n\n\nPada level 5, tugas-tugas yang ada pada tab-tab terlampir akan menjadi makin kompleks semakin posisi tabnya ke kanan. Jadi, pastikan untuk mengerjakan mulai dari kiri ke kanan."
+                story_text: "Perintah `ask` dan `print` tetap sama seperti pada level 4.\n \nPada level 5, ada hal baru, `if`! Dengan `if` kamu bisa memilih antara dua pilihan.\n\n```\nnama is ask 'siapa nama kamu?'\nif nama is Hedy print 'keren' else print 'boo'\n```\n\nKode ini menampilkan keren jika\
+                    \ kamu memasukkan Hedy sebagai nama, dan boo jika kamu memasukkan yang lain.\n\nTerkadang kode dengan `if` bisa menjadi sangat panjang dan tidak cukup menggunakan satu baris <br> \nKamu dapat memisah kodenya menjadi dua baris; baris kedua dimulai dengan `else` seperti ini:\n```\nnama\
+                    \ is ask 'siapa nama kamu?'\n if nama is Hedy print 'keren' \nelse print 'boo'\n```\n\n\nPada level 5, tugas-tugas yang ada pada tab-tab terlampir akan menjadi makin kompleks semakin posisi tabnya ke kanan. Jadi, pastikan untuk mengerjakan mulai dari kiri ke kanan."
                 example_code: |
                     ```
                     name {is} {ask} 'what is your name?'
@@ -778,7 +782,8 @@ adventures:
                     ```
                 start_code: repeat 3 times print 'Hedy itu menyenangkan!'
             8:
-                story_text: "`ask` dan `print` tetap berfungsi sama seperti sebelumnya. Tapi `if` dan `repeat` berubah. \nKamu sekarang dapat mengeksekusi kumpulan kode secara bersamaan, tapi kamu harus memberikan indentasi pada kode tersebut.\n Indentasi berarti memberikan empat spasi diawal baris. Ini juga berlaku ketika kamu hanya mau mengeksekusi satu baris kode saja.\n\n```\nrepeat 5 times\n    print 'halo semua'\n    print 'Ini akan ditampilkan lima kali'\n```"
+                story_text: "`ask` dan `print` tetap berfungsi sama seperti sebelumnya. Tapi `if` dan `repeat` berubah. \nKamu sekarang dapat mengeksekusi kumpulan kode secara bersamaan, tapi kamu harus memberikan indentasi pada kode tersebut.\n Indentasi berarti memberikan empat spasi diawal baris. Ini\
+                    \ juga berlaku ketika kamu hanya mau mengeksekusi satu baris kode saja.\n\n```\nrepeat 5 times\n    print 'halo semua'\n    print 'Ini akan ditampilkan lima kali'\n```"
                 example_code: |
                     Ini adalah cara perintah `{repeat}` bekerja:
                     ```
@@ -872,7 +877,8 @@ adventures:
                     print 'angka-angka desimal kini harus menggunakan titik'
                     print 2.5 + 2.5
             13:
-                story_text: 'Kita sekarang akan belajar menggunakan perintah `and` dan `or`! Jika kamu mau mengecek apakah dua kondisi terpenuhi, kamu tidak perlu menggunakan dua `if`. Kamu dapat menggunakan `and` untuk menggabungkan kedua kondisi, sisi kiri dan kanan dari `and` harus terpenuhi keduanya. Kamu dapat menggunakan `or` jika hanya salah satu dari dua kondisi yang perlu dipenuhi. '
+                story_text: 'Kita sekarang akan belajar menggunakan perintah `and` dan `or`! Jika kamu mau mengecek apakah dua kondisi terpenuhi, kamu tidak perlu menggunakan dua `if`. Kamu dapat menggunakan `and` untuk menggabungkan kedua kondisi, sisi kiri dan kanan dari `and` harus terpenuhi keduanya.
+                    Kamu dapat menggunakan `or` jika hanya salah satu dari dua kondisi yang perlu dipenuhi. '
                 example_code: |
                     ```
                     name = ask 'what is your name?'
@@ -886,7 +892,8 @@ adventures:
                     if name is 'Hedy' and age is 2
                         print 'You are the real Hedy!'
             14:
-                story_text: 'Kita akan mulai belajar untuk menggunakan banyak hal baru! Kamu mungkin sudah tahu hal-hal ini dari matematika: simbol `<` dan `>`. Simbol `<` mengecek apakah angka pertama lebih kecil daripada angka kedua, seperti `4 < 5`. Simbol `>` mengecek apakah angka pertama lebih besar daripada angka kedua, seperti `6 > 5`.'
+                story_text: 'Kita akan mulai belajar untuk menggunakan banyak hal baru! Kamu mungkin sudah tahu hal-hal ini dari matematika: simbol `<` dan `>`. Simbol `<` mengecek apakah angka pertama lebih kecil daripada angka kedua, seperti `4 < 5`. Simbol `>` mengecek apakah angka pertama lebih besar
+                    daripada angka kedua, seperti `6 > 5`.'
                 example_code: |
                     ```
                     age = {ask} 'How old are you?'
@@ -900,7 +907,8 @@ adventures:
                     else
                         print 'Kamu lebih tua daripada aku!'
             15:
-                story_text: Kita akan belajar tentang jenis pengulangan baru, pengulangan `while`! Kita akan melakukan pengulangan tersebut terus-menerus selama kondisinya dipenuhi. Jadi di contoh tersebut, kita terus melakukan pengulangan hingga jawaban benar telah diberikan. Jika jawaban benar tidak diberikan, pengulangan tidak akan pernah berakhir!
+                story_text: Kita akan belajar tentang jenis pengulangan baru, pengulangan `while`! Kita akan melakukan pengulangan tersebut terus-menerus selama kondisinya dipenuhi. Jadi di contoh tersebut, kita terus melakukan pengulangan hingga jawaban benar telah diberikan. Jika jawaban benar tidak
+                    diberikan, pengulangan tidak akan pernah berakhir!
                 example_code: |
                     ```
                     answer = 0
@@ -1085,7 +1093,8 @@ adventures:
                     ```
                 start_code: print 'Siapa yang mencuci piring?'
             5:
-                story_text: "Dengan `if` kamu bisa melakukan banyak hal menyenangkan dalam pengambilan pilihan dalam program tersebut. Kamu dapat membuat program kamu merespon pilihan yang sudah diberikan oleh komputer.\n\nDapatkah kamu melengkapi kode ini agar menampilkan 'Yahh' ketika yang dipilih adalah giliranmu dan 'Yeah!' untuk yang lainnya. \nJangan lupakan tanda kutip satu!"
+                story_text: "Dengan `if` kamu bisa melakukan banyak hal menyenangkan dalam pengambilan pilihan dalam program tersebut. Kamu dapat membuat program kamu merespon pilihan yang sudah diberikan oleh komputer.\n\nDapatkah kamu melengkapi kode ini agar menampilkan 'Yahh' ketika yang dipilih adalah\
+                    \ giliranmu dan 'Yeah!' untuk yang lainnya. \nJangan lupakan tanda kutip satu!"
                 example_code: |
                     ```
                     orang is ibu, ayah, Emma, Sophie
@@ -1236,7 +1245,8 @@ adventures:
                     Pada level-level berikutnya kamu dapat belajar bagaimana membuat mesin peramal kamu sendiri!
                     Di level 1 kamu dapat mudah memulainya dengan meminta Hedy mengenalkan dirinya sebagai peramal dan mengulang jawaban pengguna.
                     Seperti ini:
-                example_code: "```\nprint Halo, aku Hedy sang peramal!\nask Siapa kamu?\nprint Ijinkan aku melihat bola kristal ku\nprint Aku lihat... Aku lihat...\necho Nama kamu adalah \n```\n\nHedy sekarang hanya memberitahukan nama kamu. Dapatkah kamu membuat Hedy dapat memberitahukan hal-hal lain tentang masa depan kamu?\n\nTentu saja, Hedy bukan peramal yang baik, karena dia hanya bisa mengulang jawaban yang diberikan oleh pengguna!\nLihatlah level 2 dan tingkatkan kemampuan peramal kamu.\n"
+                example_code: "```\nprint Halo, aku Hedy sang peramal!\nask Siapa kamu?\nprint Ijinkan aku melihat bola kristal ku\nprint Aku lihat... Aku lihat...\necho Nama kamu adalah \n```\n\nHedy sekarang hanya memberitahukan nama kamu. Dapatkah kamu membuat Hedy dapat memberitahukan hal-hal lain\
+                    \ tentang masa depan kamu?\n\nTentu saja, Hedy bukan peramal yang baik, karena dia hanya bisa mengulang jawaban yang diberikan oleh pengguna!\nLihatlah level 2 dan tingkatkan kemampuan peramal kamu.\n"
                 story_text_2: |
                     ### Exercise
                     Hedy now only tells you your name. Can you expand the code so that Hedy can predict more things about you?
@@ -1324,7 +1334,10 @@ adventures:
                 start_code: print 'Halo, aku Hedy sang peramal!'
             7:
                 story_text: Pada level 6 kamu dapat menggunakan perintah `repeat` untuk membuat mesin kamu meramal beberapa kali
-                example_code: "```\nprint 'Aku Hedy sang peramal!'\nprint 'Kamu dapat bertanya 3 pertanyaan!'\nrepeat 3 times pertanyaan is ask 'Apa yang ingin kamu tahu?'\njawaban {is} ya, tidak, mungkin\nrepeat 3 times print 'Bola kristal saya mengatakan... 'jawaban {at} {random}\n```\n\nSeperti yang kamu lihat, pertanyaan-pertanyaan yang diberikan tidak ditampilkan pada contoh. Ini karena variabel 'pertanyaan' telah diulang tiga kali.\nSetiap kali pemain memberikan pertanyaan baru, Hedy menimpa pertanyaan sebelumnya. \nArtinya kamu tidak bisa menanyakan dengan cara seperti ini.\n\nDengan menggunakan tiga variabel (misal 'pertanyaan1', 'pertanyaan2' dan 'pertanyaan3') kamu dapat memecahkan masalah ini dan menampilkan semua pertanyaan.\nIni berarti kamu hanya dapat menggunakan perintah `repeat` untuk jawaban. Kamu harus menanyakan dan menampilkan semua pertanyaan secara terpisah.\nDapatkah kamu melakukannya?\n\nPada level 7 tampilan perintah `repeat` akan berubah, memungkinkan kamu untuk mengulang beberapa baris sekaligus.\n"
+                example_code: "```\nprint 'Aku Hedy sang peramal!'\nprint 'Kamu dapat bertanya 3 pertanyaan!'\nrepeat 3 times pertanyaan is ask 'Apa yang ingin kamu tahu?'\njawaban {is} ya, tidak, mungkin\nrepeat 3 times print 'Bola kristal saya mengatakan... 'jawaban {at} {random}\n```\n\nSeperti yang\
+                    \ kamu lihat, pertanyaan-pertanyaan yang diberikan tidak ditampilkan pada contoh. Ini karena variabel 'pertanyaan' telah diulang tiga kali.\nSetiap kali pemain memberikan pertanyaan baru, Hedy menimpa pertanyaan sebelumnya. \nArtinya kamu tidak bisa menanyakan dengan cara seperti ini.\n\
+                    \nDengan menggunakan tiga variabel (misal 'pertanyaan1', 'pertanyaan2' dan 'pertanyaan3') kamu dapat memecahkan masalah ini dan menampilkan semua pertanyaan.\nIni berarti kamu hanya dapat menggunakan perintah `repeat` untuk jawaban. Kamu harus menanyakan dan menampilkan semua pertanyaan\
+                    \ secara terpisah.\nDapatkah kamu melakukannya?\n\nPada level 7 tampilan perintah `repeat` akan berubah, memungkinkan kamu untuk mengulang beberapa baris sekaligus.\n"
                 start_code: print 'Halo, aku Hedy sang peramal!'
             8:
                 story_text: |-
@@ -1403,7 +1416,9 @@ adventures:
                     Jika kamu memilih pintu yang benar kamu akan bertahan hidup, tapi kalau tidak seekor monster akan...
 
                     Pada level 1 kita memulai permainan rumah berhantu dengan membuat cerita menyeramkan dan menanyakan monster apa yang pemain akan lihat di rumah berhantu.
-                example_code: "```\nprint Kenapa aku ada disini?\nprint Aku ingat temanku menyarankan untuk tidak ke rumah besar tua itu...\nprint dan tiba-tiba semuanya menjadi gelap.\nprint Tapi bagaimana caranya aku tergeletak di lantai...?\nprint Kepalaku sakit seperti telah dipukul dengan tongkat pemukul basebal!\nprint Suara apa itu?\nprint Oh tidak! Aku merasa kalau aku tidak sendiri di rumah ini!\nprint Aku perlu keluar dari sini!\nprint Ada 3 pintu didepanku...\n{ask} Pintu mana yang harus kupilih?\necho Aku memilih pintu \nprint ...?\n ```\n\nDapatkah kamu menyelesaikan cerita menyeramkan ini dengan menanyakan monster apa yang akan muncul? Atau membuat cerita rumah berhantu milik kamu sendiri?\n"
+                example_code: "```\nprint Kenapa aku ada disini?\nprint Aku ingat temanku menyarankan untuk tidak ke rumah besar tua itu...\nprint dan tiba-tiba semuanya menjadi gelap.\nprint Tapi bagaimana caranya aku tergeletak di lantai...?\nprint Kepalaku sakit seperti telah dipukul dengan tongkat\
+                    \ pemukul basebal!\nprint Suara apa itu?\nprint Oh tidak! Aku merasa kalau aku tidak sendiri di rumah ini!\nprint Aku perlu keluar dari sini!\nprint Ada 3 pintu didepanku...\n{ask} Pintu mana yang harus kupilih?\necho Aku memilih pintu \nprint ...?\n ```\n\nDapatkah kamu menyelesaikan\
+                    \ cerita menyeramkan ini dengan menanyakan monster apa yang akan muncul? Atau membuat cerita rumah berhantu milik kamu sendiri?\n"
                 story_text_2: |
                     ### Exercise
                     Can you finish the scary story? Or make up your own haunted house story?
@@ -2765,8 +2780,10 @@ adventures:
                     Apakah kamu bisa melengkapi kode berikut dengan memasukkan perintah atau karakter yang benar sebagai pengganti garis bawah?
                 start_code: print 'Selamat datang di permainan batu guning kertas mu sendiri!'
             5:
-                story_text: "Pada level 4 kamu bisa menentukan siapa yang menang. \nUntuk hal itu, kamu memerlukan perintah `if`\n\nSimpan pilihan kamu dengan sebuah nama favoritmu dan pilihan komputer dengan nama pilihan komputer.\nLalu kamu bisa menggunakan `if` untuk melihat apakah kedua pilihan tersebut sama atau berbeda.\nDapatkah kamu menyelesaikan kode ini?"
-                example_code: "```\npilihan is batu, gunting, kertas\npil_komputer is _\n pil_kamu is ask Apa yang kamu pilih?\nprint 'kamu memilih ' _\nprint 'komputer memilih ' _\nif _ is _ print 'seri' else print 'tidak seri'\nif pil_kamu is batu and pil_komputer is kertas print 'komputer menang'\n```\n\nPertama-tama, kamu perlu mengisi kotak kosong yang tersedia dengan kode yang benar untuk melihat apakah hasil permainan seri. \n"
+                story_text: "Pada level 4 kamu bisa menentukan siapa yang menang. \nUntuk hal itu, kamu memerlukan perintah `if`\n\nSimpan pilihan kamu dengan sebuah nama favoritmu dan pilihan komputer dengan nama pilihan komputer.\nLalu kamu bisa menggunakan `if` untuk melihat apakah kedua pilihan tersebut\
+                    \ sama atau berbeda.\nDapatkah kamu menyelesaikan kode ini?"
+                example_code: "```\npilihan is batu, gunting, kertas\npil_komputer is _\n pil_kamu is ask Apa yang kamu pilih?\nprint 'kamu memilih ' _\nprint 'komputer memilih ' _\nif _ is _ print 'seri' else print 'tidak seri'\nif pil_kamu is batu and pil_komputer is kertas print 'komputer menang'\n\
+                    ```\n\nPertama-tama, kamu perlu mengisi kotak kosong yang tersedia dengan kode yang benar untuk melihat apakah hasil permainan seri. \n"
                 start_code: print 'Selamat datang di permainan batu guning kertas mu sendiri!'
             9:
                 story_text: |

@@ -846,7 +846,8 @@ adventures:
                     {for} animal {in} animals
                       {print} 'I love ' animal
             11:
-                story_text: '`{print}` works just the same but we add a new form of the `{for}`. You can now write `{for} counter {in} {range} 1 {to} 5` and use `counter` in your program. Try it out to see what happens! Remember to use indentations after the `{for}` and `{if}` statements (That means starting a sentence with four spaces)'
+                story_text: '`{print}` works just the same but we add a new form of the `{for}`. You can now write `{for} counter {in} {range} 1 {to} 5` and use `counter` in your program. Try it out to see what happens! Remember to use indentations after the `{for}` and `{if}` statements (That means starting
+                    a sentence with four spaces)'
                 start_code: |-
                     {for} counter {in} {range} 1 {to} 5
                         {print} counter
@@ -863,7 +864,8 @@ adventures:
                     {print} 'decimal numbers now need to use a dot'
                     {print} 2.5 + 2.5
             13:
-                story_text: We are now going to learn `{and}` and `{or}`! If you want to check two statements, you don't have to use two {if}'s but can use `{and}` and `{or}`. If you use `{and}`, both statements, left and right of the `{and}` need to be true. We can also use `{or}`. Then only one statement needs to be correct.
+                story_text: We are now going to learn `{and}` and `{or}`! If you want to check two statements, you don't have to use two {if}'s but can use `{and}` and `{or}`. If you use `{and}`, both statements, left and right of the `{and}` need to be true. We can also use `{or}`. Then only one statement
+                    needs to be correct.
                 example_code: |
                     ```
                     name = {ask} 'what is your name?'
@@ -2632,14 +2634,7 @@ adventures:
             10:
                 story_text: |
                     In this level you'll learn how to easily {ask} your guests' orders in a short code.
-                example_code: |
-                    ```
-                    courses = appetizer, main course, dessert
-                    {for} course {in} courses
-                        {print} 'What is your order for ' course '?'
-                        _ 
-                        _
-                    ```
+                example_code: "```\ncourses = appetizer, main course, dessert\n{for} course {in} courses\n    {print} 'What is your order for ' course '?'\n    _ \n    _\n```\n"
                 story_text_2: |
                     ### Exercise
                     Of course, you could also order for multiple people!
