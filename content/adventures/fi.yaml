@@ -61,7 +61,7 @@ adventures:
                 example_code: |
                     ```
                     eläimet {is} 🦔, 🐿, 🦉, 🦇
-                    {print} Nyt hän kuulee eläinten ääniä {at} {random}
+                    {print} Nyt hän kuulee eläimet {at} {random} ääniä
                     ```
                 story_text_2: |
                     Komento `{add}` voi olla myös hyödyllinen tarinassasi.
@@ -69,7 +69,7 @@ adventures:
                     ```
                     {print} Hän kuulee äänen
                     eläimet {is} 🐿, 🦔, 🦇, 🦉
-                    eläimet {is} {ask} Mikä se mahtaa olla?
+                    eläin {is} {ask} Mikä se mahtaa olla?
                     {add} eläin {to_list} eläimet
                     {print} se oli eläimet {at} {random}
                     ```
@@ -110,7 +110,7 @@ adventures:
                     {print} nimi _ on nyt lähdössä metsään kävelylle _
                     {print} nimi _ on vähän peloissaan _
                     eläimet {is} 🦔, 🐿, 🦉, 🦇
-                    {print} _ Hän kuulee _ animals _ äänen _ {at} {random}
+                    {print} _ Hän kuulee _ eläimet {at} {random} _ äänen _
                     {print} name _ pelkää, että metsässä kummittelee _
                     ```
                 start_code: '{print} ''Tarinasi tulostetaan tänne!'''
@@ -622,12 +622,11 @@ adventures:
                     ```
                 start_code: '# place your code here'
             13:
-                story_text: |2
-
+                story_text: |
                     ### Exercise 1
                     Let's make the practice program a bit harder. The player now has to answers two questions correctly. Fill out the blanks to complete the program.
 
-                    ### Exercise 2 (extra)
+                    ### Exercise 2 Extra
                     Sometimes, calculations have multiple correct answers. For example, 10 can be divided by 5 and by 2. So the question 'What number divides 10?' can be answered by 2 and by 5.
                     Ask for a calculation that has multiple correct answers, ask the player to answer it, and determine if it is correct using `{or}`.
                     Empty the programming field and create your own solution.
@@ -772,12 +771,12 @@ adventures:
                     {if} nimi {is} Hedy {print} 'hienoa!' {else} {print} 'plääh'
             6:
                 story_text: |2
-                     Tällä tasolla opit jotain uutta: voit nyt myös suorittaa laskutoimituksia.
+                           Tällä tasolla opit jotain uutta: voit nyt myös suorittaa laskutoimituksia.
 
-                     Yhteenlaskut ovat helppoja, voit kirjoittaa ne kuten matematiikassa, esimerkiksi `5 + 5`. Vähennyslaskut toimivat samalla tavalla, esimerkiksi `5 - 5`.
+                           Yhteenlaskut ovat helppoja, voit kirjoittaa ne kuten matematiikassa, esimerkiksi `5 + 5`. Vähennyslaskut toimivat samalla tavalla, esimerkiksi `5 - 5`.
 
-                     Kertolaskujen laskeminen eroaa hieman tästä, sillä näppäimistössä ei ole kertolaskumerkkiä. Etsi vain, sitä ei todellakaan ole!
-                     Siksi kerrotaan tähdellä 8:n yläpuolella, esimerkiksi `5 * 5`. Lue se "5 kertaa 5", niin muistat sen parhaiten.
+                           Kertolaskujen laskeminen eroaa hieman tästä, sillä näppäimistössä ei ole kertolaskumerkkiä. Etsi vain, sitä ei todellakaan ole!
+                           Siksi kerrotaan tähdellä 8:n yläpuolella, esimerkiksi `5 * 5`. Lue se "5 kertaa 5", niin muistat sen parhaiten.
                 example_code: |
                     ```
                     {print} '5 plus 5 on ' 5 + 5
@@ -1022,8 +1021,7 @@ adventures:
                     {if} throw {is} earthworm points = points + 5 {else} points = points + throw
                     {print} 'those are' points ' point'
                     ```
-                example_code_2: |2
-
+                example_code_2: |
                     Did you manage to calculate the score for 8 dice? That required a lot of cutting and pasting, right? We are going to make that easier in level 7!
                 start_code: '{print} ''What will the die indicate this time?'''
             7:
@@ -1273,9 +1271,7 @@ adventures:
                 story_text: |
                     In the previous levels you've created your first fortune telling machine, but Hedy couldn't really predict anything, only {echo}.
                     In this level you can use a variable and the `{at} {random}` command to really let Hedy choose an answer for you. Check out this code for instance:
-                example_code: |2
-
-                    In this example the player can {ask} Hedy a yes-no question and Hedy will pick a random answer for you.
+                example_code: |
                     ```
                     {print} I’m Hedy the fortune teller!
                     question {is} {ask} What do you want to know?
@@ -1367,11 +1363,11 @@ adventures:
                     In this level you can use the `{repeat}` command to make your machine tell multiple fortunes at once.
                 example_code: |
                     ```
-                    {print} 'Im Hedy the fortune teller!'
-                    {print} 'You can ask 3 questions!'
-                    {repeat} 3 {times} question = {ask} 'What do you want to know?'
-                    answer = yes, no, maybe
-                    {repeat} 3 {times} {print} 'My crystal ball says... ' answer {at} {random}
+                    {print} 'I have a flower with magic petals'
+                    {print} 'If you pick the petals the flower will tell you if your crush loves you back'
+                    amount = {ask} 'How many petals do you want to pick?'
+                    options = they love you, they love you not
+                    _ _ _ _ options {at} {random}
                     ```
                 start_code: '# place your code here'
             8:
@@ -2460,8 +2456,8 @@ adventures:
         description: Create your own virtual restaurant
         levels:
             1:
-                story_text: |2
-                     In level 1 you can make your own virtual restaurant and take your guests' orders.
+                story_text: |
+                    In level 1 you can make your own virtual restaurant and take your guests' orders.
                 example_code: |
                     ```
                     {print} Welcome to Hedy's restaurant 🍟
@@ -2569,11 +2565,10 @@ adventures:
             6:
                 story_text: |
                     In this level you can use maths to calculate the total price of your customer's order, which can make your virtual restaurant more realistic.
-                example_code: |2
-
+                example_code: |
                     You can make a simple restaurant code, like this:
                     ```
-                    {print} 'Welcome to Hedys restaurant'
+                    {print} 'Welcome to Restaurant Chez Hedy'
                     {print} 'Here is our menu:'
                     {print} 'Our main courses are pizza, lasagne, or spaghetti'
                     main = {ask} 'Which main course would you like?'
@@ -2788,15 +2783,15 @@ adventures:
                     ```
                 start_code: '# place your code here'
             3:
-                story_text: |2
+                story_text: |
+                    You can use the `{at} {random}` command to let the computer pick rock, paper or scissors!
 
-                    In this level we can enter lists and choose things from them.
-                    You first make a list with `{is}`. Then you can let the computer choose something from the list with `{at} {random}`.
-                    For example, you can let the computer pick from rock, paper and scissors.
+                    ### Exercise
+                    Finish the code by using the `{at} {random}` command.
                 example_code: |
                     ```
                     choices {is} rock, paper, scissors
-                    {print} choices {at} {random}
+                    {print} choices _ _
                     ```
                 story_text_2: |
                     ### Exercise
