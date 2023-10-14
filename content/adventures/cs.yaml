@@ -185,8 +185,7 @@ adventures:
             12:
                 story_text: |
                     In this level you can use the quotation marks to save multiple words in a variable.
-                example_code: |4
-
+                example_code: |
                     ```
                     name = 'The Queen of England'
                     {print} name ' was eating a piece of cake, when suddenly...'
@@ -594,12 +593,11 @@ adventures:
                     {print} number1 ' plus ' number2 ' is ' answer
                 start_code: '# place your code here'
             13:
-                story_text: |4
-
+                story_text: |
                     ### Exercise 1
                     Let's make the practice program a bit harder. The player now has to answers two questions correctly. Fill out the blanks to complete the program.
 
-                    ### Exercise 2 (extra)
+                    ### Exercise 2 Extra
                     Sometimes, calculations have multiple correct answers. For example, 10 can be divided by 5 and by 2. So the question 'What number divides 10?' can be answered by 2 and by 5.
                     Ask for a calculation that has multiple correct answers, ask the player to answer it, and determine if it is correct using `{or}`.
                     Empty the programming field and create your own solution.
@@ -1002,8 +1000,7 @@ adventures:
                     {print} 'those are' points ' point'
                     ```
                     Can you make the code so that you get the total score for 8 dice? To do that, you have to cut and paste some lines of the code.
-                example_code_2: |4
-
+                example_code_2: |
                     Did you manage to calculate the score for 8 dice? That required a lot of cutting and pasting, right? We are going to make that easier in level 7!
                 start_code: '{print} ''What will the die indicate this time?'''
             7:
@@ -1454,8 +1451,7 @@ adventures:
                     If you pick the right door you'll survive, but {if} not a terrible monster might...
 
                     In level 1 we start our haunted house game by making up a scary story and {ask} the player what monster they'll see in the haunted house.
-                example_code: |4
-
+                example_code: |
                     ```
                     {print} How did I get here?
                     {print} I remember my friend telling me to go into the old mansion...
@@ -1470,9 +1466,6 @@ adventures:
                     {echo} I choose door
                     {print} ...?
                     ```
-
-                    ### Exercise
-                    Can you finish the scary story? Or make up your own haunted house story?
                 story_text_2: |
                     ### Exercise
                     Can you finish the scary story? Or make up your own haunted house story?
@@ -2468,8 +2461,8 @@ adventures:
         description: Vytvořte si vlastní virtuální restauraci
         levels:
             1:
-                story_text: |4
-                     V levelu 1 si můžete vytvořit svou vlastní virtuální restauraci a přijímat objednávky svých hostů..
+                story_text: |
+                    V levelu 1 si můžete vytvořit svou vlastní virtuální restauraci a přijímat objednávky svých hostů..
                 example_code: |
                     ```
                     {print} Vítejte v restauraci Hedy 🍟
@@ -2790,16 +2783,15 @@ adventures:
                     ```
                 start_code: '# place your code here'
             3:
-                story_text: |4
+                story_text: |
+                    You can use the `{at} {random}` command to let the computer pick rock, paper or scissors!
 
-                    In this level we can enter lists and choose things from them.
-                    You first make a list with `{is}`. Then you can let the computer choose something from the list with `{at} {random}`.
-                    For example, you can let the computer pick from rock, paper and scissors.
-                example_code: |4
-
+                    ### Exercise
+                    Finish the code by using the `{at} {random}` command.
+                example_code: |
                     ```
                     choices {is} rock, paper, scissors
-                    {print} choices {at} {random}
+                    {print} choices _
                     ```
                 story_text_2: |
                     ### Exercise
@@ -3545,9 +3537,7 @@ adventures:
                 story_text: |
                     V této úrovni můžete použít příkaz `{at} {random}` s kreslící želvou. Náhodná hodnota způsobí, že želva půjde pokaždé jinou cestou.
                     Použijte `{at} {random}` k výběru hodnotu ze seznamu. Můžete zkopírovat a vložit řádky 2 a 3 a vytvořit tak delší náhodnou cestu.
-                example_code: |4
-
-
+                example_code: |
                     ```
                     angles {is} 10, 50, 90, 150, 250
                     {turn} angles {at} {random}
@@ -3560,8 +3550,7 @@ adventures:
             4:
                 story_text: |
                     Ve čtvrté úrovni musíte i při kreslení používat uvozovky s příkazy `{print}` a `{ask}`!
-                example_code: |4
-
+                example_code: |
                     ```
                     {print} 'Kreslení obrazce'
                     angle {is} 90
@@ -3592,8 +3581,7 @@ adventures:
             5:
                 story_text: |
                     V páté úrovni můžete provést volbu pomocí příkazu `{if}`. Například mezi různými typy obrazců.
-                example_code: |4
-
+                example_code: |
                     ```
                     {print} 'Kreslení obrazce'
                     figure {is} {ask} 'Chcete nakreslit čtverec nebo trojúhelník?'
@@ -3634,8 +3622,7 @@ adventures:
                     Možná jste se ve škole učili, že otočení celého kruhu je 360 stupňů. Pokud ne, teď už to víte!
                     Proto také používáte 90 stupňů pro čtverec. Když 360 vydělíte 4, je to 90.
                     Teď, když umíme s Hedy počítat, můžeme kreslit jakékoliv obrazce, které chceme!
-                example_code: |4
-
+                example_code: |
                     ```
                     angles = {ask} 'Kolik úhlů chcete?'
                     angle = 360 / angles
@@ -3657,11 +3644,10 @@ adventures:
                 story_text: |
                     Nyní, když můžeme opakovat několik řádků, můžeme snadněji vytvářet obrazce.
                     Úhel nastavíme pouze jednou a pak tuto proměnnou použijeme v příkazu `{repeat}`.
-                example_code: |4
-
+                example_code: |
                     ```
                     angle = 90
-                    {repeat} 10 {times}
+                    {repeat} 4 {times}
                         {turn} angle
                         {forward} 50
                     ```
@@ -3670,9 +3656,9 @@ adventures:
                     Dokážete určit, kolikrát se musí želva otočit? Dokončete kód a nakreslete libovolný mnohoúhelník!
                 example_code_2: |
                     ```
-                    angles = {ask} 'How many angles should I draw?'
-                    angle = 360 / angles
-                    {repeat} angle {times}
+                    figure = {ask} 'How many angles should I draw?'
+                    angle = 360 / figure
+                    {repeat} figure {times}
                         {turn} _
                         {forward} _
                     ```

@@ -594,12 +594,11 @@ adventures:
                     ```
                 start_code: '# via kodo ĉi tie'
             13:
-                story_text: |4
-
+                story_text: |
                     ### Exercise 1
                     Let's make the practice program a bit harder. The player now has to answers two questions correctly. Fill out the blanks to complete the program.
 
-                    ### Exercise 2 (extra)
+                    ### Exercise 2 Extra
                     Sometimes, calculations have multiple correct answers. For example, 10 can be divided by 5 and by 2. So the question 'What number divides 10?' can be answered by 2 and by 5.
                     Ask for a calculation that has multiple correct answers, ask the player to answer it, and determine if it is correct using `{or}`.
                     Empty the programming field and create your own solution.
@@ -748,13 +747,13 @@ adventures:
                     nomo {is} {ask} 'Kio estas via nomo?'
                     {if} nomo {is} Hedy {print} 'bone!' {else} {print} 'ba!'
             6:
-                story_text: |4
-                     En ĉi tiu nivelo, vi lernas ion novan: vi povas nun ankaŭ kalkuli.
+                story_text: |
+                    En ĉi tiu nivelo, vi lernas ion novan: vi povas nun ankaŭ kalkuli.
 
-                     La pluso estas facila; vi skribas ĝin simile al matematiko: `5 + 5` ekzemple. La minuso ankaŭ funkcias bone, jen `5 - 5`.
+                    La pluso estas facila; vi skribas ĝin simile al matematiko: `5 + 5` ekzemple. La minuso ankaŭ funkcias bone, jen `5 - 5`.
 
-                     La multipliko estas iom malsamaj, ĉar ne ekzistas la multipliko-signo en via klavaro. Nu, serĉu; ĝi vere ne ekzistas!
-                     Tial oni multiplikas per la asterisko (ofte la klavo 8 kun la majuskliga klavo): `5 * 5`. Legu tion kiel «5 multiplikite per 5», por helpi la memoradon.
+                    La multipliko estas iom malsamaj, ĉar ne ekzistas la multipliko-signo en via klavaro. Nu, serĉu; ĝi vere ne ekzistas!
+                    Tial oni multiplikas per la asterisko (ofte la klavo 8 kun la majuskliga klavo): `5 * 5`. Legu tion kiel «5 multiplikite per 5», por helpi la memoradon.
                 example_code: |
                     ```
                     {print} '5 plus 5 estas ' 5 + 5
@@ -996,8 +995,7 @@ adventures:
                     {print} 'those are' poentaro ' point'
                     ```
                     Can you make the code so that you get the total score for 8 dice? To do that, you have to cut and paste some lines of the code.
-                example_code_2: |4
-
+                example_code_2: |
                     Ĉu vi sukcesis kalkuli la poentaron por 8 ĵetkuboj? Tio postulis multe da tranĉado kaj algluado, ĉu ne? Ni faciligos tion en la nivelo 7!
                 start_code: '{print} ''Kion indikos la ĵetkubo ĉi-foje?'''
             7:
@@ -1250,8 +1248,7 @@ adventures:
                 story_text: |
                     In the previous levels you've created your first fortune telling machine, but Hedy couldn't really predict anything, only {echo}.
                     In this level you can use a variable and the `{at} {random}` command to really let Hedy choose an answer for you. Check out this code for instance:
-                example_code: |4
-
+                example_code: |
                     En ĉi tiu ekzemplo, la ludanto povas demandi Hedy ĉu-demandon, kaj Hedy elektos hazardan respondon por vi.
                     ```
                     {print} Mi estas Hedy la aŭguristo!
@@ -2411,8 +2408,8 @@ adventures:
         description: Kreu vian propran virtualan restoracion
         levels:
             1:
-                story_text: |4
-                     En Nivelo 1, vi povas krei vian propran virtualan restoracion kaj preni la mendojn de viaj gastoj.
+                story_text: |
+                    En Nivelo 1, vi povas krei vian propran virtualan restoracion kaj preni la mendojn de viaj gastoj.
                 example_code: |
                     ```
                     {print} Bonvenon al Restoracio Hedy 🍟
@@ -2521,8 +2518,7 @@ adventures:
             6:
                 story_text: |
                     In this level you can use maths to calculate the total price of your customer's order, which can make your virtual restaurant more realistic.
-                example_code: |4
-
+                example_code: |
                     Vi povas verki simplan kodon por restoracio, jene:
                     ```
                     {print} 'Bonvenon al restoracio Hedy'
@@ -2605,8 +2601,7 @@ adventures:
                         manĝaĵo = {ask} 'Kion vi volas manĝi por via ' plado '?'
                         {print} manĝaĵo ' estos via ' plado
                     ```
-                story_text_2: |4
-
+                story_text_2: |
                     Kompreneble, vi ankaŭ povus mendi por pluraj homoj!
                 example_code_2: |
                     ```
@@ -2725,8 +2720,7 @@ adventures:
                     ```
                 start_code: '# via kodo ĉi tie'
             3:
-                story_text: |4
-
+                story_text: |
                     En ĉi tiu nivelo ni povas eniri listojn kaj elekti aferojn el ili.
                     Vi unue faru liston per `{is}`. Tiam vi povas lasi la komputilon elekti ion el la listo per `{at} {random}`.
                     Ekzemple, vi povas lasi la komputilon elekti el roko, papero kaj tondilo.
