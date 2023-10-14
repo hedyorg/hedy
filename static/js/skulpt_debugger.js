@@ -16,11 +16,11 @@ Sk.Debugger = class {
     constructor(filename, output_callback, stop_callback) {
         this.dbg_breakpoints = {};
         this.tmp_breakpoints = {};
-        this.suspension_stack = [];
-        this.current_suspension = -1;
+        this.suspensionStack = [];
+        this.currentSuspension = -1;
         this.eval_callback = null;
         this.suspension = null;
-        this.output_callback = output_callback;
+        this.outputCallback = output_callback;
         this.step_mode = false;
         this.filename = filename;
         this.source_code_lines = [];
@@ -64,31 +64,31 @@ Sk.Debugger = class {
     }
 
     move_up_the_stack() {
-        this.current_suspension = Math.min(this.current_suspension + 1, this.suspension_stack.length - 1);
+        this.currentSuspension = Math.min(this.currentSuspension + 1, this.suspensionStack.length - 1);
     }
 
     move_down_the_stack() {
-        this.current_suspension = Math.max(this.current_suspension - 1, 0);
+        this.currentSuspension = Math.max(this.currentSuspension - 1, 0);
     }
 
     enable_step_mode() {
         this.step_mode = true;
     }
 
-    disable_step_mode() {
+    disableStepMode() {
         this.step_mode = false;
     }
 
     get_suspension_stack() {
-        return this.suspension_stack;
+        return this.suspensionStack;
     }
 
-    get_active_suspension() {
-        if (this.suspension_stack.length === 0) {
+    getActiveSuspension() {
+        if (this.suspensionStack.length === 0 || 0 > this.currentSuspension) {
             return null;
         }
 
-        return this.suspension_stack[this.current_suspension];
+        return this.suspensionStack[this.currentSuspension];
     }
 
     generate_breakpoint_key(filename, lineno, colno) {
@@ -200,22 +200,22 @@ Sk.Debugger = class {
         }
 
         // Pop the last suspension of the stack if there is more than 0
-        if (this.suspension_stack.length > 0) {
-            this.suspension_stack.pop();
-            this.current_suspension -= 1;
+        if (this.suspensionStack.length > 0) {
+            this.suspensionStack.pop();
+            this.currentSuspension -= 1;
         }
 
         // Unroll the stack to get each suspension.
         while (suspension instanceof Sk.misceval.Suspension) {
             parent = suspension;
-            this.suspension_stack.push(parent);
-            this.current_suspension += 1;
+            this.suspensionStack.push(parent);
+            this.currentSuspension += 1;
             suspension = suspension.child;
         }
 
         suspension = parent;
         try {
-            this.output_callback();            
+            this.outputCallback();            
         } catch (error) {
             console.error(error)
         }
@@ -297,19 +297,19 @@ Sk.Debugger = class {
     }
 
     resume() {
-        // Reset the suspension stack to the topmost
-        this.current_suspension = this.suspension_stack.length - 1;
-        if (this.suspension_stack.length === 0) {
-            return Promise.resolve().then(this.stop_callback());
-        } else {
-            var promise = this.suspension_handler(this.get_active_suspension());
-            return promise
-        }
+        var _this = this;
+        return Promise.resolve().then(function() {
+            return Promise.resolve().then(function() {
+                return _this.handleSuspension(resumeSuspension(_this.getActiveSuspension()))
+            }, function(b) {
+                _this.error(b)
+            })
+        }).then(function() {})
     }
 
     pop_suspension_stack() {
-        this.suspension_stack.pop();
-        this.current_suspension -= 1;
+        this.suspensionStack.pop();
+        this.currentSuspension -= 1;
     }
 
     success(r) {
@@ -320,21 +320,21 @@ Sk.Debugger = class {
             }
             this.set_suspension(r);
         } else {
-            if (this.suspension_stack.length > 0) {
+            if (this.suspensionStack.length > 0) {
                 // Current suspension needs to be popped of the stack
                 this.pop_suspension_stack();
 
                 // We don't care about suspensions in the stack that are complete suspensions
-                while (this.suspension_stack.length >0 && this.get_active_suspension().child instanceof Sk.misceval.Suspension) {
+                while (this.suspensionStack.length >0 && this.getActiveSuspension().child instanceof Sk.misceval.Suspension) {
                     this.pop_suspension_stack();
                 }
 
-                if (this.suspension_stack.length === 0) {
+                if (this.suspensionStack.length === 0) {
                     this.stop_callback();
                     return;
                 }
 
-                var parent_suspension = this.get_active_suspension();
+                var parent_suspension = this.getActiveSuspension();
                 // The child has completed the execution. So override the child's resume
                 // so we can continue the execution.
                 parent_suspension.child.resume = function () {
@@ -434,6 +434,181 @@ Sk.Debugger = class {
             this.eval_callback(r);
         }
     }
+    startDebugger(runProgram, debuggerRef) {
+        return new Promise(function(resolveCallback, rejectCallback) {
+            try {
+                var suspension = runProgram();
+                try {
+                    if (suspension instanceof Sk.misceval.Suspension) {
+                        if (suspension.child && suspension.child.$isSuspension) {
+                            suspension = suspension.child;
+                        }
+                        debuggerRef.resolveCallback = resolveCallback;
+                        debuggerRef.rejectCallback = rejectCallback;
+                        // TODO: remove this field later    
+                        debuggerRef.isSingleStep = false;
+                        debuggerRef.handleSuspension(suspension);
+                    // I'm not sure what shouldDeferStop even is
+                    } else if (shouldDeferStop()) {
+                        debuggerRef.currentSuspension = -1;
+                    } else {
+                        resolveCallback(suspension);
+                    }
+                } catch (error) {
+                    rejectCallback(error)
+                }
+            } catch (error) {
+                rejectCallback(error)
+            }
+        })
+    }
+
+    continueForward() {
+        var _this = this;
+        return Promise.resolve().then(function() {
+            console.log(_this.currentSuspension)
+            if (-1 !== _this.currentSuspension) {
+                _this.disableStepMode()
+                return _this.resume()
+            }                
+        }).then(function() {})
+    };
+
+    onSuspension() {
+        this.outputCallback()
+        console.log('On Suspension')
+    }
+
+    getSuspensionInfo(suspension) {
+        let loopSuspension = suspension;
+        let lineNumber = loopSuspension.$lineno;
+        let columnNumber = loopSuspension.$colno;
+        let variables = loopSuspension.hasOwnProperty('$loc') ? loopSuspension.$loc : null;
+        while (loopSuspension.child && loopSuspension.child.$isSuspension) {
+            lineNumber = loopSuspension.child.$lineno; 
+            columnNumber = loopSuspension.child.$colno;
+            loopSuspension = loopSuspension.child;
+        }        
+        variables = loopSuspension.hasOwnProperty('$loc') ? loopSuspension.$loc : null;
+        return {
+            lineno: lineNumber,
+            colno: columnNumber,
+            variables: variables
+        }
+    }
+
+    pushSuspensionStack(suspension) {
+        suspension.asyncContext ? this.suspensionStack.splice(this.currentSuspension + 1, 0, suspension) : this.suspensionStack.push(suspension);
+        this.currentSuspension += 1;
+        this.onSuspension();
+    }
+
+    addAsyncSuspension(suspension) {
+        let activeSuspension = this.getActiveSuspension();
+        this.isSingleStep && this.saveState();
+        if (null != activeSuspension)
+            if (activeSuspension.asyncContext) {
+                let asyncContext = activeSuspension.asyncContext, suspensionIndex = this.currentSuspension;
+                while (suspensionIndex < this.suspensionStack.length && asyncContext === this.suspensionStack[suspensionIndex].asyncContext) { 
+                    suspensionIndex++; 
+                }
+                this.suspensionStack.splice(suspensionIndex, 0, suspension)
+            } else {
+                this.suspensionStack.splice(this.currentSuspension + 1, 0, activeSuspension.clone());
+                this.suspensionStack.splice(this.currentSuspension + 1, 0, suspension); 
+                this.currentSuspension++; 
+                this.onSuspension();
+            }
+        else  {
+            this.suspensionStack.push(suspension); 
+            this.currentSuspension = this.suspensionStack.length - 1;
+            this.onSuspension();
+        }
+    }
+}
+
+Sk.Debugger.prototype.handleSuspension = function(a) {
+    var b, c, d, e, f, g, h, k, l, m, n = this;
+    return Promise.resolve().then(function() {
+        (g = !(a instanceof Sk.misceval.Suspension)) && null != a.resolve && a.resolve(a);
+        if (h = g && n.currentSuspension < n.suspensionStack.length - 1) b = n.getActiveSuspension(), n.currentSuspension++, c = n.getActiveSuspension();
+        h && (null !== b.asyncContext && b.asyncContext !== c.asyncContext) && c.updateGlobals(c);
+        if (h) n.onSuspension();
+        else if (g && shouldDeferStop() ? n.currentSuspension = -1 : g && n.resolveCallback(), !g) return Promise.resolve().then(function() {
+            (k = n.currentSuspension < n.suspensionStack.length - 1 && (null == a.asyncContext || n.suspensionStack[n.currentSuspension].asyncContext === n.suspensionStack[n.currentSuspension + 1].asyncContext)) && n.currentSuspension++;
+            (l = k && a instanceof Sk.misceval.Suspension) && (d = n.suspensionStack[n.currentSuspension]);
+            if (l && "Sk.promise" === a.data.type) return Promise.resolve().then(function() {
+                return unrollPromise(a)
+            }).then(function(b) {
+                a = b
+            })
+        }).then(function() {
+            if (l) {
+                copyVariables.call(n,
+                    a.$locValues, d.$locValues);
+                copyVariables.call(n, a.$gblValues, d.$gblValues);
+                e = d;
+                for (f = a; e.child && e.child.$isSuspension && f.child && f.child.$isSuspension;) e = e.child, f = f.child;
+                copyVariables.call(n, f.$tmps, e.$tmps)
+            }
+            if (k) n.onSuspension();
+            else {
+                if ((m = a instanceof Sk.misceval.Suspension) && "Sk.promise" === a.data.type) return Promise.resolve().then(function() { return unrollPromise(a) }).then(function(a) { return n.handleSuspension(a) });                    
+                m && n.pushSuspensionStack(a)
+            }
+        })
+    }).then(function() {})
 };
+// I don't know if I need this
+function copyVariables(a, b) {
+    for (var c in a) {
+        if (!a.hasOwnProperty(c) || "undefined" === typeof c || c.toString().startsWith("$") || 
+            c.toString().startsWith("__") || "undefined" === typeof a[c]) {
+            break;
+        }
+        var d = a[c].__proto__.tp$name;
+        null != b[c] && -1 < this.typesToDeepCopy.indexOf(d) && (b[c] = structuredClone(a[c]))
+    }
+}
+
+function unrollPromise(suspension) {
+    function solvePromise() {
+        return Promise.resolve().then(function() {
+            if (suspension instanceof Sk.misceval.Suspension && "Sk.promise" === suspension.data.type && !suspension.optional) 
+                return suspension.data.promise.then(
+                    function(result) {
+                        suspension.data.result = result;
+                }, 
+                    function(error) {
+                        _this.error(error);
+                })
+        }).then(function() {
+            if (suspension instanceof Sk.misceval.Suspension && "Sk.promise" === suspension.data.type) {
+                suspension = resumeSuspension(suspension);
+                return solvePromise();
+            }
+        })
+    }
+    var _this = this;
+    return Promise.resolve().then(function() {        
+        return solvePromise()
+    }).then(function() {
+        return suspension
+    })
+}
+
+
+// what is this function supposed to do? idk
+function shouldDeferStop() {
+    return false;
+}
+
+
+function resumeSuspension(a) {
+    var b = a.resume();
+    b.asyncContext = a.asyncContext;
+    b.resolve = null != a.resolve ? a.resolve : b.resolve;
+    return b
+}
 
 Sk.exportSymbol("Sk.Debugger", Sk.Debugger);

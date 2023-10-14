@@ -1065,8 +1065,10 @@ export function runPythonProgram(this: any, code: string, sourceMap: any, hasTur
       breakpoints: theGlobalDebugger.check_breakpoints.bind(theGlobalDebugger),      
       execLimit: null
     });
+
     console.log(code);
     console.log(sourceMap);
+
     let lines = code.split('\n');
     for (let i = 0; i < lines.length; i++) {
       // lines with dummy variable name are not meant to be shown to the user, skip them.
@@ -1088,9 +1090,35 @@ export function runPythonProgram(this: any, code: string, sourceMap: any, hasTur
     
     startDebug();
 
-    return theGlobalDebugger.asyncToPromise(() => Sk.importMainWithBody("<stdin>", true, code, true), {}, theGlobalDebugger).then(
-      theGlobalDebugger.success.bind(theGlobalDebugger)
+    return theGlobalDebugger.startDebugger(
+      () => Sk.importMainWithBody("<stdin>", false, code, true),
+      theGlobalDebugger
+    ).then( 
+      function () {
+        console.log('Program executed');
+        
+        const pythonVariables = Sk.globals; // doesnt work change later
+        console.log(pythonVariables)
+        //  load_variables(pythonVariables); // doesnt work change later :d
+        
+        $('#stopit').hide();
+        $('#runit').show();
+        
+        stopDebug();
+        
+        if (hasPygame) {        
+          document.onkeydown = null;
+          $('#pygame-modal').hide();
+        }
+    
+        if (hasTurtle) {
+          $('#saveFilesContainer').show();
+        }
+        
+        if (cb) cb ();
+      }
     ).catch(function(err: any) {
+      console.error(err)
       const errorMessage = errorMessageFromSkulptError(err) || null;
       if (!errorMessage) {
         throw null;
@@ -1098,27 +1126,16 @@ export function runPythonProgram(this: any, code: string, sourceMap: any, hasTur
       throw new Error(errorMessage);
     });
 
-  } else {
-    // In some place the check breakpoints function is overwritten, so we need to configure
-    // the debugger again
-    Sk.configure({
-      output: outf,
-      read: builtinRead,
-      inputfun: inputFromInlineModal,
-      inputfunTakesPrompt: true,
-      __future__: Sk.python3,
-      debugging: true,
-      breakpoints: theGlobalDebugger.check_breakpoints.bind(theGlobalDebugger),      
-      execLimit: null
-    });
-   
-    theGlobalDebugger.disable_step_mode();
-    return theGlobalDebugger.resume().then(theGlobalDebugger.success.bind(theGlobalDebugger)).catch(function(err: any) {
-      const errorMessage = errorMessageFromSkulptError(err) || null;
-      if (!errorMessage) {
-        throw null;
-      }
-      throw new Error(errorMessage);
+  } else {    
+    // maybe remove debug marker here
+    return theGlobalDebugger.continueForward()
+      .catch(function(err: any) {
+        console.error(err)
+        const errorMessage = errorMessageFromSkulptError(err) || null;
+        if (!errorMessage) {
+          throw null;
+        }
+        throw new Error(errorMessage);
     });
   }
 

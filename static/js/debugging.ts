@@ -299,8 +299,10 @@ function clearDebugVariables() {
 }
 
 export function incrementDebugLine() {  
-  const active_suspension = theGlobalDebugger.get_active_suspension();
-  const lineNumber = active_suspension.$lineno;
+  const active_suspension = theGlobalDebugger.getActiveSuspension();
+  const suspension_info = theGlobalDebugger.getSuspensionInfo(active_suspension);  
+  const lineNumber = suspension_info.lineno;
+  
   if (!lineNumber) return;
   for (const [_, map] of Object.entries(theGlobalSourcemap)) {
     const startingLine = map.python_range.from_line + theGlobalDebugger.get_code_starting_line();
@@ -312,7 +314,7 @@ export function incrementDebugLine() {
         // lines in ace start at 0
         theGlobalEditor.setDebuggerCurrentLine(map.hedy_range.from_line - 1);
         break;        
-      } else if (theLevel >= 8 && blockCommands.includes(map.command)) { // these commands always come up in the tree
+      } else if (theLevel >= 8 && blockCommands.includes(map.command)) { // these commands always come up in the tree so we visit them later
         theGlobalEditor.setDebuggerCurrentLine(map.hedy_range.from_line - 1);
         break;
       }

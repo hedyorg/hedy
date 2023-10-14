@@ -151,7 +151,7 @@ class SourceMap:
             start_index = python_code.find(python_statement_code)
             code_char_length = len(python_source_code.code)
 
-            for i in range(python_code_mapped.count(python_statement_code)):
+            for i in range(python_code_mapped.count(python_source_code.code)):
                 start_index = python_code.find(python_statement_code, start_index+code_char_length)
                 start_index = max(0, start_index)  # not found (-1) means that start_index = 0
 
