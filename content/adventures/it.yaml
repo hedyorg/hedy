@@ -834,9 +834,9 @@ adventures:
                     {for} animale {in} animali
                       {print} 'Mi piace il ' animale
             11:
-                story_text: |-
-                    `{print}` funziona esattamente come prima ma aggiungiamo una nuova forma del comando `{for}`. Ora puoi scrivere `{for} counter {in} {range} 1 {to} 5` invece di `{repeat} 5 {times}` e usare `counter` nel tuo programma.
-                    Provalo per vedere cosa succede! Ricordati di indentare dopo i comandi `{for}` e `{if}` (Significa iniziare una riga con quattro spazi).
+                story_text: |
+                    You have reached level 11, you're doing great! In the higher levels, Hedy is focussing more and more on teaching you the programming language Python.
+                    In Python there is no `{repeat}` command, but there is a command that works like {repeat}. Are you curious to find out how to say `{repeat}` in Python language? Quickly go on to find out!
                 start_code: |-
                     {for} contatore {in} {range} 1 {to} 5
                         {print} contatore
@@ -853,8 +853,7 @@ adventures:
                     {print} 'I numeri decimali ora hanno bisogno di essere scritti con il punto'
                     {print} 2.5 + 2.5
             13:
-                story_text: We are now going to learn `{and}` and `{or}`! If you want to check two statements, you don't have to use two {if}'s but can use `{and}` and `{or}`. If you use `{and}`, both statements, left and right of the `{and}` need to be true. We can also use `{or}`. Then only one statement
-                    needs to be correct.
+                story_text: We are now going to learn `{and}` and `{or}`! If you want to check two statements, you don't have to use two {if}'s but can use `{and}` and `{or}`. If you use `{and}`, both statements, left and right of the `{and}` need to be true. We can also use `{or}`. Then only one statement needs to be correct.
                 example_code: |
                     ```
                     name = {ask} 'what is your name?'

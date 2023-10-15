@@ -832,9 +832,9 @@ adventures:
                     {for} besto {in} bestoj
                       {print} 'Mi amas ' besto 'n'
             11:
-                story_text: |-
-                    `{print}` funkcias same, sed ni ebligis novan formon de `{for}`. Oni nun povas uzi `{for} numero {in} {range} 1 {to} 5` kaj uzi `numero` en via programo.
-                    Provu ĝin por vidi kio okazos! Ne forgesu deŝovon post la deklaroj `{for}` kaj `{if}`. (Tio signifas komenci linion per kvar spacoj.)
+                story_text: |
+                    You have reached level 11, you're doing great! In the higher levels, Hedy is focussing more and more on teaching you the programming language Python.
+                    In Python there is no `{repeat}` command, but there is a command that works like {repeat}. Are you curious to find out how to say `{repeat}` in Python language? Quickly go on to find out!
                 start_code: |-
                     {for} nombro {in} {range} 1 {to} 5
                         {print} nombro
@@ -851,8 +851,7 @@ adventures:
                     {print} 'Decimalaj nombroj nun postulas punkton (ne komon)'
                     {print} 2.5 + 2.5
             13:
-                story_text: Ni nun lernos `{and}` kaj `{or}`! Se oni volas kontroli du kondiĉojn, oni ne devas uzi du `{if}`-ojn sed povas uzi `{and}` kaj `{or}`. Se oni uzas `{and}`, ambaŭ kondiĉoj, maldekstra kaj dekstra de la `{and}`, devas esti veraj. Oni ankaŭ povas uzi `{or}`. Tiam nur unu kondiĉo
-                    devas esti vera.
+                story_text: Ni nun lernos `{and}` kaj `{or}`! Se oni volas kontroli du kondiĉojn, oni ne devas uzi du `{if}`-ojn sed povas uzi `{and}` kaj `{or}`. Se oni uzas `{and}`, ambaŭ kondiĉoj, maldekstra kaj dekstra de la `{and}`, devas esti veraj. Oni ankaŭ povas uzi `{or}`. Tiam nur unu kondiĉo devas esti vera.
                 example_code: |
                     ```
                     nomo = {ask} 'kio estas via nomo?'
@@ -3567,8 +3566,8 @@ adventures:
                 example_code_2: |
                     ```
                     anguloj = {ask} 'Kiom da anguloj mi desegnu?'
-                    angulo = 360 / anguloj
-                    {repeat} angulo {times}
+                    angulo = 360 / anguloj 
+                    {repeat} anguloj {times}
                         {turn} _
                         {forward} _
                     ```

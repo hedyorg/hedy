@@ -708,8 +708,7 @@ adventures:
         description: Niveau forklaring
         levels:
             1:
-                story_text: "På niveau 1 kan do bruge kommandoerne `{print}`, `{ask}` og `{echo}`.\n Skriv din programkode i programmeringsfeltet. Eller tryk på den grønne knap i kodeeksemplet, og koden vil blive skrevet for dig!\nPrøv selv koden med den grønne 'Kør koden' knappen under programmeringsfeltet.\n\
-                    \nDu kan printe tekst på skærmen ved at bruge `{print}` kommandoen.     \n"
+                story_text: "På niveau 1 kan do bruge kommandoerne `{print}`, `{ask}` og `{echo}`.\n Skriv din programkode i programmeringsfeltet. Eller tryk på den grønne knap i kodeeksemplet, og koden vil blive skrevet for dig!\nPrøv selv koden med den grønne 'Kør koden' knappen under programmeringsfeltet.\n\nDu kan printe tekst på skærmen ved at bruge `{print}` kommandoen.     \n"
                 start_code: '{print} hej verden!'
             2:
                 story_text: |
@@ -845,9 +844,9 @@ adventures:
                     {for} dyr {in} alle_dyr
                       {print} 'Jeg elsker ' dyr
             11:
-                story_text: |-
-                    `{print}` virker på samme måde men vi tilføjer en ny slags `{for}`. Du kan nu skrive `{for} counter {in} {range} 1 {to} 5` i stedet for `{repeat} 5 {times}` og bruge `counter` i dit program.
-                    Prøv og se hvad der sker! Husk at bruge indrykning efter `{for}` og `{if}` kommandoen (De betyder at linjen starter med fire mellemrum).
+                story_text: |
+                    You have reached level 11, you're doing great! In the higher levels, Hedy is focussing more and more on teaching you the programming language Python.
+                    In Python there is no `{repeat}` command, but there is a command that works like {repeat}. Are you curious to find out how to say `{repeat}` in Python language? Quickly go on to find out!
                 start_code: |-
                     {for} tæller {in} {range} 1 {to} 5
                         {print} tæller
@@ -864,8 +863,7 @@ adventures:
                     {print} 'kommatal skal nu bruge et punktum'
                     {print} 2.5 + 2.5
             13:
-                story_text: Vi skal nu lære `{and}` og `{or}`! Hvis du vil tjekke to udsagn, behøver du ikke bruge to {if} kommandoer men kan blot bruge `{and}` og `{or}`. Hvis du bruger `{and}`, skal begge udsagn, til højre og venstre for `{and}` være sande. Vi kan også bruge `{or}`. Så behøver kun et
-                    enkelt udsagn være sandt.
+                story_text: Vi skal nu lære `{and}` og `{or}`! Hvis du vil tjekke to udsagn, behøver du ikke bruge to {if} kommandoer men kan blot bruge `{and}` og `{or}`. Hvis du bruger `{and}`, skal begge udsagn, til højre og venstre for `{and}` være sande. Vi kan også bruge `{or}`. Så behøver kun et enkelt udsagn være sandt.
                 example_code: |
                     ```
                     navn = {ask} 'hvad hedder du?'
@@ -3148,9 +3146,7 @@ adventures:
                 story_text: |
                     In this level, you can program a song like OldMacDonald even more quickly. You can connect the right animal to the right sound by simply putting them in the same place in the list.
                     The Drunken Sailor is also quickly made in this level. You only need 8 lines for the entire song, check it out!
-                example_code: "```\nalle_dyr = ['gris', 'hund', 'ko']\nlyde = ['øh', 'vuf', 'muh']\n{for} i {in} {range} 1 {to} 3\n    dyr = alle_dyr[i]\n    lyd = lyde[i]\n    {print} 'Jens Hansen havde en bondegård'\n    {print} 'ih ah ih ah oh!'\n    {print} 'og på den gård der var en ' dyr\n    {print}\
-                    \ 'ih ah ih ah oh!'\n    {print} 'Der var ' lyd lyd' her'\n    {print} 'og ' lyd lyd' der'\n    {print} lyde ' her'\n    {print} lyde ' der'\n    {print} 'alle steder ' lyde lyde\n```\n\n```\nlinjer = ['Hvad skal vi gøre med den fulde sømand', 'Smid ham i brummen til han vågner', 'Han\
-                    \ skal klynges op i masten']\n{for} linje {in} linjer\n    {for} i {in} {range} 1 {to} 3\n        {print} linje \n    {print} 'Tidligt om morgnen.'\n    {for} i {in} {range} 1 {to} 3\n        {print} 'Hu hej, se hun sejler'\n    {print} 'Tidligt om morgnen.'\n```\n"
+                example_code: "```\nalle_dyr = ['gris', 'hund', 'ko']\nlyde = ['øh', 'vuf', 'muh']\n{for} i {in} {range} 1 {to} 3\n    dyr = alle_dyr[i]\n    lyd = lyde[i]\n    {print} 'Jens Hansen havde en bondegård'\n    {print} 'ih ah ih ah oh!'\n    {print} 'og på den gård der var en ' dyr\n    {print} 'ih ah ih ah oh!'\n    {print} 'Der var ' lyd lyd' her'\n    {print} 'og ' lyd lyd' der'\n    {print} lyde ' her'\n    {print} lyde ' der'\n    {print} 'alle steder ' lyde lyde\n```\n\n```\nlinjer = ['Hvad skal vi gøre med den fulde sømand', 'Smid ham i brummen til han vågner', 'Han skal klynges op i masten']\n{for} linje {in} linjer\n    {for} i {in} {range} 1 {to} 3\n        {print} linje \n    {print} 'Tidligt om morgnen.'\n    {for} i {in} {range} 1 {to} 3\n        {print} 'Hu hej, se hun sejler'\n    {print} 'Tidligt om morgnen.'\n```\n"
                 start_code: '# placer din kode her'
             18:
                 story_text: |
@@ -3620,8 +3616,7 @@ adventures:
                     ```
                 start_code: '{print} ''Tegner figurer'''
             8:
-                story_text: "Nu hvor vi kan gentage flere streger, kan vi lave lettere lave figurer.\nVi skal kun sætte vinklen en gang og så bruge den variabel i `{repeat}` kommandoen.\n\n### Opgave 1\nKoden i eksemplet skaber et kvadrat. Ændrer koden så den skaber en anden figur, så som en trekant eller\
-                    \ sekskant. \n Dette kræver at du ændrer to linjer i koden.\nTip: En hel omgang er 360 grader.\n\n### Opgave 2\nLav nu en tegning der består af mindst på polygoner.\n"
+                story_text: "Nu hvor vi kan gentage flere streger, kan vi lave lettere lave figurer.\nVi skal kun sætte vinklen en gang og så bruge den variabel i `{repeat}` kommandoen.\n\n### Opgave 1\nKoden i eksemplet skaber et kvadrat. Ændrer koden så den skaber en anden figur, så som en trekant eller sekskant. \n Dette kræver at du ændrer to linjer i koden.\nTip: En hel omgang er 360 grader.\n\n### Opgave 2\nLav nu en tegning der består af mindst på polygoner.\n"
                 example_code: |
                     ```
                     vinkel = 90
@@ -3635,7 +3630,7 @@ adventures:
                 example_code_2: |
                     ```
                     kanter = {ask} 'Hvor mange kanter skal jeg tegne?'
-                    vinkel = 360 / hjørner
+                    vinkel = 360 / kanter
                     {repeat} kanter {times}
                         {turn} _
                         {forward} _

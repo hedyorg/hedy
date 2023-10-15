@@ -719,8 +719,7 @@ adventures:
         description: Tason selitys
         levels:
             1:
-                story_text: "Tasolla 1 voit käyttää komentoja `{print}`, `{ask}` ja `{echo}`.\n Kirjoita koodisi ohjelmointikenttään. Voit myös painaa vihreää painiketta esimerkkikoodilohkossa, niin koodi kirjoitetaan puolestasi!\nKokeile koodia itse ohjelmointikentän alla olevalla vihreällä \"Suorita\
-                    \ koodi\" -painikkeella.\n \nVoit tulostaa tekstiä näytölle komennolla `{print}`.     \n"
+                story_text: "Tasolla 1 voit käyttää komentoja `{print}`, `{ask}` ja `{echo}`.\n Kirjoita koodisi ohjelmointikenttään. Voit myös painaa vihreää painiketta esimerkkikoodilohkossa, niin koodi kirjoitetaan puolestasi!\nKokeile koodia itse ohjelmointikentän alla olevalla vihreällä \"Suorita koodi\" -painikkeella.\n \nVoit tulostaa tekstiä näytölle komennolla `{print}`.     \n"
                 start_code: '{print} Hei maailma!'
             2:
                 story_text: |
@@ -856,11 +855,9 @@ adventures:
                     {for} animal {in} animals
                       {print} 'Rakastan ' animal
             11:
-                story_text: |-
-                    Tällä tasolla lisäämme uuden muodon kohteelle `{for}`. Aikaisemmilla tasoilla käytimme `{for} luetteloiden kanssa, mutta voimme käyttää `{for}` myös numeroiden kanssa.
-                    Teemme sen lisäämällä muuttujanimen, jota seuraa  `{in}` `{range}`. Kirjoitamme sitten numeron, josta aloitetaan `{to}` ja numeron, johon lopetetaan.
-
-                    Kokeile esimerkkiä, niin näet mitä tapahtuu! Tällä tasolla sinun on taas käytettävä sisennyksiä `{for}` -lauseiden alapuolisilla riveillä.
+                story_text: |
+                    You have reached level 11, you're doing great! In the higher levels, Hedy is focussing more and more on teaching you the programming language Python.
+                    In Python there is no `{repeat}` command, but there is a command that works like {repeat}. Are you curious to find out how to say `{repeat}` in Python language? Quickly go on to find out!
                 start_code: |-
                     {for} laskin {in} {range} 1 {to} 5
                         {print} laskin
@@ -877,8 +874,7 @@ adventures:
                     {print} 'desimaalinumeroissa on nyt käytettävä pistettä'
                     {print} 2.5 + 2.5
             13:
-                story_text: We are now going to learn `{and}` and `{or}`! If you want to check two statements, you don't have to use two {if}'s but can use `{and}` and `{or}`. If you use `{and}`, both statements, left and right of the `{and}` need to be true. We can also use `{or}`. Then only one statement
-                    needs to be correct.
+                story_text: We are now going to learn `{and}` and `{or}`! If you want to check two statements, you don't have to use two {if}'s but can use `{and}` and `{or}`. If you use `{and}`, both statements, left and right of the `{and}` need to be true. We can also use `{or}`. Then only one statement needs to be correct.
                 example_code: |
                     ```
                     name = {ask} 'what is your name?'
@@ -1215,10 +1211,10 @@ adventures:
                         {print} 'I love ' animal
             11:
                 story_text: |-
-                    In this level, we add a new form of the `{for}`. In earlier levels, we used `{for}` with a list, but we can also use `{for}` with numbers.
-                    We do that by adding a variable name, followed by  `{in}` `{range}`. We then write the number to start at, `{to}` and the number to end at.
+                    Tällä tasolla lisäämme uuden muodon kohteelle `{for}`. Aikaisemmilla tasoilla käytimme `{for} luetteloiden kanssa, mutta voimme käyttää `{for}` myös numeroiden kanssa.
+                    Teemme sen lisäämällä muuttujanimen, jota seuraa  `{in}` `{range}`. Kirjoitamme sitten numeron, josta aloitetaan `{to}` ja numeron, johon lopetetaan.
 
-                    Try the example to see what happens! In this level again, you will need to use indentations in lines below the `{for}` statements.
+                    Kokeile esimerkkiä, niin näet mitä tapahtuu! Tällä tasolla sinun on taas käytettävä sisennyksiä `{for}` -lauseiden alapuolisilla riveillä.
                 example_code: |
                     ```
                     {for} counter {in} {range} 1 {to} 10

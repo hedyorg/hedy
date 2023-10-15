@@ -20,12 +20,10 @@ adventures:
                     {print} Aude tot felul de zgomote oriunde
                     {print} Ii este frica de o pădure bântuita
                     ```
-                story_text_2: "### Exercițiu\nCrează acum povestea ta cu cel puțin 6 line de cod.\nAceastă poveste nu poate fi la fel ca si codul din examplu. \nUtilizează cel puțin o dată comanda `{ask}` și o comandă `{echo}` .\nPoți scrie ceva despre ceea ce iți place ție. \nDacă nu ai idei, alege unul\
-                    \ din următoarele subiecte: cinema, meci de fotbal sau o zi la grădina zoologică.\n"
+                story_text_2: "### Exercițiu\nCrează acum povestea ta cu cel puțin 6 line de cod.\nAceastă poveste nu poate fi la fel ca si codul din examplu. \nUtilizează cel puțin o dată comanda `{ask}` și o comandă `{echo}` .\nPoți scrie ceva despre ceea ce iți place ție. \nDacă nu ai idei, alege unul din următoarele subiecte: cinema, meci de fotbal sau o zi la grădina zoologică.\n"
                 start_code: '{print} Povestea ta începe aici'
             2:
-                story_text: "In nivelul 2 poți face o poveste mai frumoasă și interesantă. Numele personajului principal poate fi oriunde în propoziție.\n\nPentru a crea asta trebuie să programezi un pic mai mult de data asta. Trebuie să decizi numele personajului principal. \n\nPoți pune acum numele\
-                    \ oriunde vrei in propoziție.\n"
+                story_text: "In nivelul 2 poți face o poveste mai frumoasă și interesantă. Numele personajului principal poate fi oriunde în propoziție.\n\nPentru a crea asta trebuie să programezi un pic mai mult de data asta. Trebuie să decizi numele personajului principal. \n\nPoți pune acum numele oriunde vrei in propoziție.\n"
                 example_code: |-
                     ```
                     name {is} {ask} What is the name of the main character?
@@ -166,8 +164,7 @@ adventures:
                     ```
                 start_code: '# place your code here'
             9:
-                story_text: "In acest nivel poți folosi comenzile  `{if}` și `{repeat}` in interiorul altor `{if}` și `{repeat}` comenzi. \nAceasta posibilitate iți oferă mai multe opțiuni si te ajută sa creezi o poveste interactivă.\n\n### Exercițiu 1\nCompletează programul astfel incât comanda `{if}`\
-                    \ funcționează corect.\n\n### Exercițiul 2\nAdaugă `{if}` și `{else}` in partea din poveste in care Robin merge acasă.\n\n### Exercițiul 3\nIntoarce-te la povestea de la nivelul și folosește cel puțin de două ori comanda `{if}`s în interiorul altei comenzi `{if}`.\n"
+                story_text: "In acest nivel poți folosi comenzile  `{if}` și `{repeat}` in interiorul altor `{if}` și `{repeat}` comenzi. \nAceasta posibilitate iți oferă mai multe opțiuni si te ajută sa creezi o poveste interactivă.\n\n### Exercițiu 1\nCompletează programul astfel incât comanda `{if}` funcționează corect.\n\n### Exercițiul 2\nAdaugă `{if}` și `{else}` in partea din poveste in care Robin merge acasă.\n\n### Exercițiul 3\nIntoarce-te la povestea de la nivelul și folosește cel puțin de două ori comanda `{if}`s în interiorul altei comenzi `{if}`.\n"
                 example_code: |
                     ```
                     {print} 'Robin is walking downtown'
@@ -848,11 +845,9 @@ adventures:
                     {for} animal {in} animale
                       {print} 'Îmi place' animal
             11:
-                story_text: |-
-                    In acest nivel, adăugăm o nouă formă a comenzii `{for}`. În nivelurile anterioare, am folosit `{for}` cu o listă, dar putem folosi `{for}` și cu numere.
-                    Facem asta adăugând un nume de variabilă, urmat de `{in}` `{range}`. Apoi scriem numărul de la care începem, `{to}` și numărul la care se termină.
-
-                    Încercați exemplul pentru a vedea ce se întâmplă! Și la acest nivel va trebui să utilizați indentări în rândurile de sub instrucțiunile `{for}`.
+                story_text: |
+                    You have reached level 11, you're doing great! In the higher levels, Hedy is focussing more and more on teaching you the programming language Python.
+                    In Python there is no `{repeat}` command, but there is a command that works like {repeat}. Are you curious to find out how to say `{repeat}` in Python language? Quickly go on to find out!
                 start_code: |-
                     {for} număr {in} {range} 1 {to} 5
                         {print} număr
@@ -1211,9 +1206,10 @@ adventures:
                         {print} 'I love ' animal
             11:
                 story_text: |-
-                    In this level, we add a new form of the `{for}`. In earlier levels, we used `{for}` with a list, but we can also use `{for}` with numbers.
-                    We do that by adding a variable name, followed by  `{in}` `{range}`. We then write the number to start at, `{to}` and the number to end at.
-                    Try the example to see what happens! In this level again, you will need to use indentations in lines below the `{for}` statements.
+                    In acest nivel, adăugăm o nouă formă a comenzii `{for}`. În nivelurile anterioare, am folosit `{for}` cu o listă, dar putem folosi `{for}` și cu numere.
+                    Facem asta adăugând un nume de variabilă, urmat de `{in}` `{range}`. Apoi scriem numărul de la care începem, `{to}` și numărul la care se termină.
+
+                    Încercați exemplul pentru a vedea ce se întâmplă! Și la acest nivel va trebui să utilizați indentări în rândurile de sub instrucțiunile `{for}`.
                 example_code: |
                     ```
                     {for} counter {in} {range} 1 {to} 10

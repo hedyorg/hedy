@@ -705,8 +705,7 @@ adventures:
         description: Shpjegim i niveleve
         levels:
             1:
-                story_text: "Në level 1 mund ti përdorni komandat `{print}`, `{ask}` dhe `{echo}`.\n Shkruani kodin në fushën e programimit. Ose shtypeni butonin e gjelbër në bllokun që tregon shembull, dhe kodi do të shkruhet për ju!\nProvojeni kodin tuaj duke shtypur butonin 'Ekzekuto kodin' ndër fushën\
-                    \ e programimit.\n\n Mund të printoni tekst në ekran duke përdorur komandën `{print}`.     \n"
+                story_text: "Në level 1 mund ti përdorni komandat `{print}`, `{ask}` dhe `{echo}`.\n Shkruani kodin në fushën e programimit. Ose shtypeni butonin e gjelbër në bllokun që tregon shembull, dhe kodi do të shkruhet për ju!\nProvojeni kodin tuaj duke shtypur butonin 'Ekzekuto kodin' ndër fushën e programimit.\n\n Mund të printoni tekst në ekran duke përdorur komandën `{print}`.     \n"
                 start_code: '{print} përshëndetje botë!'
             2:
                 story_text: |
@@ -842,9 +841,9 @@ adventures:
                     {for} kafsha {in} kafshët
                       {print} 'Un e dua' kafsha
             11:
-                story_text: |-
-                    `{print}` punon njëlloj por ne shtojmë një mënyrë të re të komandës `{for}`. Tani mund të shkruani `{for} counter {in} {range} 1 {to} 5` në vend të `{repeat} 5 {times}` dhe përdorni `counter` in your program.
-                    Provojeni dhe shiheni çfarë ndodhën! Mbani mend hapësirat para rreshtave nën komandat `{for}` dhe `{if}` (Kjo do të thotë të shkruani 4 hapësira, pastaj kodin).
+                story_text: |
+                    You have reached level 11, you're doing great! In the higher levels, Hedy is focussing more and more on teaching you the programming language Python.
+                    In Python there is no `{repeat}` command, but there is a command that works like {repeat}. Are you curious to find out how to say `{repeat}` in Python language? Quickly go on to find out!
                 start_code: |-
                     {for} numëruesi {in} {range} 1 {to} 5
                         {print} numëruesi
@@ -861,8 +860,7 @@ adventures:
                     {print} 'numrat decimal duhet të kenë pika'
                     {print} 2.5 + 2.5
             13:
-                story_text: Ne tash do të mësojmë për komandën `{and}` dhe `{or}`! Nëse doni të kontrolloni dy deklarata, nuk ka nevojë për dy komanda {if} por mund të përdorni `{and}` dhe `{or}`. Nëse përdorni `{and}`, të dyja deklaratat, majtë edhe djathtë `{and}` duhet të jenë të vërteta. Ne gjithashtu
-                    mund të përdorim `{or}` atëherë vetëm njëra deklaratë duhet të jetë e vërtetë.
+                story_text: Ne tash do të mësojmë për komandën `{and}` dhe `{or}`! Nëse doni të kontrolloni dy deklarata, nuk ka nevojë për dy komanda {if} por mund të përdorni `{and}` dhe `{or}`. Nëse përdorni `{and}`, të dyja deklaratat, majtë edhe djathtë `{and}` duhet të jenë të vërteta. Ne gjithashtu mund të përdorim `{or}` atëherë vetëm njëra deklaratë duhet të jetë e vërtetë.
                 example_code: |
                     ```
                     emri= {ask} 'Si e ke emrin?'
@@ -3506,8 +3504,7 @@ adventures:
                     {turn} këndi
                     {forward} 25
             3:
-                story_text: "Në këtë nivel ju mund të përdorni komandën `{at} {random}` me vizatimin e breshkës. Një zgjedhje random e bën breshkën të ecë rrugë të ndryshme çdo herë. Përdorni `{at} {random}` për të zgjedhur një vlerë nga një listë. \n\n### Sfidë\nA mund të bëni kopjoni rreshtat 2 dhe\
-                    \ 3 për të krijuar një rrugë më të gjatë random.\n"
+                story_text: "Në këtë nivel ju mund të përdorni komandën `{at} {random}` me vizatimin e breshkës. Një zgjedhje random e bën breshkën të ecë rrugë të ndryshme çdo herë. Përdorni `{at} {random}` për të zgjedhur një vlerë nga një listë. \n\n### Sfidë\nA mund të bëni kopjoni rreshtat 2 dhe 3 për të krijuar një rrugë më të gjatë random.\n"
                 example_code: |
                     ```
                     kënde {is} 10, 50, 90, 150, 250
@@ -3628,8 +3625,8 @@ adventures:
                 example_code_2: |
                     ```
                     këndet = {ask} 'Sa kënde duhet të vizatoj?'
-                    këndi = 360 / këndet
-                    {repeat} këndi {times}
+                    këndi = 360 / këndet 
+                    {repeat} këndet {times}
                         {turn} _
                         {forward} _
                     ```

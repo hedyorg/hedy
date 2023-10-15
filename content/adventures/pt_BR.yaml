@@ -837,9 +837,9 @@ adventures:
                     {for} animal {in} animais
                       {print} 'Eu adoro ' animal
             11:
-                story_text: |-
-                    `{print}` continua funcionando da mesma forma, mas adicionamos uma nova forma de `{for}`. Agora você pode escrever `{for} contador {in} {range} 1 {to} 5` e usar `contador` em seu programa.
-                    Experimente para ver o que acontece! Lembre-se de usar indentações após as instruções `{for}` e `{if}` (isso significa iniciar uma frase com quatro espaços)
+                story_text: |
+                    You have reached level 11, you're doing great! In the higher levels, Hedy is focussing more and more on teaching you the programming language Python.
+                    In Python there is no `{repeat}` command, but there is a command that works like {repeat}. Are you curious to find out how to say `{repeat}` in Python language? Quickly go on to find out!
                 start_code: |-
                     {for} contador {in} {range} 1 {to} 5
                         {print} contador
@@ -856,8 +856,7 @@ adventures:
                     {print} 'números decimais agora precisam de um ponto'
                     {print} 2.5 + 2.5
             13:
-                story_text: Agora vamos aprender `{and}` e `{or}`! Se você quiser verificar duas declarações, você não precisa usar dois `{if}`s, mas pode usar `{and}` e `{or}`. Se você usar `{and}`, ambas as declarações, à esquerda e à direita de `{and}` precisam ser verdadeiras. Também podemos usar
-                    `{or}`. Então, apenas uma afirmação precisa estar correta.
+                story_text: Agora vamos aprender `{and}` e `{or}`! Se você quiser verificar duas declarações, você não precisa usar dois `{if}`s, mas pode usar `{and}` e `{or}`. Se você usar `{and}`, ambas as declarações, à esquerda e à direita de `{and}` precisam ser verdadeiras. Também podemos usar `{or}`. Então, apenas uma afirmação precisa estar correta.
                 example_code: |
                     ```
                     nome = {ask} 'qual o seu nome?'
@@ -3538,7 +3537,7 @@ adventures:
                     ```
                     ângulos = {ask} 'Quantos ângulos eu deve desenhar?'
                     ângulo= 360 / ângulos
-                    {repeat} ângulo {times}
+                    {repeat} ângulos {times}
                         {turn} _
                         {forward} _
                     ```

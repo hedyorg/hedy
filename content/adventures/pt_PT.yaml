@@ -12,8 +12,7 @@ adventures:
 
                     Após a primeira linha, começa com `print` se quiseres que a frase seja escrita.
                     Utilizas `echo` se quiseres colocar o teu personagem principal no final da frase.
-                example_code: "```\nask O(A) personagem principal desta história é ...\nprint O(A) personagem principal vai caminhar agora na floresta\necho Está um pouco(a) assustado(a) \nprint Ouve barulhos estranhos por toda a parte\nprint Receia que esta floresta seja assombrada\n```\n\nÉ uma pena\
-                    \ só conseguires criar frases em que o nome do personagem principal aparece no final, certo? Depois de praticarmos com esta história, prossegue para o nível 2 e, a seguir, para o nível 3, onde podes criar programas cada vez mais complexos.\n"
+                example_code: "```\nask O(A) personagem principal desta história é ...\nprint O(A) personagem principal vai caminhar agora na floresta\necho Está um pouco(a) assustado(a) \nprint Ouve barulhos estranhos por toda a parte\nprint Receia que esta floresta seja assombrada\n```\n\nÉ uma pena só conseguires criar frases em que o nome do personagem principal aparece no final, certo? Depois de praticarmos com esta história, prossegue para o nível 2 e, a seguir, para o nível 3, onde podes criar programas cada vez mais complexos.\n"
                 story_text_2: |
                     ### Exercise
                     Can you make your own story in Hedy now by using `{print}` , `{ask}` and `{echo}`?
@@ -656,8 +655,7 @@ adventures:
         description: Explicação do nível
         levels:
             1:
-                story_text: "No nível 1 pode usar os comandos `{print}`, `{ask}` e `{echo}`. \nEscreve o teu código no painel de programação. Ou pressiona o botão verde no bloco do código exemplo, e o código será digitado para ti! \nExperimenta o código com o botão verde 'Executar código', por baixo do\
-                    \ painel de programação. \n \nPodes imprimir o texto no ecrã usando o comando `{print}`.     \n"
+                story_text: "No nível 1 pode usar os comandos `{print}`, `{ask}` e `{echo}`. \nEscreve o teu código no painel de programação. Ou pressiona o botão verde no bloco do código exemplo, e o código será digitado para ti! \nExperimenta o código com o botão verde 'Executar código', por baixo do painel de programação. \n \nPodes imprimir o texto no ecrã usando o comando `{print}`.     \n"
                 start_code: print Olá mundo!
             2:
                 story_text: |
@@ -795,8 +793,11 @@ adventures:
                     for animal in animals
                       print 'I love ' animal
             11:
-                story_text: '`print` funciona na mesma mas o `repeat` agora é substituído por `for`! Podes agora escrever `for counter in range 1 to 5` e usar `counter` no teu programa. Experimenta para veres o que acontece! Lembra-te de usar a indentação a seguir às instruções `for` e `if` (Isto significa
-                    começar uma frase com quatro espaços).'
+                story_text: 'You have reached level 11, you''re doing great! In the higher levels, Hedy is focussing more and more on teaching you the programming language Python.
+
+                    In Python there is no `{repeat}` command, but there is a command that works like {repeat}. Are you curious to find out how to say `{repeat}` in Python language? Quickly go on to find out!
+
+                    '
                 start_code: |-
                     for counter in range 1 to 5
                         print counter
@@ -813,8 +814,7 @@ adventures:
                     {print} 'decimal numbers now need to use a dot'
                     {print} 2.5 + 2.5
             13:
-                story_text: Vamos agora aprender `and` e `or`! Se queres verificar duas instruções, não precisas de usar dois `if` mas podes usar `and` e `or`. Se utilizares `and`, ambas as instruções, à esquerda e à direita do `and` têm de ser verdadeiras. Podemos também utilizar `or`. Neste caso, apenas
-                    uma das instruções tem de ser verdadeira.
+                story_text: Vamos agora aprender `and` e `or`! Se queres verificar duas instruções, não precisas de usar dois `if` mas podes usar `and` e `or`. Se utilizares `and`, ambas as instruções, à esquerda e à direita do `and` têm de ser verdadeiras. Podemos também utilizar `or`. Neste caso, apenas uma das instruções tem de ser verdadeira.
                 example_code: |
                     ```
                     name = ask 'what is your name?'
@@ -869,8 +869,7 @@ adventures:
                     fruta = ['maçã', 'banana', 'cereja']
                     print fruta
             17:
-                story_text: "Agora, nós vamos alterar um pouco a indentação. Cada vez que nós precisarmos de uma indentação, nós temos de colocar `:` na linha antes da indentação. \n \nNeste nível, também pode usar um novo comando:  `{elif}`. `{elif}` é curto para {else} {if} e precisa disto quando quiser\
-                    \ criar 3 (ou mais!) opções.\nDê uma vista de olhos!"
+                story_text: "Agora, nós vamos alterar um pouco a indentação. Cada vez que nós precisarmos de uma indentação, nós temos de colocar `:` na linha antes da indentação. \n \nNeste nível, também pode usar um novo comando:  `{elif}`. `{elif}` é curto para {else} {if} e precisa disto quando quiser criar 3 (ou mais!) opções.\nDê uma vista de olhos!"
                 start_code: |-
                     for i in range 1 to 10:
                         print i

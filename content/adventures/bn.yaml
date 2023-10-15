@@ -745,8 +745,7 @@ adventures:
                 start_code: |
                     repeat 3 times print 'হেডি মজাদার!'
             8:
-                story_text: "ask এবং print ঠিক একই ভাবেই কাজ করবে. কিন্তু if এবং repeat পরিবর্তিত হয়েছে! আপনি এখন কোডের গ্রুপ গুলোকে একসাথে এক্সিকিউট করতে পারেন , তবে আপনাকে কোডটিকে ইন্ডেণ্ট করতে হবে . তার মানে লাইনের শুরুতে চারটা স্পেশ দেওয়া. একটি লাইনের ব্লক তৈরি করেতে চাইলেও ঠিক একই কাজ করতে হবে\t\
-                    if আপনি একটি  `পুনরাবৃত্তি` এবং একটি  `if ` একত্রিত করতে চান আপনাকে প্রত্রেকটি ব্লক ইন্ডেণ্ট করতে হবে.  আরও বিশদের জন্যে উদাহরণ কোডটি দেখুন!\n"
+                story_text: "ask এবং print ঠিক একই ভাবেই কাজ করবে. কিন্তু if এবং repeat পরিবর্তিত হয়েছে! আপনি এখন কোডের গ্রুপ গুলোকে একসাথে এক্সিকিউট করতে পারেন , তবে আপনাকে কোডটিকে ইন্ডেণ্ট করতে হবে . তার মানে লাইনের শুরুতে চারটা স্পেশ দেওয়া. একটি লাইনের ব্লক তৈরি করেতে চাইলেও ঠিক একই কাজ করতে হবে\tif আপনি একটি  `পুনরাবৃত্তি` এবং একটি  `if ` একত্রিত করতে চান আপনাকে প্রত্রেকটি ব্লক ইন্ডেণ্ট করতে হবে.  আরও বিশদের জন্যে উদাহরণ কোডটি দেখুন!\n"
                 example_code: |
                     ```
                     {repeat} 5 {times}
@@ -793,8 +792,11 @@ adventures:
                     {for} animal {in} animals
                       {print} 'I love ' animal
             11:
-                story_text: '`{print}` works just the same but we add a new form of the `{for}`. You can now write `{for} counter {in} {range} 1 {to} 5` and use `counter` in your program. Try it out to see what happens! Remember to use indentations after the `{for}` and `{if}` statements (That means starting
-                    a sentence with four spaces)'
+                story_text: 'You have reached level 11, you''re doing great! In the higher levels, Hedy is focussing more and more on teaching you the programming language Python.
+
+                    In Python there is no `{repeat}` command, but there is a command that works like {repeat}. Are you curious to find out how to say `{repeat}` in Python language? Quickly go on to find out!
+
+                    '
                 start_code: |-
                     {for} counter {in} {range} 1 {to} 5
                         {print} counter
@@ -811,8 +813,7 @@ adventures:
                     {print} 'decimal numbers now need to use a dot'
                     {print} 2.5 + 2.5
             13:
-                story_text: We are now going to learn `{and}` and `{or}`! If you want to check two statements, you don't have to use two if's but can use `{and}` and `{or}`. If you use `{and}`, both statements, left and right of the `{and}` need to be true. We can also use `{or}`. Then only one statement
-                    needs to be correct.
+                story_text: We are now going to learn `{and}` and `{or}`! If you want to check two statements, you don't have to use two if's but can use `{and}` and `{or}`. If you use `{and}`, both statements, left and right of the `{and}` need to be true. We can also use `{or}`. Then only one statement needs to be correct.
                 example_code: |
                     ```
                     name = {ask} 'what is your name?'

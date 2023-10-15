@@ -3643,8 +3643,8 @@ adventures:
                 example_code_2: |
                     ```
                     ángulos = {ask} '¿Cuántos ángulos debo dibujar?'
-                    ángulo = 360 / figura
-                    {repeat} figura {times}
+                    ángulo = 360 / ángulos 
+                    {repeat} ángulos {times}
                         {turn} _
                         {forward} _
                     ```

@@ -5,8 +5,7 @@ adventures:
         description: Fortelling
         levels:
             1:
-                story_text: "På nivå 1 kan du lage en fortelling med en hovedperson som du velger selv.\n\nSom første linje, bruk denne koden:\n\n```\n{ask} hvem er stjernen i fortellingen din?\n```\n\nEtter den første linjen, start med `{print}` hvis du vil at setningen skal skrives ut. \nDu bruker `{echo}`\
-                    \ hvis du vil ha hovedpersonen din skal være på slutten av setningen.\n"
+                story_text: "På nivå 1 kan du lage en fortelling med en hovedperson som du velger selv.\n\nSom første linje, bruk denne koden:\n\n```\n{ask} hvem er stjernen i fortellingen din?\n```\n\nEtter den første linjen, start med `{print}` hvis du vil at setningen skal skrives ut. \nDu bruker `{echo}` hvis du vil ha hovedpersonen din skal være på slutten av setningen.\n"
                 example_code: |
                     ```
                     {ask} Hovedpersonen i fortellingen er
@@ -818,8 +817,8 @@ adventures:
                         {print} 'Jeg elsker ' dyr
             11:
                 story_text: |
-                    `{print}` fungerer på samme måten som før, men vi legger til en ny versjon av `{for}`. Nå kan du skrive`{for} teller {in} {range} 1 {to} 5` and og bruke `teller` i programmet ditt. En {range} er bare noen tall som kommer etter hverandre på tall-linjen.
-                    Prøv det ut og se hva som skjer! Husk å ha innrykk på linjen etter `{for}` og `{if}` uttrykkene (det betyr at du må starte setningen med fire mellomrom)
+                    You have reached level 11, you're doing great! In the higher levels, Hedy is focussing more and more on teaching you the programming language Python.
+                    In Python there is no `{repeat}` command, but there is a command that works like {repeat}. Are you curious to find out how to say `{repeat}` in Python language? Quickly go on to find out!
                 start_code: |-
                     {for} teller {in} {range} 1 {to} 5
                         {print} teller
@@ -905,9 +904,7 @@ adventures:
                     frukt = ['eple', 'banan', 'kirsebær']
                     {print} frukt
             17:
-                story_text: "Nå gjør vi en liten endring i koden når vi bruker innrykk. Hver gang vi trenger innrykk, må vi nå skrive `:` på linjen før innrykket.\n\n På dette nivået kan du også bruke en ny kommando `{elif}`. `{elif}` er en forkortelse for {else} {if} og du trenger det når du har lyst\
-                    \ til å lage kode med 3 (eller fler!) alternativer.\nSjekk hvordan det blir!\n```\npremier = ['1 million kroner', 'en eplekake', 'ingenting']\ndin_premie = premier[{random}]\n {print} 'Du vinner ' din_premie \n{if} din_premie == '1 million kroner':\n    {print} 'Hurra! Du er rik!'\n\
-                    {elif} din_premie == 'en eplekake':\n    {print} 'Digg, eplekake!'\n{else}:\n    {print} 'Bedre lykke neste gang..'\n```\n"
+                story_text: "Nå gjør vi en liten endring i koden når vi bruker innrykk. Hver gang vi trenger innrykk, må vi nå skrive `:` på linjen før innrykket.\n\n På dette nivået kan du også bruke en ny kommando `{elif}`. `{elif}` er en forkortelse for {else} {if} og du trenger det når du har lyst til å lage kode med 3 (eller fler!) alternativer.\nSjekk hvordan det blir!\n```\npremier = ['1 million kroner', 'en eplekake', 'ingenting']\ndin_premie = premier[{random}]\n {print} 'Du vinner ' din_premie \n{if} din_premie == '1 million kroner':\n    {print} 'Hurra! Du er rik!'\n{elif} din_premie == 'en eplekake':\n    {print} 'Digg, eplekake!'\n{else}:\n    {print} 'Bedre lykke neste gang..'\n```\n"
                 start_code: |-
                     {for} i {in} {range} 1 {to} 10:
                         {print} i
@@ -3574,11 +3571,11 @@ adventures:
                     ```
                     hjørner = {ask} 'Hvor mange hjørner skal jeg tegne?'
                     grader = 360 / hjørner
-                    {repeat} grader {times}
+                    {repeat} hjørner {times}
                         {turn} _
                         {forward} _
                     ```
-                start_code: |
+                start_code: |-
                     hjørner = {ask} 'Hvor mange hjørner skal jeg tegne?'
             9:
                 story_text: |
