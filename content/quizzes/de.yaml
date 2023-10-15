@@ -168,17 +168,17 @@ levels:
                 {echo}
             mp_choice_options:
             -   option: Are you ready to go to level 2?
-                feedback: There are two echo commands
+                feedback: Es gibt zwei `{echo}` Befehle
             -   option: |-
                     Yes!
                     Yes!
                 feedback: Great job!
             -   option: Yes!
-                feedback: There are two echo commands
+                feedback: Es gibt zwei `{echo}` -Befehle
             -   option: |-
                     Are you ready to go to level 2?
                     Yes!
-                feedback: There are two echo commands
+                feedback: Es gibt zwei `{echo}` -Befehle
             hint: Let's go!
             correct_answer: B
             question_score: '10'
@@ -2668,8 +2668,7 @@ levels:
             question_score: '10'
         6:
             question_text: Welche Zeile soll bei ??? eingefügt werden?
-            code: "{print} 'Willkommen bei McHedy!'\nbestellung = {ask} 'Möchtest du einen Hamburger oder Pommes?'\n{if} bestellung = 'Hamburger'\n\tpreis = 12\n{if} bestellung = 'Pommes'\n\tpreis = 4\ngetränk = {ask} 'Möchtest du einen Getränk dazu für 2 Euro?'\n{if} getränk = 'Ja'\n\t???\n{print} 'Das\
-                \ macht dann ' preis ' Euro bitte'"
+            code: "{print} 'Willkommen bei McHedy!'\nbestellung = {ask} 'Möchtest du einen Hamburger oder Pommes?'\n{if} bestellung = 'Hamburger'\n\tpreis = 12\n{if} bestellung = 'Pommes'\n\tpreis = 4\ngetränk = {ask} 'Möchtest du einen Getränk dazu für 2 Euro?'\n{if} getränk = 'Ja'\n\t???\n{print} 'Das macht dann ' preis ' Euro bitte'"
             mp_choice_options:
             -   option: |-
                     ```
@@ -2696,8 +2695,7 @@ levels:
             question_score: '10'
         7:
             question_text: Welche Ausgabe erhält eine Veganerin?
-            code: "menü = 'Kekse', 'Käse', 'Weintrauben'\n{print} \"Es ist mein Geburtstag! Ich habe ein paar Snacks mitgebracht!\"\ndiät = {ask} \"Haben Sie irgendwelche diätetischen Einschränkungen?\n{if} diät = 'glutenfrei'\n\t{remove} 'Kekse' {from} menü\n{if} diät = 'vegan'\n\t{remove} 'Käse' {from}\
-                \ menü\n{print} 'Für dich habe ich mitgebracht: '\n{for} snack {in} menü\n\t{print} snack"
+            code: "menü = 'Kekse', 'Käse', 'Weintrauben'\n{print} \"Es ist mein Geburtstag! Ich habe ein paar Snacks mitgebracht!\"\ndiät = {ask} \"Haben Sie irgendwelche diätetischen Einschränkungen?\n{if} diät = 'glutenfrei'\n\t{remove} 'Kekse' {from} menü\n{if} diät = 'vegan'\n\t{remove} 'Käse' {from} menü\n{print} 'Für dich habe ich mitgebracht: '\n{for} snack {in} menü\n\t{print} snack"
             mp_choice_options:
             -   option: |-
                     Es ist mein Geburtstag! Ich habe ein paar Snacks mitgebracht!
@@ -2783,8 +2781,7 @@ levels:
             question_score: '10'
         10:
             question_text: Welche Codezeile soll bei ??? ausgefüllt werden um das Lied zu vervollständigen?
-            code: "aktionen = 'clap your hands', 'stomp your feet', 'shout Hurray!'\n???\n\t{for} i {in} range 0 {to} 1\n\t\t{print} 'if youre happy and you know it'\n\t\t{print} aktion\n\t{print} 'if youre happy and you know it and you really want to show it'\n\t{print} 'if youre happy and you know it'\n\
-                \t{print} aktion"
+            code: "aktionen = 'clap your hands', 'stomp your feet', 'shout Hurray!'\n???\n\t{for} i {in} range 0 {to} 1\n\t\t{print} 'if youre happy and you know it'\n\t\t{print} aktion\n\t{print} 'if youre happy and you know it and you really want to show it'\n\t{print} 'if youre happy and you know it'\n\t{print} aktion"
             mp_choice_options:
             -   option: |-
                     ```

@@ -57,28 +57,28 @@ levels:
 
                 Wir brauchen drei Text-Codes, um interaktive Geschichten zu erstellen.
         2:
-            header: 'Hedy Level 1: {print}'
+            header: '{print}'
             text: |-
                 Den ersten Code, den du in Level 1 benutzen kannst, ist `{print}`.
 
                 `{print}` wird benutzt, um Text auf dem Bildschirm anzuzeigen.
             editor: <iframe class="fragment" src="/adventure/story/1/raw"></iframe>
         3:
-            header: 'Hedy Level 1: {ask}'
+            header: 'Der {print} Befehl'
             text: |-
                 Der zweite Code, den du in Level 1 benutzen kannst, ist `{ask}`.
 
                 `{ask}` wird benutzt, um eine Frage zu stellen, die beantwortet werden kann.
             editor: <iframe class="fragment" src="/adventure/rock/1/raw"></iframe>
         4:
-            header: 'Hedy Level 1: {echo}'
+            header: '{ask}'
             text: |-
                 Der letzte Text-Code, den du in Level 1 benutzen kannst, ist `{echo}`.
 
                 `{echo}` wird benutzt, um die Antwort auf ein `{ask}` zu wiederholen.
             editor: <iframe class="fragment" src="/adventure/parrot/1/raw"></iframe>
         5:
-            header: Programmieren!
+            header: '{echo}'
             text: |-
                 Mit `{print}`, `{ask}` und `{echo}` kannst du bereits eine kleine Geschichte erstellen.
                 Dies ist ein guter Zeitpunkt die Abenteuer Papagei, Geschichte und Stein Schere Papier zu versuchen.
@@ -93,22 +93,22 @@ levels:
                 <iframe class="fragment" src="/hedy/1"></iframe>
             editor: <iframe class="fragment" src="/hedy/1"></iframe>
         8:
-            header: Zeichnen mit der Schildkröte
+            header: Programmierung!
             text: Nun da wir uns Text-Codes angeguckt haben, schauen wir uns als Nächstes Codes zum Zeichnen an.
         9:
-            header: 'Zeichnen mit der Schildkröte: {forward}'
+            header: 'Zeichnen mit der Schildkröte'
             text: '`{forward}` wird benutzt, um die Schildkröte vorwärts zu bewegen.'
         10:
-            header: 'Zeichnen mit der Schildkröte: {turn}'
+            header: 'Zeichnen mit der Schildkröte: {forward}'
             text: '`{turn}` wird benutzt, um die Schildkröte nach links oder rechts zu drehen.'
             editor: <iframe class="fragment" src="/adventure/turtle/1/raw"></iframe>
         11:
-            header: 'Drawing with the turtle: {turn}'
+            header: 'Zeichnen mit der Schildkröte: {turn}'
             text: '`{turn}` is used to make the turtle turn left or right.'
             editor: <iframe class="fragment" src="/adventure/turtle/1/raw"></iframe>
     2:
         1:
-            header: Welcome to level 2
+            header: Willkommen auf Level 2
             text: |-
                 In this level you will learn to use variables.
 
@@ -116,11 +116,11 @@ levels:
 
                 For example: a name, age or favorite sports team.
         2:
-            header: Variables
+            header: Variablen
             text: To make or 'set' a variable we use the `{is}` command
             editor: <iframe class="fragment" src="/adventure/is_command/2/raw"></iframe>
         3:
-            header: Interactive
+            header: Interaktiv
             text: |-
                 We can also set a variable by asking questions.
 
@@ -129,7 +129,7 @@ levels:
                 This way we don't need the `{echo}`  command.
             editor: <iframe class="fragment" src="/adventure/ask_command/2/raw"></iframe>
         4:
-            header: Multiple variables
+            header: Mehrere Variablen
             text: Now that we use variables, we can use multiple variables instead of just one `{echo}`command.
             editor: <iframe class="fragment" src="/adventure/ask_command/2/raw"></iframe>
         5:
@@ -144,14 +144,14 @@ levels:
                 If you want, you could even use a variable instead of a number to decide the duration of the sleep command.
             editor: <iframe class="fragment" src="/adventure/sleep_command/2/raw"></iframe>
         7:
-            header: Let the programming fun begin!
+            header: Lasst den Programmierspaß beginnen!
             text: Enjoy the adventures in level 3!
     3:
         1:
-            header: Welcome to level 3
+            header: Willkommen auf Level 3
             text: In this level you'll learn how to make a list, add and remove items form your lists and pick a random item off that list.
         2:
-            header: Making a list
+            header: Erstellen einer Liste
             text: |-
                 You make a list with `{is}`.
 
@@ -165,7 +165,7 @@ levels:
                 Every time you run this code the output will differ.
             editor: <iframe class="fragment" src="/adventure/dice/3/raw"></iframe>
         4:
-            header: At random in a sentence
+            header: Zufällig in einem Satz
             text: You can use the `{at}` `{random}` command in a sentence as well.
             editor: <iframe class="fragment" src="/adventure/random_command/3/raw"></iframe>
         5:
@@ -183,11 +183,11 @@ levels:
                 This command removes an item from a list.
             editor: <iframe class="fragment" src="/adventure/add_remove_command/3/raw"></iframe>
         9:
-            header: Let's get to work!
+            header: Lass uns beginnen!
             text: Enjoy the adventures in level 3!
     4:
         1:
-            header: Welcome to level 4
+            header: Willkommen auf Level 4
             text: In this level you will learn how to use quotation marks.
             editor: <iframe class="fragment" src="/adventure/quotation_marks/4/raw"></iframe>
         2:
@@ -195,7 +195,7 @@ levels:
             text: 'In the previous levels, you might have come across this problem:'
             editor: <iframe class="fragment" src="/adventure/default/4/raw"></iframe>
         3:
-            header: Fixing it with quotation marks
+            header: Korrigiere es mit Anführungszeichen
             text: |-
                 In this level we will fix this problem by using quotation marks.
 
@@ -209,19 +209,19 @@ levels:
             text: This also goes for the `{ask}` command.
             editor: <iframe class="fragment" src="/adventure/quotation_marks/4/raw"></iframe>
         6:
-            header: Quotation marks and variables
+            header: Anführungszeichen und Variablen
             text: |-
                 You do not want variable names to be printed on the screen.
                 This is why variables should be left out of the quotation marks, like this:
             editor: <iframe class="fragment" src="/adventure/quotation_marks/4/raw"></iframe>
         7:
-            header: Quotation marks and variables
+            header: Anführungszeichen und Variablen
             text: |-
                 When variable names are used in the middle of a sentence, you have to leave the variables out of the quotation marks.
                 The rest of the sentence however, does need quotation marks. That looks like this:
             editor: <iframe class="fragment" src="/adventure/quotation_marks/4/raw"></iframe>
         8:
-            header: Quotation marks and contractions
+            header: Anführungszeichen und Abkürzungen
             text: |-
                 Be careful! Now that you are using quotation marks, you can't use apostrophes in contractions.
 
@@ -232,11 +232,11 @@ levels:
             text: Enjoy the adventures in level 4!
             editor: <iframe class="fragment" src="/adventure/clear_command/4/raw"></iframe>
         10:
-            header: Ready, Set, Go!
+            header: Auf die Plätze, fertig, los!
             text: Enjoy the adventures in level 4!
     5:
         1:
-            header: Welcome to level 5
+            header: Willkommen auf Level 5
             text: 'In this level you will learn to use 3 new commands: `{if}`, `{else}` and `{in}`.'
         2:
             header: if
@@ -264,7 +264,7 @@ levels:
                 You can choose to seperate commands and put them on 2 lines, like this:
             editor: <iframe class="fragment" src="/adventure/if_command/5/raw"></iframe>
         6:
-            header: Another new command
+            header: Ein weiterer neuer Befehl
             text: |-
                 If you have practised with the `{if}` and `{else}` commands, you can also try the `{in}` command.
 
@@ -273,11 +273,11 @@ levels:
                 Please note that Hedy is case sensitive. This means that if you answer "Green" instead of "green", Hedy will print "meh".
             editor: <iframe class="fragment" src="/adventure/in_command/5/raw"></iframe>
         7:
-            header: Let's go!
+            header: Los geht's
             text: Enjoy the adventures in level 5!
     6:
         1:
-            header: Welcome to level 6
+            header: Willkommen auf Level 6
             text: In this level we are adding maths to our codes.
         2:
             header: Addition
@@ -573,8 +573,7 @@ levels:
     18:
         1:
             header: Welcome to level 18
-            text: Congratulations! You have reached the last level of Hedy! The code you have created here can be copied to real Python environments like replit or PyCharm, and you can continue learning there! Note however that Python can only read English commands, so if you have been using other languages,
-                you will need to switch to English now.
+            text: Congratulations! You have reached the last level of Hedy! The code you have created here can be copied to real Python environments like replit or PyCharm, and you can continue learning there! Note however that Python can only read English commands, so if you have been using other languages, you will need to switch to English now.
         2:
             header: The Python way
             text: |-

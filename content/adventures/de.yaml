@@ -46,7 +46,7 @@ adventures:
                     ```
                 story_text_2: |
                     ### Übung
-                    Nun ist es an der Zeit Variablen zu deiner eigenen Geschichte aus dem vorigen Level hinzu zu fügen.
+                    Nun ist es an der Zeit, Variablen zu deiner eigenen Geschichte aus dem vorigen Level hinzu zu fügen.
                     Gehe zu "Meine Programme", suche dein Level 1 Geschichten-Abenteuer und kopiere den Code. Füge den Code in den Eingabebereich in diesem Level ein.
 
                     Dieser Code wird nicht funktionieren, weil du noch keine Variablen benutzt hast.
@@ -67,10 +67,10 @@ adventures:
                 example_code_2: |
                     ```
                     {print} Er hört ein Geräusch
-                    Tiere {is} 🐿, 🦔, 🦇, 🦉
-                    Tier {is} {ask} Was denkst du ist es?
-                    {add} Tier {to_list} Tiere
-                    {print} Es war das Tiere {at} {random}
+                    tiere {is} 🐿, 🦔, 🦇, 🦉
+                    tier {is} {ask} Was denkst du ist es?
+                    {add} tier {to_list} tiere
+                    {print} Es war das tiere {at} {random}
                     ```
                 story_text_3: |
                     Das ist ein Beispiel für den `{remove}` Befehl in deiner Geschichte
@@ -288,32 +288,32 @@ adventures:
     add_remove_command:
         name: '{add} {to} & {remove} {from}'
         default_save_name: add_remove_command
-        description: introducing add to and remove from
+        description: Einführung von hinzufügen und entfernen
         levels:
             3:
                 story_text: |
-                    ## Add to
-                    You can add items to the list with the `{add} {to}` command. To add an item to a list you can simply type: `{add} penguin {to} animals` or you can use the `{ask}` command like in the example code.
+                    ## Hinzufügen zu
+                    Du kannst einer Liste mit dem Befehl `{add} {to}` Elemente hinzufügen. Um ein Element zu einer Liste hinzuzufügen, kannst du einfach Folgendes eingeben: `{add} penguin {to} animals` oder du kannst den Befehl `{ask}` wie im Beispielcode verwenden.
                 example_code: |
                     ```
-                    animals {is} dog, cat, kangaroo
-                    like {is} {ask} What is your favorite animal?
-                    {add} like {to_list} animals
-                    {print} I choose animals {at} {random}
+                    tiere {is} Hund, Katze, Känguru
+                    mag_ich {is} {ask} Welches ist dein Lieblingstier?
+                    {add} mag_ich {to_list} tiere
+                    {print} Ich habe tiere {at} {random} gewählt
                     ```
                 story_text_2: |
-                    ## Remove from
-                    If you can add items to a list, of course you can also take them off. This is done with the `{remove} {from}` command.
+                    ## Entfernen von
+                    Wenn man Elemente zu einer Liste hinzufügen kann, kann man diese natürlich auch wieder entfernen. Dies geschieht mit dem Befehl `{remove} {from}`.
                 example_code_2: |
                     ```
-                    animals {is} dog, cat, kangaroo
-                    dislike {is} {ask} What animal do you not like?
-                    {remove} dislike {from} animals
-                    {print} I choose animals {at} {random}
+                    tiere {is} Hund, Katze, Känguru
+                    mag_ich_nicht {is} {ask} Welches Tier magst du nicht?
+                    {remove} mag_ich_nicht {from} tiere
+                    {print} Ich mag tiere {at} {random}
                     ```
                 story_text_3: |
-                    ### Exercise
-                    Try out the new commands in this virtual restaurant. Add the flavor the player is hpoing for to the list and remove the flavors they are allergic to.
+                    ### Übung
+                    Probiere die neuen Befehle in diesem virtuellen Restaurant aus. Füge jene Geschmacksrichtung hinzu, auf die der Spieler hofft, und entferne solche, gegen die er allergisch ist.
                 example_code_3: |
                     ```
                     {print} Mystery milkshake
@@ -325,12 +325,12 @@ adventures:
                     {print} You get a flavors {at} {random} milkshake
                     ```
                 start_code: |-
-                    animals {is} dog, cat, kangaroo
-                    like {is} {ask} What is your favorite animal?
-                    {add} like {to_list} animals
-                    dislike {is} {ask} What animal do you not like?
-                    {remove} dislike {from} animals
-                    {print} I choose animals {at} {random}
+                    tiere {is} Hund, Katze, Känguru
+                    mag_ich {is} {ask} Was ist dein Lieblingstier?
+                    {add} mag_ich {to_list} tiere
+                    mag_ich_nicht {is} {ask} Welches Tier magst du nicht?
+                    {remove} mag_ich_nicht {from} tiere
+                    {print} Gewählt habe ich tiere {at} {random}
     and_or_command:
         name: '{and} & {or}'
         default_save_name: and or
@@ -343,16 +343,16 @@ adventures:
                     If you use `{and}`, both statements, left and right of the `{and}` need to be true. We can also use `{or}`. Then only one statement needs to be correct.
                 example_code: |
                     ```
-                    name = {ask} 'what is your name?'
-                    age = {ask} 'what is your age?'
-                    {if} name {is} 'Hedy' {and} age {is} 2
-                        {print} 'You are the real Hedy!'
+                    name = {ask} 'Wie heißt du?'
+                    alter = {ask} 'Wie alt bist du?'
+                    {if} name {is} 'Hedy' {and} alter {is} 2
+                        {print} 'Du bist die echte Hedy!'
                     ```
                 start_code: |-
-                    name = {ask} 'what is your name?'
-                    age = {ask} 'what is your age?'
-                    {if} name {is} 'Hedy' {and} age {is} 2
-                        {print} 'You are the real Hedy!'
+                    name = {ask} 'Wie heißt du?'
+                    alter = {ask} 'Wie alt bist du?'
+                    {if} name {is} 'Hedy' {and} alter {is} 2
+                        {print} 'Du bist die echte Hedy!'
     ask_command:
         name: '{ask}'
         default_save_name: ask_command
@@ -364,16 +364,16 @@ adventures:
                     Jetzt, wo du den  `{print}` Befehl verwenden kannst, bist du bereit, den nächsten Befehl zu lernen:  `{ask}`. Mit dem `{ask}` Befehl kannst du Fragen stellen. Probiere es aus:
                 example_code: |
                     ```
-                    {print} Hello!
-                    {ask} What is your name?
+                    {print} Hallo!
+                    {ask} Wie heißt du?
                     ```
                 story_text_2: |
                     ## Der echo Befehl
                     Wenn du möchtest, dass der Computer die Antwort für dich wiederholt, kannst du den `{echo}` Befehl verwenden. Beachte, dass die Antwort am Ende des Satzes wiederholt wird - also in diesem Beispiel nach hello.
                 example_code_2: |
                     ```
-                    {print} Hello!
-                    {ask} What is your name?
+                    {print} Hallo!
+                    {ask} Wie heißt du?
                     {echo} hello
                     ```
                 story_text_3: |
@@ -382,12 +382,12 @@ adventures:
                     Dann frage 2 weitere Fragen mit dem `{ask}` Befehl. Nach jedem `{ask}` benutze ein `{echo}` um die Antwort auf dem Bildschirm auszugeben.
                 example_code_3: |
                     ```
-                    _ How are you doing?
+                    _ Wie geht es dir?
                     _
                     ```
                 start_code: |
-                    {print} Hello!
-                    {ask} What is your name?
+                    {print} Hallo!
+                    {ask} Wie heißt du?
                     {echo} hello
             2:
                 story_text: |
@@ -399,10 +399,10 @@ adventures:
                     Damit wird dein Code viel interaktiver!
                 example_code: |
                     ```
-                    name {is} {ask} What is your name?
-                    {print} Hello name
-                    age {is} {ask} How old are you?
-                    {print} name is age years old.
+                    name {is} {ask}  Wie heißt du?
+                    {print} Hallo name
+                    alter {is} {ask} Wie alt bist du?
+                    {print} name ist alter Jahre alt.
                     ```
                 story_text_2: |
                     ### Übung
@@ -413,8 +413,8 @@ adventures:
                     Kopiere den Code der vorherigen Übung hierher und mache sie mit `{ask}` Befehlen interaktiv.
                 example_code_2: |
                     ```
-                    favorite_animals is ask What is your favorite animal?
-                    print I like favorite_animals
+                    lieblings_tier {is} {ask} Was ist dein Lieblingstier?
+                    {print} Mein Lieblingstier ist lieblings_tier
                     ```
                 start_code: |-
                     name {is} {ask} What is your name?
@@ -531,8 +531,8 @@ adventures:
                     Nun da du die Mathematik beherrscht, kannst du selbst einen Taschenrechner erstellen!
                 example_code: |
                     ```
-                    nummer1 {is} {ask} 'Gib die erste Zahl ein:'
-                    nummer2 {is} {ask} 'Gib die zweite Zahl ein:'
+                    nummer1 = {ask} 'Gib die erste Zahl ein:'
+                    nummer2 = {ask} 'Gib die zweite Zahl ein:'
                     richtige_antwort = nummer1 * nummer2
                     {print} nummer1 ' mal ' nummer2 ' ist ' richtige_antwort
                     ```
@@ -548,9 +548,18 @@ adventures:
                     {else} {print} 'Falsch! Es war ' _
                     ```
                 story_text_3: |
-                    Du kannst den Computer auch allein zufällige Summen rechnen lassen, indem du zufällig benutzt.
-                    So wählst du einige Tabellen zum Üben, und daraus erhältst du immer eine andere Summe.
-                start_code: '{print} ''Willkommen bei diesem Taschenrechner!'''
+                    **Zusätzlich** Du kannst den Computer auch alleine zufällige Summen rechnen lassen, indem du zufällig benutzt.
+
+                    So wählst du mehrere Tabellen zum Üben aus und erhältst daraus immer eine andere Summe:
+                start_code: 'numer_1 = {ask} ''Gib die erste Zahl ein:''
+
+                    numer_2 = {ask} ''Gib die zweite Zahl ein:''
+
+                    richtiges_ergebnis = numer_1 * numer_2
+
+                    {print} numer_1 '' mal '' numer_2 '' ist '' richtiges_ergebnis
+
+                    '
             9:
                 story_text: |
                     In Level 6 hast du einen Taschenrechner erstellt. In diesem Level kannst du den Code erweitern, so dass er mehrere Fragen stellt.
@@ -559,7 +568,7 @@ adventures:
                     Kannst du Zeile 10 vervollständigen, damit das Programm funktioniert?
 
                     ### Übung 2
-                    Gib dem Spieler eine Rückmeldung, wenn sie eine richtige oder falsche Antwort eingegeben haben. Um das zu erreichen, erweitere dein Programm mit einem `{else}`.
+                    Gib dem Spieler eine Rückmeldung, wenn er eine richtige oder falsche Antwort eingegeben hat. Um das zu erreichen, erweitere dein Programm mit einem `{else}`.
                 example_code: |
                     ```
                     Punkte = 0
@@ -606,10 +615,10 @@ adventures:
                 example_code: |
                     ```
                     zahl = 10
-                    {for} i {in} {range} 1 bis 10
+                    {for} i {in} {range} 1 {to} 10
                         {print} i * zahl
                     ```
-                start_code: '# platziere deinen Code hier'
+                start_code: "zahl = 10\n{for} i {in} {range} 1 {to} 10\n    {print} i * zahl\n"
             12:
                 story_text: |
                     In diesem Level kannst du einen Taschenrechner bauen, der mit Dezimalzahlen arbeitet.
@@ -620,7 +629,7 @@ adventures:
                     ### Übung 2
                     Erstelle ein neues Mathematik-Übungsprogramm, aber verwenden jetzt Dezimalzahlen.
                     Erstelle eine Liste von Zahlen, wähle zwei zum Multiplizieren aus und lasse die Spielerin antworten.
-                    Und natürlich musst du die Antwort überprüfen! **(extra)** Erhöhe den Schwierigkeitsgrad, indem du Leben hinzufügen: Ein Spieler verliert ein Leben für eine falsche Antwort und nach drei falschen Antworten endet das Spiel.
+                    Und natürlich musst du die Antwort überprüfen! **(Zusätzlich)** Erhöhe den Schwierigkeitsgrad, indem du Leben hinzufügst: Ein Spieler verliert ein Leben für eine falsche Antwort und nach drei falschen Antworten endet das Spiel.
                 example_code: |
                     ```
                     Zahl1 = {ask} 'Was ist die erste Zahl?'
@@ -695,32 +704,32 @@ adventures:
         levels:
             4:
                 story_text: |
-                    Time for a new command! With `{clear}` you can clear all the text form your output screen. This way you can prevent your screen getting too full of text.
-                    Beware! If you are using a `{clear}` command, remember to use a `{sleep}` above it. Otherwise Hedy will clear your screen without giving you the time to read!
+                    Zeit für einen neuen Befehl! Mit `{clear}` kann der gesamte Text vom Ausgabebildschirm gelöscht werden. Auf diese Weise wird verhindert, dass der Bildschirm zu voll mit Text wird.
+                    Achtung! Wenn du den `{clear}`-Befehl verwendest, denke daran, zuvor ein `{sleep}` zu verwenden. Andernfalls löscht Hedy den Bildschirm, ohne dass du Zeit zum Lesen hast!
                 example_code: |
                     ```
-                    print '3'
-                    sleep
-                    clear
-                    print '2'
-                    sleep
-                    clear
-                    print '1'
-                    sleep
-                    clear
-                    print 'SURPRISE!'
+                    {print} '3'
+                    {sleep}
+                    {clear}
+                    {print} '2'
+                    {sleep}
+                    {clear}
+                    {print} '1'
+                    {sleep}
+                    {clear}
+                    {print} 'ÜBERRASCHUNG!'
                     ```
                 start_code: |
-                    print '3'
-                    sleep
-                    clear
-                    print '2'
-                    sleep
-                    clear
-                    print '1'
-                    sleep
-                    clear
-                    print 'SURPRISE!'
+                    {print} '3'
+                    {sleep}
+                    {clear}
+                    {print} '2'
+                    {sleep}
+                    {clear}
+                    {print} '1'
+                    {sleep}
+                    {clear}
+                    {print} 'ÜBERRASCHUNG!'
     default:
         name: Einführung
         default_save_name: Einleitung
@@ -736,29 +745,47 @@ adventures:
                 start_code: '{print} Hallo Welt!'
             2:
                 story_text: |
-                    In Level 2 lernen wir zwei neue Befehle: `{is}` und `{sleep}`.
-                    Du kannst ein Wort mit `{is}` benennen. Das nennt man eine Variable. In diesem Beispiel haben wir eine Variable name und eine Variable alter erstellt. Du kannst das Wort name irgendwo in deinem Code verwenden und es wird dann durch Hedy ersetzt, und zwar so:
-
-                    Deswegen benötigst du den Befehl `{echo}` nicht mehr!
+                    Glückwunsch! Du hast Level 2 erreicht. Hoffentlich hast du bereits einige tolle Programme erstellt!
+                    Auf Level 1 ist dir vielleicht aufgefallen, dass der Befehl `{echo}` jeweils nur einen Teil an Information speichern kann.
+                    Im Restaurant-Abenteuer konntest du beispielsweise in einem Satz wiedergeben, was der Kunde essen oder trinken möchte, aber nicht beides.
                 example_code: |
+                    **Warnung! Dieser Code funktioniert nicht!**
+                    In Hedy ändern sich die Befehle manchmal. `{echo}` funtioniert beispielsweise nur auf Level 1. Auf diesem Level lernst du eine bessere Möglichkeit, Antworten zurückzugeben.
                     ```
-                    name {is} Hedy
-                    alter {is} 15
-                    {print} name ist alter Jahre alt
+                    {print} Willkommen bei Hedy's
+                    {ask} Was möchtest du essen?
+                    {echo} Du möchtest also
+                    {ask} Was möchtest du trinken?
+                    {echo} Du möchtest also
                     ```
                 story_text_2: |
-                    `{print}` funktioniert genauso wie vorher, aber der Befehl `{ask}` hat sich verändert. Du brauchst jetzt auch für den Befehl `{ask}` eine Variable. Das sieht so aus:
+                    Gibt der Spieler einen Hamburger und eine Cola ein, kannst du nicht sagen „Also möchtest du einen Hamburger und eine Cola“, sondern musst zwei separate Zeilen erstellen.
+                    Außerdem gibt der `{echo}`-Befehl das Wort nur am Ende des Satzes wieder. Man kann also nicht sagen: „Dein Hamburger kommt gleich!“.
+
+                    Das ändert sich in Level 2. In Level 2 lernst du, mit Variablen zu arbeiten. Diese erlauben es, mehrere Informationen zu speichern und an jedem beliebigen Ort auszudrucken.
+                    Gehen wir also zum nächsten Tab!
                 start_code: '{print} Hallo Welt!'
             3:
                 story_text: |
-                    In Level 3 kannst du eine Liste erstellen. Du kannst den Computer etwas zufällig aus der Liste auswählen lassen. Du machst dies mit `{at} {random}`. Es bedeutet: Wähle ein Element an zufälliger Stelle in der Liste aus.
+                    Im vorherigen Level hast du gelernt, was eine Variable ist und wie du sie verwenden kannst, um deine Abenteuer interaktiver zu gestalten.
+                    Aber... das ist nicht das Einzige, was du mit Variablen machen kannst! Du kannst Variablen auch zum Erstellen von Listen verwenden.
+                    Und du kannst Hedy sogar ein zufälliges Wort aus einer Liste auswählen lassen, wodurch du echte Spiele erstellen kannst!
+                    Wirf einen kurzen Blick auf den nächsten Tab!
                 start_code: '{print} Hallo Welt!'
             4:
                 story_text: |
-                    In Level 4 haben sich `{print}` und `{ask}` geändert.
-                    Du musst Text, den du genau so mit ausgeben möchtest, in Anführungszeichen setzen.
-                    Das ist nützlich, denn nun kannst du alle Wörter ausgeben, die du möchtest. Auch die Wörter, mit denen du etwas mit `{is}` gespeichert hast.
-                    Die meisten Programmiersprachen verwenden ebenfalls Anführungszeichen bei ihren Ausgabebefehlen, sodass wir dem echten Programmieren einen Schritt näher kommen!
+                    In den vorherigen Levels hast du mit Variablen geübt, bist aber möglicherweise auf dieses Problem gestoßen.
+                    Möglicherweise hast du versucht, Code wie diesen auszuführen:
+
+                    Natürlich wolltest du folgendes ausgeben
+
+                    `Mein name ist Sophie`
+
+                    aber Hedy druckt
+
+                    `Mein Sophie ist Sophie`.
+
+                    In diesem Level wird dieses Problem durch die Verwendung von Anführungszeichen behoben.
                 example_code: |
                     ```
                     {print} 'Ab jetzt musst du Anführungszeichen verwenden!'

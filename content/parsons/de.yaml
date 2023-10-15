@@ -15,9 +15,9 @@ levels:
             story: You're at the DJ Booth requesting a song. Create a program that asks if you are ready to party and then asks which song you would like to hear.
             code: |-
                 {print} Hier ist DJ Hedy
-                {ask} Seid ihr bereit zum Feiern?
-                {ask} Welches Lied möchtet ihr hören?
-                {echo} Großartige Wahl! Ich liebe
+                {ask} Bist du bereit zum Feiern?
+                {ask} Welches Lied möchtest du hören?
+                {echo} Großartige Wahl! Ich liebe das Lied
     2:
         1:
             story: |-
@@ -33,18 +33,17 @@ levels:
             code: |-
                 {print} Willkommen in unserem Spielzeugladen
                 spielzeug {is} {ask} Was möchtest du kaufen?
-                {print} Das spielzeug wird zu deinem Einkaufskorb hinzugefügt.
+                {print} spielzeug wird zu deinem Einkaufskorb hinzugefügt.
                 {print} Danke für deinen Einkauf bei uns!
     3:
         1:
-            story: "The new school year at Hogwarts is starting! \nIt is the job of the sorting hat to sort you into one of the houses.\nWhich house will you be sorted into? Are you a Gryffindor, Hufflepuff, Ravenclaw or Slytherin.\nBefore the sorting hat reveals your house, you can tell it to not pick\
-                \ one of the houses."
+            story: "The new school year at Hogwarts is starting! \nIt is the job of the sorting hat to sort you into one of the houses.\nWhich house will you be sorted into? Are you a Gryffindor, Hufflepuff, Ravenclaw or Slytherin.\nBefore the sorting hat reveals your house, you can tell it to not pick one of the houses."
             code: |-
-                {print} Das neue Schuljahr in Hogwarts geht los!
-                {print} Der Sortierhut ist bereit dich in eines der Häuser einzuteilen.
+                {print} Der Sortierhut ist bereit dich in eines der Hogwarts Häuser einzuteilen.
                 häuser {is} Gryffindor, Hufflepuf, Ravenclaw, Slytherin
-                {sleep} 2
-                {print} Und es ist häuser {at} {random}
+                abneigung {is} {ask} Gibt es Häuser denen du nicht zugeteilt werden möchtest?
+                {remove} abneigung {from} häuser
+                {print} Wohl nicht abneigung, was? Besser ein... houses {at} {random}
         2:
             story: Create a program that chooses a random meal for you. Make a list of food and a list of toppings and let the program decide what you'll have!
             code: |-
@@ -59,13 +58,13 @@ levels:
                 Create a program that decides which two players have to play against each other first.
                 Start by printing the two players who play the first match, then print against which player the winner will play.
             code: |-
-                players {is} Liam, Noah, Sophie
-                player_1 {is} players {at} {random}
-                {remove} player_1 {from} players
-                player_2 {is} players {at} {random}
-                {print} player_1 ' first plays against ' player_2
-                {remove} player_2 {from} players
-                {print} 'The winner plays against ' players {at} {random}
+                spieler {is} Liam, Noah, Sophie
+                spieler_1 {is} spieler {at} {random}
+                {remove} spieler_1 {from} spieler
+                spieler_2 {is} spieler {at} {random}
+                {print} spieler_1 ' spielt zuerst gegen ' spieler_2
+                {remove} spieler_2 {from} spieler
+                {print} 'Der Gewinner spielt gegen ' spieler {at} {random}
     4:
         1:
             story: |-
@@ -78,7 +77,7 @@ levels:
                 {sleep}
                 {print} Pokémons {at} {random}
         2:
-            story: Create a lottery that lets you choose an extra price that you might win.
+            story: Erstelle eine Lotterie, bei der du einen Zusatzpreis auswählen kannst, den du gewinnen könntest.
             code: |-
                 preise {is} Auto, Hamster, 1 Million Euro
                 preis {is} {ask} 'Was möchtest du gewinnen?'
@@ -119,9 +118,9 @@ levels:
             story: Create a program that helps you calculate how many cakes you should buy for your birthday party.
             code: |-
                 {print} 'Du hast Geburtstag!'
-                leute = {ask} 'Wievielen Leuten möchtest du ein Stück Torte geben?'
-                kuchenanzahl {is} leute/8
-                {print} 'Du musst ' kuchenanzahl ' Torten kaufen'
+                leute = {ask} 'Wie vielen Leuten möchtest du ein Stück Torte geben?'
+                kuchen_anzahl {is} leute/8
+                {print} 'Du musst ' kuchen_anzahl ' Torten kaufen'
     7:
         1:
             story: Complete the baby shark song. First comes baby shark, then mommy and finally daddy shark.
