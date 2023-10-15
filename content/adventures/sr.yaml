@@ -827,11 +827,9 @@ adventures:
                     {for} životinja {in} životinje
                       {print} 'Ja volim ' životinja
             11:
-                story_text: |-
-                    U ovom nivou, dodajemo novi oblik za `{for}`. U ranijim nivoima, koristili smo `{for}` sa listom, ali `{for}` možemo koristiti i sa brojevima.
-                    To radimo tako što dodamo ime promenljivoj, i u nastavku dodamo `{in}` `{range}`. Onda napišemo broj sa kojim ćemo početi, `{to}` i broj sa kojim ćemo završiti.
-
-                    Probaj u primeru i vidi sta će se desiti! I u ovom nivou ćeš morati da koristiš uvučene redove za sve linije koje dodju ispod `{for}` izjave.
+                story_text: |
+                    You have reached level 11, you're doing great! In the higher levels, Hedy is focussing more and more on teaching you the programming language Python.
+                    In Python there is no `{repeat}` command, but there is a command that works like {repeat}. Are you curious to find out how to say `{repeat}` in Python language? Quickly go on to find out!
                 start_code: |-
                     {for} brojač {in} {range} 1 {to} 5
                         {print} brojač
@@ -1199,9 +1197,10 @@ adventures:
                         {print} 'I love ' animal
             11:
                 story_text: |-
-                    In this level, we add a new form of the `{for}`. In earlier levels, we used `{for}` with a list, but we can also use `{for}` with numbers.
-                    We do that by adding a variable name, followed by  `{in}` `{range}`. We then write the number to start at, `{to}` and the number to end at.
-                    Try the example to see what happens! In this level again, you will need to use indentations in lines below the `{for}` statements.
+                    U ovom nivou, dodajemo novi oblik za `{for}`. U ranijim nivoima, koristili smo `{for}` sa listom, ali `{for}` možemo koristiti i sa brojevima.
+                    To radimo tako što dodamo ime promenljivoj, i u nastavku dodamo `{in}` `{range}`. Onda napišemo broj sa kojim ćemo početi, `{to}` i broj sa kojim ćemo završiti.
+
+                    Probaj u primeru i vidi sta će se desiti! I u ovom nivou ćeš morati da koristiš uvučene redove za sve linije koje dodju ispod `{for}` izjave.
                 example_code: |
                     ```
                     {for} counter {in} {range} 1 {to} 10
