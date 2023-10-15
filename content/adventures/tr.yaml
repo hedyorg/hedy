@@ -52,7 +52,7 @@ adventures:
                     Bu kod bu seviyede çalışmayacaktır, çünkü henüz değişkenleri kullanmadınız.
                     Kodunuzdaki `{ask}` komutlarını ve `{echo}` komutlarını bu seviyede öğrendiğiniz doğru şekilleriyle değiştirin.
 
-                    **Ekleme** Hikayenizde gerilim oluşturmak için kodunuza bir `{sleep}` komutu ekleyin.
+                    **Ek Görev** Hikayenizde gerilim oluşturmak için kodunuza bir `{sleep}` komutu ekleyin.
                 start_code: '{print} Sizin hikayeniz'
             3:
                 story_text: |
@@ -161,7 +161,7 @@ adventures:
                     ### Alıştırma 1
                     Örnek kodda iki farklı son gösterilmektedir; biri karakterlerin zaman makinesine atladığı, diğeri ise atlamadığı son.
                     Boşlukları her sonda en az bir cümle olacak şekilde tamamlayın.
-                    **Ekleme** Hikayeyi daha uzun hale getirin. Hikayede ne oluyor? Farklı seçenekler içeren ikinci bir `{ask}` da ekleyebilirsiniz.
+                    **Ek Görev** Hikayeyi daha uzun hale getirin. Hikayede ne oluyor? Farklı seçenekler içeren ikinci bir `{ask}` da ekleyebilirsiniz.
 
                     ### Alıştırma 2
                     Kayıtlı programlarınıza geri dönün, 5. seviyedeki hikaye programınızı seçin. Şimdi her biri en az üç satır uzunluğunda bir iyi ve bir kötü son yazın!
@@ -549,7 +549,7 @@ adventures:
                     {else} {print} 'Yanlış! doğru cevap ' _
                     ```
                 story_text_3: |
-                    **Ekleme** rastgele komutunu kullanarak bilgisayarın kendi başına rastgele toplamalar yapmasını da sağlayabilirsiniz.
+                    **Ek Görev** rastgele komutunu kullanarak bilgisayarın kendi başına rastgele toplamalar yapmasını da sağlayabilirsiniz.
 
                     Bu şekilde, pratik yapmak için bir sayı tablosu seçersiniz ve bundan her zaman farklı bir toplama elde edersiniz:
                 start_code: |
@@ -629,7 +629,7 @@ adventures:
                     ### Alıştırma 2
                     Yeni bir matematik alıştırma programı oluşturun, ama şimdi ondalık sayıları kullanın.
                     Bir sayı listesi oluşturun, çarpma için iki tanesini seçin ve oyuncunun cevaplamasını sağlayın.
-                    Ve tabii ki cevabı doğrulamanız gerekiyor! **Ekleme** Can ekleyerek zorluğu artırın: Bir oyuncu yanlış cevap için bir can kaybetsin ve üç yanlış cevaptan sonra oyun sona ersin.
+                    Ve tabii ki cevabı doğrulamanız gerekiyor! **Ek Görev** Can ekleyerek zorluğu artırın: Bir oyuncu yanlış cevap için bir can kaybetsin ve üç yanlış cevaptan sonra oyun sona ersin.
                 example_code: |
                     ```
                     sayı1 = {ask} 'İlk sayı nedir?'
@@ -643,7 +643,7 @@ adventures:
                     ### Alıştırma 1
                     Alıştırma programını biraz daha zorlaştıralım. Oyuncu şimdi iki soruya doğru cevap vermek zorunda. Programı tamamlamak için boşlukları doldurun.
 
-                    ### Alıştırma 2 Ekleme
+                    ### Alıştırma 2 Ek Görev
                     Bazen hesaplamaların birden fazla doğru cevabı vardır. Örneğin, 10 hem 5'e hem de 2'ye bölünebilir. Dolayısıyla, "Hangi sayı 10'u böler?" sorusunu hem 2 hem de 5 cevaplanabilir.
                     Birden fazla doğru cevabı olan bir hesaplama sorun, oyuncudan cevaplamasını isteyin ve `{or}` kullanarak doğru olup olmadığını belirleyin.
                     Programlama alanını temizleyin ve kendi çözümünüzü oluşturun.
@@ -788,8 +788,8 @@ adventures:
                     Bu seviyede tırnak işaretleri kullanılarak bu sorun giderilir.
                 example_code: |
                     ```
-                    isim {is} Sophie
-                    {print} Benim adım isim
+                    adım {is} Sophie
+                    {print} Benim adım adım
                     ```
                 start_code: |
                     adım {is} Sophie
@@ -1045,7 +1045,7 @@ adventures:
 
                     ### Alıştırma
                     Örnek kodu, bir solucan attığınız zaman "Atmayı durdurabilirsiniz" yazacak şekilde tamamlayın. Başka bir şey attığınızda ise "Tekrar atmanız gerekiyor" demelidir.
-                    **Ekleme** Belki de tamamen farklı bir oyundaki bir kalıbı yeniden yaratmak istiyorsunuz. Bu da güzel! O zaman kendi tepkinizi oluşturun, örneğin 6 için 'evet' ve başka bir şey için 'yazık' gibi.
+                    **Ek Görev** Belki de tamamen farklı bir oyundaki bir kalıbı yeniden yaratmak istiyorsunuz. Bu da güzel! O zaman kendi tepkinizi oluşturun, örneğin 6 için 'evet' ve başka bir şey için 'yazık' gibi.
                 example_code: |
                     ```
                     seçimler {is} 1, 2, 3, 4, 5, solucan
@@ -1080,7 +1080,7 @@ adventures:
                     Bu seviyede de yine zar atabilirsiniz. `{repeat}` kodu ile kolayca bir el dolusu zar atabilirsiniz.
 
                     ### Alıştırma
-                    Örnek kodu bitirmeye çalışın! **Ekleme** Bildiğiniz bir zar oyunu düşünün ve bunu bir `{repeat}` kullanarak programlayın.
+                    Örnek kodu bitirmeye çalışın! **Ek Görev** Bildiğiniz bir zar oyunu düşünün ve bunu bir `{repeat}` kullanarak programlayın.
                 example_code: |
                     ```
                     seçimler = 1, 2, 3, 4, 5, 6
@@ -1136,7 +1136,7 @@ adventures:
                     Bulaşık makinesi programının kendi çeşidinizi yapın. Öncelikle aile üyelerinizin bir listesini yapın.
                     Ardından yapılması gereken bir görev düşünün ve bilgisayarın `{at} {random}` komutuyla görevi kimin yapması gerektiğine karar vermesini sağlayın.
 
-                    **Ekleme** Bulaşıkları kendiniz yıkamak istemiyor musunuz? Adınızı `{remove}` `{from}` komutuyla listeden kaldırarak programda hile yapın.
+                    **Ek Görev** Bulaşıkları kendiniz yıkamak istemiyor musunuz? Adınızı `{remove}` `{from}` komutuyla listeden kaldırarak programda hile yapın.
                 start_code: '{print} Bulaşıkları kim yıkıyor?'
             4:
                 story_text: |
@@ -1204,7 +1204,7 @@ adventures:
                     `{repeat}` ile kod parçalarını tekrarlayabilirsiniz. Bunu, birden fazla gün boyunca bulaşıkları kimin yıkayacağını hesaplamak için kullanabilirsiniz!
                     ### Alıştırma
                     Bütün bir hafta boyunca bulaşıkları kimin yıkaması gerektiğine karar vermek için `{repeat}` komutunu kullanın. Her boşluğun bir komut veya sayı ile doldurulması gerekiyor!
-                    **Ekleme** Evdeki diğer görevleri düşünebiliyor musunuz? Kodu üç ev işine karar verecek şekilde uyarlayın. Hangi görevlerle ilgili olduğunu yazdırmayı unutmayın!
+                    **Ek Görev** Evdeki diğer görevleri düşünebiliyor musunuz? Kodu üç ev işine karar verecek şekilde uyarlayın. Hangi görevlerle ilgili olduğunu yazdırmayı unutmayın!
                 example_code: |
                     ```
                     kişiler = anne, baba, Ali, Ayşe
@@ -1217,7 +1217,7 @@ adventures:
 
                     ### Alıştırma
                     Süpürmek veya ortalığı toplamak gibi ikinci bir angarya iş ekleyin ve bunun da tüm haftaya bölündüğünden emin olun.
-                    <br> **Ekleme** Program adil değil, şanssız olabilir ve tüm hafta boyunca temizlikçi olabilirsiniz. Programı nasıl daha adil hale getirebilirsiniz?
+                    <br> **Ek Görev** Program adil değil, şanssız olabilir ve tüm hafta boyunca temizlikçi olabilirsiniz. Programı nasıl daha adil hale getirebilirsiniz?
                 example_code: |
                     ```
                     günler = Pazartesi, Salı, Çarşamba, Perşembe, Cuma, Cumartesi, Pazar
@@ -1334,7 +1334,7 @@ adventures:
                 story_text_2: |
                     ### Alıştırma
                     Örnek kodu girdi ekranınıza kopyalayın ve kodun çalışması için boşlukları doldurun.
-                    **Ekleme** Kodu değiştirin ve falcının yalnızca adınızı değil, yaşınızı, tuttuğunuz spor takımını veya kendinizle ilgili başka bir şeyi de tahmin etmesini sağlayın.
+                    **Ek Görev** Kodu değiştirin ve falcının yalnızca adınızı değil, yaşınızı, tuttuğunuz spor takımını veya kendinizle ilgili başka bir şeyi de tahmin etmesini sağlayın.
                 start_code: '# kodunuzu buraya yazın'
             3:
                 story_text: |
@@ -1500,7 +1500,7 @@ adventures:
                 story_text: |
                     ### Alıştırma
                     Harry Potter temalı bir falcı da yapabiliriz. Boşlukları 9 satır yazdıracak şekilde doldurun.
-                    **Ekleme** Falcının temasını en sevdiğiniz kitap, film veya televizyon programı gibi başka bir şeye dönüştürün.
+                    **Ek Görev** Falcının temasını en sevdiğiniz kitap, film veya televizyon programı gibi başka bir şeye dönüştürün.
                 example_code: |
                     ```
                     evler = Gryffindor, Slytherin, Hufflepuff, Ravenclaw
@@ -1586,7 +1586,7 @@ adventures:
                     ### Alıştırma
                     Örnek kodları kopyalayın ve çalışmasını sağlamak için boşlukları doldurun!
 
-                    **Ekleme** Bu hikaye oldukça basit, belki daha heyecanlı bir hikaye ekleyerek biraz canlandırabilirsiniz.
+                    **Ek Görev** Bu hikaye oldukça basit, belki daha heyecanlı bir hikaye ekleyerek biraz canlandırabilirsiniz.
                     Ayrıca şu anda çok sınırlı sonuçlarınız var, kapıların arkasında ne olduğuna dair sadece 3 seçenek var. Belki listeye eklemek için daha fazla canavar düşünebilirsiniz!
                 example_code: |
                     ```
@@ -1689,7 +1689,7 @@ adventures:
                     2. Oyuncunun `{ask}` ile bir seçenek seçebildiğinden emin olun
                     3. Cevap doğru mu? O zaman bir sonraki canavara geçebilirler. Yanlış bir cevap mı verdiler? Oyuncuya bir `{print}` ile bildirin.
 
-                    **Ekleme** Şu anda, yanlış bir seçim yaparsanız, yine de bir canavar gösteriliyor! Bunu nasıl değiştirebilirsiniz?
+                    **Ek Görev** Şu anda, yanlış bir seçim yaparsanız, yine de bir canavar gösteriliyor! Bunu nasıl değiştirebilirsiniz?
                 example_code: |
                     ```
                     {print} 'Perili Evden Kaçış!'
@@ -1960,7 +1960,7 @@ adventures:
 
                     ### Alıştırma
                     Oyuncunun öğrenmesi için en az 3 kelime daha ekleyerek kodu daha uzun hale getirin.
-                    **Ekleme** Elbette Fransızca'dan farklı bir dil kullanmayı seçebilirsiniz. Kodu öğrenmek istediğiniz herhangi bir dile değiştirebilirsiniz.
+                    **Ek Görev** Elbette Fransızca'dan farklı bir dil kullanmayı seçebilirsiniz. Kodu öğrenmek istediğiniz herhangi bir dile değiştirebilirsiniz.
                 example_code: |
                     ```
                     {print} 'Fransızca öğrenin!'
@@ -2057,7 +2057,7 @@ adventures:
                     ### Alıştırma
                     Sarı düğmeye tıklayarak örnek kodu girdi ekranınıza kopyalayın.
                     Papağanın farklı bir soru sormasını sağlayın. Örnekteki boşlukları doldurun!
-                    **Ekleme** Papağanın birden fazla soru sormasını da sağlayabilirsiniz. Kendi kodunuzun altına birkaç satır daha kod yazın.
+                    **Ek Görev** Papağanın birden fazla soru sormasını da sağlayabilirsiniz. Kendi kodunuzun altına birkaç satır daha kod yazın.
                 example_code_2: |
                     ```
                     {print} Ben papağan Hedy.
@@ -2088,7 +2088,7 @@ adventures:
                     İlk olarak, 2. satırı bir `{is}` ve bir `{ask}` komutuyla bitirin.
                     Ardından papağanın bir süre sessiz kalmasını sağlamak için 4. ve 6. satırlara `{sleep}` komutunu girin.
 
-                    **Ekleme** Daha fazla kod satırı ekleyerek papağanın sadece adınızdan daha fazlasını sormasını sağlayabilir misiniz?
+                    **Ek Görev** Daha fazla kod satırı ekleyerek papağanın sadece adınızdan daha fazlasını sormasını sağlayabilir misiniz?
                 start_code: '{print} Ben papağan Hedy!'
             3:
                 story_text: |
@@ -2150,7 +2150,7 @@ adventures:
 
                     ### Alıştırma
                     Ne kadar paranız olduğunu ve istediğinizi satın almak için ne kadar süre biriktirmeniz gerektiğini hesaplamak için kodu tamamlayın!
-                    **Ekleme** Belki de zaten biraz para biriktirmişsinizdir? Bunu biriktirmeniz gereken miktardan düşebilirsiniz.
+                    **Ek Görev** Belki de zaten biraz para biriktirmişsinizdir? Bunu biriktirmeniz gereken miktardan düşebilirsiniz.
                 example_code: |
                     ```
                     {print} 'Dijital kumbara'
@@ -2229,7 +2229,7 @@ adventures:
 
                     ### Alıştırma
                     Kodu tamamlayın. Her seferinde basmanız gereken rastgele bir harf seçilmelidir. Doğru basınca bir puan ödül, yanlış basarsanız iki puan kesinti alırsınız.
-                    **Ekleme** Her harften sonra ekranı temizleyin ve kullanıcıya kaç puan aldığını gösterin.
+                    **Ek Görev** Her harften sonra ekranı temizleyin ve kullanıcıya kaç puan aldığını gösterin.
                 example_code: |
                     ```
                     puan = 0
@@ -2601,7 +2601,7 @@ adventures:
                     Bu tek satırda, siparişin bir özetini oluşturmak için 2 değişken kullanılmıştır.
                     Şimdi müşteriniz tarafından sipariş edilen yiyecek ve içeceklerin özetini kendiniz ekleyin.
 
-                    **Ekleme** Artık değişkenleri nasıl kullanacağınızı öğrendiğinize göre, bir satırda istediğiniz kadar değişken kullanabilirsiniz. Kodunuza daha fazla değişken ekleyebilir misiniz, örneğin masada yemek ya da paket servis, nakit ya da kart, pipetli ya da pipetsiz gibi.
+                    **Ek Görev** Artık değişkenleri nasıl kullanacağınızı öğrendiğinize göre, bir satırda istediğiniz kadar değişken kullanabilirsiniz. Kodunuza daha fazla değişken ekleyebilir misiniz, örneğin masada yemek ya da paket servis, nakit ya da kart, pipetli ya da pipetsiz gibi.
                 start_code: '# kodunuzu buraya yazın'
             3:
                 story_text: |
@@ -2662,7 +2662,7 @@ adventures:
                     Önceki seviyelerden kendi restoran kodunuzu kopyalayın. Restoranınızda bir sorun çıkarın ve bunu örnek kodda olduğu gibi kodlayın.
                     Örneğin, bir menü öğesi tükenmiş olabilir veya kredi kartı kabul etmiyor olabilirsiniz ya da dondurma makinesi bozuk olabilir.
 
-                    **Ekleme** Sorunu programlayıp, buna uygun yanıtları da programladınız mı? O zaman şimdi kodunuza daha fazla `{if}` ve `{else}` komutları eklemeyi deneyin.
+                    **Ek Görev** Sorunu programlayıp, buna uygun yanıtları da programladınız mı? O zaman şimdi kodunuza daha fazla `{if}` ve `{else}` komutları eklemeyi deneyin.
                     Kodu olabildiğince etkileşimli hale getirmek için kodunuzdaki her `{ask}` komutundan sonra bir `{if}` eklemeye çalışın!
                 example_code: |
                     ```
@@ -2707,7 +2707,7 @@ adventures:
 
                     ### Alıştırma
                     Kodu tamamlayabilir misiniz? Hedy'nin bu soruyu kişi sayısı kadar tekrarlaması gerekiyor. Yani 5 kişi varsa, sorunun 5 kez sorulması gerekir.
-                    **Ekleme** Kodunuzu daha fazla soru ile genişletin, örneğin içecekler veya sos hakkında.
+                    **Ek Görev** Kodunuzu daha fazla soru ile genişletin, örneğin içecekler veya sos hakkında.
                 example_code: |
                     ```
                     {print} "Restaurant Chez Hedy'ye Hoş Geldiniz"
@@ -2731,7 +2731,7 @@ adventures:
                 story_text_2: |
                     ### Alıştırma
                     Bu kod, menüde daha fazla öğe eklenerek genişletilebilir, örneğin içecekler ve/veya birden fazla yemek veya tatlı sunulabilir. En az bir öğe daha ekleyin.
-                    **Ekleme** Daha da fazla ürün ekleyin, istediğiniz kadar seçenek olsun!
+                    **Ek Görev** Daha da fazla ürün ekleyin, istediğiniz kadar seçenek olsun!
                 start_code: '# kodunuzu buraya yazın'
             9:
                 story_text: |
@@ -2798,7 +2798,7 @@ adventures:
                     Restoran kodunu tamamlayın, böylece birden fazla kişinin siparişini alabilirsiniz. Her seferinde sipariş numarasını yazdırın: 'Sipariş 1', 'Sipariş 2', gibi.
                     Bunu nasıl yapacağınızdan emin değil misiniz? Seviye 8 kodunuza bir göz atın.
 
-                    **Ekleme** 9. seviyede, restoran fiyatlarını da kullanmıştınız. Bunu da buraya ekleyebilirsiniz!
+                    **Ek Görev** 9. seviyede, restoran fiyatlarını da kullanmıştınız. Bunu da buraya ekleyebilirsiniz!
                 example_code: |
                     ```
                     {print} "Restaurant Hedy'ye hoş geldiniz!"
@@ -2917,10 +2917,10 @@ adventures:
                 example_code: |
                     ```
                     seçimler {is} taş, kağıt, makas
-                    {print} seçimler _
+                    {print} seçimler _ _
                     ```
                 story_text_2: |
-                    **Ekleme** İki oyunculu bir oyun hazırlayın. İlk olarak iki oyuncudan isimlerini yazmalarını isteyin. Ardından bilgisayarın rastgele seçim yapmasını sağlayın.
+                    **Ek Görev** İki oyunculu bir oyun hazırlayın. İlk olarak iki oyuncudan isimlerini yazmalarını isteyin. Ardından bilgisayarın rastgele seçim yapmasını sağlayın.
                 example_code_2: |
                     ```
                     seçimler {is} taş, kağıt, makas
@@ -2963,7 +2963,7 @@ adventures:
                     ### Alıştırma
                     Kodu tamamlayabilir misiniz? Program her kombinasyon için kimin kazandığını söylemelidir.
 
-                    **Ekleme** Birden fazla oyun mu oynamak istiyorsunuz? Birden fazla tur oynayabilmek için kodu genişletin. Kullanıcıya kaç tur oynamak istediğini sormak için bir `{ask}` bile kullanabilirsiniz.
+                    **Ek Görev** Birden fazla oyun mu oynamak istiyorsunuz? Birden fazla tur oynayabilmek için kodu genişletin. Kullanıcıya kaç tur oynamak istediğini sormak için bir `{ask}` bile kullanabilirsiniz.
                 example_code: |
                     ```
                     seçimler {is} taş, kağıt, makas
@@ -3172,7 +3172,7 @@ adventures:
 
                     ### Alıştırma
                     Bebek Köpekbalığı şarkısını bir `{repeat}` ile yazdırabilir misiniz? Boşlukları değiştirerek kodu tamamlayın?
-                    **Ekleme** Bebek Köpekbalığı'ndan sonra elbette başka şarkılar da programlayabilirsiniz. Tekrarı olan birçok şarkı var!
+                    **Ek Görev** Bebek Köpekbalığı'ndan sonra elbette başka şarkılar da programlayabilirsiniz. Tekrarı olan birçok şarkı var!
                     Aklınıza bir şarkı daha geliyorsa yazdırabilir misiniz?
                 example_code: |
                     ```
@@ -3209,7 +3209,7 @@ adventures:
                     ### Alıştırma 2
                     Beş küçük maymun yatakta zıplıyor şarkısını yazdırın. Eğer hatırlamıyorsanız metne bakın.
 
-                    **Ekleme** Ali babanın bir çiftliği var şarkısını yazdırın ve `{if}` kullanarak tüm hayvanların farklı bir ses çıkardığından emin olun.
+                    **Ek Görev** Ali babanın bir çiftliği var şarkısını yazdırın ve `{if}` kullanarak tüm hayvanların farklı bir ses çıkardığından emin olun.
                 example_code_2: |
                     ```
                     maymunlar = 5, 4, 3, 2, 1
@@ -3321,7 +3321,7 @@ adventures:
                     ### Alıştırma 2
                     Oyun ayrıca kimin kazandığına karar vermiyor. Bunu, arka arkaya 3 noktanın aynı sembole sahip olup olmadığını kontrol ederek eklemeniz gerekir.
 
-                    ### Alıştırma 3 Ekleme
+                    ### Alıştırma 3 Ek Görev
                     Her zaman birlikte oynayabileceğiniz bir arkadaşınız olmayabilir. Bir bilgisayar rakibi oluşturabilir misin?
                 example_code: |
                     ```
@@ -3679,7 +3679,7 @@ adventures:
                     Bu kodun çalışmasını sağlamak için kodun içine doğru sayıları doldurun.
                     Bunu yaptıktan sonra, geriye doğru seçeneğini eklemeyi deneyebilirsiniz.
 
-                    **Ekleme** 'Sol' ve 'sağ' kullanmak yerine, programı Kuzey, Doğu, Güney ve Batı ile yeniden oluşturun.
+                    **Ek Görev** 'Sol' ve 'sağ' kullanmak yerine, programı Kuzey, Doğu, Güney ve Batı ile yeniden oluşturun.
                     Bu şekilde Kuzeydoğu ve Güneybatı gibi daha fazla yön ekleyebilirsiniz.
                 example_code_2: |
                     ```
@@ -3738,7 +3738,7 @@ adventures:
                         {forward} 50
                     ```
                 story_text_2: |
-                    **Ekleme** Artık farklı şekiller çizen programımızı geliştirebiliriz. Kodu tamamlayınca istediğiniz herhangi bir çokgeni çizebilirsiniz!
+                    **Ek Görev** Artık farklı şekiller çizen programımızı geliştirebiliriz. Kodu tamamlayınca istediğiniz herhangi bir çokgeni çizebilirsiniz!
                 example_code_2: |
                     ```
                     şekil = {ask} 'Kaç tane açı çizmeliyim?'
@@ -3755,7 +3755,7 @@ adventures:
                     ### Alıştırma 1
                     Bu kod üç tane siyah üçgen oluşturur, bunu beş pembe kareye dönüştürün.
 
-                     **Ekleme** En az iki farklı şekil türünden oluşan kendi seçtiğiniz bir şekil oluşturun.
+                    **Ek Görev** En az iki farklı şekil türünden oluşan kendi seçtiğiniz bir şekil oluşturun.
                 example_code: |
                     ```
                     {color} {black}

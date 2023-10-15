@@ -538,11 +538,10 @@ adventures:
                     {if} answer {is} _ {print} 'good job!'
                     {else} {print} 'Wrong! It was ' _
                     ```
-                story_text_3: |4
-
+                story_text_3: |
                     **Extra** You can also let the computer do random sums on its own using random.
 
-                        This is how you choose a number of tables to practice, and from that you always get a different sum:
+                    This is how you choose a number of tables to practice, and from that you always get a different sum:
                 start_code: '{print} ''Welcome to this calculator!'''
             9:
                 story_text: |
@@ -623,8 +622,7 @@ adventures:
                     ```
                 start_code: '# 코드를 여기에 입력하세요'
             13:
-                story_text: |4
-
+                story_text: |
                     ### 연습문제 1
                     Let's make the practice program a bit harder. The player now has to answers two questions correctly. Fill out the blanks to complete the program.
 
@@ -1044,8 +1042,7 @@ adventures:
                     {if} throw {is} earthworm points = points + 5 {else} points = points + throw
                     {print} 'those are ' points ' points'
                     ```
-                example_code_2: |4
-
+                example_code_2: |
                     Did you manage to calculate the score for 8 dice? That required a lot of cutting and pasting, right? We are going to make that easier in level 7!
                 start_code: '{print} ''What will the die indicate this time?'''
             7:
@@ -3665,9 +3662,9 @@ adventures:
                     **Extra** 다양한 도형을 그리는 프로그램을 개선할 수 있습니다. 코드를 완성하면 원하는 다각형을 그릴 수 있습니다!
                 example_code_2: |
                     ```
-                    angles = {ask} 'How many angles should I draw?'
-                    angle = 360 / angles
-                    {repeat} angle {times}
+                    figure = {ask} 'How many angles should I draw?'
+                    angle = 360 / figure
+                    {repeat} figure {times}
                         {turn} _
                         {forward} _
                     ```

@@ -171,8 +171,7 @@ adventures:
             12:
                 story_text: |
                     In this level you can use the quotation marks to save multiple words in a variable.
-                example_code: |4
-
+                example_code: |
                     ```
                     name = 'The Queen of England'
                     {print} name ' was eating a piece of cake, when suddenly...'
@@ -576,12 +575,11 @@ adventures:
                     {print} number1 ' plus ' number2 ' is ' answer
                 start_code: '# place your code here'
             13:
-                story_text: |4
-
+                story_text: |
                     ### Exercise 1
                     Let's make the practice program a bit harder. The player now has to answers two questions correctly. Fill out the blanks to complete the program.
 
-                    ### Exercise 2 (extra)
+                    ### Exercise 2 Extra
                     Sometimes, calculations have multiple correct answers. For example, 10 can be divided by 5 and by 2. So the question 'What number divides 10?' can be answered by 2 and by 5.
                     Ask for a calculation that has multiple correct answers, ask the player to answer it, and determine if it is correct using `{or}`.
                     Empty the programming field and create your own solution.
@@ -705,15 +703,14 @@ adventures:
                     هذا مفيد لإنه يمكنك من طباعة كل الكلمات التي تريدها حتى الكلمات التي قمت بتخزينها باستخدام الأمر `{is}`.
 
                     معظم لغات البرمجة تستخدم علامات الاقتباس عند طباعة الكلام على الشاشة باستخدام الكود، لذلك نحن نتقدم خطوة أخرى باتجاه البرمجة الحقيقية!
-                example_code: "\n```\n{print} \"يجب عليك استعمال علامات الاقتباس من الان وصاعداً!\"\nالجواب {is} {ask} \"ما الذي يجب علينا استعماله من الان وصاعداً؟\"\n{print} \"يجب علينا استعمال \" الجواب \n```\n"
+                example_code: "```\n{print} \"يجب عليك استعمال علامات الاقتباس من الان وصاعداً!\"\nالجواب {is} {ask} \"ما الذي يجب علينا استعماله من الان وصاعداً؟\"\n{print} \"يجب علينا استعمال \" الجواب \n```\n"
                 start_code: '{print} "مرحبا أيها العالم"'
             5:
                 story_text: |
                     في المستوى الخامس لدينا شيء جديد: الأمر `{if}`! باستخدام الأمر `{if}` يمكنك أن تفحص شيئا ما وتقوم بالاختيار بين أمرين مختلفين بناء على نتيجة ذلك الفحص.
                     هذا الكود يطبع واو هذا رائع! اذا ادخلت هيدي كإجابة على سؤال الاسم، بينما يطبع اه.. حسنا اذا أدخلت أي شيء اخر.
                     `{ask}` و `{print}` لا يزالان يعملان كما في المستوى الرابع.
-                example_code: |4
-
+                example_code: |
                     ```
                     اسمك {is} {ask} "ما اسمك؟"
                     {if} اسمك {is} هيدي {print} "واو هذا رائع!" {else} {print} "اه.. حسنا"
@@ -729,8 +726,7 @@ adventures:
 
                     عملية الضرب مختلفة بعض الشيء، لأنه لا يوجد اشارة الضرب المعروفة لديك في لوحة المفاتيح (يمكنك البحث الان!).
                     لذلك نقوم بعملية الضرب من خلال اشارة الإجامة أو النجمة الصغيرة الموجودة في لوحة المفاتيح فوق الرقم ٨ عادة: `٥*٥` ونقرأها هكذا "٥ ضرب ٥" لتتذكرها بسهولة.
-                example_code: |4
-
+                example_code: |
                     ```
                     {print} "٥ زائد ٥ تساوي " ٥+٥
                     {print}  "٥ ناقص ٥ تساوي " ٥-٥
@@ -740,8 +736,7 @@ adventures:
             7:
                 story_text: |
                     في المستوى السابع أضفنا الأمر `{repeat}`. باستخدام الأمر `{repeat}` يمكننا أن نكرر تنفيذ سطر واحد من الكود عدة مرات.
-                example_code: |4
-
+                example_code: |
                     ```
                     {repeat} ٣ {times} {print} "هيدي ممتعة!"
                     ```
@@ -796,11 +791,9 @@ adventures:
                     {for} حيوان {in} حيواناتي_المفضلة
                         {print} "أنا أحب " حيوان
             11:
-                story_text: |4-
-
-                            `{print}` لا زال يعمل بالطريقة نفسها، ولكن أضفنا شكلاً جديداً من الأمر `{for}`. بامكاننا الان أن نكتب `{for} دورة {in} {range} ١ {to} ٥` وأن نستخدم بعدها المتغير `دورة` في البرنامج.
-
-                            فلنجرب الان ونرى ما سيحدث! تذكر أن تضع الإزاحة بعد استخدام الأوامر `{for}` و `{if}`(هذا يعني وضع اربع فراغات قبل بداية السطر الذي يكون ضمن هذه الأوامر)
+                story_text: |
+                    `{print}` لا زال يعمل بالطريقة نفسها، ولكن أضفنا شكلاً جديداً من الأمر `{for}`. بامكاننا الان أن نكتب `{for} دورة {in} {range} ١ {to} ٥` وأن نستخدم بعدها المتغير `دورة` في البرنامج.
+                    فلنجرب الان ونرى ما سيحدث! تذكر أن تضع الإزاحة بعد استخدام الأوامر `{for}` و `{if}`(هذا يعني وضع اربع فراغات قبل بداية السطر الذي يكون ضمن هذه الأوامر)
                 start_code: |
                     {for} دورة {in} {range} ١ {to} ٥
                         {print} دورة
@@ -808,8 +801,7 @@ adventures:
                 story_text: |-
                     **الأرقام العشرية**
                     الى الان لم تكن هيدي تسمح باستخدام الأرقام العشرية مثل ٢.٥ ولكن الان أصبح استخدامها ممكنا. انتبه الى أن الحاسوب يستعمل النقطة `.` كفاصل بين الأرقام الصحيحة والكسور.
-                example_code: |4
-
+                example_code: |
                     ```
                     {print} "اثنان ونصف زائد اثنان ونصف يساوي ..."
                     {print} ٢.٥ + ٢.٥
@@ -840,8 +832,7 @@ adventures:
                     علامة الأكبر `<` تستعمل لفحص ما اذا كان الرقم الأول أكبر من الرقم الثاني، مثلا `النقاط > ١٠` تفحص ما اذا كان المتغير `النقاط` أكبر/أكثر من الرقم ١٠.
                     عندما نريد فحص ما اذا كان الرقم الأول أكبر من أو مساوياً للرقم الثاني، يمكننا استعمال `>=`، مثلاً `النقاط >= ١١`.
                     نستعمل علامات المقارنة هذه عند القايام بفحص شيء معين مع الأمر `{if}`، هكذا:
-                example_code: |4
-
+                example_code: |
                     ```
                     عمرك = {ask} "ما عمرك؟"
                     {if} عمرك > ١٢
@@ -948,8 +939,7 @@ adventures:
                     {if} رمية {is} دودةالأرض النقاط = النقاط + 5 {else} النقاط = النقاط + رمية
                     {print} 'نقاطك الآن ' النقاط' نقطة'
                     ```
-                example_code_2: |4
-
+                example_code_2: |
                     Did you manage to calculate the score for 8 dice? That required a lot of cutting and pasting, right? We are going to make that easier in level 7!
                 start_code: '{print} ''إلى ماذا سيشير حجر النرد هذه المرة؟'''
             7:
@@ -1192,8 +1182,7 @@ adventures:
                 story_text: |
                     في المستويات السابقة استطعت أن تصنع أول عراف آلي لك، ولكن لم تستطع هيدي التنبؤ بأي شيء، لقد رددت فقط بعض الإجابات من خلال الأمر {echo}.
                     ولكن في هذا المستوى يمكنك استخدام المتغيرات و الأمر الجديد الذي تعلمته `{at} {random}` لكي تجعل هيدي تتنبأ لك الإجابة حقًا. تحقق من الكود الموضح في المثال و جرب بنفسك:
-                example_code: |4
-
+                example_code: |
                     في هذا المثال يمكن لللاعب استخدام الأمر {ask} ليطرح على هيدي العرافة سؤالاً بنعم أو لا، وهيدي سوف تختار لك إجابة عشوائية في كل مرة.
                     ```
                     {print} أنا هيدي العرافة!
@@ -1432,7 +1421,7 @@ adventures:
                     {print} _أنت ترى..._
                     {sleep}
                     {print} الأشباح {at} {random}
-                     ```
+                    ```
                 start_code: '#اكتب الكود الخاص بك هنا'
             5:
                 story_text: |
@@ -1834,8 +1823,8 @@ adventures:
         description: اصنع ببغاء الكتروني خاص بك، سيقوم بنسخ كل ما تقول!
         levels:
             1:
-                story_text: |4
-                     اصنع ببغاء الكتروني خاص بك، سيقوم بنسخ كل ما تقول!
+                story_text: |
+                    اصنع ببغاء الكتروني خاص بك، سيقوم بنسخ كل ما تقول!
                 example_code: |
                     ```
                     {print} انا الببغاء هيدي
@@ -2331,8 +2320,8 @@ adventures:
         description: اصنع مطعماً افتراضياً خاصاً بك
         levels:
             1:
-                story_text: |4
-                     في المستوى ١ ستتمكن من صنع مطعم افتراضي وتأخذ طلبات الطعام الخاصة بضيوفك.
+                story_text: |
+                    في المستوى ١ ستتمكن من صنع مطعم افتراضي وتأخذ طلبات الطعام الخاصة بضيوفك.
                 example_code: "```{print} \U0001F35F اهلاً بكم في مطعم هيدي \n{ask} ماذا تود ان تطلب؟\n{echo} اذاً، طلبك هو \n{print} شكرًا لطلبكم من مطعمنا!\n{print} طلبك في طريقه إليك!\n ```\n"
                 story_text_2: |
                     هل يمكنك التفكير في عدة سطور اخرى تضيفها لتطور كود مطعمك؟ على سبيل المثال، هل يمكنك استخدام `{ask}` لسؤال الضيوف ماذا يفضلون كشراب بجانب وجبتهم، وبعد ذلك اخبارهم بسعر طلبهم، و ان تتمنى لهم وجبة هنيئة؟
@@ -2390,8 +2379,7 @@ adventures:
                     ```
                 start_code: '# اكتب الكود الخاص بك هنا'
             4:
-                story_text: |4
-
+                story_text: |
                     في هذا المستوى عليك استخدام علامات الاقتباس مع الأمر `{print}` .
                     هل تستطيع أن تجعل الكود الخاص بك من المستويات السابقة أن يعمل بالشكل الصحيح بإضافة علامات الاقتباس؟
                 example_code: |
@@ -2432,8 +2420,7 @@ adventures:
             6:
                 story_text: |
                     في هذا المستوى يمكنك إستخدام الحساب الرياضي لتحسب المبلغ الكُلي لطلب زبونك، مما سيجعل مطعمك الإلكتروني أكثر واقعية.
-                example_code: |4
-
+                example_code: |
                     يمكنك كتابة كود مطعم إلكتروني بسيط، كالمثال التالي:
                     ```
                     {print} 'أهلاً بكم في مطعم هيدي'
@@ -2641,8 +2628,7 @@ adventures:
                     ```
                 start_code: '#اكتب الكود الخاص بك هنا'
             3:
-                story_text: |4
-
+                story_text: |
                     في هذا المستوى يمكننا إستخدام القوائم و الإختار منها.
                     في البداية اصنع قائمة بإستخدام `{is}`. بعد ذلك يمكنك ترك الكومبيوتر يختار شيئًا من هذه القائمة بإستخدام `{at} {random}`.
                     على سبيل المثال، ستترك الكومبيوتر يختار من بين حجر، ورقة، أو مقص.
@@ -2801,13 +2787,13 @@ adventures:
                     The code you made in the previous level can be made a lot easier in this one with the `{and}` command.
                 example_code: |
                     ```
-                    name is ask 'What is your name?'
-                    password is ask 'What is your password?'
-                    if name is 'Agent007' and password is 'TOPSECRET'
-                        print 'Go to the airport at 02.00'
-                    else
-                        print 'Go to the trainstation at 10.00'
-                     ```
+                    name {is} {ask} 'What is your name?'
+                    password {is} {ask} 'What is your password?'
+                    {if} name {is} 'Agent007' _ password {is} 'TOPSECRET'
+                        {print} 'Go to the airport at 02.00'
+                    {else}
+                        {print} 'Go to the trainstation at 10.00'
+                    ```
                 start_code: '# place your code here'
     sleep_command:
         name: '{sleep}'
@@ -3409,9 +3395,7 @@ adventures:
             4:
                 story_text: |
                     في المستوى الرابع يجب أن نستخدم علامات الإقتباس مع الأوامر `{print}` و`{ask}`. حتى في الكود الذي نستخدمه للرسم!
-                example_code: |4
-
-
+                example_code: |
                     ```
                     {print} "رسم الأشكال"
                     الزاوية هي ٩٠
@@ -3442,9 +3426,7 @@ adventures:
             5:
                 story_text: |
                     في المستوى الخامس يمكننا الاختيار بناء على فحص معين من خلال الأمر `{if}`. على سبيل المثال الإحتيار بين عدة أنواع من أشكال الرسم.
-                example_code: |4
-
-
+                example_code: |
                     ```
                     {print} "رسم الأشكال"
                     الشكل {is} {ask} "هل تريد مربعاً أم مثلثاً؟"
@@ -3486,8 +3468,7 @@ adventures:
                     قد تكون تعلمت في المدرسة أن الإستدارة بشكل دائرة كاملة تساوي ٣٦٠ درجة. اذا لم تتعلم ذلك من قبل فأنت الآن تعرف!
                     لذلك أيضا نستخدم ٩٠درجة من أجل رسم مربع. ٣٦٠مقسومة على ٤ تساوي ٩٠.
                     بما أننا نستطيع القيام بالعمليات الحسابية في هيدي، يمكننا رسم كل الأشكال التي نريد!
-                example_code: |4
-
+                example_code: |
                     ```
                     عدد_الزوايا = {ask} "كم عدد الزوايا المطلوبة؟"
                     الزاوية = ٣٦٠ / عدد_الزوايا
@@ -3509,9 +3490,7 @@ adventures:
                 story_text: |
                     بما أننا قادرون على تكرار عدة أسطر برمجية الآن فيمكننا أن نرسم الأشكال بسهولة أكثر.
                     يجب علينا فقط أن نحدد الزاوية مرة واحدة ومن ثم استخدام المتغير في مع الأمر البرمجي `{repeat}`.
-                example_code: |4
-
-
+                example_code: |
                     ```
                     الزاوية = ٩٠
                     {repeat} ١٠ {times}
@@ -3519,7 +3498,7 @@ adventures:
                         {forward} ٥٠
                     ```
                 story_text_2: "كذلك يمكننا تحسين البرنامج الذي يرسم الأشكال المختلفة. \nهل يمكنك حاسب كم يجب على الرسام أن يستدير هنا؟ أكمل الكود وسيصبح بإمكانك أن تطبع الشكل المضلع الذي تريد!\n"
-                example_code_2: "\n\n```\nعدد_الزوايا = {ask} \"كم عدد الزوايا التي يجب أن أقوم بها؟\"\nالزاوية = ٣٦٠ / عدد_الزوايا\n{repeat} الزاوية {times} \n    {turn} _\n    {forward} _\n```\n"
+                example_code_2: "```\nعدد_الزوايا = {ask} \"كم عدد الزوايا التي يجب أن أقوم بها؟\"\nالزاوية = ٣٦٠ / عدد_الزوايا\n{repeat} الزاوية {times} \n    {turn} _\n    {forward} _\n```\n"
                 start_code: عدد_الزوايا = {ask} "كم عدد الزوايا التي يجب أن أقوم بها؟"
             9:
                 story_text: |
@@ -3528,7 +3507,7 @@ adventures:
                     ### Exercise 1
                     This code creates three black triangles, change that into five pink squares.
 
-                     **(extra)** Create a figure of your own choosing consisting of at least two different shapes types.
+                     **Extra** Create a figure of your own choosing consisting of at least two different shapes types.
                 example_code: |
                     ```
                     {color} {black}
