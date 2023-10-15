@@ -1,143 +1,149 @@
 1:
--   name: "{print}"
-    explanation: "Iets printen met `{print}`."
-    demo_code: "{print} Hallo welkom bij Hedy!"
--   name: "{ask}"
-    explanation: "Iets vragen met `{ask}`."
-    demo_code: "{ask} Wat is je lievelingskleur?"
--   name: "{echo}"
-    explanation: "Iets herhalen dat is ingetypt met `{echo}`."
+-   name: '{print}'
+    explanation: Iets printen met `{print}`.
+    demo_code: '{print} Hallo welkom bij Hedy!'
+-   name: '{ask}'
+    explanation: Iets vragen met `{ask}`.
+    demo_code: '{ask} Wat is je lievelingskleur?'
+-   name: '{echo}'
+    explanation: Iets herhalen dat is ingetypt met `{echo}`.
     demo_code: |-
         {ask} Wat is je lievelingskleur?
         {echo} dus je lievelingskleur is
--   name: "{print} emoji"
-    explanation: "Print een emoji met `{print}`."
-    demo_code: "{print} 🙋 🌍 ❗"
--   name: "{forward}"
-    explanation: "Een lijn tekenen met `{forward}`."
-    demo_code: "{forward} 100"
--   name: "{turn}"
-    explanation: "De teken-schildpad draaien met `{turn}`."
+-   name: '{print} emoji'
+    explanation: Print een emoji met `{print}`.
+    demo_code: '{print} 🙋 🌍 ❗'
+-   name: '{forward}'
+    explanation: Een lijn tekenen met `{forward}`.
+    demo_code: '{forward} 100'
+-   name: '{turn}'
+    explanation: De teken-schildpad draaien met `{turn}`.
     demo_code: |-
         {forward} 25
         {turn} {left}
         {forward} 25
         {turn} {right}
 2:
--   name: "{is}"
-    explanation: "Een woord een naam geven met `{is}`. Je mag de naam zelf kiezen."
+-   name: '{is}'
+    explanation: Een woord een naam geven met `{is}`. Je mag de naam zelf kiezen.
     demo_code: |-
         voornaam {is} Hedy
         {print} ik heet voornaam
--   name: "{ask}"
-    explanation: "Stel een vraag met `{ask}`. Denk eraan dat je het antwoord een naam moet geven met `{is}`."
+-   name: '{ask}'
+    explanation: Stel een vraag met `{ask}`. Denk eraan dat je het antwoord een naam moet geven met `{is}`.
     demo_code: |-
         kleur {is} {ask} Wat is je lievelingskleur?
         {print} kleur is je lievelingskleur!
--   name: "{sleep}"
-    explanation: "`{sleep}` laat Hedy voor een (paar) seconde(n) pauzeren."
+-   name: '{sleep}'
+    explanation: '`{sleep}` laat Hedy voor een (paar) seconde(n) pauzeren.'
     demo_code: |-
         {print} Laat me even een seconde nadenken...
         {sleep}
         {print} Hmm... Ik heb nog 3 seconden denktijd nodig...
         {sleep} 3
         {print} Eureka! Ik weet het!
--   name: "{is} met schildpad"
-    explanation: "Geef een getal een naam met `{is}`. Je kan de naam zelf verzinnen."
+-   name: '{is} met schildpad'
+    explanation: Geef een getal een naam met `{is}`. Je kan de naam zelf verzinnen.
     demo_code: |-
         hoek {is} 90
         {turn} hoek
         {forward} 100
 3:
--   name: "Kies willekeurig"
-    explanation: "Iets willekeurigs uit een groep woorden kiezen met `{at}` en `{random}`."
+-   name: Kies willekeurig
+    explanation: Iets willekeurigs uit een groep woorden kiezen met `{at}` en `{random}`.
     demo_code: |-
         dieren {is} hond, kat, kangoeroe
         {print} dieren {at} {random}
--   name: "{add}"
-    explanation: "`{add}` iets `{to_list}` een lijst."
+-   name: '{add}'
+    explanation: '`{add}` iets `{to_list}` een lijst.'
     demo_code: |-
         dieren {is} kat, koe
         {add} hond {to_list} dieren
--   name: "{remove}"
-    explanation: "`{remove}` iets `{from}` een lijst."
+-   name: '{remove}'
+    explanation: '`{remove}` iets `{from}` een lijst.'
     demo_code: |-
         dieren {is} hond, kat, koe
         {remove} hond {from} dieren
 4:
--   name: "{print}"
-    explanation: "Iets letterlijk printen met aanhalingstekens."
-    demo_code: "{print} 'Hallo welkom bij Hedy'"
--   name: "{is}"
-    explanation: "Een stukje tekst een naam geven en `{print}`en zonder aanhalingstekens."
+-   name: '{print}'
+    explanation: Iets letterlijk printen met aanhalingstekens.
+    demo_code: '{print} ''Hallo welkom bij Hedy'''
+-   name: '{is}'
+    explanation: Een stukje tekst een naam geven en `{print}`en zonder aanhalingstekens.
     demo_code: |-
         naam {is} Hedy
         {print} 'ik heet ' naam
--   name: "{ask}"
-    explanation: "Iets vragen met `{ask}`."
+-   name: '{ask}'
+    explanation: Iets vragen met `{ask}`.
     demo_code: |-
         kleur {is} {ask} 'Wat is je lievelingskleur?'
         {print} 'Jouw favoriet is dus ' kleur
 5:
--   name: "{print}"
-    explanation: "Print letterlijk met aanhalingstekens."
-    demo_code: |-
-        {print} 'Hallo, welkom bij Hedy.'
--   name: "{ask}"
-    explanation: "Iets vragen met `{ask}`."
+-   name: '{print}'
+    explanation: Print letterlijk met aanhalingstekens.
+    demo_code: '{print} ''Hallo, welkom bij Hedy.'''
+-   name: '{ask}'
+    explanation: Iets vragen met `{ask}`.
     demo_code: |-
         kleur {is} {ask} 'Wat is je lievelingskleur?'
         {print} kleur 'is je lievelingskleur!'
--   demo_code: "kleur {is} {ask} 'Wat is je lievelingskleur?'\n{if} kleur {is} groen {print} 'mooi!' {else} {print} 'bah'"
-    name: '{if}'
+-   name: '{if}'
     explanation: Maak een keuze met `{if}`.
--   explanation: Maak een keuze met `{if}`.
-    demo_code: "antwoord {is} {ask} 'Hoe ver moet ik lopen?'\n{if} antwoord {is} ver {forward} 100 {else} {forward} 5"
-    name: '{if} met de tekenschildpad'
--   explanation: Kijk of een onderdeel erin zit met `{in}`.
-    name: '{in}'
-    demo_code: "mooie_kleuren {is} groen, geel\nkleur {is} {ask} 'Wat {is} je lievelingskleur?'\n{if} kleur {in} mooie_kleuren {print} 'mooi!' {else} {print} 'bah'"
+    demo_code: |-
+        kleur {is} {ask} 'Wat is je lievelingskleur?'
+        {if} kleur {is} groen {print} 'mooi!' {else} {print} 'bah'
+-   name: '{if} met de tekenschildpad'
+    explanation: Maak een keuze met `{if}`.
+    demo_code: |-
+        antwoord {is} {ask} 'Hoe ver moet ik lopen?'
+        {if} antwoord {is} ver {forward} 100 {else} {forward} 5
+-   name: '{in}'
+    explanation: Kijk of een onderdeel erin zit met `{in}`.
+    demo_code: |-
+        mooie_kleuren {is} groen, geel
+        kleur {is} {ask} 'Wat {is} je lievelingskleur?'
+        {if} kleur {in} mooie_kleuren {print} 'mooi!' {else} {print} 'bah'
 -   name: '{pressed}'
     explanation: Controleer of een toets op het toetsenbord is `{pressed}`.
-    demo_code: "{if} a {is} {pressed} {print} 'Je hebt A ingedrukt!' {else} {print} 'Je hebt een andere toets dan A ingedrukt!'"
+    demo_code: '{if} a {is} {pressed} {print} ''Je hebt A ingedrukt!'' {else} {print} ''Je hebt een andere toets dan A ingedrukt!'''
 6:
--   name: "{print}"
-    explanation: "Iets letterlijk printen met aanhalingstekens."
-    demo_code: "{print} '5 keer 5 is ' 5 * 5"
--   name: "{ask}"
-    explanation: "Het antwoord van een som vragen en kijken of het goed is."
+-   name: '{print}'
+    explanation: Iets letterlijk printen met aanhalingstekens.
+    demo_code: '{print} ''5 keer 5 is '' 5 * 5'
+-   name: '{ask}'
+    explanation: Het antwoord van een som vragen en kijken of het goed is.
     demo_code: |-
         antwoord = {ask} 'Hoeveel is 10 plus 10?'
         {if} antwoord {is} 20 {print} 'Goedzo!' {else} {print} 'Foutje'
--   name: "`{ask}` en `{if}` met schildpad"
-    explanation: "De gebruiker vragen hoeveel hoeken hij wil."
+-   name: '`{ask}` en `{if}` met schildpad'
+    explanation: De gebruiker vragen hoeveel hoeken hij wil.
     demo_code: |-
         hoeken = {ask} 'Hoeveel hoeken krijgt dit figuur?'
         hoek = 360 / hoeken
         {forward} 50
 7:
--   name: "{print}"
-    explanation: "Iets letterlijk printen met aanhalingstekens."
-    demo_code: |-
-        {print} 'Hallo, welkom bij Hedy.'
--   name: "{ask}"
-    explanation: "Iets vragen met `{ask}`."
+-   name: '{print}'
+    explanation: Iets letterlijk printen met aanhalingstekens.
+    demo_code: '{print} ''Hallo, welkom bij Hedy.'''
+-   name: '{ask}'
+    explanation: Iets vragen met `{ask}`.
     demo_code: |-
         kleur = {ask} 'Wat is je lievelingskleur?'
         {print} kleur ' is je lievelingskleur!'
--   demo_code: "kleur = {ask} 'Wat is je favoriete kleur?'\n{if} kleur {is} groen {print} 'mooi!' {else} {print} 'meh'"
-    name: '{if}'
+-   name: '{if}'
     explanation: Maak een keuze met `{if}`.
+    demo_code: |-
+        kleur = {ask} 'Wat is je favoriete kleur?'
+        {if} kleur {is} groen {print} 'mooi!' {else} {print} 'meh'
 -   name: '{repeat} met de tekenschildpad'
     explanation: Herhaal een regel code met `{repeat}`.
     demo_code: '{repeat} 3 {times} {forward} 10'
 8:
--   name: "{print}"
-    explanation: "Print iets. Denk eraan een aanhalingsteken te gebruiken als je iets letterlijk wil printen."
-    demo_code: |-
-        {print} '5 keer 5 is ' 5 * 5
--   name: "{ask}"
-    explanation: "Vraag om het antwoord op een som en controleer of het goed is. We kunnen nu twee regels printen."
+-   name: '{print}'
+    explanation: Print iets. Denk eraan een aanhalingsteken te gebruiken als je iets letterlijk wil printen.
+    demo_code: '{print} ''5 keer 5 is '' 5 * 5'
+-   name: '{ask}'
+    explanation: Vraag om het antwoord op een som en controleer of het goed is. We kunnen nu twee regels printen.
     demo_code: |-
         antwoord = {ask} 'Hoeveel is 5 plus 5?'
         {if} antwoord {is} 10
@@ -147,14 +153,21 @@
             {print} 'Oeps!'
             {print} 'Het antwoord is 10'
 -   name: '`{repeat}` met turtle'
-    explanation: 'Herhaal meerdere regels.'
-    demo_code: "{repeat} 4 {times}\n    {turn} 90\n    {forward} 50"
+    explanation: Herhaal meerdere regels.
+    demo_code: |-
+        {repeat} 4 {times}
+            {turn} 90
+            {forward} 50
 -   name: '{pressed}'
     explanation: Controleer of een toets op het toetsenbord is `{pressed}`.
-    demo_code: "{if} a {is} {pressed}\n    {print} 'Je hebt A ingedrukt!'\n{else}\n    {print} 'Je hebt een andere toets dan A ingedrukt!'"
+    demo_code: |-
+        {if} a {is} {pressed}
+            {print} 'Je hebt A ingedrukt!'
+        {else}
+            {print} 'Je hebt een andere toets dan A ingedrukt!'
 9:
--   name: "`{if}` met meerdere regels"
-    explanation: "Het antwoord van een som vragen met `{ask}` en kijken of het goed is. Nu printen we twee regels uit."
+-   name: '`{if}` met meerdere regels'
+    explanation: Het antwoord van een som vragen met `{ask}` en kijken of het goed is. Nu printen we twee regels uit.
     demo_code: |-
         antwoord = {ask} 'Hoeveel is 10 plus 10?'
         {if} antwoord {is} 20
@@ -163,56 +176,65 @@
         {else}
             {print} 'Foutje'
             {print} 'Het antwoord moest zijn 20'
--   name: "`{repeat}` met de turtle"
-    explanation: "Meerdere regels samen herhalen."
+-   name: '`{repeat}` met de turtle'
+    explanation: Meerdere regels samen herhalen.
     demo_code: |-
         {repeat} 4 {times}
             {turn} 90
             {forward} 50
 10:
--   name: "{print}"
-    explanation: "Print iets. Vergeet niet om aanhalingstekens te gebruiken als je iets letterlijk wil printen."
-    demo_code: |-
-        {print} '5 keer 5 is ' 5 * 5
+-   name: '{print}'
+    explanation: Print iets. Vergeet niet om aanhalingstekens te gebruiken als je iets letterlijk wil printen.
+    demo_code: '{print} ''5 keer 5 is '' 5 * 5'
 -   name: '{for} with a list'
-    explanation: 'Print alles in een lijst.'
-    demo_code: "animals {is} hond, kat, blobvis\n{for} animal {in} animals\n  {print} 'I love ' animal"
+    explanation: Print alles in een lijst.
+    demo_code: |-
+        animals {is} hond, kat, blobvis
+        {for} animal {in} animals
+          {print} 'I love ' animal
 11:
--   name: "{for} met i"
-    explanation: "We kunnen `{for}` met een `{range}` gebruiken."
+-   name: '{for} met i'
+    explanation: We kunnen `{for}` met een `{range}` gebruiken.
     demo_code: |-
         {for} i {in} {range} 1 {to} 10
             {print} i
         {print} 'Wie niet weg is, is gezien'
--   demo_code: "antwoord = {ask} 'Wat is 5 + 5?'\n{if} antwoord {is} 10\n    {print} 'Goed gedaan!'\n    {print} 'Klopt, het antwoord was ' antwoord\n{else}\n    {print} 'Oeps!'\n    {print} 'Het antwoord is 10'"
-    name: '{ask}'
+-   name: '{ask}'
     explanation: Vraag het antwoord van een som en controleer of het goed is. We kunnen nu 2 regels printen.
+    demo_code: |-
+        antwoord = {ask} 'Wat is 5 + 5?'
+        {if} antwoord {is} 10
+            {print} 'Goed gedaan!'
+            {print} 'Klopt, het antwoord was ' antwoord
+        {else}
+            {print} 'Oeps!'
+            {print} 'Het antwoord is 10'
 12:
--   name: "assign text"
-    explanation: "Decimale getallen."
+-   name: assign text
+    explanation: Decimale getallen.
     demo_code: |-
         {print} 'Rekenen maar!'
         {print} 'Twee-en-een-half plus twee-en-een-half is...'
         {print} 2.5 + 2.5
--   name: "tekst toewijzen"
-    explanation: "Tekst met aanhalingstekens achter een `=`"
+-   name: tekst toewijzen
+    explanation: Tekst met aanhalingstekens achter een `=`
     demo_code: |-
         naam = 'Hedy de robot'
         {print} 'Hallo ' naam
--   name: "Aanhalingstekens na een vergelijking met `{if}`"
-    explanation: "Tekst met aanhalingstekens na `{if}`."
+-   name: Aanhalingstekens na een vergelijking met `{if}`
+    explanation: Tekst met aanhalingstekens na `{if}`.
     demo_code: |-
         naam = {ask} 'Wie ben jij?'
         {if} naam = 'Hedy'
             {print} 'Hoi!'
--   name: "float directly"
-    explanation: "Een lijst met aanhalingstekens."
+-   name: float directly
+    explanation: Een lijst met aanhalingstekens.
     demo_code: |-
         superhelden = 'Iron Man', 'Batman', 'Superman'
         {print} superhelden {at} {random}
 13:
--   name: "{and}"
-    explanation: "Twee delen, allebei moeten kloppen."
+-   name: '{and}'
+    explanation: Twee delen, allebei moeten kloppen.
     demo_code: |-
         antwoord1 = {ask} 'Hoeveel is 3+2?'
         antwoord2 = {ask} 'Hoeveel is 2+2?'
@@ -220,8 +242,8 @@
             {print} 'beide antwoorden zijn goed!'
         {else}
             {print} 'Minimaal 1 antwoord is fout!'
--   name: "{or}"
-    explanation: "Tenminste 1 van de 2 delen moet kloppen. Als ze allebei kloppen, is het ook goed."
+-   name: '{or}'
+    explanation: Tenminste 1 van de 2 delen moet kloppen. Als ze allebei kloppen, is het ook goed.
     demo_code: |-
         antwoord1 = {ask} 'Hoeveel is 3+2?'
         antwoord2 = {ask} 'Hoeveel is 2+2?'
@@ -230,52 +252,52 @@
         {else}
             {print} 'Beide antwoorden zijn fout!'
 14:
--   name: "Kleiner"
-    explanation: "De `<` kijkt of het eerste getal kleiner is dan het tweede getal."
+-   name: Kleiner
+    explanation: De `<` kijkt of het eerste getal kleiner is dan het tweede getal.
     demo_code: |-
         leeftijd = {ask} 'Hoe oud ben jij?'
         {if} leeftijd < 13
             {print} 'Dan ben je jonger dan ik!'
--   name: "Groter"
-    explanation: "De `>` kijkt of het eerste getal groter is dan het tweede getal."
+-   name: Groter
+    explanation: De `>` kijkt of het eerste getal groter is dan het tweede getal.
     demo_code: |-
         leeftijd = {ask} 'Hoe oud ben jij?'
         {if} leeftijd > 13
             {print} 'Dan ben je ouder dan ik!'
 -   name: Gelijk
-    explanation: "We gebruiken `==` om te kijken of twee dingen hetzelfde zijn."
+    explanation: We gebruiken `==` om te kijken of twee dingen hetzelfde zijn.
     demo_code: |-
         antwoord = {ask} 'Wat is 5 * 5?'
         {if} antwoord == 25
             {print} 'Klopt!'
 -   name: Ongelijk
-    explanation: "We gebruiken `!=` om te kijken of twee dingen niet hetzelfde zijn."
+    explanation: We gebruiken `!=` om te kijken of twee dingen niet hetzelfde zijn.
     demo_code: |-
         antwoord = {ask} 'Wat is 5 * 5?'
         {if} antwoord != 25
             {print} 'Foutje!'
--   name: "Kleiner of gelijk"
-    explanation: "We gebruiken `<=` om te kijken of het eerste getal kleiner dan of even klein is als het tweede getal."
+-   name: Kleiner of gelijk
+    explanation: We gebruiken `<=` om te kijken of het eerste getal kleiner dan of even klein is als het tweede getal.
     demo_code: |-
         leeftijd = {ask} 'Hoe oud ben jij?'
         {if} leeftijd <= 12
             {print} 'Dan ben je jonger dan ik!'
--   name: "Groter of gelijk"
-    explanation: "We gebruiken `>=` om te kijken of het eerste getal groter dan of even groot is als het tweede getal."
+-   name: Groter of gelijk
+    explanation: We gebruiken `>=` om te kijken of het eerste getal groter dan of even groot is als het tweede getal.
     demo_code: |-
         leeftijd = {ask} 'Hoe oud ben jij?'
         {if} leeftijd >= 14
             {print} 'Dan ben je ouder dan ik!'
 15:
--   name: "{while}"
-    explanation: "We kunnen dus een `{while}` loop gebruiken met `!=`."
+-   name: '{while}'
+    explanation: We kunnen dus een `{while}` loop gebruiken met `!=`.
     demo_code: |-
         antwoord = 0
         {while} antwoord != 25
             antwoord = {ask} 'Wat is 5 keer 5?'
         {print} 'Goed gedaan!'
--   name: "Kleiner {while}"
-    explanation: "We kunnen een `{while}` lus ook gebruiken met `<` en `>`."
+-   name: Kleiner {while}
+    explanation: We kunnen een `{while}` lus ook gebruiken met `<` en `>`.
     demo_code: |-
         tel = 1
         {while} tel < 3
@@ -283,26 +305,26 @@
             tel = tel + 1
         {print} 'We zijn klaar'
 16:
--   name: "Haakjes om lijstjes"
-    explanation: "Lijstjes met vierkante haken."
+-   name: Haakjes om lijstjes
+    explanation: Lijstjes met vierkante haken.
     demo_code: |-
         fruit = ['appel', 'banaan', 'kers']
         {print} fruit
--   name: "Pak iets uit een lijst"
-    explanation: "Om een item uit een lijst te krijgen gebruiken we [nummer] dus met fruit[1] krijg je de eerste fruit uit de lijst!"
+-   name: Pak iets uit een lijst
+    explanation: Om een item uit een lijst te krijgen gebruiken we [nummer] dus met fruit[1] krijg je de eerste fruit uit de lijst!
     demo_code: |-
         fruit = ['banaan', 'appel', 'kers']
         eerstefruit = fruit[1]
         {print} eerstefruit
--   name: "Pak een random item uit een lijst"
-    explanation: "Om een willekeurig item uit een lijst te pakken, gebruiken we `[{random}]`. Dus `fruit[{random}]` pakt een willekeurig fruit uit de lijst!"
+-   name: Pak een random item uit een lijst
+    explanation: Om een willekeurig item uit een lijst te pakken, gebruiken we `[{random}]`. Dus `fruit[{random}]` pakt een willekeurig fruit uit de lijst!
     demo_code: |-
         fruit = ['banaan', 'appel', 'kers']
         willekeurig_fruit = fruit[{random}]
         {print} willekeurig_fruit
 17:
--   name: "{elif}"
-    explanation: "`{elif}`"
+-   name: '{elif}'
+    explanation: '`{elif}`'
     demo_code: |-
         a = 2
         {if} a == 1:
@@ -311,14 +333,14 @@
             {print} 'a is 2'
         {else}:
             {print} 'a is niet 1 of 2'
--   name: "{print}"
-    explanation: "Bij `{for}` moet je dus een `:` erachter zetten!"
+-   name: '{print}'
+    explanation: Bij `{for}` moet je dus een `:` erachter zetten!
     demo_code: |-
         {for} i {in} {range} 1 {to} 10:
             {print} i
         {print} 'Wie niet weg is, is gezien'
--   name: "{if}"
-    explanation: "We moeten hetzelfde doen met al onze `{if}` s."
+-   name: '{if}'
+    explanation: We moeten hetzelfde doen met al onze `{if}` s.
     demo_code: |-
         kleur = {ask} 'Wat vind jij de mooiste kleur?'
         {if} kleur == 'groen':
@@ -326,22 +348,21 @@
         {else}:
             {print} 'Jouw lievelingskleur is niet groen'
 18:
--   name: "{print}"
-    explanation: "Bij `{print}` moet je haakjes gebruiken."
-    demo_code: |-
-        {print}('hallo!')
--   name: "{range}"
-    explanation: "Bij `{range}` moet je haakjes gebruiken."
+-   name: '{print}'
+    explanation: Bij `{print}` moet je haakjes gebruiken.
+    demo_code: '{print}(''hallo!'')'
+-   name: '{range}'
+    explanation: Bij `{range}` moet je haakjes gebruiken.
     demo_code: |-
         {for} i {in} {range} (1,10):
             {print}('Hallo nummero ', i)
--   name: "{print} met var"
-    explanation: "Bij `{print}` moet je haakjes en komma's gebruiken als je meerdere dingen print."
+-   name: '{print} met var'
+    explanation: Bij `{print}` moet je haakjes en komma's gebruiken als je meerdere dingen print.
     demo_code: |-
         naam = 'Hedy'
         {print}('ik heet', naam)
--   name: "iets vragen met {input}"
-    explanation: "Gebruik `{input}` in plaats van `{ask}` om iets te vragen."
+-   name: iets vragen met {input}
+    explanation: Gebruik `{input}` in plaats van `{ask}` om iets te vragen.
     demo_code: |-
         naam = {input}('Hoe heet jij?')
         {print}('Dus jij heet ', naam)
