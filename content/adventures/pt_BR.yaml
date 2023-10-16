@@ -837,9 +837,9 @@ adventures:
                     {for} animal {in} animais
                       {print} 'Eu adoro ' animal
             11:
-                story_text: |-
-                    `{print}` continua funcionando da mesma forma, mas adicionamos uma nova forma de `{for}`. Agora você pode escrever `{for} contador {in} {range} 1 {to} 5` e usar `contador` em seu programa.
-                    Experimente para ver o que acontece! Lembre-se de usar indentações após as instruções `{for}` e `{if}` (isso significa iniciar uma frase com quatro espaços)
+                story_text: |
+                    You have reached level 11, you're doing great! In the higher levels, Hedy is focussing more and more on teaching you the programming language Python.
+                    In Python there is no `{repeat}` command, but there is a command that works like {repeat}. Are you curious to find out how to say `{repeat}` in Python language? Quickly go on to find out!
                 start_code: |-
                     {for} contador {in} {range} 1 {to} 5
                         {print} contador
@@ -3538,7 +3538,7 @@ adventures:
                     ```
                     ângulos = {ask} 'Quantos ângulos eu deve desenhar?'
                     ângulo= 360 / ângulos
-                    {repeat} ângulo {times}
+                    {repeat} ângulos {times}
                         {turn} _
                         {forward} _
                     ```
