@@ -300,8 +300,9 @@ function clearDebugVariables() {
 
 export function incrementDebugLine() {  
   const active_suspension = theGlobalDebugger.getActiveSuspension();
-  const suspension_info = theGlobalDebugger.getSuspensionInfo(active_suspension);  
+  const suspension_info = theGlobalDebugger.getSuspensionInfo(active_suspension);
   const lineNumber = suspension_info.lineno;
+  load_variables(suspension_info.variables);
   
   if (!lineNumber) return;
   for (const [_, map] of Object.entries(theGlobalSourcemap)) {
