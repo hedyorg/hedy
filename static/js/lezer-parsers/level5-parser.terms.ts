@@ -17,4 +17,8 @@ export const
   Sleep = 27,
   Add = 29,
   Remove = 32,
-  ErrorInvalid = 35
+  If = 35,
+  Condition = 37,
+  IfLessCommand = 43,
+  ErrorInvalid = 44,
+  Else = 45
