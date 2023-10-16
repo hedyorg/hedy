@@ -3524,12 +3524,12 @@ levels:
         8:
             question_text: Which statement is true about this automated toilet system?
             code: |-
-                while toilet == 'occupied'
+                {while} toilet == 'occupied'
                     lights = 'on'
                     air_freshener_sprays = 'yes'
-                    sleep 60
-                else
-                    lights = 'off'
+                    {sleep} 60
+                lights = 'off'
+                air_freshener_sprays = 'no'
             mp_choice_options:
             -   option: The lights and air freshener will turn off after 1 minute
                 feedback: False!

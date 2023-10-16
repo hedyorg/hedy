@@ -592,12 +592,11 @@ adventures:
                     {print} number1 ' plus ' number2 ' is ' answer
                 start_code: '# place your code here'
             13:
-                story_text: |4
-
+                story_text: |
                     ### Exercise 1
                     Let's make the practice program a bit harder. The player now has to answers two questions correctly. Fill out the blanks to complete the program.
 
-                    ### Exercise 2 (extra)
+                    ### Exercise 2 Extra
                     Sometimes, calculations have multiple correct answers. For example, 10 can be divided by 5 and by 2. So the question 'What number divides 10?' can be answered by 2 and by 5.
                     Ask for a calculation that has multiple correct answers, ask the player to answer it, and determine if it is correct using `{or}`.
                     Empty the programming field and create your own solution.
@@ -841,9 +840,9 @@ adventures:
                     {for} जानवर {in} जानवरों
                         {print} 'मुझे पसंद है ' जानवर
             11:
-                story_text: |-
-                    `{print}` वैसा ही काम करेगा लेकिन हम `{for}` का एक नया रूप जोड़ते हैं|
-                    अब आप '{for} काउंटर  {in} {range} 1 {to} 5' लिख सकते हैं और आपके प्रोग्राम में 'काउंटर' का उपयोग कर सकते हैं| कोशिश करके देखो क्या होता है! `{for}` और '{if}' पंक्तियों के बाद इंडेंटेशन का उपयोग करना ध्यान में रखें (जिसका मतलब है कि सेंटेंस लिखने से पहले 4 रिक्त स्थान डाल दें|)
+                story_text: |
+                    You have reached level 11, you're doing great! In the higher levels, Hedy is focussing more and more on teaching you the programming language Python.
+                    In Python there is no `{repeat}` command, but there is a command that works like {repeat}. Are you curious to find out how to say `{repeat}` in Python language? Quickly go on to find out!
                 start_code: |-
                     {for} काउंटर {in} {range} 1 {to} 5
                         {print} काउंटर
@@ -3607,9 +3606,9 @@ adventures:
                     Can you figure out how far the turtle has to turn here? Finish the code and you can draw any polygon you'd like!
                 example_code_2: |
                     ```
-                    angles = {ask} 'How many angles should I draw?'
-                    angle = 360 / angles
-                    {repeat} angle {times}
+                    figure = {ask} 'How many angles should I draw?'
+                    angle = 360 / figure
+                    {repeat} figure {times}
                         {turn} _
                         {forward} _
                     ```

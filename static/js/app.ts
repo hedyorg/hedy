@@ -137,10 +137,22 @@ export function initializeApp(options: InitializeAppOptions) {
 
   // Close the dropdown menu if the user clicks outside of it
   $(document).on("click", function(event){
-      if(!$(event.target).closest(".dropdown").length){
-          $(".dropdown-menu").slideUp("medium");
-          $(".cheatsheet-menu").slideUp("medium");
+    // The following is not needed anymore, but it saves the next for loop if the click is not for dropdown.
+    if (!$(event.target).closest(".dropdown").length) {
+      $(".dropdown-menu").slideUp("medium");
+      $(".cheatsheet-menu").slideUp("medium");
+      return;
+    }
+
+    const allDropdowns = $('.dropdown-menu')
+    for (const dd of allDropdowns) {
+      // find the closest dropdown button (element) that initiated the event
+      const c = $(dd).closest('.dropdown')[0]
+      // if the click event target is not within or close to the container, slide up the dropdown menu
+      if (!$(event.target).closest(c).length) {
+        $(dd).slideUp('fast');
       }
+    }
   });
 
   $("#search_language").on('keyup', function() {

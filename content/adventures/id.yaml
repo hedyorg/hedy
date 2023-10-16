@@ -594,12 +594,11 @@ adventures:
                     {print} number1 ' plus ' number2 ' is ' answer
                 start_code: '# place your code here'
             13:
-                story_text: |4
-
+                story_text: |
                     ### Exercise 1
                     Let's make the practice program a bit harder. The player now has to answers two questions correctly. Fill out the blanks to complete the program.
 
-                    ### Exercise 2 (extra)
+                    ### Exercise 2 Extra
                     Sometimes, calculations have multiple correct answers. For example, 10 can be divided by 5 and by 2. So the question 'What number divides 10?' can be answered by 2 and by 5.
                     Ask for a calculation that has multiple correct answers, ask the player to answer it, and determine if it is correct using `{or}`.
                     Empty the programming field and create your own solution.
@@ -858,10 +857,9 @@ adventures:
                     for hewan in hewanhewan
                       print 'Aku suka ' hewan
             11:
-                story_text: |-
-                    ##Pengulangan!
-                    `{print}` berfungsi sama namun kita menambahkan form baru di `{for}`. Sekarang kamu bisa menuliskan `{for} counter {in} {range} 1 {to} 5` maupun `{reapeat} 5 {times}` dan gunakan `counter` pada program kamu.
-                    Cobalah lihat apa yang terjadi! Ingat untuk menggunakan indentasi sesudah perintah `{for}` dan `{if}` statements( Artinya mengawali baris dengan empat spasi).
+                story_text: |
+                    You have reached level 11, you're doing great! In the higher levels, Hedy is focussing more and more on teaching you the programming language Python.
+                    In Python there is no `{repeat}` command, but there is a command that works like {repeat}. Are you curious to find out how to say `{repeat}` in Python language? Quickly go on to find out!
                 start_code: |-
                     for pembilang in range 1 to 5
                         print pembilang
@@ -1015,8 +1013,7 @@ adventures:
                     Dapatkan kamu membuat kodenya untuk menghitung total poin dari lemparan dadu 8 kali? Untuk melakukannya, kamu harus menyalin beberapa baris kode.
 
                     Apakah kamu berhasil menghitung poin dari lemparan dadu 8 kali? Ini memerlukan banyak salinan kode, betul? Kita akan membuatnya lebih mudah pada level 7!
-                example_code_2: |4
-
+                example_code_2: |
                     Did you manage to calculate the score for 8 dice? That required a lot of cutting and pasting, right? We are going to make that easier in level 7!
                 start_code: print 'Apakah yang akan dihasilkan dari lemparan dadu kali ini?'
             7:
@@ -2655,7 +2652,14 @@ adventures:
                     ```
                 start_code: courses = appetizer, main course, dessert
             11:
-                story_text: Kamu dapat menggunakan `for i in range 1 to 5` untuk menampilkan pesanan dari berbagai pembeli secara terurut.
+                story_text: |
+                    We can use the `{for}` with `{range}` to print the orders from multiple customers in an orderly manner.
+
+                    ### Exercise
+                    Finish the restaurant code, so that you can ask for the order of multiple people. Print the order number each time: 'Order 1', 'Order 2', etc.
+                    Are you not sure how to go about this? Have a peek at your level 8 code.
+
+                    **Extra** In level 9 the restaurant also used prices. You can add that here too!
                 example_code: |
                     ```
                     print 'Selamat datang di rumah makan Hedy!'
@@ -3619,15 +3623,8 @@ adventures:
                         forward 50
                     ```
                 story_text_2: Selain itu, kita juga bisa meningkatkan kemampuan program untuk menggambar banyak bentuk. Dapatkah kamu tebak seberapa jauh sang kura-kura perlu berbelok disini? Selesaikan kodenya dan kamu dapat menggambar bentuk poligon apapun yang kamu suka!
-                example_code_2: |
-                    ```
-                    jumlahsudut is ask 'Berapa banyak sudut yang kamu mau?'
-                    sudut is 360 / jumlahsudut
-                    repeat sudut times
-                        turn _
-                        forward_
-                    ```
-                start_code: hoeken is ask 'Berapa banyak sudut yang aku harus gambar?'
+                example_code_2: "```\njumlahsudut = {ask} 'Berapa banyak sudut yang kamu mau?'\nsudut = 360 / jumlahsudut \n{repeat} jumlahsudut {times}\n    {turn} _\n    {forward} _\n```\n"
+                start_code: hoeken = {ask} 'Berapa banyak sudut yang aku harus gambar?'
             9:
                 story_text: |
                     Now that we can use a `{repeat}` inside a `{repeat}`, we can create more complex figures.
