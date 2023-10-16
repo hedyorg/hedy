@@ -832,9 +832,9 @@ adventures:
                     {for} besto {in} bestoj
                       {print} 'Mi amas ' besto 'n'
             11:
-                story_text: |-
-                    `{print}` funkcias same, sed ni ebligis novan formon de `{for}`. Oni nun povas uzi `{for} numero {in} {range} 1 {to} 5` kaj uzi `numero` en via programo.
-                    Provu ĝin por vidi kio okazos! Ne forgesu deŝovon post la deklaroj `{for}` kaj `{if}`. (Tio signifas komenci linion per kvar spacoj.)
+                story_text: |
+                    You have reached level 11, you're doing great! In the higher levels, Hedy is focussing more and more on teaching you the programming language Python.
+                    In Python there is no `{repeat}` command, but there is a command that works like {repeat}. Are you curious to find out how to say `{repeat}` in Python language? Quickly go on to find out!
                 start_code: |-
                     {for} nombro {in} {range} 1 {to} 5
                         {print} nombro
@@ -3564,14 +3564,7 @@ adventures:
                 story_text_2: |
                     Ankaŭ ni nun povas plibonigi la programon, kiu desegnas malsamajn figurojn.
                     Ĉu vi povas eltrovi kiom malproksimen la testudo devas turni ĉi tien? Finu la kodon kaj vi povas desegni ajnan plurangulon, kiun vi ŝatus!
-                example_code_2: |
-                    ```
-                    anguloj = {ask} 'Kiom da anguloj mi desegnu?'
-                    angulo = 360 / anguloj
-                    {repeat} angulo {times}
-                        {turn} _
-                        {forward} _
-                    ```
+                example_code_2: "```\nanguloj = {ask} 'Kiom da anguloj mi desegnu?'\nangulo = 360 / anguloj \n{repeat} anguloj {times}\n    {turn} _\n    {forward} _\n```\n"
                 start_code: anguloj = {ask} 'Kiom da anguloj desegni?'
             9:
                 story_text: |

@@ -869,7 +869,7 @@ adventures:
                 start_code: '{print} ''!Vayamos a la siguiente pestaña!'''
             11:
                 story_text: |
-                    Has alcanzado el nivel 10, ¡lo estás haciendo genial! En los niveles superiores, Hedy se centra más y más en enseñarte el lenguaje de programación Python.
+                    Has alcanzado el nivel 11, ¡lo estás haciendo genial! En los niveles superiores, Hedy se centra más y más en enseñarte el lenguaje de programación Python.
                     En Python no hay comando `{repeat}`, pero hay un comando que funciona como {repeat}.¿Tienes curiosidad de saber cómo se llama `{repeat}` en el idioma Python? Averígualo rápidamente.
                 start_code: '{print} ''!Vayamos a la siguiente pestaña!'''
             12:
@@ -3652,14 +3652,7 @@ adventures:
                     ```
                 story_text_2: |
                     **Extra** Podemos mejorar el programa que dibuja diferentes figuras. Completa el código y ¡puedes dibujar cualquier polígono que te guste!
-                example_code_2: |
-                    ```
-                    ángulos = {ask} '¿Cuántos ángulos debo dibujar?'
-                    ángulo = 360 / figura
-                    {repeat} figura {times}
-                        {turn} _
-                        {forward} _
-                    ```
+                example_code_2: "```\nángulos = {ask} '¿Cuántos ángulos debo dibujar?'\nángulo = 360 / ángulos \n{repeat} ángulos {times}\n    {turn} _\n    {forward} _\n```\n"
                 start_code: figura = {ask} '¿Cuántos ángulos debo dibujar?'
             9:
                 story_text: |
