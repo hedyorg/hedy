@@ -42,8 +42,8 @@ If { skw<"if"> Condition IfLessCommand? Else? }
 Else { kw<"else"> IfLessCommand? }
 
 Condition { 
-    EqualityCheck { Text skw<"is"> (String | Text | skw<"pressed">) } |
-    ListCheck { Text skw<"not">? skw<"in">  Text }
+    EqualityCheck { Text skw<"is"> (String | Text| Int | skw<"pressed">) } |
+    ListCheck { (Text | Int) skw<"not">? skw<"in">  Text }
 }
 
 kw<term> { @specialize[@name={term}]<Text, term> }
