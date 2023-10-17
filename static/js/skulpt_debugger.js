@@ -296,15 +296,12 @@ Sk.Debugger = class {
         });
     }
 
-    resume() {
-        var _this = this;
-        return Promise.resolve().then(function() {
-            return Promise.resolve().then(function() {
-                return _this.handleSuspension(resumeSuspension(_this.getActiveSuspension()))
-            }, function(b) {
-                _this.error(b)
-            })
-        }).then(function() {})
+    async resume() {
+        try {
+            await this.handleSuspension(resumeSuspension(this.getActiveSuspension()))
+        } catch(e) {
+            this.error(e);
+        }        
     }
 
     pop_suspension_stack() {
@@ -312,38 +309,6 @@ Sk.Debugger = class {
         this.currentSuspension -= 1;
     }
 
-    success(r) {
-        if (r instanceof Sk.misceval.Suspension) {
-            if (r.data['type'] === 'Sk.promise') {
-                var promise = this.suspension_handler(r);
-                promise.then(this.success.bind(this), this.error.bind(this));
-            }
-            this.set_suspension(r);
-        } else {
-            if (this.suspensionStack.length > 0) {
-                // Current suspension needs to be popped of the stack
-                this.pop_suspension_stack();
-
-                // We don't care about suspensions in the stack that are complete suspensions
-                while (this.suspensionStack.length >0 && this.getActiveSuspension().child instanceof Sk.misceval.Suspension) {
-                    this.pop_suspension_stack();
-                }
-
-                if (this.suspensionStack.length === 0) {
-                    this.stop_callback();
-                    return;
-                }
-
-                var parent_suspension = this.getActiveSuspension();
-                // The child has completed the execution. So override the child's resume
-                // so we can continue the execution.
-                parent_suspension.child.resume = function () {
-                    return r;
-                };
-                this.resume();
-            }
-        }
-    }
 
     error(e) {
         this.print("Traceback (most recent call last):");
@@ -357,83 +322,7 @@ Sk.Debugger = class {
         }
     }
 
-    asyncToPromise(suspendablefn, suspHandlers, debugger_obj) {
-        return new Promise(function (resolve, reject) {
-            try {
-                debugger_obj.resolveCallback = resolve;
-                debugger_obj.resolveCallback = reject;
-                var r = suspendablefn();
-
-                (function handleResponse(r) {
-                    try {
-                        // jsh*nt insists these be defined outside the loop
-                        var resume = function () {
-                            try {
-                                resolve(r.resume());
-                            } catch (e) {
-                                reject(e);
-                            }
-                        };
-                        var resumeWithData = function resolved(x) {
-                            try {
-                                r.data["result"] = x;
-                                resume();
-                            } catch (e) {
-                                reject(e);
-                            }
-                        };
-                        var resumeWithError = function rejected(e) {
-                            try {
-                                r.data["error"] = e;
-                                resume();
-                            } catch (ex) {
-                                reject(ex);
-                            }
-                        };
-
-                        while (r instanceof Sk.misceval.Suspension) {
-                            if (r.data["type"] == "Sk.promise") {
-                                r.data["promise"].then(resumeWithData, resumeWithError);
-                                return;
-                            } else if (r.data["type"] == "Sk.yield") {
-                                // Assumes all yields are optional, as Sk.setTimeout might
-                                // not be able to yield.
-                                //Sk.setTimeout(resume, 0);
-                                Sk.global["setImmediate"](resume);
-                                return;
-                            } else if (r.data["type"] == "Sk.delay") {
-                                //Sk.setTimeout(resume, 1);
-                                Sk.global["setImmediate"](resume);
-                                return;
-                            } else if (r.optional) {
-                                // Unhandled optional suspensions just get
-                                // resumed immediately, and we go around the loop again.
-                                debugger_obj.set_suspension(r);
-                                return;
-                            } else {
-                                // Unhandled, non-optional suspension.
-                                throw new Sk.builtin.SuspensionError("Unhandled non-optional suspension of type '" + r.data["type"] + "'");
-                            }
-                        }
-
-                        resolve(r);
-                    } catch (e) {
-                        reject(e);
-                    }
-                })(r);
-            } catch (e) {
-                reject(e);
-            }
-        });
-    }
-    execute(suspendablefn, suspHandlers) {
-        var r = suspendablefn();
-
-        if (r instanceof Sk.misceval.Suspension) {
-            this.suspensions.concat(r);
-            this.eval_callback(r);
-        }
-    }
+   
     startDebugger(runProgram, debuggerRef) {
         return new Promise(function(resolveCallback, rejectCallback) {
             try {
@@ -443,14 +332,13 @@ Sk.Debugger = class {
                         if (suspension.child && suspension.child.$isSuspension) {
                             suspension = suspension.child;
                         }
+                        
                         debuggerRef.resolveCallback = resolveCallback;
                         debuggerRef.rejectCallback = rejectCallback;
+                        
                         // TODO: remove this field later    
                         debuggerRef.isSingleStep = false;
                         debuggerRef.handleSuspension(suspension);
-                    // I'm not sure what shouldDeferStop even is
-                    } else if (shouldDeferStop()) {
-                        debuggerRef.currentSuspension = -1;
                     } else {
                         resolveCallback(suspension);
                     }
@@ -463,15 +351,12 @@ Sk.Debugger = class {
         })
     }
 
-    continueForward() {
-        var _this = this;
-        return Promise.resolve().then(function() {
-            console.log(_this.currentSuspension)
-            if (-1 !== _this.currentSuspension) {
-                _this.disableStepMode()
-                return _this.resume()
-            }                
-        }).then(function() {})
+    async continueForward() {       
+        console.log(this.currentSuspension)
+        if (-1 !== this.currentSuspension) {
+            this.disableStepMode()
+            await this.resume()
+        }        
     };
 
     onSuspension() {
@@ -525,40 +410,89 @@ Sk.Debugger = class {
             this.onSuspension();
         }
     }
+    async handleSuspension(suspension) {    
+        if (!(suspension instanceof Sk.misceval.Suspension)) {
+            // The suspension to handle is not a suspension: Either we are done running the program, returning from an asynchronous
+            // function or waiting for a callback that the user defined to be called (with asyncContext)
+    
+            // If the resolve function of the suspension is not null, resolve it. This is needed for asyncContext suspensions
+            if (suspension.resolve != null) {
+                suspension.resolve(suspension);
+            }
+    
+            // We finished an asynchronous fork, resume with the parent (suspension from where we started)
+            if (this.currentSuspension < this.suspensionStack.length - 1) {
+                var prevSusp = this.getActiveSuspension();
+                this.currentSuspension++;
+                var thisSusp = this.getActiveSuspension();
+                if (prevSusp.asyncContext !== null && prevSusp.asyncContext !== thisSusp.asyncContext) {
+                    //Update the suspensions global variable values
+                    thisSusp.updateGlobals(thisSusp);
+                }
+                this.onSuspension();
+            }
+            // We finished a fork, but there is no parent if shouldDeferStop() set currentSuspension to -1 and return
+            else {
+                if (shouldDeferStop()) {
+                    this.currentSuspension = -1;
+                } else {
+                    this.resolveCallback();
+                }
+    
+                //This return is needed, because the babel plugin does some crazy stuff, can be removed if we have await/async natively
+                return;
+            }
+    
+    
+        } else if (this.currentSuspension < this.suspensionStack.length - 1 && (suspension.asyncContext == null ||
+            (this.suspensionStack[this.currentSuspension].asyncContext === this.suspensionStack[this.currentSuspension + 1].asyncContext))) {
+            //We are behind the last point the program stopped, just increase the currentSuspension by one. Note that the async context must be the same
+            this.currentSuspension++;
+            if (suspension instanceof Sk.misceval.Suspension) {
+    
+                //Get current suspension
+                var oldSuspension = this.suspensionStack[this.currentSuspension];
+    
+                //If a promise, unroll it and possibly wait
+                if (suspension.data["type"] === "Sk.promise") {
+                    suspension = await unrollPromise(suspension);
+                }
+    
+                // We need to write the changes to the succeeding suspension, else any user changes to the variables is lost
+    
+                // -- Copy all changes to $loc and $gbl (globals variables) of the next suspension --
+                // ----------------------------------------------------------------------------------
+                copyVariables.call(this, suspension.$locValues, oldSuspension.$locValues);
+                copyVariables.call(this, suspension.$gblValues, oldSuspension.$gblValues);
+    
+                // -- Copy all changes to $tmps (local variables) of the next suspension --
+                // ------------------------------------------------------------------------
+                // We need to go to the inner most suspension
+                var tmpOldSusp = oldSuspension;
+                var tmpSusp = suspension;
+                while (tmpOldSusp.child && tmpOldSusp.child.$isSuspension && tmpSusp.child && tmpSusp.child.$isSuspension) {
+                    tmpOldSusp = tmpOldSusp.child; //iterate to child to change variables
+                    tmpSusp = tmpSusp.child; //iterate to child to change variables
+                }
+    
+                copyVariables.call(this, tmpSusp.$tmps, tmpOldSusp.$tmps);
+            }
+    
+            // Display the current values of the variables of the suspension
+            this.onSuspension();
+        } else if (suspension instanceof Sk.misceval.Suspension) {
+            //If a promise, unroll it and possibly wait and handle the return value
+            if (suspension.data["type"] === "Sk.promise") {
+                return this.handleSuspension(await unrollPromise(suspension));
+            }
+            //Push the suspension on the stack
+            this.pushSuspensionStack(suspension);
+        }
+    
+    }
 }
 
-Sk.Debugger.prototype.handleSuspension = function(a) {
-    var b, c, d, e, f, g, h, k, l, m, n = this;
-    return Promise.resolve().then(function() {
-        (g = !(a instanceof Sk.misceval.Suspension)) && null != a.resolve && a.resolve(a);
-        if (h = g && n.currentSuspension < n.suspensionStack.length - 1) b = n.getActiveSuspension(), n.currentSuspension++, c = n.getActiveSuspension();
-        h && (null !== b.asyncContext && b.asyncContext !== c.asyncContext) && c.updateGlobals(c);
-        if (h) n.onSuspension();
-        else if (g && shouldDeferStop() ? n.currentSuspension = -1 : g && n.resolveCallback(), !g) return Promise.resolve().then(function() {
-            (k = n.currentSuspension < n.suspensionStack.length - 1 && (null == a.asyncContext || n.suspensionStack[n.currentSuspension].asyncContext === n.suspensionStack[n.currentSuspension + 1].asyncContext)) && n.currentSuspension++;
-            (l = k && a instanceof Sk.misceval.Suspension) && (d = n.suspensionStack[n.currentSuspension]);
-            if (l && "Sk.promise" === a.data.type) return Promise.resolve().then(function() {
-                return unrollPromise(a)
-            }).then(function(b) {
-                a = b
-            })
-        }).then(function() {
-            if (l) {
-                copyVariables.call(n,
-                    a.$locValues, d.$locValues);
-                copyVariables.call(n, a.$gblValues, d.$gblValues);
-                e = d;
-                for (f = a; e.child && e.child.$isSuspension && f.child && f.child.$isSuspension;) e = e.child, f = f.child;
-                copyVariables.call(n, f.$tmps, e.$tmps)
-            }
-            if (k) n.onSuspension();
-            else {
-                if ((m = a instanceof Sk.misceval.Suspension) && "Sk.promise" === a.data.type) return Promise.resolve().then(function() { return unrollPromise(a) }).then(function(a) { return n.handleSuspension(a) });                    
-                m && n.pushSuspensionStack(a)
-            }
-        })
-    }).then(function() {})
-};
+
 // I don't know if I need this
 function copyVariables(a, b) {
     for (var c in a) {
@@ -571,30 +505,18 @@ function copyVariables(a, b) {
     }
 }
 
-function unrollPromise(suspension) {
-    function solvePromise() {
-        return Promise.resolve().then(function() {
-            if (suspension instanceof Sk.misceval.Suspension && "Sk.promise" === suspension.data.type && !suspension.optional) 
-                return suspension.data.promise.then(
-                    function(result) {
-                        suspension.data.result = result;
-                }, 
-                    function(error) {
-                        _this.error(error);
-                })
-        }).then(function() {
-            if (suspension instanceof Sk.misceval.Suspension && "Sk.promise" === suspension.data.type) {
-                suspension = resumeSuspension(suspension);
-                return solvePromise();
-            }
-        })
+async function unrollPromise(suspension) {
+    while (suspension instanceof Sk.misceval.Suspension && suspension.data["type"] === "Sk.promise") {
+        if (!suspension.optional) {
+            await suspension.data["promise"].then(function (data) {
+                suspension.data["result"] = data;
+            }, function (e) {
+                this.error(e);
+            });
+        }
+        suspension = resumeSuspension(suspension);
     }
-    var _this = this;
-    return Promise.resolve().then(function() {        
-        return solvePromise()
-    }).then(function() {
-        return suspension
-    })
+    return suspension;
 }
 
 
@@ -604,11 +526,11 @@ function shouldDeferStop() {
 }
 
 
-function resumeSuspension(a) {
-    var b = a.resume();
-    b.asyncContext = a.asyncContext;
-    b.resolve = null != a.resolve ? a.resolve : b.resolve;
-    return b
+function resumeSuspension(suspension) {
+    var resumed = suspension.resume();
+    resumed.asyncContext = suspension.asyncContext;
+    resumed.resolve = null != suspension.resolve ? suspension.resolve : resumed.resolve;
+    return resumed
 }
 
 Sk.exportSymbol("Sk.Debugger", Sk.Debugger);
