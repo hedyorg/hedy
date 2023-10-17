@@ -1,14 +1,14 @@
 levels:
     1:
         1:
-            question_text: What's this programming language called?
+            question_text: Come si chiama questo linguaggio di programmazione?
             mp_choice_options:
             -   option: Hedy
-                feedback: Good job!
+                feedback: Buon lavoro!
             -   option: Heddy
-                feedback: Not this one!
+                feedback: Non questo!
             -   option: Haydie
-                feedback: Not this one!
+                feedback: Non questo!
             -   option: Heidi
                 feedback: Not this one!
             hint: Prende il nome da Hedy Lamarr.
@@ -16,7 +16,7 @@ levels:
             question_score: '10'
         2:
             question_text: Which command makes text appear?
-            code: ___ Hello!
+            code: _Ciao!
             mp_choice_options:
             -   option: |-
                     ```
@@ -27,7 +27,7 @@ levels:
                     ```
                     {print}
                      ```
-                feedback: Correct!
+                feedback: Corretto!
             -   option: |-
                     ```
                     hello
@@ -38,7 +38,7 @@ levels:
                     {ask}
                     ```
                 feedback: With `{ask}`, you can ask a question.
-            hint: _?_ Hello world!
+            hint: _Ciao mondo!
             correct_answer: B
             question_score: '10'
         3:
@@ -51,7 +51,7 @@ levels:
                 feedback: '`{print}` prints text, but it doesn''t ask questions.'
             -   option: |-
                     ```
-                    {ask} {print} What is your favorite color?
+                    {ask} {print} Qual è il tuo colore preferito?
                     ```
                 feedback: Hai bisogno di un solo comando, non due.
             -   option: |-
@@ -68,7 +68,7 @@ levels:
             correct_answer: C
             question_score: '10'
         4:
-            question_text: What is wrong with this code?
+            question_text: Cosa c'è di sbagliato in questo codice?
             code: |-
                 Hi Im Hedy!
                 {ask} Who are you?
@@ -78,7 +78,7 @@ levels:
                 feedback: Correct!
             -   option: Im in line 1 is spelled wrong.
                 feedback: Im is spelled wrong on purpose; Hedy doesn't understand the apostrophes yet.
-            -   option: '`{echo}` isn''t a command.'
+            -   option: '`{echo}` non è un comando.'
                 feedback: '`{echo}` is a command, there''s another mistake.'
             -   option: Nothing! This is a perfect code!
                 feedback: Wrong, look carefully!
@@ -167,7 +167,7 @@ levels:
             correct_answer: C
             question_score: '10'
         9:
-            question_text: What's wrong with this code?
+            question_text: Cosa c'è di sbagliato in questo codice?
             code: |-
                 {print} Hello!
                 {print} How are you doing?
@@ -185,7 +185,7 @@ levels:
             correct_answer: B
             question_score: '10'
         10:
-            question_text: Which output will be in your outputscreen after you've run this code?
+            question_text: Quale output sarà nella schermata di output dopo aver eseguito questo codice?
             code: |-
                 {ask} Are you ready to go to level 2?
                 {echo}

@@ -549,7 +549,7 @@ adventures:
                     {else} {print} 'Yanlış! doğru cevap ' _
                     ```
                 story_text_3: |
-                    **Ek Görev** rastgele komutunu kullanarak bilgisayarın kendi başına rastgele toplamalar yapmasını da sağlayabilirsiniz.
+                    **Ek Görev** `{random}` komutunu kullanarak bilgisayarın kendi başına rastgele toplamalar yapmasını da sağlayabilirsiniz.
 
                     Bu şekilde, pratik yapmak için bir sayı tablosu seçersiniz ve bundan her zaman farklı bir toplama elde edersiniz:
                 start_code: |
@@ -2984,7 +2984,7 @@ adventures:
             10:
                 story_text: |
                     ### Alıştırma
-                    Önceki seviyelerde, kendi taş kağıt makas oyununuzu bolca yaptınız. Bu kodu tamamlayıp oyunun çalışmasını sağlamak için {for} komutunu düzgün bir şekilde kullanabilir misiniz?
+                    Önceki seviyelerde, kendi taş kağıt makas oyununuzu bolca yaptınız. Bu kodu tamamlayıp oyunun çalışmasını sağlamak için `{for}` komutunu düzgün bir şekilde kullanabilir misiniz?
                 example_code: |
                     ```
                     seçimler = _
@@ -3071,7 +3071,7 @@ adventures:
                 example_code: |
                     ```
                     isim {is} {ask} 'Senin adın ne?'
-                    eğer isim {is} '_'
+                    {if} isim {is} '_'
                         a {is} 'Havaalanına git '
                     {else}
                         a {is} 'Tren istasyonuna git '

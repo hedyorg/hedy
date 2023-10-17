@@ -2,108 +2,109 @@ levels:
     1:
         1:
             story: |-
-                Puzzels are exercises in which the lines of code are already written for you. You only have to place the lines in the correct order. Drag the lines of code into the input screen and run the code. Can you get the program to work?
-                You're a customer at bakery Hedy.
-                You walk into the bakery and are welcomed by the baker.
-                He asks what type of pie you want to order.
-                Then he repeats your answer back to you.
-                Lastly, your order is being prepared.
+                Puzzels 是已经为您编写代码行的练习。您只需按正确的顺序放置行。将代码行拖到输入屏幕中并运行代码。你能让程序工作吗？
+
+                您是海蒂面包店的顾客。
+                您走进面包店，受到面包师的欢迎。
+                他问你想点什么类型的馅饼。
+                然后他重复你的答案。
+                最后，您的订单正在准备中。
             code: |-
-                {print} Welcome to bakery Hedy!
-                {ask} What type of pie do you want to order?
-                {echo} So you want
-                {print} Your order is being prepared!
+                {print} 欢迎光临海蒂面包店！
+                {ask} 您想订购什么类型的馅饼？
+                {echo} 所以你想要
+                {print} 您的订单正在准备中！
         2:
             story: You're at the DJ Booth requesting a song. Create a program that asks if you are ready to party and then asks which song you would like to hear.
             code: |-
-                {print} This is DJ Hedy
-                {ask} Are you ready to party?
-                {ask} What song would you like to hear?
-                {echo} Great choice! I love the song
+                {print} 这是DJ海蒂
+                {ask} 你准备好参加派对了吗？
+                {ask} 你想听什么歌？
+                {echo} 很棒的选择！我喜欢这首歌
     2:
         1:
             story: |-
                 You and your friends are going to watch some Netflix.
                 Show which movie you're about to watch and wish the viewers lot of fun!
             code: |-
-                {print} It is time for an evening of Netflix
-                film {is} Sonic the Hedgehog 2
-                {print} We're going to film
-                {print} Have fun!
+                {print} 是时候度过一个晚上的网飞了
+                电影 {is} 刺猬索尼克2
+                {print} 我们要看电影
+                {print} 玩得愉快！
         2:
             story: This is the webshop of a toy store. Create a program where costumers can add an item to their shopping cart.
             code: |-
-                {print} Welcome to our toystore
-                toy {is} {ask} What would you like to buy?
-                {print} toy is added to your shopping cart.
-                {print} Thank you for shopping with us!
+                {print} 欢迎来到我们的玩具店
+                玩具 {is} {ask} 你想买什么？
+                {print}玩具已添加到您的购物车中。
+                {print} 感谢您与我们一起购物！
     3:
         1:
             story: "The new school year at Hogwarts is starting! \nIt is the job of the sorting hat to sort you into one of the houses.\nWhich house will you be sorted into? Are you a Gryffindor, Hufflepuff, Ravenclaw or Slytherin.\nBefore the sorting hat reveals your house, you can tell it to not pick\
                 \ one of the houses."
             code: |-
-                {print} The sorting hat is ready to sort you into a Hogwarts house.
-                houses {is} Gryffindor, Hufflepuf, Ravenclaw, Slytherin
-                dislike {is} {ask} Are there any houses you do not want to be part of?
-                {remove} dislike {from} houses
-                {print} Not dislike eh? Better be... houses {at} {random}
+                {print} 分院帽已经准备好把你分到霍格沃茨的房子里了。
+                房子 {is} 格兰芬多、赫奇普夫、拉文克劳、斯莱特林
+                不喜欢{is} {ask} 有没有你不想成为其中一部分的房子？
+                {remove} 不喜欢{from} 房子
+                {print} 不是不喜欢吧？最好是...房子{at} {random}
         2:
             story: Create a program that chooses a random meal for you. Make a list of food and a list of toppings and let the program decide what you'll have!
             code: |-
-                食物 {is} pizza, icecream, salad, sandwich
-                和浇头 {is} chocolate, cheese, tuna, sprinkles
-                {print} Your random meal for today is...
-                sleep 2
+                食物 {is} 披萨,冰激凌, 沙拉, 三明治
+                浇头 {is} 巧克力, 芝士, 金枪鱼, 洒
+                {print} 你今天的随机餐是...
+                {sleep} 2
                 {print} 食物 {at} {random} 和浇头 {at} {random}
         3:
             story: |-
-                In a chess tournament there are three players left.
-                Create a program that decides which two players have to play against each other first.
-                Start by printing the two players who play the first match, then print against which player the winner will play.
+                在国际象棋锦标赛中，还剩下三名棋手。
+                创建一个程序，决定哪两个玩家必须首先相互对战。
+                首先打印参加第一场比赛的两名玩家，然后打印获胜者将与哪位玩家进行比赛。
             code: |-
-                players {is} Liam, Noah, Sophie
-                player_1 {is} players {at} {random}
-                {remove} player_1 {from} players
-                player_2 {is} players {at} {random}
-                {print} player_1 ' first plays against ' player_2
-                {remove} player_2 {from} players
-                {print} 'The winner plays against ' players {at} {random}
+                玩家 {is} 利亚姆、诺亚、苏菲
+                玩家_1 {is} 玩家 {at} {random}
+                {remove} 玩家_1 {from}玩家
+                玩家_2 {is} 玩家 {at} {random}
+                {print} 玩家_1 ' 第一次对阵' 玩家_2
+                {remove} 玩家_2 {from} 玩家
+                {print} '获胜者对战 ' 玩家 {at} {random}
     4:
         1:
             story: |-
-                You are the newest Pokémon trainer from Pallet Town!
-                Make a program that selects your first Pokémon.
-                Let the program wait a minute before revealing your first pokémon.
+                你是托盘镇最新的神奇宝贝训练师！
+                制作一个程序来选择您的第一个神奇宝贝。
+                让程序等待一分钟，然后再显示您的第一个神奇宝贝。
             code: |-
-                pokemons {is} Pikachu, Charmander, Bulbasaur, Squirtle
-                {print} 'This is going to be your first pokémon!'
+                口袋妖怪 {is} 皮卡丘、查曼德、球龙、喷子
+                {print} “这将是你的第一只神奇宝贝！”
                 {sleep}
-                {print} pokemons {at} {random}
+                {print} 口袋妖怪 {at} {random}
         2:
-            story: Create a lottery that lets you choose an extra price that you might win.
+            story: 创建一个彩票，让你选择一个你可能赢得的额外奖品。
             code: |-
-                prices {is} car, hamster, 1 million euros
-                price {is} {ask} 'What would you like to win?'
-                {add} price {to_list} prices
-                {print} 'You won a ' prices {at} {random}
+                奖品 {is}汽车，仓鼠，100万欧元
+                价格 {is} {ask} “你想赢什么？”
+                {add} 价格 {to_list} 奖品
+                {print} “你赢得了一个”价格 {at} {random}
     5:
         1:
             story: |-
                 Make a program that checks if your favourite movie is already in the list of the computer.
                 If so, print that you have great taste, otherwise add the movie to the list.
             code: |-
-                favoriete_movies {is} Batman, Spiderman, The Avengers, Jurassic Park
-                movie {is} {ask} 'What is your favourite movie?'
-                {if} movie {in} favoriete_movies {print} 'You have great taste!'
-                {else} {print} 'Such a shame that your favourite movie is not in the list, we will add it right away!'
-                {add} movie {to_list} favoriete_movies
+                最喜欢的电影 {is} 蝙蝠侠、蜘蛛侠、复仇者联盟、侏罗纪公园
+                电影 {is} {ask} “你最喜欢的电影是什么？”
+                {if} 电影 {in} 最喜欢的电影 {print}“你的品味真高！”
+                {else} {print}“太可惜了，你最喜欢的电影不在列表中，我们会马上添加！”
+                {add} 电影{to_list} 最喜欢的电影
         2:
             story: Create a maths game.
             code: |-
-                {print} 'Solve this problem'
-                answer {is} {ask} '88 - 16 = ?'
-                {if} answer {is} 72 {print} 'Correct!'
-                {else} {print} 'Wrong! The answer was 72'
+                {print}“解决这个问题”
+                答案{is} {ask} '88 - 16 = ?'
+                {if} 回答 {is} 72 {print} “对！”
+                {else} {print}“错！答案是72”
     6:
         1:
             story: |-
@@ -112,11 +113,11 @@ levels:
                 First calculate the dogyears then the catyears.
                 Show the user the different ages.
             code: |-
-                age = {ask} 'How old are you?'
-                dog_age = age * 7
-                cat_age = age * 5
-                {print} 'In dogyears you are ' dog_age ' years old.'
-                {print} 'In catyears you are ' cat_age ' years old.'
+                年龄 = {ask}“你多大了？”
+                狗的年龄 = 年龄 * 7
+                猫的年龄 = 年龄 * 5
+                {print}“在狗年里，你已经'dog_age'岁了。
+                {print} “在猫年里，你已经'cat_age'岁了。
         2:
             story: Create a program that helps you calculate how many cakes you should buy for your birthday party.
             code: |-
@@ -161,10 +162,10 @@ levels:
                   counter = counter - 1
                   {print} counter
                   {sleep} 1
-                {print} 'Ready or not here I come!'
+                {print} “准备好了，我来不来！”
     9:
         1:
-            story: This game will give you three maths assignments. Each time the question is different. Can you figure out the order?
+            story: 这个游戏会给你三个数学作业。每次的问题都不同。你能弄清楚顺序吗？
             code: |-
                 numbers = 1, 2, 3, 4, 5, 6, 7, 8, 9, 10
                 {repeat} 3 {times}

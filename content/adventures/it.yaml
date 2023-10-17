@@ -21,17 +21,20 @@ adventures:
                     {print} He's afraid this is a haunted forest
                     ```
                 story_text_2: |
-                    Riesci a creare la tua storia in Hedy utilizzando `{print}`, `{ask}` e `{echo}`?
+                    ### Esercizio
+                    Ora crea la tua storia di almeno 6 righe di codice.
+                    Questa storia non può essere uguale al codice di esempio.
+                    Utilizza almeno un comando `{ask}` e un comando `{echo}`.
+                    Puoi farlo su qualsiasi argomento che ti piace.
+                    Se non riesci a pensare a un argomento, usa una delle nostre scelte: andare al cinema, una partita sportiva o una giornata allo zoo.
                 start_code: '{print} La tua storia inizia qui'
             2:
                 story_text: |
-                    Nel livello 2 puoi rendere la tua storia più divertente. Il nome del tuo protagonista può apparire in qualsiasi posizione nella frase.
+                    Nel livello 2 puoi rendere la tua storia più divertente. Il nome del tuo personaggio principale ora può essere ovunque nella frase.
 
-                    Devi scrivere un po' più codice per fare questo. Prima devi dare un nome al tuo protagonista.
+                    Devi programmare un po' di più per quello. Ora devi prima nominare il tuo personaggio principale.
 
-                    Poi, puoi mettere quel nome dovunque in una frase.
-
-                    Riesci a creare una storia utilizzando una variabile? Riesci ad aggiungere altre variabili?
+                    Puoi quindi inserire quel nome ovunque in una frase.
                 example_code: |-
                     ```
                     name {is} {ask} What is the name of the main character?
@@ -42,14 +45,14 @@ adventures:
                     {print} name is afraid this is a haunted forest
                     ```
                 story_text_2: |
-                    ### Exercise
-                    Now it's time to add variables to your own story that you've made in the previous level.
-                    Go to 'My programs', look for your level 1 story adventure and copy the code. Paste the code in your input screen in this level.
+                    ### Esercizio
+                    Ora è il momento di aggiungere variabili alla tua storia che hai creato nel livello precedente.
+                    Vai su 'I miei programmi', cerca la tua avventura storia di livello 1 e copia il codice. Incolla il codice nella schermata di input in questo livello.
 
-                    This code won't work in this level, because you have not used variables yet.
-                    Change the `{ask}` commands and `{echo}` commands in your code to the correct form that you've learned in this level.
+                    Questo codice non funzionerà in questo livello perché non hai ancora utilizzato le variabili.
+                    Modifica i comandi `{ask}` e `{echo}` nel tuo codice nella forma corretta che hai imparato in questo livello.
 
-                    **Extra** Add a sleep command to your code to build up tension in your story.
+                    **Extra** Aggiungi un comando `{sleep}` al tuo codice per aumentare la tensione nella tua storia.
                 start_code: '{print} La tua storia'
             3:
                 story_text: |
@@ -88,13 +91,15 @@ adventures:
                     Puoi risolvere il problema in questo livello. Basta usare le virgolette per tutto quello che vuoi stampare.
                 example_code: |
                     ```
-                    nome {is} Hans
-                    {print} _Il nome del protagonista è_ nome
-                    {print} nome _sta andando a fare una passeggiata nel bosco_
-                    {print} nome _è un po' spaventato_
-                    animali {is} 🦔, 🐿, 🦉, 🦇
-                    {print} _Ha sentito il suono di un _ animali {at} {random}
-                    {print} name _ha paura che questa sia una foresta infestata_
+                    nome {è} {chiedi} _ Come ti chiami? _
+                    {print} _ Il personaggio principale si chiama _ nome
+                    _
+                    _
+                    {print} nome _ ora camminerà nel bosco _
+                    {print} nome _ è un po' spaventato _
+                    animali {è} 🦔, 🐿, 🦉, 🦇
+                    {print} _ Sente il suono di _ animali {at} {random}
+                    {print} nome _ ha paura che questa sia una foresta infestata _
                     ```
                 start_code: '{print} ''La tua storia verrà stampata qui!'''
             5:
