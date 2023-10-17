@@ -29,15 +29,18 @@ class TestsLevel8(HedyTester):
 
     def test_if_one_line(self):
         code = textwrap.dedent("""\
+        prind skipping
         antwoord is 25
         if antwoord is 100 print 'goed zo' else print 'neenee'""")
 
         expected = textwrap.dedent("""\
+        pass
         antwoord = '25'
         pass""")
 
         skipped_mappings = [
-            SkippedMapping(SourceRange(2, 1, 2, 55), hedy.exceptions.WrongLevelException),
+            SkippedMapping(SourceRange(1, 1, 1, 15), hedy.exceptions.InvalidCommandException),
+            SkippedMapping(SourceRange(3, 1, 3, 55), hedy.exceptions.WrongLevelException)
         ]
 
         # one line if's are no longer allowed
@@ -987,13 +990,17 @@ class TestsLevel8(HedyTester):
 
     def test_if_pressed_missing_else_gives_error(self):
         code = textwrap.dedent("""\
+        prind skipping
         if x is pressed 
           print 'missing else!'""")
 
-        expected = "pass"
+        expected = textwrap.dedent("""\
+        pass
+        pass""")
 
         skipped_mappings = [
-            SkippedMapping(SourceRange(1, 1, 2, 34), hedy.exceptions.MissingElseForPressitException),
+            SkippedMapping(SourceRange(1, 1, 1, 15), hedy.exceptions.InvalidCommandException),
+            SkippedMapping(SourceRange(2, 1, 3, 33), hedy.exceptions.MissingElseForPressitException),
         ]
 
         self.multi_level_tester(
