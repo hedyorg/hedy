@@ -10,6 +10,8 @@
     </script>
     {% endif %}
     <div class="flex flex-col gap-4">
+
+      {% if second_teacher %}<h1>{{_('role')}}: {{role}}</h1>{% endif %}
         <div class="flex flex-row items-center gap-2">
             <h1>{{ class_info.name }}</h1><span class="cursor-pointer" onclick='hedyApp.rename_class("{{class_info.id}}", {{_('class_name_prompt')|default(None)|tojson}})'>✏️</span>
         </div>
@@ -41,12 +43,41 @@
           </tbody>
           </table>
       </div>
+      {% if is_teacher and class_info.second_teachers %}
+      <div class="flex flex-row items-center gap-1">
+        <h2>{{ _('second_teachers')}}</h2>
+      </div>
+      <div id="second_teachers_container" class="program w-full border-solid border-2 border-orange-400 rounded p-4">
+        <table class="table-auto w-full text-sm">
+          <thead>
+            <tr class="font-bold text-left">
+              <th id="username_header">{{_('username')}}</th>
+              <th id="role">{{_('role')}}</th>
+              <th id="overview_header">{{_('programs')}}</th>
+            </tr>
+          </thead>
+          <tbody id="class-user-table">
+            {% for ta in class_info.second_teachers %}
+              <tr>
+                <td class="username_cell">{{ta.username}}</td>
+                <td id="role_cell">{{ta.role}}</td>
+                <td class="overview_cell"><a href="/programs?user={{ta}}">{{ta.username}}'s {{_('page')}}</a></td>
+              </tr>
+            {% endfor %}
+          </tbody>
+          </table>
+      </div>
+      {% endif %}
       <div class="flex flex-col gap-4">
         <div class="flex flex-wrap gap-2">
             {% if is_admin and class_info.teacher != username %}
                 <button class="green-btn" id="customize-class-button" data-cy="customize_class_button" onclick="window.location.href = '/for-teachers/customize-class/{{class_info.id}}'">View customizations</button>
             {% else %}
-                <button class="green-btn" id="add-student" onclick=$('#add_students_options').toggle();$(this).toggleClass('green-btn');$(this).toggleClass('blue-btn');>{{_('add_students')}}</button>
+            {% if is_teacher %}
+              <button class="green-btn" id="add-second-teacher" _="on click call hedyApp.invite_student('{{class_info.id}}', {{_('invite_prompt')|default(None)|tojson}}, '/invite-second-teacher')">{{_('add_second_teacher')}}</button>
+            {% endif %}
+
+                <button class="green-btn" id="add-student" _="on click toggle the *display of #add_students_options then toggle between .green-btn and .blue-btn on me">{{_('add_students')}}</button>
                 <button class="green-btn" id="customize-class-button" data-cy="customize_class_button" onclick="window.location.href = '/for-teachers/customize-class/{{class_info.id}}'">{{_('customize_class')}}</button>
             {% endif %}
             <button class="green-btn" id="live_stats_button" onclick="window.location.href = '/live_stats/class/{{class_info.id}}'">{{_('class_live')}}</button>
@@ -61,10 +92,12 @@
           <div class="flex flex-row gap-2">
             <button class="green-btn" id="copy-join-link" onclick='hedyApp.copy_join_link("{{class_info.link}}", {{_('copy_link_success')|default(None)|tojson}})'>{{_('copy_join_link')}}</button>
             <button class="green-btn" id="invite-student" onclick='hedyApp.invite_student("{{class_info.id}}", {{_('invite_prompt')|default(None)|tojson}})'>{{_('invite_by_username')}}</button>
+            <button class="green-btn" id="invite-ta" onclick='hedyApp.invite_ta("{{class_info.id}}", {{_('invite_prompt')|default(None)|tojson}})'>{{_('invite_ta')}}</button>
             <button class="green-btn" id="create-accounts" onclick="window.open('/for-teachers/create-accounts/{{ class_info.id }}', '_self')">{{_('create_accounts')}}</button>
           </div>
       </div>
-      {% if invites %}
+      <!-- TODO: add purpose of invitation. -->
+      {% if invites and not is_second_teacher %}
         <div class="border-t border-gray-500 pt-4">
           <h2>{{_('pending_invites')}}</h2>
           <div class="inline-block border-solid border-2 border-orange-400 rounded mt-2 mb-4 p-4">
