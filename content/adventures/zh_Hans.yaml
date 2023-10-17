@@ -45,10 +45,9 @@ adventures:
                     {print} 名字 害怕这个森林里面闹鬼
                     ```
                 story_text_2: |
-                    ### 练习
-                    现在是时候给你在上一关中制作的自己的故事添加变量了。
-                    进入 "我的程序"，寻找你的第1关故事冒险，复制代码。把代码粘贴到本关的输入屏幕中。
-
+                    ###练习
+                    现在是时候将变量添加到你在前一个关卡中创造的故事中了。
+                    转到“我的程序”，寻找你的1级故事冒险并复制代码。将代码粘贴到这个关卡的输入屏幕上。
                     这段代码在本关不会起作用，因为你还没有使用变量。
                     把你代码中的`{ask}`命令和`{echo}`命令改成你在本关学到的正确形式。
 
@@ -226,19 +225,16 @@ adventures:
                 start_code: '# 在此处键入代码'
     add_remove_command:
         name: '{add} {to} & {remove} {from}'
-        default_save_name: add_remove_command
-        description: introducing add to and remove from
+        default_save_name: 添加_删除_命令
+        description: 简介 添加和删除
         levels:
             3:
                 story_text: |
-                    ## Add to
-                    You can add items to the list with the `{add} {to}` command. To add an item to a list you can simply type: `{add} penguin {to} animals` or you can use the `{ask}` command like in the example code.
+                    ## 添加到
+                    您可以使用“{add} {to}”令将项目添加到列表中。要将项目添加到列表中，您只需键入：“{add} 企鹅 {to} 动物”或者您可以使用“{ask}”命令，如示例代码所示。
                 example_code: |
                     ```
-                    animals {is} dog, cat, kangaroo
-                    like {is} {ask} What is your favorite animal?
-                    {add} like {to_list} animals
-                    {print} I choose animals {at} {random}
+                    动物 {is} 狗， 猫， 袋鼠
                     ```
                 story_text_2: |
                     ## Remove from

@@ -539,9 +539,9 @@ adventures:
                     {else} {print} '¡Incorrecto! Era ' _
                     ```
                 story_text_3: |
-                    **Extra** También puedes dejar que el ordenador haga sumas aleatorias por sí mismo usando random.
+                    **Extra** También puedes dejar que el ordenador haga sumas aleatorias por sí mismo usando `{random}`.
 
-                    Así eliges un número de tablas para practicar, y de ahí siempre obtienes una suma diferente:
+                    Así elige un número de las tablas para practicar, y de ahí siempre obtiene una suma diferente:
                 start_code: |
                     número_1 = {ask} 'Introduce el primer número:'
                     número_2 = {ask} 'Escribe el segundo número:'
@@ -2906,7 +2906,7 @@ adventures:
             10:
                 story_text: |
                     ### Ejercicio
-                    En los niveles anteriores hiciste tu propio juego de piedra, papel, tijeras. ¿Puedes completar el código y usar el comando {for} adecuadamente para hacer que el juego funcione?
+                    En los niveles anteriores hiciste tu propio juego de piedra, papel, tijeras. ¿Puedes completar el código y usar el comando `{for}` adecuadamente para hacer que el juego funcione?
                 example_code: |
                     ```
                     opciones = _
@@ -2993,7 +2993,7 @@ adventures:
                 example_code: |
                     ```
                     nombre {is} {ask} '¿Cuál es tu nombre?'
-                    if nombre {is} '_'
+                    {if} nombre {is} '_'
                         a {is} 'Ve al aeropuerto '
                     {else}
                         a {is} 'Ve a la estación de trenes '
