@@ -1406,10 +1406,10 @@ def get_embedded_code_editor(level):
     try:
         level = int(level)
         if level < 1 or level > hedy.HEDY_MAX_LEVEL:
-            program = '# Gekozen leven is ongeldig, Hedy staat nu op level 1'
+            program = gettext('invalid_level_comment') # '# Gekozen leven is ongeldig, Hedy staat nu op level 1'
             level = 1
     except ValueError:
-        program = '# Gekozen leven is ongeldig, Hedy staat nu op level 1'
+        program = gettext('invalid_level_comment')
         level = 1
 
     run = True if request.args.get('run') == 'true' else False
@@ -1419,12 +1419,12 @@ def get_embedded_code_editor(level):
     language = request.args.get('lang', 'en')
     if language not in ALL_LANGUAGES.keys():
         language = 'nl'
-        program = '# Gekozen taal is ongeldig, Hedy staat nu op Nederlands'
+        program = gettext('invalid_language_comment') # '# Gekozen taal is ongeldig, Hedy staat nu op Nederlands'
 
     keyword_language = request.args.get('keyword', 'en')
     if keyword_language not in ALL_KEYWORD_LANGUAGES.keys():
         language = 'en'
-        program = '# Gekozen commando\'s taal is ongeldig, Hedy staat nu op Engels commando\'s'
+        program = gettext('invalid_keyword_language_comment') # '# Gekozen commando\'s taal is ongeldig, Hedy staat nu op Engels commando\'s'
 
     # Make sure to set the session lang to enforce the correct translated strings to be rendered
     session['lang'] = language
@@ -1434,7 +1434,7 @@ def get_embedded_code_editor(level):
             program = base64.b64decode(encoded_program)
             program = program.decode('utf-8')
         except binascii.Error:
-            program = '# Het gegeven programma is niet geldig'
+            program = gettext('invalid_program_comment') # '# Het gegeven programma is niet geldig'
 
     return render_template("embedded-editor.html", embedded=True, run=run, language=language,
                            keyword_language=keyword_language,
