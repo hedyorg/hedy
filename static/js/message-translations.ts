@@ -1045,7 +1045,7 @@ export const TRANSLATIONS: Record<string, Record<MessageKey, string>> = {
     "disabled": "Disabled",
     "fortune": "🔮, ✨",
     "haunted": "🦇, 👻, 🎃",
-    "level_title": "Level",
+    "level_title": "Nivo",
     "restaurant": "🍣, 🍕, 🍔",
     "rock": "✂️, 📜, 🗻",
     "songs": "🎵,🎶",
