@@ -1037,7 +1037,7 @@ export const TRANSLATIONS: Record<string, Record<MessageKey, string>> = {
     "Transpile_success": "Dobar posao!\nNeverovatno!\nDobro urađeno!\nOdlično!\nBio si odličan!",
     "Transpile_warning": "Upozorenje!",
     "Unsaved_Changes": "Nisi sačuvao program. Želiš li da izađeš bez čuvanja?",
-    "adventures_restored": "The default adventures have been restored!",
+    "adventures_restored": "Podrazumevane avanture su vraćene.",
     "copy_link_to_share": "Copy link to share",
     "customization_deleted": "Customizations successfully deleted.",
     "dice": "🎲",
