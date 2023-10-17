@@ -98,7 +98,7 @@ def remember_current_user(db_user):
     session["keyword_lang"] = db_user.get("keyword_language", "en")
 
     # Prepare the cached user object
-    session["user"] = pick(db_user, "username", "email", "is_teacher")
+    session["user"] = pick(db_user, "username", "email", "is_teacher", "second_teacher_in")
     # Classes is a set in dynamo, but it must be converted to an array otherwise it cannot be stored in a session
     session["user"]["classes"] = list(db_user.get("classes", []))
 
@@ -172,6 +172,11 @@ def is_admin(user):
 def is_teacher(user):
     # the `is_teacher` field is either `0`, `1` or not present.
     return bool(user.get("is_teacher", False))
+
+
+def is_second_teacher(user):
+    # the `second_teacher_in` field indicates that the user is a second teacher in classes.
+    return bool(user.get("second_teacher_in", False))
 
 
 def has_public_profile(user):
@@ -256,7 +261,8 @@ def requires_teacher(f):
 
     @wraps(f)
     def inner(*args, **kws):
-        if not is_user_logged_in() or not is_teacher(current_user()):
+        if not is_user_logged_in() or \
+                (not is_teacher(current_user()) and not is_second_teacher(current_user())):
             return utils.error_page(error=403, ui_message=gettext("unauthorized"))
         return f(*args, user=current_user(), **kws)
 
