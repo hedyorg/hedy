@@ -18,6 +18,7 @@ from website.auth import (
     current_user,
     is_admin,
     is_teacher,
+    is_second_teacher,
     requires_login,
     requires_teacher,
     store_new_student_account,
@@ -46,9 +47,17 @@ class ForTeachersModule(WebsiteModule):
         welcome_teacher = session.get("welcome-teacher") or False
         session.pop("welcome-teacher", None)
 
-        teacher_classes = self.db.get_teacher_classes(current_user()["username"], True)
+        main_teacher = current_user()["username"]
+        if user.get("second_teacher_in"):
+            teacher_classes = []
+            for class_id in user.get("second_teacher_in"):
+                teacher_classes.append(self.db.get_class(class_id))
+            main_teacher = teacher_classes[0]['teacher']
+        else:
+            teacher_classes = self.db.get_teacher_classes(main_teacher, True)
+
         adventures = []
-        for adventure in self.db.get_teacher_adventures(current_user()["username"]):
+        for adventure in self.db.get_teacher_adventures(main_teacher):
             adventures.append(
                 {
                     "id": adventure.get("id"),
@@ -122,10 +131,10 @@ class ForTeachersModule(WebsiteModule):
     @route("/class/<class_id>", methods=["GET"])
     @requires_login
     def get_class(self, user, class_id):
-        if not is_teacher(user) and not is_admin(user):
+        if not is_teacher(user) and not is_second_teacher(user) and not is_admin(user):
             return utils.error_page(error=403, ui_message=gettext("retrieve_class_error"))
         Class = self.db.get_class(class_id)
-        if not Class or (Class["teacher"] != user["username"] and not is_admin(user)):
+        if not Class or (Class["teacher"] != user["username"] and not is_admin(user) and not is_second_teacher(user)):
             return utils.error_page(error=404, ui_message=gettext("no_such_class"))
         students = []
 
@@ -170,7 +179,6 @@ class ForTeachersModule(WebsiteModule):
                     "expire_timestamp": utils.localized_date_format(invite["ttl"], short_format=True),
                 }
             )
-
         return render_template(
             "class-overview.html",
             current_page="for-teachers",
@@ -181,6 +189,7 @@ class ForTeachersModule(WebsiteModule):
                 "students": students,
                 "link": os.getenv("BASE_URL", "") + "/hedy/l/" + Class["link"],
                 "teacher": Class["teacher"],
+                "second_teachers": Class.get("second_teachers"),
                 "name": Class["name"],
                 "id": Class["id"],
             },
@@ -190,7 +199,7 @@ class ForTeachersModule(WebsiteModule):
     @route("/customize-class/<class_id>", methods=["GET"])
     @requires_login
     def get_class_customization_page(self, user, class_id):
-        if not is_teacher(user) and not is_admin(user):
+        if not is_teacher(user) and not is_second_teacher(user) and not is_admin(user):
             return utils.error_page(error=403, ui_message=gettext("retrieve_class_error"))
         Class = self.db.get_class(class_id)
         if not Class or (Class["teacher"] != user["username"] and not is_admin(user)):
@@ -221,7 +230,7 @@ class ForTeachersModule(WebsiteModule):
     @route("/get-customization-level", methods=["GET"])
     @requires_login
     def change_dropdown_level(self, user):
-        if not is_teacher(user) and not is_admin(user):
+        if not is_teacher(user) and not is_second_teacher(user) and not is_admin(user):
             return utils.error_page(error=403, ui_message=gettext("retrieve_class_error"))
         Class = self.db.get_class(session['class_id'])
         if not Class or (Class["teacher"] != user["username"] and not is_admin(user)):
@@ -244,7 +253,7 @@ class ForTeachersModule(WebsiteModule):
     @route("/add-adventure/level/<level>", methods=["POST"])
     @requires_login
     def add_adventure(self, user, level):
-        if not is_teacher(user) and not is_admin(user):
+        if not is_teacher(user) and not is_second_teacher(user) and not is_admin(user):
             return utils.error_page(error=403, ui_message=gettext("retrieve_class_error"))
         Class = self.db.get_class(session['class_id'])
         if not Class or (Class["teacher"] != user["username"] and not is_admin(user)):
