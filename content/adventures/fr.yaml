@@ -56,7 +56,7 @@ adventures:
                 start_code: '{print} Ton histoire'
             3:
                 story_text: |
-                    Dans le niveau 3, tu peux rendre ton histoire plus amusante. Tu peux tirer au hasard un monstre, un animal ou un autre obstacle, comme ceci :
+                    Au niveau 3, tu peux rendre ton histoire plus amusante. Tu peux tirer au hasard un monstre, un animal ou un autre obstacle, comme ceci :
                 example_code: |
                     ```
                     animaux {is} 🦔, 🐿, 🦉, 🦇
@@ -75,7 +75,7 @@ adventures:
                 story_text_3: |
                     Ceci est un exemple de la commande `{remove}` dans ton histoire.
 
-                    ### Défi
+                    ### Exercice
                     Copie ton histoire des niveaux précédents dans celui-ci.
                     Dans ce niveau, tu as appris 3 nouvelles commandes `{at} {random}`, `{add} {to}` et `{remove} {from}`.
                     Ajoute de nouvelles lignes de code à ton histoire de manière à ce que ces nouvelles commandes apparaissent au moins une fois.
@@ -270,12 +270,12 @@ adventures:
             3:
                 story_text: |
                     ## Ajouter à
-                    Tu peux ajouter des éléments à une liste avec la commande `{add} {to}`. Pour ajouter un élément à une liste, tu peux simplement écrire : `{add} pingouin {to} animaux` ou tu peux utiliser la commande `{ask}` comme dans le code d'exemple.
+                    Tu peux ajouter des éléments à une liste avec la commande `{add} {to}`. Pour ajouter un élément à une liste, tu peux simplement écrire : `{add} pingouin {to} animaux` ou tu peux utiliser la commande `{ask}` comme dans le code d'exemple.
                 example_code: |
                     ```
                     animaux {is} chien, chat, kangourou
-                    favori {is} {ask} Quel est ton animal préféré ?
-                    {add} favori {to_list} animaux
+                    préféré {is} {ask} Quel est ton animal préféré ?
+                    {add} préféré {to_list} animaux
                     {print} Je choisis animaux {at} {random}
                     ```
                 story_text_2: |
@@ -284,28 +284,28 @@ adventures:
                 example_code_2: |
                     ```
                     animaux {is} chien, chat, kangourou
-                    mal_aimé {is} {ask} Quel animal n'aimes-tu pas ?
+                    mal_aimé {is} {ask} Quel animal n'aimes-tu pas ?
                     {remove} mal_aimé {from} animaux
                     {print} Je choisis animaux {at} {random}
                     ```
                 story_text_3: |
                     ### Exercice
-                    Essaye les nouvelles commandes dans ce restaurant virtuel. Ajoute les parfums que les joueurs désirent à la liste et supprime les parfums auxquels ils sont allergiques.
+                    Essaye les nouvelles commandes dans ce restaurant virtuel. Ajoute le parfum que le joueur désire à la liste et supprime le parfum auxquels il est allergique.
                 example_code_3: |
                     ```
                     {print} Le milkshake mystérieux
                     parfums {is} fraise, chololat, vanille
-                    désire {is} {ask} Quelle parfum désires-tu ?
+                    désiré {is} {ask} Quelle parfum désires-tu ?
                     _
-                    allergie {is} {ask} Est-tu allergique à un parfum ?
+                    allergie {is} {ask} Es-tu allergique à un parfum ?
                     _
                     {print} Voici un milkshake parfums {at} {random}
                     ```
                 start_code: |-
                     animaux {is} chien, chat, kangourou
-                    favori {is} {ask} Quel est ton animal préféré ?
-                    {add} favori {to_list} animaux
-                    mal_aimé {is} {ask} Quel animal n'aimes-tu pas ?
+                    préféré {is} {ask} Quel est ton animal préféré ?
+                    {add} préféré {to_list} animaux
+                    mal_aimé {is} {ask} Quel animal n'aimes-tu pas ?
                     {remove} mal_aimé {from} animaux
                     {print} Je choisis animaux {at} {random}
     and_or_command:
@@ -727,10 +727,10 @@ adventures:
                 start_code: '{print} bonjour le monde !'
             3:
                 story_text: |
-                    Dans le niveau précédent tu as appris ce qu'est une variable et comment tu peux l'utiliser pour rendre tes aventures plus interactives.
-                    Mais... ce n'est pas la seule chose que tu peux faire avec des variables ! Tu peux aussi utiliser des variables pour faire des listes.
-                    Et tu peux même demander à Hedy de tirer un mot au hasard dans la liste, ce qui te permet de faire des vrais jeux !
-                    Va jeter un coup d'œil à l'onglet suivant !
+                    Au niveau précédent, tu as appris ce qu'est une variable et comment tu peux l'utiliser pour rendre tes aventures plus interactives.
+                    Mais… ce n'est pas la seule chose que tu peux faire avec des variables ! Tu peux aussi utiliser des variables pour faire des listes.
+                    Et tu peux même demander à Hedy de tirer un mot au hasard dans la liste, ce qui te permet de faire des vrais jeux !
+                    Va jeter un coup d'œil à l'onglet suivant !
                 start_code: '{print} bonjour le monde !'
             4:
                 story_text: |
@@ -970,7 +970,7 @@ adventures:
                 example_code: |
                     ```
                     choix {is} 1, 2, 3, 4, 5, ver de terre
-                    {print} choix {at} {random}
+                    {print} Tu as obtenu un _ {at} {random}
                     ```
                 story_text_2: |
                     ### Exercice
@@ -982,7 +982,7 @@ adventures:
                     ```
                 start_code: |
                     choix {is} 1, 2, 3, 4, 5, ver de terre
-                    {print} Tu as jeté un _ {at} {random}
+                    {print} Tu as obtenu un _ {at} {random}
             4:
                 story_text: |
                     Dans ce niveau, tu peux aussi créer un dé. Mais cette fois, tu peux essayer par toi-même sans un exemple de code !
@@ -1070,17 +1070,20 @@ adventures:
         levels:
             3:
                 story_text: |
-                    Do you always disagree at home about who should wash the dishes or change the litter box today?
-                    Then you can let the computer choose very fairly. You can program that in this level!
-                    You first make a list of the members of your family. Then choose '{at} {random}' from the list.
+                    Est-ce que tu n'es jamais d'accord à la maison pour savoir qui doit nettoyer la vaisselle ou changer la litière du chat ?
+                    Alors, tu peux demander à l'ordinateur de choisir très équitablement. Tu peux programmer ça à ce niveau !
                 example_code: |
                     ```
-                    people {is} mom, dad, Emma, Sophie
-                    {print} people {at} {random}
+                    personnes {is} maman, papa, Emma, Sophie
+                    {print} personnes {at} {random}
                     ```
                 story_text_2: |
-                    Don't feel like doing the dishes yourself? Hack the program to remove your name from the list.
-                start_code: '{print} Who does the dishes?'
+                    ### Exercice
+                    Fait ta propre version du programme lave-vaisselle. Commence par faire la liste des membres de ta famille.
+                    Ensuite, pense à une tâche qui doit être faite, et demande à l'ordinateur de décider qui doit faire la tâche avec la commande `{at} {random}`.
+
+                    **Bonus** Pas envie de faire la vaisselle ? Hack le programme en retirant ton nom de la liste avec la commande `{remove}` `{from}`.
+                start_code: '{print} Qui fait la vaisselle ?'
             4:
                 story_text: |
                     Avec les guillemets, tu peux rendre le programme de la vaisselle encore mieux.
@@ -2000,11 +2003,11 @@ adventures:
                     Pour commencer, termine la ligne 2 avec une commande `{is}` et une commande `{ask}`.
                     Ensuite, écrit une commande `{sleep}` aux lignes 4 et 6 pour que le perroquet se calme un petit peu.
 
-                    **En plus** Peux-tu faire que le perroquet demande plus que ton nom, en ajoutant des lignes de code ?
+                    **Bonus** Peux-tu faire que le perroquet demande plus que ton nom, en ajoutant des lignes de code ?
                 start_code: '{print} Je suis Hedy le perroquet !'
             3:
                 story_text: |
-                    Apprend à ton perroquet un nouveau mot avec `{add}`.
+                    Apprend à ton perroquet un nouveau mot avec `{add} {to}`.
                     ### Exercice
                     Peux-tu ajouter la commande `{add} {to}` pour faire marcher le code ?
                 example_code: |
@@ -2013,7 +2016,7 @@ adventures:
                     {print} Entraine ton perroquet !
                     nouveau_mot {is} {ask} Quel mot veux-tu lui apprendre ?
                     _ nouveau_mot _ mots
-                    {print} 🧒 Dit nouveau_mot , Hedy !
+                    {print} 🧒 Dit nouveau_mot, Hedy !
                     {print} 🦜 mots {at} {random}
                     ```
                 start_code: '# écris ton code ici'
@@ -2511,24 +2514,24 @@ adventures:
                     Dans cette simple ligne, deux variables ont été utilisés pour créer un résumé de la commande.
                     Maintenant ajoute ton propre résumé de la nourriture et de la boisson commandé par le client.
 
-                    **En plus** Maintenant que tu as appris comment utiliser les variables, tu peux utiliser autant de variables sur une ligne que tu le désires. Peux-tu ajouter plus de variables dans ton code, pour demander « sur place » ou « à emporter », « en liquide » ou « en carte », « avec ou sans paille », etc. ?
+                    **Bonus** Maintenant que tu as appris comment utiliser les variables, tu peux utiliser autant de variables sur une ligne que tu le désires. Peux-tu ajouter plus de variables dans ton code, pour demander « sur place » ou « à emporter », « en liquide » ou « en carte », « avec ou sans paille », etc. ?
                 start_code: '# écris ton code ici'
             3:
                 story_text: |
-                    As-tu du mal à décider ce que tu voudras manger pour dîner ? Tu peux laisser Hedy décider pour toi !
+                    As-tu du mal à décider ce que tu voudrais manger pour dîner ? Tu peux laisser Hedy décider pour toi !
                     Ajoute simplement une liste de tes plats préférés (ou ceux que tu détestes le plus) et Hedy pourra choisir ton dîner pour toi.
                     Tu peux aussi t'amuser, en laissant Hedy choisir, en plus, le prix de ton repas ! Que vas-tu obtenir ?
                 example_code: |
                     ```
                     plats {is} spaghetti, choux de Bruxelles, Hamburgers
-                    {print} Tu prendra plats {at} {random} ce soir !
+                    {print} Ce soir, tu mangeras des plats {at} {random} !
                     prix {is} 1 euro, 10 euros, 100 euros
-                    {print} Ça fera prix {at} {random} s'il vous plait.
+                    {print} Ça fera prix {at} {random} s'il te plait.
                     ```
                 story_text_2: |
                     ### Exercice
                     Maintenant, fais ta propre version du restaurant aléatoire.
-                    Fais ta propre liste d'entrées, plats, desserts, boissons et prix.
+                    Fais ta liste d'entrées, plats, desserts, boissons et prix.
                     Ensuite, utilise les commandes `{print}` et `{at} {random}` pour dire au client son menu pour ce soir.
                 example_code_2: |
                     ```
@@ -2797,7 +2800,7 @@ adventures:
                     {print} choix {at} {random}
                     ```
                 story_text_2: |
-                    **En plus** fait un jeu pour deux joueurs. En premier, demande aux deux joueurs leurs noms. Ensuite, laisse l'ordinateur tirer leur réponse au hasard.
+                    **Bonus** fait un jeu pour deux joueurs. Commence par demander aux deux joueurs leurs noms. Ensuite, laisse l'ordinateur tirer leur réponse au hasard.
                 example_code_2: |
                     ```
                     choix {is} pierre, papier, ciseaux
@@ -3550,9 +3553,9 @@ adventures:
                 story_text_2: |
                     ### Exercice
                     Écrit les bons nombres dans ce code pour le faire marcher.
-                    Après que tu ais fait ça, tu peux essayer d'ajouter l'option en arrière.
+                    Après avoir fait ça, tu peux essayer d'ajouter l'option en arrière.
 
-                    **En plus** Au lieu d'utiliser `{left}` et `{right}`, refait le programme avec Nord, Est, Sud et Ouest.
+                    **Bonus** Au lieu d'utiliser `{left}` et `{right}`, refait le programme avec nord, est, sud et ouest.
                     Tu pourrais même ajouter encore plus de directions comme Nord-Est, Sud-Ouest, etc.
                 example_code_2: |
                     ```
