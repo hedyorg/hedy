@@ -45,7 +45,8 @@ from website import (ab_proxying, achievements, admin, auth_pages, aws_helpers,
                      profile, programs, querylog, quiz, statistics,
                      translating)
 from website.auth import (current_user, is_admin, is_teacher, has_public_profile,
-                          login_user_from_token_cookie, requires_login, requires_login_redirect, requires_teacher)
+                          login_user_from_token_cookie, requires_login, requires_login_redirect, requires_teacher,
+                          forget_current_user)
 from website.log_fetcher import log_fetcher
 from website.frontend_types import Adventure, Program, ExtraStory, SaveInfo
 
@@ -1396,6 +1397,8 @@ def get_specific_adventure(name, level, mode):
 
 @app.route('/embedded/<int:level>', methods=['GET'])
 def get_embedded_code_editor(level):
+    forget_current_user()
+
     # Start with an empty program
     program = ''
 
@@ -1412,7 +1415,7 @@ def get_embedded_code_editor(level):
     run = True if request.args.get('run') == 'true' else False
     encoded_program = request.args.get('program')
 
-    # Set a fallback for most default use: nl interface and en keywords -> provide feedback if invalid
+    # Set a fallback for most default use: 'nl' interface and 'en' keywords -> provide feedback if invalid
     language = request.args.get('lang', 'nl')
     if language not in ALL_LANGUAGES.keys():
         language = 'nl'
