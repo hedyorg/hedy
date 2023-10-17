@@ -1,0 +1,91 @@
+@top Program { eol* (Command eol+)* Command? }
+
+Command {
+    Assign | AssignList | Ask | Clear |Print | Turtle | Sleep | Add | Remove | If | Else | Repeat | For | ErrorInvalid
+}
+
+IfLessCommand {
+    Assign | AssignList | Ask | Clear |Print | Turtle | Sleep | Add | Remove | Repeat | For | ErrorInvalid
+}
+
+@local tokens {    
+    stringEnd { "'" | "\n" }    
+    @else stringContent
+  }
+  
+  @skip {} {
+    String { "'" (stringContent)* stringEnd }
+}
+
+
+Print { skw<"print"> ( String | ListAccess | Expression )+ }
+
+AssignList { Text (skw<"is"> | Op<"=">) (Text+ | Int ) ~ambig  (Comma (Text+ | Int ))+ } // comma doesn't really parse well if it is not separated by spaces
+Assign { Text (skw<"is"> | Op<"=">) (Expression ~ambig  | ListAccess)+ }
+Ask { Text (skw<"is"> | Op<"=">) skw<"ask"> ( String | ListAccess | Expression )+ }
+Sleep { skw<"sleep"> (Text | ListAccess)? }
+
+ListAccess { Text kw<"at"> (kw<"random"> | Text) }
+
+Turtle[@isGroup=turtle] {
+    Forward { skw<"forward"> (Expression | ListAccess ) } |
+    Turn { skw<"turn"> (Expression | ListAccess ) } |
+    Color { skw<"color"> (Expression | ListAccess)  }
+}   
+
+Add { skw<"add"> Text skw<"to"> Text }
+Remove { skw<"remove"> Text skw<"from"> Text }
+Clear { skw<"clear"> }
+ErrorInvalid[@dynamicPrecedence=-10] { Text+ }
+
+If { skw<"if"> Condition IfLessCommand? Else? }
+Else { kw<"else"> IfLessCommand? }
+
+Condition { 
+    EqualityCheck { Text (skw<"is"> | Op<"=">) (String | Text| Int | skw<"pressed">) } |
+    ListCheck { (Text | Int) skw<"not">? skw<"in">  Text }
+}
+
+
+Repeat { skw<"repeat"> (Int | Text) skw<"times"> IfLessCommand }
+
+For { skw<"for"> Text skw<"in"> (Text | skw<"range"> (Text | Int) skw<"to"> (Text | Int)) }
+
+kw<term> { @specialize[@name={term}]<Text, term> }
+skw<term> { @extend[@name={term}]<Text, term> }
+Op<expr> { expr }
+
+Comma { "," }
+
+atom { Int | Text }
+
+binaryExpression {
+    Expression !times Op<"*" | "/"> Expression |
+    Expression !plus Op<"+" | "-"> Expression
+}
+
+Expression {
+    Int |
+    Text |
+    binaryExpression
+}
+
+@precedence {
+    times @left,
+    plus @right
+}
+
+
+@tokens {
+    @precedence {
+        Int,
+        Text
+    }
+    Comment { "#" ![\n]* }
+    eol { "\n" }
+    Text { ![^\n,،，、 +'#/*\-=]+ } // a little bit of a hack not to parse commas never, but lezer adds them as error nodes, so it still
+    space { " " }
+    Int { @digit+ }
+}
+
+@skip { Comment | space }
