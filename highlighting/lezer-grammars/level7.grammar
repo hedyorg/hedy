@@ -8,8 +8,8 @@ IfLessCommand {
     Assign | AssignList | Ask | Clear |Print | Turtle | Sleep | Add | Remove | Repeat | ErrorInvalid
 }
 
-@local tokens {
-    stringEnd[@name="quote"] { "'" }
+@local tokens {    
+    stringEnd { "'" | "\n" }    
     @else stringContent
   }
   
