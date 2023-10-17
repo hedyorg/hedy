@@ -3489,12 +3489,12 @@ levels:
         8:
             question_text: 이 자동 화장실 시스템에 대한 설명으로 옳은 것은?
             code: |-
-                while toilet == 'occupied'
+                {while} toilet == 'occupied'
                     lights = 'on'
                     air_freshener_sprays = 'yes'
-                    sleep 60
-                else
-                    lights = 'off'
+                    {sleep} 60
+                lights = 'off'
+                air_freshener_sprays = 'no'
             mp_choice_options:
             -   option: The lights and air freshener will turn off after 1 minute
                 feedback: 틀렸어!

@@ -168,17 +168,17 @@ levels:
                 {echo}
             mp_choice_options:
             -   option: Are you ready to go to level 2?
-                feedback: There are two echo commands
+                feedback: Es gibt zwei `{echo}` Befehle
             -   option: |-
                     Yes!
                     Yes!
                 feedback: Great job!
             -   option: Yes!
-                feedback: There are two echo commands
+                feedback: Es gibt zwei `{echo}` -Befehle
             -   option: |-
                     Are you ready to go to level 2?
                     Yes!
-                feedback: There are two echo commands
+                feedback: Es gibt zwei `{echo}` -Befehle
             hint: Let's go!
             correct_answer: B
             question_score: '10'
@@ -3434,12 +3434,12 @@ levels:
         8:
             question_text: Which statement is true about this automated toilet system?
             code: |-
-                while toilet == 'occupied'
+                {while} toilet == 'occupied'
                     lights = 'on'
                     air_freshener_sprays = 'yes'
-                    sleep 60
-                else
-                    lights = 'off'
+                    {sleep} 60
+                lights = 'off'
+                air_freshener_sprays = 'no'
             mp_choice_options:
             -   option: The lights and air freshener will turn off after 1 minute
                 feedback: False!
