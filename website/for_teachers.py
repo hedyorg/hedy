@@ -175,6 +175,7 @@ class ForTeachersModule(WebsiteModule):
             invites.append(
                 {
                     "username": invite["username"],
+                    "invited_as": invite["invited_as"],
                     "timestamp": utils.localized_date_format(invite["timestamp"], short_format=True),
                     "expire_timestamp": utils.localized_date_format(invite["ttl"], short_format=True),
                 }

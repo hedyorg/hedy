@@ -534,7 +534,7 @@ class Database:
         """Return the classes with given id."""
         return CLASSES.get({"id": id})
 
-    def get_teacher_classes(self, username, students_to_list=False):
+    def get_teacher_classes(self, username, students_to_list=False, second_teacher=None):
         """Return all the classes belonging to a teacher."""
         classes = None
         if isinstance(storage, dynamo.AwsDynamoStorage):
@@ -551,6 +551,11 @@ class Database:
             classes = []
             for Class in CLASSES.get_many({"teacher": username}, reverse=True):
                 classes.append(Class.copy())
+
+        if second_teacher:
+            classes = list(filter(lambda c: c.get("second_teachers")
+                                  and second_teacher in c["second_teachers"], classes))
+
         if students_to_list:
             for Class in classes:
                 if "students" not in Class:
@@ -613,6 +618,10 @@ class Database:
     def update_class(self, id, name):
         """Updates a class."""
         CLASSES.update({"id": id}, {"name": name})
+
+    def update_class_data(self, id, class_data):
+        """Updates a class."""
+        CLASSES.update({"id": id}, class_data)
 
     def add_student_to_class(self, class_id, student_id):
         """Adds a student to a class."""
