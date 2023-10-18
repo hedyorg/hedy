@@ -51,7 +51,7 @@ adventures:
                     这段代码在本关不会起作用，因为你还没有使用变量。
                     把你代码中的`{ask}`命令和`{echo}`命令改成你在本关学到的正确形式。
 
-                    **另外**在你的代码中添加一个睡眠命令，在你的故事中建立起紧张感。
+                    **另外**在你的代码中添加一个`{sleep}`命令，在你的故事中建立起紧张感。
                 start_code: '{print} 你的故事'
             3:
                 story_text: |
@@ -235,20 +235,23 @@ adventures:
                 example_code: |
                     ```
                     动物 {is} 狗， 猫， 袋鼠
+                    像 {is} {ask} 你最喜欢的动物是什么？
+                    {add}像{to_list}动物们
+                    {print}我选择动物 {at} {random}
                     ```
                 story_text_2: |
                     ## Remove from
                     If you can add items to a list, of course you can also take them off. This is done with the `{remove} {from}` command.
                 example_code_2: |
                     ```
-                    animals {is} dog, cat, kangaroo
-                    dislike {is} {ask} What animal do you not like?
-                    {remove} dislike {from} animals
-                    {print} I choose animals {at} {random}
+                    动物们 {is} 狗, 猫, 袋鼠
+                    不喜欢{is} {ask} 你不喜欢什么动物？
+                    {remove} 不喜欢 {from} 动物们
+                    {print}我选择动物 {at} {random}
                     ```
                 story_text_3: |
-                    ### Exercise
-                    Try out the new commands in this virtual restaurant. Add the flavor the player is hpoing for to the list and remove the flavors they are allergic to.
+                    ### 锻炼
+                    在这个虚拟餐厅中尝试新命令。将玩家想要的口味添加到列表中，并删除他们过敏的口味。
                 example_code_3: |
                     ```
                     {print} Mystery milkshake
