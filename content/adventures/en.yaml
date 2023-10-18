@@ -541,7 +541,7 @@ adventures:
                     {else} {print} 'Wrong! It was ' _
                     ```
                 story_text_3: |
-                    **Extra** You can also let the computer do random sums on its own using random.
+                    **Extra** You can also let the computer do random sums on its own using `{random}`.
 
                     This is how you choose a number of tables to practice, and from that you always get a different sum:
                 start_code: |
@@ -3248,7 +3248,7 @@ adventures:
             10:
                 story_text: |
                     ### Exercise
-                    In the previous levels you have often made your own rock paper scissors game. Can you finish the code and use the {for} command properly to get the game to work?
+                    In the previous levels you have often made your own rock paper scissors game. Can you finish the code and use the `{for}` command properly to get the game to work?
                 example_code: |
                     ```
                     choices = _
@@ -3335,7 +3335,7 @@ adventures:
                 example_code: |
                     ```
                     name {is} {ask} 'What is your name?'
-                    if name {is} '_'
+                    {if} name {is} '_'
                         a {is} 'Go to the airport '
                     {else}
                         a {is} 'Go to the trainstation '
