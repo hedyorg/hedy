@@ -351,6 +351,51 @@ class MiscClassPages(WebsiteModule):
             "class_id": class_id,
             "timestamp": utils.times(),
             "ttl": utils.times() + invite_length,
+            "invited_as": gettext("student"),
+        }
+        self.db.add_class_invite(data)
+        return {}, 200
+
+    @route("/invite-second-teacher", methods=["POST"])
+    @requires_teacher
+    def invite_second_teaceher(self, user):
+        teacher = user
+        body = request.json
+        # Validations
+        if not isinstance(body, dict):
+            return gettext("ajax_error"), 400
+        if not isinstance(body.get("username"), str):
+            return gettext("username_invalid"), 400
+        if not isinstance(body.get("class_id"), str):
+            return "class id must be a string", 400
+        if len(body.get("username")) < 1:
+            return gettext("username_empty"), 400
+
+        username = body.get("username").lower()
+        class_id = body.get("class_id")
+
+        print('\n\n', 'update now', username, teacher, '\n\n')
+
+        Class = self.db.get_class(class_id)
+        if not Class or Class["teacher"] != teacher["username"]:
+            return utils.error_page(error=404, ui_message=gettext("no_such_class"))
+
+        user = self.db.user_by_username(username)
+        if not user:
+            return gettext("student_not_existing"), 400  # TODO: change to teacher not existing
+        if self.db.get_username_invite(user["username"]):
+            return gettext("student_already_invite"), 400
+
+        if user.get("second_teacher_in") and class_id in user["second_teacher_in"]:
+            #     return gettext("student_already_in_class"), 400
+            return {}, 200  # TODO: say user is already a second teacher
+
+        data = {
+            "username": username,
+            "class_id": class_id,
+            "timestamp": utils.times(),
+            "ttl": utils.times() + invite_length,
+            "invited_as": gettext("second_teacher"),
         }
         self.db.add_class_invite(data)
         return {}, 200
