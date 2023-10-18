@@ -1,4 +1,6 @@
 # coding=utf-8
+import base64
+import binascii
 import collections
 import copy
 import logging
@@ -43,7 +45,8 @@ from website import (ab_proxying, achievements, admin, auth_pages, aws_helpers,
                      profile, programs, querylog, quiz, statistics,
                      translating)
 from website.auth import (current_user, is_admin, is_teacher, has_public_profile,
-                          login_user_from_token_cookie, requires_login, requires_login_redirect, requires_teacher)
+                          login_user_from_token_cookie, requires_login, requires_login_redirect, requires_teacher,
+                          forget_current_user)
 from website.log_fetcher import log_fetcher
 from website.frontend_types import Adventure, Program, ExtraStory, SaveInfo
 
@@ -1389,6 +1392,56 @@ def get_specific_adventure(name, level, mode):
                                adventures=adventures,
                                initial_tab=initial_tab,
                                current_user_name=current_user()['username'],
+                           ))
+
+
+@app.route('/embedded/<int:level>', methods=['GET'])
+def get_embedded_code_editor(level):
+    forget_current_user()
+
+    # Start with an empty program
+    program = ''
+
+    # If for any reason the level is invalid, set to level 1
+    try:
+        level = int(level)
+        if level < 1 or level > hedy.HEDY_MAX_LEVEL:
+            program = gettext('invalid_level_comment')
+            level = 1
+    except ValueError:
+        program = gettext('invalid_level_comment')
+        level = 1
+
+    run = True if request.args.get('run') == 'true' else False
+    encoded_program = request.args.get('program')
+
+    # Set a fallback for default use
+    language = request.args.get('lang', 'en')
+    if language not in ALL_LANGUAGES.keys():
+        language = 'nl'
+        program = gettext('invalid_language_comment')
+
+    keyword_language = request.args.get('keyword', 'en')
+    if keyword_language not in ALL_KEYWORD_LANGUAGES.keys():
+        language = 'en'
+        program = gettext('invalid_keyword_language_comment')
+
+    # Make sure to set the session lang to enforce the correct translated strings to be rendered
+    session['lang'] = language
+
+    if encoded_program and not program:
+        try:
+            program = base64.b64decode(encoded_program)
+            program = program.decode('utf-8')
+        except binascii.Error:
+            program = gettext('invalid_program_comment')
+
+    return render_template("embedded-editor.html", embedded=True, run=run, language=language,
+                           keyword_language=keyword_language,
+                           level=level, program=program, javascript_page_options=dict(
+                               page='code',
+                               lang=language,
+                               level=level
                            ))
 
 
