@@ -226,6 +226,32 @@ class ClassModule(WebsiteModule):
             return {"achievement": achievement}, 200
         return {}, 200
 
+    @route("/<class_id>/second-teacher/<second_teacher>", methods=["DELETE"])
+    @requires_login
+    def remove_second_teacher(self, user, class_id, second_teacher):
+        print('\n\n\n', class_id, second_teacher)
+        Class = self.db.get_class(class_id)
+        if not Class or (Class["teacher"] != user["username"] and second_teacher != user["username"]):
+            return gettext("ajax_error"), 400
+        second_teacher = self.db.user_by_username(second_teacher)
+        # remove this class from the second teacher's table
+        st_classes = list(filter(lambda cid: cid != class_id, second_teacher.get("second_teacher_in", [])))
+        self.db.update_user(second_teacher['username'], {"second_teacher_in": st_classes})
+
+        # remove this second teacher from the class' table
+        second_teachers = list(filter(lambda st: st['username'] !=
+                               second_teacher['username'], Class.get('second_teachers', [])))
+        self.db.update_class_data(class_id, {"second_teachers": second_teachers})
+
+        refresh_current_user_from_db()
+        achievement = None
+        if Class["teacher"] == user["username"]:
+            achievement = self.achievements.add_single_achievement(user["username"], "detention")
+        if achievement:
+            utils.add_pending_achievement({"achievement": achievement, "reload": True})
+            return {"achievement": achievement}, 200
+        return {}, 205
+
 
 class MiscClassPages(WebsiteModule):
     """All the pages that have to do with the teacher interface or classes, but
