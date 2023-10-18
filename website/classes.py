@@ -163,6 +163,8 @@ class ClassModule(WebsiteModule):
         # request.url = re.sub(r'/class/.*', '/programs', request.url)
         # return redirect(request.url, code=302)
         return {}, 302
+
+    # Legacy function; will be gradually replaced by the join_class_id
     @route("/join", methods=["POST"])
     def join_class(self):
         body = request.json
@@ -172,19 +174,38 @@ class ClassModule(WebsiteModule):
         if not Class or Class["id"] != body["id"]:
             return utils.error_page(error=404, ui_message=gettext("invalid_class_link"))
 
-        if not current_user()["username"]:
+        user = current_user()
+        username = user['username']
+        if not username:
             return gettext("join_prompt"), 403
 
-        self.db.add_student_to_class(Class["id"], current_user()["username"])
-        refresh_current_user_from_db()
         # We only want to remove the invite if the user joins the class with an actual pending invite
-        invite = self.db.get_username_invite(current_user()["username"])
+        invite = self.db.get_username_invite(username)
+
         if invite and invite.get("class_id") == body["id"]:
-            self.db.remove_class_invite(current_user()["username"])
+            invited_as = invite.get("invited_as")
+            if invited_as == gettext("second_teacher"):
+                class_id = Class["id"]
+                if not (user.get("second_teacher_in") and class_id in user["second_teacher_in"]):
+                    st_classes = user["second_teacher_in"] + [class_id] if user.get("second_teacher_in") else [class_id]
+                    # self.db.update_user(username, {"second_teacher": True, "role": role, "appointed_by": teacher['username'] })
+                    self.db.update_user(username, {"second_teacher_in": st_classes})
+
+                    # The role can be changed later when needed/desired.
+                    second_teachers = Class['second_teachers'] + [{"username": username, "role": "teacher"}] \
+                        if Class.get('second_teachers') else [{"username": username, "role": "teacher"}]
+                    self.db.update_class_data(class_id, {"second_teachers": second_teachers})
+                    # return {}, 200
+                # else: TODO: maybe indicate that the user is already a second teacher.
+            elif invited_as == gettext("student"):
+                self.db.add_student_to_class(Class["id"], username)
+
+            refresh_current_user_from_db()
+            self.db.remove_class_invite(username)
             # Also remove the pending message in this case
             session["messages"] = 0
 
-        achievement = self.achievements.add_single_achievement(current_user()["username"], "epic_education")
+        achievement = self.achievements.add_single_achievement(username, "epic_education")
         if achievement:
             return {"achievement": achievement}, 200
         return {}, 200
