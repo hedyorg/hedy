@@ -221,7 +221,12 @@ adventures:
                     ```
                 start_code: '# scrivi il tuo codice qui'
             12:
-                story_text: "In questo livello saranno necessarie le virgolette per salvare più parole in una variabile.\n\n### Esercizio\n\nTrova una storia da un livello precedente, qualsiasi livello è ok. Ora assicurati che le virgolette siano aggiunte nei posti giusti."
+                story_text: |-
+                    In questo livello saranno necessarie le virgolette per salvare più parole in una variabile.
+
+                    ### Esercizio
+
+                    Trova una storia da un livello precedente, qualsiasi livello è ok. Ora assicurati che le virgolette siano aggiunte nei posti giusti.
                 example_code: |
                     ```
                     name = 'The Queen of England'
@@ -838,8 +843,7 @@ adventures:
                         {else}
                             {print} 'pizza is better'
                     ```
-                start_code: |-
-                    {print} Andiamo alla scheda successiva!
+                start_code: '{print} Andiamo alla scheda successiva!'
             10:
                 story_text: |
                     Stai andando alla grande! Nei livelli precedenti abbiamo ancora dovuto affrontare un piccolo problema. Hai imparato a ripetere le righe, ma cosa succederebbe se volessi modificarle leggermente?
@@ -878,7 +882,12 @@ adventures:
                     {print} 'I numeri decimali ora hanno bisogno di essere scritti con il punto'
                     {print} 2.5 + 2.5
             13:
-                story_text: "Nei livelli precedenti hai imparato come inserire due comandi `{if}`uno dentro l'altro. Funziona bene, ma ti dà codici molto lunghi e scomodi come questo:\n\nIn questo sistema devi fornire sia il nome utente corretto che la password corretta.\nIn questo livello imparerai il comando `{and}` che renderà questo codice molto più breve e comprensibile!\nControlla!\n"
+                story_text: |
+                    Nei livelli precedenti hai imparato come inserire due comandi `{if}`uno dentro l'altro. Funziona bene, ma ti dà codici molto lunghi e scomodi come questo:
+
+                    In questo sistema devi fornire sia il nome utente corretto che la password corretta.
+                    In questo livello imparerai il comando `{and}` che renderà questo codice molto più breve e comprensibile!
+                    Controlla!
                 example_code: |
                     ```
                     name = {ask} 'what is your name?'
@@ -964,7 +973,9 @@ adventures:
                         {print} i
                     {print} 'Pronti o no, io arrivo!'
             18:
-                story_text: "Congratulazioni! Hai raggiunto l'ultimo livello di Hedy! Il codice che hai creato qui può essere copiato in ambienti Python reali come replit o PyCharm e puoi continuare ad imparare lì!\nTieni presente tuttavia che Python può leggere solo comandi inglesi, quindi se hai utilizzato altre lingue, ora dovrai passare all'inglese.\n"
+                story_text: |
+                    Congratulazioni! Hai raggiunto l'ultimo livello di Hedy! Il codice che hai creato qui può essere copiato in ambienti Python reali come replit o PyCharm e puoi continuare ad imparare lì!
+                    Tieni presente tuttavia che Python può leggere solo comandi inglesi, quindi se hai utilizzato altre lingue, ora dovrai passare all'inglese.
                 start_code: |-
                     nome = 'Hedy'
                     {print}('Mi chiamo ', nome)
@@ -994,11 +1005,9 @@ adventures:
                     ```
                     choices {is} _
                     ```
-                start_code: 'scelte {is} 1, 2, 3, 4, 5, lombrico
-
+                start_code: |
+                    scelte {is} 1, 2, 3, 4, 5, lombrico
                     {print} Hai lanciato _ {at} {random}!
-
-                    '
             4:
                 story_text: |
                     In questo livello puoi anche creare dadi. Ma questa volta puoi provarlo tu stesso, senza un codice di esempio!
@@ -2746,11 +2755,9 @@ adventures:
                     {ask} choose from _
                     {echo} so your choice was:
                     ```
-                start_code: '{print} Benvenuto nella tua carta forbici da sasso!
-
+                start_code: |
+                    {print} Benvenuto nella tua carta forbici da sasso!
                     {ask} Cosa sceglierai?
-
-                    '
             2:
                 story_text: |
                     In this level you can practise using the variables, so that you can make the rock, paper, scissors game in the next level!
