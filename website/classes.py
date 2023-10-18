@@ -121,6 +121,48 @@ class ClassModule(WebsiteModule):
             class_info={"id": Class["id"], "name": Class["name"]},
         )
 
+    @route('join/<class_id>', methods=["POST"])
+    @requires_login
+    def join_class_id(self, user, class_id):
+        Class = self.db.get_class(class_id)
+        if not Class:
+            # TODO: change to invalid_class; if necessary!
+            return utils.error_page(error=404, ui_message=gettext("invalid_class_link"))
+
+        username = user['username']
+        if not username:
+            return gettext("join_prompt"), 403
+
+        # We only want to remove the invite if the user joins the class with an actual pending invite
+        invite = self.db.get_username_invite(username)
+
+        if invite and invite.get("class_id") == class_id:
+            invited_as = invite.get("invited_as")
+            if invited_as == gettext("second_teacher"):
+                st_classes = user["second_teacher_in"] + [class_id] if user.get("second_teacher_in") else [class_id]
+                self.db.update_user(username, {"second_teacher_in": st_classes})
+
+                # The role can be changed later when needed.
+                second_teacher_data = [{"username": username, "role": "teacher"}]
+                second_teachers = Class['second_teachers'] + second_teacher_data \
+                    if Class.get('second_teachers') else second_teacher_data
+
+                self.db.update_class_data(class_id, {"second_teachers": second_teachers})
+            elif invited_as == gettext("student"):
+                self.db.add_student_to_class(Class["id"], username)
+
+            refresh_current_user_from_db()
+            self.db.remove_class_invite(username)
+            # Also remove the pending message in this case
+            session["messages"] = 0
+
+        achievement = self.achievements.add_single_achievement(username, "epic_education")
+        if achievement:
+            utils.add_pending_achievement({"achievement": achievement, "redirect": "/programs"})
+            return {"achievement": achievement}, 200
+        # request.url = re.sub(r'/class/.*', '/programs', request.url)
+        # return redirect(request.url, code=302)
+        return {}, 302
     @route("/join", methods=["POST"])
     def join_class(self):
         body = request.json
