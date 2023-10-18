@@ -321,8 +321,8 @@ adventures:
                     {print} Ik kies dieren {at} {random}
     and_or_command:
         name: '{and} & {or}'
-        default_save_name: and or
-        description: introducing and or
+        default_save_name: en of
+        description: introduceert en / of
         levels:
             13:
                 story_text: We gaan nu `{and}` en `{or}` gebruiken! Als je twee dingen wilt checken hoef je niet meer twee {if}jes in elkaar te doen maar kan je nu `{and}` en `{or}` gebruiken. Beide dingen moeten waar zijn als je een `{and}` gebruikt. We kunnen ook `{or}` gebruiken. Daarbij moet er één
@@ -1194,8 +1194,8 @@ adventures:
                        {print} 'Op ' dag ' doet ' namen {at} {random} ' de afwas.'
     elif_command:
         name: '{elif}'
-        default_save_name: elif
-        description: elif
+        default_save_name: alsanders
+        description: introduceert het alsanders commando
         levels:
             17:
                 story_text: |-
@@ -1225,8 +1225,8 @@ adventures:
                         {print} 'Veel geluk de volgende keer..'
     for_command:
         name: '{for}'
-        default_save_name: for
-        description: for command
+        default_save_name: voor
+        description: introduceert het voor commando
         levels:
             10:
                 story_text: |-
@@ -1710,8 +1710,8 @@ adventures:
                 start_code: '# Schrijf jouw code hier'
     if_command:
         name: '{if} & {else}'
-        default_save_name: if_command
-        description: Introducing the if command
+        default_save_name: als
+        description: introduceert het als commando
         levels:
             5:
                 story_text: |
@@ -1788,8 +1788,8 @@ adventures:
                         {print} 'Je wil niet doorgaan'
     in_command:
         name: '{in}'
-        default_save_name: in_command
-        description: Introducing the in command
+        default_save_name: in
+        description: introduceert het in commando
         levels:
             5:
                 story_text: |
@@ -1939,8 +1939,8 @@ adventures:
                 start_code: '# Schrijf jouw code hier'
     maths:
         name: Rekenen
-        default_save_name: maths
-        description: Introducing maths
+        default_save_name: rekenen
+        description: introduceert rekenen
         levels:
             6:
                 story_text: |
@@ -2261,8 +2261,8 @@ adventures:
                 start_code: '# Schrijf jouw code hier'
     quotation_marks:
         name: '''Aanhalingstekens'''
-        default_save_name: quotation_marks
-        description: Introduction quotation marks
+        default_save_name: haakjes
+        description: introduceert haakjes in Hedy
         levels:
             4:
                 story_text: |
@@ -2335,8 +2335,8 @@ adventures:
                         {print} 'Hoi!'
     random_command:
         name: '{random}'
-        default_save_name: random_command
-        description: introducing at random command
+        default_save_name: willekeurig
+        description: introduceert het op willekeurig commando
         levels:
             3:
                 story_text: |
@@ -2391,8 +2391,8 @@ adventures:
                         {print} 'is ' geluksgetallen[i]
     repeat_command:
         name: '{repeat}'
-        default_save_name: repeat_command
-        description: repeat command
+        default_save_name: herhaal
+        description: introduceert het herhaal commando
         levels:
             7:
                 story_text: |
@@ -2462,8 +2462,8 @@ adventures:
                             {print} 'pizza is lekkerder'
     repeat_command_2:
         name: '{repeat} 2'
-        default_save_name: repeat_command_2
-        description: repeat command 2
+        default_save_name: herhaal2
+        description: herhaal
         levels:
             7:
                 story_text: |
@@ -2744,7 +2744,7 @@ adventures:
                 start_code: gangen = voorgerecht, hoofdgerecht, nagerecht
             11:
                 story_text: |
-                    Je kunt nu `{for}`met een `{range}` gebruiken om een bestelling met `{print}` te tonen voor meerdere mensen.
+                    Je kunt nu `{for}`met een `{range}` gebruiken om een bestelling voor meerdere mensen te tonen.
 
                     ### Opdracht
                     Maak de restaurantcode af. Zorg dat je de bestelling van meerdere mensen kan opnemen. Print steeds netjes het nummer uit, dus 'persoon 1', 'persoon 2', enz.
@@ -2853,12 +2853,12 @@ adventures:
             2:
                 story_text: |
                     In dit level kun je variabelen gebruiken om alvast een stukje van het spelletje te programmeren. In het volgende level leer je het spelletje maken.
-                    ###Opdracht
-                    Maak de code af door de variabele in te vullen op de lege plekken.
-                    Dit spel is nog niet echt interactief, maar wees gerust, dat komt in het volgende tabblad al.
+                    ### Opdracht
+                    Maak de code af door de **variabele** in te vullen op de lege plekken.
+                    Dit spel is nog niet echt interactief, maar wees gerust, in het volgende tabblad leer je `{ask}` gebruiken met variabelen.
                 example_code: |-
                     ```
-                    keuze {is} {ask} steen, papier of schaar?
+                    keuze {is} steen
                     {print} ik kies _
                     ```
                 start_code: '# Schrijf jouw code hier'
@@ -2992,8 +2992,8 @@ adventures:
                 start_code: '# Schrijf jouw code hier'
     rock_2:
         name: Steen, papier, schaar 2
-        default_save_name: rock_2
-        description: Part 2 of rock, paper, scissors
+        default_save_name: Steen2
+        description: Deel 2 van steen, papier schaar
         levels:
             2:
                 story_text: |
@@ -3050,8 +3050,8 @@ adventures:
                 start_code: '# Schrijf jouw code hier'
     sleep_command:
         name: '{sleep}'
-        default_save_name: sleep_command
-        description: introducing sleep command
+        default_save_name: slaap
+        description: introduceert het slaap commando
         levels:
             2:
                 story_text: |
@@ -3155,7 +3155,8 @@ adventures:
                 example_code: "```\nfamilie = baby, mama, papa, opa, oma\n_ _ _ _ \n  {print} _\n```\n"
                 story_text_2: |
                     ### Opdracht 2
-                    Print het liedjes 10 kleine visjes met een `{for}`. Zoek de tekst op als je die niet kent.
+                    Print het liedje 10 kleine visjes. Zoek de tekst op als je die niet kent.
+
                     **Extra** Print het liedje Old MacDonald had a farm. Zoek de tekst op als je die niet kent, en zorg dat alle dieren ook het goede geluid maken, met een `{if}`.
                 example_code_2: |
                     ```
@@ -3701,8 +3702,8 @@ adventures:
                 start_code: '# Write your code here'
     while_command:
         name: '{while}'
-        default_save_name: while_command
-        description: while
+        default_save_name: zolang
+        description: introduceert het zolang commando
         levels:
             15:
                 story_text: |-

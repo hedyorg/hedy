@@ -116,15 +116,15 @@ levels:
                 年龄 = {ask}“你多大了？”
                 狗的年龄 = 年龄 * 7
                 猫的年龄 = 年龄 * 5
-                {print}“在狗年里，你已经'dog_age'岁了。
-                {print} “在猫年里，你已经'cat_age'岁了。
+                {print}“在狗年里，你已经'dog_age'岁了。”
+                {print} “在猫年里，你已经'cat_age'岁了。”
         2:
             story: Create a program that helps you calculate how many cakes you should buy for your birthday party.
             code: |-
-                {print} 'It is your birthday!'
-                people = {ask} 'How many people do you want to give a slice of cake?'
-                cakes_amount = people/8
-                {print} 'You will have to buy ' cakes_amount ' cakes'
+                {print} “今天是你的生日！”
+                人 = {ask} “你想给多少人一块蛋糕？”
+                蛋糕数量 = 人数/8
+                {print} “你将不得不购买蛋糕数量的蛋糕”
     7:
         1:
             story: Complete the baby shark song. First comes baby shark, then mommy and finally daddy shark.
@@ -138,7 +138,7 @@ levels:
         2:
             story: Create the song 'The wheels on the bus go round and round'
             code: |-
-                {print} 'the wheels on the bus go'
+                {print} “公共汽车上的轮子”
                 {repeat} 3 {times} {print} 'round and round'
                 {print} 'the wheels of the bus go round and round'
                 {print} 'all through the town'
@@ -148,38 +148,38 @@ levels:
                 You and four other friends are playing Pokémon Go! Create a program that decides in which team each of you will play.
                 Either red, yellow or blue! Take a little pauze after announcing a team.
             code: |-
-                teams = red, yellow, blue
-                {print} 'Red, Yellow of Blue?'
+                团队 =红, 黄, 蓝
+                {print} '红, 黄，蓝?'
                 {repeat} 5 {times}
-                  {print} 'You are selected in team... '
-                  {print} teams {at} {random}
-                  sleep 2
+                  {print} “你被选入了团队...'
+                  {print} 团队 {at} {random}
+                  睡眠 2
         2:
             story: Print the countdown for a  game of hide and seek.
             code: |-
-                counter = 11
+                计数器 = 11
                 {repeat} 10 {times}
-                  counter = counter - 1
-                  {print} counter
+                  计数器 = 计数器 - 1
+                  {print} 计数器
                   {sleep} 1
                 {print} “准备好了，我来不来！”
     9:
         1:
             story: 这个游戏会给你三个数学作业。每次的问题都不同。你能弄清楚顺序吗？
             code: |-
-                numbers = 1, 2, 3, 4, 5, 6, 7, 8, 9, 10
+                数字= 1, 2, 3, 4, 5, 6, 7, 8, 9, 10
                 {repeat} 3 {times}
-                    number = numbers {at} {random}
-                    correct_answer = 5 * number
-                    answer = {ask} 'What is 5 times' number '?'
-                    {if} answer = correct_answer
-                        {print} 'Good job!'
+                    数字 =数字 {at} {random}
+                    正确回答= 5 * 数字
+                    回答 = {ask} “5倍数是多少？”
+                    {if} 回答 = 正确回答
+                        {print} “干得好！”
                     {else}
-                        {print} 'No! The correct answer is ' correct_answer
+                        {print}“不！正确答案是”正确答案
         2:
             story: |-
-                This code asks the costumers in a restaurant if they would like to order dessert. If they do, it asks them what kind of dessert. If they order tiramisu they are told that the tiramisu is sold out.
-                Can you get the code to work?
+                此代码询问餐厅的顾客是否要订购甜点。如果他们这样做，它会问他们什么样的甜点。如果他们订购提拉米苏，他们会被告知提拉米苏已经售罄。
+                你能让代码工作吗？
             code: |-
                 order = {ask} 'Would you like to order dessert?'
                 {if} order = yes
@@ -193,8 +193,8 @@ levels:
     10:
         1:
             story: |-
-                Help this family out by creating a schedule of who is cooking and what they should be making this week. The remove commands make sure nobody has to cook twice and they have a differnet dinner every day.
-                **Mind!** the variable order should be first days, then people, and lastly dinner_options. This goes for the lines with the remove commands too.
+                通过制定谁在做饭以及他们本周应该做什么的时间表来帮助这个家庭。删除命令确保没有人必须做两次饭，并且他们每天都有不同的晚餐。
+                **注意！**可变顺序应该是第一天，然后是人，最后是晚餐选项。这也适用于带有删除命令的行。
             code: |-
                 days = Monday, Tuesday, Wednesday, Thursday, Friday
                 people = mom, dad, Martin, Abby, Jesse
@@ -207,8 +207,8 @@ levels:
                     {remove} chosen_dinner {from} dinner_options
         2:
             story: |-
-                This make-over robot will decide your new hairstyle for you. If you do not agree with the first choice, you can try again.
-                **Mind** The variable people is defined in the first line. The variable hairstyles in the second.
+                这个化妆机器人将为您决定您的新发型。如果您不同意第一个选择，可以重试。
+                **头脑**变量人定义在第一行。第二个中的可变发型。
             code: |-
                 people = Betty, Amanda, Marc
                 hairstyles = a bald head, a mohawk, a ponytail, spikes
@@ -221,17 +221,17 @@ levels:
                         {print} 'Lets try again... Then 'person ' will get ' hairstyles {at} {random}
     11:
         1:
-            story: Create the count down clock for New Year's eve! The program should show the numbers from 10 to 1 for a second and then wish you a happy new year.
+            story: 为除夕夜创建倒计时时钟！该程序应该显示从 10 到 1 的数字一秒钟，然后祝您新年快乐。
             code: |-
-                {for} number {in} {range} 10 {to} 1
-                    {print} number
+                {for} 数字 {in} {range} 10 {to} 1
+                    {print} 数字
                     {sleep}
                     {clear}
-                {print} 'Happy New Year!'
+                {print}“新年快乐！”
         2:
             story: |-
-                Create a program that tells us the final results of the science fair. Firstly define the variable contestants, then the variable place.
-                **Hint** Line 5 should be the sleep command, and you should end with saying congratulations.
+                创建一个程序，告诉我们科学博览会的最终结果。首先定义可变参赛者，然后定义可变位置。
+                **提示** 第 5 行应该是睡眠命令，您应该以表示祝贺结束。
             code: |-
                 {print} 'And now we will reveal the results of the science fair'
                 contestants = Vivienne, Paul, Trixy, Bianca, Katya
@@ -244,16 +244,16 @@ levels:
     12:
         1:
             story: |-
-                Sing the song 'What shall we do with the drunken sailor'. In case you don't know it, the song goed like this:
+                唱这首歌“我们该怎么办醉酒的水手”。如果你不知道，这首歌是这样的：
 
-                What will we do with the drunken sailor
-                What will we do with the drunken sailor
-                What will we do with the drunken sailor
-                Early in the morning
-                Way hey and up she rises
-                Way hey and up she rises
-                Way hey and up she rises
-                Early in the morning
+                我们将如何处理醉酒的水手
+                我们将如何处理醉酒的水手
+                我们将如何处理醉酒的水手
+                清晨
+                她冉冉升起
+                她冉冉升起
+                她冉冉升起
+                清晨
             code: |-
                 verses = 'What will we do with the drunken sailor', 'Way hey and up she rises'
                 {for} verse {in} verses
@@ -261,7 +261,7 @@ levels:
                         {print} verse
                     {print} 'Early in the morning'
         2:
-            story: Play a game of Twister with us! First define the variable people, then limbs, then colors.
+            story: 和我们一起玩龙卷风游戏！首先定义可变的人，然后是四肢，然后是颜色。
             code: |-
                 people = 'Jess', 'Nick', 'Winston'
                 limbs = 'left hand', 'left foot', 'right hand', 'right foot'
