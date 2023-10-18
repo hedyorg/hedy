@@ -13,7 +13,7 @@
    <div class="flex flex-col gap-4 mx-4 lg:mx-16">
        {% if invite_data %}
            <h1 class="section-header" id="my-messages" onclick="$ ('#messages').toggle()">{{_('my_messages')}}</h1>
-           <div id="messages" class="profile-section-body">
+           <div id="messages" class="profile-section-body" style="display: block;">
              <h2 class="profile-section-body-header">{{_('my_messages')}}</h2>
              {% if invite_data %}
                  <div>
