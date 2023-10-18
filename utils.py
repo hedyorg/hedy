@@ -301,6 +301,10 @@ def session_id():
     return session['session_id']
 
 
+def add_pending_achievement(data):
+    session['pending_achievements'] = session.get('pending_achievements', []) + [data]
+
+
 # https://github.com/python-babel/babel/issues/454
 def customize_babel_locale(custom_locales: dict):
     from babel.core import get_global
