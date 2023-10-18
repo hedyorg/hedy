@@ -1,14 +1,14 @@
 levels:
     1:
         1:
-            question_text: What's this programming language called?
+            question_text: Come si chiama questo linguaggio di programmazione?
             mp_choice_options:
             -   option: Hedy
-                feedback: Good job!
+                feedback: Buon lavoro!
             -   option: Heddy
-                feedback: Not this one!
+                feedback: Non questo!
             -   option: Haydie
-                feedback: Not this one!
+                feedback: Non questo!
             -   option: Heidi
                 feedback: Not this one!
             hint: Prende il nome da Hedy Lamarr.
@@ -16,7 +16,7 @@ levels:
             question_score: '10'
         2:
             question_text: Which command makes text appear?
-            code: ___ Hello!
+            code: _Ciao!
             mp_choice_options:
             -   option: |-
                     ```
@@ -27,7 +27,7 @@ levels:
                     ```
                     {print}
                      ```
-                feedback: Correct!
+                feedback: Corretto!
             -   option: |-
                     ```
                     hello
@@ -38,7 +38,7 @@ levels:
                     {ask}
                     ```
                 feedback: With `{ask}`, you can ask a question.
-            hint: _?_ Hello world!
+            hint: _Ciao mondo!
             correct_answer: B
             question_score: '10'
         3:
@@ -51,7 +51,7 @@ levels:
                 feedback: '`{print}` prints text, but it doesn''t ask questions.'
             -   option: |-
                     ```
-                    {ask} {print} What is your favorite color?
+                    {ask} {print} Qual è il tuo colore preferito?
                     ```
                 feedback: Hai bisogno di un solo comando, non due.
             -   option: |-
@@ -68,7 +68,7 @@ levels:
             correct_answer: C
             question_score: '10'
         4:
-            question_text: What is wrong with this code?
+            question_text: Cosa c'è di sbagliato in questo codice?
             code: |-
                 Hi Im Hedy!
                 {ask} Who are you?
@@ -78,7 +78,7 @@ levels:
                 feedback: Correct!
             -   option: Im in line 1 is spelled wrong.
                 feedback: Im is spelled wrong on purpose; Hedy doesn't understand the apostrophes yet.
-            -   option: '`{echo}` isn''t a command.'
+            -   option: '`{echo}` non è un comando.'
                 feedback: '`{echo}` is a command, there''s another mistake.'
             -   option: Nothing! This is a perfect code!
                 feedback: Wrong, look carefully!
@@ -167,7 +167,7 @@ levels:
             correct_answer: C
             question_score: '10'
         9:
-            question_text: What's wrong with this code?
+            question_text: Cosa c'è di sbagliato in questo codice?
             code: |-
                 {print} Hello!
                 {print} How are you doing?
@@ -185,7 +185,7 @@ levels:
             correct_answer: B
             question_score: '10'
         10:
-            question_text: Which output will be in your outputscreen after you've run this code?
+            question_text: Quale output sarà nella schermata di output dopo aver eseguito questo codice?
             code: |-
                 {ask} Are you ready to go to level 2?
                 {echo}
@@ -785,7 +785,7 @@ levels:
                     {print} 'You win... prices {at} {random}'
                     ```
                 feedback: Hedy will literally print 'prices {at} {random}''
-            hint: 'Think carefully: what is a variable and should be outside of the quotation marks? And what are normal words that should be inside?.'
+            hint: 'Pensa attentamente: cos''è una variabile e dovrebbe essere fuori dalle virgolette? E quali sono le parole normali che dovrebbero esserci dentro?'
             correct_answer: A
             question_score: '10'
         7:
@@ -887,7 +887,7 @@ levels:
                 feedback: '`No these commands remain the same'
             -   option: In level 5 `{ask}` and `{print}` work the same as in level 4
                 feedback: Correct!
-            hint: We have only learned a new command in level 5.
+            hint: Quale va insieme al comando `{if}`?
             correct_answer: D
             question_score: '10'
         2:
@@ -1368,7 +1368,7 @@ levels:
             correct_answer: A
             question_score: '10'
         5:
-            question_text: Is this code right or wrong?
+            question_text: Questo codice è giusto o sbagliato?
             code: '{repeat} 100 {times} {print} ''Hedy is awesome!'''
             mp_choice_options:
             -   option: Correct
@@ -1393,7 +1393,7 @@ levels:
                     the wheels on the bus go
                     the wheels on the bus go
                     round and round
-                feedback: Only the second line is repeated 3 times
+                feedback: Solo la seconda riga viene ripetuta 3 volte
             -   option: |-
                     the wheels on the bus go
                     round and round
@@ -1431,7 +1431,7 @@ levels:
                     ROCK YOU!
                     We will
                     ROCK YOU!
-                feedback: ROCK YOU! won't be repeated
+                feedback: ROCK TU! non sarà ripetuto
             -   option: |-
                     We will
                     ROCK YOU!
@@ -1440,7 +1440,7 @@ levels:
             correct_answer: B
             question_score: '10'
         8:
-            question_text: Welke Hedy code hoort bij dit resultaat
+            question_text: Quale codice Hedy appartiene a questo output?
             code: |-
                 Here comes the sun
                 Do do do do
@@ -1478,7 +1478,7 @@ levels:
                     {print} 'And I say'
                     {print} 'Its alright'"
                     ```
-                feedback: Dit is niet de juiste volgorde..
+                feedback: Questo non è l'ordine corretto..
             hint: '`{repeat}` kan alleen worden gebruikt als je dezelfde regel meerdere keren achter elkaar wil uitvoeren.'
             correct_answer: A
             question_score: '10'
@@ -1524,7 +1524,7 @@ levels:
                     {print} 'Please help me !'
                     ```
                 feedback: Perfect
-            hint: '''Help !'' wordt 3x herhaald.'
+            hint: '''Aiuto!'' viene ripetuto 3 volte.'
             correct_answer: D
             question_score: '10'
         10:
@@ -1541,47 +1541,47 @@ levels:
                     {print} 'if youre happy and you know it and you really want to show it'
                     {print} 'if youre happy and you know it clap your hands'
                     ```
-                feedback: Almost! the first line needs an extra word
+                feedback: Quasi! la prima riga necessita di una parola in più
             -   option: |-
                     ```
-                    {repeat} 2 {times} {print} 'if youre happy and you know it clap your hands'
-                    {print} 'if youre happy and you know it and you really want to show it'
-                    {print} 'if youre happy and you know it clap your hands'
+                    {repeat} 2 {times} {print} 'se sei felice e lo sai batti le mani'
+                    {print} 'se sei felice e lo sai e vuoi davvero dimostrarlo'
+                    {print} 'se sei felice e lo sai batti le mani'
                     ```
-                feedback: Great!
+                feedback: Grande!
             -   option: |-
                     ```
-                    {repeat} 3 {times} {print} 'if youre happy and you know it clap your hands'
-                    {print} 'if youre happy and you know it and you really want to show it'
+                    {repeat} 3 {times} {print} 'se sei felice e lo sai batti le mani'
+                    {print} 'se sei felice e lo sai e vuoi davvero dimostrarlo'
                     ```
-                feedback: This is not in the right order.
+                feedback: Questo non è nell'ordine giusto.
             -   option: |-
                     ```
-                    {repeat} 4 {times} 'if youre happy and you know it'
-                    {repeat} 2 times 'clap your hands'
-                    {print} 'and you really want to show it'
-                    {print} 'clap your hands'
+                    {repeat} 4 {times} 'se sei felice e lo sai'
+                    {repeat} 2 {times} 'batti le mani'
+                    {print} 'e vuoi davvero mostrarlo'
+                    {print} 'batti le mani'
                     ```
-                feedback: This is not in the right order.
-            hint: Mind the order of the sentences.
+                feedback: Questo non è nell'ordine giusto.
+            hint: Attenzione all'ordine delle frasi.
             correct_answer: B
             question_score: '10'
     8:
         1:
-            question_text: Which output will be produced by this code?
+            question_text: Quale output sarà prodotto da questo codice?
             code: |-
                 {repeat} 2 {times}
-                    {print} 'Hello'
-                    {print} 'Im Hedy!'
+                    {print} 'Ciao'
+                    {print} 'Sono Hedy!'
             mp_choice_options:
             -   option: |-
-                    Hello
-                    Im Hedy!
-                feedback: Everything is printed twice.
+                    Ciao
+                    Sono Hedy!
+                feedback: Tutto viene stampato due volte.
             -   option: |-
-                    Hello
-                    Hello
-                    Im Hedy
+                    Ciao
+                    Ciao
+                    Sono Hedy
                 feedback: The second line is repeated twice as well.
             -   option: |-
                     Hello
@@ -1611,7 +1611,7 @@ levels:
             -   option: There is a spelling mistake in the `{repeat}` command.
                 feedback: Nee, repeat is de goede spelling
             -   option: The second line need to start with 4 spaces as indentation.
-                feedback: Correct!
+                feedback: Corretto!
             hint: Something is missing in the second line?
             correct_answer: D
             question_score: '10'
