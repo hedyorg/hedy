@@ -20,7 +20,11 @@
                      {{_('invite_message')}} "<span class="font-bold italic">{{ invite_data['class_name'] }}</span>".<br>
                      {{_('sent_by')}} "<span class="font-bold italic">{{ invite_data['teacher'] }}</span>". {{_('prompt_join_class')}}
                      <div class="flex flex-row mt-4">
-                            <button type="reset" class="green-btn" id="join-link" onclick="window.open('/hedy/l/{{ invite_data['join_link'] }}', '_self');">{{_('join_class')}}</button>
+                            <button type="reset" class="green-btn" id="join" 
+                                hx-post="/class/join/{{invite_data['class_id']}}"
+                                hx-swap="none"
+                                _="on htmx:afterRequest if detail.xhr.status == '302' then set window.location.pathname to '/programs' else log detail.xhr end"
+                                >{{_('join_class')}} {{ invite_data['invited_as'] }}</button>
                             <button type="submit" class="red-btn mx-4 px-4" onclick="hedyApp.remove_student_invite('{{user_data['username']}}', '{{invite_data['class_id']}}', '{{_('delete_invite_prompt')}}')">{{_('delete_invite')}}</button>
                     </div>
                  </div>
