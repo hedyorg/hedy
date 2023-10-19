@@ -1,0 +1,101 @@
+@top Program { eol* (Command eol+)* Command? }
+
+Command {
+    Assign | AssignList | Ask | Clear |Print | Turtle | Sleep | Add | Remove | If | Else | Repeat | For | Define | Call | Return | ErrorInvalid
+}
+
+IfLessCommand {
+    Assign | AssignList | Ask | Clear |Print | Turtle | Sleep | Add | Remove | Repeat | For | Define | Call | Return | ErrorInvalid
+}
+
+@local tokens {    
+    stringEnd { "'" | "\n" }    
+    @else stringContent
+  }
+  
+  @skip {} {
+    String { "'" (stringContent)* stringEnd }
+}
+
+
+Print { skw<"print"> ( ListAccess | Expression | Call )+ }
+
+AssignList { Text (skw<"is"> | Op<"=">) (Text+ | Number ) ~ambig  (Op<","> (Text+ | Number ))+ } // Op<","> doesn't really parse well if it is not separated by spaces
+Assign { Text (skw<"is"> | Op<"=">) (Expression ~ambig  | ListAccess)+ }
+Ask { Text (skw<"is"> | Op<"=">) skw<"ask"> ( ListAccess | Expression )+ }
+Sleep { skw<"sleep"> (Expression | ListAccess | Call)? }
+
+ListAccess { Text kw<"at"> (kw<"random"> | Text) }
+
+Turtle[@isGroup=turtle] {
+    Forward { skw<"forward"> (Expression | ListAccess | Call) } |
+    Turn { skw<"turn"> (Expression | ListAccess | Call) } |
+    Color { skw<"color"> (Expression | ListAccess | Call)  }
+}   
+
+Add { skw<"add"> (Expression | Call ) skw<"to"> Text }
+Remove { skw<"remove"> (Expression | Call) skw<"from"> Text }
+Clear { skw<"clear"> }
+ErrorInvalid[@dynamicPrecedence=-10] { Text+ }
+
+If { skw<"if"> Condition ((skw<"and"> | skw<"or">) Condition)* IfLessCommand? Else? }
+Else { kw<"else"> IfLessCommand? }
+
+Condition {    
+    EqualityCheck { Text (skw<"is"> | Op<"=">) (String | Text | Number | skw<"pressed">) } |
+    ListCheck { (Text | Number) skw<"not">? skw<"in">  Text }
+}
+
+
+Repeat { skw<"repeat"> (Number | Text) skw<"times"> IfLessCommand }
+
+For { skw<"for"> Text skw<"in"> (Text | skw<"range"> (Text | Number) skw<"to"> (Text | Number)) }
+
+Define { skw<"define"> Text (kw<"with">  Arguments)? }
+Call { kw<"call"> Text (kw<"with"> Arguments) }
+Return { skw<"return"> ( ListAccess | Expression | Call)+ }
+
+
+Arguments { argument (Op<","> argument)* }
+argument { Expression | ListAccess }
+
+
+kw<term> { @specialize[@name={term}]<Text, term> }
+skw<term> { @extend[@name={term}]<Text, term> }
+Op<expr> { expr }
+
+
+atom { Number | Text }
+
+binaryExpression {
+    Expression !times Op<"*" | "/"> Expression |
+    Expression !plus Op<"+" | "-"> Expression
+}
+
+// I should add Call here, but it works for now
+Expression {
+    Number |
+    Text |
+    String |
+    binaryExpression
+}
+
+@precedence {
+    times @left,
+    plus @right
+}
+
+
+@tokens {
+    @precedence {
+        Number,
+        Text
+    }
+    Comment { "#" ![\n]* }
+    eol { "\n" }
+    Text { ![^\n,،，、 '+#/*\-=]+ } // a little bit of a hack not to parse commas never, but lezer adds them as error nodes, so it still
+    space { " " }
+    Number { @digit+ ("." @digit+)? }
+}
+
+@skip { Comment | space }
