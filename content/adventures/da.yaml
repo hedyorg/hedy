@@ -541,7 +541,7 @@ adventures:
                     {else} {print} 'Wrong! It was ' _
                     ```
                 story_text_3: |
-                    You can also let the computer do random sums on its own using random.
+                    You can also let the computer do random calculations on its own using {random}.
                     This is how you choose a number of tables to practice, and from that you always get a different sum:
                 start_code: '{print} ''Welcome to this calculator!'''
             9:
@@ -845,9 +845,9 @@ adventures:
                     {for} dyr {in} alle_dyr
                       {print} 'Jeg elsker ' dyr
             11:
-                story_text: |-
-                    `{print}` virker på samme måde men vi tilføjer en ny slags `{for}`. Du kan nu skrive `{for} counter {in} {range} 1 {to} 5` i stedet for `{repeat} 5 {times}` og bruge `counter` i dit program.
-                    Prøv og se hvad der sker! Husk at bruge indrykning efter `{for}` og `{if}` kommandoen (De betyder at linjen starter med fire mellemrum).
+                story_text: |
+                    You have reached level 11, you're doing great! In the higher levels, Hedy is focussing more and more on teaching you the programming language Python.
+                    In Python there is no `{repeat}` command, but there is a command that works like {repeat}. Are you curious to find out how to say `{repeat}` in Python language? Quickly go on to find out!
                 start_code: |-
                     {for} tæller {in} {range} 1 {to} 5
                         {print} tæller
@@ -3635,7 +3635,7 @@ adventures:
                 example_code_2: |
                     ```
                     kanter = {ask} 'Hvor mange kanter skal jeg tegne?'
-                    vinkel = 360 / hjørner
+                    vinkel = 360 / kanter
                     {repeat} kanter {times}
                         {turn} _
                         {forward} _

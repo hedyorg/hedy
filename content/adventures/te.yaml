@@ -548,7 +548,7 @@ adventures:
                     {else} {print} 'Wrong! It was ' _
                     ```
                 story_text_3: |
-                    You can also let the computer do random sums on its own using random.
+                    You can also let the computer do random calculations on its own using {random}.
                     This is how you choose a number of tables to practice, and from that you always get a different sum:
                 start_code: '{print} ''Welcome to this calculator!'''
             9:
@@ -852,9 +852,9 @@ adventures:
                     {for} animal {in} animals
                       {print} 'I love ' animal
             11:
-                story_text: |-
-                    `{print}` works just the same but we add a new form of the `{for}`. You can now write `{for} counter {in} {range} 1 {to} 5` instead of `{repeat} 5 {times}` and use `counter` in your program.
-                    Try it out to see what happens! Remember to use indentations after the `{for}` and `{if}` statements (That means starting a sentence with four spaces).
+                story_text: |
+                    You have reached level 11, you're doing great! In the higher levels, Hedy is focussing more and more on teaching you the programming language Python.
+                    In Python there is no `{repeat}` command, but there is a command that works like {repeat}. Are you curious to find out how to say `{repeat}` in Python language? Quickly go on to find out!
                 start_code: |-
                     {for} counter {in} {range} 1 {to} 5
                         {print} counter
@@ -3658,9 +3658,9 @@ adventures:
                     Can you figure out how far the turtle has to turn here? Finish the code and you can draw any polygon you'd like!
                 example_code_2: |
                     ```
-                    angles = {ask} 'How many angles should I draw?'
-                    angle = 360 / angles
-                    {repeat} angle {times}
+                    figure = {ask} 'How many angles should I draw?'
+                    angle = 360 / figure
+                    {repeat} figure {times}
                         {turn} _
                         {forward} _
                     ```

@@ -842,9 +842,9 @@ adventures:
                     {for} kafsha {in} kafshët
                       {print} 'Un e dua' kafsha
             11:
-                story_text: |-
-                    `{print}` punon njëlloj por ne shtojmë një mënyrë të re të komandës `{for}`. Tani mund të shkruani `{for} counter {in} {range} 1 {to} 5` në vend të `{repeat} 5 {times}` dhe përdorni `counter` in your program.
-                    Provojeni dhe shiheni çfarë ndodhën! Mbani mend hapësirat para rreshtave nën komandat `{for}` dhe `{if}` (Kjo do të thotë të shkruani 4 hapësira, pastaj kodin).
+                story_text: |
+                    You have reached level 11, you're doing great! In the higher levels, Hedy is focussing more and more on teaching you the programming language Python.
+                    In Python there is no `{repeat}` command, but there is a command that works like {repeat}. Are you curious to find out how to say `{repeat}` in Python language? Quickly go on to find out!
                 start_code: |-
                     {for} numëruesi {in} {range} 1 {to} 5
                         {print} numëruesi
@@ -3625,14 +3625,7 @@ adventures:
                 story_text_2: |
                     Gjithashtu, mund ta përmirësojmë programin që vizaton figura.
                     A mund ta kuptoni sa herë duhet që breshka të kthehet këtu? Përfundojeni kodin dhe pastaj mund të vizatoni çdo poligon që dëshironi!
-                example_code_2: |
-                    ```
-                    këndet = {ask} 'Sa kënde duhet të vizatoj?'
-                    këndi = 360 / këndet
-                    {repeat} këndi {times}
-                        {turn} _
-                        {forward} _
-                    ```
+                example_code_2: "```\nkëndet = {ask} 'Sa kënde duhet të vizatoj?'\nkëndi = 360 / këndet \n{repeat} këndet {times}\n    {turn} _\n    {forward} _\n```\n"
                 start_code: këndet = {ask} 'Sa kënde duhet të vizatoj?'
             9:
                 story_text: |

@@ -541,7 +541,7 @@ adventures:
                     {else} {print} 'Wrong! It was ' _
                     ```
                 story_text_3: |
-                    **Extra** You can also let the computer do random sums on its own using random.
+                    **Extra** You can also let the computer do random sums on its own using `{random}`.
 
                     This is how you choose a number of tables to practice, and from that you always get a different sum:
                 start_code: |
@@ -884,7 +884,7 @@ adventures:
                 start_code: '{print} ''Lets go to the next tab!'''
             11:
                 story_text: |
-                    You have reached level 10, you're doing great! In the higher levels, Hedy is focussing more and more on teaching you the programming language Python.
+                    You have reached level 11, you're doing great! In the higher levels, Hedy is focussing more and more on teaching you the programming language Python.
                     In Python there is no `{repeat}` command, but there is a command that works like {repeat}. Are you curious to find out how to say `{repeat}` in Python language? Quickly go on to find out!
                 start_code: '{print} ''Lets go to the next tab!'''
             12:
@@ -2953,7 +2953,7 @@ adventures:
             10:
                 story_text: |
                     ### Exercise
-                    In the previous levels you have often made your own rock paper scissors game. Can you finish the code and use the {for} command properly to get the game to work?
+                    In the previous levels you have often made your own rock paper scissors game. Can you finish the code and use the `{for}` command properly to get the game to work?
                 example_code: |
                     ```
                     choices = _
@@ -3040,7 +3040,7 @@ adventures:
                 example_code: |
                     ```
                     name {is} {ask} 'What is your name?'
-                    if name {is} '_'
+                    {if} name {is} '_'
                         a {is} 'Go to the airport '
                     {else}
                         a {is} 'Go to the trainstation '

@@ -531,7 +531,7 @@ adventures:
                     {else} {print} 'Wrong! It was ' correct_answer
                     ```
                 story_text_2: |
-                    You can also let the computer do random sums on its own using random.
+                    You can also let the computer do random calculations on its own using {random}.
                     This is how you choose a number of tables to practice, and from that you always get a different sum:
                 example_code_2: |
                     ```
@@ -545,7 +545,7 @@ adventures:
                     {else} {print} 'mistake! it was ' correct_answer
                     ```
                 story_text_3: |
-                    You can also let the computer do random sums on its own using random.
+                    You can also let the computer do random calculations on its own using {random}.
                     This is how you choose a number of tables to practice, and from that you always get a different sum:
                 start_code: '{print} ''Welcome to this calculator!'''
             9:
@@ -843,11 +843,9 @@ adventures:
                     {for} animal {in} animals
                       {print} 'I love ' animal
             11:
-                story_text: |-
-                    На цьому рівні ми додаємо нову форму `{for}`. На попередніх рівнях ми використовували `{for}` зі списком, але ми також можемо використовувати `{for}` з числами.
-                    Ми робимо це, додаючи ім'я змінної, за яким слідує `{in}` `{range}`.  Потім ми пишемо число, з якого почнемо, `{to}` і число, на якому треба закінчити.
-
-                    Спробуйте приклад і подивіться, що вийде! У цьому рівні вам знову потрібно буде використовувати відступи у рядках під `{for}` деклараціями.
+                story_text: |
+                    You have reached level 11, you're doing great! In the higher levels, Hedy is focussing more and more on teaching you the programming language Python.
+                    In Python there is no `{repeat}` command, but there is a command that works like {repeat}. Are you curious to find out how to say `{repeat}` in Python language? Quickly go on to find out!
                 start_code: |-
                     {for} counter {in} {range} 1 {to} 5
                         {print} counter
@@ -1201,9 +1199,10 @@ adventures:
                         {print} 'I love ' animal
             11:
                 story_text: |-
-                    In this level, we add a new form of the `{for}`. In earlier levels, we used `{for}` with a list, but we can also use `{for}` with numbers.
-                    We do that by adding a variable name, followed by  `{in}` `{range}`. We then write the number to start at, `{to}` and the number to end at.
-                    Try the example to see what happens! In this level again, you will need to use indentations in lines below the `{for}` statements.
+                    На цьому рівні ми додаємо нову форму `{for}`. На попередніх рівнях ми використовували `{for}` зі списком, але ми також можемо використовувати `{for}` з числами.
+                    Ми робимо це, додаючи ім'я змінної, за яким слідує `{in}` `{range}`.  Потім ми пишемо число, з якого почнемо, `{to}` і число, на якому треба закінчити.
+
+                    Спробуйте приклад і подивіться, що вийде! У цьому рівні вам знову потрібно буде використовувати відступи у рядках під `{for}` деклараціями.
                 example_code: |
                     ```
                     {for} counter {in} {range} 1 {to} 10
@@ -3587,9 +3586,9 @@ adventures:
                     Can you figure out how far the turtle has to turn here? Finish the code and you can draw any polygon you'd like!
                 example_code_2: |
                     ```
-                    angles = {ask} 'How many angles should I draw?'
-                    angle = 360 / angles
-                    {repeat} angle {times}
+                    figure = {ask} 'How many angles should I draw?'
+                    angle = 360 / figure
+                    {repeat} figure {times}
                         {turn} _
                         {forward} _
                     ```

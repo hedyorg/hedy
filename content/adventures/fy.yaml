@@ -512,7 +512,7 @@ adventures:
                     {else} {print} 'Wrong! It was ' correct_answer
                     ```
                 story_text_2: |
-                    You can also let the computer do random sums on its own using random.
+                    You can also let the computer do random calculations on its own using {random}.
                     This is how you choose a number of tables to practice, and from that you always get a different sum:
                 example_code_2: |
                     ```
@@ -526,7 +526,7 @@ adventures:
                     {else} {print} 'mistake! it was ' correct_answer
                     ```
                 story_text_3: |
-                    You can also let the computer do random sums on its own using random.
+                    You can also let the computer do random calculations on its own using {random}.
                     This is how you choose a number of tables to practice, and from that you always get a different sum:
                 start_code: '{print} ''Welcome to this calculator!'''
             9:
@@ -885,7 +885,9 @@ adventures:
                     for dier in dieren
                       print dier ' is een leuk dier!'
             11:
-                story_text: "Wy feroarje no `repeat` yn `for`! No typst `for i in range 1 to 5`, ynstee fan `repeat 5 times`. \nIt leuke is datst dy fariabele `i` ek yn dyn programma brûke kinst!\nTink derom datst noch hieltiid alle rigels dy't werhelle wurde moatte, ynspringst mei 4 spaasjes."
+                story_text: |
+                    You have reached level 11, you're doing great! In the higher levels, Hedy is focussing more and more on teaching you the programming language Python.
+                    In Python there is no `{repeat}` command, but there is a command that works like {repeat}. Are you curious to find out how to say `{repeat}` in Python language? Quickly go on to find out!
                 start_code: |-
                     for i in range 1 to 10
                         print i
@@ -3707,9 +3709,9 @@ adventures:
                     Can you figure out how far the turtle has to turn here? Finish the code and you can draw any polygon you'd like!
                 example_code_2: |
                     ```
-                    angles = {ask} 'How many angles should I draw?'
-                    angle = 360 / angles
-                    {repeat} angle {times}
+                    figure = {ask} 'How many angles should I draw?'
+                    angle = 360 / figure
+                    {repeat} figure {times}
                         {turn} _
                         {forward} _
                     ```

@@ -549,7 +549,7 @@ adventures:
                     {else} {print} 'Yanlış! doğru cevap ' _
                     ```
                 story_text_3: |
-                    **Ek Görev** rastgele komutunu kullanarak bilgisayarın kendi başına rastgele toplamalar yapmasını da sağlayabilirsiniz.
+                    **Ek Görev** `{random}` komutunu kullanarak bilgisayarın kendi başına rastgele toplamalar yapmasını da sağlayabilirsiniz.
 
                     Bu şekilde, pratik yapmak için bir sayı tablosu seçersiniz ve bundan her zaman farklı bir toplama elde edersiniz:
                 start_code: |
@@ -892,7 +892,7 @@ adventures:
                 start_code: '{print} ''Hadi bir sonraki sekmeye geçelim!'''
             11:
                 story_text: |
-                    Seviye 10'a ulaştınız, harika gidiyorsunuz! Daha yüksek seviyelerde, Hedy size Python programlama dilini öğretmeye daha fazla odaklanıyor.
+                    Seviye 11'e ulaştınız, harika gidiyorsunuz! Daha yüksek seviyelerde, Hedy size Python programlama dilini öğretmeye daha fazla odaklanıyor.
                     Python'da `{repeat}` komutu yoktur, ancak {repeat} gibi çalışan bir komut vardır. Python dilinde `{repeat}` komutunun nasıl söylendiğini merak ediyor musunuz? Öğrenmek için hemen devam edin!
                 start_code: '{print} ''Hadi bir sonraki sekmeye geçelim!'''
             12:
@@ -2984,7 +2984,7 @@ adventures:
             10:
                 story_text: |
                     ### Alıştırma
-                    Önceki seviyelerde, kendi taş kağıt makas oyununuzu bolca yaptınız. Bu kodu tamamlayıp oyunun çalışmasını sağlamak için {for} komutunu düzgün bir şekilde kullanabilir misiniz?
+                    Önceki seviyelerde, kendi taş kağıt makas oyununuzu bolca yaptınız. Bu kodu tamamlayıp oyunun çalışmasını sağlamak için `{for}` komutunu düzgün bir şekilde kullanabilir misiniz?
                 example_code: |
                     ```
                     seçimler = _
@@ -3071,7 +3071,7 @@ adventures:
                 example_code: |
                     ```
                     isim {is} {ask} 'Senin adın ne?'
-                    eğer isim {is} '_'
+                    {if} isim {is} '_'
                         a {is} 'Havaalanına git '
                     {else}
                         a {is} 'Tren istasyonuna git '

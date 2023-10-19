@@ -554,7 +554,7 @@ adventures:
                     {else} {print} 'Wrong! It was ' _
                     ```
                 story_text_3: |
-                    You can also let the computer do random sums on its own using random.
+                    You can also let the computer do random calculations on its own using {random}.
                     This is how you choose a number of tables to practice, and from that you always get a different sum:
                 start_code: '{print} ''Welcome to this calculator!'''
             9:
@@ -789,7 +789,7 @@ adventures:
                     Som-hi!, anem a la següent pestanya a descobrir la nova comanda!
                 example_code: |
                     ```
-                    contrassenya {is}{ask}'Quina és la contrassenya correcta?'
+                    contrasenya {is} {ask} 'Quina és la contrassenya correcta?'
                     ```
                 start_code: |-
                     nom {is} {ask} 'Quin és el teu nom?'
@@ -879,7 +879,7 @@ adventures:
                 start_code: '{print} ''Som-hi!, cap a la següent pestanya!'''
             11:
                 story_text: |
-                    Has arribat al nivell 10! Ho estàs fent genial! Als nivells superiors, Hedy es focalitza en ensenyar-te més i més el llenguatge Python.
+                    Has arribat al nivell 11! Ho estàs fent genial! Als nivells superiors, Hedy es focalitza en ensenyar-te més i més el llenguatge Python.
                     A Python no hi ha la comanada `{repeat}`. Hi ha, però una comanda molt similar a {repeat}. No estàs curós per saber com fer la comanda `{repeat}` a Python? Corre, ves a descobrir-ho!
                 start_code: '{print} ''Som-hi!, cap a la següent pestanya!'''
             12:
@@ -3695,9 +3695,9 @@ adventures:
                     Can you figure out how far the turtle has to turn here? Finish the code and you can draw any polygon you'd like!
                 example_code_2: |
                     ```
-                    angles = {ask} 'How many angles should I draw?'
-                    angle = 360 / angles
-                    {repeat} angle {times}
+                    figure = {ask} 'How many angles should I draw?'
+                    angle = 360 / figure
+                    {repeat} figure {times}
                         {turn} _
                         {forward} _
                     ```

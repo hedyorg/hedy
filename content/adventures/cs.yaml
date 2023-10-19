@@ -513,7 +513,7 @@ adventures:
                     {else} {print} 'Wrong! It was ' correct_answer
                     ```
                 story_text_2: |
-                    You can also let the computer do random sums on its own using random.
+                    You can also let the computer do random calculations on its own using {random}.
                     This is how you choose a number of tables to practice, and from that you always get a different sum:
                 example_code_2: |
                     ```
@@ -527,7 +527,7 @@ adventures:
                     {else} {print} 'mistake! it was ' correct_answer
                     ```
                 story_text_3: |
-                    You can also let the computer do random sums on its own using random.
+                    You can also let the computer do random calculations on its own using {random}.
                     This is how you choose a number of tables to practice, and from that you always get a different sum:
                 start_code: '{print} ''Welcome to this calculator!'''
             9:
@@ -850,9 +850,9 @@ adventures:
                     for animal in animals
                       print 'I love ' animal
             11:
-                story_text: |-
-                    `{print}`  funguje stejně, ale odteď budeme používat novou formu příkazu `{for}`! Teď můžeš napsat `{for} pocitadlo {in} {range} 1 {to} 5` a použít `pocitadlo` ve svém programu.
-                    Vyzkoušej si to a uvidíš, co se stane! Nezapomeň používat odsazení na řádcích za příkazy `{for}` a `{if}` (To znamená začínat řádek čtyřmi mezerami).
+                story_text: |
+                    You have reached level 11, you're doing great! In the higher levels, Hedy is focussing more and more on teaching you the programming language Python.
+                    In Python there is no `{repeat}` command, but there is a command that works like {repeat}. Are you curious to find out how to say `{repeat}` in Python language? Quickly go on to find out!
                 start_code: |-
                     for pocitadlo in range 1 to 5
                         print pocitadlo
@@ -3656,9 +3656,9 @@ adventures:
                     Dokážete určit, kolikrát se musí želva otočit? Dokončete kód a nakreslete libovolný mnohoúhelník!
                 example_code_2: |
                     ```
-                    angles = {ask} 'How many angles should I draw?'
-                    angle = 360 / angles
-                    {repeat} angle {times}
+                    figure = {ask} 'How many angles should I draw?'
+                    angle = 360 / figure
+                    {repeat} figure {times}
                         {turn} _
                         {forward} _
                     ```

@@ -515,7 +515,7 @@ adventures:
                     {else} {print} 'Wrong! It was ' correct_answer
                     ```
                 story_text_2: |
-                    You can also let the computer do random sums on its own using random.
+                    You can also let the computer do random calculations on its own using {random}.
                     This is how you choose a number of tables to practice, and from that you always get a different sum:
                 example_code_2: |
                     ```
@@ -529,7 +529,7 @@ adventures:
                     {else} {print} 'mistake! it was ' correct_answer
                     ```
                 story_text_3: |
-                    You can also let the computer do random sums on its own using random.
+                    You can also let the computer do random calculations on its own using {random}.
                     This is how you choose a number of tables to practice, and from that you always get a different sum:
                 start_code: '{print} ''Welcome to this calculator!'''
             9:
@@ -857,10 +857,9 @@ adventures:
                     for hewan in hewanhewan
                       print 'Aku suka ' hewan
             11:
-                story_text: |-
-                    ##Pengulangan!
-                    `{print}` berfungsi sama namun kita menambahkan form baru di `{for}`. Sekarang kamu bisa menuliskan `{for} counter {in} {range} 1 {to} 5` maupun `{reapeat} 5 {times}` dan gunakan `counter` pada program kamu.
-                    Cobalah lihat apa yang terjadi! Ingat untuk menggunakan indentasi sesudah perintah `{for}` dan `{if}` statements( Artinya mengawali baris dengan empat spasi).
+                story_text: |
+                    You have reached level 11, you're doing great! In the higher levels, Hedy is focussing more and more on teaching you the programming language Python.
+                    In Python there is no `{repeat}` command, but there is a command that works like {repeat}. Are you curious to find out how to say `{repeat}` in Python language? Quickly go on to find out!
                 start_code: |-
                     for pembilang in range 1 to 5
                         print pembilang
@@ -2653,7 +2652,14 @@ adventures:
                     ```
                 start_code: courses = appetizer, main course, dessert
             11:
-                story_text: Kamu dapat menggunakan `for i in range 1 to 5` untuk menampilkan pesanan dari berbagai pembeli secara terurut.
+                story_text: |
+                    We can use the `{for}` with `{range}` to print the orders from multiple customers in an orderly manner.
+
+                    ### Exercise
+                    Finish the restaurant code, so that you can ask for the order of multiple people. Print the order number each time: 'Order 1', 'Order 2', etc.
+                    Are you not sure how to go about this? Have a peek at your level 8 code.
+
+                    **Extra** In level 9 the restaurant also used prices. You can add that here too!
                 example_code: |
                     ```
                     print 'Selamat datang di rumah makan Hedy!'
@@ -3617,15 +3623,8 @@ adventures:
                         forward 50
                     ```
                 story_text_2: Selain itu, kita juga bisa meningkatkan kemampuan program untuk menggambar banyak bentuk. Dapatkah kamu tebak seberapa jauh sang kura-kura perlu berbelok disini? Selesaikan kodenya dan kamu dapat menggambar bentuk poligon apapun yang kamu suka!
-                example_code_2: |
-                    ```
-                    jumlahsudut is ask 'Berapa banyak sudut yang kamu mau?'
-                    sudut is 360 / jumlahsudut
-                    repeat sudut times
-                        turn _
-                        forward_
-                    ```
-                start_code: hoeken is ask 'Berapa banyak sudut yang aku harus gambar?'
+                example_code_2: "```\njumlahsudut = {ask} 'Berapa banyak sudut yang kamu mau?'\nsudut = 360 / jumlahsudut \n{repeat} jumlahsudut {times}\n    {turn} _\n    {forward} _\n```\n"
+                start_code: hoeken = {ask} 'Berapa banyak sudut yang aku harus gambar?'
             9:
                 story_text: |
                     Now that we can use a `{repeat}` inside a `{repeat}`, we can create more complex figures.

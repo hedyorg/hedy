@@ -516,7 +516,7 @@ adventures:
                     else print 'Nem jó! Ennyi: ' jo_valasz
                     ```
                 story_text_2: |
-                    You can also let the computer do random sums on its own using random.
+                    You can also let the computer do random calculations on its own using {random}.
                     This is how you choose a number of tables to practice, and from that you always get a different sum:
                 example_code_2: |-
                     ```
@@ -530,7 +530,7 @@ adventures:
                     else print 'hiba! ennyi: ' jo_valasz
                     ```
                 story_text_3: |
-                    You can also let the computer do random sums on its own using random.
+                    You can also let the computer do random calculations on its own using {random}.
                     This is how you choose a number of tables to practice, and from that you always get a different sum:
                 start_code: print 'Üdvözlünk a számológépnél!'
             9:
@@ -825,9 +825,9 @@ adventures:
                     {for} állat {in} állatok
                       {print} 'Szép ' állat
             11:
-                story_text: |-
-                    A `{print}` ugyanúgy működik, mint eddig, de a `{for}` parancsot egy új formával egészítjük ki. Ahelyett, hogy `{repeat} 5 {times}` írhatod azt, hogy `{for} számláló {in} {range} 1 {to} 5` és alatta használhatod, `számláló`t.
-                    Próbáld ki, és nézd meg, mi történik! Ne felejts el behúzásokat használni a `{for}` és `{if}` utasítások után. (Ez azt jelenti, hogy egy sort négy szóközzel kell kezdened.)
+                story_text: |
+                    You have reached level 11, you're doing great! In the higher levels, Hedy is focussing more and more on teaching you the programming language Python.
+                    In Python there is no `{repeat}` command, but there is a command that works like {repeat}. Are you curious to find out how to say `{repeat}` in Python language? Quickly go on to find out!
                 start_code: |-
                     {for} számláló {in} {range} 1 {to} 10
                         {print} számláló
@@ -3645,15 +3645,8 @@ adventures:
                 story_text_2: |
                     Also, we can now improve the program that draws different figures.
                     Can you figure out how far the turtle has to turn here? Finish the code and you can draw any polygon you'd like!
-                example_code_2: |-
-                    ```
-                    szogek is ask 'How many angles should I draw?'
-                    szog is 360 / szogek
-                    repeat szog times
-                        turn _
-                        forward_
-                    ```
-                start_code: szogek is ask 'Hány szöget kell rajzolnom?'
+                example_code_2: "```\nszogek = {ask} 'How many angles should I draw?'\nszog = 360 / szogek \n{repeat} szogek {times}\n    {turn} _\n    {forward} _\n```\n"
+                start_code: szogek = {ask}  'Hány szöget kell rajzolnom?'
             9:
                 story_text: |
                     Now that we can use a `{repeat}` inside a `{repeat}`, we can create more complex figures.

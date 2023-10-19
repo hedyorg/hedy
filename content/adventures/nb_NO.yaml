@@ -523,7 +523,7 @@ adventures:
                     {else} {print} 'feil! det var ' riktig_svar
                     ```
                 story_text_3: |
-                    You can also let the computer do random sums on its own using random.
+                    You can also let the computer do random calculations on its own using {random}.
                     This is how you choose a number of tables to practice, and from that you always get a different sum:
                 start_code: '{print} ''Velkommen til denne kalkulatoren!'''
             9:
@@ -818,8 +818,8 @@ adventures:
                         {print} 'Jeg elsker ' dyr
             11:
                 story_text: |
-                    `{print}` fungerer på samme måten som før, men vi legger til en ny versjon av `{for}`. Nå kan du skrive`{for} teller {in} {range} 1 {to} 5` and og bruke `teller` i programmet ditt. En {range} er bare noen tall som kommer etter hverandre på tall-linjen.
-                    Prøv det ut og se hva som skjer! Husk å ha innrykk på linjen etter `{for}` og `{if}` uttrykkene (det betyr at du må starte setningen med fire mellomrom)
+                    You have reached level 11, you're doing great! In the higher levels, Hedy is focussing more and more on teaching you the programming language Python.
+                    In Python there is no `{repeat}` command, but there is a command that works like {repeat}. Are you curious to find out how to say `{repeat}` in Python language? Quickly go on to find out!
                 start_code: |-
                     {for} teller {in} {range} 1 {to} 5
                         {print} teller
@@ -3574,12 +3574,11 @@ adventures:
                     ```
                     hjørner = {ask} 'Hvor mange hjørner skal jeg tegne?'
                     grader = 360 / hjørner
-                    {repeat} grader {times}
+                    {repeat} hjørner {times}
                         {turn} _
                         {forward} _
                     ```
-                start_code: |
-                    hjørner = {ask} 'Hvor mange hjørner skal jeg tegne?'
+                start_code: hjørner = {ask} 'Hvor mange hjørner skal jeg tegne?'
             9:
                 story_text: |
                     Now that we can use a `{repeat}` inside a `{repeat}`, we can create more complex figures.

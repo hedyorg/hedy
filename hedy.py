@@ -174,6 +174,16 @@ def needs_colon(rule):
     return f'{rule[0:pos]} _COLON {rule[pos:]}'
 
 
+def _translate_index_error(code, list_name):
+    exception_text = gettext('catch_index_exception').replace('{list_name}', style_command(list_name))
+    return textwrap.dedent(f"""\
+        try:
+          {code}
+        except IndexError:
+          raise Exception({repr(exception_text)})
+        """)
+
+
 PREPROCESS_RULES = {
     'needs_colon': needs_colon
 }
@@ -1493,17 +1503,8 @@ class ConvertToPython_1(ConvertToPython):
                     list_args.append(group[3])
                     lists_names.append(group[4])
         code = ""
-        exception_text_template = gettext('catch_index_exception')
         for i, list_name in enumerate(lists_names):
-            exception_text = exception_text_template.replace('{list_name}', style_command(list_name))
-            if "'" in exception_text:
-                exception_text = exception_text.replace("'", "\\'")
-            code += textwrap.dedent(f"""\
-            try:
-              {list_args[i]}
-            except IndexError:
-              raise Exception('{exception_text}')
-            """)
+            code += _translate_index_error(list_args[i], list_name)
         return code
 
 
@@ -2312,13 +2313,7 @@ class ConvertToPython_16(ConvertToPython_15):
     def change_list_item(self, meta, args):
         left_side = args[0] + '[' + args[1] + '-1]'
         right_side = args[2]
-        exception_text = gettext('catch_index_exception').replace('{list_name}', style_command(args[0]))
-        exception = textwrap.dedent(f"""\
-        try:
-          {left_side}
-        except IndexError:
-          raise Exception('{exception_text}')
-        """)
+        exception = _translate_index_error(left_side, args[0])
         return exception + left_side + ' = ' + right_side
 
     def ifs(self, meta, args):
@@ -2823,7 +2818,9 @@ def transpile(input_string, level, lang="en", skip_faulty=True):
         transpile_result = transpile_inner(input_string, level, lang, populate_source_map=True)
 
     except Exception as original_error:
-        if getenv('ENABLE_SKIP_FAULTY', False) and skip_faulty:
+        hedy_amount_lines = len(input_string.strip().split('\n'))
+
+        if getenv('ENABLE_SKIP_FAULTY', False) and skip_faulty and hedy_amount_lines > 1:
             if isinstance(original_error, source_map.exceptions_not_to_skip):
                 raise original_error
             try:
