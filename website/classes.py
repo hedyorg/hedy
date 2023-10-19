@@ -224,7 +224,7 @@ class ClassModule(WebsiteModule):
     def remove_second_teacher(self, user, class_id, second_teacher):
         print('\n\n\n', class_id, second_teacher)
         Class = self.db.get_class(class_id)
-        if not Class or Class["teacher"] != user["username"]: # only teachers can remove second teachers.
+        if not Class or Class["teacher"] != user["username"]:  # only teachers can remove second teachers.
             return gettext("ajax_error"), 400
         second_teacher = self.db.user_by_username(second_teacher)
         self.db.remove_second_teacher_from_class(Class, second_teacher)
@@ -268,9 +268,9 @@ class MiscClassPages(WebsiteModule):
             return gettext("class_name_empty"), 400
 
         Class = self.db.get_class(body.get("id"))
-        if not Class or Class["teacher"] != user["username"]: # only teachers can duplicate a class
+        if not Class or Class["teacher"] != user["username"]:  # only teachers can duplicate a class
             return gettext("no_such_class"), 404
-        
+
         # second_teachers = Class.get("second_teachers")
 
         # We use this extra call to verify if the class name doesn't already exist, if so it's a duplicate

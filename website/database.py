@@ -539,7 +539,7 @@ class Database:
         classes = None
         user = auth.current_user()
         if isinstance(storage, dynamo.AwsDynamoStorage):
-            # if current user is a second teacher, we show the related classes. 
+            # if current user is a second teacher, we show the related classes.
             if auth.is_second_teacher(user):
                 classes = [CLASSES.get({"id": class_id}) for class_id in user["second_teacher_in"]]
             else:
@@ -641,7 +641,8 @@ class Database:
         st_classes = second_teacher.get("second_teacher_in", []) + [Class["id"]]
         self.update_user(second_teacher["username"], {"second_teacher_in": st_classes})
 
-        second_teachers = Class.get("second_teachers", []) + [{"username": second_teacher["username"], "role": "teacher"}]
+        second_teachers = Class.get("second_teachers", []) + \
+            [{"username": second_teacher["username"], "role": "teacher"}]
         self.update_class_data(Class["id"], {"second_teachers": second_teachers})
 
     def remove_second_teacher_from_class(self, Class, second_teacher, only_user=False):
@@ -653,7 +654,7 @@ class Database:
         if not only_user:
             # remove this second teacher from the class' table
             second_teachers = list(filter(lambda st: st["username"] !=
-                                second_teacher["username"], Class.get("second_teachers", [])))
+                                          second_teacher["username"], Class.get("second_teachers", [])))
             self.update_class_data(Class["id"], {"second_teachers": second_teachers})
 
     def delete_class(self, Class):
