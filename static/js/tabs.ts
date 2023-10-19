@@ -104,8 +104,8 @@ export class Tabs {
   }
 
   public switchToNextTab() {
-      const currenTab = $('*[data-tab="' + this._currentTab + '"]');
-      const tabName = currenTab.next().data('tab') as string ?? '';
+      const currentTab = $('*[data-tab="' + this._currentTab + '"]');
+      const tabName = currentTab.next().data('tab') as string ?? '';
       if (tabName != '') {
           this.switchToTab(tabName);
       }
