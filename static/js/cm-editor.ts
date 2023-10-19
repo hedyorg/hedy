@@ -19,6 +19,16 @@ import {
 
 import { parser as level1Parser } from "./lezer-parsers/level1-parser.js"
 import { parser as level2Parser } from "./lezer-parsers/level2-parser.js"
+import { parser as level3Parser } from "./lezer-parsers/level3-parser"
+import { parser as level4Parser } from "./lezer-parsers/level4-parser"
+import { parser as level5Parser } from "./lezer-parsers/level5-parser"
+import { parser as level6Parser } from "./lezer-parsers/level6-parser"
+import { parser as level7Parser } from "./lezer-parsers/level7-parser"
+import { parser as level8Parser } from "./lezer-parsers/level8-parser"
+import { parser as level10Parser } from "./lezer-parsers/level10-parser"
+import { parser as level11Parser } from "./lezer-parsers/level11-parser"
+import { parser as level12Parser } from "./lezer-parsers/level12-parser"
+import { parser as level13Parser } from "./lezer-parsers/level13-parser"
 
 import { styleTags, tags as t } from "@lezer/highlight";
 import {LRLanguage} from "@codemirror/language"
@@ -98,40 +108,290 @@ export class HedyCodeMirrorEditor implements HedyEditor {
 
         const mainEditorStyling = EditorView.theme(this.themeStyles);
         
+        let parserWithMetadata13 = level13Parser.configure({
+            props: [
+                styleTags({
+                        "print forward turn color ask is echo sleep Comma at random remove from add to if else in not Op repeat times for range with return and or": t.keyword,
+                        "Assign/IsToken": t.keyword,      
+                        Comment: t.lineComment,                        
+                        "String quote": t.string,
+                        "clear pressed": t.color,
+                        "Int Number": t.number,
+                        "define call": t.operatorKeyword,
+                        "Command/ErrorInvalid/Text Command/ErrorInvalid/TextWithoutSpaces": t.invalid,
+                    })
+                ]
+            })
+            
+            const level13Language = LRLanguage.define({
+                    parser: parserWithMetadata13,
+                    languageData: {
+                            commentTokens: {line: "#"}
+                        }
+        })
+        
+        function hedyLevel13() {
+            return new LanguageSupport(level13Language)
+        }
+
+
+        let parserWithMetadata12 = level12Parser.configure({
+            props: [
+                styleTags({
+                        "print forward turn color ask is echo sleep Comma at random remove from add to if else in not Op repeat times for range with return": t.keyword,
+                        "Assign/IsToken": t.keyword,      
+                        Comment: t.lineComment,                        
+                        "String quote": t.string,
+                        "clear pressed": t.color,
+                        "Int Number": t.number,
+                        "define call": t.operatorKeyword,
+                        "Command/ErrorInvalid/Text Command/ErrorInvalid/TextWithoutSpaces": t.invalid,
+                    })
+                ]
+            })
+            
+            const level12Language = LRLanguage.define({
+                    parser: parserWithMetadata12,
+                    languageData: {
+                            commentTokens: {line: "#"}
+                        }
+        })
+        
+        function hedyLevel12() {
+            return new LanguageSupport(level12Language)
+        }
+
+        let parserWithMetadata11 = level11Parser.configure({
+            props: [
+                styleTags({
+                        "print forward turn color ask is echo sleep Comma at random remove from add to if else in not Op repeat times for range": t.keyword,
+                        "Assign/IsToken": t.keyword,      
+                        Comment: t.lineComment,                        
+                        "String quote": t.string,
+                        "clear pressed": t.color,
+                        "Int": t.number,
+                        "Command/ErrorInvalid/Text Command/ErrorInvalid/TextWithoutSpaces": t.invalid,
+                    })
+                ]
+            })
+            
+            const level11Language = LRLanguage.define({
+                    parser: parserWithMetadata11,
+                    languageData: {
+                            commentTokens: {line: "#"}
+                        }
+        })
+        
+        function hedyLevel11() {
+            return new LanguageSupport(level11Language)
+        }
+        let parserWithMetadata10 = level10Parser.configure({
+            props: [
+                styleTags({
+                        "print forward turn color ask is echo sleep Comma at random remove from add to if else in not Op repeat times for": t.keyword,
+                        "Assign/IsToken": t.keyword,      
+                        Comment: t.lineComment,                        
+                        "String quote": t.string,
+                        "clear pressed": t.color,
+                        "Int": t.number,
+                        "Command/ErrorInvalid/Text Command/ErrorInvalid/TextWithoutSpaces": t.invalid,
+                    })
+                ]
+            })
+            
+            const level10Language = LRLanguage.define({
+                    parser: parserWithMetadata10,
+                    languageData: {
+                            commentTokens: {line: "#"}
+                        }
+        })
+        
+        function hedyLevel10() {
+            return new LanguageSupport(level10Language)
+        }
+        
+        let parserWithMetadata8 = level8Parser.configure({
+            props: [
+                styleTags({
+                        "print forward turn color ask is echo sleep Comma at random remove from add to if else in not Op repeat times": t.keyword,
+                        "Assign/IsToken": t.keyword,      
+                        Comment: t.lineComment,                        
+                        "String quote": t.string,
+                        "clear pressed": t.color,
+                        "Int": t.number,
+                        "Command/ErrorInvalid/Text Command/ErrorInvalid/TextWithoutSpaces": t.invalid,
+                    })
+                ]
+            })
+            
+            const level8Language = LRLanguage.define({
+                    parser: parserWithMetadata8,
+                    languageData: {
+                            commentTokens: {line: "#"}
+                        }
+        })
+        
+        function hedyLevel8() {
+            return new LanguageSupport(level8Language)
+        }
+
+        let parserWithMetadata7 = level7Parser.configure({
+            props: [
+                styleTags({
+                        "print forward turn color ask is echo sleep Comma at random remove from add to if else in not Op repeat times": t.keyword,
+                        "Assign/IsToken": t.keyword,      
+                        Comment: t.lineComment,                        
+                        "String quote": t.string,
+                        "clear pressed": t.color,
+                        "Int": t.number,
+                        "Command/ErrorInvalid/Text Command/ErrorInvalid/TextWithoutSpaces": t.invalid,
+                    })
+                ]
+            })
+            
+            const level7Language = LRLanguage.define({
+                    parser: parserWithMetadata7,
+                    languageData: {
+                            commentTokens: {line: "#"}
+                        }
+        })
+        
+        function hedyLevel7() {
+            return new LanguageSupport(level7Language)
+        }
+
+
+        let parserWithMetadata6 = level6Parser.configure({
+            props: [
+                styleTags({
+                        "print forward turn color ask is echo sleep Comma at random remove from add to if else in not Op": t.keyword,
+                        "Assign/IsToken": t.keyword,      
+                        Comment: t.lineComment,                        
+                        "String quote": t.string,
+                        "clear pressed": t.color,
+                        "Int": t.number,
+                        "Command/ErrorInvalid/Text Command/ErrorInvalid/TextWithoutSpaces": t.invalid,
+                    })
+                ]
+            })
+            
+            const level6Language = LRLanguage.define({
+                    parser: parserWithMetadata6,
+                    languageData: {
+                            commentTokens: {line: "#"}
+                        }
+        })
+        
+        function hedyLevel6() {
+            return new LanguageSupport(level6Language)
+        }
+        
+        let parserWithMetadata5 = level5Parser.configure({
+            props: [
+                styleTags({
+                        "print forward turn color ask is echo sleep Comma at random remove from add to if else in not": t.keyword,
+                        "Assign/IsToken": t.keyword,      
+                        Comment: t.lineComment,                        
+                        "String quote": t.string,
+                        "clear pressed": t.color,
+                        "Command/ErrorInvalid/Text Command/ErrorInvalid/TextWithoutSpaces": t.invalid,
+                    })
+                ]
+            })
+            
+            const level5Language = LRLanguage.define({
+                    parser: parserWithMetadata5,
+                    languageData: {
+                            commentTokens: {line: "#"}
+                        }
+        })
+        
+        function hedyLevel5() {
+            return new LanguageSupport(level5Language)
+        }
+        
+        let parserWithMetadata4 = level4Parser.configure({
+            props: [
+                styleTags({
+                        "print forward turn color ask is echo sleep Comma at random remove from add to": t.keyword,
+                        "Assign/IsToken": t.keyword,      
+                        Comment: t.lineComment,                        
+                        "String quote": t.string,
+                        "clear": t.color,
+                        "Command/ErrorInvalid/Text Command/ErrorInvalid/TextWithoutSpaces": t.invalid,
+                    })
+                ]
+            })
+            
+            const level4Language = LRLanguage.define({
+                    parser: parserWithMetadata4,
+                    languageData: {
+                            commentTokens: {line: "#"}
+                        }
+        })
+        
+        function hedyLevel4() {
+            return new LanguageSupport(level4Language)
+        }
+
+        let parserWithMetadata3 = level3Parser.configure({
+            props: [
+                styleTags({
+                        "print forward turn color ask is echo sleep Comma at random remove from add to": t.keyword,
+                        "Assign/IsToken": t.keyword,      
+                        Comment: t.lineComment,                        
+                        "Name": t.name,
+                        "Command/ErrorInvalid/Text Command/ErrorInvalid/TextWithoutSpaces": t.invalid,
+                    })
+                ]
+            })
+            
+            const level3Language = LRLanguage.define({
+                    parser: parserWithMetadata3,
+                    languageData: {
+                            commentTokens: {line: "#"}
+                        }
+        })
+        
+        function hedyLevel3() {
+            return new LanguageSupport(level3Language)
+        }
+
+        let parserWithMetadata2 = level2Parser.configure({
+            props: [
+                styleTags({
+                        "print forward turn color ask is echo sleep": t.keyword,
+                        "Assign/IsToken": t.keyword,
+                        "Text AssignArgument/Name TextNo ": t.string,        
+                        Comment: t.lineComment,                        
+                        "Name": t.name,
+                        "Command/ErrorInvalid/Text Command/ErrorInvalid/TextWithoutSpaces": t.invalid,
+                    })
+                ]
+            })
+            
+            const level2Language = LRLanguage.define({
+                    parser: parserWithMetadata2,
+                    languageData: {
+                            commentTokens: {line: "#"}
+                        }
+        })
+        
+        function hedyLevel2() {
+            return new LanguageSupport(level2Language)
+        }
+
         let parserWithMetadata = level1Parser.configure({
             props: [
                 styleTags({
-                    "PrintToken ask echo forward turn color": t.keyword,
+                    "print ask echo forward turn color": t.keyword,
                     Text: t.string,        
                     Comment: t.lineComment,
                     "Command/ErrorInvalid/Text Command/ErrorInvalid/TextWithoutSpaces": t.invalid,
                 })
             ]
         })
-        
-        let parserWithMetadata2 = level2Parser.configure({
-            props: [
-                styleTags({
-                    "PrintToken AskToken SleepToken ForwardToken TurnToken ColorToken IsToken": t.keyword,
-                    "Text": t.string,        
-                    Comment: t.lineComment,
-                    "Name": t.name,
-                    "Command/ErrorInvalid/Text Command/ErrorInvalid/TextWithoutSpaces": t.invalid,
-                })
-            ]
-        })
-        
-        const level2Language = LRLanguage.define({
-            parser: parserWithMetadata2,
-            languageData: {
-                commentTokens: {line: "#"}
-            }
-        })
-
-        function hedyLevel2() {
-            return new LanguageSupport(level2Language)
-        }
-        
+            
         const level1Language = LRLanguage.define({
             parser: parserWithMetadata,
             languageData: {
@@ -171,7 +431,7 @@ export class HedyCodeMirrorEditor implements HedyEditor {
                 debugLineField,
                 incorrectLineField,
                 Prec.high(decorationsTheme),
-                hedyLevel2()
+                hedyLevel13()
             ]
         });
         this.view = new EditorView({
@@ -301,7 +561,7 @@ export class HedyCodeMirrorEditor implements HedyEditor {
             const transaction = this.view.state.update({
                 effects: StateEffect.appendConfig.of(EditorView.updateListener.of((v: ViewUpdate) => {                
                     if (v.docChanged) {
-                        console.log(level2Parser.parse(v.state.doc.toString()).toString());
+                        console.log(level13Parser.parse(v.state.doc.toString()).toString());
                         handler();
                     }
                 }))
