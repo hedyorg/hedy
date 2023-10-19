@@ -5,7 +5,7 @@ from datetime import date, timedelta
 
 from utils import timems, times
 
-from . import dynamo
+from . import dynamo, auth
 from . import querylog
 
 storage = dynamo.AwsDynamoStorage.from_env() or dynamo.MemoryStorage("dev_database.json")
@@ -534,12 +534,16 @@ class Database:
         """Return the classes with given id."""
         return CLASSES.get({"id": id})
 
-    def get_teacher_classes(self, username, students_to_list=False, second_teacher=None):
+    def get_teacher_classes(self, username, students_to_list=False):
         """Return all the classes belonging to a teacher."""
         classes = None
+        user = auth.current_user()
         if isinstance(storage, dynamo.AwsDynamoStorage):
-            classes = CLASSES.get_many({"teacher": username}, reverse=True)
-
+            # if current user is a second teacher, we show the related classes. 
+            if auth.is_second_teacher(user):
+                classes = [CLASSES.get({"id": class_id}) for class_id in user["second_teacher_in"]]
+            else:
+                classes = CLASSES.get_many({"teacher": username}, reverse=True)
         # If we're using the in-memory database, we need to make a shallow copy
         # of the classes before changing the `students` key from a set to list,
         # otherwise the field will remain a list later and that will break the
@@ -549,12 +553,11 @@ class Database:
         # skeptical that it's accurate.
         else:
             classes = []
-            for Class in CLASSES.get_many({"teacher": username}, reverse=True):
-                classes.append(Class.copy())
-
-        if second_teacher:
-            classes = list(filter(lambda c: c.get("second_teachers")
-                                  and second_teacher in c["second_teachers"], classes))
+            if auth.is_second_teacher(user):
+                classes = [CLASSES.get({"id": class_id}).copy() for class_id in user["second_teacher_in"]]
+            else:
+                for Class in CLASSES.get_many({"teacher": username}, reverse=True):
+                    classes.append(Class.copy())
 
         if students_to_list:
             for Class in classes:
@@ -632,6 +635,26 @@ class Database:
         """Removes a student from a class."""
         CLASSES.update({"id": class_id}, {"students": dynamo.DynamoRemoveFromStringSet(student_id)})
         USERS.update({"username": student_id}, {"classes": dynamo.DynamoRemoveFromStringSet(class_id)})
+
+    def add_second_teacher_to_class(self, Class, second_teacher):
+        """Adds a second teacher to a class."""
+        st_classes = second_teacher.get("second_teacher_in", []) + [Class["id"]]
+        self.update_user(second_teacher["username"], {"second_teacher_in": st_classes})
+
+        second_teachers = Class.get("second_teachers", []) + [{"username": second_teacher["username"], "role": "teacher"}]
+        self.update_class_data(Class["id"], {"second_teachers": second_teachers})
+
+    def remove_second_teacher_from_class(self, Class, second_teacher, only_user=False):
+        """Removes a second teacher from a class."""
+        # remove this class from the second teacher's table
+        st_classes = list(filter(lambda cid: cid != Class["id"], second_teacher.get("second_teacher_in", [])))
+        self.update_user(second_teacher["username"], {"second_teacher_in": st_classes})
+
+        if not only_user:
+            # remove this second teacher from the class' table
+            second_teachers = list(filter(lambda st: st["username"] !=
+                                second_teacher["username"], Class.get("second_teachers", [])))
+            self.update_class_data(Class["id"], {"second_teachers": second_teachers})
 
     def delete_class(self, Class):
         for student_id in Class.get("students", []):
