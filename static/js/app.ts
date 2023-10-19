@@ -1508,7 +1508,8 @@ export function toggle_developers_mode(enforced: boolean) {
 }
 
 export function toggle_keyword_language(lang: string) {
-  window.open('?keyword_language=' + lang, "_self");
+  const hash = window.location.hash;
+  window.open('?keyword_language=' + lang + hash, "_self");
 }
 
 export function toggle_blur_code() {
