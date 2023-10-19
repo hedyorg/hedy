@@ -197,7 +197,11 @@
     </div>
     <div class="order-5">
       {% if not specific_adventure %}
-          <div class="flex {% if prev_level %}justify-between{% else %}justify-end{%endif%}">
+          <div class="flex justify-end">
+            <button class="green-btn" id="next_adventure_button" onclick="">{{_('next_adventure')}}</button>
+          </div>
+
+          <div class="flex {% if prev_level %}justify-between{% else %}justify-end{%endif%}" style="display: none;">
             {% if prev_level and (not customizations or prev_level in customizations['available_levels']) %}
               <a class="green-btn" id="prev_level_button" href="{{ hedy_link(prev_level, 1) }}">{{_('regress_button')|replace("{level}", prev_level)}}</a>
             {% elif prev_level and not (not customizations or prev_level in customizations['available_levels']) %}

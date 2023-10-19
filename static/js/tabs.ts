@@ -103,6 +103,12 @@ export class Tabs {
     }
   }
 
+  public switchToNextTab() {
+      const currentTab = $(".tab-selected").first();
+      const tabName = currentTab.next().data('tab') as string;
+      this.switchToTab(tabName);
+  }
+
   public get currentTab() {
     return this._currentTab;
   }
