@@ -78,7 +78,7 @@
                       <input id="keyword_toggle" type="checkbox" {% if ((g.keyword_lang !="en" and not
                         request.args.get('keyword_language')) or (request.args.get('keyword_language') and
                         request.args.get('keyword_language') !="en" )) %}checked{% endif %}
-                        onclick="hedyApp.toggle_keyword_language('{% if ((g.keyword_lang != " en" and not
+                        onclick="hedyApp.toggle_keyword_language(`{% if ((g.keyword_lang != "en" and not
                         request.args.get('keyword_language')) or (request.args.get('keyword_language') and
                         request.args.get('keyword_language') !="en" )) %}en{% else %}{{g.lang}}{% endif %}')"
                         class="sr-only" />
