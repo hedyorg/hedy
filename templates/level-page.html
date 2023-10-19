@@ -75,9 +75,12 @@
                   <label for="keyword_toggle" class="flex flex-row items-center justify-center cursor-pointer"
                     data-cy="kwlang-switch-toggle">
                     <div class="relative flex w-full">
-                        <input id="keyword_toggle" type="checkbox" {% if g.keyword_lang != "en" or
-                        request.args.get('keyword_language') != "en" %}checked{% endif %}
-                        _="on click hedyApp.toggle_keyword_language({% if g.keyword_lang != "en" or request.args.get('keyword_language') != "en" %}'en'
+                        <input id="keyword_toggle" type="checkbox"
+                        {% if (g.keyword_lang != "en" and not request.args.get('keyword_language')) or
+                        (request.args.get('keyword_language') and request.args.get('keyword_language') != "en") %}checked{% endif %}
+                        _="on click hedyApp.toggle_keyword_language({% 
+                          if (g.keyword_lang != 'en' and not request.args.get('keyword_language')) or
+                              (request.args.get('keyword_language') and request.args.get('keyword_language') != 'en') %}'en'
                           {% else %}'{{g.lang}}'{% endif %})"
                         class="sr-only" />
                       <div class="w-8 h-4 bg-gray-400 rounded-full shadow-inner"></div>
