@@ -198,7 +198,7 @@
     <div class="order-5">
       {% if not specific_adventure %}
           <div class="flex justify-end">
-            <button class="green-btn" id="next_adventure_button" onclick="">{{_('next_adventure')}}</button>
+            <button class="green-btn" id="next_adventure_button" onclick="hedyApp.switchToNextTab()">{{_('next_adventure')}}</button>
           </div>
 
           <div class="flex {% if prev_level %}justify-between{% else %}justify-end{%endif%}" style="display: none;">
