@@ -342,3 +342,15 @@ def base_url():
         url = request.host_url
 
     return url if not url.endswith('/') else url[:-1]
+
+
+def can_edit_class(user, Class):
+    """
+    Check if a given user has the permission to edit a class.
+    
+    Returns:
+        bool: True if the user has edit permission, False otherwise.
+    """
+    return Class["teacher"] == user["username"] or \
+        any(second_teacher["username"] == user["username"] and second_teacher["role"] == "teacher" \
+            for second_teacher in Class.get("second_teachers", []))
