@@ -99,6 +99,7 @@ def remember_current_user(db_user):
 
     # Prepare the cached user object
     session["user"] = pick(db_user, "username", "email", "is_teacher", "second_teacher_in")
+    session["user"]["second_teacher_in"] = db_user.get("second_teacher_in", [])
     # Classes is a set in dynamo, but it must be converted to an array otherwise it cannot be stored in a session
     session["user"]["classes"] = list(db_user.get("classes", []))
 

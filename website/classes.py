@@ -6,7 +6,8 @@ from flask_babel import gettext
 import utils
 from config import config
 from website.flask_helpers import render_template
-from website.auth import current_user, is_teacher, requires_login, requires_teacher, refresh_current_user_from_db
+from website.auth import current_user, is_teacher, requires_login, requires_teacher, \
+    refresh_current_user_from_db, is_second_teacher
 
 from .achievements import Achievements
 from .database import Database
@@ -39,16 +40,20 @@ class ClassModule(WebsiteModule):
 
         # We use this extra call to verify if the class name doesn't already exist, if so it's a duplicate
         Classes = self.db.get_teacher_classes(user["username"], True)
+        actual_teacher = user["username"]
         for Class in Classes:
             if Class["name"] == body["name"]:
                 return gettext("class_name_duplicate"), 200
+            if Class["teacher"] != actual_teacher:
+                actual_teacher = Class["teacher"]
 
         Class = {
             "id": uuid.uuid4().hex,
             "date": utils.timems(),
-            "teacher": user["username"],
+            "teacher": actual_teacher,
             "link": utils.random_id_generator(7),
             "name": body["name"],
+            "created_by": user["username"],
         }
 
         self.db.store_class(Class)
@@ -70,14 +75,14 @@ class ClassModule(WebsiteModule):
             return gettext("class_name_empty"), 400
 
         Class = self.db.get_class(class_id)
-        if not Class or Class["teacher"] != user["username"]:
+        if not Class or not (utils.can_edit_class(user, Class)):
             return gettext("no_such_class"), 404
 
         # We use this extra call to verify if the class name doesn't already exist, if so it's a duplicate
         Classes = self.db.get_teacher_classes(user["username"], True)
         for Class in Classes:
             if Class["name"] == body["name"]:
-                return "duplicate", 200  # Todo TB: Will have to look into this, but not sure why we return a 200?
+                return gettext("class_name_duplicate"), 200
 
         self.db.update_class(class_id, body["name"])
         achievement = self.achievements.add_single_achievement(user["username"], "on_second_thoughts")
@@ -89,10 +94,13 @@ class ClassModule(WebsiteModule):
     @requires_login
     def delete_class(self, user, class_id):
         Class = self.db.get_class(class_id)
-        if not Class or Class["teacher"] != user["username"]:
+        if not Class or not (utils.can_edit_class(user, Class)):
             return gettext("no_such_class"), 404
 
         self.db.delete_class(Class)
+        if is_second_teacher(user):
+            self.db.remove_second_teacher_from_class(Class, user, only_user=True)
+
         achievement = self.achievements.add_single_achievement(user["username"], "end_of_semester")
         if achievement:
             return {"achievement": achievement}, 200
@@ -139,15 +147,7 @@ class ClassModule(WebsiteModule):
         if invite and invite.get("class_id") == class_id:
             invited_as = invite.get("invited_as")
             if invited_as == gettext("second_teacher"):
-                st_classes = user["second_teacher_in"] + [class_id] if user.get("second_teacher_in") else [class_id]
-                self.db.update_user(username, {"second_teacher_in": st_classes})
-
-                # The role can be changed later when needed.
-                second_teacher_data = [{"username": username, "role": "teacher"}]
-                second_teachers = Class['second_teachers'] + second_teacher_data \
-                    if Class.get('second_teachers') else second_teacher_data
-
-                self.db.update_class_data(class_id, {"second_teachers": second_teachers})
+                self.db.add_second_teacher_to_class(Class, user)
             elif invited_as == gettext("student"):
                 self.db.add_student_to_class(Class["id"], username)
 
@@ -187,14 +187,7 @@ class ClassModule(WebsiteModule):
             if invited_as == gettext("second_teacher"):
                 class_id = Class["id"]
                 if not (user.get("second_teacher_in") and class_id in user["second_teacher_in"]):
-                    st_classes = user["second_teacher_in"] + [class_id] if user.get("second_teacher_in") else [class_id]
-                    # self.db.update_user(username, {"second_teacher": True, "role": role, "appointed_by": teacher['username'] })
-                    self.db.update_user(username, {"second_teacher_in": st_classes})
-
-                    # The role can be changed later when needed/desired.
-                    second_teachers = Class['second_teachers'] + [{"username": username, "role": "teacher"}] \
-                        if Class.get('second_teachers') else [{"username": username, "role": "teacher"}]
-                    self.db.update_class_data(class_id, {"second_teachers": second_teachers})
+                    self.db.add_second_teacher_to_class(Class, user)
                     # return {}, 200
                 # else: TODO: maybe indicate that the user is already a second teacher.
             elif invited_as == gettext("student"):
@@ -214,7 +207,7 @@ class ClassModule(WebsiteModule):
     @requires_login
     def leave_class(self, user, class_id, student_id):
         Class = self.db.get_class(class_id)
-        if not Class or (Class["teacher"] != user["username"] and student_id != user["username"]):
+        if not Class or not (utils.can_edit_class(user, Class)):
             return gettext("ajax_error"), 400
 
         self.db.remove_student_from_class(Class["id"], student_id)
@@ -231,17 +224,10 @@ class ClassModule(WebsiteModule):
     def remove_second_teacher(self, user, class_id, second_teacher):
         print('\n\n\n', class_id, second_teacher)
         Class = self.db.get_class(class_id)
-        if not Class or (Class["teacher"] != user["username"] and second_teacher != user["username"]):
+        if not Class or Class["teacher"] != user["username"]: # only teachers can remove second teachers.
             return gettext("ajax_error"), 400
         second_teacher = self.db.user_by_username(second_teacher)
-        # remove this class from the second teacher's table
-        st_classes = list(filter(lambda cid: cid != class_id, second_teacher.get("second_teacher_in", [])))
-        self.db.update_user(second_teacher['username'], {"second_teacher_in": st_classes})
-
-        # remove this second teacher from the class' table
-        second_teachers = list(filter(lambda st: st['username'] !=
-                               second_teacher['username'], Class.get('second_teachers', [])))
-        self.db.update_class_data(class_id, {"second_teachers": second_teachers})
+        self.db.remove_second_teacher_from_class(Class, second_teacher)
 
         refresh_current_user_from_db()
         achievement = None
@@ -282,8 +268,10 @@ class MiscClassPages(WebsiteModule):
             return gettext("class_name_empty"), 400
 
         Class = self.db.get_class(body.get("id"))
-        if not Class or Class["teacher"] != user["username"]:
+        if not Class or Class["teacher"] != user["username"]: # only teachers can duplicate a class
             return gettext("no_such_class"), 404
+        
+        # second_teachers = Class.get("second_teachers")
 
         # We use this extra call to verify if the class name doesn't already exist, if so it's a duplicate
         # Todo TB: This is a duplicate function, might be nice to perform some clean-up to reduce these parts
@@ -302,9 +290,14 @@ class MiscClassPages(WebsiteModule):
             "teacher": user["username"],
             "link": utils.random_id_generator(7),
             "name": body.get("name"),
+            "created_by": user["username"],
         }
 
         self.db.store_class(new_class)
+        # TODO: duplicate students and second teachers.
+        # if second_teachers:
+        #     for st in second_teachers:
+        #         self.db.add_second_teacher_to_class(new_class, st)
 
         # Get the customizations of the current class -> if they exist, update id and store again
         customizations = self.db.get_class_customizations(body.get("id"))
@@ -320,6 +313,7 @@ class MiscClassPages(WebsiteModule):
     @requires_teacher
     def invite_student(self, user):
         body = request.json
+        print('\n\n\n', body)
         # Validations
         if not isinstance(body, dict):
             return gettext("ajax_error"), 400
@@ -334,7 +328,7 @@ class MiscClassPages(WebsiteModule):
         class_id = body.get("class_id")
 
         Class = self.db.get_class(class_id)
-        if not Class or Class["teacher"] != user["username"]:
+        if not Class or not (utils.can_edit_class(user, Class)):
             return utils.error_page(error=404, ui_message=gettext("no_such_class"))
 
         user = self.db.user_by_username(username)
@@ -373,8 +367,6 @@ class MiscClassPages(WebsiteModule):
 
         username = body.get("username").lower()
         class_id = body.get("class_id")
-
-        print('\n\n', 'update now', username, teacher, '\n\n')
 
         Class = self.db.get_class(class_id)
         if not Class or Class["teacher"] != teacher["username"]:
@@ -416,10 +408,10 @@ class MiscClassPages(WebsiteModule):
         class_id = body.get("class_id")
 
         # Fixme TB -> Sure the user is also allowed to remove their invite, but why the 'retrieve_class_error'?
-        if not is_teacher(user) and username != user.get("username"):
+        if not is_teacher(user) and not is_second_teacher(user) and username != user.get("username"):
             return utils.error_page(error=403, ui_message=gettext("retrieve_class_error"))
         Class = self.db.get_class(class_id)
-        if not Class or (Class["teacher"] != user["username"] and username != user.get("username")):
+        if not Class or (not utils.can_edit_class(user, Class) and username != user.get("username")):
             return utils.error_page(error=404, ui_message=gettext("no_such_class"))
 
         self.db.remove_class_invite(username)

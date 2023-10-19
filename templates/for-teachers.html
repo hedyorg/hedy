@@ -20,7 +20,7 @@
                   <th class="px-4 py-2 text-left">{{_('name')}}</th>
                   <!-- This is a bucket-fix to get the first letter capitalized, should find a long-term solution -->
                   <th class="px-4 py-2">{{_('students')[0]|upper}}{{_('students')[1:]}}</th>
-                  <th class="p-2">{{_('duplicate')}}</th>
+                  {% if not is_second_teacher %}<th class="p-2">{{_('duplicate')}}</th>{% endif %}
                   <th class="p-2">{{_('remove')}}</th>
               </tr>
             </thead>
@@ -29,7 +29,7 @@
                 <tr>
                   <td class="px-4 py-2"><a href="for-teachers/class/{{class.id}}" class="view_class" data-cy="view_class_link">{{class.name|e}}</a></td>
                   <td class="text-center p-2">{{class.students|length}}</td>
-                  <td class="text-center p-2"><a class="no-underline cursor-pointer" onclick='hedyApp.duplicate_class("{{class.id}}", {{_('class_name_prompt')|default(None)|tojson}})')><span class="fas fa-copy"></span></a></td>
+                  {% if not is_second_teacher %}<td class="text-center p-2"><a class="no-underline cursor-pointer" onclick='hedyApp.duplicate_class("{{class.id}}", {{_('class_name_prompt')|default(None)|tojson}})')><span class="fas fa-copy"></span></a></td>{% endif %}
                   <td class="text-center p-2"><a class="no-underline cursor-pointer" onclick='hedyApp.delete_class("{{class.id}}", {{_('delete_class_prompt')|default(None)|tojson}})'>🗑️</a></td>
                 </tr>
               {% endfor %}
