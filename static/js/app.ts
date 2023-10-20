@@ -209,7 +209,7 @@ export function initializeCodePage(options: InitializeCodePageOptions) {
     attachMainEditorEvents(theGlobalEditor);
     error.setEditor(theGlobalEditor);
     initializeDebugger({
-      editor: theGlobalEditor,    
+      editor: theGlobalEditor,
       level: theLevel,
       language: theLanguage,
     });
@@ -364,7 +364,7 @@ export function initializeViewProgramPage(options: InitializeViewProgramPageOpti
   attachMainEditorEvents(theGlobalEditor);
   error.setEditor(theGlobalEditor);
   initializeDebugger({
-    editor: theGlobalEditor,    
+    editor: theGlobalEditor,
     level: theLevel,
     language: theLanguage,
   });
@@ -844,7 +844,7 @@ export function runPythonProgram(this: any, code: string, sourceMap: any, hasTur
         skip_faulty_found_errors = true;
         theGlobalEditor.setIncorrectLine(range, Number(index));
       }
-      
+
       // Only show the warning box for the first error shown
       if (skip_faulty_found_errors && !warning_box_shown) {
         error.showFadingWarning(ClientMessages['Execute_error'], ClientMessages['Errors_found']);
@@ -1508,7 +1508,8 @@ export function toggle_developers_mode(enforced: boolean) {
 }
 
 export function toggle_keyword_language(lang: string) {
-  window.open('?keyword_language=' + lang, "_self");
+  const hash = window.location.hash;
+  window.open('?keyword_language=' + lang + hash, "_self");
 }
 
 export function toggle_blur_code() {
@@ -1558,7 +1559,7 @@ async function postJsonWithAchievements(url: string, data: any): Promise<any> {
 export function change_keyword_language(start_lang: string, new_lang: string) {
   tryCatchPopup(async () => {
     const response = await postJsonWithAchievements('/translate_keywords', {
-      code: theGlobalEditor,
+      code: theGlobalEditor.contents,
       start_lang: start_lang,
       goal_lang: new_lang,
       level: theLevel,
