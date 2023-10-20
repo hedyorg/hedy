@@ -128,6 +128,12 @@
             console.dir = function () {};
             console.debug = function () {};
 
+            // Dynamically add the gutter to the editor when readOnly
+            {% if readOnly %}
+                var editor = ace.edit('editor');
+                editor.setOption("showGutter", true);
+            {% endif %}
+
             // We need a work-around to allow listening to events from outside the embedded editor
             function sendRunEvent() {
               window.parent.postMessage({
