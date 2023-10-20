@@ -18,42 +18,42 @@ IfLessCommand {
 }
 
 
-Print { skw<"print"> ( ListAccess | Expression | Call )+ }
+Print { kw<"print"> ( ListAccess | Expression | Call )+ }
 
-AssignList { Text (skw<"is"> | Op<"=">) (Text+ | Number ) ~ambig  (Op<","> (Text+ | Number ))+ } // Op<","> doesn't really parse well if it is not separated by spaces
-Assign { Text (skw<"is"> | Op<"=">) (Expression ~ambig  | ListAccess)+ }
-Ask { Text (skw<"is"> | Op<"=">) skw<"ask"> ( ListAccess | Expression )+ }
-Sleep { skw<"sleep"> (Expression | ListAccess | Call)? }
+AssignList { Text (kw<"is"> | Op<"=">) (Text+ | Number ) ~ambig  (Op<","> (Text+ | Number ))+ } // Op<","> doesn't really parse well if it is not separated by spaces
+Assign { Text (kw<"is"> | Op<"=">) (Expression ~ambig  | ListAccess)+ }
+Ask { Text (kw<"is"> | Op<"=">) kw<"ask"> ( ListAccess | Expression )+ }
+Sleep { kw<"sleep"> (Expression | ListAccess | Call)? }
 
 ListAccess { Text kw<"at"> (kw<"random"> | Text) }
 
 Turtle[@isGroup=turtle] {
-    Forward { skw<"forward"> (Expression | ListAccess | Call) } |
-    Turn { skw<"turn"> (Expression | ListAccess | Call) } |
-    Color { skw<"color"> (Expression | ListAccess | Call)  }
+    Forward { kw<"forward"> (Expression | ListAccess | Call) } |
+    Turn { kw<"turn"> (Expression | ListAccess | Call) } |
+    Color { kw<"color"> (Expression | ListAccess | Call)  }
 }   
 
-Add { skw<"add"> (Expression | Call ) skw<"to"> Text }
-Remove { skw<"remove"> (Expression | Call) skw<"from"> Text }
-Clear { skw<"clear"> }
+Add { kw<"add"> (Expression | Call ) kw<"to"> Text }
+Remove { kw<"remove"> (Expression | Call) kw<"from"> Text }
+Clear { kw<"clear"> }
 ErrorInvalid[@dynamicPrecedence=-10] { Text+ }
 
-If { skw<"if"> Condition ((skw<"and"> | skw<"or">) Condition)* IfLessCommand? Else? }
+If { kw<"if"> Condition ((kw<"and"> | kw<"or">) Condition)* IfLessCommand? Else? }
 Else { kw<"else"> IfLessCommand? }
 
 Condition {    
-    EqualityCheck { Text (skw<"is"> | Op<"=">) (String | Text | Number | skw<"pressed">) } |
-    ListCheck { (Text | Number) skw<"not">? skw<"in">  Text }
+    EqualityCheck { (Expression | Call) (kw<"is"> | Op<"=">) (Expression | Call | kw<"pressed">) } |
+    ListCheck { (Expression | Call) kw<"not">? kw<"in">  Text }
 }
 
 
-Repeat { skw<"repeat"> (Number | Text) skw<"times"> IfLessCommand }
+Repeat { kw<"repeat"> (Number | Text) kw<"times"> IfLessCommand }
 
-For { skw<"for"> Text skw<"in"> (Text | skw<"range"> (Text | Number) skw<"to"> (Text | Number)) }
+For { kw<"for"> Text kw<"in"> (Text | kw<"range"> (Text | Number) kw<"to"> (Text | Number)) }
 
-Define { skw<"define"> Text (kw<"with">  Arguments)? }
+Define { kw<"define"> Text (kw<"with">  Arguments)? }
 Call { kw<"call"> Text (kw<"with"> Arguments) }
-Return { skw<"return"> ( ListAccess | Expression | Call)+ }
+Return { kw<"return"> ( ListAccess | Expression | Call)+ }
 
 
 Arguments { argument (Op<","> argument)* }
