@@ -31,6 +31,7 @@ import { parser as level12Parser } from "./lezer-parsers/level12-parser"
 import { parser as level13Parser } from "./lezer-parsers/level13-parser"
 import { parser as level14Parser } from "./lezer-parsers/level14-parser"
 import { parser as level15Parser } from "./lezer-parsers/level15-parser"
+import { parser as level16Parser } from "./lezer-parsers/level16-parser"
 
 import { styleTags, tags as t } from "@lezer/highlight";
 import {LRLanguage} from "@codemirror/language"
@@ -109,6 +110,32 @@ export class HedyCodeMirrorEditor implements HedyEditor {
         const cursorStyle = { ".cm-cursor, .cm-dropCursor": {borderLeftColor: "white", borderLeftWidth: "2px"} }
 
         const mainEditorStyling = EditorView.theme(this.themeStyles);
+
+        let parserWithMetadata16 = level16Parser.configure({
+            props: [
+                styleTags({
+                        "print forward turn color ask is echo sleep Comma at random remove from add to if else in not Op repeat times for range with return and or while": t.keyword,
+                        "Assign/IsToken": t.keyword,      
+                        Comment: t.lineComment,                        
+                        "String quote": t.string,
+                        "clear pressed": t.color,
+                        "Int Number": t.number,
+                        "define call": t.operatorKeyword,
+                        "Command/ErrorInvalid/Text Command/ErrorInvalid/TextWithoutSpaces": t.invalid,
+                    })
+                ]
+            })
+            
+            const level16Language = LRLanguage.define({
+                    parser: parserWithMetadata16,
+                    languageData: {
+                            commentTokens: {line: "#"}
+                        }
+        })
+        
+        function hedyLevel16() {
+            return new LanguageSupport(level16Language)
+        }
 
         let parserWithMetadata15 = level15Parser.configure({
             props: [
@@ -486,7 +513,7 @@ export class HedyCodeMirrorEditor implements HedyEditor {
                 debugLineField,
                 incorrectLineField,
                 Prec.high(decorationsTheme),
-                hedyLevel15()
+                hedyLevel16()
             ]
         });
         this.view = new EditorView({
@@ -616,7 +643,7 @@ export class HedyCodeMirrorEditor implements HedyEditor {
             const transaction = this.view.state.update({
                 effects: StateEffect.appendConfig.of(EditorView.updateListener.of((v: ViewUpdate) => {                
                     if (v.docChanged) {
-                        console.log(level15Parser.parse(v.state.doc.toString()).toString());
+                        console.log(level16Parser.parse(v.state.doc.toString()).toString());
                         handler();
                     }
                 }))
