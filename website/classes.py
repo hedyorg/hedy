@@ -308,6 +308,7 @@ class MiscClassPages(WebsiteModule):
         achievement = self.achievements.add_single_achievement(current_user()["username"], "one_for_money")
         if achievement:
             return {"achievement": achievement}, 200
+        return {"id": new_class["id"]}, 200
 
     @route("/invite_student", methods=["POST"])
     @requires_teacher
