@@ -172,7 +172,9 @@ def is_admin(user):
 
 def is_teacher(user):
     # the `is_teacher` field is either `0`, `1` or not present.
-    return bool(user.get("is_teacher", False))
+    user_is_teacher = bool(user.get("is_teacher", False))
+    user_is_second_teacher = is_second_teacher(user)
+    return user_is_teacher or user_is_second_teacher
 
 
 def is_second_teacher(user):
