@@ -541,7 +541,7 @@ adventures:
                     {else} {print} 'Wrong! It was ' _
                     ```
                 story_text_3: |
-                    **Extra** You can also let the computer do random sums on its own using random.
+                    **Extra** You can also let the computer do random sums on its own using `{random}`.
 
                     This is how you choose a number of tables to practice, and from that you always get a different sum:
                 start_code: |
@@ -819,7 +819,7 @@ adventures:
                     {if} order {is} fries food_price {is} 2
                     drink {is} {ask} 'What would you like to drink?'
                     {if} drink {is} water drink_price {is} 0
-                    else drink_price {is} 3
+                    {else} drink_price {is} 3
                     total_price {is} food_price + drink_price
                     {print} 'That will be ' total_price ' dollars, please'
                     ```
@@ -859,7 +859,7 @@ adventures:
                     ```
                     answer = {ask} 'Are you ready to learn something new?'
                     {if} answer {is} yes
-                        {print} 'Great! You can learn to use the repeat commando in the if command!'
+                        {print} 'Great! You can learn to use the repeat command in the if command!'
                         {print} 'Hooray!'
                         {print} 'Hooray!'
                         {print} 'Hooray!'
@@ -884,7 +884,7 @@ adventures:
                 start_code: '{print} ''Lets go to the next tab!'''
             11:
                 story_text: |
-                    You have reached level 10, you're doing great! In the higher levels, Hedy is focussing more and more on teaching you the programming language Python.
+                    You have reached level 11, you're doing great! In the higher levels, Hedy is focussing more and more on teaching you the programming language Python.
                     In Python there is no `{repeat}` command, but there is a command that works like {repeat}. Are you curious to find out how to say `{repeat}` in Python language? Quickly go on to find out!
                 start_code: '{print} ''Lets go to the next tab!'''
             12:
@@ -1838,8 +1838,8 @@ adventures:
                     When you've finished the code, try to create a code of your own and use a question that you've thought of yourself.
                 example_code_2: |
                     ```
-                    animals is dog, cow, sheep
-                    answer is ask 'What is your favorite animal?'
+                    animals {is} dog, cow, sheep
+                    answer {is} {ask} 'What is your favorite animal?'
                     _ answer _ animals _ 'Mine too!'
                     _ _ 'My favorite animals are dogs, cows and sheep'
                     ```
@@ -2816,6 +2816,10 @@ adventures:
                     with fries and pancakes. Or something completely different of course!
                 example_code: |
                     ```
+                    price = 10
+                    food = {ask} 'What would you like to eat?'
+                    drinks = {ask} 'What would you like to drink?'
+                    {if} food {is} 'sandwich' _ drinks {is} 'juice'
                         {print} 'That is our discount menu'
                         price = price - 3
                     {if} drinks {is} 'water' _ drinks {is} 'juice'
@@ -2949,7 +2953,7 @@ adventures:
             10:
                 story_text: |
                     ### Exercise
-                    In the previous levels you have often made your own rock paper scissors game. Can you finish the code and use the {for} command properly to get the game to work?
+                    In the previous levels you have often made your own rock paper scissors game. Can you finish the code and use the `{for}` command properly to get the game to work?
                 example_code: |
                     ```
                     choices = _
@@ -3036,7 +3040,7 @@ adventures:
                 example_code: |
                     ```
                     name {is} {ask} 'What is your name?'
-                    if name {is} '_'
+                    {if} name {is} '_'
                         a {is} 'Go to the airport '
                     {else}
                         a {is} 'Go to the trainstation '
@@ -3724,6 +3728,23 @@ adventures:
                         {color} {black}
                     ```
                 start_code: '# place your code here'
+            10:
+                story_text: |
+                    In this level you can make the turtle draw a figure.
+                    The turtle will travel the distances in the list, one by one, making bigger and bigger steps.
+                    ### Exercise 1
+                    Add a 90 degree turn in the loop, so that a spiral is drawn.
+                    Add at least 5 numbers to the list, so the spiral grows larger.
+                    **(extra)** can you change the spiral into another shape? Experiment with numbers for the turn!
+                    ### Exercise 2
+                    The spiral is drawn outwards, make it go inwards?
+                example_code: |
+                    ```
+                    {turn} 90
+                    distances = 10, 20, 30, 40, 50, 60
+                    {for} distance {in} distances
+                        {forward} distance
+                start_code: ''
     while_command:
         name: '{while}'
         default_save_name: while_command

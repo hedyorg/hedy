@@ -516,7 +516,7 @@ adventures:
                     else print 'Nem jó! Ennyi: ' jo_valasz
                     ```
                 story_text_2: |
-                    You can also let the computer do random sums on its own using random.
+                    You can also let the computer do random calculations on its own using {random}.
                     This is how you choose a number of tables to practice, and from that you always get a different sum:
                 example_code_2: |-
                     ```
@@ -530,7 +530,7 @@ adventures:
                     else print 'hiba! ennyi: ' jo_valasz
                     ```
                 story_text_3: |
-                    You can also let the computer do random sums on its own using random.
+                    You can also let the computer do random calculations on its own using {random}.
                     This is how you choose a number of tables to practice, and from that you always get a different sum:
                 start_code: print 'Üdvözlünk a számológépnél!'
             9:
@@ -595,12 +595,11 @@ adventures:
                     {print} number1 ' plus ' number2 ' is ' answer
                 start_code: '# place your code here'
             13:
-                story_text: |4
-
+                story_text: |
                     ### Exercise 1
                     Let's make the practice program a bit harder. The player now has to answers two questions correctly. Fill out the blanks to complete the program.
 
-                    ### Exercise 2 (extra)
+                    ### Exercise 2 Extra
                     Sometimes, calculations have multiple correct answers. For example, 10 can be divided by 5 and by 2. So the question 'What number divides 10?' can be answered by 2 and by 5.
                     Ask for a calculation that has multiple correct answers, ask the player to answer it, and determine if it is correct using `{or}`.
                     Empty the programming field and create your own solution.
@@ -826,9 +825,9 @@ adventures:
                     {for} állat {in} állatok
                       {print} 'Szép ' állat
             11:
-                story_text: |-
-                    A `{print}` ugyanúgy működik, mint eddig, de a `{for}` parancsot egy új formával egészítjük ki. Ahelyett, hogy `{repeat} 5 {times}` írhatod azt, hogy `{for} számláló {in} {range} 1 {to} 5` és alatta használhatod, `számláló`t.
-                    Próbáld ki, és nézd meg, mi történik! Ne felejts el behúzásokat használni a `{for}` és `{if}` utasítások után. (Ez azt jelenti, hogy egy sort négy szóközzel kell kezdened.)
+                story_text: |
+                    You have reached level 11, you're doing great! In the higher levels, Hedy is focussing more and more on teaching you the programming language Python.
+                    In Python there is no `{repeat}` command, but there is a command that works like {repeat}. Are you curious to find out how to say `{repeat}` in Python language? Quickly go on to find out!
                 start_code: |-
                     {for} számláló {in} {range} 1 {to} 10
                         {print} számláló
@@ -1001,8 +1000,7 @@ adventures:
                     if dobas is giliszta pontok = pontok + 5 else pontok = pontok + dobas
                     print 'Pontok:' pontok
                     ```
-                example_code_2: |4
-
+                example_code_2: |
                     Did you manage to calculate the score for 8 dice? That required a lot of cutting and pasting, right? We are going to make that easier in level 7!
                 start_code: print 'Mit dobunk ezúttal?'
             7:
@@ -3647,15 +3645,8 @@ adventures:
                 story_text_2: |
                     Also, we can now improve the program that draws different figures.
                     Can you figure out how far the turtle has to turn here? Finish the code and you can draw any polygon you'd like!
-                example_code_2: |-
-                    ```
-                    szogek is ask 'How many angles should I draw?'
-                    szog is 360 / szogek
-                    repeat szog times
-                        turn _
-                        forward_
-                    ```
-                start_code: szogek is ask 'Hány szöget kell rajzolnom?'
+                example_code_2: "```\nszogek = {ask} 'How many angles should I draw?'\nszog = 360 / szogek \n{repeat} szogek {times}\n    {turn} _\n    {forward} _\n```\n"
+                start_code: szogek = {ask}  'Hány szöget kell rajzolnom?'
             9:
                 story_text: |
                     Now that we can use a `{repeat}` inside a `{repeat}`, we can create more complex figures.
@@ -3676,6 +3667,23 @@ adventures:
                         {color} {black}
                     ```
                 start_code: '# place your code here'
+            10:
+                story_text: |
+                    In this level you can make the turtle draw a figure.
+                    The turtle will travel the distances in the list, one by one, making bigger and bigger steps.
+                    ### Exercise 1
+                    Add a 90 degree turn in the loop, so that a spiral is drawn.
+                    Add at least 5 numbers to the list, so the spiral grows larger.
+                     **(extra)** can you change the spiral into another shape? Experiment with numbers for the turn!
+                    ### Exercise 2
+                    The spiral is drawn outwards, make it go inwards?
+                example_code: |
+                    ```
+                    {turn} 90
+                    distances = 10, 20, 30, 40, 50, 60
+                    {for} distance {in} distances
+                        {forward} distance
+                start_code: '# Write your code here'
     while_command:
         name: '{while}'
         default_save_name: while_command

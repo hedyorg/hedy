@@ -527,7 +527,7 @@ adventures:
                     {else} {print} 'Malĝuste! La ĝusta respondo estas ' ĝusta_respondo
                     ```
                 story_text_3: |
-                    You can also let the computer do random sums on its own using random.
+                    You can also let the computer do random calculations on its own using {random}.
                     This is how you choose a number of tables to practice, and from that you always get a different sum:
                 start_code: '{print} ''Bonvenon al kalkulilo!'''
             9:
@@ -594,12 +594,11 @@ adventures:
                     ```
                 start_code: '# via kodo ĉi tie'
             13:
-                story_text: |4
-
+                story_text: |
                     ### Exercise 1
                     Let's make the practice program a bit harder. The player now has to answers two questions correctly. Fill out the blanks to complete the program.
 
-                    ### Exercise 2 (extra)
+                    ### Exercise 2 Extra
                     Sometimes, calculations have multiple correct answers. For example, 10 can be divided by 5 and by 2. So the question 'What number divides 10?' can be answered by 2 and by 5.
                     Ask for a calculation that has multiple correct answers, ask the player to answer it, and determine if it is correct using `{or}`.
                     Empty the programming field and create your own solution.
@@ -748,13 +747,13 @@ adventures:
                     nomo {is} {ask} 'Kio estas via nomo?'
                     {if} nomo {is} Hedy {print} 'bone!' {else} {print} 'ba!'
             6:
-                story_text: |4
-                     En ĉi tiu nivelo, vi lernas ion novan: vi povas nun ankaŭ kalkuli.
+                story_text: |
+                    En ĉi tiu nivelo, vi lernas ion novan: vi povas nun ankaŭ kalkuli.
 
-                     La pluso estas facila; vi skribas ĝin simile al matematiko: `5 + 5` ekzemple. La minuso ankaŭ funkcias bone, jen `5 - 5`.
+                    La pluso estas facila; vi skribas ĝin simile al matematiko: `5 + 5` ekzemple. La minuso ankaŭ funkcias bone, jen `5 - 5`.
 
-                     La multipliko estas iom malsamaj, ĉar ne ekzistas la multipliko-signo en via klavaro. Nu, serĉu; ĝi vere ne ekzistas!
-                     Tial oni multiplikas per la asterisko (ofte la klavo 8 kun la majuskliga klavo): `5 * 5`. Legu tion kiel «5 multiplikite per 5», por helpi la memoradon.
+                    La multipliko estas iom malsamaj, ĉar ne ekzistas la multipliko-signo en via klavaro. Nu, serĉu; ĝi vere ne ekzistas!
+                    Tial oni multiplikas per la asterisko (ofte la klavo 8 kun la majuskliga klavo): `5 * 5`. Legu tion kiel «5 multiplikite per 5», por helpi la memoradon.
                 example_code: |
                     ```
                     {print} '5 plus 5 estas ' 5 + 5
@@ -833,9 +832,9 @@ adventures:
                     {for} besto {in} bestoj
                       {print} 'Mi amas ' besto 'n'
             11:
-                story_text: |-
-                    `{print}` funkcias same, sed ni ebligis novan formon de `{for}`. Oni nun povas uzi `{for} numero {in} {range} 1 {to} 5` kaj uzi `numero` en via programo.
-                    Provu ĝin por vidi kio okazos! Ne forgesu deŝovon post la deklaroj `{for}` kaj `{if}`. (Tio signifas komenci linion per kvar spacoj.)
+                story_text: |
+                    You have reached level 11, you're doing great! In the higher levels, Hedy is focussing more and more on teaching you the programming language Python.
+                    In Python there is no `{repeat}` command, but there is a command that works like {repeat}. Are you curious to find out how to say `{repeat}` in Python language? Quickly go on to find out!
                 start_code: |-
                     {for} nombro {in} {range} 1 {to} 5
                         {print} nombro
@@ -996,8 +995,7 @@ adventures:
                     {print} 'those are' poentaro ' point'
                     ```
                     Can you make the code so that you get the total score for 8 dice? To do that, you have to cut and paste some lines of the code.
-                example_code_2: |4
-
+                example_code_2: |
                     Ĉu vi sukcesis kalkuli la poentaron por 8 ĵetkuboj? Tio postulis multe da tranĉado kaj algluado, ĉu ne? Ni faciligos tion en la nivelo 7!
                 start_code: '{print} ''Kion indikos la ĵetkubo ĉi-foje?'''
             7:
@@ -1250,8 +1248,7 @@ adventures:
                 story_text: |
                     In the previous levels you've created your first fortune telling machine, but Hedy couldn't really predict anything, only {echo}.
                     In this level you can use a variable and the `{at} {random}` command to really let Hedy choose an answer for you. Check out this code for instance:
-                example_code: |4
-
+                example_code: |
                     En ĉi tiu ekzemplo, la ludanto povas demandi Hedy ĉu-demandon, kaj Hedy elektos hazardan respondon por vi.
                     ```
                     {print} Mi estas Hedy la aŭguristo!
@@ -2411,8 +2408,8 @@ adventures:
         description: Kreu vian propran virtualan restoracion
         levels:
             1:
-                story_text: |4
-                     En Nivelo 1, vi povas krei vian propran virtualan restoracion kaj preni la mendojn de viaj gastoj.
+                story_text: |
+                    En Nivelo 1, vi povas krei vian propran virtualan restoracion kaj preni la mendojn de viaj gastoj.
                 example_code: |
                     ```
                     {print} Bonvenon al Restoracio Hedy 🍟
@@ -2521,8 +2518,7 @@ adventures:
             6:
                 story_text: |
                     In this level you can use maths to calculate the total price of your customer's order, which can make your virtual restaurant more realistic.
-                example_code: |4
-
+                example_code: |
                     Vi povas verki simplan kodon por restoracio, jene:
                     ```
                     {print} 'Bonvenon al restoracio Hedy'
@@ -2605,8 +2601,7 @@ adventures:
                         manĝaĵo = {ask} 'Kion vi volas manĝi por via ' plado '?'
                         {print} manĝaĵo ' estos via ' plado
                     ```
-                story_text_2: |4
-
+                story_text_2: |
                     Kompreneble, vi ankaŭ povus mendi por pluraj homoj!
                 example_code_2: |
                     ```
@@ -2725,8 +2720,7 @@ adventures:
                     ```
                 start_code: '# via kodo ĉi tie'
             3:
-                story_text: |4
-
+                story_text: |
                     En ĉi tiu nivelo ni povas eniri listojn kaj elekti aferojn el ili.
                     Vi unue faru liston per `{is}`. Tiam vi povas lasi la komputilon elekti ion el la listo per `{at} {random}`.
                     Ekzemple, vi povas lasi la komputilon elekti el roko, papero kaj tondilo.
@@ -3570,14 +3564,7 @@ adventures:
                 story_text_2: |
                     Ankaŭ ni nun povas plibonigi la programon, kiu desegnas malsamajn figurojn.
                     Ĉu vi povas eltrovi kiom malproksimen la testudo devas turni ĉi tien? Finu la kodon kaj vi povas desegni ajnan plurangulon, kiun vi ŝatus!
-                example_code_2: |
-                    ```
-                    anguloj = {ask} 'Kiom da anguloj mi desegnu?'
-                    angulo = 360 / anguloj
-                    {repeat} angulo {times}
-                        {turn} _
-                        {forward} _
-                    ```
+                example_code_2: "```\nanguloj = {ask} 'Kiom da anguloj mi desegnu?'\nangulo = 360 / anguloj \n{repeat} anguloj {times}\n    {turn} _\n    {forward} _\n```\n"
                 start_code: anguloj = {ask} 'Kiom da anguloj desegni?'
             9:
                 story_text: |
@@ -3599,6 +3586,23 @@ adventures:
                         {color} {black}
                     ```
                 start_code: '# place your code here'
+            10:
+                story_text: |
+                    In this level you can make the turtle draw a figure.
+                    The turtle will travel the distances in the list, one by one, making bigger and bigger steps.
+                    ### Exercise 1
+                    Add a 90 degree turn in the loop, so that a spiral is drawn.
+                    Add at least 5 numbers to the list, so the spiral grows larger.
+                     **(extra)** can you change the spiral into another shape? Experiment with numbers for the turn!
+                    ### Exercise 2
+                    The spiral is drawn outwards, make it go inwards?
+                example_code: |
+                    ```
+                    {turn} 90
+                    distances = 10, 20, 30, 40, 50, 60
+                    {for} distance {in} distances
+                        {forward} distance
+                start_code: '# Write your code here'
     while_command:
         name: '{while}'
         default_save_name: while_command

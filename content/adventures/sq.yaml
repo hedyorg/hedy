@@ -608,12 +608,11 @@ adventures:
                     ```
                 start_code: '# Vendoseni kodin tuaj këtu'
             13:
-                story_text: |4
-
+                story_text: |
                     ### Exercise 1
                     Let's make the practice program a bit harder. The player now has to answers two questions correctly. Fill out the blanks to complete the program.
 
-                    ### Exercise 2 (extra)
+                    ### Exercise 2 Extra
                     Sometimes, calculations have multiple correct answers. For example, 10 can be divided by 5 and by 2. So the question 'What number divides 10?' can be answered by 2 and by 5.
                     Ask for a calculation that has multiple correct answers, ask the player to answer it, and determine if it is correct using `{or}`.
                     Empty the programming field and create your own solution.
@@ -706,8 +705,8 @@ adventures:
         description: Shpjegim i niveleve
         levels:
             1:
-                story_text: "Në level 1 mund ti përdorni komandat `{print}`, `{ask}` dhe `{echo}`.\nShkruani kodin në fushën e programimit. Ose shtypeni butonin e gjelbër në bllokun që tregon shembull, dhe kodi do të shkruhet për ju!\nProvojeni kodin tuaj duke shtypur butonin 'Ekzekuto kodin' ndër fushën\
-                    \ e programimit.\n\nMund të printoni tekst në ekran duke përdorur komandën `{print}`.     \n"
+                story_text: "Në level 1 mund ti përdorni komandat `{print}`, `{ask}` dhe `{echo}`.\n Shkruani kodin në fushën e programimit. Ose shtypeni butonin e gjelbër në bllokun që tregon shembull, dhe kodi do të shkruhet për ju!\nProvojeni kodin tuaj duke shtypur butonin 'Ekzekuto kodin' ndër fushën\
+                    \ e programimit.\n\n Mund të printoni tekst në ekran duke përdorur komandën `{print}`.     \n"
                 start_code: '{print} përshëndetje botë!'
             2:
                 story_text: |
@@ -758,13 +757,13 @@ adventures:
                     emri {is} {ask} 'si e ke emrin?'
                     {if} emri {is} Hedy {print} 'mirë!' {else} {print} 'meh'
             6:
-                story_text: |4
-                     Në këtë nivel ju do të mësoni diçka të re: ju tash mund të kalkuloni.
+                story_text: |
+                    Në këtë nivel ju do të mësoni diçka të re: ju tash mund të kalkuloni.
 
-                     Plusi është i lehtë, mund ta shkruani si në matematik: për shembull `5 + 5`. Gjithashtu punon edhe minusi, është `5 - 5`.
+                    Plusi është i lehtë, mund ta shkruani si në matematik: për shembull `5 + 5`. Gjithashtu punon edhe minusi, është `5 - 5`.
 
-                     Shumëzimi është pak më ndryshe, sepse nuk keni shumëzim në tastierë. Kërkojeni, sigurisht nuk është!
-                     Kjo është përse ne shumëzojmë me yll që gjendet tek numri 8 lartë në tastierë: (mbajeni shtypur shift, pastaj shtypni numrin 8) `5 * 5`. Lexoni at si "5 herë 5" kjo do ju ndihmojë që ta mbani mend.
+                    Shumëzimi është pak më ndryshe, sepse nuk keni shumëzim në tastierë. Kërkojeni, sigurisht nuk është!
+                    Kjo është përse ne shumëzojmë me yll që gjendet tek numri 8 lartë në tastierë: (mbajeni shtypur shift, pastaj shtypni numrin 8) `5 * 5`. Lexoni at si "5 herë 5" kjo do ju ndihmojë që ta mbani mend.
                 example_code: |
                     ```
                     {print} '5 plus 5 është ' 5 + 5
@@ -843,9 +842,9 @@ adventures:
                     {for} kafsha {in} kafshët
                       {print} 'Un e dua' kafsha
             11:
-                story_text: |-
-                    `{print}` punon njëlloj por ne shtojmë një mënyrë të re të komandës `{for}`. Tani mund të shkruani `{for} counter {in} {range} 1 {to} 5` në vend të `{repeat} 5 {times}` dhe përdorni `counter` in your program.
-                    Provojeni dhe shiheni çfarë ndodhën! Mbani mend hapësirat para rreshtave nën komandat `{for}` dhe `{if}` (Kjo do të thotë të shkruani 4 hapësira, pastaj kodin).
+                story_text: |
+                    You have reached level 11, you're doing great! In the higher levels, Hedy is focussing more and more on teaching you the programming language Python.
+                    In Python there is no `{repeat}` command, but there is a command that works like {repeat}. Are you curious to find out how to say `{repeat}` in Python language? Quickly go on to find out!
                 start_code: |-
                     {for} numëruesi {in} {range} 1 {to} 5
                         {print} numëruesi
@@ -1007,8 +1006,7 @@ adventures:
                     {if} hedhja {is} krimi_tokes pikët = pikët+ 5 {else} pikët= pikët + hedhja
                     {print} 'këto janë' pikët ' pikë'
                     ```
-                example_code_2: |4
-
+                example_code_2: |
                     A mundët që të kalkuloni pikët për 8 zare? U desh të kopjoni shumë apo? Ne do ta bëjmë më të lehtë në nivelin 7!
                 start_code: '{print} ''Çfarë do të tregojë zari këtë herë'''
             7:
@@ -1256,8 +1254,7 @@ adventures:
                 story_text: |
                     Në nivelet e mëparshme ju keni krijuar makinën tuaj të parë të tregimit të fatit, por Hedy nuk mund të parashikonte asgjë, vetëm {echo}.
                     Në këtë nivel, ju mund të përdorni një variabël dhe komandën `{at} {random}` për ta lënë Hedy-n të zgjedhë një përgjigje për ju. Shikoni këtë kod për shembull:
-                example_code: |4
-
+                example_code: |
                     Në këtë shembull, lojtari mund të {ask} Hedy-t një pyetje po-jo dhe Hedy do të zgjedhë një përgjigje të rastësishme për ju.
                     ```
                     {print} I’m Hedy the fortune teller!
@@ -2436,8 +2433,8 @@ adventures:
         description: Krijoni restorantin tuaj virtual
         levels:
             1:
-                story_text: |4
-                     Në nivelin 1 ju mund të bëni restorantin tuaj virtual dhe të merrni porosi nga klientët.
+                story_text: |
+                    Në nivelin 1 ju mund të bëni restorantin tuaj virtual dhe të merrni porosi nga klientët.
                 example_code: |
                     ```
                     {print} Mirë se erdhët në Restorantin e Hedy-it🍟
@@ -2541,8 +2538,7 @@ adventures:
             6:
                 story_text: |
                     Në këtë nivel mund të përdorni matematikën për të kalkuluar çmimin total të klientit tuaj, e cila do ta bëjë restorantin tuaj më reale.
-                example_code: |4
-
+                example_code: |
                     Ju mund ta bëni një kod të thjeshtë për restorant, si kështu:
                     ```
                     {print} 'Mirë se erdhët në Restorant Hedy'
@@ -2757,8 +2753,7 @@ adventures:
                     ```
                 start_code: '# Vendoseni kodin tuaj këtu'
             3:
-                story_text: |4
-
+                story_text: |
                     Në këtë nivel mund të futni një listë and të zgjidhni nga ajo.
                     Në fillim e bëni një listë me komandën `{is}`. Dhe pastaj mund ta bëni që kompjuteri za zgjedhë një nga lista me komandën `{at} {random}`.
                     Si për shembull, ju mund ta bëni që kompjuteri të zgjedhë gur, letër, gërshërë.
@@ -3630,14 +3625,7 @@ adventures:
                 story_text_2: |
                     Gjithashtu, mund ta përmirësojmë programin që vizaton figura.
                     A mund ta kuptoni sa herë duhet që breshka të kthehet këtu? Përfundojeni kodin dhe pastaj mund të vizatoni çdo poligon që dëshironi!
-                example_code_2: |
-                    ```
-                    këndet = {ask} 'Sa kënde duhet të vizatoj?'
-                    këndi = 360 / këndet
-                    {repeat} këndi {times}
-                        {turn} _
-                        {forward} _
-                    ```
+                example_code_2: "```\nkëndet = {ask} 'Sa kënde duhet të vizatoj?'\nkëndi = 360 / këndet \n{repeat} këndet {times}\n    {turn} _\n    {forward} _\n```\n"
                 start_code: këndet = {ask} 'Sa kënde duhet të vizatoj?'
             9:
                 story_text: |
@@ -3659,6 +3647,23 @@ adventures:
                         {color} {black}
                     ```
                 start_code: '# place your code here'
+            10:
+                story_text: |
+                    In this level you can make the turtle draw a figure.
+                    The turtle will travel the distances in the list, one by one, making bigger and bigger steps.
+                    ### Exercise 1
+                    Add a 90 degree turn in the loop, so that a spiral is drawn.
+                    Add at least 5 numbers to the list, so the spiral grows larger.
+                     **(extra)** can you change the spiral into another shape? Experiment with numbers for the turn!
+                    ### Exercise 2
+                    The spiral is drawn outwards, make it go inwards?
+                example_code: |
+                    ```
+                    {turn} 90
+                    distances = 10, 20, 30, 40, 50, 60
+                    {for} distance {in} distances
+                        {forward} distance
+                start_code: '# Write your code here'
     while_command:
         name: '{while}'
         default_save_name: while_command
