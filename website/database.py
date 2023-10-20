@@ -645,6 +645,11 @@ class Database:
             [{"username": second_teacher["username"], "role": "teacher"}]
         self.update_class_data(Class["id"], {"second_teachers": second_teachers})
 
+    def get_class_main_teacher(self, class_id, only_username=True):
+        """Gets the main teacher of a class"""
+        Class = self.get_class(class_id)
+        return Class["teacher"] if only_username else self.user_by_username(Class["teacher"])
+
     def remove_second_teacher_from_class(self, Class, second_teacher, only_user=False):
         """Removes a second teacher from a class."""
         # remove this class from the second teacher's table
