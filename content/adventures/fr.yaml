@@ -60,17 +60,17 @@ adventures:
                 example_code: |
                     ```
                     animaux {is} 🦔, 🐿, 🦉, 🦇
-                    {print} Maintenant il entend le cri d'un animaux {at} {random}
+                    {print} Maintenant il entend des cris de animaux {at} {random}
                     ```
                 story_text_2: |
                     La commande `{add}` peut aussi être pratique pour ton histoire.
                 example_code_2: |
                     ```
                     {print} Il entend un bruit
-                    animaux {is} 🐿, 🦔, 🦇, 🦉
-                    animal {is} {ask} C'est quoi à ton avis ?
+                    animaux {is} un 🐿, un 🦔, une 🦇, une 🦉
+                    animal {is} {ask} C'est quoi à ton avis ?
                     {add} animal {to_list} animaux
-                    {print} C'était un animaux {at} {random}
+                    {print} C'était animaux {at} {random}
                     ```
                 story_text_3: |
                     Ceci est un exemple de la commande `{remove}` dans ton histoire.
@@ -84,35 +84,36 @@ adventures:
                     {print} Son sac à dos est beaucoup trop lourd.
                     {print} Il y a dedans une bouteille d'eau, une lampe torche et une brique.
                     sac_à_dos {is} eau, torche, brique
-                    jeté {is} {ask} Quel objet devrions-nous jeter ?
+                    jeté {is} {ask} Quel objet devrions-nous jeter ?
                     {remove} jeté {from} sac_à_dos
                     ```
                 start_code: '{print} Ton histoire'
             4:
                 story_text: |
-                    Tu as sans doute remarqué que le problème des niveaux précédents persiste. As-tu essayé d'afficher une phrase contenant le mot « nom » ? Par exemple : `{print}` mon nom est nom.
-                    Tu peux résoudre ce problème dans ce niveau. Tu dois mettre entre guillemets tout ce que tu veux écrire.
+                    Comme nous le disions en introduction, le niveau précédent avait un problème avec les variables. Avais-tu essayé d'afficher une phrase contenant la variable « nom » ? Par exemple : `{print} mon nom est nom`.
+                    À ce niveau, tu n'as plus ce problème. Tu dois mettre entre guillemets tout le texte qui doit être écrit pour le différentier du nom des variables :
+                    `{print} "mon nom est " nom`.
 
-                    ### Défi
-                    Copie le code d’exemple et ajoute des guillemets à la place des espaces blancs aux lignes 1 et 2 pour le faire fonctionner.
-                    Les espaces blancs en ligne 3 et 4 ne devraient pas être remplacés par des guillemets, mais une commande `{sleep}`et une commande `{clear}`. Peux-tu faire marcher ça ?
+                    ### Exercice
+                    Copie l’exemple et ajoute des guillemets à la place des espaces vides aux lignes 1 et 2 pour le faire fonctionner.
+                    Les espaces vides en ligne 3 et 4 ne doivent pas être remplacés par des guillemets, mais par une commande `{sleep}` et une commande `{clear}`. Peux-tu faire marcher tout l'exemple ?
 
-                    ### Défi 2
-                    Rends-toi au niveau précédent et copie le code de ton histoire. Dans ce niveau, ton code fonctionnera en ajoutant des guillemets aux bons endroits.
-                    Astuce : les variables de ta propre histoire ne doivent pas être entre guillemets, comme le montre la seconde ligne dans le code d'exemple. Dans cette ligne, le nom de la variable n'est pas entre guillemets.
+                    ### Exercice 2
+                    Rends-toi au niveau précédent et copie le code de ton histoire. Fais marcher ton code à ce niveau en ajoutant des guillemets aux bons endroits.
+                    Attention : les variables de ton histoire ne doivent pas être entre guillemets, comme le montre la seconde ligne de l'exemple. Dans cette ligne, le nom de la variable n'est pas entre guillemets.
                 example_code: |
                     ```
-                    nom {is} {ask} _ Comment t'appelles-tu ? _
-                    {print}  _ Le personnage principal s'appelle _ nom
+                    nom {is} {ask} _ Comment t'appelles-tu ? _
+                    {print} _ Le personnage principal s'appelle _ nom
                     _
                     _
-                    {print} nom  _ va se promener dans les bois _
+                    {print} nom _ va se promener dans les bois _
                     {print} nom _ a un peu peur _
                     animaux {is} 🦔, 🐿, 🦉, 🦇
-                    {print} _ Il entend le bruit d'un _ animaux {at} {random}
+                    {print} _ Il entend des bruits de _ animaux {at} {random}
                     {print} nom _ craint que la forêt ne soit hantée _
                     ```
-                start_code: '{print} "ton histoire va s''écrire ici !"'
+                start_code: '{print} "Ton histoire va s''écrire ici !"'
             5:
                 story_text: |
                     Dans ce niveau, différentes fins peuvent être programmées afin de rendre ton histoire encore plus amusante.
@@ -664,7 +665,7 @@ adventures:
         levels:
             4:
                 story_text: |
-                    C'est le moment d'apprendre une nouvelle commande ! Avec `{clear}`tu peux effacer tout le texte de l'écran d'affichage. De cette manière, tu peux éviter que ton écran ne soit trop rempli de texte.
+                    C'est le moment d'apprendre une nouvelle commande ! Avec `{clear}` tu peux effacer tout le texte de l'écran d'affichage. De cette manière, tu peux éviter que ton écran ne soit trop rempli de texte.
                     Attention ! Quand tu utilises une commande `{clear}`, rappelle-toi d'utiliser un `{sleep}` juste avant. Sinon Hedy effacera ton écran sans te laisser le temps de le lire !
                 example_code: |
                     ```
@@ -677,7 +678,7 @@ adventures:
                     {print} "1"
                     {sleep}
                     {clear}
-                    {print} "SURPRISE !"
+                    {print} "SURPRISE !"
                     ```
                 start_code: |
                     {print} "3"
@@ -689,7 +690,7 @@ adventures:
                     {print} "1"
                     {sleep}
                     {clear}
-                    {print} "SURPRISE !"
+                    {print} "SURPRISE !"
     default:
         name: Introduction
         default_save_name: intro
@@ -730,7 +731,7 @@ adventures:
                     Au niveau précédent, tu as appris ce qu'est une variable et comment tu peux l'utiliser pour rendre tes aventures plus interactives.
                     Mais… ce n'est pas la seule chose que tu peux faire avec des variables ! Tu peux aussi utiliser des variables pour faire des listes.
                     Et tu peux même demander à Hedy de tirer un mot au hasard dans la liste, ce qui te permet de faire des vrais jeux !
-                    Va jeter un coup d'œil à l'onglet suivant !
+                    Ça commence à l'onglet suivant !
                 start_code: '{print} bonjour le monde !'
             4:
                 story_text: |
@@ -746,12 +747,15 @@ adventures:
                     `Mon Sophie est Sophie`.
 
                     À ce niveau, ce problème est résolu à l'aide des guillemets.
+                    Nous allons voir comment. Commence par l'onglet suivant !
                 example_code: |
                     ```
                     nom {is} Sophie
                     {print} Mon nom est nom
                     ```
-                start_code: '{print} "Bonjour le monde"'
+                start_code: |
+                    nom {is} Sophie
+                    {print} Mon nom est nom
             5:
                 story_text: |
                     Dans les niveaux précédents tu as appris à utiliser `{at} {random}` pour rendre tes jeux différents à chaque exécution.
@@ -985,11 +989,11 @@ adventures:
                     {print} Tu as obtenu un _ {at} {random}
             4:
                 story_text: |
-                    Dans ce niveau, tu peux aussi créer un dé. Mais cette fois, tu peux essayer par toi-même sans un exemple de code !
+                    À ce niveau, tu peux aussi créer un dé. Mais cette fois, tu peux essayer par toi-même sans exemple de code !
 
                     ### Exercice
-                    Fais ton propre dé dans ce niveau.
-                    Astuce : si tu manques d'idée sur comment faire un dé. Jette un œil au dé que tu as fait au niveau d'avant, mais n'oublie pas d'ajouter les guillemets.
+                    Fais ton propre dé à ce niveau.
+                    Astuce : si tu manques d'idée sur comment faire un dé. Jette un œil au dé que tu as fait au niveau d'avant, mais n'oublie pas d'ajouter les guillemets.
                 start_code: '{print} "Quelle est la valeur du dé cette fois ?"'
             5:
                 story_text: |
@@ -1070,8 +1074,8 @@ adventures:
         levels:
             3:
                 story_text: |
-                    Est-ce que tu n'es jamais d'accord à la maison pour savoir qui doit nettoyer la vaisselle ou changer la litière du chat ?
-                    Alors, tu peux demander à l'ordinateur de choisir très équitablement. Tu peux programmer ça à ce niveau !
+                    Est-ce que tu n'es jamais d'accord, à la maison, de qui doit laver la vaisselle ou changer la litière du chat ?
+                    Alors, tu peux demander à l'ordinateur de choisir très équitablement. Voilà ce que tu peux programmer à ce niveau !
                 example_code: |
                     ```
                     personnes {is} maman, papa, Emma, Sophie
@@ -1089,14 +1093,14 @@ adventures:
                     Avec les guillemets, tu peux rendre le programme de la vaisselle encore mieux.
 
                     ### Exercice
-                    D'abord, remplace les blancs avec les bons symboles ou commandes pour que ce programme d'exemple fonctionne.
-                    Est-ce que tu as saisi ? Génial ! Maintenant, copie le code que tu as fait au niveau précédent et fais le fonctionner dans ce niveau en ajoutant les guillemets aux bons endroits.
+                    D'abord, remplace les blancs avec les bons symboles ou commandes pour que cet exemple fonctionne.
+                    As-tu saisi ? Génial ! Maintenant, copie le code que tu as fait au niveau précédent et fais le fonctionner à ce niveau en ajoutant les guillemets aux bons endroits.
                 example_code: |
                     ```
-                    famille {is} maman, papa, Emma, Sophie
-                    {print} _ la vaisselle est faite par _
+                    personnes {is} maman, papa, Emma, Sophie
+                    {print} _ la vaisselle sera faite par _
                     {sleep}
-                    {print} famille {at} _
+                    {print} personnes {at} _
                     ```
                 start_code: '{print} "Qui fait la vaisselle ?"'
             5:
@@ -1300,7 +1304,7 @@ adventures:
                     Les guillemets du niveau 4 rendent ça possible !
 
                     ### Exercice
-                    Nous avons retiré toutes les guillemets de cet exemple de code, peux-tu les ajouter à tous les bons endroits ?
+                    Nous avons retiré toutes les guillemets de cet exemple, peux-tu les remettre partout où c'est nécessaire ?
 
                     ### Exercice 2
                     Retourne au niveau précédent et copie ton code de la voyante. Fais fonctionner le code dans ce niveau en ajoutant les guillemets aux bons endroits.
@@ -1311,7 +1315,7 @@ adventures:
                     question {is} {ask} Que voudrais-tu savoir ?
                     {print} Voici ta question : question
                     réponses {is} oui, non, peut-être
-                    {print} Ma boule de cristal dit...
+                    {print} Ma boule de cristal dit…
                     {sleep} 2
                     {print} réponses {at} {random}
                     ```
@@ -1511,17 +1515,23 @@ adventures:
                 start_code: monstre1 {is} _
             3:
                 story_text: |
-                    In the previous levels you've made an introduction to your haunted house game, but as you might have noticed the story would always have a dreadful end.
-                    In this level you can make your story more interactive by changing the outcome of the game; sometimes you'll get eaten, sometimes you'll escape!
-                    Let Hedy decide randomly!
+                    Au niveau précédent, nous avons écrit une introduction à ton jeu de maison hantée, mais comme tu l'as peut-être remarqué, l'histoire avait toujours la même fin horrible.
+                    À ce niveau, tu peux rendre ton histoire plus interactive en changeant l'issue du jeu ; parfois tu te feras manger, parfois tu réussiras à t'échapper !
+                    Laissons Hedy décider aléatoirement !
+
+                    ## Exercice
+                    Copie l'exemple de code et rempli les espace vide pour le faire marcher !
+
+                    **Bonus** Cette histoire est assez simple, tu peux peut-être la rendre un peu effrayante en racontant plus de choses.
+                    Et aussi, les fins possibles sont pour l'instant très limitées, il n'y a que 3 options possibles pour ce qui est derrière la porte. Peut-être peux-tu ajouter de nouveaux monstres à la liste !
                 example_code: |
                     ```
-                    _ Escape from the haunted house!
-                    _ There are 3 doors in front of you...
-                    _ _ _ Which door do you choose?
-                    _ You picked door ... choice
-                    monsters _ a zombie, a vampire, NOTHING YOUVE ESCAPED
-                    _ You see...
+                    _ Comment sortir de la maison hantée ?
+                    _ Il y a trois portes devant toi…
+                    _ _ _ Quelle porte choisis-tu ?
+                    _ Tu as choisi la porte… choix
+                    monstres _ un zombie, un vampire, RIEN DU TOUT ET TU T'ÉCHAPPES PAR LA SORTIE
+                    _ Tu vois…
                     {sleep}
                     _ _ _ _
                     ```
@@ -1531,7 +1541,7 @@ adventures:
                     Dans ce niveau, tu vas apprendre comment utiliser les guillemets dans tes jeux.
 
                     ### Exercice
-                    Peux-tu faire fonctionner ta maison hantée pour le niveau 4 ?
+                    Peux-tu écrire ta maison hantée pour le niveau 4 ?
 
                     ### Exercice 2
                     Reviens au niveau précédent et copie ton code de la maison hantée. Fais fonctionner le code dans ce niveau en ajoutant des guillemets aux bons endroits.
@@ -1539,10 +1549,10 @@ adventures:
                     ```
                     _ Ajoute les guillemets à ce code _
                     {print} Echappe toi de la maison hantée !
-                    {print} Il y a 3 portes devant toi...
+                    {print} Il y a 3 portes devant toi…
                     choix {is} {ask} Quelle porte choisis-tu ?
-                    {print} Tu as choisi la porte ... choix
-                    monstres {is} un zombie, un vampire, RIEN TU T'ES ECHAPPE•E
+                    {print} Tu as choisi la porte… choix
+                    monstres {is} un zombie, un vampire, RIEN DU TOUT ET TU T'ÉCHAPPES PAR LA SORTIE
                     {print} Tu vois...
                     {sleep}
                     {print} monstres {at} {random}
@@ -2022,9 +2032,9 @@ adventures:
                 start_code: '# écris ton code ici'
             4:
                 story_text: |
-                    Dans ce niveau nous devons utiliser les guillemets avec les commandes `{ask}` et `{print}`.
+                    À ce niveau nous devons utiliser les guillemets avec les commandes `{ask}` et `{print}`.
                     ### Exercice
-                    Complète le code en remplissant les blancs par des guillemets.
+                    Complète le code en remplaçant les blancs par des guillemets.
                 example_code: |
                     ```
                     mots {is} coco, Hedy
@@ -2248,24 +2258,26 @@ adventures:
                     La plupart des langages de programmation utilisent aussi des guillemets pour afficher, donc on s'approche un peu plus de la vraie programmation !
                 example_code: |
                     ```
-                    {print} "Tu as besoins d'utiliser les guillemets à partir de maintenant !"
-                    réponse {is} {ask} "Qu'avons nous besoins d'utiliser à partir de maintenant ?"
+                    {print} "Tu as besoins d'utiliser les guillemets à partir de maintenant !"
+                    réponse {is} {ask} "Qu'avons nous besoins d'utiliser à partir de maintenant ?"
                     {print} "Nous avons besoins d'utiliser " réponse
                     ```
                 story_text_2: |
                     ## Apostrophes
                     Important ! Hedy accepte que tu utilises les guillemets ou les apostrophes pour entourer tes textes. En anglais, on utilise généralement les apostrophes car cela ne pose pas trop de problème, mais en français, cela pose un problème avec, par exemple, « aujourd'hui » ou « s'il vous plait »
-                    Astuce : Nous te recommandons d'utiliser les guillemets qui fonctionnent bien dans la plupart de situations.
-                    L'exemple montre la mauvaise façon d'utiliser les apostrophes.
+
+                    Astuce : Nous te recommandons d'utiliser les guillemets qui fonctionnent bien dans la plupart des cas.
+
+                    L'exemple montre le problème avec les apostrophes. Peux-tu le corriger en remplaçant par des guillemets ?
                 example_code_2: |
                     ```
-                    _ Voici comment ça ne marche pas avec les apostrophes_
+                    {print} _ Voici comment ça ne marche pas avec les apostrophes : _
                     {print} 'aujourd'hui je fais du babysitting avec les enfants de ma sœur'
-                    {print} 'qu'y a-t-il de plus amusant que ça ?'
+                    {print} 'qu'y a-t-il de plus amusant que ça ?'
                     ```
                 start_code: |-
-                    {print}"Tu as besoins d'utiliser les guillemets à partir de maintenant !"
-                    réponse {is} {ask} "Qu'avons-nous besoins d'utiliser à partir de maintenant ?"
+                    {print}"Tu as besoins d'utiliser les guillemets à partir de maintenant !"
+                    réponse {is} {ask} "Qu'avons-nous besoins d'utiliser à partir de maintenant ?"
                     {print} "Nous avons besoins d'utiliser " réponse
             12:
                 story_text: |
@@ -2546,7 +2558,7 @@ adventures:
                 start_code: '# écris ton code ici'
             4:
                 story_text: |
-                    Dans ce niveau, tu dois utiliser les guillemets lorsque tu utilises les commandes `{print}` ou `{ask}`.
+                    À ce niveau, tu dois utiliser les guillemets avec les commandes `{print}` ou `{ask}`.
 
                     ### Exercice
                     Ajoute les guillemets à ce code pour le faire fonctionner ! Attention : les variables ne doivent pas être entourées de guillemets.
@@ -3515,7 +3527,7 @@ adventures:
                     ```
                 story_text_2: |
                     Tu peux aussi changer la couleur des lignes avec la commande `{color}`. Jette un œil à l'exemple.
-                    Tu peux aussi utiliser la commande `{color} {white}` pour rendre des lignes « invisibles ». Tu pourrais utiliser ces lignes blanches pour déplacer la tortue où tu veux à l'écran avant de commencer à dessiner.
+                    Quand tu utilises la commande `{color} {white}` pour dessiner, les lignes sont « invisibles ». Astuce : utilise le blanc pour déplacer la tortue où tu veux à l'écran avant de commencer à dessiner.
                 example_code_2: |
                     ```
                     {color} {white}
