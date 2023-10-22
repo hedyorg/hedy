@@ -1824,8 +1824,8 @@ adventures:
                 story_text_2: |
                     ### Exercice
                     Il est temps de faire tes propres variables !
-                    Dans le code d'exemple, nous avons défini la variable `animaux_favoris`. En ligne 1, la variable reçoit une valeur, et en ligne 2 nous avons utilisé la variable dans une commande `{print}`.
-                    Pour commencer, termine notre exemple en remplissant l'espace vide rose avec le nom de ton animal favori. Ensuite, essaye d'écrire 3 autres codes toi-même. Choisi un mot, donne-lui une valeur avec la commande `{is}`. Ensuite, utilise ta nouvelle variable dans une commande `{print}`, comme nous venons de le faire.
+                    Dans le code d'exemple, nous avons défini la variable `animaux_préférés`. En ligne 1, la variable reçoit une valeur, et en ligne 2 nous avons utilisé la variable dans une commande `{print}`.
+                    Pour commencer, termine notre exemple en remplissant l'espace vide avec le nom de ton animal préféré. Ensuite, essaye d'écrire 3 autres codes toi-même. Choisi un nom de variable, donne-lui une valeur avec la commande `{is}`. Ensuite, utilise ta nouvelle variable dans une commande `{print}`, comme dans l'exemple.
                 example_code_2: |
                     ```
                     animaux_préférés {is} _
@@ -2573,8 +2573,8 @@ adventures:
                     {print} Aujourd'hui nous servons pizza ou lasagne.
                     plat {is} {ask} Que voudrais-tu manger ?
                     {print} Très bon choix !  plat  est ce que je préfère !
-                    accompagnement {is} {ask} Voudrais-tu de la viande ou des légumes en garniture ?
-                    {print} plat  avec  accompagnement  . C'est parti !
+                    garniture {is} {ask} Que veux-tu en garniture ? fromages ou légumes ?
+                    {print} plat  aux  garniture  . C'est parti !
                     boisson {is} {ask} Que voudrais-tu boire avec ça ?
                     {print} Merci pour ta commande.
                     {print} Tes  plat  et  boisson  vont être servis !
