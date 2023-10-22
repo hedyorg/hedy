@@ -625,32 +625,32 @@ adventures:
         levels:
             4:
                 story_text: |
-                    Time for a new command! With `{clear}` you can clear all the text form your output screen. This way you can prevent your screen getting too full of text.
-                    Beware! If you are using a `{clear}` command, remember to use a `{sleep}` above it. Otherwise Hedy will clear your screen without giving you the time to read!
+                    Czas na nową komendę! Z komendą `{clear}` możesz wyczyścić cały tekst z ekranu. W ten sposób możesz zapobiec ścianie tekstu na Twoim ekranie.
+                    Uważaj! Jeżeli używasz komendy `{clear}`, to pamiętaj nad nią użyć komendy `{sleep}`. W przeciwnym wypadku Hedy wyczyści Twój ekran zanim będziesz miał szansę cokolwiek przeczytać.
                 example_code: |
                     ```
-                    print '3'
-                    sleep
-                    clear
-                    print '2'
-                    sleep
-                    clear
-                    print '1'
-                    sleep
-                    clear
-                    print 'SURPRISE!'
+                    {print} '3'
+                    {sleep}
+                    {clear}
+                    {print} '2'
+                    {sleep}
+                    {clear}
+                    {print} '1'
+                    {sleep}
+                    {clear}
+                    {print} 'NIESPODZIANKA!'
                     ```
                 start_code: |
-                    print '3'
-                    sleep
-                    clear
-                    print '2'
-                    sleep
-                    clear
-                    print '1'
-                    sleep
-                    clear
-                    print 'SURPRISE!'
+                    {print} '3'
+                    {sleep}
+                    {clear}
+                    {print} '2'
+                    {sleep}
+                    {clear}
+                    {print} '1'
+                    {sleep}
+                    {clear}
+                    {print} 'NIESPODZIANKA!'
     default:
         name: Pierwsze kroki
         default_save_name: wstęp
@@ -686,17 +686,26 @@ adventures:
                 start_code: '{print} witaj świecie!'
             4:
                 story_text: |
-                    W poziomie 4 `{ask}` i `{print}` zmieniły się.
-                    Musisz umieścić w cudzysłowach tekst, który chcesz wyświetlić.
-                    Jest to przydatne, ponieważ teraz możesz wyświetlić na ekranie wszystkie słowa, które chcesz. Również słowa, których użyłeś, aby przechować coś za pomocą `{is}`.
-                    Większość języków programowania również używa cudzysłowów podczas wyświetlania tekstu, a więc jesteśmy o jeden krok bliżej prawdziwego programowania!
+                    Na poprzednich poziomach ćwiczyliśmy używanie zmiennych, ale mogłaś napotkać się na jeden problem.
+                    Mogłaś próbować odpalać tego typu kod:
+                    
+                    Oczywiście chciałaś, aby wypisało się:
+
+                    `Moje imię to Zosia`
+
+                    Jednak Hedy wypisuje:
+
+                    `Moje Zosia to Zosia`.
+
+                    Na tym poziomie rozwiążemy ten problem używająć cudzysłowów.
                 example_code: |
                     ```
-                    {print} 'Od teraz musisz używać cudzysłowów!'
-                    odpowiedź {is} {ask} 'Czego od teraz musimy używać?'
-                    {print} 'Musimy używać ' odpowiedź
+                    imię {is} Zosia
+                    {print} Moje imię to imię
                     ```
-                start_code: '{print} ''Witaj świecie'''
+                start_code: |-
+                    imię {is} Zosia
+                    {print} Moje imię to imię
             5:
                 story_text: |
                     W poziomie 5 pojawia się coś nowego `{if}`! Za pomocą `{if}` możesz wybrać pomiędzy dwoma opcjami.
@@ -1709,7 +1718,7 @@ adventures:
     is_command:
         name: '{is}'
         default_save_name: komenda_to
-        description: przestawienie komendy to
+        description: Przedstawienie komendy to
         levels:
             2:
                 story_text: |
@@ -2126,38 +2135,27 @@ adventures:
                     ```
                 start_code: '# umieść tutaj swój kod'
     quotation_marks:
-        name: '''quotation marks'''
-        default_save_name: quotation_marks
-        description: Introduction quotation marks
+        name: '''Cudzysłowy'''
+        default_save_name: cudzysłowy
+        description: Przedstawienie cudzysłowów
         levels:
             4:
                 story_text: |
-                    ## 'Quotation marks'
-                    In level 4 `{ask}` and `{print}` have changed.
-                    You must put text that you want to print between quotation marks.
-                    This is useful, because now you can print all the words you want. Also the words you used to store something with `{is}`.
-                    Most programming languages also use quotation marks when printing, so we are also getting a step closer to real programming!
+                    ## Cudzysłowy
+                    W poziomie 4 `{ask}` i `{print}` zmieniły się.
+                    Musisz umieścić w cudzysłowach tekst, który chcesz wyświetlić.
+                    Jest to przydatne, ponieważ teraz możesz wyświetlić na ekranie wszystkie słowa, które chcesz. Również słowa, których użyłeś, aby przechować coś za pomocą `{is}`.
+                    Większość języków programowania również używa cudzysłowów podczas wyświetlania tekstu, a więc jesteśmy o jeden krok bliżej prawdziwego programowania!
                 example_code: |
                     ```
-                    {print} 'You need to use quotation marks from now on!'
-                    answer {is} {ask} 'What do we need to use from now on?'
-                    {print} 'We need to use ' answer
-                    ```
-                story_text_2: |
-                    ## Contractions
-                    Important! Mind that now that we're using quotation marks, Hedy will get confused when you use the apostrophe for contractions like I'm or What's.
-                    Make sure to remove those apostrophes and change the spelling to I am or What is.
-                    Check out the example code to see the wrong way of using apostrophes.
-                example_code_2: |
-                    ```
-                    _ This is the wrong way of using apostrophes _
-                    {print} 'I'm babysitting my sister's kids'
-                    {print} 'What's more fun than that?'
+                    {print} 'Od teraz musimy używać cudzysłowów!'
+                    odpowiedź {is} {ask} 'Czego musimy używać?'
+                    {print} 'Musimy używać ' odpowiedź
                     ```
                 start_code: |-
-                    {print} 'You need to use quotation marks from now on!'
-                    answer {is} {ask} 'What do we need to use from now on?'
-                    {print} 'We need to use ' answer
+                    {print} 'Od teraz musimy używać cudzysłowów!'
+                    odpowiedź {is} {ask} 'Czego musimy używać?'
+                    {print} 'Musimy używać ' odpowiedź
             12:
                 story_text: |
                     **All texts need to be in quotation marks**
@@ -2199,7 +2197,7 @@ adventures:
     random_command:
         name: '{random}'
         default_save_name: Komenda pozycja losowa
-        description: Przestawienie komendy pozycja losowa
+        description: Przedstawienie komendy pozycja losowa
         levels:
             3:
                 story_text: |
@@ -2665,7 +2663,10 @@ adventures:
             4:
                 story_text: |
                     Na tym poziomie możemy dodatkowo zaprogramować kamień, papier, nożyce. Jeśli chcesz dodać tekst, tutaj również musisz użyć cudzysłowów.
-                    Czy uzupełnisz kod, wprowadzając poprawne polecenia lub znaki w podkreśleniach?
+
+                    ### Ćwiczenie
+
+                    Przekopiuj swój kod z poprzedniego poziomu i spraw, żeby zadziałał używając cudzysłowów w każdej komendzie `{print}` i `{ask}`.
                 start_code: '{print} ''Witamy w twoim własnym programie kamień, papier, nożyce!'''
             5:
                 story_text: |
