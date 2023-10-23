@@ -124,9 +124,9 @@
             })
 
             // Remove all console logs as these messages might clutter the log of the parent site
-            // console.log = function () {};
-            // console.dir = function () {};
-            // console.debug = function () {};
+            console.log = function () {};
+            console.dir = function () {};
+            console.debug = function () {};
 
             // Dynamically add the gutter to the editor when readOnly
             {% if readOnly %}
@@ -139,9 +139,9 @@
                 if (message.data.mode) {
                     const editor = ace.edit('editor');
                     if (message.data.mode == 'readonly') {
-                        editor.setOption("readonly", true);
+                        editor.setReadOnly(true);
                     } else if (message.data.mode == 'edit') {
-                        editor.setOption("readonly", false);
+                        editor.setReadOnly(false);
                     }
                 }
             });
