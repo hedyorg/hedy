@@ -39,21 +39,17 @@ class ClassModule(WebsiteModule):
             return gettext("class_name_empty"), 400
 
         # We use this extra call to verify if the class name doesn't already exist, if so it's a duplicate
-        Classes = self.db.get_teacher_classes(user["username"], True)
-        actual_teacher = user["username"]
+        Classes = self.db.get_teacher_classes(user["username"], True, teacher_only=True)
         for Class in Classes:
             if Class["name"] == body["name"]:
                 return gettext("class_name_duplicate"), 200
-            if Class["teacher"] != actual_teacher:
-                actual_teacher = Class["teacher"]
 
         Class = {
             "id": uuid.uuid4().hex,
             "date": utils.timems(),
-            "teacher": actual_teacher,
+            "teacher": user["username"],
             "link": utils.random_id_generator(7),
             "name": body["name"],
-            "created_by": user["username"],
         }
 
         self.db.store_class(Class)
@@ -79,7 +75,10 @@ class ClassModule(WebsiteModule):
             return gettext("no_such_class"), 404
 
         # We use this extra call to verify if the class name doesn't already exist, if so it's a duplicate
-        Classes = self.db.get_teacher_classes(user["username"], True)
+        username = user["username"]
+        if is_second_teacher(user, class_id):
+            username = Class["teacher"]
+        Classes = self.db.get_teacher_classes(username, True, teacher_only=True)
         for Class in Classes:
             if Class["name"] == body["name"]:
                 return gettext("class_name_duplicate"), 200
@@ -98,7 +97,7 @@ class ClassModule(WebsiteModule):
             return gettext("no_such_class"), 404
 
         self.db.delete_class(Class)
-        if is_second_teacher(user):
+        if is_second_teacher(user, class_id):
             self.db.remove_second_teacher_from_class(Class, user, only_user=True)
 
         achievement = self.achievements.add_single_achievement(user["username"], "end_of_semester")
@@ -174,31 +173,19 @@ class ClassModule(WebsiteModule):
         if not Class or Class["id"] != body["id"]:
             return utils.error_page(error=404, ui_message=gettext("invalid_class_link"))
 
-        user = current_user()
-        username = user['username']
-        if not username:
+        if not current_user()["username"]:
             return gettext("join_prompt"), 403
 
+        self.db.add_student_to_class(Class["id"], current_user()["username"])
+        refresh_current_user_from_db()
         # We only want to remove the invite if the user joins the class with an actual pending invite
-        invite = self.db.get_username_invite(username)
-
+        invite = self.db.get_username_invite(current_user()["username"])
         if invite and invite.get("class_id") == body["id"]:
-            invited_as = invite.get("invited_as")
-            if invited_as == gettext("second_teacher"):
-                class_id = Class["id"]
-                if not (user.get("second_teacher_in") and class_id in user["second_teacher_in"]):
-                    self.db.add_second_teacher_to_class(Class, user)
-                    # return {}, 200
-                # else: TODO: maybe indicate that the user is already a second teacher.
-            elif invited_as == gettext("student"):
-                self.db.add_student_to_class(Class["id"], username)
-
-            refresh_current_user_from_db()
-            self.db.remove_class_invite(username)
+            self.db.remove_class_invite(current_user()["username"])
             # Also remove the pending message in this case
             session["messages"] = 0
 
-        achievement = self.achievements.add_single_achievement(username, "epic_education")
+        achievement = self.achievements.add_single_achievement(current_user()["username"], "epic_education")
         if achievement:
             return {"achievement": achievement}, 200
         return {}, 200
@@ -222,7 +209,6 @@ class ClassModule(WebsiteModule):
     @route("/<class_id>/second-teacher/<second_teacher>", methods=["DELETE"])
     @requires_login
     def remove_second_teacher(self, user, class_id, second_teacher):
-        print('\n\n\n', class_id, second_teacher)
         Class = self.db.get_class(class_id)
         if not Class or Class["teacher"] != user["username"]:  # only teachers can remove second teachers.
             return gettext("ajax_error"), 400
@@ -268,14 +254,14 @@ class MiscClassPages(WebsiteModule):
             return gettext("class_name_empty"), 400
 
         Class = self.db.get_class(body.get("id"))
-        if not Class or Class["teacher"] != user["username"]:  # only teachers can duplicate a class
+        if not Class or not utils.can_edit_class(user, Class):  # only teachers can duplicate a class
             return gettext("no_such_class"), 404
 
         # second_teachers = Class.get("second_teachers")
 
         # We use this extra call to verify if the class name doesn't already exist, if so it's a duplicate
         # Todo TB: This is a duplicate function, might be nice to perform some clean-up to reduce these parts
-        Classes = self.db.get_teacher_classes(user["username"], True)
+        Classes = self.db.get_teacher_classes(user["username"], True, teacher_only=True)
         for Class in Classes:
             if Class["name"] == body.get("name"):
                 return gettext("class_name_duplicate"), 400
@@ -310,11 +296,10 @@ class MiscClassPages(WebsiteModule):
             return {"achievement": achievement}, 200
         return {"id": new_class["id"]}, 200
 
-    @route("/invite_student", methods=["POST"])
+    @route("/invite-student", methods=["POST"])
     @requires_teacher
     def invite_student(self, user):
         body = request.json
-        print('\n\n\n', body)
         # Validations
         if not isinstance(body, dict):
             return gettext("ajax_error"), 400
@@ -369,17 +354,21 @@ class MiscClassPages(WebsiteModule):
         username = body.get("username").lower()
         class_id = body.get("class_id")
 
-        Class = self.db.get_class(class_id)
-        if not Class or Class["teacher"] != teacher["username"]:
-            return utils.error_page(error=404, ui_message=gettext("no_such_class"))
-
         user = self.db.user_by_username(username)
+        Class = self.db.get_class(class_id)
+        if not Class:
+            return utils.error_page(error=404, ui_message=gettext("no_such_class"))
+        elif Class["teacher"] != teacher["username"] or not is_teacher(user):
+            return "Only teachers can add or be added as second teachers!", 403
+        elif Class["teacher"] == username:
+            return "You cannot add yourself as a second teacher!", 400
+
         if not user:
             return gettext("student_not_existing"), 400  # TODO: change to teacher not existing
         if self.db.get_username_invite(user["username"]):
             return gettext("student_already_invite"), 400
 
-        if user.get("second_teacher_in") and class_id in user["second_teacher_in"]:
+        if is_second_teacher(user, class_id):
             #     return gettext("student_already_in_class"), 400
             return {}, 200  # TODO: say user is already a second teacher
 
@@ -409,7 +398,7 @@ class MiscClassPages(WebsiteModule):
         class_id = body.get("class_id")
 
         # Fixme TB -> Sure the user is also allowed to remove their invite, but why the 'retrieve_class_error'?
-        if not is_teacher(user) and not is_second_teacher(user) and username != user.get("username"):
+        if not is_teacher(user) and username != user.get("username"):
             return utils.error_page(error=403, ui_message=gettext("retrieve_class_error"))
         Class = self.db.get_class(class_id)
         if not Class or (not utils.can_edit_class(user, Class) and username != user.get("username")):

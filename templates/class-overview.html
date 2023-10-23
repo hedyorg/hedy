@@ -85,8 +85,8 @@
             {% if is_admin and class_info.teacher != username %}
                 <button class="green-btn" id="customize-class-button" data-cy="customize_class_button" onclick="window.location.href = '/for-teachers/customize-class/{{class_info.id}}'">View customizations</button>
             {% else %}
-            {% if is_teacher and not is_second_teacher %}
-              <button class="green-btn" id="add-second-teacher" _="on click call hedyApp.invite_student('{{class_info.id}}', {{_('invite_prompt')|default(None)|tojson}}, '/invite-second-teacher')">{{_('add_second_teacher')}}</button>
+            {% if class_info.teacher == username %}
+              <button class="green-btn" id="add-second-teacher" _="on click call hedyApp.invite_student('{{class_info.id}}', {{_('invite_prompt')|default(None)|tojson}}, '/invite-second-teacher')">{{_('invite_second_teacher')}}</button>
             {% endif %}
 
                 <button class="green-btn" id="add-student" _="on click toggle the *display of #add_students_options then toggle between .green-btn and .blue-btn on me">{{_('add_students')}}</button>

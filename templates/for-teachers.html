@@ -18,9 +18,10 @@
             <thead class="bg-gray-200">
               <tr>
                   <th class="px-4 py-2 text-left">{{_('name')}}</th>
+                  <th class="px-4 py-2 text-left">{{_('teacher')}}</th>
                   <!-- This is a bucket-fix to get the first letter capitalized, should find a long-term solution -->
                   <th class="px-4 py-2">{{_('students')[0]|upper}}{{_('students')[1:]}}</th>
-                  {% if not is_second_teacher %}<th class="p-2">{{_('duplicate')}}</th>{% endif %}
+                  <th class="p-2">{{_('duplicate')}}</th>
                   <th class="p-2">{{_('remove')}}</th>
               </tr>
             </thead>
@@ -28,8 +29,9 @@
               {% for class in teacher_classes %}
                 <tr>
                   <td class="px-4 py-2"><a href="for-teachers/class/{{class.id}}" class="view_class" data-cy="view_class_link">{{class.name|e}}</a></td>
+                  <td class="username_cell">{{class.teacher}}</td>
                   <td class="text-center p-2">{{class.students|length}}</td>
-                  {% if not is_second_teacher %}<td class="text-center p-2"><a class="no-underline cursor-pointer" onclick='hedyApp.duplicate_class("{{class.id}}", {{_('class_name_prompt')|default(None)|tojson}})')><span class="fas fa-copy"></span></a></td>{% endif %}
+                  <td class="text-center p-2"><a class="no-underline cursor-pointer" onclick='hedyApp.duplicate_class("{{class.id}}", {{_('class_name_prompt')|default(None)|tojson}}, {% if class.teacher != username %}"{{class.name}}"{% else %}" "{% endif %})'><span class="fas fa-copy"></span></a></td>
                   <td class="text-center p-2"><a class="no-underline cursor-pointer" onclick='hedyApp.delete_class("{{class.id}}", {{_('delete_class_prompt')|default(None)|tojson}})'>🗑️</a></td>
                 </tr>
               {% endfor %}
@@ -46,6 +48,7 @@
             <thead class="bg-gray-200">
               <tr>
                   <th class="px-4 py-2 text-left">{{_('name')}}</th>
+                  <th class="px-4 py-2 text-left">{{_('teacher')}}</th>
                   <th class="p-2">{{_('level')}}</th>
                   <th class="p-2 hidden sm:block">{{_('last_update')}}</th>
                   <th class="p-2">{{_('preview')}}</th>
@@ -56,6 +59,7 @@
               {% for adventure in teacher_adventures %}
                 <tr>
                   <td class="px-4 py-2"><a href="for-teachers/customize-adventure/{{adventure.id}}" class="no-underline" data-cy="edit-link">{{adventure.name|e}}</a></td>
+                  <td class="username_cell">{{adventure.creator}}</td>
                   <td class="text-center p-2">{% if adventure.level %}{{adventure.level}}{% else %}-{% endif %}</td>
                   <td class="text-center p-2 hidden sm:block">{{adventure.date}}</td>
                   <td class="text-center p-2"><a class="no-underline cursor-pointer" href="/for-teachers/customize-adventure/view/{{ adventure.id }}">👁</a></td>

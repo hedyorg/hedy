@@ -534,16 +534,16 @@ class Database:
         """Return the classes with given id."""
         return CLASSES.get({"id": id})
 
-    def get_teacher_classes(self, username, students_to_list=False):
+    def get_teacher_classes(self, username, students_to_list=False, teacher_only=False):
         """Return all the classes belonging to a teacher."""
         classes = None
         user = auth.current_user()
         if isinstance(storage, dynamo.AwsDynamoStorage):
+            classes = list(CLASSES.get_many({"teacher": username}, reverse=True))
+
             # if current user is a second teacher, we show the related classes.
-            if auth.is_second_teacher(user):
-                classes = [CLASSES.get({"id": class_id}) for class_id in user["second_teacher_in"]]
-            else:
-                classes = CLASSES.get_many({"teacher": username}, reverse=True)
+            if not teacher_only and auth.is_second_teacher(user):
+                classes.extend([CLASSES.get({"id": class_id}) for class_id in user["second_teacher_in"]])
         # If we're using the in-memory database, we need to make a shallow copy
         # of the classes before changing the `students` key from a set to list,
         # otherwise the field will remain a list later and that will break the
@@ -553,11 +553,13 @@ class Database:
         # skeptical that it's accurate.
         else:
             classes = []
-            if auth.is_second_teacher(user):
-                classes = [CLASSES.get({"id": class_id}).copy() for class_id in user["second_teacher_in"]]
-            else:
-                for Class in CLASSES.get_many({"teacher": username}, reverse=True):
-                    classes.append(Class.copy())
+            for Class in CLASSES.get_many({"teacher": username}, reverse=True):
+                classes.append(Class.copy())
+
+            # if current user is a second teacher, we show the related classes.
+            if not teacher_only and auth.is_second_teacher(user):
+                classes.extend([CLASSES.get({"id": class_id}).copy() for class_id in user["second_teacher_in"]])
+                # classes.extend(CLASSES.query.filter(id__in=user["second_teacher_in"]).all())
 
         if students_to_list:
             for Class in classes:
