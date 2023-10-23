@@ -428,7 +428,7 @@ adventures:
                     nome {is} {ask} Come ti chiami?
                     {print} Ciao nome
                     età {is} {ask} Quanti anni hai?
-                    Il nome di {print} ha anni.
+                    {print} Il nome di ha anni.
     blackjack:
         name: Jack nero
         default_save_name: Jack nero
@@ -539,8 +539,8 @@ adventures:
                     Now that you can calculate, you can also create a program to practice maths calculations. You can make up the calculations yourself, for example:
                 example_code: |
                     ```
-                    number_1 = {ask} 'Compila il primo numero:'
-                    number_2 = {ask} 'Compila il secondo numero:'
+                    numero_1 = {ask} 'Compila il primo numero:'
+                    numero_2 = {ask} 'Compila il secondo numero:'
                     risposta_corretta = numero_1 * numero_2
                     {print} numero_1 ' volte ' numero_2 ' è 'risposta_corretta
                     ```
@@ -559,9 +559,9 @@ adventures:
                     **Extra** Puoi anche lasciare che il computer esegua somme casuali da solo utilizzando `{random}`.
 
                     Ecco come scegli un numero di tabelle su cui esercitarti e da ciò ottieni sempre una somma diversa:
-                start_code: 'number_1 = {ask} ''Compila il primo numero:''
+                start_code: 'numero_1 = {ask} ''Compila il primo numero:''
 
-                    number_2 = {ask} ''Compila il secondo numero:''
+                    numero_2 = {ask} ''Compila il secondo numero:''
 
                     risposta_corretta = numero_1 * numero_2
 
@@ -605,10 +605,10 @@ adventures:
                         {for} numero2 {in} numeri
                             risposta = {ask} 'Quanto fa 'numero2' per 'numero1'?'
                             corretto = numero1 * numero2
-                            {if} la risposta {is} corretta
+                            {if} risposta {is} corretta
                                 {print} 'Ottimo lavoro!'
                             {else}
-                                {print} 'Questo è sbagliato. La risposta giusta è "corretta".
+                                {print} 'Questo è sbagliato. La risposta giusta è ' corretto
                     ```
                 start_code: '# place your code here'
             11:
