@@ -708,13 +708,14 @@ adventures:
                     {print} Moje imię to imię
             5:
                 story_text: |
-                    W poziomie 5 pojawia się coś nowego `{if}`! Za pomocą `{if}` możesz wybrać pomiędzy dwoma opcjami.
-                    Ten kod wyświetla „to miło”, jeśli wprowadzisz imię Hedy, w przeciwnym wypadku wyświetli „bu!”.
-                    `{ask}` i `{print}` działają w dalszym ciągu tak jak w poziomie 4.
+                    W poprzednich poziomach nauczyliśmy się używać `{at} {random}`, które sprawiało, że gry wyglądały inaczej pomiędzy ich odpaleniami.
+                    Ale to nie jest do końca interaktywne, ponieważ gracz nie ma wpływu co się stanie dalej w grze.
+
+                    Na tym poziomie nauczyć się nowej komendy `{if}`, która pozwoli na dawanie różnych odpowiedzi w Twoich programach.
+                    Dla przykładu, w ten sposób będziesz mógł zaprogramować hasło dla swojego komputera. Przejdźmy do kolejnej zakładki!
                 example_code: |
                     ```
-                    imię {is} {ask} 'jak masz na imię?'
-                    {if} imię {is} Hedy {print} 'to miło' {else} {print} 'bu!'
+                    hasło {is} {ask} 'Jakie jest prawidłowe hasło?'
                     ```
                 start_code: |-
                     imię {is} {ask} 'Jak masz na imię?'
@@ -1608,36 +1609,37 @@ adventures:
         levels:
             5:
                 story_text: |
-                    ## If... else....
-                    In level 5 there is something new, the `{if}`! With the `{if}` you can choose between two different options.
-                    This code prints nice if you enter Hedy as a name, and boo! if you enter something else.
-                    `{ask}` and `{print}` still work like they did in level 4.
+                    ## Jeżeli... inaczej...
+                    W poziomie 5 pojawia się coś nowego `{if}`! Za pomocą `{if}` możesz wybrać pomiędzy dwoma opcjami.
+                    Ten kod wyświetla „to miło”, jeśli wprowadzisz imię Hedy, w przeciwnym wypadku wyświetli „bu!”.
+                    `{ask}` i `{print}` działają w dalszym ciągu tak jak w poziomie 4.
                 example_code: |
                     ```
-                    name {is} {ask} 'what is your name?'
-                    {if} name {is} Hedy {print} 'nice' {else} {print} 'boo!'
+                    imię {is} {ask} 'jak masz na imię?'
+                    {if} imię {is} Hedy {print} 'super' {else} {print} 'eh'
                     ```
                 story_text_2: |
-                    Sometimes code with an `{if}` gets really long and does not fit on the line well. <br> You may also divide the code over two lines, starting the second line at the `{else}` like this:
+                    Czasami kod zawierający `{if}` staje się naprawdę długi i nie mieści się w linii. <br>
+                    Wtedy możesz podzielić kod na dwie linie, zaczynając drugą linię od `{else}`, tak jak w przykładzie:
                 example_code_2: |
                     ```
-                    name {is} {ask} 'what is your name?'
-                    {if} name {is} Hedy {print} 'nice'
-                    {else} {print} 'boo!'
+                    imię {is} {ask} 'jak masz na imię?'
+                    {if} imię {is} Hedy {print} 'super'
+                    {else} {print} 'eh'
                     ```
                 story_text_3: |
                     ### Ćwiczenie
-                    Try to create your own code with `{if}` and `{else}`. You can use the example code if you want.
+                    Spróbuj napisać własny kod używając `{if}` and `{else}`. Możesz użyć przykładowego kodu.
                 example_code_3: |
                     ```
-                    answer {is} {ask} '2 + 2 = ?'
-                    _ _ _ 4 _ 'Great job!'
-                    _ _ 'No 2 + 2 = 4'
+                    odpowiedź {is} {ask} '2 + 2 = ?'
+                    _ _ _ 4 _ 'Dobra robota!'
+                    _ _ 'Nie, 2 + 2 = 4'
                     ```
                 start_code: |-
-                    name {is} {ask} 'what is your name?'
-                    {if} name {is} Hedy {print} 'nice'
-                    {else} {print} 'boo!'
+                    imię {is} {ask} 'jak masz na imię?'
+                    {if} imię {is} Hedy {print} 'super'
+                    {else} {print} 'eh'
             8:
                 story_text: |
                     ## If... Else...
@@ -1689,31 +1691,31 @@ adventures:
         levels:
             5:
                 story_text: |
-                    ## Lists
-                    When we want to check if something is in a list, we can now use the `{in}` command.
-                    This code prints pretty! if you choose green or yellow, and meh otherwise.
+                    ## Listy
+                    Aby sprawdzić czy coś jest obecne na liście, możemy użyć komendy `{in}`.
+                    Ten kod wypisuje 'ładny' jeśli wprowadzimy 'zielony' albo 'żółty', a w przeciwnym razie wypisuje 'meh'.
                 example_code: |
                     ```
-                    pretty_colors {is} green, yellow
-                    favorite_color {is} {ask} 'What is your favorite color?'
-                    {if} favorite_color {in} pretty_colors {print} 'pretty!'
+                    ładne_kolory {is} zielony, żółty
+                    wybrany_kolor {is} {ask} 'Jaki jest Twój ulubiony kolor?'
+                    {if} wybrany_kolor {in} ładne_kolory {print} 'ładny!'
                     {else} {print} 'meh'
                     ```
                 story_text_2: |
                     ### Ćwiczenie
-                    Finish the example code by filling in the blanks with commands that you've learned.
-                    When you've finished the code, try to create a code of your own and use a question that you've thought of yourself.
+                    Dokończ przykładowy kod wypełniająć puste miejsca komendami, których się nauczyłeś.
+                    Po dokończeniu kodu, spróbuj stworzyć własny kod i użyj pytania, które wymyśliłeś sam.
                 example_code_2: |
                     ```
-                    animals is dog, cow, sheep
-                    answer is ask 'What is your favorite animal?'
-                    _ answer _ animals _ 'Mine too!'
-                    _ _ 'My favorite animals are dogs, cows and sheep'
+                    zwierzęta {is} pies, krowa, owca
+                    odpowiedź {is} {ask} 'Jakie jest Twoje ulubione zwierzę?'
+                    _ odpowiedź _ animals _ 'Mine too!'
+                    _ _ 'Moje ulubione zwierzęta to psy, krowy i owce'
                     ```
                 start_code: |-
-                    pretty_colors {is} green, yellow
-                    favorite_color {is} {ask} 'What is your favorite color?'
-                    {if} favorite_color {in} pretty_colors {print} 'pretty!'
+                    ładne_kolory {is} zielony, żółty
+                    wybrany_kolor {is} {ask} 'Jaki jest Twój ulubiony kolor?'
+                    {if} wybrany_kolor {in} ładne_kolory {print} 'ładny!'
                     {else} {print} 'meh'
     is_command:
         name: '{is}'
