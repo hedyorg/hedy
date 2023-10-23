@@ -136,9 +136,10 @@
 
             // Listen to message from the host to dynamically toggle readOnly mode
             window.addEventListener('message', function (message) {
+                console.log(message);
                 if (message.data.mode) {
                     const editor = ace.edit('editor');
-                    if (message.data.mode == 'readonly') {
+                    if (message.data.mode == 'read') {
                         editor.setReadOnly(true);
                     } else if (message.data.mode == 'edit') {
                         editor.setReadOnly(false);
