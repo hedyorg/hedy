@@ -124,15 +124,27 @@
             })
 
             // Remove all console logs as these messages might clutter the log of the parent site
-            console.log = function () {};
-            console.dir = function () {};
-            console.debug = function () {};
+            // console.log = function () {};
+            // console.dir = function () {};
+            // console.debug = function () {};
 
             // Dynamically add the gutter to the editor when readOnly
             {% if readOnly %}
-                var editor = ace.edit('editor');
+                const editor = ace.edit('editor');
                 editor.setOption("showGutter", true);
             {% endif %}
+
+            // Listen to message from the host to dynamically toggle readOnly mode
+            window.addEventListener('message', function (message) {
+                if (message.data.mode) {
+                    const editor = ace.edit('editor');
+                    if (message.data.mode == 'readonly') {
+                        editor.setOption("readonly", true);
+                    } else if (message.data.mode == 'edit') {
+                        editor.setOption("readonly", false);
+                    }
+                }
+            });
 
             // We need a work-around to allow listening to events from outside the embedded editor
             function sendRunEvent() {
