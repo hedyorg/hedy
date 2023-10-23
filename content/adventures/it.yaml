@@ -559,15 +559,11 @@ adventures:
                     **Extra** Puoi anche lasciare che il computer esegua somme casuali da solo utilizzando `{random}`.
 
                     Ecco come scegli un numero di tabelle su cui esercitarti e da ciò ottieni sempre una somma diversa:
-                start_code: 'numero_1 = {ask} ''Compila il primo numero:''
-
-                    numero_2 = {ask} ''Compila il secondo numero:''
-
+                start_code: |
+                    numero_1 = {ask} 'Compila il primo numero:'
+                    numero_2 = {ask} 'Compila il secondo numero:'
                     risposta_corretta = numero_1 * numero_2
-
-                    {print} numero_1 '' volte '' numero_2 '' è ''risposta_corretta
-
-                    '
+                    {print} numero_1 ' volte ' numero_2 ' è 'risposta_corretta
             9:
                 story_text: |
                     Nel livello 6 hai creato una calcolatrice, in questo livello puoi espandere quel codice in modo che ponga più domande.
@@ -626,7 +622,10 @@ adventures:
                     {for} i {in} {range} 1 to 10
                         {print} i * number
                     ```
-                start_code: "numero = 10\n{for} i {in} {range} 1 {to} 10\n    {print} i * numero\n"
+                start_code: |
+                    numero = 10
+                    {for} i {in} {range} 1 {to} 10
+                        {print} i * numero
             12:
                 story_text: |
                     In questo livello puoi creare una calcolatrice che funzioni con i numeri decimali.
