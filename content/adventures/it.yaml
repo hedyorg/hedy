@@ -247,8 +247,8 @@ adventures:
                     {print} 'Il nostro eroe sta camminando attraverso la foresta'
                     {print} 'Il percorso si divide in due parti'
                     path = {ask} 'Quale percorso dovrebbe scegliere?'
-                    arma = {chiedere} 'Che arma estrae?'
-                    {if} percorso {{is}} 'sinistra' {is} arma {is} 'spada'
+                    arma = {ask} 'Che arma estrae?'
+                    {if} percorso {is} 'sinistra' {and} arma {is} 'spada'
                         _
                     ```
                 start_code: '# scrivi il tuo codice qui'
@@ -280,19 +280,19 @@ adventures:
                     Create a story of at least 5 sentences. You don't have to use 'name' just yet.
                 example_code: |
                     ```
-                    {print}('Welcome to this story!')
+                    {print}('Benvenuti in questa storia!')
                     ```
                 story_text_2: |
-                    ### Exercise 2
-                    We have already prepared an `{input}` for you. First, use the `name` variable in your story.
-                    Then add a second `{ask}` and use that variable as well.
-                    Tip: Remember the commas in a `{print}` between text and variables!
+                    ### Esercizio 2
+                    Abbiamo già preparato un `{input}` per te. Innanzitutto, utilizza la variabile `name` nella tua storia.
+                    Quindi aggiungi un secondo `{ask}` e usa anche quella variabile.
+                    Suggerimento: ricorda le virgole in `{print}` tra testo e variabili!
                 example_code_2: |
                     ```
-                    naam = {input}("What's your name?")
-                    {print}('Welcome to this story!')
+                    naam = {input}("Come ti chiami?")
+                    {print}('Benvenuti in questa storia!')
                     ```
-                start_code: '# Schrijf jouw code hier'
+                start_code: '# inserisci qui il tuo codice'
     add_remove_command:
         name: '{add} {to} & {remove} {from}'
         default_save_name: add_remove_command
@@ -341,20 +341,20 @@ adventures:
                     {print} I choose animals {at} {random}
     and_or_command:
         name: '{and} & {or}'
-        default_save_name: and or
+        default_save_name: e o
         description: introducing and or
         levels:
             13:
                 story_text: |-
-                    We are now going to learn `{and}` and `{or}`! If you want to check two statements, you don't have to use two `{if}`s but can use `{and}` and `{or}`.
+                    Ora impareremo `{and}` e `{or}`! Se vuoi controllare due istruzioni, non devi usare due `{if}` ma puoi usare `{and}` e `{or}`.
 
-                    If you use `{and}`, both statements, left and right of the `{and}` need to be true. We can also use `{or}`. Then only one statement needs to be correct.
+                    Se usi `{and}`, entrambe le affermazioni, a sinistra e a destra di `{and}` devono essere vere. Possiamo anche usare `{or}`. Allora solo una affermazione deve essere corretta.
                 example_code: |
                     ```
-                    name = {ask} 'what is your name?'
-                    age = {ask} 'what is your age?'
-                    {if} name {is} 'Hedy' {and} age {is} 2
-                        {print} 'You are the real Hedy!'
+                    nome = {ask} 'come ti chiami?'
+                    età = {ask} 'qual è la tua età?'
+                    {if} nome {is} 'Hedy' {and} età {is} 2
+                        {print} 'Tu sei la vera Hedy!'
                     ```
                 start_code: |-
                     name = {ask} 'what is your name?'
@@ -399,12 +399,12 @@ adventures:
                     {echo} hello
             2:
                 story_text: |
-                    ## The ask command
-                    Now that we can use **variables** in our codes, we no longer need the `{echo}` command.
-                    We can use variables to store the answers to our questions and this way we can use the answer to multiple questions in our codes.
-                    Check it out:
+                    ## Il comando chiedi
+                    Ora che possiamo utilizzare le **variabili** nei nostri codici, non abbiamo più bisogno del comando `{echo}`.
+                    Possiamo utilizzare le variabili per memorizzare le risposte alle nostre domande e in questo modo possiamo utilizzare la risposta a più domande nei nostri codici.
+                    Controlla:
 
-                    This way your code is becoming interactive!
+                    In questo modo il tuo codice diventa interattivo!
                 example_code: |
                     ```
                     name {is} {ask} What is your name?
@@ -413,36 +413,36 @@ adventures:
                     {print} name is age years old.
                     ```
                 story_text_2: |
-                    ### Exercise
-                    In the previous tab you have practised with setting variables with the `{is}` command.
-                    You have created at least 3 variables and used them with a print command.
-                    Now, instead of setting the variables we want you to make the variables interactive, like we did in our example.
+                    ### Esercizio
+                    Nella scheda precedente ti sei esercitato a impostare le variabili con il comando `{is}`.
+                    Hai creato almeno 3 variabili e le hai utilizzate con un comando print.
+                    Ora, invece di impostare le variabili, vogliamo che tu renda le variabili interattive, come abbiamo fatto nel nostro esempio.
 
-                    Copy your code from the previous tab and make the variables interactive by using `{ask}` commands.
+                    Copia il codice dalla scheda precedente e rendi interattive le variabili utilizzando i comandi `{ask}`.
                 example_code_2: |
                     ```
-                    favorite_animals is ask What is your favorite animal?
-                    print I like favorite_animals
+                    favorite_animals {is} {ask} Qual è il tuo animale preferito?
+                    {print} Mi piacciono gli animali_preferiti
                     ```
                 start_code: |-
-                    name {is} {ask} What is your name?
-                    {print} Hello name
-                    age {is} {ask} How old are you?
-                    {print} name is age years old.
+                    nome {is} {ask} Come ti chiami?
+                    {print} Ciao nome
+                    età {is} {ask} Quanti anni hai?
+                    Il nome di {print} ha anni.
     blackjack:
-        name: Blackjack
-        default_save_name: Blackjack
-        description: Try to get as close to 21 as you can
+        name: Jack nero
+        default_save_name: Jack nero
+        description: Cerca di avvicinarti il più possibile a 21
         levels:
             17:
                 story_text: |
-                    Blackjack is a simple game of cards in which you have to get as close to 21 points as possible. You get two cards. Each card is worth their numeral value, and the face cards (Jack, Queen and King) are worth 10 points.
-                    The Ace is worth either 1 or 11 points (you can choose). The dealer, your opponent, also gets two cards.
-                    If you want, you can get another card, and its points will be added to your total. The dealer can also choose to take another card.
-                    But be careful not to get more than 21 points, because if you do, you lose!
-                    The player who gets closest to 21, without going over it, wins!
+                    Il Blackjack è un semplice gioco di carte in cui devi avvicinarti il più possibile a 21 punti. Ottieni due carte. Ogni carta vale il suo valore numerico e le figure (Fante, Regina e Re) valgono 10 punti.
+                    L'asso vale 1 o 11 punti (puoi scegliere). Anche il dealer, il tuo avversario, riceve due carte.
+                    Se lo desideri, puoi ottenere un'altra carta e i suoi punti verranno aggiunti al tuo totale. Il dealer può anche scegliere di prendere un'altra carta.
+                    Ma fai attenzione a non ottenere più di 21 punti, perché se lo fai, perdi!
+                    Vince il giocatore che si avvicina di più al 21, senza superarlo!
 
-                    Have fun!
+                    Divertiti!
                 example_code: |
                     ```
                     {print} 'BLACKJACK'
@@ -539,10 +539,10 @@ adventures:
                     Now that you can calculate, you can also create a program to practice maths calculations. You can make up the calculations yourself, for example:
                 example_code: |
                     ```
-                    correct_answer = 11 * 27
-                    answer = {ask} 'How much is 11 times 27?'
-                    {if} answer {is} correct_answer {print} 'good job!'
-                    {else} {print} 'Wrong! It was ' correct_answer
+                    number_1 = {ask} 'Compila il primo numero:'
+                    number_2 = {ask} 'Compila il secondo numero:'
+                    risposta_corretta = numero_1 * numero_2
+                    {print} numero_1 ' volte ' numero_2 ' è 'risposta_corretta
                     ```
                 story_text_2: |
                     ### Esercizio
@@ -550,23 +550,33 @@ adventures:
                     Compila gli spazi vuoti per completarlo!
                 example_code_2: |
                     ```
-                    tables = 4, 5, 6, 8
-                    numbers = 1, 2, 3, 4, 5, 6, 7, 8, 9, 10
-                    table = tables {at} {random}
-                    number = numbers {at} {random}
-                    correct_answer = table * number
-                    answer = {ask} 'how much is ' table ' times ' number '?'
-                    {if} answer {is} correct_answer {print} 'okay'
-                    {else} {print} 'mistake! it was ' correct_answer
+                    risposta_corretta = 11 * 27
+                    risposta = {ask} 'Quanto fa 11 per 27?'
+                    {if} risposta {is} _ {print} 'bel lavoro!'
+                    {else} {print} 'Sbagliato! Era ' _
                     ```
                 story_text_3: |
                     **Extra** Puoi anche lasciare che il computer esegua somme casuali da solo utilizzando `{random}`.
 
                     Ecco come scegli un numero di tabelle su cui esercitarti e da ciò ottieni sempre una somma diversa:
-                start_code: '{print} ''Welcome to this calculator!'''
+                start_code: 'number_1 = {ask} ''Compila il primo numero:''
+
+                    number_2 = {ask} ''Compila il secondo numero:''
+
+                    risposta_corretta = numero_1 * numero_2
+
+                    {print} numero_1 '' volte '' numero_2 '' è ''risposta_corretta
+
+                    '
             9:
                 story_text: |
-                    In previous levels you've learned how to make a calculator, in this level you can expand that code and make it into a little maths game. Like this...
+                    Nel livello 6 hai creato una calcolatrice, in questo livello puoi espandere quel codice in modo che ponga più domande.
+
+                    ### Esercizio 1
+                    Riesci a finire la riga 10 per far funzionare il programma?
+
+                    ### Esercizio 2
+                    Dai un feedback al giocatore quando inserisce una risposta giusta o sbagliata. Per raggiungere questo obiettivo, espandi il tuo programma con un `{else}`.
                 example_code: |
                     ```
                     punteggio = 0
@@ -582,7 +592,7 @@ adventures:
                             punteggio = punteggio + 1
                     {print} 'Ottimo lavoro! Il tuo punteggio è... 'punteggio' su 10!'
                     ```
-                start_code: '{print} ''Welcome to this calculator!'''
+                start_code: '{print} ''Benvenuti in questa calcolatrice!'''
             10:
                 story_text: |
                     Questo gioco di calcolatrice ti aiuta a praticare le tue tabelline!
@@ -590,15 +600,15 @@ adventures:
                     Puoi aggiungere più numeri all'elenco, così da poter esercitarti con le tabelline fino al 10?
                 example_code: |
                     ```
-                    numbers = 1, 2, 3
-                    {for} number1 {in} numbers
-                        {for} number2 {in} numbers
-                            answer = {ask} 'How much is ' number2 ' times ' number1 '?'
-                            correct = number1 * number2
-                            {if} answer {is} correct
-                                {print} 'Great job!'
+                    numeri = 1, 2, 3
+                    {for} numero1 {in} numeri
+                        {for} numero2 {in} numeri
+                            risposta = {ask} 'Quanto fa 'numero2' per 'numero1'?'
+                            corretto = numero1 * numero2
+                            {if} la risposta {is} corretta
+                                {print} 'Ottimo lavoro!'
                             {else}
-                                {print} 'Thats wrong. The right answer is ' correct
+                                {print} 'Questo è sbagliato. La risposta giusta è "corretta".
                     ```
                 start_code: '# place your code here'
             11:
@@ -616,18 +626,26 @@ adventures:
                     {for} i {in} {range} 1 to 10
                         {print} i * number
                     ```
-                start_code: '# place your code here'
+                start_code: "numero = 10\n{for} i {in} {range} 1 {to} 10\n    {print} i * numero\n"
             12:
                 story_text: |
-                    Now you can make a calculator that works for decimal numbers.
+                    In questo livello puoi creare una calcolatrice che funzioni con i numeri decimali.
+
+                    ### Esercizio 1
+                    Compila gli spazi vuoti per completare la calcolatrice. Ricordarsi di utilizzare un punto e non una virgola per i numeri decimali.
+
+                    ### Esercizio 2
+                    Crea un nuovo programma di esercitazione di matematica, ma ora usa i numeri decimali.
+                    Crea una lista di numeri, scegline due per multipli e lascia che sia il giocatore a rispondere.
+                    E ovviamente devi convalidare la risposta! **Extra** Aumenta la difficoltà aggiungendo vite: un giocatore perde una vita per una risposta sbagliata e dopo tre risposte sbagliate il gioco finisce.
                 example_code: |
                     ```
-                    number1 = {ask} 'What is the first number?'
-                    number2 = {ask} 'What is the second number?'
-                    answer = number1 + number2
-                    {print} number1 ' plus ' number2 ' is ' answer
+                    numero1 = {ask} 'Qual è il primo numero?'
+                    numero2 = {ask} 'Qual è il secondo numero?'
+                    risposta = _
+                    {print} numero1' più 'numero2' è '_
                     ```
-                start_code: '# place your code here'
+                start_code: '# inserisci qui il tuo codice'
             13:
                 story_text: |
                     ### Exercise 1
@@ -698,28 +716,28 @@ adventures:
                     Beware! If you are using a `{clear}` command, remember to use a `{sleep}` above it. Otherwise Hedy will clear your screen without giving you the time to read!
                 example_code: |
                     ```
-                    print '3'
-                    sleep
-                    clear
-                    print '2'
-                    sleep
-                    clear
-                    print '1'
-                    sleep
-                    clear
-                    print 'SURPRISE!'
+                    {print} '3'
+                    {sleep}
+                    {clear}
+                    {print} '2'
+                    {sleep}
+                    {clear}
+                    {print} '1'
+                    {sleep}
+                    {clear}
+                    {print} 'SORPRESA'
                     ```
                 start_code: |
-                    print '3'
-                    sleep
-                    clear
-                    print '2'
-                    sleep
-                    clear
-                    print '1'
-                    sleep
-                    clear
-                    print 'SURPRISE!'
+                    {print} '3'
+                    {sleep}
+                    {clear}
+                    {print} '2'
+                    {sleep}
+                    {clear}
+                    {print} '1'
+                    {sleep}
+                    {clear}
+                    {print} 'SORPRESA'
     default:
         name: Introduzione
         default_save_name: intro
