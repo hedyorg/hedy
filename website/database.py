@@ -600,6 +600,26 @@ class Database:
     def get_teacher_adventures(self, username):
         return ADVENTURES.get_many({"creator": username})
 
+    def get_second_teacher_adventures(self, classes, teacher):
+        """Retrieves all adventures of every second teacher in a class"""
+        # we consider the current user as a second teacher 
+        adventures = []
+        # accounting for duplicates
+        retrieved = {teacher: True} # current teacher's adventures are already retrieved 
+        # for the classes they're teachers and second teachers in, we
+        for Class in classes:
+            # get the adventures of all other teachers.
+            if not retrieved.get(Class["teacher"]):
+                adventures.extend(self.get_teacher_adventures(Class["teacher"]))
+                retrieved[Class["teacher"]] = True
+            # and all other second teachers
+            for st in Class.get("second_teachers", []):
+                if not retrieved.get(st["username"]):
+                    st_adventures = self.get_teacher_adventures(st["username"])
+                    adventures.extend(st_adventures)
+                    retrieved[st["username"]] = True
+        return adventures
+
     def all_adventures(self):
         return ADVENTURES.scan()
 
