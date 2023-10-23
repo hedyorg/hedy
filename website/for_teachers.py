@@ -370,7 +370,8 @@ class ForTeachersModule(WebsiteModule):
         # if is_second_teacher(user):
         #     username = self.db.get_class_main_teacher(class_id)
         teacher_adventures = list(self.db.get_teacher_adventures(user["username"]))
-        second_teacher_adventures = self.db.get_second_teacher_adventures([self.db.get_class(class_id)], user["username"])
+        second_teacher_adventures = self.db.get_second_teacher_adventures(
+            [self.db.get_class(class_id)], user["username"])
         teacher_adventures += second_teacher_adventures
         customizations = self.db.get_class_customizations(class_id)
 
