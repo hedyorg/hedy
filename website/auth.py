@@ -121,10 +121,10 @@ def force_json_serializable_type(x):
 # Retrieve the current user from the Flask session.
 #
 # If the current user is too old, as determined by the time-to-live, we repopulate from the database.
-def current_user():
+def current_user(refresh=False):
     now = times()
     ttl = session.get("user-ttl", None)
-    if ttl is None or now >= ttl:
+    if ttl is None or now >= ttl or refresh:
         refresh_current_user_from_db()
 
     user = session.get("user", {"username": "", "email": ""})
@@ -170,16 +170,17 @@ def is_admin(user):
     return user.get("username") in admin_users or user.get("email") in admin_users
 
 
-def is_teacher(user):
+def is_teacher(user, cls=None):
     # the `is_teacher` field is either `0`, `1` or not present.
-    user_is_teacher = bool(user.get("is_teacher", False))
-    user_is_second_teacher = is_second_teacher(user)
-    return user_is_teacher or user_is_second_teacher
+    return bool(user.get("is_teacher", False))
 
 
-def is_second_teacher(user):
-    # the `second_teacher_in` field indicates that the user is a second teacher in classes.
-    return bool(user.get("second_teacher_in", False))
+def is_second_teacher(user, class_id=None):
+    # the `second_teacher_in` field indicates the classes where the user is a second teacher.
+    class_id = class_id or session.get("class_id")
+    if not class_id:
+        return bool(user.get("second_teacher_in", False))
+    return is_teacher(user) and class_id in user.get("second_teacher_in", [])
 
 
 def has_public_profile(user):
@@ -264,8 +265,7 @@ def requires_teacher(f):
 
     @wraps(f)
     def inner(*args, **kws):
-        if not is_user_logged_in() or \
-                (not is_teacher(current_user()) and not is_second_teacher(current_user())):
+        if not is_user_logged_in() or not is_teacher(current_user()):
             return utils.error_page(error=403, ui_message=gettext("unauthorized"))
         return f(*args, user=current_user(), **kws)
 
