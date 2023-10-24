@@ -602,10 +602,10 @@ class Database:
 
     def get_second_teacher_adventures(self, classes, teacher):
         """Retrieves all adventures of every second teacher in a class"""
-        # we consider the current user as a second teacher 
+        # we consider the current user as a second teacher
         adventures = []
         # accounting for duplicates
-        retrieved = {teacher: True} # current teacher's adventures are already retrieved 
+        retrieved = {teacher: True}  # current teacher's adventures are already retrieved
         # for the classes they're teachers and second teachers in, we
         for Class in classes:
             # get the adventures of all other teachers.
