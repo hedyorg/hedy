@@ -367,10 +367,11 @@ class ForTeachersModule(WebsiteModule):
             default_adventures = hedy_content.Adventures("en").get_adventure_keyname_name_levels()
 
         # username = user["username"]
-        # if is_second_teacher(user):
+        # if is_second_teacher(user, session["class_id"]):
         #     username = self.db.get_class_main_teacher(class_id)
         teacher_adventures = list(self.db.get_teacher_adventures(user["username"]))
-        second_teacher_adventures = self.db.get_second_teacher_adventures([self.db.get_class(class_id)], user["username"])
+        second_teacher_adventures = self.db.get_second_teacher_adventures(
+            [self.db.get_class(class_id)], user["username"])
         teacher_adventures += second_teacher_adventures
         customizations = self.db.get_class_customizations(class_id)
 
@@ -489,7 +490,7 @@ class ForTeachersModule(WebsiteModule):
         Class = self.db.get_class(class_id)
         if not Class or Class["teacher"] != user["username"]:
             return utils.error_page(error=404, ui_message=gettext("no_such_class"))
-        # username = Class["teacher"] if is_second_teacher(user) else user["username"]
+        # username = Class["teacher"] if is_second_teacher(user, session["class_id"]) else user["username"]
         teacher_adventures = list(self.db.get_teacher_adventures(user["username"]))
         second_teacher_adventures = self.db.get_second_teacher_adventures([Class], user["username"])
         teacher_adventures += second_teacher_adventures
@@ -704,7 +705,8 @@ class ForTeachersModule(WebsiteModule):
             if self.db.user_by_username(account.get("username").strip().lower()):
                 return {"error": gettext("usernames_exist"), "value": account.get("username").strip().lower()}, 200
 
-        username = self.db.get_class_main_teacher(session["class_id"]) if is_second_teacher(user) else user["username"]
+        username = self.db.get_class_main_teacher(session["class_id"]) if is_second_teacher(
+            user, session["class_id"]) else user["username"]
         # Now -> actually store the users in the db
         for account in body.get("accounts", []):
             # Set the current teacher language and keyword language as new account language

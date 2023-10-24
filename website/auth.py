@@ -177,7 +177,6 @@ def is_teacher(user, cls=None):
 
 def is_second_teacher(user, class_id=None):
     # the `second_teacher_in` field indicates the classes where the user is a second teacher.
-    class_id = class_id or session.get("class_id")
     if not class_id:
         return bool(user.get("second_teacher_in", False))
     return is_teacher(user) and class_id in user.get("second_teacher_in", [])
