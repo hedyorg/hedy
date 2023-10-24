@@ -1,74 +1,74 @@
 @top Program { eol* (Command eol+)* Command? }
 
 Command {
-    Assign | AssignList | Input | Clear |Print | Turtle | Sleep | Add | Remove | If | Else | Repeat | For | Define | Call | Return | While | Elif |ErrorInvalid
-}
-
-IfLessCommand {
-    Assign | AssignList | Input | Clear |Print | Turtle | Sleep | Add | Remove | Repeat | For | Define | Call | Return | While | Elif | ErrorInvalid
+    Assign | AssignList | Input | Clear | Print | Turtle | Sleep | Add | Remove | If | Else | Repeat | For | Define | Call | Return | While | Elif | ErrorInvalid
 }
 
 @local tokens {    
-    stringEnd { "'" | "\n" }    
-    @else stringContent
+    singleQuoteStringEnd { "'" | "\n" }
+    @else singleQuoteStringContent
   }
   
   @skip {} {
-    String { "'" (stringContent)* stringEnd }
+    singleQuotedString { "'" (singleQuoteStringContent)* singleQuoteStringEnd }
 }
 
+@local tokens {    
+    doubleQuoteStringEnd { '"' | "\n" }
+    @else doubleQuoteStringContent
+  }
+  
+  @skip {} {
+    doubleQuotedString { '"' (doubleQuoteStringContent)* doubleQuoteStringEnd }
+}
 
-Print { kw<"print">  Op<"("> Arguments? Op<")"> }
+String { doubleQuotedString | singleQuotedString }
 
-AssignList { Text (kw<"is"> | Op<"=">) Op<"["> (String | Number ) ~ambig  (Op<","> (String | Number ))+ Op<"]">} // Op<","> doesn't really parse well if it is not separated by spaces
-Assign { (Text | ListAccess) (kw<"is"> | Op<"=">) (Expression ~ambig )+ }
-Input { Text (kw<"is"> | Op<"=">) kw<"input"> Op<"("> Arguments? Op<")"> }
-Sleep { kw<"sleep"> (Expression | Call)? }
+Print { print+  Op<"("> Arguments? Op<")"> }
 
-ListAccess { Text Op<"["> (kw<"random"> | Text) Op<"]">}
+AssignList { Text (is+ | Op<"=">) Op<"["> (String | Number ) ~ambig  (Comma (String | Number ))+ Op<"]">} // Comma doesn't really parse well if it is not separated by spaces
+Assign { (Text | ListAccess) (is+ | Op<"=">) (Expression ~ambig )+ }
+Input { Text (is+ | Op<"=">) input+ Op<"("> Arguments? Op<")"> }
+Sleep { sleep+ (Expression | Call)? }
+
+ListAccess { Text Op<"["> (random+ | Text) Op<"]">}
 
 Turtle[@isGroup=turtle] {
-    Forward { kw<"forward"> (Expression | Call) } |
-    Turn { kw<"turn"> (Expression | Call) } |
-    Color { kw<"color"> (Expression | Call)  }
+    Forward { forward+ (Expression | Call) } |
+    Turn { turn+ (Expression | Call) } |
+    Color { color+ (Expression | Call)  }
 }   
 
-Add { kw<"add"> (Expression | Call ) kw<"to"> Text }
-Remove { kw<"remove"> (Expression | Call) kw<"from"> Text }
-Clear { kw<"clear"> }
+Add { add+ (Expression | Call ) toList+ Text }
+Remove { remove+ (Expression | Call) from+ Text }
+Clear { clear+ }
 ErrorInvalid[@dynamicPrecedence=-10] { Text+ }
 
-If { kw<"if"> Condition ((kw<"and"> | kw<"or">) Condition)* Op<":"> IfLessCommand? Else? }
-Else { kw<"else"> Op<":"> IfLessCommand? }
-Elif { kw<"elif"> Condition ((kw<"and"> | kw<"or">) Condition)* Op<":"> }
+If { ifs+ Condition ((and+| or+) Condition)* Op<":"> }
+Else { elses+ Op<":"> }
+Elif { elif+ Condition ((and+| or+) Condition)* Op<":"> }
 Condition {    
-    PressedCheck { Text ~cond kw<"is"> kw<"pressed"> } |
-    EqualityCheck { (Expression | Call) (kw<"is"> | Op<"="> Op<"=">? ) (Expression | Call) } |
+    PressedCheck { Text ~cond is+ pressed+ } |
+    EqualityCheck { (Expression | Call) (is+ | Op<"="> Op<"=">? ) (Expression | Call) } |
     NotEqualCheck { (Expression | Call) (Op<"!=">) (Expression | Call) } |
     ComparisonCheck { (Expression | Call) (Op<">"> | Op<"<">) Op<"=">? (Expression | Call) } |
-    ListCheck { (Expression ~cond | Call) kw<"not">? kw<"in">  Text }
+    ListCheck { (Expression ~cond | Call) notIn+  Text }
 }
 
 
-Repeat { kw<"repeat"> (Number | Text) kw<"times"> IfLessCommand }
+Repeat { repeat+ (Number | Text) times+ }
 
-For { kw<"for"> Text kw<"in"> (Text | kw<"range"> Op<"("> (Number | Text) Op<","> (Number | Text) (Op<","> (Number | Text))? Op<")">) Op<":"> }
-While { kw<"while"> Condition ((kw<"and"> | kw<"or">) Condition)* Op<":">}
-Define { kw<"def"> Text Op<"("> Arguments? Op<")"> Op<":">}
+For { fors+ Text ins+ (Text | range+ Op<"("> (Number | Text) Comma (Number | Text) (Comma (Number | Text))? Op<")">) Op<":"> }
+While { whiles+ Condition ((and+| or+) Condition)* Op<":">}
+Define { def+ Text Op<"("> Arguments? Op<")"> Op<":">}
 Call { Text Op<"("> Arguments? Op<")"> }
-Return { kw<"return"> ( Expression | Call)+ }
+Return { returns+ (Call)+ }
 
 
-Arguments { argument (Op<","> argument)* }
+Arguments { argument (Comma argument)* }
 argument { Expression | Call}
 
-
-kw<term> { @specialize[@name={term}]<Text, term> }
-skw<term> { @extend[@name={term}]<Text, term> }
 Op<expr> { expr }
-
-
-atom { Number | Text }
 
 binaryExpression {
     Expression !times Op<"*" | "/"> Expression |
@@ -90,6 +90,37 @@ Expression {
 }
 
 
+@external specialize { Text } specializeKeyword from "./tokens" {
+    print[@name="print"],
+    is[@name="is"],
+    input[@name="input"],
+    sleep[@name="sleep"],
+    random[@name="random"],
+    forward[@name="forward"],
+    turn[@name="turn"],
+    color[@name="color"],
+    add[@name="add"],
+    remove[@name="remove"],
+    from[@name="from"],
+    clear[@name="clear"],
+    ifs[@name="if"],
+    elses[@name="else"],
+    and[@name="and"],
+    or[@name="or"],
+    pressed[@name="pressed"],
+    notIn[@name="notIn"],
+    ins[@name="in"],
+    repeat[@name="repeat"],
+    times[@name="times"],
+    range[@name="range"],
+    whiles[@name="while"],
+    def[@name="def"],
+    returns[@name="return"],
+    fors[@name="for"],
+    toList[@name="toList"],
+    elif[@name="elif"]
+}
+
 @tokens {
     @precedence {
         Number,
@@ -97,9 +128,11 @@ Expression {
     }
     Comment { "#" ![\n]* }
     eol { "\n" }
-    Text { ![^\n,،，、 '+#/*\-=><!\]\[:()]+ } // a little bit of a hack not to parse commas never, but lezer adds them as error nodes, so it still
+    Comma { $[,،，、] } // every language comma is valid here
+    Text { !["\n,،，、 '+#/*\-=><!\]\[:()]+ } // a little bit of a hack not to parse commas never, but lezer adds them as error nodes, so it still
     space { " " }
-    Number { @digit+ ("." @digit+)? }
+    digit { $[٠١٢٣٤٥٦٧٨٩۰۱۲۳۴۵۶۷۸۹0123456789] } // latin, arab and pa_PK (Panjabi) scripts
+    Number { digit+ ("." digit+)? }
 }
 
 @skip { Comment | space }

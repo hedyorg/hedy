@@ -18,6 +18,7 @@ import { HedyEditor, EditorType } from './editor';
 import { stopDebug } from "./debugging";
 import { HedyAceEditorCreator } from './ace-editor';
 import { HedyCodeMirrorEditor, HedyCodeMirrorEditorCreator } from './cm-editor';
+import { initializeTranslation } from './lezer-parsers/tokens';
 
 export let theGlobalEditor: HedyEditor;
 export let theModalEditor: HedyEditor;
@@ -196,6 +197,7 @@ export function initializeCodePage(options: InitializeCodePageOptions) {
   if ($editor.length) {
     const dir = $("body").attr("dir");
     theGlobalEditor = editorCreator.initializeEditorWithGutter($editor, EditorType.MAIN, dir);
+    initializeTranslation({keywordLanguage: theKeywordLanguage, level: theLevel});
     attachMainEditorEvents(theGlobalEditor);
     error.setEditor(theGlobalEditor);
     initializeDebugger({

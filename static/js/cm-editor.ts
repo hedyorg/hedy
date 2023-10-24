@@ -16,7 +16,6 @@ import {
     removeIncorrectLineEffect
 } from "./cm-decorations";
 
-
 import { parser as level1Parser } from "./lezer-parsers/level1-parser.js"
 import { parser as level2Parser } from "./lezer-parsers/level2-parser.js"
 import { parser as level3Parser } from "./lezer-parsers/level3-parser"
@@ -37,6 +36,26 @@ import { parser as level18Parser } from "./lezer-parsers/level18-parser"
 
 import { styleTags, tags as t } from "@lezer/highlight";
 import {LRLanguage} from "@codemirror/language"
+
+const PARSERS = {
+    1: level1Parser,
+    2: level2Parser,
+    3: level3Parser,
+    4: level4Parser,
+    5: level5Parser,
+    6: level6Parser,
+    7: level7Parser,
+    8: level8Parser,
+    10: level10Parser,
+    11: level11Parser,
+    12: level12Parser,
+    13: level13Parser,
+    14: level14Parser,
+    15: level15Parser,
+    16: level16Parser,
+    17: level17Parser,
+    18: level18Parser 
+};
 
 export class HedyCodeMirrorEditorCreator implements HedyEditorCreator {
     /**
@@ -112,10 +131,11 @@ export class HedyCodeMirrorEditor implements HedyEditor {
         const cursorStyle = { ".cm-cursor, .cm-dropCursor": {borderLeftColor: "white", borderLeftWidth: "2px"} }
 
         const mainEditorStyling = EditorView.theme(this.themeStyles);
+        
         let parserWithMetadata18 = level18Parser.configure({
             props: [
                 styleTags({
-                        "print forward turn color ask is echo sleep Comma at random remove from add to if else in not Op repeat times for range with return and or while elif def": t.keyword,
+                        "print forward turn color ask is echo sleep Comma at random remove from add to if else in not Op repeat times for range with return and or while elif def input toList": t.keyword,
                         "Assign/IsToken": t.keyword,      
                         Comment: t.lineComment,                        
                         "String quote": t.string,
