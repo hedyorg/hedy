@@ -1117,6 +1117,11 @@ class IsValid(Filter):
         return False, InvalidInfo("print without quotes", arguments=[
                                   text], line=meta.line, column=meta.column), meta
 
+    def error_list_access(self,meta,args):
+        #for now copying another function, to test whether anything is being done at all
+        error = InvalidInfo('misspelled "at" command', arguments=[str(args[0])], line=meta.line, column=meta.column)
+        return False, error, meta
+    
     def error_invalid(self, meta, args):
         # TODO: this will not work for misspelling 'at', needs to be improved!
 
@@ -3204,6 +3209,9 @@ def is_program_valid(program_root, input_string, level, lang):
             unquotedtext = invalid_info.arguments[0]
             raise exceptions.UnquotedTextException(
                 level=level, unquotedtext=unquotedtext, line_number=invalid_info.line)
+        elif invalid_info.error_type == 'misspelled "at" command':
+            #raising an exception here, for now default parameters, will put the wrongly spelled word later on
+            raise exceptions.MisspelledAtCommand(level=level, line_number=line)
         elif invalid_info.error_type == 'unsupported number':
             raise exceptions.UnsupportedFloatException(value=''.join(invalid_info.arguments))
         elif invalid_info.error_type == 'lonely text':
