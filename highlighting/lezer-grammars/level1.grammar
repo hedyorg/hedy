@@ -1,10 +1,10 @@
-@top Program { Command+ }
+@top Program { eol* (Command eol+)* Command? }
 Command {
     Print | Ask | Echo | Turtle | ErrorInvalid
 }
-Print { kw<"print"> Text }
-Ask { kw<"ask"> (Text) }
-Echo { kw<"echo"> (Text) }
+Print { print+ Text }
+Ask { ask+ Text }
+Echo { echo+ Text }
 
 Turtle[@isGroup=turtle] {
     Forward |
@@ -13,51 +13,33 @@ Turtle[@isGroup=turtle] {
 }
 
 Forward {
-    kw<"forward"> (Text)
+    forward+ (Text)
 }
 
 Turn {
-    kw<"turn"> (Text)
+    turn+ (Text)
 }
 
 Color {
-    kw<"color"> Text
+    color+ Text
 }
 
-ErrorInvalid { TextWithoutSpaces Text? }
+@external specialize { Text } specializeKeyword from "./tokens" {
+    print[@name="print"],
+    forward[@name="forward"],
+    turn[@name="turn"],
+    echo[@name="echo"],
+    ask[@name="ask"],
+    color[@name="color"]
+}
 
-kw<term> { @specialize[@name={term}]<TextWithoutSpaces, term> }
+ErrorInvalid { Text+ }
 
 @tokens {
-    @precedence { PrintToken, TextWithoutSpaces, Text}
     Comment { "#" ![\n]* }
-    PrintToken {  ( "ـ"* "ق" "ـ"* "و" "ـ"* "ل" "ـ"*  | "print") }
-    AskToken {  "ask" }
-    EchoToken {  "echo" }
-    ForwardToken {  "forward" }
-    TurnToken {  "turn" }
-    ColorToken {  "color" }
     eol { "\n" }
-    // minus { "-" }
-    // black { "black" }
-    // blue { "blue" }
-    // brown { "brown" }
-    // gray {  "gray" }
-    // green {  "green" }
-    // Left {  "left" }
-    // orange {  "orange" }
-    // pink {  "pink" }
-    // purple {  "purple" }
-    // red {  "red" }
-    // Right {  "right" }
-    // white {  "white" }
-    // yellow {  "yellow" }
-    // Number { Negative_number | Positive_number  }
-    TextWithoutSpaces { ![\n #]+ }
-    Text { (![\n#ـ\r])(![\n#\r]*) }
-    Name { LetterOrUnderscore LetterOrNumeral*}
-    LetterOrUnderscore { ($[\p{L}_])+ }
-    LetterOrNumeral { LetterOrUnderscore | ($[\p{N}])+ }    
+    space { " " }
+    Text { ![\n #]+ }
 }
 
-@skip { Comment | eol }
+@skip { Comment | space }

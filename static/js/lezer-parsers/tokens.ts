@@ -8,7 +8,10 @@ import {
 from "./level18-parser.terms";
 import TRADUCTION_IMPORT from '../../../highlighting/highlighting-trad.json';
 
-
+import {
+    print as print1, echo as echo1, ask as ask1, color as color1,
+    forward as forward1, turn as turn1
+} from "./level1-parser.terms";
 export interface InitializeCodeMirrorSyntaxHighlighterOptions {
     readonly keywordLanguage: string;
     readonly level: number;
@@ -18,6 +21,14 @@ let TRADUCTION: Map<string,string>;
 let level: number;
 
 const keywordToToken: Record<number, Record<string, number>> = {
+    1: {
+        "ask": ask1,
+        "print": print1,
+        "echo": echo1,
+        "forward": forward1,
+        "turn": turn1,
+        "color": color1
+    },
     18 : {
         "add": add18,
         "and": and18,    
