@@ -133,7 +133,7 @@ class ForTeachersModule(WebsiteModule):
         if not Class or (not utils.can_edit_class(user, Class) and not is_admin(user)):
             return utils.error_page(error=404, ui_message=gettext("no_such_class"))
         students = []
-
+        session['class_id'] = class_id
         for student_username in Class.get("students", []):
             student = self.db.user_by_username(student_username)
             programs = self.db.programs_for_user(student_username)
@@ -488,7 +488,7 @@ class ForTeachersModule(WebsiteModule):
         level = request.args.get('level')
 
         Class = self.db.get_class(class_id)
-        if not Class or Class["teacher"] != user["username"]:
+        if not Class or (not utils.can_edit_class(user, Class) and not is_admin(user)):
             return utils.error_page(error=404, ui_message=gettext("no_such_class"))
         # username = Class["teacher"] if is_second_teacher(user, session["class_id"]) else user["username"]
         teacher_adventures = list(self.db.get_teacher_adventures(user["username"]))
