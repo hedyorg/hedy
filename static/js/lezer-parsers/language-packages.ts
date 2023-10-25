@@ -14,8 +14,7 @@ export let languagePerLevel: Record<number, languageSupport> ={
     1: {
         parser: level1Parser,
         styleTags: {
-            "print ask echo forward turn color": t.keyword,
-            Text: t.string,        
+            "print ask echo forward turn color": t.keyword,      
             Comment: t.lineComment,
             "Command/ErrorInvalid/Text": t.invalid,
         }
