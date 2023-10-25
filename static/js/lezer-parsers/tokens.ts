@@ -6,12 +6,18 @@ import {
   repeat as repeat18, times as times18, range as range18, whiles as whiles18,
   def as def18, returns as returns18, fors as fors18, toList as toList18, elif as elif18}
 from "./level18-parser.terms";
-import TRADUCTION_IMPORT from '../../../highlighting/highlighting-trad.json';
 
 import {
     print as print1, echo as echo1, ask as ask1, color as color1,
     forward as forward1, turn as turn1
 } from "./level1-parser.terms";
+
+import {
+    print as print2, ask as ask2, color as color2,
+    forward as forward2, turn as turn2, sleep as sleep2, is as is2
+} from "./level2-parser.terms";
+
+import TRADUCTION_IMPORT from '../../../highlighting/highlighting-trad.json';
 export interface InitializeCodeMirrorSyntaxHighlighterOptions {
     readonly keywordLanguage: string;
     readonly level: number;
@@ -28,6 +34,15 @@ const keywordToToken: Record<number, Record<string, number>> = {
         "forward": forward1,
         "turn": turn1,
         "color": color1
+    },
+    2: {
+        "ask": ask2,
+        "print": print2,
+        "forward": forward2,
+        "turn": turn2,
+        "color": color2,
+        "sleep": sleep2,
+        "is": is2
     },
     18 : {
         "add": add18,

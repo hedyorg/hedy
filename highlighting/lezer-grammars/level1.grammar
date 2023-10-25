@@ -7,22 +7,12 @@ Ask { ask+ Text }
 Echo { echo+ Text }
 
 Turtle[@isGroup=turtle] {
-    Forward |
-    Turn |
-    Color
+    Forward { forward+ Text } |
+    Turn { turn+ Text } |
+    Color { color+ Text }
 }
 
-Forward {
-    forward+ (Text)
-}
-
-Turn {
-    turn+ (Text)
-}
-
-Color {
-    color+ Text
-}
+ErrorInvalid[@dynamicPrecedence=-10] { Text+ }
 
 @external specialize { Text } specializeKeyword from "./tokens" {
     print[@name="print"],
@@ -33,7 +23,6 @@ Color {
     color[@name="color"]
 }
 
-ErrorInvalid { Text+ }
 
 @tokens {
     Comment { "#" ![\n]* }

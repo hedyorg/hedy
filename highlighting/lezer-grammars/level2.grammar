@@ -1,28 +1,35 @@
 @top Program { eol* (Command eol+)* Command? }
 Command {
-    Assign  | Ask | Print | Turtle | Sleep |ErrorInvalid
+    Assign | Ask | Print | Turtle | Sleep
 }
 
-Assign { TextWithoutSpaces " "* kw<"is"> " "* (TextWithoutSpaces)+ }
-Ask { TextWithoutSpaces " "* kw<"is"> " "* kw<"ask"> " "* (TextWithoutSpaces)+ }
-Print { kw<"print"> " "* (TextWithoutSpaces)+ }
-Sleep { kw<"sleep"> " "* TextWithoutSpaces }
+Assign { Text is+ Text+ }
+Ask { Text is+ ask+ Text+ }
+Print { print+ Text+ }
+Sleep { sleep+ Text }
 
 Turtle[@isGroup=turtle] {
-    Forward { kw<"forward"> " "* (TextWithoutSpaces) } |
-    Turn { kw<"turn"> " "* (TextWithoutSpaces) } |
-    Color { kw<"color"> " "* TextWithoutSpaces }
+    Forward { forward+ Text } |
+    Turn { turn+ Text } |
+    Color { color+ Text }
 }
 
+@external extend { Text } specializeKeyword from "./tokens" {
+    ask[@name="ask"],
+    print[@name="print"],
+    forward[@name="forward"],
+    turn[@name="turn"],
+    color[@name="color"],
+    sleep[@name="sleep"],
+    is[@name="is"]
+}
 
-ErrorInvalid { TextWithoutSpaces (TextWithoutSpaces)? }
-
-kw<term> { @specialize[@name={term}]<TextWithoutSpaces, term> }
-
-@tokens {    
+@tokens {
     Comment { "#" ![\n]* }
     eol { "\n" }
-    TextWithoutSpaces { ![\n #]+ }  
+    space { " " }
+    Text { ![\n #]+ }
 }
-
+// we do not skip level in this level and produce somewhat weird trees with errors
+// but it works tm
 @skip { Comment }
