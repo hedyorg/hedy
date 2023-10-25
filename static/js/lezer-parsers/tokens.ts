@@ -25,56 +25,72 @@ export interface InitializeCodeMirrorSyntaxHighlighterOptions {
 
 let TRADUCTION: Map<string,string>;
 let level: number;
-
-const keywordToToken: Record<number, Record<string, number>> = {
+interface tokenSpecilizer {
+    extend: Record<string, number>,
+    specialize: Record<string, number>,
+}
+const keywordToToken: Record<number, tokenSpecilizer> = {
     1: {
-        "ask": ask1,
-        "print": print1,
-        "echo": echo1,
-        "forward": forward1,
-        "turn": turn1,
-        "color": color1
+        extend: {
+            "ask": ask1,
+            "print": print1,
+            "echo": echo1,
+            "forward": forward1,
+            "turn": turn1,
+            "color": color1
+        },
+        specialize: {}
     },
     2: {
-        "ask": ask2,
-        "print": print2,
-        "forward": forward2,
-        "turn": turn2,
-        "color": color2,
-        "sleep": sleep2,
-        "is": is2
+        extend: {
+            "print": print2,
+            "forward": forward2,
+            "turn": turn2,
+            "color": color2,
+            "sleep": sleep2,
+            "is": is2
+        },
+        specialize: {
+            "ask": ask2,
+        }
     },
     18 : {
-        "add": add18,
-        "and": and18,    
-        "clear": clear18,
-        "color": color18,
-        "def": def18,
-        "print": print18,
-        "is": is18,
-        "input": input18,
-        "sleep": sleep18,
-        "random": random18,
-        "forward": forward18,
-        "turn": turn18,
-        "to_list": toList18,
-        "remove": remove18,
-        "from": from18,
-        "if": ifs18,
-        "else": elses18,
-        "or": or18,
-        "pressed": pressed18,
-        "not_in": notIn18,
-        "in": ins18,
-        "repeat": repeat18,
-        "times": times18,
-        "range": range18,
-        "while": whiles18,
-        "returns": returns18,
-        "for": fors18,
-        "elif": elif18
+        specialize: {
+            "add": add18,
+            "and": and18,    
+            "clear": clear18,
+            "color": color18,
+            "def": def18,
+            "print": print18,
+            "is": is18,
+            "input": input18,
+            "sleep": sleep18,
+            "random": random18,
+            "forward": forward18,
+            "turn": turn18,
+            "to_list": toList18,
+            "remove": remove18,
+            "from": from18,
+            "if": ifs18,
+            "else": elses18,
+            "or": or18,
+            "pressed": pressed18,
+            "not_in": notIn18,
+            "in": ins18,
+            "repeat": repeat18,
+            "times": times18,
+            "range": range18,
+            "while": whiles18,
+            "returns": returns18,
+            "for": fors18,
+            "elif": elif18
+        },
+        extend: {}
     }
 }
+
+let specializeTranslations: Map<string, string>;
+let extendTranslations: Map<string, string>;
 
 export function initializeTranslation(options: InitializeCodeMirrorSyntaxHighlighterOptions) {
     const TRADUCTIONS = convert(TRADUCTION_IMPORT) as Map<string, Map<string,string>>;
@@ -82,17 +98,37 @@ export function initializeTranslation(options: InitializeCodeMirrorSyntaxHighlig
     let lang = options.keywordLanguage;
     if (!TRADUCTIONS.has(lang)) { lang = 'en'; }
     // get the traduction    
-    TRADUCTION = TRADUCTIONS.get(lang) as Map<string,string> ;    
+    TRADUCTION = TRADUCTIONS.get(lang) as Map<string,string>;
+    specializeTranslations = new Map();
+    extendTranslations = new Map();
+    
+    for (const [key, value] of TRADUCTION) {
+        if (key in keywordToToken[level].specialize) {
+            specializeTranslations.set(key, value);
+        } else if (key in keywordToToken[level].extend) {
+            extendTranslations.set(key, value);
+        }
+    }
+
+    console.log("specializeTranslations", specializeTranslations);
+    console.log("extendTranslations", extendTranslations);
 }
 
 export function specializeKeyword(name: string) {
-    for (const [key, value] of TRADUCTION) {
-        if (name === 'en') {
-            console.log(key, value)
-        }
+    for (const [key, value] of specializeTranslations) {
         const regexString =  value.replace(' ', '|');
         if (new RegExp(`^(${regexString})$`, 'gu').test(name)) {
-          return keywordToToken[level][key];
+          return keywordToToken[level].specialize[key];
+        }
+    }
+    return -1;
+}
+
+export function extendKeyword(name: string) {
+    for (const [key, value] of extendTranslations) {
+        const regexString =  value.replace(' ', '|');
+        if (new RegExp(`^(${regexString})$`, 'gu').test(name)) {
+          return keywordToToken[level].extend[key];
         }
     }
     return -1;
