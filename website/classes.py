@@ -93,12 +93,12 @@ class ClassModule(WebsiteModule):
     @requires_login
     def delete_class(self, user, class_id):
         Class = self.db.get_class(class_id)
-        if not Class or not (utils.can_edit_class(user, Class)):
+        if not Class:
             return gettext("no_such_class"), 404
+        if Class["teacher"] != user["username"]:  # only teachers can remove their classes.
+            return gettext("unauthorized"), 403
 
         self.db.delete_class(Class)
-        if is_second_teacher(user, class_id):
-            self.db.remove_second_teacher_from_class(Class, user, only_user=True)
 
         achievement = self.achievements.add_single_achievement(user["username"], "end_of_semester")
         if achievement:
@@ -369,8 +369,7 @@ class MiscClassPages(WebsiteModule):
             return gettext("student_already_invite"), 400
 
         if is_second_teacher(user, class_id):
-            #     return gettext("student_already_in_class"), 400
-            return {}, 200  # TODO: say user is already a second teacher
+            return "Already a second teacher.", 400
 
         data = {
             "username": username,
