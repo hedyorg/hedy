@@ -14,8 +14,11 @@ Turtle[@isGroup=turtle] {
     Color { color+ Text }
 }
 
-@external extend { Text } specializeKeyword from "./tokens" {
-    ask[@name="ask"],
+@external specialize { Text } specializeKeyword from "./tokens" {
+    ask[@name="ask"]
+}
+
+@external extend { Text } extendKeyword from "./tokens" {
     print[@name="print"],
     forward[@name="forward"],
     turn[@name="turn"],
@@ -30,6 +33,5 @@ Turtle[@isGroup=turtle] {
     space { " " }
     Text { ![\n #]+ }
 }
-// we do not skip level in this level and produce somewhat weird trees with errors
-// but it works tm
-@skip { Comment }
+
+@skip { Comment | space }
