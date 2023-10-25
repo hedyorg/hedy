@@ -2,9 +2,9 @@
 Command {
     Print | Ask | Echo | Turtle | ErrorInvalid
 }
-Print { print+ Text }
-Ask { ask+ Text }
-Echo { echo+ Text }
+Print { print+ Text+ }
+Ask { ask+ Text+ }
+Echo { echo+ Text* }
 
 Turtle[@isGroup=turtle] {
     Forward { forward+ Text } |
@@ -14,7 +14,7 @@ Turtle[@isGroup=turtle] {
 
 ErrorInvalid[@dynamicPrecedence=-10] { Text+ }
 
-@external specialize { Text } specializeKeyword from "./tokens" {
+@external extend { Text } extendKeyword from "./tokens" {
     print[@name="print"],
     forward[@name="forward"],
     turn[@name="turn"],
