@@ -56,6 +56,24 @@ class TestsLevel3(HedyTester):
             extra_check_function=check_in_list
         )
 
+    def test_random_turle_dutch(self):
+        code = textwrap.dedent("""\
+        lijstkleuren is blauw, groen, wit
+        kleur lijstkleuren at random
+        vooruit 10""")
+
+        expected = HedyTester.dedent("dieren = ['blauw', 'groen', 'wit']",
+                                     HedyTester.list_access_transpiled("random.choice(dieren)"),
+                                     "print(f'{random.choice(dieren)}')")
+
+
+        self.multi_level_tester(
+            max_level=11,
+            code=code,
+            lang='nl',
+            expected=expected
+        )
+
     def test_print_list_random_punctuation(self):
         code = textwrap.dedent("""\
         gerechten is spaghetti, spruitjes, hamburgers

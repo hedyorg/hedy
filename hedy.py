@@ -294,9 +294,12 @@ commands_per_level = {
 command_turn_literals = ['right', 'left']
 command_make_color = ['black', 'blue', 'brown', 'gray', 'green', 'orange', 'pink', 'purple', 'red', 'white', 'yellow']
 
-def command_make_color_local(language):
+def color_commands_local(language):
     colors_local = [hedy_translation.translate_keyword_from_en(k, language) for k in command_make_color]
-    return command_make_color + colors_local
+    return colors_local
+
+def command_make_color_local(language):
+    return command_make_color + color_commands_local(language)
 
 # Commands and their types per level (only partially filled!)
 commands_and_types_per_level = {
@@ -1464,8 +1467,8 @@ class ConvertToPython_1(ConvertToPython):
     def make_forward(self, parameter):
         return self.make_turtle_command(parameter, Command.forward, 'forward', True, 'int')
 
-    def make_color(self, parameter):
-        return self.make_turtle_color_command(parameter, Command.color, 'pencolor')
+    def make_color(self, parameter, language):
+        return self.make_turtle_color_command(parameter, Command.color, 'pencolor', language)
 
     def make_turtle_command(self, parameter, command, command_text, add_sleep, type):
         exception = ''
@@ -1483,12 +1486,21 @@ class ConvertToPython_1(ConvertToPython):
             return sleep_after(transpiled, False)
         return transpiled
 
-    def make_turtle_color_command(self, parameter, command, command_text):
+    def make_turtle_color_command(self, parameter, command, command_text, language):
+        colors = command_make_color_local(language)
         variable = self.get_fresh_var('__trtl')
+
+        # we translate the color value to English at runtime, since it might be decided at runtime
+        # coming from a random list or ask
+
+        color_dict = {hedy_translation.translate_keyword_from_en(x, language): x for x in command_make_color }
+
         return textwrap.dedent(f"""\
             {variable} = f'{parameter}'
-            if {variable} not in {command_make_color}:
+            color_dict = {color_dict}
+            if {variable} not in {colors}:
               raise Exception(f'While running your program the command {style_command(command)} received the value {style_command('{' + variable + '}')} which is not allowed. Try using another color.')
+            {variable} = color_dict[{variable}]
             t.{command_text}({variable})""")
 
     def make_catch_exception(self, args):
@@ -1538,7 +1550,7 @@ class ConvertToPython_2(ConvertToPython_1):
 
         arg = self.process_variable_for_fstring(arg)
 
-        return self.make_color(arg)
+        return self.make_color(arg, self.language)
 
     def turn(self, meta, args):
         if len(args) == 0:
@@ -1735,8 +1747,8 @@ except NameError:
 @hedy_transpiler(level=5)
 @source_map_transformer(source_map)
 class ConvertToPython_5(ConvertToPython_4):
-    def __init__(self, lookup, numerals_language):
-        super().__init__(lookup, numerals_language)
+    def __init__(self, lookup, language, numerals_language):
+        super().__init__(lookup, language, numerals_language)
 
     def ifs(self, meta, args):
         return f"""if {args[0]}:
