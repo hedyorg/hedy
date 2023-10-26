@@ -176,6 +176,9 @@ class ForTeachersModule(WebsiteModule):
                     "expire_timestamp": utils.localized_date_format(invite["ttl"], short_format=True),
                 }
             )
+
+        teacher = user if Class["teacher"] == user["username"] else self.db.user_by_username(Class["teacher"])
+        second_teachers = [teacher] + Class.get("second_teachers", [])
         return render_template(
             "class-overview.html",
             current_page="for-teachers",
@@ -186,7 +189,7 @@ class ForTeachersModule(WebsiteModule):
                 "students": students,
                 "link": os.getenv("BASE_URL", "") + "/hedy/l/" + Class["link"],
                 "teacher": Class["teacher"],
-                "second_teachers": Class.get("second_teachers"),
+                "second_teachers": second_teachers,
                 "name": Class["name"],
                 "id": Class["id"],
             },
