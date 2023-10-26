@@ -350,12 +350,17 @@ class HedyTester(unittest.TestCase):
           raise Exception(f'While running your program the command <span class="command-highlighted">sleep</span> received the value <span class="command-highlighted">{{{val}}}</span> which is not allowed. Try changing the value to a number.')""")
 
     @staticmethod
-    def turtle_color_command_transpiled(val):
+    def turtle_color_command_transpiled(val, lang):
+        color_dict = {hedy_translation.translate_keyword_from_en(x, lang): x for x in hedy.command_make_color }
+        colors = hedy.command_make_color_local(lang)
+
         return textwrap.dedent(f"""\
-      __trtl = f'{val}'
-      if __trtl not in ['black', 'blue', 'brown', 'gray', 'green', 'orange', 'pink', 'purple', 'red', 'white', 'yellow']:
-        raise Exception(f'While running your program the command <span class="command-highlighted">color</span> received the value <span class="command-highlighted">{{__trtl}}</span> which is not allowed. Try using another color.')
-      t.pencolor(__trtl)""")
+        __trtl = f'{val}'
+        color_dict = {color_dict}
+        if __trtl not in {colors}:
+          raise Exception(f'While running your program the command <span class="command-highlighted">color</span> received the value <span class="command-highlighted">{{__trtl}}</span> which is not allowed. Try using another color.')
+        __trtl = color_dict[__trtl]
+        t.pencolor(__trtl)""")
 
     @staticmethod
     def input_transpiled(var_name, text):

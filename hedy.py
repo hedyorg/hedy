@@ -299,7 +299,10 @@ def color_commands_local(language):
     return colors_local
 
 def command_make_color_local(language):
-    return command_make_color + color_commands_local(language)
+    if language == "en":
+        return command_make_color
+    else:
+        return command_make_color + color_commands_local(language)
 
 # Commands and their types per level (only partially filled!)
 commands_and_types_per_level = {
