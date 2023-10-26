@@ -294,10 +294,6 @@ commands_per_level = {
 command_turn_literals = ['right', 'left']
 command_make_color = ['black', 'blue', 'brown', 'gray', 'green', 'orange', 'pink', 'purple', 'red', 'white', 'yellow']
 
-def command_make_color_local(language):
-    colors_local = [hedy_translation.translate_keyword_from_en(k, language) for k in command_make_color]
-    return command_make_color + colors_local
-
 # Commands and their types per level (only partially filled!)
 commands_and_types_per_level = {
     Command.print: {
@@ -1019,7 +1015,7 @@ class AllCommands(Transformer):
     def __init__(self, level):
         self.level = level
 
-    def standardize_keyword(self, keyword):
+    def translate_keyword(self, keyword):
         # some keywords have names that are not a valid name for a command
         # that's why we call them differently in the grammar
         # we have to translate them to the regular names here for further communciation
@@ -1051,7 +1047,7 @@ class AllCommands(Transformer):
 
     def __default__(self, args, children, meta):
         # if we are matching a rule that is a command
-        production_rule_name = self.standardize_keyword(args)
+        production_rule_name = self.translate_keyword(args)
         leaves = flatten_list_of_lists_to_list(children)
         # for the achievements we want to be able to also detect which operators were used by a kid
         operators = ['addition', 'subtraction', 'multiplication', 'division']
@@ -1246,9 +1242,8 @@ def hedy_transpiler(level):
 
 @v_args(meta=True)
 class ConvertToPython(Transformer):
-    def __init__(self, lookup, language="en", numerals_language="Latin"):
+    def __init__(self, lookup, numerals_language="Latin"):
         self.lookup = lookup
-        self.language = language
         self.numerals_language = numerals_language
 
     # default for line number is max lines so if it is not given, there
@@ -1380,9 +1375,8 @@ class ConvertToPython(Transformer):
 @source_map_transformer(source_map)
 class ConvertToPython_1(ConvertToPython):
 
-    def __init__(self, lookup, language, numerals_language):
+    def __init__(self, lookup, numerals_language):
         self.numerals_language = numerals_language
-        self.language = language
         self.lookup = lookup
         __class__.level = 1
 
@@ -1437,7 +1431,7 @@ class ConvertToPython_1(ConvertToPython):
             return "t.pencolor('black')"  # no arguments defaults to black ink
 
         arg = args[0].data
-        if arg in command_make_color_local(self.language):
+        if arg in command_make_color:
             return f"t.pencolor('{arg}')"
         else:
             # the TypeValidator should protect against reaching this line:
@@ -3321,7 +3315,7 @@ def transpile_inner(input_string, level, lang="en", populate_source_map=False):
 
         # grab the right transpiler from the lookup
         convertToPython = TRANSPILER_LOOKUP[level]
-        python = convertToPython(lookup_table, lang, numerals_language).transform(abstract_syntax_tree)
+        python = convertToPython(lookup_table, numerals_language).transform(abstract_syntax_tree)
 
         commands = AllCommands(level).transform(program_root)
 
