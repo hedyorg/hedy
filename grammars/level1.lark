@@ -3,9 +3,10 @@ program: _EOL* (command _EOL+)* command?
 command: print | ask | echo | turtle | error_invalid_space | error_invalid | empty_line
 
 print: _PRINT (text)?
+_color_literal : black | blue | brown | gray | green | orange | pink | purple | red | white | yellow | text
 ask: _ASK (text)?
 echo: _ECHO (text)?
-turtle: _FORWARD ((NUMBER | text))? -> forward | _TURN ((left | right ))? -> turn | _COLOR ((black | blue | brown | gray | green | orange | pink | purple | red | white | yellow | text))? -> color
+turtle: _FORWARD ((NUMBER | text))? -> forward | _TURN ((left | right ))? -> turn | _COLOR (_color_literal)? -> color
 error_invalid_space: _SPACE any
 
 // We give the error_invalid rule below a priority of -100,
