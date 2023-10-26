@@ -308,7 +308,7 @@ adventures:
                     smaken {is} aardbei, chocolade, vanille
                     hoop {is} {ask} Welke smaak hoop je dat het wordt?
                     _
-                    allergie {is} {ask} Voor welke smaak ben je allergsich?
+                    allergie {is} {ask} Voor welke smaak ben je allergisch?
                     _
                     {print} Je krijgt een {at} {random} milkshake
                     ```
@@ -512,9 +512,9 @@ adventures:
                 example_code_2: |
                     ```
                     goed_antwoord = 11 * 27
-                    antwoord = {ask} 'Heveel is 11 keer 27?'
+                    antwoord = {ask} 'Hoeveel is 11 keer 27?'
                     {if} antwoord {is} _ {print} 'goed gedaan!'
-                    {else} {print} 'Wrong! It was ' _
+                    {else} {print} 'Helaas! Het was ' _
                     ```
                 story_text_3: |
                     Je kunt ook de computer zelf willekeurige sommen laten maken met `{random}`.
@@ -1095,7 +1095,7 @@ adventures:
                     totaal_prijs {is} eten_prijs + drinken_prijs
                     {print} 'Dat wordt dan ' totaal_prijs ' euro, alstublieft'
                     ```
-                start_code: '# place your code here'
+                start_code: '# Schrijf jouw code hier'
             7:
                 story_text: |
                     Goed gedaan! Je bent bij het volgende level, wat betekent dat je goed geoefend hebt met `{if}` en `{else}`. Waarschijnlijk heb je al gemerkt dat je codes steeds langer worden.
@@ -1320,6 +1320,9 @@ adventures:
                     Je kunt nu weer een regenwormendobbelsteen maken, maar nu kun je ook uitrekenen hoeveel punten er gegooid zijn.
 
                     Je weet misschien dat de worm bij Regenwormen telt voor 5 punten. Nu kun je een worp gooien, en dan meteen uitrekenen hoeveel punten je dan hebt gegooid. Zo doe je dat voor 1 dobbelsteen:
+
+                    ### Opdracht
+                    Kun jij de code nu zo maken dat je de totaalscore krijgt voor 8 dobbelstenen? Daarvoor moet je sommige stukken van de code knippen en plakken.
                 example_code: |
                     ```
                     keuzes = 1, 2, 3, 4, 5, regenworm
@@ -1330,7 +1333,6 @@ adventures:
                     {else} punten = punten + worp
                     {print} 'dat zijn dan ' punten ' punten'
                     ```
-                    Kun jij de code nu zo maken dat je de totaalscore krijgt voor 8 dobbelstenen? Daarvoor moet je sommige stukken van de code knippen en plakken.
                 example_code_2: |
                     Did you manage to calculate the score for 8 dice? That required a lot of cutting and pasting, right? We are going to make that easier in level 7!
                 start_code: '{print} ''Wat zal de dobbelsteen deze keer aangeven?'''
@@ -2145,15 +2147,11 @@ adventures:
                     {print} naam is leeftijd jaar oud.
             6:
                 story_text: |
-                    We veranderen ook hoe je een woord opslaat in een variabele! Je mag hierbij vanaf nu een `=` in plaats van een `{is}` gebruiken. Kijk maar:                example_code: |
+                    We veranderen ook hoe je een woord opslaat in een variabele! Je mag hierbij vanaf nu een `=` in plaats van een `{is}` gebruiken. Kijk maar:
+                example_code: |
                     ```
                     naam = Hedy
                     antwoord = 20 + 4
-                    ```
-                example_code: |
-                    ```
-                    name = Hedy
-                    answer = 20 + 4
                     ```
                 start_code: |
                     naam = Hedy
@@ -2920,7 +2918,7 @@ adventures:
                     In dit level kun je in jouw restaurant prijzen toevoegen en berekenen, dat maakt het veel echter!
                     Maar je kunt natuurlijk nog veel meer toevoegen zoals b.v. meer gerechten.
 
-                    ###Opdracht
+                    ### Opdracht
                     Je kunt nog meer toevoegen, denk maar eens aan...
                     * vragen hoeveel personen er komen en het bedrag daarmee vermenigvuldigen
                     * nog meer gerechten toevoegen
@@ -3374,6 +3372,8 @@ adventures:
                     In liedjes zit vaak veel herhaling. Soms wordt er in die herhaling ook geteld.
                     Bijvoorbeeld in het welbekende potje met vet. Dat kan je met een beetje rekenen zelf programmeren.
 
+                    Tip: gebruik de voorleesfunctie om Hedy het liedje te laten zingen!
+
                     ### Opdracht
                     Je kunt nu regel 2 t/m 9 zo vaak herhalen als je wil door de regels te kopiëren en plakken.
                 example_code: |
@@ -3383,23 +3383,20 @@ adventures:
                     {print} 'al op de tafel gezet'
                     {print} 'Ik heb het'
                     {print} 'potje, potje, potje, potje... '
-                    {print} 'veeeeeet'
+                    {print} 'veh heh het'
                     {print} 'al op de tafel gezet'
                     couplet = couplet + 1
+                    {sleep}
                     {print} 'Door naar het ' couplet 'e couplet'
                     ```
-
-                    Na het potje met vet kun je natuurlijk ook nog andere liedjes programmeren. Er zijn veel liedjes met tellen erin.
-                    Misschien kun jij het liedje 99 bottles of beer ook wel maken! Daar tellen we af in plaats van op.
-                story_text_2: |
-                    Dit kinderliedje telt van 10 visjes naar 1 visje. Kopieer regel 2 tot en met 7 om het hele lied te maken!
+                story_text_2: "Dit kinderliedje telt van 10 visjes naar 1 visje. \nKopieer regel 2 tot en met 7 om het hele lied te maken!\n"
                 example_code_2: |
                     ```
                     nummer = 11
                     nummer = nummer - 1
-                    {print} nummer 'kleine visjes zwommen naar de zee'
+                    {print} nummer ' kleine visjes zwommen naar de zee'
                     {print} 'Moeder zei ik ga niet mee! '
-                    {print} 'Ik blijf liever in de vieze oude sloop want in de zee daar zwemmen haaien en die bijten je'
+                    {print} 'Ik blijf liever in de vieze oude sloot want in de zee daar zwemmen haaien en die bijten je'
                     {print} 'BLUB BLUB BLUB BLUB BLUB BLUB BLUB BLUB BLUB BLUB BLUB BLUB BLUB'
                     {sleep}
                     ```
