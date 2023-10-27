@@ -294,15 +294,18 @@ commands_per_level = {
 command_turn_literals = ['right', 'left']
 command_make_color = ['black', 'blue', 'brown', 'gray', 'green', 'orange', 'pink', 'purple', 'red', 'white', 'yellow']
 
+
 def color_commands_local(language):
     colors_local = [hedy_translation.translate_keyword_from_en(k, language) for k in command_make_color]
     return colors_local
+
 
 def command_make_color_local(language):
     if language == "en":
         return command_make_color
     else:
         return command_make_color + color_commands_local(language)
+
 
 # Commands and their types per level (only partially filled!)
 commands_and_types_per_level = {
@@ -1496,7 +1499,7 @@ class ConvertToPython_1(ConvertToPython):
         # we translate the color value to English at runtime, since it might be decided at runtime
         # coming from a random list or ask
 
-        color_dict = {hedy_translation.translate_keyword_from_en(x, language): x for x in command_make_color }
+        color_dict = {hedy_translation.translate_keyword_from_en(x, language): x for x in command_make_color}
 
         return textwrap.dedent(f"""\
             {variable} = f'{parameter}'

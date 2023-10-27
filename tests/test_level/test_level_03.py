@@ -67,7 +67,6 @@ class TestsLevel3(HedyTester):
                                      HedyTester.turtle_color_command_transpiled("{random.choice(lijstkleuren)}", lang),
                                      HedyTester.forward_transpiled('10', self.level))
 
-
         self.multi_level_tester(
             max_level=11,
             code=code,
