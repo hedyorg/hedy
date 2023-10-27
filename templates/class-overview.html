@@ -45,7 +45,8 @@
       </div>
       {% if is_teacher and class_info.second_teachers %}
         <div id="second_teachers_container" class="border-t border-gray-500 pt-4">
-          <h2>{{ _('teachers')}} {% if class_info.teacher == username %}<span class="text-red-500 text-sm">{{_('second_teacher_prompt')}}</span>{% endif %}</h2>
+          <h2>{{ _('teachers')}}</h2>
+          {% if class_info.teacher == username and class_info.second_teachers|length > 1 %}<p class="text-red-500 mt-0 mb-2">{{_('second_teacher_prompt')}}</p>{% endif %}
           <div class="border-solid border-2 border-orange-400 rounded p-4">
             <table class="table-auto w-full text-sm">
             <thead>

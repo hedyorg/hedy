@@ -31,10 +31,7 @@ describe('Is able to click on duplicate class', () => {
           
           // Checks for input field
           cy.get('#modal-prompt-input').type(' teacher2');
-          cy.get('#modal-ok-button').click();
-          
-          // Remove it again; so that it doesn't interfere with other tests.
-          const className = cy.get(`tbody :nth-child(${i+1}) .view_class`).then($c => console.log("NOW REMOVE", $c))
+          cy.get('#modal-ok-button').click(); 
         }
       })
     

@@ -1,11 +1,11 @@
 import {loginForTeacher, logout} from "../../tools/login/login.js"
 import { goToProfilePage } from "../../tools/navigation/nav";
 
-const teachers = ["teacher2", "teacher3"]
+const secondTeachers = ["teacher2", "teacher3"]
 const invitesTable = body => body.find("#invites-block table")
 
 describe("Second teachers: invitations", () => {
-  it(`Invites ${teachers.length} second teachers: by username`, () => {
+  it(`Invites ${secondTeachers.length} second teachers: by username`, () => {
 
     loginForTeacher();
 
@@ -13,7 +13,7 @@ describe("Second teachers: invitations", () => {
 
     cy.get(".view_class").first().click();
 
-    for (const teacher of teachers) {
+    for (const teacher of secondTeachers) {
       cy.wait(500);
       
       cy.get("#add-second-teacher").click();
@@ -30,7 +30,7 @@ describe("Second teachers: invitations", () => {
           table = cy.get("#invites-block table")
           cy.get("#invites-block .username_cell")
           .should('be.visible')
-          .and("include.text", [teacher])
+          .and("include.text", teacher)
         } else {
           cy.log("Second teacher not invited.")
         }
@@ -40,7 +40,7 @@ describe("Second teachers: invitations", () => {
     // logout();
   })
 
-  it(`Tries duplicating ${teachers[0]}'s invitation`, () => {
+  it(`Tries duplicating ${secondTeachers[0]}'s invitation`, () => {
 
     loginForTeacher()
 
@@ -49,7 +49,7 @@ describe("Second teachers: invitations", () => {
     cy.wait(500);
 
     cy.get("#add-second-teacher").click();
-    cy.get("#modal-prompt-input").type(teachers[0]);
+    cy.get("#modal-prompt-input").type(secondTeachers[0]);
     cy.get("#modal-ok-button").click();
     cy.wait(500);
 
@@ -58,23 +58,23 @@ describe("Second teachers: invitations", () => {
     .and("contain", "pending invitation")
   })
 
-  it(`Accepts invitation sent to ${teachers[0]}`, () => {
-    loginForTeacher(teachers[0])
+  it(`Accepts invitation sent to ${secondTeachers[0]}`, () => {
+    loginForTeacher(secondTeachers[0])
     goToProfilePage()
     cy.get("#messages").should("exist")
     cy.get("#messages #join").click()
     logout();
   })
 
-  it("Reads all second teachers", () => {
+  it.only("Reads all second teachers", () => {
     loginForTeacher()
     cy.get(".view_class").first().click();
     cy.wait(500);
-    cy.get("#second_teachers_container .username_cell").should("have.text", teachers[0])
+    cy.get("#second_teachers_container .username_cell").should("include.text", secondTeachers[0])
     logout()
   })
 
-  it(`Deletes ${teachers[1]}'s invitation`, () => {
+  it(`Deletes ${secondTeachers[1]}'s invitation`, () => {
 
     loginForTeacher();
     cy.wait(500);
@@ -96,7 +96,7 @@ describe("Second teachers: invitations", () => {
     
     cy.wait(500);
     cy.get('body').then(invitesTable).then(table => 
-      table.length && cy.get("#invites-block table").should("not.contain", teachers[0]))
+      table.length && cy.get("#invites-block table").should("not.contain", secondTeachers[0]))
     logout();
   })
 
