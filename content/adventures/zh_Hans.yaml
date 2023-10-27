@@ -241,7 +241,7 @@ adventures:
                     ```
                 story_text_2: |
                     ## Remove from
-                    If you can add items to a list, of course you can also take them off. This is done with the `{remove} {from}` command.
+                    如果你可以将项目添加到列表中，当然你也可以将其删除。可以使用 `{remove} {from}` 指令.
                 example_code_2: |
                     ```
                     动物们 {is} 狗, 猫, 袋鼠
@@ -307,7 +307,7 @@ adventures:
                     ```
                 story_text_2: |
                     ## The echo command
-                    If you want the computer to repeat the answer, you can use the `{echo}` command. The answer will then be echoed back at the end of the sentence, so in this example after hello.
+                    如果想让计算机将结果重复一遍，可以使用 `{echo}` 命令。答案将在程序末尾输出，因此在本例中，结果将在 hello 之后输出。
                 example_code_2: |
                     ```
                     {print} Hello!
@@ -315,12 +315,12 @@ adventures:
                     {echo} hello
                     ```
                 story_text_3: |
-                    ### Exercise
-                    Try out the `{ask}` and `{echo}` commands. Firstly, fill in the blanks to make this program work.
-                    Then ask 2 more questions using the `{ask}` command, after each `{ask}` use an `{echo}` to print the answer on the screen.
+                    ### 练习
+                    尝试使用“{ask}”和“{echo}”命令，首先，完成填空以使该程序成功运行。
+                    然后使用“{ask}”命令再问 2 个问题，在每个“{ask}”之后使用“{echo}”在屏幕上打印答案。
                 example_code_3: |
                     ```
-                    _ How are you doing?
+                    _ 你好吗?
                     _
                     ```
                 start_code: |
@@ -329,12 +329,11 @@ adventures:
                     {echo} hello
             2:
                 story_text: |
-                    ## The ask command
-                    Now that we can use **variables** in our codes, we no longer need the `{echo}` command.
-                    We can use variables to store the answers to our questions and this way we can use the answer to multiple questions in our codes.
-                    Check it out:
-
-                    This way your code is becoming interactive!
+                    ## 询问命令
+                    现在我们可以在代码中使用**变量**，我们可以不再使用“{echo}”命令。
+                    我们可以使用变量来保存问题的答案，这样我们就可以在代码中使用多个问题的答案。
+                    一探究竟：
+                    这样你的代码就变得具有交互性了！
                 example_code: |
                     ```
                     name {is} {ask} What is your name?
