@@ -18,17 +18,13 @@ levels:
             question_text: Che devono essere riempiti negli spazi vuoti per creare il testo Hello! apparire?
             code: _Ciao!
             mp_choice_options:
-            -   option: |-
-                    `{echo}`
+            -   option: '`{echo}`'
                 feedback: '`{echo}` ripete una risposta data.'
-            -   option: |-
-                    `{print}`
+            -   option: '`{print}`'
                 feedback: Corretto!
-            -   option: |-
-                    `hello`
+            -   option: '`hello`'
                 feedback: Ciao non è un comando.
-            -   option: |-
-                    `{ask}`
+            -   option: '`{ask}`'
                 feedback: With `{ask}`, you can ask a question.
             hint: _Ciao mondo!
             correct_answer: B
@@ -66,7 +62,7 @@ levels:
                 {ask} Chi sei?
                 {echo} Ciao...
             mp_choice_options:
-            -   option: 'Manca `{print}` nella riga 1.'
+            -   option: Manca `{print}` nella riga 1.
                 feedback: Corretto!
             -   option: Il comando nella riga 2 è scritto in modo errato.
                 feedback: Il comando è scritto correttamente.
