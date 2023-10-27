@@ -7,15 +7,15 @@ levels:
                 feedback: 做得好！
             -   option: 海蒂
                 feedback: 不是这个！
-            -   option: Haydie
+            -   option: 海蒂
                 feedback: 不是这个！
-            -   option: Heidi
+            -   option: 海蒂
                 feedback: 不是这个！
             hint: 它是以海蒂-拉玛的名字命名的。
             correct_answer: A
             question_score: '10'
         2:
-            question_text: 哪个命令可以用来打印文字？
+            question_text: 哪些需要在空白处填写才能使文字你好！出现？
             code: ___ 你好！
             mp_choice_options:
             -   option: |-
@@ -38,7 +38,7 @@ levels:
                     {ask}
                     ```
                 feedback: 你可以使用 `{ask}` 来提问。
-            hint: _?_ 你好世界！
+            hint: _你好世界！
             correct_answer: B
             question_score: '10'
         3:
@@ -76,7 +76,7 @@ levels:
             mp_choice_options:
             -   option: 第一行缺少了`{print}`。
                 feedback: 正确！
-            -   option: 第一行的“Im”的写法在英语中是错误的。
+            -   option: 第 2 行中的命令拼写错误。
                 feedback: 该命令的拼写是正确的。
             -   option: '`{echo}`不是一个命令。'
                 feedback: '`{echo}`是一个命令。错的是别的地方。'
@@ -89,7 +89,7 @@ levels:
             question_text: 第二行缺少了哪个命令？
             code: |-
                 {ask} 你最喜欢的宠物是什么？
-                _?_ 所以你最喜欢的宠物是...
+                _所以你最喜欢的宠物是...
             mp_choice_options:
             -   option: |-
                     ```
@@ -185,24 +185,24 @@ levels:
             correct_answer: B
             question_score: '10'
         10:
-            question_text: Which output will be in your outputscreen after you've run this code?
+            question_text: 运行此代码后，输出屏幕中将显示哪个输出？
             code: |-
                 {ask} Are you ready to go to level 2?
                 {echo}
                 {echo}
             mp_choice_options:
             -   option: Are you ready to go to level 2?
-                feedback: There are two echo commands
+                feedback: 这里有两个`{echo}`命令
             -   option: |-
                     Yes!
                     Yes!
                 feedback: Great job!
             -   option: Yes!
-                feedback: There are two echo commands
+                feedback: 这里有两个`{echo}`命令
             -   option: |-
                     Are you ready to go to level 2?
                     Yes!
-                feedback: There are two echo commands
+                feedback: 这里有两个`{echo}`命令
             hint: Let's go!
             correct_answer: B
             question_score: '10'
@@ -299,7 +299,7 @@ levels:
             question_text: 空白的一行应该填什么？
             code: |-
                 {print} 最佳编程语言奖属于……
-                _?_
+                _
                 {print} 海蒂！
             mp_choice_options:
             -   option: |-
@@ -329,7 +329,7 @@ levels:
             question_text: 第2行应该用什么命令？
             code: |-
                 {print} 我会在3秒后爆炸！
-                _?_
+                _
                 {print} 砰！
             mp_choice_options:
             -   option: |-
@@ -397,14 +397,14 @@ levels:
             -   option: 第2行应该是：`{print}` 我 喜欢 动物
                 feedback: “某动物”是变量名
             -   option: 第2行应该是：`{sleep}` 我 喜欢 动物
-                feedback: Sleep 并非用来 `{print}` 文字
+                feedback: 睡眠并非用来 `{print}` 文字
             hint: 你需要`{print}`“我 喜欢 狗”
             correct_answer: B
             question_score: '10'
         10:
             question_text: 第1行应该用什么命令？
             code: |-
-                口味 {is} _?_
+                口味 {is} _
                 {print} 你最喜欢的冰淇淋是……
                 {sleep}
                 {print} 口味
@@ -456,7 +456,7 @@ levels:
                     {at} {random}
                     ```
                 feedback: 正确!
-            hint: Arbitrarily 表示没有计划的，随机性的.
+            hint: 任意表示没有计划的，随机性的。
             correct_answer: D
             question_score: '10'
         2:
@@ -469,8 +469,8 @@ levels:
                 feedback: 干的好!
             -   option: 第一行需要以 `{print}`为开头.
                 feedback: 不，你不许要`{print}`
-            -   option: 第二行需要放 'animal', 而非 'animals'',
-                feedback: animals is correct.
+            -   option: 第二行需要放 '动物', 而非 '动物们'
+                feedback: 动物是正确的。
             -   option: '`{at} {random}` 的拼法不正确'
                 feedback: '`{at} {random}` 是正确的拼法'
             hint: 第一行似乎有什么问题
@@ -486,7 +486,7 @@ levels:
                     ```
                     {at} {random} {print} options
                     ```
-                feedback: You're almost there. The order of the words isn't right yet.
+                feedback: 你快到了。单词的顺序还不正确。
             -   option: |-
                     ```
                     {print} 石头 {at} {random}
@@ -505,19 +505,19 @@ levels:
         4:
             question_text: 为了打印一个随机价格，第2行应该怎么改？
             code: |-
-                prices {is} 1 dollar, 100 dollar, 1 million dollar
-                {print} price {at} {random}
+                价格 {is} 1美元，100美元，100万美元
+                {print} 价格 {at} {random}
             mp_choice_options:
             -   option: |-
                     ```
                     {print} price
                     ```
-                feedback: You don't want to `{print}` the word price, but you want to `{print}` one price out of your list `{at} {random}`
+                feedback: 你不想要 `{print}` 价格这个词, 但是你想要 `{print}` 你清单中的一个价格 `{at} {random}`
             -   option: |-
                     ```
                     {print} prices {at} {random}
                     ```
-                feedback: Great! You've really paid attention.
+                feedback: 太棒了! 你真的注意了。
             -   option: |-
                     ```
                     {print} {at} {random} price
@@ -531,57 +531,57 @@ levels:
         5:
             question_text: 这代码有什么问题呢?
             code: |-
-                question {is} {ask} What do you want to know?
-                {print} question
-                answers {is} yes, no, maybe
-                {print} answers {at} {random}
+                问题 {is} {ask} 你想要知道什么？
+                {print} 问题
+                回答{is} 是, 不，可能
+                {print} 回答{at} {random}
             mp_choice_options:
-            -   option: Line 1 needs to say `{print}` instead of `{ask}`
+            -   option: 第一行需要说`{print}` 而不是`{ask}`
                 feedback: 不，这并没有错。
-            -   option: Line 2 needs to say `{ask}` instead of `{print}`
+            -   option: 第2行需要说`{ask}`而不是`{print}`
                 feedback: 不，这并没有错。
-            -   option: Line 2 needs to say answers `{at} {random}` `{is}` yes, no, maybe
+            -   option: 第二行需要说回答 `{at} {random}` `{is}` 是, 不, 可能
                 feedback: 不，这并没有错。
             -   option: 没事， 这个代码很完美
-                feedback: That's right!
-            hint: Does this code even have a mistake?
+                feedback: 没错！
+            hint: 这段代码甚至有错误吗？
             correct_answer: D
             question_score: '10'
         6:
-            question_text: What's wrong with this code?
+            question_text: 这段代码有什么错误？
             code: |-
-                question {is} {ask} What do you want to know?
-                answers yes, no, maybe
-                {print} answers {at} {random}
+                问题 {is} {ask} 你想知道什么？
+                回答是，不，可能
+                {print} 回答 {at} {random}
             mp_choice_options:
-            -   option: Line 2 needs to say question instead of answers
-                feedback: No that's not right
-            -   option: Line 2 needs the `{is}` command
-                feedback: Correct
-            -   option: Line 3 needs to say answer instead of answers
-                feedback: No the variable's called answers
-            -   option: Nothing! This code is great!
-                feedback: Actually, line 2 has a mistake.
-            hint: There is something wrong with line 2.
+            -   option: 第二行需要说问题而不是回答
+                feedback: 不那不是对的
+            -   option: 第二行需要 `{is}` 命令
+                feedback: 正确
+            -   option: 第三行需要说回答而不是回答
+                feedback: 否变量的调用答案
+            -   option: 没什么！这个代码很好！
+                feedback: 事实上，第二行有一个错误。
+            hint: 第二行有一些问题。
             correct_answer: B
             question_score: '10'
         7:
-            question_text: What does the `{add}` command do?
+            question_text: '`{add}`命令有什么作用？'
             code: |-
                 books {is} Harry Potter, The Hobbit, Green Eggs and Ham
                 your_book {is} {ask} What is your favorite book?
                 {add} your_book {to} books
                 {print} books {at} {random}
             mp_choice_options:
-            -   option: The `{add}` command removes a random book from the list
-                feedback: The remove command removes, the add command adds
-            -   option: The `{add}` command adds a random book to a list
-                feedback: It doesn't. It adds your answer to the list!
-            -   option: The `{add}` command adds your favorite book to the list
-                feedback: Correct!
-            -   option: The `{add}` command prints your favorite book.
-                feedback: No, it adds your favorite book to the list
-            hint: The `{add}` command adds a book, but which one?
+            -   option: '`{add}`命令从列表中删除随机书籍'
+                feedback: 删除命令删除，添加命令添加
+            -   option: '`{add}`命令将随机书籍添加到列表中'
+                feedback: 其实不然。它会将您的答案添加到列表中！
+            -   option: '`{add}` 命令将您喜爱的书籍添加到列表中'
+                feedback: 正确！
+            -   option: '`{add}` 命令打印你最喜欢的书。'
+                feedback: 不，它会将您最喜欢的书添加到列表中
+            hint: '`{add}` 命令添加一本书，但哪一本书？'
             correct_answer: C
             question_score: '10'
         8:
