@@ -13,7 +13,7 @@
         <div id="editor-area" class="w-full flex flex-grow gap-4 mt-0 mb-0">
             <div class="flex flex-col w-full" id="code_editor">
                 <div class="w-full flex-1 flex flex-col">
-                    <div id="editor" style="background: #272822; font-size:0.95em; color: white" blurred='false'class="w-full flex-1 text-lg rounded">{{program}}</div>
+                    <div id="editor" style="background: #272822; font-size:0.95em; color: white" blurred="false" class="w-full flex-1 text-lg rounded" {% if readOnly %}data-readonly="true"{% endif %}>{{program}}</div>
                     <div id="errorbox"
                       class="flex-0 z-20 mt-0 bg-red-100 border-t-4 border-red-500 rounded-b text-red-900 px-4 py-3 shadow-md" role="alert"
                       style="display: none;">
@@ -64,8 +64,8 @@
             {% if run %}
                 <div class="w-full flex flex-col order-2 relative" id="code_output">
                       <!-- tabindex=0 makes the div focusable -->
-                      <div id="output" tabindex=0 class="flex-1 rounded p-2 px-3 bg-gray-900 color-white w-full text-lg overflow-auto {% if raw %} max-h-56 {% endif %}" style="min-height: 3rem;"></div>
-                      <div id="turtlecanvas" class="flex-0 ltr:pl-4 rtl:pr-4"  raw="yes"></div>
+                      <div id="output" tabindex=0 class="flex-1 rounded p-2 px-3 bg-gray-900 color-white w-full text-lg overflow-auto" style="min-height: 3rem;"></div>
+                      <div id="turtlecanvas" class="flex-0 ltr:pl-4 rtl:pr-4"></div>
                       <div id="inline-modal" class="flex-0">
                         <div id="ask-modal" class="py-2 text-left px-3 border-4 border-teal-500 mt-3 rounded bg-green-100" style="display: none">
                         <!--Title-->
@@ -127,6 +127,24 @@
             console.log = function () {};
             console.dir = function () {};
             console.debug = function () {};
+
+            // Dynamically add the gutter to the editor when readOnly
+            {% if readOnly %}
+                const editor = ace.edit('editor');
+                editor.setOption("showGutter", true);
+            {% endif %}
+
+            // Listen to message from the host to dynamically toggle readOnly mode
+            window.addEventListener('message', function (message) {
+                if (message.data.mode) {
+                    const editor = ace.edit('editor');
+                    if (message.data.mode == 'read') {
+                        editor.setReadOnly(true);
+                    } else if (message.data.mode == 'edit') {
+                        editor.setReadOnly(false);
+                    }
+                }
+            });
 
             // We need a work-around to allow listening to events from outside the embedded editor
             function sendRunEvent() {
