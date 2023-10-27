@@ -1833,7 +1833,6 @@ class ConvertToPython_6(ConvertToPython_5):
             converted = f'convert_numerals("{self.numerals_language}",{a.children[0]})'
             return "{" + converted + "}"
 
-
     def sleep(self, meta, args):
         if not args:
             return "time.sleep(1)"
@@ -1865,8 +1864,6 @@ class ConvertToPython_6(ConvertToPython_5):
                 args_new.append(self.process_variable_for_fstring(a))
 
         return ''.join(args_new)
-
-
 
     def equality_check(self, meta, args):
         arg0 = self.process_variable(args[0], meta.line)
