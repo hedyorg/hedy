@@ -19,24 +19,16 @@ levels:
             code: _Ciao!
             mp_choice_options:
             -   option: |-
-                    ```
-                    {echo}
-                    ```
-                feedback: '`{echo}` repeats a given answer.'
+                    `{echo}`
+                feedback: '`{echo}` ripete una risposta data.'
             -   option: |-
-                    ```
-                    {print}
-                     ```
+                    `{print}`
                 feedback: Corretto!
             -   option: |-
-                    ```
-                    hello
-                    ```
+                    `hello`
                 feedback: Ciao non è un comando.
             -   option: |-
-                    ```
-                    {ask}
-                    ```
+                    `{ask}`
                 feedback: With `{ask}`, you can ask a question.
             hint: _Ciao mondo!
             correct_answer: B
@@ -64,22 +56,22 @@ levels:
                     {echo} What is your favorite color?
                     ```
                 feedback: '`{echo}` repeats your answer back to you.'
-            hint: You can {ask} something with the {ask} command
+            hint: Puoi chiedere qualcosa con il comando `{ask}`
             correct_answer: C
             question_score: '10'
         4:
             question_text: Cosa c'è di sbagliato in questo codice?
             code: |-
-                Hi Im Hedy!
-                {ask} Who are you?
-                {echo} Hi...
+                Ciao, sono Hedy!
+                {ask} Chi sei?
+                {echo} Ciao...
             mp_choice_options:
-            -   option: '`{print}` in line 1 is missing.'
-                feedback: Correct!
-            -   option: Im in line 1 is spelled wrong.
-                feedback: Im is spelled wrong on purpose; Hedy doesn't understand the apostrophes yet.
+            -   option: 'Manca `{print}` nella riga 1.'
+                feedback: Corretto!
+            -   option: Il comando nella riga 2 è scritto in modo errato.
+                feedback: Il comando è scritto correttamente.
             -   option: '`{echo}` non è un comando.'
-                feedback: '`{echo}` is a command, there''s another mistake.'
+                feedback: '`{echo}` è un comando, c''è un altro errore.'
             -   option: Nothing! This is a perfect code!
                 feedback: Wrong, look carefully!
             hint: Line 1 doesn't seem right
