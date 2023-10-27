@@ -89,7 +89,7 @@ adventures:
                 start_code: '{print} 你的故事'
             4:
                 story_text: "你可能注意到了，在之前的级别里还有个问题。你有没有试过打印含有“名字”这个词的句子？即：`{print}` 我的名字是名字。\n 在这一级里你可以解决这个问题。你必须给所有需要打印的东西加上引号。\n\n### 练习1\n复制示例代码并通过添加引号来使其正常工作。 \n\n ### 练习 2 \n返回到上一个级别并复制故事代码。通过在正确的位置添加引号，使代码在此级别中正常工作。 \n注意：你自己故事中的变量应该在引号之外。就像范例代码的第二行一样。在该行中，变量名称放在引号之外。\n"
-                example_code: "```\n名字 {is} {ask}_你的名字是什么? _\n{print}     _ 主人公的名字是_名字 \n {print} 名字     _正准备走进树林_\n{print} 名字 _有点害怕'\n动物们 {is} \U0001F994, \U0001F43F, \U0001F989, \U0001F987\n{print} _他听到了一个_ 动物们{at} {random} 的声音\n{print} 名字_担心这片森林闹鬼_\n```\n"
+                example_code: "```\n名字 {is} {ask}_你的名字是什么? _\n{print}     _ 主人公的名字是_名字 \n {print} 名字     _正准备走进树林_\n{print} 名字 _有点害怕'\n动物们 {is} 🦔, 🐿, 🦉, 🦇\n{print} _他听到了一个_ 动物们{at} {random} 的声音\n{print} 名字_担心这片森林闹鬼_\n```\n"
                 start_code: '{print} ''你的故事会打印在这里！'''
             5:
                 story_text: |
@@ -241,7 +241,7 @@ adventures:
                     ```
                 story_text_2: |
                     ## Remove from
-                    If you can add items to a list, of course you can also take them off. This is done with the `{remove} {from}` command.
+                    如果你可以将项目添加到列表中，当然你也可以将其删除。可以使用 `{remove} {from}` 指令.
                 example_code_2: |
                     ```
                     动物们 {is} 狗, 猫, 袋鼠
@@ -307,7 +307,7 @@ adventures:
                     ```
                 story_text_2: |
                     ## The echo command
-                    If you want the computer to repeat the answer, you can use the `{echo}` command. The answer will then be echoed back at the end of the sentence, so in this example after hello.
+                    如果想让计算机将结果重复一遍，可以使用 `{echo}` 命令。答案将在程序末尾输出，因此在本例中，结果将在 hello 之后输出。
                 example_code_2: |
                     ```
                     {print} Hello!
@@ -315,12 +315,12 @@ adventures:
                     {echo} hello
                     ```
                 story_text_3: |
-                    ### Exercise
-                    Try out the `{ask}` and `{echo}` commands. Firstly, fill in the blanks to make this program work.
-                    Then ask 2 more questions using the `{ask}` command, after each `{ask}` use an `{echo}` to print the answer on the screen.
+                    ### 练习
+                    尝试使用“{ask}”和“{echo}”命令，首先，完成填空以使该程序成功运行。
+                    然后使用“{ask}”命令再问 2 个问题，在每个“{ask}”之后使用“{echo}”在屏幕上打印答案。
                 example_code_3: |
                     ```
-                    _ How are you doing?
+                    _ 你好吗?
                     _
                     ```
                 start_code: |
@@ -329,12 +329,11 @@ adventures:
                     {echo} hello
             2:
                 story_text: |
-                    ## The ask command
-                    Now that we can use **variables** in our codes, we no longer need the `{echo}` command.
-                    We can use variables to store the answers to our questions and this way we can use the answer to multiple questions in our codes.
-                    Check it out:
-
-                    This way your code is becoming interactive!
+                    ## 询问命令
+                    现在我们可以在代码中使用**变量**，我们可以不再使用“{echo}”命令。
+                    我们可以使用变量来保存问题的答案，这样我们就可以在代码中使用多个问题的答案。
+                    一探究竟：
+                    这样你的代码就变得具有交互性了！
                 example_code: |
                     ```
                     name {is} {ask} What is your name?
@@ -1254,7 +1253,7 @@ adventures:
                     在本级中，你将学会在使用算命仙时，（秘密地）使结果对你有利！
                     通过使用`{if}` 和`{else}` ，你可以确保你总是能得到好运，而其他人可能得不到。
                     看看这个例子就知道了。
-                example_code: "```\n{print} '我是海蒂算命仙!'\n{print} '我可以预测你明天是否会中彩票！'\n人 {is} {ask} '你是谁？'\n{if} 人 {is} 海蒂 {print} '你肯定会中奖！\U0001F929' {else} {print} '你运气不好！别人会中奖！\U0001F62D' \n```\n"
+                example_code: "```\n{print} '我是海蒂算命仙!'\n{print} '我可以预测你明天是否会中彩票！'\n人 {is} {ask} '你是谁？'\n{if} 人 {is} 海蒂 {print} '你肯定会中奖！🤩' {else} {print} '你运气不好！别人会中奖！😭' \n```\n"
                 start_code: '# 在这里写下你的代码'
             6:
                 story_text: |
