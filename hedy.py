@@ -152,8 +152,10 @@ PYTHON_KEYWORDS = [
     'is',
     'try',
     'int']
+
+LIBRARIES = ['time', 'random']
 # Python keywords and function names need hashing when used as var names
-reserved_words = set(PYTHON_BUILTIN_FUNCTIONS + PYTHON_KEYWORDS)
+reserved_words = set(PYTHON_BUILTIN_FUNCTIONS + PYTHON_KEYWORDS + LIBRARIES)
 
 # Let's retrieve all keywords dynamically from the cached KEYWORDS dictionary
 indent_keywords = {}
