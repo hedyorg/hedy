@@ -1821,6 +1821,35 @@ else:
 @source_map_transformer(source_map)
 class ConvertToPython_6(ConvertToPython_5):
 
+    def convert_tree_to_number(self, a):
+        # takes a calculation tree coming from the process_calculation() method, and turns it into numbers
+        # we do that late in the tree to deal with different numeral systems
+
+        if self.numerals_language == "Latin":
+            return "{" + a.children[0] + "}"
+        else:
+            converted = f'convert_numerals("{self.numerals_language}",{a.children[0]})'
+            return "{" + converted + "}"
+
+
+    def sleep(self, meta, args):
+        if not args:
+            return "time.sleep(1)"
+        else:
+            if type(args[0]) is Tree:
+                args[0] = args[0].children[0]
+                value = f'{args[0]}'
+            else:
+                value = f'"{args[0]}"' if self.is_int(args[0]) else args[0]
+
+            exceptions = self.make_catch_exception(args)
+            try_prefix = "try:\n" + textwrap.indent(exceptions, "  ")
+            code = try_prefix + textwrap.dedent(f"""\
+                  time.sleep(int({value}))
+                except ValueError:
+                  raise Exception(f'While running your program the command {style_command(Command.sleep)} received the value {style_command('{' + value + '}')} which is not allowed. Try changing the value to a number.')""")
+            return code
+
     def print_ask_args(self, meta, args):
         # we only check non-Tree (= non calculation) arguments
         self.check_var_usage(args, meta.line)
@@ -1829,15 +1858,13 @@ class ConvertToPython_6(ConvertToPython_5):
         args_new = []
         for a in args:
             if isinstance(a, Tree):
-                if self.numerals_language == "Latin":
-                    args_new.append("{" + a.children[0] + "}")
-                else:
-                    converted = f'convert_numerals("{self.numerals_language}",{a.children[0]})'
-                    args_new.append("{" + converted + "}")
+                args_new.append(self.convert_tree_to_number(a))
             else:
                 args_new.append(self.process_variable_for_fstring(a))
 
         return ''.join(args_new)
+
+
 
     def equality_check(self, meta, args):
         arg0 = self.process_variable(args[0], meta.line)

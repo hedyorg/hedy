@@ -64,6 +64,16 @@ class TestsLevel12(HedyTester):
             output=output
         )
 
+    def test_sleep_division_float(self):
+        code = "sleep 1 / 20"
+        expected = "time.sleep(0)"
+
+        self.multi_level_tester(
+            code=code,
+            expected=expected,
+            max_level=17
+        )
+
     def test_print_literal_strings(self):
         code = """print "It's " '"Hedy"!'"""
         expected = """print(f'''It\\'s "Hedy"!''')"""
