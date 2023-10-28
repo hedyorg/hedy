@@ -77,28 +77,68 @@ class TestsLevel7(HedyTester):
         self.single_level_tester(code=code, exception=hedy.exceptions.UndefinedVarException)
 
     def test_missing_body(self):
-        code = "repeat 5 times"
+        code = textwrap.dedent("""\
+        prind skipping
+        repeat 5 times""")
 
-        self.multi_level_tester(code=code,
-                                exception=hedy.exceptions.MissingInnerCommandException,
-                                max_level=8)
+        expected = textwrap.dedent("""\
+        pass
+        pass""")
+
+        skipped_mappings = [
+            SkippedMapping(SourceRange(1, 1, 1, 15), hedy.exceptions.InvalidCommandException),
+            SkippedMapping(SourceRange(2, 1, 2, 15), hedy.exceptions.MissingInnerCommandException)
+        ]
+
+        self.multi_level_tester(
+            code=code,
+            expected=expected,
+            skipped_mappings=skipped_mappings,
+            max_level=8
+        )
 
     @parameterized.expand(HedyTester.quotes)
     def test_print_without_opening_quote_gives_error(self, q):
-        code = f"print hedy 123{q}"
+        code = textwrap.dedent(f"""\
+        print hedy 123{q}
+        prind skipping""")
+
+        expected = textwrap.dedent("""\
+        pass
+        pass""")
+
+        skipped_mappings = [
+            SkippedMapping(SourceRange(1, 1, 1, 16), hedy.exceptions.UnquotedTextException),
+            SkippedMapping(SourceRange(2, 1, 2, 15), hedy.exceptions.InvalidCommandException)
+        ]
+
         self.multi_level_tester(
-            code,
-            max_level=17,
-            exception=hedy.exceptions.UnquotedTextException
+            code=code,
+            expected=expected,
+            skipped_mappings=skipped_mappings,
+            max_level=17
         )
 
     @parameterized.expand(HedyTester.quotes)
     def test_print_without_closing_quote_gives_error(self, q):
-        code = f"print {q}hedy 123"
+        code = textwrap.dedent(f"""\
+        prind skipping
+        print {q}hedy 123""")
+
+        expected = textwrap.dedent("""\
+        pass
+        pass""")
+
+        skipped_mappings = [
+            SkippedMapping(SourceRange(1, 1, 1, 15), hedy.exceptions.InvalidCommandException),
+            SkippedMapping(SourceRange(2, 1, 2, 16), hedy.exceptions.UnquotedTextException)
+        ]
+
         self.multi_level_tester(
-            code,
-            max_level=17,
-            exception=hedy.exceptions.UnquotedTextException
+            code=code,
+            expected=expected,
+            skipped_mappings=skipped_mappings,
+            max_level=17
         )
 
     def test_repeat_with_string_variable_gives_type_error(self):
@@ -142,15 +182,18 @@ class TestsLevel7(HedyTester):
 
     def test_repeat_with_missing_print_gives_lonely_text_exc(self):
         code = textwrap.dedent("""\
+        prind skipping
         repeat 3 times 'n'""")
 
         expected = textwrap.dedent("""\
+        pass
         for __i__ in range(int('3')):
           pass
           time.sleep(0.1)""")
 
         skipped_mappings = [
-            SkippedMapping(SourceRange(1, 16, 1, 19), hedy.exceptions.LonelyTextException),
+            SkippedMapping(SourceRange(1, 1, 1, 15), hedy.exceptions.InvalidCommandException),
+            SkippedMapping(SourceRange(2, 16, 2, 19), hedy.exceptions.LonelyTextException)
         ]
 
         self.single_level_tester(
@@ -161,12 +204,17 @@ class TestsLevel7(HedyTester):
 
     def test_repeat_with_missing_times_gives_error(self):
         code = textwrap.dedent("""\
-        repeat 3 print 'n'""")
+        prind skipping
+        repeat 3 print 'n'
+        """)
 
-        expected = "pass"
+        expected = textwrap.dedent("""\
+        pass
+        pass""")
 
         skipped_mappings = [
-            SkippedMapping(SourceRange(1, 1, 1, 19), hedy.exceptions.IncompleteRepeatException),
+            SkippedMapping(SourceRange(1, 1, 1, 15), hedy.exceptions.InvalidCommandException),
+            SkippedMapping(SourceRange(2, 1, 2, 19), hedy.exceptions.IncompleteRepeatException),
         ]
 
         self.single_level_tester(

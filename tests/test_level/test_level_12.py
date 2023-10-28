@@ -4,7 +4,8 @@ from parameterized import parameterized
 
 import hedy
 from hedy import Command
-from tests.Tester import HedyTester
+from hedy_sourcemap import SourceRange
+from tests.Tester import HedyTester, SkippedMapping
 
 
 class TestsLevel12(HedyTester):
@@ -2192,8 +2193,17 @@ class TestsLevel12(HedyTester):
                 print 1
         call simple_function""")
 
+        expected = textwrap.dedent("""\
+        pass
+        simple_function()""")
+
+        skipped_mappings = [
+            SkippedMapping(SourceRange(1, 1, 3, 34), hedy.exceptions.NestedFunctionException),
+        ]
+
         self.multi_level_tester(
             code=code,
-            exception=hedy.exceptions.NestedFunctionException,
-            max_level=16,
+            expected=expected,
+            skipped_mappings=skipped_mappings,
+            max_level=16
         )

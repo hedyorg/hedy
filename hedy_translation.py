@@ -2,9 +2,10 @@ from collections import namedtuple
 from lark import Visitor, Token
 import hedy
 import operator
-import yaml
 from os import path
 import hedy_content
+from website.yaml_file import YamlFile
+import copy
 
 # Holds the token that needs to be translated, its line number, start and
 # end indexes and its value (e.g. ", ").
@@ -18,9 +19,11 @@ def keywords_to_dict(lang="nl"):
     keywords_path = "content/keywords/"
     yaml_filesname_with_path = path.join(base, keywords_path, lang + ".yaml")
 
-    with open(yaml_filesname_with_path, "r", encoding="UTF-8") as stream:
-        command_combinations = yaml.safe_load(stream)
-
+    # as we mutate this dict, we have to make a copy
+    # as YamlFile re-uses the yaml contents
+    command_combinations = copy.deepcopy(
+        YamlFile.for_file(yaml_filesname_with_path).to_dict()
+    )
     for k, v in command_combinations.items():
         command_combinations[k] = v.split("|")
 
@@ -79,7 +82,7 @@ def translate_keywords(input_string_, from_lang="en", to_lang="nl", level=1):
         hedy.source_map.clear()
         hedy.source_map.set_skip_faulty(False)
 
-        parser = hedy.get_parser(level, from_lang, True)
+        parser = hedy.get_parser(level, from_lang, True, hedy.source_map.skip_faulty)
         keyword_dict_from = keywords_to_dict(from_lang)
         keyword_dict_to = keywords_to_dict(to_lang)
 
@@ -134,7 +137,7 @@ def replace_token_in_line(line, rule, original, target):
 def find_command_keywords(
     input_string, lang, level, keywords, start_line, end_line, start_column, end_column
 ):
-    parser = hedy.get_parser(level, lang, True)
+    parser = hedy.get_parser(level, lang, True, hedy.source_map.skip_faulty)
     program_root = parser.parse(input_string).children[0]
 
     translator = Translator(input_string)

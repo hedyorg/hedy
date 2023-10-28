@@ -21,6 +21,9 @@ export function loginForAdmin() {
 }
 
 export function login(username, password) {
+    cy.clearCookies();
+    cy.clearAllLocalStorage()
+    cy.clearAllSessionStorage();
     goToLogin();
     cy.get('#username').type(username);
     cy.get('#password').type(password);

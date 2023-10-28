@@ -1,17 +1,18 @@
 import textwrap
+from functools import lru_cache, cache
 
 import lark
 from flask_babel import gettext
 from lark import Lark
 from lark.exceptions import UnexpectedEOF, UnexpectedCharacters, VisitError
 from lark import Tree, Transformer, visitors, v_args
-from os import path
+from os import path, getenv
 
 import warnings
 import hedy
 import hedy_translation
+from utils import atomic_write_file
 from hedy_content import ALL_KEYWORD_LANGUAGES
-import utils
 from collections import namedtuple
 import re
 import regex
@@ -19,6 +20,12 @@ from dataclasses import dataclass, field
 import exceptions
 import program_repair
 import yaml
+import hashlib
+import os
+import pickle
+import sys
+import tempfile
+import utils
 
 # Some useful constants
 from hedy_content import KEYWORDS
@@ -167,6 +174,16 @@ def needs_colon(rule):
     return f'{rule[0:pos]} _COLON {rule[pos:]}'
 
 
+def _translate_index_error(code, list_name):
+    exception_text = gettext('catch_index_exception').replace('{list_name}', style_command(list_name))
+    return textwrap.dedent(f"""\
+        try:
+          {code}
+        except IndexError:
+          raise Exception({repr(exception_text)})
+        """)
+
+
 PREPROCESS_RULES = {
     'needs_colon': needs_colon
 }
@@ -258,20 +275,20 @@ commands_per_level = {
     2: ['print', 'ask', 'is', 'turn', 'forward', 'color', 'sleep'],
     3: ['ask', 'is', 'print', 'forward', 'turn', 'color', 'sleep', 'at', 'random', 'add', 'to', 'remove', 'from'],
     4: ['ask', 'is', 'print', 'forward', 'turn', 'color', 'sleep', 'at', 'random', 'add', 'to', 'remove', 'from', 'clear'],
-    5: ['ask', 'is', 'print', 'forward', 'turn', 'color', 'sleep', 'at', 'random', 'add', 'to', 'remove', 'from', 'in', 'not in', 'if', 'else', 'pressed', 'button', 'clear'],
-    6: ['ask', 'is', 'print', 'forward', 'turn', 'color', 'sleep', 'at', 'random', 'add', 'to', 'remove', 'from', 'in', 'not in', 'if', 'else', 'pressed', 'button', 'clear'],
-    7: ['ask', 'is', 'print', 'forward', 'turn', 'color', 'sleep', 'at', 'random', 'add', 'to', 'remove', 'from', 'in', 'not in', 'if', 'else', 'pressed', 'button', 'repeat', 'times', 'clear'],
-    8: ['ask', 'is', 'print', 'forward', 'turn', 'color', 'sleep', 'at', 'random', 'add', 'to', 'remove', 'from', 'in', 'not in', 'if', 'else', 'pressed', 'button', 'repeat', 'times', 'clear'],
-    9: ['ask', 'is', 'print', 'forward', 'turn', 'color', 'sleep', 'at', 'random', 'add', 'to', 'remove', 'from', 'in', 'not in', 'if', 'else', 'pressed', 'button', 'repeat', 'times', 'clear'],
-    10: ['ask', 'is', 'print', 'forward', 'turn', 'color', 'sleep', 'at', 'random', 'add', 'to', 'remove', 'from', 'in', 'not in', 'if', 'else', 'pressed', 'button', 'repeat', 'times', 'for', 'clear'],
-    11: ['ask', 'is', 'print', 'forward', 'turn', 'color', 'sleep', 'at', 'random', 'add', 'to', 'remove', 'from', 'in', 'not in', 'if', 'else', 'pressed', 'button', 'for', 'range', 'repeat', 'clear'],
-    12: ['ask', 'is', 'print', 'forward', 'turn', 'color', 'sleep', 'at', 'random', 'add', 'to', 'remove', 'from', 'in', 'not in', 'if', 'else', 'pressed', 'button', 'for', 'range', 'repeat', 'clear', 'define', 'call'],
-    13: ['ask', 'is', 'print', 'forward', 'turn', 'color', 'sleep', 'at', 'random', 'add', 'to', 'remove', 'from', 'in', 'not in', 'if', 'else', 'pressed', 'button', 'for', 'range', 'repeat', 'and', 'or', 'clear', 'define', 'call'],
-    14: ['ask', 'is', 'print', 'forward', 'turn', 'color', 'sleep', 'at', 'random', 'add', 'to', 'remove', 'from', 'in', 'not in', 'if', 'else', 'pressed', 'button', 'for', 'range', 'repeat', 'and', 'or', 'clear', 'define', 'call'],
-    15: ['ask', 'is', 'print', 'forward', 'turn', 'color', 'sleep', 'at', 'random', 'add', 'to', 'remove', 'from', 'in', 'not in', 'if', 'else', 'pressed', 'button', 'for', 'range', 'repeat', 'and', 'or', 'while', 'clear', 'define', 'call'],
-    16: ['ask', 'is', 'print', 'forward', 'turn', 'color', 'sleep', 'at', 'random', 'add', 'to', 'remove', 'from', 'in', 'not in', 'if', 'else', 'pressed', 'button', 'for', 'range', 'repeat', 'and', 'or', 'while', 'clear', 'define', 'call'],
-    17: ['ask', 'is', 'print', 'forward', 'turn', 'color', 'sleep', 'at', 'random', 'add', 'to', 'remove', 'from', 'in', 'not in', 'if', 'else', 'pressed', 'button', 'for', 'range', 'repeat', 'and', 'or', 'while', 'elif', 'clear', 'define', 'call'],
-    18: ['is', 'print', 'forward', 'turn', 'color', 'sleep', 'at', 'random', 'add', 'to', 'remove', 'from', 'in', 'if', 'not in', 'else', 'for', 'pressed', 'button', 'range', 'repeat', 'and', 'or', 'while', 'elif', 'input', 'clear', 'define', 'call'],
+    5: ['ask', 'is', 'print', 'forward', 'turn', 'color', 'sleep', 'at', 'random', 'add', 'to', 'remove', 'from', 'in', 'not in', 'if', 'else', 'ifpressed', 'assign_button', 'clear'],
+    6: ['ask', 'is', 'print', 'forward', 'turn', 'color', 'sleep', 'at', 'random', 'add', 'to', 'remove', 'from', 'in', 'not in', 'if', 'else', 'ifpressed', 'assign_button', 'clear'],
+    7: ['ask', 'is', 'print', 'forward', 'turn', 'color', 'sleep', 'at', 'random', 'add', 'to', 'remove', 'from', 'in', 'not in', 'if', 'else', 'ifpressed', 'assign_button', 'repeat', 'times', 'clear'],
+    8: ['ask', 'is', 'print', 'forward', 'turn', 'color', 'sleep', 'at', 'random', 'add', 'to', 'remove', 'from', 'in', 'not in', 'if', 'else', 'ifpressed', 'assign_button', 'repeat', 'times', 'clear'],
+    9: ['ask', 'is', 'print', 'forward', 'turn', 'color', 'sleep', 'at', 'random', 'add', 'to', 'remove', 'from', 'in', 'not in', 'if', 'else', 'ifpressed', 'assign_button', 'repeat', 'times', 'clear'],
+    10: ['ask', 'is', 'print', 'forward', 'turn', 'color', 'sleep', 'at', 'random', 'add', 'to', 'remove', 'from', 'in', 'not in', 'if', 'else', 'ifpressed', 'assign_button', 'repeat', 'times', 'for', 'clear'],
+    11: ['ask', 'is', 'print', 'forward', 'turn', 'color', 'sleep', 'at', 'random', 'add', 'to', 'remove', 'from', 'in', 'not in', 'if', 'else', 'ifpressed', 'assign_button', 'for', 'range', 'repeat', 'clear'],
+    12: ['ask', 'is', 'print', 'forward', 'turn', 'color', 'sleep', 'at', 'random', 'add', 'to', 'remove', 'from', 'in', 'not in', 'if', 'else', 'ifpressed', 'assign_button', 'for', 'range', 'repeat', 'clear', 'define', 'call'],
+    13: ['ask', 'is', 'print', 'forward', 'turn', 'color', 'sleep', 'at', 'random', 'add', 'to', 'remove', 'from', 'in', 'not in', 'if', 'else', 'ifpressed', 'assign_button', 'for', 'range', 'repeat', 'and', 'or', 'clear', 'define', 'call'],
+    14: ['ask', 'is', 'print', 'forward', 'turn', 'color', 'sleep', 'at', 'random', 'add', 'to', 'remove', 'from', 'in', 'not in', 'if', 'else', 'ifpressed', 'assign_button', 'for', 'range', 'repeat', 'and', 'or', 'clear', 'define', 'call'],
+    15: ['ask', 'is', 'print', 'forward', 'turn', 'color', 'sleep', 'at', 'random', 'add', 'to', 'remove', 'from', 'in', 'not in', 'if', 'else', 'ifpressed', 'assign_button', 'for', 'range', 'repeat', 'and', 'or', 'while', 'clear', 'define', 'call'],
+    16: ['ask', 'is', 'print', 'forward', 'turn', 'color', 'sleep', 'at', 'random', 'add', 'to', 'remove', 'from', 'in', 'not in', 'if', 'else', 'ifpressed', 'assign_button', 'for', 'range', 'repeat', 'and', 'or', 'while', 'clear', 'define', 'call'],
+    17: ['ask', 'is', 'print', 'forward', 'turn', 'color', 'sleep', 'at', 'random', 'add', 'to', 'remove', 'from', 'in', 'not in', 'if', 'else', 'ifpressed', 'assign_button', 'for', 'range', 'repeat', 'and', 'or', 'while', 'elif', 'clear', 'define', 'call'],
+    18: ['is', 'print', 'forward', 'turn', 'color', 'sleep', 'at', 'random', 'add', 'to', 'remove', 'from', 'in', 'if', 'not in', 'else', 'for', 'ifpressed', 'assign_button', 'range', 'repeat', 'and', 'or', 'while', 'elif', 'input', 'clear', 'define', 'call'],
 }
 
 command_turn_literals = ['right', 'left']
@@ -357,6 +374,10 @@ def get_list_keywords(commands, to_lang):
         with open(to_yaml_filesname_with_path, 'r', encoding='utf-8') as stream:
             to_yaml_dict = yaml.safe_load(stream)
         for command in commands:
+            if command == 'ifpressed':  # TODO: this is a bit of a hack
+                command = 'pressed'    # since in the yamls they are called pressed
+            if command == 'assign_button':  # but in the grammar 'ifpressed'
+                command = 'button'         # should be changed in the yaml eventually!
             try:
                 translation_commands.append(to_yaml_dict[command])
             except Exception:
@@ -978,40 +999,6 @@ class Filter(Transformer):
         return all(args), ''.join([c for c in args]), meta
 
 
-class UsesTurtle(Transformer):
-    def __default__(self, args, children, meta):
-        if len(children) == 0:  # no children? you are a leaf that is not Turn or Forward, so you are no Turtle command
-            return False
-        else:
-            return any(isinstance(c, bool) and c is True for c in children)
-
-    # returns true if Forward or Turn are in the tree, false otherwise
-    def forward(self, args):
-        return True
-
-    def color(self, args):
-        return True
-
-    def turn(self, args):
-        return True
-
-    # somehow tokens are not picked up by the default rule so they need their own rule
-    def INT(self, args):
-        return False
-
-    def NAME(self, args):
-        return False
-
-    def NUMBER(self, args):
-        return False
-
-    def POSITIVE_NUMBER(self, args):
-        return False
-
-    def NEGATIVE_NUMBER(self, args):
-        return False
-
-
 class UsesPyGame(Transformer):
     command_prefix = (f"""\
 pygame_end = False
@@ -1022,21 +1009,6 @@ while not pygame_end:
     pygame_end = True
     pygame.quit()
     break""")
-
-    def __default__(self, args, children, meta):
-        if len(children) == 0:  # no children? you are a leaf that is not Pressed, so you are no PyGame command
-            return False
-        else:
-            return any(isinstance(c, bool) and c is True for c in children)
-
-    def ifpressed(self, args):
-        return True
-
-    def ifpressed_else(self, args):
-        return True
-
-    def assign_button(self, args):
-        return True
 
 
 class AllCommands(Transformer):
@@ -1077,10 +1049,12 @@ class AllCommands(Transformer):
         # if we are matching a rule that is a command
         production_rule_name = self.translate_keyword(args)
         leaves = flatten_list_of_lists_to_list(children)
-        # for the achievements we want to be able to also detct which operators were used by a kid
+        # for the achievements we want to be able to also detect which operators were used by a kid
         operators = ['addition', 'subtraction', 'multiplication', 'division']
 
-        if production_rule_name in commands_per_level[self.level] or production_rule_name in operators:
+        if production_rule_name in commands_per_level[self.level] or production_rule_name in operators or production_rule_name == 'ifpressed_else':
+            # ifpressed_else is not in the yamls, upsetting lookup code to get an alternative later
+            # lookup should be fixed instead, making a special case for now
             if production_rule_name == 'else':  # use of else also has an if
                 return ['if', 'else'] + leaves
             return [production_rule_name] + leaves
@@ -1114,52 +1088,14 @@ class AllCommands(Transformer):
 
 
 def all_commands(input_string, level, lang='en'):
+    """Return the commands used in a program string.
+
+    This function is still used in the web frontend, and some tests, but no longer by 'transpile'.
+    """
     input_string = process_input_string(input_string, level, lang)
     program_root = parse_input(input_string, level, lang)
 
     return AllCommands(level).transform(program_root)
-
-
-class AllPrintArguments(Transformer):
-    def __init__(self, level):
-        self.level = level
-
-    def __default__(self, args, children, meta):
-        leaves = flatten_list_of_lists_to_list(children)
-
-        if args == 'print':
-            return children
-        else:
-            return leaves  # 'pop up' the children
-
-    def program(self, args):
-        return flatten_list_of_lists_to_list(args)
-
-    # somehow tokens are not picked up by the default rule so they need their own rule
-    def INT(self, args):
-        return []
-
-    def NAME(self, args):
-        return []
-
-    def NUMBER(self, args):
-        return []
-
-    def POSITIVE_NUMBER(self, args):
-        return []
-
-    def NEGATIVE_NUMBER(self, args):
-        return []
-
-    def text(self, args):
-        return ''.join(args)
-
-
-def all_print_arguments(input_string, level, lang='en'):
-    input_string = process_input_string(input_string, level, lang)
-    program_root = parse_input(input_string, level, lang)
-
-    return AllPrintArguments(level).transform(program_root)
 
 
 @v_args(meta=True)
@@ -1167,6 +1103,9 @@ class IsValid(Filter):
     # all rules are valid except for the "Invalid" production rule
     # this function is used to generate more informative error messages
     # tree is transformed to a node of [Bool, args, command number]
+
+    def __init__(self, level):
+        self.level = level
 
     def error_invalid_space(self, meta, args):
         # return space to indicate that line starts in a space
@@ -1572,15 +1511,8 @@ class ConvertToPython_1(ConvertToPython):
                     list_args.append(group[3])
                     lists_names.append(group[4])
         code = ""
-        exception_text_template = gettext('catch_index_exception')
         for i, list_name in enumerate(lists_names):
-            exception_text = exception_text_template.replace('{list_name}', style_command(list_name))
-            code += textwrap.dedent(f"""\
-            try:
-              {list_args[i]}
-            except IndexError:
-              raise Exception('{exception_text}')
-            """)
+            code += _translate_index_error(list_args[i], list_name)
         return code
 
 
@@ -2393,13 +2325,7 @@ class ConvertToPython_16(ConvertToPython_15):
     def change_list_item(self, meta, args):
         left_side = args[0] + '[' + args[1] + '-1]'
         right_side = args[2]
-        exception_text = gettext('catch_index_exception').replace('{list_name}', style_command(args[0]))
-        exception = textwrap.dedent(f"""\
-        try:
-          {left_side}
-        except IndexError:
-          raise Exception('{exception_text}')
-        """)
+        exception = _translate_index_error(left_side, args[0])
         return exception + left_side + ' = ' + right_side + self.add_debug_breakpoint()
 
     def ifs(self, meta, args):
@@ -2462,20 +2388,30 @@ class ConvertToPython_18(ConvertToPython_17):
         return self.print(meta, args)
 
 
-def merge_grammars(grammar_text_1, grammar_text_2, level):
+def get_rule_from_string(s):
+    parts = s.split(':')
+    # get part before and after : (this is a join because there can be : in the rule)
+    if len(parts) <= 1:
+        return s, s
+    return parts[0], ''.join(parts[1])
+
+
+def merge_grammars(grammar_text_1, grammar_text_2):
     # this function takes two grammar files and merges them into one
     # rules that are redefined in the second file are overridden
     # rules that are new in the second file are added (remaining_rules_grammar_2)
     merged_grammar = []
+
+    deletables = []   # this list collects rules we no longer need,
+    # they will be removed when we encounter them
 
     rules_grammar_1 = grammar_text_1.split('\n')
     remaining_rules_grammar_2 = grammar_text_2.split('\n')
     for line_1 in rules_grammar_1:
         if line_1 == '' or line_1[0] == '/':  # skip comments and empty lines:
             continue
-        parts = line_1.split(':')
-        # get part before are after : (this is a join because there can be : in the rule)
-        name_1, definition_1 = parts[0], ''.join(parts[1:])
+
+        name_1, definition_1 = get_rule_from_string(line_1)
 
         rules_grammar_2 = grammar_text_2.split('\n')
         override_found = False
@@ -2488,8 +2424,7 @@ def merge_grammars(grammar_text_1, grammar_text_2, level):
                 name_2 = f'{needs_preprocessing.group(1)}'
                 processor = needs_preprocessing.group(3)
             else:
-                parts = line_2.split(':')
-                name_2, definition_2 = parts[0], ''.join(parts[1])  # get part before are after :
+                name_2, definition_2 = get_rule_from_string(line_2)
 
             if name_1 == name_2:
                 override_found = True
@@ -2499,14 +2434,17 @@ def merge_grammars(grammar_text_1, grammar_text_2, level):
                 else:
                     line_2_processed = line_2
                 if definition_1.strip() == definition_2.strip():
-                    warn_message = f"The rule {name_1} is duplicated on level {level}. Please check!"
+                    warn_message = f"The rule {name_1} is duplicated: {definition_1} and {definition_2}. Please check!"
                     warnings.warn(warn_message)
                 # Used to compute the rules that use the merge operators in the grammar
                 # namely +=, -= and >
-                new_rule = merge_rules_operator(definition_1, definition_2, name_1, line_2_processed)
-                # Already procesed so remove it
+                new_rule, new_deletables = merge_rules_operator(definition_1, definition_2, name_1, line_2_processed)
+                if new_deletables:
+                    deletables += new_deletables
+                # Already processed, so remove it
                 remaining_rules_grammar_2.remove(line_2)
                 break
+
         # new rule found? print that. nothing found? print org rule
         if override_found:
             merged_grammar.append(new_rule)
@@ -2519,31 +2457,37 @@ def merge_grammars(grammar_text_1, grammar_text_2, level):
             merged_grammar.append(rule)
 
     merged_grammar = sorted(merged_grammar)
-    return '\n'.join(merged_grammar)
+    # filter deletable rules
+    rules_to_keep = [rule for rule in merged_grammar if get_rule_from_string(rule)[0] not in deletables]
+    return '\n'.join(rules_to_keep)
 
 
 def merge_rules_operator(prev_definition, new_definition, name, complete_line):
     # Check if the rule is adding or substracting new rules
     has_add_op = new_definition.startswith('+=')
-    has_sub_op = has_add_op and '-=' in new_definition
+    has_remove_op = has_add_op and '-=' in new_definition
     has_last_op = has_add_op and '>' in new_definition
-    if has_sub_op:
+    deletables = None
+    if has_remove_op:
         # Get the rules we need to substract
         part_list = new_definition.split('-=')
-        add_list, sub_list = (part_list[0], part_list[1]) if has_sub_op else (part_list[0], '')
+        add_list, commands_after_minus = (part_list[0], part_list[1]) if has_remove_op else (part_list[0], '')
         add_list = add_list[3:]
+
         # Get the rules that need to be last
-        sub_list = sub_list.split('>')
-        sub_list, last_list = (sub_list[0], sub_list[1]) if has_last_op else (sub_list[0], '')
-        sub_list = sub_list + '|' + last_list
-        result_cmd_list = get_remaining_rules(prev_definition, sub_list)
+        split_on_greater_than = commands_after_minus.split('>')
+        commands_to_be_removed, last_list = (
+            split_on_greater_than[0], split_on_greater_than[1]) if has_last_op else (split_on_greater_than[0], '')
+        commands_after_minus = commands_to_be_removed + '|' + last_list
+        result_cmd_list = get_remaining_rules(prev_definition, commands_after_minus)
+        deletables = commands_to_be_removed.strip().split('|')
     elif has_add_op:
         # Get the rules that need to be last
         part_list = new_definition.split('>')
-        add_list, sub_list = (part_list[0], part_list[1]) if has_last_op else (part_list[0], '')
+        add_list, commands_after_minus = (part_list[0], part_list[1]) if has_last_op else (part_list[0], '')
         add_list = add_list[3:]
-        last_list = sub_list
-        result_cmd_list = get_remaining_rules(prev_definition, sub_list)
+        last_list = commands_after_minus
+        result_cmd_list = get_remaining_rules(prev_definition, commands_after_minus)
     else:
         result_cmd_list = prev_definition
 
@@ -2553,62 +2497,68 @@ def merge_rules_operator(prev_definition, new_definition, name, complete_line):
         new_rule = f"{name}: {result_cmd_list} | {add_list}"
     else:
         new_rule = complete_line
-    return new_rule
+
+    return new_rule, deletables
 
 
 def get_remaining_rules(orig_def, sub_def):
-    orig_cmd_list = [command.strip() for command in orig_def.split('|')]
-    unwanted_cmd_list = [command.strip() for command in sub_def.split('|')]
-    result_cmd_list = [cmd for cmd in orig_cmd_list if cmd not in unwanted_cmd_list]
-    result_cmd_list = ' | '.join(result_cmd_list)  # turn the result list into a string
-    return result_cmd_list
+    original_commands = [command.strip() for command in orig_def.split('|')]
+    commands_after_minus = [command.strip() for command in sub_def.split('|')]
+    remaining_commands = [cmd for cmd in original_commands if cmd not in commands_after_minus]
+    remaining_commands = ' | '.join(remaining_commands)  # turn the result list into a string
+    return remaining_commands
 
 
-def create_grammar(level, lang="en"):
+# this is only a couple of MB in total, safe to cache
+@cache
+def create_grammar(level, lang, skip_faulty):
     # start with creating the grammar for level 1
-    result = get_full_grammar_for_level(1)
-    keywords = get_keywords_for_language(lang)
+    merged_grammars = get_full_grammar_for_level(1)
 
-    result = merge_grammars(result, keywords, 1)
     # then keep merging new grammars in
     for i in range(2, level + 1):
         grammar_text_i = get_additional_rules_for_level(i)
-        result = merge_grammars(result, grammar_text_i, i)
+        merged_grammars = merge_grammars(merged_grammars, grammar_text_i)
+
+    # keyword and other terminals never have mergable rules, so we can just add them at the end
+    keywords = get_keywords_for_language(lang)
+    terminals = get_terminals()
+    merged_grammars = merged_grammars + '\n' + keywords + '\n' + terminals
 
     # Change the grammar if skipping faulty is enabled
-    if source_map.skip_faulty:
+    if skip_faulty:
         # Make sure to change the meaning of error_invalid
         # this way more text will be 'catched'
-        error_invalid_rules = re.findall(r'^error_invalid.-100:.*?\n', result, re.MULTILINE)
+        error_invalid_rules = re.findall(r'^error_invalid.-100:.*?\n', merged_grammars, re.MULTILINE)
         if len(error_invalid_rules) > 0:
             error_invalid_rule = error_invalid_rules[0]
             error_invalid_rule_changed = 'error_invalid.-100: textwithoutspaces _SPACE* text?\n'
-            result = result.replace(error_invalid_rule, error_invalid_rule_changed)
+            merged_grammars = merged_grammars.replace(error_invalid_rule, error_invalid_rule_changed)
 
         # from level 12:
         # Make sure that all keywords in the language are added to the rules:
         # textwithspaces & textwithoutspaces, so that these do not fall into the error_invalid rule
         if level > 12:
-            textwithspaces_rules = re.findall(r'^textwithspaces:.*?\n', result, re.MULTILINE)
+            textwithspaces_rules = re.findall(r'^textwithspaces:.*?\n', merged_grammars, re.MULTILINE)
             if len(textwithspaces_rules) > 0:
                 textwithspaces_rule = textwithspaces_rules[0]
                 textwithspaces_rule_changed = r'textwithspaces: /(?:[^#\n،,，、 ]| (?!SKIP1))+/ -> text' + '\n'
-                result = result.replace(textwithspaces_rule, textwithspaces_rule_changed)
+                merged_grammars = merged_grammars.replace(textwithspaces_rule, textwithspaces_rule_changed)
 
-            textwithoutspaces_rules = re.findall(r'^textwithoutspaces:.*?\n', result, re.MULTILINE)
+            textwithoutspaces_rules = re.findall(r'^textwithoutspaces:.*?\n', merged_grammars, re.MULTILINE)
             if len(textwithoutspaces_rules) > 0:
                 textwithoutspaces_rule = textwithoutspaces_rules[0]
                 textwithoutspaces_rule_changed = (
                     r'textwithoutspaces: /(?:[^#\n،,，、 *+\-\/eiіиలేไamfnsbअ否אو]|SKIP2)+/ -> text' + '\n'
                 )
-                result = result.replace(textwithoutspaces_rule, textwithoutspaces_rule_changed)
+                merged_grammars = merged_grammars.replace(textwithoutspaces_rule, textwithoutspaces_rule_changed)
 
             non_allowed_words = re.findall(r'".*?"', keywords)
             non_allowed_words = list(set(non_allowed_words))
 
             non_allowed_words = [x.replace('"', '') for x in non_allowed_words]
             non_allowed_words_with_space = '|'.join(non_allowed_words)
-            result = result.replace('SKIP1', non_allowed_words_with_space)
+            merged_grammars = merged_grammars.replace('SKIP1', non_allowed_words_with_space)
 
             letters_done = []
             string_words = ''
@@ -2625,38 +2575,38 @@ def create_grammar(level, lang="en"):
             string_words = string_words.replace('|)', ')')  # remove empty regex expressions
             string_words = string_words[1:]  # remove first |
 
-            result = result.replace('SKIP2', string_words)
+            merged_grammars = merged_grammars.replace('SKIP2', string_words)
 
         # Make sure that the error_invalid is added to the command rule
         # to function as a 'bucket' for faulty text
-        command_rules = re.findall(r'^command:.*?\n', result, re.MULTILINE)
+        command_rules = re.findall(r'^command:.*?\n', merged_grammars, re.MULTILINE)
         if len(command_rules) > 0:
             command_rule = command_rules[0]
             command_rule_with_error_invalid = command_rule.replace('\n', '') + " | error_invalid\n"
-            result = result.replace(command_rule, command_rule_with_error_invalid)
+            merged_grammars = merged_grammars.replace(command_rule, command_rule_with_error_invalid)
 
         # Make sure that the error_invalid is added to the if_less_command rule
         # to function as a 'bucket' for faulty if body commands
-        if_less_command_rules = re.findall(r'^_if_less_command:.*?\n', result, re.MULTILINE)
+        if_less_command_rules = re.findall(r'^_if_less_command:.*?\n', merged_grammars, re.MULTILINE)
         if len(if_less_command_rules) > 0:
             if_less_command_rule = if_less_command_rules[0]
             if_less_command_rule_with_error_invalid = if_less_command_rule.replace('\n', '') + " | error_invalid\n"
-            result = result.replace(if_less_command_rule, if_less_command_rule_with_error_invalid)
+            merged_grammars = merged_grammars.replace(if_less_command_rule, if_less_command_rule_with_error_invalid)
 
         # Make sure that the _non_empty_program rule does not contain error_invalid rules
         # so that all errors will be catches by error_invalid instead of _non_empty_program_skipping
-        non_empty_program_rules = re.findall(r'^_non_empty_program:.*?\n', result, re.MULTILINE)
+        non_empty_program_rules = re.findall(r'^_non_empty_program:.*?\n', merged_grammars, re.MULTILINE)
         if len(non_empty_program_rules) > 0:
             non_empty_program_rule = non_empty_program_rules[0]
             non_empty_program_rule_changed = (
                 '_non_empty_program: _EOL* (command) _SPACE* (_EOL+ command _SPACE*)* _EOL*\n'
             )
-            result = result.replace(non_empty_program_rule, non_empty_program_rule_changed)
+            merged_grammars = merged_grammars.replace(non_empty_program_rule, non_empty_program_rule_changed)
 
     # ready? Save to file to ease debugging
     # this could also be done on each merge for performance reasons
-    save_total_grammar_file(level, result, lang)
-    return result
+    save_total_grammar_file(level, merged_grammars, lang)
+    return merged_grammars
 
 
 def save_total_grammar_file(level, grammar, lang):
@@ -2706,23 +2656,117 @@ def get_keywords_for_language(language):
     return keywords
 
 
+def get_terminals():
+    script_dir = path.abspath(path.dirname(__file__))
+    with open(path.join(script_dir, "grammars", "terminals.lark"), "r", encoding="utf-8") as file:
+        terminals = file.read()
+    return terminals
+
+
 PARSER_CACHE = {}
 
 
-def get_parser(level, lang="en", keep_all_tokens=False):
+def _get_parser_cache_directory():
+    # TODO we should maybe store this to .test-cache so we can
+    # re-use them in github actions caches for faster CI.
+    # We can do this after #4574 is merged.
+    return tempfile.gettempdir()
+
+
+def _save_parser_to_file(lark, pickle_file):
+    # Store the parser to a file, a bit hacky because it is not
+    # pickle-able out of the box
+    # See https://github.com/lark-parser/lark/issues/1348
+
+    # Note that if Lark ever implements the cache for Earley parser
+    # or if we switch to a LALR parser we don't need this hack anymore
+
+    full_path = os.path.join(_get_parser_cache_directory(), pickle_file)
+
+    # These attributes can not be pickled as they are a module
+    lark.parser.parser.lexer_conf.re_module = None
+    lark.parser.lexer_conf.re_module = None
+
+    try:
+        with atomic_write_file(full_path) as fp:
+            pickle.dump(lark, fp)
+    except OSError:
+        # Ignore errors if another process already moved the file
+        # or if the destination already exist.
+        # These scenarios can happen under concurrent execution.
+        pass
+
+    # Restore the unpickle-able bits.
+    # Keep this in sync with the restore method!
+    lark.parser.parser.lexer_conf.re_module = regex
+    lark.parser.lexer_conf.re_module = regex
+
+
+def _restore_parser_from_file_if_present(pickle_file):
+    full_path = os.path.join(_get_parser_cache_directory(), pickle_file)
+    if os.path.isfile(full_path):
+        try:
+            with open(full_path, "rb") as fp:
+                lark = pickle.load(fp)
+            # Restore the unpickle-able bits.
+            # Keep this in sync with the save method!
+            lark.parser.parser.lexer_conf.re_module = regex
+            lark.parser.lexer_conf.re_module = regex
+            return lark
+        except Exception:
+            # If anything goes wrong try to remove the file
+            # and we will try again in the next cycle
+            try:
+                os.unlink(full_path)
+            except Exception:
+                pass
+    return None
+
+
+@lru_cache(maxsize=0 if utils.is_production() else 100)
+def get_parser(level, lang="en", keep_all_tokens=False, skip_faulty=False):
     """Return the Lark parser for a given level.
+    Parser generation takes about 0.5 seconds depending on the level so
+    we want to cache it, or we have latency of 500ms on the calculations
+    and a high server load, and CI runs of 5+ hours.
+
+    We used to cache this to RAM but because of all the permutations we
+    had 1000s of parsers and got into out-of-memory issue in the
+    production environment.
+
+    Now we cache a limited number of the parsers to RAM, but introduce
+    a second tier of cache to disk.
+
+    This is not implemented by Lark natively for the Earley parser.
+    See https://github.com/lark-parser/lark/issues/1348.
     """
-    key = str(level) + "." + lang + '.' + str(keep_all_tokens) + '.' + str(source_map.skip_faulty)
-    existing = PARSER_CACHE.get(key)
-    if existing and not utils.is_debug_mode():
-        return existing
-    grammar = create_grammar(level, lang)
-    ret = Lark(grammar, regex=True, propagate_positions=True, keep_all_tokens=keep_all_tokens)  # ambiguity='explicit'
-    PARSER_CACHE[key] = ret
-    return ret
+    grammar = create_grammar(level, lang, skip_faulty)
+    parser_opts = {
+        "regex": True,
+        "propagate_positions": True,
+        "keep_all_tokens": keep_all_tokens,
+    }
+    unique_parser_hash = hashlib.sha1("_".join((
+        grammar,
+        str(sys.version_info[:2]),
+        str(parser_opts),
+    )).encode()).hexdigest()
+
+    cached_parser_file = f"cached-parser-{level}-{lang}-{unique_parser_hash}.pkl"
+
+    use_cache = True
+    lark = None
+    if use_cache:
+        lark = _restore_parser_from_file_if_present(cached_parser_file)
+    if lark is None:
+        lark = Lark(grammar, **parser_opts)  # ambiguity='explicit'
+        if use_cache:
+            _save_parser_to_file(lark, cached_parser_file)
+
+    return lark
 
 
-ParseResult = namedtuple('ParseResult', ['code', 'source_map', 'has_turtle', 'has_pygame'])
+ParseResult = namedtuple('ParseResult', ['code', 'source_map', 'has_turtle', 'has_pygame', 'commands'])
 
 
 def transpile_inner_with_skipping_faulty(input_string, level, lang="en"):
@@ -2769,36 +2813,35 @@ def transpile_inner_with_skipping_faulty(input_string, level, lang="en"):
     return transpile_result
 
 
-def transpile(input_string, level, lang="en", skip_faulty=False, is_debug=False):
+def transpile(input_string, level, lang="en", skip_faulty=True, is_debug=False):
     """
     Function that transpiles the Hedy code to Python
 
-    The first time the client will try to execute the code without skipping faulty code
-    If an exception is caught (the Hedy code contains faults) an exception is raised to inform the client
+    The first time we try to transpile the code without skipping faulty code
+    If an exception is caught (the Hedy code contains faults) an exception is raised
 
-    The second time, after an Error is received by the client, the client will re-POST the code
-    with skipping faulty enabled, after that we either return the partially correct code or raise the original error
+    The second time, after the non-skipping approach raised an exception,
+    we try transpile the code with skipping faulty code, if skip_faulty is True.
+    After that either the partial program is returned or the original error
     """
 
-    if not skip_faulty:
-        try:
-            source_map.set_skip_faulty(False)
-            transpile_result = transpile_inner(input_string, level, lang, populate_source_map=True, is_debug=is_debug)
-        except Exception as original_error:
-            source_map.exception_found_during_parsing = original_error  # store original exception
-            raise original_error
-    else:
-        original_error = source_map.exception_found_during_parsing
-        source_map.clear()
+    try:
+        source_map.set_skip_faulty(False)
+        transpile_result = transpile_inner(input_string, level, lang, populate_source_map=True, is_debug=is_debug)
 
-        if isinstance(original_error, source_map.exceptions_not_to_skip):
-            raise original_error
+    except Exception as original_error:
+        hedy_amount_lines = len(input_string.strip().split('\n'))
 
-        try:
-            source_map.set_skip_faulty(True)
-            transpile_result = transpile_inner_with_skipping_faulty(input_string, level, lang)
-        except Exception:
-            raise original_error  # we could not skip faulty code, raise original exception
+        if getenv('ENABLE_SKIP_FAULTY', False) and skip_faulty and hedy_amount_lines > 1:
+            if isinstance(original_error, source_map.exceptions_not_to_skip):
+                raise original_error
+            try:
+                source_map.set_skip_faulty(True)
+                transpile_result = transpile_inner_with_skipping_faulty(input_string, level, lang)
+            except Exception:
+                raise original_error  # we could not skip faulty code, raise original exception
+        else:
+            raise original_error
 
     return transpile_result
 
@@ -3023,12 +3066,23 @@ def preprocess_ifs(code, lang='en'):
                     return True
             return False
 
+    def next_non_empty_line(lines, start_line_number):
+        if start_line_number > len(lines):
+            return ''  # end of code, return empty so that starts_with doesnt find anything
+        else:
+            for i in range(start_line_number + 1, len(lines)):
+                if lines[i] == '':
+                    continue
+                else:
+                    return lines[i]
+
+        return ''  # nothing found? return empty so that starts_with doesnt find anything
+
     for i in range(len(lines) - 1):
         line = lines[i]
-        next_line = lines[i + 1]
 
-        # if this line starts with if but does not contain an else, and the next line too is not an else.
-        if (starts_with('if', line) or starts_with_after_repeat('if', line)) and (not starts_with('else', next_line)) and (not contains('else', line)):
+        # if this line starts with if but does not contain an else, and the next non-empty line too is not an else.
+        if (starts_with('if', line) or starts_with_after_repeat('if', line)) and (not starts_with('else', next_non_empty_line(lines, i))) and (not contains('else', line)):
             # is this line just a condition and no other keyword (because that is no problem)
             commands = ["print", "ask", "forward", "turn"]
             excluded_commands = ["pressed"]
@@ -3089,7 +3143,7 @@ def process_input_string(input_string, level, lang, escape_backslashes=True, pre
 
 
 def parse_input(input_string, level, lang):
-    parser = get_parser(level, lang)
+    parser = get_parser(level, lang, skip_faulty=source_map.skip_faulty)
     try:
         parse_result = parser.parse(input_string + '\n')
         return parse_result.children[0]  # getting rid of the root could also be done in the transformer would be nicer
@@ -3119,8 +3173,7 @@ def parse_input(input_string, level, lang):
 
 def is_program_valid(program_root, input_string, level, lang):
     # IsValid returns (True,) or (False, args)
-    instance = IsValid()
-    instance.level = level  # TODO: could be done in a constructor once we are sure we will go this way
+    instance = IsValid(level)
     is_valid = instance.transform(program_root)
 
     if not is_valid[0]:
@@ -3276,16 +3329,15 @@ def transpile_inner(input_string, level, lang="en", populate_source_map=False, i
         convertToPython = TRANSPILER_LOOKUP[level]
         python = convertToPython(lookup_table, numerals_language, is_debug).transform(abstract_syntax_tree)
 
-        uses_turtle = UsesTurtle()
-        has_turtle = uses_turtle.transform(abstract_syntax_tree)
+        commands = AllCommands(level).transform(program_root)
 
-        uses_pygame = UsesPyGame()
-        has_pygame = uses_pygame.transform(abstract_syntax_tree)
+        has_turtle = "forward" in commands or "turn" in commands or "color" in commands
+        has_pygame = "ifpressed" in commands or "ifpressed_else" in commands or "assign_button" in commands
 
         if populate_source_map:
             source_map.set_python_output(python)
 
-        return ParseResult(python, source_map, has_turtle, has_pygame)
+        return ParseResult(python, source_map, has_turtle, has_pygame, commands)
     except VisitError as E:
         if isinstance(E, VisitError):
             # Exceptions raised inside visitors are wrapped inside VisitError. Unwrap it if it is a

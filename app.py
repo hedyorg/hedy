@@ -1,4 +1,6 @@
 # coding=utf-8
+import base64
+import binascii
 import collections
 import copy
 import logging
@@ -43,7 +45,8 @@ from website import (ab_proxying, achievements, admin, auth_pages, aws_helpers,
                      profile, programs, querylog, quiz, statistics,
                      translating)
 from website.auth import (current_user, is_admin, is_teacher, has_public_profile,
-                          login_user_from_token_cookie, requires_login, requires_login_redirect, requires_teacher)
+                          login_user_from_token_cookie, requires_login, requires_login_redirect, requires_teacher,
+                          forget_current_user)
 from website.log_fetcher import log_fetcher
 from website.frontend_types import Adventure, Program, ExtraStory, SaveInfo
 
@@ -484,21 +487,15 @@ def parse():
         return "body.level must be a string", 400
     if 'adventure_name' in body and not isinstance(body['adventure_name'], str):
         return "if present, body.adventure_name must be a string", 400
-    # TODO: Once we figure out whats wrong with the skip faulty code, we need to reinstantiate this
-    # if 'skip_faulty' not in body:
-    #     return "body.skip_faulty must be a boolean", 400
     if 'is_debug' not in body:
         return "body.is_debug must be a boolean", 400
-
     error_check = False
     if 'error_check' in body:
         error_check = True
 
     code = body['code']
     level = int(body['level'])
-    skip_faulty = False  # bool(body['skip_faulty'])
     is_debug = bool(body['is_debug'])
-
     # Language should come principally from the request body,
     # but we'll fall back to browser default if it's missing for whatever
     # reason.
@@ -518,7 +515,7 @@ def parse():
         keyword_lang = current_keyword_language()["lang"]
         with querylog.log_time('transpile'):
             try:
-                transpile_result = transpile_add_stats(code, level, lang, skip_faulty, is_debug)
+                transpile_result = transpile_add_stats(code, level, lang, is_debug)
                 if username and not body.get('tutorial'):
                     DATABASE.increase_user_run_count(username)
                     ACHIEVEMENTS.increase_count("run")
@@ -538,18 +535,18 @@ def parse():
 
         try:
             response['Code'] = transpile_result.code
-            # source_map_result = transpile_result.source_map.get_result()
+            source_map_result = transpile_result.source_map.get_result()
 
-            # for i, mapping in source_map_result.items():
-            #     if mapping['error'] is not None:
-            #         source_map_result[i]['error'] = translate_error(
-            #             source_map_result[i]['error'].error_code,
-            #             source_map_result[i]['error'].arguments,
-            #             keyword_lang
-            #         )
+            for i, mapping in source_map_result.items():
+                if mapping['error'] is not None:
+                    source_map_result[i]['error'] = translate_error(
+                        source_map_result[i]['error'].error_code,
+                        source_map_result[i]['error'].arguments,
+                        keyword_lang
+                    )
 
-            # response['source_map'] = source_map_result
-            response['source_map'] = transpile_result.source_map.get_result()
+            response['source_map'] = source_map_result
+
             if transpile_result.has_pygame:
                 response['has_pygame'] = True
 
@@ -560,13 +557,13 @@ def parse():
 
         with querylog.log_time('detect_sleep'):
             try:
-                response['has_sleep'] = 'sleep' in hedy.all_commands(code, level, lang)
+                response['has_sleep'] = 'sleep' in transpile_result.commands
             except BaseException:
                 pass
 
         try:
             if username and not body.get('tutorial') and ACHIEVEMENTS.verify_run_achievements(
-                    username, code, level, response):
+                    username, code, level, response, transpile_result.commands):
                 response['achievements'] = ACHIEVEMENTS.get_earned_achievements()
         except Exception as E:
             print(f"error determining achievements for {code} with {E}")
@@ -719,11 +716,11 @@ def download_machine_file(filename, extension="zip"):
     return send_file("machine_files/" + filename + "." + extension, as_attachment=True)
 
 
-def transpile_add_stats(code, level, lang_, skip_faulty, is_debug):
+def transpile_add_stats(code, level, lang_, is_debug):
     username = current_user()['username'] or None
     number_of_lines = code.count('\n')
     try:
-        result = hedy.transpile(code, level, lang_, skip_faulty, is_debug)
+        result = hedy.transpile(code, level, lang_, is_debug)
         statistics.add(
             username, lambda id_: DATABASE.add_program_stats(id_, level, number_of_lines, None))
         return result
@@ -753,6 +750,7 @@ def translate_error(code, arguments, keyword_lang):
         'allowed_types',
         'invalid_type',
         'invalid_type_2',
+        'offending_keyword',
         'character_found',
         'concept',
         'tip',
@@ -769,6 +767,7 @@ def translate_error(code, arguments, keyword_lang):
         'guessed_command',
         'invalid_argument',
         'invalid_argument_2',
+        'offending_keyword',
         'variable',
         'invalid_value',
         'print',
@@ -1397,6 +1396,57 @@ def get_specific_adventure(name, level, mode):
                            ))
 
 
+@app.route('/embedded/<int:level>', methods=['GET'])
+def get_embedded_code_editor(level):
+    forget_current_user()
+
+    # Start with an empty program
+    program = ''
+
+    # If for any reason the level is invalid, set to level 1
+    try:
+        level = int(level)
+        if level < 1 or level > hedy.HEDY_MAX_LEVEL:
+            program = gettext('invalid_level_comment')
+            level = 1
+    except ValueError:
+        program = gettext('invalid_level_comment')
+        level = 1
+
+    run = True if request.args.get('run') == 'true' else False
+    readOnly = True if request.args.get('readOnly') == 'true' else False
+    encoded_program = request.args.get('program')
+
+    # Set a fallback for default use
+    language = request.args.get('lang', 'en')
+    if language not in ALL_LANGUAGES.keys():
+        language = 'nl'
+        program = gettext('invalid_language_comment')
+
+    keyword_language = request.args.get('keyword', 'en')
+    if keyword_language not in ALL_KEYWORD_LANGUAGES.keys():
+        language = 'en'
+        program = gettext('invalid_keyword_language_comment')
+
+    # Make sure to set the session lang to enforce the correct translated strings to be rendered
+    session['lang'] = language
+
+    if encoded_program and not program:
+        try:
+            program = base64.b64decode(encoded_program)
+            program = program.decode('utf-8')
+        except binascii.Error:
+            program = gettext('invalid_program_comment')
+
+    return render_template("embedded-editor.html", embedded=True, run=run, language=language,
+                           keyword_language=keyword_language, readOnly=readOnly,
+                           level=level, program=program, javascript_page_options=dict(
+                               page='code',
+                               lang=language,
+                               level=level
+                           ))
+
+
 @app.route('/cheatsheet/', methods=['GET'], defaults={'level': 1})
 @app.route('/cheatsheet/<level>', methods=['GET'])
 def get_cheatsheet_page(level):
@@ -1572,10 +1622,9 @@ def favicon():
 
 
 @app.route('/')
-@app.route('/start')
 @app.route('/index.html')
 def main_page():
-    sections = hedyweb.PageTranslations('start').get_page_translations(g.lang)['start-sections']
+    sections = hedyweb.PageTranslations('start').get_page_translations(g.lang)['home-sections']
 
     sections = sections[:]
 
@@ -1634,6 +1683,13 @@ def join():
     join_translations = hedyweb.PageTranslations('join').get_page_translations(g.lang)
     return render_template('join.html', page_title=gettext('title_learn-more'),
                            current_page='join', content=join_translations)
+
+
+@app.route('/start')
+def start():
+    start_translations = hedyweb.PageTranslations('start').get_page_translations(g.lang)
+    return render_template('start.html', page_title=gettext('title_learn-more'),
+                           current_page='start', content=start_translations)
 
 
 @app.route('/privacy')

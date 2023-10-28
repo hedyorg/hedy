@@ -138,10 +138,22 @@ export function initializeApp(options: InitializeAppOptions) {
 
   // Close the dropdown menu if the user clicks outside of it
   $(document).on("click", function(event){
-      if(!$(event.target).closest(".dropdown").length){
-          $(".dropdown-menu").slideUp("medium");
-          $(".cheatsheet-menu").slideUp("medium");
+    // The following is not needed anymore, but it saves the next for loop if the click is not for dropdown.
+    if (!$(event.target).closest(".dropdown").length) {
+      $(".dropdown-menu").slideUp("medium");
+      $(".cheatsheet-menu").slideUp("medium");
+      return;
+    }
+
+    const allDropdowns = $('.dropdown-menu')
+    for (const dd of allDropdowns) {
+      // find the closest dropdown button (element) that initiated the event
+      const c = $(dd).closest('.dropdown')[0]
+      // if the click event target is not within or close to the container, slide up the dropdown menu
+      if (!$(event.target).closest(c).length) {
+        $(dd).slideUp('fast');
       }
+    }
   });
 
   $("#search_language").on('keyup', function() {
@@ -198,7 +210,7 @@ export function initializeCodePage(options: InitializeCodePageOptions) {
     attachMainEditorEvents(theGlobalEditor);
     error.setEditor(theGlobalEditor);
     initializeDebugger({
-      editor: theGlobalEditor,    
+      editor: theGlobalEditor,
       level: theLevel,
       language: theLanguage,
       keywordLanguage: theKeywordLanguage,
@@ -261,7 +273,7 @@ function attachMainEditorEvents(editor: HedyEditor) {
 
   editor.on('change', () => {
     theLocalSaveWarning.setProgramLength(theGlobalEditor.contents.split('\n').length);
-    // theGlobalEditor.markers.clearIncorrectLines(); => part of skip faulty feauture
+    theGlobalEditor.clearIncorrectLines();
   });
 
   // If prompt is shown and user enters text in the editor, hide the prompt.
@@ -311,23 +323,31 @@ function attachMainEditorEvents(editor: HedyEditor) {
     }
   });
 
-  // Removed until we can fix the skip lines feature
-  // We show the error message when clicking on the skipped code
-  // this._editor.on("click", function(e) {
-  //   let position = e.getDocumentPosition()
-  //   position = e.editor.renderer.textToScreenCoordinates(position.row, position.column)
+  // We show the error message when clicking on the skipped code or hide them if ace editor is clicked
+  $(document).on("click", 'div[class*=ace_content], div[class*=ace_incorrect_hedy_code]', function(e) {
+    let className = e.target.className;
 
-  //   let element = document.elementFromPoint(position.pageX, position.pageY)
-  //   if (element !== null && element.className.includes("ace_incorrect_hedy_code")){
-  //     let mapIndex = element.classList[0].replace('ace_incorrect_hedy_code_', '');
-  //     let mapError = theGlobalSourcemap[mapIndex];
+    // Only do this if skipping faulty is used
+    if ($('div[class*=ace_incorrect_hedy_code]')[0]) {
+      if (className === 'ace_content') {
+        // Hide error, warning or okbox
+        $('#okbox').hide();
+        $('#warningbox').hide();
+        $('#errorbox').hide();
+      } else {
+        // Show error for this line
+        let mapIndex = className;
+        mapIndex = mapIndex.replace('ace_incorrect_hedy_code_', '');
+        mapIndex = mapIndex.replace('ace_start ace_br15', '');
+        let mapError = theGlobalSourcemap[Number(mapIndex)];
 
-  //     $('#okbox').hide ();
-  //     $('#warningbox').hide();
-  //     $('#errorbox').hide();
-  //     error.show(ClientMessages['Transpile_error'], mapError.error);
-  //   }
-  // });
+        $('#okbox').hide();
+        $('#warningbox').hide();
+        $('#errorbox').hide();
+        error.show(ClientMessages['Transpile_error'], mapError.error);
+      }
+    }
+  });
 }
 
 export interface InitializeViewProgramPageOptions {
@@ -346,7 +366,7 @@ export function initializeViewProgramPage(options: InitializeViewProgramPageOpti
   attachMainEditorEvents(theGlobalEditor);
   error.setEditor(theGlobalEditor);
   initializeDebugger({
-    editor: theGlobalEditor,    
+    editor: theGlobalEditor,
     level: theLevel,
     language: theLanguage,
     keywordLanguage: theKeywordLanguage,
@@ -537,19 +557,6 @@ export async function runit(level: number, lang: string, disabled_prompt: string
         
         program_data = response;
         console.log('Response', response);
-        
-        if (response.Warning && $('#editor').is(":visible")) {
-          //storeFixedCode(response, level);
-          error.showWarning(ClientMessages['Transpile_warning'], response.Warning);
-        }
-  
-        // if (!data.skip_faulty && response.Error) {
-        //   data.skip_faulty = true;
-        //   error.showWarningSpinner();
-        //   error.showWarning(ClientMessages['Execute_error'], ClientMessages['Errors_found']);
-        //   response = await postJsonWithAchievements('/parse', data);
-        //   error.hide(true);
-        // }
 
         showAchievements(response.achievements, false, "");
         if (adventure && response.save_info) {
@@ -836,23 +843,32 @@ window.onerror = function reportClientException(message, source, line_number, co
 export function runPythonProgram(this: any, code: string, sourceMap: any, hasTurtle: boolean, hasPygame: boolean, hasSleep: boolean, hasWarnings: boolean, cb: () => void, run_type: "run" | "debug" | "continue") {
   // If we are in the Parsons problem -> use a different output
   let outputDiv = $('#output');
+  let skip_faulty_found_errors = false;
+  let warning_box_shown = false;
 
   if (sourceMap){
-    // theGlobalSourcemap = sourceMap;
-    // let Range = ace.require("ace/range").Range
+    theGlobalSourcemap = sourceMap;
+    let Range = ace.require("ace/range").Range
 
-    // // We loop through the mappings and underline a mapping if it contains an error
-    // for (const index in sourceMap) {
-    //   const map = sourceMap[index];
-    //   const range = new Range(
-    //     map.hedy_range.from_line-1, map.hedy_range.from_column-1,
-    //     map.hedy_range.to_line-1, map.hedy_range.to_column-1
-    //   )
+    // We loop through the mappings and underline a mapping if it contains an error
+    for (const index in sourceMap) {
+      const map = sourceMap[index];
+      const range = new Range(
+        map.hedy_range.from_line-1, map.hedy_range.from_column-1,
+        map.hedy_range.to_line-1, map.hedy_range.to_column-1
+      )
 
-    //   if (map.error != null){
-    //     theGlobalEditor.markers.addMarker(range, `ace_incorrect_hedy_code_${index}`, "text", true);
-    //   }
-    // }
+      if (map.error != null) {
+        skip_faulty_found_errors = true;
+        theGlobalEditor.setIncorrectLine(range, Number(index));
+      }
+
+      // Only show the warning box for the first error shown
+      if (skip_faulty_found_errors && !warning_box_shown) {
+        error.showFadingWarning(ClientMessages['Execute_error'], ClientMessages['Errors_found']);
+        warning_box_shown = true;
+      }
+    }
   }
 
   const storage = window.localStorage;
@@ -1075,6 +1091,12 @@ export function runPythonProgram(this: any, code: string, sourceMap: any, hasTur
         // breakpoints are 1-indexed
         theGlobalDebugger.add_breakpoint('<stdin>.py', i + 1, '0', false);
       }
+    }
+
+    // Do not show success message if we found errors that we skipped
+    if (!hasWarnings && code !== last_code && !debug && !skip_faulty_found_errors) {
+        showSuccesMessage();
+        last_code = code;
     }
 
     theGlobalDebugger.set_code_starting_line(code_prefix.split('\n').length - 1);
@@ -1587,7 +1609,8 @@ export function toggle_developers_mode(enforced: boolean) {
 }
 
 export function toggle_keyword_language(lang: string) {
-  window.open('?keyword_language=' + lang, "_self");
+  const hash = window.location.hash;
+  window.open('?keyword_language=' + lang + hash, "_self");
 }
 
 export function toggle_blur_code() {
@@ -1637,7 +1660,7 @@ async function postJsonWithAchievements(url: string, data: any): Promise<any> {
 export function change_keyword_language(start_lang: string, new_lang: string) {
   tryCatchPopup(async () => {
     const response = await postJsonWithAchievements('/translate_keywords', {
-      code: theGlobalEditor,
+      code: theGlobalEditor.contents,
       start_lang: start_lang,
       goal_lang: new_lang,
       level: theLevel,
