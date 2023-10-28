@@ -47,8 +47,8 @@ If it is a new idea, [start a discussion](https://github.com/hedyorg/hedy/discus
 * New meanings for existing keywords
 * Experimental improvements to the parser/transpiler
 
-Please note that we want to be a friendly and welcoming open source project. If you submit an issue, refrain from saying things are "bad", or "wrong" or "broken". Assume that code that is there was made by people that do their best! Neutrally phrased messages are nicer for everyone. For example use "did not do what I expected", "appears not to work" or "could be improved". For full community guideline, please read the [Hedy Wiki](https://github.com/hedyorg/hedy/wiki)
-Also feel free to join our [Discord](https://discord.gg/8yY7dEme9r) channel to discuss ideas, get in touch with us our show of your Hedy related creations.
+Please note that we want to be a friendly and welcoming open source project. If you submit an issue, refrain from saying things are "bad", or "wrong" or "broken". Assume that code that is there was made by people that do their best! Neutrally phrased messages are nicer for everyone. For example use "did not do what I expected", "appears not to work" or "could be improved". For full community guidelines, please read the [Hedy Wiki](https://github.com/hedyorg/hedy/wiki)
+Also feel free to join our [Discord](https://discord.gg/8yY7dEme9r) channel to discuss ideas, and get in touch with us our show of your Hedy related creations.
 
 ## Want to help improve Hedy?
 
