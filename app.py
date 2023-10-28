@@ -720,7 +720,7 @@ def transpile_add_stats(code, level, lang_, is_debug):
     username = current_user()['username'] or None
     number_of_lines = code.count('\n')
     try:
-        result = hedy.transpile(code, level, lang_, is_debug)
+        result = hedy.transpile(code, level, lang_, is_debug=is_debug)
         statistics.add(
             username, lambda id_: DATABASE.add_program_stats(id_, level, number_of_lines, None))
         return result
