@@ -143,17 +143,29 @@ class SourceMap:
         for hedy_source_code, python_source_code in self.map.items():
             if hedy_source_code.error is not None or python_source_code.code == '':
                 continue
+            if self.level <= 7:
+                start_index = -1
+                number_of_indents = 0
+                while start_index == -1:
+                    python_statement_code = textwrap.indent(python_source_code.code, '  '*number_of_indents)
+                    start_index = python_code.find(python_statement_code)
+                    code_char_length = len(python_source_code.code)
 
-            number_of_indents = find_indent_length(
-                hedy_lines[hedy_source_code.source_range.from_line - 1]) // indent_size
+                    for i in range(python_code_mapped.count(python_source_code.code)):
+                        start_index = python_code.find(python_statement_code, start_index+code_char_length)
+                        start_index = max(0, start_index)  # not found (-1) means that start_index = 0
+                    number_of_indents += 1
+            else:
+                number_of_indents = find_indent_length(
+                    hedy_lines[hedy_source_code.source_range.from_line - 1]) // indent_size
 
-            python_statement_code = textwrap.indent(python_source_code.code, '  '*number_of_indents)
-            start_index = python_code.find(python_statement_code)
-            code_char_length = len(python_source_code.code)
+                python_statement_code = textwrap.indent(python_source_code.code, '  '*number_of_indents)
+                start_index = python_code.find(python_statement_code)
+                code_char_length = len(python_source_code.code)
 
-            for i in range(python_code_mapped.count(python_source_code.code)):
-                start_index = python_code.find(python_statement_code, start_index+code_char_length)
-                start_index = max(0, start_index)  # not found (-1) means that start_index = 0
+                for i in range(python_code_mapped.count(python_source_code.code)):
+                    start_index = python_code.find(python_statement_code, start_index+code_char_length)
+                    start_index = max(0, start_index)  # not found (-1) means that start_index = 0
 
             end_index = start_index + code_char_length
             start_line, start_column = line_col(python_code, start_index)

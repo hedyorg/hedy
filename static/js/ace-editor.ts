@@ -301,11 +301,7 @@ export class HedyAceEditor implements HedyEditor {
   /**
    * Set the current line in the debugger
    */
-  public setDebuggerCurrentLine(line: number | undefined) {
-    if (this.currentLineMarker?.line === line) {
-      return;
-    }
-
+  public setDebuggerCurrentLine(line?: number, startPos?: number, finishPos?: number): void {
     if (this.currentLineMarker) {
       this.removeMarker(this.currentLineMarker.id);
     }
@@ -314,8 +310,12 @@ export class HedyAceEditor implements HedyEditor {
       this.currentLineMarker = undefined;
       return;
     }
-
-    const id = this.addMarker(new ace.Range(line, 0, line, 999), 'debugger-current-line', 'fullLine');
+    let id: number;
+    if (startPos === undefined && finishPos === undefined) {
+      id = this.addMarker(new ace.Range(line, 0, line, 999), 'debugger-current-line', 'fullLine');
+    } else {
+      id = this.addMarker(new ace.Range(line, startPos, line, finishPos), 'debugger-current-line', 'text');
+    }
     this.currentLineMarker = { line, id };
   }
 

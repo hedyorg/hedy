@@ -1,4 +1,4 @@
-/**
+    /**
  * Debugger support for skulpt module
  */
 
@@ -352,7 +352,6 @@ Sk.Debugger = class {
     }
 
     async continueForward() {       
-        console.log(this.currentSuspension)
         if (-1 !== this.currentSuspension) {
             this.disableStepMode()
             await this.resume()
@@ -361,7 +360,6 @@ Sk.Debugger = class {
 
     onSuspension() {
         this.outputCallback()
-        console.log('On Suspension')
     }
 
     getSuspensionInfo(suspension) {

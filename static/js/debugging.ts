@@ -1,9 +1,11 @@
 import { runit, theGlobalDebugger,theGlobalSourcemap } from "./app";
 import { HedyEditor, Breakpoints } from "./editor";
-
+import  TRADUCTION_IMPORT  from '../../highlighting/highlighting-trad.json'
+import { convert } from './syntaxModesRules'
 let theGlobalEditor: HedyEditor;
 let theLevel: number;
 let theLanguage: string;
+let TRADUCTION: Map<string,string>;
 
 //Feature flag for variable and values view
 let variable_view = false;
@@ -34,6 +36,10 @@ const blockCommands = [
   'elifs',
   'ifpressed_elifs',
 ]
+
+const ifRegex = "^((__if__) *[^\n ]+ *((__is__)|(__in__)) *[^\n ]+) *.+$";
+const repeatRegex = "^((__repeat__) *[^\n ]+ *(__times__)) *[^\n ]+ *.+$";
+const elseRegex = "^(__else__) *[^\n ]+.+$";
 
 /**
  * Add types for the gutter event
@@ -132,12 +138,19 @@ export interface InitializeDebuggerOptions {
   readonly level: number;
   readonly editor: HedyEditor;
   readonly language: string;
+  readonly keywordLanguage: string;
 }
 
 export function initializeDebugger(options: InitializeDebuggerOptions) {
   theGlobalEditor = options.editor;
   theLevel = options.level;
   theLanguage = options.language;
+  
+  let TRADUCTIONS = convert(TRADUCTION_IMPORT) as Map<string, Map<string,string>>;
+  let lang = options.keywordLanguage;
+  if (!TRADUCTIONS.has(lang)) { lang = 'en'; }
+  // get the traduction
+  TRADUCTION = TRADUCTIONS.get(lang) as Map<string,string> ;
 
   //Hides the HTML DIV for variables if feature flag is false
   if (!variable_view) {
@@ -303,19 +316,63 @@ export function incrementDebugLine() {
   const suspension_info = theGlobalDebugger.getSuspensionInfo(active_suspension);
   const lineNumber = suspension_info.lineno;
   load_variables(suspension_info.variables);
-  
+  const ifRegexTranslated = ifRegex.replace('__if__', TRADUCTION.get('if')!)
+    .replace('__is__', TRADUCTION.get('is')!)
+    .replace('__in__', TRADUCTION.get('in')!);
+
+  const repeatRegexTranslated = repeatRegex.replace('__repeat__', TRADUCTION.get('repeat')!)
+    .replace('__times__', TRADUCTION.get('times')!);
+
+  const elseRegexTranslated = elseRegex.replace('__else__', TRADUCTION.get('else')!)
+
+  const ifRe = new RegExp(ifRegexTranslated, "gu");
+  const repeatRe = new RegExp(repeatRegexTranslated, "gu");
+  const elseRe = new RegExp(elseRegexTranslated, "gu");
+
   if (!lineNumber) return;
   for (const [_, map] of Object.entries(theGlobalSourcemap)) {
     const startingLine = map.python_range.from_line + theGlobalDebugger.get_code_starting_line();
     const finishingLine = map.python_range.to_line + theGlobalDebugger.get_code_starting_line();
     // Maybe we hit the correct mapping for this line
     if (lineNumber >= startingLine && lineNumber <= finishingLine) {
+      console.log(map)    
       // Highlight whole line if it's a full command
-      if(fullLineCommands.includes(map.command) || theLevel <= 7 && blockCommands.includes(map.command)){
-        // lines in ace start at 0
-        theGlobalEditor.setDebuggerCurrentLine(map.hedy_range.from_line - 1);
-        break;        
-      } else if (theLevel >= 8 && blockCommands.includes(map.command)) { // these commands always come up in the tree so we visit them later
+      if(fullLineCommands.includes(map.command)){        
+        // lines in ace start at 0       
+        const lines = theGlobalEditor.contents.split('\n');
+        const line = lines[map.hedy_range.from_line - 1];
+        const ifMatches = ifRe.exec(line);
+        const repeatMatches = repeatRe.exec(line);
+        const elseMatches = elseRe.exec(line);
+        if (ifMatches || repeatMatches || elseMatches) {
+          theGlobalEditor.setDebuggerCurrentLine(map.hedy_range.from_line - 1, 
+            map.hedy_range.from_column - 1, map.hedy_range.to_column - 1);
+        } else {
+          theGlobalEditor.setDebuggerCurrentLine(map.hedy_range.from_line - 1);
+        }
+        break
+      } else if (theLevel <= 7 && blockCommands.includes(map.command)){
+        const lines = theGlobalEditor.contents.split('\n');
+        const fullLine = lines[map.hedy_range.from_line - 1];
+        const line = fullLine.substring(map.hedy_range.from_column - 1, map.hedy_range.to_column - 1);        
+        const activeLine: string = theGlobalDebugger.get_source_line(lineNumber - 1);
+
+        if (activeLine.match(/ *if/)) {
+          const ifMatches = ifRe.exec(line);
+          if (ifMatches) {
+            const length = ifMatches[1].length;
+            theGlobalEditor.setDebuggerCurrentLine(map.hedy_range.from_line - 1, map.hedy_range.from_column - 1, length);            
+            break
+          }
+        } else if (activeLine.match(/ *for/)) {
+          const repeatMatches = repeatRe.exec(line);
+          if (repeatMatches){            
+            const length = repeatMatches[1].length;            
+            theGlobalEditor.setDebuggerCurrentLine(map.hedy_range.from_line - 1, map.hedy_range.from_column - 1, map.hedy_range.from_column + length - 1);
+            break
+          }
+        }
+      }  else if (theLevel >= 8 && blockCommands.includes(map.command)) { // these commands always come up in the tree so we visit them later
         theGlobalEditor.setDebuggerCurrentLine(map.hedy_range.from_line - 1);
         break;
       }

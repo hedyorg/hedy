@@ -201,6 +201,7 @@ export function initializeCodePage(options: InitializeCodePageOptions) {
       editor: theGlobalEditor,    
       level: theLevel,
       language: theLanguage,
+      keywordLanguage: theKeywordLanguage,
     });
   }
 
@@ -348,6 +349,7 @@ export function initializeViewProgramPage(options: InitializeViewProgramPageOpti
     editor: theGlobalEditor,    
     level: theLevel,
     language: theLanguage,
+    keywordLanguage: theKeywordLanguage,
   });
 }
 
@@ -1065,9 +1067,6 @@ export function runPythonProgram(this: any, code: string, sourceMap: any, hasTur
       breakpoints: theGlobalDebugger.check_breakpoints.bind(theGlobalDebugger),      
       execLimit: null
     });
-
-    console.log(code);
-    console.log(sourceMap);
 
     let lines = code.split('\n');
     for (let i = 0; i < lines.length; i++) {
