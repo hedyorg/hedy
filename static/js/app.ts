@@ -1117,11 +1117,7 @@ export function runPythonProgram(this: any, code: string, sourceMap: any, hasTur
     ).then( 
       function () {
         console.log('Program executed');
-        
-        const pythonVariables = Sk.globals; // doesnt work change later
-        console.log(pythonVariables)
-        //  load_variables(pythonVariables); // doesnt work change later :d
-        
+  
         $('#stopit').hide();
         $('#runit').show();
         

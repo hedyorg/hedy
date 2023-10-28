@@ -334,8 +334,7 @@ export function incrementDebugLine() {
     const startingLine = map.python_range.from_line + theGlobalDebugger.get_code_starting_line();
     const finishingLine = map.python_range.to_line + theGlobalDebugger.get_code_starting_line();
     // Maybe we hit the correct mapping for this line
-    if (lineNumber >= startingLine && lineNumber <= finishingLine) {
-      console.log(map)    
+    if (lineNumber >= startingLine && lineNumber <= finishingLine) { 
       // Highlight whole line if it's a full command
       if(fullLineCommands.includes(map.command)){        
         // lines in ace start at 0       
