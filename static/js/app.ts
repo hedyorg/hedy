@@ -871,13 +871,11 @@ export function runPythonProgram(this: any, code: string, sourceMap: any, hasTur
     }
   }
 
-  const storage = window.localStorage;
   let skulptExternalLibraries:{[index: string]:any} = {
       './extensions.js': {
         path: theStaticRoot + "/vendor/skulpt-stdlib-extensions.js",
       },
   };
-  let debug = storage.getItem("debugLine");
 
   Sk.pre = "output";
   const turtleConfig = (Sk.TurtleGraphics || (Sk.TurtleGraphics = {}));
@@ -1049,13 +1047,11 @@ export function runPythonProgram(this: any, code: string, sourceMap: any, hasTur
   
       // Check if the program was correct but the output window is empty: Return a warning
       if ($('#output').is(':empty') && $('#turtlecanvas').is(':empty')) {
-        if(!debug){
-          pushAchievement("error_or_empty");
-          error.showWarning(ClientMessages['Transpile_warning'], ClientMessages['Empty_output']);
-        }
+        pushAchievement("error_or_empty");
+        error.showWarning(ClientMessages['Transpile_warning'], ClientMessages['Empty_output']);        
         return;
       }
-      if (!hasWarnings && code !== last_code && !debug) {
+      if (!hasWarnings && code !== last_code) {
           showSuccesMessage();
           last_code = code;
       }
@@ -1094,8 +1090,7 @@ export function runPythonProgram(this: any, code: string, sourceMap: any, hasTur
     }
 
     // Do not show success message if we found errors that we skipped
-    if (!hasWarnings && code !== last_code && !debug && !skip_faulty_found_errors) {
-        showSuccesMessage();
+    if (!hasWarnings && code !== last_code && !skip_faulty_found_errors) {
         last_code = code;
     }
 
