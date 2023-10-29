@@ -1,9 +1,15 @@
-    /**
+/**
  * Debugger support for skulpt module
- */
+*/
 
 var Sk = Sk || {};
-
+/**
+ * Many thanks to the WebTygerJython for kindly providing guidance and even access to their code base
+ * to make this debugger possible.
+ * 
+ * The mecanism to handle suspensions is taken from
+ * Schneider, Joël (2020) Design and Implementation of a Graphics Window and Debugger for WebTigerJython, ETH Zü
+ */
 Sk.Breakpoint = function (filename, lineno, colno) {
     this.filename = filename;
     this.lineno = lineno;
