@@ -145,7 +145,7 @@ class SourceMap:
             if self.level <= 7:
                 start_index = -1
                 number_of_indents = 0
-                while start_index == -1:
+                while start_index == -1 and number_of_indents < 10:
                     python_statement_code = textwrap.indent(python_source_code.code, '  '*number_of_indents)
                     start_index = python_code.find(python_statement_code)
                     code_char_length = len(python_source_code.code)
