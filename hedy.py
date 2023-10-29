@@ -718,7 +718,7 @@ class TypeValidator(Transformer):
         return self.to_typed_tree(tree, HedyType.none)
 
     def for_list(self, tree):
-        print("for_list")        
+        print("for_list")
         command = Command.for_list
         allowed_types = get_allowed_types(command, self.level)
         self.check_type_allowed(command, allowed_types, tree.children[1], tree.meta)
@@ -857,7 +857,7 @@ class TypeValidator(Transformer):
                 result = {k: v for k, v in result.items()}
                 command = ' '.join([v.strip() for v in result.values() if v is not None])
             print("invalid argument detected")
-            #parser runs into an error where list is detected, preventing any of the error productions from being ran
+            # parser runs into an error where list is detected, preventing any of the error productions from being ran
             raise exceptions.InvalidArgumentTypeException(command=command, invalid_type=arg_type,
                                                           invalid_argument=variable, allowed_types=allowed_types, line_number=meta.line)
         return arg_type
@@ -1112,7 +1112,7 @@ class IsValid(Filter):
     # all rules are valid except for the "Invalid" production rule
     # this function is used to generate more informative error messages
     # tree is transformed to a node of [Bool, args, command number]
-    
+
     def __init__(self, level):
         self.level = level
 
@@ -1126,14 +1126,15 @@ class IsValid(Filter):
         return False, InvalidInfo("print without quotes", arguments=[
                                   text], line=meta.line, column=meta.column), meta
 
-<<<<<<< HEAD
-    def error_list_access(self,meta,args):
-        #for now copying another function, to test whether anything is being done at all
-        print("hello")
-=======
+
+<< << << < HEAD
     def error_list_access(self, meta, args):
         # for now copying another function, to test whether anything is being done at all
->>>>>>> 471b594cbc74674c414d5e289355a68a1048f3e4
+        print("hello")
+== == == =
+    def error_list_access(self, meta, args):
+        # for now copying another function, to test whether anything is being done at all
+>>>>>> > 471b594cbc74674c414d5e289355a68a1048f3e4
         error = InvalidInfo('misspelled "at" command', arguments=[str(args[0])], line=meta.line, column=meta.column)
         return False, error, meta
 
