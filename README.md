@@ -32,28 +32,22 @@ A simple way to help out Hedy is to [help us translate Hedy](https://github.com/
 
 [![](https://hosted.weblate.org/widgets/hedy/-/multi-auto.svg)](https://hosted.weblate.org/engage/hedy/)
 
-## I have an idea for what you should build or improve!
+## I found a bug!
 
-Great! We have multiple ways of monitoring ideas.
+Oh no! Here is how you can let us know:
 
-If it is a small fix, it is best to [make an issue](https://github.com/hedyorg/hedy/issues/new/choose). Issues are meant for things we know that we want to work on, such as:
+* If it is a small fix and clearly wrong (such as a crash or a wrong error message) please [make an issue](https://github.com/hedyorg/hedy/issues/new/choose). 
 
-* Error messages that need to be improved
-* Crashes or bugs
+* If it is more of an idea, please reach out to us on [Discord](https://discord.gg/8yY7dEme9r).
 
-If it is a new idea, [start a discussion](https://github.com/hedyorg/hedy/discussions/categories/ideas). Discussions are a place to chat about stuff we do not know if we want to work on yet, or we are not sure how to do, such as:
+Please note that we are a friendly and welcoming open source project. If you submit an issue, refrain from saying things are "bad", or "wrong" or "broken". Assume that code that is there was made by people that do their best! Neutrally phrased messages are nicer for everyone. For example use "did not do what I expected", "appears not to work" or "could be improved". For full community guidelines, please read the [Hedy Wiki](https://github.com/hedyorg/hedy/wiki)
+Also feel free to join our [Discord](https://discord.gg/8yY7dEme9r) server to discuss ideas, and get in touch with us our show of your Hedy related creations.
 
-* New keywords
-* New meanings for existing keywords
-* Experimental improvements to the parser/transpiler
+## I want to contribute 
 
-Please note that we want to be a friendly and welcoming open source project. If you submit an issue, refrain from saying things are "bad", or "wrong" or "broken". Assume that code that is there was made by people that do their best! Neutrally phrased messages are nicer for everyone. For example use "did not do what I expected", "appears not to work" or "could be improved". For full community guidelines, please read the [Hedy Wiki](https://github.com/hedyorg/hedy/wiki)
-Also feel free to join our [Discord](https://discord.gg/8yY7dEme9r) channel to discuss ideas, and get in touch with us our show of your Hedy related creations.
+Great, thanks!! 
 
-## Want to help improve Hedy?
-
-We would love to have a few more programmers join the Hedy team as regular contributors!
-If you are interested, please consult [Hedy Wiki](https://github.com/hedyorg/hedy/wiki)
+Before you start, please consult the ["before your first contribution"](https://github.com/hedyorg/hedy/wiki#getting-started-on-your-first-contribution) section of our Wiki. First contributions that are not linked to issues either labeled "good first issue" or "approved", or that do not link to any issues will be closed. We don't have the bandwidth to inspect pull requests that are not aligned with our goals. If you need any help getting started, the Wiki is the best place to start, and you can also always drop into the Discord! (in #programmers-general).
 
 ## Thanks to all Contributors
 
