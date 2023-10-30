@@ -731,6 +731,7 @@ class ForTeachersModule(WebsiteModule):
                 temp["checked"] = True
             class_data.append(temp)
 
+        adventure_tags = self.db.read_tags(tags_id=adventure["id"]).get("items", [])
         return render_template(
             "customize-adventure.html",
             page_title=gettext("title_customize-adventure"),
@@ -738,6 +739,7 @@ class ForTeachersModule(WebsiteModule):
             class_data=class_data,
             max_level=hedy.HEDY_MAX_LEVEL,
             current_page="for-teachers",
+            tags=adventure_tags,
         )
 
     @route("/customize-adventure", methods=["POST"])

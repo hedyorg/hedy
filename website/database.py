@@ -42,10 +42,19 @@ CLASSES = dynamo.Table(storage, "classes", "id", indexes=[
 # - level (int | str): level number, sometimes as an int, sometimes as a str
 # - name (str): adventure name
 # - public (bool): whether it can be shared
+# - tags_id (str): id of tags that describe this adventure.
 ADVENTURES = dynamo.Table(storage, "adventures", "id", indexes=[dynamo.Index("creator")])
 INVITATIONS = dynamo.Table(
     storage, "class_invitations", partition_key="username", indexes=[dynamo.Index("class_id")]
 )
+
+"""
+# TAGS
+    - id
+    - items (str[]): holds the tag items.
+    - creator (str): username (of a teacher account, hopefully)
+"""
+TAGS = dynamo.Table(storage, "tags", "id", indexes=[dynamo.Index("creator")])
 
 # Class customizations
 #
@@ -586,6 +595,26 @@ class Database:
 
     def update_adventure(self, adventure_id, adventure):
         ADVENTURES.update({"id": adventure_id}, adventure)
+
+    def create_tags(self, data):
+        return TAGS.create(data)
+
+    def read_tags(self, tags_id):
+        tags = TAGS.get({"id": tags_id})
+        return tags if tags else {}
+
+    def read_tags_by_username(self, username):
+        tags = TAGS.get({"creator": username})
+        return tags if tags else {}
+
+    def update_tags(self, tags_id, data):
+        # Update existing tags
+        return TAGS.update({"id": tags_id}, data)
+
+    def delete_tag(self, id, tag):
+        tags = self.read_tags(id).get("items", [])
+        tags = [t for t in tags if t != tag]
+        return self.update_tags(id, {"items": tags})
 
     def get_teacher_adventures(self, username):
         return ADVENTURES.get_many({"creator": username})

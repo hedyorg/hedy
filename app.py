@@ -50,6 +50,8 @@ from website.auth import (current_user, is_admin, is_teacher, has_public_profile
 from website.log_fetcher import log_fetcher
 from website.frontend_types import Adventure, Program, ExtraStory, SaveInfo
 
+import uuid
+
 logConfig(LOGGING_CONFIG)
 logger = logging.getLogger(__name__)
 
@@ -105,6 +107,8 @@ for lang in ALL_LANGUAGES.keys():
 ACHIEVEMENTS_TRANSLATIONS = hedyweb.AchievementTranslations()
 DATABASE = database.Database()
 ACHIEVEMENTS = achievements.Achievements(DATABASE, ACHIEVEMENTS_TRANSLATIONS)
+
+TAGS = hedy_content.Tags(lang)
 
 
 def load_adventures_for_level(level):
@@ -1393,6 +1397,58 @@ def get_specific_adventure(name, level, mode):
                                initial_tab=initial_tab,
                                current_user_name=current_user()['username'],
                            ))
+
+
+@app.route('/put-tag', methods=['POST', 'PUT'])
+@app.route('/put-tag/<tags_id>', methods=['POST', 'PUT'])
+@requires_teacher
+def create_tags(user, tags_id=None):
+    # acts as creating or updating tags.
+    new_tag = request.form.get("tag")
+    adventure_id = request.args.get("adventure_id")
+    class_id = request.args.get("class_id")
+
+    if not new_tag or (not tags_id and not (adventure_id or class_id)):
+        return gettext("no_tag"), 400
+    new_tag = new_tag.strip()
+    # If no tags id, then it's likely that we want to create tags for the first time.
+    if not tags_id:
+        # if no id passed, then create one with the adventure/class id; or new one.
+        tags_id = adventure_id or class_id or uuid.uuid4().hex
+        users_tags = []
+
+    users_tags = DATABASE.read_tags(tags_id).get("items", [])
+
+    unique_tags = []
+    for tag in users_tags:
+        if tag == new_tag:
+            return gettext("duplicate_tag"), 400
+        elif tag not in unique_tags:
+            unique_tags.append(tag)
+    unique_tags.append(new_tag)
+
+    if len(users_tags) > 0:
+        # if there are, then update them
+        DATABASE.update_tags(tags_id, {"items": unique_tags})
+    else:
+        # create new tags otherwise.
+        DATABASE.create_tags({"id": tags_id, "items": unique_tags, "creator": user["username"]})
+
+    return jinja_partials.render_partial('htmx-tags-list.html', tags=unique_tags, tags_id=tags_id)
+
+
+@app.route("/delete-tag/<id>/<tag>", methods=["DELETE"])
+@requires_teacher
+def delete_single_tag(user, id, tag):
+    if not tag or not id:
+        return gettext('no_tag'), 400
+    tags = DATABASE.read_tags(id)
+    if not tags or tags["creator"] != user["username"]:
+        return utils.error_page(error=404, ui_message=gettext("no_tag"))
+    DATABASE.delete_tag(id, tag)
+    adventure_tags = DATABASE.read_tags(id).get("items", [])
+
+    return jinja_partials.render_partial('htmx-tags-list.html', tags=adventure_tags, tags_id=id)
 
 
 @app.route('/embedded/<int:level>', methods=['GET'])

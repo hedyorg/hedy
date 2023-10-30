@@ -21,6 +21,30 @@
                             {% endfor %}
                         </select>
                     </div>
+                    <div class="flex flex-row items-center mb-4">
+                        <label for="tags" class="inline-block w-40 text-xl">{{_('tags')}}</label>
+                        <div class="flex flex-row w-full">
+                                <input type="text" name="current-tags" value="{{tags}}" hidden>
+                                <input type="text" name="tag" placeholder="Enter a tag" id="input_adventure_tags"
+                                    _="on keypress if event.keyCode == 13 then event.stopPropagation()" 
+                                    hx-trigger="enter"
+                                    hx-post="/put-tag?adventure_id={{adventure.id}}" hx-target="#tags-list" hx-swap="outerHTML" hx-include="[name=current-tags]"
+                                    _="on htmx:afterRequest focus()"
+                                    class="appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 ltr:pr-8 rtl:pl-8 rounded"
+                                    >
+                                <button class="green-btn" id="add_adventure_tags"
+                                    hx-trigger="click"
+                                    hx-post="/put-tag?adventure_id={{adventure.id}}"
+                                    hx-target="#tags-list"
+                                    hx-swap="outerHTML"
+                                    hx-include="[name='current-tags'], [name='tag']"
+                                    _="on htmx:afterRequest set value of #input_adventure_tags to ''"
+                                    >{{_('add')}}</button>
+                        </div>
+                    </div>
+                    {{ render_partial('htmx-tags-list.html', tags=tags, tags_id=adventure.id) }}
+                    
+
                     <div class="border border-black rounded-lg p-4 text-sm">
                         {{_('adventure_exp_1')}}
                         <div class="flex flex-row my-2 items-center">
