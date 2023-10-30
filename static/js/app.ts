@@ -1130,12 +1130,11 @@ export function runPythonProgram(this: any, code: string, sourceMap: any, hasTur
         if (cb) cb ();
       }
     ).catch(function(err: any) {
-      console.error(err)
       const errorMessage = errorMessageFromSkulptError(err) || null;
       if (!errorMessage) {
         throw null;
       }
-      throw new Error(errorMessage);
+      throw new Error(errorMessage);      
     });
 
   } else {    
