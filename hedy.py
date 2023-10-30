@@ -1127,14 +1127,9 @@ class IsValid(Filter):
                                   text], line=meta.line, column=meta.column), meta
 
 
-<< << << < HEAD
     def error_list_access(self, meta, args):
         # for now copying another function, to test whether anything is being done at all
         print("hello")
-== == == =
-    def error_list_access(self, meta, args):
-        # for now copying another function, to test whether anything is being done at all
->>>>>> > 471b594cbc74674c414d5e289355a68a1048f3e4
         error = InvalidInfo('misspelled "at" command', arguments=[str(args[0])], line=meta.line, column=meta.column)
         return False, error, meta
 
@@ -3186,6 +3181,7 @@ def is_program_valid(program_root, input_string, level, lang):
     # IsValid returns (True,) or (False, args)
     instance = IsValid(level)
     is_valid = instance.transform(program_root)
+    print(program_root)
 
     if not is_valid[0]:
         _, invalid_info = is_valid
