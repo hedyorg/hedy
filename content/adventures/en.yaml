@@ -859,7 +859,7 @@ adventures:
                     ```
                     answer = {ask} 'Are you ready to learn something new?'
                     {if} answer {is} yes
-                        {print} 'Great! You can learn to use the repeat commando in the if command!'
+                        {print} 'Great! You can learn to use the repeat command in the if command!'
                         {print} 'Hooray!'
                         {print} 'Hooray!'
                         {print} 'Hooray!'
@@ -986,7 +986,7 @@ adventures:
                 story_text: |
                     Now we are going to change indentation a little bit. Every time that we need an indentation, we need `:` at the line before the indentation.
 
-                    In this level you can also use a new command: `{ elif }`. `{elif}` is short for {else} {if} and you need it when you want to make 3 (or more!) options.
+                    In this level you can also use a new command: `{elif}`. `{elif}` is short for {else} {if} and you need it when you want to make 3 (or more!) options.
                     Check it out!
                 start_code: '{print} ''Lets go to the next tab!'''
             18:
@@ -1838,8 +1838,8 @@ adventures:
                     When you've finished the code, try to create a code of your own and use a question that you've thought of yourself.
                 example_code_2: |
                     ```
-                    animals is dog, cow, sheep
-                    answer is ask 'What is your favorite animal?'
+                    animals {is} dog, cow, sheep
+                    answer {is} {ask} 'What is your favorite animal?'
                     _ answer _ animals _ 'Mine too!'
                     _ _ 'My favorite animals are dogs, cows and sheep'
                     ```

@@ -58,7 +58,7 @@ export function initializeSyntaxHighlighter(options: InitializeSyntaxHighlighter
 }
 
 // convert an objet in a map
-function convert(o:(object|undefined)) {
+export function convert(o:(object|undefined)) {
   if (typeof o === 'object') {
     let tmp:Map<string, object> = new Map(Object.entries(o));
 
@@ -75,7 +75,7 @@ function convert(o:(object|undefined)) {
 }
 
 // here we need to transfome __<KEYWORD>__ in a current kayword with translation
-function convertReg(oldReg:string, TRAD:Map<string,string> ) {
+export function convertReg(oldReg:string, TRAD:Map<string,string> ) {
   var newReg = oldReg;
 
   TRAD.forEach((value,key) => {
