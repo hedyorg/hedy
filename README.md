@@ -5,7 +5,7 @@
 ![](https://img.shields.io/github/issues/hedyorg/hedy)
 
 ![](static/images/Hedy-logo-96x96-round.png)
-<div id="top"></div>
+
 # Hedy
 
 Hedy is a gradual programming language aimed at teaching programming and teaching Python. It teaches using different levels. The first level just offers printing text and asking for input. This level is meant to introduce learners to the idea of a programming language, and the environment. From there, Hedy builds up to include more complex syntax and additional concepts.
@@ -60,4 +60,3 @@ If you are interested, please consult [Hedy Wiki](https://github.com/hedyorg/hed
 Thank you very much for taking your time to help Hedy.
 
 [![Contributors](https://contrib.rocks/image?repo=hedyorg/hedy)]([https://github.com/codemaniac-sahil/news-webapp-api](https://github.com/hedyorg/hedy)https://github.com/hedyorg/hedy/graphs/contributors)
-<p align="right">(<a href="#top">🔼 Back to top</a>)</p>

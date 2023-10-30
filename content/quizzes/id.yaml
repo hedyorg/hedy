@@ -8,52 +8,52 @@ levels:
             -   option: Heddy
                 feedback: Bukan yang ini!
             -   option: Haydie
-                feedback: Bukan yang ini!
+                feedback: Not this one!
             -   option: Heidi
-                feedback: Bukan yang ini!
-            hint: Itu dinamai sesuai dengan Hedy Lamarr.
+                feedback: Not this one!
+            hint: It's named after Hedy Lamarr.
             correct_answer: A
             question_score: '10'
         2:
-            question_text: Yang perlu diisi di tempat kosong agar teks Hello! muncul?
+            question_text: Which command makes text appear?
             code: ___ Hello!
             mp_choice_options:
             -   option: |-
                     ```
                     {echo}
                     ```
-                feedback: '`{echo}` mengulang jawaban yang diberikan.'
+                feedback: '`{echo}` repeats a given answer.'
             -   option: |-
                     ```
                     {print}
                      ```
-                feedback: Benar!
+                feedback: Correct!
             -   option: |-
                     ```
                     hello
                     ```
-                feedback: Hello bukan perintah.
+                feedback: Hello isn't a command.
             -   option: |-
                     ```
                     {ask}
                     ```
-                feedback: Dengan `{ask}`, kamu bisa bertanya.
-            hint: _ Halo dunia!
+                feedback: With `{ask}`, you can ask a question.
+            hint: _?_ Hello world!
             correct_answer: B
             question_score: '10'
         3:
-            question_text: Bagaimana cara kamu bertanya warna favorit seseorang?
+            question_text: How do you ask what someone's favorite color is?
             mp_choice_options:
             -   option: |-
                     ```
                     {print} What is your favorite color?
                     ```
-                feedback: '`{print}` mencetak teks, tetapi tidak mengajukan pertanyaan.'
+                feedback: '`{print}` prints text, but it doesn''t ask questions.'
             -   option: |-
                     ```
                     {ask} {print} What is your favorite color?
                     ```
-                feedback: Anda hanya perlu satu perintah, bukan dua.
+                feedback: You only need one command, not two.
             -   option: |-
                     ```
                     {ask} What is your favorite color?
@@ -63,25 +63,25 @@ levels:
                     ```
                     {echo} What is your favorite color?
                     ```
-                feedback: '`{echo}` mengulangi jawaban Anda kembali.'
-            hint: Anda dapat menanyakan sesuatu dengan perintah `{ask}`
+                feedback: '`{echo}` repeats your answer back to you.'
+            hint: You can {ask} something with the {ask} command
             correct_answer: C
             question_score: '10'
         4:
-            question_text: Apa yang salah dengan kode ini?
+            question_text: What is wrong with this code?
             code: |-
-                Hai, saya Hedy!
-                {ask} Siapa kamu?
-                {echo} Hai...
+                Hi Im Hedy!
+                {ask} Who are you?
+                {echo} Hi...
             mp_choice_options:
-            -   option: '`{print}` di baris 1 tidak ada.'
-                feedback: Benar!
-            -   option: Perintah di baris 2 salah dieja.
-                feedback: Perintahnya dieja dengan benar.
-            -   option: '`{echo}` bukanlah sebuah perintah.'
-                feedback: '`{echo}` adalah sebuah perintah, ada kesalahan lain.'
-            -   option: Tidak ada apa-apa! Ini adalah kode yang sempurna!
-                feedback: Salah, perhatikan baik-baik!
+            -   option: '`{print}` in line 1 is missing.'
+                feedback: Correct!
+            -   option: Im in line 1 is spelled wrong.
+                feedback: Im is spelled wrong on purpose; Hedy doesn't understand the apostrophes yet.
+            -   option: '`{echo}` isn''t a command.'
+                feedback: '`{echo}` is a command, there''s another mistake.'
+            -   option: Nothing! This is a perfect code!
+                feedback: Wrong, look carefully!
             hint: Line 1 doesn't seem right
             correct_answer: A
             question_score: '10'

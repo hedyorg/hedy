@@ -2,13 +2,12 @@ levels:
     1:
         1:
             story: |-
-                Puzzle adalah latihan di mana baris kode sudah ditulis untuk Anda. Anda hanya perlu menempatkan baris-baris tersebut dalam urutan yang benar. Tarik baris kode ke layar masukan dan jalankan kode. Bisakah Anda membuat program berfungsi?
-
-                Anda adalah pelanggan di toko roti Hedy.
-                Anda masuk ke toko roti dan disambut oleh penjual roti.
-                Dia bertanya jenis pai apa yang ingin Anda pesan.
-                Kemudian dia mengulang jawaban Anda.
-                Terakhir, pesanan Anda sedang disiapkan.
+                Puzzels are exercises in which the lines of code are already written for you. You only have to place the lines in the correct order. Drag the lines of code into the input screen and run the code. Can you get the program to work?
+                You're a customer at bakery Hedy.
+                You walk into the bakery and are welcomed by the baker.
+                He asks what type of pie you want to order.
+                Then he repeats your answer back to you.
+                Lastly, your order is being prepared.
             code: |-
                 {print} Welcome to bakery Hedy!
                 {ask} What type of pie do you want to order?
@@ -54,37 +53,37 @@ levels:
         2:
             story: Create a program that chooses a random meal for you. Make a list of food and a list of toppings and let the program decide what you'll have!
             code: |-
-                Makanan {is} pizza, es krim, salad, sandwich
-                Topping {is} cokelat, keju, tuna, taburan
-                {print} Makanan acak Anda hari ini adalah...
-                {sleep} 2
-                {print} Makanan {at} {random} dengan topping {at} {random}
+                food {is} pizza, icecream, salad, sandwich
+                toppings {is} chocolate, cheese, tuna, sprinkles
+                {print} Your random meal for today is...
+                sleep 2
+                {print} food at random with toppings at random
         3:
             story: |-
                 In a chess tournament there are three players left.
                 Create a program that decides which two players have to play against each other first.
                 Start by printing the two players who play the first match, then print against which player the winner will play.
             code: |-
-                Para pemain {is} Liam, Noah, Sophie
-                Pemain_1 {is} dari para pemain {at}{random}
-                {remove} Pemain_1 {from} para pemain
-                Pemain_2 {is} dari para pemain {at}{random}
-                {print} Pemain_1 'pertama kali bermain melawan' Pemain_2
-                {remove} Pemain_2 {from} para pemain
-                {print} 'Pemenangnya akan bermain melawan' para pemain {at}{random}
+                players {is} Liam, Noah, Sophie
+                player_1 {is} players {at} {random}
+                {remove} player_1 {from} players
+                player_2 {is} players {at} {random}
+                {print} player_1 ' first plays against ' player_2
+                {remove} player_2 {from} players
+                {print} 'The winner plays against ' players {at} {random}
     4:
         1:
             story: |-
-                Kamu adalah pelatih Pokémon terbaru dari Kota Pallet!
-                Buatlah sebuah program yang memilih Pokémon pertamamu.
-                Biarkan program menunggu satu detik sebelum mengungkapkan Pokémon pertamamu.
+                You are the newest Pokémon trainer from Pallet Town!
+                Make a program that selects your first Pokémon.
+                Let the program wait a minute before revealing your first pokémon.
             code: |-
                 pokemons {is} Pikachu, Charmander, Bulbasaur, Squirtle
                 {print} 'This is going to be your first pokémon!'
                 {sleep}
                 {print} pokemons {at} {random}
         2:
-            story: Buat undian yang memungkinkan Anda memilih hadiah tambahan yang mungkin Anda menangkan.
+            story: Create a lottery that lets you choose an extra price that you might win.
             code: |-
                 prices {is} car, hamster, 1 million euros
                 price {is} {ask} 'What would you like to win?'
@@ -104,10 +103,10 @@ levels:
         2:
             story: Create a maths game.
             code: |-
-                {print} 'Selesaikan masalah ini'
-                jawaban {is} {ask} '88 - 16 = ?'
-                {if} jawaban {is} 72 {print} 'Benar!'
-                {else} {print} 'Salah! Jawabannya adalah 72'
+                {print} 'Solve this problem'
+                answer {is} {ask} '88 - 16 = ?'
+                {if} answer {is} 72 {print} 'Correct!'
+                {else} print 'Wrong! The answer was 72'
     6:
         1:
             story: |-
