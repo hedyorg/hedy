@@ -1126,7 +1126,6 @@ class IsValid(Filter):
         return False, InvalidInfo("print without quotes", arguments=[
                                   text], line=meta.line, column=meta.column), meta
 
-
     def error_list_access(self, meta, args):
         # for now copying another function, to test whether anything is being done at all
         print("hello")
