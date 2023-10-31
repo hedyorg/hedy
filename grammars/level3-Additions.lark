@@ -2,7 +2,7 @@ command:+= error_list_access | assign_list | add | remove > error_invalid
 _print_argument: (_SPACE | (list_access textwithoutspaces?) | error_list_access | textwithoutspaces)*
 ask: var _IS _ASK ((_SPACE | text_ask)*)?
 
-error_list_access: var_access (textwithoutspaces)*
+error_list_access: var_access _AT textwithoutspaces
 
 assign: var _IS (list_access | text) -> assign
 assign_list: var _IS text_list (_COMMA text_list)+
