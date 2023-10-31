@@ -761,6 +761,8 @@ class ForTeachersModule(WebsiteModule):
             return gettext("adventure_length"), 400
         if not isinstance(body.get("public"), bool):
             return gettext("public_invalid"), 400
+        if not isinstance(body.get("language"), str) or body.get("language") not in hedy_content.ALL_LANGUAGES.keys():
+            return gettext("language_invalid"), 400
 
         current_adventure = self.db.get_adventure(body["id"])
         if not current_adventure or current_adventure["creator"] != user["username"]:
@@ -786,9 +788,14 @@ class ForTeachersModule(WebsiteModule):
             "level": body["level"],
             "content": body["content"],
             "public": body["public"],
+            "language": body["language"],
         }
 
         self.db.update_adventure(body["id"], adventure)
+
+        tags = self.db.read_tags(body["id"])
+        if tags != {}:  # if there's a set of tags, then
+            self.db.update_tags(body["id"], {"public": body["public"], "language": body["language"]})
 
         return {"success": gettext("adventure_updated")}, 200
 
@@ -835,6 +842,7 @@ class ForTeachersModule(WebsiteModule):
             "name": body["name"],
             "level": 1,
             "content": "",
+            "language": g.lang,
         }
 
         self.db.store_adventure(adventure)

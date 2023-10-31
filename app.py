@@ -108,7 +108,9 @@ ACHIEVEMENTS_TRANSLATIONS = hedyweb.AchievementTranslations()
 DATABASE = database.Database()
 ACHIEVEMENTS = achievements.Achievements(DATABASE, ACHIEVEMENTS_TRANSLATIONS)
 
-TAGS = hedy_content.Tags(lang)
+TAGS = collections.defaultdict(hedy_content.NoSuchAdventure)
+for lang in ALL_LANGUAGES.keys():
+    TAGS[lang] = hedy_content.Tags(lang)
 
 
 def load_adventures_for_level(level):
@@ -1399,11 +1401,10 @@ def get_specific_adventure(name, level, mode):
                            ))
 
 
-@app.route('/put-tag', methods=['POST', 'PUT'])
-@app.route('/put-tag/<tags_id>', methods=['POST', 'PUT'])
+@app.route('/create-tag', methods=['POST', 'PUT'])
+@app.route('/create-tag/<tags_id>', methods=['POST', 'PUT'])
 @requires_teacher
 def create_tags(user, tags_id=None):
-    # acts as creating or updating tags.
     new_tag = request.form.get("tag")
     adventure_id = request.args.get("adventure_id")
     class_id = request.args.get("class_id")
@@ -1432,9 +1433,41 @@ def create_tags(user, tags_id=None):
         DATABASE.update_tags(tags_id, {"items": unique_tags})
     else:
         # create new tags otherwise.
-        DATABASE.create_tags({"id": tags_id, "items": unique_tags, "creator": user["username"]})
+        DATABASE.create_tags({"id": tags_id, "items": unique_tags,
+                              "creator": user["username"], "language": g.lang})
 
-    return jinja_partials.render_partial('htmx-tags-list.html', tags=unique_tags, tags_id=tags_id)
+    return jinja_partials.render_partial('htmx-tags-list.html', tags=unique_tags,
+                                         tags_id=tags_id, creator=user["username"])
+
+
+@app.route("/read-tags", methods=["GET"])
+@app.route("/read-tags/<tags_id>", methods=["GET"])
+@requires_login
+def read_tags(user, tags_id=None):
+    # TODO: the public param could be used to list tags that are localized. E.g., "Hedy team"
+    public = False  # request.args.get("public")
+    if not tags_id:
+        adventure_id = request.args.get("adventure_id")
+        class_id = request.args.get("class_id")
+        creator = request.args.get("username")
+        tags_id = adventure_id or class_id
+
+    if public:
+        # TODO: get localized tags.
+        keyword_lang = g.keyword_lang
+        tags = TAGS[g.lang].get_tags(keyword_lang)
+    else:
+        if tags_id:
+            tags = DATABASE.read_tags(tags_id)
+            return {}, 200  # TODO: return localized tags
+        else:
+            tags = DATABASE.read_tags_by_username(creator or user["username"])
+            items = [item for tag in tags for item in tag.get("items", [])]
+            creator = creator or (len(tags) and tags[0].get("creator", ""))
+            tags_id = tags[0].get("id") if len(tags) else ""
+            public = True  # len(tags) and tags[0].get("public", "")
+            return jinja_partials.render_partial('htmx-tags-list.html', tags=items, tags_id=tags_id,
+                                                 creator=creator, public=public)
 
 
 @app.route("/delete-tag/<id>/<tag>", methods=["DELETE"])
@@ -1446,9 +1479,9 @@ def delete_single_tag(user, id, tag):
     if not tags or tags["creator"] != user["username"]:
         return utils.error_page(error=404, ui_message=gettext("no_tag"))
     DATABASE.delete_tag(id, tag)
-    adventure_tags = DATABASE.read_tags(id).get("items", [])
+    available_tags = DATABASE.read_tags(id).get("items", [])
 
-    return jinja_partials.render_partial('htmx-tags-list.html', tags=adventure_tags, tags_id=id)
+    return {"message": gettext('tag_deleted'), "tags": available_tags}, 200
 
 
 @app.route('/embedded/<int:level>', methods=['GET'])

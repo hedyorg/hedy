@@ -426,6 +426,11 @@ class NoSuchSlides:
         return {}
 
 
+class NoSuchTags:
+    def get_tags(self):
+        return {}
+
+
 class Tags(StructuredDataFile):
     def __init__(self, language):
         self.language = language

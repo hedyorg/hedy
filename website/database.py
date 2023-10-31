@@ -53,6 +53,8 @@ INVITATIONS = dynamo.Table(
     - id
     - items (str[]): holds the tag items.
     - creator (str): username (of a teacher account, hopefully)
+    - public (bool): whether it's a public set of tags
+    - language (str): the language of the created tags.
 """
 TAGS = dynamo.Table(storage, "tags", "id", indexes=[dynamo.Index("creator")])
 
@@ -604,7 +606,7 @@ class Database:
         return tags if tags else {}
 
     def read_tags_by_username(self, username):
-        tags = TAGS.get({"creator": username})
+        tags = TAGS.get_many({"creator": username})
         return tags if tags else {}
 
     def update_tags(self, tags_id, data):

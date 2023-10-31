@@ -11,15 +11,18 @@
             class='relative border-2 rounded-lg border-green-400 p-2 px-5 mx-2 mb-2'
                         >
             {{tag}}
-            <span class='absolute top-0.5 right-0.5 text-gray-600 hover:text-red-400 fa-regular fa-circle-xmark'
-            {% if tags_id %}
-                hx-delete="/delete-tag/{{tags_id}}/{{tag}}" 
-                hx-target="#tags-list"
-                hx-swap="outerHTML"
-            {% else %}
-                _='on click remove #tag_{{loop.index}}'
+            {% if not public and username == creator %}
+                <span class='absolute top-0.5 right-0.5 text-gray-600 hover:text-red-400 fa-regular fa-circle-xmark'
+                {% if tags_id %}
+                    hx-delete="/delete-tag/{{tags_id}}/{{tag}}" 
+                    hx-swap="none"
+                    _="on htmx:afterRequest if detail.xhr.status == 200 then remove #tag_{{loop.index}}
+                        if JSON.parse(detail.xhr.response).tags.length == 0 toggle .hidden on #no-tags"
+                {% else %}
+                    _='on click remove #tag_{{loop.index}}'
+                {% endif %}
+                ></span>
             {% endif %}
-            ></span>
         </li>
         <!-- <input type="text"
             autofocus
@@ -29,5 +32,5 @@
             value="{{tag}}"
             > -->
     {% endfor %}
-    {% if tags|length == 0 %}<li id="no-tags" class='border-2 rounded-lg border-green-400 p-2 px-5 mx-2 mb-2'>{{_('no_tags')}}</li>{% endif %}
+    <li id="no-tags" class='border-2 rounded-lg border-green-400 p-2 px-5 mx-2 mb-2 {% if tags|length > 0 %}hidden{% endif %}'>{{_('no_tags')}}</li>
 </ul>
