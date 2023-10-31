@@ -3351,7 +3351,6 @@ def transpile_inner(input_string, level, lang="en", populate_source_map=False, i
 
         # grab the right transpiler from the lookup
         convertToPython = TRANSPILER_LOOKUP[level]
-        python = convertToPython(lookup_table, lang, numerals_language).transform(abstract_syntax_tree)
         python = convertToPython(lookup_table, lang, numerals_language, is_debug).transform(abstract_syntax_tree)
 
         commands = AllCommands(level).transform(program_root)
