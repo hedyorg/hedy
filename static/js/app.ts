@@ -9,7 +9,7 @@ import { Achievement, Adventure, isServerSaveInfo, ServerSaveInfo } from './type
 import { startIntroTutorial } from './tutorials/tutorial';
 import { loadParsonsExercise } from './parsons';
 import { checkNow, onElementBecomesVisible } from './browser-helpers/on-element-becomes-visible';
-import { initializeDebugger, load_variables, returnLinesWithoutBreakpoints } from './debugging';
+import { incrementDebugLine, initializeDebugger, load_variables, returnLinesWithoutBreakpoints, startDebug } from './debugging';
 import { localDelete, localLoad, localSave } from './local';
 import { initializeLoginLinks } from './auth';
 import { postJson } from './comm';
@@ -18,6 +18,7 @@ import { HedyEditor, EditorType } from './editor';
 import { HedyAceEditorCreator } from './ace-editor';
 import { stopDebug } from "./debugging";
 
+export let theGlobalDebugger: any;
 export let theGlobalEditor: HedyEditor;
 export let theModalEditor: HedyEditor;
 export let theGlobalSourcemap: { [x: string]: any; };
@@ -212,6 +213,7 @@ export function initializeCodePage(options: InitializeCodePageOptions) {
       editor: theGlobalEditor,
       level: theLevel,
       language: theLanguage,
+      keywordLanguage: theKeywordLanguage,
     });
   }
 
@@ -302,7 +304,7 @@ function attachMainEditorEvents(editor: HedyEditor) {
       if (!theLevel || !theLanguage) {
         throw new Error('Oh no');
       }
-      runit (theLevel, theLanguage, "", function () {
+      runit (theLevel, theLanguage, "", "run",function () {
         $ ('#output').focus ();
       });
     }
@@ -367,6 +369,7 @@ export function initializeViewProgramPage(options: InitializeViewProgramPageOpti
     editor: theGlobalEditor,
     level: theLevel,
     language: theLanguage,
+    keywordLanguage: theKeywordLanguage,
   });
 }
 
@@ -470,7 +473,7 @@ function clearOutput() {
   buttonsDiv.hide();
 }
 
-export async function runit(level: number, lang: string, disabled_prompt: string, cb: () => void) {
+export async function runit(level: number, lang: string, disabled_prompt: string, run_type: "run" | "debug" | "continue", cb: () => void) {
   // Copy 'currentTab' into a variable, so that our event handlers don't mess up
   // if the user changes tabs while we're waiting for a response
   const adventureName = currentTab;
@@ -495,7 +498,10 @@ export async function runit(level: number, lang: string, disabled_prompt: string
   $('#runit').hide();
   $('#stopit').show();
   $('#saveFilesContainer').hide();
-  clearOutput();
+  
+  if (run_type !== 'continue') {
+    clearOutput();
+  }
 
   try {
     var editor = theGlobalEditor;
@@ -524,60 +530,72 @@ export async function runit(level: number, lang: string, disabled_prompt: string
 
     editor.clearErrors()
     removeBulb();
-    console.log('Original program:\n', code);
+    // console.log('Original program:\n', code);
 
     const adventure = theAdventures[adventureName];
+    let program_data;
 
-    try {
-      cancelPendingAutomaticSave();
-      let data = {
-        level: `${level}`,
-        code: code,
-        lang: lang,
-        skip_faulty: false,
-        tutorial: $('#code_output').hasClass("z-40"), // if so -> tutorial mode
-        read_aloud : !!$('#speak_dropdown').val(),
-        adventure_name: adventureName,
+    if (run_type === 'run' || run_type === 'debug') {
+      try {
+        cancelPendingAutomaticSave();
+        let data = {
+          level: `${level}`,
+          code: code,
+          lang: lang,
+          skip_faulty: false,
+          is_debug: run_type === 'debug',
+          tutorial: $('#code_output').hasClass("z-40"), // if so -> tutorial mode
+          read_aloud : !!$('#speak_dropdown').val(),
+          adventure_name: adventureName,
+  
+          // Save under an existing id if this field is set
+          program_id: isServerSaveInfo(adventure?.save_info) ? adventure.save_info.id : undefined,
+          save_name: saveNameFromInput(),
+        };
 
-        // Save under an existing id if this field is set
-        program_id: isServerSaveInfo(adventure?.save_info) ? adventure.save_info.id : undefined,
-        save_name: saveNameFromInput(),
-      };
+        let response = await postJsonWithAchievements('/parse', data);
+        
+        program_data = response;
+        console.log('Response', response);
 
-      let response = await postJsonWithAchievements('/parse', data);
-      console.log('Response', response);
-
-      showAchievements(response.achievements, false, "");
-      if (adventure && response.save_info) {
-        adventure.save_info = response.save_info;
-        adventure.start_code = code;
-      }
-      if (response.Error) {
-        error.show(ClientMessages['Transpile_error'], response.Error);
-        if (response.Location && response.Location[0] != "?") {
-          //storeFixedCode(response, level);
-          // Location can be either [row, col] or just [row].
-          theGlobalEditor.highlightError(response.Location[0], response.Location[1]);
+        showAchievements(response.achievements, false, "");
+        if (adventure && response.save_info) {
+          adventure.save_info = response.save_info;
+          adventure.start_code = code;
         }
-        $('#stopit').hide();
-        $('#runit').show();
-        return;
-      }
-      runPythonProgram(response.Code, response.source_map, response.has_turtle, response.has_pygame, response.has_sleep, response.Warning, cb).catch(function(err) {
-        // The err is null if we don't understand it -> don't show anything
-        if (err != null) {
-          error.show(ClientMessages['Execute_error'], err.message);
-          reportClientError(level, code, err.message);
+
+        if (response.Error) {
+          error.show(ClientMessages['Transpile_error'], response.Error);
+          if (response.Location && response.Location[0] != "?") {
+            //storeFixedCode(response, level);
+            // Location can be either [row, col] or just [row].
+            theGlobalEditor.highlightError(response.Location[0], response.Location[1]);
+          }
+          $('#stopit').hide();
+          $('#runit').show();
+          return;
         }
-      });
-    } catch (e: any) {
-      console.error(e);
-      if (e.internetError) {
-        error.show(ClientMessages['Connection_error'], ClientMessages['CheckInternet']);
-      } else {
-        error.show(ClientMessages['Other_error'], ClientMessages['ServerError']);
+      } catch (e: any) {
+        console.error(e);
+        if (e.internetError) {
+          error.show(ClientMessages['Connection_error'], ClientMessages['CheckInternet']);
+        } else {
+          error.show(ClientMessages['Other_error'], ClientMessages['ServerError']);
+        }
       }
+    } else {
+      program_data = theGlobalDebugger.get_program_data();
     }
+    
+    runPythonProgram(program_data.Code, program_data.source_map, program_data.has_turtle, program_data.has_pygame, program_data.has_sleep, program_data.Warning, cb, run_type).catch(function(err: any) {
+      // The err is null if we don't understand it -> don't show anything
+      if (err != null) {
+        error.show(ClientMessages['Execute_error'], err.message);
+        reportClientError(level, code, err.message);
+      }
+    });
+  
+  
   } catch (e: any) {
     modal.notifyError(e.responseText);
   }
@@ -822,7 +840,7 @@ window.onerror = function reportClientException(message, source, line_number, co
   });
 }
 
-export function runPythonProgram(this: any, code: string, sourceMap: any, hasTurtle: boolean, hasPygame: boolean, hasSleep: boolean, hasWarnings: boolean, cb: () => void) {
+export function runPythonProgram(this: any, code: string, sourceMap: any, hasTurtle: boolean, hasPygame: boolean, hasSleep: boolean, hasWarnings: boolean, cb: () => void, run_type: "run" | "debug" | "continue") {
   // If we are in the Parsons problem -> use a different output
   let outputDiv = $('#output');
   let skip_faulty_found_errors = false;
@@ -853,20 +871,11 @@ export function runPythonProgram(this: any, code: string, sourceMap: any, hasTur
     }
   }
 
-  //Saving the variable button because sk will overwrite the output div
-  const variableButton = outputDiv.find('#variable_button');
-  const variables = outputDiv.find('#variables');
-  outputDiv.empty();
-  outputDiv.append(variableButton);
-  outputDiv.append(variables);
-
-  const storage = window.localStorage;
   let skulptExternalLibraries:{[index: string]:any} = {
       './extensions.js': {
         path: theStaticRoot + "/vendor/skulpt-stdlib-extensions.js",
       },
   };
-  let debug = storage.getItem("debugLine");
 
   Sk.pre = "output";
   const turtleConfig = (Sk.TurtleGraphics || (Sk.TurtleGraphics = {}));
@@ -977,87 +986,169 @@ export function runPythonProgram(this: any, code: string, sourceMap: any, hasTur
   code = code_prefix + code;
   if (hasPygame) code += pygame_suffix;
 
-  Sk.configure({
-    output: outf,
-    read: builtinRead,
-    inputfun: inputFromInlineModal,
-    inputfunTakesPrompt: true,
-    setTimeout: timeout,
-    __future__: Sk.python3,
-    timeoutMsg: function () {
-      // If the timeout is 1 this is due to us stopping the program: don't show "too long" warning
+  if (run_type === "run") {
+    Sk.configure({
+      output: outf,
+      read: builtinRead,
+      inputfun: inputFromInlineModal,
+      inputfunTakesPrompt: true,
+      setTimeout: timeout,
+      __future__: Sk.python3,
+      timeoutMsg: function () {
+        // If the timeout is 1 this is due to us stopping the program: don't show "too long" warning
+        $('#stopit').hide();
+        $('#runit').show();
+        if (Sk.execLimit != 1) {
+          pushAchievement("hedy_hacking");
+          return ClientMessages ['Program_too_long'];
+        } else {
+          return null;
+        }
+      },
+      // We want to make the timeout function a bit more sophisticated that simply setting a value
+      // In levels 1-6 users are unable to create loops and programs with a lot of lines are caught server-sided
+      // So: a very large limit in these levels, keep the limit on other onces.
+      execLimit: (function () {
+        const level = theLevel;
+        if (hasTurtle || hasPygame) {
+          // We don't want a timeout when using the turtle or pygame -> just set one for 10 minutes
+          return (6000000);
+        }
+        if (level < 7) {
+          // Also on a level < 7 (as we don't support loops yet), a timeout is redundant -> just set one for 5 minutes
+          return (3000000);
+        }
+        // Set a time-out of either 20 seconds when having a sleep and 5 seconds when not
+        return ((hasSleep) ? 20000 : 5000);
+      }) ()
+    });
+  
+    return Sk.misceval.asyncToPromise(() =>
+      Sk.importMainWithBody("<stdin>", false, code, true), {
+        "*": () => {
+          // We don't do anything here...
+        }
+      }
+     ).then(function(_mod) {
+      console.log('Program executed');
+      const pythonVariables = Sk.globals;
+      load_variables(pythonVariables);
       $('#stopit').hide();
       $('#runit').show();
-      if (Sk.execLimit != 1) {
-        pushAchievement("hedy_hacking");
-        return ClientMessages ['Program_too_long'];
-      } else {
-        return null;
+  
+      if (hasPygame) {
+        document.onkeydown = null;
+        $('#pygame-modal').hide();
       }
-    },
-    // We want to make the timeout function a bit more sophisticated that simply setting a value
-    // In levels 1-6 users are unable to create loops and programs with a lot of lines are caught server-sided
-    // So: a very large limit in these levels, keep the limit on other onces.
-    execLimit: (function () {
-      const level = theLevel;
-      if (hasTurtle || hasPygame) {
-        // We don't want a timeout when using the turtle or pygame -> just set one for 10 minutes
-        return (6000000);
+  
+      if (hasTurtle) {
+        $('#saveFilesContainer').show();
       }
-      if (level < 7) {
-        // Also on a level < 7 (as we don't support loops yet), a timeout is redundant -> just set one for 5 minutes
-        return (3000000);
-      }
-      // Set a time-out of either 20 seconds when having a sleep and 5 seconds when not
-      return ((hasSleep) ? 20000 : 5000);
-    }) ()
-  });
-
-  return Sk.misceval.asyncToPromise(() =>
-    Sk.importMainWithBody("<stdin>", false, code, true), {
-      "*": () => {
-        // We don't do anything here...
-      }
-    }
-   ).then(function(_mod) {
-    console.log('Program executed');
-    const pythonVariables = Sk.globals;
-    load_variables(pythonVariables);
-    $('#stopit').hide();
-    $('#runit').show();
-
-    if (hasPygame) {
-      document.onkeydown = null;
-      $('#pygame-modal').hide();
-    }
-
-    if (hasTurtle) {
-      $('#saveFilesContainer').show();
-    }
-
-    // Check if the program was correct but the output window is empty: Return a warning
-    if ($('#output').is(':empty') && $('#turtlecanvas').is(':empty')) {
-      if(!debug){
+  
+      // Check if the program was correct but the output window is empty: Return a warning
+      if ($('#output').is(':empty') && $('#turtlecanvas').is(':empty')) {
         pushAchievement("error_or_empty");
-        error.showWarning(ClientMessages['Transpile_warning'], ClientMessages['Empty_output']);
+        error.showWarning(ClientMessages['Transpile_warning'], ClientMessages['Empty_output']);        
+        return;
       }
-      return;
+      if (!hasWarnings && code !== last_code) {
+          showSuccesMessage();
+          last_code = code;
+      }
+      if (cb) cb ();
+    }).catch(function(err) {
+      const errorMessage = errorMessageFromSkulptError(err) || null;
+      if (!errorMessage) {
+        throw null;
+      }
+      throw new Error(errorMessage);
+    });
+    
+  } else if (run_type === "debug") {
+    
+    theGlobalDebugger = new Sk.Debugger('<stdin>', incrementDebugLine, stopDebug);
+    theGlobalSourcemap = sourceMap;
+    
+    Sk.configure({
+      output: outf,
+      read: builtinRead,
+      inputfun: inputFromInlineModal,
+      inputfunTakesPrompt: true,
+      __future__: Sk.python3,
+      debugging: true,
+      breakpoints: theGlobalDebugger.check_breakpoints.bind(theGlobalDebugger),      
+      execLimit: null
+    });
+
+    let lines = code.split('\n');
+    for (let i = 0; i < lines.length; i++) {
+      // lines with dummy variable name are not meant to be shown to the user, skip them.
+      if (lines[i].includes("# __BREAKPOINT__") && !lines[i].includes('x__x__x__x')) {
+        // breakpoints are 1-indexed
+        theGlobalDebugger.add_breakpoint('<stdin>.py', i + 1, '0', false);
+      }
     }
+
     // Do not show success message if we found errors that we skipped
-    if (!hasWarnings && code !== last_code && !debug && !skip_faulty_found_errors) {
-        showSuccesMessage();
+    if (!hasWarnings && code !== last_code && !skip_faulty_found_errors) {
         last_code = code;
     }
-    if (cb) cb ();
-  }).catch(function(err) {
 
+    theGlobalDebugger.set_code_starting_line(code_prefix.split('\n').length - 1);
+    theGlobalDebugger.set_code_lines(code.split('\n'));
+    theGlobalDebugger.set_program_data({
+      Code: code,
+      source_map: sourceMap,
+      has_turtle: hasTurtle,
+      has_pygame: hasPygame,
+      Warning: hasWarnings
+    });
+    
+    startDebug();
 
-    const errorMessage = errorMessageFromSkulptError(err) || null;
-    if (!errorMessage) {
-      throw null;
-    }
-    throw new Error(errorMessage);
-  });
+    return theGlobalDebugger.startDebugger(
+      () => Sk.importMainWithBody("<stdin>", false, code, true),
+      theGlobalDebugger
+    ).then( 
+      function () {
+        console.log('Program executed');
+  
+        $('#stopit').hide();
+        $('#runit').show();
+        
+        stopDebug();
+        
+        if (hasPygame) {        
+          document.onkeydown = null;
+          $('#pygame-modal').hide();
+        }
+    
+        if (hasTurtle) {
+          $('#saveFilesContainer').show();
+        }
+        
+        if (cb) cb ();
+      }
+    ).catch(function(err: any) {
+      const errorMessage = errorMessageFromSkulptError(err) || null;
+      if (!errorMessage) {
+        throw null;
+      }
+      throw new Error(errorMessage);      
+    });
+
+  } else {    
+    // maybe remove debug marker here
+    return theGlobalDebugger.continueForward()
+      .catch(function(err: any) {
+        console.error(err)
+        const errorMessage = errorMessageFromSkulptError(err) || null;
+        if (!errorMessage) {
+          throw null;
+        }
+        throw new Error(errorMessage);
+    });
+  }
 
   /**
    * Get the error messages from a Skulpt error

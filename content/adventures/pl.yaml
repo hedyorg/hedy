@@ -2154,6 +2154,17 @@ adventures:
                     odpowiedź {is} {ask} 'Czego musimy używać?'
                     {print} 'Musimy używać ' odpowiedź
                     ```
+                story_text_2: |
+                    ## Contractions
+                    Important! Mind that now that we're using quotation marks, Hedy will get confused when you use the apostrophe for contractions like I'm or What's.
+                    Make sure to remove those apostrophes and change the spelling to I am or What is.
+                    Check out the example code to see the wrong way of using apostrophes.
+                example_code_2: |
+                    ```
+                    _ This is the wrong way of using apostrophes _
+                    {print} 'I'm babysitting my sister's kids'
+                    {print} 'What's more fun than that?'
+                    ```
                 start_code: |-
                     {print} 'Od teraz musimy używać cudzysłowów!'
                     odpowiedź {is} {ask} 'Czego musimy używać?'
