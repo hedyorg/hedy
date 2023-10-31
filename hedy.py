@@ -623,6 +623,8 @@ class TypeValidator(Transformer):
         self.input_string = input_string
 
     def print(self, tree):
+        print("\nrunning print")
+        print(tree, "\n")
         self.validate_args_type_allowed(Command.print, tree.children, tree.meta)
 
         return self.to_typed_tree(tree)
@@ -831,12 +833,14 @@ class TypeValidator(Transformer):
 
     def validate_args_type_allowed(self, command, children, meta):
         print("validate_args")
+        print("before ", children)
         allowed_types = get_allowed_types(command, self.level)
         children = children if type(children) is list else [children]
-        print(children)
-        print("ran succesfully")
-        """for child in children:
-            self.check_type_allowed(command, allowed_types, child, meta)"""
+        print("after ", children)
+        print("ran succesfully\n")
+        for child in children:
+            print(self)
+            self.check_type_allowed(command, allowed_types, child, meta)
 
     def check_type_allowed(self, command, allowed_types, tree, meta=None):
         arg_type = self.get_type(tree)
@@ -1125,7 +1129,6 @@ class IsValid(Filter):
         text = ' '.join(words)
         return False, InvalidInfo("print without quotes", arguments=[
                                   text], line=meta.line, column=meta.column), meta
-
 
     def error_list_access(self, meta, args):
         # for now copying another function, to test whether anything is being done at all
@@ -2612,6 +2615,8 @@ def create_grammar(level, lang, skip_faulty):
     # ready? Save to file to ease debugging
     # this could also be done on each merge for performance reasons
     save_total_grammar_file(level, merged_grammars, lang)
+    print("grammar_text being displayed at level ", level)
+    print(merged_grammars)
     return merged_grammars
 
 
@@ -2747,6 +2752,7 @@ def get_parser(level, lang="en", keep_all_tokens=False, skip_faulty=False):
     See https://github.com/lark-parser/lark/issues/1348.
     """
     grammar = create_grammar(level, lang, skip_faulty)
+    print("\nattempt 11\n", grammar)
     parser_opts = {
         "regex": True,
         "propagate_positions": True,
@@ -2820,6 +2826,7 @@ def transpile_inner_with_skipping_faulty(input_string, level, lang="en"):
 
 
 def transpile(input_string, level, lang="en", skip_faulty=True):
+    print("2.transpile")
     """
     Function that transpiles the Hedy code to Python
 
@@ -3151,7 +3158,10 @@ def process_input_string(input_string, level, lang, escape_backslashes=True, pre
 def parse_input(input_string, level, lang):
     parser = get_parser(level, lang, skip_faulty=source_map.skip_faulty)
     try:
+        print("\nattempt 10\n", parser)
+        print("\nattempt 5", input_string)
         parse_result = parser.parse(input_string + '\n')
+        print("\nattempt 4", parse_result)
         return parse_result.children[0]  # getting rid of the root could also be done in the transformer would be nicer
     except lark.UnexpectedEOF:
         lines = input_string.split('\n')
@@ -3181,7 +3191,6 @@ def is_program_valid(program_root, input_string, level, lang):
     # IsValid returns (True,) or (False, args)
     instance = IsValid(level)
     is_valid = instance.transform(program_root)
-    print(program_root)
 
     if not is_valid[0]:
         _, invalid_info = is_valid
@@ -3292,6 +3301,7 @@ def create_lookup_table(abstract_syntax_tree, level, lang, input_string):
     visitor = LookupEntryCollector(level)
     visitor.visit_topdown(abstract_syntax_tree)
     entries = visitor.lookup
+    print("\nattempt 1\n")
 
     TypeValidator(entries, level, lang, input_string).transform(abstract_syntax_tree)
 
@@ -3301,12 +3311,16 @@ def create_lookup_table(abstract_syntax_tree, level, lang, input_string):
 def transpile_inner(input_string, level, lang="en", populate_source_map=False):
     check_program_size_is_valid(input_string)
 
+    print("3.transpile_inner")
+
     level = int(level)
     if level > HEDY_MAX_LEVEL:
         raise Exception(f'Levels over {HEDY_MAX_LEVEL} not implemented yet')
 
     input_string = process_input_string(input_string, level, lang)
     program_root = parse_input(input_string, level, lang)
+
+    print("\nattempt 3", program_root)
 
     if populate_source_map:
         source_map.clear()
@@ -3325,6 +3339,8 @@ def transpile_inner(input_string, level, lang="en", populate_source_map=False):
         if not valid_echo(abstract_syntax_tree):
             raise exceptions.LonelyEchoException()
 
+        print("\nattempt 2")
+        print(abstract_syntax_tree)
         lookup_table = create_lookup_table(abstract_syntax_tree, level, lang, input_string)
 
         # FH, may 2022. for now, we just out arabic numerals when the language is ar
@@ -3347,6 +3363,7 @@ def transpile_inner(input_string, level, lang="en", populate_source_map=False):
         if populate_source_map:
             source_map.set_python_output(python)
 
+        print("transpiling completed")
         return ParseResult(python, source_map, has_turtle, has_pygame, commands)
     except VisitError as E:
         if isinstance(E, VisitError):
@@ -3359,6 +3376,7 @@ def transpile_inner(input_string, level, lang="en", populate_source_map=False):
 
 
 def execute(input_string, level):
+    print("1.execute")
     python = transpile(input_string, level)
     if python.has_turtle:
         raise exceptions.HedyException("hedy.execute doesn't support turtle")
