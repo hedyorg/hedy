@@ -306,7 +306,7 @@ Sk.Debugger = class {
         try {
             await this.handleSuspension(resumeSuspension(this.getActiveSuspension()))
         } catch(e) {
-            this.error(e);
+            this.rejectCallback(e);
         }        
     }
 
@@ -515,7 +515,7 @@ async function unrollPromise(suspension) {
             await suspension.data["promise"].then(function (data) {
                 suspension.data["result"] = data;
             }, function (e) {
-                this.error(e);
+                this.rejectCallback(e);
             });
         }
         suspension = resumeSuspension(suspension);
