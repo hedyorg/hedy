@@ -23,9 +23,9 @@
                             <button type="reset" class="green-btn" id="join" 
                                 hx-post="/class/join/{{invite_data['class_id']}}"
                                 hx-swap="none"
-                                _="on htmx:afterRequest if detail.xhr.status == '302' then set window.location.pathname to '/programs' 
+                                _="on htmx:afterRequest if detail.xhr.status == '302' then set window.location.pathname to {% if is_teacher %}'/for-teachers'{% else %}'/programs'{% endif %} 
                                     else hide #messages end"
-                                >{{_('join_class')}} {{ invite_data['invited_as'] }}</button>
+                                >{{_('join_class')}}</button>
                             <button type="submit" class="red-btn mx-4 px-4" onclick="hedyApp.remove_student_invite('{{user_data['username']}}', '{{invite_data['class_id']}}', '{{_('delete_invite_prompt')}}')">{{_('delete_invite')}}</button>
                     </div>
                  </div>

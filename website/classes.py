@@ -355,21 +355,20 @@ class MiscClassPages(WebsiteModule):
         class_id = body.get("class_id")
 
         user = self.db.user_by_username(username)
+        if not user:
+            return gettext("teacher_invalid"), 400  # TODO: change to teacher not existing
+        if self.db.get_username_invite(user["username"]):
+            return gettext("student_already_invite"), 400
+        if is_second_teacher(user, class_id):
+            return "Already a second teacher.", 400
+
         Class = self.db.get_class(class_id)
         if not Class:
             return utils.error_page(error=404, ui_message=gettext("no_such_class"))
         elif Class["teacher"] != teacher["username"] or not is_teacher(user):
-            return "Only teachers can add or be added as second teachers!", 403
-        elif Class["teacher"] == username:
+            return gettext("teacher_invalid"), 400
+        elif Class["teacher"] == username:  # this check is almost never the case; but just in case.
             return "You cannot add yourself as a second teacher!", 400
-
-        if not user:
-            return gettext("student_not_existing"), 400  # TODO: change to teacher not existing
-        if self.db.get_username_invite(user["username"]):
-            return gettext("student_already_invite"), 400
-
-        if is_second_teacher(user, class_id):
-            return "Already a second teacher.", 400
 
         data = {
             "username": username,

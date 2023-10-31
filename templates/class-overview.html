@@ -46,7 +46,7 @@
       {% if is_teacher and class_info.second_teachers %}
         <div id="second_teachers_container" class="border-t border-gray-500 pt-4">
           <h2>{{ _('teachers')}}</h2>
-          {% if class_info.teacher == username and class_info.second_teachers|length > 1 %}<p class="text-red-500 mt-0 mb-2">{{_('second_teacher_prompt')}}</p>{% endif %}
+          {% if class_info.teacher == username and class_info.second_teachers|length > 1 %}<p class="text-red-500 mt-0 mb-2">{{_('second_teacher_warning')}}</p>{% endif %}
           <div class="border-solid border-2 border-orange-400 rounded p-4">
             <table class="table-auto w-full text-sm">
             <thead>
@@ -72,11 +72,10 @@
                   {% if second_teacher.username != class_info.teacher %}<a href="#" class="no-underline" id="remove-second-teacher"
                   hx-swap="none"
                   {# TODO: 
-                    - change remove_student_prompt to remove_user_prompt 
                     - figure a new way of showing modal instead of calling js
                     - remove container instead of reloading if only one el exists.
                     #}
-                  hx-confirm="{{_('remove_student_prompt')}}"
+                  hx-confirm="{{_('remove_user_prompt')}}"
                   hx-delete="/class/{{class_info['id']}}/second-teacher/{{second_teacher['username']}}"
                   _="on htmx:afterRequest if detail.xhr.status == 205 then window.location.reload()"
                   >🗑️</a>{% else %}--{% endif %}
@@ -94,7 +93,7 @@
                 <button class="green-btn" id="customize-class-button" data-cy="customize_class_button" onclick="window.location.href = '/for-teachers/customize-class/{{class_info.id}}'">View customizations</button>
             {% else %}
             {% if class_info.teacher == username %}
-              <button class="green-btn" id="add-second-teacher" _="on click call hedyApp.invite_student('{{class_info.id}}', {{_('second_teacher_prompt')|default(None)|tojson}}, '/invite-second-teacher')">{{_('invite_second_teacher')}}</button>
+              <button class="green-btn" id="add-second-teacher" _="on click call hedyApp.invite_student('{{class_info.id}}', {{_('second_teacher_prompt')|default(None)|tojson}}, '/invite-second-teacher')">{{_('invite_teacher')}}</button>
             {% endif %}
 
                 <button class="green-btn" id="add-student" _="on click toggle the *display of #add_students_options then toggle between .green-btn and .blue-btn on me">{{_('add_students')}}</button>
