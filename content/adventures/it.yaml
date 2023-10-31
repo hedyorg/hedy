@@ -295,29 +295,29 @@ adventures:
                 start_code: '# inserisci qui il tuo codice'
     add_remove_command:
         name: '{add} {to} & {remove} {from}'
-        default_save_name: add_remove_command
-        description: introducing add to and remove from
+        default_save_name: aggiungi_rimuovi_comando
+        description: introducendo aggiungi a e rimuovi da
         levels:
             3:
                 story_text: |
-                    ## Add to
-                    You can add items to the list with the `{add} {to}` command. To add an item to a list you can simply type: `{add} penguin {to} animals` or you can use the `{ask}` command like in the example code.
+                    ## Aggiungere a
+                    Puoi aggiungere elementi all'elenco con il comando `{add} {to}`. Per aggiungere un elemento a una lista puoi semplicemente digitare: `{add} penguin {to} animals` oppure puoi usare il comando `{ask}` come nel codice di esempio.
                 example_code: |
                     ```
-                    animals {is} dog, cat, kangaroo
-                    like {is} {ask} What is your favorite animal?
-                    {add} like {to_list} animals
-                    {print} I choose animals {at} {random}
+                    animali {is} cane, gatto, canguro
+                    like {is} {ask} Qual è il tuo animale preferito?
+                    {add} mi piace {to_list} animali
+                    {print} Scelgo gli animali {at} {random}
                     ```
                 story_text_2: |
-                    ## Remove from
-                    If you can add items to a list, of course you can also take them off. This is done with the `{remove} {from}` command.
+                    ## Rimuovere da
+                    Se puoi aggiungere elementi a un elenco, ovviamente puoi anche rimuoverli. Questo viene fatto con il comando `{remove} {from}`.
                 example_code_2: |
                     ```
-                    animals {is} dog, cat, kangaroo
-                    dislike {is} {ask} What animal do you not like?
-                    {remove} dislike {from} animals
-                    {print} I choose animals {at} {random}
+                    animali {is} cane, gatto, canguro
+                    non_mi_piace {is} {ask} Quale animale non ti piace?
+                    {remove} non_mi_piace {from} animali
+                    {print} Scelgo gli animali {at} {random}
                     ```
                 story_text_3: |
                     ### Exercise
@@ -983,7 +983,7 @@ adventures:
                 story_text: |
                     Ora cambieremo leggermente il rientro. Ogni volta che abbiamo bisogno di un rientro, abbiamo bisogno di `:` nella riga prima del rientro.
 
-                    In questo livello puoi anche utilizzare un nuovo comando: `{ elif }`. `{elif}` è l'abbreviazione di {else} {if} e ti serve quando vuoi fare 3 (o più!) opzioni.
+                    In questo livello puoi anche utilizzare un nuovo comando: `{elif}`. `{elif}` è l'abbreviazione di {else} {if} e ti serve quando vuoi fare 3 (o più!) opzioni.
                     Controlla!
                 start_code: |-
                     {for} i {in} {range} 1 {to} 10:

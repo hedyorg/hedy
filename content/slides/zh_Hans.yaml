@@ -2,7 +2,7 @@ levels:
     0:
         1:
             header: 欢迎来到海蒂！
-            text: Hedy是一种编程语言。
+            text: 海蒂(Hedy)是一种编程语言。
         2:
             header: 编程
             text: |-
@@ -13,7 +13,7 @@ levels:
             header: 编程语言
             text: |-
                 也许你已经知道了一些编程语言？
-                例如:
+                一些例子是:
                 * Scratch
                 * Python
                 * HTML
@@ -27,10 +27,10 @@ levels:
         5:
             header: Hedy编程
             text: |-
-                <iframe class="embedded-hedy" src="/adventure/story/1/raw">在Hedy中，我们使用特殊代码，如`{print}`。
+                在海蒂中，我们使用特殊代码，如`{print}`。
                 <iframe class="embedded-hedy" src="/adventure/story/1/raw"></iframe>
         6:
-            header: Hedy编程
+            header: 海蒂编程
             text: |-
                 代码词将显示为粉红色。
                 <iframe class="embedded-hedy" src="/adventure/story/1/raw"></iframe>
@@ -59,7 +59,7 @@ levels:
         2:
             header: '{打印}'
             text: |-
-                在第1级中，你可以使用的第一个代码是`{print}`。
+                在级别1中，你可以使用的第一个代码是`{print}`。
 
                 `{print}`用于在屏幕上显示文本。
             editor: <iframe class="fragment" src="/adventure/print_command/1/raw"></iframe>
@@ -73,28 +73,35 @@ levels:
         4:
             header: '{ask}'
             text: |-
-                在第1级中，你可以使用的最后一个文本代码是`{echo}`。
+                在级别1中，你可以使用的第二个代码是`{echo}`。
 
-                `{echo}`用于重复`{ask}`的答案。
+                `{ask}`用于提出需要回答的问题答案。
             editor: <iframe class="fragment" src="/adventure/parrot/1/raw"></iframe>
         5:
             header: '{echo}'
             text: |-
-                使用`{print}`、`{ask}`和`{echo}`，你已经可以创作一个小故事。
-                这是尝试冒险活动鹦鹉、石头剪刀布和故事的的好时机。
+                正如在前面的示例中所看到的。 你可以使用使用`{ask}`命令提出问题。
+
+                但是答案不会显示在输出屏幕中。
+
+                如果确实希望显示答案，可以使用此级别的最后一个命令：`{echo}`。
+
+                `{echo}` 用于重复 `{ask}` 的答案。
             editor: <iframe class="fragment" src="/adventure/ask_command/1/raw"></iframe>
         6:
             header: 编程!
-            text: 探险活动显示在标签页中。
+            text: |-
+                使用`{print}`, `{ask}` 和 `{echo}`，你已经可以创建一个小故事了。
+                现在是尝试鹦鹉、故事和石头剪刀布冒险的好时机。
         7:
             header: 编程!
-            text: |-
-                可以用标记黄色箭头的按钮复制例子。
-                <iframe class="fragment" src="/hedy/1"></iframe>
+            text: 探险活动显示在标签页中。
             editor: <iframe class="fragment" src="/hedy/1"></iframe>
         8:
             header: 标志程序！
-            text: 现在我们已经看到了文本代码，接下来我们将看到图形代码。
+            text: |-
+                黄色箭头按钮可用于复制示例。
+                <iframe class="fragment" src="/hedy/1"></iframe>
         9:
             header: 和海龟一起绘图
             text: '`{forward}` 用于让海龟向前移动。'
@@ -104,48 +111,48 @@ levels:
             editor: <iframe class="fragment" src="/adventure/turtle/1/raw"></iframe>
         11:
             header: '和海龟一起绘图: {turn}'
-            text: '`{turn}` is used to make the turtle turn left or right.'
+            text: '`{turn}` 用于让海龟向左或向右转。'
             editor: <iframe class="fragment" src="/adventure/turtle/1/raw"></iframe>
     2:
         1:
             header: 欢迎来到第 2 级
             text: |-
-                In this level you will learn to use variables.
+                在这个级别中，你将学习使用变量。
 
-                A variable is a word that can be used to store informatie.
+                变量是一个可以用来存储信息的词。
 
-                For example: a name, age or favorite sports team.
+                例如：姓名、年龄或最喜欢的运动队。
         2:
             header: 变量
-            text: To make or 'set' a variable we use the `{is}` command
+            text: 要创建或“设置”变量，我们使用`{is}`命令
             editor: <iframe class="fragment" src="/adventure/is_command/2/raw"></iframe>
         3:
             header: 交互的
             text: |-
-                We can also set a variable by asking questions.
+                我们还可以通过提问来设置变量。
 
-                The answer to the question is stored in the variable.
+                问题的答案存储在变量中。
 
-                This way we don't need the `{echo}`  command.
+                这样我们就不需要`{echo}`命令。
             editor: <iframe class="fragment" src="/adventure/ask_command/2/raw"></iframe>
         4:
             header: 多个变量
-            text: Now that we use variables, we can use multiple variables instead of just one `{echo}`command.
+            text: 既然我们使用了变量，就可以使用多个变量，而不仅仅是一个“{echo}”命令。
             editor: <iframe class="fragment" src="/adventure/ask_command/2/raw"></iframe>
         5:
             header: 停顿
-            text: You can also use the `{sleep}` command to pause the code for a while.
+            text: 你还可以使用`{sleep}` 指令暂停代码一段时间。
             editor: <iframe class="fragment" src="/adventure/sleep_command/2/raw"></iframe>
         6:
             header: 停顿 5 次
             text: |-
-                You can add a number after the `{sleep}` command if you want the pause to be longer.
+                如果你希望暂停时间更长，可以在 `{sleep}` 命令后添加一个数字。
 
-                If you want, you could even use a variable instead of a number to decide the duration of the sleep command.
+                如果需要，甚至可以使用变量而不是数字来决定睡眠命令的持续时间。
             editor: <iframe class="fragment" src="/adventure/sleep_command/2/raw"></iframe>
         7:
             header: 开始欢乐编程吧！
-            text: Enjoy the adventures in level 3!
+            text: 享受第 3 关的冒险！
     3:
         1:
             header: 欢迎来到第 3 级
