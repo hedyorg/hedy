@@ -17,7 +17,6 @@ from website.flask_helpers import render_template
 from website.auth import (
     is_admin,
     is_teacher,
-    is_second_teacher,
     requires_login,
     requires_teacher,
     store_new_student_account,
@@ -439,9 +438,6 @@ class ForTeachersModule(WebsiteModule):
         else:
             default_adventures = hedy_content.Adventures("en").get_adventure_keyname_name_levels()
 
-        # username = user["username"]
-        # if is_second_teacher(user, session["class_id"]):
-        #     username = self.db.get_class_main_teacher(class_id)
         teacher_adventures = list(self.db.get_teacher_adventures(user["username"]))
         second_teacher_adventures = self.db.get_second_teacher_adventures(
             [self.db.get_class(class_id)], user["username"])
@@ -563,7 +559,6 @@ class ForTeachersModule(WebsiteModule):
         Class = self.db.get_class(class_id)
         if not Class or (not utils.can_edit_class(user, Class) and not is_admin(user)):
             return utils.error_page(error=404, ui_message=gettext("no_such_class"))
-        # username = Class["teacher"] if is_second_teacher(user, session["class_id"]) else user["username"]
         teacher_adventures = list(self.db.get_teacher_adventures(user["username"]))
         second_teacher_adventures = self.db.get_second_teacher_adventures([Class], user["username"])
         teacher_adventures += second_teacher_adventures
@@ -778,14 +773,15 @@ class ForTeachersModule(WebsiteModule):
             if self.db.user_by_username(account.get("username").strip().lower()):
                 return {"error": gettext("usernames_exist"), "value": account.get("username").strip().lower()}, 200
 
-        username = self.db.get_class_main_teacher(session["class_id"]) if is_second_teacher(
-            user, session["class_id"]) else user["username"]
+        # the following is due to the fact that the current user may be a second user.
+        teacher = classes[0].get("teacher") if len(classes) else user["username"]
+        print("\n\n\n", teacher, user)
         # Now -> actually store the users in the db
         for account in body.get("accounts", []):
             # Set the current teacher language and keyword language as new account language
             account["language"] = g.lang
             account["keyword_language"] = g.keyword_lang
-            store_new_student_account(self.db, account, username)
+            store_new_student_account(self.db, account, teacher)
             if account.get("class"):
                 class_id = [i.get("id") for i in classes if i.get("name") == account.get("class")][0]
                 self.db.add_student_to_class(class_id, account.get("username").strip().lower())
