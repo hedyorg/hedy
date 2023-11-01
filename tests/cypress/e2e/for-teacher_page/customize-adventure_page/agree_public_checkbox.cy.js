@@ -2,7 +2,7 @@ import {loginForTeacher} from '../../tools/login/login.js'
 import {goToEditAdventure} from '../../tools/navigation/nav.js'
 
 describe('Agree public checkbox test', () => {
-  for (const teacher of ["teacher1", "teacher2"]) { 
+  for (const teacher of ["teacher1", "teacher4"]) { 
     it(`passes: ${teacher}`, () => {
       loginForTeacher(teacher);
       goToEditAdventure();

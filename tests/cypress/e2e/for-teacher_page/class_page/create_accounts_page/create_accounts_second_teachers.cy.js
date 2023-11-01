@@ -6,11 +6,11 @@ let students;
 
 
 beforeEach(() => {
-  loginForTeacher("teacher2");
+  loginForTeacher("teacher4");
 })
 
 before(() => {
-  loginForTeacher("teacher2");
+  loginForTeacher("teacher4");
   students = addStudents(classname, 4);
 })
 

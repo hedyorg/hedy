@@ -19,7 +19,7 @@ describe('Is able to click on duplicate class', () => {
   })
 
   it("Second teacher can duplicate main teacher's class", () => {
-    loginForTeacher("teacher2");
+    loginForTeacher("teacher4");
     goToTeachersPage();
 
     // Take actions only when teacher2 is a second teacher; i.e., having teacher1 as a teacher.
@@ -30,7 +30,7 @@ describe('Is able to click on duplicate class', () => {
           cy.get(`tbody :nth-child(${i+1}) .no-underline > .fas`).click();
           
           // Checks for input field
-          cy.get('#modal-prompt-input').type(' teacher2');
+          cy.get('#modal-prompt-input').type(' teacher4');
           cy.get('#modal-ok-button').click(); 
         }
       })

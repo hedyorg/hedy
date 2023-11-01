@@ -26,7 +26,7 @@ describe('Is able to click on duplicate class', () => {
   })
 
   it("Second teacher can click on duplicate button of main teacher's class", () => {
-    loginForTeacher("teacher2");
+    loginForTeacher("teacher4");
     goToTeachersPage();
 
     // Take actions only when teacher2 is a second teacher; i.e., having teacher1 as a teacher.

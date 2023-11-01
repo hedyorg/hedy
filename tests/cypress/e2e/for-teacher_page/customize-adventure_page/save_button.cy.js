@@ -74,7 +74,7 @@ describe('Save button test', () => {
       times: 1,
     }).as("customizeAdventure")
 
-    loginForTeacher("teacher2");
+    loginForTeacher("teacher4");
     goToEditAdventure();
 
     // should all not be visible at start

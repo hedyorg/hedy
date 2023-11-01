@@ -66,7 +66,7 @@ describe("Second teachers: invitations", () => {
     logout();
   })
 
-  it.only("Reads all second teachers", () => {
+  it("Reads all second teachers", () => {
     loginForTeacher()
     cy.get(".view_class").first().click();
     cy.wait(500);

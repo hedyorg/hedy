@@ -2,7 +2,7 @@ import { loginForTeacher } from '../../tools/login/login.js'
 
 describe('customize class page', () => {
     beforeEach(() => {
-      loginForTeacher("teacher2");
+      loginForTeacher("teacher4");
       // ensureIsSecondTeacher("teacher1", "teacher2")
       // await ensureClass();
       cy.getBySel('view_class_link').first().click(); // Press on view class button
@@ -149,65 +149,6 @@ describe('customize class page', () => {
         .click();
     });
 
-    it('FIXME: selects two adventures and swaps them using drag and drop', () => {
-      /**
-       * FIXME: Since We changed the library that handles the drag and drop,
-       * this test is harder to make into work, since the Cypress documentation,
-       * and the documentation of the library are no use.
-       */
-
-      /*
-
-      // Click on level 1
-      selectLevel('1');
-
-      // Now it should be visible
-      cy.getBySel('level-1').should('be.visible');
-
-      // Get the first and second adventure
-      cy.getBySel('level-1')
-        .children()
-        .eq(0)
-        .invoke('attr', 'value')
-        .as('first_adventure');
-
-      cy.getBySel('level-1')
-        .children()
-        .eq(1)
-        .invoke('attr', 'value')
-        .as('second_adventure');
-
-      // Getting their values first, and then moving them around
-      cy.get('@first_adventure').then(first_adventure => {
-        cy.get('@second_adventure').then(second_adventure => {
-
-          // Move the second adventure to the first place
-          cy.getBySel('level-1')
-            .children()
-            .eq(1)
-            .trigger('dragstart')
-
-          cy.getBySel('level-1')
-            .children()
-            .eq(0)
-            .trigger('drop')
-            .trigger('dragend');
-
-          // they should be inverted now
-          cy.getBySel('level-1')
-            .children()
-            .eq(0)
-            .should('have.value', second_adventure);
-
-          cy.getBySel('level-1')
-            .children()
-            .eq(1)
-            .should('have.value', first_adventure);
-        })
-      })
-    */
-    });
-
     it('Disabling current level displays a message', () => {
       cy.getBySel('level-1').should('be.visible');
       cy.get('#state-disabled').should('not.be.visible');
@@ -251,12 +192,6 @@ describe('customize class page', () => {
         cy.get(`div[data-cy="${hiddenAdventure}"]`).should('be.visible');
       });
 
-      it('becomes invisible for the student', () => {
-        // FIXME: This test is hard to write, as I'd like to invite `student1`
-        // to the class, but inviting existing students takes a lot of steps...
-
-        // loginForStudent();
-      });
     });
   });
 
