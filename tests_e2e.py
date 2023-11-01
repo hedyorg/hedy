@@ -1645,7 +1645,7 @@ class TestCustomAdventures(AuthHelper):
             'level': '5',
             'content': 'This is just long enough!',
             'public': True,
-            'language': 'en',}
+            'language': 'en', }
         self.post_data('for-teachers/customize-adventure', body, expect_http_code=404)
 
     def test_valid_update_adventure(self):
@@ -1666,7 +1666,7 @@ class TestCustomAdventures(AuthHelper):
             'level': '5',
             'content': 'This is just long enough!',
             'public': True,
-            'language': 'en',}
+            'language': 'en', }
         self.post_data('for-teachers/customize-adventure', body, expect_http_code=200)
 
     def test_valid_update_adventure_with_class(self):
