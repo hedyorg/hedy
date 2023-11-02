@@ -1,1 +1,3 @@
-Testing to see if this create a tile in the /contribute page.
+All our Contributing info can be found in [our wiki](https://github.com/hedyorg/hedy/wiki)https://github.com/hedyorg/hedy/wiki.
+
+Before you start, please consult the "before your first contribution" section of our Wiki. First contributions that are not linked to issues either labeled "good first issue" or "approved", or that do not link to any issues will be closed. We don't have the bandwidth to inspect pull requests that are not aligned with our goals. If you need any help getting started, the Wiki is the best place to start, and you can also always drop into the Discord! (in #programmers-general).

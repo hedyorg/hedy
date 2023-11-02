@@ -44,7 +44,7 @@ from website import (ab_proxying, achievements, admin, auth_pages, aws_helpers,
                      cdn, classes, database, for_teachers, s3_logger, parsons,
                      profile, programs, querylog, quiz, statistics,
                      translating)
-from website.auth import (current_user, is_admin, is_teacher, has_public_profile,
+from website.auth import (current_user, is_admin, is_teacher, is_second_teacher, has_public_profile,
                           login_user_from_token_cookie, requires_login, requires_login_redirect, requires_teacher,
                           forget_current_user)
 from website.log_fetcher import log_fetcher
@@ -401,7 +401,8 @@ if utils.is_heroku() and not os.getenv('HEROKU_RELEASE_CREATED_AT'):
 def enrich_context_with_user_info():
     user = current_user()
     data = {'username': user.get('username', ''),
-            'is_teacher': is_teacher(user), 'is_admin': is_admin(user), 'has_public_profile': has_public_profile(user)}
+            'is_teacher': is_teacher(user), 'is_second_teacher': is_second_teacher(user),
+            'is_admin': is_admin(user), 'has_public_profile': has_public_profile(user)}
     return data
 
 
@@ -956,7 +957,7 @@ def programs_page(user):
     filter = request.args.get('filter', default=None, type=str)
     submitted = True if filter == 'submitted' else None
 
-    result = DATABASE.filtered_programs_for_user(from_user or username,
+    result = DATABASE.filtered_programs_for_user({"username": from_user or username},
                                                  level=level,
                                                  adventure=adventure,
                                                  submitted=submitted,
@@ -1667,7 +1668,7 @@ def reset_page():
 @requires_login_redirect
 def profile_page(user):
     profile = DATABASE.user_by_username(user['username'])
-    programs = DATABASE.public_programs_for_user(user['username'])
+    programs = DATABASE.filtered_programs_for_user({"username": user['username'], "public": 1})
     public_profile_settings = DATABASE.get_public_profile_settings(current_user()['username'])
 
     classes = []
@@ -2282,9 +2283,9 @@ def public_user_page(username):
     user_public_info = DATABASE.get_public_profile_settings(username)
     page = request.args.get('page', default=None, type=str)
     if user_public_info:
-        user_programs = DATABASE.public_programs_for_user(username,
-                                                          limit=10,
-                                                          pagination_token=page)
+        user_programs = DATABASE.filtered_programs_for_user({"username": user['username'], "public": 1},
+                                                            limit=10,
+                                                            pagination_token=page)
         next_page_token = user_programs.next_page_token
         user_programs = normalize_public_programs(user_programs)
         user_achievements = DATABASE.progress_by_username(username) or {}

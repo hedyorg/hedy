@@ -468,14 +468,15 @@ class TestsLevel2(HedyTester):
         )
 
     def test_color_translated(self):
+        lang = 'nl'
         code = "kleur blauw"
-        expected = HedyTester.turtle_color_command_transpiled('blue')
+        expected = HedyTester.turtle_color_command_transpiled('blue', lang)
 
         self.multi_level_tester(
             code=code,
             expected=expected,
             extra_check_function=self.is_turtle(),
-            lang='nl',
+            lang=lang,
             max_level=10
         )
 
