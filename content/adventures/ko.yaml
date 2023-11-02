@@ -1238,12 +1238,12 @@ adventures:
                     `{for}`는 `{repeat}`와 `{if}`와 같은 블록을 생성하므로 블록의 모든 행은 4개의 공백으로 시작해야 한다.
                 example_code: |
                     ```
-                    animals {is} dog, cat, blobfish
+                    animals = dog, cat, blobfish
                     {for} animal {in} animals
                         {print} 'I love ' animal
                     ```
                 start_code: |-
-                    animals {is} dog, cat, blobfish
+                    animals = dog, cat, blobfish
                     {for} animal {in} animals
                         {print} 'I love ' animal
             11:
