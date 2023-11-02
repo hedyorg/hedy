@@ -927,13 +927,13 @@ adventures:
                     In dit level leer je een code waarmee dat wel kan! En nog een stuk gemakkelijker ook!
                 example_code: |
                     ```
-                    spel {is} 'aan'
+                    spel = 'aan'
                     {for} i {in} {range} 1 {to} 100
-                        {if} spel {is} 'aan'
+                        {if} spel == 'aan'
                             antwoord = {ask} 'Wil je doorspelen?'
-                            {if} antwoord {is} 'nee'
-                                spel {is} 'over'
-                            {if} antwoord {is} 'ja'
+                            {if} antwoord == 'nee'
+                                spel = 'over'
+                            {if} antwoord == 'ja'
                                 {print} 'Ok dan ga ik door'
                     ```
                 start_code: '{print} ''Op naar het volgende avontuur!'''

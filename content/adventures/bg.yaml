@@ -229,8 +229,8 @@ adventures:
                 start_code: '# place your code here'
             15:
                 story_text: |
-                    Using the `{while}` loop can make your stories more interesting. For example, you can use `{while} game {is} 'on'` so you can play until the game is over.
-                    Or you can use `{while} sword {is} 'lost'` so the player can't continu the game until they have found something.
+                    Using the `{while}` loop can make your stories more interesting. For example, you can use `{while} game == 'on'` so you can play until the game is over.
+                    Or you can use `{while} sword == 'lost'` so the player can't continu the game until they have found something.
                 example_code: |
                     ```
                     keys = 'lost'
@@ -908,13 +908,13 @@ adventures:
                     If the correct answer is never given, the loop never ends!
                 example_code: |
                     ```
-                    game {is} 'on'
+                    game = 'on'
                     {for} i {in} {range} 1 {to} 100
-                        {if} game {is} 'on'
+                        {if} game == 'on'
                             answer = {ask} 'Do you want to continue?'
-                            {if} answer {is} 'no'
-                                game {is} 'over'
-                            {if} answer {is} 'yes'
+                            {if} answer == 'no'
+                                game = 'over'
+                            {if} answer == 'yes'
                                 {print} 'Ok we will continue'
                     ```
                 start_code: |-
