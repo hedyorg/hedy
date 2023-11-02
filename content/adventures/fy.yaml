@@ -669,12 +669,6 @@ adventures:
         description: Calculator 2
         levels:
             14:
-                example_code: |
-                    ```
-                    # Use your own code from the previous adventure.
-                    ```
-                start_code: |
-                    # Use your own code from the previous adventure.
                 story_text: |
                     ## Exercise 2
                     **This is the second part of this adventure.** The adventure starts in the previous tab.
@@ -689,6 +683,12 @@ adventures:
                     ## Exercise 3
                     Did you want to make your program even better? Great! In the previous program you could only calculate the mean grade of 1 subject, but it would be better if you could calculate the mean grade for all subjects you want!
                     We won't tell you how to do it, but we will give you one tip: Start your code in line 1 with: define calculate_mean_grade with subject.
+                example_code: |
+                    ```
+                    # Use your own code from the previous adventure.
+                    ```
+                start_code: |
+                    # Use your own code from the previous adventure.
     clear_command:
         name: '{clear}'
         default_save_name: clear_command
@@ -1507,8 +1507,8 @@ adventures:
                 start_code: '# place your code here'
     functions:
         name: functions
-        description: functions
         default_save_name: functions
+        description: functions
         levels:
             12:
                 story_text: |
@@ -1630,8 +1630,8 @@ adventures:
                     {print} 'The new price is ' new_price ' dollar'
     guess_my_number:
         name: Guess my number
-        description: guess my number
         default_save_name: guess my number
+        description: guess my number
         levels:
             14:
                 story_text: |
@@ -1917,9 +1917,9 @@ adventures:
                     ```
                 start_code: '# place your code here'
     hotel:
-        name: "hotel"
-        description: hotel
+        name: hotel
         default_save_name: hotel
+        description: hotel
         levels:
             13:
                 story_text: |
@@ -4032,6 +4032,23 @@ adventures:
                         {color} {black}
                     ```
                 start_code: '# place your code here'
+            10:
+                story_text: |
+                    In this level you can make the turtle draw a figure.
+                    The turtle will travel the distances in the list, one by one, making bigger and bigger steps.
+                    ### Exercise 1
+                    Add a 90 degree turn in the loop, so that a spiral is drawn.
+                    Add at least 5 numbers to the list, so the spiral grows larger.
+                     **(extra)** can you change the spiral into another shape? Experiment with numbers for the turn!
+                    ### Exercise 2
+                    The spiral is drawn outwards, make it go inwards?
+                example_code: |
+                    ```
+                    {turn} 90
+                    distances = 10, 20, 30, 40, 50, 60
+                    {for} distance {in} distances
+                        {forward} distance
+                start_code: '# Write your code here'
             12:
                 story_text: |
                     We can use functions to draw more complex figures with less code.
@@ -4066,23 +4083,6 @@ adventures:
                     {call} square
                     {forward} 50
                     {call} square
-            10:
-                story_text: |
-                    In this level you can make the turtle draw a figure.
-                    The turtle will travel the distances in the list, one by one, making bigger and bigger steps.
-                    ### Exercise 1
-                    Add a 90 degree turn in the loop, so that a spiral is drawn.
-                    Add at least 5 numbers to the list, so the spiral grows larger.
-                     **(extra)** can you change the spiral into another shape? Experiment with numbers for the turn!
-                    ### Exercise 2
-                    The spiral is drawn outwards, make it go inwards?
-                example_code: |
-                    ```
-                    {turn} 90
-                    distances = 10, 20, 30, 40, 50, 60
-                    {for} distance {in} distances
-                        {forward} distance
-                start_code: '# Write your code here'
     while_command:
         name: '{while}'
         default_save_name: while_command

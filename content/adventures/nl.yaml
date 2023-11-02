@@ -685,12 +685,6 @@ adventures:
         description: Calculator 2
         levels:
             14:
-                example_code: |
-                    ```
-                    # Gebruik je eigen code van het vorige avontuur
-                    ```
-                start_code: |
-                    # Gebruik je eigen code van het vorige avontuur
                 story_text: |
                     ### Opdracht 2
                     **Dit is het vervolg op het vorige avontuur.** Het avontuur begint in het vorige tabje.
@@ -705,6 +699,12 @@ adventures:
                     ### Opdracht 3
                     Wil je het programma nog beter maken? Super! In het vorige programma kon je het gemiddelde cijfer berekenen van 1 vak, maar het zou beter zijn als dat voor meerdere vakken kon.
                     We verklappen niet hoe je dit kunt bouwen, maar we geven je wel een tip: Begin je code in regel 1 met '{define} bereken_gemiddelde_cijfer {with} vak.
+                example_code: |
+                    ```
+                    # Gebruik je eigen code van het vorige avontuur
+                    ```
+                start_code: |
+                    # Gebruik je eigen code van het vorige avontuur
     clear_command:
         name: '{clear}'
         default_save_name: clear_command
@@ -1486,8 +1486,8 @@ adventures:
                 start_code: '# Schrijf jouw code hier'
     functions:
         name: Functies
-        description: functions
         default_save_name: functions
+        description: functions
         levels:
             12:
                 story_text: |
@@ -1608,8 +1608,8 @@ adventures:
                     {print} 'De nieuwe prijs is ' nieuwe_prijs ' euro'
     guess_my_number:
         name: Raad mijn getal
-        description: guess my number
         default_save_name: guess my number
+        description: guess my number
         levels:
             14:
                 story_text: |
@@ -1901,9 +1901,9 @@ adventures:
                     ```
                 start_code: '# Schrijf jouw code hier'
     hotel:
-        name: "hotel"
-        description: hotel
+        name: hotel
         default_save_name: hotel
+        description: hotel
         levels:
             13:
                 story_text: |
@@ -3975,6 +3975,23 @@ adventures:
                         {color} {black}
                     ```
                 start_code: '# place your code here'
+            10:
+                story_text: |
+                    In this level you can make the turtle draw a figure.
+                    The turtle will travel the distances in the list, one by one, making bigger and bigger steps.
+                    ### Exercise 1
+                    Add a 90 degree turn in the loop, so that a spiral is drawn.
+                    Add at least 5 numbers to the list, so the spiral grows larger.
+                     **(extra)** can you change the spiral into another shape? Experiment with numbers for the turn!
+                    ### Exercise 2
+                    The spiral is drawn outwards, make it go inwards?
+                example_code: |
+                    ```
+                    {turn} 90
+                    afstanden = 10, 20, 30, 40, 50, 60
+                    {for} afstand {in} afstanden
+                        {forward} afstand
+                start_code: '# Write your code here'
             12:
                 story_text: |
                     We kunnen functies gebruiken om complexere figuren te tekenen met minder code.
@@ -4009,23 +4026,6 @@ adventures:
                     {call} vierkant
                     {forward} 50
                     {call} vierkant
-            10:
-                story_text: |
-                    In this level you can make the turtle draw a figure.
-                    The turtle will travel the distances in the list, one by one, making bigger and bigger steps.
-                    ### Exercise 1
-                    Add a 90 degree turn in the loop, so that a spiral is drawn.
-                    Add at least 5 numbers to the list, so the spiral grows larger.
-                     **(extra)** can you change the spiral into another shape? Experiment with numbers for the turn!
-                    ### Exercise 2
-                    The spiral is drawn outwards, make it go inwards?
-                example_code: |
-                    ```
-                    {turn} 90
-                    afstanden = 10, 20, 30, 40, 50, 60
-                    {for} afstand {in} afstanden
-                        {forward} afstand
-                start_code: '# Write your code here'
     while_command:
         name: '{while}'
         default_save_name: zolang

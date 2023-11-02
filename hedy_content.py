@@ -29,7 +29,7 @@ customize_babel_locale(CUSTOM_BABEL_LANGUAGES)
 KEYWORDS_ADVENTURES = {'print_command', 'ask_command', 'is_command', 'sleep_command', 'random_command',
                        'add_remove_command', 'quotation_marks', 'if_command', 'in_command', 'maths', 'repeat_command',
                        'repeat_command_2', 'for_command', 'and_or_command', 'while_command', 'elif_command',
-                       'clear_command', 'pressit', 'clear_command','functions'}
+                       'clear_command', 'pressit', 'clear_command', 'functions'}
 
 ADVENTURE_ORDER_PER_LEVEL = {
     1: [

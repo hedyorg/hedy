@@ -693,12 +693,6 @@ adventures:
         description: Calculator 2
         levels:
             14:
-                example_code: |
-                    ```
-                    # Use your own code from the previous adventure.
-                    ```
-                start_code: |
-                    # Use your own code from the previous adventure.
                 story_text: |
                     ## Exercise 2
                     **This is the second part of this adventure.** The adventure starts in the previous tab.
@@ -713,6 +707,12 @@ adventures:
                     ## Exercise 3
                     Did you want to make your program even better? Great! In the previous program you could only calculate the mean grade of 1 subject, but it would be better if you could calculate the mean grade for all subjects you want!
                     We won't tell you how to do it, but we will give you one tip: Start your code in line 1 with: define calculate_mean_grade with subject.
+                example_code: |
+                    ```
+                    # Use your own code from the previous adventure.
+                    ```
+                start_code: |
+                    # Use your own code from the previous adventure.
     clear_command:
         name: '{clear}'
         default_save_name: comando_limpiar
@@ -1480,8 +1480,8 @@ adventures:
                 start_code: '# pon tu código aquí'
     functions:
         name: functions
-        description: functions
         default_save_name: functions
+        description: functions
         levels:
             12:
                 story_text: |
@@ -1603,8 +1603,8 @@ adventures:
                     {print} 'The new price is ' new_price ' dollar'
     guess_my_number:
         name: Guess my number
-        description: guess my number
         default_save_name: guess my number
+        description: guess my number
         levels:
             14:
                 story_text: |
@@ -1888,9 +1888,9 @@ adventures:
                     ```
                 start_code: '# pon tu código aquí'
     hotel:
-        name: "hotel"
-        description: hotel
+        name: hotel
         default_save_name: hotel
+        description: hotel
         levels:
             13:
                 story_text: |
@@ -3968,6 +3968,23 @@ adventures:
                         {color} {black}
                     ```
                 start_code: '# pon tu código aquí'
+            10:
+                story_text: |
+                    En este nivel puedes hacer que la tortuga dibuje una figura.
+                    La tortuga recorrerá las distancias de la lista, una a una, dando pasos cada vez más grandes.
+                    ### Ejercicio 1
+                    Añade un giro de 90 grados en el bucle, de forma que se dibuje una espiral.
+                    Añade al menos 5 números a la lista, para que la espiral se haga más grande.
+                    **(extra)** ¿Puedes cambiar la espiral a otra forma? ¡Experimenta con los números para el giro!
+                    ### Ejercicio 2
+                    La espiral está dibujada hacia fuera, ¿haz que vaya hacia dentro?
+                example_code: |
+                    ```
+                    {turn} 90
+                    distancias = 10, 20, 30, 40, 50, 60
+                    {for} distancia {in} distancias
+                        {forward} distancia
+                start_code: '# Write your code here'
             12:
                 story_text: |
                     We can use functions to draw more complex figures with less code.
@@ -4002,23 +4019,6 @@ adventures:
                     {call} square
                     {forward} 50
                     {call} square
-            10:
-                story_text: |
-                    En este nivel puedes hacer que la tortuga dibuje una figura.
-                    La tortuga recorrerá las distancias de la lista, una a una, dando pasos cada vez más grandes.
-                    ### Ejercicio 1
-                    Añade un giro de 90 grados en el bucle, de forma que se dibuje una espiral.
-                    Añade al menos 5 números a la lista, para que la espiral se haga más grande.
-                    **(extra)** ¿Puedes cambiar la espiral a otra forma? ¡Experimenta con los números para el giro!
-                    ### Ejercicio 2
-                    La espiral está dibujada hacia fuera, ¿haz que vaya hacia dentro?
-                example_code: |
-                    ```
-                    {turn} 90
-                    distancias = 10, 20, 30, 40, 50, 60
-                    {for} distancia {in} distancias
-                        {forward} distancia
-                start_code: '# Write your code here'
     while_command:
         name: '{while}'
         default_save_name: comando_mientras
