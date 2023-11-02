@@ -21,13 +21,13 @@ levels:
     2:
         1:
             story: |-
-                Tes amis et toi allez regarder un film sur Netflix.
-                Affiche le titre du film que vous allez regarder et souhaite un bon visionnage !
+                Tes amis et toi aller faire une soirée télé avec Hedy.
+                Demande à Hedy d'afficher le titre du film puis de vous souhaiter une bonne soirée !
             code: |-
-                {print} C'est l'heure d'une soirée ciné !
+                {print} C'est l'heure du film du soir sur TV Hedy !
                 film {is} Sonic le hérisson 2
-                {print} Nous allons regarder film
-                {print} On va bien s'amuser !
+                {print} Vous pourrez voir film
+                {print} Amusez-vous bien !
         2:
             story: Ceci est la boutique en ligne d'un magasin de jouets. Crée un programme où les clients peuvent ajouter un jouet dans leur panier.
             code: |-
@@ -38,17 +38,16 @@ levels:
     3:
         1:
             story: |-
-                C'est la rentrée à Poudlard !
-                Le Choixpeau magique va décider de la maison qui t'accueillera.
-                Dans quelle maison iras-tu ?
-                Es-tu plutôt Gryffondor, Poufsouffle, Serdaigle, ou Serpentard ?
-                Laisse le programme faire une petite pause avant de dévoiler ta maison.
+                C'est la rentrée à Poudlard !
+                C'est le Choixpeau magique qui décide de la maison qui t'accueillera.
+                Dans quelle maison iras-tu ? Es-tu plutôt Gryffondor, Poufsouffle, Serdaigle, ou Serpentard ?
+                Avant que le Choixpeau ne révèle ta maison, tu peux lui dire de ne pas choisir une des maisons.
             code: |-
-                {print} Une nouvelle année commence à Poudlard !
-                {print} Le Choipeaux magique va décider de la maison qui t'accueillera.
-                la_maison {is} Gryffondor, Poufsouffle, Serdaigle, ou Serpentard
-                {sleep} 2
-                {print} Et c'est la_maison {at} {random}
+                {print} Le Choixpeaux magique est prêt à choisir ta maison à Poudlard.
+                maisons {is} Gryffondor, Poufsouffle, Serdaigle, Serpentard
+                refusée {is} {ask} Y a-t-il une maison que tu ne veux pas ?
+                {remove} refusée {from} maisons
+                {print} pas refusée hein ? Alors ce sera… maisons {at} {random}
         2:
             story: Écris un programme qui te choisit un plat au hasard. Crée une liste d'aliments et une liste de garnitures et laisse le programme décider pour toi !
             code: |-
@@ -73,39 +72,39 @@ levels:
     4:
         1:
             story: |-
-                Tu es le plus jeune entraineur Pokémon de Pallet Town !
-                Fais un programme qui sélectionne ton premier Pokémon.
-                Laisse attendre le programme une minute avant de révéler ton premier Pokémon.
+                Tu es le plus jeune entraineur Pokémon de Bourg Palette !
+                Écrit un programme qui sélectionne ton premier Pokémon.
+                Fais attendre le programme une seconde avant de révéler ton premier Pokémon.
             code: |-
                 pokemons {is} Pikachu, Salamèche, Bulbizarre, Carapuce
-                {print} 'Ça va être ton premier pokémon!'
+                {print} "Ton premier Pokémon sera…"
                 {sleep}
                 {print} pokemons {at} {random}
         2:
-            story: Create a lottery that lets you choose an extra price that you might win.
+            story: Crée une loterie qui te laisse choisir un prix supplémentaire que tu pourrais gagner.
             code: |-
-                lots {is} voiture, hamster, 1 million d'euros
+                lots {is} une voiture, un hamster, 1 million d'euros
                 lot {is} {ask} "Qu'est-ce que tu veux gagner ?"
                 {add} lot {to_list} lots
-                {print} 'Tu as gagné un.e ' lots {at} {random}
+                {print} "Tu as gagné " lots {at} {random}
     5:
         1:
             story: |-
-                Make a program that checks if your favourite movie is already in the list of the computer.
-                If so, print that you have great taste, otherwise add the movie to the list.
+                Fait un programme qui vérifie si ton film préféré est déjà dans la liste de l'ordinateur.
+                Si c'est le cas, affiche que tu as bon goût, sinon ajoute le film à la liste.
             code: |-
-                films_préférés {is} Batman, Spiderman, Les Avengers, Jurassic Park
-                film {is} {ask} 'Quel est ton film préféré?'
-                {if} film {in} films_préférés {print} 'Tu as de bon goûts!'
-                {else} {print} "Quel dommage que ton film préféré ne soit pas dans la liste, nous allons l'ajouter tout de suite!"
-                {add} film {to_list} films_préférés
+                films {is} Batman, Spiderman, Les Avengers, Jurassic Park
+                film_préféré {is} {ask} "Quel est ton film préféré ?"
+                {if} film_préféré {in} films {print} "Tu as bon goût !"
+                {else} {print} "Quel dommage que ton film préféré ne soit pas dans la liste, ajoutons-le tout de suite !"
+                {add} film_préféré {to_list} films
         2:
-            story: Create a maths game.
+            story: Crée un jeu de maths.
             code: |-
-                {print} 'Résout de problème'
-                réponse {is} {ask} '88 - 16 = ?'
-                {if} réponse {is} 72 {print} 'Correct!'
-                {else} {print} 'Faux ! La réponse était 72'
+                {print} "Résout ce problème"
+                réponse {is} {ask} "88 - 16 = ?"
+                {if} réponse {is} 72 {print} "Correct !"
+                {else} {print} "Faux ! La réponse était 72"
     6:
         1:
             story: |-

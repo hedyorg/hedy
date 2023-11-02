@@ -25,17 +25,17 @@
         {turn} {right}
 2:
 -   name: '{is}'
-    explanation: Donne un nom à un mot que tu peux utiliser dans le programme avec `{is}`.
+    explanation: Donne à un mot, un nom à utiliser dans le programme avec `{is}`. Tu peux choisir le nom toi-même.
     demo_code: |-
         nom {is} Hedy
         {print} bienvenue nom
 -   name: '{ask}'
-    explanation: Demande quelque chose avec `{ask}`. Attention ! Tu dois donner à la réponse un nom avec `{is}`.
+    explanation: Demande quelque chose avec `{ask}`. Attention ! Tu dois donner à la réponse un nom avec `{is}`.
     demo_code: |-
         couleur {is} {ask} Quelle est ta couleur préférée ?
         {print} couleur est ton préféré !
 -   name: '{sleep}'
-    explanation: '`{sleep}` Laissez Hedy faire une pause d''une (ou deux) seconde(s).'
+    explanation: Avec `{sleep}`, tu peux demander à Hedy de faire une pause d'une (ou plusieurs) seconde(s).
     demo_code: |-
         {print} Laissez-moi réfléchir une seconde...
         {sleep}
@@ -43,7 +43,7 @@
         {sleep} 3
         {print} Eureka ! Je l'ai eu !
 -   name: '{is}  avec tortue'
-    explanation: Donnez un nom à un numéro en utilisant `{is}`. Tu peux choisir le nom toi-même.
+    explanation: Donnez un nom à un nombre en utilisant `{is}`. Tu peux choisir le nom toi-même.
     demo_code: |-
         angle {is} 90
         {turn} angle
@@ -66,7 +66,7 @@
         {remove} chien {from} animaux
 4:
 -   name: '{print}'
-    explanation: Afficher exactement ce qui est entre les guillemets.
+    explanation: Affiche exactement ce qui est entre les guillemets.
     demo_code: '{print} ''Bonjour et bienvenue à Hedy.'''
 -   name: '{is}'
     explanation: Donne un nom à un texte et  `{print}` le sans guillemets.
@@ -111,15 +111,15 @@
     explanation: Affiche exactement ce qui est entre les guillemets.
     demo_code: '{print} ''5 fois 5 font '' 5 * 5'
 -   name: '{ask}'
-    explanation: Demandes un calcul et vérifies si elle est correcte.
+    explanation: Demandes un calcul et vérifie s'il est correcte.
     demo_code: |-
         reponse = {ask} 'Combien font 10 plus 10?'
         {if} reponse {is} 20 {print} 'Oui!' {else} {print} 'Oups'
 -   name: '`{ask}` et `{if}` avec la tortue'
-    explanation: Ask the user how many angles they want.
+    explanation: Demande à l'utilisateur combien il veut de sommets.
     demo_code: |-
-        angles = {ask} 'Nombres angles?'
-        angle = 360 / angles
+        nombre_sommets = {ask} "Nombre de sommets"
+        angle = 360 / nombre_sommets
         {forward} 50
 7:
 -   name: '{print}'
@@ -307,20 +307,20 @@
 -   name: crochets
     explanation: Liste avec des crochets.
     demo_code: |-
-        fruits = ['pomme', 'banane', 'cerise']
+        fruits = ["pomme", "banane", "cerise"]
         {print} fruits
 -   name: Obtenir un élément d'une liste
-    explanation: 'Pour obtenir un élément d''une liste, on utilise [nombre] donc fruits[1] signifie : obtenir le premier fruit de la liste !'
+    explanation: 'Pour obtenir un élément d''une liste, on utilise [nombre] donc fruits[1] signifie : obtenir le premier fruit de la liste !'
     demo_code: |-
-        fruits = ['banane', 'pomme', 'cerise']
-        premierfruit = fruits[1]
-        {print} premierfruit
--   name: Obtenir un élément aléatoire dans une liste
-    explanation: 'Pour obtenir un élément aléatoire d''une liste, on utilise [aléatoire] donc fruits[aléatoire] signifie : obtenir un fruit aléatoire de la liste !'
+        fruits = ["banane", "pomme", "cerise"]
+        premier_fruit = fruits[1]
+        {print} premier_fruit
+-   name: Obtenir un élément au hasard dans une liste
+    explanation: 'Pour obtenir un élément au hasard dans une liste, on utilise [{random}] donc fruits[{random}] signifie : obtenir un fruit au hasard de la liste !'
     demo_code: |-
-        fruits = ['banane', 'pomme', 'cerise']
-        fruit_aleatoire = fruits[{random}]
-        {print} fruit_aleatoire
+        fruits = ["banane", "pomme", "cerise"]
+        fruit_aléatoire = fruits[{random}]
+        {print} fruit_aléatoire
 17:
 -   name: '{elif}'
     explanation: '`{elif}`'

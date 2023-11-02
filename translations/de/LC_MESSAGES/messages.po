@@ -1,18 +1,5 @@
-
 msgid ""
-msgstr ""
-"Project-Id-Version: PACKAGE VERSION\n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-10-02 19:31+0530\n"
-"PO-Revision-Date: 2023-09-23 08:40+0000\n"
-"Last-Translator: Anonymous <noreply@weblate.org>\n"
-"Language: de\n"
-"Language-Team: de <LL@li.org>\n"
-"Plural-Forms: nplurals=2; plural=n != 1;\n"
-"MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=utf-8\n"
-"Content-Transfer-Encoding: 8bit\n"
-"Generated-By: Babel 2.12.1\n"
+msgstr "Project-Id-Version: PACKAGE VERSION\nReport-Msgid-Bugs-To: \nPOT-Creation-Date: 2023-10-02 19:31+0530\nPO-Revision-Date: 2023-10-29 16:06+0000\nLast-Translator: Vanessa Lewecke <vanessa-lewecke@gmx.de>\nLanguage-Team: de <LL@li.org>\nLanguage: de\nMIME-Version: 1.0\nContent-Type: text/plain; charset=utf-8\nContent-Transfer-Encoding: 8bit\nPlural-Forms: nplurals=2; plural=n != 1;\nX-Generator: Weblate 5.2-dev\nGenerated-By: Babel 2.12.1\n"
 
 msgid "Access Before Assign"
 msgstr ""
@@ -21,9 +8,7 @@ msgstr ""
 "gesetzt. Setze eine Variable bevor du sie benutzt."
 
 msgid "Cyclic Var Definition"
-msgstr ""
-"Der Name {variable} muss gesetzt werden bevor du ihn auf der rechten "
-"Seite eines Befehls verwenden kannst."
+msgstr "Der Name {variable} muss gesetzt werden, bevor du ihn auf der rechten Seite des {is} Befehls verwenden kannst."
 
 msgid "Has Blanks"
 msgstr ""
@@ -108,9 +93,7 @@ msgstr ""
 "neuen Block mit {indent_size} Leerzeichen mehr als in der Zeile zuvor."
 
 msgid "Parse"
-msgstr ""
-"Dein Programm ist keine gültige Hedy-Sprache. In Zeile {location[0]} an "
-"Position {location[1]} ist ein kleiner Fehler."
+msgstr "Dein Programm ist keine gültige Hedy-Sprache. In Zeile {location[0]} an Position {location[1]} ist ein kleiner Fehler. Du hast {character_found} geschrieben, aber das ist nicht erlaubt."
 
 msgid "Pressit Missing Else"
 msgstr ""
@@ -130,9 +113,7 @@ msgstr ""
 " Block mit {indent_size} Leerzeichen mehr als in der Zeile zuvor."
 
 msgid "Unquoted Assignment"
-msgstr ""
-"Ab diesem Level musst du rechts neben einem `is` Befehl den Text in "
-"einfache Anführungszeichen setzen. Du hast das für {text} vergessen."
+msgstr "Ab diesem Level musst du rechts neben einem {is} Befehl den Text in einfache Anführungszeichen setzen. Du hast das für den Text {text} vergessen."
 
 msgid "Unquoted Equality Check"
 msgstr ""
@@ -154,7 +135,7 @@ msgid "Unsupported String Value"
 msgstr "Text-Werte dürfen kein {invalid_value} enthalten."
 
 msgid "Var Undefined"
-msgstr "Du hast versucht {name} auszugeben, aber du hast es nicht angelegt."
+msgstr "Du hast versucht {name} auszugeben, aber du hast es nicht angelegt. Es ist auch möglich, dass du versucht hast, {name} zu nutzen, aber die Anführungszeichen vergessen hast."
 
 msgid "Wrong Level"
 msgstr ""
@@ -261,9 +242,6 @@ msgstr "vor {timestamp}"
 msgid "agree_invalid"
 msgstr "Du musst den Privatsphäre-Bedingungen zustimmen."
 
-msgid "agree_third_party"
-msgstr ""
-
 msgid "agree_with"
 msgstr "Ich stimme zu"
 
@@ -323,9 +301,8 @@ msgstr "von"
 msgid "cancel"
 msgstr "Abbrechen"
 
-#, fuzzy
 msgid "cant_parse_exception"
-msgstr "Couldn't parse the program"
+msgstr "Das Programm konnte nicht analysiert werden"
 
 msgid "catch_index_exception"
 msgstr ""
@@ -350,9 +327,8 @@ msgstr "Du bist schon in dieser Klasse"
 msgid "class_customize_success"
 msgstr "Klasse erfolgreich angepasst."
 
-#, fuzzy
 msgid "class_live"
-msgstr "Live statistics"
+msgstr "Live-Statistiken"
 
 msgid "class_name_duplicate"
 msgstr "Du hast bereits eine Klasse mit diesem Namen."
@@ -366,9 +342,8 @@ msgstr "Dieser Klassenname ist ungültig."
 msgid "class_name_prompt"
 msgstr "Bitte gib den Namen der Klasse ein"
 
-#, fuzzy
 msgid "class_overview"
-msgstr "Class overview"
+msgstr "Kursübersicht"
 
 msgid "close"
 msgstr "Schließen"
@@ -376,20 +351,17 @@ msgstr "Schließen"
 msgid "comma"
 msgstr "ein Komma"
 
-#, fuzzy
 msgid "command_not_available_yet_exception"
-msgstr "Command not available yet"
+msgstr "Befehl noch nicht verfügbar"
 
-#, fuzzy
 msgid "command_unavailable_exception"
-msgstr "Command not correct anymore"
+msgstr "Befehl nicht mehr korrekt"
 
 msgid "commands"
 msgstr "Befehle"
 
-#, fuzzy
 msgid "common_errors"
-msgstr "Common errors"
+msgstr "Häufige Fehler"
 
 msgid "congrats_message"
 msgstr "Herzlichen Glückwunsch, {username}, Du hast Hedy abgeschlossen!"
@@ -562,10 +534,7 @@ msgid "echo_and_ask_mismatch_exception"
 msgstr "Echo and ask mismatch"
 
 msgid "echo_out"
-msgstr ""
-"Ab Level 2 wird {echo} nicht mehr gebraucht. Du kannst jetzt eine Antwort"
-" mit {aks} und {print} wiedergeben. Beispiel: Name ist {ask} Wie heißt "
-"Du? {print} Hallo Name"
+msgstr "Ab Level 2 wird {echo} nicht mehr gebraucht. Du kannst jetzt eine Antwort mit {ask} und {print} wiedergeben. Beispiel: Name {is} {ask} Wie heißt Du? {print} Hallo Name"
 
 msgid "edit_code_button"
 msgstr "Programm ändern"
@@ -633,9 +602,8 @@ msgstr "Entdecke die Programme"
 msgid "explore_programs_logo_alt"
 msgstr "Entdecke Programme Symbol"
 
-#, fuzzy
 msgid "favorite_program"
-msgstr "Favorite program"
+msgstr "Lieblingsprogramm"
 
 msgid "favourite_confirm"
 msgstr "Bist du dir sicher, dieses Programm als Lieblingsprogramm einzustellen?"
@@ -787,9 +755,8 @@ msgstr "Ich werde noch ein wenig weiter dran arbeiten"
 msgid "image_invalid"
 msgstr "Das gewählte Bild ist ungültig."
 
-#, fuzzy
 msgid "incomplete_command_exception"
-msgstr "Incomplete Command"
+msgstr "Unvollständiges Kommando"
 
 #, fuzzy
 msgid "incorrect_handling_of_quotes_exception"
@@ -799,9 +766,8 @@ msgstr "Incorrect handling of quotes"
 msgid "incorrect_use_of_types_exception"
 msgstr "Incorrect use of types"
 
-#, fuzzy
 msgid "incorrect_use_of_variable_exception"
-msgstr "Incorrect use of variable"
+msgstr "Falsche Nutzung von Variablen"
 
 #, fuzzy
 msgid "indentation_exception"
@@ -816,9 +782,26 @@ msgstr "eine ganze Zahl"
 msgid "invalid_class_link"
 msgstr "Ungültiger Link zum Beitreten zu einer Klasse."
 
-#, fuzzy
 msgid "invalid_command_exception"
-msgstr "Invalid command"
+msgstr "Ungültiges Kommando"
+
+#, fuzzy
+msgid "invalid_keyword_language_comment"
+msgstr ""
+"# The provided keyword language is invalid, keyword language is set to "
+"English"
+
+#, fuzzy
+msgid "invalid_language_comment"
+msgstr "# The provided language is invalid, language set to English"
+
+#, fuzzy
+msgid "invalid_level_comment"
+msgstr "# The provided level is invalid, level is set to level 1"
+
+#, fuzzy
+msgid "invalid_program_comment"
+msgstr "# The provided program is invalid, please try again"
 
 msgid "invalid_teacher_invitation_code"
 msgstr ""
@@ -843,6 +826,9 @@ msgstr "Du hast eine Einladung zu einer Klasse erhalten"
 msgid "invite_prompt"
 msgstr "Nutzernamen eingeben"
 
+msgid "invite_teacher"
+msgstr ""
+
 msgid "join_class"
 msgstr "Klasse beitreten"
 
@@ -854,9 +840,8 @@ msgstr ""
 "Bitte wähle eine gültige Schlüsselwortsprache (wähle Englisch oder deine "
 "eigene Sprache)."
 
-#, fuzzy
 msgid "language"
-msgstr "Language"
+msgstr "Sprache"
 
 msgid "language_invalid"
 msgstr "Bitte wähle eine gültige Sprache."
@@ -870,16 +855,14 @@ msgstr "Zuletzt verdiente Errungenschaft"
 msgid "last_edited"
 msgstr "Zuletzt geändert"
 
-#, fuzzy
 msgid "last_error"
-msgstr "Last error"
+msgstr "Letzter Fehler"
 
 msgid "last_login"
 msgstr "Zuletzt eingeloggt"
 
-#, fuzzy
 msgid "last_program"
-msgstr "Last program"
+msgstr "Letztes Programm"
 
 msgid "last_update"
 msgstr "Letztes Update"
@@ -1069,9 +1052,8 @@ msgstr "Meine Klassen"
 msgid "my_messages"
 msgstr "Meine Nachrichten"
 
-#, fuzzy
 msgid "my_public_profile"
-msgstr "My public profile"
+msgstr "Mein öffentliches Profil"
 
 msgid "name"
 msgstr "Name"
@@ -1095,7 +1077,7 @@ msgid "new_password"
 msgstr "Neues Passwort"
 
 msgid "new_password_repeat"
-msgstr ""
+msgstr "Wiederhole das neue Passwort"
 
 msgid "newline"
 msgstr "eine neue Zeile"
@@ -1322,9 +1304,8 @@ msgstr ""
 msgid "program_header"
 msgstr "Meine Programme"
 
-#, fuzzy
 msgid "program_too_large_exception"
-msgstr "Programs too large"
+msgstr "Programme zu groß"
 
 msgid "programming_experience"
 msgstr "Hast du schon mal programmiert?"
@@ -1409,6 +1390,9 @@ msgstr ""
 msgid "remove_student_prompt"
 msgstr "Soll der/die Schüler*in aus der Klasse entfernt werden?"
 
+msgid "remove_user_prompt"
+msgstr ""
+
 msgid "repair_program_logo_alt"
 msgstr "Repariere Programm Symbol"
 
@@ -1459,6 +1443,9 @@ msgstr "Du darfst dieses Abenteuer nicht sehen!"
 msgid "retrieve_class_error"
 msgstr "Nur Lehrpersonen können Klassen laden"
 
+msgid "role"
+msgstr ""
+
 msgid "run_code_button"
 msgstr "Programm ausführen"
 
@@ -1490,6 +1477,15 @@ msgstr "Suche..."
 
 msgid "search_button"
 msgstr "Suche"
+
+msgid "second_teacher"
+msgstr ""
+
+msgid "second_teacher_prompt"
+msgstr ""
+
+msgid "second_teacher_warning"
+msgstr ""
 
 msgid "see_certificate"
 msgstr "Zertifikat für {username} ansehen!"
@@ -1579,6 +1575,9 @@ msgstr "Programm stoppen"
 msgid "string"
 msgstr "Text"
 
+msgid "student"
+msgstr ""
+
 msgid "student_already_in_class"
 msgstr "Diese(r) Schüler(in) ist bereits in deiner Klasse."
 
@@ -1588,9 +1587,8 @@ msgstr "Diese(r) Schüler(in) hat bereits eine ausstehende Einladung."
 msgid "student_details"
 msgstr ""
 
-#, fuzzy
 msgid "student_list"
-msgstr "Student list"
+msgstr "Studentenliste"
 
 msgid "student_not_existing"
 msgstr "Dieser Nutzername existiert nicht."
@@ -1661,6 +1659,9 @@ msgstr ""
 "Willkommen bei Hedy! Du bist nun eine stolze BesitzerIn eines LehrerIn "
 "Kontos, welches dir erlaubt Klassen zu erstellen und Schüler einzuladen."
 
+msgid "teachers"
+msgstr ""
+
 msgid "template_code"
 msgstr ""
 "Dies ist die Erklärung zu meinem Abenteuer!\n"
@@ -1688,9 +1689,8 @@ msgstr "Hedy - Administratorseite"
 msgid "title_class grid_overview"
 msgstr "Hedy - Gitterübersicht"
 
-#, fuzzy
 msgid "title_class live_statistics"
-msgstr "Hedy - Live Statistics"
+msgstr "Hedy - Echtzeitstatistiken"
 
 msgid "title_class-overview"
 msgstr "Hedy - Klassenüberblick"
@@ -1755,9 +1755,8 @@ msgstr ""
 msgid "translating_hedy"
 msgstr "Hedy übersetzen"
 
-#, fuzzy
 msgid "translator"
-msgstr "Translator"
+msgstr "Übersetzer"
 
 msgid "try_it"
 msgstr "Probier es aus"
@@ -1766,9 +1765,7 @@ msgid "tutorial"
 msgstr "Anleitung"
 
 msgid "tutorial_code_snippet"
-msgstr ""
-"print Hallo Welt!\n"
-"print Ich lerne Hedy mit dem Hedy-Tutorial!"
+msgstr "{print} Hallo Welt!\n{print} Ich lerne Hedy mit dem Hedy-Tutorial!"
 
 msgid "tutorial_message_not_found"
 msgstr "Der angefragt Tutorial-Schritt konnte nicht gefunden werden…"
@@ -1811,9 +1808,8 @@ msgstr "Öffentliches Profil-Update"
 msgid "updating_indicator"
 msgstr "Updatet"
 
-#, fuzzy
 msgid "use_of_blanks_exception"
-msgstr "Use of blanks in programs"
+msgstr "Nutzung von Leerzeichen in Programmen"
 
 #, fuzzy
 msgid "use_of_nested_functions_exception"
@@ -1861,9 +1857,8 @@ msgstr "Willkommen"
 msgid "welcome_back"
 msgstr "Willkommen zurück"
 
-#, fuzzy
 msgid "what_is_your_role"
-msgstr "What is your role?"
+msgstr "Was ist deine Rolle?"
 
 msgid "what_should_my_code_do"
 msgstr "Was soll mein Code tun?"
@@ -2058,4 +2053,3 @@ msgstr "Dein Programm"
 
 #~ msgid "title_class statistics"
 #~ msgstr "Meine Statistiken"
-

@@ -6,7 +6,7 @@ adventures:
         levels:
             1:
                 story_text: |
-                    在第1级中你可以自己添加角色创作一个有不同主角的故事动画。。
+                    在第1级中你可以自己添加角色创作一个有不同主角的故事动画。
 
                     在第一行，使用`{ask}`，问谁是故事的主角。
 
@@ -45,14 +45,13 @@ adventures:
                     {print} 名字 害怕这个森林里面闹鬼
                     ```
                 story_text_2: |
-                    ### 练习
-                    现在是时候给你在上一关中制作的自己的故事添加变量了。
-                    进入 "我的程序"，寻找你的第1关故事冒险，复制代码。把代码粘贴到本关的输入屏幕中。
-
+                    ###练习
+                    现在是时候将变量添加到你在前一个关卡中创造的故事中了。
+                    转到“我的程序”，寻找你的1级故事冒险并复制代码。将代码粘贴到这个关卡的输入屏幕上。
                     这段代码在本关不会起作用，因为你还没有使用变量。
                     把你代码中的`{ask}`命令和`{echo}`命令改成你在本关学到的正确形式。
 
-                    **另外**在你的代码中添加一个睡眠命令，在你的故事中建立起紧张感。
+                    **另外**在你的代码中添加一个`{sleep}`命令，在你的故事中建立起紧张感。
                 start_code: '{print} 你的故事'
             3:
                 story_text: |
@@ -89,8 +88,8 @@ adventures:
                     ```
                 start_code: '{print} 你的故事'
             4:
-                story_text: "你可能注意到了，在之前的级别里还有个问题。你有没有试过打印含有“名字”这个词的句子？即：`{print}` 我的名字是名字。\n在这一级里你可以解决这个问题。你必须给所有需要打印的东西加上引号。\n\n### 练习1\n复制示例代码并通过添加引号来使其正常工作。 \n\n### 练习 2 \n返回到上一个级别并复制故事代码。通过在正确的位置添加引号，使代码在此级别中正常工作。 \n注意：你自己故事中的变量应该在引号之外。就像范例代码的第二行一样。在该行中，变量名称放在引号之外。\n"
-                example_code: "```\n名字 {is} {ask}_你的名字是什么? _\n{print}     _ 主人公的名字是_名字 \n{print} 名字     _正准备走进树林_\n{print} 名字 _有点害怕'\n动物们 {is} \U0001F994, \U0001F43F, \U0001F989, \U0001F987\n{print} _他听到了一个_ 动物们{at} {random} 的声音\n{print} 名字_担心这片森林闹鬼_\n```\n"
+                story_text: "你可能注意到了，在之前的级别里还有个问题。你有没有试过打印含有“名字”这个词的句子？即：`{print}` 我的名字是名字。\n 在这一级里你可以解决这个问题。你必须给所有需要打印的东西加上引号。\n\n### 练习1\n复制示例代码并通过添加引号来使其正常工作。 \n\n ### 练习 2 \n返回到上一个级别并复制故事代码。通过在正确的位置添加引号，使代码在此级别中正常工作。 \n注意：你自己故事中的变量应该在引号之外。就像范例代码的第二行一样。在该行中，变量名称放在引号之外。\n"
+                example_code: "```\n名字 {is} {ask}_你的名字是什么? _\n{print}     _ 主人公的名字是_名字 \n {print} 名字     _正准备走进树林_\n{print} 名字 _有点害怕'\n动物们 {is} \U0001F994, \U0001F43F, \U0001F989, \U0001F987\n{print} _他听到了一个_ 动物们{at} {random} 的声音\n{print} 名字_担心这片森林闹鬼_\n```\n"
                 start_code: '{print} ''你的故事会打印在这里！'''
             5:
                 story_text: |
@@ -119,7 +118,7 @@ adventures:
                     ```
                 start_code: '{print} ''你的故事从这里开始！'''
             7:
-                story_text: "在故事里，有人会重复同一个词好几次。比如，当有人在呼救或者唱歌。\n在这一级，你可以通过`{repeat}`在故事中加入这种重复。\n\n### 练习 \n在你自己的故事中加入重复的内容。返回你保存的程序中，选择第6级的故事程序，找到一个包含`{print}` 的行，然后重复它！\n"
+                story_text: "在故事里，有人会重复同一个词好几次。比如，当有人在呼救或者唱歌。\n在这一级，你可以通过`{repeat}`在故事中加入这种重复。\n \n### 练习 \n在你自己的故事中加入重复的内容。返回你保存的程序中，选择第6级的故事程序，找到一个包含`{print}` 的行，然后重复它！\n"
                 example_code: |
                     ```
                     {print} '王子不断地呼救'
@@ -128,7 +127,7 @@ adventures:
                     ```
                 start_code: '{repeat} 5 {times} {print} ''救命！'''
             8:
-                story_text: "在这一级中，你可以在你的{if} 条件语句中使用多行，这样你就可以升级你的好的或坏的结局！\n\n### 练习1\n代码范例中显示了两种不同的结局；一种是主人公跳上时光机，另一种是没有跳上时光机。\n每个结局都至少需要用一个句子完成空格。 \n**（额外的）**使故事更长。故事中会发生什么？您还可以添加具有不同选项的第二个 `{ask}`\n\n### 练习2\n返回你保存的程序中，从第5级选择你的故事程序。现在写一个好的和一个坏的结局，每个结局至少有三行长! \n"
+                story_text: "在这一级中，你可以在你的{if} 条件语句中使用多行，这样你就可以升级你的好的或坏的结局！\n\n### 练习1\n代码范例中显示了两种不同的结局；一种是主人公跳上时光机，另一种是没有跳上时光机。\n 每个结局都至少需要用一个句子完成空格。 \n**（额外的）**使故事更长。故事中会发生什么？您还可以添加具有不同选项的第二个 `{ask}`\n \n### 练习2\n返回你保存的程序中，从第5级选择你的故事程序。现在写一个好的和一个坏的结局，每个结局至少有三行长! \n"
                 example_code: |
                     ```
                     {print} '哦，不！霸王龙来了！'
@@ -142,7 +141,7 @@ adventures:
                     ```
                 start_code: '# 在这里写你的代码'
             9:
-                story_text: "在这一级，你可以通过嵌套，在一个 `{if}`和`{repeat}` 语句里包含其它 `{if}`和`{repeat}`语句。\n这让你有了很多选择，极大地提高了故事地互动性。\n\n### 练习1 \n完成代码，使`{if}` 能正常工作。 \n\n### 练习2 \n为故事中罗宾也回家的部分添加一个`{if}` 和`{else}`语句 。 \n\n### 练习3 \n回到你第8级的故事中，在另一个`{if}` 条件语句里面至少使用两个`{if}`条件语句。\n"
+                story_text: "在这一级，你可以通过嵌套，在一个 `{if}`和`{repeat}` 语句里包含其它 `{if}`和`{repeat}`语句。\n 这让你有了很多选择，极大地提高了故事地互动性。\n\n### 练习1 \n完成代码，使`{if}` 能正常工作。 \n\n### 练习2 \n 为故事中罗宾也回家的部分添加一个`{if}` 和`{else}`语句 。 \n\n### 练习3 \n回到你第8级的故事中，在另一个`{if}` 条件语句里面至少使用两个`{if}`条件语句。\n"
                 example_code: |
                     ```
                     {print} '罗宾来到了市区'
@@ -160,7 +159,7 @@ adventures:
                     ```
                 start_code: '# 在这里写你的代码'
             10:
-                story_text: "在这一级，你可以在你的故事里使用 {for} 命令。这样很容易就能写出儿童书里的“棕熊，棕熊，你看到了什么”的故事。\n\n### 练习\n\n请看\n<a \nhref=\"https://www.yonkerspublicschools.org/cms/lib/NY01814060/Centricity/Domain/1621/Brown%20Bear%20Book.pdf\"> the story</a> 如果你不知道这个故事，请确保它是按照书中的内容打印的。\n"
+                story_text: "在这一级，你可以在你的故事里使用 {for} 命令。这样很容易就能写出儿童书里的“棕熊，棕熊，你看到了什么”的故事。\n\n ### 练习\n\n请看\n<a \nhref=\"https://www.yonkerspublicschools.org/cms/lib/NY01814060/Centricity/Domain/1621/Brown%20Bear%20Book.pdf\"> the story</a> 如果你不知道这个故事，请确保它是按照书中的内容打印的。\n"
                 example_code: "```\n动物们 = _ , _ , _ \n{print} '棕熊，棕熊 '\n{print} '你看到了什么？'\n```\n"
                 start_code: '# 在这里写你的代码'
             12:
@@ -226,33 +225,33 @@ adventures:
                 start_code: '# 在此处键入代码'
     add_remove_command:
         name: '{add} {to} & {remove} {from}'
-        default_save_name: add_remove_command
-        description: introducing add to and remove from
+        default_save_name: 添加_删除_命令
+        description: 简介 添加和删除
         levels:
             3:
                 story_text: |
-                    ## Add to
-                    You can add items to the list with the `{add} {to}` command. To add an item to a list you can simply type: `{add} penguin {to} animals` or you can use the `{ask}` command like in the example code.
+                    ## 添加到
+                    您可以使用“{add} {to}”令将项目添加到列表中。要将项目添加到列表中，您只需键入：“{add} 企鹅 {to} 动物”或者您可以使用“{ask}”命令，如示例代码所示。
                 example_code: |
                     ```
-                    animals {is} dog, cat, kangaroo
-                    like {is} {ask} What is your favorite animal?
-                    {add} like {to_list} animals
-                    {print} I choose animals {at} {random}
+                    动物 {is} 狗， 猫， 袋鼠
+                    像 {is} {ask} 你最喜欢的动物是什么？
+                    {add} 像 {to_list} 动物
+                    {print} 我选择 动物 {at} {random}
                     ```
                 story_text_2: |
                     ## Remove from
-                    If you can add items to a list, of course you can also take them off. This is done with the `{remove} {from}` command.
+                    如果你可以将项目添加到列表中，当然你也可以将其删除。可以使用 `{remove} {from}` 指令.
                 example_code_2: |
                     ```
-                    animals {is} dog, cat, kangaroo
-                    dislike {is} {ask} What animal do you not like?
-                    {remove} dislike {from} animals
-                    {print} I choose animals {at} {random}
+                    动物们 {is} 狗, 猫, 袋鼠
+                    不喜欢 {is} {ask} 你不喜欢什么动物？
+                    {remove} 不喜欢 {from} 动物们
+                    {print}我选择 动物们 {at} {random}
                     ```
                 story_text_3: |
-                    ### Exercise
-                    Try out the new commands in this virtual restaurant. Add the flavor the player is hpoing for to the list and remove the flavors they are allergic to.
+                    ### 锻炼
+                    在这个虚拟餐厅中尝试新命令。将玩家想要的口味添加到列表中，并删除他们过敏的口味。
                 example_code_3: |
                     ```
                     {print} Mystery milkshake
@@ -308,7 +307,7 @@ adventures:
                     ```
                 story_text_2: |
                     ## The echo command
-                    If you want the computer to repeat the answer, you can use the `{echo}` command. The answer will then be echoed back at the end of the sentence, so in this example after hello.
+                    如果想让计算机将结果重复一遍，可以使用 `{echo}` 命令。答案将在程序末尾输出，因此在本例中，结果将在 hello 之后输出。
                 example_code_2: |
                     ```
                     {print} Hello!
@@ -316,12 +315,12 @@ adventures:
                     {echo} hello
                     ```
                 story_text_3: |
-                    ### Exercise
-                    Try out the `{ask}` and `{echo}` commands. Firstly, fill in the blanks to make this program work.
-                    Then ask 2 more questions using the `{ask}` command, after each `{ask}` use an `{echo}` to print the answer on the screen.
+                    ### 练习
+                    尝试使用“{ask}”和“{echo}”命令，首先，完成填空以使该程序成功运行。
+                    然后使用“{ask}”命令再问 2 个问题，在每个“{ask}”之后使用“{echo}”在屏幕上打印答案。
                 example_code_3: |
                     ```
-                    _ How are you doing?
+                    _ 你好吗?
                     _
                     ```
                 start_code: |
@@ -330,12 +329,11 @@ adventures:
                     {echo} hello
             2:
                 story_text: |
-                    ## The ask command
-                    Now that we can use **variables** in our codes, we no longer need the `{echo}` command.
-                    We can use variables to store the answers to our questions and this way we can use the answer to multiple questions in our codes.
-                    Check it out:
-
-                    This way your code is becoming interactive!
+                    ## 询问命令
+                    现在我们可以在代码中使用**变量**，我们可以不再使用“{echo}”命令。
+                    我们可以使用变量来保存问题的答案，这样我们就可以在代码中使用多个问题的答案。
+                    一探究竟：
+                    这样你的代码就变得具有交互性了！
                 example_code: |
                     ```
                     name {is} {ask} What is your name?
@@ -352,8 +350,8 @@ adventures:
                     Copy your code from the previous tab and make the variables interactive by using `{ask}` commands.
                 example_code_2: |
                     ```
-                    favorite_animals is ask What is your favorite animal?
-                    print I like favorite_animals
+                    favorite_animals {is} {ask} 你喜欢什么 动物?
+                    {print} 我喜欢 favorite_animals
                     ```
                 start_code: |-
                     name {is} {ask} What is your name?
@@ -561,12 +559,11 @@ adventures:
                     ```
                 start_code: '# 在这里写你的代码'
             13:
-                story_text: |4
-
+                story_text: |
                     ### Exercise 1
                     Let's make the practice program a bit harder. The player now has to answers two questions correctly. Fill out the blanks to complete the program.
 
-                    ### Exercise 2 (extra)
+                    ### Exercise 2 Extra
                     Sometimes, calculations have multiple correct answers. For example, 10 can be divided by 5 and by 2. So the question 'What number divides 10?' can be answered by 2 and by 5.
                     Ask for a calculation that has multiple correct answers, ask the player to answer it, and determine if it is correct using `{or}`.
                     Empty the programming field and create your own solution.
@@ -698,7 +695,7 @@ adventures:
         description: 级别说明
         levels:
             1:
-                story_text: "在第1级，你可以使用命令`{print}`、`{ask}`和`{echo}`。\n在编程栏里面输入你的代码。或者按下代码范例框里面的绿色按钮，它会为你输入代码!\n你可以用左边编程栏下方绿色的 “运行程序” 按钮测试你的代码。\n\n你可以使用`{print}`命令将文本打印到屏幕上。     \n"
+                story_text: "在第1级，你可以使用命令`{print}`、`{ask}`和`{echo}`。\n在编程栏里面输入你的代码。或者按下代码范例框里面的绿色按钮，它会为你输入代码!\n 你可以用左边编程栏下方绿色的 “运行程序” 按钮测试你的代码。\n\n你可以使用`{print}`命令将文本打印到屏幕上。     \n"
                 start_code: '{print} 你好，世界！'
             2:
                 story_text: |
@@ -825,11 +822,9 @@ adventures:
                     {for} animal {in} 动物
                       {print} '我爱 ' animal
             11:
-                story_text: |-
-                    在本关中，我们增加了一种新的`{for}`形式。在前面的关卡中，我们将`{for}`用于列表，我们也可以将`{for}`用于数字。
-                    我们通过添加一个变量名，在其后面接着`{in}``{range}`。然后我们写上数字来开始，`{to}`来作为数字的终点。
-
-                    试试这个例子，看看会发生什么! 在这一关卡中，你将需要在`{for}`语句下面的行中使用缩进。
+                story_text: |
+                    You have reached level 11, you're doing great! In the higher levels, Hedy is focussing more and more on teaching you the programming language Python.
+                    In Python there is no `{repeat}` command, but there is a command that works like {repeat}. Are you curious to find out how to say `{repeat}` in Python language? Quickly go on to find out!
                 start_code: |-
                     {for} 计数器 {in} {range} 1 {to} 5
                         {print} 计数器
@@ -880,7 +875,7 @@ adventures:
                     {else}
                         {print} '你比我年纪大！'
             15:
-                story_text: "我们将要学习一个新的循环, 就是`{while}` 循环！只要语句为真/有效，我们就不停的执行循环语句！\n所以别忘了改变循环语句中的变量值。\n\n因此在范例代码中，我们一直不停的执行循环语句直到一个正确的答案被给出。 \n如果正确答案一直没有被给出, 这个循环语句就不会结束!"
+                story_text: "我们将要学习一个新的循环, 就是`{while}` 循环！只要语句为真/有效，我们就不停的执行循环语句！\n所以别忘了改变循环语句中的变量值。\n \n因此在范例代码中，我们一直不停的执行循环语句直到一个正确的答案被给出。 \n如果正确答案一直没有被给出, 这个循环语句就不会结束!"
                 example_code: |
                     ```
                     答案 = 0
@@ -989,8 +984,7 @@ adventures:
                     {if} 投出数 {is} 蚯蚓 点数 = 点数 + 5 {else} 点数 = 点数 + 投出数
                     {print} '现在是' 点数 '点'
                     ```
-                example_code_2: |4
-
+                example_code_2: |
                     你计算出8个骰子的点数了吗？这需要大量复制粘贴，对吗？在第7级，我们会让它更简单！
                 start_code: '{print} ''骰子这次会投出什么？'''
             7:
@@ -1196,9 +1190,10 @@ adventures:
                         {print} 'I love ' animal
             11:
                 story_text: |-
-                    In this level, we add a new form of the `{for}`. In earlier levels, we used `{for}` with a list, but we can also use `{for}` with numbers.
-                    We do that by adding a variable name, followed by  `{in}` `{range}`. We then write the number to start at, `{to}` and the number to end at.
-                    Try the example to see what happens! In this level again, you will need to use indentations in lines below the `{for}` statements.
+                    在本关中，我们增加了一种新的`{for}`形式。在前面的关卡中，我们将`{for}`用于列表，我们也可以将`{for}`用于数字。
+                    我们通过添加一个变量名，在其后面接着`{in}``{range}`。然后我们写上数字来开始，`{to}`来作为数字的终点。
+
+                    试试这个例子，看看会发生什么! 在这一关卡中，你将需要在`{for}`语句下面的行中使用缩进。
                 example_code: |
                     ```
                     {for} counter {in} {range} 1 {to} 10
@@ -2863,8 +2858,8 @@ adventures:
                     ```
                 start_code: '# 在这里写你的代码'
             13:
-                story_text: "在这一级，我们可以用新的命令来升级我们的餐厅。\n我们用`{and}`来判断 {if} 命令中的两个条件是否同时成立。\n\n ### 练习 \n在右边的空白处填写`{and}`和`{or}` 。\n"
-                example_code: "```\n价格 = 10\n食物 = {ask} '您想吃什么？'\n饮料们 = {ask} '您想喝什么？'\n{if}食物 {is} '三明治'_ 饮料们 {is} '果汁'\n          {print} '这是我们的优惠套餐'\n          价格 = 价格 - 3\n{if}饮料们{is} '果汁' _饮料们{is} '矿泉水'。 \n          {print} '你的选择真健康！\n{print} '一共' 价格 '元'\n```\n"
+                story_text: "在这一级，我们可以用新的命令来升级我们的餐厅。\n我们用`{and}`来判断 {if} 命令中的两个条件是否同时成立。\n \n ### 练习 \n在右边的空白处填写`{and}`和`{or}` 。\n"
+                example_code: "```\n价格 = 10\n食物 = {ask} '您想吃什么？'\n饮料们 = {ask} '您想喝什么？'\n{if}食物 {is} '三明治'_ 饮料们 {is} '果汁'\n          {print} '这是我们的优惠套餐'\n          价格 = 价格 - 3\n{if}饮料们{is} '果汁' _饮料们{is} '矿泉水'。 \n          {print} '你的选择真健康！\n {print} '一共' 价格 '元'\n```\n"
                 start_code: '# 在这里写你的代码'
             15:
                 story_text: |
@@ -2919,8 +2914,7 @@ adventures:
                     ```
                 start_code: '# 在这里写你的代码'
             3:
-                story_text: |4
-
+                story_text: |
                     在这一级，我们可以输入列表并从列表中选择。
                     你要先用`{is}`制作一个列表。然后你可以用`{at} {random}`让电脑从列表里选一个。
                     例如，你可以让电脑选择石头、剪刀或布。
@@ -3135,7 +3129,7 @@ adventures:
         description: 打印一首歌
         levels:
             6:
-                story_text: "歌曲中通常包含大量重复。有时重复是基于计数的。\n比如那首著名的歌曲“啤酒瓶”中。你可以用一点数学知识来为这首歌编程。 \n\n提示：使用朗读功能，让海蒂把歌曲唱给你听! \n\n### 练习 \n现在你可以通过复制第2至第7行的内容来重复这几行歌词，你想要重复几次就可以重复几次。\n"
+                story_text: "歌曲中通常包含大量重复。有时重复是基于计数的。\n比如那首著名的歌曲“啤酒瓶”中。你可以用一点数学知识来为这首歌编程。 \n \n提示：使用朗读功能，让海蒂把歌曲唱给你听! \n\n### 练习 \n现在你可以通过复制第2至第7行的内容来重复这几行歌词，你想要重复几次就可以重复几次。\n"
                 example_code: |
                     ```
                     歌词 = 99
@@ -3161,7 +3155,7 @@ adventures:
                     ```
                 start_code: '{print} ''让我们唱歌吧！'''
             7:
-                story_text: "歌曲经常包含大量的重复。例如...小鲨鱼!如果你唱这首歌，其实你就是一直在唱同一句歌词：\n\n小鲨鱼图图图杜杜 <br>\n小鲨鱼图图图杜杜 <br>\n小鲨鱼图图图杜杜 <br>\n小鲨鱼\n\n### 练习 \n你可以用`{repeat}` 来打印歌曲《小鲨鱼》？ 完成代码，替换空白处？ \n**另外* 在《小鲨鱼》之后，你当然还可以为其他歌曲编程。很多歌曲都有重复的句子！你能想出更多的歌曲吗？ \n你能再想出一首歌曲并打印出来吗？\n"
+                story_text: "歌曲经常包含大量的重复。例如...小鲨鱼!如果你唱这首歌，其实你就是一直在唱同一句歌词：\n\n小鲨鱼图图图杜杜 <br>\n 小鲨鱼图图图杜杜 <br>\n小鲨鱼图图图杜杜 <br>\n小鲨鱼\n\n### 练习 \n你可以用`{repeat}` 来打印歌曲《小鲨鱼》？ 完成代码，替换空白处？ \n**另外* 在《小鲨鱼》之后，你当然还可以为其他歌曲编程。很多歌曲都有重复的句子！你能想出更多的歌曲吗？ \n你能再想出一首歌曲并打印出来吗？\n"
                 example_code: |
                     ```
                     {repeat} _ _{print} '小鲨鱼图图图杜杜'
@@ -3220,7 +3214,7 @@ adventures:
                     ```
                 start_code: '# 把你的代码放在这里'
             12:
-                story_text: "在这首歌中，我们可以使编程变得更加容易 '如果你很快乐，你意识到了，拍拍你的手'。因为我们可以把所有的动作放在一个变量中，看看吧。\n\n### 练习 \n你能在每一行中加入适量的缩进，使歌曲正确播放吗？ \n注意：不是所有的行都需要缩进\n"
+                story_text: "在这首歌中，我们可以使编程变得更加容易 '如果你很快乐，你意识到了，拍拍你的手'。因为我们可以把所有的动作放在一个变量中，看看吧。\n \n### 练习 \n你能在每一行中加入适量的缩进，使歌曲正确播放吗？ \n注意：不是所有的行都需要缩进\n"
                 example_code: |
                     ```
                     _一组动作 = '拍拍手', '跺跺脚', '喊万岁!'
@@ -3791,7 +3785,7 @@ adventures:
                     ```
                 start_code: '{print} ''绘图'''
             8:
-                story_text: "现在我们能重复多行了，可以更容易地画图。\n我们只需要设置一下角度，然后在`{repeat}`中使用这个变量。\n\n### 练习1 \n用这个代码范例画了一个正方形。改变代码，使其画另一个图形，如一个三角形或一个六边形。 \n这需要对两行代码进行修改。\n 提示：一个完整的圆是360度。\n\n ### 练习2 \n现在画一个至少由两个多边形组成的图形。\n"
+                story_text: "现在我们能重复多行了，可以更容易地画图。\n我们只需要设置一下角度，然后在`{repeat}`中使用这个变量。\n\n### 练习1 \n用这个代码范例画了一个正方形。改变代码，使其画另一个图形，如一个三角形或一个六边形。 \n这需要对两行代码进行修改。\n 提示：一个完整的圆是360度。\n \n ### 练习2 \n现在画一个至少由两个多边形组成的图形。\n"
                 example_code: |
                     ```
                     角度 = 90
@@ -3864,6 +3858,23 @@ adventures:
                     {call} square
                     {forward} 50
                     {call} square
+            10:
+                story_text: |
+                    In this level you can make the turtle draw a figure.
+                    The turtle will travel the distances in the list, one by one, making bigger and bigger steps.
+                    ### Exercise 1
+                    Add a 90 degree turn in the loop, so that a spiral is drawn.
+                    Add at least 5 numbers to the list, so the spiral grows larger.
+                     **(extra)** can you change the spiral into another shape? Experiment with numbers for the turn!
+                    ### Exercise 2
+                    The spiral is drawn outwards, make it go inwards?
+                example_code: |
+                    ```
+                    {turn} 90
+                    distances = 10, 20, 30, 40, 50, 60
+                    {for} distance {in} distances
+                        {forward} distance
+                start_code: '# Write your code here'
     while_command:
         name: '{while}'
         default_save_name: while_command
@@ -3880,14 +3891,14 @@ adventures:
                     ```
                     answer = 0
                     {while} answer != 25
-                        answer = {ask} 'What is 5 times 5?'
-                    {print} 'A correct answer has been given'
+                        answer = {ask} '5重复5次是多少?'
+                    {print} '一个正确的回答给出'
                     ```
                 start_code: |-
                     answer = 0
                     {while} answer != 25
-                        answer = {ask} 'What is 5 times 5?'
-                    {print} 'A correct answer has been given'
+                        answer = {ask} '5重复5次是多少?'
+                    {print} '一个正确的回答给出'
     years:
         name: 新年
         default_save_name: 新年倒计时

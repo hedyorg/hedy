@@ -20,7 +20,7 @@ adventures:
                 story_text_2: |
                     ### Exercise
                     Can you make your own story in Hedy now by using `{print}` , `{ask}` and `{echo}`?
-                start_code: print Cerita kamu dimulai dari sini
+                start_code: '{print} Cerita kamu dimulai dari sini'
             2:
                 story_text: |-
                     Pada level 2, kamu dapat membuat ceritanya lebih menyenangkan. Karakter utama kamu sekarang dapat muncul dimanapun pada kalimat-kalimatnya.
@@ -37,15 +37,15 @@ adventures:
                     print nama takut kalau hutan tersebut berhantu
                     ```
                 story_text_2: |
-                    ### Exercise
-                    Now it's time to add variables to your own story that you've made in the previous level.
-                    Go to 'My programs', look for your level 1 story adventure and copy the code. Paste the code in your input screen in this level.
+                    ### Latihan
+                    Sekarang saatnya untuk menambahkan variabel ke cerita Anda sendiri yang telah Anda buat di level sebelumnya.
+                    Pergi ke ‘Program Saya’, cari petualangan cerita level 1 Anda dan salin kode tersebut. Tempelkan kode tersebut di layar input Anda di level ini.
 
-                    This code won't work in this level, because you have not used variables yet.
-                    Change the `{ask}` commands and `{echo}` commands in your code to the correct form that you've learned in this level.
+                    Kode ini tidak akan berfungsi di level ini, karena Anda belum menggunakan variabel.
+                    Ubah perintah '{ask}' dan '{echo}' dalam kode Anda ke bentuk yang benar yang telah Anda pelajari di level ini.
 
-                    **Extra** Add a sleep command to your code to build up tension in your story.
-                start_code: print Cerita kamu
+                    **Ekstra** Tambahkan perintah '{sleep}' ke kode Anda untuk membangun ketegangan dalam cerita Anda.
+                start_code: '{print} Cerita kamu'
             3:
                 story_text: |-
                     Kamu dapat menambahkan sesuatu secara acak di cerita kamu. Monster, hewan, atau benda apapun.
@@ -64,11 +64,11 @@ adventures:
                     The command `{add}` can also come in handy in your story. For example
                 example_code_2: |
                     ```
-                    {print} He hears a sound
-                    animals {is} 🐿, 🦔, 🦇, 🦉
-                    animal {is} {ask} What do you think it is?
-                    {add} animal {to_list} animals
-                    {print} it was a animals {at} {random}
+                    {print} Dia mendengarkan sebuah suara
+                    hewan_hewan {is} 🐿, 🦔, 🦇, 🦉
+                    hewan {is} {ask} apa yang kamu pikirkan?
+                    {add} hewan {to_list} hewan_hewan
+                    {print} itu adalah hewan_hewan {at} {random}
                     ```
                 story_text_3: |
                     This is an example of the `{remove}` command in your story
@@ -515,7 +515,7 @@ adventures:
                     {else} {print} 'Wrong! It was ' correct_answer
                     ```
                 story_text_2: |
-                    You can also let the computer do random sums on its own using random.
+                    You can also let the computer do random calculations on its own using {random}.
                     This is how you choose a number of tables to practice, and from that you always get a different sum:
                 example_code_2: |
                     ```
@@ -529,7 +529,7 @@ adventures:
                     {else} {print} 'mistake! it was ' correct_answer
                     ```
                 story_text_3: |
-                    You can also let the computer do random sums on its own using random.
+                    You can also let the computer do random calculations on its own using {random}.
                     This is how you choose a number of tables to practice, and from that you always get a different sum:
                 start_code: '{print} ''Welcome to this calculator!'''
             9:
@@ -594,12 +594,11 @@ adventures:
                     {print} number1 ' plus ' number2 ' is ' answer
                 start_code: '# place your code here'
             13:
-                story_text: |4
-
+                story_text: |
                     ### Exercise 1
                     Let's make the practice program a bit harder. The player now has to answers two questions correctly. Fill out the blanks to complete the program.
 
-                    ### Exercise 2 (extra)
+                    ### Exercise 2 Extra
                     Sometimes, calculations have multiple correct answers. For example, 10 can be divided by 5 and by 2. So the question 'What number divides 10?' can be answered by 2 and by 5.
                     Ask for a calculation that has multiple correct answers, ask the player to answer it, and determine if it is correct using `{or}`.
                     Empty the programming field and create your own solution.
@@ -774,9 +773,9 @@ adventures:
                     ```
                 start_code: '{print} ''Halo dunia'''
             5:
-                story_text: "Perintah `ask` dan `print` tetap sama seperti pada level 4.\n\nPada level 5, ada hal baru, `if`! Dengan `if` kamu bisa memilih antara dua pilihan.\n\n```\nnama is ask 'siapa nama kamu?'\nif nama is Hedy print 'keren' else print 'boo'\n```\n\nKode ini menampilkan keren jika\
+                story_text: "Perintah `ask` dan `print` tetap sama seperti pada level 4.\n \nPada level 5, ada hal baru, `if`! Dengan `if` kamu bisa memilih antara dua pilihan.\n\n```\nnama is ask 'siapa nama kamu?'\nif nama is Hedy print 'keren' else print 'boo'\n```\n\nKode ini menampilkan keren jika\
                     \ kamu memasukkan Hedy sebagai nama, dan boo jika kamu memasukkan yang lain.\n\nTerkadang kode dengan `if` bisa menjadi sangat panjang dan tidak cukup menggunakan satu baris <br> \nKamu dapat memisah kodenya menjadi dua baris; baris kedua dimulai dengan `else` seperti ini:\n```\nnama\
-                    \ is ask 'siapa nama kamu?'\nif nama is Hedy print 'keren' \nelse print 'boo'\n```\n\n\nPada level 5, tugas-tugas yang ada pada tab-tab terlampir akan menjadi makin kompleks semakin posisi tabnya ke kanan. Jadi, pastikan untuk mengerjakan mulai dari kiri ke kanan."
+                    \ is ask 'siapa nama kamu?'\n if nama is Hedy print 'keren' \nelse print 'boo'\n```\n\n\nPada level 5, tugas-tugas yang ada pada tab-tab terlampir akan menjadi makin kompleks semakin posisi tabnya ke kanan. Jadi, pastikan untuk mengerjakan mulai dari kiri ke kanan."
                 example_code: |
                     ```
                     name {is} {ask} 'what is your name?'
@@ -823,7 +822,7 @@ adventures:
                     ```
                 start_code: repeat 3 times print 'Hedy itu menyenangkan!'
             8:
-                story_text: "`ask` dan `print` tetap berfungsi sama seperti sebelumnya. Tapi `if` dan `repeat` berubah. \nKamu sekarang dapat mengeksekusi kumpulan kode secara bersamaan, tapi kamu harus memberikan indentasi pada kode tersebut.\nIndentasi berarti memberikan empat spasi diawal baris. Ini\
+                story_text: "`ask` dan `print` tetap berfungsi sama seperti sebelumnya. Tapi `if` dan `repeat` berubah. \nKamu sekarang dapat mengeksekusi kumpulan kode secara bersamaan, tapi kamu harus memberikan indentasi pada kode tersebut.\n Indentasi berarti memberikan empat spasi diawal baris. Ini\
                     \ juga berlaku ketika kamu hanya mau mengeksekusi satu baris kode saja.\n\n```\nrepeat 5 times\n    print 'halo semua'\n    print 'Ini akan ditampilkan lima kali'\n```"
                 example_code: |
                     Ini adalah cara perintah `{repeat}` bekerja:
@@ -898,10 +897,9 @@ adventures:
                     for hewan in hewanhewan
                       print 'Aku suka ' hewan
             11:
-                story_text: |-
-                    ##Pengulangan!
-                    `{print}` berfungsi sama namun kita menambahkan form baru di `{for}`. Sekarang kamu bisa menuliskan `{for} counter {in} {range} 1 {to} 5` maupun `{reapeat} 5 {times}` dan gunakan `counter` pada program kamu.
-                    Cobalah lihat apa yang terjadi! Ingat untuk menggunakan indentasi sesudah perintah `{for}` dan `{if}` statements( Artinya mengawali baris dengan empat spasi).
+                story_text: |
+                    You have reached level 11, you're doing great! In the higher levels, Hedy is focussing more and more on teaching you the programming language Python.
+                    In Python there is no `{repeat}` command, but there is a command that works like {repeat}. Are you curious to find out how to say `{repeat}` in Python language? Quickly go on to find out!
                 start_code: |-
                     for pembilang in range 1 to 5
                         print pembilang
@@ -1055,8 +1053,7 @@ adventures:
                     Dapatkan kamu membuat kodenya untuk menghitung total poin dari lemparan dadu 8 kali? Untuk melakukannya, kamu harus menyalin beberapa baris kode.
 
                     Apakah kamu berhasil menghitung poin dari lemparan dadu 8 kali? Ini memerlukan banyak salinan kode, betul? Kita akan membuatnya lebih mudah pada level 7!
-                example_code_2: |4
-
+                example_code_2: |
                     Did you manage to calculate the score for 8 dice? That required a lot of cutting and pasting, right? We are going to make that easier in level 7!
                 start_code: print 'Apakah yang akan dihasilkan dari lemparan dadu kali ini?'
             7:
@@ -1376,8 +1373,8 @@ adventures:
                 start_code: print 'Halo, aku Hedy sang peramal!'
             7:
                 story_text: Pada level 6 kamu dapat menggunakan perintah `repeat` untuk membuat mesin kamu meramal beberapa kali
-                example_code: "```\nprint 'Aku Hedy sang peramal!'\nprint 'Kamu dapat bertanya 3 pertanyaan!'\nrepeat 3 times pertanyaan is ask 'Apa yang ingin kamu tahu?'\njawaban is ya, tidak, mungkin\nrepeat 3 times print 'Bola kristal saya mengatakan... ' jawaban at random\n```\n\nSeperti yang kamu\
-                    \ lihat, pertanyaan-pertanyaan yang diberikan tidak ditampilkan pada contoh. Ini karena variabel 'pertanyaan' telah diulang tiga kali.\nSetiap kali pemain memberikan pertanyaan baru, Hedy menimpa pertanyaan sebelumnya. \nArtinya kamu tidak bisa menanyakan dengan cara seperti ini.\n\
+                example_code: "```\nprint 'Aku Hedy sang peramal!'\nprint 'Kamu dapat bertanya 3 pertanyaan!'\nrepeat 3 times pertanyaan is ask 'Apa yang ingin kamu tahu?'\njawaban {is} ya, tidak, mungkin\nrepeat 3 times print 'Bola kristal saya mengatakan... 'jawaban {at} {random}\n```\n\nSeperti yang\
+                    \ kamu lihat, pertanyaan-pertanyaan yang diberikan tidak ditampilkan pada contoh. Ini karena variabel 'pertanyaan' telah diulang tiga kali.\nSetiap kali pemain memberikan pertanyaan baru, Hedy menimpa pertanyaan sebelumnya. \nArtinya kamu tidak bisa menanyakan dengan cara seperti ini.\n\
                     \nDengan menggunakan tiga variabel (misal 'pertanyaan1', 'pertanyaan2' dan 'pertanyaan3') kamu dapat memecahkan masalah ini dan menampilkan semua pertanyaan.\nIni berarti kamu hanya dapat menggunakan perintah `repeat` untuk jawaban. Kamu harus menanyakan dan menampilkan semua pertanyaan\
                     \ secara terpisah.\nDapatkah kamu melakukannya?\n\nPada level 7 tampilan perintah `repeat` akan berubah, memungkinkan kamu untuk mengulang beberapa baris sekaligus.\n"
                 start_code: print 'Halo, aku Hedy sang peramal!'
@@ -1388,13 +1385,13 @@ adventures:
                     Pada contoh berikut kamu dapat membuat sang peramal menanyakan 3 pertanyaan dan juga menampilkannya sekaligus!
                 example_code: |
                     ```
-                    print 'Aku Hedy sang peramal!'
-                    print 'Kamu dapat bertanya 3 pertanyaan!'
-                    jawaban is ya, tidak, mungkin
-                    repeat 3 times
-                       pertanyaan is ask 'Apa yang ingin kamu tahu?'
-                       print pertanyaan
-                       print 'Bola kristal saya menyatakan...' jawaban at random
+                    {print} 'Aku Hedy sang peramal!'
+                    {print} 'Kamu dapat bertanya 3 pertanyaan!'
+                    jawaban {is} ya, tidak, mungkin
+                    {repeat} 3 {times}
+                        pertanyaan {is} {ask} 'Apa yang ingin kamu tahu?'
+                        {print} pertanyaan
+                        {print} 'Bola kristal saya menyatakan...' jawaban {at} {random}
                     ```
                 start_code: print 'Halo, aku Hedy sang peramal!'
             10:
@@ -1611,7 +1608,7 @@ adventures:
 
                     Pada level 1 kita memulai permainan rumah berhantu dengan membuat cerita menyeramkan dan menanyakan monster apa yang pemain akan lihat di rumah berhantu.
                 example_code: "```\nprint Kenapa aku ada disini?\nprint Aku ingat temanku menyarankan untuk tidak ke rumah besar tua itu...\nprint dan tiba-tiba semuanya menjadi gelap.\nprint Tapi bagaimana caranya aku tergeletak di lantai...?\nprint Kepalaku sakit seperti telah dipukul dengan tongkat\
-                    \ pemukul basebal!\nprint Suara apa itu?\nprint Oh tidak! Aku merasa kalau aku tidak sendiri di rumah ini!\nprint Aku perlu keluar dari sini!\nprint Ada 3 pintu didepanku...\nask Pintu mana yang harus kupilih?\necho Aku memilih pintu \nprint ...?\n```\n\nDapatkah kamu menyelesaikan\
+                    \ pemukul basebal!\nprint Suara apa itu?\nprint Oh tidak! Aku merasa kalau aku tidak sendiri di rumah ini!\nprint Aku perlu keluar dari sini!\nprint Ada 3 pintu didepanku...\n{ask} Pintu mana yang harus kupilih?\necho Aku memilih pintu \nprint ...?\n ```\n\nDapatkah kamu menyelesaikan\
                     \ cerita menyeramkan ini dengan menanyakan monster apa yang akan muncul? Atau membuat cerita rumah berhantu milik kamu sendiri?\n"
                 story_text_2: |
                     ### Exercise
@@ -1704,9 +1701,9 @@ adventures:
                     monster is werewolf, mumi, vampir, zombie
                     pintuterpilih is ask 'Pintu mana yang mau kamu pilih?'
                     print 'Kamu memilih pintu... ' pintuterpilih
-                    pintutepat is pintu at random
+                    pintutepat is pintu {at} {random}
                     if pintuterpilih is pintutepat print 'Bagus! Kamu berhasil kabur!'
-                    else print 'Oh tidak! Kamu dimakan oleh ... ' monster at random
+                    else print 'Oh tidak! Kamu dimakan oleh ... ' monster {at} {random}
                     ```
                 start_code: print 'Kenapa aku ada disini?'
             9:
@@ -1719,13 +1716,13 @@ adventures:
                     monster is zombie, vampir, laba-laba besar
                     repeat 3 times
                         if pemain is hidup
-                            pintubenar is pintu at random
+                            pintubenar is pintu {at} {random}
                             print 'Ada 3 pintu di depan kamu...'
                             pintuterpilih is ask 'Pintu mana yang mau kamu pilih?'
                             if pintuterpilih is pintubenar
                                 print 'Tidak ada monster disini!'
                             else
-                                print 'Kamu dimakan oleh ' monster at random
+                                print 'Kamu dimakan oleh ' monster {at} {random}
                                 pemain is meninggal
                         else
                             print 'PERMAINAN BERAKHIR'
@@ -1746,14 +1743,14 @@ adventures:
                     monster is zombie, vampir, laba-laba besar
                     for i in range 1 to 3
                         if pemain is hidup
-                            pintubenar is pintu at random
+                            pintubenar is pintu {at} {random}
                             print 'Ruangan ' i
                             print 'Ada 3 pintu di depan kamu...'
                             pintuterpilih is ask 'Pintu mana yang mau kamu pilih?'
                             if pintuterpilih is pintubenar
                                 print 'Tidak ada monster disini!'
                             else
-                                print 'Kamu dimakan oleh ' monster at random
+                                print 'Kamu dimakan oleh ' monster {at} {random}
                                 pemain is meninggal
                         else
                             print 'PERMAINAN BERAKHIR'
@@ -2894,7 +2891,14 @@ adventures:
                     ```
                 start_code: courses = appetizer, main course, dessert
             11:
-                story_text: Kamu dapat menggunakan `for i in range 1 to 5` untuk menampilkan pesanan dari berbagai pembeli secara terurut.
+                story_text: |
+                    We can use the `{for}` with `{range}` to print the orders from multiple customers in an orderly manner.
+
+                    ### Exercise
+                    Finish the restaurant code, so that you can ask for the order of multiple people. Print the order number each time: 'Order 1', 'Order 2', etc.
+                    Are you not sure how to go about this? Have a peek at your level 8 code.
+
+                    **Extra** In level 9 the restaurant also used prices. You can add that here too!
                 example_code: |
                     ```
                     print 'Selamat datang di rumah makan Hedy!'
@@ -3023,7 +3027,7 @@ adventures:
             5:
                 story_text: "Pada level 4 kamu bisa menentukan siapa yang menang. \nUntuk hal itu, kamu memerlukan perintah `if`\n\nSimpan pilihan kamu dengan sebuah nama favoritmu dan pilihan komputer dengan nama pilihan komputer.\nLalu kamu bisa menggunakan `if` untuk melihat apakah kedua pilihan tersebut\
                     \ sama atau berbeda.\nDapatkah kamu menyelesaikan kode ini?"
-                example_code: "```\npilihan is batu, gunting, kertas\npil_komputer is _\npil_kamu is ask Apa yang kamu pilih?\nprint 'kamu memilih ' _\nprint 'komputer memilih ' _\nif _ is _ print 'seri' else print 'tidak seri'\nif pil_kamu is batu and pil_komputer is kertas print 'komputer menang'\n\
+                example_code: "```\npilihan is batu, gunting, kertas\npil_komputer is _\n pil_kamu is ask Apa yang kamu pilih?\nprint 'kamu memilih ' _\nprint 'komputer memilih ' _\nif _ is _ print 'seri' else print 'tidak seri'\nif pil_kamu is batu and pil_komputer is kertas print 'komputer menang'\n\
                     ```\n\nPertama-tama, kamu perlu mengisi kotak kosong yang tersedia dengan kode yang benar untuk melihat apakah hasil permainan seri. \n"
                 start_code: print 'Selamat datang di permainan batu guning kertas mu sendiri!'
             9:
@@ -3914,15 +3918,8 @@ adventures:
                         forward 50
                     ```
                 story_text_2: Selain itu, kita juga bisa meningkatkan kemampuan program untuk menggambar banyak bentuk. Dapatkah kamu tebak seberapa jauh sang kura-kura perlu berbelok disini? Selesaikan kodenya dan kamu dapat menggambar bentuk poligon apapun yang kamu suka!
-                example_code_2: |
-                    ```
-                    jumlahsudut is ask 'Berapa banyak sudut yang kamu mau?'
-                    sudut is 360 / jumlahsudut
-                    repeat sudut times
-                        turn _
-                        forward_
-                    ```
-                start_code: hoeken is ask 'Berapa banyak sudut yang aku harus gambar?'
+                example_code_2: "```\njumlahsudut = {ask} 'Berapa banyak sudut yang kamu mau?'\nsudut = 360 / jumlahsudut \n{repeat} jumlahsudut {times}\n    {turn} _\n    {forward} _\n```\n"
+                start_code: hoeken = {ask} 'Berapa banyak sudut yang aku harus gambar?'
             9:
                 story_text: |
                     Now that we can use a `{repeat}` inside a `{repeat}`, we can create more complex figures.
@@ -3977,6 +3974,23 @@ adventures:
                     {call} square
                     {forward} 50
                     {call} square
+            10:
+                story_text: |
+                    In this level you can make the turtle draw a figure.
+                    The turtle will travel the distances in the list, one by one, making bigger and bigger steps.
+                    ### Exercise 1
+                    Add a 90 degree turn in the loop, so that a spiral is drawn.
+                    Add at least 5 numbers to the list, so the spiral grows larger.
+                     **(extra)** can you change the spiral into another shape? Experiment with numbers for the turn!
+                    ### Exercise 2
+                    The spiral is drawn outwards, make it go inwards?
+                example_code: |
+                    ```
+                    {turn} 90
+                    distances = 10, 20, 30, 40, 50, 60
+                    {for} distance {in} distances
+                        {forward} distance
+                start_code: '# Write your code here'
     while_command:
         name: '{while}'
         default_save_name: while_command

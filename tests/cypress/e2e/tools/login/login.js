@@ -5,8 +5,8 @@ export function loginForUser() {
     cy.wait(500);
 }
 
-export function loginForTeacher() {
-    login("teacher1", "123456");
+export function loginForTeacher(username="teacher1") {
+    login(username, "123456");
     cy.wait(500);
 }
 
@@ -21,6 +21,9 @@ export function loginForAdmin() {
 }
 
 export function login(username, password) {
+    cy.clearCookies();
+    cy.clearAllLocalStorage()
+    cy.clearAllSessionStorage();
     goToLogin();
     cy.get('#username').type(username);
     cy.get('#password').type(password);

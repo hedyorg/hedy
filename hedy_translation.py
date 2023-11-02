@@ -2,9 +2,10 @@ from collections import namedtuple
 from lark import Visitor, Token
 import hedy
 import operator
-import yaml
 from os import path
 import hedy_content
+from website.yaml_file import YamlFile
+import copy
 
 # Holds the token that needs to be translated, its line number, start and
 # end indexes and its value (e.g. ", ").
@@ -18,9 +19,11 @@ def keywords_to_dict(lang="nl"):
     keywords_path = "content/keywords/"
     yaml_filesname_with_path = path.join(base, keywords_path, lang + ".yaml")
 
-    with open(yaml_filesname_with_path, "r", encoding="UTF-8") as stream:
-        command_combinations = yaml.safe_load(stream)
-
+    # as we mutate this dict, we have to make a copy
+    # as YamlFile re-uses the yaml contents
+    command_combinations = copy.deepcopy(
+        YamlFile.for_file(yaml_filesname_with_path).to_dict()
+    )
     for k, v in command_combinations.items():
         command_combinations[k] = v.split("|")
 

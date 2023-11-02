@@ -216,7 +216,8 @@ class QuizModule(WebsiteModule):
         # Add any achievements we accumulated to the session. They will be sent to the
         # client at the next possible opportunity. `add_single_achievement` may have
         if achievement:
-            session['pending_achievements'] = session.get('pending_achievements', []) + achievement
+            session['pending_achievements'] = session.get(
+                'pending_achievements', []) + [{"achievement": achievement, "redirect": None}]
 
     def initialize_attempt(self, level):
         """Record that we're starting a new attempt."""
