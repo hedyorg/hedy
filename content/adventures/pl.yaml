@@ -2801,8 +2801,8 @@ adventures:
                     Czy potrafisz wpisać właściwe polecenie w pustym miejscu? Mózg: Superszpieg musi poprawnie odpowiedzieć na OBA pytania, zanim zdobędzie poufne informacje!
                 example_code: |
                     ```
-                    imię {is} {ask} 'Jak masz na imię?'
-                    hasło {is} {ask} 'Jakie jest twoje hasło?'
+                    imię = {ask} 'Jak masz na imię?'
+                    hasło = {ask} 'Jakie jest twoje hasło?'
                     {if} imię {is} 'Agent007' _ hasło {is} 'TOPSECRET'
                         {print} 'Jedź na lotnisko o 02.00'
                     {else}

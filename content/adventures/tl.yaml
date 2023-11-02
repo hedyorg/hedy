@@ -2938,8 +2938,8 @@ adventures:
                     Can you fill in the right command on the blank? Mind: The superspy has to answer BOTH questions correctly, before they get the confidential information!
                 example_code: |
                     ```
-                    name {is} {ask} 'What is your name?'
-                    password {is} {ask} 'What is your password?'
+                    name = {ask} 'What is your name?'
+                    password = {ask} 'What is your password?'
                     {if} name {is} 'Agent007' _ password {is} 'TOPSECRET'
                         {print} 'Go to the airport at 02.00'
                     {else}

@@ -3040,8 +3040,8 @@ adventures:
                     Vi vill förvirra fienden ännu mer! Skapa en lista med falska svar och välj ett slumpmässigt när ett felaktigt svar ges.
                 example_code: |
                     ```
-                    name {is} {ask} 'Vad heter du?'
-                    lösenord {is} {ask} 'Vad är ditt lösenord?'
+                    name = {ask} 'Vad heter du?'
+                    lösenord = {ask} 'Vad är ditt lösenord?'
                     {if} namn {is} 'Agent007' _ lösenord {is} 'TOPSECRET'
                         {print} 'Åk till flygplatsen kl. 02.00'
                     {else}

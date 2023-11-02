@@ -3040,8 +3040,8 @@ adventures:
                     **(extra)** Voeg een extra vraag toe zoals in level 12.
                 example_code: |
                     ```
-                    naam {is} {ask} 'Hoe heet je?'
-                    wachtwoord {is} {ask} 'Wat is het wachtwoord?'
+                    naam = {ask} 'Hoe heet je?'
+                    wachtwoord = {ask} 'Wat is het wachtwoord?'
                     {if} naam {is} 'Agent007' _ wachtwoord {is} 'TOPSECRET'
                         {print} 'Ga naar het vliegveld om 02:00'
                     {else}

@@ -3094,8 +3094,8 @@ adventures:
                     Düşmanın kafasını daha da karıştırmak istiyoruz! Sahte cevaplardan oluşan bir liste oluşturun ve yanlış cevap verildiğinde rastgele birini seçin.
                 example_code: |
                     ```
-                    isim {is} {ask} 'Senin adın ne?'
-                    şifre {is} {ask} 'Şifre nedir?'
+                    isim = {ask} 'Senin adın ne?'
+                    şifre = {ask} 'Şifre nedir?'
                     {if} isim {is} 'Ajan007' _ şifre {is} 'ÇOKGİZLİ'
                         {print} 'Gece 02.00'de havaalanına git.'
                     {else}

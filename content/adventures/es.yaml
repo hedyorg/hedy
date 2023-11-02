@@ -3016,8 +3016,8 @@ adventures:
                     ¡Queremos confundir aún más al enemigo! Crea una lista con respuestas falsas y selecciona una al azar cuando den una respuesta incorrecta.
                 example_code: |
                     ```
-                    nombre {is} {ask} '¿Cuál es tu nombre?'
-                    contraseña {is} {ask} '¿Cuál es tu contraseña?'
+                    nombre = {ask} '¿Cuál es tu nombre?'
+                    contraseña = {ask} '¿Cuál es tu contraseña?'
                     {if} nombre {is} 'Agente007' _ contraseña {is} 'SUPERSECRETO'
                         {print} 'Ve al aeropuerto a las 02.00'
                     {else}

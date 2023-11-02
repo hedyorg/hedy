@@ -3049,8 +3049,8 @@ adventures:
                     Wir wollen den Gegner noch mehr verwirren! Erstelle eine Liste mit falschen Antworten und wähle eine zufällig aus, wenn eine falsche Antwort gegeben wird.
                 example_code: |
                     ```
-                    Name {is} {ask} 'Wie heißt du?'
-                    Passwort {is} {ask} 'Wie lautet dein Passwort?'
+                    Name = {ask} 'Wie heißt du?'
+                    Passwort = {ask} 'Wie lautet dein Passwort?'
                     {if} Name {is} 'Agent007' _ Passwort {is} 'STRENGGEHEIM'
                         {print} 'Gehe um 2 Uhr zum Flughafen'
                     {else}

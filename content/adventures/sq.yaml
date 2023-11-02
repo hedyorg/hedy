@@ -2919,8 +2919,8 @@ adventures:
                     A mund të plotësoni komandën e duhur në vendin bosh? Mendja: Superspiuni duhet t'u përgjigjet saktë të DY pyetjeve, përpara se të marrë informacionin konfidencial!
                 example_code: |
                     ```
-                    emri {is} {ask} 'Cili është emri juaj?'
-                    fjalëkalimi {is} {ask} "Cili është fjalëkalimi juaj?"
+                    emri = {ask} 'Cili është emri juaj?'
+                    fjalëkalimi = {ask} "Cili është fjalëkalimi juaj?"
                     {if} emri {is} 'Agent007' _ fjalëkalimi {is} 'TOPSECRET'
                          {print} 'Shko në aeroport në orën 02:00'
                     {else}
