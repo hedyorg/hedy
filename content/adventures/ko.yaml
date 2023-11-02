@@ -412,6 +412,18 @@ adventures:
                     {print} Hello name
                     age {is} {ask} How old are you?
                     {print} name is age years old.
+            18:
+                story_text: 파이썬 코드를 얻기 위해 우리가 해야 할 마지막 변화는 `{ask}`를 `{input}`으로 바꾸는 것이다.
+                example_code: |
+                    ```
+                    {print}('My name is Hedy!')
+                    name = {input}('What is your name?')
+                    {print}('So your name is ', name)
+                    ```
+                start_code: |
+                    {print}('My name is Hedy!')
+                                        name = {input}('What is your name?')
+                                        {print}('So your name is ', name)
     blackjack:
         name: 블랙잭
         default_save_name: 블랙잭
@@ -2227,13 +2239,6 @@ adventures:
                     ```
                     temperature = 25
                     {print}('It is ', temperature, ' degrees outside')
-                    ```
-                story_text_3: 파이썬 코드를 얻기 위해 우리가 해야 할 마지막 변화는 `{ask}`를 `{input}`으로 바꾸는 것이다.
-                example_code_3: |
-                    ```
-                    {print}('My name is Hedy!')
-                    name = {input}('What is your name?')
-                    {print}('So your name is ', name)
                     ```
                 start_code: |-
                     name = 'Hedy'

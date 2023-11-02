@@ -412,6 +412,18 @@ adventures:
                     {print} Hola nombre
                     edad {is} {ask} ¿Cuántos años tienes?
                     {print} nombre tiene edad años.
+            18:
+                story_text: El último cambio que tenemos que hacer para conseguir el código en Python es cambiar `{ask}` por `{input}`.
+                example_code: |
+                    ```
+                    {print}('¡Mi nombre es Hedy!')
+                    nombre = {input}('¿Cómo te llamas?')
+                    {print}('Así que te llamas ', nombre)
+                    ```
+                start_code: |
+                    {print}('¡Mi nombre es Hedy!')
+                    nombre = {input}('¿Cómo te llamas?')
+                    {print}('Así que te llamas ', nombre)
     blackjack:
         name: Blackjack
         default_save_name: Blackjack
@@ -2213,13 +2225,6 @@ adventures:
                     ```
                     temperatura = 25
                     {print}('Hay ', temperatura, ' grados fuera')
-                    ```
-                story_text_3: El último cambio que tenemos que hacer para conseguir el código en Python es cambiar `{ask}` por `{input}`.
-                example_code_3: |
-                    ```
-                    {print}('¡Mi nombre es Hedy!')
-                    nombre = {input}('¿Cómo te llamas?')
-                    {print}('Así que te llamas ', nombre)
                     ```
                 start_code: |-
                     nombre = 'Hedy'
