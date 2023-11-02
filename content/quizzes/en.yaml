@@ -3566,22 +3566,22 @@ levels:
                 {for} i {in} {range} 1 {to} 3
                     {print}  _
             mp_choice_options:
-            -   option: |
+            -   option: |-
                     ```
                     friends[i] has to do chores [i]
                     ```
                 feedback: Mind the spacing.
-            -   option: |
+            -   option: |-
                     ```
                     friends[1] has to do chores[1]
                     ```
                 feedback: It will print 3 times that Wesley has to do the cooking
-            -   option: |
+            -   option: |-
                     ```
                     chores[i] ' has to do ' friends[random]
                     ```
                 feedback: The person has to do the chore, not the other way around
-            -   option: |
+            -   option: |-
                     ```
                     friends[i] ' has to do ' chores[i]
                     ```
@@ -3712,7 +3712,7 @@ levels:
                 Lionell and Raj get to go second
                 Kim and Leroy get to go third
             mp_choice_options:
-            -   option: |
+            -   option: |-
                     ```
                     teams = ['Macy and Kate', 'Lionell and Raj', 'Kim and Leroy']
                     position = ['first', 'second', 'third']
@@ -3720,7 +3720,7 @@ levels:
                     {print} teams[random] ' get to go ' position[i]
                     ```
                 feedback: This is not right
-            -   option: |
+            -   option: |-
                     ```
                     teams = ['Macy and Kate', 'Lionell and Raj', 'Kim and Leroy']
                     position = ['first', 'second', 'third']
@@ -3728,7 +3728,7 @@ levels:
                       {print} teams[i] ' get to go ' position[i]
                     ```
                 feedback: Amazing!
-            -   option: |
+            -   option: |-
                     ```
                     teams = ['Macy', 'Kate', 'Lionell', 'Raj', 'Kim', 'Leroy']
                     position = ['first', 'second', 'third']
@@ -3736,7 +3736,10 @@ levels:
                       {print} teams[random] ' get to go ' position[random]
                     ```
                 feedback: This is not it.
-            -   option: |
+            -   hint: If you look carefully at the first line, you'll see that only the first two answers are possibly correct.
+                correct_answer: B
+                question_score: '10'
+                option: |-
                     ```
                     teams = ['Macy and Kate' 'Lionell and Raj' 'Kim and Leroy']
                     position = ['first' 'second' 'third']
@@ -3744,9 +3747,6 @@ levels:
                         {print} teams[i] ' get to go ' position[i]
                     ```
                 feedback: This is not going to work!
-                hint: If you look carefully at the first line, you'll see that only the first two answers are possibly correct.
-                correct_answer: B
-                question_score: '10'
         9:
             question_text: What is a possible output for this code?
             code: |-
@@ -3754,32 +3754,32 @@ levels:
                 {for} i {in} {range} 0 {to} 1
                   {print} 'I will travel to ' countries[random]
             mp_choice_options:
-            -   option: |
+            -   option: |-
                     ```
                     I will travel to Canada
                     I will travel to Canada
                     ```
                 feedback: Great job!
-            -   option: |
+            -   option: |-
                     ```
                     I will travel to Canada
                     ```
                 feedback: It will be repeated twice
-            -   option: |
+            -   option: |-
                     ```
                     I will travel to Canada, Zimbabwe and New Zealand
                     ```
                 feedback: This is not it.
-            -   option: |
+            -   hint: Range 0 to 1 is 2 times
+                correct_answer: A
+                question_score: '10'
+                option: |-
                     ```
                     I will travel to Canada
                     I will travel to Zimbabwe
                     I will travel to New Zealand
                     ```
                 feedback: It's only repeated twice
-                hint: Range 0 to 1 is 2 times
-                correct_answer: A
-                question_score: '10'
         10:
             question_text: Which 3 lines will complete this code correctly?
             code: |-
@@ -3792,32 +3792,32 @@ levels:
                     {add} i {to} list_of_raffle_numbers
                 {for} i {in} {range} 1 {to} 5
             mp_choice_options:
-            -   option: |
+            -   option: |-
                     ```
                     chosen_number = list_of_numbers at random
                     print books[i] ' will go to person number ' chosen_number
                     {add} chosen_number {to} list_of_numbers
                     ```
                 feedback: Almost there... but adding the winner to the list makes this raffle unfair
-            -   option: |
+            -   option: |-
                     ```
                     print person[i] ' wins ' book[i]
                     ```
                 feedback: There is no list called 'person'
-            -   option: |
+            -   option: |-
                     ```
                     chosen_number = list_of_numbers[people]
                     print books[people] ' will go to person number ' chosen_number
                     {remove} chosen_number {from} list_of_numbers
                     ```
                 feedback: This is not it.
-            -   option: |
+            -   hint: You need to use the {remove} command
+                correct_answer: D
+                question_score: '10'
+                option: |-
                     ```
                     chosen_number = list_of_numbers[random]
                     print books[i] ' will go to person number ' chosen_number
                     {remove} chosen_number {from} list_of_numbers
                     ```
                 feedback: Fantastic!
-                hint: You need to use the {remove} command
-                correct_answer: D
-                question_score: '10'
