@@ -3736,10 +3736,7 @@ levels:
                       {print} teams[random] ' get to go ' position[random]
                     ```
                 feedback: This is not it.
-            -   hint: If you look carefully at the first line, you'll see that only the first two answers are possibly correct.
-                correct_answer: B
-                question_score: '10'
-                option: |-
+            -   option: |-
                     ```
                     teams = ['Macy and Kate' 'Lionell and Raj' 'Kim and Leroy']
                     position = ['first' 'second' 'third']
@@ -3747,6 +3744,9 @@ levels:
                         {print} teams[i] ' get to go ' position[i]
                     ```
                 feedback: This is not going to work!
+            hint: If you look carefully at the first line, you'll see that only the first two answers are possibly correct.
+            correct_answer: B
+            question_score: '10'
         9:
             question_text: What is a possible output for this code?
             code: |-
@@ -3770,16 +3770,16 @@ levels:
                     I will travel to Canada, Zimbabwe and New Zealand
                     ```
                 feedback: This is not it.
-            -   hint: Range 0 to 1 is 2 times
-                correct_answer: A
-                question_score: '10'
-                option: |-
+            -    option: |-
                     ```
                     I will travel to Canada
                     I will travel to Zimbabwe
                     I will travel to New Zealand
                     ```
                 feedback: It's only repeated twice
+            hint: Range 0 to 1 is 2 times
+            correct_answer: A
+            question_score: '10'
         10:
             question_text: Which 3 lines will complete this code correctly?
             code: |-
@@ -3811,13 +3811,13 @@ levels:
                     {remove} chosen_number {from} list_of_numbers
                     ```
                 feedback: This is not it.
-            -   hint: You need to use the {remove} command
-                correct_answer: D
-                question_score: '10'
-                option: |-
+            -   option: |-
                     ```
                     chosen_number = list_of_numbers[random]
                     print books[i] ' will go to person number ' chosen_number
                     {remove} chosen_number {from} list_of_numbers
                     ```
                 feedback: Fantastic!
+            hint: You need to use the {remove} command
+            correct_answer: D
+            question_score: '10'
