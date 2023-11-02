@@ -42,6 +42,9 @@ describe('Save button test', () => {
 
     cy.get('#modal-confirm')
       .should('not.be.visible');
+
+    // wait 3s until the alert goes away!
+    cy.wait(3000);
     cy.get('#modal_alert_container')
       .should('not.be.visible');
     cy.get('#modal_alert_text')
