@@ -211,9 +211,9 @@ levels:
             question_text: Pernyataan mana yang benar?
             mp_choice_options:
             -   option: Anda dapat menggunakan perintah `{print}` untuk mengajukan pertanyaan.
-                feedback: 'Itulah gunanya meminta'
+                feedback: Itulah gunanya meminta
             -   option: Anda dapat menggunakan perintah `{ask}` untuk mengulangi jawaban.
-                feedback: 'itu tidak benar'
+                feedback: itu tidak benar
             -   option: Dengan perintah `{print}` Anda dapat menampilkan teks
                 feedback: Bagus
             -   option: Dengan perintah {sleep}, Anda dapat menghapus teks dari layar.
@@ -658,25 +658,25 @@ levels:
         1:
             question_text: Manakah dari kode berikut yang benar?
             mp_choice_options:
-            -   option: '```
-
-                    {print} ''Saya sangat bersemangat untuk mengikuti kuis ini!''
-
-                    ```'
+            -   option: |-
+                    ```
+                    {print} 'Saya sangat bersemangat untuk mengikuti kuis ini!'
+                    ```
                 feedback: Itu benar
-            -   option: "```\n{print} Saya sangat bersemangat untuk mengikuti kuis ini!\n```"
+            -   option: |-
+                    ```
+                    {print} Saya sangat bersemangat untuk mengikuti kuis ini!
+                    ```
                 feedback: '{print} sekarang membutuhkan tanda kutip!'
-            -   option: '```
-
-                    {print} ''Saya sangat bersemangat untuk mengikuti kuis ini!''
-
-                    ```'
-                feedback: 'jangan gunakan apostrof atau gunakan tanda kutip terbalik'
-            -   option: '```
-
-                    {print} ''Saya sangat bersemangat untuk mengikuti kuis ini!
-
-                    ```'
+            -   option: |-
+                    ```
+                    {print} 'Saya sangat bersemangat untuk mengikuti kuis ini!'
+                    ```
+                feedback: jangan gunakan apostrof atau gunakan tanda kutip terbalik
+            -   option: |-
+                    ```
+                    {print} 'Saya sangat bersemangat untuk mengikuti kuis ini!
+                    ```
                 feedback: hati-hati saat menggunakan tanda kutip dan apostrof
             hint: Di level 4 Anda memerlukan tanda kutip untuk 2 perintah.
             correct_answer: A
@@ -892,11 +892,11 @@ levels:
                 _ {print} 'Angka keberuntunganku 5!'
             mp_choice_options:
             -   option: '`{print}`'
-                feedback: 'Sudah ada perintah `{print}`.'
+                feedback: Sudah ada perintah `{print}`.
             -   option: '`{if}`'
-                feedback: 'Perintah `{if}` digunakan pada baris di atas.'
+                feedback: Perintah `{if}` digunakan pada baris di atas.
             -   option: '`{sleep}`'
-                feedback: 'Bukan itu!'
+                feedback: Bukan itu!
             -   option: '`{else}`'
                 feedback: Correct!
             hint: Manakah yang cocok dengan perintah `{if}`?
@@ -1898,7 +1898,10 @@ levels:
                     Kerja bagus!
                     ```
                 feedback: Bukan itu!
-            -   option: "```\nKomputer akan meledak dalam 5... 4... 3... 2... 1...\n```"
+            -   option: |-
+                    ```
+                    Komputer akan meledak dalam 5... 4... 3... 2... 1...
+                    ```
                 feedback: Bukan itu!
             -   option: |-
                     ```
