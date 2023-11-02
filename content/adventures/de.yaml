@@ -2912,10 +2912,10 @@ adventures:
                     **(extra)** Möchtest du mehr als eine Runde spielen? Erweitere den Code, sodass du mehrere Runden spielen kannst. Du kannst sogar ein `{ask}` verwenden, um die Nutzer zu fragen, wie viele Runden sie spielen möchten.
                 example_code: |
                     ```
-                    Auswahl {is} Schere, Stein, Papier
-                    deine_Wahl {is} {ask} 'Was wählst du?'
+                    Auswahl = Schere, Stein, Papier
+                    deine_Wahl = {ask} 'Was wählst du?'
                     {print} 'Du wählst ' deine_Wahl
-                    Computer_Wahl {is} Auswahl {at} {random}
+                    Computer_Wahl = Auswahl {at} {random}
                     {print} 'Der Computer wählt ' Computer_Wahl
                     {if} Computer_Wahl {is} deine_Wahl
                         {print} 'Unentschieden'

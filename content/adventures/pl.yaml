@@ -2704,7 +2704,7 @@ adventures:
             9:
                 story_text: "W tym poziomie można zaprogramować całą grę kamień, papier, nożyce poprzez zagnieżdżanie poleceń `{if}`. \n\n### Ćwiczenie\nCzy potrafisz dokończyć kod? Program musi powiedzieć, kto wygrał dla każdej kombinacji.\n\n**Dodatkowo** Chcesz zagrać w więcej niż jedną grę? Rozwiń\
                     \ kod tak, aby można było rozegrać wiele rund. Możesz nawet użyć `{ask}`, aby zapytać użytkownika, ile rund chce zagrać.\n"
-                example_code: "```\nopcje {is} papier, kamień, nożyce\ntwój_wybór {is} {ask} 'Co wybierasz?'\n{print} 'Wybrałeś ' twój_wybór \nwybór_komputera {is} opcje {at} {random}\n{print} 'Komputer wybrał ' wybór_komputera \n{if} wybór_komputera {is} twój_wybór \n    {print} 'remis'\n{if} wybór_komputera\
+                example_code: "```\nopcje = papier, kamień, nożyce\ntwój_wybór = {ask} 'Co wybierasz?'\n{print} 'Wybrałeś ' twój_wybór \nwybór_komputera = opcje {at} {random}\n{print} 'Komputer wybrał ' wybór_komputera \n{if} wybór_komputera {is} twój_wybór \n    {print} 'remis'\n{if} wybór_komputera\
                     \ {is} kamień\n    {if} twój_wybór  {is} papier\n        {print} 'Wygrałeś!'\n    {if} twój_wybór  {is} nożyce\n        {print} 'Przegrałeś!'\n#dokończ program\n```\n"
                 start_code: '# umieść tutaj swój kod'
             10:

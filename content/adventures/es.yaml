@@ -2888,10 +2888,10 @@ adventures:
                     \ código para que puedas jugar varias rondas. Incluso puedes usar un `{ask}` para preguntar al usuario cuantas rondas quieren jugar.\n"
                 example_code: |
                     ```
-                    opciones {is} piedra, papel, tijera
-                    tu_opción {is} {ask} '¿Que escoges?'
+                    opciones = piedra, papel, tijera
+                    tu_opción = {ask} '¿Que escoges?'
                     {print} 'Escogiste ' tu_opción
-                    opción_computadora {is} opciones {at} {random}
+                    opción_computadora = opciones {at} {random}
                     {print} 'La computadora escogió ' opción_computadora
                     {if} opción_computadora {is} tu_opción
                         {print} 'Empate'

@@ -2921,9 +2921,9 @@ adventures:
                     vragen hoeveel potjes er gespeeld gaan worden.
                 example_code: |
                     ```
-                    keuzes {is} steen, papier, schaar
-                    jouw_keuze {is} {ask} 'Wat kies jij?'
-                    computer_keuze {is} keuzes {at} {random}
+                    keuzes = steen, papier, schaar
+                    jouw_keuze = {ask} 'Wat kies jij?'
+                    computer_keuze = keuzes {at} {random}
                     {print} 'Jij kiest ' jouw_keuze
                     {print} 'De computer kiest ' computer_keuze
                     {if} computer_keuze {is} jouw_keuze

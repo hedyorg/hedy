@@ -2966,10 +2966,10 @@ adventures:
                     **Ek Görev** Birden fazla oyun mu oynamak istiyorsunuz? Birden fazla tur oynayabilmek için kodu genişletin. Kullanıcıya kaç tur oynamak istediğini sormak için bir `{ask}` bile kullanabilirsiniz.
                 example_code: |
                     ```
-                    seçimler {is} taş, kağıt, makas
-                    senin_seçimin {is} {ask} 'Sen neyi seçiyorsun?'
+                    seçimler = taş, kağıt, makas
+                    senin_seçimin = {ask} 'Sen neyi seçiyorsun?'
                     {print} 'Senin seçimin ' senin_seçimin
-                    bilgisayarın_seçimi {is} seçimler {at} {random}
+                    bilgisayarın_seçimi = seçimler {at} {random}
                     {print} 'Bilgisayarın seçimi ' bilgisayarın_seçimi
                     {if} bilgisayarın_seçimi {is} senin_seçimin
                         {print} 'Berabere'

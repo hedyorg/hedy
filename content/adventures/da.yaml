@@ -2830,10 +2830,10 @@ adventures:
                     In this level you can program the whole rock, paper, scissors game by nesting the `{if}` commands. Can you finish the code?
                 example_code: |
                     ```
-                    choices {is} rock, paper, scissors
-                    your_choice {is} {ask} 'What do you choose?'
+                    choices = rock, paper, scissors
+                    your_choice = {ask} 'What do you choose?'
                     {print} 'You choose ' your_choice
-                    computer_choice {is} choices {at} {random}
+                    computer_choice = choices {at} {random}
                     {print} 'The computer chooses ' computer_choice
                     {if} computer_choice {is} your_choice
                         {print} 'Tie'

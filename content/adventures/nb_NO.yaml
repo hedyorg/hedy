@@ -2768,10 +2768,10 @@ adventures:
                     På dette nivået kan du programmere hele stein, saks, papir ved å plassere `{if}`-kommandoer inni `{if}`-kommandoer. Kan du fullføre koden?
                 example_code: |
                     ```
-                    valgene {is} stein, saks, papir
-                    ditt_valg {is} {ask} 'Hva velger du?'
+                    valgene = stein, saks, papir
+                    ditt_valg = {ask} 'Hva velger du?'
                     {print} 'Du valgte ' ditt_valg
-                    datamaskinens_valg {is} valgene {at} {random}
+                    datamaskinens_valg = valgene {at} {random}
                     {print} 'Datamaskinen valgte ' datamaskinens_valg
                     {if} datamaskinens_valg {is} ditt_valg
                         {print} 'Uavgjort'

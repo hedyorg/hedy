@@ -2770,10 +2770,10 @@ adventures:
                     En ĉi tiu nivelo, vi povas programi la tutan ludon de roko, papero kaj tondilo ingante la {if}-komandojn. Ĉu vi povas fini la kodon?
                 example_code: |
                     ```
-                    elektoj {is} roko, papero, tondilo
-                    via_elekto {is} {ask} 'Kion vi elektas?'
+                    elektoj = roko, papero, tondilo
+                    via_elekto = {ask} 'Kion vi elektas?'
                     {print} 'Vi elektas ' via_elekto 'n'
-                    komputila_elekto {is} elektoj {at} {random}
+                    komputila_elekto = elektoj {at} {random}
                     {print} 'La komputilo elektas ' komputila_elekto 'n'
                     {if} komputila_elekto {is} via_elekto
                         {print} 'Vana partio'

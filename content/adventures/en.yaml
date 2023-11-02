@@ -2935,7 +2935,7 @@ adventures:
                     \ can play multiple rounds. You can even use an `{ask}` to ask the user how many rounds they want to play.\n"
                 example_code: |
                     ```
-                    choices {is} rock, paper, scissors
+                    choices = rock, paper, scissors
                     your_choice {is} {ask} 'What do you choose?'
                     {print} 'You choose ' your_choice
                     computer_choice {is} choices {at} {random}
