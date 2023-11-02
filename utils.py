@@ -301,6 +301,10 @@ def session_id():
     return session['session_id']
 
 
+def add_pending_achievement(data):
+    session['pending_achievements'] = session.get('pending_achievements', []) + [data]
+
+
 # https://github.com/python-babel/babel/issues/454
 def customize_babel_locale(custom_locales: dict):
     from babel.core import get_global
@@ -338,3 +342,15 @@ def base_url():
         url = request.host_url
 
     return url if not url.endswith('/') else url[:-1]
+
+
+def can_edit_class(user, Class):
+    """
+    Check if a given user has the permission to edit a class.
+
+    Returns:
+        bool: True if the user has edit permission, False otherwise.
+    """
+    return Class["teacher"] == user["username"] or \
+        any(second_teacher["username"] == user["username"] and second_teacher["role"] == "teacher"
+            for second_teacher in Class.get("second_teachers", []))
