@@ -2,6 +2,7 @@ import collections
 import json
 import os
 import uuid
+import logging
 
 from flask import g, jsonify, request, session
 from jinja_partials import render_partial
@@ -28,11 +29,11 @@ from .achievements import Achievements
 from .database import Database
 from .website_module import WebsiteModule, route
 
+logger = logging.getLogger(__name__)
 
 SLIDES = collections.defaultdict(hedy_content.NoSuchSlides)
 for lang in hedy_content.ALL_LANGUAGES.keys():
     SLIDES[lang] = hedy_content.Slides(lang)
-
 
 class ForTeachersModule(WebsiteModule):
     def __init__(self, db: Database, achievements: Achievements):
@@ -219,11 +220,11 @@ class ForTeachersModule(WebsiteModule):
             ))
     
     @route("/load-survey")
-    def load_survey(questions):
+    def load_survey(self, questions):
         return render_partial('htmx-survey.html', questions=questions)
 
-    @route("/submit-survey", methods=["POST"])
-    def submit_survey():
+    @route("/submit-survey/<question>", methods=["POST"])
+    def submit_survey(self, question):
         # Process survey submission
         user_responses = {}
         for key, value in request.form.items():
@@ -237,9 +238,10 @@ class ForTeachersModule(WebsiteModule):
         class_questions = [
         "What is the age range in your class?",
         "What is the spoken language in your class?",
-        "What is the gender balance in your class?"
+        "What is the gender balance in your class?",
         ]
-        return self.load_survey(class_questions)
+        logging.debug(class_questions)
+        return render_partial('htmx-survey.html', questions=class_questions)
 
     @route("/get-customization-level", methods=["GET"])
     @requires_login

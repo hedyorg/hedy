@@ -1,16 +1,21 @@
-<div id="survey-popup" class="fixed inset-0 flex items-center justify-center bg-black bg-opacity-40 hidden">
-<div class="bg-white p-4 rounded shadow-md">
-<div id="survey-text" class="text-white mb-8 text-xl"></div>
-    <form id="survey-form" hx-post="/submit-survey" hx-target="#survey-popup">
-    {% for question in questions %}
-        <div class="mb-4">
-        <p>{{ question }}</p>
-        <div class="flex items-center space-x-4">
-            <input type="text" name="question{{ forloop.counter }}">
-            </div>
-        </div>
-    {% endfor %}
-    <button type="submit" class="bg-blue-500 text-white rounded p-2">Submit</button>
-    </form>
-</div>
+<div id="survey" class="fixed top-0 left-0 w-full h-full flex items-center justify-center bg-gray-900 bg-opacity-50 z-50">
+    <div id="survey-text" class="text-white mb-8 text-xl">{{ _('title') }}</div>
+    <div class="bg-white w-96 p-6 rounded-lg shadow-lg">
+        <div id="survey-text" class="text-white mb-8 text-xl"></div>
+            <form id="survey-form" hx-post="/for-teachers/submit-survey/{{question}}" hx-target="#survey">
+            {% for question in questions %}
+                <div class="mb-4">
+                <p>{{ question }}</p>
+                <div class="flex items-center space-x-4">
+                    <input type="text" name="question{{ loop.index }}">
+                    </div>
+                </div>
+            {% endfor %}
+            <button type="submit" class="green-btn block m-4 w-40 pb-4 pt-4"
+            hx-trigger="click"
+            hx-post="/for-teachers/submit-survey/{{question}}"
+            hx-swap="outerHTML"
+      >Submit</button>
+            </form>
+    </div>
 </div>
