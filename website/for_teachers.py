@@ -218,11 +218,11 @@ class ForTeachersModule(WebsiteModule):
                 class_id=class_id
             ))
     
-    @route("/load_survey")
+    @route("/load-survey")
     def load_survey(questions):
         return render_partial('htmx-survey.html', questions=questions)
 
-    @route("/submit_survey", methods=["POST"])
+    @route("/submit-survey", methods=["POST"])
     def submit_survey():
         # Process survey submission
         user_responses = {}
@@ -232,7 +232,7 @@ class ForTeachersModule(WebsiteModule):
         # Handle the user's survey responses
         return
     
-    @route("/class_survey", methods=["GET"])
+    @route("/class-survey", methods=["GET"])
     def class_survey(self):
         class_questions = [
         "What is the age range in your class?",
