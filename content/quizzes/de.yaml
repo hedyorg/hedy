@@ -619,17 +619,17 @@ levels:
                     ```
                     {print} Ich bin sehr aufgeregt dieses Quiz zu machen!
                     ```
-                feedback: '`{ask}` benötigt ebenfalls Anführungszeichen!'
+                feedback: '`{print}` benötigt ebenfalls Anführungszeichen!'
             -   option: |-
                     ```
                     {print} 'I'ch bin sehr aufgeregt dieses Quiz zu machen!'
                     ```
-                feedback: '`{at} {random}` funktioniert weiterhin'
+                feedback: Nutze keine Apostrophen, nutze statt dessen einen Grave-Akzent
             -   option: |-
                     ```
                     {print} 'I'ch bin sehr aufgeregt dieses Quiz zu machen!
                     ```
-                feedback: Nein, aber 2 andere Befehle schon.
+                feedback: Vorsicht bei der Nutzung von Anführungszeichen und Apostrophen
             hint: In Level 4 benötigst du für 2 Befehle Anführungszeichen.
             correct_answer: A
             question_score: '10'
@@ -886,7 +886,7 @@ levels:
                 feedback: Das Passwort ist nicht Passwort...
             -   option: ALARM INTRUDER
                 feedback: Dies wird ausgegeben, wenn du das falsche Passwort eintippst!
-            hint: '`{if}` passwort `{is}` ... `{print}` ''Richtig!''!'''
+            hint: '`{if}` passwort `{is}` ... `{print}` ''Richtig!'''
             correct_answer: B
             question_score: '10'
         4:
@@ -926,7 +926,7 @@ levels:
             correct_answer: A
             question_score: '10'
         6:
-            question_text: Welches Wort sollte anstelle des Fragezeichens in der letzten Zeile stehen?
+            question_text: Welches Wort sollte anstelle des Leerzeichens in der letzten Zeile stehen?
             code: |-
                 {print} 'Ich bin Hedy die Fußballwahrsagerin!'
                 {print} 'Ich werde vorhersagen, welchen Platz dein Team am Ende belegen wird!'
@@ -958,7 +958,7 @@ levels:
             correct_answer: C
             question_score: '10'
         7:
-            question_text: Welches Wort sollte anstelle des Fragezeichens stehen?
+            question_text: Welches Wort sollte anstelle des Leerzeichens stehen?
             code: |-
                 {print} 'Ich kann vorhersagen, ob du ein Millionär sein wirst oder nicht!'
                 name {is} {ask} 'Was ist dein Name?'
@@ -977,7 +977,7 @@ levels:
             correct_answer: D
             question_score: '10'
         8:
-            question_text: Welches Wort sollte anstelle des Fragezeichens stehen?
+            question_text: Welches Wort sollte anstelle des Leerzeichens stehen?
             code: |-
                 Tier {is} {ask} 'Was ist dein Lieblingstier?'
                 {if} _ {is} Pinguin {print} 'Das ist auch mein Lieblingstier!'
@@ -1266,7 +1266,7 @@ levels:
                     {repeat} 100 {times} {print} 'hallo'
                     ```
                 feedback: Das ist richtig!
-            hint: Erst der wiederhole-Befehl, dann der `{print}` Befehl
+            hint: Erst der `{repeat}` -Befehl, dann der `{print}` Befehl
             correct_answer: D
             question_score: '10'
         3:
@@ -1301,7 +1301,7 @@ levels:
                 feedback: '`{repeat}` ist richtig geschrieben'
             -   option: '`{times}`'
                 feedback: '`{times}` ist richtig geschrieben'
-            hint: I'm ist falsch, du kannst keine Apostrophe verwenden
+            hint: I'm ist falsch, du kannst keine Apostrophe in einem Satz verwenden
             correct_answer: A
             question_score: '10'
         5:
@@ -1546,7 +1546,7 @@ levels:
             -   option: Das `{print}`-Kommando muss entfernt werden.
                 feedback: Nein, du brauchst es.
             -   option: Da ist ein Schreibfehler im `{repeat}` Befehl.
-                feedback: Nein, wiederhole ist die richtige Schreibweise
+                feedback: Nein, `{repeat}` ist die richtige Schreibweise
             -   option: Die zweite Zeile sollte mit 4 Leerzeichen als Einrückung beginnen.
                 feedback: Richtig!
             hint: Etwas fehlt in der zweiten Zeile?
@@ -1583,7 +1583,7 @@ levels:
                     Baby shark
                     Baby shark
                 feedback: Was wird wiederholt und was nicht.
-            hint: Was wird wiederholt und was nicht?.
+            hint: Was wird wiederholt und was nicht?
             correct_answer: C
             question_score: '10'
         4:
