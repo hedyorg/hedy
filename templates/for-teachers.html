@@ -36,7 +36,14 @@
             </tbody>
           </table>
         {% endif %}
-      <button class="green-btn mt-4" id="create_class_button" onclick='hedyApp.create_class ({{_('class_name_prompt')|default(None)|tojson}})'>{{_('create_class')}}</button>
+      <!-- <button class="green-btn mt-4" id="create_class_button" onclick='hedyApp.create_class ({{_('class_name_prompt')|default(None)|tojson}})'>{{_('create_class')}}</button> -->
+      <button class="green-btn" id="survey-button"
+      hx-trigger="click"
+      hx-get="/class_survey"
+      hx-target="#survey-popup"
+      hx-swap="outerHTML"
+      >{{_('survey-test')}}</button>
+      {{ render_partial('htmx-survey.html', questions=questions) }}
     </div>
     <div id="teacher_adventures" class="flex flex-col items-center gap-2 pb-4 border-b">
         <h2>{{_('my_adventures')}}</h2>

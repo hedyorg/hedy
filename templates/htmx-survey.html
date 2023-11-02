@@ -1,0 +1,16 @@
+<div id="survey-popup" class="fixed inset-0 flex items-center justify-center bg-black bg-opacity-40 hidden">
+<div class="bg-white p-4 rounded shadow-md">
+<div id="survey-text" class="text-white mb-8 text-xl"></div>
+    <form id="survey-form" hx-post="/submit_survey" hx-target="#survey-popup">
+    {% for question in survey_questions %}
+        <div class="mb-4">
+        <p>{{ question }}</p>
+        <div class="flex items-center space-x-4">
+            <input type="text" name="question{{ forloop.counter }}">
+            </div>
+        </div>
+    {% endfor %}
+    <button type="submit" class="bg-blue-500 text-white rounded p-2">Submit</button>
+    </form>
+</div>
+</div>

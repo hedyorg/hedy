@@ -217,6 +217,29 @@ class ForTeachersModule(WebsiteModule):
                 page='customize-class',
                 class_id=class_id
             ))
+    
+    @route("/load_survey")
+    def load_survey(questions):
+        return render_partial('htmx-survey.html', questions=questions)
+
+    @route("/submit_survey", methods=["POST"])
+    def submit_survey():
+        # Process survey submission
+        user_responses = {}
+        for key, value in request.form.items():
+            if key.startswith("question"):
+                user_responses[key] = value
+        # Handle the user's survey responses
+        return
+    
+    @route("/class_survey", methods=["GET"])
+    def class_survey(self):
+        class_questions = [
+        "What is the age range in your class?",
+        "What is the spoken language in your class?",
+        "What is the gender balance in your class?"
+        ]
+        return self.load_survey(class_questions)
 
     @route("/get-customization-level", methods=["GET"])
     @requires_login
