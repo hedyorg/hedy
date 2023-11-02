@@ -184,9 +184,9 @@ adventures:
                         {print} 'Robin ziet een interessant boek.'
                         boek = {ask} 'Koopt Robin het boek?'
                         {if} boek {is} ja
-                            {print} 'Robin koopt het boek en gaat naar huis'
-                        {else}
-                            {print} 'Robin verlaat de winkel en gaat naar huis'
+                    _ {print} 'Robin koopt het boek en gaat naar huis'
+                    _ {else}
+                    _ {print} 'Robin verlaat de winkel en gaat naar huis'
                     {else}
                         {print} 'Robin gaat naar huis'
                     ```
@@ -1045,12 +1045,12 @@ adventures:
                 story_text: |
                     Je kunt ook in dit level weer een dobbelsteen maken. Met de `{repeat}` code kun je makkelijk een heel handje dobbelstenen rollen.
 
-                    ###Opdracht
+                    ### Opdracht
                     Probeer de voorbeeldcode maar eens af te maken!  Op de streepjes moeten meerdere commando's en tekens komen. **Extra** Kun jij een andere spel met dobbelstenen maken, gebruik wel `{repeat}`!
                 example_code: |
                     ```
-                    keuzes {is} 1, 2, 3, 4, 5, regenworm
-                    {repeat} _ _ {print} _ _ _
+                    keuzes = 1, 2, 3, 4, 5, 6
+                    _ _ _ _ _ _ _
                     ```
                 start_code: '{print} ''Wat zal de dobbelsteen deze keer aangeven?'''
             10:
@@ -1386,12 +1386,12 @@ adventures:
                 start_code: '# Schrijf jouw code hier'
             7:
                 story_text: |
-                    ###Opdracht
+                    ### Opdracht
                     Maak het programma af zodat het je verteld of de ander ook verliefd op jouw is.
                 example_code: |
                     ```
                     {print} 'Ik heb een bloem met tover-blaadjes'
-                    {print} 'Als je de blaadjes plukt, de bloem wil je vertellen of jouw geliefde ook verliefd op jouw is.'
+                    {print} 'Als je de blaadjes plukt, vertelt de bloem of jouw geliefde ook verliefd op jou is.'
                     aantal = {ask} 'Hoeveel blaadjes wil je plukken?'
                     opties = ook verliefd op jou, niet verliefd op jou
                     _ _ _ _ 'Jouw geliefde is ' opties {at} {random}
@@ -1623,7 +1623,7 @@ adventures:
                         {else}
                             {print} 'GAME OVER'
                     {if} speler {is} levend
-                        {print} ' Hoera! Je bent ontsnapt!'
+                        {print} 'Hoera! Je bent ontsnapt!'
                     ```
                 start_code: '{print} ''Ontsnap uit het spookhuis!'''
             11:
@@ -1769,6 +1769,7 @@ adventures:
                 story_text: |
                     In dit level kun je een {if} commando in een ander {if} commando stoppen.
                 example_code: |
+                    ```
                     doorgaan = {ask} 'Wil je doorgaan?'
                     {if} doorgaan = ja
                         zeker = {ask} 'Weet je het zeker?'
@@ -1778,6 +1779,7 @@ adventures:
                             {print} 'Je bent niet zeker'
                     {else}
                         {print} 'Je wil niet doorgaan'
+                    ```
                 start_code: |
                     doorgaan = {ask} 'Wil je doorgaan?'
                     {if} doorgaan = ja
@@ -2394,11 +2396,11 @@ adventures:
         levels:
             7:
                 story_text: |
-                    ## Repeat! Repeat! Repeat!
-                    Level 7 adds the `{repeat}` command.  `{repeat}` can be used to execute one line of code multiple times. Like this:
+                    ## Herhaal! Herhaal! Herhaal!
+                    In level 7 leer je het `{repeat}` commando. Met `{repeat}` kan je een regel code meerdere keren laten uitvoeren. Zoals dit:
 
-                    ### Exercise
-                    Play around with the repeat command. Can you make the happy birthday song in only 3 lines of code instead of 4 now?
+                    ### Opdracht
+                    Probeer het `{repeat}` commando uit. Kan jij het happy birthday liedje in 3 regels code opschrijven in plaats van 4?
                 example_code: |
                     ```
                     {repeat} 3 {times} {print} 'Hedy is leuk!'
@@ -3662,7 +3664,7 @@ adventures:
                 start_code: hoeken = {ask} 'Hoeveel hoeken krijgt dit figuur?'
             9:
                 story_text: |
-                    We kunnen met een `{repeat}` in een `{repeat}` we complexere figuren maken.
+                    We kunnen met een `{repeat}` in een `{repeat}` complexere figuren maken.
 
                     ### Opdracht 1
                     De voorbeeldcode tekent drie zwarte driehoeken, verander dat in vijf roze vierkanten.
