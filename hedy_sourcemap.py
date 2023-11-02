@@ -1,4 +1,5 @@
 import re
+import textwrap
 import exceptions
 from os import path
 from lark import Tree
@@ -53,10 +54,11 @@ class SourceCode:
     a source_range (SourceRange) and the code (str)
     """
 
-    def __init__(self, source_range: SourceRange, code: str, error: Exception = None):
+    def __init__(self, source_range: SourceRange, code: str, error: Exception = None, command_name: str = None):
         self.source_range = source_range
         self.code = code
         self.error = error
+        self.command_name = command_name
 
     def __hash__(self):
         return hash((
@@ -78,7 +80,7 @@ class SourceCode:
 
     def __str__(self):
         if self.error is None:
-            return f'{self.source_range} --- {self.code}'
+            return f'{self.source_range} --- {self.code} --- {self.command_name}'
         else:
             return f'{self.source_range} -- ERROR[{self.error}] CODE[{self.code}]'
 
@@ -131,6 +133,8 @@ class SourceMap:
     def set_python_output(self, python_code):
         self.python_code = python_code
         python_code_mapped = list()
+        hedy_lines = self.hedy_code.split('\n')
+        indent_size = find_program_indent_length(hedy_lines)
 
         def line_col(context, idx):
             return context.count('\n', 0, idx) + 1, idx - context.rfind('\n', 0, idx)
@@ -138,13 +142,29 @@ class SourceMap:
         for hedy_source_code, python_source_code in self.map.items():
             if hedy_source_code.error is not None or python_source_code.code == '':
                 continue
+            if self.level <= 7:
+                start_index = -1
+                number_of_indents = 0
+                while start_index == -1 and number_of_indents < 10:
+                    python_statement_code = textwrap.indent(python_source_code.code, '  '*number_of_indents)
+                    start_index = python_code.find(python_statement_code)
+                    code_char_length = len(python_source_code.code)
 
-            start_index = python_code.find(python_source_code.code)
-            code_char_length = len(python_source_code.code)
+                    for i in range(python_code_mapped.count(python_source_code.code)):
+                        start_index = python_code.find(python_statement_code, start_index+code_char_length)
+                        start_index = max(0, start_index)  # not found (-1) means that start_index = 0
+                    number_of_indents += 1
+            else:
+                number_of_indents = find_indent_length(
+                    hedy_lines[hedy_source_code.source_range.from_line - 1]) // indent_size
 
-            for i in range(python_code_mapped.count(python_source_code.code)):
-                start_index = python_code.find(python_source_code.code, start_index+code_char_length)
-                start_index = max(0, start_index)  # not found (-1) means that start_index = 0
+                python_statement_code = textwrap.indent(python_source_code.code, '  '*number_of_indents)
+                start_index = python_code.find(python_statement_code)
+                code_char_length = len(python_source_code.code)
+
+                for i in range(python_code_mapped.count(python_source_code.code)):
+                    start_index = python_code.find(python_statement_code, start_index+code_char_length)
+                    start_index = max(0, start_index)  # not found (-1) means that start_index = 0
 
             end_index = start_index + code_char_length
             start_line, start_column = line_col(python_code, start_index)
@@ -202,10 +222,10 @@ class SourceMap:
                     'to_column': python_source_code.source_range.to_column,
                 },
                 'error': hedy_source_code.error,
+                'command': hedy_source_code.command_name
             }
 
             index += 1
-
         return response_map
 
     def get_compressed_mapping(self):
@@ -281,7 +301,8 @@ def source_map_rule(source_map: SourceMap):
                     meta.container_end_line, meta.container_end_column
                 ),
                 hedy_code_input,
-                error=error
+                error=error,
+                command_name=function.__name__
             )
 
             python_code = SourceCode(
@@ -313,3 +334,29 @@ def source_map_transformer(source_map: SourceMap):
         return cls
 
     return decorate
+
+
+def find_indent_length(line):
+    number_of_spaces = 0
+    for x in line:
+        if x == ' ':
+            number_of_spaces += 1
+        else:
+            break
+    return number_of_spaces
+
+
+def find_program_indent_length(program_lines):
+    indent_size = 4
+    found_indent_size = False
+    for line in program_lines:
+        leading_spaces = find_indent_length(line)
+        # continue if line is just spaces
+        if leading_spaces == len(line):
+            continue
+
+        if not found_indent_size and leading_spaces > 0:
+            indent_size = leading_spaces
+            found_indent_size = True
+
+    return indent_size

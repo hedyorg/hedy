@@ -73,6 +73,9 @@ htmx.on('htmx:sendError', () => {
  * The server can trigger achievement events
  */
 htmx.on('displayAchievements', (ev) => {
-    const achievements = (ev as any).detail as Achievement[];
-    showAchievements(achievements, true, '');
+    const payloads = (ev as any).detail.value
+    for (const payload of payloads) {
+        const achievement= payload["achievement"] as Achievement[]
+        showAchievements(achievement, payload["reload"], payload["redirect"])
+    }
 });

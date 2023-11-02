@@ -8,52 +8,52 @@ levels:
             -   option: Heddy
                 feedback: Bukan yang ini!
             -   option: Haydie
-                feedback: Not this one!
+                feedback: Bukan yang ini!
             -   option: Heidi
-                feedback: Not this one!
-            hint: It's named after Hedy Lamarr.
+                feedback: Bukan yang ini!
+            hint: Itu dinamai sesuai dengan Hedy Lamarr.
             correct_answer: A
             question_score: '10'
         2:
-            question_text: Which command makes text appear?
+            question_text: Yang perlu diisi di tempat kosong agar teks Hello! muncul?
             code: ___ Hello!
             mp_choice_options:
             -   option: |-
                     ```
                     {echo}
                     ```
-                feedback: '`{echo}` repeats a given answer.'
+                feedback: '`{echo}` mengulang jawaban yang diberikan.'
             -   option: |-
                     ```
                     {print}
                      ```
-                feedback: Correct!
+                feedback: Benar!
             -   option: |-
                     ```
                     hello
                     ```
-                feedback: Hello isn't a command.
+                feedback: Hello bukan perintah.
             -   option: |-
                     ```
                     {ask}
                     ```
-                feedback: With `{ask}`, you can ask a question.
-            hint: _?_ Hello world!
+                feedback: Dengan `{ask}`, kamu bisa bertanya.
+            hint: _ Halo dunia!
             correct_answer: B
             question_score: '10'
         3:
-            question_text: How do you ask what someone's favorite color is?
+            question_text: Bagaimana cara kamu bertanya warna favorit seseorang?
             mp_choice_options:
             -   option: |-
                     ```
                     {print} What is your favorite color?
                     ```
-                feedback: '`{print}` prints text, but it doesn''t ask questions.'
+                feedback: '`{print}` mencetak teks, tetapi tidak mengajukan pertanyaan.'
             -   option: |-
                     ```
                     {ask} {print} What is your favorite color?
                     ```
-                feedback: You only need one command, not two.
+                feedback: Anda hanya perlu satu perintah, bukan dua.
             -   option: |-
                     ```
                     {ask} What is your favorite color?
@@ -63,166 +63,166 @@ levels:
                     ```
                     {echo} What is your favorite color?
                     ```
-                feedback: '`{echo}` repeats your answer back to you.'
-            hint: You can {ask} something with the {ask} command
+                feedback: '`{echo}` mengulangi jawaban Anda kembali.'
+            hint: Anda dapat menanyakan sesuatu dengan perintah `{ask}`
             correct_answer: C
             question_score: '10'
         4:
-            question_text: What is wrong with this code?
+            question_text: Apa yang salah dengan kode ini?
             code: |-
-                Hi Im Hedy!
-                {ask} Who are you?
-                {echo} Hi...
+                Hai, saya Hedy!
+                {ask} Siapa kamu?
+                {echo} Hai...
             mp_choice_options:
-            -   option: '`{print}` in line 1 is missing.'
-                feedback: Correct!
-            -   option: Im in line 1 is spelled wrong.
-                feedback: Im is spelled wrong on purpose; Hedy doesn't understand the apostrophes yet.
-            -   option: '`{echo}` isn''t a command.'
-                feedback: '`{echo}` is a command, there''s another mistake.'
-            -   option: Nothing! This is a perfect code!
-                feedback: Wrong, look carefully!
-            hint: Line 1 doesn't seem right
+            -   option: '`{print}` di baris 1 tidak ada.'
+                feedback: Benar!
+            -   option: Perintah di baris 2 salah dieja.
+                feedback: Perintahnya dieja dengan benar.
+            -   option: '`{echo}` bukanlah sebuah perintah.'
+                feedback: '`{echo}` adalah sebuah perintah, ada kesalahan lain.'
+            -   option: Tidak ada apa-apa! Ini adalah kode yang sempurna!
+                feedback: Salah, perhatikan baik-baik!
+            hint: Baris 1 sepertinya tidak benar
             correct_answer: A
             question_score: '10'
         5:
-            question_text: Which command is missing in line 2?
+            question_text: Perintah mana yang hilang di baris 2?
             code: |-
-                {ask} What is your favorite pet?
-                _?_ So your favorite pet is...
+                {ask} Apa hewan peliharaan favoritmu?
+                _ Jadi hewan peliharaan favoritmu adalah...
             mp_choice_options:
             -   option: |-
                     ```
                     {print}
                     ```
-                feedback: No, you would like the answer to be repeated back to you.
+                feedback: Tidak, Anda ingin jawabannya diulang kembali kepada Anda.
             -   option: |-
                     ```
                     Hedy
                     ```
-                feedback: Hedy isn't a command.
+                feedback: Hedy bukan sebuah perintah.
             -   option: |-
                     ```
                     {ask}
                     ```
-                feedback: With `{ask}` you can ask a question.
+                feedback: Dengan `{ask}` Anda dapat mengajukan pertanyaan.
             -   option: |-
                     ```
                     {echo}
                     ```
                 feedback: Right on!
-            hint: You want to see the answer at the end of line 2...
+            hint: Anda ingin melihat jawabannya di akhir baris 2...
             correct_answer: D
             question_score: '10'
         6:
-            question_text: What's wrong with this code?
+            question_text: Apa yang salah dengan kode ini?
             code: |-
-                {print} Hi im Hedy!
-                {print} Which football team do you support?
-                {echo} You support...
-                {print} Cool! Me too!
+                {print} Hai, saya Hedy!
+                {print} Tim sepak bola mana yang Anda dukung?
+                {echo} Anda mendukung...
+                {print} Keren! Saya juga!
             mp_choice_options:
             -   option: In line 1 `{print}` should be replaced with `{ask}`.
-                feedback: '`{print}` in line 1 is correct.'
+                feedback: '`{print}` pada baris 1 benar.'
             -   option: In line 2, `{print}` should be replaced with `{ask}`.
-                feedback: Great! You paid attention!
-            -   option: Line 3 has to begin with `{print}` instead of `{echo}`.
-                feedback: '`{echo}` is correct.'
-            -   option: In line 4, `{print}` is spelled wrong.
-                feedback: No, there is a mistake somewhere else
-            hint: Check the `{print}` commands.
+                feedback: Hebat! Anda memperhatikan!
+            -   option: Baris 3 harus dimulai dengan `{print}`, bukan `{echo}`.
+                feedback: '`{echo}` benar.'
+            -   option: Pada baris 4, `{print}` salah dieja.
+                feedback: Tidak, ada kesalahan di tempat lain
+            hint: Periksa perintah `{print}`.
             correct_answer: B
             question_score: '10'
         7:
-            question_text: What's wrong with this code?
+            question_text: Apa yang salah dengan kode ini?
             code: |-
-                {print} Welcome at Hedys restaurant!
-                {ask} What would you like to eat?
-                {echo} So you want to order ...
-                {print} Coming right up! Enjoy!
+                {print} Selamat datang di restoran Hedys!
+                {ask} Kamu ingin makan apa?
+                {echo} Jadi kamu ingin memesan...
+                {print} Segera hadir! Menikmati!
             mp_choice_options:
             -   option: In line 1 `{print}` needs to be replaced with `{ask}`
-                feedback: Are you sure something is wrong?
+                feedback: Apakah Anda yakin ada sesuatu yang salah?
             -   option: In line 1 `{print}` needs to be replaced with `{echo}`
-                feedback: Are you sure something's wrong?
+                feedback: Apakah Anda yakin ada sesuatu yang salah?
             -   option: In line 3 `{echo}` needs to be replaced with `{print}`
-                feedback: Are you sure something is wrong?
-            -   option: Nothing! This is a perfect code!
-                feedback: Correct!
-            hint: Check the code line by line
+                feedback: Apakah Anda yakin ada sesuatu yang salah?
+            -   option: Tidak ada apa-apa! Ini adalah kode yang sempurna!
+                feedback: Benar!
+            hint: Periksa kode baris demi baris
             correct_answer: D
             question_score: '10'
         8:
-            question_text: How do you use the `{echo}` command?
+            question_text: Bagaimana cara menggunakan perintah `{echo}`?
             mp_choice_options:
-            -   option: You can use it to `{ask}` a question.
-                feedback: That's what `{ask}` is for!
-            -   option: You can use it to `{print}` text.
-                feedback: That's what `{print}` is for!
-            -   option: You can use it to repeat an answer.
-                feedback: Good job!
-            -   option: You can use it to make text disappear.
-                feedback: That's not right...
+            -   option: Anda dapat menggunakannya untuk `{ask}` pertanyaan.
+                feedback: Itulah gunanya `{ask}`!
+            -   option: Anda dapat menggunakannya dengan cara yang persis sama seperti `{print}`.
+                feedback: Itulah gunanya `{print}`!
+            -   option: Anda dapat menggunakannya untuk mengulangi jawaban.
+                feedback: Kerja bagus!
+            -   option: Anda dapat menggunakannya untuk menghilangkan teks.
+                feedback: Itu tidak benar...
             hint: '`{echo}` is used after an `{ask}` command.'
             correct_answer: C
             question_score: '10'
         9:
-            question_text: What's wrong with this code?
+            question_text: Apa yang salah dengan kode ini?
             code: |-
-                {print} Hello!
-                {print} How are you doing?
-                {echo} So you are doing...
+                {print} Halo!
+                {print} Bagaimana kabarmu?
+                {echo} Jadi yang kamu lakukan...
             mp_choice_options:
             -   option: '`{print}` in line 1 should be `{ask}`'
-                feedback: No, `{print}` is right. Where is the question being asked?
+                feedback: Tidak, `{print}` benar. Dimana pertanyaannya diajukan?
             -   option: '`{print}` in line 2 should be `{ask}`'
                 feedback: Super!
             -   option: '`{echo}` in line 3 should be `{ask}`'
-                feedback: No, `{echo}` is right. Where is the question being asked?
-            -   option: Nothing. This is a perfect code!
-                feedback: Look carefully for the mistake...
-            hint: '`{ask}` allows you to ask a question'
+                feedback: Tidak, `{echo}` benar. Dimana pertanyaannya diajukan?
+            -   option: Tidak ada apa-apa. Ini adalah kode yang sempurna!
+                feedback: Perhatikan baik-baik kesalahannya...
+            hint: '`{ask}` memungkinkan Anda mengajukan pertanyaan'
             correct_answer: B
             question_score: '10'
         10:
-            question_text: Which output will be in your outputscreen after you've run this code?
+            question_text: Output mana yang akan ada di layar output Anda setelah Anda menjalankan kode ini?
             code: |-
                 {ask} Are you ready to go to level 2?
                 {echo}
                 {echo}
             mp_choice_options:
             -   option: Are you ready to go to level 2?
-                feedback: There are two echo commands
+                feedback: Ada dua perintah `{echo}`
             -   option: |-
                     Yes!
                     Yes!
                 feedback: Great job!
             -   option: Yes!
-                feedback: There are two echo commands
+                feedback: Ada dua perintah `{echo}`
             -   option: |-
                     Are you ready to go to level 2?
                     Yes!
-                feedback: There are two echo commands
-            hint: Let's go!
+                feedback: Ada dua perintah `{echo}`
+            hint: Ayo!
             correct_answer: B
             question_score: '10'
     2:
         1:
-            question_text: Which statement is true?
+            question_text: Pernyataan mana yang benar?
             mp_choice_options:
-            -   option: In level 2 the `{print}` command doesn't exist anymore
-                feedback: '`{print}` still works'
-            -   option: In level 2 the `{ask}` command doesn't exist anymore
-                feedback: '`{ask}` still works!'
-            -   option: In level 2 the `{echo}` command doesn't exist anymore
-                feedback: Good
-            -   option: In level 2 all the level 1 commands still work
-                feedback: No one command doesn't work anymore.
-            hint: '`{print}` and `{ask}` still exist.'
+            -   option: Anda dapat menggunakan perintah `{print}` untuk mengajukan pertanyaan.
+                feedback: Itulah gunanya meminta
+            -   option: Anda dapat menggunakan perintah `{ask}` untuk mengulangi jawaban.
+                feedback: itu tidak benar
+            -   option: Dengan perintah `{print}` Anda dapat menampilkan teks
+                feedback: Bagus
+            -   option: Dengan perintah {sleep}, Anda dapat menghapus teks dari layar.
+                feedback: Itu bukan cara kerja `{sleep}`.
+            hint: '`{print}` masih berfungsi dengan cara yang sama seperti di level 1'
             correct_answer: C
             question_score: '10'
         2:
-            question_text: Which code is correct?
+            question_text: Kode mana yang benar?
             mp_choice_options:
             -   option: |-
                     ```
@@ -233,403 +233,403 @@ levels:
                     ```
                     {ask} {is} name What is your name
                     ```
-                feedback: The words are right, the order is not!
+                feedback: Kata-katanya benar, urutannya tidak!
             -   option: |-
                     ```
                     {ask} What is your name?
                     ```
-                feedback: This worked in level 1, but in level 2 and up it works differently.
+                feedback: Ini berfungsi di level 1, tetapi di level 2 dan lebih tinggi cara kerjanya berbeda.
             -   option: |-
                     ```
                     {ask} What is your name? {is} name
                     ```
-                feedback: The words are right, the order isn't!
-            hint: '`{ask}` doesn''t work like in level 1'
+                feedback: Kata-katanya benar, urutannya tidak!
+            hint: '`{ask}` tidak berfungsi seperti di level 1'
             correct_answer: A
             question_score: '10'
         3:
-            question_text: What appears on your output screen when you run this code?
+            question_text: Apa yang muncul di layar keluaran saat Anda menjalankan kode ini?
             code: |-
-                name {is} Marleen
-                {print} name goes to the market and she buys an apple.
+                nama {is} Marleen
+                {print} nama pergi ke pasar dan dia membeli sebuah apel.
             mp_choice_options:
-            -   option: name goes to the market and she buys an apple.
-                feedback: The word name is replaced with Marleen
-            -   option: Marleen goes to the market.
-                feedback: The second part of the sentence isn't left out!
-            -   option: Marleen goes to the market and she buys an apple.
+            -   option: nama pergi ke pasar dan dia membeli sebuah apel.
+                feedback: Kata nama diganti dengan Marleen
+            -   option: Marleen pergi ke pasar.
+                feedback: Bagian kedua dari kalimat tersebut tidak ketinggalan!
+            -   option: Marleen pergi ke pasar dan dia membeli sebuah apel.
                 feedback: Right on!
-            -   option: Marleen goes to the market and Marleen buys an apple.
-                feedback: She is not replaced with the name
-            hint: The word name is replaced with Marleen
+            -   option: Marleen pergi ke pasar dan Marleen membeli sebuah apel.
+                feedback: Dia tidak diganti dengan nama
+            hint: Kata nama diganti dengan Marleen
             correct_answer: C
             question_score: '10'
         4:
-            question_text: What will you see on the output screen when you run this code?
+            question_text: Apa yang akan Anda lihat di layar keluaran saat Anda menjalankan kode ini?
             code: |-
                 name {is} Hedy
                 {print} Hi my name is name!
             mp_choice_options:
             -   option: Hi my name is name
-                feedback: The variable name is replaced with Hedy
+                feedback: Nama variabel diganti dengan Hedy
             -   option: Hi my name is Hedy
-                feedback: The variable name is replaced with Hedy
+                feedback: Nama variabel diganti dengan Hedy
             -   option: Hi my Hedy is name
-                feedback: The variable name is replaced with Hedy
+                feedback: Nama variabel diganti dengan Hedy
             -   option: Hi my Hedy is Hedy
-                feedback: Correct, this mistake will be fixed in level 4!
-            hint: '''name'' is being replaced with ''Hedy'' in both places'
+                feedback: Benar, kesalahan ini akan diperbaiki di level 4!
+            hint: '''nama'' diganti dengan ''Hedy'' di kedua tempat'
             correct_answer: D
             question_score: '10'
         5:
-            question_text: What happens when you use the `{sleep}` command?
+            question_text: Apa yang terjadi jika Anda menggunakan perintah `{sleep}`?
             mp_choice_options:
-            -   option: It slows down your computer
-                feedback: fortunately not!
-            -   option: It closes down Hedy
-                feedback: fortunately not!
-            -   option: Your program pauses for a second and then continues
-                feedback: That's right!
-            -   option: You put it at the end so Hedy knows your program is finished
-                feedback: No it would be useless at the end of your code
-            hint: The computer waits for a second at the `{sleep}` command
+            -   option: Ini memperlambat komputer Anda
+                feedback: untungnya tidak!
+            -   option: Itu menutupi Hedy
+                feedback: untungnya tidak!
+            -   option: Program Anda berhenti sejenak dan kemudian melanjutkan
+                feedback: Itu benar!
+            -   option: Anda meletakkannya di akhir agar Hedy tahu program Anda sudah selesai
+                feedback: Tidak, itu akan sia-sia di akhir kode Anda
+            hint: Komputer menunggu beberapa detik pada perintah `{sleep}`
             correct_answer: C
             question_score: '10'
         6:
-            question_text: What should be on the lines?
+            question_text: Apa yang harus dipertaruhkan?
             code: |-
-                {print} And the award for best programming language goes to...
-                _?_
+                {print} Dan penghargaan untuk bahasa pemrograman terbaik diberikan kepada...
+                _
                 {print} Hedy!
             mp_choice_options:
             -   option: |-
                     ```
                     {sleep}
                     ```
-                feedback: Perfect!
+                feedback: Sempurna!
             -   option: |-
                     ```
                     {echo}
                     ```
-                feedback: There is nothing to repeat back here
+                feedback: Tidak ada yang perlu diulangi di sini
             -   option: |-
                     ```
                     {print}
                     ```
-                feedback: There is no text there to `{print}` there
+                feedback: Tidak ada teks untuk `{print}` di sana
             -   option: |-
                     ```
                     {ask}
                     ```
-                feedback: There is no question there to be asked
-            hint: Pause for dramatic effect...
+                feedback: Tidak ada pertanyaan yang perlu ditanyakan
+            hint: Jeda untuk efek dramatis...
             correct_answer: A
             question_score: '10'
         7:
-            question_text: What command should be used on line 2?
+            question_text: Perintah apa yang harus digunakan pada baris 2?
             code: |-
-                {print} I will explode in 3 seconds!
-                _?_
+                {print} Saya akan meledak dalam 3 detik!
+                _
                 {print} BOOM!
             mp_choice_options:
             -   option: |-
                     ```
                     {print} 3
                     ```
-                feedback: You don't need to `{print}`
+                feedback: Anda tidak perlu `{print}`
             -   option: |-
                     ```
                     {sleep} 3
                     ```
-                feedback: Perfect!
+                feedback: Sempurna!
             -   option: |-
                     ```
                     {sleep}
                     ```
-                feedback: This way the bomb will explode in 1 second
+                feedback: Dengan cara ini bom akan meledak dalam 1 detik
             -   option: |-
                     ```
                     {sleep} {sleep} {sleep}
                     ```
-                feedback: Make it easier on yourself by using the number 3
-            hint: You want the computer to wait for 3 seconds
+                feedback: Permudah diri Anda dengan menggunakan angka 3
+            hint: Anda ingin komputer menunggu selama 3 detik
             correct_answer: B
             question_score: '10'
         8:
-            question_text: How would you correct the first line of code?
+            question_text: Bagaimana cara Anda memperbaiki baris kode pertama?
             code: |-
-                {ask} {is} How old are you?
-                {print} age
+                {ask} {is} Berapa umurmu?
+                {print} usia
             mp_choice_options:
             -   option: |-
                     ```
                     age {ask} {is} How old are you?
                     ```
-                feedback: That is the wrong order
+                feedback: Itu adalah urutan yang salah
             -   option: |-
                     ```
                     {ask} {is} age How old are you?
                     ```
-                feedback: That is the wrong order
+                feedback: Itu adalah urutan yang salah
             -   option: |-
                     ```
                     age {is} {ask} How old are you?
                     ```
-                feedback: You get it!
+                feedback: Kau mengerti!
             -   option: |-
                     ```
                     age {is} How old are you?
                     ```
                 feedback: Where is the `{ask}` command?
-            hint: The variable name should come first
+            hint: Nama variabel harus didahulukan
             correct_answer: C
             question_score: '10'
         9:
-            question_text: What is going wrong in this code?
+            question_text: Apa yang salah dalam kode ini?
             code: |-
-                dogs {is} animal
-                {print} I love animal
+                anjing {is} binatang
+                {print} Saya suka binatang
             mp_choice_options:
-            -   option: 'Line 1 should say: dogs `{is}` animals'
-                feedback: The variable name is animal
-            -   option: 'Line 1 should say: animal `{is}` dogs'
+            -   option: 'Baris 1 seharusnya berbunyi: anjing `{is}` binatang'
+                feedback: Nama variabelnya adalah hewan
+            -   option: 'Baris 1 harus mengatakan: hewan `{is}` anjing'
                 feedback: Great!
-            -   option: 'Line 2 should say: `{print}` I love animals'
-                feedback: The variable name is animal
-            -   option: 'Line 2 should say: `{sleep}` I love animals'
-                feedback: Sleep is not used to `{print}` text
-            hint: You want to `{print}` 'I love dogs'
+            -   option: 'Baris 2 seharusnya berbunyi: `{print}` Saya suka binatang'
+                feedback: Nama variabelnya adalah hewan
+            -   option: 'Baris 2 seharusnya berbunyi: `{sleep}` Saya suka binatang'
+                feedback: Tidur tidak digunakan untuk `{print}` teks
+            hint: Anda ingin `{print}` 'Saya suka anjing-anjing'
             correct_answer: B
             question_score: '10'
         10:
-            question_text: What command should be used on the line 1?
+            question_text: Perintah apa yang harus digunakan pada baris 1?
             code: |-
-                flavor {is} _?_
-                {print} Your favorite icecream is...
+                rasa {is} _
+                {print} Es krim favoritmu adalah...
                 {sleep}
-                {print} flavor
+                rasa {print}
             mp_choice_options:
             -   option: |-
                     ```
                     {sleep} 3
                     ```
-                feedback: You want to know the favorite flavor!
+                feedback: Anda ingin tahu rasa favoritnya!
             -   option: |-
                     ```
                     {print} strawberries
                     ```
-                feedback: You do not want a `{print}` command at the middle of the line...
+                feedback: Anda tidak ingin perintah `{print}` di tengah baris...
             -   option: |-
                     ```
                     strawberries, chocolate, vanilla
                     ```
-                feedback: This way you are making a list. You don't want that now.
+                feedback: Dengan cara ini Anda membuat daftar. Anda tidak menginginkan itu sekarang.
             -   option: |-
                     ```
                     {ask} What flavor icecream do you like?
                     ```
-                feedback: That's right!
-            hint: You want to `{ask}` a question
+                feedback: Itu benar!
+            hint: Anda ingin `{ask}` pertanyaan
             correct_answer: D
             question_score: '10'
     3:
         1:
-            question_text: What command do you use to let Hedy pick something arbitrarily?
+            question_text: Perintah apa yang Anda gunakan agar Hedy memilih sesuatu secara sembarangan?
             mp_choice_options:
             -   option: |-
                     ```
                     {print}
                     ```
-                feedback: '`{print}` is used to print text'
+                feedback: '`{print}` digunakan untuk mencetak teks'
             -   option: |-
                     ```
                     {ask}
                     ```
-                feedback: '`{ask}` is used to ask a question'
+                feedback: '`{ask}` digunakan untuk mengajukan pertanyaan'
             -   option: |-
                     ```
                     {is}
                     ```
-                feedback: '`{is}` is used to make a list'
+                feedback: '`{is}` digunakan untuk membuat daftar'
             -   option: |-
                     ```
                     {at} {random}
                     ```
-                feedback: Correct!
-            hint: Arbitrarily means without a plan or randomly.
+                feedback: Benar!
+            hint: Sewenang-wenang artinya tanpa rencana atau asal-asalan.
             correct_answer: D
             question_score: '10'
         2:
-            question_text: What's wrong with this code?
+            question_text: Apa yang salah dengan kode ini?
             code: |-
-                animals {is} dog cat cow
-                {print} animals {at} {random}
+                binatang {is} anjing kucing sapi
+                {print} hewan {at} {random}
             mp_choice_options:
-            -   option: 'You need commas in line 1: dog, cat, cow.'
-                feedback: Good job!
-            -   option: Line 1 needs to start with `{print}`.
-                feedback: No, you don't need `{print}`
-            -   option: Line 2 needs to say 'animal' instead of 'animals'',
-                feedback: animals is correct.
-            -   option: '`{at} {random}` is spelled incorrectly'
-                feedback: '`{at} {random}` is the correct spelling'
-            hint: There's something wrong in line 1
+            -   option: 'Anda memerlukan koma di baris 1: anjing, kucing, sapi.'
+                feedback: Kerja bagus!
+            -   option: Baris 1 harus dimulai dengan `{print}`.
+                feedback: Tidak, Anda tidak memerlukan `{print}`
+            -   option: Baris 2 perlu mengatakan 'hewan', bukan 'hewan-hewan'
+                feedback: binatang adalah benar.
+            -   option: '`{at} {random}` salah dieja'
+                feedback: '`{at} {random}` adalah ejaan yang benar'
+            hint: Ada yang salah di baris 1
             correct_answer: A
             question_score: '10'
         3:
             question_text: How do you fix the mistake in line 2 of this code?
             code: |-
-                options {is} rock, paper, scissors
-                {print} rock, paper, scissors {at} {random}
+                pilihan {is} batu, kertas, gunting
+                {print} batu, kertas, gunting {at} {random}
             mp_choice_options:
             -   option: |-
                     ```
                     {at} {random} {print} options
                     ```
-                feedback: You're almost there. The order of the words isn't right yet.
+                feedback: Kamu hampir sampai. Urutan kata-katanya belum tepat.
             -   option: |-
                     ```
                     {print} rock {at} {random}
                     ```
-                feedback: you don't always want the Hedy to {print} rock, sometimes you want scissors or paper.
+                feedback: Anda tidak selalu ingin Hedy {print} batu, terkadang Anda menginginkan gunting atau kertas.
             -   option: |-
                     ```
                     {print} options {at} {random}
                     ```
-                feedback: Very good!
-            -   option: Nothing, the code is correct!
-                feedback: Look carefully for the mistake
-            hint: The variable (the list) is called options.
+                feedback: Sangat bagus!
+            -   option: Tidak ada, kodenya benar!
+                feedback: Perhatikan baik-baik kesalahannya
+            hint: Variabel (daftar) disebut pilihan.
             correct_answer: C
             question_score: '10'
         4:
-            question_text: What should change in line 2 to print a random price?
+            question_text: Apa yang harus diubah pada baris 2 untuk mencetak harga acak?
             code: |-
-                prices {is} 1 dollar, 100 dollar, 1 million dollar
-                {print} price {at} {random}
+                harga {is} 1 dolar, 100 dolar, 1 juta dolar
+                {print} harga {at} {random}
             mp_choice_options:
             -   option: |-
                     ```
                     {print} price
                     ```
-                feedback: You don't want to `{print}` the word price, but you want to `{print}` one price out of your list `{at} {random}`
+                feedback: Anda tidak ingin `{print}` kata harga, namun Anda ingin `{print}` satu harga dari daftar Anda `{at} {random}`
             -   option: |-
                     ```
                     {print} prices {at} {random}
                     ```
-                feedback: Great! You've really paid attention.
+                feedback: Besar! Anda benar-benar memperhatikan.
             -   option: |-
                     ```
                     {print} {at} {random} price
                     ```
-                feedback: '`{at} {random}` is placed behind the variable.'
-            -   option: Nothing, this code is alright.
-                feedback: Look carefully for the mistake you missed!
-            hint: The variable name is prices
+                feedback: '`{at} {random}` ditempatkan di belakang variabel.'
+            -   option: Tidak ada, kode ini baik-baik saja.
+                feedback: Perhatikan baik-baik kesalahan yang Anda lewatkan!
+            hint: Nama variabelnya adalah harga
             correct_answer: B
             question_score: '10'
         5:
-            question_text: What is wrong in this code?
+            question_text: Apa yang salah dalam kode ini?
             code: |-
-                question {is} {ask} What do you want to know?
-                {print} question
-                answers {is} yes, no, maybe
-                {print} answers {at} {random}
+                pertanyaan {is} {ask} Apa yang ingin kamu ketahui?
+                pertanyaan {print}
+                jawaban {is} ya, tidak, mungkin
+                {print} jawaban {at} {random}
             mp_choice_options:
-            -   option: Line 1 needs to say `{print}` instead of `{ask}`
-                feedback: No, that's not wrong.
-            -   option: Line 2 needs to say `{ask}` instead of `{print}`
-                feedback: No that's not wrong.
-            -   option: Line 2 needs to say answers `{at} {random}` `{is}` yes, no, maybe
-                feedback: No, that's not wrong.
-            -   option: Nothing, this code is perfect
-                feedback: That's right!
-            hint: Does this code even have a mistake?
+            -   option: Baris 1 perlu menyebutkan `{print}`, bukan `{ask}`
+                feedback: Tidak, itu tidak salah.
+            -   option: Baris 2 perlu menyebutkan `{ask}`, bukan `{print}`
+                feedback: Tidak, itu tidak salah.
+            -   option: Baris 2 harus berisi jawaban `{at} {random}` `{is}` ya, tidak, mungkin
+                feedback: Tidak, itu tidak salah.
+            -   option: Tidak ada, kode ini sempurna
+                feedback: Itu benar!
+            hint: Apakah kode ini ada kesalahannya?
             correct_answer: D
             question_score: '10'
         6:
-            question_text: What's wrong with this code?
+            question_text: Apa yang salah dengan kode ini?
             code: |-
-                question {is} {ask} What do you want to know?
-                answers yes, no, maybe
-                {print} answers {at} {random}
+                pertanyaan {is} {ask} Apa yang ingin kamu ketahui?
+                jawaban ya, tidak, mungkin
+                {print} jawaban {at} {random}
             mp_choice_options:
-            -   option: Line 2 needs to say question instead of answers
-                feedback: No that's not right
-            -   option: Line 2 needs the `{is}` command
-                feedback: Correct
-            -   option: Line 3 needs to say answer instead of answers
-                feedback: No the variable's called answers
-            -   option: Nothing! This code is great!
-                feedback: Actually, line 2 has a mistake.
-            hint: There is something wrong with line 2.
+            -   option: Baris 2 perlu mengatakan pertanyaan, bukan jawaban
+                feedback: Tidak, itu tidak benar
+            -   option: Baris 2 memerlukan perintah `{is}`
+                feedback: Benar
+            -   option: Baris 3 perlu mengatakan jawaban, bukan jawaban
+                feedback: Tidak, variabel yang disebut jawaban
+            -   option: Tidak ada apa-apa! Kode ini bagus!
+                feedback: Sebenarnya baris 2 ada kesalahan.
+            hint: Ada yang salah dengan baris 2.
             correct_answer: B
             question_score: '10'
         7:
-            question_text: What does the `{add}` command do?
+            question_text: Apa fungsi perintah `{add}`?
             code: |-
                 books {is} Harry Potter, The Hobbit, Green Eggs and Ham
                 your_book {is} {ask} What is your favorite book?
                 {add} your_book {to} books
                 {print} books {at} {random}
             mp_choice_options:
-            -   option: The `{add}` command removes a random book from the list
-                feedback: The remove command removes, the add command adds
-            -   option: The `{add}` command adds a random book to a list
-                feedback: It doesn't. It adds your answer to the list!
-            -   option: The `{add}` command adds your favorite book to the list
-                feedback: Correct!
-            -   option: The `{add}` command prints your favorite book.
-                feedback: No, it adds your favorite book to the list
-            hint: The `{add}` command adds a book, but which one?
+            -   option: Perintah `{add}` menghapus buku acak dari daftar
+                feedback: Perintah hapus menghapus, perintah tambah menambahkan
+            -   option: Perintah `{add}` menambahkan buku acak ke daftar
+                feedback: Tidak. Itu menambahkan jawaban Anda ke daftar!
+            -   option: Perintah `{add}` menambahkan buku favorit Anda ke daftar
+                feedback: Benar!
+            -   option: Perintah `{add}` mencetak buku favorit Anda.
+                feedback: Tidak, itu menambahkan buku favorit Anda ke dalam daftar
+            hint: Perintah `{add}` menambahkan buku, tapi yang mana?
             correct_answer: C
             question_score: '10'
         8:
-            question_text: What is the output of this code?
+            question_text: Apa keluaran dari kode ini?
             code: |-
-                crisps {is} sea salt, paprika, sour cream
-                {remove} sea salt {from} crisps
-                {remove} paprika {from} crisps
-                {print} crisps {at} {random}
+                keripik {is} garam laut, paprika, krim asam
+                {remove} garam laut {from} keripik
+                {remove} paprika {from} keripik
+                {print} keripik {at} {random}
             mp_choice_options:
-            -   option: You can't tell, because Hedy will `{print}` one of the 3 flavors `{at} {random}`
-                feedback: Take a look at the `{remove}` commands
+            -   option: Anda tidak tahu, karena Hedy akan `{print}` salah satu dari 3 rasa `{at} {random}`
+                feedback: Lihatlah perintah `{remove}`
             -   option: sea salt
-                feedback: sea salt is removed from the list
+                feedback: garam laut dihapus dari daftar
             -   option: paprika
-                feedback: Paprika is removed from the list
-            -   option: sour cream
-                feedback: That's right!
-            hint: There are 3 flavors, bit 2 are removed. Which one remains?
+                feedback: Paprika dihapus dari daftar
+            -   option: krim asam
+                feedback: Itu benar!
+            hint: Ada 3 rasa, bit2nya dihilangkan. Yang mana yang tersisa?
             correct_answer: D
             question_score: '10'
         9:
-            question_text: What's wrong with this code?
+            question_text: Apa yang salah dengan kode ini?
             code: |-
-                colors {is} blue, purple, green
-                chosen_color {is} {ask} Which haircolor wouldn't your like to have?
-                {remove} chosen_color {from} colors
-                {print} I will dye my hair color {at} {random}
+                warna {is} biru, ungu, hijau
+                warna_pilihan {is} {ask} Warna rambut manakah yang tidak ingin Anda miliki?
+                {remove} warna_pilihan {from} warna
+                {print} Saya akan mewarnai warna rambut saya {at} {random}
             mp_choice_options:
-            -   option: 'Line 3 should say: `{remove}` blue `{from}` colors'
-                feedback: Maybe you want blue hair though!
-            -   option: Line 3 should have an `{add}` command instead of a `{remove}` command
-                feedback: You want to remove the chosen color so `{remove}` is right.
-            -   option: In line 4 the variable should be called colors instead of color
-                feedback: Great job!
-            -   option: Nothing, this is a correct code!
-                feedback: Find the mistake!
-            hint: Look at line 3
+            -   option: 'Baris 3 seharusnya berisi: warna `{remove}` biru `{from}`'
+                feedback: Mungkin Anda menginginkan rambut biru!
+            -   option: Baris 3 harus memiliki perintah `{add}`, bukan perintah `{remove}`
+                feedback: Anda ingin menghapus warna yang dipilih sehingga `{remove}` benar.
+            -   option: Pada baris 4 variabel harus disebut warna-warna, bukan warna
+                feedback: Kerja bagus!
+            -   option: Tidak ada, ini kode yang benar!
+                feedback: Temukan kesalahannya!
+            hint: Lihatlah baris 3
             correct_answer: C
             question_score: '10'
         10:
-            question_text: What should be on the _?_?
+            question_text: Apa yang harus ada di _?
             code: |-
-                walkers {is} dad, mom, Sam, Petra
-                walked_yesterday {is} {ask} Who walked the dogs yesterday?
-                {print} walked_yesterday shouldn't have to walk the dogs again today
-                _?_
-                {print} walkers {at} {random} , it's your turn to walk the dogs!
+                pejalan kaki {is} ayah, ibu, Sam, Petra
+                berjalan_kemarin {is} {ask} Siapa yang mengajak anjing-anjing jalan-jalan kemarin?
+                {print} berjalan_kemarin tidak perlu mengajak anjing-anjing jalan-jalan lagi hari ini
+                _
+                {print} pejalan kaki {at} {random} , giliran Anda untuk mengajak anjing-anjing jalan-jalan!
             mp_choice_options:
             -   option: |-
                     ```
@@ -645,184 +645,196 @@ levels:
                     ```
                     {remove} walkers {from} yesterday
                     ```
-                feedback: yesterday is not a variable
+                feedback: kemarin bukanlah sebuah variabel
             -   option: |-
                     ```
                     {add} walked_yesterday {to} walkers
                     ```
-                feedback: This increased the change that the person who walked yesterday now has to do it again. That's mean.
-            hint: The person who walked the dog yesterday should be removed from the list.
+                feedback: Hal ini meningkatkan kemungkinan orang yang berjalan kemarin kini harus melakukannya lagi. Itu kejam.
+            hint: Orang yang mengajak anjing jalan-jalan kemarin harus dikeluarkan dari daftar.
             correct_answer: A
             question_score: '10'
     4:
         1:
-            question_text: Which of these is true?
+            question_text: Manakah dari kode berikut yang benar?
             mp_choice_options:
-            -   option: '`{print}` and `{ask}` now need quotation marks'
-                feedback: That's right
-            -   option: Only `{print}` needs quotation marks
-                feedback: '`{ask}` needs quotation marks too!'
-            -   option: '`{at} {random}` doesn''t work anymore in level 4'
-                feedback: '`{at} {random}` still works'
-            -   option: '`{at} {random}` now needs quotation marks'
-                feedback: No, but 2 other commands do.
-            hint: In level 4 you need quotation marks for 2 commands.
+            -   option: |-
+                    ```
+                    {print} 'Saya sangat bersemangat untuk mengikuti kuis ini!'
+                    ```
+                feedback: Itu benar
+            -   option: |-
+                    ```
+                    {print} Saya sangat bersemangat untuk mengikuti kuis ini!
+                    ```
+                feedback: '{print} sekarang membutuhkan tanda kutip!'
+            -   option: |-
+                    ```
+                    {print} 'Saya sangat bersemangat untuk mengikuti kuis ini!'
+                    ```
+                feedback: jangan gunakan apostrof atau gunakan tanda kutip terbalik
+            -   option: |-
+                    ```
+                    {print} 'Saya sangat bersemangat untuk mengikuti kuis ini!
+                    ```
+                feedback: hati-hati saat menggunakan tanda kutip dan apostrof
+            hint: Di level 4 Anda memerlukan tanda kutip untuk 2 perintah.
             correct_answer: A
             question_score: '10'
         2:
-            question_text: Which code uses the proper quotation marks?
+            question_text: Kode mana yang menggunakan tanda kutip yang tepat?
             mp_choice_options:
             -   option: |-
                     ```
                     {print} `hello`
                     ```
-                feedback: This quotation mark is skewed, you need a straight one.
+                feedback: Tanda kutip ini miring, perlu yang lurus.
             -   option: |-
                     ```
                     {print} 'hello'
                     ```
-                feedback: Correct
+                feedback: Benar
             -   option: |-
                     ```
                     {print} hello
                     ```
-                feedback: There are no quotation marks here!.
+                feedback: Tidak ada tanda kutip di sini!
             -   option: |-
                     ```
                     {print} ,hello,
                     ```
-                feedback: This is a comma, you need quotation marks.
-            hint: Pick the right quotation marks.
+                feedback: Ini koma, Anda perlu tanda kutip.
+            hint: Pilih tanda kutip yang tepat.
             correct_answer: B
             question_score: '10'
         3:
-            question_text: Where are the quotation marks used correctly?
+            question_text: Di mana tanda kutip digunakan dengan benar?
             mp_choice_options:
             -   option: |-
                     ```
                     {print} Hi Im Hedy
                     ```
-                feedback: Add quotation marks please!
+                feedback: Tolong tambahkan tanda kutip!
             -   option: |-
                     ```
                     {print} 'Hi Im Hedy
                     ```
-                feedback: Both before and after the words you want to print should be a quotation mark.
+                feedback: Baik sebelum maupun sesudah kata yang ingin dicetak harus diberi tanda kutip.
             -   option: |-
                     ```
                     '{print} Hi Im Hedy'
                     ```
-                feedback: The first quotation mark should be behind the word {print}
+                feedback: Tanda kutip pertama harus berada di belakang kata `{print}`
             -   option: |-
                     ```
                     {print} 'Hi Im Hedy'
                     ```
-                feedback: Perfect!
-            hint: Both before and after the words you want to print should be a quotation mark.
+                feedback: Sempurna!
+            hint: Baik sebelum maupun sesudah kata yang ingin dicetak harus diberi tanda kutip.
             correct_answer: D
             question_score: '10'
         4:
-            question_text: Which statement is true?
+            question_text: Pernyataan mana yang benar?
             mp_choice_options:
-            -   option: 'You need quotation marks around the word `{print}`, like this: `''{print}''`.'
-                feedback: The quotation marks shouldn't be around the command itself.
-            -   option: You need quotation marks around the words you want to print.
+            -   option: 'Anda memerlukan tanda kutip di sekitar kata `{print}`, seperti ini: `''{print}''`.'
+                feedback: Tanda kutip tidak boleh berada di sekitar perintah itu sendiri.
+            -   option: Anda memerlukan tanda kutip di sekitar kata yang ingin Anda cetak.
                 feedback: Super!
-            -   option: You do not need quotation marks when using the `{ask}` command
-                feedback: Both `{print}` and `{ask}` require quotation marks
-            -   option: You can choose yourself whether to use quotation marks or not.
-                feedback: Unfortunately, Hedy is stricter than that.
-            hint: From level 4 on you need to use quotation marks.
+            -   option: Anda tidak memerlukan tanda kutip saat menggunakan perintah `{ask}`
+                feedback: Baik `{print}` dan `{ask}` memerlukan tanda kutip
+            -   option: Anda bisa memilih sendiri apakah akan menggunakan tanda petik atau tidak.
+                feedback: Sayangnya, Hedy lebih tegas dari itu.
+            hint: Mulai level 4 dan seterusnya Anda perlu menggunakan tanda kutip.
             correct_answer: B
             question_score: '10'
         5:
-            question_text: What has to be changed in order for the game to work?
+            question_text: Apa yang harus diubah agar permainan dapat berjalan?
             code: |-
-                options {is} rock, paper, scissors
-                {print} 'options {at} {random}'
+                pilihan {is} batu, kertas, gunting
+                {print} 'pilihan {at} {random}'
             mp_choice_options:
             -   option: |-
                     ```
                     '{print} options {at} {random}'
                     ```
-                feedback: Never put the quotation mark in front of the {print} command.
+                feedback: Jangan pernah memberi tanda kutip di depan perintah `{print}`.
             -   option: |-
                     ```
                     {print} 'options' {at} {random}
                     ```
-                feedback: options is a variable. You don't literally want to print 'options {at} {random}'.
+                feedback: pilihan adalah variabel. Anda sebenarnya tidak ingin mencetak 'pilihan {at} {random}'.
             -   option: |-
                     ```
                     {print} options {at} {random}
                     ```
-                feedback: That's right
-            -   option: Nothing, the game already works!
-                feedback: Look carefully. There is an error.
-            hint: You don't want Hedy to literally print 'options {at} {random}', you want it to print 'rock' or 'paper' or 'scissors'.
+                feedback: Itu benar
+            -   option: Tidak ada, gamenya sudah berfungsi!
+                feedback: Perhatikan baik-baik. Terjadi kesalahan.
+            hint: Anda tidak ingin Hedy mencetak 'pilihan {at} {random}' secara harfiah, Anda ingin Hedy mencetak 'rock' atau 'paper' atau 'scissors'.
             correct_answer: C
             question_score: '10'
         6:
-            question_text: What would be a good next line in this code?
-            code: prices {is} 1 dollar, 100 dollars, 1 million dollars
+            question_text: Apa baris selanjutnya yang bagus dalam kode ini?
+            code: harga {is} 1 dolar, 100 dolar, 1 juta dolar
             mp_choice_options:
             -   option: |-
                     ```
                     {print} 'You win...' prices {at} {random}
                     ```
-                feedback: Great! You get it!
+                feedback: Bagus! Kau mengerti!
             -   option: |-
                     ```
                     {print} You win... 'prices {at} {random}'
                     ```
-                feedback: Hedy will literally print 'prices {at} {random}'
+                feedback: Hedy secara harfiah akan mencetak 'harga {at} {random}'
             -   option: |-
                     ```
                     {print} You win... prices {at} {random}
                     ```
-                feedback: You need some quotation marks!
+                feedback: Anda memerlukan beberapa tanda kutip!
             -   option: |-
                     ```
                     {print} 'You win... prices {at} {random}'
                     ```
-                feedback: Hedy will literally print 'prices {at} {random}''
-            hint: 'Think carefully: what is a variable and should be outside of the quotation marks? And what are normal words that should be inside?.'
+                feedback: Hedy secara harfiah akan mencetak 'harga {at} {random}''
+            hint: 'Pikirkan baik-baik: apa itu variabel dan harus berada di luar tanda kutip? Dan kata-kata normal apa yang seharusnya ada di dalamnya?'
             correct_answer: A
             question_score: '10'
         7:
-            question_text: What's wrong with this code?
+            question_text: Apa yang salah dengan kode ini?
             code: |-
-                question {is} {ask} What do you want to know?
-                answers {is} yes, no, maybe
-                {print} answers {at} {random}
+                pertanyaan {is} {ask} Apa yang ingin kamu ketahui?
+                jawaban {is} ya, tidak, mungkin
+                {print} jawaban {at} {random}
             mp_choice_options:
-            -   option: Quotation marks are missing in line 1
-                feedback: Correct!
-            -   option: Quotation marks are missing in line 2
-                feedback: A variable doesn't need quotes
-            -   option: Quotation marks are missing in line 3
-                feedback: You don't want Hedy to literally print 'answers {at} {random}' so no quotation marks needed here!
-            -   option: Nothing, this code is good as is!
-                feedback: Look carefully. You missed a mistake!
-            hint: Check each line on whether they'd need quotation marks or not.
+            -   option: Tanda kutip hilang di baris 1
+                feedback: Benar!
+            -   option: Tanda kutip hilang di baris 2
+                feedback: Variabel tidak memerlukan tanda kutip
+            -   option: Tanda kutip hilang di baris 3
+                feedback: Anda tidak ingin Hedy mencetak 'jawaban {at} {random}' secara harfiah, jadi tidak diperlukan tanda kutip di sini!
+            -   option: Tidak ada, kode ini bagus apa adanya!
+                feedback: Perhatikan baik-baik. Anda melewatkan satu kesalahan!
+            hint: Periksa setiap baris apakah mereka memerlukan tanda kutip atau tidak.
             correct_answer: A
             question_score: '10'
         8:
-            question_text: What would be a good next line for this code?
+            question_text: Apa baris selanjutnya yang bagus untuk kode ini?
             code: |-
-                {print} 'Welcome at the money show!'
-                {print} 'In front of you are 3 doors'
-                door {is} {ask} 'Which door do you choose?'
+                {print} 'Selamat datang di pameran uang!'
+                {print} 'Di depanmu ada 3 pintu'
+                door {is} {ask} 'Pintu mana yang kamu pilih?'
             mp_choice_options:
             -   option: |-
                     ```
                     {print} So you pick door door
                     ```
-                feedback: We need quotation marks
+                feedback: Kami membutuhkan tanda kutip
             -   option: |-
                     ```
                     {print} 'So you pick ' door door
                     ```
-                feedback: If the player chooses door 3, Hedy will say 'So you pick 3 3
+                feedback: Jika pemain memilih pintu 3, Hedy akan berkata 'Jadi kamu pilih 3 3
             -   option: |-
                     ```
                     {print} 'So you pick door ' door
@@ -832,154 +844,154 @@ levels:
                     ```
                     {print} 'So you pick door door'
                     ```
-                feedback: Hedy will literally print 'So you pick door door
-            hint: The second word door should be replaced with the number, the first should still be the word door...
+                feedback: Hedy secara harfiah akan mencetak 'Jadi, Anda memilih pintu
+            hint: Kata kedua pintu sebaiknya diganti dengan nomor, yang pertama tetap kata pintu...
             correct_answer: C
             question_score: '10'
         9:
-            question_text: What will never appear in your output screen?
+            question_text: Apa yang tidak akan pernah muncul di layar keluaran Anda?
             code: |-
-                clubs {is} Real Madrid, Bayern Munchen, Manchester United, Ajax
-                {print} clubs {at} {random} ' is going the win the champions league'
+                klub {is} Real Madrid, Bayern Munchen, Manchester United, Ajax
+                {print} klub {at} {random} 'akan memenangkan liga champions'
             mp_choice_options:
-            -   option: Ajax is going to win the champions league
-                feedback: Hedy could `{print}` that
-            -   option: Real Madrid is going to win the champions league
-                feedback: Hedy could `{print}` that
-            -   option: Bayer Munchen is going to win the champions league
-                feedback: Hedy could `{print}` that
-            -   option: FC Barcelona is going to win the champions league
-                feedback: That's right. It's not in the list
-            hint: What are Hedy's options to randomly pick from?
+            -   option: Ajax akan memenangkan Liga Champions
+                feedback: Hedy bisa `{print}` itu
+            -   option: Real Madrid akan memenangkan Liga Champions
+                feedback: Hedy bisa `{print}` itu
+            -   option: Bayern Munchen akan memenangkan liga champion
+                feedback: Hedy bisa `{print}` itu
+            -   option: FC Barcelona akan memenangkan liga champion
+                feedback: Itu benar. Itu tidak ada dalam daftar
+            hint: Apa saja pilihan Hedy yang dapat dipilih secara acak?
             correct_answer: D
             question_score: '10'
         10:
-            question_text: Which statement is true?
+            question_text: Pernyataan mana yang benar?
             code: |-
-                people {is} mom, dad, Emma, Sophie
-                {print} The dishes are done by...
-                {print} people {at} {random}
+                orang-orangnya {is} ibu, ayah, Emma, Sophie
+                {print} Pencucian dilakukan oleh...
+                {print} orang {at} {random}
             mp_choice_options:
-            -   option: Quotation marks are missing in line 1
-                feedback: A list doesn't need quotation marks
-            -   option: Quotation marks are missing in line 2
-                feedback: Correct
-            -   option: Quotation marks are missing in both line 2 and 3
-                feedback: Line 3 doesn't need quotation marks because it's not printed literally
-            -   option: Nothing, this code has no mistakes
-                feedback: You missed one!
-            hint: One line needs quotation marks, because you want it to be printed literally.
+            -   option: Tanda kutip hilang di baris 1
+                feedback: Daftar tidak memerlukan tanda kutip
+            -   option: Tanda kutip hilang di baris 2
+                feedback: Benar
+            -   option: Tanda kutip tidak ada di baris 2 dan 3
+                feedback: Baris 3 tidak perlu tanda kutip karena tidak dicetak secara harafiah
+            -   option: Tidak ada, kode ini tidak ada kesalahan
+                feedback: Anda melewatkan satu!
+            hint: Satu baris perlu tanda kutip, karena ingin dicetak secara harfiah.
             correct_answer: B
             question_score: '10'
     5:
         1:
-            question_text: What is true?
+            question_text: Perintah mana yang harus diisi pada _?
             code: |-
-                number {is} {ask} 'What is your lucky number?'
-                {if} number {is} 5 {print} 'Mine too!'
-                _?_ {print} 'My lucky number is 5!'
+                number {is} {ask} 'Berapa angka keberuntunganmu?'
+                {if} nomor {is} 5 {print} 'Milikku juga!'
+                _ {print} 'Angka keberuntunganku 5!'
             mp_choice_options:
-            -   option: In level 5 `{print}` works differently than in level 4
-                feedback: '`{print}` is still the same'
-            -   option: In level 5 `{ask}` works differently than in level 4
-                feedback: '`{ask}` is still the same'
-            -   option: In level 5 `{ask}` and `{print}` work differently than in level 4
-                feedback: '`No these commands remain the same'
-            -   option: In level 5 `{ask}` and `{print}` work the same as in level 4
+            -   option: '`{print}`'
+                feedback: Sudah ada perintah `{print}`.
+            -   option: '`{if}`'
+                feedback: Perintah `{if}` digunakan pada baris di atas.
+            -   option: '`{sleep}`'
+                feedback: Bukan itu!
+            -   option: '`{else}`'
                 feedback: Correct!
-            hint: We have only learned a new command in level 5.
+            hint: Manakah yang cocok dengan perintah `{if}`?
             correct_answer: D
             question_score: '10'
         2:
-            question_text: What appears in your output screen when you type in the name Hedy?
+            question_text: Apa yang muncul di layar keluaran Anda saat Anda mengetikkan nama Hedy?
             code: |-
-                name {is} {ask} 'What is your name?'
-                {if} name {is} Hedy {print} 'fun' {else} {print} 'less fun'
+                nama {is} {ask} 'Siapa namamu?'
+                {if} nama {is} Hedy {print} 'menyenangkan' {else} {print} 'kurang menyenangkan'
             mp_choice_options:
-            -   option: fun
-                feedback: That's right!
-            -   option: less fun
-                feedback: If the name is Hedy, it will say 'fun''
+            -   option: seru
+                feedback: Itu benar!
+            -   option: kurang menyenangkan
+                feedback: Kalau namanya Hedy pasti ada tulisan 'menyenangkan''
             -   option: Hedy
-                feedback: No, it doesn't print the name
+                feedback: Tidak, itu tidak mencetak namanya
             -   option: Error
-                feedback: Fortunately not!
+                feedback: Untungnya tidak!
             hint: '`{if}` name `{is}` Hedy `{print}` ...?'
             correct_answer: A
             question_score: '10'
         3:
-            question_text: What is the right password?
+            question_text: Apa kata sandi yang benar?
             code: |-
-                password {is} {ask} 'What is the password?'
-                {if} password {is} SECRET {print} 'Correct!'
-                {else} {print} 'ALARM! INTRUDER!'
+                kata sandi {is} {ask} 'Apa kata sandinya?'
+                {if} kata sandi {is} RAHASIA {print} 'Benar!'
+                {else} {print} 'ALARM! PENGACAU!'
             mp_choice_options:
-            -   option: Correct!
-                feedback: This is printed when you type in the correct password
+            -   option: Benar!
+                feedback: Ini dicetak ketika Anda mengetikkan kata sandi yang benar
             -   option: SECRET
-                feedback: That's right!'
+                feedback: Itu benar!'
             -   option: password
-                feedback: The password isn't password...
+                feedback: Kata sandinya bukan kata sandi...
             -   option: ALARM INTRUDER
-                feedback: This is printed when you type in the incorrect password!
-            hint: '`{if}` password `{is}` ... `{print}` ''Correct!''!'''
+                feedback: Ini dicetak ketika Anda mengetikkan kata sandi yang salah!
+            hint: '`{if}` kata sandi `{is}` ... `{print}` ''Benar!'''
             correct_answer: B
             question_score: '10'
         4:
-            question_text: What does Hedy print when you type in the wrong password?
+            question_text: Apa yang dicetak Hedy ketika Anda mengetikkan kata sandi yang salah?
             code: |-
-                password {is} {ask} 'What is the password?'
-                {if} password {is} SECRET {print} 'Correct!'
-                {else} {print} 'ALARM! INTRUDER!'
+                kata sandi {is} {ask} 'Apa kata sandinya?'
+                {if} kata sandi {is} RAHASIA {print} 'Benar!'
+                {else} {print} 'ALARM! PENGACAU!'
             mp_choice_options:
-            -   option: Correct
-                feedback: That's printed if the correct answer is given, not the wrong one...
+            -   option: Benar
+                feedback: Itu dicetak jika jawaban yang diberikan benar, bukan jawaban yang salah...
             -   option: SECRET
-                feedback: That's not the right answer
-            -   option: Wrong!
-                feedback: No, this is not what Hedy will print
+                feedback: Itu bukan jawaban yang tepat
+            -   option: Salah!
+                feedback: Tidak, bukan ini yang akan dicetak Hedy
             -   option: ALARM! INTRUDER!
-                feedback: Great job!
-            hint: Your computer will sound the alarm for intruders!
+                feedback: Kerja bagus!
+            hint: Komputer Anda akan membunyikan alarm adanya penyusup!
             correct_answer: D
             question_score: '10'
         5:
-            question_text: Why will Hedy say 'ALARM! INTRUDER' when you type in 'secret'?
+            question_text: Kenapa Hedy bilang 'ALARM! PENYUSUN' saat Anda mengetik 'rahasia'?
             code: |-
-                password {is} {ask} 'What is the password?'
-                {if} password {is} SECRET {print} 'Correct!'
-                {else} {print} 'ALARM! INTRUDER!'
+                kata sandi {is} {ask} 'Apa kata sandinya?'
+                {if} kata sandi {is} RAHASIA {print} 'Benar!'
+                {else} {print} 'ALARM! PENGACAU!'
             mp_choice_options:
-            -   option: Because it needs to be in capitals, so SECRET
-                feedback: Indeed!
-            -   option: Because the password is alarm
-                feedback: No, this is not the password.
-            -   option: Because it's spelled wrong.
-                feedback: That's not how you spell secret
-            -   option: Because Hedy makes a mistake
+            -   option: Karena harus dalam huruf kapital, jadi RAHASIA
+                feedback: Memang!
+            -   option: Karena passwordnya adalah alarm
+                feedback: Tidak, ini bukan kata sandinya.
+            -   option: Karena ejaannya salah.
+                feedback: Itu bukan cara Anda mengeja rahasia
+            -   option: Karena Hedy melakukan kesalahan
                 feedback: No, Hedy is right
-            hint: The spelling of the word has to be exactly the same.
+            hint: Ejaan kata tersebut harus sama persis.
             correct_answer: A
             question_score: '10'
         6:
-            question_text: Which word should be on the place of the question mark in the last line?
+            question_text: Kata manakah yang harus ditempatkan pada baris terakhir?
             code: |-
-                {print} 'Im Hedy the football fortune teller!'
-                {print} 'I will predict what place your team will end up!'
-                club is {ask} 'Which club is your favorite?'
-                {if} club {is} ajax {print} 'Ajax is going to win of course!'
-                _?_ {print} 'Sorry, your club is gonna be in last place...'
+                {print} 'Saya Hedy si peramal sepak bola!'
+                {print} 'Saya akan memperkirakan di mana tim Anda akan berakhir!'
+                Klub adalah {ask} 'Klub mana yang menjadi favoritmu?'
+                {if} klub {is} ajax {print} 'Ajax tentu saja akan menang!'
+                _ {print} 'Maaf, klub Anda akan berada di posisi terakhir...'
             mp_choice_options:
             -   option: |-
                     ```
                     {if}
                     ```
-                feedback: '`{if}` is already in the line above'
+                feedback: '`{if}` sudah ada di baris di atas'
             -   option: |-
                     ```
                     {at} {random}
                     ```
-                feedback: No, you need `{else}`.
+                feedback: Tidak, Anda memerlukan `{else}`.
             -   option: |-
                     ```
                     {else}
@@ -989,430 +1001,430 @@ levels:
                     ```
                     {print}
                     ```
-                feedback: '`{print}` is already there, we need a word before it!'
-            hint: '`{if}` goes together with...?'
+                feedback: '`{print}` sudah ada, kita memerlukan kata sebelum itu!'
+            hint: '`{if}` cocok dengan...?'
             correct_answer: C
             question_score: '10'
         7:
-            question_text: Which word should be in the place of the question mark?
+            question_text: Kata manakah yang harus menggantikan bagian yang kosong?
             code: |-
-                {print} 'I can predict if you will be a millionair or not!'
-                name {is} {ask} 'Whats your name?'
-                {if} name {is} Hedy {print} 'You will be a millionair!'
-                {else} _?_ 'Unfortunately... No big money for you.'
+                {print} 'Saya bisa memperkirakan apakah Anda akan menjadi jutawan atau tidak!'
+                nama {is} {ask} 'Siapa namamu?'
+                {if} nama {is} Hedy {print} 'Anda akan menjadi jutawan!'
+                {else} _ 'Sayangnya... Tidak ada banyak uang untuk Anda.'
             mp_choice_options:
             -   option: |-
                     ```
                     {if}
                     ```
-                feedback: '`{if}` is in the line above.'
+                feedback: '`{if}` ada pada baris di atas.'
             -   option: |-
                     ```
                     {at} {random}
                     ```
-                feedback: No, you don't need `{at} {random}`.
+                feedback: Tidak, Anda tidak memerlukan `{at} {random}`.
             -   option: |-
                     ```
                     {else}
                     ```
-                feedback: There already is an `{else}` command
+                feedback: Sudah ada perintah `{else}`
             -   option: |-
                     ```
                     {print}
                     ```
-                feedback: Awesome!
-            hint: After `{else}` a `{print}` command follows
+                feedback: Luar biasa!
+            hint: Setelah `{else}` perintah `{print}` mengikuti
             correct_answer: D
             question_score: '10'
         8:
-            question_text: Which word should be on the place of the question mark?
+            question_text: Kata manakah yang harus diletakkan di tempat yang kosong?
             code: |-
-                animal {is} {ask} 'What is your favorite animal?'
-                {if} _?_ {is} penguin {print} 'Thats my favorite animal too!'
-                {else} {print} 'Cool! I like penguins.'
+                hewan {is} {ask} 'Apa hewan favoritmu?'
+                {if} _ {is} penguin {print} 'Itu juga hewan favoritku!'
+                {else} {print} 'Keren! Saya suka penguin.'
             mp_choice_options:
             -   option: |-
                     ```
                     favorite animal
                     ```
-                feedback: That's not the variable name.
+                feedback: Itu bukan nama variabelnya.
             -   option: |-
                     ```
                     animal
                     ```
-                feedback: Great job!
+                feedback: Kerja bagus!
             -   option: |-
                     ```
                     {if}
                     ```
-                feedback: '`{if}` is already there'
+                feedback: '`{if}` sudah ada'
             -   option: |-
                     ```
                     {print}
                     ```
-                feedback: No, that's not it.
-            hint: What the variable name?
+                feedback: Tidak, bukan itu.
+            hint: Apa nama variabelnya?
             correct_answer: B
             question_score: '10'
         9:
-            question_text: Which door should you choose to escape??
+            question_text: Pintu mana yang harus Anda pilih untuk melarikan diri??
             code: |-
-                {print} 'Escape from the haunted house!'
-                {print} 'There are 3 doors in front of you'
-                door {is} {ask} 'Which door do you choose?'
-                monsters {is} vampire, werewolf, giant spider
-                {if} door {is} 2 {print} 'Yay, you can escape!'
-                {else} {print} 'You are being devoured by a... ' monsters {at} {random}
+                {print} 'Kabur dari rumah hantu!'
+                {print} 'Ada 3 pintu di depanmu'
+                pintu {is} {ask} 'Pintu mana yang kamu pilih?'
+                monster {is} vampir, manusia serigala, laba-laba raksasa
+                {if} pintu {is} 2 {print} 'Hore, kamu bisa kabur!'
+                {else} {print} 'Kamu sedang dimakan oleh... ' monster {at} {random}
             mp_choice_options:
             -   option: '1'
-                feedback: Bad choice! You're being eaten
+                feedback: Pilihan yang buruk! Kamu sedang dimakan
             -   option: '2'
-                feedback: Super! You escaped!
+                feedback: Super! Anda lolos!
             -   option: '3'
-                feedback: Bad choice! You're being eaten.
-            -   option: It's a trap, you will always be eaten!
-                feedback: Luckily not!
-            hint: One of the doors will keep you safe..
+                feedback: Pilihan yang buruk! Kamu sedang dimakan.
+            -   option: Ini jebakan, kamu akan selalu dimakan!
+                feedback: Untungnya tidak!
+            hint: Salah satu pintu akan membuat Anda tetap aman..
             correct_answer: B
             question_score: '10'
         10:
-            question_text: Which monster is standing behind door 1?
+            question_text: Monster manakah yang berdiri di balik pintu 1?
             code: |-
-                {print} 'Escape from the haunted house!'
-                {print} 'There are 3 doors in front of you'
-                door {is} {ask} 'Which door do you choose?'
-                monsters {is} vampire, werewolf, giant spider
-                {if} door {is} 2 {print} 'Yay, you can escape!'
-                {else} {print} 'You are being devoured by a... ' monsters {at} {random}
+                {print} 'Kabur dari rumah hantu!'
+                {print} 'Ada 3 pintu di depanmu'
+                pintu {is} {ask} 'Pintu mana yang kamu pilih?'
+                monster {is} vampir, manusia serigala, laba-laba raksasa
+                {if} pintu {is} 2 {print} 'Hore, kamu bisa kabur!'
+                {else} {print} 'Kamu sedang dimakan oleh... ' monster {at} {random}
             mp_choice_options:
-            -   option: Hedy picks a random monster each time.
-                feedback: Awesome!
-            -   option: vampire
-                feedback: Not always...
-            -   option: werewolf
-                feedback: Not always...
-            -   option: giant spider
-                feedback: Not always...
-            hint: Mind the last 3 words... monsters `{at} {random}`...
+            -   option: Hedy memilih monster acak setiap kali.
+                feedback: Luar biasa!
+            -   option: vampir
+                feedback: Tidak selalu...
+            -   option: manusia serigala
+                feedback: Tidak selalu...
+            -   option: laba-laba raksasa
+                feedback: Tidak selalu...
+            hint: Ingat 3 kata terakhir... monster `{at} {random}`...
             correct_answer: A
             question_score: '10'
     6:
         1:
-            question_text: What's Hedy's output when you run this code?
+            question_text: Apa keluaran Hedy saat Anda menjalankan kode ini?
             code: '{print} 2*10'
             mp_choice_options:
             -   option: '20'
-                feedback: Correct!
+                feedback: Benar!
             -   option: '12'
-                feedback: No, the plus sign is used in addition
+                feedback: Tidak, tanda tambah digunakan sebagai tambahan
             -   option: 2*10
-                feedback: No, Hedy will calculate the answer
+                feedback: Tidak, Hedy akan menghitung jawabannya
             -   option: '210'
-                feedback: Mind it's a calculation.
-            hint: The `*` is used as a multiplication sign
+                feedback: Ingat, ini perhitungan.
+            hint: '`*` digunakan sebagai tanda perkalian'
             correct_answer: A
             question_score: '10'
         2:
-            question_text: Which sign do you use for an addition?
+            question_text: Apa yang Anda gunakan saat ingin menjumlahkan dua angka?
             mp_choice_options:
             -   option: '`-`'
-                feedback: That's not it
+                feedback: Bukan itu
             -   option: plus
-                feedback: That's not it
+                feedback: Bukan itu
             -   option: '`*`'
-                feedback: That's not it
+                feedback: Bukan itu
             -   option: '`+`'
-                feedback: Correct!
+                feedback: Benar!
             hint: It's the plus sign.
             correct_answer: D
             question_score: '10'
         3:
-            question_text: What's Hedy's output when you run this code?
+            question_text: Apa keluaran Hedy saat Anda menjalankan kode ini?
             code: '{print} ''3*10'''
             mp_choice_options:
             -   option: '30'
-                feedback: This would be the right answer if there were no quotation marks.
+                feedback: Ini akan menjadi jawaban yang tepat jika tidak ada tanda kutip.
             -   option: '13'
-                feedback: Try again..
+                feedback: Coba lagi..
             -   option: 3*10
-                feedback: Correct! There are quotation marks, so Hedy will print it literally.
-            -   option: Nothing, Hedy will give an error message.
-                feedback: No, Hedy will print it literally.
-            hint: Mind the quotation marks!!
+                feedback: Benar! Ada tanda petiknya, jadi Hedy akan mencetaknya secara harafiah.
+            -   option: Tidak ada, Hedy akan memberikan pesan error.
+                feedback: Tidak, Hedy akan mencetaknya secara harfiah.
+            hint: Perhatikan tanda kutip!!
             correct_answer: C
             question_score: '10'
         4:
-            question_text: Kim is 10 years old. What will Hedy print for her?
+            question_text: Kim berumur 10 tahun. Apa yang akan Hedy cetak untuknya?
             code: |-
-                name = {ask} 'How many letters are in your name?'
-                age = {ask} 'How old are you?'
-                luckynumber = name*age
-                {print} 'Your lucky number is...' luckynumber
+                nama = {ask} 'Ada berapa huruf dalam namamu?'
+                umur = {ask} 'Berapa umurmu?'
+                angka keberuntungan = nama*umur
+                {print} 'Nomor keberuntungan Anda adalah...' angka keberuntungan
             mp_choice_options:
             -   option: '30'
-                feedback: Mind, Hedy also prints 'Your lucky number is...'
+                feedback: Pikiran, Hedy juga mencetak 'Nomor keberuntunganmu adalah...'
             -   option: '10'
-                feedback: Please try again.
-            -   option: Your lucky number is... 30
-                feedback: That's right!
-            -   option: Your lucky number is... 10
-                feedback: Her lucky number is name times age...
-            hint: 'Kim has 3 letters, she is 10 years old so: letters times age = 3*10 = 30.'
+                feedback: Silakan coba lagi.
+            -   option: Angka keberuntungan Anda adalah... 30
+                feedback: Itu benar!
+            -   option: Angka keberuntungan Anda adalah... 10
+                feedback: Angka keberuntungannya adalah nama dikali umur...
+            hint: 'Kim mempunyai 3 huruf, umurnya 10 tahun jadi: huruf dikali umur = 3*10 = 30.'
             correct_answer: C
             question_score: '10'
         5:
-            question_text: If 5 people eat at this restaurant, how much do they have to pay in total?
+            question_text: Jika 5 orang makan di restoran ini, berapa total biaya yang harus mereka bayar?
             code: |-
-                {print} 'Welcome to Hedys!'
-                people = {ask} 'How many people are eating with us tonight?'
-                price = people * 10
-                {print} 'That will be ' price 'dollar please'
+                {print} 'Selamat datang di Hedys!'
+                orang = {ask} 'Berapa banyak orang yang makan bersama kita malam ini?'
+                harga = orang * 10
+                {print} 'Tolong, itu 'harga' dolar'
             mp_choice_options:
-            -   option: 5 dollars
-                feedback: Unfortunately, it's not that cheap.
-            -   option: 10 dollars
-                feedback: No, it's 10 dollars each.
-            -   option: 15 dollars
-                feedback: The * means multiplication.
-            -   option: 50 dollars
+            -   option: 5 dolar
+                feedback: Sayangnya, harganya tidak semurah itu.
+            -   option: 10 dolar
+                feedback: Tidak, itu 10 dolar masing-masing.
+            -   option: 15 dolar
+                feedback: Tanda * berarti perkalian.
+            -   option: 50 dolar
                 feedback: Great!
             hint: '`price` `is` `people` `times` 10'
             correct_answer: D
             question_score: '10'
         6:
-            question_text: How much does a hamburger cost is this virtual restaurant?
+            question_text: Berapa harga hamburger di restoran virtual ini?
             code: |-
-                {print} 'Welcome at Hedys diner'
-                food = {ask} 'What would you like to eat?'
-                price = 0
-                {if} food {is} hamburger price = 15
-                {if} food {is} fries price = 6
+                {print} 'Selamat datang di restoran Hedys'
+                makanan = {ask} 'Kamu mau makan apa?'
+                harga = 0
+                {if} makanan {is} harga hamburger = 15
+                {if} makanan {is} harga kentang goreng = 6
             mp_choice_options:
-            -   option: 15 dollars
+            -   option: 15 dolar
                 feedback: Super!
-            -   option: 6 dollars
-                feedback: The fries are 6 dollars
-            -   option: 0 dollars
-                feedback: The hamburger isn't free!
-            -   option: 21 dollars
-                feedback: That's the price for a hamburger and fries!
-            hint: Mind the fourth line.
+            -   option: 6 dolar
+                feedback: Kentang gorengnya seharga 6 dolar
+            -   option: 0 dolar
+                feedback: Hamburgernya tidak gratis!
+            -   option: 21 dolar
+                feedback: Itulah harga hamburger dan kentang goreng!
+            hint: Perhatikan baris keempat.
             correct_answer: A
             question_score: '10'
         7:
-            question_text: Why does line 7 say 'price is price + 3' instead of 'price is 3'?
+            question_text: Mengapa baris 7 mengatakan 'harga adalah harga + 3' dan bukannya 'harga adalah 3'?
             code: |-
-                {print} 'Welcome at Hedys diner'
-                food = {ask} 'What would you like to eat?'
-                price = 0
-                {if} food {is} hamburger price = price + 15
-                {if} food {is} fries price = price + 6
-                drinks is {ask} 'What would you like to drink?'
-                {if} drinks {is} coke price = price + 3
-                {if} drinks {is} water price = price + 1
-                {print} price ' dollars please'
+                {print} 'Selamat datang di restoran Hedys'
+                makanan = {ask} 'Kamu mau makan apa?'
+                harga = 0
+                {if} makanan {is} harga hamburger = harga + 15
+                {if} makanan {is} harga kentang goreng = harga + 6
+                minumannya adalah {ask} 'Kamu ingin minum apa?'
+                {if} minuman {is} harga coke = harga + 3
+                {if} minuman {is} harga air = harga + 1
+                {print} harga 'tolong dolar'
             mp_choice_options:
-            -   option: It could have been `price = 3` just as well.
-                feedback: No, that's not true. Hedy needs to add 3 dollars to the total.
-            -   option: Because Hedy doesn't understand `price = 3`.
-                feedback: Hedy would understand, but it wouldn't be right.
-            -   option: Because Hedy would otherwise forget about the previous order. The price would be 3 dollars in total.
-                feedback: That's right!
-            -   option: Because the price is 0 dollars to begin with.
-                feedback: That's true, but not the reason
-            hint: The price shouldn't be 3, but 3 dollars more than it already was
+            -   option: Bisa jadi `price = 3` juga.
+                feedback: Tidak itu tidak benar. Hedy perlu menambahkan 3 dolar ke total.
+            -   option: Karena Hedy tidak mengerti `price = 3`.
+                feedback: Hedy pasti mengerti, tapi itu tidak benar.
+            -   option: Karena jika tidak, Hedy akan melupakan pesanan sebelumnya. Harganya akan menjadi total 3 dolar.
+                feedback: Itu benar!
+            -   option: Karena awalnya harganya 0 dolar.
+                feedback: Itu benar, tapi bukan alasannya
+            hint: Harganya seharusnya bukan 3, tapi 3 dolar lebih mahal dari sebelumnya
             correct_answer: C
             question_score: '10'
         8:
-            question_text: Why is this code incorrect?
+            question_text: Mengapa kode ini salah?
             code: |-
-                correct answer = 3*12
-                answer = {ask} 'What is 3 times 12?'
-                {if} answer {is} correct answer {print} 'Good job!'
-                {else} {print} 'No... It was ' correct answer
+                jawaban yang benar = 3*12
+                jawaban = {ask} 'Berapakah 3 kali 12?'
+                {if} jawabannya {is} jawaban yang benar {print} 'Kerja bagus!'
+                {else} {print} 'Tidak... Itu ' jawaban yang benar
             mp_choice_options:
-            -   option: There shouldn't be quotation marks in line 2
-                feedback: No, there should be!
-            -   option: The variable is called correct answer, but a variable's name can only be 1 word. So it should be correct_answer
-                feedback: Correct!
-            -   option: The `{if}` and `{else}` commands should be in the same line.
-                feedback: No, that's not true.
-            -   option: The variable in line 2 can't be called answer, because it is too similar to the variable correct answer.
-                feedback: Variable names can be similar, but they can't be 2 words...
-            hint: Inspect what the variables are called.
+            -   option: Tidak boleh ada tanda petik pada baris ke 2
+                feedback: Tidak, seharusnya ada!
+            -   option: Variabel tersebut disebut jawaban benar, namun nama variabel hanya boleh 1 kata. Jadi seharusnya benar_jawabannya
+                feedback: Benar!
+            -   option: Perintah `{if}` dan `{else}` harus berada di baris yang sama.
+                feedback: Tidak itu tidak benar.
+            -   option: Variabel pada baris 2 tidak bisa disebut jawaban, karena terlalu mirip dengan variabel jawaban benar.
+                feedback: Nama variabel boleh mirip, tapi tidak boleh 2 kata...
+            hint: Periksa apa nama variabelnya.
             correct_answer: B
             question_score: '10'
         9:
-            question_text: Imagine you love football a 10, you've eaten 2 bananas and have washed your hands 3 times today. How smart does the silly fortune teller think you are?
+            question_text: Bayangkan Anda menyukai sepak bola, Anda sudah makan 2 buah pisang dan mencuci tangan 3 kali hari ini. Seberapa pintarkah Anda menurut peramal konyol itu?
             code: |-
-                {print} 'Im Hedy the silly fortune teller'
-                {print} 'I will predict how smart you are!'
-                football = {ask} 'On a scale of 0 to 10 how much do you love football?'
-                bananas = {ask} 'How many bananas have you eaten this week?'
-                hygiene = {ask} 'How many times did you wash your hands today??'
-                result = bananas + hygiene
-                result = result * football
-                {print} 'You are ' result 'percent smart.'
+                {print} 'Aku Hedy si peramal konyol'
+                {print} 'Saya akan memperkirakan seberapa pintar Anda!'
+                sepak bola = {ask} 'Dalam skala 0 sampai 10 seberapa besar Anda menyukai sepak bola?'
+                pisang-pisang = {ask} 'Berapa banyak pisang yang kamu makan minggu ini?'
+                kebersihan = {ask} 'Berapa kali kamu mencuci tangan hari ini??'
+                hasil = pisang + kebersihan
+                hasil = hasil * sepak bola
+                {print} 'Kamu 'hasil' persen pintar.'
             mp_choice_options:
             -   option: 10%
-                feedback: (2 bananas + 3 hygiene) * 10 football = 5*10 =?
+                feedback: (2 pisang + 3 kebersihan) * 10 sepak bola = 5*10 =?
             -   option: 32%
-                feedback: (2 bananas + 3 hygiene) * 10 football = 5*10 =?
+                feedback: (2 pisang + 3 kebersihan) * 10 sepak bola = 5*10 =?
             -   option: 50%
-                feedback: Super! You are 100 percent smart!
+                feedback: Super! Anda 100 persen pintar!
             -   option: 100%
-                feedback: (2 bananas + 3 hygiene) * 10 football = 5*10 =?
-            hint: (2 bananas + 3 hygiene) * 10 football = 5*10 =?
+                feedback: (2 pisang + 3 kebersihan) * 10 sepak bola = 5*10 =?
+            hint: (2 pisang + 3 kebersihan) * 10 sepak bola = 5*10 =?
             correct_answer: C
             question_score: '10'
         10:
-            question_text: Which statement is true?
+            question_text: Pernyataan mana yang benar?
             code: |-
-                name _?_ Hedy
-                {print} name 'is walking trough the forrest'
+                nama _Hedy
+                {print} nama 'sedang berjalan melewati hutan'
             mp_choice_options:
-            -   option: You can only fill in the word is on the `_?_`
-                feedback: You are allowed to use the `=` sign as well
-            -   option: You can fill in either the word is or the `=` sign on the `_?_`
-                feedback: Amazing!
-            -   option: You have to fill in =is= on the `_?_`
-                feedback: No, one `=` sign is enough
-            -   option: You can only use the `=` sign when working with numbers, not with words.
-                feedback: You can also use `=` with words.
-            hint: '`{is}` and `=` are both allowed'
+            -   option: Anda hanya dapat mengisi kata yang ada pada `_`
+                feedback: Anda juga diperbolehkan menggunakan tanda `=`
+            -   option: Anda dapat mengisi kata is atau tanda `=` pada `_`
+                feedback: Luar biasa!
+            -   option: Anda harus mengisi =is= pada `_`
+                feedback: Tidak, satu tanda `=` sudah cukup
+            -   option: Anda hanya dapat menggunakan tanda `=` saat bekerja dengan angka, bukan kata.
+                feedback: Anda juga dapat menggunakan `=` dengan kata-kata.
+            hint: '`{is}` dan `=` keduanya diperbolehkan'
             correct_answer: B
             question_score: '10'
     7:
         1:
-            question_text: How many lines can you repeat at once with the repeat command at this level?
+            question_text: Berapa banyak baris yang dapat Anda ulangi sekaligus dengan perintah ulangi pada level ini?
             mp_choice_options:
             -   option: '0'
-                feedback: No you can repeat a line.
+                feedback: Tidak, Anda dapat mengulangi satu baris.
             -   option: '1'
-                feedback: Correct, one line at a time
-            -   option: '2'
-                feedback: In this level only one line at a time
-            -   option: infinite
-                feedback: In this level you can only repeat one line at a time
-            hint: You can only repeat 1 line at a time
+                feedback: Benar, satu baris pada satu waktu
+            -   option: '3'
+                feedback: Pada level ini hanya satu baris dalam satu waktu
+            -   option: tak terbatas
+                feedback: Pada level ini Anda hanya dapat mengulang satu baris dalam satu waktu
+            hint: Anda hanya dapat mengulang satu baris dalam satu waktu
             correct_answer: B
             question_score: '10'
         2:
-            question_text: Which code is right?
+            question_text: Kode mana yang benar?
             mp_choice_options:
             -   option: |-
                     ```
                     {print} 100 {times} 'hello'
                     ```
-                feedback: '`{repeat}` 100 `{times}` `{print}` ''hello'''
+                feedback: '`{repeat}` 100 `{times}` `{print}` ''halo'''
             -   option: |-
                     ```
                     {print} {repeat} 100 {times} 'hello'
                     ```
-                feedback: '{repeat} 100 {times} {print} ''hello'''
+                feedback: '{repeat} 100 {times} {print} ''halo'''
             -   option: |-
                     ```
                     {repeat} 'hello' 100 {times}
                     ```
-                feedback: '{repeat} 100 {times} {print} ''hello'''
+                feedback: '{repeat} 100 {times} {print} ''halo'''
             -   option: |-
                     ```
                     {repeat} 100 {times} {print} 'hello'
                     ```
-                feedback: That's right!
-            hint: First the repeat command, then the `{print}` command
+                feedback: Itu benar!
+            hint: Pertama perintah `{repeat}`, lalu perintah `{print}`
             correct_answer: D
             question_score: '10'
         3:
-            question_text: Is this code right or wrong?
-            code: '{repeat} 100 {times} ''Hello!'''
+            question_text: Apakah kode ini benar atau salah?
+            code: '{repeat} 100 {times} ''Halo!'''
             mp_choice_options:
             -   option: Right
-                feedback: No, a word is missing
-            -   option: Wrong, the word `{repeat}` is missing
-                feedback: The word `{repeat}` is there, another word is missing
-            -   option: Wrong, the word `{times}` is missing
-                feedback: The word `{times}` is there, another word is missing.
-            -   option: Wrong, the word `{print}` is missing
-                feedback: Correct
-            hint: 'It should be: `{repeat}` 100 `{times}` `{print}` ''Hello'''
+                feedback: Tidak, ada satu kata yang hilang
+            -   option: Salah, kata `{repeat}` tidak ada
+                feedback: Kata `{repeat}` ada di sana, ada kata lain yang hilang
+            -   option: Salah, kata `{times}` tidak ada
+                feedback: Kata `{times}` ada di sana, ada kata lain yang hilang.
+            -   option: Salah, kata `{print}` tidak ada
+                feedback: Benar
+            hint: 'Seharusnya: `{repeat}` 100 `{times}` `{print}` ''Halo'''
             correct_answer: D
             question_score: '10'
         4:
-            question_text: Which word is wrong in the code?
+            question_text: Kata manakah yang salah dalam kode tersebut?
             code: |-
-                {print} 'I'm blue'
+                {print} 'Aku biru'
                 {repeat} 7 {times} {print} 'da ba dee, da ba da'
             mp_choice_options:
             -   option: |-
                     ```
                     I'm
                     ```
-                feedback: That's right!
+                feedback: Itu benar!
             -   option: |-
                     ```
                     {print}
                     ```
-                feedback: '`{print}` is spelled correctly'
+                feedback: '`{print}` dieja dengan benar'
             -   option: |-
                     ```
                     {repeat}
                     ```
-                feedback: '`{repeat}` is spelled correctly'
+                feedback: '`{repeat}` dieja dengan benar'
             -   option: |-
                     ```
                     {times}
                     ```
-                feedback: '`{times}` is spelled correctly'
-            hint: I'm is wrong, you can't use apostrophes
+                feedback: '`{times}` dieja dengan benar'
+            hint: Saya salah, Anda tidak bisa menggunakan apostrof dalam sebuah kalimat
             correct_answer: A
             question_score: '10'
         5:
-            question_text: Is this code right or wrong?
-            code: '{repeat} 100 {times} {print} ''Hedy is awesome!'''
+            question_text: Apakah kode ini benar atau salah?
+            code: '{repeat} 100 {times} {print} ''Hedy luar biasa!'''
             mp_choice_options:
-            -   option: Correct
-                feedback: That's right!
-            -   option: Wrong
-                feedback: That's not it
-            hint: The code is correct!
+            -   option: Benar
+                feedback: Itu benar!
+            -   option: Salah
+                feedback: Bukan itu
+            hint: Kodenya benar!
             correct_answer: A
             question_score: '10'
         6:
-            question_text: What will be the output from this code?
+            question_text: Apa keluaran dari kode ini?
             code: |-
-                {print} 'The wheels on the bus go'
-                {repeat} 3 {times} {print} ' round and round'
+                {print} 'Roda di bus melaju'
+                {repeat} 3 {times} {print} 'berputar-putar'
             mp_choice_options:
             -   option: |-
-                    the wheels on the bus go
-                    round and round
-                feedback: Only the second line is repeated 3 times
+                    roda bus melaju
+                    berputar-putar
+                feedback: Hanya baris kedua yang diulang sebanyak 3 kali
             -   option: |-
-                    the wheels on the bus go
-                    the wheels on the bus go
-                    the wheels on the bus go
-                    round and round
-                feedback: Only the second line is repeated 3 times
+                    roda bus melaju
+                    roda bus melaju
+                    roda bus melaju
+                    berputar-putar
+                feedback: Hanya baris kedua yang diulang sebanyak 3 kali
             -   option: |-
-                    the wheels on the bus go
-                    round and round
-                    the wheels on the bus go
-                    round and round
-                    the wheels on the bus go
-                    round and round
-                feedback: Only the second line is repeated 3 times
+                    roda bus melaju
+                    berputar-putar
+                    roda bus melaju
+                    berputar-putar
+                    roda bus melaju
+                    berputar-putar
+                feedback: Hanya baris kedua yang diulang sebanyak 3 kali
             -   option: |-
-                    the wheels on the bus go
-                    round and round
-                    round and round
-                    round and round
-                feedback: All though the town! Perfect!
-            hint: Only 'round and round' is repeated 3 times.
+                    roda bus melaju
+                    berputar-putar
+                    berputar-putar
+                    berputar-putar
+                feedback: Di seluruh kota! Sempurna!
+            hint: Hanya 'berputar-putar' yang diulang sebanyak 3 kali.
             correct_answer: D
             question_score: '10'
         7:
-            question_text: What will be the output from this code?
+            question_text: Apa keluaran dari kode ini?
             code: |-
                 {repeat} 2 {times} {print} 'We will'
                 {print} 'ROCK YOU!'
@@ -1420,27 +1432,27 @@ levels:
             -   option: |-
                     We will We will
                     ROCK YOU!
-                feedback: '''We will'' won''t appear twice in the same line'
+                feedback: '''We will'' tidak akan muncul dua kali dalam baris yang sama'
             -   option: |-
                     We will
                     We will
                     ROCK YOU!
-                feedback: Great!
+                feedback: Hebat!
             -   option: |-
                     We will
                     ROCK YOU!
                     We will
                     ROCK YOU!
-                feedback: ROCK YOU! won't be repeated
+                feedback: ROCK YOU! tidak akan terulang
             -   option: |-
                     We will
                     ROCK YOU!
-                feedback: Mind the repeat command
-            hint: Mind the `{repeat}` command.
+                feedback: Perhatikan perintah ulangi
+            hint: Perhatikan perintah `{repeat}`.
             correct_answer: B
             question_score: '10'
         8:
-            question_text: Welke Hedy code hoort bij dit resultaat
+            question_text: Kode Hedy apa yang termasuk dalam keluaran ini?
             code: |-
                 Here comes the sun
                 Do do do do
@@ -1456,13 +1468,13 @@ levels:
                     {print} 'And I say'
                     {print} 'Its alright'
                     ```
-                feedback: Perfect, je kan het `{repeat}` commando hier niet gebruiken.
+                feedback: Luar biasa, Anda tidak dapat menggunakan perintah `{repeat}` di sini.
             -   option: |-
                     ```
                     {repeat} 2 {times} {print} 'Here comes the sun'
                     {print} 'And I say'
                     {print} 'Its alright'"
-                feedback: Waar is de 'Do do do do' gebleven?
+                feedback: Di mana Anda meninggalkan 'Do do do do'?
             -   option: |-
                     ```
                     {repeat} 2 {times} {print} 'Here comes the sun'
@@ -1470,7 +1482,7 @@ levels:
                     {print} 'And I say'
                     {print} 'Its alright'
                     ```
-                feedback: Dit is niet de juiste volgorde..
+                feedback: Ini bukan urutan yang benar..
             -   option: |-
                     ```
                     {repeat} 2 {times} {print} 'Here comes the sun'
@@ -1478,57 +1490,57 @@ levels:
                     {print} 'And I say'
                     {print} 'Its alright'"
                     ```
-                feedback: Dit is niet de juiste volgorde..
-            hint: '`{repeat}` kan alleen worden gebruikt als je dezelfde regel meerdere keren achter elkaar wil uitvoeren.'
+                feedback: Ini bukan urutan yang benar..
+            hint: '`{repeat}` hanya dapat digunakan jika Anda ingin mengeksekusi baris yang sama beberapa kali berturut-turut.'
             correct_answer: A
             question_score: '10'
         9:
-            question_text: Welke Hedy code hoort bij dit resultaat ?
+            question_text: Kode Hedy apa yang termasuk dalam keluaran ini?
             code: |-
-                Batman was flying through Gotham.
-                When suddenly he heard someone screaming...
-                Help !
-                Help !
-                Help !
-                Please help me !"
+                Batman sedang terbang melalui Gotham.
+                Tiba-tiba dia mendengar seseorang berteriak...
+                Tolong!
+                Tolong!
+                Tolong!
+                Tolong bantu aku!
             mp_choice_options:
             -   option: |-
                     ```
-                    {print} 'Batman was flying through Gotham. '
-                    {print} 'When suddenly he heard someone screaming...'
-                    {print} 'Help !'
-                    {repeat} 3 {times} {print} 'Please help me !'
+                    {print} 'Batman sedang terbang melalui Gotham. '
+                    {print} 'Saat tiba-tiba dia mendengar seseorang berteriak!'
+                    {print} 'Bantuan!'
+                    {repeat} 3 {times} {print} 'Tolong bantu saya!'
                     ```
-                feedback: Je herhaalt de verkeerde regel
+                feedback: Kalimat yang Anda ulangi salah.
             -   option: |-
                     ```
-                    {print} 'Batman was flying through Gotham.'
-                    {print} 'When suddenly he heard someone screaming...'
-                    {repeat} 3 {times} 'Help !'
-                    {print} 'Please help me !'
+                    {print} 'Batman sedang terbang melalui Gotham.'
+                    {print} 'Saat tiba-tiba dia mendengar seseorang berteriak!'
+                    {repeat} 3 {times} 'Bantuan!'
+                    {print} 'Tolong bantu saya!'
                     ```
-                feedback: Het commando `{print}` mist op regel 3
+                feedback: Perintah `{print}` tidak ada di baris 3.
             -   option: |-
                     ```
-                    {print} Batman was flying through Gotham.
-                    {print} When suddenly he heard someone screaming...
-                    {repeat} 3 {times} {print} Help !
-                    {print} Please help me !
+                    {print} Batman sedang terbang melalui Gotham.
+                    {print} Tiba-tiba dia mendengar seseorang berteriak!
+                    {repeat} 3 {times} {print} Bantuan!
+                    {print} Tolong bantu saya!
                     ```
-                feedback: Je vergeet de aanhalingstekens
+                feedback: Anda kehilangan tanda kutip
             -   option: |-
                     ```
-                    {print} 'Batman was flying through Gotham.'
-                    {print} 'When suddenly he heard someone screaming...'
-                    {repeat} 3 {times} {print} 'Help !'
-                    {print} 'Please help me !'
+                    {print} 'Batman sedang terbang melalui Gotham.'
+                    {print} 'Saat tiba-tiba dia mendengar seseorang berteriak!'
+                    {repeat} 3 {times} {print} 'Bantuan!'
+                    {print} 'Tolong bantu saya!'
                     ```
-                feedback: Perfect
-            hint: '''Help !'' wordt 3x herhaald.'
+                feedback: Sempurna
+            hint: '''Tolong!'' diulang sebanyak 3 kali.'
             correct_answer: D
             question_score: '10'
         10:
-            question_text: What Hedy code belongs to this output?
+            question_text: Kode manakah yang termasuk dalam keluaran ini?
             code: |-
                 if youre happy and you know it clap your hands
                 if youre happy and you know it clap your hands
@@ -1541,7 +1553,7 @@ levels:
                     {print} 'if youre happy and you know it and you really want to show it'
                     {print} 'if youre happy and you know it clap your hands'
                     ```
-                feedback: Almost! the first line needs an extra word
+                feedback: Hampir! baris pertama membutuhkan kata tambahan
             -   option: |-
                     ```
                     {repeat} 2 {times} {print} 'if youre happy and you know it clap your hands'
@@ -1554,7 +1566,7 @@ levels:
                     {repeat} 3 {times} {print} 'if youre happy and you know it clap your hands'
                     {print} 'if youre happy and you know it and you really want to show it'
                     ```
-                feedback: This is not in the right order.
+                feedback: Ini tidak dalam urutan yang benar.
             -   option: |-
                     ```
                     {repeat} 4 {times} 'if youre happy and you know it'
@@ -1562,61 +1574,61 @@ levels:
                     {print} 'and you really want to show it'
                     {print} 'clap your hands'
                     ```
-                feedback: This is not in the right order.
-            hint: Mind the order of the sentences.
+                feedback: Ini tidak dalam urutan yang benar.
+            hint: Perhatikan urutan kalimatnya.
             correct_answer: B
             question_score: '10'
     8:
         1:
-            question_text: Which output will be produced by this code?
+            question_text: Output manakah yang akan dihasilkan oleh kode ini?
             code: |-
                 {repeat} 2 {times}
-                    {print} 'Hello'
-                    {print} 'Im Hedy!'
+                    {print} 'Halo'
+                    {print} 'Saya Hedy!'
             mp_choice_options:
             -   option: |-
-                    Hello
-                    Im Hedy!
-                feedback: Everything is printed twice.
+                    Halo
+                    Aku Hedy!
+                feedback: Semuanya dicetak dua kali.
             -   option: |-
-                    Hello
-                    Hello
-                    Im Hedy
-                feedback: The second line is repeated twice as well.
+                    Halo
+                    Halo
+                    Aku Hedy
+                feedback: Baris kedua juga diulang dua kali.
             -   option: |-
-                    Hello
-                    Im Hedy!
-                    Hello
-                    Im Hedy!
+                    Halo
+                    Aku Hedy!
+                    Halo
+                    Aku Hedy!
                 feedback: Super!
             -   option: |-
-                    Hello
-                    Hello
-                    Im Hedy!
-                    Im Hedy!
-                feedback: Everything is printed twice
-            hint: Both lines are repeated twice.
+                    Halo
+                    Halo
+                    Aku Hedy!
+                    Aku Hedy!
+                feedback: Semuanya dicetak dua kali
+            hint: Kedua baris diulang dua kali.
             correct_answer: C
             question_score: '10'
         2:
-            question_text: What is wrong with this code?
+            question_text: Apa yang salah dengan kode ini?
             code: |-
                 {repeat} 5 {times}
-                {print} 'Hedy is cool!'
+                {print} 'Hedy keren!'
             mp_choice_options:
-            -   option: This should be only one line, not 2.
-                feedback: No it should be 2 lines.
-            -   option: This `{print}` command has to go
-                feedback: No, you need it.
-            -   option: There is a spelling mistake in the `{repeat}` command.
-                feedback: Nee, repeat is de goede spelling
-            -   option: The second line need to start with 4 spaces as indentation.
-                feedback: Correct!
-            hint: Something is missing in the second line?
+            -   option: Ini seharusnya hanya satu baris, bukan 2.
+                feedback: Tidak, itu harus 2 baris.
+            -   option: Perintah `{print}` ini harus dihapus.
+                feedback: Tidak, kamu membutuhkannya.
+            -   option: Ada kesalahan ejaan pada perintah `{repeat}`.
+                feedback: Tidak, `{repeat}` adalah ejaan yang benar
+            -   option: Baris kedua harus dimulai dengan 4 spasi sebagai lekukan.
+                feedback: Benar!
+            hint: Ada yang hilang di baris kedua?
             correct_answer: D
             question_score: '10'
         3:
-            question_text: What output will be produced when you run this program?
+            question_text: Output apa yang akan dihasilkan ketika Anda menjalankan program ini?
             code: |-
                 {repeat} 3 {times}
                     {print} 'Baby shark tututudutudu'
@@ -1625,7 +1637,7 @@ levels:
             -   option: |-
                     Baby shark tututudutudu
                     Baby shark
-                feedback: Mind the `{repeat}` command!
+                feedback: Perhatikan perintah `{repeat}`!
             -   option: |-
                     Baby shark tututudutudu
                     Baby shark
@@ -1633,74 +1645,74 @@ levels:
                     Baby shark
                     Baby shark tututudutudu
                     Baby shark
-                feedback: The last line has no indentation, so it's not repeated.
+                feedback: Baris terakhir tidak ada lekukannya, jadi tidak terulang kembali.
             -   option: |-
                     Baby shark tututudutudu
                     Baby shark tututudutudu
                     Baby shark tututudutudu
                     Baby shark
-                feedback: Right!
+                feedback: Benar!
             -   option: |-
                     Baby shark tututudutudu
                     Baby shark
                     Baby shark
                     Baby shark
-                feedback: What is being repeated and what isn't.
-            hint: What is being repeated and what is not?.
+                feedback: Apa yang diulang dan apa yang tidak.
+            hint: Apa yang diulang dan apa yang tidak?
             correct_answer: C
             question_score: '10'
         4:
-            question_text: Which output is correct?
+            question_text: Keluaran mana yang benar?
             code: |-
-                {print} 'The children went:'
+                {print} 'Anak-anak pergi:'
                 {repeat} 2 {times}
-                    {print} 'Yay!'
-                    {print} 'Were going on holiday!'
+                    {print} 'Hore!'
+                    {print} 'Kita akan berlibur!'
             mp_choice_options:
             -   option: |-
-                    The children went:
-                    Yay!
-                    Were going on holiday!
-                feedback: Mind the `{repeat}` command !
+                    Anak-anak pergi:
+                    Hore!
+                    Kami akan berlibur!
+                feedback: Perhatikan perintah `{repeat}`!
             -   option: |-
-                    The children went:
-                    Yay!
-                    Were going on holiday!
-                    Yay!
-                    Were going on holiday!
-                feedback: Correct!
+                    Anak-anak pergi:
+                    Hore!
+                    Kami akan berlibur!
+                    Hore!
+                    Kami akan berlibur!
+                feedback: Benar!
             -   option: |-
-                    The children went:
-                    Yay!
-                    Yay!
-                    Were going on holiday!
-                    Were going on holiday!
-                feedback: This order is incorrect.
+                    Anak-anak pergi:
+                    Hore!
+                    Hore!
+                    Kami akan berlibur!
+                    Kami akan berlibur!
+                feedback: Urutan ini salah.
             -   option: |-
-                    The children went:
-                    Yay!
-                    Yay!
-                    Were going on holiday!
-                feedback: The last line is repeated too.
-            hint: The block under the `{repeat}` command is repeated twice.
+                    Anak-anak pergi:
+                    Hore!
+                    Hore!
+                    Kami akan berlibur!
+                feedback: Baris terakhir juga diulang.
+            hint: Blok di bawah perintah `{repeat}` diulang dua kali.
             correct_answer: B
             question_score: '10'
         5:
-            question_text: What is wrong with this code?
+            question_text: Apa yang salah dengan kode ini?
             code: |-
-                end = {ask} 'Do you want a happy or a sad ending?'
-                {if} end {is} happy {print} 'They lived happily ever after'
-                {else} {print} 'The world exploded. The end.'
+                akhir = {ask} 'Kamu ingin akhir yang bahagia atau sedih?'
+                {if} akhir {is} bahagia {print} 'Mereka hidup bahagia selamanya'
+                {else} {print} 'Dunia meledak. Tamat.'
             mp_choice_options:
-            -   option: The `{print}` commands on the last two lines should start on new lines en start with 4 spaces.
-                feedback: That's right!
+            -   option: Perintah `{print}` pada dua baris terakhir harus dimulai pada baris baru dan dimulai dengan 4 spasi.
+                feedback: Itu benar!
             -   option: '`{else}` is not a command!'
-                feedback: It is!
-            -   option: Lines that start with `{if}` should start with 4 spaces
-                feedback: That's not true
-            -   option: '`{ask}` is no longer a command'
-                feedback: That's not true
-            hint: Something is wrong with indentation
+                feedback: Itu!
+            -   option: Baris yang dimulai dengan `{if}` harus dimulai dengan 4 spasi
+                feedback: Itu tidak benar
+            -   option: '`{ask}` bukan lagi sebuah perintah'
+                feedback: Itu tidak benar
+            hint: Ada yang salah dengan lekukan
             correct_answer: A
             question_score: '10'
         6:
@@ -1739,28 +1751,28 @@ levels:
         7:
             question_text: What is wrong with this code?
             code: |-
-                eten = {ask} 'What would you like to eat?'
-                {if} food {is} fries
-                sauce = {ask} 'What sauce would you like?'
-                    {print} 'One fries with ' sauce
-                {if} food {is} pizza
-                    topping = {ask} 'What topping would you like?'
-                    {print} 'One pizza with ' topping
-                {print} 'That you for your order'
+                makanan = {ask} 'Kamu mau makan apa?'
+                {if} makanan {is} kentang goreng
+                saus = {ask} 'Kamu mau saus apa?'
+                    {print} 'Satu kentang goreng dengan saus'
+                {if} makanan {is} pizza
+                    topping = {ask} 'Kamu mau topping apa?'
+                    {print} 'Satu pizza dengan topping '
+                {print} 'Terima kasih atas pesanan Anda'
             mp_choice_options:
-            -   option: Nothing this code is correct!
-                feedback: Something is wrong!.
-            -   option: You're not allowed to use an `{if}` command after an `{ask}` command.
-                feedback: You are!.
-            -   option: You don't have to use indentation twice. Only in the first `{if}` command.
-                feedback: You always have to use indentation.
-            -   option: The indentation is wrong in the first `{if}` command.
-                feedback: That's right.
-            hint: Take a careful look at the indentation.
+            -   option: Tidak ada apa-apa. Kode ini benar!
+                feedback: Sesuatu yang salah!
+            -   option: Anda tidak diperbolehkan menggunakan perintah `{if}` setelah perintah `{ask}`.
+                feedback: Anda!
+            -   option: Anda tidak perlu menggunakan indentasi dua kali. Hanya di perintah `{if}` pertama.
+                feedback: Anda selalu harus menggunakan lekukan.
+            -   option: Indentasi salah pada perintah `{if}` pertama.
+                feedback: Itu benar.
+            hint: Perhatikan baik-baik lekukannya.
             correct_answer: D
             question_score: '10'
         8:
-            question_text: In which of the codes is the indentation done right?
+            question_text: Di kode manakah lekukan dilakukan dengan benar?
             mp_choice_options:
             -   option: |-
                     ```
@@ -1771,7 +1783,7 @@ levels:
                           {else}
                               {print} You are wrong!
                     ```
-                feedback: You are wrong!
+                feedback: Anda salah!
             -   option: |-
                     ```
                     {if} answer is right
@@ -1781,7 +1793,7 @@ levels:
                     {else}
                     {print} You are wrong!
                     ```
-                feedback: You are wrong!
+                feedback: Anda salah!
             -   option: |-
                     ```
                     {if} answer is right
@@ -1791,7 +1803,7 @@ levels:
                     {else}
                         {print} You are wrong!
                     ```
-                feedback: You are... right!
+                feedback: Kamu... benar!
             -   option: |-
                     ```
                     {if} answer is right
@@ -1801,124 +1813,133 @@ levels:
                     {else}
                         {print} You are wrong!
                     ```
-                feedback: You are wrong!
-            hint: What should happen if the person is right? And what else?
+                feedback: Anda salah!
+            hint: Apa yang harus terjadi jika orang tersebut benar? Lalu apa lagi?
             correct_answer: C
             question_score: '10'
         9:
-            question_text: What line(s) in this code should start with 4 spaces?
+            question_text: Baris apa dalam kode ini yang harus dimulai dengan 4 spasi?
             code: |-
-                1 music = {ask} 'What is your favorite music genre?'
-                2 {if} music is rock
+                1 musik = {ask} 'Apa genre musik favoritmu?'
+                2 {if} musik {is} rock
                 3 {print} '🤘'
                 4 {else}
                 5 {print} '👎'
             mp_choice_options:
-            -   option: Line 2 and 4
-                feedback: The lines after the `{if}` and `{else}` command should start with 4 spaces
-            -   option: Only line 3
-                feedback: Not only 3...
-            -   option: Line 3, 4 and 5
-                feedback: Line 4 shouldn't
-            -   option: Line 3 and 5
-                feedback: Great job!
-            hint: The lines after an `{if}` or `{else}` command should start with 4 spaces.
+            -   option: Baris 2 dan 4
+                feedback: Baris setelah perintah `{if}` dan `{else}` harus dimulai dengan 4 spasi
+            -   option: Hanya 3 baris
+                feedback: Tidak hanya 3...
+            -   option: Baris 3, 4 dan 5
+                feedback: Baris 4 seharusnya tidak
+            -   option: Baris 3 dan 5
+                feedback: Kerja bagus!
+            hint: Baris setelah perintah `{if}` atau `{else}` harus dimulai dengan 4 spasi.
             correct_answer: D
             question_score: '10'
         10:
-            question_text: Which statement is true?
+            question_text: Pernyataan mana yang benar?
             code: |-
-                1 level = {ask} 'What level are you on?"
-                2 {if} level {is} 8
-                3 {print} Great job!
+                1 level = {ask} 'Kamu di level berapa?'
+                2 {if} tingkat {is} 8
+                3 {print} 'Kerja bagus!'
             mp_choice_options:
-            -   option: All lines should start with 4 spaces
-                feedback: That's not true
-            -   option: Line 2 and 3 should start with 4 spaces
-                feedback: That's not true
-            -   option: Line 2 should start with 4 spaces
-                feedback: That's not true
-            -   option: Line 3 should start with 4 spaces
-                feedback: You are correct!
-            hint: Only one line starts with 4 spaces, but which one...?
+            -   option: Semua baris harus dimulai dengan 4 spasi
+                feedback: Itu tidak benar
+            -   option: Baris 2 dan 3 harus dimulai dengan 4 spasi
+                feedback: Itu tidak benar
+            -   option: Baris 2 harus dimulai dengan 4 spasi
+                feedback: Itu tidak benar
+            -   option: Baris 3 harus dimulai dengan 4 spasi
+                feedback: Anda benar!
+            hint: Hanya satu baris yang dimulai dengan 4 spasi, tapi yang mana...?
             correct_answer: D
             question_score: '10'
     9:
         1:
-            question_text: What is wrong with this code?
+            question_text: Apa yang salah dengan kode ini?
             code: |-
                 {repeat} 3 {times}
-                   eten = {ask} 'What would you like to eat?'
-                   {if} food {is} fries
-                       sauce = {ask} 'What sauce would you like?'
-                       {print} 'One fries with ' sauce
-                   {if} food {is} pizza
-                       topping = {ask} 'What topping would you like?'
-                       {print} 'One pizza with ' topping
-                {print} 'That you for your order'
+                   makanan = {ask} 'Kamu mau makan apa?'
+                   {if} makanan {is} kentang goreng
+                       saus = {ask} 'Kamu mau saus apa?'
+                       {print} 'Satu kentang goreng dengan saus'
+                   {if} makanan {is} pizza
+                       topping = {ask} 'Kamu mau topping apa?'
+                       {print} 'Satu pizza dengan topping '
+                {print} 'Terima kasih atas pesanan Anda'
             mp_choice_options:
-            -   option: Nothing this code is correct!
-                feedback: That's right!.
-            -   option: You're not allowed to use an `{if}` command after an `{ask}` command.
-                feedback: You are!.
-            -   option: You don't have to use indentation twice.
-                feedback: You always have to use indentation.
-            -   option: The indentation is wrong in the last `{if}` command.
-                feedback: It not, though.
-            hint: all the indentation is done correctly.
+            -   option: Tidak ada, kode ini benar!
+                feedback: Itu benar!
+            -   option: Anda tidak diperbolehkan menggunakan perintah `{if}` setelah perintah `{ask}`.
+                feedback: Anda!
+            -   option: Anda tidak perlu menggunakan indentasi dua kali.
+                feedback: Anda selalu harus menggunakan lekukan.
+            -   option: Indentasi salah pada perintah `{if}` terakhir.
+                feedback: Itu bukan lekukannya.
+            hint: Semua lekukan dilakukan dengan benar.
             correct_answer: A
             question_score: '10'
         2:
-            question_text: What will be printed after entering the correct password?
+            question_text: Apa yang akan dicetak setelah memasukkan kata sandi yang benar?
             code: |-
-                password = {ask} 'What is the password?'
-                correct_password = Hedy
-                {if} password {is} correct_password
+                kata sandi = {ask} 'Apa kata sandinya?'
+                kata sandi_benar = Halo
+                {if} kata sandi {is} kata sandi_benar
                     {repeat} 2 {times}
-                        {print} 'Good job!'
-                        {print} 'You can use the computer!'
+                        {print} 'Kerja bagus!'
+                        {print} 'Anda dapat menggunakan komputer!'
                 {else}
-                    {print} 'The computer will explode in 5... 4... 3... 2... 1...'
+                    {print} 'Komputer akan meledak dalam 5...4...3...2...1...'
             mp_choice_options:
             -   option: |-
-                    Good job!
-                    Good job!
-                feedback: That's not it!
-            -   option: The computer will explode in 5... 4... 3... 2... 1...
-                feedback: That's not it!
+                    ```
+                    Kerja bagus!
+                    Kerja bagus!
+                    ```
+                feedback: Bukan itu!
             -   option: |-
-                    Good job !
-                    Good job!
-                    You can use the computer!
-                feedback: That's not it!
+                    ```
+                    Komputer akan meledak dalam 5... 4... 3... 2... 1...
+                    ```
+                feedback: Bukan itu!
             -   option: |-
-                    Good job!
-                    You can use the computer!
-                    Good job!
-                    You can use the computer!
-                feedback: Correct!
-            hint: Everything under the `{repeat}` command is repeated twice.
+                    ```
+                    Kerja bagus!
+                    Kerja bagus!
+                    Anda dapat menggunakan komputer!
+                    ```
+                feedback: Bukan itu!
+            -   option: |-
+                    ```
+                    Kerja bagus!
+                    Anda dapat menggunakan komputer!
+                    Kerja bagus!
+                    Anda dapat menggunakan komputer!
+                    ```
+                feedback: Benar!
+            hint: Segala sesuatu di bawah perintah `{repeat}` diulang dua kali.
             correct_answer: D
             question_score: '10'
         3:
-            question_text: Which case should you choose to win a million dollars?
+            question_text: Kasus mana yang harus Anda pilih untuk memenangkan satu juta dolar?
             code: |-
-                {print} 'Choose the right case and win!'
-                case = {ask} 'Which case will you pick? 1 or 2?'
-                {if} case {is} 1
-                     action = {ask} 'Open it or sell it?'
-                         {if} action {is} sell
-                             {print} 'You sell your case for 10 dollars'
-                         {if} action {is} open
-                             {print} 'You open the case and win an apple pie'
-                {if} case {is} 2
-                     action = {ask} 'Open it or sell it?'
-                         {if} action {is} sell
-                             {print} 'You sell the case for 500 dollars'
-                         {if} action {is} open
-                             {print} 'You open the case and win a million dollars!'
+                {print} 'Pilih kasus yang tepat dan menangkan!'
+                kasus = {ask} 'Kasus manakah yang akan Anda pilih? 1 atau 2?'
+                {if} kasus {is} 1
+                     aksi = {ask} 'Buka atau jual?'
+                     {if} tindakan {is} penjualan
+                         {print} 'Anda menjual casing Anda seharga 10 dolar'
+                     {if} tindakan {is} terbuka
+                         {print} 'Anda membuka kasing dan memenangkan pai apel'
+                {if} kasus {is} 2
+                     aksi = {ask} 'Buka atau jual?'
+                     {if} tindakan {is} penjualan
+                         {print} 'Anda menjual kasingnya seharga 500 dolar'
+                     {if} tindakan {is} terbuka
+                         {print} 'Anda membuka kasus ini dan memenangkan satu juta dolar!'
             mp_choice_options:
-            -   option: case 1, sell
+            -   option: kasus 1, jual
                 feedback: You don't win a million!
             -   option: case 1, open
                 feedback: You don't win a million
@@ -2041,7 +2062,7 @@ levels:
                     {if} drink {is} coke
                             price = price - 2
                     ```
-                feedback: Try again
+                feedback: Dua `{if}` berturut-turut tidak pernah benar.
             -   option: |-
                     ```
                     {if} food {is} pizza

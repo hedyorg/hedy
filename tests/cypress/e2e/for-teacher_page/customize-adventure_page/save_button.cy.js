@@ -65,4 +65,48 @@ describe('Save button test', () => {
     cy.get('#modal-no-button')
       .should('not.be.visible');
   })
+
+  it('second teacher should not be able to change an adventure', () => {
+
+    cy.intercept({
+      method: "POST",
+      url: "/for-teachers/customize-adventure",
+      times: 1,
+    }).as("customizeAdventure")
+
+    loginForTeacher("teacher4");
+    goToEditAdventure();
+
+    // should all not be visible at start
+    cy.get('#modal-confirm')
+      .should('not.be.visible');
+    cy.get('#modal_alert_container')
+      .should('not.be.visible');
+    cy.get('#modal_alert_text')
+      .should('not.be.visible');
+    cy.get('#modal-no-button')
+      .should('not.be.visible');
+    cy.get('#modal-yes-button')
+      .should('not.be.visible');
+
+    // Not saving (clicking in save and than on 'yes')
+    cy.get('#save_adventure_button')
+      .should('be.visible')
+      .should('not.be.disabled')
+      .should('have.attr', 'type', 'submit')
+      .click();
+
+
+    cy.get('#modal-yes-button')
+    .should('be.visible')
+    .should('not.be.disabled')
+    .click();
+
+    cy.get('#modal_alert_container')
+      .should('be.visible');
+    cy.get('#modal_alert_text')
+      .should('be.visible')
+    
+    cy.wait("@customizeAdventure").should('have.nested.property', 'response.statusCode', 403)
+  })
 })

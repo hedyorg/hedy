@@ -842,12 +842,12 @@ adventures:
                     ¡Buenas noticias! En este nivel se te permitirá poner un {if} dentro de otro {if}, o dentro de un comando {repeat}.
                 example_code: |
                     ```
-                    respuesta = {ask} ¿Estás preparado para aprender algo nuevo?
+                    respuesta = {ask} "¿Estás preparado para aprender algo nuevo?"
                     {if} respuesta {is} Sí
                         {print} '¡Genial! Puedes aprender a usar el comando repeat en el comando if!'
-                        {print} '¡Hurra!
-                        {print} "¡Hurra!
-                        {print} "¡Hurra!
+                        {print} '¡Hurra!'
+                        {print} '¡Hurra!'
+                        {print} '¡Hurra!'
                     {else}
                         {print} 'Quizás deberías practicar un poco más en el nivel anterior'
                 start_code: '{print} ¡Vayamos a la siguiente pestaña!'
@@ -971,7 +971,7 @@ adventures:
                 story_text: |
                     Ahora vamos a cambiar un poco la indentación. Cada vez que necesitemos una sangría, necesitaremos `:` en la línea anterior a la sangría.
 
-                    En este nivel también se puede utilizar un nuevo comando: `{ elif }`. `{elif}` es la abreviatura de {else} {if} y lo necesitas cuando quieres hacer 3 (¡o más!) opciones.
+                    En este nivel también se puede utilizar un nuevo comando: `{elif}`. `{elif}` es la abreviatura de {else} {if} y lo necesitas cuando quieres hacer 3 (¡o más!) opciones.
                     ¡Compruébalo!
                 start_code: '{print} ''¡Vamos a la siguiente pestaña!'''
             18:
@@ -1032,7 +1032,7 @@ adventures:
                     Este es código para calcular los puntos para un dado:
 
                     ### Ejercicio
-                    ¿Puedes hacer que el código obtenga la puntuación total por 8 dados? Para hacer eso tienes que cortar y copiar algunas líneas de código.
+                    ¿Puedes hacer que el código obtenga la puntuación total por 8 dados? Para hacer eso tienes que copiar y pegar algunas líneas de código.
                 example_code: |
                     ```
                     opciones = 1, 2, 3, 4, 5, lombriz
@@ -1043,7 +1043,7 @@ adventures:
                     {print} 'esos son ' puntos ' puntos'
                     ```
                 example_code_2: |
-                    ¿Conseguiste calcular la puntuación para 8 dados? Esto requería un montón de cortar y pegar, ¿verdad? ¡Vamos a hacerlo más fácil en el nivel 7!
+                    ¿Conseguiste calcular la puntuación de 8 dados? Eso requirió mucho copiar y pegar, ¿verdad? ¡Vamos a hacerlo más fácil en el nivel 7!
                 start_code: '{print} ''¿Qué salió esta vez?'''
             7:
                 story_text: |
@@ -1143,11 +1143,11 @@ adventures:
                 example_code: "```\npersonas = mamá, papá, Emma, María\nemma_lava = 0\nlavaplatos = personas {at} {random}\n{print} 'El lavaplatos es ' lavaplatos\n{if} lavaplatos {is} Emma emma_lava = emma_lava + 1\n{print} 'Emma va a hacer los platos hoy ' emma_lava 'veces'\n```\n\nAhora puedes copiar\
                     \ las líneas 3 a 5 unas cuantas veces (por ejemplo, 7 para toda la semana) para calcular para toda la semana otra vez. \n¿Puedes hacer el código para toda la semana?\n"
                 story_text_2: |
-                    Si tienes muy mala suerte, ¡el programa anterior puede que te elija para lavar los platos toda la semana! ¡Eso no es justo!
-                    Para crear un sistema mas justo puedes utilizar el comando `{remove}` para eliminar la persona elegida de la lista. De esta forma no tendrás que lavar los platos hasta que todos hayan hecho un turno.
+                    Si tienes muy mala suerte, puede que el programa anterior te elija para fregar los platos durante toda la semana. ¡Eso no es justo!
+                    Para crear un sistema más justo puedes utilizar el comando `{remove}` para eliminar a la persona elegida de la lista. Así no tendrás que volver a fregar los platos hasta que todos hayan tenido su turno.
 
-                    ¡Lunes y martes ya están añadidos! ¿Puedes añadir el resto de la semana?
-                    Y ¿puedes dar con una solución para cuando la lista esté vacía?
+                    El Lunes y el Martes ya están listos. ¿Puedes añadir el resto de la semana?
+                    Y... ¿se te ocurre alguna solución para cuando tu lista esté vacía?
                 example_code_2: "```\npersonas = mamá, papá, Emma, Sofía\nlavavajillas = personas {at} {random}\n{print} 'El lunes los platos serán lavados por ' lavavajillas \n{remove} lavavajillas {from} personas\nlavavajillas = personas {at} {random}\n{print} 'El martes los platos serán lavados por\
                     \ ' lavavajillas \n{remove} lavavajillas {from} personas\n```\n"
                 start_code: '{print} ''¿Quién lavará los platos?'''

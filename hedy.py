@@ -294,6 +294,19 @@ commands_per_level = {
 command_turn_literals = ['right', 'left']
 command_make_color = ['black', 'blue', 'brown', 'gray', 'green', 'orange', 'pink', 'purple', 'red', 'white', 'yellow']
 
+
+def color_commands_local(language):
+    colors_local = [hedy_translation.translate_keyword_from_en(k, language) for k in command_make_color]
+    return colors_local
+
+
+def command_make_color_local(language):
+    if language == "en":
+        return command_make_color
+    else:
+        return command_make_color + color_commands_local(language)
+
+
 # Commands and their types per level (only partially filled!)
 commands_and_types_per_level = {
     Command.print: {
@@ -1015,7 +1028,7 @@ class AllCommands(Transformer):
     def __init__(self, level):
         self.level = level
 
-    def translate_keyword(self, keyword):
+    def standardize_keyword(self, keyword):
         # some keywords have names that are not a valid name for a command
         # that's why we call them differently in the grammar
         # we have to translate them to the regular names here for further communciation
@@ -1047,7 +1060,7 @@ class AllCommands(Transformer):
 
     def __default__(self, args, children, meta):
         # if we are matching a rule that is a command
-        production_rule_name = self.translate_keyword(args)
+        production_rule_name = self.standardize_keyword(args)
         leaves = flatten_list_of_lists_to_list(children)
         # for the achievements we want to be able to also detect which operators were used by a kid
         operators = ['addition', 'subtraction', 'multiplication', 'division']
@@ -1242,9 +1255,17 @@ def hedy_transpiler(level):
 
 @v_args(meta=True)
 class ConvertToPython(Transformer):
-    def __init__(self, lookup, numerals_language="Latin"):
+    def __init__(self, lookup, language="en", numerals_language="Latin", is_debug=False):
         self.lookup = lookup
+        self.language = language
         self.numerals_language = numerals_language
+        self.is_debug = is_debug
+
+    def add_debug_breakpoint(self):
+        if self.is_debug:
+            return f" # __BREAKPOINT__"
+        else:
+            return ""
 
     # default for line number is max lines so if it is not given, there
     # is no check on whether the var is defined
@@ -1375,9 +1396,11 @@ class ConvertToPython(Transformer):
 @source_map_transformer(source_map)
 class ConvertToPython_1(ConvertToPython):
 
-    def __init__(self, lookup, numerals_language):
+    def __init__(self, lookup, language, numerals_language, is_debug):
         self.numerals_language = numerals_language
+        self.language = language
         self.lookup = lookup
+        self.is_debug = is_debug
         __class__.level = 1
 
     def program(self, meta, args):
@@ -1402,18 +1425,18 @@ class ConvertToPython_1(ConvertToPython):
     def print(self, meta, args):
         # escape needed characters
         argument = process_characters_needing_escape(args[0])
-        return "print('" + argument + "')"
+        return f"print('" + argument + "')" + self.add_debug_breakpoint()
 
     def ask(self, meta, args):
         argument = process_characters_needing_escape(args[0])
-        return "answer = input('" + argument + "')"
+        return "answer = input('" + argument + "')" + self.add_debug_breakpoint()
 
     def echo(self, meta, args):
         if len(args) == 0:
-            return "print(answer)"  # no arguments, just print answer
+            return f"print(answer){self.add_debug_breakpoint()}"  # no arguments, just print answer
 
         argument = process_characters_needing_escape(args[0])
-        return "print('" + argument + " '+answer)"
+        return "print('" + argument + " '+answer)" + self.add_debug_breakpoint()
 
     def comment(self, meta, args):
         return f"#{''.join(args)}"
@@ -1423,16 +1446,16 @@ class ConvertToPython_1(ConvertToPython):
 
     def forward(self, meta, args):
         if len(args) == 0:
-            return sleep_after('t.forward(50)', False)
+            return sleep_after(f't.forward(50){self.add_debug_breakpoint()}', False, self.is_debug)
         return self.make_forward(int(args[0]))
 
     def color(self, meta, args):
         if len(args) == 0:
-            return "t.pencolor('black')"  # no arguments defaults to black ink
+            return f"t.pencolor('black'){self.add_debug_breakpoint()}"  # no arguments defaults to black ink
 
         arg = args[0].data
-        if arg in command_make_color:
-            return f"t.pencolor('{arg}')"
+        if arg in command_make_color_local(self.language):
+            return f"t.pencolor('{arg}'){self.add_debug_breakpoint()}"
         else:
             # the TypeValidator should protect against reaching this line:
             raise exceptions.InvalidArgumentTypeException(command=Command.color, invalid_type='', invalid_argument=arg,
@@ -1440,13 +1463,13 @@ class ConvertToPython_1(ConvertToPython):
 
     def turn(self, meta, args):
         if len(args) == 0:
-            return "t.right(90)"  # no arguments defaults to a right turn
+            return f"t.right(90){self.add_debug_breakpoint()}"  # no arguments defaults to a right turn
 
         arg = args[0].data
         if arg == 'left':
-            return "t.left(90)"
+            return f"t.left(90){self.add_debug_breakpoint()}"
         elif arg == 'right':
-            return "t.right(90)"
+            return f"t.right(90){self.add_debug_breakpoint()}"
         else:
             # the TypeValidator should protect against reaching this line:
             raise exceptions.InvalidArgumentTypeException(command=Command.turn, invalid_type='', invalid_argument=arg,
@@ -1458,8 +1481,8 @@ class ConvertToPython_1(ConvertToPython):
     def make_forward(self, parameter):
         return self.make_turtle_command(parameter, Command.forward, 'forward', True, 'int')
 
-    def make_color(self, parameter):
-        return self.make_turtle_color_command(parameter, Command.color, 'pencolor')
+    def make_color(self, parameter, language):
+        return self.make_turtle_color_command(parameter, Command.color, 'pencolor', language)
 
     def make_turtle_command(self, parameter, command, command_text, add_sleep, type):
         exception = ''
@@ -1472,18 +1495,27 @@ class ConvertToPython_1(ConvertToPython):
               {variable} = {type}({variable})
             except ValueError:
               raise Exception(f'While running your program the command {style_command(command)} received the value {style_command('{' + variable + '}')} which is not allowed. Try changing the value to a number.')
-            t.{command_text}(min(600, {variable}) if {variable} > 0 else max(-600, {variable}))""")
-        if add_sleep:
-            return sleep_after(transpiled, False)
+            t.{command_text}(min(600, {variable}) if {variable} > 0 else max(-600, {variable})){self.add_debug_breakpoint()}""")
+        if add_sleep and not self.is_debug:
+            return sleep_after(transpiled, False, self.is_debug)
         return transpiled
 
-    def make_turtle_color_command(self, parameter, command, command_text):
+    def make_turtle_color_command(self, parameter, command, command_text, language):
+        colors = command_make_color_local(language)
         variable = self.get_fresh_var('__trtl')
+
+        # we translate the color value to English at runtime, since it might be decided at runtime
+        # coming from a random list or ask
+
+        color_dict = {hedy_translation.translate_keyword_from_en(x, language): x for x in command_make_color}
+
         return textwrap.dedent(f"""\
             {variable} = f'{parameter}'
-            if {variable} not in {command_make_color}:
+            color_dict = {color_dict}
+            if {variable} not in {colors}:
               raise Exception(f'While running your program the command {style_command(command)} received the value {style_command('{' + variable + '}')} which is not allowed. Try using another color.')
-            t.{command_text}({variable})""")
+            {variable} = color_dict[{variable}]
+            t.{command_text}({variable}){self.add_debug_breakpoint()}""")
 
     def make_catch_exception(self, args):
         lists_names = []
@@ -1525,18 +1557,18 @@ class ConvertToPython_2(ConvertToPython_1):
 
     def color(self, meta, args):
         if len(args) == 0:
-            return "t.pencolor('black')"
+            return f"t.pencolor('black'){self.add_debug_breakpoint()}"
         arg = args[0]
         if not isinstance(arg, str):
             arg = arg.data
 
         arg = self.process_variable_for_fstring(arg)
 
-        return self.make_color(arg)
+        return self.make_color(arg, self.language)
 
     def turn(self, meta, args):
         if len(args) == 0:
-            return "t.right(90)"  # no arguments defaults to a right turn
+            return f"t.right(90){self.add_debug_breakpoint()}"  # no arguments defaults to a right turn
         arg = args[0]
         if self.is_variable(arg):
             return self.make_turn(escape_var(arg))
@@ -1573,16 +1605,16 @@ class ConvertToPython_2(ConvertToPython_1):
                 args_new.append(''.join([self.process_variable_for_fstring(x, meta.line) for x in res]))
         exception = self.make_catch_exception(args)
         argument_string = ' '.join(args_new)
-        return exception + f"print(f'{argument_string}')"
+        return exception + f"print(f'{argument_string}'){self.add_debug_breakpoint()}"
 
     def ask(self, meta, args):
         var = args[0]
         all_parameters = ["'" + process_characters_needing_escape(a) + "'" for a in args[1:]]
-        return f'{var} = input(' + '+'.join(all_parameters) + ")"
+        return f'{var} = input(' + '+'.join(all_parameters) + ")" + self.add_debug_breakpoint()
 
     def forward(self, meta, args):
         if len(args) == 0:
-            return sleep_after('t.forward(50)', False)
+            return sleep_after(f't.forward(50){self.add_debug_breakpoint()}', False, self.is_debug)
 
         if ConvertToPython.is_int(args[0]):
             parameter = int(args[0])
@@ -1597,25 +1629,26 @@ class ConvertToPython_2(ConvertToPython_1):
         value = args[1]
         if self.is_random(value) or self.is_list(value):
             exception = self.make_catch_exception([value])
-            return exception + parameter + " = " + value
+            return exception + parameter + " = " + value + self.add_debug_breakpoint()
         else:
             if self.is_variable(value):
                 value = self.process_variable(value, meta.line)
-                return parameter + " = " + value
+                return parameter + " = " + value + self.add_debug_breakpoint()
             else:
                 # if the assigned value is not a variable and contains single quotes, escape them
                 value = process_characters_needing_escape(value)
-                return parameter + " = '" + value + "'"
+                return parameter + " = '" + value + "'" + self.add_debug_breakpoint()
 
     def sleep(self, meta, args):
+
         if not args:
-            return "time.sleep(1)"
+            return f"time.sleep(1){self.add_debug_breakpoint()}"
         else:
             value = f'"{args[0]}"' if self.is_int(args[0]) else args[0]
             exceptions = self.make_catch_exception(args)
             try_prefix = "try:\n" + textwrap.indent(exceptions, "  ")
             code = try_prefix + textwrap.dedent(f"""\
-                  time.sleep(int({value}))
+                  time.sleep(int({value})){self.add_debug_breakpoint()}
                 except ValueError:
                   raise Exception(f'While running your program the command {style_command(Command.sleep)} received the value {style_command('{' + value + '}')} which is not allowed. Try changing the value to a number.')""")
             return code
@@ -1628,7 +1661,7 @@ class ConvertToPython_3(ConvertToPython_2):
     def assign_list(self, meta, args):
         parameter = args[0]
         values = [f"'{process_characters_needing_escape(a)}'" for a in args[1:]]
-        return f"{parameter} = [{', '.join(values)}]"
+        return f"{parameter} = [{', '.join(values)}]{self.add_debug_breakpoint()}"
 
     def list_access(self, meta, args):
         args = [escape_var(a) for a in args]
@@ -1655,14 +1688,14 @@ class ConvertToPython_3(ConvertToPython_2):
     def add(self, meta, args):
         value = self.process_argument(meta, args[0])
         list_var = args[1]
-        return f"{list_var}.append({value})"
+        return f"{list_var}.append({value}){self.add_debug_breakpoint()}"
 
     def remove(self, meta, args):
         value = self.process_argument(meta, args[0])
         list_var = args[1]
         return textwrap.dedent(f"""\
         try:
-          {list_var}.remove({value})
+          {list_var}.remove({value}){self.add_debug_breakpoint()}
         except:
           pass""")
 
@@ -1703,18 +1736,18 @@ class ConvertToPython_4(ConvertToPython_3):
     def print(self, meta, args):
         argument_string = self.print_ask_args(meta, args)
         exceptions = self.make_catch_exception(args)
-        return exceptions + f"print(f'{argument_string}')"
+        return exceptions + f"print(f'{argument_string}'){self.add_debug_breakpoint()}"
 
     def ask(self, meta, args):
         var = args[0]
         argument_string = self.print_ask_args(meta, args[1:])
-        return f"{var} = input(f'{argument_string}')"
+        return f"{var} = input(f'{argument_string}'){self.add_debug_breakpoint()}"
 
     def error_print_nq(self, meta, args):
         return ConvertToPython_2.print(self, meta, args)
 
-    def clear(self, meta, args):
-        return f"""extensions.clear()
+    def clear(self, meta, args):  # todo not sure about it being here
+        return f"""extensions.clear(){self.add_debug_breakpoint()}
 try:
     # If turtle is being used, reset canvas
     t.hideturtle()
@@ -1729,17 +1762,17 @@ except NameError:
 @hedy_transpiler(level=5)
 @source_map_transformer(source_map)
 class ConvertToPython_5(ConvertToPython_4):
-    def __init__(self, lookup, numerals_language):
-        super().__init__(lookup, numerals_language)
+    def __init__(self, lookup, language, numerals_language, is_debug):
+        super().__init__(lookup, language, numerals_language, is_debug)
 
-    def ifs(self, meta, args):
-        return f"""if {args[0]}:
+    def ifs(self, meta, args):  # might be worth asking if we want a debug breakpoint here
+        return f"""if {args[0]}:{self.add_debug_breakpoint()}
 {ConvertToPython.indent(args[1])}"""
 
     def ifelse(self, meta, args):
-        return f"""if {args[0]}:
+        return f"""if {args[0]}:{self.add_debug_breakpoint()}
 {ConvertToPython.indent(args[1])}
-else:
+else:{self.add_debug_breakpoint()}
 {ConvertToPython.indent(args[2])}"""
 
     def condition(self, meta, args):
@@ -1852,19 +1885,19 @@ class ConvertToPython_6(ConvertToPython_5):
         parameter = args[0]
         value = args[1]
         if type(value) is Tree:
-            return parameter + " = " + value.children[0]
+            return parameter + " = " + value.children[0] + self.add_debug_breakpoint()
         else:
             if self.is_variable(value):
                 value = self.process_variable(value, meta.line)
                 if self.is_list(value) or self.is_random(value):
                     exception = self.make_catch_exception([value])
-                    return exception + parameter + " = " + value
+                    return exception + parameter + " = " + value + self.add_debug_breakpoint()
                 else:
                     return parameter + " = " + value
             else:
                 # if the assigned value is not a variable and contains single quotes, escape them
                 value = process_characters_needing_escape(value)
-                return parameter + " = '" + value + "'"
+                return parameter + " = '" + value + "'" + self.add_debug_breakpoint()
 
     def process_token_or_tree(self, argument):
         if type(argument) is Tree:
@@ -1897,7 +1930,7 @@ class ConvertToPython_6(ConvertToPython_5):
 
     def turn(self, meta, args):
         if len(args) == 0:
-            return "t.right(90)"  # no arguments defaults to a right turn
+            return "t.right(90)" + self.add_debug_breakpoint()  # no arguments defaults to a right turn
         arg = args[0]
         if self.is_variable(arg):
             return self.make_turn(escape_var(arg))
@@ -1907,7 +1940,7 @@ class ConvertToPython_6(ConvertToPython_5):
 
     def forward(self, meta, args):
         if len(args) == 0:
-            return sleep_after('t.forward(50)', False)
+            return sleep_after('t.forward(50)' + self.add_debug_breakpoint(), False, self.is_debug)
         arg = args[0]
         if self.is_variable(arg):
             return self.make_forward(escape_var(arg))
@@ -1916,7 +1949,10 @@ class ConvertToPython_6(ConvertToPython_5):
         return self.make_forward(int(args[0]))
 
 
-def sleep_after(commands, indent=True):
+def sleep_after(commands, indent=True, is_debug=False):
+    if is_debug:
+        return commands
+
     lines = commands.split()
     if lines[-1] == "time.sleep(0.1)":  # we don't sleep double so skip if final line is a sleep already
         return commands
@@ -1934,8 +1970,8 @@ class ConvertToPython_7(ConvertToPython_6):
         times = self.process_variable(args[0], meta.line)
         command = args[1]
         # in level 7, repeats can only have 1 line as their arguments
-        command = sleep_after(command, False)
-        return f"""for {var_name} in range(int({str(times)})):
+        command = sleep_after(command, False, self.is_debug)
+        return f"""for {var_name} in range(int({str(times)})):{self.add_debug_breakpoint()}
 {ConvertToPython.indent(command)}"""
 
 
@@ -1958,13 +1994,13 @@ class ConvertToPython_8_9(ConvertToPython_7):
 
         all_lines = [ConvertToPython.indent(x) for x in args[1:]]
         body = "\n".join(all_lines)
-        body = sleep_after(body)
+        body = sleep_after(body, indent=True, is_debug=self.is_debug)
 
-        return f"for {var_name} in range(int({times})):\n{body}"
+        return f"for {var_name} in range(int({times})):{self.add_debug_breakpoint()}\n{body}"
 
     def ifs(self, meta, args):
         all_lines = [ConvertToPython.indent(x) for x in args[1:]]
-        return "if " + args[0] + ":\n" + "\n".join(all_lines)
+        return "if " + args[0] + ":" + self.add_debug_breakpoint() + "\n" + "\n".join(all_lines)
 
     def ifpressed(self, met, args):
         args = [a for a in args if a != ""]  # filter out in|dedent tokens
@@ -2046,8 +2082,8 @@ class ConvertToPython_10(ConvertToPython_8_9):
 
         body = "\n".join([ConvertToPython.indent(x) for x in args[2:]])
 
-        body = sleep_after(body, True)
-        return f"for {times} in {args[1]}:\n{body}"
+        body = sleep_after(body, True, self.is_debug)
+        return f"for {times} in {args[1]}:{ self.add_debug_breakpoint() }\n{body}"
 
 
 @v_args(meta=True)
@@ -2058,12 +2094,12 @@ class ConvertToPython_11(ConvertToPython_10):
         args = [a for a in args if a != ""]  # filter out in|dedent tokens
         iterator = escape_var(args[0])
         body = "\n".join([ConvertToPython.indent(x) for x in args[3:]])
-        body = sleep_after(body)
+        body = sleep_after(body, True, self.is_debug)
         stepvar_name = self.get_fresh_var('step')
         begin = self.process_token_or_tree(args[1])
         end = self.process_token_or_tree(args[2])
         return f"""{stepvar_name} = 1 if {begin} < {end} else -1
-for {iterator} in range({begin}, {end} + {stepvar_name}, {stepvar_name}):
+for {iterator} in range({begin}, {end} + {stepvar_name}, {stepvar_name}):{self.add_debug_breakpoint()}
 {body}"""
 
 
@@ -2135,12 +2171,12 @@ class ConvertToPython_12(ConvertToPython_11):
     def print(self, meta, args):
         argument_string = self.print_ask_args(meta, args)
         exception = self.make_catch_exception(args)
-        return exception + f"print(f'''{argument_string}''')"
+        return exception + f"print(f'''{argument_string}''')" + self.add_debug_breakpoint()
 
     def ask(self, meta, args):
         var = args[0]
         argument_string = self.print_ask_args(meta, args[1:])
-        assign = f"{var} = input(f'''{argument_string}''')"
+        assign = f"{var} = input(f'''{argument_string}''')" + self.add_debug_breakpoint()
 
         return textwrap.dedent(f"""\
         {assign}
@@ -2155,7 +2191,7 @@ class ConvertToPython_12(ConvertToPython_11):
     def assign_list(self, meta, args):
         parameter = args[0]
         values = args[1:]
-        return parameter + " = [" + ", ".join(values) + "]"
+        return parameter + " = [" + ", ".join(values) + "]" + self.add_debug_breakpoint()
 
     def assign(self, meta, args):
         right_hand_side = args[1]
@@ -2178,11 +2214,11 @@ class ConvertToPython_12(ConvertToPython_11):
 
         if isinstance(right_hand_side, Tree):
             exception = self.make_catch_exception([right_hand_side.children[0]])
-            return exception + left_hand_side + " = " + right_hand_side.children[0]
+            return exception + left_hand_side + " = " + right_hand_side.children[0] + self.add_debug_breakpoint()
         else:
             # we no longer escape quotes here because they are now needed
             exception = self.make_catch_exception([right_hand_side])
-            return exception + left_hand_side + " = " + right_hand_side + ""
+            return exception + left_hand_side + " = " + right_hand_side + "" + self.add_debug_breakpoint()
 
     def var(self, meta, args):
         name = args[0]
@@ -2191,7 +2227,7 @@ class ConvertToPython_12(ConvertToPython_11):
 
     def turn(self, meta, args):
         if len(args) == 0:
-            return "t.right(90)"  # no arguments defaults to a right turn
+            return "t.right(90)" + self.add_debug_breakpoint()  # no arguments defaults to a right turn
         arg = args[0]
         if self.is_variable(arg):
             return self.make_turn(escape_var(arg))
@@ -2201,7 +2237,7 @@ class ConvertToPython_12(ConvertToPython_11):
 
     def forward(self, meta, args):
         if len(args) == 0:
-            return sleep_after('t.forward(50)', False)
+            return sleep_after('t.forward(50)' + self.add_debug_breakpoint(), False, self.is_debug)
         arg = args[0]
         if self.is_variable(arg):
             return self.make_forward(escape_var(arg))
@@ -2273,9 +2309,9 @@ class ConvertToPython_15(ConvertToPython_14):
         args = [a for a in args if a != ""]  # filter out in|dedent tokens
         all_lines = [ConvertToPython.indent(x) for x in args[1:]]
         body = "\n".join(all_lines)
-        body = sleep_after(body)
+        body = sleep_after(body, True, self.is_debug)
         exceptions = self.make_catch_exception([args[0]])
-        return exceptions + "while " + args[0] + ":\n" + body
+        return exceptions + "while " + args[0] + ":" + self.add_debug_breakpoint() + "\n" + body
 
     def ifpressed(self, meta, args):
         button_name = self.process_variable(args[0], meta.line)
@@ -2308,18 +2344,18 @@ class ConvertToPython_16(ConvertToPython_15):
     def assign_list(self, meta, args):
         parameter = args[0]
         values = [a for a in args[1:]]
-        return parameter + " = [" + ", ".join(values) + "]"
+        return parameter + " = [" + ", ".join(values) + "]" + self.add_debug_breakpoint()
 
     def change_list_item(self, meta, args):
         left_side = args[0] + '[' + args[1] + '-1]'
         right_side = args[2]
         exception = _translate_index_error(left_side, args[0])
-        return exception + left_side + ' = ' + right_side
+        return exception + left_side + ' = ' + right_side + self.add_debug_breakpoint()
 
     def ifs(self, meta, args):
         all_lines = [ConvertToPython.indent(x) for x in args[1:]]
         exceptions = self.make_catch_exception([args[0]])
-        return exceptions + "if " + args[0] + ":\n" + "\n".join(all_lines)
+        return exceptions + "if " + args[0] + ":" + self.add_debug_breakpoint() + "\n" + "\n".join(all_lines)
 
 
 @v_args(meta=True)
@@ -2329,7 +2365,7 @@ class ConvertToPython_17(ConvertToPython_16):
     def elifs(self, meta, args):
         args = [a for a in args if a != ""]  # filter out in|dedent tokens
         all_lines = [ConvertToPython.indent(x) for x in args[1:]]
-        return "\nelif " + args[0] + ":\n" + "\n".join(all_lines)
+        return "\nelif " + args[0] + ":" + self.add_debug_breakpoint() + "\n" + "\n".join(all_lines)
 
     def ifpressed_elifs(self, meta, args):
         args = [a for a in args if a != ""]  # filter out in|dedent tokens
@@ -2801,7 +2837,7 @@ def transpile_inner_with_skipping_faulty(input_string, level, lang="en"):
     return transpile_result
 
 
-def transpile(input_string, level, lang="en", skip_faulty=True):
+def transpile(input_string, level, lang="en", skip_faulty=True, is_debug=False):
     """
     Function that transpiles the Hedy code to Python
 
@@ -2815,7 +2851,7 @@ def transpile(input_string, level, lang="en", skip_faulty=True):
 
     try:
         source_map.set_skip_faulty(False)
-        transpile_result = transpile_inner(input_string, level, lang, populate_source_map=True)
+        transpile_result = transpile_inner(input_string, level, lang, populate_source_map=True, is_debug=is_debug)
 
     except Exception as original_error:
         hedy_amount_lines = len(input_string.strip().split('\n'))
@@ -3276,7 +3312,7 @@ def create_lookup_table(abstract_syntax_tree, level, lang, input_string):
     return entries
 
 
-def transpile_inner(input_string, level, lang="en", populate_source_map=False):
+def transpile_inner(input_string, level, lang="en", populate_source_map=False, is_debug=False):
     check_program_size_is_valid(input_string)
 
     level = int(level)
@@ -3315,7 +3351,7 @@ def transpile_inner(input_string, level, lang="en", populate_source_map=False):
 
         # grab the right transpiler from the lookup
         convertToPython = TRANSPILER_LOOKUP[level]
-        python = convertToPython(lookup_table, numerals_language).transform(abstract_syntax_tree)
+        python = convertToPython(lookup_table, lang, numerals_language, is_debug).transform(abstract_syntax_tree)
 
         commands = AllCommands(level).transform(program_root)
 
