@@ -2934,17 +2934,17 @@ adventures:
                     Make your own secret code for your superspy. Can you make it consist of even more variables?
                 example_code: |
                     ```
-                    name {is} {ask} 'What is your name?'
-                    if name {is} 'Agent007'
-                        a {is} 'Go to the airport '
+                    name = {ask} 'What is your name?'
+                    {if} name {is} '_'
+                        a = 'Go to the airport '
                     {else}
-                        a {is} 'Go to the trainstation '
-                    password {is} {ask} 'What is the password?'
-                    {if} password {is} 'TOPSECRET'
-                        b {is} 'tomorrow at 02.00'
+                        a = 'Go to the trainstation '
+                    password = {ask} 'What is the password?'
+                    {if} password {is} _
+                        b = 'tomorrow at 02.00'
                     {else}
-                        b {is} 'today at 10.00'
-                    {print} a + b
+                        b = 'today at 10.00'
+                    {print} _ _ _
                     ```
                 start_code: '# place your code here'
             13:

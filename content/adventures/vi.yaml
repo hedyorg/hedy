@@ -2923,16 +2923,16 @@ adventures:
                 example_code: |
                     ```
                     name {is} {ask} 'What is your name?'
-                    if name {is} 'Agent007'
+                    {if} name {is} '_'
                         a {is} 'Go to the airport '
                     {else}
                         a {is} 'Go to the trainstation '
                     password {is} {ask} 'What is the password?'
-                    {if} password {is} 'TOPSECRET'
+                    {if} password {is} _
                         b {is} 'tomorrow at 02.00'
                     {else}
                         b {is} 'today at 10.00'
-                    {print} a + b
+                    {print} _ _ _
                     ```
                 start_code: '# place your code here'
             13:

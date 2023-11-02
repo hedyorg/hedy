@@ -2929,17 +2929,17 @@ adventures:
                     If the enemy tries to crack the code, they will get some false info to waste their time.
                 example_code: |
                     ```
-                    name is ask 'What is your name?'
-                    if name is 'Agent007'
-                        a is 'Go to the airport '
-                    else
-                        a is 'Go to the trainstation '
-                    password is ask 'What is the password?'
-                    if password is 'TOPSECRET'
-                        b is 'tomorrow at 02.00'
-                    else
-                        b is 'today at 10.00'
-                    print a + b
+                    name {is} {ask} 'What is your name?'
+                    {if} name {is} '_'
+                        a {is} 'Go to the airport '
+                    {else}
+                        a {is} 'Go to the trainstation '
+                    password {is} {ask} 'What is the password?'
+                    {if} password {is} _
+                        b {is} 'tomorrow at 02.00'
+                    {else}
+                        b {is} 'today at 10.00'
+                    {print} _ _ _
                     ```
                 start_code: '# place your code here'
             13:

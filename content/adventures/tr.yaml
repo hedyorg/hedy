@@ -3070,16 +3070,16 @@ adventures:
                     Koda üçüncü bir bileşen ekleyin, bir giysi parçası veya bir nesne gibi.
                 example_code: |
                     ```
-                    isim {is} {ask} 'Senin adın ne?'
+                    isim = {ask} 'Senin adın ne?'
                     {if} isim {is} '_'
-                        a {is} 'Havaalanına git '
+                        a = 'Havaalanına git '
                     {else}
-                        a {is} 'Tren istasyonuna git '
-                    şifre {is} {ask} 'Şifre nedir?'
+                        a = 'Tren istasyonuna git '
+                    şifre = {ask} 'Şifre nedir?'
                     {if} şifre {is} _
-                        b {is} 'yarın gece saat 02.00'de'
+                        b = 'yarın gece saat 02.00'de'
                     {else}
-                        b {is} 'bugün sabah saat 10.00'da'
+                        b = 'bugün sabah saat 10.00'da'
                     {print} _ _ _
                     ```
                 start_code: '# kodunuzu buraya yazın'

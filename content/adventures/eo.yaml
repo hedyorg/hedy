@@ -2863,16 +2863,16 @@ adventures:
                     Se la malamiko provos solvi la kodon, ili ricevos falsajn informojn por malŝpari sian tempon.
                 example_code: |
                     ```
-                    nomo {is} {ask} 'Kio estas via nomo?'
+                    nomo = {ask} 'Kio estas via nomo?'
                     {if} nomo {is} 'Agento007'
-                        a {is} 'Iru al la flughaveno '
+                        a = 'Iru al la flughaveno '
                     {else}
-                        a {is} 'Iru al la stacidomo '
-                    pasvorto {is} {ask} 'Kio estas la pasvorto?'
+                        a = 'Iru al la stacidomo '
+                    pasvorto = {ask} 'Kio estas la pasvorto?'
                     {if} pasvorto {is} 'SEKRETO'
-                        b {is} 'morgaŭ je la 2a horo'
+                        b = 'morgaŭ je la 2a horo'
                     else
-                        b {is} 'hodiaŭ je la 10a horo'
+                        b = 'hodiaŭ je la 10a horo'
                     {print} a + b
                     ```
                 start_code: '# via kodo ĉi tie'

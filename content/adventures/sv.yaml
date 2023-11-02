@@ -3016,16 +3016,16 @@ adventures:
                     Lägg till en tredje komponent till koden, till exempel ett klädesplagg eller ett föremål.
                 example_code: |
                     ```
-                    namn {is} {ask} 'Vad heter du?'
-                    om namn {is} '_'
-                        a {is} 'Åk till flygplatsen'
+                    namn = {ask} 'Vad heter du?'
+                    {if} namn {is} '_'
+                        a = 'Åk till flygplatsen'
                     {else}
-                        a {is} 'Åk till tågstationen'
-                    lösenord {is} {ask} 'Vad är lösenordet?'
+                        a = 'Åk till tågstationen'
+                    lösenord {= {ask} 'Vad är lösenordet?'
                     {if} lösenord {is} _
-                        b {is} 'imorgon kl. 02.00'
+                        b = 'imorgon kl. 02.00'
                     {else}
-                        b {is} 'idag kl. 10.00'
+                        b = 'idag kl. 10.00'
                     {print} _ _ _
                     ```
                 start_code: '# ha din kod här'

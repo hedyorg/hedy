@@ -3025,16 +3025,16 @@ adventures:
                     Füge dem Code eine dritte Komponente hinzu, zum Beispiel ein Kleidungsstück oder einen Gegenstand.
                 example_code: |
                     ```
-                    Name {is} {ask} 'Wie heißt du?'
+                    Name = {ask} 'Wie heißt du?'
                     if Name {is} '_'
-                        a {is} 'Geh zum Flughafen '
+                        a = 'Geh zum Flughafen '
                     {else}
-                        a {is} 'Geh zum Bahnhof '
-                    Passwort {is}  {ask} 'Wie lautet das Passwort?'
+                        a = 'Geh zum Bahnhof '
+                    Passwort =  {ask} 'Wie lautet das Passwort?'
                     {if} Passwort {is} _
-                        b {is} 'Morgen um 2 Uhr'
+                        b = 'Morgen um 2 Uhr'
                     {else}
-                        b {is} 'Morgen um 10 Uhr'
+                        b = 'Morgen um 10 Uhr'
                     {print} _ _ _
                     ```
                 start_code: '# setze hier deinen Code hin'

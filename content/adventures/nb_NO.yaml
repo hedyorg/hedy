@@ -2860,16 +2860,16 @@ adventures:
                     If the enemy tries to crack the code, they will get some false info to waste their time.
                 example_code: |
                     ```
-                    name is ask 'Hva heter du??'
+                    name = ask 'Hva heter du??'
                     if name is 'Agent007'
-                        a is 'Go to the airport '
+                        a = 'Go to the airport '
                     else
-                        a is 'Go to the trainstation '
-                    passord is ask 'Hva er passordet?'
+                        a ='Go to the trainstation '
+                    passord = ask 'Hva er passordet?'
                     if passord is 'TOPSECRET'
-                        b is 'tomorrow at 02.00'
+                        b = 'tomorrow at 02.00'
                     else
-                        b is 'today at 10.00'
+                        b = 'today at 10.00'
                     print a + b
                     ```
                 start_code: '# skriv koden din her'

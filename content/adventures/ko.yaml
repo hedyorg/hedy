@@ -3003,16 +3003,16 @@ adventures:
                     Add a third component to the code, like a piece of clothing or an object.
                 example_code: |
                     ```
-                    name {is} {ask} 'What is your name?'
+                    name = {ask} 'What is your name?'
                     if name {is} '_'
-                        a {is} 'Go to the airport '
+                        a = 'Go to the airport '
                     {else}
-                        a {is} 'Go to the trainstation '
-                    password {is} {ask} 'What is the password?'
+                        a = 'Go to the trainstation '
+                    password = {ask} 'What is the password?'
                     {if} password {is} _
-                        b {is} 'tomorrow at 02.00'
+                        b = 'tomorrow at 02.00'
                     {else}
-                        b {is} 'today at 10.00'
+                        b = 'today at 10.00'
                     {print} _ _ _
                     ```
                 start_code: '# 코드를 여기에 입력하세요'

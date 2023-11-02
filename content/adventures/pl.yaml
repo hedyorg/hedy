@@ -2783,16 +2783,16 @@ adventures:
                     Utwórz własny tajny kod dla swojego superszpiega. Czy możesz sprawić, by składał się z jeszcze większej liczby zmiennych?
                 example_code: |
                     ```
-                    imię {is} {ask} 'Jak masz na imię?'
+                    imię = {ask} 'Jak masz na imię?'
                     if imię {is} 'Agent007'
-                        a {is} 'Jedź na lotnisko '
+                        a = 'Jedź na lotnisko '
                     {else}
-                        a {is} 'Idź na dworzec kolejowy'
-                    hasło {is} {ask} 'Jakie jest hasło?'
+                        a = 'Idź na dworzec kolejowy'
+                    hasło = {ask} 'Jakie jest hasło?'
                     {if} hasło {is} 'TOPSECRET'
-                        b {is} 'jutro o 02.00'
+                        b = 'jutro o 02.00'
                     {else}
-                        b {is} 'dziś o 10.00'
+                        b = 'dziś o 10.00'
                     {print} a + b
                     ```
                 start_code: '# umieść tutaj swój kod'

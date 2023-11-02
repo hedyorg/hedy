@@ -3017,16 +3017,16 @@ adventures:
                     \ agent. Laat beiden onderdelen zien aan de echte spion.\n### Opdracht 2\nVoeg nog een derde vraag toe en maak jouw wachtwoord langer met bijv een kledingstuk of een voorwerp!                 \n"
                 example_code: |
                     ```
-                    naam {is} {ask} 'Hoe heet je?'
+                    naam = {ask} 'Hoe heet je?'
                     {if} naam {is} '_'
-                        plek {is} 'Ga naar het vliegveld '
+                        plek = 'Ga naar het vliegveld '
                     {else}
-                        plek {is} 'Ga naar het treinstation '
-                    wachtwoord {is} {ask} 'Wat is het wachtwoord?'
+                        plek = 'Ga naar het treinstation '
+                    wachtwoord = {ask} 'Wat is het wachtwoord?'
                     {if} wachtwoord {is} _
-                        tijd {is} 'morgen om 02:00'
+                        tijd = 'morgen om 02:00'
                     {else}
-                        tijd {is} 'vandaag om 10:00'
+                        tijd = 'vandaag om 10:00'
                     {print} _ _
                     ```
                 start_code: '# Schrijf jouw code hier'

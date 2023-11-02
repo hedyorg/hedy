@@ -2901,16 +2901,16 @@ adventures:
                     Bëni kodin tuaj sekret për superspiunin tuaj. A mund ta bëni atë të përbëhet nga edhe më shumë variabla?
                 example_code: |
                     ```
-                    emri {is} {ask} 'Cili është emri juaj?'
+                    emri = {ask} 'Cili është emri juaj?'
                     {if} emri {is} 'Agent007'
-                         a {is} 'Shko në aeroport'
+                         a = 'Shko në aeroport'
                     {else}
-                         a {is} 'Shko në stacionin e trenit'
-                    fjalëkalimi {is} {ask} "Cili është fjalëkalimi?"
+                         a = 'Shko në stacionin e trenit'
+                    fjalëkalimi = {ask} "Cili është fjalëkalimi?"
                     {if} fjalëkalimi {is} "TOPSECRET"
-                         b {is} 'nesër në 02:00'
+                         b = 'nesër në 02:00'
                     {else}
-                         b {is} 'sot në orën 10:00'
+                         b = 'sot në orën 10:00'
                     {print} a + b
                     ```
                 start_code: '# Vendoseni kodin tuaj këtu'

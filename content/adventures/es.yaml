@@ -2992,16 +2992,16 @@ adventures:
                     Añade un tercer componente al código, como una prenda de ropa o un objeto.
                 example_code: |
                     ```
-                    nombre {is} {ask} '¿Cuál es tu nombre?'
+                    nombre = {ask} '¿Cuál es tu nombre?'
                     {if} nombre {is} '_'
-                        a {is} 'Ve al aeropuerto '
+                        a = 'Ve al aeropuerto '
                     {else}
-                        a {is} 'Ve a la estación de trenes '
-                    contraseña {is} {ask} '¿Cuál es la contraseña?'
+                        a = 'Ve a la estación de trenes '
+                    contraseña = {ask} '¿Cuál es la contraseña?'
                     {if} contraseña {is} _
-                        b {is} 'mañana a las 02.00'
+                        b = 'mañana a las 02.00'
                     {else}
-                        b {is} 'hoy a las 10.00'
+                        b = 'hoy a las 10.00'
                     {print} _ _ _
                     ```
                 start_code: '# pon tu código aquí'
