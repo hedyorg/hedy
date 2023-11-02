@@ -2259,6 +2259,14 @@ adventures:
                     {for} i {in} {range} 1 {to} 3
                         {print} friends[i] 's lucky number is ' lucky_numbers[i]
                     ```
+                story_text_2: |-
+                    Now that you've learned to use the brackets in lists, you can also start using the {at} {random} command in the Python way!
+                    You simply type the name of your list with `[random]` behind it!
+                example_code_2: |-
+                    ```
+                    fruit = ['apple', 'banana', 'cherry']
+                    {print} fruit[random]
+                    ```
                 start_code: |-
                     friends = ['Ahmed', 'Ben', 'Cayden']
                     {print} friends[1] ' is the first friend on the list.'
@@ -2268,14 +2276,6 @@ adventures:
                     lucky_numbers = [15, 18, 6]
                     {for} i {in} {range} 1 {to} 3
                         {print} friends[i] 's lucky number is ' lucky_numbers[i]
-                story_text_2: |-
-                    Now that you've learned to use the brackets in lists, you can also start using the {at} {random} command in the Python way!
-                    You simply type the name of your list with `[random]` behind it!
-                example_code_2: |-
-                    ```
-                    fruit = ['apple', 'banana', 'cherry']
-                    {print} fruit[random]
-                    ```
     repeat_command:
         name: '{repeat}'
         default_save_name: repeat_command
