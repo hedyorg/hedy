@@ -1,21 +1,28 @@
-<div id="survey" class="fixed top-0 left-0 w-full h-full flex items-center justify-center bg-gray-900 bg-opacity-50 z-50">
-    <div id="survey-text" class="text-white mb-8 text-xl">{{ _('title') }}</div>
-    <div class="bg-white w-96 p-6 rounded-lg shadow-lg">
-        <div id="survey-text" class="text-white mb-8 text-xl"></div>
-            <form id="survey-form" hx-post="/for-teachers/submit-survey/{{question}}" hx-target="#survey">
-            {% for question in questions %}
-                <div class="mb-4">
-                <p>{{ question }}</p>
-                <div class="flex items-center space-x-4">
-                    <input type="text" name="question{{ loop.index }}">
+<div id="survey" class="z-50 fixed" style="width: 500px; top: 40%; left: 50%; transform: translate(-50%, -50%);">
+    <div class="bg-blue-500 border border-black rounded-lg px-8 py-4 text-center">
+        <div id="survey_title" class="text-white mb-8 text-xl">{{ _(survey_title) }}</div>
+        <form id="survey-form">
+        {% for question in questions %}
+        <div class="mb-4">
+                    <div id="survey_title" class="text-white mb-4 text-l">{{ _(question) }}</div>
+                    <div class="flex flex-row justify-center space-x-1">
+                        <input id="input" type="text" class="flex items-center border border-green-400 rounded p-2 px-3 w-4/5 mt-1" name="question{{ loop.index }}">
                     </div>
                 </div>
             {% endfor %}
-            <button type="submit" class="green-btn block m-4 w-40 pb-4 pt-4"
-            hx-trigger="click"
-            hx-post="/for-teachers/submit-survey/{{question}}"
-            hx-swap="outerHTML"
-      >Submit</button>
-            </form>
+        </form>
+            <div class="mt-4 flex flex-row justify-center">
+                <button type="submit" class="green-btn block m-4 w-40 pb-4 pt-4"
+                hx-trigger="click"
+                hx-post="/for-teachers/submit-survey/{{survey_title}}"
+                >Submit</button>
+                <button type="cancel" class="red-btn block m-4 w-40 pb-4 pt-4"
+                hx-trigger="click"
+                hx-swap="none"
+                _="on toggle .hidden"
+                >Cancel</button>
+            </div>
+        </div>
     </div>
-</div>
+
+

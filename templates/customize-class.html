@@ -43,6 +43,11 @@
                                available_adventures=available_adventures)
             }}
         </div>
+        <button class="green-btn" id="survey-button"
+      hx-trigger="click"
+      hx-get="/for-teachers/class-survey"
+      hx-swap="outerHTML"
+      >{{_('survey-test')}}</button>
     </div>
 
     <div class="flex flex-col lg:flex-row gap-4">
