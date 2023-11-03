@@ -223,16 +223,13 @@ class ForTeachersModule(WebsiteModule):
     def load_survey(self, title, questions):
         return render_partial('htmx-survey.html', survey_title=title, questions=questions)
 
-    @route("/submit-survey/<answers>", methods=['POST'])
-    def submit_survey(self, answers):
-        logging.debug("hello!")
-        logging.debug(answers)
-        # Process survey submission
-        # user_responses = {}
-        # for key, value in request.form.items():
-        #     if key.startswith("question"):
-        #         user_responses[key] = value
-        # # Handle the user's survey responses
+    @route("/submit-survey/", methods=['POST'])
+    def submit_survey(self):
+        teacher_responses = {}
+        for key, value in request.form.items():
+            if key.startswith("answer"):
+                teacher_responses[key] = value
+        # # Handle the teachers's survey responses
         return ''
     
     @route("/class-survey", methods=['GET'])
@@ -243,7 +240,6 @@ class ForTeachersModule(WebsiteModule):
         "What is the spoken language in your class?",
         "What is the gender balance in your class?",
         ]
-        # logging.debug(class_questions)
         return self.load_survey(class_info_title, class_questions)
 
     @route("/get-customization-level", methods=["GET"])

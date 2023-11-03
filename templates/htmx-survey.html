@@ -6,7 +6,7 @@
         <div class="mb-4">
                     <div id="survey_title" class="text-white mb-4 text-l">{{ _(question) }}</div>
                     <div class="flex flex-row justify-center space-x-1">
-                        <input id="input" type="text" class="flex items-center border border-green-400 rounded p-2 px-3 w-4/5 mt-1" name="question{{ loop.index }}">
+                        <input id="input" type="text" class="flex items-center border border-green-400 rounded p-2 px-3 w-4/5 mt-1" name="answer{{ loop.index }}">
                     </div>
                 </div>
             {% endfor %}
@@ -14,15 +14,15 @@
             <div class="mt-4 flex flex-row justify-center">
                 <button type="submit" class="green-btn block m-4 w-40 pb-4 pt-4"
                 hx-trigger="click"
-                hx-post="/for-teachers/submit-survey/{{survey_title}}"
+                hx-post="/for-teachers/submit-survey/"
+                hx-include="[name='answer']"
                 >Submit</button>
                 <button type="cancel" class="red-btn block m-4 w-40 pb-4 pt-4"
                 hx-trigger="click"
-                hx-swap="none"
-                _="on toggle .hidden"
-                >Cancel</button>
+                hx-swap="innerHTML"
+                _="on click toggle .hidden on #survey">
+                Cancel</button>
             </div>
         </div>
     </div>
-
 
