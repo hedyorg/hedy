@@ -657,9 +657,26 @@ adventures:
                     mean_grade = {call} _
                     {print} 'Your mean grade is ' mean_grade
             15:
+                story_text: |
+                    You can add the `{while}` loop to the calculator game you've learned to make in a previous level.
+                    This makes sure the player can't continue to the next question if they answer incorrectly.
+                example_code: |
+                    ```
+                    score = 0
+                    {for} i {in} {range} 0 {to} 9
+                        numbers = 1, 2, 3, 4, 5, 6, 7, 8, 9, 10
+                        number1 = numbers {at} {random}
+                        number2 = numbers {at} {random}
+                        correct = number1 * number2
+                        answer = 0
+                        {while} answer != correct
+                            {print} 'How much is ' number1 ' times ' number2 '?'
+                            answer = {ask} 'Fill in your answer:'
+                            {print} 'Your answer is ' answer
+                        {print} 'Good job!'
+                    {print} 'You win!'
+                    ```
                 start_code: '# place your code here'
-                example_code: "```\nscore = 0\n{for} i {in} {range} 0 {to} 9\n    numbers = 1, 2, 3, 4, 5, 6, 7, 8, 9, 10\n    number1 = numbers {at} {random}\n    number2 = numbers {at} {random}\n    correct = number1 * number2\n    answer = 0\n    {while} answer != correct\n        {print} 'How much is ' number1 ' times ' number2 '?'\n        answer = {ask} 'Fill in your answer:'\n        {print} 'Your answer is ' answer\n    {print} 'Good job!'\n{print} 'You win!'\n```\n"
-                story_text: "You can add the `{while}` loop to the calculator game you've learned to make in a previous level.\nThis makes sure the player can't continue to the next question if they answer incorrectly.\n"
     calculator_2:
         name: Calculator 2
         default_save_name: Calculator 2
@@ -885,7 +902,8 @@ adventures:
                     {print} 'Decimalaj nombroj nun postulas punkton (ne komon)'
                     {print} 2.5 + 2.5
             13:
-                story_text: Ni nun lernos `{and}` kaj `{or}`! Se oni volas kontroli du kondiĉojn, oni ne devas uzi du `{if}`-ojn sed povas uzi `{and}` kaj `{or}`. Se oni uzas `{and}`, ambaŭ kondiĉoj, maldekstra kaj dekstra de la `{and}`, devas esti veraj. Oni ankaŭ povas uzi `{or}`. Tiam nur unu kondiĉo devas esti vera.
+                story_text: Ni nun lernos `{and}` kaj `{or}`! Se oni volas kontroli du kondiĉojn, oni ne devas uzi du `{if}`-ojn sed povas uzi `{and}` kaj `{or}`. Se oni uzas `{and}`, ambaŭ kondiĉoj, maldekstra kaj dekstra de la `{and}`, devas esti veraj. Oni ankaŭ povas uzi `{or}`. Tiam nur unu kondiĉo
+                    devas esti vera.
                 example_code: |
                     ```
                     nomo = {ask} 'kio estas via nomo?'
