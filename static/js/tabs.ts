@@ -121,17 +121,8 @@ export class Tabs {
       const prevTab = currentTab.prev().data('tab')?.length > 0 ?? false;
       const nextTab = currentTab.next().data('tab')?.length > 0 ?? false;
 
-      console.log('prev tab: ' + prevTab);
-      console.log('next tab: ' + nextTab);
-
-      if (prevTab) {
-          $("#prev_tab_button").show();
-      } else {
-          $("#prev_tab_button").hide();
-      }
-
-
-      $('#next_tab_button').show(nextTab);
+      $('#prev_tab_button').toggle(prevTab);
+      $('#next_tab_button').toggle(nextTab);
   }
 
   public switchToPrevTab() {
