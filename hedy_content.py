@@ -240,6 +240,7 @@ ADVENTURE_ORDER_PER_LEVEL = {
     18: [
         'default',
         'print_command',
+        'ask_command',
         'story',
         'songs'
     ]
