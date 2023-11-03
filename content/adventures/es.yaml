@@ -842,14 +842,14 @@ adventures:
                     ¡Buenas noticias! En este nivel se te permitirá poner un {if} dentro de otro {if}, o dentro de un comando {repeat}.
                 example_code: |
                     ```
-                    respuesta = {ask} '¿Estás preparado para aprender algo nuevo?'
-                    {if} respuesta {is} sí
-                        {print} '¡Genial! !Puedes aprender a usar el comando repetir en el comando si!'
-                        {print} '!Hurra!'
-                        {print} '!Hurra!'
-                        {print} '!Hurra!'
+                    respuesta = {ask} ¿Estás preparado para aprender algo nuevo?
+                    {if} respuesta {is} Sí
+                        {print} '¡Genial! Puedes aprender a usar el comando repeat en el comando if!'
+                        {print} '¡Hurra!
+                        {print} "¡Hurra!
+                        {print} "¡Hurra!
                     {else}
-                        {print} 'Tal vez deberías practicar un poco más en el nivel anterior'
+                        {print} 'Quizás deberías practicar un poco más en el nivel anterior'
                 start_code: '{print} ¡Vayamos a la siguiente pestaña!'
             10:
                 story_text: |
@@ -971,7 +971,7 @@ adventures:
                 story_text: |
                     Ahora vamos a cambiar un poco la indentación. Cada vez que necesitemos una sangría, necesitaremos `:` en la línea anterior a la sangría.
 
-                    En este nivel también se puede utilizar un nuevo comando: `{ elif }`. `{elif}` es la abreviatura de {else} {if} y lo necesitas cuando quieres hacer 3 (¡o más!) opciones.
+                    En este nivel también se puede utilizar un nuevo comando: `{elif}`. `{elif}` es la abreviatura de {else} {if} y lo necesitas cuando quieres hacer 3 (¡o más!) opciones.
                     ¡Compruébalo!
                 start_code: '{print} ''¡Vamos a la siguiente pestaña!'''
             18:
@@ -1791,8 +1791,8 @@ adventures:
                     Cuando completes el código, intenta crear por ti mismo un código y usa una pregunta que se te haya ocurrido.
                 example_code_2: |
                     ```
-                    animales es perro, vaca, oveja
-                    respuesta es preguntar '¿Cuál es tu animal preferido?'
+                    animales {is} perro, vaca, oveja
+                    respuesta {is} {ask} '¿Cuál es tu animal preferido?'
                     _ respuesta _ animales _ '¡También el mío!'
                     _ _ 'Mis animales preferidos son perros, vacas y ovejas'
                     ```

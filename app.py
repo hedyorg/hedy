@@ -487,14 +487,15 @@ def parse():
         return "body.level must be a string", 400
     if 'adventure_name' in body and not isinstance(body['adventure_name'], str):
         return "if present, body.adventure_name must be a string", 400
-
+    if 'is_debug' not in body:
+        return "body.is_debug must be a boolean", 400
     error_check = False
     if 'error_check' in body:
         error_check = True
 
     code = body['code']
     level = int(body['level'])
-
+    is_debug = bool(body['is_debug'])
     # Language should come principally from the request body,
     # but we'll fall back to browser default if it's missing for whatever
     # reason.
@@ -514,7 +515,7 @@ def parse():
         keyword_lang = current_keyword_language()["lang"]
         with querylog.log_time('transpile'):
             try:
-                transpile_result = transpile_add_stats(code, level, lang)
+                transpile_result = transpile_add_stats(code, level, lang, is_debug)
                 if username and not body.get('tutorial'):
                     DATABASE.increase_user_run_count(username)
                     ACHIEVEMENTS.increase_count("run")
@@ -715,11 +716,11 @@ def download_machine_file(filename, extension="zip"):
     return send_file("machine_files/" + filename + "." + extension, as_attachment=True)
 
 
-def transpile_add_stats(code, level, lang_):
+def transpile_add_stats(code, level, lang_, is_debug):
     username = current_user()['username'] or None
     number_of_lines = code.count('\n')
     try:
-        result = hedy.transpile(code, level, lang_)
+        result = hedy.transpile(code, level, lang_, is_debug=is_debug)
         statistics.add(
             username, lambda id_: DATABASE.add_program_stats(id_, level, number_of_lines, None))
         return result
@@ -1413,6 +1414,7 @@ def get_embedded_code_editor(level):
         level = 1
 
     run = True if request.args.get('run') == 'true' else False
+    readOnly = True if request.args.get('readOnly') == 'true' else False
     encoded_program = request.args.get('program')
 
     # Set a fallback for default use
@@ -1437,7 +1439,7 @@ def get_embedded_code_editor(level):
             program = gettext('invalid_program_comment')
 
     return render_template("embedded-editor.html", embedded=True, run=run, language=language,
-                           keyword_language=keyword_language,
+                           keyword_language=keyword_language, readOnly=readOnly,
                            level=level, program=program, javascript_page_options=dict(
                                page='code',
                                lang=language,
