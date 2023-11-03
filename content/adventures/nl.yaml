@@ -145,7 +145,7 @@ adventures:
                     Dat kun je nu in je verhaal zetten met `{repeat}`.
 
                     ### Opdracht
-                    Kun jij ook herhaling in jouw verhaal gebruiken? Ga terug naar level 6, zoek je verhaalprogramma op en kies minstens
+                    Kun jij ook herhaling in jouw verhaal gebruiken? Zoek een van jouw verhaalprogramma's uit een vorig level op en kies minstens
                     één `{print}` regel om te herhalen.
                 example_code: |
                     ```
@@ -978,13 +978,13 @@ adventures:
                     In dit level leer je een code waarmee dat wel kan! En nog een stuk gemakkelijker ook!
                 example_code: |
                     ```
-                    spel {is} 'aan'
+                    spel = 'aan'
                     {for} i {in} {range} 1 {to} 100
-                        {if} spel {is} 'aan'
+                        {if} spel == 'aan'
                             antwoord = {ask} 'Wil je doorspelen?'
-                            {if} antwoord {is} 'nee'
-                                spel {is} 'over'
-                            {if} antwoord {is} 'ja'
+                            {if} antwoord == 'nee'
+                                spel = 'over'
+                            {if} antwoord == 'ja'
                                 {print} 'Ok dan ga ik door'
                     ```
                 start_code: '{print} ''Op naar het volgende avontuur!'''
@@ -1288,7 +1288,7 @@ adventures:
                     `{for}` mag meerdere regels gebruiken, net zoals de `{repeat}` en `{if}`, dus alle regels eronder moeten met spaties beginnen.
                 example_code: |
                     ```
-                    dieren {is} hond, kat, papegaai
+                    dieren = hond, kat, papegaai
                     {for} dier {in} dieren
                       {print} dier ' is een leuk dier!'
                     ```
@@ -2004,13 +2004,13 @@ adventures:
                     Voeg een {else} commando toe aan de voorbeeldcode. Maak een blok van de regels code door in te springen. Inspirngen doe je door de regel te starten met 4 spaties.
                 example_code: |
                     ```
-                    naam {is} {ask} 'Hoe heet je?'
+                    naam = {ask} 'Hoe heet je?'
                     {if} naam {is} Hedy
                         {print} 'Welkom Hedy'
                         {print} 'Jij mag computeren!'
                     ```
                 start_code: |
-                    naam {is} {ask} 'Hoe heet je?'
+                    naam = {ask} 'Hoe heet je?'
                     {if} naam {is} Hedy
                         {print} 'Welkom Hedy'
                         {print} 'Jij mag computeren!'
@@ -2620,17 +2620,33 @@ adventures:
                 example_code: |
                     ```
                     vrienden = ['Ahmed', 'Ben', 'Cayden']
+                    {print} vrienden[1] ' is de eerste vriend op mijn lijstje'
+                    {print} vrienden[2] ' is de tweede vriend op mijn lijstje'
+                    {print} vrienden[3] ' is de derde vriend op mijn lijstje'
+                    #nu matchen we 2 lijstjes door de variabele i te gebruiken
                     geluksgetallen = [15, 18, 6]
                     {for} i {in} {range} 1 {to} 3
                        {print} 'het geluksgetal van ' vrienden[i]
                        {print} 'is ' geluksgetallen[i]
                     ```
+                story_text_2: |-
+                    Nu je hebt geleerd om de rechte haken te gebruiken bij je lijstjes, kun je ook {at} {random} leren gebruiken op de Pythonmanier!
+                    Je typt simpleweg de naam van de lijst en typt er [random] achter.
+                example_code_2: |-
+                    ```
+                    fruit = ['appel', 'banaan', 'kers']
+                    {print} fruit[random]
+                    ```
                 start_code: |-
                     vrienden = ['Ahmed', 'Ben', 'Cayden']
+                    {print} vrienden[1] ' is de eerste vriend op mijn lijstje'
+                    {print} vrienden[2] ' is de tweede vriend op mijn lijstje'
+                    {print} vrienden[3] ' is de derde vriend op mijn lijstje'
+                    #nu matchen we 2 lijstjes door de variabele i te gebruiken
                     geluksgetallen = [15, 18, 6]
                     {for} i {in} {range} 1 {to} 3
-                        {print} 'het geluksgetal van ' vrienden[i]
-                        {print} 'is ' geluksgetallen[i]
+                       {print} 'het geluksgetal van ' vrienden[i]
+                       {print} 'is ' geluksgetallen[i]
     repeat_command:
         name: '{repeat}'
         default_save_name: herhaal
@@ -3163,9 +3179,9 @@ adventures:
                     vragen hoeveel potjes er gespeeld gaan worden.
                 example_code: |
                     ```
-                    keuzes {is} steen, papier, schaar
-                    jouw_keuze {is} {ask} 'Wat kies jij?'
-                    computer_keuze {is} keuzes {at} {random}
+                    keuzes = steen, papier, schaar
+                    jouw_keuze = {ask} 'Wat kies jij?'
+                    computer_keuze = keuzes {at} {random}
                     {print} 'Jij kiest ' jouw_keuze
                     {print} 'De computer kiest ' computer_keuze
                     {if} computer_keuze {is} jouw_keuze
@@ -3259,16 +3275,16 @@ adventures:
                     \ agent. Laat beiden onderdelen zien aan de echte spion.\n### Opdracht 2\nVoeg nog een derde vraag toe en maak jouw wachtwoord langer met bijv een kledingstuk of een voorwerp!                 \n"
                 example_code: |
                     ```
-                    naam {is} {ask} 'Hoe heet je?'
+                    naam = {ask} 'Hoe heet je?'
                     {if} naam {is} '_'
-                        plek {is} 'Ga naar het vliegveld '
+                        plek = 'Ga naar het vliegveld '
                     {else}
-                        plek {is} 'Ga naar het treinstation '
-                    wachtwoord {is} {ask} 'Wat is het wachtwoord?'
+                        plek = 'Ga naar het treinstation '
+                    wachtwoord = {ask} 'Wat is het wachtwoord?'
                     {if} wachtwoord {is} _
-                        tijd {is} 'morgen om 02:00'
+                        tijd = 'morgen om 02:00'
                     {else}
-                        tijd {is} 'vandaag om 10:00'
+                        tijd = 'vandaag om 10:00'
                     {print} _ _
                     ```
                 start_code: '# Schrijf jouw code hier'
@@ -3282,8 +3298,8 @@ adventures:
                     **(extra)** Voeg een extra vraag toe zoals in level 12.
                 example_code: |
                     ```
-                    naam {is} {ask} 'Hoe heet je?'
-                    wachtwoord {is} {ask} 'Wat is het wachtwoord?'
+                    naam = {ask} 'Hoe heet je?'
+                    wachtwoord = {ask} 'Wat is het wachtwoord?'
                     {if} naam {is} 'Agent007' _ wachtwoord {is} 'TOPSECRET'
                         {print} 'Ga naar het vliegveld om 02:00'
                     {else}

@@ -142,7 +142,7 @@ adventures:
                     You can put such repetitions in your story, in this level with `{repeat}`.
 
                     ### Exercise
-                    Add repetition to your own story. Go back to your saved programs, choose your story program from level 6 and
+                    Add repetition to your own story. Go back to your saved programs, choose your story program from a previous level and
                     find a line containing `{print}` and repeat it!
                 example_code: |
                     ```
@@ -238,8 +238,8 @@ adventures:
                 start_code: '# place your code here'
             15:
                 story_text: |
-                    Using the `{while}` loop can make your stories more interesting. For example, you can use `{while} game {is} 'on'` so you can play until the game is over.
-                    Or you can use `{while} sword {is} 'lost'` so the player can't continu the game until they have found something.
+                    Using the `{while}` loop can make your stories more interesting. For example, you can use `{while} game == 'on'` so you can play until the game is over.
+                    Or you can use `{while} sword == 'lost'` so the player can't continu the game until they have found something.
                 example_code: |
                     ```
                     keys = 'lost'
@@ -854,7 +854,7 @@ adventures:
                     This is how the `{if}` and `{else}` command work now:
 
                     ```
-                    name {is} {ask} 'What is your name?'
+                    name = {ask} 'What is your name?'
                     {if} name {is} Hedy
                         {print} 'Welcome Hedy'
                         {print} 'You can play on your computer!'
@@ -981,10 +981,13 @@ adventures:
                 example_code: |
                     ```
                     friends = ['Ahmed', 'Ben', 'Cayden']
+                    {print} friends[1] ' is the first friend on the list.'
+                    {print} friends[2] ' is the second friend on the list.'
+                    {print} friends[3] ' is the third friend on the list.'
+                    #now we will match 2 lists using the variable i
                     lucky_numbers = [15, 18, 6]
                     {for} i {in} {range} 1 {to} 3
-                        {print} 'the lucky number of ' friends[i]
-                        {print} 'is ' lucky_numbers[i]
+                        {print} friends[i] 's lucky number is ' lucky_numbers[i]
                     ```
                 start_code: |-
                     fruit = ['apple', 'banana', 'cherry']
@@ -1261,12 +1264,12 @@ adventures:
                     `{for}` creates a block, like `{repeat}` and `{if}` so all lines in the block need to start with 4 spaces.
                 example_code: |
                     ```
-                    animals {is} dog, cat, blobfish
+                    animals = dog, cat, blobfish
                     {for} animal {in} animals
                         {print} 'I love ' animal
                     ```
                 start_code: |-
-                    animals {is} dog, cat, blobfish
+                    animals = dog, cat, blobfish
                     {for} animal {in} animals
                         {print} 'I love ' animal
             11:
@@ -1967,13 +1970,13 @@ adventures:
                     Add an {else} command to the example code. Make a block of line using indentation. You do this by starting each line with 4 spaces.
                 example_code: |
                     ```
-                    name {is} {ask} 'What is your name?'
+                    name = {ask} 'What is your name?'
                     {if} name {is} Hedy
                         {print} 'Welcome Hedy'
                         {print} 'You can play on your computer!'
                     ```
                 start_code: |
-                    name {is} {ask} 'What is your name?'
+                    name = {ask} 'What is your name?'
                     {if} name {is} Hedy
                         {print} 'Welcome Hedy'
                         {print} 'You can play on your computer!'
@@ -2577,18 +2580,35 @@ adventures:
             16:
                 story_text: |-
                     We are going to make lists the Python way, with square brackets around the lists! We also keep the quotation marks around each item like we have learned in previous levels.
-                    We use square brackets to point out a place in a list. The {at} {random} command can not be used anymore.
+                    We use square brackets to point out a place in a list. For example: `friends[1]` is the first name on the list of friends, as you can see in the first part of the example code. The second part of the example code shows you that we can also match 2 lists using the variable i.
                 example_code: |
                     ```
                     friends = ['Ahmed', 'Ben', 'Cayden']
+                    {print} friends[1] ' is the first friend on the list.'
+                    {print} friends[2] ' is the second friend on the list.'
+                    {print} friends[3] ' is the third friend on the list.'
+                    #now we will match 2 lists using the variable i
                     lucky_numbers = [15, 18, 6]
                     {for} i {in} {range} 1 {to} 3
-                        {print} 'the lucky number of ' friends[i]
-                        {print} 'is ' lucky_numbers[i]
+                        {print} friends[i] 's lucky number is ' lucky_numbers[i]
                     ```
-                start_code: |-
+                story_text_2: |-
+                    Now that you've learned to use the brackets in lists, you can also start using the {at} {random} command in the Python way!
+                    You simply type the name of your list with `[random]` behind it!
+                example_code_2: |-
+                    ```
                     fruit = ['apple', 'banana', 'cherry']
                     {print} fruit[random]
+                    ```
+                start_code: |-
+                    friends = ['Ahmed', 'Ben', 'Cayden']
+                    {print} friends[1] ' is the first friend on the list.'
+                    {print} friends[2] ' is the second friend on the list.'
+                    {print} friends[3] ' is the third friend on the list.'
+                    #now we will match 2 lists using the variable i
+                    lucky_numbers = [15, 18, 6]
+                    {for} i {in} {range} 1 {to} 3
+                        {print} friends[i] 's lucky number is ' lucky_numbers[i]
     repeat_command:
         name: '{repeat}'
         default_save_name: repeat_command
@@ -3087,10 +3107,10 @@ adventures:
                     \ can play multiple rounds. You can even use an `{ask}` to ask the user how many rounds they want to play.\n"
                 example_code: |
                     ```
-                    choices {is} rock, paper, scissors
-                    your_choice {is} {ask} 'What do you choose?'
+                    choices = rock, paper, scissors
+                    your_choice = {ask} 'What do you choose?'
                     {print} 'You choose ' your_choice
-                    computer_choice {is} choices {at} {random}
+                    computer_choice = choices {at} {random}
                     {print} 'The computer chooses ' computer_choice
                     {if} computer_choice {is} your_choice
                         {print} 'Tie'
@@ -3195,16 +3215,16 @@ adventures:
                 example_code: |
                     ```
                     name {is} {ask} 'What is your name?'
-                    if name {is} 'Agent007'
+                    {if} name {is} '_'
                         a {is} 'Go to the airport '
                     {else}
                         a {is} 'Go to the trainstation '
                     password {is} {ask} 'What is the password?'
-                    {if} password {is} 'TOPSECRET'
+                    {if} password {is} _
                         b {is} 'tomorrow at 02.00'
                     {else}
                         b {is} 'today at 10.00'
-                    {print} a + b
+                    {print} _ _ _
                     ```
                 start_code: '# place your code here'
             13:
@@ -3212,8 +3232,8 @@ adventures:
                     Can you fill in the right command on the blank? Mind: The superspy has to answer BOTH questions correctly, before they get the confidential information!
                 example_code: |
                     ```
-                    name {is} {ask} 'What is your name?'
-                    password {is} {ask} 'What is your password?'
+                    name = {ask} 'What is your name?'
+                    password = {ask} 'What is your password?'
                     {if} name {is} 'Agent007' _ password {is} 'TOPSECRET'
                         {print} 'Go to the airport at 02.00'
                     {else}

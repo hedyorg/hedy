@@ -656,6 +656,27 @@ adventures:
 
                     mean_grade = {call} _
                     {print} 'Your mean grade is ' mean_grade
+            15:
+                story_text: |
+                    You can add the `{while}` loop to the calculator game you've learned to make in a previous level.
+                    This makes sure the player can't continue to the next question if they answer incorrectly.
+                example_code: |
+                    ```
+                    score = 0
+                    {for} i {in} {range} 0 {to} 9
+                        numbers = 1, 2, 3, 4, 5, 6, 7, 8, 9, 10
+                        number1 = numbers {at} {random}
+                        number2 = numbers {at} {random}
+                        correct = number1 * number2
+                        answer = 0
+                        {while} answer != correct
+                            {print} 'How much is ' number1 ' times ' number2 '?'
+                            answer = {ask} 'Fill in your answer:'
+                            {print} 'Your answer is ' answer
+                        {print} 'Good job!'
+                    {print} 'You win!'
+                    ```
+                start_code: '# place your code here'
     calculator_2:
         name: Calculator 2
         default_save_name: Calculator 2
@@ -1211,12 +1232,12 @@ adventures:
                     `{for}` creates a block, like `{repeat}` and `{if}` so all lines in the block need to start with 4 spaces.
                 example_code: |
                     ```
-                    animals {is} dog, cat, blobfish
+                    animals = dog, cat, blobfish
                     {for} animal {in} animals
                         {print} 'I love ' animal
                     ```
                 start_code: |-
-                    animals {is} dog, cat, blobfish
+                    animals = dog, cat, blobfish
                     {for} animal {in} animals
                         {print} 'I love ' animal
             11:
@@ -1909,13 +1930,13 @@ adventures:
                     Add an {else} command to the example code. Make a block of line using indentation. You do this by starting each line with 4 spaces.
                 example_code: |
                     ```
-                    name {is} {ask} 'What is your name?'
+                    name = {ask} 'What is your name?'
                     {if} name {is} Hedy
                         {print} 'Welcome Hedy'
                         {print} 'You can play on your computer!'
                     ```
                 start_code: |
-                    name {is} {ask} 'What is your name?'
+                    name = {ask} 'What is your name?'
                     {if} name {is} Hedy
                         {print} 'Welcome Hedy'
                         {print} 'You can play on your computer!'
@@ -2504,18 +2525,35 @@ adventures:
             16:
                 story_text: |-
                     We are going to make lists the Python way, with square brackets around the lists! We also keep the quotation marks around each item like we have learned in previous levels.
-                    We use square brackets to point out a place in a list. The {at} {random} command can not be used anymore.
+                    We use square brackets to point out a place in a list. For example: `friends[1]` is the first name on the list of friends, as you can see in the first part of the example code. The second part of the example code shows you that we can also match 2 lists using the variable i.
                 example_code: |
                     ```
                     friends = ['Ahmed', 'Ben', 'Cayden']
+                    {print} friends[1] ' is the first friend on the list.'
+                    {print} friends[2] ' is the second friend on the list.'
+                    {print} friends[3] ' is the third friend on the list.'
+                    #now we will match 2 lists using the variable i
                     lucky_numbers = [15, 18, 6]
                     {for} i {in} {range} 1 {to} 3
-                        {print} 'the lucky number of ' friends[i]
-                        {print} 'is ' lucky_numbers[i]
+                        {print} friends[i] 's lucky number is ' lucky_numbers[i]
                     ```
-                start_code: |-
+                story_text_2: |-
+                    Now that you've learned to use the brackets in lists, you can also start using the {at} {random} command in the Python way!
+                    You simply type the name of your list with `[random]` behind it!
+                example_code_2: |-
+                    ```
                     fruit = ['apple', 'banana', 'cherry']
                     {print} fruit[random]
+                    ```
+                start_code: |-
+                    friends = ['Ahmed', 'Ben', 'Cayden']
+                    {print} friends[1] ' is the first friend on the list.'
+                    {print} friends[2] ' is the second friend on the list.'
+                    {print} friends[3] ' is the third friend on the list.'
+                    #now we will match 2 lists using the variable i
+                    lucky_numbers = [15, 18, 6]
+                    {for} i {in} {range} 1 {to} 3
+                        {print} friends[i] 's lucky number is ' lucky_numbers[i]
     repeat_command:
         name: '{repeat}'
         default_save_name: repeat_command
@@ -2994,10 +3032,10 @@ adventures:
                     En ĉi tiu nivelo, vi povas programi la tutan ludon de roko, papero kaj tondilo ingante la {if}-komandojn. Ĉu vi povas fini la kodon?
                 example_code: |
                     ```
-                    elektoj {is} roko, papero, tondilo
-                    via_elekto {is} {ask} 'Kion vi elektas?'
+                    elektoj = roko, papero, tondilo
+                    via_elekto = {ask} 'Kion vi elektas?'
                     {print} 'Vi elektas ' via_elekto 'n'
-                    komputila_elekto {is} elektoj {at} {random}
+                    komputila_elekto = elektoj {at} {random}
                     {print} 'La komputilo elektas ' komputila_elekto 'n'
                     {if} komputila_elekto {is} via_elekto
                         {print} 'Vana partio'
@@ -3087,16 +3125,16 @@ adventures:
                     Se la malamiko provos solvi la kodon, ili ricevos falsajn informojn por malŝpari sian tempon.
                 example_code: |
                     ```
-                    nomo {is} {ask} 'Kio estas via nomo?'
+                    nomo = {ask} 'Kio estas via nomo?'
                     {if} nomo {is} 'Agento007'
-                        a {is} 'Iru al la flughaveno '
+                        a = 'Iru al la flughaveno '
                     {else}
-                        a {is} 'Iru al la stacidomo '
-                    pasvorto {is} {ask} 'Kio estas la pasvorto?'
+                        a = 'Iru al la stacidomo '
+                    pasvorto = {ask} 'Kio estas la pasvorto?'
                     {if} pasvorto {is} 'SEKRETO'
-                        b {is} 'morgaŭ je la 2a horo'
+                        b = 'morgaŭ je la 2a horo'
                     else
-                        b {is} 'hodiaŭ je la 10a horo'
+                        b = 'hodiaŭ je la 10a horo'
                     {print} a + b
                     ```
                 start_code: '# via kodo ĉi tie'
@@ -3105,8 +3143,8 @@ adventures:
                     La kodo, kiun vi faris en la antaŭa nivelo, estas simpligebla en ĉi tiu nivelo per la komando `{and}`.
                 example_code: |
                     ```
-                    nomo {is} {ask} 'Kio estas via nomo?'
-                    pasvorto {is} {ask} 'Kio estas via pasvorto?'
+                    nomo = {ask} 'Kio estas via nomo?'
+                    pasvorto = {ask} 'Kio estas via pasvorto?'
                     {if} nomo {is} 'Agento007' {and} pasvorto {is} 'SEKRETO'
                         {print} 'Iru al la flughaveno je la 2a horo'
                     {else}

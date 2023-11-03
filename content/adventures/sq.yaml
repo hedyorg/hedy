@@ -237,8 +237,8 @@ adventures:
                 start_code: '# Vendoseni kodin tuaj këtu'
             15:
                 story_text: |
-                    Duke përdorur komandën `{while}` mund ta bëni tregimin më interesante. Për shembull, ju mund të përdorni `{while} game {is} 'on'` kështu që ju mund të luani derisa loja të mbarojë.
-                    Ose ju mund të përdorni `{while} sword {is} 'lost'` kështu që lojtari nuk mund të vazhdojë lojën pa mos e gjetur shpatën.
+                    Duke përdorur komandën `{while}` mund ta bëni tregimin më interesante. Për shembull, ju mund të përdorni `{while} game == 'on'` kështu që ju mund të luani derisa loja të mbarojë.
+                    Ose ju mund të përdorni `{while} sword == 'lost'` kështu që lojtari nuk mund të vazhdojë lojën pa mos e gjetur shpatën.
                 example_code: |
                     ```
                     çelsat = 'humbur'
@@ -1239,12 +1239,12 @@ adventures:
                     `{for}` creates a block, like `{repeat}` and `{if}` so all lines in the block need to start with 4 spaces.
                 example_code: |
                     ```
-                    animals {is} dog, cat, blobfish
+                    animals = dog, cat, blobfish
                     {for} animal {in} animals
                         {print} 'I love ' animal
                     ```
                 start_code: |-
-                    animals {is} dog, cat, blobfish
+                    animals = dog, cat, blobfish
                     {for} animal {in} animals
                         {print} 'I love ' animal
             11:
@@ -1952,13 +1952,13 @@ adventures:
                     Add an {else} command to the example code. Make a block of line using indentation. You do this by starting each line with 4 spaces.
                 example_code: |
                     ```
-                    name {is} {ask} 'What is your name?'
+                    name = {ask} 'What is your name?'
                     {if} name {is} Hedy
                         {print} 'Welcome Hedy'
                         {print} 'You can play on your computer!'
                     ```
                 start_code: |
-                    name {is} {ask} 'What is your name?'
+                    name = {ask} 'What is your name?'
                     {if} name {is} Hedy
                         {print} 'Welcome Hedy'
                         {print} 'You can play on your computer!'
@@ -2550,18 +2550,35 @@ adventures:
             16:
                 story_text: |-
                     We are going to make lists the Python way, with square brackets around the lists! We also keep the quotation marks around each item like we have learned in previous levels.
-                    We use square brackets to point out a place in a list. The {at} {random} command can not be used anymore.
+                    We use square brackets to point out a place in a list. For example: `friends[1]` is the first name on the list of friends, as you can see in the first part of the example code. The second part of the example code shows you that we can also match 2 lists using the variable i.
                 example_code: |
                     ```
                     friends = ['Ahmed', 'Ben', 'Cayden']
+                    {print} friends[1] ' is the first friend on the list.'
+                    {print} friends[2] ' is the second friend on the list.'
+                    {print} friends[3] ' is the third friend on the list.'
+                    #now we will match 2 lists using the variable i
                     lucky_numbers = [15, 18, 6]
                     {for} i {in} {range} 1 {to} 3
-                        {print} 'the lucky number of ' friends[i]
-                        {print} 'is ' lucky_numbers[i]
+                        {print} friends[i] 's lucky number is ' lucky_numbers[i]
                     ```
-                start_code: |-
+                story_text_2: |-
+                    Now that you've learned to use the brackets in lists, you can also start using the {at} {random} command in the Python way!
+                    You simply type the name of your list with `[random]` behind it!
+                example_code_2: |-
+                    ```
                     fruit = ['apple', 'banana', 'cherry']
                     {print} fruit[random]
+                    ```
+                start_code: |-
+                    friends = ['Ahmed', 'Ben', 'Cayden']
+                    {print} friends[1] ' is the first friend on the list.'
+                    {print} friends[2] ' is the second friend on the list.'
+                    {print} friends[3] ' is the third friend on the list.'
+                    #now we will match 2 lists using the variable i
+                    lucky_numbers = [15, 18, 6]
+                    {for} i {in} {range} 1 {to} 3
+                        {print} friends[i] 's lucky number is ' lucky_numbers[i]
     repeat_command:
         name: '{repeat}'
         default_save_name: repeat_command
@@ -3047,10 +3064,10 @@ adventures:
                     Në këtë nivel mund ta programi gjithë lojën gur, letër, gërshërë duke përdorur komandën {if} një mbi një. A mund ta përfundoni kodin?
                 example_code: |
                     ```
-                    zgjedhjet {is} gur, letër, gërshërë
-                    zgjedhja_juaj {is} {ask} 'Çfarë zgjidhni?'
+                    zgjedhjet = gur, letër, gërshërë
+                    zgjedhja_juaj = {ask} 'Çfarë zgjidhni?'
                     {print} 'Ju zgjodhët ' zgjedhja_juaj
-                    zgjedhja_kompjuterit {is} zgjedhjet {at} {random}
+                    zgjedhja_kompjuterit = zgjedhjet {at} {random}
                     {print} 'Kompjuteri zgjodhi ' zgjedhja_kompjuterit
                     {if} zgjedhja_kompjuterit {is} zgjedhja_juaj
                         {print} 'Barazim'
@@ -3146,16 +3163,16 @@ adventures:
                     Bëni kodin tuaj sekret për superspiunin tuaj. A mund ta bëni atë të përbëhet nga edhe më shumë variabla?
                 example_code: |
                     ```
-                    emri {is} {ask} 'Cili është emri juaj?'
+                    emri = {ask} 'Cili është emri juaj?'
                     {if} emri {is} 'Agent007'
-                         a {is} 'Shko në aeroport'
+                         a = 'Shko në aeroport'
                     {else}
-                         a {is} 'Shko në stacionin e trenit'
-                    fjalëkalimi {is} {ask} "Cili është fjalëkalimi?"
+                         a = 'Shko në stacionin e trenit'
+                    fjalëkalimi = {ask} "Cili është fjalëkalimi?"
                     {if} fjalëkalimi {is} "TOPSECRET"
-                         b {is} 'nesër në 02:00'
+                         b = 'nesër në 02:00'
                     {else}
-                         b {is} 'sot në orën 10:00'
+                         b = 'sot në orën 10:00'
                     {print} a + b
                     ```
                 start_code: '# Vendoseni kodin tuaj këtu'
@@ -3164,8 +3181,8 @@ adventures:
                     A mund të plotësoni komandën e duhur në vendin bosh? Mendja: Superspiuni duhet t'u përgjigjet saktë të DY pyetjeve, përpara se të marrë informacionin konfidencial!
                 example_code: |
                     ```
-                    emri {is} {ask} 'Cili është emri juaj?'
-                    fjalëkalimi {is} {ask} "Cili është fjalëkalimi juaj?"
+                    emri = {ask} 'Cili është emri juaj?'
+                    fjalëkalimi = {ask} "Cili është fjalëkalimi juaj?"
                     {if} emri {is} 'Agent007' _ fjalëkalimi {is} 'TOPSECRET'
                          {print} 'Shko në aeroport në orën 02:00'
                     {else}
