@@ -52,15 +52,11 @@ export class Tabs {
     $('#prev_tab_button').on('click', (e) => {
         e.preventDefault();
         this.switchToPrevTab();
-
-        // Todo: Check if there is a next / prev tab -> hide buttons conditionally
     });
 
     $('#next_tab_button').on('click', (e) => {
         e.preventDefault();
         this.switchToNextTab();
-
-        // Todo: Check if there is a next / prev tab -> hide buttons conditionally
     });
 
     // Determine initial tab
@@ -80,7 +76,7 @@ export class Tabs {
       this.switchToTab(initialTab);
     }
 
-    // Todo: Determine if we need to hide the prev / next button or both
+    this.updatePrevNextButtons();
   }
 
   public switchToTab(tabName: string) {
@@ -117,6 +113,25 @@ export class Tabs {
     } else {
       doSwitch();
     }
+  }
+
+  updatePrevNextButtons() {
+      const currentTab = $('*[data-tab="' + this._currentTab + '"]');
+
+      const prevTab = currentTab.prev().data('tab')?.length > 0 ?? false;
+      const nextTab = currentTab.next().data('tab')?.length > 0 ?? false;
+
+      console.log('prev tab: ' + prevTab);
+      console.log('next tab: ' + nextTab);
+
+      if (prevTab) {
+          $("#prev_tab_button").show();
+      } else {
+          $("#prev_tab_button").hide();
+      }
+
+
+      $('#next_tab_button').show(nextTab);
   }
 
   public switchToPrevTab() {

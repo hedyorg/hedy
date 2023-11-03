@@ -245,6 +245,8 @@ export function initializeCodePage(options: InitializeCodePageOptions) {
       adventure.save_info = 'local-storage';
     }
 
+    tabs.updatePrevNextButtons();
+
     reconfigurePageBasedOnTab();
     checkNow();
     theLocalSaveWarning.switchTab();
