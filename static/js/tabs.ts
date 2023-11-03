@@ -49,6 +49,20 @@ export class Tabs {
       this.switchToTab(tabName);
     });
 
+    $('#prev_tab_button').on('click', (e) => {
+        e.preventDefault();
+        this.switchToPrevTab();
+
+        // Todo: Check if there is a next / prev tab -> hide buttons conditionally
+    });
+
+    $('#next_tab_button').on('click', (e) => {
+        e.preventDefault();
+        this.switchToNextTab();
+
+        // Todo: Check if there is a next / prev tab -> hide buttons conditionally
+    });
+
     // Determine initial tab
     // 1. Given by code
     // 2. In the URL
