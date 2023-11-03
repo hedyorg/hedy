@@ -246,8 +246,8 @@ adventures:
                 start_code: '# setze hier deinen Code hin'
             15:
                 story_text: |
-                    Mit der `{while}`-Schleife kannst du deine Geschichten noch interessanter gestalten. So kannst du zum Beispiel mit  `{while} game {is} 'on'``{while} sword {is} 'lost'` dein Spiel so lange laufen lassen, bis es tatsächlich vorbei ist.
-                    Oder du lässt die Spieler mit  `{while} game {is} 'on'` so lange weiter suchen, bis sie etwas finden.
+                    Mit der `{while}`-Schleife kannst du deine Geschichten noch interessanter gestalten. So kannst du zum Beispiel mit  `{while} game == 'on'``{while} sword == 'lost'` dein Spiel so lange laufen lassen, bis es tatsächlich vorbei ist.
+                    Oder du lässt die Spieler mit  `{while} game == 'on'` so lange weiter suchen, bis sie etwas finden.
                 example_code: |
                     ```
                     Schlüssel = 'verloren'
@@ -1315,12 +1315,12 @@ adventures:
                     `{for}` creates a block, like `{repeat}` and `{if}` so all lines in the block need to start with 4 spaces.
                 example_code: |
                     ```
-                    animals {is} dog, cat, blobfish
+                    animals = dog, cat, blobfish
                     {for} animal {in} animals
                         {print} 'I love ' animal
                     ```
                 start_code: |-
-                    animals {is} dog, cat, blobfish
+                    animals = dog, cat, blobfish
                     {for} animal {in} animals
                         {print} 'I love ' animal
             11:
@@ -2042,13 +2042,13 @@ adventures:
                     Add an {else} command to the example code. Make a block of line using indentation. You do this by starting each line with 4 spaces.
                 example_code: |
                     ```
-                    name {is} {ask} 'What is your name?'
+                    name = {ask} 'What is your name?'
                     {if} name {is} Hedy
                         {print} 'Welcome Hedy'
                         {print} 'You can play on your computer!'
                     ```
                 start_code: |
-                    name {is} {ask} 'What is your name?'
+                    name = {ask} 'What is your name?'
                     {if} name {is} Hedy
                         {print} 'Welcome Hedy'
                         {print} 'You can play on your computer!'
@@ -3174,10 +3174,10 @@ adventures:
                     **(extra)** Möchtest du mehr als eine Runde spielen? Erweitere den Code, sodass du mehrere Runden spielen kannst. Du kannst sogar ein `{ask}` verwenden, um die Nutzer zu fragen, wie viele Runden sie spielen möchten.
                 example_code: |
                     ```
-                    Auswahl {is} Schere, Stein, Papier
-                    deine_Wahl {is} {ask} 'Was wählst du?'
+                    Auswahl = Schere, Stein, Papier
+                    deine_Wahl = {ask} 'Was wählst du?'
                     {print} 'Du wählst ' deine_Wahl
-                    Computer_Wahl {is} Auswahl {at} {random}
+                    Computer_Wahl = Auswahl {at} {random}
                     {print} 'Der Computer wählt ' Computer_Wahl
                     {if} Computer_Wahl {is} deine_Wahl
                         {print} 'Unentschieden'
@@ -3287,16 +3287,16 @@ adventures:
                     Füge dem Code eine dritte Komponente hinzu, zum Beispiel ein Kleidungsstück oder einen Gegenstand.
                 example_code: |
                     ```
-                    Name {is} {ask} 'Wie heißt du?'
+                    Name = {ask} 'Wie heißt du?'
                     if Name {is} '_'
-                        a {is} 'Geh zum Flughafen '
+                        a = 'Geh zum Flughafen '
                     {else}
-                        a {is} 'Geh zum Bahnhof '
-                    Passwort {is}  {ask} 'Wie lautet das Passwort?'
+                        a = 'Geh zum Bahnhof '
+                    Passwort =  {ask} 'Wie lautet das Passwort?'
                     {if} Passwort {is} _
-                        b {is} 'Morgen um 2 Uhr'
+                        b = 'Morgen um 2 Uhr'
                     {else}
-                        b {is} 'Morgen um 10 Uhr'
+                        b = 'Morgen um 10 Uhr'
                     {print} _ _ _
                     ```
                 start_code: '# setze hier deinen Code hin'
@@ -3311,8 +3311,8 @@ adventures:
                     Wir wollen den Gegner noch mehr verwirren! Erstelle eine Liste mit falschen Antworten und wähle eine zufällig aus, wenn eine falsche Antwort gegeben wird.
                 example_code: |
                     ```
-                    Name {is} {ask} 'Wie heißt du?'
-                    Passwort {is} {ask} 'Wie lautet dein Passwort?'
+                    Name = {ask} 'Wie heißt du?'
+                    Passwort = {ask} 'Wie lautet dein Passwort?'
                     {if} Name {is} 'Agent007' _ Passwort {is} 'STRENGGEHEIM'
                         {print} 'Gehe um 2 Uhr zum Flughafen'
                     {else}

@@ -251,8 +251,8 @@ adventures:
                 start_code: '# разместите здесь свой код'
             15:
                 story_text: |
-                    Использование цикла `{while}` может сделать ваши истории более интересными. Например, вы можете использовать `{while} game {is} 'on'`, чтобы можно было играть до тех пор, пока игра не закончится.
-                    Или вы можете использовать `{while} sword {is} 'lost'`, чтобы игрок не мог продолжить игру, пока не найдет что-нибудь.
+                    Использование цикла `{while}` может сделать ваши истории более интересными. Например, вы можете использовать `{while} game == 'on'`, чтобы можно было играть до тех пор, пока игра не закончится.
+                    Или вы можете использовать `{while} sword == 'lost'`, чтобы игрок не мог продолжить игру, пока не найдет что-нибудь.
                 example_code: |
                     ```
                     keys = 'lost'
@@ -1261,12 +1261,12 @@ adventures:
                     `{for}` creates a block, like `{repeat}` and `{if}` so all lines in the block need to start with 4 spaces.
                 example_code: |
                     ```
-                    animals {is} dog, cat, blobfish
+                    animals = dog, cat, blobfish
                     {for} animal {in} animals
                         {print} 'I love ' animal
                     ```
                 start_code: |-
-                    animals {is} dog, cat, blobfish
+                    animals = dog, cat, blobfish
                     {for} animal {in} animals
                         {print} 'I love ' animal
             11:
@@ -1966,13 +1966,13 @@ adventures:
                     Add an {else} command to the example code. Make a block of line using indentation. You do this by starting each line with 4 spaces.
                 example_code: |
                     ```
-                    name {is} {ask} 'What is your name?'
+                    name = {ask} 'What is your name?'
                     {if} name {is} Hedy
                         {print} 'Welcome Hedy'
                         {print} 'You can play on your computer!'
                     ```
                 start_code: |
-                    name {is} {ask} 'What is your name?'
+                    name = {ask} 'What is your name?'
                     {if} name {is} Hedy
                         {print} 'Welcome Hedy'
                         {print} 'You can play on your computer!'
@@ -3096,10 +3096,10 @@ adventures:
                     В этом уровне вы можете запрограммировать целую игру "Камень, ножницы, бумага" путем вложения команд `{if}`. Сможете ли вы закончить код?
                 example_code: |
                     ```
-                    choices {is} rock, paper, scissors
-                    your_choice {is} {ask} 'What do you choose?'
+                    choices = rock, paper, scissors
+                    your_choice = {ask} 'What do you choose?'
                     {print} 'You choose ' your_choice
-                    computer_choice {is} choices {at} {random}
+                    computer_choice = choices {at} {random}
                     {print} 'The computer chooses ' computer_choice
                     {if} computer_choice {is} your_choice
                         {print} 'Tie'
@@ -3194,16 +3194,16 @@ adventures:
                     Придумайте свой собственный секретный код для супершпиона. Сможете ли вы сделать его состоящим из еще большего количества переменных?
                 example_code: |
                     ```
-                    name {is} {ask} 'Как вас зовут?'
+                    name = {ask} 'Как вас зовут?'
                     if name {is} 'Agent007'
-                        a {is} 'Поехать в аэропорт'
+                        a = 'Поехать в аэропорт'
                     {else}
-                        a {is} 'Поехать на вокзал'
-                    пароль {is} {ask} 'Какой пароль?'
+                        a = 'Поехать на вокзал'
+                    пароль = {ask} 'Какой пароль?'
                     {if} пароль {is} 'TOPSECRET'
-                        b {is} 'завтра в 02.00'
+                        b = 'завтра в 02.00'
                     {else}
-                        b {is} 'сегодня в 10.00'
+                        b = 'сегодня в 10.00'
                     {print} a + b
                     ```
                 start_code: '# разместите здесь свой код'
@@ -3212,8 +3212,8 @@ adventures:
                     Можете ли вы заполнить правильную команду на бланке? Разум: Супершпион должен правильно ответить на ОБА вопроса, прежде чем он получит конфиденциальную информацию!
                 example_code: |
                     ```
-                    name {is} {ask} 'What is your name?'
-                    пароль {is} {ask} 'Какой у вас пароль?'
+                    name = {ask} 'What is your name?'
+                    пароль = {ask} 'Какой у вас пароль?'
                     {if} имя {is} 'Agent007' _ пароль {is} 'TOPSECRET'
                         {print} 'Поехать в аэропорт в 02.00'
                     {else}

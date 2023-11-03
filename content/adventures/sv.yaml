@@ -249,8 +249,8 @@ adventures:
                 start_code: '# placera din kod här'
             15:
                 story_text: |
-                    Med `{while}`-loopen kan du göra dina berättelser mer intressanta. Du kan t.ex. använda `{while} game {is} 'on'` så att du kan spela tills spelet är slut.
-                    Eller så kan du använda `{while} sword {is} 'lost'` så att spelaren inte kan fortsätta spelet förrän den har hittat något.
+                    Med `{while}`-loopen kan du göra dina berättelser mer intressanta. Du kan t.ex. använda `{while} game == 'on'` så att du kan spela tills spelet är slut.
+                    Eller så kan du använda `{while} sword == 'lost'` så att spelaren inte kan fortsätta spelet förrän den har hittat något.
                 example_code: |
                     ```
                     nycklar = 'förlorade'
@@ -1301,7 +1301,7 @@ adventures:
                     `{for}` skapar ett block, som `{repeat}` och `{if}` så alla rader i blocket måste börja med fyra mellanslag.
                 example_code: |
                     ```
-                    djur {is} hund, katt, marulk
+                    djur = hund, katt, marulk
                     {for} djuret {in} djur
                         {print} 'Jag älskar ' djuret
                     ```
@@ -2015,13 +2015,13 @@ adventures:
                     Lägg till ett {else}-kommando till exempelkoden. Gör ett kodblock med indrag. Det gör du genom att börja varje rad med fyra mellanslag.
                 example_code: |
                     ```
-                    namn {is} {ask} 'Vad heter du?'
+                    namn = {ask} 'Vad heter du?'
                     {if} namn {is} Hedy
                         {print} 'Välkommen Hedy'
                         {print} 'Du kan spela på din dator!'
                     ```
                 start_code: |
-                    namn {is} {ask} 'Vad heter du?'
+                    namn = {ask} 'Vad heter du?'
                     {if} namn {is} Hedy
                         {print} 'Välkommen Hedy'
                         {print} 'Du kan spela på din dator!'
@@ -3176,10 +3176,10 @@ adventures:
                     \ så att du kan spela flera omgångar. Du kan till och med använda en `{ask}` för att fråga användaren hur många rundor hen vill spela.\n"
                 example_code: |
                     ```
-                    val {is} sten, sax, påse
-                    ditt_val {is} {ask} 'Vad väljer du?'
+                    val = sten, sax, påse
+                    ditt_val = {ask} 'Vad väljer du?'
                     {print} 'Du väljer ' ditt_val
-                    datorval {is} val {at} {random}
+                    datorval = val {at} {random}
                     {print} 'Datorn väljer ' datorval
                     {if} datorval {is} ditt_val
                         {print} 'Oavgjort'
@@ -3280,16 +3280,16 @@ adventures:
                     Lägg till en tredje komponent till koden, till exempel ett klädesplagg eller ett föremål.
                 example_code: |
                     ```
-                    namn {is} {ask} 'Vad heter du?'
-                    om namn {is} '_'
-                        a {is} 'Åk till flygplatsen'
+                    namn = {ask} 'Vad heter du?'
+                    {if} namn {is} '_'
+                        a = 'Åk till flygplatsen'
                     {else}
-                        a {is} 'Åk till tågstationen'
-                    lösenord {is} {ask} 'Vad är lösenordet?'
+                        a = 'Åk till tågstationen'
+                    lösenord = {ask} 'Vad är lösenordet?'
                     {if} lösenord {is} _
-                        b {is} 'imorgon kl. 02.00'
+                        b = 'imorgon kl. 02.00'
                     {else}
-                        b {is} 'idag kl. 10.00'
+                        b = 'idag kl. 10.00'
                     {print} _ _ _
                     ```
                 start_code: '# ha din kod här'
@@ -3304,8 +3304,8 @@ adventures:
                     Vi vill förvirra fienden ännu mer! Skapa en lista med falska svar och välj ett slumpmässigt när ett felaktigt svar ges.
                 example_code: |
                     ```
-                    name {is} {ask} 'Vad heter du?'
-                    lösenord {is} {ask} 'Vad är ditt lösenord?'
+                    name = {ask} 'Vad heter du?'
+                    lösenord = {ask} 'Vad är ditt lösenord?'
                     {if} namn {is} 'Agent007' _ lösenord {is} 'TOPSECRET'
                         {print} 'Åk till flygplatsen kl. 02.00'
                     {else}
