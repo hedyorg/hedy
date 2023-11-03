@@ -90,7 +90,7 @@ adventures:
                 start_code: '{print} Tvoja priča'
             4:
                 story_text: |
-                    Možda su primetio da još uvek postoji problem u prethodnim nivoima. Da li si probao da ištampaš rečenicu koja u sebi sadrži reč ime? `{print}` moje ime je ime.
+                    Možda si primetio da još uvek postoji problem u prethodnim nivoima. Da li si probao da ištampaš rečenicu koja u sebi sadrži reč ime? `{print}` moje ime je ime.
                     To možeš rešiti u ovom nivou. Moraš koristiti znake navoda za sve šo planiraš da štampaš.
 
                     ### Vežbanje 1
@@ -106,7 +106,7 @@ adventures:
                     {print} ime  _ ide sada da šeta u šumu _
                     {print} ime _ je pomalo uplašen _
                     životinje {is} 🦔, 🐿, 🦉, 🦇
-                    {print} _ On čuje zvuk koji pravi _ životinje {at} {random}
+                    {print} _ On čuje zvuk _ životinje {at} {random}
                     {print} ime _ se boji da je šuma ukleta _
                     ```
                 start_code: '{print} ''Tvoja priča će biti ištampana ovde!'''
@@ -137,8 +137,7 @@ adventures:
                     ```
                 start_code: '{print} ''Ovde će tvoja priča početi!'''
             7:
-                story_text: "U priči, neko će ponoviti reči nekoliko puta. Na primer, kada neko zove u pomoć ili peva pesmu.\nU ovom nivou ovakva ponavljanja staviti u svoju priču sa`{repeat}`.\n\n### Vežbanje\nDodaj ponavljanja u svoju priču. Vrati se do svojih sačuvanih programa, odaberi priču iz nivoa\
-                    \ 6 i \npronadji liniju sa komandom `{print}` i ponovi je!\n"
+                story_text: "U priči, neko će ponoviti reči nekoliko puta. Na primer, kada neko zove u pomoć ili peva pesmu.\nU ovom nivou ovakva ponavljanja staviti u svoju priču sa`{repeat}`.\n\n### Vežbanje\nDodaj ponavljanja u svoju priču. Vrati se do svojih sačuvanih programa, odaberi priču iz nivoa 6 i \npronadji liniju sa komandom `{print}` i ponovi je!\n"
                 example_code: |
                     ```
                     {print} 'The prince kept calling for help'
@@ -147,9 +146,7 @@ adventures:
                     ```
                 start_code: '{repeat} 5 {times} {print} ''Help!'''
             8:
-                story_text: "In this level you can use multiple lines in your {if} commands, this way you can upgrade your happy or sad ending!\n\n### Exercise 1\nThe example code shows two different endings; one where the characters jump in a time machine and one where they do not.\nComplete the blanks\
-                    \ with at least one sentence per ending. \n**(extra)** Make the story longer. What happens in the story? You can also add a second `{ask}` with different options.\n \n### Exercise 2\nGo back to your saved programs, choose your story program from level 5. Now write a good and a bad\
-                    \ ending of at least three lines long each! \n"
+                story_text: "In this level you can use multiple lines in your {if} commands, this way you can upgrade your happy or sad ending!\n\n### Exercise 1\nThe example code shows two different endings; one where the characters jump in a time machine and one where they do not.\nComplete the blanks with at least one sentence per ending. \n**(extra)** Make the story longer. What happens in the story? You can also add a second `{ask}` with different options.\n \n### Exercise 2\nGo back to your saved programs, choose your story program from level 5. Now write a good and a bad ending of at least three lines long each! \n"
                 example_code: |
                     ```
                     {print} 'Ooo NE! T-rex se približava!'
@@ -163,8 +160,7 @@ adventures:
                     ```
                 start_code: '# ispiši svoj kod ovde'
             9:
-                story_text: "U ovom nivou možeš koristiti komande `{if}` i `{repeat}` unutar comandi `{if}` i `{repeat}`. \nOvo ti daje mnoge opcije i zaista pomaže da tvoja priča bude što interaktivnija.\n\n### Vežbanje 1\nZavrši kod tako da `{if}` radi tačno.\n\n### Vežbanje 2\nDodaj `{if}` i `{else}`\
-                    \ za deo priče gde Robin takodje ide kući.\n\n### Vežbanje 3\nIdi nazad na novo 8 tvoje priče i iskoristi bar dva puta `{if}`unutar drugog `{if}`.\n"
+                story_text: "U ovom nivou možeš koristiti komande `{if}` i `{repeat}` unutar comandi `{if}` i `{repeat}`. \nOvo ti daje mnoge opcije i zaista pomaže da tvoja priča bude što interaktivnija.\n\n### Vežbanje 1\nZavrši kod tako da `{if}` radi tačno.\n\n### Vežbanje 2\nDodaj `{if}` i `{else}` za deo priče gde Robin takodje ide kući.\n\n### Vežbanje 3\nIdi nazad na novo 8 tvoje priče i iskoristi bar dva puta `{if}`unutar drugog `{if}`.\n"
                 example_code: |
                     ```
                     {print} 'Robin se seta po gradu'
@@ -737,8 +733,7 @@ adventures:
         description: Nivo objašnjenje
         levels:
             1:
-                story_text: "U Nivou 1 možete koristiti komande `{print}`, `{ask}` i `{echo}`.\n Iskucaj svoj kod u programerskom polju. Ili pritisni zeleno dugme u primeru koda i kod će se iskucati za vas!\nIsprobaj sam kod tako što ćeš pritisnuti zeleno 'Run code' dugme ispod programerskog polja.\n\n\
-                    Možeš ispisati tekst na ekranu koristeći `{print}` komandu.     \n"
+                story_text: "U Nivou 1 možete koristiti komande `{print}`, `{ask}` i `{echo}`.\n Iskucaj svoj kod u programerskom polju. Ili pritisni zeleno dugme u primeru koda i kod će se iskucati za vas!\nIsprobaj sam kod tako što ćeš pritisnuti zeleno 'Run code' dugme ispod programerskog polja.\n\nMožeš ispisati tekst na ekranu koristeći `{print}` komandu.     \n"
                 start_code: '{print} Zdravo svete!'
             2:
                 story_text: |
@@ -786,8 +781,7 @@ adventures:
                     ime {is} {ask} 'Kako se zoveš?'
                     {if} ime {is} Hedy {print} 'super!' {else} {print} 'bla'
             6:
-                story_text: "U ovom nivou naučićeš nešto novo: sada možeš da vršiš i matematičke operacije.\n\nSabiranje je lako, pišeš isto kao i u matematici: `5 + 5` na primer. Oduzimanje je takodje lako, `5 - 5`.\n\nMnoženje je malo drugačije, jer ne postoji znak puta na tastaturi. \nZato množimo\
-                    \ sa zvezdicom na tipki iznad broja 8: `5 * 5`. Čitaj kao \"5 puta 5\" to najbolje pomaže da zapamtiš.\n"
+                story_text: "U ovom nivou naučićeš nešto novo: sada možeš da vršiš i matematičke operacije.\n\nSabiranje je lako, pišeš isto kao i u matematici: `5 + 5` na primer. Oduzimanje je takodje lako, `5 - 5`.\n\nMnoženje je malo drugačije, jer ne postoji znak puta na tastaturi. \nZato množimo sa zvezdicom na tipki iznad broja 8: `5 * 5`. Čitaj kao \"5 puta 5\" to najbolje pomaže da zapamtiš.\n"
                 example_code: |
                     ```
                     {print} '5 plus 5 je ' 5 + 5
@@ -1741,8 +1735,7 @@ adventures:
                     ```
                 start_code: '# place your code here'
             9:
-                story_text: "In this level you can use nesting, which allows you to make the haunted house even more interactive!\n\n### Exercise\nNow it's very hard to win this game, can you make it easier to win?\nChange your code so it only has one wrong door and two correct doors instead of one correct\
-                    \ door and two wrong ones? \nTip: This means changing the variable correct_door into wrong_door, and switching the `{if}` and `{else}` code.\nAnd of course you may also change the story and make it your own. Change the monsters or make it a happy game show where you get a gift!\n"
+                story_text: "In this level you can use nesting, which allows you to make the haunted house even more interactive!\n\n### Exercise\nNow it's very hard to win this game, can you make it easier to win?\nChange your code so it only has one wrong door and two correct doors instead of one correct door and two wrong ones? \nTip: This means changing the variable correct_door into wrong_door, and switching the `{if}` and `{else}` code.\nAnd of course you may also change the story and make it your own. Change the monsters or make it a happy game show where you get a gift!\n"
                 example_code: |
                     ```
                     {print} 'Escape from the Haunted House!'
@@ -1766,9 +1759,7 @@ adventures:
                     ```
                 start_code: '{print} ''Escape from the haunted house!'''
             11:
-                story_text: "In this level we've changed the `{for}` command so we can tell the player where they are. \n\n### Exercise 1\nFinish the program so the player knows which room they are in.\n\n### Exercise 2\nMake the program into an adventure by following these steps:\n\n1. Make a list of\
-                    \ choices (like: fight or flight)\n2. Make sure the player can choose an option with `{ask}`\n3. Is answer correct? Then they may proceed to the next monster. Do they give a wrong answer? Let the player know with a `{print}`. \n\n **(extra)** If you make a wrong choice, a monster is\
-                    \ still shown! How could you change that?\n"
+                story_text: "In this level we've changed the `{for}` command so we can tell the player where they are. \n\n### Exercise 1\nFinish the program so the player knows which room they are in.\n\n### Exercise 2\nMake the program into an adventure by following these steps:\n\n1. Make a list of choices (like: fight or flight)\n2. Make sure the player can choose an option with `{ask}`\n3. Is answer correct? Then they may proceed to the next monster. Do they give a wrong answer? Let the player know with a `{print}`. \n\n **(extra)** If you make a wrong choice, a monster is still shown! How could you change that?\n"
                 example_code: |
                     ```
                     {print} 'Escape from the Haunted House!'
@@ -2844,9 +2835,7 @@ adventures:
                     **(extra)** Add even more items, as many options as you like!
                 start_code: '# place your code here'
             9:
-                story_text: "In this level you can use nesting to make your restaurant more realistic and more fun!\n\n### Exercise\nThe indentation was removed in the example code. \nCan you figure out how much indentation each line needs in order for the code to work properly?\nIf the customer orders\
-                    \ pizza, Hedy shouldn't ask what sauce the costumer wants.\n\n**(extra)** A restaurant does not stock all sauces. Make a list of available sauces and give a reply with each order whether you sell it. <br>\n**(extra)** Pizzas have toppings. Ask customers what they want.<br>\n**(extra)**\
-                    \ Do customers want a drink? Ask them too! <br>                    \n"
+                story_text: "In this level you can use nesting to make your restaurant more realistic and more fun!\n\n### Exercise\nThe indentation was removed in the example code. \nCan you figure out how much indentation each line needs in order for the code to work properly?\nIf the customer orders pizza, Hedy shouldn't ask what sauce the costumer wants.\n\n**(extra)** A restaurant does not stock all sauces. Make a list of available sauces and give a reply with each order whether you sell it. <br>\n**(extra)** Pizzas have toppings. Ask customers what they want.<br>\n**(extra)** Do customers want a drink? Ask them too! <br>                    \n"
                 example_code: |
                     ```
                     {print} 'Welcome to Restaurant Chez Hedy!'
@@ -3054,8 +3043,7 @@ adventures:
                     Fill in the correct code on the blanks to see {if} it is a draw.
                 start_code: '{print} ''Welcome to your own rock scissors paper!'''
             9:
-                story_text: "In this level you can program the whole rock, paper, scissors game by nesting the `{if}` commands. \n\n### Exercise\nCan you finish the code? The program must tell who has won for every combination.\n\n**(extra)** Want to play more than one game? Expand the code so that you\
-                    \ can play multiple rounds. You can even use an `{ask}` to ask the user how many rounds they want to play.\n"
+                story_text: "In this level you can program the whole rock, paper, scissors game by nesting the `{if}` commands. \n\n### Exercise\nCan you finish the code? The program must tell who has won for every combination.\n\n**(extra)** Want to play more than one game? Expand the code so that you can play multiple rounds. You can even use an `{ask}` to ask the user how many rounds they want to play.\n"
                 example_code: |
                     ```
                     choices {is} rock, paper, scissors
@@ -3894,8 +3882,7 @@ adventures:
                     ```
                 start_code: '{print} ''Drawing figures'''
             8:
-                story_text: "Now that we can repeat several lines, we can make figures more easily.\nWe only have to set the angle once and then use that variable in the `{repeat}`.\n\n### Exercise 1\nThe example code creates a square. Change the code so that it create another figure, such as a triangle\
-                    \ or a hexagon. \nThis requires a change to two lines of code.\nTip: An entire circle is 360 degrees.\n\n### Exercise 2\nNow create a drawing consisting of at least two polygons.\n"
+                story_text: "Now that we can repeat several lines, we can make figures more easily.\nWe only have to set the angle once and then use that variable in the `{repeat}`.\n\n### Exercise 1\nThe example code creates a square. Change the code so that it create another figure, such as a triangle or a hexagon. \nThis requires a change to two lines of code.\nTip: An entire circle is 360 degrees.\n\n### Exercise 2\nNow create a drawing consisting of at least two polygons.\n"
                 example_code: |
                     ```
                     angle = 90
