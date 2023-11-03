@@ -123,6 +123,11 @@ export class Tabs {
 
       $('#prev_tab_button').toggle(prevTab);
       $('#next_tab_button').toggle(nextTab);
+
+      // If there is not a next tab, there might be a next level for which we can show a button
+      if ($('#next_level_button').length) {
+          $('#next_level_button').toggle(!nextTab);
+      }
   }
 
   public switchToPrevTab() {

@@ -203,6 +203,9 @@
             </div>
             <div>
                 <button class="green-btn" id="next_tab_button">{{_('next_adventure')}}</button>
+                {% if next_level %}
+                    <a class="green-btn" id="next_level_button" href="{{ hedy_link(next_level, 1) }}" style="display: none;">{{_('advance_button')|replace("{level}", next_level)}}</a>
+                {% endif %}
             </div>
           </div>
       {% else %}
