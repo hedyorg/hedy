@@ -15,7 +15,7 @@ levels:
             correct_answer: A
             question_score: '10'
         2:
-            question_text: Comment remplir ce code pour fait apparaître le texte Bonjour ! ?
+            question_text: Comment remplir ce code pour faire apparaître le texte Bonjour ! ?
             code: _ Bonjour !
             mp_choice_options:
             -   option: '`{echo}`'
@@ -34,7 +34,7 @@ levels:
             mp_choice_options:
             -   option: |-
                     ```
-                    {print} Quelle est ta couleur favorite ?
+                    {print} Quelle est ta couleur préféré ?
                     ```
                 feedback: '`{print}` affiche du texte, mais il ne pose pas de questions.'
             -   option: |-
@@ -63,7 +63,7 @@ levels:
                 {echo} Bonjour...
             mp_choice_options:
             -   option: Il manque la commande `{print}` à la ligne 1.
-                feedback: C'est ça !
+                feedback: Correcte !
             -   option: La commande de la ligne 2 est mal orthographiée.
                 feedback: La commande est correctement orthographiée.
             -   option: '`{echo}` n''est pas une commande.'
@@ -373,11 +373,20 @@ levels:
                 {sleep}
                 {print} gout
             mp_choice_options:
-            -   option: sleep 3
+            -   option: |-
+                    ```
+                    {sleep} 3
+                    ```
                 feedback: Tu veux connaître la saveur préférée !
-            -   option: print fraises
+            -   option: |-
+                    ```
+                    {print} fraises
+                    ```
                 feedback: Tu ne veux pas `{print}` au milieu de la ligne...
-            -   option: fraises, chocolat, vanille
+            -   option: |-
+                    ```
+                    fraises, chocolat, vanille
+                    ```
                 feedback: Si tu fait cela, tu feras une liste. Tu ne veux pas de ça maintenant.
             -   option: |-
                     ```
@@ -425,9 +434,15 @@ levels:
                 options {is} pierre, feuille, ciseaux
                 {print} pierre, feuille, ciseaux {at} {random}
             mp_choice_options:
-            -   option: at random print options
+            -   option: |-
+                    ```
+                    {at} {random} {print}options
+                    ```
                 feedback: Tu y es presque. L'ordre des mots n'est pas encore correct.
-            -   option: print pierre at random
+            -   option: |-
+                    ```
+                    {print} pierre {at} {random}
+                    ```
                 feedback: tu ne veux pas toujours qu'Hedy {print} pierre, parfois tu veux feuille ou ciseaux.
             -   option: print options at random
                 feedback: Très bien !

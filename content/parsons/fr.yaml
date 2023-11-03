@@ -90,21 +90,21 @@ levels:
     5:
         1:
             story: |-
-                Make a program that checks if your favourite movie is already in the list of the computer.
-                If so, print that you have great taste, otherwise add the movie to the list.
+                Fait un programme qui vérifie si ton film préféré est déjà dans la liste de l'ordinateur.
+                Si c'est le cas, affiche que tu as bon goût, sinon ajoute le film à la liste.
             code: |-
-                films_préférés {is} Batman, Spiderman, Les Avengers, Jurassic Park
-                film {is} {ask} 'Quel est ton film préféré?'
-                {if} film {in} films_préférés {print} 'Tu as de bon goûts!'
-                {else} {print} "Quel dommage que ton film préféré ne soit pas dans la liste, nous allons l'ajouter tout de suite!"
-                {add} film {to_list} films_préférés
+                films {is} Batman, Spiderman, Les Avengers, Jurassic Park
+                film_préféré {is} {ask} "Quel est ton film préféré ?"
+                {if} film_préféré {in} films {print} "Tu as bon goût !"
+                {else} {print} "Quel dommage que ton film préféré ne soit pas dans la liste, ajoutons-le tout de suite !"
+                {add} film_préféré {to_list} films
         2:
-            story: Create a maths game.
+            story: Crée un jeu de maths.
             code: |-
-                {print} 'Résout de problème'
-                réponse {is} {ask} '88 - 16 = ?'
-                {if} réponse {is} 72 {print} 'Correct!'
-                {else} {print} 'Faux ! La réponse était 72'
+                {print} "Résout ce problème"
+                réponse {is} {ask} "88 - 16 = ?"
+                {if} réponse {is} 72 {print} "Correct !"
+                {else} {print} "Faux ! La réponse était 72"
     6:
         1:
             story: |-
