@@ -145,7 +145,7 @@ adventures:
                     Dat kun je nu in je verhaal zetten met `{repeat}`.
 
                     ### Opdracht
-                    Kun jij ook herhaling in jouw verhaal gebruiken? Ga terug naar level 6, zoek je verhaalprogramma op en kies minstens
+                    Kun jij ook herhaling in jouw verhaal gebruiken? Zoek een van jouw verhaalprogramma's uit een vorig level op en kies minstens
                     één `{print}` regel om te herhalen.
                 example_code: |
                     ```
@@ -395,6 +395,18 @@ adventures:
                     {print} Hoi naam
                     leeftijd {is} {ask} Hoe oud ben je?
                     {print} naam is leeftijd jaar oud.
+            18:
+                story_text: Als laatste veranderen we het woord dat je moet gebruiken voor `{ask}`. Vanaf nu noemen we ask`{input}`.
+                example_code: |
+                    ```
+                    {print}('Mijn naam is Hedy!')
+                    naam = {input}('Hoe heet je?')
+                    {print}('Dus jouw naam is ', naam)
+                    ```
+                start_code: |
+                    {print}('Mijn naam is Hedy!')
+                    naam = {input}('Hoe heet je?')
+                    {print}('Dus jouw naam is ', naam)
     blackjack:
         name: Blackjack
         default_save_name: Blackjack
@@ -626,25 +638,38 @@ adventures:
                 start_code: '# Schrijf jouw code hier'
             14:
                 story_text: |
-                    In dit level kun je het spelletje 'Raad mijn getal' programmeren!
+                    In dit avontuur leer je een rekenmachine bouwen die het gemiddelde cijfer voor jou berekent. Als je de rekenmachine aan de praat krijgt, kun je doorgaan naar het volgende avontuur. Daar leer je hoe je extra features toevoegt aan je rekenmachine.
+
+                    ## Opdracht 1
+                    Vul de lege lijntjes in om de rekenmachine aan de praat te krijgen.
+                    * Start op regel 4, voeg een vraag toe om uit te vinden welk cijfer de leerling heeft gekregen.
+                    * Op regel 5 wil je vervolgens het totaal berekenen van alle cijfers, dus totaal = totaal + cijfer.
+                    * Daarna zorgen we voor een return value. We willen het gemiddelde als return value, dus het totaal gedeeld door de hoeveelheid toetsen (oftewel gedeeld door 4).
+                    * Tot slot roepen we de functie op in regel line 8.
+
+                    Heb je het voor elkaar gekregen? Geweldig! Wil je nog meer opties bouwen voor de rekenmachine? **Kijk in het volgende tabje, daar gaat het avontuur verder!**
                 example_code: |
                     ```
-                    {print} 'Raad mijn getal'
-                    getallen = 1, 2, 3, 4, 5, 6, 7, 8, 9, 10
-                    getal = getallen {at} {random}
-                    spel = 'aan'
-                    {for} i {in} {range} 1 {to} 10
-                        {if} spel == 'aan'
-                            gok = {ask} 'Welk getal denk je?'
-                            {if} gok > getal
-                                {print} 'Lager!'
-                            {if} gok < getal
-                                {print} 'Hoger!'
-                            {if} gok == getal
-                                {print} 'Hoera!'
-                                spel = 'af'
+                    {define} bereken_gemiddelde_cijfer
+                        totaal = 0
+                        {for} i {in} {range} 1 {to} 4
+                            cijfer = {ask} _
+                            totaal = totaal + _
+                            {return} _ / 4
+
+                    gemiddelde_cijfer = {call} _
+                    print 'Je staat gemiddeld een ' gemiddelde_cijfer
                     ```
-                start_code: '# Schrijf jouw code hier'
+                start_code: |
+                    {define} bereken_gemiddelde_cijfer
+                        totaal = 0
+                        {for} i {in} {range} 1 {to} 4
+                            cijfer = {ask} _
+                            totaal = totaal + _
+                            {return} _ / 4
+
+                    gemiddelde_cijfer = {call} _
+                    print 'Je staat gemiddeld een ' gemiddelde_cijfer
             15:
                 story_text: |
                     In het rekenspelletje dat je een aantal levels terug hebt leren maken, kun je de `{while}` loop toevoegen.
@@ -666,6 +691,32 @@ adventures:
                     {print} 'Je hebt gewonnen!'
                     ```
                 start_code: '# Schrijf jouw code hier'
+    calculator_2:
+        name: Rekenmachine 2
+        default_save_name: Calculator 2
+        description: Calculator 2
+        levels:
+            14:
+                story_text: |
+                    ### Opdracht 2
+                    **Dit is het vervolg op het vorige avontuur.** Het avontuur begint in het vorige tabje.
+                    Natuurlijk wil je niet altijd het gemiddelde berekenen van 4 toetsen. Soms wil je het gemiddelde van wel 10 toetsen, of soms maar 2...
+                    We kunnen dit probleem oplossen door het argument en de variabele 'hoeveelheid_toetsen' toe te voegen.
+                    * Begin een nieuwe regel op regel 3. Stel daar de variabele hoeveelheid_toetsen in door te vragen hoeveel toetsen de speler heeft gehad.
+                    * Verander de 4 in regel 4  naar 'hoeveelheid_toetsen'
+                    * Verander tot slot de 4 in regel 6 in hoeveelheid_toetsen.
+
+                    Probeer je nieuwe programma uit. Werkt het?
+
+                    ### Opdracht 3
+                    Wil je het programma nog beter maken? Super! In het vorige programma kon je het gemiddelde cijfer berekenen van 1 vak, maar het zou beter zijn als dat voor meerdere vakken kon.
+                    We verklappen niet hoe je dit kunt bouwen, maar we geven je wel een tip: Begin je code in regel 1 met '{define} bereken_gemiddelde_cijfer {with} vak.
+                example_code: |
+                    ```
+                    # Gebruik je eigen code van het vorige avontuur
+                    ```
+                start_code: |
+                    # Gebruik je eigen code van het vorige avontuur
     clear_command:
         name: '{clear}'
         default_save_name: clear_command
@@ -1445,6 +1496,157 @@ adventures:
                     {print} voorspellingen {at} {random}
                     ```
                 start_code: '# Schrijf jouw code hier'
+    functions:
+        name: Functies
+        default_save_name: functions
+        description: functions
+        levels:
+            12:
+                story_text: |
+                    In dit level leer je hoe je **functies** gebruikt. Een functie is een blokje code dat je meerdere keren kunt gebruiken. Functies helpen je de code te ordenen.
+                    Om een functie te maken, gebruik je `{define}` en geef je de functie een naam. Daarna zet je er regels code onder in een ingesprongen blokje.
+                    Sla daarna een regel over om je code mooi en overzichtelijk te houden. Goed werk! Je hebt een functie gemaakt!
+
+                    Als je nu dit blokje wil gebruikne, dan gebruik je  <code>{call}</code>  en de naam van de functie. Zo hieven we de code niet vaker te typen.
+                    Kijk maar eens naar ons Twistervoorbeeld. De functie 'draai' bevat een blok code dat een kleur en een ledemaat kiest.
+
+                    ### Opdracht
+                    Maak de code af door de 2 variabelen gekozen_ledemaat en gekozen_kleur in te stellen.
+                    Kies daarna hoe vaak je wil dat er gedraaid wordt aan de spinner.
+
+                    ### Opdracht 2
+                    Maak de code nog beter door er aan naam aan toe te voegen. Gebruik de variabele 'mensen' om iedereen een eigen commando te geven.
+                    Bijvoorbeeld: 'Ahmed, rechterhand op groen' of 'Jessica, linkervoet op geel'.
+                example_code: |
+                    ```
+                    kanten = 'linker', 'rechter'
+                    ledematen = 'hand', 'voet'
+                    kleuren = 'rood', 'blauw', 'groen', 'geel'
+
+                    {define} draai
+                        gekozen_kant = kanten {at} {random}
+                        gekozen_ledemaat = ledematen _
+                        gekozen_kleur = kleuren _
+                        {print} gekozen_kant gekozen_ledemaat ' op ' gekozen_kleur
+
+                    {print} 'Klaar voor een potje Twister?'
+                    {for} i {in} {range} 1 to _
+                        {call} draai
+                        {sleep} 2
+                    ```
+                start_code: |
+                    kanten = 'linker', 'rechter'
+                    ledematen = 'hand', 'voet'
+                    kleuren = 'rood', 'blauw', 'groen', 'geel'
+
+                    {define} draai
+                        gekozen_kant = kanten {at} {random}
+                        gekozen_ledemaat = ledematen _
+                        gekozen_kleur = kleuren _
+                        {print} gekozen_kant gekozen_ledemaat ' op ' gekozen_kleur
+
+                    {print} 'Klaar voor een potje Twister?'
+                    {for} i {in} {range} 1 to _
+                        {call} draai
+                        {sleep} 2
+            13:
+                story_text: |
+                    Nu je hebt geleerd om functies te gebruiken, leer je dit level hoe je functies kunt gebruiken met argumenten.
+                    Een **argument** is een variabele die in een functie gebruikt wordt. Het wordt daarbuiten niet gebruikt.
+
+                    In deze code hebben we bijvoorbeeld het eerste stukje van het liedje 'My Bonnie is over the ocean' geprogrammeerd.
+                    In dit voorbeeld hebben we het argument 'plaats' gebruikt. plaats is een variabele die alleen in de functie gebruikt wordt, een argument dus.
+                    Om 'plaats' te gebruiken hebben zetten we `{with} place` achter `{define} lied`.
+                    Als de functie geroepen wordt vervangt de computer het argument 'plaats' met de text die na `{call} song {with}` staat.
+
+                    ### Exercise
+                    Het volgende couplet gaat zo:
+
+                    Last night as I lay on my pillow
+                    Last night as I lay on my bed
+                    Last night as I lay on my pillow
+                    I dreamed that my Bonnie is dead
+
+                    Kun jij dat programmeren?
+                example_code: |
+                    ```
+                    {define} lied {with} plek
+                        {print} 'My Bonnie is over the ' plek
+
+                    {call} lied {with} 'ocean'
+                    {call} lied {with} 'sea'
+                    {call} lied {with} 'ocean'
+                    ```
+                start_code: |
+                    {define} lied {with} plek
+                        {print} 'My Bonnie is over the ' plek
+
+                    {call} lied {with} 'ocean'
+                    {call} lied {with} 'sea'
+                    {call} lied {with} 'ocean'
+            14:
+                story_text: |
+                    In de vorige levels heb je geleerd om functies met argumenten te maken. Je kunt functies ook goed gebruiken om iets uit te rekenen.
+                    Je kunt de functie een som geven en de functie geeft jou dan het antwoord. Dit antwoord noem je de **return value**.
+
+                    Bijboorbeeld, in deze code geeft de functie bereken_nieuwe_prijd de nieuwe prijs van een item. Het geeft je de nieuwe prijs als return value.
+
+                    ## Opdracht
+                    Maak deze code af. We hebben de nieuwe variabele nieuwe_prijs al voor je gemaakt, maar jij moet hem nog instellen.
+                    Maak de regel af door de functie te roepen en de nieuwe prijs te berekenen.
+                example_code: |
+                    ```
+                    {define} bereken_nieuwe_prijs {with} bedrag, percentage
+                        percentage = percentage / 100
+                        korting_bedrag = bedrag * percentage
+                        {return} bedrag - korting_bedrag
+
+                    oude_prijs = {ask} 'Wat staat er op het prijskaartje?'
+                    korting = {ask} 'Hoeveel procent korting krijg je?'
+
+                    nieuwe_prijs = _ bereken_nieuwe_prijs with oude_prijs, _
+                    {print} 'De nieuwe prijs is ' nieuwe_prijs ' euro'
+                    ```
+                start_code: |
+                    {define} bereken_nieuwe_prijs {with} bedrag, percentage
+                        percentage = percentage / 100
+                        korting_bedrag = bedrag * percentage
+                        {return} bedrag - korting_bedrag
+
+                    oude_prijs = {ask} 'Wat staat er op het prijskaartje?'
+                    korting = {ask} 'Hoeveel procent korting krijg je?'
+
+                    nieuwe_prijs = _ bereken_nieuwe_prijs with oude_prijs, _
+                    {print} 'De nieuwe prijs is ' nieuwe_prijs ' euro'
+    guess_my_number:
+        name: Raad mijn getal
+        default_save_name: guess my number
+        description: guess my number
+        levels:
+            14:
+                story_text: |
+                    In dit level kun je het spel 'Raad mijn getal' programmeren.
+
+                    ### Opdracht
+                    Vul de juiste symbolen in op de lege plekken om het spel aan de praat te krijgen.
+                example_code: |
+                    ```
+                    {print} 'Raad mijn getal'
+                    getallen = 1, 2, 3, 4, 5, 6, 7, 8, 9, 10
+                    getal = getallen {at} {random}
+                    spel = 'aan'
+                    {for} i {in} {range} 1 {to} 10
+                        {if} spel == 'aan'
+                            gok = {ask} 'Welk getal denk jij?'
+                            {if} gok _ getal
+                                {print} 'Lager!'
+                            {if} gok _ getal
+                                {print} 'Hoger!'
+                            {if} gok _ getal
+                                {print} 'Je hebt het getal geraden!'
+                                spel = 'over'
+                    ```
+                start_code: '# place your code here'
     harry_potter:
         name: Harry Potter
         default_save_name: Harry Potter
@@ -1710,6 +1912,53 @@ adventures:
                         {print} 'GAME OVER'
                     ```
                 start_code: '# Schrijf jouw code hier'
+    hotel:
+        name: hotel
+        default_save_name: hotel
+        description: hotel
+        levels:
+            13:
+                story_text: |
+                    In het vorige avontuur heb je geleerd om een argument te gebruiken bij een functie, en hoe je dit kan combineren met een `{ask}`.
+                    Je hebt je wellicht afgevraagd waarom je deze functie zou gebruiken, want de functies zijn steeds maar een regel of een paar regeltjes code.
+                    In dit voorbeeld laten we je zien hoe een grotere functie eruit ziet en we zullen meerdere argumenten gebruiken. Je zult zien hoe fijn het dan is om een functie te kunnen gebruiken.
+                    Hier is een voorbeeld van een functie met argumenten en een {ask} commando.
+                example_code: |
+                    ```
+                    {define} welkomstbericht {with} titel, achternaam, afkomst, kamernummer
+                        {print} 'Welkom in Hotel Hedy, ' titel ' ' achternaam
+                        fijne_reis {is} {ask} 'Heeft u een fijne reis gehad vanaf ' afkomst '?'
+                        {if} fijne_reis {is} 'ja'
+                            {print} 'Mooi!'
+                        {else}
+                            {print} 'Wat naar voor u.'
+                            {print} 'Hopelijk kunt u lekker tot rust komen op uw kamer.'
+                        {print} 'Uw kamernummer is ' kamernummer
+
+                    {print} 'Hallo. Vul uw gegevens in om in te checken.'
+                    titel = {ask} 'Wat is uw aanspreekvorm (dhr, mevr, dr, etc.)?'
+                    naam = {ask} 'Wat is uw achternaam?'
+                    afkomst = {ask} 'Waar komt u vandaan?'
+
+                    {call} welkomstbericht {with} titel, naam, afkomst, 105
+                    ```
+                start_code: |
+                    {define} welkomstbericht {with} titel, achternaam, afkomst, kamernummer
+                        {print} 'Welkom in Hotel Hedy, ' titel ' ' achternaam
+                        fijne_reis {is} {ask} 'Heeft u een fijne reis gehad vanaf ' afkomst '?'
+                        {if} fijne_reis {is} 'ja'
+                            {print} 'Mooi!'
+                        {else}
+                            {print} 'Wat naar voor u.'
+                            {print} 'Hopelijk kunt u lekker tot rust komen op uw kamer.'
+                        {print} 'Uw kamernummer is ' kamernummer
+
+                    {print} 'Hallo. Vul uw gegevens in om in te checken.'
+                    titel = {ask} 'Wat is uw aanspreekvorm (dhr, mevr, dr, etc.)?'
+                    naam = {ask} 'Wat is uw achternaam?'
+                    afkomst = {ask} 'Waar komt u vandaan?'
+
+                    {call} welkomstbericht {with} titel, naam, afkomst, 105
     if_command:
         name: '{if} & {else}'
         default_save_name: als
@@ -2219,13 +2468,6 @@ adventures:
                     temperatuur = 25
                     {print}('Het is ', temperatuur, ' graden buiten')
                     ```
-                story_text_3: Als laatste veranderen we het woord dat je moet gebruiken voor `{ask}`. Vanaf nu noemen we ask`{input}`.
-                example_code_3: |
-                    ```
-                    {print}('Mijn naam is Hedy!')
-                    naam = {input}('Hoe heet je?')
-                    {print}('Dus jouw naam is ', naam)
-                    ```
                 start_code: |-
                     naam = 'Hedy'
                     {print}('Mijn naam is ', naam)
@@ -2378,17 +2620,33 @@ adventures:
                 example_code: |
                     ```
                     vrienden = ['Ahmed', 'Ben', 'Cayden']
+                    {print} vrienden[1] ' is de eerste vriend op mijn lijstje'
+                    {print} vrienden[2] ' is de tweede vriend op mijn lijstje'
+                    {print} vrienden[3] ' is de derde vriend op mijn lijstje'
+                    #nu matchen we 2 lijstjes door de variabele i te gebruiken
                     geluksgetallen = [15, 18, 6]
                     {for} i {in} {range} 1 {to} 3
                        {print} 'het geluksgetal van ' vrienden[i]
                        {print} 'is ' geluksgetallen[i]
                     ```
+                story_text_2: |-
+                    Nu je hebt geleerd om de rechte haken te gebruiken bij je lijstjes, kun je ook {at} {random} leren gebruiken op de Pythonmanier!
+                    Je typt simpleweg de naam van de lijst en typt er [random] achter.
+                example_code_2: |-
+                    ```
+                    fruit = ['appel', 'banaan', 'kers']
+                    {print} fruit[random]
+                    ```
                 start_code: |-
                     vrienden = ['Ahmed', 'Ben', 'Cayden']
+                    {print} vrienden[1] ' is de eerste vriend op mijn lijstje'
+                    {print} vrienden[2] ' is de tweede vriend op mijn lijstje'
+                    {print} vrienden[3] ' is de derde vriend op mijn lijstje'
+                    #nu matchen we 2 lijstjes door de variabele i te gebruiken
                     geluksgetallen = [15, 18, 6]
                     {for} i {in} {range} 1 {to} 3
-                        {print} 'het geluksgetal van ' vrienden[i]
-                        {print} 'is ' geluksgetallen[i]
+                       {print} 'het geluksgetal van ' vrienden[i]
+                       {print} 'is ' geluksgetallen[i]
     repeat_command:
         name: '{repeat}'
         default_save_name: herhaal
@@ -3196,6 +3454,32 @@ adventures:
                     _ {print} action
                     ```
                 start_code: '# Schrijf jouw code hier'
+            13:
+                story_text: |
+                    In het vorige avontuur heb je geleerd hoe je een argument kunt gebruiken in een functie, maar wist je ook dat je dit kunt combineren met een `{ask}`?
+                    In dit voorbeeld hebben we het 'My Bonnie' programma aangepast en interactief gemaakt. Er wordt nu gevraagd waar Bonnie is.
+                example_code: |
+                    ```
+                    {define} lied {with} plek
+                        {print} 'My Bonnie is ' plek
+
+                    gekozen_plek = {ask} 'Waar is Bonnie?'
+                    synoniem = {ask} 'Wat een is daar een ander woord voor?'
+
+                    {call} lied {with} gekozen_plek
+                    {call} lied {with} synoniem
+                    {call} lied {with} gekozen_plek
+                    ```
+                start_code: |
+                    {define} lied {with} plek
+                        {print} 'My Bonnie is ' plek
+
+                    gekozen_plek = {ask} 'Waar is Bonnie?'
+                    synoniem = {ask} 'Wat een is daar een ander woord voor?'
+
+                    {call} lied {with} gekozen_plek
+                    {call} lied {with} synoniem
+                    {call} lied {with} gekozen_plek
             16:
                 story_text: |
                     Maak het nog makkelijker om een liedje te programmeren zoals old MacDonald! Je kunt nu de dieren en hun geluiden aan elkaar koppelen, door ze op dezelfde plaats in het lijstje te zetten.
@@ -3251,6 +3535,36 @@ adventures:
                         {print} 's morgens in de vroegte'
                     ```
                 start_code: '# Schrijf jouw code hier'
+    songs_2:
+        name: Zing nog een lied!
+        default_save_name: Song 2
+        description: Sing a song 2
+        levels:
+            12:
+                story_text: |
+                    Liedjes bevatten vaak veel herhaling. We kunnen daarvoor een functie gebruiken!
+                    ### Opdracht
+                    Kijk naar de voorbeeldcode met de functie. Vul het lied aan tot het compleet is.
+                example_code: |
+                    ```
+                    {define} slaap
+                        {print} 'Slaap kindje slaap'
+                        {print} _
+
+                    {call} slaap
+                    {print} 'Een schaap met witte voetjes'
+                    {print} 'die drinkt zijn melk zo zoetjes'
+                    {call} _
+                    ```
+                start_code: |
+                    {define} slaap
+                        {print} 'Slaap kindje slaap'
+                        {print} _
+
+                    {call} slaap
+                    {print} 'Een schaap met witte voetjes'
+                    {print} 'die drinkt zijn melk zo zoetjes'
+                    {call} _
     tic:
         name: Boter Kaas en Eieren
         default_save_name: Boter
@@ -3699,6 +4013,40 @@ adventures:
                     {for} afstand {in} afstanden
                         {forward} afstand
                 start_code: '# Write your code here'
+            12:
+                story_text: |
+                    We kunnen functies gebruiken om complexere figuren te tekenen met minder code.
+                    ### Opdracht 1
+                    Vul de functie in zodat er drie vierkanten getekend worden. Als je wil dat het plaatje mooier wordt, kun je de lijntjes tussen de vierkanten in wit maken.
+
+                    ### Opdracht 2
+                    De code kan zelfs nog korter. Vul de laatste regels aan met een `{repeat}`, zodat het figuur dezelfde vorm behoudt.
+
+                    ### Opdracht 3
+                    Maak je eigen tekening met verschillende figuurtjes.
+                    Verander het aantal figuren met `{repeat}` en de vorm van het figuur met `{define}`
+                example_code: |
+                    ```
+                    {define} vierkant
+                        {repeat} 4 {times}
+                            {turn} _
+                            {forward} _
+                    {call} vierkant
+                    {forward} 50
+                    {call} vierkant
+                    {forward} 50
+                    {call} vierkant
+                    ```
+                start_code: |
+                    {define} vierkant
+                        {repeat} 4 {times}
+                            {turn} _
+                            {forward} _
+                    {call} vierkant
+                    {forward} 50
+                    {call} vierkant
+                    {forward} 50
+                    {call} vierkant
     while_command:
         name: '{while}'
         default_save_name: zolang

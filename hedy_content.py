@@ -25,10 +25,11 @@ CUSTOM_BABEL_LANGUAGES = {'pa_PK': 'pa_Arab_PK', 'kmr': 'ku_TR', 'tn': 'en', 'tl
 CUSTOM_LANGUAGE_TRANSLATIONS = {'kmr': 'Kurdî (Tirkiye)', 'tn': 'Setswana', 'tl': 'ᜆᜄᜎᜓᜄ᜔'}
 customize_babel_locale(CUSTOM_BABEL_LANGUAGES)
 
+# This changes the color of the adventure tab to pink
 KEYWORDS_ADVENTURES = {'print_command', 'ask_command', 'is_command', 'sleep_command', 'random_command',
                        'add_remove_command', 'quotation_marks', 'if_command', 'in_command', 'maths', 'repeat_command',
                        'repeat_command_2', 'for_command', 'and_or_command', 'while_command', 'elif_command',
-                       'clear_command', 'pressit'}
+                       'clear_command', 'pressit', 'clear_command', 'functions'}
 
 ADVENTURE_ORDER_PER_LEVEL = {
     1: [
@@ -174,12 +175,15 @@ ADVENTURE_ORDER_PER_LEVEL = {
     12: [
         'default',
         'maths',
+        'functions',
         'quotation_marks',
         'story',
         'fortune',
         'songs',
+        'songs_2',
         'restaurant',
         'calculator',
+        'turtle',
         'piggybank',
         'secret'
     ],
@@ -187,6 +191,9 @@ ADVENTURE_ORDER_PER_LEVEL = {
         'default',
         'and_or_command',
         'secret',
+        'functions',
+        # 'functions_2',
+        # 'functions_3',
         'story',
         'rock',
         'restaurant',
@@ -196,8 +203,12 @@ ADVENTURE_ORDER_PER_LEVEL = {
     14: [
         'default',
         'is_command',
+        'guess_my_number',
         'haunted',
+        'functions',
+        'hotel',
         'calculator',
+        'calculator_2',
         'piggybank',
         'quizmaster',
         'tic'
@@ -229,6 +240,7 @@ ADVENTURE_ORDER_PER_LEVEL = {
     18: [
         'default',
         'print_command',
+        'ask_command',
         'story',
         'songs'
     ]
