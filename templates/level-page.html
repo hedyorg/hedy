@@ -5,8 +5,11 @@
 <div id="level-header" class="bg-blue-200">
   <div class="ltr:pl-8 rtl:pr-8 py-2 flex gap-2 px-4 items-center justify-between w-full max-w-screen-2xl mx-auto">
     <div class="dropdown relative">
-        <div class="text-2xl font-bold text-blue-500 whitespace-nowrap flex-0 cursor-pointer" onclick="$('#level_dropdown').slideToggle('medium');">
-            {{ _('level_title') }} {{ level_nr }}
+        <div class="text-2xl font-bold text-blue-500 whitespace-nowrap flex flex-row items-center gap-2 cursor-pointer" onclick="$('#level_dropdown').slideToggle('medium');">
+            <span>{{ _('level_title') }} {{ level_nr }}</span>
+            <svg class="fill-current h-6 w-6" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
+                <path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z" />
+            </svg>
         </div>
         <div class="dropdown-menu ltr:left-0 rtl:right-0 dropdown-blue z-20 mt-2" id="level_dropdown" style="display: none; padding: 0px !important;">
             <h2 class="px-2 py-6">{{_('level_title')}}</h2>
