@@ -79,6 +79,8 @@ export class Tabs {
     if (initialTab) {
       this.switchToTab(initialTab);
     }
+
+    // Todo: Determine if we need to hide the prev / next button or both
   }
 
   public switchToTab(tabName: string) {
