@@ -486,8 +486,23 @@ levels:
                 Siffror har inte citattecken.
             editor: <iframe class="fragment" src="/adventure/maths/12/raw"></iframe>
         4:
-            header: Är du redo att prova?
-            text: Ha det kul med äventyren på nivå 12!
+            header: Functions!
+            text: |-
+                In this level you'll learn how to use functions. A function is a block of code you can easily use multiple times. Using functions helps us organize pieces of code that we can use again and again. To create a function, use define and give the function a name. Then put all the lines you want in the function in a indented block under the define line. Leave one empty line in your code to make it look nice and neat. Great job! You have created a function!
+
+                Now, whenever we need that block of code, we just use call with the function's name to call it up! We don't have to type that block of code again.
+        5:
+            header: Twinkle Twinkle little star!
+            text: |-
+                In this program you see an example of a function.
+                Let's see what happens if you fill in the rest of the song!
+            editor: <iframe class="fragment" src="/adventure/songs_2/12/raw"></iframe>
+        6:
+            header: Functions
+            text: As you could see in the example a function is a block of code that can be called anytime. You use `{define}` to set the function and `{call}` to use it.
+        7:
+            header: Ready to try it out?
+            text: Enjoy the adventures in level 12!
     13:
         1:
             header: Välkommen till nivå 13
@@ -506,8 +521,47 @@ levels:
                 Låt oss se vad som händer när du byter `{and}` mot `{or}`.
             editor: <iframe class="fragment" src="/adventure/and_or_command/13/raw"></iframe>
         4:
-            header: Nu kör vi!
-            text: Ha det kul med äventyren på nivå 13!
+            header: Functions with arguments
+            text: Now that you've learned how to use functions, you'll learn how to use a function with an **argument**. An argument is a variable that is used within a function. It is not used outside the function.
+        5:
+            header: Example
+            text: |-
+                In this example you see how the argument 'place' is used in the function.
+                Run the code and change 'ocean' and 'sea' to something else, and see what happens.
+            editor: <iframe class="fragment" src="/adventure/functions/13/raw"></iframe>
+        6:
+            header: Example with variable
+            text: |-
+                Now you've ssen how arguments work, you could also combine function with a question.
+
+                What happens if you make these changes:
+                ```
+                define song with place
+                    print 'My Bonnie is ' place
+
+                answer is ask 'Where is my Bonnie?'
+                call song with answer
+                ```
+            editor: <iframe class="fragment" src="/adventure/functions/13/raw"></iframe>
+        7:
+            header: Even more questions!
+            text: |-
+                Now we have combined even more question with the function. Type this code and see what happens.
+
+                Note how the variables and the arguments have the same name. This is allowed.
+                Does it confuse you? Just use different names, that is allowed as well.
+                ```
+                define song with name, place
+                    print 'My ' name ' is ' place
+
+                name is ask 'Who?'
+                place is ask 'Where are they?'
+                call song with name, place
+                ```
+            editor: <iframe class="fragment" src="/adventure/functions/13/raw"></iframe>
+        8:
+            header: Let's go!
+            text: Enjoy the adventures in level 13!
     14:
         1:
             header: Välkommen till nivå 14
@@ -539,8 +593,16 @@ levels:
                 == används i `{if}`-satser.
             editor: <iframe class="fragment" src="/adventure/default/14/raw"></iframe>
         4:
-            header: Nu sätter vi igång!
-            text: Ha det kul med äventyren på nivå 14!
+            header: Return value
+            text: In the previous levels you have learned to create functions and use arguments with them. Another great use of a function is to let it calculate something for you. You can give the function a calculation and it will give you the answer of the calculation. This answer is called a **return
+                value**.
+        5:
+            header: Return value
+            text: For example, in this code the function calculate_new_price will calculate the new price of any item. It will give you the new price as a return value.
+            editor: <iframe class="fragment" src="/adventure/functions/14/raw"></iframe>
+        6:
+            header: Let's get to work!
+            text: Enjoy the adventures in level 14!
     15:
         1:
             header: Välkommen till nivå 15
