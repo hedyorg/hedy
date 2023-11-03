@@ -585,57 +585,57 @@ levels:
             correct_answer: C
             question_score: '10'
         8:
-            question_text: What is the output of this code?
+            question_text: 这段代码的输出是什么？
             code: |-
-                crisps {is} sea salt, paprika, sour cream
-                {remove} sea salt {from} crisps
-                {remove} paprika {from} crisps
-                {print} crisps {at} {random}
+                薯片 {is} 海盐、辣椒粉、酸奶油
+                {from} 薯片中 {remove} 海盐
+                {from} 薯片中 {remove} 辣椒粉
+                {print} 薯片 {at} {random}
             mp_choice_options:
-            -   option: You can't tell, because Hedy will `{print}` one of the 3 flavors `{at} {random}`
-                feedback: Take a look at the `{remove}` commands
+            -   option: 你无法分辨，因为 海蒂 会 `{print}` 3 种口味 `{at} {random}`之一
+                feedback: 看一下 `{remove}`命令
             -   option: sea salt
-                feedback: sea salt is removed from the list
-            -   option: paprika
-                feedback: Paprika is removed from the list
-            -   option: sour cream
-                feedback: That's right!
-            hint: There are 3 flavors, bit 2 are removed. Which one remains?
+                feedback: 海盐已从列表中删除
+            -   option: 辣椒粉
+                feedback: 辣椒粉已从列表中删除
+            -   option: 酸奶油
+                feedback: 这是正确的！
+            hint: 有 3 种口味，第 2 位被删除。 还剩下哪一个？
             correct_answer: D
             question_score: '10'
         9:
-            question_text: What's wrong with this code?
+            question_text: 这段代码有什么问题？
             code: |-
-                colors {is} blue, purple, green
-                chosen_color {is} {ask} Which haircolor wouldn't your like to have?
-                {remove} chosen_color {from} colors
-                {print} I will dye my hair color {at} {random}
+                颜色 {is} 蓝色、紫色、绿色
+                chosen_color {is} {ask} 你不喜欢哪种发色？
+                {from} 种颜色中 {remove} chosen_color
+                {print}我将 {at} {random} 染发颜色
             mp_choice_options:
-            -   option: 'Line 3 should say: `{remove}` blue `{from}` colors'
-                feedback: Maybe you want blue hair though!
-            -   option: Line 3 should have an `{add}` command instead of a `{remove}` command
-                feedback: You want to remove the chosen color so `{remove}` is right.
-            -   option: In line 4 the variable should be called colors instead of color
-                feedback: Great job!
-            -   option: Nothing, this is a correct code!
-                feedback: Find the mistake!
-            hint: Look at line 3
+            -   option: 第 3 行应该显示：`{remove}` 蓝色`{from}`颜色
+                feedback: 也许你想要蓝色头发！
+            -   option: 第 3 行应该有一个 `{add}` ”命令，而不是 `{remove}`命令
+                feedback: 你想要删除所选颜色，因此 `{remove}`是正确的。
+            -   option: 在第 4 行中，变量应该称为 colors 而不是 color
+                feedback: 做得好！
+            -   option: 没什么，这是正确的代码！
+                feedback: 找出错误！
+            hint: 看第3行
             correct_answer: C
             question_score: '10'
         10:
-            question_text: What should be on the _?_?
+            question_text: _ 上应该写什么？
             code: |-
-                walkers {is} dad, mom, Sam, Petra
-                walked_yesterday {is} {ask} Who walked the dogs yesterday?
-                {print} walked_yesterday shouldn't have to walk the dogs again today
-                _?_
-                {print} walkers {at} {random} , it's your turn to walk the dogs!
+                walkers {is} 爸爸、妈妈、山姆、佩特拉
+                walked_yesterday {is} {ask} 昨天谁遛狗了？
+                {print} walked_yesterday 今天不应该再去遛狗
+                _
+                {print} walkers {at} {random}，轮到你遛狗了！
             mp_choice_options:
             -   option: |-
                     ```
                     {remove} walked_yesterday {from} walkers
                     ```
-                feedback: Super!
+                feedback: 赞！
             -   option: |-
                     ```
                     {remove} walked yesterday {to} walkers
@@ -645,55 +645,55 @@ levels:
                     ```
                     {remove} walkers {from} yesterday
                     ```
-                feedback: yesterday is not a variable
+                feedback: yesterday不是变量
             -   option: |-
                     ```
                     {add} walked_yesterday {to} walkers
                     ```
-                feedback: This increased the change that the person who walked yesterday now has to do it again. That's mean.
-            hint: The person who walked the dog yesterday should be removed from the list.
+                feedback: 这意味着增加了昨天走路的人现在必须再走一次的变化。
+            hint: 昨天遛狗的人应该从名单中删除。
             correct_answer: A
             question_score: '10'
     4:
         1:
-            question_text: Which of these is true?
+            question_text: 这些代码中哪一个是正确的？
             mp_choice_options:
             -   option: |-
                     ```
                     {print} ‘我很高兴参加这次测验！’
                     ```
-                feedback: That's right
+                feedback: 这是正确的
             -   option: |-
                     ```
                     {print} ‘我很高兴参加这次测验！’
                     ```
-                feedback: '`{ask}` needs quotation marks too!'
+                feedback: '{print} 现在需要引号！'
             -   option: |-
                     ```
                     {print} ‘我很高兴参加这次测验！’
                     ```
-                feedback: '`{at} {random}` still works'
+                feedback: 不要使用撇号或使用反引号代替
             -   option: |-
                     ```
                     {print} ‘我很高兴参加这次测验！’
                     ```
-                feedback: No, but 2 other commands do.
-            hint: In level 4 you need quotation marks for 2 commands.
+                feedback: 使用引号和撇号时要小心
+            hint: 在第 4 级中，你需要用引号来表示 2 个命令。
             correct_answer: A
             question_score: '10'
         2:
-            question_text: Which code uses the proper quotation marks?
+            question_text: 哪个代码使用了正确的引号？
             mp_choice_options:
             -   option: |-
                     ```
                     {print} `hello`
                     ```
-                feedback: This quotation mark is skewed, you need a straight one.
+                feedback: 这个引号是歪斜的，你需要一个直的。
             -   option: |-
                     ```
                     {print} 'hello'
                     ```
-                feedback: Correct
+                feedback: 正确的
             -   option: |-
                     ```
                     {print} hello
@@ -703,23 +703,23 @@ levels:
                     ```
                     {print} ,hello,
                     ```
-                feedback: This is a comma, you need quotation marks.
-            hint: Pick the right quotation marks.
+                feedback: 这是一个逗号，你需要引号。
+            hint: 选择正确的引号。
             correct_answer: B
             question_score: '10'
         3:
-            question_text: Where are the quotation marks used correctly?
+            question_text: 引号在哪儿使用正确？
             mp_choice_options:
             -   option: |-
                     ```
                     {print} Hi Im Hedy
                     ```
-                feedback: Add quotation marks please!
+                feedback: 请加引号！
             -   option: |-
                     ```
                     {print} 'Hi Im Hedy
                     ```
-                feedback: Both before and after the words you want to print should be a quotation mark.
+                feedback: 要打印的单词之前和之后都应该加引号。
             -   option: |-
                     ```
                     '{print} Hi Im Hedy'
@@ -729,29 +729,29 @@ levels:
                     ```
                     {print} 'Hi Im Hedy'
                     ```
-                feedback: Perfect!
-            hint: Both before and after the words you want to print should be a quotation mark.
+                feedback: 完美！
+            hint: 要打印的单词之前和之后都应该加引号。
             correct_answer: D
             question_score: '10'
         4:
-            question_text: Which statement is true?
+            question_text: 哪个论述是对的？
             mp_choice_options:
-            -   option: 'You need quotation marks around the word `{print}`, like this: `''{print}''`.'
-                feedback: The quotation marks shouldn't be around the command itself.
-            -   option: You need quotation marks around the words you want to print.
-                feedback: Super!
-            -   option: You do not need quotation marks when using the `{ask}` command
-                feedback: Both `{print}` and `{ask}` require quotation marks
-            -   option: You can choose yourself whether to use quotation marks or not.
-                feedback: Unfortunately, Hedy is stricter than that.
-            hint: From level 4 on you need to use quotation marks.
+            -   option: 你需要在单词`{print}`两边加上引号，如下所示：`{print}`。
+                feedback: 命令本身不应包含引号。
+            -   option: 你需要在要打印的单词两边加上引号。
+                feedback: 赞!
+            -   option: 使用 `{ask}`命令时不需要引号
+                feedback: '`{print}` 和 `{ask}` 都需要引号'
+            -   option: 你可以自行选择是否使用引号。
+                feedback: 不幸的是，海蒂 比这更严格。
+            hint: 从第 4 级开始，需要使用引号。
             correct_answer: B
             question_score: '10'
         5:
-            question_text: What has to be changed in order for the game to work?
+            question_text: 为了让游戏正常运行，必须改变什么？
             code: |-
-                options {is} rock, paper, scissors
-                {print} 'options {at} {random}'
+                选项 {is} 石头、剪刀、布
+                {print} '选项 {at} {random}'
             mp_choice_options:
             -   option: |-
                     ```
@@ -762,15 +762,15 @@ levels:
                     ```
                     {print} 'options' {at} {random}
                     ```
-                feedback: options is a variable. You don't literally want to print 'options {at} {random}'.
+                feedback: 选项是一个变量。 你实际上并不想打印 '选项 {at} {random}'。
             -   option: |-
                     ```
                     {print} options {at} {random}
                     ```
-                feedback: That's right
-            -   option: Nothing, the game already works!
-                feedback: Look carefully. There is an error.
-            hint: You don't want Hedy to literally print 'options {at} {random}', you want it to print 'rock' or 'paper' or 'scissors'.
+                feedback: 这就对了
+            -   option: 没什么，游戏已经可以玩了！
+                feedback: 仔细看。 还有错误。
+            hint: 不希望 海蒂 按字面意思打印'选项 {at} {random}'，你是想它打印'rock'或'paper'或'scissors'。
             correct_answer: C
             question_score: '10'
         6:
@@ -925,85 +925,85 @@ levels:
             -   option: less fun
                 feedback: If the name is Hedy, it will say 'fun''
             -   option: Hedy
-                feedback: No, it doesn't print the name
+                feedback: 不，它不打印名字
             -   option: Error
-                feedback: Fortunately not!
+                feedback: 幸好没有！
             hint: '`{if}` name `{is}` Hedy `{print}` ...?'
             correct_answer: A
             question_score: '10'
         3:
             question_text: 正确的密码是什么？
             code: |-
-                password {is} {ask} 'What is the password?'
-                {if} password {is} SECRET {print} 'Correct!'
-                {else} {print} 'ALARM! INTRUDER!'
+                密码 {is} {ask} '密码是什么？'
+                {if} 密码 {is} SECRET {print} '正确！'
+                {else} {print} '警报！ 入侵者！'
             mp_choice_options:
-            -   option: Correct!
-                feedback: This is printed when you type in the correct password
+            -   option: 正确!
+                feedback: 当输入正确的密码时会打印此信息
             -   option: SECRET
-                feedback: That's right!'
+                feedback: 这是正确的！'
             -   option: password
-                feedback: The password isn't password...
+                feedback: 密码不是password...
             -   option: ALARM INTRUDER
-                feedback: This is printed when you type in the incorrect password!
-            hint: '`{if}` password `{is}` ... `{print}` ''Correct!''!'''
+                feedback: 当输入错误的密码时会打印此信息！
+            hint: '`{if}` 密码 `{is}` ... `{print}` ''正确！''！'''
             correct_answer: B
             question_score: '10'
         4:
-            question_text: What does Hedy print when you type in the wrong password?
+            question_text: 输入错误密码时 海蒂 会打印什么？
             code: |-
-                password {is} {ask} 'What is the password?'
-                {if} password {is} SECRET {print} 'Correct!'
-                {else} {print} 'ALARM! INTRUDER!'
+                密码 {is} {ask} '密码是什么？'
+                {if} 密码 {is} SECRET {print} '正确！'
+                {else} {print} '警报！ 入侵者！'
             mp_choice_options:
-            -   option: Correct
-                feedback: That's printed if the correct answer is given, not the wrong one...
+            -   option: 正确
+                feedback: 如果给出正确答案，就会打印出来，而不是错误答案......
             -   option: SECRET
-                feedback: That's not the right answer
-            -   option: Wrong!
-                feedback: No, this is not what Hedy will print
+                feedback: 这不是正确的答案
+            -   option: 错了！
+                feedback: 不，这不是 海蒂 将打印的内容
             -   option: ALARM! INTRUDER!
-                feedback: Great job!
-            hint: Your computer will sound the alarm for intruders!
+                feedback: 干的好!
+            hint: 你计算机将对入侵者发出警报！
             correct_answer: D
             question_score: '10'
         5:
-            question_text: Why will Hedy say 'ALARM! INTRUDER' when you type in 'secret'?
+            question_text: 为什么当你输入'secret' 时，海蒂会说 '警报！入侵者'？
             code: |-
-                password {is} {ask} 'What is the password?'
-                {if} password {is} SECRET {print} 'Correct!'
-                {else} {print} 'ALARM! INTRUDER!'
+                密码 {is} {ask} '密码是什么？'
+                {if} 密码 {is} SECRET {print} '正确！'
+                {else} {print} '警报！ 入侵者！'
             mp_choice_options:
-            -   option: Because it needs to be in capitals, so SECRET
-                feedback: Indeed!
-            -   option: Because the password is alarm
-                feedback: No, this is not the password.
-            -   option: Because it's spelled wrong.
-                feedback: That's not how you spell secret
-            -   option: Because Hedy makes a mistake
+            -   option: 因为SECRET需要大写
+                feedback: 的确！
+            -   option: 因为密码是alarm
+                feedback: 不，这不是密码。
+            -   option: 因为写错了。
+                feedback: 这不是你拼写秘密的方式
+            -   option: 因为海蒂犯了一个错误
                 feedback: No, Hedy is right
-            hint: The spelling of the word has to be exactly the same.
+            hint: 该单词的拼写必须完全相同。
             correct_answer: A
             question_score: '10'
         6:
-            question_text: Which word should be on the place of the question mark in the last line?
+            question_text: 最后一行问号处应该用哪个词？
             code: |-
-                {print} 'Im Hedy the football fortune teller!'
-                {print} 'I will predict what place your team will end up!'
-                club is {ask} 'Which club is your favorite?'
-                {if} club {is} ajax {print} 'Ajax is going to win of course!'
-                _?_ {print} 'Sorry, your club is gonna be in last place...'
+                {print}'我是足球算命师 海蒂!'
+                {print} '我会预测你的球队最终会取得什么名次!'
+                俱乐部{问}'你最喜欢哪个俱乐部?'
+                {if} 俱乐部 {is} 阿贾克斯 {print} '阿贾克斯当然会赢!'
+                _ {print} '抱歉，你的俱乐部将排在最后......'
             mp_choice_options:
             -   option: |-
                     ```
                     {if}
                     ```
-                feedback: '`{if}` is already in the line above'
+                feedback: '`{if}` 已经在上面的行中'
             -   option: |-
                     ```
                     {at} {random}
                     ```
-                feedback: No, you need `{else}`.
+                feedback: 不，你需要`{else}`。
             -   option: |-
                     ```
                     {else}
@@ -1013,316 +1013,316 @@ levels:
                     ```
                     {print}
                     ```
-                feedback: '`{print}` is already there, we need a word before it!'
-            hint: '`{if}` goes together with...?'
+                feedback: '`{print}` 已经存在，我们需要在它之前添加一个单词！'
+            hint: '`{if}` 与...一起使用？'
             correct_answer: C
             question_score: '10'
         7:
-            question_text: Which word should be in the place of the question mark?
+            question_text: 问号的位置应该用哪个词？
             code: |-
-                {print} 'I can predict if you will be a millionair or not!'
-                name {is} {ask} 'Whats your name?'
-                {if} name {is} Hedy {print} 'You will be a millionair!'
-                {else} _?_ 'Unfortunately... No big money for you.'
+                {print} '我可以预测你是否会成为百万富翁！'
+                name {is} {ask} '你叫什么名字？'
+                {if} name {is} 海蒂 {print} '你将成为百万富翁！'
+                {else} _'不幸的是……你没有多少钱。'
             mp_choice_options:
             -   option: |-
                     ```
                     {if}
                     ```
-                feedback: '`{if}` is in the line above.'
+                feedback: '`{if}` 在上面的行中。'
             -   option: |-
                     ```
                     {at} {random}
                     ```
-                feedback: No, you don't need `{at} {random}`.
+                feedback: 不，你不需要`{at} {random}`。
             -   option: |-
                     ```
                     {else}
                     ```
-                feedback: There already is an `{else}` command
+                feedback: 已经有一个 `{else}` 命令
             -   option: |-
                     ```
                     {print}
                     ```
-                feedback: Awesome!
-            hint: After `{else}` a `{print}` command follows
+                feedback: 超赞!
+            hint: 在`{else}`之后是`{print}`命令
             correct_answer: D
             question_score: '10'
         8:
-            question_text: Which word should be on the place of the question mark?
+            question_text: 问号处应该填哪个词？
             code: |-
-                animal {is} {ask} 'What is your favorite animal?'
-                {if} _?_ {is} penguin {print} 'Thats my favorite animal too!'
-                {else} {print} 'Cool! I like penguins.'
+                动物 {is} {ask} '你最喜欢的动物是什么？'
+                {if} _ {is} 企鹅 {print} '那也是我最喜欢的动物！'
+                {else} {print} '酷！ 我喜欢企鹅。'
             mp_choice_options:
             -   option: |-
                     ```
                     favorite animal
                     ```
-                feedback: That's not the variable name.
+                feedback: 那不是变量名。
             -   option: |-
                     ```
                     animal
                     ```
-                feedback: Great job!
+                feedback: 干得好!
             -   option: |-
                     ```
                     {if}
                     ```
-                feedback: '`{if}` is already there'
+                feedback: '`{if}` 已经存在'
             -   option: |-
                     ```
                     {print}
                     ```
-                feedback: No, that's not it.
-            hint: What the variable name?
+                feedback: 不，不是这样。
+            hint: 变量名是什么？
             correct_answer: B
             question_score: '10'
         9:
-            question_text: Which door should you choose to escape??
+            question_text: 你应该选择哪扇门逃生？
             code: |-
-                {print} 'Escape from the haunted house!'
-                {print} 'There are 3 doors in front of you'
-                door {is} {ask} 'Which door do you choose?'
-                monsters {is} vampire, werewolf, giant spider
-                {if} door {is} 2 {print} 'Yay, you can escape!'
-                {else} {print} 'You are being devoured by a... ' monsters {at} {random}
+                {print} '逃离鬼屋！'
+                {print} '你面前有 3 扇门'
+                门{is} {ask} '你选择哪扇门？'
+                怪物{is}吸血鬼、狼人、巨型蜘蛛
+                {if} 门 {is} 2 {print} '耶，你可以逃脱了！'
+                {else} {print}'你正在被......'怪物吞噬{at} {random}
             mp_choice_options:
             -   option: '1'
-                feedback: Bad choice! You're being eaten
+                feedback: 糟糕的选择！ 你正在被吃掉
             -   option: '2'
-                feedback: Super! You escaped!
+                feedback: 赞！ 你逃掉了！
             -   option: '3'
-                feedback: Bad choice! You're being eaten.
-            -   option: It's a trap, you will always be eaten!
-                feedback: Luckily not!
-            hint: One of the doors will keep you safe..
+                feedback: 糟糕的选择！ 你正在被吃掉。
+            -   option: 这是一个陷阱，你永远都会被吃掉！
+                feedback: 幸运的是没有！
+            hint: 其中一扇门将保证您的安全。
             correct_answer: B
             question_score: '10'
         10:
-            question_text: Which monster is standing behind door 1?
+            question_text: 哪个怪物站在 1 号门后面？
             code: |-
-                {print} 'Escape from the haunted house!'
-                {print} 'There are 3 doors in front of you'
-                door {is} {ask} 'Which door do you choose?'
-                monsters {is} vampire, werewolf, giant spider
-                {if} door {is} 2 {print} 'Yay, you can escape!'
-                {else} {print} 'You are being devoured by a... ' monsters {at} {random}
+                {print} '逃离鬼屋！'
+                {print} '你面前有 3 扇门'
+                门 {is} {ask} '你选择哪扇门？'
+                怪物{是}吸血鬼、狼人、巨型蜘蛛
+                {if} 门 {is} 2 {print} '耶，你可以逃脱了！'
+                {else} {print} '你正在被......' 怪物吞噬{at} {random}
             mp_choice_options:
-            -   option: Hedy picks a random monster each time.
-                feedback: Awesome!
-            -   option: vampire
-                feedback: Not always...
-            -   option: werewolf
-                feedback: Not always...
-            -   option: giant spider
-                feedback: Not always...
-            hint: Mind the last 3 words... monsters `{at} {random}`...
+            -   option: 海蒂每次都会随机选择一个怪物。
+                feedback: 超赞!
+            -   option: 吸血鬼
+                feedback: 不总是...
+            -   option: 狼人
+                feedback: 不总是...
+            -   option: 巨型蜘蛛
+                feedback: 不总是...
+            hint: 注意最后 3 个词...怪物`{at} {random}`...
             correct_answer: A
             question_score: '10'
     6:
         1:
-            question_text: What's Hedy's output when you run this code?
+            question_text: 运行这段代码时 海蒂 的输出是什么？
             code: '{print} 2*10'
             mp_choice_options:
             -   option: '20'
-                feedback: Correct!
+                feedback: 对了!
             -   option: '12'
-                feedback: No, the plus sign is used in addition
+                feedback: 不，加号是另外使用的
             -   option: 2*10
-                feedback: No, Hedy will calculate the answer
+                feedback: 不，海蒂 会计算出答案
             -   option: '210'
-                feedback: Mind it's a calculation.
-            hint: The `*` is used as a multiplication sign
+                feedback: 请注意，这是一个计算。
+            hint: '`*` 用作乘号'
             correct_answer: A
             question_score: '10'
         2:
-            question_text: Which sign do you use for an addition?
+            question_text: 使用哪个符号进行添加？
             mp_choice_options:
             -   option: '`-`'
-                feedback: That's not it
+                feedback: 不是这个
             -   option: plus
-                feedback: That's not it
+                feedback: 不是这个
             -   option: '`*`'
-                feedback: That's not it
+                feedback: 不是这个
             -   option: '`+`'
-                feedback: Correct!
+                feedback: 正确!
             hint: It's the plus sign.
             correct_answer: D
             question_score: '10'
         3:
-            question_text: What's Hedy's output when you run this code?
+            question_text: 运行这段代码时 海蒂 的输出是什么？
             code: '{print} ''3*10'''
             mp_choice_options:
             -   option: '30'
-                feedback: This would be the right answer if there were no quotation marks.
+                feedback: 如果没有引号，这将是正确的答案。
             -   option: '13'
-                feedback: Try again..
+                feedback: 再试一次吧..
             -   option: 3*10
-                feedback: Correct! There are quotation marks, so Hedy will print it literally.
-            -   option: Nothing, Hedy will give an error message.
-                feedback: No, Hedy will print it literally.
-            hint: Mind the quotation marks!!
+                feedback: 正确的！ 因为有引号，所以 海蒂和 会按字面意思打印出来。
+            -   option: 没什么，海蒂 会给出错误信息。
+                feedback: 不，海蒂 会逐字打印。
+            hint: 注意引号！！
             correct_answer: C
             question_score: '10'
         4:
-            question_text: Kim is 10 years old. What will Hedy print for her?
+            question_text: 金今年10岁了。 海蒂会为她打印什么？
             code: |-
-                name = {ask} 'How many letters are in your name?'
-                age = {ask} 'How old are you?'
-                luckynumber = name*age
-                {print} 'Your lucky number is...' luckynumber
+                name = {ask} '你的名字中有多少个字母？
+                年龄 = {ask} '你多大了？
+                幸运数字=姓名*年龄
+                {print} '你的幸运数字是...' luckynumber
             mp_choice_options:
             -   option: '30'
-                feedback: Mind, Hedy also prints 'Your lucky number is...'
+                feedback: 请注意，海蒂 还打印出 '你的幸运数字是……'
             -   option: '10'
-                feedback: Please try again.
-            -   option: Your lucky number is... 30
-                feedback: That's right!
-            -   option: Your lucky number is... 10
-                feedback: Her lucky number is name times age...
-            hint: 'Kim has 3 letters, she is 10 years old so: letters times age = 3*10 = 30.'
+                feedback: 请再试一次。
+            -   option: 你的幸运数字是... 30
+                feedback: 这就对了！
+            -   option: 你的幸运数字是... 10
+                feedback: 她的幸运数字是名字乘年龄……
+            hint: Kim 有 3 个字母，她今年 10 岁，所以：字母乘以年龄 = 3*10 = 30。
             correct_answer: C
             question_score: '10'
         5:
-            question_text: If 5 people eat at this restaurant, how much do they have to pay in total?
+            question_text: 如果5个人在这家餐厅吃饭，总共要付多少钱？
             code: |-
-                {print} 'Welcome to Hedys!'
-                people = {ask} 'How many people are eating with us tonight?'
-                price = people * 10
-                {print} 'That will be ' price 'dollar please'
+                {print} '欢迎来到 海蒂！'
+                people = {ask} '今晚有多少人和我们一起吃饭？'
+                price =人数*10
+                {print} '这将是 ' 价格 '请付美元'
             mp_choice_options:
-            -   option: 5 dollars
-                feedback: Unfortunately, it's not that cheap.
-            -   option: 10 dollars
-                feedback: No, it's 10 dollars each.
-            -   option: 15 dollars
-                feedback: The * means multiplication.
-            -   option: 50 dollars
+            -   option: 5美元
+                feedback: 不幸的是，它并不便宜。
+            -   option: 10 美元
+                feedback: 不，每个 10 美元。
+            -   option: 15美元
+                feedback: '* 表示乘法。'
+            -   option: 50 美元
                 feedback: Great!
             hint: '`price` `is` `people` `times` 10'
             correct_answer: D
             question_score: '10'
         6:
-            question_text: How much does a hamburger cost is this virtual restaurant?
+            question_text: 这家虚拟餐厅一个汉堡要多少钱？
             code: |-
-                {print} 'Welcome at Hedys diner'
-                food = {ask} 'What would you like to eat?'
+                {print} '欢迎来到 海蒂 餐厅'
+                food = {ask} '你想吃什么？'
                 price = 0
-                {if} food {is} hamburger price = 15
-                {if} food {is} fries price = 6
+                {if} food {is} 汉堡price = 15
+                {if} food {is} 薯条price = 6
             mp_choice_options:
-            -   option: 15 dollars
-                feedback: Super!
-            -   option: 6 dollars
-                feedback: The fries are 6 dollars
-            -   option: 0 dollars
-                feedback: The hamburger isn't free!
-            -   option: 21 dollars
-                feedback: That's the price for a hamburger and fries!
-            hint: Mind the fourth line.
+            -   option: 15美元
+                feedback: 赞!
+            -   option: 6 美元
+                feedback: 薯条6块钱
+            -   option: 0 美元
+                feedback: 汉堡不是免费的！
+            -   option: 21 美元
+                feedback: 这是一个汉堡和薯条的价格！
+            hint: 注意第四行。
             correct_answer: A
             question_score: '10'
         7:
-            question_text: Why does line 7 say 'price is price + 3' instead of 'price is 3'?
+            question_text: 为什么第 7 行显示“价格是价格 + 3”而不是“价格是 3”？
             code: |-
-                {print} 'Welcome at Hedys diner'
-                food = {ask} 'What would you like to eat?'
+                {print} '欢迎来到 海蒂 餐厅'
+                food = {ask} '你想吃什么？'
                 price = 0
-                {if} food {is} hamburger price = price + 15
-                {if} food {is} fries price = price + 6
-                drinks is {ask} 'What would you like to drink?'
-                {if} drinks {is} coke price = price + 3
-                {if} drinks {is} water price = price + 1
-                {print} price ' dollars please'
+                {if} food {is} 汉堡price = price + 15
+                {if} food {is} 薯条price = price + 6
+                饮料是{ask} '你想喝什么？'
+                {if} 饮料 {is} 可乐price = price + 3
+                {if}饮料{is}水price=price+1
+                {print} price'请付美元
             mp_choice_options:
-            -   option: It could have been `price = 3` just as well.
-                feedback: No, that's not true. Hedy needs to add 3 dollars to the total.
-            -   option: Because Hedy doesn't understand `price = 3`.
-                feedback: Hedy would understand, but it wouldn't be right.
-            -   option: Because Hedy would otherwise forget about the previous order. The price would be 3 dollars in total.
-                feedback: That's right!
-            -   option: Because the price is 0 dollars to begin with.
-                feedback: That's true, but not the reason
-            hint: The price shouldn't be 3, but 3 dollars more than it already was
+            -   option: 也可以是 `price = 3`。
+                feedback: 不，那不是真的。 海蒂 需要在总数中添加 3 美元。
+            -   option: 因为 海蒂 不明白 `price = 3`。
+                feedback: 海蒂会理解，但这是不对的。
+            -   option: 因为否则 海蒂 就会忘记之前的订单。 价格总共是3美元。
+                feedback: 这是正确的！
+            -   option: 因为一开始的价格是0美元。
+                feedback: 确实如此，但不是原因
+            hint: 价格不应该是3，而是比原来多了3美元
             correct_answer: C
             question_score: '10'
         8:
-            question_text: Why is this code incorrect?
+            question_text: 为什么这段代码不正确？
             code: |-
-                correct answer = 3*12
-                answer = {ask} 'What is 3 times 12?'
-                {if} answer {is} correct answer {print} 'Good job!'
-                {else} {print} 'No... It was ' correct answer
+                正确答案 = 3*12
+                答案 = {ask} '3 乘以 12 是多少？'
+                {if} 回答 {is} 正确答案 {print} '干得好！'
+                {else} {print} '不...这是'正确答案
             mp_choice_options:
-            -   option: There shouldn't be quotation marks in line 2
-                feedback: No, there should be!
-            -   option: The variable is called correct answer, but a variable's name can only be 1 word. So it should be correct_answer
-                feedback: Correct!
-            -   option: The `{if}` and `{else}` commands should be in the same line.
-                feedback: No, that's not true.
-            -   option: The variable in line 2 can't be called answer, because it is too similar to the variable correct answer.
-                feedback: Variable names can be similar, but they can't be 2 words...
-            hint: Inspect what the variables are called.
+            -   option: 第 2 行不应有引号
+                feedback: 不，应该有！
+            -   option: 该变量称为正确答案，但变量的名称只能是 1 个单词。 所以应该是correct_answer
+                feedback: 对了!
+            -   option: '`{if}` 和 `{else}` 命令应该在同一行。'
+                feedback: 不，那不是真的。
+            -   option: 第2行中的变量不能称为答案，因为它与变量正确答案太相似。
+                feedback: 变量名可以相似，但不能是两个单词......
+            hint: 检查变量的名称。
             correct_answer: B
             question_score: '10'
         9:
-            question_text: Imagine you love football a 10, you've eaten 2 bananas and have washed your hands 3 times today. How smart does the silly fortune teller think you are?
+            question_text: 想象一下，你10分热爱足球，今天吃了 2 根香蕉并且洗手了 3 次。 那个愚蠢的算命先生认为你有多聪明？
             code: |-
-                {print} 'Im Hedy the silly fortune teller'
-                {print} 'I will predict how smart you are!'
-                football = {ask} 'On a scale of 0 to 10 how much do you love football?'
-                bananas = {ask} 'How many bananas have you eaten this week?'
-                hygiene = {ask} 'How many times did you wash your hands today??'
+                {print}'我是糊涂的算命师海蒂'
+                {print} '我会预测你有多聪明！'
+                Football = {ask} '按 0 到 10 分，你有多热爱足球？'
+                bananas = {ask} '这周你吃了多少根香蕉？'
+                hygiene = {ask} '你今天洗了多少次手？？'
                 result = bananas + hygiene
                 result = result * football
-                {print} 'You are ' result 'percent smart.'
+                {print} '你' result' 的确聪明。'
             mp_choice_options:
             -   option: 10%
                 feedback: (2 bananas + 3 hygiene) * 10 football = 5*10 =?
             -   option: 32%
                 feedback: (2 bananas + 3 hygiene) * 10 football = 5*10 =?
             -   option: 50%
-                feedback: Super! You are 100 percent smart!
+                feedback: 极好！ 你是百分百聪明的！
             -   option: 100%
                 feedback: (2 bananas + 3 hygiene) * 10 football = 5*10 =?
             hint: (2 bananas + 3 hygiene) * 10 football = 5*10 =?
             correct_answer: C
             question_score: '10'
         10:
-            question_text: Which statement is true?
+            question_text: 哪个论述是对的？
             code: |-
-                name _?_ Hedy
-                {print} name 'is walking trough the forrest'
+                名字_海蒂
+                {print} name '正在穿过森林'
             mp_choice_options:
             -   option: 您只能在`_`上填写单词
-                feedback: You are allowed to use the `=` sign as well
+                feedback: 也可以使用`=`符号
             -   option: 您可以在 `_` 上填写单词 ' is ' 或 `=` 符号
-                feedback: Amazing!
+                feedback: 赞哪！
             -   option: 你必须在 `_` 上填写 =是=
-                feedback: No, one `=` sign is enough
-            -   option: You can only use the `=` sign when working with numbers, not with words.
-                feedback: You can also use `=` with words.
-            hint: '`{is}` and `=` are both allowed'
+                feedback: 不，一个 `=` 符号就足够了
+            -   option: 在处理数字时只能使用 `=` 符号，而不能在处理单词时使用。
+                feedback: 还可以将 `=` 与单词一起使用。
+            hint: '`{is}` 和 `=` 都是允许的'
             correct_answer: B
             question_score: '10'
     7:
         1:
-            question_text: How many lines can you repeat at once with the repeat command at this level?
+            question_text: 使用此级别的repeat命令可以一次重复多少行？
             mp_choice_options:
             -   option: '0'
-                feedback: No you can repeat a line.
+                feedback: 不，您可以重复一行。
             -   option: '1'
-                feedback: Correct, one line at a time
-            -   option: '2'
-                feedback: In this level only one line at a time
-            -   option: infinite
-                feedback: In this level you can only repeat one line at a time
-            hint: You can only repeat 1 line at a time
+                feedback: 正确，一次一行
+            -   option: '3'
+                feedback: 在这个级别中一次只有一行
+            -   option: 无穷
+                feedback: 在此级别中，一次只能重复一行
+            hint: 一次只能重复 1 行
             correct_answer: B
             question_score: '10'
         2:
-            question_text: Which code is right?
+            question_text: 哪个代码是正确的？
             mp_choice_options:
             -   option: |-
                     ```
@@ -1343,81 +1343,81 @@ levels:
                     ```
                     {repeat} 100 {times} {print} 'hello'
                     ```
-                feedback: That's right!
-            hint: First the repeat command, then the `{print}` command
+                feedback: 这是正确的！
+            hint: 首先是`{repeat}`命令，然后是`{print}`命令
             correct_answer: D
             question_score: '10'
         3:
-            question_text: Is this code right or wrong?
+            question_text: 这段代码是对还是错？
             code: '{repeat} 100 {times} ''Hello!'''
             mp_choice_options:
             -   option: Right
-                feedback: No, a word is missing
-            -   option: Wrong, the word `{repeat}` is missing
-                feedback: The word `{repeat}` is there, another word is missing
-            -   option: Wrong, the word `{times}` is missing
-                feedback: The word `{times}` is there, another word is missing.
-            -   option: Wrong, the word `{print}` is missing
-                feedback: Correct
-            hint: 'It should be: `{repeat}` 100 `{times}` `{print}` ''Hello'''
+                feedback: 不，少了一个字
+            -   option: 错误，缺少`{repeat}`一词
+                feedback: 单词`{repeat}`存在，另一个单词缺失
+            -   option: 错误，缺少`{times}`一词
+                feedback: 这里有`{times}`这个词，但缺少另一个词。
+            -   option: 错误，缺少`{print}`一词
+                feedback: 对了
+            hint: 应该是： `{repeat}` 100 `{times}` `{print}` 'Hello'
             correct_answer: D
             question_score: '10'
         4:
-            question_text: Which word is wrong in the code?
+            question_text: 代码中哪个单词是错误的？
             code: |-
-                {print} 'I'm blue'
-                {repeat} 7 {times} {print} 'da ba dee, da ba da'
+                {print}'我很忧郁'
+                {repeat} 7 {times} {打印} 'da ba dee, da ba da'
             mp_choice_options:
             -   option: |-
                     ```
                     I'm
                     ```
-                feedback: That's right!
+                feedback: 这是正确的！
             -   option: |-
                     ```
                     {print}
                     ```
-                feedback: '`{print}` is spelled correctly'
+                feedback: '`{print}` 拼写正确'
             -   option: |-
                     ```
                     {repeat}
                     ```
-                feedback: '`{repeat}` is spelled correctly'
+                feedback: '`{repeat}` 拼写正确'
             -   option: |-
                     ```
                     {times}
                     ```
-                feedback: '`{times}` is spelled correctly'
-            hint: I'm is wrong, you can't use apostrophes
+                feedback: '`{times}` 拼写正确'
+            hint: 我错了，你不能在句子中使用撇号
             correct_answer: A
             question_score: '10'
         5:
-            question_text: Is this code right or wrong?
-            code: '{repeat} 100 {times} {print} ''Hedy is awesome!'''
+            question_text: 这段代码是对还是错？
+            code: '{repeat} 100 {times} {print} ''海蒂太棒了！'''
             mp_choice_options:
-            -   option: Correct
-                feedback: That's right!
-            -   option: Wrong
-                feedback: That's not it
-            hint: The code is correct!
+            -   option: 对了
+                feedback: 这是正确的！
+            -   option: 警告
+                feedback: 不是这个
+            hint: 代码是正确的！
             correct_answer: A
             question_score: '10'
         6:
-            question_text: What will be the output from this code?
+            question_text: 这段代码的输出是什么？
             code: |-
-                {print} 'The wheels on the bus go'
-                {repeat} 3 {times} {print} ' round and round'
+                {print} '公共汽车上的轮子开始运转'
+                {repeat} 3{times}{print}' 一轮又一轮'
             mp_choice_options:
             -   option: |-
-                    the wheels on the bus go
-                    round and round
-                feedback: Only the second line is repeated 3 times
+                    公共汽车上的轮子走起来
+                    一遍又一遍
+                feedback: 仅第二行重复3次
             -   option: |-
                     the wheels on the bus go
                     the wheels on the bus go
                     the wheels on the bus go
                     round and round
-                feedback: Only the second line is repeated 3 times
+                feedback: 仅第二行重复3次
             -   option: |-
                     the wheels on the bus go
                     round and round
@@ -1425,18 +1425,18 @@ levels:
                     round and round
                     the wheels on the bus go
                     round and round
-                feedback: Only the second line is repeated 3 times
+                feedback: 仅第二行重复3次
             -   option: |-
                     the wheels on the bus go
                     round and round
                     round and round
                     round and round
-                feedback: All though the town! Perfect!
-            hint: Only 'round and round' is repeated 3 times.
+                feedback: 遍布整个城镇！ 完美的！
+            hint: 只‘round and round'重复了3次。
             correct_answer: D
             question_score: '10'
         7:
-            question_text: What will be the output from this code?
+            question_text: 这段代码的输出是什么？
             code: |-
                 {repeat} 2 {times} {print} 'We will'
                 {print} 'ROCK YOU!'
@@ -1444,7 +1444,7 @@ levels:
             -   option: |-
                     We will We will
                     ROCK YOU!
-                feedback: '''We will'' won''t appear twice in the same line'
+                feedback: '''We will''不会在同一行中出现两次'
             -   option: |-
                     We will
                     We will
@@ -1455,12 +1455,12 @@ levels:
                     ROCK YOU!
                     We will
                     ROCK YOU!
-                feedback: ROCK YOU! won't be repeated
+                feedback: ROCK YOU! 不会重复
             -   option: |-
                     We will
                     ROCK YOU!
-                feedback: Mind the repeat command
-            hint: Mind the `{repeat}` command.
+                feedback: 注意重复命令
+            hint: 注意`{repeat}`命令。
             correct_answer: B
             question_score: '10'
         8:
@@ -1480,13 +1480,13 @@ levels:
                     {print} 'And I say'
                     {print} 'Its alright'
                     ```
-                feedback: Perfect, je kan het `{repeat}` commando hier niet gebruiken.
+                feedback: 太棒了，你不能在这里使用 `{repeat}` 命令。
             -   option: |-
                     ```
                     {repeat} 2 {times} {print} 'Here comes the sun'
                     {print} 'And I say'
                     {print} 'Its alright'"
-                feedback: Waar is de 'Do do do do' gebleven?
+                feedback: 你把“Do do do do”留在哪里了？
             -   option: |-
                     ```
                     {repeat} 2 {times} {print} 'Here comes the sun'
@@ -1494,7 +1494,7 @@ levels:
                     {print} 'And I say'
                     {print} 'Its alright'
                     ```
-                feedback: Dit is niet de juiste volgorde..
+                feedback: 这不是正确的顺序..
             -   option: |-
                     ```
                     {repeat} 2 {times} {print} 'Here comes the sun'
@@ -1502,12 +1502,12 @@ levels:
                     {print} 'And I say'
                     {print} 'Its alright'"
                     ```
-                feedback: Dit is niet de juiste volgorde..
-            hint: '`{repeat}` kan alleen worden gebruikt als je dezelfde regel meerdere keren achter elkaar wil uitvoeren.'
+                feedback: 这不是正确的顺序..
+            hint: 仅当您想连续多次执行同一行时才可以使用`{repeat}`。
             correct_answer: A
             question_score: '10'
         9:
-            question_text: Welke Hedy code hoort bij dit resultaat ?
+            question_text: 该输出属于什么 海蒂 代码？
             code: |-
                 蝙蝠侠正在高谭市上空飞行。
                 当他突然听到有人在尖叫...
@@ -1539,7 +1539,7 @@ levels:
                     {repeat} 3 {times} {print} Help !
                     {print} Please help me !
                     ```
-                feedback: Je vergeet de aanhalingstekens
+                feedback: 你漏掉了引号
             -   option: |-
                     ```
                     {print} 'Batman was flying through Gotham.'
@@ -1547,12 +1547,12 @@ levels:
                     {repeat} 3 {times} {print} 'Help !'
                     {print} 'Please help me !'
                     ```
-                feedback: Perfect
-            hint: '''Help !'' wordt 3x herhaald.'
+                feedback: 完美
+            hint: '''Help！'' 重复3次。'
             correct_answer: D
             question_score: '10'
         10:
-            question_text: What Hedy code belongs to this output?
+            question_text: 哪个代码属于这个输出？
             code: |-
                 if youre happy and you know it clap your hands
                 if youre happy and you know it clap your hands
@@ -1565,7 +1565,7 @@ levels:
                     {print} 'if youre happy and you know it and you really want to show it'
                     {print} 'if youre happy and you know it clap your hands'
                     ```
-                feedback: Almost! the first line needs an extra word
+                feedback: 几乎！ 第一行需要一个额外的单词
             -   option: |-
                     ```
                     {repeat} 2 {times} {print} 'if youre happy and you know it clap your hands'
@@ -1578,7 +1578,7 @@ levels:
                     {repeat} 3 {times} {print} 'if youre happy and you know it clap your hands'
                     {print} 'if youre happy and you know it and you really want to show it'
                     ```
-                feedback: This is not in the right order.
+                feedback: 这顺序不正确。
             -   option: |-
                     ```
                     {repeat} 4 {times} 'if youre happy and you know it'
@@ -1586,13 +1586,13 @@ levels:
                     {print} 'and you really want to show it'
                     {print} 'clap your hands'
                     ```
-                feedback: This is not in the right order.
-            hint: Mind the order of the sentences.
+                feedback: 这顺序不正确。
+            hint: 注意句子的顺序。
             correct_answer: B
             question_score: '10'
     8:
         1:
-            question_text: Which output will be produced by this code?
+            question_text: 这段代码会产生什么输出？
             code: |-
                 {repeat} 2 {times}
                     {print} 'Hello'
@@ -3541,4 +3541,285 @@ levels:
                 feedback: You should fill in a name, not a number
             hint: You win the game by having the most points. Your name should appear on the screen
             correct_answer: A
+            question_score: '10'
+    16:
+        1:
+            question_text: Which command should be filled in on the blanks to print a random snack?
+            code: |-
+                snacks = nachos, chips, cucumber, sweets
+                {print} _
+            mp_choice_options:
+            -   option: '`snacks {at} {random}`'
+                feedback: This is the old way.
+            -   option: '`[{random} snack]`'
+                feedback: The order is wrong.
+            -   option: '`snacks[{random}]`'
+                feedback: Correct
+            -   option: '`snacks[{at} {random}]`'
+                feedback: We do not need `at`anymore
+            hint: We no longer use {at}
+            correct_answer: C
+            question_score: '10'
+        2:
+            question_text: What should be filled in on the blanks if you want a list of what chores are done by whom?
+            code: |-
+                friends = ['Wesley', 'Eric', 'Kaylee']
+                chores = [the cooking, the cleaning, nothing]
+                {for} i {in} {range} 1 {to} 3
+                    {print}  _
+            mp_choice_options:
+            -   option: |-
+                    ```
+                    friends[i] has to do chores [i]
+                    ```
+                feedback: Mind the spacing.
+            -   option: |-
+                    ```
+                    friends[1] has to do chores[1]
+                    ```
+                feedback: It will print 3 times that Wesley has to do the cooking
+            -   option: |-
+                    ```
+                    chores[i] ' has to do ' friends[random]
+                    ```
+                feedback: The person has to do the chore, not the other way around
+            -   option: |-
+                    ```
+                    friends[i] ' has to do ' chores[i]
+                    ```
+                feedback: Fantastic!
+            hint: '`i` tells us what item in the list it is. So friend 1 does chore 1 etc.'
+            correct_answer: D
+            question_score: '10'
+        3:
+            question_text: What is a possible output for this program?
+            code: |-
+                friends = ['Wesley', 'Eric', 'Kaylee']
+                chore = [the cooking, the cleaning, nothing]
+                {for} i {in} {range} 1 {to} 3
+                    {print}  friends[i] has to do chores[i]
+            mp_choice_options:
+            -   option: |-
+                    ```
+                    Wesley has to do the cooking
+                    Eric has to do the cleaning
+                    Kaylee has to do nothing
+                    ```
+                feedback: Super!
+            -   option: |-
+                    ```
+                    Kaylee has to do the cooking
+                    Wesley has to do the cleaning
+                    Eric has to do nothing
+                    ```
+                feedback: No, it is not random.
+            -   option: |-
+                    ```
+                    Wesley has to do the cooking
+                    Wesley has to do the cleaning
+                    Wesley has to do the nothing
+                    ```
+                feedback: Poor Wesley!
+            -   option: |-
+                    ```
+                    Wesley has to do the cooking
+                    Wesley has to do the cooking
+                    Wesley has to do the cooking
+                    ```
+                feedback: That's not it
+            hint: It's not random...
+            correct_answer: A
+            question_score: '10'
+        4:
+            question_text: What is wrong with this code?
+            code: |-
+                friends = ['Jaylee', 'Erin', 'Fay']
+                lucky_numbers = [15, 18, 6]
+                {for} i {in} {range} 0 {to} 3
+                    print 'the lucky number of ' friends[i]
+                    print 'is ' lucky_numbers[i]
+            mp_choice_options:
+            -   option: The variable in line 4 should be 'friend[i]', not 'friends[i]'
+                feedback: That is not right.
+            -   option: Line 3 should say 'in range 1 to 3' not 'in range 0 to 3'
+                feedback: Good catch!
+            -   option: Line 4 should say 'lucky_number', not 'lucky number
+                feedback: It's not a variable, it's just text.
+            -   option: '{in} in line 3 should be removed'
+                feedback: That's not it
+            hint: There's nothing wrong with line 4
+            correct_answer: B
+            question_score: '10'
+        5:
+            question_text: Which line should be filled in in the blank?
+            code: |-
+                animals = ['dog', 'cow', 'horse']
+                _
+                {for} i {in} {range} 1 {to} 3
+                    {print} 'the ' animals[i] ' says ' sounds[i]
+            mp_choice_options:
+            -   option: noises = ['moo', 'woof', 'neigh']
+                feedback: Mind the variable name and the order of the sounds.
+            -   option: sounds = '[woof], [moo], [neigh]'.
+                feedback: Look at line one to see how brackets are supposed to be used.
+            -   option: sounds = [woof, moo, neigh]
+                feedback: Don't forget the quotation marks!
+            -   option: sounds = ['woof', 'moo', 'neigh']
+                feedback: Great job!
+            hint: Look at line 1 to see proper use of brackets and quotation marks.
+            correct_answer: D
+            question_score: '10'
+        6:
+            question_text: Which statement is true?
+            code: |-
+                people = ['Chris', 'Jaylino', 'Ryan']
+                games = ['fortnite', 'minecraft', 'fifa']
+                {for} o {in} {range} 1 {to} 3
+                  {print} people[o] ' likes ' games[o]
+            mp_choice_options:
+            -   option: You are not allowed to use the variable o. It should be named i.
+                feedback: i is the most commonly used variable name in this case, but it's not mandatory to use i.
+            -   option: The output will say that Jaylino likes fortnite.
+                feedback: No, he likes minecraft.
+            -   option: The output will say that Ryan likes fifa
+                feedback: Correct
+            -   option: This code will not work. It will give and error.
+                feedback: No, the code is correct.
+            hint: There is nothing wrong with this code.
+            correct_answer: C
+            question_score: '10'
+        7:
+            question_text: What's wrong with this code?
+            code: |-
+                people = ['Savi', 'Senna', 'Fayenne']
+                transportation = ['bike', 'train', 'car']
+                {for} i {in} {range} 1 {to} 3
+                  {print} people[i] goes to school by transportation[i]
+            mp_choice_options:
+            -   option: Line 1 needs less quotation marks
+                feedback: That is not right.
+            -   option: Line 3 should start with indentation
+                feedback: It should not!
+            -   option: Line 4 should start without indentation
+                feedback: It should not
+            -   option: Line 4 needs more quotation marks.
+                feedback: Amazing!
+            hint: There is a mistake made in the usage of quotation marks.
+            correct_answer: D
+            question_score: '10'
+        8:
+            question_text: Which of these codes belongs to this output?
+            code: |-
+                Macy and Kate get to go first
+                Lionell and Raj get to go second
+                Kim and Leroy get to go third
+            mp_choice_options:
+            -   option: |-
+                    ```
+                    teams = ['Macy and Kate', 'Lionell and Raj', 'Kim and Leroy']
+                    position = ['first', 'second', 'third']
+                    {for} i {in} {range} 0 {to} 3
+                    {print} teams[random] ' get to go ' position[i]
+                    ```
+                feedback: This is not right
+            -   option: |-
+                    ```
+                    teams = ['Macy and Kate', 'Lionell and Raj', 'Kim and Leroy']
+                    position = ['first', 'second', 'third']
+                    {for} i {in} {range} 1 {to} 3
+                      {print} teams[i] ' get to go ' position[i]
+                    ```
+                feedback: Amazing!
+            -   option: |-
+                    ```
+                    teams = ['Macy', 'Kate', 'Lionell', 'Raj', 'Kim', 'Leroy']
+                    position = ['first', 'second', 'third']
+                    {for} i {in} {range} 1 {to} 6
+                      {print} teams[random] ' get to go ' position[random]
+                    ```
+                feedback: This is not it.
+            -   option: |-
+                    ```
+                    teams = ['Macy and Kate' 'Lionell and Raj' 'Kim and Leroy']
+                    position = ['first' 'second' 'third']
+                    {for} teams {in} {range} 0 {to} 3
+                        {print} teams[i] ' get to go ' position[i]
+                    ```
+                feedback: This is not going to work!
+            hint: If you look carefully at the first line, you'll see that only the first two answers are possibly correct.
+            correct_answer: B
+            question_score: '10'
+        9:
+            question_text: What is a possible output for this code?
+            code: |-
+                countries = ['Canada', 'Zimbabwe', 'New Zealand']
+                {for} i {in} {range} 0 {to} 1
+                  {print} 'I will travel to ' countries[random]
+            mp_choice_options:
+            -   option: |-
+                    ```
+                    I will travel to Canada
+                    I will travel to Canada
+                    ```
+                feedback: Great job!
+            -   option: |-
+                    ```
+                    I will travel to Canada
+                    ```
+                feedback: It will be repeated twice
+            -   option: |-
+                    ```
+                    I will travel to Canada, Zimbabwe and New Zealand
+                    ```
+                feedback: This is not it.
+            -   option: |-
+                    ```
+                    I will travel to Canada
+                    I will travel to Zimbabwe
+                    I will travel to New Zealand
+                    ```
+                feedback: It's only repeated twice
+            hint: Range 0 to 1 is 2 times
+            correct_answer: A
+            question_score: '10'
+        10:
+            question_text: Which 3 lines will complete this code correctly?
+            code: |-
+                {print} 'The book raffle will start soon'
+                {print} 'Get your tickets now!'
+                {books} = ['Narnia', 'The Hobbit', 'Oliver Twist', 'Harry Potter', 'Green eggs and ham']
+                people = {ask} 'How many raffle tickets are sold?'
+                list_of_raffle_numbers = [1, 2]
+                {for} i {in} {range} 3 {to} people
+                    {add} i {to} list_of_raffle_numbers
+                {for} i {in} {range} 1 {to} 5
+            mp_choice_options:
+            -   option: |-
+                    ```
+                    chosen_number = list_of_numbers at random
+                    print books[i] ' will go to person number ' chosen_number
+                    {add} chosen_number {to} list_of_numbers
+                    ```
+                feedback: Almost there... but adding the winner to the list makes this raffle unfair
+            -   option: |-
+                    ```
+                    print person[i] ' wins ' book[i]
+                    ```
+                feedback: There is no list called 'person'
+            -   option: |-
+                    ```
+                    chosen_number = list_of_numbers[people]
+                    print books[people] ' will go to person number ' chosen_number
+                    {remove} chosen_number {from} list_of_numbers
+                    ```
+                feedback: This is not it.
+            -   option: |-
+                    ```
+                    chosen_number = list_of_numbers[random]
+                    print books[i] ' will go to person number ' chosen_number
+                    {remove} chosen_number {from} list_of_numbers
+                    ```
+                feedback: Fantastic!
+            hint: You need to use the {remove} command
+            correct_answer: D
             question_score: '10'

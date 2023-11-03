@@ -249,8 +249,8 @@ adventures:
                 start_code: '# placera din kod här'
             15:
                 story_text: |
-                    Med `{while}`-loopen kan du göra dina berättelser mer intressanta. Du kan t.ex. använda `{while} game {is} 'on'` så att du kan spela tills spelet är slut.
-                    Eller så kan du använda `{while} sword {is} 'lost'` så att spelaren inte kan fortsätta spelet förrän den har hittat något.
+                    Med `{while}`-loopen kan du göra dina berättelser mer intressanta. Du kan t.ex. använda `{while} game == 'on'` så att du kan spela tills spelet är slut.
+                    Eller så kan du använda `{while} sword == 'lost'` så att spelaren inte kan fortsätta spelet förrän den har hittat något.
                 example_code: |
                     ```
                     nycklar = 'förlorade'
@@ -424,6 +424,19 @@ adventures:
                     {print} Hej namn
                     ålder {is} {ask} Hur gammal är du?
                     {print} namn är ålder år gammal.
+            18:
+                story_text: |
+                    Den sista ändringen vi behöver göra för att få Python-kod är att ändra `{ask}` till `{input}`.
+                example_code: |
+                    ```
+                    {print}('Jag heter Hedy!')
+                    namn = {input}('Vad heter du?')
+                    {print}('Du heter alltså ', namn)
+                    ```
+                start_code: |
+                    {print}('Jag heter Hedy!')
+                    namn = {input}('Vad heter du?')
+                    {print}('Du heter alltså ', namn)
     blackjack:
         name: Blackjack
         default_save_name: Blackjack
@@ -1288,7 +1301,7 @@ adventures:
                     `{for}` skapar ett block, som `{repeat}` och `{if}` så alla rader i blocket måste börja med fyra mellanslag.
                 example_code: |
                     ```
-                    djur {is} hund, katt, marulk
+                    djur = hund, katt, marulk
                     {for} djuret {in} djur
                         {print} 'Jag älskar ' djuret
                     ```
@@ -2002,13 +2015,13 @@ adventures:
                     Lägg till ett {else}-kommando till exempelkoden. Gör ett kodblock med indrag. Det gör du genom att börja varje rad med fyra mellanslag.
                 example_code: |
                     ```
-                    namn {is} {ask} 'Vad heter du?'
+                    namn = {ask} 'Vad heter du?'
                     {if} namn {is} Hedy
                         {print} 'Välkommen Hedy'
                         {print} 'Du kan spela på din dator!'
                     ```
                 start_code: |
-                    namn {is} {ask} 'Vad heter du?'
+                    namn = {ask} 'Vad heter du?'
                     {if} namn {is} Hedy
                         {print} 'Välkommen Hedy'
                         {print} 'Du kan spela på din dator!'
@@ -2016,15 +2029,17 @@ adventures:
                 story_text: |
                     In this level you can also put an {if} command inside another {if} command.
                 example_code: |
-                    continue = ask 'Do you want to continue?'
-                    if continue = yes
-                        sure = ask 'Are you sure?'
-                        if sure is yes
-                            print 'We will continue'
-                        else
-                            print 'You are not sure'
-                    else
-                        print 'You do not want to continue'
+                    ```
+                    continue = {ask} 'Do you want to continue?'
+                    {if} continue = yes
+                        sure = {ask} 'Are you sure?'
+                        {if} sure {is} yes
+                            {print} 'We will continue'
+                        {else}
+                            {print} 'You are not sure'
+                    {else}
+                        {print} 'You do not want to continue'
+                    ```
                 start_code: |
                     continue = ask 'Do you want to continue?'
                     if continue = yes
@@ -2476,13 +2491,6 @@ adventures:
                     temperatur = 25
                     {print}('Det är ', temperatur, ' grader ute')
                     ```
-                story_text_3: Den sista ändringen vi behöver göra för att få Python-kod är att ändra `{ask}` till `{input}`.
-                example_code_3: |
-                    ```
-                    {print}('Jag heter Hedy!')
-                    namn = {input}('Vad heter du?')
-                    {print}('Du heter alltså ', namn)
-                    ```
                 start_code: |-
                     namn = 'Hedy'
                     {print}('Jag heter ', namn)
@@ -2625,19 +2633,37 @@ adventures:
                     {print} djur {at} {random}
             16:
                 story_text: |-
-                    Vi ska göra listor på Python-sättet, med hakparenteser runt listorna! Vi skriver också citattecken runt varje element som vi har lärt oss på tidigare nivåer.
-                    Vi använder hakparenteser för att peka ut en plats i en lista. Kommandot {at} {random} kan inte längre användas.
+                    We are going to make lists the Python way, with square brackets around the lists! We also keep the quotation marks around each item like we have learned in previous levels.
+                    We use square brackets to point out a place in a list. For example: `friends[1]` is the first name on the list of friends, as you can see in the first part of the example code.
+                    The second part of the example code shows you that we can also match 2 lists using the variable i.
                 example_code: |
                     ```
-                    vänner = ['Ahmed', 'Ben', 'Cayden']
-                    lyckotal = [15, 18, 6]
+                    friends = ['Ahmed', 'Ben', 'Cayden']
+                    {print} friends[1] ' is the first friend on the list.'
+                    {print} friends[2] ' is the second friend on the list.'
+                    {print} friends[3] ' is the third friend on the list.'
+                    #now we will match 2 lists using the variable i
+                    lucky_numbers = [15, 18, 6]
                     {for} i {in} {range} 1 {to} 3
-                        {print} 'lyckotalet för ' vänner[i]
-                        {print} 'är ' lyckotal[i]
+                        {print} friends[i] 's lucky number is ' lucky_numbers[i]
+                    ```
+                story_text_2: |-
+                    Now that you've learned to use the brackets in lists, you can also start using the {at} {random} command in the Python way!
+                    You simply type the name of your list with `[random]` behind it!
+                example_code_2: |-
+                    ```
+                    fruit = ['apple', 'banana', 'cherry']
+                    {print} fruit[random]
                     ```
                 start_code: |-
-                    frukt = ['äpple', 'banan', 'körsbär']
-                    {print} frukt[slump]
+                    friends = ['Ahmed', 'Ben', 'Cayden']
+                    {print} friends[1] ' is the first friend on the list.'
+                    {print} friends[2] ' is the second friend on the list.'
+                    {print} friends[3] ' is the third friend on the list.'
+                    #now we will match 2 lists using the variable i
+                    lucky_numbers = [15, 18, 6]
+                    {for} i {in} {range} 1 {to} 3
+                        {print} friends[i] 's lucky number is ' lucky_numbers[i]
     repeat_command:
         name: Upprepa
         default_save_name: kommandot_upprepa
@@ -3150,10 +3176,10 @@ adventures:
                     \ så att du kan spela flera omgångar. Du kan till och med använda en `{ask}` för att fråga användaren hur många rundor hen vill spela.\n"
                 example_code: |
                     ```
-                    val {is} sten, sax, påse
-                    ditt_val {is} {ask} 'Vad väljer du?'
+                    val = sten, sax, påse
+                    ditt_val = {ask} 'Vad väljer du?'
                     {print} 'Du väljer ' ditt_val
-                    datorval {is} val {at} {random}
+                    datorval = val {at} {random}
                     {print} 'Datorn väljer ' datorval
                     {if} datorval {is} ditt_val
                         {print} 'Oavgjort'
@@ -3254,16 +3280,16 @@ adventures:
                     Lägg till en tredje komponent till koden, till exempel ett klädesplagg eller ett föremål.
                 example_code: |
                     ```
-                    namn {is} {ask} 'Vad heter du?'
-                    om namn {is} '_'
-                        a {is} 'Åk till flygplatsen'
+                    namn = {ask} 'Vad heter du?'
+                    {if} namn {is} '_'
+                        a = 'Åk till flygplatsen'
                     {else}
-                        a {is} 'Åk till tågstationen'
-                    lösenord {is} {ask} 'Vad är lösenordet?'
+                        a = 'Åk till tågstationen'
+                    lösenord = {ask} 'Vad är lösenordet?'
                     {if} lösenord {is} _
-                        b {is} 'imorgon kl. 02.00'
+                        b = 'imorgon kl. 02.00'
                     {else}
-                        b {is} 'idag kl. 10.00'
+                        b = 'idag kl. 10.00'
                     {print} _ _ _
                     ```
                 start_code: '# ha din kod här'
@@ -3278,8 +3304,8 @@ adventures:
                     Vi vill förvirra fienden ännu mer! Skapa en lista med falska svar och välj ett slumpmässigt när ett felaktigt svar ges.
                 example_code: |
                     ```
-                    name {is} {ask} 'Vad heter du?'
-                    lösenord {is} {ask} 'Vad är ditt lösenord?'
+                    name = {ask} 'Vad heter du?'
+                    lösenord = {ask} 'Vad är ditt lösenord?'
                     {if} namn {is} 'Agent007' _ lösenord {is} 'TOPSECRET'
                         {print} 'Åk till flygplatsen kl. 02.00'
                     {else}
