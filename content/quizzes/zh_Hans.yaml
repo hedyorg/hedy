@@ -585,57 +585,57 @@ levels:
             correct_answer: C
             question_score: '10'
         8:
-            question_text: What is the output of this code?
+            question_text: 这段代码的输出是什么？
             code: |-
-                crisps {is} sea salt, paprika, sour cream
-                {remove} sea salt {from} crisps
-                {remove} paprika {from} crisps
-                {print} crisps {at} {random}
+                薯片 {is} 海盐、辣椒粉、酸奶油
+                {from} 薯片中 {remove} 海盐
+                {from} 薯片中 {remove} 辣椒粉
+                {print} 薯片 {at} {random}
             mp_choice_options:
-            -   option: You can't tell, because Hedy will `{print}` one of the 3 flavors `{at} {random}`
-                feedback: Take a look at the `{remove}` commands
+            -   option: 你无法分辨，因为 海蒂 会 `{print}` 3 种口味 `{at} {random}`之一
+                feedback: 看一下 `{remove}`命令
             -   option: sea salt
-                feedback: sea salt is removed from the list
-            -   option: paprika
-                feedback: Paprika is removed from the list
-            -   option: sour cream
-                feedback: That's right!
-            hint: There are 3 flavors, bit 2 are removed. Which one remains?
+                feedback: 海盐已从列表中删除
+            -   option: 辣椒粉
+                feedback: 辣椒粉已从列表中删除
+            -   option: 酸奶油
+                feedback: 这是正确的！
+            hint: 有 3 种口味，第 2 位被删除。 还剩下哪一个？
             correct_answer: D
             question_score: '10'
         9:
-            question_text: What's wrong with this code?
+            question_text: 这段代码有什么问题？
             code: |-
-                colors {is} blue, purple, green
-                chosen_color {is} {ask} Which haircolor wouldn't your like to have?
-                {remove} chosen_color {from} colors
-                {print} I will dye my hair color {at} {random}
+                颜色 {is} 蓝色、紫色、绿色
+                chosen_color {is} {ask} 你不喜欢哪种发色？
+                {from} 种颜色中 {remove} chosen_color
+                {print}我将 {at} {random} 染发颜色
             mp_choice_options:
-            -   option: 'Line 3 should say: `{remove}` blue `{from}` colors'
-                feedback: Maybe you want blue hair though!
-            -   option: Line 3 should have an `{add}` command instead of a `{remove}` command
-                feedback: You want to remove the chosen color so `{remove}` is right.
-            -   option: In line 4 the variable should be called colors instead of color
-                feedback: Great job!
-            -   option: Nothing, this is a correct code!
-                feedback: Find the mistake!
-            hint: Look at line 3
+            -   option: 第 3 行应该显示：`{remove}` 蓝色`{from}`颜色
+                feedback: 也许你想要蓝色头发！
+            -   option: 第 3 行应该有一个 `{add}` ”命令，而不是 `{remove}`命令
+                feedback: 你想要删除所选颜色，因此 `{remove}`是正确的。
+            -   option: 在第 4 行中，变量应该称为 colors 而不是 color
+                feedback: 做得好！
+            -   option: 没什么，这是正确的代码！
+                feedback: 找出错误！
+            hint: 看第3行
             correct_answer: C
             question_score: '10'
         10:
-            question_text: What should be on the _?_?
+            question_text: _ 上应该写什么？
             code: |-
-                walkers {is} dad, mom, Sam, Petra
-                walked_yesterday {is} {ask} Who walked the dogs yesterday?
-                {print} walked_yesterday shouldn't have to walk the dogs again today
-                _?_
-                {print} walkers {at} {random} , it's your turn to walk the dogs!
+                walkers {is} 爸爸、妈妈、山姆、佩特拉
+                walked_yesterday {is} {ask} 昨天谁遛狗了？
+                {print} walked_yesterday 今天不应该再去遛狗
+                _
+                {print} walkers {at} {random}，轮到你遛狗了！
             mp_choice_options:
             -   option: |-
                     ```
                     {remove} walked_yesterday {from} walkers
                     ```
-                feedback: Super!
+                feedback: 赞！
             -   option: |-
                     ```
                     {remove} walked yesterday {to} walkers
@@ -645,55 +645,55 @@ levels:
                     ```
                     {remove} walkers {from} yesterday
                     ```
-                feedback: yesterday is not a variable
+                feedback: yesterday不是变量
             -   option: |-
                     ```
                     {add} walked_yesterday {to} walkers
                     ```
-                feedback: This increased the change that the person who walked yesterday now has to do it again. That's mean.
-            hint: The person who walked the dog yesterday should be removed from the list.
+                feedback: 这意味着增加了昨天走路的人现在必须再走一次的变化。
+            hint: 昨天遛狗的人应该从名单中删除。
             correct_answer: A
             question_score: '10'
     4:
         1:
-            question_text: Which of these is true?
+            question_text: 这些代码中哪一个是正确的？
             mp_choice_options:
             -   option: |-
                     ```
                     {print} ‘我很高兴参加这次测验！’
                     ```
-                feedback: That's right
+                feedback: 这是正确的
             -   option: |-
                     ```
                     {print} ‘我很高兴参加这次测验！’
                     ```
-                feedback: '`{ask}` needs quotation marks too!'
+                feedback: '{print} 现在需要引号！'
             -   option: |-
                     ```
                     {print} ‘我很高兴参加这次测验！’
                     ```
-                feedback: '`{at} {random}` still works'
+                feedback: 不要使用撇号或使用反引号代替
             -   option: |-
                     ```
                     {print} ‘我很高兴参加这次测验！’
                     ```
-                feedback: No, but 2 other commands do.
-            hint: In level 4 you need quotation marks for 2 commands.
+                feedback: 使用引号和撇号时要小心
+            hint: 在第 4 级中，你需要用引号来表示 2 个命令。
             correct_answer: A
             question_score: '10'
         2:
-            question_text: Which code uses the proper quotation marks?
+            question_text: 哪个代码使用了正确的引号？
             mp_choice_options:
             -   option: |-
                     ```
                     {print} `hello`
                     ```
-                feedback: This quotation mark is skewed, you need a straight one.
+                feedback: 这个引号是歪斜的，你需要一个直的。
             -   option: |-
                     ```
                     {print} 'hello'
                     ```
-                feedback: Correct
+                feedback: 正确的
             -   option: |-
                     ```
                     {print} hello
@@ -703,23 +703,23 @@ levels:
                     ```
                     {print} ,hello,
                     ```
-                feedback: This is a comma, you need quotation marks.
-            hint: Pick the right quotation marks.
+                feedback: 这是一个逗号，你需要引号。
+            hint: 选择正确的引号。
             correct_answer: B
             question_score: '10'
         3:
-            question_text: Where are the quotation marks used correctly?
+            question_text: 引号在哪儿使用正确？
             mp_choice_options:
             -   option: |-
                     ```
                     {print} Hi Im Hedy
                     ```
-                feedback: Add quotation marks please!
+                feedback: 请加引号！
             -   option: |-
                     ```
                     {print} 'Hi Im Hedy
                     ```
-                feedback: Both before and after the words you want to print should be a quotation mark.
+                feedback: 要打印的单词之前和之后都应该加引号。
             -   option: |-
                     ```
                     '{print} Hi Im Hedy'
@@ -729,20 +729,20 @@ levels:
                     ```
                     {print} 'Hi Im Hedy'
                     ```
-                feedback: Perfect!
-            hint: Both before and after the words you want to print should be a quotation mark.
+                feedback: 完美！
+            hint: 要打印的单词之前和之后都应该加引号。
             correct_answer: D
             question_score: '10'
         4:
-            question_text: Which statement is true?
+            question_text: 哪个论述是对的？
             mp_choice_options:
-            -   option: 'You need quotation marks around the word `{print}`, like this: `''{print}''`.'
-                feedback: The quotation marks shouldn't be around the command itself.
-            -   option: You need quotation marks around the words you want to print.
-                feedback: Super!
-            -   option: You do not need quotation marks when using the `{ask}` command
-                feedback: Both `{print}` and `{ask}` require quotation marks
-            -   option: You can choose yourself whether to use quotation marks or not.
+            -   option: 你需要在单词`{print}`两边加上引号，如下所示：`{print}`。
+                feedback: 命令本身不应包含引号。
+            -   option: 你需要在要打印的单词两边加上引号。
+                feedback: 赞!
+            -   option: 使用 `{ask}`命令时不需要引号
+                feedback: '`{print}` 和 `{ask}` 都需要引号'
+            -   option: 你可以自行选择是否使用引号。
                 feedback: Unfortunately, Hedy is stricter than that.
             hint: From level 4 on you need to use quotation marks.
             correct_answer: B
