@@ -237,8 +237,8 @@ adventures:
                 start_code: '# Vendoseni kodin tuaj këtu'
             15:
                 story_text: |
-                    Duke përdorur komandën `{while}` mund ta bëni tregimin më interesante. Për shembull, ju mund të përdorni `{while} game {is} 'on'` kështu që ju mund të luani derisa loja të mbarojë.
-                    Ose ju mund të përdorni `{while} sword {is} 'lost'` kështu që lojtari nuk mund të vazhdojë lojën pa mos e gjetur shpatën.
+                    Duke përdorur komandën `{while}` mund ta bëni tregimin më interesante. Për shembull, ju mund të përdorni `{while} game == 'on'` kështu që ju mund të luani derisa loja të mbarojë.
+                    Ose ju mund të përdorni `{while} sword == 'lost'` kështu që lojtari nuk mund të vazhdojë lojën pa mos e gjetur shpatën.
                 example_code: |
                     ```
                     çelsat = 'humbur'
@@ -1239,12 +1239,12 @@ adventures:
                     `{for}` creates a block, like `{repeat}` and `{if}` so all lines in the block need to start with 4 spaces.
                 example_code: |
                     ```
-                    animals {is} dog, cat, blobfish
+                    animals = dog, cat, blobfish
                     {for} animal {in} animals
                         {print} 'I love ' animal
                     ```
                 start_code: |-
-                    animals {is} dog, cat, blobfish
+                    animals = dog, cat, blobfish
                     {for} animal {in} animals
                         {print} 'I love ' animal
             11:
@@ -1952,13 +1952,13 @@ adventures:
                     Add an {else} command to the example code. Make a block of line using indentation. You do this by starting each line with 4 spaces.
                 example_code: |
                     ```
-                    name {is} {ask} 'What is your name?'
+                    name = {ask} 'What is your name?'
                     {if} name {is} Hedy
                         {print} 'Welcome Hedy'
                         {print} 'You can play on your computer!'
                     ```
                 start_code: |
-                    name {is} {ask} 'What is your name?'
+                    name = {ask} 'What is your name?'
                     {if} name {is} Hedy
                         {print} 'Welcome Hedy'
                         {print} 'You can play on your computer!'
@@ -3064,10 +3064,10 @@ adventures:
                     Në këtë nivel mund ta programi gjithë lojën gur, letër, gërshërë duke përdorur komandën {if} një mbi një. A mund ta përfundoni kodin?
                 example_code: |
                     ```
-                    zgjedhjet {is} gur, letër, gërshërë
-                    zgjedhja_juaj {is} {ask} 'Çfarë zgjidhni?'
+                    zgjedhjet = gur, letër, gërshërë
+                    zgjedhja_juaj = {ask} 'Çfarë zgjidhni?'
                     {print} 'Ju zgjodhët ' zgjedhja_juaj
-                    zgjedhja_kompjuterit {is} zgjedhjet {at} {random}
+                    zgjedhja_kompjuterit = zgjedhjet {at} {random}
                     {print} 'Kompjuteri zgjodhi ' zgjedhja_kompjuterit
                     {if} zgjedhja_kompjuterit {is} zgjedhja_juaj
                         {print} 'Barazim'
@@ -3163,16 +3163,16 @@ adventures:
                     Bëni kodin tuaj sekret për superspiunin tuaj. A mund ta bëni atë të përbëhet nga edhe më shumë variabla?
                 example_code: |
                     ```
-                    emri {is} {ask} 'Cili është emri juaj?'
+                    emri = {ask} 'Cili është emri juaj?'
                     {if} emri {is} 'Agent007'
-                         a {is} 'Shko në aeroport'
+                         a = 'Shko në aeroport'
                     {else}
-                         a {is} 'Shko në stacionin e trenit'
-                    fjalëkalimi {is} {ask} "Cili është fjalëkalimi?"
+                         a = 'Shko në stacionin e trenit'
+                    fjalëkalimi = {ask} "Cili është fjalëkalimi?"
                     {if} fjalëkalimi {is} "TOPSECRET"
-                         b {is} 'nesër në 02:00'
+                         b = 'nesër në 02:00'
                     {else}
-                         b {is} 'sot në orën 10:00'
+                         b = 'sot në orën 10:00'
                     {print} a + b
                     ```
                 start_code: '# Vendoseni kodin tuaj këtu'
@@ -3181,8 +3181,8 @@ adventures:
                     A mund të plotësoni komandën e duhur në vendin bosh? Mendja: Superspiuni duhet t'u përgjigjet saktë të DY pyetjeve, përpara se të marrë informacionin konfidencial!
                 example_code: |
                     ```
-                    emri {is} {ask} 'Cili është emri juaj?'
-                    fjalëkalimi {is} {ask} "Cili është fjalëkalimi juaj?"
+                    emri = {ask} 'Cili është emri juaj?'
+                    fjalëkalimi = {ask} "Cili është fjalëkalimi juaj?"
                     {if} emri {is} 'Agent007' _ fjalëkalimi {is} 'TOPSECRET'
                          {print} 'Shko në aeroport në orën 02:00'
                     {else}

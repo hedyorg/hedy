@@ -184,8 +184,8 @@ adventures:
                 start_code: '# 在这里写你的代码'
             15:
                 story_text: |
-                    运用`{while}`循环能让你的故事更有趣。比如，用`{while} game {is} 'on'`可以让游戏一直进行到结束为止。
-                    或者用`{while} sword {is} 'lost'`来要求玩家必须先找到剑，才能继续游戏。
+                    运用`{while}`循环能让你的故事更有趣。比如，用`{while} game == 'on'`可以让游戏一直进行到结束为止。
+                    或者用`{while} sword == 'lost'`来要求玩家必须先找到剑，才能继续游戏。
                 example_code: |
                     ```
                     钥匙 = '丢失'
@@ -1195,12 +1195,12 @@ adventures:
                     `{for}` creates a block, like `{repeat}` and `{if}` so all lines in the block need to start with 4 spaces.
                 example_code: |
                     ```
-                    animals {is} dog, cat, blobfish
+                    animals = dog, cat, blobfish
                     {for} animal {in} animals
                         {print} 'I love ' animal
                     ```
                 start_code: |-
-                    animals {is} dog, cat, blobfish
+                    animals = dog, cat, blobfish
                     {for} animal {in} animals
                         {print} 'I love ' animal
             11:
@@ -1910,13 +1910,13 @@ adventures:
                     Add an {else} command to the example code. Make a block of line using indentation. You do this by starting each line with 4 spaces.
                 example_code: |
                     ```
-                    name {is} {ask} 'What is your name?'
+                    name = {ask} 'What is your name?'
                     {if} name {is} Hedy
                         {print} 'Welcome Hedy'
                         {print} 'You can play on your computer!'
                     ```
                 start_code: |
-                    name {is} {ask} 'What is your name?'
+                    name = {ask} 'What is your name?'
                     {if} name {is} Hedy
                         {print} 'Welcome Hedy'
                         {print} 'You can play on your computer!'
@@ -2998,10 +2998,10 @@ adventures:
                      **（另外）** 想玩多玩几个游戏吗？拓展代码，以便您可以多玩几个回合。您甚至可以使用 `{ask}` 询问用户他们想玩多少回合。
                 example_code: |
                     ```
-                    选项 {is} 石头，剪刀，布
-                    你选择 {is} {ask} '你选择什么？'
+                    选项 = 石头，剪刀，布
+                    你选择 = {ask} '你选择什么？'
                     {print} '你选择了' 你选择
-                    计算机选择 {is} 选项 {at} {random}
+                    计算机选择 = 选项 {at} {random}
                     {print} '计算机选择了' 计算机选择
                     {if} 计算机选择 {is} 你选择
                         {print} '平手'
@@ -3105,16 +3105,16 @@ adventures:
                     为你的超级间谍编写你自己的秘密代码。你能让它由更多的变量组成吗？
                 example_code: |
                     ```
-                    名字 {is} {ask} '你的名字是什么？'
+                    名字 = {ask} '你的名字是什么？'
                     {if} 名字 {is} '特工007'
-                        a {is} '去机场'
+                        a = '去机场'
                     {else}
-                        a {is} '去火车站'
-                    密码 {is} {ask} '密码是什么？'
+                        a = '去火车站'
+                    密码 = {ask} '密码是什么？'
                     {if} 密码 {is} 'TOPSECRET'
-                        b {is} '明天02.00'
+                        b = '明天02.00'
                     {else}
-                        b {is} '今天10.00'
+                        b = '今天10.00'
                     {print} a + b
                     ```
                 start_code: '# 在这里写下你的代码'
@@ -3123,8 +3123,8 @@ adventures:
                     你能在空白处填上正确的命令吗？注意：超级间谍必须同时回答正确两个问题，然后才能获取机密情报!
                 example_code: |
                     ```
-                    名字 {is} {ask} '你的名字是什么？
-                    密码 {is} {ask} '你的密码是什么？'
+                    名字 = {ask} '你的名字是什么？
+                    密码 = {ask} '你的密码是什么？'
                     {if} 名字 {is} '特工007' _密码{is} 'TOPSECRET'
                         {print} '02.00去机场'
                     {else}
