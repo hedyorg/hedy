@@ -399,6 +399,18 @@ adventures:
                     {print} Bonjour nom
                     âge {is} {ask} Quel âge as-tu ?
                     {print} nom a âge ans.
+            18:
+                story_text: Le changement final que nous devons faire pour avoir du code Python c'est de remplacer `{ask}` par `{input}`.
+                example_code: |
+                    ```
+                    {print}("Mon nom est hedy !")
+                    nom = {input}("quel est ton nom ?")
+                    {print}("Ainsi ton nom est ", nom)
+                    ```
+                start_code: |
+                    {print}("Mon nom est hedy !")
+                    nom = {input}("quel est ton nom ?")
+                    {print}("Ainsi ton nom est ", nom)
     blackjack:
         name: Blackjack
         default_save_name: Blackjack
@@ -2228,13 +2240,6 @@ adventures:
                     ```
                     temperature = 25
                     {print}("Il fait ", temperature, " degrés dehors")
-                    ```
-                story_text_3: Le changement final que nous devons faire pour avoir du code Python c'est de remplacer `{ask}` par `{input}`.
-                example_code_3: |
-                    ```
-                    {print}("Mon nom est hedy !")
-                    nom = {input}("quel est ton nom ?")
-                    {print}("Ainsi ton nom est ", nom)
                     ```
                 start_code: |-
                     nom = "Hedy"
