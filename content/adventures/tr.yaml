@@ -422,6 +422,18 @@ adventures:
                     {print} Merhaba isim
                     yaş {is} {ask} Kaç yaşındasın?
                     {print} name age yaşındadır.
+            18:
+                story_text: Python kodunu elde etmek için yapmamız gereken son değişiklik `{ask}` ifadesini `{input}` olarak değiştirmektir.
+                example_code: |
+                    ```
+                    {print}('Benim adım Hedy!')
+                    isim = {input}('Senin adın ne?')
+                    {print}('Demek senin ismin ', isim)
+                    ```
+                start_code: |
+                    {print}('Benim adım Hedy!')
+                    isim = {input}('Senin adın ne?')
+                    {print}('Demek senin ismin ', isim)
     blackjack:
         name: Yirmibir
         default_save_name: Yirmibir
@@ -2523,13 +2535,6 @@ adventures:
                     ```
                     sıcaklık = 25
                     {print}('Hava dışarıda ', sıcaklık, ' derece')
-                    ```
-                story_text_3: Python kodunu elde etmek için yapmamız gereken son değişiklik `{ask}` ifadesini `{input}` olarak değiştirmektir.
-                example_code_3: |
-                    ```
-                    {print}('Benim adım Hedy!')
-                    isim = {input}('Senin adın ne?')
-                    {print}('Demek senin ismin ', isim)
                     ```
                 start_code: |-
                     isim = 'Hedy'

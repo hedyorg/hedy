@@ -395,6 +395,18 @@ adventures:
                     {print} Hoi naam
                     leeftijd {is} {ask} Hoe oud ben je?
                     {print} naam is leeftijd jaar oud.
+            18:
+                story_text: Als laatste veranderen we het woord dat je moet gebruiken voor `{ask}`. Vanaf nu noemen we ask`{input}`.
+                example_code: |
+                    ```
+                    {print}('Mijn naam is Hedy!')
+                    naam = {input}('Hoe heet je?')
+                    {print}('Dus jouw naam is ', naam)
+                    ```
+                start_code: |
+                    {print}('Mijn naam is Hedy!')
+                    naam = {input}('Hoe heet je?')
+                    {print}('Dus jouw naam is ', naam)
     blackjack:
         name: Blackjack
         default_save_name: Blackjack
@@ -2455,13 +2467,6 @@ adventures:
                     ```
                     temperatuur = 25
                     {print}('Het is ', temperatuur, ' graden buiten')
-                    ```
-                story_text_3: Als laatste veranderen we het woord dat je moet gebruiken voor `{ask}`. Vanaf nu noemen we ask`{input}`.
-                example_code_3: |
-                    ```
-                    {print}('Mijn naam is Hedy!')
-                    naam = {input}('Hoe heet je?')
-                    {print}('Dus jouw naam is ', naam)
                     ```
                 start_code: |-
                     naam = 'Hedy'
