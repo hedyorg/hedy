@@ -3182,6 +3182,10 @@ adventures:
                         {print} 'early in the morning'
                     ```
                 start_code: '# écris ton code ici'
+            13:
+                start_code: "{define} song {with} place\n    {print} 'My Bonnie is ' place\n\nchosen_place = {ask} 'Where do you want Bonnie to be?'\nsynonym = {ask} 'What is another word for that?'\n\n{call} song {with} chosen_place\n{call} song {with} synonym\n{call} song {with} chosen_place\n"
+                story_text: "In the previous adventure you have learned how to use an argument in a function, but did you know that you could combine them with {ask} commands as well?\nIn this example we have changed the 'My Bonnie' program and made it interactive. You are now asked where Bonnie is.\n"
+                example_code: "```\n{define} song {with} place\n    {print} 'My Bonnie is ' place\n\nchosen_place = {ask} 'Where do you want Bonnie to be?'\nsynonym = {ask} 'What is another word for that?'\n\n{call} song {with} chosen_place\n{call} song {with} synonym\n{call} song {with} chosen_place\n```\n"
     tic:
         name: Tic Tac Toe
         default_save_name: Tic
@@ -3687,6 +3691,10 @@ adventures:
                     {for} distance {in} distances
                         {forward} distance
                 start_code: '# Write your code here'
+            12:
+                example_code: "```\n{define} square\n    {repeat} 4 {times}\n        {turn} _\n        {forward} _\n{call} square\n{forward} 50\n{call} square\n{forward} 50\n{call} square\n```\n"
+                story_text: "We can use functions to draw more complex figures with less code.\n### Exercise 1\nFill the function so that three squares are created. If you want the image to look nicer, you can make the lines between the squares white.\n\n### Exercise 2\nThe code can be made even shorter. Place the final lines into a `{repeat}` so the figure remains the same.\n\n### Exercise 3\nCreate your own drawing with different figures.\nChange both the number of figures with the `{repeat}` and the shape of the figures in the `{define}`\n"
+                start_code: "{define} square\n    {repeat} 4 {times}\n        {turn} _\n        {forward} _\n{call} square\n{forward} 50\n{call} square\n{forward} 50\n{call} square\n"
     while_command:
         name: '{while}'
         default_save_name: while_command
@@ -3729,3 +3737,56 @@ adventures:
                     {print} 'Happy New Year!'
                     ```
                 start_code: '# écrit to code ici'
+    functions:
+        levels:
+            14:
+                example_code: "```\n{define} calculate_new_price {with} amount, percentage\n    percentage = percentage / 100\n    discount_amount = amount * percentage\n    return amount - discount_amount\n\nold_price = {ask} 'How much is on the price tag?'\ndiscount = {ask} 'What percentage is the discount?'\n\nnew_price = _ calculate_new_price {with} old_price, _\n{print} 'The new price is ' new_price ' dollar'\n```\n"
+                start_code: "{define} calculate_new_price {with} amount, percentage\n    percentage = percentage / 100\n    discount_amount = amount * percentage\n    return amount - discount_amount\n\nold_price = {ask} 'How much is on the price tag?'\ndiscount = {ask} 'What percentage is the discount?'\n\nnew_price = _ calculate_new_price {with} old_price, _\n{print} 'The new price is ' new_price ' dollar'\n"
+                story_text: "In the previous levels you have learned to create functions and use arguments with them. Another great use of a function is to let it calculate something for you.\nYou can give the function a calculation and it will give you the answer of the calculation. This answer is called a **return value**.\n\nFor example, in this code the function calculate_new_price will calculate the new price of any item. It will give you the new price as a return value.\n\n## Exercise\nFinish this code. We have already made the variable new_price for you, you only need to set it.\nYou should finish the line of code by calling the function that calculates the new price.\n"
+            12:
+                start_code: "sides = 'left', 'right'\nlimbs = 'hand', 'foot'\ncolors = 'red', 'blue', 'green', 'yellow'\n\n{define} turn\n    chosen_side = sides {at} {random}\n    chosen_limb = limbs _\n    chosen_color = colors _\n    {print} chosen_side ' ' chosen_limb ' on ' chosen_color\n\n{print} 'Lets play a game of Twister!'\n{for} i {in} {range} 1 to _\n    {call} turn\n    {sleep} 2\n"
+                story_text: "In this level you'll learn how to use **functions**. A function is a block of code you can easily use multiple times. Using functions helps us organize pieces of code that we can use again and again.\nTo create a function, use `{define}` and give the function a name. Then put all the lines you want in the function in a indented block under the `{define}` line.\nLeave one empty line in your code to make it look nice and neat. Great job! You have created a function!\n\nNow, whenever we need that block of code, we just use <code>{call}</code> with the function's name to call it up! We don't have to type that block of code again.\n\nCheck out this example code of a game of Twister. The function 'turn' contains a block of code that chooses which limb should go where.\n\n### Exercise\nFinish this code by setting the 2 variables chosen_limb and chosen_color.\nThen, choose how many times you want to call the function to give the twister spinner a spin.\n\n### Exercise 2\nImprove your code by adding a variable called 'people'. Use the variable to give all the players their own command in the game.\nFor example: 'Ahmed, right hand on green' or 'Jessica, left foot on yellow'.\n"
+                example_code: "```\nsides = 'left', 'right'\nlimbs = 'hand', 'foot'\ncolors = 'red', 'blue', 'green', 'yellow'\n\n{define} turn\n    chosen_side = sides {at} {random}\n    chosen_limb = limbs _\n    chosen_color = colors _\n    {print} chosen_side ' ' chosen_limb ' on ' chosen_color\n\n{print} 'Lets play a game of Twister!'\n{for} i {in} {range} 1 to _\n    {call} turn\n    {sleep} 2\n```\n"
+            13:
+                start_code: "{define} song {with} place\n    {print} 'My Bonnie is over the ' place\n\n{call} song {with} 'ocean'\n{call} song {with} 'sea'\n{call} song {with} 'ocean'\n"
+                story_text: "Now that you've learned how to use functions, you'll learn how to use a function with an argument.\nAn **argument** is a variable that is used within a function. It is not used outside the function.\n\nFor example in this code we've programmed the first verse of the song 'My Bonnie is over the ocean'.\nIn this example code the argument `place` is used. Place is a variable that is only used in the function, so an argument.\nTo use `place` we have programmed the line `define song with place`.\nWhen the function is called, computer will replace the argument `place`, with the piece of text after `call song with`.\n\n### Exercise\nThe next verse of this song goes:\n\nLast night as I lay on my pillow\nLast night as I lay on my bed\nLast night as I lay on my pillow\nI dreamed that my Bonnie is dead\n\nCan you program this verse in the same way as the example?\n"
+                example_code: "```\n{define} song {with} place\n    {print} 'My Bonnie is over the ' place\n\n{call} song {with} 'ocean'\n{call} song {with} 'sea'\n{call} song {with} 'ocean'\n```\n"
+        name: functions
+        description: functions
+        default_save_name: functions
+    hotel:
+        levels:
+            13:
+                start_code: "{define} welcome_message {with} title, last_name, country, room_number\n    {print} 'Welcome to Hotel Hedy, ' title ' ' last_name\n    nice_trip {is} {ask} 'Did you have a nice trip from, ' country '?'\n    {if} nice_trip {is} 'yes'\n        {print} 'Lovely!'\n    {else}\n        {print} 'Sorry to hear that.'\n        {print} 'Hopefully you can take a nice rest in you room.'\n    {print} 'Your room number is ' room_number\n\n{print} 'Hello. Please fill in your information to check in.'\ntitle = {ask} 'What is your title (mr, mrs, ms, dr, etc.)?'\nname = {ask} 'What is you last name?'\nhomecountry = {ask} 'What country do you come from?'\n\n{call} welcome_message {with} title, name, homecountry, 105\n"
+                example_code: "```\n{define} welcome_message {with} title, last_name, country, room_number\n    {print} 'Welcome to Hotel Hedy, ' title ' ' last_name\n    nice_trip {is} {ask} 'Did you have a nice trip from, ' country '?'\n    {if} nice_trip {is} 'yes'\n        {print} 'Lovely!'\n    {else}\n        {print} 'Sorry to hear that.'\n        {print} 'Hopefully you can take a nice rest in you room.'\n    {print} 'Your room number is ' room_number\n\n{print} 'Hello. Please fill in your information to check in.'\ntitle = {ask} 'What is your title (mr, mrs, ms, dr, etc.)?'\nname = {ask} 'What is you last name?'\nhomecountry = {ask} 'What country do you come from?'\n\n{call} welcome_message {with} title, name, homecountry, 105\n```\n"
+                story_text: "In the previous adventure you have learned how to use an argument in a function, and you've learned how to combine it with an {ask}.\nYou might have wondered why you would use functions, because the functions in the example were only one line of code.\nNow we will show you what a bigger function looks like and we will use multiple agruments now as well. You'll see how much better it is to use a function once the function gets bigger.\nHere is an example of a function with arguments combined with {ask} commands.\n"
+        description: hotel
+        default_save_name: hotel
+        name: hotel
+    songs_2:
+        description: Sing a song 2
+        levels:
+            12:
+                start_code: "{define} twinkle\n    {print} 'Twinkle'\n    {print} '...'\n\n{call} twinkle\n{print} 'Up above the world so high'\n{print} 'Like a diamond in the sky'\n{call} _\n"
+                example_code: "```\n{define} twinkle\n    {print} 'Twinkle'\n    {print} '...'\n\n{call} twinkle\n{print} 'Up above the world so high'\n{print} 'Like a diamond in the sky'\n{call} _\n```\n"
+                story_text: "Songs contain a lot of repetition. We can capture it with a function!\n### Exercise\nLook at the example code with the function. Fill out the two lines so the full song is printed.\n"
+        default_save_name: Song 2
+        name: Sing a song! 2
+    calculator_2:
+        levels:
+            14:
+                story_text: "## Exercise 2\n**This is the second part of this adventure.** The adventure starts in the previous tab.\nOf course, you don't always want to calculate the mean of 4 tests. You might want to calculate the mean of 10 tests or only 2...\nWe can fix this problem by adding the argument and variable 'amount_of_tests'.\n* Start a new line on line 3. Set the amount_of_tests argument by asking the student how many tests they have made.\n* Change the 4 in line 4 to the new argument amount_of_tests.\n* Lastly, change the 4 in line 6 to amount_of_tests\n\nTry out your new program. Does it work?\n\n## Exercise 3\nDid you want to make your program even better? Great! In the previous program you could only calculate the mean grade of 1 subject, but it would be better if you could calculate the mean grade for all subjects you want!\nWe won't tell you how to do it, but we will give you one tip: Start your code in line 1 with: define calculate_mean_grade with subject.\n"
+                start_code: "# Use your own code from the previous adventure.\n"
+                example_code: "```\n# Use your own code from the previous adventure.\n```\n"
+        name: Calculator 2
+        default_save_name: Calculator 2
+        description: Calculator 2
+    guess_my_number:
+        description: guess my number
+        levels:
+            14:
+                start_code: '# place your code here'
+                example_code: "```\n{print} 'Guess my number'\nnumbers = 1, 2, 3, 4, 5, 6, 7, 8, 9, 10\nnumber = numbers {at} {random}\ngame = 'on'\n{for} i {in} {range} 1 {to} 10\n    {if} game == 'on'\n        guess = {ask} 'Which number do you think it is?'\n        {if} guess _ number\n            {print} 'Lower!'\n        {if} guess _ number\n            {print} 'Higher!'\n        {if} guess _ number\n            {print} 'You win!'\n            game = 'over'\n```\n"
+                story_text: "In this level you can program the game 'Guess my number'\n\n### Exercise\nFill in the correct symbols on the blanks to get the game to work.\n"
+        name: Guess my number
+        default_save_name: guess my number
