@@ -2526,18 +2526,35 @@ adventures:
             16:
                 story_text: |-
                     We are going to make lists the Python way, with square brackets around the lists! We also keep the quotation marks around each item like we have learned in previous levels.
-                    We use square brackets to point out a place in a list. The {at} {random} command can not be used anymore.
+                    We use square brackets to point out a place in a list. For example: `friends[1]` is the first name on the list of friends, as you can see in the first part of the example code. The second part of the example code shows you that we can also match 2 lists using the variable i.
                 example_code: |
                     ```
                     friends = ['Ahmed', 'Ben', 'Cayden']
+                    {print} friends[1] ' is the first friend on the list.'
+                    {print} friends[2] ' is the second friend on the list.'
+                    {print} friends[3] ' is the third friend on the list.'
+                    #now we will match 2 lists using the variable i
                     lucky_numbers = [15, 18, 6]
                     {for} i {in} {range} 1 {to} 3
-                        {print} 'the lucky number of ' friends[i]
-                        {print} 'is ' lucky_numbers[i]
+                        {print} friends[i] 's lucky number is ' lucky_numbers[i]
                     ```
-                start_code: |-
+                story_text_2: |-
+                    Now that you've learned to use the brackets in lists, you can also start using the {at} {random} command in the Python way!
+                    You simply type the name of your list with `[random]` behind it!
+                example_code_2: |-
+                    ```
                     fruit = ['apple', 'banana', 'cherry']
                     {print} fruit[random]
+                    ```
+                start_code: |-
+                    friends = ['Ahmed', 'Ben', 'Cayden']
+                    {print} friends[1] ' is the first friend on the list.'
+                    {print} friends[2] ' is the second friend on the list.'
+                    {print} friends[3] ' is the third friend on the list.'
+                    #now we will match 2 lists using the variable i
+                    lucky_numbers = [15, 18, 6]
+                    {for} i {in} {range} 1 {to} 3
+                        {print} friends[i] 's lucky number is ' lucky_numbers[i]
     repeat_command:
         name: '{repeat}'
         default_save_name: repeat_command
