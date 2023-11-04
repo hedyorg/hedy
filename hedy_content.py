@@ -29,7 +29,7 @@ customize_babel_locale(CUSTOM_BABEL_LANGUAGES)
 KEYWORDS_ADVENTURES = {'print_command', 'ask_command', 'is_command', 'sleep_command', 'random_command',
                        'add_remove_command', 'quotation_marks', 'if_command', 'in_command', 'maths', 'repeat_command',
                        'repeat_command_2', 'for_command', 'and_or_command', 'while_command', 'elif_command',
-                       'clear_command', 'pressit', 'clear_command', 'functions'}
+                       'clear_command', 'pressit', 'debugging', 'functions'}
 
 ADVENTURE_ORDER_PER_LEVEL = {
     1: [
@@ -43,6 +43,7 @@ ADVENTURE_ORDER_PER_LEVEL = {
         'turtle',
         'restaurant',
         'fortune',
+        'debugging'
     ],
     2: [
         'default',
@@ -55,7 +56,8 @@ ADVENTURE_ORDER_PER_LEVEL = {
         'parrot',
         'story',
         'restaurant',
-        'turtle'
+        'turtle',
+        'debugging'
     ],
     3: [
         'default',
@@ -69,7 +71,8 @@ ADVENTURE_ORDER_PER_LEVEL = {
         'dishes',
         'story',
         'haunted',
-        'turtle'
+        'turtle',
+        'debugging'
     ],
     4: [
         'default',
@@ -83,7 +86,8 @@ ADVENTURE_ORDER_PER_LEVEL = {
         'story',
         'haunted',
         'fortune',
-        'restaurant'
+        'restaurant',
+        'debugging'
     ],
     5: [
         'default',
@@ -99,7 +103,8 @@ ADVENTURE_ORDER_PER_LEVEL = {
         'restaurant',
         'fortune',
         'pressit',
-        'turtle'
+        'turtle',
+        'debugging'
     ],
     6: [
         'default',
@@ -111,7 +116,8 @@ ADVENTURE_ORDER_PER_LEVEL = {
         'turtle',
         'calculator',
         'fortune',
-        'restaurant'
+        'restaurant',
+        'debugging'
     ],
     7: [
         'default',
@@ -123,7 +129,8 @@ ADVENTURE_ORDER_PER_LEVEL = {
         'repeat_command_2',
         'fortune',
         'restaurant',
-        'pressit'
+        'pressit',
+        'debugging'
     ],
     8: [
         'default',
@@ -135,7 +142,8 @@ ADVENTURE_ORDER_PER_LEVEL = {
         'story',
         'haunted',
         'restaurant',
-        'turtle'
+        'turtle',
+        'debugging'
     ],
     9: [
         'default',
@@ -147,7 +155,8 @@ ADVENTURE_ORDER_PER_LEVEL = {
         'restaurant',
         'haunted',
         'pressit',
-        'turtle'
+        'turtle',
+        'debugging'
     ],
     10: [
         'default',
@@ -162,6 +171,7 @@ ADVENTURE_ORDER_PER_LEVEL = {
         'rock',
         'calculator',
         'restaurant',
+        'debugging'
     ],
     11: [
         'default',
@@ -170,7 +180,8 @@ ADVENTURE_ORDER_PER_LEVEL = {
         'calculator',
         'songs',
         'restaurant',
-        'haunted'
+        'haunted',
+        'debugging'
     ],
     12: [
         'default',
@@ -185,7 +196,8 @@ ADVENTURE_ORDER_PER_LEVEL = {
         'calculator',
         'turtle',
         'piggybank',
-        'secret'
+        'secret',
+        'debugging'
     ],
     13: [
         'default',
@@ -198,7 +210,8 @@ ADVENTURE_ORDER_PER_LEVEL = {
         'rock',
         'restaurant',
         'calculator',
-        'tic'
+        'tic',
+        'debugging'
     ],
     14: [
         'default',
@@ -211,7 +224,8 @@ ADVENTURE_ORDER_PER_LEVEL = {
         'calculator_2',
         'piggybank',
         'quizmaster',
-        'tic'
+        'tic',
+        'debugging'
     ],
     15: [
         'default',
@@ -221,28 +235,32 @@ ADVENTURE_ORDER_PER_LEVEL = {
         'dice',
         'rock',
         'calculator',
-        'tic'
+        'tic',
+        'debugging'
     ],
     16: [
         'default',
         'random_command',
         'haunted',
         'songs',
-        'language'
+        'language',
+        'debugging'
     ],
     17: [
         'default',
         'for_command',
         'elif_command',
         'tic',
-        'blackjack'
+        'blackjack',
+        'debugging'
     ],
     18: [
         'default',
         'print_command',
         'ask_command',
         'story',
-        'songs'
+        'songs',
+        'debugging'
     ]
 }
 
