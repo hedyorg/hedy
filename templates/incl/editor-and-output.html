@@ -200,7 +200,7 @@
             <button class="green-btn previous-tab ltr:ml-1 rtl:mr-1" 
               href="#"
               _="on load or click from .tab
-                set :els to getPreviousAndNext()
+                set :els to hedyApp.getPreviousAndNext()
                 if :els[0]
                   set *display to 'block'
                   set the *justify-content of #pagination_container to 'space-between' 
@@ -209,21 +209,60 @@
                   set the *justify-content of #pagination_container to 'flex-end' 
                   set *display to 'none'
                 end
-                put '&LongLeftArrow; ' + prevContent into my innerHTML
+                if body[@dir] == 'rtl'
+                  set arrow to '&LongRightArrow; '
+                else
+                  set arrow to '&LongLeftArrow; '
+                end
+                put arrow + prevContent into my innerHTML
                 on click call :els[0].click()"></button>
+            <!-- 
+              TODO:
+              investigate why next_level is always incremented instead of assigned to the level that's actually next.
+              For instance, disable level 2, but leave the rest enabled; now next_level is 2 but should be 3.
+             -->
+            {% if prev_level and (not customizations or prev_level in customizations['available_levels']) %}
+              <div class="flex-1">
+                <a id="prev_level_button"
+                  class="green-btn ltr:ml-1 rtl:mr-1 hidden"
+                  href="{{ hedy_link(prev_level, 1) }}"
+                  _="on load or click from .tab
+                      if the *display of .previous-tab is 'none'
+                        toggle .hidden on me
+                      else
+                        add .hidden to me
+                      end">{{_('regress_button')|replace("{level}", prev_level)}}</a>
+              </div>
+            {% endif %}
 
             <button class="green-btn next-tab ltr:ml-1 rtl:mr-1" 
               href="#"
               _="on load or click from .tab
-                set :els to getPreviousAndNext()
+                set :els to hedyApp.getPreviousAndNext()
                 if :els[1]
                   set *display to 'block'
                   set nextContent to :els[1].innerHTML.trim()
                 else
                   set *display to 'none'
                 end
-                put nextContent + ' &LongRightArrow;' into my innerHTML
+                if body[@dir] == 'rtl'
+                  set arrow to ' &LongLeftArrow;'
+                else
+                  set arrow to ' &LongRightArrow;'
+                end
+                put nextContent + arrow into my innerHTML
                 on click call :els[1].click()"></button>
+            {% if not quiz and not parsons and next_level and (not customizations or next_level in customizations['available_levels']) %}
+              <a id="next_level_button"
+                class="green-btn ltr:ml-1 rtl:mr-1 hidden"
+                href="{{ hedy_link(next_level, 1) }}"
+                _="on load or click from .tab
+                    if the *display of .next-tab is 'none'
+                      toggle .hidden on me
+                    else
+                      add .hidden to me
+                    end">{{_('advance_button')|replace("{level}", next_level)}}</a>
+            {% endif %}
           </div>
     </div>
   </div>
@@ -319,17 +358,3 @@ $(document).ready(function () {
 });
 </script>
 {% endif %}
-
-<script>
-  function getPreviousAndNext(el) {
-    const selected = document.querySelector('.tab-selected')
-    const i = parseInt(selected.getAttribute('tabindex'))
-    // console.log('current', i, selected)
-    const prev = document.querySelector(`.tab[tabindex='${i-1}']`)
-    // console.log(prev)
-    const next = document.querySelector(`.tab[tabindex='${i+1}']`)
-    // console.log('next', next)
-
-    return [prev, next]
-  }
-</script>
