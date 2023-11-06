@@ -17,6 +17,13 @@ import {
     forward as forward2, turn as turn2, sleep as sleep2, is as is2
 } from "./level2-parser.terms";
 
+import {
+    print as print3, ask as ask3, color as color3,
+    forward as forward3, turn as turn3, sleep as sleep3, is as is3,
+    add as add3, remove as remove3, from as from3, to_list as to_list3,
+    at as at3, random as random3
+} from "./level3-parser.terms"
+
 import TRADUCTION_IMPORT from '../../../highlighting/highlighting-trad.json';
 export interface InitializeCodeMirrorSyntaxHighlighterOptions {
     readonly keywordLanguage: string;
@@ -52,6 +59,25 @@ const keywordToToken: Record<number, tokenSpecilizer> = {
         },
         specialize: {
             "ask": ask2,
+        }
+    },
+    3: {
+        extend: {
+            "print": print3,
+            "forward": forward3,
+            "turn": turn3,
+            "color": color3,
+            "sleep": sleep3,
+            "is": is3,
+            "add": add3,
+            "remove": remove3,
+            "from": from3,
+            "to_list": to_list3,
+        },
+        specialize: {
+            "ask": ask3,
+            "at": at3,
+            "random": random3
         }
     },
     18 : {
@@ -109,9 +135,6 @@ export function initializeTranslation(options: InitializeCodeMirrorSyntaxHighlig
             extendTranslations.set(key, value);
         }
     }
-
-    console.log("specializeTranslations", specializeTranslations);
-    console.log("extendTranslations", extendTranslations);
 }
 
 export function specializeKeyword(name: string) {

@@ -14,7 +14,4 @@ export const
   Ask = 12,
   Echo = 13,
   Turtle = 14,
-  Forward = 15,
-  Turn = 16,
-  Color = 17,
   ErrorInvalid = 18

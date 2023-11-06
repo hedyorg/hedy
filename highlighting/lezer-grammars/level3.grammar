@@ -3,32 +3,46 @@ Command {
     Assign | AssignList | Ask | Print | Turtle | Sleep | Add | Remove | ErrorInvalid
 }
 
-Print { skw<"print"> ( Text | ListAccess )+ }
+Print { print+ ( Text | ListAccess )+ }
+AssignList { Text is+ Text+ (Comma Text+)+ }
+Assign { Text is+ (Text+ | ListAccess) }
+Ask { Text is+ ask+ (Text)+ }
+Sleep { sleep+ (Text | ListAccess) }
+ListAccess { Text at+ (random+ | Text) }
+Add { add+ Text to_list+ Text }
+Remove { remove+ Text from+ Text }
 
-AssignList { Text skw<"is"> Text+ (Comma Text+)+ } // comma doesn't really parse well if it is not separated by spaces
-Assign { Text skw<"is"> (Text+ | ListAccess) }
-Ask { Text skw<"is"> kw<"ask"> (Text)+ }
-Sleep { skw<"sleep"> (Text | ListAccess) }
-
-ListAccess { Text kw<"at"> (kw<"random"> | Text) }
 Turtle[@isGroup=turtle] {
-    Forward { skw<"forward"> (Text | ListAccess ) } |
-    Turn { skw<"turn"> (Text | ListAccess ) } |
-    Color { skw<"color"> (Text | ListAccess)  }
+    Forward { forward+ (Text | ListAccess ) } |
+    Turn { turn+ (Text | ListAccess ) } |
+    Color { color+ (Text | ListAccess)  }
 }
-
-Add { skw<"add"> Text skw<"to"> Text }
-Remove { skw<"remove"> Text skw<"from"> Text }
 
 ErrorInvalid[@dynamicPrecedence=-10] { Text+ }
 
-kw<term> { @specialize[@name={term}]<Text, term> }
-skw<term> { @extend[@name={term}]<Text, term> }
-Comma { "," }
+@external specialize { Text } specializeKeyword from "./tokens" {
+    ask[@name="ask"],
+    at[@name="at"],
+    random[@name="random"]
+}
+
+@external extend { Text } extendKeyword from "./tokens" {
+    print[@name="print"],
+    forward[@name="forward"],
+    turn[@name="turn"],
+    color[@name="color"],
+    sleep[@name="sleep"],
+    is[@name="is"],
+    add[@name="add"],
+    from[@name="from"],
+    remove[@name="remove"],
+    to_list[@name="to_list"]
+}
 
 @tokens {
     Comment { "#" ![\n]* }
     eol { "\n" }
+    Comma { $[,،，、] } // every language comma is valid here
     Text { ![^\n,،，、 #]+ } // a little bit of a hack not to parse commas never, but lezer adds them as error nodes, so it still
     space { " " }
 }
