@@ -10,8 +10,8 @@ export function loginForTeacher(username="teacher1") {
     cy.wait(500);
 }
 
-export function loginForStudent() {
-    login("student1", "123456");
+export function loginForStudent(student="student1") {
+    login(student, "123456");
     cy.wait(500);
 }
 
