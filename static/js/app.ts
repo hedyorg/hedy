@@ -1600,7 +1600,13 @@ export function toggle_developers_mode(enforced: boolean) {
 
 export function toggle_keyword_language(lang: string) {
   const hash = window.location.hash;
-  window.open('?keyword_language=' + lang + hash, "_self");
+  let args = window.location.search;
+  if (args.includes('keyword_language')) {
+    args = args.replace(/keyword_language=[a-z]+/, 'keyword_language=' + lang)
+  } else {
+    args = args ? `${args}&keyword_language=${lang}` : `?keyword_language`
+  }
+  window.open(args + hash, "_self");
 }
 
 export function toggle_blur_code() {
