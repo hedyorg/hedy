@@ -220,16 +220,24 @@ class ForTeachersModule(WebsiteModule):
             ))
     
     @route("/load-survey")
-    def load_survey(self, title, questions):
-        return render_partial('htmx-survey.html', survey_title=title, questions=questions)
+    def load_survey(self, description, questions):
+        return render_partial('htmx-survey.html', description=description, questions=questions)
 
-    @route("/submit-survey/", methods=['POST'])
-    def submit_survey(self):
-        teacher_responses = {}
+    @route("/submit-survey", methods=['POST'])
+    @requires_login
+    def submit_survey(self, user):
+        if not is_teacher(user) and not is_admin(user):
+            return utils.error_page(error=403, ui_message=gettext("retrieve_class_error"))
+        Class = self.db.get_class(session['class_id'])
+        if not Class or (Class["teacher"] != user["username"] and not is_admin(user)):
+            return utils.error_page(error=404, ui_message=gettext("no_such_class"))
+        
+        responses = {}
         for key, value in request.form.items():
             if key.startswith("answer"):
-                teacher_responses[key] = value
-        # # Handle the teachers's survey responses
+                logging.debug(value)
+                responses[key] = value
+        # # Handle the survey responses
         return ''
     
     @route("/class-survey", methods=['GET'])
