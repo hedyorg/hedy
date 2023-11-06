@@ -107,7 +107,7 @@ DATABASE = database.Database()
 ACHIEVEMENTS = achievements.Achievements(DATABASE, ACHIEVEMENTS_TRANSLATIONS)
 
 
-def load_adventures_for_level(level):
+def load_adventures_for_level(level, subset=None):
     """Load the adventures available to the current user at the given level.
 
     These are the default adventures, with the customizations implied
@@ -120,7 +120,10 @@ def load_adventures_for_level(level):
     keyword_lang = g.keyword_lang
 
     all_adventures = []
-    adventures = ADVENTURES[g.lang].get_adventures(keyword_lang)
+    if subset:
+        adventures = ADVENTURES[g.lang].get_adventures_subset(subset, keyword_lang)
+    else:
+        adventures = ADVENTURES[g.lang].get_adventures(keyword_lang)
 
     for short_name, adventure in adventures.items():
         adventure_level = adventure['levels'].get(level, None)
@@ -1099,6 +1102,185 @@ def teacher_tutorial(user):
                                page='for-teachers',
                                tutorial=True,
                            ))
+
+# routing to index.html
+@app.route('/hour-of-code/<int:level>', methods=['GET'])
+@app.route('/hour-of-code', methods=['GET'], defaults={'level': 1})
+def hour_of_code(level, program_id=None):
+    try:
+        level = int(level)
+        if level < 1 or level > hedy.HEDY_MAX_LEVEL:
+            return utils.error_page(error=404, ui_message=gettext('no_such_level'))
+    except BaseException:
+        return utils.error_page(error=404, ui_message=gettext('no_such_level'))
+
+    loaded_program = None
+    if program_id:
+        result = DATABASE.program_by_id(program_id)
+        if not result or not current_user_allowed_to_see_program(result):
+            return utils.error_page(error=404, ui_message=gettext('no_such_program'))
+
+        loaded_program = Program.from_database_row(result)
+
+    language = request.args.get("language", g.lang)
+    g.lang = language
+    keyword_language = request.args.get("keyword_language", g.keyword_lang)
+    g.keyword_lang = keyword_language
+
+    subset = [adv.strip() for adv in request.args.get("subset", "").strip().split(",")]
+    subset = subset if subset[0] else ["print_command", "parrot"]
+    adventures = load_adventures_for_level(level, subset=subset)
+
+    if not adventures:
+        return utils.error_page(error=404, ui_message=gettext("no_such_adventure"))
+
+    # Initially all levels are available -> strip those for which conditions
+    # are not met or not available yet
+    available_levels = list(range(1, hedy.HEDY_MAX_LEVEL + 1))
+
+    customizations = {}
+    if current_user()['username']:
+        customizations = DATABASE.get_student_class_customizations(current_user()['username'])
+
+    if 'levels' in customizations:
+        available_levels = customizations['levels']
+        now = timems()
+        for current_level, timestamp in customizations.get('opening_dates', {}).items():
+            if utils.datetotimeordate(timestamp) > utils.datetotimeordate(utils.mstoisostring(now)):
+                try:
+                    available_levels.remove(int(current_level))
+                except BaseException:
+                    print("Error: there is an openings date without a level")
+
+    if 'levels' in customizations and level not in available_levels:
+        return utils.error_page(error=403, ui_message=gettext('level_not_class'))
+
+    # At this point we can have the following scenario:
+    # - The level is allowed and available
+    # - But, if there is a quiz threshold we have to check again if the user has reached it
+
+    if 'level_thresholds' in customizations:
+        if 'quiz' in customizations.get('level_thresholds'):
+            # Temporary store the threshold
+            threshold = customizations.get('level_thresholds').get('quiz')
+            # Get the max quiz score of the user in the previous level
+            # A bit out-of-scope, but we want to enable the next level button directly after finishing the quiz
+            # Todo: How can we fix this without a re-load?
+            quiz_stats = DATABASE.get_quiz_stats([current_user()['username']])
+            # Only check the quiz threshold if there is a quiz to obtain a score on the previous level
+            if level > 1 and QUIZZES[g.lang].get_quiz_data_for_level(level - 1):
+                scores = [x.get('scores', []) for x in quiz_stats if x.get('level') == level - 1]
+                scores = [score for week_scores in scores for score in week_scores]
+                max_score = 0 if len(scores) < 1 else max(scores)
+                if max_score < threshold:
+                    return utils.error_page(
+                        error=403, ui_message=gettext('quiz_threshold_not_reached'))
+
+            # We also have to check if the next level should be removed from the available_levels
+            # Only check the quiz threshold if there is a quiz to obtain a score on the current level
+            if level < hedy.HEDY_MAX_LEVEL and QUIZZES[g.lang].get_quiz_data_for_level(level):
+                scores = [x.get('scores', []) for x in quiz_stats if x.get('level') == level]
+                scores = [score for week_scores in scores for score in week_scores]
+                max_score = 0 if len(scores) < 1 else max(scores)
+                # We don't have the score yet for the next level -> remove all upcoming
+                # levels from 'available_levels'
+                if max_score < threshold:
+                    # if this level is currently available, but score is below max score
+                    customizations["below_threshold"] = (level + 1 in available_levels)
+                    available_levels = available_levels[:available_levels.index(level) + 1]
+
+    # Add the available levels to the customizations dict -> simplify
+    # implementation on the front-end
+    customizations['available_levels'] = available_levels
+    cheatsheet = COMMANDS[g.lang].get_commands_for_level(level, g.keyword_lang)
+
+    load_customized_adventures(level, customizations, adventures)
+    load_saved_programs(level, adventures, loaded_program)
+    initial_tab = adventures[0].short_name
+
+    if loaded_program:
+        # Make sure that there is an adventure(/tab) for a loaded program, otherwise make one
+        initial_tab = loaded_program.adventure_name
+        if not any(a.short_name == loaded_program.adventure_name for a in adventures):
+            adventures.append(Adventure(
+                short_name=loaded_program.adventure_name,
+                # This is not great but we got nothing better :)
+                name=gettext('your_program'),
+                text='',
+                example_code='',
+                start_code=loaded_program.code,
+                save_name=loaded_program.name,
+                is_teacher_adventure=False,
+                is_command_adventure=loaded_program.adventure_name in KEYWORDS_ADVENTURES
+            ))
+
+    adventures_map = {a.short_name: a for a in adventures}
+
+    enforce_developers_mode = False
+    if 'other_settings' in customizations and 'developers_mode' in customizations['other_settings']:
+        enforce_developers_mode = True
+
+    hide_cheatsheet = False
+    if 'other_settings' in customizations and 'hide_cheatsheet' in customizations['other_settings']:
+        hide_cheatsheet = True
+
+    parsons = True if PARSONS[g.lang].get_parsons_data_for_level(level) else False
+    quiz = True if QUIZZES[g.lang].get_quiz_data_for_level(level) else False
+    tutorial = True if TUTORIALS[g.lang].get_tutorial_for_level(level) else False
+
+    quiz_questions = 0
+    parson_exercises = 0
+
+    if quiz:
+        quiz_questions = len(QUIZZES[g.lang].get_quiz_data_for_level(level))
+    if parsons:
+        parson_exercises = len(PARSONS[g.lang].get_parsons_data_for_level(level))
+
+    if 'other_settings' in customizations and 'hide_parsons' in customizations['other_settings']:
+        parsons = False
+    if 'other_settings' in customizations and 'hide_quiz' in customizations['other_settings']:
+        quiz = False
+
+    # max_level = hedy.HEDY_MAX_LEVEL
+    level_number = int(level)
+
+    commands = hedy.commands_per_level.get(level)
+    return render_template(
+        "code-page.html",
+        level_nr=str(level_number),
+        level=level_number,
+        current_page='Hour of Code',
+        prev_level=None,
+        next_level=None,
+        # prev_level=level_number - 1 if level_number > 1 else None,
+        # next_level=level_number + 1 if level_number < max_level else None,
+        # customizations=customizations,
+        hide_cheatsheet=hide_cheatsheet,
+        # enforce_developers_mode=enforce_developers_mode,
+        enforce_developers_mode=enforce_developers_mode,
+        loaded_program=loaded_program,
+        adventures=adventures,
+        initial_tab=initial_tab,
+        commands=commands,
+        parsons=parsons,
+        parsons_exercises=parson_exercises,
+        tutorial=tutorial,
+        latest=version(),
+        # quiz=quiz,
+        quiz_questions=quiz_questions,
+        cheatsheet=cheatsheet,
+        blur_button_available=False,
+        initial_adventure=adventures_map[initial_tab],
+        current_user_is_in_class=len(current_user().get('classes') or []) > 0,
+        # See initialize.ts
+        javascript_page_options=dict(
+            page='code',
+            level=level_number,
+            lang=g.lang,
+            adventures=adventures,
+            initial_tab=initial_tab,
+            current_user_name=current_user()['username'],
+        ))
 
 
 # routing to index.html

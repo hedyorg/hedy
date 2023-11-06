@@ -375,6 +375,10 @@ class Adventures(StructuredDataFile):
     def get_adventures(self, keyword_lang="en"):
         return deep_translate_keywords(self.file.get('adventures'), keyword_lang)
 
+    def get_adventures_subset(self, subset=["print_command", "parrot"], keyword_lang="en"):
+        adventures = {aid: adv for aid, adv in self.file.get('adventures', {}).items() if aid in subset}
+        return deep_translate_keywords(adventures, keyword_lang)
+
     def has_adventures(self):
         return True if self.file.get('adventures') else False
 
