@@ -1,6 +1,7 @@
 import { parser as level1Parser} from './level1-parser'
 import { parser as level2Parser} from './level2-parser'
 import { parser as level3Parser} from './level3-parser'
+import { parser as level4Parser} from './level4-parser'
 import { parser as level18Parser} from './level18-parser'
 import { tags as t } from "@lezer/highlight";
 import { LRParser } from '@lezer/lr';
@@ -30,9 +31,20 @@ export let languagePerLevel: Record<number, languageSupport> ={
     3: {
         parser: level3Parser,
         styleTags: {
-            "print forward turn color ask is echo sleep Op at random remove from add to": t.keyword,   
+            "print forward turn color ask is echo sleep Op at random remove from add to Comma": t.keyword,   
             Comment: t.lineComment,
             "Name": t.name,
+            "Command/ErrorInvalid/Text": t.invalid,
+        }
+    },
+    4: {
+        parser: level4Parser,
+        styleTags: {
+            "print forward turn color ask is echo sleep Op at random remove from add to Comma": t.keyword,
+            "clear": t.color, 
+            Comment: t.lineComment,
+            "Name": t.name,
+            "String": t.string,
             "Command/ErrorInvalid/Text": t.invalid,
         }
     },

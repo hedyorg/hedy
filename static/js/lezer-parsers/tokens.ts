@@ -24,6 +24,13 @@ import {
     at as at3, random as random3
 } from "./level3-parser.terms"
 
+import {
+    print as print4, ask as ask4, color as color4,
+    forward as forward4, turn as turn4, sleep as sleep4, is as is4,
+    add as add4, remove as remove4, from as from4, to_list as to_list4,
+    at as at4, random as random4, clear as clear4
+} from "./level4-parser.terms"
+
 import TRADUCTION_IMPORT from '../../../highlighting/highlighting-trad.json';
 export interface InitializeCodeMirrorSyntaxHighlighterOptions {
     readonly keywordLanguage: string;
@@ -78,6 +85,26 @@ const keywordToToken: Record<number, tokenSpecilizer> = {
             "ask": ask3,
             "at": at3,
             "random": random3
+        }
+    },
+    4: {
+        extend: {
+            "print": print4,
+            "forward": forward4,
+            "turn": turn4,
+            "color": color4,
+            "sleep": sleep4,
+            "is": is4,
+            "add": add4,
+            "remove": remove4,
+            "from": from4,
+            "to_list": to_list4,
+            "clear": clear4
+        },
+        specialize: {
+            "ask": ask4,
+            "at": at4,
+            "random": random4
         }
     },
     18 : {
