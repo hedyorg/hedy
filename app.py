@@ -1104,6 +1104,8 @@ def teacher_tutorial(user):
                            ))
 
 # routing to index.html
+
+
 @app.route('/hour-of-code/<int:level>', methods=['GET'])
 @app.route('/hour-of-code', methods=['GET'], defaults={'level': 1})
 def hour_of_code(level, program_id=None):
