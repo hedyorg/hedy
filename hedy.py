@@ -1126,6 +1126,7 @@ class IsValid(Filter):
 
     def error_list_access(self, meta, args):
         # for now copying another function, to test whether anything is being done at all
+
         error = InvalidInfo('misspelled "at" command', arguments=[str(args[0])], line=meta.line, column=meta.column)
         return False, error, meta
 
@@ -1341,9 +1342,15 @@ class ConvertToPython(Transformer):
             return args
         else:
             # TODO: check whether this is really never raised??
+            # It is being raised! In case of the following command: 'print animals at inde'
+            # In this case 'animals' is a correct list and 'inde' is an unset variable
+            # This means the var setting has to be altered a bit here
             # return first name with issue
             first_unquoted_var = unquoted_args[0]
-            raise exceptions.UndefinedVarException(name=first_unquoted_var, line_number=var_access_linenumber)
+            for a in unquoted_args:
+                if a == 'None':
+                    a = first_unquoted_var
+                    raise exceptions.UndefinedVarException(name=first_unquoted_var, line_number=var_access_linenumber)
 
     # static methods
     @staticmethod
