@@ -56,6 +56,15 @@ import {
     repeat as repeat7, times as times7, 
 } from "./level7-parser.terms"
 
+import {
+    print as print8, ask as ask8, color as color8,
+    forward as forward8, turn as turn8, sleep as sleep8, is as is8,
+    add as add8, remove as remove8, from as from8, to_list as to_list8,
+    at as at8, random as random8, clear as clear8, ifs as if8,
+    elses as else8, ins as in8, pressed as pressed8, not_in as not_in8,
+    repeat as repeat8, times as times8, 
+} from "./level8-parser.terms"
+
 import TRADUCTION_IMPORT from '../../../highlighting/highlighting-trad.json';
 export interface InitializeCodeMirrorSyntaxHighlighterOptions {
     readonly keywordLanguage: string;
@@ -208,6 +217,33 @@ const keywordToToken: Record<number, tokenSpecilizer> = {
             "random": random7,
             "else": else7
         },        
+    },
+    8: {
+        extend: {
+            "print": print8,
+            "forward": forward8,
+            "turn": turn8,
+            "color": color8,
+            "sleep": sleep8,
+            "is": is8,
+            "add": add8,
+            "remove": remove8,
+            "from": from8,
+            "to_list": to_list8,
+            "clear": clear8,
+            "not_in": not_in8,
+            "in": in8,
+            "repeat": repeat8,
+            "times": times8
+        },
+        specialize: {
+            "if": if8,
+            "pressed": pressed8,
+            "ask": ask8,
+            "at": at8,
+            "random": random8,
+            "else": else8
+        },
     },
     18 : {
         specialize: {
