@@ -130,12 +130,10 @@ export interface HedyEditor {
   /**
    * Set the current line in the debugger
    */
-  setDebuggerCurrentLine(line: number | undefined): void;
-  
-  /** 
-   * Return the contents of the lines that are active as a string, meaning they don't have a marker
-   * in the gutter. 
-   * @param debugLine the current debug line, if there is one
+  setDebuggerCurrentLine(line?: number, startPos?: number, finishPos?: number): void;
+
+  /**
+   * Mark the given set of lines as currently struck through
    */
   getActiveContents(debugLine?: string | null): string;
 }

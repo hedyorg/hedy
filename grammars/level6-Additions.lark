@@ -10,7 +10,7 @@ ask: var (_IS | _EQUALS) _ASK (_print_argument)?
 
 equality_check: (textwithoutspaces | INT) (_IS | _EQUALS) (quoted_text| textwithoutspaces | INT)
 
-condition:+= equality_check -= equality_check
+condition:+=  in_list_check | not_in_list_check | equality_check
 
 list_access_var: var (_IS | _EQUALS) var _AT (INT | random)
 assign_button: NAME (_IS | _EQUALS) _BUTTON

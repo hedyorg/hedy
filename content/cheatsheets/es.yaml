@@ -35,7 +35,7 @@
         color {is} {ask} ¿Cuál es tu color favorito?
         {print} El color es tú favorito!
 -   name: '{sleep}'
-    explanation: '`{sleep}` Permite a Hedy tomar una pausa por un (par de) segundo(s).'
+    explanation: Con `{sleep}`, puedes dejar que Hedy haga una pausa de un (par de) segundo(s).
     demo_code: |-
         {print} Déjame pensar por un segundo...
         {sleep}
@@ -184,7 +184,7 @@
             {forward} 50
 10:
 -   name: '{print}'
-    explanation: Imprime algo. Recuerda usar una comilla para para imprimir literalmente.
+    explanation: Imprime algo. Recuerde utilizar las comillas para la impresión literal.
     demo_code: '{print} ''5 por 5 es '' 5 * 5'
 -   name: '{for} con una lista'
     explanation: Muestra todas las cosas en una lista.
@@ -316,7 +316,7 @@
         primerafruta = fruta[1]
         {print} primerafruta
 -   name: Coge un elemento aleatorio de una lista
-    explanation: Para coger un elemento aleatorio de una lista usamos [aleatorio] así que fruta[aleatorio] significa, ¡coge una fruta aleatoria de la lista!
+    explanation: Para obtener un elemento aleatorio de una lista usamos [{random}] así que fruta [{random}] significa, ¡obtén una fruta aleatoria de la lista!
     demo_code: |-
         fruta = ['plátano', 'manzana', 'cereza']
         fruta_aleatoria = fruta[{random}]

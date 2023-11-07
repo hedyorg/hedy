@@ -98,7 +98,8 @@ def remember_current_user(db_user):
     session["keyword_lang"] = db_user.get("keyword_language", "en")
 
     # Prepare the cached user object
-    session["user"] = pick(db_user, "username", "email", "is_teacher")
+    session["user"] = pick(db_user, "username", "email", "is_teacher", "second_teacher_in")
+    session["user"]["second_teacher_in"] = db_user.get("second_teacher_in", [])
     # Classes is a set in dynamo, but it must be converted to an array otherwise it cannot be stored in a session
     session["user"]["classes"] = list(db_user.get("classes", []))
 
@@ -120,10 +121,10 @@ def force_json_serializable_type(x):
 # Retrieve the current user from the Flask session.
 #
 # If the current user is too old, as determined by the time-to-live, we repopulate from the database.
-def current_user():
+def current_user(refresh=False):
     now = times()
     ttl = session.get("user-ttl", None)
-    if ttl is None or now >= ttl:
+    if ttl is None or now >= ttl or refresh:
         refresh_current_user_from_db()
 
     user = session.get("user", {"username": "", "email": ""})
@@ -169,9 +170,16 @@ def is_admin(user):
     return user.get("username") in admin_users or user.get("email") in admin_users
 
 
-def is_teacher(user):
+def is_teacher(user, cls=None):
     # the `is_teacher` field is either `0`, `1` or not present.
     return bool(user.get("is_teacher", False))
+
+
+def is_second_teacher(user, class_id=None):
+    # the `second_teacher_in` field indicates the classes where the user is a second teacher.
+    if not class_id:
+        return bool(user.get("second_teacher_in", False))
+    return is_teacher(user) and class_id in user.get("second_teacher_in", [])
 
 
 def has_public_profile(user):

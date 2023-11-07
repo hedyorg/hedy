@@ -1,4 +1,6 @@
 # coding=utf-8
+import base64
+import binascii
 import collections
 import copy
 import logging
@@ -42,8 +44,9 @@ from website import (ab_proxying, achievements, admin, auth_pages, aws_helpers,
                      cdn, classes, database, for_teachers, s3_logger, parsons,
                      profile, programs, querylog, quiz, statistics,
                      translating)
-from website.auth import (current_user, is_admin, is_teacher, has_public_profile,
-                          login_user_from_token_cookie, requires_login, requires_login_redirect, requires_teacher)
+from website.auth import (current_user, is_admin, is_teacher, is_second_teacher, has_public_profile,
+                          login_user_from_token_cookie, requires_login, requires_login_redirect, requires_teacher,
+                          forget_current_user)
 from website.log_fetcher import log_fetcher
 from website.frontend_types import Adventure, Program, ExtraStory, SaveInfo
 
@@ -392,7 +395,8 @@ if utils.is_heroku() and not os.getenv('HEROKU_RELEASE_CREATED_AT'):
 def enrich_context_with_user_info():
     user = current_user()
     data = {'username': user.get('username', ''),
-            'is_teacher': is_teacher(user), 'is_admin': is_admin(user), 'has_public_profile': has_public_profile(user)}
+            'is_teacher': is_teacher(user), 'is_second_teacher': is_second_teacher(user),
+            'is_admin': is_admin(user), 'has_public_profile': has_public_profile(user)}
     return data
 
 
@@ -484,14 +488,15 @@ def parse():
         return "body.level must be a string", 400
     if 'adventure_name' in body and not isinstance(body['adventure_name'], str):
         return "if present, body.adventure_name must be a string", 400
-
+    if 'is_debug' not in body:
+        return "body.is_debug must be a boolean", 400
     error_check = False
     if 'error_check' in body:
         error_check = True
 
     code = body['code']
     level = int(body['level'])
-
+    is_debug = bool(body['is_debug'])
     # Language should come principally from the request body,
     # but we'll fall back to browser default if it's missing for whatever
     # reason.
@@ -511,7 +516,7 @@ def parse():
         keyword_lang = current_keyword_language()["lang"]
         with querylog.log_time('transpile'):
             try:
-                transpile_result = transpile_add_stats(code, level, lang)
+                transpile_result = transpile_add_stats(code, level, lang, is_debug)
                 if username and not body.get('tutorial'):
                     DATABASE.increase_user_run_count(username)
                     ACHIEVEMENTS.increase_count("run")
@@ -712,11 +717,11 @@ def download_machine_file(filename, extension="zip"):
     return send_file("machine_files/" + filename + "." + extension, as_attachment=True)
 
 
-def transpile_add_stats(code, level, lang_):
+def transpile_add_stats(code, level, lang_, is_debug):
     username = current_user()['username'] or None
     number_of_lines = code.count('\n')
     try:
-        result = hedy.transpile(code, level, lang_)
+        result = hedy.transpile(code, level, lang_, is_debug=is_debug)
         statistics.add(
             username, lambda id_: DATABASE.add_program_stats(id_, level, number_of_lines, None))
         return result
@@ -946,7 +951,7 @@ def programs_page(user):
     filter = request.args.get('filter', default=None, type=str)
     submitted = True if filter == 'submitted' else None
 
-    result = DATABASE.filtered_programs_for_user(from_user or username,
+    result = DATABASE.filtered_programs_for_user({"username": from_user or username},
                                                  level=level,
                                                  adventure=adventure,
                                                  submitted=submitted,
@@ -1392,6 +1397,57 @@ def get_specific_adventure(name, level, mode):
                            ))
 
 
+@app.route('/embedded/<int:level>', methods=['GET'])
+def get_embedded_code_editor(level):
+    forget_current_user()
+
+    # Start with an empty program
+    program = ''
+
+    # If for any reason the level is invalid, set to level 1
+    try:
+        level = int(level)
+        if level < 1 or level > hedy.HEDY_MAX_LEVEL:
+            program = gettext('invalid_level_comment')
+            level = 1
+    except ValueError:
+        program = gettext('invalid_level_comment')
+        level = 1
+
+    run = True if request.args.get('run') == 'true' else False
+    readOnly = True if request.args.get('readOnly') == 'true' else False
+    encoded_program = request.args.get('program')
+
+    # Set a fallback for default use
+    language = request.args.get('lang', 'en')
+    if language not in ALL_LANGUAGES.keys():
+        language = 'nl'
+        program = gettext('invalid_language_comment')
+
+    keyword_language = request.args.get('keyword', 'en')
+    if keyword_language not in ALL_KEYWORD_LANGUAGES.keys():
+        language = 'en'
+        program = gettext('invalid_keyword_language_comment')
+
+    # Make sure to set the session lang to enforce the correct translated strings to be rendered
+    session['lang'] = language
+
+    if encoded_program and not program:
+        try:
+            program = base64.b64decode(encoded_program)
+            program = program.decode('utf-8')
+        except binascii.Error:
+            program = gettext('invalid_program_comment')
+
+    return render_template("embedded-editor.html", embedded=True, run=run, language=language,
+                           keyword_language=keyword_language, readOnly=readOnly,
+                           level=level, program=program, javascript_page_options=dict(
+                               page='code',
+                               lang=language,
+                               level=level
+                           ))
+
+
 @app.route('/cheatsheet/', methods=['GET'], defaults={'level': 1})
 @app.route('/cheatsheet/<level>', methods=['GET'])
 def get_cheatsheet_page(level):
@@ -1523,7 +1579,7 @@ def reset_page():
 @requires_login_redirect
 def profile_page(user):
     profile = DATABASE.user_by_username(user['username'])
-    programs = DATABASE.public_programs_for_user(user['username'])
+    programs = DATABASE.filtered_programs_for_user({"username": user['username'], "public": 1})
     public_profile_settings = DATABASE.get_public_profile_settings(current_user()['username'])
 
     classes = []
@@ -2138,9 +2194,9 @@ def public_user_page(username):
     user_public_info = DATABASE.get_public_profile_settings(username)
     page = request.args.get('page', default=None, type=str)
     if user_public_info:
-        user_programs = DATABASE.public_programs_for_user(username,
-                                                          limit=10,
-                                                          pagination_token=page)
+        user_programs = DATABASE.filtered_programs_for_user({"username": user['username'], "public": 1},
+                                                            limit=10,
+                                                            pagination_token=page)
         next_page_token = user_programs.next_page_token
         user_programs = normalize_public_programs(user_programs)
         user_achievements = DATABASE.progress_by_username(username) or {}
