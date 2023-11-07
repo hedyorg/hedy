@@ -48,7 +48,7 @@ If { ifs+ Condition IfLessCommand? Else? }
 Else { elses+ IfLessCommand? }
 
 Condition { 
-    EqualityCheck { Text is+ (String | Text | pressed+) } |
+    EqualityCheck { Text is+ (String | Expression | pressed+) } |
     InListCheck { Text ins+  Text } |
     NotInListCheck { Text not_in+  Text }
 }
