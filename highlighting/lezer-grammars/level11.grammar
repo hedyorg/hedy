@@ -23,7 +23,7 @@ Command {
 
 String { doubleQuotedString | singleQuotedString }
 
-Print { print ( String | ListAccess | Expression )+ }
+Print { print+ ( String | ListAccess | Expression )+ }
 Ask { Text (is+ | Op<"=">) ask+ ( String | ListAccess | Expression )+ }
 
 AssignList { Text (is+ | Op<"=">) (Text+ | Int ) ~ambig  (Comma (Text+ | Int ))+ } // comma doesn't really parse well if it is not separated by spaces

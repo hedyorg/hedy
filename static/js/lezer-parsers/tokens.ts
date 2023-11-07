@@ -83,6 +83,16 @@ import {
     repeat as repeat11, times as times11, fors as for11, to as to11, range as range11
 } from "./level11-parser.terms"
 
+import {
+    print as print12, ask as ask12, color as color12,
+    forward as forward12, turn as turn12, sleep as sleep12, is as is12,
+    add as add12, remove as remove12, from as from12, to_list as to_list12,
+    at as at12, random as random12, clear as clear12, ifs as if12,
+    elses as else12, ins as in12, pressed as pressed12, not_in as not_in12,
+    repeat as repeat12, times as times12, fors as for12, to as to12, range as range12,
+    define as define12, returns as returns12, _with as with12, call as call12
+} from "./level12-parser.terms"
+
 import TRADUCTION_IMPORT from '../../../highlighting/highlighting-trad.json';
 export interface InitializeCodeMirrorSyntaxHighlighterOptions {
     readonly keywordLanguage: string;
@@ -347,6 +357,40 @@ const keywordToToken: Record<number, tokenSpecilizer> = {
             "at": at11,
             "random": random11,
             "else": else11
+        },
+    },
+    12: {
+        extend: {
+            "print": print12,
+            "forward": forward12,
+            "turn": turn12,
+            "color": color12,
+            "sleep": sleep12,
+            "is": is12,
+            "add": add12,
+            "remove": remove12,
+            "from": from12,
+            "to_list": to_list12,
+            "clear": clear12,
+            "not_in": not_in12,
+            "in": in12,
+            "repeat": repeat12,
+            "times": times12,
+            "for": for12,
+            "to": to12,
+            "range": range12,
+            "returns": returns12,
+            "call": call12,
+            "define": define12,
+            "with": with12
+        },
+        specialize: {
+            "if": if12,
+            "pressed": pressed12,
+            "ask": ask12,
+            "at": at12,
+            "random": random12,
+            "else": else12
         },
     },
     18 : {
