@@ -690,7 +690,7 @@ export function initializeTranslation(options: InitializeCodeMirrorSyntaxHighlig
     }
 }
 
-export function specializeKeyword(name: string) {
+export function specializeKeyword(name: string, _: any) {      
     for (const [key, value] of specializeTranslations) {
         const regexString =  value.replace(' ', '|');
         if (new RegExp(`^(${regexString})$`, 'gu').test(name)) {
@@ -700,7 +700,7 @@ export function specializeKeyword(name: string) {
     return -1;
 }
 
-export function extendKeyword(name: string) {
+export function extendKeyword(name: string, _: any) {
     for (const [key, value] of extendTranslations) {
         const regexString =  value.replace(' ', '|');
         if (new RegExp(`^(${regexString})$`, 'gu').test(name)) {
