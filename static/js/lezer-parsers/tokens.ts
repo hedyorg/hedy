@@ -1,13 +1,4 @@
 import {
-  print as print18, is as is18, input as input18, sleep as sleep18, random as random18, 
-  forward as forward18, turn as turn18, color as color18, add as add18,
-  remove as remove18, from as from18, clear as clear18, ifs as ifs18,
-  elses as elses18, and as and18, or as or18, pressed as pressed18, notIn as notIn18, ins as ins18,
-  repeat as repeat18, times as times18, range as range18, whiles as whiles18,
-  def as def18, returns as returns18, fors as fors18, toList as toList18, elif as elif18}
-from "./level18-parser.terms";
-
-import {
     print as print1, echo as echo1, ask as ask1, color as color1,
     forward as forward1, turn as turn1
 } from "./level1-parser.terms";
@@ -125,6 +116,37 @@ import {
     define as define15, returns as returns15, _with as with15, call as call15,
     and as and15, or as or15, _while as while15
 } from "./level15-parser.terms"
+
+import {
+    print as print16, ask as ask16, color as color16,
+    forward as forward16, turn as turn16, sleep as sleep16, is as is16,
+    add as add16, remove as remove16, from as from16, to_list as to_list16,
+    random as random16, clear as clear16, ifs as if16,
+    elses as else16, ins as in16, pressed as pressed16, not_in as not_in16,
+    repeat as repeat16, times as times16, fors as for16, to as to16, range as range16,
+    define as define16, returns as returns16, _with as with16, call as call16,
+    and as and16, or as or16, _while as while16
+} from "./level16-parser.terms"
+
+import {
+    print as print17, ask as ask17, color as color17,
+    forward as forward17, turn as turn17, sleep as sleep17, is as is17,
+    add as add17, remove as remove17, from as from17, to_list as to_list17,
+    random as random17, clear as clear17, ifs as if17,
+    elses as else17, ins as in17, pressed as pressed17, not_in as not_in17,
+    repeat as repeat17, times as times17, fors as for17, to as to17, range as range17,
+    define as define17, returns as returns17, _with as with17, call as call17,
+    and as and17, or as or17, _while as while17, elif as elif17
+} from "./level17-parser.terms"
+
+import {
+    print as print18, is as is18, input as input18, sleep as sleep18, random as random18, 
+    forward as forward18, turn as turn18, color as color18, add as add18,
+    remove as remove18, from as from18, clear as clear18, ifs as ifs18,
+    elses as elses18, and as and18, or as or18, pressed as pressed18, notIn as notIn18, ins as ins18,
+    repeat as repeat18, times as times18, range as range18, whiles as whiles18,
+    def as def18, returns as returns18, fors as fors18, toList as toList18, elif as elif18
+}  from "./level18-parser.terms";
 
 import TRADUCTION_IMPORT from '../../../highlighting/highlighting-trad.json';
 export interface InitializeCodeMirrorSyntaxHighlighterOptions {
@@ -534,6 +556,81 @@ const keywordToToken: Record<number, tokenSpecilizer> = {
             "in": in15,
             "is": is15,
             "while": while15
+        },
+    },
+    16: {
+        extend: {
+            "print": print16,
+            "forward": forward16,
+            "turn": turn16,
+            "color": color16,
+            "sleep": sleep16,
+            "is": is16,
+            "add": add16,
+            "remove": remove16,
+            "from": from16,
+            "to_list": to_list16,
+            "clear": clear16,
+            "not_in": not_in16,
+            "repeat": repeat16,
+            "times": times16,
+            "for": for16,
+            "to": to16,
+            "range": range16,
+            "returns": returns16,
+            "call": call16,
+            "define": define16,
+            "with": with16
+        },
+        specialize: {
+            "if": if16,
+            "pressed": pressed16,
+            "ask": ask16,
+            "random": random16,
+            "else": else16,
+            "and": and16,
+            "or": or16,
+            "in": in16,
+            "is": is16,
+            "while": while16
+        },
+    },
+    17: {
+        extend: {
+            "print": print17,
+            "forward": forward17,
+            "turn": turn17,
+            "color": color17,
+            "sleep": sleep17,
+            "is": is17,
+            "add": add17,
+            "remove": remove17,
+            "from": from17,
+            "to_list": to_list17,
+            "clear": clear17,
+            "not_in": not_in17,
+            "repeat": repeat17,
+            "times": times17,
+            "for": for17,
+            "to": to17,
+            "range": range17,
+            "returns": returns17,
+            "call": call17,
+            "define": define17,
+            "with": with17
+        },
+        specialize: {
+            "if": if17,
+            "pressed": pressed17,
+            "ask": ask17,
+            "random": random17,
+            "else": else17,
+            "and": and17,
+            "or": or17,
+            "in": in17,
+            "is": is17,
+            "while": while17,
+            "elif": elif17
         },
     },
     18 : {

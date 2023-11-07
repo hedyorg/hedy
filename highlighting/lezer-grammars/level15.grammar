@@ -45,7 +45,7 @@ Turtle[@isGroup=turtle] {
 If { ifs+ Condition ((and+ | or+) Condition)* }
 Else { elses+ } 
 
-Condition {    
+Condition {
     PressedCheck { Text ~cond is+ pressed+ } |
     EqualityCheck { (Expression | Call) (is+ | Op<"="> Op<"=">? ) (Expression | Call) } |
     NotEqualCheck { (Expression | Call) (Op<"!=">) (Expression | Call) } |
