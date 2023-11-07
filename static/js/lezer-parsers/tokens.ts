@@ -31,6 +31,14 @@ import {
     at as at4, random as random4, clear as clear4
 } from "./level4-parser.terms"
 
+import {
+    print as print5, ask as ask5, color as color5,
+    forward as forward5, turn as turn5, sleep as sleep5, is as is5,
+    add as add5, remove as remove5, from as from5, to_list as to_list5,
+    at as at5, random as random5, clear as clear5, ifs as if5,
+    elses as else5, ins as in5, pressed as pressed5, not_in as not_in5
+} from "./level5-parser.terms"
+
 import TRADUCTION_IMPORT from '../../../highlighting/highlighting-trad.json';
 export interface InitializeCodeMirrorSyntaxHighlighterOptions {
     readonly keywordLanguage: string;
@@ -105,6 +113,31 @@ const keywordToToken: Record<number, tokenSpecilizer> = {
             "ask": ask4,
             "at": at4,
             "random": random4
+        }
+    },
+    5: {
+        extend: {
+            "print": print5,
+            "forward": forward5,
+            "turn": turn5,
+            "color": color5,
+            "sleep": sleep5,
+            "is": is5,
+            "add": add5,
+            "remove": remove5,
+            "from": from5,
+            "to_list": to_list5,
+            "clear": clear5,
+            "pressed": pressed5,
+            "not_in": not_in5,
+            "in": in5
+        },
+        specialize: {
+            "if": if5,
+            "ask": ask5,
+            "at": at5,
+            "random": random5,
+            "else": else5
         }
     },
     18 : {

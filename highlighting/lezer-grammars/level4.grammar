@@ -32,6 +32,7 @@ Sleep { sleep+ (Text | ListAccess)? }
 ListAccess { Text at+ (random+ | Text) }
 Add { add+ Text to_list+ Text }
 Remove { remove+ Text from+ Text }
+Clear { clear+ }
 
 Turtle[@isGroup=turtle] {
     Forward { forward+ (Text | ListAccess ) } |
@@ -41,7 +42,6 @@ Turtle[@isGroup=turtle] {
 
 ErrorInvalid[@dynamicPrecedence=-10] { Text+ }
 
-Clear { clear+ }
 @external specialize { Text } specializeKeyword from "./tokens" {
     ask[@name="ask"],
     at[@name="at"],
