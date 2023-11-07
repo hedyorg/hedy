@@ -1122,11 +1122,6 @@ def hour_of_code(level, program_id=None):
 
         loaded_program = Program.from_database_row(result)
 
-    language = request.args.get("language", g.lang)
-    g.lang = language
-    keyword_language = request.args.get("keyword_language", g.keyword_lang)
-    g.keyword_lang = keyword_language
-
     subset = [adv.strip() for adv in request.args.get("subset", "").strip().split(",")]
     subset = subset if subset[0] else ["print_command", "parrot"]
     adventures = load_adventures_for_level(level, subset=subset)
@@ -1224,24 +1219,18 @@ def hour_of_code(level, program_id=None):
     if 'other_settings' in customizations and 'hide_cheatsheet' in customizations['other_settings']:
         hide_cheatsheet = True
 
-    parsons = True if PARSONS[g.lang].get_parsons_data_for_level(level) else False
     quiz = True if QUIZZES[g.lang].get_quiz_data_for_level(level) else False
     tutorial = True if TUTORIALS[g.lang].get_tutorial_for_level(level) else False
 
     quiz_questions = 0
-    parson_exercises = 0
 
     if quiz:
         quiz_questions = len(QUIZZES[g.lang].get_quiz_data_for_level(level))
-    if parsons:
-        parson_exercises = len(PARSONS[g.lang].get_parsons_data_for_level(level))
 
-    if 'other_settings' in customizations and 'hide_parsons' in customizations['other_settings']:
-        parsons = False
     if 'other_settings' in customizations and 'hide_quiz' in customizations['other_settings']:
         quiz = False
 
-    # max_level = hedy.HEDY_MAX_LEVEL
+    max_level = hedy.HEDY_MAX_LEVEL
     level_number = int(level)
 
     commands = hedy.commands_per_level.get(level)
@@ -1250,10 +1239,8 @@ def hour_of_code(level, program_id=None):
         level_nr=str(level_number),
         level=level_number,
         current_page='Hour of Code',
-        prev_level=None,
-        next_level=None,
-        # prev_level=level_number - 1 if level_number > 1 else None,
-        # next_level=level_number + 1 if level_number < max_level else None,
+        prev_level=level_number - 1 if level_number > 1 else None,
+        next_level=level_number + 1 if level_number < max_level else None,
         # customizations=customizations,
         hide_cheatsheet=hide_cheatsheet,
         # enforce_developers_mode=enforce_developers_mode,
@@ -1262,11 +1249,11 @@ def hour_of_code(level, program_id=None):
         adventures=adventures,
         initial_tab=initial_tab,
         commands=commands,
-        parsons=parsons,
-        parsons_exercises=parson_exercises,
+        # parsons=parsons,
+        # parsons_exercises=parson_exercises,
         tutorial=tutorial,
         latest=version(),
-        # quiz=quiz,
+        quiz=quiz,
         quiz_questions=quiz_questions,
         cheatsheet=cheatsheet,
         blur_button_available=False,
