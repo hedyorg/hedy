@@ -6,11 +6,13 @@ describe('Go to levels buttons', () => {
     loginForStudent('student5')
     // Test when code is unchanged
     goToHedyLevel2Page();
+    cy.wait(500)
     cy.get('#prev_level_button').click();
     cy.url().should('include', Cypress.env('hedy_page'));
 
     // Test when code is changed
     goToHedyLevel2Page();
+    cy.wait(500)
     cy.get('#editor').type('hello');
     cy.get('#prev_level_button').click();
     cy.url().should('include', Cypress.env('hedy_page'));
