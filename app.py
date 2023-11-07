@@ -1243,6 +1243,7 @@ def index(level, program_id):
         current_page='hedy',
         prev_level=level_number - 1 if level_number > 1 else None,
         next_level=level_number + 1 if level_number < max_level else None,
+        max_level=hedy.HEDY_MAX_LEVEL,
         customizations=customizations,
         hide_cheatsheet=hide_cheatsheet,
         enforce_developers_mode=enforce_developers_mode,
