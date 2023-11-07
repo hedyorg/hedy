@@ -1,63 +1,61 @@
 @top Program { eol* (Command eol+)* Command? }
-
 Command {
-    Assign | AssignList | Ask | Clear |Print | Turtle | Sleep | Add | Remove | If | Else | Repeat | For | ErrorInvalid
-}
-
-IfLessCommand {
-    Assign | AssignList | Ask | Clear |Print | Turtle | Sleep | Add | Remove | Repeat | For | ErrorInvalid
+    Assign | AssignList | Ask | Clear |Print | Turtle | Sleep | Add | Remove| If | Else | Repeat | For | ErrorInvalid
 }
 
 @local tokens {    
-    stringEnd { "'" | "\n" }    
-    @else stringContent
+    singleQuoteStringEnd { "'" | "\n" }
+    @else singleQuoteStringContent
   }
   
   @skip {} {
-    String { "'" (stringContent)* stringEnd }
+    singleQuotedString { "'" (singleQuoteStringContent)* singleQuoteStringEnd }
 }
 
+@local tokens {    
+    doubleQuoteStringEnd { '"' | "\n" }
+    @else doubleQuoteStringContent
+  }
+  
+  @skip {} {
+    doubleQuotedString { '"' (doubleQuoteStringContent)* doubleQuoteStringEnd }
+}
 
-Print { skw<"print"> ( String | ListAccess | Expression )+ }
+String { doubleQuotedString | singleQuotedString }
 
-AssignList { Text (skw<"is"> | Op<"=">) (Text+ | Int ) ~ambig  (Comma (Text+ | Int ))+ } // comma doesn't really parse well if it is not separated by spaces
-Assign { Text (skw<"is"> | Op<"=">) (Expression ~ambig  | ListAccess)+ }
-Ask { Text (skw<"is"> | Op<"=">) skw<"ask"> ( String | ListAccess | Expression )+ }
-Sleep { skw<"sleep"> (Text | ListAccess)? }
+Print { print ( String | ListAccess | Expression )+ }
+Ask { Text (is+ | Op<"=">) ask+ ( String | ListAccess | Expression )+ }
 
-ListAccess { Text kw<"at"> (kw<"random"> | Text) }
+AssignList { Text (is+ | Op<"=">) (Text+ | Int ) ~ambig  (Comma (Text+ | Int ))+ } // comma doesn't really parse well if it is not separated by spaces
+Assign { Text (is+ | Op<"=">) (Expression ~ambig  | ListAccess)+ }
+Sleep { sleep+ (Expression | ListAccess )? }
+ListAccess { Text at+ (random+ | Text) }
+Add { add+ Text to_list+ Text }
+Remove { remove+ Text from+ Text }
+Clear { clear+ }
 
 Turtle[@isGroup=turtle] {
-    Forward { skw<"forward"> (Expression | ListAccess ) } |
-    Turn { skw<"turn"> (Expression | ListAccess ) } |
-    Color { skw<"color"> (Expression | ListAccess)  }
+    Forward { forward+ (Expression | ListAccess ) } |
+    Turn { turn+ (Expression | ListAccess ) } |
+    Color { color+ (Expression | ListAccess)  }
 }   
 
-Add { skw<"add"> Text skw<"to"> Text }
-Remove { skw<"remove"> Text skw<"from"> Text }
-Clear { skw<"clear"> }
-ErrorInvalid[@dynamicPrecedence=-10] { Text+ }
-
-If { skw<"if"> Condition IfLessCommand? Else? }
-Else { kw<"else"> IfLessCommand? }
+If { ifs+ Condition }
+Else { elses+ }
 
 Condition { 
-    EqualityCheck { Text (skw<"is"> | Op<"=">) (String | Text| Int | skw<"pressed">) } |
-    ListCheck { (Text | Int) skw<"not">? skw<"in">  Text }
+    EqualityCheck { Text is+ (String | Expression | pressed+) } |
+    InListCheck { Text ins+  Text } |
+    NotInListCheck { Text not_in+  Text }
 }
 
+Repeat { repeat+ (Int | Text) times+ }
 
-Repeat { skw<"repeat"> (Int | Text) skw<"times"> IfLessCommand }
+For { fors+ Text ins+ Text }
 
-For { skw<"for"> Text skw<"in"> Text }
+ErrorInvalid[@dynamicPrecedence=-10] { Text+ }
 
-kw<term> { @specialize[@name={term}]<Text, term> }
-skw<term> { @extend[@name={term}]<Text, term> }
 Op<expr> { expr }
-
-Comma { "," }
-
-atom { Int | Text }
 
 binaryExpression {
     Expression !times Op<"*" | "/"> Expression |
@@ -75,6 +73,33 @@ Expression {
     plus @right
 }
 
+@external specialize { Text } specializeKeyword from "./tokens" {
+    ask[@name="ask"],
+    at[@name="at"],
+    random[@name="random"],
+    ifs[@name="if"],
+    pressed[@name="pressed"],
+    elses[@name="else"]
+}
+
+@external extend { Text } extendKeyword from "./tokens" {
+    print[@name="print"],
+    forward[@name="forward"],
+    turn[@name="turn"],
+    color[@name="color"],
+    sleep[@name="sleep"],
+    is[@name="is"],
+    add[@name="add"],
+    from[@name="from"],
+    remove[@name="remove"],
+    to_list[@name="to_list"],
+    clear[@name="clear"],    
+    ins[@name="in"],
+    not_in[@name="not_in"],
+    repeat[@name="repeat"],
+    times[@name="times"],
+    fors[@name="for"]
+}
 
 @tokens {
     @precedence {
@@ -83,9 +108,11 @@ Expression {
     }
     Comment { "#" ![\n]* }
     eol { "\n" }
-    Text { ![^\n,،，、 +'#/*\-=]+ } // a little bit of a hack not to parse commas never, but lezer adds them as error nodes, so it still
+    Comma { $[,،，、] } // every language comma is valid here
+    Text { ![^\n,،，、 '"#+\-*/=]+ } // a little bit of a hack not to parse commas never, but lezer adds them as error nodes, so it still
     space { " " }
-    Int { @digit+ }
+    digit { $[٠١٢٣٤٥٦٧٨٩۰۱۲۳۴۵۶۷۸۹0123456789] } // latin, arab and pa_PK (Panjabi) scripts
+    Int { digit+ }
 }
 
 @skip { Comment | space }

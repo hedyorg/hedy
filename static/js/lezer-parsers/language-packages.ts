@@ -6,6 +6,7 @@ import { parser as level5Parser} from './level5-parser'
 import { parser as level6Parser} from './level6-parser'
 import { parser as level7Parser } from './level7-parser'
 import { parser as level8Parser } from './level8-parser'
+import { parser as level10Parser } from './level10-parser'
 import { parser as level18Parser} from './level18-parser'
 import { tags as t } from "@lezer/highlight";
 import { LRParser } from '@lezer/lr';
@@ -91,6 +92,31 @@ export let languagePerLevel: Record<number, languageSupport> ={
         parser: level8Parser,
         styleTags: {
             "print forward turn color ask is echo sleep Op at random remove from add to Comma if else in not_in repeat times": t.keyword,
+            "clear pressed": t.color,
+            Comment: t.lineComment,
+            "Name": t.name,
+            "String": t.string,
+            "Int": t.number,
+            "Command/ErrorInvalid/Text": t.invalid,
+        }
+    },
+    // same as level 8
+    9: {
+        parser: level8Parser,
+        styleTags: {
+            "print forward turn color ask is echo sleep Op at random remove from add to Comma if else in not_in repeat times": t.keyword,
+            "clear pressed": t.color,
+            Comment: t.lineComment,
+            "Name": t.name,
+            "String": t.string,
+            "Int": t.number,
+            "Command/ErrorInvalid/Text": t.invalid,
+        }
+    },
+    10: {
+        parser: level10Parser,
+        styleTags: {
+            "print forward turn color ask is echo sleep Op at random remove from add to Comma if else in not_in repeat times for": t.keyword,
             "clear pressed": t.color,
             Comment: t.lineComment,
             "Name": t.name,

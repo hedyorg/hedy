@@ -65,6 +65,16 @@ import {
     repeat as repeat8, times as times8, 
 } from "./level8-parser.terms"
 
+import {
+    print as print10, ask as ask10, color as color10,
+    forward as forward10, turn as turn10, sleep as sleep10, is as is10,
+    add as add10, remove as remove10, from as from10, to_list as to_list10,
+    at as at10, random as random10, clear as clear10, ifs as if10,
+    elses as else10, ins as in10, pressed as pressed10, not_in as not_in10,
+    repeat as repeat10, times as times10, fors as for10
+} from "./level10-parser.terms"
+
+
 import TRADUCTION_IMPORT from '../../../highlighting/highlighting-trad.json';
 export interface InitializeCodeMirrorSyntaxHighlighterOptions {
     readonly keywordLanguage: string;
@@ -243,6 +253,62 @@ const keywordToToken: Record<number, tokenSpecilizer> = {
             "at": at8,
             "random": random8,
             "else": else8
+        },
+    },
+    // same as level 8
+    9: {
+        extend: {
+            "print": print8,
+            "forward": forward8,
+            "turn": turn8,
+            "color": color8,
+            "sleep": sleep8,
+            "is": is8,
+            "add": add8,
+            "remove": remove8,
+            "from": from8,
+            "to_list": to_list8,
+            "clear": clear8,
+            "not_in": not_in8,
+            "in": in8,
+            "repeat": repeat8,
+            "times": times8
+        },
+        specialize: {
+            "if": if8,
+            "pressed": pressed8,
+            "ask": ask8,
+            "at": at8,
+            "random": random8,
+            "else": else8
+        },
+    },
+    10: {
+        extend: {
+            "print": print10,
+            "forward": forward10,
+            "turn": turn10,
+            "color": color10,
+            "sleep": sleep10,
+            "is": is10,
+            "add": add10,
+            "remove": remove10,
+            "from": from10,
+            "to_list": to_list10,
+            "clear": clear10,
+            "not_in": not_in10,
+            "in": in10,
+            "repeat": repeat10,
+            "times": times10,
+            "for": for10
+        },
+        specialize: {
+            "if": if10,
+            "pressed": pressed10,
+            "ask": ask10,
+            "at": at10,
+            "random": random10,
+            "else": else10
         },
     },
     18 : {
