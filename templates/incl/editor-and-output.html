@@ -225,13 +225,14 @@
               <div class="flex-1">
                 <a id="prev_level_button"
                   class="green-btn ltr:ml-1 rtl:mr-1 hidden"
-                  href="{{ hedy_link(prev_level, 1) }}"
+                  href="#"
                   _="on load or click from .tab
                       if the *display of .previous-tab is 'none'
                         toggle .hidden on me
                       else
                         add .hidden to me
-                      end">{{_('regress_button')|replace("{level}", prev_level)}}</a>
+                      end
+                      on click hedyApp.goToLevel({{prev_level}})">{{_('regress_button')|replace("{level}", prev_level)}}</a>
               </div>
             {% endif %}
 
@@ -255,13 +256,14 @@
             {% if not quiz and not parsons and next_level and (not customizations or next_level in customizations['available_levels']) %}
               <a id="next_level_button"
                 class="green-btn ltr:ml-1 rtl:mr-1 hidden"
-                href="{{ hedy_link(next_level, 1) }}"
+                href="#"
                 _="on load or click from .tab
                     if the *display of .next-tab is 'none'
                       toggle .hidden on me
                     else
                       add .hidden to me
-                    end">{{_('advance_button')|replace("{level}", next_level)}}</a>
+                    end
+                    on click hedyApp.goToLevel({{next_level}})">{{_('advance_button')|replace("{level}", next_level)}}</a>
             {% endif %}
           </div>
     </div>
