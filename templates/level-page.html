@@ -18,7 +18,7 @@
         style="display: none; padding: 0px !important;">
         {% for dropdown_level in range(1, (max_level + 1))%}
         <button id="level_button" class="flex-row flex justify-between items-center gap-2 px-2 py-2 border-b border-dashed border-blue-500
-        {% if dropdown_level == level %}bg-blue-500{% else %}bg-white{% endif %}"
+        {% if dropdown_level == level %}bg-blue-300{% else %}bg-white{% endif %}"
         {% if dropdown_level == level %}disabled{% endif %}
         style="width: 100%;"
         _="on click hedyApp.goToLevel({{dropdown_level}})">
