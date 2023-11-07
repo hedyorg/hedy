@@ -145,12 +145,12 @@ const keywordToToken: Record<number, tokenSpecilizer> = {
             "from": from5,
             "to_list": to_list5,
             "clear": clear5,
-            "pressed": pressed5,
             "not_in": not_in5,
             "in": in5
         },
         specialize: {
             "if": if5,
+            "pressed": pressed5,
             "ask": ask5,
             "at": at5,
             "random": random5,
@@ -170,12 +170,12 @@ const keywordToToken: Record<number, tokenSpecilizer> = {
             "from": from6,
             "to_list": to_list6,
             "clear": clear6,
-            "pressed": pressed6,
             "not_in": not_in6,
             "in": in6
         },
         specialize: {
             "if": if6,
+            "pressed": pressed6,
             "ask": ask6,
             "at": at6,
             "random": random6,
@@ -195,7 +195,6 @@ const keywordToToken: Record<number, tokenSpecilizer> = {
             "from": from7,
             "to_list": to_list7,
             "clear": clear7,
-            "pressed": pressed7,
             "not_in": not_in7,
             "in": in7,
             "repeat": repeat7,
@@ -203,6 +202,7 @@ const keywordToToken: Record<number, tokenSpecilizer> = {
         },
         specialize: {
             "if": if7,
+            "pressed": pressed7,
             "ask": ask7,
             "at": at7,
             "random": random7,

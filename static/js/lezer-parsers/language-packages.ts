@@ -77,7 +77,8 @@ export let languagePerLevel: Record<number, languageSupport> ={
     7: {
         parser: level7Parser,
         styleTags: {
-            "print forward turn color ask is echo sleep Op at random remove from add to Comma if else in not_in repeat times": t.keyword,            "clear pressed": t.color, 
+            "print forward turn color ask is echo sleep Op at random remove from add to Comma if else in not_in repeat times": t.keyword,
+            "clear pressed": t.color,
             Comment: t.lineComment,
             "Name": t.name,
             "String": t.string,

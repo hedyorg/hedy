@@ -61,7 +61,8 @@ ErrorInvalid[@dynamicPrecedence=-10] { Text+ }
     at[@name="at"],
     random[@name="random"],
     ifs[@name="if"],
-    elses[@name="else"]
+    elses[@name="else"],
+    pressed[@name="pressed"]
 }
 
 @external extend { Text } extendKeyword from "./tokens" {
@@ -76,7 +77,6 @@ ErrorInvalid[@dynamicPrecedence=-10] { Text+ }
     remove[@name="remove"],
     to_list[@name="to_list"],
     clear[@name="clear"],    
-    pressed[@name="pressed"],
     ins[@name="in"],
     not_in[@name="not_in"]
 }
