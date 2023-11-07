@@ -235,9 +235,10 @@ class UnquotedTextException(HedyException):
 
 class MisspelledAtCommand(HedyException):
     # TODO adjust the parameters, will only put this in en/messages.po
-    def __init__(self, level, line_number):
+    def __init__(self, command, arg1, line_number):
         super().__init__('Misspelled At Command',
-                         level=level,
+                         command=command,
+                         invalid_argument=arg1,
                          line_number=line_number)
 
 

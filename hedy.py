@@ -1126,7 +1126,7 @@ class IsValid(Filter):
 
     def error_list_access(self, meta, args):
         # for now copying another function, to test whether anything is being done at all
-        error = InvalidInfo('misspelled "at" command', arguments=[str(args[0])], line=meta.line, column=meta.column)
+        error = InvalidInfo('misspelled "at" command', arguments=[str(args[1][1])], line=meta.line)
         return False, error, meta
 
     def error_invalid(self, meta, args):
@@ -3222,7 +3222,7 @@ def is_program_valid(program_root, input_string, level, lang):
                 level=level, unquotedtext=unquotedtext, line_number=invalid_info.line)
         elif invalid_info.error_type == 'misspelled "at" command':
             # raising an exception here, for now default parameters, will put the wrongly spelled word later on
-            raise exceptions.MisspelledAtCommand(level=level, line_number=line)
+            raise exceptions.MisspelledAtCommand(command='at', arg1=invalid_info.arguments[0], line_number=line)
         elif invalid_info.error_type == 'unsupported number':
             raise exceptions.UnsupportedFloatException(value=''.join(invalid_info.arguments))
         elif invalid_info.error_type == 'lonely text':
