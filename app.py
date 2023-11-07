@@ -36,7 +36,7 @@ from safe_format import safe_format
 from config import config
 from website.flask_helpers import render_template, proper_tojson, JinjaCompatibleJsonProvider
 from hedy_content import (ADVENTURE_ORDER_PER_LEVEL, KEYWORDS_ADVENTURES, ALL_KEYWORD_LANGUAGES,
-                          ALL_LANGUAGES, COUNTRIES)
+                          ALL_LANGUAGES, COUNTRIES, HOC_ADVENTURE_PER_LEVEL)
 
 from logging_config import LOGGING_CONFIG
 from utils import dump_yaml_rt, is_debug_mode, load_yaml_rt, timems, version, strip_accents
@@ -1125,7 +1125,7 @@ def hour_of_code(level, program_id=None):
         loaded_program = Program.from_database_row(result)
 
     subset = [adv.strip() for adv in request.args.get("subset", "").strip().split(",")]
-    subset = subset if subset[0] else ["print_command", "parrot"]
+    subset = subset if subset[0] else HOC_ADVENTURE_PER_LEVEL[level]
     adventures = load_adventures_for_level(level, subset=subset)
 
     if not adventures:
