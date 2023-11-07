@@ -93,6 +93,17 @@ import {
     define as define12, returns as returns12, _with as with12, call as call12
 } from "./level12-parser.terms"
 
+import {
+    print as print13, ask as ask13, color as color13,
+    forward as forward13, turn as turn13, sleep as sleep13, is as is13,
+    add as add13, remove as remove13, from as from13, to_list as to_list13,
+    at as at13, random as random13, clear as clear13, ifs as if13,
+    elses as else13, ins as in13, pressed as pressed13, not_in as not_in13,
+    repeat as repeat13, times as times13, fors as for13, to as to13, range as range13,
+    define as define13, returns as returns13, _with as with13, call as call13,
+    and as and13, or as or13
+} from "./level13-parser.terms"
+
 import TRADUCTION_IMPORT from '../../../highlighting/highlighting-trad.json';
 export interface InitializeCodeMirrorSyntaxHighlighterOptions {
     readonly keywordLanguage: string;
@@ -391,6 +402,42 @@ const keywordToToken: Record<number, tokenSpecilizer> = {
             "at": at12,
             "random": random12,
             "else": else12
+        },
+    },
+    13: {
+        extend: {
+            "print": print13,
+            "forward": forward13,
+            "turn": turn13,
+            "color": color13,
+            "sleep": sleep13,
+            "is": is13,
+            "add": add13,
+            "remove": remove13,
+            "from": from13,
+            "to_list": to_list13,
+            "clear": clear13,
+            "not_in": not_in13,
+            "in": in13,
+            "repeat": repeat13,
+            "times": times13,
+            "for": for13,
+            "to": to13,
+            "range": range13,
+            "returns": returns13,
+            "call": call13,
+            "define": define13,
+            "with": with13
+        },
+        specialize: {
+            "if": if13,
+            "pressed": pressed13,
+            "ask": ask13,
+            "at": at13,
+            "random": random13,
+            "else": else13,
+            "and": and13,
+            "or": or13
         },
     },
     18 : {
