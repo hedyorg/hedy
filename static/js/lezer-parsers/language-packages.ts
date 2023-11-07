@@ -3,6 +3,7 @@ import { parser as level2Parser} from './level2-parser'
 import { parser as level3Parser} from './level3-parser'
 import { parser as level4Parser} from './level4-parser'
 import { parser as level5Parser} from './level5-parser'
+import { parser as level6Parser} from './level6-parser'
 import { parser as level18Parser} from './level18-parser'
 import { tags as t } from "@lezer/highlight";
 import { LRParser } from '@lezer/lr';
@@ -57,6 +58,18 @@ export let languagePerLevel: Record<number, languageSupport> ={
             Comment: t.lineComment,
             "Name": t.name,
             "String": t.string,
+            "Command/ErrorInvalid/Text": t.invalid,
+        }
+    },
+    6: {
+        parser: level6Parser,
+        styleTags: {
+            "print forward turn color ask is echo sleep Op at random remove from add to Comma if else in not_in": t.keyword,
+            "clear pressed": t.color, 
+            Comment: t.lineComment,
+            "Name": t.name,
+            "String": t.string,
+            "Int": t.number,
             "Command/ErrorInvalid/Text": t.invalid,
         }
     },
