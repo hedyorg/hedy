@@ -4,71 +4,72 @@ Command {
     Assign | AssignList | Ask | Clear |Print | Turtle | Sleep | Add | Remove | If | Else | Repeat | For | Define | Call | Return | While | ErrorInvalid
 }
 
-IfLessCommand {
-    Assign | AssignList | Ask | Clear |Print | Turtle | Sleep | Add | Remove | Repeat | For | Define | Call | Return | While | ErrorInvalid
-}
-
 @local tokens {    
-    stringEnd { "'" | "\n" }    
-    @else stringContent
+    singleQuoteStringEnd { "'" | "\n" }
+    @else singleQuoteStringContent
   }
   
   @skip {} {
-    String { "'" (stringContent)* stringEnd }
+    singleQuotedString { "'" (singleQuoteStringContent)* singleQuoteStringEnd }
 }
 
+@local tokens {    
+    doubleQuoteStringEnd { '"' | "\n" }
+    @else doubleQuoteStringContent
+  }
+  
+  @skip {} {
+    doubleQuotedString { '"' (doubleQuoteStringContent)* doubleQuoteStringEnd }
+}
 
-Print { kw<"print"> ( ListAccess | Expression | Call )+ }
+String { doubleQuotedString | singleQuotedString }
 
-AssignList { Text (kw<"is"> | Op<"=">) (Text+ | Number ) ~ambig  (Op<","> (Text+ | Number ))+ } // Op<","> doesn't really parse well if it is not separated by spaces
-Assign { Text (kw<"is"> | Op<"=">) (Expression ~ambig  | ListAccess)+ }
-Ask { Text (kw<"is"> | Op<"=">) kw<"ask"> ( ListAccess | Expression )+ }
-Sleep { kw<"sleep"> (Expression | ListAccess | Call)? }
 
-ListAccess { Text kw<"at"> (kw<"random"> | Text) }
+Print { print+ ( ListAccess | Expression | Call )+ }
+Ask { Text (is+ | Op<"=">) ask+ ( ListAccess | Expression )+ }
+
+AssignList { Text (is+ | Op<"=">) (Text+ | Number ) ~ambig  (Comma (Text+ | Number ))+ }
+Assign { Text (is+ | Op<"=">) (Expression ~ambig  | ListAccess)+ }
+Sleep { sleep+ (Expression | ListAccess | Call)? }
+ListAccess { Text at+ (random+ | Text) }
+Add { add+ (Expression | Call ) to_list+ Text }
+Remove { remove+ (Expression | Call) from+ Text }
+Clear { clear+ }
 
 Turtle[@isGroup=turtle] {
-    Forward { kw<"forward"> (Expression | ListAccess | Call) } |
-    Turn { kw<"turn"> (Expression | ListAccess | Call) } |
-    Color { kw<"color"> (Expression | ListAccess | Call)  }
-}   
-
-Add { kw<"add"> (Expression | Call ) kw<"to"> Text }
-Remove { kw<"remove"> (Expression | Call) kw<"from"> Text }
-Clear { kw<"clear"> }
-ErrorInvalid[@dynamicPrecedence=-10] { Text+ }
-
-If { kw<"if"> Condition ((kw<"and"> | kw<"or">) Condition)* IfLessCommand? Else? }
-Else { kw<"else"> IfLessCommand? }
-
-Condition {    
-    PressedCheck { Text ~cond kw<"is"> kw<"pressed"> } |
-    EqualityCheck { (Expression | Call) (kw<"is"> | Op<"="> Op<"=">? ) (Expression | Call) } |
-    NotEqualCheck { (Expression | Call) (Op<"!=">) (Expression | Call) } |
-    ComparisonCheck { (Expression | Call) (Op<">"> | Op<"<">) Op<"=">? (Expression | Call) } |
-    ListCheck { (Expression ~cond | Call) kw<"not">? kw<"in">  Text }
+    Forward { forward+ (Expression | ListAccess | Call) } |
+    Turn { turn+ (Expression | ListAccess | Call) } |
+    Color { color+ (Expression | ListAccess | Call)  }
 }
 
+If { ifs+ Condition ((and+ | or+) Condition)* }
+Else { elses+ } 
 
-Repeat { kw<"repeat"> (Number | Text) kw<"times"> IfLessCommand }
+Condition {    
+    PressedCheck { Text ~cond is+ pressed+ } |
+    EqualityCheck { (Expression | Call) (is+ | Op<"="> Op<"=">? ) (Expression | Call) } |
+    NotEqualCheck { (Expression | Call) (Op<"!=">) (Expression | Call) } |
+    ComparisonCheck { (Expression | Call) (Op<">"> | Op<"<">) Op<"=">? (Expression | Call) } |
+    InListCheck { (Expression ~cond | Call) ins+  Text } |
+    NotInListCheck { (Expression ~cond | Call) not_in+  Text }
+}
 
-For { kw<"for"> Text kw<"in"> (Text | kw<"range"> (Text | Number) kw<"to"> (Text | Number)) }
-While { kw<"while"> Condition ((kw<"and"> | kw<"or">) Condition)* }
-Define { kw<"define"> Text (kw<"with">  Arguments)? }
-Call { kw<"call"> Text (kw<"with"> Arguments) }
-Return { kw<"return"> ( ListAccess | Expression | Call)+ }
+Repeat { repeat+ (Number | Text) times+ }
+
+For { fors+ Text ins+ (Text | range+ (Text | Number) to+ (Text | Number)) }
+While { while+ Condition ((and+ | or+) Condition)* }
 
 
-Arguments { argument (Op<","> argument)* }
+Define { define+ Text (with+  Arguments)? }
+Call { call+ Text (with+ Arguments) }
+Return { returns+ ( ListAccess | Expression | Call)+ }
+
+Arguments { argument (Comma argument)* }
 argument { Expression | ListAccess }
 
+ErrorInvalid[@dynamicPrecedence=-10] { Text+ }
 
-kw<term> { @specialize[@name={term}]<Text, term> }
-skw<term> { @extend[@name={term}]<Text, term> }
 Op<expr> { expr }
-
-
-atom { Number | Text }
 
 binaryExpression {
     Expression !times Op<"*" | "/"> Expression |
@@ -88,6 +89,42 @@ Expression {
     plus @right
 }
 
+@external specialize { Text } specializeKeyword from "./tokens" {
+    ask[@name="ask"],
+    at[@name="at"],
+    random[@name="random"],
+    ifs[@name="if"],
+    pressed[@name="pressed"],
+    elses[@name="else"],
+    and[@name="and"],
+    or[@name="or"],
+    is[@name="is"],
+    while[@name="while"]
+}
+
+@external extend { Text } extendKeyword from "./tokens" {
+    print[@name="print"],
+    forward[@name="forward"],
+    turn[@name="turn"],
+    color[@name="color"],
+    sleep[@name="sleep"],
+    add[@name="add"],
+    from[@name="from"],
+    remove[@name="remove"],
+    to_list[@name="to_list"],
+    clear[@name="clear"],    
+    ins[@name="in"],
+    not_in[@name="not_in"],
+    repeat[@name="repeat"],
+    times[@name="times"],
+    fors[@name="for"],
+    to[@name="to"],
+    range[@name="range"],
+    call[@name="call"],
+    define[@name="define"],
+    returns[@name="resturns"],
+    with[@name="with"]
+}
 
 @tokens {
     @precedence {
@@ -96,9 +133,11 @@ Expression {
     }
     Comment { "#" ![\n]* }
     eol { "\n" }
-    Text { ![^\n,،，、 '+#/*\-=><!]+ } // a little bit of a hack not to parse commas never, but lezer adds them as error nodes, so it still
+    Comma { $[,،，、] } // every language comma is valid here
+    Text { ![^\n,،，、 '"#+\-*/=><!]+ } // a little bit of a hack not to parse commas never, but lezer adds them as error nodes, so it still
     space { " " }
-    Number { @digit+ ("." @digit+)? }
+    digit { $[٠١٢٣٤٥٦٧٨٩۰۱۲۳۴۵۶۷۸۹0123456789] } // latin, arab and pa_PK (Panjabi) scripts
+    Number { digit+ ("." digit+)? }
 }
 
 @skip { Comment | space }

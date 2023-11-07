@@ -115,6 +115,17 @@ import {
     and as and14, or as or14
 } from "./level14-parser.terms"
 
+import {
+    print as print15, ask as ask15, color as color15,
+    forward as forward15, turn as turn15, sleep as sleep15, is as is15,
+    add as add15, remove as remove15, from as from15, to_list as to_list15,
+    at as at15, random as random15, clear as clear15, ifs as if15,
+    elses as else15, ins as in15, pressed as pressed15, not_in as not_in15,
+    repeat as repeat15, times as times15, fors as for15, to as to15, range as range15,
+    define as define15, returns as returns15, _with as with15, call as call15,
+    and as and15, or as or15, _while as while15
+} from "./level15-parser.terms"
+
 import TRADUCTION_IMPORT from '../../../highlighting/highlighting-trad.json';
 export interface InitializeCodeMirrorSyntaxHighlighterOptions {
     readonly keywordLanguage: string;
@@ -457,8 +468,7 @@ const keywordToToken: Record<number, tokenSpecilizer> = {
             "forward": forward14,
             "turn": turn14,
             "color": color14,
-            "sleep": sleep14,
-            "is": is14,
+            "sleep": sleep14,           
             "add": add14,
             "remove": remove14,
             "from": from14,
@@ -485,6 +495,45 @@ const keywordToToken: Record<number, tokenSpecilizer> = {
             "and": and14,
             "or": or14,
             "in": in14,
+            "is": is14,
+        },
+    },
+    15: {
+        extend: {
+            "print": print15,
+            "forward": forward15,
+            "turn": turn15,
+            "color": color15,
+            "sleep": sleep15,
+            "is": is15,
+            "add": add15,
+            "remove": remove15,
+            "from": from15,
+            "to_list": to_list15,
+            "clear": clear15,
+            "not_in": not_in15,
+            "repeat": repeat15,
+            "times": times15,
+            "for": for15,
+            "to": to15,
+            "range": range15,
+            "returns": returns15,
+            "call": call15,
+            "define": define15,
+            "with": with15
+        },
+        specialize: {
+            "if": if15,
+            "pressed": pressed15,
+            "ask": ask15,
+            "at": at15,
+            "random": random15,
+            "else": else15,
+            "and": and15,
+            "or": or15,
+            "in": in15,
+            "is": is15,
+            "while": while15
         },
     },
     18 : {
