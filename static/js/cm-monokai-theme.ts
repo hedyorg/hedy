@@ -19,6 +19,7 @@ const strawberry = "#ff6188",
     gutterBackground = "#2F3129",
     gutterColor = "#8F908A",
     activeLineGutter = "#272727",
+    skyBlue = "#66D9EF",
     // we don't really use these two, might need to edit them in the future
     tooltipBackground = "#353a42",
     darkBackground = "#21252b"
@@ -128,7 +129,7 @@ export const monokaiHighlightStyle = HighlightStyle.define([
   {tag: [t.typeName, t.className, t.number, t.changed, t.annotation, t.modifier, t.self, t.namespace],
    color: greenLizard},
   {tag: [t.operator, t.operatorKeyword, t.url, t.escape, t.regexp, t.link, t.special(t.string)],
-   color: strawberry},
+   color: skyBlue},
   {tag: [t.meta, t.comment],
    color: darkSilver},
   {tag: t.strong,

@@ -59,7 +59,7 @@ Repeat { repeat+ (Number | Text) times+ }
 For { fors+ Text ins+ (Text | range+ (Text | Number) to+ (Text | Number)) }
 
 Define { define+ Text (with+  Arguments)? }
-Call { call+ Text (with+ Arguments) }
+Call { call+ Text (with+ Arguments)? }
 Return { returns+ ( ListAccess | Expression | Call)+ }
 
 Arguments { argument (Comma argument)* }

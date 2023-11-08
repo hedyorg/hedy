@@ -61,7 +61,7 @@ For { fors+ Text ins+ (Text | range+ (Text | Number) to+ (Text | Number)) Op<':'
 While { while+ Condition ((and+ | or+) Condition)* Op<':'>}
 
 Define { define+ Text (with+  Arguments)? Op<':'>}
-Call { call+ Text (with+ Arguments) }
+Call { call+ Text (with+ Arguments)? }
 Return { returns+ (Expression | Call)+ }
 
 Arguments { argument (Comma argument)* }

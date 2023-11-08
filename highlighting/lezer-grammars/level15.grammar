@@ -61,7 +61,7 @@ While { while+ Condition ((and+ | or+) Condition)* }
 
 
 Define { define+ Text (with+  Arguments)? }
-Call { call+ Text (with+ Arguments) }
+Call { call+ Text (with+ Arguments)? }
 Return { returns+ ( ListAccess | Expression | Call)+ }
 
 Arguments { argument (Comma argument)* }
