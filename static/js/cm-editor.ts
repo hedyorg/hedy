@@ -2,7 +2,6 @@ import { HedyEditor, EditorType, HedyEditorCreator, EditorEvent, SourceRange } f
 import { EditorView, ViewUpdate, drawSelection, dropCursor, highlightActiveLine, 
         highlightActiveLineGutter, highlightSpecialChars, keymap, lineNumbers } from '@codemirror/view'
 import { EditorState, Compartment, StateEffect, Prec } from '@codemirror/state'
-import { oneDark } from '@codemirror/theme-one-dark';
 import { EventEmitter } from "./event-emitter";
 import { deleteTrailingWhitespace, defaultKeymap, historyKeymap } from '@codemirror/commands'
 import { history } from "@codemirror/commands"
@@ -19,6 +18,7 @@ import { styleTags } from "@lezer/highlight";
 import {LRLanguage} from "@codemirror/language"
 import { languagePerLevel } from "./lezer-parsers/language-packages";
 import { theLevel } from "./app";
+import { monokai } from "./cm-monokai-theme";
 
 export class HedyCodeMirrorEditorCreator implements HedyEditorCreator {
     /**
@@ -79,7 +79,8 @@ export class HedyCodeMirrorEditor implements HedyEditor {
                 background: '#272822',
                 fontSize: '15.2px',
                 color: 'white',
-                borderRadius: '4px'
+                borderRadius: '4px',
+                marginRight: '5px'
             },
 
             ".cm-scroller": {
@@ -115,7 +116,7 @@ export class HedyCodeMirrorEditor implements HedyEditor {
                     ...searchKeymap, // we need to replace this with our own search widget
                     ...historyKeymap,
                 ]),
-                oneDark,
+                monokai,
                 this.theme.of(mainEditorStyling),
                 this.readMode.of(EditorState.readOnly.of(isReadOnly)),
                 errorLineField,
