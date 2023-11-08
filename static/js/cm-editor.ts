@@ -12,7 +12,8 @@ import {
     addErrorLine, addErrorWord, removeDebugLine, removeErrorMarkers, 
     breakpointGutterState, breakpointGutter, addIncorrectLineEffect,
     incorrectLineField,
-    removeIncorrectLineEffect
+    removeIncorrectLineEffect,
+    addDebugWords
 } from "./cm-decorations";
 import { styleTags } from "@lezer/highlight";
 import {LRLanguage} from "@codemirror/language"
@@ -331,12 +332,9 @@ export class HedyCodeMirrorEditor implements HedyEditor {
     /**
      * Set the current line in the debugger
      */
-    setDebuggerCurrentLine(line: number | undefined) {        
-        line = line === undefined ? line : line + 1;
-
-        if (this.currentDebugLine === line) {
-            return;
-        }
+    setDebuggerCurrentLine(line?: number, startPos?: number, finishPos?: number) {
+        
+        console.log(line, startPos, finishPos);
 
         if (this.currentDebugLine) {
             this.view.dispatch({ effects: removeDebugLine.of() });
@@ -348,9 +346,20 @@ export class HedyCodeMirrorEditor implements HedyEditor {
         }
 
         this.currentDebugLine = line;
-        let effect: StateEffect<{row: number}>;
-        effect = addDebugLine.of({row: line});
-        this.view.dispatch({effects: effect});
+        if (startPos !== undefined && finishPos !== undefined) {
+            let effect: StateEffect<{from: number, to: number}>
+            const docLine = this.view.state.doc.line(line);
+            console.log(docLine)
+            const from = docLine.from + startPos - 1;
+            const to = docLine.from + finishPos;
+            console.log(`from ${from} - to ${to}`);
+            effect = addDebugWords.of({from, to});
+            this.view.dispatch({effects: effect});
+        } else {
+            let effect: StateEffect<{row: number}>;
+            effect = addDebugLine.of({row: line});
+            this.view.dispatch({effects: effect});
+        }
     }
 
     getActiveContents(debugLine: string | null): string {

@@ -7,6 +7,9 @@ export const addErrorWord = StateEffect.define<{row: number, col: number}>();
 export const removeErrorMarkers = StateEffect.define<void>();
 
 export const addDebugLine = StateEffect.define<{row: number}>();
+export const addDebugWords = StateEffect.define<{from: number, to: number}>({
+    map: (val, mapping) => ({from: mapping.mapPos(val.from), to: mapping.mapPos(val.to)})
+});
 export const removeDebugLine = StateEffect.define<void>();
 
 const breakpointGutterEffect = StateEffect.define<{pos: number, on: boolean}>({
@@ -72,6 +75,10 @@ export const debugLineField = StateField.define<DecorationSet>({
             const line = tr.state.doc.line(e.value.row);
             errors = errors.update({
                 add: [debugLine.range(line.from, line.from)]
+            });
+        } else if (e.is(addDebugWords)) {            
+            errors = errors.update({
+                add: [debugWord.range(e.value.from, e.value.to)]
             });
         } else if (e.is(removeDebugLine)) {
             // Just return the empty decoration set to remove all of the errors
@@ -144,6 +151,7 @@ const deactivateLineState = StateField.define<DecorationSet>({
 const errorHighlightLine = Decoration.line({class: "cm-error-editor"});
 const errorHighlightMark = Decoration.mark({class: "cm-error-editor"});
 const debugLine = Decoration.line({class: "cm-debugger-current-line"});
+const debugWord = Decoration.mark({class: "cm-debugger-current-line"});
 const incorrectCodeMark = Decoration.mark({class: "cm-incorrect-hedy-code"});
 const deactivateLineMarker = Decoration.line({class: "cm-disabled-line"})
 

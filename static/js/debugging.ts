@@ -349,10 +349,12 @@ export function incrementDebugLine() {
         const repeatMatches = repeatRe.exec(line);
         const elseMatches = elseRe.exec(line);
         if (ifMatches || repeatMatches || elseMatches) {
-          theGlobalEditor.setDebuggerCurrentLine(map.hedy_range.from_line - 1, 
-            map.hedy_range.from_column - 1, map.hedy_range.to_column - 1);
+          console.log('inside if repeat else')
+          console.log(map)
+          theGlobalEditor.setDebuggerCurrentLine(map.hedy_range.from_line, 
+            map.hedy_range.from_column, map.hedy_range.to_column - 1);
         } else {
-          theGlobalEditor.setDebuggerCurrentLine(map.hedy_range.from_line - 1);
+          theGlobalEditor.setDebuggerCurrentLine(map.hedy_range.from_line);
         }
         break
       } else if (theLevel <= 7 && blockCommands.includes(map.command)){
@@ -365,19 +367,19 @@ export function incrementDebugLine() {
           const ifMatches = ifRe.exec(line);
           if (ifMatches) {
             const length = ifMatches[1].length;
-            theGlobalEditor.setDebuggerCurrentLine(map.hedy_range.from_line - 1, map.hedy_range.from_column - 1, length);            
+            theGlobalEditor.setDebuggerCurrentLine(map.hedy_range.from_line, map.hedy_range.from_column, map.hedy_range.from_column + length - 1);            
             break
           }
         } else if (activeLine.match(/ *for/)) {
           const repeatMatches = repeatRe.exec(line);
           if (repeatMatches){            
             const length = repeatMatches[1].length;            
-            theGlobalEditor.setDebuggerCurrentLine(map.hedy_range.from_line - 1, map.hedy_range.from_column - 1, map.hedy_range.from_column + length - 1);
+            theGlobalEditor.setDebuggerCurrentLine(map.hedy_range.from_line, map.hedy_range.from_column, map.hedy_range.from_column + length - 1);
             break
           }
         }
       }  else if (theLevel >= 8 && blockCommands.includes(map.command)) { // these commands always come up in the tree so we visit them later
-        theGlobalEditor.setDebuggerCurrentLine(map.hedy_range.from_line - 1);
+        theGlobalEditor.setDebuggerCurrentLine(map.hedy_range.from_line);
         break;
       }
     }
