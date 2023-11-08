@@ -1259,6 +1259,7 @@ def hour_of_code(level, program_id=None):
         tutorial=tutorial,
         latest=version(),
         quiz=quiz,
+        max_level=hedy.HEDY_MAX_LEVEL,
         quiz_questions=quiz_questions,
         cheatsheet=cheatsheet,
         blur_button_available=False,
