@@ -198,14 +198,15 @@ class Database:
         """
         return PROGRAMS.get_many({"username": username}, reverse=True)
 
-    def filtered_programs_for_user(self, program_query, level=None, adventure=None, submitted=None,
-                                   limit=None, pagination_token=None, public=None):
+    def filtered_programs_for_user(self, username, level=None, adventure=None, submitted=None,
+                                   limit=None, pagination_token=None):
         ret = []
 
         # FIXME: Query by index, the current behavior is slow for many programs
         # (See https://github.com/hedyorg/hedy/issues/4121)
-        programs = dynamo.GetManyIterator(PROGRAMS, program_query,
+        programs = dynamo.GetManyIterator(PROGRAMS, {"username": username},
                                           reverse=True, batch_size=limit, pagination_token=pagination_token)
+
         for program in programs:
             if level and program.get('level') != int(level):
                 continue
@@ -221,6 +222,21 @@ class Database:
             ret.append(program)
 
             if limit and len(ret) >= limit:
+                break
+
+        return dynamo.ResultPage(ret, programs.next_page_token)
+
+    def public_programs_for_user(self, username, limit=None, pagination_token=None):
+        # Only return programs that are public but not submitted
+        programs = dynamo.GetManyIterator(PROGRAMS, {"username": username},
+                                          reverse=True, batch_size=limit, pagination_token=pagination_token)
+        ret = []
+        for program in programs:
+            if program.get("public") != 1 or program.get("submitted", False):
+                continue
+            ret.append(program)
+
+            if limit is not None and len(ret) >= limit:
                 break
 
         return dynamo.ResultPage(ret, programs.next_page_token)
