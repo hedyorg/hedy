@@ -10,5 +10,10 @@ describe("Testing subset passed through the URL", () => {
             goToPage(`/hour-of-code/${level}?subset=${subset.join(",")}`)
             cy.get(".tab").should("have.length", subset.length + 1)
         })
+
+        it('has a tracking pixel', () => {
+            goToPage(`/hour-of-code/${level}?subset=${subset.join(",")}`)
+            cy.get("#tracking_pixel").should("exist")
+        })
     }
 })
