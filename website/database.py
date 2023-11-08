@@ -198,7 +198,7 @@ class Database:
         """
         return PROGRAMS.get_many({"username": username}, reverse=True)
 
-    def filtered_programs_for_user(self, username, level=None, adventure=None, submitted=None,
+    def filtered_programs_for_user(self, username, level=None, adventure=None, submitted=None, public=None,
                                    limit=None, pagination_token=None):
         ret = []
 
@@ -218,25 +218,12 @@ class Database:
             if submitted is not None:
                 if program.get('submitted') != submitted:
                     continue
+            if public is not None and bool(program.get('public')) != public:
+                continue
 
             ret.append(program)
 
             if limit and len(ret) >= limit:
-                break
-
-        return dynamo.ResultPage(ret, programs.next_page_token)
-
-    def public_programs_for_user(self, username, limit=None, pagination_token=None):
-        # Only return programs that are public but not submitted
-        programs = dynamo.GetManyIterator(PROGRAMS, {"username": username},
-                                          reverse=True, batch_size=limit, pagination_token=pagination_token)
-        ret = []
-        for program in programs:
-            if program.get("public") != 1 or program.get("submitted", False):
-                continue
-            ret.append(program)
-
-            if limit is not None and len(ret) >= limit:
                 break
 
         return dynamo.ResultPage(ret, programs.next_page_token)
