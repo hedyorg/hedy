@@ -1050,7 +1050,7 @@ def tutorial_index():
     initial_tab = adventures[0].short_name
     initial_adventure = adventures[0]
 
-    max_level = hedy.HEDY_MAX_LEVEL #do we need to fetch the max level per language?
+    max_level = hedy.HEDY_MAX_LEVEL  # do we need to fetch the max level per language?
 
     return render_template(
         "code-page.html",
