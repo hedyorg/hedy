@@ -954,7 +954,7 @@ def programs_page(user):
     filter = request.args.get('filter', default=None, type=str)
     submitted = True if filter == 'submitted' else None
 
-    result = DATABASE.filtered_programs_for_user({"username": from_user or username},
+    result = DATABASE.filtered_programs_for_user(from_user or username,
                                                  level=level,
                                                  adventure=adventure,
                                                  submitted=submitted,
@@ -1756,7 +1756,7 @@ def reset_page():
 @requires_login_redirect
 def profile_page(user):
     profile = DATABASE.user_by_username(user['username'])
-    programs = DATABASE.filtered_programs_for_user({"username": user['username'], "public": 1})
+    programs = DATABASE.filtered_programs_for_user(user['username'], public=True)
     public_profile_settings = DATABASE.get_public_profile_settings(current_user()['username'])
 
     classes = []
@@ -2371,7 +2371,8 @@ def public_user_page(username):
     user_public_info = DATABASE.get_public_profile_settings(username)
     page = request.args.get('page', default=None, type=str)
     if user_public_info:
-        user_programs = DATABASE.filtered_programs_for_user({"username": user['username'], "public": 1},
+        user_programs = DATABASE.filtered_programs_for_user(username,
+                                                            public=True,
                                                             limit=10,
                                                             pagination_token=page)
         next_page_token = user_programs.next_page_token
