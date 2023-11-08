@@ -6,12 +6,25 @@
   <div class="ltr:pl-8 rtl:pr-8 py-2 flex gap-2 px-4 items-center justify-between w-full max-w-screen-2xl mx-auto">
     <div class="dropdown relative">
     <button class="white-btn px-4 rounded inline-flex items-center gap-2 text-xl" id="dropdown_level_button"
-        onclick="$('#level_dropdown').slideToggle('medium');">
+        onclick="$('#level_dropdown').slideToggle('medium');"
+        _="on click 
+            if .upwards-arrow is .hidden
+              set *display on upwards-arrow 
+            else
+              toggle .hidden to upwards-arrow
+            if .downwards-arrow is .hidden
+              set *display on upwards-arrow 
+            else
+              add .hidden to downwards-arrow
+        ">
         <span>{{ _('level_title') }} {{ level_nr }}
           &nbsp;
           {% if assignment_nr %} · {{ _('step_title') }} {{ assignment_nr }} {% endif %}</span>
-        <svg class="fill-current h-6 w-6" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
+        <svg class="downwards-arrow fill-current h-6 w-6" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
           <path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z" />
+        </svg>
+        <svg class="upwards-arrow hidden fill-current h-6 w-6" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
+          <path d="M9.293 11.05l.707-.707L15.657 15l-1.414 1.414L10 12.172 5.757 16.414 4.343 15z" />
         </svg>
       </button>
       <div class="dropdown-menu dropdown-blue z-20 min-w-full" id="level_dropdown"
