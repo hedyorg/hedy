@@ -264,6 +264,121 @@ ADVENTURE_ORDER_PER_LEVEL = {
     ]
 }
 
+HOUR_OF_CODE_ADVENTURES = {
+    1: [
+        'print_command',
+        'parrot',
+        'turtle',
+        'debugging'
+    ],
+    2: [
+        'default',
+        'parrot',
+        'turtle',
+        'debugging'
+    ],
+    3: [
+        'parrot',
+        'dishes',
+        'turtle',
+        'debugging'
+    ],
+    4: [
+        'dishes',
+        'parrot',
+        'story',
+        'debugging'
+    ],
+    5: [
+        'language',
+        'parrot',
+        'turtle',
+        'debugging'
+    ],
+    6: [
+        'songs',
+        'dishes',
+        'turtle',
+        'debugging'
+    ],
+    7: [
+        'songs',
+        'dishes',
+        'restaurant',
+        'debugging'
+    ],
+    8: [
+        'songs',
+        'restaurant',
+        'turtle',
+        'debugging'
+    ],
+    9: [
+        'rock',
+        'restaurant',
+        'turtle',
+        'debugging'
+    ],
+    10: [
+        'dishes',
+        'dice',
+        'turtle',
+        'songs',
+        'debugging'
+    ],
+    11: [
+        'years',
+        'songs',
+        'restaurant',
+        'debugging'
+    ],
+    12: [
+        'maths',
+        'functions',
+        'story',
+        'turtle',
+        'debugging'
+    ],
+    13: [
+        'story',
+        'rock',
+        'restaurant',
+        'calculator',
+        'debugging'
+    ],
+    14: [
+        'guess_my_number',
+        'haunted',
+        'hotel',
+        'calculator',
+        'quizmaster',
+        'debugging'
+    ],
+    15: [
+        'restaurant',
+        'story',
+        'dice',
+        'rock',
+        'debugging'
+    ],
+    16: [
+        'haunted',
+        'songs',
+        'language',
+        'debugging'
+    ],
+    17: [
+        'blackjack',
+        'debugging'
+    ],
+    18: [
+        'story',
+        'songs',
+        'debugging'
+    ]
+}
+
+
 RESEARCH = {}
 for paper in sorted(os.listdir('content/research'),
                     key=lambda x: int(x.split("_")[-1][:-4]),
@@ -374,6 +489,10 @@ class Adventures(StructuredDataFile):
 
     def get_adventures(self, keyword_lang="en"):
         return deep_translate_keywords(self.file.get('adventures'), keyword_lang)
+
+    def get_adventures_subset(self, subset=["print_command", "parrot"], keyword_lang="en"):
+        adventures = {aid: adv for aid, adv in self.file.get('adventures', {}).items() if aid in subset}
+        return deep_translate_keywords(adventures, keyword_lang)
 
     def has_adventures(self):
         return True if self.file.get('adventures') else False

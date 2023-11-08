@@ -1628,7 +1628,11 @@ export function toggle_developers_mode(enforced: boolean) {
 
 export function toggle_keyword_language(lang: string) {
   const hash = window.location.hash;
-  window.open('?keyword_language=' + lang + hash, "_self");
+  const queryString = window.location.search;
+  const urlParams = new URLSearchParams(queryString);
+  urlParams.set('keyword_language', lang)
+  window.location.search = urlParams.toString()
+  window.open(hash, "_self");
 }
 
 export function toggle_blur_code() {
@@ -1651,15 +1655,25 @@ export async function change_language(lang: string) {
   await tryCatchPopup(async () => {
     const response = await postJsonWithAchievements('/change_language', { lang });
     if (response.succes) {
-      // Check if keyword_language is set to change it to English
       const queryString = window.location.search;
       const urlParams = new URLSearchParams(queryString);
       if (urlParams.get('keyword_language') !== null) {
         urlParams.set('keyword_language', 'en');
+      }
+      if (urlParams.get("language") !== null) {
+        urlParams.set("language", lang)
         window.location.search = urlParams.toString();
       } else {
         location.reload();
       }
+      // What's the logic behind this? what happens the keyword_language=en and we want to change the language to arabic? params? 
+      // Check if keyword_language is set to change it to English
+      // if (urlParams.get('keyword_language') !== null) {
+      //   urlParams.set('keyword_language', 'en');
+      //   window.location.search = urlParams.toString();
+      // } else {
+      //   location.reload();
+      // }
     }
   });
 }
@@ -2115,4 +2129,13 @@ function change_shared (shared: boolean, index: number) {
     $('#favourite_program_container_' + index).removeClass('text-yellow-400');
     $('#favourite_program_container_' + index).addClass('text-white');
   }
+}
+
+export function goToLevel(level: any) {
+  window.location.hash = '' // the hash will be set to the first adventure.
+  let newPath = window.location.pathname.replace(/\d+/, level);
+  if (!newPath.includes(level)) {
+    newPath = window.location.pathname + `/${level}`
+  } 
+  window.location.pathname = newPath
 }
