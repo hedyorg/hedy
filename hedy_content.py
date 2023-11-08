@@ -264,8 +264,7 @@ ADVENTURE_ORDER_PER_LEVEL = {
     ]
 }
 
-# Felienne, you can change what show here!
-HOC_ADVENTURE_PER_LEVEL = {
+HOUR_OF_CODE_ADVENTURES = {
     1: [
         'print_command',
         'parrot',
