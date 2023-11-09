@@ -67,9 +67,10 @@ class TableStorage(metaclass=ABCMeta):
 
 class KeySchema:
     """The schema of a table key.
-    
+
     Consists of a partition key and optionally a sort key.
     """
+
     def __init__(self, partition_key, sort_key=None):
         self.partition_key = partition_key
         self.sort_key = sort_key
@@ -85,7 +86,7 @@ class KeySchema:
             return self.partition_key == names[0]
         if len(names) == 2:
             return ((self.partition_key == names[0] and self.sort_key == names[1])
-                or (self.partition_key == names[1] and self.sort_key == names[0]))
+                    or (self.partition_key == names[1] and self.sort_key == names[0]))
         return False
 
     def __repr__(self):
@@ -207,7 +208,7 @@ class Table:
         # Check to make sure the indexes have unique partition keys
         part_names = reverse_index((index.index_name, index.partition_key) for index in self.indexes)
         duped = [names for names in part_names.values() if len(names) > 1]
-        if duped: 
+        if duped:
             raise RuntimeError(f'Table {self.table_name}: indexes with the same partition key: {duped}')
 
     @querylog.timed_as("db_get")
@@ -409,7 +410,8 @@ class Table:
 
         schemas = [self.key_schema] + [i.key_schema for i in self.indexes]
         str_schemas = ', '.join(str(s) for s in schemas)
-        raise RuntimeError(f"Table {self.table_name} can be queried using one of {str_schemas}. Got {tuple(key_data.keys())}")
+        raise RuntimeError(
+            f"Table {self.table_name} can be queried using one of {str_schemas}. Got {tuple(key_data.keys())}")
 
     def _extract_key(self, data):
         """
