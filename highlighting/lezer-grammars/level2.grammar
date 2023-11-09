@@ -1,6 +1,6 @@
 @top Program { eol* (Command eol+)* Command? }
 Command {
-    Assign | Ask | Print | Turtle | Sleep
+    Assign | Ask | Print | Turtle | Sleep | ErrorInvalid
 }
 
 Assign { Text is+ Text+ }
