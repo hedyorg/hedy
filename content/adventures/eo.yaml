@@ -2492,64 +2492,67 @@ adventures:
                 start_code: '{print} ''Eskapu el la hantata domo!'''
             14:
                 story_text: |
-                    En ĉi tiu nivelo, vi povas uzi la simbolojn `<` kaj `>` por kalkuli vivojn en via ludo.
+                    ### Exercise
+                    In this level you can use the `<` and `>` symbol to introduce lives to your game.
+                    Make sure the player loses a life when they come across the wrong monster and that the game stops if you have no lives left.
                 example_code: |
                     ```
                     {print} 'Escape from the haunted house'
                     lives = 3
-                    pordoj = 1, 2, 3
-                    monstroj = 'the wicked witch', 'a zombie', 'a sleeping 3 headed dog'
+                    doors = 1, 2, 3
+                    monsters = 'the wicked witch', 'a zombie', 'a sleeping 3 headed dog'
                     {for} i {in} {range} 1 {to} 10
-                        {if} lives > 0
-                            bona_pordo = pordoj {at} {random}
-                            monstro = monstroj {at} {random}
+                        {if} lives _
+                            good_door = doors {at} {random}
+                            monster = monsters {at} {random}
                             chosen_door = {ask} 'Which door do you choose?'
-                            {if} bona_pordo == chosen_door
+                            {if} good_door == chosen_door
                                 {print} 'You have chosen the correct door'
                             {else}
-                                {print} 'You see...' monstro
-                                {if} monstro == 'a sleeping 3 headed dog'
-                                    {print} 'Pffieuw.... Ĝi dormas'
+                                {print} 'You see...' monster
+                                {if} monster == 'a sleeping 3 headed dog'
+                                    {print} 'Pffieuw.... Its asleep'
                                 {else}
                                     {print} 'You lose one life'
-                                    lives = lives -1
+                                    lives = _
                         {else}
-                            {print} 'FINO'
+                            {print} 'GAME OVER'
                     ```
-                start_code: '# via kodo ĉi tie'
+                start_code: '# place your code here'
             16:
                 story_text: |
+                    ### Exercise
                     This haunted house game uses the connection between the lists you can use in this level.
                     For example: all the properties that belong to the zombie are first in all the lists, witch second and vampire third.
-                    Check out the code!
+                    Check out the code and fill in  `weapons[i]`, `monsters[i]` , `bad_fate[i]`, `good_fate[i]`, `hint[i]` on the correct blanks to get the code to work!
                 example_code: |
                     ```
-                    nombroj = [1, 2, 3]
-                    i = nombroj[{random}]
-                    sono = ['gruntadon', 'rikanon', 'susurantajn vespertflugilojn']
-                    monstroj = ['kadavromonstro', 'sorĉistino', 'vampiro']
-                    malbona_rezulto = ['Via cerbo estas formanĝita', 'Vi estas eterne malbenita', 'Vi estas mordita']
-                    bona_rezulto = ['Vi ĵetas la ŝinkon. La kadavromonstro, distrita, ekmanĝas ĝin.', 'Vi ekbruligas la kurtenojn. La sorĉistino fuĝas pro timo de la fajro.', 'La vampiro malamas la ajlon kaj fuĝas.']
-                    armiloj = ['ŝinko', 'fajrilo', 'ajlo']
-                    {print} 'Vi staras antaŭ malnova domego'
-                    {print} 'Io estas fia ĉi tie'
-                    {print} 'Vi aŭdas ' sono[i]
-                    {print} 'Vi esploros ĝin'
-                    {print} 'Vi eniras la kuirejon kaj vidas fajrilon, krudan ŝinkon kaj ajlon.'
-                    via_armilo = {ask} 'Kion vi prenas?'
-                    {print} 'Portante vian ' via_armilo 'n, vi eniras la ĉefĉambron'
-                    {print} 'Tie troviĝas ' monstroj[i]
-                    bezonata_armilo = armiloj[i]
-                    {if} via_armilo == bezonata_armilo
-                        {print} 'Vi uzas vian ' via_armilo 'n'
-                        {print} bona_rezulto[i]
-                        {print} 'VI GAJNAS!'
+                    numbers = [1, 2, 3]
+                    i = numbers[{random}]
+                    hint = ['growling', 'a cackling laugh', 'fluttering batwings']
+                    monsters = ['zombie', 'witch', 'vampire']
+                    bad_fate = ['Your brain is eaten', 'You are forever cursed', 'You are bitten']
+                    good_fate = ['You throw the ham. The zombie is distracted and starts eating it.', 'You set the curtains on fire. The witch flees out of fear for the fire', 'The vampire hates garlic and flees']
+                    weapons = ['ham', 'lighter', 'garlic']
+                    {print} 'You are standing in front of an old mansion'
+                    {print} 'Something is not right here'
+                    {print} 'You hear ' _
+                    {print} 'You are going to explore it'
+                    {print} 'You enter the kitchen and see a lighter, a raw ham and a garlic.'
+                    your_weapon = {ask} 'What do you bring with you?'
+                    {print} 'With your ' your_weapon ' you enter the living room'
+                    {print} 'There you find a ' _
+                    needed_weapon = _
+                    {if} your_weapon == needed_weapon
+                        {print} 'You use your ' your_weapon
+                        {print} _
+                        {print} 'YOU WIN!'
                     {else}
-                        {print} 'Vi elektis maltaŭgan armilon…'
-                        {print} malbona_rezulto[i]
-                        {print} 'FINO'
+                        {print} 'You have chosen the wrong weapon...'
+                        {print} _
+                        {print} 'GAME OVER'
                     ```
-                start_code: '# via kodo ĉi tie'
+                start_code: '# place your code here'
     hotel:
         name: hotel
         default_save_name: hotel

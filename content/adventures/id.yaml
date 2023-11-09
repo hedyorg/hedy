@@ -2490,7 +2490,9 @@ adventures:
                 start_code: print 'Kabur dari rumah berhantu!'
             14:
                 story_text: |
+                    ### Exercise
                     In this level you can use the `<` and `>` symbol to introduce lives to your game.
+                    Make sure the player loses a life when they come across the wrong monster and that the game stops if you have no lives left.
                 example_code: |
                     ```
                     {print} 'Escape from the haunted house'
@@ -2498,7 +2500,7 @@ adventures:
                     doors = 1, 2, 3
                     monsters = 'the wicked witch', 'a zombie', 'a sleeping 3 headed dog'
                     {for} i {in} {range} 1 {to} 10
-                        {if} lives > 0
+                        {if} lives _
                             good_door = doors {at} {random}
                             monster = monsters {at} {random}
                             chosen_door = {ask} 'Which door do you choose?'
@@ -2510,44 +2512,44 @@ adventures:
                                     {print} 'Pffieuw.... Its asleep'
                                 {else}
                                     {print} 'You lose one life'
-                                    lives = lives -1
+                                    lives = _
                         {else}
                             {print} 'GAME OVER'
                     ```
                 start_code: '# place your code here'
             16:
                 story_text: |
+                    ### Exercise
                     This haunted house game uses the connection between the lists you can use in this level.
                     For example: all the properties that belong to the zombie are first in all the lists, witch second and vampire third.
-                    Check out the code!
+                    Check out the code and fill in  `weapons[i]`, `monsters[i]` , `bad_fate[i]`, `good_fate[i]`, `hint[i]` on the correct blanks to get the code to work!
                 example_code: |
                     ```
                     numbers = [1, 2, 3]
-                    i = numbers[random]
+                    i = numbers[{random}]
                     hint = ['growling', 'a cackling laugh', 'fluttering batwings']
                     monsters = ['zombie', 'witch', 'vampire']
                     bad_fate = ['Your brain is eaten', 'You are forever cursed', 'You are bitten']
                     good_fate = ['You throw the ham. The zombie is distracted and starts eating it.', 'You set the curtains on fire. The witch flees out of fear for the fire', 'The vampire hates garlic and flees']
                     weapons = ['ham', 'lighter', 'garlic']
-                    {print} 'You are standing in front of an old mension'
+                    {print} 'You are standing in front of an old mansion'
                     {print} 'Something is not right here'
-                    {print} 'You hear ' hint[i]
+                    {print} 'You hear ' _
                     {print} 'You are going to explore it'
-                    {print} 'You enter the kitchen en see a lighter, a raw ham and a garlic.'
+                    {print} 'You enter the kitchen and see a lighter, a raw ham and a garlic.'
                     your_weapon = {ask} 'What do you bring with you?'
                     {print} 'With your ' your_weapon ' you enter the living room'
-                    {print} 'There you find a ' monsters[i]
-                    needed_weapon = weapons[i]
+                    {print} 'There you find a ' _
+                    needed_weapon = _
                     {if} your_weapon == needed_weapon
                         {print} 'You use your ' your_weapon
-                        {print} good_fate[i]
+                        {print} _
                         {print} 'YOU WIN!'
                     {else}
                         {print} 'You have chosen the wrong weapon...'
-                        {print} bad_fate[i]
+                        {print} _
                         {print} 'GAME OVER'
                     ```
-                start_code: '# place your code here'
     hotel:
         name: hotel
         default_save_name: hotel

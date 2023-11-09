@@ -2514,64 +2514,67 @@ adventures:
                 start_code: '{print} ''Ik nga shtëpia e përhumbur!'''
             14:
                 story_text: |
-                    Në këtë nivel, ju mund të përdorni simbolin `<` dhe `>` për të futur jetë në lojën tuaj.
+                    ### Exercise
+                    In this level you can use the `<` and `>` symbol to introduce lives to your game.
+                    Make sure the player loses a life when they come across the wrong monster and that the game stops if you have no lives left.
                 example_code: |
                     ```
-                    {print} 'Ik nga shtëpia e përhumbur'
-                    jeta = 3
-                    dyert = 1, 2, 3
-                    përbindëshat = 'magjistare e keqe', 'një mumje', 'një qen me 3 koka duke fjetur'
+                    {print} 'Escape from the haunted house'
+                    lives = 3
+                    doors = 1, 2, 3
+                    monsters = 'the wicked witch', 'a zombie', 'a sleeping 3 headed dog'
                     {for} i {in} {range} 1 {to} 10
-                        {if} jeta> 0
-                            dera_mirë = dyert {at} {random}
-                            përbindësh = përbindëshat {at} {random}
-                            dera_zgjedhur = {ask} 'Cilën derë zgjidhni?'
-                            {if} dera_mirë == dera_zgjedhur
-                                {print} 'Ke zgjedhur derën e duhur'
+                        {if} lives _
+                            good_door = doors {at} {random}
+                            monster = monsters {at} {random}
+                            chosen_door = {ask} 'Which door do you choose?'
+                            {if} good_door == chosen_door
+                                {print} 'You have chosen the correct door'
                             {else}
-                                {print} "E shihni..." përbindësh
-                                {if} përbindësh == 'një qen me 3 koka duke fjetur'
-                                    {print} 'Pffieuw... Është në gjumë'
+                                {print} 'You see...' monster
+                                {if} monster == 'a sleeping 3 headed dog'
+                                    {print} 'Pffieuw.... Its asleep'
                                 {else}
-                                    {print} 'Ti humb një jetë'
-                                    jeta = jeta -1
+                                    {print} 'You lose one life'
+                                    lives = _
                         {else}
-                            {print} 'LOJA PËRFUNDOI'
+                            {print} 'GAME OVER'
                     ```
-                start_code: '# Vendoseni kodin tuaj këtu'
+                start_code: '# place your code here'
             16:
                 story_text: |
-                    Kjo lojë e shtëpive të përhumbura përdor lidhjen midis listave që mund të përdorni në këtë nivel.
-                    Për shembull: të gjitha pronat që i përkasin zombit janë të parat në të gjitha listat, shtriga e dyta dhe vampiri i treti.
-                    Shikoni kodin!
+                    ### Exercise
+                    This haunted house game uses the connection between the lists you can use in this level.
+                    For example: all the properties that belong to the zombie are first in all the lists, witch second and vampire third.
+                    Check out the code and fill in  `weapons[i]`, `monsters[i]` , `bad_fate[i]`, `good_fate[i]`, `hint[i]` on the correct blanks to get the code to work!
                 example_code: |
                     ```
-                    numrat = [1, 2, 3]
-                    i = numrat[{random}]
-                    zëra = ['ulërimë', 'një e qeshur rrëqethëse', 'krahët që fluturojnë']
-                    përbindëshat= ['mumje', 'shtrigë', 'vampir']
-                    fat_keq = ['Truri të është ngrënë', 'Ti je i mallkuar përgjithmonë', 'Je kafshuar']
-                    fat_mirë = ['Ti hedh proshutën. Mumje shpërqendrohet dhe fillon ta hajë atë.', 'I vure zjarrin perdeve. Shtriga ikën nga frika e zjarrit', 'Vampiri e urren hudhrën dhe ikën']
-                    armë = ['proshutë', 'çakmak', 'hudhër']
-                    {print} 'Ju jeni duke qëndruar përballë një pallati të vjetër'
-                    {print} 'Diçka nuk është në rregull këtu'
-                    {print} "Ju dëgjoni" zëra[i]
-                    {print} 'Do ta eksplorosh'
-                    {print} 'Hyni në kuzhinë dhe shihni një çakmak, një proshutë të papërpunuar dhe një hudhër.'
-                    arma_juaj = {ask} 'Çfarë sjell me vete?'
-                    {print} 'Me ' arma_juaj ' hyni në dhomën e ndenjes'
-                    {print} 'Aty gjen një ' përbindëshat[i]
-                    arma_nevojshme = armë[i]
-                    {if} arma_juaj == arma_nevojshme
-                        {print} 'Ju përdorni ' arma_juaj
-                        {print} fat_mirë[i]
-                        {print} 'TI FITON!'
+                    numbers = [1, 2, 3]
+                    i = numbers[{random}]
+                    hint = ['growling', 'a cackling laugh', 'fluttering batwings']
+                    monsters = ['zombie', 'witch', 'vampire']
+                    bad_fate = ['Your brain is eaten', 'You are forever cursed', 'You are bitten']
+                    good_fate = ['You throw the ham. The zombie is distracted and starts eating it.', 'You set the curtains on fire. The witch flees out of fear for the fire', 'The vampire hates garlic and flees']
+                    weapons = ['ham', 'lighter', 'garlic']
+                    {print} 'You are standing in front of an old mansion'
+                    {print} 'Something is not right here'
+                    {print} 'You hear ' _
+                    {print} 'You are going to explore it'
+                    {print} 'You enter the kitchen and see a lighter, a raw ham and a garlic.'
+                    your_weapon = {ask} 'What do you bring with you?'
+                    {print} 'With your ' your_weapon ' you enter the living room'
+                    {print} 'There you find a ' _
+                    needed_weapon = _
+                    {if} your_weapon == needed_weapon
+                        {print} 'You use your ' your_weapon
+                        {print} _
+                        {print} 'YOU WIN!'
                     {else}
-                        {print} 'Ke zgjedhur armën e gabuar...'
-                        {print} fat_keq[i]
-                        {print} 'LOJA MBAROI'
+                        {print} 'You have chosen the wrong weapon...'
+                        {print} _
+                        {print} 'GAME OVER'
                     ```
-                start_code: '# Vendoseni kodin tuaj këtu'
+                start_code: '# place your code here'
     hotel:
         name: hotel
         default_save_name: hotel

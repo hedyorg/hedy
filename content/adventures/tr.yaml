@@ -2619,64 +2619,67 @@ adventures:
                 start_code: '{print} ''Perili evden kaçış!'''
             14:
                 story_text: |
-                    Bu seviyede, `<` ve `>` sembollerini kullanarak oyununuza canlar ekleyebilirsiniz.
+                    ### Exercise
+                    In this level you can use the `<` and `>` symbol to introduce lives to your game.
+                    Make sure the player loses a life when they come across the wrong monster and that the game stops if you have no lives left.
                 example_code: |
                     ```
-                    {print} 'Perili evden kaçış'
-                    canlar = 3
-                    kapılar = 1, 2, 3
-                    canavarlar = 'kötü cadı', 'zombi', 'uyuyan üç başlı bir köpek'
+                    {print} 'Escape from the haunted house'
+                    lives = 3
+                    doors = 1, 2, 3
+                    monsters = 'the wicked witch', 'a zombie', 'a sleeping 3 headed dog'
                     {for} i {in} {range} 1 {to} 10
-                        {if} canlar > 0
-                            iyi_kapı = kapılar {at} {random}
-                            canavar = canavarlar {at} {random}
-                            seçilen_kapı = {ask} 'Hangi kapıyı seçiyorsunuz?'
-                            {if} iyi_kapı == seçilen_kapı
-                                {print} 'Doğru kapıyı seçtiniz'
+                        {if} lives _
+                            good_door = doors {at} {random}
+                            monster = monsters {at} {random}
+                            chosen_door = {ask} 'Which door do you choose?'
+                            {if} good_door == chosen_door
+                                {print} 'You have chosen the correct door'
                             {else}
-                                {print} 'Karşınıza bir...' canavar ' çıktı'
-                                {if} canavar == 'uyuyan üç başlı bir köpek'
-                                    {print} 'Pffieuw.... Neyseki uyuyor'
+                                {print} 'You see...' monster
+                                {if} monster == 'a sleeping 3 headed dog'
+                                    {print} 'Pffieuw.... Its asleep'
                                 {else}
-                                    {print} 'Bir can kaybettiniz'
-                                    canlar = canlar -1
+                                    {print} 'You lose one life'
+                                    lives = _
                         {else}
-                            {print} 'OYUN BİTTİ'
+                            {print} 'GAME OVER'
                     ```
-                start_code: '# kodunuzu buraya yazın'
+                start_code: '# place your code here'
             16:
                 story_text: |
-                    Bu perili ev oyunu, bu seviyede kullanabileceğiniz listeler ile arasında bir bağlantı kullanır.
-                    Örneğin: zombiye ait tüm özellikler tüm listelerde ilk sırada, cadı ikinci sırada ve vampir üçüncü sırada yer alır.
-                    Kodu kontrol edin!
+                    ### Exercise
+                    This haunted house game uses the connection between the lists you can use in this level.
+                    For example: all the properties that belong to the zombie are first in all the lists, witch second and vampire third.
+                    Check out the code and fill in  `weapons[i]`, `monsters[i]` , `bad_fate[i]`, `good_fate[i]`, `hint[i]` on the correct blanks to get the code to work!
                 example_code: |
                     ```
-                    sayılar = [1, 2, 3]
-                    i = sayılar[{random}]
-                    ipucu = ['hırlama', 'gıdaklayan bir kahkaha', 'çırpınan yarasa kanatları']
-                    canavarlar = ['zombi', 'cadı', 'vampir']
-                    kötü_son = ['Beynini yediler', 'Sonsuza kadar lanetlendin', 'Isırıldın']
-                    iyi_son = ['Bir et parçası fırlatırsın. Zombinin dikkati dağılır ve onu yemeye başlar', 'Perdeleri ateşe verirsin. Cadı yangın korkusuyla kaçar', 'Vampir sarımsaktan nefret eder ve kaçar']
-                    silahlar = ['et', 'çakmak', 'sarımsak']
-                    {print} 'Eski bir konağın önünde duruyorsunuz.'
-                    {print} 'Burada doğru olmayan bir şeyler var.'
-                    {print} 'Bir ' ipucu[i] ' sesi duyuyorsunuz... '
-                    {print} 'Onu aramaya gidiyorsunuz'
-                    {print} 'Mutfağa giriyorsunuz ve bir çakmak, çiğ bir et ve sarımsak görüyorsunuz.'
-                    senin_silahın = {ask} 'Yanına hangisini alıyorsun? (çakmak, et, sarımsak)'
-                    {print} 'Elinde ' senin_silahın ' ile oturma odasına giriyorsun'
-                    {print} 'Orada karşına bir ' canavarlar[i] ' çıkıyor'
-                    gereken_silah = silahlar[i]
-                    {if} senin_silahın == gereken_silah
-                        {print} 'Elindeki ' senin_silahın ' ile saldırıyorsun'
-                        {print} iyi_son[i]
-                        {print} 'SEN KAZANDIN!'
+                    numbers = [1, 2, 3]
+                    i = numbers[{random}]
+                    hint = ['growling', 'a cackling laugh', 'fluttering batwings']
+                    monsters = ['zombie', 'witch', 'vampire']
+                    bad_fate = ['Your brain is eaten', 'You are forever cursed', 'You are bitten']
+                    good_fate = ['You throw the ham. The zombie is distracted and starts eating it.', 'You set the curtains on fire. The witch flees out of fear for the fire', 'The vampire hates garlic and flees']
+                    weapons = ['ham', 'lighter', 'garlic']
+                    {print} 'You are standing in front of an old mansion'
+                    {print} 'Something is not right here'
+                    {print} 'You hear ' _
+                    {print} 'You are going to explore it'
+                    {print} 'You enter the kitchen and see a lighter, a raw ham and a garlic.'
+                    your_weapon = {ask} 'What do you bring with you?'
+                    {print} 'With your ' your_weapon ' you enter the living room'
+                    {print} 'There you find a ' _
+                    needed_weapon = _
+                    {if} your_weapon == needed_weapon
+                        {print} 'You use your ' your_weapon
+                        {print} _
+                        {print} 'YOU WIN!'
                     {else}
-                        {print} 'Yanlış silahı seçmişsin....'
-                        {print} kötü_son[i]
-                        {print} 'OYUN BİTTİ'
+                        {print} 'You have chosen the wrong weapon...'
+                        {print} _
+                        {print} 'GAME OVER'
                     ```
-                start_code: '# kodunuzu buraya yazın'
+                start_code: '# place your code here'
     hotel:
         name: hotel
         default_save_name: hotel

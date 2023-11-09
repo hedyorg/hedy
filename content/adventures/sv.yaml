@@ -2577,64 +2577,67 @@ adventures:
                 start_code: '{print} ''Fly från spökhuset!'''
             14:
                 story_text: |
-                    På den här nivån kan du använda symbolerna `<` och `>` för att lägga till liv i ditt spel.
+                    ### Exercise
+                    In this level you can use the `<` and `>` symbol to introduce lives to your game.
+                    Make sure the player loses a life when they come across the wrong monster and that the game stops if you have no lives left.
                 example_code: |
                     ```
-                    {print} 'Fly från spökhuset'
-                    liv = 3
-                    dörrar = 1, 2, 3
-                    monster = 'den onda häxan', 'en zombie', 'en sovande trehövdad hund'
+                    {print} 'Escape from the haunted house'
+                    lives = 3
+                    doors = 1, 2, 3
+                    monsters = 'the wicked witch', 'a zombie', 'a sleeping 3 headed dog'
                     {for} i {in} {range} 1 {to} 10
-                        {if} liv > 0
-                            bra_dörr = dörrar {at} {random}
-                            monster = monster {at} {random}
-                            vald_dörr = {ask} 'Vilken dörr väljer du?'
-                            {if} bra_dörr == vald_dörr
-                                {print} 'Du har valt rätt dörr'
+                        {if} lives _
+                            good_door = doors {at} {random}
+                            monster = monsters {at} {random}
+                            chosen_door = {ask} 'Which door do you choose?'
+                            {if} good_door == chosen_door
+                                {print} 'You have chosen the correct door'
                             {else}
-                                {print} 'Du ser … ' monster
-                                {if} monster == 'en sovande trehövdad hund'
-                                    {print} 'Puuh … den sover'
+                                {print} 'You see...' monster
+                                {if} monster == 'a sleeping 3 headed dog'
+                                    {print} 'Pffieuw.... Its asleep'
                                 {else}
-                                    {print} 'Du förlorar ett liv'
-                                    liv = liv - 1
+                                    {print} 'You lose one life'
+                                    lives = _
                         {else}
                             {print} 'GAME OVER'
                     ```
-                start_code: '# skriv din kod här'
+                start_code: '# place your code here'
             16:
                 story_text: |
-                    Detta spökhusspel använder sambandet mellan listorna du kan använda på denna nivå.
-                    Till exempel: alla egenskaper som tillhör zombien är först i alla listor, häxan på andra plats och vampyren på tredje plats.
-                    Kolla in koden!
+                    ### Exercise
+                    This haunted house game uses the connection between the lists you can use in this level.
+                    For example: all the properties that belong to the zombie are first in all the lists, witch second and vampire third.
+                    Check out the code and fill in  `weapons[i]`, `monsters[i]` , `bad_fate[i]`, `good_fate[i]`, `hint[i]` on the correct blanks to get the code to work!
                 example_code: |
                     ```
-                    siffror = [1, 2, 3]
-                    i = siffror[{random}]
-                    ledtråd = ['morrande', 'ett kacklande skratt', 'fladdrande fladdermusvingar']
-                    monster = ['zombie', 'häxa', 'vampyr']
-                    otur = ['Din hjärna är uppäten', 'Du är för evigt förbannad', 'Du är biten']
-                    tur = ['Du kastar skinkan. Zombien är distraherad och börjar äta den.', 'Du sätter eld på gardinerna. Häxan flyr av rädsla för elden', 'Vampyren hatar vitlök och flyr']
-                    vapen = ['skinka', 'tändare', 'vitlök']
-                    {print} 'Du står framför en gammal herrgård'
-                    {print} 'Det är något som inte stämmer här'
-                    {print} 'Du hör ' ledtråd[i]
-                    {print} 'Du ska utforska det'
-                    {print} 'Du går in i köket och ser en tändare, en rå skinka och en vitlök.'
-                    ditt_vapen = {ask} 'Vad tar du med dig?'
-                    {print} 'Med en ' ditt_vapen ' går du in i vardagsrummet'
-                    {print} 'Där hittar du ett ' monster[i]
-                    behöver_vapen = vapen[i]
-                    {if} ditt_vapen == behövs_vapen
-                        {print} 'Du använder ' ditt_vapen
-                        {print} tur[i]
-                        {print} 'DU VANN!'
+                    numbers = [1, 2, 3]
+                    i = numbers[{random}]
+                    hint = ['growling', 'a cackling laugh', 'fluttering batwings']
+                    monsters = ['zombie', 'witch', 'vampire']
+                    bad_fate = ['Your brain is eaten', 'You are forever cursed', 'You are bitten']
+                    good_fate = ['You throw the ham. The zombie is distracted and starts eating it.', 'You set the curtains on fire. The witch flees out of fear for the fire', 'The vampire hates garlic and flees']
+                    weapons = ['ham', 'lighter', 'garlic']
+                    {print} 'You are standing in front of an old mansion'
+                    {print} 'Something is not right here'
+                    {print} 'You hear ' _
+                    {print} 'You are going to explore it'
+                    {print} 'You enter the kitchen and see a lighter, a raw ham and a garlic.'
+                    your_weapon = {ask} 'What do you bring with you?'
+                    {print} 'With your ' your_weapon ' you enter the living room'
+                    {print} 'There you find a ' _
+                    needed_weapon = _
+                    {if} your_weapon == needed_weapon
+                        {print} 'You use your ' your_weapon
+                        {print} _
+                        {print} 'YOU WIN!'
                     {else}
-                        {print} 'Du valde fel vapen ...'
-                        {print} otur[i]
-                        {print} 'SPELET SLUT'
+                        {print} 'You have chosen the wrong weapon...'
+                        {print} _
+                        {print} 'GAME OVER'
                     ```
-                start_code: '# skriv din kod här'
+                start_code: '# place your code here'
     hotel:
         name: hotel
         default_save_name: hotel

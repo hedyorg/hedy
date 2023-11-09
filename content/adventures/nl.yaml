@@ -2569,7 +2569,9 @@ adventures:
                 start_code: '{print} ''Ontsnap uit het spookhuis!'''
             14:
                 story_text: |
+                    ### Opdracht
                     In dit level gebruik je `<` en `>` om levens toe te voegen aan je spel.
+                    Zorg dat de speler een level verliest als hij/zij het verkeerde monster tegenkomen en zorg dat het spel stopt als er geen levens meer over zijn.
                 example_code: |
                     ```
                     {print} 'Ontsnap uit het spookhuis'
@@ -2577,7 +2579,7 @@ adventures:
                     deuren = 1, 2, 3
                     monsters = 'de boze heks', 'een zombie', 'een slapende 3 koppige hond'
                     {for} i {in} {range} 1 {to} 10
-                        {if} levens > 0
+                        {if} levens _
                             goede_deur = deuren {at} {random}
                             monster = monsters {at} {random}
                             gekozen_deur = {ask} 'Welke deur kies jij?'
@@ -2589,16 +2591,17 @@ adventures:
                                     {print} 'Pffieuw.... Hij slaapt'
                                 {else}
                                     {print} 'Je hebt een leven kwijt!'
-                                    levens = levens - 1
+                                    levens = _
                         {else}
                             {print} 'GAME OVER'
                     ```
                 start_code: '# Schrijf jouw code hier'
             16:
                 story_text: |
+                    ### Opdracht
                     Deze spookhuisgame gebruikt de connectie tussen de verschillende lijstjes, die je in dit level kunt gebruiken.
                     Bijvoorbeeld: alle eigenschappen die bij de zombie horen staan als eerste in alle lijstjes, de heks als tweede en de vampier derde.
-                    Kijk maar naar de code.
+                    Kijk maar naar de code en vul op een van deze variabelen in op de lege plekken: `wapens[i]`, `monsters[i]`, `goedlot[i]`, `noodlot[i]`, `hint[i]`
                 example_code: |
                     ```
                     getallen = [1, 2, 3]
@@ -2610,20 +2613,20 @@ adventures:
                     wapens = ['rauwe ham', 'aansteker', 'knoflook']
                     {print} 'Je staat bij een oude verlaten villa'
                     {print} 'Iets is hier niet pluis...'
-                    {print} 'Je hoort ' hint[i]
+                    {print} 'Je hoort ' _
                     {print} 'Je gaat op ontdekking'
                     {print} 'Je stapt de keukendeur binnen en ziet daar een aansteker, een rauwe ham en een knoflook'
                     jouw_wapen = {ask} 'Wat neem je mee?'
                     {print} 'Met je ' jouw_wapen ' loop je door naar de woonkamer'
-                    {print} 'Daar zie je een ' monsters[i]
-                    benodigde_wapen = wapens[i]
+                    {print} 'Daar zie je een ' _
+                    benodigde_wapen = _
                     {if} jouw_wapen == benodigde_wapen
                         {print} 'Je gebruikt je ' jouw_wapen
-                        {print} goedlot[i]
+                        {print} _
                         {print} 'Jij wint!'
                     {else}
                         {print} 'Je hebt helaas het verkeerde wapen'
-                        {print} noodlot[i]
+                        {print} _
                         {print} 'GAME OVER'
                     ```
                 start_code: '# Schrijf jouw code hier'

@@ -2556,64 +2556,67 @@ adventures:
                 start_code: '{print} ''¡Escapa de la casa encantada!'''
             14:
                 story_text: |
-                    En este nivel puedes usar los símbolos `<` y `>` para introducir vidas a tu juego.
+                    ### Exercise
+                    In this level you can use the `<` and `>` symbol to introduce lives to your game.
+                    Make sure the player loses a life when they come across the wrong monster and that the game stops if you have no lives left.
                 example_code: |
                     ```
-                    {print} 'Escape de la Casa Embrujada'
-                    vidas = 3
-                    puertas = 1, 2, 3
-                    monstruos = 'la bruja malvada', 'un zombi', 'un perro de 3 cabezas durmiendo'
+                    {print} 'Escape from the haunted house'
+                    lives = 3
+                    doors = 1, 2, 3
+                    monsters = 'the wicked witch', 'a zombie', 'a sleeping 3 headed dog'
                     {for} i {in} {range} 1 {to} 10
-                        {if} vidas > 0
-                            puerta_buena = puertas {at} {random}
-                            monstruo = monstruos {at} {random}
-                            puerta_escogida = {ask} '¿Que puerta escoges?'
-                            {if} puerta_buena == puerta_escogida
-                                {print} 'Has escogido la puerta correcta'
+                        {if} lives _
+                            good_door = doors {at} {random}
+                            monster = monsters {at} {random}
+                            chosen_door = {ask} 'Which door do you choose?'
+                            {if} good_door == chosen_door
+                                {print} 'You have chosen the correct door'
                             {else}
-                                {print} 'Ves un...' monstruo
-                                {if} monstruo == 'un perro de 3 cabezas durmiendo'
-                                    {print} 'Fiiiuuuuu.... Esta durmiendo'
+                                {print} 'You see...' monster
+                                {if} monster == 'a sleeping 3 headed dog'
+                                    {print} 'Pffieuw.... Its asleep'
                                 {else}
-                                    {print} 'Pierdes una vida'
-                                    vidas = vidas -1
+                                    {print} 'You lose one life'
+                                    lives = _
                         {else}
-                            {print} 'JUEGO TERMINADO'
+                            {print} 'GAME OVER'
                     ```
-                start_code: '# pon tu código aquí'
+                start_code: '# place your code here'
             16:
                 story_text: |
-                    Este juego de la casa embrujada usa la conexión entre las listas que aprendiste a usar en este nivel.
-                    Por ejemplo: todas las características que pertenecen al primer zombi están todas en las listas, la segunda para la bruja y la tercera para el vampiro.
-                    ¡Échale un vistazo al código!
+                    ### Exercise
+                    This haunted house game uses the connection between the lists you can use in this level.
+                    For example: all the properties that belong to the zombie are first in all the lists, witch second and vampire third.
+                    Check out the code and fill in  `weapons[i]`, `monsters[i]` , `bad_fate[i]`, `good_fate[i]`, `hint[i]` on the correct blanks to get the code to work!
                 example_code: |
                     ```
-                    números = [1, 2, 3]
-                    i = números[{random}]
-                    pista = ['gruñido', 'carcajada', 'aleteo de alas de murciélago']
-                    monstruos = ['zombi', 'bruja', 'vampiro']
-                    mala_suerte = ['Se come tu cerebro', 'Estás maldito para siempre', 'Te muerden']
-                    buena_suerte = ['Lanzas el jamón. El zombi se distrae y empieza a comérselo.', 'Prendes fuego a las cortinas. La bruja huye por miedo al fuego', 'El vampiro odia el ajo y huye']
-                    armas = ['jamón', 'mechero', 'ajo']
-                    {print} 'Estás delante de una vieja mansión'
-                    {print} 'Algo no está bien aquí'
-                    {print} 'Oyes ' pista[i]
-                    {print} 'Vas a explorarlo'
-                    {print} 'Entras en la cocina y ves un mechero, un jamón crudo y un ajo.'
-                    tu_arma = {ask} '¿Qué llevas contigo?'
-                    {print} 'Entras en el salón con ' tu_arma
-                    {print} 'Allí encuentras un ' monstruos[i]
-                    arma_necesaria = armas[i]
-                    {if} tu_arma == arma_necesaria
-                        {print} 'Usas tu ' tu_arma
-                        {print} buena_suerte[i]
-                        {print} '¡GANASTE!'
+                    numbers = [1, 2, 3]
+                    i = numbers[{random}]
+                    hint = ['growling', 'a cackling laugh', 'fluttering batwings']
+                    monsters = ['zombie', 'witch', 'vampire']
+                    bad_fate = ['Your brain is eaten', 'You are forever cursed', 'You are bitten']
+                    good_fate = ['You throw the ham. The zombie is distracted and starts eating it.', 'You set the curtains on fire. The witch flees out of fear for the fire', 'The vampire hates garlic and flees']
+                    weapons = ['ham', 'lighter', 'garlic']
+                    {print} 'You are standing in front of an old mansion'
+                    {print} 'Something is not right here'
+                    {print} 'You hear ' _
+                    {print} 'You are going to explore it'
+                    {print} 'You enter the kitchen and see a lighter, a raw ham and a garlic.'
+                    your_weapon = {ask} 'What do you bring with you?'
+                    {print} 'With your ' your_weapon ' you enter the living room'
+                    {print} 'There you find a ' _
+                    needed_weapon = _
+                    {if} your_weapon == needed_weapon
+                        {print} 'You use your ' your_weapon
+                        {print} _
+                        {print} 'YOU WIN!'
                     {else}
-                        {print} 'Has elegido el arma equivocada...'
-                        {print} mala_suerte[i]
-                        {print} 'PERDISTE'
+                        {print} 'You have chosen the wrong weapon...'
+                        {print} _
+                        {print} 'GAME OVER'
                     ```
-                start_code: '# pon tu código aquí'
+                start_code: '# place your code here'
     hotel:
         name: hotel
         default_save_name: hotel
