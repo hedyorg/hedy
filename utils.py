@@ -177,7 +177,7 @@ def version():
 
 
 def valid_email(s):
-    return bool(re.match(r'^(([a-zA-Z0-9_+\.\-]+)@([\da-zA-Z\.\-]+)\.([a-zA-Z\.]{2,6})\s*)$', s))
+    return bool(re.match(r'^(([a-zA-Z0-9_+\.\-]+)@([\da-zA-Z\.\-]+)\.([a-zA-Z\.]{2,10})\s*)$', s))
 
 
 @contextlib.contextmanager
