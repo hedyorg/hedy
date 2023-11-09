@@ -94,9 +94,9 @@ class KeySchema:
 
     def fully_matches(self, data):
         """Return whether all keys in are in the data."""
-        return (self.partition_key in data and 
+        return (self.partition_key in data and
                 (not self.sort_key or self.sort_key in data))
-        
+
     def extract(self, data):
         ret = {}
         if self.partition_key not in data:
@@ -420,7 +420,8 @@ class Table:
         if self.key_schema.matches(key_data):
             # Sanity check that if we expect to query 1 element, we must pass a sort key if defined
             if not many and not self.key_schema.fully_matches(key_data):
-                raise RuntimeError(f"Looking up one value, but missing sort key: {self.key_schema.sort_key} in {key_data}")
+                raise RuntimeError(
+                    f"Looking up one value, but missing sort key: {self.key_schema.sort_key} in {key_data}")
 
             return TableLookup(self.table_name, key_data)
 
