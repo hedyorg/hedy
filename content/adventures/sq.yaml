@@ -3004,22 +3004,28 @@ adventures:
                 start_code: '# Vendoseni kodin tuaj këtu'
             14:
                 story_text: |
-                    Në këtë nivel mund ta lejoni Hedy-n t'ju tregojë {if} keni kursyer mjaftueshëm para!
+                    ### Exercise
+                    In this level you can let Hedy tell you if you have saved up enough money!
+                    Finish this code by filling in the blanks!
                 example_code: |
                     ```
-                    para = {ask} 'Sa para keni kursyer?'
-                    dëshira = {ask} 'Sa para ju duhen?'
-                    kompensim = {ask} 'Sa para xhepi merrni çdo javë?'
-                    për_të_ruajtur = dëshira - para
-                    javë = për_të_ruajtur / kompensim
-                    {if} dëshira > para
-                         {print} 'Duhet të kurseni më shumë!'
-                         {print} 'Do tju duhen ' javë ' jave të tjera.'
-                    {else}
-                         {print} 'Shkëlqyeshëm! ke mjaft'
-                         {print} 'Le të bëjmë pazar!'
+                    _ calculate_budget with wish, money, allowance
+                        to_save = wish - money
+                        weeks = to_save / allowance
+                        {if} wish _ money
+                            {print} 'You need to save up some more!'
+                            {print} 'Youll need ' weeks ' more weeks.'
+                        {else}
+                            {print} 'Great! You have enough'
+                            {print} 'Lets go shopping!'
+
+                    money = {ask} 'How much money have you saved?'
+                    wish = {ask} 'How much money do you need?'
+                    allowance = {ask} 'How much pocket money do you get each week?'
+
+                    {call} calculate_budget with _, _, _
                     ```
-                start_code: '# Vendoseni kodin tuaj këtu'
+                start_code: '# place your code here'
     pressit:
         name: Key presses
         default_save_name: Pressed

@@ -2979,22 +2979,28 @@ adventures:
                 start_code: '# via kodo ĉi tie'
             14:
                 story_text: |
-                    En ĉi tiu nivelo, per la komando `{if}` de Hedy, vi povas kontroli, ĉu vi ŝparis sufiĉe da mono!
+                    ### Exercise
+                    In this level you can let Hedy tell you if you have saved up enough money!
+                    Finish this code by filling in the blanks!
                 example_code: |
                     ```
-                    mono = {ask} 'Kiom da mono vi ŝparis?'
-                    bezono = {ask} 'Kiom da mono vi bezonas?'
-                    poŝmono = {ask} 'Kiom da poŝmono vi ricevas ĉiusemajne?'
-                    ŝparenda = bezono - mono
-                    semajnoj = ŝparenda / poŝmono
-                    {if} bezono > mono
-                        {print} 'Vi devas ŝpari iom pli!'
-                        {print} 'Vi bezonos ' semajnoj ' pliajn semajnojn.'
-                    {else}
-                        {print} 'Bonege! Vi havas sufiĉe'
-                        {print} 'Ni ekbutikumu!'
+                    _ calculate_budget with wish, money, allowance
+                        to_save = wish - money
+                        weeks = to_save / allowance
+                        {if} wish _ money
+                            {print} 'You need to save up some more!'
+                            {print} 'Youll need ' weeks ' more weeks.'
+                        {else}
+                            {print} 'Great! You have enough'
+                            {print} 'Lets go shopping!'
+
+                    money = {ask} 'How much money have you saved?'
+                    wish = {ask} 'How much money do you need?'
+                    allowance = {ask} 'How much pocket money do you get each week?'
+
+                    {call} calculate_budget with _, _, _
                     ```
-                start_code: '# via kodo ĉi tie'
+                start_code: '# place your code here'
     pressit:
         name: Key presses
         default_save_name: Pressed

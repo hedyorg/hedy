@@ -3072,20 +3072,26 @@ adventures:
                 start_code: '# Schrijf jouw code hier'
             14:
                 story_text: |
+                    ### Opdracht
                     In dit level kun je Hedy laten vertellen of je al genoeg geld hebt gespaard of niet!
+                    Maak de code af door de lege plekken in te vullen!
                 example_code: |
                     ```
+                    _ bereken_budget {with} wens, geld, zakgeld
+                        sparen = wens - geld
+                        weken = sparen / zakgeld
+                        {if} wens _ geld
+                            {print} 'Helaas even doorsparen!'
+                            {print} 'Je moet nog ' weken ' weken.'
+                        {else}
+                            {print} 'Hoera, je hebt genoeg!'
+                            {print} 'Op naar de winkel!'
+
                     geld = {ask} 'Hoeveel geld heb je al gespaard?'
                     wens = {ask} 'Hoeveel geld heb je nodig?'
                     zakgeld = {ask} 'Hoeveel zakgeld krijg je per week?'
-                    sparen = wens - geld
-                    weken = sparen / zakgeld
-                    {if} wens > geld
-                        {print} 'Helaas even doorsparen!'
-                        {print} 'Je moet nog ' weken ' weken.'
-                    {else}
-                        {print} 'Hoera, je hebt genoeg!'
-                        {print} 'Op naar de winkel!'
+
+                    {call} _
                     ```
                 start_code: '# Schrijf jouw code hier'
     pressit:
