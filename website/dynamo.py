@@ -409,16 +409,16 @@ class Table:
 
         schemas = [self.key_schema] + [i.key_schema for i in self.indexes]
         str_schemas = ', '.join(str(s) for s in schemas)
-        raise RuntimeError(f"Table {self.table_name} can be queried using one of {str_schemas}. Got {tuple(key_data.keys())}")
+        raise ValueError(f"Table {self.table_name} can be queried using one of {str_schemas}. Got {tuple(key_data.keys())}")
 
     def _extract_key(self, data):
         """
         Extract the key data out of plain data.
         """
         if self.partition_key not in data:
-            raise RuntimeError(f"Partition key '{self.partition_key}' missing from data: {data}")
+            raise ValueError(f"Partition key '{self.partition_key}' missing from data: {data}")
         if self.sort_key and self.sort_key not in data:
-            raise RuntimeError(f"Sort key '{self.sort_key}' missing from data: {data}")
+            raise ValueError(f"Sort key '{self.sort_key}' missing from data: {data}")
 
         return {k: data[k] for k in self._key_names()}
 
