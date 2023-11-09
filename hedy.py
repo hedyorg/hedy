@@ -3061,7 +3061,10 @@ def preprocess_ifs(code, lang='en'):
 
     def contains(command, line):
         if lang in ALL_KEYWORD_LANGUAGES:
-            command_plus_translated_command = [command, KEYWORDS[lang].get(command)]
+            if not command == '=':
+                command_plus_translated_command = [command, KEYWORDS[lang].get(command)]
+            else:
+                command_plus_translated_command = [command]
             for c in command_plus_translated_command:
                 if c in line:
                     return True
@@ -3112,7 +3115,7 @@ def preprocess_ifs(code, lang='en'):
             excluded_commands = ["pressed"]
 
             if (
-                (contains_any_of(commands, line) or contains_two('is', line))
+                (contains_any_of(commands, line) or contains_two('is', line) or (contains('is', line) and contains('=', line)))
                 and not contains_any_of(excluded_commands, line)
             ):
                 # a second command, but also no else in this line -> check next line!
