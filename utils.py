@@ -180,7 +180,6 @@ def valid_email(s):
     return bool(re.match(r'^(([a-zA-Z0-9_+\.\-]+)@([\da-zA-Z\.\-]+)\.([a-zA-Z\.]{2,10})\s*)$', s))
 
 
-
 @contextlib.contextmanager
 def atomic_write_file(filename, mode='wb'):
     """Write to a filename atomically.
