@@ -1,27 +1,27 @@
 describe('Test editor box functionality', () => {
 
-  it('Test echo, print, ask level 1', () => {    
+  it('Test echo, print, ask level 1', () => {
     cy.intercept('/parse').as('parse')
-    
+
     visitLevel(1);
-    
+
     cy.focused().type('print Hello world\nask Hello!\necho');
     codeMirrorContent().should('have.text', 'print Hello worldask Hello!echo');
-    
+
     cy.get('#debug_button').click();
     cy.wait('@parse')
 
     cy.get('.cm-line')
       .eq(0)
       .should('have.class', 'cm-debugger-current-line');
-    
+
     cy.get('#debug_continue').click();
     cy.get('#output').should('contain.text', 'Hello world');
-    
+
     cy.get('.cm-line')
       .eq(1)
       .should('have.class', 'cm-debugger-current-line');
-    
+
     cy.get('#debug_continue').click();
     cy.get('#ask-modal').should('be.visible');
     cy.get('#ask-modal > form > div > input[type="text"]').type('Hedy!');
@@ -30,21 +30,21 @@ describe('Test editor box functionality', () => {
     cy.get('.cm-line')
       .eq(2)
       .should('have.class', 'cm-debugger-current-line');
-    
+
     cy.get('#debug_continue').click();
-    
-    cy.get('#output').should('contain.text', 'Hedy!');      
+
+    cy.get('#output').should('contain.text', 'Hedy!');
   });
 
   it('Test is, ask and sleep level 2', () => {
     cy.intercept('/parse').as('parse')
     visitLevel(2);
-    
+
     cy.focused().type('name is ask What is your name?\nprint Hello name\nage is 15\nprint name is age years old.');
-    
+
     cy.get('#debug_button').click();
     cy.wait('@parse')
-    
+
     cy.get('.cm-line')
       .eq(0)
       .should('have.class', 'cm-debugger-current-line');
@@ -53,334 +53,334 @@ describe('Test editor box functionality', () => {
     cy.get('#ask-modal').should('be.visible');
     cy.get('#ask-modal > form > div > input[type="text"]').type('Hedy');
     cy.get('#ask-modal > form > div > input[type="submit"]').click();
-    
+
     cy.get('.cm-line')
       .eq(1)
       .should('have.class', 'cm-debugger-current-line');
-    
-    cy.get('#debug_continue').click();    
+
+    cy.get('#debug_continue').click();
     cy.get('#output').should('contain.text', 'Hello Hedy');
-    
+
     cy.get('.cm-line')
       .eq(2)
       .should('have.class', 'cm-debugger-current-line');
-    cy.get('#debug_continue').click();    
-    
+    cy.get('#debug_continue').click();
+
     cy.get('.cm-line')
       .eq(3)
       .should('have.class', 'cm-debugger-current-line');
 
-    cy.get('#debug_continue').click();    
+    cy.get('#debug_continue').click();
     cy.get('#output').should('contain.text', 'Hedy is 15 years old.');
   });
 
   it('Test sleep, clear level 4', () => {
     cy.intercept('/parse').as('parse');
     visitLevel(4);
-    
+
     cy.focused().type("print '3'\nsleep\nclear");
-    
-    cy.get('#debug_button').click();    
+
+    cy.get('#debug_button').click();
     cy.wait('@parse')
-    
+
     cy.get('.cm-line')
       .eq(0)
       .should('have.class', 'cm-debugger-current-line');
-    
+
     cy.get('#debug_continue').click();
     cy.get('#output').should('contain.text', '3');
-    
+
     cy.get('.cm-line')
       .eq(1)
       .should('have.class', 'cm-debugger-current-line');
-    
-    cy.get('#debug_continue').click();    
+
+    cy.get('#debug_continue').click();
     cy.wait(1000) // next command is sleep so wait 1 second
-    
+
     cy.get('.cm-line')
       .eq(2)
       .should('have.class', 'cm-debugger-current-line');
-    
+
     cy.get('#debug_continue').click();
     cy.get('#output').should('be.empty');
   });
 
-  it('Test if and else level 5, with condition true', () => {    
+  it('Test if and else level 5, with condition true', () => {
     cy.intercept('/parse').as('parse');
-    
+
     visitLevel(5);
-    
+
     cy.focused().type("name is Hedy\nif name is Hedy print 'nice'\nelse print 'boo!'");
-      
-    cy.get('#debug_button').click();    
+
+    cy.get('#debug_button').click();
     cy.wait('@parse')
 
     cy.get('.cm-line')
       .eq(0)
-      .should('have.class', 'cm-debugger-current-line');      
+      .should('have.class', 'cm-debugger-current-line');
     cy.get('#debug_continue').click();
-   
+
     cy.get('.cm-debugger-current-line > span').then(els => {
-      const texts =  [...els].map(getText);
+      const texts = [...els].map(getText);
       expect(texts).to.deep.eq('if name is Hedy'.split(' '))
     })
     cy.get('#debug_continue').click();
-   
+
     cy.get('.cm-debugger-current-line > span').then(els => {
-      const texts =  [...els].map(getText);
+      const texts = [...els].map(getText);
       expect(texts).to.deep.eq("print 'nice'".split(' '))
     })
     cy.get('#debug_continue').click();
   });
-  
+
   it('Test if and else level 5, with condition false', () => {
     cy.intercept('/parse').as('parse');
-      
+
     visitLevel(5);
-    
+
     cy.focused().type("name is Hedy\nif name is Jesus print 'nice'\nelse print 'boo!'");
-      
-    cy.get('#debug_button').click();    
+
+    cy.get('#debug_button').click();
     cy.wait('@parse')
 
     cy.get('.cm-line')
       .eq(0)
-      .should('have.class', 'cm-debugger-current-line');      
+      .should('have.class', 'cm-debugger-current-line');
     cy.get('#debug_continue').click();
-    
+
     cy.get('.cm-debugger-current-line > span').then(els => {
-      const texts =  [...els].map(getText);
+      const texts = [...els].map(getText);
       expect(texts).to.deep.eq('if name is Jesus'.split(' '))
     })
     cy.get('#debug_continue').click();
-    
+
     cy.get('.cm-debugger-current-line > span').then(els => {
-      const texts =  [...els].map(getText);
+      const texts = [...els].map(getText);
       expect(texts).to.deep.eq("print 'boo!'".split(' '))
     })
     cy.get('#debug_continue').click();
   });
 
 
-it('Test repeat with print statement inside ', () => { 
-  cy.intercept('/parse').as('parse');    
-  
-  visitLevel(7);
+  it('Test repeat with print statement inside ', () => {
+    cy.intercept('/parse').as('parse');
 
-  cy.focused().type("repeat 3 times print 'Hedy is fun'");
+    visitLevel(7);
 
-  cy.get('#debug_button').click();    
-  cy.wait('@parse')
-  
-  cy.get('.cm-debugger-current-line > span').then(els => {
-    const texts =  [...els].map(getText);
-    expect(texts).to.deep.eq("repeat 3 times".split(' '))
-  })
-  cy.get('#debug_continue').click();
+    cy.focused().type("repeat 3 times print 'Hedy is fun'");
 
-  
-  // For some reason not yet known to me we have to pass two times on a for statement
-  // the first time it executes
-  cy.get('.cm-debugger-current-line > span').then(els => {
-    const texts =  [...els].map(getText);
-    expect(texts).to.deep.eq("repeat 3 times".split(' '))
-  })
-  cy.get('#debug_continue').click();
+    cy.get('#debug_button').click();
+    cy.wait('@parse')
 
-  cy.get('.cm-debugger-current-line > span').then(els => {
-    const texts =  [...els].map(getText);
-    expect(texts).to.deep.eq(['print', "'Hedy is fun'"])
-  })
-  cy.get('#debug_continue').click();
-  cy.get('#output').should('contain.text', 'Hedy is fun');
+    cy.get('.cm-debugger-current-line > span').then(els => {
+      const texts = [...els].map(getText);
+      expect(texts).to.deep.eq("repeat 3 times".split(' '))
+    })
+    cy.get('#debug_continue').click();
 
-  cy.get('.cm-debugger-current-line > span').then(els => {
-    const texts =  [...els].map(getText);
-    expect(texts).to.deep.eq("repeat 3 times".split(' '))
-  })
-  cy.get('#debug_continue').click();
-  
-  cy.get('.cm-debugger-current-line > span').then(els => {
-    const texts =  [...els].map(getText);
-    expect(texts).to.deep.eq(['print', "'Hedy is fun'"])
-  })
-  cy.get('#debug_continue').click();
-  cy.get('#output').should('contain.text', 'Hedy is fun\nHedy is fun');
-  
-  cy.get('.cm-debugger-current-line > span').then(els => {
-    const texts =  [...els].map(getText);
-    expect(texts).to.deep.eq("repeat 3 times".split(' '))
-  })
-  cy.get('#debug_continue').click();
 
-  cy.get('.cm-debugger-current-line > span').then(els => {
-    const texts =  [...els].map(getText);
-    expect(texts).to.deep.eq(['print', "'Hedy is fun'"])
-  })
-  cy.get('#debug_continue').click();
-  cy.get('#output').should('contain.text', 'Hedy is fun\nHedy is fun\nHedy is fun');
-});
-it('Test if with repeat statement inside ', () => {
-  cy.intercept('/parse').as('parse');      
-  
-  visitLevel(7);
-  
-  cy.focused().type("if 1 is 1 repeat 1 times print 'Hedy is fun'");
-  cy.get('#debug_button').click();
-  cy.wait('@parse')
-  
-  cy.get('.cm-debugger-current-line > span').then(els => {
-    const texts =  [...els].map(getText);
-    expect(texts).to.deep.eq('if 1 is 1'.split(' '))
-  })
-  cy.get('#debug_continue').click();
+    // For some reason not yet known to me we have to pass two times on a for statement
+    // the first time it executes
+    cy.get('.cm-debugger-current-line > span').then(els => {
+      const texts = [...els].map(getText);
+      expect(texts).to.deep.eq("repeat 3 times".split(' '))
+    })
+    cy.get('#debug_continue').click();
 
-  cy.get('.cm-debugger-current-line > span').then(els => {
-    const texts =  [...els].map(getText);
-    expect(texts).to.deep.eq('repeat 1 times'.split(' '))
-  })
-  cy.get('#debug_continue').click();
+    cy.get('.cm-debugger-current-line > span').then(els => {
+      const texts = [...els].map(getText);
+      expect(texts).to.deep.eq(['print', "'Hedy is fun'"])
+    })
+    cy.get('#debug_continue').click();
+    cy.get('#output').should('contain.text', 'Hedy is fun');
 
-  // For some reason not yet known to me we have to pass two times on a for statement
-  // the first time it executes
-  cy.get('.cm-debugger-current-line > span').then(els => {
-    const texts =  [...els].map(getText);
-    expect(texts).to.deep.eq('repeat 1 times'.split(' '))
-  })
-  cy.get('#debug_continue').click();
+    cy.get('.cm-debugger-current-line > span').then(els => {
+      const texts = [...els].map(getText);
+      expect(texts).to.deep.eq("repeat 3 times".split(' '))
+    })
+    cy.get('#debug_continue').click();
 
-  cy.get('.cm-debugger-current-line > span').then(els => {
-    const texts =  [...els].map(getText);
-    expect(texts).to.deep.eq(['print', "'Hedy is fun'"])
-  })
-  cy.get('#debug_continue').click();
-  cy.get('#output').should('contain.text', 'Hedy is fun');
-});
-it('Test repeat with blocks', () => {
-  cy.intercept('/parse').as('parse');      
-    
-  visitLevel(8);
-  
-  cy.focused().type("repeat 2 times\n    print 'a'\n    print 'b'");  
-  cy.get('#debug_button').click();
-  cy.wait('@parse')
+    cy.get('.cm-debugger-current-line > span').then(els => {
+      const texts = [...els].map(getText);
+      expect(texts).to.deep.eq(['print', "'Hedy is fun'"])
+    })
+    cy.get('#debug_continue').click();
+    cy.get('#output').should('contain.text', 'Hedy is fun\nHedy is fun');
 
-  cy.get('.cm-line')
-    .eq(0)
-    .should('have.class', 'cm-debugger-current-line');
-  cy.get('#debug_continue').click();
-  
-  // For some reason not yet known to me we have to pass two times on a for statement
-  // the first time it executes
-  cy.get('.cm-line')
-    .eq(0)
-    .should('have.class', 'cm-debugger-current-line');
-  cy.get('#debug_continue').click();
-  
-  cy.get('.cm-line')
-    .eq(1)
-    .should('have.class', 'cm-debugger-current-line');
-  cy.get('#debug_continue').click();      
-  cy.get('#output').should('contain.text', 'a');
-  
-  cy.get('.cm-line')
-    .eq(2)
-    .should('have.class', 'cm-debugger-current-line');
-  cy.get('#debug_continue').click();      
-  cy.get('#output').should('contain.text', 'a\nb');
+    cy.get('.cm-debugger-current-line > span').then(els => {
+      const texts = [...els].map(getText);
+      expect(texts).to.deep.eq("repeat 3 times".split(' '))
+    })
+    cy.get('#debug_continue').click();
 
-  cy.get('.cm-line')
-    .eq(0)
-    .should('have.class', 'cm-debugger-current-line');
-  cy.get('#debug_continue').click();
-  
-  cy.get('.cm-line')
-    .eq(1)
-    .should('have.class', 'cm-debugger-current-line');
-  cy.get('#debug_continue').click();      
-  cy.get('#output').should('contain.text', 'a\nb\na');
-  
-  cy.get('.cm-line')
-    .eq(2)
-    .should('have.class', 'cm-debugger-current-line');
-  cy.get('#debug_continue').click();      
-  cy.get('#output').should('contain.text', 'a\nb\na\nb');
-});
+    cy.get('.cm-debugger-current-line > span').then(els => {
+      const texts = [...els].map(getText);
+      expect(texts).to.deep.eq(['print', "'Hedy is fun'"])
+    })
+    cy.get('#debug_continue').click();
+    cy.get('#output').should('contain.text', 'Hedy is fun\nHedy is fun\nHedy is fun');
+  });
+  it('Test if with repeat statement inside ', () => {
+    cy.intercept('/parse').as('parse');
 
-it('Test if with condition true', () => {
-  cy.intercept('/parse').as('parse');      
-    
-  visitLevel(8);
-  
-  cy.focused().type("if Hedy is Hedy\n    print 'Welcome Hedy'");
+    visitLevel(7);
 
-  cy.get('#debug_button').click();
-  cy.wait('@parse')
-  
-  cy.get('.cm-line')
-    .eq(0)
-    .should('have.class', 'cm-debugger-current-line');
-  cy.get('#debug_continue').click();
-    
-  cy.get('.cm-line')
-    .eq(1)
-    .should('have.class', 'cm-debugger-current-line');
-  cy.get('#debug_continue').click();      
-  cy.get('#output').should('contain.text', 'Welcome Hedy');
-});
-it('Test ifelse with condition false', () => {
-  cy.intercept('/parse').as('parse');
-  visitLevel(8);
-  
-  cy.focused().type("if Jesus is Hedy\n    print 'Welcome Hedy'\nelse\n    print 'Not Hedy'");
-  
-  cy.get('#debug_button').click();
-  cy.wait('@parse')
-  
-  cy.get('.cm-line')
-    .eq(0)
-    .should('have.class', 'cm-debugger-current-line');
-  cy.get('#debug_continue').click();
-    
-  cy.get('.cm-line')
-    .eq(3)
-    .should('have.class', 'cm-debugger-current-line');
-  cy.get('#debug_continue').click();      
-  cy.get('#output').should('contain.text', 'Not Hedy');
-});
-it('Test repeat with blocks', () => {
-  cy.intercept('/parse').as('parse');
+    cy.focused().type("if 1 is 1 repeat 1 times print 'Hedy is fun'");
+    cy.get('#debug_button').click();
+    cy.wait('@parse')
 
-  visitLevel(8);
-  cy.focused().type("repeat 1 times\n    turn 3\nforward 50");
+    cy.get('.cm-debugger-current-line > span').then(els => {
+      const texts = [...els].map(getText);
+      expect(texts).to.deep.eq('if 1 is 1'.split(' '))
+    })
+    cy.get('#debug_continue').click();
 
-  cy.get('#debug_button').click();
-  cy.wait('@parse')
+    cy.get('.cm-debugger-current-line > span').then(els => {
+      const texts = [...els].map(getText);
+      expect(texts).to.deep.eq('repeat 1 times'.split(' '))
+    })
+    cy.get('#debug_continue').click();
 
-  cy.get('.cm-line')
-    .eq(0)
-    .should('have.class', 'cm-debugger-current-line');
-  cy.get('#debug_continue').click();
+    // For some reason not yet known to me we have to pass two times on a for statement
+    // the first time it executes
+    cy.get('.cm-debugger-current-line > span').then(els => {
+      const texts = [...els].map(getText);
+      expect(texts).to.deep.eq('repeat 1 times'.split(' '))
+    })
+    cy.get('#debug_continue').click();
 
-  // For some reason not yet known to me we have to pass two times on a for statement
-  // the first time it executes
-  cy.get('.cm-line')
-    .eq(0)
-    .should('have.class', 'cm-debugger-current-line');
-  cy.get('#debug_continue').click();
+    cy.get('.cm-debugger-current-line > span').then(els => {
+      const texts = [...els].map(getText);
+      expect(texts).to.deep.eq(['print', "'Hedy is fun'"])
+    })
+    cy.get('#debug_continue').click();
+    cy.get('#output').should('contain.text', 'Hedy is fun');
+  });
+  it('Test repeat with blocks', () => {
+    cy.intercept('/parse').as('parse');
 
-  cy.get('.cm-line')
-    .eq(1)
-    .should('have.class', 'cm-debugger-current-line');
-  cy.get('#debug_continue').click();
+    visitLevel(8);
 
-  cy.get('.cm-line')
-    .eq(2)
-    .should('have.class', 'cm-debugger-current-line');
-  cy.get('#debug_continue').click();
+    cy.focused().type("repeat 2 times\n    print 'a'\n    print 'b'");
+    cy.get('#debug_button').click();
+    cy.wait('@parse')
 
-  cy.get('#turtlecanvas').should('be.visible');
-});
+    cy.get('.cm-line')
+      .eq(0)
+      .should('have.class', 'cm-debugger-current-line');
+    cy.get('#debug_continue').click();
+
+    // For some reason not yet known to me we have to pass two times on a for statement
+    // the first time it executes
+    cy.get('.cm-line')
+      .eq(0)
+      .should('have.class', 'cm-debugger-current-line');
+    cy.get('#debug_continue').click();
+
+    cy.get('.cm-line')
+      .eq(1)
+      .should('have.class', 'cm-debugger-current-line');
+    cy.get('#debug_continue').click();
+    cy.get('#output').should('contain.text', 'a');
+
+    cy.get('.cm-line')
+      .eq(2)
+      .should('have.class', 'cm-debugger-current-line');
+    cy.get('#debug_continue').click();
+    cy.get('#output').should('contain.text', 'a\nb');
+
+    cy.get('.cm-line')
+      .eq(0)
+      .should('have.class', 'cm-debugger-current-line');
+    cy.get('#debug_continue').click();
+
+    cy.get('.cm-line')
+      .eq(1)
+      .should('have.class', 'cm-debugger-current-line');
+    cy.get('#debug_continue').click();
+    cy.get('#output').should('contain.text', 'a\nb\na');
+
+    cy.get('.cm-line')
+      .eq(2)
+      .should('have.class', 'cm-debugger-current-line');
+    cy.get('#debug_continue').click();
+    cy.get('#output').should('contain.text', 'a\nb\na\nb');
+  });
+
+  it('Test if with condition true', () => {
+    cy.intercept('/parse').as('parse');
+
+    visitLevel(8);
+
+    cy.focused().type("if Hedy is Hedy\n    print 'Welcome Hedy'");
+
+    cy.get('#debug_button').click();
+    cy.wait('@parse')
+
+    cy.get('.cm-line')
+      .eq(0)
+      .should('have.class', 'cm-debugger-current-line');
+    cy.get('#debug_continue').click();
+
+    cy.get('.cm-line')
+      .eq(1)
+      .should('have.class', 'cm-debugger-current-line');
+    cy.get('#debug_continue').click();
+    cy.get('#output').should('contain.text', 'Welcome Hedy');
+  });
+  it('Test ifelse with condition false', () => {
+    cy.intercept('/parse').as('parse');
+    visitLevel(8);
+
+    cy.focused().type("if Jesus is Hedy\n    print 'Welcome Hedy'\nelse\n    print 'Not Hedy'");
+
+    cy.get('#debug_button').click();
+    cy.wait('@parse')
+
+    cy.get('.cm-line')
+      .eq(0)
+      .should('have.class', 'cm-debugger-current-line');
+    cy.get('#debug_continue').click();
+
+    cy.get('.cm-line')
+      .eq(3)
+      .should('have.class', 'cm-debugger-current-line');
+    cy.get('#debug_continue').click();
+    cy.get('#output').should('contain.text', 'Not Hedy');
+  });
+  it('Test repeat with blocks', () => {
+    cy.intercept('/parse').as('parse');
+
+    visitLevel(8);
+    cy.focused().type("repeat 1 times\n    turn 3\nforward 50");
+
+    cy.get('#debug_button').click();
+    cy.wait('@parse')
+
+    cy.get('.cm-line')
+      .eq(0)
+      .should('have.class', 'cm-debugger-current-line');
+    cy.get('#debug_continue').click();
+
+    // For some reason not yet known to me we have to pass two times on a for statement
+    // the first time it executes
+    cy.get('.cm-line')
+      .eq(0)
+      .should('have.class', 'cm-debugger-current-line');
+    cy.get('#debug_continue').click();
+
+    cy.get('.cm-line')
+      .eq(1)
+      .should('have.class', 'cm-debugger-current-line');
+    cy.get('#debug_continue').click();
+
+    cy.get('.cm-line')
+      .eq(2)
+      .should('have.class', 'cm-debugger-current-line');
+    cy.get('#debug_continue').click();
+
+    cy.get('#turtlecanvas').should('be.visible');
+  });
 
   it('Test repeat with ifelse inside', () => {
     cy.intercept('/parse').as('parse');
