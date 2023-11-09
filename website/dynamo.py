@@ -546,8 +546,6 @@ class AwsDynamoStorage(TableStorage):
         else:
             filter_expression, filter_values, filter_names = None, None, None
 
-        print(key_expression)
-
         result = self.db.query(
             **notnone(
                 TableName=make_table_name(self.db_prefix, table_name),
