@@ -110,14 +110,10 @@ class KeySchema:
         return ret
 
     def to_string(self, opt=False):
-        _o = ''
-        _c = ''
-        if opt:
-            _o = '['
-            _c = ']'
-
-        if self.sort_key:
-            return f'({self.partition_key}{_o}, {self.sort_key}{_c})'
+        if self.sort_key and opt:
+            return f'({self.partition_key}[, {self.sort_key}])'
+        if self.sort_key and not opt:
+            return f'({self.partition_key}, {self.sort_key})'
         return f'({self.partition_key})'
 
     def __repr__(self):
