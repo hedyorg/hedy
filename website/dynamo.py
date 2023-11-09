@@ -75,6 +75,9 @@ class KeySchema:
         self.partition_key = partition_key
         self.sort_key = sort_key
 
+        # Both names in an array
+        self.key_names = [self.partition_key] + ([self.sort_key] if self.sort_key else [])
+
     def matches(self, key):
         """Whether the given key matches the current schema.
 
@@ -89,13 +92,39 @@ class KeySchema:
                     or (self.partition_key == names[1] and self.sort_key == names[0]))
         return False
 
+    def fully_matches(self, data):
+        """Return whether all keys in are in the data."""
+        return (self.partition_key in data and 
+                (not self.sort_key or self.sort_key in data))
+        
+    def extract(self, data):
+        ret = {}
+        if self.partition_key not in data:
+            raise ValueError(f"Partition key '{self.partition_key}' missing from data: {data}")
+        ret[self.partition_key] = data[self.partition_key]
+
+        if self.sort_key:
+            if self.sort_key not in data:
+                raise ValueError(f"Sort key '{self.sort_key}' missing from data: {data}")
+            ret[self.sort_key] = data[self.sort_key]
+        return ret
+
+    def to_string(self, opt=False):
+        _o = ''
+        _c = ''
+        if opt:
+            _o = '['
+            _c = ']'
+
+        if self.sort_key:
+            return f'({self.partition_key}{_o}, {self.sort_key}{_c})'
+        return f'({self.partition_key})'
+
     def __repr__(self):
         return f'KeySchema({repr(self.partition_key)}, {repr(self.sort_key)})'
 
     def __str__(self):
-        if self.sort_key:
-            return f'({self.partition_key}[, {self.sort_key}])'
-        return f'({self.partition_key})'
+        return self.to_string()
 
 
 class Index:
@@ -108,8 +137,6 @@ class Index:
 
     def __init__(self, partition_key: str, sort_key: str = None, index_name: str = None, keys_only: bool = False):
         self.key_schema = KeySchema(partition_key, sort_key)
-        self.partition_key = partition_key
-        self.sort_key = sort_key
         self.index_name = index_name
         self.keys_only = keys_only
         if not self.index_name:
@@ -200,13 +227,10 @@ class Table:
         self.key_schema = KeySchema(partition_key, sort_key)
         self.storage = storage
         self.table_name = table_name
-        self.partition_key = partition_key
-        self.sort_key = sort_key
         self.indexes = indexes or []
-        self.key_names = [self.partition_key] + ([self.sort_key] if self.sort_key else [])
 
         # Check to make sure the indexes have unique partition keys
-        part_names = reverse_index((index.index_name, index.partition_key) for index in self.indexes)
+        part_names = reverse_index((index.index_name, index.key_schema.partition_key) for index in self.indexes)
         duped = [names for names in part_names.values() if len(names) > 1]
         if duped:
             raise RuntimeError(f'Table {self.table_name}: indexes with the same partition key: {duped}')
@@ -226,7 +250,7 @@ class Table:
             return first_or_none(
                 self.storage.query_index(
                     lookup.table_name, lookup.index_name, lookup.key, sort_key=lookup.sort_key, limit=1,
-                    keys_only=lookup.keys_only, table_key_names=self.key_names,
+                    keys_only=lookup.keys_only, table_key_names=self.key_schema.key_names,
                 )[0]
             )
         assert False
@@ -258,7 +282,7 @@ class Table:
         first_lookup = next(iter(lookups.values()))
 
         resp_dict = self.storage.batch_get_item(
-            first_lookup.table_name, {k: l.key for k, l in lookups.items()}, table_key_names=self.key_names)
+            first_lookup.table_name, {k: l.key for k, l in lookups.items()}, table_key_names=self.key_schema.key_names)
         if input_is_dict:
             return {k: resp_dict.get(k) for k in keys.keys()}
         else:
@@ -285,7 +309,7 @@ class Table:
             items, next_page_token = self.storage.query(
                 lookup.table_name,
                 lookup.key,
-                sort_key=self.sort_key,
+                sort_key=self.key_schema.sort_key,
                 reverse=reverse,
                 limit=limit,
                 pagination_token=decode_page_token(pagination_token),
@@ -301,7 +325,7 @@ class Table:
                 limit=limit,
                 pagination_token=decode_page_token(pagination_token),
                 keys_only=lookup.keys_only,
-                table_key_names=self.key_names,
+                table_key_names=self.key_schema.key_names,
                 filter=filter,
             )
         else:
@@ -319,13 +343,11 @@ class Table:
     @querylog.timed_as("db_create")
     def create(self, data):
         """Put a single complete record into the database."""
-        if self.partition_key not in data:
-            raise ValueError(f"Expecting '{self.partition_key}' field in create() call, got: {data}")
-        if self.sort_key and self.sort_key not in data:
-            raise ValueError(f"Expecting '{self.sort_key}' field in create() call, got: {data}")
+        if not self.key_schema.fully_matches(data):
+            raise ValueError(f"Expecting fields {self.key_schema} in create() call, got: {data}")
 
         querylog.log_counter(f"db_create:{self.table_name}")
-        self.storage.put(self.table_name, self._extract_key(data), data)
+        self.storage.put(self.table_name, self.key_schema.extract(data), data)
         return data
 
     def put(self, data):
@@ -371,7 +393,7 @@ class Table:
         backoff = ExponentialBackoff()
         while to_delete:
             for item in to_delete:
-                key = self._extract_key(item)
+                key = self.key_schema.extract(item)
                 self.delete(key)
             to_delete = self.get_many(key)
             backoff.sleep_when(to_delete)
@@ -397,8 +419,8 @@ class Table:
         # We do a regular table lookup if both the table partition and sort keys occur in the given key.
         if self.key_schema.matches(key_data):
             # Sanity check that if we expect to query 1 element, we must pass a sort key if defined
-            if not many and self.key_schema.sort_key and len(key_data) == 1:
-                raise RuntimeError(f"Looking up one value, but missing sort key: {self.sort_key} in {key_data}")
+            if not many and not self.key_schema.fully_matches(key_data):
+                raise RuntimeError(f"Looking up one value, but missing sort key: {self.key_schema.sort_key} in {key_data}")
 
             return TableLookup(self.table_name, key_data)
 
@@ -406,32 +428,18 @@ class Table:
         for index in self.indexes:
             if index.key_schema.matches(key_data):
                 return IndexLookup(self.table_name, index.index_name, key_data,
-                                   index.sort_key, keys_only=index.keys_only)
+                                   index.key_schema.sort_key, keys_only=index.keys_only)
 
         schemas = [self.key_schema] + [i.key_schema for i in self.indexes]
-        str_schemas = ', '.join(str(s) for s in schemas)
+        str_schemas = ', '.join(s.to_string(opt=True) for s in schemas)
         raise ValueError(
             f"Table {self.table_name} can be queried using one of {str_schemas}. Got {tuple(key_data.keys())}")
 
-    def _extract_key(self, data):
-        """
-        Extract the key data out of plain data.
-        """
-        if self.partition_key not in data:
-            raise ValueError(f"Partition key '{self.partition_key}' missing from data: {data}")
-        if self.sort_key and self.sort_key not in data:
-            raise ValueError(f"Sort key '{self.sort_key}' missing from data: {data}")
-
-        return {k: data[k] for k in self._key_names()}
-
-    def _key_names(self):
-        return set(x for x in [self.partition_key, self.sort_key] if x is not None)
-
     def _validate_key(self, key):
-        if key.keys() != self._key_names():
-            raise RuntimeError(f"key fields incorrect: {key} != {self._key_names()}")
+        if not self.key_schema.fully_matches(key):
+            raise ValueError(f"key fields incorrect: {key} not containing {self.key_schema}")
         if any(not v for v in key.values()):
-            raise RuntimeError(f"key fields cannot be empty: {key}")
+            raise ValueError(f"key fields cannot be empty: {key}")
 
 
 DDB_SERIALIZER = TypeSerializer()
