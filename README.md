@@ -1,3 +1,4 @@
+[![](https://zenodo.org/badge/226863521.svg)](https://zenodo.org/doi/10.5281/zenodo.10084456)
 ![](https://img.shields.io/github/commit-activity/m/hedyorg/hedy)
 ![](https://img.shields.io/github/last-commit/hedyorg/hedy)
 ![](https://img.shields.io/github/stars/hedyorg/hedy)
