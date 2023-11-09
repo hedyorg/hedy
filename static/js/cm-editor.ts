@@ -71,9 +71,7 @@ export class HedyCodeMirrorEditor implements HedyEditor {
     private currentDebugLine?: number;
     private incorrectLineMapping: Record<string, number> = {};
 
-    constructor(element: HTMLElement, isReadOnly: boolean, editorType: EditorType, dir: string = "ltr") {
-        console.log(editorType, dir);
-
+    constructor(element: HTMLElement, isReadOnly: boolean, _: EditorType, __: string = "ltr") {
         this.themeStyles = {
             "&": {
                 height: "352px",
@@ -143,7 +141,6 @@ export class HedyCodeMirrorEditor implements HedyEditor {
     * @param level      
     */
     setHighlighterForLevel(level: number): void {
-        console.log(level)
         const language = languagePerLevel[level];
         const parserWithMetadata = language.parser.configure({
             props: [
@@ -161,14 +158,6 @@ export class HedyCodeMirrorEditor implements HedyEditor {
         function hedy() {
             return new LanguageSupport(langPackage)
         }
-        const transaction = this.view.state.update({
-            effects: StateEffect.appendConfig.of(EditorView.updateListener.of((v: ViewUpdate) => {                
-                if (v.docChanged) {
-                    console.log(language.parser.parse(v.state.doc.toString()).toString())
-                }
-            }))
-        })
-        this.view.dispatch(transaction);
 
         const effect = StateEffect.appendConfig.of(hedy());
 
@@ -332,10 +321,7 @@ export class HedyCodeMirrorEditor implements HedyEditor {
     /**
      * Set the current line in the debugger
      */
-    setDebuggerCurrentLine(line?: number, startPos?: number, finishPos?: number) {
-        
-        console.log(line, startPos, finishPos);
-
+    setDebuggerCurrentLine(line?: number, startPos?: number, finishPos?: number) {                
         if (this.currentDebugLine) {
             this.view.dispatch({ effects: removeDebugLine.of() });
         }
@@ -349,10 +335,8 @@ export class HedyCodeMirrorEditor implements HedyEditor {
         if (startPos !== undefined && finishPos !== undefined) {
             let effect: StateEffect<{from: number, to: number}>
             const docLine = this.view.state.doc.line(line);
-            console.log(docLine)
             const from = docLine.from + startPos - 1;
             const to = docLine.from + finishPos;
-            console.log(`from ${from} - to ${to}`);
             effect = addDebugWords.of({from, to});
             this.view.dispatch({effects: effect});
         } else {
