@@ -90,41 +90,41 @@ levels:
     5:
         1:
             story: |-
-                Make a program that checks if your favourite movie is already in the list of the computer.
-                If so, print that you have great taste, otherwise add the movie to the list.
+                Fait un programme qui vérifie si ton film préféré est déjà dans la liste de l'ordinateur.
+                Si c'est le cas, affiche que tu as bon goût, sinon ajoute le film à la liste.
             code: |-
-                films_préférés {is} Batman, Spiderman, Les Avengers, Jurassic Park
-                film {is} {ask} 'Quel est ton film préféré?'
-                {if} film {in} films_préférés {print} 'Tu as de bon goûts!'
-                {else} {print} "Quel dommage que ton film préféré ne soit pas dans la liste, nous allons l'ajouter tout de suite!"
-                {add} film {to_list} films_préférés
+                films {is} Batman, Spiderman, Les Avengers, Jurassic Park
+                film_préféré {is} {ask} "Quel est ton film préféré ?"
+                {if} film_préféré {in} films {print} "Tu as bon goût !"
+                {else} {print} "🙁, ton film n'est pas dans la liste. Ajoutons-le tout de suite !"
+                {add} film_préféré {to_list} films
         2:
-            story: Create a maths game.
+            story: Crée un jeu de maths.
             code: |-
-                {print} 'Résout de problème'
-                réponse {is} {ask} '88 - 16 = ?'
-                {if} réponse {is} 72 {print} 'Correct!'
-                {else} {print} 'Faux ! La réponse était 72'
+                {print} "Résout ce problème"
+                réponse {is} {ask} "88 - 16 = ?"
+                {if} réponse {is} 72 {print} "Correct !"
+                {else} {print} "Faux ! La réponse était 72"
     6:
         1:
             story: |-
-                Make a program that calculates how old you are in dog and cat years.
-                First ask the age of the user and start calculating.
-                First calculate the dogyears then the catyears.
-                Show the user the different ages.
+                Fait un programme qui calcule quel âge aurait un chien et un chat de ton âge
+                Commence par demander l'âge de l'utilisateur et commence à calculer.
+                Calcule d'abord l'âge du chien, puis l'âge du chat.
+                Affiche ensuite les âges.
             code: |-
-                âge = {ask} 'Quel âge as-tu?'
+                âge = {ask} "Quel âge as-tu ?"
                 âge_chien = âge * 7
                 âge_chat = âge * 5
-                {print} 'En âge chien, tu as ' âge_chien ' ans.'
-                {print} 'En âge chat, tu as ' âge_chat ' ans.'
+                {print} "Un chien de ton âge a en année d'humain " âge_chien " ans."
+                {print} "Un chat de ton âge a en année d'humain " âge_chat " ans."
         2:
-            story: Create a program that helps you calculate how many cakes you should buy for your birthday party.
+            story: Fait un programme qui t'aide à calculer combien de gâteaux acheter pour ta fête d'anniversaire.
             code: |-
-                {print} "C'est ton anniversaire!"
-                gens = {ask} 'À combien de personnes veux-tu donner une part de gâteau?'
-                nombre_de_gâteaux {is} gens/8
-                {print} 'Tu dois acheter ' nombre_de_gâteaux ' gâteaux'
+                {print} "C'est ton anniversaire !"
+                nombre_personnes = {ask} "À combien de personnes veux-tu donner une part de gâteau ?"
+                nombre_gâteaux {is} nombre_personnes/8
+                {print} "Tu dois acheter " nombre_gâteaux " gâteaux"
     7:
         1:
             story: Complete the baby shark song. First comes baby shark, then mommy and finally daddy shark.
