@@ -130,6 +130,9 @@ class ForTeachersModule(WebsiteModule):
             return utils.error_page(error=404, ui_message=gettext("no_such_class"))
         students = []
 
+        # if Class.get("students") and not Class.get("skip_survey"):
+        self.class_survey()
+
         for student_username in Class.get("students", []):
             student = self.db.user_by_username(student_username)
             programs = self.db.programs_for_user(student_username)
@@ -219,8 +222,9 @@ class ForTeachersModule(WebsiteModule):
                 class_id=class_id
             ))
     
-    @route("/load-survey")
+    @route("/load-survey", methods=['POST'])
     def load_survey(self, description, questions):
+        logger.debug("rendering")
         return render_partial('htmx-survey.html', description=description, questions=questions)
 
     @route("/submit-survey", methods=['POST'])
@@ -234,7 +238,7 @@ class ForTeachersModule(WebsiteModule):
         # # Handle the survey responses
         return ''
     
-    @route("/class-survey", methods=['GET'])
+    @route("/class-survey", methods=['POST'])
     def class_survey(self):
         description = gettext("class_survey_description")
         questions = gettext("class_survey_questions").split("\n")
