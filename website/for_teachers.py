@@ -236,13 +236,9 @@ class ForTeachersModule(WebsiteModule):
     
     @route("/class-survey", methods=['GET'])
     def class_survey(self):
-        survey_description = "We would like to get a better overview of our Hedy users. By providing these answers, you would help improve Hedy. Thank you!"
-        questions = [
-        "What is the age range in your class?",
-        "What is the spoken language in your class?",
-        "What is the gender balance in your class?",
-        ]
-        return self.load_survey(survey_description, questions)
+        description = gettext("class_survey_description")
+        questions = gettext("class_survey_questions").split("\n")
+        return self.load_survey(description, questions)
     
     @route("/skip-survey", methods=['POST'])
     def skip_survey(self):
