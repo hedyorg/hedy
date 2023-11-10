@@ -6,7 +6,7 @@
         <div class="mb-4">
                     <div id="question" class="text-white mb-4 text-l">{{ _(question) }}</div>
                     <div class="flex flex-row justify-center space-x-1">
-                        <input id="input" type="text" class="flex items-center border border-green-400 rounded p-2 px-3 w-4/5 mt-1" name="answer{{ loop.index }}">
+                        <input autofocus="autofocus" id="input" type="text" class="flex items-center border border-green-400 rounded p-2 px-3 w-4/5 mt-1" name="answer{{ loop.index }}">
                     </div>
                 </div>
             {% endfor %}
@@ -20,9 +20,10 @@
                 Submit</button>
                 <button type="cancel" class="red-btn block m-4 w-40 pb-4 pt-4"
                 hx-trigger="click"
+                hx-post="/for-teachers/skip-survey"
                 hx-swap="innerHTML"
-                _="on click toggle .hidden on #survey">
-                Cancel</button>
+                _="on click toggle .hidden on #survey toggle .hidden on #modal-mask">
+                Skip</button>
             </div>
         </form>
         </div>

@@ -225,13 +225,7 @@ class ForTeachersModule(WebsiteModule):
 
     @route("/submit-survey", methods=['POST'])
     @requires_login
-    def submit_survey(self, user):
-        if not is_teacher(user) and not is_admin(user):
-            return utils.error_page(error=403, ui_message=gettext("retrieve_class_error"))
-        Class = self.db.get_class(session['class_id'])
-        if not Class or (Class["teacher"] != user["username"] and not is_admin(user)):
-            return utils.error_page(error=404, ui_message=gettext("no_such_class"))
-        
+    def submit_survey(self, user):        
         responses = {}
         for key, value in request.form.items():
             if key.startswith("answer"):
@@ -242,13 +236,29 @@ class ForTeachersModule(WebsiteModule):
     
     @route("/class-survey", methods=['GET'])
     def class_survey(self):
-        class_info_title = "We would like to get a better overview of our Hedy users. By providing these answers, you would help improve Hedy. Thank you!"
-        class_questions = [
+        survey_description = "We would like to get a better overview of our Hedy users. By providing these answers, you would help improve Hedy. Thank you!"
+        questions = [
         "What is the age range in your class?",
         "What is the spoken language in your class?",
         "What is the gender balance in your class?",
         ]
-        return self.load_survey(class_info_title, class_questions)
+        return self.load_survey(survey_description, questions)
+    
+    @route("/skip-survey", methods=['POST'])
+    def skip_survey(self):
+        class_id = session['class_id']
+        Class = self.db.get_class(class_id)
+        if Class and not Class.get('skip_survey'):
+            self.db.add_skip_survey_to_class(class_id)
+        return ''
+
+    @route("/get-skip-survey", methods=['GET'])
+    def get_skip_survey(self):
+        class_id = session['class_id']
+        Class = self.db.get_class(class_id)
+        if Class and Class.get('skip_survey') == True:
+            return True
+        return False
 
     @route("/get-customization-level", methods=["GET"])
     @requires_login
