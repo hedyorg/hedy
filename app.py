@@ -25,7 +25,7 @@ from flask import (Flask, Response, abort, after_this_request, g,
 from flask_babel import Babel, gettext
 from flask_commonmark import Commonmark
 from flask_compress import Compress
-from werkzeug.urls import url_encode
+from urllib.parse import quote_plus
 
 import hedy
 import hedy_content
@@ -2263,7 +2263,7 @@ def modify_query(**new_values):
     for key, value in new_values.items():
         args[key] = value
 
-    return '{}?{}'.format(request.path, url_encode(args))
+    return '{}?{}'.format(request.path, quote_plus(args))
 
 
 @app.template_global()
