@@ -13,7 +13,8 @@ import {
     breakpointGutterState, breakpointGutter, addIncorrectLineEffect,
     incorrectLineField,
     removeIncorrectLineEffect,
-    addDebugWords
+    addDebugWords,
+    placeholders
 } from "./cm-decorations";
 import { styleTags } from "@lezer/highlight";
 import {LRLanguage} from "@codemirror/language"
@@ -121,7 +122,8 @@ export class HedyCodeMirrorEditor implements HedyEditor {
                 errorLineField,
                 debugLineField,
                 incorrectLineField,
-                Prec.high(decorationsTheme)
+                Prec.high(decorationsTheme),
+                placeholders
             ]
         });
         
