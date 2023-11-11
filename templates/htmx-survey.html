@@ -1,3 +1,4 @@
+{% block regular_content %}
 <div id="survey" class="z-50 fixed" style="width: 500px; top: 40%; left: 50%; transform: translate(-50%, -50%);">
     <div class="bg-blue-500 border border-black rounded-lg px-8 py-4 text-center">
         <div id="description" class="text-white mb-8 text-xl">{{ _(description) }}</div>
@@ -6,27 +7,28 @@
         <div class="mb-4">
                     <div id="question" class="text-white mb-4 text-l">{{ _(question) }}</div>
                     <div class="flex flex-row justify-center space-x-1">
-                        <input autofocus="autofocus" id="input" type="text" class="flex items-center border border-green-400 rounded p-2 px-3 w-4/5 mt-1" name="answer{{ loop.index }}">
+                        <input autofocus="autofocus" id="input" type="text" class="flex items-center border border-green-400 rounded p-2 px-3 w-4/5 mt-1" name="{{ question }}">
                     </div>
                 </div>
             {% endfor %}
             <div class="mt-4 flex flex-row justify-center">
                 <button type="submit" class="green-btn block m-4 w-40 pb-4 pt-4"
                 hx-trigger="click"
-                hx-post="/for-teachers/submit-survey"
-                hx-include="[name='answer']"
+                hx-post="/for-teachers/submit-survey/{{ class_info.id }}"
+                hx-include="[name='question']"
                 hx-swap="innerHTML"
-                _="on click toggle .hidden on #survey toggle .hidden on #modal-mask">
+                _="on click toggle .hidden on #survey">
                 Submit</button>
-                <button type="cancel" class="red-btn block m-4 w-40 pb-4 pt-4"
+                <button type="skip" class="red-btn block m-4 w-40 pb-4 pt-4"
                 hx-trigger="click"
-                hx-post="/for-teachers/skip-survey"
+                hx-post="/for-teachers/skip-survey/{{ class_info.id }}"
                 hx-swap="innerHTML"
-                _="on click toggle .hidden on #survey toggle .hidden on #modal-mask">
+                _="on click toggle .hidden on #survey">
                 Skip</button>
             </div>
         </form>
         </div>
         </div>
     </div>
+{% endblock %}
 

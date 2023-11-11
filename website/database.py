@@ -613,12 +613,12 @@ class Database:
     def update_class(self, id, name):
         """Updates a class."""
         CLASSES.update({"id": id}, {"name": name})
+    
+    def add_survey_reponses_to_class(self, id, responses):
+        CLASSES.update({"id": id}, {"survey_responses": responses})
 
     def add_skip_survey_to_class(self, id):
         CLASSES.update({"id": id}, {"skip_survey": True})
-
-    def get_skip_survey_from_class(self, id):
-        return CLASSES.get({"id": id})
 
     def add_student_to_class(self, class_id, student_id):
         """Adds a student to a class."""

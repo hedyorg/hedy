@@ -29,8 +29,6 @@ from .achievements import Achievements
 from .database import Database
 from .website_module import WebsiteModule, route
 
-logger = logging.getLogger(__name__)
-
 SLIDES = collections.defaultdict(hedy_content.NoSuchSlides)
 for lang in hedy_content.ALL_LANGUAGES.keys():
     SLIDES[lang] = hedy_content.Slides(lang)
@@ -129,9 +127,11 @@ class ForTeachersModule(WebsiteModule):
         if not Class or (Class["teacher"] != user["username"] and not is_admin(user)):
             return utils.error_page(error=404, ui_message=gettext("no_such_class"))
         students = []
+        description = ""
+        questions = []
 
-        # if Class.get("students") and not Class.get("skip_survey"):
-        self.class_survey()
+        if Class.get("students") and self.get_skip_survey(class_id) == False:
+            description, questions = self.class_survey(Class)
 
         for student_username in Class.get("students", []):
             student = self.db.user_by_username(student_username)
@@ -189,6 +189,8 @@ class ForTeachersModule(WebsiteModule):
                 "id": Class["id"],
             },
             javascript_page_options=dict(page="class-overview"),
+            description=description, 
+            questions=questions,
         )
 
     @route("/customize-class/<class_id>", methods=["GET"])
@@ -221,40 +223,42 @@ class ForTeachersModule(WebsiteModule):
                 page='customize-class',
                 class_id=class_id
             ))
-    
-    @route("/load-survey", methods=['POST'])
-    def load_survey(self, description, questions):
-        logger.debug("rendering")
-        return render_partial('htmx-survey.html', description=description, questions=questions)
 
-    @route("/submit-survey", methods=['POST'])
-    @requires_login
-    def submit_survey(self, user):        
+    @route("/submit-survey/<class_id>", methods=['POST'])
+    def submit_survey(self, class_id):        
         responses = {}
-        for key, value in request.form.items():
-            if key.startswith("answer"):
-                logging.debug(value)
-                responses[key] = value
-        # # Handle the survey responses
+        survey_done = True
+        for question, answer in request.form.items():
+            responses[question] = answer
+            if not answer:
+                survey_done = False
+        if survey_done is True:
+            self.db.add_skip_survey_to_class(class_id)
+        self.db.add_survey_reponses_to_class(class_id, responses)
         return ''
-    
-    @route("/class-survey", methods=['POST'])
-    def class_survey(self):
+
+    def class_survey(self, Class):
+        description = ""
+        questions = []
+
         description = gettext("class_survey_description")
-        questions = gettext("class_survey_questions").split("\n")
-        return self.load_survey(description, questions)
-    
-    @route("/skip-survey", methods=['POST'])
-    def skip_survey(self):
-        class_id = session['class_id']
-        Class = self.db.get_class(class_id)
-        if Class and not Class.get('skip_survey'):
+        db_questions = Class.get('survey_responses')
+
+        if db_questions:
+            for question, answer in db_questions.items():
+                if not answer:
+                    questions.append(question)
+        if not questions:
+            questions = gettext("class_survey_questions").split("\n")
+        return description, questions
+
+    @route("/skip-survey/<class_id>", methods=['POST'])
+    def skip_survey(self, class_id):
+        if self.get_skip_survey(class_id) == False:
             self.db.add_skip_survey_to_class(class_id)
         return ''
 
-    @route("/get-skip-survey", methods=['GET'])
-    def get_skip_survey(self):
-        class_id = session['class_id']
+    def get_skip_survey(self, class_id):
         Class = self.db.get_class(class_id)
         if Class and Class.get('skip_survey') == True:
             return True

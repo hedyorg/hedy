@@ -92,5 +92,8 @@
         </div>
       {% endif %}
     </div>
+    {% if description and questions %}
+      {{ render_partial('htmx-survey.html', description=description, questions=questions, class_info=class_info) }}
+    {% endif %}
 </div>
 {% endblock %}
