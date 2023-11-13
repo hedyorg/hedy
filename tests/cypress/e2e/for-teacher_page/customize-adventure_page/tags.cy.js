@@ -55,7 +55,7 @@ describe("Tags of adventures", () => {
   it("declines adding duplicate", () => {
     cy.intercept({
       method: "POST",
-      url: "/create-tag*",
+      url: "*",
       times: 1,
     }).as("createTag")
 
