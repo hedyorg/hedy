@@ -156,7 +156,7 @@ export class HedyCodeMirrorEditor implements HedyEditor {
             "Text": t.name,
             "String": t.string,
             "clear pressed": t.color,
-            "Number": t.number,
+            "Number Int": t.number,
             "define call": t.operatorKeyword,
             "Command/ErrorInvalid/Text": t.invalid,
         }
