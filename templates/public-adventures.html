@@ -1,0 +1,114 @@
+
+{% extends "auth.html" %}
+
+{% block regular_content %}
+    <h1>public adventures</h1>
+    <div id="filters" class="flex items-center gap-2 justify-around bg-green-400 shadow-md rounded-lg p-4 mb-4">
+        <div>{{_('filters')}}</div>
+        <div id="search" class="flex-1">
+            <input id="search_adventure"
+                type="search"
+                placeholder="{{_('search')}}"
+                class="border text-black border-gray-500 rounded h-8 px-2 w-full"
+                _="on keyup debounced at 500ms set searchTerm to my value 
+                    if searchTerm is '' then 
+                        set adventures to .adventure
+                        set adventures to Array(adventures).map(\ adv -> not adv.classList.contains('hidden'))
+                        log adventures
+                        for child in adventures
+                            child.classList.remove('hidden')
+                        end
+
+                    else 
+                        set adventures to .adventure
+                        for child in adventures index i
+                            set txt to child.querySelector('.name').innerText
+                            if txt.includes(searchTerm)
+                                child.classList.remove('hidden')
+                            else
+                                child.classList.add('hidden')
+                            end
+                        end
+                    end"
+
+                >
+        </div>
+        <div id="language">
+            <!-- <select name="language" id="language"> -->
+            <select id="language"
+                name="language"
+                required
+                class="block appearance-none w-full border border-gray-200 text-gray-700 p-2 rounded"
+                _="on change set lang to my value
+                    if lang == ''
+                        set adventures to .adventure
+                        for child in adventures
+                            child.classList.remove('hidden')
+                        end
+                    else 
+                        set adventures to .adventure
+                        for adv in adventures
+                            set advLang to adv@data-lang
+                            if advLang == lang
+                                adv.classList.remove('hidden')
+                            else
+                                adv.classList.add('hidden')
+                            end
+                        end
+                    end"
+                >
+                <option value="">{{_('select_lang')}}</option>
+                {% for lang in available_languages %}
+                    <option value="{{lang}}">{{lang_to_sym(lang)}}</option>
+                {% endfor %}
+            </select>
+        </div>
+        <div id="tags">
+            <select id="tag"
+                name="tag"
+                required
+                class="block appearance-none w-full border border-gray-200 text-gray-700 p-2 rounded"
+                _="on change set tag to my value
+                    if tag == ''
+                        set adventures to .adventure
+                        for child in adventures
+                            child.classList.remove('hidden')
+                        end
+                    else 
+                        set adventures to .adventure
+                        for adv in adventures
+                            set tags to Array(adv.querySelector('#tags-list').children)
+                            set tagNames to tags.map(\ s -> s.innerText)[0]
+                            if tagNames.some(\ t -> t == tag)
+                                adv.classList.remove('hidden')
+                            else
+                                adv.classList.add('hidden')
+                            end
+                        end
+                    end"
+                >
+                <option value="">{{_('select_tag')}}</option>
+                {% for tag in available_tags %}
+                    <option value="{{tag}}">{{tag}}</option>
+                {% endfor %}
+            </select>
+        </div>
+    </div>
+    <div id="adventures" class="card-container gap-2">
+        {% for adventure in adventures %}
+            <div class="adventure grid bg-white shadow-md rounded-lg" data-lang="{{adventure.language}}">
+                <div class="py-4 px-6">
+                    <h2 class="name text-xl font-semibold">{{ adventure.name|e }}</h2>
+                    <p class="text-gray-600 mt-1">{{_('creator')}}: {{ adventure.creator }}</p>
+                    <p class="text-gray-600 mt-1">
+                        Level: {% if adventure.level %}{{ adventure.level }}{% else %}-{% endif %}
+                    </p>
+                    <p class="text-gray-600 mt-1">{{ adventure.date }}</p>
+                </div>
+                <div class="flex justify-between items-center px-6 py-4 bg-green-200 shadow-lg">
+            {{ render_partial('htmx-tags-list.html', tags=adventure["tags"], adventure_id=adventure.id, creator=adventure.creator) }}
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+{% endblock %}
