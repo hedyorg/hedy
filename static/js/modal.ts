@@ -217,8 +217,6 @@ export const success = {
     $('#okbox .caption').text(caption);
     $('#okbox').show();
     const height = computeEditorHeight('okbox');
-    console.log(height); 
-    console.log(editor)
     editor?.resize(height);
     setTimeout(function() {     
       $('#okbox').hide();
