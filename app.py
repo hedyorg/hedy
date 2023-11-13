@@ -25,7 +25,7 @@ from flask import (Flask, Response, abort, after_this_request, g,
 from flask_babel import Babel, gettext
 from flask_commonmark import Commonmark
 from flask_compress import Compress
-from werkzeug.urls import url_encode
+from urllib.parse import quote_plus
 
 import hedy
 import hedy_content
@@ -36,7 +36,11 @@ from safe_format import safe_format
 from config import config
 from website.flask_helpers import render_template, proper_tojson, JinjaCompatibleJsonProvider
 from hedy_content import (ADVENTURE_ORDER_PER_LEVEL, KEYWORDS_ADVENTURES, ALL_KEYWORD_LANGUAGES,
+<<<<<<< HEAD
                           ALL_LANGUAGES, COUNTRIES, HOC_ADVENTURE_PER_LEVEL)
+=======
+                          ALL_LANGUAGES, COUNTRIES, HOUR_OF_CODE_ADVENTURES)
+>>>>>>> main
 
 from logging_config import LOGGING_CONFIG
 from utils import dump_yaml_rt, is_debug_mode, load_yaml_rt, timems, version, strip_accents
@@ -954,7 +958,7 @@ def programs_page(user):
     filter = request.args.get('filter', default=None, type=str)
     submitted = True if filter == 'submitted' else None
 
-    result = DATABASE.filtered_programs_for_user({"username": from_user or username},
+    result = DATABASE.filtered_programs_for_user(from_user or username,
                                                  level=level,
                                                  adventure=adventure,
                                                  submitted=submitted,
@@ -1128,7 +1132,11 @@ def hour_of_code(level, program_id=None):
         loaded_program = Program.from_database_row(result)
 
     subset = [adv.strip() for adv in request.args.get("subset", "").strip().split(",")]
+<<<<<<< HEAD
     subset = subset if subset[0] else HOC_ADVENTURE_PER_LEVEL[level]
+=======
+    subset = subset if subset[0] else HOUR_OF_CODE_ADVENTURES[level]
+>>>>>>> main
     adventures = load_adventures_for_level(level, subset=subset)
 
     if not adventures:
@@ -1246,7 +1254,12 @@ def hour_of_code(level, program_id=None):
         current_page='Hour of Code',
         prev_level=level_number - 1 if level_number > 1 else None,
         next_level=level_number + 1 if level_number < max_level else None,
+<<<<<<< HEAD
         # customizations=customizations,
+=======
+        HOC_tracking_pixel=True,
+        customizations=customizations,
+>>>>>>> main
         hide_cheatsheet=hide_cheatsheet,
         # enforce_developers_mode=enforce_developers_mode,
         enforce_developers_mode=enforce_developers_mode,
@@ -1755,7 +1768,7 @@ def reset_page():
 @requires_login_redirect
 def profile_page(user):
     profile = DATABASE.user_by_username(user['username'])
-    programs = DATABASE.filtered_programs_for_user({"username": user['username'], "public": 1})
+    programs = DATABASE.filtered_programs_for_user(user['username'], public=True)
     public_profile_settings = DATABASE.get_public_profile_settings(current_user()['username'])
 
     classes = []
@@ -2262,7 +2275,7 @@ def modify_query(**new_values):
     for key, value in new_values.items():
         args[key] = value
 
-    return '{}?{}'.format(request.path, url_encode(args))
+    return '{}?{}'.format(request.path, quote_plus(args))
 
 
 @app.template_global()
@@ -2370,7 +2383,8 @@ def public_user_page(username):
     user_public_info = DATABASE.get_public_profile_settings(username)
     page = request.args.get('page', default=None, type=str)
     if user_public_info:
-        user_programs = DATABASE.filtered_programs_for_user({"username": user['username'], "public": 1},
+        user_programs = DATABASE.filtered_programs_for_user(username,
+                                                            public=True,
                                                             limit=10,
                                                             pagination_token=page)
         next_page_token = user_programs.next_page_token

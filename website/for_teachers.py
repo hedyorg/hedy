@@ -222,11 +222,12 @@ class ForTeachersModule(WebsiteModule):
         filter = request.args.get('filter', default=None, type=str)
         submitted = True if filter == 'submitted' else None
 
-        result = self.db.filtered_programs_for_user({"username": from_user, "public": 1},
+        result = self.db.filtered_programs_for_user(from_user,
                                                     level=level,
                                                     adventure=adventure,
                                                     submitted=submitted,
                                                     pagination_token=page,
+                                                    public=True,
                                                     limit=10)
 
         programs = []

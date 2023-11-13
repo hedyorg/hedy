@@ -162,7 +162,7 @@
 
 {% include 'incl/share-modal.html' %}
 {% include 'incl/hand-in-modal.html' %}
-{% if url_for(request.endpoint) == "/hour-of-code" %}
+{% if HOC_tracking_pixel %}
   <img src="https://code.org/api/hour/begin_hedy_text.png" id="tracking_pixel" alt="Tracking Pixel - Hour of code" height="1" width="1">
 {% endif %}
 {% endblock %}

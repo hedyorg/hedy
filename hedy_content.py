@@ -264,6 +264,7 @@ ADVENTURE_ORDER_PER_LEVEL = {
     ]
 }
 
+<<<<<<< HEAD
 # Felienne, you can change what show here!
 HOC_ADVENTURE_PER_LEVEL = {
     1: [
@@ -276,10 +277,18 @@ HOC_ADVENTURE_PER_LEVEL = {
         'turtle',
         'restaurant',
         'fortune',
+=======
+HOUR_OF_CODE_ADVENTURES = {
+    1: [
+        'print_command',
+        'parrot',
+        'turtle',
+>>>>>>> main
         'debugging'
     ],
     2: [
         'default',
+<<<<<<< HEAD
         'is_command',
         'rock',
         'ask_command',
@@ -289,10 +298,14 @@ HOC_ADVENTURE_PER_LEVEL = {
         'parrot',
         'story',
         'restaurant',
+=======
+        'parrot',
+>>>>>>> main
         'turtle',
         'debugging'
     ],
     3: [
+<<<<<<< HEAD
         'default',
         'random_command',
         'dice',
@@ -304,10 +317,15 @@ HOC_ADVENTURE_PER_LEVEL = {
         'dishes',
         'story',
         'haunted',
+=======
+        'parrot',
+        'dishes',
+>>>>>>> main
         'turtle',
         'debugging'
     ],
     4: [
+<<<<<<< HEAD
         'default',
         'quotation_marks',
         'rock',
@@ -336,10 +354,21 @@ HOC_ADVENTURE_PER_LEVEL = {
         'restaurant',
         'fortune',
         'pressit',
+=======
+        'dishes',
+        'parrot',
+        'story',
+        'debugging'
+    ],
+    5: [
+        'language',
+        'parrot',
+>>>>>>> main
         'turtle',
         'debugging'
     ],
     6: [
+<<<<<<< HEAD
         'default',
         'maths',
         'is_command',
@@ -374,11 +403,27 @@ HOC_ADVENTURE_PER_LEVEL = {
         'if_command',
         'story',
         'haunted',
+=======
+        'songs',
+        'dishes',
+        'turtle',
+        'debugging'
+    ],
+    7: [
+        'songs',
+        'dishes',
+        'restaurant',
+        'debugging'
+    ],
+    8: [
+        'songs',
+>>>>>>> main
         'restaurant',
         'turtle',
         'debugging'
     ],
     9: [
+<<<<<<< HEAD
         'default',
         'repeat_command',
         'if_command',
@@ -388,10 +433,15 @@ HOC_ADVENTURE_PER_LEVEL = {
         'restaurant',
         'haunted',
         'pressit',
+=======
+        'rock',
+        'restaurant',
+>>>>>>> main
         'turtle',
         'debugging'
     ],
     10: [
+<<<<<<< HEAD
         'default',
         'for_command',
         'dishes',
@@ -439,10 +489,33 @@ HOC_ADVENTURE_PER_LEVEL = {
         'functions',
         # 'functions_2',
         # 'functions_3',
+=======
+        'dishes',
+        'dice',
+        'turtle',
+        'songs',
+        'debugging'
+    ],
+    11: [
+        'years',
+        'songs',
+        'restaurant',
+        'debugging'
+    ],
+    12: [
+        'maths',
+        'functions',
+        'story',
+        'turtle',
+        'debugging'
+    ],
+    13: [
+>>>>>>> main
         'story',
         'rock',
         'restaurant',
         'calculator',
+<<<<<<< HEAD
         'tic',
         'debugging'
     ],
@@ -463,10 +536,24 @@ HOC_ADVENTURE_PER_LEVEL = {
     15: [
         'default',
         'while_command',
+=======
+        'debugging'
+    ],
+    14: [
+        'guess_my_number',
+        'haunted',
+        'hotel',
+        'calculator',
+        'quizmaster',
+        'debugging'
+    ],
+    15: [
+>>>>>>> main
         'restaurant',
         'story',
         'dice',
         'rock',
+<<<<<<< HEAD
         'calculator',
         'tic',
         'debugging'
@@ -474,23 +561,34 @@ HOC_ADVENTURE_PER_LEVEL = {
     16: [
         'default',
         'random_command',
+=======
+        'debugging'
+    ],
+    16: [
+>>>>>>> main
         'haunted',
         'songs',
         'language',
         'debugging'
     ],
     17: [
+<<<<<<< HEAD
         'default',
         'for_command',
         'elif_command',
         'tic',
+=======
+>>>>>>> main
         'blackjack',
         'debugging'
     ],
     18: [
+<<<<<<< HEAD
         'default',
         'print_command',
         'ask_command',
+=======
+>>>>>>> main
         'story',
         'songs',
         'debugging'
