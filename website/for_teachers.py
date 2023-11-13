@@ -863,7 +863,9 @@ class ForTeachersModule(WebsiteModule):
         if not isinstance(body.get("public"), bool):
             return gettext("public_invalid"), 400
         if not isinstance(body.get("language"), str) or body.get("language") not in hedy_content.ALL_LANGUAGES.keys():
-            return gettext("language_invalid"), 400
+            # we're incrementally integrating language into adventures; i.e., not all adventures have a language field.
+            body["language"] = g.lang
+            # return gettext("language_invalid"), 400
 
         current_adventure = self.db.get_adventure(body["id"])
         if not current_adventure:
