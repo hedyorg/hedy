@@ -5,30 +5,31 @@
 <div id="level-header" class="bg-blue-200">
   <div class="ltr:pl-8 rtl:pr-8 py-2 flex gap-2 px-4 items-center justify-between w-full max-w-screen-2xl mx-auto">
     <div class="dropdown relative">
-    <button class="white-btn px-4 rounded inline-flex items-center gap-2 text-xl" id="dropdown_level_button"
-        onclick="$('#level_dropdown').slideToggle('medium');"
-        _="on click 
-            if .upwards-arrow is .hidden
-              set *display on upwards-arrow 
-            else
-              toggle .hidden to upwards-arrow
-            if .downwards-arrow is .hidden
-              set *display on upwards-arrow 
-            else
-              add .hidden to downwards-arrow
-        ">
-        <span>{{ _('level_title') }} {{ level_nr }}
-          &nbsp;
-          {% if assignment_nr %} · {{ _('step_title') }} {{ assignment_nr }} {% endif %}</span>
-        <svg class="downwards-arrow fill-current h-6 w-6" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
-          <path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z" />
-        </svg>
-        <svg class="upwards-arrow hidden fill-current h-6 w-6" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
-          <path d="M9.293 11.05l.707-.707L15.657 15l-1.414 1.414L10 12.172 5.757 16.414 4.343 15z" />
-        </svg>
-      </button>
+        <button class="white-btn px-4 rounded inline-flex items-center gap-2 text-xl" id="dropdown_level_button"
+            onclick="$('#level_dropdown').slideToggle('medium');"
+            _="on mutation of @style
+                    set arrow to #language-arrow
+                    if *display == 'none'
+                        remove .rotate-180 from arrow
+                    else if not arrow.classList.contains('rotate-180')
+                        add .rotate-180 to arrow
+                    end">
+            <span>{{ _('level_title') }} {{ level_nr }}
+              &nbsp;
+              {% if assignment_nr %} · {{ _('step_title') }} {{ assignment_nr }} {% endif %}</span>
+            <svg id="level-arrow" class="fill-current h-6 w-6" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
+              <path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z" />
+            </svg>
+          </button>
       <div class="dropdown-menu dropdown-blue z-20 min-w-full" id="level_dropdown"
-        style="display: none; padding: 0px !important; margin: 0px; margin-top: 0.25rem;">
+        style="display: none; padding: 0px !important; margin: 0px; margin-top: 0.25rem;"
+        _="on mutation of @style
+        set arrow to #level-arrow
+        if *display == 'none'
+            remove .rotate-180 from arrow
+        else if not arrow.classList.contains('rotate-180')
+            add .rotate-180 to arrow
+        end">
         {% for dropdown_level in range(1, (max_level + 1))%}
         <button id="level_button" class="flex-row flex justify-between items-center gap-2 px-2 py-2 border-b border-dashed border-blue-500
         {% if dropdown_level == level %}bg-white{% else %}hover:bg-blue-100 bg-blue-200{% endif %}"
@@ -63,12 +64,19 @@
       <button class="green-btn font-semibold rounded inline-flex items-center gap-2" id="dropdown_cheatsheet_button"
         onclick="$('#cheatsheet_dropdown').slideToggle('medium');">
         <span>{{ "🤔" }}</span>
-        <svg class="fill-current h-6 w-6" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
+        <svg id="cheatsheet-arrow" class="fill-current h-6 w-6" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
           <path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z" />
         </svg>
       </button>
       <div class="dropdown-menu dropdown-green z-20 mt-2" id="cheatsheet_dropdown"
-        style="display: none; padding: 0px !important;">
+        style="display: none; padding: 0px !important;"
+        _="on mutation of @style
+        set arrow to #cheatsheet-arrow
+        if *display == 'none'
+            remove .rotate-180 from arrow
+        else if not arrow.classList.contains('rotate-180')
+            add .rotate-180 to arrow
+        end">
         <h2 class="px-2 py-6">{{_('cheatsheet_title')}}</h2>
         {% for example in cheatsheet %}
         <div class="flex justify-between items-center gap-4 px-4 py-8 border-t border-dashed border-green-500">
@@ -92,12 +100,19 @@
         <button class="green-btn font-semibold rounded inline-flex items-center gap-2"
           onclick="$('#commands_dropdown').slideToggle('medium');" data-cy="kwlang-switch-btn">
           <span class="fa-solid fa-language"></span>
-          <svg class="fill-current h-6 w-6" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
+          <svg id="commands-language-arrow" class="fill-current h-6 w-6" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
             <path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z" />
           </svg>
         </button>
         <div class="dropdown-menu dropdown-green z-20 mt-2" id="commands_dropdown" {% if not
-          request.args.get('keyword_language') %}style="display: none;" {% endif %}>
+          request.args.get('keyword_language') %}style="display: none;" {% endif %}
+            _="on mutation of @style
+            set arrow to #commands-language-arrow
+            if *display == 'none'
+                remove .rotate-180 from arrow
+            else if not arrow.classList.contains('rotate-180')
+                add .rotate-180 to arrow
+            end">
           <h2 class="px-4 pt-2">{{_('commands')}}</h2>
           <!-- If the current language is non-english and supports keywords: show a two column table -->
           <table class="mx-4 my-2" cellpadding="4">
