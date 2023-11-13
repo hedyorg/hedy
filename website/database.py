@@ -43,7 +43,7 @@ CLASSES = dynamo.Table(storage, "classes", "id", indexes=[
 # - name (str): adventure name
 # - public (bool): whether it can be shared
 # - tags_id (str): id of tags that describe this adventure.
-ADVENTURES = dynamo.Table(storage, "adventures", "id", indexes=[dynamo.Index("creator")])
+ADVENTURES = dynamo.Table(storage, "adventures", "id", indexes=[dynamo.Index("creator"), dynamo.Index("public")])
 INVITATIONS = dynamo.Table(
     storage, "class_invitations", partition_key="username", indexes=[dynamo.Index("class_id")]
 )
@@ -611,11 +611,6 @@ class Database:
     def update_tag(self, tags_id, data):
         # Update existing tags
         return TAGS.update({"id": tags_id}, data)
-
-    def delete_tag(self, id, tag):
-        tags = self.read_tags(id).get("items", [])
-        tags = [t for t in tags if t != tag]
-        return self.update_tags(id, {"items": tags})
 
     def get_teacher_adventures(self, username):
         return ADVENTURES.get_many({"creator": username})
