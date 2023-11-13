@@ -22,7 +22,7 @@ import { theGlobalSourcemap, theLevel } from "./app";
 import { monokai } from "./cm-monokai-theme";
 import { error } from "./modal";
 import { ClientMessages } from "./client-messages";
-import { styleTags, tags as t } from "@lezer/highlight";
+import { Tag, styleTags, tags as t } from "@lezer/highlight";
 
 export class HedyCodeMirrorEditorCreator implements HedyEditorCreator {
     /**
@@ -147,7 +147,7 @@ export class HedyCodeMirrorEditor implements HedyEditor {
     setHighlighterForLevel(level: number): void {
         const language = languagePerLevel[level];
         // Contains all of the keywords for every level
-        const hedyStyleTags = {
+        const hedyStyleTags: Record<string, Tag> = {
             "print forward turn color ask is echo sleep Comma": t.keyword,
             "at random remove from add to if else in not Op": t.keyword,
             "repeat times for range with return and or while": t.keyword,

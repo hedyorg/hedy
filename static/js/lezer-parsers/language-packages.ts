@@ -16,13 +16,7 @@ import { parser as level15Parser } from './level15-parser'
 import { parser as level16Parser } from './level16-parser'
 import { parser as level17Parser } from './level17-parser'
 import { parser as level18Parser} from './level18-parser'
-import { Tag } from "@lezer/highlight";
 import { LRParser } from '@lezer/lr';
-
-export interface languageSupport {
-    parser: LRParser,
-    styleTags: Record<string, Tag>
-}
 
 export let languagePerLevel: Record<number, LRParser> = {
     1: level1Parser,
