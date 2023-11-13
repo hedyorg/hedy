@@ -2206,9 +2206,11 @@ def other_languages(lang_param=None):
     current_lang = lang_param or g.lang
     return [make_lang_obj(lang) for lang in ALL_LANGUAGES.keys() if lang != current_lang]
 
+
 @app.template_global()
 def lang_to_sym(lang):
     return ALL_LANGUAGES[lang]
+
 
 @app.template_global()
 def other_keyword_languages():
