@@ -15,4 +15,5 @@ export const
   Ask = 13,
   Print = 14,
   Turtle = 15,
-  Sleep = 19
+  Sleep = 19,
+  ErrorInvalid = 20

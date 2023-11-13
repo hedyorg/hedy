@@ -3,19 +3,20 @@ import {LRParser} from "@lezer/lr"
 import {specializeKeyword, extendKeyword} from "./tokens"
 export const parser = LRParser.deserialize({
   version: 14,
-  states: "&`QYQPOOOOQO'#Cp'#CpQYQPOOOqQPO'#CgOOQO'#Cu'#CuOvQPO'#CjOOQO'#Cv'#CvO!OQPO'#ClOOQO'#Cw'#CwO!WQPO'#CmOOQO'#Cx'#CxO!`QPO'#CnOOQO'#Ck'#CkOOQO'#Cy'#CyO!hQPO'#CoOOQO'#Cf'#CfQlQPO'#CqQ!pQPOOOOQO-E6n-E6nOOQO'#Cr'#CrO#UQPO,59ROOQO'#Cs'#CsO#aQPO,59UOOQO-E6s-E6sOOQO-E6t-E6tOOQO,59W,59WOOQO-E6u-E6uOOQO,59X,59XOOQO-E6v-E6vOOQO,59Y,59YOOQO-E6w-E6wOOQO,59Z,59ZO#lQPO,59]OOQO-E6o-E6oOOQO-E6p-E6pO$WQPO1G.mOOQO'#Ct'#CtO$cQPO1G.oOOQO-E6q-E6qO$kQPO7+$ZOOQO-E6r-E6r",
-  stateData: "$v~OWOSpOS~OQSORUOSWOTYOU]O[ROqPO~OVcO~OQSO[eO~ORUO[iO~OSWO[kO~OTYO[mO~OU]O[oO~OQSORUOSWOTYOU]O[RO~OPtOVcO[eO~O[eOn^aq^a~OqPOQeaReaSeaTeaUea[eanea~O[eOnZiqZi~OPtO[eO~O[eOn]qq]q~O",
-  goto: "#unPPPPPPPPPPotPtttyyyt!O!Y!a!g!u!{#T#]#e#mV`OQaV_OQaV[OQaQQOSbQpRp`SaOQRqaQdRRrdQfTQsdUvfswRwuQudRxuUTOQaRgTUVOQaRhVUXOQaRjXUZOQaRlZU^OQaRn^",
-  nodeNames: "⚠ ask print forward turn color sleep is Comment Program Command Assign Text Ask Print Turtle Forward Turn Color Sleep",
-  maxTerm: 33,
+  states: "&fQYQPOOOOQO'#Cq'#CqQYQPOOOqQPO'#CtO!PQPO'#CpOOQO'#Cv'#CvO![QPO'#CjOOQO'#Cw'#CwO!dQPO'#ClOOQO'#Cx'#CxO!lQPO'#CmOOQO'#Cy'#CyO!tQPO'#CnOOQO'#Ck'#CkOOQO'#Cz'#CzO!|QPO'#CoOOQO'#Cf'#CfQlQPO'#CrQ#[QPOOOOQO-E6o-E6oOOQO'#Cs'#CsO#pQPO,59ROOQO'#Ct'#CtOOQO-E6r-E6rO#{QPO,59UOOQO-E6t-E6tOOQO-E6u-E6uOOQO,59W,59WOOQO-E6v-E6vOOQO,59X,59XOOQO-E6w-E6wOOQO,59Y,59YO$WQPO,59ZOOQO-E6x-E6xO$cQPO,59^OOQO-E6p-E6pOOQO-E6q-E6qO$}QPO1G.mOOQO'#Cu'#CuO%YQPO1G.oO%bQPO7+$ZOOQO-E6s-E6s",
+  stateData: "%m~OWOSqOS~OQTORVOSXOTZOU^O[ROrPO~OVdO[hXohXrhX~O[fOodXrdX~OQTO[fO~ORVO[kO~OSXO[mO~OTZO[oO~OU^O[fOocXrcX~OQTORVOSXOTZOU^O[RO~OPvOVdO[fO~O[fOo^ar^a~O[fOocarca~OrPOQfaRfaSfaTfaUfa[faofa~O[fOoZirZi~OPvO[fO~O[fOo]qr]q~O",
+  goto: "$QoPPPPPPPPPPpuPuuuzzzuu!P!Z!b!h#Q#W#`#h#p#xVaOQbV`OQbV]OQbQQOScQrRraSbOQRsbQeRRteUSOQbYgShpuxQhUQp_QueRxwQweRywUUOQbRiUUWOQbRjWUYOQbRlYU[OQbRn[U_OQbRq_",
+  nodeNames: "⚠ ask print forward turn color sleep is Comment Program Command Assign Text Ask Print Turtle Forward Turn Color Sleep ErrorInvalid",
+  maxTerm: 34,
   nodeProps: [
     ["group", 15,"turtle"]
   ],
   skippedNodes: [0,8],
   repeatNodeCount: 10,
-  tokenData: "#O~RXOYnYZ!]Zpnpq!bqsnst!gt;'Sn;'S;=`!V<%lOn~sU[~OYnZpnqsnt;'Sn;'S;=`!V<%lOn~!YP;=`<%ln~!bOq~~!gOp~~!lSW~OY!gZ;'S!g;'S;=`!x<%lO!g~!{P;=`<%l!g",
+  tokenData: "#O~RXOYnYZ!]Zpnpq!bqsnst!gt;'Sn;'S;=`!V<%lOn~sU[~OYnZpnqsnt;'Sn;'S;=`!V<%lOn~!YP;=`<%ln~!bOr~~!gOq~~!lSW~OY!gZ;'S!g;'S;=`!x<%lO!g~!{P;=`<%l!g",
   tokenizers: [0],
   topRules: {"Program":[0,9]},
+  dynamicPrecedences: {"20":-10},
   specialized: [{term: 12, get: (value: any, stack: any) => (specializeKeyword(value, stack) << 1), external: specializeKeyword},{term: 12, get: (value: any, stack: any) => (extendKeyword(value, stack) << 1) | 1, external: extendKeyword, extend: true}],
   tokenPrec: 0
 })
