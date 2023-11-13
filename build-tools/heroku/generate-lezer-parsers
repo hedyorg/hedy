@@ -2,7 +2,8 @@
 set -eu
 
 # Generate the lezer parsers from the grammars specified in  highlighting/lezer-grammars/
-for level in $(seq 1 18);
-do
-    npx lezer-generator --typeScript  ../../highlighting/lezer-grammars/level${level}.grammar -o ../../static/js/lezer-parsers/level${level}-parser.ts
+for grammarFile in ../../highlighting/lezer-grammars/level*.grammar ; do
+    baseName=$(basename "$grammarFile")
+    tsFile=${baseName%.grammar}-parser.ts
+    npx lezer-generator --typeScript "$grammarFile" -o ../../static/js/lezer-parsers/$tsFile
 done
