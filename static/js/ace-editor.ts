@@ -333,11 +333,12 @@ export class HedyAceEditor implements HedyEditor {
       this.currentLineMarker = undefined;
       return;
     }
+    line = line - 1;    
     let id: number;
-    if (startPos === undefined && finishPos === undefined) {
+    if (startPos === undefined || finishPos === undefined) {
       id = this.addMarker(new ace.Range(line, 0, line, 999), 'debugger-current-line', 'fullLine');
     } else {
-      id = this.addMarker(new ace.Range(line, startPos, line, finishPos), 'debugger-current-line', 'text');
+      id = this.addMarker(new ace.Range(line, startPos - 1, line, finishPos - 1), 'debugger-current-line', 'text');
     }
     this.currentLineMarker = { line, id };
   }
