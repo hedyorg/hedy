@@ -264,7 +264,7 @@ ADVENTURE_ORDER_PER_LEVEL = {
     ]
 }
 
-<<<<<<< HEAD
+<< << << < HEAD
 # Felienne, you can change what show here!
 HOC_ADVENTURE_PER_LEVEL = {
     1: [
@@ -277,18 +277,18 @@ HOC_ADVENTURE_PER_LEVEL = {
         'turtle',
         'restaurant',
         'fortune',
-=======
-HOUR_OF_CODE_ADVENTURES = {
+== == == =
+HOUR_OF_CODE_ADVENTURES= {
     1: [
         'print_command',
         'parrot',
         'turtle',
->>>>>>> main
+>>>>>> > main
         'debugging'
     ],
     2: [
         'default',
-<<<<<<< HEAD
+<< << << < HEAD
         'is_command',
         'rock',
         'ask_command',
@@ -298,14 +298,14 @@ HOUR_OF_CODE_ADVENTURES = {
         'parrot',
         'story',
         'restaurant',
-=======
+== == == =
         'parrot',
->>>>>>> main
+>>>>>> > main
         'turtle',
         'debugging'
     ],
     3: [
-<<<<<<< HEAD
+<< << << < HEAD
         'default',
         'random_command',
         'dice',
@@ -317,15 +317,15 @@ HOUR_OF_CODE_ADVENTURES = {
         'dishes',
         'story',
         'haunted',
-=======
+== == == =
         'parrot',
         'dishes',
->>>>>>> main
+>>>>>> > main
         'turtle',
         'debugging'
     ],
     4: [
-<<<<<<< HEAD
+<< << << < HEAD
         'default',
         'quotation_marks',
         'rock',
@@ -354,7 +354,7 @@ HOUR_OF_CODE_ADVENTURES = {
         'restaurant',
         'fortune',
         'pressit',
-=======
+== == == =
         'dishes',
         'parrot',
         'story',
@@ -363,12 +363,12 @@ HOUR_OF_CODE_ADVENTURES = {
     5: [
         'language',
         'parrot',
->>>>>>> main
+>>>>>> > main
         'turtle',
         'debugging'
     ],
     6: [
-<<<<<<< HEAD
+<< << << < HEAD
         'default',
         'maths',
         'is_command',
@@ -403,7 +403,7 @@ HOUR_OF_CODE_ADVENTURES = {
         'if_command',
         'story',
         'haunted',
-=======
+== == == =
         'songs',
         'dishes',
         'turtle',
@@ -417,13 +417,13 @@ HOUR_OF_CODE_ADVENTURES = {
     ],
     8: [
         'songs',
->>>>>>> main
+>>>>>> > main
         'restaurant',
         'turtle',
         'debugging'
     ],
     9: [
-<<<<<<< HEAD
+<< << << < HEAD
         'default',
         'repeat_command',
         'if_command',
@@ -433,15 +433,15 @@ HOUR_OF_CODE_ADVENTURES = {
         'restaurant',
         'haunted',
         'pressit',
-=======
+== == == =
         'rock',
         'restaurant',
->>>>>>> main
+>>>>>> > main
         'turtle',
         'debugging'
     ],
     10: [
-<<<<<<< HEAD
+<< << << < HEAD
         'default',
         'for_command',
         'dishes',
@@ -489,7 +489,7 @@ HOUR_OF_CODE_ADVENTURES = {
         'functions',
         # 'functions_2',
         # 'functions_3',
-=======
+== == == =
         'dishes',
         'dice',
         'turtle',
@@ -510,12 +510,12 @@ HOUR_OF_CODE_ADVENTURES = {
         'debugging'
     ],
     13: [
->>>>>>> main
+>>>>>> > main
         'story',
         'rock',
         'restaurant',
         'calculator',
-<<<<<<< HEAD
+<< << << < HEAD
         'tic',
         'debugging'
     ],
@@ -536,7 +536,7 @@ HOUR_OF_CODE_ADVENTURES = {
     15: [
         'default',
         'while_command',
-=======
+== == == =
         'debugging'
     ],
     14: [
@@ -548,12 +548,12 @@ HOUR_OF_CODE_ADVENTURES = {
         'debugging'
     ],
     15: [
->>>>>>> main
+>>>>>> > main
         'restaurant',
         'story',
         'dice',
         'rock',
-<<<<<<< HEAD
+<< << << < HEAD
         'calculator',
         'tic',
         'debugging'
@@ -561,34 +561,34 @@ HOUR_OF_CODE_ADVENTURES = {
     16: [
         'default',
         'random_command',
-=======
+== == == =
         'debugging'
     ],
     16: [
->>>>>>> main
+>>>>>> > main
         'haunted',
         'songs',
         'language',
         'debugging'
     ],
     17: [
-<<<<<<< HEAD
+<< << << < HEAD
         'default',
         'for_command',
         'elif_command',
         'tic',
-=======
->>>>>>> main
+== == == =
+>>>>>> > main
         'blackjack',
         'debugging'
     ],
     18: [
-<<<<<<< HEAD
+<< << << < HEAD
         'default',
         'print_command',
         'ask_command',
-=======
->>>>>>> main
+== == == =
+>>>>>> > main
         'story',
         'songs',
         'debugging'
@@ -596,67 +596,67 @@ HOUR_OF_CODE_ADVENTURES = {
 }
 
 
-RESEARCH = {}
+RESEARCH= {}
 for paper in sorted(os.listdir('content/research'),
                     key=lambda x: int(x.split("_")[-1][:-4]),
                     reverse=True):
     # An_approach_to_describing_the_semantics_of_Hedy_2022.pdf -> 2022, An
     # approach to describing the semantics of Hedy
-    name = paper.replace("_", " ").split(".")[0]
-    name = name[-4:] + ". " + name[:-5]
-    RESEARCH[name] = paper
+    name= paper.replace("_", " ").split(".")[0]
+    name= name[-4:] + ". " + name[:-5]
+    RESEARCH[name]= paper
 
 # load all available languages in dict
 # list_translations of babel does about the same, but without territories.
-languages = {}
+languages= {}
 if not os.path.isdir('translations'):
     # should not be possible, but if it's moved someday, EN would still be working.
-    ALL_LANGUAGES['en'] = 'English'
-    ALL_KEYWORD_LANGUAGES['en'] = 'EN'
+    ALL_LANGUAGES['en']= 'English'
+    ALL_KEYWORD_LANGUAGES['en']= 'EN'
 
 for folder in os.listdir('translations'):
-    locale_dir = os.path.join('translations', folder, 'LC_MESSAGES')
+    locale_dir= os.path.join('translations', folder, 'LC_MESSAGES')
     if not os.path.isdir(locale_dir):
         continue
     if filter(lambda x: x.endswith('.mo'), os.listdir(locale_dir)):
-        languages[folder] = CUSTOM_LANGUAGE_TRANSLATIONS.get(folder,
+        languages[folder]= CUSTOM_LANGUAGE_TRANSLATIONS.get(folder,
                                                              static_babel_content.LANGUAGE_NAMES.get(folder, folder))
 
 
 for lang in sorted(languages):
-    ALL_LANGUAGES[lang] = languages[lang]
+    ALL_LANGUAGES[lang]= languages[lang]
     if os.path.exists('./grammars/keywords-' + lang + '.lark'):
-        ALL_KEYWORD_LANGUAGES[lang] = lang[0:2].upper()  # first two characters
+        ALL_KEYWORD_LANGUAGES[lang]= lang[0:2].upper()  # first two characters
 
 # Load and cache all keyword yamls
-KEYWORDS = {}
+KEYWORDS= {}
 for lang in ALL_KEYWORD_LANGUAGES.keys():
-    KEYWORDS[lang] = YamlFile.for_file(f'content/keywords/{lang}.yaml').to_dict()
+    KEYWORDS[lang]= YamlFile.for_file(f'content/keywords/{lang}.yaml').to_dict()
     for k, v in KEYWORDS[lang].items():
         if isinstance(v, str) and "|" in v:
             # when we have several options, pick the first one as default
             # Some keys are ints, turn them into strings
-            KEYWORDS[lang][k] = v.split('|')[0]
+            KEYWORDS[lang][k]= v.split('|')[0]
 
 
 class StructuredDataFile:
     """Base class for all data files in the content directory."""
 
     def __init__(self, filename):
-        self.filename = filename
-        self._file = None
+        self.filename= filename
+        self._file= None
 
-    @property
+    @ property
     def file(self):
         """Lazily load the requested file."""
         if not self._file:
-            self._file = YamlFile.for_file(self.filename)
+            self._file= YamlFile.for_file(self.filename)
         return self._file
 
 
 class Commands(StructuredDataFile):
     def __init__(self, language):
-        self.language = language
+        self.language= language
         super().__init__(f'content/cheatsheets/{self.language}.yaml')
 
     def get_commands_for_level(self, level, keyword_lang):
@@ -668,7 +668,7 @@ def deep_translate_keywords(yaml, keyword_language):
         """Recurse through a data structure and replace keyword placeholders in any strings we encounter."""
         if isinstance(yaml, str):
             # this is used to localize adventures linked in slides (PR 3860)
-            yaml = yaml.replace('/raw', f'/raw?keyword_language={keyword_language}')
+            yaml= yaml.replace('/raw', f'/raw?keyword_language={keyword_language}')
             return safe_format(yaml, **KEYWORDS.get(keyword_language))
         if isinstance(yaml, list):
             return [deep_translate_keywords(e, keyword_language) for e in yaml]
@@ -695,7 +695,7 @@ class NoSuchCommand:
 
 class Adventures(StructuredDataFile):
     def __init__(self, language):
-        self.language = language
+        self.language= language
         super().__init__(f'content/adventures/{self.language}.yaml')
 
     def get_adventure_keyname_name_levels(self):
@@ -708,7 +708,7 @@ class Adventures(StructuredDataFile):
         return deep_translate_keywords(self.file.get('adventures'), keyword_lang)
 
     def get_adventures_subset(self, subset=["print_command", "parrot"], keyword_lang="en"):
-        adventures = {aid: adv for aid, adv in self.file.get('adventures', {}).items() if aid in subset}
+        adventures= {aid: adv for aid, adv in self.file.get('adventures', {}).items() if aid in subset}
         return deep_translate_keywords(adventures, keyword_lang)
 
     def has_adventures(self):
@@ -722,7 +722,7 @@ class NoSuchAdventure:
 
 class ParsonsProblem(StructuredDataFile):
     def __init__(self, language):
-        self.language = language
+        self.language= language
         super().__init__(f'content/parsons/{self.language}.yaml')
 
     def get_highest_exercise_level(self, level):
@@ -737,7 +737,7 @@ class ParsonsProblem(StructuredDataFile):
 
 class Quizzes(StructuredDataFile):
     def __init__(self, language):
-        self.language = language
+        self.language= language
         super().__init__(f'content/quizzes/{self.language}.yaml')
 
     def get_highest_question_level(self, level):
@@ -759,17 +759,17 @@ class Tutorials(StructuredDataFile):
     # Want to parse the keywords only once, they can be cached -> perform this
     # action on server start
     def __init__(self, language):
-        self.language = language
+        self.language= language
         super().__init__(f'content/tutorials/{self.language}.yaml')
 
     def get_tutorial_for_level(self, level, keyword_lang="en"):
         if level not in ["intro", "teacher"]:
-            level = int(level)
+            level= int(level)
         return deep_translate_keywords(self.file.get(level, None), keyword_lang)
 
     def get_tutorial_for_level_step(self, level, step, keyword_lang="en"):
         if level not in ["intro", "teacher"]:
-            level = int(level)
+            level= int(level)
         return deep_translate_keywords(self.file.get(level, {}).get('steps', {}).get(step), keyword_lang)
 
 
@@ -780,7 +780,7 @@ class NoSuchTutorial:
 
 class Slides(StructuredDataFile):
     def __init__(self, language):
-        self.language = language
+        self.language= language
         super().__init__(f'content/slides/{self.language}.yaml')
 
     def get_slides_for_level(self, level, keyword_lang="en"):

@@ -36,11 +36,11 @@ from safe_format import safe_format
 from config import config
 from website.flask_helpers import render_template, proper_tojson, JinjaCompatibleJsonProvider
 from hedy_content import (ADVENTURE_ORDER_PER_LEVEL, KEYWORDS_ADVENTURES, ALL_KEYWORD_LANGUAGES,
-<<<<<<< HEAD
+<< << << < HEAD
                           ALL_LANGUAGES, COUNTRIES, HOC_ADVENTURE_PER_LEVEL)
-=======
+== == == =
                           ALL_LANGUAGES, COUNTRIES, HOUR_OF_CODE_ADVENTURES)
->>>>>>> main
+>> >>>> > main
 
 from logging_config import LOGGING_CONFIG
 from utils import dump_yaml_rt, is_debug_mode, load_yaml_rt, timems, version, strip_accents
