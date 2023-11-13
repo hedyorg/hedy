@@ -16,13 +16,13 @@ import {
     addDebugWords,
     placeholders
 } from "./cm-decorations";
-import { styleTags } from "@lezer/highlight";
 import {LRLanguage} from "@codemirror/language"
 import { languagePerLevel } from "./lezer-parsers/language-packages";
 import { theGlobalSourcemap, theLevel } from "./app";
 import { monokai } from "./cm-monokai-theme";
 import { error } from "./modal";
 import { ClientMessages } from "./client-messages";
+import { styleTags, tags as t } from "@lezer/highlight";
 
 export class HedyCodeMirrorEditorCreator implements HedyEditorCreator {
     /**
@@ -146,9 +146,24 @@ export class HedyCodeMirrorEditor implements HedyEditor {
     */
     setHighlighterForLevel(level: number): void {
         const language = languagePerLevel[level];
-        const parserWithMetadata = language.parser.configure({
+        // Contains all of the keywords for every level
+        const hedyStyleTags = {
+            "print forward turn color ask is echo sleep Comma": t.keyword,
+            "at random remove from add to if else in not Op": t.keyword,
+            "repeat times for range with return and or while": t.keyword,
+            "elif def input toList": t.keyword,
+            Comment: t.lineComment,
+            "Text": t.name,
+            "String": t.string,
+            "clear pressed": t.color,
+            "Number": t.number,
+            "define call": t.operatorKeyword,
+            "Command/ErrorInvalid/Text": t.invalid,
+        }
+        
+        const parserWithMetadata = language.configure({
             props: [
-                styleTags(language.styleTags)
+                styleTags(hedyStyleTags)
            ]
         })
             
