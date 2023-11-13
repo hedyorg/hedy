@@ -51,12 +51,11 @@ INVITATIONS = dynamo.Table(
 """
 # TAGS
     - id
-    - items (str[]): holds the tag items.
-    - creator (str): username (of a teacher account, hopefully)
-    - public (bool): whether it's a public set of tags
-    - language (str): the language of the created tags.
+    - name (str): tag name.
+    - tagged_in ([{ id, public, language }]): tagged in which adventures.
+    - popularity (int): # of adventures it's been tagged in.
 """
-TAGS = dynamo.Table(storage, "tags", "id", indexes=[dynamo.Index("creator")])
+TAGS = dynamo.Table(storage, "tags", "id", indexes=[dynamo.Index("name", sort_key="popularity")])
 
 # Class customizations
 #
@@ -596,18 +595,20 @@ class Database:
     def update_adventure(self, adventure_id, adventure):
         ADVENTURES.update({"id": adventure_id}, adventure)
 
-    def create_tags(self, data):
+    def create_tag(self, data):
         return TAGS.create(data)
 
-    def read_tags(self, tags_id):
-        tags = TAGS.get({"id": tags_id})
-        return tags if tags else {}
+    def read_tag(self, tag_name):
+        return TAGS.get({"name": tag_name})
+
+    def read_tags(self, tags):
+        return [self.read_tag(name) for name in tags]
 
     def read_tags_by_username(self, username):
         tags = TAGS.get_many({"creator": username})
         return tags if tags else {}
 
-    def update_tags(self, tags_id, data):
+    def update_tag(self, tags_id, data):
         # Update existing tags
         return TAGS.update({"id": tags_id}, data)
 

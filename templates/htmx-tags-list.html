@@ -13,8 +13,8 @@
             {{tag}}
             {% if not public and username == creator %}
                 <span class='absolute top-0.5 right-0.5 text-gray-600 hover:text-red-400 fa-regular fa-circle-xmark'
-                {% if tags_id %}
-                    hx-delete="/delete-tag/{{tags_id}}/{{tag}}" 
+                {% if adventure_id %}
+                    hx-delete="/tags/delete/{{tag}}/{{adventure_id}}" 
                     hx-swap="none"
                     _="on htmx:afterRequest if detail.xhr.status == 200 then remove #tag_{{loop.index}}
                         if JSON.parse(detail.xhr.response).tags.length == 0 toggle .hidden on #no-tags"

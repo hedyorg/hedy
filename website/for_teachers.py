@@ -832,7 +832,6 @@ class ForTeachersModule(WebsiteModule):
                 temp["checked"] = True
             class_data.append(temp)
 
-        adventure_tags = self.db.read_tags(tags_id=adventure["id"]).get("items", [])
         return render_template(
             "customize-adventure.html",
             page_title=gettext("title_customize-adventure"),
@@ -840,7 +839,8 @@ class ForTeachersModule(WebsiteModule):
             class_data=class_data,
             max_level=hedy.HEDY_MAX_LEVEL,
             current_page="for-teachers",
-            tags=adventure_tags,
+            # TODO: update tags to be {name, canEdit} where canEdit is true if currentUser is the creator.
+            adventure_tags=adventure.get("tags", []),
         )
 
     @route("/customize-adventure", methods=["POST"])
@@ -897,9 +897,13 @@ class ForTeachersModule(WebsiteModule):
 
         self.db.update_adventure(body["id"], adventure)
 
-        tags = self.db.read_tags(body["id"])
-        if tags != {}:  # if there's a set of tags, then
-            self.db.update_tags(body["id"], {"public": body["public"], "language": body["language"]})
+        tags = self.db.read_tags(current_adventure.get("tags", []))
+        for tag in tags:
+            for tag_adventure in tag["tagged_in"]:
+                if tag_adventure["id"] == current_adventure["id"]:
+                    tag_adventure["public"] = body["public"]
+                    tag_adventure["language"] = body["language"]
+            self.db.update_tag(tag["id"], {"tagged_in": tag["tagged_in"]})
 
         return {"success": gettext("adventure_updated")}, 200
 
@@ -913,6 +917,11 @@ class ForTeachersModule(WebsiteModule):
             return gettext("unauthorized"), 403
 
         self.db.delete_adventure(adventure_id)
+        tags = self.db.read_tags(adventure.get("tags", []))
+        for tag in tags:
+            tagged_in = list(filter(lambda t: t["id"] != adventure_id, tag["tagged_in"]))
+            if len(tag["tagged_in"]) != len(tagged_in):  # only update if this adventure was tagged.
+                self.db.update_tag(tag["id"], {"tagged_in": tagged_in})
         return {}, 200
 
     @route("/preview-adventure", methods=["POST"])

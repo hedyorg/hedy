@@ -25,8 +25,8 @@
                     <div class="flex flex-row items-center mb-4">
                         <label for="language" class="inline-block w-40 text-xl">{{_('language')}}</label>
                         <select id="language" name="language" required class="block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 ltr:pr-8 rtl:pl-8 rounded">
-                            <option value="{{ current_language().lang }}" selected>{{current_language().sym}}</option>
-                            {% for language in other_languages() %}
+                            <option value="{{ adventure['language'] or current_language().lang }}" selected>{{ lang_to_sym(adventure['language'] or current_language().lang) }}</option>
+                            {% for language in other_languages(adventure["language"]) %}
                                 <option value="{{language.lang}}">{{language.sym}}</option>
                             {% endfor %}
                         </select>
@@ -38,13 +38,13 @@
                                 <input type="text" name="tag" placeholder="{{_('tag_input_placeholder')}}" id="input_adventure_tags"
                                     _="on keypress if event.keyCode == 13 then event.stopPropagation()" 
                                     hx-trigger="enter"
-                                    hx-post="/create-tag?adventure_id={{adventure.id}}" hx-target="#tags-list" hx-swap="outerHTML"
+                                    hx-post="/tags/create/{{adventure.id}}" hx-target="#tags-list" hx-swap="outerHTML"
                                     _="on htmx:afterRequest focus()"
                                     class="appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 ltr:pr-8 rtl:pl-8 rounded"
                                     >
                                 <button class="green-btn" id="add_adventure_tags"
                                     hx-trigger="click"
-                                    hx-post="/create-tag?adventure_id={{adventure.id}}"
+                                    hx-post="/tags/create/{{adventure.id}}"
                                     hx-target="#tags-list"
                                     hx-swap="outerHTML"
                                     hx-include="[name='tag']"
@@ -52,7 +52,7 @@
                                     >{{_('add')}}</button>
                         </div>
                     </div>
-                    {{ render_partial('htmx-tags-list.html', tags=tags, tags_id=adventure.id, creator=adventure.creator) }}
+                    {{ render_partial('htmx-tags-list.html', tags=adventure_tags, adventure_id=adventure.id, creator=adventure.creator) }}
                     
 
                     <div class="border border-black rounded-lg p-4 text-sm">

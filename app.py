@@ -43,14 +43,13 @@ from utils import dump_yaml_rt, is_debug_mode, load_yaml_rt, timems, version, st
 from website import (ab_proxying, achievements, admin, auth_pages, aws_helpers,
                      cdn, classes, database, for_teachers, s3_logger, parsons,
                      profile, programs, querylog, quiz, statistics,
-                     translating)
+                     translating, tags)
 from website.auth import (current_user, is_admin, is_teacher, is_second_teacher, has_public_profile,
                           login_user_from_token_cookie, requires_login, requires_login_redirect, requires_teacher,
                           forget_current_user)
 from website.log_fetcher import log_fetcher
 from website.frontend_types import Adventure, Program, ExtraStory, SaveInfo
 
-import uuid
 
 logConfig(LOGGING_CONFIG)
 logger = logging.getLogger(__name__)
@@ -1580,89 +1579,6 @@ def get_specific_adventure(name, level, mode):
                            ))
 
 
-@app.route('/create-tag', methods=['POST', 'PUT'])
-@app.route('/create-tag/<tags_id>', methods=['POST', 'PUT'])
-@requires_teacher
-def create_tags(user, tags_id=None):
-    new_tag = request.form.get("tag")
-    adventure_id = request.args.get("adventure_id")
-    class_id = request.args.get("class_id")
-
-    if not new_tag or (not tags_id and not (adventure_id or class_id)):
-        return gettext("no_tag"), 400
-    new_tag = new_tag.strip()
-    # If no tags id, then it's likely that we want to create tags for the first time.
-    if not tags_id:
-        # if no id passed, then create one with the adventure/class id; or new one.
-        tags_id = adventure_id or class_id or uuid.uuid4().hex
-        users_tags = []
-
-    users_tags = DATABASE.read_tags(tags_id).get("items", [])
-
-    unique_tags = []
-    for tag in users_tags:
-        if tag == new_tag:
-            return gettext("duplicate_tag"), 400
-        elif tag not in unique_tags:
-            unique_tags.append(tag)
-    unique_tags.append(new_tag)
-
-    if len(users_tags) > 0:
-        # if there are, then update them
-        DATABASE.update_tags(tags_id, {"items": unique_tags})
-    else:
-        # create new tags otherwise.
-        DATABASE.create_tags({"id": tags_id, "items": unique_tags,
-                              "creator": user["username"], "language": g.lang})
-
-    return jinja_partials.render_partial('htmx-tags-list.html', tags=unique_tags,
-                                         tags_id=tags_id, creator=user["username"])
-
-
-@app.route("/read-tags", methods=["GET"])
-@app.route("/read-tags/<tags_id>", methods=["GET"])
-@requires_login
-def read_tags(user, tags_id=None):
-    # TODO: the public param could be used to list tags that are localized. E.g., "Hedy team"
-    public = False  # request.args.get("public")
-    if not tags_id:
-        adventure_id = request.args.get("adventure_id")
-        class_id = request.args.get("class_id")
-        creator = request.args.get("username")
-        tags_id = adventure_id or class_id
-
-    if public:
-        # TODO: get localized tags.
-        keyword_lang = g.keyword_lang
-        tags = TAGS[g.lang].get_tags(keyword_lang)
-    else:
-        if tags_id:
-            tags = DATABASE.read_tags(tags_id)
-            return {}, 200  # TODO: return localized tags
-        else:
-            tags = DATABASE.read_tags_by_username(creator or user["username"])
-            items = [item for tag in tags for item in tag.get("items", [])]
-            creator = creator or (len(tags) and tags[0].get("creator", ""))
-            tags_id = tags[0].get("id") if len(tags) else ""
-            public = True  # len(tags) and tags[0].get("public", "")
-            return jinja_partials.render_partial('htmx-tags-list.html', tags=items, tags_id=tags_id,
-                                                 creator=creator, public=public)
-
-
-@app.route("/delete-tag/<id>/<tag>", methods=["DELETE"])
-@requires_teacher
-def delete_single_tag(user, id, tag):
-    if not tag or not id:
-        return gettext('no_tag'), 400
-    tags = DATABASE.read_tags(id)
-    if not tags or tags["creator"] != user["username"]:
-        return utils.error_page(error=404, ui_message=gettext("no_tag"))
-    DATABASE.delete_tag(id, tag)
-    available_tags = DATABASE.read_tags(id).get("items", [])
-
-    return {"message": gettext('tag_deleted'), "tags": available_tags}, 200
-
-
 @app.route('/embedded/<int:level>', methods=['GET'])
 def get_embedded_code_editor(level):
     forget_current_user()
@@ -2285,11 +2201,14 @@ def all_countries():
 
 
 @app.template_global()
-def other_languages():
+def other_languages(lang_param=None):
     """Return a list of language objects that are NOT the current language."""
-    current_lang = g.lang
+    current_lang = lang_param or g.lang
     return [make_lang_obj(lang) for lang in ALL_LANGUAGES.keys() if lang != current_lang]
 
+@app.template_global()
+def lang_to_sym(lang):
+    return ALL_LANGUAGES[lang]
 
 @app.template_global()
 def other_keyword_languages():
@@ -2563,6 +2482,7 @@ app.register_blueprint(quiz.QuizModule(DATABASE, ACHIEVEMENTS, QUIZZES))
 app.register_blueprint(parsons.ParsonsModule(PARSONS))
 app.register_blueprint(statistics.StatisticsModule(DATABASE))
 app.register_blueprint(statistics.LiveStatisticsModule(DATABASE))
+app.register_blueprint(tags.TagsModule(DATABASE, ACHIEVEMENTS))
 
 
 # *** START SERVER ***
