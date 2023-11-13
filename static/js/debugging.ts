@@ -349,8 +349,6 @@ export function incrementDebugLine() {
         const repeatMatches = repeatRe.exec(line);
         const elseMatches = elseRe.exec(line);
         if (ifMatches || repeatMatches || elseMatches) {
-          console.log('inside if repeat else')
-          console.log(map)
           theGlobalEditor.setDebuggerCurrentLine(map.hedy_range.from_line, 
             map.hedy_range.from_column, map.hedy_range.to_column - 1);
         } else {
