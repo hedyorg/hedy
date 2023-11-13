@@ -17,7 +17,7 @@ import { LocalSaveWarning } from './local-save-warning';
 import { HedyEditor, EditorType } from './editor';
 import { stopDebug } from "./debugging";
 import { HedyAceEditorCreator } from './ace-editor';
-import { HedyCodeMirrorEditor, HedyCodeMirrorEditorCreator } from './cm-editor';
+import { HedyCodeMirrorEditorCreator } from './cm-editor';
 import { initializeTranslation } from './lezer-parsers/tokens';
 
 export let theGlobalDebugger: any;
@@ -295,25 +295,10 @@ function attachMainEditorEvents(editor: HedyEditor) {
   });
 
   editor.on('click', (event: MouseEvent) => {
-    if (theGlobalEditor instanceof HedyCodeMirrorEditor) {
-      if (!theGlobalEditor.hasIncorrectLinesDecorations()) return;
-      const pos = theGlobalEditor.getPosFromCoord(event.x, event.y);
-      if (pos == null) return;
-      const index = theGlobalEditor.indexOfErrorInPos(pos)
-      if (index == null) {
-        // Hide error, warning or okbox
-        error.hide();
-      } else {
-        // Show error for this line
-        let mapError = theGlobalSourcemap[index];
-        error.hide();
-        error.show(ClientMessages['Transpile_error'], mapError.error);
-      }
-    }
-  })
+    editor.skipFaultyHandler(event);
+  });
 
   // *** KEYBOARD SHORTCUTS ***
-
   let altPressed: boolean | undefined;
   // alt is 18, enter is 13
   window.addEventListener ('keydown', function (ev) {
@@ -342,32 +327,6 @@ function attachMainEditorEvents(editor: HedyEditor) {
     if (keyCode === 18) {
       altPressed = false;
       return;
-    }
-  });
-
-  // We show the error message when clicking on the skipped code or hide them if ace editor is clicked
-  $(document).on("click", 'div[class*=ace_content], div[class*=ace_incorrect_hedy_code]', function(e) {
-    let className = e.target.className;
-
-    // Only do this if skipping faulty is used
-    if ($('div[class*=ace_incorrect_hedy_code]')[0]) {
-      if (className === 'ace_content') {
-        // Hide error, warning or okbox
-        $('#okbox').hide();
-        $('#warningbox').hide();
-        $('#errorbox').hide();
-      } else {
-        // Show error for this line
-        let mapIndex = className;
-        mapIndex = mapIndex.replace('ace_incorrect_hedy_code_', '');
-        mapIndex = mapIndex.replace('ace_start ace_br15', '');
-        let mapError = theGlobalSourcemap[Number(mapIndex)];
-
-        $('#okbox').hide();
-        $('#warningbox').hide();
-        $('#errorbox').hide();
-        error.show(ClientMessages['Transpile_error'], mapError.error);
-      }
     }
   });
 }

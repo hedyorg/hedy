@@ -1,6 +1,8 @@
-import { theLevel } from "./app";
+import { theGlobalSourcemap, theLevel } from "./app";
+import { ClientMessages } from "./client-messages";
 import { HedyEditorCreator, HedyEditor, Breakpoints, EditorType, EditorEvent, SourceRange } from "./editor";
 import { EventEmitter } from "./event-emitter";
+import { error } from "./modal";
 // const MOVE_CURSOR_TO_BEGIN = -1;
 const MOVE_CURSOR_TO_END = 1;
 
@@ -400,6 +402,33 @@ export class HedyAceEditor implements HedyEditor {
     }
   
     return code;
+  }
+
+  public skipFaultyHandler(): void {
+    $(document).on("click", 'div[class*=ace_content], div[class*=ace_incorrect_hedy_code]', function(e) {
+      let className = e.target.className;
+  
+      // Only do this if skipping faulty is used
+      if ($('div[class*=ace_incorrect_hedy_code]')[0]) {
+        if (className === 'ace_content') {
+          // Hide error, warning or okbox
+          $('#okbox').hide();
+          $('#warningbox').hide();
+          $('#errorbox').hide();
+        } else {
+          // Show error for this line
+          let mapIndex = className;
+          mapIndex = mapIndex.replace('ace_incorrect_hedy_code_', '');
+          mapIndex = mapIndex.replace('ace_start ace_br15', '');
+          let mapError = theGlobalSourcemap[Number(mapIndex)];
+  
+          $('#okbox').hide();
+          $('#warningbox').hide();
+          $('#errorbox').hide();
+          error.show(ClientMessages['Transpile_error'], mapError.error);
+        }
+      }
+    });
   }
 }
 

@@ -136,4 +136,9 @@ export interface HedyEditor {
    * Mark the given set of lines as currently struck through
    */
   getActiveContents(debugLine?: string | null): string;
+
+  /**
+   * Skip faulty event handler
+   */
+  skipFaultyHandler(event?: MouseEvent): void;
 }

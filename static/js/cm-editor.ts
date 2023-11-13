@@ -19,8 +19,10 @@ import {
 import { styleTags } from "@lezer/highlight";
 import {LRLanguage} from "@codemirror/language"
 import { languagePerLevel } from "./lezer-parsers/language-packages";
-import { theLevel } from "./app";
+import { theGlobalSourcemap, theLevel } from "./app";
 import { monokai } from "./cm-monokai-theme";
+import { error } from "./modal";
+import { ClientMessages } from "./client-messages";
 
 export class HedyCodeMirrorEditorCreator implements HedyEditorCreator {
     /**
@@ -421,5 +423,21 @@ export class HedyCodeMirrorEditor implements HedyEditor {
         let hasIncorrectLines = false;
         incorrectLineSet.between(0, this.view.state.doc.length, () => { hasIncorrectLines = true });        
         return hasIncorrectLines
+    }
+
+    public skipFaultyHandler(event: MouseEvent): void {
+    if (!this.hasIncorrectLinesDecorations()) return;
+        const pos = this.getPosFromCoord(event.x, event.y);
+        if (pos == null) return;
+        const index = this.indexOfErrorInPos(pos)
+        if (index == null) {
+            // Hide error, warning or okbox
+            error.hide();
+        } else {
+            // Show error for this line
+            let mapError = theGlobalSourcemap[index];
+            error.hide();
+            error.show(ClientMessages['Transpile_error'], mapError.error);
+        }
     }
 }
