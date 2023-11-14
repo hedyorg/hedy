@@ -1,4 +1,4 @@
-import { multiLevelTester } from "../tools/lezer/lezer_tester"
+import { multiLevelTester, singleLevelTester } from "../tools/lezer/lezer_tester"
 
 describe('Lezer parser tets for level 2', () => {
     describe('Successfull tests level 2', () => {
@@ -67,7 +67,7 @@ describe('Lezer parser tets for level 2', () => {
                         Turtle(Forward(forward,Text))
                     )
                 )`
-            
+
             multiLevelTester('Test turtle assignment', code, expectedTree, 2, 5);
         });
     });
@@ -82,8 +82,15 @@ describe('Lezer parser tets for level 2', () => {
                         ErrorInvalid(Text,⚠(ask),Text,Text,Text,Text,Text,Text)
                     )
                 )`
-            
+
             multiLevelTester('Test ask without is gives error', code, expectedTree, 2, 3);
-        })
+        });
+
+        describe('echo gives error', () => {
+            const code = 'echo hello';
+            const expectedTree = `Program(Command(ErrorInvalid(Text,Text)))`;
+
+            singleLevelTester('Test echo gives error', code, expectedTree, 2);
+        });
     })
 });
