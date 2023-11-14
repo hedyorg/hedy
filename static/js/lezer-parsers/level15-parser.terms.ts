@@ -18,7 +18,7 @@ export const
   add = 16,
   from = 17,
   remove = 18,
-  to_list = 19,
+  toList = 19,
   clear = 20,
   ins = 21,
   not_in = 22,

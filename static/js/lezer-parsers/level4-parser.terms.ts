@@ -12,7 +12,7 @@ export const
   add = 10,
   from = 11,
   remove = 12,
-  to_list = 13,
+  toList = 13,
   clear = 14,
   Comment = 15,
   Program = 16,

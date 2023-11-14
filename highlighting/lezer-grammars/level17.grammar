@@ -32,7 +32,7 @@ AssignList { Text (is+ | Op<"=">) Op<"["> (String | Number ) ~ambig  (Comma (Str
 Assign { (Text | ListAccess) (is+ | Op<"=">) (Expression ~ambig )+ }
 Sleep { sleep+ (Expression | Call)? }
 ListAccess { Text Op<"["> (random+ | Text) Op<"]"> }
-Add { add+ (Expression | Call ) to_list+ Text }
+Add { add+ (Expression | Call ) toList+ Text }
 Remove { remove+ (Expression | Call) from+ Text }
 Clear { clear+ }
 
@@ -112,7 +112,7 @@ Expression {
     add[@name="add"],
     from[@name="from"],
     remove[@name="remove"],
-    to_list[@name="to_list"],
+    toList[@name="toList"],
     clear[@name="clear"],    
     ins[@name="in"],
     not_in[@name="not_in"],

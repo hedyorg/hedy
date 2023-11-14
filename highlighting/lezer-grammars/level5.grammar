@@ -35,7 +35,7 @@ AssignList { Text is+ Text+ (Comma Text+)+ }
 Assign { Text is+ (Text+ | ListAccess) }
 Sleep { sleep+ (Text | ListAccess)? }
 ListAccess { Text at+ (random+ | Text) }
-Add { add+ Text to_list+ Text }
+Add { add+ Text toList+ Text }
 Remove { remove+ Text from+ Text }
 Clear { clear+ }
 
@@ -75,7 +75,7 @@ ErrorInvalid[@dynamicPrecedence=-10] { Text+ }
     add[@name="add"],
     from[@name="from"],
     remove[@name="remove"],
-    to_list[@name="to_list"],
+    toList[@name="toList"],
     clear[@name="clear"],    
     ins[@name="in"],
     not_in[@name="not_in"]
