@@ -70,7 +70,14 @@
                             toggle .hidden on #show-tags_{{loop.index}}
                             ">{{_('hide')}}</a></p>
                     </div>
-                <div class="flex justify-between items-center px-6 py-4 bg-gray-200 shadow-lg">
+                <div id="actions" class="flex justify-between items-center px-6 py-4 {% if user['username'] == adventure['creator'] %}bg-white{%else%}bg-gray-200{%endif%} shadow-lg">
+                    {% if user["username"] != adventure["creator"] %}
+                        <button class="green-btn" id="clone_adventure_btn"
+                            hx-trigger="click"
+                            hx-post="/public-adventures/clone/{{adventure.id}}"
+                            hx-swap="none"
+                            >{{_('clone')}}</button>
+                    {% endif %}
                 </div>
             </div>
         {% endfor %}
