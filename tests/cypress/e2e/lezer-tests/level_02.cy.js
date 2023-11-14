@@ -71,4 +71,19 @@ describe('Lezer parser tets for level 2', () => {
             multiLevelTester('Test turtle assignment', code, expectedTree, 2, 5);
         });
     });
+
+    describe('Error tests level 2', () => {
+        describe('Ask without is gives error', () => {
+            // ⚠ is the name of an error node that is inserted in the tree
+            const code = 'destination ask what is where are you going?';
+            const expectedTree = `
+                Program(
+                    Command(
+                        ErrorInvalid(Text,⚠(ask),Text,Text,Text,Text,Text,Text)
+                    )
+                )`
+            
+            multiLevelTester('Test ask without is gives error', code, expectedTree, 2, 3);
+        })
+    })
 });
