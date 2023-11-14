@@ -1,5 +1,8 @@
       {# TABS #}
-      <div id="adventures">
+      <div id="adventures"
+      _="if localStorage.getItem('developers_mode') is true
+            toggle .hidden on #adventures
+          end">
         {% macro adventure_tab(tabname, title, selected, id, tab_class, index) %}
             <div
                 class="tab {% if selected %}tab-selected{% endif %} flex items-center justify-center whitespace-nowrap {{ tab_class }}"
