@@ -43,12 +43,13 @@ from utils import dump_yaml_rt, is_debug_mode, load_yaml_rt, timems, version, st
 from website import (ab_proxying, achievements, admin, auth_pages, aws_helpers,
                      cdn, classes, database, for_teachers, s3_logger, parsons,
                      profile, programs, querylog, quiz, statistics,
-                     translating)
+                     translating, tags)
 from website.auth import (current_user, is_admin, is_teacher, is_second_teacher, has_public_profile,
                           login_user_from_token_cookie, requires_login, requires_login_redirect, requires_teacher,
                           forget_current_user)
 from website.log_fetcher import log_fetcher
 from website.frontend_types import Adventure, Program, ExtraStory, SaveInfo
+
 
 logConfig(LOGGING_CONFIG)
 logger = logging.getLogger(__name__)
@@ -105,6 +106,10 @@ for lang in ALL_LANGUAGES.keys():
 ACHIEVEMENTS_TRANSLATIONS = hedyweb.AchievementTranslations()
 DATABASE = database.Database()
 ACHIEVEMENTS = achievements.Achievements(DATABASE, ACHIEVEMENTS_TRANSLATIONS)
+
+TAGS = collections.defaultdict(hedy_content.NoSuchAdventure)
+for lang in ALL_LANGUAGES.keys():
+    TAGS[lang] = hedy_content.Tags(lang)
 
 
 def load_adventures_for_level(level, subset=None):
@@ -2196,10 +2201,15 @@ def all_countries():
 
 
 @app.template_global()
-def other_languages():
+def other_languages(lang_param=None):
     """Return a list of language objects that are NOT the current language."""
-    current_lang = g.lang
+    current_lang = lang_param or g.lang
     return [make_lang_obj(lang) for lang in ALL_LANGUAGES.keys() if lang != current_lang]
+
+
+@app.template_global()
+def lang_to_sym(lang):
+    return ALL_LANGUAGES[lang]
 
 
 @app.template_global()
@@ -2474,6 +2484,7 @@ app.register_blueprint(quiz.QuizModule(DATABASE, ACHIEVEMENTS, QUIZZES))
 app.register_blueprint(parsons.ParsonsModule(PARSONS))
 app.register_blueprint(statistics.StatisticsModule(DATABASE))
 app.register_blueprint(statistics.LiveStatisticsModule(DATABASE))
+app.register_blueprint(tags.TagsModule(DATABASE, ACHIEVEMENTS))
 
 
 # *** START SERVER ***
