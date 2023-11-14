@@ -1,79 +1,51 @@
-import {parser} from "../../../../static/js/lezer-parsers/level1-parser"
+import { parser as level1Parser } from "../../../../static/js/lezer-parsers/level1-parser"
 import { initializeTranslation } from '../../../../static/js/lezer-parsers/tokens';
 import { testTree } from "@lezer/generator/dist/test"
+import { multiLevelTester, singleLevelTester } from "../tools/lezer/lezer_tester"
 
-describe('Lezer parser tests for level 1', () => {    
+describe('Lezer parser tests for level 1', () => {
     beforeEach(() => {
-        initializeTranslation({keywordLanguage: 'en', level: 1});
+        initializeTranslation({ keywordLanguage: 'en', level: 1 });
     });
 
     describe('Successfull tests', () => {
-        it ('Test print with text', () => {
-            const code = 'print hello world\nprint how are you';
-            const expectedTree =
-            `Program(
-                Command(
-                    Print(print,Text,Text)
-                ),
-                Command(
-                    Print(print,Text,Text,Text)
-                )
-            )` ;
-            testTree(parser.parse(code), expectedTree);
+        describe('Print tests', () => {
+            multiLevelTester('Test print with text', 'print hello world\nprint how are you',
+                'Program(Command(Print(print,Text,Text)), Command(Print(print,Text,Text,Text)))', 1, 3);
+
         });
-    
-        it('Test ask with text', () => {
+
+        describe('Ask tests', () => {
             const code = 'ask what is your name';
-            const expectedTree = 
-            `Program(
+            const expectedTree =
+                `Program(
                 Command(
                     Ask(ask,Text,Text,Text,Text)
                 )
             )
             `
-            testTree(parser.parse(code), expectedTree);
-        });
-    
-        it('Test echo', () => {
-            const code = 'echo hello'
+            singleLevelTester('Test ask', code, expectedTree, 1);
+        })
+
+        describe('Echo tests', () => {
+            const code = 'echo hello';
             const expectedTree =
-            `Program(
+                `Program(
                 Command(
                     Echo(echo, Text)
                 )
             )
             `
-            testTree(parser.parse(code), expectedTree);
-        });
-    
-        it('Test print, ask, echo combined', () => {
-            const code = `print Im Hedy the parrot
-                ask whats your name?
-                echo`
-            
-            const expectedTree = 
-            `Program(
-                Command(
-                    Print(print,Text,Text,Text,Text)
-                ),
-                Command(
-                    Ask(ask,Text,Text,Text)
-                ),
-                Command(
-                    Echo(echo)
-                )
-            )`
-    
-            testTree(parser.parse(code), expectedTree);
-        });
-    
-        it('Test turtle commands: forward, turn, color', () => {
+            singleLevelTester('Test echo', code, expectedTree, 1);
+        })
+
+        describe('Turtle tests', () => {
             const code = `forward 20
             turn right
             color black`;
-    
-            const expectedTree = 
-            `Program(
+
+            const expectedTree =
+                `Program(
                 Command(
                     Turtle(Forward(forward,Text))
                 ),
@@ -84,8 +56,28 @@ describe('Lezer parser tests for level 1', () => {
                     Turtle(Color(color,Text))
                 )
             )`
+
+            singleLevelTester('Test turtle commands: forward, turn, color', code, expectedTree, 1);
+        });
+
+        describe('Combined tests', () => {
+            const code = `print Im Hedy the parrot
+                ask whats your name?
+                echo`
     
-            testTree(parser.parse(code), expectedTree);
+            const expectedTree =
+                `Program(
+                Command(
+                    Print(print,Text,Text,Text,Text)
+                ),
+                Command(
+                    Ask(ask,Text,Text,Text)
+                ),
+                Command(
+                    Echo(echo)
+                )
+            )`
+            singleLevelTester('Test print, ask, echo combined', code, expectedTree, 1);
         });
     });
 
@@ -94,24 +86,24 @@ describe('Lezer parser tests for level 1', () => {
             const code = 'hello world';
             const expectedTree = `Program(Command(ErrorInvalid(Text,Text)))`
 
-            testTree(parser.parse(code), expectedTree);
+            multiLevelTester('Test error', code, expectedTree, 1, 18);
         });
 
         it('Correct command after error parses correctly', () => {
             const code = `what is your name
-            echo so your name is
+            print pretty name
             `
-            const expectedTree = 
-            `Program(
+            const expectedTree =
+                `Program(
                 Command(
                     ErrorInvalid(Text,Text,Text,Text)
                 ),
                 Command(
-                    Echo(echo,Text,Text,Text,Text)
+                    Print(print,Text,Text)
                 )
             )`
-            
-            testTree(parser.parse(code), expectedTree);
+
+            multiLevelTester('Test error', code, expectedTree, 1, 3);
         });
     })
-})
+});
