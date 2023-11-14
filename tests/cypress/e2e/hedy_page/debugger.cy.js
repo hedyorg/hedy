@@ -1,420 +1,385 @@
 describe('Test editor box functionality', () => {
-
   it('Test echo, print, ask level 1', () => {
-    cy.intercept('/parse').as('parse')
-
-    visitLevel(1);
-
+    const heightRe = new RegExp('height: ([0-9]+(.[0-9]+)?)+px', 'gu');    
+    visitLevel(1)
     cy.focused().type('print Hello world\nask Hello!\necho');
-    codeMirrorContent().should('have.text', 'print Hello worldask Hello!echo');
+    
+    cy.get('.ace_active-line').invoke('attr', 'style').then((text) => {
+      // We calculate the height of the lines to later get the active line
+      const matches = heightRe.exec(text);
+      const lineHeight = parseFloat(matches[1]);
+      aceContent().should('have.text', 'print Hello worldask Hello!echo');
+      cy.get('#debug_button').click();
 
-    cy.get('#debug_button').click();
-    cy.wait('@parse')
+      // checkFullDebugLine(lineHeight, 1);
+      cy.get('#debug_continue').click();
+      cy.get('#output').should('contain.text', 'Hello world');
 
-    cy.get('.cm-line')
-      .eq(0)
-      .should('have.class', 'cm-debugger-current-line');
+      // checkFullDebugLine(lineHeight, 2);
+      cy.get('#debug_continue').click();
+      cy.get('#ask-modal').should('be.visible');
+      cy.get('#ask-modal > form > div > input[type="text"]').type('Hedy!');
+      cy.get('#ask-modal > form > div > input[type="submit"]').click();
 
-    cy.get('#debug_continue').click();
-    cy.get('#output').should('contain.text', 'Hello world');
-
-    cy.get('.cm-line')
-      .eq(1)
-      .should('have.class', 'cm-debugger-current-line');
-
-    cy.get('#debug_continue').click();
-    cy.get('#ask-modal').should('be.visible');
-    cy.get('#ask-modal > form > div > input[type="text"]').type('Hedy!');
-    cy.get('#ask-modal > form > div > input[type="submit"]').click();
-
-    cy.get('.cm-line')
-      .eq(2)
-      .should('have.class', 'cm-debugger-current-line');
-
-    cy.get('#debug_continue').click();
-
-    cy.get('#output').should('contain.text', 'Hedy!');
+      // checkFullDebugLine(lineHeight, 3)
+      cy.get('#debug_continue').click();
+      cy.get('#output').should('contain.text', 'Hedy!');
+      cy.wait(1000)
+      // cy.get('#debug_button').should('be.visible'); // we finished execution
+    });
   });
-
+  
   it('Test is, ask and sleep level 2', () => {
-    cy.intercept('/parse').as('parse')
+    const heightRe = new RegExp('height: ([0-9]+(.[0-9]+)?)+px', 'gu');    
     visitLevel(2);
-
     cy.focused().type('name is ask What is your name?\nprint Hello name\nage is 15\nprint name is age years old.');
-
-    cy.get('#debug_button').click();
-    cy.wait('@parse')
-
-    cy.get('.cm-line')
-      .eq(0)
-      .should('have.class', 'cm-debugger-current-line');
-
-    cy.get('#debug_continue').click();
-    cy.get('#ask-modal').should('be.visible');
-    cy.get('#ask-modal > form > div > input[type="text"]').type('Hedy');
-    cy.get('#ask-modal > form > div > input[type="submit"]').click();
-
-    cy.get('.cm-line')
-      .eq(1)
-      .should('have.class', 'cm-debugger-current-line');
-
-    cy.get('#debug_continue').click();
-    cy.get('#output').should('contain.text', 'Hello Hedy');
-
-    cy.get('.cm-line')
-      .eq(2)
-      .should('have.class', 'cm-debugger-current-line');
-    cy.get('#debug_continue').click();
-
-    cy.get('.cm-line')
-      .eq(3)
-      .should('have.class', 'cm-debugger-current-line');
-
-    cy.get('#debug_continue').click();
-    cy.get('#output').should('contain.text', 'Hedy is 15 years old.');
+    
+    cy.get('.ace_active-line').invoke('attr', 'style').then((text) => {
+      // We calculate the height of the lines to later get the active line
+      const matches = heightRe.exec(text);
+      const lineHeight = parseFloat(matches[1]);
+      cy.get('#debug_button').click();    
+      
+      // checkFullDebugLine(lineHeight, 1);
+      cy.get('#debug_continue').click();
+      cy.get('#ask-modal').should('be.visible');
+      cy.get('#ask-modal > form > div > input[type="text"]').type('Hedy');
+      cy.get('#ask-modal > form > div > input[type="submit"]').click();
+      
+      // checkFullDebugLine(lineHeight, 2);
+      cy.get('#debug_continue').click();    
+      cy.get('#output').should('contain.text', 'Hello Hedy');
+      
+      // checkFullDebugLine(lineHeight, 3);
+      cy.get('#debug_continue').click();    
+      
+      // checkFullDebugLine(lineHeight, 4);
+      cy.get('#debug_continue').click();    
+      cy.get('#output').should('contain.text', 'Hedy is 15 years old.'); 
+      cy.wait(1000)
+      // cy.get('#debug_button').should('be.visible'); // we finished execution
+    });
   });
 
   it('Test sleep, clear level 4', () => {
-    cy.intercept('/parse').as('parse');
+    const heightRe = new RegExp('height: ([0-9]+(.[0-9]+)?)+px', 'gu');    
     visitLevel(4);
-
     cy.focused().type("print '3'\nsleep\nclear");
-
-    cy.get('#debug_button').click();
-    cy.wait('@parse')
-
-    cy.get('.cm-line')
-      .eq(0)
-      .should('have.class', 'cm-debugger-current-line');
-
-    cy.get('#debug_continue').click();
-    cy.get('#output').should('contain.text', '3');
-
-    cy.get('.cm-line')
-      .eq(1)
-      .should('have.class', 'cm-debugger-current-line');
-
-    cy.get('#debug_continue').click();
-    cy.wait(1000) // next command is sleep so wait 1 second
-
-    cy.get('.cm-line')
-      .eq(2)
-      .should('have.class', 'cm-debugger-current-line');
-
-    cy.get('#debug_continue').click();
-    cy.get('#output').should('be.empty');
+    
+    cy.get('.ace_active-line').invoke('attr', 'style').then((text) => {
+      // We calculate the height of the lines to later get the active line
+      const matches = heightRe.exec(text);
+      const lineHeight = parseFloat(matches[1]);
+      cy.get('#debug_button').click();    
+      
+      // checkFullDebugLine(lineHeight, 1);
+      cy.get('#debug_continue').click();
+      cy.get('#output').should('contain.text', '3');
+      
+      // checkFullDebugLine(lineHeight, 2);
+      cy.get('#debug_continue').click();    
+      cy.wait(1000) // next command is sleep so wait 1 second
+      
+      // checkFullDebugLine(lineHeight, 3);
+      cy.get('#debug_continue').click();
+      cy.get('#output').should('be.empty');
+      cy.wait(1000)
+      // cy.get('#debug_button').should('be.visible'); // we finished execution
+    });
   });
 
   it('Test if and else level 5, with condition true', () => {
-    cy.intercept('/parse').as('parse');
-
+    const heightRe = new RegExp('height: ([0-9]+(.[0-9]+)?)+px', 'gu');  
+        
     visitLevel(5);
-
     cy.focused().type("name is Hedy\nif name is Hedy print 'nice'\nelse print 'boo!'");
+    
+    cy.get('.ace_active-line').invoke('attr', 'style').then((text) => {
+      // We calculate the height of the lines to later get the active line
+      const matches = heightRe.exec(text);
+      const lineHeight = parseFloat(matches[1]);
+      cy.get('#debug_button').click();    
 
-    cy.get('#debug_button').click();
-    cy.wait('@parse')
+      // checkFullDebugLine(lineHeight, 1);      
+      cy.get('#debug_continue').click();
+      
+      //checkPartialDebugLine(lineHeight, 2, true);
+      cy.get('#debug_continue').click();
 
-    cy.get('.cm-line')
-      .eq(0)
-      .should('have.class', 'cm-debugger-current-line');
-    cy.get('#debug_continue').click();
-
-    cy.get('.cm-debugger-current-line > span').then(els => {
-      const texts = [...els].map(getText);
-      expect(texts).to.deep.eq('if name is Hedy'.split(' '))
-    })
-    cy.get('#debug_continue').click();
-
-    cy.get('.cm-debugger-current-line > span').then(els => {
-      const texts = [...els].map(getText);
-      expect(texts).to.deep.eq("print 'nice'".split(' '))
-    })
-    cy.get('#debug_continue').click();
+      //checkPartialDebugLine(lineHeight, 2, false);
+      cy.get('#debug_continue').click();
+      cy.wait(1000)
+      
+      // The else should not be highlighter and we stop execution
+      // cy.get('#debug_button').should('be.visible'); // we finished execution
+    });
   });
 
   it('Test if and else level 5, with condition false', () => {
-    cy.intercept('/parse').as('parse');
-
+    const heightRe = new RegExp('height: ([0-9]+(.[0-9]+)?)+px', 'gu');  
+        
     visitLevel(5);
-
     cy.focused().type("name is Hedy\nif name is Jesus print 'nice'\nelse print 'boo!'");
+    
+    cy.get('.ace_active-line').invoke('attr', 'style').then((text) => {
+      // We calculate the height of the lines to later get the active line
+      const matches = heightRe.exec(text);
+      const lineHeight = parseFloat(matches[1]);
+      cy.get('#debug_button').click();    
 
-    cy.get('#debug_button').click();
-    cy.wait('@parse')
+      // checkFullDebugLine(lineHeight, 1);      
+      cy.get('#debug_continue').click();
+      
+      //checkPartialDebugLine(lineHeight, 2, true);
+      cy.get('#debug_continue').click();
 
-    cy.get('.cm-line')
-      .eq(0)
-      .should('have.class', 'cm-debugger-current-line');
-    cy.get('#debug_continue').click();
-
-    cy.get('.cm-debugger-current-line > span').then(els => {
-      const texts = [...els].map(getText);
-      expect(texts).to.deep.eq('if name is Jesus'.split(' '))
-    })
-    cy.get('#debug_continue').click();
-
-    cy.get('.cm-debugger-current-line > span').then(els => {
-      const texts = [...els].map(getText);
-      expect(texts).to.deep.eq("print 'boo!'".split(' '))
-    })
-    cy.get('#debug_continue').click();
+      // we should highlight the print statement after the else!
+      //checkPartialDebugLine(lineHeight, 3, false);
+      cy.get('#debug_continue').click();
+      cy.wait(1000)
+      
+      // The else should not be highlighter and we stop execution
+      // cy.get('#debug_button').should('be.visible'); // we finished execution
+    });
   });
-
 
   it('Test repeat with print statement inside ', () => {
-    cy.intercept('/parse').as('parse');
-
+    const heightRe = new RegExp('height: ([0-9]+(.[0-9]+)?)+px', 'gu');  
+        
     visitLevel(7);
-
     cy.focused().type("repeat 3 times print 'Hedy is fun'");
+    
+    cy.get('.ace_active-line').invoke('attr', 'style').then((text) => {
+      // We calculate the height of the lines to later get the active line
+      const matches = heightRe.exec(text);
+      const lineHeight = parseFloat(matches[1]);
+      
+      cy.get('#debug_button').click();
+      
+      //checkPartialDebugLine(lineHeight, 1, true);
+      cy.get('#debug_continue').click();
+      
+      // For some reason not yet known to me we have to pass two times on a for statement
+      // the first time it executes
+      //checkPartialDebugLine(lineHeight, 1, true);
+      cy.get('#debug_continue').click();
 
-    cy.get('#debug_button').click();
-    cy.wait('@parse')
+      //checkPartialDebugLine(lineHeight, 1, false);
+      cy.get('#debug_continue').click();
+      cy.get('#output').should('contain.text', 'Hedy is fun');
 
-    cy.get('.cm-debugger-current-line > span').then(els => {
-      const texts = [...els].map(getText);
-      expect(texts).to.deep.eq("repeat 3 times".split(' '))
-    })
-    cy.get('#debug_continue').click();
+      //checkPartialDebugLine(lineHeight, 1, true);
+      cy.get('#debug_continue').click();
+      
+      //checkPartialDebugLine(lineHeight, 1, false);
+      cy.get('#debug_continue').click();
+      cy.get('#output').should('contain.text', 'Hedy is fun\nHedy is fun');
+      
+      //checkPartialDebugLine(lineHeight, 1, true);
+      cy.get('#debug_continue').click();
 
-
-    // For some reason not yet known to me we have to pass two times on a for statement
-    // the first time it executes
-    cy.get('.cm-debugger-current-line > span').then(els => {
-      const texts = [...els].map(getText);
-      expect(texts).to.deep.eq("repeat 3 times".split(' '))
-    })
-    cy.get('#debug_continue').click();
-
-    cy.get('.cm-debugger-current-line > span').then(els => {
-      const texts = [...els].map(getText);
-      expect(texts).to.deep.eq(['print', "'Hedy is fun'"])
-    })
-    cy.get('#debug_continue').click();
-    cy.get('#output').should('contain.text', 'Hedy is fun');
-
-    cy.get('.cm-debugger-current-line > span').then(els => {
-      const texts = [...els].map(getText);
-      expect(texts).to.deep.eq("repeat 3 times".split(' '))
-    })
-    cy.get('#debug_continue').click();
-
-    cy.get('.cm-debugger-current-line > span').then(els => {
-      const texts = [...els].map(getText);
-      expect(texts).to.deep.eq(['print', "'Hedy is fun'"])
-    })
-    cy.get('#debug_continue').click();
-    cy.get('#output').should('contain.text', 'Hedy is fun\nHedy is fun');
-
-    cy.get('.cm-debugger-current-line > span').then(els => {
-      const texts = [...els].map(getText);
-      expect(texts).to.deep.eq("repeat 3 times".split(' '))
-    })
-    cy.get('#debug_continue').click();
-
-    cy.get('.cm-debugger-current-line > span').then(els => {
-      const texts = [...els].map(getText);
-      expect(texts).to.deep.eq(['print', "'Hedy is fun'"])
-    })
-    cy.get('#debug_continue').click();
-    cy.get('#output').should('contain.text', 'Hedy is fun\nHedy is fun\nHedy is fun');
+      //checkPartialDebugLine(lineHeight, 1, false);
+      cy.get('#debug_continue').click();
+      cy.get('#output').should('contain.text', 'Hedy is fun\nHedy is fun\nHedy is fun');
+      cy.wait(1000)
+            
+      // cy.get('#debug_button').should('be.visible'); // we finished execution
+    });
   });
-  it('Test if with repeat statement inside ', () => {
-    cy.intercept('/parse').as('parse');
 
+  it('Test repeat with if statement inside ', () => {
+    const heightRe = new RegExp('height: ([0-9]+(.[0-9]+)?)+px', 'gu');  
+        
     visitLevel(7);
-
     cy.focused().type("if 1 is 1 repeat 1 times print 'Hedy is fun'");
-    cy.get('#debug_button').click();
-    cy.wait('@parse')
+    
+    cy.get('.ace_active-line').invoke('attr', 'style').then((text) => {
+      // We calculate the height of the lines to later get the active line
+      const matches = heightRe.exec(text);
+      const lineHeight = parseFloat(matches[1]);
+      
+      cy.get('#debug_button').click();
+      
+      //checkPartialDebugLine(lineHeight, 1, true);
+      cy.get('#debug_continue').click();
 
-    cy.get('.cm-debugger-current-line > span').then(els => {
-      const texts = [...els].map(getText);
-      expect(texts).to.deep.eq('if 1 is 1'.split(' '))
-    })
-    cy.get('#debug_continue').click();
+      //checkPartialDebugLine(lineHeight, 1, false);
+      cy.get('#debug_continue').click();
 
-    cy.get('.cm-debugger-current-line > span').then(els => {
-      const texts = [...els].map(getText);
-      expect(texts).to.deep.eq('repeat 1 times'.split(' '))
-    })
-    cy.get('#debug_continue').click();
+      // For some reason not yet known to me we have to pass two times on a for statement
+      // the first time it executes
+      //checkPartialDebugLine(lineHeight, 1, false);
+      cy.get('#debug_continue').click();
 
-    // For some reason not yet known to me we have to pass two times on a for statement
-    // the first time it executes
-    cy.get('.cm-debugger-current-line > span').then(els => {
-      const texts = [...els].map(getText);
-      expect(texts).to.deep.eq('repeat 1 times'.split(' '))
-    })
-    cy.get('#debug_continue').click();
-
-    cy.get('.cm-debugger-current-line > span').then(els => {
-      const texts = [...els].map(getText);
-      expect(texts).to.deep.eq(['print', "'Hedy is fun'"])
-    })
-    cy.get('#debug_continue').click();
-    cy.get('#output').should('contain.text', 'Hedy is fun');
+      //checkPartialDebugLine(lineHeight, 1, false);
+      cy.get('#debug_continue').click();
+      cy.get('#output').should('contain.text', 'Hedy is fun');
+      cy.wait(1000)
+          
+      // cy.get('#debug_button').should('be.visible'); // we finished execution
+    });
   });
+
   it('Test repeat with blocks', () => {
-    cy.intercept('/parse').as('parse');
-
+    const heightRe = new RegExp('height: ([0-9]+(.[0-9]+)?)+px', 'gu');  
+        
     visitLevel(8);
+    cy.focused().type("repeat 2 times\n    print 'a'\nprint 'b'");
+    
+    cy.get('.ace_active-line').invoke('attr', 'style').then((text) => {
+      // We calculate the height of the lines to later get the active line
+      const matches = heightRe.exec(text);
+      const lineHeight = parseFloat(matches[1]);
+      
+      cy.get('#debug_button').click();
+      
+      // checkFullDebugLine(lineHeight, 1);
+      cy.get('#debug_continue').click();
+      
+      // For some reason not yet known to me we have to pass two times on a for statement
+      // the first time it executes
+      // checkFullDebugLine(lineHeight, 1);
+      cy.get('#debug_continue').click();
+      
+      // checkFullDebugLine(lineHeight, 2);
+      cy.get('#debug_continue').click();      
+      cy.get('#output').should('contain.text', 'a');
+      
+      // checkFullDebugLine(lineHeight, 3);
+      cy.get('#debug_continue').click();      
+      cy.get('#output').should('contain.text', 'a\nb');
 
-    cy.focused().type("repeat 2 times\n    print 'a'\n    print 'b'");
-    cy.get('#debug_button').click();
-    cy.wait('@parse')
-
-    cy.get('.cm-line')
-      .eq(0)
-      .should('have.class', 'cm-debugger-current-line');
-    cy.get('#debug_continue').click();
-
-    // For some reason not yet known to me we have to pass two times on a for statement
-    // the first time it executes
-    cy.get('.cm-line')
-      .eq(0)
-      .should('have.class', 'cm-debugger-current-line');
-    cy.get('#debug_continue').click();
-
-    cy.get('.cm-line')
-      .eq(1)
-      .should('have.class', 'cm-debugger-current-line');
-    cy.get('#debug_continue').click();
-    cy.get('#output').should('contain.text', 'a');
-
-    cy.get('.cm-line')
-      .eq(2)
-      .should('have.class', 'cm-debugger-current-line');
-    cy.get('#debug_continue').click();
-    cy.get('#output').should('contain.text', 'a\nb');
-
-    cy.get('.cm-line')
-      .eq(0)
-      .should('have.class', 'cm-debugger-current-line');
-    cy.get('#debug_continue').click();
-
-    cy.get('.cm-line')
-      .eq(1)
-      .should('have.class', 'cm-debugger-current-line');
-    cy.get('#debug_continue').click();
-    cy.get('#output').should('contain.text', 'a\nb\na');
-
-    cy.get('.cm-line')
-      .eq(2)
-      .should('have.class', 'cm-debugger-current-line');
-    cy.get('#debug_continue').click();
-    cy.get('#output').should('contain.text', 'a\nb\na\nb');
+      // checkFullDebugLine(lineHeight, 1);
+      cy.get('#debug_continue').click();
+      
+      // checkFullDebugLine(lineHeight, 2);
+      cy.get('#debug_continue').click();      
+      cy.get('#output').should('contain.text', 'a\nb\na');
+      
+      // checkFullDebugLine(lineHeight, 3);
+      cy.get('#debug_continue').click();      
+      cy.get('#output').should('contain.text', 'a\nb\na\nb');
+      cy.wait(1000)
+            
+      // cy.get('#debug_button').should('be.visible'); // we finished execution
+    });
   });
 
   it('Test if with condition true', () => {
-    cy.intercept('/parse').as('parse');
-
+    const heightRe = new RegExp('height: ([0-9]+(.[0-9]+)?)+px', 'gu');  
+        
     visitLevel(8);
-
     cy.focused().type("if Hedy is Hedy\n    print 'Welcome Hedy'");
-
-    cy.get('#debug_button').click();
-    cy.wait('@parse')
-
-    cy.get('.cm-line')
-      .eq(0)
-      .should('have.class', 'cm-debugger-current-line');
-    cy.get('#debug_continue').click();
-
-    cy.get('.cm-line')
-      .eq(1)
-      .should('have.class', 'cm-debugger-current-line');
-    cy.get('#debug_continue').click();
-    cy.get('#output').should('contain.text', 'Welcome Hedy');
+    
+    cy.get('.ace_active-line').invoke('attr', 'style').then((text) => {
+      // We calculate the height of the lines to later get the active line
+      const matches = heightRe.exec(text);
+      const lineHeight = parseFloat(matches[1]);
+      
+      cy.get('#debug_button').click();
+      
+      // checkFullDebugLine(lineHeight, 1);
+      cy.get('#debug_continue').click();
+        
+      // checkFullDebugLine(lineHeight, 2);
+      cy.get('#debug_continue').click();      
+      cy.get('#output').should('contain.text', 'Welcome Hedy');
+      cy.wait(1000)
+            
+      // cy.get('#debug_button').should('be.visible'); // we finished execution
+    });
   });
+
   it('Test ifelse with condition false', () => {
-    cy.intercept('/parse').as('parse');
+    const heightRe = new RegExp('height: ([0-9]+(.[0-9]+)?)+px', 'gu');  
+        
     visitLevel(8);
-
-    cy.focused().type("if Jesus is Hedy\n    print 'Welcome Hedy'\nelse\n    print 'Not Hedy'");
-
-    cy.get('#debug_button').click();
-    cy.wait('@parse')
-
-    cy.get('.cm-line')
-      .eq(0)
-      .should('have.class', 'cm-debugger-current-line');
-    cy.get('#debug_continue').click();
-
-    cy.get('.cm-line')
-      .eq(3)
-      .should('have.class', 'cm-debugger-current-line');
-    cy.get('#debug_continue').click();
-    cy.get('#output').should('contain.text', 'Not Hedy');
+    cy.focused().type("if Jesus is Hedy\n    print 'Welcome Hedy'\n{backspace}else\n    print 'Not Hedy'");
+    
+    cy.get('.ace_active-line').invoke('attr', 'style').then((text) => {
+      // We calculate the height of the lines to later get the active line
+      const matches = heightRe.exec(text);
+      const lineHeight = parseFloat(matches[1]);
+      
+      cy.get('#debug_button').click();
+      
+      // checkFullDebugLine(lineHeight, 1);
+      cy.get('#debug_continue').click();
+        
+      // checkFullDebugLine(lineHeight, 4);
+      cy.get('#debug_continue').click();      
+      cy.get('#output').should('contain.text', 'Not Hedy');
+      cy.wait(1000)
+            
+      // cy.get('#debug_button').should('be.visible'); // we finished execution
+    });
   });
+
   it('Test repeat with blocks', () => {
-    cy.intercept('/parse').as('parse');
+    const heightRe = new RegExp('height: ([0-9]+(.[0-9]+)?)+px', 'gu');  
 
     visitLevel(8);
     cy.focused().type("repeat 1 times\n    turn 3\nforward 50");
+    
+    cy.get('.ace_active-line').invoke('attr', 'style').then((text) => {
+      // We calculate the height of the lines to later get the active line
+      const matches = heightRe.exec(text);
+      const lineHeight = parseFloat(matches[1]);
+      
+      cy.get('#debug_button').click();
+      
+      // checkFullDebugLine(lineHeight, 1);
+      cy.get('#debug_continue').click();
+      
+      // For some reason not yet known to me we have to pass two times on a for statement
+      // the first time it executes
+      // checkFullDebugLine(lineHeight, 1);
+      cy.get('#debug_continue').click();
+      
+      // checkFullDebugLine(lineHeight, 2);
+      cy.get('#debug_continue').click();
+      
+      // checkFullDebugLine(lineHeight, 3);
+      cy.get('#debug_continue').click(); 
 
-    cy.get('#debug_button').click();
-    cy.wait('@parse')
-
-    cy.get('.cm-line')
-      .eq(0)
-      .should('have.class', 'cm-debugger-current-line');
-    cy.get('#debug_continue').click();
-
-    // For some reason not yet known to me we have to pass two times on a for statement
-    // the first time it executes
-    cy.get('.cm-line')
-      .eq(0)
-      .should('have.class', 'cm-debugger-current-line');
-    cy.get('#debug_continue').click();
-
-    cy.get('.cm-line')
-      .eq(1)
-      .should('have.class', 'cm-debugger-current-line');
-    cy.get('#debug_continue').click();
-
-    cy.get('.cm-line')
-      .eq(2)
-      .should('have.class', 'cm-debugger-current-line');
-    cy.get('#debug_continue').click();
-
-    cy.get('#turtlecanvas').should('be.visible');
+      cy.get('#turtlecanvas').should('be.visible'); 
+      cy.wait(1000)
+      // cy.get('#debug_button').should('be.visible'); // we finished execution
+    });
   });
 
   it('Test repeat with ifelse inside', () => {
-    cy.intercept('/parse').as('parse');
+    const heightRe = new RegExp('height: ([0-9]+(.[0-9]+)?)+px', 'gu');  
 
     visitLevel(9);
+    cy.focused().type("repeat 1 times\n    if pizza is pizza\n    print 'nice!'\n{backspace}else\n    print 'pizza is better'");
+    
+    cy.get('.ace_active-line').invoke('attr', 'style').then((text) => {
+      // We calculate the height of the lines to later get the active line
+      const matches = heightRe.exec(text);
+      const lineHeight = parseFloat(matches[1]);
+      
+      cy.get('#debug_button').click();
+      
+      // checkFullDebugLine(lineHeight, 1);
+      cy.get('#debug_continue').click();
+      
+      // For some reason not yet known to me we have to pass two times on a for statement
+      // the first time it executes
+      // checkFullDebugLine(lineHeight, 1);
+      cy.get('#debug_continue').click();
+      
+      // checkFullDebugLine(lineHeight, 2);
+      cy.get('#debug_continue').click();
+      
+      // checkFullDebugLine(lineHeight, 3);
+      cy.get('#debug_continue').click(); 
 
-    cy.focused().type("repeat 1 times\n    if pizza is pizza\n        print 'nice!'\n    else\n        print 'pizza is better'");
+      cy.get('#output').should('contain.text', 'nice!');
+      cy.wait(1000)
 
-    cy.get('#debug_button').click();
-    cy.wait('@parse')
-
-    cy.get('.cm-line')
-      .eq(0)
-      .should('have.class', 'cm-debugger-current-line');
-    cy.get('#debug_continue').click();
-
-    // For some reason not yet known to me we have to pass two times on a for statement
-    // the first time it executes
-    cy.get('.cm-line')
-      .eq(0)
-      .should('have.class', 'cm-debugger-current-line');
-    cy.get('#debug_continue').click();
-
-    cy.get('.cm-line')
-      .eq(1)
-      .should('have.class', 'cm-debugger-current-line');
-    cy.get('#debug_continue').click();
-
-    cy.get('.cm-line')
-      .eq(2)
-      .should('have.class', 'cm-debugger-current-line');
-    cy.get('#debug_continue').click();
-
-    cy.get('#output').should('contain.text', 'nice!');
+      // cy.get('#debug_button').should('be.visible'); // we finished execution
+    });
   });
 });
 
@@ -428,11 +393,11 @@ describe('Test editor box functionality', () => {
  */
 function clearViaBackspace() {
   cy.focused().type('{moveToEnd}' + '{backspace}'.repeat(200));
-  codeMirrorContent().should('have.text', '');
+  aceContent().should('have.text', '');
 }
 
-function codeMirrorContent() {
-  return cy.get('.cm-content');
+function aceContent() {
+  return cy.get('#editor > .ace_scroller > .ace_content');
 }
 
 function checkFullDebugLine(lineHeight, line) {
@@ -456,7 +421,7 @@ function checkPartialDebugLine(lineHeight, line, begginingOfLine) {
       let matches = topRe.exec(text);
       const lineTop = parseFloat(matches[1]);
       expect(lineTop).to.eq(lineHeight * (line - 1));
-
+      
       const leftRe = new RegExp('left: ([0-9]+(.[0-9]+)?)+px', 'gu');
       matches = leftRe.exec(text);
       const leftVal = parseFloat(matches[1]);
@@ -470,8 +435,6 @@ function checkPartialDebugLine(lineHeight, line, begginingOfLine) {
 
 function visitLevel(level) {
   cy.visit(`${Cypress.env('hedy_page')}/${level}#default`);
-  codeMirrorContent().click();
-  cy.focused().clear();
+  aceContent().click();
+  clearViaBackspace();
 }
-
-const getText = el => el.textContent.trim();

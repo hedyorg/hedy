@@ -17,11 +17,11 @@ describe('Is able to share and unshare programs', () => {
         });
         cy.visit(`${Cypress.env('hedy_page')}#default`);
         // Execute program to save it 
-        cy.get('.cm-content').click();
+        cy.get('#editor > .ace_scroller > .ace_content').click();
         // empty textarea
         cy.focused().clear()
         cy.get('#editor').type('print Hello world');
-        cy.get('.cm-content').should('contain.text', 'print Hello world');
+        cy.get('#editor > .ace_scroller > .ace_content').should('contain.text', 'print Hello world');
         cy.get('#runit').click();
         cy.get('#output').should('contain.text', 'Hello world');
         cy.visit(`${Cypress.env('programs_page')}`);
