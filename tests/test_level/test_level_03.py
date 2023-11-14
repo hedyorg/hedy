@@ -56,6 +56,22 @@ class TestsLevel3(HedyTester):
             extra_check_function=check_in_list
         )
 
+    def test_color_basic(self):
+        code = textwrap.dedent("""\
+        color red
+        forward 10""")
+
+        expected = HedyTester.dedent(HedyTester.turtle_color_command_transpiled("red", 'en'),
+                                     HedyTester.forward_transpiled('10', self.level))
+
+        self.multi_level_tester(
+            max_level=11,
+            code=code,
+            lang='nl',
+            translate=False,
+            expected=expected
+        )
+
     def test_random_turle_dutch(self):
         lang = 'nl'
         code = textwrap.dedent("""\
