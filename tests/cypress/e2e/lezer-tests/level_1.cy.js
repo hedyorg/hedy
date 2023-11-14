@@ -1,13 +1,6 @@
-import { parser as level1Parser } from "../../../../static/js/lezer-parsers/level1-parser"
-import { initializeTranslation } from '../../../../static/js/lezer-parsers/tokens';
-import { testTree } from "@lezer/generator/dist/test"
 import { multiLevelTester, singleLevelTester } from "../tools/lezer/lezer_tester"
 
 describe('Lezer parser tests for level 1', () => {
-    beforeEach(() => {
-        initializeTranslation({ keywordLanguage: 'en', level: 1 });
-    });
-
     describe('Successfull tests', () => {
         describe('Print tests', () => {
             multiLevelTester('Test print with text', 'print hello world\nprint how are you',

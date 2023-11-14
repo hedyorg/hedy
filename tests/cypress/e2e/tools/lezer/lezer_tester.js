@@ -52,6 +52,7 @@ export function multiLevelTester(testName, code, expectedTree, from, to) {
 
 export function singleLevelTester(testName, code, expectedTree, level) {
     it(testName, () => {
+        initializeTranslation({ keywordLanguage: 'en', level: level });    
         testTree(parsers[level].parse(code), expectedTree);
     })
 }
