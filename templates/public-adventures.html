@@ -3,7 +3,10 @@
 
 {% block regular_content %}
     <h1>public adventures</h1>
-    <div id="filters" class="flex items-center gap-2 justify-around bg-green-400 shadow-md rounded-lg p-4 mb-4">
+    <div id="filters"
+        class="flex items-center gap-2 justify-around bg-gray-400 shadow-md rounded-lg p-4 mb-4"
+        _="on load set $filtered to []
+            on click log localStorage">
         <div>{{_('filters')}}</div>
         <div id="search" class="flex-1">
             <input id="search_adventure"
@@ -11,52 +14,18 @@
                 placeholder="{{_('search')}}"
                 class="border text-black border-gray-500 rounded h-8 px-2 w-full"
                 _="on keyup debounced at 500ms set searchTerm to my value 
-                    if searchTerm is '' then 
-                        set adventures to .adventure
-                        set adventures to Array(adventures).map(\ adv -> not adv.classList.contains('hidden'))
-                        log adventures
-                        for child in adventures
-                            child.classList.remove('hidden')
-                        end
-
-                    else 
-                        set adventures to .adventure
-                        for child in adventures index i
-                            set txt to child.querySelector('.name').innerText
-                            if txt.includes(searchTerm)
-                                child.classList.remove('hidden')
-                            else
-                                child.classList.add('hidden')
-                            end
-                        end
-                    end"
+                    applyFilter(searchTerm, 'search', $filtered)"
 
                 >
         </div>
-        <div id="language">
+        <div id="languages">
             <!-- <select name="language" id="language"> -->
             <select id="language"
                 name="language"
                 required
-                class="block appearance-none w-full border border-gray-200 text-gray-700 p-2 rounded"
+                class="block appearance-none w-full border border-blue-200 text-blue-700 p-2 rounded"
                 _="on change set lang to my value
-                    if lang == ''
-                        set adventures to .adventure
-                        for child in adventures
-                            child.classList.remove('hidden')
-                        end
-                    else 
-                        set adventures to .adventure
-                        for adv in adventures
-                            set advLang to adv@data-lang
-                            if advLang == lang
-                                adv.classList.remove('hidden')
-                            else
-                                adv.classList.add('hidden')
-                            end
-                        end
-                    end"
-                >
+                    applyFilter(lang, 'lang', $filtered)">
                 <option value="">{{_('select_lang')}}</option>
                 {% for lang in available_languages %}
                     <option value="{{lang}}">{{lang_to_sym(lang)}}</option>
@@ -67,26 +36,9 @@
             <select id="tag"
                 name="tag"
                 required
-                class="block appearance-none w-full border border-gray-200 text-gray-700 p-2 rounded"
+                class="block appearance-none w-full border border-blue-200 text-blue-700 p-2 rounded"
                 _="on change set tag to my value
-                    if tag == ''
-                        set adventures to .adventure
-                        for child in adventures
-                            child.classList.remove('hidden')
-                        end
-                    else 
-                        set adventures to .adventure
-                        for adv in adventures
-                            set tags to Array(adv.querySelector('#tags-list').children)
-                            set tagNames to tags.map(\ s -> s.innerText)[0]
-                            if tagNames.some(\ t -> t == tag)
-                                adv.classList.remove('hidden')
-                            else
-                                adv.classList.add('hidden')
-                            end
-                        end
-                    end"
-                >
+                    applyFilter(tag, 'tag', $filtered)">
                 <option value="">{{_('select_tag')}}</option>
                 {% for tag in available_tags %}
                     <option value="{{tag}}">{{tag}}</option>
@@ -104,11 +56,87 @@
                         Level: {% if adventure.level %}{{ adventure.level }}{% else %}-{% endif %}
                     </p>
                     <p class="text-gray-600 mt-1">{{ adventure.date }}</p>
+                    <a href="#" id="show-tags_{{loop.index}}"
+                         _="on click toggle .hidden on #current-tags_{{loop.index}}
+                            toggle .hidden on me
+                            ">
+                            <p class="text-gray-600 mt-1">{{_('tags')}}:
+                        {{adventure["tags"]|length}}</p>
+                    </a>
                 </div>
-                <div class="flex justify-between items-center px-6 py-4 bg-green-200 shadow-lg">
-            {{ render_partial('htmx-tags-list.html', tags=adventure["tags"], adventure_id=adventure.id, creator=adventure.creator) }}
+                    <div id="current-tags_{{loop.index}}" class="hidden">
+                        {{ render_partial('htmx-tags-list.html', tags=adventure["tags"], adventure_id=adventure.id, creator=adventure.creator) }}
+                        <a href="#" _="on click toggle .hidden on #current-tags_{{loop.index}}
+                            toggle .hidden on #show-tags_{{loop.index}}
+                            ">{{_('hide')}}</a></p>
+                    </div>
+                <div class="flex justify-between items-center px-6 py-4 bg-gray-200 shadow-lg">
                 </div>
             </div>
         {% endfor %}
     </div>
+
+    <script>
+        function applyFilter(term, type, filtered) {
+            filtered[type] = filtered[type] || {term, exclude: []}
+            const filterExist = document.querySelector('#search_adventure').value ||
+                document.querySelector('#language').value ||
+                document.querySelector('#tag').value
+            
+
+            if (!term) {
+                filtered[type] = {term, exclude: []}
+            }
+            const adventures = document.querySelectorAll('.adventure')
+
+            if (!filterExist) {
+                for (const adv of adventures) {
+                    adv.classList.remove('hidden')
+                }
+                filtered = {}
+                return
+            }
+
+            for (const adv of adventures) {
+                let toValidate;
+                if (type === 'search') {
+                    toValidate = adv.querySelector('.name').innerText
+                } else if (type === 'lang') {
+                    toValidate = adv.getAttribute('data-lang')
+                } else {
+                    const tags = adv.querySelector('#tags-list').children
+                    const tagNames = []
+                    for (const t of tags) {
+                        tagNames.push(t.innerText)
+                    }
+                    toValidate = tagNames.join(' ')
+                }
+
+                if (term && toValidate.includes(term)) {
+                    if (filtered[type].exclude.some(a => a === adv)) {
+                        filtered[type].exclude = filtered[type].exclude.filter(a => a !== adv)
+                    }
+                } 
+                else if (term) {
+                    if (filtered.term !== term && !filtered[type].exclude.some(a => a === adv)) {
+                        filtered[type].exclude.push(adv)
+                    }
+                }
+            }
+
+            for (const adv of adventures) {
+                let allFiltersPassed = true;
+                for (const t in filtered) {
+                    if (filtered[t].exclude.some(a => a === adv)) {
+                        allFiltersPassed = false;
+                    }
+                }
+                if (allFiltersPassed) {
+                    adv.classList.remove('hidden')
+                } else {
+                    adv.classList.add('hidden')
+                }
+            }
+        }
+    </script>
 {% endblock %}
