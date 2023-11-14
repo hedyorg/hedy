@@ -2,10 +2,20 @@ import { multiLevelTester, singleLevelTester } from "../tools/lezer/lezer_tester
 
 describe('Lezer parser tests for level 1', () => {
     describe('Successfull tests', () => {
+        
         describe('Print tests', () => {
-            multiLevelTester('Test print with text', 'print hello world\nprint how are you',
-                'Program(Command(Print(print,Text,Text)), Command(Print(print,Text,Text,Text)))', 1, 3);
-
+            const code = 'print hello world\nprint how are you'
+            const expectedTree = 
+                `Program(
+                    Command(
+                        Print(print,Text,Text)
+                    ), 
+                    Command(
+                        Print(print,Text,Text,Text)
+                    )
+                )`
+            
+            multiLevelTester('Test print with text', code, expectedTree, 1, 3);
         });
 
         describe('Ask tests', () => {
@@ -75,28 +85,28 @@ describe('Lezer parser tests for level 1', () => {
     });
 
     describe('Error tests', () => {
-        it('Misspelled command gives ErrorInvalid', () => {
+        describe('Misspelled command gives ErrorInvalid', () => {
             const code = 'hello world';
             const expectedTree = `Program(Command(ErrorInvalid(Text,Text)))`
 
-            multiLevelTester('Test error', code, expectedTree, 1, 18);
+            multiLevelTester('Test misspelled command', code, expectedTree, 1, 18);
         });
 
-        it('Correct command after error parses correctly', () => {
-            const code = `what is your name
+        describe('Correct command after error parses correctly', () => {
+            const code = `prn hello world
             print pretty name
             `
             const expectedTree =
                 `Program(
                 Command(
-                    ErrorInvalid(Text,Text,Text,Text)
+                    ErrorInvalid(Text,Text,Text)
                 ),
                 Command(
                     Print(print,Text,Text)
                 )
             )`
 
-            multiLevelTester('Test error', code, expectedTree, 1, 3);
+            multiLevelTester('Test command after error parses correctly', code, expectedTree, 1, 3);
         });
     })
 });
