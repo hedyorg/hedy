@@ -42,10 +42,20 @@ CLASSES = dynamo.Table(storage, "classes", "id", indexes=[
 # - level (int | str): level number, sometimes as an int, sometimes as a str
 # - name (str): adventure name
 # - public (bool): whether it can be shared
-ADVENTURES = dynamo.Table(storage, "adventures", "id", indexes=[dynamo.Index("creator")])
+# - tags_id (str): id of tags that describe this adventure.
+ADVENTURES = dynamo.Table(storage, "adventures", "id", indexes=[dynamo.Index("creator"), dynamo.Index("public")])
 INVITATIONS = dynamo.Table(
     storage, "class_invitations", partition_key="username", indexes=[dynamo.Index("class_id")]
 )
+
+"""
+# TAGS
+    - id
+    - name (str): tag name.
+    - tagged_in ([{ id, public, language }]): tagged in which adventures.
+    - popularity (int): # of adventures it's been tagged in.
+"""
+TAGS = dynamo.Table(storage, "tags", "id", indexes=[dynamo.Index("name", sort_key="popularity")])
 
 # Class customizations
 #
@@ -584,6 +594,23 @@ class Database:
 
     def update_adventure(self, adventure_id, adventure):
         ADVENTURES.update({"id": adventure_id}, adventure)
+
+    def create_tag(self, data):
+        return TAGS.create(data)
+
+    def read_tag(self, tag_name):
+        return TAGS.get({"name": tag_name})
+
+    def read_tags(self, tags):
+        return [self.read_tag(name) for name in tags]
+
+    def read_tags_by_username(self, username):
+        tags = TAGS.get_many({"creator": username})
+        return tags if tags else {}
+
+    def update_tag(self, tags_id, data):
+        # Update existing tags
+        return TAGS.update({"id": tags_id}, data)
 
     def get_teacher_adventures(self, username):
         return ADVENTURES.get_many({"creator": username})

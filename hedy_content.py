@@ -573,3 +573,23 @@ class Slides(StructuredDataFile):
 class NoSuchSlides:
     def get_slides_for_level(self, level, keyword_lang):
         return {}
+
+
+class NoSuchTags:
+    def get_tags(self):
+        return {}
+
+
+class Tags(StructuredDataFile):
+    def __init__(self, language):
+        self.language = language
+        super().__init__(f'content/tags/{self.language}.yaml')
+
+    def get_tags_names(self):
+        return {tid: tags['items'] for tid, tags in self.file.get('tags', {}).items()}
+
+    def get_tags(self, keyword_lang="en"):
+        return deep_translate_keywords(self.file.get('tags'), keyword_lang)
+
+    def has_tags(self):
+        return True if self.file.get('tags') else False
