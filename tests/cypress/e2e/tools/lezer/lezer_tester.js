@@ -40,19 +40,19 @@ const parsers = {
     18: level18Parser        
 };
 
-export function multiLevelTester(testName, code, expectedTree, from, to) {
+export function multiLevelTester(testName, code, expectedTree, from, to, language = 'en') {
 
     for (let i = from; i <= to; i++) {
         it(`${testName} for level ${i}`, () => {
-            initializeTranslation({ keywordLanguage: 'en', level: i });
+            initializeTranslation({ keywordLanguage: language, level: i });
             testTree(parsers[i].parse(code), expectedTree);
         })
     }
 }
 
-export function singleLevelTester(testName, code, expectedTree, level) {
+export function singleLevelTester(testName, code, expectedTree, level, language = 'en') {
     it(testName, () => {
-        initializeTranslation({ keywordLanguage: 'en', level: level });    
+        initializeTranslation({ keywordLanguage: language, level: level });    
         testTree(parsers[level].parse(code), expectedTree);
     })
 }

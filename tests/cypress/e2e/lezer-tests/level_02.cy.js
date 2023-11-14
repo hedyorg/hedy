@@ -1,4 +1,4 @@
-import { multiLevelTester, singleLevelTester } from "../tools/lezer/lezer_tester"
+import { multiLevelTester } from "../tools/lezer/lezer_tester"
 
 describe('Lezer parser tets for level 2', () => {
     describe('Successfull tests level 2', () => {
