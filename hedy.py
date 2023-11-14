@@ -1507,7 +1507,7 @@ class ConvertToPython_1(ConvertToPython):
         # we translate the color value to English at runtime, since it might be decided at runtime
         # coming from a random list or ask
 
-        color_dict = {hedy_translation.translate_keyword_from_en(x, language): x for x in command_make_color}
+        color_dict = {hedy_translation.translate_keyword_from_en(x, language): x for x in colors}
 
         return textwrap.dedent(f"""\
             {variable} = f'{parameter}'
