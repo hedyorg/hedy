@@ -200,8 +200,7 @@ export const success = {
 
   hide: function () {
     $('#okbox').hide();
-    const height = computeEditorHeight('okbox');
-    editor?.resize(height);
+    editor?.resize();
 
   },
 
@@ -209,24 +208,20 @@ export const success = {
     $('#okbox .caption').text(caption);
     $('#okbox .details').text(message);
     $('#okbox').show();
-    const height = computeEditorHeight('okbox');
-    editor?.resize(height);
+    editor?.resize();
   },
 
   show(caption: string) {
     $('#okbox .caption').text(caption);
     $('#okbox').show();
-    const height = computeEditorHeight('okbox');
-    editor?.resize(height);
-    setTimeout(function() {     
-      $('#okbox').hide();
-      const height = computeEditorHeight('okbox');
-      editor?.resize(height); 
-    }, 3000);
+    editor?.resize();
+    setTimeout(function(){     $('#okbox').hide();
+    editor?.resize(); }, 3000);
   }
 }
 
 export const error = {
+  //TODO: change this to the new interface of HedyEditor
   setEditor(e: HedyEditor) {
     editor = e;
   },
@@ -234,35 +229,27 @@ export const error = {
   hide() {
     $('#errorbox').hide();
     $('#warningbox').hide();
-    const height = computeEditorHeight('errorbox')
-    editor?.resize(height);
+    editor?.resize();
   },
   showWarning(caption: string, message: string) {
-    this.hide();
     $('#warningbox .caption').text(caption);
     $('#warningbox .details').text(message);
     $('#warningbox').show();
-    const height = computeEditorHeight('warningbox');
-    editor?.resize(height);
+    editor?.resize();
   },
 
   show(caption: string, message: string) {
     $('#errorbox .caption').text(caption);
-    $('#errorbox .details').html(message);    
+    $('#errorbox .details').html(message);
     $('#errorbox').show();
-    const height = computeEditorHeight('errorbox');
-    editor?.resize(height);
+    editor?.resize();
   },
 
   showFadingWarning(caption: string, message: string) {
     error.showWarning(caption, message);    
     setTimeout(function(){
-      $('#warningbox').fadeOut({
-        complete: () => {
-          const height = computeEditorHeight('warningbox');
-          editor?.resize(height);
-        }
-      });
+      $('#warningbox').fadeOut();
+      editor?.resize(); 
     }, 10000);
   }
 }
@@ -279,10 +266,4 @@ export async function tryCatchPopup(cb: () => void | Promise<void>) {
     console.log('Error', e);
     modal.notifyError(e.message);
   }
-}
-
-function computeEditorHeight(boxId: string): number {
-  const editorHeight = document.getElementById('editor')!.clientHeight;
-  const boxHeight = document.getElementById(boxId)!.offsetHeight!;
-  return editorHeight - boxHeight;
 }
