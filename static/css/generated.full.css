@@ -2627,22 +2627,6 @@ code {
   top: -0.25rem;
 }
 
-.top-2 {
-  top: 0.5rem;
-}
-
-.right-2 {
-  right: 0.5rem;
-}
-
-.left-0 {
-  left: 0px;
-}
-
-.left-1\/2 {
-  left: 50%;
-}
-
 .top-0\.5 {
   top: 0.125rem;
 }
@@ -2657,6 +2641,22 @@ code {
 
 .right-0 {
   right: 0px;
+}
+
+.top-2 {
+  top: 0.5rem;
+}
+
+.right-2 {
+  right: 0.5rem;
+}
+
+.left-0 {
+  left: 0px;
+}
+
+.left-1\/2 {
+  left: 50%;
 }
 
 .top-16 {
@@ -5521,12 +5521,12 @@ code {
   margin-top: -2rem;
 }
 
-.mt-auto {
-  margin-top: auto;
-}
-
 .mt-1 {
   margin-top: 0.25rem;
+}
+
+.mt-auto {
+  margin-top: auto;
 }
 
 .-ml-32 {
@@ -16045,6 +16045,11 @@ code {
   border-color: rgb(49 130 206 / var(--tw-border-opacity));
 }
 
+.border-green-300 {
+  --tw-border-opacity: 1;
+  border-color: rgb(154 230 180 / var(--tw-border-opacity));
+}
+
 .border-blue-500 {
   --tw-border-opacity: 1;
   border-color: rgb(66 153 225 / var(--tw-border-opacity));
@@ -16246,11 +16251,6 @@ code {
 .border-green-200 {
   --tw-border-opacity: 1;
   border-color: rgb(198 246 213 / var(--tw-border-opacity));
-}
-
-.border-green-300 {
-  --tw-border-opacity: 1;
-  border-color: rgb(154 230 180 / var(--tw-border-opacity));
 }
 
 .border-green-700 {
@@ -23101,9 +23101,19 @@ code {
   padding-bottom: 3rem;
 }
 
+.px-6 {
+  padding-left: 1.5rem;
+  padding-right: 1.5rem;
+}
+
 .px-16 {
   padding-left: 4rem;
   padding-right: 4rem;
+}
+
+.px-5 {
+  padding-left: 1.25rem;
+  padding-right: 1.25rem;
 }
 
 .py-16 {
@@ -23144,16 +23154,6 @@ code {
 .px-12 {
   padding-left: 3rem;
   padding-right: 3rem;
-}
-
-.px-6 {
-  padding-left: 1.5rem;
-  padding-right: 1.5rem;
-}
-
-.px-5 {
-  padding-left: 1.25rem;
-  padding-right: 1.25rem;
 }
 
 .px-7 {
@@ -24584,6 +24584,11 @@ code {
   color: rgb(34 84 61 / var(--tw-text-opacity));
 }
 
+.text-gray-600 {
+  --tw-text-opacity: 1;
+  color: rgb(113 128 150 / var(--tw-text-opacity));
+}
+
 .text-gray-800 {
   --tw-text-opacity: 1;
   color: rgb(45 55 72 / var(--tw-text-opacity));
@@ -24637,11 +24642,6 @@ code {
 .text-yellow-400 {
   --tw-text-opacity: 1;
   color: rgb(246 224 94 / var(--tw-text-opacity));
-}
-
-.text-gray-600 {
-  --tw-text-opacity: 1;
-  color: rgb(113 128 150 / var(--tw-text-opacity));
 }
 
 .text-orange-600 {
@@ -28557,6 +28557,10 @@ code {
   outline-offset: 8px;
 }
 
+.outline-blue-400 {
+  outline-color: #63b3ed;
+}
+
 .outline-transparent {
   outline-color: transparent;
 }
@@ -28799,10 +28803,6 @@ code {
 
 .outline-blue-300 {
   outline-color: #90cdf4;
-}
-
-.outline-blue-400 {
-  outline-color: #63b3ed;
 }
 
 .outline-blue-500 {
@@ -30728,6 +30728,12 @@ code {
   transition-duration: 150ms;
 }
 
+.transition-shadow {
+  transition-property: box-shadow;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  transition-duration: 150ms;
+}
+
 .transition-opacity {
   transition-property: opacity;
   transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
@@ -30748,12 +30754,6 @@ code {
   transition-property: color, background-color, border-color, fill, stroke, -webkit-text-decoration-color;
   transition-property: color, background-color, border-color, text-decoration-color, fill, stroke;
   transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, -webkit-text-decoration-color;
-  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
-  transition-duration: 150ms;
-}
-
-.transition-shadow {
-  transition-property: box-shadow;
   transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
   transition-duration: 150ms;
 }
@@ -31859,14 +31859,14 @@ div[class^="ace_incorrect_hedy_code"] {
   background-color: rgb(203 213 224 / 0.5);
 }
 
-.hover\:text-white:hover {
-  --tw-text-opacity: 1;
-  color: rgb(255 255 255 / var(--tw-text-opacity));
-}
-
 .hover\:text-red-400:hover {
   --tw-text-opacity: 1;
   color: rgb(252 129 129 / var(--tw-text-opacity));
+}
+
+.hover\:text-white:hover {
+  --tw-text-opacity: 1;
+  color: rgb(255 255 255 / var(--tw-text-opacity));
 }
 
 .hover\:underline:hover {
@@ -31876,6 +31876,20 @@ div[class^="ace_incorrect_hedy_code"] {
 
 .hover\:opacity-100:hover {
   opacity: 1;
+}
+
+.hover\:shadow-lg:hover {
+  --tw-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+  --tw-shadow-colored: 0 10px 15px -3px var(--tw-shadow-color), 0 4px 6px -4px var(--tw-shadow-color);
+  box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
+}
+
+.hover\:outline:hover {
+  outline-style: solid;
+}
+
+.hover\:outline-2:hover {
+  outline-width: 2px;
 }
 
 .focus\:bg-blue-100:focus {
@@ -32128,6 +32142,10 @@ div[class^="ace_incorrect_hedy_code"] {
 
   .sm\:w-5\/12 {
     width: 41.666667%;
+  }
+
+  .sm\:flex-row {
+    flex-direction: row;
   }
 }
 

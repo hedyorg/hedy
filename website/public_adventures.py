@@ -1,4 +1,3 @@
-import copy
 import uuid
 from flask_babel import gettext
 
@@ -6,6 +5,7 @@ import utils
 from config import config
 from website.auth import requires_teacher
 from website.flask_helpers import render_template
+from jinja_partials import render_partial
 
 from .achievements import Achievements
 from .database import Database
@@ -26,8 +26,13 @@ class PublicAdventuresModule(WebsiteModule):
     @requires_teacher
     def index(self, user):
         public_adventures = self.db.get_public_adventures()
+        public_adventures = sorted(public_adventures, key=lambda a: a["creator"] == user["username"], reverse=True)
         adventures = []
+        included = {}
         for adventure in public_adventures:
+            if included.get(adventure["name"]):
+                continue
+            included[adventure["name"]] = True
             adventures.append(
                 {
                     "id": adventure.get("id"),
@@ -35,13 +40,13 @@ class PublicAdventuresModule(WebsiteModule):
                     "creator": adventure.get("creator"),
                     "date": utils.localized_date_format(adventure.get("date")),
                     "level": adventure.get("level"),
-                    "language": adventure.get("language", ""),
+                    "language": adventure.get("language", None),
                     "tags": adventure.get("tags", []),
                 }
             )
-        adventures = sorted(adventures, key=lambda a: a["creator"] == user["username"], reverse=True)
 
-        available_languages = set([adv["language"] for adv in adventures])
+        available_languages = set([adv["language"] for adv in adventures if adv["language"]])
+        print('\n\n\n', available_languages)
         available_tags = set([tag for adv in adventures for tag in adv.get("tags", [])])
 
         return render_template(
@@ -70,11 +75,22 @@ class PublicAdventuresModule(WebsiteModule):
             if adventure["name"] == current_adventure["name"]:
                 return gettext("adventure_duplicate"), 400
 
-        adventure = copy.deepcopy(current_adventure)
-        adventure["cloned_from"] = adventure["id"]
-        adventure["id"] = uuid.uuid4().hex
-        adventure["creator"] = user["username"]
+        adventure = {
+                    "id": uuid.uuid4().hex,
+                    "cloned_from": adventure_id,
+                    "name": current_adventure.get("name"),
+                    "public": True,
+                    "creator": user["username"],
+                    "date": utils.timems(),
+                    "level": current_adventure.get("level"),
+                    "language": current_adventure.get("language", ""),
+                    "tags": current_adventure.get("tags", []),
+                }
 
+
+        self.db.update_adventure(adventure_id, { "cloned_times": adventure.get("cloned_times", 0) + 1 })
         self.db.store_adventure(adventure)
-        return {"id": adventure["id"]}, 200
-        # return self.index()
+        adventure["date"] = utils.localized_date_format(adventure.get("date"))
+        return render_partial('htmx-adventure-card.html',
+                              adventure=adventure,
+                              user=user,)
