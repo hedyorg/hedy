@@ -364,8 +364,6 @@ class HedyTester(unittest.TestCase):
             __trtl = color_dict[__trtl]
         t.pencolor(__trtl)""")
 
-
-
     @staticmethod
     def input_transpiled(var_name, text):
         return textwrap.dedent(f"""\
