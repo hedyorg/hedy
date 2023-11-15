@@ -9,21 +9,24 @@ import { Achievement, Adventure, isServerSaveInfo, ServerSaveInfo } from './type
 import { startIntroTutorial } from './tutorials/tutorial';
 import { loadParsonsExercise } from './parsons';
 import { checkNow, onElementBecomesVisible } from './browser-helpers/on-element-becomes-visible';
-import { incrementDebugLine, initializeDebugger, load_variables, returnLinesWithoutBreakpoints, startDebug } from './debugging';
+import { incrementDebugLine, initializeDebugger, load_variables, startDebug } from './debugging';
 import { localDelete, localLoad, localSave } from './local';
 import { initializeLoginLinks } from './auth';
 import { postJson } from './comm';
 import { LocalSaveWarning } from './local-save-warning';
 import { HedyEditor, EditorType } from './editor';
-import { HedyAceEditorCreator } from './ace-editor';
 import { stopDebug } from "./debugging";
+import { HedyAceEditorCreator } from './ace-editor';
+import { HedyCodeMirrorEditorCreator } from './cm-editor';
+import { initializeTranslation } from './lezer-parsers/tokens';
 
 export let theGlobalDebugger: any;
 export let theGlobalEditor: HedyEditor;
 export let theModalEditor: HedyEditor;
 export let theGlobalSourcemap: { [x: string]: any; };
 export const theLocalSaveWarning = new LocalSaveWarning();
-const editorCreator: HedyAceEditorCreator = new HedyAceEditorCreator();
+const editorCreator: HedyCodeMirrorEditorCreator = new HedyCodeMirrorEditorCreator();
+const aceEditorCreator: HedyAceEditorCreator = new HedyAceEditorCreator();
 let last_code: string;
 
 /**
@@ -207,6 +210,7 @@ export function initializeCodePage(options: InitializeCodePageOptions) {
   if ($editor.length) {
     const dir = $("body").attr("dir");
     theGlobalEditor = editorCreator.initializeEditorWithGutter($editor, EditorType.MAIN, dir);
+    initializeTranslation({keywordLanguage: theKeywordLanguage, level: theLevel});
     attachMainEditorEvents(theGlobalEditor);
     error.setEditor(theGlobalEditor);
     initializeDebugger({
@@ -272,8 +276,7 @@ export function initializeCodePage(options: InitializeCodePageOptions) {
 function attachMainEditorEvents(editor: HedyEditor) {
 
   editor.on('change', () => {
-    theLocalSaveWarning.setProgramLength(theGlobalEditor.contents.split('\n').length);
-    theGlobalEditor.clearIncorrectLines();
+    theLocalSaveWarning.setProgramLength(theGlobalEditor.contents.split('\n').length);    
   });
 
   // If prompt is shown and user enters text in the editor, hide the prompt.
@@ -286,12 +289,16 @@ function attachMainEditorEvents(editor: HedyEditor) {
     askPromptOpen = false;
     $('#runit').css('background-color', '');
     theGlobalEditor.clearErrors();
+    theGlobalEditor.clearIncorrectLines();
     //removing the debugging state when loading in the editor
     stopDebug();
   });
 
-  // *** KEYBOARD SHORTCUTS ***
+  editor.on('click', (event: MouseEvent) => {
+    editor.skipFaultyHandler(event);
+  });
 
+  // *** KEYBOARD SHORTCUTS ***
   let altPressed: boolean | undefined;
   // alt is 18, enter is 13
   window.addEventListener ('keydown', function (ev) {
@@ -320,32 +327,6 @@ function attachMainEditorEvents(editor: HedyEditor) {
     if (keyCode === 18) {
       altPressed = false;
       return;
-    }
-  });
-
-  // We show the error message when clicking on the skipped code or hide them if ace editor is clicked
-  $(document).on("click", 'div[class*=ace_content], div[class*=ace_incorrect_hedy_code]', function(e) {
-    let className = e.target.className;
-
-    // Only do this if skipping faulty is used
-    if ($('div[class*=ace_incorrect_hedy_code]')[0]) {
-      if (className === 'ace_content') {
-        // Hide error, warning or okbox
-        $('#okbox').hide();
-        $('#warningbox').hide();
-        $('#errorbox').hide();
-      } else {
-        // Show error for this line
-        let mapIndex = className;
-        mapIndex = mapIndex.replace('ace_incorrect_hedy_code_', '');
-        mapIndex = mapIndex.replace('ace_start ace_br15', '');
-        let mapError = theGlobalSourcemap[Number(mapIndex)];
-
-        $('#okbox').hide();
-        $('#warningbox').hide();
-        $('#errorbox').hide();
-        error.show(ClientMessages['Transpile_error'], mapError.error);
-      }
     }
   });
 }
@@ -389,7 +370,7 @@ export function initializeHighlightedCodeBlocks(where: Element) {
       // Otherwise, the teacher manual Frequent Mistakes page is SUPER SLOW to load.
       onElementBecomesVisible(preview, () => {
         // Create this example editor
-        const exampleEditor = editorCreator.initializeReadOnlyEditor(preview, dir);
+        const exampleEditor = aceEditorCreator.initializeReadOnlyEditor(preview, dir);
         // Strip trailing newline, it renders better
         exampleEditor.contents = exampleEditor.contents.trimRight();
         // And add an overlay button to the editor if requested via a show-copy-button class, either
@@ -848,15 +829,16 @@ export function runPythonProgram(this: any, code: string, sourceMap: any, hasTur
 
   if (sourceMap){
     theGlobalSourcemap = sourceMap;
-    let Range = ace.require("ace/range").Range
-
     // We loop through the mappings and underline a mapping if it contains an error
     for (const index in sourceMap) {
       const map = sourceMap[index];
-      const range = new Range(
-        map.hedy_range.from_line-1, map.hedy_range.from_column-1,
-        map.hedy_range.to_line-1, map.hedy_range.to_column-1
-      )
+
+      const range = {
+        startLine: map.hedy_range.from_line,
+        startColumn: map.hedy_range.from_column,
+        endLine: map.hedy_range.to_line,
+        endColumn: map.hedy_range.to_column
+      }
 
       if (map.error != null) {
         skip_faulty_found_errors = true;
@@ -1503,8 +1485,10 @@ function get_parsons_code() {
 }
 
 export function get_active_and_trimmed_code() {
-  theGlobalEditor.trimTrailingSpace()
-  return returnLinesWithoutBreakpoints(theGlobalEditor);
+  theGlobalEditor.trimTrailingSpace();
+  const storage = window.localStorage;
+  const debugLine = storage.getItem("debugLine");
+  return theGlobalEditor.getActiveContents(debugLine);
 }
 
 export function confetti_cannon(){
@@ -1590,11 +1574,12 @@ export function toggle_developers_mode(enforced: boolean) {
     $('#editor-area').removeClass('mt-5');
     $('#code_editor').css('height', 36 + "em");
     $('#code_output').css('height', 36 + "em");
-    theGlobalEditor.resize();
+    theGlobalEditor.resize(576);
   } else {
     $('#editor-area').addClass('mt-5');
     $('#code_editor').height('22rem');
     $('#code_output').height('22rem');
+    theGlobalEditor.resize(352);
   }
 }
 
