@@ -2,7 +2,6 @@ import collections
 import json
 import os
 import uuid
-import logging
 
 from flask import g, jsonify, request, session
 from jinja_partials import render_partial
@@ -28,10 +27,12 @@ from website.auth import (
 from .achievements import Achievements
 from .database import Database
 from .website_module import WebsiteModule, route
+from datetime import date
 
 SLIDES = collections.defaultdict(hedy_content.NoSuchSlides)
 for lang in hedy_content.ALL_LANGUAGES.keys():
     SLIDES[lang] = hedy_content.Slides(lang)
+
 
 class ForTeachersModule(WebsiteModule):
     def __init__(self, db: Database, achievements: Achievements):
@@ -127,11 +128,12 @@ class ForTeachersModule(WebsiteModule):
         if not Class or (Class["teacher"] != user["username"] and not is_admin(user)):
             return utils.error_page(error=404, ui_message=gettext("no_such_class"))
         students = []
+        survey_id = ""
         description = ""
         questions = []
 
-        if Class.get("students") and self.get_skip_survey(class_id) == False:
-            description, questions = self.class_survey(Class)
+        if Class.get("students"):
+            survey_id, description, questions = self.class_survey(class_id)
 
         for student_username in Class.get("students", []):
             student = self.db.user_by_username(student_username)
@@ -189,7 +191,8 @@ class ForTeachersModule(WebsiteModule):
                 "id": Class["id"],
             },
             javascript_page_options=dict(page="class-overview"),
-            description=description, 
+            survey_id=survey_id,
+            description=description,
             questions=questions,
         )
 
@@ -224,8 +227,37 @@ class ForTeachersModule(WebsiteModule):
                 class_id=class_id
             ))
 
-    @route("/submit-survey/<class_id>", methods=['POST'])
-    def submit_survey(self, class_id):        
+    # not generic
+    def class_survey(self, class_id):
+        description = ""
+        survey_id = "class" + '_' + class_id
+        description = gettext("class_survey_description")
+
+        survey = self.db.get_survey(survey_id)
+        if not survey:
+            self.db.store_survey(dict(id=f"{survey_id}"))
+            survey = self.db.get_survey(survey_id)
+        elif survey.get('skip') is True or date.today().isoformat():
+            return "", "", ""
+
+        questions = self.get_unanswered_questions(survey, 'class_survey_questions')
+        return survey_id, description, questions
+
+    # generic
+    def get_unanswered_questions(self, survey, trans_key):
+        questions = []
+        db_questions = survey.get('responses')
+        if db_questions:
+            for question, answer in db_questions.items():
+                if not answer:
+                    questions.append(question)
+        if not questions:
+            questions = gettext(trans_key).split("\n")
+        return questions
+
+    # generic
+    @route("/submit-survey/<survey_id>", methods=['POST'])
+    def submit_survey(self, survey_id):
         responses = {}
         survey_done = True
         for question, answer in request.form.items():
@@ -233,36 +265,28 @@ class ForTeachersModule(WebsiteModule):
             if not answer:
                 survey_done = False
         if survey_done is True:
-            self.db.add_skip_survey_to_class(class_id)
-        self.db.add_survey_reponses_to_class(class_id, responses)
+            self.db.add_skip_survey(survey_id)
+            self.db.add_survey_responses(survey_id, responses)
+            return ''
+        self.db.add_survey_responses(survey_id, responses)
+        return ''
+        # return ''
+
+    # generic
+    @route("/skip-survey/<survey_id>", methods=['POST'])
+    def skip_survey(self, survey_id):
+        survey = self.db.get_survey(survey_id)
+        if survey and survey.get('skip') is not True:  # check this out
+            self.db.add_skip_survey(survey_id)
         return ''
 
-    def class_survey(self, Class):
-        description = ""
-        questions = []
-
-        description = gettext("class_survey_description")
-        db_questions = Class.get('survey_responses')
-
-        if db_questions:
-            for question, answer in db_questions.items():
-                if not answer:
-                    questions.append(question)
-        if not questions:
-            questions = gettext("class_survey_questions").split("\n")
-        return description, questions
-
-    @route("/skip-survey/<class_id>", methods=['POST'])
-    def skip_survey(self, class_id):
-        if self.get_skip_survey(class_id) == False:
-            self.db.add_skip_survey_to_class(class_id)
+    # generic
+    @route("/remind-later-survey/<survey_id>", methods=['POST'])
+    def remind_later_survey(self, survey_id):
+        survey = self.db.get_survey(survey_id)
+        if survey and survey.get('skip') is not True:  # check this out
+            self.db.add_remind_later_survey(survey_id)
         return ''
-
-    def get_skip_survey(self, class_id):
-        Class = self.db.get_class(class_id)
-        if Class and Class.get('skip_survey') == True:
-            return True
-        return False
 
     @route("/get-customization-level", methods=["GET"])
     @requires_login

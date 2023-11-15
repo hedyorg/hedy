@@ -47,6 +47,15 @@ INVITATIONS = dynamo.Table(
     storage, "class_invitations", partition_key="username", indexes=[dynamo.Index("class_id")]
 )
 
+# A survey
+# - id (str): the identifier of the survey + the response identifier ex. "class_teacher1" or "students_student1"
+# - responses (str []): the response per question
+
+SURVEYS = dynamo.Table(storage, "surveys", "id", indexes=[
+    dynamo.Index('responses'),
+    dynamo.Index('skip'),
+])
+
 # Class customizations
 #
 # Various columns with different meanings:
@@ -613,12 +622,21 @@ class Database:
     def update_class(self, id, name):
         """Updates a class."""
         CLASSES.update({"id": id}, {"name": name})
-    
-    def add_survey_reponses_to_class(self, id, responses):
-        CLASSES.update({"id": id}, {"survey_responses": responses})
 
-    def add_skip_survey_to_class(self, id):
-        CLASSES.update({"id": id}, {"skip_survey": True})
+    def store_survey(self, survey):
+        SURVEYS.create(survey)
+
+    def get_survey(self, id):
+        return SURVEYS.get({"id": id})
+
+    def add_survey_responses(self, id, responses):
+        SURVEYS.update({"id": id}, {"responses": responses})
+
+    def add_skip_survey(self, id):
+        SURVEYS.update({"id": id}, {"skip": True})
+
+    def add_remind_later_survey(self, id):
+        SURVEYS.update({"id": id}, {"skip": date.today().isoformat()})
 
     def add_student_to_class(self, class_id, student_id):
         """Adds a student to a class."""

@@ -5,7 +5,7 @@
         <form id="survey-form">
         {% for question in questions %}
         <div class="mb-4">
-                    <div id="question" class="text-white mb-4 text-l">{{ _(question) }}</div>
+                    <div id="question" class="text-white mb-4 text-xl">{{ _(question) }}</div>
                     <div class="flex flex-row justify-center space-x-1">
                         <input autofocus="autofocus" id="input" type="text" class="flex items-center border border-green-400 rounded p-2 px-3 w-4/5 mt-1" name="{{ question }}">
                     </div>
@@ -14,17 +14,25 @@
             <div class="mt-4 flex flex-row justify-center">
                 <button type="submit" class="green-btn block m-4 w-40 pb-4 pt-4"
                 hx-trigger="click"
-                hx-post="/for-teachers/submit-survey/{{ class_info.id }}"
+                hx-post="/for-teachers/submit-survey/{{ survey_id }}"
                 hx-include="[name='question']"
                 hx-swap="innerHTML"
                 _="on click toggle .hidden on #survey">
                 Submit</button>
-                <button type="skip" class="red-btn block m-4 w-40 pb-4 pt-4"
+                <button type="remind_later" class="red-btn block m-4 w-40 pb-4 pt-4"
                 hx-trigger="click"
-                hx-post="/for-teachers/skip-survey/{{ class_info.id }}"
+                hx-post="/for-teachers/remind-later-survey/{{ survey_id }}"
                 hx-swap="innerHTML"
                 _="on click toggle .hidden on #survey">
-                Skip</button>
+                Remind me later</button>
+            </div>
+            <div class="flex-row justify-center">
+            <button type="skip" class="text-white m-1 w-40 pb-4 pt-4"
+                hx-trigger="click"
+                hx-post="/for-teachers/skip-survey/{{ survey_id }}"
+                hx-swap="innerHTML"
+                _="on click toggle .hidden on #survey">
+                <u>Don't ask again</u></button>
             </div>
         </form>
         </div>
