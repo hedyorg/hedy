@@ -67,7 +67,6 @@ class TestsLevel3(HedyTester):
         self.multi_level_tester(
             max_level=11,
             code=code,
-            lang='nl',
             translate=False,
             expected=expected
         )
