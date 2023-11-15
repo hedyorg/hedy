@@ -37,11 +37,8 @@
                 ">{{_('clone')}}</button>
         {%else%}
             <!-- TODO: button to add to class(es) -->
-            <!-- <button class="green-btn mr-4" id="create_adventure_button" onclick='hedyApp.create_adventure({{_('
-                adventure_prompt')|default(None)|tojson}})' {% if second_teacher and role=='viewer' %}disabled{% endif
-                %}>{{_('create_adventure')}}</button> -->
-            <a class="no-underline cursor-pointer" onclick='hedyApp.delete_adventure("{{adventure.id}}", {{_('
-                delete_adventure_prompt')|default(None)|tojson}})'>🗑️</a>
+            <a class="no-underline cursor-pointer" onclick='hedyApp.delete_adventure("{{adventure.id}}",
+            {{_('delete_adventure_prompt')|default(None)|tojson}})'>🗑️</a>
         {% endif %}
     </div>
 </div>
