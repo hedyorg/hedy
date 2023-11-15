@@ -1507,14 +1507,16 @@ class ConvertToPython_1(ConvertToPython):
         # we translate the color value to English at runtime, since it might be decided at runtime
         # coming from a random list or ask
 
-        color_dict = {hedy_translation.translate_keyword_from_en(x, language): x for x in colors}
+        color_dict = {hedy_translation.translate_keyword_from_en(x, language): x for x in command_make_color}
 
         return textwrap.dedent(f"""\
             {variable} = f'{parameter}'
             color_dict = {color_dict}
             if {variable} not in {colors}:
               raise Exception(f'While running your program the command {style_command(command)} received the value {style_command('{' + variable + '}')} which is not allowed. Try using another color.')
-            {variable} = color_dict[{variable}]
+            else:
+              if not {variable} in {command_make_color}:
+                {variable} = color_dict[{variable}]
             t.{command_text}({variable}){self.add_debug_breakpoint()}""")
 
     def make_catch_exception(self, args):
