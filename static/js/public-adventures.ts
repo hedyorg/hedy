@@ -35,12 +35,12 @@ export function applyFilter(term: string, type: string, filtered: any) {
         }
 
         if (term && toValidate?.includes(term)) {
-            if (filtered[type].exclude.some(a => a === adv)) {
-                filtered[type].exclude = filtered[type].exclude.filter(a => a !== adv)
+            if (filtered[type].exclude.some((a: Element) => a === adv)) {
+                filtered[type].exclude = filtered[type].exclude.filter((a: Element) => a !== adv)
             }
         } 
         else if (term) {
-            if (filtered.term !== term && !filtered[type].exclude.some(a => a === adv)) {
+            if (filtered.term !== term && !filtered[type].exclude.some((a: Element) => a === adv)) {
                 filtered[type].exclude.push(adv)
             }
         }
@@ -49,7 +49,7 @@ export function applyFilter(term: string, type: string, filtered: any) {
     for (const adv of adventures) {
         let allFiltersPassed = true;
         for (const t in filtered) {
-            if (filtered[t].exclude.some(a => a === adv)) {
+            if (filtered[t].exclude.some((a: Element) => a === adv)) {
                 allFiltersPassed = false;
             }
         }
