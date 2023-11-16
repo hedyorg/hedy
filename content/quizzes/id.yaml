@@ -1965,7 +1965,7 @@ levels:
             mp_choice_options:
             -   option: Sleeping Beauty dengan ukuran sepatu 38 mendapat keluaran 'Aku akan terus mencari'
                 feedback: Tidak, dia menjawab, 'Bukan kamu orangnya!'
-            -   option: 'Cinderella dengan ukuran sepatu 40 mendapat keluaran ''❤️❤️❤️'''
+            -   option: Cinderella dengan ukuran sepatu 40 mendapat keluaran '❤️❤️❤️'
                 feedback: Tidak, dia mendapat jawaban 'Saya akan terus mencari'
             -   option: Sleeping Beauty dengan ukuran sepatu 40 mendapat keluaran 'Aku akan terus mencari'
                 feedback: Itu benar!
@@ -2032,7 +2032,7 @@ levels:
             correct_answer: C
             question_score: '10'
         7:
-            question_text: "Anda akan mendapat diskon 5 dolar jika memesan pizza ukuran sedang dengan minuman bersoda.<br>Tetapi kodenya salah! Bagaimana cara men-debugnya?"
+            question_text: Anda akan mendapat diskon 5 dolar jika memesan pizza ukuran sedang dengan minuman bersoda.<br>Tetapi kodenya salah! Bagaimana cara men-debugnya?
             code: |-
                 {if} makanan {is} pizza
                 {if} ukuran {is} sedang
@@ -2720,11 +2720,11 @@ levels:
                     {print} Sepatu hak tinggi sedang diskon 50% sekarang!
             mp_choice_options:
             -   option: Line 1 and 2
-                feedback: 'Tidak'
+                feedback: Tidak
             -   option: Line 1, 2 and 3
-                feedback: 'Tidak'
+                feedback: Tidak
             -   option: Line 1, 2 and 4
-                feedback: 'Tidak'
+                feedback: Tidak
             -   option: All of the lines
                 feedback: Sempurna!
             hint: Apakah baris 3 perlu tanda kutip juga?
@@ -2841,7 +2841,7 @@ levels:
                     ```
                     {print} '7 / 2'
                     ```
-                feedback: 'Tidak'
+                feedback: Tidak
             -   option: |-
                     ```
                     {print} 7 / 2
@@ -2851,12 +2851,12 @@ levels:
                     ```
                     {print} 7 : 2
                     ```
-                feedback: 'Tidak'
+                feedback: Tidak
             -   option: |-
                     ```
                     {print} 7 * 2
                     ```
-                feedback: 'Tidak'
+                feedback: Tidak
             hint: 7 dibagi 2 adalah 3,5
             correct_answer: B
             question_score: '10'
@@ -2901,7 +2901,10 @@ levels:
                     {print} 'jika kamu senang dan kamu mengetahuinya'
                     tindakan {print}
             mp_choice_options:
-            -   option: "```\n{for} saya {in} {range} 1 {to} 3\n```"
+            -   option: |-
+                    ```
+                    {for} saya {in} {range} 1 {to} 3
+                    ```
                 feedback: Ini sulit! Semua tindakan dalam daftar harus ada dalam lagu.
             -   option: for action in actions
                 feedback: You are amazing!

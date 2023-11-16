@@ -236,7 +236,7 @@ levels:
             -   option: Marion va au marché et elle achète une pomme.
                 feedback: Bien joué !
             -   option: Marion va au marché et Marion achète une pomme.
-                feedback: 'Le mot « elle » n''est pas remplacé par le nom'
+                feedback: Le mot « elle » n'est pas remplacé par le nom
             hint: Le mot « nom » est remplacé par « Marion »
             correct_answer: C
             question_score: '10'
@@ -444,7 +444,10 @@ levels:
                     {print} pierre {at} {random}
                     ```
                 feedback: tu ne veux pas toujours qu'Hedy affiche « pierre », parfois tu veux « papier » ou « ciseaux ».
-            -   option: "```\n{print} options {at} {random}\n```"
+            -   option: |-
+                    ```
+                    {print} options {at} {random}
+                    ```
                 feedback: Très bien !
             -   option: Pas besoin, le code est correct !
                 feedback: Cherche bien l'erreur
@@ -457,11 +460,20 @@ levels:
                 coûts {is} 1 euro, 100 euros, 1 million d'euros
                 {print} coût {at} {random}
             mp_choice_options:
-            -   option: "```\n{print} coût\n```"
+            -   option: |-
+                    ```
+                    {print} coût
+                    ```
                 feedback: tu ne veux pas afficher le mot « coût », mais tu veux afficher un coût tiré au hasard dans ta liste
-            -   option: "```\n{print} coûts {at} {random}\n```"
+            -   option: |-
+                    ```
+                    {print} coûts {at} {random}
+                    ```
                 feedback: Super ! Tu as vraiment fait attention.
-            -   option: "```\n{print} {at} {random} coût\n```"
+            -   option: |-
+                    ```
+                    {print} {at} {random} coût
+                    ```
                 feedback: '`{at} {random}` doit se trouver après le nom de la variable.'
             -   option: Rien, ce code est correct.
                 feedback: Cherche bien l'erreur que tu as manquée !
@@ -612,7 +624,7 @@ levels:
                     ```
                     {print} 'C'est très exitant ce quiz !'
                     ```
-                feedback: 'Utilisez les guillemets pour entourer les textes plutôt que les apostrophes'
+                feedback: Utilisez les guillemets pour entourer les textes plutôt que les apostrophes
             -   option: |-
                     ```
                     {print} "Je suis très excité par ce quiz !
