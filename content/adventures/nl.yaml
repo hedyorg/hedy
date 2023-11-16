@@ -4229,13 +4229,17 @@ adventures:
                 story_text: |
                     Maak het nog makkelijker om een liedje te programmeren zoals old MacDonald! Je kunt nu de dieren en hun geluiden aan elkaar koppelen, door ze op dezelfde plaats in het lijstje te zetten.
                     Ook de Dronken Zeeman gaat lekker snel in dit level! Je hebt maar 5 regels nodig voor het gehele lied. Kijk maar!
+
+                    ### Opdracht
+                    Maak het Old MacDonald liedje af door de juiste waarden in te vullen bij `dier` en `geluid`, namelijk `dieren[i]` en `geluiden[i]`.
+
                 example_code: |
                     ```
                     dieren = ['big', 'hond', 'koe']
                     geluiden = ['knor', 'woef', 'boe']
                     {for} i {in} {range} 1 {to} 3
-                        dier = dieren[i]
-                        geluid = geluiden[i]
+                        dier = _
+                        geluid = _
                         {print} 'Old MacDonald had een wei'
                         {print} 'hi ja hi ja ho!'
                         {print} 'En in die wei daar stond een ' dier

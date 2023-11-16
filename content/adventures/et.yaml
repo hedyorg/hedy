@@ -4095,13 +4095,16 @@ adventures:
                 story_text: |
                     In this level, you can program a song like OldMacDonald even more quickly. You can connect the right animal to the right sound by simply putting them in the same place in the list.
                     The Drunken Sailor is also quickly made in this level. You only need 8 lines for the entire song, check it out!
+
+                    ### Exercise
+                    Complete the Old McDonald song by setting the variable `animal` to `animals[i]` and `sound` to `sounds[i]`.
                 example_code: |
                     ```
                     animals = ['pig', 'dog', 'cow']
                     sounds = ['oink', 'woof', 'moo']
                     {for} i {in} {range} 1 {to} 3
-                        animal = animals[i]
-                        sound = sounds[i]
+                        animal = _
+                        sound = _
                         {print} 'Old McDonald had a farm'
                         {print} 'E I E I O!'
                         {print} 'and on that farm he had a ' animal
