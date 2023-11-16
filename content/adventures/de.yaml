@@ -103,6 +103,8 @@ adventures:
                     ```
                     Name {is} {ask} _ Was ist dein Name? _
                     {print}  _ Der Name der Hauptfigur lautet _ Name
+                    _
+                    _
                     {print} Name  _ läuft nun in den Wald hinein _
                     {print} Name _ fürchtet sich ein wenig _
                     Tiere {is} 🦔, 🐿, 🦉, 🦇
@@ -142,7 +144,7 @@ adventures:
                     Solche Wiederholungen kannst du mit dem Befehl `{repeat}` in diesem Level in deine Geschichte einfügen.
 
                     ### Übung
-                    Füge Wiederholungen zu deiner eigenen Geschichte hinzu. Gehe zurück zu deinen gespeicherten Programmen, wähle dein Geschichte-Programm aus Level 6 aus und
+                    Füge Wiederholungen zu deiner eigenen Geschichte hinzu. Gehe zurück zu deinen gespeicherten Programmen, wähle dein Geschichte-Programm aus einem vorherigen Level aus und
                     finde eine Zeile die `{print}` enthält und wiederhole sie.
                 example_code: |
                     ```
@@ -158,7 +160,7 @@ adventures:
                     ### Übung 1
                     Der Beispiel-Code zeigt zwei verschiedene Enden; eines bei dem die Figuren in eine Zeitmaschine springen und eines wo sie es nicht tun.
                     Vervollständige die Lücken mit mindestens einem Satz pro Ende.
-                    **(extra)** Mach die Geschichte länger. Was passiert in der Geschichte? Du kannst auch ein zweites `{ask}` mit verschiedenen Auswahlmöglichkeiten hinzufügen.
+                    **Extra** Mach die Geschichte länger. Was passiert in der Geschichte? Du kannst auch ein zweites `{ask}` mit verschiedenen Auswahlmöglichkeiten hinzufügen.
 
                     ### Übung 2
                     Gehe zurück zu deinen gespeicherten Programmen und wähle deine Geschichte-Programm aus Level 5 aus. Schreibe nun ein gutes und ein schlechtes Ende mit jeweils mindestens drei Zeilen Länge!
@@ -288,7 +290,7 @@ adventures:
     add_remove_command:
         name: '{add} {to} & {remove} {from}'
         default_save_name: add_remove_command
-        description: Einführung von hinzufügen und entfernen
+        description: Führt hinzufügen und entfernen ein
         levels:
             3:
                 story_text: |
@@ -1428,7 +1430,7 @@ adventures:
 
                     print 'Thanks for ordering!'
                     ```
-                start_code: |4
+                start_code: |2
 
                     define food_order
                         toppings = ask 'pepperoni, tuna, veggie or cheese?'
@@ -1479,7 +1481,7 @@ adventures:
                         print 'there a ' sound
                         print 'everywhere a ' sound sound
                     ```
-                start_code: |4
+                start_code: |2
 
                     animals = ['pig', 'dog', 'cow']
                     sounds = ['oink', 'woof', 'moo']
@@ -3166,8 +3168,7 @@ adventures:
                     ```
                 start_code: '# Platziere deinen Code hier'
             9:
-                story_text: "Da du jetzt weißt wie man Befehle kombiniert, kannst du mit Hilfe von `{pressed}` ein Touch-Type-Tool erstellen. \n\n### Übung\nVervollständige den Code. Jedes Mal soll ein zufälliger Buchstabe ausgewählt werden. Diesen muss man drücken. Du bekommst einen Punkt für die richtige\
-                    \ Taste und zwei Punkte Abzug für die falsche Taste.\n**(extra)** Lösche den Bildschirm nach jedem Buchstaben und zeige dem Benutzer, wie viele Punkte er erreicht hat.\n"
+                story_text: "Da du jetzt weißt wie man Befehle kombiniert, kannst du mit Hilfe von `{pressed}` ein Touch-Type-Tool erstellen. \n\n### Übung\nVervollständige den Code. Jedes Mal soll ein zufälliger Buchstabe ausgewählt werden. Diesen muss man drücken. Du bekommst einen Punkt für die richtige Taste und zwei Punkte Abzug für die falsche Taste.\n**(extra)** Lösche den Bildschirm nach jedem Buchstaben und zeige dem Benutzer, wie viele Punkte er erreicht hat.\n"
                 example_code: "```\nPunkte = 0\nBuchstaben = a, b, c, d, e\n{repeat} 10 {times}\n    Buchstabe = _ _ _ \n    {print} 'Drück den Buchstaben ' Buchstabe\n    {if} Buchstabe {is} {pressed}\n    _\n    _\n    _\n```\n"
                 start_code: '# platziere deinen Code hier'
     print_command:
@@ -3669,9 +3670,7 @@ adventures:
                     **(extra)** Füge so viele Gerichte hinzu wie du magst!
                 start_code: '# setze hier deinen Code hin'
             9:
-                story_text: "In diesem Level kannst du Verschachtelung benutzen, um dein Restaurant realistischer und spaßiger zu machen!\n\n### Übung\nDie Einrückung im Beispiel-Code wurde entfernt.\nKannst du herausfinden wie viel Einrückung jede Zeile benötigt, damit der Code ordentlich funktioniert?\n\
-                    Falls der Kunde Pizza bestellt, sollte Hedy nicht fragen, welche Soße der Kunde möchte.\n\n**(extra)** Ein Restaurant lagert nicht alle möglichen Soßen. Erstelle eine Liste mit verfügbaren Soßen und gib eine Antwort bei jeder Bestellung, ob du sie auf Lager hast. <br>\n**(extra)**\
-                    \ Pizzen haben Beläge. Frag die Kunden, was sie möchten.<br>\n **(extra)** Möchten die Kunden etwas trinken? Frag sie! <br>                    \n"
+                story_text: "In diesem Level kannst du Verschachtelung benutzen, um dein Restaurant realistischer und spaßiger zu machen!\n\n### Übung\nDie Einrückung im Beispiel-Code wurde entfernt.\nKannst du herausfinden wie viel Einrückung jede Zeile benötigt, damit der Code ordentlich funktioniert?\nFalls der Kunde Pizza bestellt, sollte Hedy nicht fragen, welche Soße der Kunde möchte.\n\n**(extra)** Ein Restaurant lagert nicht alle möglichen Soßen. Erstelle eine Liste mit verfügbaren Soßen und gib eine Antwort bei jeder Bestellung, ob du sie auf Lager hast. <br>\n**(extra)** Pizzen haben Beläge. Frag die Kunden, was sie möchten.<br>\n **(extra)** Möchten die Kunden etwas trinken? Frag sie! <br>                    \n"
                 example_code: |
                     ```
                     {print} 'Willkommen im Restaurant Chez Hedy!'
@@ -4094,8 +4093,7 @@ adventures:
                     ```
                 start_code: '{print} ''Lass uns singen!'''
             7:
-                story_text: "In Liedern wiederholt sich oft einiges. So auch im Lied \"Baby Hai\"! Wenn du es singst, singst du eigentlich immer das gleiche:\n\nBaby Hai tututudutudu <br>\nBaby Hai tututudutudu <br>\nBaby Hai tututudutudu <br>\nBaby Hai \n\n### Übung\nKannst du das Lied mit Hilfe des\
-                    \ `{repeat}` Befehls ausgeben? Vervollständige den Code, indem du die Lücken füllst!\n **Extra** Nach dem Baby-Hai kannst du natürlich auch andere Lieder programmieren. Es gibt viele Lieder mit Wiederholung!\nKannst du an ein weiteres Lied denken und es ausgeben?\n"
+                story_text: "In Liedern wiederholt sich oft einiges. So auch im Lied \"Baby Hai\"! Wenn du es singst, singst du eigentlich immer das gleiche:\n\nBaby Hai tututudutudu <br>\nBaby Hai tututudutudu <br>\nBaby Hai tututudutudu <br>\nBaby Hai \n\n### Übung\nKannst du das Lied mit Hilfe des `{repeat}` Befehls ausgeben? Vervollständige den Code, indem du die Lücken füllst!\n **Extra** Nach dem Baby-Hai kannst du natürlich auch andere Lieder programmieren. Es gibt viele Lieder mit Wiederholung!\nKannst du an ein weiteres Lied denken und es ausgeben?\n"
                 example_code: |
                     ```
                     {repeat} _ _ {print} 'Baby Hai tututudutudu'
