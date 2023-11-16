@@ -101,7 +101,7 @@
     explanation: 用 `{in}`检查元素。
     demo_code: |-
         漂亮_颜色 {is} 绿色，黄色
-        颜色 {is} {ask} '什么 {is} 你最喜欢的颜色？'
+        颜色 {is} {ask} '什么 是你最喜欢的颜色？'
         {if} 颜色 {in} 漂亮_颜色 {print} '漂亮！' {else} {print} '呵呵'
 -   name: '{pressed}'
     explanation: 检查键盘上的某个键是否按下`{pressed}` 。
@@ -316,7 +316,7 @@
         firstfruit = fruit[1]
         {print} firstfruit
 -   name: 从一个列表中随机选择元素
-    explanation: 我们用[random] 从一个列表中随机选择元素，因此fruit[random]的意思是从列表fruit中随机选择一个水果!
+    explanation: 我们用[{random}] 从一个列表中随机选择元素，因此fruit[{random}]的意思是从列表中随机选择一个水果!
     demo_code: |-
         水果 = ['香蕉', '苹果', '樱桃']
         随机水果 = 水果[{random}]
