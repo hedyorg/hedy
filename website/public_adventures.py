@@ -76,19 +76,18 @@ class PublicAdventuresModule(WebsiteModule):
                 return gettext("adventure_duplicate"), 400
 
         adventure = {
-                    "id": uuid.uuid4().hex,
-                    "cloned_from": adventure_id,
-                    "name": current_adventure.get("name"),
-                    "public": True,
-                    "creator": user["username"],
-                    "date": utils.timems(),
-                    "level": current_adventure.get("level"),
-                    "language": current_adventure.get("language", ""),
-                    "tags": current_adventure.get("tags", []),
-                }
+            "id": uuid.uuid4().hex,
+            "cloned_from": adventure_id,
+            "name": current_adventure.get("name"),
+            "public": True,
+            "creator": user["username"],
+            "date": utils.timems(),
+            "level": current_adventure.get("level"),
+            "language": current_adventure.get("language", ""),
+            "tags": current_adventure.get("tags", []),
+        }
 
-
-        self.db.update_adventure(adventure_id, { "cloned_times": adventure.get("cloned_times", 0) + 1 })
+        self.db.update_adventure(adventure_id, {"cloned_times": adventure.get("cloned_times", 0) + 1})
         self.db.store_adventure(adventure)
         adventure["date"] = utils.localized_date_format(adventure.get("date"))
         return render_partial('htmx-adventure-card.html',
