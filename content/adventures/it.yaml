@@ -1436,7 +1436,7 @@ adventures:
 
                     print 'Thanks for ordering!'
                     ```
-                start_code: |4
+                start_code: |2
 
                     define food_order
                         toppings = ask 'pepperoni, tuna, veggie or cheese?'
@@ -1487,7 +1487,7 @@ adventures:
                         print 'there a ' sound
                         print 'everywhere a ' sound sound
                     ```
-                start_code: |4
+                start_code: |2
 
                     animals = ['pig', 'dog', 'cow']
                     sounds = ['oink', 'woof', 'moo']
@@ -4662,7 +4662,7 @@ adventures:
                         {forward} 50
                         {color} {black}
                     ```
-                start_code: '# place your code here'
+                start_code: '# posiziona il tuo codice qui'
             10:
                 story_text: |
                     In this level you can make the turtle draw a figure.
@@ -4680,7 +4680,7 @@ adventures:
                     {for} distance {in} distances
                         {forward} distance
                     ```
-                start_code: '# Write your code here'
+                start_code: '# posiziona il tuo codice qui'
             12:
                 story_text: |
                     We can use functions to draw more complex figures with less code.
@@ -4722,27 +4722,27 @@ adventures:
         levels:
             15:
                 story_text: |-
-                    We are going to learn a new loop, the `{while}` loop! We continue the loop as long as the statement is true.
-                    So don't forget to change the value in the loop.
+                    Stiamo per imparare un nuovo loop, il `{while}` loop!Continuiamo il ciclo finché la condizione è vera. 
+                    Quindi, non dimenticare di modificare il valore nel loop.
 
-                    In the example code, we continue until a correct answer has been given.
-                    If the correct answer is never given, the loop never ends!
+                    Nel codice di esempio, continuiamo fino a quando non viene fornita una risposta corretta.
+                     Se la risposta corretta non viene mai fornita, il loop non termina mai!
                 example_code: |
                     ```
-                    answer = 0
-                    {while} answer != 25
-                        answer = {ask} 'What is 5 times 5?'
-                    {print} 'A correct answer has been given'
+                    risposta = 0
+                    {while} risposta != 25
+                        risposta = {ask} 'Quanto fa 5 per 5?'
+                    {print} 'La risposta é corretta'
                     ```
                 start_code: |-
-                    answer = 0
-                    {while} answer != 25
-                        answer = {ask} 'What is 5 times 5?'
-                    {print} 'A correct answer has been given'
+                    risposta = 0
+                    {while} risposta != 25
+                            risposta= {ask} 'Quanto fa 5 per 5?'
+                    {print} 'La risposta é corretta'
     years:
-        name: New Year's
-        default_save_name: New Year's Countdown
-        description: Countdown to the new year!
+        name: Anno nuovo
+        default_save_name: Conto alla rovescia per il nuovo anno
+        description: Conto alla rovescia per il nuovo anno!
         levels:
             11:
                 story_text: |
@@ -4756,4 +4756,4 @@ adventures:
                         {print} i
                     {print} 'Happy New Year!'
                     ```
-                start_code: '# place your code here'
+                start_code: '# posiziona il tuo codice qui'
