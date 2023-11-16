@@ -241,7 +241,9 @@ class ForTeachersModule(WebsiteModule):
         elif survey.get('skip') is True or survey.get('skip') is date.today().isoformat():
             return "", "", ""
 
-        questions = self.survey.get_unanswered_questions(survey, "class_survey_questions")
+        questions = self.survey.get_unanswered_questions(survey)
+        if not questions:
+            questions = gettext("class_survey_questions").split("\n")
         return survey_id, description, questions
 
     @route("/get-customization-level", methods=["GET"])
