@@ -548,7 +548,7 @@ def parse():
             """)
             response['Code'] = t + transpile_result.code
 
-            #response['Code'] = transpile_result.code
+            # response['Code'] = transpile_result.code
             source_map_result = transpile_result.source_map.get_result()
 
             for i, mapping in source_map_result.items():
