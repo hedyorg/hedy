@@ -1853,18 +1853,27 @@ adventures:
                 start_code: '# skriv din kod här'
             15:
                 story_text: |
-                    I det här spelet måste du kasta en sexa på så få försök som möjligt.
+                    ### Exercise
+                    In this level you can create a little game in which you'll have to throw 6 as fast as possible.
+                    We have started the code, it's up to you to get the game to work!
+
+                    Firstly, add a `{while}` loop that checks if 6 has been thrown or not.
+                    As long as you haven't thrown 6 already, throw the dice on a random number.
+                    Print what the player has thrown.
+                    Add a try to the amount of tries
+                    Wait a second before you throw again, or - in case you've thrown a 6 - before the game ends.
                 example_code: |
                     ```
-                    alternativ = 1, 2, 3, 4, 5, 6
-                    {print} 'Kasta 6 så fort du kan!'
-                    kastad = 0
-                    försök = 0
-                    {while} kastad != 6
-                        kastad = alternativ {at} {random}
-                        {print} 'Du kastade ' kastad
-                        försök = försök + 1
-                    {print} 'Ja! Du kastade 6 på ' försök ' försök.'
+                    options = 1, 2, 3, 4, 5, 6
+                    {print} 'Throw 6 as fast as you can!'
+                    thrown = 0
+                    tries = 0
+                    _
+                    _
+                    _
+                    _
+                    _
+                    {print} 'Yes! You have thrown 6 in ' tries ' tries.'
                     ```
                 start_code: '# skriv din kod här'
     dishes:

@@ -1814,17 +1814,26 @@ adventures:
                 start_code: '# place your code here'
             15:
                 story_text: |
-                    In this game you have to throw 6 in as little tries as possible.
+                    ### Exercise
+                    In this level you can create a little game in which you'll have to throw 6 as fast as possible.
+                    We have started the code, it's up to you to get the game to work!
+
+                    Firstly, add a `{while}` loop that checks if 6 has been thrown or not.
+                    As long as you haven't thrown 6 already, throw the dice on a random number.
+                    Print what the player has thrown.
+                    Add a try to the amount of tries
+                    Wait a second before you throw again, or - in case you've thrown a 6 - before the game ends.
                 example_code: |
                     ```
                     options = 1, 2, 3, 4, 5, 6
                     {print} 'Throw 6 as fast as you can!'
                     thrown = 0
                     tries = 0
-                    {while} thrown != 6
-                        thrown = options {at} {random}
-                        {print} 'You threw ' thrown
-                        tries = tries + 1
+                    _
+                    _
+                    _
+                    _
+                    _
                     {print} 'Yes! You have thrown 6 in ' tries ' tries.'
                     ```
                 start_code: '# place your code here'

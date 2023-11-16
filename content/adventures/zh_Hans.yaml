@@ -1750,18 +1750,27 @@ adventures:
                 start_code: '# 在这里写你的代码'
             15:
                 story_text: |
-                    在这个游戏里，你需要用尽可能少的次数投出6。
+                    ### Exercise
+                    In this level you can create a little game in which you'll have to throw 6 as fast as possible.
+                    We have started the code, it's up to you to get the game to work!
+
+                    Firstly, add a `{while}` loop that checks if 6 has been thrown or not.
+                    As long as you haven't thrown 6 already, throw the dice on a random number.
+                    Print what the player has thrown.
+                    Add a try to the amount of tries
+                    Wait a second before you throw again, or - in case you've thrown a 6 - before the game ends.
                 example_code: |
                     ```
-                    选项 = 1, 2, 3, 4, 5, 6
-                    {print} '用最快的速度投出6！'
-                    投 = 0
-                    次数 = 0
-                    {while} 投 != 6
-                        投 = 选项 {at} {random}
-                        {print} '你投了' 投
-                        次数 = 次数 + 1
-                    {print} '很好！你在' 次数 '次里投出了6！'
+                    options = 1, 2, 3, 4, 5, 6
+                    {print} 'Throw 6 as fast as you can!'
+                    thrown = 0
+                    tries = 0
+                    _
+                    _
+                    _
+                    _
+                    _
+                    {print} 'Yes! You have thrown 6 in ' tries ' tries.'
                     ```
                 start_code: '# 在这里写你的代码'
     dishes:

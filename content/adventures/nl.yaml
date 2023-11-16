@@ -1837,17 +1837,27 @@ adventures:
                 start_code: '# Schrijf jouw code hier'
             15:
                 story_text: |
-                    In dit dobbelspelletje moet je 6 gooien in zo min mogelijk beurten.
+                    ### Opdracht
+                    In dit level kun je een klein spelletje maken waarbij je zo snel mogelijk 6 moet gooien.
+                    We hebben al een beginnetje gemaakt aan je code, jij moet hem nog af zien te maken!
+
+                    Allereerst moet je een `{while}`loop toevoegen, die controleert of er al 6 is gegooid.
+                    Als dat niet zo is, gooi je de dobbelsteen op een random nummer.
+                    Print daarna wat de speler gegooid heeft.
+                    Tel een poging op bij het aantal pogingen dat je al gedaan hebt.
+                    Wacht een seconde voordat er weer gegooid wordt, of voordat het spel eindigt in het geval dat je 6 hebt gegooid.
+
                 example_code: |
                     ```
                     opties = 1, 2, 3, 4, 5, 6
                     {print} 'Gooi 6 in zo min mogelijk beurten!'
                     gegooid = 0
                     pogingen = 0
-                    {while} gegooid != 6
-                        gegooid = opties {at} {random}
-                        {print} 'Jij gooide ' gegooid
-                        pogingen = pogingen + 1
+                    _
+                    _
+                    _
+                    _
+                    _
                     {print} 'Hoera! Je hebt 6 gegooid in ' pogingen ' pogingen.'
                     ```
                 start_code: '# Schrijf jouw code hier'
