@@ -630,7 +630,7 @@ class Database:
         return SURVEYS.get({"id": id})
 
     def add_survey_responses(self, id, responses):
-        SURVEYS.update({"id": id}, {"responses": responses})
+        SURVEYS.update({"id": id}, {"responses":  responses})
 
     def add_skip_survey(self, id):
         SURVEYS.update({"id": id}, {"skip": True})

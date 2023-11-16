@@ -14,14 +14,14 @@
             <div class="mt-4 flex flex-row justify-center">
                 <button type="submit" class="green-btn block m-4 w-40 pb-4 pt-4"
                 hx-trigger="click"
-                hx-post="/for-teachers/submit-survey/{{ survey_id }}"
+                hx-post="/surveys/submit-survey/{{ survey_id }}"
                 hx-include="[name='question']"
                 hx-swap="innerHTML"
                 _="on click toggle .hidden on #survey">
                 Submit</button>
                 <button type="remind_later" class="red-btn block m-4 w-40 pb-4 pt-4"
                 hx-trigger="click"
-                hx-post="/for-teachers/remind-later-survey/{{ survey_id }}"
+                hx-post="/surveys/remind-later-survey/{{ survey_id }}"
                 hx-swap="innerHTML"
                 _="on click toggle .hidden on #survey">
                 Remind me later</button>
@@ -29,7 +29,7 @@
             <div class="flex-row justify-center">
             <button type="skip" class="text-white m-1 w-40 pb-4 pt-4"
                 hx-trigger="click"
-                hx-post="/for-teachers/skip-survey/{{ survey_id }}"
+                hx-post="/surveys/skip-survey/{{ survey_id }}"
                 hx-swap="innerHTML"
                 _="on click toggle .hidden on #survey">
                 <u>Don't ask again</u></button>

@@ -42,7 +42,7 @@ from logging_config import LOGGING_CONFIG
 from utils import dump_yaml_rt, is_debug_mode, load_yaml_rt, timems, version, strip_accents
 from website import (ab_proxying, achievements, admin, auth_pages, aws_helpers,
                      cdn, classes, database, for_teachers, s3_logger, parsons,
-                     profile, programs, querylog, quiz, statistics,
+                     profile, programs, querylog, quiz, statistics, surveys,
                      translating)
 from website.auth import (current_user, is_admin, is_teacher, has_public_profile,
                           login_user_from_token_cookie, requires_login, requires_login_redirect, requires_teacher,
@@ -105,6 +105,7 @@ for lang in ALL_LANGUAGES.keys():
 ACHIEVEMENTS_TRANSLATIONS = hedyweb.AchievementTranslations()
 DATABASE = database.Database()
 ACHIEVEMENTS = achievements.Achievements(DATABASE, ACHIEVEMENTS_TRANSLATIONS)
+SURVEYS = surveys.SurveysModule(DATABASE)
 
 
 def load_adventures_for_level(level):
@@ -2286,7 +2287,7 @@ def current_user_allowed_to_see_program(program):
 app.register_blueprint(auth_pages.AuthModule(DATABASE))
 app.register_blueprint(profile.ProfileModule(DATABASE))
 app.register_blueprint(programs.ProgramsModule(DATABASE, ACHIEVEMENTS))
-app.register_blueprint(for_teachers.ForTeachersModule(DATABASE, ACHIEVEMENTS))
+app.register_blueprint(for_teachers.ForTeachersModule(DATABASE, ACHIEVEMENTS, SURVEYS))
 app.register_blueprint(classes.ClassModule(DATABASE, ACHIEVEMENTS))
 app.register_blueprint(classes.MiscClassPages(DATABASE, ACHIEVEMENTS))
 app.register_blueprint(admin.AdminModule(DATABASE))
@@ -2295,6 +2296,7 @@ app.register_blueprint(quiz.QuizModule(DATABASE, ACHIEVEMENTS, QUIZZES))
 app.register_blueprint(parsons.ParsonsModule(PARSONS))
 app.register_blueprint(statistics.StatisticsModule(DATABASE))
 app.register_blueprint(statistics.LiveStatisticsModule(DATABASE))
+app.register_blueprint(surveys.SurveysModule(DATABASE))
 
 
 # *** START SERVER ***

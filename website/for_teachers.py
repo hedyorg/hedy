@@ -28,6 +28,7 @@ from .achievements import Achievements
 from .database import Database
 from .website_module import WebsiteModule, route
 from datetime import date
+from .surveys import SurveysModule
 
 SLIDES = collections.defaultdict(hedy_content.NoSuchSlides)
 for lang in hedy_content.ALL_LANGUAGES.keys():
@@ -35,10 +36,11 @@ for lang in hedy_content.ALL_LANGUAGES.keys():
 
 
 class ForTeachersModule(WebsiteModule):
-    def __init__(self, db: Database, achievements: Achievements):
+    def __init__(self, db: Database, achievements: Achievements, surveys: SurveysModule):
         super().__init__("teachers", __name__, url_prefix="/for-teachers")
         self.db = db
         self.achievements = achievements
+        self.survey = surveys
 
     @route("/", methods=["GET"])
     @requires_teacher
@@ -227,7 +229,6 @@ class ForTeachersModule(WebsiteModule):
                 class_id=class_id
             ))
 
-    # not generic
     def class_survey(self, class_id):
         description = ""
         survey_id = "class" + '_' + class_id
@@ -237,56 +238,11 @@ class ForTeachersModule(WebsiteModule):
         if not survey:
             self.db.store_survey(dict(id=f"{survey_id}"))
             survey = self.db.get_survey(survey_id)
-        elif survey.get('skip') is True or date.today().isoformat():
+        elif survey.get('skip') is True or survey.get('skip') is date.today().isoformat():
             return "", "", ""
 
-        questions = self.get_unanswered_questions(survey, 'class_survey_questions')
+        questions = self.survey.get_unanswered_questions(survey, 'class_survey_questions')
         return survey_id, description, questions
-
-    # generic
-    def get_unanswered_questions(self, survey, trans_key):
-        questions = []
-        db_questions = survey.get('responses')
-        if db_questions:
-            for question, answer in db_questions.items():
-                if not answer:
-                    questions.append(question)
-        if not questions:
-            questions = gettext(trans_key).split("\n")
-        return questions
-
-    # generic
-    @route("/submit-survey/<survey_id>", methods=['POST'])
-    def submit_survey(self, survey_id):
-        responses = {}
-        survey_done = True
-        for question, answer in request.form.items():
-            responses[question] = answer
-            if not answer:
-                survey_done = False
-        if survey_done is True:
-            self.db.add_skip_survey(survey_id)
-            self.db.add_survey_responses(survey_id, responses)
-            return ''
-        self.db.add_survey_responses(survey_id, responses)
-        return ''
-        # return ''
-
-    # generic
-    @route("/skip-survey/<survey_id>", methods=['POST'])
-    def skip_survey(self, survey_id):
-        survey = self.db.get_survey(survey_id)
-        if survey and survey.get('skip') is not True:  # check this out
-            self.db.add_skip_survey(survey_id)
-        return ''
-
-    # generic
-    @route("/remind-later-survey/<survey_id>", methods=['POST'])
-    def remind_later_survey(self, survey_id):
-        survey = self.db.get_survey(survey_id)
-        if survey and survey.get('skip') is not True:  # check this out
-            self.db.add_remind_later_survey(survey_id)
-        return ''
 
     @route("/get-customization-level", methods=["GET"])
     @requires_login
