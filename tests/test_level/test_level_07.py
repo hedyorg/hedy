@@ -3,7 +3,8 @@ import textwrap
 from parameterized import parameterized
 
 import hedy
-from tests.Tester import HedyTester
+from hedy_sourcemap import SourceRange
+from tests.Tester import HedyTester, SkippedMapping
 
 
 class TestsLevel7(HedyTester):
@@ -75,6 +76,71 @@ class TestsLevel7(HedyTester):
 
         self.single_level_tester(code=code, exception=hedy.exceptions.UndefinedVarException)
 
+    def test_missing_body(self):
+        code = textwrap.dedent("""\
+        prind skipping
+        repeat 5 times""")
+
+        expected = textwrap.dedent("""\
+        pass
+        pass""")
+
+        skipped_mappings = [
+            SkippedMapping(SourceRange(1, 1, 1, 15), hedy.exceptions.InvalidCommandException),
+            SkippedMapping(SourceRange(2, 1, 2, 15), hedy.exceptions.MissingInnerCommandException)
+        ]
+
+        self.multi_level_tester(
+            code=code,
+            expected=expected,
+            skipped_mappings=skipped_mappings,
+            max_level=8
+        )
+
+    @parameterized.expand(HedyTester.quotes)
+    def test_print_without_opening_quote_gives_error(self, q):
+        code = textwrap.dedent(f"""\
+        print hedy 123{q}
+        prind skipping""")
+
+        expected = textwrap.dedent("""\
+        pass
+        pass""")
+
+        skipped_mappings = [
+            SkippedMapping(SourceRange(1, 1, 1, 16), hedy.exceptions.UnquotedTextException),
+            SkippedMapping(SourceRange(2, 1, 2, 15), hedy.exceptions.InvalidCommandException)
+        ]
+
+        self.multi_level_tester(
+            code=code,
+            expected=expected,
+            skipped_mappings=skipped_mappings,
+            max_level=17
+        )
+
+    @parameterized.expand(HedyTester.quotes)
+    def test_print_without_closing_quote_gives_error(self, q):
+        code = textwrap.dedent(f"""\
+        prind skipping
+        print {q}hedy 123""")
+
+        expected = textwrap.dedent("""\
+        pass
+        pass""")
+
+        skipped_mappings = [
+            SkippedMapping(SourceRange(1, 1, 1, 15), hedy.exceptions.InvalidCommandException),
+            SkippedMapping(SourceRange(2, 1, 2, 16), hedy.exceptions.UnquotedTextException)
+        ]
+
+        self.multi_level_tester(
+            code=code,
+            expected=expected,
+            skipped_mappings=skipped_mappings,
+            max_level=17
+        )
+
     def test_repeat_with_string_variable_gives_type_error(self):
         code = textwrap.dedent("""\
         n is 'test'
@@ -100,19 +166,62 @@ class TestsLevel7(HedyTester):
         x is 3
         repeat 3 times x""")
 
-        self.single_level_tester(code=code, exception=hedy.exceptions.IncompleteRepeatException)
+        expected = textwrap.dedent("""\
+        x = '3'
+        pass""")
+
+        skipped_mappings = [
+            SkippedMapping(SourceRange(2, 1, 2, 17), hedy.exceptions.IncompleteRepeatException),
+        ]
+
+        self.single_level_tester(
+            code=code,
+            expected=expected,
+            skipped_mappings=skipped_mappings,
+        )
 
     def test_repeat_with_missing_print_gives_lonely_text_exc(self):
         code = textwrap.dedent("""\
+        prind skipping
         repeat 3 times 'n'""")
 
-        self.single_level_tester(code=code, exception=hedy.exceptions.LonelyTextException)
+        expected = textwrap.dedent("""\
+        pass
+        for __i__ in range(int('3')):
+          pass
+          time.sleep(0.1)""")
+
+        skipped_mappings = [
+            SkippedMapping(SourceRange(1, 1, 1, 15), hedy.exceptions.InvalidCommandException),
+            SkippedMapping(SourceRange(2, 16, 2, 19), hedy.exceptions.LonelyTextException)
+        ]
+
+        self.single_level_tester(
+            code=code,
+            expected=expected,
+            skipped_mappings=skipped_mappings,
+        )
 
     def test_repeat_with_missing_times_gives_error(self):
         code = textwrap.dedent("""\
-        repeat 3 print 'n'""")
+        prind skipping
+        repeat 3 print 'n'
+        """)
 
-        self.single_level_tester(code=code, exception=hedy.exceptions.IncompleteRepeatException)
+        expected = textwrap.dedent("""\
+        pass
+        pass""")
+
+        skipped_mappings = [
+            SkippedMapping(SourceRange(1, 1, 1, 15), hedy.exceptions.InvalidCommandException),
+            SkippedMapping(SourceRange(2, 1, 2, 19), hedy.exceptions.IncompleteRepeatException),
+        ]
+
+        self.single_level_tester(
+            code=code,
+            expected=expected,
+            skipped_mappings=skipped_mappings,
+        )
 
     def test_repeat_ask(self):
         code = textwrap.dedent("""\
@@ -419,7 +528,7 @@ class TestsLevel7(HedyTester):
           if convert_numerals('Latin', aan) == convert_numerals('Latin', 'ja'):
             print(f'Hedy is leuk!')
           else:
-            _ = 'x'
+            x__x__x__x = '5'
           time.sleep(0.1)
         for __i__ in range(int('3')):
           if convert_numerals('Latin', aan) == convert_numerals('Latin', 'ja'):
@@ -437,5 +546,28 @@ class TestsLevel7(HedyTester):
         self.single_level_tester(
             code=code,
             expected=expected,
-            output=output,
-            translate=False)
+            output=output)
+
+    def test_source_map(self):
+        code = textwrap.dedent("""\
+        print 'The prince kept calling for help'
+        repeat 5 times print 'Help!'
+        print 'Why is nobody helping me?'""")
+
+        expected_code = textwrap.dedent("""\
+        print(f'The prince kept calling for help')
+        for __i__ in range(int('5')):
+          print(f'Help!')
+          time.sleep(0.1)
+        print(f'Why is nobody helping me?')""")
+
+        expected_source_map = {
+            '1/1-1/41': '1/1-1/43',
+            '2/16-2/29': '3/3-3/18',
+            '2/1-2/29': '2/1-4/18',
+            '3/1-3/34': '5/1-5/36',
+            '1/1-3/35': '1/1-5/36'
+        }
+
+        self.single_level_tester(code, expected=expected_code)
+        self.source_map_tester(code=code, expected_source_map=expected_source_map)

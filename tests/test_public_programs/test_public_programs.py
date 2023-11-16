@@ -6,7 +6,7 @@ from app import translate_error, app
 from flask_babel import force_locale
 import exceptions
 
-most_recent_file_name = 'tests/test_public_programs/filtered-programs-2022-12-01.json'
+most_recent_file_name = 'tests/test_public_programs/filtered-programs-2023-06-19.json'
 public_snippets = []
 
 # this file tests all public programs in the database
@@ -20,27 +20,39 @@ with open(most_recent_file_name, 'r') as public_programs_file:
 for p in public_programs:
     s = Snippet(filename='file',
                 level=int(p['level']),
-                field_name='field',
+                field_name=None,
                 code=p['code'],
                 language=p['language'],
                 error=p['error']
                 )
     public_snippets.append(s)
 
-p2 = [(s.name, s) for s in public_snippets if not s.error]
+p2 = [(s.name, s) for s in public_snippets]
+
+passed_snippets = []
 
 
 class TestsPublicPrograms(HedyTester):
     @parameterized.expand(p2)
     def test_programs(self, name, snippet):
-        if snippet is not None and len(snippet.code) > 0:
+        # test correct programs
+        if snippet is not None and len(snippet.code) > 0 and len(snippet.code) < 100 and not snippet.error:
             try:
                 self.single_level_tester(
                     code=snippet.code,
                     level=int(snippet.level),
                     lang=snippet.language,
-                    translate=False
+                    translate=False,
+                    skip_faulty=False
                 )
+
+                # useful code if you want to test what erroneous snippets are now passing
+                # passed_snippets.append(str(snippet.level) + '\n' + snippet.code + '\n--------\n')
+                # try:
+                #     with open('output.txt', 'w') as f:
+                #         f.writelines(passed_snippets)
+                # except Exception as e:
+                #     pass
 
             except hedy.exceptions.CodePlaceholdersPresentException:  # Code with blanks is allowed
                 pass
@@ -61,3 +73,15 @@ class TestsPublicPrograms(HedyTester):
                         print(f'\n----\n{snippet.code}\n----')
                         print(f'in language {snippet.language} from level {snippet.level} gives error:')
                         print(f'{error_message} at line {location}')
+                        raise E
+
+        # test if we are not validating previously incorrect programs
+        if snippet is not None and len(snippet.code) > 0 and snippet.error:
+            self.single_level_tester(
+                code=snippet.code,
+                level=int(snippet.level),
+                lang=snippet.language,
+                translate=False,
+                exception=exceptions.HedyException,
+                skip_faulty=False
+            )

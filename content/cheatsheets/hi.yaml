@@ -1,7 +1,7 @@
 1:
--   name: "{print}"
-    explanation: "`{print}` के साथ कुछ प्रिंट करें।"
-    demo_code: "{print} हैलो हेडी में आपका स्वागत है!"
+-   name: '{print}'
+    explanation: '`{print}` के साथ कुछ प्रिंट करें।'
+    demo_code: '{print} हैलो हेडी में आपका स्वागत है!'
 -   name: '{ask}'
     explanation: '`{ask}` के साथ कुछ पूछो।'
     demo_code: '{ask} आपका पसंदीदा रंग क्या है?'
@@ -24,8 +24,8 @@
         {forward} २५
         {turn} right
 2:
--   name: "{is}"
-    explanation: "प्रोग्राम में उपयोग करने के लिए `{is}` का उपयोग करके एक शब्द को एक नाम दें। नाम आप खुद चुन सकते हैं।"
+-   name: '{is}'
+    explanation: प्रोग्राम में उपयोग करने के लिए `{is}` का उपयोग करके एक शब्द को एक नाम दें। नाम आप खुद चुन सकते हैं।
     demo_code: |-
         name {is} हेडी
         {print} स्वागत है name
@@ -42,15 +42,15 @@
         {print} हम्म.. मुझे ३ और सेकंड चाहिए...
         {sleep} ३
         {print} यूरेका! मुझे मिलगया!
--   explanation: '`{is}` का प्रयोग करके किसी संख्या को एक नाम दें। नाम आप खुद चुन सकते हैं।'
+-   name: '{is}- turtle'
+    explanation: '`{is}` का प्रयोग करके किसी संख्या को एक नाम दें। नाम आप खुद चुन सकते हैं।'
     demo_code: |-
         angle {is} ९०
         {turn} angle
         {forward} १००
-    name: '{is}- turtle'
 3:
--   name: "चुनें_यादृच्छिक"
-    explanation: "`at` और `random` वाले समूह से एक यादृच्छिक शब्द चुनें"
+-   name: चुनें_यादृच्छिक
+    explanation: '`at` और `random` वाले समूह से एक यादृच्छिक शब्द चुनें'
     demo_code: |-
         animals {is} कुत्ता, बिल्ली, कंगारू
         {print} animals at random
@@ -65,9 +65,9 @@
         animals {is} बिल्ली, कुत्ता, गाय
         remove कुत्ता from animals
 4:
--   name: "प्रिंट"
-    explanation: "उद्धरण चिह्नों का उपयोग करके सटीक रूप से प्रिंट करें"
-    demo_code: "{print} 'हैलो हेडी में आपका स्वागत है।'"
+-   name: प्रिंट
+    explanation: उद्धरण चिह्नों का उपयोग करके सटीक रूप से प्रिंट करें
+    demo_code: '{print} ''हैलो हेडी में आपका स्वागत है।'''
 -   name: '{is}'
     explanation: कुछ टेक्स्ट को एक नाम दें और उद्धरण चिह्नों के बिना '{print}' करें
     demo_code: |-
@@ -79,9 +79,9 @@
         color {is} {ask} 'आपका पसंदीदा रंग क्या है?'
         {print} color ' आपका पसंदीदा रंग है!'
 5:
--   name: "{print}"
-    explanation: "उद्धरण चिह्नों का उपयोग करके हूबहू प्रिंट करें"
-    demo_code: "{print} 'हैलो, हेडी में आपका स्वागत है।'"
+-   name: '{print}'
+    explanation: उद्धरण चिह्नों का उपयोग करके हूबहू प्रिंट करें
+    demo_code: '{print} ''हैलो, हेडी में आपका स्वागत है।'''
 -   name: '{ask}'
     explanation: '`{ask}` के साथ कुछ पूछो।'
     demo_code: |-
@@ -105,11 +105,11 @@
         {if} रंग {in} सुंदर_रंग {print} 'सुंदर!' {else} {print} 'मेह'
 -   name: '{pressed}'
     explanation: Check whether a given key on the keyboard is `{pressed}`.
-    demo_code: "{if} a {is} {pressed} {print} 'You pressed A!' {else} {print} 'You pressed another key!'"
+    demo_code: '{if} a {is} {pressed} {print} ''You pressed A!'' {else} {print} ''You pressed another key!'''
 6:
--   name: "{print}"
-    explanation: "उद्धरण चिह्नों का उपयोग करके बिल्कुल हूबहू प्रिंट करें"
-    demo_code: "{print} '5 गुना 5 है' 5 * 5"
+-   name: '{print}'
+    explanation: उद्धरण चिह्नों का उपयोग करके बिल्कुल हूबहू प्रिंट करें
+    demo_code: '{print} ''5 गुना 5 है'' 5 * 5'
 -   name: '{ask}'
     explanation: '{ask} गणना के लिए और जांचें कि क्या यह सही है।'
     demo_code: |-
@@ -122,9 +122,9 @@
         कोण = 360 / कोण
         {forward} 50
 7:
--   name: "{print}"
-    explanation: "उद्धरण चिह्नों का उपयोग करके बिल्कुल हूबहू प्रिंट करें"
-    demo_code: "{print} 'हैलो, हेडी में आपका स्वागत है।'"
+-   name: '{print}'
+    explanation: उद्धरण चिह्नों का उपयोग करके बिल्कुल हूबहू प्रिंट करें
+    demo_code: '{print} ''हैलो, हेडी में आपका स्वागत है।'''
 -   name: '{ask}'
     explanation: '`{ask}` के साथ कुछ पूछो।'
     demo_code: |-
@@ -139,9 +139,9 @@
     explanation: कोड की एक पंक्ति को `{repeat}` के साथ दोहराएं।
     demo_code: '{repeat} 3 {times} {forward} 10'
 8:
--   name: "{print}"
-    explanation: "कुछ छापो। शाब्दिक मुद्रण के लिए उद्धरण चिह्न का उपयोग करना याद रखें।"
-    demo_code: "{print} '5 गुना 5 है' 5 * 5"
+-   name: '{print}'
+    explanation: कुछ छापो। शाब्दिक मुद्रण के लिए उद्धरण चिह्न का उपयोग करना याद रखें।
+    demo_code: '{print} ''5 गुना 5 है'' 5 * 5'
 -   name: '{ask}'
     explanation: एक योग का उत्तर मांगें और जांचें कि क्या यह सही है। अब हम 2 पंक्तियां प्रिंट कर सकते हैं।
     demo_code: |-
@@ -160,10 +160,14 @@
             {forward} 50
 -   name: '{pressed}'
     explanation: Check whether a given key on the keyboard is `{pressed}`.
-    demo_code: "{if} a {is} {pressed}\n    {print} 'You pressed A!'\n{else}\n    {print} 'You pressed another key!'"
+    demo_code: |-
+        {if} a {is} {pressed}
+            {print} 'You pressed A!'
+        {else}
+            {print} 'You pressed another key!'
 9:
--   name: "`{if}` कई पंक्तियों के साथ"
-    explanation: "प्रश्नों के योग का उत्तर '{ask}' के साथ और देखें कि क्या यह सही है। अब हम दो लाइन प्रिंट करते हैं।"
+-   name: '`{if}` कई पंक्तियों के साथ'
+    explanation: प्रश्नों के योग का उत्तर '{ask}' के साथ और देखें कि क्या यह सही है। अब हम दो लाइन प्रिंट करते हैं।
     demo_code: |-
         उत्तर = {ask} '20 जमा 20 क्या है?'
         {if} उत्तर {is} 20
@@ -179,9 +183,9 @@
             {turn} 90
             {forward} 50
 10:
--   name: "{print}"
-    explanation: "कुछ प्रिंट करो। शाब्दिक मुद्रण के लिए उद्धरण चिह्न का उपयोग करना याद रखें।"
-    demo_code: "{print} '5 गुना 5 है' 5 * 5"
+-   name: '{print}'
+    explanation: कुछ प्रिंट करो। शाब्दिक मुद्रण के लिए उद्धरण चिह्न का उपयोग करना याद रखें।
+    demo_code: '{print} ''5 गुना 5 है'' 5 * 5'
 -   name: '{for} एक सूची के साथ'
     explanation: एक सूची में सभी चीजें प्रिंट करें
     demo_code: |-
@@ -189,8 +193,8 @@
         {for} जानवर {in} जानवरों
             {print} 'मुझे पसंद है ' जानवर
 11:
--   name: "{for} लूप"
-    explanation: "हम {range} के साथ `{for}` का उपयोग कर सकते हैं"
+-   name: '{for} लूप'
+    explanation: हम {range} के साथ `{for}` का उपयोग कर सकते हैं
     demo_code: |-
         {for} काउंटर {in} {range} 1 {to} 5
             {print} काउंटर
@@ -205,31 +209,31 @@
             {print} 'उफ़!'
             {print} 'जवाब 10 है'
 12:
--   name: "फ्लोट सीधे"
-    explanation: "दशमलव संख्याएं"
+-   name: फ्लोट सीधे
+    explanation: दशमलव संख्याएं
     demo_code: |-
         {print} 'गणना करें!'
         {print} 'ढाई जमा ढाई है...'
         {print} 2.5 + 2.5
--   name: "टेक्स्ट असाइन करें"
-    explanation: "= के बाद उद्धरण चिह्नों वाला पाठ"
-    demo_code: |
+-   name: टेक्स्ट असाइन करें
+    explanation: = के बाद उद्धरण चिह्नों वाला पाठ
+    demo_code: |-
         नाम = 'हेडी द रोबोट'
         {print} 'हैलो' नाम
--   name: "{if} तुलना के बाद उद्धरण"
-    explanation: "{if} के बाद उद्धरण चिह्नों वाला टेक्स्ट"
-    demo_code: |
+-   name: '{if} तुलना के बाद उद्धरण'
+    explanation: '{if} के बाद उद्धरण चिह्नों वाला टेक्स्ट'
+    demo_code: |-
         name = ask 'Who are you?'
         if name = 'Hedy'
             print 'Hi there!'
--   name: "सूची में उद्धरण"
-    explanation: "उद्धरण चिह्नों वाली एक सूची"
+-   name: सूची में उद्धरण
+    explanation: उद्धरण चिह्नों वाली एक सूची
     demo_code: |-
         सुपरहीरो = 'स्पाइडरमैन', 'बैटमैन', 'आयरन मैन'
         {print} सुपरहीरो {at} {random}
 13:
--   name: "{and}"
-    explanation: "दो भाग दोनों सही होने चाहिए"
+-   name: '{and}'
+    explanation: दो भाग दोनों सही होने चाहिए
     demo_code: |-
         उत्तर1 = {ask} '3+2 क्या है?'
         उत्तर2 = {ask} '2+2 क्या है?'
@@ -237,8 +241,8 @@
             {print} 'दोनों उत्तर सही हैं!'
         else
             {print} 'कम से कम एक उत्तर गलत है!'
--   name: "{or}"
-    explanation: "दो भागों में से कम से कम 1 का सही होना आवश्यक है। अगर दोनों सही हैं, तो भी ठीक है।"
+-   name: '{or}'
+    explanation: दो भागों में से कम से कम 1 का सही होना आवश्यक है। अगर दोनों सही हैं, तो भी ठीक है।
     demo_code: |-
         उत्तर1 = {ask} '3+2 क्या है?'
         उत्तर2 = {ask} '2+2 क्या है?'
@@ -247,8 +251,8 @@
         else
             {print} 'दोनों उत्तर गलत हैं!'
 14:
--   name: "छोटा"
-    explanation: "हम `<` का उपयोग यह जांचने के लिए करते हैं कि पहली संख्या दूसरी संख्या से छोटी है या नहीं।"
+-   name: छोटा
+    explanation: हम `<` का उपयोग यह जांचने के लिए करते हैं कि पहली संख्या दूसरी संख्या से छोटी है या नहीं।
     demo_code: |-
         उम्र = {ask} 'आप कितने साल के हैं?'
         {if} उम्र <13
@@ -284,15 +288,15 @@
         {if} उम्र>= 14
             {print} 'आप मुझसे बड़े हो!'
 15:
--   name: "{while}"
-    explanation: "हम `{while}` लूप का उपयोग नहीं के बराबर कर सकते हैं"
+-   name: '{while}'
+    explanation: हम `{while}` लूप का उपयोग नहीं के बराबर कर सकते हैं
     demo_code: |-
         उत्तर = 0
         {while} उत्तर!= 25
             उत्तर = {ask} '5 गुना 5 क्या है?'
         {print} 'एक सही उत्तर दिया गया है'
--   name: "छोटा {while}"
-    explanation: "हम `{while}` लूप का उपयोग `<` और `>` के साथ भी कर सकते हैं।"
+-   name: छोटा {while}
+    explanation: हम `{while}` लूप का उपयोग `<` और `>` के साथ भी कर सकते हैं।
     demo_code: |-
         गिनती = 1
         {while} गिनती <3
@@ -300,8 +304,8 @@
             गिनती = गिनती + 1
         {print} 'हम कर चुके हैं'
 16:
--   name: "वर्ग कोष्ठक"
-    explanation: "वर्गाकार कोष्ठकों के साथ सूचियाँ"
+-   name: वर्ग कोष्ठक
+    explanation: वर्गाकार कोष्ठकों के साथ सूचियाँ
     demo_code: |-
         फल = ['सेब', 'केला', 'चेरी']
         {print} फल
@@ -318,8 +322,8 @@
         अनियमित_फल = फल[random]
         {print} अनियमित_फल
 17:
--   name: "{elif}"
-    explanation: "`{elif}`|"
+-   name: '{elif}'
+    explanation: '`{elif}`|'
     demo_code: |-
         अ = 2
         {if} अ == 1:
@@ -343,18 +347,21 @@
         {else}:
             {print} 'आपका पसंदीदा रंग हरा नहीं है'
 18:
--   name: "{print}"
-    explanation: "With `{print}` you need to use parentheses"
-    demo_code: |-
-        {print}('hi!')
--   name: "{print} with var"
-    explanation: "With `{print}` you need to use parentheses and commas if you {print} more items"
+-   name: '{print}'
+    explanation: With `{print}` you need to use parentheses
+    demo_code: '{print}(''hi!'')'
+-   name: '{print} with var'
+    explanation: With `{print}` you need to use parentheses and commas if you {print} more items
     demo_code: |-
         name = 'Hedy'
         {print}('my name is ', name)
 -   name: '{print} with var'
     explanation: With `{print}` you need to use parentheses and commas if you {print} more items
-    demo_code: "name = 'Hedy'\n{print}('my name is ', name)"
+    demo_code: |-
+        name = 'Hedy'
+        {print}('my name is ', name)
 -   name: ask something with {input}
     explanation: Use `{input}` instead of `{ask}` to ask something
-    demo_code: "name = {input}('What is your name?')\n{print}('So your name is ', name)"
+    demo_code: |-
+        name = {input}('What is your name?')
+        {print}('So your name is ', name)

@@ -1,7 +1,6 @@
 import { initializeSyntaxHighlighter } from './syntaxModesRules';
 import { ClientMessages } from './client-messages';
 import { modal, error, success, tryCatchPopup } from './modal';
-import { Markers } from './markers';
 import JSZip from "jszip";
 import { Tabs } from './tabs';
 import { MessageKey } from './message-translations';
@@ -10,25 +9,33 @@ import { Achievement, Adventure, isServerSaveInfo, ServerSaveInfo } from './type
 import { startIntroTutorial } from './tutorials/tutorial';
 import { loadParsonsExercise } from './parsons';
 import { checkNow, onElementBecomesVisible } from './browser-helpers/on-element-becomes-visible';
-import { initializeDebugger, load_variables, returnLinesWithoutBreakpoints, stopDebug } from './debugging';
+import { incrementDebugLine, initializeDebugger, load_variables, startDebug } from './debugging';
 import { localDelete, localLoad, localSave } from './local';
 import { initializeLoginLinks } from './auth';
+
 import { postJson, fetchText } from './comm';
 
-// const MOVE_CURSOR_TO_BEGIN = -1;
-const MOVE_CURSOR_TO_END = 1;
+import { postJson } from './comm';
+import { LocalSaveWarning } from './local-save-warning';
+import { HedyEditor, EditorType } from './editor';
+import { stopDebug } from "./debugging";
+import { HedyAceEditorCreator } from './ace-editor';
+import { HedyCodeMirrorEditorCreator } from './cm-editor';
+import { initializeTranslation } from './lezer-parsers/tokens';
 
-export let theGlobalEditor: AceAjax.Editor;
-export let theModalEditor: AceAjax.Editor;
-let markers: Markers;
-
+export let theGlobalDebugger: any;
+export let theGlobalEditor: HedyEditor;
+export let theModalEditor: HedyEditor;
+export let theGlobalSourcemap: { [x: string]: any; };
+export const theLocalSaveWarning = new LocalSaveWarning();
+const editorCreator: HedyCodeMirrorEditorCreator = new HedyCodeMirrorEditorCreator();
+const aceEditorCreator: HedyAceEditorCreator = new HedyAceEditorCreator();
 let last_code: string;
 
 /**
  * Used to record and undo pygame-related settings
  */
 let pygameRunning = false;
-
 /**
  * Represents whether there's an open 'ask' prompt
  */
@@ -37,8 +44,10 @@ let askPromptOpen = false;
 // Many bits of code all over this file need this information globally.
 // Not great but it'll do for now until we refactor this file some more.
 let theAdventures: Record<string, Adventure> = {};
-let theLevel: number = 0;
-let theLanguage: string = '';
+export let theLevel: number = 0;
+export let theLanguage: string = '';
+let theKeywordLanguage: string = 'en';
+let theStaticRoot: string = '';
 let currentTab: string;
 let theUserIsLoggedIn: boolean;
 
@@ -112,6 +121,10 @@ const slides_template = `
 export interface InitializeAppOptions {
   readonly level: number;
   readonly keywordLanguage: string;
+  /**
+   * The URL root where static content is hosted
+   */
+  readonly staticRoot?: string;
 }
 
 /**
@@ -119,18 +132,34 @@ export interface InitializeAppOptions {
  */
 export function initializeApp(options: InitializeAppOptions) {
   theLevel = options.level;
+  theKeywordLanguage = options.keywordLanguage;
+  theStaticRoot = options.staticRoot ?? '';
+  // When we are in Alpha or in dev the static root already points to an internal directory
+  theStaticRoot = theStaticRoot === '/' ? '' : theStaticRoot;
   initializeSyntaxHighlighter({
     keywordLanguage: options.keywordLanguage,
   });
-  initializeHighlightedCodeBlocks(options.keywordLanguage);
+  initializeHighlightedCodeBlocks(document.body);
   initializeCopyToClipboard();
 
   // Close the dropdown menu if the user clicks outside of it
   $(document).on("click", function(event){
-      if(!$(event.target).closest(".dropdown").length){
-          $(".dropdown-menu").slideUp("medium");
-          $(".cheatsheet-menu").slideUp("medium");
+    // The following is not needed anymore, but it saves the next for loop if the click is not for dropdown.
+    if (!$(event.target).closest(".dropdown").length) {
+      $(".dropdown-menu").slideUp("medium");
+      $(".cheatsheet-menu").slideUp("medium");
+      return;
+    }
+
+    const allDropdowns = $('.dropdown-menu')
+    for (const dd of allDropdowns) {
+      // find the closest dropdown button (element) that initiated the event
+      const c = $(dd).closest('.dropdown')[0]
+      // if the click event target is not within or close to the container, slide up the dropdown menu
+      if (!$(event.target).closest(c).length) {
+        $(dd).slideUp('fast');
       }
+    }
   });
 
   $("#search_language").on('keyup', function() {
@@ -167,6 +196,9 @@ export interface InitializeCodePageOptions {
  */
 export function initializeCodePage(options: InitializeCodePageOptions) {
   theUserIsLoggedIn = !!options.current_user_name;
+  if (theUserIsLoggedIn) {
+    theLocalSaveWarning.setLoggedIn();
+  }
 
   theAdventures = Object.fromEntries((options.adventures ?? []).map(a => [a.short_name, a]));
 
@@ -177,14 +209,29 @@ export function initializeCodePage(options: InitializeCodePageOptions) {
   theLanguage = options.lang;
 
   // *** EDITOR SETUP ***
-  initializeMainEditor($('#editor'));
+  const $editor = $('#editor');
+  if ($editor.length) {
+    const dir = $("body").attr("dir");
+    theGlobalEditor = editorCreator.initializeEditorWithGutter($editor, EditorType.MAIN, dir);
+    initializeTranslation({keywordLanguage: theKeywordLanguage, level: theLevel});
+    attachMainEditorEvents(theGlobalEditor);
+    error.setEditor(theGlobalEditor);
+    initializeDebugger({
+      editor: theGlobalEditor,
+      level: theLevel,
+      language: theLanguage,
+      keywordLanguage: theKeywordLanguage,
+    });
+  }
 
   const anchor = window.location.hash.substring(1);
+
+  const validAnchor = [...Object.keys(theAdventures), 'parsons', 'quiz'].includes(anchor) ? anchor : undefined;
 
   const tabs = new Tabs({
     // If we're opening an adventure from the beginning (either through a link to /hedy/adventures or through a saved program for an adventure), we click on the relevant tab.
     // We click on `level` to load a program associated with level, if any.
-    initialTab: anchor in theAdventures ? anchor : options.initial_tab,
+    initialTab: validAnchor ?? options.initial_tab,
   });
 
   tabs.on('beforeSwitch', () => {
@@ -198,7 +245,8 @@ export function initializeCodePage(options: InitializeCodePageOptions) {
 
     // Load initial code from local storage, if available
     const programFromLs = localLoad(currentTabLsKey());
-    if (programFromLs && adventure) {
+    // if we are in raw (used in slides) we don't want to load from local storage, we always want to show startcode
+    if (programFromLs && adventure && ($('#turtlecanvas').attr("raw") != 'yes')) {
       adventure.start_code = programFromLs.code;
       adventure.save_name = programFromLs.saveName;
       adventure.save_info = 'local-storage';
@@ -206,6 +254,7 @@ export function initializeCodePage(options: InitializeCodePageOptions) {
 
     reconfigurePageBasedOnTab();
     checkNow();
+    theLocalSaveWarning.switchTab();
   });
 
   initializeSpeech();
@@ -227,79 +276,33 @@ export function initializeCodePage(options: InitializeCodePageOptions) {
   $('#program_name').on('blur', () => saveIfNecessary());
 }
 
-export interface InitializeViewProgramPageOptions {
-  readonly page: 'view-program';
-  readonly level: number;
-  readonly lang: string;
-}
+function attachMainEditorEvents(editor: HedyEditor) {
 
-export function initializeViewProgramPage(options: InitializeViewProgramPageOptions) {
-  theLevel = options.level;
-  theLanguage = options.lang;
+  editor.on('change', () => {
+    theLocalSaveWarning.setProgramLength(theGlobalEditor.contents.split('\n').length);    
+  });
 
-  // We need to enable the main editor for the program page as well
-  initializeMainEditor($('#editor'));
-}
-
-/**
- * Initialize the main editor and attach all the required event handlers
- */
-function initializeMainEditor($editor: JQuery) {
-  if (!$editor.length) return;
-
-  // Set const value to determine the current page direction -> useful for ace editor settings
-  const dir = $("body").attr("dir");
-
-  // We expose the editor globally so it's available to other functions for resizing
-  var editor = turnIntoAceEditor($editor.get(0)!, $editor.data('readonly'), true);
-  theGlobalEditor = editor;
-  theGlobalEditor.setShowPrintMargin(false);
-  theGlobalEditor.renderer.setScrollMargin(0, 0, 0, 20)
-  error.setEditor(editor);
-  markers = new Markers(theGlobalEditor);
-
-  window.Range = ace.require('ace/range').Range // get reference to ace/range
-
-  // Load existing code from session, if it exists
-  const storage = window.sessionStorage;
-  if (storage) {
-    const loadedProgram = $editor.data('loaded-program');
-
-    // On page load, if we have a saved program and we are not loading a program by id, we load the saved program
-    const programFromStorage = storage.getItem(currentTabLsKey());
-    if (loadedProgram !== 'True' && programFromStorage) {
-      editor.setValue(programFromStorage?.trim(), MOVE_CURSOR_TO_END);
+  // If prompt is shown and user enters text in the editor, hide the prompt.
+  editor.on('change', function() {
+    if (askPromptOpen) {
+      stopit();
+      theGlobalEditor.focus(); // Make sure the editor has focus, so we can continue typing
     }
+    if ($('#ask-modal').is(':visible')) $('#inline-modal').hide();
+    askPromptOpen = false;
+    $('#runit').css('background-color', '');
+    theGlobalEditor.clearErrors();
+    theGlobalEditor.clearIncorrectLines();
+    //removing the debugging state when loading in the editor
+    stopDebug();
+  });
 
-    // When the user exits the editor, save what we have.
-    editor.on('blur', function(_e: Event) {
-      storage.setItem(currentTabLsKey(), editor.getValue());
-    });
-
-    if (dir === "rtl") {
-        editor.setOptions({ rtl: true });
-    }
-
-    // If prompt is shown and user enters text in the editor, hide the prompt.
-    editor.on('change', function () {
-      if (askPromptOpen) {
-        stopit();
-        editor.focus(); // Make sure the editor has focus, so we can continue typing
-      }
-      if ($('#ask-modal').is(':visible')) $('#inline-modal').hide();
-      askPromptOpen = false;
-      $ ('#runit').css('background-color', '');
-
-      clearErrors(editor);
-      //removing the debugging state when loading in the editor
-      stopDebug();
-    });
-  }
+  editor.on('click', (event: MouseEvent) => {
+    editor.skipFaultyHandler(event);
+  });
 
   // *** KEYBOARD SHORTCUTS ***
-
   let altPressed: boolean | undefined;
-
   // alt is 18, enter is 13
   window.addEventListener ('keydown', function (ev) {
     const keyCode = ev.keyCode;
@@ -311,14 +314,14 @@ function initializeMainEditor($editor: JQuery) {
       if (!theLevel || !theLanguage) {
         throw new Error('Oh no');
       }
-      runit (theLevel, theLanguage, "", function () {
+      runit (theLevel, theLanguage, "", "run",function () {
         $ ('#output').focus ();
       });
     }
     // We don't use jquery because it doesn't return true for this equality check.
     if (keyCode === 37 && document.activeElement === document.getElementById ('output')) {
-      editor.focus ();
-      editor.navigateFileEnd ();
+      theGlobalEditor.focus();
+      theGlobalEditor.moveCursorToEndOfFile();
     }
   });
   window.addEventListener ('keyup', function (ev) {
@@ -329,96 +332,79 @@ function initializeMainEditor($editor: JQuery) {
       return;
     }
   });
-
-  // *** Debugger ***
-  initializeDebugger({
-    editor: theGlobalEditor,
-    markers,
-    level: theLevel,
-    language: theLanguage,
-  });
-
-  return editor;
 }
 
-function initializeHighlightedCodeBlocks(keywordLanguage: string) {
+export interface InitializeViewProgramPageOptions {
+  readonly page: 'view-program';
+  readonly level: number;
+  readonly lang: string;
+}
+
+export function initializeViewProgramPage(options: InitializeViewProgramPageOptions) {
+  theLevel = options.level;
+  theLanguage = options.lang;
+
+  // We need to enable the main editor for the program page as well
+  const dir = $("body").attr("dir");
+  theGlobalEditor = editorCreator.initializeEditorWithGutter($('#editor'), EditorType.MAIN, dir);
+  attachMainEditorEvents(theGlobalEditor);
+  error.setEditor(theGlobalEditor);
+  initializeDebugger({
+    editor: theGlobalEditor,
+    level: theLevel,
+    language: theLanguage,
+    keywordLanguage: theKeywordLanguage,
+  });
+}
+
+export function initializeHighlightedCodeBlocks(where: Element) {
   const dir = $("body").attr("dir");
 
   // Any code blocks we find inside 'turn-pre-into-ace' get turned into
   // read-only editors (for syntax highlighting)
-  for (const preview of $('.turn-pre-into-ace pre').get()) {
-    $(preview)
-      .addClass('text-lg rounded overflow-x-hidden')
-      // We set the language of the editor to the current keyword_language -> needed when copying to main editor
-      .attr('lang', keywordLanguage);
+  for (const container of $(where).find('.turn-pre-into-ace').get()) {
+    for (const preview of $(container).find('pre').get()) {
+      $(preview)
+        .addClass('text-lg rounded overflow-x-hidden')
+        // We set the language of the editor to the current keyword_language -> needed when copying to main editor
+        .attr('lang', theKeywordLanguage);
 
-    // Only turn into an editor if the editor scrolls into view
-    // Otherwise, the teacher manual Frequent Mistakes page is SUPER SLOW to load.
-    onElementBecomesVisible(preview, () => {
-      const exampleEditor = turnIntoAceEditor(preview, true);
-
-      // Fits to content size
-      exampleEditor.setOptions({ maxLines: Infinity });
-      if ($(preview).hasClass('common-mistakes')) {
-        exampleEditor.setOptions({
-          showGutter: true,
-          showPrintMargin: true,
-          highlightActiveLine: true,
-          minLines: 5,
-        });
-      } else if ($(preview).hasClass('cheatsheet')) {
-        exampleEditor.setOptions({ minLines: 1 });
-      } else if ($(preview).hasClass('parsons')) {
-        exampleEditor.setOptions({
-          minLines: 1,
-          showGutter: false,
-          showPrintMargin: false,
-          highlightActiveLine: false
-        });
-      } else {
-        exampleEditor.setOptions({ minLines: 2 });
-      }
-
-      if (dir === "rtl") {
-          exampleEditor.setOptions({ rtl: true });
-      }
-
-      // Strip trailing newline, it renders better
-      exampleEditor.setValue(exampleEditor.getValue().replace(/\n+$/, ''), -1);
-      // And add an overlay button to the editor, if the no-copy-button attribute isn't there
-      if (! $(preview).hasClass('no-copy-button')) {
-        const buttonContainer = $('<div>').addClass('absolute ltr:-right-1 rtl:left-2 w-16').css({top: 5}).appendTo(preview);
-        let symbol = "⇥";
-        if (dir === "rtl") {
-          symbol = "⇤";
-        }
-        $('<button>').css({ fontFamily: 'sans-serif' }).addClass('yellow-btn').text(symbol).appendTo(buttonContainer).click(function() {
-          if (!theGlobalEditor?.getReadOnly()) {
-            theGlobalEditor?.setValue(exampleEditor.getValue() + '\n', MOVE_CURSOR_TO_END);
+      // Only turn into an editor if the editor scrolls into view
+      // Otherwise, the teacher manual Frequent Mistakes page is SUPER SLOW to load.
+      onElementBecomesVisible(preview, () => {
+        // Create this example editor
+        const exampleEditor = aceEditorCreator.initializeReadOnlyEditor(preview, dir);
+        // Strip trailing newline, it renders better
+        exampleEditor.contents = exampleEditor.contents.trimRight();
+        // And add an overlay button to the editor if requested via a show-copy-button class, either
+        // on the <pre> itself OR on the element that has the '.turn-pre-into-ace' class.
+        if ($(preview).hasClass('show-copy-button') || $(container).hasClass('show-copy-button')) {
+          const buttonContainer = $('<div>').addClass('absolute ltr:-right-1 rtl:left-2 w-16').css({top: 5}).appendTo(preview);
+          let symbol = "⇥";
+          if (dir === "rtl") {
+            symbol = "⇤";
           }
-          update_view("main_editor_keyword_selector", <string>$(preview).attr('lang'));
-          stopit();
-          clearOutput();
-        });
-      }
+          $('<button>').css({ fontFamily: 'sans-serif' }).addClass('yellow-btn').text(symbol).appendTo(buttonContainer).click(function() {
+            if (!theGlobalEditor?.isReadOnly) {
+              theGlobalEditor.contents = exampleEditor.contents + '\n';
+            }
+            update_view("main_editor_keyword_selector", <string>$(preview).attr('lang'));
+            stopit();
+            clearOutput();
+          });
+        }
 
-      const levelStr = $(preview).attr('level');
-      if (levelStr) {
-        exampleEditor.session.setMode(getHighlighter(parseInt(levelStr, 10)));
-      }
-    });
+        const levelStr = $(preview).attr('level');
+        if (levelStr) {
+          exampleEditor.setHighlighterForLevel(parseInt(levelStr, 10));
+        }
+      });
+    }
   }
 }
 
 export function getHighlighter(level: number) {
   return `ace/mode/level${level}`;
-}
-
-function clearErrors(editor: AceAjax.Editor) {
-  // Not sure if we use annotations everywhere, but this was
-  // here already.
-  editor.session.clearAnnotations();
-  markers.clearErrors();
 }
 
 export function stopit() {
@@ -471,7 +457,7 @@ function clearOutput() {
   buttonsDiv.hide();
 }
 
-export async function runit(level: number, lang: string, disabled_prompt: string, cb: () => void) {
+export async function runit(level: number, lang: string, disabled_prompt: string, run_type: "run" | "debug" | "continue", cb: () => void) {
   // Copy 'currentTab' into a variable, so that our event handlers don't mess up
   // if the user changes tabs while we're waiting for a response
   const adventureName = currentTab;
@@ -484,6 +470,8 @@ export async function runit(level: number, lang: string, disabled_prompt: string
     return;
   }
 
+  theLocalSaveWarning.clickRun();
+
   // Make sure to stop previous PyGame event listeners
   if (typeof Sk.unbindPygameListeners === 'function') {
     Sk.unbindPygameListeners();
@@ -493,8 +481,11 @@ export async function runit(level: number, lang: string, disabled_prompt: string
   Sk.execLimit = 1;
   $('#runit').hide();
   $('#stopit').show();
-  $('#saveFiles').hide();
-  clearOutput();
+  $('#saveFilesContainer').hide();
+  
+  if (run_type !== 'continue') {
+    clearOutput();
+  }
 
   try {
     var editor = theGlobalEditor;
@@ -503,7 +494,7 @@ export async function runit(level: number, lang: string, disabled_prompt: string
       code = get_parsons_code();
       // We return no code if all lines are empty or there is a mistake -> clear errors and do nothing
       if (!code) {
-        clearErrors(editor);
+        editor.clearErrors();
         stopit();
         return;
       } else {
@@ -515,70 +506,80 @@ export async function runit(level: number, lang: string, disabled_prompt: string
     } else {
       code = get_active_and_trimmed_code();
       if (code.length == 0) {
-        clearErrors(editor);
+        editor.clearErrors()
         stopit();
         return;
       }
     }
 
-    clearErrors(editor);
+    editor.clearErrors()
     removeBulb();
-    console.log('Original program:\n', code);
+    // console.log('Original program:\n', code);
 
     const adventure = theAdventures[adventureName];
+    let program_data;
 
-    try {
-      cancelPendingAutomaticSave();
-      const response = await postJsonWithAchievements('/parse', {
-        level: `${level}`,
-        code: code,
-        lang: lang,
-        tutorial: $('#code_output').hasClass("z-40"), // if so -> tutorial mode
-        read_aloud : !!$('#speak_dropdown').val(),
-        adventure_name: adventureName,
+    if (run_type === 'run' || run_type === 'debug') {
+      try {
+        cancelPendingAutomaticSave();
+        let data = {
+          level: `${level}`,
+          code: code,
+          lang: lang,
+          skip_faulty: false,
+          is_debug: run_type === 'debug',
+          tutorial: $('#code_output').hasClass("z-40"), // if so -> tutorial mode
+          read_aloud : !!$('#speak_dropdown').val(),
+          adventure_name: adventureName,
+  
+          // Save under an existing id if this field is set
+          program_id: isServerSaveInfo(adventure?.save_info) ? adventure.save_info.id : undefined,
+          save_name: saveNameFromInput(),
+        };
 
-        // Save under an existing id if this field is set
-        program_id: isServerSaveInfo(adventure?.save_info) ? adventure.save_info.id : undefined,
-        save_name: saveNameFromInput(),
-      });
+        let response = await postJsonWithAchievements('/parse', data);
+        
+        program_data = response;
+        console.log('Response', response);
 
-      console.log('Response', response);
-
-      if (response.Warning && $('#editor').is(":visible")) {
-        //storeFixedCode(response, level);
-        error.showWarning(ClientMessages['Transpile_warning'], response.Warning);
-      }
-      showAchievements(response.achievements, false, "");
-      if (adventure && response.save_info) {
-        adventure.save_info = response.save_info;
-        adventure.start_code = code;
-      }
-      if (response.Error) {
-        error.show(ClientMessages['Transpile_error'], response.Error);
-        if (response.Location && response.Location[0] != "?") {
-          //storeFixedCode(response, level);
-          // Location can be either [row, col] or just [row].
-          markers.highlightAceError(response.Location[0], response.Location[1]);
+        showAchievements(response.achievements, false, "");
+        if (adventure && response.save_info) {
+          adventure.save_info = response.save_info;
+          adventure.start_code = code;
         }
-        $('#stopit').hide();
-        $('#runit').show();
-        return;
-      }
-      runPythonProgram(response.Code, response.has_turtle, response.has_pygame, response.has_sleep, response.Warning, cb).catch(function(err) {
-        // The err is null if we don't understand it -> don't show anything
-        if (err != null) {
-          error.show(ClientMessages['Execute_error'], err.message);
-          reportClientError(level, code, err.message);
+
+        if (response.Error) {
+          error.show(ClientMessages['Transpile_error'], response.Error);
+          if (response.Location && response.Location[0] != "?") {
+            //storeFixedCode(response, level);
+            // Location can be either [row, col] or just [row].
+            theGlobalEditor.highlightError(response.Location[0], response.Location[1]);
+          }
+          $('#stopit').hide();
+          $('#runit').show();
+          return;
         }
-      });
-    } catch (e: any) {
-      console.error(e);
-      if (e.internetError) {
-        error.show(ClientMessages['Connection_error'], ClientMessages['CheckInternet']);
-      } else {
-        error.show(ClientMessages['Other_error'], ClientMessages['ServerError']);
+      } catch (e: any) {
+        console.error(e);
+        if (e.internetError) {
+          error.show(ClientMessages['Connection_error'], ClientMessages['CheckInternet']);
+        } else {
+          error.show(ClientMessages['Other_error'], ClientMessages['ServerError']);
+        }
       }
+    } else {
+      program_data = theGlobalDebugger.get_program_data();
     }
+    
+    runPythonProgram(program_data.Code, program_data.source_map, program_data.has_turtle, program_data.has_pygame, program_data.has_sleep, program_data.Warning, cb, run_type).catch(function(err: any) {
+      // The err is null if we don't understand it -> don't show anything
+      if (err != null) {
+        error.show(ClientMessages['Execute_error'], err.message);
+        reportClientError(level, code, err.message);
+      }
+    });
+  
+  
   } catch (e: any) {
     modal.notifyError(e.responseText);
   }
@@ -687,11 +688,11 @@ function removeBulb(){
  * Called when the user clicks the "Try" button in one of the palette buttons
  */
 export function tryPaletteCode(exampleCode: string) {
-  if (theGlobalEditor?.getReadOnly()) {
+  if (theGlobalEditor?.isReadOnly) {
     return;
   }
 
-  theGlobalEditor.setValue(exampleCode + '\n', MOVE_CURSOR_TO_END);
+  theGlobalEditor.contents = exampleCode + '\n';
   //As the commands try-it buttons only contain english code -> make sure the selected language is english
   if (!($('#editor').attr('lang') == 'en')) {
       $('#editor').attr('lang', 'en');
@@ -823,24 +824,43 @@ window.onerror = function reportClientException(message, source, line_number, co
   });
 }
 
-export function runPythonProgram(this: any, code: string, hasTurtle: boolean, hasPygame: boolean, hasSleep: boolean, hasWarnings: boolean, cb: () => void) {
+export function runPythonProgram(this: any, code: string, sourceMap: any, hasTurtle: boolean, hasPygame: boolean, hasSleep: boolean, hasWarnings: boolean, cb: () => void, run_type: "run" | "debug" | "continue") {
   // If we are in the Parsons problem -> use a different output
   let outputDiv = $('#output');
+  let skip_faulty_found_errors = false;
+  let warning_box_shown = false;
 
-  //Saving the variable button because sk will overwrite the output div
-  const variableButton = outputDiv.find('#variable_button');
-  const variables = outputDiv.find('#variables');
-  outputDiv.empty();
-  outputDiv.append(variableButton);
-  outputDiv.append(variables);
+  if (sourceMap){
+    theGlobalSourcemap = sourceMap;
+    // We loop through the mappings and underline a mapping if it contains an error
+    for (const index in sourceMap) {
+      const map = sourceMap[index];
 
-  const storage = window.localStorage;
+      const range = {
+        startLine: map.hedy_range.from_line,
+        startColumn: map.hedy_range.from_column,
+        endLine: map.hedy_range.to_line,
+        endColumn: map.hedy_range.to_column
+      }
+
+      if (map.error != null) {
+        skip_faulty_found_errors = true;
+        theGlobalEditor.setIncorrectLine(range, Number(index));
+      }
+
+      // Only show the warning box for the first error shown
+      if (skip_faulty_found_errors && !warning_box_shown) {
+        error.showFadingWarning(ClientMessages['Execute_error'], ClientMessages['Errors_found']);
+        warning_box_shown = true;
+      }
+    }
+  }
+
   let skulptExternalLibraries:{[index: string]:any} = {
       './extensions.js': {
-        path: "/vendor/skulpt-stdlib-extensions.js",
+        path: theStaticRoot + "/vendor/skulpt-stdlib-extensions.js",
       },
   };
-  let debug = storage.getItem("debugLine");
 
   Sk.pre = "output";
   const turtleConfig = (Sk.TurtleGraphics || (Sk.TurtleGraphics = {}));
@@ -849,7 +869,11 @@ export function runPythonProgram(this: any, code: string, hasTurtle: boolean, ha
   if ($('#adventures-tab').is(":hidden")) {
       turtleConfig.height = 600;
       turtleConfig.worldHeight = 600;
-  } else {
+  } else if ($('#turtlecanvas').attr("raw") == 'yes'){
+      turtleConfig.height = 150;
+      turtleConfig.worldHeight = 250;
+  }
+  else {
       turtleConfig.height = 300;
       turtleConfig.worldHeight = 300;
   }
@@ -873,46 +897,46 @@ export function runPythonProgram(this: any, code: string, hasTurtle: boolean, ha
   if (hasPygame){
     skulptExternalLibraries = {
       './extensions.js': {
-        path: "/vendor/skulpt-stdlib-extensions.js",
+        path: theStaticRoot + "/vendor/skulpt-stdlib-extensions.js",
       },
       './pygame.js': {
-        path: "/vendor/pygame_4_skulpt/init.js",
+        path: theStaticRoot + "/vendor/pygame_4_skulpt/init.js",
       },
       './display.js': {
-        path: "/vendor/pygame_4_skulpt/display.js",
+        path: theStaticRoot + "/vendor/pygame_4_skulpt/display.js",
       },
       './draw.js': {
-        path: "/vendor/pygame_4_skulpt/draw.js",
+        path: theStaticRoot + "/vendor/pygame_4_skulpt/draw.js",
       },
       './event.js': {
-        path: "/vendor/pygame_4_skulpt/event.js",
+        path: theStaticRoot + "/vendor/pygame_4_skulpt/event.js",
       },
       './font.js': {
-        path: "/vendor/pygame_4_skulpt/font.js",
+        path: theStaticRoot + "/vendor/pygame_4_skulpt/font.js",
       },
       './image.js': {
-        path: "/vendor/pygame_4_skulpt/image.js",
+        path: theStaticRoot + "/vendor/pygame_4_skulpt/image.js",
       },
       './key.js': {
-        path: "/vendor/pygame_4_skulpt/key.js",
+        path: theStaticRoot + "/vendor/pygame_4_skulpt/key.js",
       },
       './mouse.js': {
-        path: "/vendor/pygame_4_skulpt/mouse.js",
+        path: theStaticRoot + "/vendor/pygame_4_skulpt/mouse.js",
       },
       './transform.js': {
-        path: "/vendor/pygame_4_skulpt/transform.js",
+        path: theStaticRoot + "/vendor/pygame_4_skulpt/transform.js",
       },
       './locals.js': {
-        path: "/vendor/pygame_4_skulpt/locals.js",
+        path: theStaticRoot + "/vendor/pygame_4_skulpt/locals.js",
       },
       './time.js': {
-        path: "/vendor/pygame_4_skulpt/time.js",
+        path: theStaticRoot + "/vendor/pygame_4_skulpt/time.js",
       },
       './version.js': {
-        path: "/vendor/pygame_4_skulpt/version.js",
+        path: theStaticRoot + "/vendor/pygame_4_skulpt/version.js",
       },
       './buttons.js': {
-          path: "/js/buttons.js",
+          path: theStaticRoot + "/js/buttons.js",
       },
     };
 
@@ -939,7 +963,7 @@ export function runPythonProgram(this: any, code: string, hasTurtle: boolean, ha
       pygameModal.removeClass('bottom-0');
       pygameModal.removeClass('w-full');
     }
-    
+
     document.onkeydown = animateKeys;
     pygameRunning = true;
   }
@@ -947,91 +971,176 @@ export function runPythonProgram(this: any, code: string, hasTurtle: boolean, ha
   code = code_prefix + code;
   if (hasPygame) code += pygame_suffix;
 
-  Sk.configure({
-    output: outf,
-    read: builtinRead,
-    inputfun: inputFromInlineModal,
-    inputfunTakesPrompt: true,
-    setTimeout: timeout,
-    __future__: Sk.python3,
-    timeoutMsg: function () {
-      // If the timeout is 1 this is due to us stopping the program: don't show "too long" warning
+  if (run_type === "run") {
+    Sk.configure({
+      output: outf,
+      read: builtinRead,
+      inputfun: inputFromInlineModal,
+      inputfunTakesPrompt: true,
+      setTimeout: timeout,
+      __future__: Sk.python3,
+      timeoutMsg: function () {
+        // If the timeout is 1 this is due to us stopping the program: don't show "too long" warning
+        $('#stopit').hide();
+        $('#runit').show();
+        if (Sk.execLimit != 1) {
+          pushAchievement("hedy_hacking");
+          return ClientMessages ['Program_too_long'];
+        } else {
+          return null;
+        }
+      },
+      // We want to make the timeout function a bit more sophisticated that simply setting a value
+      // In levels 1-6 users are unable to create loops and programs with a lot of lines are caught server-sided
+      // So: a very large limit in these levels, keep the limit on other onces.
+      execLimit: (function () {
+        const level = theLevel;
+        if (hasTurtle || hasPygame) {
+          // We don't want a timeout when using the turtle or pygame -> just set one for 10 minutes
+          return (6000000);
+        }
+        if (level < 7) {
+          // Also on a level < 7 (as we don't support loops yet), a timeout is redundant -> just set one for 5 minutes
+          return (3000000);
+        }
+        // Set a time-out of either 20 seconds when having a sleep and 5 seconds when not
+        return ((hasSleep) ? 20000 : 5000);
+      }) ()
+    });
+    
+    (Sk as any).builtins.load_url = new Sk.builtin.func((url_text:any) => {
+      const ret = fetchText(url_text);
+      return new Sk.misceval.promiseToSuspension(ret.then(Sk.ffi.remapToPy));
+    });
+  
+    return Sk.misceval.asyncToPromise(() =>
+      Sk.importMainWithBody("<stdin>", false, code, true), {
+        "*": () => {
+          // We don't do anything here...
+        }
+      }
+     ).then(function(_mod) {
+      console.log('Program executed');
+      const pythonVariables = Sk.globals;
+      load_variables(pythonVariables);
       $('#stopit').hide();
       $('#runit').show();
-      if (Sk.execLimit != 1) {
-        pushAchievement("hedy_hacking");
-        return ClientMessages ['Program_too_long'];
-      } else {
-        return null;
+  
+      if (hasPygame) {
+        document.onkeydown = null;
+        $('#pygame-modal').hide();
       }
-    },
-    // We want to make the timeout function a bit more sophisticated that simply setting a value
-    // In levels 1-6 users are unable to create loops and programs with a lot of lines are caught server-sided
-    // So: a very large limit in these levels, keep the limit on other onces.
-    execLimit: (function () {
-      const level = theLevel;
-      if (hasTurtle || hasPygame) {
-        // We don't want a timeout when using the turtle or pygame -> just set one for 10 minutes
-        return (6000000);
+  
+      if (hasTurtle) {
+        $('#saveFilesContainer').show();
       }
-      if (level < 7) {
-        // Also on a level < 7 (as we don't support loops yet), a timeout is redundant -> just set one for 5 minutes
-        return (3000000);
-      }
-      // Set a time-out of either 20 seconds when having a sleep and 5 seconds when not
-      return ((hasSleep) ? 20000 : 5000);
-    }) ()
-  });
-
-  (Sk as any).builtins.load_url = new Sk.builtin.func((url_text:any) => {
-    const ret = fetchText(url_text);
-    return new Sk.misceval.promiseToSuspension(ret.then(Sk.ffi.remapToPy));
-  });
-
-  return Sk.misceval.asyncToPromise(() =>
-    Sk.importMainWithBody("<stdin>", false, code, true), {
-      "*": () => {
-        // We don't do anything here...
-      }
-    }
-   ).then(function(_mod) {
-    console.log('Program executed');
-    const pythonVariables = Sk.globals;
-    load_variables(pythonVariables);
-    $('#stopit').hide();
-    $('#runit').show();
-
-    if (hasPygame) {
-      document.onkeydown = null;
-      $('#pygame-modal').hide();
-    }
-
-    if (hasTurtle) {
-      $('#saveFiles').show();
-    }
-
-    // Check if the program was correct but the output window is empty: Return a warning
-    if ($('#output').is(':empty') && $('#turtlecanvas').is(':empty')) {
-      if(!debug){
+  
+      // Check if the program was correct but the output window is empty: Return a warning
+      if ($('#output').is(':empty') && $('#turtlecanvas').is(':empty')) {
         pushAchievement("error_or_empty");
-        error.showWarning(ClientMessages['Transpile_warning'], ClientMessages['Empty_output']);
+        error.showWarning(ClientMessages['Transpile_warning'], ClientMessages['Empty_output']);        
+        return;
       }
-      return;
+
+      if (!hasWarnings && code !== last_code) {
+          showSuccesMessage();
+          last_code = code;
+      }
+      if (cb) cb ();
+      
+    }).catch(function(err) {
+      const errorMessage = errorMessageFromSkulptError(err) || null;
+      if (!errorMessage) {
+        throw null;
+      }
+      throw new Error(errorMessage);
+    });
+    
+  } else if (run_type === "debug") {
+    
+    theGlobalDebugger = new Sk.Debugger('<stdin>', incrementDebugLine, stopDebug);
+    theGlobalSourcemap = sourceMap;
+    
+    Sk.configure({
+      output: outf,
+      read: builtinRead,
+      inputfun: inputFromInlineModal,
+      inputfunTakesPrompt: true,
+      __future__: Sk.python3,
+      debugging: true,
+      breakpoints: theGlobalDebugger.check_breakpoints.bind(theGlobalDebugger),      
+      execLimit: null
+    });
+
+    let lines = code.split('\n');
+    for (let i = 0; i < lines.length; i++) {
+      // lines with dummy variable name are not meant to be shown to the user, skip them.
+      if (lines[i].includes("# __BREAKPOINT__") && !lines[i].includes('x__x__x__x')) {
+        // breakpoints are 1-indexed
+        theGlobalDebugger.add_breakpoint('<stdin>.py', i + 1, '0', false);
+      }
     }
-    if (!hasWarnings && code !== last_code && !debug) {
-        showSuccesMessage();
+
+    // Do not show success message if we found errors that we skipped
+    if (!hasWarnings && code !== last_code && !skip_faulty_found_errors) {
         last_code = code;
     }
-    if (cb) cb ();
-  }).catch(function(err) {
 
+    theGlobalDebugger.set_code_starting_line(code_prefix.split('\n').length - 1);
+    theGlobalDebugger.set_code_lines(code.split('\n'));
+    theGlobalDebugger.set_program_data({
+      Code: code,
+      source_map: sourceMap,
+      has_turtle: hasTurtle,
+      has_pygame: hasPygame,
+      Warning: hasWarnings
+    });
+    
+    startDebug();
 
-    const errorMessage = errorMessageFromSkulptError(err) || null;
-    if (!errorMessage) {
-      throw null;
-    }
-    throw new Error(errorMessage);
-  });
+    return theGlobalDebugger.startDebugger(
+      () => Sk.importMainWithBody("<stdin>", false, code, true),
+      theGlobalDebugger
+    ).then( 
+      function () {
+        console.log('Program executed');
+  
+        $('#stopit').hide();
+        $('#runit').show();
+        
+        stopDebug();
+        
+        if (hasPygame) {        
+          document.onkeydown = null;
+          $('#pygame-modal').hide();
+        }
+    
+        if (hasTurtle) {
+          $('#saveFilesContainer').show();
+        }
+        
+        if (cb) cb ();
+      }
+    ).catch(function(err: any) {
+      const errorMessage = errorMessageFromSkulptError(err) || null;
+      if (!errorMessage) {
+        throw null;
+      }
+      throw new Error(errorMessage);      
+    });
+
+  } else {    
+    // maybe remove debug marker here
+    return theGlobalDebugger.continueForward()
+      .catch(function(err: any) {
+        console.error(err)
+        const errorMessage = errorMessageFromSkulptError(err) || null;
+        if (!errorMessage) {
+          throw null;
+        }
+        throw new Error(errorMessage);
+    });
+  }
 
   /**
    * Get the error messages from a Skulpt error
@@ -1049,7 +1158,7 @@ export function runPythonProgram(this: any, code: string, hasTurtle: boolean, ha
 
   function addToOutput(text: string, color: string) {
     $('<span>').text(text).css({ color }).appendTo(outputDiv);
-    outputDiv.scrollTop(outputDiv.prop('scrollHeight'));
+    scrollOutputToBottom();
   }
 
   // output functions are configurable.  This one just appends some text
@@ -1146,6 +1255,9 @@ export function runPythonProgram(this: any, code: string, hasTurtle: boolean, ha
           return false;
         });
         $('#ask-modal').show();
+
+        // Scroll the output div to the bottom so you can see the question
+        scrollOutputToBottom();
       });
     } else {
       return new Promise(function (ok) {
@@ -1383,18 +1495,10 @@ function get_parsons_code() {
 }
 
 export function get_active_and_trimmed_code() {
-
-  try {
-    // This module may or may not exist, so let's be extra careful here.
-    const whitespace = ace.require("ace/ext/whitespace");
-    whitespace.trimTrailingSpace(theGlobalEditor.session, true);
-  } catch (e) {
-    console.error(e);
-  }
-
-  const code = returnLinesWithoutBreakpoints(theGlobalEditor);
-
-  return code;
+  theGlobalEditor.trimTrailingSpace();
+  const storage = window.localStorage;
+  const debugLine = storage.getItem("debugLine");
+  return theGlobalEditor.getActiveContents(debugLine);
 }
 
 export function confetti_cannon(){
@@ -1436,15 +1540,21 @@ function getConfettiForAdventure(adventure: MessageKey){
   return [['🌈'], ['⚡️'], ['💥'], ['✨'], ['💫']];
 }
 
-export function ScrollOutputToBottom(){
-$("#output").animate({ scrollTop: $(document).height() }, "slow");
-  return false;
+/**
+ * Scroll the output to bottom immediately
+ */
+function scrollOutputToBottom() {
+  const outputDiv = $('#output');
+  outputDiv.scrollTop(outputDiv.prop('scrollHeight'));
 }
 
 export function modalStepOne(level: number){
   createModal(level);
-  let modal_editor = $('#modal-editor');
-  initializeModalEditor(modal_editor);
+  let $modalEditor = $('#modal-editor');
+  if ($modalEditor.length) {
+    const dir = $("body").attr("dir");
+    theModalEditor = editorCreator.initializeEditorWithGutter($modalEditor, EditorType.MODAL, dir);
+  }
 }
 
 function showSuccesMessage(){
@@ -1458,106 +1568,6 @@ function createModal(level:number ){
   let editor = "<div id='modal-editor' class=\"w-full flex-1 text-lg rounded\" style='height:200px; width:50vw;'></div>".replace("{level}", level.toString());
   let title = ClientMessages['Program_repair'];
   modal.repair(editor, 0, title);
-}
-
-/**
- * Turn an HTML element into an Ace editor
- */
-export function turnIntoAceEditor(element: HTMLElement, isReadOnly: boolean, isMainEditor = false): AceAjax.Editor {
-  const editor = ace.edit(element);
-  editor.setTheme("ace/theme/monokai");
-  if (isReadOnly) {
-    // Remove the cursor
-    editor.renderer.$cursorLayer.element.style.display = "none";
-    editor.setOptions({
-      readOnly: true,
-      showGutter: false,
-      showPrintMargin: false,
-      highlightActiveLine: false
-    });
-    // A bit of margin looks better
-    editor.renderer.setScrollMargin(3, 3, 10, 20)
-
-    // When it is the main editor -> we want to show line numbers!
-    if (isMainEditor) {
-      editor.setOptions({
-        showGutter: true
-      });
-    }
-  }
-
-  // Everything turns into 'ace/mode/levelX', except what's in
-  // this table. Yes the numbers are strings. That's just JavaScript for you.
-  if (theLevel) {
-    const mode = getHighlighter(theLevel);
-    editor.session.setMode(mode);
-  }
-
-  return editor;
-}
-
-function initializeModalEditor($editor: JQuery) {
-  if (!$editor.length) return;
-  // We expose the editor globally so it's available to other functions for resizing
-  let editor = turnIntoAceEditor($editor.get(0)!, true);
-  theModalEditor = editor;
-  error.setEditor(editor);
-
-  window.Range = ace.require('ace/range').Range // get reference to ace/range
-
-  // Load existing code from session, if it exists
-  const storage = window.sessionStorage;
-  if (storage) {
-      let tempIndex = 0;
-      let resultString = "";
-
-      if(storage.getItem('fixed_{lvl}'.replace("{lvl}", currentTabLsKey()))){
-        resultString = storage.getItem('fixed_{lvl}'.replace("{lvl}", currentTabLsKey()))?? "";
-        let tempString = ""
-        for (let i = 0; i < resultString.length + 1; i++) {
-          setTimeout(function() {
-            editor.setValue(tempString,tempIndex);
-            tempString += resultString[tempIndex];
-            tempIndex++;
-          }, 150 * i);
-        }
-      }
-      else{
-        resultString = storage.getItem('warning_{lvl}'.replace("{lvl}", currentTabLsKey()))?? "";
-        editor.setValue(resultString);
-      }
-  }
-
-  // *** KEYBOARD SHORTCUTS ***
-
-  let altPressed: boolean | undefined;
-
-  // alt is 18, enter is 13
-  window.addEventListener ('keydown', function (ev) {
-    const keyCode = ev.keyCode;
-    if (keyCode === 18) {
-      altPressed = true;
-      return;
-    }
-    if (keyCode === 13 && altPressed) {
-      runit (theLevel, theLanguage, "", function () {
-        $ ('#output').focus ();
-      });
-    }
-    // We don't use jquery because it doesn't return true for this equality check.
-    if (keyCode === 37 && document.activeElement === document.getElementById ('output')) {
-      editor.focus ();
-      editor.navigateFileEnd ();
-    }
-  });
-  window.addEventListener ('keyup', function (ev) {
-    const keyCode = ev.keyCode;
-    if (keyCode === 18) {
-      altPressed = false;
-      return;
-    }
-  });
-  return editor;
 }
 
 export function toggle_developers_mode(enforced: boolean) {
@@ -1574,16 +1584,22 @@ export function toggle_developers_mode(enforced: boolean) {
     $('#editor-area').removeClass('mt-5');
     $('#code_editor').css('height', 36 + "em");
     $('#code_output').css('height', 36 + "em");
-    theGlobalEditor.resize();
+    theGlobalEditor.resize(576);
   } else {
     $('#editor-area').addClass('mt-5');
     $('#code_editor').height('22rem');
     $('#code_output').height('22rem');
+    theGlobalEditor.resize(352);
   }
 }
 
 export function toggle_keyword_language(lang: string) {
-  window.open('?keyword_language=' + lang, "_self");
+  const hash = window.location.hash;
+  const queryString = window.location.search;
+  const urlParams = new URLSearchParams(queryString);
+  urlParams.set('keyword_language', lang)
+  window.location.search = urlParams.toString()
+  window.open(hash, "_self");
 }
 
 export function toggle_blur_code() {
@@ -1606,15 +1622,25 @@ export async function change_language(lang: string) {
   await tryCatchPopup(async () => {
     const response = await postJsonWithAchievements('/change_language', { lang });
     if (response.succes) {
-      // Check if keyword_language is set to change it to English
       const queryString = window.location.search;
       const urlParams = new URLSearchParams(queryString);
       if (urlParams.get('keyword_language') !== null) {
         urlParams.set('keyword_language', 'en');
+      }
+      if (urlParams.get("language") !== null) {
+        urlParams.set("language", lang)
         window.location.search = urlParams.toString();
       } else {
         location.reload();
       }
+      // What's the logic behind this? what happens the keyword_language=en and we want to change the language to arabic? params? 
+      // Check if keyword_language is set to change it to English
+      // if (urlParams.get('keyword_language') !== null) {
+      //   urlParams.set('keyword_language', 'en');
+      //   window.location.search = urlParams.toString();
+      // } else {
+      //   location.reload();
+      // }
     }
   });
 }
@@ -1633,14 +1659,14 @@ async function postJsonWithAchievements(url: string, data: any): Promise<any> {
 export function change_keyword_language(start_lang: string, new_lang: string) {
   tryCatchPopup(async () => {
     const response = await postJsonWithAchievements('/translate_keywords', {
-      code: ace.edit('editor').getValue(),
+      code: theGlobalEditor.contents,
       start_lang: start_lang,
       goal_lang: new_lang,
       level: theLevel,
     });
 
     if (response.success) {
-      ace.edit('editor').setValue(response.code, MOVE_CURSOR_TO_END);
+      theGlobalEditor.contents = response.code;
       $('#editor').attr('lang', new_lang);
       update_view('main_editor_keyword_selector', new_lang);
     }
@@ -1793,7 +1819,7 @@ function resetWindow() {
   output.append(variable_button);
   output.append(variables);
   theGlobalEditor?.clearSelection();
-  theGlobalEditor?.session.clearBreakpoints();
+  theGlobalEditor?.clearBreakpoints();
 }
 
 /**
@@ -1813,7 +1839,7 @@ function updatePageElements() {
   $('#editor').toggle(isCodeTab);
   $('#debug_container').toggle(isCodeTab);
   $('#program_name_container').toggle(isCodeTab);
-  theGlobalEditor.setReadOnly(false);
+  theGlobalEditor.isReadOnly = false;
 
   const adventure = theAdventures[currentTab];
   if (adventure) {
@@ -1842,7 +1868,7 @@ function updatePageElements() {
     $('[data-view="if-submitted"]').toggle(isSubmitted);
     $('[data-view="if-not-submitted"]').toggle(!isSubmitted);
 
-    theGlobalEditor.setReadOnly(isSubmitted);
+    theGlobalEditor.isReadOnly = isSubmitted;
   }
 }
 
@@ -1862,7 +1888,7 @@ function reconfigurePageBasedOnTab() {
   const adventure = theAdventures[currentTab];
   if (adventure) {
     $ ('#program_name').val(adventure.save_name);
-    theGlobalEditor?.setValue(adventure.start_code, MOVE_CURSOR_TO_END);
+    theGlobalEditor.contents = adventure.start_code;
   }
 }
 
@@ -1961,19 +1987,26 @@ function programNeedsSaving(adventureName: string) {
   // We need to save if the content changed, OR if we have the opportunity to
   // save a program that was loaded from local storage to the server.
   // (Submitted programs are never saved again).
-  const programChanged = theGlobalEditor.getValue() !== adventure.start_code;
+  const programChanged = theGlobalEditor.contents !== adventure.start_code;
   const nameChanged = $('#program_name').val() !== adventure.save_name;
   const localStorageCanBeSavedToServer = theUserIsLoggedIn && adventure.save_info === 'local-storage';
   const isUnchangeable = isServerSaveInfo(adventure.save_info) ? adventure.save_info.submitted : false;
 
-  return (programChanged || nameChanged || localStorageCanBeSavedToServer) && !isUnchangeable;
+  // Do not autosave the program if the size is very small compared to the previous
+  // save. This protects against accidental `Ctrl-A, hit a key` and everything is gone. Clicking the
+  // "Run" button will always save regardless of size.
+  const wasSavedBefore = adventure.save_info !== undefined;
+  const suspiciouslySmallFraction = 0.5;
+  const programSuspiciouslyShrunk = wasSavedBefore && theGlobalEditor.contents.length < adventure.start_code.length * suspiciouslySmallFraction;
+
+  return (programChanged || nameChanged || localStorageCanBeSavedToServer) && !isUnchangeable && !programSuspiciouslyShrunk;
 }
 
 /**
  * (Re)set a timer to trigger a save in N second
  */
 let saveTimer: number | undefined;
-function triggerAutomaticSave() {
+export function triggerAutomaticSave() {
   const saveSeconds = 20;
   cancelPendingAutomaticSave();
   saveTimer = window.setTimeout(() => saveIfNecessary(), saveSeconds * 1000);
@@ -1995,8 +2028,9 @@ async function saveIfNecessary() {
 
   console.info('Saving program automatically...');
 
-  const code = theGlobalEditor.getValue();
+  const code = theGlobalEditor.contents;
   const saveName = saveNameFromInput();
+
 
   if (theUserIsLoggedIn) {
     const saveInfo = isServerSaveInfo(adventure.save_info) ? adventure.save_info : undefined;
@@ -2025,4 +2059,50 @@ async function saveIfNecessary() {
 
 function currentTabLsKey() {
   return `save-${currentTab}-${theLevel}`;
+}
+
+export async function share_program(id: string, index: number, Public: boolean, prompt: string) {
+  await modal.confirmP(prompt);
+  await tryCatchPopup(async () => {
+    const response = await postJsonWithAchievements('/programs/share', { id, public: Public });
+    showAchievements(response.achievement, true, "");
+    if (Public) {
+      change_shared(true, index);
+    } else {
+      change_shared(false, index);
+    }
+    modal.notifySuccess(response.message);
+  });
+}
+
+function change_shared (shared: boolean, index: number) {
+  // Index is a front-end unique given to each program container and children
+  // This value enables us to remove, hide or show specific element without connecting to the server (again)
+  // When index is -1 we share the program from code page (there is no program container) -> no visual change needed
+  if (index == -1) {
+    return;
+  }
+  if (shared) {
+    $('#non_public_button_container_' + index).hide();
+    $('#public_button_container_' + index).show();
+    $('#favourite_program_container_' + index).show();
+  } else {
+    $('#modal-copy-button').hide();
+    $('#public_button_container_' + index).hide();
+    $('#non_public_button_container_' + index).show();
+    $('#favourite_program_container_' + index).hide();
+
+    // In the theoretical situation that a user unshares their favourite program -> Change UI
+    $('#favourite_program_container_' + index).removeClass('text-yellow-400');
+    $('#favourite_program_container_' + index).addClass('text-white');
+  }
+}
+
+export function goToLevel(level: any) {
+  window.location.hash = '' // the hash will be set to the first adventure.
+  let newPath = window.location.pathname.replace(/\d+/, level);
+  if (!newPath.includes(level)) {
+    newPath = window.location.pathname + `/${level}`
+  } 
+  window.location.pathname = newPath
 }

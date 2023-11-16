@@ -74,7 +74,7 @@ export function destroy(confirmation: string) {
 export function destroy_public(confirmation: string) {
   modal.confirm (confirmation, async () => {
     await postNoResponse('/auth/destroy_public');
-    redirect ('my-profile');
+    location.reload();
   });
 }
 

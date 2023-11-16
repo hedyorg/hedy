@@ -416,3 +416,135 @@ class TestsLevel14(HedyTester):
             max_level=15,
             exception=exceptions.NoIndentationException
         )
+
+    def test_simple_function(self):
+        code = textwrap.dedent("""\
+        define test_function_1
+            int = 1
+            return "Test function " int
+        define test_function_2 with int
+            return "Test function " int
+        define test_function_3 with input
+            if input != 5
+                print "NE5"
+            if input < 5
+                print "LT5"
+            if input <= 5
+                print "LTE5"
+            if input > 5
+                print "GT5"
+            if input >= 5
+                print "GTE5"
+            if input = 5
+                print "E5"
+        print call test_function_1
+        print call test_function_2 with 2
+        m = 3
+        print call test_function_2 with m
+        print call test_function_2 with 4.0
+        print call test_function_2 with "5"
+        print call test_function_2 with 4 * 1.5
+        print ""
+        call test_function_3 with 4
+        print ""
+        call test_function_3 with 5
+        print ""
+        call test_function_3 with 6""")
+
+        expected = textwrap.dedent("""\
+        def test_function_1():
+          _int = 1
+          return f'''Test function {_int}'''
+        def test_function_2(_int):
+          return f'''Test function {_int}'''
+        def test_function_3(_input):
+          if convert_numerals('Latin', _input)!=convert_numerals('Latin', 5):
+            print(f'''NE5''')
+          if convert_numerals('Latin', _input)<convert_numerals('Latin', 5):
+            print(f'''LT5''')
+          if convert_numerals('Latin', _input)<=convert_numerals('Latin', 5):
+            print(f'''LTE5''')
+          if convert_numerals('Latin', _input)>convert_numerals('Latin', 5):
+            print(f'''GT5''')
+          if convert_numerals('Latin', _input)>=convert_numerals('Latin', 5):
+            print(f'''GTE5''')
+          if convert_numerals('Latin', _input) == convert_numerals('Latin', '5'):
+            print(f'''E5''')
+        print(f'''{test_function_1()}''')
+        print(f'''{test_function_2(2)}''')
+        m = 3
+        print(f'''{test_function_2(m)}''')
+        print(f'''{test_function_2(4.0)}''')
+        print(f'''{test_function_2('5')}''')
+        print(f'''{test_function_2(4 * 1.5)}''')
+        print(f'''''')
+        test_function_3(4)
+        print(f'''''')
+        test_function_3(5)
+        print(f'''''')
+        test_function_3(6)""")
+
+        output = textwrap.dedent("""\
+        Test function 1
+        Test function 2
+        Test function 3
+        Test function 4.0
+        Test function 5
+        Test function 6.0
+
+        NE5
+        LT5
+        LTE5
+
+        LTE5
+        GTE5
+        E5
+
+        NE5
+        GT5
+        GTE5""")
+
+        self.multi_level_tester(
+            code=code,
+            expected=expected,
+            output=output,
+            max_level=16
+        )
+
+    def test_source_map(self):
+        code = textwrap.dedent("""\
+        age = ask 'How old are you?'
+        if age < 13
+            print 'You are younger than me!'
+        else
+            print 'You are older than me!'""")
+
+        excepted_code = textwrap.dedent("""\
+        age = input(f'''How old are you?''')
+        try:
+          age = int(age)
+        except ValueError:
+          try:
+            age = float(age)
+          except ValueError:
+            pass
+        if convert_numerals('Latin', age)<convert_numerals('Latin', 13):
+          print(f'''You are younger than me!''')
+        else:
+          print(f'''You are older than me!''')""")
+
+        expected_source_map = {
+            '1/1-1/4': '1/1-1/4',
+            '1/1-1/29': '1/1-8/9',
+            '2/4-2/7': '3/3-3/6',
+            '2/4-2/12': '9/4-9/64',
+            '3/5-3/37': '10/1-10/39',
+            '2/1-3/46': '9/1-10/41',
+            '5/5-5/35': '12/1-12/37',
+            '3/46-5/44': '12/-248-3/3',
+            '2/1-5/44': '9/1-12/39',
+            '1/1-5/45': '1/1-12/39'
+        }
+
+        self.single_level_tester(code, expected=excepted_code)
+        self.source_map_tester(code=code, expected_source_map=expected_source_map)

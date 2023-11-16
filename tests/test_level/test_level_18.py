@@ -3,7 +3,8 @@ import textwrap
 from parameterized import parameterized
 
 import hedy
-from tests.Tester import HedyTester
+from hedy_sourcemap import SourceRange
+from tests.Tester import HedyTester, SkippedMapping
 
 
 class TestsLevel18(HedyTester):
@@ -334,3 +335,24 @@ class TestsLevel18(HedyTester):
             # End of PyGame Event Handler""")
 
         self.single_level_tester(code=code, expected=expected)
+
+    def test_nested_functions(self):
+        code = textwrap.dedent("""\
+        def simple_function():
+            def nested_function():
+                print(1)
+        simple_function()""")
+
+        expected = textwrap.dedent("""\
+        pass
+        simple_function()""")
+
+        skipped_mappings = [
+            SkippedMapping(SourceRange(1, 1, 3, 35), hedy.exceptions.NestedFunctionException),
+        ]
+
+        self.single_level_tester(
+            code=code,
+            expected=expected,
+            skipped_mappings=skipped_mappings,
+        )

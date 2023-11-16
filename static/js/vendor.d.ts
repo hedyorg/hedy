@@ -41,6 +41,7 @@ declare const Sk: {
   insertPyGameEvent: (eventName: string) => null;
   bindPygameListeners(); void;
   unbindPygameListeners(): void;
+  Debugger: any
 }
 
 interface Variable {

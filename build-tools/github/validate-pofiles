@@ -1,0 +1,60 @@
+#!/usr/bin/env python3
+# Check all .po files, and make sure they don't have duplicate msgid's in there.
+# (Perhaps normal and commented out).
+from os import path
+import collections
+import os
+import re
+import sys
+
+
+def scan_pofiles(root):
+    """Return True if there are any problems."""
+    ret = False
+    for dir, _, files in os.walk(root):
+        for file in files:
+            if file.endswith('.po'):
+                fullpath = path.join(dir, file)
+                ret |= scan_file(fullpath)
+    return ret
+
+
+PAT = re.compile('^(?:#~ )?msgid "(.*)"')
+
+
+def scan_file(filename):
+    with open(filename, 'r', encoding='utf-8') as f:
+        lines = f.read().splitlines()
+
+    indexes = collections.defaultdict(list)
+    for i, line in enumerate(lines):
+        m = PAT.match(line)
+        if m:
+            indexes[m.group(1)].append(i)
+
+    morethanonce = [(word, lines) for word, lines in indexes.items() if len(lines) > 1]
+    if len(morethanonce) == 0:
+        return False
+
+    print('-' * 70)
+    print(filename)
+    print('-' * 70)
+
+    for word, linenrs in morethanonce:
+        print(f"The translation of '{word}' occurs {len(linenrs)} times:")
+        print('')
+        for nr in linenrs:
+            print(f'    {nr + 1}: {lines[nr]}')
+            print(f'    {nr + 2}: {lines[nr + 1]}')
+            print('')
+
+    return True
+
+
+if __name__ == '__main__':
+    fail = scan_pofiles(path.join(path.dirname(__file__), '..', '..', 'translations'))
+    if fail:
+        print('Something went wrong with the gettext translation files, some entries were duplicated.')
+        print('See above for the list. Please make sure every msgid occurs only once,')
+        print('not commented out, with the right translation.')
+        sys.exit(1)

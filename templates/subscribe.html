@@ -1,0 +1,58 @@
+{% extends "auth.html" %}
+
+{% block full_width_content %}
+<div class="text-xl flex flex-col">
+    <div class="bg-blue-200 my-16 border-b-8 border-blue-300 py-8">
+        <div class="copy-container">
+            <form class="flex flex-col gap-2"
+            action="https://hedycode.us7.list-manage.com/subscribe/post?u=22a3ce4e09535f82f587a7118&amp;id=57f3b3c090&amp;f_id=0079d1e4f0" method="post"
+            >
+                <h2 class="my-0 text-center">{{_('mailing_title')}}</h2>
+                <div class="signup-container">
+                    <label for="mce-FNAME" class="signup-label">{{_('surname')}}</label>
+                    <input type="text" value="" name="FNAME" class="signup-input" id="mce-FNAME">
+                </div>
+                <div class="signup-container">
+                    <label for="mce-LNAME" class="signup-label">{{_('lastname')}}</label>
+                    <input type="text" value="" name="LNAME" class="signup-input" id="mce-LNAME">
+                </div>
+                <div class="signup-container">
+                    <label for="mce-EMAIL" class="signup-label">{{_('email')}}<span class="asterisk">*</span></label>
+                    <input type="email" value="" name="EMAIL" class="signup-input" id="mce-EMAIL" required>
+                </div>
+                <div class="signup-container">
+                    <label for="mce-EMAIL" class="signup-label">{{_('what_is_your_role')}}</label>
+                    <select name="tags" class="signup-input">
+                      <option value="8226806">{{_('translator')}}</option>
+                      <option value="6998417">{{_('teacher')}}</option>
+                    </select>
+                </div>
+                <div class="signup-container">
+                    <label for="mce-LANG" class="signup-label">{{_('language')}}*</label>
+                    <select data-placeholder="Choose a Language..." name="LANG" class="signup-input" id="mce-LANG" required>
+                        <option value="" disabled selected>-- {{_('select')}} --</option>
+                        {% for language in other_languages() %}
+                        <option value="{{language.lang}}">{{language.sym}}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+                <div class="signup-container">
+                    <div class="response" id="mce-error-response" style="display:none"></div>
+                    <div class="response" id="mce-success-response" style="display:none"></div>
+                </div>    <!-- real people should not fill this in and expect good things - do not remove this or risk form bot signups-->
+                <div style="position: absolute; left: -5000px;" aria-hidden="true"><input type="text" name="b_22a3ce4e09535f82f587a7118_57f3b3c090" tabindex="-1" value=""></div>
+                <div class="flex flex-row items-center justify-center gap-4">
+                    <input type="submit" name="subscribe" id="mc-embedded-subscribe" class="green-btn" value="{{_('subscribe')}}">
+                </div>
+                <div class="text-center text-sm mb-4">
+                    <p class="text-base mt-0">({{_('required_field')}})</p>
+                </div>
+                <div class="text-center">
+                    (<a href="https://us7.campaign-archive.com/home/?u=22a3ce4e09535f82f587a7118&id=57f3b3c090" class="text-black" target="_blank" title="View previous campaigns">{{_('previous_campaigns')}}</a>)
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}
+

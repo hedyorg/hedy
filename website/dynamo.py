@@ -33,11 +33,12 @@ class TableStorage(metaclass=ABCMeta):
 
     # The 'sort_key' argument for query and query_index is used to indicate that one of the keys is a sort_key
     # This is now needed because we can query by index sort key too. Still hacky hacky :).
-    def query(self, table_name, key, sort_key, reverse, limit, pagination_token):
+    def query(self, table_name, key, sort_key, reverse, limit, pagination_token, filter=None):
         ...
 
     def query_index(self, table_name, index_name, keys, sort_key, reverse=False,
-                    limit=None, pagination_token=None, keys_only=None, table_key_names=None):
+                    limit=None, pagination_token=None, keys_only=None, table_key_names=None,
+                    filter=None):
         ...
 
     def put(self, table_name, key, data):
@@ -64,6 +65,64 @@ class TableStorage(metaclass=ABCMeta):
         ...
 
 
+class KeySchema:
+    """The schema of a table key.
+
+    Consists of a partition key and optionally a sort key.
+    """
+
+    def __init__(self, partition_key, sort_key=None):
+        self.partition_key = partition_key
+        self.sort_key = sort_key
+
+        # Both names in an array
+        self.key_names = [self.partition_key] + ([self.sort_key] if self.sort_key else [])
+
+    def matches(self, key):
+        """Whether the given key matches the current schema.
+
+        There must be exactly one value which is the partition key,
+        or exactly two values which are the partition and sort keys.
+        """
+        names = tuple(key.keys())
+        if len(names) == 1:
+            return self.partition_key == names[0]
+        if len(names) == 2:
+            return ((self.partition_key == names[0] and self.sort_key == names[1])
+                    or (self.partition_key == names[1] and self.sort_key == names[0]))
+        return False
+
+    def fully_matches(self, data):
+        """Return whether all keys in are in the data."""
+        return (self.partition_key in data and
+                (not self.sort_key or self.sort_key in data))
+
+    def extract(self, data):
+        ret = {}
+        if self.partition_key not in data:
+            raise ValueError(f"Partition key '{self.partition_key}' missing from data: {data}")
+        ret[self.partition_key] = data[self.partition_key]
+
+        if self.sort_key:
+            if self.sort_key not in data:
+                raise ValueError(f"Sort key '{self.sort_key}' missing from data: {data}")
+            ret[self.sort_key] = data[self.sort_key]
+        return ret
+
+    def to_string(self, opt=False):
+        if self.sort_key and opt:
+            return f'({self.partition_key}[, {self.sort_key}])'
+        if self.sort_key and not opt:
+            return f'({self.partition_key}, {self.sort_key})'
+        return f'({self.partition_key})'
+
+    def __repr__(self):
+        return f'KeySchema({repr(self.partition_key)}, {repr(self.sort_key)})'
+
+    def __str__(self):
+        return self.to_string()
+
+
 class Index:
     """A DynamoDB index.
 
@@ -73,8 +132,7 @@ class Index:
     """
 
     def __init__(self, partition_key: str, sort_key: str = None, index_name: str = None, keys_only: bool = False):
-        self.partition_key = partition_key
-        self.sort_key = sort_key
+        self.key_schema = KeySchema(partition_key, sort_key)
         self.index_name = index_name
         self.keys_only = keys_only
         if not self.index_name:
@@ -162,12 +220,16 @@ class Table:
     """
 
     def __init__(self, storage: TableStorage, table_name, partition_key, sort_key=None, indexes=None):
+        self.key_schema = KeySchema(partition_key, sort_key)
         self.storage = storage
         self.table_name = table_name
-        self.partition_key = partition_key
-        self.sort_key = sort_key
         self.indexes = indexes or []
-        self.key_names = [self.partition_key] + ([self.sort_key] if self.sort_key else [])
+
+        # Check to make sure the indexes have unique partition keys
+        part_names = reverse_index((index.index_name, index.key_schema.partition_key) for index in self.indexes)
+        duped = [names for names in part_names.values() if len(names) > 1]
+        if duped:
+            raise RuntimeError(f'Table {self.table_name}: indexes with the same partition key: {duped}')
 
     @querylog.timed_as("db_get")
     def get(self, key):
@@ -184,7 +246,7 @@ class Table:
             return first_or_none(
                 self.storage.query_index(
                     lookup.table_name, lookup.index_name, lookup.key, sort_key=lookup.sort_key, limit=1,
-                    keys_only=lookup.keys_only, table_key_names=self.key_names,
+                    keys_only=lookup.keys_only, table_key_names=self.key_schema.key_names,
                 )[0]
             )
         assert False
@@ -216,14 +278,14 @@ class Table:
         first_lookup = next(iter(lookups.values()))
 
         resp_dict = self.storage.batch_get_item(
-            first_lookup.table_name, {k: l.key for k, l in lookups.items()}, table_key_names=self.key_names)
+            first_lookup.table_name, {k: l.key for k, l in lookups.items()}, table_key_names=self.key_schema.key_names)
         if input_is_dict:
             return {k: resp_dict.get(k) for k in keys.keys()}
         else:
             return [resp_dict.get(f'k{i}') for i in range(len(keys))]
 
     @querylog.timed_as("db_get_many")
-    def get_many(self, key, reverse=False, limit=None, pagination_token=None):
+    def get_many(self, key, reverse=False, limit=None, pagination_token=None, filter=None):
         """Gets a list of items by key from the database.
 
         The key must be a dict with a single entry which references the
@@ -231,6 +293,10 @@ class Table:
 
         `get_many` reads up to 1MB of data from the database, or a maximum of `limit`
         records, whichever one is hit first.
+
+        After reading, the items can be filtered by passing conditions in 'filter'.
+        Filtering happens after reading, and saves bytes sent over the wire. It is still
+        important to pick a good key to read.
         """
         querylog.log_counter(f"db_get_many:{self.table_name}")
 
@@ -239,10 +305,11 @@ class Table:
             items, next_page_token = self.storage.query(
                 lookup.table_name,
                 lookup.key,
-                sort_key=self.sort_key,
+                sort_key=self.key_schema.sort_key,
                 reverse=reverse,
                 limit=limit,
                 pagination_token=decode_page_token(pagination_token),
+                filter=filter
             )
         elif isinstance(lookup, IndexLookup):
             items, next_page_token = self.storage.query_index(
@@ -254,30 +321,29 @@ class Table:
                 limit=limit,
                 pagination_token=decode_page_token(pagination_token),
                 keys_only=lookup.keys_only,
-                table_key_names=self.key_names,
+                table_key_names=self.key_schema.key_names,
+                filter=filter,
             )
         else:
             assert False
-        querylog.log_counter("db_get_many_items", len(items))
+        querylog.log_counter(f"db_get_many_items:{self.table_name}", len(items))
         return ResultPage(items, encode_page_token(next_page_token))
 
-    def get_all(self, key, reverse=False):
+    def get_all(self, key, reverse=False, batch_size=None):
         """Return an iterator that will iterate over all elements in the table matching the query.
 
         Iterating over all elements can take a long time, make sure you have a timeout in the loop
         somewhere!"""
-        return GetManyIterator(self, key, reverse=reverse)
+        return GetManyIterator(self, key, reverse=reverse, batch_size=batch_size)
 
     @querylog.timed_as("db_create")
     def create(self, data):
         """Put a single complete record into the database."""
-        if self.partition_key not in data:
-            raise ValueError(f"Expecting '{self.partition_key}' field in create() call, got: {data}")
-        if self.sort_key and self.sort_key not in data:
-            raise ValueError(f"Expecting '{self.sort_key}' field in create() call, got: {data}")
+        if not self.key_schema.fully_matches(data):
+            raise ValueError(f"Expecting fields {self.key_schema} in create() call, got: {data}")
 
         querylog.log_counter(f"db_create:{self.table_name}")
-        self.storage.put(self.table_name, self._extract_key(data), data)
+        self.storage.put(self.table_name, self.key_schema.extract(data), data)
         return data
 
     def put(self, data):
@@ -323,7 +389,7 @@ class Table:
         backoff = ExponentialBackoff()
         while to_delete:
             for item in to_delete:
-                key = self._extract_key(item)
+                key = self.key_schema.extract(item)
                 self.delete(key)
             to_delete = self.get_many(key)
             backoff.sleep_when(to_delete)
@@ -346,52 +412,31 @@ class Table:
         if any(not v for v in key_data.values()):
             raise ValueError(f"Key data cannot have empty values: {key_data}")
 
-        keys = set(key_data.keys())
-        table_keys = self._key_names()
-        one_key = list(keys)[0]
-
         # We do a regular table lookup if both the table partition and sort keys occur in the given key.
-        if keys == table_keys:
+        if self.key_schema.matches(key_data):
+            # Sanity check that if we expect to query 1 element, we must pass a sort key if defined
+            if not many and not self.key_schema.fully_matches(key_data):
+                raise RuntimeError(
+                    f"Looking up one value, but missing sort key: {self.key_schema.sort_key} in {key_data}")
+
             return TableLookup(self.table_name, key_data)
 
         # We do an index table lookup if the partition (and possibly the sort key) of an index occur in the given key.
         for index in self.indexes:
-            index_key_names = [x for x in [index.partition_key, index.sort_key] if x is not None]
-            if keys == set(index_key_names) or one_key == index.partition_key:
+            if index.key_schema.matches(key_data):
                 return IndexLookup(self.table_name, index.index_name, key_data,
-                                   index.sort_key, keys_only=index.keys_only)
+                                   index.key_schema.sort_key, keys_only=index.keys_only)
 
-        if len(keys) != 1:
-            raise RuntimeError(f"Getting key data: {key_data}, but expecting: {table_keys}")
-
-        # If the one key matches the partition key, it must be because we also have a
-        # sort key, but that's allowed because we are looking for 'many' records.
-        if one_key == self.partition_key:
-            if not many:
-                raise RuntimeError(f"Looking up one value, but missing sort key: {self.sort_key} in {key_data}")
-            return TableLookup(self.table_name, key_data)
-
-        raise RuntimeError(f"Field not partition key or index: {one_key}")
-
-    def _extract_key(self, data):
-        """
-        Extract the key data out of plain data.
-        """
-        if self.partition_key not in data:
-            raise RuntimeError(f"Partition key '{self.partition_key}' missing from data: {data}")
-        if self.sort_key and self.sort_key not in data:
-            raise RuntimeError(f"Sort key '{self.sort_key}' missing from data: {data}")
-
-        return {k: data[k] for k in self._key_names()}
-
-    def _key_names(self):
-        return set(x for x in [self.partition_key, self.sort_key] if x is not None)
+        schemas = [self.key_schema] + [i.key_schema for i in self.indexes]
+        str_schemas = ', '.join(s.to_string(opt=True) for s in schemas)
+        raise ValueError(
+            f"Table {self.table_name} can be queried using one of {str_schemas}. Got {tuple(key_data.keys())}")
 
     def _validate_key(self, key):
-        if key.keys() != self._key_names():
-            raise RuntimeError(f"key fields incorrect: {key} != {self._key_names()}")
+        if not self.key_schema.fully_matches(key):
+            raise ValueError(f"key fields incorrect: {key} not containing {self.key_schema}")
         if any(not v for v in key.values()):
-            raise RuntimeError(f"key fields cannot be empty: {key}")
+            raise ValueError(f"key fields cannot be empty: {key}")
 
 
 DDB_SERIALIZER = TypeSerializer()
@@ -460,43 +505,65 @@ class AwsDynamoStorage(TableStorage):
 
         return ret
 
-    def query(self, table_name, key, sort_key, reverse, limit, pagination_token):
+    def query(self, table_name, key, sort_key, reverse, limit, pagination_token, filter=None):
         key_expression, attr_values, attr_names = self._prep_query_data(key, sort_key)
+
+        if filter:
+            filter_expression, filter_values, filter_names = self._prep_query_data(filter, is_key_expression=False)
+        else:
+            filter_expression, filter_values, filter_names = None, None, None
+
         result = self.db.query(
             **notnone(
                 TableName=make_table_name(self.db_prefix, table_name),
+                # Key & Filter
                 KeyConditionExpression=key_expression,
-                ExpressionAttributeValues=attr_values,
+                FilterExpression=filter_expression,
+                ExpressionAttributeValues=merge_dicts(attr_values, filter_values),
+                ExpressionAttributeNames=merge_dicts(attr_names, filter_names),
+                # Paging
                 ScanIndexForward=not reverse,
-                ExpressionAttributeNames=attr_names,
                 Limit=limit,
                 ExclusiveStartKey=self._encode(pagination_token) if pagination_token else None,
             )
         )
+
+        if result.get('Count') and result.get('ScannedCount') and filter:
+            querylog.log_counter('dropped_by_filter', int(result['ScannedCount']) - int(result['Count']))
 
         items = [self._decode(x) for x in result.get("Items", [])]
         next_page_token = self._decode(result.get("LastEvaluatedKey", None))
         return items, next_page_token
 
     def query_index(self, table_name, index_name, keys, sort_key, reverse=False, limit=None, pagination_token=None,
-                    keys_only=None, table_key_names=None):
+                    keys_only=None, table_key_names=None, filter=None):
         # keys_only is ignored here -- that's only necessary for the in-memory implementation.
         # In an actual DDB table, that's an attribute of the index itself
 
         key_expression, attr_values, attr_names = self._prep_query_data(keys, sort_key)
+        if filter:
+            filter_expression, filter_values, filter_names = self._prep_query_data(filter, is_key_expression=False)
+        else:
+            filter_expression, filter_values, filter_names = None, None, None
 
         result = self.db.query(
             **notnone(
                 TableName=make_table_name(self.db_prefix, table_name),
                 IndexName=index_name,
+                # Key & Filter
                 KeyConditionExpression=key_expression,
-                ExpressionAttributeValues=attr_values,
+                FilterExpression=filter_expression,
+                ExpressionAttributeValues=merge_dicts(attr_values, filter_values),
+                ExpressionAttributeNames=merge_dicts(attr_names, filter_names),
+                # Paging
                 ScanIndexForward=not reverse,
-                ExpressionAttributeNames=attr_names,
                 Limit=limit,
                 ExclusiveStartKey=self._encode(pagination_token) if pagination_token else None,
             )
         )
+
+        if result.get('Count') and result.get('ScannedCount') and filter:
+            querylog.log_counter('dropped_by_filter', int(result['ScannedCount']) - int(result['Count']))
 
         items = [self._decode(x) for x in result.get("Items", [])]
         next_page_token = (
@@ -504,9 +571,10 @@ class AwsDynamoStorage(TableStorage):
         )
         return items, next_page_token
 
-    def _prep_query_data(self, key, sort_key=None):
+    def _prep_query_data(self, key, sort_key=None, is_key_expression=True):
         eq_conditions, special_conditions = DynamoCondition.partition(key)
-        validate_only_sort_key(special_conditions, sort_key)
+        if is_key_expression:
+            validate_only_sort_key(special_conditions, sort_key)
 
         # We must escape field names with a '#' because Dynamo is unhappy
         # with fields called 'level' etc:
@@ -634,9 +702,14 @@ class MemoryStorage(TableStorage):
         return {k: self.get_item(table_name, key) for k, key in keys_map.items()}
 
     @lock.synchronized
-    def query(self, table_name, key, sort_key, reverse, limit, pagination_token):
+    def query(self, table_name, key, sort_key, reverse, limit, pagination_token, filter=None):
         eq_conditions, special_conditions = DynamoCondition.partition(key)
         validate_only_sort_key(special_conditions, sort_key)
+
+        if filter:
+            filter_eq_conditions, filter_special_conditions = DynamoCondition.partition(filter)
+        else:
+            filter_eq_conditions, filter_special_conditions = {}, {}
 
         records = self.tables.get(table_name, [])
         filtered = [r for r in records if self._query_matches(r, eq_conditions, special_conditions)]
@@ -675,17 +748,26 @@ class MemoryStorage(TableStorage):
             with_keys = with_keys[:limit]
             next_page_key = with_keys[-1][0]
 
-        return copy.copy([record for _, record in with_keys]), next_page_key
+        # Do a final filtering to mimic DynamoDB FilterExpression
+        return copy.copy([record
+                          for _, record in with_keys
+                          if self._query_matches(record, filter_eq_conditions, filter_special_conditions)
+                          ]), next_page_key
 
     # NOTE: on purpose not @synchronized here
     def query_index(self, table_name, index_name, keys, sort_key, reverse=False, limit=None, pagination_token=None,
-                    keys_only=None, table_key_names=None):
+                    keys_only=None, table_key_names=None, query_index=None, filter=None):
         # If keys_only, we project down to the index + table keys
         # In a REAL dynamo table, the index just wouldn't have more data. The in-memory table has everything,
         # so we need to drop some data so programmers don't accidentally rely on it.
 
         records, next_page_token = self.query(
-            table_name, keys, sort_key=sort_key, reverse=reverse, limit=limit, pagination_token=pagination_token
+            table_name, keys,
+            sort_key=sort_key,
+            reverse=reverse,
+            limit=limit,
+            pagination_token=pagination_token,
+            filter=filter,
         )
 
         if not keys_only:
@@ -1024,7 +1106,7 @@ class ExponentialBackoff:
 
     @querylog.timed_as('db:sleep')
     def sleep(self):
-        time.sleep(random.randint(0, self.time))
+        time.sleep(random.random() * self.time)
         self.time *= 2
 
     def sleep_when(self, condition):
@@ -1147,17 +1229,17 @@ class GetManyIterator(QueryIterator):
     Wrapper around query_many that automatically paginates.
     """
 
-    def __init__(self, table, key, reverse=False, limit=None, pagination_token=None):
+    def __init__(self, table, key, reverse=False, batch_size=None, pagination_token=None):
         self.table = table
         self.key = key
         self.reverse = reverse
-        self.limit = limit
+        self.batch_size = batch_size
         super().__init__(pagination_token)
 
     def _do_fetch(self):
         return self.table.get_many(self.key,
                                    reverse=self.reverse,
-                                   limit=self.limit,
+                                   limit=self.batch_size,
                                    pagination_token=self.pagination_token)
 
 
@@ -1174,3 +1256,19 @@ class ScanIterator(QueryIterator):
 
     def _do_fetch(self):
         return self.table.scan(limit=self.limit, pagination_token=self.pagination_token)
+
+
+def merge_dicts(a, b):
+    if not a:
+        return b
+    if not b:
+        return a
+    return dict(**a, **b)
+
+
+def reverse_index(xs):
+    """Transform a list of (key, value) into a dictionary of { value -> [key] }."""
+    ret = collections.defaultdict(list)
+    for key, value in xs:
+        ret[value].append(key)
+    return ret

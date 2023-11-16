@@ -20,6 +20,10 @@ ADDITIONAL_GETTEXT_KEYS = [
     'unsaved_class_changes',
     'teacher_welcome',
     'copy_link_to_share',
+    'customization_deleted',
+    'directly_available',
+    'disabled',
+    'adventures_restored'
 ]
 
 

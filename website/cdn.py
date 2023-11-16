@@ -65,5 +65,6 @@ class Cdn:
         """
         response = self.app.send_static_file(filename)
         response.headers["Access-Control-Allow-Origin"] = "*"
+        response.cache_control.no_cache = None
         response.cache_control.max_age = 24 * 3600  # A day
         return response

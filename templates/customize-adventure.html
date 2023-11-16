@@ -21,19 +21,53 @@
                             {% endfor %}
                         </select>
                     </div>
+
+                    <div class="flex flex-row items-center mb-4">
+                        <label for="language" class="inline-block w-40 text-xl">{{_('language')}}</label>
+                        <select id="language" name="language" required class="block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 ltr:pr-8 rtl:pl-8 rounded">
+                            <option value="{{ adventure['language'] or current_language().lang }}" selected>{{ lang_to_sym(adventure['language'] or current_language().lang) }}</option>
+                            {% for language in other_languages(adventure["language"]) %}
+                                <option value="{{language.lang}}">{{language.sym}}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+
+                    <div class="flex flex-row items-center mb-4">  
+                        <label for="tags" class="inline-block w-40 text-xl">{{_('tags')}}</label>
+                        <div class="flex flex-row w-full">
+                                <input type="text" name="tag" placeholder="{{_('tag_input_placeholder')}}" id="input_adventure_tags"
+                                    _="on keypress if event.keyCode == 13 then event.stopPropagation()" 
+                                    hx-trigger="enter"
+                                    hx-post="/tags/create/{{adventure.id}}" hx-target="#tags-list" hx-swap="outerHTML"
+                                    _="on htmx:afterRequest focus()"
+                                    class="appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 ltr:pr-8 rtl:pl-8 rounded"
+                                    >
+                                <button class="green-btn" id="add_adventure_tags"
+                                    hx-trigger="click"
+                                    hx-post="/tags/create/{{adventure.id}}"
+                                    hx-target="#tags-list"
+                                    hx-swap="outerHTML"
+                                    hx-include="[name='tag']"
+                                    _="on htmx:afterRequest set value of #input_adventure_tags to ''"
+                                    >{{_('add')}}</button>
+                        </div>
+                    </div>
+                    {{ render_partial('htmx-tags-list.html', tags=adventure_tags, adventure_id=adventure.id, creator=adventure.creator) }}
+                    
+
                     <div class="border border-black rounded-lg p-4 text-sm">
                         {{_('adventure_exp_1')}}
                         <div class="flex flex-row my-2 items-center">
-                            <pre class="inline-block w-64">&lt;code&gt;&#123;{{parse_keyword('print')}}&#125;&lt;/code&gt;</pre>
+                            <pre class="code-teacher">&lt;code&gt;&#123;{{parse_keyword('print')}}&#125;&lt;/code&gt;</pre>
                             <b class="mx-4">&rarr;</b>
                             <code class="text-base">{{parse_keyword('print')}}</code>
                         </div>
                         {{_('adventure_exp_2')}}
                         <div class="flex flex-row items-center">
-                            <pre class="inline-block w-64">&lt;pre&gt;<br>&#123;{{parse_keyword('print')}}&#125; {{_('hello_world')}}<br>&lt;/pre&gt;</pre>
+                            <pre class="code-teacher">&lt;pre&gt;<br>&#123;{{parse_keyword('print')}}&#125; {{_('hello_world')}}<br>&lt;/pre&gt;</pre>
                             <b class="mx-4">&rarr;</b>
                             <div class="turn-pre-into-ace w-64" style="white-space: pre-wrap;">
-                                <pre level="1" class="no-copy-button">{{parse_keyword('print')}} {{_('hello_world')}}</pre>
+                                <pre level="1">{{parse_keyword('print')}} {{_('hello_world')}}</pre>
                             </div>
                         </div>
                         {{_('adventure_exp_3')}}

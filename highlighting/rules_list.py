@@ -1,6 +1,6 @@
 from definition import (DIGIT, END_WORD, START_WORD, TOKEN_CONSTANT,
                         get_translated_keyword)
-from list_keywords import LEVELS
+from list_keywords import LEVELS, SECONDARY_COLOR_WORDS
 
 # After the level 4
 # so what is not in quotes is code,
@@ -67,7 +67,7 @@ def rule_all(level):
     for command in data_level["space_before_and_after"]:
         list_rules.append({
             'regex': START_WORD + get_translated_keyword(command) + END_WORD,
-            'token': ["text", "keyword"],
+            'token': ["text", "support.function" if command in SECONDARY_COLOR_WORDS else "keyword"],
             'next': "start",
             'unicode': True
         })

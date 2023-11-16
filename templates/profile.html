@@ -13,14 +13,19 @@
    <div class="flex flex-col gap-4 mx-4 lg:mx-16">
        {% if invite_data %}
            <h1 class="section-header" id="my-messages" onclick="$ ('#messages').toggle()">{{_('my_messages')}}</h1>
-           <div id="messages" class="profile-section-body">
+           <div id="messages" class="profile-section-body" style="display: block;">
              <h2 class="profile-section-body-header">{{_('my_messages')}}</h2>
              {% if invite_data %}
                  <div>
                      {{_('invite_message')}} "<span class="font-bold italic">{{ invite_data['class_name'] }}</span>".<br>
                      {{_('sent_by')}} "<span class="font-bold italic">{{ invite_data['teacher'] }}</span>". {{_('prompt_join_class')}}
                      <div class="flex flex-row mt-4">
-                            <button type="reset" class="green-btn" id="join-link" onclick="window.open('/hedy/l/{{ invite_data['join_link'] }}', '_self');">{{_('join_class')}}</button>
+                            <button type="reset" class="green-btn" id="join" 
+                                hx-post="/class/join/{{invite_data['class_id']}}"
+                                hx-swap="none"
+                                _="on htmx:afterRequest if detail.xhr.status == '302' then set window.location.pathname to {% if is_teacher %}'/for-teachers'{% else %}'/programs'{% endif %} 
+                                    else hide #messages end"
+                                >{{_('join_class')}}</button>
                             <button type="submit" class="red-btn mx-4 px-4" onclick="hedyApp.remove_student_invite('{{user_data['username']}}', '{{invite_data['class_id']}}', '{{_('delete_invite_prompt')}}')">{{_('delete_invite')}}</button>
                     </div>
                  </div>
@@ -30,9 +35,6 @@
        <h1 class="section-header" onclick="$ ('#public_profile_body').toggle()">{{_('public_profile')}}</h1>
        <div id="public_profile_body" class="profile-section-body" {% if request.args.get('open') == "public-profile" %} style="display: inline;"{% endif %}>
             <h2 class="profile-section-body-header">{{_('public_profile')}}</h2>
-            <div class="flex flex-row my-2 justify-center items-center">
-                <button class="green-btn {% if not public_settings %}hidden{% endif %}" onclick="window.open('/user/{{ username}}')" id="public_profile_redirect">{{_('visit_own_public_profile')}}</button>
-            </div>
              <form id="public_profile" class="flex flex-col gap-4">
                  <div class="flex flex-col">
                      <h3 class="px-2 pt-0 pb-2 my-0 font-semibold">{{_('profile_picture')}}</h3>
@@ -144,10 +146,6 @@
                         <option value="{{ alpha }}" {% if alpha == user_data['country'] %}selected{% endif %}>{{ name }}</option>
                     {% endfor %}
                 </select>
-            </div>
-            <div class="flex flex-row items-center mt-4 gap-4">
-                <input type="checkbox" id="agree_third_party" name="agree_third_party" {% if user_data['third_party'] %}checked{% endif %}>
-                <label class="text-center" for="agree_third_party">{{_('agree_third_party')}}</label>
             </div>
             <div class="mb-4">
                 <button type="submit" class="green-btn mt-4">{{_('update_profile')}}</button>

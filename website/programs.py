@@ -1,7 +1,7 @@
 import uuid
 from typing import Optional
 
-from flask import g, request
+from flask import g, request, jsonify
 from flask_babel import gettext
 
 import hedy
@@ -12,8 +12,8 @@ from website.auth import current_user, email_base_url, is_admin, requires_admin,
 from .achievements import Achievements
 from .database import Database
 from .website_module import WebsiteModule, route
-from .flask_helpers import proper_jsonify as jsonify
-from .types import SaveInfo, Program
+from .frontend_types import SaveInfo, Program
+from . import querylog
 
 
 class ProgramsLogic:
@@ -30,6 +30,7 @@ class ProgramsLogic:
         self.db = db
         self.achievements = achievements
 
+    @querylog.timed
     def store_user_program(self,
                            user,
                            level: int,
@@ -78,6 +79,9 @@ class ProgramsLogic:
         self.db.increase_user_save_count(user["username"])
         self.achievements.increase_count("saved")
         self.achievements.verify_save_achievements(user["username"], adventure_name)
+
+        querylog.log_value(program_id=program['id'],
+                           adventure_name=adventure_name, error=error, code_lines=len(code.split('\n')))
 
         return program
 

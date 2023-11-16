@@ -1,6 +1,7 @@
 // We add the : at the end of if and else and elif and for/while
 
 command:+= ifpressed (ifpressed_elifs)* ifpressed_elses? | ifs (elifs)* elses? -= ifs elses?
+
 // These will be handled by the preprocessor step in the merger
 // It will find the appropiate function for this anotation and modify it accordingly
 ifpressed_else<needs_colon>
@@ -14,3 +15,4 @@ elifs: _EOL _ELIF _conditions _COLON _EOL (_SPACE command) (_EOL _SPACE command)
 for_list<needs_colon>
 for_loop<needs_colon>
 while_loop<needs_colon>
+define<needs_colon>

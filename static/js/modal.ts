@@ -2,6 +2,8 @@
  * The modal we pop up to have children confirm things
  */
 
+import { HedyEditor } from "./editor";
+
 class Modal {
   constructor() {
     // Just one binding, never needs stat
@@ -186,19 +188,20 @@ class Modal {
   }
 }
 
-let editor: AceAjax.Editor | undefined;
+let editor: HedyEditor | undefined;
 
 /**
  * The error that appears underneath the code editor
  */
 export const success = {
-  setEditor(e: AceAjax.Editor) {
+  setEditor(e: HedyEditor) {
     editor = e;
   },
 
   hide: function () {
     $('#okbox').hide();
-    editor?.resize();
+    const height = computeEditorHeight('okbox');
+    editor?.resize(height);
 
   },
 
@@ -206,41 +209,61 @@ export const success = {
     $('#okbox .caption').text(caption);
     $('#okbox .details').text(message);
     $('#okbox').show();
-    editor?.resize();
+    const height = computeEditorHeight('okbox');
+    editor?.resize(height);
   },
 
   show(caption: string) {
     $('#okbox .caption').text(caption);
     $('#okbox').show();
-    editor?.resize();
-    setTimeout(function(){     $('#okbox').hide();
-    editor?.resize(); }, 3000);
+    const height = computeEditorHeight('okbox');
+    editor?.resize(height);
+    setTimeout(function() {     
+      $('#okbox').hide();
+      const height = computeEditorHeight('okbox');
+      editor?.resize(height); 
+    }, 3000);
   }
 }
 
 export const error = {
-  setEditor(e: AceAjax.Editor) {
+  setEditor(e: HedyEditor) {
     editor = e;
   },
 
   hide() {
     $('#errorbox').hide();
     $('#warningbox').hide();
-    editor?.resize();
+    const height = computeEditorHeight('errorbox')
+    editor?.resize(height);
   },
-
   showWarning(caption: string, message: string) {
+    this.hide();
     $('#warningbox .caption').text(caption);
     $('#warningbox .details').text(message);
     $('#warningbox').show();
-    editor?.resize();
+    const height = computeEditorHeight('warningbox');
+    editor?.resize(height);
   },
 
   show(caption: string, message: string) {
     $('#errorbox .caption').text(caption);
-    $('#errorbox .details').html(message);
+    $('#errorbox .details').html(message);    
     $('#errorbox').show();
-    editor?.resize();
+    const height = computeEditorHeight('errorbox');
+    editor?.resize(height);
+  },
+
+  showFadingWarning(caption: string, message: string) {
+    error.showWarning(caption, message);    
+    setTimeout(function(){
+      $('#warningbox').fadeOut({
+        complete: () => {
+          const height = computeEditorHeight('warningbox');
+          editor?.resize(height);
+        }
+      });
+    }, 10000);
   }
 }
 
@@ -256,4 +279,10 @@ export async function tryCatchPopup(cb: () => void | Promise<void>) {
     console.log('Error', e);
     modal.notifyError(e.message);
   }
+}
+
+function computeEditorHeight(boxId: string): number {
+  const editorHeight = document.getElementById('editor')!.clientHeight;
+  const boxHeight = document.getElementById(boxId)!.offsetHeight!;
+  return editorHeight - boxHeight;
 }

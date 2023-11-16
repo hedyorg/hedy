@@ -177,6 +177,27 @@ class TestsLevel6(HedyTester):
 
         self.multi_level_tester(max_level=7, code=code, expected=expected, output='gelijkspel!')
 
+    def test_if_french(self):
+        code = textwrap.dedent("""\
+        plat_principal = demande "Quel plat principal souhaitez-vous?"
+        prix = 0
+        si plat_principal est lasagnes prix = 12
+        affiche "Ce sera " prix""")
+
+        expected = textwrap.dedent("""\
+        plat_principal = input(f'Quel plat principal souhaitez-vous?')
+        prix = '0'
+        if convert_numerals('Latin', plat_principal) == convert_numerals('Latin', 'lasagnes'):
+          prix = '12'
+        else:
+          x__x__x__x = '5'
+        print(f'Ce sera {prix}')""")
+
+        self.multi_level_tester(max_level=7,
+                                code=code,
+                                expected=expected,
+                                lang='fr')
+
     def test_equality_arabic(self):
         code = textwrap.dedent("""\
         nummer1 is ٢
@@ -828,11 +849,11 @@ class TestsLevel6(HedyTester):
         if convert_numerals('Latin', name) == convert_numerals('Latin', 'Hedy'):
           print(f'nice!')
         else:
-          _ = 'x'
+          x__x__x__x = '5'
         if name in names:
           print(f'nice!')""")
 
-        self.multi_level_tester(max_level=7, code=code, expected=expected, translate=False)
+        self.multi_level_tester(max_level=7, code=code, expected=expected)
 
     def test_consecutive_if_and_if_else_statements(self):
         code = textwrap.dedent("""\
@@ -846,11 +867,29 @@ class TestsLevel6(HedyTester):
         if convert_numerals('Latin', naam) == convert_numerals('Latin', 'Hedy'):
           print(f'leuk')
         else:
-          _ = 'x'
+          x__x__x__x = '5'
         if convert_numerals('Latin', naam) == convert_numerals('Latin', 'Python'):
           print(f'ook leuk')
         else:
           print(f'minder leuk!')""")
+
+        self.multi_level_tester(max_level=7, code=code, expected=expected)
+
+    def test_two_ifs_assign(self):
+        code = textwrap.dedent("""\
+        order is fries
+        if order is fries price is 5
+        drink is water
+        print drink""")
+
+        expected = textwrap.dedent("""\
+        order = 'fries'
+        if convert_numerals('Latin', order) == convert_numerals('Latin', 'fries'):
+          price = '5'
+        else:
+          x__x__x__x = '5'
+        drink = 'water'
+        print(f'{drink}')""")
 
         self.multi_level_tester(max_level=7, code=code, expected=expected, translate=False)
 

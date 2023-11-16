@@ -4,7 +4,8 @@ from parameterized import parameterized
 
 import hedy
 from hedy import Command
-from tests.Tester import HedyTester
+from hedy_sourcemap import SourceRange
+from tests.Tester import HedyTester, SkippedMapping
 
 
 class TestsLevel12(HedyTester):
@@ -2034,3 +2035,175 @@ class TestsLevel12(HedyTester):
           time.sleep(0.1)""")
 
         self.multi_level_tester(code=code, expected=expected, max_level=16)
+
+    def test_simple_function(self):
+        code = textwrap.dedent("""\
+        define simple_function_1 with parameter
+            print "simple_function_1 - 1"
+            m = "simple_function_1 - 2"
+            print m
+        define simple_function_2 with param
+            print "simple_function_2 - 1"
+            print param
+        define simple_function_3 with param_a, param_b, param_c
+            if param_a = "A"
+                print "simple_function_3 - 1"
+                print param_b
+            else
+                print "simple_function_3 - 2"
+                if param_a = "B"
+                    print "simple_function_3 - 2A"
+                    print param_b
+                else
+                    print "simple_function_3 - 2B"
+                    print param_c
+        a = "test1"
+        call simple_function_3 with "A", a, 1.0
+        call simple_function_3 with "B", a, 1.0
+        call simple_function_3 with "C", a, 1.0""")
+
+        expected = textwrap.dedent("""\
+        def simple_function_1(parameter):
+          print(f'''simple_function_1 - 1''')
+          m = 'simple_function_1 - 2'
+          print(f'''{m}''')
+        def simple_function_2(param):
+          print(f'''simple_function_2 - 1''')
+          print(f'''{param}''')
+        def simple_function_3(param_a, param_b, param_c):
+          if convert_numerals('Latin', param_a) == convert_numerals('Latin', 'A'):
+            print(f'''simple_function_3 - 1''')
+            print(f'''{param_b}''')
+          else:
+            print(f'''simple_function_3 - 2''')
+            if convert_numerals('Latin', param_a) == convert_numerals('Latin', 'B'):
+              print(f'''simple_function_3 - 2A''')
+              print(f'''{param_b}''')
+            else:
+              print(f'''simple_function_3 - 2B''')
+              print(f'''{param_c}''')
+        a = 'test1'
+        simple_function_3('A', a, 1.0)
+        simple_function_3('B', a, 1.0)
+        simple_function_3('C', a, 1.0)""")
+
+        output = textwrap.dedent("""\
+        simple_function_3 - 1
+        test1
+        simple_function_3 - 2
+        simple_function_3 - 2A
+        test1
+        simple_function_3 - 2
+        simple_function_3 - 2B
+        1.0""")
+
+        self.multi_level_tester(
+            code=code,
+            expected=expected,
+            output=output,
+            max_level=16
+        )
+
+    def test_source_map(self):
+        code = textwrap.dedent("""\
+        price = 0.0
+        food = ask 'What would you like to order?'
+        drink = ask 'What would you like to drink?'
+        if food is 'hamburger'
+            price = price + 6.50
+        if food is 'pizza'
+            price = price + 5.75
+        if drink is 'water'
+            price = price + 1.20
+        if drink is 'soda'
+            price = price + 2.35
+        print 'That will be ' price ' dollar, please'""")
+
+        expected_code = textwrap.dedent("""\
+        price = 0.0
+        food = input(f'''What would you like to order?''')
+        try:
+          food = int(food)
+        except ValueError:
+          try:
+            food = float(food)
+          except ValueError:
+            pass
+        drink = input(f'''What would you like to drink?''')
+        try:
+          drink = int(drink)
+        except ValueError:
+          try:
+            drink = float(drink)
+          except ValueError:
+            pass
+        if convert_numerals('Latin', food) == convert_numerals('Latin', 'hamburger'):
+          price = price + 6.5
+        if convert_numerals('Latin', food) == convert_numerals('Latin', 'pizza'):
+          price = price + 5.75
+        if convert_numerals('Latin', drink) == convert_numerals('Latin', 'water'):
+          price = price + 1.2
+        if convert_numerals('Latin', drink) == convert_numerals('Latin', 'soda'):
+          price = price + 2.35
+        print(f'''That will be {price} dollar, please''')""")
+
+        expected_source_map = {
+            '1/1-1/6': '1/1-1/6',
+            '1/1-1/12': '1/1-1/12',
+            '2/1-2/5': '2/1-2/5',
+            '2/1-2/43': '2/1-9/9',
+            '3/1-3/6': '10/1-10/6',
+            '3/1-3/44': '10/1-17/9',
+            '4/4-4/8': '4/3-4/7',
+            '4/4-4/23': '18/4-18/77',
+            '5/5-5/10': '21/1-21/6',
+            '5/13-5/18': '23/1-23/6',
+            '5/5-5/25': '19/1-19/20',
+            '4/1-5/34': '18/1-19/22',
+            '6/4-6/8': '4/14-4/18',
+            '6/4-6/19': '20/4-20/73',
+            '7/5-7/10': '25/1-25/6',
+            '7/13-7/18': '1/1-1/6',
+            '7/5-7/25': '21/1-21/21',
+            '6/1-7/34': '20/1-21/23',
+            '8/4-8/9': '10/42-10/47',
+            '8/4-8/20': '22/4-22/74',
+            '9/5-9/10': '19/1-19/6',
+            '9/13-9/18': '21/1-21/6',
+            '9/5-9/25': '23/1-23/20',
+            '8/1-9/34': '22/1-23/22',
+            '10/4-10/9': '12/3-12/8',
+            '10/4-10/19': '24/4-24/73',
+            '11/5-11/10': '23/1-23/6',
+            '11/13-11/18': '25/1-25/6',
+            '11/5-11/25': '25/1-25/21',
+            '10/1-11/34': '24/1-25/23',
+            '12/23-12/28': '26/25-26/30',
+            '12/1-12/46': '26/1-26/50',
+            '1/1-12/47': '1/1-26/50'
+        }
+
+        self.single_level_tester(code, expected=expected_code)
+        self.source_map_tester(code=code, expected_source_map=expected_source_map)
+
+    def test_nested_functions(self):
+        code = textwrap.dedent("""\
+        define simple_function
+            define nested_function
+                print 1
+        call simple_function""")
+
+        expected = textwrap.dedent("""\
+        pass
+        simple_function()""")
+
+        skipped_mappings = [
+            SkippedMapping(SourceRange(1, 1, 3, 34), hedy.exceptions.NestedFunctionException),
+        ]
+
+        self.multi_level_tester(
+            code=code,
+            expected=expected,
+            skipped_mappings=skipped_mappings,
+            max_level=16
+        )

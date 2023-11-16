@@ -1,7 +1,11 @@
 import textwrap
 import hedy
 from hedy import Command
-from tests.Tester import HedyTester
+from hedy_sourcemap import SourceRange
+from tests.Tester import HedyTester, SkippedMapping
+
+from hypothesis import given, settings
+import hypothesis.strategies
 
 
 class TestsLevel1(HedyTester):
@@ -12,6 +16,7 @@ class TestsLevel1(HedyTester):
      * combined tests
      * markup tests
      * negative tests
+     * hypothesis tests
 
     Naming conventions are like this:
      * single keyword positive tests are just keyword or keyword_special_case
@@ -33,8 +38,8 @@ class TestsLevel1(HedyTester):
             expected=expected,
             output=output,
             expected_commands=expected_commands
+
         )
-        self.assertEqual([output], hedy.all_print_arguments(code, self.level))
 
     def test_print_no_space(self):
         code = "printHallo welkom bij Hedy!"
@@ -48,7 +53,6 @@ class TestsLevel1(HedyTester):
             output=output,
             expected_commands=expected_commands
         )
-        self.assertEqual([output], hedy.all_print_arguments(code, self.level))
 
     def test_print_line_with_spaces_works(self):
         code = "print hallo\n      \nprint hallo"
@@ -78,7 +82,6 @@ class TestsLevel1(HedyTester):
         Mooi hoor""")
 
         self.single_level_tester(code=code, expected=expected, output=output)
-        self.assertEqual(['Hallo welkom bij Hedy', 'Mooi hoor'], hedy.all_print_arguments(code, self.level))
 
     def test_print_single_quoted_text(self):
         code = "print 'Welcome to OceanView!'"
@@ -476,11 +479,28 @@ class TestsLevel1(HedyTester):
         )
 
     def test_turn_with_text_gives_error(self):
-        code = "turn koekoek"
+        code = textwrap.dedent("""\
+        turn koekoek
+        prind skipping""")
+
+        expected = textwrap.dedent("""\
+        pass
+        pass""")
+
+        # We test the skipping of faulty code by checking if a certain range contains an error after executing
+        # The source range consists of from_line, from_column, to_line, to_column
+        # we can add multiple tests to the skipped_mappings list to test multiple error mappings
+
+        skipped_mappings = [
+            SkippedMapping(SourceRange(1, 1, 1, 13), hedy.exceptions.InvalidArgumentException),
+            SkippedMapping(SourceRange(2, 1, 2, 15), hedy.exceptions.InvalidCommandException),
+        ]
+
         self.single_level_tester(
             code=code,
-            extra_check_function=lambda c: c.exception.arguments['line_number'] == 1,
-            exception=hedy.exceptions.InvalidArgumentException)
+            expected=expected,
+            skipped_mappings=skipped_mappings
+        )
 
     #
     # comment tests
@@ -502,8 +522,6 @@ class TestsLevel1(HedyTester):
             output=output,
             expected_commands=[Command.print]
         )
-
-        self.assertEqual(['Hallo welkom bij Hedy! '], hedy.all_print_arguments(code, self.level))
 
     #
     # combined commands tests
@@ -568,36 +586,108 @@ class TestsLevel1(HedyTester):
     # negative tests
     #
     def test_print_with_space_gives_invalid(self):
-        code = " print Hallo welkom bij Hedy!"
+        code = textwrap.dedent("""\
+         print Hallo welkom bij Hedy!
+        prind skipping""")
+
+        expected = textwrap.dedent("""\
+        pass
+        pass""")
+
+        skipped_mappings = [
+            SkippedMapping(SourceRange(1, 1, 1, 30), hedy.exceptions.InvalidSpaceException),
+            SkippedMapping(SourceRange(2, 1, 2, 15), hedy.exceptions.InvalidCommandException),
+        ]
 
         self.multi_level_tester(
             code=code,
-            exception=hedy.exceptions.InvalidSpaceException,
-            max_level=3)
+            expected=expected,
+            skipped_mappings=skipped_mappings,
+            max_level=1)
 
     def test_ask_with_space_gives_invalid(self):
-        code = " ask Hallo welkom bij Hedy?"
+        code = textwrap.dedent("""\
+         ask Hallo welkom bij Hedy?
+        prind skipping""")
+
+        expected = textwrap.dedent("""\
+        pass
+        pass""")
+
+        skipped_mappings = [
+            SkippedMapping(SourceRange(1, 1, 1, 28), hedy.exceptions.InvalidSpaceException),
+            SkippedMapping(SourceRange(2, 1, 2, 15), hedy.exceptions.InvalidCommandException),
+        ]
 
         self.multi_level_tester(
             code=code,
-            exception=hedy.exceptions.InvalidSpaceException,
+            expected=expected,
+            skipped_mappings=skipped_mappings,
             max_level=1)
 
     def test_lines_with_spaces_gives_invalid(self):
         code = " print Hallo welkom bij Hedy!\n print Hallo welkom bij Hedy!"
+        expected = "pass\npass"
+
+        skipped_mappings = [
+            SkippedMapping(SourceRange(1, 1, 1, 30), hedy.exceptions.InvalidSpaceException),
+            SkippedMapping(SourceRange(1, 1, 1, 30), hedy.exceptions.InvalidSpaceException),
+        ]
 
         self.multi_level_tester(
             code=code,
-            exception=hedy.exceptions.InvalidSpaceException,
+            expected=expected,
+            skipped_mappings=skipped_mappings,
             max_level=3)
 
     def test_word_plus_period_gives_invalid(self):
-        code = "word."
-        self.single_level_tester(code, exception=hedy.exceptions.MissingCommandException)
+        code = textwrap.dedent("""\
+        word.
+        prind skipping""")
+
+        expected = textwrap.dedent("""\
+        pass
+        pass""")
+
+        skipped_mappings = [
+            SkippedMapping(SourceRange(1, 1, 1, 6), hedy.exceptions.MissingCommandException),
+            SkippedMapping(SourceRange(2, 1, 2, 15), hedy.exceptions.InvalidCommandException),
+        ]
+
+        self.single_level_tester(
+            code=code,
+            expected=expected,
+            skipped_mappings=skipped_mappings
+        )
 
     def test_non_keyword_gives_invalid(self):
-        code = "groen"
-        self.single_level_tester(code, exception=hedy.exceptions.MissingCommandException)
+        code = textwrap.dedent("""\
+        groen
+        prind skipping""")
+
+        expected = textwrap.dedent("""\
+        pass
+        pass""")
+
+        skipped_mappings = [
+            SkippedMapping(SourceRange(1, 1, 1, 6), hedy.exceptions.MissingCommandException),
+            SkippedMapping(SourceRange(2, 1, 2, 15), hedy.exceptions.InvalidCommandException),
+        ]
+
+        self.single_level_tester(
+            code=code,
+            expected=expected,
+            skipped_mappings=skipped_mappings
+        )
+
+    def test_one_mistake_not_skipped(self):
+        code = "prind wrong"
+
+        self.multi_level_tester(
+            code=code,
+            exception=hedy.exceptions.InvalidCommandException,
+            max_level=3
+        )
 
     def test_lonely_echo_gives_LonelyEcho(self):
         code = "echo wat dan?"
@@ -613,11 +703,23 @@ class TestsLevel1(HedyTester):
         code = textwrap.dedent("""\
         print hallo
 
-        prnt hallo""")
+        prnt hallo
+        prind skipping""")
+
+        expected = textwrap.dedent("""\
+        print('hallo')
+        pass
+        pass""")
+
+        skipped_mappings = [
+            SkippedMapping(SourceRange(3, 1, 3, 11), hedy.exceptions.InvalidCommandException),
+            SkippedMapping(SourceRange(4, 1, 4, 15), hedy.exceptions.InvalidCommandException),
+        ]
+
         self.single_level_tester(
             code,
-            exception=hedy.exceptions.InvalidCommandException,
-            extra_check_function=(lambda x: x.exception.arguments['line_number'] == 3)
+            expected=expected,
+            skipped_mappings=skipped_mappings
         )
 
     def test_print_without_argument_gives_incomplete(self):
@@ -636,9 +738,108 @@ class TestsLevel1(HedyTester):
         )
 
     def test_non_keyword_with_argument_gives_invalid(self):
+        code = textwrap.dedent("""\
+        aks felienne 123
+        prind skipping""")
+
+        expected = textwrap.dedent("""\
+        pass
+        pass""")
+
+        skipped_mappings = [
+            SkippedMapping(SourceRange(1, 1, 1, 17), hedy.exceptions.InvalidCommandException),
+            SkippedMapping(SourceRange(2, 1, 2, 15), hedy.exceptions.InvalidCommandException),
+        ]
+
         self.multi_level_tester(
-            code="aks felienne 123",
-            exception=hedy.exceptions.InvalidCommandException,
-            extra_check_function=lambda c: c.exception.arguments['invalid_command'] == 'aks',
-            max_level=17,
+            code=code,
+            expected=expected,
+            skipped_mappings=skipped_mappings,
+            extra_check_function=lambda c: c.arguments['invalid_command'] in ['aks', 'prind'],
+            max_level=5,
         )
+
+    def test_source_map(self):
+        code = textwrap.dedent("""\
+        print Hallo welkom bij Hedy!
+        forward 50
+        ask Wat is je lievelingskleur
+        echo je lievelingskleur is""")
+
+        expected_code = HedyTester.dedent(f"""\
+        print('Hallo welkom bij Hedy!')
+        {HedyTester.indent(
+            HedyTester.forward_transpiled(50, self.level),
+            8, True)
+        }
+        answer = input('Wat is je lievelingskleur')
+        print('je lievelingskleur is '+answer)""")
+
+        expected_source_map = {
+            '1/1-1/29': '1/1-1/32',
+            '2/1-2/11': '2/1-8/16',
+            '3/1-3/30': '9/1-9/44',
+            '4/1-4/27': '10/1-10/39',
+            '1/1-4/28': '1/1-10/39'
+        }
+
+        self.single_level_tester(code, expected=expected_code)
+        self.source_map_tester(code=code, expected_source_map=expected_source_map)
+
+# hypothesis initialization starts here
+
+
+# numbers define an order since some commands must be in a certain place (f.e. here: ask must go before echo)
+templates = [
+    ("print <P>", -1),
+    ("print <P>", -1),
+    ("print <P>", -1),
+    ("turn left", -1),  # arguments for turn and forward could also be randomly sampled
+    ("turn right", -1),
+    ("forward 200", -1),
+    ("forward -200", -1),
+    ("ask <P>", 1),
+    ("echo <P>", 2),
+    ("ask <P>", 3),
+    ("echo <P>", 4)
+]
+
+
+def valid_permutation(lines):
+    orders = [order for _, order in lines]
+    significant_orders = [x for x in orders if x > 0]  # -1 may be placed everywhere
+    list = [significant_orders[i] <= significant_orders[i+1] for i in range(len(significant_orders)-1)]
+    return all(list)
+
+
+class TestsHypothesisLevel1(HedyTester):
+    level = 1
+
+    @given(code_tuples=hypothesis.strategies.permutations(templates), d=hypothesis.strategies.data())
+    @settings(deadline=None, max_examples=100)
+    # FH may 2023: we now always use a permutation, but a random sample which could potentially be smaller would be a nice addition!
+    def test_template_combination(self, code_tuples, d):
+        excluded_chars = ["_", "#", '\n', '\r']
+        random_print_argument = hypothesis.strategies.text(
+            alphabet=hypothesis.strategies.characters(blacklist_characters=excluded_chars),
+            min_size=1,
+            max_size=10)
+
+        if valid_permutation(code_tuples):
+            lines = [line.replace("<P>", d.draw(random_print_argument)) for line, _ in code_tuples]
+            code = '\n'.join(lines)
+
+            self.single_level_tester(
+                code=code,
+                translate=False
+            )
+
+            expected_commands = [Command.ask, Command.ask, Command.echo, Command.echo, Command.forward, Command.forward,
+                                 Command.print, Command.print, Command.print, Command.turn, Command.turn]
+
+            # TODO, FH sept 2023: all_commands parses and thus is expensive
+            # we should get the commands list back from the parser instead (parseresult.commands)
+            # since we don't use many single_level_tester features
+            # we can transpile and check the python "manually"
+            all_commands = sorted(hedy.all_commands(code, self.level, 'en'))
+            self.assertEqual(expected_commands, all_commands)

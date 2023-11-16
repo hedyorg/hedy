@@ -1,20 +1,13 @@
 import { loginForUser } from "../tools/login/login";
-import { goToHedyPage } from "../tools/navigation/nav";
+import { goToHedyPage, goToAdventurePage } from "../tools/navigation/nav";
 
-describe('The Hedy level 1 page', () => {
+describe('The Hedy level 1 print adventure page', () => {
   beforeEach(() => {
-    goToHedyPage();
+    goToAdventurePage();
   });
 
   it('has the word print highlighted in examples', () => {
     cy.get('#adventures-tab pre')
-      .contains('print')
-      .should('be.visible')
-      .and('have.class', 'ace_keyword');
-  })
-
-  it('has the word print highlighted in the editor', () => {
-    cy.get('#editor')
       .contains('print')
       .should('be.visible')
       .and('have.class', 'ace_keyword');
@@ -38,24 +31,10 @@ describe('The view program page', () => {
 
     cy.visit(urlFromClipboard);
   });
-
-  it('has syntax highlighting', () => {
-    cy.get('#editor')
-      .contains('print')
-      .should('be.visible')
-      .and('have.class', 'ace_keyword');
-  })
 })
 
 describe('The raw program page', () => {
   beforeEach(() => {
     cy.visit('/adventure/story/1/raw');
-  });
-
-  it('has syntax highlighting', () => {
-    cy.get('#editor')
-      .contains('print')
-      .should('be.visible')
-      .and('have.class', 'ace_keyword');
   });
 });

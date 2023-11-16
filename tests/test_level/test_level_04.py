@@ -4,7 +4,8 @@ from parameterized import parameterized
 
 import hedy
 from hedy import Command
-from tests.Tester import HedyTester
+from hedy_sourcemap import SourceRange
+from tests.Tester import HedyTester, SkippedMapping
 
 
 class TestsLevel4(HedyTester):
@@ -100,12 +101,25 @@ class TestsLevel4(HedyTester):
             expected=expected)
 
     def test_print_with_space_gives_invalid(self):
-        code = " print 'Hallo welkom bij Hedy!'"
+        code = textwrap.dedent("""\
+         print 'Hallo welkom bij Hedy!'
+        prind skipping""")
+
+        expected = textwrap.dedent("""\
+        pass
+        pass""")
+
+        skipped_mappings = [
+            SkippedMapping(SourceRange(1, 1, 1, 32), hedy.exceptions.InvalidSpaceException),
+            SkippedMapping(SourceRange(2, 1, 2, 15), hedy.exceptions.InvalidCommandException)
+        ]
 
         self.multi_level_tester(
             code=code,
-            exception=hedy.exceptions.InvalidSpaceException,
-            max_level=7)
+            expected=expected,
+            skipped_mappings=skipped_mappings,
+            max_level=5
+        )
 
     def test_print_no_space(self):
         code = "print'hallo wereld!'"
@@ -173,14 +187,24 @@ class TestsLevel4(HedyTester):
     def test_print_without_quotes_gives_error_from_grammar(self):
         # in some cases, there is no variable confusion since 'hedy 123' can't be a variable
         # then we can immediately raise the no quoted exception
+        code = textwrap.dedent("""\
+        print hedy 123
+        prind skipping""")
 
-        code = "print hedy 123"
+        expected = textwrap.dedent("""\
+        pass
+        pass""")
+
+        skipped_mappings = [
+            SkippedMapping(SourceRange(1, 1, 1, 15), hedy.exceptions.UnquotedTextException),
+            SkippedMapping(SourceRange(2, 1, 2, 15), hedy.exceptions.InvalidCommandException)
+        ]
 
         self.multi_level_tester(
             code=code,
+            expected=expected,
+            skipped_mappings=skipped_mappings,
             max_level=5,
-            exception=hedy.exceptions.UnquotedTextException,
-            extra_check_function=lambda c: c.exception.arguments['line_number'] == 1
         )
 
     def test_print_without_quotes_gives_error_from_transpiler(self):
@@ -200,12 +224,24 @@ class TestsLevel4(HedyTester):
 
     def test_ask_without_quotes_gives_error_from_grammar(self):
         # same as print for level 4
-        code = "pietje is ask hedy 123"
+        code = textwrap.dedent("""\
+        pietje is ask hedy 123
+        prind skipping""")
+
+        expected = textwrap.dedent("""\
+        pass
+        pass""")
+
+        skipped_mappings = [
+            SkippedMapping(SourceRange(1, 1, 1, 23), hedy.exceptions.UnquotedTextException),
+            SkippedMapping(SourceRange(2, 1, 2, 15), hedy.exceptions.InvalidCommandException)
+        ]
 
         self.multi_level_tester(
             code=code,
+            expected=expected,
+            skipped_mappings=skipped_mappings,
             max_level=4,
-            exception=hedy.exceptions.UnquotedTextException
         )
 
     def test_assign_catalan_var_name(self):
@@ -236,8 +272,17 @@ class TestsLevel4(HedyTester):
 
         self.multi_level_tester(
             code=code,
-            max_level=17,
+            max_level=5,
             exception=hedy.exceptions.UnquotedTextException,
+        )
+
+    def test_one_mistake_not_skipped(self):
+        code = "prind 'wrong'"
+
+        self.multi_level_tester(
+            code=code,
+            exception=hedy.exceptions.InvalidCommandException,
+            max_level=17
         )
 
     def test_print_similar_var_gives_error(self):
@@ -259,20 +304,46 @@ class TestsLevel4(HedyTester):
 
     @parameterized.expand(HedyTester.quotes)
     def test_print_without_opening_quote_gives_error(self, q):
-        code = f"print hedy 123{q}"
+        code = textwrap.dedent(f"""\
+        print hedy 123{q}
+        prind skipping""")
+
+        expected = textwrap.dedent("""\
+        pass
+        pass""")
+
+        skipped_mappings = [
+            SkippedMapping(SourceRange(1, 1, 1, 16), hedy.exceptions.UnquotedTextException),
+            SkippedMapping(SourceRange(2, 1, 2, 15), hedy.exceptions.InvalidCommandException)
+        ]
+
         self.multi_level_tester(
             code,
-            max_level=6,
-            exception=hedy.exceptions.UnquotedTextException
+            expected=expected,
+            skipped_mappings=skipped_mappings,
+            max_level=5
         )
 
     @parameterized.expand(HedyTester.quotes)
     def test_print_without_closing_quote_gives_error(self, q):
-        code = f"print {q}hedy 123"
+        code = textwrap.dedent(f"""\
+        print {q}hedy 123
+        prind skipping""")
+
+        expected = textwrap.dedent("""\
+        pass
+        pass""")
+
+        skipped_mappings = [
+            SkippedMapping(SourceRange(1, 1, 1, 16), hedy.exceptions.UnquotedTextException),
+            SkippedMapping(SourceRange(2, 1, 2, 15), hedy.exceptions.InvalidCommandException)
+        ]
+
         self.multi_level_tester(
             code,
-            max_level=6,
-            exception=hedy.exceptions.UnquotedTextException
+            expected=expected,
+            skipped_mappings=skipped_mappings,
+            max_level=5
         )
 
     def test_print_single_quoted_text_var(self):
@@ -371,8 +442,24 @@ class TestsLevel4(HedyTester):
         self.multi_level_tester(code=code, expected=expected, max_level=11)
 
     def test_ask_without_quotes_gives_error(self):
-        code = "kleur is ask Hedy 123"
-        self.single_level_tester(code, exception=hedy.exceptions.HedyException)
+        code = textwrap.dedent("""\
+        kleur is ask Hedy 123
+        prind skipping""")
+
+        expected = textwrap.dedent("""\
+        pass
+        pass""")
+
+        skipped_mappings = [
+            SkippedMapping(SourceRange(1, 1, 1, 22), hedy.exceptions.UnquotedTextException),
+            SkippedMapping(SourceRange(2, 1, 2, 15), hedy.exceptions.InvalidCommandException)
+        ]
+
+        self.single_level_tester(
+            code,
+            expected=expected,
+            skipped_mappings=skipped_mappings
+        )
 
     def test_ask_text_without_quotes_gives_error(self):
         code = "var is ask hallo wereld"
@@ -385,13 +472,45 @@ class TestsLevel4(HedyTester):
 
     @parameterized.expand(HedyTester.quotes)
     def test_ask_without_opening_quote_gives_error(self, q):
-        code = f"kleur is ask Hedy 123{q}"
-        self.single_level_tester(code, exception=hedy.exceptions.UnquotedTextException)
+        code = textwrap.dedent(f"""\
+        kleur is ask Hedy 123{q}
+        prind skipping""")
+
+        expected = textwrap.dedent("""\
+        pass
+        pass""")
+
+        skipped_mappings = [
+            SkippedMapping(SourceRange(1, 1, 1, 23), hedy.exceptions.UnquotedTextException),
+            SkippedMapping(SourceRange(2, 1, 2, 15), hedy.exceptions.InvalidCommandException)
+        ]
+
+        self.single_level_tester(
+            code,
+            expected=expected,
+            skipped_mappings=skipped_mappings
+        )
 
     @parameterized.expand(HedyTester.quotes)
     def test_ask_without_closing_quote_gives_error(self, q):
-        code = f"kleur is ask {q}Hedy 123"
-        self.single_level_tester(code, exception=hedy.exceptions.UnquotedTextException)
+        code = textwrap.dedent(f"""\
+        kleur is ask {q}Hedy 123
+        prind skipping""")
+
+        expected = textwrap.dedent("""\
+        pass
+        pass""")
+
+        skipped_mappings = [
+            SkippedMapping(SourceRange(1, 1, 1, 23), hedy.exceptions.UnquotedTextException),
+            SkippedMapping(SourceRange(2, 1, 2, 15), hedy.exceptions.InvalidCommandException)
+        ]
+
+        self.single_level_tester(
+            code,
+            expected=expected,
+            skipped_mappings=skipped_mappings
+        )
 
     def test_ask_with_comma(self):
         code = textwrap.dedent("""\
@@ -674,9 +793,25 @@ class TestsLevel4(HedyTester):
         )
 
     def test_quoted_text_gives_error(self):
-        code = 'competitie die gaan we winnen'
+        code = textwrap.dedent("""\
+        competitie die gaan we winnen
+        prind skipping""")
 
-        self.multi_level_tester(code=code, exception=hedy.exceptions.MissingCommandException)
+        expected = textwrap.dedent("""\
+        pass
+        pass""")
+
+        skipped_mappings = [
+            SkippedMapping(SourceRange(1, 1, 1, 30), hedy.exceptions.MissingCommandException),
+            SkippedMapping(SourceRange(2, 1, 2, 15), hedy.exceptions.InvalidCommandException)
+        ]
+
+        self.multi_level_tester(
+            code=code,
+            expected=expected,
+            skipped_mappings=skipped_mappings,
+            max_level=5
+        )
 
     def test_repair_incorrect_print_argument(self):
         code = "print ,'Hello'"
@@ -688,10 +823,24 @@ class TestsLevel4(HedyTester):
         )
 
     def test_lonely_text(self):
-        code = "'Hello'"
+        code = textwrap.dedent("""\
+        'Hello'
+        prind skipping""")
+
+        expected = textwrap.dedent("""\
+        pass
+        pass""")
+
+        skipped_mappings = [
+            SkippedMapping(SourceRange(1, 1, 1, 8), hedy.exceptions.LonelyTextException),
+            SkippedMapping(SourceRange(2, 1, 2, 15), hedy.exceptions.InvalidCommandException)
+        ]
+
         self.multi_level_tester(
             code=code,
-            exception=hedy.exceptions.LonelyTextException
+            expected=expected,
+            skipped_mappings=skipped_mappings,
+            max_level=5
         )
 
     def test_clear(self):
@@ -708,3 +857,26 @@ class TestsLevel4(HedyTester):
             pass""")
 
         self.multi_level_tester(code=code, expected=expected)
+
+    def test_source_map(self):
+        code = textwrap.dedent("""\
+        print 'You need to use quotation marks from now on!'
+        answer is ask 'What do we need to use from now on?'
+        print 'We need to use ' answer""")
+
+        expected_code = textwrap.dedent("""\
+        print(f'You need to use quotation marks from now on!')
+        answer = input(f'What do we need to use from now on?')
+        print(f'We need to use {answer}')""")
+
+        expected_source_map = {
+            '1/1-1/53': '1/1-1/55',
+            '2/1-2/7': '2/1-2/7',
+            '2/1-2/52': '2/1-2/55',
+            '3/25-3/31': '3/25-3/31',
+            '3/1-3/31': '3/1-3/34',
+            '1/1-3/32': '1/1-3/34'
+        }
+
+        self.single_level_tester(code, expected=expected_code)
+        self.source_map_tester(code=code, expected_source_map=expected_source_map)

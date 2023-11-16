@@ -1,7 +1,10 @@
 # coding=utf-8
+import base64
+import binascii
 import collections
 import copy
 import logging
+import json
 import datetime
 import os
 import re
@@ -9,18 +12,20 @@ import sys
 import traceback
 import textwrap
 import zipfile
+import jinja_partials
 from typing import Optional
 from logging.config import dictConfig as logConfig
 from os import path
 
 import static_babel_content
-from flask import (Flask, Markup, Response, abort, after_this_request, g,
-                   redirect, request, send_file, url_for,
+from markupsafe import Markup
+from flask import (Flask, Response, abort, after_this_request, g,
+                   redirect, request, send_file, url_for, jsonify,
                    send_from_directory, session)
 from flask_babel import Babel, gettext
 from flask_commonmark import Commonmark
 from flask_compress import Compress
-from werkzeug.urls import url_encode
+from urllib.parse import quote_plus
 
 import hedy
 import hedy_content
@@ -29,20 +34,22 @@ import hedyweb
 import utils
 from safe_format import safe_format
 from config import config
-from website.flask_helpers import render_template, proper_tojson, proper_jsonify as jsonify
-from hedy_content import (ADVENTURE_ORDER_PER_LEVEL, ALL_KEYWORD_LANGUAGES,
-                          ALL_LANGUAGES, COUNTRIES)
+from website.flask_helpers import render_template, proper_tojson, JinjaCompatibleJsonProvider
+from hedy_content import (ADVENTURE_ORDER_PER_LEVEL, KEYWORDS_ADVENTURES, ALL_KEYWORD_LANGUAGES,
+                          ALL_LANGUAGES, COUNTRIES, HOUR_OF_CODE_ADVENTURES)
 
 from logging_config import LOGGING_CONFIG
 from utils import dump_yaml_rt, is_debug_mode, load_yaml_rt, timems, version, strip_accents
 from website import (ab_proxying, achievements, admin, auth_pages, aws_helpers,
                      cdn, classes, database, for_teachers, s3_logger, parsons,
                      profile, programs, querylog, quiz, statistics,
-                     translating)
-from website.auth import (current_user, is_admin, is_teacher,
-                          login_user_from_token_cookie, requires_login, requires_login_redirect, requires_teacher)
+                     translating, tags)
+from website.auth import (current_user, is_admin, is_teacher, is_second_teacher, has_public_profile,
+                          login_user_from_token_cookie, requires_login, requires_login_redirect, requires_teacher,
+                          forget_current_user)
 from website.log_fetcher import log_fetcher
-from website.types import Adventure, Program, ExtraStory, SaveInfo
+from website.frontend_types import Adventure, Program, ExtraStory, SaveInfo
+
 
 logConfig(LOGGING_CONFIG)
 logger = logging.getLogger(__name__)
@@ -61,8 +68,15 @@ os.chdir(os.path.join(os.getcwd(), __file__.replace(
 # Setting up Flask and babel (web and translations)
 app = Flask(__name__, static_url_path='')
 app.url_map.strict_slashes = False  # Ignore trailing slashes in URLs
+app.json = JinjaCompatibleJsonProvider(app)
+
+# Most files should be loaded through the CDN which has its own caching period and invalidation.
+# Use 5 minutes as a reasonable default for all files we load elsewise.
+app.config['SEND_FILE_MAX_AGE_DEFAULT'] = datetime.timedelta(minutes=5)
+
 babel = Babel(app)
 
+jinja_partials.register_extensions(app)
 app.template_filter('tojson')(proper_tojson)
 
 COMMANDS = collections.defaultdict(hedy_content.NoSuchCommand)
@@ -93,8 +107,12 @@ ACHIEVEMENTS_TRANSLATIONS = hedyweb.AchievementTranslations()
 DATABASE = database.Database()
 ACHIEVEMENTS = achievements.Achievements(DATABASE, ACHIEVEMENTS_TRANSLATIONS)
 
+TAGS = collections.defaultdict(hedy_content.NoSuchAdventure)
+for lang in ALL_LANGUAGES.keys():
+    TAGS[lang] = hedy_content.Tags(lang)
 
-def load_adventures_for_level(level):
+
+def load_adventures_for_level(level, subset=None):
     """Load the adventures available to the current user at the given level.
 
     These are the default adventures, with the customizations implied
@@ -107,7 +125,10 @@ def load_adventures_for_level(level):
     keyword_lang = g.keyword_lang
 
     all_adventures = []
-    adventures = ADVENTURES[g.lang].get_adventures(keyword_lang)
+    if subset:
+        adventures = ADVENTURES[g.lang].get_adventures_subset(subset, keyword_lang)
+    else:
+        adventures = ADVENTURES[g.lang].get_adventures(keyword_lang)
 
     for short_name, adventure in adventures.items():
         adventure_level = adventure['levels'].get(level, None)
@@ -138,6 +159,7 @@ def load_adventures_for_level(level):
                 example_code=adventure['levels'][level].get('example_code', ""),
                 extra_stories=extra_stories,
                 is_teacher_adventure=False,
+                is_command_adventure=short_name in KEYWORDS_ADVENTURES,
                 save_name=f'{default_save_name} {level}',
                 start_code=adventure['levels'][level].get('start_code', ""))
 
@@ -276,6 +298,10 @@ def initialize_session():
     utils.session_id()
     login_user_from_token_cookie()
 
+    g.user = current_user()
+    querylog.log_value(session_id=utils.session_id(), username=g.user['username'],
+                       is_teacher=is_teacher(g.user), is_admin=is_admin(g.user))
+
 
 if os.getenv('IS_PRODUCTION'):
     @app.before_request
@@ -346,6 +372,7 @@ def setup_language():
         session['lang'] = request.accept_languages.best_match(
             ALL_LANGUAGES.keys(), 'en')
     g.lang = session['lang']
+    querylog.log_value(lang=session['lang'])
 
     if 'keyword_lang' not in session:
         session['keyword_lang'] = g.lang if g.lang in ALL_KEYWORD_LANGUAGES.keys() else 'en'
@@ -376,7 +403,8 @@ if utils.is_heroku() and not os.getenv('HEROKU_RELEASE_CREATED_AT'):
 def enrich_context_with_user_info():
     user = current_user()
     data = {'username': user.get('username', ''),
-            'is_teacher': is_teacher(user), 'is_admin': is_admin(user)}
+            'is_teacher': is_teacher(user), 'is_second_teacher': is_second_teacher(user),
+            'is_admin': is_admin(user), 'has_public_profile': has_public_profile(user)}
     return data
 
 
@@ -385,6 +413,35 @@ def add_generated_css_file():
     return {
         "generated_css_file": '/css/generated.full.css' if is_debug_mode() else '/css/generated.css'
     }
+
+
+@app.context_processor
+def add_hx_detection():
+    """Detect when a request is sent by HTMX.
+
+    A template may decide to render things differently when it is vs. when it isn't.
+    """
+    hx_request = bool(request.headers.get('Hx-Request'))
+    return {
+        "hx_request": hx_request,
+        "hx_layout": 'htmx-layout-yes.html' if hx_request else 'htmx-layout-no.html',
+    }
+
+
+@app.after_request
+def hx_triggers(response):
+    """For HTMX Requests, push any pending achievements in the session to the client.
+
+    Use the HX-Trigger header, which will trigger events on the client. There is a listener
+    there which will respond to the 'displayAchievements' event.
+    """
+    if not request.headers.get('HX-Request'):
+        return response
+
+    achs = session.pop('pending_achievements', [])
+    if achs:
+        response.headers.set('HX-Trigger', json.dumps({'displayAchievements': achs}))
+    return response
 
 
 @app.after_request
@@ -428,6 +485,7 @@ def echo_session_vars_main():
 
 
 @app.route('/parse', methods=['POST'])
+@querylog.timed_as('parse_handler')
 def parse():
     body = request.json
     if not body:
@@ -438,14 +496,15 @@ def parse():
         return "body.level must be a string", 400
     if 'adventure_name' in body and not isinstance(body['adventure_name'], str):
         return "if present, body.adventure_name must be a string", 400
-
+    if 'is_debug' not in body:
+        return "body.is_debug must be a boolean", 400
     error_check = False
     if 'error_check' in body:
         error_check = True
 
     code = body['code']
     level = int(body['level'])
-
+    is_debug = bool(body['is_debug'])
     # Language should come principally from the request body,
     # but we'll fall back to browser default if it's missing for whatever
     # reason.
@@ -465,7 +524,7 @@ def parse():
         keyword_lang = current_keyword_language()["lang"]
         with querylog.log_time('transpile'):
             try:
-                transpile_result = transpile_add_stats(code, level, lang)
+                transpile_result = transpile_add_stats(code, level, lang, is_debug)
                 if username and not body.get('tutorial'):
                     DATABASE.increase_user_run_count(username)
                     ACHIEVEMENTS.increase_count("run")
@@ -476,10 +535,9 @@ def parse():
                 else:
                     response['Error'] = translated_error
                 response['Location'] = ex.error_location
-                response['FixedCode'] = ex.fixed_code
                 transpile_result = ex.fixed_result
                 exception = ex
-            except hedy.exceptions.UnquotedEqualityCheck as ex:
+            except hedy.exceptions.UnquotedEqualityCheckException as ex:
                 response['Error'] = translate_error(ex.error_code, ex.arguments, keyword_lang)
                 response['Location'] = ex.error_location
                 exception = ex
@@ -490,6 +548,19 @@ def parse():
             """)
             response['Code'] = t + transpile_result.code
 
+            #response['Code'] = transpile_result.code
+            source_map_result = transpile_result.source_map.get_result()
+
+            for i, mapping in source_map_result.items():
+                if mapping['error'] is not None:
+                    source_map_result[i]['error'] = translate_error(
+                        source_map_result[i]['error'].error_code,
+                        source_map_result[i]['error'].arguments,
+                        keyword_lang
+                    )
+
+            response['source_map'] = source_map_result
+
             if transpile_result.has_pygame:
                 response['has_pygame'] = True
 
@@ -498,13 +569,15 @@ def parse():
         except Exception:
             pass
 
-        try:
-            response['has_sleep'] = 'sleep' in hedy.all_commands(code, level, lang)
-        except BaseException:
-            pass
+        with querylog.log_time('detect_sleep'):
+            try:
+                response['has_sleep'] = 'sleep' in transpile_result.commands
+            except BaseException:
+                pass
+
         try:
             if username and not body.get('tutorial') and ACHIEVEMENTS.verify_run_achievements(
-                    username, code, level, response):
+                    username, code, level, response, transpile_result.commands):
                 response['achievements'] = ACHIEVEMENTS.get_earned_achievements()
         except Exception as E:
             print(f"error determining achievements for {code} with {E}")
@@ -657,11 +730,11 @@ def download_machine_file(filename, extension="zip"):
     return send_file("machine_files/" + filename + "." + extension, as_attachment=True)
 
 
-def transpile_add_stats(code, level, lang_):
+def transpile_add_stats(code, level, lang_, is_debug):
     username = current_user()['username'] or None
     number_of_lines = code.count('\n')
     try:
-        result = hedy.transpile(code, level, lang_)
+        result = hedy.transpile(code, level, lang_, is_debug=is_debug)
         statistics.add(
             username, lambda id_: DATABASE.add_program_stats(id_, level, number_of_lines, None))
         return result
@@ -691,6 +764,7 @@ def translate_error(code, arguments, keyword_lang):
         'allowed_types',
         'invalid_type',
         'invalid_type_2',
+        'offending_keyword',
         'character_found',
         'concept',
         'tip',
@@ -700,12 +774,14 @@ def translate_error(code, arguments, keyword_lang):
         'ask',
         'echo',
         'is',
+        'if',
         'repeat']
     arguments_that_require_highlighting = [
         'command',
         'guessed_command',
         'invalid_argument',
         'invalid_argument_2',
+        'offending_keyword',
         'variable',
         'invalid_value',
         'print',
@@ -713,6 +789,7 @@ def translate_error(code, arguments, keyword_lang):
         'ask',
         'echo',
         'is',
+        'if',
         'repeat']
 
     # Todo TB -> We have to find a more delicate way to fix this: returns some gettext() errors
@@ -735,6 +812,7 @@ def translate_error(code, arguments, keyword_lang):
     arguments["else"] = "else"
     arguments["repeat"] = "repeat"
     arguments["is"] = "is"
+    arguments["if"] = "if"
 
     # some arguments like allowed types or characters need to be translated in the error message
     for k, v in arguments.items():
@@ -982,6 +1060,8 @@ def tutorial_index():
     initial_tab = adventures[0].short_name
     initial_adventure = adventures[0]
 
+    max_level = hedy.HEDY_MAX_LEVEL  # do we need to fetch the max level per language?
+
     return render_template(
         "code-page.html",
         intro_tutorial=True,
@@ -992,6 +1072,7 @@ def tutorial_index():
         initial_tab=initial_tab,
         commands=commands,
         quiz=True,
+        max_level=max_level,
         parsons=True if parsons else False,
         parsons_exercises=parsons,
         initial_adventure=initial_adventure,
@@ -1035,15 +1116,183 @@ def teacher_tutorial(user):
                                tutorial=True,
                            ))
 
+# routing to index.html
+
+
+@app.route('/hour-of-code/<int:level>', methods=['GET'])
+@app.route('/hour-of-code', methods=['GET'], defaults={'level': 1})
+def hour_of_code(level, program_id=None):
+    try:
+        level = int(level)
+        if level < 1 or level > hedy.HEDY_MAX_LEVEL:
+            return utils.error_page(error=404, ui_message=gettext('no_such_level'))
+    except BaseException:
+        return utils.error_page(error=404, ui_message=gettext('no_such_level'))
+
+    loaded_program = None
+    if program_id:
+        result = DATABASE.program_by_id(program_id)
+        if not result or not current_user_allowed_to_see_program(result):
+            return utils.error_page(error=404, ui_message=gettext('no_such_program'))
+
+        loaded_program = Program.from_database_row(result)
+
+    subset = [adv.strip() for adv in request.args.get("subset", "").strip().split(",")]
+    subset = subset if subset[0] else HOUR_OF_CODE_ADVENTURES[level]
+    adventures = load_adventures_for_level(level, subset=subset)
+
+    if not adventures:
+        return utils.error_page(error=404, ui_message=gettext("no_such_adventure"))
+
+    # Initially all levels are available -> strip those for which conditions
+    # are not met or not available yet
+    available_levels = list(range(1, hedy.HEDY_MAX_LEVEL + 1))
+
+    customizations = {}
+    if current_user()['username']:
+        customizations = DATABASE.get_student_class_customizations(current_user()['username'])
+
+    if 'levels' in customizations:
+        available_levels = customizations['levels']
+        now = timems()
+        for current_level, timestamp in customizations.get('opening_dates', {}).items():
+            if utils.datetotimeordate(timestamp) > utils.datetotimeordate(utils.mstoisostring(now)):
+                try:
+                    available_levels.remove(int(current_level))
+                except BaseException:
+                    print("Error: there is an openings date without a level")
+
+    if 'levels' in customizations and level not in available_levels:
+        return utils.error_page(error=403, ui_message=gettext('level_not_class'))
+
+    # At this point we can have the following scenario:
+    # - The level is allowed and available
+    # - But, if there is a quiz threshold we have to check again if the user has reached it
+
+    if 'level_thresholds' in customizations:
+        if 'quiz' in customizations.get('level_thresholds'):
+            # Temporary store the threshold
+            threshold = customizations.get('level_thresholds').get('quiz')
+            # Get the max quiz score of the user in the previous level
+            # A bit out-of-scope, but we want to enable the next level button directly after finishing the quiz
+            # Todo: How can we fix this without a re-load?
+            quiz_stats = DATABASE.get_quiz_stats([current_user()['username']])
+            # Only check the quiz threshold if there is a quiz to obtain a score on the previous level
+            if level > 1 and QUIZZES[g.lang].get_quiz_data_for_level(level - 1):
+                scores = [x.get('scores', []) for x in quiz_stats if x.get('level') == level - 1]
+                scores = [score for week_scores in scores for score in week_scores]
+                max_score = 0 if len(scores) < 1 else max(scores)
+                if max_score < threshold:
+                    return utils.error_page(
+                        error=403, ui_message=gettext('quiz_threshold_not_reached'))
+
+            # We also have to check if the next level should be removed from the available_levels
+            # Only check the quiz threshold if there is a quiz to obtain a score on the current level
+            if level < hedy.HEDY_MAX_LEVEL and QUIZZES[g.lang].get_quiz_data_for_level(level):
+                scores = [x.get('scores', []) for x in quiz_stats if x.get('level') == level]
+                scores = [score for week_scores in scores for score in week_scores]
+                max_score = 0 if len(scores) < 1 else max(scores)
+                # We don't have the score yet for the next level -> remove all upcoming
+                # levels from 'available_levels'
+                if max_score < threshold:
+                    # if this level is currently available, but score is below max score
+                    customizations["below_threshold"] = (level + 1 in available_levels)
+                    available_levels = available_levels[:available_levels.index(level) + 1]
+
+    # Add the available levels to the customizations dict -> simplify
+    # implementation on the front-end
+    customizations['available_levels'] = available_levels
+    cheatsheet = COMMANDS[g.lang].get_commands_for_level(level, g.keyword_lang)
+
+    load_customized_adventures(level, customizations, adventures)
+    load_saved_programs(level, adventures, loaded_program)
+    initial_tab = adventures[0].short_name
+
+    if loaded_program:
+        # Make sure that there is an adventure(/tab) for a loaded program, otherwise make one
+        initial_tab = loaded_program.adventure_name
+        if not any(a.short_name == loaded_program.adventure_name for a in adventures):
+            adventures.append(Adventure(
+                short_name=loaded_program.adventure_name,
+                # This is not great but we got nothing better :)
+                name=gettext('your_program'),
+                text='',
+                example_code='',
+                start_code=loaded_program.code,
+                save_name=loaded_program.name,
+                is_teacher_adventure=False,
+                is_command_adventure=loaded_program.adventure_name in KEYWORDS_ADVENTURES
+            ))
+
+    adventures_map = {a.short_name: a for a in adventures}
+
+    enforce_developers_mode = False
+    if 'other_settings' in customizations and 'developers_mode' in customizations['other_settings']:
+        enforce_developers_mode = True
+
+    hide_cheatsheet = False
+    if 'other_settings' in customizations and 'hide_cheatsheet' in customizations['other_settings']:
+        hide_cheatsheet = True
+
+    quiz = True if QUIZZES[g.lang].get_quiz_data_for_level(level) else False
+    tutorial = True if TUTORIALS[g.lang].get_tutorial_for_level(level) else False
+
+    quiz_questions = 0
+
+    if quiz:
+        quiz_questions = len(QUIZZES[g.lang].get_quiz_data_for_level(level))
+
+    if 'other_settings' in customizations and 'hide_quiz' in customizations['other_settings']:
+        quiz = False
+
+    max_level = hedy.HEDY_MAX_LEVEL
+    level_number = int(level)
+
+    commands = hedy.commands_per_level.get(level)
+    return render_template(
+        "code-page.html",
+        level_nr=str(level_number),
+        level=level_number,
+        current_page='Hour of Code',
+        prev_level=level_number - 1 if level_number > 1 else None,
+        next_level=level_number + 1 if level_number < max_level else None,
+        HOC_tracking_pixel=True,
+        customizations=customizations,
+        hide_cheatsheet=hide_cheatsheet,
+        # enforce_developers_mode=enforce_developers_mode,
+        enforce_developers_mode=enforce_developers_mode,
+        loaded_program=loaded_program,
+        adventures=adventures,
+        initial_tab=initial_tab,
+        commands=commands,
+        # parsons=parsons,
+        # parsons_exercises=parson_exercises,
+        tutorial=tutorial,
+        latest=version(),
+        quiz=quiz,
+        max_level=hedy.HEDY_MAX_LEVEL,
+        quiz_questions=quiz_questions,
+        cheatsheet=cheatsheet,
+        blur_button_available=False,
+        initial_adventure=adventures_map[initial_tab],
+        current_user_is_in_class=len(current_user().get('classes') or []) > 0,
+        # See initialize.ts
+        javascript_page_options=dict(
+            page='code',
+            level=level_number,
+            lang=g.lang,
+            adventures=adventures,
+            initial_tab=initial_tab,
+            current_user_name=current_user()['username'],
+        ))
+
 
 # routing to index.html
 @app.route('/ontrack', methods=['GET'], defaults={'level': '1', 'program_id': None})
 @app.route('/onlinemasters', methods=['GET'], defaults={'level': '1', 'program_id': None})
 @app.route('/onlinemasters/<int:level>', methods=['GET'], defaults={'program_id': None})
-@app.route('/space_eu', methods=['GET'], defaults={'level': '1', 'program_id': None})
-@app.route('/hedy', methods=['GET'], defaults={'level': '1', 'program_id': None})
-@app.route('/hedy/<level>', methods=['GET'], defaults={'program_id': None})
-@app.route('/hedy/<level>/<program_id>', methods=['GET'])
+@app.route('/hedy/<int:level>', methods=['GET'], defaults={'program_id': None})
+@app.route('/hedy/<int:level>/<program_id>', methods=['GET'])
 def index(level, program_id):
     try:
         level = int(level)
@@ -1053,7 +1302,6 @@ def index(level, program_id):
         return utils.error_page(error=404, ui_message=gettext('no_such_level'))
 
     loaded_program = None
-
     if program_id:
         result = DATABASE.program_by_id(program_id)
         if not result or not current_user_allowed_to_see_program(result):
@@ -1140,6 +1388,7 @@ def index(level, program_id):
                 start_code=loaded_program.code,
                 save_name=loaded_program.name,
                 is_teacher_adventure=False,
+                is_command_adventure=loaded_program.adventure_name in KEYWORDS_ADVENTURES
             ))
 
     adventures_map = {a.short_name: a for a in adventures}
@@ -1180,6 +1429,7 @@ def index(level, program_id):
         current_page='hedy',
         prev_level=level_number - 1 if level_number > 1 else None,
         next_level=level_number + 1 if level_number < max_level else None,
+        max_level=hedy.HEDY_MAX_LEVEL,
         customizations=customizations,
         hide_cheatsheet=hide_cheatsheet,
         enforce_developers_mode=enforce_developers_mode,
@@ -1206,6 +1456,22 @@ def index(level, program_id):
             initial_tab=initial_tab,
             current_user_name=current_user()['username'],
         ))
+
+
+@app.route('/hedy', methods=['GET'])
+def index_level():
+    if current_user()['username']:
+        highest_quiz = get_highest_quiz_level(current_user()['username'])
+        # This function returns the character '-' in case there are no finished quizes
+        if highest_quiz == '-':
+            level_rendered = 1
+        elif highest_quiz == hedy.HEDY_MAX_LEVEL:
+            level_rendered = hedy.HEDY_MAX_LEVEL
+        else:
+            level_rendered = highest_quiz + 1
+        return index(level_rendered, None)
+    else:
+        return index(1, None)
 
 
 @app.route('/hedy/<id>/view', methods=['GET'])
@@ -1278,10 +1544,8 @@ def get_specific_adventure(name, level, mode):
     if not adventures:
         return utils.error_page(error=404, ui_message=gettext('no_such_adventure'))
 
-    prev_level = level - 1 if [x for x in load_adventures_for_level(
-        level - 1) if x.short_name == name] else False
-    next_level = level + 1 if [x for x in load_adventures_for_level(
-        level + 1) if x.short_name == name] else False
+    prev_level = None  # we are not rendering buttons in raw, no lookup needed here
+    next_level = None
 
     # Add the commands to enable the language switcher dropdown
     commands = hedy.commands_per_level.get(level)
@@ -1317,6 +1581,57 @@ def get_specific_adventure(name, level, mode):
                                adventures=adventures,
                                initial_tab=initial_tab,
                                current_user_name=current_user()['username'],
+                           ))
+
+
+@app.route('/embedded/<int:level>', methods=['GET'])
+def get_embedded_code_editor(level):
+    forget_current_user()
+
+    # Start with an empty program
+    program = ''
+
+    # If for any reason the level is invalid, set to level 1
+    try:
+        level = int(level)
+        if level < 1 or level > hedy.HEDY_MAX_LEVEL:
+            program = gettext('invalid_level_comment')
+            level = 1
+    except ValueError:
+        program = gettext('invalid_level_comment')
+        level = 1
+
+    run = True if request.args.get('run') == 'true' else False
+    readOnly = True if request.args.get('readOnly') == 'true' else False
+    encoded_program = request.args.get('program')
+
+    # Set a fallback for default use
+    language = request.args.get('lang', 'en')
+    if language not in ALL_LANGUAGES.keys():
+        language = 'nl'
+        program = gettext('invalid_language_comment')
+
+    keyword_language = request.args.get('keyword', 'en')
+    if keyword_language not in ALL_KEYWORD_LANGUAGES.keys():
+        language = 'en'
+        program = gettext('invalid_keyword_language_comment')
+
+    # Make sure to set the session lang to enforce the correct translated strings to be rendered
+    session['lang'] = language
+
+    if encoded_program and not program:
+        try:
+            program = base64.b64decode(encoded_program)
+            program = program.decode('utf-8')
+        except binascii.Error:
+            program = gettext('invalid_program_comment')
+
+    return render_template("embedded-editor.html", embedded=True, run=run, language=language,
+                           keyword_language=keyword_language, readOnly=readOnly,
+                           level=level, program=program, javascript_page_options=dict(
+                               page='code',
+                               lang=language,
+                               level=level
                            ))
 
 
@@ -1451,7 +1766,7 @@ def reset_page():
 @requires_login_redirect
 def profile_page(user):
     profile = DATABASE.user_by_username(user['username'])
-    programs = DATABASE.public_programs_for_user(user['username'])
+    programs = DATABASE.filtered_programs_for_user(user['username'], public=True)
     public_profile_settings = DATABASE.get_public_profile_settings(current_user()['username'])
 
     classes = []
@@ -1495,10 +1810,9 @@ def favicon():
 
 
 @app.route('/')
-@app.route('/start')
 @app.route('/index.html')
 def main_page():
-    sections = hedyweb.PageTranslations('start').get_page_translations(g.lang)['start-sections']
+    sections = hedyweb.PageTranslations('start').get_page_translations(g.lang)['home-sections']
 
     sections = sections[:]
 
@@ -1536,6 +1850,11 @@ def main_page():
                            current_page='start', content=content)
 
 
+@app.route('/subscribe')
+def subscribe():
+    return render_template('subscribe.html', current_page='subscribe')
+
+
 @app.route('/learn-more')
 def learn_more():
     learn_more_translations = hedyweb.PageTranslations('learn-more').get_page_translations(g.lang)
@@ -1552,6 +1871,13 @@ def join():
     join_translations = hedyweb.PageTranslations('join').get_page_translations(g.lang)
     return render_template('join.html', page_title=gettext('title_learn-more'),
                            current_page='join', content=join_translations)
+
+
+@app.route('/start')
+def start():
+    start_translations = hedyweb.PageTranslations('start').get_page_translations(g.lang)
+    return render_template('start.html', page_title=gettext('title_learn-more'),
+                           current_page='start', content=start_translations)
 
 
 @app.route('/privacy')
@@ -1598,12 +1924,16 @@ def explore():
         achievement = ACHIEVEMENTS.add_single_achievement(
             current_user()['username'], "indiana_jones")
 
-    programs = normalize_explore_programs(DATABASE.get_public_programs(
+    programs = DATABASE.get_public_programs(
         limit=40,
         level_filter=level,
         language_filter=language,
-        adventure_filter=adventure))
-    favourite_programs = normalize_explore_programs(DATABASE.get_hedy_choices())
+        adventure_filter=adventure)
+    favourite_programs = DATABASE.get_hedy_choices()
+
+    # Do 'normalize_public_programs' on both sets at once, to save database calls
+    normalized = normalize_public_programs(list(programs) + list(favourite_programs.records))
+    programs, favourite_programs = split_at(len(programs), normalized)
 
     adventures_names = hedy_content.Adventures(session['lang']).get_adventure_names()
 
@@ -1611,7 +1941,7 @@ def explore():
         'explore.html',
         programs=programs,
         favourite_programs=favourite_programs,
-        filtered_level=str(level),
+        filtered_level=str(level) if level else None,
         achievement=achievement,
         filtered_adventure=adventure,
         filtered_lang=language,
@@ -1621,8 +1951,8 @@ def explore():
         current_page='explore')
 
 
-def normalize_explore_programs(programs):
-    """Normalize the content for all programs in the given array, for showing on the /explore page.
+def normalize_public_programs(programs):
+    """Normalize the content for all programs in the given array, for showing on the /explore or /user page.
 
     Does the following thing:
 
@@ -1818,6 +2148,17 @@ def translate_command(command):
 
 
 @app.template_filter()
+def markdown_retain_newlines(x):
+    """Force newlines in to the input MarkDown string to be rendered as <br>"""
+    # This works by adding two spaces before every newline. That's a signal to MarkDown
+    # that the newlines should be forced.
+    #
+    # Nobody is going to type this voluntarily to distinguish between linebreaks line by
+    # line, but you can use this filter to do this for all line breaks.
+    return x.replace('\n', '  \n')
+
+
+@app.template_filter()
 def nl2br(x):
     """Turn newlines into <br>"""
     # The input to this object will either be a literal string or a 'Markup' object.
@@ -1865,10 +2206,15 @@ def all_countries():
 
 
 @app.template_global()
-def other_languages():
+def other_languages(lang_param=None):
     """Return a list of language objects that are NOT the current language."""
-    current_lang = g.lang
+    current_lang = lang_param or g.lang
     return [make_lang_obj(lang) for lang in ALL_LANGUAGES.keys() if lang != current_lang]
+
+
+@app.template_global()
+def lang_to_sym(lang):
+    return ALL_LANGUAGES[lang]
 
 
 @app.template_global()
@@ -1932,7 +2278,7 @@ def modify_query(**new_values):
     for key, value in new_values.items():
         args[key] = value
 
-    return '{}?{}'.format(request.path, url_encode(args))
+    return '{}?{}'.format(request.path, quote_plus(args))
 
 
 @app.template_global()
@@ -2038,23 +2384,29 @@ def public_user_page(username):
     if not user:
         return utils.error_page(error=404, ui_message=gettext('user_not_private'))
     user_public_info = DATABASE.get_public_profile_settings(username)
+    page = request.args.get('page', default=None, type=str)
     if user_public_info:
-        user_programs = DATABASE.public_programs_for_user(username)
+        user_programs = DATABASE.filtered_programs_for_user(username,
+                                                            public=True,
+                                                            limit=10,
+                                                            pagination_token=page)
+        next_page_token = user_programs.next_page_token
+        user_programs = normalize_public_programs(user_programs)
         user_achievements = DATABASE.progress_by_username(username) or {}
 
         favourite_program = None
         if 'favourite_program' in user_public_info and user_public_info['favourite_program']:
             favourite_program = DATABASE.program_by_id(
                 user_public_info['favourite_program'])
-        if len(user_programs) >= 5:
-            user_programs = user_programs[:5]
 
         last_achieved = None
         if user_achievements.get('achieved'):
             last_achieved = user_achievements['achieved'][-1]
         certificate_message = safe_format(gettext('see_certificate'), username=username)
+        print(user_programs)
         # Todo: TB -> In the near future: add achievement for user visiting their own profile
-
+        next_page_url = url_for('public_user_page', username=username, **dict(request.args,
+                                page=next_page_token)) if next_page_token else None
         return render_template(
             'public-page.html',
             user_info=user_public_info,
@@ -2064,7 +2416,8 @@ def public_user_page(username):
             programs=user_programs,
             last_achieved=last_achieved,
             user_achievements=user_achievements,
-            certificate_message=certificate_message)
+            certificate_message=certificate_message,
+            next_page_url=next_page_url)
     return utils.error_page(error=404, ui_message=gettext('user_not_private'))
 
 
@@ -2135,6 +2488,8 @@ app.register_blueprint(achievements.AchievementsModule(ACHIEVEMENTS))
 app.register_blueprint(quiz.QuizModule(DATABASE, ACHIEVEMENTS, QUIZZES))
 app.register_blueprint(parsons.ParsonsModule(PARSONS))
 app.register_blueprint(statistics.StatisticsModule(DATABASE))
+app.register_blueprint(statistics.LiveStatisticsModule(DATABASE))
+app.register_blueprint(tags.TagsModule(DATABASE, ACHIEVEMENTS))
 
 
 # *** START SERVER ***
@@ -2156,20 +2511,71 @@ def try_parse_int(x):
         return None
 
 
+def analyze_memory_snapshot(start_snapshot, end_snapshot):
+    filters = [
+        tracemalloc.Filter(False, "<frozen importlib._bootstrap>"),
+        tracemalloc.Filter(False, "<frozen importlib._bootstrap_external>"),
+        tracemalloc.Filter(False, "<unknown>"),
+    ]
+    start_snapshot = start_snapshot.filter_traces(filters)
+    end_snapshot = end_snapshot.filter_traces(filters)
+    top_stats = end_snapshot.compare_to(start_snapshot, 'traceback')
+
+    limit = 10
+
+    print("Top %s leaking locations" % limit)
+    for index, stat in enumerate(top_stats[:limit], 1):
+        print("#%s: %.1f KiB (count=%d)" % (index, stat.size / 1024, stat.count))
+        for line in stat.traceback.format():
+            print(' ', line)
+        print('')
+
+    other = top_stats[limit:]
+    if other:
+        size = sum(stat.size for stat in other)
+        print("%s other: %.1f KiB" % (len(other), size / 1024))
+    total = sum(stat.size for stat in top_stats)
+    print("Total allocated size: %.1f KiB" % (total / 1024))
+
+
+def split_at(n, xs):
+    """Split a collection at an index."""
+    return xs[:n], xs[n:]
+
+
 if __name__ == '__main__':
     # Start the server on a developer machine. Flask is initialized in DEBUG mode, so it
     # hot-reloads files. We also flip our own internal "debug mode" flag to True, so our
     # own file loading routines also hot-reload.
     utils.set_debug_mode(not os.getenv('NO_DEBUG_MODE'))
 
+    # For local debugging, fetch all static files on every request
+    app.config['SEND_FILE_MAX_AGE_DEFAULT'] = None
+
     # If we are running in a Python debugger, don't use flasks reload mode. It creates
     # subprocesses which make debugging harder.
     is_in_debugger = sys.gettrace() is not None
 
+    # Set PYTHONTRACEMALLOC=10 to debug memory usage
+    profile_memory = os.getenv('PYTHONTRACEMALLOC')
+    start_snapshot = None
+    if profile_memory:
+        import tracemalloc
+        tracemalloc.start()
+        start_snapshot = tracemalloc.take_snapshot()
+
     on_server_start()
     logger.debug('app starting in debug mode')
     # Threaded option enables multiple instances for multiple user access support
-    app.run(threaded=True, debug=not is_in_debugger,
+    app.run(threaded=True, debug=not is_in_debugger and not profile_memory,
             port=config['port'], host="0.0.0.0")
 
     # See `Procfile` for how the server is started on Heroku.
+
+    # If we hit Ctrl-C, we end up here
+    if profile_memory:
+        print('⏳ Taking memory snapshot. This may take a moment.')
+        import gc
+        gc.collect()
+        end_snapshot = tracemalloc.take_snapshot()
+        analyze_memory_snapshot(start_snapshot, end_snapshot)

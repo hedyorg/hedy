@@ -4,7 +4,8 @@ from parameterized import parameterized
 
 import exceptions
 import hedy
-from tests.Tester import HedyTester
+from hedy_sourcemap import SourceRange
+from tests.Tester import HedyTester, SkippedMapping
 
 
 class TestsLevel17(HedyTester):
@@ -535,3 +536,49 @@ class TestsLevel17(HedyTester):
               break""")
 
         self.single_level_tester(code=code, expected=expected)
+
+    def test_nested_functions(self):
+        code = textwrap.dedent("""\
+        define simple_function:
+            define nested_function:
+                print 1
+        call simple_function""")
+
+        expected = textwrap.dedent("""\
+        pass
+        simple_function()""")
+
+        skipped_mappings = [
+            SkippedMapping(SourceRange(1, 1, 3, 34), hedy.exceptions.NestedFunctionException),
+        ]
+
+        self.single_level_tester(
+            code=code,
+            expected=expected,
+            skipped_mappings=skipped_mappings,
+        )
+
+    def test_source_map(self):
+        code = textwrap.dedent("""\
+        for i in range 1 to 10:
+            print i
+        print 'Ready or not, here I come!'""")
+
+        excepted_code = textwrap.dedent("""\
+        step = 1 if 1 < 10 else -1
+        for i in range(1, 10 + step, step):
+          print(f'''{i}''')
+          time.sleep(0.1)
+        print(f'''Ready or not, here I come!''')""")
+
+        expected_source_map = {
+            '1/5-1/6': '1/10-1/11',
+            '2/11-2/12': '1/1-1/2',
+            '2/5-2/12': '3/1-3/18',
+            '1/1-2/21': '1/1-4/18',
+            '3/1-3/35': '5/1-5/41',
+            '1/1-3/36': '1/1-5/41'
+        }
+
+        self.single_level_tester(code, expected=excepted_code)
+        self.source_map_tester(code=code, expected_source_map=expected_source_map)

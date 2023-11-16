@@ -1,10 +1,12 @@
 import functools
 import operator
+import itertools
 from datetime import date, timedelta
 
 from utils import timems, times
 
-from . import dynamo
+from . import dynamo, auth
+from . import querylog
 
 storage = dynamo.AwsDynamoStorage.from_env() or dynamo.MemoryStorage("dev_database.json")
 
@@ -18,8 +20,9 @@ TOKENS = dynamo.Table(storage, "tokens", "id", indexes=[
 ])
 PROGRAMS = dynamo.Table(storage, "programs", "id", indexes=[
     dynamo.Index('username', sort_key='date', index_name='username-index'),
-    dynamo.Index('public', sort_key='date', index_name='public-index'),
     dynamo.Index('hedy_choice', sort_key='date', index_name='hedy_choice-index'),
+    # For the explore page, this index has 'level', 'lang' and 'adventure_name'
+    dynamo.Index('public', sort_key='date'),
 
     # For the filtered view of the 'explore' page (keys_only so we don't duplicate other attributes unnecessarily)
     dynamo.Index('lang', sort_key='date', keys_only=True),
@@ -39,10 +42,20 @@ CLASSES = dynamo.Table(storage, "classes", "id", indexes=[
 # - level (int | str): level number, sometimes as an int, sometimes as a str
 # - name (str): adventure name
 # - public (bool): whether it can be shared
-ADVENTURES = dynamo.Table(storage, "adventures", "id", indexes=[dynamo.Index("creator")])
+# - tags_id (str): id of tags that describe this adventure.
+ADVENTURES = dynamo.Table(storage, "adventures", "id", indexes=[dynamo.Index("creator"), dynamo.Index("public")])
 INVITATIONS = dynamo.Table(
     storage, "class_invitations", partition_key="username", indexes=[dynamo.Index("class_id")]
 )
+
+"""
+# TAGS
+    - id
+    - name (str): tag name.
+    - tagged_in ([{ id, public, language }]): tagged in which adventures.
+    - popularity (int): # of adventures it's been tagged in.
+"""
+TAGS = dynamo.Table(storage, "tags", "id", indexes=[dynamo.Index("name", sort_key="popularity")])
 
 # Class customizations
 #
@@ -73,8 +86,8 @@ CUSTOMIZATIONS = dynamo.Table(storage, "class_customizations", partition_key="id
 ACHIEVEMENTS = dynamo.Table(storage, "achievements", partition_key="username")
 PUBLIC_PROFILES = dynamo.Table(storage, "public_profiles", partition_key="username")
 PARSONS = dynamo.Table(storage, "parsons", "id")
-
-
+STUDENT_ADVENTURES = dynamo.Table(storage, "student_adventures", "id")
+CLASS_ERRORS = dynamo.Table(storage, "class_errors", "id")
 # We use the epoch field to make an index on the users table, sorted by a different
 # sort key. In our case, we want to sort by 'created', so that we can make an ordered
 # list of users.
@@ -126,12 +139,16 @@ QUIZ_STATS = dynamo.Table(
     storage, "quiz-stats", partition_key="id#level", sort_key="week", indexes=[dynamo.Index("id", "week")]
 )
 
+# Program stats also includes a boolean array indicating the order of successful and non-successful runs.
+# In order to not flood the database, this history array can maximally have 100 entries.
+MAX_CHART_HISTORY_SIZE = 50
+
 
 class Database:
     def record_quiz_answer(self, attempt_id, username, level, question_number, answer, is_correct):
         """Update the current quiz record with a new answer.
 
-        Uses a DynamoDB update to add to the exising record.
+        Uses a DynamoDB update to add to the exising record. Expects answer to be A, B, C etc.
         """
         key = {
             "user": username,
@@ -191,14 +208,15 @@ class Database:
         """
         return PROGRAMS.get_many({"username": username}, reverse=True)
 
-    def filtered_programs_for_user(self, username, level=None, adventure=None, submitted=None,
+    def filtered_programs_for_user(self, username, level=None, adventure=None, submitted=None, public=None,
                                    limit=None, pagination_token=None):
         ret = []
 
         # FIXME: Query by index, the current behavior is slow for many programs
         # (See https://github.com/hedyorg/hedy/issues/4121)
         programs = dynamo.GetManyIterator(PROGRAMS, {"username": username},
-                                          reverse=True, limit=limit, pagination_token=pagination_token)
+                                          reverse=True, batch_size=limit, pagination_token=pagination_token)
+
         for program in programs:
             if level and program.get('level') != int(level):
                 continue
@@ -210,18 +228,15 @@ class Database:
             if submitted is not None:
                 if program.get('submitted') != submitted:
                     continue
+            if public is not None and bool(program.get('public')) != public:
+                continue
 
             ret.append(program)
 
-            if len(ret) >= limit:
+            if limit and len(ret) >= limit:
                 break
 
         return dynamo.ResultPage(ret, programs.next_page_token)
-
-    def public_programs_for_user(self, username):
-        # Only return programs that are public but not submitted
-        programs = PROGRAMS.get_many({"username": username}, reverse=True)
-        return [p for p in programs if p.get("public") == 1 and not p.get("submitted", False)]
 
     def program_by_id(self, id):
         """Get program by ID.
@@ -267,6 +282,32 @@ class Database:
     def delete_program_by_id(self, id):
         """Delete a program by id."""
         PROGRAMS.delete({"id": id})
+
+    def student_adventure_by_id(self, id):
+        # Fetch a student adventure with id formatted as studentID-adventureName-level
+        return STUDENT_ADVENTURES.get({"id": id})
+
+    def update_student_adventure(self, id, ticked):
+        # Swap the ticked value when a request is sent
+        return STUDENT_ADVENTURES.update({"id": id}, {"ticked": not ticked})
+
+    def store_student_adventure(self, student_adventure):
+        # Store the adventure data in this table in case it doesn't match the programs table.
+        STUDENT_ADVENTURES.create(student_adventure)
+        return student_adventure
+
+    def get_class_errors(self, class_id):
+        # Fetch a student adventure with id formatted as studentID-adventureName-level
+        return CLASS_ERRORS.get({"id": class_id})
+
+    def update_class_errors(self, class_errors):
+        # Swap the ticked value when a request is sent
+        return CLASS_ERRORS.put(class_errors)
+
+    def store_class_errors(self, class_errors):
+        # create a new class errors object
+        CLASS_ERRORS.create(class_errors)
+        return class_errors
 
     def increase_user_program_count(self, username, delta=1):
         """Increase the program count of a user by the given delta."""
@@ -372,58 +413,46 @@ class Database:
         programs = PROGRAMS.get_many({"public": 1}, reverse=True)
         return [x for x in programs if not x.get("submitted", False)]
 
+    @querylog.timed_as("get_public_programs")
     def get_public_programs(self, level_filter=None, language_filter=None, adventure_filter=None, limit=40):
         """Return the most recent N public programs, optionally filtered by attributes.
 
-        Walk down three key-only indexes at the same time until we have accumulated enough programs.
+        The 'public' index is the most discriminatory: fetch public programs, then evaluate them against
+        the filters (on the server). The index we're using here has the 'lang', 'adventure_name' and
+        'level' columns.
         """
-        filters = []
+        filter = {}
         if level_filter:
-            filters.append(PROGRAMS.get_all({'level': int(level_filter)}, reverse=True))
+            filter['level'] = int(level_filter)
         if language_filter:
-            filters.append(PROGRAMS.get_all({'lang': language_filter}, reverse=True))
+            filter['lang'] = language_filter
         if adventure_filter:
-            filters.append(PROGRAMS.get_all({'adventure_name': adventure_filter}, reverse=True))
+            filter['adventure_name'] = adventure_filter
 
-        programs = dynamo.GetManyIterator(PROGRAMS, {'public': 1}, reverse=True)
-
-        # Iterate down programs, filtering down by the filters in 'filters' as we go to make sure
-        # the programs match the filter. This works because they all have a 'matching' date field
-        # we can use to sync up the streams.
-        #
-        # Use a cancellation token to timeout if this takes too long. For example, if there are 0
-        # programs to find this might take a long while to iterate through everything before it
-        # concludes we didn't want any of it.
-        #
-        # Intersecting the filters beforehand and then fetching whatever matches
-        # is more efficient if we are likely to match very little.
         timeout = dynamo.Cancel.after_timeout(timedelta(seconds=3))
+        id_batch_size = 200
 
-        found_programs = []
-        for program in programs:
-            if len(found_programs) >= limit or timeout.is_cancelled():
+        found_program_ids = []
+        pagination_token = None
+        while len(found_program_ids) < limit and not timeout.is_cancelled():
+            page = PROGRAMS.get_many({'public': 1}, reverse=True, limit=id_batch_size,
+                                     pagination_token=pagination_token, filter=filter)
+            found_program_ids.extend([{'id': r['id']} for r in page])
+            pagination_token = page.next_page_token
+            if pagination_token is None:
                 break
+        del found_program_ids[limit:]  # Cap off in case we found too much
 
-            # Advance every filter to match the date that the current program has
-            # FIXME: This is not guaranteed to catch 2 programs that have the same
-            # timestamp, but for the purposes of showing a sampling of public programs
-            # I don't really care.
-            for flt in filters:
-                while flt and flt.current['date'] > program['date']:
-                    flt.advance()
-
-            # Include the current program in the result set if it is now the front item in each filter.
-            if all((flt and flt.current['id'] == program['id']) for flt in filters):
-                found_programs.append(program)
-
+        # Now retrieve all programs we found with a batch-get
+        found_programs = PROGRAMS.batch_get(found_program_ids)
         return found_programs
 
     def add_public_profile_information(self, programs):
-        """Add the information to a list of programs on whether the author has a public profile or not.
+        """For each program in a list, note whether the author has a public profile or not.
 
         For each program, add 'public_user': True or 'public_user': None.
 
-        Modifies the list in-place.
+        Modifies the records in the list in-place.
         """
         queries = {p['id']: {'username': p['username'].strip().lower()} for p in programs}
         profiles = PUBLIC_PROFILES.batch_get(queries)
@@ -503,12 +532,16 @@ class Database:
         """Return the classes with given id."""
         return CLASSES.get({"id": id})
 
-    def get_teacher_classes(self, username, students_to_list=False):
+    def get_teacher_classes(self, username, students_to_list=False, teacher_only=False):
         """Return all the classes belonging to a teacher."""
         classes = None
+        user = auth.current_user()
         if isinstance(storage, dynamo.AwsDynamoStorage):
-            classes = CLASSES.get_many({"teacher": username}, reverse=True)
+            classes = list(CLASSES.get_many({"teacher": username}, reverse=True))
 
+            # if current user is a second teacher, we show the related classes.
+            if not teacher_only and auth.is_second_teacher(user):
+                classes.extend([CLASSES.get({"id": class_id}) for class_id in user["second_teacher_in"]])
         # If we're using the in-memory database, we need to make a shallow copy
         # of the classes before changing the `students` key from a set to list,
         # otherwise the field will remain a list later and that will break the
@@ -520,6 +553,12 @@ class Database:
             classes = []
             for Class in CLASSES.get_many({"teacher": username}, reverse=True):
                 classes.append(Class.copy())
+
+            # if current user is a second teacher, we show the related classes.
+            if not teacher_only and auth.is_second_teacher(user):
+                classes.extend([CLASSES.get({"id": class_id}).copy() for class_id in user["second_teacher_in"]])
+                # classes.extend(CLASSES.query.filter(id__in=user["second_teacher_in"]).all())
+
         if students_to_list:
             for Class in classes:
                 if "students" not in Class:
@@ -556,8 +595,45 @@ class Database:
     def update_adventure(self, adventure_id, adventure):
         ADVENTURES.update({"id": adventure_id}, adventure)
 
+    def create_tag(self, data):
+        return TAGS.create(data)
+
+    def read_tag(self, tag_name):
+        return TAGS.get({"name": tag_name})
+
+    def read_tags(self, tags):
+        return [self.read_tag(name) for name in tags]
+
+    def read_tags_by_username(self, username):
+        tags = TAGS.get_many({"creator": username})
+        return tags if tags else {}
+
+    def update_tag(self, tags_id, data):
+        # Update existing tags
+        return TAGS.update({"id": tags_id}, data)
+
     def get_teacher_adventures(self, username):
         return ADVENTURES.get_many({"creator": username})
+
+    def get_second_teacher_adventures(self, classes, teacher):
+        """Retrieves all adventures of every second teacher in a class"""
+        # we consider the current user as a second teacher
+        adventures = []
+        # accounting for duplicates
+        retrieved = {teacher: True}  # current teacher's adventures are already retrieved
+        # for the classes they're teachers and second teachers in, we
+        for Class in classes:
+            # get the adventures of all other teachers.
+            if not retrieved.get(Class["teacher"]):
+                adventures.extend(self.get_teacher_adventures(Class["teacher"]))
+                retrieved[Class["teacher"]] = True
+            # and all other second teachers
+            for st in Class.get("second_teachers", []):
+                if not retrieved.get(st["username"]):
+                    st_adventures = self.get_teacher_adventures(st["username"])
+                    adventures.extend(st_adventures)
+                    retrieved[st["username"]] = True
+        return adventures
 
     def all_adventures(self):
         return ADVENTURES.scan()
@@ -583,6 +659,10 @@ class Database:
         """Updates a class."""
         CLASSES.update({"id": id}, {"name": name})
 
+    def update_class_data(self, id, class_data):
+        """Updates a class."""
+        CLASSES.update({"id": id}, class_data)
+
     def add_student_to_class(self, class_id, student_id):
         """Adds a student to a class."""
         CLASSES.update({"id": class_id}, {"students": dynamo.DynamoAddToStringSet(student_id)})
@@ -592,6 +672,27 @@ class Database:
         """Removes a student from a class."""
         CLASSES.update({"id": class_id}, {"students": dynamo.DynamoRemoveFromStringSet(student_id)})
         USERS.update({"username": student_id}, {"classes": dynamo.DynamoRemoveFromStringSet(class_id)})
+
+    def add_second_teacher_to_class(self, Class, second_teacher):
+        """Adds a second teacher to a class."""
+        st_classes = second_teacher.get("second_teacher_in", []) + [Class["id"]]
+        self.update_user(second_teacher["username"], {"second_teacher_in": st_classes})
+
+        second_teachers = Class.get("second_teachers", []) + \
+            [{"username": second_teacher["username"], "role": "teacher"}]
+        self.update_class_data(Class["id"], {"second_teachers": second_teachers})
+
+    def remove_second_teacher_from_class(self, Class, second_teacher, only_user=False):
+        """Removes a second teacher from a class."""
+        # remove this class from the second teacher's table
+        st_classes = list(filter(lambda cid: cid != Class["id"], second_teacher.get("second_teacher_in", [])))
+        self.update_user(second_teacher["username"], {"second_teacher_in": st_classes})
+
+        if not only_user:
+            # remove this second teacher from the class' table
+            second_teachers = list(filter(lambda st: st["username"] !=
+                                          second_teacher["username"], Class.get("second_teachers", [])))
+            self.update_class_data(Class["id"], {"second_teachers": second_teachers})
 
     def delete_class(self, Class):
         for student_id in Class.get("students", []):
@@ -631,6 +732,11 @@ class Database:
         return customizations
 
     def get_student_class_customizations(self, user):
+        """Return customizations for the very first class this user is part of.
+
+        If the user is part of multiple classes, they will only get the customizations
+        of the first class.
+        """
         student_classes = self.get_student_classes(user)
         if student_classes:
             class_customizations = self.get_class_customizations(student_classes[0]["id"])
@@ -768,14 +874,25 @@ class Database:
         data = [QUIZ_STATS.get_many({"id": i, "week": dynamo.Between(start_week, end_week)}) for i in ids]
         return functools.reduce(operator.iconcat, data, [])
 
-    def add_program_stats(self, id, level, number_of_lines, exception):
+    def add_program_stats(self, id, level, number_of_lines, exception, error_message=None):
         key = {"id#level": f"{id}#{level}", "week": self.to_year_week(date.today())}
-
         add_attributes = {"id": id, "level": level, "number_of_lines": number_of_lines}
+        program_stats = PROGRAM_STATS.get_many({"id": id, "week": self.to_year_week(date.today())})
+
+        # chart history and error history are used for visual elements on the live dashboard, see statistics.py
+        # for how they are read from the database
+        chart_history = []
+        if program_stats.records:
+            chart_history = program_stats.records[0].get('chart_history', [])
+        chart_slice = MAX_CHART_HISTORY_SIZE if len(chart_history) > MAX_CHART_HISTORY_SIZE else 0
+
         if exception:
             add_attributes[exception] = dynamo.DynamoIncrement()
+            new_chart_history = list(chart_history) + [0]
         else:
             add_attributes["successful_runs"] = dynamo.DynamoIncrement()
+            new_chart_history = list(chart_history) + [1]
+        add_attributes["chart_history"] = new_chart_history[-chart_slice:]
 
         return PROGRAM_STATS.update(key, add_attributes)
 
@@ -796,3 +913,13 @@ class Database:
     def get_username_role(self, username):
         role = "teacher" if USERS.get({"username": username}).get("teacher_request") is True else "student"
         return role
+
+
+def batched(iterable, n):
+    "Batch data into tuples of length n. The last batch may be shorter."
+    # batched('ABCDEFG', 3) --> ABC DEF G
+    if n < 1:
+        raise ValueError('n must be at least one')
+    it = iter(iterable)
+    while batch := tuple(itertools.islice(it, n)):
+        yield batch

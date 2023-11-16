@@ -13,6 +13,7 @@ export interface TabEvents {
 export interface TabOptions {
   readonly initialTab?: string;
 }
+
 /**
  * Tabs
  *
@@ -68,6 +69,7 @@ export class Tabs {
 
   public switchToTab(tabName: string) {
     const doSwitch = () => {
+      const oldTab = this._currentTab;
       this._currentTab = tabName;
 
       // Do a 'replaceState' to add a '#anchor' to the URL
@@ -89,7 +91,7 @@ export class Tabs {
       allTargets.addClass('hidden');
       target.removeClass('hidden');
 
-      this.tabEvents.emit('afterSwitch', { oldTab: this._currentTab, newTab: tabName });
+      this.tabEvents.emit('afterSwitch', { oldTab, newTab: tabName });
     }
 
     // We don't do a beforeSwitch event for the very first tab switch
@@ -115,3 +117,12 @@ export class Tabs {
   }
 }
 
+
+export function getPreviousAndNext() {
+  const selected = document.querySelector('.tab-selected')
+  if (!selected) return []
+  const i = parseInt(selected.getAttribute('tabindex') || '0')
+  const prev = document.querySelector(`.tab[tabindex='${i-1}']`)
+  const next = document.querySelector(`.tab[tabindex='${i+1}']`)
+  return [prev, next]
+}

@@ -4,7 +4,6 @@ from flask_babel import gettext
 import hedyweb
 import utils
 from website.flask_helpers import render_template
-from website import statistics
 from website.auth import (
     create_verify_link,
     current_user,
@@ -73,7 +72,6 @@ class AdminModule(WebsiteModule):
             "experience_languages",
             "language",
             "keyword_language",
-            "third_party",
         ]
 
         for user in users:
@@ -81,7 +79,6 @@ class AdminModule(WebsiteModule):
             data["email_verified"] = not bool(data["verification_pending"])
             data["is_teacher"] = bool(data["is_teacher"])
             data["teacher_request"] = True if data["teacher_request"] else None
-            data["third_party"] = True if data["third_party"] else None
             data["created"] = utils.timestamp_to_date(data["created"])
             data["last_login"] = utils.timestamp_to_date(data["last_login"]) if data.get("last_login") else None
             if category == "language":
@@ -125,25 +122,6 @@ class AdminModule(WebsiteModule):
             javascript_page_options=dict(page='admin-users'),
         )
 
-    @route("/classes", methods=["GET"])
-    @requires_admin
-    def get_admin_classes_page(self, user):
-        classes = [
-            {
-                "name": Class.get("name"),
-                "teacher": Class.get("teacher"),
-                "created": utils.localized_date_format(Class.get("date")),
-                "students": len(Class.get("students")) if "students" in Class else 0,
-                "stats": statistics.get_general_class_stats(Class.get("students", [])),
-                "id": Class.get("id"),
-            }
-            for Class in self.db.all_classes()
-        ]
-
-        classes = sorted(classes, key=lambda d: d.get("stats").get("week").get("runs"), reverse=True)
-
-        return render_template("admin/admin-classes.html", classes=classes, page_title=gettext("title_admin"))
-
     @route("/adventures", methods=["GET"])
     @requires_admin
     def get_admin_adventures_page(self, user):
@@ -166,21 +144,6 @@ class AdminModule(WebsiteModule):
             page_title=gettext("title_admin"),
             current_page="admin",
         )
-
-    @route("/stats", methods=["GET"])
-    @requires_admin
-    def get_admin_stats_page(self, user):
-        return render_template("admin/admin-stats.html",
-                               page_title=gettext("title_admin"),
-                               current_page="admin",
-                               javascript_page_options=dict(
-                                   page='admin-stats',
-                               ))
-
-    @route("/logs", methods=["GET"])
-    @requires_admin
-    def get_admin_logs_page(self, user):
-        return render_template("admin/admin-logs.html", page_title=gettext("title_admin"), current_page="admin")
 
     @route("/achievements", methods=["GET"])
     @requires_admin

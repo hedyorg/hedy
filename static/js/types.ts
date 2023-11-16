@@ -8,6 +8,9 @@ export interface Adventure {
   /** The type of adventure */
   is_teacher_adventure: boolean;
 
+  /** Is this an adventure about a keyword? */
+  is_command_adventure: boolean;
+
   /** Markdown for the introductory paragraph */
   text?: string;
 
@@ -80,16 +83,6 @@ export interface Program {
   name: string;
   code: string;
   adventure_name?: string;
-}
-
-export interface AvailableAdventure {
-  from_teacher: boolean;
-  name: string;
-}
-
-export interface TeacherAdventure {
-  id: string;
-  level: string;
 }
 
 /**
