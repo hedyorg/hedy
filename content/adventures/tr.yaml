@@ -249,8 +249,11 @@ adventures:
                 start_code: '# kodunuzu buraya yazın'
             15:
                 story_text: |
-                    `{while}` döngüsünü kullanmak hikayelerinizi daha ilginç hale getirebilir. Örneğin, oyun bitene kadar oynayabilmek için `{while} oyun {is} 'devam'` kullanabilirsiniz.
-                    Ya da `{while} kılıç {is} 'kayıp'` kullanabilirsiniz, böylece oyuncu bir şey bulana kadar oyuna devam edemez.
+                    `{while}` döngüsünü kullanmak hikayelerinizi daha ilginç hale getirebilir. Örneğin, oyun bitene kadar oynayabilmek için `{while} oyun == 'devam'` kullanabilirsiniz.
+                    Ya da `{while} kılıç == 'kayıp'` kullanabilirsiniz, böylece oyuncu bir şey bulana kadar oyuna devam edemez.
+
+                    ### Exercise
+                    The example code shows you how to use the `{while}` loop in a story. Now **think of your own scenario** in which the player has to find something before they can continue.
                 example_code: |
                     ```
                     anahtarlar = 'kayıp'

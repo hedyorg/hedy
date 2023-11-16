@@ -222,8 +222,11 @@ adventures:
                 start_code: '# coloque o seu código aqui'
             15:
                 story_text: |
-                    Usar o laço `{while}` pode tornar suas histórias mais interessantes. Por exemplo, você pode usar `{while} jogo {is} 'ligado'` para poder jogar até que o jogo termine.
-                    Ou você pode usar `{while} espada {is} 'perdida'` para que o jogador não possa continuar o jogo até encontrar algo.
+                    Usar o laço `{while}` pode tornar suas histórias mais interessantes. Por exemplo, você pode usar `{while} jogo == 'ligado'` para poder jogar até que o jogo termine.
+                    Ou você pode usar `{while} espada == 'perdida'` para que o jogador não possa continuar o jogo até encontrar algo.
+
+                    ### Exercise
+                    The example code shows you how to use the `{while}` loop in a story. Now **think of your own scenario** in which the player has to find something before they can continue.
                 example_code: |
                     ```
                     chaves = 'perdidas'

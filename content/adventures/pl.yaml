@@ -226,6 +226,9 @@ adventures:
                 story_text: |
                     Przy użyciu pętli `{while}` możesz stworzyć jeszcze bardziej wciągające opowieści. Na przykład, możesz użyć `{while} gra {is} 'działa'` żeby kontynuować grę aż się zakończy.
                     Alternatywnie możesz napisać `{while} miecz {is} 'zagubiony'` żeby nie pozwolić graczowi kontynuować zanim znajdą miecz.
+
+                    ### Exercise
+                    The example code shows you how to use the `{while}` loop in a story. Now **think of your own scenario** in which the player has to find something before they can continue.
                 example_code: "```\nklucze = 'zgubione'\n{print} 'Stoisz w ogrodzie i zgubiłeś swoje klucze.' \n{print} 'Gdzie chcesz ich poszukać?'\n{print} 'Możesz wybrać: drzewo, doniczka, kamień, skrzynka na listy'\n{while} klucze == 'zgubione'\n    miejsce = {ask} 'Gdzie chcesz popatrzeć?'\n    {if}\
                     \ miejsce == 'doniczka'\n        {print} 'Tutaj są!'\n        klucze = 'znalezione'\n    {else}\n        {print} 'Nie, nie ma ich w ' miejsce\n{print} 'Teraz możesz wejść do domu!'\n```\n"
                 start_code: '# tutaj umieść swój kod'
