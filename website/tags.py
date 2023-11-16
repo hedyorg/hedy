@@ -22,6 +22,20 @@ class TagsModule(WebsiteModule):
         self.db = db
         self.achievements = achievements
 
+    @route("/<adventure_id>", methods=["GET"])
+    @route("/", methods=["GET"], defaults={"adventure_id": None})
+    @requires_teacher
+    def get_all(self, user, adventure_id):
+        print(self.get)
+        public_tags = self.db.read_public_tags()
+        adventure_id = request.args.get("adventure_id")
+        if adventure_id:
+            adventure = self.db.get_adventure(adventure_id)
+            # exclude current adventure's tags
+            public_tags = list(filter(lambda t: t["name"] not in adventure.get("tags", []), public_tags))
+        
+        return jinja_partials.render_partial('htmx-tags-dropdown.html', tags=public_tags, adventure_id=adventure_id)
+
     @route("/create/<adventure_id>", methods=["POST"])
     @route("/create/<adventure_id>/<new_tag>", methods=["POST"])
     @requires_teacher
@@ -91,6 +105,4 @@ class TagsModule(WebsiteModule):
         adventure_tags = list(filter(lambda name: name != tag_name, adventure_tags))
         self.db.update_adventure(adventure_id, {"tags": adventure_tags})
 
-        return adventure_tags, 200
-        # return jinja_partials.render_partial('htmx-tags-list.html', tags=adventure_tags,
-        #                             adventure_id=adventure_id, creator=user["username"])
+        return jinja_partials.render_partial('htmx-tags-dropdown-item.html', tag=db_tag, adventure_id=adventure_id)
