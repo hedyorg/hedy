@@ -292,7 +292,20 @@ commands_per_level = {
 }
 
 command_turn_literals = ['right', 'left']
-command_make_color = ['black', 'blue', 'brown', 'gray', 'green', 'orange', 'pink', 'purple', 'red', 'white', 'yellow']
+english_colors = ['black', 'blue', 'brown', 'gray', 'green', 'orange', 'pink', 'purple', 'red', 'white', 'yellow']
+
+
+def color_commands_local(language):
+    colors_local = [hedy_translation.translate_keyword_from_en(k, language) for k in english_colors]
+    return colors_local
+
+
+def command_make_color_local(language):
+    if language == "en":
+        return english_colors
+    else:
+        return english_colors + color_commands_local(language)
+
 
 # Commands and their types per level (only partially filled!)
 commands_and_types_per_level = {
@@ -310,8 +323,8 @@ commands_and_types_per_level = {
                    2: [HedyType.integer, HedyType.input],
                    12: [HedyType.integer, HedyType.input, HedyType.float]
                    },
-    Command.color: {1: command_make_color,
-                    2: [command_make_color, HedyType.string, HedyType.input]},
+    Command.color: {1: english_colors,
+                    2: [english_colors, HedyType.string, HedyType.input]},
     Command.forward: {1: [HedyType.integer, HedyType.input],
                       12: [HedyType.integer, HedyType.input, HedyType.float]
                       },
@@ -1015,7 +1028,7 @@ class AllCommands(Transformer):
     def __init__(self, level):
         self.level = level
 
-    def translate_keyword(self, keyword):
+    def standardize_keyword(self, keyword):
         # some keywords have names that are not a valid name for a command
         # that's why we call them differently in the grammar
         # we have to translate them to the regular names here for further communciation
@@ -1047,7 +1060,7 @@ class AllCommands(Transformer):
 
     def __default__(self, args, children, meta):
         # if we are matching a rule that is a command
-        production_rule_name = self.translate_keyword(args)
+        production_rule_name = self.standardize_keyword(args)
         leaves = flatten_list_of_lists_to_list(children)
         # for the achievements we want to be able to also detect which operators were used by a kid
         operators = ['addition', 'subtraction', 'multiplication', 'division']
@@ -1242,8 +1255,9 @@ def hedy_transpiler(level):
 
 @v_args(meta=True)
 class ConvertToPython(Transformer):
-    def __init__(self, lookup, numerals_language="Latin", is_debug=False):
+    def __init__(self, lookup, language="en", numerals_language="Latin", is_debug=False):
         self.lookup = lookup
+        self.language = language
         self.numerals_language = numerals_language
         self.is_debug = is_debug
 
@@ -1382,8 +1396,9 @@ class ConvertToPython(Transformer):
 @source_map_transformer(source_map)
 class ConvertToPython_1(ConvertToPython):
 
-    def __init__(self, lookup, numerals_language, is_debug):
+    def __init__(self, lookup, language, numerals_language, is_debug):
         self.numerals_language = numerals_language
+        self.language = language
         self.lookup = lookup
         self.is_debug = is_debug
         __class__.level = 1
@@ -1439,7 +1454,7 @@ class ConvertToPython_1(ConvertToPython):
             return f"t.pencolor('black'){self.add_debug_breakpoint()}"  # no arguments defaults to black ink
 
         arg = args[0].data
-        if arg in command_make_color:
+        if arg in command_make_color_local(self.language):
             return f"t.pencolor('{arg}'){self.add_debug_breakpoint()}"
         else:
             # the TypeValidator should protect against reaching this line:
@@ -1466,8 +1481,8 @@ class ConvertToPython_1(ConvertToPython):
     def make_forward(self, parameter):
         return self.make_turtle_command(parameter, Command.forward, 'forward', True, 'int')
 
-    def make_color(self, parameter):
-        return self.make_turtle_color_command(parameter, Command.color, 'pencolor')
+    def make_color(self, parameter, language):
+        return self.make_turtle_color_command(parameter, Command.color, 'pencolor', language)
 
     def make_turtle_command(self, parameter, command, command_text, add_sleep, type):
         exception = ''
@@ -1485,12 +1500,23 @@ class ConvertToPython_1(ConvertToPython):
             return sleep_after(transpiled, False, self.is_debug)
         return transpiled
 
-    def make_turtle_color_command(self, parameter, command, command_text):
+    def make_turtle_color_command(self, parameter, command, command_text, language):
+        both_colors = command_make_color_local(language)
         variable = self.get_fresh_var('__trtl')
+
+        # we translate the color value to English at runtime, since it might be decided at runtime
+        # coming from a random list or ask
+
+        color_dict = {hedy_translation.translate_keyword_from_en(x, language): x for x in english_colors}
+
         return textwrap.dedent(f"""\
             {variable} = f'{parameter}'
-            if {variable} not in {command_make_color}:
+            color_dict = {color_dict}
+            if {variable} not in {both_colors}:
               raise Exception(f'While running your program the command {style_command(command)} received the value {style_command('{' + variable + '}')} which is not allowed. Try using another color.')
+            else:
+              if not {variable} in {english_colors}:
+                {variable} = color_dict[{variable}]
             t.{command_text}({variable}){self.add_debug_breakpoint()}""")
 
     def make_catch_exception(self, args):
@@ -1540,7 +1566,7 @@ class ConvertToPython_2(ConvertToPython_1):
 
         arg = self.process_variable_for_fstring(arg)
 
-        return self.make_color(arg)
+        return self.make_color(arg, self.language)
 
     def turn(self, meta, args):
         if len(args) == 0:
@@ -1738,8 +1764,8 @@ except NameError:
 @hedy_transpiler(level=5)
 @source_map_transformer(source_map)
 class ConvertToPython_5(ConvertToPython_4):
-    def __init__(self, lookup, numerals_language, is_debug):
-        super().__init__(lookup, numerals_language, is_debug)
+    def __init__(self, lookup, language, numerals_language, is_debug):
+        super().__init__(lookup, language, numerals_language, is_debug)
 
     def ifs(self, meta, args):  # might be worth asking if we want a debug breakpoint here
         return f"""if {args[0]}:{self.add_debug_breakpoint()}
@@ -3331,7 +3357,7 @@ def transpile_inner(input_string, level, lang="en", populate_source_map=False, i
 
         # grab the right transpiler from the lookup
         convertToPython = TRANSPILER_LOOKUP[level]
-        python = convertToPython(lookup_table, numerals_language, is_debug).transform(abstract_syntax_tree)
+        python = convertToPython(lookup_table, lang, numerals_language, is_debug).transform(abstract_syntax_tree)
 
         commands = AllCommands(level).transform(program_root)
 
