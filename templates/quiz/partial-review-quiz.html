@@ -24,10 +24,7 @@
     {% endif %}
     {% if next_level %}
         <div class="flex py-4 px-4 bg-blue-200 justify-end border-t-4 border-blue-400">
-            <!-- <a href="/hedy/{{next_level}}" class="green-btn text-2xl px-8 py-4"> -->
-            <a href="#"
-                _="on click hedyApp.goToLevel({{next_level}})"
-                class="green-btn text-2xl px-8 py-4">
+            <a href="/hedy/{{next_level}}" class="green-btn text-2xl px-8 py-4">
                 {{_('advance_button')|replace("{level}", next_level)}}
             </a>
         </div>

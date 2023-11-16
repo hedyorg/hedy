@@ -20,25 +20,16 @@ ALL_KEYWORD_LANGUAGES = {}
 NON_LATIN_LANGUAGES = ['ar', 'bg', 'bn', 'el', 'fa', 'hi', 'he', 'pa_PK', 'ru', 'zh_Hans']
 
 # Babel has a different naming convention than Weblate and doesn't support some languages -> fix this manually
-CUSTOM_BABEL_LANGUAGES = {'pa_PK': 'pa_Arab_PK',
-                          'kmr': 'ku_TR',
-                          'tn': 'en',
-                          'pap': 'en',
-                          'tl': 'en'}
-
+CUSTOM_BABEL_LANGUAGES = {'pa_PK': 'pa_Arab_PK', 'kmr': 'ku_TR', 'tn': 'en', 'tl': 'en'}
 # For the non-existing language manually overwrite the display language to make sure it is displayed correctly
-CUSTOM_LANGUAGE_TRANSLATIONS = {'kmr': 'Kurdî (Tirkiye)',
-                                'tn': 'Setswana',
-                                'pap': 'Papiamentu',
-                                'tl': 'ᜆᜄᜎᜓᜄ᜔'}
-
+CUSTOM_LANGUAGE_TRANSLATIONS = {'kmr': 'Kurdî (Tirkiye)', 'tn': 'Setswana', 'tl': 'ᜆᜄᜎᜓᜄ᜔'}
 customize_babel_locale(CUSTOM_BABEL_LANGUAGES)
 
 # This changes the color of the adventure tab to pink
 KEYWORDS_ADVENTURES = {'print_command', 'ask_command', 'is_command', 'sleep_command', 'random_command',
                        'add_remove_command', 'quotation_marks', 'if_command', 'in_command', 'maths', 'repeat_command',
                        'repeat_command_2', 'for_command', 'and_or_command', 'while_command', 'elif_command',
-                       'clear_command', 'pressit', 'debugging', 'functions'}
+                       'clear_command', 'pressit', 'clear_command', 'functions'}
 
 ADVENTURE_ORDER_PER_LEVEL = {
     1: [
@@ -52,7 +43,6 @@ ADVENTURE_ORDER_PER_LEVEL = {
         'turtle',
         'restaurant',
         'fortune',
-        'debugging'
     ],
     2: [
         'default',
@@ -65,8 +55,7 @@ ADVENTURE_ORDER_PER_LEVEL = {
         'parrot',
         'story',
         'restaurant',
-        'turtle',
-        'debugging'
+        'turtle'
     ],
     3: [
         'default',
@@ -80,8 +69,7 @@ ADVENTURE_ORDER_PER_LEVEL = {
         'dishes',
         'story',
         'haunted',
-        'turtle',
-        'debugging'
+        'turtle'
     ],
     4: [
         'default',
@@ -95,8 +83,7 @@ ADVENTURE_ORDER_PER_LEVEL = {
         'story',
         'haunted',
         'fortune',
-        'restaurant',
-        'debugging'
+        'restaurant'
     ],
     5: [
         'default',
@@ -112,8 +99,7 @@ ADVENTURE_ORDER_PER_LEVEL = {
         'restaurant',
         'fortune',
         'pressit',
-        'turtle',
-        'debugging'
+        'turtle'
     ],
     6: [
         'default',
@@ -125,8 +111,7 @@ ADVENTURE_ORDER_PER_LEVEL = {
         'turtle',
         'calculator',
         'fortune',
-        'restaurant',
-        'debugging'
+        'restaurant'
     ],
     7: [
         'default',
@@ -138,8 +123,7 @@ ADVENTURE_ORDER_PER_LEVEL = {
         'repeat_command_2',
         'fortune',
         'restaurant',
-        'pressit',
-        'debugging'
+        'pressit'
     ],
     8: [
         'default',
@@ -151,8 +135,7 @@ ADVENTURE_ORDER_PER_LEVEL = {
         'story',
         'haunted',
         'restaurant',
-        'turtle',
-        'debugging'
+        'turtle'
     ],
     9: [
         'default',
@@ -164,8 +147,7 @@ ADVENTURE_ORDER_PER_LEVEL = {
         'restaurant',
         'haunted',
         'pressit',
-        'turtle',
-        'debugging'
+        'turtle'
     ],
     10: [
         'default',
@@ -180,7 +162,6 @@ ADVENTURE_ORDER_PER_LEVEL = {
         'rock',
         'calculator',
         'restaurant',
-        'debugging'
     ],
     11: [
         'default',
@@ -189,8 +170,7 @@ ADVENTURE_ORDER_PER_LEVEL = {
         'calculator',
         'songs',
         'restaurant',
-        'haunted',
-        'debugging'
+        'haunted'
     ],
     12: [
         'default',
@@ -205,8 +185,7 @@ ADVENTURE_ORDER_PER_LEVEL = {
         'calculator',
         'turtle',
         'piggybank',
-        'secret',
-        'debugging'
+        'secret'
     ],
     13: [
         'default',
@@ -219,8 +198,7 @@ ADVENTURE_ORDER_PER_LEVEL = {
         'rock',
         'restaurant',
         'calculator',
-        'tic',
-        'debugging'
+        'tic'
     ],
     14: [
         'default',
@@ -233,8 +211,7 @@ ADVENTURE_ORDER_PER_LEVEL = {
         'calculator_2',
         'piggybank',
         'quizmaster',
-        'tic',
-        'debugging'
+        'tic'
     ],
     15: [
         'default',
@@ -244,149 +221,29 @@ ADVENTURE_ORDER_PER_LEVEL = {
         'dice',
         'rock',
         'calculator',
-        'tic',
-        'debugging'
+        'tic'
     ],
     16: [
         'default',
         'random_command',
         'haunted',
         'songs',
-        'language',
-        'debugging'
+        'language'
     ],
     17: [
         'default',
         'for_command',
         'elif_command',
         'tic',
-        'blackjack',
-        'debugging'
+        'blackjack'
     ],
     18: [
         'default',
         'print_command',
-        'ask_command',
         'story',
-        'songs',
-        'debugging'
+        'songs'
     ]
 }
-
-HOUR_OF_CODE_ADVENTURES = {
-    1: [
-        'print_command',
-        'parrot',
-        'turtle',
-        'debugging'
-    ],
-    2: [
-        'default',
-        'parrot',
-        'turtle',
-        'debugging'
-    ],
-    3: [
-        'parrot',
-        'dishes',
-        'turtle',
-        'debugging'
-    ],
-    4: [
-        'dishes',
-        'parrot',
-        'story',
-        'debugging'
-    ],
-    5: [
-        'language',
-        'parrot',
-        'turtle',
-        'debugging'
-    ],
-    6: [
-        'songs',
-        'dishes',
-        'turtle',
-        'debugging'
-    ],
-    7: [
-        'songs',
-        'dishes',
-        'restaurant',
-        'debugging'
-    ],
-    8: [
-        'songs',
-        'restaurant',
-        'turtle',
-        'debugging'
-    ],
-    9: [
-        'rock',
-        'restaurant',
-        'turtle',
-        'debugging'
-    ],
-    10: [
-        'dishes',
-        'dice',
-        'turtle',
-        'songs',
-        'debugging'
-    ],
-    11: [
-        'years',
-        'songs',
-        'restaurant',
-        'debugging'
-    ],
-    12: [
-        'maths',
-        'functions',
-        'story',
-        'turtle',
-        'debugging'
-    ],
-    13: [
-        'story',
-        'rock',
-        'restaurant',
-        'calculator',
-        'debugging'
-    ],
-    14: [
-        'guess_my_number',
-        'haunted',
-        'hotel',
-        'calculator',
-        'quizmaster',
-        'debugging'
-    ],
-    15: [
-        'restaurant',
-        'story',
-        'dice',
-        'rock',
-        'debugging'
-    ],
-    16: [
-        'haunted',
-        'songs',
-        'language',
-        'debugging'
-    ],
-    17: [
-        'blackjack',
-        'debugging'
-    ],
-    18: [
-        'story',
-        'songs',
-        'debugging'
-    ]
-}
-
 
 RESEARCH = {}
 for paper in sorted(os.listdir('content/research'),
@@ -499,10 +356,6 @@ class Adventures(StructuredDataFile):
     def get_adventures(self, keyword_lang="en"):
         return deep_translate_keywords(self.file.get('adventures'), keyword_lang)
 
-    def get_adventures_subset(self, subset=["print_command", "parrot"], keyword_lang="en"):
-        adventures = {aid: adv for aid, adv in self.file.get('adventures', {}).items() if aid in subset}
-        return deep_translate_keywords(adventures, keyword_lang)
-
     def has_adventures(self):
         return True if self.file.get('adventures') else False
 
@@ -582,23 +435,3 @@ class Slides(StructuredDataFile):
 class NoSuchSlides:
     def get_slides_for_level(self, level, keyword_lang):
         return {}
-
-
-class NoSuchTags:
-    def get_tags(self):
-        return {}
-
-
-class Tags(StructuredDataFile):
-    def __init__(self, language):
-        self.language = language
-        super().__init__(f'content/tags/{self.language}.yaml')
-
-    def get_tags_names(self):
-        return {tid: tags['items'] for tid, tags in self.file.get('tags', {}).items()}
-
-    def get_tags(self, keyword_lang="en"):
-        return deep_translate_keywords(self.file.get('tags'), keyword_lang)
-
-    def has_tags(self):
-        return True if self.file.get('tags') else False

@@ -42,20 +42,10 @@ CLASSES = dynamo.Table(storage, "classes", "id", indexes=[
 # - level (int | str): level number, sometimes as an int, sometimes as a str
 # - name (str): adventure name
 # - public (bool): whether it can be shared
-# - tags_id (str): id of tags that describe this adventure.
-ADVENTURES = dynamo.Table(storage, "adventures", "id", indexes=[dynamo.Index("creator"), dynamo.Index("public")])
+ADVENTURES = dynamo.Table(storage, "adventures", "id", indexes=[dynamo.Index("creator")])
 INVITATIONS = dynamo.Table(
     storage, "class_invitations", partition_key="username", indexes=[dynamo.Index("class_id")]
 )
-
-"""
-# TAGS
-    - id
-    - name (str): tag name.
-    - tagged_in ([{ id, public, language }]): tagged in which adventures.
-    - popularity (int): # of adventures it's been tagged in.
-"""
-TAGS = dynamo.Table(storage, "tags", "id", indexes=[dynamo.Index("name", sort_key="popularity")])
 
 # Class customizations
 #
@@ -208,15 +198,14 @@ class Database:
         """
         return PROGRAMS.get_many({"username": username}, reverse=True)
 
-    def filtered_programs_for_user(self, username, level=None, adventure=None, submitted=None, public=None,
-                                   limit=None, pagination_token=None):
+    def filtered_programs_for_user(self, program_query, level=None, adventure=None, submitted=None,
+                                   limit=None, pagination_token=None, public=None):
         ret = []
 
         # FIXME: Query by index, the current behavior is slow for many programs
         # (See https://github.com/hedyorg/hedy/issues/4121)
-        programs = dynamo.GetManyIterator(PROGRAMS, {"username": username},
+        programs = dynamo.GetManyIterator(PROGRAMS, program_query,
                                           reverse=True, batch_size=limit, pagination_token=pagination_token)
-
         for program in programs:
             if level and program.get('level') != int(level):
                 continue
@@ -228,8 +217,6 @@ class Database:
             if submitted is not None:
                 if program.get('submitted') != submitted:
                     continue
-            if public is not None and bool(program.get('public')) != public:
-                continue
 
             ret.append(program)
 
@@ -594,23 +581,6 @@ class Database:
 
     def update_adventure(self, adventure_id, adventure):
         ADVENTURES.update({"id": adventure_id}, adventure)
-
-    def create_tag(self, data):
-        return TAGS.create(data)
-
-    def read_tag(self, tag_name):
-        return TAGS.get({"name": tag_name})
-
-    def read_tags(self, tags):
-        return [self.read_tag(name) for name in tags]
-
-    def read_tags_by_username(self, username):
-        tags = TAGS.get_many({"creator": username})
-        return tags if tags else {}
-
-    def update_tag(self, tags_id, data):
-        # Update existing tags
-        return TAGS.update({"id": tags_id}, data)
 
     def get_teacher_adventures(self, username):
         return ADVENTURES.get_many({"creator": username})

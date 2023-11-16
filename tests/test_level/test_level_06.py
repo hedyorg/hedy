@@ -177,27 +177,6 @@ class TestsLevel6(HedyTester):
 
         self.multi_level_tester(max_level=7, code=code, expected=expected, output='gelijkspel!')
 
-    def test_if_french(self):
-        code = textwrap.dedent("""\
-        plat_principal = demande "Quel plat principal souhaitez-vous?"
-        prix = 0
-        si plat_principal est lasagnes prix = 12
-        affiche "Ce sera " prix""")
-
-        expected = textwrap.dedent("""\
-        plat_principal = input(f'Quel plat principal souhaitez-vous?')
-        prix = '0'
-        if convert_numerals('Latin', plat_principal) == convert_numerals('Latin', 'lasagnes'):
-          prix = '12'
-        else:
-          x__x__x__x = '5'
-        print(f'Ce sera {prix}')""")
-
-        self.multi_level_tester(max_level=7,
-                                code=code,
-                                expected=expected,
-                                lang='fr')
-
     def test_equality_arabic(self):
         code = textwrap.dedent("""\
         nummer1 is ٢

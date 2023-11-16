@@ -46,17 +46,10 @@
             <div class="flex flex-row gap-2 items-center">
                 <i class="fas fa-fw fa-globe"></i>
                 <span class="hidden lg:flex">{{ current_language().sym }}</span>
-                <svg id="language-arrow" class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"/></svg>
+                <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"/></svg>
             </div>
           </a>
-          <div class="dropdown-menu dropdown-blue" id="language-dropdown" style="display: none;"
-          _="on mutation of @style
-                set arrow to #language-arrow
-                if *display == 'none'
-                    remove .rotate-180 from arrow
-                else if not arrow.classList.contains('rotate-180')
-                    add .rotate-180 to arrow
-                end">
+          <div class="dropdown-menu dropdown-blue" id="language-dropdown" style="display: none;">
               <div class="mb-4">
                   <input id="search_language" placeholder="{{_('search')}}" class="border text-black border-gray-500 rounded h-8 px-2 w-full">
               </div>              

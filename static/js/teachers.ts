@@ -206,7 +206,6 @@ function update_db_adventure(adventure_id: string) {
    const level = $('#custom_adventure_level').val();
    const content = DOMPurify.sanitize(<string>$('#custom_adventure_content').val());
    const agree_public = $('#agree_public').prop('checked');
-   const language = $('#language').val();
 
     $.ajax({
       type: 'POST',
@@ -216,8 +215,7 @@ function update_db_adventure(adventure_id: string) {
         name: adventure_name,
         level: level,
         content: content,
-        public: agree_public,
-        language,
+        public: agree_public
       }),
       contentType: 'application/json',
       dataType: 'json'

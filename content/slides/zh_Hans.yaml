@@ -1,7 +1,7 @@
 levels:
     0:
         1:
-            header: 欢迎来到海蒂!
+            header: 欢迎来到海蒂！
             text: Hedy是一种编程语言。
         2:
             header: 编程
@@ -12,8 +12,8 @@ levels:
         3:
             header: 编程语言
             text: |-
-                Maybe you already know some programming languages?
-                Some examples are:
+                也许你已经知道了一些编程语言？
+                例如:
                 * Scratch
                 * Python
                 * HTML
@@ -59,9 +59,9 @@ levels:
         2:
             header: '{打印}'
             text: |-
-                在级别1中，你可以使用的第一个代码是 `{打印}`。
+                在第1级中，你可以使用的第一个代码是`{print}`。
 
-                `{打印}`是用来在屏幕上显示文本。
+                `{print}`用于在屏幕上显示文本。
             editor: <iframe class="fragment" src="/adventure/print_command/1/raw"></iframe>
         3:
             header: '{打印} 命令'
@@ -73,12 +73,12 @@ levels:
         4:
             header: Hedy 第1 级：{echo}
             text: |-
-                在第1级中，你可以使用的最后一个文本代码是`{问}`。
+                在第1级中，你可以使用的最后一个文本代码是`{echo}`。
 
-                `{问}`用于重复`{ask}`的答案。
+                `{echo}`用于重复`{ask}`的答案。
             editor: <iframe class="fragment" src="/adventure/parrot/1/raw"></iframe>
         5:
-            header: 编程
+            header: 编程!
             text: |-
                 使用`{print}`、`{ask}`和`{echo}`，你已经可以创作一个小故事。
                 这是尝试冒险活动鹦鹉、石头剪刀布和故事的的好时机。
@@ -93,7 +93,7 @@ levels:
                 <iframe class="fragment" src="/hedy/1"></iframe>
             editor: <iframe class="fragment" src="/hedy/1"></iframe>
         8:
-            header: 用海龟绘图画画！
+            header: 用海龟绘图画画
             text: 现在我们已经看到了文本代码，接下来我们将看到图形代码。
         9:
             header: 用海龟画画：{forward}
@@ -202,7 +202,7 @@ levels:
                 This also makes our code look more like 'real' Python code.
         4:
             header: Quotation marks with print
-            text: 每次使用 `{print}` 命令时，都需要将要显示在屏幕上的文本放在引号中。
+            text: Each time you use the `{print}` command you need to put the text that you want to appear on the screen in quotation marks.
             editor: <iframe class="fragment" src="/adventure/quotation_marks/4/raw"></iframe>
         5:
             header: Quotation marks with ask
@@ -217,443 +217,441 @@ levels:
         7:
             header: Quotation marks and variables
             text: |-
-                当变量名用在句子中间时，必须将变量放在引号之外。
-                然而，句子的其余部分确实需要引号。 看起来像这样:
+                When variable names are used in the middle of a sentence, you have to leave the variables out of the quotation marks.
+                The rest of the sentence however, does need quotation marks. That looks like this:
             editor: <iframe class="fragment" src="/adventure/quotation_marks/4/raw"></iframe>
         8:
             header: Quotation marks and contractions
             text: |-
-                当心！ 既然使用了引号，则不能在缩写中使用引号。
+                Be careful! Now that you are using quotation marks, you can't use apostrophes in contractions.
 
-                请尝试在下面的屏幕中打印诸如“you're”或“I'm”之类的缩写，看看会发生什么......
+                Please try to print a contraction like "you're" or "I'm" in the screen below and see what happens....
             editor: <iframe class="fragment" src="/adventure/rock/4/raw"></iframe>
         9:
-            header: 清除
-            text: |-
-                在本级别中，你还将学习 {clear} 命令。
-                使用此命令，可以擦除输出屏幕上的所有文本。
-
-                请注意，你也应该配合使用睡眠命令。 如果不这样做，计算机将在你阅读之前擦除所有文本！
+            header: Ready, Set, Go!
+            text: Enjoy the adventures in level 4!
             editor: <iframe class="fragment" src="/adventure/clear_command/4/raw"></iframe>
         10:
             header: Ready, Set, Go!
-            text: 享受第 4 关的冒险！
+            text: Enjoy the adventures in level 4!
     5:
         1:
             header: Welcome to level 5
-            text: 在本级别中，你将学习使用 3 个新命令：`{if}`, `{else}` 和 `{in}`.。
+            text: 'In this level you will learn to use 3 new commands: `{if}`, `{else}` and `{in}`.'
         2:
             header: if
             text: |-
-                `{if}` 命令允许你在两个选项之间进行选择。
-                在此示例中，如果给定的答案是 `Hedy`，计算机将打印`'nice'`。
-                如果答案不是 `Hedy`，计算机将不执行任何操作。
+                The `{if}` command allows you to choose between two options.
+                In this example the computer will print 'nice' if the given answer is Hedy.
+                If the answer is not Hedy, the computer will do nothing.
             editor: <iframe class="fragment" src="/adventure/if_command/5/raw"></iframe>
         3:
             header: Don't forget to print
-            text: 使用 `{if}` 命令时，不要忘记使用`{print}`命令。
+            text: When using the `{if}` command, don't forget to use the `{print}` command.
             editor: <iframe class="fragment" src="/adventure/if_command/5/raw"></iframe>
         4:
-            header: 否则
+            header: else
             text: |-
-                使用 `{if}` 命令时，还可以添加 `{else}` 命令。
-                如果答案是 `Hedy`，计算机会打印`'nice'`。
-                但如果答案是别的，计算机会打印`'boo'`
+                When using an `{if}` command, you can also add an `{else}` command.
+                If the answer is Hedy, the computer will print 'nice'.
+                But if the answer is something else the computer will print 'boo'
             editor: <iframe class="fragment" src="/adventure/if_command/5/raw"></iframe>
         5:
             header: Long lines
             text: |-
-                你可能已经注意到，当你同时使用 `{if}` 和 `{else}`命令时，你的代码行可能会变得很长。
+                You might have noticed that your lines can get very long when you have both an `{if}` and an `{else}` command.
 
-                你可以选择将命令分开并将它们放在两行中，如下所示：
+                You can choose to seperate commands and put them on 2 lines, like this:
             editor: <iframe class="fragment" src="/adventure/if_command/5/raw"></iframe>
         6:
             header: Another new command
             text: |-
-                如果你已经练习过`{if}` 和 `{else}`命令，也可以尝试 `{in}` 命令。
+                If you have practised with the `{if}` and `{else}` commands, you can also try the `{in}` command.
 
-                使用 `{in}` ，你可以让计算机检查某个项目是否在列表中，例如：
+                With `{in}` you can let the computer check if an item is in a list, for example:
 
-                请注意 `Hedy` 区分大小写。 这意味着如果您回答`"Green"`而不是`"green"`，`Hedy` 将打印`"meh"`。
+                Please note that Hedy is case sensitive. This means that if you answer "Green" instead of "green", Hedy will print "meh".
             editor: <iframe class="fragment" src="/adventure/in_command/5/raw"></iframe>
         7:
             header: Let's go!
-            text: 享受第 5 关的冒险！
+            text: Enjoy the adventures in level 5!
     6:
         1:
             header: Welcome to level 6
-            text: 在这个级别中，我们将在代码中添加数学。
+            text: In this level we are adding maths to our codes.
         2:
             header: Addition
-            text: 如果要计算加法，只需使用加号即可。
+            text: If you want to calculate an addition, simply use the plus sign.
             editor: <iframe class="fragment" src="/adventure/maths/6/raw"></iframe>
         3:
             header: Subtraction
-            text: 如果要减，可以使用减号。
+            text: If you want to subtract, you can use the minus sign.
             editor: <iframe class="fragment" src="/adventure/maths/6/raw"></iframe>
         4:
             header: Multiplication
-            text: 如果要进行乘法，可以使用星号。
+            text: If you want to do multiplications, you can use the asterisk.
             editor: <iframe class="fragment" src="/adventure/maths/6/raw"></iframe>
         5:
             header: Division
-            text: 您可以使用斜杠进行除法。
+            text: You can use the slash for division.
             editor: <iframe class="fragment" src="/adventure/maths/6/raw"></iframe>
         6:
             header: Summary
-            text: 总之，您可以使用 +、-、* 和 / 来进行数学运算。
+            text: In summary, you can use +, -, * and / to do maths.
             editor: <iframe class="fragment" src="/adventure/maths/6/raw"></iframe>
         7:
             header: The = symbol
             text: |-
-                从现在开始，您还可以使用 = 符号代替 `{is}` 命令。
-                这适用于数字和单词，也适用于 `{if}` 或 `{else}`命令之后。
+                From now on you can also use the = symbol instead of the `{is}` command.
+                This goes for both numbers and words, and it also goes after the `{if}` or `{else}` commands.
             editor: <iframe class="fragment" src="/adventure/is_command/6/raw"></iframe>
         8:
             header: Calculations with variables
-            text: 你可以使用数字进行计算，但也可以使用变量进行计算，如下所示：
+            text: 'You can use calculations with numbers, but you can also use variables to do calculations, like this:'
             editor: <iframe class="fragment" src="/adventure/calculator/6/raw"></iframe>
         9:
             header: Let's get to work!
-            text: 享受第 6 关的冒险！
+            text: Enjoy the adventures in level 6!
     7:
         1:
             header: Welcome to level 7
-            text: 在本级别中，你将学习如何根据需要多次重复一行代码。
+            text: In this level you will learn how to repeat a line of code as many times a you'd like.
         2:
             header: repeat 3 times
             text: |-
-                如果你想重复一行代码，可以使用 `{repeat}` 3 `{times}` 代码。
-                如果您想多次重复该行，只需更改数字即可。
+                If you want to repeat a line of code, you can use the `{repeat}` 3 `{times}` code.
+                If you want to repeat the line more times, simply change the number.
 
-                例如：如果您正在编写一个故事，其中您的角色大声呼救 5 次，则可能如下所示：
+                For example: If you are programming a story where your character shouts for help for 5 times, it could look like this:
             editor: <iframe class="fragment" src="/adventure/story/7/raw"></iframe>
         3:
             header: Don't forget the print command
-            text: 使用重复命令时，不要忘记`{print}`命令。
+            text: When using the repeat command, do not forget the `{print}` command.
             editor: <iframe class="fragment" src="/adventure/print/7/raw"></iframe>
         4:
             header: Repeat an ask command
-            text: 你还可以多次重复 `{ask}`, `{if}` 或 `{else}` 命令。
+            text: You can also repeat an `{ask}`, `{if}` or `{else}` command multiple times.
             editor: <iframe class="fragment" src="/adventure/repeat_command_2/7/raw"></iframe>
         5:
             header: Ready Set Go!
-            text: 享受第七关的冒险吧！
+            text: Enjoy the adventures in level 7!
     8:
         1:
             header: Welcome to level 8
-            text: 在本级别中，你将学习使用缩进使 `{repeat}`, `{if}` 和 `{else}` c命令适用于多行代码。
+            text: In this level you will learn to use indentation to make the `{repeat}`, `{if}` and `{else}` commands work for multiple lines of code.
         2:
             header: '{repeat} commands before'
             text: |-
-                在前面的关卡中，`{repeat}`命令如下所示：
+                In the previous levels, the `{repeat}` command looked like this:
 
-                你只能重复一行代码。
+                You could only repeat one line of code.
             editor: <iframe class="fragment" src="/adventure/story/7/raw"></iframe>
         3:
             header: '{repeat} commands now'
             text: |-
-                在此级别中，你可以重复多行代码。 为此，你必须告诉计算机哪些行属于同一行并且应该重复。
-                你可以通过使用缩进来完成此操作。
+                In this level you can repeat multiple lines of code. To do this you must tell the computer which lines belong together and should be repeated.
+                You do this by using indentation.
 
-                在要重复的每一行的开头使用 4 个空格（或一个制表符），如下所示：
+                Use 4 spaces (or one tab) at the beginning of each line that you want to repeat, like this:
             editor: <iframe class="fragment" src="/adventure/repeat_command/8/raw"></iframe>
         4:
             header: '{repeat} commands now'
             text: |-
-                如果需要，你可以在 `{repeat}` 命令之后继续，无需缩进。
-                不以缩进开头的行将不会重复。
+                If you want to, you can continue after the `{repeat}` command without indentation.
+                The lines that do not start with indentation will not be repeated.
             editor: <iframe class="fragment" src="/adventure/repeat_command_2/8/raw"></iframe>
         5:
             header: if and else before
             text: |-
-                `{if}` 和 `{else}` 命令也是如此。
-                这些是之前的命令：
+                The same goes for the `{if}` and `{else}` commands.
+                These were the commands before:
             editor: <iframe class="fragment" src="/adventure/if_command/5/raw"></iframe>
         6:
             header: if and else now
             text: |-
-                现在这些 `{if}` 和 `{else}` 命令。
-                `{if}` 和 `{else}` 命令后面的每一行都以缩进开头。
+                These are the `{if}` and `{else}` commands now.
+                Each line after the `{if}` and `{else}` commands start with indentation.
             editor: <iframe class="fragment" src="/adventure/if_command/8/raw"></iframe>
         7:
             header: stopping the indentation
-            text: 就像使用 `{repeat}` 命令一样，你可以停止使用缩进，并且行将始终显示。 不仅仅是该陈述是否属实。
+            text: Just like with the `{repeat}` command, you can stop using indentation and the lines will always be shown. Not just if the statement is true.
             editor: <iframe class="fragment" src="/adventure/if_command/8/raw"></iframe>
         8:
             header: if statements inside if statements
             text: |-
-                你可能想过尝试将 if 命令放入重复命令中，或放入另一个 if 命令中。
-                目前，这还不可能。 在更高的级别中，这是允许的，但现在让我们首先集中练习使用适当缩进的 `{if}` `{else}` 和 `{repeat}` 命令。
+                You might have thought of trying to put an if command inside a repeat command, or inside another if command.
+                For now, this is not possible yet. In the higher levels, it will be allowed, but for now let's focus on practising the `{if}` `{else}` and `{repeat}` commands with proper indentation first.
         9:
             header: Let's check out the adventures!
-            text: 享受第8关的冒险吧！
+            text: Enjoy the adventures in level 8!
     9:
         1:
             header: Welcome to level 9
             text: |-
-                在此级别中，您可以在 `{if}` 或 `{repeat}`命令之后使用多行代码。
+                In this level you can use multiple lines of code after an `{if}` or after a `{repeat}` command.
 
-                您甚至可以将`{repeat}` 命令放入另一个`{repeat}` 命令中。
+                You can even put a `{repeat}` command within another `{repeat}`  command.
         2:
             header: Multiple lines after `{repeat}`
-            text: 您可以在 `{repeat}`之后使用多行。
+            text: You are allowed to use multiple lines after `{repeat}`.
             editor: <iframe class="fragment" src="/adventure/repeat_command/9/raw"></iframe>
         3:
             header: Indentation matters!
-            text: 缩进对于告诉计算机哪些行应该重复以及哪些行只能运行一次非常重要。
+            text: Indentation is very important to tell the computer which lines should be repeated and which lines should only be ran once.
             editor: <iframe class="fragment" src="/adventure/repeat_command_2/8/raw"></iframe>
         4:
             header: Multipe lines after `{if}`
-            text: 你还可以在“{if}”之后使用多行
+            text: You can also use multiple lines after `{if}`
             editor: <iframe class="fragment" src="/adventure/if_command/9/raw"></iframe>
         5:
             header: Indentation matters
-            text: 同样，缩进仍然非常重要，可以在代码中产生很大的差异。
+            text: Again, indentation is still very important and can make a big difference in the code.
             editor: <iframe class="fragment" src="/adventure/if_command/9/raw"></iframe>
         6:
             header: An `{if}` inside a `{repeat}`
             text: |-
-                现在你可以在这些命令之后使用多行代码，你也可以将它们放在一起。
-                一探究竟:
+                Now that you can use multiple lines of code after these command, you can also put them within each other.
+                Check it out:
             editor: <iframe class="fragment" src="/adventure/repeat_command/9/raw"></iframe>
         7:
             header: Mind the indentation
-            text: 请注意，此代码的第四行和第六行以 8 个缩进空格开头。
+            text: Mind that the fourth and sixth line of this code starts with 8 spaces of indentation.
             editor: <iframe class="fragment" src="/adventure/repeat_command/9/raw"></iframe>
         8:
             header: Let's go!
-            text: 享受第9关的冒险吧！
+            text: Enjoy the adventures in level 9!
     10:
         1:
             header: Welcome to level 10
-            text: 在本级别中，您将学习一个新命令：`{for}`。
+            text: 'In this level you will learn a new command: `{for}`.'
         2:
             header: The for command
-            text: 使用 for 可以创建一个列表并使用该列表上的所有项目。 `{for}` 创建一个块，就像重复(repeat)一样，块中的所有行都需要以缩进（4 个空格）开头。
+            text: With for you can make a list and use all items on that list. `{for}` creates a block, like repeat and if so all lines in the block need to start with indentation (4 spaces).
             editor: <iframe class="fragment" src="/adventure/for_command/10/raw"></iframe>
         3:
             header: The for command
-            text: 在这里您可以看到 `{for}` 命令的另一个示例：
+            text: 'Here you see another example of the `{for}` command:'
             editor: <iframe class="fragment" src="/adventure/dishes/10/raw"></iframe>
         4:
             header: Time to program!
-            text: 享受第10关的冒险吧！
+            text: Enjoy the adventures in level 10!
     11:
         1:
             header: Welcome to level 11
             text: |-
-                在此级别中，我们添加了一种新形式的 `{for}`命令。 在早期的级别中，我们将 for 与列表一起使用，但我们也可以将 for 与数字一起使用。
+                In this level, we add a new form of the `{for}` command. In earlier levels, we used for with a list, but we can also use for with numbers.
 
-                这样我们就不再需要 `{repeat}` 命令了。
+                This way we don't need the `{repeat}` command anymore.
         2:
             header: The for command
-            text: 新的 for 命令如下所示：
+            text: 'This is what the new for command looks like:'
             editor: <iframe class="fragment" src="/adventure/for_command/11/raw"></iframe>
         3:
             header: the variable i
             text: |-
-                在上一张幻灯片中，变量被命名为 `'counter'`，因为它正在倒计时。
-                当然，可以为你想要的变量使用任何名称。
-                在这种情况下，Python 等编程语言中使用的变量的标准名称是`'i'`。
-                看起来像这样：
+                In the previous slide the variable was named 'counter', because it was counting down.
+                You can of course use any name for the variable you want.
+                The standard name  for variables in this situation that is used in programming languages like Python is 'i'.
+                That looks like this:
             editor: <iframe class="fragment" src="/adventure/calculator/11/raw"></iframe>
         4:
             header: Let's start programming!
-            text: 享受第11关的冒险吧！
+            text: Enjoy the adventures in level 11!
     12:
         1:
             header: Welcome to level 12
             text: |-
-                从这个级别开始，您可以使用十进制数，并且引号有一些变化。
-                您还可以从此级别开始使用功能！
+                From this level on you are allowed to use decimal numbers and there are some changes to the quotation marks.
+                You can also use functions from this level on!
         2:
             header: Quotation marks
             text: |-
-                此级别对引号的使用进行了一些更改。
-                从现在开始，**所有文本**都需要用引号引起来。 这包括变量值、列表中的项目以及 {if} 命令之后的文本。
+                This level makes some changes to the usage of quotation marks.
+                From now on, **all texts** need to be in quotation marks. This includes values of variables, items on lists and text after {if} commands.
             editor: <iframe class="fragment" src="/adventure/quotation_marks/12/raw"></iframe>
         3:
             header: Decimal numbers
             text: |-
-                从这个级别开始，你还可以使用十进制数字。 这可以让你的"餐厅"等项目变得更好！
+                From this level on you are also allowed to use decimal numbers. This can make programs like your restaurant even better!
 
-                数字不加引号。
+                Numbers do not quotation marks.
             editor: <iframe class="fragment" src="/adventure/maths/12/raw"></iframe>
         4:
             header: Functions!
             text: |-
-                在此级别中，您将学习如何使用函数。函数是可以轻松多次使用的代码块。使用函数可以帮助我们组织可以反复使用的代码片段。若要创建函数，请使用 define 并为函数命名。然后将函数中所需的所有行放在定义行下方的缩进块中。在代码中留一个空行，使其看起来美观整洁。干得好！您已经创建了一个函数！
+                In this level you'll learn how to use functions. A function is a block of code you can easily use multiple times. Using functions helps us organize pieces of code that we can use again and again. To create a function, use define and give the function a name. Then put all the lines you want in the function in a indented block under the define line. Leave one empty line in your code to make it look nice and neat. Great job! You have created a function!
 
-                现在，每当我们需要该代码块时，我们只需使用带有函数名称的来调用它！我们不必再次键入该代码块。
+                Now, whenever we need that block of code, we just use call with the function's name to call it up! We don't have to type that block of code again.
         5:
-            header: 一闪一闪亮星星！
+            header: Twinkle Twinkle little star!
             text: |-
-                在此程序中，您将看到一个函数示例。
-                让我们看看如果你填写歌曲的其余部分会发生什么！
+                In this program you see an example of a function.
+                Let's see what happens if you fill in the rest of the song!
             editor: <iframe class="fragment" src="/adventure/songs_2/12/raw"></iframe>
         6:
-            header: 功能
-            text: 正如您在示例中看到的，函数是一个可以随时调用的代码块。您可以使用“{定义}”来设置函数，并使用“{叫}”来使用它。
+            header: Functions
+            text: As you could see in the example a function is a block of code that can be called anytime. You use `{define}` to set the function and `{call}` to use it.
         7:
-            header: 准备好尝试了吗？
-            text: 享受12级的冒险！
+            header: Ready to try it out?
+            text: Enjoy the adventures in level 12!
     13:
         1:
             header: Welcome to level 13
             text: |-
-                我们现在要学习 `{and}` 和 `{or}`！ 如果要检查两个语句，则不必使用两个 if，而是可以使用 and 和 or。
-                从现在开始，您还可以在函数中使用参数。
+                We are now going to learn `{and}` and `{or}`! If you want to check two statements, you don't have to use two ifs but can use and and or.
+                From now on you could also use arguments in your functions.
         2:
             header: The and command
             text: |-
-                `{and}` 命令始终与 {if} 命令结合使用。
-                这样你就可以检查 2 个陈述是否正确。 例如：
+                The `{and}` command is always used in a combination with the {if} command.
+                This way you can check if 2 statements are true. For example:
             editor: <iframe class="fragment" src="/adventure/and_or_command/13/raw"></iframe>
         3:
             header: The or command
             text: |-
-                `{or}` 与 `{and}` 命令的工作方式相同，但两个语句中只有一个必须为真。
+                The `{or}` works in the same way as the `{and}` command, but only 1 of the two statements has to be true.
 
-                让我们看看将 `{and}`更改为 `{or}`时会发生什么。
+                Let's see what happens when you change the `{and}` for `{or}`.
             editor: <iframe class="fragment" src="/adventure/and_or_command/13/raw"></iframe>
         4:
             header: Functions with arguments
-            text: 现在，您已经学习了如何使用函数，您将学习如何使用带有 **argument** 的函数。参数是在函数中使用的变量。它不在函数外部使用。
+            text: Now that you've learned how to use functions, you'll learn how to use a function with an **argument**. An argument is a variable that is used within a function. It is not used outside the function.
         5:
-            header: 例如
+            header: Example
             text: |-
-                在此示例中，您将看到如何在函数中使用参数“place”。
-                运行代码并将“ocean”和“sea”更改为其他名称，然后查看会发生什么。
+                In this example you see how the argument 'place' is used in the function.
+                Run the code and change 'ocean' and 'sea' to something else, and see what happens.
             editor: <iframe class="fragment" src="/adventure/functions/13/raw"></iframe>
         6:
-            header: 变量示例
+            header: Example with variable
             text: |-
-                现在你已经了解了参数是如何工作的，你也可以将函数与问题结合起来。
+                Now you've ssen how arguments work, you could also combine function with a question.
 
-                如果进行以下更改，会发生什么情况：
+                What happens if you make these changes:
                 ```
-                用地点定义歌曲
-                打印“我的邦妮是”的地方
-                ```
-                答案是问“我的邦妮在哪里？
-                呼叫歌曲与应答
+                define song with place
+                    print 'My Bonnie is ' place
+
+                answer is ask 'Where is my Bonnie?'
+                call song with answer
                 ```
             editor: <iframe class="fragment" src="/adventure/functions/13/raw"></iframe>
         7:
-            header: 还有更多问题！
+            header: Even more questions!
             text: |-
-                现在，我们将更多问题与函数结合在一起。键入此代码，看看会发生什么。
+                Now we have combined even more question with the function. Type this code and see what happens.
 
-                请注意变量和参数的名称相同。这是允许的。
-                它让你感到困惑吗？只是使用不同的名称，这也是允许的。
+                Note how the variables and the arguments have the same name. This is allowed.
+                Does it confuse you? Just use different names, that is allowed as well.
                 ```
-                用名字、地点定义歌曲
-                打印 '我的 ' 名字 ' 是 ' 地方
+                define song with name, place
+                    print 'My ' name ' is ' place
 
-                名字是问“谁？”
-                地方是问“他们在哪里？”
-                用名字、地点叫歌
+                name is ask 'Who?'
+                place is ask 'Where are they?'
+                call song with name, place
                 ```
             editor: <iframe class="fragment" src="/adventure/functions/13/raw"></iframe>
         8:
-            header: 出发！
-            text: 享受 13 级的冒险！
+            header: Let's go!
+            text: Enjoy the adventures in level 13!
     14:
         1:
             header: Welcome to level 14
-            text: 在这个关卡中，你将学习一些可以帮助你改进程序的新符号，比如>。您还将学习如何使用函数的返回值。
+            text: In this level you'll learn some new symbols that can help you improve your programs, like >. You will also learn to work with return values of a function.
         2:
             header: Symbols
             text: |-
-                这些是您可以使用的新符号：
+                These are the new symbols you can use:
 
-                   > 表示大于...
+                  The >  means bigger than...
 
-                   >= 表示大于或等于...
+                  The >= means bigger than or the same as...
 
-                   < 表示小于...
+                  The <  means smaller than...
 
-                   <= 表示小于或等于...
+                  The <= means smaller than or the same as...
 
-                你可以像这样使用它们：
+                You can use them like this:
             editor: <iframe class="fragment" src="/adventure/is_command/14/raw"></iframe>
         3:
             header: Symbols
             text: |-
-                您还可以使用：
+                You can also use:
 
-                == 意思是 相同。
+                == is the same as.
 
-                != 意思是 不是
+                != is not
 
-                == 用于 `{if}` 语句中。
+                == is used in `{if}` statements.
             editor: <iframe class="fragment" src="/adventure/default/14/raw"></iframe>
         4:
             header: Return value
-            text: 在前面的级别中，您已经学习了创建函数并对其使用参数。函数的另一个重要用途是让它为您计算一些东西。你可以给函数一个计算，它会给你计算的答案。此答案称为**返回值**。
+            text: In the previous levels you have learned to create functions and use arguments with them. Another great use of a function is to let it calculate something for you. You can give the function a calculation and it will give you the answer of the calculation. This answer is called a **return
+                value**.
         5:
-            header: 返回值
-            text: 例如，在此代码中，函数 算新价将计算任何项目的新价格。它将为您提供新价格作为返回值。
+            header: Return value
+            text: For example, in this code the function calculate_new_price will calculate the new price of any item. It will give you the new price as a return value.
             editor: <iframe class="fragment" src="/adventure/functions/14/raw"></iframe>
         6:
-            header: 让我们开始工作吧！
-            text: 享受14级的冒险！
+            header: Let's get to work!
+            text: Enjoy the adventures in level 14!
     15:
         1:
             header: Welcome to level 15
-            text: 在本级别中，你将了解“{while}”循环。
+            text: In this level you will learn about the `{while}` loop.
         2:
             header: '{while}'
             text: |-
-                我们将学习一种新循环，即 while 循环！ 只要语句为真，循环就会继续。 所以不要忘记更改循环中的值。
+                We are going to learn a new loop, the while loop! The loop continues as long as the statement is true. So don't forget to change the value in the loop.
 
-                在示例代码中，我们将继续下去，直到给出正确答案。 如果从未给出正确答案，循环将永远不会结束！
+                In the example code, we continue until a correct answer has been given. If the correct answer is never given, the loop will never end!
             editor: <iframe class="fragment" src="/adventure/while_command/15/raw"></iframe>
         3:
             header: Let's try it out!
-            text: 享受15级的冒险吧！
+            text: Enjoy the adventures in level 15!
     16:
         1:
             header: Welcome to level 16
-            text: 在本级别中，你将了解[方括号]以及如何使用它们。
+            text: In this level you will learn about the [square brackets] and how to use them.
         2:
             header: Square brackets
-            text: 我们将以 Python 方式创建列表，用方括号将列表括起来！ 我们还保留每个项目周围的引号，就像我们在之前的级别中学到的那样。 我们使用方括号来指出列表中的位置。 at random 命令不能再使用。
+            text: We are going to make lists the Python way, with square brackets around the lists! We also keep the quotation marks around each item like we have learned in previous levels. We use square brackets to point out a place in a list. The at random command can not be used anymore.
             editor: <iframe class="fragment" src="/adventure/random_command/16/raw"></iframe>
         3:
             header: Let's try it out!
-            text: 享受16级的冒险吧！
+            text: Enjoy the adventures in level 16!
     17:
         1:
             header: Welcome to level 17
-            text: 在本级别中，你将学习如何使用冒号以及 elif 命令。
+            text: in this level you will learn how to use a colon and you will learn the elif command.
         2:
             header: Colon
-            text: '现在我们要稍微改变一下缩进。 每次我们需要缩进时，我们都需要在缩进之前的行添加 : 。'
+            text: 'Now we are going to change indentation a little bit. Every time that we need an indentation, we need : at the line before the indentation.'
             editor: <iframe class="fragment" src="/adventure/print_command/17/raw"></iframe>
         3:
             header: Elif
-            text: 在这个关卡中你还可以使用一个新命令：elif。 elif 是 else if 的缩写，当您想要创建 3 个（或更多！）选项时需要它。 一起来一探究竟！
+            text: 'In this level you can also use a new command: elif. elif is short for else if and you need it when you want to make 3 (or more!) options. Check it out!'
             editor: <iframe class="fragment" src="/adventure/elif_command/17/raw"></iframe>
         4:
             header: Let's try it out!
-            text: 享受第17关的冒险吧！
+            text: Enjoy the adventures in level 17!
     18:
         1:
             header: Welcome to level 18
-            text: 恭喜！ 你已到达 海蒂 的最后一关！ 在此处创建的代码可以复制到真实的 Python 环境（例如 replit 或 PyCharm），并且你可以在那里继续学习！ 但请注意，Python 只能读取英文命令，因此如果你一直在使用其他语言，则现在需要切换到英文。
+            text: Congratulations! You have reached the last level of Hedy! The code you have created here can be copied to real Python environments like replit or PyCharm, and you can continue learning there! Note however that Python can only read English commands, so if you have been using other languages,
+                you will need to switch to English now.
         2:
             header: The Python way
             text: |-
-                我们得到了真正的 Python 代码！ 这意味着从现在开始我们需要在 print 和 range 中使用括号。
+                We arrived at real Python code! That means we need to use parentheses with print and range from now on.
 
-                另外，如果要打印多个项目，则需要用逗号分隔它们。
+                Also, if you want to print more than one item, you need to separate them by commas.
 
-                为了获取 Python 代码，我们需要进行的最后一个更改是将询问更改为输入。
+                The final change we will need to make to get Python code is changing ask into input.
 
-                单击 'print' 选项卡查看所有示例。
+                Click on the 'print' tab for all the examples.
             editor: <iframe class="fragment" src="/hedy/18"></iframe>
         3:
             header: The very last adventures!
-            text: 享受第 18 关的最后冒险吧！
+            text: Enjoy the very last adventures in level 18!
