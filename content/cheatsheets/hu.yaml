@@ -35,7 +35,7 @@
         szín {is} {ask} Mi a kedvenc színed?
         {print} szín a kedvenc színed!
 -   name: '{sleep}'
-    explanation: 'Állítsd meg a Hedy-t egy (pár) másodpercre: `{sleep}`.'
+    explanation: 'A `{sleep}` segítségével megállítható a Hedy egy (néhány) másodpercig.'
     demo_code: |-
         {print} Hadd gondolkodjak egy pillanatot...
         {sleep}
@@ -69,7 +69,7 @@
     explanation: Pontos kiíratás idézőjelekkel.
     demo_code: '{print} "Szia, üdvözlünk a Hedy-nél."'
 -   name: is
-    explanation: Adj nevet a szövegnek és írasd ki `print`segítségével idézőjelek nélkül
+    explanation: Adj nevet a szövegnek és írasd ki `{print}` segítségével idézőjelek nélkül.
     demo_code: |-
         nev is Hedy
         print 'A nevem ' nev
@@ -88,35 +88,35 @@
         szin is ask 'Mi a kedvenc színed?'
         print szin ' a kedvenced!'
 -   name: if
-    explanation: Válassz az `if` utasítással
+    explanation: Válassz az `{if}` utasítással.
     demo_code: |-
         szin is ask 'Mi a kedvenc színed?'
         if szin is zöld print 'szép!' else print 'csúnya'
 -   name: if utasítás a teknőssel
-    explanation: Válassz az `if` utasítással
+    explanation: Válassz az `{if}` utasítással.
     demo_code: |-
         valasz is ask 'Milyen messze menjek?'
         if valasz is messze forward 100 else forward 5
 -   name: '{in}'
-    explanation: Check elements with `{in}`
+    explanation: 'Ellenőrizd az elemeket ezzel: `{in}`.'
     demo_code: |-
-        pretty_colors {is} green, yellow
-        color {is} {ask} 'What {is} your favorite color?'
-        {if} color {in} pretty_colors {print} 'pretty!' {else} {print} 'meh'
+        szép_színek {is} zöld, sárga
+        szín {is} {ask} 'Melyik a kedvenc színed?'
+        {if} szín {in} szép_színek {print} 'szép!' {else} {print} 'nem szép'
 -   name: '{pressed}'
     explanation: Ellenőrizze hogy a `{pressed}` kulcs a billentyűzeten van-e.
-    demo_code: '{if} a {is} {pressed} {print} ''You pressed A!'' {else} {print} ''You pressed another key!'''
+    demo_code: '{if} a {is} {pressed} {print} ''Megnyomtad az A-t!'' {else} {print} ''Megynyomtál egy másik gombot!'''
 6:
 -   name: print
-    explanation: Pontos kiíratás aposztrófokkal
+    explanation: Pontos kiíratás aposztrófokkal.
     demo_code: print '5-ször 5 az ' 5 * 5
 -   name: '`ask` és `if` számolásokkal'
     explanation: Kérdezz egy számolást és ellenőrizd, hogy jó-e.
     demo_code: |-
         valasz = ask 'Mennyi 10+10?'
         if valasz is 20 print 'Igen!' else print 'Hoppá'
--   name: '`ask` és `if` teknős'
-    explanation: Kérdezd meg a felhasználót mennyi szöget akar
+-   name: '`{ask}` és `{if}` teknőssel'
+    explanation: Kérdezd meg a felhasználót mennyi szöget akar.
     demo_code: |-
         szogek = ask 'Hány szög?'
         szog = 360 / szogek
@@ -131,7 +131,7 @@
         szin = ask 'Mi a kedvenc színed?'
         print szin ' a kedvenced!'
 -   name: if
-    explanation: Készíts elágazást az `if` utasítással
+    explanation: Készíts elágazást az `{if}` utasítással.
     demo_code: |-
         szin = ask 'Mi a kedvenc színed?'
         if szin is zöld print 'szép!' else print 'csúnya'
@@ -153,18 +153,18 @@
             print 'Hoppá!'
             print 'A válasz 10'
 -   name: '`{repeat}` with turtle'
-    explanation: '{repeat} multiple lines'
+    explanation: 'Több sor ismétlése.'
     demo_code: |-
         {repeat} 4 {times}
             {turn} 90
             {forward} 50
 -   name: '{pressed}'
-    explanation: Check whether a given key on the keyboard is `{pressed}`.
+    explanation: Annak ellenőrzése, hogy a billentyűzet egy adott billentyűje `{pressed}`.
     demo_code: |-
         {if} a {is} {pressed}
-            {print} 'You pressed A!'
+            {print} 'Megnyomtad az A-t!'
         {else}
-            {print} 'You pressed another key!'
+            {print} 'Megnyomtál egy másik gombot!'
 9:
 -   name: '`{if}` with multiple lines'
     explanation: The answer of a sum of questions with '{ask}' and see if it is correct. Now we print out two lines.
@@ -177,7 +177,7 @@
             {print} 'Wrong'
             {print} 'The answer is 20'
 -   name: '`{repeat}` and turtle'
-    explanation: '{repeat} multiple lines'
+    explanation: 'Több sor ismétlése.'
     demo_code: |-
         {repeat} 4 {times}
             {turn} 90
@@ -187,14 +187,14 @@
     explanation: print something. Remember to use a quotation mark for literal printing.
     demo_code: '{print} ''5 times 5 is '' 5 * 5'
 -   name: '{for} with a list'
-    explanation: print all things in a list
+    explanation: Minden dolog kiírása egy listában.
     demo_code: |-
         animals {is} dog, cat, blobfish
         {for} animal {in} animals
           {print} 'I love ' animal
 11:
 -   name: repeat
-    explanation: a `repeat` utasítást `for` utasítással helyettesítjük
+    explanation: A `{for}` utasítást a `{range}` utasítással használhatjuk.
     demo_code: |-
         for i in range 1 to 10
           print i
@@ -211,7 +211,7 @@
             print 'A válasz 10'
 12:
 -   name: float directly
-    explanation: Decimal numbers
+    explanation: Tízes számok.
     demo_code: |-
         {print} 'Calculate away!'
         {print} 'Two and a half plus two and a half is...'
@@ -221,22 +221,21 @@
     demo_code: |-
         name = 'Hedy the Robot'
         {print} 'Hello ' name
--   name: quotes after {if} comparison
-    explanation: Text with quotation marks after {if}
+-   name: idézőjelek a `{if}` összehasonlítás után
+    explanation: Szöveg idézőjelekkel az `{if}` után.
     demo_code: |-
         name = {ask} 'Who are you?'
         {if} name = 'Hedy'
             {print} 'Hi there!'
 -   name: quotes in list
-    explanation: A list with quotation marks
+    explanation: Egy lista idézőjelekkel.
     demo_code: |-
         superheroes = 'Iron Man', 'Batman', 'Superman'
         {print} superheroes {at} {random}
 13:
 -   name: És
     explanation: |-
-        Mindkét állításnak (az `and` bal és jobb oldalán) igaznak kell lenni.
-        if 3+2 is 5 and 2+2 is 4
+        Mindkét résznek helyesnek kell lennie.
     demo_code: |-
         valasz1 = ask 'Mennyi 3+2?'
         valasz2 = ask 'Mennyi 2+2?'
@@ -258,18 +257,14 @@
 14:
 -   name: Kisebb
     explanation: |-
-        A `<` ellenőrzi, hogy az első szám kisebb-e, mint a második. Például, ha le akarjuk
-        ellenőrizni, hogy valtozo kisebb-e, mint 15, akkor `valtozo< 15` utasítást használjuk.
-        Például: kor<13
+        A `<` ellenőrzi, hogy az első szám kisebb-e, mint a második.
     demo_code: |-
         kor = ask 'Hány éves vagy?'
         if kor < 13
          print 'Fiatalabb vagy, mint én!'
 -   name: Nagyobb
     explanation: |-
-        A `>` ellenőrzi, hogy az első szám nagyobb-e, mint a második. Például, ha le akarjuk
-        ellenőrizni, hogy valtozo nagyobb-e, mint 15, akkor `valtozo>15` utasítást használjuk.
-        Például: kor>13
+        A `>` ellenőrzi, hogy az első szám nagyobb-e, mint a második.
     demo_code: |-
         kor = ask 'Hány éves vagy?'
         if kor < 13
@@ -300,7 +295,7 @@
             {print} 'You are older than me!'
 15:
 -   name: Logikai amíg
-    explanation: A `while` ciklust `True` és `False` segítségével használhatjuk. while valasz is False
+    explanation: Használhatjuk a `{while}` hurkot a nem egyenlővel.
     demo_code: |-
         valasz = 0
         while valasz != 25
@@ -362,20 +357,20 @@
             print 'a értéke nem 1 vagy 2'
 18:
 -   name: '{print}'
-    explanation: With `{print}` you need to use parentheses
+    explanation: A `{print}` után zárójeleket kell használni.
     demo_code: '{print}(''hi!'')'
 -   name: '{print} with var'
-    explanation: With `{print}` you need to use parentheses and commas if you {print} more items
+    explanation: A `{range}` után zárójeleket kell használni.
     demo_code: |-
         name = 'Hedy'
         {print}('my name is ', name)
 -   name: '{print} with var'
-    explanation: With `{print}` you need to use parentheses and commas if you {print} more items
+    explanation: A `{print}`-nél zárójeleket és vesszőket kell használnod, ha több elemet írsz ki.
     demo_code: |-
         name = 'Hedy'
         {print}('my name is ', name)
 -   name: ask something with {input}
-    explanation: Use `{input}` instead of `{ask}` to ask something
+    explanation: Használd az `{input}`-ot az `{ask}` helyett, ha kérdezni akarsz valamit.
     demo_code: |-
         name = {input}('What is your name?')
         {print}('So your name is ', name)
