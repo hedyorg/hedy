@@ -676,20 +676,26 @@ adventures:
                 story_text: |
                     In het rekenspelletje dat je een aantal levels terug hebt leren maken, kun je de `{while}` loop toevoegen.
                     Hierdoor mag de speler pas door naar de volgende vraag als het goede antwoord gegeven is.
+
+                    ## Opdracht
+                    Voeg een `{while}` toe aan de functie, vraag de speler wat nummer_1 keer nummer_2 is en print hun antwoord.
+                    Gebruik daarna `{call}` om de functie op te roepen.
                 example_code: |
                     ```
-                    score = 0
-                    {for} i {in} {range} 0 {to} 9
-                        getallen = 1, 2, 3, 4, 5, 6, 7, 8, 9, 10
-                        getal1 = getallen {at} {random}
-                        getal2 = getallen {at} {random}
-                        goede_antwoord = getal1 * getal2
+                    {define} nieuwe_vraag
+                        nummers = 1, 2, 3, 4, 5, 6, 7, 8, 9, 10
+                        nummer_1 = nummers {at} {random}
+                        nummer_2 = nummers {at} {random}
+                        correct = nummer_1 * nummer_2
                         antwoord = 0
-                        {while} antwoord != goede_antwoord
-                            {print} 'Hoeveel is ' getal1 ' keer ' getal2 '?'
-                            antwoord = {ask} 'Vul hier het antwoord in:'
-                            {print} 'Jouw antwoord is ' antwoord
-                        {print} 'Goed zo!'
+                        _
+                        _
+                        _
+                        {print} 'Well done!'
+
+                    {print} 'Geef 10 goede antwoorden om te winnen!'
+                    {for} i {in} {range} 1 {to} 10
+                        _
                     {print} 'Je hebt gewonnen!'
                     ```
                 start_code: '# Schrijf jouw code hier'

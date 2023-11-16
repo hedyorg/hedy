@@ -708,21 +708,27 @@ adventures:
                 story_text: |
                     Önceki bir seviyede yapmayı öğrendiğiniz hesap makinesi oyununa `{while}` döngüsünü ekleyebilirsiniz.
                     Bu, oyuncunun yanlış cevap vermesi durumunda bir sonraki soruya devam edememesini sağlar.
+
+                    ## Exercise
+                    Add the `{while}` loop in the function, ask the player what number_1 times number_2 is and print their answer.
+                    Then `{call}` the function.
                 example_code: |
                     ```
-                    puan = 0
-                    {for} i {in} {range} 0 {to} 9
-                        sayılar = 1, 2, 3, 4, 5, 6, 7, 8, 9, 10
-                        sayı1 = sayılar {at} {random}
-                        sayı2 = sayılar {at} {random}
-                        doğrucevap = sayı1 * sayı2
-                        cevap = 0
-                        {while} cevap != doğrucevap
-                            {print} 'Söyle hadi, ' sayı1 ' kere ' sayı2 ' kaç eder?'
-                            cevap = {ask} 'Cevabın nedir?:'
-                            {print} 'Cevabın ' cevap
-                        {print} 'Aferin, iyi işti!'
-                    {print} 'Sen kazandın!'
+                    {define} new_question
+                        numbers = 1, 2, 3, 4, 5, 6, 7, 8, 9, 10
+                        number_1 = numbers {at} {random}
+                        number_2 = numbers {at} {random}
+                        correct = number_1 * number_2
+                        answer = 0
+                        _
+                        _
+                        _
+                        {print} 'Well done!'
+
+                    {print} 'Give 10 correct answers to win!'
+                    {for} i {in} {range} 1 {to} 10
+                        _
+                    {print} 'You win!'
                     ```
                 start_code: '# kodunuzu buraya yazın'
     calculator_2:

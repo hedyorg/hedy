@@ -685,21 +685,27 @@ adventures:
                 story_text: |
                     Puedes agregar el bucle `{while}` al jugo de la calculadora que aprendiste a hacer en el nivel anterior.
                     Esto asegura que el jugador no pueda continuar a la siguiente pregunta si se responde incorrectamente.
+
+                    ## Exercise
+                    Add the `{while}` loop in the function, ask the player what number_1 times number_2 is and print their answer.
+                    Then `{call}` the function.
                 example_code: |
                     ```
-                    puntaje = 0
-                    {for} i {in} {range} 0 {to} 9
-                        números = 1, 2, 3, 4, 5, 6, 7, 8, 9, 10
-                        número1 = números {at} {random}
-                        número2 = números {at} {random}
-                        correcta = número1 * número2
-                        respuesta = 0
-                        {while} respuesta != correcta
-                            {print} '¿Cuánto es ' número1 ' por ' número2 '?'
-                            respuesta = {ask} 'Escribe tu respuesta:'
-                            {print} 'Tu respuesta es ' respuesta
-                        {print} '¡Buen trabajo!'
-                    {print} '¡Ganaste!'
+                    {define} new_question
+                        numbers = 1, 2, 3, 4, 5, 6, 7, 8, 9, 10
+                        number_1 = numbers {at} {random}
+                        number_2 = numbers {at} {random}
+                        correct = number_1 * number_2
+                        answer = 0
+                        _
+                        _
+                        _
+                        {print} 'Well done!'
+
+                    {print} 'Give 10 correct answers to win!'
+                    {for} i {in} {range} 1 {to} 10
+                        _
+                    {print} 'You win!'
                     ```
                 start_code: '# pon tu código aquí'
     calculator_2:

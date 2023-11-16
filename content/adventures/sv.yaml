@@ -704,21 +704,27 @@ adventures:
                 story_text: |
                     Du kan lägga till `{while}` -slingan i räknespelet som du lärder dig göra på en tidigare nivå.
                     Det gör att spelaren inte kan fortsätta till nästa fråga om den svarar fel.
+
+                    ## Exercise
+                    Add the `{while}` loop in the function, ask the player what number_1 times number_2 is and print their answer.
+                    Then `{call}` the function.
                 example_code: |
                     ```
-                    poäng = 0
-                    {for} i {in} {range} 0 {to} 9
-                        tal = 1, 2, 3, 4, 5, 6, 7, 8, 9, 10
-                        tal1 = tal {at} {random}
-                        tal2 = tal {at} {random}
-                        rätt = tal1 * tal2
-                        svar = 0
-                        {while} svar != rätt
-                            {print} 'Hur mycket är ' tal1 ' gånger ' tal2 '?'
-                            svar = {ask} 'Fyll i ditt svar:'
-                            {print} 'Ditt svar är ' svar
-                        {print} 'Bra jobbat!'
-                    {print} 'Du vann!'
+                    {define} new_question
+                        numbers = 1, 2, 3, 4, 5, 6, 7, 8, 9, 10
+                        number_1 = numbers {at} {random}
+                        number_2 = numbers {at} {random}
+                        correct = number_1 * number_2
+                        answer = 0
+                        _
+                        _
+                        _
+                        {print} 'Well done!'
+
+                    {print} 'Give 10 correct answers to win!'
+                    {for} i {in} {range} 1 {to} 10
+                        _
+                    {print} 'You win!'
                     ```
                 start_code: '# skriv din kod här'
     calculator_2:

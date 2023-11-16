@@ -659,21 +659,27 @@ adventures:
                 story_text: |
                     Du kan legge til en `{while}`-løkke til kalkulatorspillet du lærte å lage på det forrige nivået.
                     Dette gjør det sånn at spilleren ikke kan fortsette til neste spørsmål om de har svart feil.
+
+                    ## Exercise
+                    Add the `{while}` loop in the function, ask the player what number_1 times number_2 is and print their answer.
+                    Then `{call}` the function.
                 example_code: |
                     ```
-                    poengsum = 0
-                    {for} i {in} {range} 0 {to} 9
-                        tallene = 1, 2, 3, 4, 5, 6, 7, 8, 9, 10
-                        tall1 = tallene {at} {random}
-                        tall2 = tallene {at} {random}
-                        riktig_svar = tall1 * tall2
-                        ditt_svar = 0
-                        {while} ditt_svar != riktig_svar
-                            {print} 'Hvor mye er ' tall1 ' ganger ' tall2 '?'
-                            ditt_svar = {ask} 'Skriv inn ditt svar:'
-                            {print} 'Ditt svar er ' ditt_svar
-                        {print} 'Godt jobbet!'
-                    {print} 'Du vant!'
+                    {define} new_question
+                        numbers = 1, 2, 3, 4, 5, 6, 7, 8, 9, 10
+                        number_1 = numbers {at} {random}
+                        number_2 = numbers {at} {random}
+                        correct = number_1 * number_2
+                        answer = 0
+                        _
+                        _
+                        _
+                        {print} 'Well done!'
+
+                    {print} 'Give 10 correct answers to win!'
+                    {for} i {in} {range} 1 {to} 10
+                        _
+                    {print} 'You win!'
                     ```
                 start_code: '# skriv koden din her'
     calculator_2:

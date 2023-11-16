@@ -677,21 +677,27 @@ adventures:
                 story_text: |
                     Ju mund ta shtoni komandën `{while}` në lojën me kalkulator që e mësuat në nivelin e mëparshëm.
                     Kjo siguron se lojtarët nuk mund të vazhdojnë në pyetjen tjetër {if}(nëse) përgjigjen gabim.
+
+                    ## Exercise
+                    Add the `{while}` loop in the function, ask the player what number_1 times number_2 is and print their answer.
+                    Then `{call}` the function.
                 example_code: |
                     ```
-                    pikë = 0
-                    {for} i {in} {range} 0 {to} 9
-                        numrat = 1, 2, 3, 4, 5, 6, 7, 8, 9, 10
-                        numri1 = numrat {at} {random}
-                        numri2 = numrat {at} {random}
-                        saktë = numri1 * numri2
-                        përgjigja= 0
-                        {while} përgjigja != saktë
-                            {print} 'Sa bëjnë ' numri1 ' herë' numri2 '?'
-                            përgjigja = {ask} 'Shkruani përgjigjen:'
-                            {print} 'Përgjigja juaj është ' përgjigja
-                        {print} 'Punë e mirë!'
-                    {print} 'Ju fituat!'
+                    {define} new_question
+                        numbers = 1, 2, 3, 4, 5, 6, 7, 8, 9, 10
+                        number_1 = numbers {at} {random}
+                        number_2 = numbers {at} {random}
+                        correct = number_1 * number_2
+                        answer = 0
+                        _
+                        _
+                        _
+                        {print} 'Well done!'
+
+                    {print} 'Give 10 correct answers to win!'
+                    {for} i {in} {range} 1 {to} 10
+                        _
+                    {print} 'You win!'
                     ```
                 start_code: '# Vendoseni kodin tuaj këtu'
     calculator_2:

@@ -707,21 +707,27 @@ adventures:
                 story_text: |
                     Du kannst die `{while}` Schleife zum Taschenrechnerspiel, was du im vorigen Level gelernt hast, hinzufügen.
                     Dies stellt sicher, dass der Spieler nicht zur nächsten Frage weiterkommt, wenn er falsch antwortet.
+
+                    ## Exercise
+                    Add the `{while}` loop in the function, ask the player what number_1 times number_2 is and print their answer.
+                    Then `{call}` the function.
                 example_code: |
                     ```
-                    punkte = 0
-                    {for} i {in} {range} 0 {to} 9
-                        zahlen = 1, 2, 3, 4, 5, 6, 7, 8, 9, 10
-                        zahl1 = zahlen {at} {random}
-                        zahl2 = zahlen {at} {random}
-                        korrekt = zahl1 * zahl2
-                        antwort = 0
-                        {while} antwort != korrekt
-                            {print} 'Wie viel ist ' zahl1 ' mal ' zahl2 '?'
-                            antwort = {ask} 'Schreibe deine Antwort hier:'
-                            {print} 'Deine Antwort ist ' antwort
-                        {print} 'Gut gemacht!'
-                    {print} 'Du gewinnst!'
+                    {define} new_question
+                        numbers = 1, 2, 3, 4, 5, 6, 7, 8, 9, 10
+                        number_1 = numbers {at} {random}
+                        number_2 = numbers {at} {random}
+                        correct = number_1 * number_2
+                        answer = 0
+                        _
+                        _
+                        _
+                        {print} 'Well done!'
+
+                    {print} 'Give 10 correct answers to win!'
+                    {for} i {in} {range} 1 {to} 10
+                        _
+                    {print} 'You win!'
                     ```
                 start_code: '# setze hier deinen Code hin'
     calculator_2:
