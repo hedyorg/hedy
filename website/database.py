@@ -606,6 +606,7 @@ class Database:
 
     def read_public_tags(self):
         return TAGS.scan()
+
     def read_tags_by_username(self, username):
         tags = TAGS.get_many({"creator": username})
         return tags if tags else {}
@@ -641,7 +642,7 @@ class Database:
         return ADVENTURES.scan()
 
     def public_adventures(self):
-        return ADVENTURES.get_many({ "public": True })
+        return ADVENTURES.get_many({"public": True})
 
     def get_student_classes_ids(self, username):
         ids = USERS.get({"username": username}).get("classes")

@@ -33,7 +33,7 @@ class TagsModule(WebsiteModule):
             adventure = self.db.get_adventure(adventure_id)
             # exclude current adventure's tags
             public_tags = list(filter(lambda t: t["name"] not in adventure.get("tags", []), public_tags))
-        
+
         return jinja_partials.render_partial('htmx-tags-dropdown.html', tags=public_tags, adventure_id=adventure_id)
 
     @route("/create/<adventure_id>", methods=["POST"])
