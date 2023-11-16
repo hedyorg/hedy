@@ -3791,11 +3791,13 @@ adventures:
             15:
                 story_text: |
                     Met de `{while}` kun je zorgen dat je klanten kunnen blijven bestellen tot ze klaar zijn.
+                    ### Opdracht
+                    Voeg het `{while}` commando op de juiste wijze toe aan deze code.
                 example_code: |
                     ```
                     {print} 'Welkom bij McHedy'
                     meer = 'ja'
-                    {while} meer == 'ja'
+                    _
                         bestelling = {ask} 'Wat wil je bestellen?'
                         {print} bestelling
                         meer = {ask} 'Wilt u nog iets bestellen?'

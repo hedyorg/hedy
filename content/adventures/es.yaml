@@ -3765,11 +3765,14 @@ adventures:
             15:
                 story_text: |
                     Con el comando `{while}` puedes asegurarte que tus clientes sigan agregando ordenes hasta que gusten.
+
+                    ### Exercise
+                    Correctly add the `{while}` command to this code.
                 example_code: |
                     ```
                     {print} 'Bienvenido a McHedy'
                     más = 'sí'
-                    {while} más == 'sí'
+                    _
                         pedido = {ask} '¿Qué te gustaría ordenar?'
                         {print} pedido
                         más = {ask} '¿Te gustaría pedir algo más?'

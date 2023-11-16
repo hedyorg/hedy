@@ -3795,11 +3795,13 @@ adventures:
             15:
                 story_text: |
                     Med `{while}` kan du göra så att dina kunder kan fortsätta att lägga till beställningar tills de är klara.
+                    ### Exercise
+                    Correctly add the `{while}` command to this code.
                 example_code: |
                     ```
                     {print} 'Välkommen till McHedy'
                     mer = 'ja'
-                    {while} mer == 'ja'
+                    _
                         order = {ask} 'Vad vill du beställa?'
                         {print} order
                         mer = {ask} 'Vill du beställa något mer?'

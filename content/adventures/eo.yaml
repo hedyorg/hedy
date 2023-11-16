@@ -3656,17 +3656,19 @@ adventures:
             15:
                 story_text: |
                     Per la `{while}` vi povas certigi, ke viaj klientoj povas mendadi ĝis ili finiĝos.
+
+                    ### Exercise
+                    Correctly add the `{while}` command to this code.
                 example_code: |
                     ```
                     {print} 'Bonvenon al McHedy'
                     pli = 'jes'
-                    {while} pli == 'jes'
+                    _
                         mendo = {ask} 'Kion vi volas mendi?'
                         {print} mendo
                         pli = {ask} 'Ĉu vi volas mendi ion pli?'
                     {print} 'Dankon!'
                     ```
-                    <!--{else}-->
                 start_code: '# via kodo ĉi tie'
     rock:
         name: Roko, papero, tondilo

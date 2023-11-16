@@ -3787,11 +3787,14 @@ adventures:
             15:
                 story_text: |
                     With the `{while}` you can make sure your costumers can keep adding orders until they are done.
+
+                    ### Exercise
+                    Correctly add the `{while}` command to this code.
                 example_code: |
                     ```
                     {print} 'Willkommen bei McHedy'
                     mehr = 'ja'
-                    {while} mehr == 'ja'
+                    _
                         Bestellung = {ask} 'Was würden Sie gerne bestellen?'
                         {print} Bestellung
                         mehr = {ask} 'Würden Sie gerne noch etwas bestellen?'

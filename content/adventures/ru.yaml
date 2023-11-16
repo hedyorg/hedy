@@ -3721,11 +3721,13 @@ adventures:
             15:
                 story_text: |
                     С помощью `{while}` вы можете убедиться, что ваши клиенты могут продолжать добавлять заказы, пока они не будут выполнены.
+                    ### Exercise
+                    Correctly add the `{while}` command to this code.
                 example_code: |
                     ```
                     {print} 'Добро пожаловать в МакХеди'
                     more = 'yes'
-                    {while} more == 'yes'
+                    _
                         заказать = {ask} 'Что бы вы хотели заказать?'
                         {print} заказать
                         more = {ask} 'Вы хотите заказать что-нибудь еще?'

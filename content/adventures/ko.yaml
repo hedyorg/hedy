@@ -3781,11 +3781,14 @@ adventures:
             15:
                 story_text: |
                     `{while}`를 사용하면 고객이 주문이 완료될 때까지 주문을 계속 추가할 수 있습니다.
+
+                    ### Exercise
+                    Correctly add the `{while}` command to this code.
                 example_code: |
                     ```
                     {print} 'Welcome at McHedy'
                     more = 'yes'
-                    {while} more == 'yes'
+                    _
                         order = {ask} 'What would you like to order?'
                         {print} order
                         more = {ask} 'Would you like to order anything else?'

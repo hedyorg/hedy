@@ -3616,11 +3616,13 @@ adventures:
             15:
                 story_text: |
                     通过`{while}`命令，你可以确保你的客人能不断追加点单，直到点完。
+                    ### Exercise
+                    Correctly add the `{while}` command to this code.
                 example_code: |
                     ```
                     {print} '欢迎来到麦海蒂快餐店'
                     还有 = '是'
-                    {while} 还有 == '是'
+                    _
                         点单 = {ask} '您要点什么？'
                         {print} 点单
                         还有 = {ask} '您还要点别的吗？'

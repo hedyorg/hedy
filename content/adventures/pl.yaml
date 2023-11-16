@@ -3596,7 +3596,9 @@ adventures:
             15:
                 story_text: |
                     Dzięki `{while}` możesz mieć pewność, że Twoi klienci będą mogli dodawać zamówienia, dopóki ich nie skończą.
-                example_code: "```\n{print} 'Witamy w McHedy'\nwięcej = 'tak'\n{while} więcej == 'tak'\n    zamówienie = {ask} 'Co chcesz zamówić?'\n    {print} zamówienie \n    więcej = {ask} 'Czy chciałby Pan/Pani zamówić coś jeszcze?'\n{print} 'Dziękuję!'\n```\n"
+                    ### Exercise
+                    Correctly add the `{while}` command to this code.
+                example_code: "```\n{print} 'Witamy w McHedy'\nwięcej = 'tak'\n_\n    zamówienie = {ask} 'Co chcesz zamówić?'\n    {print} zamówienie \n    więcej = {ask} 'Czy chciałby Pan/Pani zamówić coś jeszcze?'\n{print} 'Dziękuję!'\n```\n"
                 start_code: '# umieść tutaj swój kod'
     rock:
         name: Papier, kamień, nożyce

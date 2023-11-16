@@ -3845,11 +3845,13 @@ adventures:
             15:
                 story_text: |
                     `{while}` ile müşterilerinizin istekleri bitene kadar sipariş eklemeye devam edebilmelerini sağlayabilirsiniz.
+                    ### Exercise
+                    Correctly add the `{while}` command to this code.
                 example_code: |
                     ```
                     {print} "McHedy'ye Hoş Geldiniz"
                     dahafazla = 'evet'
-                    {while} dahafazla == 'evet'
+                    _
                         sipariş = {ask} 'Ne sipariş etmek istersiniz?'
                         {print} sipariş
                         dahafazla = {ask} 'Başka bir şey sipariş etmek ister misiniz?'
