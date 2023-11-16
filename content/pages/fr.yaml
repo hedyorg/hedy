@@ -375,7 +375,7 @@ sections:
                 solution_code: |-
                     {ask} Quel est votre nom ?
                     {echo} Ton nom est
-        -   title: Les élèves veulent que le mot répété (variable) se trouve au milieu d'une phrase
+        -   title: Les élèves veulent que le mot (la variable) répété par la commande `{echo}` se trouve au milieu d'une phrase
             example:
                 error_text: Et ils ont raison ! C'est pourquoi ils apprendront à utiliser les variables au niveau suivant.
                 error_code: |-
@@ -420,7 +420,7 @@ sections:
                 error_text: Pour certains élèves, il peut être frustrant d'apprendre que la commande `{echo}` ne fonctionne plus. C'est pourquoi il est très important d'expliquer les avantages de l'utilisation des variables. Par exemple, vous pouvez utiliser plusieurs variables dans un code, et vous pouvez
                     les placer où vous voulez dans une phrase !
                 error_code: |-
-                    réponse {is} {ask} Pourquoi {echo} ne fonctionne plus?!
+                    réponse {is} {ask} Pourquoi {echo} ne fonctionne plus ?!
                     {echo}
                 solution_text: Utilise plutôt une variable.
                 solution_code: |-

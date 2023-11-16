@@ -1627,7 +1627,8 @@ class TestCustomAdventures(AuthHelper):
                 'classes': [],
                 'level': '5',
                 'content': 'This is just long enough!',
-                'public': 'panda'
+                'public': 'panda',
+                'language': None,
             },
         ]
 
@@ -1643,7 +1644,8 @@ class TestCustomAdventures(AuthHelper):
             'classes': [],
             'level': '5',
             'content': 'This is just long enough!',
-            'public': True}
+            'public': True,
+            'language': 'en', }
         self.post_data('for-teachers/customize-adventure', body, expect_http_code=404)
 
     def test_valid_update_adventure(self):
@@ -1663,7 +1665,8 @@ class TestCustomAdventures(AuthHelper):
             'classes': [],
             'level': '5',
             'content': 'This is just long enough!',
-            'public': True}
+            'public': True,
+            'language': 'en', }
         self.post_data('for-teachers/customize-adventure', body, expect_http_code=200)
 
     def test_valid_update_adventure_with_class(self):
@@ -1688,7 +1691,8 @@ class TestCustomAdventures(AuthHelper):
             'classes': [class_id],
             'level': '5',
             'content': 'This is just long enough!',
-            'public': True
+            'public': True,
+            'language': 'en',
         }
 
         self.post_data('for-teachers/customize-adventure', body, expect_http_code=200)

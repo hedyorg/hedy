@@ -1,3 +1,4 @@
+import { HedyAceEditor } from "./ace-editor";
 import { runit, theGlobalDebugger,theGlobalSourcemap } from "./app";
 import { HedyEditor, Breakpoints } from "./editor";
 import  TRADUCTION_IMPORT  from '../../highlighting/highlighting-trad.json'
@@ -53,7 +54,6 @@ interface GutterMouseDownEvent {
   getDocumentPosition(): AceAjax.Position;
   stop(): void;
 }
-
 
 function hide_if_no_variables(){
   if($('#variables #variable-list li').length == 0){
@@ -179,7 +179,11 @@ export function initializeDebugger(options: InitializeDebuggerOptions) {
 }
 
 function initializeBreakpoints(editor: HedyEditor) {
-  
+  /**
+   * Both of these events listener only are executed for Ace
+   * CodeMirror doesn't need them
+   */
+
   editor.on("guttermousedown", function (e: GutterMouseDownEvent) {
     const target = e.domEvent.target as HTMLElement;
 
@@ -221,14 +225,15 @@ function initializeBreakpoints(editor: HedyEditor) {
  * (Breakpoints mean "disabled lines" in Hedy).
  * */
   editor.on('changeBreakpoint', function() {
-    const breakpoints = theGlobalEditor.getBreakpoints();
-
-    const disabledLines = Object.entries(breakpoints)
-      .filter(([_, bpClass]) => bpClass === BP_DISABLED_LINE)
-      .map(([line, _]) => line)
-      .map(x => parseInt(x, 10));
-
-    theGlobalEditor.strikethroughLines(disabledLines);
+    if (theGlobalEditor instanceof HedyAceEditor) {
+      const breakpoints = theGlobalEditor.getDeactivatedLines();
+      const disabledLines = Object.entries(breakpoints)
+        .filter(([_, bpClass]) => bpClass === BP_DISABLED_LINE)
+        .map(([line, _]) => line)
+        .map(x => parseInt(x, 10));
+      
+      theGlobalEditor.strikethroughLines(disabledLines);
+    }
   });
 }
 
@@ -311,7 +316,7 @@ function clearDebugVariables() {
   }
 }
 
-export function incrementDebugLine() {  
+export function incrementDebugLine() {
   const active_suspension = theGlobalDebugger.getActiveSuspension();
   const suspension_info = theGlobalDebugger.getSuspensionInfo(active_suspension);
   const lineNumber = suspension_info.lineno;
@@ -344,10 +349,10 @@ export function incrementDebugLine() {
         const repeatMatches = repeatRe.exec(line);
         const elseMatches = elseRe.exec(line);
         if (ifMatches || repeatMatches || elseMatches) {
-          theGlobalEditor.setDebuggerCurrentLine(map.hedy_range.from_line - 1, 
-            map.hedy_range.from_column - 1, map.hedy_range.to_column - 1);
+          theGlobalEditor.setDebuggerCurrentLine(map.hedy_range.from_line, 
+            map.hedy_range.from_column, map.hedy_range.to_column - 1);
         } else {
-          theGlobalEditor.setDebuggerCurrentLine(map.hedy_range.from_line - 1);
+          theGlobalEditor.setDebuggerCurrentLine(map.hedy_range.from_line);
         }
         break
       } else if (theLevel <= 7 && blockCommands.includes(map.command)){
@@ -360,19 +365,19 @@ export function incrementDebugLine() {
           const ifMatches = ifRe.exec(line);
           if (ifMatches) {
             const length = ifMatches[1].length;
-            theGlobalEditor.setDebuggerCurrentLine(map.hedy_range.from_line - 1, map.hedy_range.from_column - 1, length);            
+            theGlobalEditor.setDebuggerCurrentLine(map.hedy_range.from_line, map.hedy_range.from_column, map.hedy_range.from_column + length - 1);            
             break
           }
         } else if (activeLine.match(/ *for/)) {
           const repeatMatches = repeatRe.exec(line);
           if (repeatMatches){            
             const length = repeatMatches[1].length;            
-            theGlobalEditor.setDebuggerCurrentLine(map.hedy_range.from_line - 1, map.hedy_range.from_column - 1, map.hedy_range.from_column + length - 1);
+            theGlobalEditor.setDebuggerCurrentLine(map.hedy_range.from_line, map.hedy_range.from_column, map.hedy_range.from_column + length - 1);
             break
           }
         }
       }  else if (theLevel >= 8 && blockCommands.includes(map.command)) { // these commands always come up in the tree so we visit them later
-        theGlobalEditor.setDebuggerCurrentLine(map.hedy_range.from_line - 1);
+        theGlobalEditor.setDebuggerCurrentLine(map.hedy_range.from_line);
         break;
       }
     }
@@ -391,30 +396,6 @@ function markCurrentDebuggerLine() {
   } else {
     theGlobalEditor.setDebuggerCurrentLine(undefined);
   }
-}
-
-export function returnLinesWithoutBreakpoints(editor: HedyEditor) {
-
-  // ignore the lines with a breakpoint in it.
-  let code = editor.contents;
-  const breakpoints = editor.getBreakpoints();
-  const storage = window.localStorage;
-  const debugLines = storage.getItem('debugLine');
-
-  if (code) {
-    let lines = code.split('\n');
-    if(debugLines != null){
-      lines = lines.slice(0, parseInt(debugLines) + 1);
-    }
-    for (let i = 0; i < lines.length; i++) {
-      if (breakpoints[i] == BP_DISABLED_LINE) {
-        lines[i] = '';
-      }
-    }
-    code = lines.join('\n');
-  }
-
-  return code;
 }
 
 /**

@@ -20,9 +20,18 @@ ALL_KEYWORD_LANGUAGES = {}
 NON_LATIN_LANGUAGES = ['ar', 'bg', 'bn', 'el', 'fa', 'hi', 'he', 'pa_PK', 'ru', 'zh_Hans']
 
 # Babel has a different naming convention than Weblate and doesn't support some languages -> fix this manually
-CUSTOM_BABEL_LANGUAGES = {'pa_PK': 'pa_Arab_PK', 'kmr': 'ku_TR', 'tn': 'en', 'tl': 'en'}
+CUSTOM_BABEL_LANGUAGES = {'pa_PK': 'pa_Arab_PK',
+                          'kmr': 'ku_TR',
+                          'tn': 'en',
+                          'pap': 'en',
+                          'tl': 'en'}
+
 # For the non-existing language manually overwrite the display language to make sure it is displayed correctly
-CUSTOM_LANGUAGE_TRANSLATIONS = {'kmr': 'Kurdî (Tirkiye)', 'tn': 'Setswana', 'tl': 'ᜆᜄᜎᜓᜄ᜔'}
+CUSTOM_LANGUAGE_TRANSLATIONS = {'kmr': 'Kurdî (Tirkiye)',
+                                'tn': 'Setswana',
+                                'pap': 'Papiamentu',
+                                'tl': 'ᜆᜄᜎᜓᜄ᜔'}
+
 customize_babel_locale(CUSTOM_BABEL_LANGUAGES)
 
 # This changes the color of the adventure tab to pink
@@ -573,3 +582,23 @@ class Slides(StructuredDataFile):
 class NoSuchSlides:
     def get_slides_for_level(self, level, keyword_lang):
         return {}
+
+
+class NoSuchTags:
+    def get_tags(self):
+        return {}
+
+
+class Tags(StructuredDataFile):
+    def __init__(self, language):
+        self.language = language
+        super().__init__(f'content/tags/{self.language}.yaml')
+
+    def get_tags_names(self):
+        return {tid: tags['items'] for tid, tags in self.file.get('tags', {}).items()}
+
+    def get_tags(self, keyword_lang="en"):
+        return deep_translate_keywords(self.file.get('tags'), keyword_lang)
+
+    def has_tags(self):
+        return True if self.file.get('tags') else False
