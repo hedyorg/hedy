@@ -246,6 +246,8 @@ sections:
 -   title: Caractéristiques supplémentaires de Hedy
     key: caractéristiques
     subsections:
+    -   title: Statistiques des enseignants
+        text: COMING SOON We are currently working on two new features for teachers; live statistics and an overview of programs per level.
     -   title: Créez votre propre aventure
         text: Les enseignants peuvent également créer leur propre aventure. [Cette vidéo] (https://www.youtube.com/watch?v=A0zbXpxX4q4) vous montre comment créer votre propre aventure en tant qu'enseignant et l'ajouter à votre (vos) cour(s).
     -   title: Explorer la page
@@ -281,7 +283,7 @@ sections:
             Donc, si vous avez oublié comment une commande fonctionne, c'est très simple, jetez un œil à l'aide-mémoire.
     -   title: Vidéo
         text: Cette [vidéo] (https://www.youtube.com/watch?v=c4MntPPgl1Y) vous présente d'autres fonctionnalités de Hedy, comme les aides-mémoire et le sélecteur de clavier.
--   title: "After Hedy"
+-   title: After Hedy
     key: after
     subsections:
     -   title: What to do after Hedy?
@@ -330,7 +332,7 @@ sections:
                 solution_code: |-
                     {ask} Quel est votre nom ?
                     {echo} Ton nom est
-        -   title: Les élèves veulent que le mot répété (variable) se trouve au milieu d'une phrase
+        -   title: Les élèves veulent que le mot (la variable) répété par la commande `{echo}` se trouve au milieu d'une phrase
             example:
                 error_text: Et ils ont raison ! C'est pourquoi ils apprendront à utiliser les variables au niveau suivant.
                 error_code: |-
@@ -375,7 +377,7 @@ sections:
                 error_text: Pour certains élèves, il peut être frustrant d'apprendre que la commande `{echo}` ne fonctionne plus. C'est pourquoi il est très important d'expliquer les avantages de l'utilisation des variables. Par exemple, vous pouvez utiliser plusieurs variables dans un code, et vous pouvez
                     les placer où vous voulez dans une phrase !
                 error_code: |-
-                    réponse {is} {ask} Pourquoi {echo} ne fonctionne plus?!
+                    réponse {is} {ask} Pourquoi {echo} ne fonctionne plus ?!
                     {echo}
                 solution_text: Utilise plutôt une variable.
                 solution_code: |-

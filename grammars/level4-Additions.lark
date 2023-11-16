@@ -3,7 +3,6 @@ command: clear | print | ask | turtle | assign_list | add | remove | sleep | err
 
 print: _PRINT (_print_argument)? -> print
 error_print_no_quotes: _PRINT text -> error_print_nq
-
 // FH, feb 2023 Shall we rename this 'var' to declare maybe? I confused myself :)
 ask: var _IS _ASK (_print_argument)?
 error_ask_no_quotes: var _IS _ASK text  -> error_print_nq

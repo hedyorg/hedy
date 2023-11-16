@@ -222,11 +222,12 @@ class ForTeachersModule(WebsiteModule):
         filter = request.args.get('filter', default=None, type=str)
         submitted = True if filter == 'submitted' else None
 
-        result = self.db.filtered_programs_for_user({"username": from_user, "public": 1},
+        result = self.db.filtered_programs_for_user(from_user,
                                                     level=level,
                                                     adventure=adventure,
                                                     submitted=submitted,
                                                     pagination_token=page,
+                                                    public=True,
                                                     limit=10)
 
         programs = []
@@ -838,6 +839,8 @@ class ForTeachersModule(WebsiteModule):
             class_data=class_data,
             max_level=hedy.HEDY_MAX_LEVEL,
             current_page="for-teachers",
+            # TODO: update tags to be {name, canEdit} where canEdit is true if currentUser is the creator.
+            adventure_tags=adventure.get("tags", []),
         )
 
     @route("/customize-adventure", methods=["POST"])
@@ -859,6 +862,10 @@ class ForTeachersModule(WebsiteModule):
             return gettext("adventure_length"), 400
         if not isinstance(body.get("public"), bool):
             return gettext("public_invalid"), 400
+        if not isinstance(body.get("language"), str) or body.get("language") not in hedy_content.ALL_LANGUAGES.keys():
+            # we're incrementally integrating language into adventures; i.e., not all adventures have a language field.
+            body["language"] = g.lang
+            # return gettext("language_invalid"), 400
 
         current_adventure = self.db.get_adventure(body["id"])
         if not current_adventure:
@@ -887,9 +894,18 @@ class ForTeachersModule(WebsiteModule):
             "level": body["level"],
             "content": body["content"],
             "public": body["public"],
+            "language": body["language"],
         }
 
         self.db.update_adventure(body["id"], adventure)
+
+        tags = self.db.read_tags(current_adventure.get("tags", []))
+        for tag in tags:
+            for tag_adventure in tag["tagged_in"]:
+                if tag_adventure["id"] == current_adventure["id"]:
+                    tag_adventure["public"] = body["public"]
+                    tag_adventure["language"] = body["language"]
+            self.db.update_tag(tag["id"], {"tagged_in": tag["tagged_in"]})
 
         return {"success": gettext("adventure_updated")}, 200
 
@@ -903,6 +919,11 @@ class ForTeachersModule(WebsiteModule):
             return gettext("unauthorized"), 403
 
         self.db.delete_adventure(adventure_id)
+        tags = self.db.read_tags(adventure.get("tags", []))
+        for tag in tags:
+            tagged_in = list(filter(lambda t: t["id"] != adventure_id, tag["tagged_in"]))
+            if len(tag["tagged_in"]) != len(tagged_in):  # only update if this adventure was tagged.
+                self.db.update_tag(tag["id"], {"tagged_in": tagged_in})
         return {}, 200
 
     @route("/preview-adventure", methods=["POST"])
@@ -938,6 +959,7 @@ class ForTeachersModule(WebsiteModule):
             "name": body["name"],
             "level": 1,
             "content": "",
+            "language": g.lang,
         }
 
         self.db.store_adventure(adventure)

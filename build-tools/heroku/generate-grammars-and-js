@@ -9,5 +9,8 @@ python3 ../../content/yaml_to_lark_utils.py
 echo '-----> Creating python prefixes for TypeScript'
 ./generate-prefixes-ts
 
+echo '-----> Generating the lezer parsers'
+./generate-lezer-parsers
+
 echo '-----> Compiling TypeScript'
 ./generate-typescript

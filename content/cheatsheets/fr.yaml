@@ -25,7 +25,7 @@
         {turn} {right}
 2:
 -   name: '{is}'
-    explanation: Donne à un mot, un nom à utiliser dans le programme avec `{is}`. Tu peux choisir le nom toi-même.
+    explanation: Donne un nom à un mot avec `{is}`. Tu peux choisir le nom toi-même et l'utiliser ensuite dans le programme.
     demo_code: |-
         nom {is} Hedy
         {print} bienvenue nom
@@ -37,9 +37,9 @@
 -   name: '{sleep}'
     explanation: Avec `{sleep}`, tu peux demander à Hedy de faire une pause d'une (ou plusieurs) seconde(s).
     demo_code: |-
-        {print} Laissez-moi réfléchir une seconde...
+        {print} Laissez-moi réfléchir une seconde…
         {sleep}
-        {print} Hmm... Il me faut encore 3 secondes...
+        {print} Hmm… Il me faut encore 3 secondes…
         {sleep} 3
         {print} Eureka ! Je l'ai eu !
 -   name: '{is}  avec tortue'
@@ -67,54 +67,54 @@
 4:
 -   name: '{print}'
     explanation: Affiche exactement ce qui est entre les guillemets.
-    demo_code: '{print} ''Bonjour et bienvenue à Hedy.'''
+    demo_code: '{print} "Bonjour et bienvenue à Hedy."'
 -   name: '{is}'
     explanation: Donne un nom à un texte et  `{print}` le sans guillemets.
     demo_code: |-
         nom {is} Hedy
-        {print} 'mon nom est ' nom
+        {print} "mon nom est " nom
 -   name: '{ask}'
     explanation: Demande quelque chose avec `{ask}`.
     demo_code: |-
-        couleur {is} {ask} 'Quelle est ta couleur préférée?'
-        {print} couleur ' est ta couleur préférée!'
+        couleur {is} {ask} "Quelle est ta couleur préférée ?"
+        {print} couleur " est ta couleur préférée !"
 5:
 -   name: '{print}'
     explanation: Affiche exactement ce qui est entre les guillemets.
-    demo_code: '{print} ''Bonjour et bienvenue à Hedy.'''
+    demo_code: '{print} "Bonjour et bienvenue à Hedy."'
 -   name: '{ask}'
     explanation: Demande quelque chose avec `{ask}`.
     demo_code: |-
-        couleur {is} {ask} 'Quelle est ta couleur préférée?'
-        {print} couleur ' est ta couleur préférée!'
+        couleur {is} {ask} "Quelle est ta couleur préférée ?"
+        {print} couleur " est ta couleur préférée !"
 -   name: '{if}'
     explanation: Fait un choix avec `{if}`.
     demo_code: |-
-        couleur {is} {ask} 'Quelle est ta couleur préférée?'
-        {if} couleur {is} vert {print} 'joli!' {else} {print} 'bof'
+        couleur {is} {ask} "Quelle est ta couleur préférée ?"
+        {if} couleur {is} vert {print} "joli !" {else} {print} "bof"
 -   name: '{if} avec la tortue'
     explanation: Fait un choix avec `{if}`.
     demo_code: |-
-        réponse {is} {ask} "Jusqu'où dois-je marcher?"
+        réponse {is} {ask} "Jusqu'où dois-je marcher ?"
         {if} réponse {is} loin {forward} 100 {else} {forward} 5
 -   name: '{in}'
     explanation: Check elements with `{in}`.
     demo_code: |-
         jolies_couleurs {is} vert, jaune
-        couleur {is} {ask} 'Quelle {is} ta couleur favorite?'
-        {if} couleur {in} jolies_couleurs {print} 'joli!' {else} {print} 'moche'
+        couleur {is} {ask} "Quelle est ta couleur préférée ?"
+        {if} couleur {in} jolies_couleurs {print} "joli !" {else} {print} "moche"
 -   name: '{pressed}'
     explanation: Vérifiez si une touche donnée du clavier est `{pressed}`.
-    demo_code: '{if} a {is} {pressed} {print} ''Vous avez appuyé sur A!'' {else} {print} ''Vous avez appuyé sur une autre touche!'''
+    demo_code: '{if} a {is} {pressed} {print} "Vous avez appuyé sur A !" {else} {print} "Vous avez appuyé sur une autre touche !"'
 6:
 -   name: '{print}'
     explanation: Affiche exactement ce qui est entre les guillemets.
-    demo_code: '{print} ''5 fois 5 font '' 5 * 5'
+    demo_code: '{print} "5 fois 5 font " 5 * 5'
 -   name: '{ask}'
     explanation: Demandes un calcul et vérifie s'il est correcte.
     demo_code: |-
-        reponse = {ask} 'Combien font 10 plus 10?'
-        {if} reponse {is} 20 {print} 'Oui!' {else} {print} 'Oups'
+        reponse = {ask} "Combien font 10 plus 10 ?"
+        {if} reponse {is} 20 {print} "Oui !" {else} {print} "Oups"
 -   name: '`{ask}` et `{if}` avec la tortue'
     explanation: Demande à l'utilisateur combien il veut de sommets.
     demo_code: |-
@@ -124,34 +124,34 @@
 7:
 -   name: '{print}'
     explanation: Affiche exactement ce qui est entre les guillemets.
-    demo_code: '{print} ''Bonjour et bienvenue à Hedy.'''
+    demo_code: '{print} "Bonjour et bienvenue à Hedy."'
 -   name: '{ask}'
     explanation: Demande quelque chose avec `{ask}`.
     demo_code: |-
-        couleur = {ask} 'Quelle est ta couleur préférée?'
-        {print} couleur ' est ta couleur préférée!'
+        couleur = {ask} "Quelle est ta couleur préférée ?"
+        {print} couleur " est ta couleur préférée !"
 -   name: '{if}'
     explanation: Fait un choix avec `{if}`.
     demo_code: |-
-        couleur = {ask} 'Quelle est ta couleur préférée?'
-        {if} couleur {is} vert {print} 'joli!' {else} {print} 'bof'
+        couleur = {ask} "Quelle est ta couleur préférée ?"
+        {if} couleur {is} vert {print} "joli !" {else} {print} "bof"
 -   name: '{repeat} avec la tortue'
     explanation: Répètes une ligne de code avec `{repeat}`.
     demo_code: '{repeat} 3 {times} {forward} 10'
 8:
 -   name: '{print}'
     explanation: Affiche quelque chose. N’oublies pas les guillemets pour afficher exactement ce qui est saisi.
-    demo_code: '{print} ''5 fois 5 font '' 5 * 5'
+    demo_code: '{print} "5 fois 5 font " 5 * 5'
 -   name: '{ask}'
     explanation: Demandes le résultat d’une addition et vérifies si elle est correcte. Tu peux désormais imprimer sur 2 lignes.
     demo_code: |-
-        reponse = {ask} 'Combien font 5 plus 5?'
+        reponse = {ask} "Combien font 5 plus 5 ?"
         {if} reponse {is} 10
-            {print} 'Bien joué!'
-            {print} 'En effet, la réponse est ' reponse
+            {print} "Bien joué !"
+            {print} "En effet, la réponse était " reponse
         {else}
-            {print} 'Oups!'
-            {print} 'La réponse est 10.'
+            {print} "Oups !"
+            {print} "La réponse est 10"
 -   name: '{repeat} avec la tortue'
     explanation: Répète plusieurs lignes.
     demo_code: |-
@@ -162,9 +162,9 @@
     explanation: Vérifiez si une touche donnée du clavier est `{pressed}`.
     demo_code: |-
         {if} a {is} {pressed}
-            {print} 'Vous avez appuyé sur A!'
+            {print} "Vous avez appuyé sur A !"
         {else}
-            {print} 'Vous avez appuyé sur une autre touche!'
+            {print} "Vous avez appuyé sur une autre touche !"
 9:
 -   name: '{if} avec plusieurs lignes'
     explanation: Vérifies la réponse d'une addition de nombres avec `{ask}`. On affiche maintenant sur 2 lignes.
@@ -185,7 +185,7 @@
 10:
 -   name: '{print}'
     explanation: Affiche quelque chose. N’oublies pas les guillemets pour afficher exactement ce qui est saisi.
-    demo_code: '{print} ''5 fois 5 font '' 5 * 5'
+    demo_code: '{print} "5 fois 5 font " 5 * 5'
 -   name: '{for} with a list'
     explanation: Affiche tout les éléments d'un liste.
     demo_code: |-
@@ -201,13 +201,13 @@
 -   name: '{ask}'
     explanation: Demandes le résultat d’une addition et vérifies si elle est correcte. Tu peux désormais imprimer sur 2 lignes.
     demo_code: |-
-        reponse = {ask} 'Combien font 5 plus 5?'
+        reponse = {ask} "Combien font 5 plus 5 ?"
         {if} reponse {is} 10
-            {print} 'Bien joué!'
-            {print} 'En effet, la réponse est ' reponse
+            {print} "Bien joué !"
+            {print} "En effet, la réponse était " reponse
         {else}
-            {print} 'Oups!'
-            {print} 'La réponse est 10.'
+            {print} "Oups !"
+            {print} "La réponse est 10"
 12:
 -   name: Directement flottante
     explanation: Nombres décimaux.
@@ -358,8 +358,8 @@
 -   name: '{print} avec var'
     explanation: Avec `{print}` on doit utiliser des parenthèses et des virgules si l'on affiche plusieurs éléments.
     demo_code: |-
-        nom = 'Hedy'
-        {print}('mon nom est ', nom)
+        nom = "Hedy"
+        {print}("mon nom est ", nom)
 -   name: demande quelque chose avec {input}
     explanation: Utilisez `{input}` au lieu de `{ask}` pour demander quelque chose.
     demo_code: |-

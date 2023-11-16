@@ -13,6 +13,7 @@ import uuid
 import unicodedata
 import traceback
 
+from email_validator import EmailNotValidError, validate_email
 from flask_babel import gettext, format_date, format_datetime, format_timedelta
 from ruamel import yaml
 import commonmark
@@ -177,7 +178,11 @@ def version():
 
 
 def valid_email(s):
-    return bool(re.match(r'^(([a-zA-Z0-9_+\.\-]+)@([\da-zA-Z\.\-]+)\.([a-zA-Z\.]{2,6})\s*)$', s))
+    try:
+        _ = validate_email(s, check_deliverability=False)
+        return True
+    except EmailNotValidError:
+        return False
 
 
 @contextlib.contextmanager
@@ -268,7 +273,7 @@ def markdown_to_html_tags(markdown):
 
 
 def error_page(error=404, page_error=None, ui_message=None, menu=True, iframe=None, exception=None):
-    if error not in [403, 404, 500]:
+    if error not in [400, 403, 404, 500]:
         error = 404
     default = gettext('default_404')
     if error == 403:

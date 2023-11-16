@@ -119,14 +119,14 @@ adventures:
                     À ce niveau, différentes fins peuvent être programmées afin de rendre ton histoire encore plus amusante.
                     Le code exemple te montre comment réaliser deux fins différentes.
 
-                    ### Défi 1
+                    ### Exercice 1
                     Écris une nouvelle histoire courte du sujet de ton choix.
                     En panne d'inspiration ? Choisie l'un des sujets suivants : un super-héros, une journée d'école ennuyeuse, une île déserte.
 
                     Maintenant, donne la possibilité au joueur de choisir une fin heureuse ou non, comme indiqué dans le code exemple.
                     Programme les deux fins.
 
-                    ### Défi 2
+                    ### Exercice 2
                     Copie l'histoire créée aux niveaux précédents.
                     Trouve le moyen d'ajouter au moins deux commandes `{if}` et `{else}` à ton histoire.
                     La fin peut être heureuse ou non. Tu peux également trouver d'autres moyens d'inclure ces commandes.
@@ -224,8 +224,8 @@ adventures:
                 start_code: '# place ton code ici'
             15:
                 story_text: |
-                    Using the `{while}` loop can make your stories more interesting. For example, you can use `{while} game {is} 'on'` so you can play until the game is over.
-                    Or you can use `{while} sword {is} 'lost'` so the player can't continu the game until they have found something.
+                    Using the `{while}` loop can make your stories more interesting. For example, you can use `{while} game == 'on'` so you can play until the game is over.
+                    Or you can use `{while} sword == 'lost'` so the player can't continu the game until they have found something.
                 example_code: |
                     ```
                     keys = 'lost'
@@ -399,6 +399,18 @@ adventures:
                     {print} Bonjour nom
                     âge {is} {ask} Quel âge as-tu ?
                     {print} nom a âge ans.
+            18:
+                story_text: Le changement final que nous devons faire pour avoir du code Python c'est de remplacer `{ask}` par `{input}`.
+                example_code: |
+                    ```
+                    {print}("Mon nom est hedy !")
+                    nom = {input}("quel est ton nom ?")
+                    {print}("Ainsi ton nom est ", nom)
+                    ```
+                start_code: |
+                    {print}("Mon nom est hedy !")
+                    nom = {input}("quel est ton nom ?")
+                    {print}("Ainsi ton nom est ", nom)
     blackjack:
         name: Blackjack
         default_save_name: Blackjack
@@ -506,33 +518,34 @@ adventures:
         levels:
             6:
                 story_text: |
-                    Now that you can calculate, you can also create a program to practice maths calculations. You can make up the calculations yourself, for example:
+                    Maintenant que tu peux faire des maths, tu peux te faire une calculatrice !
                 example_code: |
                     ```
-                    correct_answer = 11 * 27
-                    answer = {ask} 'How much is 11 times 27?'
-                    {if} answer {is} correct_answer {print} 'good job!'
-                    {else} {print} 'Wrong! It was ' correct_answer
+                    nombre_1 = {ask} "Saisir le premier nombre :"
+                    nombre_2 = {ask} "Saisir le second nombre :"
+                    bonne_réponse = nombre_1 * nombre_2
+                    {print} nombre_1 " fois " nombre_2 " fait " bonne_réponse
                     ```
                 story_text_2: |
-                    You can also let the computer do random calculations on its own using {random}.
-                    This is how you choose a number of tables to practice, and from that you always get a different sum:
+                    ### Exercice
+                    La calculatrice ci-dessus calcule les réponses pour toi, mais tu peux aussi faire un programme pour tester tes propres compétences en calcul, comme ceci :
+                    Complète les espaces vides pour que ça marche !
                 example_code_2: |
                     ```
-                    tables = 4, 5, 6, 8
-                    numbers = 1, 2, 3, 4, 5, 6, 7, 8, 9, 10
-                    table = tables {at} {random}
-                    number = numbers {at} {random}
-                    correct_answer = table * number
-                    answer = {ask} 'how much is ' table ' times ' number '?'
-                    {if} answer {is} correct_answer {print} 'okay'
-                    {else} {print} 'mistake! it was ' correct_answer
+                    bonne_réponse = 11 * 27
+                    réponse = {ask} "Combient font 11 fois 27 ?"
+                    {if} réponse {is} _ {print} "bon boulot !"
+                    {else} {print} "Faux ! c'était " _
                     ```
                 story_text_3: |
-                    **Extra** Vous pouvez également laisser l'ordinateur faire des additions aléatoires de lui-même en utilisant random.
+                    **Bonus** Tu peux également laisser l'ordinateur faire des additions aléatoires de lui-même en utilisant '{random}'.
 
-                    C'est ainsi que vous choisissez un certain nombre de tables pour vous entraîner, et que vous obtenez toujours une somme différente :
-                start_code: '{print} ''Welcome to this calculator!'''
+                    Voici comment choisir un nombre de tables à pratiquer, et ainsi obtenir toujours une somme différente :
+                start_code: |
+                    nombre_1 = {ask} "Saisi le premier nombre :"
+                    nombre_2 = {ask} "Saisi le second nombre :"
+                    bonne_réponse = nombre_1 * nombre_2
+                    {print} nombre_1 " fois " nombre_2 " fait " bonne_réponse
             9:
                 story_text: |
                     In previous levels you've learned how to make a calculator, in this level you can expand that code and make it into a little maths game. Like this...
@@ -658,6 +671,32 @@ adventures:
                     {print} 'You win!'
                     ```
                 start_code: '# écris ton code ici'
+    calculator_2:
+        name: Calculator 2
+        default_save_name: Calculator 2
+        description: Calculator 2
+        levels:
+            14:
+                story_text: |
+                    ## Exercise 2
+                    **This is the second part of this adventure.** The adventure starts in the previous tab.
+                    Of course, you don't always want to calculate the mean of 4 tests. You might want to calculate the mean of 10 tests or only 2...
+                    We can fix this problem by adding the argument and variable 'amount_of_tests'.
+                    * Start a new line on line 3. Set the amount_of_tests argument by asking the student how many tests they have made.
+                    * Change the 4 in line 4 to the new argument amount_of_tests.
+                    * Lastly, change the 4 in line 6 to amount_of_tests
+
+                    Try out your new program. Does it work?
+
+                    ## Exercise 3
+                    Did you want to make your program even better? Great! In the previous program you could only calculate the mean grade of 1 subject, but it would be better if you could calculate the mean grade for all subjects you want!
+                    We won't tell you how to do it, but we will give you one tip: Start your code in line 1 with: define calculate_mean_grade with subject.
+                example_code: |
+                    ```
+                    # Use your own code from the previous adventure.
+                    ```
+                start_code: |
+                    # Use your own code from the previous adventure.
     clear_command:
         name: '{clear}'
         default_save_name: clear_command
@@ -691,6 +730,721 @@ adventures:
                     {sleep}
                     {clear}
                     {print} "SURPRISE !"
+    debugging:
+        name: debugging
+        default_save_name: debugging
+        description: debugging adventure
+        levels:
+            1:
+                story_text: |-
+                    Welcome to a debugging adventure. Debugging a code means getting rid of mistakes in the code.
+                    That means that in these debugging adventures, we will show you code that does not work yet.
+                    You will have to figure out what's wrong and correct the mistakes.
+
+                    ### Exercise
+                    Debug this code. Good luck!
+                example_code: |
+                    **Attention ! Ce code à besoins d'être débogué !**
+                    ```
+                    {print} J'aime la programmation
+                    Aimes-tu la programmation aussi ?
+                    {echo}
+                    {print} Quels sont tes loisirs ?
+                    {echo} Tes loisirs sont
+                    ```
+                start_code: |
+                    {print} J'aime la programmation
+                    Aimes-tu la programmation aussi ?
+                    {echo}
+                    {print} Quels sont tes loisirs ?
+                    {echo} Tes loisirs sont
+            2:
+                story_text: |-
+                    Welcome to a debugging adventure. Debugging a code means getting rid of mistakes in the code.
+                    That means that in these debugging adventures, we will give you a code that does not work yet.
+                    You will have to figure out what's wrong and correct the mistakes.
+
+                    ### Exercise
+                    Debug this code. Good luck!
+                example_code: |
+                    **Attention ! Ce code à besoins d'être débogué !**
+                    ```
+                    destination {ask} Où vas-tu partir en vacances ?
+                    {print} L'avion pour dstination décolle à 15h00
+                    {ask} as-tu déjà enregistré tes bagages ?
+                    {echo}
+                    {print} Permets-moi d'imprimer ta carte d'embarquement.
+                    {sleep}
+                    Voila ! Fait un bon voyage !
+                    ```
+                start_code: |
+                    destination {ask} Où vas-tu partir en vacances ?
+                    {print} L'avion pour dstination décolle à 15h00
+                    {ask} as-tu déjà enregistré tes bagages ?
+                    {echo}
+                    {print} Permets-moi d'imprimer ta carte d'embarquement.
+                    {sleep}
+                    Voila ! Fait un bon voyage !
+            3:
+                story_text: |-
+                    Welcome to a debugging adventure. Debugging a code means getting rid of mistakes in the code.
+                    That means that in these debugging adventures, we will give you a code that does not work yet.
+                    You will have to figure out what's wrong and correct the mistakes.
+
+                    ### Exercise
+                    Debug this code. Good luck!
+                example_code: |
+                    **Warning! This code needs to be debugged!**
+                    ```
+                    movie_choices {is} dracula, fast and furious, home alone, barbie
+                    chosen_movie {is} movies {at} {random}
+                    {print} Tonight we will watch chosen _movies
+                    like {ask} Do you like that movie?
+                    {print} Tomorrow we will watch something else.
+                    {add} chosen_movie {to} movie_choices
+                    {print} Tomorrow we will watch tomorrows_movie
+                    tomorrows_movie {is} movie_choices {at} {random}
+                    I'll go get the popcorn! {print}
+                    ```
+                start_code: |
+                    movie_choices {is} dracula, fast and furious, home alone, barbie
+                    chosen_movie {is} movies {at} {random}
+                    {print} Tonight we will watch chosen _movies
+                    like {ask} Do you like that movie?
+                    {print} Tomorrow we will watch something else.
+                    {add} chosen_movie {to} movie_choices
+                    {print} Tomorrow we will watch tomorrows_movie
+                    tomorrows_movie {is} movie_choices {at} {random}
+                    I'll go get the popcorn! {print}
+            4:
+                story_text: |-
+                    ### Exercise
+                    Debug this code. Good luck!
+                example_code: |
+                    **Warning! This code needs to be debugged!**
+                    ```
+                    {print} 'Welcome to the online library!
+                    {ask} What genre of books do you like?
+                    {print} You like genre
+                    author {is} {ask} 'Who's your favorite author?'
+                    {print} 'author is your favorite author'
+                    {print} Hmmm... i think you should try... books {at} {random}
+                    ```
+                start_code: |
+                    {print} 'Welcome to the online library!
+                    {ask} What genre of books do you like?
+                    {print} You like genre
+                    author {is} {ask} 'Who's your favorite author?'
+                    {print} 'author is your favorite author'
+                    {print} Hmmm... I think you should try... books {at} {random}
+            5:
+                story_text: |-
+                    ### Exercise
+                    Debug this code. Good luck!
+                example_code: |
+                    **Warning! This code needs to be debugged!**
+                    ```
+                    {print} Welcome to Swimming Pool Hedy!
+                    class {is} {ask} 'Are you here to join a class today?'
+                    {if} class yes
+                        {print} 'Great! You are joining a class!'
+                        {print} {else} 'You will not be joining a class'
+                    discount {is} {ask} 'Do you have a discount code?'
+                    {if} discount {is} yes
+                    discount_answer {is} {ask} 'What is your discount code?'
+                    discount_codes = Senior4231, Student8786, NewMember6709
+                    {if} discount_answer {is} {in} discount_codes
+                        {print} 'That will be $3,50'
+                            {else} 'That code is not valid'
+                    {else} 'That will be $5,50'
+                    {print} 'Have a nice swim!'
+                    ```
+                start_code: |
+                    {print} Welcome to Swimming Pool Hedy!
+                    class {is} {ask} 'Are you here to join a class today?'
+                    {if} class yes
+                        {print} 'Great! You are joining a class!'
+                        {print} {else} 'You will not be joining a class'
+                    discount {is} {ask} 'Do you have a discount code?'
+                    {if} discount {is} yes
+                    discount_answer {is} {ask} 'What is your discount code?'
+                    discount_codes = Senior4231, Student8786, NewMember6709
+                    {if} discount_answer {is} {in} discount_codes
+                        {print} 'That will be $3,50'
+                            {else} 'That code is not valid'
+                    {else} 'That will be $5,50'
+                    {print} 'Have a nice swim!'
+            6:
+                story_text: |-
+                    ### Exercise
+                    Debug this code. Good luck!
+                example_code: |
+                    **Warning! This code needs to be debugged!**
+                    ```
+                    {print} 'Vending machine'
+                        chosen_product = {ask} 'Please select a product'
+                    1_dollar_products = coke orange juice water
+                    2_dollar_products = chocolate, cookie, museli bar
+                    3_dollar_prodcuts = potato chips, beef jerky, banana bread
+                    {if} chosen {in} 1_dollar_products
+                    price = 1
+                    {if} chosen_product {is} 2_dollar_products
+                        price = 2
+                        {if} chosen_product {in} 3_dollar_products
+                            price = 3
+                    amount_of_products = '{ask} How many of ' chosen_product would you like to have?'
+                    total = price + amount_of_products
+                    {print} 'That will be $' price 'please'
+                    ```
+                start_code: |
+                    {print} 'Vending machine'
+                        chosen_product = {ask} 'Please select a product'
+                    1_dollar_products = coke orange juice water
+                    2_dollar_products = chocolate, cookie, museli bar
+                    3_dollar_prodcuts = potato chips, beef jerky, banana bread
+                    {if} chosen {in} 1_dollar_products
+                    price = 1
+                    {if} chosen_product {is} 2_dollar_products
+                        price = 2
+                        {if} chosen_product {in} 3_dollar_products
+                            price = 3
+                    amount_of_products = '{ask} How many of ' chosen_product would you like to have?'
+                    total = price + amount_of_products
+                    {print} 'That will be $' price 'please'
+            7:
+                story_text: |-
+                    ### Exercise
+                    Surprise! This program looks more like an output than a code. And yet, we don't want you to just add `{print}` commands in front of each line.
+                    Fix this program to turn it into the nursery rhyme 'Brother John (Frère Jaques)' by using the {repeat} command of course!
+                example_code: |
+                    **Warning! This code needs to be debugged!**
+                    ```
+                    Are you sleeping?
+                    Brother John!
+                    Morning bells are ringing!
+                    Ding, dang, dong!
+                    ```
+                start_code: |
+                    Are you sleeping?
+                    Brother John!
+                    Morning bells are ringing!
+                    Ding, dang, dong!
+            8:
+                story_text: |-
+                    ### Exercise
+                    Debug this code. Good luck!
+                example_code: |
+                    **Warning! This code needs to be debugged!**
+                    ```
+                    {print} 'Welcome to Manicures and Pedicures by Hedy'
+                    bodypart = {ask} 'Are you getting your fingernails or toenails done today? Or both?'
+                    {if} bodyparts {is} both
+                            {print} That will be $25'
+                            price = 25
+                        {else}
+                            {print} That will be $18'
+                            price = 18
+                    color = {ask} What color would you like?
+                    sparkles = {ask} 'Would you like some sparkles with that?'
+                    {if} sparkles {is} yes
+                        {print} 'We charge $3 extra for that'
+                    price = price + 3
+                    {else} {print} 'No sparkles' {print} 'So no extra charge'
+                    {sleep} 5
+                    {print} 'All done! That will be $' price ' please!'
+                    {print} 'Thank you! Byebye!'
+                start_code: |
+                    {print} 'Welcome to Manicures and Pedicures by Hedy'
+                    bodypart = {ask} 'Are you getting your fingernails or toenails done today? Or both?'
+                    {if} bodyparts {is} both
+                            {print} That will be $25'
+                            price = 25
+                        {else}
+                            {print} That will be $18'
+                            price = 18
+                    color = {ask} What color would you like?
+                    sparkles = {ask} 'Would you like some sparkles with that?'
+                    {if} sparkles {is} yes
+                        {print} 'We charge $3 extra for that'
+                    price = price + 3
+                    {else} {print} 'No sparkles' {print} 'So no extra charge'
+                    {sleep} 5
+                    {print} 'All done! That will be $' price ' please!'
+                    {print} 'Thank you! Byebye!'
+            9:
+                story_text: |-
+                    ### Exercise
+                    Debug this code. Good luck!
+                example_code: |
+                    **Warning! This code needs to be debugged!**
+                    ```
+                    {print} 'Welcome to our sandwich shop'
+                    amount 'How many sandwiches would you like to buy?'
+                    {repeat} amount {times}
+                    {ask} {is} {ask} 'What kind or bread would you like your sandwich to be?'
+                    types_of_bread {is} white, wheat, rye, garlic, gluten free
+                    {if} chosen_bread in types_of_bread
+                    {print} 'Lovely!'
+                    {else}
+                    'I'm sorry we don't sell that'
+                    topping {is} {ask} 'What kind of topping would you like?'
+                    sauce {is} {ask} 'What kind of sauce would you like?'
+                    {print} One chosen_bread with topping and sauce.
+                    price = amount * 6
+                    {print} 'That will be 'price dollar' please'
+                    ```
+                start_code: |
+                    {print} 'Welcome to our sandwich shop'
+                    amount 'How many sandwiches would you like to buy?'
+                    {repeat} amount {times}
+                    {ask} {is} {ask} 'What kind or bread would you like your sandwich to be?'
+                    types_of_bread {is} white, wheat, rye, garlic, gluten free
+                    {if} chosen_bread in types_of_bread
+                    {print} 'Lovely!'
+                    {else}
+                    'I'm sorry we don't sell that'
+                    topping {is} {ask} 'What kind of topping would you like?'
+                    sauce {is} {ask} 'What kind of sauce would you like?'
+                    {print} One chosen_bread with topping and sauce.
+                    price = amount * 6
+                    {print} 'That will be 'price dollar' please'
+            10:
+                story_text: |-
+                    ### Exercise
+                    Debug this code. Good luck!
+                example_code: |
+                    **Warning! This code needs to be debugged!**
+                    ```
+                    names = Muad Hasan Samira Noura
+                    activities = fly a kite, go swimming, go hiking, catch tan in the sun
+                    {for} name {is} names
+                    {print} At the beach name loves to activity at random
+                    ```
+                start_code: |
+                    names = Muad Hasan Samira Noura
+                    activities = fly a kite, go swimming, go hiking, catch tan in the sun
+                    {for} name {is} names
+                    {print} At the beach name loves to activity at random
+            11:
+                story_text: |-
+                    ### Exercise
+                    Debug this calender program. The output of this program is supposed to look like a list of dates.
+                    For example:
+
+                    ```
+                    Hedy calender
+                    Here are all the days of November
+                    November 1
+                    November 2
+                    November 3
+                    ```
+                    And so on.
+
+                    Mind that you have to test your code extra carefully for the month February, because the amount of days in this month changes in leap years.
+                example_code: |
+                    **Warning! This code needs to be debugged!**
+                    ```
+                    print 'Hedy calender'
+                    months_with_31 days = January, March, May, July, September, October, December
+                    months_with_30_days = April, June, August, November
+                    month = ask 'Which month would you like to see?'
+                    if month in months_with_31_days
+                        days = 31
+                        if month in months_with30_days
+                            days = 30
+                    if month = February
+                        leap_years = 2020, 2024, 2028, 2036, 2040, 2044, 2028
+                        year = ask 'What year is it?'
+                    if year in leap_years
+                        days = 29
+                    else
+                        days = 28
+
+                    print 'Here are all the days of ' moth
+                    for i in range 1 to days
+                        print month i
+                    ```
+                start_code: |
+                    print 'Hedy calender'
+                    months_with_31 days = January, March, May, July, September, October, December
+                    months_with_30_days = April, June, August, November
+                    month = ask 'Which month would you like to see?'
+                    if month in months_with_31_days
+                        days = 31
+                        if month in months_with30_days
+                            days = 30
+                    if month = February
+                        leap_years = 2020, 2024, 2028, 2036, 2040, 2044, 2028
+                        year = ask 'What year is it?'
+                    if year in leap_years
+                        days = 29
+                    else
+                        days = 28
+
+                    print 'Here are all the days of ' moth
+                    for i in range 1 to days
+                        print month i
+            12:
+                story_text: |-
+                    ### Exercise
+                    Debug this code. Good luck!
+                example_code: |
+                    **Warning! This code needs to be debugged!**
+                    ```
+                    define greet
+                    greetings = 'Hello', 'Hi there', 'Goodevening'
+                        print greetings at random
+
+                    define take_order
+                        food = ask 'What would you like to eat?'
+                        print 'One food'
+                        drink = 'What would you like to drink?'
+                        print 'One ' drink
+                        more = ask 'Would you like anything else?'
+                            if more is 'no'
+                        print 'Alright'
+                            else
+                            print 'And ' more
+                    print 'Thank you'
+
+                    print 'Welcome to our restaurant'
+                    people = ask 'How many people are in your party tonight?'
+                    for i in range 0 to people
+                        call greet_costumer
+                    ```
+                start_code: |
+                    define greet
+                    greetings = 'Hello', 'Hi there', 'Goodevening'
+                        print greetings at random
+
+                    define take_order
+                        food = ask 'What would you like to eat?'
+                        print 'One food'
+                        drink = 'What would you like to drink?'
+                        print 'One ' drink
+                        more = ask 'Would you like anything else?'
+                            if more is 'no'
+                        print 'Alright'
+                            else
+                            print 'And ' more
+                    print 'Thank you'
+
+                    print 'Welcome to our restaurant'
+                    people = ask 'How many people are in your party tonight?'
+                    for i in range 0 to people
+                        call greet_costumer
+            13:
+                story_text: |-
+                    ### Exercise
+                    Debug this code. Good luck!
+                example_code: |
+                    **Warning! This code needs to be debugged!**
+                    ```
+                    defin movie_recommendation with name
+                        action_movies == 'Die Hard', 'Fast and Furious', 'Inglorious Bastards'
+                        romance_movies = 'Love Actually', 'The Notebook', 'Titanic'
+                        comedy_movies = 'Mr Bean' 'Barbie''Deadpool'
+                        kids_movies = 'Minions', 'Paddington', 'Encanto'
+                        if name is 'Camila' or name is 'Manuel'
+                            recommended_movie = kids_movie at random
+                        if name is 'Pedro' or 'Gabriella'
+                                mood = ask 'What you in the mood for?'
+                            if mood is 'action'
+                                recommended_movie = comedy_movies at random
+                            if mood is 'romance'
+                                recommended_movie = romance_movies
+                        if mood is 'comedy'
+                                recommended_movie = comedy_movies at random
+
+                    print 'I would recommend ' recommended_movie ' for ' name
+
+                    name = ask 'Who is watching?'
+                    recommendation = ask 'Would you like a recommendation?'
+                    if recommendaion is 'yes'
+                    print movie_recommendation with name
+                    else
+                    print 'No problem!'
+                    ```
+                start_code: |
+                    defin movie_recommendation with name
+                        action_movies == 'Die Hard', 'Fast and Furious', 'Inglorious Bastards'
+                        romance_movies = 'Love Actually', 'The Notebook', 'Titanic'
+                        comedy_movies = 'Mr Bean' 'Barbie''Deadpool'
+                        kids_movies = 'Minions', 'Paddington', 'Encanto'
+                        if name is 'Camila' or name is 'Manuel'
+                            recommended_movie = kids_movie at random
+                        if name is 'Pedro' or 'Gabriella'
+                                mood = ask 'What you in the mood for?'
+                            if mood is 'action'
+                                recommended_movie = comedy_movies at random
+                            if mood is 'romance'
+                                recommended_movie = romance_movies
+                        if mood is 'comedy'
+                                recommended_movie = comedy_movies at random
+
+                    print 'I would recommend ' recommended_movie ' for ' name
+
+                    name = ask 'Who is watching?'
+                    recommendation = ask 'Would you like a recommendation?'
+                    if recommendaion is 'yes'
+                    print movie_recommendation with name
+                    else
+                    print 'No problem!'
+            14:
+                story_text: |-
+                    ### Exercise
+                    Debug this code. Good luck!
+                example_code: |
+                    **Warning! This code needs to be debugged!**
+                    ```
+                    define calculate_heartbeat
+                        print 'Press your fingertips gently against the side of your neck'
+                        print '(just under your jawline)'
+                        print 'Count the number of beats you feel for 15 seconds'
+                        beats == ask 'How many beats do you feel in 15 seconds?'
+                        heartbeat = beats*4
+                        print 'Your heartbeat is ' heartbeat
+                        if heartbeat >= 60 or heartbeat <= 100
+                            print 'Your heartbeat seems fine'
+                        else
+                            if heartbeat > 60
+                                print 'Your heartbeat seems to be too low'
+                            if heartbeat < 100
+                                print 'Your heartbeat seems to be too high'
+                            print 'You might want to contact a medical professional'
+
+                    measure_heartbeat = ask 'Would you like to measure your heartbeat?'
+                    if measure_heartbeat = 'yes'
+                        call measure_heartbeat
+                    else
+                        'no problem'
+                    ```
+                start_code: |
+                    define calculate_heartbeat
+                        print 'Press your fingertips gently against the side of your neck'
+                        print '(just under your jawline)'
+                        print 'Count the number of beats you feel for 15 seconds'
+                        beats == ask 'How many beats do you feel in 15 seconds?'
+                        heartbeat = beats*4
+                        print 'Your heartbeat is ' heartbeat
+                        if heartbeat >= 60 or heartbeat <= 100
+                            print 'Your heartbeat seems fine'
+                        else
+                            if heartbeat > 60
+                                print 'Your heartbeat seems to be too low'
+                            if heartbeat < 100
+                                print 'Your heartbeat seems to be too high'
+                            print 'You might want to contact a medical professional'
+
+                    measure_heartbeat = ask 'Would you like to measure your heartbeat?'
+                    if measure_heartbeat = 'yes'
+                        call measure_heartbeat
+                    else
+                        'no problem'
+            15:
+                story_text: |-
+                    ### Exercise
+                    Debug this random children's story. Good luck!
+                example_code: |
+                    **Warning! This code needs to be debugged!**
+                    ```
+                    names = 'Tanya', 'Romy', 'Kayla', 'Aldrin', 'Ali'
+                    verbs='walking', 'skipping', 'cycling', 'driving', 'running'
+                    locations = 'on a mountaintop', 'in the supermarket', 'to the swimming pool'
+                    hiding_spots = 'behind a tree', under a table', in a box'
+                    sounds = 'a trumpet', 'a car crash', 'thunder'
+                    causes_of_noise = 'a television', 'a kid with firecrackers', 'a magic elephant', 'a dream'
+
+                    chosen_ name = names at random
+                    chosen_verb = verbs at random
+                    chosen_location = 'locations at random'
+                    chosen_sounds = noises at random
+                    chosen_spot = hiding_spots random
+                    chosen_causes = causes_of_noise at random
+
+                    print chosen_name ' was ' chosen_verb ' ' chosen_location
+                    print 'when they suddenly heard a sound like ' sounds at random
+                    print chosen_name ' looked around, but they couldn't discover where the noise came from'
+                    print chosen_name ' hid ' chosen_spot'
+                    print 'They tried to look around, but couldn't see anything from there'
+                    hidden = 'yes'
+                    while hidden = 'yes'
+                        print chosen_name 'still didn't see anything'
+                    answer = ask 'does ' chosen_name ' move from their hiding spot?'
+                        if answer = 'yes'
+                            hidden == 'no'
+                    print 'chosen_name moved from' chosen_spot
+                    print 'And then they saw it was just' chosen_cause
+                    print chosen_name 'laughed and went on with their day'
+                    print The End
+                    ```
+                start_code: |
+                    names = 'Tanya', 'Romy', 'Kayla', 'Aldrin', 'Ali'
+                    verbs='walking', 'skipping', 'cycling', 'driving', 'running'
+                    locations = 'on a mountaintop', 'in the supermarket', 'to the swimming pool'
+                    hiding_spots = 'behind a tree', under a table', in a box'
+                    sounds = 'a trumpet', 'a car crash', 'thunder'
+                    causes_of_noise = 'a television', 'a kid with firecrackers', 'a magic elephant', 'a dream'
+
+                    chosen_ name = names at random
+                    chosen_verb = verbs at random
+                    chosen_location = 'locations at random'
+                    chosen_sounds = noises at random
+                    chosen_spot = hiding_spots random
+                    chosen_causes = causes_of_noise at random
+
+                    print chosen_name ' was ' chosen_verb ' ' chosen_location
+                    print 'when they suddenly heard a sound like ' sounds at random
+                    print chosen_name ' looked around, but they couldn't discover where the noise came from'
+                    print chosen_name ' hid ' chosen_spot'
+                    print 'They tried to look around, but couldn't see anything from there'
+                    hidden = 'yes'
+                    while hidden = 'yes'
+                        print chosen_name 'still didn't see anything'
+                    answer = ask 'does ' chosen_name ' move from their hiding spot?'
+                        if answer = 'yes'
+                            hidden == 'no'
+                    print 'chosen_name moved from' chosen_spot
+                    print 'And then they saw it was just' chosen_cause
+                    print chosen_name 'laughed and went on with their day'
+                    print The End
+            16:
+                story_text: |-
+                    ### Exercise
+                    Debug this code. Good luck!
+                    Tip: Make sure that you only see your score once in the end.
+                example_code: |
+                    **Warning! This code needs to be debugged!**
+                    ```
+                    country = ['The Netherlands', 'Poland', 'Turkey', 'Zimbabwe', 'Thailand', 'Brasil', 'Peru', 'Australia', 'India', 'Romania' ]
+                    capitals = 'Amsterdam', 'Warshaw' 'Istanbul', 'Harare', 'Bangkok', 'Brasilia', 'Lima', 'Canberra', 'New Delhi', 'Bucharest'
+                    score = 0
+                    for i in range 0 to 10
+                        answer = ask 'What's the capital of ' countries[i]
+                        correct = capital[i]
+                        if answer = correct
+                            print 'Correct!'
+                        score = score + 1
+                        else
+                            print 'Wrong,' capitals[i] 'in the capital of' countries[i]
+                        print 'You scored ' score ' out of 10'
+
+                    ```
+                start_code: |
+                    country = ['The Netherlands', 'Poland', 'Turkey', 'Zimbabwe', 'Thailand', 'Brasil', 'Peru', 'Australia', 'India', 'Romania' ]
+                    capitals = 'Amsterdam', 'Warshaw' 'Istanbul', 'Harare', 'Bangkok', 'Brasilia', 'Lima', 'Canberra', 'New Delhi', 'Bucharest'
+                    score = 0
+                    for i in range 0 to 10
+                        answer = ask 'What's the capital of ' countries[i]
+                        correct = capital[i]
+                        if answer = correct
+                            print 'Correct!'
+                        score = score + 1
+                        else
+                            print 'Wrong,' capitals[i] 'in the capital of' countries[i]
+                        print 'You scored ' score ' out of 10'
+            17:
+                story_text: |-
+                    ### Exercise
+                    Debug this code. Good luck!
+                example_code: |
+                    **Warning! This code needs to be debugged!**
+                    ```
+                    define food_order
+                        toppings = ask 'pepperoni, tuna, veggie or cheese?'
+                        size = ask 'big, medium or small?'
+                        number_of_pizza = ask 'How many these pizzas would you like?'
+
+                        print 'YOU ORDERED'
+                        print number_of_pizzas ' size  ' topping ' pizza'
+
+                    define drinks_order
+                        drink = ask 'water, coke, icetea, lemonade or coffee?'
+                        number_of_drinks = ask 'How many of these drinks would you like?'
+
+                        print 'YOU ORDERED'
+                        print number_of_drinks ' ' drink
+
+                    'Welcome to Hedy pizza'
+                    more_food = ask 'Would you like to order a pizza?'
+                    while more_food = 'yes'
+                        return food_order
+                        more_food = ask 'Would you like to order a pizza?'
+                    more_drinks = ask 'Would you like to order some drinks?'
+                    while more_drinks == 'yes'
+                        call drink_order
+                        more_drinks == ask 'Would you like to order more drinks?'
+
+
+                    print 'Thanks for ordering!'
+                    ```
+                start_code: |4
+
+                      define food_order
+                          toppings = ask 'pepperoni, tuna, veggie or cheese?'
+                          size = ask 'big, medium or small?'
+                          number_of_pizza = ask 'How many these pizzas would you like?'
+
+                          print 'YOU ORDERED'
+                          print number_of_pizzas ' size  ' topping ' pizza'
+
+                      define drinks_order
+                          drink = ask 'water, coke, icetea, lemonade or coffee?'
+                          number_of_drinks = ask 'How many of these drinks would you like?'
+
+                          print 'YOU ORDERED'
+                          print number_of_drinks ' ' drink
+
+                      'Welcome to Hedy pizza'
+                      more_food = ask 'Would you like to order a pizza?'
+                      while more_food = 'yes'
+                          return food_order
+                          more_food = ask 'Would you like to order a pizza?'
+                      more_drinks = ask 'Would you like to order some drinks?'
+                      while more_drinks == 'yes'
+                          call drink_order
+                          more_drinks == ask 'Would you like to order more drinks?'
+
+
+                      print 'Thanks for ordering!'
+            18:
+                story_text: |-
+                    ### Exercise
+                    Debug this Old MacDonald program from level 16. Good luck!
+                example_code: |
+                    **Warning! This code needs to be debugged!**
+                    ```
+                    animals = ['pig', 'dog', 'cow']
+                    sounds = ['oink', 'woof', 'moo']
+                    for i in range 1 to 3
+                        animal = animals[i]
+                        sound = sounds[i]
+                        print 'Old McDonald had a farm'
+                        print 'E I E I O!'
+                        print 'and on that farm he had a ' animal
+                        print 'E I E I O!'
+                        print 'with a ' sound sound ' here'
+                        print 'and a ' sound sound ' there'
+                        print 'here a ' sound
+                        print 'there a ' sound
+                        print 'everywhere a ' sound sound
+                    ```
+                start_code: |4
+
+                      animals = ['pig', 'dog', 'cow']
+                      sounds = ['oink', 'woof', 'moo']
+                      for i in range 1 to 3
+                          animal = animals[i]
+                          sound = sounds[i]
+                          print 'Old McDonald had a farm'
+                          print 'E I E I O!'
+                          print 'and on that farm he had a ' animal
+                          print 'E I E I O!'
+                          print 'with a ' sound sound ' here'
+                          print 'and a ' sound sound ' there'
+                          print 'here a ' sound
+                          print 'there a ' sound
+                          print 'everywhere a ' sound sound
     default:
         name: Introduction
         default_save_name: intro
@@ -703,11 +1457,11 @@ adventures:
                     Essaye toi-même le code ci-dessous avec le bouton vert « Exécuter le code » en-dessous de la zone de programmation.
 
                     On y va ? Rends-toi à l'onglet suivant pour apprendre ta première commande !
-                start_code: '{print} bonjour le monde !'
+                start_code: '{print} bonjour le monde !'
             2:
                 story_text: |
-                    Bravo ! Tu as atteint le niveau 2. Avec un peu de chance, tu as déjà écrit des super codes !
-                    Dans le premier niveau, tu as peut-être remarqué que la commande `{echo}` ne peut se rappeler qu'une seule information à la fois.
+                    Félicitations ! Tu as atteint le niveau 2. Avec un peu de chance, tu as déjà écrit des super codes !
+                    Au premier niveau, tu as peut-être remarqué que la commande `{echo}` ne peut se rappeler qu'une seule information à la fois.
                     Par exemple, dans l'aventure du restaurant, tu peux re-dire ce que le client voulait manger ou ce qu'il voulait boire, mais pas les deux en une seule phrase.
                 example_code: |
                     **Attention ! Ce code ne fonctionne pas !**
@@ -732,7 +1486,7 @@ adventures:
                     Mais… ce n'est pas la seule chose que tu peux faire avec des variables ! Tu peux aussi utiliser des variables pour faire des listes.
                     Et tu peux même demander à Hedy de tirer un mot au hasard dans la liste, ce qui te permet de faire des vrais jeux !
                     Ça commence à l'onglet suivant !
-                start_code: '{print} bonjour le monde !'
+                start_code: '{print} bonjour le monde !'
             4:
                 story_text: |
                     Aux niveaux précédents, tu t'es entrainé à utiliser les variables, mais tu as peut-être rencontré le problème suivant.
@@ -772,8 +1526,8 @@ adventures:
                     {if} nom {is} Hedy {print} "cool !" {else} {print} "mouais"
             6:
                 story_text: |
-                    Au niveau précédent, tu t'es entrainé avec `{ask}` et `{if}`. Tu es capable, par exemple, de demander à des invités ce qu'ils souhaitent manger.
-                    Ce que tu ne peux pas encore faire est de calculer le prix du repas de chacun.
+                    Au niveau précédent, tu t'es entrainé avec `{ask}` et `{if}` et tu es maintenant capable de demander, par exemple, à des invités ce qu'ils souhaitent manger.
+                    Par contre, tu ne pouvais pas encore calculer le prix du repas de chacun.
 
                     Ce niveau rend possible l'addition, la soustraction et la multiplication dans tes programmes. Tu pourras calculer les prix dans ton restaurant mais aussi ajouter un code secret pour faire une réduction à tes amis et ta famille.
                     Une autre possibilité sera de programmer ton propre jeu de mathématiques, pour que ton petit frère ou ta petite sœur s'entraîne aux multiplications.
@@ -789,7 +1543,7 @@ adventures:
                     {if} commande {is} frites prix_plat {is} 2
                     boisson {is} {ask} "Que désirez-vous boire ?"
                     {if} boisson {is} eau prix_boisson {is} 0
-                    else prix_boisson {is} 3
+                    {else} prix_boisson {is} 3
                     prix_total {is} prix_plat + prix_boisson
                     {print} "Ça fera " prix_total " euros, s'il vous plait"
                     ```
@@ -1110,7 +1864,7 @@ adventures:
                 story_text: |
                     Avec le `{if}` tu peux maintenant t'amuser à faire des choix dans ton programme. Tu peux faire que ton programme réponde au choix fait par l'ordinateur.
                     ### Exercice
-                    Peux-tu finir le code pour qu'il affiche « pas de bol » quand c'est ton tour et sinon « yes ! » ?
+                    Peux-tu finir le code pour qu'il affiche « pas de bol » quand c'est ton tour et sinon « yes ! » ?
                     N'oublie pas les guillemets !
                 example_code: |
                     ```
@@ -1183,7 +1937,7 @@ adventures:
         levels:
             17:
                 story_text: |
-                    In this level you can also use a new command: `{elif}`. `{elif}` is short for `{else}` `{if}` and you need it when you want to make 3 (or more!) options.
+                    In this level you can also use a new command: `{elif}`. `{elif}` is a combination of the keywords `{else}` and `{if}` and you need it when you want to make 3 (or more!) options.
                     Check it out!
                 example_code: |
                     ```
@@ -1219,7 +1973,7 @@ adventures:
                     `{for}` crée un bloc, comme `{repeat}` et `{if}`. Il faut donc ajouter 4 espaces devant toutes les lignes du bloc.
                 example_code: |
                     ```
-                    animaux {is} chiens, chats, méduses
+                    animaux = chiens, chats, méduses
                     {for} animal {in} animaux
                         {print} "J'aime les " animal
                     ```
@@ -1349,33 +2103,25 @@ adventures:
                 start_code: '# écris ton code ici'
             6:
                 story_text: |
-                    In this level you can use math in your predictions as a fortune teller. This allows you to make up (silly) formulas to calculate the future.
-                    For example you could calculate how rich you'll get or how many kids you will have when you grow up.
+                    À ce niveau tu peux utiliser les maths dans tes prédictions en tant que voyante. Cela te permettra de fabriquer de (folles) formules pour calculer le futur.
+                    Par exemple, tu pourrais calculer ta future fortune ou combien d'enfants tu auras quand tu seras une grande personne.
+
+
+
+                    ### Exercice
+                    Peux-tu imaginer ta propre machine (folle) de voyance ?
                 example_code: |
                     ```
-                    {print} 'I am Hedy the fortune teller!'
-                    {print} 'I can predict how many kids youll get when you grow up!'
-                    age = {ask} 'How old are you?'
-                    siblings = {ask} 'How many siblings do you have?'
-                    length = {ask} 'How tall are you in centimetres?'
-                    kids = length / age
-                    kids = kids - siblings
-                    {print} 'You will get ...'
+                    {print} "Je suis Hedy la voyante !"
+                    {print} "Je peux prédire combien tu auras d'enfants quand tu seras une grande personne !"
+                    âge = {ask} "Quel âge as-tu ?"
+                    frères_et_soeurs = {ask} "Combien as-tu de frères et soeur ?"
+                    hauteur = {ask} "Combien mesures-tu en centimètres ?"
+                    enfants = hauteur / âge
+                    enfants = enfants - frères_et_soeurs
+                    {print} "Tu auras…"
                     {sleep}
-                    {print} kids ' kids!'
-                    ```
-
-                    If the previous example wasn't silly enough for you, take a look at this one!
-
-                    ```
-                    {print} 'Im Hedy the silly fortune teller!'
-                    {print} 'I will predict how smart you are!'
-                    football = {ask} 'On a scale 1-10 how much do you love football?'
-                    bananas = {ask} 'How many bananas did you eat this week?'
-                    hygiene = {ask} 'How many times did you wash your hands today?'
-                    result = bananas + hygiene
-                    result = result * football
-                    {print} 'You are ' result ' percent smart.'
+                    {print} enfants " enfants !"
                     ```
                 start_code: '# écris ton code ici'
             7:
@@ -1438,6 +2184,158 @@ adventures:
                     {print} fortunes {at} {random}
                     ```
                 start_code: '# écris ton code ici'
+    functions:
+        name: functions
+        default_save_name: functions
+        description: functions
+        levels:
+            12:
+                story_text: |
+                    In this level you'll learn how to use **functions**. A function is a block of code you can easily use multiple times. Using functions helps us organize pieces of code that we can use again and again.
+                    To create a function, use `{define}` and give the function a name. Then put all the lines you want in the function in a indented block under the `{define}` line.
+                    Leave one empty line in your code to make it look nice and neat. Great job! You have created a function!
+
+                    Now, whenever we need that block of code, we just use <code>{call}</code> with the function's name to call it up! We don't have to type that block of code again.
+
+                    Check out this example code of a game of Twister. The function 'turn' contains a block of code that chooses which limb should go where.
+
+                    ### Exercise
+                    Finish this code by setting the 2 variables chosen_limb and chosen_color.
+                    Then, choose how many times you want to call the function to give the twister spinner a spin.
+
+                    ### Exercise 2
+                    Improve your code by adding a variable called 'people'. Use the variable to give all the players their own command in the game.
+                    For example: 'Ahmed, right hand on green' or 'Jessica, left foot on yellow'.
+                example_code: |
+                    ```
+                    sides = 'left', 'right'
+                    limbs = 'hand', 'foot'
+                    colors = 'red', 'blue', 'green', 'yellow'
+
+                    {define} turn
+                        chosen_side = sides {at} {random}
+                        chosen_limb = limbs _
+                        chosen_color = colors _
+                        {print} chosen_side ' ' chosen_limb ' on ' chosen_color
+
+                    {print} 'Lets play a game of Twister!'
+                    {for} i {in} {range} 1 to _
+                        {call} turn
+                        {sleep} 2
+                    ```
+                start_code: |
+                    sides = 'left', 'right'
+                    limbs = 'hand', 'foot'
+                    colors = 'red', 'blue', 'green', 'yellow'
+
+                    {define} turn
+                        chosen_side = sides {at} {random}
+                        chosen_limb = limbs _
+                        chosen_color = colors _
+                        {print} chosen_side ' ' chosen_limb ' on ' chosen_color
+
+                    {print} 'Lets play a game of Twister!'
+                    {for} i {in} {range} 1 to _
+                        {call} turn
+                        {sleep} 2
+            13:
+                story_text: |
+                    Now that you've learned how to use functions, you'll learn how to use a function with an argument.
+                    An **argument** is a variable that is used within a function. It is not used outside the function.
+
+                    For example in this code we've programmed the first verse of the song 'My Bonnie is over the ocean'.
+                    In this example code the argument `place` is used. Place is a variable that is only used in the function, so an argument.
+                    To use `place` we have programmed the line `define song with place`.
+                    When the function is called, computer will replace the argument `place`, with the piece of text after `call song with`.
+
+                    ### Exercise
+                    The next verse of this song goes:
+
+                    Last night as I lay on my pillow
+                    Last night as I lay on my bed
+                    Last night as I lay on my pillow
+                    I dreamed that my Bonnie is dead
+
+                    Can you program this verse in the same way as the example?
+                example_code: |
+                    ```
+                    {define} song {with} place
+                        {print} 'My Bonnie is over the ' place
+
+                    {call} song {with} 'ocean'
+                    {call} song {with} 'sea'
+                    {call} song {with} 'ocean'
+                    ```
+                start_code: |
+                    {define} song {with} place
+                        {print} 'My Bonnie is over the ' place
+
+                    {call} song {with} 'ocean'
+                    {call} song {with} 'sea'
+                    {call} song {with} 'ocean'
+            14:
+                story_text: |
+                    In the previous levels you have learned to create functions and use arguments with them. Another great use of a function is to let it calculate something for you.
+                    You can give the function a calculation and it will give you the answer of the calculation. This answer is called a **return value**.
+
+                    For example, in this code the function calculate_new_price will calculate the new price of any item. It will give you the new price as a return value.
+
+                    ## Exercise
+                    Finish this code. We have already made the variable new_price for you, you only need to set it.
+                    You should finish the line of code by calling the function that calculates the new price.
+                example_code: |
+                    ```
+                    {define} calculate_new_price {with} amount, percentage
+                        percentage = percentage / 100
+                        discount_amount = amount * percentage
+                        return amount - discount_amount
+
+                    old_price = {ask} 'How much is on the price tag?'
+                    discount = {ask} 'What percentage is the discount?'
+
+                    new_price = _ calculate_new_price {with} old_price, _
+                    {print} 'The new price is ' new_price ' dollar'
+                    ```
+                start_code: |
+                    {define} calculate_new_price {with} amount, percentage
+                        percentage = percentage / 100
+                        discount_amount = amount * percentage
+                        return amount - discount_amount
+
+                    old_price = {ask} 'How much is on the price tag?'
+                    discount = {ask} 'What percentage is the discount?'
+
+                    new_price = _ calculate_new_price {with} old_price, _
+                    {print} 'The new price is ' new_price ' dollar'
+    guess_my_number:
+        name: Guess my number
+        default_save_name: guess my number
+        description: guess my number
+        levels:
+            14:
+                story_text: |
+                    In this level you can program the game 'Guess my number'
+
+                    ### Exercise
+                    Fill in the correct symbols on the blanks to get the game to work.
+                example_code: |
+                    ```
+                    {print} 'Guess my number'
+                    numbers = 1, 2, 3, 4, 5, 6, 7, 8, 9, 10
+                    number = numbers {at} {random}
+                    game = 'on'
+                    {for} i {in} {range} 1 {to} 10
+                        {if} game == 'on'
+                            guess = {ask} 'Which number do you think it is?'
+                            {if} guess _ number
+                                {print} 'Lower!'
+                            {if} guess _ number
+                                {print} 'Higher!'
+                            {if} guess _ number
+                                {print} 'You win!'
+                                game = 'over'
+                    ```
+                start_code: '# place your code here'
     harry_potter:
         name: Harry Potter
         default_save_name: Harry Potter
@@ -1702,6 +2600,53 @@ adventures:
                         {print} 'GAME OVER'
                     ```
                 start_code: '# écris ton code ici'
+    hotel:
+        name: hotel
+        default_save_name: hotel
+        description: hotel
+        levels:
+            13:
+                story_text: |
+                    In the previous adventure you have learned how to use an argument in a function, and you've learned how to combine it with an {ask}.
+                    You might have wondered why you would use functions, because the functions in the example were only one line of code.
+                    Now we will show you what a bigger function looks like and we will use multiple agruments now as well. You'll see how much better it is to use a function once the function gets bigger.
+                    Here is an example of a function with arguments combined with {ask} commands.
+                example_code: |
+                    ```
+                    {define} welcome_message {with} title, last_name, country, room_number
+                        {print} 'Welcome to Hotel Hedy, ' title ' ' last_name
+                        nice_trip {is} {ask} 'Did you have a nice trip from, ' country '?'
+                        {if} nice_trip {is} 'yes'
+                            {print} 'Lovely!'
+                        {else}
+                            {print} 'Sorry to hear that.'
+                            {print} 'Hopefully you can take a nice rest in you room.'
+                        {print} 'Your room number is ' room_number
+
+                    {print} 'Hello. Please fill in your information to check in.'
+                    title = {ask} 'What is your title (mr, mrs, ms, dr, etc.)?'
+                    name = {ask} 'What is you last name?'
+                    homecountry = {ask} 'What country do you come from?'
+
+                    {call} welcome_message {with} title, name, homecountry, 105
+                    ```
+                start_code: |
+                    {define} welcome_message {with} title, last_name, country, room_number
+                        {print} 'Welcome to Hotel Hedy, ' title ' ' last_name
+                        nice_trip {is} {ask} 'Did you have a nice trip from, ' country '?'
+                        {if} nice_trip {is} 'yes'
+                            {print} 'Lovely!'
+                        {else}
+                            {print} 'Sorry to hear that.'
+                            {print} 'Hopefully you can take a nice rest in you room.'
+                        {print} 'Your room number is ' room_number
+
+                    {print} 'Hello. Please fill in your information to check in.'
+                    title = {ask} 'What is your title (mr, mrs, ms, dr, etc.)?'
+                    name = {ask} 'What is you last name?'
+                    homecountry = {ask} 'What country do you come from?'
+
+                    {call} welcome_message {with} title, name, homecountry, 105
     if_command:
         name: '{if} & {else}'
         default_save_name: if_command
@@ -1751,7 +2696,7 @@ adventures:
                     Ajoute une commande `{else}` à l'exemple de code. Fait un bloc de lignes en utilisant l'indentation. Tu le fais en commençant chaque ligne avec 4 espaces.
                 example_code: |
                     ```
-                    nom {is} {ask} "Quel est ton nom ?"
+                    nom = {ask} "Quel est ton nom ?"
                     {if} nom {is} Hedy
                         {print} "Bienvenue Hedy"
                         {print} "Tu peux jouer sur ton ordinateur !"
@@ -1765,15 +2710,17 @@ adventures:
                 story_text: |
                     In this level you can also put an {if} command inside another {if} command.
                 example_code: |
-                    continue = ask 'Do you want to continue?'
-                    if continue = yes
-                        sure = ask 'Are you sure?'
-                        if sure is yes
-                            print 'We will continue'
-                        else
-                            print 'You are not sure'
-                    else
-                        print 'You do not want to continue'
+                    ```
+                    continue = {ask} 'Do you want to continue?'
+                    {if} continue = yes
+                        sure = {ask} 'Are you sure?'
+                        {if} sure {is} yes
+                            {print} 'We will continue'
+                        {else}
+                            {print} 'You are not sure'
+                    {else}
+                        {print} 'You do not want to continue'
+                    ```
                 start_code: |
                     continue = ask 'Do you want to continue?'
                     if continue = yes
@@ -1797,8 +2744,8 @@ adventures:
                 example_code: |
                     ```
                     jolies_couleurs {is} vert, jaune
-                    couleur_favori {is} {ask} "Quelle est ta couleur préférée ?"
-                    {if} couleur_favori {in} jolies_couleurs {print} "jolie !"
+                    couleur_préférée {is} {ask} "Quelle est ta couleur préférée ?"
+                    {if} couleur_préférée {in} jolies_couleurs {print} "jolie !"
                     {else} {print} "bof"
                     ```
                 story_text_2: |
@@ -1810,12 +2757,12 @@ adventures:
                     animaux {is} chien, vache, mouton
                     réponse {is} {ask} "Quel est ton animal préféré ?"
                     _ réponse _ animaux _ "c'est aussi le mien !"
-                    _ _ "mes animaux préférés sont le chien, la vache et le mouton"
+                    _ _ "mes animaux préférés sont chien, vache et mouton"
                     ```
                 start_code: |-
                     jolies_couleurs {is} vert, jaune
-                    couleur_favori {is} {ask} "Quelle est ta couleur préférée ?"
-                    {if} couleur_favori {in} jolies_couleurs {print} "jolie !"
+                    couleur_préférée {is} {ask} "Quelle est ta couleur préférée ?"
+                    {if} couleur_préférée {in} jolies_couleurs {print} "jolie !"
                     {else} {print} "bof"
     is_command:
         name: '{is}'
@@ -1900,18 +2847,19 @@ adventures:
         levels:
             5:
                 story_text: |
-                    Fait ton propre programme pour t'entraîner à apprendre le vocabulaire d'une nouvelle langue.
+                    Fait ton propre programme pour t'entraîner à apprendre des mots dans nouvelle langue.
 
                     ## Exercice
                     Écrit un code plus long en ajourant au moins 3 autres mots à apprendre.
-                    **Bonus** Bien sûrpp, tu peux choisir d'utiliser un autre langage que l'anglais. Tu peux changer ton code pour apprendre le langage que tu veux.
+
+                    **Bonus** Bien sûr, tu peux choisir d'utiliser un autre langage que l'anglais. Tu peux changer ton code pour apprendre le langage que tu veux.
                 example_code: |
                     ```
                     {print} "Apprendre l'anglais !"
-                    réponse1 {is} {ask} '🐱'
+                    réponse1 {is} {ask} "🐱"
                     {if} réponse1 {is} cat {print} "Formidable !"
                     {else} {print} "Non, chat se dit cat"
-                    réponse2 {is} {ask} '🐸'
+                    réponse2 {is} {ask} "🐸"
                     {if} réponse2 {is} frog {print} "Super !"
                     {else} {print} "Non, grenouille se dit frog"
                     ```
@@ -2137,7 +3085,7 @@ adventures:
                 example_code: |
                     ```
                     {print} "Voulez-vous une bonne (b) ou une mauvaise (m) fin ?"
-                    {if} b {is} {pressed} {print} "Ils vécurent heureux et eurent beaucoup d'enfants ❤"
+                    {if} b {is} {pressed} {print} "Ils vécurent heureux et eurent beaucoup d'enfants ❤️"
                     {else} {print} "Le prince fut mangé par un hippopotame 😭"
                     ```
                 story_text_2: |
@@ -2226,13 +3174,6 @@ adventures:
                     ```
                     temperature = 25
                     {print}("Il fait ", temperature, " degrés dehors")
-                    ```
-                story_text_3: Le changement final que nous devons faire pour avoir du code Python c'est de remplacer `{ask}` par `{input}`.
-                example_code_3: |
-                    ```
-                    {print}("Mon nom est hedy !")
-                    nom = {input}("quel est ton nom ?")
-                    {print}("Ainsi ton nom est ", nom)
                     ```
                 start_code: |-
                     nom = "Hedy"
@@ -2378,19 +3319,37 @@ adventures:
                     {print} animaux {at} {random}
             16:
                 story_text: |-
-                    Nous allons créer des listes comme en Python, avec des crochets autour des listes ! Nous gardons aussi les guillemets autour de chaque élément comme nous l'avons appris au niveau précédent.
-                    Nous utilisons les crochets pour désigner une position dans une liste. La commande {at} {random} ne peut plus être utilisée.
+                    We are going to make lists the Python way, with square brackets around the lists! We also keep the quotation marks around each item like we have learned in previous levels.
+                    We use square brackets to point out a place in a list. For example: `friends[1]` is the first name on the list of friends, as you can see in the first part of the example code.
+                    The second part of the example code shows you that we can also match 2 lists using the variable i.
                 example_code: |
                     ```
-                    amis = ["Ahmed", "Ben", "Cayden"]
-                    numéros_porte_bonheur = [15, 18, 6]
+                    friends = ['Ahmed', 'Ben', 'Cayden']
+                    {print} friends[1] ' is the first friend on the list.'
+                    {print} friends[2] ' is the second friend on the list.'
+                    {print} friends[3] ' is the third friend on the list.'
+                    #now we will match 2 lists using the variable i
+                    lucky_numbers = [15, 18, 6]
                     {for} i {in} {range} 1 {to} 3
-                        {print} "Le numéro porte-bonheur de " amis[i]
-                        {print} "est " numéros_porte_bonheur[i]
+                        {print} friends[i] 's lucky number is ' lucky_numbers[i]
                     ```
-                start_code: |-
+                story_text_2: |-
+                    Now that you've learned to use the brackets in lists, you can also start using the {at} {random} command in the Python way!
+                    You simply type the name of your list with `[random]` behind it!
+                example_code_2: |-
+                    ```
                     fruit = ["pomme", "banane", "cerise"]
                     {print} fruit[random]
+                    ```
+                start_code: |-
+                    friends = ['Ahmed', 'Ben', 'Cayden']
+                    {print} friends[1] ' is the first friend on the list.'
+                    {print} friends[2] ' is the second friend on the list.'
+                    {print} friends[3] ' is the third friend on the list.'
+                    #now we will match 2 lists using the variable i
+                    lucky_numbers = [15, 18, 6]
+                    {for} i {in} {range} 1 {to} 3
+                        {print} friends[i] 's lucky number is ' lucky_numbers[i]
     repeat_command:
         name: '{repeat}'
         default_save_name: repeat_command
@@ -2621,19 +3580,28 @@ adventures:
                 start_code: '# écris ton code ici'
             6:
                 story_text: |
-                    In this level you can use maths to calculate the total price of your customer's order, which can make your virtual restaurant more realistic.
+                    À ce niveau tu peux utiliser les maths pour calculer le prix total pour la commande de ton client, pour faire un restaurant plus réaliste.
+                    Mais tu peux aussi ajouter beaucoup plus de choses à ton restaurant virtuel, par exemple, plus de plats.
+
+                    ### Exercice
+                    Tu peux ajouter beaucoup plus de choses à ton restaurant virtuel. Par exemple, tu peux…
+                    - demander combien de personnes vont manger et multiplier le prix par ce nombre ?
+                    - ajouter un autre plat ?
+                    - donner une réduction aux gens quand ils donnent un code de réduction (secret) ?
+                    - ajouter un menu enfant ?
+                    - penser à d'autres choses amusantes à ajouter ?
                 example_code: |
-                    Vous pouvez créer un code de restaurant simple, comme celui-ci :
+                    Tu peux créer un code de restaurant simple, comme celui-ci :
                     ```
                     {print} "Bienvenue au restaurant Chez Hedy"
                     {print} "Voici notre menu :"
-                    {print} "Nos plats principaux sont : pizza, lasagnes ou spaghettis"
+                    {print} "Nos plats principaux sont : pizza, lasagnes ou spaghetti"
                     plat_principal = {ask} "Quel plat principal souhaitez-vous ?"
+                    {print} "Votre commande : " plat_principal
                     prix = 0
                     {if} plat_principal {is} pizza prix = 10
                     {if} plat_principal {is} lasagnes prix = 12
-                    {if} plat_principal {is} spaghettis prix = 8
-                    {print} "Vous avez commandé " plat_principal
+                    {if} plat_principal {is} spaghetti prix = 8
                     {print} "Ce sera " prix " euros, s'il vous plaît"
                     {print} "Merci, bon appétit !"
                     ```
@@ -2871,10 +3839,10 @@ adventures:
                     In this level you can program the whole rock, paper, scissors game by nesting the {if}-commands. Can you finish the code?
                 example_code: |
                     ```
-                    choices {is} rock, paper, scissors
-                    your_choice {is} {ask} 'What do you choose?'
+                    choices = rock, paper, scissors
+                    your_choice = {ask} 'What do you choose?'
                     {print} 'You choose ' your_choice
-                    computer_choice {is} choices {at} {random}
+                    computer_choice = choices {at} {random}
                     {print} 'The computer chooses ' computer_choice
                     {if} computer_choice {is} your_choice
                         {print} 'Tie'
@@ -2964,17 +3932,17 @@ adventures:
                     If the enemy tries to crack the code, they will get some false info to waste their time.
                 example_code: |
                     ```
-                    name is ask 'What is your name?'
-                    if name is 'Agent007'
-                        a is 'Go to the airport '
-                    else
-                        a is 'Go to the trainstation '
-                    password is ask 'What is the password?'
-                    if password is 'TOPSECRET'
-                        b is 'tomorrow at 02.00'
-                    else
-                        b is 'today at 10.00'
-                    print a + b
+                    name {is} {ask} 'What is your name?'
+                    {if} name {is} '_'
+                        a {is} 'Go to the airport '
+                    {else}
+                        a {is} 'Go to the trainstation '
+                    password {is} {ask} 'What is the password?'
+                    {if} password {is} _
+                        b {is} 'tomorrow at 02.00'
+                    {else}
+                        b {is} 'today at 10.00'
+                    {print} _ _ _
                     ```
                 start_code: '# écris ton code ici'
             13:
@@ -2982,12 +3950,12 @@ adventures:
                     The code you made in the previous level can be made a lot easier in this one with the `{and}` command.
                 example_code: |
                     ```
-                    name is ask 'What is your name?'
-                    password is ask 'What is your password?'
-                    if name is 'Agent007' and password is 'TOPSECRET'
-                        print 'Go to the airport at 02.00'
-                    else
-                        print 'Go to the trainstation at 10.00'
+                    name = {ask} 'What is your name?'
+                    password = {ask} 'What is your password?'
+                    {if} name {is} 'Agent007' _ password {is} 'TOPSECRET'
+                        {print} 'Go to the airport at 02.00'
+                    {else}
+                        {print} 'Go to the trainstation at 10.00'
                      ```
                 start_code: '# écris ton code ici'
     sleep_command:
@@ -3024,7 +3992,7 @@ adventures:
                     Astuce : Utilise la fonction de lecture du texte pour que Hedy te chante la chanson !
 
                     ### Exercice
-                    Tu peux maintenant répéter les lignes 3 à 7 autant de fois que tu le veux en copiant les lignes.
+                    Maintenant que ton programme fonctionne, tu peux répéter les lignes 3 à 7 autant de fois que tu le veux en copiant les lignes.
                 example_code: |
                     ```
                     verset = 99
@@ -3127,6 +4095,32 @@ adventures:
                         {print} action
                     ```
                 start_code: '# écris ton code ici'
+            13:
+                story_text: |
+                    In the previous adventure you have learned how to use an argument in a function, but did you know that you could combine them with {ask} commands as well?
+                    In this example we have changed the 'My Bonnie' program and made it interactive. You are now asked where Bonnie is.
+                example_code: |
+                    ```
+                    {define} song {with} place
+                        {print} 'My Bonnie is ' place
+
+                    chosen_place = {ask} 'Where do you want Bonnie to be?'
+                    synonym = {ask} 'What is another word for that?'
+
+                    {call} song {with} chosen_place
+                    {call} song {with} synonym
+                    {call} song {with} chosen_place
+                    ```
+                start_code: |
+                    {define} song {with} place
+                        {print} 'My Bonnie is ' place
+
+                    chosen_place = {ask} 'Where do you want Bonnie to be?'
+                    synonym = {ask} 'What is another word for that?'
+
+                    {call} song {with} chosen_place
+                    {call} song {with} synonym
+                    {call} song {with} chosen_place
             16:
                 story_text: |
                     In this level, you can program a song like OldMacDonald even more quickly. You can connect the right animal to the right sound by simply putting them in the same place in the list.
@@ -3182,6 +4176,36 @@ adventures:
                         {print} 'early in the morning'
                     ```
                 start_code: '# écris ton code ici'
+    songs_2:
+        name: Sing a song! 2
+        default_save_name: Song 2
+        description: Sing a song 2
+        levels:
+            12:
+                story_text: |
+                    Songs contain a lot of repetition. We can capture it with a function!
+                    ### Exercise
+                    Look at the example code with the function. Fill out the two lines so the full song is printed.
+                example_code: |
+                    ```
+                    {define} twinkle
+                        {print} 'Twinkle'
+                        {print} '...'
+
+                    {call} twinkle
+                    {print} 'Up above the world so high'
+                    {print} 'Like a diamond in the sky'
+                    {call} _
+                    ```
+                start_code: |
+                    {define} twinkle
+                        {print} 'Twinkle'
+                        {print} '...'
+
+                    {call} twinkle
+                    {print} 'Up above the world so high'
+                    {print} 'Like a diamond in the sky'
+                    {call} _
     tic:
         name: Tic Tac Toe
         default_save_name: Tic
@@ -3686,7 +4710,42 @@ adventures:
                     distances = 10, 20, 30, 40, 50, 60
                     {for} distance {in} distances
                         {forward} distance
+                    ```
                 start_code: '# Write your code here'
+            12:
+                story_text: |
+                    We can use functions to draw more complex figures with less code.
+                    ### Exercise 1
+                    Fill the function so that three squares are created. If you want the image to look nicer, you can make the lines between the squares white.
+
+                    ### Exercise 2
+                    The code can be made even shorter. Place the final lines into a `{repeat}` so the figure remains the same.
+
+                    ### Exercise 3
+                    Create your own drawing with different figures.
+                    Change both the number of figures with the `{repeat}` and the shape of the figures in the `{define}`
+                example_code: |
+                    ```
+                    {define} square
+                        {repeat} 4 {times}
+                            {turn} _
+                            {forward} _
+                    {call} square
+                    {forward} 50
+                    {call} square
+                    {forward} 50
+                    {call} square
+                    ```
+                start_code: |
+                    {define} square
+                        {repeat} 4 {times}
+                            {turn} _
+                            {forward} _
+                    {call} square
+                    {forward} 50
+                    {call} square
+                    {forward} 50
+                    {call} square
     while_command:
         name: '{while}'
         default_save_name: while_command
