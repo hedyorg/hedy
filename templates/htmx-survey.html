@@ -1,5 +1,5 @@
 {% block regular_content %}
-<div id="survey" class="z-50 fixed" style="width: 500px; top: 40%; left: 50%; transform: translate(-50%, -50%);">
+<div id="survey" class="z-50 fixed" style="width: 30%; top: 50%; left: 50%; transform: translate(-50%, -50%);">
     <div class="bg-blue-500 border border-black rounded-lg px-8 py-4 text-center">
         <div id="description" class="text-white mb-8 text-xl">{{ _(description) }}</div>
         <form id="survey-form">
@@ -7,19 +7,19 @@
         <div class="mb-4">
                     <div id="question" class="text-white mb-4 text-xl">{{ _(question) }}</div>
                     <div class="flex flex-row justify-center space-x-1">
-                        <input autofocus="autofocus" id="input" type="text" class="flex items-center border border-green-400 rounded p-2 px-3 w-4/5 mt-1" name="{{ question }}">
+                        <input autofocus="autofocus" id="input" type="text" class="flex items-center border border-green-400 rounded p-2 px-3 w-4/5 mx-auto" name="{{ question }}">
                     </div>
                 </div>
             {% endfor %}
             <div class="mt-4 flex flex-row justify-center">
-                <button type="submit" class="green-btn block m-4 w-40 pb-4 pt-4"
+                <button type="submit" class="green-btn block mx-auto w-40 pb-4 pt-4"
                 hx-trigger="click"
                 hx-post="/surveys/submit-survey/{{ survey_id }}"
                 hx-include="[name='question']"
                 hx-swap="innerHTML"
                 _="on click toggle .hidden on #survey">
                 {{_('survey_submit')}}</button>
-                <button type="remind_later" class="red-btn block m-4 w-40 pb-4 pt-4"
+                <button type="remind_later" class="red-btn block mx-auto w-40 pb-4 pt-4"
                 hx-trigger="click"
                 hx-post="/surveys/remind-later-survey/{{ survey_id }}"
                 hx-swap="innerHTML"
