@@ -18,13 +18,13 @@
                 hx-include="[name='question']"
                 hx-swap="innerHTML"
                 _="on click toggle .hidden on #survey">
-                Submit</button>
+                {{_('survey_submit')}}</button>
                 <button type="remind_later" class="red-btn block m-4 w-40 pb-4 pt-4"
                 hx-trigger="click"
                 hx-post="/surveys/remind-later-survey/{{ survey_id }}"
                 hx-swap="innerHTML"
                 _="on click toggle .hidden on #survey">
-                Remind me later</button>
+                {{_('survey_later')}}</button>
             </div>
             <div class="flex-row justify-center">
             <button type="skip" class="text-white m-1 w-40 pb-4 pt-4"
@@ -32,7 +32,7 @@
                 hx-post="/surveys/skip-survey/{{ survey_id }}"
                 hx-swap="innerHTML"
                 _="on click toggle .hidden on #survey">
-                <u>Don't ask again</u></button>
+                <u>{{_('survey_skip')}}</u></button>
             </div>
         </form>
         </div>

@@ -2604,20 +2604,16 @@ code {
   top: -0.25rem;
 }
 
-.top-0 {
-  top: 0px;
-}
-
-.left-0 {
-  left: 0px;
-}
-
 .top-2 {
   top: 0.5rem;
 }
 
 .right-2 {
   right: 0.5rem;
+}
+
+.left-0 {
+  left: 0px;
 }
 
 .left-1\/2 {
@@ -2630,6 +2626,10 @@ code {
 
 .right-0\.5 {
   right: 0.125rem;
+}
+
+.top-0 {
+  top: 0px;
 }
 
 .right-0 {
@@ -5498,12 +5498,12 @@ code {
   margin-top: -2rem;
 }
 
-.mt-auto {
-  margin-top: auto;
-}
-
 .mt-1 {
   margin-top: 0.25rem;
+}
+
+.mt-auto {
+  margin-top: auto;
 }
 
 .-ml-32 {
@@ -7144,10 +7144,6 @@ code {
   width: 33.333333%;
 }
 
-.w-96 {
-  width: 24rem;
-}
-
 .w-4\/5 {
   width: 80%;
 }
@@ -7204,6 +7200,10 @@ code {
 
 .w-screen {
   width: 100vw;
+}
+
+.w-96 {
+  width: 24rem;
 }
 
 .w-2 {
@@ -13706,10 +13706,10 @@ code {
   margin-bottom: calc(1.5rem * var(--tw-space-y-reverse));
 }
 
-.space-x-4 > :not([hidden]) ~ :not([hidden]) {
+.space-x-1 > :not([hidden]) ~ :not([hidden]) {
   --tw-space-x-reverse: 0;
-  margin-right: calc(1rem * var(--tw-space-x-reverse));
-  margin-left: calc(1rem * calc(1 - var(--tw-space-x-reverse)));
+  margin-right: calc(0.25rem * var(--tw-space-x-reverse));
+  margin-left: calc(0.25rem * calc(1 - var(--tw-space-x-reverse)));
 }
 
 .space-x-3 > :not([hidden]) ~ :not([hidden]) {
@@ -13730,16 +13730,16 @@ code {
   margin-left: calc(0px * calc(1 - var(--tw-space-x-reverse)));
 }
 
-.space-x-1 > :not([hidden]) ~ :not([hidden]) {
-  --tw-space-x-reverse: 0;
-  margin-right: calc(0.25rem * var(--tw-space-x-reverse));
-  margin-left: calc(0.25rem * calc(1 - var(--tw-space-x-reverse)));
-}
-
 .space-x-2 > :not([hidden]) ~ :not([hidden]) {
   --tw-space-x-reverse: 0;
   margin-right: calc(0.5rem * var(--tw-space-x-reverse));
   margin-left: calc(0.5rem * calc(1 - var(--tw-space-x-reverse)));
+}
+
+.space-x-4 > :not([hidden]) ~ :not([hidden]) {
+  --tw-space-x-reverse: 0;
+  margin-right: calc(1rem * var(--tw-space-x-reverse));
+  margin-left: calc(1rem * calc(1 - var(--tw-space-x-reverse)));
 }
 
 .space-x-5 > :not([hidden]) ~ :not([hidden]) {
@@ -20383,10 +20383,6 @@ code {
   background-color: rgb(12 74 110 / var(--tw-bg-opacity));
 }
 
-.bg-opacity-50 {
-  --tw-bg-opacity: 0.5;
-}
-
 .bg-opacity-0 {
   --tw-bg-opacity: 0;
 }
@@ -20413,6 +20409,10 @@ code {
 
 .bg-opacity-40 {
   --tw-bg-opacity: 0.4;
+}
+
+.bg-opacity-50 {
+  --tw-bg-opacity: 0.5;
 }
 
 .bg-opacity-60 {
@@ -22894,16 +22894,16 @@ code {
   padding: 3rem;
 }
 
-.p-6 {
-  padding: 1.5rem;
-}
-
 .p-8 {
   padding: 2rem;
 }
 
 .p-1 {
   padding: 0.25rem;
+}
+
+.p-6 {
+  padding: 1.5rem;
 }
 
 .p-0 {

@@ -50,6 +50,7 @@ INVITATIONS = dynamo.Table(
 # A survey
 # - id (str): the identifier of the survey + the response identifier ex. "class_teacher1" or "students_student1"
 # - responses (str []): the response per question
+# - skip (str): if the survey should never be shown or today date to be reminded later
 
 SURVEYS = dynamo.Table(storage, "surveys", "id", indexes=[
     dynamo.Index('responses'),
