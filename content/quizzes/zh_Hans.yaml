@@ -2009,26 +2009,26 @@ levels:
             correct_answer: C
             question_score: '10'
         6:
-            question_text: After which command(s) should you use indentation (starting the next line with 4 spaces)?
+            question_text: 在哪些命令之后应该使用缩进（下一行以 4 个空格开始）？
             mp_choice_options:
             -   option: '`{if}`'
-                feedback: Don't forget the others
+                feedback: 别忘了其他人
             -   option: '`{if}` `{repeat}`'
-                feedback: Don't forget `{else}`!
+                feedback: 不要忘记 `{else}`!
             -   option: '`{if}` `{else}` `{repeat}`'
-                feedback: Keep it up!
+                feedback: 继续加油！
             -   option: '`{if}` `{else}` `{repeat}` `{print}`'
-                feedback: Not with print
-            hint: Indentation happens on the line below some commands
+                feedback: 不使用{print}
+            hint: 缩进发生在某些命令下方的行上
             correct_answer: C
             question_score: '10'
         7:
             question_text: 如果你点了一个中等大小的比萨和一杯可乐，你会得到5元的折扣。<br>但这段代码中存在一个错误！如何调试这段代码？
             code: |-
-                {if} food {is} pizza
-                {if} size {is} medium
-                {if} drink {is} coke
-                price = price - 2
+                {if}食物 {is} 披萨
+                {if} 尺寸 {is} 中号
+                {if} 饮料 {is} 可乐
+                价格 = 价格 - 5
             mp_choice_options:
             -   option: |-
                     ```
@@ -2037,7 +2037,7 @@ levels:
                             {if} drink {is} coke
                                 price = price - 2
                     ```
-                feedback: Amazing!
+                feedback: 令人惊奇！
             -   option: |-
                     ```
                     {if} food {is} pizza
@@ -2045,7 +2045,7 @@ levels:
                     {if} drink {is} coke
                         price = price - 2
                     ```
-                feedback: 第二个{if} 命令是错误代码！
+                feedback: 第二个`{if}`未命中代码！
             -   option: |-
                     ```
                     {if} food {is} pizza
@@ -2053,7 +2053,7 @@ levels:
                     {if} drink {is} coke
                             price = price - 2
                     ```
-                feedback: 不可以连续使用两个 {if}命令， 这样是错误的 。
+                feedback: 两个连续的`{if}`永远不正确。
             -   option: |-
                     ```
                     {if} food {is} pizza
@@ -2061,55 +2061,55 @@ levels:
                             {if} drink {is} coke
                             price = price - 2
                     ```
-                feedback: 差不多是正确的不过请看最后一行。
-            hint: After each `{if}` command, the line below should indent
+                feedback: 几乎正确。再看最后一行
+            hint: 在每个`{if}`命令之后，下面的行应该缩进
             correct_answer: A
             question_score: '10'
         8:
-            question_text: What is wrong is this code?
+            question_text: 这段代码有什么问题？
             code: "年龄={ask} ‘生日快乐!你多大了？’\n唱歌={ask}‘你想让我们唱歌吗？’\n\t{if} 唱歌{is} 是\n\t\t{repeat}岁{times}\n\t\t\t{print}‘加油’"
             mp_choice_options:
-            -   option: You can't put two questions in a row
-                feedback: Yes you can.
-            -   option: The variable called 'age' is later on used as 'years'
-                feedback: Keen eye! Good job!
-            -   option: You're not allowed to start with 8 spaces, like line 4 and 5 do
-                feedback: You actually must start like that.
-            -   option: A code must always start with a `{print}` command in the first line
-                feedback: That's not true.
-            hint: The indentation is done right this time
+            -   option: 你不能连续提出两个问题
+                feedback: 是的你可以。
+            -   option: 名为“age”的变量后来被用作“years”
+                feedback: 敏锐的眼光！干得好！
+            -   option: 您不能像第 5 行那样以 8 个空格开头
+                feedback: 你实际上必须这样开始。
+            -   option: 代码必须始终以第一行中的`{print}`命令开头
+                feedback: 那不是真的。
+            hint: 这次缩进是正确的
             correct_answer: B
             question_score: '10'
         9:
-            question_text: How many `{if}` commands can be placed inside another `{if}` command?
+            question_text: 在另一个`{if}`命令中可以放置多少个`{if}`命令？
             mp_choice_options:
-            -   option: None, that is not allowed
-                feedback: You are allowed to
-            -   option: Only 1
-                feedback: You could use more if you like
+            -   option: 无，这是不允许的
+                feedback: 你被允许
+            -   option: 只有1
+                feedback: 如果你愿意，你可以使用更多
             -   option: '3'
-                feedback: You could use more if you like
-            -   option: Infinite, as long as you keep using indentation correctly
-                feedback: That is true
-            hint: You can put an `{if}` command inside an `{if}` command.
+                feedback: 如果你愿意，你可以使用更多
+            -   option: 无限，只要你继续正确使用缩进
+                feedback: 这是真的
+            hint: 您可以将`{if}`命令放在`{if}`命令中。
             correct_answer: D
             question_score: '10'
         10:
-            question_text: Which statement is true?
+            question_text: 哪种说法是正确的？
             code: |-
                 1 {repeat} 2 {times}
-                2 {if} level {is} 9
-                3 {print} Great job!
+                2 {if} 水平{is} 9
+                3 {print} 干得好!
             mp_choice_options:
-            -   option: All lines should start with 4 spaces
-                feedback: Only line 2 and 3 start with spaces
-            -   option: Line 2 and 3 should start with 4 spaces
-                feedback: Line 3 should start with 8
-            -   option: Line 2 and 3 should start with 8 spaces
-                feedback: Line 2 should start with 4
-            -   option: line 2 should atart with 4 spaces and line 3 with 8
-                feedback: You are correct!
-            hint: The first line doens't start with any spaces
+            -   option: 所有行都应以 4 个空格开头
+                feedback: 只有第 2 行和第 3 行以空格开头
+            -   option: 第 2 行和第 3 行应以 4 个空格开头
+                feedback: 第 3 行应以 8 开头
+            -   option: 第 2 行和第 3 行应以 8 个空格开头
+                feedback: 第 2 行应以 4 开头
+            -   option: 第 2 行应以 4 个空格开头，第 3 行应以 8 开头
+                feedback: 你是对的!
+            hint: 第一行不以任何空格开头
             correct_answer: D
             question_score: '10'
     10:

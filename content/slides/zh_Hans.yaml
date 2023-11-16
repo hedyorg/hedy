@@ -59,9 +59,9 @@ levels:
         2:
             header: '{打印}'
             text: |-
-                在级别1中，你可以使用的第一个代码是 `{print}`。
+                在级别1中，你可以使用的第一个代码是 `{打印}`。
 
-                `{print}`是用来在屏幕上显示文本。
+                `{打印}`是用来在屏幕上显示文本。
             editor: <iframe class="fragment" src="/adventure/print_command/1/raw"></iframe>
         3:
             header: '{打印} 命令'
@@ -73,12 +73,12 @@ levels:
         4:
             header: Hedy 第1 级：{echo}
             text: |-
-                在第1级中，你可以使用的最后一个文本代码是`{echo}`。
+                在第1级中，你可以使用的最后一个文本代码是`{问}`。
 
-                `{echo}`用于重复`{ask}`的答案。
+                `{问}`用于重复`{ask}`的答案。
             editor: <iframe class="fragment" src="/adventure/parrot/1/raw"></iframe>
         5:
-            header: 编程!
+            header: 编程
             text: |-
                 使用`{print}`、`{ask}`和`{echo}`，你已经可以创作一个小故事。
                 这是尝试冒险活动鹦鹉、石头剪刀布和故事的的好时机。
@@ -93,7 +93,7 @@ levels:
                 <iframe class="fragment" src="/hedy/1"></iframe>
             editor: <iframe class="fragment" src="/hedy/1"></iframe>
         8:
-            header: 用海龟绘图画画
+            header: 用海龟绘图画画！
             text: 现在我们已经看到了文本代码，接下来我们将看到图形代码。
         9:
             header: 用海龟画画：{forward}
@@ -464,7 +464,7 @@ levels:
     12:
         1:
             header: Welcome to level 12
-            text: 从这个级别开始，你可以使用十进制数字，并且引号也有一些变化。
+            text: "从这个级别开始，您可以使用十进制数，并且引号有一些变化。\n您还可以从此级别开始使用功能！"
         2:
             header: Quotation marks
             text: |-
@@ -480,23 +480,23 @@ levels:
             editor: <iframe class="fragment" src="/adventure/maths/12/raw"></iframe>
         4:
             header: Functions!
-            text: 享受12关的冒险吧！
+            text: "在此级别中，您将学习如何使用函数。函数是可以轻松多次使用的代码块。使用函数可以帮助我们组织可以反复使用的代码片段。若要创建函数，请使用 define 并为函数命名。然后将函数中所需的所有行放在定义行下方的缩进块中。在代码中留一个空行，使其看起来美观整洁。干得好！您已经创建了一个函数！\n\n现在，每当我们需要该代码块时，我们只需使用带有函数名称的来调用它！我们不必再次键入该代码块。"
         5:
-            header: Twinkle Twinkle little star!
+            header: 一闪一闪亮星星！
             text: |-
-                In this program you see an example of a function.
-                Let's see what happens if you fill in the rest of the song!
+                在此程序中，您将看到一个函数示例。
+                让我们看看如果你填写歌曲的其余部分会发生什么！
             editor: <iframe class="fragment" src="/adventure/songs_2/12/raw"></iframe>
         6:
-            header: Functions
-            text: As you could see in the example a function is a block of code that can be called anytime. You use `{define}` to set the function and `{call}` to use it.
+            header: 功能
+            text: 正如您在示例中看到的，函数是一个可以随时调用的代码块。您可以使用“{定义}”来设置函数，并使用“{叫}”来使用它。
         7:
-            header: Ready to try it out?
-            text: Enjoy the adventures in level 12!
+            header: 准备好尝试了吗？
+            text: 享受12级的冒险！
     13:
         1:
             header: Welcome to level 13
-            text: 我们现在要学习 `{and}` 和 `{or}`！ 如果要检查两个语句，则不必使用两个 if，而是可以使用 and 和 or。
+            text: "我们现在要学习 `{and}` 和 `{or}`！ 如果要检查两个语句，则不必使用两个 if，而是可以使用 and 和 or。\n从现在开始，您还可以在函数中使用参数。"
         2:
             header: The and command
             text: |-
@@ -512,50 +512,50 @@ levels:
             editor: <iframe class="fragment" src="/adventure/and_or_command/13/raw"></iframe>
         4:
             header: Functions with arguments
-            text: 享受第13关的冒险吧！
+            text: 现在，您已经学习了如何使用函数，您将学习如何使用带有 **argument** 的函数。参数是在函数中使用的变量。它不在函数外部使用。
         5:
-            header: Example
+            header: 例如
             text: |-
-                In this example you see how the argument 'place' is used in the function.
-                Run the code and change 'ocean' and 'sea' to something else, and see what happens.
+                在此示例中，您将看到如何在函数中使用参数“place”。
+                运行代码并将“ocean”和“sea”更改为其他名称，然后查看会发生什么。
             editor: <iframe class="fragment" src="/adventure/functions/13/raw"></iframe>
         6:
-            header: Example with variable
+            header: 变量示例
             text: |-
-                Now you've ssen how arguments work, you could also combine function with a question.
+                现在你已经了解了参数是如何工作的，你也可以将函数与问题结合起来。
 
-                What happens if you make these changes:
+                如果进行以下更改，会发生什么情况：
                 ```
-                define song with place
-                    print 'My Bonnie is ' place
-
-                answer is ask 'Where is my Bonnie?'
-                call song with answer
+                用地点定义歌曲
+                打印“我的邦妮是”的地方
+                ```
+                答案是问“我的邦妮在哪里？
+                呼叫歌曲与应答
                 ```
             editor: <iframe class="fragment" src="/adventure/functions/13/raw"></iframe>
         7:
-            header: Even more questions!
+            header: 还有更多问题！
             text: |-
-                Now we have combined even more question with the function. Type this code and see what happens.
+                现在，我们将更多问题与函数结合在一起。键入此代码，看看会发生什么。
 
-                Note how the variables and the arguments have the same name. This is allowed.
-                Does it confuse you? Just use different names, that is allowed as well.
+                请注意变量和参数的名称相同。这是允许的。
+                它让你感到困惑吗？只是使用不同的名称，这也是允许的。
                 ```
-                define song with name, place
-                    print 'My ' name ' is ' place
+                用名字、地点定义歌曲
+                打印 '我的 ' 名字 ' 是 ' 地方
 
-                name is ask 'Who?'
-                place is ask 'Where are they?'
-                call song with name, place
+                名字是问“谁？”
+                地方是问“他们在哪里？”
+                用名字、地点叫歌
                 ```
             editor: <iframe class="fragment" src="/adventure/functions/13/raw"></iframe>
         8:
-            header: Let's go!
-            text: Enjoy the adventures in level 13!
+            header: 出发！
+            text: 享受 13 级的冒险！
     14:
         1:
             header: Welcome to level 14
-            text: 在这个级别中，你将学习一些可以帮助改进程序的新符号，例如 >。
+            text: 在这个关卡中，你将学习一些可以帮助你改进程序的新符号，比如>。您还将学习如何使用函数的返回值。
         2:
             header: Symbols
             text: |-
@@ -584,14 +584,14 @@ levels:
             editor: <iframe class="fragment" src="/adventure/default/14/raw"></iframe>
         4:
             header: Return value
-            text: 享受第14关的冒险吧！
+            text: 在前面的级别中，您已经学习了创建函数并对其使用参数。函数的另一个重要用途是让它为您计算一些东西。你可以给函数一个计算，它会给你计算的答案。此答案称为**返回值**。
         5:
-            header: Return value
-            text: For example, in this code the function calculate_new_price will calculate the new price of any item. It will give you the new price as a return value.
+            header: 返回值
+            text: 例如，在此代码中，函数 算新价将计算任何项目的新价格。它将为您提供新价格作为返回值。
             editor: <iframe class="fragment" src="/adventure/functions/14/raw"></iframe>
         6:
-            header: Let's get to work!
-            text: Enjoy the adventures in level 14!
+            header: 让我们开始工作吧！
+            text: 享受14级的冒险！
     15:
         1:
             header: Welcome to level 15
