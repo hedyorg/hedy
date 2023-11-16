@@ -1,5 +1,5 @@
 describe('Test editor box functionality', () => {
-/*
+
   it('Test echo, print, ask level 1', () => {
     cy.intercept('/parse').as('parse')
 
@@ -416,7 +416,7 @@ describe('Test editor box functionality', () => {
 
     cy.get('#output').should('contain.text', 'nice!');
   });
-*/
+
   it('Test flat if split between lines', () => {
     cy.intercept('/parse').as('parse');
 
