@@ -1,7 +1,7 @@
 {% block regular_content %}
-<div id="survey" class="z-50 fixed" style="width: 30%; top: 50%; left: 50%; transform: translate(-50%, -50%);">
+<div id="survey" class="z-50 fixed w-screen h-screen" style="width: 30%; top: 50%; left: 50%; transform: translate(-50%, -50%);">
     <div class="bg-blue-500 border border-black rounded-lg px-8 py-4 text-center">
-        <div id="description" class="text-white mb-8 text-xl">{{ _(description) }}</div>
+        <div id="description" class="text-white mb-8 text-l">{{ _(description) }}</div>
         <form id="survey-form">
         {% for question in questions %}
         <div class="mb-4">
