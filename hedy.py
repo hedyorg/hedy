@@ -292,19 +292,19 @@ commands_per_level = {
 }
 
 command_turn_literals = ['right', 'left']
-command_make_color = ['black', 'blue', 'brown', 'gray', 'green', 'orange', 'pink', 'purple', 'red', 'white', 'yellow']
+english_colors = ['black', 'blue', 'brown', 'gray', 'green', 'orange', 'pink', 'purple', 'red', 'white', 'yellow']
 
 
 def color_commands_local(language):
-    colors_local = [hedy_translation.translate_keyword_from_en(k, language) for k in command_make_color]
+    colors_local = [hedy_translation.translate_keyword_from_en(k, language) for k in english_colors]
     return colors_local
 
 
 def command_make_color_local(language):
     if language == "en":
-        return command_make_color
+        return english_colors
     else:
-        return command_make_color + color_commands_local(language)
+        return english_colors + color_commands_local(language)
 
 
 # Commands and their types per level (only partially filled!)
@@ -323,8 +323,8 @@ commands_and_types_per_level = {
                    2: [HedyType.integer, HedyType.input],
                    12: [HedyType.integer, HedyType.input, HedyType.float]
                    },
-    Command.color: {1: command_make_color,
-                    2: [command_make_color, HedyType.string, HedyType.input]},
+    Command.color: {1: english_colors,
+                    2: [english_colors, HedyType.string, HedyType.input]},
     Command.forward: {1: [HedyType.integer, HedyType.input],
                       12: [HedyType.integer, HedyType.input, HedyType.float]
                       },
@@ -1501,20 +1501,22 @@ class ConvertToPython_1(ConvertToPython):
         return transpiled
 
     def make_turtle_color_command(self, parameter, command, command_text, language):
-        colors = command_make_color_local(language)
+        both_colors = command_make_color_local(language)
         variable = self.get_fresh_var('__trtl')
 
         # we translate the color value to English at runtime, since it might be decided at runtime
         # coming from a random list or ask
 
-        color_dict = {hedy_translation.translate_keyword_from_en(x, language): x for x in command_make_color}
+        color_dict = {hedy_translation.translate_keyword_from_en(x, language): x for x in english_colors}
 
         return textwrap.dedent(f"""\
             {variable} = f'{parameter}'
             color_dict = {color_dict}
-            if {variable} not in {colors}:
+            if {variable} not in {both_colors}:
               raise Exception(f'While running your program the command {style_command(command)} received the value {style_command('{' + variable + '}')} which is not allowed. Try using another color.')
-            {variable} = color_dict[{variable}]
+            else:
+              if not {variable} in {english_colors}:
+                {variable} = color_dict[{variable}]
             t.{command_text}({variable}){self.add_debug_breakpoint()}""")
 
     def make_catch_exception(self, args):
@@ -3061,7 +3063,10 @@ def preprocess_ifs(code, lang='en'):
 
     def contains(command, line):
         if lang in ALL_KEYWORD_LANGUAGES:
-            command_plus_translated_command = [command, KEYWORDS[lang].get(command)]
+            if not command == '=':
+                command_plus_translated_command = [command, KEYWORDS[lang].get(command)]
+            else:
+                command_plus_translated_command = [command]
             for c in command_plus_translated_command:
                 if c in line:
                     return True
@@ -3112,7 +3117,8 @@ def preprocess_ifs(code, lang='en'):
             excluded_commands = ["pressed"]
 
             if (
-                (contains_any_of(commands, line) or contains_two('is', line))
+                (contains_any_of(commands, line) or contains_two('is', line)
+                 or (contains('is', line) and contains('=', line)))
                 and not contains_any_of(excluded_commands, line)
             ):
                 # a second command, but also no else in this line -> check next line!

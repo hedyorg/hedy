@@ -1,0 +1,50 @@
+@top Program { eol* (Command eol+)* Command? }
+Command {
+    Assign | AssignList | Ask | Print | Turtle | Sleep | Add | Remove | ErrorInvalid
+}
+
+Print { print+ ( Text | ListAccess )+ }
+AssignList { Text is+ Text+ (Comma Text+)+ }
+Assign { Text is+ (Text+ | ListAccess) }
+Ask { Text is+ ask+ (Text)+ }
+Sleep { sleep+ (Text | ListAccess)? }
+ListAccess { Text at+ (random+ | Text) }
+Add { add+ Text toList+ Text }
+Remove { remove+ Text from+ Text }
+
+Turtle[@isGroup=turtle] {
+    Forward { forward+ (Text | ListAccess ) } |
+    Turn { turn+ (Text | ListAccess ) } |
+    Color { color+ (Text | ListAccess)  }
+}
+
+ErrorInvalid[@dynamicPrecedence=-10] { Text+ }
+
+@external specialize { Text } specializeKeyword from "./tokens" {
+    ask[@name="ask"],
+    at[@name="at"],
+    random[@name="random"]
+}
+
+@external extend { Text } extendKeyword from "./tokens" {
+    print[@name="print"],
+    forward[@name="forward"],
+    turn[@name="turn"],
+    color[@name="color"],
+    sleep[@name="sleep"],
+    is[@name="is"],
+    add[@name="add"],
+    from[@name="from"],
+    remove[@name="remove"],
+    toList[@name="toList"]
+}
+
+@tokens {
+    Comment { "#" ![\n]* }
+    eol { "\n" }
+    Comma { $[,،，、] } // every language comma is valid here
+    Text { ![^\n,،，、 #]+ } // a little bit of a hack not to parse commas never, but lezer adds them as error nodes, so it still
+    space { " " }
+}
+
+@skip { Comment | space }

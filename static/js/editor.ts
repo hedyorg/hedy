@@ -12,10 +12,18 @@ export enum EditorType {
 type EditorEventEmitter = EventEmitter<EditorEvent>;
 type OnEditorEventParameters = Parameters<EditorEventEmitter['on']>;
 
+export interface SourceRange {
+  readonly startLine: number;
+  readonly startColumn: number;
+  readonly endLine: number;
+  readonly endColumn: number;
+}
+
 export interface EditorEvent {
   readonly change: string;
   readonly guttermousedown: string;
-  readonly changeBreakpoint: string
+  readonly changeBreakpoint: string;
+  readonly click: string
 }
 
 export interface HedyEditorCreator {  
@@ -53,8 +61,9 @@ export interface HedyEditor {
 
   /**
    * Resizes the editor after changing its size programatically
+   * @param newHeight the new height of the editor, if supplied
    */
-  resize(): void;
+  resize(newHeight?: number): void;
 
   /**
    * Focuses the text area for the current editor
@@ -82,11 +91,6 @@ export interface HedyEditor {
   clearBreakpoints(): void;
 
   /**
-   * Returns the breakpoints as a map-to-css-class
-   */
-  getBreakpoints(): Breakpoints;
-
-  /**
    * An event handler for the HedyEditor 
    * @param key the event
    * @param handler  the event handler function
@@ -95,8 +99,8 @@ export interface HedyEditor {
   on(key: OnEditorEventParameters[0], handler: any): void;
 
   /**
-  * Trim trailing whitespaces
-  */
+   * Trim trailing whitespaces
+   */
   trimTrailingSpace: () => void;
 
   /**
@@ -116,7 +120,7 @@ export interface HedyEditor {
   /**
    * set incorrect line
    */
-  setIncorrectLine(range: AceAjax.Range, lineIndex: number): void;
+  setIncorrectLine(range: SourceRange, lineIndex: number): void;
 
   /**
    * Remove all incorrect lines markers
@@ -131,5 +135,10 @@ export interface HedyEditor {
   /**
    * Mark the given set of lines as currently struck through
    */
-  strikethroughLines(lines: number[]): void;
+  getActiveContents(debugLine?: string | null): string;
+
+  /**
+   * Skip faulty event handler
+   */
+  skipFaultyHandler(event?: MouseEvent): void;
 }
