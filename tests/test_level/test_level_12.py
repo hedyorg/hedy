@@ -74,6 +74,22 @@ class TestsLevel12(HedyTester):
             max_level=17
         )
 
+    def test_sleep_division_float_var(self):
+        code = textwrap.dedent("""\
+        time = 0.2
+        sleep time""")
+
+        expected = HedyTester.dedent("""\
+            _time = 0.2""",
+                                     HedyTester.sleep_command_transpiled('_time')
+                                     )
+
+        self.multi_level_tester(
+            code=code,
+            expected=expected,
+            max_level=17
+        )
+
     def test_print_literal_strings(self):
         code = """print "It's " '"Hedy"!'"""
         expected = """print(f'''It\\'s "Hedy"!''')"""
@@ -488,7 +504,6 @@ class TestsLevel12(HedyTester):
         )
 
     def test_turtle_with_expression(self):
-
         code = textwrap.dedent("""\
             num = 10.6
             turn num + 10.5
