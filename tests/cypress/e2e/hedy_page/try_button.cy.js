@@ -9,7 +9,7 @@ describe('Is able to use try pre formatted code', () => {
 
       cy.get('#try_button2').click();
 
-      cy.get('#editor > .ace_scroller > .ace_content .ace_line').each((element, index) => {
+      cy.get('.cm-line').each((element, index) => {
         if(index == 0) {
           cy.get(element).should('contain', 'ask');
         }

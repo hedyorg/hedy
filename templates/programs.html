@@ -63,7 +63,7 @@
                 </tr>
             </tbody>
             </table>
-            {% if public_profile %}
+            {% if public_profile and not second_teachers_programs %}
                 <div class="ml-auto favourite_program_container {% if public_profile.favourite_program and public_profile.favourite_program == program.id %}text-yellow-400{% else %}text-white{% endif %} text-2xl{% if not program.public %} hidden{% endif %}" id="favourite_program_container_{{ loop.index }}">
                     <i class="fa fa-star p-4 bg-blue-300 rounded-full cursor-pointer hover:bg-blue-600" onclick="hedyApp.set_favourite_program('{{ program.id }}', {{ loop.index }}, '{{_('favourite_confirm')}}');" aria-hidden="true"></i>
                 </div>
@@ -74,11 +74,14 @@
         </div>
         <div id="submitted_button_container_{{ loop.index }}" class="flex flex-row gap-2" {% if not program.submitted %} style="display: none;" {% endif %}>
             <button class="green-btn" onclick="window.open (hedyApp.viewProgramLink('{{program.id}}'))">{{_('open')}}</button>
+            {% if not second_teachers_programs %}
             <button class="blue-btn" onclick="hedyApp.copy_to_clipboard(hedyApp.viewProgramLink('{{program.id}}'), '{{_('copy_clipboard')}}')">{{_('copy_link_to_share')}}</button>
             <button class="red-btn" data-cy="delete_submitted_program_{{ loop.index }}" onclick="hedyApp.delete_program('{{ program.id }}', {{ loop.index }}, '{{_('delete_confirm')}}')">{{_('delete')}}</button>
+            {% endif %}
         </div>
         <div id="non_submitted_button_container_{{ loop.index }}" class="flex flex-row w-full gap-2 {% if program.submitted %} hidden {% endif %}">
             <a href="/hedy/{{program.level|string}}/{{program.id}}"><button class="green-btn">{{_('open')}}</button></a>
+            {% if not second_teachers_programs %}
             <button class="red-btn" data-cy="delete_non_submitted_program_{{ loop.index }}" onclick="hedyApp.delete_program('{{ program.id }}', {{ loop.index }}, '{{_('delete_confirm')}}')">{{_('delete')}}</button>
             <div id="public_button_container_{{ loop.index }}" class="flex flex-row w-full gap-2" {% if not program.public %}style="display: none;"{% endif %}> <!-- ml-auto alignment doesn't work with hidden but does with display: none; -->
                 <button class="blue-btn" data-cy="unshare_program_{{ loop.index }}" onclick="hedyApp.share_program('{{program.id}}', {{ loop.index }}, false, '{{_('unshare_confirm')}}')">{{_('unshare')}}</button>
@@ -88,19 +91,30 @@
             <div id="non_public_button_container_{{ loop.index }}" class="{% if program.public %} hidden {% endif %}">
                 <button class="blue-btn" onclick="hedyApp.share_program ('{{program.id}}', {{ loop.index }}, true, '{{_('share_confirm')}}')">{{_('share')}}</button>
             </div>
+            {% endif %}
         </div>
     </div>
   {% endfor %}
+
+    {% if second_teachers_programs %}
+    {% if programs|length == 0 %}
+        <div class="my-8">{{ from_user }} {{_('no_shared_programs')}}</div>
+    {% endif %}
+        <div class="flex flex-row ml-auto gap-2">
+            <button id='back_to_class' class="green-btn" _="on click window.open('/for-teachers/class/{{class_id}}', '_self')" data-cy="back_to_class">{{_('back_to_class')}}</button>
+        </div>
+    {% endif %}
+
   {% if programs|length == 0 and not from_user and not filtered_level and not filtered_adventure %}
-  <p>{{_('no_programs')}}
-    <br><br>
-    <button class="btn block flex-none self-end" onclick="window.open ('/hedy', '_self')">{{_('write_first_program')}}</button>
-  </p>
+    <p>{{_('no_programs')}}
+        <br><br>
+        <button class="btn block flex-none self-end" onclick="window.open ('/hedy', '_self')">{{_('write_first_program')}}</button>
+    </p>
   {% endif %}
   {% if next_page_url %}
-  <p>
-    <a href="{{next_page_url}}" class="btn green-btn">{{_('next_page')}}</a>
-  </p>
+    <p>
+        <a href="{{next_page_url}}" class="btn green-btn">{{_('next_page')}}</a>
+    </p>
   {% endif %}
   </div>
 </div>

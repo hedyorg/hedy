@@ -5,13 +5,13 @@ export function loginForUser() {
     cy.wait(500);
 }
 
-export function loginForTeacher() {
-    login("teacher1", "123456");
+export function loginForTeacher(username="teacher1") {
+    login(username, "123456");
     cy.wait(500);
 }
 
-export function loginForStudent() {
-    login("student1", "123456");
+export function loginForStudent(student="student1") {
+    login(student, "123456");
     cy.wait(500);
 }
 

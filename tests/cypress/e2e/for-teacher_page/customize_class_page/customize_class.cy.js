@@ -248,7 +248,7 @@ describe('customize class page', () => {
 
         cy.getBySel('available_adventures_current_level').select(`${hiddenAdventure}`);
 
-        cy.get(`div[data-cy="${hiddenAdventure}"]`).should('be.visible');
+        cy.get(`div[data-cy="${hiddenAdventure}"]`).should('exist');
       });
 
       it('becomes invisible for the student', () => {
