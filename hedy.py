@@ -1875,8 +1875,11 @@ class ConvertToPython_6(ConvertToPython_5):
             return "time.sleep(1)"
         else:
             if type(args[0]) is Tree:
-                args[0] = args[0].children[0]
-                value = f'{args[0]}'
+                if self.is_list(args[0]):
+                    raise hedy.exceptions.InvalidArgumentTypeException
+                else:
+                    args[0] = args[0].children[0]
+                    value = f'{args[0]}'
             else:
                 value = f'"{args[0]}"' if self.is_int(args[0]) else args[0]
 
