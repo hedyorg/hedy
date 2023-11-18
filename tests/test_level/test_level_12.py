@@ -66,7 +66,8 @@ class TestsLevel12(HedyTester):
 
     def test_sleep_division_float(self):
         code = "sleep 1 / 20"
-        expected = "time.sleep(0)"
+        expected = HedyTester.dedent(
+            HedyTester.sleep_command_transpiled("1 / 20"))
 
         self.multi_level_tester(
             code=code,
@@ -891,15 +892,6 @@ class TestsLevel12(HedyTester):
 
         self.multi_level_tester(code=code, expected=expected)
 
-    def test_sleep_with_float_gives_error(self):
-        code = textwrap.dedent("""\
-            n is 1.5
-            sleep n""")
-
-        self.multi_level_tester(
-            code=code,
-            extra_check_function=lambda c: c.exception.arguments['line_number'] == 2,
-            exception=hedy.exceptions.InvalidArgumentTypeException)
 
     #
     # assign tests
