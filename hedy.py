@@ -1358,6 +1358,10 @@ class ConvertToPython(Transformer):
             first_unquoted_var = unquoted_args[0]
             raise exceptions.UndefinedVarException(name=first_unquoted_var, line_number=var_access_linenumber)
 
+    @staticmethod
+    def check_if_error_skipped(tree):
+        return hasattr(IsValid, tree.data)
+
     # static methods
     @staticmethod
     def is_quoted(s):
@@ -1875,8 +1879,8 @@ class ConvertToPython_6(ConvertToPython_5):
             return "time.sleep(1)"
         else:
             if type(args[0]) is Tree:
-                if self.is_list(args[0]):
-                    raise hedy.exceptions.InvalidArgumentTypeException
+                if self.check_if_error_skipped(args[0]):
+                    raise hedy.exceptions.InvalidErrorSkippedException
                 else:
                     args[0] = args[0].children[0]
                     value = f'{args[0]}'
@@ -2889,7 +2893,7 @@ def transpile(input_string, level, lang="en", skip_faulty=True, is_debug=False):
     except Exception as original_error:
         hedy_amount_lines = len(input_string.strip().split('\n'))
 
-        if getenv('ENABLE_SKIP_FAULTY', False) and skip_faulty and hedy_amount_lines > 1:
+        if getenv('ENABLE_SKIP_FAULTY', True) and skip_faulty and hedy_amount_lines > 1:
             if isinstance(original_error, source_map.exceptions_not_to_skip):
                 raise original_error
             try:
