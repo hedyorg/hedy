@@ -153,7 +153,7 @@ PYTHON_KEYWORDS = [
     'try',
     'int']
 
-LIBRARIES = ['time', 'random']
+LIBRARIES = ['time']
 # Python keywords and function names need hashing when used as var names
 reserved_words = set(PYTHON_BUILTIN_FUNCTIONS + PYTHON_KEYWORDS + LIBRARIES)
 
