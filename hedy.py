@@ -330,7 +330,9 @@ commands_and_types_per_level = {
     Command.forward: {1: [HedyType.integer, HedyType.input],
                       12: [HedyType.integer, HedyType.input, HedyType.float]
                       },
-    Command.sleep: {1: [HedyType.integer, HedyType.input]},
+    Command.sleep:    {1: [HedyType.integer, HedyType.input],
+                      12: [HedyType.integer, HedyType.input, HedyType.float]
+                      },
     Command.list_access: {1: [HedyType.list]},
     Command.in_list: {1: [HedyType.list]},
     Command.add_to_list: {1: [HedyType.list]},
