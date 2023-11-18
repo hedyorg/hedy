@@ -892,10 +892,10 @@ class TestsLevel12(HedyTester):
 
         self.multi_level_tester(code=code, expected=expected)
 
-
     #
     # assign tests
     #
+
     def test_assign_integer(self):
         code = "naam is 14"
         expected = "naam = 14"
