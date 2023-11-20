@@ -359,3 +359,14 @@ def can_edit_class(user, Class):
     return Class["teacher"] == user["username"] or \
         any(second_teacher["username"] == user["username"] and second_teacher["role"] == "teacher"
             for second_teacher in Class.get("second_teachers", []))
+
+
+def get_unanswered_questions(survey):
+    questions = []
+    db_questions = survey.get('responses')
+
+    if db_questions:
+        for question, answer in db_questions.items():
+            if not answer:
+                questions.append(question)
+    return questions

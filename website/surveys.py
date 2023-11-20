@@ -39,13 +39,3 @@ class SurveysModule(WebsiteModule):
         if survey:
             self.db.add_remind_later_survey(survey_id)
         return ''
-
-    def get_unanswered_questions(self, survey):
-        questions = []
-        db_questions = survey.get('responses')
-
-        if db_questions:
-            for question, answer in db_questions.items():
-                if not answer:
-                    questions.append(question)
-        return questions

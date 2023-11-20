@@ -2476,7 +2476,7 @@ def current_user_allowed_to_see_program(program):
 app.register_blueprint(auth_pages.AuthModule(DATABASE))
 app.register_blueprint(profile.ProfileModule(DATABASE))
 app.register_blueprint(programs.ProgramsModule(DATABASE, ACHIEVEMENTS))
-app.register_blueprint(for_teachers.ForTeachersModule(DATABASE, ACHIEVEMENTS, SURVEYS))
+app.register_blueprint(for_teachers.ForTeachersModule(DATABASE, ACHIEVEMENTS))
 app.register_blueprint(classes.ClassModule(DATABASE, ACHIEVEMENTS))
 app.register_blueprint(classes.MiscClassPages(DATABASE, ACHIEVEMENTS))
 app.register_blueprint(admin.AdminModule(DATABASE))

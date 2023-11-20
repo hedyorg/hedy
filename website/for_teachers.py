@@ -27,7 +27,6 @@ from .achievements import Achievements
 from .database import Database
 from .website_module import WebsiteModule, route
 from datetime import date
-from .surveys import SurveysModule
 
 SLIDES = collections.defaultdict(hedy_content.NoSuchSlides)
 for lang in hedy_content.ALL_LANGUAGES.keys():
@@ -35,11 +34,10 @@ for lang in hedy_content.ALL_LANGUAGES.keys():
 
 
 class ForTeachersModule(WebsiteModule):
-    def __init__(self, db: Database, achievements: Achievements, surveys: SurveysModule):
+    def __init__(self, db: Database, achievements: Achievements):
         super().__init__("teachers", __name__, url_prefix="/for-teachers")
         self.db = db
         self.achievements = achievements
-        self.survey = surveys
 
     @route("/", methods=["GET"])
     @requires_teacher
@@ -324,7 +322,7 @@ class ForTeachersModule(WebsiteModule):
         elif survey.get('skip') is True or survey.get('skip') is date.today().isoformat():
             return "", "", ""
 
-        questions = self.survey.get_unanswered_questions(survey)
+        questions = utils.get_unanswered_questions(survey)
         if not questions:
             questions = gettext("class_survey_questions").split("\n")
         return survey_id, description, questions, survey_later
