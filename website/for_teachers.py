@@ -3,7 +3,7 @@ import json
 import os
 import uuid
 
-from flask import g, jsonify, request, session
+from flask import g, jsonify, request, session, url_for
 from jinja_partials import render_partial
 from flask_babel import gettext
 
@@ -207,6 +207,77 @@ class ForTeachersModule(WebsiteModule):
             description=description,
             questions=questions,
         )
+
+    @route("/class/<class_id>/programs/<username>", methods=["GET", "POST"])
+    @requires_teacher
+    def public_programs(self, user, class_id, username):
+        Class = self.db.get_class(class_id)
+        if not Class:
+            return utils.error_page(error=404, ui_message=gettext("no_such_class"))
+
+        from_user = username or request.args.get("user")
+        if not from_user and not is_admin(user):
+            return utils.error_page(error=404, ui_message=gettext("no_programs"))
+
+        allowed_to_edit = session.get("class_id", False) and utils.can_edit_class(user, Class)
+
+        if from_user and not utils.can_edit_class(user, Class):
+            return utils.error_page(error=403, ui_message=gettext('not_teacher'))
+
+        # We request our own page -> also get the public_profile settings
+        public_profile = None
+        if allowed_to_edit:
+            public_profile = self.db.get_public_profile_settings(from_user)
+
+        level = request.args.get('level', default=None, type=str) or None
+        adventure = request.args.get('adventure', default=None, type=str) or None
+        page = request.args.get('page', default=None, type=str)
+        filter = request.args.get('filter', default=None, type=str)
+        submitted = True if filter == 'submitted' else None
+
+        result = self.db.filtered_programs_for_user(from_user,
+                                                    level=level,
+                                                    adventure=adventure,
+                                                    submitted=submitted,
+                                                    pagination_token=page,
+                                                    public=True,
+                                                    limit=10)
+
+        programs = []
+        for item in result:
+            date = utils.delta_timestamp(item['date'])
+            # This way we only keep the first 4 lines to show as preview to the user
+            code = "\n".join(item['code'].split("\n")[:4])
+            programs.append(
+                {'id': item['id'],
+                 'code': code,
+                 'date': date,
+                 'level': item['level'],
+                 'name': item['name'],
+                 'adventure_name': item.get('adventure_name'),
+                 'submitted': item.get('submitted'),
+                 'public': item.get('public'),
+                 'number_lines': item['code'].count('\n') + 1
+                 }
+            )
+
+        adventure_names = hedy_content.Adventures(g.lang).get_adventure_names()
+
+        next_page_url = url_for('programs_page', **dict(request.args, page=result.next_page_token)
+                                ) if result.next_page_token else None
+
+        return render_template(
+            'programs.html',
+            programs=programs,
+            page_title=gettext('title_programs'),
+            current_page='for-teachers',
+            from_user=from_user,
+            public_profile=public_profile,
+            adventure_names=adventure_names,
+            max_level=hedy.HEDY_MAX_LEVEL,
+            next_page_url=next_page_url,
+            class_id=class_id,
+            second_teachers_programs=True)
 
     @route("/customize-class/<class_id>", methods=["GET"])
     @requires_login
