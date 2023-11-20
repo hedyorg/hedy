@@ -8,7 +8,7 @@ describe("Tags of adventures", () => {
   })
 
   it("has tags input and button", () => {
-    cy.get("#input_adventure_tags")
+    cy.get("#search_tags_input")
       .should("be.visible")
       .should("be.empty")
 
@@ -18,26 +18,23 @@ describe("Tags of adventures", () => {
 
   it("has no tags initially", () => {
     cy.get("#tags-list")
-      .should("be.visible")
-      .get("#no-tags")
-      .should("be.visible")
+      .should("be.not.visible")
   })
 
   it("adds a tag to adventure by pressing enter within the input field", () => {
-    cy.get("#input_adventure_tags")
+    cy.get("#search_tags_input")
       .should("be.empty")
       .type("statements{enter}")
     cy.wait(500)
     cy.get("#tags-list")
       .should("be.visible")
-      .get("#no-tags")
-      .should("be.hidden")
+
     cy.get("#tags-list li")
       .should("include.text", "statements")
   })
 
   it("adds a tag to adventure by pressing the add button", () => {
-    cy.get("#input_adventure_tags")
+    cy.get("#search_tags_input")
       .should("be.empty")
       .type("training")
     cy.get("#add_adventure_tags")
@@ -46,8 +43,7 @@ describe("Tags of adventures", () => {
     cy.wait(500)
     cy.get("#tags-list")
       .should("be.visible")
-      .get("#no-tags")
-      .should("be.hidden")
+
     cy.get("#tags-list li")
       .should("include.text", "training")
   })
@@ -59,7 +55,7 @@ describe("Tags of adventures", () => {
       times: 1,
     }).as("createTag")
 
-    cy.get("#input_adventure_tags")
+    cy.get("#search_tags_input")
       .should("be.empty")
       .type("training{enter}")
     cy.wait("@createTag").should('have.nested.property', 'response.statusCode', 400)
