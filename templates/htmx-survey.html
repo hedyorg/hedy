@@ -1,5 +1,5 @@
 {% block regular_content %}
-<div id="survey" class="z-50 fixed w-screen h-screen" style="width: 30%; top: 50%; left: 50%; transform: translate(-50%, -50%);">
+<div id="survey" class="flex absolute inset-0 items-center justify-center" style="width: 30%; top: 50%; left: 50%; transform: translate(-50%, -50%);">
     <div class="bg-blue-500 border border-black rounded-lg px-8 py-4 text-center">
         <div id="description" class="text-white mb-8 text-l">{{ _(description) }}</div>
         <form id="survey-form">
@@ -24,7 +24,7 @@
                 hx-post="/surveys/remind-later-survey/{{ survey_id }}"
                 hx-swap="innerHTML"
                 _="on click toggle .hidden on #survey">
-                {{_('survey_later')}}</button>
+                {{_(survey_later)}}</button>
             </div>
             <div class="flex-row justify-center">
             <button type="skip" class="text-white m-1 w-40 pb-4 pt-4"

@@ -141,7 +141,7 @@ class ForTeachersModule(WebsiteModule):
         questions = []
 
         if Class.get("students"):
-            survey_id, description, questions = self.class_survey(class_id)
+            survey_id, description, questions, survey_later = self.class_survey(class_id)
 
         for student_username in Class.get("students", []):
             student = self.db.user_by_username(student_username)
@@ -206,6 +206,7 @@ class ForTeachersModule(WebsiteModule):
             survey_id=survey_id,
             description=description,
             questions=questions,
+            survey_later=survey_later,
         )
 
     @route("/class/<class_id>/programs/<username>", methods=["GET", "POST"])
@@ -314,6 +315,7 @@ class ForTeachersModule(WebsiteModule):
         description = ""
         survey_id = "class" + '_' + class_id
         description = gettext("class_survey_description")
+        survey_later = gettext("class_survey_later")
 
         survey = self.db.get_survey(survey_id)
         if not survey:
@@ -325,7 +327,7 @@ class ForTeachersModule(WebsiteModule):
         questions = self.survey.get_unanswered_questions(survey)
         if not questions:
             questions = gettext("class_survey_questions").split("\n")
-        return survey_id, description, questions
+        return survey_id, description, questions, survey_later
 
     @route("/get-customization-level", methods=["GET"])
     @requires_login
