@@ -18,17 +18,13 @@ levels:
             question_text: Yang perlu diisi di tempat kosong agar teks Hello! muncul?
             code: ___ Hello!
             mp_choice_options:
-            -   option: |-
-                    `{echo}`
+            -   option: '`{echo}`'
                 feedback: '`{echo}` mengulang jawaban yang diberikan.'
-            -   option: |-
-                    `{print}`
+            -   option: '`{print}`'
                 feedback: Benar!
-            -   option: |-
-                    `hello`
+            -   option: '`hello`'
                 feedback: Hello bukan perintah.
-            -   option: |-
-                    `{ask}`
+            -   option: '`{ask}`'
                 feedback: Dengan `{ask}`, kamu bisa bertanya.
             hint: _ Halo dunia!
             correct_answer: B
@@ -83,17 +79,13 @@ levels:
                 {ask} Apa hewan peliharaan favoritmu?
                 _ Jadi hewan peliharaan favoritmu adalah...
             mp_choice_options:
-            -   option: |-
-                    `{print}`
+            -   option: '`{print}`'
                 feedback: Tidak, Anda ingin jawabannya diulang kembali kepada Anda.
-            -   option: |-
-                    `Hedy`
+            -   option: '`Hedy`'
                 feedback: Hedy bukan sebuah perintah.
-            -   option: |-
-                    `{ask}`
+            -   option: '`{ask}`'
                 feedback: Dengan `{ask}` Anda dapat mengajukan pertanyaan.
-            -   option: |-
-                    `{echo}`
+            -   option: '`{echo}`'
                 feedback: Right on!
             hint: Anda ingin melihat jawabannya di akhir baris 2...
             correct_answer: D
@@ -286,17 +278,13 @@ levels:
                 _
                 {print} Hedy!
             mp_choice_options:
-            -   option: |-
-                    `{sleep}`
+            -   option: '`{sleep}`'
                 feedback: Sempurna!
-            -   option: |-
-                    `{echo}`
+            -   option: '`{echo}`'
                 feedback: Tidak ada yang perlu diulangi di sini
-            -   option: |-
-                    `{print}`
+            -   option: '`{print}`'
                 feedback: Tidak ada teks untuk `{print}` di sana
-            -   option: |-
-                    `{ask}`
+            -   option: '`{ask}`'
                 feedback: Tidak ada pertanyaan yang perlu ditanyakan
             hint: Jeda untuk efek dramatis...
             correct_answer: A
@@ -412,17 +400,13 @@ levels:
         1:
             question_text: Perintah apa yang Anda gunakan agar Hedy memilih sesuatu secara sembarangan?
             mp_choice_options:
-            -   option: |-
-                    `{print}`
+            -   option: '`{print}`'
                 feedback: '`{print}` digunakan untuk mencetak teks'
-            -   option: |-
-                    `{ask}`
+            -   option: '`{ask}`'
                 feedback: '`{ask}` digunakan untuk mengajukan pertanyaan'
-            -   option: |-
-                    `{is}`
+            -   option: '`{is}`'
                 feedback: '`{is}` digunakan untuk membuat daftar'
-            -   option: |-
-                    `{at}` `{random}`
+            -   option: '`{at}` `{random}`'
                 feedback: Benar!
             hint: Sewenang-wenang artinya tanpa rencana atau asal-asalan.
             correct_answer: D
@@ -981,17 +965,13 @@ levels:
                 {if} nama {is} Hedy {print} 'Anda akan menjadi jutawan!'
                 {else} _ 'Sayangnya... Tidak ada banyak uang untuk Anda.'
             mp_choice_options:
-            -   option: |-
-                    `{if}`
+            -   option: '`{if}`'
                 feedback: '`{if}` ada pada baris di atas.'
-            -   option: |-
-                    `{at}` `{random}`
+            -   option: '`{at}` `{random}`'
                 feedback: Tidak, Anda tidak memerlukan `{at} {random}`.
-            -   option: |-
-                    `{else}`
+            -   option: '`{else}`'
                 feedback: Sudah ada perintah `{else}`
-            -   option: |-
-                    `{print}`
+            -   option: '`{print}`'
                 feedback: Luar biasa!
             hint: Setelah `{else}` perintah `{print}` mengikuti
             correct_answer: D
@@ -1013,11 +993,9 @@ levels:
                     animal
                     ```
                 feedback: Kerja bagus!
-            -   option: |-
-                    `{if}`
+            -   option: '`{if}`'
                 feedback: '`{if}` sudah ada'
-            -   option: |-
-                    `{print}`
+            -   option: '`{print}`'
                 feedback: Tidak, bukan itu.
             hint: Apa nama variabelnya?
             correct_answer: B
@@ -1317,14 +1295,11 @@ levels:
                     I'm
                     ```
                 feedback: Itu benar!
-            -   option: |-
-                    `{print}`
+            -   option: '`{print}`'
                 feedback: '`{print}` dieja dengan benar'
-            -   option: |-
-                    `{repeat}`
+            -   option: '`{repeat}`'
                 feedback: '`{repeat}` dieja dengan benar'
-            -   option: |-
-                    `{times}`
+            -   option: '`{times}`'
                 feedback: '`{times}` dieja dengan benar'
             hint: Saya salah, Anda tidak bisa menggunakan apostrof dalam sebuah kalimat
             correct_answer: A
@@ -2325,14 +2300,11 @@ levels:
                     counter
                     ```
                 feedback: 'No'
-            -   option: |-
-                    `{range}`
+            -   option: '`{range}`'
                 feedback: Correct
-            -   option: |-
-                    `{if}`
+            -   option: '`{if}`'
                 feedback: 'No'
-            -   option: |-
-                    `{for}`
+            -   option: '`{for}`'
                 feedback: 'No'
             hint: What did you learn in this level?
             correct_answer: B
@@ -2850,11 +2822,20 @@ levels:
                     {for} saya {in} {range} 1 {to} 3
                     ```
                 feedback: Ini sulit! Semua tindakan dalam daftar harus ada dalam lagu.
-            -   option: "```\n{for} tindakan {in} tindakan-tindakan\n```"
+            -   option: |-
+                    ```
+                    {for} tindakan {in} tindakan-tindakan
+                    ```
                 feedback: Kamu luar biasa!
-            -   option: "```\n{repeat} 3 {times}\n```"
+            -   option: |-
+                    ```
+                    {repeat} 3 {times}
+                    ```
                 feedback: Ini sulit! Semua tindakan dalam daftar harus ada dalam lagu.
-            -   option: "```\n{print} tindakan {at} {random}\n```"
+            -   option: |-
+                    ```
+                    {print} tindakan {at} {random}
+                    ```
                 feedback: Ini sulit! Semua tindakan dalam daftar harus ada dalam lagu.
             hint: Ini sulit! Semua tindakan dalam daftar harus ada dalam lagu.
             correct_answer: B
@@ -2908,9 +2889,9 @@ levels:
             -   option: '`{or}`'
                 feedback: Pemikiran yang bagus!
             -   option: '`+`'
-                feedback: 'Tidak'
+                feedback: Tidak
             -   option: '`{print}`'
-                feedback: 'Tidak'
+                feedback: Tidak
             hint: Baik vegan maupun Muslim tidak boleh makan sosis gulung.
             correct_answer: B
             question_score: '10'
@@ -2937,15 +2918,27 @@ levels:
             question_score: '10'
         4:
             question_text: Baris kode manakah yang harus mengikuti baris ini dalam permainan batu-kertas-gunting?
-            code: "{if} pilihan_komputer {is} 'batu' {and} pilihan_Anda {is} 'kertas'"
+            code: '{if} pilihan_komputer {is} ''batu'' {and} pilihan_Anda {is} ''kertas'''
             mp_choice_options:
-            -   option: "```\n{print} 'kamu menang'\n```"
+            -   option: |-
+                    ```
+                    {print} 'kamu menang'
+                    ```
                 feedback: Kamu menang!
-            -   option: "```\n{print} 'kamu kalah'\n```"
+            -   option: |-
+                    ```
+                    {print} 'kamu kalah'
+                    ```
                 feedback: Kamu kalah!
-            -   option: "```\n{print} 'dasi'\n```"
+            -   option: |-
+                    ```
+                    {print} 'dasi'
+                    ```
                 feedback: Hanya seri jika kedua pilihannya sama
-            -   option: "```\n{print} 'coba lagi'\n```"
+            -   option: |-
+                    ```
+                    {print} 'coba lagi'
+                    ```
                 feedback: Coba lagi!
             hint: Kertas mengalahkan batu
             correct_answer: A
@@ -3122,9 +3115,9 @@ levels:
             -   option: '`{or}`'
                 feedback: Kerja bagus!
             -   option: '`{in}`'
-                feedback: 'Tidak'
+                feedback: Tidak
             -   option: '`{if}`'
-                feedback: 'Tidak'
+                feedback: Tidak
             hint: Item tersebut ada di daftar makanan ringan, atau di daftar minuman
             correct_answer: B
             question_score: '10'
@@ -3151,13 +3144,13 @@ levels:
             question_text: Kode manakah yang menggunakan simbol = atau == yang benar?
             mp_choice_options:
             -   option: '{if} nama = Hedy'
-                feedback: 'Tidak'
+                feedback: Tidak
             -   option: '{if} umur = 24'
-                feedback: 'Tidak'
+                feedback: Tidak
             -   option: jawaban = {ask} 'Apa jawabanmu'
                 feedback: Ya!
             -   option: jawaban == {ask} 'Apa kabarmu?'
-                feedback: 'Tidak'
+                feedback: Tidak
             hint: Saat Anda membandingkan dua jawaban, Anda harus menggunakan ==
             correct_answer: C
             question_score: '10'
@@ -3307,9 +3300,9 @@ levels:
                       {print} 'Kamu akan sakit perut!'
             mp_choice_options:
             -   option: 1 atau lebih
-                feedback: 'Tidak'
+                feedback: Tidak
             -   option: 2 atau lebih
-                feedback: 'Tidak'
+                feedback: Tidak
             -   option: 8 atau lebih
                 feedback: Hampir
             -   option: 9 atau lebih
@@ -3362,12 +3355,12 @@ levels:
                     ```
                     {while} name = Hedy
                     ```
-                feedback: 'Tidak'
+                feedback: Tidak
             -   option: |-
                     ```
                     {while} age = 24
                     ```
-                feedback: 'Tidak'
+                feedback: Tidak
             -   option: |-
                     ```
                     {while} time > 0
@@ -3526,13 +3519,13 @@ levels:
                       {print} 'Kamu sudah muak hari ini'
             mp_choice_options:
             -   option: Tidak ada apa-apa. 1600 tidak diprogram ke dalam aplikasi.
-                feedback: 'Tidak'
+                feedback: Tidak
             -   option: kamu bisa makan lagi
-                feedback: 'Tidak'
+                feedback: Tidak
             -   option: Itu benar
                 feedback: Ya!
             -   option: Anda sudah makan cukup untuk hari ini
-                feedback: 'Tidak'
+                feedback: Tidak
             hint: 1600 adalah antara 1000 dan 2000
             correct_answer: C
             question_score: '10'

@@ -777,13 +777,25 @@ levels:
                 {print} "Il y a 3 portes devant toi"
                 porte {is} {ask} "Quelle porte choisis-tu ?"
             mp_choice_options:
-            -   option: "```\n{print} Donc tu choisis la porte porte\n```"
+            -   option: |-
+                    ```
+                    {print} Donc tu choisis la porte porte
+                    ```
                 feedback: Il faut des guillemets
-            -   option: "```\n{print} \"Donc tu choisis la \" porte porte\n```"
+            -   option: |-
+                    ```
+                    {print} "Donc tu choisis la " porte porte
+                    ```
                 feedback: Si le joueur choisit la porte 3, Hedy dira « Donc tu choisis 3 3 »
-            -   option: "```\n{print} \"Donc tu choisis la porte \" porte\n```"
+            -   option: |-
+                    ```
+                    {print} "Donc tu choisis la porte " porte
+                    ```
                 feedback: Super !
-            -   option: "```\n{print} \"Donc tu choisis la porte porte\"\n```"
+            -   option: |-
+                    ```
+                    {print} "Donc tu choisis la porte porte"
+                    ```
                 feedback: Hedy affichera « Donc tu choisis la porte porte »
             hint: Le deuxième mot « porte » doit être remplacé par le numéro, le premier doit rester le mot « porte »…
             correct_answer: C
