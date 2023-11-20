@@ -445,7 +445,7 @@ class TestsLevel3(HedyTester):
         print dieren ad random""")
 
         self.multi_level_tester(
-            max_level=11,
+            max_level=3,
             code=code,
             extra_check_function=lambda c: c.exception.arguments['line_number'] == 2,
             exception=hedy.exceptions.InvalidArgumentTypeException

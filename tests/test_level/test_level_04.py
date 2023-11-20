@@ -572,6 +572,20 @@ class TestsLevel4(HedyTester):
             extra_check_function=check_in_list
         )
 
+    def test_list_access_misspelled_at_gives_error(self):
+        code = textwrap.dedent("""\
+        dieren is Hond, Kat, Kangoeroe
+        print dieren at random""")
+
+        self.multi_level_tester(
+            max_level=5,
+            # set to false for now, probably is incorrect so a look would be appreciated!
+            skip_faulty=0,
+            code=code,
+            extra_check_function=lambda c: c.exception.arguments['line_number'] == 2,
+            exception=hedy.exceptions.MisspelledAtCommand
+        )
+
     def test_ask_list_access_index(self):
         code = textwrap.dedent("""\
         colors is orange, blue, green
