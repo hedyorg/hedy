@@ -1,4 +1,14 @@
 
+import { modal } from './modal';
+
+export function cloned(message: string, success: Boolean = true) {
+    if (success) {
+        modal.notifySuccess(message)
+    } else {
+        modal.notifyError(message)
+    }
+}
+
 export function applyFilter(term: string, type: string, filtered: any) {
     term = term.trim()
     filtered[type] = filtered[type] || {term, exclude: []}

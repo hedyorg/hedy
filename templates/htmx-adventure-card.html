@@ -1,4 +1,4 @@
-<div class="adventure grid bg-white shadow-md rounded-lg transition-shadow hover:shadow-lg outline-blue-400 hover:outline hover:outline-2"
+<div class="adventure grid grid-rows-[1fr_100px] bg-white shadow-md rounded-lg transition-shadow hover:shadow-lg outline-blue-400 hover:outline hover:outline-2"
     data-lang="{{adventure.language or current_language().lang}}"
     _="on removeMe remove me">
     <div class="py-4 px-6">
@@ -24,7 +24,12 @@
         {% if user["username"] != adventure["creator"] %}
             <button class="green-btn" id="clone_adventure_btn"
                 _="on htmx:afterRequest log detail 
-                if detail.xhr.status == '200' then log 'removing my card' then send removeMe"
+                if detail.xhr.status == '200'
+                    hedyApp.cloned('{{_('adventure_cloned')}}')
+                    send removeMe
+                else
+                    hedyApp.cloned('{{_('adventure_cloned_error')}}', false)
+                end"
                 hx-trigger="click"
                 hx-post="/public-adventures/clone/{{adventure.id}}"
                 hx-swap="afterbegin"
@@ -32,8 +37,10 @@
                 ">{{_('clone')}}</button>
         {%else%}
             <!-- TODO: button to add to class(es) -->
-            <a class="no-underline cursor-pointer" onclick='hedyApp.delete_adventure("{{adventure.id}}",
-            {{_('delete_adventure_prompt')|default(None)|tojson}})'>🗑️</a>
+            <button
+                class="green-btn" id="edit_adventure_button"
+                _="on click window.open('/for-teachers/customize-adventure/{{adventure.id}}', '_self')">
+                {{_('edit_adventure')}}</button>
         {% endif %}
     </div>
 </div>
