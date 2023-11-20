@@ -748,187 +748,187 @@ adventures:
         levels:
             1:
                 story_text: |-
-                    Welkom bij het debugging avontuur. Debugging a code means getting rid of mistakes in the code.
-                    That means that in these debugging adventures, we will show you code that does not work yet.
-                    You will have to figure out what's wrong and correct the mistakes.
+                    Welkom bij het debugging avontuur. Een code debuggen betekent dat je alle fouten eruit gaat halen.
+                    In deze debugging avonturen laten we je dus code zien die nog niet werkt.
+                    Jij moet uitzoeken wat er mis is en de fouten verbeteren.
 
                     ### Opdracht
                     Debug deze code. Succes!
                 example_code: |
-                    **Warning! This code needs to be debugged!**
+                    **Pas op! Deze code bevat fouten!**
                     ```
-                    {print} I love programming
-                    Do you love programming too?
+                    {print} Ik vind programmeren leuk
+                    Vind jij programmeren ook leuk?
                     {echo}
-                    {print} What are your hobbies?
-                    {echo} Your hobbies are
+                    {print} Wat zijn je hobbies?
+                    {echo} Jouw hobbies zijn
                     ```
                 start_code: |
-                    {print} I love programming
-                    Do you love programming too?
+                    {print} Ik vind programmeren leuk
+                    Vind jij programmeren ook leuk?
                     {echo}
-                    {print} What are your hobbies?
-                    {echo} Your hobbies are
+                    {print} Wat zijn je hobbies?
+                    {echo} Jouw hobbies zijn
             2:
                 story_text: |-
-                    Welcome to a debugging adventure. Debugging a code means getting rid of mistakes in the code.
-                    That means that in these debugging adventures, we will give you a code that does not work yet.
-                    You will have to figure out what's wrong and correct the mistakes.
+                    Welkom bij het debugging avontuur. Een code debuggen betekent dat je alle fouten eruit gaat halen.
+                    In deze debugging avonturen laten we je dus code zien die nog niet werkt.
+                    Jij moet uitzoeken wat er mis is en de fouten verbeteren.
 
-                    ### Exercise
-                    Debug this code. Good luck!
+                    ### Opdracht
+                    Debug deze code. Succes!
                 example_code: |
-                    **Warning! This code needs to be debugged!**
+                    **Pas op! Deze code bevat fouten!**
                     ```
-                    destination {ask} Where are you going on holidays?
-                    {print} The flight to dstination leaves at 3 pm.
-                    {ask} Did you check in your luggage yet?
+                    bestemming {ask} Waar ga je naartoe op vakantie?
+                    {print} De vlucht naar bstemming vertrekt om 15:00 uur.
+                    {ask} Heb je jouw bagage al ingecheckt?
                     {echo}
-                    {print} Let me print your boarding pass for you.
+                    {print} Ik ga nu je vliegticket printen.
                     {sleep}
-                    Here you go! Have a nice trip!
+                    Alsjeblieft! Goede reis!
                     ```
                 start_code: |
-                    destination {ask} Where are you going on holidays?
-                    {print} The flight to dstination leaves at 3 pm.
-                    {ask} Did you check in your luggage yet?
+                    bestemming {ask} Waar ga je naartoe op vakantie?
+                    {print} De vlucht naar bstemming vertrekt om 15:00 uur.
+                    {ask} Heb je jouw bagage al ingecheckt?
                     {echo}
-                    {print} Let me print your boarding pass for you.
+                    {print} Ik ga nu je vliegticket printen.
                     {sleep}
-                    Here you go! Have a nice trip!
+                    Alsjeblieft! Goede reis!
             3:
                 story_text: |-
-                    Welcome to a debugging adventure. Debugging a code means getting rid of mistakes in the code.
-                    That means that in these debugging adventures, we will give you a code that does not work yet.
-                    You will have to figure out what's wrong and correct the mistakes.
+                    Welkom bij het debugging avontuur. Een code debuggen betekent dat je alle fouten eruit gaat halen.
+                    In deze debugging avonturen laten we je dus code zien die nog niet werkt.
+                    Jij moet uitzoeken wat er mis is en de fouten verbeteren.
 
-                    ### Exercise
-                    Debug this code. Good luck!
+                    ### Opdracht
+                    Debug deze code. Succes!
                 example_code: |
-                    **Warning! This code needs to be debugged!**
+                    **Pas op! Deze code bevat fouten!**
                     ```
-                    movie_choices {is} dracula, fast and furious, home alone, barbie
-                    chosen_movie {is} movies {at} {random}
-                    {print} Tonight we will watch chosen _movies
-                    like {ask} Do you like that movie?
-                    {print} Tomorrow we will watch something else.
-                    {add} chosen_movie {to} movie_choices
-                    {print} Tomorrow we will watch tomorrows_movie
-                    tomorrows_movie {is} movie_choices {at} {random}
-                    I'll go get the popcorn! {print}
+                    film_keuzes {is} dracula, fast and furious, home alone, barbie
+                    gekozen_film {is} films {at} {random}
+                    {print} Vanavond gaan we gekozen_films kijken
+                    leuk {ask} Vind je dat een leuke film?
+                    {print} Morgen zullen we iets anders gaan kijken.
+                    {add} gekozen_film {to} film_keuzes
+                    {print} Morgen zullen we film_morgen gaan kijken
+                    film_morgen {is} film_keuzes {at} {random}
+                    Ik ga de popcorn pakken! {print}
                     ```
                 start_code: |
-                    movie_choices {is} dracula, fast and furious, home alone, barbie
-                    chosen_movie {is} movies {at} {random}
-                    {print} Tonight we will watch chosen _movies
-                    like {ask} Do you like that movie?
-                    {print} Tomorrow we will watch something else.
-                    {add} chosen_movie {to} movie_choices
-                    {print} Tomorrow we will watch tomorrows_movie
-                    tomorrows_movie {is} movie_choices {at} {random}
-                    I'll go get the popcorn! {print}
+                    film_keuzes {is} dracula, fast and furious, home alone, barbie
+                    gekozen_film {is} films {at} {random}
+                    {print} Vanavond gaan we gekozen_films kijken
+                    leuk {ask} Vind je dat een leuke film?
+                    {print} Morgen zullen we iets anders gaan kijken.
+                    {add} gekozen_film {to} film_keuzes
+                    {print} Morgen zullen we film_morgen gaan kijken
+                    film_morgen {is} film_keuzes {at} {random}
+                    Ik ga de popcorn pakken! {print}
             4:
                 story_text: |-
-                    ### Exercise
-                    Debug this code. Good luck!
+                    ### Opdracht
+                    Debug deze code. Succes!
                 example_code: |
-                    **Warning! This code needs to be debugged!**
+                    **Pas op! Deze code bevat fouten!**
                     ```
-                    {print} 'Welcome to the online library!
-                    {ask} What genre of books do you like?
-                    {print} You like genre
-                    author {is} {ask} 'Who's your favorite author?'
-                    {print} 'author is your favorite author'
-                    {print} Hmmm... i think you should try... books {at} {random}
+                    {print} 'Welkom bij de online bibliotheek!
+                    {ask} Welk genre boeken vind je leuk?
+                    {print} Jij houdt van het genre
+                    auteur {is} {ask} 'Wie' is je favoriete auteur?'
+                    {print} 'auteur is jouw favoriete auteur'
+                    {print} Hmmm... ik denk dat je boeken {at} {random} leuk zou vinden
                     ```
                 start_code: |
-                    {print} 'Welcome to the online library!
-                    {ask} What genre of books do you like?
-                    {print} You like genre
-                    author {is} {ask} 'Who's your favorite author?'
-                    {print} 'author is your favorite author'
-                    {print} Hmmm... I think you should try... books {at} {random}
+                    {print} 'Welkom bij de online bibliotheek!
+                    {ask} Welk genre boeken vind je leuk?
+                    {print} Jij houdt van het genre
+                    auteur {is} {ask} 'Wie' is je favoriete auteur?'
+                    {print} 'auteur is jouw favoriete auteur'
+                    {print} Hmmm... ik denk dat je boeken {at} {random} leuk zou vinden
             5:
                 story_text: |-
-                    ### Exercise
-                    Debug this code. Good luck!
+                    ### Opdracht
+                    Debug deze code. Succes!
                 example_code: |
-                    **Warning! This code needs to be debugged!**
+                    **Pas op! Deze code bevat fouten!**
                     ```
-                    {print} Welcome to Swimming Pool Hedy!
-                    class {is} {ask} 'Are you here to join a class today?'
-                    {if} class yes
-                        {print} 'Great! You are joining a class!'
-                        {print} {else} 'You will not be joining a class'
-                    discount {is} {ask} 'Do you have a discount code?'
-                    {if} discount {is} yes
-                    discount_answer {is} {ask} 'What is your discount code?'
-                    discount_codes = Senior4231, Student8786, NewMember6709
-                    {if} discount_answer {is} {in} discount_codes
-                        {print} 'That will be $3,50'
-                            {else} 'That code is not valid'
-                    {else} 'That will be $5,50'
-                    {print} 'Have a nice swim!'
+                    {print} Welkom bij Zwembad Hedy!
+                    les {is} {ask} 'Wil je vandaag een zwemles volgen?'
+                    {if} les ja
+                        {print} 'Mooi! Jij gaat meedoen aan een les!'
+                        {print} {else} 'Je gaat geen zwemles volgen'
+                    korting {is} {ask} 'Heb je een kortingscode?'
+                    {if} korting {is} ja
+                    korting_antwoord {is} {ask} 'Welke kortingscode heb je?'
+                    kortingscode = Senior4231, Student8786, NewMember6709
+                    {if} korting_antwoord {is} {in} kortingscode
+                        {print} 'Dat wordt dan €3,50'
+                            {else} 'Die code is niet geldig'
+                    {else} 'Dat wordt dan €5,50'
+                    {print} 'Veel plezier!'
                     ```
                 start_code: |
-                    {print} Welcome to Swimming Pool Hedy!
-                    class {is} {ask} 'Are you here to join a class today?'
-                    {if} class yes
-                        {print} 'Great! You are joining a class!'
-                        {print} {else} 'You will not be joining a class'
-                    discount {is} {ask} 'Do you have a discount code?'
-                    {if} discount {is} yes
-                    discount_answer {is} {ask} 'What is your discount code?'
-                    discount_codes = Senior4231, Student8786, NewMember6709
-                    {if} discount_answer {is} {in} discount_codes
-                        {print} 'That will be $3,50'
-                            {else} 'That code is not valid'
-                    {else} 'That will be $5,50'
-                    {print} 'Have a nice swim!'
+                    {print} Welkom bij Zwembad Hedy!
+                    les {is} {ask} 'Wil je vandaag een zwemles volgen?'
+                    {if} les ja
+                        {print} 'Mooi! Jij gaat meedoen aan een les!'
+                        {print} {else} 'Je gaat geen zwemles volgen'
+                    korting {is} {ask} 'Heb je een kortingscode?'
+                    {if} korting {is} ja
+                    korting_antwoord {is} {ask} 'Welke kortingscode heb je?'
+                    kortingscode = Senior4231, Student8786, NewMember6709
+                    {if} korting_antwoord {is} {in} kortingscode
+                        {print} 'Dat wordt dan €3,50'
+                            {else} 'Die code is niet geldig'
+                    {else} 'Dat wordt dan €5,50'
+                    {print} 'Veel plezier!'
             6:
                 story_text: |-
-                    ### Exercise
-                    Debug this code. Good luck!
+                    ### Opdracht
+                    Debug deze code. Succes!
                 example_code: |
-                    **Warning! This code needs to be debugged!**
+                    **Pas op! Deze code bevat fouten!**
                     ```
-                    {print} 'Vending machine'
-                        chosen_product = {ask} 'Please select a product'
-                    1_dollar_products = coke orange juice water
-                    2_dollar_products = chocolate, cookie, museli bar
-                    3_dollar_prodcuts = potato chips, beef jerky, banana bread
-                    {if} chosen {in} 1_dollar_products
-                    price = 1
-                    {if} chosen_product {is} 2_dollar_products
-                        price = 2
-                        {if} chosen_product {in} 3_dollar_products
-                            price = 3
-                    amount_of_products = '{ask} How many of ' chosen_product would you like to have?'
-                    total = price + amount_of_products
-                    {print} 'That will be $' price 'please'
+                    {print} 'Snackautomaat'
+                        gekozen_product = {ask} 'Maak een keuze'
+                    1_euro_producten = cola sinas sap water
+                    2_euro_producten = chocolade, koekje, museli reep
+                    3_euro_prodcuten = chips, gezouten nootjes, bananenbrood
+                    {if} gekozen {in} 1_euro_producten
+                    prijs = 1
+                    {if} gekozen_product {is} 2_euro_producten
+                        prijs = 2
+                        {if} gekozen_product {in} 3_euro_producten
+                            prijs = 3
+                    aantal_producten = '{ask} Hoeveel  ' gekozen_product wilt u hebben?'
+                    totaall = prijs + aantal producten
+                    {print} 'Dat wordt dan €' prijs 'alstublieft'
                     ```
                 start_code: |
-                    {print} 'Vending machine'
-                        chosen_product = {ask} 'Please select a product'
-                    1_dollar_products = coke orange juice water
-                    2_dollar_products = chocolate, cookie, museli bar
-                    3_dollar_prodcuts = potato chips, beef jerky, banana bread
-                    {if} chosen {in} 1_dollar_products
-                    price = 1
-                    {if} chosen_product {is} 2_dollar_products
-                        price = 2
-                        {if} chosen_product {in} 3_dollar_products
-                            price = 3
-                    amount_of_products = '{ask} How many of ' chosen_product would you like to have?'
-                    total = price + amount_of_products
-                    {print} 'That will be $' price 'please'
+                    {print} 'Snackautomaat'
+                        gekozen_product = {ask} 'Maak een keuze'
+                    1_euro_producten = cola sinas sap water
+                    2_euro_producten = chocolade, koekje, museli reep
+                    3_euro_prodcuten = chips, gezouten nootjes, bananenbrood
+                    {if} gekozen {in} 1_euro_producten
+                    prijs = 1
+                    {if} gekozen_product {is} 2_euro_producten
+                        prijs = 2
+                        {if} gekozen_product {in} 3_euro_producten
+                            prijs = 3
+                    aantal_producten = '{ask} Hoeveel  ' gekozen_product wilt u hebben?'
+                    totaall = prijs + aantal producten
+                    {print} 'Dat wordt dan €' prijs 'alstublieft'
             7:
                 story_text: |-
-                    ### Exercise
-                    Surprise! The program in this debugging adventure actually doesn't give an error. And yet, this is not what we want the code to do.
-                    Fix this program to turn it into the nursery rhyme 'Brother John (Frère Jaques)' by using the {repeat} command of course!.
+                    ### Opdracht
+                    Verassing! Het programma in dit debugging avontuur geeft geen foutmelding. Toch doet de code niet helemaal wat we willen.
+                    Verbeter de code zodat deze het Engelse slaapliedje 'Brother John (Frère Jaques)' zingt. Gebruik hiervoor het  {repeat} commando!
                 example_code: |
-                    **Warning! This code needs to be debugged!**
+                    **Pas op! Deze code bevat fouten!**
                     ```
                     Are you sleeping?
                     Brother John!
@@ -1391,33 +1391,33 @@ adventures:
                     ```
                 start_code: |2
 
-                    define food_order
-                        toppings = ask 'pepperoni, tuna, veggie or cheese?'
-                        size = ask 'big, medium or small?'
-                        number_of_pizza = ask 'How many these pizzas would you like?'
+                        define food_order
+                            toppings = ask 'pepperoni, tuna, veggie or cheese?'
+                            size = ask 'big, medium or small?'
+                            number_of_pizza = ask 'How many these pizzas would you like?'
 
-                        print 'YOU ORDERED'
-                        print number_of_pizzas ' size  ' topping ' pizza'
+                            print 'YOU ORDERED'
+                            print number_of_pizzas ' size  ' topping ' pizza'
 
-                    define drinks_order
-                        drink = ask 'water, coke, icetea, lemonade or coffee?'
-                        number_of_drinks = ask 'How many of these drinks would you like?'
+                        define drinks_order
+                            drink = ask 'water, coke, icetea, lemonade or coffee?'
+                            number_of_drinks = ask 'How many of these drinks would you like?'
 
-                        print 'YOU ORDERED'
-                        print number_of_drinks ' ' drink
+                            print 'YOU ORDERED'
+                            print number_of_drinks ' ' drink
 
-                    'Welcome to Hedy pizza'
-                    more_food = ask 'Would you like to order a pizza?'
-                    while more_food = 'yes'
-                        return food_order
+                        'Welcome to Hedy pizza'
                         more_food = ask 'Would you like to order a pizza?'
-                    more_drinks = ask 'Would you like to order some drinks?'
-                    while more_drinks == 'yes'
-                        call drink_order
-                        more_drinks == ask 'Would you like to order more drinks?'
+                        while more_food = 'yes'
+                            return food_order
+                            more_food = ask 'Would you like to order a pizza?'
+                        more_drinks = ask 'Would you like to order some drinks?'
+                        while more_drinks == 'yes'
+                            call drink_order
+                            more_drinks == ask 'Would you like to order more drinks?'
 
 
-                    print 'Thanks for ordering!'
+                        print 'Thanks for ordering!'
             18:
                 story_text: |-
                     ### Exercise
@@ -1442,20 +1442,20 @@ adventures:
                     ```
                 start_code: |2
 
-                    animals = ['pig', 'dog', 'cow']
-                    sounds = ['oink', 'woof', 'moo']
-                    for i in range 1 to 3
-                        animal = animals[i]
-                        sound = sounds[i]
-                        print 'Old McDonald had a farm'
-                        print 'E I E I O!'
-                        print 'and on that farm he had a ' animal
-                        print 'E I E I O!'
-                        print 'with a ' sound sound ' here'
-                        print 'and a ' sound sound ' there'
-                        print 'here a ' sound
-                        print 'there a ' sound
-                        print 'everywhere a ' sound sound
+                        animals = ['pig', 'dog', 'cow']
+                        sounds = ['oink', 'woof', 'moo']
+                        for i in range 1 to 3
+                            animal = animals[i]
+                            sound = sounds[i]
+                            print 'Old McDonald had a farm'
+                            print 'E I E I O!'
+                            print 'and on that farm he had a ' animal
+                            print 'E I E I O!'
+                            print 'with a ' sound sound ' here'
+                            print 'and a ' sound sound ' there'
+                            print 'here a ' sound
+                            print 'there a ' sound
+                            print 'everywhere a ' sound sound
     default:
         name: Introductie
         default_save_name: intro
@@ -1478,7 +1478,7 @@ adventures:
                     **Let op! Deze code werkt niet!**
                     In Hedy veranderen commando's wel eens. Zo werkt `{echo}` alleen in level 1. In dit level leer je een betere manier om antwoord te echoën!
                     ```
-                    {print} Welcome bij restaurant Hedy
+                    {print} Welkom bij restaurant Hedy
                     {ask} Wat wil je eten?
                     {echo} Dus jij wilt graag
                     {ask} Wat wil je drinken?
@@ -1803,7 +1803,7 @@ adventures:
                     Je kunt ook in dit level weer een dobbelsteen maken. Met de `{repeat}` code kun je makkelijk een heel handje dobbelstenen rollen.
 
                     ### Opdracht
-                    Probeer de voorbeeldcode maar eens af te maken!  Op de streepjes moeten meerdere commando's en tekens komen. **Extra** Kun jij een andere spel met dobbelstenen maken, gebruik wel `{repeat}`!
+                    Probeer de voorbeeldcode maar eens af te maken!  Op de streepjes moeten meerdere commando's en tekens komen. **Extra** Kun jij een ander spel met dobbelstenen maken? Gebruik wel `{repeat}`!
                 example_code: |
                     ```
                     keuzes = 1, 2, 3, 4, 5, 6
@@ -2121,7 +2121,7 @@ adventures:
             6:
                 story_text: |
                     In dit level kun je rekenen met Hedy, waardoor je "magische" formules kunt gebruiken in je voorspellingen!
-                    Zo kun je berekenen hoe rijk je wordt, aan de hand van de formule in het voorbeeld:
+                    Zo kun je berekenen hoe rijk je wordt of hoeveel kinderen je later zult krijgen, aan de hand van de formule in het voorbeeld:
 
 
 
@@ -2450,7 +2450,7 @@ adventures:
                     _ Er zijn drie deuren voor je neus...
                     _ _ _ Welke deur kies jij?
                     _ Je opent deur ... keuze
-                    monsters _ een zombie, een vampire, LEEG JE BENT ONTSNAPT
+                    monsters _ een zombie, een vampier, LEEG JE BENT ONTSNAPT
                     _ Daar zie je...
                     {sleep}
                     _ _ _ _
@@ -2754,7 +2754,7 @@ adventures:
                 story_text: |
                     **Lijstjes**
                     Om te kijken of iets in een lijst zit, kun je nu ook gebruik maken van `{in}`.
-                    Deze code print mooi als je geel of rood antwoordt, en anders meh!
+                    Deze code print mooi als je geel of rood antwoordt, en anders mwah!
                 example_code: |
                     ```
                     mooie_kleuren {is} geel, rood
@@ -3431,7 +3431,7 @@ adventures:
             7:
                 story_text: |
                     Je hebt nu geoefend met het `{repeat}` commando in combinatie met het `{print}` commando, maar wist je dat je `{repeat}` ook met andere commando's kunt combineren?
-                    In deze voorbeeldcode kun je zien hoe je `{repeat}` ook met `{ask}`, `{if}` of `{else}` gebruikt kan worden.
+                    In deze voorbeeldcode kun je zien hoe `{repeat}` ook met `{ask}`, `{if}` of `{else}` gebruikt kan worden.
                 example_code: |
                     ```
                     {repeat} 2 {times} antwoord = {ask} 'Wist je al dat je een vraag ook kunt herhalen?'
@@ -3576,7 +3576,7 @@ adventures:
                     Probeer een `{if}` toe te voegen na ieder `{ask}` commando, waardoor jouw programma zo interactief mogelijk wordt.
                 example_code: |
                     ```
-                    drank_voorraad {is} water, lemonade, cola, orange juice
+                    drank_voorraad {is} water, limonade, cola, sinaasappelsap
                     drank {is} {ask} 'Wat wilt u drinken?'
                     {if} drank {in} drank_voorraad {print} 'Een ' drank 'komt eraan!'
                     {else} {print} 'Sorry, dat hebben we niet'
