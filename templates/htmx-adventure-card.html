@@ -17,11 +17,6 @@
         </a>
         {% if adventure["tags"]|length > 0 %}
             {{ render_partial('htmx-tags-list.html', tags=adventure["tags"], adventure_id=adventure.id) }}
-        {% elif adventure["creator"] == user["username"] %}
-            <p class="text-gray-600 mt-1">{{ _('tags') }}: 
-                <a href="/for-teachers/customize-adventure/{{adventure.id}}"
-                    class="no-underline cursor-pointer">{{_('add')}}</a>
-            </p>
         {%endif%}
     </div>
     <div id="actions"
