@@ -13,6 +13,11 @@
         <p class="text-gray-600 mt-1">
             {{_('level')}}: {% if adventure.level %}{{ adventure.level }}{% else %}-{% endif %}
         </p>
+        {% if adventure["cloned_times"] %}
+            <p class="text-gray-600 mt-1">
+                {{_('cloned_times')}}: {{adventure["cloned_times"]}}
+            </p>
+        {%endif%}
         <p class="text-gray-600 mt-1">{{_('last_update')}}: {{ adventure.date }}</p>
         </a>
         {% if adventure["tags"]|length > 0 %}
@@ -22,13 +27,14 @@
     <div id="actions"
         class="flex items-center px-6 py-4 bg-gray-200 shadow-lg">
         {% if user["username"] != adventure["creator"] %}
+            <a class="green-btn mx-1 no-underline cursor-pointer" href="/for-teachers/customize-adventure/view/{{ adventure.id }}">{{_('preview')}}</a>
             <button class="green-btn" id="clone_adventure_btn"
                 _="on htmx:afterRequest log detail 
                 if detail.xhr.status == '200'
                     hedyApp.cloned('{{_('adventure_cloned')}}')
                     send removeMe
                 else
-                    hedyApp.cloned('{{_('adventure_cloned_error')}}', false)
+                    hedyApp.cloned(detail.xhr.response, false)
                 end"
                 hx-trigger="click"
                 hx-post="/public-adventures/clone/{{adventure.id}}"

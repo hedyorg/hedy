@@ -41,6 +41,7 @@ class PublicAdventuresModule(WebsiteModule):
                     "date": utils.localized_date_format(adventure.get("date")),
                     "level": adventure.get("level"),
                     "language": adventure.get("language", None),
+                    "cloned_times": adventure.get("cloned_times"),
                     "tags": adventure.get("tags", []),
                 }
             )
@@ -79,6 +80,7 @@ class PublicAdventuresModule(WebsiteModule):
             "id": uuid.uuid4().hex,
             "cloned_from": adventure_id,
             "name": current_adventure.get("name"),
+            "content": current_adventure.get("content"),
             "public": True,
             "creator": user["username"],
             "date": utils.timems(),
@@ -87,7 +89,7 @@ class PublicAdventuresModule(WebsiteModule):
             "tags": current_adventure.get("tags", []),
         }
 
-        self.db.update_adventure(adventure_id, {"cloned_times": adventure.get("cloned_times", 0) + 1})
+        self.db.update_adventure(adventure_id, {"cloned_times": current_adventure.get("cloned_times", 0) + 1})
         self.db.store_adventure(adventure)
         adventure["date"] = utils.localized_date_format(adventure.get("date"))
         return render_partial('htmx-adventure-card.html',
