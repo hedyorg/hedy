@@ -351,15 +351,17 @@ class HedyTester(unittest.TestCase):
 
     @staticmethod
     def turtle_color_command_transpiled(val, lang="en"):
-        color_dict = {hedy_translation.translate_keyword_from_en(x, lang): x for x in hedy.command_make_color}
-        colors = hedy.command_make_color_local(lang)
+        color_dict = {hedy_translation.translate_keyword_from_en(x, lang): x for x in hedy.english_colors}
+        both_colors = hedy.command_make_color_local(lang)
 
         return textwrap.dedent(f"""\
         __trtl = f'{val}'
         color_dict = {color_dict}
-        if __trtl not in {colors}:
+        if __trtl not in {both_colors}:
           raise Exception(f'While running your program the command <span class="command-highlighted">color</span> received the value <span class="command-highlighted">{{__trtl}}</span> which is not allowed. Try using another color.')
-        __trtl = color_dict[__trtl]
+        else:
+          if not __trtl in {hedy.english_colors}:
+            __trtl = color_dict[__trtl]
         t.pencolor(__trtl)""")
 
     @staticmethod

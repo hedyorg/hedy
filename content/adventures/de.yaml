@@ -103,6 +103,8 @@ adventures:
                     ```
                     Name {is} {ask} _ Was ist dein Name? _
                     {print}  _ Der Name der Hauptfigur lautet _ Name
+                    _
+                    _
                     {print} Name  _ läuft nun in den Wald hinein _
                     {print} Name _ fürchtet sich ein wenig _
                     Tiere {is} 🦔, 🐿, 🦉, 🦇
@@ -142,7 +144,7 @@ adventures:
                     Solche Wiederholungen kannst du mit dem Befehl `{repeat}` in diesem Level in deine Geschichte einfügen.
 
                     ### Übung
-                    Füge Wiederholungen zu deiner eigenen Geschichte hinzu. Gehe zurück zu deinen gespeicherten Programmen, wähle dein Geschichte-Programm aus Level 6 aus und
+                    Füge Wiederholungen zu deiner eigenen Geschichte hinzu. Gehe zurück zu deinen gespeicherten Programmen, wähle dein Geschichte-Programm aus einem vorherigen Level aus und
                     finde eine Zeile die `{print}` enthält und wiederhole sie.
                 example_code: |
                     ```
@@ -158,7 +160,7 @@ adventures:
                     ### Übung 1
                     Der Beispiel-Code zeigt zwei verschiedene Enden; eines bei dem die Figuren in eine Zeitmaschine springen und eines wo sie es nicht tun.
                     Vervollständige die Lücken mit mindestens einem Satz pro Ende.
-                    **(extra)** Mach die Geschichte länger. Was passiert in der Geschichte? Du kannst auch ein zweites `{ask}` mit verschiedenen Auswahlmöglichkeiten hinzufügen.
+                    **Extra** Mach die Geschichte länger. Was passiert in der Geschichte? Du kannst auch ein zweites `{ask}` mit verschiedenen Auswahlmöglichkeiten hinzufügen.
 
                     ### Übung 2
                     Gehe zurück zu deinen gespeicherten Programmen und wähle deine Geschichte-Programm aus Level 5 aus. Schreibe nun ein gutes und ein schlechtes Ende mit jeweils mindestens drei Zeilen Länge!
@@ -291,7 +293,7 @@ adventures:
     add_remove_command:
         name: '{add} {to} & {remove} {from}'
         default_save_name: add_remove_command
-        description: Einführung von hinzufügen und entfernen
+        description: Führt hinzufügen und entfernen ein
         levels:
             3:
                 story_text: |
@@ -1439,33 +1441,33 @@ adventures:
                     ```
                 start_code: |4
 
-                    define food_order
-                        toppings = ask 'pepperoni, tuna, veggie or cheese?'
-                        size = ask 'big, medium or small?'
-                        number_of_pizza = ask 'How many these pizzas would you like?'
+                      define food_order
+                          toppings = ask 'pepperoni, tuna, veggie or cheese?'
+                          size = ask 'big, medium or small?'
+                          number_of_pizza = ask 'How many these pizzas would you like?'
 
-                        print 'YOU ORDERED'
-                        print number_of_pizzas ' size  ' topping ' pizza'
+                          print 'YOU ORDERED'
+                          print number_of_pizzas ' size  ' topping ' pizza'
 
-                    define drinks_order
-                        drink = ask 'water, coke, icetea, lemonade or coffee?'
-                        number_of_drinks = ask 'How many of these drinks would you like?'
+                      define drinks_order
+                          drink = ask 'water, coke, icetea, lemonade or coffee?'
+                          number_of_drinks = ask 'How many of these drinks would you like?'
 
-                        print 'YOU ORDERED'
-                        print number_of_drinks ' ' drink
+                          print 'YOU ORDERED'
+                          print number_of_drinks ' ' drink
 
-                    'Welcome to Hedy pizza'
-                    more_food = ask 'Would you like to order a pizza?'
-                    while more_food = 'yes'
-                        return food_order
-                        more_food = ask 'Would you like to order a pizza?'
-                    more_drinks = ask 'Would you like to order some drinks?'
-                    while more_drinks == 'yes'
-                        call drink_order
-                        more_drinks == ask 'Would you like to order more drinks?'
+                      'Welcome to Hedy pizza'
+                      more_food = ask 'Would you like to order a pizza?'
+                      while more_food = 'yes'
+                          return food_order
+                          more_food = ask 'Would you like to order a pizza?'
+                      more_drinks = ask 'Would you like to order some drinks?'
+                      while more_drinks == 'yes'
+                          call drink_order
+                          more_drinks == ask 'Would you like to order more drinks?'
 
 
-                    print 'Thanks for ordering!'
+                      print 'Thanks for ordering!'
             18:
                 story_text: |-
                     ### Exercise
@@ -1490,20 +1492,20 @@ adventures:
                     ```
                 start_code: |4
 
-                    animals = ['pig', 'dog', 'cow']
-                    sounds = ['oink', 'woof', 'moo']
-                    for i in range 1 to 3
-                        animal = animals[i]
-                        sound = sounds[i]
-                        print 'Old McDonald had a farm'
-                        print 'E I E I O!'
-                        print 'and on that farm he had a ' animal
-                        print 'E I E I O!'
-                        print 'with a ' sound sound ' here'
-                        print 'and a ' sound sound ' there'
-                        print 'here a ' sound
-                        print 'there a ' sound
-                        print 'everywhere a ' sound sound
+                      animals = ['pig', 'dog', 'cow']
+                      sounds = ['oink', 'woof', 'moo']
+                      for i in range 1 to 3
+                          animal = animals[i]
+                          sound = sounds[i]
+                          print 'Old McDonald had a farm'
+                          print 'E I E I O!'
+                          print 'and on that farm he had a ' animal
+                          print 'E I E I O!'
+                          print 'with a ' sound sound ' here'
+                          print 'and a ' sound sound ' there'
+                          print 'here a ' sound
+                          print 'there a ' sound
+                          print 'everywhere a ' sound sound
     default:
         name: Einführung
         default_save_name: Einleitung
@@ -2012,7 +2014,7 @@ adventures:
         levels:
             17:
                 story_text: |
-                    In this level you can also use a new command: `{elif}`. `{elif}` is short for `{else}` `{if}` and you need it when you want to make 3 (or more!) options.
+                    In this level you can also use a new command: `{elif}`. `{elif}` is a combination of the keywords `{else}` and `{if}` and you need it when you want to make 3 (or more!) options.
                     Check it out!
                 example_code: |
                     ```

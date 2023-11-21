@@ -1447,33 +1447,33 @@ adventures:
                     ```
                 start_code: |4
 
-                    define food_order
-                        toppings = ask 'pepperoni, tuna, veggie or cheese?'
-                        size = ask 'big, medium or small?'
-                        number_of_pizza = ask 'How many these pizzas would you like?'
+                      define food_order
+                          toppings = ask 'pepperoni, tuna, veggie or cheese?'
+                          size = ask 'big, medium or small?'
+                          number_of_pizza = ask 'How many these pizzas would you like?'
 
-                        print 'YOU ORDERED'
-                        print number_of_pizzas ' size  ' topping ' pizza'
+                          print 'YOU ORDERED'
+                          print number_of_pizzas ' size  ' topping ' pizza'
 
-                    define drinks_order
-                        drink = ask 'water, coke, icetea, lemonade or coffee?'
-                        number_of_drinks = ask 'How many of these drinks would you like?'
+                      define drinks_order
+                          drink = ask 'water, coke, icetea, lemonade or coffee?'
+                          number_of_drinks = ask 'How many of these drinks would you like?'
 
-                        print 'YOU ORDERED'
-                        print number_of_drinks ' ' drink
+                          print 'YOU ORDERED'
+                          print number_of_drinks ' ' drink
 
-                    'Welcome to Hedy pizza'
-                    more_food = ask 'Would you like to order a pizza?'
-                    while more_food = 'yes'
-                        return food_order
-                        more_food = ask 'Would you like to order a pizza?'
-                    more_drinks = ask 'Would you like to order some drinks?'
-                    while more_drinks == 'yes'
-                        call drink_order
-                        more_drinks == ask 'Would you like to order more drinks?'
+                      'Welcome to Hedy pizza'
+                      more_food = ask 'Would you like to order a pizza?'
+                      while more_food = 'yes'
+                          return food_order
+                          more_food = ask 'Would you like to order a pizza?'
+                      more_drinks = ask 'Would you like to order some drinks?'
+                      while more_drinks == 'yes'
+                          call drink_order
+                          more_drinks == ask 'Would you like to order more drinks?'
 
 
-                    print 'Thanks for ordering!'
+                      print 'Thanks for ordering!'
             18:
                 story_text: |-
                     ### Exercise
@@ -1498,20 +1498,20 @@ adventures:
                     ```
                 start_code: |4
 
-                    animals = ['pig', 'dog', 'cow']
-                    sounds = ['oink', 'woof', 'moo']
-                    for i in range 1 to 3
-                        animal = animals[i]
-                        sound = sounds[i]
-                        print 'Old McDonald had a farm'
-                        print 'E I E I O!'
-                        print 'and on that farm he had a ' animal
-                        print 'E I E I O!'
-                        print 'with a ' sound sound ' here'
-                        print 'and a ' sound sound ' there'
-                        print 'here a ' sound
-                        print 'there a ' sound
-                        print 'everywhere a ' sound sound
+                      animals = ['pig', 'dog', 'cow']
+                      sounds = ['oink', 'woof', 'moo']
+                      for i in range 1 to 3
+                          animal = animals[i]
+                          sound = sounds[i]
+                          print 'Old McDonald had a farm'
+                          print 'E I E I O!'
+                          print 'and on that farm he had a ' animal
+                          print 'E I E I O!'
+                          print 'with a ' sound sound ' here'
+                          print 'and a ' sound sound ' there'
+                          print 'here a ' sound
+                          print 'there a ' sound
+                          print 'everywhere a ' sound sound
     default:
         name: Introduzione
         default_save_name: intro
@@ -2002,7 +2002,7 @@ adventures:
         levels:
             17:
                 story_text: |
-                    In this level you can also use a new command: `{elif}`. `{elif}` is short for `{else}` `{if}` and you need it when you want to make 3 (or more!) options.
+                    In this level you can also use a new command: `{elif}`. `{elif}` is a combination of the keywords `{else}` and `{if}` and you need it when you want to make 3 (or more!) options.
                     Check it out!
                 example_code: |
                     ```
@@ -4699,7 +4699,7 @@ adventures:
                         {forward} 50
                         {color} {black}
                     ```
-                start_code: '# place your code here'
+                start_code: '# posiziona il tuo codice qui'
             10:
                 story_text: |
                     In this level you can make the turtle draw a figure.
@@ -4717,7 +4717,7 @@ adventures:
                     {for} distance {in} distances
                         {forward} distance
                     ```
-                start_code: '# Write your code here'
+                start_code: '# posiziona il tuo codice qui'
             12:
                 story_text: |
                     We can use functions to draw more complex figures with less code.
@@ -4758,28 +4758,24 @@ adventures:
         description: while
         levels:
             15:
-                story_text: |-
-                    We are going to learn a new loop, the `{while}` loop! We continue the loop as long as the statement is true.
-                    So don't forget to change the value in the loop.
-
-                    In the example code, we continue until a correct answer has been given.
-                    If the correct answer is never given, the loop never ends!
+                story_text: "Stiamo per imparare un nuovo loop, il `{while}` loop!Continuiamo il ciclo finché la condizione è vera. \nQuindi, non dimenticare di modificare il valore nel loop.\n\nNel codice di esempio, continuiamo fino a quando non viene fornita una risposta corretta.\n Se la risposta\
+                    \ corretta non viene mai fornita, il loop non termina mai!"
                 example_code: |
                     ```
-                    answer = 0
-                    {while} answer != 25
-                        answer = {ask} 'What is 5 times 5?'
-                    {print} 'A correct answer has been given'
+                    risposta = 0
+                    {while} risposta != 25
+                        risposta = {ask} 'Quanto fa 5 per 5?'
+                    {print} 'La risposta é corretta'
                     ```
                 start_code: |-
-                    answer = 0
-                    {while} answer != 25
-                        answer = {ask} 'What is 5 times 5?'
-                    {print} 'A correct answer has been given'
+                    risposta = 0
+                    {while} risposta != 25
+                            risposta= {ask} 'Quanto fa 5 per 5?'
+                    {print} 'La risposta é corretta'
     years:
-        name: New Year's
-        default_save_name: New Year's Countdown
-        description: Countdown to the new year!
+        name: Anno nuovo
+        default_save_name: Conto alla rovescia per il nuovo anno
+        description: Conto alla rovescia per il nuovo anno!
         levels:
             11:
                 story_text: |
@@ -4793,4 +4789,4 @@ adventures:
                         {print} i
                     {print} 'Happy New Year!'
                     ```
-                start_code: '# place your code here'
+                start_code: '# posiziona il tuo codice qui'

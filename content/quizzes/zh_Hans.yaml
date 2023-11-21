@@ -216,7 +216,7 @@ levels:
                 feedback: 不是的
             -   option: 你可以用`{print}`命令显示文本
                 feedback: 不错
-            -   option: 你可以用 {sleep} 命令清除屏幕上的文本。
+            -   option: 你可以用 `{sleep}` 命令清除屏幕上的文本。
                 feedback: 这不是`{sleep}`的作用。
             hint: '`{print}`的作用仍然和第1关中一样'
             correct_answer: C
@@ -619,7 +619,7 @@ levels:
                 feedback: 做得好！
             -   option: 没什么，这是正确的代码！
                 feedback: 找出错误！
-            hint: 看第3行
+            hint: 看第4行
             correct_answer: C
             question_score: '10'
         10:
@@ -638,7 +638,7 @@ levels:
                 feedback: 赞！
             -   option: |-
                     ```
-                    {remove} walked yesterday {to} walkers
+                    {remove} walked_yesterday {to} walkers
                     ```
                 feedback: '`{remove} {from}` or `{add} {to}`, not `{remove} {to}`'
             -   option: |-
@@ -774,122 +774,122 @@ levels:
             correct_answer: C
             question_score: '10'
         6:
-            question_text: What would be a good next line in this code?
-            code: prices {is} 1 dollar, 100 dollars, 1 million dollars
+            question_text: 这段代码中的下一行应该是什么？
+            code: 价格 {is} 1 美元、100 美元、100 万美元
             mp_choice_options:
             -   option: |-
                     ```
                     {print} 'You win...' prices {at} {random}
                     ```
-                feedback: Great! You get it!
+                feedback: 赞！ 你懂了！
             -   option: |-
                     ```
                     {print} You win... 'prices {at} {random}'
                     ```
-                feedback: Hedy will literally print 'prices {at} {random}'
+                feedback: 海蒂 会逐字打印'prices {at} {random}'
             -   option: |-
                     ```
                     {print} You win... prices {at} {random}
                     ```
-                feedback: You need some quotation marks!
+                feedback: 您需要一些引号！
             -   option: |-
                     ```
                     {print} 'You win... prices {at} {random}'
                     ```
-                feedback: Hedy will literally print 'prices {at} {random}''
+                feedback: 海蒂 会逐字打印 "prices {at} {random}"
             hint: 仔细想想：什么是变量？我们应该把它放在引号外吗？放在引号里面的普通的词汇有哪些？
             correct_answer: A
             question_score: '10'
         7:
-            question_text: What's wrong with this code?
+            question_text: 这段代码有什么问题？
             code: |-
-                question {is} {ask} What do you want to know?
-                answers {is} yes, no, maybe
-                {print} answers {at} {random}
+                问题 {is} {ask} 你想知道什么？
+                答案{is} 是，不是，也许
+                {print}回答{at} {random}
             mp_choice_options:
-            -   option: Quotation marks are missing in line 1
-                feedback: Correct!
-            -   option: Quotation marks are missing in line 2
-                feedback: A variable doesn't need quotes
-            -   option: Quotation marks are missing in line 3
-                feedback: You don't want Hedy to literally print 'answers {at} {random}' so no quotation marks needed here!
-            -   option: Nothing, this code is good as is!
-                feedback: Look carefully. You missed a mistake!
-            hint: Check each line on whether they'd need quotation marks or not.
+            -   option: 第 1 行缺少引号
+                feedback: 正确!
+            -   option: 第 2 行缺少引号
+                feedback: 变量不需要引号
+            -   option: 第 3 行缺少引号
+                feedback: 您不希望 海蒂 按字面意思打印 'answers {at} {random}'，因此此处不需要引号！
+            -   option: 没什么，这段代码本来就很好！
+                feedback: 仔细地看。 你错过了一个错误！
+            hint: 检查每一行是否需要引号。
             correct_answer: A
             question_score: '10'
         8:
-            question_text: What would be a good next line for this code?
+            question_text: 这段代码的下一行应该是什么？
             code: |-
-                {print} 'Welcome at the money show!'
-                {print} 'In front of you are 3 doors'
-                door {is} {ask} 'Which door do you choose?'
+                {print} '欢迎来到金钱秀！'
+                {print} '在你面前有三扇门'
+                门{is} {ask}“你选择哪扇门？”
             mp_choice_options:
             -   option: |-
                     ```
                     {print} So you pick door door
                     ```
-                feedback: We need quotation marks
+                feedback: 我们需要引号
             -   option: |-
                     ```
                     {print} 'So you pick ' door door
                     ```
-                feedback: If the player chooses door 3, Hedy will say 'So you pick 3 3
+                feedback: 如果玩家选择 3 号门，海蒂 会说'所以你选择 3 3'
             -   option: |-
                     ```
                     {print} 'So you pick door ' door
                     ```
-                feedback: Super!
+                feedback: 超赞!
             -   option: |-
                     ```
                     {print} 'So you pick door door'
                     ```
-                feedback: Hedy will literally print 'So you pick door door
-            hint: The second word door should be replaced with the number, the first should still be the word door...
+                feedback: 海蒂 会直接打印 '所以你选择门'
+            hint: 第二个“门”字应该换成数字，第一个应该还是“门”字……
             correct_answer: C
             question_score: '10'
         9:
-            question_text: What will never appear in your output screen?
+            question_text: 什么永远不会出现在你的输出屏幕上？
             code: |-
-                clubs {is} Real Madrid, Bayern Munchen, Manchester United, Ajax
-                {print} clubs {at} {random} ' is going the win the champions league'
+                俱乐部 {is} 皇家马德里、拜仁慕尼黑、曼联、阿贾克斯
+                {print} 俱乐部 {at} {random} '将赢得冠军联赛'
             mp_choice_options:
-            -   option: Ajax is going to win the champions league
-                feedback: Hedy could `{print}` that
-            -   option: Real Madrid is going to win the champions league
-                feedback: Hedy could `{print}` that
-            -   option: Bayer Munchen is going to win the champions league
-                feedback: Hedy could `{print}` that
-            -   option: FC Barcelona is going to win the champions league
-                feedback: That's right. It's not in the list
-            hint: What are Hedy's options to randomly pick from?
+            -   option: 阿贾克斯将赢得冠军联赛
+                feedback: 海蒂 可以`{print}` 那些
+            -   option: 皇马将赢得欧冠冠军
+                feedback: 海蒂可以 `{print}` 那些
+            -   option: 拜仁慕尼黑将赢得欧冠冠军
+                feedback: 海蒂可以 `{print}` 那些
+            -   option: 巴塞罗那足球俱乐部将赢得冠军联赛
+                feedback: 这是正确的。 它不在列表中
+            hint: 海蒂 可以随机选择哪些选项？
             correct_answer: D
             question_score: '10'
         10:
-            question_text: Which statement is true?
+            question_text: 哪个论述是对的？
             code: |-
-                people {is} mom, dad, Emma, Sophie
-                {print} The dishes are done by...
-                {print} people {at} {random}
+                人们{is}妈妈、爸爸、艾玛、苏菲
+                {print} 菜肴是由...做的
+                {print}人们{at} {random}
             mp_choice_options:
-            -   option: Quotation marks are missing in line 1
-                feedback: A list doesn't need quotation marks
-            -   option: Quotation marks are missing in line 2
-                feedback: Correct
-            -   option: Quotation marks are missing in both line 2 and 3
-                feedback: Line 3 doesn't need quotation marks because it's not printed literally
-            -   option: Nothing, this code has no mistakes
-                feedback: You missed one!
-            hint: 有一行需要加引号，因为你想逐字打印它。
+            -   option: 第 1 行缺少引号
+                feedback: 列表不需要引号
+            -   option: 第 2 行缺少引号
+                feedback: 正确
+            -   option: 第 2 行和第 3 行都缺少引号
+                feedback: 第 3 行不需要引号，因为它不是按字面打印的
+            -   option: 没什么，这段代码没有错误
+                feedback: 你错过了一个！
+            hint: 有一行需要引号，因为您希望它按字面意思打印。
             correct_answer: B
             question_score: '10'
     5:
         1:
-            question_text: 应该在_?_上填写哪个命令？
+            question_text: 应该在_上填写哪个命令？
             code: |-
                 数字 {is} {ask} '你的幸运数字是多少？'
                 {if} 数字 {is} 5 {print} '我也是！'
-                _?_ {print} '我的幸运数字是 5！'
+                _{print} '我的幸运数字是 5！'
             mp_choice_options:
             -   option: |-
                     ```
@@ -915,15 +915,15 @@ levels:
             correct_answer: D
             question_score: '10'
         2:
-            question_text: What appears in your output screen when you type in the name Hedy?
+            question_text: 当您输入 海蒂 名字时，输出屏幕上会出现什么？
             code: |-
-                name {is} {ask} 'What is your name?'
-                {if} name {is} Hedy {print} 'fun' {else} {print} 'less fun'
+                name {is} {ask} '你叫什么名字？
+                {if} name {is} 海蒂 {print} '有趣' {else} {print} '没那么有趣'
             mp_choice_options:
-            -   option: fun
-                feedback: That's right!
-            -   option: less fun
-                feedback: If the name is Hedy, it will say 'fun''
+            -   option: 有点意思
+                feedback: 这是正确的！
+            -   option: 不太有趣
+                feedback: 如果名字是 海蒂，它会说'有趣'
             -   option: Hedy
                 feedback: 不，它不打印名字
             -   option: Error
@@ -941,7 +941,7 @@ levels:
             -   option: 正确!
                 feedback: 当输入正确的密码时会打印此信息
             -   option: SECRET
-                feedback: 这是正确的！'
+                feedback: 这是正确的!
             -   option: password
                 feedback: 密码不是password...
             -   option: ALARM INTRUDER
@@ -990,7 +990,7 @@ levels:
             code: |-
                 {print}'我是足球算命师 海蒂!'
                 {print} '我会预测你的球队最终会取得什么名次!'
-                俱乐部{问}'你最喜欢哪个俱乐部?'
+                俱乐部{ask}'你最喜欢哪个俱乐部?'
                 {if} 俱乐部 {is} 阿贾克斯 {print} '阿贾克斯当然会赢!'
                 _ {print} '抱歉，你的俱乐部将排在最后......'
             mp_choice_options:
@@ -1105,7 +1105,7 @@ levels:
                 {print} '逃离鬼屋！'
                 {print} '你面前有 3 扇门'
                 门 {is} {ask} '你选择哪扇门？'
-                怪物{是}吸血鬼、狼人、巨型蜘蛛
+                怪物{is}吸血鬼、狼人、巨型蜘蛛
                 {if} 门 {is} 2 {print} '耶，你可以逃脱了！'
                 {else} {print} '你正在被......' 怪物吞噬{at} {random}
             mp_choice_options:
@@ -1366,7 +1366,7 @@ levels:
             question_text: 代码中哪个单词是错误的？
             code: |-
                 {print}'我很忧郁'
-                {repeat} 7 {times} {打印} 'da ba dee, da ba da'
+                {repeat} 7 {times} {print} 'da ba dee, da ba da'
             mp_choice_options:
             -   option: |-
                     ```
@@ -1595,27 +1595,27 @@ levels:
             question_text: 这段代码会产生什么输出？
             code: |-
                 {repeat} 2 {times}
-                    {print} 'Hello'
-                    {print} 'Im Hedy!'
+                     {print}“你好”
+                     {print}“我是海蒂！”
             mp_choice_options:
             -   option: |-
                     你好
                     我是海蒂！
-                feedback: Everything is printed twice.
+                feedback: 所有内容都打印两次。
             -   option: |-
                     你好
                     你好
                     我是海蒂
-                feedback: The second line is repeated twice as well.
+                feedback: 第二行也重复两次。
             -   option: |-
                     你好
                     我是海蒂！
                     你好
                     我是海蒂！
-                feedback: Super!
+                feedback: 极好的！
             -   option: "你好 \n你好 \n我是海蒂！\n我是海蒂！"
-                feedback: Everything is printed twice
-            hint: Both lines are repeated twice.
+                feedback: 所有内容都打印两次
+            hint: 这两行都重复两次。
             correct_answer: C
             question_score: '10'
         2:
@@ -1629,23 +1629,23 @@ levels:
             -   option: 必须去掉`{print}`命令。
                 feedback: 不，你需要它。
             -   option: '`{repeat}`命令打错了。'
-                feedback: 不，没打错
-            -   option: 第二行开头需要缩进空四格。
+                feedback: 不，`{repeat}`是正确的拼写
+            -   option: 第二行开头需要缩进四个空格。
                 feedback: 正确！
             hint: 第二行缺了什么？
             correct_answer: D
             question_score: '10'
         3:
-            question_text: What output will be produced when you run this program?
+            question_text: 运行该程序时会产生什么输出？
             code: |-
                 {repeat} 3 {times}
-                    {print} 'Baby shark tututudutudu'
-                {print} 'Baby shark'
+                    {print} '小鲨鱼 tututudutudu'
+                {print} '小鲨鱼'
             mp_choice_options:
             -   option: |-
                     Baby shark tututudutudu
                     Baby shark
-                feedback: Mind the `{repeat}` command!
+                feedback: 注意 `{repeat}`命令！
             -   option: |-
                     Baby shark tututudutudu
                     Baby shark
@@ -1653,57 +1653,57 @@ levels:
                     Baby shark
                     Baby shark tututudutudu
                     Baby shark
-                feedback: The last line has no indentation, so it's not repeated.
+                feedback: 最后一行没有缩进，因此不再重复。
             -   option: |-
                     Baby shark tututudutudu
                     Baby shark tututudutudu
                     Baby shark tututudutudu
                     Baby shark
-                feedback: Right!
+                feedback: 对了！
             -   option: |-
                     Baby shark tututudutudu
                     Baby shark
                     Baby shark
                     Baby shark
-                feedback: What is being repeated and what isn't.
-            hint: What is being repeated and what is not?.
+                feedback: 什么是重复的，什么不是。
+            hint: 什么是重复的，什么不是？
             correct_answer: C
             question_score: '10'
         4:
-            question_text: Which output is correct?
+            question_text: 哪个输出是正确的？
             code: |-
-                {print} 'The children went:'
+                {print} '孩子们去了：'
                 {repeat} 2 {times}
-                    {print} 'Yay!'
-                    {print} 'Were going on holiday!'
+                     {print}“耶！”
+                     {print} '我们要去度假了！'
             mp_choice_options:
             -   option: "孩子们去了： \n耶！ \n要去度假了！"
-                feedback: Mind the `{repeat}` command !
+                feedback: 注意`{repeat}`命令！
             -   option: "孩子们去了： \n耶! \n我们要去度假了! \n耶! \n我们要去度假了!"
-                feedback: Correct!
+                feedback: 正确!
             -   option: "孩子们去了： \n耶！ \n耶！ \n我们要去度假了！ \n我们要去度假了！"
-                feedback: This order is incorrect.
+                feedback: 这个顺序是不正确的。
             -   option: "孩子们去了：\n耶！ \n耶！  \n我们要去度假了!"
-                feedback: The last line is repeated too.
-            hint: The block under the `{repeat}` command is repeated twice.
+                feedback: 最后一行也重复。
+            hint: '`{repeat}`命令下的块重复两次。'
             correct_answer: B
             question_score: '10'
         5:
-            question_text: What is wrong with this code?
+            question_text: 这段代码有什么问题？
             code: |-
-                end = {ask} 'Do you want a happy or a sad ending?'
-                {if} end {is} happy {print} 'They lived happily ever after'
-                {else} {print} 'The world exploded. The end.'
+                end = {ask} '你想要一个快乐的结局还是悲伤的结局？
+                {if} end {is} 欢乐 {print} '他们从此过上了幸福的生活'a
+                {else} {print} '世界爆炸了。 结束。'
             mp_choice_options:
-            -   option: The `{print}` commands on the last two lines should start on new lines en start with 4 spaces.
-                feedback: That's right!
+            -   option: 最后两行的`{print}`命令应换行并以 4 个空格开头。
+                feedback: 这是正确的！
             -   option: '`{else}` is not a command!'
-                feedback: It is!
-            -   option: Lines that start with `{if}` should start with 4 spaces
-                feedback: That's not true
-            -   option: '`{ask}` is no longer a command'
-                feedback: That's not true
-            hint: Something is wrong with indentation
+                feedback: 正是！
+            -   option: 以 `{if}` 开头的行应以 4 个空格开头
+                feedback: 这不是真的
+            -   option: '`{ask}` 不再是一个命令'
+                feedback: 这不是真的
+            hint: 缩进有问题
             correct_answer: A
             question_score: '10'
         6:
@@ -1742,16 +1742,16 @@ levels:
         7:
             question_text: 这段代码哪里错了？
             code: |-
-                食物 = {ask} '你想吃什么？'
-                {if} 食物 {is} 薯条
-                酱汁 = {ask} '你想要什么酱？'
+                food = {ask} '你想吃什么？'
+                {if} food {is} 薯条
+                sauce= {ask} '你想要什么酱？'
                     {print} '一份薯条配' 酱汁
-                {if} 食物 {is} 披萨
-                    配料 = {ask} '你想要什么配料？'
+                {if} food {is} 披萨
+                    topping = {ask} '你想要什么配料？'
                     {print} '一份披萨配' 配料
                 {print} '这些是你点的'
             mp_choice_options:
-            -   option: 没有错。这段代码是正确的！
+            -   option: 没错。这段代码是正确的！
                 feedback: 有地方出错了！
             -   option: '`{ask}`命令后面不能用`{if}`命令。'
                 feedback: 可以用！
@@ -1763,7 +1763,7 @@ levels:
             correct_answer: D
             question_score: '10'
         8:
-            question_text: In which of the codes is the indentation done right?
+            question_text: 哪段代码中的缩进正确嘛？
             mp_choice_options:
             -   option: |-
                     ```
@@ -1774,7 +1774,7 @@ levels:
                           {else}
                               {print} '你错了！'
                     ```
-                feedback: You are wrong!
+                feedback: 您错了！
             -   option: |-
                     ```
                     {if} 答案{is} 32
@@ -1784,7 +1784,7 @@ levels:
                     {else}
                     {print} '你错了！'
                     ```
-                feedback: You are wrong!
+                feedback: 您错了！
             -   option: |-
                     ```
                     {if} 答案{is} 32
@@ -1794,7 +1794,7 @@ levels:
                     {else}
                         {print} '你错了！'
                     ```
-                feedback: You are... right!
+                feedback: 你...对了！
             -   option: |-
                     ```
                     {if} 答案{is} 32
@@ -1804,12 +1804,12 @@ levels:
                     {else}
                         {print} '你错了！'
                     ```
-                feedback: You are wrong!
-            hint: What should happen if the person is right? And what else?
+                feedback: 您错了！
+            hint: 如果这个人是对的，会发生什么？ 还有什么？
             correct_answer: C
             question_score: '10'
         9:
-            question_text: What line(s) in this code should start with 4 spaces?
+            question_text: 此代码中的哪一行应以 4 个空格开头？
             code: |-
                 1 音乐 = {ask} '你最喜欢的音乐类型是什么？'
                 2{if} 音乐{is} 摇滚
@@ -1817,58 +1817,58 @@ levels:
                 4{else}
                 5{print} '👎'
             mp_choice_options:
-            -   option: Line 2 and 4
-                feedback: The lines after the `{if}` and `{else}` command should start with 4 spaces
-            -   option: Only line 3
-                feedback: Not only 3...
-            -   option: Line 3, 4 and 5
-                feedback: Line 4 shouldn't
-            -   option: Line 3 and 5
-                feedback: Great job!
-            hint: The lines after an `{if}` or `{else}` command should start with 4 spaces.
+            -   option: 第 2 和 第4行
+                feedback: '`{if}` 和 `{else}` 命令后面的行应以 4 个空格开头'
+            -   option: 仅第3行
+                feedback: 不仅第3行...
+            -   option: 第 3,4 和 第5行
+                feedback: 不应该是第 4 行
+            -   option: 第 3 和 第5行
+                feedback: 干的好!
+            hint: '`{if}` 或 `{else}` 命令后面的行应以 4 个空格开头。'
             correct_answer: D
             question_score: '10'
         10:
-            question_text: Which statement is true?
+            question_text: 哪个论述是对的？
             code: |-
                 1 级别 ={ask} '你学到哪一级了？'
                 2 {if} 级别{is} 8
                 3 {print} '干得好！'
             mp_choice_options:
-            -   option: All lines should start with 4 spaces
-                feedback: That's not true
-            -   option: Line 2 and 3 should start with 4 spaces
-                feedback: That's not true
-            -   option: Line 2 should start with 4 spaces
-                feedback: That's not true
-            -   option: Line 3 should start with 4 spaces
-                feedback: You are correct!
-            hint: Only one line starts with 4 spaces, but which one...?
+            -   option: 所有行都应以 4 个空格开头
+                feedback: 这不是真的
+            -   option: 第 2 行和第 3 行应以 4 个空格开头
+                feedback: 这不是真的
+            -   option: 第 2 行应以 4 个空格开头
+                feedback: 这不是真的
+            -   option: 第 3行应以 4 个空格开头
+                feedback: 你是对的！
+            hint: 只有一行以 4 个空格开头，但是哪一行...？
             correct_answer: D
             question_score: '10'
     9:
         1:
-            question_text: What is wrong with this code?
+            question_text: 这段代码有什么问题？
             code: |-
                 {repeat} 3 {times}
-                   eten = {ask} 'What would you like to eat?'
-                   {if} food {is} fries
-                       sauce = {ask} 'What sauce would you like?'
-                       {print} 'One fries with ' sauce
-                   {if} food {is} pizza
-                       topping = {ask} 'What topping would you like?'
-                       {print} 'One pizza with ' topping
-                {print} 'That you for your order'
+                    food = {ask} '你想吃什么？'
+                    {if}食物{is}薯条
+                        sauce = {ask} '你想要什么酱汁？'
+                        {print} '一份薯条配'酱汁
+                    {if}食物{is}披萨
+                        topping = {ask} '您想要什么配料？'
+                        {print} '一份带有 ' 配料的披萨
+                {print} '感谢您的订单'
             mp_choice_options:
-            -   option: Nothing this code is correct!
+            -   option: 没什么, 这段代码是正确的！
                 feedback: 这是正确的！
-            -   option: You're not allowed to use an `{if}` command after an `{ask}` command.
+            -   option: 您不能在`{ask}`命令之后使用`{if}`命令。
                 feedback: 可以用！
-            -   option: You don't have to use indentation twice.
-                feedback: You always have to use indentation.
-            -   option: The indentation is wrong in the last `{if}` command.
-                feedback: It not, though.
-            hint: all the indentation is done correctly.
+            -   option: 您不必使用缩进两次。
+                feedback: 你总是必须使用缩进。
+            -   option: 最后一个`{if}`命令中的缩进是错误的。
+                feedback: 这不是缩进。
+            hint: 所有缩进均正确完成。
             correct_answer: A
             question_score: '10'
         2:
@@ -1913,64 +1913,64 @@ levels:
             correct_answer: D
             question_score: '10'
         3:
-            question_text: Which case should you choose to win a million dollars?
+            question_text: 您应该选择哪个案例来赢得百万美元？
             code: |-
-                {print} 'Choose the right case and win!'
-                case = {ask} 'Which case will you pick? 1 or 2?'
-                {if} case {is} 1
-                     action = {ask} 'Open it or sell it?'
-                         {if} action {is} sell
-                             {print} 'You sell your case for 10 dollars'
-                         {if} action {is} open
-                             {print} 'You open the case and win an apple pie'
-                {if} case {is} 2
-                     action = {ask} 'Open it or sell it?'
-                         {if} action {is} sell
-                             {print} 'You sell the case for 500 dollars'
-                         {if} action {is} open
-                             {print} 'You open the case and win a million dollars!'
+                {print} '选择正确的情况并获胜！'
+                case = {ask} '你会选择哪种情况？ 1还是2？
+                {if} 情况 {is} 1
+                      action = {ask} '打开还是出售？'
+                          {if} 行动 {is} 卖出
+                              {print} '你以 10 美元的价格出售你的箱子'
+                          {if} 操作 {is} 打开
+                              {print} '您打开箱子并赢得苹果派'
+                {if} 情况 {is} 2
+                      action = {ask} '打开还是出售？'
+                          {if} 行动 {is} 卖出
+                              {print} '你以 500 美元的价格出售这个箱子'
+                          {if} 操作 {is} 打开
+                              {print} '您打开箱子并赢得一百万美元！'
             mp_choice_options:
-            -   option: case 1, sell
-                feedback: You don't win a million!
-            -   option: case 1, open
-                feedback: You don't win a million
-            -   option: case 2, sell
-                feedback: You don't win a million
-            -   option: case 2, open
-                feedback: Great job! You win!
-            hint: Follow the right path
+            -   option: 情况1,出售
+                feedback: 你没能赢得一百万!
+            -   option: 情况1，打开
+                feedback: 你没能赢得一百万
+            -   option: 情况2,出售
+                feedback: 你没能赢得一百万
+            -   option: 情况2,打开
+                feedback: 干得好！ 你赢了！
+            hint: 遵循正确的道路
             correct_answer: D
             question_score: '10'
         4:
-            question_text: Which statement is true?
+            question_text: 哪个论述是对的？
             code: |-
-                name = {ask} 'What is your name?'
-                size = {ask} 'What is your shoe size?'
-                {if} size {is} 38
-                    {if} name {is} Cinderella
-                        {print} 'I was looking for you!'
-                    {else}
-                        {print} 'You are not the one!'
+                name = {ask} '你叫什么名字？
+                size = {ask} '你的鞋码是多少？'
+                {if} 尺寸 {is} 38
+                     {if} 名字 {is} 灰姑娘
+                         {print}'❤️❤️❤️'
+                     {else}
+                         {print} '你不是那个人！'
                 {else}
-                    {print} 'Ill keep looking'
+                     {print} '我会继续寻找'
             mp_choice_options:
-            -   option: Sleeping Beauty with shoe size 38 gets the output 'Ill keep looking'
-                feedback: No, she gets 'You are not the one!'
-            -   option: 'Cinderella with shoe size 40 gets the output: ''I was looking for you!'''
-                feedback: No, she gets 'Ill keep looking'
-            -   option: Sleeping Beauty with shoe size 40 gets the output 'Ill keep looking'
-                feedback: That's right!
-            -   option: Cinderella with shoe size 40 gets the output 'I was looking for you!'
-                feedback: No she gets 'Ill keep looking'
-            hint: No matter what your name is, if you have shoe size 40 you will get the message 'Ill keep looking'.
+            -   option: 鞋号为 38 的睡美人得到输出“我会继续寻找”
+                feedback: 不，她得到的是“你不是那个人！”
+            -   option: 鞋号为 40 的灰姑娘得到输出“❤️❤️❤️”
+                feedback: 不，她得到“我会继续寻找”
+            -   option: 鞋号为 40 的睡美人得到输出“我会继续寻找”
+                feedback: 这是正确的！
+            -   option: 鞋号为 38 的灰姑娘得到的输出是“我会继续寻找”
+                feedback: 不，她得到了“❤️❤️❤️”
+            hint: 无论你名字是什么，如果你的鞋码为 40，你都会收到“我会继续寻找”的消息。
             correct_answer: C
             question_score: '10'
         5:
-            question_text: Which code produced this output?
+            question_text: 哪个代码产生了这个输出？
             output: |-
-                Icecream is the best!
-                Icecream is the best!
-                Icecream is the best!
+                冰淇淋是最好的!
+                冰淇淋是最好的!
+                冰淇淋是最好的!
             mp_choice_options:
             -   option: |-
                     ```
@@ -1979,7 +1979,7 @@ levels:
                         {repeat} 3 {times}
                         {print} 'Icecream is the best!'
                     ```
-                feedback: Don't forget the indentation after `{repeat}` commands.
+                feedback: 不要忘记`{repeat}`命令后面的缩进。
             -   option: |-
                     ```
                     desert = {ask} 'What is your favorite type of desert?'
@@ -1987,7 +1987,7 @@ levels:
                     {repeat} 3 {times}
                         {print} 'Icecream is the best!'
                     ```
-                feedback: Use indentation after an `{if}` command
+                feedback: 在 `{if}` 命令后使用缩进
             -   option: |-
                     ```
                     desert = {ask} 'What is your favorite type of desert?'
@@ -1995,7 +1995,7 @@ levels:
                         {repeat} 3 {times}
                             {print} 'Icecream is the best!'
                     ```
-                feedback: Perfect
+                feedback: 完美
             -   option: |-
                     ```
                     {repeat} 3 {times}
@@ -2004,31 +2004,31 @@ levels:
                             {repeat} 3 {times}
                             {print} 'Icecream is the best!'
                     ```
-                feedback: There are 2 `{repeat}` commands in this code.
-            hint: Watch the indentation
+                feedback: 此代码中有 2 个`{repeat}`命令。
+            hint: 观察缩进
             correct_answer: C
             question_score: '10'
         6:
-            question_text: After which command(s) should you use indentation (starting the next line with 4 spaces)?
+            question_text: 在哪些命令之后应该使用缩进（下一行以 4 个空格开始）？
             mp_choice_options:
             -   option: '`{if}`'
-                feedback: Don't forget the others
+                feedback: 别忘了其他人
             -   option: '`{if}` `{repeat}`'
-                feedback: Don't forget `{else}`!
+                feedback: 不要忘记 `{else}`!
             -   option: '`{if}` `{else}` `{repeat}`'
-                feedback: Keep it up!
+                feedback: 继续加油！
             -   option: '`{if}` `{else}` `{repeat}` `{print}`'
-                feedback: Not with print
-            hint: Indentation happens on the line below some commands
+                feedback: 不使用{print}
+            hint: 缩进发生在某些命令下方的行上
             correct_answer: C
             question_score: '10'
         7:
             question_text: 如果你点了一个中等大小的比萨和一杯可乐，你会得到5元的折扣。<br>但这段代码中存在一个错误！如何调试这段代码？
             code: |-
-                {if} food {is} pizza
-                {if} size {is} medium
-                {if} drink {is} coke
-                price = price - 2
+                {if}食物 {is} 披萨
+                {if} 尺寸 {is} 中号
+                {if} 饮料 {is} 可乐
+                价格 = 价格 - 5
             mp_choice_options:
             -   option: |-
                     ```
@@ -2037,7 +2037,7 @@ levels:
                             {if} drink {is} coke
                                 price = price - 2
                     ```
-                feedback: Amazing!
+                feedback: 令人惊奇！
             -   option: |-
                     ```
                     {if} food {is} pizza
@@ -2045,7 +2045,7 @@ levels:
                     {if} drink {is} coke
                         price = price - 2
                     ```
-                feedback: 第二个{if} 命令是错误代码！
+                feedback: 第二个`{if}`未命中代码！
             -   option: |-
                     ```
                     {if} food {is} pizza
@@ -2053,7 +2053,7 @@ levels:
                     {if} drink {is} coke
                             price = price - 2
                     ```
-                feedback: 不可以连续使用两个 {if}命令， 这样是错误的 。
+                feedback: 两个连续的`{if}`永远不正确。
             -   option: |-
                     ```
                     {if} food {is} pizza
@@ -2061,55 +2061,55 @@ levels:
                             {if} drink {is} coke
                             price = price - 2
                     ```
-                feedback: 差不多是正确的不过请看最后一行。
-            hint: After each `{if}` command, the line below should indent
+                feedback: 几乎正确。再看最后一行
+            hint: 在每个`{if}`命令之后，下面的行应该缩进
             correct_answer: A
             question_score: '10'
         8:
-            question_text: What is wrong is this code?
+            question_text: 这段代码有什么问题？
             code: "年龄={ask} ‘生日快乐!你多大了？’\n唱歌={ask}‘你想让我们唱歌吗？’\n\t{if} 唱歌{is} 是\n\t\t{repeat}岁{times}\n\t\t\t{print}‘加油’"
             mp_choice_options:
-            -   option: You can't put two questions in a row
-                feedback: Yes you can.
-            -   option: The variable called 'age' is later on used as 'years'
-                feedback: Keen eye! Good job!
-            -   option: You're not allowed to start with 8 spaces, like line 4 and 5 do
-                feedback: You actually must start like that.
-            -   option: A code must always start with a `{print}` command in the first line
-                feedback: That's not true.
-            hint: The indentation is done right this time
+            -   option: 你不能连续提出两个问题
+                feedback: 是的你可以。
+            -   option: 名为“age”的变量后来被用作“years”
+                feedback: 敏锐的眼光！干得好！
+            -   option: 您不能像第 5 行那样以 8 个空格开头
+                feedback: 你实际上必须这样开始。
+            -   option: 代码必须始终以第一行中的`{print}`命令开头
+                feedback: 那不是真的。
+            hint: 这次缩进是正确的
             correct_answer: B
             question_score: '10'
         9:
-            question_text: How many `{if}` commands can be placed inside another `{if}` command?
+            question_text: 在另一个`{if}`命令中可以放置多少个`{if}`命令？
             mp_choice_options:
-            -   option: None, that is not allowed
-                feedback: You are allowed to
-            -   option: Only 1
-                feedback: You could use more if you like
+            -   option: 无，这是不允许的
+                feedback: 你被允许
+            -   option: 只有1
+                feedback: 如果你愿意，你可以使用更多
             -   option: '3'
-                feedback: You could use more if you like
-            -   option: Infinite, as long as you keep using indentation correctly
-                feedback: That is true
-            hint: You can put an `{if}` command inside an `{if}` command.
+                feedback: 如果你愿意，你可以使用更多
+            -   option: 无限，只要你继续正确使用缩进
+                feedback: 这是真的
+            hint: 您可以将`{if}`命令放在`{if}`命令中。
             correct_answer: D
             question_score: '10'
         10:
-            question_text: Which statement is true?
+            question_text: 哪种说法是正确的？
             code: |-
                 1 {repeat} 2 {times}
-                2 {if} level {is} 9
-                3 {print} Great job!
+                2 {if} 水平{is} 9
+                3 {print} 干得好!
             mp_choice_options:
-            -   option: All lines should start with 4 spaces
-                feedback: Only line 2 and 3 start with spaces
-            -   option: Line 2 and 3 should start with 4 spaces
-                feedback: Line 3 should start with 8
-            -   option: Line 2 and 3 should start with 8 spaces
-                feedback: Line 2 should start with 4
-            -   option: line 2 should atart with 4 spaces and line 3 with 8
-                feedback: You are correct!
-            hint: The first line doens't start with any spaces
+            -   option: 所有行都应以 4 个空格开头
+                feedback: 只有第 2 行和第 3 行以空格开头
+            -   option: 第 2 行和第 3 行应以 4 个空格开头
+                feedback: 第 3 行应以 8 开头
+            -   option: 第 2 行和第 3 行应以 8 个空格开头
+                feedback: 第 2 行应以 4 开头
+            -   option: 第 2 行应以 4 个空格开头，第 3 行应以 8 开头
+                feedback: 你是对的!
+            hint: 第一行不以任何空格开头
             correct_answer: D
             question_score: '10'
     10:
@@ -2117,101 +2117,101 @@ levels:
             question_text: 如果我们想打印每份贺词，我们需要在 `_` 上填写什么？
             code: |-
                 compliments = perfect, great job, amazing
-                _?_
+                _
                     {print} compliment
             mp_choice_options:
             -   option: |-
                     ```
                     {for} each compliment
                     ```
-                feedback: That's not it
+                feedback: 不是这个
             -   option: |-
                     ```
                     {for} compliment {in} compliments
                     ```
-                feedback: You deserve all those compliments!
+                feedback: 你值得所有这些赞美!
             -   option: |-
                     ```
                     {if} compliment {in} compliments
                     ```
-                feedback: That's not it
+                feedback: 不是这个
             -   option: |-
                     ```
                     {for} compliments {in} compliment
                     ```
-                feedback: Almost there!
-            hint: '`{for}` each compliment in the lists of compliments...'
+                feedback: 差不多了!
+            hint: 恭维列表中的每条恭维都是`{for}`...
             correct_answer: B
             question_score: '10'
         2:
-            question_text: Which output is correct?
+            question_text: 哪个输出是正确的?
             code: |-
                 meals = pizza, pasta, pancakes
                 {for} meal {in} meals
-                    {print} 'I love ' meal
+                    {print} '我喜欢' meal
             mp_choice_options:
-            -   option: I love pizza
-                feedback: Line 2 says `{for}` each meal in the list of meals. So each meal is printed.
-            -   option: I love pasta
-                feedback: Line 2 says `{for}` each meal in the list of meals. So each meal is printed.
-            -   option: I love pancakes
-                feedback: Line 2 says `{for}` each meal in the list of meals. So each meal is printed.
+            -   option: 我喜欢披萨
+                feedback: 第 2 行用`{for}`显示膳食列表中的每顿饭。 所以每顿饭都会被打印出来。
+            -   option: 我喜欢意面
+                feedback: 第 2 行用`{for}`显示膳食列表中的每顿饭。 所以每顿饭都会被打印出来。
+            -   option: 我喜欢煎饼
+                feedback: 第 2 行用`{for}`显示膳食列表中的每顿饭。 所以每顿饭都会被打印出来。
             -   option: |-
-                    I love pizza
-                    I love pasta
-                    I love pancakes
+                    我喜欢披萨
+                    我喜欢意面
+                    我喜欢煎饼
                 feedback: Great!
-            hint: Line 2 says for each meal in the list of meals. So each meal is printed.
+            hint: 第 2 行表示餐食列表中的每餐。 所以每顿饭都会被打印出来。
             correct_answer: D
             question_score: '10'
         3:
-            question_text: Which output is correct?
+            question_text: 哪个输出是正确的?
             code: |-
                 animals = dogs, cats, hamsters, chickens
                 {for} animal {in} animals
-                    {print} animal ' are lovely pets'
+                    {print} animal ' 是可爱的宠物'
             mp_choice_options:
-            -   option: dogs are lovely pets
-                feedback: Line 2 says {for} each animal in the list of animals. So each animal is {print}ed.
-            -   option: dogs, cats, hamsters, chickens are lovely pets
-                feedback: Each animal gets their own line in the output.
+            -   option: 狗狗是可爱的宠物
+                feedback: 第 2 行{for}表示动物列表中的每个动物。 所以每只动物都被{print}了。
+            -   option: 狗、猫、仓鼠、鸡都是可爱的宠物
+                feedback: 每只动物在输出中都有自己的行。
             -   option: |-
-                    dogs are lovely pets
-                    cats are lovely pets
-                    hamsters are lovely pets
-                    chickens are lovely pets
+                    狗狗是可爱的宠物
+                    猫猫是可爱的宠物
+                    仓鼠是可爱的宠物
+                    小鸡是可爱的宠物
                 feedback: Great!
-            -   option: You don't know yet. Because it chooses one of the animals {at} {random}.
-                feedback: Line 2 says {for} each animal in the list of animals. So each animal is {print}ed.
-            hint: Line 2 says {for} each animal in the list of animals. So each animal is printed
+            -   option: 你还不知道。 因为{at}{random}选择其中一种动物。
+                feedback: 第 2 行{for}表示动物列表中的每个动物。 所以每只动物都被{print}了。
+            hint: 第 2 行{for}表示动物列表中的每个动物。 所以每只动物都被打印了
             correct_answer: C
             question_score: '10'
         4:
-            question_text: What's wrong with this code?
+            question_text: 这段代码有什么问题？
             code: |-
                 groceries = apples, bread, milk
                 {for} item {in} groceries
-                    {print} 'We need ' groceries
+                    {print} '我们需要 ' groceries
             mp_choice_options:
-            -   option: Line 2 needs to start with 4 spaces as indentation
-                feedback: No it doesn't. Only line 3 needs indentation, which it has.
-            -   option: Line 3 does not need to start with 4 spaces as indentation
-                feedback: Line 2 is a `{for}`command so line 3 does need to start with an indent.
-            -   option: Line 3 should say item instead of groceries
-                feedback: Good job!
-            -   option: Line 2 should say groceries instead of item
-                feedback: No it does not.
-            hint: Line 2 says `{for}` each item in the list of groceries
+            -   option: 第2行需要以4个空格开头作为缩进
+                feedback: 不，没有。 只有第 3 行也需要缩进。
+            -   option: 第3行不需要以4个空格开头作为缩进
+                feedback: 第 2 行是一个`{for}`命令，因此第 3 行确实需要以缩进开头。
+            -   option: 第 3 行应该显示 item 而不是grocery
+                feedback: 干得好!
+            -   option: 第 2 行应显示杂货而不是商品
+                feedback: 不，不是的。
+            hint: 第 2 行显示杂货列表中的每一项  `{for}`
             correct_answer: C
             question_score: '10'
         5:
-            question_text: What word should be on the _?_ with these digital dice?
+            question_text: 这些数字骰子的 _?_ 上应该写什么字？
             code: |-
                 {print} 'Welcome to the digital dice!'
                 players = Ann, John, Jesse
                 choices = 1, 2, 3, 4, 5, 6
                 {for} player {in} players
-                    {print} player ' throws ' _?_ {at} {random}
+                    {print} player ' throws ' _ {at} {random}
             mp_choice_options:
             -   option: players
                 feedback: It would say 'Ann throws Jesse', instead of 'Ann throws 6'.

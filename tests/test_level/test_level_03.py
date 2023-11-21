@@ -56,6 +56,21 @@ class TestsLevel3(HedyTester):
             extra_check_function=check_in_list
         )
 
+    def test_color_basic(self):
+        code = textwrap.dedent("""\
+        color red
+        forward 10""")
+
+        expected = HedyTester.dedent(HedyTester.turtle_color_command_transpiled("red", 'en'),
+                                     HedyTester.forward_transpiled('10', self.level))
+
+        self.multi_level_tester(
+            max_level=11,
+            code=code,
+            translate=False,
+            expected=expected
+        )
+
     def test_random_turle_dutch(self):
         lang = 'nl'
         code = textwrap.dedent("""\
@@ -177,6 +192,21 @@ class TestsLevel3(HedyTester):
           raise Exception(f'While running your program the command <span class=\"command-highlighted\">sleep</span> received the value <span class=\"command-highlighted\">{n[int(1)-1]}</span> which is not allowed. Try changing the value to a number.')""")
 
         self.multi_level_tester(max_level=11, code=code, expected=expected)
+
+    def test_sleep_with_time_variable(self):
+        code = textwrap.dedent("""\
+            time is 10
+            sleep time""")
+
+        expected = HedyTester.dedent("""\
+            _time = '10'""",
+                                     HedyTester.sleep_command_transpiled('_time')
+                                     )
+
+        self.multi_level_tester(
+            code=code,
+            expected=expected,
+            max_level=11)
 
     def test_sleep_with_list_random(self):
         self.maxDiff = None
@@ -464,7 +494,7 @@ class TestsLevel3(HedyTester):
         print dieren ad random""")
 
         self.multi_level_tester(
-            max_level=11,
+            max_level=3,
             code=code,
             extra_check_function=lambda c: c.exception.arguments['line_number'] == 2,
             exception=hedy.exceptions.InvalidArgumentTypeException
