@@ -137,6 +137,7 @@ class ForTeachersModule(WebsiteModule):
         survey_id = ""
         description = ""
         questions = []
+        survey_later = ""
 
         if Class.get("students"):
             survey_id, description, questions, survey_later = self.class_survey(class_id)
