@@ -96,8 +96,8 @@ class TestsLevel12(HedyTester):
         sleep 0.2""")
 
         expected = HedyTester.dedent(
-                                     HedyTester.sleep_command_transpiled('0.2')
-                                     )
+            HedyTester.sleep_command_transpiled('0.2')
+        )
 
         self.multi_level_tester(
             code=code,
