@@ -186,6 +186,22 @@ def _translate_index_error(code, list_name):
         """)
 
 
+def translate_value_error(command, value, suggestion_type):
+    exception_text = gettext('catch_value_exception')
+    # Right now we only have two types of suggestion
+    # In the future we might change this if the number increases
+    if suggestion_type == 'number':
+        suggestion_text = gettext('suggestion_number')
+    elif suggestion_type == 'color':
+        suggestion_text = gettext('suggestion_color')
+
+    exception_text = exception_text.replace('{command}', style_command(command))
+    exception_text = exception_text.replace('{value}', style_command(value))
+    exception_text = exception_text.replace('{suggestion}', suggestion_text)
+
+    return repr(exception_text)
+
+
 PREPROCESS_RULES = {
     'needs_colon': needs_colon
 }
@@ -1502,12 +1518,13 @@ class ConvertToPython_1(ConvertToPython):
         if isinstance(parameter, str):
             exception = self.make_catch_exception([parameter])
         variable = self.get_fresh_var('__trtl')
+        exception_text = translate_value_error(command, variable, 'number')
         transpiled = exception + textwrap.dedent(f"""\
             {variable} = {parameter}
             try:
               {variable} = {type}({variable})
             except ValueError:
-              raise Exception(f'While running your program the command {style_command(command)} received the value {style_command('{' + variable + '}')} which is not allowed. Try changing the value to a number.')
+              raise Exception({exception_text})
             t.{command_text}(min(600, {variable}) if {variable} > 0 else max(-600, {variable})){self.add_debug_breakpoint()}""")
         if add_sleep and not self.is_debug:
             return sleep_after(transpiled, False, self.is_debug)
@@ -1521,12 +1538,12 @@ class ConvertToPython_1(ConvertToPython):
         # coming from a random list or ask
 
         color_dict = {hedy_translation.translate_keyword_from_en(x, language): x for x in english_colors}
-
+        exception_text = translate_value_error(command, parameter, 'color')
         return textwrap.dedent(f"""\
             {variable} = f'{parameter}'
             color_dict = {color_dict}
             if {variable} not in {both_colors}:
-              raise Exception(f'While running your program the command {style_command(command)} received the value {style_command('{' + variable + '}')} which is not allowed. Try using another color.')
+              raise Exception({exception_text})
             else:
               if not {variable} in {english_colors}:
                 {variable} = color_dict[{variable}]
@@ -1662,10 +1679,11 @@ class ConvertToPython_2(ConvertToPython_1):
             value = f'"{args[0]}"' if self.is_int(args[0]) else args[0]
             exceptions = self.make_catch_exception(args)
             try_prefix = "try:\n" + textwrap.indent(exceptions, "  ")
+            exception_text = translate_value_error(Command.sleep, value, 'number')
             code = try_prefix + textwrap.dedent(f"""\
                   time.sleep(int({value})){self.add_debug_breakpoint()}
                 except ValueError:
-                  raise Exception(f'While running your program the command {style_command(Command.sleep)} received the value {style_command('{' + value + '}')} which is not allowed. Try changing the value to a number.')""")
+                  raise Exception({exception_text})""")
             return code
 
 
@@ -1894,10 +1912,11 @@ class ConvertToPython_6(ConvertToPython_5):
 
             exceptions = self.make_catch_exception(args)
             try_prefix = "try:\n" + textwrap.indent(exceptions, "  ")
+            exception_text = translate_value_error(Command.sleep, value, 'number')
             code = try_prefix + textwrap.dedent(f"""\
                   time.sleep(int({value}))
                 except ValueError:
-                  raise Exception(f'While running your program the command {style_command(Command.sleep)} received the value {style_command('{' + value + '}')} which is not allowed. Try changing the value to a number.')""")
+                  raise Exception({exception_text})""")
             return code
 
     def print_ask_args(self, meta, args):
