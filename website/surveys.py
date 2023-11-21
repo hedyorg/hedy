@@ -26,7 +26,7 @@ class SurveysModule(WebsiteModule):
         if db:
             for question, answer in responses.items():
                 for key, value in db.items():
-                    if value['question'] is question:
+                    if value['question'] == question:
                         value['answer'] = answer
             self.db.add_survey_responses(survey_id, db)
         else:
