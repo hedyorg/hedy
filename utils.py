@@ -361,12 +361,21 @@ def can_edit_class(user, Class):
             for second_teacher in Class.get("second_teachers", []))
 
 
-def get_unanswered_questions(survey):
-    questions = []
-    db_questions = survey.get('responses')
+def get_unanswered_questions(survey, new_questions):
+    unanswered_questions = []
+    db = survey.get('responses')
 
-    if db_questions:
-        for question, answer in db_questions.items():
-            if not answer:
-                questions.append(question)
-    return questions
+    if not db:
+        return new_questions, ""
+
+    for key, value in db.items():
+        if value['answer'] is '':
+            unanswered_questions.append(new_questions[int(key)-1])
+
+    i = 0
+    for key, value in db.items():
+        if value['answer'] is '':
+            value['question'] = unanswered_questions[i]
+            i += 1
+
+    return unanswered_questions, db

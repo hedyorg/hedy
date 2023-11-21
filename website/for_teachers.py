@@ -314,18 +314,23 @@ class ForTeachersModule(WebsiteModule):
         survey_id = "class" + '_' + class_id
         description = gettext("class_survey_description")
         survey_later = gettext("class_survey_later")
+        questions = []
 
         survey = self.db.get_survey(survey_id)
         if not survey:
             self.db.store_survey(dict(id=f"{survey_id}"))
             survey = self.db.get_survey(survey_id)
         elif survey.get('skip') is True or survey.get('skip') is date.today().isoformat():
-            return "", "", ""
+            return "", "", "", ""
 
-        questions = utils.get_unanswered_questions(survey)
-        if not questions:
-            questions = gettext("class_survey_questions").split("\n")
-        return survey_id, description, questions, survey_later
+        questions.append(gettext("class_survey_question1"))
+        questions.append(gettext("class_survey_question2"))
+        questions.append(gettext("class_survey_question3"))
+        questions.append(gettext("class_survey_question4"))
+        unanswered_questions, translate_db = utils.get_unanswered_questions(survey, questions)
+        if translate_db:
+            self.db.add_survey_responses(survey_id, translate_db)
+        return survey_id, description, unanswered_questions, survey_later
 
     @route("/get-customization-level", methods=["GET"])
     @requires_login

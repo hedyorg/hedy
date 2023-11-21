@@ -12,18 +12,26 @@ class SurveysModule(WebsiteModule):
     def submit_survey(self, survey_id):
         survey_done = True
         survey = self.db.get_survey(survey_id)
-        responses = survey.get('responses')
-        if not responses:
-            responses = {}
+        db = survey.get('responses')
+        new_db = {}
+        responses = {}
 
-        for question, answer in request.form.items():
+        for i, (question, answer) in enumerate(request.form.items(), start=1):
             if not answer:
                 survey_done = False
+            new_db[i] = {'answer': answer, 'question': question}
             responses[question] = answer
-
         if survey_done is True:
             self.db.add_skip_survey(survey_id)
-        self.db.add_survey_responses(survey_id, responses)
+        if db:
+            for question, answer in responses.items():
+                for key, value in db.items():
+                    if value['question'] is question:
+                        value['answer'] = answer
+            self.db.add_survey_responses(survey_id, db)
+        else:
+            self.db.add_survey_responses(survey_id, new_db)
+
         return ''
 
     @route("/skip-survey/<survey_id>", methods=['POST'])
