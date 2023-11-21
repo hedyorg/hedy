@@ -1358,6 +1358,10 @@ class ConvertToPython(Transformer):
             first_unquoted_var = unquoted_args[0]
             raise exceptions.UndefinedVarException(name=first_unquoted_var, line_number=var_access_linenumber)
 
+    @staticmethod
+    def check_if_error_skipped(tree):
+        return hasattr(IsValid, tree.data)
+
     # static methods
     @staticmethod
     def is_quoted(s):
@@ -1875,8 +1879,11 @@ class ConvertToPython_6(ConvertToPython_5):
             return "time.sleep(1)"
         else:
             if type(args[0]) is Tree:
-                args[0] = args[0].children[0]
-                value = f'{args[0]}'
+                if self.check_if_error_skipped(args[0]):
+                    raise hedy.exceptions.InvalidErrorSkippedException
+                else:
+                    args[0] = args[0].children[0]
+                    value = f'{args[0]}'
             else:
                 value = f'"{args[0]}"' if self.is_int(args[0]) else args[0]
 

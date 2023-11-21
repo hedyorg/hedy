@@ -294,4 +294,9 @@ class NestedFunctionException(HedyException):
         super().__init__('Nested Function')
 
 
+class InvalidErrorSkippedException(HedyException):
+    def __init__(self):
+        super().__init__('Invalid Error Skipped')
+
+
 HEDY_EXCEPTIONS = {name: cls for name, cls in globals().items() if inspect.isclass(cls)}
