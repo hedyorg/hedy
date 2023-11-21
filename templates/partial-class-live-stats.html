@@ -1,15 +1,11 @@
 <div id="main_content">
     
     <!-- Title  -->
-    <div class="flex flex-row gap-4">
+    <div class="flex flex-row justify-between">
         <div class="dropdown relative">
             <button class="white-btn px-4 rounded inline-flex items-center gap-2 text-xl" id="dropdown_level_button"
                 onclick="$('#level_dropdown').slideToggle('medium');">
-                <span>{{ _('level_title') }} 1
-                  &nbsp;                  
-                <svg id="level-arrow" class="fill-current h-6 w-6" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
-                  <path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z" />
-                </svg>
+                <span>{{ _('level_title') }} 1 <i id="level-arrow" class="fa-solid fa-angle-down"></i>
               </button>
               <div class="dropdown-menu dropdown-blue z-20 min-w-full" id="level_dropdown"
                 style="display: none; padding: 0px !important; margin: 0px; margin-top: 0.25rem;"
@@ -34,49 +30,16 @@
               </div>
             </div>
         <div class="flex font-bold font-slab text-sky-600 text-2xl">
-            <h1>{{_('live_dashboard')}}</h1>
+            <h1>{{_('live_dashboard')}} - {{ _('level_title') }} {{ 1 }}</h1>
         </div>
         <!--  Back to class button  -->
         <button class="green-btn float-right" id="to_class_button" onclick="window.location.href='/for-teachers/class/{{class_info.id}}'" target="_blank">
           {{_('back_to_class')}}
         </button>
     </div>
-
-    <div class="flex justify-center p-4">
-        <div class="relative">
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
-                <path stroke-linecap="round" stroke-linejoin="round" d="M9.879 7.519c1.171-1.025 3.071-1.025 4.242 0 1.172 1.025 1.172 2.687 0 3.712-.203.179-.43.326-.67.442-.745.361-1.45.999-1.45 1.827v.75M21 12a9 9 0 11-18 0 9 9 0 0118 0zm-9 5.25h.008v.008H12v-.008z" />
-            </svg>
-            <div class='text-center tooltip opacity-0 hover:opacity-100 duration-300 absolute inset-0 z-10 items-top -ml-32'>
-                <span class='tooltiptext text-xs font-medium absolute rounded shadow-lg p-1 w-72' style="color:black; background:lightsteelblue;">
-                    Real-time Analytics Dashboard (RADboard) is a dashboard for teachers to monitor the progress of students during class.
-                        RADboard is currently in alpha so it is possible that you encounter some bugs.
-                </span>
-            </div>
-        </div>
-    </div>
-
-    <!-- Levels selector -->
-    <div class="flex justify-center mb-10">
-        <div>
-            {% for i in range(1, max_level + 1) %}
-                <button class="level-select-button {% if i in class_overview.selected_levels %}green-btn{% else %}gray-btn{% endif %} h-8 w-6 p-1 text-sm" 
-                        id="level_button_{{ i }}" data-cy="enable_level_{{ i }}" 
-                        hx-get="/live_stats/class/{{ class_info.id }}/select_level?level={{ i }}"                        
-                        value="{{ i }}"
-                        hx-target="#main_content"
-                        hx-swap="outerHTML">
-                            {{ i }}
-                </button>
-            {% endfor %}
-        </div>        
-        <a class="blue-btn ml-4 mb-4 h-8 p-1 text-sm" href="#" onclick="window.location.reload(true)">
-            Refresh <i class="fa fa-refresh" aria-hidden="true"></i>
-        </a>
-    </div>
     
     <!-- Card 1 Class Overview -->
-    <div class="justify-center">
+    <div class="justify-center mt-20">
         <h2 class="text-center">{{_('class_overview')}}</h2>
         <!-- Hide / Show -->
         <div class="float-right relative m-2">
