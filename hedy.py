@@ -728,14 +728,12 @@ class TypeValidator(Transformer):
         return self.to_typed_tree(tree, HedyType.boolean)
 
     def repeat(self, tree):
-        print("repeat")
         command = Command.repeat
         allowed_types = get_allowed_types(command, self.level)
         self.check_type_allowed(command, allowed_types, tree.children[0], tree.meta)
         return self.to_typed_tree(tree, HedyType.none)
 
     def for_list(self, tree):
-        print("for_list")
         command = Command.for_list
         allowed_types = get_allowed_types(command, self.level)
         self.check_type_allowed(command, allowed_types, tree.children[1], tree.meta)
@@ -743,7 +741,6 @@ class TypeValidator(Transformer):
         return self.to_typed_tree(tree, HedyType.none)
 
     def for_loop(self, tree):
-        print("for_loop")
         command = Command.for_loop
         allowed_types = get_allowed_types(command, self.level)
 
@@ -822,7 +819,6 @@ class TypeValidator(Transformer):
         return self.to_typed_tree(tree, HedyType.boolean)
 
     def to_comparison_tree(self, command, tree):
-        print("comparison_tree")
         allowed_types = get_allowed_types(command, self.level)
         self.check_type_allowed(command, allowed_types, tree.children[0], tree.meta)
         self.check_type_allowed(command, allowed_types, tree.children[1], tree.meta)
@@ -830,7 +826,6 @@ class TypeValidator(Transformer):
 
     def validate_binary_command_args_type(self, command, tree, type_promotion_rules):
         allowed_types = get_allowed_types(command, self.level)
-        print("validate_binary")
         left_type = self.check_type_allowed(command, allowed_types, tree.children[0], tree.meta)
         right_type = self.check_type_allowed(command, allowed_types, tree.children[1], tree.meta)
 
@@ -850,7 +845,6 @@ class TypeValidator(Transformer):
         allowed_types = get_allowed_types(command, self.level)
         children = children if type(children) is list else [children]
         for child in children:
-            print(self)
             self.check_type_allowed(command, allowed_types, child, meta)
 
     def check_type_allowed(self, command, allowed_types, tree, meta=None):
@@ -871,8 +865,6 @@ class TypeValidator(Transformer):
                     meta.end_column - 2)
                 result = {k: v for k, v in result.items()}
                 command = ' '.join([v.strip() for v in result.values() if v is not None])
-            print("invalid argument detected")
-            # parser runs into an error where list is detected, preventing any of the error productions from being ran
             raise exceptions.InvalidArgumentTypeException(command=command, invalid_type=arg_type,
                                                           invalid_argument=variable, allowed_types=allowed_types, line_number=meta.line)
         return arg_type
@@ -1142,7 +1134,6 @@ class IsValid(Filter):
                                   text], line=meta.line, column=meta.column), meta
 
     def error_list_access(self, meta, args):
-        # for now copying another function, to test whether anything is being done at all
         error = InvalidInfo('misspelled "at" command', arguments=[str(args[1][1])], line=meta.line)
         return False, error, meta
 
@@ -1481,7 +1472,6 @@ class ConvertToPython_1(ConvertToPython):
             return f"t.pencolor('{arg}'){self.add_debug_breakpoint()}"
         else:
             # the TypeValidator should protect against reaching this line:
-            print("errormessage1")
             raise exceptions.InvalidArgumentTypeException(command=Command.color, invalid_type='', invalid_argument=arg,
                                                           allowed_types=get_allowed_types(Command.color, self.level), line_number=meta.line)
 
@@ -1496,7 +1486,6 @@ class ConvertToPython_1(ConvertToPython):
             return f"t.right(90){self.add_debug_breakpoint()}"
         else:
             # the TypeValidator should protect against reaching this line:
-            print("errormessage2")
             raise exceptions.InvalidArgumentTypeException(command=Command.turn, invalid_type='', invalid_argument=arg,
                                                           allowed_types=get_allowed_types(Command.turn, self.level), line_number=meta.line)
 
@@ -3299,7 +3288,6 @@ def is_program_valid(program_root, input_string, level, lang):
             raise exceptions.UnquotedTextException(
                 level=level, unquotedtext=unquotedtext, line_number=invalid_info.line)
         elif invalid_info.error_type == 'misspelled "at" command':
-            # raising an exception here, for now default parameters, will put the wrongly spelled word later on
             raise exceptions.MisspelledAtCommand(command='at', arg1=invalid_info.arguments[0], line_number=line)
         elif invalid_info.error_type == 'unsupported number':
             raise exceptions.UnsupportedFloatException(value=''.join(invalid_info.arguments))
