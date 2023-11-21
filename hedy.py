@@ -152,8 +152,10 @@ PYTHON_KEYWORDS = [
     'is',
     'try',
     'int']
+
+LIBRARIES = ['time']
 # Python keywords and function names need hashing when used as var names
-reserved_words = set(PYTHON_BUILTIN_FUNCTIONS + PYTHON_KEYWORDS)
+reserved_words = set(PYTHON_BUILTIN_FUNCTIONS + PYTHON_KEYWORDS + LIBRARIES)
 
 # Let's retrieve all keywords dynamically from the cached KEYWORDS dictionary
 indent_keywords = {}
@@ -328,7 +330,9 @@ commands_and_types_per_level = {
     Command.forward: {1: [HedyType.integer, HedyType.input],
                       12: [HedyType.integer, HedyType.input, HedyType.float]
                       },
-    Command.sleep: {1: [HedyType.integer, HedyType.input]},
+    Command.sleep:    {1: [HedyType.integer, HedyType.input],
+                       12: [HedyType.integer, HedyType.input, HedyType.float]
+                       },
     Command.list_access: {1: [HedyType.list]},
     Command.in_list: {1: [HedyType.list]},
     Command.add_to_list: {1: [HedyType.list]},
@@ -1130,9 +1134,11 @@ class IsValid(Filter):
         return False, InvalidInfo("print without quotes", arguments=[
                                   text], line=meta.line, column=meta.column), meta
 
-    def error_invalid(self, meta, args):
-        # TODO: this will not work for misspelling 'at', needs to be improved!
+    def error_list_access(self, meta, args):
+        error = InvalidInfo('misspelled "at" command', arguments=[str(args[1][1])], line=meta.line)
+        return False, error, meta
 
+    def error_invalid(self, meta, args):
         error = InvalidInfo('invalid command', command=args[0][1], arguments=[
                             [a[1] for a in args[1:]]], line=meta.line, column=meta.column)
         return False, error, meta
@@ -1349,12 +1355,19 @@ class ConvertToPython(Transformer):
             # all good? return for further processing
             return args
         else:
-            # TODO: check whether this is really never raised??
             # return first name with issue
-            first_unquoted_var = unquoted_args[0]
-            raise exceptions.UndefinedVarException(name=first_unquoted_var, line_number=var_access_linenumber)
+            for index, a in enumerate(unquoted_args):
+                current_arg = unquoted_in_lookup[index]
+                if current_arg is None:
+                    first_unquoted_var = a
+                    raise exceptions.UndefinedVarException(name=first_unquoted_var, line_number=var_access_linenumber)
 
     # static methods
+
+    @staticmethod
+    def check_if_error_skipped(tree):
+        return hasattr(IsValid, tree.data)
+
     @staticmethod
     def is_quoted(s):
         opening_quotes = ['‘', "'", '"', "“", "«"]
@@ -1856,6 +1869,37 @@ else:
 @source_map_transformer(source_map)
 class ConvertToPython_6(ConvertToPython_5):
 
+    def convert_tree_to_number(self, a):
+        # takes a calculation tree coming from the process_calculation() method, and turns it into numbers
+        # we do that late in the tree to deal with different numeral systems
+
+        if self.numerals_language == "Latin":
+            return "{" + a.children[0] + "}"
+        else:
+            converted = f'convert_numerals("{self.numerals_language}",{a.children[0]})'
+            return "{" + converted + "}"
+
+    def sleep(self, meta, args):
+        if not args:
+            return "time.sleep(1)"
+        else:
+            if type(args[0]) is Tree:
+                if self.check_if_error_skipped(args[0]):
+                    raise hedy.exceptions.InvalidErrorSkippedException
+                else:
+                    args[0] = args[0].children[0]
+                    value = f'{args[0]}'
+            else:
+                value = f'"{args[0]}"' if self.is_int(args[0]) else args[0]
+
+            exceptions = self.make_catch_exception(args)
+            try_prefix = "try:\n" + textwrap.indent(exceptions, "  ")
+            code = try_prefix + textwrap.dedent(f"""\
+                  time.sleep(int({value}))
+                except ValueError:
+                  raise Exception(f'While running your program the command {style_command(Command.sleep)} received the value {style_command('{' + value + '}')} which is not allowed. Try changing the value to a number.')""")
+            return code
+
     def print_ask_args(self, meta, args):
         # we only check non-Tree (= non calculation) arguments
         self.check_var_usage(args, meta.line)
@@ -1864,11 +1908,7 @@ class ConvertToPython_6(ConvertToPython_5):
         args_new = []
         for a in args:
             if isinstance(a, Tree):
-                if self.numerals_language == "Latin":
-                    args_new.append("{" + a.children[0] + "}")
-                else:
-                    converted = f'convert_numerals("{self.numerals_language}",{a.children[0]})'
-                    args_new.append("{" + converted + "}")
+                args_new.append(self.convert_tree_to_number(a))
             else:
                 args_new.append(self.process_variable_for_fstring(a))
 
@@ -3246,6 +3286,8 @@ def is_program_valid(program_root, input_string, level, lang):
             unquotedtext = invalid_info.arguments[0]
             raise exceptions.UnquotedTextException(
                 level=level, unquotedtext=unquotedtext, line_number=invalid_info.line)
+        elif invalid_info.error_type == 'misspelled "at" command':
+            raise exceptions.MisspelledAtCommand(command='at', arg1=invalid_info.arguments[0], line_number=line)
         elif invalid_info.error_type == 'unsupported number':
             raise exceptions.UnsupportedFloatException(value=''.join(invalid_info.arguments))
         elif invalid_info.error_type == 'lonely text':

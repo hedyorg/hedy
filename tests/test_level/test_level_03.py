@@ -193,6 +193,21 @@ class TestsLevel3(HedyTester):
 
         self.multi_level_tester(max_level=11, code=code, expected=expected)
 
+    def test_sleep_with_time_variable(self):
+        code = textwrap.dedent("""\
+            time is 10
+            sleep time""")
+
+        expected = HedyTester.dedent("""\
+            _time = '10'""",
+                                     HedyTester.sleep_command_transpiled('_time')
+                                     )
+
+        self.multi_level_tester(
+            code=code,
+            expected=expected,
+            max_level=11)
+
     def test_sleep_with_list_random(self):
         self.maxDiff = None
         code = textwrap.dedent("""\
@@ -479,7 +494,7 @@ class TestsLevel3(HedyTester):
         print dieren ad random""")
 
         self.multi_level_tester(
-            max_level=11,
+            max_level=3,
             code=code,
             extra_check_function=lambda c: c.exception.arguments['line_number'] == 2,
             exception=hedy.exceptions.InvalidArgumentTypeException
