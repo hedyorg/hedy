@@ -12,6 +12,7 @@ describe('Is able to go to logs page', () => {
     var currentUrl = '';
     cy.url().then(url => {
       currentUrl = url;
+      cy.get('#survey').invoke('hide').should('not.be.visible');
       cy.get('#customize-class-button').click(); // Press logs button
 
       let statsUrl = Cypress.env('customize_class_page') + currentUrl.substring(currentUrl.indexOf('class/')+6);
