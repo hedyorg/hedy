@@ -233,6 +233,14 @@ class UnquotedTextException(HedyException):
                          line_number=line_number)
 
 
+class MisspelledAtCommand(HedyException):
+    def __init__(self, command, arg1, line_number):
+        super().__init__('Misspelled At Command',
+                         command=command,
+                         invalid_argument=arg1,
+                         line_number=line_number)
+
+
 class UnquotedAssignTextException(HedyException):
     def __init__(self, text, line_number):
         super().__init__('Unquoted Assignment', text=text, line_number=line_number)
@@ -292,6 +300,11 @@ class MissingElseForPressitException(HedyException):
 class NestedFunctionException(HedyException):
     def __init__(self):
         super().__init__('Nested Function')
+
+
+class InvalidErrorSkippedException(HedyException):
+    def __init__(self):
+        super().__init__('Invalid Error Skipped')
 
 
 HEDY_EXCEPTIONS = {name: cls for name, cls in globals().items() if inspect.isclass(cls)}

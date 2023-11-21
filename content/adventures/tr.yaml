@@ -249,8 +249,11 @@ adventures:
                 start_code: '# kodunuzu buraya yazın'
             15:
                 story_text: |
-                    `{while}` döngüsünü kullanmak hikayelerinizi daha ilginç hale getirebilir. Örneğin, oyun bitene kadar oynayabilmek için `{while} oyun {is} 'devam'` kullanabilirsiniz.
-                    Ya da `{while} kılıç {is} 'kayıp'` kullanabilirsiniz, böylece oyuncu bir şey bulana kadar oyuna devam edemez.
+                    `{while}` döngüsünü kullanmak hikayelerinizi daha ilginç hale getirebilir. Örneğin, oyun bitene kadar oynayabilmek için `{while} oyun == 'devam'` kullanabilirsiniz.
+                    Ya da `{while} kılıç == 'kayıp'` kullanabilirsiniz, böylece oyuncu bir şey bulana kadar oyuna devam edemez.
+
+                    ### Exercise
+                    The example code shows you how to use the `{while}` loop in a story. Now **think of your own scenario** in which the player has to find something before they can continue.
                 example_code: |
                     ```
                     anahtarlar = 'kayıp'
@@ -671,7 +674,7 @@ adventures:
                 story_text: |
                     In this adventure you will build a calculator that calculates your mean grade for you. If you get your calculator to work, you can move on to the next adventure, which allows you to add two extra features.
 
-                    ## Exercise 1
+                    ### Exercise 1
                     Fill in the blanks to get the calculator to work.
                     * Start with the fourth line, add a question to figure out what grade the student got.
                     * In the fifth line you'll want to calculate the total of all grades, so the total = total + grade.
@@ -705,21 +708,27 @@ adventures:
                 story_text: |
                     Önceki bir seviyede yapmayı öğrendiğiniz hesap makinesi oyununa `{while}` döngüsünü ekleyebilirsiniz.
                     Bu, oyuncunun yanlış cevap vermesi durumunda bir sonraki soruya devam edememesini sağlar.
+
+                    ### Exercise
+                    Add the `{while}` loop in the function, ask the player what number_1 times number_2 is and print their answer.
+                    Then `{call}` the function.
                 example_code: |
                     ```
-                    puan = 0
-                    {for} i {in} {range} 0 {to} 9
-                        sayılar = 1, 2, 3, 4, 5, 6, 7, 8, 9, 10
-                        sayı1 = sayılar {at} {random}
-                        sayı2 = sayılar {at} {random}
-                        doğrucevap = sayı1 * sayı2
-                        cevap = 0
-                        {while} cevap != doğrucevap
-                            {print} 'Söyle hadi, ' sayı1 ' kere ' sayı2 ' kaç eder?'
-                            cevap = {ask} 'Cevabın nedir?:'
-                            {print} 'Cevabın ' cevap
-                        {print} 'Aferin, iyi işti!'
-                    {print} 'Sen kazandın!'
+                    {define} new_question
+                        numbers = 1, 2, 3, 4, 5, 6, 7, 8, 9, 10
+                        number_1 = numbers {at} {random}
+                        number_2 = numbers {at} {random}
+                        correct = number_1 * number_2
+                        answer = 0
+                        _
+                        _
+                        _
+                        {print} 'Well done!'
+
+                    {print} 'Give 10 correct answers to win!'
+                    {for} i {in} {range} 1 {to} 10
+                        _
+                    {print} 'You win!'
                     ```
                 start_code: '# kodunuzu buraya yazın'
     calculator_2:
@@ -729,7 +738,7 @@ adventures:
         levels:
             14:
                 story_text: |
-                    ## Exercise 2
+                    ### Exercise 2
                     **This is the second part of this adventure.** The adventure starts in the previous tab.
                     Of course, you don't always want to calculate the mean of 4 tests. You might want to calculate the mean of 10 tests or only 2...
                     We can fix this problem by adding the argument and variable 'amount_of_tests'.
@@ -739,7 +748,7 @@ adventures:
 
                     Try out your new program. Does it work?
 
-                    ## Exercise 3
+                    ### Exercise 3
                     Did you want to make your program even better? Great! In the previous program you could only calculate the mean grade of 1 subject, but it would be better if you could calculate the mean grade for all subjects you want!
                     We won't tell you how to do it, but we will give you one tip: Start your code in line 1 with: define calculate_mean_grade with subject.
                 example_code: |
@@ -1869,18 +1878,27 @@ adventures:
                 start_code: '# kodunuzu buraya yazın'
             15:
                 story_text: |
-                    Bu oyunda, mümkün olduğunca az deneme yaparak 6 atmanız gerekiyor.
+                    ### Exercise
+                    In this level you can create a little game in which you'll have to throw 6 as fast as possible.
+                    We have started the code, it's up to you to get the game to work!
+
+                    Firstly, add a `{while}` loop that checks if 6 has been thrown or not.
+                    As long as you haven't thrown 6 already, throw the dice on a random number.
+                    Print what the player has thrown.
+                    Add a try to the amount of tries
+                    Wait a second before you throw again, or - in case you've thrown a 6 - before the game ends.
                 example_code: |
                     ```
-                    seçenekler = 1, 2, 3, 4, 5, 6
-                    {print} 'Atabildiğin kadar hızlı şekilde 6 at!'
-                    atılan = 0
-                    denemeler = 0
-                    {while} atılan != 6
-                        atılan = seçenekler {at} {random}
-                        {print} 'Atılan zar ' atılan
-                        denemeler = denemeler + 1
-                    {print} 'Oldu be sonunda! 6 atmak için ' denemeler ' kere zar attın'
+                    options = 1, 2, 3, 4, 5, 6
+                    {print} 'Throw 6 as fast as you can!'
+                    thrown = 0
+                    tries = 0
+                    _
+                    _
+                    _
+                    _
+                    _
+                    {print} 'Yes! You have thrown 6 in ' tries ' tries.'
                     ```
                 start_code: '# kodunuzu buraya yazın'
     dishes:
@@ -2353,7 +2371,7 @@ adventures:
 
                     For example, in this code the function calculate_new_price will calculate the new price of any item. It will give you the new price as a return value.
 
-                    ## Exercise
+                    ### Exercise
                     Finish this code. We have already made the variable new_price for you, you only need to set it.
                     You should finish the line of code by calling the function that calculates the new price.
                 example_code: |
@@ -2619,64 +2637,67 @@ adventures:
                 start_code: '{print} ''Perili evden kaçış!'''
             14:
                 story_text: |
-                    Bu seviyede, `<` ve `>` sembollerini kullanarak oyununuza canlar ekleyebilirsiniz.
+                    ### Exercise
+                    In this level you can use the `<` and `>` symbol to introduce lives to your game.
+                    Make sure the player loses a life when they come across the wrong monster and that the game stops if you have no lives left.
                 example_code: |
                     ```
-                    {print} 'Perili evden kaçış'
-                    canlar = 3
-                    kapılar = 1, 2, 3
-                    canavarlar = 'kötü cadı', 'zombi', 'uyuyan üç başlı bir köpek'
+                    {print} 'Escape from the haunted house'
+                    lives = 3
+                    doors = 1, 2, 3
+                    monsters = 'the wicked witch', 'a zombie', 'a sleeping 3 headed dog'
                     {for} i {in} {range} 1 {to} 10
-                        {if} canlar > 0
-                            iyi_kapı = kapılar {at} {random}
-                            canavar = canavarlar {at} {random}
-                            seçilen_kapı = {ask} 'Hangi kapıyı seçiyorsunuz?'
-                            {if} iyi_kapı == seçilen_kapı
-                                {print} 'Doğru kapıyı seçtiniz'
+                        {if} lives _
+                            good_door = doors {at} {random}
+                            monster = monsters {at} {random}
+                            chosen_door = {ask} 'Which door do you choose?'
+                            {if} good_door == chosen_door
+                                {print} 'You have chosen the correct door'
                             {else}
-                                {print} 'Karşınıza bir...' canavar ' çıktı'
-                                {if} canavar == 'uyuyan üç başlı bir köpek'
-                                    {print} 'Pffieuw.... Neyseki uyuyor'
+                                {print} 'You see...' monster
+                                {if} monster == 'a sleeping 3 headed dog'
+                                    {print} 'Pffieuw.... Its asleep'
                                 {else}
-                                    {print} 'Bir can kaybettiniz'
-                                    canlar = canlar -1
+                                    {print} 'You lose one life'
+                                    lives = _
                         {else}
-                            {print} 'OYUN BİTTİ'
+                            {print} 'GAME OVER'
                     ```
-                start_code: '# kodunuzu buraya yazın'
+                start_code: '# place your code here'
             16:
                 story_text: |
-                    Bu perili ev oyunu, bu seviyede kullanabileceğiniz listeler ile arasında bir bağlantı kullanır.
-                    Örneğin: zombiye ait tüm özellikler tüm listelerde ilk sırada, cadı ikinci sırada ve vampir üçüncü sırada yer alır.
-                    Kodu kontrol edin!
+                    ### Exercise
+                    This haunted house game uses the connection between the lists you can use in this level.
+                    For example: all the properties that belong to the zombie are first in all the lists, witch second and vampire third.
+                    Check out the code and fill in  `weapons[i]`, `monsters[i]` , `bad_fate[i]`, `good_fate[i]`, `hint[i]` on the correct blanks to get the code to work!
                 example_code: |
                     ```
-                    sayılar = [1, 2, 3]
-                    i = sayılar[{random}]
-                    ipucu = ['hırlama', 'gıdaklayan bir kahkaha', 'çırpınan yarasa kanatları']
-                    canavarlar = ['zombi', 'cadı', 'vampir']
-                    kötü_son = ['Beynini yediler', 'Sonsuza kadar lanetlendin', 'Isırıldın']
-                    iyi_son = ['Bir et parçası fırlatırsın. Zombinin dikkati dağılır ve onu yemeye başlar', 'Perdeleri ateşe verirsin. Cadı yangın korkusuyla kaçar', 'Vampir sarımsaktan nefret eder ve kaçar']
-                    silahlar = ['et', 'çakmak', 'sarımsak']
-                    {print} 'Eski bir konağın önünde duruyorsunuz.'
-                    {print} 'Burada doğru olmayan bir şeyler var.'
-                    {print} 'Bir ' ipucu[i] ' sesi duyuyorsunuz... '
-                    {print} 'Onu aramaya gidiyorsunuz'
-                    {print} 'Mutfağa giriyorsunuz ve bir çakmak, çiğ bir et ve sarımsak görüyorsunuz.'
-                    senin_silahın = {ask} 'Yanına hangisini alıyorsun? (çakmak, et, sarımsak)'
-                    {print} 'Elinde ' senin_silahın ' ile oturma odasına giriyorsun'
-                    {print} 'Orada karşına bir ' canavarlar[i] ' çıkıyor'
-                    gereken_silah = silahlar[i]
-                    {if} senin_silahın == gereken_silah
-                        {print} 'Elindeki ' senin_silahın ' ile saldırıyorsun'
-                        {print} iyi_son[i]
-                        {print} 'SEN KAZANDIN!'
+                    numbers = [1, 2, 3]
+                    i = numbers[{random}]
+                    hint = ['growling', 'a cackling laugh', 'fluttering batwings']
+                    monsters = ['zombie', 'witch', 'vampire']
+                    bad_fate = ['Your brain is eaten', 'You are forever cursed', 'You are bitten']
+                    good_fate = ['You throw the ham. The zombie is distracted and starts eating it.', 'You set the curtains on fire. The witch flees out of fear for the fire', 'The vampire hates garlic and flees']
+                    weapons = ['ham', 'lighter', 'garlic']
+                    {print} 'You are standing in front of an old mansion'
+                    {print} 'Something is not right here'
+                    {print} 'You hear ' _
+                    {print} 'You are going to explore it'
+                    {print} 'You enter the kitchen and see a lighter, a raw ham and a garlic.'
+                    your_weapon = {ask} 'What do you bring with you?'
+                    {print} 'With your ' your_weapon ' you enter the living room'
+                    {print} 'There you find a ' _
+                    needed_weapon = _
+                    {if} your_weapon == needed_weapon
+                        {print} 'You use your ' your_weapon
+                        {print} _
+                        {print} 'YOU WIN!'
                     {else}
-                        {print} 'Yanlış silahı seçmişsin....'
-                        {print} kötü_son[i]
-                        {print} 'OYUN BİTTİ'
+                        {print} 'You have chosen the wrong weapon...'
+                        {print} _
+                        {print} 'GAME OVER'
                     ```
-                start_code: '# kodunuzu buraya yazın'
+                start_code: '# place your code here'
     hotel:
         name: hotel
         default_save_name: hotel
@@ -2939,7 +2960,9 @@ adventures:
                 start_code: '# kodunuzu buraya yazın'
             16:
                 story_text: |
-                    Yeni bir dilde kelime bilginizi geliştirmek için kendi programınızı yapın.
+                    ### Exercise
+                    Take a look at the example code. This is a program to practise French vocabulary. Now make your own program to practice your vocabulary in a new language.
+                    If you don't know any other languages, you can use Google translate or you can use emojis and your native language.
                 example_code: |
                     ```
                     fransızca_kelimeler = ['bonjour', 'ordinateur', 'pomme de terre']
@@ -3130,22 +3153,28 @@ adventures:
                 start_code: '# kodunuzu buraya yazın'
             14:
                 story_text: |
-                    Bu seviyede, Hedy'nin size yeterince para biriktirip biriktirmediğinizi söylemesini sağlayabilirsiniz!
+                    ### Exercise
+                    In this level you can let Hedy tell you if you have saved up enough money!
+                    Finish this code by filling in the blanks!
                 example_code: |
                     ```
-                    biriken = {ask} 'Ne kadar para biriktirdiniz?'
-                    istek = {ask} 'Ne kadar paraya ihtiyacınız var?'
-                    haftalık = {ask} 'Her hafta ne kadar cep harçlığı alıyorsunuz?'
-                    birikmesi_gereken = istek - biriken
-                    haftalat = birikmesi_gereken / haftalık
-                    {if} istek > biriken
-                        {print} 'Biraz daha para biriktirmelisiniz!'
-                        {print} 'Size ' haftalat ' hafta daha gerekiyor'
-                    {else}
-                        {print} 'Harika! Yeterince paranız var'
-                        {print} 'Hadi alışverişe gidelim!'
+                    _ calculate_budget with wish, money, allowance
+                        to_save = wish - money
+                        weeks = to_save / allowance
+                        {if} wish _ money
+                            {print} 'You need to save up some more!'
+                            {print} 'Youll need ' weeks ' more weeks.'
+                        {else}
+                            {print} 'Great! You have enough'
+                            {print} 'Lets go shopping!'
+
+                    money = {ask} 'How much money have you saved?'
+                    wish = {ask} 'How much money do you need?'
+                    allowance = {ask} 'How much pocket money do you get each week?'
+
+                    {call} calculate_budget with _, _, _
                     ```
-                start_code: '# kodunuzu buraya yazın'
+                start_code: '# place your code here'
     pressit:
         name: Tuşa basma
         default_save_name: Basılı
@@ -3836,11 +3865,13 @@ adventures:
             15:
                 story_text: |
                     `{while}` ile müşterilerinizin istekleri bitene kadar sipariş eklemeye devam edebilmelerini sağlayabilirsiniz.
+                    ### Exercise
+                    Correctly add the `{while}` command to this code.
                 example_code: |
                     ```
                     {print} "McHedy'ye Hoş Geldiniz"
                     dahafazla = 'evet'
-                    {while} dahafazla == 'evet'
+                    _
                         sipariş = {ask} 'Ne sipariş etmek istersiniz?'
                         {print} sipariş
                         dahafazla = {ask} 'Başka bir şey sipariş etmek ister misiniz?'
@@ -3996,6 +4027,7 @@ adventures:
                 start_code: '# kodunuzu buraya yazın'
             15:
                 story_text: |
+                    ### Alıştırma
                     Bilgisayarı yenene kadar oynayın! Ama önce örnek kodu bitirin...
                 example_code: |
                     ```
@@ -4265,8 +4297,8 @@ adventures:
                     hayvanlar = ['eşekleri', 'köpekleri', 'inekleri']
                     sesler = ['ai', 'hav', 'möö']
                     {for} i {in} {range} 1 {to} 3
-                        hayvan = hayvanlar[i]
-                        ses = sesler[i]
+                        hayvan = _
+                        ses = _
                         {print} 'Ali Babanın bir çiftliği var'
                         {print} '...'
                         {print} 'çiftliğinde ' hayvan ' var'

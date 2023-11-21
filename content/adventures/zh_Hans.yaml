@@ -186,6 +186,9 @@ adventures:
                 story_text: |
                     运用`{while}`循环能让你的故事更有趣。比如，用`{while} game == 'on'`可以让游戏一直进行到结束为止。
                     或者用`{while} sword == 'lost'`来要求玩家必须先找到剑，才能继续游戏。
+
+                    ### Exercise
+                    The example code shows you how to use the `{while}` loop in a story. Now **think of your own scenario** in which the player has to find something before they can continue.
                 example_code: |
                     ```
                     钥匙 = '丢失'
@@ -591,7 +594,7 @@ adventures:
                 story_text: |
                     In this adventure you will build a calculator that calculates your mean grade for you. If you get your calculator to work, you can move on to the next adventure, which allows you to add two extra features.
 
-                    ## Exercise 1
+                    ### Exercise 1
                     Fill in the blanks to get the calculator to work.
                     * Start with the fourth line, add a question to figure out what grade the student got.
                     * In the fifth line you'll want to calculate the total of all grades, so the total = total + grade.
@@ -625,21 +628,27 @@ adventures:
                 story_text: |
                     您可以添加 `{while}` 循环到您已经在上一级中学过的计算器游戏中去。 
                     这可以确保{if}玩家在没有回答正确的情况下不能回答下一个问题。
+
+                    ### Exercise
+                    Add the `{while}` loop in the function, ask the player what number_1 times number_2 is and print their answer.
+                    Then `{call}` the function.
                 example_code: |
                     ```
-                    分数 = 0
-                    {for} i {in} {range} 0 {to} 9
-                        数字 = 1, 2, 3, 4, 5, 6, 7, 8, 9, 10
-                        数一 = 数字 {at} {random}
-                        数二 = 数字 {at} {random}
-                        正确 = 数一 * 数二
-                        答案 = 0
-                        {while} 答案 != 正确
-                            {print} 数一 '乘以' 数二 '是多少？'
-                            答案 = {ask} '填写答案'
-                            {print} '你的答案是' 答案
-                        {print} '做得好！'
-                    {print} '你赢了！'
+                    {define} new_question
+                        numbers = 1, 2, 3, 4, 5, 6, 7, 8, 9, 10
+                        number_1 = numbers {at} {random}
+                        number_2 = numbers {at} {random}
+                        correct = number_1 * number_2
+                        answer = 0
+                        _
+                        _
+                        _
+                        {print} 'Well done!'
+
+                    {print} 'Give 10 correct answers to win!'
+                    {for} i {in} {range} 1 {to} 10
+                        _
+                    {print} 'You win!'
                     ```
                 start_code: '# 在这里写你的代码'
     calculator_2:
@@ -649,7 +658,7 @@ adventures:
         levels:
             14:
                 story_text: |
-                    ## Exercise 2
+                    ### Exercise 2
                     **This is the second part of this adventure.** The adventure starts in the previous tab.
                     Of course, you don't always want to calculate the mean of 4 tests. You might want to calculate the mean of 10 tests or only 2...
                     We can fix this problem by adding the argument and variable 'amount_of_tests'.
@@ -659,7 +668,7 @@ adventures:
 
                     Try out your new program. Does it work?
 
-                    ## Exercise 3
+                    ### Exercise 3
                     Did you want to make your program even better? Great! In the previous program you could only calculate the mean grade of 1 subject, but it would be better if you could calculate the mean grade for all subjects you want!
                     We won't tell you how to do it, but we will give you one tip: Start your code in line 1 with: define calculate_mean_grade with subject.
                 example_code: |
@@ -1747,18 +1756,27 @@ adventures:
                 start_code: '# 在这里写你的代码'
             15:
                 story_text: |
-                    在这个游戏里，你需要用尽可能少的次数投出6。
+                    ### Exercise
+                    In this level you can create a little game in which you'll have to throw 6 as fast as possible.
+                    We have started the code, it's up to you to get the game to work!
+
+                    Firstly, add a `{while}` loop that checks if 6 has been thrown or not.
+                    As long as you haven't thrown 6 already, throw the dice on a random number.
+                    Print what the player has thrown.
+                    Add a try to the amount of tries
+                    Wait a second before you throw again, or - in case you've thrown a 6 - before the game ends.
                 example_code: |
                     ```
-                    选项 = 1, 2, 3, 4, 5, 6
-                    {print} '用最快的速度投出6！'
-                    投 = 0
-                    次数 = 0
-                    {while} 投 != 6
-                        投 = 选项 {at} {random}
-                        {print} '你投了' 投
-                        次数 = 次数 + 1
-                    {print} '很好！你在' 次数 '次里投出了6！'
+                    options = 1, 2, 3, 4, 5, 6
+                    {print} 'Throw 6 as fast as you can!'
+                    thrown = 0
+                    tries = 0
+                    _
+                    _
+                    _
+                    _
+                    _
+                    {print} 'Yes! You have thrown 6 in ' tries ' tries.'
                     ```
                 start_code: '# 在这里写你的代码'
     dishes:
@@ -2218,7 +2236,7 @@ adventures:
 
                     For example, in this code the function calculate_new_price will calculate the new price of any item. It will give you the new price as a return value.
 
-                    ## Exercise
+                    ### Exercise
                     Finish this code. We have already made the variable new_price for you, you only need to set it.
                     You should finish the line of code by calling the function that calculates the new price.
                 example_code: |
@@ -2472,7 +2490,9 @@ adventures:
                 start_code: '{print} ‘逃离鬼屋！’'
             14:
                 story_text: |
-                    在这一关你可以使用 `<` 和`>`符号去向你的游戏中引入生命。
+                    ### Exercise
+                    In this level you can use the `<` and `>` symbol to introduce lives to your game.
+                    Make sure the player loses a life when they come across the wrong monster and that the game stops if you have no lives left.
                 example_code: |
                     ```
                     {print} 'Escape from the haunted house'
@@ -2480,7 +2500,7 @@ adventures:
                     doors = 1, 2, 3
                     monsters = 'the wicked witch', 'a zombie', 'a sleeping 3 headed dog'
                     {for} i {in} {range} 1 {to} 10
-                        {if} lives > 0
+                        {if} lives _
                             good_door = doors {at} {random}
                             monster = monsters {at} {random}
                             chosen_door = {ask} 'Which door do you choose?'
@@ -2492,16 +2512,17 @@ adventures:
                                     {print} 'Pffieuw.... Its asleep'
                                 {else}
                                     {print} 'You lose one life'
-                                    lives = lives -1
+                                    lives = _
                         {else}
                             {print} 'GAME OVER'
                     ```
-                start_code: '# 在这里写下你的代码'
+                start_code: '# place your code here'
             16:
                 story_text: |
-                    这个鬼屋游戏使用了你在此级别中可以使用的列表之间的关联。
-                    例如：所有属于僵尸的道具在每个列表中都排在第一位，女巫的道具排在第二位，吸血鬼的道具排在第三位。
-                    检查下代码吧！
+                    ### Exercise
+                    This haunted house game uses the connection between the lists you can use in this level.
+                    For example: all the properties that belong to the zombie are first in all the lists, witch second and vampire third.
+                    Check out the code and fill in  `weapons[i]`, `monsters[i]` , `bad_fate[i]`, `good_fate[i]`, `hint[i]` on the correct blanks to get the code to work!
                 example_code: |
                     ```
                     numbers = [1, 2, 3]
@@ -2513,23 +2534,23 @@ adventures:
                     weapons = ['ham', 'lighter', 'garlic']
                     {print} 'You are standing in front of an old mansion'
                     {print} 'Something is not right here'
-                    {print} 'You hear ' hint[i]
+                    {print} 'You hear ' _
                     {print} 'You are going to explore it'
                     {print} 'You enter the kitchen and see a lighter, a raw ham and a garlic.'
                     your_weapon = {ask} 'What do you bring with you?'
                     {print} 'With your ' your_weapon ' you enter the living room'
-                    {print} 'There you find a ' monsters[i]
-                    needed_weapon = weapons[i]
+                    {print} 'There you find a ' _
+                    needed_weapon = _
                     {if} your_weapon == needed_weapon
                         {print} 'You use your ' your_weapon
-                        {print} good_fate[i]
+                        {print} _
                         {print} 'YOU WIN!'
                     {else}
                         {print} 'You have chosen the wrong weapon...'
-                        {print} bad_fate[i]
+                        {print} _
                         {print} 'GAME OVER'
                     ```
-                start_code: '# 在这里写下你的代码'
+                start_code: '# place your code here'
     hotel:
         name: hotel
         default_save_name: hotel
@@ -2790,7 +2811,9 @@ adventures:
                 start_code: '# 在这里写下你的代码'
             16:
                 story_text: |
-                    Make your own program to practice your vocabulary in a new language.
+                    ### Exercise
+                    Take a look at the example code. This is a program to practise French vocabulary. Now make your own program to practice your vocabulary in a new language.
+                    If you don't know any other languages, you can use Google translate or you can use emojis and your native language.
                 example_code: |
                     ```
                     french_words = ['bonjour', 'ordinateur', 'pomme de terre']
@@ -2961,22 +2984,28 @@ adventures:
                 start_code: '# 将你的代码写在这里'
             14:
                 story_text: |
-                    在这个关卡中你可以让海蒂告诉你是否你存了足够的钱！
+                    ### Exercise
+                    In this level you can let Hedy tell you if you have saved up enough money!
+                    Finish this code by filling in the blanks!
                 example_code: |
                     ```
+                    _ calculate_budget with wish, money, allowance
+                        to_save = wish - money
+                        weeks = to_save / allowance
+                        {if} wish _ money
+                            {print} 'You need to save up some more!'
+                            {print} 'Youll need ' weeks ' more weeks.'
+                        {else}
+                            {print} 'Great! You have enough'
+                            {print} 'Lets go shopping!'
+
                     money = {ask} 'How much money have you saved?'
                     wish = {ask} 'How much money do you need?'
                     allowance = {ask} 'How much pocket money do you get each week?'
-                    to_save = wish - money
-                    weeks = to_save / allowance
-                    {if} wish > money
-                        {print} 'You need to save up some more!'
-                        {print} 'Youll need ' weeks ' more weeks.'
-                    {else}
-                        {print} 'Great! You have enough'
-                        {print} 'Lets go shopping!'
+
+                    {call} calculate_budget with _, _, _
                     ```
-                start_code: '# 在这里写下你的代码'
+                start_code: '# place your code here'
     pressit:
         name: 按键
         default_save_name: 按下
@@ -3074,6 +3103,7 @@ adventures:
         levels:
             14:
                 story_text: |
+                    ### Exercise
                     In this adventure you can make your own quiz! Fill in the blanks, add more questions and enjoy your own quiz!
                     You can make a quiz about anything you like: your hobby, your favorite animal, your favorite book or anything at all!
                 example_code: |
@@ -3332,7 +3362,7 @@ adventures:
                     This means the last line shouldn't start with indentation as it doesn't belong to the block.
                     If you do start the last line with indentation the song will turn out wrong.
 
-                    ## Exercise
+                    ### Exercise
                     Each line in the example code starts with a blank. Remove the blanks and try to figure out which line need indentation and which don't to make the muffin man song.
                 example_code: |
                     ```
@@ -3606,11 +3636,13 @@ adventures:
             15:
                 story_text: |
                     通过`{while}`命令，你可以确保你的客人能不断追加点单，直到点完。
+                    ### Exercise
+                    Correctly add the `{while}` command to this code.
                 example_code: |
                     ```
                     {print} '欢迎来到麦海蒂快餐店'
                     还有 = '是'
-                    {while} 还有 == '是'
+                    _
                         点单 = {ask} '您要点什么？'
                         {print} 点单
                         还有 = {ask} '您还要点别的吗？'
@@ -4004,8 +4036,8 @@ adventures:
                     动物们 = ['猪', '狗', '牛']
                     声音们 = ['哼哼', '汪汪', '哞']
                     {for} i {in} {range} 1 {to} 3
-                        动物 = 动物们[i]
-                        声音 = 声音们[i]
+                        动物 = _
+                        声音 = _
                         {print} '老麦当劳有一个农场'
                         {print} '咦啊咦啊欧！'
                         {print} '在那个农场里，他有一个' 动物
