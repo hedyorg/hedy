@@ -192,7 +192,7 @@ levels:
                 feedback: Eso no es verdad
             -   option: Con el comando `{print}` puedes hacer que el texto aparezca
                 feedback: Bien
-            -   option: Con el comando {sleep}, puedes eliminar texto de tu pantalla.
+            -   option: Con el comando `{sleep}`, puedes eliminar texto de tu pantalla.
                 feedback: Así no es como funciona `{sleep}`.
             hint: '`{print}` todavía funciona de la misma manera que en el nivel 1'
             correct_answer: C
@@ -571,7 +571,7 @@ levels:
                 feedback: ¡Gran trabajo!
             -   option: Nada, ¡el código es correcto!
                 feedback: ¡Encuentra el fallo!
-            hint: Mira la línea 3
+            hint: Mira la línea 4
             correct_answer: C
             question_score: '10'
         10:
@@ -603,7 +603,7 @@ levels:
                     {add} caminado_ayer {to} senderistas
                     ```
                 feedback: Esto aumenta la probabilidad de que la persona que andó ayer tenga que hacerlo otra vez. Eso es malo.
-            hint: Se debería borrar de la lista a la persona que paseó al perro ayer.
+            hint: Se debería borrar de la lista a la persona que paseó a los perros ayer.
             correct_answer: A
             question_score: '10'
     4:
@@ -881,8 +881,8 @@ levels:
             -   option: ¡Correcto!
                 feedback: Esto se imprime cuando escribes la contraseña correcta
             -   option: SECRET
-                feedback: ¡Eso es cierto!'
-            -   option: password
+                feedback: ¡Así es!
+            -   option: contraseña
                 feedback: La contraseña no es contraseña...
             -   option: ALARM INTRUDER
                 feedback: ¡Esto se imprime cuando escribes la contraseña incorrecta!
@@ -3546,7 +3546,7 @@ levels:
             question_score: '10'
     16:
         1:
-            question_text: Which command should be filled in on the blanks to print a random snack?
+            question_text: ¿Qué comando debería rellenar los espacios en blancos para imprimir un snack aleatorio?
             code: |-
                 snacks = nachos, chips, cucumber, sweets
                 {print} _
@@ -3554,7 +3554,7 @@ levels:
             -   option: '`snacks {at} {random}`'
                 feedback: This is the old way.
             -   option: '`[{random} snack]`'
-                feedback: The order is wrong.
+                feedback: El orden está mal.
             -   option: '`snacks[{random}]`'
                 feedback: Correct
             -   option: '`snacks[{at} {random}]`'
