@@ -236,8 +236,10 @@ adventures:
                 start_code: '# Schrijf jouw code hier'
             15:
                 story_text: |
-                    In dit level kun je de `{while}` loop gebruiken om je verhaaltjes nog interessanter te maken. Zo kun je `{while} spelletje {is} 'aan'` gebruiken om het spel te laten werken totdat je game over bent.
-                    Of je kunt `{while} zwaard {is} 'kwijt'` gebruiken, zodat de speler niet verder kan totdat hij/zij het zwaard gevonden heeft.
+                    In dit level kun je de `{while}` loop gebruiken om je verhaaltjes nog interessanter te maken. Zo kun je `{while} spelletje == 'aan'` gebruiken om het spel te laten werken totdat je game over bent.
+                    Of je kunt `{while} zwaard == 'kwijt'` gebruiken, zodat de speler niet verder kan totdat hij/zij het zwaard gevonden heeft.
+                    ### Opdracht
+                    De voorbeeldcode laat zien hoe je  `{while}` in een verhaal kunt gebruiken. Bedenk nu je **eigen scenario** waarin de speler iets moet vinden voordat hij/zij door kan spelen.
                 example_code: |
                     ```
                     sleutels = 'kwijt'
@@ -674,20 +676,26 @@ adventures:
                 story_text: |
                     In het rekenspelletje dat je een aantal levels terug hebt leren maken, kun je de `{while}` loop toevoegen.
                     Hierdoor mag de speler pas door naar de volgende vraag als het goede antwoord gegeven is.
+
+                    ## Opdracht
+                    Voeg een `{while}` toe aan de functie, vraag de speler wat nummer_1 keer nummer_2 is en print hun antwoord.
+                    Gebruik daarna `{call}` om de functie op te roepen.
                 example_code: |
                     ```
-                    score = 0
-                    {for} i {in} {range} 0 {to} 9
-                        getallen = 1, 2, 3, 4, 5, 6, 7, 8, 9, 10
-                        getal1 = getallen {at} {random}
-                        getal2 = getallen {at} {random}
-                        goede_antwoord = getal1 * getal2
+                    {define} nieuwe_vraag
+                        nummers = 1, 2, 3, 4, 5, 6, 7, 8, 9, 10
+                        nummer_1 = nummers {at} {random}
+                        nummer_2 = nummers {at} {random}
+                        correct = nummer_1 * nummer_2
                         antwoord = 0
-                        {while} antwoord != goede_antwoord
-                            {print} 'Hoeveel is ' getal1 ' keer ' getal2 '?'
-                            antwoord = {ask} 'Vul hier het antwoord in:'
-                            {print} 'Jouw antwoord is ' antwoord
-                        {print} 'Goed zo!'
+                        _
+                        _
+                        _
+                        {print} 'Well done!'
+
+                    {print} 'Geef 10 goede antwoorden om te winnen!'
+                    {for} i {in} {range} 1 {to} 10
+                        _
                     {print} 'Je hebt gewonnen!'
                     ```
                 start_code: '# Schrijf jouw code hier'
@@ -1835,17 +1843,26 @@ adventures:
                 start_code: '# Schrijf jouw code hier'
             15:
                 story_text: |
-                    In dit dobbelspelletje moet je 6 gooien in zo min mogelijk beurten.
+                    ### Opdracht
+                    In dit level kun je een klein spelletje maken waarbij je zo snel mogelijk 6 moet gooien.
+                    We hebben al een beginnetje gemaakt aan je code, jij moet hem nog af zien te maken!
+
+                    Allereerst moet je een `{while}`loop toevoegen, die controleert of er al 6 is gegooid.
+                    Als dat niet zo is, gooi je de dobbelsteen op een random nummer.
+                    Print daarna wat de speler gegooid heeft.
+                    Tel een poging op bij het aantal pogingen dat je al gedaan hebt.
+                    Wacht een seconde voordat er weer gegooid wordt, of voordat het spel eindigt in het geval dat je 6 hebt gegooid.
                 example_code: |
                     ```
                     opties = 1, 2, 3, 4, 5, 6
                     {print} 'Gooi 6 in zo min mogelijk beurten!'
                     gegooid = 0
                     pogingen = 0
-                    {while} gegooid != 6
-                        gegooid = opties {at} {random}
-                        {print} 'Jij gooide ' gegooid
-                        pogingen = pogingen + 1
+                    _
+                    _
+                    _
+                    _
+                    _
                     {print} 'Hoera! Je hebt 6 gegooid in ' pogingen ' pogingen.'
                     ```
                 start_code: '# Schrijf jouw code hier'
@@ -2569,7 +2586,9 @@ adventures:
                 start_code: '{print} ''Ontsnap uit het spookhuis!'''
             14:
                 story_text: |
+                    ### Opdracht
                     In dit level gebruik je `<` en `>` om levens toe te voegen aan je spel.
+                    Zorg dat de speler een level verliest als hij/zij het verkeerde monster tegenkomen en zorg dat het spel stopt als er geen levens meer over zijn.
                 example_code: |
                     ```
                     {print} 'Ontsnap uit het spookhuis'
@@ -2577,7 +2596,7 @@ adventures:
                     deuren = 1, 2, 3
                     monsters = 'de boze heks', 'een zombie', 'een slapende 3 koppige hond'
                     {for} i {in} {range} 1 {to} 10
-                        {if} levens > 0
+                        {if} levens _
                             goede_deur = deuren {at} {random}
                             monster = monsters {at} {random}
                             gekozen_deur = {ask} 'Welke deur kies jij?'
@@ -2589,16 +2608,17 @@ adventures:
                                     {print} 'Pffieuw.... Hij slaapt'
                                 {else}
                                     {print} 'Je hebt een leven kwijt!'
-                                    levens = levens - 1
+                                    levens = _
                         {else}
                             {print} 'GAME OVER'
                     ```
                 start_code: '# Schrijf jouw code hier'
             16:
                 story_text: |
+                    ### Opdracht
                     Deze spookhuisgame gebruikt de connectie tussen de verschillende lijstjes, die je in dit level kunt gebruiken.
                     Bijvoorbeeld: alle eigenschappen die bij de zombie horen staan als eerste in alle lijstjes, de heks als tweede en de vampier derde.
-                    Kijk maar naar de code.
+                    Kijk maar naar de code en vul op een van deze variabelen in op de lege plekken: `wapens[i]`, `monsters[i]`, `goedlot[i]`, `noodlot[i]`, `hint[i]`
                 example_code: |
                     ```
                     getallen = [1, 2, 3]
@@ -2610,20 +2630,20 @@ adventures:
                     wapens = ['rauwe ham', 'aansteker', 'knoflook']
                     {print} 'Je staat bij een oude verlaten villa'
                     {print} 'Iets is hier niet pluis...'
-                    {print} 'Je hoort ' hint[i]
+                    {print} 'Je hoort ' _
                     {print} 'Je gaat op ontdekking'
                     {print} 'Je stapt de keukendeur binnen en ziet daar een aansteker, een rauwe ham en een knoflook'
                     jouw_wapen = {ask} 'Wat neem je mee?'
                     {print} 'Met je ' jouw_wapen ' loop je door naar de woonkamer'
-                    {print} 'Daar zie je een ' monsters[i]
-                    benodigde_wapen = wapens[i]
+                    {print} 'Daar zie je een ' _
+                    benodigde_wapen = _
                     {if} jouw_wapen == benodigde_wapen
                         {print} 'Je gebruikt je ' jouw_wapen
-                        {print} goedlot[i]
+                        {print} _
                         {print} 'Jij wint!'
                     {else}
                         {print} 'Je hebt helaas het verkeerde wapen'
-                        {print} noodlot[i]
+                        {print} _
                         {print} 'GAME OVER'
                     ```
                 start_code: '# Schrijf jouw code hier'
@@ -2884,7 +2904,9 @@ adventures:
                 start_code: '# Schrijf jouw code hier'
             16:
                 story_text: |
-                    Maak je eigen programma om woordjes te leren in een vreemde taal.
+                    ### Opdracht
+                    Kijk naar de voorbeeldcode. Dit programma is gemaakt om Franse woordjes te leren. Maak nu je eigen programma om een vreemde taal te leren.
+                    Als je geen andere taal spreekt, kun je Google Translate gebruiken of je kunt emojis en Nederlands gebruiken.
                 example_code: |
                     ```
                     franswoord = ['bonjour', 'ordinateur', 'pomme de terre']
@@ -3069,20 +3091,26 @@ adventures:
                 start_code: '# Schrijf jouw code hier'
             14:
                 story_text: |
+                    ### Opdracht
                     In dit level kun je Hedy laten vertellen of je al genoeg geld hebt gespaard of niet!
+                    Maak de code af door de lege plekken in te vullen!
                 example_code: |
                     ```
+                    _ bereken_budget {with} wens, geld, zakgeld
+                        sparen = wens - geld
+                        weken = sparen / zakgeld
+                        {if} wens _ geld
+                            {print} 'Helaas even doorsparen!'
+                            {print} 'Je moet nog ' weken ' weken.'
+                        {else}
+                            {print} 'Hoera, je hebt genoeg!'
+                            {print} 'Op naar de winkel!'
+
                     geld = {ask} 'Hoeveel geld heb je al gespaard?'
                     wens = {ask} 'Hoeveel geld heb je nodig?'
                     zakgeld = {ask} 'Hoeveel zakgeld krijg je per week?'
-                    sparen = wens - geld
-                    weken = sparen / zakgeld
-                    {if} wens > geld
-                        {print} 'Helaas even doorsparen!'
-                        {print} 'Je moet nog ' weken ' weken.'
-                    {else}
-                        {print} 'Hoera, je hebt genoeg!'
-                        {print} 'Op naar de winkel!'
+
+                    {call} _
                     ```
                 start_code: '# Schrijf jouw code hier'
     pressit:
@@ -3193,6 +3221,7 @@ adventures:
         levels:
             14:
                 story_text: |
+                    ### Opdracht
                     In dit avontuur leer je je eigen quiz maken. Vul het voorbeeld in, maak extra vragen en geniet van je eigen quiz!
                     Je kunt de quiz maken over wat je maar wil: je hobby, lievelingsdier, lievelingsboek of ...?
                 example_code: |
@@ -3781,11 +3810,13 @@ adventures:
             15:
                 story_text: |
                     Met de `{while}` kun je zorgen dat je klanten kunnen blijven bestellen tot ze klaar zijn.
+                    ### Opdracht
+                    Voeg het `{while}` commando op de juiste wijze toe aan deze code.
                 example_code: |
                     ```
                     {print} 'Welkom bij McHedy'
                     meer = 'ja'
-                    {while} meer == 'ja'
+                    _
                         bestelling = {ask} 'Wat wil je bestellen?'
                         {print} bestelling
                         meer = {ask} 'Wilt u nog iets bestellen?'
@@ -3943,6 +3974,7 @@ adventures:
                 start_code: '# Schrijf jouw code hier'
             15:
                 story_text: |
+                    ### Opdracht
                     Speel tot je de computer verslaat! Maar maak eerst de voorbeeld code af...
                 example_code: |
                     ```
@@ -4199,13 +4231,16 @@ adventures:
                 story_text: |
                     Maak het nog makkelijker om een liedje te programmeren zoals old MacDonald! Je kunt nu de dieren en hun geluiden aan elkaar koppelen, door ze op dezelfde plaats in het lijstje te zetten.
                     Ook de Dronken Zeeman gaat lekker snel in dit level! Je hebt maar 5 regels nodig voor het gehele lied. Kijk maar!
+
+                    ### Opdracht
+                    Maak het Old MacDonald liedje af door de juiste waarden in te vullen bij `dier` en `geluid`, namelijk `dieren[i]` en `geluiden[i]`.
                 example_code: |
                     ```
                     dieren = ['big', 'hond', 'koe']
                     geluiden = ['knor', 'woef', 'boe']
                     {for} i {in} {range} 1 {to} 3
-                        dier = dieren[i]
-                        geluid = geluiden[i]
+                        dier = _
+                        geluid = _
                         {print} 'Old MacDonald had een wei'
                         {print} 'hi ja hi ja ho!'
                         {print} 'En in die wei daar stond een ' dier

@@ -224,6 +224,9 @@ adventures:
                 story_text: |
                     Uzante la buklon `{while}`, oni povas igi siajn rakontojn pli interesaj. Ekzemple, oni povas uzi `{while} ludo {is} 'daŭranta'` por ke oni povu ludi ĝis la ludo finiĝos.
                     Aŭ oni povas uzi `{while} glavo {is} 'perdita'` por ke la ludanto ne povu daŭrigi sen trovi ion.
+
+                    ### Exercise
+                    The example code shows you how to use the `{while}` loop in a story. Now **think of your own scenario** in which the player has to find something before they can continue.
                 example_code: |
                     ```
                     ŝlosilo = 'perdita'
@@ -626,7 +629,7 @@ adventures:
                 story_text: |
                     In this adventure you will build a calculator that calculates your mean grade for you. If you get your calculator to work, you can move on to the next adventure, which allows you to add two extra features.
 
-                    ## Exercise 1
+                    ### Exercise 1
                     Fill in the blanks to get the calculator to work.
                     * Start with the fourth line, add a question to figure out what grade the student got.
                     * In the fifth line you'll want to calculate the total of all grades, so the total = total + grade.
@@ -660,20 +663,26 @@ adventures:
                 story_text: |
                     You can add the `{while}` loop to the calculator game you've learned to make in a previous level.
                     This makes sure the player can't continue to the next question if they answer incorrectly.
+
+                    ### Exercise
+                    Add the `{while}` loop in the function, ask the player what number_1 times number_2 is and print their answer.
+                    Then `{call}` the function.
                 example_code: |
                     ```
-                    score = 0
-                    {for} i {in} {range} 0 {to} 9
+                    {define} new_question
                         numbers = 1, 2, 3, 4, 5, 6, 7, 8, 9, 10
-                        number1 = numbers {at} {random}
-                        number2 = numbers {at} {random}
-                        correct = number1 * number2
+                        number_1 = numbers {at} {random}
+                        number_2 = numbers {at} {random}
+                        correct = number_1 * number_2
                         answer = 0
-                        {while} answer != correct
-                            {print} 'How much is ' number1 ' times ' number2 '?'
-                            answer = {ask} 'Fill in your answer:'
-                            {print} 'Your answer is ' answer
-                        {print} 'Good job!'
+                        _
+                        _
+                        _
+                        {print} 'Well done!'
+
+                    {print} 'Give 10 correct answers to win!'
+                    {for} i {in} {range} 1 {to} 10
+                        _
                     {print} 'You win!'
                     ```
                 start_code: '# place your code here'
@@ -684,7 +693,7 @@ adventures:
         levels:
             14:
                 story_text: |
-                    ## Exercise 2
+                    ### Exercise 2
                     **This is the second part of this adventure.** The adventure starts in the previous tab.
                     Of course, you don't always want to calculate the mean of 4 tests. You might want to calculate the mean of 10 tests or only 2...
                     We can fix this problem by adding the argument and variable 'amount_of_tests'.
@@ -694,7 +703,7 @@ adventures:
 
                     Try out your new program. Does it work?
 
-                    ## Exercise 3
+                    ### Exercise 3
                     Did you want to make your program even better? Great! In the previous program you could only calculate the mean grade of 1 subject, but it would be better if you could calculate the mean grade for all subjects you want!
                     We won't tell you how to do it, but we will give you one tip: Start your code in line 1 with: define calculate_mean_grade with subject.
                 example_code: |
@@ -1790,18 +1799,27 @@ adventures:
                 start_code: '# via kodo ĉi tie'
             15:
                 story_text: |
-                    En ĉi tiu ludo, vi ĵetadas ĵetkubon, provante ricevi seson per malmultaj provoj laŭeble.
+                    ### Exercise
+                    In this level you can create a little game in which you'll have to throw 6 as fast as possible.
+                    We have started the code, it's up to you to get the game to work!
+
+                    Firstly, add a `{while}` loop that checks if 6 has been thrown or not.
+                    As long as you haven't thrown 6 already, throw the dice on a random number.
+                    Print what the player has thrown.
+                    Add a try to the amount of tries
+                    Wait a second before you throw again, or - in case you've thrown a 6 - before the game ends.
                 example_code: |
                     ```
-                    opcioj = 1, 2, 3, 4, 5, 6
-                    {print} 'Provu ricevi seson per malmultaj provoj laŭeble!'
-                    rezulto = 0
-                    provoj = 0
-                    {while} rezulto != 6
-                        rezulto = opcioj {at} {random}
-                        {print} 'Via ĵeto montras ' rezulto
-                        provoj = provoj + 1
-                    {print} 'Jes! Vi ricevis seson per ' provoj ' provoj.'
+                    options = 1, 2, 3, 4, 5, 6
+                    {print} 'Throw 6 as fast as you can!'
+                    thrown = 0
+                    tries = 0
+                    _
+                    _
+                    _
+                    _
+                    _
+                    {print} 'Yes! You have thrown 6 in ' tries ' tries.'
                     ```
                 start_code: '# via kodo ĉi tie'
     dishes:
@@ -2246,7 +2264,7 @@ adventures:
 
                     For example, in this code the function calculate_new_price will calculate the new price of any item. It will give you the new price as a return value.
 
-                    ## Exercise
+                    ### Exercise
                     Finish this code. We have already made the variable new_price for you, you only need to set it.
                     You should finish the line of code by calling the function that calculates the new price.
                 example_code: |
@@ -2492,64 +2510,67 @@ adventures:
                 start_code: '{print} ''Eskapu el la hantata domo!'''
             14:
                 story_text: |
-                    En ĉi tiu nivelo, vi povas uzi la simbolojn `<` kaj `>` por kalkuli vivojn en via ludo.
+                    ### Exercise
+                    In this level you can use the `<` and `>` symbol to introduce lives to your game.
+                    Make sure the player loses a life when they come across the wrong monster and that the game stops if you have no lives left.
                 example_code: |
                     ```
                     {print} 'Escape from the haunted house'
                     lives = 3
-                    pordoj = 1, 2, 3
-                    monstroj = 'the wicked witch', 'a zombie', 'a sleeping 3 headed dog'
+                    doors = 1, 2, 3
+                    monsters = 'the wicked witch', 'a zombie', 'a sleeping 3 headed dog'
                     {for} i {in} {range} 1 {to} 10
-                        {if} lives > 0
-                            bona_pordo = pordoj {at} {random}
-                            monstro = monstroj {at} {random}
+                        {if} lives _
+                            good_door = doors {at} {random}
+                            monster = monsters {at} {random}
                             chosen_door = {ask} 'Which door do you choose?'
-                            {if} bona_pordo == chosen_door
+                            {if} good_door == chosen_door
                                 {print} 'You have chosen the correct door'
                             {else}
-                                {print} 'You see...' monstro
-                                {if} monstro == 'a sleeping 3 headed dog'
-                                    {print} 'Pffieuw.... Ĝi dormas'
+                                {print} 'You see...' monster
+                                {if} monster == 'a sleeping 3 headed dog'
+                                    {print} 'Pffieuw.... Its asleep'
                                 {else}
                                     {print} 'You lose one life'
-                                    lives = lives -1
+                                    lives = _
                         {else}
-                            {print} 'FINO'
+                            {print} 'GAME OVER'
                     ```
-                start_code: '# via kodo ĉi tie'
+                start_code: '# place your code here'
             16:
                 story_text: |
+                    ### Exercise
                     This haunted house game uses the connection between the lists you can use in this level.
                     For example: all the properties that belong to the zombie are first in all the lists, witch second and vampire third.
-                    Check out the code!
+                    Check out the code and fill in  `weapons[i]`, `monsters[i]` , `bad_fate[i]`, `good_fate[i]`, `hint[i]` on the correct blanks to get the code to work!
                 example_code: |
                     ```
-                    nombroj = [1, 2, 3]
-                    i = nombroj[{random}]
-                    sono = ['gruntadon', 'rikanon', 'susurantajn vespertflugilojn']
-                    monstroj = ['kadavromonstro', 'sorĉistino', 'vampiro']
-                    malbona_rezulto = ['Via cerbo estas formanĝita', 'Vi estas eterne malbenita', 'Vi estas mordita']
-                    bona_rezulto = ['Vi ĵetas la ŝinkon. La kadavromonstro, distrita, ekmanĝas ĝin.', 'Vi ekbruligas la kurtenojn. La sorĉistino fuĝas pro timo de la fajro.', 'La vampiro malamas la ajlon kaj fuĝas.']
-                    armiloj = ['ŝinko', 'fajrilo', 'ajlo']
-                    {print} 'Vi staras antaŭ malnova domego'
-                    {print} 'Io estas fia ĉi tie'
-                    {print} 'Vi aŭdas ' sono[i]
-                    {print} 'Vi esploros ĝin'
-                    {print} 'Vi eniras la kuirejon kaj vidas fajrilon, krudan ŝinkon kaj ajlon.'
-                    via_armilo = {ask} 'Kion vi prenas?'
-                    {print} 'Portante vian ' via_armilo 'n, vi eniras la ĉefĉambron'
-                    {print} 'Tie troviĝas ' monstroj[i]
-                    bezonata_armilo = armiloj[i]
-                    {if} via_armilo == bezonata_armilo
-                        {print} 'Vi uzas vian ' via_armilo 'n'
-                        {print} bona_rezulto[i]
-                        {print} 'VI GAJNAS!'
+                    numbers = [1, 2, 3]
+                    i = numbers[{random}]
+                    hint = ['growling', 'a cackling laugh', 'fluttering batwings']
+                    monsters = ['zombie', 'witch', 'vampire']
+                    bad_fate = ['Your brain is eaten', 'You are forever cursed', 'You are bitten']
+                    good_fate = ['You throw the ham. The zombie is distracted and starts eating it.', 'You set the curtains on fire. The witch flees out of fear for the fire', 'The vampire hates garlic and flees']
+                    weapons = ['ham', 'lighter', 'garlic']
+                    {print} 'You are standing in front of an old mansion'
+                    {print} 'Something is not right here'
+                    {print} 'You hear ' _
+                    {print} 'You are going to explore it'
+                    {print} 'You enter the kitchen and see a lighter, a raw ham and a garlic.'
+                    your_weapon = {ask} 'What do you bring with you?'
+                    {print} 'With your ' your_weapon ' you enter the living room'
+                    {print} 'There you find a ' _
+                    needed_weapon = _
+                    {if} your_weapon == needed_weapon
+                        {print} 'You use your ' your_weapon
+                        {print} _
+                        {print} 'YOU WIN!'
                     {else}
-                        {print} 'Vi elektis maltaŭgan armilon…'
-                        {print} malbona_rezulto[i]
-                        {print} 'FINO'
+                        {print} 'You have chosen the wrong weapon...'
+                        {print} _
+                        {print} 'GAME OVER'
                     ```
-                start_code: '# via kodo ĉi tie'
+                start_code: '# place your code here'
     hotel:
         name: hotel
         default_save_name: hotel
@@ -2810,7 +2831,9 @@ adventures:
                 start_code: '# via kodo ĉi tie'
             16:
                 story_text: |
-                    Faru vian propran programon por ekzerci vian vortprovizon en nova lingvo.
+                    ### Exercise
+                    Take a look at the example code. This is a program to practise French vocabulary. Now make your own program to practice your vocabulary in a new language.
+                    If you don't know any other languages, you can use Google translate or you can use emojis and your native language.
                 example_code: |
                     ```
                     francaj_vortoj = ['bonjour', 'ordinateur', 'pomme de terre']
@@ -2976,22 +2999,28 @@ adventures:
                 start_code: '# via kodo ĉi tie'
             14:
                 story_text: |
-                    En ĉi tiu nivelo, per la komando `{if}` de Hedy, vi povas kontroli, ĉu vi ŝparis sufiĉe da mono!
+                    ### Exercise
+                    In this level you can let Hedy tell you if you have saved up enough money!
+                    Finish this code by filling in the blanks!
                 example_code: |
                     ```
-                    mono = {ask} 'Kiom da mono vi ŝparis?'
-                    bezono = {ask} 'Kiom da mono vi bezonas?'
-                    poŝmono = {ask} 'Kiom da poŝmono vi ricevas ĉiusemajne?'
-                    ŝparenda = bezono - mono
-                    semajnoj = ŝparenda / poŝmono
-                    {if} bezono > mono
-                        {print} 'Vi devas ŝpari iom pli!'
-                        {print} 'Vi bezonos ' semajnoj ' pliajn semajnojn.'
-                    {else}
-                        {print} 'Bonege! Vi havas sufiĉe'
-                        {print} 'Ni ekbutikumu!'
+                    _ calculate_budget with wish, money, allowance
+                        to_save = wish - money
+                        weeks = to_save / allowance
+                        {if} wish _ money
+                            {print} 'You need to save up some more!'
+                            {print} 'Youll need ' weeks ' more weeks.'
+                        {else}
+                            {print} 'Great! You have enough'
+                            {print} 'Lets go shopping!'
+
+                    money = {ask} 'How much money have you saved?'
+                    wish = {ask} 'How much money do you need?'
+                    allowance = {ask} 'How much pocket money do you get each week?'
+
+                    {call} calculate_budget with _, _, _
                     ```
-                start_code: '# via kodo ĉi tie'
+                start_code: '# place your code here'
     pressit:
         name: Key presses
         default_save_name: Pressed
@@ -3365,7 +3394,7 @@ adventures:
                     This means the last line shouldn't start with indentation as it doesn't belong to the block.
                     If you do start the last line with indentation the song will turn out wrong.
 
-                    ## Exercise
+                    ### Exercise
                     Each line in the example code starts with a blank. Remove the blanks and try to figure out which line need indentation and which don't to make the muffin man song.
                 example_code: |
                     ```
@@ -3647,17 +3676,19 @@ adventures:
             15:
                 story_text: |
                     Per la `{while}` vi povas certigi, ke viaj klientoj povas mendadi ĝis ili finiĝos.
+
+                    ### Exercise
+                    Correctly add the `{while}` command to this code.
                 example_code: |
                     ```
                     {print} 'Bonvenon al McHedy'
                     pli = 'jes'
-                    {while} pli == 'jes'
+                    _
                         mendo = {ask} 'Kion vi volas mendi?'
                         {print} mendo
                         pli = {ask} 'Ĉu vi volas mendi ion pli?'
                     {print} 'Dankon!'
                     ```
-                    <!--{else}-->
                 start_code: '# via kodo ĉi tie'
     rock:
         name: Roko, papero, tondilo
@@ -3793,6 +3824,7 @@ adventures:
                 start_code: '# via kodo ĉi tie'
             15:
                 story_text: |
+                    ### Exercise
                     Ludu ĝis vi gajnos! Sed unue, kompletigu la ekzemplan kodon…
                 example_code: |
                     ```
@@ -4068,8 +4100,8 @@ adventures:
                     bestoj = ['porko', 'hundo', 'bovo']
                     sonoj = ['oink', 'woof', 'muĝ']
                     {for} i {in} {range} 1 {to} 3
-                        besto = bestoj[i]
-                        sono = sonoj[i]
+                        besto = _
+                        sono = _
                         {print} 'Old McDonald had a farm'
                         {print} 'E I E I O!'
                         {print} 'and on that farm he had a ' besto
