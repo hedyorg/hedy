@@ -320,7 +320,7 @@ class ForTeachersModule(WebsiteModule):
         if not survey:
             self.db.store_survey(dict(id=f"{survey_id}"))
             survey = self.db.get_survey(survey_id)
-        elif survey.get('skip') is True or survey.get('skip') is date.today().isoformat():
+        elif survey.get('skip') is True or survey.get('skip') == date.today().isoformat():
             return "", "", "", ""
 
         questions.append(gettext("class_survey_question1"))
