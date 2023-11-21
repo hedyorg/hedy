@@ -369,12 +369,12 @@ def get_unanswered_questions(survey, new_questions):
         return new_questions, ""
 
     for key, value in db.items():
-        if value['answer'] is '':
+        if value['answer'] == '':
             unanswered_questions.append(new_questions[int(key)-1])
 
     i = 0
     for key, value in db.items():
-        if value['answer'] is '':
+        if value['answer'] == '':
             value['question'] = unanswered_questions[i]
             i += 1
 
