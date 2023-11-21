@@ -619,7 +619,7 @@ levels:
                     ```
                     {print} Je suis très excité par ce quiz !
                     ```
-                feedback: '{print} a maintenant besoin de guillemets !'
+                feedback: '`{print}` a maintenant besoin de guillemets !'
             -   option: |-
                     ```
                     {print} 'C'est très exitant ce quiz !'
@@ -700,116 +700,128 @@ levels:
             correct_answer: B
             question_score: '10'
         5:
-            question_text: Qu'est-ce qui doit être changé pour que le code fonctionne ?
+            question_text: Qu'est-ce qui doit être changé pour que le code fonctionne ?
             code: |-
                 options {is} pierre, feuille, ciseaux
-                {print} 'options {at} {random}'
+                {print} "options {at} {random}"
             mp_choice_options:
             -   option: |-
                     ```
-                    '{print} options {at} {random}'
+                    "{print} options {at} {random}"
                     ```
-                feedback: N'utilise jamais de guillemets avant la commande `{print}`.
+                feedback: Ne mets jamais de guillemets avant la commande `{print}`.
             -   option: |-
                     ```
-                    {print} 'options' {at} {random}
+                    {print} "options" {at} {random}
                     ```
-                feedback: options est une variable. Tu ne souhaites pas afficher 'options {at} {random}'.
+                feedback: options est une variable. Tu ne souhaites pas afficher littéralement le mot « options ».
             -   option: |-
                     ```
                     {print} options {at} {random}
                     ```
                 feedback: C’est juste
-            -   option: Rien, le jeu fonctionne déjà !
+            -   option: Rien, le jeu fonctionne déjà !
                 feedback: Regardes bien. Il y a une erreur.
-            hint: Tu ne veux pas qu'Hedy affiche littéralement 'options {at} {random}', tu veux qu'elle affiche 'pierre' ou 'feuille' ou 'ciseaux'.
+            hint: Tu ne veux pas qu'Hedy affiche littéralement « options {at} {random} », tu veux qu'elle affiche « pierre », « papier » ou « ciseaux ».
             correct_answer: C
             question_score: '10'
         6:
-            question_text: Quelle serait la prochaine ligne de ce code ?
-            code: prix {is} 1 euro, 100 euros, 1 million euros
+            question_text: Quelle serait la prochaine ligne de ce code ?
+            code: prix {is} 1 euro, 100 euros, 1 million d'euros
             mp_choice_options:
             -   option: |-
                     ```
-                    {print} 'Tu gagnes...' prix {at} {random}
+                    {print} "Tu gagnes…" prix {at} {random}
                     ```
-                feedback: Super ! Tu as compris !
+                feedback: Super ! Tu as compris !
             -   option: |-
                     ```
-                    {print} Tu gagnes... 'prix {at} {random}'
+                    {print} Tu gagnes… "prix {at} {random}"
                     ```
-                feedback: Hedy va afficher 'prix {at} {random}'
+                feedback: Hedy va littéralement afficher « prix {at} {random} »
             -   option: |-
                     ```
-                    {print} Tu gagnes... prix {at} {random}
+                    {print} Tu gagnes… prix {at} {random}
                     ```
-                feedback: Tu as besoin de guillemets !
+                feedback: Tu as besoin de guillemets !
             -   option: |-
                     ```
-                    {print} 'Tu gagnes... prix {at} {random}'
+                    {print} "Tu gagnes… prix {at} {random}"
                     ```
-                feedback: Hedy va afficher 'prix{at} {random}''
-            hint: 'Réfléchis bien : qu''est-ce qui est une variable et doit être en dehors des guillemets ? Et quels sont les mots normaux qui doivent être à l''intérieur ?'
+                feedback: Hedy va afficher littéralement « Tu gagnes… prix {at} {random} »
+            hint: 'Réfléchis bien : qu''est-ce qui est une variable et doit être en dehors des guillemets ? Et quels sont les mots normaux qui doivent être à l''intérieur ?'
             correct_answer: A
             question_score: '10'
         7:
-            question_text: Quel est le problème avec ce code ?
+            question_text: Quel est le problème avec ce code ?
             code: |-
                 question {is} {ask} Que veux-tu savoir ?
                 reponses {is} oui, non, peut-être
                 {print} reponses {at} {random}
             mp_choice_options:
             -   option: Les guillemets sont manquants à la ligne 1
-                feedback: Correct !
+                feedback: Correct !
             -   option: Les guillemets sont manquants à la ligne 2
-                feedback: Une variable n'a pas besoin de guillemets
+                feedback: Une variable ne doit pas avoir de guillemets
             -   option: Les guillemets sont manquants à la ligne 3
-                feedback: Tu ne veux pas qu'Hedy affiche littéralement 'reponses {at} {random}', donc pas besoin de guillemets ici !
-            -   option: Rien, le code est bien comme ça !
-                feedback: Regardes bien. Tu as loupé une erreur !
+                feedback: Tu ne veux pas qu'Hedy affiche littéralement « reponses {at} {random} », donc pas besoin de guillemets ici !
+            -   option: Rien, le code est bien comme ça !
+                feedback: Regardes bien. Tu as loupé une erreur !
             hint: Vérifies chaque ligne pour savoir si elle a besoin de guillemets ou pas.
             correct_answer: A
             question_score: '10'
         8:
-            question_text: Quelle serait la prochaine ligne à ajouter à ce code ?
+            question_text: Quelle serait la prochaine ligne à ajouter à ce code ?
             code: |-
-                {print} 'Bienvenue au monty hall !'
-                {print} 'Il y a 3 portes devant toi !'
-                porte {is} {ask} 'Quelle est la porte que tu choisis !'
+                {print} "Bienvenue à notre jeu télévisé !"
+                {print} "Il y a 3 portes devant toi"
+                porte {is} {ask} "Quelle porte choisis-tu ?"
             mp_choice_options:
-            -   option: print Donc tu choisis la porte porte
+            -   option: |-
+                    ```
+                    {print} Donc tu choisis la porte porte
+                    ```
                 feedback: Il faut des guillemets
-            -   option: print 'Donc tu choisis la 'porte porte
-                feedback: Si le joueur choisit la porte 3, Hedy dira 'Donc tu choisis 3 3
-            -   option: print 'Donc tu choisis la porte' porte
+            -   option: |-
+                    ```
+                    {print} "Donc tu choisis la " porte porte
+                    ```
+                feedback: Si le joueur choisit la porte 3, Hedy dira « Donc tu choisis 3 3 »
+            -   option: |-
+                    ```
+                    {print} "Donc tu choisis la porte " porte
+                    ```
                 feedback: Super !
-            -   option: print 'Donc tu choisis la porte porte'
-                feedback: Hedy affichera 'Donc tu choisis la porte porte
-            hint: Le deuxième mot 'porte' devrait être remplacé par le numéro, le premier devrait toujours être le mot 'porte'...
+            -   option: |-
+                    ```
+                    {print} "Donc tu choisis la porte porte"
+                    ```
+                feedback: Hedy affichera « Donc tu choisis la porte porte »
+            hint: Le deuxième mot « porte » doit être remplacé par le numéro, le premier doit rester le mot « porte »…
             correct_answer: C
             question_score: '10'
         9:
-            question_text: Qu'est-ce qui ne pourra pas être affiché sur ton écran de sortie ?
+            question_text: Qu'est-ce qui ne pourra pas être affiché sur ton écran de sortie ?
             code: |-
                 clubs {is} Real Madrid, Bayern Munchen, Manchester United, Ajax
-                {print} clubs {at} {random} ' va gagner la ligue des champions'
+                {print} clubs {at} {random} " va gagner la Ligue des champions"
             mp_choice_options:
-            -   option: chocolat est ma glace préférée
-                feedback: Hedy pourrait `{print}`er ça
-            -   option: fraise vanille est ma glace préférée
-                feedback: Hedy pourrait `{print}`r ça
-            -   option: Le Bayern Munich va gagner la ligue des champions
-                feedback: Hedy pourrait `{print}`r ça
-            -   option: fraise est ma glace préférée
-                feedback: C'est vrai. Cette option n'est pas dans la liste
-            hint: Quelles sont les options parmis lesquelles Hedy peut choisir au hasard?
+            -   option: Ajax va gagner la Ligue des champions
+                feedback: Hedy pourrait afficher ça
+            -   option: Real Madrid va gagner la Ligue des champions
+                feedback: Hedy pourrait afficher ça
+            -   option: Bayern Munich va gagner la ligue des champions
+                feedback: Hedy pourrait afficher ça
+            -   option: FC Barcelona va gagner la ligue des champions
+                feedback: C'est vrai. Ce n'est pas dans la liste
+            hint: Quelles sont les options parmi lesquelles Hedy peut choisir au hasard ?
             correct_answer: D
             question_score: '10'
         10:
             question_text: Quelle affirmation est vraie ?
             code: |-
                 personnes {is} maman, papa, Emma, Sophie
-                {print} La vaisselle est faite par...
+                {print} La vaisselle est faite par…
                 {print} personnes {at} {random}
             mp_choice_options:
             -   option: Les guillemets manquent à la ligne 1
@@ -820,160 +832,160 @@ levels:
                 feedback: La ligne 3 n'a pas besoin de guillemets, car elle n'est pas affichée littéralement.
             -   option: Rien, ce code n'a pas d'erreurs
                 feedback: Tu en as loupé une !
-            hint: Regarde bien les guillemets !
+            hint: Regarde bien les guillemets !
             correct_answer: B
             question_score: '10'
     5:
         1:
-            question_text: Quelle commande devrait être remplie avec le _ ?
+            question_text: Quelle commande devrait-on écrire à la place du _ ?
             code: |-
-                nombre {is} {ask} 'Quel est ton nombre porte bonheur ?'
-                {if} nombre {is} 5 {print} 'Pareil !'
-                _ {print} 'Mon nombre porte bonheur est le 5 !'
+                nombre {is} {ask} "Quel est ton nombre porte-bonheur ?"
+                {if} nombre {is} 5 {print} "Pareil !"
+                _ {print} "Mon nombre porte-bonheur est le 5 !"
             mp_choice_options:
             -   option: '`{print}`'
                 feedback: Il y a déjà une commande `{print}`.
             -   option: '`{if}`'
                 feedback: La commande `{if}` est utlisée sur la ligne au dessus.
             -   option: '`{sleep}`'
-                feedback: Non ce n'est pas ça !
+                feedback: Non, ce n'est pas ça !
             -   option: '`{else}`'
                 feedback: C'est exact !
-            hint: Laquelle va avec la commande `{if}` ?
+            hint: Laquelle fonctionne de paire avec la commande `{if}` ?
             correct_answer: D
             question_score: '10'
         2:
-            question_text: Qu'est-ce qui s'affichera lorsque tu tapes le nom Hedy ?
+            question_text: Qu'est-ce qui s'affichera si tu réponds le nom Hedy ?
             code: |-
-                nom {is} {ask} 'Quel est ton nom?'
-                {if} nom {is} Hedy {print} 'fun' {else} {print} 'mouais'
+                nom {is} {ask} "Quel est ton nom ?"
+                {if} nom {is} Hedy {print} "cool" {else} {print} "moins cool"
             mp_choice_options:
-            -   option: fun
-                feedback: Correct !
-            -   option: mouais
-                feedback: Si le nom est Hedy, il dira "fun"
+            -   option: cool
+                feedback: C'est ça !
+            -   option: moins cool
+                feedback: Si le nom est Hedy, ce programme écrira « cool »
             -   option: Hedy
-                feedback: Non, cela n'affichera pas le nom
+                feedback: Non, ce n'est pas le nom qui s'affichera
             -   option: Erreur
                 feedback: Heureusement, non !
-            hint: '`{if}` nom `{is}` Hedy `{print}` ... ?'
+            hint: '`{if}` nom `{is}` Hedy `{print}` … ?'
             correct_answer: A
             question_score: '10'
         3:
             question_text: Quel est le bon mot de passe ?
             code: |-
-                secret {is} {ask} 'Quel est le mot de passe ?'
-                {if} secret {is} SECRET {print} 'Correct !'
-                {else} {print} 'ALERTE ! INTRUSION !'
+                mot-de-passe {is} {ask} "Quel est le mot de passe ?"
+                {if} mot-de-passe {is} SECRET {print} "Correct !"
+                {else} {print} "ALERTE ! INTRUSION !"
             mp_choice_options:
             -   option: Correct !
-                feedback: Ceci est le texte qui sera affiché si tu as le bon mot de passe
+                feedback: Ceci est le texte qui sera affiché si tu donnes le bon mot de passe
             -   option: SECRET
-                feedback: Correct !
-            -   option: secret
-                feedback: Le mot de passe n'est pas secret...
+                feedback: C'est exact '
+            -   option: mot-de-passe
+                feedback: Le mot de passe n'est pas mot-de-passe…
             -   option: ALERTE INTRUSION
-                feedback: Ceci est le texte qui sera affiché si tu n'as pas le bon mot de passe !
-            hint: '`{if}` secret `{is}` ... `{print}` ''Correct !'''
+                feedback: Ceci est le texte qui sera affiché si tu ne donnes pas le bon mot de passe !
+            hint: '`{if}` mot-de-passe `{is}` … `{print}` "Correct !"'
             correct_answer: B
             question_score: '10'
         4:
-            question_text: Qu'est-ce qu'Hedy affiche quand tu tapes le mauvais mot de passe ?
+            question_text: Qu'est-ce qu'Hedy affiche si tu tapes un mauvais mot de passe ?
             code: |-
-                secret {is} {ask} 'Quel est le mot de passe ?'
-                {if} secret {is} SECRET {print} 'Correct !'
-                {else} {print} 'ALERTE ! INTRUSION !'
+                mot-de-passe {is} {ask} "Quel est le mot de passe ?"
+                {if} mot-de-passe {is} SECRET {print} "Correct !"
+                {else} {print} "ALERTE ! INTRUSION !"
             mp_choice_options:
             -   option: Correct
-                feedback: Ceci est le texte qui sera affiché si tu as la bonne réponse...
+                feedback: Ceci est le texte qui sera affiché si tu as la bonne réponse, pas la mauvaise…
             -   option: SECRET
                 feedback: Ce n'est pas la bonne réponse
-            -   option: Faux !
+            -   option: Faux !
                 feedback: Non, ce n'est pas ce qu'Hedy affichera
             -   option: ALERTE ! INTRUSION !
-                feedback: Excellent travail !
-            hint: L'ordinateur déclenchera l'alarme en cas d'intrusion !
+                feedback: Excellent travail !
+            hint: L'ordinateur déclenchera l'alarme pour les intrusions !
             correct_answer: D
             question_score: '10'
         5:
-            question_text: Pourquoi Hedy dira 'ALARME ! INTRUSION !' si tu tapes 'secret' ?
+            question_text: Pourquoi Hedy dira 'ALARME ! INTRUSION !' si tu réponds « secret » ?
             code: |-
-                secret {is} {ask} 'Quel est le mot de passe ?'
-                {if} secret {is} SECRET {print} 'Correct !'
-                {else} {print} 'ALERTE ! INTRUSION !'
+                mot-de-passe {is} {ask} "Quel est le mot de passe ?"
+                {if} mot-de-passe {is} SECRET {print} "Correct !"
+                {else} {print} "ALERTE ! INTRUSION !"
             mp_choice_options:
-            -   option: Parce qu'il doit être en majuscules, comme SECRET
-                feedback: Bien !
-            -   option: Parce que le mot de passe est 'alarme'
+            -   option: Parce que le mot de passe est écrit en majuscules, donc SECRET
+                feedback: En effet !
+            -   option: Parce que le mot de passe est « alarme »
                 feedback: Non, ce n'est pas le mot de passe.
-            -   option: Parce qu'il n'a pas la bonne orthographe.
-                feedback: Regarde mieux
-            -   option: Parce que Hedy fait erreur
+            -   option: Parce que ce n'est pas la bonne orthographe.
+                feedback: L'orthographe est correcte, mais le mot de passe est en majuscule
+            -   option: Parce que Hedy fait une erreur
                 feedback: Non, Hedy a raison
-            hint: L'orthographe du mot doit être exactement la même.
+            hint: La réponse doit être exactement la même que le mot de passe.
             correct_answer: A
             question_score: '10'
         6:
-            question_text: Quel mot devrait être à la place du point d'interrogation dans la dernière ligne ?
+            question_text: Quel mot devrait être à la place de l'espace vide à la dernière ligne ?
             code: |-
-                {print} 'Je suis Hedy, la voyante du football !'
-                {print} 'Je vais prédire quelle place ton équipe va occuper !'
-                club is {ask} 'Quel est ton club préféré ?'
-                {if} club {is} Brest {print} 'Le Stade brestois 29 va gagner !'
-                _ {print} 'Désolé, ton club va terminer à la dernière place...'
+                {print} "Je suis Hedy, la voyante du football !"
+                {print} "Je vais prédire quelle place ton équipe va occuper !"
+                club is {ask} "Quel est ton club préféré ?"
+                {if} club {is} Brest {print} "Le Stade brestois 29 va gagner bien sur !"
+                _ {print} "Désolé, ton club va terminer à la dernière place…"
             mp_choice_options:
             -   option: |-
                     ```
                     {if}
                     ```
-                feedback: '`{if}` est déjà sur la ligne du dessus'
+                feedback: '`{if}` est déjà sur la ligne précédente'
             -   option: |-
                     ```
                     {at} {random}
                     ```
-                feedback: Non, tu as besoin de `{else}`.
+                feedback: Non, tu dois écrire `{else}`.
             -   option: |-
                     ```
                     {else}
                     ```
-                feedback: Bien !
+                feedback: Super !
             -   option: |-
                     ```
                     {print}
                     ```
-                feedback: '`{print}` est déjà là, il nous faut un mot avant !'
-            hint: '`{if}` va avec...?'
+                feedback: '`{print}` est déjà là, il nous faut un mot avant !'
+            hint: '`{if}` va de pair avec… ?'
             correct_answer: C
             question_score: '10'
         7:
-            question_text: Quel mot devrait être à la place du point d'interrogation ?
+            question_text: Quel mot devrait être à la place de l'espace vide ?
             code: |-
-                {print} 'Je peux prédire si tu seras millionnaire ou pas !'
-                prenom {is} {ask} 'Dis moi ton nom..'
-                {if} prenom {is} Hedy {print} 'Tu seras millionnaire !'
-                {else} _ 'Malheureusement... Pas de grosse fortune pour toi.'
+                {print} "Je peux prédire si tu seras millionnaire ou pas !"
+                nom {is} {ask} "Quel est ton nom ?"
+                {if} nom {is} Hedy {print} "Tu seras millionnaire !"
+                {else} _ "Malheureusement… Pas de gros sous pour toi."
             mp_choice_options:
             -   option: '`{if}`'
-                feedback: '`{if}` est déjà sur la ligne juste au-dessus.'
+                feedback: '`{if}` est déjà sur la ligne précédente.'
             -   option: '`{at}` `{random}`'
                 feedback: Non, tu n'as pas besoin de `{at} {random}`.
             -   option: '`{else}`'
-                feedback: Il y a déjà la commande `{else}`
+                feedback: La commande `{else}` est déjà présente
             -   option: '`{print}`'
-                feedback: Superbe !
-            hint: La commande `{print}` suit le `{else}`
+                feedback: Génial !
+            hint: Après `{else}` il faut la commande `{print}`
             correct_answer: D
             question_score: '10'
         8:
-            question_text: Quel mot devrait être à la place du point d'interrogation ?
+            question_text: Quel mot devrait être à la place de l'espace vide ?
             code: |-
-                animal {is} {ask} 'Quel est ton animal favori ?'
-                {if} _ {is} pingouin {print} 'Cest aussi mon animal préféré !'
-                {else} {print} 'Cool ! moi je préfère les pingouins.'
+                animal {is} {ask} "Quel est ton animal préféré ?"
+                {if} _ {is} pingouin {print} "C'est aussi mon animal préféré !"
+                {else} {print} "Cool ! Moi, je préfère les pingouins."
             mp_choice_options:
             -   option: |-
                     ```
-                    animal favori
+                    animal préféré
                     ```
                 feedback: Ce n'est pas le nom de la variable.
             -   option: |-
@@ -982,52 +994,52 @@ levels:
                     ```
                 feedback: Excellent travail !
             -   option: '`{if}`'
-                feedback: '`{if}`f est déjà là'
+                feedback: '`{if}` est déjà là'
             -   option: '`{print}`'
-                feedback: Non, ce n'est pas cela.
+                feedback: Non, ce n'est pas ça.
             hint: Quel est le nom de la variable ?
             correct_answer: B
             question_score: '10'
         9:
-            question_text: Quelle porte dois-tu choisir pour t'échapper??
+            question_text: Quelle porte dois-tu choisir pour t'échapper ?
             code: |-
-                {print} 'Échappe-toi de la maison hantée !'
-                {print} 'Il y a 3 portes devant toi'
-                porte {is} {ask} 'Quelle porte choisis-tu ?'
+                {print} "Échappe-toi de la maison hantée !"
+                {print} "Il y a 3 portes devant toi"
+                porte {is} {ask} "Quelle porte choisis-tu ?"
                 monstres {is} vampire, loup-garou, araignée géante
-                {if} porte {is} 2 {print} 'Bravo, tu peux t échapper !'
-                {else} {print} 'Tu es dévoré par un...' monstres {at} {random}
+                {if} porte {is} 2 {print} "Bravo, tu peux t'échapper !"
+                {else} {print} "Tu te fais dévorer par un… " monstres {at} {random}
             mp_choice_options:
             -   option: '1'
                 feedback: Mauvais choix ! Tu as été mangé
             -   option: '2'
-                feedback: Super ! Tu t'es échappé !
+                feedback: Super ! Tu t'échappes !
             -   option: '3'
                 feedback: Mauvais choix ! Tu as été mangé.
-            -   option: C'est un piège, tu seras toujours mangé !
+            -   option: C'est un piège, tu seras toujours mangé !
                 feedback: Heureusement, non !
-            hint: L'une des portes te mettra en sécurité..
+            hint: L'une des portes te mettra en sécurité.
             correct_answer: B
             question_score: '10'
         10:
-            question_text: Quel monstre se tient derrière la porte 1 ?
+            question_text: Quel monstre se tient derrière la porte 1 ?
             code: |-
-                {print} 'Échape toi de la maison hantée!'
-                {print} l y a 3 portes devant toi'
-                porte {is} {ask} 'Quelle porte choisis-tu ?'
+                {print} "Échape toi de la maison hantée !"
+                {print} "Il y a 3 portes devant toi"
+                porte {is} {ask} "Quelle porte choisis-tu ?"
                 monstres {is} vampire, loup-garou, araignée géante
-                {if} porte {is} 2 {print} 'Bravo, tu peux t échapper !'
-                {else} {print} 'Tu es dévoré par un...' monstres {at} {random}
+                {if} porte {is} 2 {print} "Bravo, tu t'échapes !"
+                {else} {print} "Tu te fais dévorer par un…" monstres {at} {random}
             mp_choice_options:
             -   option: Hedy choisit un monstre au hasard à chaque fois.
                 feedback: Génial !
             -   option: vampire
-                feedback: Pas toujours...
+                feedback: Pas toujours…
             -   option: loup-garou
-                feedback: Pas toujours...
+                feedback: Pas toujours…
             -   option: araignée géante
-                feedback: Pas toujours...
-            hint: Attention aux 3 derniers mots... monstres `{at} {random}`...
+                feedback: Pas toujours…
+            hint: Attention aux 3 derniers mots… monstres `{at} {random}`…
             correct_answer: A
             question_score: '10'
     6:

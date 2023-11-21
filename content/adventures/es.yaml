@@ -364,8 +364,8 @@ adventures:
                     {ask} ¿Cómo te llamas?
                     ```
                 story_text_2: |
-                    ## El comando echo
-                    Si quieres que el ordenador te repita la respuesta, puedes usar el comando `{echo}`. Se hará eco de la respuesta de nuevo al final de la frase, así que en este ejemplo después de hola.
+                    ## El comando `{echo}`
+                    Si quieres que el ordenador te repita la respuesta, puedes usar el comando `{echo}`. Se hará eco de la respuesta al final de la frase. En este ejemplo después de hola.
                 example_code_2: |
                     ```
                     {print} ¡Hola!
@@ -829,26 +829,26 @@ adventures:
                 example_code: |
                     **¡Atención! Este código necesita ser depurado.
                     ```
-                    movie_choices {is} Dracula, Fast and furious, Solo en casa, Barbie
-                    pelicula_escogida {is} peliculas {at} {random}
-                    {print} Esta noche veremos movie_choices
-                    like {ask} ¿Te gusta esa película?
+                    opciones_peliculas {is} Dracula, Fast and furious, Solo en casa, Barbie
+                    pelicula_escogida {is} opciones_peliculas {at} {random}
+                    {print} Esta noche veremos pelicula _escogida
+                    gustar {ask} ¿Te gusta esa película?
                     {print} Mañana veremos otra.
-                    {add} movie_choices {at} movie_choices
-                    {print} Mañana veremos tomorrows_movie
-                    tomorrows_movie {is} movie_choices {at} {random}
+                    {add} pelicula_escogida {to} opciones_peliculas
+                    {print} Mañana veremos pelicula_mañana
+                    pelicula_mañana {is} opciones_peliculas {at} {random}
                     ¡Voy a por las palomitas! {print}
                     ```
                 start_code: |
-                    movie_choices {is} dracula, fast and furious, home alone, barbie
-                    chosen_movie {is} movies {at} {random}
-                    {print} Tonight we will watch chosen _movies
-                    like {ask} Do you like that movie?
-                    {print} Tomorrow we will watch something else.
-                    {add} chosen_movie {to} movie_choices
-                    {print} Tomorrow we will watch tomorrows_movie
-                    tomorrows_movie {is} movie_choices {at} {random}
-                    I'll go get the popcorn! {print}
+                    opciones_peliculas {is} Dracula, Fast and furious, Solo en casa, Barbie
+                    pelicula_escogida {is} opciones_peliculas {at} {random}
+                    {print} Esta noche veremos pelicula _escogida
+                    gustar {ask} ¿Te gusta esa película?
+                    {print} Mañana veremos otra.
+                    {add} pelicula_escogida {to} opciones_peliculas
+                    {print} Mañana veremos pelicula_mañana
+                    pelicula_mañana {is} opciones_peliculas {at} {random}
+                    ¡Voy a por las palomitas! {print}
             4:
                 story_text: |-
                     ### Ejercicio
@@ -1413,33 +1413,33 @@ adventures:
                     ```
                 start_code: |4
 
-                      define food_order
-                          toppings = ask 'pepperoni, tuna, veggie or cheese?'
-                          size = ask 'big, medium or small?'
-                          number_of_pizza = ask 'How many these pizzas would you like?'
+                          define food_order
+                              toppings = ask 'pepperoni, tuna, veggie or cheese?'
+                              size = ask 'big, medium or small?'
+                              number_of_pizza = ask 'How many these pizzas would you like?'
 
-                          print 'YOU ORDERED'
-                          print number_of_pizzas ' size  ' topping ' pizza'
+                              print 'YOU ORDERED'
+                              print number_of_pizzas ' size  ' topping ' pizza'
 
-                      define drinks_order
-                          drink = ask 'water, coke, icetea, lemonade or coffee?'
-                          number_of_drinks = ask 'How many of these drinks would you like?'
+                          define drinks_order
+                              drink = ask 'water, coke, icetea, lemonade or coffee?'
+                              number_of_drinks = ask 'How many of these drinks would you like?'
 
-                          print 'YOU ORDERED'
-                          print number_of_drinks ' ' drink
+                              print 'YOU ORDERED'
+                              print number_of_drinks ' ' drink
 
-                      'Welcome to Hedy pizza'
-                      more_food = ask 'Would you like to order a pizza?'
-                      while more_food = 'yes'
-                          return food_order
+                          'Welcome to Hedy pizza'
                           more_food = ask 'Would you like to order a pizza?'
-                      more_drinks = ask 'Would you like to order some drinks?'
-                      while more_drinks == 'yes'
-                          call drink_order
-                          more_drinks == ask 'Would you like to order more drinks?'
+                          while more_food = 'yes'
+                              return food_order
+                              more_food = ask 'Would you like to order a pizza?'
+                          more_drinks = ask 'Would you like to order some drinks?'
+                          while more_drinks == 'yes'
+                              call drink_order
+                              more_drinks == ask 'Would you like to order more drinks?'
 
 
-                      print 'Thanks for ordering!'
+                          print 'Thanks for ordering!'
             18:
                 story_text: |-
                     ### Exercise
@@ -1464,20 +1464,20 @@ adventures:
                     ```
                 start_code: |4
 
-                      animals = ['pig', 'dog', 'cow']
-                      sounds = ['oink', 'woof', 'moo']
-                      for i in range 1 to 3
-                          animal = animals[i]
-                          sound = sounds[i]
-                          print 'Old McDonald had a farm'
-                          print 'E I E I O!'
-                          print 'and on that farm he had a ' animal
-                          print 'E I E I O!'
-                          print 'with a ' sound sound ' here'
-                          print 'and a ' sound sound ' there'
-                          print 'here a ' sound
-                          print 'there a ' sound
-                          print 'everywhere a ' sound sound
+                          animals = ['pig', 'dog', 'cow']
+                          sounds = ['oink', 'woof', 'moo']
+                          for i in range 1 to 3
+                              animal = animals[i]
+                              sound = sounds[i]
+                              print 'Old McDonald had a farm'
+                              print 'E I E I O!'
+                              print 'and on that farm he had a ' animal
+                              print 'E I E I O!'
+                              print 'with a ' sound sound ' here'
+                              print 'and a ' sound sound ' there'
+                              print 'here a ' sound
+                              print 'there a ' sound
+                              print 'everywhere a ' sound sound
     default:
         name: Introducción
         default_save_name: intro
@@ -1571,8 +1571,8 @@ adventures:
                     precio_total {is} 0
                     {print} 'Bienvenido a McHedy'
                     pedido {is} {ask} '¿Qué le gustaría comer?'
-                    {if} pedido {is} precio_comida hamburguesa {is} 5
-                    {if} pedido {is} precio_comida patatas fritas {is} 2
+                    {if} pedido {is} hamburguesa precio_comida {is} 5
+                    {if} pedido {is} patatas precio_comida {is} 2
                     bebida {is} {ask} '¿Qué le gustaría beber?'
                     {if} bebida {is} precio_bebida agua {is} 0
                     {else} precio_bebida {is} 3
