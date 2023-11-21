@@ -42,8 +42,10 @@ jobs:
 
     # This is necessary for the TypeScript to contain translations
     # from Gettex.
-    - name: Compiling Babel translations
+    - name: Update and compile Babel translations
       run: |
+        pybabel extract -F babel.cfg -o messages.pot . --no-location --sort-output --omit-header
+        pybabel update -i messages.pot -d translations -N --no-wrap --omit-header
         pybabel compile -f -d translations
 
     - name: Compile TypeScript to JavaScript
