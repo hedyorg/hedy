@@ -1912,10 +1912,11 @@ class ConvertToPython_6(ConvertToPython_5):
 
             exceptions = self.make_catch_exception(args)
             try_prefix = "try:\n" + textwrap.indent(exceptions, "  ")
+            exception_text = translate_value_error(Command.sleep, value, 'number')
             code = try_prefix + textwrap.dedent(f"""\
                   time.sleep(int({value}))
                 except ValueError:
-                  raise Exception(f'While running your program the command {style_command(Command.sleep)} received the value {style_command('{' + value + '}')} which is not allowed. Try changing the value to a number.')""")
+                  raise Exception({exception_text})""")
             return code
 
     def print_ask_args(self, meta, args):
