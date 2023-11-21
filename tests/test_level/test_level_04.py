@@ -579,7 +579,6 @@ class TestsLevel4(HedyTester):
 
         self.multi_level_tester(
             max_level=5,
-            # set to false for now, probably is incorrect so a look would be appreciated!
             skip_faulty=False,
             code=code,
             extra_check_function=lambda c: c.exception.arguments['line_number'] == 2,
