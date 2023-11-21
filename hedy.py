@@ -1373,12 +1373,10 @@ class ConvertToPython(Transformer):
                     raise exceptions.UndefinedVarException(name=first_unquoted_var, line_number=var_access_linenumber)
 
     # static methods
-                    
+
     @staticmethod
     def check_if_error_skipped(tree):
         return hasattr(IsValid, tree.data)
-
-
 
     @staticmethod
     def is_quoted(s):
