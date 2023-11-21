@@ -826,7 +826,7 @@ class TypeValidator(Transformer):
 
     def validate_binary_command_args_type(self, command, tree, type_promotion_rules):
         allowed_types = get_allowed_types(command, self.level)
-        
+
         left_type = self.check_type_allowed(command, allowed_types, tree.children[0], tree.meta)
         right_type = self.check_type_allowed(command, allowed_types, tree.children[1], tree.meta)
 
@@ -3388,7 +3388,7 @@ def transpile_inner(input_string, level, lang="en", populate_source_map=False, i
 
         if not valid_echo(abstract_syntax_tree):
             raise exceptions.LonelyEchoException()
-        
+
         lookup_table = create_lookup_table(abstract_syntax_tree, level, lang, input_string)
 
         # FH, may 2022. for now, we just out arabic numerals when the language is ar
