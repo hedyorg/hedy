@@ -266,6 +266,78 @@ class LiveStatisticsModule(WebsiteModule):
         self.MAX_COMMON_ERRORS = 10
         self.MAX_FEED_SIZE = 4
 
+    def get_matrix_values(self, students, class_adventures_formatted, ticked_adventures, level):
+        rendered_adventures = class_adventures_formatted.get(level)
+        matrix = [[None for _ in range(len(class_adventures_formatted[level]))] for _ in range(len(students))]
+        for student_index in range(len(students)):
+            student_list = ticked_adventures.get(students[student_index])
+            if student_list and rendered_adventures:
+                for program in student_list:
+                    if program['level'] == level:
+                        index = rendered_adventures.index(program['name'])
+                        matrix[student_index][index] = 1 if program['ticked'] else 0
+        return matrix
+
+    def get_grid_info(self, user, class_id, level):
+        class_ = self.db.get_class(class_id)
+        if hedy_content.Adventures(g.lang).has_adventures():
+            adventures = hedy_content.Adventures(g.lang).get_adventure_keyname_name_levels()
+        else:
+            adventures = hedy_content.Adventures("en").get_adventure_keyname_name_levels()
+
+        students = sorted(class_.get("students", []))
+        teacher_adventures = self.db.get_teacher_adventures(user["username"])
+
+        class_info = get_customizations(self.db, class_id)
+        class_adventures = class_info.get('sorted_adventures')
+
+        adventure_names = {}
+        for adv_key, adv_dic in adventures.items():
+            for name, _ in adv_dic.items():
+                adventure_names[adv_key] = hedy_content.get_localized_name(name, g.keyword_lang)
+
+        for adventure in teacher_adventures:
+            adventure_names[adventure['id']] = adventure['name']
+
+        class_adventures_formatted = {}
+        for key, value in class_adventures.items():
+            adventure_list = []
+            for adventure in value:
+                # if the adventure is not in adventure names it means that the data in the customizations is bad
+                if not adventure['name'] == 'next' and adventure['name'] in adventure_names:
+                    adventure_list.append(adventure_names[adventure['name']])
+            class_adventures_formatted[key] = adventure_list
+
+        ticked_adventures = {}
+        student_adventures = {}
+        for student in students:
+            programs = self.db.last_level_programs_for_user(student, level)
+            if programs:
+                ticked_adventures[student] = []
+                current_program = {}
+                for _, program in programs.items():
+                    # Old programs sometimes don't have adventures associated to them
+                    # So skip them
+                    if 'adventure_name' not in program:
+                        continue
+                    name = adventure_names.get(program['adventure_name'], program['adventure_name'])
+                    customized_level = class_adventures_formatted.get(str(program['level']))
+                    if name in customized_level:
+                        student_adventure_id = f"{student}-{program['adventure_name']}-{level}"
+                        current_adventure = self.db.student_adventure_by_id(student_adventure_id)
+                        if not current_adventure:
+                            # store the adventure in case it's not in the table
+                            current_adventure = self.db.store_student_adventure(
+                                dict(id=f"{student_adventure_id}", ticked=False, program_id=program['id']))
+
+                        current_program = dict(id=program['id'], level=str(program['level']),
+                                               name=name, ticked=current_adventure['ticked'])
+
+                        student_adventures[student_adventure_id] = program['id']
+                        ticked_adventures[student].append(current_program)
+
+        return students, class_, class_adventures_formatted, ticked_adventures, adventure_names, student_adventures
+
     def __selected_levels(self, class_id):
         class_customization = get_customizations(self.db, class_id)
         class_overview = class_customization.get('dashboard_customization')
@@ -349,6 +421,13 @@ class LiveStatisticsModule(WebsiteModule):
         students, common_errors, selected_levels, quiz_info, attempted_adventures, \
             adventures = self.get_class_live_stats(user, class_)
 
+        students_grid, class_, class_adventures_formatted, ticked_adventures, \
+            adventure_names, student_adventures = self.get_grid_info(
+                user, class_id, 1)
+        matrix_values = self.get_matrix_values(students_grid, class_adventures_formatted, ticked_adventures, '1')
+        adventure_names = {value: key for key, value in adventure_names.items()}
+        print(class_adventures_formatted)
+        print(adventure_names)
         return render_template(
             "class-live-stats.html",
             class_info={
@@ -363,12 +442,20 @@ class LiveStatisticsModule(WebsiteModule):
             dashboard_options={
                 "student": student
             },
+            grid={
+                'students': students_grid,
+            },
             attempted_adventures=attempted_adventures,
             dashboard_options_args=dashboard_options_args,
             adventures=adventures,
             max_level=HEDY_MAX_LEVEL,
             current_page="my-profile",
-            page_title=gettext("title_class live_statistics")
+            page_title=gettext("title_class live_statistics"),
+            class_adventures=class_adventures_formatted,
+            ticked_adventures=ticked_adventures,
+            matrix_values=matrix_values,
+            adventure_names=adventure_names,
+            student_adventures=student_adventures,
         )
 
     def get_class_live_stats(self, user, class_):
@@ -427,6 +514,60 @@ class LiveStatisticsModule(WebsiteModule):
         selected_levels = self.__selected_levels(class_id)
         chosen_level = request.args.get("level")
 
+        if int(chosen_level) in selected_levels:
+            selected_levels.remove(int(chosen_level))
+        else:
+            selected_levels.append(int(chosen_level))
+
+        customization = get_customizations(self.db, class_id)
+        dashboard_customization = customization.get('dashboard_customization', {})
+        dashboard_customization['selected_levels'] = selected_levels
+        customization['dashboard_customization'] = dashboard_customization
+        self.db.update_class_customizations(customization)
+
+        students, common_errors, selected_levels, quiz_info, attempted_adventures, \
+            adventures = self.get_class_live_stats(user, class_)
+
+        student = _check_student_arg()
+        dashboard_options_args = _build_url_args(student=student)
+
+        return jinja_partials.render_partial(
+            "partial-class-live-stats.html",
+            class_info={
+                "id": class_id,
+                "students": students,
+                "common_errors": common_errors['errors']
+            },
+            class_overview={
+                "selected_levels": selected_levels,
+                "quiz_info": quiz_info
+            },
+            dashboard_options={
+                "student": student
+            },
+            attempted_adventures=attempted_adventures,
+            dashboard_options_args=dashboard_options_args,
+            adventures=adventures,
+            max_level=HEDY_MAX_LEVEL,
+            current_page="my-profile",
+            page_title=gettext("title_class live_statistics")
+        )
+
+    @route("/live_stats/class/<class_id>/level/<level>", methods=["GET"])
+    @requires_login
+    def select_level(self, user, class_id, level):
+        """
+        Adds or remove the current level from the UI
+        """
+        if not is_teacher(user) and not is_admin(user):
+            return utils.error_page(error=403, ui_message=gettext("retrieve_class_error"))
+
+        class_ = self.db.get_class(class_id)
+        if not class_ or (class_["teacher"] != user["username"] and not is_admin(user)):
+            return utils.error_page(error=404, ui_message=gettext("no_such_class"))
+
+        chosen_level = level
+        selected_levels = []
         if int(chosen_level) in selected_levels:
             selected_levels.remove(int(chosen_level))
         else:
