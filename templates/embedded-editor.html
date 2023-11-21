@@ -97,7 +97,7 @@
             <div class="h-12" id="code_related_buttons">
               <div class="flex justify-between gap-2 items-start h-12 overflow-visible">
                 <div id="runButtonContainer">
-                  <button id="runit" class="green-btn" onclick='hedyApp.runit({{ level }}, "{{ language }}", {{_('already_program_running')|default(None)|tojson}})'>{{_('run_code_button')}} </button>
+                  <button id="runit" class="green-btn" onclick='hedyApp.runit({{ level }}, "{{ language }}", {{_('already_program_running')|default(None)|tojson}}, "run")'>{{_('run_code_button')}} </button>
                   <button id="stopit" class="red-btn" onclick="hedyApp.stopit()" style="display: none;">{{_('stop_code_button')}}</button>
                 </div>
               </div>
@@ -130,9 +130,21 @@
 
             // Dynamically add the gutter to the editor when readOnly
             {% if readOnly %}
-                var editor = ace.edit('editor');
+                const editor = ace.edit('editor');
                 editor.setOption("showGutter", true);
             {% endif %}
+
+            // Listen to message from the host to dynamically toggle readOnly mode
+            window.addEventListener('message', function (message) {
+                if (message.data.mode) {
+                    const editor = ace.edit('editor');
+                    if (message.data.mode == 'read') {
+                        editor.setReadOnly(true);
+                    } else if (message.data.mode == 'edit') {
+                        editor.setReadOnly(false);
+                    }
+                }
+            });
 
             // We need a work-around to allow listening to events from outside the embedded editor
             function sendRunEvent() {

@@ -216,6 +216,10 @@ class TestQueryInMemory(unittest.TestCase, Helpers):
             {'id': 'key', 'sort': 3, 'x': 'z'},
         ])
 
+    def test_no_superfluous_keys(self):
+        with self.assertRaises(ValueError):
+            self.table.get_many({'m': 'some_value', 'Z': 'some_other_value'})
+
     def test_query_index(self):
         self.table.create({'id': 'key', 'sort': 1, 'm': 'val'})
         self.table.create({'id': 'key', 'sort': 2, 'm': 'another'})

@@ -22,8 +22,8 @@ levels:
             text: |-
                 Si sabes programar, puedes hacer muchas cosas chulas:
                 * Construir historias interactivas
-                * Crear dibujos por ordenador y dibujarlos en papel o tela
-                * Construir tus propias aplicaciones para usarlas en tu teléfono
+                * Crear dibujos por ordenador y dibujarlos en papel o tela.
+                * Construir tus propias aplicaciones para usarlas en tu teléfono.
         5:
             header: Programar en Hedy
             text: |-
@@ -38,7 +38,7 @@ levels:
             header: Programar en Hedy
             text: |-
                 Iniciamos el código con el botón Ejecutar código debajo del código.
-                <iframe class="embedded-hedy" src="/adventure/story/1/raw"></iframe>
+                <iframe class="embedded-hedy" src="/adventure/story/1/raw"></iframe>.
         8:
             header: Programar en Hedy
             text: |-
@@ -471,7 +471,9 @@ levels:
     12:
         1:
             header: Bienvenido al nivel 12
-            text: Desde este nivel en adelante se permite que uses números decimales y hay algunos cambios a las comillas.
+            text: |-
+                A partir de este nivel puedes utilizar números decimales y hay algunos cambios en las comillas.
+                ¡A partir de este nivel también puedes utilizar funciones!
         2:
             header: Comillas
             text: |-
@@ -486,12 +488,29 @@ levels:
                 Los números no llevan comillas.
             editor: <iframe class="fragment" src="/adventure/maths/12/raw"></iframe>
         4:
-            header: ¿Preparado para probarlo?
-            text: ¡Disfruta las aventuras en el nivel 12!
+            header: Functions!
+            text: |-
+                In this level you'll learn how to use functions. A function is a block of code you can easily use multiple times. Using functions helps us organize pieces of code that we can use again and again. To create a function, use define and give the function a name. Then put all the lines you want in the function in a indented block under the define line. Leave one empty line in your code to make it look nice and neat. Great job! You have created a function!
+
+                Now, whenever we need that block of code, we just use call with the function's name to call it up! We don't have to type that block of code again.
+        5:
+            header: ¡Brilla brilla pequeña estrella!
+            text: |-
+                En este programa ves un ejemplo de una función.
+                ¡Veamos qué ocurre si rellenas el resto!
+            editor: <iframe class="fragment" src="/adventure/songs_2/12/raw"></iframe>
+        6:
+            header: Funciones
+            text: Como has podido ver en el ejemplo una función es un bloque de código que puede ser llamado en cualquier momento. Se usa `{define}` para definir la función y `{call}` para usarla.
+        7:
+            header: ¿Listo para probarlo?
+            text: ¡Disfruta de las aventuras en el nivel 12!
     13:
         1:
             header: Bienvenido al nivel 13
-            text: ¡Ahora vamos a aprender `{and}` y `{or}`! Si quieres comprobar dos sentencias, no tienes que usar dos si sino que se puede utilizar y y o.
+            text: |-
+                Ahora vamos a aprender `{and}` y `{or}`. Si quieres comprobar dos sentencias, no tienes que usar dos if sino que puedes usar and y or.
+                A partir de ahora también puedes usar argumentos en tus funciones.
         2:
             header: El comando y
             text: |-
@@ -506,12 +525,51 @@ levels:
                 Veamos que ocurre cuando cambias el `{and}` por `{or}`.
             editor: <iframe class="fragment" src="/adventure/and_or_command/13/raw"></iframe>
         4:
+            header: Functions with arguments
+            text: Now that you've learned how to use functions, you'll learn how to use a function with an **argument**. An argument is a variable that is used within a function. It is not used outside the function.
+        5:
+            header: Ejemplo
+            text: |-
+                En este ejemplo puedes ver cómo se utiliza el argumento 'place' en la función.
+                Ejecuta el código y cambia 'ocean' y 'sea' por otra cosa, a ver qué pasa.
+            editor: <iframe class="fragment" src="/adventure/functions/13/raw"></iframe>
+        6:
+            header: Un ejemplo con una variable
+            text: |-
+                Ahora has ssen cómo funcionan los argumentos, también podría combinar función con una pregunta.
+
+                ¿Qué sucede si usted hace estos cambios?:
+                ```
+                definir canción con lugar
+                    Imprimir 'Mi Bonnie es ' lugar
+
+                La respuesta es preguntar "¿Dónde está mi Bonnie?"
+                llamada a la canción con la respuesta
+                ```
+            editor: <iframe class="fragment" src="/adventure/functions/13/raw"></iframe>
+        7:
+            header: ¡Aún más preguntas!
+            text: |-
+                Ahora hemos combinado aún más preguntas con la función. Escriba este código y vea qué sucede.
+
+                Observe cómo las variables y los argumentos tienen el mismo nombre. Esto está permitido.
+                ¿Te confunde? Simplemente use nombres diferentes, eso también está permitido.
+                ```
+                definir canción con nombre, lugar
+                    imprime 'Mi 'nombre' es 'lugar
+
+                el nombre es preguntar '¿Quién?'
+                el lugar es preguntar '¿Dónde están?'
+                llamar canción con nombre, lugar
+                ```
+            editor: <iframe class="fragment" src="/adventure/functions/13/raw"></iframe>
+        8:
             header: ¡Vamos!
-            text: ¡Disfruta las aventuras en el nivel 13!
+            text: ¡Disfruta de las aventuras en el nivel 13!
     14:
         1:
             header: Bienvenido al nivel 14
-            text: En este nivel aprenderás algunos símbolos nuevos que pueden ayudarte a mejorar tus programas, como >.
+            text: En este nivel aprenderás algunos símbolos nuevos que pueden ayudarte a mejorar tus programas, como >. También aprenderás a trabajar con los valores de retorno de una función.
         2:
             header: Símbolos
             text: |-
@@ -539,8 +597,16 @@ levels:
                 == se usa en sentencias `{if}`.
             editor: <iframe class="fragment" src="/adventure/default/14/raw"></iframe>
         4:
+            header: Return value
+            text: In the previous levels you have learned to create functions and use arguments with them. Another great use of a function is to let it calculate something for you. You can give the function a calculation and it will give you the answer of the calculation. This answer is called a **return
+                value**.
+        5:
+            header: Valor devuelto
+            text: Por ejemplo, en este código la función calculate_new_price calculará el nuevo precio de cualquier artículo. Le dará el nuevo precio como valor de retorno.
+            editor: <iframe class="fragment" src="/adventure/functions/14/raw"></iframe>
+        6:
             header: ¡Manos a la obra!
-            text: ¡Disfruta las aventuras en el nivel 14!
+            text: ¡Disfruta de las aventuras en el nivel 14!
     15:
         1:
             header: Bienvenido al nivel 15

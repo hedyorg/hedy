@@ -1,8 +1,16 @@
-import { theLevel } from "./app";
-import { HedyEditorCreator, HedyEditor, Breakpoints, EditorType, EditorEvent } from "./editor";
+import { theGlobalSourcemap, theLevel } from "./app";
+import { ClientMessages } from "./client-messages";
+import { HedyEditorCreator, HedyEditor, Breakpoints, EditorType, EditorEvent, SourceRange } from "./editor";
 import { EventEmitter } from "./event-emitter";
+import { error } from "./modal";
 // const MOVE_CURSOR_TO_BEGIN = -1;
 const MOVE_CURSOR_TO_END = 1;
+
+/**
+ * The 'ace_breakpoint' style has been overridden to show a sleeping emoji in the gutter
+ */
+const BP_DISABLED_LINE = 'ace_breakpoint';
+
 export class HedyAceEditorCreator implements HedyEditorCreator {
   /**
    * This function should initialize the editor and set up all the required
@@ -44,7 +52,8 @@ export class HedyAceEditor implements HedyEditor {
   private editorEvent = new EventEmitter<EditorEvent>({
     change: true,
     guttermousedown: true,
-    changeBreakpoint: true
+    changeBreakpoint: true,
+    click: true
   });
   private markerClasses = new Map<number, string>();
   private currentLineMarker?: MarkerLocation;
@@ -210,7 +219,7 @@ export class HedyAceEditor implements HedyEditor {
  * It's actually a map of number-to-class. Class is usually 'ace_breakpoint'
  * but can be something you pick yourself.
  */
-  getBreakpoints(): Breakpoints {
+  getDeactivatedLines(): Breakpoints {
     return this._editor.session.getBreakpoints() as unknown as Breakpoints;
   }
 
@@ -231,7 +240,7 @@ export class HedyAceEditor implements HedyEditor {
     }
   }
 
-  public on(key: Parameters<typeof this.editorEvent.on>[0], handler: Parameters<typeof this.editorEvent.on>[1]) {
+  public on(key: Parameters<typeof this.editorEvent.on>[0], handler: any) {
     const ret = this.editorEvent.on(key, handler);
     // This particular event needs to be attached to the session
     if (key == 'changeBreakpoint'){
@@ -284,14 +293,20 @@ export class HedyAceEditor implements HedyEditor {
 
 
   /**
-   * Set incorrect line marker => Part of skip line feature
+   * Set incorrect line marker
    */
-  public setIncorrectLine(range: AceAjax.Range, lineIndex: number){
-    this.addMarker(range, `ace_incorrect_hedy_code_${lineIndex}`, "text", true);
+  public setIncorrectLine(range: SourceRange, lineIndex: number){
+    // Positions in Ace are 0-based
+    const aceRange = new ace.Range(
+      range.startLine - 1, range.startColumn - 1,
+      range.endLine - 1, range.endColumn - 1
+    );
+
+    this.addMarker(aceRange, `ace_incorrect_hedy_code_${lineIndex}`, "text", true);
   }
 
   /**
-   * Remove all incorrect lines markers => Part of skip line feature
+   * Remove all incorrect lines
    */
   public clearIncorrectLines() {
     const markers = this._editor.session.getMarkers(true);
@@ -309,11 +324,7 @@ export class HedyAceEditor implements HedyEditor {
   /**
    * Set the current line in the debugger
    */
-  public setDebuggerCurrentLine(line: number | undefined) {
-    if (this.currentLineMarker?.line === line) {
-      return;
-    }
-
+  public setDebuggerCurrentLine(line?: number, startPos?: number, finishPos?: number): void {
     if (this.currentLineMarker) {
       this.removeMarker(this.currentLineMarker.id);
     }
@@ -322,8 +333,13 @@ export class HedyAceEditor implements HedyEditor {
       this.currentLineMarker = undefined;
       return;
     }
-
-    const id = this.addMarker(new ace.Range(line, 0, line, 999), 'debugger-current-line', 'fullLine');
+    line = line - 1;    
+    let id: number;
+    if (startPos === undefined || finishPos === undefined) {
+      id = this.addMarker(new ace.Range(line, 0, line, 999), 'debugger-current-line', 'fullLine');
+    } else {
+      id = this.addMarker(new ace.Range(line, startPos - 1, line, finishPos - 1), 'debugger-current-line', 'text');
+    }
     this.currentLineMarker = { line, id };
   }
 
@@ -369,9 +385,51 @@ export class HedyAceEditor implements HedyEditor {
       .filter(([_, k]) => k === klass)
       .map(([id, _]) => id);
   }
+  public getActiveContents(debugLine: string | null): string {
+    let code = this._editor.session.getValue();
+    const breakpoints = this.getDeactivatedLines();
+    
+    if (code) {
+      let lines = code.split('\n');
+      if(debugLine != null){
+        lines = lines.slice(0, parseInt(debugLine) + 1);
+      }
+      for (let i = 0; i < lines.length; i++) {
+        if (breakpoints[i] == BP_DISABLED_LINE) {
+          lines[i] = '';
+        }
+      }
+      code = lines.join('\n');
+    }
   
-  public get session() {
-    return this._editor.session;
+    return code;
+  }
+
+  public skipFaultyHandler(): void {
+    $(document).on("click", 'div[class*=ace_content], div[class*=ace_incorrect_hedy_code]', function(e) {
+      let className = e.target.className;
+  
+      // Only do this if skipping faulty is used
+      if ($('div[class*=ace_incorrect_hedy_code]')[0]) {
+        if (className === 'ace_content') {
+          // Hide error, warning or okbox
+          $('#okbox').hide();
+          $('#warningbox').hide();
+          $('#errorbox').hide();
+        } else {
+          // Show error for this line
+          let mapIndex = className;
+          mapIndex = mapIndex.replace('ace_incorrect_hedy_code_', '');
+          mapIndex = mapIndex.replace('ace_start ace_br15', '');
+          let mapError = theGlobalSourcemap[Number(mapIndex)];
+  
+          $('#okbox').hide();
+          $('#warningbox').hide();
+          $('#errorbox').hide();
+          error.show(ClientMessages['Transpile_error'], mapError.error);
+        }
+      }
+    });
   }
 }
 
