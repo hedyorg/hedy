@@ -637,7 +637,7 @@ class TestsLevel16(HedyTester):
             numbers is [1, 2, 3]
             sleep numbers at random""")
 
-        expected = textwrap.dedent(f"""\
+        expected = HedyTester.dedent(f"""\
         pass
         numbers = [1, 2, 3]
         pass""")
