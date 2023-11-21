@@ -605,7 +605,13 @@ class Database:
         return [self.read_tag(name) for name in tags]
 
     def read_public_tags(self):
-        return TAGS.scan()
+        """Public tags are tagged within one or more public adventure or those that aren't in use."""
+        all_tags = TAGS.scan()
+        public_tags = []
+        for tag in all_tags:
+            if not tag["tagged_in"] or any([adv["public"] for adv in tag["tagged_in"]]):
+                public_tags.append(tag)
+        return public_tags
 
     def read_tags_by_username(self, username):
         tags = TAGS.get_many({"creator": username})

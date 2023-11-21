@@ -25,8 +25,7 @@ class TagsModule(WebsiteModule):
     @route("/<adventure_id>", methods=["GET"])
     @route("/", methods=["GET"], defaults={"adventure_id": None})
     @requires_teacher
-    def get_all(self, user, adventure_id):
-        print(self.get)
+    def get_public_tags(self, user, adventure_id):
         public_tags = self.db.read_public_tags()
         adventure_id = request.args.get("adventure_id")
         if adventure_id:
@@ -34,7 +33,8 @@ class TagsModule(WebsiteModule):
             # exclude current adventure's tags
             public_tags = list(filter(lambda t: t["name"] not in adventure.get("tags", []), public_tags))
 
-        return jinja_partials.render_partial('htmx-tags-dropdown.html', tags=public_tags, adventure_id=adventure_id)
+        return jinja_partials.render_partial('htmx-tags-dropdown.html',
+                                             tags=public_tags, adventure_id=adventure_id, creator=user)
 
     @route("/create/<adventure_id>", methods=["POST"])
     @route("/create/<adventure_id>/<new_tag>", methods=["POST"])
