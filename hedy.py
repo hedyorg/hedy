@@ -1134,9 +1134,11 @@ class IsValid(Filter):
         return False, InvalidInfo("print without quotes", arguments=[
                                   text], line=meta.line, column=meta.column), meta
 
-    def error_invalid(self, meta, args):
-        # TODO: this will not work for misspelling 'at', needs to be improved!
+    def error_list_access(self, meta, args):
+        error = InvalidInfo('misspelled "at" command', arguments=[str(args[1][1])], line=meta.line)
+        return False, error, meta
 
+    def error_invalid(self, meta, args):
         error = InvalidInfo('invalid command', command=args[0][1], arguments=[
                             [a[1] for a in args[1:]]], line=meta.line, column=meta.column)
         return False, error, meta
@@ -1353,16 +1355,19 @@ class ConvertToPython(Transformer):
             # all good? return for further processing
             return args
         else:
-            # TODO: check whether this is really never raised??
             # return first name with issue
-            first_unquoted_var = unquoted_args[0]
-            raise exceptions.UndefinedVarException(name=first_unquoted_var, line_number=var_access_linenumber)
+            for index, a in enumerate(unquoted_args):
+                current_arg = unquoted_in_lookup[index]
+                if current_arg is None:
+                    first_unquoted_var = a
+                    raise exceptions.UndefinedVarException(name=first_unquoted_var, line_number=var_access_linenumber)
+
+    # static methods
 
     @staticmethod
     def check_if_error_skipped(tree):
         return hasattr(IsValid, tree.data)
 
-    # static methods
     @staticmethod
     def is_quoted(s):
         opening_quotes = ['‘', "'", '"', "“", "«"]
@@ -3281,6 +3286,8 @@ def is_program_valid(program_root, input_string, level, lang):
             unquotedtext = invalid_info.arguments[0]
             raise exceptions.UnquotedTextException(
                 level=level, unquotedtext=unquotedtext, line_number=invalid_info.line)
+        elif invalid_info.error_type == 'misspelled "at" command':
+            raise exceptions.MisspelledAtCommand(command='at', arg1=invalid_info.arguments[0], line_number=line)
         elif invalid_info.error_type == 'unsupported number':
             raise exceptions.UnsupportedFloatException(value=''.join(invalid_info.arguments))
         elif invalid_info.error_type == 'lonely text':
