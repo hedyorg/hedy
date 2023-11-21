@@ -741,7 +741,14 @@ class LiveStatisticsModule(WebsiteModule):
         """
         class_ = self.db.get_class(class_id)
         exceptions_per_user = {}
+        exceptions_per_user_1 = {}
         students = sorted(class_.get("students", []))
+
+        level_1 = self.db.get_program_stats_for_level(students, 1)
+        for program_data in level_1:
+            exceptions = {k: v for k, v in program_data.items() if k.lower().endswith("exception")}
+            exceptions_per_user_1[program_data['id']] = exceptions
+
         for student_username in students:
             program_stats = self.db.get_program_stats([student_username], None, None)
             if program_stats:
@@ -791,6 +798,9 @@ class LiveStatisticsModule(WebsiteModule):
         labels = [x['label'] for x in common_errors['errors']]
         exception_type_counts = {}
 
+        print('*'*100)
+        print(f'Exceptions per user: {exceptions_per_user}')
+        print('*'*100)
         # Iterate over each error and its corresponding username in the current session group
         for username, exception_count in exceptions_per_user.items():
             for exception_name, count in exception_count.items():
