@@ -1139,8 +1139,6 @@ class IsValid(Filter):
         return False, error, meta
 
     def error_invalid(self, meta, args):
-        # TODO: this will not work for misspelling 'at', needs to be improved!
-
         error = InvalidInfo('invalid command', command=args[0][1], arguments=[
                             [a[1] for a in args[1:]]], line=meta.line, column=meta.column)
         return False, error, meta
