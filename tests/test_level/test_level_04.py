@@ -575,7 +575,7 @@ class TestsLevel4(HedyTester):
     def test_list_access_misspelled_at_gives_error(self):
         code = textwrap.dedent("""\
         dieren is Hond, Kat, Kangoeroe, Kaketoe
-        print dieren at random""")
+        print dieren ad random""")
 
         self.multi_level_tester(
             max_level=5,
