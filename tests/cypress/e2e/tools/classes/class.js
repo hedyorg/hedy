@@ -53,6 +53,7 @@ export function addStudents(classname, count) {
     cy.get(".view_class").contains(new RegExp(`^${classname}$`)).click();
     cy.wait(500);
 
+    cy.get('body').then($b => $b.find("#survey")).then($s => $s.length && $s.hide())
     cy.get('#add-student').click();
     cy.get('#create-accounts').click();
     cy.wrap(students).each((student, index) => {
