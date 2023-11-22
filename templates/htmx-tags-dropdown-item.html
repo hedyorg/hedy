@@ -1,5 +1,5 @@
 <!-- Requires #search_tags_input to exist -->
-<div class="relative cursor-pointer !w-full border-2 rounded-lg border-green-300 p-2 px-5 m-2 shadow"
+<div class="relative cursor-pointer !w-full border-2 rounded-lg border-green-300 p-2 px-5 m-1 shadow"
     id="tag_{{tag['name']}}" hx-post="/tags/create/{{adventure_id}}/{{tag.name}}" hx-target="#tags-list"
     hx-swap="outerHTML" _="on click event.stopPropagation()
         on htmx:afterRequest 
