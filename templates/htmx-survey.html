@@ -1,5 +1,5 @@
 {% block regular_content %}
-<div id="survey" class="flex absolute inset-0 items-center justify-center" style="width: 30%; top: 50%; left: 50%; transform: translate(-50%, -50%);">
+<div id="survey" class="flex absolute inset-0 items-center justify-center">
     <div class="bg-blue-500 border border-black rounded-lg px-8 py-4 text-center">
         <div id="description" class="text-white mb-8 text-l">{{ _(description) }}</div>
         <form id="survey-form">
@@ -11,7 +11,7 @@
                     </div>
                 </div>
             {% endfor %}
-            <div class="mt-4 flex flex-row justify-center">
+            <div class="mt-4 flex flex-row gap-2 justify-center">
                 <button type="submit" class="green-btn block mx-auto w-40 pb-4 pt-4"
                 hx-trigger="click"
                 hx-post="/surveys/submit-survey/{{ survey_id }}"
