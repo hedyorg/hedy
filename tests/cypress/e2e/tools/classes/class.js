@@ -54,6 +54,7 @@ export function addStudents(classname, count) {
     cy.wait(500);
 
     cy.get('#add-student').click();
+    cy.get('#survey').invoke('hide').should('not.be.visible');
     cy.get('#create-accounts').click();
     cy.wrap(students).each((student, index) => {
       cy.get(`:nth-child(${(index + 2)}) > #username`).type(student);
