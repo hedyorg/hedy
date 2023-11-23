@@ -12,6 +12,7 @@ describe("Second teachers: invitations", () => {
     cy.wait(500);
 
     cy.get(".view_class").first().click();
+    cy.get('body').then($b => $b.find("#survey")).then($s => $s.length && $s.hide())
 
     for (const teacher of secondTeachers) {
       cy.wait(500);
@@ -45,6 +46,7 @@ describe("Second teachers: invitations", () => {
     loginForTeacher()
 
     cy.get(".view_class").first().click();
+    cy.get('body').then($b => $b.find("#survey")).then($s => $s.length && $s.hide())
 
     cy.wait(500);
 
@@ -69,6 +71,7 @@ describe("Second teachers: invitations", () => {
   it("Reads all second teachers", () => {
     loginForTeacher()
     cy.get(".view_class").first().click();
+    cy.get('body').then($b => $b.find("#survey")).then($s => $s.length && $s.hide())
     cy.wait(500);
     cy.get("#second_teachers_container .username_cell").should("include.text", secondTeachers[0])
     logout()
@@ -79,6 +82,7 @@ describe("Second teachers: invitations", () => {
     loginForTeacher();
     cy.wait(500);
     cy.get(".view_class").first().click();
+    cy.get('body').then($b => $b.find("#survey")).then($s => $s.length && $s.hide())
 
     cy.get("body").then(invitesTable).then(table => {
       // if not, then no invitation.
