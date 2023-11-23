@@ -94,6 +94,7 @@ ADVENTURE_ORDER_PER_LEVEL = {
         'dishes',
         'parrot',
         'turtle',
+        'turtle_draw_it',
         'clear_command',
         'story',
         'haunted',
@@ -116,6 +117,7 @@ ADVENTURE_ORDER_PER_LEVEL = {
         'fortune',
         'pressit',
         'turtle',
+        'turtle_draw_it',
         'debugging'
     ],
     6: [
@@ -126,6 +128,7 @@ ADVENTURE_ORDER_PER_LEVEL = {
         'dice',
         'dishes',
         'turtle',
+        'turtle_draw_it',
         'calculator',
         'fortune',
         'restaurant',
@@ -141,6 +144,7 @@ ADVENTURE_ORDER_PER_LEVEL = {
         'repeat_command_2',
         'fortune',
         'restaurant',
+        'turtle_draw_it',
         'pressit',
         'debugging'
     ],
@@ -155,6 +159,7 @@ ADVENTURE_ORDER_PER_LEVEL = {
         'haunted',
         'restaurant',
         'turtle',
+        'turtle_draw_it',
         'debugging'
     ],
     9: [
@@ -168,6 +173,7 @@ ADVENTURE_ORDER_PER_LEVEL = {
         'haunted',
         'pressit',
         'turtle',
+        'turtle_draw_it',
         'debugging'
     ],
     10: [
@@ -177,6 +183,7 @@ ADVENTURE_ORDER_PER_LEVEL = {
         'dice',
         'fortune',
         'turtle',
+        'turtle_draw_it',
         'harry_potter',
         'songs',
         'story',
