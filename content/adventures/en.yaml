@@ -4904,6 +4904,25 @@ adventures:
                     ```
                 start_code:
                     ## Recreate the drawing with the turtle
+            5:
+                story_text: |
+                    ### Exercise
+                    Recreate the drawings with the turtle!
+
+                    **Extra** Let the player decide which color the square should be.
+
+                    ***Extra*** Can you make the letter of your own first name and the flag of your own country too?
+
+                    Square <img src="https://github.com/hedyorg/hedy/assets/80678586/03b96c2c-7b94-4032-9f9f-3f3b13573623" width="100">
+                    Letters <img src="https://github.com/hedyorg/hedy/assets/80678586/e75f4fa5-f1f5-4b48-806c-916c28e4e8ad" width="100">
+                    Flag <img src="https://github.com/hedyorg/hedy/assets/80678586/877fc337-df80-4185-8005-a6c28904f66e" width="100">
+                example_code: |
+                    Hint for the square:
+                    ```
+                    chosen_color is ask _
+                    ```
+                start_code:
+                    ## Recreate the drawing with the turtle
             8:
                 story_text: |
                     ### Exercise
@@ -4920,10 +4939,27 @@ adventures:
                     ### Exercise
                     Recreate the drawings with the turtle!
 
-                    Title <img src="" width="100">
-                    Title <img src="" width="100">
-                    Title <img src="" width="100">
-                example_code: ""
+                    **Extra** Give the player a choice which country they would like to see the flag of.
+
+                    Cross *use max. 7 lines* <img src="https://github.com/hedyorg/hedy/assets/80678586/76e42c76-aa3f-4863-8eee-ead73c09a186" width="100">
+                    Randomly colored nested squares *use max. 8 lines* <img src="https://github.com/hedyorg/hedy/assets/80678586/17f878cc-e893-4c10-b32e-a09a50bf08de" width="100">
+                    Flags <img src="https://github.com/hedyorg/hedy/assets/80678586/877fc337-df80-4185-8005-a6c28904f66e" width="100">
+                example_code: |
+                    Hint for the nested squares:
+                    ```
+                    colors = red, blue, orange, yellow, pink, purple, green, brown, black
+                    distance = 120
+                    repeat 5 times
+                    _
+                    ```
+                    Hint for the flags:
+                    ```
+                    country = ask 'which country would you like to see the flag of?'
+                    if country is 'the Netherlands'
+                        color_1 = red
+                        color_2 = white
+                        color_3 = blue
+                    ```
                 start_code:
                     ## Recreate the drawing with the turtle
             6:
