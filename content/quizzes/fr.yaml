@@ -1044,188 +1044,188 @@ levels:
             question_score: '10'
     6:
         1:
-            question_text: Quelle est la sortie d'Hedy lorsque tu exécutes ce programme ?
-            code: print 2*10
+            question_text: Qu'affiche Hedy lorsque tu exécutes ce programme ?
+            code: '{print} 2*10'
             mp_choice_options:
             -   option: '20'
-                feedback: Correct !
+                feedback: Correct !
             -   option: '12'
-                feedback: non, c'est une multiplication pas une addition
+                feedback: non, pour l'addition il faut utiliser le signe plus
             -   option: 2*10
-                feedback: Non, Hedy va calculer la réponse
+                feedback: Non, Hedy calculera la réponse
             -   option: '210'
-                feedback: Attention, il y a un calcul.
-            hint: Le * est utilisé comme signe de multiplication
+                feedback: Attention, c'est un calcul.
+            hint: Le caractère `*` est utilisé comme signe de multiplication
             correct_answer: A
             question_score: '10'
         2:
-            question_text: Quel signe utilises-tu pour une addition ?
+            question_text: Quel signe utilises-tu pour ajouter deux nombres ?
             mp_choice_options:
             -   option: '`-`'
-                feedback: Ce n'est pas ça.
+                feedback: Ce n'est pas ça
             -   option: plus
-                feedback: Ce n'est pas ça.
+                feedback: Ce n'est pas ça
             -   option: '`*`'
-                feedback: Ce n'est pas ça.
+                feedback: Ce n'est pas ça
             -   option: '`+`'
-                feedback: Correct !
-            hint: C'est le signe 'plus'.
+                feedback: Correct !
+            hint: C'est le signe « plus ».
             correct_answer: D
             question_score: '10'
         3:
-            question_text: Quelle est la sortie d'Hedy lorsque tu exécutes ce code ?
-            code: print '3*10'
+            question_text: Qu'affiche Hedy lorsque tu exécutes ce code ?
+            code: '{print} "3*10"'
             mp_choice_options:
             -   option: '30'
                 feedback: Ce serait la bonne réponse s'il n'y avait pas de guillemets.
             -   option: '13'
-                feedback: Essaye encore..
+                feedback: Essaye encore…
             -   option: 3*10
-                feedback: Correct ! Il y a des guillemets, donc Hedy va l'afficher sans faire de calcul.
+                feedback: Correct ! Il y a des guillemets, donc Hedy va afficher le texte sans faire de calcul.
             -   option: Rien, Hedy donnera un message d'erreur.
                 feedback: Non, il n'y aura pas d'erreurs
-            hint: Attention aux guillemets !
+            hint: Attention aux guillemets !
             correct_answer: C
             question_score: '10'
         4:
-            question_text: Eve a 10 ans. Que va imprimer Hedy pour elle ?
+            question_text: Eve a 10 ans. Que va afficher Hedy pour elle ?
             code: |-
-                nom is ask 'Combien de lettres y a-t-il dans ton nom ?'
-                âge is ask 'Quel âge as-tu ?'
-                nombremagique is nom*âge
-                print 'Ton numéro porte bonheur est...' nombremagique
+                lettres = {ask} "Combien de lettres y a-t-il dans ton nom ?"
+                âge = {ask} "Quel âge as-tu ?"
+                numéro_porte_bonheur = lettres*âge
+                {print} "Ton numéro porte-bonheur est…" numéro_porte_bonheur
             mp_choice_options:
             -   option: '30'
-                feedback: Attention, Hedy imprime autre chose !
+                feedback: Attention, Hedy affiche aussi « Ton numéro porte-bonheur est… »
             -   option: '10'
-                feedback: Recommence !
-            -   option: Ton numéro porte bonheur est... 30
-                feedback: Bien joué !
-            -   option: Ton numéro porte bonheur est... 10
-                feedback: Son numéro de chance est le nom multiplié par l'âge ...
-            hint: 'Eve a 3 lettres, elle a 10 ans donc : lettres fois âge = 3*10 = ...'
+                feedback: Recommence.
+            -   option: Ton numéro porte-bonheur est… 30
+                feedback: C'est bon !
+            -   option: Ton numéro porte-bonheur est… 10
+                feedback: Son numéro porte-bonheur est lettres multiplié par âge…
+            hint: 'Son nom Eve a 3 lettres et elle a 10 ans donc : lettres fois âge = 3*10 = 30.'
             correct_answer: C
             question_score: '10'
         5:
-            question_text: Si 5 personnes mangent dans ce restaurant, combien doivent-elles payer au total ?
+            question_text: Si 5 personnes mangent dans ce restaurant, combien doivent-elles payer au total ?
             code: |-
-                print 'Bienvenue chez Hedy !'
-                people is ask 'Combien de personnes mangent avec nous ce soir ?'
-                prix is people * 10
-                print 'Ce fera ' prix 'euros s il te plait'
+                {print} "Bienvenue chez Hedy !"
+                personnes = {ask} "Combien de personnes mangent avec nous ce soir ?"
+                prix = personnes * 10
+                print "Ça fera " prix " euros s'il vous plait"
             mp_choice_options:
             -   option: 5 dollars
                 feedback: Hélas, c'est plus cher
             -   option: 10 dollars
-                feedback: Non, c'est 10 par personne !
+                feedback: Non, c'est 10 euros par personne !
             -   option: 15 dollars
-                feedback: Attention, c'est une multiplication !
+                feedback: Le signe `*` est pour la multiplication.
             -   option: 50 dollars
-                feedback: Bien !
-            hint: '`prix` `est` `personnes` `multiplie` 10'
+                feedback: Génial !
+            hint: '`prix` = `personnes` fois `10`'
             correct_answer: D
             question_score: '10'
         6:
-            question_text: Combien coûte un hamburger dans ce restaurant ?
+            question_text: Combien coûte un hamburger dans ce restaurant virtuel ?
             code: |-
-                {print} 'Bienvenue chez Hedy !'
-                choix = {ask} 'Qu est-ce que tu veux manger ?'
+                {print} "Bienvenue au restaurant Chez Hedy !"
+                choix = {ask} "Que veux-tu manger ?"
                 prix = 0
                 {if} choix {is} hamburger prix = 15
                 {if} choix {is} frites prix = 6
             mp_choice_options:
-            -   option: 15 dollars
-                feedback: Super !
-            -   option: 6 dollars
-                feedback: Les frites coûtent 6 dollars
-            -   option: 0 dollars
-                feedback: Le hamburger n'est pas gratuit !
-            -   option: 21 dollars
-                feedback: C'est le prix d'un hamburger avec des frites !
-            hint: Regarde sur la 4ème ligne.
+            -   option: 15 euros
+                feedback: Super !
+            -   option: 6 euros
+                feedback: Ce sont les frites qui coûtent 6 euros
+            -   option: 0 euros
+                feedback: Le hamburger n'est pas gratuit !
+            -   option: 21 euros
+                feedback: Ça c'est le prix d'un hamburger avec des frites !
+            hint: Regarde la ligne 4.
             correct_answer: A
             question_score: '10'
         7:
-            question_text: Pourquoi n'a-t-on pas mis 'prix + 3' à la place de 'prix is prix + 3' à la ligne 7 ?
+            question_text: Pourquoi n'a-t-on pas mis `prix = 3` à la place de `prix = prix + 3` à la ligne 7 ?
             code: |-
-                print 'Bienvenue chez Hedy !'
-                prix is 0
-                boisson is ask 'Que veux-tu boire ?'
-                if boisson is coca prix is prix + 3
-                if boisson is eau prix is prix + 1
-                plat is ask 'Que veux-tu manger ?'
-                if plat is hamburger prix is prix + 15
-                if plat is frites prix is prix + 6
-                print 'cela fera' prix 'euros !'
+                {print} "Bienvenue au restaurant Chez Hedy !"
+                plat = {ask} "Que veux-tu manger ?"
+                prix = 0
+                {if} plat {is} hamburger prix = prix + 15
+                {if} plat {is} frites prix = prix + 6
+                boisson = {ask} "Que veux-tu boire ?"
+                {if} boisson {is} coca prix = prix + 3
+                {if} boisson {is} eau prix = prix + 1
+                {print} prix " euros s'il te plait"
             mp_choice_options:
-            -   option: Les 2 sont équivalents.
-                feedback: Non, ce n'est pas vrai !
-            -   option: Parce que Hedy ne comprend pas
-                feedback: Hedy comprendrait, mais ne fera pas ce que tu veux !
-            -   option: Parce que l'on veut ajouter 3 au total !
-                feedback: Bien joué !
+            -   option: Ç'aurait pu être `prix = 3` aussi.
+                feedback: Non, ce n'est pas vrai ! Hedy doit ajouter 3 euros au prix total.
+            -   option: Parce que Hedy ne comprend pas `prix = 3`.
+                feedback: Hedy comprendrait, mais ne ferait pas ce que tu veux !
+            -   option: Parce que sinon Hedy oublierait ce qui a déjà été calculé. Le prix total serait 3 euros seulement.
+                feedback: C'est ça !
             -   option: Parce que le prix est de 0 euros pour commencer.
-                feedback: C'est vrai, mais ce n'est pas la raison !
-            hint: Le prix ne doit pas être de 3, mais de 3 euros de plus !
+                feedback: C'est vrai, mais ce n'est pas la raison
+            hint: Le prix ne doit pas être de 3 euros, mais de 3 euros… de plus !
             correct_answer: C
             question_score: '10'
         8:
-            question_text: Pourquoi ce code est-il incorrect ?
+            question_text: Pourquoi ce code est-il incorrect ?
             code: |-
-                réponse correcte is 3*12
-                réponse is ask 'Combien font 3 fois 12 ?'
-                if réponse is réponse correcte print 'Bien joué!'
-                else print 'Raté, la réponse etait ..' réponse correcte
+                réponse correcte = 3*12
+                réponse = {ask} "Combien font 3 fois 12 ?"
+                {if} réponse {is} réponse correcte {print} 'Bon travail !'
+                {else} {print} "Non, la réponse est " réponse correcte
             mp_choice_options:
             -   option: Il ne devrait pas y avoir de guillemets à la ligne 2.
-                feedback: Non, il doit y en avoir !
-            -   option: La variable s'appelle 'réponse correcte', mais le nom d'une variable ne peut être qu'un mot.
-                feedback: Correct ! Il faudrait renommer la variable en 'réponsecorrecte'
-            -   option: Les commandes if et else doivent être sur la même ligne.
+                feedback: Non, il doit y en avoir !
+            -   option: La variable s'appelle `réponse correcte`, mais le nom d'une variable ne peut être qu'un seul mot. Il faut écrire `réponse_correcte`
+                feedback: Correct !
+            -   option: Les commandes `{if}` et `{else}` doivent être sur la même ligne.
                 feedback: Non, c'est faux.
             -   option: La variable de la ligne 2 ne peut pas être appelée réponse, car elle est trop similaire à la variable réponse correcte.
-                feedback: Les noms des variables peuvent être similaires..
-            hint: Fais attention aux noms des variables !
+                feedback: Les noms des variables peuvent être similaires, mais ne peuvent pas être composé de deux mots séparés
+            hint: Vérifie le nom des variables !
             correct_answer: B
             question_score: '10'
         9:
-            question_text: Imagine que tu aimes le football à 10, que tu as mangé 2 bananes et que tu t'es lavé les mains 3 fois aujourd'hui. A quel point la diseuse de bonne aventure pense que tu es intelligent ?
+            question_text: Imagine que tu aimes le football à 10, que tu as mangé 2 bananes et que tu t'es lavé les mains 3 fois aujourd'hui. Quel est ton niveau d'intelligence selon la voyante folle ?
             code: |-
-                print 'Je suis Hedy la Voyante'
-                print 'Je vais prédire à quel point tu es intelligent !'
-                foot is ask 'Sur une échelle de 0 à 10, à quel point aimes-tu le football ?'
-                bananes is ask 'Combien de bananes as-tu mangé cette semaine ?'
-                main is ask 'Combien de fois t'es-tu lavé les mains aujourd'hui ?'
-                resultat is bananes + main
-                resultat is resultat * foot
-                print 'tu as un QI de ' resultat
+                {print} "Je suis Hedy la voyante folle"
+                {print} "Je vais prédire ton niveau d'intelligence !"
+                foot = {ask} "Sur une échelle de 0 à 10, à quel point aimes-tu le football ?"
+                bananes ={ask} "Combien de bananes as-tu mangé cette semaine ?"
+                hygiène = {ask} "Combien de fois as-tu lavé tes mains aujourd'hui ?"
+                résultat = bananes + hygiène
+                résultat = résultat * foot
+                {print} "Ton niveau d'intelligence est de " résultat
             mp_choice_options:
             -   option: '10'
-                feedback: (2 bananes + 3 main) * 10 foot = 5*10 = ?
+                feedback: (2 bananes + 3 hygiène) * 10 foot = 5*10 = ?
             -   option: '32'
-                feedback: (2 bananes + 3 main) * 10 foot = 5*10 = ?
+                feedback: (2 bananes + 3 hygiène) * 10 foot = 5*10 = ?
             -   option: '50'
-                feedback: Super, tu es doué !
+                feedback: Super, ton niveau d'intelligence est correct !
             -   option: '100'
-                feedback: (2 bananes + 3 main) * 10 foot = 5*10 = ?
-            hint: (2 bananes + 3 main) * 10 foot = 5*10 = ?
+                feedback: (2 bananes + 3 hygiène) * 10 foot = 5*10 = ?
+            hint: (2 bananes + 3 hygiène) * 10 foot = 5*10 = ?
             correct_answer: C
             question_score: '10'
         10:
-            question_text: Which statement is true?
+            question_text: Quelle affirmation est vraie ?
             code: |-
-                name _?_ Hedy
-                print name 'is walking trough the forrest'
+                name _ Hedy
+                {print} name "marche dans la forêt"
             mp_choice_options:
-            -   option: You can only fill in the word is on the _?_
-                feedback: You are allowed to use the = sign as well
-            -   option: You can fill in either the word is or the = sign on the _?_
-                feedback: Amazing!
-            -   option: You have to fill in =is= on the _?_.
-                feedback: No, one = sign is enough
-            -   option: You can only use the = sign when working with numbers, not with words.
-                feedback: You can also use = with words.
-            hint: is and = are both allowed
+            -   option: On ne peut écrire que la commande `{is}` à la place de `_`
+                feedback: Non, on peut aussi utiliser le signe `=`
+            -   option: On peut écrire la commande `{is}` ou le signe `=` à la place de `_`
+                feedback: Fantastique !
+            -   option: On doit écrire la commande `={is}=` à la place de `_`
+                feedback: Non, un seul signe `=` est suffisant
+            -   option: On ne peut utiliser le signe `=` qu'avec les nombres, pas avec les mots.
+                feedback: Tu peux utiliser `=` avec les mots aussi.
+            hint: '`{is}` et `=` sont tous les deux autorisés.'
             correct_answer: B
             question_score: '10'
     7:
