@@ -288,6 +288,7 @@ class ForTeachersModule(WebsiteModule):
             adventures=adventures,
             adventure_names=adventure_names,
             available_adventures=available_adventures,
+            custom_adventures=list(dict.fromkeys([item for sublist in available_adventures.values() for item in sublist if item.is_teacher_adventure])),
             adventures_default_order=hedy_content.ADVENTURE_ORDER_PER_LEVEL,
             current_page="for-teachers",
             min_level=min_level,
@@ -532,8 +533,10 @@ class ForTeachersModule(WebsiteModule):
             adventure = SortedAdventure(short_name=teacher_adventure['id'],
                                         long_name=teacher_adventure['name'],
                                         is_teacher_adventure=True,
-                                        is_command_adventure=False)
-            teacher_adventures[int(teacher_adventure['level'])].add(adventure)
+                                        is_command_adventure=False,)
+                                        # levels=teacher_adventure.get("levels", []))
+            for level in teacher_adventure.get("levels", [teacher_adventure.get("level")]):
+                teacher_adventures[int(level)].add(adventure)
 
         for level in range(1, hedy.HEDY_MAX_LEVEL + 1):
             adventures_set = set(adventures[level])
@@ -847,6 +850,7 @@ class ForTeachersModule(WebsiteModule):
     @requires_teacher
     def update_adventure(self, user):
         body = request.json
+
         # Validations
         if not isinstance(body, dict):
             return gettext("ajax_error"), 400
@@ -854,7 +858,7 @@ class ForTeachersModule(WebsiteModule):
             return gettext("adventure_id_invalid"), 400
         if not isinstance(body.get("name"), str):
             return gettext("adventure_name_invalid"), 400
-        if not isinstance(body.get("level"), str):
+        if not isinstance(body.get("level"), list):
             return gettext("level_invalid"), 400
         if not isinstance(body.get("content"), str):
             return gettext("content_invalid"), 400
@@ -891,7 +895,8 @@ class ForTeachersModule(WebsiteModule):
             "date": utils.timems(),
             "creator": user["username"],
             "name": body["name"],
-            "level": body["level"],
+            "level": body["level"][0],
+            "levels": body["level"],
             "content": body["content"],
             "public": body["public"],
             "language": body["language"],

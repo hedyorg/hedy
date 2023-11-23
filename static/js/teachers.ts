@@ -242,7 +242,8 @@ function show_preview(content: string) {
     const name = $('#custom_adventure_name').val();
     if (typeof name !== 'string') { throw new Error(`Expected name to be string, got '${name}'`); }
     const level = $('#custom_adventure_level').val();
-    if (typeof level !== 'string') { throw new Error(`Expected level to be string, got '${name}'`); }
+    // TODO: perhaps check for the level AND display it in preview!
+    // if (typeof level !== 'string') { throw new Error(`Expected level to be string, got '${name}'`); } // name?? should be level!
 
     let container = $('<div>');
     container.addClass('preview border border-black px-8 py-4 text-left rounded-lg bg-gray-200 text-black');
