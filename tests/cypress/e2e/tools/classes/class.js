@@ -77,6 +77,7 @@ export function navigateToClass(classname) {
     cy.wait(500);
     cy.get(".view_class").contains(new RegExp(`^${classname}$`)).click();
     cy.wait(500);
+    cy.get('body').then($b => $b.find("#survey")).then($s => $s.length && $s.hide())
 }
 
 export default {createClassAndAddStudents};
