@@ -463,7 +463,8 @@ class Table:
                 continue
 
             raise ValueError('Trying to insert %r into table %s, but %s is a Partition or Sort Key of the table itself '
-                             ' or an index, so must be of type string, number or binary.' % ({field: value}, self.table_name, field))
+                             ' or an index, so must be of type string, number or binary.'
+                             % ({field: value}, self.table_name, field))
 
 
 DDB_SERIALIZER = TypeSerializer()
