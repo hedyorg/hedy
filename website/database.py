@@ -62,10 +62,7 @@ TAGS = dynamo.Table(storage, "tags", "id", indexes=[dynamo.Index("name", sort_ke
 # - responses (str []): the response per question
 # - skip (str): if the survey should never be shown or today date to be reminded later
 
-SURVEYS = dynamo.Table(storage, "surveys", "id", indexes=[
-    dynamo.Index('responses'),
-    dynamo.Index('skip'),
-])
+SURVEYS = dynamo.Table(storage, "surveys", "id")
 
 # Class customizations
 #
