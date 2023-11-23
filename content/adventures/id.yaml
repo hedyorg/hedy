@@ -126,12 +126,12 @@ adventures:
                     Kamu juga dapat menggunakan nama yang dimasukkan. Ini sama dengan yang ada di level 3. Kamu dapat menggabungkan ini dengan `if` dan akhirnya sebuah cerita dengan dua alternatif akhir jadi!
                 example_code: |
                     ```
-                    name {is} {ask} 'Siapa yang berjalan di hutan?'
+                    nama {is} {ask} 'Siapa yang berjalan di hutan?'
                     {print} nama 'berjalan melewati hutan'
                     {print} nama 'bertemu monster'
                     akhir {is} {ask} 'Apakah kamu ingin akhir yang baik atau buruk?'
-                    {if} akhir {is} nama {print} yang bagus 'mengambil pedang dan monster itu segera lari'
-                    {else} {print} Nama 'Monster itu memakan '
+                    {if} akhir {is} nama {print}  nama 'yang bagus  mengambil pedang dan monster itu segera lari'
+                    {else} {print} nama 'Monster itu memakan '
                     ```
                 start_code: print 'Sekarang cerita kamu akan dimulai!'
             7:
@@ -284,7 +284,7 @@ adventures:
                     binatang {is} anjing, kucing, kanguru
                     seperti {is} {ask} Apa hewan favoritmu?
                     {add} seperti {to_list} binatang
-                    {print} Saya memilih hewan {at} {random}
+                    {print} Saya memilih binatang {at} {random}
                     ```
                 story_text_2: |
                     ## Hapus dari
@@ -292,9 +292,9 @@ adventures:
                 example_code_2: |
                     ```
                     binatang {is} anjing, kucing, kanguru
-                    tidak suka {is} {ask} Hewan apa yang tidak kamu suka?
-                    {remove} tidak suka {from} binatang
-                    {print} Saya memilih hewan {at} {random}
+                    tidak_suka {is} {ask} Hewan apa yang tidak kamu suka?
+                    {remove} tidak_suka {from} binatang
+                    {print} Saya memilih binatang {at} {random}
                     ```
                 story_text_3: |
                     ### Latihan
@@ -313,9 +313,9 @@ adventures:
                     binatang {is} anjing, kucing, kanguru
                     seperti {is} {ask} Apa hewan favoritmu?
                     {add} seperti {to_list} binatang
-                    tidak suka {is} {ask} Hewan apa yang tidak kamu suka?
-                    {remove} tidak suka {from} binatang
-                    {print} Saya memilih hewan {at} {random}
+                    tidak_suka {is} {ask} Hewan apa yang tidak kamu suka?
+                    {remove} tidak_suka {from} binatang
+                    {print} Saya memilih binatang {at} {random}
     and_or_command:
         name: '{and} & {or}'
         default_save_name: dan atau
@@ -528,10 +528,10 @@ adventures:
                     Now that you can calculate, you can also create a program to practice maths calculations. You can make up the calculations yourself, for example:
                 example_code: |
                     ```
-                    number_1 = {ask} 'Isi angka pertama:'
-                    number_2 = {ask} 'Isi angka kedua:'
+                    angka_1 = {ask} 'Isi angka pertama:'
+                    angka_2 = {ask} 'Isi angka kedua:'
                     jawaban_benar = angka_1 * angka_2
-                    {print} angka_1 ' dikalikan ' angka_2 ' adalah 'jawaban_benar
+                    {print} angka_1 ' dikalikan ' angka_2 ' adalah ' jawaban_benar
                     ```
                 story_text_2: |
                     You can also let the computer do random calculations on its own using {random}.
@@ -580,14 +580,14 @@ adventures:
                 example_code: |
                     ```
                     angka = 1, 2, 3
-                    {for} nomor1 {in} nomor
-                        {for} nomor2 {in} nomor
-                            jawaban = {ask} 'Berapa 'angka2' dikalikan 'angka1'?'
-                            benar = angka1 * angka2
+                    {for} nomor1 {in} angka
+                        {for} nomor2 {in} angka
+                            jawaban = {ask} 'Berapa ' nomor1 ' dikalikan ' nomor2 ' ?'
+                            benar = nomor1 * nomor2
                             {if} jawaban {is} benar
                                 {print} 'Kerja bagus!'
                             {else}
-                                {print} 'Itu salah. Jawaban yang tepat adalah 'benar
+                                {print} 'Itu salah. Jawaban yang tepat adalah ' benar
                     ```
                 start_code: '# letakkan kode Anda di sini'
             11:
@@ -601,11 +601,11 @@ adventures:
                     Go back to your level 10 multiplication code, and modify it so that it uses a `{for}` and `{range}`.
                 example_code: |
                     ```
-                    angka = 10
+                    nomor = 10
                     {for} i {in} {range} 1 {to} 10
                         {print} i * nomor
                     ```
-                start_code: "angka = 10\n{for} i {in} {range} 1 {to} 10\n    {print} i * nomor\n"
+                start_code: "angka = 10\n{for} i {in} {range} 1 {to} 10\n    {print} i * angka\n"
             12:
                 story_text: |
                     Di level ini, Anda bisa membuat kalkulator yang berfungsi untuk angka desimal.
@@ -1411,33 +1411,33 @@ adventures:
                     ```
                 start_code: |2
 
-                        define food_order
-                            toppings = ask 'pepperoni, tuna, veggie or cheese?'
-                            size = ask 'big, medium or small?'
-                            number_of_pizza = ask 'How many these pizzas would you like?'
+                                define food_order
+                                    toppings = ask 'pepperoni, tuna, veggie or cheese?'
+                                    size = ask 'big, medium or small?'
+                                    number_of_pizza = ask 'How many these pizzas would you like?'
 
-                            print 'YOU ORDERED'
-                            print number_of_pizzas ' size  ' topping ' pizza'
+                                    print 'YOU ORDERED'
+                                    print number_of_pizzas ' size  ' topping ' pizza'
 
-                        define drinks_order
-                            drink = ask 'water, coke, icetea, lemonade or coffee?'
-                            number_of_drinks = ask 'How many of these drinks would you like?'
+                                define drinks_order
+                                    drink = ask 'water, coke, icetea, lemonade or coffee?'
+                                    number_of_drinks = ask 'How many of these drinks would you like?'
 
-                            print 'YOU ORDERED'
-                            print number_of_drinks ' ' drink
+                                    print 'YOU ORDERED'
+                                    print number_of_drinks ' ' drink
 
-                        'Welcome to Hedy pizza'
-                        more_food = ask 'Would you like to order a pizza?'
-                        while more_food = 'yes'
-                            return food_order
-                            more_food = ask 'Would you like to order a pizza?'
-                        more_drinks = ask 'Would you like to order some drinks?'
-                        while more_drinks == 'yes'
-                            call drink_order
-                            more_drinks == ask 'Would you like to order more drinks?'
+                                'Welcome to Hedy pizza'
+                                more_food = ask 'Would you like to order a pizza?'
+                                while more_food = 'yes'
+                                    return food_order
+                                    more_food = ask 'Would you like to order a pizza?'
+                                more_drinks = ask 'Would you like to order some drinks?'
+                                while more_drinks == 'yes'
+                                    call drink_order
+                                    more_drinks == ask 'Would you like to order more drinks?'
 
 
-                        print 'Thanks for ordering!'
+                                print 'Thanks for ordering!'
             18:
                 story_text: |-
                     ### Exercise
@@ -1462,20 +1462,20 @@ adventures:
                     ```
                 start_code: |2
 
-                        animals = ['pig', 'dog', 'cow']
-                        sounds = ['oink', 'woof', 'moo']
-                        for i in range 1 to 3
-                            animal = animals[i]
-                            sound = sounds[i]
-                            print 'Old McDonald had a farm'
-                            print 'E I E I O!'
-                            print 'and on that farm he had a ' animal
-                            print 'E I E I O!'
-                            print 'with a ' sound sound ' here'
-                            print 'and a ' sound sound ' there'
-                            print 'here a ' sound
-                            print 'there a ' sound
-                            print 'everywhere a ' sound sound
+                                animals = ['pig', 'dog', 'cow']
+                                sounds = ['oink', 'woof', 'moo']
+                                for i in range 1 to 3
+                                    animal = animals[i]
+                                    sound = sounds[i]
+                                    print 'Old McDonald had a farm'
+                                    print 'E I E I O!'
+                                    print 'and on that farm he had a ' animal
+                                    print 'E I E I O!'
+                                    print 'with a ' sound sound ' here'
+                                    print 'and a ' sound sound ' there'
+                                    print 'here a ' sound
+                                    print 'there a ' sound
+                                    print 'everywhere a ' sound sound
     default:
         name: Pengantar
         default_save_name: intro
@@ -4572,10 +4572,10 @@ adventures:
                     {forward} 50
                     ```
                 start_code: |-
-                    print 'Menggambar bentuk'
-                    sudut is 90
-                    turn sudut
-                    forward 25
+                    {print} 'Menggambar bentuk'
+                    sudut {is} 90
+                    {turn} sudut
+                    {forward} 25
             5:
                 story_text: 'Pada level 4 kita akan mengambil sebuah pilihan dengan `if`. Sebagai contoh: mengambil satu dari kumpulan bentuk.'
                 example_code: |
