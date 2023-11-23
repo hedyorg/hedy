@@ -216,7 +216,7 @@ levels:
                 feedback: 不是的
             -   option: 你可以用`{print}`命令显示文本
                 feedback: 不错
-            -   option: 你可以用 {sleep} 命令清除屏幕上的文本。
+            -   option: 你可以用 `{sleep}` 命令清除屏幕上的文本。
                 feedback: 这不是`{sleep}`的作用。
             hint: '`{print}`的作用仍然和第1关中一样'
             correct_answer: C
@@ -619,7 +619,7 @@ levels:
                 feedback: 做得好！
             -   option: 没什么，这是正确的代码！
                 feedback: 找出错误！
-            hint: 看第3行
+            hint: 看第4行
             correct_answer: C
             question_score: '10'
         10:
@@ -638,7 +638,7 @@ levels:
                 feedback: 赞！
             -   option: |-
                     ```
-                    {remove} walked yesterday {to} walkers
+                    {remove} walked_yesterday {to} walkers
                     ```
                 feedback: '`{remove} {from}` or `{add} {to}`, not `{remove} {to}`'
             -   option: |-
@@ -834,7 +834,7 @@ levels:
                     ```
                     {print} 'So you pick ' door door
                     ```
-                feedback: 如果玩家选择 3 号门，海蒂 会说'所以你选择 3 3”
+                feedback: 如果玩家选择 3 号门，海蒂 会说'所以你选择 3 3'
             -   option: |-
                     ```
                     {print} 'So you pick door ' door
@@ -844,7 +844,7 @@ levels:
                     ```
                     {print} 'So you pick door door'
                     ```
-                feedback: 海蒂 会直接打印 '所以你选择门
+                feedback: 海蒂 会直接打印 '所以你选择门'
             hint: 第二个“门”字应该换成数字，第一个应该还是“门”字……
             correct_answer: C
             question_score: '10'
@@ -941,7 +941,7 @@ levels:
             -   option: 正确!
                 feedback: 当输入正确的密码时会打印此信息
             -   option: SECRET
-                feedback: 这是正确的！'
+                feedback: 这是正确的!
             -   option: password
                 feedback: 密码不是password...
             -   option: ALARM INTRUDER
@@ -2117,101 +2117,101 @@ levels:
             question_text: 如果我们想打印每份贺词，我们需要在 `_` 上填写什么？
             code: |-
                 compliments = perfect, great job, amazing
-                _?_
+                _
                     {print} compliment
             mp_choice_options:
             -   option: |-
                     ```
                     {for} each compliment
                     ```
-                feedback: That's not it
+                feedback: 不是这个
             -   option: |-
                     ```
                     {for} compliment {in} compliments
                     ```
-                feedback: You deserve all those compliments!
+                feedback: 你值得所有这些赞美!
             -   option: |-
                     ```
                     {if} compliment {in} compliments
                     ```
-                feedback: That's not it
+                feedback: 不是这个
             -   option: |-
                     ```
                     {for} compliments {in} compliment
                     ```
-                feedback: Almost there!
-            hint: '`{for}` each compliment in the lists of compliments...'
+                feedback: 差不多了!
+            hint: 恭维列表中的每条恭维都是`{for}`...
             correct_answer: B
             question_score: '10'
         2:
-            question_text: Which output is correct?
+            question_text: 哪个输出是正确的?
             code: |-
                 meals = pizza, pasta, pancakes
                 {for} meal {in} meals
-                    {print} 'I love ' meal
+                    {print} '我喜欢' meal
             mp_choice_options:
-            -   option: I love pizza
-                feedback: Line 2 says `{for}` each meal in the list of meals. So each meal is printed.
-            -   option: I love pasta
-                feedback: Line 2 says `{for}` each meal in the list of meals. So each meal is printed.
-            -   option: I love pancakes
-                feedback: Line 2 says `{for}` each meal in the list of meals. So each meal is printed.
+            -   option: 我喜欢披萨
+                feedback: 第 2 行用`{for}`显示膳食列表中的每顿饭。 所以每顿饭都会被打印出来。
+            -   option: 我喜欢意面
+                feedback: 第 2 行用`{for}`显示膳食列表中的每顿饭。 所以每顿饭都会被打印出来。
+            -   option: 我喜欢煎饼
+                feedback: 第 2 行用`{for}`显示膳食列表中的每顿饭。 所以每顿饭都会被打印出来。
             -   option: |-
-                    I love pizza
-                    I love pasta
-                    I love pancakes
+                    我喜欢披萨
+                    我喜欢意面
+                    我喜欢煎饼
                 feedback: Great!
-            hint: Line 2 says for each meal in the list of meals. So each meal is printed.
+            hint: 第 2 行表示餐食列表中的每餐。 所以每顿饭都会被打印出来。
             correct_answer: D
             question_score: '10'
         3:
-            question_text: Which output is correct?
+            question_text: 哪个输出是正确的?
             code: |-
                 animals = dogs, cats, hamsters, chickens
                 {for} animal {in} animals
-                    {print} animal ' are lovely pets'
+                    {print} animal ' 是可爱的宠物'
             mp_choice_options:
-            -   option: dogs are lovely pets
-                feedback: Line 2 says {for} each animal in the list of animals. So each animal is {print}ed.
-            -   option: dogs, cats, hamsters, chickens are lovely pets
-                feedback: Each animal gets their own line in the output.
+            -   option: 狗狗是可爱的宠物
+                feedback: 第 2 行{for}表示动物列表中的每个动物。 所以每只动物都被{print}了。
+            -   option: 狗、猫、仓鼠、鸡都是可爱的宠物
+                feedback: 每只动物在输出中都有自己的行。
             -   option: |-
-                    dogs are lovely pets
-                    cats are lovely pets
-                    hamsters are lovely pets
-                    chickens are lovely pets
+                    狗狗是可爱的宠物
+                    猫猫是可爱的宠物
+                    仓鼠是可爱的宠物
+                    小鸡是可爱的宠物
                 feedback: Great!
-            -   option: You don't know yet. Because it chooses one of the animals {at} {random}.
-                feedback: Line 2 says {for} each animal in the list of animals. So each animal is {print}ed.
-            hint: Line 2 says {for} each animal in the list of animals. So each animal is printed
+            -   option: 你还不知道。 因为{at}{random}选择其中一种动物。
+                feedback: 第 2 行{for}表示动物列表中的每个动物。 所以每只动物都被{print}了。
+            hint: 第 2 行{for}表示动物列表中的每个动物。 所以每只动物都被打印了
             correct_answer: C
             question_score: '10'
         4:
-            question_text: What's wrong with this code?
+            question_text: 这段代码有什么问题？
             code: |-
                 groceries = apples, bread, milk
                 {for} item {in} groceries
-                    {print} 'We need ' groceries
+                    {print} '我们需要 ' groceries
             mp_choice_options:
-            -   option: Line 2 needs to start with 4 spaces as indentation
-                feedback: No it doesn't. Only line 3 needs indentation, which it has.
-            -   option: Line 3 does not need to start with 4 spaces as indentation
-                feedback: Line 2 is a `{for}`command so line 3 does need to start with an indent.
-            -   option: Line 3 should say item instead of groceries
-                feedback: Good job!
-            -   option: Line 2 should say groceries instead of item
-                feedback: No it does not.
-            hint: Line 2 says `{for}` each item in the list of groceries
+            -   option: 第2行需要以4个空格开头作为缩进
+                feedback: 不，没有。 只有第 3 行也需要缩进。
+            -   option: 第3行不需要以4个空格开头作为缩进
+                feedback: 第 2 行是一个`{for}`命令，因此第 3 行确实需要以缩进开头。
+            -   option: 第 3 行应该显示 item 而不是grocery
+                feedback: 干得好!
+            -   option: 第 2 行应显示杂货而不是商品
+                feedback: 不，不是的。
+            hint: 第 2 行显示杂货列表中的每一项  `{for}`
             correct_answer: C
             question_score: '10'
         5:
-            question_text: What word should be on the _?_ with these digital dice?
+            question_text: 这些数字骰子的 _?_ 上应该写什么字？
             code: |-
                 {print} 'Welcome to the digital dice!'
                 players = Ann, John, Jesse
                 choices = 1, 2, 3, 4, 5, 6
                 {for} player {in} players
-                    {print} player ' throws ' _?_ {at} {random}
+                    {print} player ' throws ' _ {at} {random}
             mp_choice_options:
             -   option: players
                 feedback: It would say 'Ann throws Jesse', instead of 'Ann throws 6'.

@@ -18,25 +18,13 @@ levels:
             question_text: Yang perlu diisi di tempat kosong agar teks Hello! muncul?
             code: ___ Hello!
             mp_choice_options:
-            -   option: |-
-                    ```
-                    {echo}
-                    ```
+            -   option: '`{echo}`'
                 feedback: '`{echo}` mengulang jawaban yang diberikan.'
-            -   option: |-
-                    ```
-                    {print}
-                     ```
+            -   option: '`{print}`'
                 feedback: Benar!
-            -   option: |-
-                    ```
-                    hello
-                    ```
+            -   option: '`hello`'
                 feedback: Hello bukan perintah.
-            -   option: |-
-                    ```
-                    {ask}
-                    ```
+            -   option: '`{ask}`'
                 feedback: Dengan `{ask}`, kamu bisa bertanya.
             hint: _ Halo dunia!
             correct_answer: B
@@ -91,25 +79,13 @@ levels:
                 {ask} Apa hewan peliharaan favoritmu?
                 _ Jadi hewan peliharaan favoritmu adalah...
             mp_choice_options:
-            -   option: |-
-                    ```
-                    {print}
-                    ```
+            -   option: '`{print}`'
                 feedback: Tidak, Anda ingin jawabannya diulang kembali kepada Anda.
-            -   option: |-
-                    ```
-                    Hedy
-                    ```
+            -   option: '`Hedy`'
                 feedback: Hedy bukan sebuah perintah.
-            -   option: |-
-                    ```
-                    {ask}
-                    ```
+            -   option: '`{ask}`'
                 feedback: Dengan `{ask}` Anda dapat mengajukan pertanyaan.
-            -   option: |-
-                    ```
-                    {echo}
-                    ```
+            -   option: '`{echo}`'
                 feedback: Right on!
             hint: Anda ingin melihat jawabannya di akhir baris 2...
             correct_answer: D
@@ -302,25 +278,13 @@ levels:
                 _
                 {print} Hedy!
             mp_choice_options:
-            -   option: |-
-                    ```
-                    {sleep}
-                    ```
+            -   option: '`{sleep}`'
                 feedback: Sempurna!
-            -   option: |-
-                    ```
-                    {echo}
-                    ```
+            -   option: '`{echo}`'
                 feedback: Tidak ada yang perlu diulangi di sini
-            -   option: |-
-                    ```
-                    {print}
-                    ```
+            -   option: '`{print}`'
                 feedback: Tidak ada teks untuk `{print}` di sana
-            -   option: |-
-                    ```
-                    {ask}
-                    ```
+            -   option: '`{ask}`'
                 feedback: Tidak ada pertanyaan yang perlu ditanyakan
             hint: Jeda untuk efek dramatis...
             correct_answer: A
@@ -436,25 +400,13 @@ levels:
         1:
             question_text: Perintah apa yang Anda gunakan agar Hedy memilih sesuatu secara sembarangan?
             mp_choice_options:
-            -   option: |-
-                    ```
-                    {print}
-                    ```
+            -   option: '`{print}`'
                 feedback: '`{print}` digunakan untuk mencetak teks'
-            -   option: |-
-                    ```
-                    {ask}
-                    ```
+            -   option: '`{ask}`'
                 feedback: '`{ask}` digunakan untuk mengajukan pertanyaan'
-            -   option: |-
-                    ```
-                    {is}
-                    ```
+            -   option: '`{is}`'
                 feedback: '`{is}` digunakan untuk membuat daftar'
-            -   option: |-
-                    ```
-                    {at} {random}
-                    ```
+            -   option: '`{at}` `{random}`'
                 feedback: Benar!
             hint: Sewenang-wenang artinya tanpa rencana atau asal-asalan.
             correct_answer: D
@@ -834,7 +786,7 @@ levels:
                     ```
                     {print} 'So you pick ' door door
                     ```
-                feedback: Jika pemain memilih pintu 3, Hedy akan berkata 'Jadi kamu pilih 3 3
+                feedback: Jika pemain memilih pintu 3, Hedy akan berkata 'Jadi kamu pilih 3 3'
             -   option: |-
                     ```
                     {print} 'So you pick door ' door
@@ -844,7 +796,7 @@ levels:
                     ```
                     {print} 'So you pick door door'
                     ```
-                feedback: Hedy secara harfiah akan mencetak 'Jadi, Anda memilih pintu
+                feedback: Hedy secara harfiah akan mencetak 'Jadi, Anda memilih pintu'
             hint: Kata kedua pintu sebaiknya diganti dengan nomor, yang pertama tetap kata pintu...
             correct_answer: C
             question_score: '10'
@@ -929,7 +881,7 @@ levels:
             -   option: Benar!
                 feedback: Ini dicetak ketika Anda mengetikkan kata sandi yang benar
             -   option: SECRET
-                feedback: Itu benar!'
+                feedback: Itu benar!
             -   option: password
                 feedback: Kata sandinya bukan kata sandi...
             -   option: ALARM INTRUDER
@@ -1013,25 +965,13 @@ levels:
                 {if} nama {is} Hedy {print} 'Anda akan menjadi jutawan!'
                 {else} _ 'Sayangnya... Tidak ada banyak uang untuk Anda.'
             mp_choice_options:
-            -   option: |-
-                    ```
-                    {if}
-                    ```
+            -   option: '`{if}`'
                 feedback: '`{if}` ada pada baris di atas.'
-            -   option: |-
-                    ```
-                    {at} {random}
-                    ```
+            -   option: '`{at}` `{random}`'
                 feedback: Tidak, Anda tidak memerlukan `{at} {random}`.
-            -   option: |-
-                    ```
-                    {else}
-                    ```
+            -   option: '`{else}`'
                 feedback: Sudah ada perintah `{else}`
-            -   option: |-
-                    ```
-                    {print}
-                    ```
+            -   option: '`{print}`'
                 feedback: Luar biasa!
             hint: Setelah `{else}` perintah `{print}` mengikuti
             correct_answer: D
@@ -1053,15 +993,9 @@ levels:
                     animal
                     ```
                 feedback: Kerja bagus!
-            -   option: |-
-                    ```
-                    {if}
-                    ```
+            -   option: '`{if}`'
                 feedback: '`{if}` sudah ada'
-            -   option: |-
-                    ```
-                    {print}
-                    ```
+            -   option: '`{print}`'
                 feedback: Tidak, bukan itu.
             hint: Apa nama variabelnya?
             correct_answer: B
@@ -1361,20 +1295,11 @@ levels:
                     I'm
                     ```
                 feedback: Itu benar!
-            -   option: |-
-                    ```
-                    {print}
-                    ```
+            -   option: '`{print}`'
                 feedback: '`{print}` dieja dengan benar'
-            -   option: |-
-                    ```
-                    {repeat}
-                    ```
+            -   option: '`{repeat}`'
                 feedback: '`{repeat}` dieja dengan benar'
-            -   option: |-
-                    ```
-                    {times}
-                    ```
+            -   option: '`{times}`'
                 feedback: '`{times}` dieja dengan benar'
             hint: Saya salah, Anda tidak bisa menggunakan apostrof dalam sebuah kalimat
             correct_answer: A
@@ -1569,10 +1494,10 @@ levels:
                 feedback: Ini tidak dalam urutan yang benar.
             -   option: |-
                     ```
-                    {repeat} 4 {times} 'if youre happy and you know it'
-                    {repeat} 2 times 'clap your hands'
-                    {print} 'and you really want to show it'
-                    {print} 'clap your hands'
+                    {repeat} 4 {times} 'jika kamu senang dan kamu mengetahuinya'
+                    {repeat} 2 {times} 'bertepuk tangan'
+                    {print} 'dan Anda benar-benar ingin menunjukkannya'
+                    {print} 'bertepuk tangan'
                     ```
                 feedback: Ini tidak dalam urutan yang benar.
             hint: Perhatikan urutan kalimatnya.
@@ -1776,42 +1701,42 @@ levels:
             mp_choice_options:
             -   option: |-
                     ```
-                    {if} answer is right
-                       {print} You are...
-                          sleep
-                              {print} right!
+                    {if} jawaban {is} 32
+                       {print} 'Kamu adalah...'
+                          {sleep}
+                              {print} 'benar!'
                           {else}
-                              {print} You are wrong!
+                              {print} 'Kamu salah!'
                     ```
                 feedback: Anda salah!
             -   option: |-
                     ```
-                    {if} answer is right
-                    {print} You are...
-                    sleep
-                    {print} right!
+                    {if} jawaban {is} 32
+                    {print} 'Kamu adalah...'
+                    {sleep}
+                    {print} 'benar!'
                     {else}
-                    {print} You are wrong!
+                    {print} 'Kamu salah!'
                     ```
                 feedback: Anda salah!
             -   option: |-
                     ```
-                    {if} answer is right
-                        {print} You are...
-                        sleep
-                        {print} right!
+                    {if} jawaban {is} 32
+                        {print} 'Kamu adalah...'
+                        {sleep}
+                        {print} 'benar!'
                     {else}
-                        {print} You are wrong!
+                        {print} 'Kamu salah!'
                     ```
                 feedback: Kamu... benar!
             -   option: |-
                     ```
-                    {if} answer is right
-                        {print} You are...
-                        sleep
-                    {print} right!
+                    {if} jawaban {is} 32
+                        {print} 'Kamu adalah...'
+                        {sleep}
+                    {print} 'benar!'
                     {else}
-                        {print} You are wrong!
+                        {print} 'Kamu salah!'
                     ```
                 feedback: Anda salah!
             hint: Apa yang harus terjadi jika orang tersebut benar? Lalu apa lagi?
@@ -2078,7 +2003,7 @@ levels:
             question_text: Apa yang salah dalam kode ini?
             code: |-
                 umur = {ask} 'Selamat Ulang Tahun! Berapa usiamu?'
-                bernyanyi = {ask} 'Apakah Anda ingin kami bernyanyi?'
+                bernyanyi = {ask} 'Apakah Anda ingin kami nyanyi?'
                 {if} bernyanyi {is} ya
                     {repeat} tahun {times}
                         {print} 'Hore Hip Hip'
@@ -2225,7 +2150,7 @@ levels:
                 pemain = Ann, John, Jesse
                 pilihan = 1, 2, 3, 4, 5, 6
                 {for} pemain {in} pemain-pemain
-                    {print} pemain ' melempar ' _ {at} {print}
+                    {print} pemain ' melempar ' _ {at} {random}
             mp_choice_options:
             -   option: pemain-pemain
                 feedback: Akan tertulis 'Ann melempar Jesse', bukan 'Ann melempar 6'.
@@ -2328,8 +2253,8 @@ levels:
             code: |-
                 kursus = hidangan pembuka, hidangan utama, hidangan penutup
                 nama = Timon, Onno
-                {for} nama {in} nama
-                    {for} kursus {in} kursus
+                {for} nama {in} nama-nama
+                    {for} kursus {in} kursus-kursus
                         makanan = {ask} nama ', apa yang ingin kamu makan sebagai 'menu'?'
                         {print} beri nama ' pesanan ' makanan ' sebagai ' menunya
             mp_choice_options:
@@ -2375,20 +2300,11 @@ levels:
                     counter
                     ```
                 feedback: 'No'
-            -   option: |-
-                    ```
-                    {range}
-                    ```
+            -   option: '`{range}`'
                 feedback: Correct
-            -   option: |-
-                    ```
-                    {if}
-                    ```
+            -   option: '`{if}`'
                 feedback: 'No'
-            -   option: |-
-                    ```
-                    {for}
-                    ```
+            -   option: '`{for}`'
                 feedback: 'No'
             hint: What did you learn in this level?
             correct_answer: B
@@ -2477,8 +2393,8 @@ levels:
                 feedback: Now Hedy prints the numbers from 0 to 10 instead of 10 to 0.
             -   option: |-
                     ```
-                    {for} i {in} {range} 0 to 10
-                        {print} - i
+                    {for} saya {in} {range} 0 {to} 10
+                        {print} - saya
                     ```
                 feedback: Hedy would print negative numbers in this case.
             -   option: |-
@@ -2687,9 +2603,9 @@ levels:
                 feedback: Baiklah!
             -   option: |-
                     ```
-                    flavors = 'vanilla, strawberry, chocolate'
-                    print 'I would like a ' flavors at random ' cake.'
-                    ```
+                                    rasa = 'vanila, stroberi, coklat'
+                                    {print} 'Saya mau kue ' rasa {at} {random} '.'
+                                    ```
                 feedback: Semua nilai rasa yang berbeda harus diberi tanda kutip.
             hint: Baris kedua sama pada setiap kodenya, perhatikan baris pertama
             correct_answer: C
@@ -2704,7 +2620,7 @@ levels:
                 feedback: Benar!
             -   option: The quotation marks aren't used correctly in line 2
                 feedback: Itu tidak benar
-            -   option: You can't use the = sign when using an ask command
+            -   option: Anda tidak dapat menggunakan tanda = saat menggunakan perintah {ask}
                 feedback: Itu tidak benar
             -   option: Nothing is wrong.
                 feedback: Itu tidak benar
@@ -2759,16 +2675,16 @@ levels:
         6:
             question_text: Baris manakah yang harus diisi pada ???
             code: |-
-                print 'Welcome to McHedy!'
-                order = ask 'Would you like a hamburger or fries?'
-                if order = 'hamburger'
-                  price = 12
-                if order = 'fries'
-                  price = 4
-                drinks = ask 'Would you like a drink with that for 2 dollars?'
-                if drinks = 'yes'
-                  ???
-                print 'That will be ' price ' dollar please'
+                {print} 'Selamat datang di McHedy!'
+                pesanan = {ask} 'Apakah Anda mau hamburger atau kentang goreng?'
+                {if} pesanan = 'hamburger'
+                    harga = 12
+                {if} pesanan = 'kentang goreng'
+                    harga = 4
+                minuman = {ask} 'Apakah Anda mau minuman dengan itu seharga 2 dolar?'
+                {if} minuman = 'ya'
+                    ???
+                {print} 'Tolong, itu 'harga' dolar'
             mp_choice_options:
             -   option: |-
                     ```
@@ -2894,7 +2810,7 @@ levels:
             code: |-
                 tindakan = 'bertepuk tangan', 'menghentakkan kaki', 'berteriak Hore!'
                 ???
-                    {untuk} saya {in} {range} 0 {to} 1
+                    {for} i {in} {range} 0 {to} 1
                         {print} 'jika kamu senang dan kamu mengetahuinya'
                         tindakan {print}
                     {print} 'jika kamu senang dan kamu mengetahuinya dan kamu benar-benar ingin menunjukkannya'
@@ -2906,319 +2822,340 @@ levels:
                     {for} saya {in} {range} 1 {to} 3
                     ```
                 feedback: Ini sulit! Semua tindakan dalam daftar harus ada dalam lagu.
-            -   option: for action in actions
-                feedback: You are amazing!
-            -   option: repeat 3 times
-                feedback: This is a hard one! All the actions on the list must be in the song.
-            -   option: print actions at random
-                feedback: This is a hard one! All the actions on the list must be in the song.
-            hint: This is a hard one! All the actions on the list must be in the song.
+            -   option: |-
+                    ```
+                    {for} tindakan {in} tindakan-tindakan
+                    ```
+                feedback: Kamu luar biasa!
+            -   option: |-
+                    ```
+                    {repeat} 3 {times}
+                    ```
+                feedback: Ini sulit! Semua tindakan dalam daftar harus ada dalam lagu.
+            -   option: |-
+                    ```
+                    {print} tindakan {at} {random}
+                    ```
+                feedback: Ini sulit! Semua tindakan dalam daftar harus ada dalam lagu.
+            hint: Ini sulit! Semua tindakan dalam daftar harus ada dalam lagu.
             correct_answer: B
             question_score: '10'
     13:
         1:
-            question_text: Which code should be filled in at the ??? ?
+            question_text: Kode manakah yang harus diisi pada bagian ??? ?
             code: |-
-                name = ask 'What is your name?'
-                song = ask 'Whould you like to hear a song?'
-                birthday = ask 'Is today your birthday?'
+                nama = {ask} 'Siapa namamu?'
+                lagu = {ask} 'Siapa yang ingin mendengarkan lagunya?'
+                ulang tahun = {ask} 'Apakah hari ini ulang tahunmu?'
                 ???
-                  print 'Happy Birthday to you!'
-                  print 'Happy Birthday to you!'
-                  print 'Happy Birthday. dear ' name
-                  print 'Happy Birthday to you!'
+                    {print} 'Selamat Ulang Tahun untukmu!'
+                    {print} 'Selamat Ulang Tahun untukmu!'
+                    {print} Nama 'Selamat Ulang Tahun sayang'
+                    {print} 'Selamat Ulang Tahun untukmu!'
             mp_choice_options:
             -   option: |-
                     ```
-                    if birthday and song = 'yes'
+                    {if} ulang tahun {and} lagu = 'ya'
                     ```
-                feedback: Almost there
+                feedback: Hampir sampai
             -   option: |-
                     ```
-                    if birthday = 'yes' and name = 'Hedy'
+                    {if} ulang tahun = 'ya' {and} nama = 'Hedy'
                     ```
-                feedback: Hedy only sings for you if you like to hear a song
+                feedback: Hedy hanya bernyanyi untukmu jika kamu suka mendengarkan sebuah lagu
             -   option: |-
                     ```
-                    if song = 'yes' and birthday = 'yes'
+                    {if} lagu = 'ya' {and} ulang tahun = 'ya'
                     ```
                 feedback: Super!
             -   option: |-
                     ```
-                    if song = 'yes' or birthday = 'yes'
+                    {if} lagu = 'ya' {or} ulang tahun = 'ya'
                     ```
-                feedback: Hedy only sings if both answers are yes
-            hint: Hedy sings if you want to hear a song and it's you birthday
+                feedback: Hedy hanya bernyanyi jika kedua jawabannya adalah ya
+            hint: Hedy bernyanyi jika kamu ingin mendengarkan lagu dan ini hari ulang tahunmu
             correct_answer: C
             question_score: '10'
         2:
-            question_text: Which command is missing in the code at the place of the ??? ?
+            question_text: Perintah mana yang hilang dalam kode menggantikan ??? ?
             code: |-
-                menu = 'cheese', 'sausage rolls', 'cookies'
-                diet = ask 'Do you have any dietary restrictions?'
-                if diet = 'vegan' ??? diet = 'halal'
-                    remove 'sausage rolls' from menu
+                menu = 'keju', 'sosis gulung', 'kue'
+                diet = {ask} 'Apakah Anda memiliki pantangan makanan?'
+                {if} diet = 'vegan' ??? diet = 'halal'
+                    {remove} menu 'sosis gulung' {from}
             mp_choice_options:
-            -   option: and
-                feedback: You don't have to be vegan and muslim
-            -   option: or
-                feedback: Great thinking!
-            -   option: +
-                feedback: 'No'
-            -   option: print
-                feedback: 'No'
-            hint: Neither vegans nor muslims can eat sausage rolls.
+            -   option: '`{and}`'
+                feedback: Anda tidak harus menjadi vegan dan muslim
+            -   option: '`{or}`'
+                feedback: Pemikiran yang bagus!
+            -   option: '`+`'
+                feedback: Tidak
+            -   option: '`{print}`'
+                feedback: Tidak
+            hint: Baik vegan maupun Muslim tidak boleh makan sosis gulung.
             correct_answer: B
             question_score: '10'
         3:
-            question_text: Which output is given to a member without a discount code?
+            question_text: Output manakah yang diberikan kepada member tanpa kode diskon?
             code: |-
-                member = ask 'Do you have a membership card?'
-                discount = ask 'Do you have a discount code?'
-                if member = 'yes' or discount = 'yes'
-                    print 'You get a free apple pie!'
-                else
-                    print 'That will be 5 dollars please'
+                member = {ask} 'Apakah Anda mempunyai kartu anggota?'
+                diskon = {ask} 'Apakah Anda mempunyai kode diskon?'
+                {if} anggota = 'ya' {or} diskon = 'ya'
+                    {print} 'Anda mendapat pai apel gratis!'
+                {else}
+                    {print} 'Tolong, itu 5 dolar'
             mp_choice_options:
-            -   option: You get a free pie!
-                feedback: Great job!
-            -   option: That will be 5 dollars please
-                feedback: That is not true
-            -   option: This code won't work, so there is no output
-                feedback: There is nothing wrong with the code
-            -   option: There is no way of knowing
-                feedback: There is! Read the question carefully
-            hint: Mind the command 'or' in line 3
+            -   option: Anda mendapatkan pai apel gratis!
+                feedback: Kerja bagus!
+            -   option: Tolong, itu 5 dolar
+                feedback: itu tidak benar
+            -   option: Kode ini tidak akan berfungsi, jadi tidak ada keluaran
+                feedback: Tidak ada yang salah dengan kodenya
+            -   option: Tidak ada cara untuk mengetahuinya
+                feedback: Ada! Baca pertanyaannya dengan cermat
+            hint: Perhatikan perintah `{or}` di baris 3
             correct_answer: A
             question_score: '10'
         4:
-            question_text: Which line of code should follow this line in rock-paper-scissors game?
-            code: if computer_choice is 'rock' and your_choice is 'paper'
+            question_text: Baris kode manakah yang harus mengikuti baris ini dalam permainan batu-kertas-gunting?
+            code: '{if} pilihan_komputer {is} ''batu'' {and} pilihan_Anda {is} ''kertas'''
             mp_choice_options:
-            -   option: print 'you win'
-                feedback: You win!
-            -   option: print 'you lose'
-                feedback: You lose!
-            -   option: print 'tie'
-                feedback: It's only a tie if both choices are the same
-            -   option: print 'try again'
-                feedback: Try again!
-            hint: Paper beats rock
+            -   option: |-
+                    ```
+                    {print} 'kamu menang'
+                    ```
+                feedback: Kamu menang!
+            -   option: |-
+                    ```
+                    {print} 'kamu kalah'
+                    ```
+                feedback: Kamu kalah!
+            -   option: |-
+                    ```
+                    {print} 'dasi'
+                    ```
+                feedback: Hanya seri jika kedua pilihannya sama
+            -   option: |-
+                    ```
+                    {print} 'coba lagi'
+                    ```
+                feedback: Coba lagi!
+            hint: Kertas mengalahkan batu
             correct_answer: A
             question_score: '10'
         5:
-            question_text: Which statement is true about this code?
+            question_text: Pernyataan manakah yang benar tentang kode ini?
             code: |-
-                if name = 'Cinderella' and shoe_size = 38
-                    print 'You are my one true love!'
+                {if} nama = 'Cinderella' {and} ukuran_sepatu = 38
+                    {print} 'Kamulah cinta sejatiku!'
             mp_choice_options:
-            -   option: Every person with shoe size 38 is this prince's one true love
-                feedback: The prince is a little more picky than that!
-            -   option: Every person named Cinderella is this prince's one true love
-                feedback: The prince is a little more picky than that!
-            -   option: Every person that is named Cinderella and has shoe size 38 is this prince's one true love
-                feedback: Fantastic!
-            -   option: Every person that's not named Cinderella and does not have shoe size 38 is this prince's one true love
-                feedback: The prince is a little more picky than that!
-            hint: Both statements have to be true
+            -   option: Setiap orang dengan ukuran sepatu 38 adalah cinta sejati pangeran ini
+                feedback: Pangeran sedikit lebih pilih-pilih dari itu!
+            -   option: Setiap orang yang bernama Cinderella adalah cinta sejati pangeran ini
+                feedback: Pangeran sedikit lebih pilih-pilih dari itu!
+            -   option: Setiap orang yang bernama Cinderella dan memiliki ukuran sepatu 38 adalah cinta sejati pangeran ini
+                feedback: Fantastis!
+            -   option: Setiap orang yang tidak bernama Cinderella dan tidak memiliki sepatu ukuran 38 adalah cinta sejati pangeran ini
+                feedback: Pangeran sedikit lebih pilih-pilih dari itu!
+            hint: Kedua pernyataan tersebut harus benar
             correct_answer: C
             question_score: '10'
         6:
-            question_text: Which statement about this code is true?
+            question_text: Pernyataan manakah yang benar tentang kode ini?
             code: |-
-                print 'Let me guess which family member you are!'
-                glasses = ask 'Do you wear glasses?'
-                female = ask 'Are you female?'
-                if glasses = 'yes' and female = 'yes'
-                    print 'You must be Sophie!'
-                if glasses = 'no' and female = 'yes'
-                   print 'You must be Marleen!'
-                if glasses = 'yes' and female = 'no'
-                    print 'You must be Wouter!'
-                if glasses = 'no' and female = 'no'
-                    print 'You must be Michael!'
+                {print} 'Biar saya tebak Anda anggota keluarga yang mana!'
+                kacamata = {ask} 'Apakah kamu memakai kacamata?'
+                perempuan = {ask} 'Apakah kamu perempuan?'
+                {if} kacamata = 'ya' {and} perempuan = 'ya'
+                    {print} 'Kamu pasti Sophie!'
+                {if} kacamata = 'tidak' {and} perempuan = 'ya'
+                   {print} 'Kamu pasti Marleen!'
+                {if} kacamata = 'ya' {and} perempuan = 'tidak'
+                    {print} 'Kamu pasti Wouter!'
+                {if} kacamata = 'tidak' {and} perempuan = 'tidak'
+                    {print} 'Kamu pasti Michael!'
             mp_choice_options:
-            -   option: Michael is a boy with glasses
-                feedback: Try again
-            -   option: Marleen is a girl with glasses
-                feedback: Try again
-            -   option: Wouter is a boy without glasses
-                feedback: Try again
-            -   option: Sophie is a girl with glasses
-                feedback: Great job!
-            hint: Take a good look! Or do you need glasses?
+            -   option: Michael adalah anak laki-laki berkacamata
+                feedback: Coba lagi
+            -   option: Marleen adalah seorang gadis berkacamata
+                feedback: Coba lagi
+            -   option: Wouter adalah anak laki-laki tanpa kacamata
+                feedback: Coba lagi
+            -   option: Sophie adalah seorang gadis berkacamata
+                feedback: Kerja bagus!
+            hint: Perhatikan baik-baik! Atau apakah Anda membutuhkan kacamata?
             correct_answer: D
             question_score: '10'
         7:
-            question_text: Which statement is false?
+            question_text: Pernyataan mana yang salah?
             code: |-
-                print 'Thank you for helping me take care of my pets'
-                print 'Here is a program to help feed them'
-                animal is ask 'What kind of animal are they?'
-                color is ask 'What colour are they?'
-                if animal is 'cat' and color = 'grey'
-                    print 'That is Abby. She eats 3 scoops of cat nibbles'
-                if animal is 'cat' and color = 'orange'
-                    print 'That is Milo. He eats 4 scoops of cat nibbles'
-                if animal is 'bird' or color is 'black'
-                    print 'I fed them this moring! They do not need more food today'
-                if animal is 'hamster' and color is 'brown'
-                    print 'You can feed them a piece of carrot'
+                {print} 'Terima kasih telah membantu saya merawat hewan peliharaan saya'
+                {print} 'Ini adalah program untuk membantu memberi makan mereka'
+                hewan = {ask} 'Hewan apakah itu?'
+                warna = {ask} 'Apa warnanya?'
+                {if} animal = 'kucing' {and} warna = 'abu-abu'
+                    {print} 'Itu Abby. Dia makan 3 sendok camilan kucing
+                {if} animal = 'kucing' {and} warna = 'oranye'
+                    {print} 'Itu Milo. Dia makan 4 sendok camilan kucing'
+                {if} animal = 'burung' {or} color = 'hitam'
+                    {print} 'Saya memberi mereka makan pagi ini! Mereka tidak membutuhkan lebih banyak makanan hari ini'
+                {if} animal = 'hamster' {and} warna= 'coklat'
+                    {print} 'Anda bisa memberi mereka makan wortel'
             mp_choice_options:
-            -   option: The grey cat is called Abby
-                feedback: This is true!
-            -   option: Milo the orange cat eats 4 scoops of cat nibbles
-                feedback: This is true
-            -   option: The black hamster needs to be fed a piece of carrot
-                feedback: Great job!
-            -   option: The yellow bird was fed this morning
-                feedback: This is true
-            hint: Read the last 4 lines carefully
+            -   option: Kucing abu-abu itu bernama Abby
+                feedback: Ini benar!
+            -   option: Milo si kucing oranye makan 4 sendok camilan kucing
+                feedback: ini benar
+            -   option: Hamster hitam perlu diberi makan sepotong wortel
+                feedback: Kerja bagus!
+            -   option: Burung kuning diberi makan pagi ini
+                feedback: ini benar
+            hint: Baca 4 baris terakhir dengan cermat
             correct_answer: C
             question_score: '10'
         8:
-            question_text: What output do you get if you order popcorn but no drink?
+            question_text: Output apa yang Anda dapatkan jika Anda memesan popcorn tetapi tidak ada minuman?
             code: |-
-                print 'Welcome to the movie theater'
-                popcorn = ask 'Would you like some popcorn?'
-                drink = ask 'Would you like a drink?'
-                if popcorn = 'yes' and drink = 'yes'
-                    print 'That will be 8 dollars please'
-                if popcorn = 'no' and drink = 'yes'
-                   print 'That will be 3 dollars please'
-                if popcorn = 'yes' and drink = 'no'
-                    print 'That will be 5 dollars please'
-                if popcorn = 'no' and drink = 'no'
-                    print 'Ok'
-                print 'Enjoy the movie'
+                {print} 'Selamat datang di bioskop'
+                popcorn = {ask} 'Apakah kamu mau popcorn?'
+                minum = {ask} 'Apakah kamu mau minum?'
+                {if} popcorn = 'ya' {and} minuman = 'ya'
+                    {print} 'Tolong, harganya 8 dolar'
+                {if} popcorn = 'tidak' {and} minuman = 'ya'
+                   {print} 'Tolong, itu 3 dolar'
+                {if} popcorn = 'ya' {and} minuman = 'tidak'
+                    {print} 'Tolong, itu 5 dolar'
+                {if} popcorn = 'tidak' {and} minuman = 'tidak'
+                    {print} 'Oke'
+                {print} 'Nikmati filmnya'
             mp_choice_options:
             -   option: |-
-                    Welcome to the movie theater
-                    That will be 8 dollars please
-                    Enjoy the movie
-                feedback: You have paid too much!
+                    Selamat datang di bioskop
+                    Tolong, itu 8 dolar
+                    Nikmati filmnya
+                feedback: Anda telah membayar terlalu banyak!
             -   option: |-
-                    Welcome to the movie theater
-                    That will be 5 dollars please
-                    Enjoy the movie
-                feedback: Amazing!
+                    Selamat datang di bioskop
+                    Tolong, itu 5 dolar
+                    Nikmati filmnya
+                feedback: Luar biasa!
             -   option: |-
-                    Welcome to the movie theater
-                    That will be 3 dollars please
-                    Enjoy the movie
-                feedback: That's not enough money!
+                    Selamat datang di bioskop
+                    Tolong, itu 3 dolar
+                    Nikmati filmnya
+                feedback: Uang itu tidak cukup!
             -   option: |-
-                    Welcome to the movie theater
-                    Ok
-                    Enjoy the movie
-                feedback: You have to pay for your popcorn!
-            hint: popcorn = yes and drink = no
+                    Selamat datang di bioskop
+                    Oke
+                    Nikmati filmnya
+                feedback: Anda harus membayar untuk popcorn Anda!
+            hint: popcorn = ya dan minuman = tidak
             correct_answer: B
             question_score: '10'
         9:
-            question_text: What is wrong with this code?
+            question_text: Apa yang salah dengan kode ini?
             code: |-
-                1  chocolate = ask 'Would you like chocolate sauce on your ice cream?'
-                2  sprinkles = ask 'Would you like sprinkles on your ice cream?'
-                3  if chocolate and sprinkles = 'yes'
-                4      print 'Ice cream with chocolate sauce and sprinkles, coming up!'
-                5  if chocolate = 'yes' and sprinkles = 'no'
-                6      print 'Ice cream with chocolate sauce, coming up!'
-                7  if chocolate = 'no' and sprinkles = 'yes'
-                8      print 'Ice cream with sprinkles, coming up'
-                9  if chocolate = 'no' and sprinkles = 'no'
-                10     print 'Just plain icecream, coming up!'
+                1 coklat = {ask} 'Apakah Anda ingin saus coklat pada es krim Anda?'
+                2 taburan = {ask} 'Apakah Anda ingin taburan pada es krim Anda?'
+                3 {if} coklat {and} taburan = 'ya'
+                4 {print} 'Es krim dengan saus coklat dan taburan, segera hadir!'
+                5 {if} coklat = 'ya' {and} taburan = 'tidak'
+                6 {print} 'Es krim dengan saus coklat, segera hadir!'
+                7 {if} coklat = 'tidak' {and} taburan = 'ya'
+                8 {print} 'Es krim dengan taburan, segera hadir'
+                9 {if} coklat = 'tidak' {and} taburan = 'tidak'
+                10 {print} 'Es krim biasa saja, segera hadir!'
             mp_choice_options:
             -   option: |-
                     Line 3 should be:
                     ```
                     {if} chocolate = 'yes' {and} sprinkles = 'yes'
                     ```
-                feedback: Correct!
+                feedback: Benar!
             -   option: |-
                     Line 3 should be:
                     ```
                     {if} chocolate = 'no' {and} sprinkles = 'no'
                     ```
-                feedback: This is not what I ordered!
+                feedback: Ini bukan yang saya pesan!
             -   option: |-
                     Line 5 should be:
                     ```
                     {if} chocolate = 'yes' {and} sprinkles = 'yes'
                     ```
-                feedback: This is not what I ordered!
+                feedback: Ini bukan yang saya pesan!
             -   option: |-
                     Line 7 should be:
                     ```
                     {if} chocolate = 'yes' {and} sprinkles = 'no'
                     ```
-                feedback: This is not what I ordered!
-            hint: There is a mistake in line 3
+                feedback: Ini bukan yang saya pesan!
+            hint: Ada kesalahan pada baris 3
             correct_answer: A
             question_score: '10'
         10:
-            question_text: Which command needs to be in line 8 at the place of the ??? ?
+            question_text: Perintah mana yang harus ada di baris 8 menggantikan ??? ?
             code: |-
-                print 'Welcome to the product finder of this supermarkt'
-                item is ask 'What product are you looking for?'
-                bakery = 'bread', 'buns', 'muffins'
-                drinks = 'soda', 'water', 'lemonade'
-                snacks = 'chips', 'nuts', 'dips'
-                frozen = 'fries', 'icecream', 'pizza'
-                fruit = 'bananas', 'apples', 'oranges'
-                if item in snacks ??? item in drinks
-                    print 'This item is in aile 3'
-                if item in bakery or item in bakery
-                    print 'This item in in the back of the store'
-                if item in fruit
-                    print 'The fruit is sold near the register'
+                {print} 'Selamat datang di pencari produk supermarket ini'
+                item = {ask} 'Produk apa yang sedang kamu cari?'
+                roti = 'roti', 'roti', 'muffin'
+                minuman = 'soda', 'air', 'limun'
+                makanan ringan = 'keripik', 'kacang', 'saus'
+                beku = 'kentang goreng', 'es krim', 'pizza'
+                buah = 'pisang', 'apel', 'jeruk'
+                {if} item {in} makanan ringan ??? barang {in} minuman
+                    {print} 'Barang ini ada di lorong 3'
+                {if} barang {in} toko roti {or} barang {in} toko roti
+                    {print} 'Item ini ada di belakang toko'
+                {if} item {in} buah
+                    {print} 'Buahnya dijual di dekat kasir'
             mp_choice_options:
-            -   option: and
-                feedback: There are no items that are both the list of snacks and the list of drinks
-            -   option: or
-                feedback: Great job!
-            -   option: in
-                feedback: 'No'
-            -   option: if
-                feedback: 'No'
-            hint: The item is either in the list of snacks, or in the list of drinks
+            -   option: '`{and}`'
+                feedback: Tidak ada item yang merupakan daftar makanan ringan dan daftar minuman
+            -   option: '`{or}`'
+                feedback: Kerja bagus!
+            -   option: '`{in}`'
+                feedback: Tidak
+            -   option: '`{if}`'
+                feedback: Tidak
+            hint: Item tersebut ada di daftar makanan ringan, atau di daftar minuman
             correct_answer: B
             question_score: '10'
     14:
         1:
-            question_text: Which symbol should be used on the blank?
+            question_text: Simbol manakah yang harus digunakan pada bagian yang kosong?
             code: |-
                 name _ {ask} 'Who are you?'
                 {if} name == 'Hedy'
                     {print} 'Me too!'
             mp_choice_options:
             -   option: '`=>`'
-                feedback: This is not a symbol.
+                feedback: Ini bukan sebuah simbol.
             -   option: '`==`'
-                feedback: We are not comparing anything, just asking.
+                feedback: Kami tidak membandingkan apa pun, hanya bertanya.
             -   option: '`!=`'
-                feedback: We are not comparing anything, just asking
+                feedback: Kami tidak membandingkan apa pun, hanya bertanya
             -   option: '`=`'
-                feedback: Right!
-            hint: We are not comparing anything, we are just asking a name.
+                feedback: Benar!
+            hint: Kami tidak membandingkan apa pun, kami hanya menanyakan nama.
             correct_answer: D
             question_score: '10'
         2:
-            question_text: Which of these codes has used the correct = or == symbol?
+            question_text: Kode manakah yang menggunakan simbol = atau == yang benar?
             mp_choice_options:
-            -   option: '{if} name = Hedy'
-                feedback: 'No'
-            -   option: '{if} age = 24'
-                feedback: 'No'
-            -   option: answer = {ask} 'What is your answer'
-                feedback: Yes!
-            -   option: answer == {ask} 'How are you doing?'
-                feedback: 'No'
-            hint: When you are comparing two answers you should use ==
+            -   option: '{if} nama = Hedy'
+                feedback: Tidak
+            -   option: '{if} umur = 24'
+                feedback: Tidak
+            -   option: jawaban = {ask} 'Apa jawabanmu'
+                feedback: Ya!
+            -   option: jawaban == {ask} 'Apa kabarmu?'
+                feedback: Tidak
+            hint: Saat Anda membandingkan dua jawaban, Anda harus menggunakan ==
             correct_answer: C
             question_score: '10'
         3:
-            question_text: Which symbols should be filled in on the two blanks?
+            question_text: Simbol manakah yang harus diisi pada kedua bagian yang kosong?
             code: |-
                 guests = {ask} 'How many people are at the party?'
                 {if} guests _ 130
@@ -3227,83 +3164,83 @@ levels:
                     {print} 'Im sorry, the club is full. '
                     {print} 'You have to wait for a guest to leave'
             mp_choice_options:
-            -   option: '`>` and `<`'
-                feedback: That's not it
-            -   option: '`=` and `>=`'
-                feedback: That's not it
-            -   option: '`<` and `>=`'
-                feedback: You are right
+            -   option: '`>` dan `<`'
+                feedback: Bukan itu
+            -   option: '`=` dan `>=`'
+                feedback: Bukan itu
+            -   option: '`<` dan `>=`'
+                feedback: Kamu benar
             -   option: '`+` and `==`'
-            hint: There are 130 people allowed in the club
+            hint: Ada 130 orang yang diperbolehkan di klub
             correct_answer: C
             question_score: '10'
-            feedback: That's not it
+            feedback: Bukan itu
         4:
-            question_text: What's wrong with this code?
+            question_text: Apa yang salah dengan kode ini?
             code: |-
-                price = 10
-                money = {ask} How much money do you have?
-                buy = {ask} 'Would you like to buy this teddy bear?'
-                {if} money >= price and buy == 'yes'
-                    {print} 'You can buy the bear!'
+                harga = 10
+                uang = {ask} Berapa banyak uang yang kamu punya?
+                beli = {ask} 'Apakah Anda ingin membeli boneka beruang ini?'
+                {if} uang >= harga {and} beli == 'ya'
+                    {print} 'Kamu bisa membeli beruang itu!'
                 {else}
-                    {print} 'You cannot buy this bear!'
+                    {print} 'Kamu tidak bisa membeli beruang ini!'
             mp_choice_options:
-            -   option: In line 1 == should be used instead of =
-                feedback: No that's not it
-            -   option: Line 2 misses quotation marks
-                feedback: You are correct
-            -   option: In line 4 = should have been used instead of ==
-                feedback: No that's not it
-            -   option: In line 4 <= should have been used instead of >=
-                feedback: No that's not it
-            hint: The symbols are right
+            -   option: Pada baris 1 == harus digunakan sebagai pengganti =
+                feedback: Tidak, bukan itu
+            -   option: Baris 2 tidak memiliki tanda petik
+                feedback: Anda benar
+            -   option: Pada baris 4 = seharusnya digunakan, bukan ==
+                feedback: Tidak, bukan itu
+            -   option: Pada baris 4 <= seharusnya digunakan, bukan >=
+                feedback: Tidak, bukan itu
+            hint: Simbolnya benar
             correct_answer: B
             question_score: '10'
         5:
             question_text: Which symbol should be filled in on the blanks if the movie is suitable for kids for the age of 12 and up?
             code: |-
-                age = {ask} 'How old are you?'
-                ticket = {ask} 'Do you have a ticket?'
-                {if} age _ and ticket == 'yes'
-                    {print} 'You can enter the movie theater.'
+                age = {ask} 'Berapa umurmu?'
+                tiket = {ask} 'Apakah Anda punya tiket?'
+                {if} usia _ {and} tiket == 'ya'
+                    {print} 'Anda bisa masuk ke bioskop.'
                 {else}
-                    {print} 'You are not allowed to come in!'
+                    {print} 'Anda tidak diperbolehkan masuk!'
             mp_choice_options:
             -   option: '`> 12`'
-                feedback: 12 year olds are allowed too
+                feedback: Anak berusia 12 tahun juga diperbolehkan
             -   option: '`>= 12`'
-                feedback: Great!
+                feedback: Hebat!
             -   option: '`< 12`'
-                feedback: These kids are too young!
+                feedback: Anak-anak ini masih terlalu muda!
             -   option: '`<= 12`'
-                feedback: These kids are too young
-            hint: '> means greater than'
+                feedback: Anak-anak ini masih terlalu muda
+            hint: '> berarti lebih besar dari'
             correct_answer: B
             question_score: '10'
         6:
-            question_text: How many times do you have to say you are annoyed before this annoying game stops?
+            question_text: Berapa kali Anda harus mengatakan Anda kesal sebelum permainan menjengkelkan ini berhenti?
             code: |-
-                lives = 2
-                {repeat} 10 times
-                    {if} lives != 0
-                        answer = {ask} 'Are you annoyed yet?'
-                    {if} answer == 'yes'
-                        lives = lives - 1
+                hidup = 2
+                {repeat} 10 {times}
+                    {if} hidup != 0
+                        jawaban = {ask} 'Apakah kamu sudah kesal?'
+                    {if} jawaban == 'ya'
+                        nyawa = nyawa - 1
             mp_choice_options:
-            -   option: 10 times
-                feedback: It stops after 2 times
-            -   option: 0 times
-                feedback: It stops after 2 times
-            -   option: 1 time
-                feedback: It stops after 2 times
-            -   option: 2 times
-                feedback: That is correct
-            hint: '!= means ''is not'''
+            -   option: 10 kali
+                feedback: Itu berhenti setelah 2 kali
+            -   option: 0 kali
+                feedback: Itu berhenti setelah 2 kali
+            -   option: 1 kali
+                feedback: Itu berhenti setelah 2 kali
+            -   option: 2 kali
+                feedback: Itu betul
+            hint: '!= berarti ''tidak'''
             correct_answer: D
             question_score: '10'
         7:
-            question_text: What should be filled in on the three blanks?
+            question_text: Apa yang harus diisi pada ketiga titik kosong tersebut?
             code: |-
                 {print} 'Guess which number'
                 numbers = 1, 2, 3, 4, 5, 6, 7, 8, 9, 10
@@ -3320,19 +3257,19 @@ levels:
                             {print} _
                             game = 'over'
             mp_choice_options:
-            -   option: '`''Lower''` and `''Higher''` and `''You win!''`'
-                feedback: That's not quite right.
-            -   option: '`''Higher''` and `''Lower''` and `''You win!''`'
-                feedback: You win!
-            -   option: '`''You win!''` and `''Lower!''` and `''Higher''`'
-                feedback: That's not quite right.
-            -   option: '`''Lower!''` and `''You win!''` and `''Higher!''`'
-                feedback: That's not quite right.
-            hint: The last one should say you win.
+            -   option: '`''Lower''` dan `''Higher''` dan `''You win!''`'
+                feedback: Itu kurang tepat.
+            -   option: '`''Higher''` dan `''Lower''` dan `''You win!''`'
+                feedback: Kamu menang!
+            -   option: '`''You win!''` dan `''Lower!''` dan `''Higher''`'
+                feedback: Itu kurang tepat.
+            -   option: '`''Lower!''` dan `''You win!''` dan `''Higher!''`'
+                feedback: Itu kurang tepat.
+            hint: Yang terakhir seharusnya mengatakan Anda menang.
             correct_answer: B
             question_score: '10'
         8:
-            question_text: Which statement is true about this roller coaster?
+            question_text: Pernyataan manakah yang benar tentang roller coaster ini?
             code: |-
                 length = {ask} 'Please fill in your length in cm'
                 {if} length < 120
@@ -3340,169 +3277,169 @@ levels:
                 {else}
                     {print} 'Enjoy the ride'
             mp_choice_options:
-            -   option: You must be taller than 120 cm to go on the roller coaster
+            -   option: Anda harus memiliki tinggi lebih dari 120 cm untuk dapat naik roller coaster
                 feedback: True!
-            -   option: You must be taller than 119 cm to go on the roller coaster
-                feedback: If you are 120 cm you won't get in
+            -   option: Anda harus memiliki tinggi badan lebih dari 119 cm untuk dapat naik roller coaster
+                feedback: Jika tinggi badan Anda 120 cm, Anda tidak akan bisa masuk
             -   option: You must be shorter than 120 cm to go on the roller coaster
                 feedback: '> means greater than'
-            -   option: There are no length restrictions to go on the roller coaster
-                feedback: There are.
+            -   option: Tidak ada batasan panjang untuk menaiki roller coaster
+                feedback: Ada.
             hint: '> means greater than'
             correct_answer: A
             question_score: '10'
         9:
-            question_text: How many pieces of chocolate will give you a stomach ache according to this fitbit?
+            question_text: Berapa potong coklat yang bikin sakit perut menurut fitbit ini?
             code: |-
-                chocolate = {ask} 'How many pieces of chocolate have you eaten?'
-                  {if} chocolate <= 2
-                      {print} 'That is a healthy amount'
-                  {if} chocolate > 2 and chocolate =< 8
-                      {print} 'That is a bit much'
-                  {if} chocolate > 8
-                      {print} 'You will get a stomach ache!'
+                coklat = {ask} 'Berapa potong coklat yang sudah kamu makan?'
+                  {if} coklat <= 2
+                      {print} 'Itu jumlah yang sehat'
+                  {if} coklat > 2 {and} coklat =< 8
+                      {print} 'Itu agak berlebihan'
+                  {if} coklat > 8
+                      {print} 'Kamu akan sakit perut!'
             mp_choice_options:
-            -   option: 1 or more
-                feedback: 'No'
-            -   option: 2 or more
-                feedback: 'No'
-            -   option: 8 or more
-                feedback: Almost
-            -   option: 9 or more
-                feedback: Great!
-            hint: '> 8 means more than 8'
+            -   option: 1 atau lebih
+                feedback: Tidak
+            -   option: 2 atau lebih
+                feedback: Tidak
+            -   option: 8 atau lebih
+                feedback: Hampir
+            -   option: 9 atau lebih
+                feedback: Hebat!
+            hint: '> 8 berarti lebih dari 8'
             correct_answer: D
             question_score: '10'
         10:
-            question_text: What should be filled in in the blanks?
+            question_text: Apa yang harus diisi pada bagian yang kosong?
             code: |-
                 {print} 'Whoever gets the most points wins!'
                 {if} points_player_1 < points_player_2
                     {print} _
             mp_choice_options:
-            -   option: '''player 1 wins'''
-                feedback: Look at who has the highest score!
-            -   option: '''player 2 wins'''
-                feedback: Yes!
-            -   option: '''player 2 loses'''
-                feedback: Look at who has the highest score!
-            -   option: '''It is a tie'''
-                feedback: No it's not, one player has a higher score
-            hint: You win the game by having the most points
+            -   option: '''pemain 1 menang'''
+                feedback: Lihatlah siapa yang memiliki skor tertinggi!
+            -   option: '''pemain 2 menang'''
+                feedback: Ya!
+            -   option: '''pemain 2 kalah'''
+                feedback: Lihatlah siapa yang memiliki skor tertinggi!
+            -   option: '''Itu seri'''
+                feedback: Tidak, tidak, satu pemain memiliki skor lebih tinggi
+            hint: Anda memenangkan permainan dengan mendapatkan poin terbanyak
             correct_answer: B
             question_score: '10'
     15:
         1:
-            question_text: 'Which symbol should be used on the blank? Tip: You must keep guessing until you get it right.'
+            question_text: 'Simbol manakah yang harus digunakan pada bagian yang kosong? Tip: Anda harus terus menebak sampai Anda bisa menebaknya dengan benar.'
             code: |-
-                answer = 0
-                while answer _ 'Amsterdam'
-                    answer = ask 'What is the capital city of the Netherlands?'
-                print 'You have given the correct answer'
+                jawaban = 0
+                {while} jawaban _ 'Amsterdam'
+                    jawaban = {ask} 'Apa ibu kota Belanda?'
+                {print} 'Anda telah memberikan jawaban yang benar'
             mp_choice_options:
             -   option: '`=!`'
-                feedback: That is not right.
+                feedback: Itu tidak benar.
             -   option: '`==`'
-                feedback: You don't have to keep guessing if you've given the right answer.
+                feedback: Anda tidak perlu terus menebak-nebak apakah Anda sudah memberikan jawaban yang benar.
             -   option: '`!=`'
-                feedback: Correct
+                feedback: Benar
             -   option: '`=`'
-                feedback: That's not it
-            hint: Keep guessing until you say Amsterdam
+                feedback: Bukan itu
+            hint: Terus menebak sampai Anda mengatakan Amsterdam
             correct_answer: C
             question_score: '10'
         2:
-            question_text: Which of these codes has used the correct symbol(s)?
+            question_text: Manakah dari kode berikut yang menggunakan simbol yang benar?
             mp_choice_options:
             -   option: |-
                     ```
                     {while} name = Hedy
                     ```
-                feedback: 'No'
+                feedback: Tidak
             -   option: |-
                     ```
                     {while} age = 24
                     ```
-                feedback: 'No'
+                feedback: Tidak
             -   option: |-
                     ```
                     {while} time > 0
                     ```
-                feedback: Yes!
+                feedback: Ya!
             -   option: |-
                     ```
                     {while} answer == yes'
                     ```
-                feedback: A quotation mark is missing
-            hint: When you are comparing two answers you should use ==
+                feedback: Tanda kutip tidak ada
+            hint: Saat Anda membandingkan dua jawaban, Anda harus menggunakan ==
             correct_answer: C
             question_score: '10'
         3:
-            question_text: Which command should be filled in on the two blanks?
+            question_text: Perintah mana yang harus diisi pada bagian yang kosong?
             code: |-
-                _ age >= 18
-                  print 'you are not allowed in this bar'
+                _ usia <18
+                  {print} 'kamu tidak diperbolehkan berada di bar ini'
             mp_choice_options:
             -   option: '`{in}`'
-                feedback: That's not it
+                feedback: Bukan itu
             -   option: '`{while}`'
-                feedback: You are right
+                feedback: Kamu benar
             -   option: '`{for}`'
-                feedback: That's not it
+                feedback: Bukan itu
             -   option: '`{range}`'
-                feedback: That's not it
-            hint: You are not allowed in the bar as long as you are 17 or younger
+                feedback: Bukan itu
+            hint: Anda tidak diperbolehkan berada di bar selama Anda berusia 17 tahun ke bawah
             correct_answer: B
             question_score: '10'
         4:
-            question_text: What's wrong with this code?
+            question_text: Apa yang salah dengan kode ini?
             code: |-
-                options = 1, 2, 3, 4, 5, 6
-                print 'Throw 6 as fast as you can!'
-                thrown = 0
-                tries = 0
-                while thrown == 6
-                    thrown = options at random
-                    print 'You threw ' thrown
-                    tries = tries + 1
-                print 'Yes! You have thrown 6 in ' tries ' tries.'
+                pilihan = 1, 2, 3, 4, 5, 6
+                {print} 'Lempar 6 secepat mungkin!'
+                dilempar = 0
+                mencoba = 0
+                {while} dilempar == 6
+                    dilempar = pilihan {at} {random}
+                    {print} 'Kamu melempar ' dilempar
+                    mencoba = mencoba + 1
+                {print} 'Ya! Anda telah memasukkan 6 kali 'mencoba' mencoba.'
             mp_choice_options:
-            -   option: In line 1 == should be used instead of =
-                feedback: No that's not it
-            -   option: Line 2 misses quotation marks
-                feedback: That's not right
-            -   option: In line 5 if should have been used instead of while
-                feedback: That's not it
-            -   option: In line 5 != should have been used instead of ==
-                feedback: You are correct
-            hint: There is something wrong in line 5
+            -   option: Pada baris 1 == harus digunakan sebagai pengganti =
+                feedback: Tidak, bukan itu
+            -   option: Baris 2 tidak memiliki tanda kutip
+                feedback: Itu tidak benar
+            -   option: Pada baris 5, {if} seharusnya digunakan, bukan {while}
+                feedback: Bukan itu
+            -   option: Di baris 5 != seharusnya digunakan daripada ==
+                feedback: Anda benar
+            hint: Ada yang salah di baris 5
             correct_answer: D
             question_score: '10'
         5:
-            question_text: What should be placed on the blank to make this program work correctly?
+            question_text: Apa yang harus ditempatkan pada bagian kosong agar program ini bekerja dengan benar?
             code: |-
-                wetness = 10
-                while wetness != 0
-                    print 'Your hair is still wet, hair dryer on!'
-                    sleep 1
-                    clear
-                    wetness _
+                basah = 10
+                {while} basah != 0
+                    {print} 'Rambutmu masih basah, pengering rambut menyala!'
+                    {sleep} 1
+                    {clear}
+                    basah _
 
-                print 'All dry!'
+                {print} 'Semua kering!'
             mp_choice_options:
-            -   option: = wetness
-                feedback: That will not change anything
-            -   option: = wetness = 1
-                feedback: You can't have two times = in one line
-            -   option: = wetness - 1
-                feedback: You are correct!
-            -   option: = wetness + 1
-                feedback: The program should count down
-            hint: wetness should get less each time
+            -   option: = basah
+                feedback: Itu tidak akan mengubah apapun
+            -   option: = basah  = 1
+                feedback: Anda tidak dapat memiliki dua kali = dalam satu baris
+            -   option: = basah - 1
+                feedback: Anda benar!
+            -   option: = basah + 1
+                feedback: Program ini harus menghitung mundur
+            hint: kebasahan akan berkurang setiap saat
             correct_answer: C
             question_score: '10'
         6:
-            question_text: what is wrong with this code?
+            question_text: Apa yang salah dengan kode ini?
             code: |-
                 lives = 100
                     {while} lives != 0
@@ -3510,19 +3447,19 @@ levels:
                 {if} answer == 'yes'
                     lives = lives - 1
             mp_choice_options:
-            -   option: while should be if
-                feedback: No that is not right
-            -   option: if should be while
-                feedback: No that is not right
-            -   option: Line 3 should start with more indentation
-                feedback: No that's not right
-            -   option: Line 2 should start with less indentation
-                feedback: That is correct
-            hint: Look closely at the indentation
+            -   option: '{while} seharusnya {if}'
+                feedback: Tidak, itu tidak benar
+            -   option: '{if} seharusnya {while}'
+                feedback: Tidak, itu tidak benar
+            -   option: Baris 3 harus dimulai dengan lebih banyak lekukan
+                feedback: Tidak, itu tidak benar
+            -   option: Baris 2 harus dimulai dengan lekukan yang lebih sedikit
+                feedback: Itu betul
+            hint: Perhatikan baik-baik lekukannya
             correct_answer: D
             question_score: '10'
         7:
-            question_text: How should this program be changed to that it works?
+            question_text: Bagaimana seharusnya program ini diubah agar dapat berfungsi?
             code: |-
                 {print} 'Guess which number'
                 numbers = 1, 2, 3, 4, 5, 6, 7, 8, 9, 10
@@ -3538,19 +3475,19 @@ levels:
                         {print} _
                         game = 'over'
             mp_choice_options:
-            -   option: '... change the first {if} into a {while}'
-                feedback: Perfect!
-            -   option: '... change the second {if} into a {while}'
-                feedback: That's not quite right.
-            -   option: '... change the third {if} into a {while}'
-                feedback: That's not quite right.
-            -   option: '... change the fourth {if} into a {while}'
-                feedback: That's not quite right.
-            hint: The last one should say you win.
+            -   option: '... ubah {if} pertama menjadi {while}'
+                feedback: Sempurna!
+            -   option: '... ubah {if} kedua menjadi {while}'
+                feedback: Itu kurang tepat.
+            -   option: '... ubah {if} ketiga menjadi {while}'
+                feedback: Itu kurang tepat.
+            -   option: '... ubah {if} keempat menjadi {while}'
+                feedback: Itu kurang tepat.
+            hint: Yang terakhir seharusnya mengatakan Anda menang.
             correct_answer: A
             question_score: '10'
         8:
-            question_text: Which statement is true about this automated toilet system?
+            question_text: Pernyataan manakah yang benar tentang sistem toilet otomatis ini?
             code: |-
                 {while} toilet == 'occupied'
                     lights = 'on'
@@ -3559,336 +3496,336 @@ levels:
                 lights = 'off'
                 air_freshener_sprays = 'no'
             mp_choice_options:
-            -   option: The lights and air freshener will turn off after 1 minute
-                feedback: False!
-            -   option: The air freshener sprays once every minute and the lights stay on the whole time while you are on the toilet
-                feedback: Great job
-            -   option: The air freshener sprays once you leave the toilet.
-                feedback: It only sprays when you're in there.
-            -   option: The lights will always stay on.
-                feedback: That wouldn't be right.
-            hint: The block after the while command keeps happening while the toilet is occupied.
+            -   option: Lampu dan pengharum ruangan akan mati setelah 1 menit
+                feedback: Palsu!
+            -   option: Pengharum ruangan disemprotkan sekali setiap menit dan lampu tetap menyala sepanjang waktu saat Anda berada di toilet
+                feedback: Kerja bagus
+            -   option: Penyegar udara menyemprot begitu Anda meninggalkan toilet.
+                feedback: Itu hanya menyemprot saat Anda berada di sana.
+            -   option: Lampu akan selalu menyala.
+                feedback: Itu tidak benar.
+            hint: Pemblokiran setelah perintah {while} terus terjadi saat toilet sedang ditempati.
             correct_answer: B
             question_score: '10'
         9:
-            question_text: What will the diet app say if you have eaten 1600 calories today?
+            question_text: Apa yang akan dikatakan aplikasi diet jika Anda sudah makan 1600 kalori hari ini?
             code: |-
-                chocolate = {ask} 'How many calories have you eaten today?'
-                  {while} calories <= 1000
-                      {print} 'You could eat some more'
-                  {while} calories > 1000 and calories =< 2000
-                      {print} 'That is alright'
-                  {while} calories > 2000
-                      {print} 'You have had enough for today'
+                kalori = {ask} 'Berapa banyak kalori yang kamu makan hari ini?'
+                  {while} kalori <= 1000
+                      {print} 'Kamu bisa makan lagi'
+                  {while} kalori > 1000 {and} kalori =< 2000
+                      {print} 'Tidak apa-apa'
+                  {while} kalori > 2000
+                      {print} 'Kamu sudah muak hari ini'
             mp_choice_options:
-            -   option: Nothing. 1600 is not programmed into the app.
-                feedback: 'No'
-            -   option: you could eat some more
-                feedback: 'No'
-            -   option: That is alright
-                feedback: Yes!
-            -   option: You have eaten enough for today
-                feedback: 'No'
-            hint: 1600 is between 1000 and 2000
+            -   option: Tidak ada apa-apa. 1600 tidak diprogram ke dalam aplikasi.
+                feedback: Tidak
+            -   option: kamu bisa makan lagi
+                feedback: Tidak
+            -   option: Itu benar
+                feedback: Ya!
+            -   option: Anda sudah makan cukup untuk hari ini
+                feedback: Tidak
+            hint: 1600 adalah antara 1000 dan 2000
             correct_answer: C
             question_score: '10'
         10:
-            question_text: 'What should be filled in in the blanks? Tip: the player with the most points is in the lead.'
+            question_text: 'Apa yang harus diisi pada bagian yang kosong? Tip: pemain dengan poin terbanyak memimpin.'
             code: |-
                 name_player_1 = {ask} 'Name player 1:'
                 name_player_2 = {ask} 'Name player 2:'
                 {while} points_player_1 > points_player_2
                     {print} _ ' is in the lead right now!'
             mp_choice_options:
-            -   option: name_player_1
-                feedback: You are right!
-            -   option: name_player_2
-                feedback: No they are losing!
-            -   option: points_player_1
-                feedback: You should fill in a name, not a number
-            -   option: points_player_2
-                feedback: You should fill in a name, not a number
-            hint: You win the game by having the most points. Your name should appear on the screen
+            -   option: nama_pemain_1
+                feedback: Kamu benar!
+            -   option: nama_pemain_2
+                feedback: Tidak, mereka kalah!
+            -   option: poin_pemain_1
+                feedback: Anda harus mengisi nama, bukan nomor
+            -   option: poin_pemain_2
+                feedback: Anda harus mengisi nama, bukan nomor
+            hint: Anda memenangkan permainan dengan mendapatkan poin terbanyak. Nama Anda akan muncul di layar
             correct_answer: A
             question_score: '10'
     16:
         1:
-            question_text: Which command should be filled in on the blanks to print a random snack?
+            question_text: Perintah mana yang harus diisi pada bagian yang kosong untuk mencetak camilan acak?
             code: |-
-                snacks = nachos, chips, cucumber, sweets
+                makanan ringan = nacho, keripik, mentimun, manisan
                 {print} _
             mp_choice_options:
             -   option: '`snacks {at} {random}`'
-                feedback: This is the old way.
+                feedback: Ini adalah cara lama.
             -   option: '`[{random} snack]`'
-                feedback: The order is wrong.
+                feedback: Urutannya salah.
             -   option: '`snacks[{random}]`'
-                feedback: Correct
+                feedback: Benar
             -   option: '`snacks[{at} {random}]`'
-                feedback: We do not need `at`anymore
-            hint: We no longer use {at}
+                feedback: Kita tidak memerlukan kata `at` lagi
+            hint: Kita tidak lagi menggunakan {at}
             correct_answer: C
             question_score: '10'
         2:
-            question_text: What should be filled in on the blanks if you want a list of what chores are done by whom?
+            question_text: Apa yang harus diisi jika Anda ingin daftar tugas apa saja yang dikerjakan oleh siapa?
             code: |-
-                friends = ['Wesley', 'Eric', 'Kaylee']
-                chores = [the cooking, the cleaning, nothing]
+                teman = ['Wesley', 'Eric', 'Kaylee']
+                tugas = [memasak, bersih-bersih, tidak ada apa-apa]
                 {for} i {in} {range} 1 {to} 3
-                    {print}  _
+                    {print} _
             mp_choice_options:
             -   option: |-
                     ```
-                    friends[i] has to do chores [i]
+                    teman[i] harus mengerjakan tugas rumah [i]
                     ```
-                feedback: Mind the spacing.
+                feedback: Perhatikan jaraknya.
             -   option: |-
                     ```
-                    friends[1] has to do chores[1]
+                    teman[1] harus mengerjakan tugas rumah[1]
                     ```
-                feedback: It will print 3 times that Wesley has to do the cooking
+                feedback: Ini akan mencetak 3 kali Wesley harus memasak
             -   option: |-
                     ```
-                    chores[i] ' has to do ' friends[random]
+                    tugas[i] ' harus dilakukan ' teman[random]
                     ```
-                feedback: The person has to do the chore, not the other way around
+                feedback: Orang tersebutlah yang harus melakukan tugasnya, bukan sebaliknya
             -   option: |-
                     ```
-                    friends[i] ' has to do ' chores[i]
+                    teman[i] ' harus mengerjakan ' tugas rumah[i]
                     ```
-                feedback: Fantastic!
-            hint: '`i` tells us what item in the list it is. So friend 1 does chore 1 etc.'
+                feedback: Fantastis!
+            hint: '`i` memberi tahu kita item apa yang ada dalam daftar itu. Jadi teman 1 mengerjakan tugas 1 dst.'
             correct_answer: D
             question_score: '10'
         3:
-            question_text: What is a possible output for this program?
+            question_text: Apa kemungkinan keluaran dari program ini?
             code: |-
-                friends = ['Wesley', 'Eric', 'Kaylee']
-                chore = [the cooking, the cleaning, nothing]
+                teman = ['Wesley', 'Eric', 'Kaylee']
+                tugas = [memasak, bersih-bersih, tidak ada apa-apa]
                 {for} i {in} {range} 1 {to} 3
-                    {print}  friends[i] has to do chores[i]
+                    {print} teman[i] harus mengerjakan tugas[i]
             mp_choice_options:
             -   option: |-
                     ```
-                    Wesley has to do the cooking
-                    Eric has to do the cleaning
-                    Kaylee has to do nothing
+                    Wesley harus memasak
+                    Eric harus melakukan pembersihan
+                    Kaylee tidak perlu melakukan apa pun
                     ```
                 feedback: Super!
             -   option: |-
                     ```
-                    Kaylee has to do the cooking
-                    Wesley has to do the cleaning
-                    Eric has to do nothing
+                    Kaylee harus memasak
+                    Wesley harus melakukan pembersihan
+                    Eric tidak perlu melakukan apa pun
                     ```
-                feedback: No, it is not random.
+                feedback: Tidak, ini tidak acak.
             -   option: |-
                     ```
-                    Wesley has to do the cooking
-                    Wesley has to do the cleaning
-                    Wesley has to do the nothing
+                    Wesley harus memasak
+                    Wesley harus melakukan pembersihan
+                    Wesley tidak perlu melakukan apa pun
                     ```
-                feedback: Poor Wesley!
+                feedback: Wesley yang malang!
             -   option: |-
                     ```
-                    Wesley has to do the cooking
-                    Wesley has to do the cooking
-                    Wesley has to do the cooking
+                    Wesley harus memasak
+                    Wesley harus memasak
+                    Wesley harus memasak
                     ```
-                feedback: That's not it
-            hint: It's not random...
+                feedback: Bukan itu
+            hint: Itu tidak acak...
             correct_answer: A
             question_score: '10'
         4:
-            question_text: What is wrong with this code?
+            question_text: Apa yang salah dengan kode ini?
             code: |-
-                friends = ['Jaylee', 'Erin', 'Fay']
-                lucky_numbers = [15, 18, 6]
+                teman = ['Jaylee', 'Erin', 'Fay']
+                angka_keberuntungan = [15, 18, 6]
                 {for} i {in} {range} 0 {to} 3
-                    print 'the lucky number of ' friends[i]
-                    print 'is ' lucky_numbers[i]
+                    cetak 'jumlah keberuntungan' teman[i]
+                    cetak 'adalah' angka_keberuntungan[i]
             mp_choice_options:
-            -   option: The variable in line 4 should be 'friend[i]', not 'friends[i]'
-                feedback: That is not right.
-            -   option: Line 3 should say 'in range 1 to 3' not 'in range 0 to 3'
-                feedback: Good catch!
-            -   option: Line 4 should say 'lucky_number', not 'lucky number
-                feedback: It's not a variable, it's just text.
-            -   option: '{in} in line 3 should be removed'
-                feedback: That's not it
-            hint: There's nothing wrong with line 4
+            -   option: Variabel pada baris 4 seharusnya 'teman[i]', bukan 'teman-teman[i]'
+                feedback: Itu tidak benar.
+            -   option: Baris 3 harus mengatakan 'dalam rentang 1 hingga 3' bukan 'dalam rentang 0 hingga 3'
+                feedback: Tangkapan yang bagus!
+            -   option: Baris 4 seharusnya bertuliskan 'angka_keberuntungan', bukan 'angka keberuntungan'
+                feedback: Itu bukan variabel, itu hanya teks.
+            -   option: '{in} pada baris 3 harus dihapus'
+                feedback: Bukan itu
+            hint: Tidak ada yang salah dengan baris 4
             correct_answer: B
             question_score: '10'
         5:
-            question_text: Which line should be filled in in the blank?
+            question_text: Baris manakah yang harus diisi pada bagian yang kosong?
             code: |-
-                animals = ['dog', 'cow', 'horse']
+                hewan = ['anjing', 'sapi', 'kuda']
                 _
-                {for} i {in} {range} 1 {to} 3
-                    {print} 'the ' animals[i] ' says ' sounds[i]
+                {for} i{in} {range} 1 {to} 3
+                    {print} '' binatang[saya] ' mengatakan ' suara[saya]
             mp_choice_options:
-            -   option: noises = ['moo', 'woof', 'neigh']
-                feedback: Mind the variable name and the order of the sounds.
-            -   option: sounds = '[woof], [moo], [neigh]'.
-                feedback: Look at line one to see how brackets are supposed to be used.
-            -   option: sounds = [woof, moo, neigh]
-                feedback: Don't forget the quotation marks!
-            -   option: sounds = ['woof', 'moo', 'neigh']
-                feedback: Great job!
-            hint: Look at line 1 to see proper use of brackets and quotation marks.
+            -   option: suara = ['moo', 'guk', 'meringkik']
+                feedback: Perhatikan nama variabel dan urutan bunyinya.
+            -   option: suara = '[guk], [moo], [meringkik]'.
+                feedback: Lihatlah baris pertama untuk melihat bagaimana tanda kurung seharusnya digunakan.
+            -   option: suara = [guk, melenguh, meringkik]
+                feedback: Jangan lupa tanda petiknya!
+            -   option: suara = ['guk', 'moo', 'meringkik']
+                feedback: Kerja bagus!
+            hint: Lihat baris 1 untuk melihat penggunaan tanda kurung dan tanda kutip yang tepat.
             correct_answer: D
             question_score: '10'
         6:
-            question_text: Which statement is true?
+            question_text: Pernyataan mana yang benar?
             code: |-
-                people = ['Chris', 'Jaylino', 'Ryan']
-                games = ['fortnite', 'minecraft', 'fifa']
+                orang = ['Chris', 'Jaylino', 'Ryan']
+                permainan = ['fortnite', 'minecraft', 'fifa']
                 {for} o {in} {range} 1 {to} 3
-                  {print} people[o] ' likes ' games[o]
+                  {print} orang[o] ' suka ' permainan[o]
             mp_choice_options:
-            -   option: You are not allowed to use the variable o. It should be named i.
-                feedback: i is the most commonly used variable name in this case, but it's not mandatory to use i.
-            -   option: The output will say that Jaylino likes fortnite.
-                feedback: No, he likes minecraft.
-            -   option: The output will say that Ryan likes fifa
-                feedback: Correct
-            -   option: This code will not work. It will give and error.
-                feedback: No, the code is correct.
-            hint: There is nothing wrong with this code.
+            -   option: Anda tidak diperbolehkan menggunakan variabel o. Itu harus diberi nama saya.
+                feedback: i adalah nama variabel yang paling umum digunakan dalam kasus ini, namun tidak wajib menggunakan i.
+            -   option: Outputnya akan mengatakan bahwa Jaylino menyukai fortnite.
+                feedback: Tidak, dia suka minecraft.
+            -   option: Outputnya akan mengatakan bahwa Ryan menyukai FIFA
+                feedback: Benar
+            -   option: Kode ini tidak akan berfungsi. Ini akan memberi dan kesalahan.
+                feedback: Tidak, kodenya benar.
+            hint: Tidak ada yang salah dengan kode ini.
             correct_answer: C
             question_score: '10'
         7:
-            question_text: What's wrong with this code?
+            question_text: Apa yang salah dengan kode ini?
             code: |-
-                people = ['Savi', 'Senna', 'Fayenne']
-                transportation = ['bike', 'train', 'car']
+                orang = ['Savi', 'Senna', 'Fayenne']
+                transportasi = ['sepeda', 'kereta', 'mobil']
                 {for} i {in} {range} 1 {to} 3
-                  {print} people[i] goes to school by transportation[i]
+                  {print} orang[i] berangkat ke sekolah dengan transportasi[i]
             mp_choice_options:
-            -   option: Line 1 needs less quotation marks
-                feedback: That is not right.
-            -   option: Line 3 should start with indentation
-                feedback: It should not!
-            -   option: Line 4 should start without indentation
-                feedback: It should not
-            -   option: Line 4 needs more quotation marks.
-                feedback: Amazing!
-            hint: There is a mistake made in the usage of quotation marks.
+            -   option: Baris 1 membutuhkan lebih sedikit tanda kutip
+                feedback: Itu tidak benar.
+            -   option: Baris 3 harus dimulai dengan lekukan
+                feedback: Seharusnya tidak!
+            -   option: Baris 4 harus dimulai tanpa lekukan
+                feedback: Seharusnya tidak
+            -   option: Baris 4 membutuhkan lebih banyak tanda kutip.
+                feedback: Luar biasa!
+            hint: Terdapat kesalahan dalam penggunaan tanda petik.
             correct_answer: D
             question_score: '10'
         8:
-            question_text: Which of these codes belongs to this output?
+            question_text: Manakah dari kode berikut yang termasuk dalam keluaran ini?
             code: |-
-                Macy and Kate get to go first
-                Lionell and Raj get to go second
-                Kim and Leroy get to go third
+                Macy dan Kate berangkat duluan
+                Lionell dan Raj berada di urutan kedua
+                Kim dan Leroy berada di posisi ketiga
             mp_choice_options:
             -   option: |-
                     ```
-                    teams = ['Macy and Kate', 'Lionell and Raj', 'Kim and Leroy']
-                    position = ['first', 'second', 'third']
+                    tim = ['Macy dan Kate', 'Lionell dan Raj', 'Kim dan Leroy']
+                    posisi = ['pertama', 'kedua', 'ketiga']
                     {for} i {in} {range} 0 {to} 3
-                    {print} teams[random] ' get to go ' position[i]
+                    {print} tim[random] posisi ' berangkat '[i]
                     ```
-                feedback: This is not right
+                feedback: Ini tidak benar
             -   option: |-
                     ```
-                    teams = ['Macy and Kate', 'Lionell and Raj', 'Kim and Leroy']
-                    position = ['first', 'second', 'third']
+                    tim = ['Macy dan Kate', 'Lionell dan Raj', 'Kim dan Leroy']
+                    posisi = ['pertama', 'kedua', 'ketiga']
                     {for} i {in} {range} 1 {to} 3
-                      {print} teams[i] ' get to go ' position[i]
+                      {print} tim[i] posisi ' berangkat '[i]
                     ```
-                feedback: Amazing!
+                feedback: Luar biasa!
             -   option: |-
                     ```
-                    teams = ['Macy', 'Kate', 'Lionell', 'Raj', 'Kim', 'Leroy']
-                    position = ['first', 'second', 'third']
+                    tim = ['Macy', 'Kate', 'Lionell', 'Raj', 'Kim', 'Leroy']
+                    posisi = ['pertama', 'kedua', 'ketiga']
                     {for} i {in} {range} 1 {to} 6
-                      {print} teams[random] ' get to go ' position[random]
+                      {print} tim[random] posisi ' berangkat '[random]
                     ```
-                feedback: This is not it.
+                feedback: Ini bukan itu.
             -   option: |-
                     ```
-                    teams = ['Macy and Kate' 'Lionell and Raj' 'Kim and Leroy']
-                    position = ['first' 'second' 'third']
-                    {for} teams {in} {range} 0 {to} 3
-                        {print} teams[i] ' get to go ' position[i]
+                    tim = ['Macy dan Kate' 'Lionell dan Raj' 'Kim dan Leroy']
+                    posisi = ['pertama' 'kedua' 'ketiga']
+                    {for} tim {in} {range} 0 {to} 3
+                        {print} tim[i] posisi ' berangkat '[i]
                     ```
-                feedback: This is not going to work!
-            hint: If you look carefully at the first line, you'll see that only the first two answers are possibly correct.
+                feedback: Ini tidak akan berhasil!
+            hint: Jika Anda memperhatikan baris pertama dengan cermat, Anda akan melihat bahwa hanya dua jawaban pertama yang mungkin benar.
             correct_answer: B
             question_score: '10'
         9:
-            question_text: What is a possible output for this code?
+            question_text: Apa kemungkinan keluaran untuk kode ini?
             code: |-
-                countries = ['Canada', 'Zimbabwe', 'New Zealand']
+                negara = ['Kanada', 'Zimbabwe', 'Selandia Baru']
                 {for} i {in} {range} 0 {to} 1
-                  {print} 'I will travel to ' countries[random]
+                  {print} 'Saya akan bepergian ke' negara[random]
             mp_choice_options:
             -   option: |-
                     ```
-                    I will travel to Canada
-                    I will travel to Canada
+                    Saya akan melakukan perjalanan ke Kanada
+                    Saya akan melakukan perjalanan ke Kanada
                     ```
-                feedback: Great job!
+                feedback: Kerja bagus!
             -   option: |-
                     ```
-                    I will travel to Canada
+                    Saya akan melakukan perjalanan ke Kanada
                     ```
-                feedback: It will be repeated twice
+                feedback: Ini akan diulang dua kali
             -   option: |-
                     ```
-                    I will travel to Canada, Zimbabwe and New Zealand
+                    Saya akan melakukan perjalanan ke Kanada, Zimbabwe dan Selandia Baru
                     ```
-                feedback: This is not it.
+                feedback: Ini bukan itu.
             -   option: |-
                     ```
-                    I will travel to Canada
-                    I will travel to Zimbabwe
-                    I will travel to New Zealand
+                    Saya akan melakukan perjalanan ke Kanada
+                    Saya akan melakukan perjalanan ke Zimbabwe
+                    Saya akan melakukan perjalanan ke Selandia Baru
                     ```
-                feedback: It's only repeated twice
-            hint: Range 0 to 1 is 2 times
+                feedback: Itu hanya diulang dua kali
+            hint: Rentang 0 hingga 1 adalah 2 kali
             correct_answer: A
             question_score: '10'
         10:
-            question_text: Which 3 lines will complete this code correctly?
+            question_text: 3 baris manakah yang akan melengkapi kode ini dengan benar?
             code: |-
-                {print} 'The book raffle will start soon'
-                {print} 'Get your tickets now!'
-                {books} = ['Narnia', 'The Hobbit', 'Oliver Twist', 'Harry Potter', 'Green eggs and ham']
-                people = {ask} 'How many raffle tickets are sold?'
-                list_of_raffle_numbers = [1, 2]
-                {for} i {in} {range} 3 {to} people
-                    {add} i {to} list_of_raffle_numbers
+                {print} 'Undian buku akan segera dimulai'
+                {print} 'Dapatkan tiket Anda sekarang!'
+                {books} = ['Narnia', 'The Hobbit', 'Oliver Twist', 'Harry Potter', 'Telur hijau dan ham']
+                orang = {ask} 'Berapa tiket undian yang terjual?'
+                daftar_nomor_undian = [1, 2]
+                {for} saya {in} {range} 3 {to} orang
+                    {add} saya {to} daftar_angka_undian
                 {for} i {in} {range} 1 {to} 5
             mp_choice_options:
             -   option: |-
                     ```
-                    chosen_number = list_of_numbers at random
-                    print books[i] ' will go to person number ' chosen_number
-                    {add} chosen_number {to} list_of_numbers
+                    angka_yang dipilih = daftar_angka_secara acak
+                    cetak buku[i] ' akan menuju ke nomor orang ' nomor_yang dipilih
+                    {add} nomor_yang dipilih {to} daftar_nomor_
                     ```
-                feedback: Almost there... but adding the winner to the list makes this raffle unfair
+                feedback: Hampir sampai... tetapi menambahkan pemenang ke dalam daftar membuat undian ini tidak adil
             -   option: |-
                     ```
-                    print person[i] ' wins ' book[i]
+                    cetak orang[i] ' menang ' buku[i]
                     ```
-                feedback: There is no list called 'person'
+                feedback: Tidak ada daftar yang disebut 'orang'
             -   option: |-
                     ```
-                    chosen_number = list_of_numbers[people]
-                    print books[people] ' will go to person number ' chosen_number
-                    {remove} chosen_number {from} list_of_numbers
+                    angka_yang _dipilih = daftar_angka_[orang]
+                    cetak buku[orang] ' akan menuju ke nomor orang ' nomor_yang dipilih
+                    {remove} nomor_yang dipilih {from} daftar_nomor_
                     ```
-                feedback: This is not it.
+                feedback: Ini bukan itu.
             -   option: |-
                     ```
-                    chosen_number = list_of_numbers[random]
-                    print books[i] ' will go to person number ' chosen_number
-                    {remove} chosen_number {from} list_of_numbers
+                    angka_yang dipilih = daftar_angka_[random]
+                    cetak buku[i] ' akan menuju ke nomor orang ' nomor_yang dipilih
+                    {remove} nomor_yang dipilih {from} daftar_nomor_
                     ```
-                feedback: Fantastic!
-            hint: You need to use the {remove} command
+                feedback: Fantastis!
+            hint: Anda perlu menggunakan perintah {remove}
             correct_answer: D
             question_score: '10'
