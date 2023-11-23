@@ -31,8 +31,9 @@ def task_tailwind():
         ],
         targets=[target],
 
-        verbosity=0, # stderr is too noisy by default
+        verbosity=0,  # stderr is too noisy by default
     )
+
 
 def task_compile_babel():
     """Compile .po files for use with Babel."""
@@ -47,7 +48,7 @@ def task_compile_babel():
         # Every .po file leads to a .mo file
         targets=[replace_ext(f, '.mo') for f in pofiles],
 
-        verbosity=0, # stderr is too noisy by default
+        verbosity=0,  # stderr is too noisy by default
     )
 
 
@@ -78,9 +79,9 @@ def task_typescript():
 
             # Then bundle JavaScript into a single bundle
             ['npx', 'esbuild', '__tmp__/static/js/index.js',
-            '--bundle', '--sourcemap', '--minify', '--target=es2017',
-            '--global-name=hedyApp', '--platform=browser',
-            '--outfile=static/js/appbundle.js'],
+             '--bundle', '--sourcemap', '--minify', '--target=es2017',
+             '--global-name=hedyApp', '--platform=browser',
+             '--outfile=static/js/appbundle.js'],
 
             # Delete tempdir
             ['rm', '-rf', '__tmp__'],
@@ -91,6 +92,7 @@ def task_typescript():
 ######################################################################################
 # Below this line are helpers for the task definitions
 #
+
 
 def replace_ext(filename, ext):
     """Replace the extension of a filename."""
