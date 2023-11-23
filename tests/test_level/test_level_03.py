@@ -189,7 +189,7 @@ class TestsLevel3(HedyTester):
             raise Exception('catch_index_exception')
           time.sleep(int(n[int(1)-1]))
         except ValueError:
-          raise Exception(f'While running your program the command <span class=\"command-highlighted\">sleep</span> received the value <span class=\"command-highlighted\">{n[int(1)-1]}</span> which is not allowed. Try changing the value to a number.')""")
+          raise Exception('catch_value_exception')""")
 
         self.multi_level_tester(max_level=11, code=code, expected=expected)
 
@@ -222,7 +222,7 @@ class TestsLevel3(HedyTester):
             raise Exception('catch_index_exception')
           time.sleep(int(random.choice(n)))
         except ValueError:
-          raise Exception(f'While running your program the command <span class=\"command-highlighted\">sleep</span> received the value <span class=\"command-highlighted\">{random.choice(n)}</span> which is not allowed. Try changing the value to a number.')""")
+          raise Exception('catch_value_exception')""")
 
         self.multi_level_tester(max_level=11, code=code, expected=expected)
 
