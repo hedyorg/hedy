@@ -566,8 +566,14 @@ adventures:
                     ```
                 story_text_3: |
                     **Zusätzlich** Du kannst den Computer auch alleine zufällige Summen rechnen lassen, indem du zufällig benutzt.
-
-                    So wählst du mehrere Tabellen zum Üben aus und erhältst daraus immer eine andere Summe:
+                example_code_3: |
+                    numbers = 1, 2, 3, 4, 5, 6, 7, 8, 9, 10
+                    number_1 = _
+                    number_2 = _
+                    correct_answer = number_1 * number_2
+                    given_answer = 'What is ' number_1 ' times ' number_2 '?'
+                    {if} _
+                    {else} _
                 start_code: |
                     numer_1 = {ask} 'Gib die erste Zahl ein:'
                     numer_2 = {ask} 'Gib die zweite Zahl ein:'

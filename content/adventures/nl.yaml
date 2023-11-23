@@ -532,8 +532,14 @@ adventures:
                     ```
                 story_text_3: |
                     Je kunt ook de computer zelf willekeurige sommen laten maken met `{random}`.
-
-                    Zo kies je een aantal tafels om uit te oefenen, en pak je daaruit steeds een andere som:
+                example_code_3: |
+                    numbers = 1, 2, 3, 4, 5, 6, 7, 8, 9, 10
+                    number_1 = _
+                    number_2 = _
+                    correct_answer = number_1 * number_2
+                    given_answer = 'What is ' number_1 ' times ' number_2 '?'
+                    {if} _
+                    {else} _
                 start_code: |
                     getal_1 = {ask} 'Het eerste getal is:'
                     getal_2 = {ask} 'Het tweede getal is:'

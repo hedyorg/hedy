@@ -572,8 +572,14 @@ adventures:
                     ```
                 story_text_3: |
                     **Extra** Puoi anche lasciare che il computer esegua somme casuali da solo utilizzando `{random}`.
-
-                    Ecco come scegli un numero di tabelle su cui esercitarti e da ciò ottieni sempre una somma diversa:
+                example_code_3: |
+                    numbers = 1, 2, 3, 4, 5, 6, 7, 8, 9, 10
+                    number_1 = _
+                    number_2 = _
+                    correct_answer = number_1 * number_2
+                    given_answer = 'What is ' number_1 ' times ' number_2 '?'
+                    {if} _
+                    {else} _
                 start_code: |
                     numero_1 = {ask} 'Compila il primo numero:'
                     numero_2 = {ask} 'Compila il secondo numero:'

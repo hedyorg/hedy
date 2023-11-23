@@ -501,7 +501,14 @@ adventures:
                     ```
                 story_text_3: |
                     您还可以让计算机自己使用 {random} 求随机数的和。
-                    这就是你如何选择几个运算表进行练习的例子，而且你总会从中获得不同的和：
+                example_code_3: |
+                    numbers = 1, 2, 3, 4, 5, 6, 7, 8, 9, 10
+                    number_1 = _
+                    number_2 = _
+                    correct_answer = number_1 * number_2
+                    given_answer = 'What is ' number_1 ' times ' number_2 '?'
+                    {if} _
+                    {else} _
                 start_code: '{print} ''欢迎来到这个计算器!'''
             9:
                 story_text: |

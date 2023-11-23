@@ -525,7 +525,14 @@ adventures:
                     ```
                 story_text_3: |
                     Możesz też pozwolić komputerowi na samodzielne wykonywanie losowych sum za pomocą {random}.
-                    W ten sposób wybierasz pewną liczbę tabel do ćwiczenia i z tego zawsze otrzymujesz inną sumę:
+                example_code_3: |
+                    numbers = 1, 2, 3, 4, 5, 6, 7, 8, 9, 10
+                    number_1 = _
+                    number_2 = _
+                    correct_answer = number_1 * number_2
+                    given_answer = 'What is ' number_1 ' times ' number_2 '?'
+                    {if} _
+                    {else} _
                 start_code: '{print} ''Witamy w tym kalkulatorze!'''
             9:
                 story_text: |
