@@ -268,10 +268,10 @@ adventures:
                 start_code: |-
                     动物们 {is} 狗, 猫, 袋鼠
                     喜欢 {is} {ask} 你最喜欢的动物是什么？
-                    {add} 喜欢{to_list} 动物们
+                    {add} 喜欢 {to_list} 动物们
                     不喜欢 {is} {ask} 你不喜欢什么动物?
                     {remove} 不喜欢 {from} 动物们
-                    {print} 我选择动物们 {at} {random}
+                    {print} 动物们 {at} {random}
     and_or_command:
         name: '{and} & {or}'
         default_save_name: and or
@@ -291,8 +291,8 @@ adventures:
                     ```
                 start_code: |-
                     名字 = {ask} '你叫什么名字?'
-                    年龄= {ask} '你多少岁了?'
-                    {if} 名字 {is} '海蒂' {and}年龄{is} 2
+                    年龄 = {ask} '你多少岁了?'
+                    {if} 名字 {is} '海蒂' {and} 年龄 {is} 2
                         {print} '你就是真的海蒂!'
     ask_command:
         name: '{ask}'
@@ -339,7 +339,7 @@ adventures:
                     这样你的代码就变得具有交互性了！
                 example_code: |
                     ```
-                    名字{is} {ask} 你叫什么名字?
+                    名字 {is} {ask} 你叫什么名字?
                     {print} 你好名字
                     年龄 {is} {ask} 你多大了?
                     {print} 名字是年龄.
