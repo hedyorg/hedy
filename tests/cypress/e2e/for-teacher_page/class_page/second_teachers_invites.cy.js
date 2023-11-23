@@ -14,7 +14,6 @@ describe("Second teachers: invitations", () => {
   it(`Invites ${secondTeachers.length} second teachers: by username`, () => {
     loginForTeacher();
     cy.get(".view_class").first().click();
-    cy.get('body').then($b => $b.find("#survey")).then($s => $s.length && $s.hide())
 
     for (const teacher of secondTeachers) {
       
