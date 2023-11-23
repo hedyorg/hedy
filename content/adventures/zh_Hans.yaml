@@ -89,7 +89,7 @@ adventures:
                 start_code: '{print} 你的故事'
             4:
                 story_text: "你可能注意到了，在之前的级别里还有个问题。你有没有试过打印含有“名字”这个词的句子？即：`{print}` 我的名字是名字。\n 在这一级里你可以解决这个问题。你必须给所有需要打印的东西加上引号。\n\n### 练习1\n复制示例代码并通过添加引号来使其正常工作。 \n\n ### 练习 2 \n返回到上一个级别并复制故事代码。通过在正确的位置添加引号，使代码在此级别中正常工作。 \n注意：你自己故事中的变量应该在引号之外。就像范例代码的第二行一样。在该行中，变量名称放在引号之外。\n"
-                example_code: "```\n名字 {is} {ask}_你的名字是什么? _\n{print}     _ 主人公的名字是_名字 \n {print} 名字     _正准备走进树林_\n{print} 名字 _有点害怕'\n动物们 {is} 🦔, 🐿, 🦉, 🦇\n{print} _他听到了一个_ 动物们{at} {random} 的声音\n{print} 名字_担心这片森林闹鬼_\n```\n"
+                example_code: "```\n名字 {is} {ask}_你的名字是什么? _\n{print}     _ 主人公的名字是_名字 \n {print} 名字     _正准备走进树林_\n{print} 名字 _有点害怕'\n动物们 {is} \U0001F994, \U0001F43F, \U0001F989, \U0001F987\n{print} _他听到了一个_ 动物们{at} {random} 的声音\n{print} 名字_担心这片森林闹鬼_\n```\n"
                 start_code: '{print} ''你的故事会打印在这里！'''
             5:
                 story_text: |
@@ -502,9 +502,8 @@ adventures:
                 story_text_3: |
                     您还可以让计算机自己使用 {random} 求随机数的和。
                     这就是你如何选择几个运算表进行练习的例子，而且你总会从中获得不同的和：
-                start_code: '{print} ''欢迎来到这个计算器!''
-
-                    '
+                start_code: |
+                    {print} '欢迎来到这个计算器!'
             9:
                 story_text: |
                     在第 6 级中，您编写了一个计算器程序，在此级别中，您可以扩展该程序来提出多个问题。
@@ -563,9 +562,8 @@ adventures:
                     {for} i {in} {range} 1 to 10
                         {print} i * 数字
                     ```
-                start_code: '# 将你的代码写在这里
-
-                    '
+                start_code: |
+                    # 将你的代码写在这里
             12:
                 story_text: |
                     在本关，你可以编写一个可以计算小数的计算器。
@@ -1370,35 +1368,35 @@ adventures:
 
                     print 'Thanks for ordering!'
                     ```
-                start_code: |2
+                start_code: |4
 
-                        define food_order
-                            toppings = ask 'pepperoni, tuna, veggie or cheese?'
-                            size = ask 'big, medium or small?'
-                            number_of_pizza = ask 'How many these pizzas would you like?'
+                          define food_order
+                              toppings = ask 'pepperoni, tuna, veggie or cheese?'
+                              size = ask 'big, medium or small?'
+                              number_of_pizza = ask 'How many these pizzas would you like?'
 
-                            print 'YOU ORDERED'
-                            print number_of_pizzas ' size  ' topping ' pizza'
+                              print 'YOU ORDERED'
+                              print number_of_pizzas ' size  ' topping ' pizza'
 
-                        define drinks_order
-                            drink = ask 'water, coke, icetea, lemonade or coffee?'
-                            number_of_drinks = ask 'How many of these drinks would you like?'
+                          define drinks_order
+                              drink = ask 'water, coke, icetea, lemonade or coffee?'
+                              number_of_drinks = ask 'How many of these drinks would you like?'
 
-                            print 'YOU ORDERED'
-                            print number_of_drinks ' ' drink
+                              print 'YOU ORDERED'
+                              print number_of_drinks ' ' drink
 
-                        'Welcome to Hedy pizza'
-                        more_food = ask 'Would you like to order a pizza?'
-                        while more_food = 'yes'
-                            return food_order
-                            more_food = ask 'Would you like to order a pizza?'
-                        more_drinks = ask 'Would you like to order some drinks?'
-                        while more_drinks == 'yes'
-                            call drink_order
-                            more_drinks == ask 'Would you like to order more drinks?'
+                          'Welcome to Hedy pizza'
+                          more_food = ask 'Would you like to order a pizza?'
+                          while more_food = 'yes'
+                              return food_order
+                              more_food = ask 'Would you like to order a pizza?'
+                          more_drinks = ask 'Would you like to order some drinks?'
+                          while more_drinks == 'yes'
+                              call drink_order
+                              more_drinks == ask 'Would you like to order more drinks?'
 
 
-                        print 'Thanks for ordering!'
+                          print 'Thanks for ordering!'
             18:
                 story_text: |-
                     ### Exercise
@@ -1421,22 +1419,22 @@ adventures:
                         print 'there a ' sound
                         print 'everywhere a ' sound sound
                     ```
-                start_code: |2
+                start_code: |4
 
-                        animals = ['pig', 'dog', 'cow']
-                        sounds = ['oink', 'woof', 'moo']
-                        for i in range 1 to 3
-                            animal = animals[i]
-                            sound = sounds[i]
-                            print 'Old McDonald had a farm'
-                            print 'E I E I O!'
-                            print 'and on that farm he had a ' animal
-                            print 'E I E I O!'
-                            print 'with a ' sound sound ' here'
-                            print 'and a ' sound sound ' there'
-                            print 'here a ' sound
-                            print 'there a ' sound
-                            print 'everywhere a ' sound sound
+                          animals = ['pig', 'dog', 'cow']
+                          sounds = ['oink', 'woof', 'moo']
+                          for i in range 1 to 3
+                              animal = animals[i]
+                              sound = sounds[i]
+                              print 'Old McDonald had a farm'
+                              print 'E I E I O!'
+                              print 'and on that farm he had a ' animal
+                              print 'E I E I O!'
+                              print 'with a ' sound sound ' here'
+                              print 'and a ' sound sound ' there'
+                              print 'here a ' sound
+                              print 'there a ' sound
+                              print 'everywhere a ' sound sound
     default:
         name: 介绍
         default_save_name: 介绍
@@ -2052,7 +2050,7 @@ adventures:
                     在本级中，你将学会在使用算命仙时，（秘密地）使结果对你有利！
                     通过使用`{if}` 和`{else}` ，你可以确保你总是能得到好运，而其他人可能得不到。
                     看看这个例子就知道了。
-                example_code: "```\n{print} '我是海蒂算命仙!'\n{print} '我可以预测你明天是否会中彩票！'\n人 {is} {ask} '你是谁？'\n{if} 人 {is} 海蒂 {print} '你肯定会中奖！🤩' {else} {print} '你运气不好！别人会中奖！😭' \n```\n"
+                example_code: "```\n{print} '我是海蒂算命仙!'\n{print} '我可以预测你明天是否会中彩票！'\n人 {is} {ask} '你是谁？'\n{if} 人 {is} 海蒂 {print} '你肯定会中奖！\U0001F929' {else} {print} '你运气不好！别人会中奖！\U0001F62D' \n```\n"
                 start_code: '# 在这里写下你的代码'
             6:
                 story_text: |
