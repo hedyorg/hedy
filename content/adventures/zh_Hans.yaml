@@ -89,7 +89,7 @@ adventures:
                 start_code: '{print} 你的故事'
             4:
                 story_text: "你可能注意到了，在之前的级别里还有个问题。你有没有试过打印含有“名字”这个词的句子？即：`{print}` 我的名字是名字。\n 在这一级里你可以解决这个问题。你必须给所有需要打印的东西加上引号。\n\n### 练习1\n复制示例代码并通过添加引号来使其正常工作。 \n\n ### 练习 2 \n返回到上一个级别并复制故事代码。通过在正确的位置添加引号，使代码在此级别中正常工作。 \n注意：你自己故事中的变量应该在引号之外。就像范例代码的第二行一样。在该行中，变量名称放在引号之外。\n"
-                example_code: "```\n名字 {is} {ask}_你的名字是什么? _\n{print}     _ 主人公的名字是_名字 \n {print} 名字     _正准备走进树林_\n{print} 名字 _有点害怕'\n动物们 {is} \U0001F994, \U0001F43F, \U0001F989, \U0001F987\n{print} _他听到了一个_ 动物们{at} {random} 的声音\n{print} 名字_担心这片森林闹鬼_\n```\n"
+                example_code: "```\n名字 {is} {ask}_你的名字是什么? _\n{print}     _ 主人公的名字是_名字 \n {print} 名字     _正准备走进树林_\n{print} 名字 _有点害怕'\n动物们 {is} 🦔, 🐿, 🦉, 🦇\n{print} _他听到了一个_ 动物们{at} {random} 的声音\n{print} 名字_担心这片森林闹鬼_\n```\n"
                 start_code: '{print} ''你的故事会打印在这里！'''
             5:
                 story_text: |
@@ -266,12 +266,12 @@ adventures:
                     {print} You get a flavors {at} {random} milkshake
                     ```
                 start_code: |-
-                    animals {is} dog, cat, kangaroo
-                    like {is} {ask} What is your favorite animal?
-                    {add} like {to_list} animals
-                    dislike {is} {ask} What animal do you not like?
-                    {remove} dislike {from} animals
-                    {print} I choose animals {at} {random}
+                    动物们 {is} 狗, 猫, 袋鼠
+                    喜欢 {is} {ask} 你最喜欢的动物是什么？
+                    {add} 喜欢{to_list} 动物们
+                    不喜欢 {is} {ask} 你不喜欢什么动物?
+                    {remove} 不喜欢 {from} 动物们
+                    {print} 我选择动物们 {at} {random}
     and_or_command:
         name: '{and} & {or}'
         default_save_name: and or
@@ -279,21 +279,21 @@ adventures:
         levels:
             13:
                 story_text: |-
-                    We are now going to learn `{and}` and `{or}`! If you want to check two statements, you don't have to use two `{if}`s but can use `{and}` and `{or}`.
+                    我们现在要了解 `{and}`和 `{or}`!如果你想查两个语句, 你不用使用`{if}`s 但可以使用 `{and}` 和`{or}`.
 
-                    If you use `{and}`, both statements, left and right of the `{and}` need to be true. We can also use `{or}`. Then only one statement needs to be correct.
+                    如果你用 `{and}`, 两种陈述, `{and}` 连接的左右两种陈述必须都是真的。 我们也可以使用 `{or}`. 那么只需要一种陈述是对的。
                 example_code: |
                     ```
-                    name = {ask} 'what is your name?'
-                    age = {ask} 'what is your age?'
-                    {if} name {is} 'Hedy' {and} age {is} 2
-                        {print} 'You are the real Hedy!'
+                    名字 = {ask} '你叫什么名字?'
+                    年龄 = {ask} '你多少岁了?'
+                    {if} 名字 {is} '海蒂' {and} 年龄 {is} 2
+                        {print} '你就是真的海蒂!'
                     ```
                 start_code: |-
-                    name = {ask} 'what is your name?'
-                    age = {ask} 'what is your age?'
-                    {if} name {is} 'Hedy' {and} age {is} 2
-                        {print} 'You are the real Hedy!'
+                    名字 = {ask} '你叫什么名字?'
+                    年龄= {ask} '你多少岁了?'
+                    {if} 名字 {is} '海蒂' {and}年龄{is} 2
+                        {print} '你就是真的海蒂!'
     ask_command:
         name: '{ask}'
         default_save_name: ask_command
@@ -301,21 +301,21 @@ adventures:
         levels:
             1:
                 story_text: |
-                    ## The ask command
-                    Now that you can use the `{print}` command, you are ready to learn the next command: `{ask}`. With the `{ask}` command, you can ask a question. Check it out:
+                    ## 提问命令
+                    现在你可以用 `{print}`来命令, 你准备好学习新指令: `{ask}`. 用 `{ask}` 来指令, 你可以提一个问题. 试试吧:
                 example_code: |
                     ```
-                    {print} Hello!
-                    {ask} What is your name?
+                    {print} 你好!
+                    {ask}你叫什么名字?
                     ```
                 story_text_2: |
                     ## The echo command
                     如果想让计算机将结果重复一遍，可以使用 `{echo}` 命令。答案将在程序末尾输出，因此在本例中，结果将在 hello 之后输出。
                 example_code_2: |
                     ```
-                    {print} Hello!
-                    {ask} What is your name?
-                    {echo} hello
+                    {print} 你好!
+                    {ask} 你叫什么名字?
+                    {echo} 你好
                     ```
                 story_text_3: |
                     ### 练习
@@ -327,9 +327,9 @@ adventures:
                     _
                     ```
                 start_code: |
-                    {print} Hello!
-                    {ask} What is your name?
-                    {echo} hello
+                    {print} 你好!
+                    {ask} 你叫什么名字?
+                    {echo} 你好
             2:
                 story_text: |
                     ## 询问命令
@@ -339,28 +339,28 @@ adventures:
                     这样你的代码就变得具有交互性了！
                 example_code: |
                     ```
-                    name {is} {ask} What is your name?
-                    {print} Hello name
-                    age {is} {ask} How old are you?
-                    {print} name is age years old.
+                    名字{is} {ask} 你叫什么名字?
+                    {print} 你好名字
+                    年龄 {is} {ask} 你多大了?
+                    {print} 名字是年龄.
                     ```
                 story_text_2: |
                     ### Exercise
-                    In the previous tab you have practised with setting variables with the `{is}` command.
-                    You have created at least 3 variables and used them with a print command.
-                    Now, instead of setting the variables we want you to make the variables interactive, like we did in our example.
+                    在前面的选项中你需要操作很多带 `{is}` 的指令.
+                    你需要创造至少3种不同的变量指令并用 print command运行.
+                    现在，我们希望你创造像我们的例子里一样可以交互的变量，而不是设置变量.
 
-                    Copy your code from the previous tab and make the variables interactive by using `{ask}` commands.
+                    从前页复制你的代码，通过使用 `{ask}` 让变量交互运行.
                 example_code_2: |
                     ```
                     favorite_animals {is} {ask} 你喜欢什么 动物?
                     {print} 我喜欢 favorite_animals
                     ```
                 start_code: |-
-                    name {is} {ask} What is your name?
-                    {print} Hello name
-                    age {is} {ask} How old are you?
-                    {print} name is age years old.
+                    名字 {is} {ask} 你叫什么名字?
+                    {print} 你好名字
+                    年龄 {is} {ask} 你多大了?
+                    {print} 名字是年龄.
             18:
                 story_text: The final change we will need to make to get Python code is changing `{ask}` into `{input}`.
                 example_code: |
@@ -376,7 +376,7 @@ adventures:
     blackjack:
         name: Blackjack
         default_save_name: Blackjack
-        description: Try to get as close to 21 as you can
+        description: 尽可能地接近21
         levels:
             17:
                 story_text: |
@@ -472,7 +472,7 @@ adventures:
                     {elif} points > dealer_points {and} points < 21:
                         {print} 'You win!'
                     ```
-                start_code: '# place your code here'
+                start_code: '# 在这里输入你的代码'
     calculator:
         name: 计算器
         default_save_name: 计算器
@@ -502,7 +502,9 @@ adventures:
                 story_text_3: |
                     您还可以让计算机自己使用 {random} 求随机数的和。
                     这就是你如何选择几个运算表进行练习的例子，而且你总会从中获得不同的和：
-                start_code: '{print} ''欢迎来到这个计算器!'''
+                start_code: '{print} ''欢迎来到这个计算器!''
+
+                    '
             9:
                 story_text: |
                     在第 6 级中，您编写了一个计算器程序，在此级别中，您可以扩展该程序来提出多个问题。
@@ -561,10 +563,20 @@ adventures:
                     {for} i {in} {range} 1 to 10
                         {print} i * 数字
                     ```
-                start_code: '# 将你的代码写在这里'
+                start_code: '# 将你的代码写在这里
+
+                    '
             12:
                 story_text: |
-                    现在您可以编写一个可以计算小数的计算器。
+                    在本关，你可以编写一个可以计算小数的计算器。
+
+                    ###练习1
+                    填空完成计算。注意小数点使用句号而不是逗号。
+
+                    ###练习2
+                    创建一个新的数学运行程序，但现在要使用小数。
+                    创建一组数据，选择两个数字相乘让玩家回答。
+                    当然你有准确的答案！**Extra**通过增加生命增加难度：玩家回答错误一次失去一条命，三次回答错误后游戏结束。
                 example_code: |
                     ```
                     数一 = {ask} '第一个数字是几？'
@@ -1358,35 +1370,35 @@ adventures:
 
                     print 'Thanks for ordering!'
                     ```
-                start_code: |4
+                start_code: |2
 
-                    define food_order
-                        toppings = ask 'pepperoni, tuna, veggie or cheese?'
-                        size = ask 'big, medium or small?'
-                        number_of_pizza = ask 'How many these pizzas would you like?'
+                        define food_order
+                            toppings = ask 'pepperoni, tuna, veggie or cheese?'
+                            size = ask 'big, medium or small?'
+                            number_of_pizza = ask 'How many these pizzas would you like?'
 
-                        print 'YOU ORDERED'
-                        print number_of_pizzas ' size  ' topping ' pizza'
+                            print 'YOU ORDERED'
+                            print number_of_pizzas ' size  ' topping ' pizza'
 
-                    define drinks_order
-                        drink = ask 'water, coke, icetea, lemonade or coffee?'
-                        number_of_drinks = ask 'How many of these drinks would you like?'
+                        define drinks_order
+                            drink = ask 'water, coke, icetea, lemonade or coffee?'
+                            number_of_drinks = ask 'How many of these drinks would you like?'
 
-                        print 'YOU ORDERED'
-                        print number_of_drinks ' ' drink
+                            print 'YOU ORDERED'
+                            print number_of_drinks ' ' drink
 
-                    'Welcome to Hedy pizza'
-                    more_food = ask 'Would you like to order a pizza?'
-                    while more_food = 'yes'
-                        return food_order
+                        'Welcome to Hedy pizza'
                         more_food = ask 'Would you like to order a pizza?'
-                    more_drinks = ask 'Would you like to order some drinks?'
-                    while more_drinks == 'yes'
-                        call drink_order
-                        more_drinks == ask 'Would you like to order more drinks?'
+                        while more_food = 'yes'
+                            return food_order
+                            more_food = ask 'Would you like to order a pizza?'
+                        more_drinks = ask 'Would you like to order some drinks?'
+                        while more_drinks == 'yes'
+                            call drink_order
+                            more_drinks == ask 'Would you like to order more drinks?'
 
 
-                    print 'Thanks for ordering!'
+                        print 'Thanks for ordering!'
             18:
                 story_text: |-
                     ### Exercise
@@ -1409,22 +1421,22 @@ adventures:
                         print 'there a ' sound
                         print 'everywhere a ' sound sound
                     ```
-                start_code: |4
+                start_code: |2
 
-                    animals = ['pig', 'dog', 'cow']
-                    sounds = ['oink', 'woof', 'moo']
-                    for i in range 1 to 3
-                        animal = animals[i]
-                        sound = sounds[i]
-                        print 'Old McDonald had a farm'
-                        print 'E I E I O!'
-                        print 'and on that farm he had a ' animal
-                        print 'E I E I O!'
-                        print 'with a ' sound sound ' here'
-                        print 'and a ' sound sound ' there'
-                        print 'here a ' sound
-                        print 'there a ' sound
-                        print 'everywhere a ' sound sound
+                        animals = ['pig', 'dog', 'cow']
+                        sounds = ['oink', 'woof', 'moo']
+                        for i in range 1 to 3
+                            animal = animals[i]
+                            sound = sounds[i]
+                            print 'Old McDonald had a farm'
+                            print 'E I E I O!'
+                            print 'and on that farm he had a ' animal
+                            print 'E I E I O!'
+                            print 'with a ' sound sound ' here'
+                            print 'and a ' sound sound ' there'
+                            print 'here a ' sound
+                            print 'there a ' sound
+                            print 'everywhere a ' sound sound
     default:
         name: 介绍
         default_save_name: 介绍
@@ -2040,7 +2052,7 @@ adventures:
                     在本级中，你将学会在使用算命仙时，（秘密地）使结果对你有利！
                     通过使用`{if}` 和`{else}` ，你可以确保你总是能得到好运，而其他人可能得不到。
                     看看这个例子就知道了。
-                example_code: "```\n{print} '我是海蒂算命仙!'\n{print} '我可以预测你明天是否会中彩票！'\n人 {is} {ask} '你是谁？'\n{if} 人 {is} 海蒂 {print} '你肯定会中奖！\U0001F929' {else} {print} '你运气不好！别人会中奖！\U0001F62D' \n```\n"
+                example_code: "```\n{print} '我是海蒂算命仙!'\n{print} '我可以预测你明天是否会中彩票！'\n人 {is} {ask} '你是谁？'\n{if} 人 {is} 海蒂 {print} '你肯定会中奖！🤩' {else} {print} '你运气不好！别人会中奖！😭' \n```\n"
                 start_code: '# 在这里写下你的代码'
             6:
                 story_text: |
