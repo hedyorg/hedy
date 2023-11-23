@@ -913,18 +913,18 @@ adventures:
                     ```
                 start_code: |
                     {print} "Distributeur automatique"
-                        produit_choisi = {ask} "Veuillez sélectionner un produit"
+                    produit_choisi = {ask} "Veuillez sélectionner un produit"
                     1_euro = coca jus d'orange eau
                     2_euros = chocolat, cookie, barre muesli
                     3_eruos = chips, charcuterie, gâteau à la banane
                     {if} produit {in} 1_euro
                     prix = 1
-                    {if} produit_choisi {is} 2_euros
-                        prix = 2
-                        {if} produit_choisi {in} 3_euros
-                            prix = 3
+                    {if} produit_choisi {is} {in} 2_euros
+                    prix = 2
+                    {else} produit_choisi {in} 3_eruos
+                    prix = 3
                     nombre_de_produits = "{ask} combien de " produit_choisi voulez-vous ?"
-                    total = prix + nombre_de_produits
+                    total = prix + nombre de produits
                     {print} "Ça vous fera" prix " €, s'il vous plait"
             7:
                 story_text: |-
