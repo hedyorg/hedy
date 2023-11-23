@@ -1001,58 +1001,58 @@ adventures:
                     {print} 'Thank you! Byebye!'
             9:
                 story_text: |-
-                    ### Exercise
-                    Debug this code. Good luck!
+                    ### Opdracht
+                    Debug deze code. Succes!
                 example_code: |
-                    **Warning! This code needs to be debugged!**
+                    **Pas op! Deze code bevat fouten!**
                     ```
-                    {print} 'Welcome to our sandwich shop'
-                    amount 'How many sandwiches would you like to buy?'
-                    {repeat} amount {times}
-                    {ask} {is} {ask} 'What kind or bread would you like your sandwich to be?'
-                    types_of_bread {is} white, wheat, rye, garlic, gluten free
-                    {if} chosen_bread in types_of_bread
-                    {print} 'Lovely!'
+                    {print} 'Welkom bij onze broodjeszaak'
+                    aantal 'Hoeveel broodjes wilt u bestellen?'
+                    {repeat} aantal {times}
+                    {ask} {is} {ask} 'Welk soort brood wilt u?'
+                    soorten_brood {is} wit, bruin, rogge, knoflook, glutenvrij
+                    {if} gekozen_brood in soorten_brood
+                    {print} 'Super!'
                     {else}
-                    'I'm sorry we don't sell that'
-                    topping {is} {ask} 'What kind of topping would you like?'
-                    sauce {is} {ask} 'What kind of sauce would you like?'
-                    {print} One chosen_bread with topping and sauce.
-                    price = amount * 6
-                    {print} 'That will be 'price dollar' please'
+                    'Sorry, dat hebben we niet'
+                    extras {is} {ask} 'Wilt u daar nog extra's op?'
+                    saus {is} {ask} 'Welke saus wilt u?'
+                    {print} Een gekozen_brood met extras en saus.
+                    prijs = aantal * 6
+                    {print} 'Dat wordt dan 'prijs euro' alstublieft'
                     ```
                 start_code: |
-                    {print} 'Welcome to our sandwich shop'
-                    amount 'How many sandwiches would you like to buy?'
-                    {repeat} amount {times}
-                    {ask} {is} {ask} 'What kind or bread would you like your sandwich to be?'
-                    types_of_bread {is} white, wheat, rye, garlic, gluten free
-                    {if} chosen_bread in types_of_bread
-                    {print} 'Lovely!'
+                    {print} 'Welkom bij onze broodjeszaak'
+                    aantal 'Hoeveel broodjes wilt u bestellen?'
+                    {repeat} aantal {times}
+                    {ask} {is} {ask} 'Welk soort brood wilt u?'
+                    soorten_brood {is} wit, bruin, rogge, knoflook, glutenvrij
+                    {if} gekozen_brood in soorten_brood
+                    {print} 'Super!'
                     {else}
-                    'I'm sorry we don't sell that'
-                    topping {is} {ask} 'What kind of topping would you like?'
-                    sauce {is} {ask} 'What kind of sauce would you like?'
-                    {print} One chosen_bread with topping and sauce.
-                    price = amount * 6
-                    {print} 'That will be 'price dollar' please'
+                    'Sorry, dat hebben we niet'
+                    extras {is} {ask} 'Wilt u daar nog extra's op?'
+                    saus {is} {ask} 'Welke saus wilt u?'
+                    {print} Een gekozen_brood met extras en saus.
+                    prijs = aantal * 6
+                    {print} 'Dat wordt dan 'prijs euro' alstublieft'
             10:
                 story_text: |-
-                    ### Exercise
-                    Debug this code. Good luck!
+                    ### Opdracht
+                    Debug deze code. Succes!
                 example_code: |
-                    **Warning! This code needs to be debugged!**
+                    **Pas op! Deze code bevat fouten!**
                     ```
-                    names = Muad Hasan Samira Noura
-                    activities = fly a kite, go swimming, go hiking, catch tan in the sun
-                    {for} name {is} names
-                    {print} At the beach name loves to activity at random
+                    namen = Muad Hasan Samira Noura
+                    activiteiten = vliegeren, zwemmen, wandelen, baden in de zon
+                    {for} naam {is} namen
+                    {print} Op het strand vindt naam het leuk om to activiteit at random
                     ```
                 start_code: |
-                    names = Muad Hasan Samira Noura
-                    activities = fly a kite, go swimming, go hiking, catch tan in the sun
-                    {for} name {is} names
-                    {print} At the beach name loves to activity at random
+                    namen = Muad Hasan Samira Noura
+                    activiteiten = vliegeren, zwemmen, wandelen, baden in de zon
+                    {for} naam {is} namen
+                    {print} Op het strand vindt naam het leuk om to activiteit at random
             11:
                 story_text: |-
                     ### Exercise
@@ -1408,33 +1408,33 @@ adventures:
                     ```
                 start_code: |4
 
-                          define food_order
-                              toppings = ask 'pepperoni, tuna, veggie or cheese?'
-                              size = ask 'big, medium or small?'
-                              number_of_pizza = ask 'How many these pizzas would you like?'
+                            define food_order
+                                toppings = ask 'pepperoni, tuna, veggie or cheese?'
+                                size = ask 'big, medium or small?'
+                                number_of_pizza = ask 'How many these pizzas would you like?'
 
-                              print 'YOU ORDERED'
-                              print number_of_pizzas ' size  ' topping ' pizza'
+                                print 'YOU ORDERED'
+                                print number_of_pizzas ' size  ' topping ' pizza'
 
-                          define drinks_order
-                              drink = ask 'water, coke, icetea, lemonade or coffee?'
-                              number_of_drinks = ask 'How many of these drinks would you like?'
+                            define drinks_order
+                                drink = ask 'water, coke, icetea, lemonade or coffee?'
+                                number_of_drinks = ask 'How many of these drinks would you like?'
 
-                              print 'YOU ORDERED'
-                              print number_of_drinks ' ' drink
+                                print 'YOU ORDERED'
+                                print number_of_drinks ' ' drink
 
-                          'Welcome to Hedy pizza'
-                          more_food = ask 'Would you like to order a pizza?'
-                          while more_food = 'yes'
-                              return food_order
-                              more_food = ask 'Would you like to order a pizza?'
-                          more_drinks = ask 'Would you like to order some drinks?'
-                          while more_drinks == 'yes'
-                              call drink_order
-                              more_drinks == ask 'Would you like to order more drinks?'
+                            'Welcome to Hedy pizza'
+                            more_food = ask 'Would you like to order a pizza?'
+                            while more_food = 'yes'
+                                return food_order
+                                more_food = ask 'Would you like to order a pizza?'
+                            more_drinks = ask 'Would you like to order some drinks?'
+                            while more_drinks == 'yes'
+                                call drink_order
+                                more_drinks == ask 'Would you like to order more drinks?'
 
 
-                          print 'Thanks for ordering!'
+                            print 'Thanks for ordering!'
             18:
                 story_text: |-
                     ### Exercise
@@ -1459,20 +1459,20 @@ adventures:
                     ```
                 start_code: |4
 
-                          animals = ['pig', 'dog', 'cow']
-                          sounds = ['oink', 'woof', 'moo']
-                          for i in range 1 to 3
-                              animal = animals[i]
-                              sound = sounds[i]
-                              print 'Old McDonald had a farm'
-                              print 'E I E I O!'
-                              print 'and on that farm he had a ' animal
-                              print 'E I E I O!'
-                              print 'with a ' sound sound ' here'
-                              print 'and a ' sound sound ' there'
-                              print 'here a ' sound
-                              print 'there a ' sound
-                              print 'everywhere a ' sound sound
+                            animals = ['pig', 'dog', 'cow']
+                            sounds = ['oink', 'woof', 'moo']
+                            for i in range 1 to 3
+                                animal = animals[i]
+                                sound = sounds[i]
+                                print 'Old McDonald had a farm'
+                                print 'E I E I O!'
+                                print 'and on that farm he had a ' animal
+                                print 'E I E I O!'
+                                print 'with a ' sound sound ' here'
+                                print 'and a ' sound sound ' there'
+                                print 'here a ' sound
+                                print 'there a ' sound
+                                print 'everywhere a ' sound sound
     default:
         name: Introductie
         default_save_name: intro
@@ -2387,14 +2387,14 @@ adventures:
             10:
                 story_text: |
                     ### Opdracht
-                    We kunnen ook een waarzegger maken in Harry Potter thema. Vul het juiste in op de plek van het streppje zodat er 9 regels geprint worden.
+                    We kunnen ook een waarzegger maken in Harry Potter thema. Vul het juiste in op de plek van het streepje zodat er 9 regels geprint worden.
                     **Extra** Verander het thema van de waarzegger ook eens in iets anders! Zoals jouw eigen favoriete (sport)club, boek of show
                 example_code: |
                     ```
                     afdelingen = Griffoendor, Zwadderich, Huffelpuf, Ravenklauw
                     vakken = toverdranken, verdediging tegen de zwarte kunsten, bezweringen, transfiguratie
                     angsten = Voldemort, spinnen, je S.L.I.J.M.B.A.L.len niet halen
-                    naam = Harry, Ron, Hermelien
+                    namen = Harry, Ron, Hermelien
                     _
                     _ {print} naam ' wordt geplaatst in ' afdelingen {at} {random}
                     _ {print} naam ' is goed in ' vakken {at} {random}
@@ -4573,7 +4573,7 @@ adventures:
                     {turn} {left}
             2:
                 story_text: |
-                    In dit level kun je variabelen gebruiken om de turtle interactief te maken. Je kunt bijvoorbeeld aan de speler vragen hoeveel stapjes de turtle moet nemen.
+                    In dit level kun je variabelen gebruiken om de teken-schildpad interactief te maken. Je kunt bijvoorbeeld aan de speler vragen hoeveel stapjes de schildpad moet nemen.
                 example_code: |
                     ```
                     {print} Figuren tekenen
@@ -4583,8 +4583,8 @@ adventures:
                     {turn} hoek
                     {forward} 25
                     ```
-                story_text_2: "Daarnaast kon je in level 1 alleen maar linksaf of rechtsaf slaan. Dat is een beetje saai!\nIn level 2 kun je de neus van de turtle naar elke richting laten wijzen. \n\nGebruik 90 graden om een kwartslag te draaien. Een heel rondje draaien is 360 graden. \nKun jij een figuurtje\
-                    \ tekenen met deze code? Misschien een driehoek of een cirkel?\n"
+                story_text_2: "Daarnaast kon je in level 1 alleen maar linksaf of rechtsaf slaan. Dat is een beetje saai!\nIn level 2 kun je de neus van de schildpad naar elke richting laten wijzen. \n\nGebruik 90 graden om een kwartslag te draaien. Een heel rondje draaien is 360 graden. \nKun jij een\
+                    \ figuurtje tekenen met deze code? Misschien een driehoek of een cirkel?\n"
                 example_code_2: |-
                     {print} Schildpaddenrace!
                     hoek {is} 90
@@ -4747,21 +4747,15 @@ adventures:
                     ```
                 start_code: '# place your code here'
             10:
-                story_text: |
-                    In this level you can make the turtle draw a figure.
-                    The turtle will travel the distances in the list, one by one, making bigger and bigger steps.
-                    ### Exercise 1
-                    Add a 90 degree turn in the loop, so that a spiral is drawn.
-                    Add at least 5 numbers to the list, so the spiral grows larger.
-                     **(extra)** can you change the spiral into another shape? Experiment with numbers for the turn!
-                    ### Exercise 2
-                    The spiral is drawn outwards, make it go inwards?
+                story_text: "In dit level kun je de teken-schildpad een figuur laten tekenen. \nDe schildpad volgt de afstanden in de lijst één voor één, waarbij de stappen steeds groter worden.\n### Opdracht 1\nVoeg een turn van 90 graden toe aan de code om een spiraal te tekenen.\nVoeg ten minste 5\
+                    \ getallen toe aan de lijst, zodat de spiraal steeds groter wordt.\n **(extra)** Kan jij de spiraal in een andere vorm veranderen? Probeer verschillende getallen met turn!\n### Opdracht 2\nDe spiraal wordt nu van binnen naar buiten getekend, kun jij dit omdraaien?\n"
                 example_code: |
                     ```
                     {turn} 90
                     afstanden = 10, 20, 30, 40, 50, 60
                     {for} afstand {in} afstanden
                         {forward} afstand
+                    ```
                     ```
                 start_code: '# Write your code here'
             12:
