@@ -288,7 +288,8 @@ class ForTeachersModule(WebsiteModule):
             adventures=adventures,
             adventure_names=adventure_names,
             available_adventures=available_adventures,
-            custom_adventures=list(dict.fromkeys([item for sublist in available_adventures.values() for item in sublist if item.is_teacher_adventure])),
+            custom_adventures=list(dict.fromkeys(
+                [item for sublist in available_adventures.values() for item in sublist if item.is_teacher_adventure])),
             adventures_default_order=hedy_content.ADVENTURE_ORDER_PER_LEVEL,
             current_page="for-teachers",
             min_level=min_level,
@@ -534,7 +535,7 @@ class ForTeachersModule(WebsiteModule):
                                         long_name=teacher_adventure['name'],
                                         is_teacher_adventure=True,
                                         is_command_adventure=False,)
-                                        # levels=teacher_adventure.get("levels", []))
+            # levels=teacher_adventure.get("levels", []))
             for level in teacher_adventure.get("levels", [teacher_adventure.get("level")]):
                 teacher_adventures[int(level)].add(adventure)
 
