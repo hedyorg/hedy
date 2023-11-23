@@ -454,12 +454,16 @@ class Table:
         """
         for field in self.indexed_fields:
             value = data.get(field)
-            if value is None: continue
+            if value is None:
+                continue
 
-            if for_update and isinstance(value, DynamoUpdate): continue
-            if isinstance(value, str) or isinstance(value, numbers.Number) or isinstance(value, bytes): continue
+            if for_update and isinstance(value, DynamoUpdate):
+                continue
+            if isinstance(value, str) or isinstance(value, numbers.Number) or isinstance(value, bytes):
+                continue
 
-            raise ValueError('Trying to insert %r into table %s, but %s is a Partition or Sort Key of the table itself or an index, so must be of type string, number or binary.' % ({ field: value }, self.table_name, field))
+            raise ValueError('Trying to insert %r into table %s, but %s is a Partition or Sort Key of the table itself or an index, so must be of type string, number or binary.' % (
+                {field: value}, self.table_name, field))
 
 
 DDB_SERIALIZER = TypeSerializer()
