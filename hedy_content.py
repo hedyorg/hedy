@@ -50,6 +50,7 @@ ADVENTURE_ORDER_PER_LEVEL = {
         'haunted',
         'story',
         'turtle',
+        'turtle_draw_it',
         'restaurant',
         'fortune',
         'debugging'
@@ -66,6 +67,7 @@ ADVENTURE_ORDER_PER_LEVEL = {
         'story',
         'restaurant',
         'turtle',
+        'turtle_draw_it',
         'debugging'
     ],
     3: [
@@ -81,6 +83,7 @@ ADVENTURE_ORDER_PER_LEVEL = {
         'story',
         'haunted',
         'turtle',
+        'turtle_draw_it',
         'debugging'
     ],
     4: [
