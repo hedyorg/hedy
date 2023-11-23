@@ -532,8 +532,14 @@ adventures:
                     ```
                 story_text_3: |
                     Je kunt ook de computer zelf willekeurige sommen laten maken met `{random}`.
-
-                    Zo kies je een aantal tafels om uit te oefenen, en pak je daaruit steeds een andere som:
+                example_code_3: |
+                    numbers = 1, 2, 3, 4, 5, 6, 7, 8, 9, 10
+                    number_1 = _
+                    number_2 = _
+                    correct_answer = number_1 * number_2
+                    given_answer = 'What is ' number_1 ' times ' number_2 '?'
+                    {if} _
+                    {else} _
                 start_code: |
                     getal_1 = {ask} 'Het eerste getal is:'
                     getal_2 = {ask} 'Het tweede getal is:'
@@ -910,32 +916,32 @@ adventures:
                     **Pas op! Deze code bevat fouten!**
                     ```
                     {print} 'Snackautomaat'
-                        gekozen_product = {ask} 'Maak een keuze'
+                    gekozen_product = {ask} 'Maak een keuze'
                     1_euro_producten = cola sinas sap water
                     2_euro_producten = chocolade, koekje, museli reep
-                    3_euro_prodcuten = chips, gezouten nootjes, bananenbrood
-                    {if} gekozen {in} 1_euro_producten
+                    3euro_prodcuten = chips, gezouten nootjes, bananenbrood
+                    {if} gekozen {is} {in} 1_euro_producten
                     prijs = 1
                     {if} gekozen_product {is} 2_euro_producten
-                        prijs = 2
-                        {if} gekozen_product {in} 3_euro_producten
-                            prijs = 3
+                    prijs = 2
+                    {else} gekozen_product {in} 3_euro_producten
+                    prijs = 3
                     aantal_producten = '{ask} Hoeveel  ' gekozen_product wilt u hebben?'
                     totaall = prijs + aantal producten
                     {print} 'Dat wordt dan €' prijs 'alstublieft'
                     ```
                 start_code: |
                     {print} 'Snackautomaat'
-                        gekozen_product = {ask} 'Maak een keuze'
+                    gekozen_product = {ask} 'Maak een keuze'
                     1_euro_producten = cola sinas sap water
                     2_euro_producten = chocolade, koekje, museli reep
-                    3_euro_prodcuten = chips, gezouten nootjes, bananenbrood
-                    {if} gekozen {in} 1_euro_producten
+                    3euro_prodcuten = chips, gezouten nootjes, bananenbrood
+                    {if} gekozen {is} {in} 1_euro_producten
                     prijs = 1
                     {if} gekozen_product {is} 2_euro_producten
-                        prijs = 2
-                        {if} gekozen_product {in} 3_euro_producten
-                            prijs = 3
+                    prijs = 2
+                    {else} gekozen_product {in} 3_euro_producten
+                    prijs = 3
                     aantal_producten = '{ask} Hoeveel  ' gekozen_product wilt u hebben?'
                     totaall = prijs + aantal producten
                     {print} 'Dat wordt dan €' prijs 'alstublieft'

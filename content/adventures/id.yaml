@@ -535,7 +535,6 @@ adventures:
                     ```
                 story_text_2: |
                     You can also let the computer do random calculations on its own using {random}.
-                    This is how you choose a number of tables to practice, and from that you always get a different sum:
                 example_code_2: |
                     ```
                     jawaban_benar = 11 * 27
@@ -920,31 +919,31 @@ adventures:
                     **Peringatan! Kode ini perlu di-debug!**
                     ```
                     {print} 'Mesin penjual otomatis'
-                        produk_terpilih = {ask} 'Silakan pilih produk'
+                    produk_terpilih = {ask} 'Silakan pilih produk'
                     produk_1_dolar = coke jus jeruk air
                     produk_2_dolar = cokelat, kue, bar museli
-                    produk_3_dolar = keripik kentang, daging sapi asap, roti pisang
+                    produk3_dolar = keripik kentang, daging sapi asap, roti pisang
                     {if} produk_terpilih {in} produk_1_dolar
                     harga = 1
                     {if} produk_terpilih {is} produk_2_dolar
-                        harga = 2
-                        {if} produk_terpilih {in} produk_3_dolar
-                            harga = 3
+                    harga = 2
+                    {if} produk_terpilih {in} produk_3_dolar
+                    harga = 3
                     jumlah_produk = '{ask} Berapa banyak ' produk_terpilih ' yang ingin Anda beli?'
                     total = harga + jumlah_produk
                     {print} 'Totalnya akan menjadi $' harga 'silakan'
                 start_code: |
                     {print} 'Mesin penjual otomatis'
-                        chosen_product = {ask} 'Silakan pilih produk'
+                    chosen_product = {ask} 'Silakan pilih produk'
                     produk_1_dolar = coke, jus jeruk, air
                     produk_2_dolar = cokelat, kue, bar museli
-                    produk_3_dolar = kentang goreng, dendeng sapi, roti pisang
+                    produk3_dolar = kentang goreng, dendeng sapi, roti pisang
                     {if} chosen {in} produk_1_dolar
                     harga = 1
                     {if} chosen_product {is} produk_2_dolar
-                        harga = 2
-                        {if} chosen_product {in} produk_3_dolar
-                            harga = 3
+                    harga = 2
+                    {if} chosen_product {in} produk_3_dolar
+                    harga = 3
                     jumlah_produk = '{ask} Berapa banyak ' chosen_product ' yang ingin Anda beli?'
                     total = harga + jumlah_produk
                     {print} 'Totalnya $' harga 'silakan'
