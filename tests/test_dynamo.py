@@ -192,6 +192,14 @@ class TestQueryInMemory(unittest.TestCase, Helpers):
             {'id': 'key', 'sort': 2, 'm': 'another'}
         ])
 
+    def test_cant_use_array_for_indexed_field(self):
+        with self.assertRaises(ValueError):
+            self.table.create({ 'id': 'key', 'sort': 1, 'm': [1, 2, 3] })
+
+    def test_cant_use_array_for_partition(self):
+        with self.assertRaises(ValueError):
+            self.table.create({ 'id': [1, 2] })
+
     def test_query_with_filter(self):
         self.table.create({'id': 'key', 'sort': 1, 'm': 'val'})
         self.table.create({'id': 'key', 'sort': 2, 'm': 'another'})

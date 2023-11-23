@@ -224,6 +224,12 @@ class Table:
         self.storage = storage
         self.table_name = table_name
         self.indexes = indexes or []
+        self.indexed_fields = set()
+
+        all_schemas = [self.key_schema] + [i.key_schema for i in self.indexes]
+        for schema in all_schemas:
+            for field in schema.key_names:
+                self.indexed_fields.add(field)
 
         # Check to make sure the indexes have unique partition keys
         part_names = reverse_index((index.index_name, index.key_schema.partition_key) for index in self.indexes)
@@ -341,6 +347,7 @@ class Table:
         """Put a single complete record into the database."""
         if not self.key_schema.fully_matches(data):
             raise ValueError(f"Expecting fields {self.key_schema} in create() call, got: {data}")
+        self._validate_indexable_fields(data, False)
 
         querylog.log_counter(f"db_create:{self.table_name}")
         self.storage.put(self.table_name, self.key_schema.extract(data), data)
@@ -359,6 +366,7 @@ class Table:
         updates that aren't representable as plain values.
         """
         querylog.log_counter(f"db_update:{self.table_name}")
+        self._validate_indexable_fields(updates, True)
         self._validate_key(key)
 
         return self.storage.update(self.table_name, key, updates)
@@ -437,6 +445,21 @@ class Table:
             raise ValueError(f"key fields incorrect: {key} not containing {self.key_schema}")
         if any(not v for v in key.values()):
             raise ValueError(f"key fields cannot be empty: {key}")
+
+    def _validate_indexable_fields(self, data, for_update):
+        """Check that all fields that have [index] keys on them in this data are either strings, ints or binaries.
+
+        We can't validate whether the Dynamo index is properly defined, but at
+        least we can catch some assumptions locally.
+        """
+        for field in self.indexed_fields:
+            value = data.get(field)
+            if value is None: continue
+
+            if for_update and isinstance(value, DynamoUpdate): continue
+            if isinstance(value, str) or isinstance(value, numbers.Number) or isinstance(value, bytes): continue
+
+            raise ValueError('Trying to insert %r into table %s, but %s is a Partition or Sort Key of the table itself or an index, so must be of type string, number or binary.' % ({ field: value }, self.table_name, field))
 
 
 DDB_SERIALIZER = TypeSerializer()
