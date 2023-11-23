@@ -542,8 +542,14 @@ adventures:
                     ```
                 story_text_3: |
                     **Bonus** Tu peux également laisser l'ordinateur faire des additions aléatoires de lui-même en utilisant `{random}`.
-
-                    Voici comment choisir un nombre de tables à pratiquer, et ainsi obtenir toujours une somme différente :
+                example_code_3: |
+                    numbers = 1, 2, 3, 4, 5, 6, 7, 8, 9, 10
+                    number_1 = _
+                    number_2 = _
+                    correct_answer = number_1 * number_2
+                    given_answer = 'What is ' number_1 ' times ' number_2 '?'
+                    {if} _
+                    {else} _
                 start_code: |
                     nombre_1 = {ask} "Saisi le premier nombre :"
                     nombre_2 = {ask} "Saisi le deuxième nombre :"
@@ -891,34 +897,34 @@ adventures:
                     **Attention ! Ce code à besoins d'être débugué !**
                     ```
                     {print} "Distributeur automatique"
-                        produit_choisi = {ask} "Veuillez sélectionner un produit"
+                    produit_choisi = {ask} "Veuillez sélectionner un produit"
                     1_euro = coca jus d'orange eau
                     2_euros = chocolat, cookie, barre muesli
                     3_eruos = chips, charcuterie, gâteau à la banane
                     {if} produit {in} 1_euro
                     prix = 1
-                    {if} produit_choisi {is} 2_euros
-                        prix = 2
-                        {if} produit_choisi {in} 3_eruos
-                            prix = 3
+                    {if} produit_choisi {is} {in} 2_euros
+                    prix = 2
+                    {else} produit_choisi {in} 3_eruos
+                    prix = 3
                     nombre_de_produits = "{ask} combien de " produit_choisi voulez-vous ?"
-                    total = prix + nombre_de_produits
+                    total = prix + nombre de produits
                     {print} "Ça vous fera" prix " €, s'il vous plait"
                     ```
                 start_code: |
                     {print} "Distributeur automatique"
-                        produit_choisi = {ask} "Veuillez sélectionner un produit"
+                    produit_choisi = {ask} "Veuillez sélectionner un produit"
                     1_euro = coca jus d'orange eau
                     2_euros = chocolat, cookie, barre muesli
                     3_eruos = chips, charcuterie, gâteau à la banane
                     {if} produit {in} 1_euro
                     prix = 1
-                    {if} produit_choisi {is} 2_euros
-                        prix = 2
-                        {if} produit_choisi {in} 3_euros
-                            prix = 3
+                    {if} produit_choisi {is} {in} 2_euros
+                    prix = 2
+                    {else} produit_choisi {in} 3_eruos
+                    prix = 3
                     nombre_de_produits = "{ask} combien de " produit_choisi voulez-vous ?"
-                    total = prix + nombre_de_produits
+                    total = prix + nombre de produits
                     {print} "Ça vous fera" prix " €, s'il vous plait"
             7:
                 story_text: |-
