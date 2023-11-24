@@ -542,6 +542,7 @@ adventures:
                 story_text_3: |
                     You can also let the computer do random calculations on its own using {random}.
                 start_code: '{print} ''Welcome to this calculator!'''
+                example_code_3: "numbers = 1, 2, 3, 4, 5, 6, 7, 8, 9, 10\nnumber_1 = _\nnumber_2 = _\ncorrect_answer = number_1 * number_2\ngiven_answer = 'What is ' number_1 ' times ' number_2 '?'\n{if} _\n{else} _\n"
             9:
                 story_text: |
                     In previous levels you've learned how to make a calculator, in this level you can expand that code and make it into a little maths game. Like this...
@@ -1389,7 +1390,7 @@ adventures:
 
                     print 'Thanks for ordering!'
                     ```
-                start_code: |4
+                start_code: |2
 
                     define food_order
                         toppings = ask 'pepperoni, tuna, veggie or cheese?'
@@ -1440,7 +1441,7 @@ adventures:
                         print 'there a ' sound
                         print 'everywhere a ' sound sound
                     ```
-                start_code: |4
+                start_code: |2
 
                     animals = ['pig', 'dog', 'cow']
                     sounds = ['oink', 'woof', 'moo']
@@ -1632,8 +1633,7 @@ adventures:
                     {print} 'दशमलव संख्याओं को अब एक बिंदु का उपयोग करने की आवश्यकता है'
                     {print} 2.5 + 2.5
             13:
-                story_text: अब हम `{and}` और `{or}` सीखने जा रहे हैं! यदि आप दो कथनों की जाँच करना चाहते हैं, तो आपको दो if's का उपयोग करने की आवश्यकता नहीं है, लेकिन `{and}` और `{or}` का उपयोग कर सकते हैं। यदि आप `{and}` का उपयोग करते हैं, तो `{and}` के बाएं और दाएं दोनों कथन सत्य होने चाहिए। हम `या`
-                    का भी उपयोग कर सकते हैं। तब केवल एक कथन सही होना चाहिए।
+                story_text: अब हम `{and}` और `{or}` सीखने जा रहे हैं! यदि आप दो कथनों की जाँच करना चाहते हैं, तो आपको दो if's का उपयोग करने की आवश्यकता नहीं है, लेकिन `{and}` और `{or}` का उपयोग कर सकते हैं। यदि आप `{and}` का उपयोग करते हैं, तो `{and}` के बाएं और दाएं दोनों कथन सत्य होने चाहिए। हम `या` का भी उपयोग कर सकते हैं। तब केवल एक कथन सही होना चाहिए।
                 example_code: |
                     ```
                     name = ask 'what is your name?'
