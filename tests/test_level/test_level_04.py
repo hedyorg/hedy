@@ -226,6 +226,17 @@ class TestsLevel4(HedyTester):
             exception=hedy.exceptions.UnquotedTextException,
         )
 
+    def test_print_comma_starting_ending_quote_gives_UnquotedException(self):
+        code = "print hallo, wereld'"
+
+        self.multi_level_tester(
+            code=code,
+            max_level=17,
+            exception=hedy.exceptions.UnquotedTextException,
+        )
+
+
+
     def test_print_comma_without_ending_double_quote_gives_UnquotedException(self):
         code = 'print "hallo, wereld'
 
@@ -235,6 +246,15 @@ class TestsLevel4(HedyTester):
             exception=hedy.exceptions.UnquotedTextException,
         )
 
+
+    def test_print_comma_without_starting_double_quote_gives_UnquotedException(self):
+        code = 'print hallo, wereld"'
+
+        self.multi_level_tester(
+            code=code,
+            max_level=17,
+            exception=hedy.exceptions.UnquotedTextException,
+        )
     def test_print_without_starting_quote_gives_UnquotedException(self):
 
         code = "print hallo wereld'"
