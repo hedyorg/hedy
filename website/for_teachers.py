@@ -610,7 +610,7 @@ class ForTeachersModule(WebsiteModule):
             for adventure in default_adventures:
                 db_adventures[str(lvl)].append({'name': adventure, 'from_teacher': False})
                 sorted_adventure = SortedAdventure(short_name=adventure,
-                                                   long_name=adventure_names[adventure],
+                                                   long_name=adventure_names.get(adventure, adventure),
                                                    is_command_adventure=adventure in hedy_content.KEYWORDS_ADVENTURES,
                                                    is_teacher_adventure=False)
                 adventures[lvl].append(sorted_adventure)
