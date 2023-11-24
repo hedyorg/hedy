@@ -44,20 +44,6 @@ describe("Second teachers: invitations", () => {
       .contains('pending invitation')
   })
 
-  it(`Accepts invitation sent to ${secondTeachers[0]}`, () => {
-    loginForTeacher(secondTeachers[0]);
-    goToProfilePage();
-    cy.get("#messages").should("exist")
-    cy.get("#messages #join").click()
-  })
-
-  it(`Teacher table now contains ${secondTeachers[0]}`, () => {
-    loginForTeacher();
-    navigateToClass(className);
-
-    cy.get("#second_teachers_container .username_cell").contains(secondTeachers[0]);
-  })
-
   it(`Deletes ${secondTeachers[1]}'s invitation`, () => {
     loginForTeacher();
     navigateToClass(className);
@@ -72,7 +58,22 @@ describe("Second teachers: invitations", () => {
 
     cy.get('#modal-confirm #modal-yes-button').click();
 
+    // This needs to come before we accept teacher2's invitation, otherwise
+    // after this there are no invites and so this table isn't rendered at all.
     cy.get("#invites-block table")
-      .should("not.contain", secondTeachers[0]);
+      .should("not.contain", secondTeachers[1]);
   });
+
+  it(`Accepts invitation sent to ${secondTeachers[0]}`, () => {
+    loginForTeacher(secondTeachers[0]);
+    goToProfilePage();
+    cy.get("#messages #join").click();
+  })
+
+  it(`After accepting, the teacher table now contains ${secondTeachers[0]}`, () => {
+    loginForTeacher();
+    navigateToClass(className);
+
+    cy.get("#second_teachers_container .username_cell").contains(secondTeachers[0]);
+  })
 })
