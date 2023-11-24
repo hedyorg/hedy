@@ -67,12 +67,15 @@ describe("Second teachers: invitations", () => {
     loginForTeacher(secondTeachers[0]);
     goToProfilePage();
     cy.get("#messages #join").click();
+
+    // Give the Ajax request that gets sent as a result of the click enough time to complete
+    cy.wait(500);
   })
 
   it(`After accepting, the teacher table now contains ${secondTeachers[0]}`, () => {
     loginForTeacher();
     navigateToClass(className);
 
-    cy.get("#second_teachers_container").contains(secondTeachers[0]);
+    cy.get("#second_teachers_container .username_cell").contains(secondTeachers[0]);
   })
 })
