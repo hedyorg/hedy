@@ -64,12 +64,12 @@ describe("Second teachers: invitations", () => {
   });
 
   it(`Accepts invitation sent to ${secondTeachers[0]}`, () => {
+    cy.intercept('class/join/**').as('join');
     loginForTeacher(secondTeachers[0]);
     goToProfilePage();
     cy.get("#messages #join").click();
-
     // Give the Ajax request that gets sent as a result of the click enough time to complete
-    cy.wait(500);
+    cy.wait('@join');
   })
 
   it(`After accepting, the teacher table now contains ${secondTeachers[0]}`, () => {
