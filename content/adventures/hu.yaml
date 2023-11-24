@@ -546,6 +546,7 @@ adventures:
                 story_text_3: |
                     You can also let the computer do random calculations on its own using {random}.
                 start_code: print 'Üdvözlünk a számológépnél!'
+                example_code_3: "numbers = 1, 2, 3, 4, 5, 6, 7, 8, 9, 10\nnumber_1 = _\nnumber_2 = _\ncorrect_answer = number_1 * number_2\ngiven_answer = 'What is ' number_1 ' times ' number_2 '?'\n{if} _\n{else} _\n"
             9:
                 story_text: A 6. szinten megtanultad a számológép készítését, a 7. szinten kibővítheted ezt a kódot, és egy kis matematikai játékot készíthetsz belőle. Mint ez...
                 example_code: |-
@@ -1392,7 +1393,7 @@ adventures:
 
                     print 'Thanks for ordering!'
                     ```
-                start_code: |4
+                start_code: |2
 
                     define food_order
                         toppings = ask 'pepperoni, tuna, veggie or cheese?'
@@ -1443,7 +1444,7 @@ adventures:
                         print 'there a ' sound
                         print 'everywhere a ' sound sound
                     ```
-                start_code: |4
+                start_code: |2
 
                     animals = ['pig', 'dog', 'cow']
                     sounds = ['oink', 'woof', 'moo']
@@ -1465,8 +1466,7 @@ adventures:
         description: Szint magyarázat
         levels:
             1:
-                story_text: "Az első szinten a `{print}`, `{ask}` és `{echo}` parancsokat használhatod.\nÍrd a kódodat a programozási ablakba, vagy nyomd meg a gombot a példa programok mellett, hogy bemásold!\nPróbáld ki a kódot a zöld 'Kód futtatása' gomb megnyomásával a programozási ablak alatt!\n\n\
-                    Szöveget írhatsz a képernyőre a `{print}` paranccsal.     \n"
+                story_text: "Az első szinten a `{print}`, `{ask}` és `{echo}` parancsokat használhatod.\nÍrd a kódodat a programozási ablakba, vagy nyomd meg a gombot a példa programok mellett, hogy bemásold!\nPróbáld ki a kódot a zöld 'Kód futtatása' gomb megnyomásával a programozási ablak alatt!\n\nSzöveget írhatsz a képernyőre a `{print}` paranccsal.     \n"
                 start_code: '{print} Helló világ!'
             2:
                 story_text: |
@@ -1618,8 +1618,7 @@ adventures:
                     {print} 'a tizedes törtek pontot használnak'
                     {print} 2.5 + 2.5
             13:
-                story_text: Most megtanuljuk az `{and}` és `{or}` kifejezések használatát! Ha két állítást szeretnél ellenőrizni, akkor nem kell kettő {if} parancsot használnod, használhatod az `{and}` és `{or}` parancsokat. Ha az `{and}` parancsot használod, akkor az `{and}` bal és jobb oldalán mindkét
-                    állításnak igaznak kell lennie. `{or}` esetén csak egy állításnak kell helyesnek lennie.
+                story_text: Most megtanuljuk az `{and}` és `{or}` kifejezések használatát! Ha két állítást szeretnél ellenőrizni, akkor nem kell kettő {if} parancsot használnod, használhatod az `{and}` és `{or}` parancsokat. Ha az `{and}` parancsot használod, akkor az `{and}` bal és jobb oldalán mindkét állításnak igaznak kell lennie. `{or}` esetén csak egy állításnak kell helyesnek lennie.
                 example_code: |
                     ```
                     név = {ask} "Hogy hívnak?"
@@ -3525,8 +3524,7 @@ adventures:
                     ```
                 start_code: '# place your code here'
             4:
-                story_text: "A 3. szinten idézőjeleket fogunk alkalmazni, amikor a `print` parancsot használjuk.\nTudod-e idézőjelek hozzáadásával működtetni a 2. szintű kódodat a 3. szinten?\n\nLégy óvatos! A 2. szinten aposztrófokat engedélyeztek a szövegben, de a 3. szinten Hedy összetéveszti őket\
-                    \ idézőjelekkel, és a kód nem fog működni!\nTehát ahelyett, hogy beírnád a `print ma pizzát szolgálunk fel` kifejezést, írd be a `print` \n ma pizzát szolgálunk fel` parancsot."
+                story_text: "A 3. szinten idézőjeleket fogunk alkalmazni, amikor a `print` parancsot használjuk.\nTudod-e idézőjelek hozzáadásával működtetni a 2. szintű kódodat a 3. szinten?\n\nLégy óvatos! A 2. szinten aposztrófokat engedélyeztek a szövegben, de a 3. szinten Hedy összetéveszti őket idézőjelekkel, és a kód nem fog működni!\nTehát ahelyett, hogy beírnád a `print ma pizzát szolgálunk fel` kifejezést, írd be a `print` \n ma pizzát szolgálunk fel` parancsot."
                 example_code: |-
                     ```
                     print 'Üdvözlünk a Hedy Étteremben!'
