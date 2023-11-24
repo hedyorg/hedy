@@ -542,8 +542,15 @@ adventures:
                     ```
                 story_text_3: |
                     You can also let the computer do random calculations on its own using {random}.
+                example_code_3: |
+                    numbers = 1, 2, 3, 4, 5, 6, 7, 8, 9, 10
+                    number_1 = _
+                    number_2 = _
+                    correct_answer = number_1 * number_2
+                    given_answer = 'What is ' number_1 ' times ' number_2 '?'
+                    {if} _
+                    {else} _
                 start_code: '{print} ''Welcome to this calculator!'''
-                example_code_3: "numbers = 1, 2, 3, 4, 5, 6, 7, 8, 9, 10\nnumber_1 = _\nnumber_2 = _\ncorrect_answer = number_1 * number_2\ngiven_answer = 'What is ' number_1 ' times ' number_2 '?'\n{if} _\n{else} _\n"
             9:
                 story_text: |
                     In previous levels you've learned how to make a calculator, in this level you can expand that code and make it into a little maths game. Like this...
@@ -1392,35 +1399,35 @@ adventures:
 
                     print 'Thanks for ordering!'
                     ```
-                start_code: |2
+                start_code: |4
 
-                    define food_order
-                        toppings = ask 'pepperoni, tuna, veggie or cheese?'
-                        size = ask 'big, medium or small?'
-                        number_of_pizza = ask 'How many these pizzas would you like?'
+                      define food_order
+                          toppings = ask 'pepperoni, tuna, veggie or cheese?'
+                          size = ask 'big, medium or small?'
+                          number_of_pizza = ask 'How many these pizzas would you like?'
 
-                        print 'YOU ORDERED'
-                        print number_of_pizzas ' size  ' topping ' pizza'
+                          print 'YOU ORDERED'
+                          print number_of_pizzas ' size  ' topping ' pizza'
 
-                    define drinks_order
-                        drink = ask 'water, coke, icetea, lemonade or coffee?'
-                        number_of_drinks = ask 'How many of these drinks would you like?'
+                      define drinks_order
+                          drink = ask 'water, coke, icetea, lemonade or coffee?'
+                          number_of_drinks = ask 'How many of these drinks would you like?'
 
-                        print 'YOU ORDERED'
-                        print number_of_drinks ' ' drink
+                          print 'YOU ORDERED'
+                          print number_of_drinks ' ' drink
 
-                    'Welcome to Hedy pizza'
-                    more_food = ask 'Would you like to order a pizza?'
-                    while more_food = 'yes'
-                        return food_order
-                        more_food = ask 'Would you like to order a pizza?'
-                    more_drinks = ask 'Would you like to order some drinks?'
-                    while more_drinks == 'yes'
-                        call drink_order
-                        more_drinks == ask 'Would you like to order more drinks?'
+                      'Welcome to Hedy pizza'
+                      more_food = ask 'Would you like to order a pizza?'
+                      while more_food = 'yes'
+                          return food_order
+                          more_food = ask 'Would you like to order a pizza?'
+                      more_drinks = ask 'Would you like to order some drinks?'
+                      while more_drinks == 'yes'
+                          call drink_order
+                          more_drinks == ask 'Would you like to order more drinks?'
 
 
-                    print 'Thanks for ordering!'
+                      print 'Thanks for ordering!'
             18:
                 story_text: |-
                     ### Exercise
@@ -1443,29 +1450,30 @@ adventures:
                         print 'there a ' sound
                         print 'everywhere a ' sound sound
                     ```
-                start_code: |2
+                start_code: |4
 
-                    animals = ['pig', 'dog', 'cow']
-                    sounds = ['oink', 'woof', 'moo']
-                    for i in range 1 to 3
-                        animal = animals[i]
-                        sound = sounds[i]
-                        print 'Old McDonald had a farm'
-                        print 'E I E I O!'
-                        print 'and on that farm he had a ' animal
-                        print 'E I E I O!'
-                        print 'with a ' sound sound ' here'
-                        print 'and a ' sound sound ' there'
-                        print 'here a ' sound
-                        print 'there a ' sound
-                        print 'everywhere a ' sound sound
+                      animals = ['pig', 'dog', 'cow']
+                      sounds = ['oink', 'woof', 'moo']
+                      for i in range 1 to 3
+                          animal = animals[i]
+                          sound = sounds[i]
+                          print 'Old McDonald had a farm'
+                          print 'E I E I O!'
+                          print 'and on that farm he had a ' animal
+                          print 'E I E I O!'
+                          print 'with a ' sound sound ' here'
+                          print 'and a ' sound sound ' there'
+                          print 'here a ' sound
+                          print 'there a ' sound
+                          print 'everywhere a ' sound sound
     default:
         name: הקדמה
         default_save_name: הקדמה
         description: הסבר שלב
         levels:
             1:
-                story_text: "בשלב 1 תוכלו להשתמש בפקודות `{print}`, `{ask}` ו-`{echo}`.\n הקלידו את הקוד שלכם בשדה התכנות. או לחצו על הכפתור הירוק בבלוק הקוד לדוגמה, והקוד יוקלד עבורכם!\nנסו את הקוד בעצמכם בעזרת הכפתור הירוק 'הרץ קוד' מתחת לשדה התכנות.\n\nתוכלו להדפיס טקסט למסך בעזרת הפקודה `{print}`.     \n"
+                story_text: "בשלב 1 תוכלו להשתמש בפקודות `{print}`, `{ask}` ו-`{echo}`.\n הקלידו את הקוד שלכם בשדה התכנות. או לחצו על הכפתור הירוק בבלוק הקוד לדוגמה, והקוד יוקלד עבורכם!\nנסו את הקוד בעצמכם בעזרת הכפתור הירוק 'הרץ קוד' מתחת לשדה התכנות.\n\nתוכלו להדפיס טקסט למסך בעזרת הפקודה `{print}`.\
+                    \     \n"
                 start_code: '{print} שלום עולם!'
             2:
                 story_text: |
