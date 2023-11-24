@@ -1,83 +1,78 @@
 import {loginForTeacher, logout} from "../../tools/login/login.js"
 import { goToProfilePage } from "../../tools/navigation/nav";
-import { createClass } from "../../tools/classes/class";
+import { createClass, navigateToClass } from "../../tools/classes/class";
 
 const secondTeachers = ["teacher2", "teacher3"]
-const invitesTable = body => body.find("#invites-block table")
 
+// NOTE: These test steps must execute in sequence. Each of them depends on the previous
+// test having executed, in the order they are listed in the file.
+// They cannot be made independent until https://github.com/hedyorg/hedy/issues/4804 is resolved
 describe("Second teachers: invitations", () => {
+  // Before all: create a single class
+  let className;
   before(() => {
     loginForTeacher();
-    createClass()
+    className = createClass()
   });
 
   it(`Invites ${secondTeachers.length} second teachers: by username`, () => {
     loginForTeacher();
-    cy.get(".view_class").first().click();
+    navigateToClass(className);
 
     for (const teacher of secondTeachers) {
-      
       cy.get("#add-second-teacher").click();
       cy.get("#modal-prompt-input").type(teacher);
       cy.get("#modal-ok-button").click();
-      
-      cy.get("body").then(invitesTable).then(table => {
-        if (table.length) {
-          table = cy.get("#invites-block table")
-          cy.get("#invites-block .username_cell")
-          .should('be.visible')
-          .and("include.text", teacher)
-        } else {
-          cy.log("Second teacher not invited.")
-        }
-      })
+    }
+
+    // Check that both invited teachers are in the table
+    for (const teacher of secondTeachers) {
+      cy.get("#invites-block table")
+        .contains(teacher);
     }
   })
 
   it(`Tries duplicating ${secondTeachers[0]}'s invitation`, () => {
     loginForTeacher();
-    cy.get(".view_class").first().click();
+    navigateToClass(className);
 
     cy.get("#add-second-teacher").click();
     cy.get("#modal-prompt-input").type(secondTeachers[0]);
     cy.get("#modal-ok-button").click();
 
     cy.get("#modal_alert_container")
-    .should('be.visible')
-    .and("contain", "pending invitation")
+      .contains('pending invitation')
   })
 
   it(`Accepts invitation sent to ${secondTeachers[0]}`, () => {
-    loginForTeacher(secondTeachers[0])
-    goToProfilePage()
+    loginForTeacher(secondTeachers[0]);
+    goToProfilePage();
     cy.get("#messages").should("exist")
     cy.get("#messages #join").click()
   })
 
-  it("Reads all second teachers", () => {
-    loginForTeacher()
-    cy.get(".view_class").first().click();        
-    cy.get("#second_teachers_container .username_cell").should("include.text", secondTeachers[0])
+  it(`Teacher table now contains ${secondTeachers[0]}`, () => {
+    loginForTeacher();
+    navigateToClass(className);
+
+    cy.get("#second_teachers_container .username_cell").contains(secondTeachers[0]);
   })
 
   it(`Deletes ${secondTeachers[1]}'s invitation`, () => {
-
     loginForTeacher();
-    cy.get(".view_class").first().click();
-    cy.get("body").then(invitesTable).then(table => {
-      // if not, then no invitation.
-      if (table.length) {
-        table = cy.get("#invites-block table")
-        console.log(table)
-        table.should("exist")
-        table.get(".remove_user_invitation").first().click()
-        cy.get("#modal-yes-button").click();
-      } else {
-        cy.log("Second teacher not deleted.")
-      }
-    })
-    cy.get('body').then(invitesTable).then(table => 
-      table.length && cy.get("#invites-block table").should("not.contain", secondTeachers[0]))
-  })
+    navigateToClass(className);
 
+    cy.get("#invites-block table")
+      .get('.username_cell')
+      .contains(secondTeachers[1])
+      .parent('tr')
+      .children('.remove_user_invitation')
+      .children('a')
+      .click();
+
+    cy.get('#modal-confirm #modal-yes-button').click();
+
+    cy.get("#invites-block table")
+      .should("not.contain", secondTeachers[0]);
+  });
 })
