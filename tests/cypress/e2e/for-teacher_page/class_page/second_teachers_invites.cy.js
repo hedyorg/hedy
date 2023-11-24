@@ -52,8 +52,7 @@ describe("Second teachers: invitations", () => {
       .get('.username_cell')
       .contains(secondTeachers[1])
       .parent('tr')
-      .children('.remove_user_invitation')
-      .children('a')
+      .find('.remove_user_invitation a')
       .click();
 
     cy.get('#modal-confirm #modal-yes-button').click();
@@ -74,6 +73,6 @@ describe("Second teachers: invitations", () => {
     loginForTeacher();
     navigateToClass(className);
 
-    cy.get("#second_teachers_container .username_cell").contains(secondTeachers[0]);
+    cy.get("#second_teachers_container").contains(secondTeachers[0]);
   })
 })
