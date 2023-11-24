@@ -568,8 +568,14 @@ adventures:
                     ```
                 story_text_3: |
                     **Extrauppgift** Du kan också låta datorn göra slumpmässiga summor på egen hand med random.
-
-                    Så här väljer du ett antal tabeller att öva på och av det får du alltid en annan summa:
+                example_code_3: |
+                    numbers = 1, 2, 3, 4, 5, 6, 7, 8, 9, 10
+                    number_1 = _
+                    number_2 = _
+                    correct_answer = number_1 * number_2
+                    given_answer = 'What is ' number_1 ' times ' number_2 '?'
+                    {if} _
+                    {else} _
                 start_code: '{print} ''Välkommen till den här kalkylatorn!'''
             9:
                 story_text: |
@@ -938,34 +944,34 @@ adventures:
                     **Warning! This code needs to be debugged!**
                     ```
                     {print} 'Vending machine'
-                        chosen_product = {ask} 'Please select a product'
+                    chosen_product = {ask} 'Please select a product'
                     1_dollar_products = coke orange juice water
                     2_dollar_products = chocolate, cookie, museli bar
-                    3_dollar_prodcuts = potato chips, beef jerky, banana bread
-                    {if} chosen {in} 1_dollar_products
+                    3dollar_prodcuts = potato chips, beef jerky, banana bread
+                    {if} chosen {is} {in} 1_dollar_products
                     price = 1
                     {if} chosen_product {is} 2_dollar_products
-                        price = 2
-                        {if} chosen_product {in} 3_dollar_products
-                            price = 3
+                    price = 2
+                    {else} chosen_product {in} 3_dollar_products
+                    price = 3
                     amount_of_products = '{ask} How many of ' chosen_product would you like to have?'
-                    total = price + amount_of_products
+                    total = price + amount_of_product
                     {print} 'That will be $' price 'please'
                     ```
                 start_code: |
                     {print} 'Vending machine'
-                        chosen_product = {ask} 'Please select a product'
+                    chosen_product = {ask} 'Please select a product'
                     1_dollar_products = coke orange juice water
                     2_dollar_products = chocolate, cookie, museli bar
-                    3_dollar_prodcuts = potato chips, beef jerky, banana bread
-                    {if} chosen {in} 1_dollar_products
+                    3dollar_prodcuts = potato chips, beef jerky, banana bread
+                    {if} chosen {is} {in} 1_dollar_products
                     price = 1
                     {if} chosen_product {is} 2_dollar_products
-                        price = 2
-                        {if} chosen_product {in} 3_dollar_products
-                            price = 3
+                    price = 2
+                    {else} chosen_product {in} 3_dollar_products
+                    price = 3
                     amount_of_products = '{ask} How many of ' chosen_product would you like to have?'
-                    total = price + amount_of_products
+                    total = price + amount_of_product
                     {print} 'That will be $' price 'please'
             7:
                 story_text: |-
