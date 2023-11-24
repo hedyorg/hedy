@@ -543,14 +543,13 @@ adventures:
                     {else} {print} 'Salah! Dulu ' _
                     ```
                 story_text_3: |
-                    You can also let the computer do random calculations on its own using {random}.
-                    This is how you choose a number of tables to practice, and from that you always get a different sum:
+                    **Tambahan** Anda juga dapat membiarkan komputer melakukan penjumlahan acak sendiri menggunakan `{random}`.
                 start_code: |
                     nomor_1 = {ask} 'Isi angka pertama:'
                     nomor_2 = {ask} 'Isi angka kedua:'
                     jawaban_benar = nomor_1 * nomor_2
                     {print} nomor_1 ' dikalikan ' nomor_2 ' adalah 'jawaban_benar
-                example_code_3: "numbers = 1, 2, 3, 4, 5, 6, 7, 8, 9, 10\nnumber_1 = _\nnumber_2 = _\ncorrect_answer = number_1 * number_2\ngiven_answer = 'What is ' number_1 ' times ' number_2 '?'\n{if} _\n{else} _\n"
+                example_code_3: "angka = 1, 2, 3, 4, 5, 6, 7, 8, 9, 10\nangka_1 = _\nangka_2 = _\njawaban_benar = angka_1 * angka_2\ndiberikan_jawaban = 'Berapakah 'angka_1' dikalikan 'angka_2'?'\n{if} _\n{else} _\n"
             9:
                 story_text: |
                     Di level 6 Anda membuat kalkulator, di level ini Anda dapat memperluas kode tersebut sehingga menanyakan banyak pertanyaan.
@@ -1031,123 +1030,123 @@ adventures:
                     {print} 'Tolong, itu 'harga dolar''
                     ```
                 start_code: |
-                    {print} 'Welcome to our sandwich shop'
-                    amount 'How many sandwiches would you like to buy?'
-                    {repeat} amount {times}
-                    {ask} {is} {ask} 'What kind or bread would you like your sandwich to be?'
-                    types_of_bread {is} white, wheat, rye, garlic, gluten free
-                    {if} chosen_bread in types_of_bread
-                    {print} 'Lovely!'
+                    {print} 'Selamat datang di toko sandwich kami'
+                    jumlah 'Berapa banyak sandwich yang ingin Anda beli?'
+                    {repeat} jumlah {times}
+                    {ask} {is} {ask} 'Anda ingin sandwich jenis apa atau roti apa?'
+                    jenis_roti {is} putih, gandum, gandum hitam, bawang putih, bebas gluten
+                    {if} roti_dipilih dalam jenis_roti_roti
+                    {print} 'Indah sekali!'
                     {else}
-                    'I'm sorry we don't sell that'
-                    topping {is} {ask} 'What kind of topping would you like?'
-                    sauce {is} {ask} 'What kind of sauce would you like?'
-                    {print} One chosen_bread with topping and sauce.
-                    price = amount * 6
-                    {print} 'That will be 'price dollar' please'
+                    'Maaf kami tidak menjualnya'
+                    topping {is} {ask} 'Topping apa yang kamu mau?'
+                    saus {is} {ask} 'Saus apa yang kamu mau?'
+                    {print} Satu roti_pilihan dengan topping dan saus.
+                    harga = jumlah * 6
+                    {print} 'Tolong, itu 'harga dolar''
             10:
                 story_text: |-
-                    ### Exercise
-                    Debug this code. Good luck!
+                    ### Latihan
+                    Perbaiki kode ini. Semoga beruntung!
                 example_code: |
-                    **Warning! This code needs to be debugged!**
+                    **Peringatan! Kode ini perlu diperbaiki!**
                     ```
-                    names = Muad Hasan Samira Noura
-                    activities = fly a kite, go swimming, go hiking, catch tan in the sun
-                    {for} name {is} names
-                    {print} At the beach name loves to activity at random
+                    nama = Muad Hasan Samira Noura
+                    kegiatan = menerbangkan layang-layang, berenang, mendaki gunung, berjemur di bawah sinar matahari
+                    {for} nama {is} nama
+                    {print} Di pantai namanya suka beraktivitas {at} {random}
                     ```
                 start_code: |
-                    names = Muad Hasan Samira Noura
-                    activities = fly a kite, go swimming, go hiking, catch tan in the sun
-                    {for} name {is} names
-                    {print} At the beach name loves to activity at random
+                    nama-nama = Muad Hasan Samira Noura
+                    kegiatan = menerbangkan layang-layang, berenang, mendaki gunung, berjemur di bawah sinar matahari
+                    {for} nama {is} nama-nama
+                    {print} Di pantai namanya suka beraktivitas sembarangan
             11:
                 story_text: |-
-                    ### Exercise
-                    Debug this calender program. The output of this program is supposed to look like a list of dates.
-                    For example:
+                    ### Latihan
+                    Perbaiki program kalender ini. Output dari program ini seharusnya terlihat seperti daftar tanggal.
+                    Misalnya:
 
                     ```
-                    Hedy calender
-                    Here are all the days of November
-                    November 1
-                    November 2
-                    November 3
+                    Kalender Hedy
+                    Ini semua hari-hari di bulan November
+                    1 November
+                    2 November
+                    3 November
                     ```
-                    And so on.
+                    Dan seterusnya.
 
-                    Mind that you have to test your code extra carefully for the month February, because the amount of days in this month changes in leap years.
+                    Ingatlah bahwa Anda harus menguji kode Anda dengan ekstra hati-hati untuk bulan Februari, karena jumlah hari di bulan ini berubah berdasarkan tahun kabisat.
                 example_code: |
-                    **Warning! This code needs to be debugged!**
+                    **Peringatan! Kode ini perlu diperbaiki!**
                     ```
-                    print 'Hedy calender'
-                    months_with_31 days = January, March, May, July, September, October, December
-                    months_with_30_days = April, June, August, November
-                    month = ask 'Which month would you like to see?'
-                    if month in months_with_31_days
-                        days = 31
-                        if month in months_with30_days
-                            days = 30
-                    if month = February
-                        leap_years = 2020, 2024, 2028, 2036, 2040, 2044, 2028
-                        year = ask 'What year is it?'
-                    if year in leap_years
-                        days = 29
-                    else
-                        days = 28
+                    print 'Kalender Hedy'
+                    bulan_dengan_31 hari = Januari, Maret, Mei, Juli, September, Oktober, Desember
+                    bulan_dengan_30_hari = April, Juni, Agustus, November
+                    bulan = tanya 'Bulan apa yang ingin Anda lihat?'
+                    jika bulan dalam bulan_dengan_31_hari
+                        hari = 31
+                        jika bulan dalam bulan_dengan30_hari
+                            hari = 30
+                    jika bulan = Februari
+                        tahun_kabisat = 2020, 2024, 2028, 2036, 2040, 2044, 2028
+                        tahun = tanya 'Tahun berapa sekarang?'
+                    jika tahun dalam tahun_kabisat
+                        hari = 29
+                    kalau tidak
+                        hari = 28
 
-                    print 'Here are all the days of ' moth
-                    for i in range 1 to days
-                        print month i
+                    print 'Inilah hari-hari' ngengat
+                    untuk i dalam rentang 1 hingga hari
+                        cetak bulan i
                     ```
                 start_code: |
-                    print 'Hedy calender'
-                    months_with_31 days = January, March, May, July, September, October, December
-                    months_with_30_days = April, June, August, November
-                    month = ask 'Which month would you like to see?'
-                    if month in months_with_31_days
-                        days = 31
-                        if month in months_with30_days
-                            days = 30
-                    if month = February
-                        leap_years = 2020, 2024, 2028, 2036, 2040, 2044, 2028
-                        year = ask 'What year is it?'
-                    if year in leap_years
-                        days = 29
-                    else
-                        days = 28
+                    print 'Kalender Hedy'
+                    bulan_dengan_31 hari = Januari, Maret, Mei, Juli, September, Oktober, Desember
+                    bulan_dengan_30_hari = April, Juni, Agustus, November
+                    bulan = tanya 'Bulan apa yang ingin Anda lihat?'
+                    jika bulan dalam bulan_dengan_31_hari
+                        hari = 31
+                        jika bulan dalam bulan_dengan30_hari
+                            hari = 30
+                    jika bulan = Februari
+                        tahun_kabisat = 2020, 2024, 2028, 2036, 2040, 2044, 2028
+                        tahun = tanya 'Tahun berapa sekarang?'
+                    jika tahun dalam tahun_kabisat
+                        hari = 29
+                    kalau tidak
+                        hari = 28
 
-                    print 'Here are all the days of ' moth
-                    for i in range 1 to days
-                        print month i
+                    print 'Inilah hari-hari' ngengat
+                    untuk i dalam rentang 1 hingga hari
+                        cetak bulan i
             12:
                 story_text: |-
-                    ### Exercise
-                    Debug this code. Good luck!
+                    ### Latihan
+                    Perbaiki kode ini. Semoga beruntung!
                 example_code: |
-                    **Warning! This code needs to be debugged!**
+                    **Peringatan! Kode ini perlu diperbaiki!**
                     ```
-                    define greet
-                    greetings = 'Hello', 'Hi there', 'Goodevening'
-                        print greetings at random
+                    mendefinisikan salam
+                    salam = 'Halo', 'Halo', 'Selamat malam'
+                        cetak salam secara acak
 
-                    define take_order
-                        food = ask 'What would you like to eat?'
-                        print 'One food'
-                        drink = 'What would you like to drink?'
-                        print 'One ' drink
-                        more = ask 'Would you like anything else?'
-                            if more is 'no'
-                        print 'Alright'
-                            else
-                            print 'And ' more
-                    print 'Thank you'
+                    tentukan mengambil_pesanan
+                        makanan = tanya 'Kamu mau makan apa?'
+                        print 'Satu makanan'
+                        minum = 'Kamu ingin minum apa?'
+                        print minuman 'Satu'
+                        more = tanya 'Apakah Anda ingin yang lain?'
+                            jika lebih berarti 'tidak'
+                        cetak 'Baiklah'
+                            kalau tidak
+                            print 'Dan' lagi
+                    print 'Terima kasih'
 
-                    print 'Welcome to our restaurant'
-                    people = ask 'How many people are in your party tonight?'
-                    for i in range 0 to people
-                        call greet_costumer
+                    ptint 'Selamat datang di restoran kami'
+                    people = tanya 'Berapa orang yang ada di pestamu malam ini?'
+                    untuk saya dalam rentang 0 hingga orang
+                        hubungi salam_pelanggan
                     ```
                 start_code: |
                     define greet
@@ -1417,33 +1416,33 @@ adventures:
                     ```
                 start_code: |2
 
-                                  define food_order
-                                      toppings = ask 'pepperoni, tuna, veggie or cheese?'
-                                      size = ask 'big, medium or small?'
-                                      number_of_pizza = ask 'How many these pizzas would you like?'
+                                    define food_order
+                                        toppings = ask 'pepperoni, tuna, veggie or cheese?'
+                                        size = ask 'big, medium or small?'
+                                        number_of_pizza = ask 'How many these pizzas would you like?'
 
-                                      print 'YOU ORDERED'
-                                      print number_of_pizzas ' size  ' topping ' pizza'
+                                        print 'YOU ORDERED'
+                                        print number_of_pizzas ' size  ' topping ' pizza'
 
-                                  define drinks_order
-                                      drink = ask 'water, coke, icetea, lemonade or coffee?'
-                                      number_of_drinks = ask 'How many of these drinks would you like?'
+                                    define drinks_order
+                                        drink = ask 'water, coke, icetea, lemonade or coffee?'
+                                        number_of_drinks = ask 'How many of these drinks would you like?'
 
-                                      print 'YOU ORDERED'
-                                      print number_of_drinks ' ' drink
+                                        print 'YOU ORDERED'
+                                        print number_of_drinks ' ' drink
 
-                                  'Welcome to Hedy pizza'
-                                  more_food = ask 'Would you like to order a pizza?'
-                                  while more_food = 'yes'
-                                      return food_order
-                                      more_food = ask 'Would you like to order a pizza?'
-                                  more_drinks = ask 'Would you like to order some drinks?'
-                                  while more_drinks == 'yes'
-                                      call drink_order
-                                      more_drinks == ask 'Would you like to order more drinks?'
+                                    'Welcome to Hedy pizza'
+                                    more_food = ask 'Would you like to order a pizza?'
+                                    while more_food = 'yes'
+                                        return food_order
+                                        more_food = ask 'Would you like to order a pizza?'
+                                    more_drinks = ask 'Would you like to order some drinks?'
+                                    while more_drinks == 'yes'
+                                        call drink_order
+                                        more_drinks == ask 'Would you like to order more drinks?'
 
 
-                                  print 'Thanks for ordering!'
+                                    print 'Thanks for ordering!'
             18:
                 story_text: |-
                     ### Exercise
@@ -1468,20 +1467,20 @@ adventures:
                     ```
                 start_code: |2
 
-                                  animals = ['pig', 'dog', 'cow']
-                                  sounds = ['oink', 'woof', 'moo']
-                                  for i in range 1 to 3
-                                      animal = animals[i]
-                                      sound = sounds[i]
-                                      print 'Old McDonald had a farm'
-                                      print 'E I E I O!'
-                                      print 'and on that farm he had a ' animal
-                                      print 'E I E I O!'
-                                      print 'with a ' sound sound ' here'
-                                      print 'and a ' sound sound ' there'
-                                      print 'here a ' sound
-                                      print 'there a ' sound
-                                      print 'everywhere a ' sound sound
+                                    animals = ['pig', 'dog', 'cow']
+                                    sounds = ['oink', 'woof', 'moo']
+                                    for i in range 1 to 3
+                                        animal = animals[i]
+                                        sound = sounds[i]
+                                        print 'Old McDonald had a farm'
+                                        print 'E I E I O!'
+                                        print 'and on that farm he had a ' animal
+                                        print 'E I E I O!'
+                                        print 'with a ' sound sound ' here'
+                                        print 'and a ' sound sound ' there'
+                                        print 'here a ' sound
+                                        print 'there a ' sound
+                                        print 'everywhere a ' sound sound
     default:
         name: Pengantar
         default_save_name: intro
