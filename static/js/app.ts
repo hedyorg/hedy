@@ -335,6 +335,7 @@ export interface InitializeViewProgramPageOptions {
   readonly page: 'view-program';
   readonly level: number;
   readonly lang: string;
+  readonly code: string;
 }
 
 export function initializeViewProgramPage(options: InitializeViewProgramPageOptions) {
@@ -344,13 +345,17 @@ export function initializeViewProgramPage(options: InitializeViewProgramPageOpti
   // We need to enable the main editor for the program page as well
   const dir = $("body").attr("dir");
   theGlobalEditor = editorCreator.initializeEditorWithGutter($('#editor'), EditorType.MAIN, dir);
+  initializeTranslation({
+    keywordLanguage: options.lang, 
+    level: options.level});
   attachMainEditorEvents(theGlobalEditor);
   error.setEditor(theGlobalEditor);
+  theGlobalEditor.contents = options.code;
   initializeDebugger({
     editor: theGlobalEditor,
-    level: theLevel,
+    level: options.level,
     language: theLanguage,
-    keywordLanguage: theKeywordLanguage,
+    keywordLanguage: options.lang,
   });
 }
 

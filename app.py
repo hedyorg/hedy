@@ -1522,7 +1522,8 @@ def view_program(user, id):
                            javascript_page_options=dict(
                                page='view-program',
                                lang=g.lang,
-                               level=int(result['level'])),
+                               level=int(result['level']),
+                               code=code),
                            **arguments_dict)
 
 
