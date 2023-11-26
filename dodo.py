@@ -274,7 +274,7 @@ def task_deploy():
     """
     return dict(
         actions=None,
-        task_dep=['frontend', 'backend' ]
+        task_dep=['frontend', 'backend']
     )
 
 
