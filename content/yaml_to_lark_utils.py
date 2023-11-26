@@ -33,10 +33,6 @@ def extract_Lark_grammar_from_yaml():
         with open(yaml_filesname_with_path, 'r', encoding='utf-8') as stream:
             command_combinations = yaml.safe_load(stream)
 
-        # We don't want to create the grammar if there are no translations
-        if en_command_combinations == command_combinations and yaml_lang != "en":
-            continue
-
         # Create an empty dictionary -> fill with english keywords and then overwrite all translated keywords
         translations = collections.defaultdict(lambda: 'Unknown Exception')
         translations.update(en_command_combinations)

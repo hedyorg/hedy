@@ -8,7 +8,7 @@
     "url": "git+https://github.com/hedyorg/hedy.git"
   },
   "scripts": {
-    "build": "build-tools/heroku/on-deploy.sh",
+    "build": "doit run deploy",
     "cypress-gui": "cd tests && cypress open",
     "cypress": "cd tests && cypress run --spec \"cypress/e2e/**/*\""
   },
