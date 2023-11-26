@@ -1079,7 +1079,7 @@ levels:
             -   option: '30'
                 feedback: This would be the right answer if there were no quotation marks.
             -   option: '13'
-                feedback: Try again..
+                feedback: Try again…
             -   option: 3*10
                 feedback: Correct! There are quotation marks, so Hedy will print it literally.
             -   option: Nothing, Hedy will give an error message.
@@ -1153,7 +1153,7 @@ levels:
                 price = 0
                 {if} food {is} hamburger price = price + 15
                 {if} food {is} fries price = price + 6
-                drinks is {ask} 'What would you like to drink?'
+                drinks = {ask} 'What would you like to drink?'
                 {if} drinks {is} coke price = price + 3
                 {if} drinks {is} water price = price + 1
                 {print} price ' dollars please'

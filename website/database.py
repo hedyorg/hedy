@@ -57,6 +57,13 @@ INVITATIONS = dynamo.Table(
 """
 TAGS = dynamo.Table(storage, "tags", "id", indexes=[dynamo.Index("name", sort_key="popularity")])
 
+# A survey
+# - id (str): the identifier of the survey + the response identifier ex. "class_teacher1" or "students_student1"
+# - responses (str []): the response per question
+# - skip (str): if the survey should never be shown or today date to be reminded later
+
+SURVEYS = dynamo.Table(storage, "surveys", "id")
+
 # Class customizations
 #
 # Various columns with different meanings:
@@ -662,6 +669,21 @@ class Database:
     def update_class_data(self, id, class_data):
         """Updates a class."""
         CLASSES.update({"id": id}, class_data)
+
+    def store_survey(self, survey):
+        SURVEYS.create(survey)
+
+    def get_survey(self, id):
+        return SURVEYS.get({"id": id})
+
+    def add_survey_responses(self, id, responses):
+        SURVEYS.update({"id": id}, {"responses":  responses})
+
+    def add_skip_survey(self, id):
+        SURVEYS.update({"id": id}, {"skip": True})
+
+    def add_remind_later_survey(self, id):
+        SURVEYS.update({"id": id}, {"skip": date.today().isoformat()})
 
     def add_student_to_class(self, class_id, student_id):
         """Adds a student to a class."""
