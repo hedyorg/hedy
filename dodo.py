@@ -267,7 +267,6 @@ def task_extract():
     )
 
 
-
 ######################################################################################
 # Below this line are helpers for the task definitions
 #
