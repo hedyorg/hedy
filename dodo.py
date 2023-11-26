@@ -244,7 +244,6 @@ def task_extract():
 # Some useful task groups
 #
 
-
 def task_backend():
     """Run all tasks necessary to prepare the backend."""
     return dict(
@@ -289,6 +288,7 @@ def task_devdb():
         file_dep=['data-for-testing.json'],
         targets=['dev_database.json'],
     )
+
 
 ######################################################################################
 # Below this line are helpers for the task definitions
