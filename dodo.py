@@ -229,33 +229,6 @@ def task_lezer_parsers():
     )
 
 
-def task_deploy():
-    """Commands to run at deploy time on Heroku.
-
-    This groups other commands.
-    """
-    return dict(
-        actions=None,
-        task_dep=[
-            'tailwind',
-            'typescript',
-            'compile_babel',
-        ]
-    )
-
-
-def task_resetdb():
-    """Reset the testing database."""
-    return dict(
-        title=lambda _: 'Reset testing database (restart app.py to take effect)',
-        actions=[
-            'cp data-for-testing.json dev_database.json',
-        ],
-        file_dep=['data-for-testing.json'],
-        targets=['dev_database.json'],
-    )
-
-
 def task_extract():
     """Extract new translateable keys from the code."""
     return dict(
@@ -267,6 +240,55 @@ def task_extract():
     )
 
 
+######################################################################################
+# Some useful task groups
+#
+
+
+def task_backend():
+    """Run all tasks necessary to prepare the backend."""
+    return dict(
+        actions=None,
+        task_dep=[
+            'compile_babel',
+            'generate_static_babel_content',
+            'lark',
+        ],
+    )
+
+
+def task_frontend():
+    """Run all tasks necessary to prepare the frontend."""
+    return dict(
+        actions=None,
+        task_dep=[
+            'tailwind',
+            'typescript',
+        ]
+    )
+
+
+def task_deploy():
+    """Commands to run at deploy time on Heroku.
+
+    This groups other commands.
+    """
+    return dict(
+        actions=None,
+        task_dep=['frontend', 'backend' ]
+    )
+
+
+def task_devdb():
+    """Reset the testing database."""
+    return dict(
+        title=lambda _: 'Reset testing database (restart app.py to take effect)',
+        actions=[
+            'cp data-for-testing.json dev_database.json',
+        ],
+        file_dep=['data-for-testing.json'],
+        targets=['dev_database.json'],
+    )
 
 ######################################################################################
 # Below this line are helpers for the task definitions
