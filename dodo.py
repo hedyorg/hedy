@@ -306,7 +306,7 @@ def babel_version_unchanged(task, values):
     try:
         import babel
         babel_version = babel.__version__
-    except:
+    except Exception:
         # This might fail, that's annoying but shouldn't stop the presses.
         print('oops')
         pass
