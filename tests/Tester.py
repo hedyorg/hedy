@@ -325,10 +325,8 @@ class HedyTester(unittest.TestCase):
 
     @staticmethod
     def turtle_command_transpiled(command, val, level):
-        command_text = 'turn'
         suffix = ''
         if command == 'forward':
-            command_text = 'forward'
             suffix = '\n      time.sleep(0.1)'
 
         type = 'int' if level < 12 else 'float'
@@ -338,7 +336,7 @@ class HedyTester(unittest.TestCase):
       try:
         __trtl = {type}(__trtl)
       except ValueError:
-        raise Exception(f'While running your program the command <span class="command-highlighted">{command_text}</span> received the value <span class="command-highlighted">{{__trtl}}</span> which is not allowed. Try changing the value to a number.')
+        raise Exception('catch_value_exception')
       t.{command}(min(600, __trtl) if __trtl > 0 else max(-600, __trtl)){suffix}""")
 
     @staticmethod
@@ -347,15 +345,22 @@ class HedyTester(unittest.TestCase):
         try:
           time.sleep(int({val}))
         except ValueError:
-          raise Exception(f'While running your program the command <span class="command-highlighted">sleep</span> received the value <span class="command-highlighted">{{{val}}}</span> which is not allowed. Try changing the value to a number.')""")
+          raise Exception('catch_value_exception')""")
 
     @staticmethod
-    def turtle_color_command_transpiled(val):
+    def turtle_color_command_transpiled(val, lang="en"):
+        color_dict = {hedy_translation.translate_keyword_from_en(x, lang): x for x in hedy.english_colors}
+        both_colors = hedy.command_make_color_local(lang)
+
         return textwrap.dedent(f"""\
-      __trtl = f'{val}'
-      if __trtl not in ['black', 'blue', 'brown', 'gray', 'green', 'orange', 'pink', 'purple', 'red', 'white', 'yellow']:
-        raise Exception(f'While running your program the command <span class="command-highlighted">color</span> received the value <span class="command-highlighted">{{__trtl}}</span> which is not allowed. Try using another color.')
-      t.pencolor(__trtl)""")
+        __trtl = f'{val}'
+        color_dict = {color_dict}
+        if __trtl not in {both_colors}:
+          raise Exception('catch_value_exception')
+        else:
+          if not __trtl in {hedy.english_colors}:
+            __trtl = color_dict[__trtl]
+        t.pencolor(__trtl)""")
 
     @staticmethod
     def input_transpiled(var_name, text):

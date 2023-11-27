@@ -152,8 +152,10 @@ PYTHON_KEYWORDS = [
     'is',
     'try',
     'int']
+
+LIBRARIES = ['time']
 # Python keywords and function names need hashing when used as var names
-reserved_words = set(PYTHON_BUILTIN_FUNCTIONS + PYTHON_KEYWORDS)
+reserved_words = set(PYTHON_BUILTIN_FUNCTIONS + PYTHON_KEYWORDS + LIBRARIES)
 
 # Let's retrieve all keywords dynamically from the cached KEYWORDS dictionary
 indent_keywords = {}
@@ -182,6 +184,22 @@ def _translate_index_error(code, list_name):
         except IndexError:
           raise Exception({repr(exception_text)})
         """)
+
+
+def translate_value_error(command, value, suggestion_type):
+    exception_text = gettext('catch_value_exception')
+    # Right now we only have two types of suggestion
+    # In the future we might change this if the number increases
+    if suggestion_type == 'number':
+        suggestion_text = gettext('suggestion_number')
+    elif suggestion_type == 'color':
+        suggestion_text = gettext('suggestion_color')
+
+    exception_text = exception_text.replace('{command}', style_command(command))
+    exception_text = exception_text.replace('{value}', style_command(value))
+    exception_text = exception_text.replace('{suggestion}', suggestion_text)
+
+    return repr(exception_text)
 
 
 PREPROCESS_RULES = {
@@ -292,7 +310,20 @@ commands_per_level = {
 }
 
 command_turn_literals = ['right', 'left']
-command_make_color = ['black', 'blue', 'brown', 'gray', 'green', 'orange', 'pink', 'purple', 'red', 'white', 'yellow']
+english_colors = ['black', 'blue', 'brown', 'gray', 'green', 'orange', 'pink', 'purple', 'red', 'white', 'yellow']
+
+
+def color_commands_local(language):
+    colors_local = [hedy_translation.translate_keyword_from_en(k, language) for k in english_colors]
+    return colors_local
+
+
+def command_make_color_local(language):
+    if language == "en":
+        return english_colors
+    else:
+        return english_colors + color_commands_local(language)
+
 
 # Commands and their types per level (only partially filled!)
 commands_and_types_per_level = {
@@ -310,12 +341,14 @@ commands_and_types_per_level = {
                    2: [HedyType.integer, HedyType.input],
                    12: [HedyType.integer, HedyType.input, HedyType.float]
                    },
-    Command.color: {1: command_make_color,
-                    2: [command_make_color, HedyType.string, HedyType.input]},
+    Command.color: {1: english_colors,
+                    2: [english_colors, HedyType.string, HedyType.input]},
     Command.forward: {1: [HedyType.integer, HedyType.input],
                       12: [HedyType.integer, HedyType.input, HedyType.float]
                       },
-    Command.sleep: {1: [HedyType.integer, HedyType.input]},
+    Command.sleep:    {1: [HedyType.integer, HedyType.input],
+                       12: [HedyType.integer, HedyType.input, HedyType.float]
+                       },
     Command.list_access: {1: [HedyType.list]},
     Command.in_list: {1: [HedyType.list]},
     Command.add_to_list: {1: [HedyType.list]},
@@ -1015,7 +1048,7 @@ class AllCommands(Transformer):
     def __init__(self, level):
         self.level = level
 
-    def translate_keyword(self, keyword):
+    def standardize_keyword(self, keyword):
         # some keywords have names that are not a valid name for a command
         # that's why we call them differently in the grammar
         # we have to translate them to the regular names here for further communciation
@@ -1047,7 +1080,7 @@ class AllCommands(Transformer):
 
     def __default__(self, args, children, meta):
         # if we are matching a rule that is a command
-        production_rule_name = self.translate_keyword(args)
+        production_rule_name = self.standardize_keyword(args)
         leaves = flatten_list_of_lists_to_list(children)
         # for the achievements we want to be able to also detect which operators were used by a kid
         operators = ['addition', 'subtraction', 'multiplication', 'division']
@@ -1117,9 +1150,11 @@ class IsValid(Filter):
         return False, InvalidInfo("print without quotes", arguments=[
                                   text], line=meta.line, column=meta.column), meta
 
-    def error_invalid(self, meta, args):
-        # TODO: this will not work for misspelling 'at', needs to be improved!
+    def error_list_access(self, meta, args):
+        error = InvalidInfo('misspelled "at" command', arguments=[str(args[1][1])], line=meta.line)
+        return False, error, meta
 
+    def error_invalid(self, meta, args):
         error = InvalidInfo('invalid command', command=args[0][1], arguments=[
                             [a[1] for a in args[1:]]], line=meta.line, column=meta.column)
         return False, error, meta
@@ -1242,8 +1277,9 @@ def hedy_transpiler(level):
 
 @v_args(meta=True)
 class ConvertToPython(Transformer):
-    def __init__(self, lookup, numerals_language="Latin", is_debug=False):
+    def __init__(self, lookup, language="en", numerals_language="Latin", is_debug=False):
         self.lookup = lookup
+        self.language = language
         self.numerals_language = numerals_language
         self.is_debug = is_debug
 
@@ -1335,12 +1371,19 @@ class ConvertToPython(Transformer):
             # all good? return for further processing
             return args
         else:
-            # TODO: check whether this is really never raised??
             # return first name with issue
-            first_unquoted_var = unquoted_args[0]
-            raise exceptions.UndefinedVarException(name=first_unquoted_var, line_number=var_access_linenumber)
+            for index, a in enumerate(unquoted_args):
+                current_arg = unquoted_in_lookup[index]
+                if current_arg is None:
+                    first_unquoted_var = a
+                    raise exceptions.UndefinedVarException(name=first_unquoted_var, line_number=var_access_linenumber)
 
     # static methods
+
+    @staticmethod
+    def check_if_error_skipped(tree):
+        return hasattr(IsValid, tree.data)
+
     @staticmethod
     def is_quoted(s):
         opening_quotes = ['‘', "'", '"', "“", "«"]
@@ -1382,8 +1425,9 @@ class ConvertToPython(Transformer):
 @source_map_transformer(source_map)
 class ConvertToPython_1(ConvertToPython):
 
-    def __init__(self, lookup, numerals_language, is_debug):
+    def __init__(self, lookup, language, numerals_language, is_debug):
         self.numerals_language = numerals_language
+        self.language = language
         self.lookup = lookup
         self.is_debug = is_debug
         __class__.level = 1
@@ -1439,7 +1483,7 @@ class ConvertToPython_1(ConvertToPython):
             return f"t.pencolor('black'){self.add_debug_breakpoint()}"  # no arguments defaults to black ink
 
         arg = args[0].data
-        if arg in command_make_color:
+        if arg in command_make_color_local(self.language):
             return f"t.pencolor('{arg}'){self.add_debug_breakpoint()}"
         else:
             # the TypeValidator should protect against reaching this line:
@@ -1466,31 +1510,43 @@ class ConvertToPython_1(ConvertToPython):
     def make_forward(self, parameter):
         return self.make_turtle_command(parameter, Command.forward, 'forward', True, 'int')
 
-    def make_color(self, parameter):
-        return self.make_turtle_color_command(parameter, Command.color, 'pencolor')
+    def make_color(self, parameter, language):
+        return self.make_turtle_color_command(parameter, Command.color, 'pencolor', language)
 
     def make_turtle_command(self, parameter, command, command_text, add_sleep, type):
         exception = ''
         if isinstance(parameter, str):
             exception = self.make_catch_exception([parameter])
         variable = self.get_fresh_var('__trtl')
+        exception_text = translate_value_error(command, variable, 'number')
         transpiled = exception + textwrap.dedent(f"""\
             {variable} = {parameter}
             try:
               {variable} = {type}({variable})
             except ValueError:
-              raise Exception(f'While running your program the command {style_command(command)} received the value {style_command('{' + variable + '}')} which is not allowed. Try changing the value to a number.')
+              raise Exception({exception_text})
             t.{command_text}(min(600, {variable}) if {variable} > 0 else max(-600, {variable})){self.add_debug_breakpoint()}""")
         if add_sleep and not self.is_debug:
             return sleep_after(transpiled, False, self.is_debug)
         return transpiled
 
-    def make_turtle_color_command(self, parameter, command, command_text):
+    def make_turtle_color_command(self, parameter, command, command_text, language):
+        both_colors = command_make_color_local(language)
         variable = self.get_fresh_var('__trtl')
+
+        # we translate the color value to English at runtime, since it might be decided at runtime
+        # coming from a random list or ask
+
+        color_dict = {hedy_translation.translate_keyword_from_en(x, language): x for x in english_colors}
+        exception_text = translate_value_error(command, parameter, 'color')
         return textwrap.dedent(f"""\
             {variable} = f'{parameter}'
-            if {variable} not in {command_make_color}:
-              raise Exception(f'While running your program the command {style_command(command)} received the value {style_command('{' + variable + '}')} which is not allowed. Try using another color.')
+            color_dict = {color_dict}
+            if {variable} not in {both_colors}:
+              raise Exception({exception_text})
+            else:
+              if not {variable} in {english_colors}:
+                {variable} = color_dict[{variable}]
             t.{command_text}({variable}){self.add_debug_breakpoint()}""")
 
     def make_catch_exception(self, args):
@@ -1540,7 +1596,7 @@ class ConvertToPython_2(ConvertToPython_1):
 
         arg = self.process_variable_for_fstring(arg)
 
-        return self.make_color(arg)
+        return self.make_color(arg, self.language)
 
     def turn(self, meta, args):
         if len(args) == 0:
@@ -1623,10 +1679,11 @@ class ConvertToPython_2(ConvertToPython_1):
             value = f'"{args[0]}"' if self.is_int(args[0]) else args[0]
             exceptions = self.make_catch_exception(args)
             try_prefix = "try:\n" + textwrap.indent(exceptions, "  ")
+            exception_text = translate_value_error(Command.sleep, value, 'number')
             code = try_prefix + textwrap.dedent(f"""\
                   time.sleep(int({value})){self.add_debug_breakpoint()}
                 except ValueError:
-                  raise Exception(f'While running your program the command {style_command(Command.sleep)} received the value {style_command('{' + value + '}')} which is not allowed. Try changing the value to a number.')""")
+                  raise Exception({exception_text})""")
             return code
 
 
@@ -1738,8 +1795,8 @@ except NameError:
 @hedy_transpiler(level=5)
 @source_map_transformer(source_map)
 class ConvertToPython_5(ConvertToPython_4):
-    def __init__(self, lookup, numerals_language, is_debug):
-        super().__init__(lookup, numerals_language, is_debug)
+    def __init__(self, lookup, language, numerals_language, is_debug):
+        super().__init__(lookup, language, numerals_language, is_debug)
 
     def ifs(self, meta, args):  # might be worth asking if we want a debug breakpoint here
         return f"""if {args[0]}:{self.add_debug_breakpoint()}
@@ -1830,6 +1887,38 @@ else:
 @source_map_transformer(source_map)
 class ConvertToPython_6(ConvertToPython_5):
 
+    def convert_tree_to_number(self, a):
+        # takes a calculation tree coming from the process_calculation() method, and turns it into numbers
+        # we do that late in the tree to deal with different numeral systems
+
+        if self.numerals_language == "Latin":
+            return "{" + a.children[0] + "}"
+        else:
+            converted = f'convert_numerals("{self.numerals_language}",{a.children[0]})'
+            return "{" + converted + "}"
+
+    def sleep(self, meta, args):
+        if not args:
+            return "time.sleep(1)"
+        else:
+            if type(args[0]) is Tree:
+                if self.check_if_error_skipped(args[0]):
+                    raise hedy.exceptions.InvalidErrorSkippedException
+                else:
+                    args[0] = args[0].children[0]
+                    value = f'{args[0]}'
+            else:
+                value = f'"{args[0]}"' if self.is_int(args[0]) else args[0]
+
+            exceptions = self.make_catch_exception(args)
+            try_prefix = "try:\n" + textwrap.indent(exceptions, "  ")
+            exception_text = translate_value_error(Command.sleep, value, 'number')
+            code = try_prefix + textwrap.dedent(f"""\
+                  time.sleep(int({value}))
+                except ValueError:
+                  raise Exception({exception_text})""")
+            return code
+
     def print_ask_args(self, meta, args):
         # we only check non-Tree (= non calculation) arguments
         self.check_var_usage(args, meta.line)
@@ -1838,11 +1927,7 @@ class ConvertToPython_6(ConvertToPython_5):
         args_new = []
         for a in args:
             if isinstance(a, Tree):
-                if self.numerals_language == "Latin":
-                    args_new.append("{" + a.children[0] + "}")
-                else:
-                    converted = f'convert_numerals("{self.numerals_language}",{a.children[0]})'
-                    args_new.append("{" + converted + "}")
+                args_new.append(self.convert_tree_to_number(a))
             else:
                 args_new.append(self.process_variable_for_fstring(a))
 
@@ -3220,6 +3305,8 @@ def is_program_valid(program_root, input_string, level, lang):
             unquotedtext = invalid_info.arguments[0]
             raise exceptions.UnquotedTextException(
                 level=level, unquotedtext=unquotedtext, line_number=invalid_info.line)
+        elif invalid_info.error_type == 'misspelled "at" command':
+            raise exceptions.MisspelledAtCommand(command='at', arg1=invalid_info.arguments[0], line_number=line)
         elif invalid_info.error_type == 'unsupported number':
             raise exceptions.UnsupportedFloatException(value=''.join(invalid_info.arguments))
         elif invalid_info.error_type == 'lonely text':
@@ -3331,7 +3418,7 @@ def transpile_inner(input_string, level, lang="en", populate_source_map=False, i
 
         # grab the right transpiler from the lookup
         convertToPython = TRANSPILER_LOOKUP[level]
-        python = convertToPython(lookup_table, numerals_language, is_debug).transform(abstract_syntax_tree)
+        python = convertToPython(lookup_table, lang, numerals_language, is_debug).transform(abstract_syntax_tree)
 
         commands = AllCommands(level).transform(program_root)
 

@@ -1,4 +1,4 @@
-command:+= assign_list | add | remove > error_invalid   
+command:+= assign_list | add | remove > error_invalid
 _print_argument: (_SPACE | (list_access textwithoutspaces?) | textwithoutspaces)*
 ask: var _IS _ASK ((_SPACE | text_ask)*)?
 
@@ -6,7 +6,7 @@ assign: var _IS (list_access | text) -> assign
 assign_list: var _IS text_list (_COMMA text_list)+
 
 list_access: var_access _AT (INT | random)
-turtle: _FORWARD ((NUMBER | list_access | textwithoutspaces))? -> forward | _TURN ((NUMBER | list_access | textwithoutspaces))? -> turn | _COLOR ((black | blue | brown | gray | green | orange | pink | purple | red | white | yellow | list_access | textwithoutspaces))? -> color
+turtle: _FORWARD ((NUMBER | list_access | textwithoutspaces))? -> forward | _TURN ((NUMBER | list_access | textwithoutspaces))? -> turn | _COLOR (_color_literal | list_access | textwithoutspaces)? -> color
 
 sleep: _SLEEP (INT | list_access | var_access)?
 // lists are introduced and list separators (comma and arabic comma) have to excluded from text.

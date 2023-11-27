@@ -192,7 +192,7 @@ levels:
                 feedback: That is not true
             -   option: With the `{print}` command you can make text appear
                 feedback: Good
-            -   option: With the {sleep} command, you can remove text from the screen.
+            -   option: With the `{sleep}` command, you can remove text from the screen.
                 feedback: That's not how `{sleep}` works.
             hint: '`{print}` still works the same way as in level 1'
             correct_answer: C
@@ -571,7 +571,7 @@ levels:
                 feedback: Great job!
             -   option: Nothing, this is a correct code!
                 feedback: Find the mistake!
-            hint: Look at line 3
+            hint: Look at line 4
             correct_answer: C
             question_score: '10'
         10:
@@ -590,7 +590,7 @@ levels:
                 feedback: Super!
             -   option: |-
                     ```
-                    {remove} walked yesterday {to} walkers
+                    {remove} walked_yesterday {to} walkers
                     ```
                 feedback: '`{remove} {from}` or `{add} {to}`, not `{remove} {to}`'
             -   option: |-
@@ -603,7 +603,7 @@ levels:
                     {add} walked_yesterday {to} walkers
                     ```
                 feedback: This increased the chance that the person who walked yesterday now has to do it again. That's mean.
-            hint: The person who walked the dog yesterday should be removed from the list.
+            hint: The person who walked the dogs yesterday should be removed from the list.
             correct_answer: A
             question_score: '10'
     4:
@@ -786,7 +786,7 @@ levels:
                     ```
                     {print} 'So you pick ' door door
                     ```
-                feedback: If the player chooses door 3, Hedy will say 'So you pick 3 3
+                feedback: If the player chooses door 3, Hedy will say 'So you pick 3 3'
             -   option: |-
                     ```
                     {print} 'So you pick door ' door
@@ -796,7 +796,7 @@ levels:
                     ```
                     {print} 'So you pick door door'
                     ```
-                feedback: Hedy will literally print 'So you pick door door
+                feedback: Hedy will literally print 'So you pick door door'
             hint: The second word door should be replaced with the number, the first should still be the word door...
             correct_answer: C
             question_score: '10'
@@ -881,7 +881,7 @@ levels:
             -   option: Correct!
                 feedback: This is printed when you type in the correct password
             -   option: SECRET
-                feedback: That's right!'
+                feedback: That's right!
             -   option: password
                 feedback: The password isn't password...
             -   option: ALARM INTRUDER
@@ -1079,7 +1079,7 @@ levels:
             -   option: '30'
                 feedback: This would be the right answer if there were no quotation marks.
             -   option: '13'
-                feedback: Try again..
+                feedback: Try again…
             -   option: 3*10
                 feedback: Correct! There are quotation marks, so Hedy will print it literally.
             -   option: Nothing, Hedy will give an error message.
@@ -1153,7 +1153,7 @@ levels:
                 price = 0
                 {if} food {is} hamburger price = price + 15
                 {if} food {is} fries price = price + 6
-                drinks is {ask} 'What would you like to drink?'
+                drinks = {ask} 'What would you like to drink?'
                 {if} drinks {is} coke price = price + 3
                 {if} drinks {is} water price = price + 1
                 {print} price ' dollars please'
