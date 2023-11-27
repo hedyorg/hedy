@@ -45,7 +45,8 @@ CLASSES = dynamo.Table(storage, "classes", "id", indexes=[
 # - tags_id (str): id of tags that describe this adventure.
 ADVENTURES = dynamo.Table(storage, "adventures", "id", indexes=[dynamo.Index("creator"), dynamo.Index("public")])
 INVITATIONS = dynamo.Table(
-    storage, "class_invitations", partition_key="username", indexes=[dynamo.Index("class_id")]
+    storage, "class_invitations", partition_key="username#class_id",
+    indexes=[dynamo.Index("username"), dynamo.Index("class_id")],
 )
 
 """
@@ -728,16 +729,19 @@ class Database:
     def resolve_class_link(self, link_id):
         return CLASSES.get({"link": link_id})
 
-    def get_username_invite(self, username):
-        return INVITATIONS.get({"username": username}) or None
+    def get_user_class_invite(self, username, class_id):
+        return INVITATIONS.get({"username#class_id": f"{username}#{class_id}"}) or None
 
-    def add_class_invite(self, data):
-        INVITATIONS.put(data)
+    def add_class_invite(self, key, data):
+        INVITATIONS.update({"username#class_id": key}, data)
 
-    def remove_class_invite(self, username):
-        INVITATIONS.delete({"username": username})
+    def remove_user_class_invite(self, username, class_id):
+        return INVITATIONS.delete({"username#class_id": f"{username}#{class_id}"})
 
-    def get_class_invites(self, class_id):
+    def get_user_invitations(self, username):
+        return INVITATIONS.get_many({"username": username}) or []
+
+    def get_class_invitations(self, class_id):
         return INVITATIONS.get_many({"class_id": class_id}) or []
 
     def all_classes(self):
