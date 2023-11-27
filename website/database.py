@@ -611,6 +611,15 @@ class Database:
     def read_tags(self, tags):
         return [self.read_tag(name) for name in tags]
 
+    def read_public_tags(self):
+        """Public tags are tagged within one or more public adventure or those that aren't in use."""
+        all_tags = TAGS.scan()
+        public_tags = []
+        for tag in all_tags:
+            if not tag["tagged_in"] or any([adv["public"] for adv in tag["tagged_in"]]):
+                public_tags.append(tag)
+        return public_tags
+
     def read_tags_by_username(self, username):
         tags = TAGS.get_many({"creator": username})
         return tags if tags else {}
@@ -644,6 +653,9 @@ class Database:
 
     def all_adventures(self):
         return ADVENTURES.scan()
+
+    def public_adventures(self):
+        return ADVENTURES.get_many({"public": True})
 
     def get_student_classes_ids(self, username):
         ids = USERS.get({"username": username}).get("classes")
