@@ -2,35 +2,23 @@
 <ul id="tags-list" class="flex flex-wrap items-center mb-4 list-none">
     {% for tag in tags %}
     <!-- TODO: allow teacher to edit tags; not urgent, but for a better ux! -->
-    <!-- _="on click toggle .hidden on #update-tag-input_{{loop.index}}
-        set the value of #update-tag-input_{{loop.index}} to '{{tag}}'
-        
-        toggle .hidden on me" -->
         <li 
             id="tag_{{loop.index}}" 
-            class='relative border-2 rounded-lg border-green-300 p-2 px-5 mx-2 mb-2 shadow'
-                        >
+            class='relative border-2 rounded-lg border-green-300 p-2 px-5 mx-2 mb-2 shadow'>
             {{tag}}
             {% if not public and username == creator %}
                 <span class='absolute top-0.5 right-0.5 text-gray-600 hover:text-red-400 fa-regular fa-circle-xmark'
                 {% if adventure_id %}
+                    hx-target="#tags_dropdown"
                     hx-delete="/tags/delete/{{tag}}/{{adventure_id}}" 
-                    hx-swap="none"
-                    _="on htmx:afterRequest if detail.xhr.status == 200 then remove #tag_{{loop.index}}
-                        if JSON.parse(detail.xhr.response).tags.length == 0 toggle .hidden on #no-tags"
+                    hx-swap="beforeend"
+                    _="on htmx:afterRequest
+                        if detail.xhr.status == 200 then remove #tag_{{loop.index}} end"
                 {% else %}
                     _='on click remove #tag_{{loop.index}}'
                 {% endif %}
                 ></span>
             {% endif %}
         </li>
-        <!-- <input type="text"
-            autofocus
-            id="update-tag-input_{{loop.index}}"
-            class='relative border-2 rounded-lg border-green-400 p-2 px-5 mx-2 mb-2 hidden'
-            _="on blur toggle .hidden on me then toggle .hidden on #tag_{{loop.index}}"
-            value="{{tag}}"
-            > -->
     {% endfor %}
-    <li id="no-tags" class='border-2 rounded-lg border-green-400 p-2 px-5 mx-2 mb-2 {% if tags|length > 0 %}hidden{% endif %}'>{{_('no_tags')}}</li>
 </ul>
