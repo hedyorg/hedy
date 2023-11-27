@@ -1,0 +1,42 @@
+{% block regular_content %}
+<div id="survey" class="flex absolute inset-0 items-center justify-center">
+    <div class="bg-blue-500 border border-black rounded-lg px-8 py-4 text-center">
+        <div id="description" class="text-white mb-8 text-l">{{ _(description) }}</div>
+        <form id="survey-form">
+        {% for question in questions %}
+        <div class="mb-4">
+                    <div id="question" class="text-white mb-4 text-xl">{{ _(question) }}</div>
+                    <div class="flex flex-row justify-center space-x-1">
+                        <input autofocus="autofocus" id="input" type="text" class="flex items-center border border-green-400 rounded p-2 px-3 w-4/5 mx-auto" name="{{ question }}">
+                    </div>
+                </div>
+            {% endfor %}
+            <div class="mt-4 flex flex-row gap-2 justify-center">
+                <button type="submit" class="green-btn block mx-auto w-40 pb-4 pt-4"
+                hx-trigger="click"
+                hx-post="/surveys/submit-survey/{{ survey_id }}"
+                hx-include="[name='question']"
+                hx-swap="innerHTML"
+                _="on click toggle .hidden on #survey">
+                {{_('survey_submit')}}</button>
+                <button type="remind_later" class="red-btn block mx-auto w-40 pb-4 pt-4"
+                hx-trigger="click"
+                hx-post="/surveys/remind-later-survey/{{ survey_id }}"
+                hx-swap="innerHTML"
+                _="on click toggle .hidden on #survey">
+                {{_(survey_later)}}</button>
+            </div>
+            <div class="flex-row justify-center">
+            <button type="skip" class="text-white m-1 w-40 pb-4 pt-4"
+                hx-trigger="click"
+                hx-post="/surveys/skip-survey/{{ survey_id }}"
+                hx-swap="innerHTML"
+                _="on click toggle .hidden on #survey">
+                <u>{{_('survey_skip')}}</u></button>
+            </div>
+        </form>
+        </div>
+        </div>
+    </div>
+{% endblock %}
+
