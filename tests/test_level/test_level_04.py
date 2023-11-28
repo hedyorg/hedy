@@ -207,7 +207,63 @@ class TestsLevel4(HedyTester):
             max_level=5,
         )
 
-    def test_print_without_quotes_gives_error_from_transpiler(self):
+    def test_print_without_ending_quote_gives_UnquotedException(self):
+
+        code = "print 'hallo wereld"
+
+        self.multi_level_tester(
+            code=code,
+            max_level=17,
+            exception=hedy.exceptions.UnquotedTextException,
+        )
+
+    def test_print_comma_without_ending_quote_gives_UnquotedException(self):
+        code = "print 'hallo, wereld"
+
+        self.multi_level_tester(
+            code=code,
+            max_level=17,
+            exception=hedy.exceptions.UnquotedTextException,
+        )
+
+    def test_print_comma_starting_ending_quote_gives_UnquotedException(self):
+        code = "print hallo, wereld'"
+
+        self.multi_level_tester(
+            code=code,
+            max_level=17,
+            exception=hedy.exceptions.UnquotedTextException,
+        )
+
+    def test_print_comma_without_ending_double_quote_gives_UnquotedException(self):
+        code = 'print "hallo, wereld'
+
+        self.multi_level_tester(
+            code=code,
+            max_level=17,
+            exception=hedy.exceptions.UnquotedTextException,
+        )
+
+    def test_print_comma_without_starting_double_quote_gives_UnquotedException(self):
+        code = 'print hallo, wereld"'
+
+        self.multi_level_tester(
+            code=code,
+            max_level=17,
+            exception=hedy.exceptions.UnquotedTextException,
+        )
+
+    def test_print_without_starting_quote_gives_UnquotedException(self):
+
+        code = "print hallo wereld'"
+
+        self.multi_level_tester(
+            code=code,
+            max_level=17,
+            exception=hedy.exceptions.UnquotedTextException,
+        )
+
+    def test_print_without_all_quotes_gives_UnquotedException(self):
         # in other cases, there might be two different problems
         # is this unquoted? or did we forget an initialization of a variable?
 
@@ -827,12 +883,12 @@ class TestsLevel4(HedyTester):
         )
 
     def test_repair_incorrect_print_argument(self):
-        code = "print ,'Hello'"
+        code = "print ,Hello"
 
         self.multi_level_tester(
             code=code,
             exception=hedy.exceptions.ParseException,
-            extra_check_function=lambda c: c.exception.fixed_code == "print 'Hello'"
+            extra_check_function=lambda c: c.exception.fixed_code == "print ,Hello"
         )
 
     def test_lonely_text(self):
