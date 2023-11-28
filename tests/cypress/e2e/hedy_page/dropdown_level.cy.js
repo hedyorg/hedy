@@ -12,7 +12,9 @@ describe('Go to level dropdown', () => {
   })
 
   it('Is not able to go to disabled level 5', () => {
-    loginForTeacher('teacher1')
+    loginForTeacher();
+    cy.wait(500);
+
     cy.getBySel('view_class_link').first().click();
     cy.get('body').then($b => $b.find("#survey")).then($s => $s.length && $s.hide())
     cy.getBySel('customize_class_button').click();
