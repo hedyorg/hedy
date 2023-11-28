@@ -25,14 +25,14 @@
                   add .rotate-180 to arrow
               end">
             {% for dropdown_level in range(1, max_level) %}
-              <button id="level_button" class="flex-row flex justify-between items-center gap-2 px-2 py-2 border-b border-dashed border-blue-500
+              <button id="level_button_{{ dropdown_level }}" class="flex justify-between items-center gap-2 px-2 py-2 border-b border-dashed border-blue-500
               {% if dropdown_level == level %}bg-white{% elif dropdown_level not in customizations['available_levels'] %}bg-gray-400 tooltip{% else %}hover:bg-blue-100 bg-blue-200c{% endif %}"
               {% if dropdown_level == level or dropdown_level not in customizations['available_levels']%}disabled{% endif %}
               style="width: 100%;"
               _="on click hedyApp.goToLevel({{dropdown_level}})">
               <div class='{% if dropdown_level in customizations['available_levels'] %}hidden{% endif %}
               text-center opacity-0 hover:opacity-100 duration-300 absolute inset-0 z-10 items-top'>
-                <span class='tooltiptext text-xs font-medium absolute rounded shadow-lg' style="margin-left: -50px; bottom: 130%; color:black; background:lightsteelblue;">
+                <span class='tooltiptext text-xs font-medium absolute rounded shadow-lg' style="left: 80%; transform: translateX(-15%); bottom: 130%; color:black; background:lightsteelblue; padding: 4px; text-align: center;">
                   {{ _('tooltip_level_locked') }}
                 </span>
               </div>
