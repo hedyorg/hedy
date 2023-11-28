@@ -1,170 +1,171 @@
 <div id="main_content">
-    
-    <!-- Title  -->
-    <div class="flex flex-row justify-between items-center">
-        <div class="dropdown relative">
-            <button class="white-btn px-4 rounded inline-flex items-center gap-2 text-xl" id="dropdown_level_button"
-                onclick="$('#level_dropdown').slideToggle('medium');">
-                <span>{{ _('level_title') }} 1 <i id="level-arrow" class="fa-solid fa-angle-down"></i>
-              </button>
-              <div class="dropdown-menu dropdown-blue z-20 min-w-full" id="level_dropdown"
-                style="display: none; padding: 0px !important; margin: 0px; margin-top: 0.25rem;"
-                _="on mutation of @style
+
+  <!-- Title  -->
+  <div class="flex flex-row justify-between items-center">
+    <div class="dropdown relative">
+      <button class="white-btn px-4 rounded inline-flex items-center gap-2 text-xl" id="dropdown_level_button"
+        onclick="$('#level_dropdown').slideToggle('medium');">
+        <span>{{ _('level_title') }} 1 <i id="level-arrow" class="fa-solid fa-angle-down"></i>
+      </button>
+      <div class="dropdown-menu dropdown-blue z-20 min-w-full" id="level_dropdown"
+        style="display: none; padding: 0px !important; margin: 0px; margin-top: 0.25rem;" _="on mutation of @style
                     set arrow to #level-arrow
                     if *display == 'none'
                         remove .rotate-180 from arrow
                     else if not arrow.classList.contains('rotate-180')
                         add .rotate-180 to arrow
                     end">
-                  {% for dropdown_level in range(1, 19) %}
-                    <button id="level_button_{{dropdown_level}}" class="flex-row flex justify-between items-center gap-2 px-2 py-2 border-b border-dashed border-blue-500
-                        {% if dropdown_level == level %}bg-white{% else %}hover:bg-blue-100 bg-blue-200{% endif %}"
-                        {% if dropdown_level == level %}disabled{% endif %}
-                        style="width: 100%;"
-                        hx-get="/live_stats/class/{{class_info.id}}/level/{{dropdown_level}}"
-                        hx-target="#main_content"
-                        hx-swap="outerHTML">
-                            <div class="flex-grow h-min min-w-80" tabindex=0>
-                                {{ _('level_title') }} {{ dropdown_level }}
-                            </div>
-                    </button>
-                  {% endfor %}
-              </div>
-            </div>
-        <div class="flex font-bold font-slab text-sky-600 text-2xl">
-            <h1>{{_('live_dashboard')}} - {{ _('level_title') }} {{ 1 }}</h1>
-        </div>
-        <!--  Back to class button  -->
-        <button class="green-btn float-right" id="to_class_button" onclick="window.location.href='/for-teachers/class/{{class_info.id}}'" target="_blank">
-          {{_('back_to_class')}}
+        {% for dropdown_level in range(1, 19) %}
+        <button id="level_button_{{dropdown_level}}" class="flex-row flex justify-between items-center gap-2 px-2 py-2 border-b border-dashed border-blue-500
+                        {% if dropdown_level == level %}bg-white{% else %}hover:bg-blue-100 bg-blue-200{% endif %}" {%
+          if dropdown_level==level %}disabled{% endif %} style="width: 100%;"
+          hx-get="/live_stats/class/{{class_info.id}}/level/{{dropdown_level}}" hx-target="#main_content"
+          hx-swap="outerHTML">
+          <div class="flex-grow h-min min-w-80" tabindex=0>
+            {{ _('level_title') }} {{ dropdown_level }}
+          </div>
         </button>
-    </div>
-    
-    <!-- Card 1 Class Overview -->
-    <div class="justify-center mt-20">
-        <h2 class="text-center">{{_('class_overview')}}</h2>
-        <!-- Hide / Show -->
-        <div class="float-right relative m-2">
-            <a class="green-btn cursor-pointer text-sm text-center pt-0.5 pb-0 px-0.5 mr-2 mt-2"
-                _="on click toggle *display of #card1_class_overview 
-                    then toggle between .fa-chevron-up and .fa-chevron-down on #class_overview_icon 
-                    then toggle between .h-full and .h-14 on #class_overview_container">
-                <i id="class_overview_icon" class="fa-solid fa-chevron-up w-4"></i>
-            </a> 
-        </div>
-
-        <div class="border border-gray-400 py-2 px-4 rounded-lg overflow-x-auto" id="level">
-  <table class="table-auto text-center w-full" id="grid-table">
-    <thead>
-      <tr>
-        <th class="border-r border-b border-gray-400 p-2" >Students</th>
-        {% for adventure in class_adventures[level] %}                   
-          <th class="border-b border-gray-400 p-2 {%if not loop.last %}border-r{% endif %}">{{ adventure }}</th>
         {% endfor %}
-      </tr>
-    </thead>
-    <tbody>
-      {% for row in matrix_values %} 
-        <tr>
-          {% set student_index = loop.index0 %}
-          {% set is_last_student = loop.last %}
-          {% set student = grid['students'][student_index] %}
-          <td class="border-gray-400 p-2 border-r {% if not is_last_student %}border-b{% endif %}">{{ student }}</td>
-          {% for checkbox in row %}
-            {% set adventure_index = loop.index0 %}            
-            {# set adventure_id = adventure_names[class_adventures[level][adventure_index]] #}
-            {% set student_adventure_id = student ~ '-' ~ adventure_id ~ '-' ~ level %}
-            {% if checkbox is not none %}
-              <td class="p-2 border-gray-400 {% if not loop.last %}border-r{% endif %} {% if not is_last_student %}border-b{% endif %}">
-                <div class="relative">
-                  <input type="checkbox" 
-                         name="gridCheckBox" 
-                         class="student_adventure_checkbox align-middle text-green-700 text-center text-sm cursor-pointer {% if checkbox == 1%}fa-solid fa-check{% endif %}" 
-                         {% if checkbox == 1%}checked{% endif %} 
-                         hx-post="/grid_overview/class/{{ class_info.id }}/level?level={{ level }}&student_index={{ student_index }}&adventure_index={{ adventure_index }}" 
-                         hx-target="#level" 
-                         hx-swap="outerHTML" 
-                         hx-trigger="change">           
-                         <a class="no-underline cursor-pointer absolute right-0 text-gray-800 hover:bg-gray-400/50 hover:rounded-full px-2 mx-0" href='/hedy/{{student_adventures[student_adventure_id]}}/view'><i class="fa-regular fa-eye"></i></a>
-                </div>
-              </td>
-            {% else %}
-              <td class="border-gray-400 p-2 {% if not loop.last %}border-r{% endif %} {% if not is_last_student %}border-b{% endif %}">
-                <input type="checkbox" 
-                       class="student_adventure_checkbox align-middle fa-solid fa-xmark text-center text-sm text-orange-600" 
-                       name="gridCheckBox" 
-                       disabled="true">
-              </td>
-            {% endif %}  
+      </div>
+    </div>
+    <div class="flex font-bold font-slab text-sky-600 text-2xl">
+      <h1>{{_('live_dashboard')}} - {{ _('level_title') }} {{ 1 }}</h1>
+    </div>
+    <!--  Back to class button  -->
+    <button class="green-btn float-right" id="to_class_button"
+      onclick="window.location.href='/for-teachers/class/{{class_info.id}}'" target="_blank">
+      {{_('back_to_class')}}
+    </button>
+  </div>
+
+  <!-- Card 1 Class Overview -->
+  <div class="justify-center mt-20">
+    <h2 class="text-center">{{_('class_overview')}}</h2>
+    <!-- Hide / Show -->
+    <div class="float-right relative m-2">
+      <a class="green-btn cursor-pointer text-sm text-center pt-0.5 pb-0 px-0.5 mr-2 mt-2" _="on click toggle *display of #level 
+                    then toggle between .fa-chevron-up and .fa-chevron-down on #class_overview_icon 
+                    then toggle between .h-full and .h-14 on #level">
+        <i id="class_overview_icon" class="fa-solid fa-chevron-up w-4"></i>
+      </a>
+    </div>
+
+    <div class="border border-gray-400 py-2 px-4 rounded-lg overflow-x-auto" id="level">
+      <table class="table-auto text-center w-full pt-5" id="table">
+        <thead>
+          <tr>
+            <th class="border-r border-b border-gray-400 p-2">Students</th>
+            {% for adventure in adventure_table['adventures'] %}
+              <th class="border-b border-gray-400 p-2 {%if not loop.last %}border-r{% endif %}">{{ adventure['name'] }}</th>
+            {% endfor %}
+          </tr>
+        </thead>
+        <tbody>
+          {% for student in adventure_table['students'] %}
+          <tr>
+            {% set student_index = loop.index0 %}
+            {% set is_last_student = loop.last %}           
+            <td class="border-gray-400 p-2 border-r {% if not is_last_student %}border-b{% endif %}">{{ student }}</td>
+            {% for adventure in adventure_table['adventures'] %}
+            {% set student_adventure_id = student ~ '-' ~ adventure.id ~ '-' ~ adventure_table.level %}
+            {% if student_adventure_id in adventure_table.student_adventures %}
+                <td
+                  class="p-2 border-gray-400 {% if not loop.last %}border-r{% endif %} {% if not is_last_student %}border-b{% endif %}">
+                  <div class="relative">
+                    <input type="checkbox" name="gridCheckBox"
+                      class="student_adventure_checkbox align-middle text-green-700 text-center text-sm cursor-pointer {% if checkbox == 1%}fa-solid fa-check{% endif %}"
+                      {% if checkbox==1%}checked{% endif %}
+                      hx-post="/grid_overview/class/{{ class_info.id }}/level?level={{ level }}&student_index={{ student_index }}&adventure_index={{ adventure_index }}"
+                      hx-target="#level" hx-swap="outerHTML" hx-trigger="change">
+                    <a class="no-underline cursor-pointer absolute right-0 text-gray-800 hover:bg-gray-400/50 hover:rounded-full px-2 mx-0"
+                      href='/hedy/{{adventure_table.student_adventures[student_adventure_id]}}/view'><i class="fa-regular fa-eye"></i></a>
+                  </div>
+                </td>
+                {% else %}
+                <td
+                  class="border-gray-400 p-2 {% if not loop.last %}border-r{% endif %} {% if not is_last_student %}border-b{% endif %}">
+                  <input type="checkbox"
+                    class="student_adventure_checkbox align-middle fa-solid fa-xmark text-center text-sm text-orange-600"
+                    name="gridCheckBox" disabled="true">
+                </td>
+              {% endif %}
+            {% endfor %}
+          </tr>
           {% endfor %}
-        </tr>
-      {% endfor %}
-    </tbody>
-  </table>
-</div>
+        </tbody>
+      </table>
+    </div>
+
     <!-- Space for Student Details card, otherwise empty -->
     {% if dashboard_options.student %}
-        {%  include 'class-live-student.html' %}
+    {% include 'class-live-student.html' %}
     {% endif %}
 
     <div class="justify-center w-full max-w-8xl">
-        <div class="flex gap-4 my-8" id="columns_grid">
-            <!-- Card 2 Student List    -->
-            <div id="col1" class="basis-2/3 w-1/3">
-            </div>
+      <div class="flex gap-4 my-8" id="columns_grid">
+        <!-- Card 2 Student List    -->
+        <div id="col1" class="basis-2/3 w-1/3">
+        </div>
 
-            <!-- Card 3 Common Errors -->
-            <div id="col2" class="basis-1/3">
-                <div class="flex justify-center text-blue-500 space-x-3">
-                    <h2>
-                        {{_('common_errors')}}
-                    </h2>
-                    <div class="relative">
-                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
-                            <path stroke-linecap="round" stroke-linejoin="round" d="M9.879 7.519c1.171-1.025 3.071-1.025 4.242 0 1.172 1.025 1.172 2.687 0 3.712-.203.179-.43.326-.67.442-.745.361-1.45.999-1.45 1.827v.75M21 12a9 9 0 11-18 0 9 9 0 0118 0zm-9 5.25h.008v.008H12v-.008z" />
-                        </svg>
-                        <div class='text-center tooltip opacity-0 hover:opacity-100 duration-300 absolute inset-0 z-10 flex justify-center items-top -ml-32 mt-0.5'>
-                            <span class='tooltiptext text-xs font-medium absolute rounded shadow-lg p-1 w-72' style="color:black"> The common errors are gathered by an AI system. It detects and clusters code submissions that fail to run.
-                                    The system is not foolproof! It is possible that students make errors that are not detected.
-                            </span>
-                        </div>
-                    </div>
-                </div>
-                <div class="rounded-lg bg-blue-200 shadow-lg p-0 h-80 overflow-auto" id="card3_misconceptions">
-                    <div class="float-right relative m-2">
-                        <a class="green-btn cursor-pointer text-sm text-center pt-0.5 pb-0 px-0.5 mr-2 mt-2"
-                            _="on click toggle *display of #common_errors_list 
+        <!-- Card 3 Common Errors -->
+        <div id="col2" class="basis-1/3">
+          <div class="flex justify-center text-blue-500 space-x-3">
+            <h2>
+              {{_('common_errors')}}
+            </h2>
+            <div class="relative">
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                stroke="currentColor" class="w-6 h-6">
+                <path stroke-linecap="round" stroke-linejoin="round"
+                  d="M9.879 7.519c1.171-1.025 3.071-1.025 4.242 0 1.172 1.025 1.172 2.687 0 3.712-.203.179-.43.326-.67.442-.745.361-1.45.999-1.45 1.827v.75M21 12a9 9 0 11-18 0 9 9 0 0118 0zm-9 5.25h.008v.008H12v-.008z" />
+              </svg>
+              <div
+                class='text-center tooltip opacity-0 hover:opacity-100 duration-300 absolute inset-0 z-10 flex justify-center items-top -ml-32 mt-0.5'>
+                <span class='tooltiptext text-xs font-medium absolute rounded shadow-lg p-1 w-72' style="color:black">
+                  The common errors are gathered by an AI system. It detects and clusters code submissions that fail to
+                  run.
+                  The system is not foolproof! It is possible that students make errors that are not detected.
+                </span>
+              </div>
+            </div>
+          </div>
+          <div class="rounded-lg bg-blue-200 shadow-lg p-0 h-80 overflow-auto" id="card3_misconceptions">
+            <div class="float-right relative m-2">
+              <a class="green-btn cursor-pointer text-sm text-center pt-0.5 pb-0 px-0.5 mr-2 mt-2" _="on click toggle *display of #common_errors_list 
                                 then toggle between .fa-chevron-up and .fa-chevron-down on #common_errors_icon
                                 then toggle between .h-80 and .h-14 on #card3_misconceptions">
-                            <i id="common_errors_icon" class="fa-solid fa-chevron-up w-4"></i>
-                        </a> 
-                    </div>
-                    <div class="w-full text-left p-6 mt-10" id="common_errors_list">
-                        <ul class="max-w-md space-y-3 list-none list-inside">
-                            {% for error_entry in class_info.common_errors %}
-                                {% if error_entry.active == 1 %}
-                                    <li class="relative w-full border-solid rounded p-2 shadow bg-blue-100" id="{{ ident }}">
-                                        <div class="flex justify-between items-center">
-                                            <a class="no-underline" hx-target="#modal-target" hx-get='{{ "/live_stats/class/"~class_info.id~"/pop_up?" ~ dashboard_options_args ~ "&error-id=" ~ error_entry.id }}'>
-                                                <h3 class="cursor-pointer ml-2 hover:underline underline-offset-2">
-                                                {{_(error_entry.label)}} ({{error_entry.students|length}})
-                                                </h3>
-                                            </a>
-                                            <button class="btn-shape tiny-btn bg-green-500  p-1 border-0 text-white self-end" id="resolve-student" 
-                                                onclick='hedyApp.resolve_student("{{ class_info.id }}", "{{ error_entry.id }}", {{('resolve_student_prompt')|default(None)|tojson}})'>
-                                                Resolve <i class="fa-regular fa-circle-check"></i>
-                                            </button>
-                                        </div>
-                                    </li>
-                                {% endif %}
-                            {% endfor %}
-                        </ul>
-                  </div>
-                </div>
+                <i id="common_errors_icon" class="fa-solid fa-chevron-up w-4"></i>
+              </a>
             </div>
+            <div class="w-full text-left p-6 mt-10" id="common_errors_list">
+              <ul class="max-w-md space-y-3 list-none list-inside">
+                {% for error_entry in class_info.common_errors %}
+                {% if error_entry.active == 1 %}
+                <li class="relative w-full border-solid rounded p-2 shadow bg-blue-100" id="{{ ident }}">
+                  <div class="flex justify-between items-center">
+                    <a class="no-underline" hx-target="#modal-target"
+                      hx-get='{{ "/live_stats/class/"~class_info.id~"/pop_up?" ~ dashboard_options_args ~ "&error-id=" ~ error_entry.id }}'>
+                      <h3 class="cursor-pointer ml-2 hover:underline underline-offset-2">
+                        {{_(error_entry.label)}} ({{error_entry.students|length}})
+                      </h3>
+                    </a>
+                    <button class="btn-shape tiny-btn bg-green-500  p-1 border-0 text-white self-end"
+                      id="resolve-student"
+                      onclick='hedyApp.resolve_student("{{ class_info.id }}", "{{ error_entry.id }}", {{('
+                      resolve_student_prompt')|default(None)|tojson}})'>
+                      Resolve <i class="fa-regular fa-circle-check"></i>
+                    </button>
+                  </div>
+                </li>
+                {% endif %}
+                {% endfor %}
+              </ul>
+            </div>
+          </div>
         </div>
+      </div>
     </div>
 
     {% block popup_content %}
     {% endblock %}
-</div>
+  </div>

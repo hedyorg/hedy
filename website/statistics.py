@@ -266,17 +266,20 @@ class LiveStatisticsModule(WebsiteModule):
         self.MAX_COMMON_ERRORS = 10
         self.MAX_FEED_SIZE = 4
 
-    def get_matrix_values(self, students, class_adventures_formatted, ticked_adventures, level):
+    def get_table_of_ticked_adventures(self, students, class_adventures_formatted, ticked_adventures, level):
+        """
+        Returns a matrix of values consisting of None or 1, meaning weat
+        """
         rendered_adventures = class_adventures_formatted.get(level)
-        matrix = [[None for _ in range(len(class_adventures_formatted[level]))] for _ in range(len(students))]
+        ticked_values = [[None for _ in range(len(class_adventures_formatted[level]))] for _ in range(len(students))]
         for student_index in range(len(students)):
             student_list = ticked_adventures.get(students[student_index])
             if student_list and rendered_adventures:
                 for program in student_list:
                     if program['level'] == level:
                         index = rendered_adventures.index(program['name'])
-                        matrix[student_index][index] = 1 if program['ticked'] else 0
-        return matrix
+                        ticked_values[student_index][index] = 1 if program['ticked'] else 0
+        return ticked_values
 
     def get_grid_info(self, user, class_id, level):
         class_ = self.db.get_class(class_id)
@@ -289,7 +292,7 @@ class LiveStatisticsModule(WebsiteModule):
         teacher_adventures = self.db.get_teacher_adventures(user["username"])
 
         class_info = get_customizations(self.db, class_id)
-        class_adventures = class_info.get('sorted_adventures')
+        class_adventures = class_info.get('sorted_adventures')[str(level)]
 
         adventure_names = {}
         for adv_key, adv_dic in adventures.items():
@@ -299,14 +302,14 @@ class LiveStatisticsModule(WebsiteModule):
         for adventure in teacher_adventures:
             adventure_names[adventure['id']] = adventure['name']
 
-        class_adventures_formatted = {}
-        for key, value in class_adventures.items():
-            adventure_list = []
-            for adventure in value:
-                # if the adventure is not in adventure names it means that the data in the customizations is bad
-                if not adventure['name'] == 'next' and adventure['name'] in adventure_names:
-                    adventure_list.append(adventure_names[adventure['name']])
-            class_adventures_formatted[key] = adventure_list
+        class_adventures_formatted = []
+        for adventure in class_adventures:
+            # if the adventure is not in adventure names it means that the data in the customizations is bad
+            if not adventure['name'] == 'next' and adventure['name'] in adventure_names:
+                class_adventures_formatted.append({
+                    'name': adventure_names[adventure['name']],
+                    'id': adventure['name']
+                })
 
         ticked_adventures = {}
         student_adventures = {}
@@ -321,8 +324,8 @@ class LiveStatisticsModule(WebsiteModule):
                     if 'adventure_name' not in program:
                         continue
                     name = adventure_names.get(program['adventure_name'], program['adventure_name'])
-                    customized_level = class_adventures_formatted.get(str(program['level']))
-                    if name in customized_level:
+                    adventure = {'name': name, 'id': program['adventure_name']}
+                    if adventure in class_adventures_formatted:
                         student_adventure_id = f"{student}-{program['adventure_name']}-{level}"
                         current_adventure = self.db.student_adventure_by_id(student_adventure_id)
                         if not current_adventure:
@@ -336,7 +339,7 @@ class LiveStatisticsModule(WebsiteModule):
                         student_adventures[student_adventure_id] = program['id']
                         ticked_adventures[student].append(current_program)
 
-        return students, class_, class_adventures_formatted, ticked_adventures, adventure_names, student_adventures
+        return students, class_adventures_formatted, ticked_adventures, student_adventures
 
     def __selected_levels(self, class_id):
         class_customization = get_customizations(self.db, class_id)
@@ -418,44 +421,34 @@ class LiveStatisticsModule(WebsiteModule):
         student = _check_student_arg()
         dashboard_options_args = _build_url_args(student=student)
 
-        students, common_errors, selected_levels, quiz_info, attempted_adventures, \
-            adventures = self.get_class_live_stats(user, class_)
+        common_errors, quiz_info = self.get_class_live_stats(user, class_)
 
-        students_grid, class_, class_adventures_formatted, ticked_adventures, \
-            adventure_names, student_adventures = self.get_grid_info(
-                user, class_id, 1)
-        matrix_values = self.get_matrix_values(students_grid, class_adventures_formatted, ticked_adventures, '1')
-        adventure_names = {value: key for key, value in adventure_names.items()}
-        print(class_adventures_formatted)
-        print(adventure_names)
+        students, class_adventures_formatted, ticked_adventures, \
+            student_adventures = self.get_grid_info(user, class_id, '1')
+
         return render_template(
             "class-live-stats.html",
             class_info={
                 "id": class_id,
-                "students": students,
                 "common_errors": common_errors['errors']
             },
             class_overview={
-                "selected_levels": selected_levels,
                 "quiz_info": quiz_info
             },
             dashboard_options={
                 "student": student
             },
-            grid={
-                'students': students_grid,
+            adventure_table={
+                'students': students,
+                'adventures': class_adventures_formatted,
+                'ticked_adventures': ticked_adventures,
+                'student_adventures': student_adventures,
+                'level': '1'
             },
-            attempted_adventures=attempted_adventures,
             dashboard_options_args=dashboard_options_args,
-            adventures=adventures,
             max_level=HEDY_MAX_LEVEL,
             current_page="my-profile",
             page_title=gettext("title_class live_statistics"),
-            class_adventures=class_adventures_formatted,
-            ticked_adventures=ticked_adventures,
-            matrix_values=matrix_values,
-            adventure_names=adventure_names,
-            student_adventures=student_adventures,
         )
 
     def get_class_live_stats(self, user, class_):
@@ -467,9 +460,6 @@ class LiveStatisticsModule(WebsiteModule):
 
         # identifies common errors in the class
         common_errors = self.common_exception_detection(class_['id'], user)
-
-        students = self.__all_students(class_)
-        adventures = self.__get_adventures_for_overview(user, class_['id'])
 
         quiz_stats = []
         for student_username in class_.get("students", []):
@@ -486,17 +476,7 @@ class LiveStatisticsModule(WebsiteModule):
             )
         quiz_info = _get_quiz_info(quiz_stats)
 
-        attempted_adventures = {}
-        for level in range(1, HEDY_MAX_LEVEL+1):
-            programs_for_student = {}
-            for _student in class_.get("students", []):
-                adventures_for_student = [x['adventure_name'] for x in self.db.level_programs_for_user(_student, level)]
-                if adventures_for_student:
-                    programs_for_student[_student] = adventures_for_student
-            if programs_for_student != []:
-                attempted_adventures[level] = programs_for_student
-
-        return students, common_errors, selected_levels, quiz_info, attempted_adventures, adventures
+        return common_errors, quiz_info
 
     @route("/live_stats/class/<class_id>/select_level", methods=["GET"])
     @requires_login
