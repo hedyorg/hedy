@@ -23,12 +23,13 @@ describe('Go to level dropdown', () => {
     goToTeachersPage();
 
     cy.get(".view_class").contains(new RegExp(`^${classname}$`)).click();
-    cy.get('body').then($b => $b.find("#survey")).then($s => $s.length && $s.hide())
+    cy.get('body').then($b => $b.find("#survey")).then($s => $s.length && $s.hide());
     cy.getBySel('customize_class_button').click();
     cy.get('#enable_level_5').parent('.switch').click();
     cy.getBySel('save_customizations').click();
 
-    loginForStudent(students[0])
+    loginForStudent(students[0]);
+    cy.wait(500);
     goToHedyLevel2Page();
 
     cy.get('#dropdown_level_button').click();
