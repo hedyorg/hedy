@@ -1,11 +1,16 @@
-
+# Chinese (Simplified) translations for PROJECT.
+# Copyright (C) 2023 ORGANIZATION
+# This file is distributed under the same license as the PROJECT project.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2023.
+#
+#, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: PACKAGE VERSION\n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-11-21 19:33+0100\n"
-"PO-Revision-Date: 2023-11-14 20:05+0000\n"
-"Last-Translator: Prefill add-on <noreply-addon-prefill@weblate.org>\n"
+"Project-Id-Version: PROJECT VERSION\n"
+"Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
+"POT-Creation-Date: 2023-11-23 12:10-0400\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: zh_Hans\n"
 "Language-Team: zh_Hans <LL@li.org>\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
@@ -15,9 +20,7 @@ msgstr ""
 "Generated-By: Babel 2.11.0\n"
 
 msgid "Access Before Assign"
-msgstr ""
-"你试图在第 {access_line_number} 行使用变量 {name} ，但在第 {definition_line_number} "
-"行才设置了它。使用的变量要事先设置。"
+msgstr "你试图在第 {access_line_number} 行使用变量 {name} ，但在第 {definition_line_number} 行才设置了它。使用的变量要事先设置。"
 
 msgid "Cyclic Var Definition"
 msgstr "如果你想在是（is）命令的右侧使用变量 {variable}，你需要先给这个变量赋值。"
@@ -41,9 +44,7 @@ msgid "Invalid Argument Type"
 msgstr "你不能在{command}中使用{invalid_argument}，因为它是个{invalid_type}。试着把{invalid_argument}改成{allowed_types}。"
 
 msgid "Invalid At Command"
-msgstr ""
-"从 16 级开始，不能使用 {at} 命令。 您可以使用方括号来使用列表中的元素，例如 "
-"`friends[i]`、`lucky_numbers[{random}]`。"
+msgstr "从 16 级开始，不能使用 {at} 命令。 您可以使用方括号来使用列表中的元素，例如 `friends[i]`、`lucky_numbers[{random}]`。"
 
 msgid "Invalid Space"
 msgstr "呀！你在第{line_number}开头加了一个空格。空格会让电脑产生困惑，你不能能删除这个空格？"
@@ -66,8 +67,9 @@ msgstr "看上去你忘记在第{line_number}行写命令了。"
 msgid "Missing Inner Command"
 msgstr "看上去你忘了在第{line_number}行的{command}这一句里加上一个命令。"
 
+#, fuzzy
 msgid "Misspelled At Command"
-msgstr ""
+msgstr "It looks like you might have misspelled the {command} command, instead you wrote {invalid_argument} in line {line_number}."
 
 msgid "No Indentation"
 msgstr "第{line_number}行的空格太少了。你空了{leading_spaces}格，这样不够。每个新的代码块都要比前一行多{indent_size}个空格。"
@@ -112,10 +114,7 @@ msgid "accounts_created"
 msgstr "账户已成功创建。"
 
 msgid "accounts_intro"
-msgstr ""
-"在此页面上，您可以同时为多个学生创建帐户。也可以直接将它们添加到您的某个班级中。通过按页面右下角的绿色 "
-"+，您可以添加额外的行。您可以通过按相应的红叉来删除一行。确保按“创建帐户”时没有行为空。请记住，每个用户名和邮件地址必须是唯一的，密码必须<b>至少</b>为"
-" 6 个字符。"
+msgstr "在此页面上，您可以同时为多个学生创建帐户。也可以直接将它们添加到您的某个班级中。通过按页面右下角的绿色 +，您可以添加额外的行。您可以通过按相应的红叉来删除一行。确保按“创建帐户”时没有行为空。请记住，每个用户名和邮件地址必须是唯一的，密码必须<b>至少</b>为 6 个字符。"
 
 msgid "achievement_earned"
 msgstr "你已经赢得了一项成就!"
@@ -259,8 +258,9 @@ msgstr "无法解析程序"
 msgid "catch_index_exception"
 msgstr "你尝试访问列表 {list_name}，但它要么是空的，要么索引不存在。"
 
+#, fuzzy
 msgid "catch_value_exception"
-msgstr ""
+msgstr "While running your program the command {command} received the value {value} which is not allowed. {suggestion}."
 
 msgid "certificate"
 msgstr "竣工证书"
@@ -298,6 +298,30 @@ msgstr "请输入新班级的名称"
 
 msgid "class_overview"
 msgstr "课程概述"
+
+#, fuzzy
+msgid "class_survey_description"
+msgstr "We would like to get a better overview of our Hedy users. By providing these answers, you would help improve Hedy. Thank you!"
+
+#, fuzzy
+msgid "class_survey_later"
+msgstr "Remind me tomorrow"
+
+#, fuzzy
+msgid "class_survey_question1"
+msgstr "What is the age range in your class?"
+
+#, fuzzy
+msgid "class_survey_question2"
+msgstr "What is the spoken language in your class?"
+
+#, fuzzy
+msgid "class_survey_question3"
+msgstr "What is the gender balance in your class?"
+
+#, fuzzy
+msgid "class_survey_question4"
+msgstr "What distinguishes your students from others?"
 
 #, fuzzy
 msgid "close"
@@ -486,9 +510,7 @@ msgid "echo_and_ask_mismatch_exception"
 msgstr "回声和询问不匹配"
 
 msgid "echo_out"
-msgstr ""
-"从第二级起，你不再需要{echo}。你可以用{ask}和{print}来复述答案。比如：名字 {is} {ask} 你叫什么？{print} "
-"你好，名字"
+msgstr "从第二级起，你不再需要{echo}。你可以用{ask}和{print}来复述答案。比如：名字 {is} {ask} 你叫什么？{print} 你好，名字"
 
 msgid "edit_code_button"
 msgstr "编辑代码"
@@ -730,9 +752,7 @@ msgstr "无效命令"
 
 #, fuzzy
 msgid "invalid_keyword_language_comment"
-msgstr ""
-"# The provided keyword language is invalid, keyword language is set to "
-"English"
+msgstr "# The provided keyword language is invalid, keyword language is set to English"
 
 #, fuzzy
 msgid "invalid_language_comment"
@@ -907,27 +927,18 @@ msgstr ""
 "<strong>教师账户可以做什么？ \n"
 "现在为你解锁许多额外的选项。 \n"
 "\n"
-"1.额外的解释可在<a href=\"https://hedy.org/for-teachers/manual\">teacher's "
-"manual</a>中找到。 \n"
-"2.您可以通过您的教师帐户创建您的班级。您的学生将能加入您的班级，您也可以看到他们的进度。班级是通过<a "
-"href=\"https://hedycode.com/for-teachers\">teachers page</a>创建和管理的。 \n"
+"1.额外的解释可在<a href=\"https://hedy.org/for-teachers/manual\">teacher's manual</a>中找到。 \n"
+"2.您可以通过您的教师帐户创建您的班级。您的学生将能加入您的班级，您也可以看到他们的进度。班级是通过<a href=\"https://hedycode.com/for-teachers\">teachers page</a>创建和管理的。 \n"
 "3.您可以完全自定义您的班级，例如，您可以打开和关闭不同级别，启用或禁用冒险活动，以及编写您自己的冒险活动！ \n"
 "\n"
 "<strong>加入我们的在线社区！</strong> \n"
-"欢迎所有Hedy老师、程序员和其他爱好者加入我们的社区<a "
-"href=\"https://discord.gg/8yY7dEme9r\">Discord "
-"server</a>。这是谈论Hedy的理想场所：我们有一些频道，你可以展示你很酷的项目和课程，有一些频道可以报告错误，还有一些频道可以与其他教师和Hedy团队聊天。"
-" \n"
+"欢迎所有Hedy老师、程序员和其他爱好者加入我们的社区<a href=\"https://discord.gg/8yY7dEme9r\">Discord server</a>。这是谈论Hedy的理想场所：我们有一些频道，你可以展示你很酷的项目和课程，有一些频道可以报告错误，还有一些频道可以与其他教师和Hedy团队聊天。 \n"
 "\n"
 "<strong>如何求助</strong>？ \n"
-"如果有什么不清楚的地方，你可以在Discord上告诉我们，或者在这里给我们发邮件<a href=\"mailto: "
-"hello@hedy.org\">send us an email</a>。 \n"
+"如果有什么不清楚的地方，你可以在Discord上告诉我们，或者在这里给我们发邮件<a href=\"mailto: hello@hedy.org\">send us an email</a>。 \n"
 "\n"
 "<strong>如何报告错误</strong>\n"
-"在 Discord 中，我们有一个报告错误的频道，叫做 "
-"#bugs。这是让我们了解您所遇到的问题的最佳场所。如果您知道如何使用GitHub，您可以在那里创建一个<a "
-"href=\"https://github.com/hedyorg/hedy/issues/new?assignees=&labels=&template=bug_report.md&title=%5BBUG%5D\">issue</a>。"
-"\n"
+"在 Discord 中，我们有一个报告错误的频道，叫做 #bugs。这是让我们了解您所遇到的问题的最佳场所。如果您知道如何使用GitHub，您可以在那里创建一个<a href=\"https://github.com/hedyorg/hedy/issues/new?assignees=&labels=&template=bug_report.md&title=%5BBUG%5D\">issue</a>。\n"
 
 msgid "mail_welcome_teacher_subject"
 msgstr "您的 Hedy 教师帐户已准备就绪"
@@ -1188,9 +1199,7 @@ msgstr "等待邀请"
 
 #, fuzzy
 msgid "people_with_a_link"
-msgstr ""
-"Other people with a link can see this program. It also can be found on "
-"the \"Explore\" page."
+msgstr "Other people with a link can see this program. It also can be found on the \"Explore\" page."
 
 #, fuzzy
 msgid "percentage"
@@ -1520,9 +1529,7 @@ msgstr "Social media"
 
 #, fuzzy
 msgid "something_went_wrong_keyword_parsing"
-msgstr ""
-"There is a mistake in your adventure, are all keywords correctly "
-"surrounded with { }?"
+msgstr "There is a mistake in your adventure, are all keywords correctly surrounded with { }?"
 
 msgid "space"
 msgstr "空格"
@@ -1608,14 +1615,24 @@ msgstr "订阅"
 msgid "subscribe_newsletter"
 msgstr "订阅通讯"
 
+#, fuzzy
 msgid "suggestion_color"
-msgstr ""
+msgstr "Try using another color"
 
+#, fuzzy
 msgid "suggestion_number"
-msgstr ""
+msgstr "Try changing the value to a number"
 
 msgid "surname"
 msgstr "名"
+
+#, fuzzy
+msgid "survey_skip"
+msgstr "Don't show this again"
+
+#, fuzzy
+msgid "survey_submit"
+msgstr "Submit"
 
 msgid "tag_in_adventure"
 msgstr ""
@@ -1654,9 +1671,7 @@ msgstr "教师教程图标"
 
 #, fuzzy
 msgid "teacher_welcome"
-msgstr ""
-"Welcome to Hedy! Your are now the proud owner of a teachers account which"
-" allows you to create classes and invite students."
+msgstr "Welcome to Hedy! Your are now the proud owner of a teachers account which allows you to create classes and invite students."
 
 #, fuzzy
 msgid "teachers"
@@ -1961,40 +1976,16 @@ msgstr "你的程序"
 #~ msgstr "Available adventures level"
 
 #~ msgid "customize_class_exp_1"
-#~ msgstr ""
-#~ "Hi! On this page you can customize"
-#~ " your class. By selecting levels and"
-#~ " adventures you can choose what your"
-#~ " student can see. You can also "
-#~ "add your own created adventures to "
-#~ "levels. All levels and default "
-#~ "adventures will be selected by default."
-#~ " <b>Notice:</b> Not every adventure is "
-#~ "available for every level! Settings up"
-#~ " your customizations goes as follows:"
+#~ msgstr "Hi! On this page you can customize your class. By selecting levels and adventures you can choose what your student can see. You can also add your own created adventures to levels. All levels and default adventures will be selected by default. <b>Notice:</b> Not every adventure is available for every level! Settings up your customizations goes as follows:"
 
 #~ msgid "customize_class_exp_2"
-#~ msgstr ""
-#~ "You can always change these settings "
-#~ "later on. For example, you can "
-#~ "make specific adventures or levels "
-#~ "available while teaching a class. This"
-#~ " way it's easy for you to "
-#~ "determine which level and adventures "
-#~ "your students will be working on. "
-#~ "If you want to make everything "
-#~ "available for your class it is "
-#~ "easiest to remove the customization all"
-#~ " together."
+#~ msgstr "You can always change these settings later on. For example, you can make specific adventures or levels available while teaching a class. This way it's easy for you to determine which level and adventures your students will be working on. If you want to make everything available for your class it is easiest to remove the customization all together."
 
 #~ msgid "customize_class_step_1"
 #~ msgstr "Select levels for your class by pressing the \"level buttons\""
 
 #~ msgid "customize_class_step_2"
-#~ msgstr ""
-#~ "\"Checkboxes\" will appear for the "
-#~ "adventures available for the chosen "
-#~ "levels"
+#~ msgstr "\"Checkboxes\" will appear for the adventures available for the chosen levels"
 
 #~ msgid "customize_class_step_3"
 #~ msgstr "Select the adventures you want to make available"
