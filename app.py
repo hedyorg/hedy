@@ -113,7 +113,7 @@ for lang in ALL_LANGUAGES.keys():
     TAGS[lang] = hedy_content.Tags(lang)
 
 
-def load_adventures_for_level(level, subset=None):
+def     load_adventures_for_level(level, subset=None, filter_content=True):
     """Load the adventures available to the current user at the given level.
 
     These are the default adventures, with the customizations implied
@@ -150,8 +150,9 @@ def load_adventures_for_level(level, subset=None):
         if not default_save_name or default_save_name == 'intro':
             default_save_name = adventure['name']
 
+
         # only add adventures that have been added to the adventure list of this level
-        if short_name in ADVENTURE_ORDER_PER_LEVEL.get(level, []):
+        if (not filter_content) or short_name in ADVENTURE_ORDER_PER_LEVEL.get(level, []):
             current_adventure = Adventure(
                 short_name=short_name,
                 name=adventure['name'],
@@ -1536,7 +1537,7 @@ def get_specific_adventure(name, level, mode):
     except BaseException:
         return utils.error_page(error=404, ui_message=gettext('no_such_level'))
 
-    adventures = [x for x in load_adventures_for_level(level) if x.short_name == name]
+    adventures = [x for x in load_adventures_for_level(level, subset=None, filter_content=False) if x.short_name == name]
     if not adventures:
         return utils.error_page(error=404, ui_message=gettext('no_such_adventure'))
 
