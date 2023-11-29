@@ -53,13 +53,14 @@
 
                     <div class="flex flex-row items-center mb-4">  
                         <label for="tags" class="inline-block w-40 text-xl">{{_('tags')}}</label>
-                        <div class="flex flex-row w-full">
-                                <input type="text" name="tag" placeholder="{{_('tag_input_placeholder')}}" id="input_adventure_tags"
-                                    _="on keypress if event.keyCode == 13 then event.stopPropagation()" 
+                        <div class="flex flex-row w-full relative" id="add_tags">
+                                <input type="text" name="tag" placeholder="{{_('tag_input_placeholder')}}" id="search_tags_input"
+                                    class="appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 ltr:pr-8 rtl:pl-8 rounded"
                                     hx-trigger="enter"
                                     hx-post="/tags/create/{{adventure.id}}" hx-target="#tags-list" hx-swap="outerHTML"
-                                    _="on htmx:afterRequest focus()"
-                                    class="appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 ltr:pr-8 rtl:pl-8 rounded"
+                                    _="on click event.stopPropagation()
+                                    on keypress if event.keyCode == 13 event.stopPropagation() end
+                                    on htmx:afterRequest focus()" 
                                     >
                                 <button class="green-btn" id="add_adventure_tags"
                                     hx-trigger="click"
@@ -67,8 +68,16 @@
                                     hx-target="#tags-list"
                                     hx-swap="outerHTML"
                                     hx-include="[name='tag']"
-                                    _="on htmx:afterRequest set value of #input_adventure_tags to ''"
+                                    _="on htmx:afterRequest set value of #search_tags_input to ''"
                                     >{{_('add')}}</button>
+
+                                <div
+                                    id="tags-dropdown"
+                                    hx-trigger="load"
+                                    hx-get="/tags?adventure_id={{adventure.id}}"
+                                    hx-target="#tags-dropdown"
+                                    hx-swap="outerHTML"
+                                ></div>
                         </div>
                     </div>
                     {{ render_partial('htmx-tags-list.html', tags=adventure_tags, adventure_id=adventure.id, creator=adventure.creator) }}

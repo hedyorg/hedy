@@ -24,3 +24,4 @@ export * from './initialize';
 export * from './debugging';
 export { getPreviousAndNext } from './tabs';
 export * from './tailwind';
+export { loadParsonsExercise } from './parsons';

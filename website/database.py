@@ -57,6 +57,13 @@ INVITATIONS = dynamo.Table(
 """
 TAGS = dynamo.Table(storage, "tags", "id", indexes=[dynamo.Index("name", sort_key="popularity")])
 
+# A survey
+# - id (str): the identifier of the survey + the response identifier ex. "class_teacher1" or "students_student1"
+# - responses (str []): the response per question
+# - skip (str): if the survey should never be shown or today date to be reminded later
+
+SURVEYS = dynamo.Table(storage, "surveys", "id")
+
 # Class customizations
 #
 # Various columns with different meanings:
@@ -604,6 +611,15 @@ class Database:
     def read_tags(self, tags):
         return [self.read_tag(name) for name in tags]
 
+    def read_public_tags(self):
+        """Public tags are tagged within one or more public adventure or those that aren't in use."""
+        all_tags = TAGS.scan()
+        public_tags = []
+        for tag in all_tags:
+            if not tag["tagged_in"] or any([adv["public"] for adv in tag["tagged_in"]]):
+                public_tags.append(tag)
+        return public_tags
+
     def read_tags_by_username(self, username):
         tags = TAGS.get_many({"creator": username})
         return tags if tags else {}
@@ -638,6 +654,9 @@ class Database:
     def all_adventures(self):
         return ADVENTURES.scan()
 
+    def public_adventures(self):
+        return ADVENTURES.get_many({"public": True})
+
     def get_student_classes_ids(self, username):
         ids = USERS.get({"username": username}).get("classes")
         return list(ids) if ids else []
@@ -662,6 +681,21 @@ class Database:
     def update_class_data(self, id, class_data):
         """Updates a class."""
         CLASSES.update({"id": id}, class_data)
+
+    def store_survey(self, survey):
+        SURVEYS.create(survey)
+
+    def get_survey(self, id):
+        return SURVEYS.get({"id": id})
+
+    def add_survey_responses(self, id, responses):
+        SURVEYS.update({"id": id}, {"responses":  responses})
+
+    def add_skip_survey(self, id):
+        SURVEYS.update({"id": id}, {"skip": True})
+
+    def add_remind_later_survey(self, id):
+        SURVEYS.update({"id": id}, {"skip": date.today().isoformat()})
 
     def add_student_to_class(self, class_id, student_id):
         """Adds a student to a class."""

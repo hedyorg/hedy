@@ -34,7 +34,7 @@ describe('Is able to click on duplicate class', () => {
       .each(($username, i) => {
         if ($username.text().includes("teacher1")) {
           // Click on duplicate icon
-          cy.get(`tbody :nth-child(${i+1}) .no-underline > .fas`).click();
+          cy.get(`tbody :nth-child(${i+1}) .no-underline > .fas`).first().click();
           
           cy.wait(50)
           // Checks for input field
