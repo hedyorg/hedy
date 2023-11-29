@@ -1626,10 +1626,10 @@ def get_embedded_code_editor(level):
     return render_template("embedded-editor.html", embedded=True, run=run, language=language,
                            keyword_language=keyword_language, readOnly=readOnly,
                            level=level, javascript_page_options=dict(
-                               page='code',
+                               page='view-program',
                                lang=language,
                                level=level,
-                                code=program
+                               code=program
                            ))
 
 
