@@ -78,6 +78,12 @@
       {% if menu != False %}
         {% include "incl/menubar.html" %}
       {% endif %}
+      {% if session.preview_class %}
+      <div class="bg-red-100 border-l-4 border-red-500 text-red-700 p-4" role="alert">
+          <p class="font-bold">Preview mode</p>
+          <p>You are previewing a class as a teacher. <a href="/for-teachers/clear-preview-class">Exit preview mode</a></p>
+      </div>
+      {% endif %}
       {# Can't reindent this as it may contain preformatted code blocks whose indentation is important. #}
       {% block full_width_content %}{% endblock %}
 

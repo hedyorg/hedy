@@ -1320,7 +1320,8 @@ def index(level, program_id):
 
     customizations = {}
     if current_user()['username']:
-        customizations = DATABASE.get_student_class_customizations(current_user()['username'])
+        customizations = DATABASE.get_student_class_customizations(
+            current_user()['username'], preview_class_as_teacher=session.get("preview_class"))
 
     if 'levels' in customizations:
         available_levels = customizations['levels']

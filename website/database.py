@@ -776,7 +776,7 @@ class Database:
         customizations = CUSTOMIZATIONS.get({"id": class_id})
         return customizations
 
-    def get_student_class_customizations(self, user):
+    def get_student_class_customizations(self, user, preview_class_as_teacher=None):
         """Return customizations for the very first class this user is part of.
 
         If the user is part of multiple classes, they will only get the customizations
@@ -786,6 +786,11 @@ class Database:
         if student_classes:
             class_customizations = self.get_class_customizations(student_classes[0]["id"])
             return class_customizations or {}
+        elif preview_class_as_teacher:
+            for Class in self.get_teacher_classes(user):
+                if preview_class_as_teacher == Class["id"]:
+                    class_customizations = self.get_class_customizations(preview_class_as_teacher)
+                    return class_customizations or {}
         return {}
 
     def progress_by_username(self, username):
