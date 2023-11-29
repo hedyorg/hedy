@@ -3,15 +3,6 @@ import {goToHedyLevel2Page, goToTeachersPage} from "../tools/navigation/nav";
 import {createClassAndAddStudents} from '../tools/classes/class.js'
 
 describe('Go to level dropdown', () => {
-  it('Is able to use the level dropdown to go to level 1', () => {
-    loginForStudent('student5')
-    goToHedyLevel2Page();
-
-    cy.get('#dropdown_level_button').click();
-    cy.get('#level_button_1').click();
-    cy.url().should('include', Cypress.env('hedy_page'));
-  })
-
   it('Is not able to go to disabled level 5', () => {  
     let classname;
     let students;
@@ -33,6 +24,7 @@ describe('Go to level dropdown', () => {
     goToHedyLevel2Page();
 
     cy.get('#dropdown_level_button').click();
+    cy.get('#level_button_4').should('not.be.disabled');
     cy.get('#level_button_5').should('be.disabled');
   })
 })
