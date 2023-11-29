@@ -2851,7 +2851,7 @@ def get_parser(level, lang="en", keep_all_tokens=False, skip_faulty=False):
     return lark
 
 
-ParseResult = namedtuple('ParseResult', ['code', 'source_map', 'has_turtle', 'has_pygame', 'commands'])
+ParseResult = namedtuple('ParseResult', ['code', 'source_map', 'has_turtle', 'has_pygame', 'has_clear', 'commands'])
 
 
 def transpile_inner_with_skipping_faulty(input_string, level, lang="en"):
@@ -3422,13 +3422,14 @@ def transpile_inner(input_string, level, lang="en", populate_source_map=False, i
 
         commands = AllCommands(level).transform(program_root)
 
+        has_clear = "clear" in commands
         has_turtle = "forward" in commands or "turn" in commands or "color" in commands
         has_pygame = "ifpressed" in commands or "ifpressed_else" in commands or "assign_button" in commands
 
         if populate_source_map:
             source_map.set_python_output(python)
 
-        return ParseResult(python, source_map, has_turtle, has_pygame, commands)
+        return ParseResult(python, source_map, has_turtle, has_pygame, has_clear, commands)
     except VisitError as E:
         if isinstance(E, VisitError):
             # Exceptions raised inside visitors are wrapped inside VisitError. Unwrap it if it is a

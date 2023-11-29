@@ -925,7 +925,10 @@ class TestsLevel4(HedyTester):
         except NameError:
             pass""")
 
-        self.multi_level_tester(code=code, expected=expected)
+        self.multi_level_tester(code=code,
+                                expected=expected,
+                                extra_check_function=(lambda result: result.has_clear)
+                                )
 
     def test_source_map(self):
         code = textwrap.dedent("""\
