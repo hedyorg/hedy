@@ -195,8 +195,6 @@ class TestsLevel8(HedyTester):
 
         self.multi_level_tester(max_level=11, code=code, expected=expected, output='gelijkspel!')
 
-
-
     def test_unquoted_print_in_body(self):
         code = textwrap.dedent("""\
         svar = ask 'Vad är 5 plus 5?'
