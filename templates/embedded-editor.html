@@ -131,8 +131,6 @@
             // Dynamically add the gutter to the editor when readOnly
             {% if readOnly %}
                 hedyApp.theGlobalEditor.isReadOnly = true;
-                // const editor = ace.edit('editor');
-                // editor.setOption("showGutter", true);
             {% endif %}
 
             // Listen to message from the host to dynamically toggle readOnly mode
@@ -158,7 +156,7 @@
             function sendChangeEvent() {
                 window.parent.postMessage({
                     'change': true,
-                    'program': hedyApp.returnLinesWithoutBreakpoints(hedyApp.theGlobalEditor)
+                    'program': hedyApp.get_active_and_trimmed_code()
                 }, '*')
             }
 
