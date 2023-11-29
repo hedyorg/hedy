@@ -14,12 +14,13 @@
                         <input id="custom_adventure_name" required value="{{ adventure.name }}" class="block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 ltr:pr-8 rtl:pl-8 rounded">
                     </div>
                     <div class="flex flex-row items-center mb-4">
-                        <label for="levels" class="inline-block w-40 text-xl"  data-te-select-label-ref>{{_('level')}}</label>
+                        <label for="levels" class="inline-block w-40 text-xl"  data-te-select-label-ref>{{_('levels')}}</label>
                                 <!-- data-te-class-notch-trailing-normal="!border-gray-200" -->
                         <div
+                            id="custom_adventure_level"
                             data-te-input-wrapper-init
                             class="block appearance-none w-full bg-gray-200 text-gray-700 rounded">
-                            <select id="custom_adventure_level"
+                            <select 
                                 name="levels"
                                 required
                                 multiple
@@ -33,7 +34,7 @@
                                 >
                                 {% for i in range(1, (max_level + 1)) %}
                                     <option value="{{ i }}"
-                                        {% if i|string in adventure.levels %}selected{% endif %}>
+                                        {% if i|string in adventure.levels or i|string == adventure.level %}selected{% endif %}>
                                         {{ i }}
                                     </option>
                                 {% endfor %}
