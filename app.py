@@ -562,11 +562,15 @@ def parse():
 
             if transpile_result.has_turtle:
                 response['has_turtle'] = True
+
+            if transpile_result.has_clear:
+                response['has_clear'] = True
         except Exception:
             pass
 
         with querylog.log_time('detect_sleep'):
             try:
+                # FH, Nov 2023: hmmm I don't love that this is not done in the same place as the other "has"es
                 response['has_sleep'] = 'sleep' in transpile_result.commands
             except BaseException:
                 pass
