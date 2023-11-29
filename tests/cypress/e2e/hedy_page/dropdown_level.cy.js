@@ -1,4 +1,4 @@
-import { loginForStudent, loginForTeacher } from "../tools/login/login";
+import { loginForStudent, loginForTeacher, logout } from "../tools/login/login";
 import {goToHedyLevel2Page, goToTeachersPage} from "../tools/navigation/nav";
 import {createClassAndAddStudents} from '../tools/classes/class.js'
 
@@ -16,6 +16,7 @@ describe('Go to level dropdown', () => {
     let classname;
     let students;
 
+    logout()
     loginForTeacher();
     cy.wait(500);
 
