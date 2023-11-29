@@ -24,7 +24,9 @@ export function login(username, password) {
     cy.clearCookies();
     cy.clearAllLocalStorage()
     cy.clearAllSessionStorage();
-    goToLogin();
+    cy.intercept('GET', 'http://localhost:8080/login')
+    cy.visit('http://localhost:8080/login');
+    // goToLogin();
     cy.get('#username').type(username);
     cy.get('#password').type(password);
     cy.get('#login_button').click();
