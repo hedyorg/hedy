@@ -130,18 +130,18 @@
 
             // Dynamically add the gutter to the editor when readOnly
             {% if readOnly %}
-                const editor = ace.edit('editor');
-                editor.setOption("showGutter", true);
+                hedyApp.theGlobalEditor.isReadOnly = true;
+                // const editor = ace.edit('editor');
+                // editor.setOption("showGutter", true);
             {% endif %}
 
             // Listen to message from the host to dynamically toggle readOnly mode
             window.addEventListener('message', function (message) {
                 if (message.data.mode) {
-                    const editor = ace.edit('editor');
                     if (message.data.mode == 'read') {
-                        editor.setReadOnly(true);
+                        hedyApp.theGlobalEditor.isReadOnly = true;
                     } else if (message.data.mode == 'edit') {
-                        editor.setReadOnly(false);
+                        hedyApp.theGlobalEditor.isReadOnly = false;
                     }
                 }
             });
