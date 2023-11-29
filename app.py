@@ -1629,7 +1629,7 @@ def get_embedded_code_editor(level):
                                page='code',
                                lang=language,
                                level=level,
-                                code=program
+                               code=program
                            ))
 
 
