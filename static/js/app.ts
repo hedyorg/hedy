@@ -1567,26 +1567,34 @@ function createModal(level:number ){
 }
 
 export function toggle_developers_mode(enforced: boolean) {
-  if ($('#developers_toggle').is(":checked") || enforced) {
-      $('#adventures-tab').hide();
-      $('#blur_toggle_container').show();
-      pushAchievement("lets_focus");
+  var dev_mode = window.localStorage.getItem("developer_mode");
+  if (dev_mode == "True"){
+    window.localStorage.setItem("developer_mode", "False");
+    $('#adventures').show();
   } else {
-      $('#blur_toggle_container').hide();
-      $('#adventures-tab').show();
+    window.localStorage.setItem("developer_mode", "True");
+    $('#adventures').hide();
   }
+  // if ($('#developers_toggle').is(":checked") || enforced) {
+  //     $('#adventures-tab').hide();
+  //     $('#blur_toggle_container').show();
+  //     pushAchievement("lets_focus");
+  // } else {
+  //     $('#blur_toggle_container').hide();
+  //     $('#adventures-tab').show();
+  // }
 
-  if ($('#adventures-tab').is(":hidden")) {
-    $('#editor-area').removeClass('mt-5');
-    $('#code_editor').css('height', 36 + "em");
-    $('#code_output').css('height', 36 + "em");
-    theGlobalEditor.resize(576);
-  } else {
-    $('#editor-area').addClass('mt-5');
-    $('#code_editor').height('22rem');
-    $('#code_output').height('22rem');
-    theGlobalEditor.resize(352);
-  }
+  // if ($('#adventures-tab').is(":hidden")) {
+  //   $('#editor-area').removeClass('mt-5');
+  //   $('#code_editor').css('height', 36 + "em");
+  //   $('#code_output').css('height', 36 + "em");
+  //   theGlobalEditor.resize(576);
+  // } else {
+  //   $('#editor-area').addClass('mt-5');
+  //   $('#code_editor').height('22rem');
+  //   $('#code_output').height('22rem');
+  //   theGlobalEditor.resize(352);
+  // }
 }
 
 export function toggle_keyword_language(lang: string) {
