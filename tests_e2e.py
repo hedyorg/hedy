@@ -1642,7 +1642,7 @@ class TestCustomAdventures(AuthHelper):
             'id': '123',
             'name': 'panda',
             'classes': [],
-            'levels': '5',
+            'levels': ['5'],
             'content': 'This is just long enough!',
             'public': True,
             'language': 'en', }
