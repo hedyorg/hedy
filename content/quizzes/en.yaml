@@ -3821,3 +3821,21 @@ levels:
             hint: You need to use the {remove} command
             correct_answer: D
             question_score: '10'
+    17:
+        1:
+            question_text: sabinatesting Which command should be filled in on the blanks to print a random snack?
+            code: |-
+                snacks = nachos, chips, cucumber, sweets
+                {print} _
+            mp_choice_options:
+            -   option: '`snacks {at} {random}`'
+                feedback: This is the old way.
+            -   option: '`[{random} snack]`'
+                feedback: The order is wrong.
+            -   option: '`snacks[{random}]`'
+                feedback: Correct
+            -   option: '`snacks[{at} {random}]`'
+                feedback: We do not need `at`anymore
+            hint: We no longer use {at}
+            correct_answer: C
+            question_score: '10'
