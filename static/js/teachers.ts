@@ -203,7 +203,7 @@ function update_db_adventure(adventure_id: string) {
    // Todo TB: It would be nice if we improve this with the formToJSON() function once #3077 is merged
 
    const adventure_name = $('#custom_adventure_name').val();
-   const level = $('#custom_adventure_level').val();
+   const levels = $('#custom_adventure_levels').val();
    const content = DOMPurify.sanitize(<string>$('#custom_adventure_content').val());
    const agree_public = $('#agree_public').prop('checked');
    const language = $('#language').val();
@@ -214,10 +214,10 @@ function update_db_adventure(adventure_id: string) {
       data: JSON.stringify({
         id: adventure_id,
         name: adventure_name,
-        level: level,
         content: content,
         public: agree_public,
         language,
+        levels,
       }),
       contentType: 'application/json',
       dataType: 'json'
@@ -241,9 +241,8 @@ export function update_adventure(adventure_id: string, first_edit: boolean, prom
 function show_preview(content: string) {
     const name = $('#custom_adventure_name').val();
     if (typeof name !== 'string') { throw new Error(`Expected name to be string, got '${name}'`); }
-    const level = $('#custom_adventure_level').val();
-    // TODO: perhaps check for the level AND display it in preview!
-    // if (typeof level !== 'string') { throw new Error(`Expected level to be string, got '${name}'`); } // name?? should be level!
+    const levels = $('#custom_adventure_levels').val();
+    if (typeof levels !== 'object') { throw new Error(`Expected level to be a list, got '${levels}'`); }
 
     let container = $('<div>');
     container.addClass('preview border border-black px-8 py-4 text-left rounded-lg bg-gray-200 text-black');
@@ -258,7 +257,9 @@ function show_preview(content: string) {
         const dir = $("body").attr("dir");
         const exampleEditor = editorCreator.initializeReadOnlyEditor(preview, dir);
         exampleEditor.contents = exampleEditor.contents.replace(/\n+$/, '');
-        exampleEditor.setHighlighterForLevel(parseInt(level, 10));                
+        for (const level of levels) {
+          exampleEditor.setHighlighterForLevel(parseInt(level, 10));                
+        }
     }
 }
 

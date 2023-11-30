@@ -895,7 +895,7 @@ class ForTeachersModule(WebsiteModule):
             return gettext("adventure_id_invalid"), 400
         if not isinstance(body.get("name"), str):
             return gettext("adventure_name_invalid"), 400
-        if not isinstance(body.get("level"), list):
+        if not isinstance(body.get("levels"), list) or (isinstance(body.get("levels"), list) and not body["levels"]):
             return gettext("level_invalid"), 400
         if not isinstance(body.get("content"), str):
             return gettext("content_invalid"), 400
@@ -932,8 +932,8 @@ class ForTeachersModule(WebsiteModule):
             "date": utils.timems(),
             "creator": user["username"],
             "name": body["name"],
-            "level": body["level"][0],
-            "levels": body["level"],
+            "level": body["levels"][0],  # TODO: this should be removed gradually.
+            "levels": body["levels"],
             "content": body["content"],
             "public": body["public"],
             "language": body["language"],

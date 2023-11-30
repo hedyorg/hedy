@@ -10,17 +10,18 @@
                 <div class="flex flex-col w-full lg:w-1/2">
                     <h3 class="text-center mt-0 mb-4">{{_('general_settings')}}</h3>
                     <div class="flex flex-row items-center mb-4">
-                        <label for="name" class="inline-block w-40 text-xl">{{_('name')}}</label>
+                        <label for="custom_adventure_name" class="inline-block w-40 text-xl">{{_('name')}}</label>
                         <input id="custom_adventure_name" required value="{{ adventure.name }}" class="block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 ltr:pr-8 rtl:pl-8 rounded">
                     </div>
                     <div class="flex flex-row items-center mb-4">
-                        <label for="levels" class="inline-block w-40 text-xl"  data-te-select-label-ref>{{_('levels')}}</label>
+                        <label for="custom_adventure_levels" class="inline-block w-40 text-xl"  data-te-select-label-ref>{{_('levels')}}</label>
                                 <!-- data-te-class-notch-trailing-normal="!border-gray-200" -->
                         <div
-                            id="custom_adventure_level"
+                            id="custom_adventure_levels_container"
                             data-te-input-wrapper-init
                             class="block appearance-none w-full bg-gray-200 text-gray-700 rounded">
                             <select 
+                                id="custom_adventure_levels"
                                 name="levels"
                                 required
                                 multiple
@@ -53,7 +54,7 @@
                     </div>
 
                     <div class="flex flex-row items-center mb-4">  
-                        <label for="tags" class="inline-block w-40 text-xl">{{_('tags')}}</label>
+                        <label for="search_tags_input" class="inline-block w-40 text-xl">{{_('tags')}}</label>
                         <div class="flex flex-row w-full relative" id="add_tags">
                                 <input type="text" name="tag" placeholder="{{_('tag_input_placeholder')}}" id="search_tags_input"
                                     class="appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 ltr:pr-8 rtl:pl-8 rounded"
