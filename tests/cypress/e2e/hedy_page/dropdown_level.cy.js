@@ -1,15 +1,15 @@
-import { loginForStudent, loginForTeacher } from "../tools/login/login";
+import { loginForStudent, loginForTeacher, logout } from "../tools/login/login";
 import {goToHedyLevel2Page, goToTeachersPage} from "../tools/navigation/nav";
 import {createClassAndAddStudents} from '../tools/classes/class.js'
 
 describe('Go to level dropdown', () => {
   it('Is not able to go to disabled level 5', () => {  
-    let classname;
-    let students;
-
+    
     loginForTeacher();
     cy.wait(500);
-
+    
+    let classname;
+    let students;
     ({classname, students} = createClassAndAddStudents());
     goToTeachersPage();
 
@@ -19,6 +19,7 @@ describe('Go to level dropdown', () => {
     cy.get('#enable_level_5').parent('.switch').click();
     cy.getBySel('save_customizations').click();
 
+    logout()
     loginForStudent(students[0]);
     cy.wait(500);
     goToHedyLevel2Page();
