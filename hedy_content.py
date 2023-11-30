@@ -128,6 +128,7 @@ ADVENTURE_ORDER_PER_LEVEL = {
         'dice',
         'dishes',
         'turtle',
+        'turtle_draw_it',
         'calculator',
         'fortune',
         'restaurant',
@@ -144,6 +145,7 @@ ADVENTURE_ORDER_PER_LEVEL = {
         'fortune',
         'restaurant',
         'pressit',
+        'turtle_draw_it',
         'debugging'
     ],
     8: [
