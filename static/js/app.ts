@@ -1599,10 +1599,10 @@ export function toggle_keyword_language(current_lang: string, new_lang: string) 
     });
 
   if (response.success) {
-    const new_code = response.code
-    theGlobalEditor.contents = new_code;
+    const code = response.code
+    theGlobalEditor.contents = code;
     const saveName = saveNameFromInput();
-    localSave(currentTabLsKey(), { saveName, new_code });
+    localSave(currentTabLsKey(), { saveName, code });
     // save translated code to local storage
     // such that it can be fetched after reload
     $('#editor').attr('lang', new_lang);
