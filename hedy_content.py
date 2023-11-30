@@ -200,6 +200,7 @@ ADVENTURE_ORDER_PER_LEVEL = {
         'songs',
         'restaurant',
         'haunted',
+        'turtle_draw_it',
         'debugging'
     ],
     12: [
