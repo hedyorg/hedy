@@ -183,6 +183,7 @@ ADVENTURE_ORDER_PER_LEVEL = {
         'dice',
         'fortune',
         'turtle',
+        'turtle_draw_it',
         'harry_potter',
         'songs',
         'story',
