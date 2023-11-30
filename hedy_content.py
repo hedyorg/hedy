@@ -251,6 +251,7 @@ ADVENTURE_ORDER_PER_LEVEL = {
     15: [
         'default',
         'while_command',
+        'turtle_draw_it',
         'restaurant',
         'story',
         'dice',
