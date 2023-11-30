@@ -3,9 +3,9 @@ import { EditorView, ViewUpdate, drawSelection, dropCursor, highlightActiveLine,
         highlightActiveLineGutter, highlightSpecialChars, keymap, lineNumbers } from '@codemirror/view'
 import { EditorState, Compartment, StateEffect, Prec } from '@codemirror/state'
 import { EventEmitter } from "./event-emitter";
-import { deleteTrailingWhitespace, defaultKeymap, historyKeymap } from '@codemirror/commands'
+import { deleteTrailingWhitespace, defaultKeymap, historyKeymap, indentWithTab, insertNewlineAndIndent, indentMore } from '@codemirror/commands'
 import { history } from "@codemirror/commands"
-import { indentOnInput, defaultHighlightStyle, syntaxHighlighting ,LanguageSupport } from "@codemirror/language"
+import { indentOnInput, defaultHighlightStyle, syntaxHighlighting ,LanguageSupport, indentUnit, indentService } from "@codemirror/language"
 import { highlightSelectionMatches, searchKeymap } from "@codemirror/search";
 import { 
     errorLineField, debugLineField, decorationsTheme, addDebugLine, 
@@ -23,6 +23,10 @@ import { monokai } from "./cm-monokai-theme";
 import { error } from "./modal";
 import { ClientMessages } from "./client-messages";
 import { Tag, styleTags, tags as t } from "@lezer/highlight";
+
+
+// CodeMirror requires # of indentation to be in spaces.
+const indentSize = ' '.repeat(4);
 
 export class HedyCodeMirrorEditorCreator implements HedyEditorCreator {
     /**
@@ -117,7 +121,17 @@ export class HedyCodeMirrorEditor implements HedyEditor {
                     ...defaultKeymap,
                     ...searchKeymap, // we need to replace this with our own search widget
                     ...historyKeymap,
+                    indentWithTab,
                 ]),
+                indentUnit.of(indentSize),
+                indentService.of((context, pos) => {
+                    const previousLine = context.lineAt(pos, -1);
+                    const nextLine = context.lineAt(pos + 1, -1);
+                    const nextIndentationSize =  nextLine.text.match(/^\s*/)![0].length;
+                    const prevIndentationSize =  previousLine.text.match(/^\s*/)![0].length;
+                    const indentBy = Math.max(prevIndentationSize, nextIndentationSize);
+                    return indentBy
+                }),
                 monokai,
                 this.theme.of(mainEditorStyling),
                 this.readMode.of(EditorState.readOnly.of(isReadOnly)),
