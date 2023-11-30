@@ -74,6 +74,8 @@ def get_target_keyword(keyword_dict, keyword):
 
 def translate_keywords(input_string_, from_lang="en", to_lang="nl", level=1):
     """ "Return code with keywords translated to language of choice in level of choice"""
+    if input_string_ == "":
+        return " "  # empty string is True, so output something else that looks like the empty string
     try:
         processed_input = hedy.process_input_string(
             input_string_, level, from_lang, escape_backslashes=False, preprocess_ifs_enabled=False
