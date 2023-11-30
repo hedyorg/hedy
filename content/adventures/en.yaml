@@ -5070,7 +5070,7 @@ adventures:
                         forward _
                         turn _
                     ```
-                    
+
                     Hint Fan:
                     Start out like the fan you made in level 7. Or take a peak at the hint for the beehive, because the codes are very similar.
 
@@ -5083,9 +5083,31 @@ adventures:
                     <div class="w-full flex flex-row gap-2">
                     Title <img src="https://github.com/hedyorg/hedy/assets/80678586/76e42c76-aa3f-4863-8eee-ead73c09a186" width="100">
                     Title  <img src="https://github.com/hedyorg/hedy/assets/80678586/17f878cc-e893-4c10-b32e-a09a50bf08de" width="100">
-                    Title <img src="https://github.com/hedyorg/hedy/assets/80678586/877fc337-df80-4185-8005-a6c28904f66e" width="100">
                     </div>
-                example_code:
+                    Bracelet Designing program <img src="https://github.com/hedyorg/hedy/assets/80678586/549d7f3a-c492-4b4a-b173-746eb3400951" width="1000">
+                example_code: |
+                    Hint: Bracelet designing program
+
+
+                    Firstly, define a function for each shape you want to use on the bacelet. Then, add the shapes to the bacelet like this:
+
+                    ```
+                    _
+
+                    color white
+                    turn -90
+                    forward 300
+                    turn 180
+
+                    for i in range 1 to 5
+                        color gray
+                        forward 100
+                        shape = ask 'What kind of shape would you like next on the bracelet?'
+                        chosen_color = ask 'In which color?'
+                        color chosen_color
+                        if shape = 'square'
+                        _
+                    ```
                 start_code: '## Recreate the drawings with the turtle! '
             13:
                 story_text: |

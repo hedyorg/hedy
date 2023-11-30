@@ -217,6 +217,7 @@ ADVENTURE_ORDER_PER_LEVEL = {
         'turtle',
         'piggybank',
         'secret',
+        'turtle_draw_it',
         'debugging'
     ],
     13: [
