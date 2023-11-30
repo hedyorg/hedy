@@ -55,11 +55,11 @@
         <div id="editor" style="background: #272822; font-size:0.95em; color: white; direction: {{ g.dir }};" lang="en" blurred='false'
           {% if editor_readonly %}data-readonly="true"{% endif %}
           class="w-full flex-1 text-lg rounded {% if raw %} max-h-56 {% endif %}"></div>
-        <div id="parsons_code_container" class="w-full flex flex-col mx-auto gap-2 items-center" style="display: none;">
+        <div id="parsons_code_container" class="w-full flex flex-col mx-auto gap-2 items-center hover:cursor" style="display: none;">
             {% for i in range(1, 11) %}
-                <div class="turn-pre-into-ace relative w-full border-4 border-black rounded-lg parsons_goal_line_container" style="background-color: #272822;" id="parsons_goal_line_container_{{ i }}">
+                <div class="turn-pre-into-ace relative w-full p-2 border-4 border-black rounded-lg parsons_goal_line_container cursor-grab" style="background-color: #272822;" id="parsons_goal_line_container_{{ i }}">
                     <div index="-" draggable="true" code="" class="compiler-parsons-box w-full absolute inset-0 z-10 rounded-lg"></div>
-                    <pre level="{{ level }}" id="goal_parsons_{{ i }}" class="goal_parsons parsons text-sm"></pre>
+                    <pre level="{{ level }}" id="goal_parsons_{{ i }}" class="goal_parsons parsons text-sm m-0"></pre>
                 </div>
             {% endfor %}
         </div>
@@ -174,7 +174,7 @@
           <button id="debug_button" class="green-btn" onclick='hedyApp.runit({{ level }}, "{{ g.lang }}", {{_('already_program_running')|default(None)|tojson}}, "debug")'>🐞</button>
           <button id="debug_restart" class="green-btn hidden" onclick='hedyApp.runit({{ level }}, "{{ g.lang }}", {{_('already_program_running')|default(None)|tojson}}, "debug")'>🔄</button>
           <button id="debug_stop" class="green-btn hidden" onclick="hedyApp.stopDebug()">🛑</button>
-          <button id="debug_continue" class="green-btn" onclick='hedyApp.runit({{ level }}, "{{ g.lang }}", {{_('already_program_running')|default(None)|tojson}}, "continue")'><div class="{% if g.dir == "rtl" %}rotate-180{% endif %}">⏩</div></button>
+          <button id="debug_continue" class="green-btn hidden" onclick='hedyApp.runit({{ level }}, "{{ g.lang }}", {{_('already_program_running')|default(None)|tojson}}, "continue")'><div class="{% if g.dir == "rtl" %}rotate-180{% endif %}">⏩</div></button>
         </div>
         <button id="next_parson_button" max_exercise="{{ parsons_exercises }}" class="green-btn ltr:ml-auto rtl:mr-auto" style="display: none;">{{_('next_exercise')}}</button>
         {% if show_edit_button %}
