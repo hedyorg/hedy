@@ -57,6 +57,8 @@ class WarningException(HedyException):
         self.fixed_result = fixed_result
 
 
+# FH 2023: I think we  no longer need this exception since the editor removes leading
+# spaces?
 class InvalidSpaceException(WarningException):
     def __init__(self, level, line_number, fixed_code, fixed_result):
         super().__init__('Invalid Space',
@@ -250,6 +252,9 @@ class LonelyEchoException(HedyException):
     def __init__(self):
         super().__init__('Lonely Echo')
 
+class LonelyClearException(HedyException):
+    def __init__(self):
+        super().__init__('Lonely Clear')
 
 class CodePlaceholdersPresentException(HedyException):
     def __init__(self, line_number):
