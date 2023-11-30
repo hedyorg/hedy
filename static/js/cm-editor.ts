@@ -3,7 +3,7 @@ import { EditorView, ViewUpdate, drawSelection, dropCursor, highlightActiveLine,
         highlightActiveLineGutter, highlightSpecialChars, keymap, lineNumbers } from '@codemirror/view'
 import { EditorState, Compartment, StateEffect, Prec } from '@codemirror/state'
 import { EventEmitter } from "./event-emitter";
-import { deleteTrailingWhitespace, defaultKeymap, historyKeymap, indentWithTab, insertNewlineAndIndent, indentMore } from '@codemirror/commands'
+import { deleteTrailingWhitespace, defaultKeymap, historyKeymap, indentWithTab } from '@codemirror/commands'
 import { history } from "@codemirror/commands"
 import { indentOnInput, defaultHighlightStyle, syntaxHighlighting ,LanguageSupport, indentUnit, indentService } from "@codemirror/language"
 import { highlightSelectionMatches, searchKeymap } from "@codemirror/search";
