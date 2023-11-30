@@ -239,6 +239,7 @@ ADVENTURE_ORDER_PER_LEVEL = {
         'guess_my_number',
         'haunted',
         'functions',
+        'turtle_draw_it',
         'hotel',
         'calculator',
         'calculator_2',
