@@ -451,61 +451,6 @@ class LiveStatisticsModule(WebsiteModule):
 
         return common_errors, quiz_info
 
-    @route("/live_stats/class/<class_id>/select_level", methods=["GET"])
-    @requires_login
-    def choose_level(self, user, class_id):
-        """
-        Adds or remove the current level from the UI
-        """
-        if not is_teacher(user) and not is_admin(user):
-            return utils.error_page(error=403, ui_message=gettext("retrieve_class_error"))
-
-        class_ = self.db.get_class(class_id)
-        if not class_ or (class_["teacher"] != user["username"] and not is_admin(user)):
-            return utils.error_page(error=404, ui_message=gettext("no_such_class"))
-
-        selected_levels = self.__selected_levels(class_id)
-        chosen_level = request.args.get("level")
-
-        if int(chosen_level) in selected_levels:
-            selected_levels.remove(int(chosen_level))
-        else:
-            selected_levels.append(int(chosen_level))
-
-        customization = get_customizations(self.db, class_id)
-        dashboard_customization = customization.get('dashboard_customization', {})
-        dashboard_customization['selected_levels'] = selected_levels
-        customization['dashboard_customization'] = dashboard_customization
-        self.db.update_class_customizations(customization)
-
-        students, common_errors, selected_levels, quiz_info, attempted_adventures, \
-            adventures = self.get_class_live_stats(user, class_)
-
-        student = _check_student_arg()
-        dashboard_options_args = _build_url_args(student=student)
-
-        return jinja_partials.render_partial(
-            "partial-class-live-stats.html",
-            class_info={
-                "id": class_id,
-                "students": students,
-                "common_errors": common_errors['errors']
-            },
-            class_overview={
-                "selected_levels": selected_levels,
-                "quiz_info": quiz_info
-            },
-            dashboard_options={
-                "student": student
-            },
-            attempted_adventures=attempted_adventures,
-            dashboard_options_args=dashboard_options_args,
-            adventures=adventures,
-            max_level=HEDY_MAX_LEVEL,
-            current_page="my-profile",
-            page_title=gettext("title_class live_statistics")
-        )
-
     @route("/live_stats/class/<class_id>/level/<level>", methods=["GET"])
     @requires_login
     def select_level(self, user, class_id, level):
@@ -519,46 +464,18 @@ class LiveStatisticsModule(WebsiteModule):
         if not class_ or (class_["teacher"] != user["username"] and not is_admin(user)):
             return utils.error_page(error=404, ui_message=gettext("no_such_class"))
 
-        chosen_level = level
-        selected_levels = []
-        if int(chosen_level) in selected_levels:
-            selected_levels.remove(int(chosen_level))
-        else:
-            selected_levels.append(int(chosen_level))
+        students, class_adventures_formatted, student_adventures = self.get_grid_info(user, class_id, level)
 
-        customization = get_customizations(self.db, class_id)
-        dashboard_customization = customization.get('dashboard_customization', {})
-        dashboard_customization['selected_levels'] = selected_levels
-        customization['dashboard_customization'] = dashboard_customization
-        self.db.update_class_customizations(customization)
-
-        students, common_errors, selected_levels, quiz_info, attempted_adventures, \
-            adventures = self.get_class_live_stats(user, class_)
-
-        student = _check_student_arg()
-        dashboard_options_args = _build_url_args(student=student)
-
-        return jinja_partials.render_partial(
-            "partial-class-live-stats.html",
-            class_info={
-                "id": class_id,
-                "students": students,
-                "common_errors": common_errors['errors']
-            },
-            class_overview={
-                "selected_levels": selected_levels,
-                "quiz_info": quiz_info
-            },
-            dashboard_options={
-                "student": student
-            },
-            attempted_adventures=attempted_adventures,
-            dashboard_options_args=dashboard_options_args,
-            adventures=adventures,
-            max_level=HEDY_MAX_LEVEL,
-            current_page="my-profile",
-            page_title=gettext("title_class live_statistics")
-        )
+        return jinja_partials.render_partial("customize-grid/partial-grid-levels.html",
+                                             class_info={
+                                                 "id": class_id,
+                                             },
+                                             adventure_table={
+                                                 'students': students,
+                                                 'adventures': class_adventures_formatted,
+                                                 'student_adventures': student_adventures,
+                                                 'level': level
+                                             })
 
     @route("/live_stats/class/<class_id>/refresh", methods=["GET"])
     @requires_login

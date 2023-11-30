@@ -19,7 +19,7 @@
         <button id="level_button_{{dropdown_level}}" class="flex-row flex justify-between items-center gap-2 px-2 py-2 border-b border-dashed border-blue-500
                         {% if dropdown_level == level %}bg-white{% else %}hover:bg-blue-100 bg-blue-200{% endif %}" {%
           if dropdown_level==level %}disabled{% endif %} style="width: 100%;"
-          hx-get="/live_stats/class/{{class_info.id}}/level/{{dropdown_level}}" hx-target="#main_content"
+          hx-get="/live_stats/class/{{class_info.id}}/level/{{dropdown_level}}" hx-target="#adventure_table"
           hx-swap="outerHTML">
           <div class="flex-grow h-min min-w-80" tabindex=0>
             {{ _('level_title') }} {{ dropdown_level }}
@@ -40,17 +40,37 @@
 
   <!-- Card 1 Class Overview -->
   <div class="justify-center mt-20">
-    <h2 class="text-center">{{_('class_overview')}}</h2>
-    <!-- Hide / Show -->
-    <div class="float-right relative m-2">
-      <a class="green-btn cursor-pointer text-sm text-center pt-0.5 pb-0 px-0.5 mr-2 mt-2" _="on click toggle *display of #level 
-                    then toggle between .fa-chevron-up and .fa-chevron-down on #class_overview_icon 
-                    then toggle between .h-full and .h-14 on #level">
-        <i id="class_overview_icon" class="fa-solid fa-chevron-up w-4"></i>
-      </a>
+    <div class="flex flex-row justify-between">
+      <div class="dropdown relative">
+        <button class="white-btn px-4 rounded inline-flex items-center gap-2 text-xl" id="dropdown_level_button"
+          onclick="$('#level_dropdown').slideToggle('medium');">
+          <span>{{ _('level_title') }} 1 <i id="level-arrow" class="fa-solid fa-angle-down"></i>
+        </button>
+        <div class="dropdown-menu dropdown-blue z-20 min-w-full" id="level_dropdown"
+          style="display: none; padding: 0px !important; margin: 0px; margin-top: 0.25rem;" _="on mutation of @style
+                      set arrow to #level-arrow
+                      if *display == 'none'
+                          remove .rotate-180 from arrow
+                      else if not arrow.classList.contains('rotate-180')
+                          add .rotate-180 to arrow
+                      end">
+          {% for dropdown_level in range(1, 19) %}
+          <button id="level_button_{{dropdown_level}}" class="flex-row flex justify-between items-center gap-2 px-2 py-2 border-b border-dashed border-blue-500
+                          {% if dropdown_level == level %}bg-white{% else %}hover:bg-blue-100 bg-blue-200{% endif %}" {%
+            if dropdown_level==level %}disabled{% endif %} style="width: 100%;"
+            hx-get="/live_stats/class/{{class_info.id}}/level/{{dropdown_level}}" hx-target="#adventure_table"
+            hx-swap="outerHTML">
+            <div class="flex-grow h-min min-w-80" tabindex=0>
+              {{ _('level_title') }} {{ dropdown_level }}
+            </div>
+          </button>
+          {% endfor %}
+        </div>
+      </div>
+      <h2 class="text-center self-center">{{_('class_overview')}}</h2>
     </div>
 
-    <div class="border border-gray-400 py-2 px-4 rounded-lg overflow-x-auto">
+    <div class="border border-gray-400 py-2 px-4 rounded-lg w-full overflow-x-auto">
       {{
         render_partial('customize-grid/partial-grid-levels.html',
           adventure_table=adventure_table,

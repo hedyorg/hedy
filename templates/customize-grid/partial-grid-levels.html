@@ -17,15 +17,24 @@
       {% if student_adventure_id in adventure_table.student_adventures %}
           {% set student_adventure = adventure_table.student_adventures[student_adventure_id] %}
           <td
-            class="p-2 border-gray-400 {% if not loop.last %}border-r{% endif %} {% if not is_last_student %}border-b{% endif %}">
-            <div class="relative min-w-80">
-              <input type="checkbox" name="gridCheckBox"
-                class="student_adventure_checkbox align-middle text-green-700 text-center text-sm cursor-pointer {% if student_adventure.ticked %}fa-solid fa-check{% endif %}"
-                {% if student_adventure.ticked %}checked{% endif %}
-                hx-post="/grid_overview/class/{{ class_info.id }}/level?level={{ adventure_table.level }}&student={{ student }}&adventure={{ adventure.id }}"
-                hx-target="#adventure_table" hx-swap="outerHTML" hx-trigger="change">
-              <a class="no-underline cursor-pointer absolute right-0 text-gray-800 hover:bg-gray-400/50 hover:rounded-full px-2 mx-0"
-                href='/hedy/{{student_adventure.program}}/view'><i class="fa-regular fa-eye"></i></a>
+            class="p-2 border-gray-400
+                   {% if not loop.last %}border-r{% endif %}
+                   {% if not is_last_student %}border-b{% endif %}"
+            >
+            <div class="grid grid grid-cols-[repeat(3,_minmax(25px,_1fr))] gap-3">
+              {# Empty div so there's  gap to the middle and then the eye #}
+              <div></div>
+              <div>
+                <input type="checkbox" name="gridCheckBox"
+                  class="student_adventure_checkbox min-w-fit place-self-center text-green-700 text-center text-sm cursor-pointer {% if student_adventure.ticked %}fa-solid fa-check{% endif %}"
+                  {% if student_adventure.ticked %}checked{% endif %}
+                  hx-post="/grid_overview/class/{{ class_info.id }}/level?level={{ adventure_table.level }}&student={{ student }}&adventure={{ adventure.id }}"
+                  hx-target="#adventure_table" hx-swap="outerHTML" hx-trigger="change">
+              </div>
+              <div>
+                <a class="no-underline cursor-pointer text-gray-800 hover:bg-gray-400/50 hover:rounded-full"
+                  href='/hedy/{{student_adventure.program}}/view'><i class="fa-regular fa-eye"></i></a>
+              </div>
             </div>
           </td>
           {% else %}
