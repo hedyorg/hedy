@@ -1589,13 +1589,33 @@ export function toggle_developers_mode(enforced: boolean) {
   }
 }
 
-export function toggle_keyword_language(lang: string) {
-  const hash = window.location.hash;
-  const queryString = window.location.search;
-  const urlParams = new URLSearchParams(queryString);
-  urlParams.set('keyword_language', lang)
-  window.location.search = urlParams.toString()
-  window.open(hash, "_self");
+export function toggle_keyword_language(current_lang: string, new_lang: string) {
+  tryCatchPopup(async () => {
+    const response = await postJsonWithAchievements('/translate_keywords', {
+      code: theGlobalEditor.contents,
+      start_lang: current_lang,
+      goal_lang: new_lang,
+      level: theLevel,
+    });
+
+  if (response.success) {
+    const new_code = response.code
+    theGlobalEditor.contents = new_code;
+    const saveName = saveNameFromInput();
+    localSave(currentTabLsKey(), { saveName, new_code });
+    // save translated code to local storage
+    // such that it can be fetched after reload
+    $('#editor').attr('lang', new_lang);
+
+    // update the whole page (example codes)
+    const hash = window.location.hash;
+    const queryString = window.location.search;
+    const urlParams = new URLSearchParams(queryString);
+    urlParams.set('keyword_language', new_lang)
+    window.location.search = urlParams.toString()
+    window.open(hash, "_self");
+    }
+  });
 }
 
 export function toggle_blur_code() {
@@ -1652,22 +1672,6 @@ async function postJsonWithAchievements(url: string, data: any): Promise<any> {
   return response;
 }
 
-export function change_keyword_language(start_lang: string, new_lang: string) {
-  tryCatchPopup(async () => {
-    const response = await postJsonWithAchievements('/translate_keywords', {
-      code: theGlobalEditor.contents,
-      start_lang: start_lang,
-      goal_lang: new_lang,
-      level: theLevel,
-    });
-
-    if (response.success) {
-      theGlobalEditor.contents = response.code;
-      $('#editor').attr('lang', new_lang);
-      update_view('main_editor_keyword_selector', new_lang);
-    }
-  });
-}
 
 function update_view(selector_container: string, new_lang: string) {
   $('#' + selector_container + ' > div').map(function() {
