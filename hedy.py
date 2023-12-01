@@ -1577,6 +1577,7 @@ class ConvertToPython_1(ConvertToPython):
 @source_map_transformer(source_map)
 class ConvertToPython_2(ConvertToPython_1):
 
+    # why doesn't this live in isvalid?
     def error_ask_dep_2(self, meta, args):
         # ask is no longer usable this way, raise!
         # ask_needs_var is an entry in lang.yaml in texts where we can add extra info on this error
