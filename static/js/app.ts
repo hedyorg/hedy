@@ -1589,8 +1589,20 @@ export function toggle_developers_mode(enforced: boolean) {
   }
 }
 
+/**
+ * Run a code block, show an error message if we catch an exception
+ */
+export async function tryCatchErrorBox(cb: () => void | Promise<void>) {
+  try {
+    return await cb();
+  } catch (e: any) {
+    console.log('Error', e);
+    error.show(ClientMessages['Transpile_error'], e.message);
+  }
+}
+
 export function toggle_keyword_language(current_lang: string, new_lang: string) {
-  tryCatchPopup(async () => {
+  tryCatchErrorBox(async () => {
     const response = await postJsonWithAchievements('/translate_keywords', {
       code: theGlobalEditor.contents,
       start_lang: current_lang,
@@ -1602,9 +1614,10 @@ export function toggle_keyword_language(current_lang: string, new_lang: string) 
     const code = response.code
     theGlobalEditor.contents = code;
     const saveName = saveNameFromInput();
-    localSave(currentTabLsKey(), { saveName, code });
+
     // save translated code to local storage
     // such that it can be fetched after reload
+    localSave(currentTabLsKey(), { saveName, code });
     $('#editor').attr('lang', new_lang);
 
     // update the whole page (example codes)
