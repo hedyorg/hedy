@@ -140,17 +140,22 @@ class TestsTranslationLevel1(HedyTester):
     def test_invalid(self):
         code = "hallo"
 
-        result = hedy_translation.translate_keywords(code, from_lang="en", to_lang="nl", level=self.level)
-        expected = "hallo"
-
-        self.assertEqual(expected, result)
+        with self.assertRaises(hedy.exceptions.HedyException) as context:
+            result = hedy_translation.translate_keywords(code,
+                                                         from_lang="en",
+                                                         to_lang="nl",
+                                                         level=self.level)
 
     # No translation because of the invalid space error
     def test_invalid_space(self):
+        # FH, dec 23: We remove leading spaces in the translation, since the editor
+        # also does this. It means dropping a space from the program but that, I think, is better
+        # than not translating a program that does run
+
         code = " ask Hedy"
 
         result = hedy_translation.translate_keywords(code, from_lang="en", to_lang="nl", level=self.level)
-        expected = " ask Hedy"
+        expected = "vraag Hedy"
 
         self.assertEqual(expected, result)
 

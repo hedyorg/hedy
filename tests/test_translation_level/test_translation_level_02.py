@@ -2,6 +2,7 @@ import textwrap
 
 from parameterized import parameterized
 
+import hedy
 import hedy_translation
 from hedy_content import ALL_KEYWORD_LANGUAGES
 from tests.Tester import HedyTester
@@ -113,18 +114,18 @@ class TestsTranslationLevel2(HedyTester):
     def test_invalid(self):
         code = "hallo"
 
-        result = hedy_translation.translate_keywords(
-            code, "en", "nl", self.level)
-        expected = "hallo"
-
-        self.assertEqual(expected, result)
+        with self.assertRaises(hedy.exceptions.HedyException) as context:
+            result = hedy_translation.translate_keywords(code,
+                                                         from_lang="en",
+                                                         to_lang="nl",
+                                                         level=self.level)
 
     def test_invalid_space(self):
         code = " print Hedy"
 
         result = hedy_translation.translate_keywords(
             code, "en", "nl", self.level)
-        expected = " print Hedy"
+        expected = "print Hedy"
 
         self.assertEqual(expected, result)
 

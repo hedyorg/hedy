@@ -3210,14 +3210,14 @@ def check_program_size_is_valid(input_string):
         raise exceptions.InputTooBigException(lines_of_code=number_of_lines, max_lines=MAX_LINES)
 
 
-def process_input_string(input_string, level, lang, escape_backslashes=True, preprocess_ifs_enabled=True):
+def process_input_string(input_string, level, lang, preprocess_ifs_enabled=True):
     result = input_string.replace('\r\n', '\n')
 
     location = location_of_first_blank(result)
     if location > 0:
         raise exceptions.CodePlaceholdersPresentException(line_number=location)
 
-    if escape_backslashes and level >= 4:
+    if level >= 4:
         result = result.replace("\\", "\\\\")
 
     # In levels 5 to 7 we do not allow if without else, we add an empty print to make it possible in the parser
