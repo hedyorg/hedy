@@ -66,6 +66,16 @@ export function addStudents(classname, count) {
     return students;
 }
 
+export function addCustomizations(classname){
+    goToTeachersPage();
+
+    cy.get(".view_class").contains(classname).click();
+    cy.get('#customize-class-button').click();
+    cy.get('#enable_level_7').parent('.switch').click();
+    cy.getBySel("save_customizations").click();
+    cy.get("#back_to_class").click();
+}
+
 export function createClassAndAddStudents(){
     const classname = createClass();
     const students = addStudents(classname, 4);

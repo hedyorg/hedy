@@ -1,40 +1,52 @@
-import { createClass } from '../../tools/classes/class.js';
-import {loginForTeacher} from '../../tools/login/login.js'
+import { createClass, addCustomizations } from '../../tools/classes/class.js';
+import { loginForTeacher, logout} from '../../tools/login/login.js'
 import { goToTeachersPage } from '../../tools/navigation/nav.js';
 
-describe('Is able to click on duplicate class', () => {
-  it('Passes', () => {
+describe('Duplicate class tests', () => {
+  it('Is able to duplicate class without adding second teachers', () => {
     loginForTeacher();
-    createClass();
+    const classname = createClass();
+    addCustomizations(classname);
     goToTeachersPage();
+    const duplicate_class = `test class ${Math.random()}`;
 
     // Click on duplicate icon
     cy.get('.no-underline > .fas').first().click();
 
+    //`Check for Second Teachers option
+    cy.get('#modal-no-button').should('be.enabled').click();
+
     // Checks for input field
-    cy.get('#modal-prompt-input').type('test class 2');
+    cy.get('#modal-prompt-input').type(duplicate_class);
     cy.get('#modal-ok-button').click();
 
-    goToTeachersPage();
+    cy.reload();
+
+    cy.get(".view_class").contains(duplicate_class).click();
+    cy.get("#customize-class-button").click();
+    cy.get("#enable_level_7").should('be.enabled');
+    logout();
   })
 
-  it("Second teacher can duplicate main teacher's class", () => {
-    loginForTeacher("teacher4");
+  it('Is able to duplicate class with adding second teachers', () => {
+    loginForTeacher();
+    const classname = createClass();
+    addCustomizations(classname);
     goToTeachersPage();
+    const duplicate_class = `test class ${Math.random()}`;
 
-    // Take actions only when teacher2 is a second teacher; i.e., having teacher1 as a teacher.
-    cy.get("#teacher_classes tbody tr")
-      .each(($tr, i) => {
-        if ($tr.text().includes("teacher1")) {
-          // Click on duplicate icon
-          cy.get(`tbody :nth-child(${i+1}) .no-underline > .fas`).first().click();
-          
-          // Checks for input field
-          cy.get('#modal-prompt-input').type(' teacher4');
-          cy.get('#modal-ok-button').click(); 
-        }
-      })
-    
-    goToTeachersPage();
+    cy.get('.no-underline > .fas').first().click();
+
+    cy.get('#modal-yes-button').should('be.enabled').click();
+
+    cy.get('#modal-prompt-input').type(duplicate_class);
+    cy.get('#modal-ok-button').click();
+
+    cy.reload();
+
+    cy.get(".view_class").contains(duplicate_class).click();
+    cy.get("#invites-block").should('be.visible');
+    cy.get("#customize-class-button").click();
+    cy.get("#enable_level_7").should('be.enabled');
   })
 })
