@@ -1216,6 +1216,7 @@ def valid_echo(ast):
         'echo') > command_names.index('ask')
 
 
+
 @v_args(meta=True)
 class IsComplete(Filter):
     def __init__(self, level):
