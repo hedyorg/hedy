@@ -118,7 +118,7 @@ def translate_keywords(input_string, from_lang="en", to_lang="nl", level=1):
 
         # we have to reverse escaping or translating and retranslating will add an unlimied number of slashes
         if level >= 4:
-            result = result.replace("\\\\","\\")
+            result = result.replace("\\\\", "\\")
 
         return result
     except VisitError as E:
