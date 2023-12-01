@@ -1219,6 +1219,7 @@ def valid_echo(ast):
         # issues? probably no echoe issue :)
         return True
 
+
 @v_args(meta=True)
 class IsComplete(Filter):
     def __init__(self, level):
