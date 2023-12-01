@@ -1154,8 +1154,6 @@ class IsValid(Filter):
             line_number=meta.line
         )
 
-
-
     def error_list_access(self, meta, args):
         error = InvalidInfo('misspelled "at" command', arguments=[str(args[1][1])], line=meta.line)
         return False, error, meta
