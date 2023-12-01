@@ -114,8 +114,8 @@ class TestsTranslationLevel2(HedyTester):
     def test_invalid(self):
         code = "hallo"
 
-        with self.assertRaises(hedy.exceptions.HedyException) as context:
-            result = hedy_translation.translate_keywords(code,
+        with self.assertRaises(hedy.exceptions.HedyException):
+            hedy_translation.translate_keywords(code,
                                                          from_lang="en",
                                                          to_lang="nl",
                                                          level=self.level)
