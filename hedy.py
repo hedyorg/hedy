@@ -1147,8 +1147,14 @@ class IsValid(Filter):
     def error_print_nq(self, meta, args):
         words = [str(x[1]) for x in args]  # second half of the list is the word
         text = ' '.join(words)
-        return False, InvalidInfo("print without quotes", arguments=[
-                                  text], line=meta.line, column=meta.column), meta
+
+        raise exceptions.UnquotedTextException(
+            level=4,
+            unquotedtext=text,
+            line_number=meta.line
+        )
+
+
 
     def error_list_access(self, meta, args):
         error = InvalidInfo('misspelled "at" command', arguments=[str(args[1][1])], line=meta.line)
@@ -3301,10 +3307,6 @@ def is_program_valid(program_root, input_string, level, lang):
             raise exceptions.IncompleteRepeatException(command='print', level=level, line_number=line)
         elif invalid_info.error_type == 'repeat missing times':
             raise exceptions.IncompleteRepeatException(command='times', level=level, line_number=line)
-        elif invalid_info.error_type == 'print without quotes':
-            unquotedtext = invalid_info.arguments[0]
-            raise exceptions.UnquotedTextException(
-                level=level, unquotedtext=unquotedtext, line_number=invalid_info.line)
         elif invalid_info.error_type == 'misspelled "at" command':
             raise exceptions.MisspelledAtCommand(command='at', arg1=invalid_info.arguments[0], line_number=line)
         elif invalid_info.error_type == 'unsupported number':
@@ -3395,10 +3397,10 @@ def transpile_inner(input_string, level, lang="en", populate_source_map=False, i
         source_map.set_language(lang)
         source_map.set_hedy_input(input_string)
 
-    # checks whether any error production nodes are present in the parse tree
-    is_program_valid(program_root, input_string, level, lang)
-
     try:
+        # checks whether any error production nodes are present in the parse tree
+        is_program_valid(program_root, input_string, level, lang)
+
         abstract_syntax_tree = ExtractAST().transform(program_root)
 
         is_program_complete(abstract_syntax_tree, level)
