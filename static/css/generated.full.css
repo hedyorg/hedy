@@ -7211,10 +7211,6 @@ code {
   width: 16.666667%;
 }
 
-.w-96 {
-  width: 24rem;
-}
-
 .w-min {
   width: -moz-min-content;
   width: min-content;
@@ -7227,6 +7223,10 @@ code {
 
 .w-screen {
   width: 100vw;
+}
+
+.w-96 {
+  width: 24rem;
 }
 
 .w-2 {
@@ -7397,6 +7397,11 @@ code {
   min-width: 200px;
 }
 
+.min-w-fit {
+  min-width: -moz-fit-content;
+  min-width: fit-content;
+}
+
 .min-w-min {
   min-width: -moz-min-content;
   min-width: min-content;
@@ -7409,11 +7414,6 @@ code {
 .min-w-max {
   min-width: -moz-max-content;
   min-width: max-content;
-}
-
-.min-w-fit {
-  min-width: -moz-fit-content;
-  min-width: fit-content;
 }
 
 .max-w-screen-xl {
@@ -13036,6 +13036,10 @@ code {
   grid-template-columns: repeat(3, minmax(0, 1fr));
 }
 
+.grid-cols-\[repeat\(3\2c _minmax\(25px\2c _1fr\)\)\] {
+  grid-template-columns: repeat(3, minmax(25px, 1fr));
+}
+
 .grid-cols-1 {
   grid-template-columns: repeat(1, minmax(0, 1fr));
 }
@@ -13082,18 +13086,6 @@ code {
 
 .grid-cols-none {
   grid-template-columns: none;
-}
-
-.grid-cols-\[3_minmax\(25px\2c _1fr\)\] {
-  grid-template-columns: 3 minmax(25px, 1fr);
-}
-
-.grid-cols-\[3\2c _minmax\(25px\2c _1fr\)\] {
-  grid-template-columns: 3 minmax(25px, 1fr);
-}
-
-.grid-cols-\[repeat\(3\2c _minmax\(25px\2c _1fr\)\)\] {
-  grid-template-columns: repeat(3, minmax(25px, 1fr));
 }
 
 .grid-rows-1 {
@@ -13304,12 +13296,12 @@ code {
   gap: 0.25rem;
 }
 
-.gap-0 {
-  gap: 0px;
-}
-
 .gap-3 {
   gap: 0.75rem;
+}
+
+.gap-0 {
+  gap: 0px;
 }
 
 .gap-5 {
@@ -31783,30 +31775,30 @@ div[class^="ace_incorrect_hedy_code"] {
 }
 
 .student_adventure_checkbox[disabled] {
-  position: relative;
-  border-radius: 0.25rem;
-  --tw-border-opacity: 1;
-  border-color: rgb(160 174 192 / var(--tw-border-opacity));
-  --tw-bg-opacity: 1;
-  background-color: rgb(237 242 247 / var(--tw-bg-opacity));
+  position: relative !important;
+  border-radius: 0.25rem !important;
+  --tw-border-opacity: 1 !important;
+  border-color: rgb(160 174 192 / var(--tw-border-opacity)) !important;
+  --tw-bg-opacity: 1 !important;
+  background-color: rgb(237 242 247 / var(--tw-bg-opacity)) !important;
 }
 
 .student_adventure_checkbox {
-  position: relative;
-  border-radius: 0.25rem;
-  --tw-border-opacity: 1;
-  border-color: rgb(160 174 192 / var(--tw-border-opacity));
-  --tw-bg-opacity: 1;
-  background-color: rgb(255 255 255 / var(--tw-bg-opacity));
+  position: relative !important;
+  border-radius: 0.25rem !important;
+  --tw-border-opacity: 1 !important;
+  border-color: rgb(160 174 192 / var(--tw-border-opacity)) !important;
+  --tw-bg-opacity: 1 !important;
+  background-color: rgb(255 255 255 / var(--tw-bg-opacity)) !important;
 }
 
 .student_adventure_checkbox:checked {
-  position: relative;
-  border-radius: 0.25rem;
-  --tw-border-opacity: 1;
-  border-color: rgb(160 174 192 / var(--tw-border-opacity));
-  --tw-bg-opacity: 1;
-  background-color: rgb(154 230 180 / var(--tw-bg-opacity));
+  position: relative !important;
+  border-radius: 0.25rem !important;
+  --tw-border-opacity: 1 !important;
+  border-color: rgb(160 174 192 / var(--tw-border-opacity)) !important;
+  --tw-bg-opacity: 1 !important;
+  background-color: rgb(154 230 180 / var(--tw-bg-opacity)) !important;
 }
 
 .hover\:rounded-full:hover {
@@ -32150,6 +32142,10 @@ div[class^="ace_incorrect_hedy_code"] {
 
   .md\:w-3\/5 {
     width: 60%;
+  }
+
+  .md\:w-1 {
+    width: 0.25rem;
   }
 
   .md\:grid-flow-row-dense {
