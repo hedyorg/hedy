@@ -142,9 +142,9 @@ class TestsTranslationLevel1(HedyTester):
 
         with self.assertRaises(hedy.exceptions.HedyException):
             hedy_translation.translate_keywords(code,
-                                                         from_lang="en",
-                                                         to_lang="nl",
-                                                         level=self.level)
+                                                from_lang="en",
+                                                to_lang="nl",
+                                                level=self.level)
 
     # No translation because of the invalid space error
     def test_invalid_space(self):
