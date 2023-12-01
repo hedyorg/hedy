@@ -3829,34 +3829,85 @@ levels:
                 {for} x in minions:
                     {print} x
             mp_choice_options:
-            -   option: '`m i n i o n s`'
+            -   option: 'm i n i o n s'
                 feedback: This is not it.
-            -   option: '`minions minions minions`'
+            -   option: 'Bob Kevin Stuart'
+                feedback: Correct!
+            -   option: 'minions minions minions'
                 feedback: Take a look at the content of your list.
-            -   option: '`Bob Kevin Stuart`'
-                feedback: Correct
-            -   option: '`B o b K e v i n S t u a r t`'
+            -   option: 'B o b K e v i n S t u a r t'
                 feedback: Do not loop through the letters.
             hint: Loop through your list.
-            correct_answer: C
+            correct_answer: B
             question_score: '10'
 
         2:
             question_text: How many hedgehogs will this code print?
             code: |- 
-                {for} x in range 1 to 3:
-                  {for} y in range 1 to 2:
+                {for} x {in} range 1 {to} 3:
+                  {for} y {in} range 1 {to} 2:
                     {print} 🦔
             mp_choice_options:
-            -   option: '`🦔 🦔 🦔`'
+            -   option: '🦔 🦔 🦔'
                 feedback: Try again.
-            -   option: '`🦔 🦔`'
+            -   option: '🦔 🦔'
                 feedback: One more try.
-            -   option: '`🦔 🦔 🦔 🦔 🦔 🦔`'
-                feedback: Correct.
-            -   option: '`🦔 🦔 🦔 🦔 🦔`'
+            -   option: '🦔 🦔 🦔 🦔 🦔 🦔'
+                feedback: Well done!
+            -   option: '🦔 🦔 🦔 🦔 🦔'
                 feedback: That is not it.
             hint: Think about how many times you need repeating.
             correct_answer: C
             question_score: '10'
 
+        3:
+            question_text: What is wrong with code?
+            code: |- 
+                color is {ask} 'what is your favorite color?'
+                {if} color == 'red':
+                  {print} 'yuhuu is a tomato'
+                {elif} color == 'green':
+                  {print} 'yuhuu is an apple'
+                {elif} color == 'blue':
+                  {print} 'yuhuu is a blueberry'
+                {elif} color == 'yellow':
+                  {print} 'yuhuu is a banana'
+                {elif}:
+                  {print} 'this fruit-color does not exist'
+            mp_choice_options:
+            -   option: 'the first `elif` should be used before the `print` command'
+                feedback: Try again.
+            -   option: '`elif` can only be used once'
+                feedback: From now on we can use elif multiple times.
+            -   option: '`==` used with `elif` should be replaced by `=`'
+                feedback: Not correct.
+            -   option: '`elif` in the last line should be replaced by `else`'
+                feedback: Great!
+            hint: Think about if, elif, else.
+            correct_answer: D
+            question_score: '10'
+
+        4:
+            question_text: What is wrong with code?
+            code: |-
+              name is {ask} 'what is your name?'
+              {if} name == 'Hedy':
+              pwd is {ask} 'what is your password?'
+                {if} pwd =='turtle123':
+                  print 'yey'
+                {else}:
+                  print 'access denied'
+              {else}:
+               print 'go fish'
+            mp_choice_options:
+            -   option: ' `elif` is missing'
+                feedback: Try again.
+            -   option: '`else` can only be used once '
+                feedback: From now on we can use elif multiple times.
+            -   option: 'Nothing!'
+                feedback: Correct.
+            -   option: 'From now one when using `ask`, `is` can be replaced by `=`'
+                feedback: This is not true.
+            hint: Think about how many times you need repeating.
+            correct_answer: C
+            question_score: '10'
