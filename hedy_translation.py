@@ -93,20 +93,14 @@ def translate_keywords(input_string, from_lang="en", to_lang="nl", level=1):
         keyword_dict_from = keywords_to_dict(from_lang)
         keyword_dict_to = keywords_to_dict(to_lang)
 
-        program_root = parser.parse(processed_input + "\n")
-
-        # checks whether any error production nodes are present in the parse tree
-        hedy.is_program_valid(program_root, processed_input, level, from_lang)
-
-        abstract_syntax_tree = hedy.ExtractAST().transform(program_root)
-        hedy.is_program_complete(abstract_syntax_tree, level)
-
-        if not hedy.valid_echo(abstract_syntax_tree):
-            raise hedy.exceptions.LonelyEchoException()
+        program_root = parser.parse(processed_input + "\n").children[0]
 
         translator = Translator(processed_input)
-        translator.visit(program_root.children[0])
+        translator.visit(program_root)
         ordered_rules = reversed(sorted(translator.rules, key=operator.attrgetter("line", "start")))
+
+        # checks whether any error production nodes are present in the parse tree
+        hedy.is_program_valid(program_root, input_string, level, from_lang)
 
         result = processed_input
         for rule in ordered_rules:
