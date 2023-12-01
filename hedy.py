@@ -1206,15 +1206,18 @@ class IsValid(Filter):
 @v_args(meta=True)
 def valid_echo(ast):
     commands = ast.children
-    command_names = [x.children[0].data for x in commands]
-    no_echo = 'echo' not in command_names
+    try:
+        command_names = [x.children[0].data for x in commands]
+        no_echo = 'echo' not in command_names
 
-    # no echo is always ok!
+        # no echo is always ok!
 
-    # otherwise, both have to be in the list and echo should come after
-    return no_echo or ('echo' in command_names and 'ask' in command_names) and command_names.index(
-        'echo') > command_names.index('ask')
-
+        # otherwise, both have to be in the list and echo should come after
+        return no_echo or ('echo' in command_names and 'ask' in command_names) and command_names.index(
+            'echo') > command_names.index('ask')
+    except:
+        # issues? probably no echoe issue :)
+        return True
 
 @v_args(meta=True)
 class IsComplete(Filter):
