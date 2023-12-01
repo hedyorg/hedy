@@ -64,6 +64,47 @@ class TestsLevel12(HedyTester):
             output=output
         )
 
+    def test_sleep_division_float(self):
+        code = "sleep 1 / 20"
+        expected = HedyTester.dedent(
+            HedyTester.sleep_command_transpiled("1 / 20"))
+
+        self.multi_level_tester(
+            code=code,
+            expected=expected,
+            max_level=17
+        )
+
+    def test_sleep_division_float_var(self):
+        code = textwrap.dedent("""\
+        time = 0.2
+        sleep time""")
+
+        expected = HedyTester.dedent("""\
+            _time = 0.2""",
+                                     HedyTester.sleep_command_transpiled('_time')
+                                     )
+
+        self.multi_level_tester(
+            code=code,
+            expected=expected,
+            max_level=17
+        )
+
+    def test_sleep_division_float_literal(self):
+        code = textwrap.dedent("""\
+        sleep 0.2""")
+
+        expected = HedyTester.dedent(
+            HedyTester.sleep_command_transpiled('0.2')
+        )
+
+        self.multi_level_tester(
+            code=code,
+            expected=expected,
+            max_level=15
+        )
+
     def test_print_literal_strings(self):
         code = """print "It's " '"Hedy"!'"""
         expected = """print(f'''It\\'s "Hedy"!''')"""
@@ -478,7 +519,6 @@ class TestsLevel12(HedyTester):
         )
 
     def test_turtle_with_expression(self):
-
         code = textwrap.dedent("""\
             num = 10.6
             turn num + 10.5
@@ -806,7 +846,7 @@ class TestsLevel12(HedyTester):
             raise Exception('catch_index_exception')
           time.sleep(int(n[int(1)-1]))
         except ValueError:
-          raise Exception(f'While running your program the command <span class=\"command-highlighted\">sleep</span> received the value <span class=\"command-highlighted\">{n[int(1)-1]}</span> which is not allowed. Try changing the value to a number.')""")
+          raise Exception('catch_value_exception')""")
 
         self.multi_level_tester(max_level=15, code=code, expected=expected)
 
@@ -824,7 +864,7 @@ class TestsLevel12(HedyTester):
             raise Exception('catch_index_exception')
           time.sleep(int(random.choice(n)))
         except ValueError:
-          raise Exception(f'While running your program the command <span class=\"command-highlighted\">sleep</span> received the value <span class=\"command-highlighted\">{random.choice(n)}</span> which is not allowed. Try changing the value to a number.')""")
+          raise Exception('catch_value_exception')""")
 
         self.multi_level_tester(max_level=15, code=code, expected=expected)
 
@@ -866,19 +906,10 @@ class TestsLevel12(HedyTester):
 
         self.multi_level_tester(code=code, expected=expected)
 
-    def test_sleep_with_float_gives_error(self):
-        code = textwrap.dedent("""\
-            n is 1.5
-            sleep n""")
-
-        self.multi_level_tester(
-            code=code,
-            extra_check_function=lambda c: c.exception.arguments['line_number'] == 2,
-            exception=hedy.exceptions.InvalidArgumentTypeException)
-
     #
     # assign tests
     #
+
     def test_assign_integer(self):
         code = "naam is 14"
         expected = "naam = 14"
