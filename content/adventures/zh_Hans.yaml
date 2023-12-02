@@ -89,7 +89,7 @@ adventures:
                 start_code: '{print} 你的故事'
             4:
                 story_text: "你可能注意到了，在之前的级别里还有个问题。你有没有试过打印含有“名字”这个词的句子？即：`{print}` 我的名字是名字。\n 在这一级里你可以解决这个问题。你必须给所有需要打印的东西加上引号。\n\n### 练习1\n复制示例代码并通过添加引号来使其正常工作。 \n\n ### 练习 2 \n返回到上一个级别并复制故事代码。通过在正确的位置添加引号，使代码在此级别中正常工作。 \n注意：你自己故事中的变量应该在引号之外。就像范例代码的第二行一样。在该行中，变量名称放在引号之外。\n"
-                example_code: "```\n名字 {is} {ask}_你的名字是什么? _\n{print}     _ 主人公的名字是_名字 \n {print} 名字     _正准备走进树林_\n{print} 名字 _有点害怕'\n动物们 {is} \U0001F994, \U0001F43F, \U0001F989, \U0001F987\n{print} _他听到了一个_ 动物们{at} {random} 的声音\n{print} 名字_担心这片森林闹鬼_\n```\n"
+                example_code: "```\n名字 {is} {ask}_你的名字是什么? _\n{print}     _ 主人公的名字是_名字 \n {print} 名字     _正准备走进树林_\n{print} 名字 _有点害怕'\n动物们 {is} 🦔, 🐿, 🦉, 🦇\n{print} _他听到了一个_ 动物们{at} {random} 的声音\n{print} 名字_担心这片森林闹鬼_\n```\n"
                 start_code: '{print} ''你的故事会打印在这里！'''
             5:
                 story_text: |
@@ -274,8 +274,8 @@ adventures:
                     {print} 动物们 {at} {random}
     and_or_command:
         name: '{and} & {or}'
-        default_save_name: and or
-        description: introducing and or
+        default_save_name: 或者
+        description: 介绍和或
         levels:
             13:
                 story_text: |-
@@ -296,8 +296,8 @@ adventures:
                         {print} '你就是真的海蒂!'
     ask_command:
         name: '{ask}'
-        default_save_name: ask_command
-        description: Introduction ask command
+        default_save_name: 要求命令
+        description: 询问命令
         levels:
             1:
                 story_text: |
@@ -309,8 +309,8 @@ adventures:
                     {ask}你叫什么名字?
                     ```
                 story_text_2: |
-                    ## The echo command
-                    如果想让计算机将结果重复一遍，可以使用 `{echo}` 命令。答案将在程序末尾输出，因此在本例中，结果将在 hello 之后输出。
+                    ## 这 echo 命令
+                    如果想让计算机将结果重复一遍，你可以使用 `{echo}` 命令。答案将在程序末尾输出，因此在本例中，结果将在 hello 之后输出。
                 example_code_2: |
                     ```
                     {print} 你好!
@@ -374,8 +374,8 @@ adventures:
                     name = {input}('What is your name?')
                     {print}('So your name is ', name)
     blackjack:
-        name: Blackjack
-        default_save_name: Blackjack
+        name: 黑杰克
+        default_save_name: 黑杰克
         description: 尽可能地接近21
         levels:
             17:
@@ -483,8 +483,8 @@ adventures:
                     现在你可以做数学了，你可以自己做一个计算器！
                 example_code: |
                     ```
-                    数一 {is} {ask} '填写第一个数字：'
-                    数二 {is} {ask} '填写第二个数字：'
+                    数一 是 {ask} '填写第一个数字：'
+                    数二 是 {ask} '填写第二个数字：'
                     正确答案 = 数一 * 数二
                     {print} 数一 ' 乘以 '数二 ' 是 ' 正确答案
                     ```
@@ -501,12 +501,12 @@ adventures:
                     ```
                 story_text_3: |
                     您还可以让计算机自己使用 {random} 求随机数的和。
-                example_code_3: |
+                example_code_3: |-
                     numbers = 1, 2, 3, 4, 5, 6, 7, 8, 9, 10
                     number_1 = _
                     number_2 = _
-                    correct_answer = number_1 * number_2
-                    given_answer = 'What is ' number_1 ' times ' number_2 '?'
+                    正确答案 = 数一 * 数二
+                    得出答案 ={ask} '什么是 ' 数一 ' 乘以 ' 数二 '?'
                     {if} _
                     {else} _
                 start_code: '{print} ''欢迎来到这个计算器!'''
@@ -565,11 +565,13 @@ adventures:
                 example_code: |
                     ```
                     数字 = 10
-                    {for} i {in} {range} 1 to 10
+                    {for} i {in} {range} 1 {to} 10
                         {print} i * 数字
                     ```
                 start_code: |
-                    # 将你的代码写在这里
+                    数字＝10
+                    {for}i{in}{range}1{to}10
+                              {print}i*数字
             12:
                 story_text: |
                     在本关，你可以编写一个可以计算小数的计算器。
@@ -591,13 +593,13 @@ adventures:
                 start_code: '# 在这里写你的代码'
             13:
                 story_text: |
-                    ### Exercise 1
-                    Let's make the practice program a bit harder. The player now has to answers two questions correctly. Fill out the blanks to complete the program.
+                    ### 练习1
+                    来让这个练习程序难一点吧 .操作者现在需要正确地回答两个问题.请填写空格以完成程序.
 
-                    ### Exercise 2 Extra
-                    Sometimes, calculations have multiple correct answers. For example, 10 can be divided by 5 and by 2. So the question 'What number divides 10?' can be answered by 2 and by 5.
-                    Ask for a calculation that has multiple correct answers, ask the player to answer it, and determine if it is correct using `{or}`.
-                    Empty the programming field and create your own solution.
+                    ### 额外的练习2
+                    有时候, 计算有多个正确答案.例如，10可以被5和2整除.那么问题'什么数能整除10?'可以用2和5来回答.
+                    要求一个有多个正确答案的计算,让操作者回答它, 并确定其是否使用正确 `{or}`.
+                    清空编程字段并且创造你自己的解决方案.
                 example_code: |
                     ```
                     answer1 = {ask} 'What is 10 times 7?'
@@ -1374,7 +1376,7 @@ adventures:
 
                     print 'Thanks for ordering!'
                     ```
-                start_code: |4
+                start_code: |2
 
                           define food_order
                               toppings = ask 'pepperoni, tuna, veggie or cheese?'
@@ -1425,7 +1427,7 @@ adventures:
                         print 'there a ' sound
                         print 'everywhere a ' sound sound
                     ```
-                start_code: |4
+                start_code: |2
 
                           animals = ['pig', 'dog', 'cow']
                           sounds = ['oink', 'woof', 'moo']
@@ -2056,7 +2058,7 @@ adventures:
                     在本级中，你将学会在使用算命仙时，（秘密地）使结果对你有利！
                     通过使用`{if}` 和`{else}` ，你可以确保你总是能得到好运，而其他人可能得不到。
                     看看这个例子就知道了。
-                example_code: "```\n{print} '我是海蒂算命仙!'\n{print} '我可以预测你明天是否会中彩票！'\n人 {is} {ask} '你是谁？'\n{if} 人 {is} 海蒂 {print} '你肯定会中奖！\U0001F929' {else} {print} '你运气不好！别人会中奖！\U0001F62D' \n```\n"
+                example_code: "```\n{print} '我是海蒂算命仙!'\n{print} '我可以预测你明天是否会中彩票！'\n人 {is} {ask} '你是谁？'\n{if} 人 {is} 海蒂 {print} '你肯定会中奖！🤩' {else} {print} '你运气不好！别人会中奖！😭' \n```\n"
                 start_code: '# 在这里写下你的代码'
             6:
                 story_text: |
