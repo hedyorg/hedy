@@ -42,7 +42,7 @@ from logging_config import LOGGING_CONFIG
 from utils import dump_yaml_rt, is_debug_mode, load_yaml_rt, timems, version, strip_accents
 from website import (ab_proxying, achievements, admin, auth_pages, aws_helpers,
                      cdn, classes, database, for_teachers, s3_logger, parsons,
-                     profile, programs, querylog, quiz, statistics,
+                     profile, programs, querylog, quiz, statistics, surveys,
                      translating, tags)
 from website.auth import (current_user, is_admin, is_teacher, is_second_teacher, has_public_profile,
                           login_user_from_token_cookie, requires_login, requires_login_redirect, requires_teacher,
@@ -106,6 +106,7 @@ for lang in ALL_LANGUAGES.keys():
 ACHIEVEMENTS_TRANSLATIONS = hedyweb.AchievementTranslations()
 DATABASE = database.Database()
 ACHIEVEMENTS = achievements.Achievements(DATABASE, ACHIEVEMENTS_TRANSLATIONS)
+SURVEYS = surveys.SurveysModule(DATABASE)
 
 TAGS = collections.defaultdict(hedy_content.NoSuchAdventure)
 for lang in ALL_LANGUAGES.keys():
@@ -1522,7 +1523,8 @@ def view_program(user, id):
                            javascript_page_options=dict(
                                page='view-program',
                                lang=g.lang,
-                               level=int(result['level'])),
+                               level=int(result['level']),
+                               code=code),
                            **arguments_dict)
 
 
@@ -1623,10 +1625,11 @@ def get_embedded_code_editor(level):
 
     return render_template("embedded-editor.html", embedded=True, run=run, language=language,
                            keyword_language=keyword_language, readOnly=readOnly,
-                           level=level, program=program, javascript_page_options=dict(
-                               page='code',
+                           level=level, javascript_page_options=dict(
+                               page='view-program',
                                lang=language,
-                               level=level
+                               level=level,
+                               code=program
                            ))
 
 
@@ -2485,6 +2488,7 @@ app.register_blueprint(parsons.ParsonsModule(PARSONS))
 app.register_blueprint(statistics.StatisticsModule(DATABASE))
 app.register_blueprint(statistics.LiveStatisticsModule(DATABASE))
 app.register_blueprint(tags.TagsModule(DATABASE, ACHIEVEMENTS))
+app.register_blueprint(surveys.SurveysModule(DATABASE))
 
 
 # *** START SERVER ***

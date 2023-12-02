@@ -27,7 +27,7 @@ describe('Is able to click on duplicate class', () => {
       .each(($tr, i) => {
         if ($tr.text().includes("teacher1")) {
           // Click on duplicate icon
-          cy.get(`tbody :nth-child(${i+1}) .no-underline > .fas`).click();
+          cy.get(`tbody :nth-child(${i+1}) .no-underline > .fas`).first().click();
           
           // Checks for input field
           cy.get('#modal-prompt-input').type(' teacher4');

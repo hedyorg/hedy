@@ -335,6 +335,7 @@ export interface InitializeViewProgramPageOptions {
   readonly page: 'view-program';
   readonly level: number;
   readonly lang: string;
+  readonly code: string;
 }
 
 export function initializeViewProgramPage(options: InitializeViewProgramPageOptions) {
@@ -344,7 +345,12 @@ export function initializeViewProgramPage(options: InitializeViewProgramPageOpti
   // We need to enable the main editor for the program page as well
   const dir = $("body").attr("dir");
   theGlobalEditor = editorCreator.initializeEditorWithGutter($('#editor'), EditorType.MAIN, dir);
+  initializeTranslation({
+    keywordLanguage: options.lang, 
+    level: options.level
+  });
   attachMainEditorEvents(theGlobalEditor);
+  theGlobalEditor.contents = options.code;
   error.setEditor(theGlobalEditor);
   initializeDebugger({
     editor: theGlobalEditor,
@@ -1583,13 +1589,46 @@ export function toggle_developers_mode(enforced: boolean) {
   }
 }
 
-export function toggle_keyword_language(lang: string) {
-  const hash = window.location.hash;
-  const queryString = window.location.search;
-  const urlParams = new URLSearchParams(queryString);
-  urlParams.set('keyword_language', lang)
-  window.location.search = urlParams.toString()
-  window.open(hash, "_self");
+/**
+ * Run a code block, show an error message if we catch an exception
+ */
+export async function tryCatchErrorBox(cb: () => void | Promise<void>) {
+  try {
+    return await cb();
+  } catch (e: any) {
+    console.log('Error', e);
+    error.show(ClientMessages['Transpile_error'], e.message);
+  }
+}
+
+export function toggle_keyword_language(current_lang: string, new_lang: string) {
+  tryCatchErrorBox(async () => {
+    const response = await postJsonWithAchievements('/translate_keywords', {
+      code: theGlobalEditor.contents,
+      start_lang: current_lang,
+      goal_lang: new_lang,
+      level: theLevel,
+    });
+
+  if (response.success) {
+    const code = response.code
+    theGlobalEditor.contents = code;
+    const saveName = saveNameFromInput();
+
+    // save translated code to local storage
+    // such that it can be fetched after reload
+    localSave(currentTabLsKey(), { saveName, code });
+    $('#editor').attr('lang', new_lang);
+
+    // update the whole page (example codes)
+    const hash = window.location.hash;
+    const queryString = window.location.search;
+    const urlParams = new URLSearchParams(queryString);
+    urlParams.set('keyword_language', new_lang)
+    window.location.search = urlParams.toString()
+    window.open(hash, "_self");
+    }
+  });
 }
 
 export function toggle_blur_code() {
@@ -1646,22 +1685,6 @@ async function postJsonWithAchievements(url: string, data: any): Promise<any> {
   return response;
 }
 
-export function change_keyword_language(start_lang: string, new_lang: string) {
-  tryCatchPopup(async () => {
-    const response = await postJsonWithAchievements('/translate_keywords', {
-      code: theGlobalEditor.contents,
-      start_lang: start_lang,
-      goal_lang: new_lang,
-      level: theLevel,
-    });
-
-    if (response.success) {
-      theGlobalEditor.contents = response.code;
-      $('#editor').attr('lang', new_lang);
-      update_view('main_editor_keyword_selector', new_lang);
-    }
-  });
-}
 
 function update_view(selector_container: string, new_lang: string) {
   $('#' + selector_container + ' > div').map(function() {
