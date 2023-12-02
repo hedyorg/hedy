@@ -1246,29 +1246,25 @@ levels:
         2:
             question_text: Quel est le bon code ?
             mp_choice_options:
-            -   option: '```
-
+            -   option: |-
+                    ```
                     {print} 100 {times} "Salut !"
-
-                    ```'
+                    ```
                 feedback: '`{repeat}` 100 `{times}` `{print}` "Salut !"'
-            -   option: '```
-
+            -   option: |-
+                    ```
                     {print} {repeat} 100 {times} "Salut !"
-
-                    ```'
+                    ```
                 feedback: '{repeat} 100 {times} {print} "Salut !"'
-            -   option: '```
-
+            -   option: |-
+                    ```
                     {repeat} "Salut !" 100 {times}
-
-                    ```'
+                    ```
                 feedback: '{repeat} 100 {times} {print} "Salut !"'
-            -   option: '```
-
+            -   option: |-
+                    ```
                     {repeat} 100 {times} {print} "Salut !"
-
-                    ```'
+                    ```
                 feedback: C'est ça !
             hint: D'abord la commande `{repeat}`, puis la commande `{print}`
             correct_answer: D
@@ -1294,7 +1290,10 @@ levels:
                 {print} "J'aime le " couleur
                 {repeat} 7 {times} {print} "da ba di, da ba da"
             mp_choice_options:
-            -   option: "```\ncouleur\n```"
+            -   option: |-
+                    ```
+                    couleur
+                    ```
                 feedback: C'est ça ! La variable est inconnue
             -   option: '`{print}`'
                 feedback: '`{print}` est écrit correctement'
@@ -1354,7 +1353,7 @@ levels:
             -   option: |-
                     We will We will
                     ROCK YOU!
-                feedback: '« We will » n’apparaîtra pas 2 fois sur la même ligne'
+                feedback: « We will » n’apparaîtra pas 2 fois sur la même ligne
             -   option: |-
                     We will
                     We will
@@ -1414,7 +1413,7 @@ levels:
                     {print} "cassis"
                     ```
                 feedback: Il ne faut pas répéter « chocolat »
-            hint: "`{repeat}` ne peut être utilisé que si l'on veut exécuter la même ligne plusieurs fois de suite."
+            hint: '`{repeat}` ne peut être utilisé que si l''on veut exécuter la même ligne plusieurs fois de suite.'
             correct_answer: A
             question_score: '10'
         9:
@@ -1435,7 +1434,13 @@ levels:
                     {repeat} 3 {times} {print} "S'il vous plait, aidez-moi !"
                     ```
                 feedback: Tu ne répètes pas la bonne ligne.
-            -   option: "```\n{print} \"Batman survolait Gotham.\"\n{print} \"Quand soudain, il entend quelqu'un crier…\"\n{repeat} 3 {times} \"Au secours !\"\n{print} \"S'il vous plait, aidez-moi !\"\n```"
+            -   option: |-
+                    ```
+                    {print} "Batman survolait Gotham."
+                    {print} "Quand soudain, il entend quelqu'un crier…"
+                    {repeat} 3 {times} "Au secours !"
+                    {print} "S'il vous plait, aidez-moi !"
+                    ```
                 feedback: La commande `{print}` manque à la ligne 3.
             -   option: |-
                     ```
@@ -1445,9 +1450,15 @@ levels:
                     {print} S'il vous plait, aidez-moi !
                     ```
                 feedback: Tu oublies les guillemets
-            -   option: "```\n{print} \"Batman survolait Gotham.\"\n{print} \"Quand soudain, il entends quelqu un crier...\"\n{repeat} 3 {times} {print} \"Au secours !\"\n{print} \"S'il vous plat, aidez-moi !\"\n```"
+            -   option: |-
+                    ```
+                    {print} "Batman survolait Gotham."
+                    {print} "Quand soudain, il entends quelqu un crier..."
+                    {repeat} 3 {times} {print} "Au secours !"
+                    {print} "S'il vous plat, aidez-moi !"
+                    ```
                 feedback: Parfait
-            hint: '« Au secours ! » est répété 3 fois'
+            hint: « Au secours ! » est répété 3 fois
             correct_answer: D
             question_score: '10'
         10:

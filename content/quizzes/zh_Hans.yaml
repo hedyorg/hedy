@@ -2555,7 +2555,7 @@ levels:
                     hi
                     hi
                 feedback: Correct
-            -   option: "'hi'这个词会连续出现 25 次。"
+            -   option: '''hi''这个词会连续出现 25 次。'
                 feedback: 不，它只会出现 3 次。
             hint: 它并没说 `{print}` i
             correct_answer: C
@@ -2688,14 +2688,18 @@ levels:
             question_score: '10'
         4:
             question_text: 哪些行需要引号才能使代码正常工作？
-            code: "{print} 欢迎来到网上鞋店\ncategory = {ask} 您要找什么类型的鞋子？\n{if} category =高跟鞋\n     {print} 高跟鞋现在打5折！"
+            code: |-
+                {print} 欢迎来到网上鞋店
+                category = {ask} 您要找什么类型的鞋子？
+                {if} category =高跟鞋
+                     {print} 高跟鞋现在打5折！
             mp_choice_options:
             -   option: Line 1 and 2
-                feedback: '不'
+                feedback: 不
             -   option: Line 1, 2 and 3
-                feedback: '不'
+                feedback: 不
             -   option: Line 1, 2 and 4
-                feedback: '不'
+                feedback: 不
             -   option: All of the lines
                 feedback: 完美!
             hint: 第3行也需要引号吗？
@@ -2703,7 +2707,18 @@ levels:
             question_score: '10'
         5:
             question_text: 当 007 输入正确的密码时，他们会得到什么输出？
-            code: "name {is} {ask} '你叫什么名字？\n{if} name {is} 'Agent007'\n     a {is} '去机场 '\n{else}\n     a {is} '{print}{print}去火车站 '\n密码 {is} {ask} '密码是什么？'\n{if} 密码 {is} 'TOPSECRET'\n     b {is} '明天 02:00'\n{别的}\n     b {is} '今天 10 点'\n{print} a + b"
+            code: |-
+                name {is} {ask} '你叫什么名字？
+                {if} name {is} 'Agent007'
+                     a {is} '去机场 '
+                {else}
+                     a {is} '{print}{print}去火车站 '
+                密码 {is} {ask} '密码是什么？'
+                {if} 密码 {is} 'TOPSECRET'
+                     b {is} '明天 02:00'
+                {别的}
+                     b {is} '今天 10 点'
+                {print} a + b
             mp_choice_options:
             -   option: Go to the train station today at 10.00
                 feedback: The agent won't be catching any bad guys here
