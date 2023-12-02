@@ -3261,7 +3261,7 @@ def parse_input(input_string, level, lang):
 
 
 def is_program_valid(program_root, input_string, level, lang):
-    # IsValid raises the approproate exception when an error production (starting with error_)
+    # IsValid raises the appropriate exception when an error production (starting with error_)
     # is found in the parse tree
     instance = IsValid(level)
     is_valid = instance.transform(program_root)
@@ -3283,7 +3283,7 @@ def is_program_valid(program_root, input_string, level, lang):
             raise exceptions.InvalidSpaceException(
                 level=level, line_number=line, fixed_code=fixed_code, fixed_result=result)
 
-        else:
+        elif invalid_info.error_type == 'invalid command':
             # here we reach when all else fails!
             invalid_command = invalid_info.command
             closest = closest_command(invalid_command, get_suggestions_for_language(lang, level))
@@ -3300,7 +3300,6 @@ def is_program_valid(program_root, input_string, level, lang):
                 raise exceptions.ParseException(level=level, location=[line, column], found=invalid_command)
             elif closest is None:
                 raise exceptions.MissingCommandException(level=level, line_number=line)
-
             else:
 
                 fixed_code = None
