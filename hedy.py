@@ -1149,7 +1149,7 @@ class IsValid(Filter):
         text = ' '.join(words)
 
         raise exceptions.UnquotedTextException(
-            level=4, #todo, of course we have to fetch te real level here
+            level=4,  # todo, of course we have to fetch te real level here
             unquotedtext=text,
             line_number=meta.line
         )
@@ -1169,6 +1169,7 @@ class IsValid(Filter):
     def error_condition(self, meta, args):
         raise exceptions.UnquotedEqualityCheckException(line_number=meta.line)
         # add in line=meta.line, column=meta.column
+
     def error_repeat_no_command(self, meta, args):
         raise exceptions.MissingInnerCommandException(command='repeat', level=self.level, line_number=meta.line)
 
@@ -1194,7 +1195,7 @@ class IsValid(Filter):
 
     def error_ifpressed_missing_else(self, meta, args):
         raise exceptions.MissingElseForPressitException(
-                command='ifpressed_else', level=self.level, line_number=meta.line)
+            command='ifpressed_else', level=self.level, line_number=meta.line)
 
     def error_nested_define(self, meta, args):
         raise exceptions.NestedFunctionException()
