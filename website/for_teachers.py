@@ -216,7 +216,10 @@ class ForTeachersModule(WebsiteModule):
         Class = self.db.get_class(class_id)
         if not Class or (not utils.can_edit_class(user, Class) and not is_admin(user)):
             return utils.error_page(error=404, ui_message=gettext("no_such_class"))
-        session["preview_class"] = Class["id"]
+        session["preview_class"] = {
+            "id": Class["id"],
+            "name": Class["name"],
+        }
         return redirect("/hedy")
 
     @route("/clear-preview-class", methods=["GET"])

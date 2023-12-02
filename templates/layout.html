@@ -79,9 +79,8 @@
         {% include "incl/menubar.html" %}
       {% endif %}
       {% if session.preview_class %}
-      <div class="bg-red-100 border-l-4 border-red-500 text-red-700 p-4" role="alert">
-          <p class="font-bold">Preview mode</p>
-          <p>You are previewing a class as a teacher. <a href="/for-teachers/clear-preview-class">Exit preview mode</a></p>
+      <div class="bg-red-500 text-white text-sm font-bold px-4 py-3" role="alert">
+          <div class="text-center center-text">{{_('previewing_class').format(class_name=session.preview_class["name"])}} <a class="text-white" href="/for-teachers/clear-preview-class">{{_('exit_preview_mode')}}</a></div>
       </div>
       {% endif %}
       {# Can't reindent this as it may contain preformatted code blocks whose indentation is important. #}
