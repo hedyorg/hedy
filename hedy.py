@@ -1149,14 +1149,13 @@ class IsValid(Filter):
         text = ' '.join(words)
 
         raise exceptions.UnquotedTextException(
-            level=4,
+            level=4, #todo, of course we have to fetch te real level here
             unquotedtext=text,
             line_number=meta.line
         )
 
     def error_list_access(self, meta, args):
-        error = InvalidInfo('misspelled "at" command', arguments=[str(args[1][1])], line=meta.line)
-        return False, error, meta
+        raise exceptions.MisspelledAtCommand(command='at', arg1=str(args[1][1]), line_number=meta.line)
 
     def error_invalid(self, meta, args):
         error = InvalidInfo('invalid command', command=args[0][1], arguments=[
@@ -1164,46 +1163,42 @@ class IsValid(Filter):
         return False, error, meta
 
     def error_unsupported_number(self, meta, args):
-        error = InvalidInfo('unsupported number', arguments=[str(args[0])], line=meta.line, column=meta.column)
-        return False, error, meta
+        # add in , line=meta.line, column=meta.column
+        raise exceptions.UnsupportedFloatException(value=''.join(str(args[0])))
 
     def error_condition(self, meta, args):
-        error = InvalidInfo('invalid condition', arguments=[str(args[0])], line=meta.line, column=meta.column)
-        return False, error, meta
-
+        raise exceptions.UnquotedEqualityCheckException(line_number=meta.line)
+        # add in line=meta.line, column=meta.column
     def error_repeat_no_command(self, meta, args):
-        error = InvalidInfo('invalid repeat', arguments=[str(args[0])], line=meta.line, column=meta.column)
-        return False, error, meta
+        raise exceptions.MissingInnerCommandException(command='repeat', level=self.level, line_number=meta.line)
 
     def error_repeat_no_print(self, meta, args):
-        error = InvalidInfo('repeat missing print', arguments=[str(args[0])], line=meta.line, column=meta.column)
-        return False, error, meta
+        raise exceptions.IncompleteRepeatException(command='print', level=self.level, line_number=meta.line)
 
     def error_repeat_no_times(self, meta, args):
-        error = InvalidInfo('repeat missing times', arguments=[str(args[0])], line=meta.line, column=meta.column)
-        return False, error, meta
+        raise exceptions.IncompleteRepeatException(command='times', level=self.level, line_number=meta.line)
 
     def error_text_no_print(self, meta, args):
-        error = InvalidInfo('lonely text', arguments=[str(args[0])], line=meta.line, column=meta.column)
-        return False, error, meta
+        raise exceptions.LonelyTextException(level=self.level, line_number=meta.line)
 
     def error_list_access_at(self, meta, args):
-        error = InvalidInfo('invalid at keyword', arguments=[str(args[0])], line=meta.line, column=meta.column)
-        return False, error, meta
-    # other rules are inherited from Filter
+        raise exceptions.InvalidAtCommandException(command='at', level=self.level, line_number=meta.line)
 
     # flat if no longer allowed in level 8 and up
     def error_ifelse(self, meta, args):
-        error = InvalidInfo('flat if', arguments=[str(args[0])], line=meta.line, column=meta.column)
-        return False, error, meta
+        raise exceptions.WrongLevelException(
+            offending_keyword='if',
+            working_level=7,
+            tip='no_more_flat_if',
+            line_number=meta.line)
 
     def error_ifpressed_missing_else(self, meta, args):
-        error = InvalidInfo('ifpressed missing else', arguments=[str(args[0])], line=meta.line, column=meta.column)
-        return False, error, meta
+        raise exceptions.MissingElseForPressitException(
+                command='ifpressed_else', level=self.level, line_number=meta.line)
 
     def error_nested_define(self, meta, args):
-        error = InvalidInfo('nested function', arguments=[str(args[0])], line=meta.line, column=meta.column)
-        return False, error, meta
+        raise exceptions.NestedFunctionException()
+
     # other rules are inherited from Filter
 
 
@@ -3265,7 +3260,8 @@ def parse_input(input_string, level, lang):
 
 
 def is_program_valid(program_root, input_string, level, lang):
-    # IsValid returns (True,) or (False, args)
+    # IsValid raises the approproate exception when an error production (starting with error_)
+    # is found in the parse tree
     instance = IsValid(level)
     is_valid = instance.transform(program_root)
 
@@ -3281,50 +3277,13 @@ def is_program_valid(program_root, input_string, level, lang):
         line = invalid_info.line
         column = invalid_info.column
         if invalid_info.error_type == ' ':
-
             # the error here is a space at the beginning of a line, we can fix that!
-            fixed_code = program_repair.remove_leading_spaces(input_string)
-            if fixed_code != input_string:  # only if we have made a successful fix
-                try:
-                    fixed_result = transpile_inner(fixed_code, level, lang)
-                    result = fixed_result
-                    raise exceptions.InvalidSpaceException(
-                        level=level, line_number=line, fixed_code=fixed_code, fixed_result=result)
-                except exceptions.HedyException:
-                    invalid_info.error_type = None
-                    transpile_inner(fixed_code, level)
-                    # The fixed code contains another error. Only report the original error for now.
-                    pass
+            fixed_code, result = repair_leading_space(input_string, invalid_info, lang, level, line)
             raise exceptions.InvalidSpaceException(
                 level=level, line_number=line, fixed_code=fixed_code, fixed_result=result)
-        elif invalid_info.error_type == 'invalid condition':
-            raise exceptions.UnquotedEqualityCheckException(line_number=line)
-        elif invalid_info.error_type == 'invalid repeat':
-            raise exceptions.MissingInnerCommandException(command='repeat', level=level, line_number=line)
-        elif invalid_info.error_type == 'repeat missing print':
-            raise exceptions.IncompleteRepeatException(command='print', level=level, line_number=line)
-        elif invalid_info.error_type == 'repeat missing times':
-            raise exceptions.IncompleteRepeatException(command='times', level=level, line_number=line)
-        elif invalid_info.error_type == 'misspelled "at" command':
-            raise exceptions.MisspelledAtCommand(command='at', arg1=invalid_info.arguments[0], line_number=line)
-        elif invalid_info.error_type == 'unsupported number':
-            raise exceptions.UnsupportedFloatException(value=''.join(invalid_info.arguments))
-        elif invalid_info.error_type == 'lonely text':
-            raise exceptions.LonelyTextException(level=level, line_number=line)
-        elif invalid_info.error_type == 'flat if':
-            raise exceptions.WrongLevelException(
-                offending_keyword='if',
-                working_level=7,
-                tip='no_more_flat_if',
-                line_number=invalid_info.line)
-        elif invalid_info.error_type == 'invalid at keyword':
-            raise exceptions.InvalidAtCommandException(command='at', level=level, line_number=invalid_info.line)
-        elif invalid_info.error_type == 'ifpressed missing else':
-            raise exceptions.MissingElseForPressitException(
-                command='ifpressed_else', level=level, line_number=invalid_info.line)
-        elif invalid_info.error_type == 'nested function':
-            raise exceptions.NestedFunctionException()
+
         else:
+            # here we reach when all else fails!
             invalid_command = invalid_info.command
             closest = closest_command(invalid_command, get_suggestions_for_language(lang, level))
 
@@ -3357,6 +3316,22 @@ def is_program_valid(program_root, input_string, level, lang):
             raise exceptions.InvalidCommandException(invalid_command=invalid_command, level=level,
                                                      guessed_command=closest, line_number=line,
                                                      fixed_code=fixed_code, fixed_result=result)
+
+
+def repair_leading_space(input_string, invalid_info, lang, level, line):
+    fixed_code = program_repair.remove_leading_spaces(input_string)
+    if fixed_code != input_string:  # only if we have made a successful fix
+        try:
+            fixed_result = transpile_inner(fixed_code, level, lang)
+            result = fixed_result
+            raise exceptions.InvalidSpaceException(
+                level=level, line_number=line, fixed_code=fixed_code, fixed_result=result)
+        except exceptions.HedyException:
+            invalid_info.error_type = None
+            transpile_inner(fixed_code, level)
+            # The fixed code contains another error. Only report the original error for now.
+            pass
+    return fixed_code, result
 
 
 def is_program_complete(abstract_syntax_tree, level):

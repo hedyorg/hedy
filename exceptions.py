@@ -63,7 +63,7 @@ class InvalidSpaceException(WarningException):
                          level=level,
                          line_number=line_number,
                          fixed_code=fixed_code,
-                         fixed_result=fixed_result)
+                         fixed_result=fixed_result) #what is the difference??
 
 
 class ParseException(HedyException):
