@@ -1230,7 +1230,7 @@ levels:
             question_score: '10'
     7:
         1:
-            question_text: How many lines can you repeat at once with the repeat command at this level?
+            question_text: How many lines can you repeat at once with the `{repeat}` command at this level?
             mp_choice_options:
             -   option: '0'
                 feedback: No you can repeat a line.
@@ -1372,7 +1372,7 @@ levels:
             -   option: |-
                     We will
                     ROCK YOU!
-                feedback: Mind the repeat command
+                feedback: Mind the `{repeat}` command
             hint: Mind the `{repeat}` command.
             correct_answer: B
             question_score: '10'
@@ -1399,6 +1399,7 @@ levels:
                     {repeat} 2 {times} {print} 'Here comes the sun'
                     {print} 'And I say'
                     {print} 'Its alright'
+                    ```
                 feedback: Where did you leave 'Do do do do'?
             -   option: |-
                     ```
@@ -1407,7 +1408,7 @@ levels:
                     {print} 'And I say'
                     {print} 'Its alright'
                     ```
-                feedback: This is not the correct order..
+                feedback: This is not the correct order.
             -   option: |-
                     ```
                     {repeat} 2 {times} {print} 'Here comes the sun'
@@ -1415,7 +1416,7 @@ levels:
                     {print} 'And I say'
                     {print} 'Its alright'
                     ```
-                feedback: This is not the correct order..
+                feedback: This is not the correct order.
             hint: '`{repeat}` can only be used if you want to execute the same line multiple times in a row.'
             correct_answer: A
             question_score: '10'
@@ -1432,7 +1433,7 @@ levels:
             -   option: |-
                     ```
                     {print} 'Batman was flying through Gotham. '
-                    {print} 'When suddenly he heard someone screaming!'
+                    {print} 'When suddenly he heard someone screaming…'
                     {print} 'Help!'
                     {repeat} 3 {times} {print} 'Please help me!'
                     ```
@@ -1440,7 +1441,7 @@ levels:
             -   option: |-
                     ```
                     {print} 'Batman was flying through Gotham.'
-                    {print} 'When suddenly he heard someone screaming!'
+                    {print} 'When suddenly he heard someone screaming…'
                     {repeat} 3 {times} 'Help!'
                     {print} 'Please help me!'
                     ```
@@ -1448,7 +1449,7 @@ levels:
             -   option: |-
                     ```
                     {print} Batman was flying through Gotham.
-                    {print} When suddenly he heard someone screaming!
+                    {print} When suddenly he heard someone screaming…
                     {repeat} 3 {times} {print} Help!
                     {print} Please help me!
                     ```
@@ -1456,7 +1457,7 @@ levels:
             -   option: |-
                     ```
                     {print} 'Batman was flying through Gotham.'
-                    {print} 'When suddenly he heard someone screaming!'
+                    {print} 'When suddenly he heard someone screaming…'
                     {repeat} 3 {times} {print} 'Help!'
                     {print} 'Please help me!'
                     ```

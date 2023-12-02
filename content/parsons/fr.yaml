@@ -127,7 +127,7 @@ levels:
                 {print} "Tu dois acheter " nombre_gâteaux " gâteaux"
     7:
         1:
-            story: Complete the baby shark song. First comes baby shark, then mommy and finally daddy shark.
+            story: Remets dans l'ordre la chanson Baby Shark. Baby Shark arrive en premier, puis Mommy Shark et finalement Daddy Shark.
             code: |-
                 {repeat} 3 {times} {print} 'Baby shark tututututudu'
                 {print} 'Baby shark'
@@ -136,11 +136,11 @@ levels:
                 {repeat} 3 {times} {print} 'Daddy shark tututututudu'
                 {print} 'Daddy shark'
         2:
-            story: Create the song 'The wheels on the bus go round and round'
+            story: Crée la chanson « Les roues de l’autobus tournent tournent »
             code: |-
-                {print} "Les roues de l'autobus "
-                {repeat} 3 {times} {print} 'tournent et tournent, '
-                {print} "Les roues de l'autobus tournent et tournent "
+                {print} "Les roues de l'autobus tournent tournent"
+                {repeat} 2 {times} {print} "Tournent tournent,"
+                {print} "Les roues de l'autobus tournent tournent"
                 {print} "Dans toute la ville"
     8:
         1:
@@ -162,7 +162,7 @@ levels:
                     compteur = compteur - 1
                     {print} compteur
                     {sleep} 1
-                    {print} "Prêt ou pas, j'arrive!!"
+                {print} "Caché(e) ou pas, j'arrive !"
     9:
         1:
             story: This game will give you three maths assignments. Each time the question is different. Can you figure out the order?

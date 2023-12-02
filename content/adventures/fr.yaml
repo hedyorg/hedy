@@ -146,14 +146,14 @@ adventures:
                     À ce niveau, tu peux écrire ces répétitions dans ton histoire, avec `{repeat}`.
 
                     ### Exercice
-                    Ajoute une répétition à ta propre histoire. Recherche dans tes programmes sauvegardés, choisi l'histoire que tu as programmé au niveau 6, trouve une ligne contenant `{print}` et répète là !
+                    Ajoute une répétition à ta propre histoire. Retourne en arrière dans tes programmes sauvegardés, choisi une histoire que tu as programmée à un niveau précédent, trouve une ligne contenant `{print}` et répète là !
                 example_code: |
                     ```
                     {print} "Le prince appelait à l'aide sans arrêt"
-                    {repeat} 5 {times} {print} "au secours !"
-                    {print} "Pourquoi personne ne vient m'aider ?"
+                    {repeat} 5 {times} {print} "Au secours !"
+                    {print} "Pourquoi personne ne vient m'aider ?"
                     ```
-                start_code: '{repeat} 5 {times} {print} ''Help!'''
+                start_code: '{repeat} 5 {times} {print} ''Au secours !'''
             8:
                 story_text: |
                     À ce niveau tu peux utiliser plusieurs lignes dans une commande `{if}`, ainsi tu peux améliorer ta fin heureuse ou triste !
@@ -541,15 +541,17 @@ adventures:
                     {else} {print} "Faux ! c'était " _
                     ```
                 story_text_3: |
-                    **Bonus** Tu peux également laisser l'ordinateur faire des additions aléatoires de lui-même en utilisant `{random}`.
-                example_code_3: |
-                    numbers = 1, 2, 3, 4, 5, 6, 7, 8, 9, 10
-                    number_1 = _
-                    number_2 = _
-                    correct_answer = number_1 * number_2
-                    given_answer = 'What is ' number_1 ' times ' number_2 '?'
+                    **Bonus** Tu peux également demander à l'ordinateur de choisir les multiplications aléatoirement en utilisant `{at}` `{random}`.
+                example_code_3: |-
+                    ```
+                    nombres = 1, 2, 3, 4, 5, 6, 7, 8, 9, 10
+                    nombre_1 = _
+                    nombre_2 = _
+                    bonne_réponse = nombre_1 * nombre_2
+                    réponse_donnée = {ask} "Combiens font " nombre_1 " fois " nombre_2 " ?"
                     {if} _
                     {else} _
+                    ```
                 start_code: |
                     nombre_1 = {ask} "Saisi le premier nombre :"
                     nombre_2 = {ask} "Saisi le deuxième nombre :"
@@ -900,15 +902,15 @@ adventures:
                     produit_choisi = {ask} "Veuillez sélectionner un produit"
                     1_euro = coca jus d'orange eau
                     2_euros = chocolat, cookie, barre muesli
-                    3_eruos = chips, charcuterie, gâteau à la banane
-                    {if} produit {in} 1_euro
+                    3eruos = chips, charcuterie, gâteau à la banane
+                    {if} produit {is} {in} 1_euro
                     prix = 1
-                    {if} produit_choisi {is} {in} 2_euros
+                    {if} produit_choisi {is} 2_euros
                     prix = 2
-                    {else} produit_choisi {in} 3_eruos
+                    {else} produit_choisi {in} 3_euros
                     prix = 3
                     nombre_de_produits = "{ask} combien de " produit_choisi voulez-vous ?"
-                    total = prix + nombre de produits
+                    total = prix + nombre_de_produits
                     {print} "Ça vous fera" prix " €, s'il vous plait"
                     ```
                 start_code: |
@@ -916,34 +918,34 @@ adventures:
                     produit_choisi = {ask} "Veuillez sélectionner un produit"
                     1_euro = coca jus d'orange eau
                     2_euros = chocolat, cookie, barre muesli
-                    3_eruos = chips, charcuterie, gâteau à la banane
-                    {if} produit {in} 1_euro
+                    3eruos = chips, charcuterie, gâteau à la banane
+                    {if} produit {is} {in} 1_euro
                     prix = 1
-                    {if} produit_choisi {is} {in} 2_euros
+                    {if} produit_choisi {is} 2_euros
                     prix = 2
-                    {else} produit_choisi {in} 3_eruos
+                    {else} produit_choisi {in} 3_euros
                     prix = 3
                     nombre_de_produits = "{ask} combien de " produit_choisi voulez-vous ?"
-                    total = prix + nombre de produits
+                    total = prix + nombre_de_produits
                     {print} "Ça vous fera" prix " €, s'il vous plait"
             7:
                 story_text: |-
-                    ### Exercise
-                    Surprise! This program looks more like an output than a code. And yet, we don't want you to just add `{print}` commands in front of each line.
-                    Fix this program to turn it into the nursery rhyme 'Brother John (Frère Jaques)' by using the {repeat} command of course!
+                    ### Exercice
+                    Surprise ! Ce programme a plus l'air d'un résultat d'affichage que d'un code. Et en plus, nous ne voulons pas que tu ajoute juste des commandes `{print}` devant chaque ligne.
+                    Corrige ce programme pour qu'il affiche les paroles de la chanson « Frère Jacques » en utilisant la commande `{repeat}` bien sûr !
                 example_code: |
-                    **Warning! This code needs to be debugged!**
+                    **Attention ! Ce code doit être débuggé**
                     ```
-                    Are you sleeping?
-                    Brother John!
-                    Morning bells are ringing!
-                    Ding, dang, dong!
+                    Frère Jacques,
+                    Dormez-vous ?
+                    Sonnez les matines !
+                    Ding, daing, dong !
                     ```
                 start_code: |
-                    Are you sleeping?
-                    Brother John!
-                    Morning bells are ringing!
-                    Ding, dang, dong!
+                    Frère Jacques,
+                    Dormez-vous ?
+                    Sonnez les matines !
+                    Ding, daing, dong !
             8:
                 story_text: |-
                     ### Exercise
@@ -1393,7 +1395,7 @@ adventures:
 
                     print 'Thanks for ordering!'
                     ```
-                start_code: |4
+                start_code: |2
 
                         define food_order
                             toppings = ask 'pepperoni, tuna, veggie or cheese?'
@@ -1444,7 +1446,7 @@ adventures:
                         print 'there a ' sound
                         print 'everywhere a ' sound sound
                     ```
-                start_code: |4
+                start_code: |2
 
                         animals = ['pig', 'dog', 'cow']
                         sounds = ['oink', 'woof', 'moo']
@@ -1565,21 +1567,21 @@ adventures:
                 start_code: '# écris ton code ici'
             7:
                 story_text: |
-                    Bon travail ! Vous avez atteint le niveau suivant, ce qui signifie que vous avez pratiqué avec `{if}` et `{else}`. Vous avez probablement remarqué que vos codes deviennent de plus en plus longs.
-                    Par exemple, si vous voulez programmer 'Joyeux anniversaire'.
+                    Bon travail ! Tu as atteint le niveau suivant, ce qui signifie que tu t'es entrainé à utiliser `{if}` et `{else}`. Tu as probablement remarqué que tes codes deviennent de plus en plus longs.
+                    Par exemple, si tu veux programmer « Joyeux anniversaire ».
 
-                    C'est beaucoup de code pour principalement les mêmes mots encore et encore. Heureusement, dans l'onglet suivant, vous apprendrez une solution avec la commande `{repeat}`, qui vous permet de répéter une ligne de code plusieurs fois.
+                    Ça fait beaucoup de code pour écrire presque toujours les mêmes mots encore et encore. Heureusement, dans l'onglet suivant, tu vas apprendre une solution avec la commande `{repeat}`, qui te permet de répéter une ligne de code plusieurs fois.
                 example_code: |
                     ```
                     {print} "Joyeux anniversaire"
                     {print} "Joyeux anniversaire"
-                    {print} "Joyeux anniversaire Hedy"
+                    {print} "Joyeux anniversaire, Hedy"
                     {print} "Joyeux anniversaire"
                     ```
                 start_code: |
                     {print} "Joyeux anniversaire"
                     {print} "Joyeux anniversaire"
-                    {print} "Joyeux anniversaire chère Hedy"
+                    {print} "Joyeux anniversaire, Hedy"
                     {print} "Joyeux anniversaire"
             8:
                 story_text: |
@@ -1801,16 +1803,16 @@ adventures:
                 start_code: '{print} "Que vas-tu obtenir avec le dé cette fois ?"'
             7:
                 story_text: |
-                    You can also make a die again in level 5. With the `{repeat}` code you can easily roll a whole hand of dice.
-                    Try to finish the sample code! The dashes should contain multiple commands and characters.
+                    Tu peux aussi faire encore un dé à ce niveau. Avec le code `{repeat}` tu peux facilement jeter une pleine poignée de dés.
 
-                    But maybe you want to make a completely different die. Of course you can!
+                    ### Exercice
+                    Essaie de terminer le code d'exemple ! **Bonus** Pense à un jeu que tu connais qui nécessite un dé et programme-le en utilisant un `{repeat}`.
                 example_code: |
                     ```
-                    choices = 1, 2, 3, 4, 5, earthworm
-                    {repeat} _ _ {print} _ _ _
+                    choix = 1, 2, 3, 4, 5, 6
+                    _ _ _ _ _ _ _
                     ```
-                start_code: '{print} ''What will the die indicate this time?'''
+                start_code: '{print} "Que va afficher le dé cette fois ?"'
             10:
                 story_text: |
                     Is everybody taking too long throwing the dice? In this level you can let Hedy throw all the dice at once!
@@ -1932,13 +1934,16 @@ adventures:
                 start_code: '{print} "Qui fait la vaisselle ?"'
             7:
                 story_text: |
-                    With the `{repeat}` you can repeat pieces of code. You can use this to calculate who will be washing dishes for the entire week.
+                    Avec le `{repeat}` tu peux répéter des morceaux de code. Tu peux l'utiliser pour calculer qui fera la vaisselle plusieurs jours à l'avance !
+                    ### Exercice
+                    Utilise la commande `{repeat}`pour décider qui devra faire la vaiselle pour une semaine entière. Chaque espace vide doit être remplacé par une commande ou un nombre !
+                    **Bonus** Peux-tu penser à d'autres taches à la maison ? Adapte le code pour qu'il décide pour trois autres corvées de ménage. N'oublie pas d'affiche quelle tache est concernée !
                 example_code: |
                     ```
-                    people = mom, dad, Emma, Sophie
-                    {repeat} _ _ {print} 'the dishwasher is' _
+                    personnes = maman, papa, Emma, Sophie
+                    {repeat} _ _ {print} "La vaisselle sera faite par " _ _ _
                     ```
-                start_code: '{print} ''Who does the dishes?'''
+                start_code: '{print} "Qui fera la vaisselle ?"'
             10:
                 story_text: |
                     In this level you could make an even better dish washing shedule.
@@ -2150,14 +2155,15 @@ adventures:
                 start_code: '# écris ton code ici'
             7:
                 story_text: |
-                    In this level you can use the `{repeat}` command to make your machine tell multiple fortunes at once.
+                    ### Exercice
+                    Termine ce programme qui te dit si la personne que tu aimes t'aime aussi en retour ou pas.
                 example_code: |
                     ```
-                    {print} 'Im Hedy the fortune teller!'
-                    {print} 'You can {ask} 3 questions!'
-                    {repeat} 3 {times} question = {ask} 'What do you want to know?'
-                    answer = yes, no, maybe
-                    {repeat} 3 {times} {print} 'My crystal ball says... ' answer {at} {random}
+                    {print} "J'ai une fleur avec des pétales magiques"
+                    {print} "Si tu détaches les pétales, la fleur te dira si la personne que tu aimes t'aime en retour"
+                    quantité = {ask} "Combien de pétales veux-tu détacher ?"
+                    options = elle t'aime, elle ne t'aime pas
+                    _ _ _ _ options {at} {random}
                     ```
                 start_code: '# écris ton code ici'
             8:
@@ -3136,12 +3142,10 @@ adventures:
                 start_code: '# écris ton code ici'
             7:
                 story_text: |
-                    Now that you have learned about `{repeat}`, we can press keys multiple times.
-                    You can use it to make the turtle walk forward and turn.
+                    Maintenant que tu sais tout sur le `{repeat}`, nous pouvons appuyer sur les touches plusieurs fois.
 
                     ### Exercice
-                    The code you have seen in level 5 only checks the key once. Copy the example code and add a `{repeat}` to it, so that you can press the keys many times.
-                    Use this code to draw something nice.
+                    Le code que tu as vu au niveau 5 ne détecte la touche qu'une seule fois. Copie l'exemple et ajoute-lui un `{repeat}` pour que tu puisses appuyer sur les touches plusieurs fois.
                 example_code: |
                     ```
                     {if} x {is} {pressed} {forward} 15 {else} {turn} 90
@@ -3400,7 +3404,7 @@ adventures:
                     Joue avec la commande `{repeat}`. Peux-tu faire la chanson d'anniversaire avec seulement 3 lignes de code à la place de 4 maintenant ?
                 example_code: |
                     ```
-                    {repeat} 3 {times} {print} "Hedy est marrant !"
+                    {repeat} 3 {times} {print} "Hedy est amusante !"
                     ```
                 start_code: |
                     {print} "Joyeux anniversaire"
@@ -3453,27 +3457,27 @@ adventures:
             7:
                 story_text: |
                     ## Répète avec d'autres commandes et avec des variables
-                    Tu t'es entrainé avec la commande `{repeat}` combinée avec la commande `{print}`, mais savais-tu que tu pouvais aussi utiliser d'autres commandes avec `{repeat}` ?
-                    Dans cet exemple de code, tu peux voir que `{repeat}` peut aussi être utilisée avec une commande `{ask}`, `{if}` ou `{else}`.
+                    Tu t'es entrainé avec la commande `{repeat}` combinée avec la commande `{print}`. Mais, savais-tu que tu pouvais aussi utiliser d'autres commandes avec `{repeat}` ?
+                    Dans cet exemple, tu peux voir que `{repeat}` peut aussi être utilisée avec une commande `{ask}`, `{if}` ou `{else}`.
                 example_code: |
                     ```
-                    {repeat} 2 {times} réponse = {ask} "Savais-tu que tu pouvais poser une question plusieurs fois ?"
-                    {if} réponse {is} oui {repeat} 2 {times} {print} "Tu le savais déjà !"
-                    {else} {repeat} 3 {times} {print} "Tu as appris quelque chose de nouveau !"
+                    {repeat} 2 {times} réponse = {ask} "Savais-tu que tu pouvais poser une question plusieurs fois ?"
+                    {if} réponse {is} oui {repeat} 2 {times} {print} "Tu le savais déjà !"
+                    {else} {repeat} 3 {times} {print} "Tu as appris quelque chose de nouveau !"
                     ```
                 story_text_2: |
-                    Une autre chose intéressante que tu peux faire avec la commande `{repeat}`, c'est d'utiliser une variable pour indiquer le nombre de fois que quelque chose doit être répété. Dans l'exemple de code, tu peux voir que nous demandons en premier quel âge a la personne.
-                    Ensuite, en ligne 3, le message est répété `âge` fois. Donc nous avons utilisé la variable `âge` avec la commande `{repeat}`.
+                    Une autre chose intéressante que tu peux faire avec la commande `{repeat}` est d'utiliser une variable pour indiquer le nombre de fois que quelque chose doit être répété. Dans l'exemple, tu peux voir que nous demandons en premier quel âge a la personne.
+                    Ensuite, en ligne 3, le message est répété `âge` fois. Ainsi nous avons utilisé la variable `âge` avec la commande `{repeat}`.
                 example_code_2: |
                     ```
-                    {print} "Youpi ! C'est ton anniversaire"
-                    âge = {ask} "Quel âge as-tu ?"
-                    {repeat} âge {times} {print} "Hip Hip Hip Hourra !"
+                    {print} "Youpi ! C'est ton anniversaire"
+                    âge = {ask} "Quel âge as-tu ?"
+                    {repeat} âge {times} {print} "Hip Hip Hip Hourra !"
                     ```
                 start_code: |-
-                    {repeat} 2 {times} réponse = {ask} "Savais-tu que tu pouvais poser une question plusieurs fois ?"
-                    {if} réponse {is} oui {repeat} 2 {times} {print} "Tu le savais déjà !"
-                    {else} {repeat} 3 {times} {print} "Tu as appris quelque chose de nouveau !"
+                    {repeat} 2 {times} réponse = {ask} "Savais-tu que tu pouvais poser une question plusieurs fois ?"
+                    {if} réponse {is} oui {repeat} 2 {times} {print} "Tu le savais déjà !"
+                    {else} {repeat} 3 {times} {print} "Tu as appris quelque chose de nouveau !"
             8:
                 story_text: |
                     ### C'est dans le bloc ou pas ?
@@ -3644,8 +3648,12 @@ adventures:
                 start_code: '# écris ton code ici'
             7:
                 story_text: |
-                    In this level you've learned how to use the {repeat} command to repeat a line of code a certain amount of times.
-                    You can use that in your restaurant to {ask} multiple people what they'd like to eat. Like this:
+                    À ce niveau tu as appris comment utiliser la commande `{repeat}` pour répéter une ligne de code un certain nombre de fois.
+                    Tu peux l'utiliser dans ton restaurant pour demander à plusieurs personnes ce qu'elles veulent manger.
+
+                    ### Exercice
+                    Peux-tu compléter le code ? Hedy doit demander le plat autant de fois qu'il y a de personnes. Donc s'il y a 5 personnes, la question doit être répétée 5 fois.
+                    **Extra** Enrichi ton code avec plus de questions, par exemple pour les boissons et les sauces.
                 example_code: |
                     ```
                     {print} "Bienvenu au restaurant Chez Hedy"
@@ -4059,22 +4067,24 @@ adventures:
                 start_code: '{print} ''Chantons !'''
             7:
                 story_text: |
-                    Songs often contain a lot of repetition. For example... Baby Shark! If you sing it, you keep singing the same thing:
+                    Les chansons contiennent souvent beaucoup de répétitions. Par exemple… Baby Shark ! Si tu la chantes, tu ne fais que répéter la même chose.
 
                     Baby Shark tututudutudu <br>
                     Baby Shark tututudutudu <br>
                     Baby Shark tututudutudu <br>
                     Baby Shark
 
-                    You can make this song much shorter with a `{repeat}`! Can you finish the code?
+                    ### Exercice
+                    Peux-tu écrire la chanson Baby Shark avec un `{repeat}` ? Terminer le code en remplaçant les espace vides ?
+
+                    **Bonus** Après Baby Shark, tu peux bien sûr aussi programmer d'autres chansons. Il y a de nombreuses chansons avec des répétitions !
+                    Peux-tu penser à une nouvelle chanson et l'écrire ?
                 example_code: |
                     ```
-                    {repeat} _ _ {print} 'Baby Shark tututudutudu'
-                    {print} 'Baby Shark'
+                    {repeat} _ _ {print} "Baby Shark tututudutudu"
+                    {print} "Baby Shark"
                     ```
-
-                    After Baby Shark you can of course also program other songs. There are many songs with repetition.
-                start_code: '{print} ''Baby Shark'''
+                start_code: '{print} "Baby Shark"'
             8:
                 story_text: |
                     In a previous level you've programmed the song 'Bottles of beer'. You made one verse and then had to copy the verses 99 times. In level 7 you can repeat the song 99 times, just by adding one simple line!
