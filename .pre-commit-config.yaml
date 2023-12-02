@@ -7,3 +7,12 @@ repos:
     rev: 6.1.0
     hooks:
     -   id: flake8
+#  INSTRUCTIONS: after enabling this, run `pre-commit run --all` to clean up all content files
+  - repo: local
+    hooks:
+    -   id: content_yaml_autoformat
+        name: content yaml autoformatting
+        entry: tools/rewrite-content-yaml.py
+        files: 'content/.*\.ya?ml'
+        language: python
+        additional_dependencies: ['PyYAML==6.0.1', 'ruamel.yaml==0.17.4']

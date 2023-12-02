@@ -1,10 +1,12 @@
 from collections import namedtuple
-from lark import Visitor, Token
+from lark import Token, Visitor
+from lark.exceptions import VisitError
 import hedy
 import operator
-import yaml
 from os import path
 import hedy_content
+from website.yaml_file import YamlFile
+import copy
 
 # Holds the token that needs to be translated, its line number, start and
 # end indexes and its value (e.g. ", ").
@@ -18,9 +20,11 @@ def keywords_to_dict(lang="nl"):
     keywords_path = "content/keywords/"
     yaml_filesname_with_path = path.join(base, keywords_path, lang + ".yaml")
 
-    with open(yaml_filesname_with_path, "r", encoding="UTF-8") as stream:
-        command_combinations = yaml.safe_load(stream)
-
+    # as we mutate this dict, we have to make a copy
+    # as YamlFile re-uses the yaml contents
+    command_combinations = copy.deepcopy(
+        YamlFile.for_file(yaml_filesname_with_path).to_dict()
+    )
     for k, v in command_combinations.items():
         command_combinations[k] = v.split("|")
 
@@ -69,17 +73,23 @@ def get_target_keyword(keyword_dict, keyword):
         return keyword
 
 
-def translate_keywords(input_string_, from_lang="en", to_lang="nl", level=1):
+def translate_keywords(input_string, from_lang="en", to_lang="nl", level=1):
     """ "Return code with keywords translated to language of choice in level of choice"""
+    if input_string == "":
+        return " "  # empty string is True, so output something else that looks like the empty string
+
+    # remove leading spaces.
+    # FH, dec 23. This creates a bit of a different version of translation but that seems ok to me
+    # putting it back in seems overkill
+    input_string = input_string.lstrip()
+
     try:
-        processed_input = hedy.process_input_string(
-            input_string_, level, from_lang, escape_backslashes=False, preprocess_ifs_enabled=False
-        )
+        processed_input = hedy.process_input_string(input_string, level, from_lang, preprocess_ifs_enabled=False)
 
         hedy.source_map.clear()
         hedy.source_map.set_skip_faulty(False)
 
-        parser = hedy.get_parser(level, from_lang, True)
+        parser = hedy.get_parser(level, from_lang, True, hedy.source_map.skip_faulty)
         keyword_dict_from = keywords_to_dict(from_lang)
         keyword_dict_to = keywords_to_dict(to_lang)
 
@@ -89,8 +99,8 @@ def translate_keywords(input_string_, from_lang="en", to_lang="nl", level=1):
         translator.visit(program_root)
         ordered_rules = reversed(sorted(translator.rules, key=operator.attrgetter("line", "start")))
 
-        # FH Feb 2022 TODO trees containing invalid nodes are happily translated,
-        # should be stopped here!
+        # checks whether any error production nodes are present in the parse tree
+        hedy.is_program_valid(program_root, input_string, level, from_lang)
 
         result = processed_input
         for rule in ordered_rules:
@@ -106,9 +116,21 @@ def translate_keywords(input_string_, from_lang="en", to_lang="nl", level=1):
         result = "\n".join([line for line in result.splitlines()])
         result = result.replace("#ENDBLOCK", "")
 
+        # we have to reverse escaping or translating and retranslating will add an unlimied number of slashes
+        if level >= 4:
+            result = result.replace("\\\\", "\\")
+
         return result
-    except Exception:
-        return input_string_
+    except VisitError as E:
+        if isinstance(E, VisitError):
+            # Exceptions raised inside visitors are wrapped inside VisitError. Unwrap it if it is a
+            # HedyException to show the intended error message.
+            if isinstance(E.orig_exc, hedy.exceptions.HedyException):
+                raise E.orig_exc
+            else:
+                raise E
+    except Exception as E:
+        raise E
 
 
 def replace_line(lines, index, line):
@@ -134,7 +156,7 @@ def replace_token_in_line(line, rule, original, target):
 def find_command_keywords(
     input_string, lang, level, keywords, start_line, end_line, start_column, end_column
 ):
-    parser = hedy.get_parser(level, lang, True)
+    parser = hedy.get_parser(level, lang, True, hedy.source_map.skip_faulty)
     program_root = parser.parse(input_string).children[0]
 
     translator = Translator(input_string)

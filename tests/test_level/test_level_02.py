@@ -329,13 +329,13 @@ class TestsLevel2(HedyTester):
         try:
           __trtl = int(__trtl)
         except ValueError:
-          raise Exception(f'While running your program the command <span class="command-highlighted">turn</span> received the value <span class="command-highlighted">{__trtl}</span> which is not allowed. Try changing the value to a number.')
+          raise Exception('catch_value_exception')
         t.right(min(600, __trtl) if __trtl > 0 else max(-600, __trtl))
         __trtl = 100
         try:
           __trtl = int(__trtl)
         except ValueError:
-          raise Exception(f'While running your program the command <span class="command-highlighted">forward</span> received the value <span class="command-highlighted">{__trtl}</span> which is not allowed. Try changing the value to a number.')
+          raise Exception('catch_value_exception')
         t.forward(min(600, __trtl) if __trtl > 0 else max(-600, __trtl))
         time.sleep(0.1)""")
 
@@ -369,14 +369,17 @@ class TestsLevel2(HedyTester):
     def test_access_before_assign_not_allowed(self):
         code = textwrap.dedent("""\
         print the name program
+        prind skipping
         name is Hedy""")
 
         expected = textwrap.dedent("""\
         pass
+        pass
         name = 'Hedy'""")
 
         skipped_mappings = [
-            SkippedMapping(SourceRange(1, 1, 1, 23), hedy.exceptions.AccessBeforeAssignException)
+            SkippedMapping(SourceRange(1, 1, 1, 23), hedy.exceptions.AccessBeforeAssignException),
+            SkippedMapping(SourceRange(2, 1, 2, 15), hedy.exceptions.InvalidCommandException)
         ]
 
         self.multi_level_tester(
@@ -416,11 +419,17 @@ class TestsLevel2(HedyTester):
 
     # issue #792
     def test_turn_right_number_gives_type_error(self):
-        code = "turn right 90"
-        expected = "pass"
+        code = textwrap.dedent("""\
+        turn right 90
+        prind skipping""")
+
+        expected = textwrap.dedent("""\
+        pass
+        pass""")
 
         skipped_mappings = [
-            SkippedMapping(SourceRange(1, 1, 1, 15), hedy.exceptions.InvalidArgumentException),
+            SkippedMapping(SourceRange(1, 1, 1, 14), hedy.exceptions.InvalidArgumentException),
+            SkippedMapping(SourceRange(2, 1, 2, 15), hedy.exceptions.InvalidCommandException)
         ]
 
         self.multi_level_tester(
@@ -459,14 +468,15 @@ class TestsLevel2(HedyTester):
         )
 
     def test_color_translated(self):
+        lang = 'nl'
         code = "kleur blauw"
-        expected = HedyTester.turtle_color_command_transpiled('blue')
+        expected = HedyTester.turtle_color_command_transpiled('blue', lang)
 
         self.multi_level_tester(
             code=code,
             expected=expected,
             extra_check_function=self.is_turtle(),
-            lang='nl',
+            lang=lang,
             max_level=10
         )
 
@@ -559,11 +569,17 @@ class TestsLevel2(HedyTester):
     #
 
     def test_assign_with_space_gives_invalid(self):
-        code = " naam is Hedy"
-        expected = "pass"
+        code = textwrap.dedent("""\
+         naam is Hedy
+        prind skipping""")
+
+        expected = textwrap.dedent("""\
+        pass
+        pass""")
 
         skipped_mappings = [
             SkippedMapping(SourceRange(1, 1, 1, 14), hedy.exceptions.InvalidSpaceException),
+            SkippedMapping(SourceRange(2, 1, 2, 15), hedy.exceptions.InvalidCommandException)
         ]
 
         self.multi_level_tester(
@@ -769,11 +785,17 @@ class TestsLevel2(HedyTester):
         )
 
     def test_ask_without_var_gives_error(self):
-        code = "ask is de papier goed?"
-        expected = "pass"
+        code = textwrap.dedent("""\
+        prind skipping
+        ask is de papier goed?""")
+
+        expected = textwrap.dedent("""\
+        pass
+        pass""")
 
         skipped_mappings = [
-            SkippedMapping(SourceRange(1, 1, 1, 23), hedy.exceptions.WrongLevelException),
+            SkippedMapping(SourceRange(1, 1, 1, 15), hedy.exceptions.InvalidCommandException),
+            SkippedMapping(SourceRange(2, 1, 2, 23), hedy.exceptions.WrongLevelException),
         ]
 
         self.multi_level_tester(

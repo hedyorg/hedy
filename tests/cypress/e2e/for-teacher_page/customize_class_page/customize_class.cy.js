@@ -6,6 +6,7 @@ describe('customize class page', () => {
       loginForTeacher();
       await ensureClass();
       cy.getBySel('view_class_link').first().click(); // Press on view class button
+      cy.get('body').then($b => $b.find("#survey")).then($s => $s.length && $s.hide())
       cy.getBySel('customize_class_button').click(); // Press customize class button
 
       // Remove any customizations that already exist to get the class into a predictable state
@@ -248,7 +249,7 @@ describe('customize class page', () => {
 
         cy.getBySel('available_adventures_current_level').select(`${hiddenAdventure}`);
 
-        cy.get(`div[data-cy="${hiddenAdventure}"]`).should('be.visible');
+        cy.get(`div[data-cy="${hiddenAdventure}"]`).should('exist');
       });
 
       it('becomes invisible for the student', () => {

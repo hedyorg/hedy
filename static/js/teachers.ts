@@ -54,8 +54,8 @@ export function rename_class(id: string, class_name_prompt: string) {
     });
 }
 
-export function duplicate_class(id: string, prompt: string) {
-    modal.prompt (prompt, '', function (class_name) {
+export function duplicate_class(id: string, prompt: string, defaultValue: string = '') {
+    modal.prompt (prompt, defaultValue, function (class_name) {
     $.ajax({
       type: 'POST',
       url: '/duplicate_class',
@@ -124,11 +124,11 @@ export function join_class(id: string, name: string) {
     });
 }
 
-export function invite_student(class_id: string, prompt: string) {
+export function invite_student(class_id: string, prompt: string, url='/invite-student') {
     modal.prompt (prompt, '', function (username) {
       $.ajax({
           type: 'POST',
-          url: '/invite_student',
+          url,
           data: JSON.stringify({
             username: username,
             class_id: class_id
@@ -206,6 +206,7 @@ function update_db_adventure(adventure_id: string) {
    const level = $('#custom_adventure_level').val();
    const content = DOMPurify.sanitize(<string>$('#custom_adventure_content').val());
    const agree_public = $('#agree_public').prop('checked');
+   const language = $('#language').val();
 
     $.ajax({
       type: 'POST',
@@ -215,7 +216,8 @@ function update_db_adventure(adventure_id: string) {
         name: adventure_name,
         level: level,
         content: content,
-        public: agree_public
+        public: agree_public,
+        language,
       }),
       contentType: 'application/json',
       dataType: 'json'

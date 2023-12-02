@@ -64,6 +64,47 @@ class TestsLevel12(HedyTester):
             output=output
         )
 
+    def test_sleep_division_float(self):
+        code = "sleep 1 / 20"
+        expected = HedyTester.dedent(
+            HedyTester.sleep_command_transpiled("1 / 20"))
+
+        self.multi_level_tester(
+            code=code,
+            expected=expected,
+            max_level=17
+        )
+
+    def test_sleep_division_float_var(self):
+        code = textwrap.dedent("""\
+        time = 0.2
+        sleep time""")
+
+        expected = HedyTester.dedent("""\
+            _time = 0.2""",
+                                     HedyTester.sleep_command_transpiled('_time')
+                                     )
+
+        self.multi_level_tester(
+            code=code,
+            expected=expected,
+            max_level=17
+        )
+
+    def test_sleep_division_float_literal(self):
+        code = textwrap.dedent("""\
+        sleep 0.2""")
+
+        expected = HedyTester.dedent(
+            HedyTester.sleep_command_transpiled('0.2')
+        )
+
+        self.multi_level_tester(
+            code=code,
+            expected=expected,
+            max_level=15
+        )
+
     def test_print_literal_strings(self):
         code = """print "It's " '"Hedy"!'"""
         expected = """print(f'''It\\'s "Hedy"!''')"""
@@ -478,7 +519,6 @@ class TestsLevel12(HedyTester):
         )
 
     def test_turtle_with_expression(self):
-
         code = textwrap.dedent("""\
             num = 10.6
             turn num + 10.5
@@ -806,7 +846,7 @@ class TestsLevel12(HedyTester):
             raise Exception('catch_index_exception')
           time.sleep(int(n[int(1)-1]))
         except ValueError:
-          raise Exception(f'While running your program the command <span class=\"command-highlighted\">sleep</span> received the value <span class=\"command-highlighted\">{n[int(1)-1]}</span> which is not allowed. Try changing the value to a number.')""")
+          raise Exception('catch_value_exception')""")
 
         self.multi_level_tester(max_level=15, code=code, expected=expected)
 
@@ -824,7 +864,7 @@ class TestsLevel12(HedyTester):
             raise Exception('catch_index_exception')
           time.sleep(int(random.choice(n)))
         except ValueError:
-          raise Exception(f'While running your program the command <span class=\"command-highlighted\">sleep</span> received the value <span class=\"command-highlighted\">{random.choice(n)}</span> which is not allowed. Try changing the value to a number.')""")
+          raise Exception('catch_value_exception')""")
 
         self.multi_level_tester(max_level=15, code=code, expected=expected)
 
@@ -866,19 +906,10 @@ class TestsLevel12(HedyTester):
 
         self.multi_level_tester(code=code, expected=expected)
 
-    def test_sleep_with_float_gives_error(self):
-        code = textwrap.dedent("""\
-            n is 1.5
-            sleep n""")
-
-        self.multi_level_tester(
-            code=code,
-            extra_check_function=lambda c: c.exception.arguments['line_number'] == 2,
-            exception=hedy.exceptions.InvalidArgumentTypeException)
-
     #
     # assign tests
     #
+
     def test_assign_integer(self):
         code = "naam is 14"
         expected = "naam = 14"
@@ -2156,27 +2187,27 @@ class TestsLevel12(HedyTester):
             '3/1-3/44': '10/1-17/9',
             '4/4-4/8': '4/3-4/7',
             '4/4-4/23': '18/4-18/77',
-            '5/5-5/10': '19/3-19/8',
-            '5/13-5/18': '19/11-19/16',
-            '5/5-5/25': '19/3-19/22',
+            '5/5-5/10': '21/1-21/6',
+            '5/13-5/18': '23/1-23/6',
+            '5/5-5/25': '19/1-19/20',
             '4/1-5/34': '18/1-19/22',
             '6/4-6/8': '4/14-4/18',
             '6/4-6/19': '20/4-20/73',
-            '7/5-7/10': '21/3-21/8',
-            '7/13-7/18': '21/11-21/16',
-            '7/5-7/25': '21/3-21/23',
+            '7/5-7/10': '25/1-25/6',
+            '7/13-7/18': '1/1-1/6',
+            '7/5-7/25': '21/1-21/21',
             '6/1-7/34': '20/1-21/23',
             '8/4-8/9': '10/42-10/47',
             '8/4-8/20': '22/4-22/74',
-            '9/5-9/10': '23/3-23/8',
-            '9/13-9/18': '23/11-23/16',
-            '9/5-9/25': '23/3-23/22',
+            '9/5-9/10': '19/1-19/6',
+            '9/13-9/18': '21/1-21/6',
+            '9/5-9/25': '23/1-23/20',
             '8/1-9/34': '22/1-23/22',
             '10/4-10/9': '12/3-12/8',
             '10/4-10/19': '24/4-24/73',
-            '11/5-11/10': '25/3-25/8',
-            '11/13-11/18': '25/11-25/16',
-            '11/5-11/25': '25/3-25/23',
+            '11/5-11/10': '23/1-23/6',
+            '11/13-11/18': '25/1-25/6',
+            '11/5-11/25': '25/1-25/21',
             '10/1-11/34': '24/1-25/23',
             '12/23-12/28': '26/25-26/30',
             '12/1-12/46': '26/1-26/50',

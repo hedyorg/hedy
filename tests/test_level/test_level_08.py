@@ -29,15 +29,18 @@ class TestsLevel8(HedyTester):
 
     def test_if_one_line(self):
         code = textwrap.dedent("""\
+        prind skipping
         antwoord is 25
         if antwoord is 100 print 'goed zo' else print 'neenee'""")
 
         expected = textwrap.dedent("""\
+        pass
         antwoord = '25'
         pass""")
 
         skipped_mappings = [
-            SkippedMapping(SourceRange(2, 1, 2, 55), hedy.exceptions.WrongLevelException),
+            SkippedMapping(SourceRange(1, 1, 1, 15), hedy.exceptions.InvalidCommandException),
+            SkippedMapping(SourceRange(3, 1, 3, 55), hedy.exceptions.WrongLevelException)
         ]
 
         # one line if's are no longer allowed
@@ -191,6 +194,30 @@ class TestsLevel8(HedyTester):
           print(f'gelijkspel!')""")
 
         self.multi_level_tester(max_level=11, code=code, expected=expected, output='gelijkspel!')
+
+    def test_unquoted_print_in_body(self):
+        code = textwrap.dedent("""\
+        svar = ask 'Vad är 5 plus 5?'
+        if svar is 10
+            print 'Bra jobbat!
+            print 'Svaret var faktiskt ' svar""")
+
+        self.multi_level_tester(code=code,
+                                skip_faulty=False,
+                                exception=hedy.exceptions.UnquotedTextException,
+                                max_level=16)
+
+    def test_wrongly_quoted_print_in_body(self):
+        code = textwrap.dedent("""\
+        svar = ask 'Vad är 5 plus 5?'
+        if svar is 10
+            print 'Bra jobbat!"
+            print 'Svaret var faktiskt ' svar""")
+
+        self.multi_level_tester(code=code,
+                                skip_faulty=False,
+                                exception=hedy.exceptions.UnquotedTextException,
+                                max_level=16)
 
     def test_if_in_list_print(self):
         code = textwrap.dedent("""\
@@ -987,13 +1014,17 @@ class TestsLevel8(HedyTester):
 
     def test_if_pressed_missing_else_gives_error(self):
         code = textwrap.dedent("""\
+        prind skipping
         if x is pressed 
           print 'missing else!'""")
 
-        expected = "pass"
+        expected = textwrap.dedent("""\
+        pass
+        pass""")
 
         skipped_mappings = [
-            SkippedMapping(SourceRange(1, 1, 2, 34), hedy.exceptions.MissingElseForPressitException),
+            SkippedMapping(SourceRange(1, 1, 1, 15), hedy.exceptions.InvalidCommandException),
+            SkippedMapping(SourceRange(2, 1, 3, 33), hedy.exceptions.MissingElseForPressitException),
         ]
 
         self.multi_level_tester(
@@ -1134,14 +1165,14 @@ class TestsLevel8(HedyTester):
             '2/1-2/57': '2/1-2/61',
             '3/1-3/15': '3/1-3/17',
             '4/8-4/14': '2/27-2/33',
-            '5/5-5/9': '5/3-5/7',
-            '5/5-5/47': '5/3-5/49',
-            '6/11-6/15': '6/12-6/16',
-            '6/5-6/15': '6/3-6/19',
+            '5/5-5/9': '5/1-5/5',
+            '5/5-5/47': '5/1-5/47',
+            '6/11-6/15': '1/1-1/5',
+            '6/5-6/15': '6/1-6/17',
             '4/1-6/24': '4/1-7/18',
             '7/1-7/32': '8/1-8/34',
             '8/1-8/25': '9/1-9/27',
-            '1/1-8/26': '1/1-9/27'
+            '1/1-8/26': '1/1-9/27',
         }
 
         self.single_level_tester(code, expected=expected_code)

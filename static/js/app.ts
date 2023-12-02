@@ -9,20 +9,24 @@ import { Achievement, Adventure, isServerSaveInfo, ServerSaveInfo } from './type
 import { startIntroTutorial } from './tutorials/tutorial';
 import { loadParsonsExercise } from './parsons';
 import { checkNow, onElementBecomesVisible } from './browser-helpers/on-element-becomes-visible';
-import { initializeDebugger, load_variables, returnLinesWithoutBreakpoints } from './debugging';
+import { incrementDebugLine, initializeDebugger, load_variables, startDebug } from './debugging';
 import { localDelete, localLoad, localSave } from './local';
 import { initializeLoginLinks } from './auth';
 import { postJson } from './comm';
 import { LocalSaveWarning } from './local-save-warning';
 import { HedyEditor, EditorType } from './editor';
-import { HedyAceEditorCreator } from './ace-editor';
 import { stopDebug } from "./debugging";
+import { HedyAceEditorCreator } from './ace-editor';
+import { HedyCodeMirrorEditorCreator } from './cm-editor';
+import { initializeTranslation } from './lezer-parsers/tokens';
 
+export let theGlobalDebugger: any;
 export let theGlobalEditor: HedyEditor;
 export let theModalEditor: HedyEditor;
 export let theGlobalSourcemap: { [x: string]: any; };
 export const theLocalSaveWarning = new LocalSaveWarning();
-const editorCreator: HedyAceEditorCreator = new HedyAceEditorCreator();
+const editorCreator: HedyCodeMirrorEditorCreator = new HedyCodeMirrorEditorCreator();
+const aceEditorCreator: HedyAceEditorCreator = new HedyAceEditorCreator();
 let last_code: string;
 
 /**
@@ -137,10 +141,22 @@ export function initializeApp(options: InitializeAppOptions) {
 
   // Close the dropdown menu if the user clicks outside of it
   $(document).on("click", function(event){
-      if(!$(event.target).closest(".dropdown").length){
-          $(".dropdown-menu").slideUp("medium");
-          $(".cheatsheet-menu").slideUp("medium");
+    // The following is not needed anymore, but it saves the next for loop if the click is not for dropdown.
+    if (!$(event.target).closest(".dropdown").length) {
+      $(".dropdown-menu").slideUp("medium");
+      $(".cheatsheet-menu").slideUp("medium");
+      return;
+    }
+
+    const allDropdowns = $('.dropdown-menu')
+    for (const dd of allDropdowns) {
+      // find the closest dropdown button (element) that initiated the event
+      const c = $(dd).closest('.dropdown')[0]
+      // if the click event target is not within or close to the container, slide up the dropdown menu
+      if (!$(event.target).closest(c).length) {
+        $(dd).slideUp('fast');
       }
+    }
   });
 
   $("#search_language").on('keyup', function() {
@@ -194,12 +210,14 @@ export function initializeCodePage(options: InitializeCodePageOptions) {
   if ($editor.length) {
     const dir = $("body").attr("dir");
     theGlobalEditor = editorCreator.initializeEditorWithGutter($editor, EditorType.MAIN, dir);
+    initializeTranslation({keywordLanguage: theKeywordLanguage, level: theLevel});
     attachMainEditorEvents(theGlobalEditor);
     error.setEditor(theGlobalEditor);
     initializeDebugger({
-      editor: theGlobalEditor,    
+      editor: theGlobalEditor,
       level: theLevel,
       language: theLanguage,
+      keywordLanguage: theKeywordLanguage,
     });
   }
 
@@ -258,8 +276,7 @@ export function initializeCodePage(options: InitializeCodePageOptions) {
 function attachMainEditorEvents(editor: HedyEditor) {
 
   editor.on('change', () => {
-    theLocalSaveWarning.setProgramLength(theGlobalEditor.contents.split('\n').length);
-    theGlobalEditor.clearIncorrectLines();
+    theLocalSaveWarning.setProgramLength(theGlobalEditor.contents.split('\n').length);    
   });
 
   // If prompt is shown and user enters text in the editor, hide the prompt.
@@ -272,12 +289,16 @@ function attachMainEditorEvents(editor: HedyEditor) {
     askPromptOpen = false;
     $('#runit').css('background-color', '');
     theGlobalEditor.clearErrors();
+    theGlobalEditor.clearIncorrectLines();
     //removing the debugging state when loading in the editor
     stopDebug();
   });
 
-  // *** KEYBOARD SHORTCUTS ***
+  editor.on('click', (event: MouseEvent) => {
+    editor.skipFaultyHandler(event);
+  });
 
+  // *** KEYBOARD SHORTCUTS ***
   let altPressed: boolean | undefined;
   // alt is 18, enter is 13
   window.addEventListener ('keydown', function (ev) {
@@ -290,7 +311,7 @@ function attachMainEditorEvents(editor: HedyEditor) {
       if (!theLevel || !theLanguage) {
         throw new Error('Oh no');
       }
-      runit (theLevel, theLanguage, "", function () {
+      runit (theLevel, theLanguage, "", "run",function () {
         $ ('#output').focus ();
       });
     }
@@ -308,38 +329,13 @@ function attachMainEditorEvents(editor: HedyEditor) {
       return;
     }
   });
-
-  // We show the error message when clicking on the skipped code or hide them if ace editor is clicked
-  $(document).on("click", 'div[class*=ace_content], div[class*=ace_incorrect_hedy_code]', function(e) {
-    let className = e.target.className;
-
-    // Only do this if skipping faulty is used
-    if ($('div[class*=ace_incorrect_hedy_code]')[0]) {
-      if (className === 'ace_content') {
-        // Hide error, warning or okbox
-        $('#okbox').hide();
-        $('#warningbox').hide();
-        $('#errorbox').hide();
-      } else {
-        // Show error for this line
-        let mapIndex = className;
-        mapIndex = mapIndex.replace('ace_incorrect_hedy_code_', '');
-        mapIndex = mapIndex.replace('ace_start ace_br15', '');
-        let mapError = theGlobalSourcemap[Number(mapIndex)];
-
-        $('#okbox').hide();
-        $('#warningbox').hide();
-        $('#errorbox').hide();
-        error.show(ClientMessages['Transpile_error'], mapError.error);
-      }
-    }
-  });
 }
 
 export interface InitializeViewProgramPageOptions {
   readonly page: 'view-program';
   readonly level: number;
   readonly lang: string;
+  readonly code: string;
 }
 
 export function initializeViewProgramPage(options: InitializeViewProgramPageOptions) {
@@ -349,12 +345,18 @@ export function initializeViewProgramPage(options: InitializeViewProgramPageOpti
   // We need to enable the main editor for the program page as well
   const dir = $("body").attr("dir");
   theGlobalEditor = editorCreator.initializeEditorWithGutter($('#editor'), EditorType.MAIN, dir);
+  initializeTranslation({
+    keywordLanguage: options.lang, 
+    level: options.level
+  });
   attachMainEditorEvents(theGlobalEditor);
+  theGlobalEditor.contents = options.code;
   error.setEditor(theGlobalEditor);
   initializeDebugger({
-    editor: theGlobalEditor,    
+    editor: theGlobalEditor,
     level: theLevel,
     language: theLanguage,
+    keywordLanguage: theKeywordLanguage,
   });
 }
 
@@ -374,7 +376,7 @@ export function initializeHighlightedCodeBlocks(where: Element) {
       // Otherwise, the teacher manual Frequent Mistakes page is SUPER SLOW to load.
       onElementBecomesVisible(preview, () => {
         // Create this example editor
-        const exampleEditor = editorCreator.initializeReadOnlyEditor(preview, dir);
+        const exampleEditor = aceEditorCreator.initializeReadOnlyEditor(preview, dir);
         // Strip trailing newline, it renders better
         exampleEditor.contents = exampleEditor.contents.trimRight();
         // And add an overlay button to the editor if requested via a show-copy-button class, either
@@ -458,7 +460,7 @@ function clearOutput() {
   buttonsDiv.hide();
 }
 
-export async function runit(level: number, lang: string, disabled_prompt: string, cb: () => void) {
+export async function runit(level: number, lang: string, disabled_prompt: string, run_type: "run" | "debug" | "continue", cb: () => void) {
   // Copy 'currentTab' into a variable, so that our event handlers don't mess up
   // if the user changes tabs while we're waiting for a response
   const adventureName = currentTab;
@@ -483,7 +485,10 @@ export async function runit(level: number, lang: string, disabled_prompt: string
   $('#runit').hide();
   $('#stopit').show();
   $('#saveFilesContainer').hide();
-  clearOutput();
+  
+  if (run_type !== 'continue') {
+    clearOutput();
+  }
 
   try {
     var editor = theGlobalEditor;
@@ -512,60 +517,72 @@ export async function runit(level: number, lang: string, disabled_prompt: string
 
     editor.clearErrors()
     removeBulb();
-    console.log('Original program:\n', code);
+    // console.log('Original program:\n', code);
 
     const adventure = theAdventures[adventureName];
+    let program_data;
 
-    try {
-      cancelPendingAutomaticSave();
-      let data = {
-        level: `${level}`,
-        code: code,
-        lang: lang,
-        skip_faulty: false,
-        tutorial: $('#code_output').hasClass("z-40"), // if so -> tutorial mode
-        read_aloud : !!$('#speak_dropdown').val(),
-        adventure_name: adventureName,
+    if (run_type === 'run' || run_type === 'debug') {
+      try {
+        cancelPendingAutomaticSave();
+        let data = {
+          level: `${level}`,
+          code: code,
+          lang: lang,
+          skip_faulty: false,
+          is_debug: run_type === 'debug',
+          tutorial: $('#code_output').hasClass("z-40"), // if so -> tutorial mode
+          read_aloud : !!$('#speak_dropdown').val(),
+          adventure_name: adventureName,
+  
+          // Save under an existing id if this field is set
+          program_id: isServerSaveInfo(adventure?.save_info) ? adventure.save_info.id : undefined,
+          save_name: saveNameFromInput(),
+        };
 
-        // Save under an existing id if this field is set
-        program_id: isServerSaveInfo(adventure?.save_info) ? adventure.save_info.id : undefined,
-        save_name: saveNameFromInput(),
-      };
+        let response = await postJsonWithAchievements('/parse', data);
+        
+        program_data = response;
+        console.log('Response', response);
 
-      let response = await postJsonWithAchievements('/parse', data);
-      console.log('Response', response);
-
-      showAchievements(response.achievements, false, "");
-      if (adventure && response.save_info) {
-        adventure.save_info = response.save_info;
-        adventure.start_code = code;
-      }
-      if (response.Error) {
-        error.show(ClientMessages['Transpile_error'], response.Error);
-        if (response.Location && response.Location[0] != "?") {
-          //storeFixedCode(response, level);
-          // Location can be either [row, col] or just [row].
-          theGlobalEditor.highlightError(response.Location[0], response.Location[1]);
+        showAchievements(response.achievements, false, "");
+        if (adventure && response.save_info) {
+          adventure.save_info = response.save_info;
+          adventure.start_code = code;
         }
-        $('#stopit').hide();
-        $('#runit').show();
-        return;
-      }
-      runPythonProgram(response.Code, response.source_map, response.has_turtle, response.has_pygame, response.has_sleep, response.Warning, cb).catch(function(err) {
-        // The err is null if we don't understand it -> don't show anything
-        if (err != null) {
-          error.show(ClientMessages['Execute_error'], err.message);
-          reportClientError(level, code, err.message);
+
+        if (response.Error) {
+          error.show(ClientMessages['Transpile_error'], response.Error);
+          if (response.Location && response.Location[0] != "?") {
+            //storeFixedCode(response, level);
+            // Location can be either [row, col] or just [row].
+            theGlobalEditor.highlightError(response.Location[0], response.Location[1]);
+          }
+          $('#stopit').hide();
+          $('#runit').show();
+          return;
         }
-      });
-    } catch (e: any) {
-      console.error(e);
-      if (e.internetError) {
-        error.show(ClientMessages['Connection_error'], ClientMessages['CheckInternet']);
-      } else {
-        error.show(ClientMessages['Other_error'], ClientMessages['ServerError']);
+      } catch (e: any) {
+        console.error(e);
+        if (e.internetError) {
+          error.show(ClientMessages['Connection_error'], ClientMessages['CheckInternet']);
+        } else {
+          error.show(ClientMessages['Other_error'], ClientMessages['ServerError']);
+        }
       }
+    } else {
+      program_data = theGlobalDebugger.get_program_data();
     }
+    
+    runPythonProgram(program_data.Code, program_data.source_map, program_data.has_turtle, program_data.has_pygame, program_data.has_sleep, program_data.Warning, cb, run_type).catch(function(err: any) {
+      // The err is null if we don't understand it -> don't show anything
+      if (err != null) {
+        error.show(ClientMessages['Execute_error'], err.message);
+        reportClientError(level, code, err.message);
+      }
+    });
+  
+  
   } catch (e: any) {
     modal.notifyError(e.responseText);
   }
@@ -810,7 +827,7 @@ window.onerror = function reportClientException(message, source, line_number, co
   });
 }
 
-export function runPythonProgram(this: any, code: string, sourceMap: any, hasTurtle: boolean, hasPygame: boolean, hasSleep: boolean, hasWarnings: boolean, cb: () => void) {
+export function runPythonProgram(this: any, code: string, sourceMap: any, hasTurtle: boolean, hasPygame: boolean, hasSleep: boolean, hasWarnings: boolean, cb: () => void, run_type: "run" | "debug" | "continue") {
   // If we are in the Parsons problem -> use a different output
   let outputDiv = $('#output');
   let skip_faulty_found_errors = false;
@@ -818,21 +835,22 @@ export function runPythonProgram(this: any, code: string, sourceMap: any, hasTur
 
   if (sourceMap){
     theGlobalSourcemap = sourceMap;
-    let Range = ace.require("ace/range").Range
-
     // We loop through the mappings and underline a mapping if it contains an error
     for (const index in sourceMap) {
       const map = sourceMap[index];
-      const range = new Range(
-        map.hedy_range.from_line-1, map.hedy_range.from_column-1,
-        map.hedy_range.to_line-1, map.hedy_range.to_column-1
-      )
+
+      const range = {
+        startLine: map.hedy_range.from_line,
+        startColumn: map.hedy_range.from_column,
+        endLine: map.hedy_range.to_line,
+        endColumn: map.hedy_range.to_column
+      }
 
       if (map.error != null) {
         skip_faulty_found_errors = true;
         theGlobalEditor.setIncorrectLine(range, Number(index));
       }
-      
+
       // Only show the warning box for the first error shown
       if (skip_faulty_found_errors && !warning_box_shown) {
         error.showFadingWarning(ClientMessages['Execute_error'], ClientMessages['Errors_found']);
@@ -841,20 +859,11 @@ export function runPythonProgram(this: any, code: string, sourceMap: any, hasTur
     }
   }
 
-  //Saving the variable button because sk will overwrite the output div
-  const variableButton = outputDiv.find('#variable_button');
-  const variables = outputDiv.find('#variables');
-  outputDiv.empty();
-  outputDiv.append(variableButton);
-  outputDiv.append(variables);
-
-  const storage = window.localStorage;
   let skulptExternalLibraries:{[index: string]:any} = {
       './extensions.js': {
         path: theStaticRoot + "/vendor/skulpt-stdlib-extensions.js",
       },
   };
-  let debug = storage.getItem("debugLine");
 
   Sk.pre = "output";
   const turtleConfig = (Sk.TurtleGraphics || (Sk.TurtleGraphics = {}));
@@ -965,87 +974,169 @@ export function runPythonProgram(this: any, code: string, sourceMap: any, hasTur
   code = code_prefix + code;
   if (hasPygame) code += pygame_suffix;
 
-  Sk.configure({
-    output: outf,
-    read: builtinRead,
-    inputfun: inputFromInlineModal,
-    inputfunTakesPrompt: true,
-    setTimeout: timeout,
-    __future__: Sk.python3,
-    timeoutMsg: function () {
-      // If the timeout is 1 this is due to us stopping the program: don't show "too long" warning
+  if (run_type === "run") {
+    Sk.configure({
+      output: outf,
+      read: builtinRead,
+      inputfun: inputFromInlineModal,
+      inputfunTakesPrompt: true,
+      setTimeout: timeout,
+      __future__: Sk.python3,
+      timeoutMsg: function () {
+        // If the timeout is 1 this is due to us stopping the program: don't show "too long" warning
+        $('#stopit').hide();
+        $('#runit').show();
+        if (Sk.execLimit != 1) {
+          pushAchievement("hedy_hacking");
+          return ClientMessages ['Program_too_long'];
+        } else {
+          return null;
+        }
+      },
+      // We want to make the timeout function a bit more sophisticated that simply setting a value
+      // In levels 1-6 users are unable to create loops and programs with a lot of lines are caught server-sided
+      // So: a very large limit in these levels, keep the limit on other onces.
+      execLimit: (function () {
+        const level = theLevel;
+        if (hasTurtle || hasPygame) {
+          // We don't want a timeout when using the turtle or pygame -> just set one for 10 minutes
+          return (6000000);
+        }
+        if (level < 7) {
+          // Also on a level < 7 (as we don't support loops yet), a timeout is redundant -> just set one for 5 minutes
+          return (3000000);
+        }
+        // Set a time-out of either 20 seconds when having a sleep and 5 seconds when not
+        return ((hasSleep) ? 20000 : 5000);
+      }) ()
+    });
+  
+    return Sk.misceval.asyncToPromise(() =>
+      Sk.importMainWithBody("<stdin>", false, code, true), {
+        "*": () => {
+          // We don't do anything here...
+        }
+      }
+     ).then(function(_mod) {
+      console.log('Program executed');
+      const pythonVariables = Sk.globals;
+      load_variables(pythonVariables);
       $('#stopit').hide();
       $('#runit').show();
-      if (Sk.execLimit != 1) {
-        pushAchievement("hedy_hacking");
-        return ClientMessages ['Program_too_long'];
-      } else {
-        return null;
+  
+      if (hasPygame) {
+        document.onkeydown = null;
+        $('#pygame-modal').hide();
       }
-    },
-    // We want to make the timeout function a bit more sophisticated that simply setting a value
-    // In levels 1-6 users are unable to create loops and programs with a lot of lines are caught server-sided
-    // So: a very large limit in these levels, keep the limit on other onces.
-    execLimit: (function () {
-      const level = theLevel;
-      if (hasTurtle || hasPygame) {
-        // We don't want a timeout when using the turtle or pygame -> just set one for 10 minutes
-        return (6000000);
+  
+      if (hasTurtle) {
+        $('#saveFilesContainer').show();
       }
-      if (level < 7) {
-        // Also on a level < 7 (as we don't support loops yet), a timeout is redundant -> just set one for 5 minutes
-        return (3000000);
-      }
-      // Set a time-out of either 20 seconds when having a sleep and 5 seconds when not
-      return ((hasSleep) ? 20000 : 5000);
-    }) ()
-  });
-
-  return Sk.misceval.asyncToPromise(() =>
-    Sk.importMainWithBody("<stdin>", false, code, true), {
-      "*": () => {
-        // We don't do anything here...
-      }
-    }
-   ).then(function(_mod) {
-    console.log('Program executed');
-    const pythonVariables = Sk.globals;
-    load_variables(pythonVariables);
-    $('#stopit').hide();
-    $('#runit').show();
-
-    if (hasPygame) {
-      document.onkeydown = null;
-      $('#pygame-modal').hide();
-    }
-
-    if (hasTurtle) {
-      $('#saveFilesContainer').show();
-    }
-
-    // Check if the program was correct but the output window is empty: Return a warning
-    if ($('#output').is(':empty') && $('#turtlecanvas').is(':empty')) {
-      if(!debug){
+  
+      // Check if the program was correct but the output window is empty: Return a warning
+      if ($('#output').is(':empty') && $('#turtlecanvas').is(':empty')) {
         pushAchievement("error_or_empty");
-        error.showWarning(ClientMessages['Transpile_warning'], ClientMessages['Empty_output']);
+        error.showWarning(ClientMessages['Transpile_warning'], ClientMessages['Empty_output']);        
+        return;
       }
-      return;
+      if (!hasWarnings && code !== last_code) {
+          showSuccesMessage();
+          last_code = code;
+      }
+      if (cb) cb ();
+    }).catch(function(err) {
+      const errorMessage = errorMessageFromSkulptError(err) || null;
+      if (!errorMessage) {
+        throw null;
+      }
+      throw new Error(errorMessage);
+    });
+    
+  } else if (run_type === "debug") {
+    
+    theGlobalDebugger = new Sk.Debugger('<stdin>', incrementDebugLine, stopDebug);
+    theGlobalSourcemap = sourceMap;
+    
+    Sk.configure({
+      output: outf,
+      read: builtinRead,
+      inputfun: inputFromInlineModal,
+      inputfunTakesPrompt: true,
+      __future__: Sk.python3,
+      debugging: true,
+      breakpoints: theGlobalDebugger.check_breakpoints.bind(theGlobalDebugger),      
+      execLimit: null
+    });
+
+    let lines = code.split('\n');
+    for (let i = 0; i < lines.length; i++) {
+      // lines with dummy variable name are not meant to be shown to the user, skip them.
+      if (lines[i].includes("# __BREAKPOINT__") && !lines[i].includes('x__x__x__x')) {
+        // breakpoints are 1-indexed
+        theGlobalDebugger.add_breakpoint('<stdin>.py', i + 1, '0', false);
+      }
     }
+
     // Do not show success message if we found errors that we skipped
-    if (!hasWarnings && code !== last_code && !debug && !skip_faulty_found_errors) {
-        showSuccesMessage();
+    if (!hasWarnings && code !== last_code && !skip_faulty_found_errors) {
         last_code = code;
     }
-    if (cb) cb ();
-  }).catch(function(err) {
 
+    theGlobalDebugger.set_code_starting_line(code_prefix.split('\n').length - 1);
+    theGlobalDebugger.set_code_lines(code.split('\n'));
+    theGlobalDebugger.set_program_data({
+      Code: code,
+      source_map: sourceMap,
+      has_turtle: hasTurtle,
+      has_pygame: hasPygame,
+      Warning: hasWarnings
+    });
+    
+    startDebug();
 
-    const errorMessage = errorMessageFromSkulptError(err) || null;
-    if (!errorMessage) {
-      throw null;
-    }
-    throw new Error(errorMessage);
-  });
+    return theGlobalDebugger.startDebugger(
+      () => Sk.importMainWithBody("<stdin>", false, code, true),
+      theGlobalDebugger
+    ).then( 
+      function () {
+        console.log('Program executed');
+  
+        $('#stopit').hide();
+        $('#runit').show();
+        
+        stopDebug();
+        
+        if (hasPygame) {        
+          document.onkeydown = null;
+          $('#pygame-modal').hide();
+        }
+    
+        if (hasTurtle) {
+          $('#saveFilesContainer').show();
+        }
+        
+        if (cb) cb ();
+      }
+    ).catch(function(err: any) {
+      const errorMessage = errorMessageFromSkulptError(err) || null;
+      if (!errorMessage) {
+        throw null;
+      }
+      throw new Error(errorMessage);      
+    });
+
+  } else {    
+    // maybe remove debug marker here
+    return theGlobalDebugger.continueForward()
+      .catch(function(err: any) {
+        console.error(err)
+        const errorMessage = errorMessageFromSkulptError(err) || null;
+        if (!errorMessage) {
+          throw null;
+        }
+        throw new Error(errorMessage);
+    });
+  }
 
   /**
    * Get the error messages from a Skulpt error
@@ -1400,8 +1491,10 @@ function get_parsons_code() {
 }
 
 export function get_active_and_trimmed_code() {
-  theGlobalEditor.trimTrailingSpace()
-  return returnLinesWithoutBreakpoints(theGlobalEditor);
+  theGlobalEditor.trimTrailingSpace();
+  const storage = window.localStorage;
+  const debugLine = storage.getItem("debugLine");
+  return theGlobalEditor.getActiveContents(debugLine);
 }
 
 export function confetti_cannon(){
@@ -1487,16 +1580,55 @@ export function toggle_developers_mode(enforced: boolean) {
     $('#editor-area').removeClass('mt-5');
     $('#code_editor').css('height', 36 + "em");
     $('#code_output').css('height', 36 + "em");
-    theGlobalEditor.resize();
+    theGlobalEditor.resize(576);
   } else {
     $('#editor-area').addClass('mt-5');
     $('#code_editor').height('22rem');
     $('#code_output').height('22rem');
+    theGlobalEditor.resize(352);
   }
 }
 
-export function toggle_keyword_language(lang: string) {
-  window.open('?keyword_language=' + lang, "_self");
+/**
+ * Run a code block, show an error message if we catch an exception
+ */
+export async function tryCatchErrorBox(cb: () => void | Promise<void>) {
+  try {
+    return await cb();
+  } catch (e: any) {
+    console.log('Error', e);
+    error.show(ClientMessages['Transpile_error'], e.message);
+  }
+}
+
+export function toggle_keyword_language(current_lang: string, new_lang: string) {
+  tryCatchErrorBox(async () => {
+    const response = await postJsonWithAchievements('/translate_keywords', {
+      code: theGlobalEditor.contents,
+      start_lang: current_lang,
+      goal_lang: new_lang,
+      level: theLevel,
+    });
+
+  if (response.success) {
+    const code = response.code
+    theGlobalEditor.contents = code;
+    const saveName = saveNameFromInput();
+
+    // save translated code to local storage
+    // such that it can be fetched after reload
+    localSave(currentTabLsKey(), { saveName, code });
+    $('#editor').attr('lang', new_lang);
+
+    // update the whole page (example codes)
+    const hash = window.location.hash;
+    const queryString = window.location.search;
+    const urlParams = new URLSearchParams(queryString);
+    urlParams.set('keyword_language', new_lang)
+    window.location.search = urlParams.toString()
+    window.open(hash, "_self");
+    }
+  });
 }
 
 export function toggle_blur_code() {
@@ -1519,15 +1651,25 @@ export async function change_language(lang: string) {
   await tryCatchPopup(async () => {
     const response = await postJsonWithAchievements('/change_language', { lang });
     if (response.succes) {
-      // Check if keyword_language is set to change it to English
       const queryString = window.location.search;
       const urlParams = new URLSearchParams(queryString);
       if (urlParams.get('keyword_language') !== null) {
         urlParams.set('keyword_language', 'en');
+      }
+      if (urlParams.get("language") !== null) {
+        urlParams.set("language", lang)
         window.location.search = urlParams.toString();
       } else {
         location.reload();
       }
+      // What's the logic behind this? what happens the keyword_language=en and we want to change the language to arabic? params? 
+      // Check if keyword_language is set to change it to English
+      // if (urlParams.get('keyword_language') !== null) {
+      //   urlParams.set('keyword_language', 'en');
+      //   window.location.search = urlParams.toString();
+      // } else {
+      //   location.reload();
+      // }
     }
   });
 }
@@ -1543,22 +1685,6 @@ async function postJsonWithAchievements(url: string, data: any): Promise<any> {
   return response;
 }
 
-export function change_keyword_language(start_lang: string, new_lang: string) {
-  tryCatchPopup(async () => {
-    const response = await postJsonWithAchievements('/translate_keywords', {
-      code: theGlobalEditor,
-      start_lang: start_lang,
-      goal_lang: new_lang,
-      level: theLevel,
-    });
-
-    if (response.success) {
-      theGlobalEditor.contents = response.code;
-      $('#editor').attr('lang', new_lang);
-      update_view('main_editor_keyword_selector', new_lang);
-    }
-  });
-}
 
 function update_view(selector_container: string, new_lang: string) {
   $('#' + selector_container + ' > div').map(function() {
@@ -1983,4 +2109,13 @@ function change_shared (shared: boolean, index: number) {
     $('#favourite_program_container_' + index).removeClass('text-yellow-400');
     $('#favourite_program_container_' + index).addClass('text-white');
   }
+}
+
+export function goToLevel(level: any) {
+  window.location.hash = '' // the hash will be set to the first adventure.
+  let newPath = window.location.pathname.replace(/\d+/, level);
+  if (!newPath.includes(level)) {
+    newPath = window.location.pathname + `/${level}`
+  } 
+  window.location.pathname = newPath
 }

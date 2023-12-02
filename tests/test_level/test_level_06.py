@@ -177,6 +177,27 @@ class TestsLevel6(HedyTester):
 
         self.multi_level_tester(max_level=7, code=code, expected=expected, output='gelijkspel!')
 
+    def test_if_french(self):
+        code = textwrap.dedent("""\
+        plat_principal = demande "Quel plat principal souhaitez-vous?"
+        prix = 0
+        si plat_principal est lasagnes prix = 12
+        affiche "Ce sera " prix""")
+
+        expected = textwrap.dedent("""\
+        plat_principal = input(f'Quel plat principal souhaitez-vous?')
+        prix = '0'
+        if convert_numerals('Latin', plat_principal) == convert_numerals('Latin', 'lasagnes'):
+          prix = '12'
+        else:
+          x__x__x__x = '5'
+        print(f'Ce sera {prix}')""")
+
+        self.multi_level_tester(max_level=7,
+                                code=code,
+                                expected=expected,
+                                lang='fr')
+
     def test_equality_arabic(self):
         code = textwrap.dedent("""\
         nummer1 is ٢
@@ -926,13 +947,13 @@ class TestsLevel6(HedyTester):
         try:
           __trtl = int(__trtl)
         except ValueError:
-          raise Exception(f'While running your program the command <span class=\"command-highlighted\">turn</span> received the value <span class=\"command-highlighted\">{__trtl}</span> which is not allowed. Try changing the value to a number.')
+          raise Exception('catch_value_exception')
         t.right(min(600, __trtl) if __trtl > 0 else max(-600, __trtl))
         __trtl = int(10) + int(num)
         try:
           __trtl = int(__trtl)
         except ValueError:
-          raise Exception(f'While running your program the command <span class=\"command-highlighted\">forward</span> received the value <span class=\"command-highlighted\">{__trtl}</span> which is not allowed. Try changing the value to a number.')
+          raise Exception('catch_value_exception')
         t.forward(min(600, __trtl) if __trtl > 0 else max(-600, __trtl))
         time.sleep(0.1)""")
 
