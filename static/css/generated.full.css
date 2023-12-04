@@ -1166,8 +1166,16 @@ code {
   position: fixed;
 }
 
+.\!fixed {
+  position: fixed !important;
+}
+
 .absolute {
   position: absolute;
+}
+
+.\!relative {
+  position: relative !important;
 }
 
 .relative {
@@ -3981,6 +3989,22 @@ code {
 
 .-left-full {
   left: -100%;
+}
+
+.top-\[-\] {
+  top: -;
+}
+
+.top-\[-100\] {
+  top: -100;
+}
+
+.top-\[-100\%\] {
+  top: -100%;
+}
+
+.top-\[\] {
+  top: ;
 }
 
 .isolate {
@@ -15313,8 +15337,16 @@ code {
   overflow: hidden;
 }
 
+.\!overflow-hidden {
+  overflow: hidden !important;
+}
+
 .overflow-clip {
   overflow: clip;
+}
+
+.\!overflow-clip {
+  overflow: clip !important;
 }
 
 .overflow-visible {
@@ -15341,6 +15373,10 @@ code {
   overflow-y: hidden;
 }
 
+.\!overflow-y-hidden {
+  overflow-y: hidden !important;
+}
+
 .overflow-x-clip {
   overflow-x: clip;
 }
@@ -15349,8 +15385,16 @@ code {
   overflow-y: clip;
 }
 
+.\!overflow-y-clip {
+  overflow-y: clip !important;
+}
+
 .overflow-x-visible {
   overflow-x: visible;
+}
+
+.\!overflow-x-visible {
+  overflow-x: visible !important;
 }
 
 .overflow-y-visible {
@@ -20413,6 +20457,16 @@ code {
 .bg-sky-900 {
   --tw-bg-opacity: 1;
   background-color: rgb(12 74 110 / var(--tw-bg-opacity));
+}
+
+.\!bg-blue-400 {
+  --tw-bg-opacity: 1 !important;
+  background-color: rgb(99 179 237 / var(--tw-bg-opacity)) !important;
+}
+
+.\!bg-blue-200 {
+  --tw-bg-opacity: 1 !important;
+  background-color: rgb(190 227 248 / var(--tw-bg-opacity)) !important;
 }
 
 .bg-opacity-0 {
