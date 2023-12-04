@@ -249,6 +249,8 @@ class HedyTester(unittest.TestCase):
             test_hash = pickle.dumps(all_args)
         except AttributeError:
             test_hash = None
+        except TypeError:
+            test_hash = None
 
         if not self.snippet_already_tested_with_current_hedy_version(test_hash):
             if skipped_mappings is not None:
