@@ -2028,8 +2028,9 @@ def add_sleep_to_command(commands, indent=True, is_debug=False, location="after"
     sleep_command = "time.sleep(0.1)" if indent is False else "  time.sleep(0.1)"
     if location == "after":
         return commands + "\n" + sleep_command
-    else: # location is before
+    else:  # location is before
         return sleep_command + "\n" + commands
+
 
 @v_args(meta=True)
 @hedy_transpiler(level=7)
