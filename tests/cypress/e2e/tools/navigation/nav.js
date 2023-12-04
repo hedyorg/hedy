@@ -57,7 +57,6 @@ export function goToProfilePage()
     return goToPage(Cypress.env('profile_page'));
 }
 
-
 export function goToHedyLevel2Page()
 {
     return goToPage(Cypress.env('hedy_level2_page'));
