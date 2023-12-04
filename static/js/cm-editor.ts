@@ -14,7 +14,8 @@ import {
     incorrectLineField,
     removeIncorrectLineEffect,
     addDebugWords,
-    placeholders
+    placeholders,
+    basicIndent
 } from "./cm-decorations";
 import {LRLanguage} from "@codemirror/language"
 import { languagePerLevel } from "./lezer-parsers/language-packages";
@@ -124,14 +125,7 @@ export class HedyCodeMirrorEditor implements HedyEditor {
                     indentWithTab,
                 ]),
                 indentUnit.of(indentSize),
-                indentService.of((context, pos) => {
-                    const previousLine = context.lineAt(pos, -1);
-                    const nextLine = context.lineAt(pos + 1, -1);
-                    const nextIndentationSize =  nextLine.text.match(/^\s*/)![0].length;
-                    const prevIndentationSize =  previousLine.text.match(/^\s*/)![0].length;
-                    const indentBy = Math.max(prevIndentationSize, nextIndentationSize);
-                    return indentBy
-                }),
+                indentService.of(basicIndent),
                 monokai,
                 this.theme.of(mainEditorStyling),
                 this.readMode.of(EditorState.readOnly.of(isReadOnly)),

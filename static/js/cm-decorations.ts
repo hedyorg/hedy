@@ -1,6 +1,6 @@
 import { Decoration, DecorationSet, EditorView, GutterMarker, MatchDecorator, ViewPlugin, ViewUpdate, gutter, } from '@codemirror/view'
 import { RangeSet, StateEffect, StateField } from '@codemirror/state'
-
+import { IndentContext } from '@codemirror/language'
 
 export const addErrorLine = StateEffect.define<{ row: number }>();
 export const addErrorWord = StateEffect.define<{ row: number, col: number }>();
@@ -248,3 +248,19 @@ export const placeholders = ViewPlugin.fromClass(class {
       return view.plugin(plugin)?.placeholders || Decoration.none
     })
 })
+
+export function basicIndent(context: IndentContext, pos: number) {
+    const nextIndentationSize = context.lineIndent(pos, -1);
+    let prevIndentationSize;
+    try {
+        prevIndentationSize = context.lineIndent(pos + 1, -1);
+    } catch (error) {
+        prevIndentationSize = 0;
+    }
+    const indentBy = Math.max(
+        prevIndentationSize,
+        nextIndentationSize
+    );
+    return indentBy;
+
+}
