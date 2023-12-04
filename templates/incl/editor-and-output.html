@@ -17,31 +17,6 @@
              <span>←</span>
          </div>
         </div>
-      <!-- language selector overlay -->
-      {% if is_admin and other_keyword_language() %}
-          <div id="main_editor_keyword_selector">
-              <div class="dropdown inline-block ltr:right-0 rtl:left-0 absolute z-10 mx-2 mt-2 mb-0 text-white" lang="{{ current_keyword_language().lang }}">
-                  <button class="inline-flex items-center text-xl px-2 bg-blue-600 rounded-lg" type="button" onclick="$('.language-switcher-menu').slideToggle('medium');">
-                      {{ current_keyword_language().sym }} <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round"  d="M19 9l-7 7-7-7"></path></svg>
-                  </button>
-                  <div class="language-switcher-menu absolute hidden ltr:right-0 rtl:left-0">
-                      <ul class="list-none text-xl z-10 text-white px-4 ltr:mr-1 rtl:ml-1 bg-blue-600 rounded-lg mt-2">
-                            <a class="no-underline text-white" href="#" onclick="hedyApp.change_keyword_language ('{{ current_keyword_language().lang }}', '{{ other_keyword_language().lang }}');$('.language-switcher-menu').hide();event.preventDefault();"><li>{{ other_keyword_language().sym }}</li></a>
-                      </ul>
-                  </div>
-              </div>
-              <div class="dropdown inline-block ltr:right-0 rtl:left-0 absolute z-10 mx-2 mt-2 mb-0 text-white hidden" lang="{{ other_keyword_language().lang }}">
-                  <button class="inline-flex items-center text-xl px-2 bg-blue-600 rounded-lg" type="button" onclick="$('.language-switcher-menu').slideToggle('medium');">
-                      {{ other_keyword_language().sym }} <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round"  d="M19 9l-7 7-7-7"></path></svg>
-                  </button>
-                  <div class="language-switcher-menu absolute hidden ltr:right-0 rtl:left-0">
-                      <ul class="list-none text-xl z-10 text-white px-4 ltr:mr-1 rtl:ml-1 bg-blue-600 rounded-lg mt-2">
-                            <a class="no-underline text-white" href="#" onclick="hedyApp.change_keyword_language ('{{ other_keyword_language().lang }}', '{{ current_keyword_language().lang }}');$('.language-switcher-menu').hide();event.preventDefault();"><li>{{ current_keyword_language().sym }}</li></a>
-                      </ul>
-                  </div>
-              </div>
-          </div>
-        {% endif %}
         <!--The div below is used to send translation of search to Ace through the frontend-->
         <div id="search_placeholder" style="display: none":>{{_('search')}}</div>
       <div class="w-full flex-1 flex flex-col">
@@ -174,7 +149,7 @@
           <button id="debug_button" class="green-btn" onclick='hedyApp.runit({{ level }}, "{{ g.lang }}", {{_('already_program_running')|default(None)|tojson}}, "debug")'>🐞</button>
           <button id="debug_restart" class="green-btn hidden" onclick='hedyApp.runit({{ level }}, "{{ g.lang }}", {{_('already_program_running')|default(None)|tojson}}, "debug")'>🔄</button>
           <button id="debug_stop" class="green-btn hidden" onclick="hedyApp.stopDebug()">🛑</button>
-          <button id="debug_continue" class="green-btn" onclick='hedyApp.runit({{ level }}, "{{ g.lang }}", {{_('already_program_running')|default(None)|tojson}}, "continue")'><div class="{% if g.dir == "rtl" %}rotate-180{% endif %}">⏩</div></button>
+          <button id="debug_continue" class="green-btn hidden" onclick='hedyApp.runit({{ level }}, "{{ g.lang }}", {{_('already_program_running')|default(None)|tojson}}, "continue")'><div class="{% if g.dir == "rtl" %}rotate-180{% endif %}">⏩</div></button>
         </div>
         <button id="next_parson_button" max_exercise="{{ parsons_exercises }}" class="green-btn ltr:ml-auto rtl:mr-auto" style="display: none;">{{_('next_exercise')}}</button>
         {% if show_edit_button %}

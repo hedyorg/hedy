@@ -1523,7 +1523,8 @@ def view_program(user, id):
                            javascript_page_options=dict(
                                page='view-program',
                                lang=g.lang,
-                               level=int(result['level'])),
+                               level=int(result['level']),
+                               code=code),
                            **arguments_dict)
 
 
@@ -1624,10 +1625,11 @@ def get_embedded_code_editor(level):
 
     return render_template("embedded-editor.html", embedded=True, run=run, language=language,
                            keyword_language=keyword_language, readOnly=readOnly,
-                           level=level, program=program, javascript_page_options=dict(
-                               page='code',
+                           level=level, javascript_page_options=dict(
+                               page='view-program',
                                lang=language,
-                               level=level
+                               level=level,
+                               code=program
                            ))
 
 

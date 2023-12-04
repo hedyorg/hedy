@@ -143,7 +143,7 @@ adventures:
                     En aquest nivell, pots crear aquestes repeticions amb `{repeat}`.
 
                     ### Exercici
-                    Afegeix una repetició a la vostra pròpia història. Torna als teus programes desats, tria el teu programa d'història del nivell 6 i
+                    Afegeix una repetició a la vostra pròpia història. Torna als teus programes desats, tria el teu programa d'història del nivell anterior i
                     quan trobis una línia que contingui `{print}` i repeteix-la!
                 example_code: |
                     ```
@@ -154,25 +154,27 @@ adventures:
                 start_code: '{repeat} 5 {times} {print} ''Ajuda!'''
             8:
                 story_text: |
-                    In this level you can use multiple lines in your {if} commands, this way you can upgrade your happy or sad ending!
+                    En aquest nivell podeu utilitzar diverses línies en les comandes `{if}`, d'aquesta manera podeu actualitzar el vostre final feliç o trist.
 
-                    ### Exercise
-                    Can you make your own story with two different endings?
+                    ### Exercici 1
+                    El codi d'exemple mostra dos finals diferents; un on els personatges salten en una màquina de temps i un on no ho fan.
+                    Completa els espais en blanc amb almenys una frase per terminació.
+                    **Extra** Fes la història més llarga. Què passa a la història? Podeu afegir un segon `{ask}` amb opcions diferents.
+
+                    ### Exercici 2
+                    Torneu als vostres programes guardats, trieu el vostre programa d’història de nivell 5. Ara escriviu un final feliç o trist d’almenys tres línies!
                 example_code: |
                     ```
-                    {print} 'OH NO! The T-rex is closing in!'
-                    end = {ask} 'Do you want a happy or a sad ending?'
-                    {if} end {is} happy
-                        {print} 'Just in time Richard jumps back into the time machine!'
-                        {print} 'Michael types in the code and...'
-                        {print} '💥ZAP!💥'
-                        {print} 'They are back in their garage'
+                    {print} "OH NO! El T-rex s'apropa!"
+                    end = {ask} "Quin final vols, trist o feliç?"
+                    {if} end {is} feliç
+                        {print} "En Ricard salta a temps dins la màquina del temps!"
+                        {print} _
                     {else}
-                        {print} 'Michael yells COME ON RICHARD! RUN FASTER!'
-                        {print} 'But Richard is too slow...'
-                        {print} 'The T-rex closes in and eats him in one big bite!🦖'
+                        {print} "Oh no! En Ricard és massa lent..."
+                        {print} _
                     ```
-                start_code: '# place your code here'
+                start_code: '# situa el teu codi aquí'
             9:
                 story_text: |
                     In this level you can use nesting to put `{if}`, `{repeat}` or `{for}` commands inside other `{if}`, `{repeat}` or `{for}` commands. This gives you many options and really helps you to make your story interactive.
@@ -213,10 +215,10 @@ adventures:
                 story_text: In this level you can use the quotation marks to save multiple words in a variable.
                 example_code: |
                     ```
-                    name = 'The Queen of England'
-                    {print} name ' was eating a piece of cake, when suddenly...'
+                    nom = "La Reina d'Englaterra"
+                    {print} nom ' menjava un tall de pastís, quan de sopte...'
                     ```
-                start_code: '# place your code here'
+                start_code: '# situa el teu codi aquí'
             13:
                 story_text: |
                     By using the `{and}` and `{or}` commands, you can shorten your stories. For example, check out the dragon story.
@@ -225,31 +227,14 @@ adventures:
                     Can you make your own adventure minigame like this?
                 example_code: |
                     ```
-                    sword = 'lost'
-                    game = 'on'
-                    {print} 'Our hero is walking through the forest'
-                    {print} 'The path splits two ways'
-                    {for} i {in} {range} 0 {to} 2
-                        {if} game {is} 'on'
-                            path = {ask} 'Which path should she choose?'
-                            {if} path {is} 'left' {and} sword {is} 'found'
-                                {print} 'Our hero comes across a dragon!'
-                                {print} 'Luckily our hero has a sword to defeat the beast!'
-                                game = 'over'
-                            {if} path {is} 'left' {and} sword {is} 'lost'
-                                {print} 'Our hero finds a dragon, but she doesnt have any weapons!'
-                                {print} 'Our hero is beaten by the dragon...'
-                                {print} 'Try again'
-                                game = 'over'
-                            {if} path {is} 'right' {and} sword {is} 'found'
-                                {print} 'You have already found the sword. There is nothing left here.'
-                                {print} 'She walks back'
-                            {if} path {is} 'right' {and} sword {is} 'lost'
-                                {print} 'Our hero finds a sword'
-                                {print} 'This could come in very handy'
-                                sword = 'found'
+                    {print} 'El nostre heroïna camina dins el bosc'
+                    {print} 'El camí té una bifurcació'
+                    camí= {ask} 'Quin camí ha d'escollir?'
+                    arma = {ask} 'Quina arma desenfunda?'
+                    {if} camí {is} 'esquerre' {and} arma {is} 'espasa'
+                        _'
                     ```
-                start_code: '# place your code here'
+                start_code: '# situa el teu codi aquí'
             15:
                 story_text: |
                     Using the `{while}` loop can make your stories more interesting. For example, you can use `{while} game == 'on'` so you can play until the game is over.
@@ -259,20 +244,20 @@ adventures:
                     The example code shows you how to use the `{while}` loop in a story. Now **think of your own scenario** in which the player has to find something before they can continue.
                 example_code: |
                     ```
-                    keys = 'lost'
-                    {print} 'You are standing in your garden and you have lost your keys.'
-                    {print} 'Where do you want to look for them?'
-                    {print} 'You can choose: tree, flowerbed, rock, postbox'
-                    {while} keys == 'lost'
-                        location = {ask} 'Where do you want to look?'
-                        {if} location == 'flowerbed'
-                            {print} 'Here they are!'
-                            keys = 'found'
+                    claus = 'perdudes'
+                    {print} 'Et trobes al gardí però no pots entrar ja que has perdut les claus.'
+                    {print} 'On les vols buscar?'
+                    {print} "Pots escollir entre: l'arbre, les flors, la roca, la bústia"
+                    {while} claus == 'perdudes'
+                        lloc = {ask} 'On vols buscar-les?'
+                        {if} lloc == 'les flors'
+                            {print} 'Aquí estan!'
+                            claus = 'trobades'
                         {else}
-                            {print} 'Nope they are not at the ' location
-                    {print} 'Now you can enter the house!'
+                            {print} ' No, no són a ' lloc
+                    {print} 'Ja pots entrar a casa!'
                     ```
-                start_code: '# place your code here'
+                start_code: '# situa el teu codi aquí'
             18:
                 story_text: |
                     We are going to print another story, but now we have to use brackets with `{print}`.
@@ -281,90 +266,90 @@ adventures:
                     Create a story of at least 5 sentences. You don't have to use 'name' just yet.
                 example_code: |
                     ```
-                    {print}('Welcome to this story!')
+                    {print}('Benvingut a aquesta història!')
                     ```
                 story_text_2: |
-                    ### Exercise 2
-                    We have already prepared an `{input}` for you. First, use the `name` variable in your story.
-                    Then add a second `{ask}` and use that variable as well.
-                    Tip: Remember the commas in a `{print}` between text and variables!
+                    ### Exercici 2
+                    Ja hem preparat un `{input}` per a tu. Per començar, fes servir la variable `name` de la vostra història.
+                    A continuació, afegeix un segon `{ask}` fent-hi servir la variable.
+                    Consell: Recorda afegir les comes en un `{print}` entre el text i les variables!
                 example_code_2: |
                     ```
-                    naam = {input}("What's your name?")
-                    {print}('Welcome to this story!')
+                    nom = {input}("Com et dius?")
+                    {print}('Benvingut a aquesta història!')
                     ```
-                start_code: '# Schrijf jouw code hier'
+                start_code: '# situa el teu codi aquí'
     add_remove_command:
         name: '{add} {to} & {remove} {from}'
-        default_save_name: add_remove_command
-        description: introducing add to and remove from
+        default_save_name: comanda_afegir_borrar
+        description: Introduint afegeix i esborra de
         levels:
             3:
                 story_text: |
-                    ## Add to
-                    You can add items to the list with the `{add} {to}` command. To add an item to a list you can simply type: `{add} penguin {to} animals` or you can use the `{ask}` command like in the example code.
+                    ## Afegeix a
+                    Pots afegir articles a la llista amb la comanda`{add} {to}`. Per afegir un element a una llista, simplement escrius: `{add} penguin {to} animals` o bé pots utilitzar la comanda `{ask}` com en el codi d'exemple.
                 example_code: |
                     ```
-                    animals {is} dog, cat, kangaroo
-                    like {is} {ask} What is your favorite animal?
-                    {add} like {to_list} animals
-                    {print} I choose animals {at} {random}
+                    animals {is} gos, gat, cangur
+                    prefe {is} {ask} Quin és el teu animal preferit?
+                    {add} prefe {to_list} animals
+                    {print} Escullo animals {at} {random}
                     ```
                 story_text_2: |
-                    ## Remove from
-                    If you can add items to a list, of course you can also take them off. This is done with the `{remove} {from}` command.
+                    ## Esborra de
+                    De la mateixa manera que pots afegir articles a una llista pots treure'ls. Això es fa amb la comanda `{remove} {from}`.
                 example_code_2: |
                     ```
-                    animals {is} dog, cat, kangaroo
-                    dislike {is} {ask} What animal do you not like?
-                    {remove} dislike {from} animals
-                    {print} I choose animals {at} {random}
+                    animals {is} gos, gat, cangur
+                    noagrada {is} {ask} Quin animal no t'agrada?
+                    {remove} noagrada {from} animals
+                    {print} Escullo animals {at} {random}
                     ```
                 story_text_3: |
-                    ### Exercise
-                    Try out the new commands in this virtual restaurant. Add the flavor the player is hpoing for to the list and remove the flavors they are allergic to.
+                    ### Exercici
+                    Descobreix les noves comandes en aquest restaurant virtual. Afegeix el gust desitjat pel jugador a la llista i elimina'n els gustos als quals n'és al·lèrgic.
                 example_code_3: |
                     ```
-                    {print} Mystery milkshake
-                    flavors {is} strawberry, chocolate, vanilla
-                    hope {is} {ask} What flavor are you hoping for?
+                    {print} Batut misteriós
+                    gustos {is} maduixa, xocolata, vainilla
+                    desitjat {is} {ask} Quin gust t'esperes?
                     _
-                    allergies {is} {ask} Are you allergic to any flavors?
+                    al·lèrgia {is} {ask} Ets al·érgic a algun ingredient?
                     _
-                    {print} You get a flavors {at} {random} milkshake
+                    {print} T'ha tocat gustos {at} {random} milkshake
                     ```
                 start_code: |-
-                    animals {is} dog, cat, kangaroo
-                    like {is} {ask} What is your favorite animal?
-                    {add} like {to_list} animals
-                    dislike {is} {ask} What animal do you not like?
-                    {remove} dislike {from} animals
-                    {print} I choose animals {at} {random}
+                    animals {is} gos, gat, cangur
+                    prefe {is} {ask} Quin és el teu animal preferit?
+                    {add} prefe {to_list} animals
+                    noagrada {is} {ask} Quin animal no t'agrada?
+                    {remove} noagrada {from} animals
+                    {print} Escullo animals {at} {random}
     and_or_command:
         name: '{and} & {or}'
-        default_save_name: and or
-        description: introducing and or
+        default_save_name: i o
+        description: Introduint i o
         levels:
             13:
                 story_text: |-
-                    We are now going to learn `{and}` and `{or}`! If you want to check two statements, you don't have to use two `{if}`s but can use `{and}` and `{or}`.
+                    Ara aprendrem `{and}` i `{or}`! Quan vols comprovar dues sentències no cal fer servir dos `{if}`s, enlloc pots utilitzar les comandes `{and}` i `{or}`.
 
-                    If you use `{and}`, both statements, left and right of the `{and}` need to be true. We can also use `{or}`. Then only one statement needs to be correct.
+                    Quan utilitzes `{and}` cal que ambdues sentències, tant l'esquerra com la dreta del `{and}` , siguin certes. En canvi, quan utilitzes `{or}`, només una de les sentències ha de ser certa.
                 example_code: |
                     ```
-                    name = {ask} 'what is your name?'
-                    age = {ask} 'what is your age?'
-                    {if} name {is} 'Hedy' {and} age {is} 2
-                        {print} 'You are the real Hedy!'
+                    nom = {ask} 'Com et dius?'
+                    edat = {ask} 'Quants anys tens?'
+                    {if} nom {is} 'Hedy' {and} edat {is} 2
+                        {print} 'Ets el veritable Hedy!'
                     ```
                 start_code: |-
-                    name = {ask} 'what is your name?'
-                    age = {ask} 'what is your age?'
-                    {if} name {is} 'Hedy' {and} age {is} 2
-                        {print} 'You are the real Hedy!'
+                    nom = {ask} 'Com et dius?'
+                    edat = {ask} 'Quants anys tens?'
+                    {if} nom {is} 'Hedy' {and} edat {is} 2
+                        {print} 'Ets el veritable Hedy!'
     ask_command:
         name: '{ask}'
-        default_save_name: ask_command
+        default_save_name: comanda_pregunta
         description: Introducció a la comanda preguntar
         levels:
             1:
@@ -1432,33 +1417,33 @@ adventures:
                     ```
                 start_code: |4
 
-                    define food_order
-                        toppings = ask 'pepperoni, tuna, veggie or cheese?'
-                        size = ask 'big, medium or small?'
-                        number_of_pizza = ask 'How many these pizzas would you like?'
+                          define food_order
+                              toppings = ask 'pepperoni, tuna, veggie or cheese?'
+                              size = ask 'big, medium or small?'
+                              number_of_pizza = ask 'How many these pizzas would you like?'
 
-                        print 'YOU ORDERED'
-                        print number_of_pizzas ' size  ' topping ' pizza'
+                              print 'YOU ORDERED'
+                              print number_of_pizzas ' size  ' topping ' pizza'
 
-                    define drinks_order
-                        drink = ask 'water, coke, icetea, lemonade or coffee?'
-                        number_of_drinks = ask 'How many of these drinks would you like?'
+                          define drinks_order
+                              drink = ask 'water, coke, icetea, lemonade or coffee?'
+                              number_of_drinks = ask 'How many of these drinks would you like?'
 
-                        print 'YOU ORDERED'
-                        print number_of_drinks ' ' drink
+                              print 'YOU ORDERED'
+                              print number_of_drinks ' ' drink
 
-                    'Welcome to Hedy pizza'
-                    more_food = ask 'Would you like to order a pizza?'
-                    while more_food = 'yes'
-                        return food_order
-                        more_food = ask 'Would you like to order a pizza?'
-                    more_drinks = ask 'Would you like to order some drinks?'
-                    while more_drinks == 'yes'
-                        call drink_order
-                        more_drinks == ask 'Would you like to order more drinks?'
+                          'Welcome to Hedy pizza'
+                          more_food = ask 'Would you like to order a pizza?'
+                          while more_food = 'yes'
+                              return food_order
+                              more_food = ask 'Would you like to order a pizza?'
+                          more_drinks = ask 'Would you like to order some drinks?'
+                          while more_drinks == 'yes'
+                              call drink_order
+                              more_drinks == ask 'Would you like to order more drinks?'
 
 
-                    print 'Thanks for ordering!'
+                          print 'Thanks for ordering!'
             18:
                 story_text: |-
                     ### Exercise
@@ -1483,20 +1468,20 @@ adventures:
                     ```
                 start_code: |4
 
-                    animals = ['pig', 'dog', 'cow']
-                    sounds = ['oink', 'woof', 'moo']
-                    for i in range 1 to 3
-                        animal = animals[i]
-                        sound = sounds[i]
-                        print 'Old McDonald had a farm'
-                        print 'E I E I O!'
-                        print 'and on that farm he had a ' animal
-                        print 'E I E I O!'
-                        print 'with a ' sound sound ' here'
-                        print 'and a ' sound sound ' there'
-                        print 'here a ' sound
-                        print 'there a ' sound
-                        print 'everywhere a ' sound sound
+                          animals = ['pig', 'dog', 'cow']
+                          sounds = ['oink', 'woof', 'moo']
+                          for i in range 1 to 3
+                              animal = animals[i]
+                              sound = sounds[i]
+                              print 'Old McDonald had a farm'
+                              print 'E I E I O!'
+                              print 'and on that farm he had a ' animal
+                              print 'E I E I O!'
+                              print 'with a ' sound sound ' here'
+                              print 'and a ' sound sound ' there'
+                              print 'here a ' sound
+                              print 'there a ' sound
+                              print 'everywhere a ' sound sound
     default:
         name: Introducció
         default_save_name: intro
