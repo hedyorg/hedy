@@ -35,7 +35,7 @@
                     <div class="flex flex-row items-center mb-4">  
                         <label for="tags" class="inline-block w-40 text-xl">{{_('tags')}}</label>
                         <div class="flex flex-row w-full relative" id="add_tags">
-                                <input type="text" name="tag" placeholder="{{_('tag_input_placeholder')}}" id="search_tags_input"
+                                <input type="text" name="tag" autocomplete="off" placeholder="{{_('tag_input_placeholder')}}" id="search_tags_input"
                                     class="appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 ltr:pr-8 rtl:pl-8 rounded"
                                     hx-trigger="enter"
                                     hx-post="/tags/create/{{adventure.id}}" hx-target="#tags-list" hx-swap="outerHTML"

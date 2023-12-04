@@ -556,15 +556,17 @@ adventures:
                     {else} {print} 'Wrong! It was ' _
                     ```
                 story_text_3: |
-                    **Extra** You can also let the computer do random sums on its own using `{random}`.
-                example_code_3: |
+                    **Extra** You can also let the computer do random products on its own using `{random}`.
+                example_code_3: |-
+                    ```
                     numbers = 1, 2, 3, 4, 5, 6, 7, 8, 9, 10
                     number_1 = _
                     number_2 = _
                     correct_answer = number_1 * number_2
-                    given_answer = 'What is ' number_1 ' times ' number_2 '?'
+                    given_answer = {ask} 'What is ' number_1 ' times ' number_2 '?'
                     {if} _
                     {else} _
+                    ```
                 start_code: |
                     number_1 = {ask} 'Fill in the first number:'
                     number_2 = {ask} 'Fill in the second number:'
@@ -973,7 +975,7 @@ adventures:
                 story_text: |-
                     ### Exercise
                     Surprise! This program looks more like an output than a code. And yet, we don't want you to just add `{print}` commands in front of each line.
-                    Fix this program to turn it into the nursery rhyme 'Brother John (Frère Jaques)' by using the {repeat} command of course!
+                    Fix this program to turn it into the nursery rhyme 'Brother John (Frère Jacques)' by using the {repeat} command of course!
                 example_code: |
                     **Warning! This code needs to be debugged!**
                     ```
@@ -1438,33 +1440,33 @@ adventures:
                     ```
                 start_code: |4
 
-                        define food_order
-                            toppings = ask 'pepperoni, tuna, veggie or cheese?'
-                            size = ask 'big, medium or small?'
-                            number_of_pizza = ask 'How many these pizzas would you like?'
+                          define food_order
+                              toppings = ask 'pepperoni, tuna, veggie or cheese?'
+                              size = ask 'big, medium or small?'
+                              number_of_pizza = ask 'How many these pizzas would you like?'
 
-                            print 'YOU ORDERED'
-                            print number_of_pizzas ' size  ' topping ' pizza'
+                              print 'YOU ORDERED'
+                              print number_of_pizzas ' size  ' topping ' pizza'
 
-                        define drinks_order
-                            drink = ask 'water, coke, icetea, lemonade or coffee?'
-                            number_of_drinks = ask 'How many of these drinks would you like?'
+                          define drinks_order
+                              drink = ask 'water, coke, icetea, lemonade or coffee?'
+                              number_of_drinks = ask 'How many of these drinks would you like?'
 
-                            print 'YOU ORDERED'
-                            print number_of_drinks ' ' drink
+                              print 'YOU ORDERED'
+                              print number_of_drinks ' ' drink
 
-                        'Welcome to Hedy pizza'
-                        more_food = ask 'Would you like to order a pizza?'
-                        while more_food = 'yes'
-                            return food_order
-                            more_food = ask 'Would you like to order a pizza?'
-                        more_drinks = ask 'Would you like to order some drinks?'
-                        while more_drinks == 'yes'
-                            call drink_order
-                            more_drinks == ask 'Would you like to order more drinks?'
+                          'Welcome to Hedy pizza'
+                          more_food = ask 'Would you like to order a pizza?'
+                          while more_food = 'yes'
+                              return food_order
+                              more_food = ask 'Would you like to order a pizza?'
+                          more_drinks = ask 'Would you like to order some drinks?'
+                          while more_drinks == 'yes'
+                              call drink_order
+                              more_drinks == ask 'Would you like to order more drinks?'
 
 
-                        print 'Thanks for ordering!'
+                          print 'Thanks for ordering!'
             18:
                 story_text: |-
                     ### Exercise
@@ -1489,20 +1491,20 @@ adventures:
                     ```
                 start_code: |4
 
-                        animals = ['pig', 'dog', 'cow']
-                        sounds = ['oink', 'woof', 'moo']
-                        for i in range 1 to 3
-                            animal = animals[i]
-                            sound = sounds[i]
-                            print 'Old McDonald had a farm'
-                            print 'E I E I O!'
-                            print 'and on that farm he had a ' animal
-                            print 'E I E I O!'
-                            print 'with a ' sound sound ' here'
-                            print 'and a ' sound sound ' there'
-                            print 'here a ' sound
-                            print 'there a ' sound
-                            print 'everywhere a ' sound sound
+                          animals = ['pig', 'dog', 'cow']
+                          sounds = ['oink', 'woof', 'moo']
+                          for i in range 1 to 3
+                              animal = animals[i]
+                              sound = sounds[i]
+                              print 'Old McDonald had a farm'
+                              print 'E I E I O!'
+                              print 'and on that farm he had a ' animal
+                              print 'E I E I O!'
+                              print 'with a ' sound sound ' here'
+                              print 'and a ' sound sound ' there'
+                              print 'here a ' sound
+                              print 'there a ' sound
+                              print 'everywhere a ' sound sound
     default:
         name: Introduction
         default_save_name: intro
@@ -3513,7 +3515,7 @@ adventures:
                     {else} {repeat} 3 {times} {print} 'You have learned something new!'
                     ```
                 story_text_2: |
-                    Another interesting thing you can so with the `{repeat}` command is using variables to set the amount of times something should be repeated. In the example code you can see that we first ask the person how old they are.
+                    Another interesting thing you can do with the `{repeat}` command is using variables to set the amount of times something should be repeated. In the example code you can see that we first ask the person how old they are.
                     Then, in line 3, the question is repeated 'age' times. So we have used the variable 'age' with the `{repeat}` command.
                 example_code_2: |
                     ```
