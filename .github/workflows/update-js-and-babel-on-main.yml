@@ -44,7 +44,6 @@ jobs:
     # from Gettex.
     - name: Update and compile Babel translations
       run: |
-        pybabel extract -F babel.cfg -o messages.pot . --no-location --sort-output
         pybabel update -i messages.pot -d translations -N --no-wrap
         pybabel compile -f -d translations
 
