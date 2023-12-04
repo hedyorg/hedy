@@ -44,7 +44,6 @@ jobs:
     # from Gettex.
     - name: Compiling Babel translations
       run: |
-        pybabel update -i messages.pot -d translations -N --no-wrap
         pybabel compile -f -d translations
 
     - name: Compile TypeScript to JavaScript
