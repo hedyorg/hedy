@@ -7,7 +7,7 @@
           <span>{{ _('level_title') }} {{ adventure_table.level }}</span> <i id="level-arrow" class="fa-solid fa-angle-down"></i>
         </button>
         <div class="w-40">
-          <div class="dropdown-menu dropdown-blue !w-40 z-20 left-0" id="level_dropdown"
+          <div class="dropdown-menu dropdown-blue !w-40 z-20 ltr:left-0 rtl:right-0" id="level_dropdown"
             style="display: none; padding: 0px !important; margin: 0px; margin-top: 0.25rem;" _="on mutation of @style
                         set arrow to #level-arrow
                         if *display == 'none'
