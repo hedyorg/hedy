@@ -1577,6 +1577,7 @@ class ConvertToPython_1(ConvertToPython):
 @source_map_transformer(source_map)
 class ConvertToPython_2(ConvertToPython_1):
 
+    # why doesn't this live in isvalid?
     def error_ask_dep_2(self, meta, args):
         # ask is no longer usable this way, raise!
         # ask_needs_var is an entry in lang.yaml in texts where we can add extra info on this error
@@ -3210,14 +3211,14 @@ def check_program_size_is_valid(input_string):
         raise exceptions.InputTooBigException(lines_of_code=number_of_lines, max_lines=MAX_LINES)
 
 
-def process_input_string(input_string, level, lang, escape_backslashes=True, preprocess_ifs_enabled=True):
+def process_input_string(input_string, level, lang, preprocess_ifs_enabled=True):
     result = input_string.replace('\r\n', '\n')
 
     location = location_of_first_blank(result)
     if location > 0:
         raise exceptions.CodePlaceholdersPresentException(line_number=location)
 
-    if escape_backslashes and level >= 4:
+    if level >= 4:
         result = result.replace("\\", "\\\\")
 
     # In levels 5 to 7 we do not allow if without else, we add an empty print to make it possible in the parser
