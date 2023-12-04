@@ -915,6 +915,8 @@ class TestsLevel4(HedyTester):
     def test_clear(self):
         code = "clear"
         expected = textwrap.dedent("""\
+        time.sleep(0.1)
+        time.sleep(0.1)
         extensions.clear()
         try:
             # If turtle is being used, reset canvas
