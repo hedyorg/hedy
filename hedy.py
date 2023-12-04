@@ -1780,7 +1780,7 @@ class ConvertToPython_4(ConvertToPython_3):
     def error_print_nq(self, meta, args):
         return ConvertToPython_2.print(self, meta, args)
 
-    def clear(self, meta, args):  # todo not sure about it being here
+    def clear(self, meta, args):
         command = "extensions.clear()"
 
         # add two sleeps, one is a bit brief
