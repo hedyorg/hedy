@@ -152,6 +152,15 @@ export const monokaiHighlightStyle = HighlightStyle.define([
    color: ivory},
 ])
 
+export const highlightName = HighlightStyle.define([
+  {
+    tag: t.name,
+    color: greenLizard,
+    fontStyle: "italic",
+    fontWeight: "bold"
+  }
+])
+
 /// Extension to enable the Monokai theme (both the editor theme and
 /// the highlight style).
 export const monokai: Extension = [monokaiTheme, syntaxHighlighting(monokaiHighlightStyle)]
