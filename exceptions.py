@@ -252,9 +252,11 @@ class LonelyEchoException(HedyException):
     def __init__(self):
         super().__init__('Lonely Echo')
 
+
 class LonelyClearException(HedyException):
     def __init__(self):
         super().__init__('Lonely Clear')
+
 
 class CodePlaceholdersPresentException(HedyException):
     def __init__(self, line_number):
