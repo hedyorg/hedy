@@ -3354,6 +3354,7 @@ def create_lookup_table(abstract_syntax_tree, level, lang, input_string):
 
     return entries
 
+
 def create_AST(input_string, level, lang="en"):
     input_string = process_input_string(input_string, level, lang)
     program_root = parse_input(input_string, level, lang)
@@ -3377,7 +3378,6 @@ def create_AST(input_string, level, lang="en"):
                 raise E.orig_exc
             else:
                 raise E
-
 
 
 def transpile_inner(input_string, level, lang="en", populate_source_map=False, is_debug=False):
@@ -3417,6 +3417,7 @@ def transpile_inner(input_string, level, lang="en", populate_source_map=False, i
         source_map.set_python_output(python)
 
     return ParseResult(python, source_map, has_turtle, has_pygame, commands)
+
 
 def execute(input_string, level):
     python = transpile(input_string, level)
