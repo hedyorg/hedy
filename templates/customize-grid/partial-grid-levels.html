@@ -1,7 +1,7 @@
   <div id="adventure_overview">
     {# The header of the table #}
-    <div class="grid grid-cols-3 mb-4 w-full">
-      <div class="dropdown relative w-1/3">
+    <div class="sm:grid sm:grid-cols-3 flex flex-row gap-5  mb-4 w-full">
+      <div class="dropdown relative ">
         <button class="white-btn px-4 rounded inline-flex items-center gap-2 text-xl" id="dropdown_level_button"
           onclick="$('#level_dropdown').slideToggle('medium');">
           <span>{{ _('level_title') }} {{ adventure_table.level }}</span> <i id="level-arrow" class="fa-solid fa-angle-down"></i>
@@ -27,7 +27,7 @@
           {% endfor %}
         </div>
       </div>
-      <h2 class="text-center place-self-center mb-0 mt-0">{{_('class_overview')}} - {{ _('level_title') }} {{ adventure_table.level }}</h2>
+      <h2 class="text-center place-self-center mb-0 mt-0">{{_('class_overview')}}</h2>
     </div>
     
     {# The actual table that holds the data #}

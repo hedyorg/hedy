@@ -455,7 +455,7 @@ class LiveStatisticsModule(WebsiteModule):
     @requires_login
     def select_level(self, user, class_id, level):
         """
-        Adds or remove the current level from the UI
+        Change the level of the grid overview
         """
         if not is_teacher(user) and not is_admin(user):
             return utils.error_page(error=403, ui_message=gettext("retrieve_class_error"))
