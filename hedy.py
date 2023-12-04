@@ -3354,57 +3354,21 @@ def create_lookup_table(abstract_syntax_tree, level, lang, input_string):
 
     return entries
 
-
-def transpile_inner(input_string, level, lang="en", populate_source_map=False, is_debug=False):
-    check_program_size_is_valid(input_string)
-
-    level = int(level)
-    if level > HEDY_MAX_LEVEL:
-        raise Exception(f'Levels over {HEDY_MAX_LEVEL} not implemented yet')
-
+def create_AST(input_string, level, lang="en"):
     input_string = process_input_string(input_string, level, lang)
     program_root = parse_input(input_string, level, lang)
-
-    if populate_source_map:
-        source_map.clear()
-        source_map.set_level(level)
-        source_map.set_language(lang)
-        source_map.set_hedy_input(input_string)
 
     try:
         # checks whether any error production nodes are present in the parse tree
         is_program_valid(program_root, input_string, level, lang)
-
         abstract_syntax_tree = ExtractAST().transform(program_root)
-
         is_program_complete(abstract_syntax_tree, level)
 
         if not valid_echo(abstract_syntax_tree):
             raise exceptions.LonelyEchoException()
-
         lookup_table = create_lookup_table(abstract_syntax_tree, level, lang, input_string)
 
-        # FH, may 2022. for now, we just out arabic numerals when the language is ar
-        # this can be changed into a profile setting or could be detected
-        # in usage of programs
-        if lang == "ar":
-            numerals_language = "Arabic"
-        else:
-            numerals_language = "Latin"
-
-        # grab the right transpiler from the lookup
-        convertToPython = TRANSPILER_LOOKUP[level]
-        python = convertToPython(lookup_table, lang, numerals_language, is_debug).transform(abstract_syntax_tree)
-
-        commands = AllCommands(level).transform(program_root)
-
-        has_turtle = "forward" in commands or "turn" in commands or "color" in commands
-        has_pygame = "ifpressed" in commands or "ifpressed_else" in commands or "assign_button" in commands
-
-        if populate_source_map:
-            source_map.set_python_output(python)
-
-        return ParseResult(python, source_map, has_turtle, has_pygame, commands)
+        return lookup_table, abstract_syntax_tree
     except VisitError as E:
         if isinstance(E, VisitError):
             # Exceptions raised inside visitors are wrapped inside VisitError. Unwrap it if it is a
@@ -3414,6 +3378,45 @@ def transpile_inner(input_string, level, lang="en", populate_source_map=False, i
             else:
                 raise E
 
+
+
+def transpile_inner(input_string, level, lang="en", populate_source_map=False, is_debug=False):
+    check_program_size_is_valid(input_string)
+
+    level = int(level)
+    if level > HEDY_MAX_LEVEL:
+        raise Exception(f'Levels over {HEDY_MAX_LEVEL} not implemented yet')
+
+    if populate_source_map:
+        source_map.clear()
+        source_map.set_level(level)
+        source_map.set_language(lang)
+        source_map.set_hedy_input(input_string)
+
+    # FH, may 2022. for now, we just out arabic numerals when the language is ar
+    # this can be changed into a profile setting or could be detected
+    # in usage of programs
+    if lang == "ar":
+        numerals_language = "Arabic"
+    else:
+        numerals_language = "Latin"
+
+    lookup_table, abstract_syntax_tree = create_AST(input_string, level, lang)
+
+    # grab the right transpiler from the lookup
+    convertToPython = TRANSPILER_LOOKUP[level]
+    python = convertToPython(lookup_table, lang, numerals_language, is_debug).transform(abstract_syntax_tree)
+
+    # line below used to work on program root, must still be updated!
+    commands = AllCommands(level).transform(abstract_syntax_tree)
+
+    has_turtle = "forward" in commands or "turn" in commands or "color" in commands
+    has_pygame = "ifpressed" in commands or "ifpressed_else" in commands or "assign_button" in commands
+
+    if populate_source_map:
+        source_map.set_python_output(python)
+
+    return ParseResult(python, source_map, has_turtle, has_pygame, commands)
 
 def execute(input_string, level):
     python = transpile(input_string, level)
