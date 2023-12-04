@@ -2627,22 +2627,6 @@ code {
   top: -0.25rem;
 }
 
-.top-2 {
-  top: 0.5rem;
-}
-
-.right-2 {
-  right: 0.5rem;
-}
-
-.left-0 {
-  left: 0px;
-}
-
-.left-1\/2 {
-  left: 50%;
-}
-
 .top-0\.5 {
   top: 0.125rem;
 }
@@ -2657,6 +2641,22 @@ code {
 
 .right-0 {
   right: 0px;
+}
+
+.top-2 {
+  top: 0.5rem;
+}
+
+.right-2 {
+  right: 0.5rem;
+}
+
+.left-0 {
+  left: 0px;
+}
+
+.left-1\/2 {
+  left: 50%;
 }
 
 .top-16 {
@@ -5519,10 +5519,6 @@ code {
 
 .-mt-8 {
   margin-top: -2rem;
-}
-
-.mt-1 {
-  margin-top: 0.25rem;
 }
 
 .mt-auto {
@@ -9308,6 +9304,10 @@ code {
   cursor: pointer;
 }
 
+.cursor-grab {
+  cursor: grab;
+}
+
 .cursor-auto {
   cursor: auto;
 }
@@ -9370,10 +9370,6 @@ code {
 
 .cursor-no-drop {
   cursor: no-drop;
-}
-
-.cursor-grab {
-  cursor: grab;
 }
 
 .cursor-grabbing {
@@ -13040,6 +13036,10 @@ code {
   grid-template-columns: repeat(3, minmax(0, 1fr));
 }
 
+.grid-cols-\[repeat\(3\2c _minmax\(25px\2c _1fr\)\)\] {
+  grid-template-columns: repeat(3, minmax(25px, 1fr));
+}
+
 .grid-cols-1 {
   grid-template-columns: repeat(1, minmax(0, 1fr));
 }
@@ -13296,12 +13296,12 @@ code {
   gap: 0.25rem;
 }
 
-.gap-0 {
-  gap: 0px;
-}
-
 .gap-3 {
   gap: 0.75rem;
+}
+
+.gap-0 {
+  gap: 0px;
 }
 
 .gap-5 {
@@ -13733,6 +13733,12 @@ code {
   margin-bottom: calc(1.5rem * var(--tw-space-y-reverse));
 }
 
+.space-x-1 > :not([hidden]) ~ :not([hidden]) {
+  --tw-space-x-reverse: 0;
+  margin-right: calc(0.25rem * var(--tw-space-x-reverse));
+  margin-left: calc(0.25rem * calc(1 - var(--tw-space-x-reverse)));
+}
+
 .space-x-3 > :not([hidden]) ~ :not([hidden]) {
   --tw-space-x-reverse: 0;
   margin-right: calc(0.75rem * var(--tw-space-x-reverse));
@@ -13749,12 +13755,6 @@ code {
   --tw-space-x-reverse: 0;
   margin-right: calc(0px * var(--tw-space-x-reverse));
   margin-left: calc(0px * calc(1 - var(--tw-space-x-reverse)));
-}
-
-.space-x-1 > :not([hidden]) ~ :not([hidden]) {
-  --tw-space-x-reverse: 0;
-  margin-right: calc(0.25rem * var(--tw-space-x-reverse));
-  margin-left: calc(0.25rem * calc(1 - var(--tw-space-x-reverse)));
 }
 
 .space-x-2 > :not([hidden]) ~ :not([hidden]) {
@@ -16044,9 +16044,19 @@ code {
   border-color: rgb(104 211 145 / var(--tw-border-opacity));
 }
 
-.border-green-400 {
+.border-blue-600 {
   --tw-border-opacity: 1;
-  border-color: rgb(104 211 145 / var(--tw-border-opacity));
+  border-color: rgb(49 130 206 / var(--tw-border-opacity));
+}
+
+.border-green-300 {
+  --tw-border-opacity: 1;
+  border-color: rgb(154 230 180 / var(--tw-border-opacity));
+}
+
+.\!border-gray-400 {
+  --tw-border-opacity: 1 !important;
+  border-color: rgb(203 213 224 / var(--tw-border-opacity)) !important;
 }
 
 .border-blue-500 {
@@ -16250,11 +16260,6 @@ code {
 .border-green-200 {
   --tw-border-opacity: 1;
   border-color: rgb(198 246 213 / var(--tw-border-opacity));
-}
-
-.border-green-300 {
-  --tw-border-opacity: 1;
-  border-color: rgb(154 230 180 / var(--tw-border-opacity));
 }
 
 .border-green-700 {
@@ -23110,6 +23115,11 @@ code {
   padding-right: 4rem;
 }
 
+.px-5 {
+  padding-left: 1.25rem;
+  padding-right: 1.25rem;
+}
+
 .py-16 {
   padding-top: 4rem;
   padding-bottom: 4rem;
@@ -23153,11 +23163,6 @@ code {
 .px-6 {
   padding-left: 1.5rem;
   padding-right: 1.5rem;
-}
-
-.px-5 {
-  padding-left: 1.25rem;
-  padding-right: 1.25rem;
 }
 
 .px-7 {
@@ -24593,6 +24598,11 @@ code {
   color: rgb(45 55 72 / var(--tw-text-opacity));
 }
 
+.text-gray-600 {
+  --tw-text-opacity: 1;
+  color: rgb(113 128 150 / var(--tw-text-opacity));
+}
+
 .text-black {
   --tw-text-opacity: 1;
   color: rgb(0 0 0 / var(--tw-text-opacity));
@@ -24641,11 +24651,6 @@ code {
 .text-yellow-400 {
   --tw-text-opacity: 1;
   color: rgb(246 224 94 / var(--tw-text-opacity));
-}
-
-.text-gray-600 {
-  --tw-text-opacity: 1;
-  color: rgb(113 128 150 / var(--tw-text-opacity));
 }
 
 .text-orange-600 {
@@ -31863,14 +31868,14 @@ div[class^="ace_incorrect_hedy_code"] {
   background-color: rgb(203 213 224 / 0.5);
 }
 
-.hover\:text-white:hover {
-  --tw-text-opacity: 1;
-  color: rgb(255 255 255 / var(--tw-text-opacity));
-}
-
 .hover\:text-red-400:hover {
   --tw-text-opacity: 1;
   color: rgb(252 129 129 / var(--tw-text-opacity));
+}
+
+.hover\:text-white:hover {
+  --tw-text-opacity: 1;
+  color: rgb(255 255 255 / var(--tw-text-opacity));
 }
 
 .hover\:underline:hover {
