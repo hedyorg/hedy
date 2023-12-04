@@ -985,7 +985,8 @@ def programs_page(user):
              }
         )
 
-    adventure_names = hedy_content.Adventures(g.lang).get_adventure_names()
+    keyword_lang = g.keyword_lang
+    adventure_names = hedy_content.Adventures(g.lang).get_adventure_names(keyword_lang)
 
     next_page_url = url_for('programs_page', **dict(request.args, page=result.next_page_token)
                             ) if result.next_page_token else None
@@ -1933,7 +1934,8 @@ def explore():
     normalized = normalize_public_programs(list(programs) + list(favourite_programs.records))
     programs, favourite_programs = split_at(len(programs), normalized)
 
-    adventures_names = hedy_content.Adventures(session['lang']).get_adventure_names()
+    keyword_lang = g.keyword_lang
+    adventures_names = hedy_content.Adventures(session['lang']).get_adventure_names(keyword_lang)
 
     return render_template(
         'explore.html',
