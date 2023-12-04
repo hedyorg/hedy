@@ -930,14 +930,6 @@ class TestsLevel4(HedyTester):
                                 extra_check_function=(lambda result: result.has_clear)
                                 )
 
-    def test_clear_without_sleep(self):
-        code = textwrap.dedent("""\
-        clear""")
-
-        self.multi_level_tester(code=code,
-                                exception=exceptions.HedyException.,
-                                )
-
     def test_source_map(self):
         code = textwrap.dedent("""\
         print 'You need to use quotation marks from now on!'
