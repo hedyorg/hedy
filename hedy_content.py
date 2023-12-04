@@ -511,7 +511,9 @@ class Adventures(StructuredDataFile):
             self.file.get('adventures'), keyword_lang).items()}
         for key, value in adventure_names.items():
             if 'command' in key:
-                adventure_names[key] = '{' + value + '}'
+                words = value.split()
+                adventure_names[key] = ' '.join(['{' + word + '}' if not word.isdigit()
+                                                and word != '&' else word for word in words])
         return adventure_names
 
     def get_adventures(self, keyword_lang="en"):
