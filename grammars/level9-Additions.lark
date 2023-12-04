@@ -1,3 +1,5 @@
 // only remove repeat error commands
 
-command:+= repeat-=repeat | error_repeat_no_command | error_repeat_no_print | error_repeat_no_times
+command:+= repeat | error_repeat_deprecated -=repeat | error_repeat_no_command | error_repeat_no_print | error_repeat_no_times
+
+error_repeat_deprecated: _REPEAT (INT | var_access) _TIMES (_SPACE command)?

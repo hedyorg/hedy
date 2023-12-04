@@ -206,6 +206,12 @@ class IncompleteRepeatException(HedyException):
                          line_number=line_number)
 
 
+class DeprecatedRepeatException(HedyException):
+    def __init__(self, line_number):
+        super().__init__('Deprecated Repeat',
+                         line_number=line_number)
+
+
 class LonelyTextException(HedyException):
     def __init__(self, level, line_number):
         super().__init__('Lonely Text',

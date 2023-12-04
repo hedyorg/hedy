@@ -1179,6 +1179,10 @@ class IsValid(Filter):
         error = InvalidInfo('repeat missing times', arguments=[str(args[0])], line=meta.line, column=meta.column)
         return False, error, meta
 
+    def error_repeat_deprecated(self, meta, args):
+        error = InvalidInfo('deprecated repeat command', line=meta.line)
+        return False, error, meta
+
     def error_text_no_print(self, meta, args):
         error = InvalidInfo('lonely text', arguments=[str(args[0])], line=meta.line, column=meta.column)
         return False, error, meta
@@ -3314,6 +3318,8 @@ def is_program_valid(program_root, input_string, level, lang):
             unquotedtext = invalid_info.arguments[0]
             raise exceptions.UnquotedTextException(
                 level=level, unquotedtext=unquotedtext, line_number=invalid_info.line)
+        elif invalid_info.error_type == 'deprecated repeat command':
+            raise exceptions.DeprecatedRepeatException(line_number=line)
         elif invalid_info.error_type == 'misspelled "at" command':
             raise exceptions.MisspelledAtCommand(command='at', arg1=invalid_info.arguments[0], line_number=line)
         elif invalid_info.error_type == 'unsupported number':
