@@ -45,7 +45,7 @@ CLASSES = dynamo.Table(storage, "classes", "id", indexes=[
 # - tags_id (str): id of tags that describe this adventure.
 ADVENTURES = dynamo.Table(storage, "adventures", "id", indexes=[dynamo.Index("creator"), dynamo.Index("public")])
 INVITATIONS = dynamo.Table(
-    storage, "class_invitations", partition_key="username#class_id",
+    storage, "invitations", partition_key="username#class_id",
     indexes=[dynamo.Index("username"), dynamo.Index("class_id")],
 )
 
@@ -735,8 +735,9 @@ class Database:
     def get_user_class_invite(self, username, class_id):
         return INVITATIONS.get({"username#class_id": f"{username}#{class_id}"}) or None
 
-    def add_class_invite(self, key, data):
-        INVITATIONS.update({"username#class_id": key}, data)
+    def add_class_invite(self, data):
+        data['username#class_id'] = data['username'] + '#' + data['class_id']
+        INVITATIONS.put(data)
 
     def remove_user_class_invite(self, username, class_id):
         return INVITATIONS.delete({"username#class_id": f"{username}#{class_id}"})

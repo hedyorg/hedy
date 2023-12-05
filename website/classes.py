@@ -335,7 +335,7 @@ class MiscClassPages(WebsiteModule):
             "invited_as": 'student',
             "invited_as_text": gettext("student"),
         }
-        self.db.add_class_invite(f"{username}#{class_id}", data)
+        self.db.add_class_invite(data)
         return {}, 200
 
     @route("/invite-second-teacher", methods=["POST"])
@@ -382,7 +382,7 @@ class MiscClassPages(WebsiteModule):
             "invited_as": "second_teacher",
             "invited_as_text": gettext("second_teacher"),
         }
-        self.db.add_class_invite(f"{username}#{class_id}", data)
+        self.db.add_class_invite(data)
         return {}, 200
 
     @route("/remove_student_invite", methods=["POST"])
