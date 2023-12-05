@@ -1091,8 +1091,6 @@ class AllCommands(Transformer):
             if production_rule_name == 'else':  # use of else also has an if
                 return ['if', 'else'] + leaves
             # don't share leaves (these are numbers or variables)
-            if production_rule_name == 'forward' or production_rule_name == 'turn' or production_rule_name == 'is':
-                return [production_rule_name]
             return [production_rule_name] + leaves
         else:
             return leaves  # 'pop up' the children
