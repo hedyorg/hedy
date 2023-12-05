@@ -15,7 +15,7 @@ levels:
             correct_answer: A
             question_score: '10'
         2:
-            question_text: Milline käsk kirjutab teksti ekraanile?
+            question_text: Mis on vaja lünkadesse kirjutada, et ilmuks tekst "Hello!" ?
             code: ___ Hello!
             mp_choice_options:
             -   option: |-
@@ -38,7 +38,7 @@ levels:
                     {ask}
                     ```
                 feedback: '`{ask}` aitab sul midagi küsida.'
-            hint: _?_ Tere maailm!
+            hint: _ Tere maailm!
             correct_answer: B
             question_score: '10'
         3:
@@ -76,8 +76,8 @@ levels:
             mp_choice_options:
             -   option: '`{print}` puudub esimesel real.'
                 feedback: Õige!
-            -   option: '`{ask}` on teisel real valesti kirjutatud. See peab `aks` olema.'
-                feedback: '{ask} on õigesti kirjutatud.'
+            -   option: 'Käsk`{ask}` real 2 on valesti kirjutatud.'
+                feedback: 'Käsk on õieti kirjutatud.'
             -   option: '`{echo}` ei ole käsk.'
                 feedback: '`{echo}` on küll käsk.'
             -   option: Mitte midagi! Kood on õige!
@@ -88,8 +88,8 @@ levels:
         5:
             question_text: Milline käsk puudub teisel real?
             code: |-
-                {ask} Kes on sinu lemmik loom?
-                _?_ Nii et sinu lemmik loom on...
+                {ask} Mis su lemmikloom on?
+                _ Nii et sinu lemmikloom on...
             mp_choice_options:
             -   option: |-
                     ```
@@ -115,12 +115,12 @@ levels:
             correct_answer: D
             question_score: '10'
         6:
-            question_text: What's wrong with this code?
+            question_text: Mis on selles koodis valesti?
             code: |-
-                {print} Hi im Hedy!
-                {print} Which football team do you support?
-                {echo} You support...
-                {print} Cool! Me too!
+                {print} Tere, mina olen Hedy!
+                {print} Milline jalkameeskond sulle meeldib?
+                {echo} Sulle meeldib...
+                {print} Lahe! Mulle ka!
             mp_choice_options:
             -   option: In line 1 `{print}` should be replaced with `{ask}`.
                 feedback: '`{print}` in line 1 is correct.'
@@ -210,15 +210,15 @@ levels:
         1:
             question_text: Which statement is true?
             mp_choice_options:
-            -   option: In level 2 the `{print}` command doesn't exist anymore
+            -   option: Sa saad kasutada käsku `{print}` küsimuste esitamiseks.
                 feedback: '`{print}` still works'
-            -   option: In level 2 the `{ask}` command doesn't exist anymore
+            -   option: Käsku `{ask}` saad kasutada vastuste näitamiseks.
                 feedback: '`{ask}` still works!'
             -   option: In level 2 the `{echo}` command doesn't exist anymore
                 feedback: Good
-            -   option: In level 2 all the level 1 commands still work
+            -   option: Käsuga `{sleep}` saad teksti ekraanilt eemaldada.
                 feedback: No one command doesn't work anymore.
-            hint: '`{print}` and `{ask}` still exist.'
+            hint: '`{print}` töötab jätkuvalt samal viisil kui  tasemel 1'
             correct_answer: C
             question_score: '10'
         2:
@@ -665,7 +665,7 @@ levels:
             -   option: '`{at} {random}` doesn''t work anymore in level 4'
                 feedback: '`{at} {random}` still works'
             -   option: '`{at} {random}` now needs quotation marks'
-                feedback: No, but 2 other commands do.
+                feedback: ettevaatlik, kui kasutad jutumärke (") või ülakoma (`)
             hint: In level 4 you need quotation marks for 2 commands.
             correct_answer: A
             question_score: '10'
@@ -686,7 +686,7 @@ levels:
                     ```
                     {print} hello
                     ```
-                feedback: There are no quotation marks here!.
+                feedback: Siin jutumärke ei ole!
             -   option: |-
                     ```
                     {print} ,hello,
@@ -785,7 +785,7 @@ levels:
                     {print} 'You win... prices {at} {random}'
                     ```
                 feedback: Hedy will literally print 'prices {at} {random}''
-            hint: 'Think carefully: what is a variable and should be outside of the quotation marks? And what are normal words that should be inside?.'
+            hint: 'Mõtle hoolikalt: mis on muutuja mis peaks olema väljaspool jutumärke? Ja mis on tavalised sõnad, mis peaks olema jutumärkide sees?'
             correct_answer: A
             question_score: '10'
         7:
@@ -880,14 +880,14 @@ levels:
                 _?_ {print} 'My lucky number is 5!'
             mp_choice_options:
             -   option: In level 5 `{print}` works differently than in level 4
-                feedback: '`{print}` is still the same'
+                feedback: 'Siin juba on `{print}` käsk.'
             -   option: In level 5 `{ask}` works differently than in level 4
-                feedback: '`{ask}` is still the same'
+                feedback: '`{if}` käsk on kasutusel rida ülalpool.'
             -   option: In level 5 `{ask}` and `{print}` work differently than in level 4
                 feedback: '`No these commands remain the same'
             -   option: In level 5 `{ask}` and `{print}` work the same as in level 4
                 feedback: Correct!
-            hint: We have only learned a new command in level 5.
+            hint: Mis käib koos käsuga `{if}` ?
             correct_answer: D
             question_score: '10'
         2:
@@ -1133,7 +1133,7 @@ levels:
             -   option: '30'
                 feedback: This would be the right answer if there were no quotation marks.
             -   option: '13'
-                feedback: Try again..
+                feedback: Proovi uuesti..
             -   option: 3*10
                 feedback: Correct! There are quotation marks, so Hedy will print it literally.
             -   option: Nothing, Hedy will give an error message.
@@ -1606,7 +1606,7 @@ levels:
             mp_choice_options:
             -   option: This should be only one line, not 2.
                 feedback: No it should be 2 lines.
-            -   option: This `{print}` command has to go
+            -   option: Selle `{print}` käsu peab kustutama.
                 feedback: No, you need it.
             -   option: There is a spelling mistake in the `{repeat}` command.
                 feedback: Nee, repeat is de goede spelling
@@ -1645,8 +1645,8 @@ levels:
                     Baby shark
                     Baby shark
                     Baby shark
-                feedback: What is being repeated and what isn't.
-            hint: What is being repeated and what is not?.
+                feedback: Mida korratakse ja mida mitte?
+            hint: Mida korratakse ja mida mitte?
             correct_answer: C
             question_score: '10'
         4:
@@ -1749,9 +1749,9 @@ levels:
                 {print} 'That you for your order'
             mp_choice_options:
             -   option: Nothing this code is correct!
-                feedback: Something is wrong!.
+                feedback: Midagi on valesti.
             -   option: You're not allowed to use an `{if}` command after an `{ask}` command.
-                feedback: You are!.
+                feedback: Sina oled!
             -   option: You don't have to use indentation twice. Only in the first `{if}` command.
                 feedback: You always have to use indentation.
             -   option: The indentation is wrong in the first `{if}` command.
@@ -1858,9 +1858,9 @@ levels:
                 {print} 'That you for your order'
             mp_choice_options:
             -   option: Nothing this code is correct!
-                feedback: That's right!.
+                feedback: Õige!
             -   option: You're not allowed to use an `{if}` command after an `{ask}` command.
-                feedback: You are!.
+                feedback: Sina oled!
             -   option: You don't have to use indentation twice.
                 feedback: You always have to use indentation.
             -   option: The indentation is wrong in the last `{if}` command.
@@ -1884,7 +1884,7 @@ levels:
                     Good job!
                     Good job!
                 feedback: That's not it!
-            -   option: The computer will explode in 5... 4... 3... 2... 1...
+            -   option: "```\nArvuti kohe plahvatab 5... 4... 3... 2... 1...\n```"
                 feedback: That's not it!
             -   option: |-
                     Good job !
@@ -2041,7 +2041,7 @@ levels:
                     {if} drink {is} coke
                             price = price - 2
                     ```
-                feedback: Try again
+                feedback: Kaks `{if}`'i järjest ei ole kunagi õige.
             -   option: |-
                     ```
                     {if} food {is} pizza
