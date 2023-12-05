@@ -1090,10 +1090,8 @@ class AllCommands(Transformer):
             # lookup should be fixed instead, making a special case for now
             if production_rule_name == 'else':  # use of else also has an if
                 return ['if', 'else'] + leaves
-            elif production_rule_name == 'repeat' or production_rule_name == 'for':
-                return [production_rule_name] + leaves[1:]
             # don't share leaves (these are numbers or variables)
-            elif production_rule_name == 'forward' or production_rule_name == 'turn' or production_rule_name == 'is' or production_rule_name == 'integer':
+            if production_rule_name == 'forward' or production_rule_name == 'turn' or production_rule_name == 'is':
                 return [production_rule_name]
             return [production_rule_name] + leaves
         else:
