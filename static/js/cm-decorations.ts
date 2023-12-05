@@ -214,6 +214,7 @@ export const breakpointGutter = [
     })
 ]
 import { WidgetType } from "@codemirror/view"
+import { level as levelFacet } from './cm-editor';
 
 class PlacheholderWidget extends WidgetType {
     constructor(readonly space: string, readonly placeholder: string) { super() }
@@ -287,13 +288,17 @@ function highlightVariables(view: EditorView) {
             }
         })
     }
+    let commands = ["Assign" , "Print" , "Turtle" , "Sleep"]
+    // in levels 2 and 3 variables are not substitued inside ask
+    // not sure if that's intended behaviour or not
+    if (view.state.facet(levelFacet) > 3) commands.push("Ask")
     // Now that we have the variable names, we can distinguish them from other Text nodes
     for (let {from, to} of view.visibleRanges) {
         syntaxTree(view.state).iterate({
             from: from,
             to: to,
             enter: (node) => {
-                if (["Assign" , "Ask" , "Print" , "Turtle" , "Sleep"].includes(node.name)) {
+                if (commands.includes(node.name)) {
                     const children = node.node.getChildren('Text');
                     // no need to add again the first child of Assign and Ask since 
                     // we already highlighted it in the previous step
@@ -305,15 +310,20 @@ function highlightVariables(view: EditorView) {
                         // It's possible to have several variables in the same text nodes
                         // separetaed by other characters like: name!!!your_name
                         // Therefore, we need to get the variables names inside this text node
-                        const varNames = getVarNames(text) || [];                        
-                        // we keep track of the index of the last variable viewed
-                        let startIndex = 0;
-                        for (const name of varNames) {
-                            if (variablesNames.has(name)) {
-                                const index = text.indexOf(name, startIndex)
-                                variableDeco.add(child.from + index, child.from + index + name.length, highlightVariableMarker)
-                                startIndex = index + name.length
+                        const level = view.state.facet(levelFacet)
+                        if (level <= 3) {
+                            const varNames = getVarNames(text) || [];                        
+                            // we keep track of the index of the last variable viewed
+                            let startIndex = 0;
+                            for (const name of varNames) {
+                                if (variablesNames.has(name)) {
+                                    const index = text.indexOf(name, startIndex)
+                                    variableDeco.add(child.from + index, child.from + index + name.length, highlightVariableMarker)
+                                    startIndex = index + name.length
+                                }
                             }
+                        } else if (variablesNames.has(text)) {
+                            variableDeco.add(child.from, child.to, highlightVariableMarker)                            
                         }
                     }
                 }

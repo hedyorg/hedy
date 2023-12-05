@@ -1,7 +1,7 @@
 import { HedyEditor, EditorType, HedyEditorCreator, EditorEvent, SourceRange } from "./editor";
 import { EditorView, ViewUpdate, drawSelection, dropCursor, highlightActiveLine, 
         highlightActiveLineGutter, highlightSpecialChars, keymap, lineNumbers } from '@codemirror/view'
-import { EditorState, Compartment, StateEffect, Prec } from '@codemirror/state'
+import { EditorState, Compartment, StateEffect, Prec, Facet } from '@codemirror/state'
 import { EventEmitter } from "./event-emitter";
 import { deleteTrailingWhitespace, defaultKeymap, historyKeymap } from '@codemirror/commands'
 import { history } from "@codemirror/commands"
@@ -24,7 +24,7 @@ import { monokai } from "./cm-monokai-theme";
 import { error } from "./modal";
 import { ClientMessages } from "./client-messages";
 import { Tag, styleTags, tags as t } from "@lezer/highlight";
-
+export const level = Facet.define<number, number>();
 export class HedyCodeMirrorEditorCreator implements HedyEditorCreator {
     /**
      * This function should initialize the editor and set up all the required
@@ -101,7 +101,6 @@ export class HedyCodeMirrorEditor implements HedyEditor {
 
         const cursorStyle = { ".cm-cursor, .cm-dropCursor": {borderLeftColor: "white", borderLeftWidth: "2px"} }
         const mainEditorStyling = EditorView.theme(this.themeStyles);
-
         const state = EditorState.create({
             doc: '',
             extensions: [                                
@@ -132,6 +131,7 @@ export class HedyCodeMirrorEditor implements HedyEditor {
                 Prec.high(decorationsTheme),
                 placeholders,
                 Prec.highest(variableHighlighter),
+                theLevel ? level.of(theLevel) : []
             ]
         });
         
