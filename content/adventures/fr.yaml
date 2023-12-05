@@ -156,24 +156,24 @@ adventures:
                 start_code: '{repeat} 5 {times} {print} ''Au secours !'''
             8:
                 story_text: |
-                    À ce niveau tu peux utiliser plusieurs lignes dans une commande `{if}`, ainsi tu peux améliorer ta fin heureuse ou triste !
+                    À ce niveau tu peux utiliser plusieurs lignes dans une commande `{if}`, ainsi tu peux améliorer la fin heureuse et la fin triste !
 
                     ### Exercice 1
                     L'exemple de code montre deux fins différentes, une ou les personnages sautent dans une machine à voyager dans le temps et une où ce n'est pas le cas.
-                    Complète les espaces blancs avec, au moins, une phrase pour chaque fin.
-                    **Pour aller plus loin**, continue l'histoire. Que se passe-t-il dans l'histoire ? Tu peux aussi ajouter un second `{ask}` avec des options différentes.
+                    Complète les espaces vide avec, au moins, une phrase pour chaque fin.
+                    **Bonus** continue l'histoire. Que se passe-t-il dans l'histoire ? Tu peux aussi ajouter un second `{ask}` avec des options différentes.
 
                     ### Exercice 2
-                    Recherche dans tes programmes sauvegardés et choisi une histoire du niveau 5. Maintenant écrit une fin triste et heureuse d'au moins trois lignes de long pour chacune !
+                    Recherche dans tes programmes sauvegardés et choisi une histoire du niveau 5. Maintenant écrit une fin triste et une fin heureuse d'au moins trois lignes de long pour chacune !
                 example_code: |
                     ```
-                    {print} "Oh non ! Le T-rex se rapproche !
-                    fin = {ask} "Voulez-vous une fin triste ou heureuse ?"
-                    {if} fin {is} "heureuse"
-                        {print} "Juste à temps, Richard retourne d'un saut dans la machine à voyager dans le temps !"
+                    {print} "OH NON ! Le T-rex se rapproche !"
+                    fin = {ask} "Voulez-vous une fin triste ou heureuse ?"
+                    {if} fin {is} heureuse
+                        {print} "Juste à temps, Richard retourne d'un saut dans la machine à voyager dans le temps !"
                         {print} _
                     {else}
-                        {print} "Oh non ! Richard est trop lent…"
+                        {print} "Oh non ! Richard est trop lent…"
                         {print} _
                     ```
                 start_code: '# écris ton code ici'
@@ -948,46 +948,47 @@ adventures:
                     Ding, daing, dong !
             8:
                 story_text: |-
-                    ### Exercise
-                    Debug this code. Good luck!
+                    ### Exercice
+                    Debug ce code. Bonne chance !
                 example_code: |
-                    **Warning! This code needs to be debugged!**
+                    **Attention ! Ce code doit être débuggé !**
                     ```
-                    {print} 'Welcome to Manicures and Pedicures by Hedy'
-                    bodypart = {ask} 'Are you getting your fingernails or toenails done today? Or both?'
-                    {if} bodyparts {is} both
-                            {print} That will be $25'
-                            price = 25
+                    {print} "Bienvenue a Manucure et Pédicures par Hedy"
+                    choix = {ask} "Voulez-vous que l'on vous fasse les ongles de main ou les ongles de pieds aujourd'hui ? ou les deux ?"
+                    {if} choix {is} les deux
+                            {print} ça vous fera 25 €
+                            prix = 25
                         {else}
-                            {print} That will be $18'
-                            price = 18
-                    color = {ask} What color would you like?
-                    sparkles = {ask} 'Would you like some sparkles with that?'
-                    {if} sparkles {is} yes
-                        {print} 'We charge $3 extra for that'
-                    price = price + 3
-                    {else} {print} 'No sparkles' {print} 'So no extra charge'
+                            {print} ça vous fera 18 €
+                            prix = 18
+                    color = {ask} Quelle couleur vous plairait ?
+                    paillettes = {ask} "Voulez-vous qu'on ajoute des paillettes ?"
+                    {if} paillettes {is} oui
+                        {print} "Ça coûte 3 € de plus"
+                    prix = prix + 3
+                    {else} {print} "Pas de paillette" {print} "Pas de coût supplémentaire"
                     {sleep} 5
-                    {print} 'All done! That will be $' price ' please!'
-                    {print} 'Thank you! Byebye!'
+                    {print} "Tout est bon ! ça vous fera " prix " €, s'il vous plait !"
+                    {print} "Merci et au revoir !"
+                    ```
                 start_code: |
-                    {print} 'Welcome to Manicures and Pedicures by Hedy'
-                    bodypart = {ask} 'Are you getting your fingernails or toenails done today? Or both?'
-                    {if} bodyparts {is} both
-                            {print} That will be $25'
-                            price = 25
+                    {print} "Bienvenue a Manucure et Pédicures par Hedy"
+                    choix = {ask} "Voulez-vous que l'on vous fasse les ongles de main ou les ongles de pieds aujourd'hui ? ou les deux ?"
+                    {if} choix {is} les deux
+                            {print} Ça vous fera 25 €
+                            prix = 25
                         {else}
-                            {print} That will be $18'
-                            price = 18
-                    color = {ask} What color would you like?
-                    sparkles = {ask} 'Would you like some sparkles with that?'
-                    {if} sparkles {is} yes
-                        {print} 'We charge $3 extra for that'
-                    price = price + 3
-                    {else} {print} 'No sparkles' {print} 'So no extra charge'
+                            {print} Ça vous fera 18 €
+                            prix = 18
+                    color = {ask} Quelle couleur vous plairait ?
+                    paillettes = {ask} "Voulez-vous qu'on ajoute des paillettes ?"
+                    {if} paillettes {is} oui
+                        {print} "Ça coûte 3 € de plus"
+                    prix = prix + 3
+                    {else} {print} "Pas de paillette" {print} "Pas de coût supplémentaire"
                     {sleep} 5
-                    {print} 'All done! That will be $' price ' please!'
-                    {print} 'Thank you! Byebye!'
+                    {print} "Tout est bon ! ça vous fera " prix " €, s'il vous plait !"
+                    {print} "Merci et au revoir !"
             9:
                 story_text: |-
                     ### Exercise
@@ -1395,7 +1396,7 @@ adventures:
 
                     print 'Thanks for ordering!'
                     ```
-                start_code: |4
+                start_code: |2
 
                           define food_order
                               toppings = ask 'pepperoni, tuna, veggie or cheese?'
@@ -1446,7 +1447,7 @@ adventures:
                         print 'there a ' sound
                         print 'everywhere a ' sound sound
                     ```
-                start_code: |4
+                start_code: |2
 
                           animals = ['pig', 'dog', 'cow']
                           sounds = ['oink', 'woof', 'moo']
@@ -1568,7 +1569,7 @@ adventures:
             7:
                 story_text: |
                     Bon travail ! Tu as atteint le niveau suivant, ce qui signifie que tu t'es entrainé à utiliser `{if}` et `{else}`. Tu as probablement remarqué que tes codes deviennent de plus en plus longs.
-                    Par exemple, si tu veux programmer « Joyeux anniversaire ».
+                    Par exemple, si tu veux programmer la chanson « Joyeux anniversaire ».
 
                     Ça fait beaucoup de code pour écrire presque toujours les mêmes mots encore et encore. Heureusement, dans l'onglet suivant, tu vas apprendre une solution avec la commande `{repeat}`, qui te permet de répéter une ligne de code plusieurs fois.
                 example_code: |
@@ -1806,7 +1807,7 @@ adventures:
                     Tu peux aussi faire encore un dé à ce niveau. Avec le code `{repeat}` tu peux facilement jeter une pleine poignée de dés.
 
                     ### Exercice
-                    Essaie de terminer le code d'exemple ! **Bonus** Pense à un jeu que tu connais qui nécessite un dé et programme-le en utilisant un `{repeat}`.
+                    Essaie de terminer le code d'exemple !  **Bonus** Pense à un jeu que tu connais qui nécessite un dé et programme-le en utilisant un `{repeat}`.
                 example_code: |
                     ```
                     choix = 1, 2, 3, 4, 5, 6
@@ -2162,25 +2163,26 @@ adventures:
                     {print} "J'ai une fleur avec des pétales magiques"
                     {print} "Si tu détaches les pétales, la fleur te dira si la personne que tu aimes t'aime en retour"
                     quantité = {ask} "Combien de pétales veux-tu détacher ?"
-                    options = elle t'aime, elle ne t'aime pas
-                    _ _ _ _ options {at} {random}
+                    réponses = elle t'aime, elle ne t'aime pas
+                    _ _ _ _ réponses {at} {random}
                     ```
                 start_code: '# écris ton code ici'
             8:
                 story_text: |
-                    In the previous levels you've learned how to use repeat to make the fortune teller answer 3 questions in a row, but we had a problem with printing the questions.
-                    Now that problem is solved, because of the new way of using the repeat command.
-                    In the next example you can have your fortune teller {ask} 3 questions and also print them!
+                    Avec l'exemple suivant, tu peux faire demander à la voyante plusieurs questions et les afficher !
+
+                    ### Exercice
+                    Peux-tu remplire les espaces vides avec les bonnes commande ?
                 example_code: |
                     ```
-                    {print} 'I am Hedy the fortune teller!'
-                    {print} 'You can {ask} me 3 questions.'
-                    answers = yes, no, maybe
-                    {repeat} 3 {times}
-                       question = {ask} 'What do you want to know?'
-                       {print} question
-                       {sleep}
-                       {print} 'My crystal ball says...' answers {at} {random}
+                    {print} "Je suis Hedy la voyante !"
+                    {print} "Tu peux me poser 3 questions."
+                    réponses = oui, non, peut-être
+                    _ _ _
+                        question = {ask} "Que veux-tu savoir ?"
+                        {print} question
+                        {sleep}
+                        {print} "Ma boule de cristal dit… " réponses {at} {random}
                     ```
                 start_code: '# écris ton code ici'
             10:
@@ -2726,19 +2728,19 @@ adventures:
                     Regarde l'exemple de code.
 
                     ### Exercice
-                    Ajoute une commande `{else}` à l'exemple de code. Fait un bloc de lignes en utilisant l'indentation. Tu le fais en commençant chaque ligne avec 4 espaces.
+                    Ajoute une commande `{else}` à l'exemple. Fait un bloc de lignes en utilisant l'indentation. Tu le fais en commençant chaque ligne par 4 espaces.
                 example_code: |
                     ```
-                    nom = {ask} "Quel est ton nom ?"
+                    nom = {ask} "Quel est ton nom ?"
                     {if} nom {is} Hedy
                         {print} "Bienvenue Hedy"
-                        {print} "Tu peux jouer sur ton ordinateur !"
+                        {print} "Tu peux jouer sur ton ordinateur !"
                     ```
                 start_code: |
-                    nom {is} {ask} "Quel est ton nom ?"
+                    nom {is} {ask} "Quel est ton nom ?"
                     {if} nom {is} Hedy
                         {print} "Bienvenue Hedy"
-                        {print} "Tu peux jouer sur ton ordinateur !"
+                        {print} "Tu peux jouer sur ton ordinateur !"
             9:
                 story_text: |
                     In this level you can also put an {if} command inside another {if} command.
@@ -3457,8 +3459,8 @@ adventures:
             7:
                 story_text: |
                     ## Répète avec d'autres commandes et avec des variables
-                    Tu t'es entrainé avec la commande `{repeat}` combinée avec la commande `{print}`. Mais, savais-tu que tu pouvais aussi utiliser d'autres commandes avec `{repeat}` ?
-                    Dans cet exemple, tu peux voir que `{repeat}` peut aussi être utilisée avec une commande `{ask}`, `{if}` ou `{else}`.
+                    Tu t'es entrainé avec la commande `{repeat}` combinée avec la commande `{print}`. Mais, savais-tu que tu pouvais utiliser d'autres commandes avec `{repeat}` ?
+                    L'exemple montre que `{repeat}` peut aussi être utilisée avec une commande `{ask}`, `{if}` ou `{else}`.
                 example_code: |
                     ```
                     {repeat} 2 {times} réponse = {ask} "Savais-tu que tu pouvais poser une question plusieurs fois ?"
@@ -3482,25 +3484,26 @@ adventures:
                 story_text: |
                     ### C'est dans le bloc ou pas ?
                     À ce niveau, tu dois faire attention à quelles lignes de code doivent être dans le bloc et lesquelles ne doivent pas y être.
-                    Par exemple : si tu veux chanter la chanson *Vive le vent*. Tu veux que seule la ligne avec "Vive le vent" soit répétée deux fois.
+                    Par exemple : si tu veux chanter la chanson *Vive le vent*. Tu veux que seule la ligne avec « Vive le vent » soit répétée deux fois.
                     Cela veut dire que les lignes suivantes ne devrait pas démarrer avec une indentation car elles n'appartiennent pas au bloc.
-                    Si tu démarres les autres lignes avec une indentation, la chanson ne sera plus correcte.
+                    Si tu commences les autres lignes avec une indentation, la chanson ne sera plus correcte.
 
                     ## Exercice
-                    Chaque ligne de l'exemple de code démarre avec un espace blanc. Retire le blanc et essaye de trouver quelle ligne a besoin d'une indentation et quelle ligne n'en a pas besoin pour faire la chanson de vive le vent.
+                    Chaque ligne de l'exemple de code commence par un espace vide. Retire les espaces vides et essaye de trouver quelle ligne a besoin d'une indentation et quelle ligne n'en a pas besoin pour faire la chanson de *vive le vent*.
                 example_code: |
                     ```
+                    _ {print} "Connais-tu la chanson vive le vent ?"
                     _ {repeat} 2 {times}
                     _ {print} "Vive le vent"
                     _ {print} "Vive le vent d'hiver"
                     _ {print} "Qui s'en va sifflant, soufflant"
-                    _ {print} "Dans les grands sapins verts, oh !"
+                    _ {print} "Dans les grands sapins verts, oh !"
                     ```
                 start_code: |-
                     {repeat} 3 {times}
                         {print} "Cette ligne sera répétée…"
                         {print} "Cette ligne aussi…"
-                    {print} "mais celle-ci ne le sera pas !"
+                    {print} "mais celle-ci ne le sera pas !"
     restaurant:
         name: Restaurant
         default_save_name: Restaurant
@@ -3653,7 +3656,7 @@ adventures:
 
                     ### Exercice
                     Peux-tu compléter le code ? Hedy doit demander le plat autant de fois qu'il y a de personnes. Donc s'il y a 5 personnes, la question doit être répétée 5 fois.
-                    **Extra** Enrichi ton code avec plus de questions, par exemple pour les boissons et les sauces.
+                    **Bonus** Enrichi ton code avec plus de questions, par exemple pour les boissons et les sauces.
                 example_code: |
                     ```
                     {print} "Bienvenu au restaurant Chez Hedy"
@@ -3662,20 +3665,22 @@ adventures:
                 start_code: '# écris ton code ici'
             8:
                 story_text: |
-                    In this level you can make your virtual restaurant more elaborate by repeating multiple lines of code. Like this:
+                    À ce niveau, tu peux rendre ton restaurant virtuel plus élaboré en répétant plusieurs lignes de code. Comme ceci :
                 example_code: |
                     ```
-                    {print} 'Welcome to Hedys restaurant!'
-                    people = {ask} 'How many people will be joining us today?'
-                    {print} 'Great!'
-                    {repeat} people {times}
-                        food = {ask} 'What would you like to order?'
-                        {print} food
-                    {print} 'Thank you for ordering!'
-                    {print} 'Enjoy your meal!'
+                    {print} "Bienvenue au restaurant Chez Hedy !"
+                    personnes = {ask} "Combien de personnes doivent nous rejoindre aujourd'hui ?"
+                    {print} "Génial !"
+                    {repeat} personnes {times}
+                        plat = {ask} "Que voulez-vous commander ?"
+                        {print} plat
+                    {print} "Merci d'avoir commandé !"
+                    {print} "Bon appétit !"
                     ```
                 story_text_2: |
-                    Of course, this code can be expanded with more items on the menu, offering drinks, and/or multiple courses, so feel free to add as many options as you like!
+                    ### Exercice
+                    Ce code peut être complété avec d'autres éléments de menu, par exemple, proposer des boissons, et/ou plusieurs plats ou desserts. Ajoute au moins un autre élément.
+                    **Bonus** Ajoute encore plus d'éléments. Propose autant de choix que tu veux !
                 start_code: '# écris ton code ici'
             9:
                 story_text: |
@@ -4078,7 +4083,7 @@ adventures:
                     Peux-tu écrire la chanson Baby Shark avec un `{repeat}` ? Terminer le code en remplaçant les espace vides ?
 
                     **Bonus** Après Baby Shark, tu peux bien sûr aussi programmer d'autres chansons. Il y a de nombreuses chansons avec des répétitions !
-                    Peux-tu penser à une nouvelle chanson et l'écrire ?
+                    Peux-tu penser à une autre chanson et l'écrire ?
                 example_code: |
                     ```
                     {repeat} _ _ {print} "Baby Shark tututudutudu"
@@ -4087,16 +4092,20 @@ adventures:
                 start_code: '{print} "Baby Shark"'
             8:
                 story_text: |
-                    In a previous level you've programmed the song 'Bottles of beer'. You made one verse and then had to copy the verses 99 times. In level 7 you can repeat the song 99 times, just by adding one simple line!
+                    Aux niveaux précédents, tu as programmé la chanson « Bouteilles vertes ». Mais sans la commande `{repeat}`, tu devais recopier les versets plusieurs fois.
+                    À ce niveau, tu peux répéter la chanson 99 fois, en ajoutant juste une simple ligne !
+
+                    ### Exercice
+                    Écris la bonne commande à la place de l'espace vide et indente le code correctement.
                 example_code: |
                     ```
-                    couplet = 99
-                    {repeat} 99 {times}
-                        {print} couplet ' bouteilles de bière sur le mur'
-                        {print} couplet ' bouteilles de bière'
-                        {print} 'Prends en une et fais la circuler'
-                        couplet = couplet - 1
-                        {print} couplet ' bouteilles de bière sur le mur'
+                    verset = 99
+                    _ 99 {times}
+                    {print} verset " bouteilles vertes posées sur le mur"
+                    {print} verset " bouteilles vertes"
+                    {print} "Et si une bouteille verte vient à tomber"
+                    verset = verset - 1
+                    {print} verset " bouteilles vertes posées sur le mur"
                     ```
                 start_code: '# écris ton code ici'
             10:
@@ -4706,8 +4715,16 @@ adventures:
                 start_code: '{print} "Dessine des formes"'
             8:
                 story_text: |
-                    Now that we can repeat several lines, we can make figures more easily.
-                    We only have to set the angle once and then use that variable in the `{repeat}`.
+                    Maintenant que nous pouvons répéter plusieurs lignes, nous pouvons faire des formes plus facilement.
+                    Nous avons juste besoins de rélgler l'angle une fois et ensuite utiliser cette variable dans le `{repeat}`.
+
+                    ### Exercice 1
+                    L'exemple de code dessine un caré. Change le code pour qu'il dessine une autre forme, comme un triangle ou un hexagone.
+                    Cela demande de changer deux lignes de code.
+                    Indice : un cercle entier fait 360 degrés.
+
+                    ### Exercice 2
+                    Maintenant dessine au moins deux polygones sur le même dessin.
                 example_code: |
                     ```
                     angle = 90
@@ -4716,17 +4733,16 @@ adventures:
                         {forward} 50
                     ```
                 story_text_2: |
-                    Also, we can now improve the program that draws different figures.
-                    Can you figure out how far the turtle has to turn here? Finish the code and you can draw any polygon you'd like!
+                    **Bonus** Nous pouvons améliorer le programme qui dessine différentes formes. Termine le code et tu pourras dessiner le polygone que tu veux !
                 example_code_2: |
                     ```
-                    figure = {ask} 'How many angles should I draw?'
-                    angle = 360 / figure
-                    {repeat} figure {times}
+                    sommets = {ask} "Combien de sommets dois-je dessiner ?"
+                    angle = 360 / sommets
+                    {repeat} sommets {times}
                         {turn} _
                         {forward} _
                     ```
-                start_code: angles = {ask} 'How many angles should I draw?'
+                start_code: sommets = {ask} "Combien de sommets dois-je dessiner ?"
             9:
                 story_text: |
                     Now that we can use a `{repeat}` inside a `{repeat}`, we can create more complex figures.

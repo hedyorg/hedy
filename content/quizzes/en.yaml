@@ -1291,9 +1291,7 @@ levels:
                 {repeat} 7 {times} {print} 'da ba dee, da ba da'
             mp_choice_options:
             -   option: |-
-                    ```
-                    I'm
-                    ```
+                    `I'm`
                 feedback: That's right!
             -   option: '`{print}`'
                 feedback: '`{print}` is spelled correctly'
@@ -1322,28 +1320,36 @@ levels:
                 {repeat} 3 {times} {print} ' round and round'
             mp_choice_options:
             -   option: |-
+                    ```
                     the wheels on the bus go
                     round and round
+                    ```
                 feedback: Only the second line is repeated 3 times
             -   option: |-
+                    ```
                     the wheels on the bus go
                     the wheels on the bus go
                     the wheels on the bus go
                     round and round
+                    ```
                 feedback: Only the second line is repeated 3 times
             -   option: |-
+                    ```
                     the wheels on the bus go
                     round and round
                     the wheels on the bus go
                     round and round
                     the wheels on the bus go
                     round and round
+                    ```
                 feedback: Only the second line is repeated 3 times
             -   option: |-
+                    ```
                     the wheels on the bus go
                     round and round
                     round and round
                     round and round
+                    ```
                 feedback: All through the town! Perfect!
             hint: Only 'round and round' is repeated 3 times.
             correct_answer: D
@@ -1355,23 +1361,31 @@ levels:
                 {print} 'ROCK YOU!'
             mp_choice_options:
             -   option: |-
+                    ```
                     We will We will
                     ROCK YOU!
+                    ```
                 feedback: '''We will'' won''t appear twice in the same line'
             -   option: |-
+                    ```
                     We will
                     We will
                     ROCK YOU!
+                    ```
                 feedback: Great!
             -   option: |-
+                    ```
                     We will
                     ROCK YOU!
                     We will
                     ROCK YOU!
+                    ```
                 feedback: ROCK YOU! won't be repeated
             -   option: |-
+                    ```
                     We will
                     ROCK YOU!
+                    ```
                 feedback: Mind the `{repeat}` command
             hint: Mind the `{repeat}` command.
             correct_answer: B
@@ -1583,7 +1597,7 @@ levels:
                     Baby shark
                     Baby shark
                     Baby shark
-                feedback: What is being repeated and what isn't.
+                feedback: What is being repeated and what isn't ?
             hint: What is being repeated and what is not?
             correct_answer: C
             question_score: '10'
