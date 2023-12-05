@@ -271,15 +271,25 @@ function highlightVariables(view: EditorView) {
     let variableDeco = new RangeSetBuilder<Decoration>()
     let positions: {from: number, to: number}[] = [];
     let variablesNames = new Set()
-       // First we iterate through the tree to find all var assignments
-       // To highlight them, but also to find the names of the variables
-       // For later use in other rules
-       for (let {from, to} of view.visibleRanges) {
+    let definingCommands = [
+        'Assign' , 
+        'Ask' , 
+        'AssignList' , 
+        'For',
+        //TODO: Give a different color to functions
+        //TODO: color variables defined as function parameters
+        'Define',
+        "Input"
+    ]
+    // First we iterate through the tree to find all var assignments
+    // To highlight them, but also to find the names of the variables
+    // For later use in other rules
+    for (let {from, to} of view.visibleRanges) {
         syntaxTree(view.state).iterate({
             from: from,
             to: to,
             enter: (node) => {
-                if (node.name === 'Assign' || node.name === 'Ask' || node.name === 'AssignList') {
+                if (definingCommands.includes(node.node.name)) {
                     const child = node.node.getChild('Text');
                     if (child && isVarName(view.state.doc.sliceString(child.from, child.to))) {
                         variablesNames.add(view.state.doc.sliceString(child.from, child.to))
@@ -289,7 +299,24 @@ function highlightVariables(view: EditorView) {
             }
         })
     }
-    let commands = ["Assign" , "Print" , "Forward", "Turn", "Color", "Sleep", "ListAccess", "Add", "Remove"]
+    let commands = [
+        "Assign" , 
+        "Print" , 
+        "Forward", 
+        "Turn", 
+        "Color", 
+        "Sleep", 
+        "ListAccess", 
+        "Add", 
+        "Remove",
+        "EqualityCheck",
+        "InListCheck",
+        "NotInListCheck",
+        "Expression",
+        "Repeat",
+        "For",
+        "Call"   
+    ]
     // in levels 2 and 3 variables are not substitued inside ask
     // not sure if that's intended behaviour or not
     if (view.state.facet(levelFacet) > 3) commands.push("Ask")
