@@ -241,6 +241,12 @@ class MisspelledAtCommand(HedyException):
                          line_number=line_number)
 
 
+class NonDecimalVariable(HedyException):
+    def __init__(self, line_number):
+        super().__init__('Non Decimal Variable',
+                         line_number=line_number)
+
+
 class UnquotedAssignTextException(HedyException):
     def __init__(self, text, line_number):
         super().__init__('Unquoted Assignment', text=text, line_number=line_number)
