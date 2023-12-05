@@ -1090,7 +1090,6 @@ class AllCommands(Transformer):
             # lookup should be fixed instead, making a special case for now
             if production_rule_name == 'else':  # use of else also has an if
                 return ['if', 'else'] + leaves
-            # don't share leaves (these are numbers or variables)
             return [production_rule_name] + leaves
         else:
             return leaves  # 'pop up' the children
@@ -3376,9 +3375,13 @@ def create_AST(input_string, level, lang="en"):
 
         if not valid_echo(abstract_syntax_tree):
             raise exceptions.LonelyEchoException()
-        lookup_table = create_lookup_table(abstract_syntax_tree, level, lang, input_string)
 
-        return lookup_table, abstract_syntax_tree
+        lookup_table = create_lookup_table(abstract_syntax_tree, level, lang, input_string)
+        commands = AllCommands(level).transform(program_root)
+        # FH, dec 2023. I don't love how AllCommands works on program root and not on AST,
+        # but his will do for now. One day we should really start to clean up our AST!
+
+        return abstract_syntax_tree, lookup_table, commands
     except VisitError as E:
         if isinstance(E, VisitError):
             # Exceptions raised inside visitors are wrapped inside VisitError. Unwrap it if it is a
@@ -3409,14 +3412,12 @@ def transpile_inner(input_string, level, lang="en", populate_source_map=False, i
     else:
         numerals_language = "Latin"
 
-    lookup_table, abstract_syntax_tree = create_AST(input_string, level, lang)
+    abstract_syntax_tree, lookup_table, commands = create_AST(input_string, level, lang)
 
     # grab the right transpiler from the lookup
     convertToPython = TRANSPILER_LOOKUP[level]
     python = convertToPython(lookup_table, lang, numerals_language, is_debug).transform(abstract_syntax_tree)
 
-    # line below used to work on program root, must still be updated!
-    commands = AllCommands(level).transform(abstract_syntax_tree)
 
     has_clear = "clear" in commands
     has_turtle = "forward" in commands or "turn" in commands or "color" in commands
