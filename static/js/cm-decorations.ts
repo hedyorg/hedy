@@ -268,16 +268,37 @@ export const variableHighlighter = ViewPlugin.fromClass(class {
 
 function highlightVariables(view: EditorView) {
     let variableDeco = new RangeSetBuilder<Decoration>()
+    let variablesNames = new Set()
+    // First we iterate through the tree to find all var assignments
+    // To highlight them, but also to find the names of the variables
+    // For later use in other rules
     for (let {from, to} of view.visibleRanges) {
         syntaxTree(view.state).iterate({
             from: from,
             to: to,
             enter: (node) => {
-                if (node.name === 'Assign') {                                       
+                if (node.name === 'Assign' || node.name === 'Ask') {
                     const child = node.node.getChild('Text');
-                    if (child) {                        
-                        console.log(view.state.doc.sliceString(child.from, child.to))
+                    if (child) {
+                        variablesNames.add(view.state.doc.sliceString(child.from, child.to))
                         variableDeco.add(child.from, child.to, highlightVariableMarker)
+                    }
+                }
+            }
+        })
+    }
+    // Now that we have the variable names, we can distinguish them from other Text nodes
+    for (let {from, to} of view.visibleRanges) {
+        syntaxTree(view.state).iterate({
+            from: from,
+            to: to,
+            enter: (node) => {
+                if (node.name === 'Print') {
+                    const children = node.node.getChildren('Text');
+                    for (let child of children) {
+                        if (variablesNames.has(view.state.doc.sliceString(child.from, child.to))) {
+                            variableDeco.add(child.from, child.to, highlightVariableMarker)
+                        }
                     }
                 }
             }
