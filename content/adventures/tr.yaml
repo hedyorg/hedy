@@ -373,7 +373,7 @@ adventures:
                     {print} Merhaba!
                     {ask} Senin adın ne?
                     ```
-                story_text_2: "## yankıla komutu \nEğer bilgisayarın cevabı size tekrar etmesini istiyorsanız, `{echo}` komutunu kullanabilirsiniz. Cevabın cümlenin sonunda yankılandığını unutmayın, yani bu örnek için merhaba'dan sonra.\n"
+                story_text_2: "## `{echo}` komutu \nEğer bilgisayarın cevabı size tekrar etmesini istiyorsanız, `{echo}` komutunu kullanabilirsiniz. Cevabın cümlenin sonunda yankılandığını unutmayın, yani bu örnek için merhaba'dan sonra.\n"
                 example_code_2: |
                     ```
                     {print} Merhaba!
@@ -797,8 +797,8 @@ adventures:
                     {clear}
                     {print} 'SÜRPRİZ!'
     debugging:
-        name: debugging
-        default_save_name: debugging
+        name: hata ayıklama
+        default_save_name: hata ayıklama
         description: debugging adventure
         levels:
             1:
@@ -4859,7 +4859,7 @@ adventures:
                     {for} distance {in} distances
                         {forward} distance
                     ```
-                start_code: '# Write your code here'
+                start_code: '# kodunuzu buraya yerleştirin'
             12:
                 story_text: |
                     We can use functions to draw more complex figures with less code.
