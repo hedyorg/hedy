@@ -559,7 +559,7 @@ class ForTeachersModule(WebsiteModule):
         for level, level_default_adventures in hedy_content.ADVENTURE_ORDER_PER_LEVEL.items():
             for short_name in level_default_adventures:
                 adventure = SortedAdventure(short_name=short_name,
-                                            long_name=adventure_names[short_name],
+                                            long_name=adventure_names.get(short_name, short_name),
                                             is_teacher_adventure=False,
                                             is_command_adventure=short_name in hedy_content.KEYWORDS_ADVENTURES)
                 default_adventures[level].add(adventure)
@@ -610,7 +610,7 @@ class ForTeachersModule(WebsiteModule):
             for adventure in default_adventures:
                 db_adventures[str(lvl)].append({'name': adventure, 'from_teacher': False})
                 sorted_adventure = SortedAdventure(short_name=adventure,
-                                                   long_name=adventure_names[adventure],
+                                                   long_name=adventure_names.get(adventure, adventure),
                                                    is_command_adventure=adventure in hedy_content.KEYWORDS_ADVENTURES,
                                                    is_teacher_adventure=False)
                 adventures[lvl].append(sorted_adventure)

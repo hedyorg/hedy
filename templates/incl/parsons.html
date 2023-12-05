@@ -1,12 +1,14 @@
 <div id="parsons_container" class="hidden">
     {% if parsons_exercises > 1 %}
-        <div class="flex flex-row items-center justify-around gap-2 border-b-2 border-gray-500 pb-2">
+        <div class="flex flex-row items-center justify-around bg-gray-400 border-b-2 border-gray-500">
             {% for i in range(1, parsons_exercises + 1)%}
-                {% if i == 1 %}
-                 <div class="step current bg-gray-200" id="parsons_header_{{i}}"><span class="parsons_header_text_container" id="parsons_header_text_{{i}}">{{_('exercise')}}</span> {{ i }}</div>
-                {% else %}
-                    <div class="step {% if i % 2 == 0 %}bg-gray-400{% else %}bg-gray-200{% endif %}" id="parsons_header_{{i}}"><span class="parsons_header_text_container" id="parsons_header_text_{{i}}" style="display: none;">{{_('exercise')}}</span> {{ i }}</div>
-                {% endif %}
+                    <div class="flex-1 text-center step cursor-pointer p-2
+                        {% if i != parsons_exercises %}border-dashed border-r border-gray-500{% endif %}
+                    " id="parsons_header_{{i}}"
+                        _="on click hedyApp.loadParsonsExercise({{level}}, {{i}})">
+                        <span class="parsons_header_text_container" id="parsons_header_text_{{i}}" style="display: none;">{{_('exercise')}}</span> 
+                        {{ i }}
+                    </div>
             {% endfor %}
         </div>
     {% endif %}
@@ -16,9 +18,9 @@
                 <p id="parsons_explanation_text"></p>
                 <div class="flex flex-col mx-auto gap-2 items-center" id="parsons_code_lines">
                     {% for i in range(1, 11) %}
-                        <div class="relative w-full border-4 border-black rounded-lg parsons_start_line_container" style="background-color: #272822;" id="parsons_start_line_container_{{ i }}">
+                        <div class="relative w-full p-2 border-4 border-black rounded-lg parsons_start_line_container cursor-grab" style="background-color: #272822;" id="parsons_start_line_container_{{ i }}">
                             <div index="" draggable="true" id="start_parsons_div_{{ i }}" code="" class="start-parsons-box w-full absolute inset-0 z-10 rounded-lg"></div>
-                            <pre level="{{ level }}" id="start_parsons_{{ i }}" class="no-copy-button parsons text-sm"></pre>
+                            <pre level="{{ level }}" id="start_parsons_{{ i }}" class="no-copy-button parsons text-sm m-0"></pre>
                         </div>
                     {% endfor %}
                 </div>

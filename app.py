@@ -562,11 +562,15 @@ def parse():
 
             if transpile_result.has_turtle:
                 response['has_turtle'] = True
+
+            if transpile_result.has_clear:
+                response['has_clear'] = True
         except Exception:
             pass
 
         with querylog.log_time('detect_sleep'):
             try:
+                # FH, Nov 2023: hmmm I don't love that this is not done in the same place as the other "has"es
                 response['has_sleep'] = 'sleep' in transpile_result.commands
             except BaseException:
                 pass
@@ -1523,7 +1527,8 @@ def view_program(user, id):
                            javascript_page_options=dict(
                                page='view-program',
                                lang=g.lang,
-                               level=int(result['level'])),
+                               level=int(result['level']),
+                               code=code),
                            **arguments_dict)
 
 
@@ -1624,10 +1629,11 @@ def get_embedded_code_editor(level):
 
     return render_template("embedded-editor.html", embedded=True, run=run, language=language,
                            keyword_language=keyword_language, readOnly=readOnly,
-                           level=level, program=program, javascript_page_options=dict(
-                               page='code',
+                           level=level, javascript_page_options=dict(
+                               page='view-program',
                                lang=language,
-                               level=level
+                               level=level,
+                               code=program
                            ))
 
 
