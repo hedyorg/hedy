@@ -175,11 +175,11 @@ class ForTeachersModule(WebsiteModule):
             achievement = json.dumps(achievement)
 
         invites = []
-        for invite in self.db.get_class_invites(Class["id"]):
+        for invite in self.db.get_class_invitations(Class["id"]):
             invites.append(
                 {
                     "username": invite["username"],
-                    "invited_as": invite["invited_as"],
+                    "invited_as_text": invite["invited_as_text"],
                     "timestamp": utils.localized_date_format(invite["timestamp"], short_format=True),
                     "expire_timestamp": utils.localized_date_format(invite["ttl"], short_format=True),
                 }
