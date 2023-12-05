@@ -1776,17 +1776,16 @@ def profile_page(user):
         for class_id in profile.get('classes'):
             classes.append(DATABASE.get_class(class_id))
 
-    invite = DATABASE.get_username_invite(user['username'])
-    if invite:
-        # We have to keep this in mind as well, can simply be set to 1 for now
-        # But when adding more message structures we have to use a more sophisticated structure
-        session['messages'] = 1
-        # If there is an invite: retrieve the class information
-        class_info = DATABASE.get_class(invite.get('class_id', None))
-        if class_info:
-            invite['teacher'] = class_info.get('teacher')
-            invite['class_name'] = class_info.get('name')
-            invite['join_link'] = class_info.get('link')
+    invitations = DATABASE.get_user_invitations(user['username'])
+    if invitations:
+        session['messages'] = len(invitations)
+        # If there are invitations: retrieve the class information
+        for invite in invitations:
+            class_info = DATABASE.get_class(invite.get('class_id', None))
+            if class_info:
+                invite['teacher'] = class_info.get('teacher')
+                invite['class_name'] = class_info.get('name')
+                invite['join_link'] = class_info.get('link')
     else:
         session['messages'] = 0
 
@@ -1795,7 +1794,7 @@ def profile_page(user):
         page_title=gettext('title_my-profile'),
         programs=programs,
         user_data=profile,
-        invite_data=invite,
+        invitations=invitations,
         public_settings=public_profile_settings,
         user_classes=classes,
         current_page='my-profile')
@@ -2289,8 +2288,8 @@ def get_user_messages():
         # Todo TB: In the future this should contain the class invites + other messages
         # As the class invites are binary (you either have one or you have none, we can possibly simplify this)
         # Simply set it to 1 if we have an invite, otherwise keep at 0
-        invite = DATABASE.get_username_invite(current_user()['username'])
-        session['messages'] = 1 if invite else 0
+        invitations = DATABASE.get_user_invitations(current_user()['username'])
+        session['messages'] = len(invitations) if invitations else 0
     if session.get('messages') > 0:
         return session.get('messages')
     return None
