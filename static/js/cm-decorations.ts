@@ -269,10 +269,10 @@ export const variableHighlighter = ViewPlugin.fromClass(class {
 function highlightVariables(view: EditorView) {
     let variableDeco = new RangeSetBuilder<Decoration>()
     let variablesNames = new Set()
-    // First we iterate through the tree to find all var assignments
-    // To highlight them, but also to find the names of the variables
-    // For later use in other rules
-    for (let {from, to} of view.visibleRanges) {
+       // First we iterate through the tree to find all var assignments
+       // To highlight them, but also to find the names of the variables
+       // For later use in other rules
+       for (let {from, to} of view.visibleRanges) {
         syntaxTree(view.state).iterate({
             from: from,
             to: to,
@@ -293,11 +293,27 @@ function highlightVariables(view: EditorView) {
             from: from,
             to: to,
             enter: (node) => {
-                if (node.name === 'Print') {
+                if (["Assign" , "Ask" , "Print" , "Turtle" , "Sleep"].includes(node.name)) {
                     const children = node.node.getChildren('Text');
-                    for (let child of children) {
-                        if (variablesNames.has(view.state.doc.sliceString(child.from, child.to))) {
-                            variableDeco.add(child.from, child.to, highlightVariableMarker)
+                    // no need to add again the first child of Assign and Ask since 
+                    // we already highlighted it in the previous step
+                    let i = node.name === "Assign" || node.name === "Ask" ? 1 : 0
+                    for (; i < children.length; i++) {
+                        const child = children[i];
+                        const text = view.state.doc.sliceString(child.from, child.to);
+                        // On level 2, since there aren't distinctions between strings and variable names
+                        // It's possible to have several variables in the same text nodes
+                        // separetaed by other characters like: name!!!your_name
+                        // Therefore, we need to get the variables names inside this text node
+                        const varNames = getVarNames(text) || [];                        
+                        // we keep track of the index of the last variable viewed
+                        let startIndex = 0;
+                        for (const name of varNames) {
+                            if (variablesNames.has(name)) {
+                                const index = text.indexOf(name, startIndex)
+                                variableDeco.add(child.from + index, child.from + index + name.length, highlightVariableMarker)
+                                startIndex = index + name.length
+                            }
                         }
                     }
                 }
@@ -306,4 +322,9 @@ function highlightVariables(view: EditorView) {
     }
 
     return variableDeco.finish()
+}
+
+function getVarNames(name: string) {
+    const varRegex = /([\p{Lu}\p{Ll}\p{Lt}\p{Lm}\p{Lo}\p{Nl}_]+|([\p{Mn}\p{Mc}\p{Nd}\p{Pc}·]+)*)/gmu
+    return name.match(varRegex);
 }
