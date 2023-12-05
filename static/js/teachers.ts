@@ -54,12 +54,16 @@ export function rename_class(id: string, class_name_prompt: string) {
     });
 }
 
-export function duplicate_class(id: string, second_teacher_prompt: string, prompt: string, defaultValue: string = '') {
-  modal.confirm(second_teacher_prompt, function () {
-    apiDuplicateClass(id, prompt, true, defaultValue);
-  }, function () {
+export function duplicate_class(id: string, teacher_classes: string[], second_teacher_prompt: string, prompt: string, defaultValue: string = '') {
+  if (teacher_classes){
+    modal.confirm(second_teacher_prompt, function () {
+      apiDuplicateClass(id, prompt, true, defaultValue);
+    }, function () {
+      apiDuplicateClass(id, prompt, false, defaultValue);
+    });
+  } else {
     apiDuplicateClass(id, prompt, false, defaultValue);
-  });
+  }
 }
 
 function apiDuplicateClass(id: string, prompt: string, second_teacher: boolean, defaultValue: string = '') {
