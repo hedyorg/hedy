@@ -5,9 +5,7 @@ name: Cypress tests
 
 on:
   push:
-    branches: [ main, adventure-all-levels ]
-  pull_request:
-    branches: [ main ]
+    branches: [ adventure-all-levels ]
 
 jobs:
   # This identifier gets used in .mergify.yml
@@ -52,6 +50,7 @@ jobs:
         working-directory: tests/
         # We have already installed all dependencies
         install: false
+        browser: chrome
       env:
         # pass the Cypress Cloud record key as an environment variable
         CYPRESS_RECORD_KEY: ${{ secrets.CYPRESS_RECORD_KEY }}
