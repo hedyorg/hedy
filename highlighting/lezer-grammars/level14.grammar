@@ -29,7 +29,7 @@ Print { print+ ( ListAccess | Expression | Call )+ }
 Ask { Text (is+ | Op<"=">) ask+ ( ListAccess | Expression )+ }
 
 AssignList { Text (is+ | Op<"=">) (Text+ | Number ) ~ambig  (Comma (Text+ | Number ))+ }
-Assign { Text (is+ | Op<"=">) (Expression ~ambig  | ListAccess)+ }
+Assign { (Text | ListAccess) (is+ | Op<"=">) (Expression ~ambig  | ListAccess)+ }
 Sleep { sleep+ (Expression | ListAccess | Call)? }
 ListAccess { Text at+ (random+ | Text) }
 Add { add+ (Expression | Call ) toList+ Text }
