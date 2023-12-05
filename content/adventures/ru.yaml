@@ -1428,7 +1428,7 @@ adventures:
 
                     print 'Thanks for ordering!'
                     ```
-                start_code: |4
+                start_code: |2
 
                     define food_order
                         toppings = ask 'pepperoni, tuna, veggie or cheese?'
@@ -1479,7 +1479,7 @@ adventures:
                         print 'there a ' sound
                         print 'everywhere a ' sound sound
                     ```
-                start_code: |4
+                start_code: |2
 
                     animals = ['pig', 'dog', 'cow']
                     sounds = ['oink', 'woof', 'moo']
@@ -1661,8 +1661,7 @@ adventures:
                     {print} 'В десятичных числах теперь нужно использовать точку'
                     {print} 2.5 + 2.5
             13:
-                story_text: Сейчас мы изучим `{and}` и `{or}`! Если вы хотите проверить два утверждения, вам не обязательно использовать два {if}, но можно использовать `{and}` и `{or}`. Если вы используете `{and}`, оба утверждения, слева и справа от `{and}`, должны быть истинными. Можно также использовать
-                    `{or}`. Тогда только одно утверждение должно быть верным.
+                story_text: Сейчас мы изучим `{and}` и `{or}`! Если вы хотите проверить два утверждения, вам не обязательно использовать два {if}, но можно использовать `{and}` и `{or}`. Если вы используете `{and}`, оба утверждения, слева и справа от `{and}`, должны быть истинными. Можно также использовать `{or}`. Тогда только одно утверждение должно быть верным.
                 example_code: |
                     ```
                     имя = {ask} 'как вас зовут?'
@@ -2498,9 +2497,7 @@ adventures:
                     ```
                 start_code: '# разместите здесь свой код'
             9:
-                story_text: "В этом уровне вы можете использовать вложенность, которая позволяет сделать дом с привидениями еще более интерактивным!\n\n### Упражнение\n Сейчас очень трудно выиграть в этой игре, можете ли вы сделать так, чтобы выиграть было легче?\nИзмените свой код так, чтобы в нем была\
-                    \ только одна неправильная дверь и две правильные, а не одна правильная дверь и две неправильные? \nПодсказка: Это означает замену переменной correct_door на wrong_door, а также изменение кода `{if}` и `{else}`.\nИ, конечно, вы можете изменить историю и сделать ее своей. Измените монстров\
-                    \ или сделайте это счастливым игровым шоу, в котором вы получаете подарок!\n"
+                story_text: "В этом уровне вы можете использовать вложенность, которая позволяет сделать дом с привидениями еще более интерактивным!\n\n### Упражнение\n Сейчас очень трудно выиграть в этой игре, можете ли вы сделать так, чтобы выиграть было легче?\nИзмените свой код так, чтобы в нем была только одна неправильная дверь и две правильные, а не одна правильная дверь и две неправильные? \nПодсказка: Это означает замену переменной correct_door на wrong_door, а также изменение кода `{if}` и `{else}`.\nИ, конечно, вы можете изменить историю и сделать ее своей. Измените монстров или сделайте это счастливым игровым шоу, в котором вы получаете подарок!\n"
                 example_code: |
                     ```
                     {print} 'Escape from the Haunted House!'
@@ -2524,9 +2521,7 @@ adventures:
                     ```
                 start_code: '{print} ''Побег из дома с привидениями!'''
             11:
-                story_text: "В этом уровне мы изменили команду `{for}`, чтобы сообщить игроку, где он находится. \n\n### Упражнение 1\nЗавершите программу, чтобы игрок знал, в какой комнате он находится.\n\n### Упражнение 2\nПревратите программу в приключение, выполнив следующие шаги:\n\n1. Составьте\
-                    \ список вариантов действий (например: борьба или бегство).\n2. Убедитесь, что игрок может выбрать вариант с `{ask}`\n3. Ответ правильный? Тогда они могут перейти к следующему монстру. Ответили неправильно? Сообщите игроку об этом с помощью `{print}`. \n\n**(дополнительно)** Если вы\
-                    \ сделали неправильный выбор, монстр все равно будет показан! Как вы можете это изменить?\n"
+                story_text: "В этом уровне мы изменили команду `{for}`, чтобы сообщить игроку, где он находится. \n\n### Упражнение 1\nЗавершите программу, чтобы игрок знал, в какой комнате он находится.\n\n### Упражнение 2\nПревратите программу в приключение, выполнив следующие шаги:\n\n1. Составьте список вариантов действий (например: борьба или бегство).\n2. Убедитесь, что игрок может выбрать вариант с `{ask}`\n3. Ответ правильный? Тогда они могут перейти к следующему монстру. Ответили неправильно? Сообщите игроку об этом с помощью `{print}`. \n\n**(дополнительно)** Если вы сделали неправильный выбор, монстр все равно будет показан! Как вы можете это изменить?\n"
                 example_code: |
                     ```
                     {print} 'Побег из дома с привидениями!
@@ -3637,9 +3632,7 @@ adventures:
                     **Дополнительное задание** Добавьте ещё больше вариантов - столько, сколько вам нравится!
                 start_code: '# разместите здесь свой код'
             9:
-                story_text: "В этом уровне вы можете использовать вложенность, чтобы сделать ваш ресторан более реалистичным и веселым!\n\n### Упражнение\nВ коде примера были удалены отступы. \nМожете ли вы определить, сколько отступов должно быть в каждой строке, чтобы код работал правильно?\nЕсли клиент\
-                    \ заказывает пиццу, Хеди не должна спрашивать, какой соус хочет клиент.\n\n**(экстра)** В ресторане не все соусы имеются в наличии. Составьте список доступных соусов и при каждом заказе отвечайте, продаете ли вы его. <br>\n**(дополнительно)** У пиццы есть начинка. Спросите клиентов,\
-                    \ что они хотят.<br>\n**(дополнительно)** Хотят ли клиенты напитки? Спросите и их! <br>                    \n"
+                story_text: "В этом уровне вы можете использовать вложенность, чтобы сделать ваш ресторан более реалистичным и веселым!\n\n### Упражнение\nВ коде примера были удалены отступы. \nМожете ли вы определить, сколько отступов должно быть в каждой строке, чтобы код работал правильно?\nЕсли клиент заказывает пиццу, Хеди не должна спрашивать, какой соус хочет клиент.\n\n**(экстра)** В ресторане не все соусы имеются в наличии. Составьте список доступных соусов и при каждом заказе отвечайте, продаете ли вы его. <br>\n**(дополнительно)** У пиццы есть начинка. Спросите клиентов, что они хотят.<br>\n**(дополнительно)** Хотят ли клиенты напитки? Спросите и их! <br>                    \n"
                 example_code: |
                     ```
                     {print} 'Добро пожаловать в ресторан Хеди!'
@@ -3809,8 +3802,7 @@ adventures:
                     choices {is} rock, paper, scissors
                     {print} choices {at} {random}
                     ```
-                story_text_2: "### Задача\nСкопируйте код примера и заполните в нём проблелы, чтобы добавить ещё одного игрока.\n\n**Дополнительное задание** Сейчас игроков зовут \"игрок 1\" и \"игрок 2\". Можете добавить несколько команд `{ask}` (конечно же с переменными), чтобы дать игрокам имена? \n\
-                    Таким образом, вы сможете получить вывод вроде `Ваня выбрал... бумагу`\n"
+                story_text_2: "### Задача\nСкопируйте код примера и заполните в нём проблелы, чтобы добавить ещё одного игрока.\n\n**Дополнительное задание** Сейчас игроков зовут \"игрок 1\" и \"игрок 2\". Можете добавить несколько команд `{ask}` (конечно же с переменными), чтобы дать игрокам имена? \nТаким образом, вы сможете получить вывод вроде `Ваня выбрал... бумагу`\n"
                 example_code_2: |
                     ```
                     выбор {is} камень, бумага, ножницы
@@ -4850,3 +4842,69 @@ adventures:
                     {print} 'Happy New Year!'
                     ```
                 start_code: '# разместите здесь свой код'
+    turtle_draw_it:
+        levels:
+            2:
+                start_code: '## Recreate the drawings with the turtle!'
+                story_text: "### Exercise\nRecreate the drawings with the turtle!\n\n<div class=\"w-full flex flex-row gap-2\">\nTriangle <img src=\"https://github.com/hedyorg/hedy/assets/80678586/e974b62c-f0cf-445a-8bd4-5ad9f1f71204\" width=\"100\">\nArrow <img src=\"https://github.com/hedyorg/hedy/assets/80678586/803d8f42-9708-448c-82ea-d035697f08c9\" width=\"150\">\nBoat <img src=\"https://github.com/hedyorg/hedy/assets/80678586/94ef7189-442a-4c8f-827d-12a69203c2e9\" width=\"150\">\n</div>\n"
+            1:
+                start_code: '## Recreate the drawings with the turtle!'
+                story_text: "### Exercise\nRecreate the drawings with the turtle!\n\n<div class=\"w-full flex flex-row gap-2\">\n    Rectangle <img src=\"https://github.com/hedyorg/hedy/assets/80678586/77aa99d5-cd8f-4969-b49d-e8fed34ac550\" width=\"100\">\n    Square <img src=\"https://github.com/hedyorg/hedy/assets/80678586/03b96c2c-7b94-4032-9f9f-3f3b13573623\" width=\"200\">\n    Stairs<img src=\"https://github.com/hedyorg/hedy/assets/80678586/d4301e62-ec66-4031-827c-7d21f73ba106\" width=\"200\">\n</div>\n"
+            15:
+                story_text_2: "Fan <img src=\"https://github.com/hedyorg/hedy/assets/80678586/cb671065-b47b-49f0-b298-dcbcd2a5e28f\" width=\"150\">\n"
+                story_text_3: "Star <img src=\"https://github.com/hedyorg/hedy/assets/80678586/17564e0a-63e1-4794-8d41-15ac8c1a5a93\" width=\"150\">\n"
+                example_code: "Spiral\n```\ndistance = 5\n{while} distance < 200\n    distance = distance + 5\n     _\n```\n"
+                story_text: "### Exercise\nRecreate the drawings with the turtle!\n\nSpiral <img src=\"https://github.com/hedyorg/hedy/assets/80678586/6943223c-018b-435b-a391-23723cc7a6ad\" width=\"150\">\n"
+                start_code: '## Recreate the drawings with the turtle! '
+                example_code_3: "Star\nA star is usually drawn using 144-degree-turns. If you change this slightly to 143 degrees for example and repeat the pattern multiple times with a {while} loop you can make this figure.\n"
+                example_code_2: "Fan\n```\n{define} draw_a_square {with} side\n_\n\ni = 100\n{while} i > 1\n    _ {with} i\n    _\n    i = i - 3\n```\n"
+            10:
+                story_text: "### Exercise\nRecreate the drawings with the turtle!\n\n<div class=\"w-full flex flex-row gap-2\">\nNested Hexagon <img src=\"https://github.com/hedyorg/hedy/assets/80678586/3629e908-3cd5-44ac-bbcd-1f1cceb15654\" width=\"150\">\nTraffic lights  <img src=\"https://github.com/hedyorg/hedy/assets/80678586/edbbb608-5ff8-4349-85a6-e47809adde43\" width=\"100\">\n</div>\n"
+                start_code: '## Recreate the drawings with the turtle! '
+                story_text_2: "Christmas lights <img src=\"https://github.com/hedyorg/hedy/assets/80678586/9637ea6d-6edc-4d88-a6f7-10271bfc5371\" width=\"500\">\n"
+                example_code_2: "Hint Christmas Lights:\n\nStart by moving to the left side of the screen with an invisible white line. Then hang up the Christmas lights!\n```\n{color} white\n{turn} -90\n{forward} 300\n{turn} 90\n\ncolors = red, blue, yellow, purple, green, orange, pink\n{for} chosen_color {in} colors\n_\n```\n"
+                example_code: "Hint Nested Hexagon:\n```\ndistances = 100, 80, 60, 40, 20\n{for} distance {in} distances\n_\n```\n\nHint Traffic Lights:\n```\ncolors = red, yellow, green\n{for} chosen_color {in} colors\n    color _\n    {repeat} _\n```\n"
+            9:
+                story_text: "### Exercise\nRecreate the drawings with the turtle!\n\n**Extra** The number in brackets indicates in how many lines of code this figure can be drawn. Can you do it in the same amount of lines?\n\n**Extra** Give the player a choice which country they would like to see the flag of.\n\n<div class=\"w-full flex flex-row gap-2\">\nCross (7) <img src=\"https://github.com/hedyorg/hedy/assets/80678586/76e42c76-aa3f-4863-8eee-ead73c09a186\" width=\"150\">\nRandomly colored nested squares (8) <img src=\"https://github.com/hedyorg/hedy/assets/80678586/17f878cc-e893-4c10-b32e-a09a50bf08de\" width=\"200\">\nFlags <img src=\"https://github.com/hedyorg/hedy/assets/80678586/877fc337-df80-4185-8005-a6c28904f66e\" width=\"300\">\n</div>\n"
+                start_code: '## Recreate the drawings with the turtle! '
+                example_code: "Hint for the nested squares:\n```\ncolors = red, blue, orange, yellow, pink, purple, green, brown, black\ndistance = 120\nrepeat 5 times\n_\n```\nHint for the flags:\n```\ncountry = ask 'which country would you like to see the flag of?'\nif country is 'the Netherlands'\n    color_1 = red\n    color_2 = white\n    color_3 = blue\n```\n"
+            5:
+                example_code: "Hint:\n```\nchosen_letter {is} {ask} 'Which letter would you like to see? F, E or L?\n{if} _\n```\n"
+                start_code: '## Recreate the drawings with the turtle!'
+                story_text: "### Exercise\nRecreate the drawings with the turtle!\n\n**Extra** Make only one code that lets the player decide which letter they'd like to see! And can you add even more letters?\n\n<div class=\"w-full flex flex-row gap-2\">\nF <img src=\"https://github.com/hedyorg/hedy/assets/80678586/8a021b76-c24b-4e7c-b960-48d57f3bcb20\" width=\"100\">\nE <img src=\"https://github.com/hedyorg/hedy/assets/80678586/12821803-6422-416a-8e36-9902d14e57a4\" width=\"100\">\nL <img src=\"https://github.com/hedyorg/hedy/assets/80678586/3af6f919-7b67-4ee7-b923-11e56f2b6b24\" width=\"100\">\n</div>\n"
+            14:
+                example_code: "```\n{define} calculate_degrees {with} amount_of_corners\n    _ 360 / amount_of_corners\n\n\n{define} draw_figure {with} degrees\n    _\n        {forward} 400/amount_of_corners\n        {turn} _\n\namount_of_corners = {ask} _\ndegrees = {call} _ {with} _\n\n{call} _ {with}\n{call} _ {with}\n```\n"
+                start_code: '## Recreate the drawings with the turtle! '
+                story_text: "### Exercise\nCreate a program that asks the player how many corners their figure should have and then creates that figure.\nThe figure in the image is the output when the player fills in 10.\n\n<div class=\"w-full flex flex-row gap-2\">\n <img src=\"https://github.com/hedyorg/hedy/assets/80678586/ee32f40e-dea1-4e7c-a813-3ef63671254b\" width=\"300\">\n <img src=\"https://github.com/hedyorg/hedy/assets/80678586/3621bf77-527d-41e8-a44f-c5a21bb4ffd2\" width=\"200\">\n</div>\n"
+            11:
+                start_code: '## Recreate the drawings with the turtle! '
+                example_code: "Hint Beehive:\n```\n{for} amount_of_combs {in} {range} 1 {to} _\n    {for} walls_of_one_comb {in} {range} 1 {to} _\n        {forward} _\n        {turn} _\n    {forward} _\n    {turn} _\n```\n\nHint Fan:\nStart out like the fan you made in level 7. Or take a peak at the hint for the beehive, because the codes are very similar.\n"
+                story_text: "### Exercise\nRecreate the drawings with the turtle!\n\n<div class=\"w-full flex flex-row gap-2\">\nBeehive (6) <img src=\"https://github.com/hedyorg/hedy/assets/80678586/ec02469c-907b-4695-9382-d39a8f3c00ec\" width=\"200\">\nFan (5)  <img src=\"https://github.com/hedyorg/hedy/assets/80678586/a032ab35-c70c-4e67-9b4e-036a03ecce87\" width=\"200\">\n</div>\n"
+            12:
+                start_code: '## Recreate the drawings with the turtle! '
+                story_text: "### Exercise\nRecreate the drawings with the turtle!\n"
+                example_code: "Hint: Bracelet designing program\n\n\nFirstly, define a function **for each shape** you want to use on the bacelet. Then, add the shapes to the bacelet like this:\n\n```\n{define} draw_a_square\n_\n\n{color} white\n{turn} -90\n{forward} 300\n{turn} 180\n\n{for} i {in} {range} 1 {to} 5\n    {color} gray\n    {forward} 100\n    shape = {ask} 'What kind of shape would you like next on the bracelet?'\n    chosen_color = {ask} 'In which color?'\n    {color} chosen_color\n    {if} shape = 'square'\n        {call} draw_a_square\n```\n"
+            3:
+                start_code: '## Recreate the drawings with the turtle!'
+                story_text: "### Exercise\nRecreate the drawings with the turtle!\n\n<div class=\"w-full flex flex-row gap-2\">\nTriangle <img src=\"https://github.com/hedyorg/hedy/assets/80678586/71e04d98-9545-4614-9caf-a5f179b756a1\" width=\"150\">\nStar <img src=\"https://github.com/hedyorg/hedy/assets/80678586/421c4d28-cb99-424b-be26-dcae30d65c80\" width=\"150\">\nArrow <img src=\"https://github.com/hedyorg/hedy/assets/80678586/3cbebcae-5258-47c5-a6ac-e7ee36c1d1ce\" width=\"200\">\n</div>\n"
+            7:
+                story_text: "### Exercise\nRecreate the drawings with the turtle!\n\n<div class=\"w-full flex flex-row gap-2\">\nHexagon <img src=\"https://github.com/hedyorg/hedy/assets/80678586/92e492e1-1593-489b-aaf0-51d2a29755f4\" width=\"200\">\nTriangle <img src=\"https://github.com/hedyorg/hedy/assets/80678586/3629a5e6-1f02-4851-aab9-c5430ba4a1f1\" width=\"200\">\nFan <img src=\"https://github.com/hedyorg/hedy/assets/80678586/1ba2ff71-1230-4fe3-8255-b2c504cf1b4e\" width=\"200\">\n</div>\n"
+                start_code: '## Recreate the drawings with the turtle!'
+            13:
+                start_code: '## Recreate the drawings with the turtle! '
+                example_code: "Hint Street in different sizes\n```\n{define} draw_a_house {with} size\n_\n\n{call} draw_a_house {with} 90\n{call} draw_a_house {with} 60\n{call} draw_a_house {with} 30\n```\n\nHint Colored street\n```\n{define} draw_a_house {with} chosen_color\n_\n```\n"
+                story_text: "### Exercise\nRecreate the drawings with the turtle!\n\nStreet in different sizes <img src=\"https://github.com/hedyorg/hedy/assets/80678586/cdae9d97-d5ef-46f3-8838-24fa7b5b1bec\" width=\"300\">\nColored street  <img src=\"https://github.com/hedyorg/hedy/assets/80678586/9893e0bd-c0f8-49bc-a5a7-217182407724\" width=\"300\">\n"
+            6:
+                story_text: "### Exercise\nRecreate the drawings with the turtle!\n\n**Extra** Let the player decide which color the square should be.\n\n***Extra*** Can you make the letter of your own first name and the flag of your own country too?\n\n<div class=\"w-full flex flex-row gap-2\">\nSquare <img src=\"https://github.com/hedyorg/hedy/assets/80678586/03b96c2c-7b94-4032-9f9f-3f3b13573623\" width=\"150\">\nLetters <img src=\"https://github.com/hedyorg/hedy/assets/80678586/e75f4fa5-f1f5-4b48-806c-916c28e4e8ad\" width=\"100\">\nFlag <img src=\"https://github.com/hedyorg/hedy/assets/80678586/877fc337-df80-4185-8005-a6c28904f66e\" width=\"300\">\n</div>\n"
+                start_code: '## Recreate the drawings with the turtle!'
+                example_code: "Hint for the square:\n```\nchosen_color = {ask} _\n```\n"
+            4:
+                story_text: "### Exercise\nRecreate the drawings with the turtle!\n\n<div class=\"w-full flex flex-row gap-2\">\nColored Star <img src=\"https://github.com/hedyorg/hedy/assets/80678586/dbe39006-c050-4833-b5c4-f9d1fb1c0781\" width=\"150\">\nRainbow <img src=\"https://github.com/hedyorg/hedy/assets/80678586/2728b10f-9f7f-45ea-964e-5b284033e4f0\" width=\"500\">\nNested squares <img src=\"https://github.com/hedyorg/hedy/assets/80678586/f013f9fa-bc68-4c60-b778-2c457799d6f7\" width=\"200\">\n</div>\n"
+                start_code: '## Recreate the drawings with the turtle!'
+                example_code: "**Extra** Up for a real challenge? Make sure that the colors of these figures are selected randomly, so that each time you run your programs they'll look differently!\n\n```\ncolors {is} red, orange, yellow, green, blue, purple, pink, brown, gray, black\ncolor _\n```\n"
+            8:
+                story_text: "### Exercise\nRecreate the drawings with the turtle!\n\n**Extra** The number in brackets indicates in how many lines of code this figure can be drawn. Can you do it in the same amount of lines?\n\n<div class=\"w-full flex flex-row gap-2\">\nSquare (3) <img src=\"https://github.com/hedyorg/hedy/assets/80678586/03b96c2c-7b94-4032-9f9f-3f3b13573623\" width=\"200\">\nRandomly colored star (5) <img src=\"https://github.com/hedyorg/hedy/assets/80678586/dbe39006-c050-4833-b5c4-f9d1fb1c0781\" width=\"150\">\nRandomly colored spiral (7) <img src=\"https://github.com/hedyorg/hedy/assets/80678586/9bcdb3f1-367d-4ae0-878f-d09005424a35\" width=\"150\">\n</div>\n"
+                start_code: '## Recreate the drawings with the turtle!'
+        name: Draw it!
+        description: Draw this picture with the turtle
+        default_save_name: Draw it
