@@ -46,7 +46,7 @@ If { ifs+ Condition }
 Else { elses+ } 
 
 Condition { 
-    EqualityCheck { Text is+ (Expression | pressed+) } |
+    EqualityCheck { Text (is+ | Op<"=">) (Expression | pressed+) } |
     InListCheck { Text ins+  Text } |
     NotInListCheck { Text not_in+  Text }
 }
