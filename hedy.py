@@ -1090,6 +1090,8 @@ class AllCommands(Transformer):
             # lookup should be fixed instead, making a special case for now
             if production_rule_name == 'else':  # use of else also has an if
                 return ['if', 'else'] + leaves
+            if production_rule_name == 'forward' or production_rule_name == 'turn' or production_rule_name == 'is':  # don't share leaves (these are numbers or variables)
+                return [production_rule_name]
             return [production_rule_name] + leaves
         else:
             return leaves  # 'pop up' the children
