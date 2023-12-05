@@ -56,13 +56,13 @@ export function rename_class(id: string, class_name_prompt: string) {
 
 export function duplicate_class(id: string, second_teacher_prompt: string, prompt: string, defaultValue: string = '') {
   modal.confirm(second_teacher_prompt, function () {
-    callDuplicateClass(id, prompt, true, defaultValue);
+    apiDuplicateClass(id, prompt, true, defaultValue);
   }, function () {
-    callDuplicateClass(id, prompt, false, defaultValue);
+    apiDuplicateClass(id, prompt, false, defaultValue);
   });
 }
 
-function callDuplicateClass(id: string, prompt: string, second_teacher: boolean, defaultValue: string = '') {
+function apiDuplicateClass(id: string, prompt: string, second_teacher: boolean, defaultValue: string = '') {
     modal.prompt (prompt, defaultValue, function (class_name) {
     $.ajax({
       type: 'POST',
