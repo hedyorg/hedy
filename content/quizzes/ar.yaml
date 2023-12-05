@@ -3,52 +3,44 @@ levels:
         1:
             question_text: بماذا تسمى لغة البرمجة هذه؟
             mp_choice_options:
-            -   option: Hedy
+            -   option: هيدي
                 feedback: أحسنت!
-            -   option: Heddy
+            -   option: هيددي
                 feedback: حاول مرة اخرى!
-            -   option: Haydie
+            -   option: هايدي
                 feedback: حاول مرة اخرى!
-            -   option: Heidi
+            -   option: هييدي
                 feedback: حاول مرة اخرى!
             hint: سميت على اسم هيدي لامار.
-            correct_answer: A
+            correct_answer: أ
             question_score: '10'
         2:
-            question_text: أي الأوامر التالية يطبع النص على الشاشة؟
-            code: ___ Hello!
+            question_text: أي الخيارات التالية يجب ملؤها في الفراغ لجعل النص "مرحبا" يظهر؟
+            code: _ مرحبا!
             mp_choice_options:
             -   option: |-
-                    ```
-                    {echo}
-                    ```
+                    `{أجب}`
                 feedback: '`{echo}` يعيد تكرار إجابة سؤال.'
             -   option: |-
-                    ```
-                    {print}
-                     ```
+                    `{إطبع}`
                 feedback: إجابة صحيحة!
             -   option: |-
-                    ```
-                    اهلاً
-                    ```
-                feedback: مرحباً ليس أمراً.
+                    `أهلا`
+                feedback: أهلا ليست أمراً.
             -   option: |-
-                    ```
-                    {ask}
-                    ```
+                    `{إسأل}`
                 feedback: مع `{ask}`، يمكنك طرح سؤال.
-            hint: _؟_ مرحبًا يا عالم!
-            correct_answer: B
+            hint: _أهلا يا عالم!
+            correct_answer: ب
             question_score: '10'
         3:
-            question_text: كيف تسأل شخص ما هو لونه المفضل؟
+            question_text: كيف تسأل ما هو اللون المفضل لشخص ما؟
             mp_choice_options:
             -   option: |-
                     ```
                     {print} ما هو لونك المفضل؟
                     ```
-                feedback: '`{print}` تطبع الكلام، ولكن لا يمكن استخدامها للسؤال.'
+                feedback: '`{print}` تطبع الكلام، ولكن هي لا تطرح الأسئلة.'
             -   option: |-
                     ```
                     {ask} {print} ما هو لونك المفضل؟
@@ -76,8 +68,8 @@ levels:
             mp_choice_options:
             -   option: '`{print}` مفقودة في السطر الاول.'
                 feedback: إجابة صحيحة!
-            -   option: التهجئة خاطئة في السطر الاول.
-                feedback: لا، التهجئة الخاطئة للنص لا تسبب مشكلة إلا إذا كان الخطأ فالأمر البرمجي فقط.
+            -   option: الأمر على السطر الثاني تهجأته خاطئة.
+                feedback: الأمر تهجأته صحيحة.
             -   option: '`{echo}` ليس أمراً.'
                 feedback: '`{echo}` يستخدم كأمر بالفعل، هناك خطأ أخر.'
             -   option: لا شئ! إنه كود ممتاز!
@@ -89,7 +81,7 @@ levels:
             question_text: ما هو الأمر المفقود في السطر 2؟
             code: |-
                 {ask} ما الحيوان الأليف المفضل لديك؟
-                _؟_ إذًا حيوانك الأليف المفضل هو...
+                _ إذًا حيوانك الأليف المفضل هو...
             mp_choice_options:
             -   option: |-
                     ```
@@ -157,7 +149,7 @@ levels:
             mp_choice_options:
             -   option: يمكن إستخدامه ل`{ask}` سؤال.
                 feedback: هذا ما يفعله الأمر `{ask}`!
-            -   option: يمكن إستخدامه لأطبع الكلام.
+            -   option: يمكن إستخدامه بنفس طريقة`{print}`.
                 feedback: هذا ما يفعله الأمر `{print}`!
             -   option: يمكن إستخدامه لتكرار إجابة سؤال.
                 feedback: أحسنت!
@@ -185,24 +177,24 @@ levels:
             correct_answer: B
             question_score: '10'
         10:
-            question_text: Which output will be in your outputscreen after you've run this code?
+            question_text: ما هو المخرج الذي سيكون على شاشة الإخراج بعد قيامك بتشغيل هذا الرمز؟
             code: |-
                 {ask} Are you ready to go to level 2?
                 {echo}
                 {echo}
             mp_choice_options:
             -   option: Are you ready to go to level 2?
-                feedback: There are two echo commands
+                feedback: هنالك أمرين لـ`{echo}`
             -   option: |-
                     Yes!
                     Yes!
                 feedback: Great job!
             -   option: Yes!
-                feedback: There are two echo commands
+                feedback: هنالك أمرين لـ`{echo}`
             -   option: |-
                     Are you ready to go to level 2?
                     Yes!
-                feedback: There are two echo commands
+                feedback: هنالك أمرين لـ`{echo}`
             hint: Let's go!
             correct_answer: B
             question_score: '10'
@@ -210,7 +202,7 @@ levels:
         1:
             question_text: اختر الجملة الصحيحة
             mp_choice_options:
-            -   option: يمكنك استخدام الأمر `{print}` لإنشاء سؤال
+            -   option: يمكنك استخدام الأمر `{print}` لطرح سؤال.
                 feedback: هذا عمل الأمر `{ask}`
             -   option: يمكنك استخدام الأمر `{ask}` لإعادة ترديد إجابتك
                 feedback: هذا ليس صحيحًا
