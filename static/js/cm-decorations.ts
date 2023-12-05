@@ -281,7 +281,7 @@ function highlightVariables(view: EditorView) {
             enter: (node) => {
                 if (node.name === 'Assign' || node.name === 'Ask' || node.name === 'AssignList') {
                     const child = node.node.getChild('Text');
-                    if (child) {
+                    if (child && isVarName(view.state.doc.sliceString(child.from, child.to))) {
                         variablesNames.add(view.state.doc.sliceString(child.from, child.to))
                         positions.push({from: child.from, to: child.to})
                     }
@@ -313,7 +313,7 @@ function highlightVariables(view: EditorView) {
                         // Therefore, we need to get the variables names inside this text node
                         const level = view.state.facet(levelFacet)
                         if (level <= 3) {
-                            const varNames = getVarNames(text) || [];                        
+                            const varNames = getVarNames(text) || [];
                             // we keep track of the index of the last variable viewed
                             let startIndex = 0;
                             for (const name of varNames) {
@@ -341,6 +341,11 @@ function highlightVariables(view: EditorView) {
 }
 
 function getVarNames(name: string) {
-    const varRegex = /([\p{Lu}\p{Ll}\p{Lt}\p{Lm}\p{Lo}\p{Nl}_]+|([\p{Mn}\p{Mc}\p{Nd}\p{Pc}·]+)*)/gmu
+    const varRegex = /^[\p{Lu}\p{Ll}\p{Lt}\p{Lm}\p{Lo}\p{Nl}_]+([\p{Lu}\p{Ll}\p{Lt}\p{Lm}\p{Lo}\p{Nl}_]+|[\p{Mn}\p{Mc}\p{Nd}\p{Pc}·]+)*$/gmu
     return name.match(varRegex);
+}
+
+function isVarName(name: string) {
+    const varRegex = /^[\p{Lu}\p{Ll}\p{Lt}\p{Lm}\p{Lo}\p{Nl}_]+([\p{Lu}\p{Ll}\p{Lt}\p{Lm}\p{Lo}\p{Nl}_]+|[\p{Mn}\p{Mc}\p{Nd}\p{Pc}·]+)*$/gmu
+    return varRegex.test(name);
 }
