@@ -274,8 +274,8 @@ adventures:
                     {print} 动物们 {at} {random}
     and_or_command:
         name: '{and} & {or}'
-        default_save_name: and or
-        description: introducing and or
+        default_save_name: 或者
+        description: 介绍和或
         levels:
             13:
                 story_text: |-
@@ -296,8 +296,8 @@ adventures:
                         {print} '你就是真的海蒂!'
     ask_command:
         name: '{ask}'
-        default_save_name: ask_command
-        description: Introduction ask command
+        default_save_name: 要求命令
+        description: 询问命令
         levels:
             1:
                 story_text: |
@@ -309,8 +309,8 @@ adventures:
                     {ask}你叫什么名字?
                     ```
                 story_text_2: |
-                    ## The echo command
-                    如果想让计算机将结果重复一遍，可以使用 `{echo}` 命令。答案将在程序末尾输出，因此在本例中，结果将在 hello 之后输出。
+                    ## 这 echo 命令
+                    如果想让计算机将结果重复一遍，你可以使用 `{echo}` 命令。答案将在程序末尾输出，因此在本例中，结果将在 hello 之后输出。
                 example_code_2: |
                     ```
                     {print} 你好!
@@ -374,8 +374,8 @@ adventures:
                     name = {input}('What is your name?')
                     {print}('So your name is ', name)
     blackjack:
-        name: Blackjack
-        default_save_name: Blackjack
+        name: 黑杰克
+        default_save_name: 黑杰克
         description: 尽可能地接近21
         levels:
             17:
@@ -483,8 +483,8 @@ adventures:
                     现在你可以做数学了，你可以自己做一个计算器！
                 example_code: |
                     ```
-                    数一 {is} {ask} '填写第一个数字：'
-                    数二 {is} {ask} '填写第二个数字：'
+                    数一 是 {ask} '填写第一个数字：'
+                    数二 是 {ask} '填写第二个数字：'
                     正确答案 = 数一 * 数二
                     {print} 数一 ' 乘以 '数二 ' 是 ' 正确答案
                     ```
@@ -501,12 +501,12 @@ adventures:
                     ```
                 story_text_3: |
                     您还可以让计算机自己使用 {random} 求随机数的和。
-                example_code_3: |
+                example_code_3: |-
                     numbers = 1, 2, 3, 4, 5, 6, 7, 8, 9, 10
                     number_1 = _
                     number_2 = _
-                    correct_answer = number_1 * number_2
-                    given_answer = 'What is ' number_1 ' times ' number_2 '?'
+                    正确答案 = 数一 * 数二
+                    得出答案 ={ask} '什么是 ' 数一 ' 乘以 ' 数二 '?'
                     {if} _
                     {else} _
                 start_code: '{print} ''欢迎来到这个计算器!'''
@@ -565,11 +565,13 @@ adventures:
                 example_code: |
                     ```
                     数字 = 10
-                    {for} i {in} {range} 1 to 10
+                    {for} i {in} {range} 1 {to} 10
                         {print} i * 数字
                     ```
                 start_code: |
-                    # 将你的代码写在这里
+                    数字 = 10
+                    {for} i {in} {range} 1 {to} 10
+                        {print} i *数字
             12:
                 story_text: |
                     在本关，你可以编写一个可以计算小数的计算器。
@@ -591,13 +593,13 @@ adventures:
                 start_code: '# 在这里写你的代码'
             13:
                 story_text: |
-                    ### Exercise 1
-                    Let's make the practice program a bit harder. The player now has to answers two questions correctly. Fill out the blanks to complete the program.
+                    ### 练习1
+                    来让这个练习程序难一点吧 .操作者现在需要正确地回答两个问题.请填写空格以完成程序.
 
-                    ### Exercise 2 Extra
-                    Sometimes, calculations have multiple correct answers. For example, 10 can be divided by 5 and by 2. So the question 'What number divides 10?' can be answered by 2 and by 5.
-                    Ask for a calculation that has multiple correct answers, ask the player to answer it, and determine if it is correct using `{or}`.
-                    Empty the programming field and create your own solution.
+                    ### 额外的练习2
+                    有时候, 计算有多个正确答案.例如，10可以被5和2整除.那么问题'什么数能整除10?'可以用2和5来回答.
+                    要求一个有多个正确答案的计算,让操作者回答它, 并确定其是否使用正确 `{or}`.
+                    清空编程字段并且创造你自己的解决方案.
                 example_code: |
                     ```
                     answer1 = {ask} 'What is 10 times 7?'
@@ -1376,33 +1378,33 @@ adventures:
                     ```
                 start_code: |4
 
-                          define food_order
-                              toppings = ask 'pepperoni, tuna, veggie or cheese?'
-                              size = ask 'big, medium or small?'
-                              number_of_pizza = ask 'How many these pizzas would you like?'
+                                define food_order
+                                    toppings = ask 'pepperoni, tuna, veggie or cheese?'
+                                    size = ask 'big, medium or small?'
+                                    number_of_pizza = ask 'How many these pizzas would you like?'
 
-                              print 'YOU ORDERED'
-                              print number_of_pizzas ' size  ' topping ' pizza'
+                                    print 'YOU ORDERED'
+                                    print number_of_pizzas ' size  ' topping ' pizza'
 
-                          define drinks_order
-                              drink = ask 'water, coke, icetea, lemonade or coffee?'
-                              number_of_drinks = ask 'How many of these drinks would you like?'
+                                define drinks_order
+                                    drink = ask 'water, coke, icetea, lemonade or coffee?'
+                                    number_of_drinks = ask 'How many of these drinks would you like?'
 
-                              print 'YOU ORDERED'
-                              print number_of_drinks ' ' drink
+                                    print 'YOU ORDERED'
+                                    print number_of_drinks ' ' drink
 
-                          'Welcome to Hedy pizza'
-                          more_food = ask 'Would you like to order a pizza?'
-                          while more_food = 'yes'
-                              return food_order
-                              more_food = ask 'Would you like to order a pizza?'
-                          more_drinks = ask 'Would you like to order some drinks?'
-                          while more_drinks == 'yes'
-                              call drink_order
-                              more_drinks == ask 'Would you like to order more drinks?'
+                                'Welcome to Hedy pizza'
+                                more_food = ask 'Would you like to order a pizza?'
+                                while more_food = 'yes'
+                                    return food_order
+                                    more_food = ask 'Would you like to order a pizza?'
+                                more_drinks = ask 'Would you like to order some drinks?'
+                                while more_drinks == 'yes'
+                                    call drink_order
+                                    more_drinks == ask 'Would you like to order more drinks?'
 
 
-                          print 'Thanks for ordering!'
+                                print 'Thanks for ordering!'
             18:
                 story_text: |-
                     ### Exercise
@@ -1427,20 +1429,20 @@ adventures:
                     ```
                 start_code: |4
 
-                          animals = ['pig', 'dog', 'cow']
-                          sounds = ['oink', 'woof', 'moo']
-                          for i in range 1 to 3
-                              animal = animals[i]
-                              sound = sounds[i]
-                              print 'Old McDonald had a farm'
-                              print 'E I E I O!'
-                              print 'and on that farm he had a ' animal
-                              print 'E I E I O!'
-                              print 'with a ' sound sound ' here'
-                              print 'and a ' sound sound ' there'
-                              print 'here a ' sound
-                              print 'there a ' sound
-                              print 'everywhere a ' sound sound
+                                animals = ['pig', 'dog', 'cow']
+                                sounds = ['oink', 'woof', 'moo']
+                                for i in range 1 to 3
+                                    animal = animals[i]
+                                    sound = sounds[i]
+                                    print 'Old McDonald had a farm'
+                                    print 'E I E I O!'
+                                    print 'and on that farm he had a ' animal
+                                    print 'E I E I O!'
+                                    print 'with a ' sound sound ' here'
+                                    print 'and a ' sound sound ' there'
+                                    print 'here a ' sound
+                                    print 'there a ' sound
+                                    print 'everywhere a ' sound sound
     default:
         name: 介绍
         default_save_name: 介绍
