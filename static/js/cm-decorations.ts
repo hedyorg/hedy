@@ -269,6 +269,7 @@ export const variableHighlighter = ViewPlugin.fromClass(class {
 
 function highlightVariables(view: EditorView) {
     let variableDeco = new RangeSetBuilder<Decoration>()
+    let positions: {from: number, to: number}[] = [];
     let variablesNames = new Set()
        // First we iterate through the tree to find all var assignments
        // To highlight them, but also to find the names of the variables
@@ -278,17 +279,17 @@ function highlightVariables(view: EditorView) {
             from: from,
             to: to,
             enter: (node) => {
-                if (node.name === 'Assign' || node.name === 'Ask') {
+                if (node.name === 'Assign' || node.name === 'Ask' || node.name === 'AssignList') {
                     const child = node.node.getChild('Text');
                     if (child) {
                         variablesNames.add(view.state.doc.sliceString(child.from, child.to))
-                        variableDeco.add(child.from, child.to, highlightVariableMarker)
+                        positions.push({from: child.from, to: child.to})
                     }
                 }
             }
         })
     }
-    let commands = ["Assign" , "Print" , "Turtle" , "Sleep"]
+    let commands = ["Assign" , "Print" , "Forward", "Turn", "Color", "Sleep", "ListAccess", "Add", "Remove"]
     // in levels 2 and 3 variables are not substitued inside ask
     // not sure if that's intended behaviour or not
     if (view.state.facet(levelFacet) > 3) commands.push("Ask")
@@ -308,7 +309,7 @@ function highlightVariables(view: EditorView) {
                         const text = view.state.doc.sliceString(child.from, child.to);
                         // On level 2, since there aren't distinctions between strings and variable names
                         // It's possible to have several variables in the same text nodes
-                        // separetaed by other characters like: name!!!your_name
+                        // separated by other characters like: name!!!your_name
                         // Therefore, we need to get the variables names inside this text node
                         const level = view.state.facet(levelFacet)
                         if (level <= 3) {
@@ -318,19 +319,24 @@ function highlightVariables(view: EditorView) {
                             for (const name of varNames) {
                                 if (variablesNames.has(name)) {
                                     const index = text.indexOf(name, startIndex)
-                                    variableDeco.add(child.from + index, child.from + index + name.length, highlightVariableMarker)
+                                    positions.push({from: child.from + index, to: child.from + index + name.length})
                                     startIndex = index + name.length
                                 }
                             }
-                        } else if (variablesNames.has(text)) {
-                            variableDeco.add(child.from, child.to, highlightVariableMarker)                            
+                        } else if (variablesNames.has(text)) {                                 
+                            positions.push({from: child.from, to: child.to})                   
                         }
                     }
                 }
             }
         })
     }
-
+    // I don't think we're going to have a huge document, so this won't overflow
+    positions.sort((a, b) => a.from - b.from)
+    // If the decorations aren't sorted by starting position, CodeMirror complains, hence the need to do it like this
+    positions.forEach(pos => {
+        variableDeco.add(pos.from, pos.to, highlightVariableMarker)
+    })
     return variableDeco.finish()
 }
 
