@@ -152,8 +152,10 @@ PYTHON_KEYWORDS = [
     'is',
     'try',
     'int']
+
+LIBRARIES = ['time']
 # Python keywords and function names need hashing when used as var names
-reserved_words = set(PYTHON_BUILTIN_FUNCTIONS + PYTHON_KEYWORDS)
+reserved_words = set(PYTHON_BUILTIN_FUNCTIONS + PYTHON_KEYWORDS + LIBRARIES)
 
 # Let's retrieve all keywords dynamically from the cached KEYWORDS dictionary
 indent_keywords = {}
@@ -182,6 +184,22 @@ def _translate_index_error(code, list_name):
         except IndexError:
           raise Exception({repr(exception_text)})
         """)
+
+
+def translate_value_error(command, value, suggestion_type):
+    exception_text = gettext('catch_value_exception')
+    # Right now we only have two types of suggestion
+    # In the future we might change this if the number increases
+    if suggestion_type == 'number':
+        suggestion_text = gettext('suggestion_number')
+    elif suggestion_type == 'color':
+        suggestion_text = gettext('suggestion_color')
+
+    exception_text = exception_text.replace('{command}', style_command(command))
+    exception_text = exception_text.replace('{value}', style_command(value))
+    exception_text = exception_text.replace('{suggestion}', suggestion_text)
+
+    return repr(exception_text)
 
 
 PREPROCESS_RULES = {
@@ -328,7 +346,9 @@ commands_and_types_per_level = {
     Command.forward: {1: [HedyType.integer, HedyType.input],
                       12: [HedyType.integer, HedyType.input, HedyType.float]
                       },
-    Command.sleep: {1: [HedyType.integer, HedyType.input]},
+    Command.sleep:    {1: [HedyType.integer, HedyType.input],
+                       12: [HedyType.integer, HedyType.input, HedyType.float]
+                       },
     Command.list_access: {1: [HedyType.list]},
     Command.in_list: {1: [HedyType.list]},
     Command.add_to_list: {1: [HedyType.list]},
@@ -1130,9 +1150,11 @@ class IsValid(Filter):
         return False, InvalidInfo("print without quotes", arguments=[
                                   text], line=meta.line, column=meta.column), meta
 
-    def error_invalid(self, meta, args):
-        # TODO: this will not work for misspelling 'at', needs to be improved!
+    def error_list_access(self, meta, args):
+        error = InvalidInfo('misspelled "at" command', arguments=[str(args[1][1])], line=meta.line)
+        return False, error, meta
 
+    def error_invalid(self, meta, args):
         error = InvalidInfo('invalid command', command=args[0][1], arguments=[
                             [a[1] for a in args[1:]]], line=meta.line, column=meta.column)
         return False, error, meta
@@ -1349,12 +1371,19 @@ class ConvertToPython(Transformer):
             # all good? return for further processing
             return args
         else:
-            # TODO: check whether this is really never raised??
             # return first name with issue
-            first_unquoted_var = unquoted_args[0]
-            raise exceptions.UndefinedVarException(name=first_unquoted_var, line_number=var_access_linenumber)
+            for index, a in enumerate(unquoted_args):
+                current_arg = unquoted_in_lookup[index]
+                if current_arg is None:
+                    first_unquoted_var = a
+                    raise exceptions.UndefinedVarException(name=first_unquoted_var, line_number=var_access_linenumber)
 
     # static methods
+
+    @staticmethod
+    def check_if_error_skipped(tree):
+        return hasattr(IsValid, tree.data)
+
     @staticmethod
     def is_quoted(s):
         opening_quotes = ['‘', "'", '"', "“", "«"]
@@ -1446,7 +1475,7 @@ class ConvertToPython_1(ConvertToPython):
 
     def forward(self, meta, args):
         if len(args) == 0:
-            return sleep_after(f't.forward(50){self.add_debug_breakpoint()}', False, self.is_debug)
+            return add_sleep_to_command(f't.forward(50){self.add_debug_breakpoint()}', False, self.is_debug, location="after")
         return self.make_forward(int(args[0]))
 
     def color(self, meta, args):
@@ -1489,15 +1518,16 @@ class ConvertToPython_1(ConvertToPython):
         if isinstance(parameter, str):
             exception = self.make_catch_exception([parameter])
         variable = self.get_fresh_var('__trtl')
+        exception_text = translate_value_error(command, variable, 'number')
         transpiled = exception + textwrap.dedent(f"""\
             {variable} = {parameter}
             try:
               {variable} = {type}({variable})
             except ValueError:
-              raise Exception(f'While running your program the command {style_command(command)} received the value {style_command('{' + variable + '}')} which is not allowed. Try changing the value to a number.')
+              raise Exception({exception_text})
             t.{command_text}(min(600, {variable}) if {variable} > 0 else max(-600, {variable})){self.add_debug_breakpoint()}""")
         if add_sleep and not self.is_debug:
-            return sleep_after(transpiled, False, self.is_debug)
+            return add_sleep_to_command(transpiled, False, self.is_debug, location="after")
         return transpiled
 
     def make_turtle_color_command(self, parameter, command, command_text, language):
@@ -1508,12 +1538,12 @@ class ConvertToPython_1(ConvertToPython):
         # coming from a random list or ask
 
         color_dict = {hedy_translation.translate_keyword_from_en(x, language): x for x in english_colors}
-
+        exception_text = translate_value_error(command, parameter, 'color')
         return textwrap.dedent(f"""\
             {variable} = f'{parameter}'
             color_dict = {color_dict}
             if {variable} not in {both_colors}:
-              raise Exception(f'While running your program the command {style_command(command)} received the value {style_command('{' + variable + '}')} which is not allowed. Try using another color.')
+              raise Exception({exception_text})
             else:
               if not {variable} in {english_colors}:
                 {variable} = color_dict[{variable}]
@@ -1547,6 +1577,7 @@ class ConvertToPython_1(ConvertToPython):
 @source_map_transformer(source_map)
 class ConvertToPython_2(ConvertToPython_1):
 
+    # why doesn't this live in isvalid?
     def error_ask_dep_2(self, meta, args):
         # ask is no longer usable this way, raise!
         # ask_needs_var is an entry in lang.yaml in texts where we can add extra info on this error
@@ -1616,7 +1647,7 @@ class ConvertToPython_2(ConvertToPython_1):
 
     def forward(self, meta, args):
         if len(args) == 0:
-            return sleep_after(f't.forward(50){self.add_debug_breakpoint()}', False, self.is_debug)
+            return add_sleep_to_command(f't.forward(50){self.add_debug_breakpoint()}', False, self.is_debug, location="after")
 
         if ConvertToPython.is_int(args[0]):
             parameter = int(args[0])
@@ -1649,10 +1680,11 @@ class ConvertToPython_2(ConvertToPython_1):
             value = f'"{args[0]}"' if self.is_int(args[0]) else args[0]
             exceptions = self.make_catch_exception(args)
             try_prefix = "try:\n" + textwrap.indent(exceptions, "  ")
+            exception_text = translate_value_error(Command.sleep, value, 'number')
             code = try_prefix + textwrap.dedent(f"""\
                   time.sleep(int({value})){self.add_debug_breakpoint()}
                 except ValueError:
-                  raise Exception(f'While running your program the command {style_command(Command.sleep)} received the value {style_command('{' + value + '}')} which is not allowed. Try changing the value to a number.')""")
+                  raise Exception({exception_text})""")
             return code
 
 
@@ -1748,8 +1780,14 @@ class ConvertToPython_4(ConvertToPython_3):
     def error_print_nq(self, meta, args):
         return ConvertToPython_2.print(self, meta, args)
 
-    def clear(self, meta, args):  # todo not sure about it being here
-        return f"""extensions.clear(){self.add_debug_breakpoint()}
+    def clear(self, meta, args):
+        command = "extensions.clear()"
+
+        # add two sleeps, one is a bit brief
+        command = add_sleep_to_command(command, False, self.is_debug, "before")
+        command = add_sleep_to_command(command, False, self.is_debug, "before")
+
+        return f"""{command}{self.add_debug_breakpoint()}
 try:
     # If turtle is being used, reset canvas
     t.hideturtle()
@@ -1856,6 +1894,38 @@ else:
 @source_map_transformer(source_map)
 class ConvertToPython_6(ConvertToPython_5):
 
+    def convert_tree_to_number(self, a):
+        # takes a calculation tree coming from the process_calculation() method, and turns it into numbers
+        # we do that late in the tree to deal with different numeral systems
+
+        if self.numerals_language == "Latin":
+            return "{" + a.children[0] + "}"
+        else:
+            converted = f'convert_numerals("{self.numerals_language}",{a.children[0]})'
+            return "{" + converted + "}"
+
+    def sleep(self, meta, args):
+        if not args:
+            return "time.sleep(1)"
+        else:
+            if type(args[0]) is Tree:
+                if self.check_if_error_skipped(args[0]):
+                    raise hedy.exceptions.InvalidErrorSkippedException
+                else:
+                    args[0] = args[0].children[0]
+                    value = f'{args[0]}'
+            else:
+                value = f'"{args[0]}"' if self.is_int(args[0]) else args[0]
+
+            exceptions = self.make_catch_exception(args)
+            try_prefix = "try:\n" + textwrap.indent(exceptions, "  ")
+            exception_text = translate_value_error(Command.sleep, value, 'number')
+            code = try_prefix + textwrap.dedent(f"""\
+                  time.sleep(int({value}))
+                except ValueError:
+                  raise Exception({exception_text})""")
+            return code
+
     def print_ask_args(self, meta, args):
         # we only check non-Tree (= non calculation) arguments
         self.check_var_usage(args, meta.line)
@@ -1864,11 +1934,7 @@ class ConvertToPython_6(ConvertToPython_5):
         args_new = []
         for a in args:
             if isinstance(a, Tree):
-                if self.numerals_language == "Latin":
-                    args_new.append("{" + a.children[0] + "}")
-                else:
-                    converted = f'convert_numerals("{self.numerals_language}",{a.children[0]})'
-                    args_new.append("{" + converted + "}")
+                args_new.append(self.convert_tree_to_number(a))
             else:
                 args_new.append(self.process_variable_for_fstring(a))
 
@@ -1942,7 +2008,7 @@ class ConvertToPython_6(ConvertToPython_5):
 
     def forward(self, meta, args):
         if len(args) == 0:
-            return sleep_after('t.forward(50)' + self.add_debug_breakpoint(), False, self.is_debug)
+            return add_sleep_to_command('t.forward(50)' + self.add_debug_breakpoint(), False, self.is_debug, location="after")
         arg = args[0]
         if self.is_variable(arg):
             return self.make_forward(escape_var(arg))
@@ -1951,7 +2017,7 @@ class ConvertToPython_6(ConvertToPython_5):
         return self.make_forward(int(args[0]))
 
 
-def sleep_after(commands, indent=True, is_debug=False):
+def add_sleep_to_command(commands, indent=True, is_debug=False, location="after"):
     if is_debug:
         return commands
 
@@ -1960,7 +2026,10 @@ def sleep_after(commands, indent=True, is_debug=False):
         return commands
 
     sleep_command = "time.sleep(0.1)" if indent is False else "  time.sleep(0.1)"
-    return commands + "\n" + sleep_command
+    if location == "after":
+        return commands + "\n" + sleep_command
+    else:  # location is before
+        return sleep_command + "\n" + commands
 
 
 @v_args(meta=True)
@@ -1972,7 +2041,7 @@ class ConvertToPython_7(ConvertToPython_6):
         times = self.process_variable(args[0], meta.line)
         command = args[1]
         # in level 7, repeats can only have 1 line as their arguments
-        command = sleep_after(command, False, self.is_debug)
+        command = add_sleep_to_command(command, False, self.is_debug, location="after")
         return f"""for {var_name} in range(int({str(times)})):{self.add_debug_breakpoint()}
 {ConvertToPython.indent(command)}"""
 
@@ -1996,7 +2065,7 @@ class ConvertToPython_8_9(ConvertToPython_7):
 
         all_lines = [ConvertToPython.indent(x) for x in args[1:]]
         body = "\n".join(all_lines)
-        body = sleep_after(body, indent=True, is_debug=self.is_debug)
+        body = add_sleep_to_command(body, indent=True, is_debug=self.is_debug, location="after")
 
         return f"for {var_name} in range(int({times})):{self.add_debug_breakpoint()}\n{body}"
 
@@ -2084,7 +2153,7 @@ class ConvertToPython_10(ConvertToPython_8_9):
 
         body = "\n".join([ConvertToPython.indent(x) for x in args[2:]])
 
-        body = sleep_after(body, True, self.is_debug)
+        body = add_sleep_to_command(body, True, self.is_debug, location="after")
         return f"for {times} in {args[1]}:{ self.add_debug_breakpoint() }\n{body}"
 
 
@@ -2096,7 +2165,7 @@ class ConvertToPython_11(ConvertToPython_10):
         args = [a for a in args if a != ""]  # filter out in|dedent tokens
         iterator = escape_var(args[0])
         body = "\n".join([ConvertToPython.indent(x) for x in args[3:]])
-        body = sleep_after(body, True, self.is_debug)
+        body = add_sleep_to_command(body, True, self.is_debug, location="after")
         stepvar_name = self.get_fresh_var('step')
         begin = self.process_token_or_tree(args[1])
         end = self.process_token_or_tree(args[2])
@@ -2239,7 +2308,7 @@ class ConvertToPython_12(ConvertToPython_11):
 
     def forward(self, meta, args):
         if len(args) == 0:
-            return sleep_after('t.forward(50)' + self.add_debug_breakpoint(), False, self.is_debug)
+            return add_sleep_to_command('t.forward(50)' + self.add_debug_breakpoint(), False, self.is_debug, location="after")
         arg = args[0]
         if self.is_variable(arg):
             return self.make_forward(escape_var(arg))
@@ -2311,7 +2380,7 @@ class ConvertToPython_15(ConvertToPython_14):
         args = [a for a in args if a != ""]  # filter out in|dedent tokens
         all_lines = [ConvertToPython.indent(x) for x in args[1:]]
         body = "\n".join(all_lines)
-        body = sleep_after(body, True, self.is_debug)
+        body = add_sleep_to_command(body, True, self.is_debug, location="after")
         exceptions = self.make_catch_exception([args[0]])
         return exceptions + "while " + args[0] + ":" + self.add_debug_breakpoint() + "\n" + body
 
@@ -2792,7 +2861,7 @@ def get_parser(level, lang="en", keep_all_tokens=False, skip_faulty=False):
     return lark
 
 
-ParseResult = namedtuple('ParseResult', ['code', 'source_map', 'has_turtle', 'has_pygame', 'commands'])
+ParseResult = namedtuple('ParseResult', ['code', 'source_map', 'has_turtle', 'has_pygame', 'has_clear', 'commands'])
 
 
 def transpile_inner_with_skipping_faulty(input_string, level, lang="en"):
@@ -3151,14 +3220,14 @@ def check_program_size_is_valid(input_string):
         raise exceptions.InputTooBigException(lines_of_code=number_of_lines, max_lines=MAX_LINES)
 
 
-def process_input_string(input_string, level, lang, escape_backslashes=True, preprocess_ifs_enabled=True):
+def process_input_string(input_string, level, lang, preprocess_ifs_enabled=True):
     result = input_string.replace('\r\n', '\n')
 
     location = location_of_first_blank(result)
     if location > 0:
         raise exceptions.CodePlaceholdersPresentException(line_number=location)
 
-    if escape_backslashes and level >= 4:
+    if level >= 4:
         result = result.replace("\\", "\\\\")
 
     # In levels 5 to 7 we do not allow if without else, we add an empty print to make it possible in the parser
@@ -3218,7 +3287,6 @@ def is_program_valid(program_root, input_string, level, lang):
         line = invalid_info.line
         column = invalid_info.column
         if invalid_info.error_type == ' ':
-
             # the error here is a space at the beginning of a line, we can fix that!
             fixed_code = program_repair.remove_leading_spaces(input_string)
             if fixed_code != input_string:  # only if we have made a successful fix
@@ -3246,6 +3314,8 @@ def is_program_valid(program_root, input_string, level, lang):
             unquotedtext = invalid_info.arguments[0]
             raise exceptions.UnquotedTextException(
                 level=level, unquotedtext=unquotedtext, line_number=invalid_info.line)
+        elif invalid_info.error_type == 'misspelled "at" command':
+            raise exceptions.MisspelledAtCommand(command='at', arg1=invalid_info.arguments[0], line_number=line)
         elif invalid_info.error_type == 'unsupported number':
             raise exceptions.UnsupportedFloatException(value=''.join(invalid_info.arguments))
         elif invalid_info.error_type == 'lonely text':
@@ -3361,13 +3431,14 @@ def transpile_inner(input_string, level, lang="en", populate_source_map=False, i
 
         commands = AllCommands(level).transform(program_root)
 
+        has_clear = "clear" in commands
         has_turtle = "forward" in commands or "turn" in commands or "color" in commands
         has_pygame = "ifpressed" in commands or "ifpressed_else" in commands or "assign_button" in commands
 
         if populate_source_map:
             source_map.set_python_output(python)
 
-        return ParseResult(python, source_map, has_turtle, has_pygame, commands)
+        return ParseResult(python, source_map, has_turtle, has_pygame, has_clear, commands)
     except VisitError as E:
         if isinstance(E, VisitError):
             # Exceptions raised inside visitors are wrapped inside VisitError. Unwrap it if it is a

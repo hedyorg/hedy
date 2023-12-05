@@ -240,7 +240,10 @@ adventures:
             15:
                 story_text: |
                     Using the `{while}` loop can make your stories more interesting. For example, you can use `{while} game == 'on'` so you can play until the game is over.
-                    Or you can use `{while} sword == 'lost'` so the player can't continu the game until they have found something.
+                    Or you can use `{while} sword == 'lost'` so the player can't continue the game until they have found something.
+
+                    ### Exercise
+                    The example code shows you how to use the `{while}` loop in a story. Now **think of your own scenario** in which the player has to find something before they can continue.
                 example_code: |
                     ```
                     keys = 'lost'
@@ -553,9 +556,17 @@ adventures:
                     {else} {print} 'Wrong! It was ' _
                     ```
                 story_text_3: |
-                    **Extra** You can also let the computer do random sums on its own using `{random}`.
-
-                    This is how you choose a number of tables to practice, and from that you always get a different sum:
+                    **Extra** You can also let the computer do random products on its own using `{random}`.
+                example_code_3: |-
+                    ```
+                    numbers = 1, 2, 3, 4, 5, 6, 7, 8, 9, 10
+                    number_1 = _
+                    number_2 = _
+                    correct_answer = number_1 * number_2
+                    given_answer = {ask} 'What is ' number_1 ' times ' number_2 '?'
+                    {if} _
+                    {else} _
+                    ```
                 start_code: |
                     number_1 = {ask} 'Fill in the first number:'
                     number_2 = {ask} 'Fill in the second number:'
@@ -663,7 +674,7 @@ adventures:
                 story_text: |
                     In this adventure you will build a calculator that calculates your mean grade for you. If you get your calculator to work, you can move on to the next adventure, which allows you to add two extra features.
 
-                    ## Exercise 1
+                    ### Exercise 1
                     Fill in the blanks to get the calculator to work.
                     * Start with the fourth line, add a question to figure out what grade the student got.
                     * In the fifth line you'll want to calculate the total of all grades, so the total = total + grade.
@@ -697,20 +708,26 @@ adventures:
                 story_text: |
                     You can add the `{while}` loop to the calculator game you've learned to make in a previous level.
                     This makes sure the player can't continue to the next question if they answer incorrectly.
+
+                    ### Exercise
+                    Add the `{while}` loop in the function, ask the player what number_1 times number_2 is and print their answer.
+                    Then `{call}` the function.
                 example_code: |
                     ```
-                    score = 0
-                    {for} i {in} {range} 0 {to} 9
+                    {define} new_question
                         numbers = 1, 2, 3, 4, 5, 6, 7, 8, 9, 10
-                        number1 = numbers {at} {random}
-                        number2 = numbers {at} {random}
-                        correct = number1 * number2
+                        number_1 = numbers {at} {random}
+                        number_2 = numbers {at} {random}
+                        correct = number_1 * number_2
                         answer = 0
-                        {while} answer != correct
-                            {print} 'How much is ' number1 ' times ' number2 '?'
-                            answer = {ask} 'Fill in your answer:'
-                            {print} 'Your answer is ' answer
-                        {print} 'Good job!'
+                        _
+                        _
+                        _
+                        {print} 'Well done!'
+
+                    {print} 'Give 10 correct answers to win!'
+                    {for} i {in} {range} 1 {to} 10
+                        _
                     {print} 'You win!'
                     ```
                 start_code: '# place your code here'
@@ -721,7 +738,7 @@ adventures:
         levels:
             14:
                 story_text: |
-                    ## Exercise 2
+                    ### Exercise 2
                     **This is the second part of this adventure.** The adventure starts in the previous tab.
                     Of course, you don't always want to calculate the mean of 4 tests. You might want to calculate the mean of 10 tests or only 2...
                     We can fix this problem by adding the argument and variable 'amount_of_tests'.
@@ -731,7 +748,7 @@ adventures:
 
                     Try out your new program. Does it work?
 
-                    ## Exercise 3
+                    ### Exercise 3
                     Did you want to make your program even better? Great! In the previous program you could only calculate the mean grade of 1 subject, but it would be better if you could calculate the mean grade for all subjects you want!
                     We won't tell you how to do it, but we will give you one tip: Start your code in line 1 with: define calculate_mean_grade with subject.
                 example_code: |
@@ -925,40 +942,40 @@ adventures:
                     **Warning! This code needs to be debugged!**
                     ```
                     {print} 'Vending machine'
-                        chosen_product = {ask} 'Please select a product'
+                    chosen_product = {ask} 'Please select a product'
                     1_dollar_products = coke orange juice water
                     2_dollar_products = chocolate, cookie, museli bar
-                    3_dollar_prodcuts = potato chips, beef jerky, banana bread
-                    {if} chosen {in} 1_dollar_products
+                    3dollar_prodcuts = potato chips, beef jerky, banana bread
+                    {if} chosen {is} {in} 1_dollar_products
                     price = 1
                     {if} chosen_product {is} 2_dollar_products
-                        price = 2
-                        {if} chosen_product {in} 3_dollar_products
-                            price = 3
+                    price = 2
+                    {else} chosen_product {in} 3_dollar_products
+                    price = 3
                     amount_of_products = '{ask} How many of ' chosen_product would you like to have?'
-                    total = price + amount_of_products
+                    total = price + amount_of_product
                     {print} 'That will be $' price 'please'
                     ```
                 start_code: |
                     {print} 'Vending machine'
-                        chosen_product = {ask} 'Please select a product'
+                    chosen_product = {ask} 'Please select a product'
                     1_dollar_products = coke orange juice water
                     2_dollar_products = chocolate, cookie, museli bar
-                    3_dollar_prodcuts = potato chips, beef jerky, banana bread
-                    {if} chosen {in} 1_dollar_products
+                    3dollar_prodcuts = potato chips, beef jerky, banana bread
+                    {if} chosen {is} {in} 1_dollar_products
                     price = 1
                     {if} chosen_product {is} 2_dollar_products
-                        price = 2
-                        {if} chosen_product {in} 3_dollar_products
-                            price = 3
+                    price = 2
+                    {else} chosen_product {in} 3_dollar_products
+                    price = 3
                     amount_of_products = '{ask} How many of ' chosen_product would you like to have?'
-                    total = price + amount_of_products
+                    total = price + amount_of_product
                     {print} 'That will be $' price 'please'
             7:
                 story_text: |-
                     ### Exercise
                     Surprise! This program looks more like an output than a code. And yet, we don't want you to just add `{print}` commands in front of each line.
-                    Fix this program to turn it into the nursery rhyme 'Brother John (Frère Jaques)' by using the {repeat} command of course!
+                    Fix this program to turn it into the nursery rhyme 'Brother John (Frère Jacques)' by using the {repeat} command of course!
                 example_code: |
                     **Warning! This code needs to be debugged!**
                     ```
@@ -1061,7 +1078,7 @@ adventures:
                     names = Muad Hasan Samira Noura
                     activities = fly a kite, go swimming, go hiking, catch tan in the sun
                     {for} name {is} names
-                    {print} At the beach name loves to activity at random
+                    {print} At the beach name loves to activity {at} {random}
                     ```
                 start_code: |
                     names = Muad Hasan Samira Noura
@@ -1423,33 +1440,33 @@ adventures:
                     ```
                 start_code: |4
 
-                      define food_order
-                          toppings = ask 'pepperoni, tuna, veggie or cheese?'
-                          size = ask 'big, medium or small?'
-                          number_of_pizza = ask 'How many these pizzas would you like?'
+                          define food_order
+                              toppings = ask 'pepperoni, tuna, veggie or cheese?'
+                              size = ask 'big, medium or small?'
+                              number_of_pizza = ask 'How many these pizzas would you like?'
 
-                          print 'YOU ORDERED'
-                          print number_of_pizzas ' size  ' topping ' pizza'
+                              print 'YOU ORDERED'
+                              print number_of_pizzas ' size  ' topping ' pizza'
 
-                      define drinks_order
-                          drink = ask 'water, coke, icetea, lemonade or coffee?'
-                          number_of_drinks = ask 'How many of these drinks would you like?'
+                          define drinks_order
+                              drink = ask 'water, coke, icetea, lemonade or coffee?'
+                              number_of_drinks = ask 'How many of these drinks would you like?'
 
-                          print 'YOU ORDERED'
-                          print number_of_drinks ' ' drink
+                              print 'YOU ORDERED'
+                              print number_of_drinks ' ' drink
 
-                      'Welcome to Hedy pizza'
-                      more_food = ask 'Would you like to order a pizza?'
-                      while more_food = 'yes'
-                          return food_order
+                          'Welcome to Hedy pizza'
                           more_food = ask 'Would you like to order a pizza?'
-                      more_drinks = ask 'Would you like to order some drinks?'
-                      while more_drinks == 'yes'
-                          call drink_order
-                          more_drinks == ask 'Would you like to order more drinks?'
+                          while more_food = 'yes'
+                              return food_order
+                              more_food = ask 'Would you like to order a pizza?'
+                          more_drinks = ask 'Would you like to order some drinks?'
+                          while more_drinks == 'yes'
+                              call drink_order
+                              more_drinks == ask 'Would you like to order more drinks?'
 
 
-                      print 'Thanks for ordering!'
+                          print 'Thanks for ordering!'
             18:
                 story_text: |-
                     ### Exercise
@@ -1474,20 +1491,20 @@ adventures:
                     ```
                 start_code: |4
 
-                      animals = ['pig', 'dog', 'cow']
-                      sounds = ['oink', 'woof', 'moo']
-                      for i in range 1 to 3
-                          animal = animals[i]
-                          sound = sounds[i]
-                          print 'Old McDonald had a farm'
-                          print 'E I E I O!'
-                          print 'and on that farm he had a ' animal
-                          print 'E I E I O!'
-                          print 'with a ' sound sound ' here'
-                          print 'and a ' sound sound ' there'
-                          print 'here a ' sound
-                          print 'there a ' sound
-                          print 'everywhere a ' sound sound
+                          animals = ['pig', 'dog', 'cow']
+                          sounds = ['oink', 'woof', 'moo']
+                          for i in range 1 to 3
+                              animal = animals[i]
+                              sound = sounds[i]
+                              print 'Old McDonald had a farm'
+                              print 'E I E I O!'
+                              print 'and on that farm he had a ' animal
+                              print 'E I E I O!'
+                              print 'with a ' sound sound ' here'
+                              print 'and a ' sound sound ' there'
+                              print 'here a ' sound
+                              print 'there a ' sound
+                              print 'everywhere a ' sound sound
     default:
         name: Introduction
         default_save_name: intro
@@ -1861,17 +1878,26 @@ adventures:
                 start_code: '# place your code here'
             15:
                 story_text: |
-                    In this game you have to throw 6 in as little tries as possible.
+                    ### Exercise
+                    In this level you can create a little game in which you'll have to throw 6 as fast as possible.
+                    We have started the code, it's up to you to get the game to work!
+
+                    Firstly, add a `{while}` loop that checks if 6 has been thrown or not.
+                    As long as you haven't thrown 6 already, throw the dice on a random number.
+                    Print what the player has thrown.
+                    Add a try to the amount of tries
+                    Wait a second before you throw again, or - in case you've thrown a 6 - before the game ends.
                 example_code: |
                     ```
                     options = 1, 2, 3, 4, 5, 6
                     {print} 'Throw 6 as fast as you can!'
                     thrown = 0
                     tries = 0
-                    {while} thrown != 6
-                        thrown = options {at} {random}
-                        {print} 'You threw ' thrown
-                        tries = tries + 1
+                    _
+                    _
+                    _
+                    _
+                    _
                     {print} 'Yes! You have thrown 6 in ' tries ' tries.'
                     ```
                 start_code: '# place your code here'
@@ -2345,7 +2371,7 @@ adventures:
 
                     For example, in this code the function calculate_new_price will calculate the new price of any item. It will give you the new price as a return value.
 
-                    ## Exercise
+                    ### Exercise
                     Finish this code. We have already made the variable new_price for you, you only need to set it.
                     You should finish the line of code by calling the function that calculates the new price.
                 example_code: |
@@ -2594,7 +2620,9 @@ adventures:
                 start_code: '{print} ''Escape from the haunted house!'''
             14:
                 story_text: |
+                    ### Exercise
                     In this level you can use the `<` and `>` symbol to introduce lives to your game.
+                    Make sure the player loses a life when they come across the wrong monster and that the game stops if you have no lives left.
                 example_code: |
                     ```
                     {print} 'Escape from the haunted house'
@@ -2602,7 +2630,7 @@ adventures:
                     doors = 1, 2, 3
                     monsters = 'the wicked witch', 'a zombie', 'a sleeping 3 headed dog'
                     {for} i {in} {range} 1 {to} 10
-                        {if} lives > 0
+                        {if} lives _
                             good_door = doors {at} {random}
                             monster = monsters {at} {random}
                             chosen_door = {ask} 'Which door do you choose?'
@@ -2614,16 +2642,17 @@ adventures:
                                     {print} 'Pffieuw.... Its asleep'
                                 {else}
                                     {print} 'You lose one life'
-                                    lives = lives -1
+                                    lives = _
                         {else}
                             {print} 'GAME OVER'
                     ```
                 start_code: '# place your code here'
             16:
                 story_text: |
+                    ### Exercise
                     This haunted house game uses the connection between the lists you can use in this level.
                     For example: all the properties that belong to the zombie are first in all the lists, witch second and vampire third.
-                    Check out the code!
+                    Check out the code and fill in  `weapons[i]`, `monsters[i]` , `bad_fate[i]`, `good_fate[i]`, `hint[i]` on the correct blanks to get the code to work!
                 example_code: |
                     ```
                     numbers = [1, 2, 3]
@@ -2635,20 +2664,20 @@ adventures:
                     weapons = ['ham', 'lighter', 'garlic']
                     {print} 'You are standing in front of an old mansion'
                     {print} 'Something is not right here'
-                    {print} 'You hear ' hint[i]
+                    {print} 'You hear ' _
                     {print} 'You are going to explore it'
                     {print} 'You enter the kitchen and see a lighter, a raw ham and a garlic.'
                     your_weapon = {ask} 'What do you bring with you?'
                     {print} 'With your ' your_weapon ' you enter the living room'
-                    {print} 'There you find a ' monsters[i]
-                    needed_weapon = weapons[i]
+                    {print} 'There you find a ' _
+                    needed_weapon = _
                     {if} your_weapon == needed_weapon
                         {print} 'You use your ' your_weapon
-                        {print} good_fate[i]
+                        {print} _
                         {print} 'YOU WIN!'
                     {else}
                         {print} 'You have chosen the wrong weapon...'
-                        {print} bad_fate[i]
+                        {print} _
                         {print} 'GAME OVER'
                     ```
                 start_code: '# place your code here'
@@ -2916,7 +2945,9 @@ adventures:
                 start_code: '# place your code here'
             16:
                 story_text: |
-                    Make your own program to practice your vocabulary in a new language.
+                    ### Exercise
+                    Take a look at the example code. This is a program to practise French vocabulary. Now make your own program to practice your vocabulary in a new language.
+                    If you don't know any other languages, you can use Google translate or you can use emojis and your native language.
                 example_code: |
                     ```
                     french_words = ['bonjour', 'ordinateur', 'pomme de terre']
@@ -3107,20 +3138,26 @@ adventures:
                 start_code: '# place your code here'
             14:
                 story_text: |
+                    ### Exercise
                     In this level you can let Hedy tell you if you have saved up enough money!
+                    Finish this code by filling in the blanks!
                 example_code: |
                     ```
+                    _ calculate_budget {with} wish, money, allowance
+                        to_save = wish - money
+                        weeks = to_save / allowance
+                        {if} wish _ money
+                            {print} 'You need to save up some more!'
+                            {print} 'Youll need ' weeks ' more weeks.'
+                        {else}
+                            {print} 'Great! You have enough'
+                            {print} 'Lets go shopping!'
+
                     money = {ask} 'How much money have you saved?'
                     wish = {ask} 'How much money do you need?'
                     allowance = {ask} 'How much pocket money do you get each week?'
-                    to_save = wish - money
-                    weeks = to_save / allowance
-                    {if} wish > money
-                        {print} 'You need to save up some more!'
-                        {print} "You'll need ' weeks ' more weeks."
-                    {else}
-                        {print} 'Great! You have enough'
-                        {print} 'Lets go shopping!'
+
+                    {call} _
                     ```
                 start_code: '# place your code here'
     pressit:
@@ -3238,6 +3275,7 @@ adventures:
         levels:
             14:
                 story_text: |
+                    ### Exercise
                     In this adventure you can make your own quiz! Fill in the blanks, add more questions and enjoy your own quiz!
                     You can make a quiz about anything you like: your hobby, your favorite animal, your favorite book or anything at all!
                 example_code: |
@@ -3477,7 +3515,7 @@ adventures:
                     {else} {repeat} 3 {times} {print} 'You have learned something new!'
                     ```
                 story_text_2: |
-                    Another interesting thing you can so with the `{repeat}` command is using variables to set the amount of times something should be repeated. In the example code you can see that we first ask the person how old they are.
+                    Another interesting thing you can do with the `{repeat}` command is using variables to set the amount of times something should be repeated. In the example code you can see that we first ask the person how old they are.
                     Then, in line 3, the question is repeated 'age' times. So we have used the variable 'age' with the `{repeat}` command.
                 example_code_2: |
                     ```
@@ -3497,7 +3535,7 @@ adventures:
                     This means the last line shouldn't start with indentation as it doesn't belong to the block.
                     If you do start the last line with indentation the song will turn out wrong.
 
-                    ## Exercise
+                    ### Exercise
                     Each line in the example code starts with a blank. Remove the blanks and try to figure out which line need indentation and which don't to make the muffin man song.
                 example_code: |
                     ```
@@ -3805,11 +3843,14 @@ adventures:
             15:
                 story_text: |
                     With the `{while}` you can make sure your costumers can keep adding orders until they are done.
+
+                    ### Exercise
+                    Correctly add the `{while}` command to this code.
                 example_code: |
                     ```
                     {print} 'Welcome at McHedy'
                     more = 'yes'
-                    {while} more == 'yes'
+                    _
                         order = {ask} 'What would you like to order?'
                         {print} order
                         more = {ask} 'Would you like to order anything else?'
@@ -3960,6 +4001,7 @@ adventures:
                 start_code: '# place your code here'
             15:
                 story_text: |
+                    ### Exercise
                     Play until you beat the computer! But first, finish the example code...
                 example_code: |
                     ```
@@ -4224,13 +4266,16 @@ adventures:
                 story_text: |
                     In this level, you can program a song like OldMacDonald even more quickly. You can connect the right animal to the right sound by simply putting them in the same place in the list.
                     The Drunken Sailor is also quickly made in this level. You only need 8 lines for the entire song, check it out!
+
+                    ### Exercise
+                    Complete the Old McDonald song by setting the variable `animal` to `animals[i]` and `sound` to `sounds[i]`.
                 example_code: |
                     ```
                     animals = ['pig', 'dog', 'cow']
                     sounds = ['oink', 'woof', 'moo']
                     {for} i {in} {range} 1 {to} 3
-                        animal = animals[i]
-                        sound = sounds[i]
+                        animal = _
+                        sound = _
                         {print} 'Old McDonald had a farm'
                         {print} 'E I E I O!'
                         {print} 'and on that farm he had a ' animal
@@ -4812,6 +4857,340 @@ adventures:
                     {call} square
                     {forward} 50
                     {call} square
+    turtle_draw_it:
+        name: Draw it!
+        default_save_name: Draw it
+        description: Draw this picture with the turtle
+        levels:
+            1:
+                story_text: |
+                    ### Exercise
+                    Recreate the drawings with the turtle!
+
+                    <div class="w-full flex flex-row gap-2">
+                        Rectangle <img src="https://github.com/hedyorg/hedy/assets/80678586/77aa99d5-cd8f-4969-b49d-e8fed34ac550" width="100">
+                        Square <img src="https://github.com/hedyorg/hedy/assets/80678586/03b96c2c-7b94-4032-9f9f-3f3b13573623" width="200">
+                        Stairs<img src="https://github.com/hedyorg/hedy/assets/80678586/d4301e62-ec66-4031-827c-7d21f73ba106" width="200">
+                    </div>
+                example_code: ''
+                start_code: '## Recreate the drawings with the turtle!'
+            2:
+                story_text: |
+                    ### Exercise
+                    Recreate the drawings with the turtle!
+
+                    <div class="w-full flex flex-row gap-2">
+                    Triangle <img src="https://github.com/hedyorg/hedy/assets/80678586/e974b62c-f0cf-445a-8bd4-5ad9f1f71204" width="100">
+                    Arrow <img src="https://github.com/hedyorg/hedy/assets/80678586/803d8f42-9708-448c-82ea-d035697f08c9" width="150">
+                    Boat <img src="https://github.com/hedyorg/hedy/assets/80678586/94ef7189-442a-4c8f-827d-12a69203c2e9" width="150">
+                    </div>
+                example_code: ''
+                start_code: '## Recreate the drawings with the turtle!'
+            3:
+                story_text: |
+                    ### Exercise
+                    Recreate the drawings with the turtle!
+
+                    <div class="w-full flex flex-row gap-2">
+                    Triangle <img src="https://github.com/hedyorg/hedy/assets/80678586/71e04d98-9545-4614-9caf-a5f179b756a1" width="150">
+                    Star <img src="https://github.com/hedyorg/hedy/assets/80678586/421c4d28-cb99-424b-be26-dcae30d65c80" width="150">
+                    Arrow <img src="https://github.com/hedyorg/hedy/assets/80678586/3cbebcae-5258-47c5-a6ac-e7ee36c1d1ce" width="200">
+                    </div>
+                example_code: ''
+                start_code: '## Recreate the drawings with the turtle!'
+            4:
+                story_text: |
+                    ### Exercise
+                    Recreate the drawings with the turtle!
+
+                    <div class="w-full flex flex-row gap-2">
+                    Colored Star <img src="https://github.com/hedyorg/hedy/assets/80678586/dbe39006-c050-4833-b5c4-f9d1fb1c0781" width="150">
+                    Rainbow <img src="https://github.com/hedyorg/hedy/assets/80678586/2728b10f-9f7f-45ea-964e-5b284033e4f0" width="500">
+                    Nested squares <img src="https://github.com/hedyorg/hedy/assets/80678586/f013f9fa-bc68-4c60-b778-2c457799d6f7" width="200">
+                    </div>
+                example_code: |
+                    **Extra** Up for a real challenge? Make sure that the colors of these figures are selected randomly, so that each time you run your programs they'll look differently!
+
+                    ```
+                    colors {is} red, orange, yellow, green, blue, purple, pink, brown, gray, black
+                    color _
+                    ```
+                start_code: '## Recreate the drawings with the turtle!'
+            5:
+                story_text: |
+                    ### Exercise
+                    Recreate the drawings with the turtle!
+
+                    **Extra** Make only one code that lets the player decide which letter they'd like to see! And can you add even more letters?
+
+                    <div class="w-full flex flex-row gap-2">
+                    F <img src="https://github.com/hedyorg/hedy/assets/80678586/8a021b76-c24b-4e7c-b960-48d57f3bcb20" width="100">
+                    E <img src="https://github.com/hedyorg/hedy/assets/80678586/12821803-6422-416a-8e36-9902d14e57a4" width="100">
+                    L <img src="https://github.com/hedyorg/hedy/assets/80678586/3af6f919-7b67-4ee7-b923-11e56f2b6b24" width="100">
+                    </div>
+                example_code: |
+                    Hint:
+                    ```
+                    chosen_letter {is} {ask} 'Which letter would you like to see? F, E or L?
+                    {if} _
+                    ```
+                start_code: '## Recreate the drawings with the turtle!'
+            6:
+                story_text: |
+                    ### Exercise
+                    Recreate the drawings with the turtle!
+
+                    **Extra** Let the player decide which color the square should be.
+
+                    ***Extra*** Can you make the letter of your own first name and the flag of your own country too?
+
+                    <div class="w-full flex flex-row gap-2">
+                    Square <img src="https://github.com/hedyorg/hedy/assets/80678586/03b96c2c-7b94-4032-9f9f-3f3b13573623" width="150">
+                    Letters <img src="https://github.com/hedyorg/hedy/assets/80678586/e75f4fa5-f1f5-4b48-806c-916c28e4e8ad" width="100">
+                    Flag <img src="https://github.com/hedyorg/hedy/assets/80678586/877fc337-df80-4185-8005-a6c28904f66e" width="300">
+                    </div>
+                example_code: |
+                    Hint for the square:
+                    ```
+                    chosen_color = {ask} _
+                    ```
+                start_code: '## Recreate the drawings with the turtle!'
+            7:
+                story_text: |
+                    ### Exercise
+                    Recreate the drawings with the turtle!
+
+                    <div class="w-full flex flex-row gap-2">
+                    Hexagon <img src="https://github.com/hedyorg/hedy/assets/80678586/92e492e1-1593-489b-aaf0-51d2a29755f4" width="200">
+                    Triangle <img src="https://github.com/hedyorg/hedy/assets/80678586/3629a5e6-1f02-4851-aab9-c5430ba4a1f1" width="200">
+                    Fan <img src="https://github.com/hedyorg/hedy/assets/80678586/1ba2ff71-1230-4fe3-8255-b2c504cf1b4e" width="200">
+                    </div>
+                example_code: ''
+                start_code: '## Recreate the drawings with the turtle!'
+            8:
+                story_text: |
+                    ### Exercise
+                    Recreate the drawings with the turtle!
+
+                    **Extra** The number in brackets indicates in how many lines of code this figure can be drawn. Can you do it in the same amount of lines?
+
+                    <div class="w-full flex flex-row gap-2">
+                    Square (3) <img src="https://github.com/hedyorg/hedy/assets/80678586/03b96c2c-7b94-4032-9f9f-3f3b13573623" width="200">
+                    Randomly colored star (5) <img src="https://github.com/hedyorg/hedy/assets/80678586/dbe39006-c050-4833-b5c4-f9d1fb1c0781" width="150">
+                    Randomly colored spiral (7) <img src="https://github.com/hedyorg/hedy/assets/80678586/9bcdb3f1-367d-4ae0-878f-d09005424a35" width="150">
+                    </div>
+                example_code: ''
+                start_code: '## Recreate the drawings with the turtle!'
+            9:
+                story_text: |
+                    ### Exercise
+                    Recreate the drawings with the turtle!
+
+                    **Extra** The number in brackets indicates in how many lines of code this figure can be drawn. Can you do it in the same amount of lines?
+
+                    **Extra** Give the player a choice which country they would like to see the flag of.
+
+                    <div class="w-full flex flex-row gap-2">
+                    Cross (7) <img src="https://github.com/hedyorg/hedy/assets/80678586/76e42c76-aa3f-4863-8eee-ead73c09a186" width="150">
+                    Randomly colored nested squares (8) <img src="https://github.com/hedyorg/hedy/assets/80678586/17f878cc-e893-4c10-b32e-a09a50bf08de" width="200">
+                    Flags <img src="https://github.com/hedyorg/hedy/assets/80678586/877fc337-df80-4185-8005-a6c28904f66e" width="300">
+                    </div>
+                example_code: |
+                    Hint for the nested squares:
+                    ```
+                    colors = red, blue, orange, yellow, pink, purple, green, brown, black
+                    distance = 120
+                    repeat 5 times
+                    _
+                    ```
+                    Hint for the flags:
+                    ```
+                    country = ask 'which country would you like to see the flag of?'
+                    if country is 'the Netherlands'
+                        color_1 = red
+                        color_2 = white
+                        color_3 = blue
+                    ```
+                start_code: '## Recreate the drawings with the turtle! '
+            10:
+                story_text: |
+                    ### Exercise
+                    Recreate the drawings with the turtle!
+
+                    <div class="w-full flex flex-row gap-2">
+                    Nested Hexagon <img src="https://github.com/hedyorg/hedy/assets/80678586/3629e908-3cd5-44ac-bbcd-1f1cceb15654" width="150">
+                    Traffic lights  <img src="https://github.com/hedyorg/hedy/assets/80678586/edbbb608-5ff8-4349-85a6-e47809adde43" width="100">
+                    </div>
+                example_code: |
+                    Hint Nested Hexagon:
+                    ```
+                    distances = 100, 80, 60, 40, 20
+                    {for} distance {in} distances
+                    _
+                    ```
+
+                    Hint Traffic Lights:
+                    ```
+                    colors = red, yellow, green
+                    {for} chosen_color {in} colors
+                        color _
+                        {repeat} _
+                    ```
+                story_text_2: |
+                    Christmas lights <img src="https://github.com/hedyorg/hedy/assets/80678586/9637ea6d-6edc-4d88-a6f7-10271bfc5371" width="500">
+                example_code_2: |
+                    Hint Christmas Lights:
+
+                    Start by moving to the left side of the screen with an invisible white line. Then hang up the Christmas lights!
+                    ```
+                    {color} white
+                    {turn} -90
+                    {forward} 300
+                    {turn} 90
+
+                    colors = red, blue, yellow, purple, green, orange, pink
+                    {for} chosen_color {in} colors
+                    _
+                    ```
+                start_code: '## Recreate the drawings with the turtle! '
+            11:
+                story_text: |
+                    ### Exercise
+                    Recreate the drawings with the turtle!
+
+                    <div class="w-full flex flex-row gap-2">
+                    Beehive (6) <img src="https://github.com/hedyorg/hedy/assets/80678586/ec02469c-907b-4695-9382-d39a8f3c00ec" width="200">
+                    Fan (5)  <img src="https://github.com/hedyorg/hedy/assets/80678586/a032ab35-c70c-4e67-9b4e-036a03ecce87" width="200">
+                    </div>
+                example_code: |
+                    Hint Beehive:
+                    ```
+                    {for} amount_of_combs {in} {range} 1 {to} _
+                        {for} walls_of_one_comb {in} {range} 1 {to} _
+                            {forward} _
+                            {turn} _
+                        {forward} _
+                        {turn} _
+                    ```
+
+                    Hint Fan:
+                    Start out like the fan you made in level 7. Or take a peak at the hint for the beehive, because the codes are very similar.
+                start_code: '## Recreate the drawings with the turtle! '
+            12:
+                story_text: |
+                    ### Exercise
+                    Recreate the drawings with the turtle!
+                example_code: |
+                    Hint: Bracelet designing program
+
+
+                    Firstly, define a function **for each shape** you want to use on the bacelet. Then, add the shapes to the bacelet like this:
+
+                    ```
+                    {define} draw_a_square
+                    _
+
+                    {color} white
+                    {turn} -90
+                    {forward} 300
+                    {turn} 180
+
+                    {for} i {in} {range} 1 {to} 5
+                        {color} gray
+                        {forward} 100
+                        shape = {ask} 'What kind of shape would you like next on the bracelet?'
+                        chosen_color = {ask} 'In which color?'
+                        {color} chosen_color
+                        {if} shape = 'square'
+                            {call} draw_a_square
+                    ```
+                start_code: '## Recreate the drawings with the turtle! '
+            13:
+                story_text: |
+                    ### Exercise
+                    Recreate the drawings with the turtle!
+
+                    Street in different sizes <img src="https://github.com/hedyorg/hedy/assets/80678586/cdae9d97-d5ef-46f3-8838-24fa7b5b1bec" width="300">
+                    Colored street  <img src="https://github.com/hedyorg/hedy/assets/80678586/9893e0bd-c0f8-49bc-a5a7-217182407724" width="300">
+                example_code: |
+                    Hint Street in different sizes
+                    ```
+                    {define} draw_a_house {with} size
+                    _
+
+                    {call} draw_a_house {with} 90
+                    {call} draw_a_house {with} 60
+                    {call} draw_a_house {with} 30
+                    ```
+
+                    Hint Colored street
+                    ```
+                    {define} draw_a_house {with} chosen_color
+                    _
+                    ```
+                start_code: '## Recreate the drawings with the turtle! '
+            14:
+                story_text: |
+                    ### Exercise
+                    Create a program that asks the player how many corners their figure should have and then creates that figure.
+                    The figure in the image is the output when the player fills in 10.
+
+                    <div class="w-full flex flex-row gap-2">
+                     <img src="https://github.com/hedyorg/hedy/assets/80678586/ee32f40e-dea1-4e7c-a813-3ef63671254b" width="300">
+                     <img src="https://github.com/hedyorg/hedy/assets/80678586/3621bf77-527d-41e8-a44f-c5a21bb4ffd2" width="200">
+                    </div>
+                example_code: |
+                    ```
+                    {define} calculate_degrees {with} amount_of_corners
+                        _ 360 / amount_of_corners
+
+
+                    {define} draw_figure {with} degrees
+                        _
+                            {forward} 400/amount_of_corners
+                            {turn} _
+
+                    amount_of_corners = {ask} _
+                    degrees = {call} _ {with} _
+
+                    {call} _ {with}
+                    {call} _ {with}
+                    ```
+                start_code: '## Recreate the drawings with the turtle! '
+            15:
+                story_text: |
+                    ### Exercise
+                    Recreate the drawings with the turtle!
+
+                    Spiral <img src="https://github.com/hedyorg/hedy/assets/80678586/6943223c-018b-435b-a391-23723cc7a6ad" width="150">
+                example_code: |
+                    Spiral
+                    ```
+                    distance = 5
+                    {while} distance < 200
+                        distance = distance + 5
+                         _
+                    ```
+                story_text_2: |
+                    Fan <img src="https://github.com/hedyorg/hedy/assets/80678586/cb671065-b47b-49f0-b298-dcbcd2a5e28f" width="150">
+                example_code_2: |
+                    Fan
+                    ```
+                    {define} draw_a_square {with} side
+                    _
+
+                    i = 100
+                    {while} i > 1
+                        _ {with} i
+                        _
+                        i = i - 3
+                    ```
+                story_text_3: |
+                    Star <img src="https://github.com/hedyorg/hedy/assets/80678586/17564e0a-63e1-4794-8d41-15ac8c1a5a93" width="150">
+                example_code_3: |
+                    Star
+                    A star is usually drawn using 144-degree-turns. If you change this slightly to 143 degrees for example and repeat the pattern multiple times with a {while} loop you can make this figure.
+                start_code: '## Recreate the drawings with the turtle! '
     while_command:
         name: '{while}'
         default_save_name: while_command

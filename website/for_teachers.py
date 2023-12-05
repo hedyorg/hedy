@@ -26,7 +26,7 @@ from website.auth import (
 from .achievements import Achievements
 from .database import Database
 from .website_module import WebsiteModule, route
-
+from datetime import date
 
 SLIDES = collections.defaultdict(hedy_content.NoSuchSlides)
 for lang in hedy_content.ALL_LANGUAGES.keys():
@@ -131,8 +131,17 @@ class ForTeachersModule(WebsiteModule):
         Class = self.db.get_class(class_id)
         if not Class or (not utils.can_edit_class(user, Class) and not is_admin(user)):
             return utils.error_page(error=404, ui_message=gettext("no_such_class"))
-        students = []
+
         session['class_id'] = class_id
+        students = []
+        survey_id = ""
+        description = ""
+        questions = []
+        survey_later = ""
+
+        if Class.get("students"):
+            survey_id, description, questions, survey_later = self.class_survey(class_id)
+
         for student_username in Class.get("students", []):
             student = self.db.user_by_username(student_username)
             programs = self.db.programs_for_user(student_username)
@@ -166,11 +175,11 @@ class ForTeachersModule(WebsiteModule):
             achievement = json.dumps(achievement)
 
         invites = []
-        for invite in self.db.get_class_invites(Class["id"]):
+        for invite in self.db.get_class_invitations(Class["id"]):
             invites.append(
                 {
                     "username": invite["username"],
-                    "invited_as": invite["invited_as"],
+                    "invited_as_text": invite["invited_as_text"],
                     "timestamp": utils.localized_date_format(invite["timestamp"], short_format=True),
                     "expire_timestamp": utils.localized_date_format(invite["ttl"], short_format=True),
                 }
@@ -193,6 +202,10 @@ class ForTeachersModule(WebsiteModule):
                 "id": Class["id"],
             },
             javascript_page_options=dict(page="class-overview"),
+            survey_id=survey_id,
+            description=description,
+            questions=questions,
+            survey_later=survey_later,
         )
 
     @route("/class/<class_id>/programs/<username>", methods=["GET", "POST"])
@@ -296,6 +309,29 @@ class ForTeachersModule(WebsiteModule):
                 page='customize-class',
                 class_id=class_id
             ))
+
+    def class_survey(self, class_id):
+        description = ""
+        survey_id = "class" + '_' + class_id
+        description = gettext("class_survey_description")
+        survey_later = gettext("class_survey_later")
+        questions = []
+
+        survey = self.db.get_survey(survey_id)
+        if not survey:
+            self.db.store_survey(dict(id=f"{survey_id}"))
+            survey = self.db.get_survey(survey_id)
+        elif survey.get('skip') is True or survey.get('skip') == date.today().isoformat():
+            return "", "", "", ""
+
+        questions.append(gettext("class_survey_question1"))
+        questions.append(gettext("class_survey_question2"))
+        questions.append(gettext("class_survey_question3"))
+        questions.append(gettext("class_survey_question4"))
+        unanswered_questions, translate_db = utils.get_unanswered_questions(survey, questions)
+        if translate_db:
+            self.db.add_survey_responses(survey_id, translate_db)
+        return survey_id, description, unanswered_questions, survey_later
 
     @route("/get-customization-level", methods=["GET"])
     @requires_login
@@ -523,7 +559,7 @@ class ForTeachersModule(WebsiteModule):
         for level, level_default_adventures in hedy_content.ADVENTURE_ORDER_PER_LEVEL.items():
             for short_name in level_default_adventures:
                 adventure = SortedAdventure(short_name=short_name,
-                                            long_name=adventure_names[short_name],
+                                            long_name=adventure_names.get(short_name, short_name),
                                             is_teacher_adventure=False,
                                             is_command_adventure=short_name in hedy_content.KEYWORDS_ADVENTURES)
                 default_adventures[level].add(adventure)
@@ -574,7 +610,7 @@ class ForTeachersModule(WebsiteModule):
             for adventure in default_adventures:
                 db_adventures[str(lvl)].append({'name': adventure, 'from_teacher': False})
                 sorted_adventure = SortedAdventure(short_name=adventure,
-                                                   long_name=adventure_names[adventure],
+                                                   long_name=adventure_names.get(adventure, adventure),
                                                    is_command_adventure=adventure in hedy_content.KEYWORDS_ADVENTURES,
                                                    is_teacher_adventure=False)
                 adventures[lvl].append(sorted_adventure)

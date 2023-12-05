@@ -619,7 +619,7 @@ levels:
                     ```
                     {print} Je suis très excité par ce quiz !
                     ```
-                feedback: '{print} a maintenant besoin de guillemets !'
+                feedback: '`{print}` a maintenant besoin de guillemets !'
             -   option: |-
                     ```
                     {print} 'C'est très exitant ce quiz !'
@@ -700,116 +700,128 @@ levels:
             correct_answer: B
             question_score: '10'
         5:
-            question_text: Qu'est-ce qui doit être changé pour que le code fonctionne ?
+            question_text: Qu'est-ce qui doit être changé pour que le code fonctionne ?
             code: |-
                 options {is} pierre, feuille, ciseaux
-                {print} 'options {at} {random}'
+                {print} "options {at} {random}"
             mp_choice_options:
             -   option: |-
                     ```
-                    '{print} options {at} {random}'
+                    "{print} options {at} {random}"
                     ```
-                feedback: N'utilise jamais de guillemets avant la commande `{print}`.
+                feedback: Ne mets jamais de guillemets avant la commande `{print}`.
             -   option: |-
                     ```
-                    {print} 'options' {at} {random}
+                    {print} "options" {at} {random}
                     ```
-                feedback: options est une variable. Tu ne souhaites pas afficher 'options {at} {random}'.
+                feedback: options est une variable. Tu ne souhaites pas afficher littéralement le mot « options ».
             -   option: |-
                     ```
                     {print} options {at} {random}
                     ```
                 feedback: C’est juste
-            -   option: Rien, le jeu fonctionne déjà !
+            -   option: Rien, le jeu fonctionne déjà !
                 feedback: Regardes bien. Il y a une erreur.
-            hint: Tu ne veux pas qu'Hedy affiche littéralement 'options {at} {random}', tu veux qu'elle affiche 'pierre' ou 'feuille' ou 'ciseaux'.
+            hint: Tu ne veux pas qu'Hedy affiche littéralement « options {at} {random} », tu veux qu'elle affiche « pierre », « papier » ou « ciseaux ».
             correct_answer: C
             question_score: '10'
         6:
-            question_text: Quelle serait la prochaine ligne de ce code ?
-            code: prix {is} 1 euro, 100 euros, 1 million euros
+            question_text: Quelle serait la prochaine ligne de ce code ?
+            code: prix {is} 1 euro, 100 euros, 1 million d'euros
             mp_choice_options:
             -   option: |-
                     ```
-                    {print} 'Tu gagnes...' prix {at} {random}
+                    {print} "Tu gagnes…" prix {at} {random}
                     ```
-                feedback: Super ! Tu as compris !
+                feedback: Super ! Tu as compris !
             -   option: |-
                     ```
-                    {print} Tu gagnes... 'prix {at} {random}'
+                    {print} Tu gagnes… "prix {at} {random}"
                     ```
-                feedback: Hedy va afficher 'prix {at} {random}'
+                feedback: Hedy va littéralement afficher « prix {at} {random} »
             -   option: |-
                     ```
-                    {print} Tu gagnes... prix {at} {random}
+                    {print} Tu gagnes… prix {at} {random}
                     ```
-                feedback: Tu as besoin de guillemets !
+                feedback: Tu as besoin de guillemets !
             -   option: |-
                     ```
-                    {print} 'Tu gagnes... prix {at} {random}'
+                    {print} "Tu gagnes… prix {at} {random}"
                     ```
-                feedback: Hedy va afficher 'prix{at} {random}''
-            hint: 'Réfléchis bien : qu''est-ce qui est une variable et doit être en dehors des guillemets ? Et quels sont les mots normaux qui doivent être à l''intérieur ?'
+                feedback: Hedy va afficher littéralement « Tu gagnes… prix {at} {random} »
+            hint: 'Réfléchis bien : qu''est-ce qui est une variable et doit être en dehors des guillemets ? Et quels sont les mots normaux qui doivent être à l''intérieur ?'
             correct_answer: A
             question_score: '10'
         7:
-            question_text: Quel est le problème avec ce code ?
+            question_text: Quel est le problème avec ce code ?
             code: |-
                 question {is} {ask} Que veux-tu savoir ?
                 reponses {is} oui, non, peut-être
                 {print} reponses {at} {random}
             mp_choice_options:
             -   option: Les guillemets sont manquants à la ligne 1
-                feedback: Correct !
+                feedback: Correct !
             -   option: Les guillemets sont manquants à la ligne 2
-                feedback: Une variable n'a pas besoin de guillemets
+                feedback: Une variable ne doit pas avoir de guillemets
             -   option: Les guillemets sont manquants à la ligne 3
-                feedback: Tu ne veux pas qu'Hedy affiche littéralement 'reponses {at} {random}', donc pas besoin de guillemets ici !
-            -   option: Rien, le code est bien comme ça !
-                feedback: Regardes bien. Tu as loupé une erreur !
+                feedback: Tu ne veux pas qu'Hedy affiche littéralement « reponses {at} {random} », donc pas besoin de guillemets ici !
+            -   option: Rien, le code est bien comme ça !
+                feedback: Regardes bien. Tu as loupé une erreur !
             hint: Vérifies chaque ligne pour savoir si elle a besoin de guillemets ou pas.
             correct_answer: A
             question_score: '10'
         8:
-            question_text: Quelle serait la prochaine ligne à ajouter à ce code ?
+            question_text: Quelle serait la prochaine ligne à ajouter à ce code ?
             code: |-
-                {print} 'Bienvenue au monty hall !'
-                {print} 'Il y a 3 portes devant toi !'
-                porte {is} {ask} 'Quelle est la porte que tu choisis !'
+                {print} "Bienvenue à notre jeu télévisé !"
+                {print} "Il y a 3 portes devant toi"
+                porte {is} {ask} "Quelle porte choisis-tu ?"
             mp_choice_options:
-            -   option: print Donc tu choisis la porte porte
+            -   option: |-
+                    ```
+                    {print} Donc tu choisis la porte porte
+                    ```
                 feedback: Il faut des guillemets
-            -   option: print 'Donc tu choisis la 'porte porte
-                feedback: Si le joueur choisit la porte 3, Hedy dira 'Donc tu choisis 3 3
-            -   option: print 'Donc tu choisis la porte' porte
+            -   option: |-
+                    ```
+                    {print} "Donc tu choisis la " porte porte
+                    ```
+                feedback: Si le joueur choisit la porte 3, Hedy dira « Donc tu choisis 3 3 »
+            -   option: |-
+                    ```
+                    {print} "Donc tu choisis la porte " porte
+                    ```
                 feedback: Super !
-            -   option: print 'Donc tu choisis la porte porte'
-                feedback: Hedy affichera 'Donc tu choisis la porte porte
-            hint: Le deuxième mot 'porte' devrait être remplacé par le numéro, le premier devrait toujours être le mot 'porte'...
+            -   option: |-
+                    ```
+                    {print} "Donc tu choisis la porte porte"
+                    ```
+                feedback: Hedy affichera « Donc tu choisis la porte porte »
+            hint: Le deuxième mot « porte » doit être remplacé par le numéro, le premier doit rester le mot « porte »…
             correct_answer: C
             question_score: '10'
         9:
-            question_text: Qu'est-ce qui ne pourra pas être affiché sur ton écran de sortie ?
+            question_text: Qu'est-ce qui ne pourra pas être affiché sur ton écran de sortie ?
             code: |-
                 clubs {is} Real Madrid, Bayern Munchen, Manchester United, Ajax
-                {print} clubs {at} {random} ' va gagner la ligue des champions'
+                {print} clubs {at} {random} " va gagner la Ligue des champions"
             mp_choice_options:
-            -   option: chocolat est ma glace préférée
-                feedback: Hedy pourrait `{print}`er ça
-            -   option: fraise vanille est ma glace préférée
-                feedback: Hedy pourrait `{print}`r ça
-            -   option: Le Bayern Munich va gagner la ligue des champions
-                feedback: Hedy pourrait `{print}`r ça
-            -   option: fraise est ma glace préférée
-                feedback: C'est vrai. Cette option n'est pas dans la liste
-            hint: Quelles sont les options parmis lesquelles Hedy peut choisir au hasard?
+            -   option: Ajax va gagner la Ligue des champions
+                feedback: Hedy pourrait afficher ça
+            -   option: Real Madrid va gagner la Ligue des champions
+                feedback: Hedy pourrait afficher ça
+            -   option: Bayern Munich va gagner la ligue des champions
+                feedback: Hedy pourrait afficher ça
+            -   option: FC Barcelona va gagner la ligue des champions
+                feedback: C'est vrai. Ce n'est pas dans la liste
+            hint: Quelles sont les options parmi lesquelles Hedy peut choisir au hasard ?
             correct_answer: D
             question_score: '10'
         10:
             question_text: Quelle affirmation est vraie ?
             code: |-
                 personnes {is} maman, papa, Emma, Sophie
-                {print} La vaisselle est faite par...
+                {print} La vaisselle est faite par…
                 {print} personnes {at} {random}
             mp_choice_options:
             -   option: Les guillemets manquent à la ligne 1
@@ -820,160 +832,160 @@ levels:
                 feedback: La ligne 3 n'a pas besoin de guillemets, car elle n'est pas affichée littéralement.
             -   option: Rien, ce code n'a pas d'erreurs
                 feedback: Tu en as loupé une !
-            hint: Regarde bien les guillemets !
+            hint: Regarde bien les guillemets !
             correct_answer: B
             question_score: '10'
     5:
         1:
-            question_text: Quelle commande devrait être remplie avec le _ ?
+            question_text: Quelle commande devrait-on écrire à la place du _ ?
             code: |-
-                nombre {is} {ask} 'Quel est ton nombre porte bonheur ?'
-                {if} nombre {is} 5 {print} 'Pareil !'
-                _ {print} 'Mon nombre porte bonheur est le 5 !'
+                nombre {is} {ask} "Quel est ton nombre porte-bonheur ?"
+                {if} nombre {is} 5 {print} "Pareil !"
+                _ {print} "Mon nombre porte-bonheur est le 5 !"
             mp_choice_options:
             -   option: '`{print}`'
                 feedback: Il y a déjà une commande `{print}`.
             -   option: '`{if}`'
                 feedback: La commande `{if}` est utlisée sur la ligne au dessus.
             -   option: '`{sleep}`'
-                feedback: Non ce n'est pas ça !
+                feedback: Non, ce n'est pas ça !
             -   option: '`{else}`'
                 feedback: C'est exact !
-            hint: Laquelle va avec la commande `{if}` ?
+            hint: Laquelle fonctionne de paire avec la commande `{if}` ?
             correct_answer: D
             question_score: '10'
         2:
-            question_text: Qu'est-ce qui s'affichera lorsque tu tapes le nom Hedy ?
+            question_text: Qu'est-ce qui s'affichera si tu réponds le nom Hedy ?
             code: |-
-                nom {is} {ask} 'Quel est ton nom?'
-                {if} nom {is} Hedy {print} 'fun' {else} {print} 'mouais'
+                nom {is} {ask} "Quel est ton nom ?"
+                {if} nom {is} Hedy {print} "cool" {else} {print} "moins cool"
             mp_choice_options:
-            -   option: fun
-                feedback: Correct !
-            -   option: mouais
-                feedback: Si le nom est Hedy, il dira "fun"
+            -   option: cool
+                feedback: C'est ça !
+            -   option: moins cool
+                feedback: Si le nom est Hedy, ce programme écrira « cool »
             -   option: Hedy
-                feedback: Non, cela n'affichera pas le nom
+                feedback: Non, ce n'est pas le nom qui s'affichera
             -   option: Erreur
                 feedback: Heureusement, non !
-            hint: '`{if}` nom `{is}` Hedy `{print}` ... ?'
+            hint: '`{if}` nom `{is}` Hedy `{print}` … ?'
             correct_answer: A
             question_score: '10'
         3:
             question_text: Quel est le bon mot de passe ?
             code: |-
-                secret {is} {ask} 'Quel est le mot de passe ?'
-                {if} secret {is} SECRET {print} 'Correct !'
-                {else} {print} 'ALERTE ! INTRUSION !'
+                mot-de-passe {is} {ask} "Quel est le mot de passe ?"
+                {if} mot-de-passe {is} SECRET {print} "Correct !"
+                {else} {print} "ALERTE ! INTRUSION !"
             mp_choice_options:
             -   option: Correct !
-                feedback: Ceci est le texte qui sera affiché si tu as le bon mot de passe
+                feedback: Ceci est le texte qui sera affiché si tu donnes le bon mot de passe
             -   option: SECRET
-                feedback: Correct !
-            -   option: secret
-                feedback: Le mot de passe n'est pas secret...
+                feedback: C'est exact '
+            -   option: mot-de-passe
+                feedback: Le mot de passe n'est pas mot-de-passe…
             -   option: ALERTE INTRUSION
-                feedback: Ceci est le texte qui sera affiché si tu n'as pas le bon mot de passe !
-            hint: '`{if}` secret `{is}` ... `{print}` ''Correct !'''
+                feedback: Ceci est le texte qui sera affiché si tu ne donnes pas le bon mot de passe !
+            hint: '`{if}` mot-de-passe `{is}` … `{print}` "Correct !"'
             correct_answer: B
             question_score: '10'
         4:
-            question_text: Qu'est-ce qu'Hedy affiche quand tu tapes le mauvais mot de passe ?
+            question_text: Qu'est-ce qu'Hedy affiche si tu tapes un mauvais mot de passe ?
             code: |-
-                secret {is} {ask} 'Quel est le mot de passe ?'
-                {if} secret {is} SECRET {print} 'Correct !'
-                {else} {print} 'ALERTE ! INTRUSION !'
+                mot-de-passe {is} {ask} "Quel est le mot de passe ?"
+                {if} mot-de-passe {is} SECRET {print} "Correct !"
+                {else} {print} "ALERTE ! INTRUSION !"
             mp_choice_options:
             -   option: Correct
-                feedback: Ceci est le texte qui sera affiché si tu as la bonne réponse...
+                feedback: Ceci est le texte qui sera affiché si tu as la bonne réponse, pas la mauvaise…
             -   option: SECRET
                 feedback: Ce n'est pas la bonne réponse
-            -   option: Faux !
+            -   option: Faux !
                 feedback: Non, ce n'est pas ce qu'Hedy affichera
             -   option: ALERTE ! INTRUSION !
-                feedback: Excellent travail !
-            hint: L'ordinateur déclenchera l'alarme en cas d'intrusion !
+                feedback: Excellent travail !
+            hint: L'ordinateur déclenchera l'alarme pour les intrusions !
             correct_answer: D
             question_score: '10'
         5:
-            question_text: Pourquoi Hedy dira 'ALARME ! INTRUSION !' si tu tapes 'secret' ?
+            question_text: Pourquoi Hedy dira 'ALARME ! INTRUSION !' si tu réponds « secret » ?
             code: |-
-                secret {is} {ask} 'Quel est le mot de passe ?'
-                {if} secret {is} SECRET {print} 'Correct !'
-                {else} {print} 'ALERTE ! INTRUSION !'
+                mot-de-passe {is} {ask} "Quel est le mot de passe ?"
+                {if} mot-de-passe {is} SECRET {print} "Correct !"
+                {else} {print} "ALERTE ! INTRUSION !"
             mp_choice_options:
-            -   option: Parce qu'il doit être en majuscules, comme SECRET
-                feedback: Bien !
-            -   option: Parce que le mot de passe est 'alarme'
+            -   option: Parce que le mot de passe est écrit en majuscules, donc SECRET
+                feedback: En effet !
+            -   option: Parce que le mot de passe est « alarme »
                 feedback: Non, ce n'est pas le mot de passe.
-            -   option: Parce qu'il n'a pas la bonne orthographe.
-                feedback: Regarde mieux
-            -   option: Parce que Hedy fait erreur
+            -   option: Parce que ce n'est pas la bonne orthographe.
+                feedback: L'orthographe est correcte, mais le mot de passe est en majuscule
+            -   option: Parce que Hedy fait une erreur
                 feedback: Non, Hedy a raison
-            hint: L'orthographe du mot doit être exactement la même.
+            hint: La réponse doit être exactement la même que le mot de passe.
             correct_answer: A
             question_score: '10'
         6:
-            question_text: Quel mot devrait être à la place du point d'interrogation dans la dernière ligne ?
+            question_text: Quel mot devrait être à la place de l'espace vide à la dernière ligne ?
             code: |-
-                {print} 'Je suis Hedy, la voyante du football !'
-                {print} 'Je vais prédire quelle place ton équipe va occuper !'
-                club is {ask} 'Quel est ton club préféré ?'
-                {if} club {is} Brest {print} 'Le Stade brestois 29 va gagner !'
-                _ {print} 'Désolé, ton club va terminer à la dernière place...'
+                {print} "Je suis Hedy, la voyante du football !"
+                {print} "Je vais prédire quelle place ton équipe va occuper !"
+                club is {ask} "Quel est ton club préféré ?"
+                {if} club {is} Brest {print} "Le Stade brestois 29 va gagner bien sur !"
+                _ {print} "Désolé, ton club va terminer à la dernière place…"
             mp_choice_options:
             -   option: |-
                     ```
                     {if}
                     ```
-                feedback: '`{if}` est déjà sur la ligne du dessus'
+                feedback: '`{if}` est déjà sur la ligne précédente'
             -   option: |-
                     ```
                     {at} {random}
                     ```
-                feedback: Non, tu as besoin de `{else}`.
+                feedback: Non, tu dois écrire `{else}`.
             -   option: |-
                     ```
                     {else}
                     ```
-                feedback: Bien !
+                feedback: Super !
             -   option: |-
                     ```
                     {print}
                     ```
-                feedback: '`{print}` est déjà là, il nous faut un mot avant !'
-            hint: '`{if}` va avec...?'
+                feedback: '`{print}` est déjà là, il nous faut un mot avant !'
+            hint: '`{if}` va de pair avec… ?'
             correct_answer: C
             question_score: '10'
         7:
-            question_text: Quel mot devrait être à la place du point d'interrogation ?
+            question_text: Quel mot devrait être à la place de l'espace vide ?
             code: |-
-                {print} 'Je peux prédire si tu seras millionnaire ou pas !'
-                prenom {is} {ask} 'Dis moi ton nom..'
-                {if} prenom {is} Hedy {print} 'Tu seras millionnaire !'
-                {else} _ 'Malheureusement... Pas de grosse fortune pour toi.'
+                {print} "Je peux prédire si tu seras millionnaire ou pas !"
+                nom {is} {ask} "Quel est ton nom ?"
+                {if} nom {is} Hedy {print} "Tu seras millionnaire !"
+                {else} _ "Malheureusement… Pas de gros sous pour toi."
             mp_choice_options:
             -   option: '`{if}`'
-                feedback: '`{if}` est déjà sur la ligne juste au-dessus.'
+                feedback: '`{if}` est déjà sur la ligne précédente.'
             -   option: '`{at}` `{random}`'
                 feedback: Non, tu n'as pas besoin de `{at} {random}`.
             -   option: '`{else}`'
-                feedback: Il y a déjà la commande `{else}`
+                feedback: La commande `{else}` est déjà présente
             -   option: '`{print}`'
-                feedback: Superbe !
-            hint: La commande `{print}` suit le `{else}`
+                feedback: Génial !
+            hint: Après `{else}` il faut la commande `{print}`
             correct_answer: D
             question_score: '10'
         8:
-            question_text: Quel mot devrait être à la place du point d'interrogation ?
+            question_text: Quel mot devrait être à la place de l'espace vide ?
             code: |-
-                animal {is} {ask} 'Quel est ton animal favori ?'
-                {if} _ {is} pingouin {print} 'Cest aussi mon animal préféré !'
-                {else} {print} 'Cool ! moi je préfère les pingouins.'
+                animal {is} {ask} "Quel est ton animal préféré ?"
+                {if} _ {is} pingouin {print} "C'est aussi mon animal préféré !"
+                {else} {print} "Cool ! Moi, je préfère les pingouins."
             mp_choice_options:
             -   option: |-
                     ```
-                    animal favori
+                    animal préféré
                     ```
                 feedback: Ce n'est pas le nom de la variable.
             -   option: |-
@@ -982,375 +994,386 @@ levels:
                     ```
                 feedback: Excellent travail !
             -   option: '`{if}`'
-                feedback: '`{if}`f est déjà là'
+                feedback: '`{if}` est déjà là'
             -   option: '`{print}`'
-                feedback: Non, ce n'est pas cela.
+                feedback: Non, ce n'est pas ça.
             hint: Quel est le nom de la variable ?
             correct_answer: B
             question_score: '10'
         9:
-            question_text: Quelle porte dois-tu choisir pour t'échapper??
+            question_text: Quelle porte dois-tu choisir pour t'échapper ?
             code: |-
-                {print} 'Échappe-toi de la maison hantée !'
-                {print} 'Il y a 3 portes devant toi'
-                porte {is} {ask} 'Quelle porte choisis-tu ?'
+                {print} "Échappe-toi de la maison hantée !"
+                {print} "Il y a 3 portes devant toi"
+                porte {is} {ask} "Quelle porte choisis-tu ?"
                 monstres {is} vampire, loup-garou, araignée géante
-                {if} porte {is} 2 {print} 'Bravo, tu peux t échapper !'
-                {else} {print} 'Tu es dévoré par un...' monstres {at} {random}
+                {if} porte {is} 2 {print} "Bravo, tu peux t'échapper !"
+                {else} {print} "Tu te fais dévorer par un… " monstres {at} {random}
             mp_choice_options:
             -   option: '1'
                 feedback: Mauvais choix ! Tu as été mangé
             -   option: '2'
-                feedback: Super ! Tu t'es échappé !
+                feedback: Super ! Tu t'échappes !
             -   option: '3'
                 feedback: Mauvais choix ! Tu as été mangé.
-            -   option: C'est un piège, tu seras toujours mangé !
+            -   option: C'est un piège, tu seras toujours mangé !
                 feedback: Heureusement, non !
-            hint: L'une des portes te mettra en sécurité..
+            hint: L'une des portes te mettra en sécurité.
             correct_answer: B
             question_score: '10'
         10:
-            question_text: Quel monstre se tient derrière la porte 1 ?
+            question_text: Quel monstre se tient derrière la porte 1 ?
             code: |-
-                {print} 'Échape toi de la maison hantée!'
-                {print} l y a 3 portes devant toi'
-                porte {is} {ask} 'Quelle porte choisis-tu ?'
+                {print} "Échape toi de la maison hantée !"
+                {print} "Il y a 3 portes devant toi"
+                porte {is} {ask} "Quelle porte choisis-tu ?"
                 monstres {is} vampire, loup-garou, araignée géante
-                {if} porte {is} 2 {print} 'Bravo, tu peux t échapper !'
-                {else} {print} 'Tu es dévoré par un...' monstres {at} {random}
+                {if} porte {is} 2 {print} "Bravo, tu t'échapes !"
+                {else} {print} "Tu te fais dévorer par un…" monstres {at} {random}
             mp_choice_options:
             -   option: Hedy choisit un monstre au hasard à chaque fois.
                 feedback: Génial !
             -   option: vampire
-                feedback: Pas toujours...
+                feedback: Pas toujours…
             -   option: loup-garou
-                feedback: Pas toujours...
+                feedback: Pas toujours…
             -   option: araignée géante
-                feedback: Pas toujours...
-            hint: Attention aux 3 derniers mots... monstres `{at} {random}`...
+                feedback: Pas toujours…
+            hint: Attention aux 3 derniers mots… monstres `{at} {random}`…
             correct_answer: A
             question_score: '10'
     6:
         1:
-            question_text: Quelle est la sortie d'Hedy lorsque tu exécutes ce programme ?
-            code: print 2*10
+            question_text: Qu'affiche Hedy lorsque tu exécutes ce programme ?
+            code: '{print} 2*10'
             mp_choice_options:
             -   option: '20'
-                feedback: Correct !
+                feedback: Correct !
             -   option: '12'
-                feedback: non, c'est une multiplication pas une addition
+                feedback: non, pour l'addition il faut utiliser le signe plus
             -   option: 2*10
-                feedback: Non, Hedy va calculer la réponse
+                feedback: Non, Hedy calculera la réponse
             -   option: '210'
-                feedback: Attention, il y a un calcul.
-            hint: Le * est utilisé comme signe de multiplication
+                feedback: Attention, c'est un calcul.
+            hint: Le caractère `*` est utilisé comme signe de multiplication
             correct_answer: A
             question_score: '10'
         2:
-            question_text: Quel signe utilises-tu pour une addition ?
+            question_text: Quel signe utilises-tu pour ajouter deux nombres ?
             mp_choice_options:
             -   option: '`-`'
-                feedback: Ce n'est pas ça.
+                feedback: Ce n'est pas ça
             -   option: plus
-                feedback: Ce n'est pas ça.
+                feedback: Ce n'est pas ça
             -   option: '`*`'
-                feedback: Ce n'est pas ça.
+                feedback: Ce n'est pas ça
             -   option: '`+`'
-                feedback: Correct !
-            hint: C'est le signe 'plus'.
+                feedback: Correct !
+            hint: C'est le signe « plus ».
             correct_answer: D
             question_score: '10'
         3:
-            question_text: Quelle est la sortie d'Hedy lorsque tu exécutes ce code ?
-            code: print '3*10'
+            question_text: Qu'affiche Hedy lorsque tu exécutes ce code ?
+            code: '{print} "3*10"'
             mp_choice_options:
             -   option: '30'
                 feedback: Ce serait la bonne réponse s'il n'y avait pas de guillemets.
             -   option: '13'
-                feedback: Essaye encore..
+                feedback: Essaye encore…
             -   option: 3*10
-                feedback: Correct ! Il y a des guillemets, donc Hedy va l'afficher sans faire de calcul.
+                feedback: Correct ! Il y a des guillemets, donc Hedy va afficher le texte sans faire de calcul.
             -   option: Rien, Hedy donnera un message d'erreur.
                 feedback: Non, il n'y aura pas d'erreurs
-            hint: Attention aux guillemets !
+            hint: Attention aux guillemets !
             correct_answer: C
             question_score: '10'
         4:
-            question_text: Eve a 10 ans. Que va imprimer Hedy pour elle ?
+            question_text: Eve a 10 ans. Que va afficher Hedy pour elle ?
             code: |-
-                nom is ask 'Combien de lettres y a-t-il dans ton nom ?'
-                âge is ask 'Quel âge as-tu ?'
-                nombremagique is nom*âge
-                print 'Ton numéro porte bonheur est...' nombremagique
+                lettres = {ask} "Combien de lettres y a-t-il dans ton nom ?"
+                âge = {ask} "Quel âge as-tu ?"
+                numéro_porte_bonheur = lettres*âge
+                {print} "Ton numéro porte-bonheur est…" numéro_porte_bonheur
             mp_choice_options:
             -   option: '30'
-                feedback: Attention, Hedy imprime autre chose !
+                feedback: Attention, Hedy affiche aussi « Ton numéro porte-bonheur est… »
             -   option: '10'
-                feedback: Recommence !
-            -   option: Ton numéro porte bonheur est... 30
-                feedback: Bien joué !
-            -   option: Ton numéro porte bonheur est... 10
-                feedback: Son numéro de chance est le nom multiplié par l'âge ...
-            hint: 'Eve a 3 lettres, elle a 10 ans donc : lettres fois âge = 3*10 = ...'
+                feedback: Recommence.
+            -   option: Ton numéro porte-bonheur est… 30
+                feedback: C'est bon !
+            -   option: Ton numéro porte-bonheur est… 10
+                feedback: Son numéro porte-bonheur est lettres multiplié par âge…
+            hint: 'Son nom Eve a 3 lettres et elle a 10 ans donc : lettres fois âge = 3*10 = 30.'
             correct_answer: C
             question_score: '10'
         5:
-            question_text: Si 5 personnes mangent dans ce restaurant, combien doivent-elles payer au total ?
+            question_text: Si 5 personnes mangent dans ce restaurant, combien doivent-elles payer au total ?
             code: |-
-                print 'Bienvenue chez Hedy !'
-                people is ask 'Combien de personnes mangent avec nous ce soir ?'
-                prix is people * 10
-                print 'Ce fera ' prix 'euros s il te plait'
+                {print} "Bienvenue chez Hedy !"
+                personnes = {ask} "Combien de personnes mangent avec nous ce soir ?"
+                prix = personnes * 10
+                print "Ça fera " prix " euros s'il vous plait"
             mp_choice_options:
-            -   option: 5 dollars
+            -   option: 5 euros
                 feedback: Hélas, c'est plus cher
-            -   option: 10 dollars
-                feedback: Non, c'est 10 par personne !
-            -   option: 15 dollars
-                feedback: Attention, c'est une multiplication !
-            -   option: 50 dollars
-                feedback: Bien !
-            hint: '`prix` `est` `personnes` `multiplie` 10'
+            -   option: 10 euros
+                feedback: Non, c'est 10 euros par personne !
+            -   option: 15 euros
+                feedback: Le signe `*` est pour la multiplication.
+            -   option: 50 euros
+                feedback: Génial !
+            hint: '`prix` = `personnes` fois `10`'
             correct_answer: D
             question_score: '10'
         6:
-            question_text: Combien coûte un hamburger dans ce restaurant ?
+            question_text: Combien coûte un hamburger dans ce restaurant virtuel ?
             code: |-
-                {print} 'Bienvenue chez Hedy !'
-                choix = {ask} 'Qu est-ce que tu veux manger ?'
+                {print} "Bienvenue au restaurant Chez Hedy !"
+                choix = {ask} "Que veux-tu manger ?"
                 prix = 0
                 {if} choix {is} hamburger prix = 15
                 {if} choix {is} frites prix = 6
             mp_choice_options:
-            -   option: 15 dollars
-                feedback: Super !
-            -   option: 6 dollars
-                feedback: Les frites coûtent 6 dollars
-            -   option: 0 dollars
-                feedback: Le hamburger n'est pas gratuit !
-            -   option: 21 dollars
-                feedback: C'est le prix d'un hamburger avec des frites !
-            hint: Regarde sur la 4ème ligne.
+            -   option: 15 euros
+                feedback: Super !
+            -   option: 6 euros
+                feedback: Ce sont les frites qui coûtent 6 euros
+            -   option: 0 euros
+                feedback: Le hamburger n'est pas gratuit !
+            -   option: 21 euros
+                feedback: Ça c'est le prix d'un hamburger avec des frites !
+            hint: Regarde la ligne 4.
             correct_answer: A
             question_score: '10'
         7:
-            question_text: Pourquoi n'a-t-on pas mis 'prix + 3' à la place de 'prix is prix + 3' à la ligne 7 ?
+            question_text: Pourquoi n'a-t-on pas mis `prix = 3` à la place de `prix = prix + 3` à la ligne 7 ?
             code: |-
-                print 'Bienvenue chez Hedy !'
-                prix is 0
-                boisson is ask 'Que veux-tu boire ?'
-                if boisson is coca prix is prix + 3
-                if boisson is eau prix is prix + 1
-                plat is ask 'Que veux-tu manger ?'
-                if plat is hamburger prix is prix + 15
-                if plat is frites prix is prix + 6
-                print 'cela fera' prix 'euros !'
+                {print} "Bienvenue au restaurant Chez Hedy !"
+                plat = {ask} "Que veux-tu manger ?"
+                prix = 0
+                {if} plat {is} hamburger prix = prix + 15
+                {if} plat {is} frites prix = prix + 6
+                boisson = {ask} "Que veux-tu boire ?"
+                {if} boisson {is} coca prix = prix + 3
+                {if} boisson {is} eau prix = prix + 1
+                {print} prix " euros s'il te plait"
             mp_choice_options:
-            -   option: Les 2 sont équivalents.
-                feedback: Non, ce n'est pas vrai !
-            -   option: Parce que Hedy ne comprend pas
-                feedback: Hedy comprendrait, mais ne fera pas ce que tu veux !
-            -   option: Parce que l'on veut ajouter 3 au total !
-                feedback: Bien joué !
+            -   option: Ç'aurait pu être `prix = 3` aussi.
+                feedback: Non, ce n'est pas vrai ! Hedy doit ajouter 3 euros au prix total.
+            -   option: Parce que Hedy ne comprend pas `prix = 3`.
+                feedback: Hedy comprendrait, mais ne ferait pas ce que tu veux !
+            -   option: Parce que sinon Hedy oublierait ce qui a déjà été calculé. Le prix total serait 3 euros seulement.
+                feedback: C'est ça !
             -   option: Parce que le prix est de 0 euros pour commencer.
-                feedback: C'est vrai, mais ce n'est pas la raison !
-            hint: Le prix ne doit pas être de 3, mais de 3 euros de plus !
+                feedback: C'est vrai, mais ce n'est pas la raison
+            hint: Le prix ne doit pas être de 3 euros, mais de 3 euros… de plus !
             correct_answer: C
             question_score: '10'
         8:
-            question_text: Pourquoi ce code est-il incorrect ?
+            question_text: Pourquoi ce code est-il incorrect ?
             code: |-
-                réponse correcte is 3*12
-                réponse is ask 'Combien font 3 fois 12 ?'
-                if réponse is réponse correcte print 'Bien joué!'
-                else print 'Raté, la réponse etait ..' réponse correcte
+                réponse correcte = 3*12
+                réponse = {ask} "Combien font 3 fois 12 ?"
+                {if} réponse {is} réponse correcte {print} 'Bon travail !'
+                {else} {print} "Non, la réponse est " réponse correcte
             mp_choice_options:
             -   option: Il ne devrait pas y avoir de guillemets à la ligne 2.
-                feedback: Non, il doit y en avoir !
-            -   option: La variable s'appelle 'réponse correcte', mais le nom d'une variable ne peut être qu'un mot.
-                feedback: Correct ! Il faudrait renommer la variable en 'réponsecorrecte'
-            -   option: Les commandes if et else doivent être sur la même ligne.
+                feedback: Non, il doit y en avoir !
+            -   option: La variable s'appelle `réponse correcte`, mais le nom d'une variable ne peut être qu'un seul mot. Il faut écrire `réponse_correcte`
+                feedback: Correct !
+            -   option: Les commandes `{if}` et `{else}` doivent être sur la même ligne.
                 feedback: Non, c'est faux.
-            -   option: La variable de la ligne 2 ne peut pas être appelée réponse, car elle est trop similaire à la variable réponse correcte.
-                feedback: Les noms des variables peuvent être similaires..
-            hint: Fais attention aux noms des variables !
+            -   option: La variable de la ligne 2 ne peut pas être appelée `réponse`, car elle est trop similaire à la variable `réponse correcte`.
+                feedback: Les noms des variables peuvent être similaires, mais ne peuvent pas être composés de deux mots séparés
+            hint: Vérifie le nom des variables !
             correct_answer: B
             question_score: '10'
         9:
-            question_text: Imagine que tu aimes le football à 10, que tu as mangé 2 bananes et que tu t'es lavé les mains 3 fois aujourd'hui. A quel point la diseuse de bonne aventure pense que tu es intelligent ?
+            question_text: Imagine que tu aimes le football à 10, que tu as mangé 2 bananes et que tu t'es lavé les mains 3 fois aujourd'hui. Quel est ton niveau d'intelligence selon la voyante folle ?
             code: |-
-                print 'Je suis Hedy la Voyante'
-                print 'Je vais prédire à quel point tu es intelligent !'
-                foot is ask 'Sur une échelle de 0 à 10, à quel point aimes-tu le football ?'
-                bananes is ask 'Combien de bananes as-tu mangé cette semaine ?'
-                main is ask 'Combien de fois t'es-tu lavé les mains aujourd'hui ?'
-                resultat is bananes + main
-                resultat is resultat * foot
-                print 'tu as un QI de ' resultat
+                {print} "Je suis Hedy la voyante folle"
+                {print} "Je vais prédire ton niveau d'intelligence !"
+                foot = {ask} "Sur une échelle de 0 à 10, à quel point aimes-tu le football ?"
+                bananes = {ask} "Combien de bananes as-tu mangé cette semaine ?"
+                hygiène = {ask} "Combien de fois as-tu lavé tes mains aujourd'hui ?"
+                résultat = bananes + hygiène
+                résultat = résultat * foot
+                {print} "Ton niveau d'intelligence est de " résultat
             mp_choice_options:
             -   option: '10'
-                feedback: (2 bananes + 3 main) * 10 foot = 5*10 = ?
+                feedback: (2 bananes + 3 hygiène) * 10 foot = 5*10 = ?
             -   option: '32'
-                feedback: (2 bananes + 3 main) * 10 foot = 5*10 = ?
+                feedback: (2 bananes + 3 hygiène) * 10 foot = 5*10 = ?
             -   option: '50'
-                feedback: Super, tu es doué !
+                feedback: Super, ton niveau d'intelligence est correct !
             -   option: '100'
-                feedback: (2 bananes + 3 main) * 10 foot = 5*10 = ?
-            hint: (2 bananes + 3 main) * 10 foot = 5*10 = ?
+                feedback: (2 bananes + 3 hygiène) * 10 foot = 5*10 = ?
+            hint: (2 bananes + 3 hygiène) * 10 foot = 5*10 = ?
             correct_answer: C
             question_score: '10'
         10:
-            question_text: Which statement is true?
+            question_text: Quelle affirmation est vraie ?
             code: |-
-                name _?_ Hedy
-                print name 'is walking trough the forrest'
+                name _ Hedy
+                {print} name "marche dans la forêt"
             mp_choice_options:
-            -   option: You can only fill in the word is on the _?_
-                feedback: You are allowed to use the = sign as well
-            -   option: You can fill in either the word is or the = sign on the _?_
-                feedback: Amazing!
-            -   option: You have to fill in =is= on the _?_.
-                feedback: No, one = sign is enough
-            -   option: You can only use the = sign when working with numbers, not with words.
-                feedback: You can also use = with words.
-            hint: is and = are both allowed
+            -   option: On ne peut écrire que la commande `{is}` à la place de `_`
+                feedback: Non, on peut aussi utiliser le signe `=`
+            -   option: On peut écrire la commande `{is}` ou le signe `=` à la place de `_`
+                feedback: Fantastique !
+            -   option: On doit écrire la commande `={is}=` à la place de `_`
+                feedback: Non, un seul signe `=` est suffisant
+            -   option: On ne peut utiliser le signe `=` qu'avec les nombres, pas avec les mots.
+                feedback: Tu peux utiliser `=` avec les mots aussi.
+            hint: '`{is}` et `=` sont tous les deux autorisés.'
             correct_answer: B
             question_score: '10'
     7:
         1:
-            question_text: Combien de lignes peut-on répéter à la fois avec la commande `repeat` à ce niveau ?
+            question_text: Combien de lignes peut-on répéter à la fois avec la commande `{repeat}` à ce niveau ?
             mp_choice_options:
             -   option: '0'
-                feedback: Non..
+                feedback: Non, tu peux répéter une ligne.
             -   option: '1'
-                feedback: Correct, une ligne à la fois !
-            -   option: '2'
-                feedback: Dans ce niveau, une seule ligne à la fois
-            -   option: infini
-                feedback: Dans les niveaux suivant peut-être, mais pas encore !
+                feedback: Correcte, une ligne à la fois
+            -   option: '3'
+                feedback: À ce niveau, une seule ligne à la fois
+            -   option: Une infinité
+                feedback: À ce niveau, tu peux seulement répéter une ligne à la fois
             hint: Tu ne peux répéter qu'une ligne à la fois !
             correct_answer: B
             question_score: '10'
         2:
-            question_text: Quel code est le bon ?
+            question_text: Quel est le bon code ?
             mp_choice_options:
-            -   option: '{print} 100 {times} ''Salut !'''
-                feedback: Malheureusement non
-            -   option: '{print} {repeat} 100 {times} ''Salut !'''
-                feedback: Malheureusement non
-            -   option: '{repeat} ''Salut !'' 100 {times} "'
-                feedback: Malheureusement non
-            -   option: '{repeat} 100 times {print} ''Salut !'''
-                feedback: Bien joué !
+            -   option: |-
+                    ```
+                    {print} 100 {times} "Salut !"
+                    ```
+                feedback: '`{repeat}` 100 `{times}` `{print}` "Salut !"'
+            -   option: |-
+                    ```
+                    {print} {repeat} 100 {times} "Salut !"
+                    ```
+                feedback: '{repeat} 100 {times} {print} "Salut !"'
+            -   option: |-
+                    ```
+                    {repeat} "Salut !" 100 {times}
+                    ```
+                feedback: '{repeat} 100 {times} {print} "Salut !"'
+            -   option: |-
+                    ```
+                    {repeat} 100 {times} {print} "Salut !"
+                    ```
+                feedback: C'est ça !
             hint: D'abord la commande `{repeat}`, puis la commande `{print}`
             correct_answer: D
             question_score: '10'
         3:
-            question_text: Ce code est-il bon ou mauvais ?
-            code: repeat 100 times 'Salut !'
+            question_text: Ce code est-il bon ou mauvais ?
+            code: '{repeat} 100 {times} "Salut !"'
             mp_choice_options:
-            -   option: Ce code est valide
+            -   option: Ce code est bon
                 feedback: Non, il manque un mot
-            -   option: Faux, il manque la commande `repeat`
-                feedback: La commande `repeat` existe déjà !
-            -   option: Faux, il manque la commande `times`
-                feedback: La commande `times` existe déjà !
-            -   option: Faux, il manque la commande `print`
-                feedback: Correct !
-            hint: (?) Hello world !
+            -   option: Mauvais, il manque le mot `{repeat}`
+                feedback: Le mot `{repeat}` est là. Il manque un autre mot
+            -   option: Mauvais, il manque le mot `{times}`
+                feedback: Le mot `{times}` est là. Il manque un autre mot
+            -   option: Mauvais, il manque le mot `{print}`
+                feedback: Correct
+            hint: 'Ce devrait être : `{repeat} 100 {times} {print} "Salut !"`'
             correct_answer: D
             question_score: '10'
         4:
-            question_text: Quel mot est incorrect dans le code ?
+            question_text: Quel mot est incorrect dans ce code ?
             code: |-
-                print 'I'm blue'
-                repeat 7 times print 'da ba dee, da ba da'
+                {print} "J'aime le " couleur
+                {repeat} 7 {times} {print} "da ba di, da ba da"
             mp_choice_options:
-            -   option: I'm
-                feedback: C'est ça !
-            -   option: print
-                feedback: l'orthographe est correcte
-            -   option: repeat
-                feedback: l'orthographe est correcte
-            -   option: times
-                feedback: l'orthographe est correcte
-            hint: Fais attention aux apostrophes !
+            -   option: |-
+                    ```
+                    couleur
+                    ```
+                feedback: C'est ça ! La variable est inconnue
+            -   option: '`{print}`'
+                feedback: '`{print}` est écrit correctement'
+            -   option: '`{repeat}`'
+                feedback: '`{repeat}` est écrit correctement'
+            -   option: '`{times}`'
+                feedback: '`{times}` est écrit correctement'
+            hint: '`couleur` est incorrecte, La variable est inconnue'
             correct_answer: A
             question_score: '10'
         5:
-            question_text: Ce code est-il bon ou mauvais ?
-            code: repeat 100 print 'Hedy est génial !'
+            question_text: Ce code est-il bon ou mauvais ?
+            code: '{repeat} 100 {times} {print} "Hedy est géniale !"'
             mp_choice_options:
-            -   option: Valide
-                feedback: Hélas non !
-            -   option: Faux
-                feedback: Effectivement, il manque la commande `times` !
-            hint: Il manque une commande !
-            correct_answer: B
+            -   option: Bon
+                feedback: C'est vrai !
+            -   option: Mauvais
+                feedback: Et non !
+            hint: Le code est correct !
+            correct_answer: A
             question_score: '10'
         6:
-            question_text: Quelle sera la sortie de ce code ?
+            question_text: Que va écrire ce code ?
             code: |-
-                print 'Quand on lance un yo-yo'
-                repeat 3 times print 'Il descend et remonte'
+                {print} "Les roues de l’autobus tournent tournent"
+                {repeat} 2 {times} {print} "Tournent tournent"
             mp_choice_options:
             -   option: |-
-                    Quand on lance un yo-yo
-                    Il descend et remonte
-                feedback: Regarde mieux où est le `repeat`
+                    Les roues de l’autobus tournent tournent
+                    Tournent tournent
+                feedback: La deuxième ligne est répétée 2 fois
             -   option: |-
-                    Quand on lance un yo-yo
-                    Quand on lance un yo-yo
-                    Quand on lance un yo-yo
-                    Il descend et remonte
-                feedback: Regarde mieux où est le `repeat`
+                    Les roues de l’autobus tournent tournent
+                    Les roues de l’autobus tournent tournent
+                    Tournent tournent
+                feedback: C'est la deuxième ligne qui est répétée 2 fois
             -   option: |-
-                    Quand on lance un yo-yo
-                    Il descend et remonte
-                    Quand on lance un yo-yo
-                    Il descend et remonte
-                    Quand on lance un yo-yo
-                    Il descend et remonte
-                feedback: Regarde mieux où est le `repeat`
+                    Les roues de l’autobus tournent tournent
+                    Tournent tournent
+                    Les roues de l’autobus tournent tournent
+                    Tournent tournent
+                feedback: Seule la deuxième ligne est répétée 2 fois
             -   option: |-
-                    Quand on lance un yo-yo
-                    Il descend et remonte
-                    Il descend et remonte
-                    Il descend et remonte
-                feedback: Bravo, tu as la bonne réponse !
-            hint: Seul 'Il descend et remonte' est répété 3 fois.
+                    Les roues de l’autobus tournent tournent
+                    Tournent tournent
+                    Tournent tournent
+                feedback: Dans toute la ville ! Parfait !
+            hint: Seul « Tournent tournent » est répété 2 fois
             correct_answer: D
             question_score: '10'
         7:
-            question_text: Quelle sera la sortie de ce code ?
+            question_text: Que va écrire ce code ?
             code: |-
-                repeat 2 times print 'We will'
-                print 'ROCK YOU!'
+                {repeat} 2 {times} {print} "We will"
+                {print} "ROCK YOU!"
             mp_choice_options:
             -   option: |-
                     We will We will
                     ROCK YOU!
-                feedback: '''We will'' n’apparaît pas 2 fois sur la même ligne'
+                feedback: « We will » n’apparaîtra pas 2 fois sur la même ligne
             -   option: |-
                     We will
                     We will
                     ROCK YOU!
-                feedback: Bien !
+                feedback: Super !
             -   option: |-
                     We will
                     ROCK YOU!
                     We will
                     ROCK YOU!
-                feedback: ROCK YOU! n’apparaît qu'une fois !
+                feedback: « ROCK YOU! » n’apparaîtra qu'une fois !
             -   option: |-
                     We will
                     ROCK YOU!
-                feedback: Pense à la commande `repeat`
-            hint: Regarde où est la commande `repeat`
+                feedback: Attention à la commande `{repeat}`
+            hint: Regarde où est la commande `{repeat}`
             correct_answer: B
             question_score: '10'
         8:
-            question_text: Quel sera le code pour avoir cette sortie ?
+            question_text: Quel code faut-il pour écrire ça ?
             code: |-
                 1 2 3
                 chocolat
@@ -1359,87 +1382,120 @@ levels:
                 cassis
             mp_choice_options:
             -   option: |-
-                    print '1 2 3'
-                    print 'chocolat'
-                    print '1 2 3'
-                    print '4 5 6'
-                    print 'cassis'
-                feedback: Parfait, tu ne peux pas utiliser la commande `repeat` ici
+                    ```
+                    {print} "1 2 3"
+                    {print} "chocolat"
+                    {print} "1 2 3"
+                    {print} "4 5 6"
+                    {print} "cassis"
+                    ```
+                feedback: Parfait, tu ne peux pas utiliser la commande `{repeat}` ici.
             -   option: |-
-                    repeat 2 times print '1 2 3'
-                    print '4 5 6'
-                    print 'cassis'
-                feedback: Où est passé le 'chocolat' ?
+                    ```
+                    {repeat} 2 {times} {print} "1 2 3"
+                    {print} "4 5 6"
+                    {print} "cassis"
+                    ```
+                feedback: Où as-tu mis le « chocolat » ?
             -   option: |-
-                    repeat 2 times print '1 2 3'
-                    print 'chocolat'
-                    print '4 5 6'
-                    print 'cassis'
-                feedback: Ce n'est pas dans le bon ordre
+                    ```
+                    {repeat} 2 {times} {print} "1 2 3"
+                    {print} "chocolat"
+                    {print} "4 5 6"
+                    {print} "cassis"
+                    ```
+                feedback: Ce n'est pas dans le bon ordre.
             -   option: |-
-                    repeat 2 times print '1 2 3'
-                    repeat 2 times print 'Do do'
-                    print '4 5 6'
-                    print 'cassis'
-                feedback: Ce n'est pas dans le bon ordre
-            hint: On ne peut utiliser la `repeat` que si l'on veut avoir exactement la même ligne 2 fois (ou plus) de suite.
+                    ```
+                    {repeat} 2 {times} {print} "1 2 3"
+                    {repeat} 2 {times} {print} "chocolat"
+                    {print} "4 5 6"
+                    {print} "cassis"
+                    ```
+                feedback: Il ne faut pas répéter « chocolat »
+            hint: '`{repeat}` ne peut être utilisé que si l''on veut exécuter la même ligne plusieurs fois de suite.'
             correct_answer: A
             question_score: '10'
         9:
-            question_text: Quel sera le code pour avoir cette sortie ?
+            question_text: Quel code
             code: |-
                 Batman survolait Gotham.
-                Quand soudain, il a entendu quelqu un crier...
-                Au secours !
-                Au secours !
-                Au secours !
-                Aidez-moi !
+                Quand soudain, il a entendu quelqu'un crier…
+                Au secours !
+                Au secours !
+                Au secours !
+                S'il vous plait, aidez-moi !
             mp_choice_options:
             -   option: |-
-                    print 'Batman survolait Gotham.'
-                    print 'Quand soudain, il a entendu quelqu un crier...'
-                    print 'Au secours !'
-                    repeat 3 times print 'Aidez-moi !'
-                feedback: Tu ne répètes pas la bonne ligne
-            -   option: "print 'Batman survolait Gotham.' \nprint 'Quand soudain, il a entendu quelqu un crier...'\nrepeat 3 times 'Au secours !'\nprint 'Aidez-moi !'"
-                feedback: Hélas non !
+                    ```
+                    {print} "Batman survolait Gotham."
+                    {print} "Quand soudain, il entend quelqu'un crier…"
+                     {print} "Au secours !"
+                    {repeat} 3 {times} {print} "S'il vous plait, aidez-moi !"
+                    ```
+                feedback: Tu ne répètes pas la bonne ligne.
             -   option: |-
-                    print Batman survolait Gotham.
-                    print Quand soudain, il a entendu quelqu un crier...
-                    repeat 3 times print Au secours !
-                    print Aidez-moi !
-                feedback: Tu as oublié les guillemets
-            -   option: "print 'Batman survolait Gotham.' \nprint 'Quand soudain, il a entendu quelqu un crier...'\nrepeat 3 times print 'Au secours !'\nprint 'Aidez-moi !'"
-                feedback: Parfait !
-            hint: '''Au secours !'' doit apparaître 3 fois'
+                    ```
+                    {print} "Batman survolait Gotham."
+                    {print} "Quand soudain, il entend quelqu'un crier…"
+                    {repeat} 3 {times} "Au secours !"
+                    {print} "S'il vous plait, aidez-moi !"
+                    ```
+                feedback: La commande `{print}` manque à la ligne 3.
+            -   option: |-
+                    ```
+                    {print} Batman est en train de survoler Gotham.
+                    {print} Quand soudain, il entend quelqu'un crier…
+                    {repeat} 3 {times} {print} Au secours !
+                    {print} S'il vous plait, aidez-moi !
+                    ```
+                feedback: Tu oublies les guillemets
+            -   option: |-
+                    ```
+                    {print} "Batman survolait Gotham."
+                    {print} "Quand soudain, il entends quelqu un crier..."
+                    {repeat} 3 {times} {print} "Au secours !"
+                    {print} "S'il vous plat, aidez-moi !"
+                    ```
+                feedback: Parfait
+            hint: « Au secours ! » est répété 3 fois
             correct_answer: D
             question_score: '10'
         10:
-            question_text: Quel sera le code pour avoir cette sortie ?
+            question_text: Quel code faut-il pour afficher ça ?
             code: |-
-                Si tu es content tape dans tes mains !
-                Si tu es content tape dans tes mains !
-                Si tu es vraiment content tape dans tes mains !
-                Si tu es content tape dans tes mains !
+                Si tu es content tape dans tes mains !
+                Si tu es content tape dans tes mains !
+                Si tu es vraiment content tape dans tes mains !
+                Si tu es content tape dans tes mains !
             mp_choice_options:
             -   option: |-
-                    repeat 2 times 'Si tu es content tape dans tes mains !'
-                    print 'Si tu es vraiment content tape dans tes mains !'
-                    print 'Si tu es content tape dans tes mains !'
-                feedback: Il manque une commande !
+                    ```
+                    {repeat} 2 {times} "Si tu es content tape dans tes mains !"
+                    {print} “Si tu es vraiment content tape dans tes mains !"
+                    {print} "Si tu es content tape dans tes mains !"
+                    ```
+                feedback: Presque ! La première ligne a besoins d'un mot supplémentaire
             -   option: |-
-                    repeat 2 times print 'Si tu es content tape dans tes mains !'
-                    print 'Si tu es vraiment content tape dans tes mains !'
-                    print 'Si tu es content tape dans tes mains !'
-                feedback: Bien !
+                    ```
+                    {repeat} 2 {times} {print} "Si tu es content tape dans tes mains !"
+                    {print} "Si tu es vraiment content tape dans tes mains !"
+                    {print} "Si tu es content tape dans tes mains !"
+                    ```
+                feedback: Super !
             -   option: |-
-                    repeat 3 times print 'Si tu es content tape dans tes mains !'
-                    print 'Si tu es vraiment content tape dans tes mains !'
+                    ```
+                    {repeat} 3 {times} "Si tu es content tape dans tes mains !"
+                    {print} "Si tu es vraiment content tape dans tes mains !"
+                    ```
                 feedback: Ce n'est pas le bon ordre.
             -   option: |-
-                    repeat 4 times print 'Si tu es content'
-                    print 'vraiment'
-                    repeat 4 times print 'tape dans tes mains !'
+                    ```
+                    {repeat} 4 {times} "Si tu es "
+                    {repeat} 2 {times} "content tape dans tes mains !"
+                    {print} "vraiment content tape dans tes mains !"
+                    {print} "content tape dans tes mains !"
+                    ```
                 feedback: Ce n'est pas le bon ordre.
             hint: Fais attention à l'ordre des phrases.
             correct_answer: B
