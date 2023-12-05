@@ -1,7 +1,6 @@
 import { Decoration, DecorationSet, EditorView, GutterMarker, MatchDecorator, ViewPlugin, ViewUpdate, gutter, } from '@codemirror/view'
-import { RangeSet, StateEffect, StateField } from '@codemirror/state'
-
-
+import { RangeSet, RangeSetBuilder, StateEffect, StateField } from '@codemirror/state'
+import {syntaxTree} from "@codemirror/language"
 export const addErrorLine = StateEffect.define<{ row: number }>();
 export const addErrorWord = StateEffect.define<{ row: number, col: number }>();
 export const removeErrorMarkers = StateEffect.define<void>();
@@ -154,6 +153,7 @@ const debugLine = Decoration.line({ class: "cm-debugger-current-line" });
 const debugWord = Decoration.mark({ class: "cm-debugger-current-line" });
 const incorrectCodeMark = Decoration.mark({ class: "cm-incorrect-hedy-code" });
 const deactivateLineMarker = Decoration.line({ class: "cm-disabled-line" })
+const highlightVariableMarker = Decoration.mark({ class: "cm-highlight-var"})
 
 export const decorationsTheme = EditorView.theme({
     ".cm-error-editor": {
@@ -166,6 +166,9 @@ export const decorationsTheme = EditorView.theme({
     },
     ".cm-incorrect-hedy-code": {
         textDecoration: "red wavy underline",
+    },
+    ".cm-highlight-var": {
+        color: '#EDF492 ',
     }
 });
 
@@ -248,3 +251,38 @@ export const placeholders = ViewPlugin.fromClass(class {
       return view.plugin(plugin)?.placeholders || Decoration.none
     })
 })
+
+export const variableHighlighter = ViewPlugin.fromClass(class {
+    decorations: DecorationSet
+    constructor(view: EditorView) {
+      this.decorations = highlightVariables(view)
+    }
+    update(update: ViewUpdate) {
+      if (update.docChanged || update.viewportChanged) {
+        this.decorations = highlightVariables(update.view)
+      }
+    }
+  }, {
+    decorations: v => v.decorations
+})
+
+function highlightVariables(view: EditorView) {
+    let variableDeco = new RangeSetBuilder<Decoration>()
+    for (let {from, to} of view.visibleRanges) {
+        syntaxTree(view.state).iterate({
+            from: from,
+            to: to,
+            enter: (node) => {
+                if (node.name === 'Assign') {                                       
+                    const child = node.node.getChild('Text');
+                    if (child) {                        
+                        console.log(view.state.doc.sliceString(child.from, child.to))
+                        variableDeco.add(child.from, child.to, highlightVariableMarker)
+                    }
+                }
+            }
+        })
+    }
+
+    return variableDeco.finish()
+}

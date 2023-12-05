@@ -5,7 +5,7 @@ import { EditorState, Compartment, StateEffect, Prec } from '@codemirror/state'
 import { EventEmitter } from "./event-emitter";
 import { deleteTrailingWhitespace, defaultKeymap, historyKeymap } from '@codemirror/commands'
 import { history } from "@codemirror/commands"
-import { indentOnInput, defaultHighlightStyle, syntaxHighlighting ,LanguageSupport, syntaxTree } from "@codemirror/language"
+import { indentOnInput, defaultHighlightStyle, syntaxHighlighting ,LanguageSupport } from "@codemirror/language"
 import { highlightSelectionMatches, searchKeymap } from "@codemirror/search";
 import { 
     errorLineField, debugLineField, decorationsTheme, addDebugLine, 
@@ -14,16 +14,17 @@ import {
     incorrectLineField,
     removeIncorrectLineEffect,
     addDebugWords,
-    placeholders
+    placeholders,
+    variableHighlighter
 } from "./cm-decorations";
 import {LRLanguage} from "@codemirror/language"
 import { languagePerLevel } from "./lezer-parsers/language-packages";
 import { theGlobalSourcemap, theLevel } from "./app";
-import { highlightName, monokai, monokaiHighlightStyle } from "./cm-monokai-theme";
+import { monokai } from "./cm-monokai-theme";
 import { error } from "./modal";
 import { ClientMessages } from "./client-messages";
-import { Tag, getStyleTags, highlightTree, styleTags, tags as t, tagHighlighter } from "@lezer/highlight";
-import { SyntaxNode } from '@lezer/common'
+import { Tag, styleTags, tags as t } from "@lezer/highlight";
+
 export class HedyCodeMirrorEditorCreator implements HedyEditorCreator {
     /**
      * This function should initialize the editor and set up all the required
@@ -73,7 +74,6 @@ export class HedyCodeMirrorEditor implements HedyEditor {
     });
     private currentDebugLine?: number;
     private incorrectLineMapping: Record<string, number> = {};
-    private variables: SyntaxNode[] = [];
 
     constructor(element: HTMLElement, isReadOnly: boolean, _: EditorType, __: string = "ltr") {
         this.themeStyles = {
@@ -104,7 +104,7 @@ export class HedyCodeMirrorEditor implements HedyEditor {
 
         const state = EditorState.create({
             doc: '',
-            extensions: [                
+            extensions: [                                
                 EditorView.theme(cursorStyle),
                 breakpointGutter,
                 lineNumbers(),
@@ -130,7 +130,8 @@ export class HedyCodeMirrorEditor implements HedyEditor {
                 debugLineField,
                 incorrectLineField,
                 Prec.high(decorationsTheme),
-                placeholders
+                placeholders,
+                Prec.highest(variableHighlighter),
             ]
         });
         
@@ -292,10 +293,6 @@ export class HedyCodeMirrorEditor implements HedyEditor {
     }
 
     public on(key: Parameters<typeof this.editorEvent.on>[0], handler: any) {
-        const highlighter = tagHighlighter([{
-                tag: t.name,
-                class: '.cm-name'
-            }])
         // This type of handler works for when the view is updated
         // If in the future we need to add another type of handler to the editor
         // that hooks to the DOM, We can use the domEventHandlers configuration for that
@@ -304,25 +301,6 @@ export class HedyCodeMirrorEditor implements HedyEditor {
                 effects: StateEffect.appendConfig.of(EditorView.updateListener.of((v: ViewUpdate) => {                
                     if (v.docChanged) {
                         handler();
-                        for (let {from, to} of this.view.visibleRanges) {
-                            syntaxTree(this.view.state).iterate({
-                                from: from,
-                                to: to,
-                                enter: (node) => {
-                                    if (node.name === 'Assign') {
-                                        console.log(this.view.state.doc.sliceString(node.from, node.to))
-                                        const child = node.node.getChild('Text');
-                                        if (child) {
-                                            console.log(this.view.state.doc.sliceString(child.from, child.to));
-                                            this.variables.push(child);     
-                                            console.log(child.name)                                            
-                                            highlightTree(child.toTree(), highlighter, (from: number, to: number, classes: string) => {console.log(from, to, classes)})
-
-                                        }
-                                    }
-                                }
-                            })
-                        }
                     }
                 }))
             })
