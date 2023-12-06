@@ -3310,6 +3310,7 @@ def is_program_valid(program_root, input_string, level, lang):
 
 def repair_leading_space(input_string, lang, level, line):
     fixed_code = program_repair.remove_leading_spaces(input_string)
+    result = None
     if fixed_code != input_string:  # only if we have made a successful fix
         try:
             fixed_result = transpile_inner(fixed_code, level, lang)
