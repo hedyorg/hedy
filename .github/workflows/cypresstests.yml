@@ -44,7 +44,7 @@ jobs:
 
     - name: App bundles + CSS
       run: |
-        build-tools/heroku/generate-typscript
+        build-tools/heroku/generate-typescript
         build-tools/heroku/tailwind/generate-development-css
 
     - name: Cypress run (manual)
