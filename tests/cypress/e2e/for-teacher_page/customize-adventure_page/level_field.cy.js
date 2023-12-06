@@ -15,6 +15,8 @@ describe('Levels Dropdown Select test', () => {
           .should('not.be.disabled')
           .click()
         
+        cy.wait(400)
+
         cy.get("div[data-te-select-dropdown-ref]")
           .should('be.visible')
         

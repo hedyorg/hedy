@@ -5,7 +5,9 @@ name: Cypress tests
 
 on:
   push:
-    branches: [ adventure-all-levels ]
+    branches: [ main, adventure-all-levels ]
+  pull_request:
+    branches: [ main ]
 
 jobs:
   # This identifier gets used in .mergify.yml
@@ -42,20 +44,17 @@ jobs:
       # Runs in the background
       run: build-tools/github/start-debug-server --daemon
 
-    - name: App bundles + CSS
-      run: |
-        build-tools/heroku/generate-typescript
-        build-tools/heroku/tailwind/generate-development-css
-
-    - name: Cypress run (manual)
-      run: npm run cypress
-      #   # Where cypress.config.js and all the other cypress files live, requires 'install: false'
-      #   working-directory: tests/
-      #   # We have already installed all dependencies
-      #   install: false
-      # env:
-      #   # pass the Cypress Cloud record key as an environment variable
-      #   CYPRESS_RECORD_KEY: ${{ secrets.CYPRESS_RECORD_KEY }}
-      #   # pass GitHub token to allow accurately detecting a build vs a re-run build
-      #   GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+    - name: Cypress run
+      uses: cypress-io/github-action@v6
+      with:
+        record: true
+        # Where cypress.config.js and all the other cypress files live, requires 'install: false'
+        working-directory: tests/
+        # We have already installed all dependencies
+        install: false
+      env:
+        # pass the Cypress Cloud record key as an environment variable
+        CYPRESS_RECORD_KEY: ${{ secrets.CYPRESS_RECORD_KEY }}
+        # pass GitHub token to allow accurately detecting a build vs a re-run build
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
