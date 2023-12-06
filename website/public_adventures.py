@@ -47,7 +47,6 @@ class PublicAdventuresModule(WebsiteModule):
             )
 
         available_languages = set([adv["language"] for adv in adventures if adv["language"]])
-        print('\n\n\n', available_languages)
         available_tags = set([tag for adv in adventures for tag in adv.get("tags", [])])
 
         return render_template(
