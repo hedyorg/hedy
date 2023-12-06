@@ -163,6 +163,14 @@ class TestsLevel7(HedyTester):
 
     def test_repeat_with_missing_print_gives_error(self):
         code = textwrap.dedent("""\
+        repeat 3 times x""")
+
+        self.single_level_tester(
+            code=code,
+            exception=hedy.exceptions.IncompleteRepeatException
+        )
+    def test_repeat_with_missing_print_gives_error_skip(self):
+        code = textwrap.dedent("""\
         x is 3
         repeat 3 times x""")
 
@@ -205,8 +213,7 @@ class TestsLevel7(HedyTester):
     def test_repeat_with_missing_times_gives_error(self):
         code = textwrap.dedent("""\
         prind skipping
-        repeat 3 print 'n'
-        """)
+        repeat 3 print 'n'""")
 
         expected = textwrap.dedent("""\
         pass
