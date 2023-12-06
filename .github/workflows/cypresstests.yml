@@ -47,7 +47,7 @@ jobs:
     - name: Cypress run
       uses: cypress-io/github-action@v6
       with:
-        record: true
+        browser: electron
         # Where cypress.config.js and all the other cypress files live, requires 'install: false'
         working-directory: tests/
         # We have already installed all dependencies
