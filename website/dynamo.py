@@ -975,6 +975,9 @@ class DynamoIncrement(DynamoUpdate):
             "Value": {"N": str(self.delta)},
         }
 
+    def validate_against_type(self, type):
+        return isinstance(self.delta, int)
+
     def __repr__(self):
         return f'Inc({self.delta})'
 
@@ -990,6 +993,9 @@ class DynamoAddToStringSet(DynamoUpdate):
             "Action": "ADD",
             "Value": {"SS": list(self.elements)},
         }
+
+    def validate_against_type(self, type):
+        return all(isinstance(x, str) for x in self.elements)
 
     def __repr__(self):
         return f'Add({self.elements})'
@@ -1010,6 +1016,9 @@ class DynamoAddToNumberSet(DynamoUpdate):
             "Value": {"NS": [str(x) for x in self.elements]},
         }
 
+    def validate_against_type(self, type):
+        return all(isinstance(x, int) for x in self.elements)
+
     def __repr__(self):
         return f'Add({self.elements})'
 
@@ -1019,6 +1028,9 @@ class DynamoAddToList(DynamoUpdate):
 
     def __init__(self, *elements):
         self.elements = elements
+
+    def validate_against_type(self, type):
+        return True
 
     def to_dynamo(self):
         return {
@@ -1041,6 +1053,9 @@ class DynamoRemoveFromStringSet(DynamoUpdate):
             "Action": "DELETE",
             "Value": {"SS": list(self.elements)},
         }
+
+    def validate_against_type(self, type):
+        return all(isinstance(x, str) for x in self.elements)
 
     def __repr__(self):
         return f'Remove({self.elements})'
@@ -1342,3 +1357,25 @@ def reverse_index(xs):
     for key, value in xs:
         ret[value].append(key)
     return ret
+
+
+class string_set:
+    def __instancecheck__(self, obj):
+        try:
+            return all(isinstance(x, str) for x in obj)
+        except:
+            return False
+
+class number_set:
+    def __instancecheck__(self, obj):
+        try:
+            return all(isinstance(x, int) for x in obj)
+        except:
+            return False
+
+class binary_set:
+    def __instancecheck__(self, obj):
+        try:
+            return all(isinstance(x, bytes) for x in obj)
+        except:
+            return False
