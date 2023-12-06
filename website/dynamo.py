@@ -481,7 +481,8 @@ class Table:
         """Validate the types in the record according to the 'self.types' map."""
         for field, ftype in self.types.items():
             value = data.get(field)
-            if value is None: continue
+            if value is None:
+                continue
 
             if isinstance(value, DynamoUpdate):
                 ok = value.validate_against_type(ftype)

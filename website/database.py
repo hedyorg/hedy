@@ -11,61 +11,61 @@ from . import querylog
 storage = dynamo.AwsDynamoStorage.from_env() or dynamo.MemoryStorage("dev_database.json")
 
 USERS = dynamo.Table(storage, 'users', 'username',
-    types={
-        'username': str,
-        'email': str,
-        'epoch': int,
-        'created': int,
-    },
-    indexes=[
-        dynamo.Index('email'),
-        dynamo.Index('epoch', sort_key='created')
-    ]
-)
+                     types={
+                         'username': str,
+                         'email': str,
+                         'epoch': int,
+                         'created': int,
+                     },
+                     indexes=[
+                         dynamo.Index('email'),
+                         dynamo.Index('epoch', sort_key='created')
+                     ]
+                     )
 TOKENS = dynamo.Table(storage, 'tokens', 'id',
-    types={
-        'id': str,
-        'username': str,
-    },
-    indexes=[
-        dynamo.Index('id'),
-        dynamo.Index('username'),
-    ]
-)
+                      types={
+                          'id': str,
+                          'username': str,
+                      },
+                      indexes=[
+                          dynamo.Index('id'),
+                          dynamo.Index('username'),
+                      ]
+                      )
 PROGRAMS = dynamo.Table(storage, "programs", "id",
-    types={
-        'id': str,
-        'username': str,
-        'date': int,
-        'hedy_choice': int,
-        'public': int,
-        'lang': str,
-        'level': int,
-        'adventure_name': str,
-    },
-    indexes=[
-        dynamo.Index('username', sort_key='date', index_name='username-index'),
-        dynamo.Index('hedy_choice', sort_key='date', index_name='hedy_choice-index'),
-        # For the explore page, this index has 'level', 'lang' and 'adventure_name'
-        dynamo.Index('public', sort_key='date'),
+                        types={
+                            'id': str,
+                            'username': str,
+                            'date': int,
+                            'hedy_choice': int,
+                            'public': int,
+                            'lang': str,
+                            'level': int,
+                            'adventure_name': str,
+                        },
+                        indexes=[
+                            dynamo.Index('username', sort_key='date', index_name='username-index'),
+                            dynamo.Index('hedy_choice', sort_key='date', index_name='hedy_choice-index'),
+                            # For the explore page, this index has 'level', 'lang' and 'adventure_name'
+                            dynamo.Index('public', sort_key='date'),
 
-        # For the filtered view of the 'explore' page (keys_only so we don't duplicate other attributes unnecessarily)
-        dynamo.Index('lang', sort_key='date', keys_only=True),
-        dynamo.Index('level', sort_key='date', keys_only=True),
-        dynamo.Index('adventure_name', sort_key='date', keys_only=True),
-    ]
-)
+                            # For the filtered view of the 'explore' page (keys_only so we don't duplicate other attributes unnecessarily)
+                            dynamo.Index('lang', sort_key='date', keys_only=True),
+                            dynamo.Index('level', sort_key='date', keys_only=True),
+                            dynamo.Index('adventure_name', sort_key='date', keys_only=True),
+                        ]
+                        )
 CLASSES = dynamo.Table(storage, "classes", "id",
-    types={
-        'id': str,
-        'teacher': str,
-        'link': str,
-    },
-    indexes=[
-        dynamo.Index('teacher'),
-        dynamo.Index('link'),
-    ]
-)
+                       types={
+                           'id': str,
+                           'teacher': str,
+                           'link': str,
+                       },
+                       indexes=[
+                           dynamo.Index('teacher'),
+                           dynamo.Index('link'),
+                       ]
+                       )
 
 # A custom teacher adventure
 # - id (str): id of the adventure
@@ -77,16 +77,16 @@ CLASSES = dynamo.Table(storage, "classes", "id",
 # - public (bool): whether it can be shared
 # - tags_id (str): id of tags that describe this adventure.
 ADVENTURES = dynamo.Table(storage, "adventures", "id",
-    types={
-        'id': str,
-        'creator': str,
-        'public': bool,
-    },
-    indexes=[
-        dynamo.Index("creator"),
-        dynamo.Index("public"),
-    ]
-)
+                          types={
+                              'id': str,
+                              'creator': str,
+                              'public': bool,
+                          },
+                          indexes=[
+                              dynamo.Index("creator"),
+                              dynamo.Index("public"),
+                          ]
+                          )
 INVITATIONS = dynamo.Table(
     storage, "invitations", partition_key="username#class_id",
     types={
@@ -108,15 +108,15 @@ INVITATIONS = dynamo.Table(
     - popularity (int): # of adventures it's been tagged in.
 """
 TAGS = dynamo.Table(storage, "tags", "id",
-    types={
-        'id': str,
-        'name': str,
-        'popularity': int,
-    },
-    indexes=[
-        dynamo.Index("name", sort_key="popularity")
-    ]
-)
+                    types={
+                        'id': str,
+                        'name': str,
+                        'popularity': int,
+                    },
+                    indexes=[
+                        dynamo.Index("name", sort_key="popularity")
+                    ]
+                    )
 
 # A survey
 # - id (str): the identifier of the survey + the response identifier ex. "class_teacher1" or "students_student1"
@@ -124,10 +124,10 @@ TAGS = dynamo.Table(storage, "tags", "id",
 # - skip (str): if the survey should never be shown or today date to be reminded later
 
 SURVEYS = dynamo.Table(storage, "surveys", "id",
-    types={
-        'id': str,
-    },
-)
+                       types={
+                           'id': str,
+                       },
+                       )
 
 # Class customizations
 #
@@ -155,23 +155,23 @@ SURVEYS = dynamo.Table(storage, "surveys", "id",
 #      available to this class. This list is deprecated, all adventures a teacher created
 #      are now automatically available to all of their classes.
 CUSTOMIZATIONS = dynamo.Table(storage, "class_customizations", partition_key="id",
-    types={ 'id': str },
-)
+                              types={'id': str},
+                              )
 ACHIEVEMENTS = dynamo.Table(storage, "achievements", partition_key="username",
-    types={ 'username': str },
-)
+                            types={'username': str},
+                            )
 PUBLIC_PROFILES = dynamo.Table(storage, "public_profiles", partition_key="username",
-    types={ 'username': str },
-)
+                               types={'username': str},
+                               )
 PARSONS = dynamo.Table(storage, "parsons", "id",
-    types={ 'id': str },
-)
+                       types={'id': str},
+                       )
 STUDENT_ADVENTURES = dynamo.Table(storage, "student_adventures", "id",
-    types={ 'id': str },
-)
+                                  types={'id': str},
+                                  )
 CLASS_ERRORS = dynamo.Table(storage, "class_errors", "id",
-    types={ 'id': str },
-)
+                            types={'id': str},
+                            )
 # We use the epoch field to make an index on the users table, sorted by a different
 # sort key. In our case, we want to sort by 'created', so that we can make an ordered
 # list of users.
@@ -204,11 +204,11 @@ CURRENT_USER_EPOCH = 1
 # by a user. 'level' is padded to 4 characters, then attemptId is added.
 #
 QUIZ_ANSWERS = dynamo.Table(storage, "quizAnswers", partition_key="user", sort_key="levelAttempt",
-    types={
-        'user': str,
-        'levelAttempt': str,
-    }
-)
+                            types={
+                                'user': str,
+                                'levelAttempt': str,
+                            }
+                            )
 
 # Holds information about program runs: success/failure and produced exceptions. Entries are created per user per level
 # per week and updated in place. Uses a composite partition key 'id#level' and 'week' as a sort key. Structure:
