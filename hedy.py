@@ -1174,7 +1174,8 @@ class IsValid(Filter):
             if invalid_command_en == Command.turn:
                 arg = args[0][0]
                 raise hedy.exceptions.InvalidArgumentException(command=invalid_command,
-                                                               allowed_types=get_allowed_types(Command.turn, self.level),
+                                                               allowed_types=get_allowed_types(
+                                                                   Command.turn, self.level),
                                                                invalid_argument=arg,
                                                                line_number=meta.line)
             # clearly the error message here should be better or it should be a different one!
@@ -1195,7 +1196,6 @@ class IsValid(Filter):
         raise exceptions.InvalidCommandException(invalid_command=invalid_command, level=self.level,
                                                  guessed_command=closest, line_number=meta.line,
                                                  fixed_code=fixed_code, fixed_result=result)
-
 
     def error_unsupported_number(self, meta, args):
         # add in , line=meta.line, column=meta.column
@@ -3402,7 +3402,6 @@ def transpile_inner(input_string, level, lang="en", populate_source_map=False, i
     # grab the right transpiler from the lookup
     convertToPython = TRANSPILER_LOOKUP[level]
     python = convertToPython(lookup_table, lang, numerals_language, is_debug).transform(abstract_syntax_tree)
-
 
     has_clear = "clear" in commands
     has_turtle = "forward" in commands or "turn" in commands or "color" in commands
