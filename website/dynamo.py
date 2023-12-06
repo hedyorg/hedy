@@ -217,14 +217,19 @@ class Table:
           project the full set of attributes. Indexes can have a partition and their
           own sort keys.
         - sort_key: a field that is the sort key for the table.
+        - Types: a dictionary of field name to type object, to validate fields against.
+          Does not have to be exhaustive, but it must include all the indexed fields.
+          You can use: str, list, bool, bytes, int, float, numbers.Number, dict, list,
+          string_set, number_set, binary_set (last 3 declared in this module).
     """
 
-    def __init__(self, storage: TableStorage, table_name, partition_key, sort_key=None, indexes=None):
+    def __init__(self, storage: TableStorage, table_name, partition_key, types, sort_key=None, indexes=None):
         self.key_schema = KeySchema(partition_key, sort_key)
         self.storage = storage
         self.table_name = table_name
         self.indexes = indexes or []
         self.indexed_fields = set()
+        self.types = types or {}
 
         all_schemas = [self.key_schema] + [i.key_schema for i in self.indexes]
         for schema in all_schemas:
@@ -235,7 +240,11 @@ class Table:
         part_names = reverse_index((index.index_name, index.key_schema.partition_key) for index in self.indexes)
         duped = [names for names in part_names.values() if len(names) > 1]
         if duped:
-            raise RuntimeError(f'Table {self.table_name}: indexes with the same partition key: {duped}')
+            raise ValueError(f'Table {self.table_name}: indexes with the same partition key: {duped}')
+
+        # Check to make sure all indexed fields have a declared type
+        if undeclared := [f for f in self.indexed_fields if f not in self.types]:
+            raise ValueError(f'Declare the type of these fields which are used as keys: {", ".join(undeclared)}')
 
     @querylog.timed_as("db_get")
     def get(self, key):
@@ -348,6 +357,7 @@ class Table:
         if not self.key_schema.fully_matches(data):
             raise ValueError(f"Expecting fields {self.key_schema} in create() call, got: {data}")
         self._validate_indexable_fields(data, False)
+        self._validate_types(data)
 
         querylog.log_counter(f"db_create:{self.table_name}")
         self.storage.put(self.table_name, self.key_schema.extract(data), data)
@@ -368,6 +378,7 @@ class Table:
         querylog.log_counter(f"db_update:{self.table_name}")
         self._validate_indexable_fields(updates, True)
         self._validate_key(key)
+        self._validate_types(updates)
 
         return self.storage.update(self.table_name, key, updates)
 
@@ -465,6 +476,19 @@ class Table:
             raise ValueError('Trying to insert %r into table %s, but %s is a Partition or Sort Key of the table itself '
                              ' or an index, so must be of type string, number or binary.'
                              % ({field: value}, self.table_name, field))
+
+    def _validate_types(self, data):
+        """Validate the types in the record according to the 'self.types' map."""
+        for field, ftype in self.types.items():
+            value = data.get(field)
+            if value is None: continue
+
+            if isinstance(value, DynamoUpdate):
+                ok = value.validate_against_type(ftype)
+            else:
+                ok = isinstance(value, ftype)
+            if not ok:
+                raise ValueError(f'In {data}, value of {field} should be of type {ftype} (got {value}')
 
 
 DDB_SERIALIZER = TypeSerializer()
@@ -937,6 +961,9 @@ class DynamoUpdate:
     def to_dynamo(self):
         raise NotImplementedError()
 
+    def validate_against_type(self, type):
+        raise NotImplementedError()
+
 
 class DynamoIncrement(DynamoUpdate):
     def __init__(self, delta=1):
@@ -947,6 +974,9 @@ class DynamoIncrement(DynamoUpdate):
             "Action": "ADD",
             "Value": {"N": str(self.delta)},
         }
+
+    def __repr__(self):
+        return f'Inc({self.delta})'
 
 
 class DynamoAddToStringSet(DynamoUpdate):
@@ -960,6 +990,9 @@ class DynamoAddToStringSet(DynamoUpdate):
             "Action": "ADD",
             "Value": {"SS": list(self.elements)},
         }
+
+    def __repr__(self):
+        return f'Add({self.elements})'
 
 
 class DynamoAddToNumberSet(DynamoUpdate):
@@ -977,6 +1010,9 @@ class DynamoAddToNumberSet(DynamoUpdate):
             "Value": {"NS": [str(x) for x in self.elements]},
         }
 
+    def __repr__(self):
+        return f'Add({self.elements})'
+
 
 class DynamoAddToList(DynamoUpdate):
     """Add one or more elements to a list."""
@@ -990,6 +1026,9 @@ class DynamoAddToList(DynamoUpdate):
             "Value": {"L": [DDB_SERIALIZER.serialize(x) for x in self.elements]},
         }
 
+    def __repr__(self):
+        return f'Add({self.elements})'
+
 
 class DynamoRemoveFromStringSet(DynamoUpdate):
     """Remove one or more elements to a string set."""
@@ -1002,6 +1041,9 @@ class DynamoRemoveFromStringSet(DynamoUpdate):
             "Action": "DELETE",
             "Value": {"SS": list(self.elements)},
         }
+
+    def __repr__(self):
+        return f'Remove({self.elements})'
 
 
 class DynamoCondition:
