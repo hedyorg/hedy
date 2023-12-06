@@ -1367,12 +1367,14 @@ class string_set:
         except:
             return False
 
+
 class number_set:
     def __instancecheck__(self, obj):
         try:
             return all(isinstance(x, int) for x in obj)
         except:
             return False
+
 
 class binary_set:
     def __instancecheck__(self, obj):
