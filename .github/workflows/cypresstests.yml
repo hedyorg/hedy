@@ -42,6 +42,11 @@ jobs:
       # Runs in the background
       run: build-tools/github/start-debug-server --daemon
 
+    - name: App bundles + CSS
+      run: |
+        build-tools/heroku/generate-typscript
+        build-tools/heroku/tailwind/generate-development-css
+
     - name: Cypress run (manual)
       run: npm run cypress
       #   # Where cypress.config.js and all the other cypress files live, requires 'install: false'
