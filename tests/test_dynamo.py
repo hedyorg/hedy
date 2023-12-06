@@ -83,14 +83,14 @@ class TestDynamoAbstraction(unittest.TestCase, Helpers):
         """Test that adding to a set and removing from a set works."""
         with with_clean_file('test.json'):
             table = dynamo.Table(dynamo.MemoryStorage('test.json'), 'table', 'id',
-                types={ 'id': str })
+                                 types={'id': str})
             table.create(dict(
                 id='key',
                 values=set(['a', 'b', 'c']),
             ))
 
             table = dynamo.Table(dynamo.MemoryStorage('test.json'), 'table', 'id',
-                types={ 'id': str })
+                                 types={'id': str})
             final = table.get(dict(id='key'))
             self.assertEqual(final['values'], set(['a', 'b', 'c']))
 
