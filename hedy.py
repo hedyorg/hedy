@@ -1162,6 +1162,9 @@ class IsValid(Filter):
     def error_list_access(self, meta, args):
         raise exceptions.MisspelledAtCommand(command='at', arg1=str(args[1][1]), line_number=meta.line)
 
+    def error_non_decimal(self, meta, args):
+        raise exceptions.NonDecimalVariable(line_number=meta.line)
+
     def error_invalid(self, meta, args):
         invalid_command = args[0][1]
         closest = closest_command(invalid_command, get_suggestions_for_language(self.lang, self.level))
