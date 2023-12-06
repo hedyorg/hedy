@@ -1,16 +1,18 @@
 start: program
 program: _EOL* (command _EOL+)* command?
-command: print | ask | echo | turtle | error_invalid | empty_line
+command: print | ask | echo | turtle | error_invalid_space | error_invalid | empty_line
 
 print: _PRINT (text)?
 _color_literal : black | blue | brown | gray | green | orange | pink | purple | red | white | yellow
 ask: _ASK (text)?
 echo: _ECHO (text)?
 turtle: _FORWARD ((NUMBER | text))? -> forward | _TURN ((left | right ))? -> turn | _COLOR (_color_literal | text)? -> color
+error_invalid_space: _SPACE any
 
 // We give the error_invalid rule below a priority of -100,
 // just to be sure that if Lark tries to resolve ambiguity, error_invalid will be considered last
 error_invalid.-100: textwithoutspaces text?
+
 
 text: /([^\n#ـ])([^\n#]*)/ -> text //anything can be parsed except for a newline and a comment hash
 // to properly deal with tatweels, we also need to prevent text from starting with a tatweel,
