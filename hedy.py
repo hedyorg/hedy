@@ -3307,8 +3307,7 @@ def parse_input(input_string, level, lang):
 def is_program_valid(program_root, input_string, level, lang):
     # IsValid raises the appropriate exception when an error production (starting with error_)
     # is found in the parse tree
-    instance = IsValid(level, lang, input_string)
-    is_valid = instance.transform(program_root)
+    instance = IsValid(level, lang, input_string).transform(program_root)
 
 
 def repair_leading_space(input_string, lang, level, line):
