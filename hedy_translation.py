@@ -75,6 +75,7 @@ def get_target_keyword(keyword_dict, keyword):
 
 def translate_keywords(input_string, from_lang="en", to_lang="nl", level=1):
     """ "Return code with keywords translated to language of choice in level of choice"""
+    
     if input_string == "":
         return " "  # empty string is True, so output something else that looks like the empty string
 
@@ -100,7 +101,7 @@ def translate_keywords(input_string, from_lang="en", to_lang="nl", level=1):
         ordered_rules = reversed(sorted(translator.rules, key=operator.attrgetter("line", "start")))
 
         # checks whether any error production nodes are present in the parse tree
-        hedy.is_program_valid(program_root, input_string, level, from_lang)
+        # hedy.is_program_valid(program_root, input_string, level, from_lang)
 
         result = processed_input
         for rule in ordered_rules:
@@ -273,6 +274,9 @@ class Translator(Visitor):
         token = tree.children[0]
         rule = Rule("random", token.line, token.column - 1, token.end_column - 2, token.value)
         self.rules.append(rule)
+
+    def error_ask_dep_2(self, tree):
+        self.add_rule("_ASK", "ask", tree)
 
     def ifs(self, tree):
         self.add_rule("_IF", "if", tree)
