@@ -478,6 +478,18 @@ class TestsLevel1(HedyTester):
             lang='nl'
         )
 
+    def test_turn_ar(self):
+        # doesn't translate, probably because of the tatweel regex!
+        code = "استدر يسار"
+        expected = "t.left(90)"
+
+        self.single_level_tester(
+            code=code,
+            expected=expected,
+            extra_check_function=self.is_turtle(),
+            lang='ar'
+        )
+
     def test_turn_with_text_gives_error(self):
         code = textwrap.dedent("""\
         turn koekoek
@@ -691,12 +703,14 @@ class TestsLevel1(HedyTester):
 
     def test_lonely_echo_gives_LonelyEcho(self):
         code = "echo wat dan?"
-        self.single_level_tester(code, exception=hedy.exceptions.LonelyEchoException)
+        self.single_level_tester(
+            code,
+            exception=hedy.exceptions.LonelyEchoException)
 
     def test_echo_before_ask_gives_lonely_echo(self):
         code = textwrap.dedent("""\
         echo what can't we do?
-        ask time travel """)
+        ask time travel""")
         self.single_level_tester(code, exception=hedy.exceptions.LonelyEchoException)
 
     def test_pint_after_empty_line_gives_error_line_3(self):
