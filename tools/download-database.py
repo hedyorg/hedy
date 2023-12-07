@@ -23,7 +23,7 @@ def main():
     defs.add('hedy-beta-adventures')
     defs.add('hedy-beta-classes')
     defs.add('hedy-beta-class_customizations')
-    defs.add('hedy-beta-class_invitations')
+    defs.add('hedy-beta-invitations')
     defs.add('hedy-beta-parsons')
     defs.add('hedy-beta-program-stats')
     defs.add('hedy-beta-programs')

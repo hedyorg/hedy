@@ -416,6 +416,70 @@ describe('Test editor box functionality', () => {
 
     cy.get('#output').should('contain.text', 'nice!');
   });
+
+  it('Test flat if split between lines', () => {
+    cy.intercept('/parse').as('parse');
+
+    visitLevel(5);
+
+    cy.focused().type("if x is y\nprint '!bonito!'\nelse print 'meh'");
+
+    cy.get('#debug_button').click();
+    cy.wait('@parse')
+
+    cy.get('.cm-debugger-current-line > span').then(els => {
+      const texts = [...els].map(getText);
+      expect(texts).to.deep.eq('if x is y'.split(' '));
+    });
+    cy.get('#debug_continue').click();
+
+    cy.get('.cm-debugger-current-line > span').then(els => {
+      const texts = [...els].map(getText);
+      expect(texts).to.deep.eq(['print', "'meh'"]);
+    });
+
+    cy.get('#debug_continue').click();
+
+    cy.get('#output').should('contain.text', 'meh');
+  });
+
+  it('Test repeat with flat if split between lines inside', () => {
+    cy.intercept('/parse').as('parse');
+
+    visitLevel(7);
+
+    cy.focused().type("repeat 1 times if x is x print 'a'\nelse print 'b'");
+
+    cy.get('#debug_button').click();
+    cy.wait('@parse')
+
+    cy.get('.cm-debugger-current-line > span').then(els => {
+      const texts = [...els].map(getText);
+      expect(texts).to.deep.eq('repeat 1 times'.split(' '));
+    });
+    cy.get('#debug_continue').click();
+
+    cy.get('.cm-debugger-current-line > span').then(els => {
+      const texts = [...els].map(getText);
+      expect(texts).to.deep.eq('repeat 1 times'.split(' '));
+    });
+    cy.get('#debug_continue').click();
+    
+    cy.get('.cm-debugger-current-line > span').then(els => {
+      const texts = [...els].map(getText);
+      expect(texts).to.deep.eq('if x is x'.split(' '));
+    });
+    cy.get('#debug_continue').click();
+    
+    cy.get('.cm-debugger-current-line > span').then(els => {
+      const texts = [...els].map(getText);
+      expect(texts).to.deep.eq(['print', "'a'"]);
+    });
+
+    cy.get('#debug_continue').click();
+
+    cy.get('#output').should('contain.text', 'a');
+  });
 });
 
 /**

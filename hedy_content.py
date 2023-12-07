@@ -50,6 +50,7 @@ ADVENTURE_ORDER_PER_LEVEL = {
         'haunted',
         'story',
         'turtle',
+        'turtle_draw_it',
         'restaurant',
         'fortune',
         'debugging'
@@ -66,6 +67,7 @@ ADVENTURE_ORDER_PER_LEVEL = {
         'story',
         'restaurant',
         'turtle',
+        'turtle_draw_it',
         'debugging'
     ],
     3: [
@@ -81,6 +83,7 @@ ADVENTURE_ORDER_PER_LEVEL = {
         'story',
         'haunted',
         'turtle',
+        'turtle_draw_it',
         'debugging'
     ],
     4: [
@@ -91,6 +94,7 @@ ADVENTURE_ORDER_PER_LEVEL = {
         'dishes',
         'parrot',
         'turtle',
+        'turtle_draw_it',
         'clear_command',
         'story',
         'haunted',
@@ -113,6 +117,7 @@ ADVENTURE_ORDER_PER_LEVEL = {
         'fortune',
         'pressit',
         'turtle',
+        'turtle_draw_it',
         'debugging'
     ],
     6: [
@@ -123,6 +128,7 @@ ADVENTURE_ORDER_PER_LEVEL = {
         'dice',
         'dishes',
         'turtle',
+        'turtle_draw_it',
         'calculator',
         'fortune',
         'restaurant',
@@ -139,6 +145,7 @@ ADVENTURE_ORDER_PER_LEVEL = {
         'fortune',
         'restaurant',
         'pressit',
+        'turtle_draw_it',
         'debugging'
     ],
     8: [
@@ -152,6 +159,7 @@ ADVENTURE_ORDER_PER_LEVEL = {
         'haunted',
         'restaurant',
         'turtle',
+        'turtle_draw_it',
         'debugging'
     ],
     9: [
@@ -165,6 +173,7 @@ ADVENTURE_ORDER_PER_LEVEL = {
         'haunted',
         'pressit',
         'turtle',
+        'turtle_draw_it',
         'debugging'
     ],
     10: [
@@ -174,6 +183,7 @@ ADVENTURE_ORDER_PER_LEVEL = {
         'dice',
         'fortune',
         'turtle',
+        'turtle_draw_it',
         'harry_potter',
         'songs',
         'story',
@@ -190,6 +200,7 @@ ADVENTURE_ORDER_PER_LEVEL = {
         'songs',
         'restaurant',
         'haunted',
+        'turtle_draw_it',
         'debugging'
     ],
     12: [
@@ -206,6 +217,7 @@ ADVENTURE_ORDER_PER_LEVEL = {
         'turtle',
         'piggybank',
         'secret',
+        'turtle_draw_it',
         'debugging'
     ],
     13: [
@@ -213,10 +225,9 @@ ADVENTURE_ORDER_PER_LEVEL = {
         'and_or_command',
         'secret',
         'functions',
-        # 'functions_2',
-        # 'functions_3',
         'story',
         'rock',
+        'turtle_draw_it',
         'restaurant',
         'calculator',
         'tic',
@@ -228,6 +239,7 @@ ADVENTURE_ORDER_PER_LEVEL = {
         'guess_my_number',
         'haunted',
         'functions',
+        'turtle_draw_it',
         'hotel',
         'calculator',
         'calculator_2',
@@ -239,6 +251,7 @@ ADVENTURE_ORDER_PER_LEVEL = {
     15: [
         'default',
         'while_command',
+        'turtle_draw_it',
         'restaurant',
         'story',
         'dice',
@@ -493,8 +506,9 @@ class Adventures(StructuredDataFile):
     def get_adventure_keyname_name_levels(self):
         return {aid: {adv['name']: list(adv['levels'].keys())} for aid, adv in self.file.get('adventures', {}).items()}
 
-    def get_adventure_names(self):
-        return {aid: adv['name'] for aid, adv in self.file.get('adventures', {}).items()}
+    def get_adventure_names(self, keyword_lang):
+        return {aid: adv['name'] for aid, adv in deep_translate_keywords(
+            self.file.get('adventures'), keyword_lang).items()}
 
     def get_adventures(self, keyword_lang="en"):
         return deep_translate_keywords(self.file.get('adventures'), keyword_lang)
