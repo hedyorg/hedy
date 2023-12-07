@@ -474,7 +474,7 @@ class TestsLevel17(HedyTester):
         self.single_level_tester(
             code=code,
             exception=hedy.exceptions.ParseException,
-            extra_check_function=lambda c: c.exception.error_location[0] == 2 and c.exception.error_location[1] == 5
+            extra_check_function=lambda c: c.exception.error_location[0] == 2 and c.exception.error_location[1] == 31
         )
 
     def test_if_button_is_pressed_print(self):
