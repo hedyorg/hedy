@@ -1566,35 +1566,42 @@ function createModal(level:number ){
   modal.repair(editor, 0, title);
 }
 
-export function toggle_developers_mode(enforced: boolean) {
-  var dev_mode = window.localStorage.getItem("developer_mode");
-  if (dev_mode == "True"){
-    window.localStorage.setItem("developer_mode", "False");
+export function toggle_developers_mode() {
+  let dev_mode = window.localStorage.getItem('developer_mode');
+  if (dev_mode == 'True' || dev_mode == null){
+    window.localStorage.setItem('developer_mode', 'False');
     $('#adventures').show();
+    $('#editor-area').addClass('mt-5');
+    $('#code_editor').height('22rem');
+    $('#code_output').height('22rem');
+    theGlobalEditor.resize(352);
   } else {
-    window.localStorage.setItem("developer_mode", "True");
+    window.localStorage.setItem('developer_mode', 'True');
     $('#adventures').hide();
+    pushAchievement("lets_focus");
+    $('#editor-area').removeClass('mt-5');
+    $('#code_editor').css('height', 36 + "em");
+    $('#code_output').css('height', 36 + "em");
+    theGlobalEditor.resize(576);
   }
-  // if ($('#developers_toggle').is(":checked") || enforced) {
-  //     $('#adventures-tab').hide();
-  //     $('#blur_toggle_container').show();
-  //     pushAchievement("lets_focus");
-  // } else {
-  //     $('#blur_toggle_container').hide();
-  //     $('#adventures-tab').show();
-  // }
+}
 
-  // if ($('#adventures-tab').is(":hidden")) {
-  //   $('#editor-area').removeClass('mt-5');
-  //   $('#code_editor').css('height', 36 + "em");
-  //   $('#code_output').css('height', 36 + "em");
-  //   theGlobalEditor.resize(576);
-  // } else {
-  //   $('#editor-area').addClass('mt-5');
-  //   $('#code_editor').height('22rem');
-  //   $('#code_output').height('22rem');
-  //   theGlobalEditor.resize(352);
-  // }
+export function developers_mode(enforce_developers_mode:boolean){
+  let dev_mode = window.localStorage.getItem('developer_mode');
+  if (dev_mode == 'True' || enforce_developers_mode == true){
+    $('#adventures').hide();
+    $('#developers_toggle').prop('checked', true);
+    $('#editor-area').removeClass('mt-5');
+    $('#code_editor').css('height', 36 + "em");
+    $('#code_output').css('height', 36 + "em");
+    theGlobalEditor.resize(576);
+  } else {
+    $('#adventures').show();
+    $('#editor-area').addClass('mt-5');
+    $('#code_editor').height('22rem');
+    $('#code_output').height('22rem');
+    theGlobalEditor.resize(352);
+  }
 }
 
 export function toggle_keyword_language(lang: string) {
