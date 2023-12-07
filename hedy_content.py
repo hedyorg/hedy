@@ -15,10 +15,6 @@ COUNTRIES = static_babel_content.COUNTRIES
 ALL_LANGUAGES = {}
 ALL_KEYWORD_LANGUAGES = {}
 
-# Todo TB -> We create this list manually, but it would be nice if we find
-# a way to automate this as well
-NON_LATIN_LANGUAGES = ['ar', 'bg', 'bn', 'el', 'fa', 'hi', 'he', 'pa_PK', 'ru', 'zh_Hans']
-
 # Babel has a different naming convention than Weblate and doesn't support some languages -> fix this manually
 CUSTOM_BABEL_LANGUAGES = {'pa_PK': 'pa_Arab_PK',
                           'kmr': 'ku_TR',
