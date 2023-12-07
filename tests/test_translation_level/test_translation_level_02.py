@@ -138,6 +138,15 @@ class TestsTranslationLevel2(HedyTester):
 
         self.assertEqual(expected, result)
 
+    def test_echo_french(self):
+        code = "echo Hedy"
+
+        result = hedy_translation.translate_keywords(
+            code, "en", "fr", self.level)
+        expected = "réponds Hedy"
+
+        self.assertEqual(expected, result)
+
     @parameterized.expand(
         HedyTester.as_list_of_tuples(
             all_keywords["ask"],
