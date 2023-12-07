@@ -163,14 +163,6 @@ class HedyTester(unittest.TestCase):
             res.append(t)
         return res
 
-    def codeToInvalidInfo(self, code):
-        instance = hedy.IsValid(self.level)
-        program_root = hedy.parse_input(code, self.level, 'en')
-        is_valid = instance.transform(program_root)
-        _, invalid_info = is_valid
-
-        return invalid_info[0].line, invalid_info[0].column
-
     def multi_level_tester(
             self,
             code,
@@ -248,6 +240,8 @@ class HedyTester(unittest.TestCase):
             # see PYTHONHASHSEED
             test_hash = pickle.dumps(all_args)
         except AttributeError:
+            test_hash = None
+        except TypeError:
             test_hash = None
 
         if not self.snippet_already_tested_with_current_hedy_version(test_hash):
