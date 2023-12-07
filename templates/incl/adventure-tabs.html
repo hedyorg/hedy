@@ -1,10 +1,5 @@
       {# TABS #}
       <div id="adventures"
-      _="if window.localStorage.getItem('developer_mode') is 'True'
-            add .hidden to #adventures
-        else
-            remove .hidden from #adventures
-          end"
           >
         {% macro adventure_tab(tabname, title, selected, id, tab_class, index) %}
             <div

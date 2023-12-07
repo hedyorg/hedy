@@ -273,11 +273,13 @@
 <div class="mx-auto mt-4 w-64 border-gray-400 border-2 rounded-full py-2 px-4{% if editor_readonly or enforce_developers_mode %} hidden{% endif %}" id="developers_toggle_container">
   <label for="developers_toggle" class="flex flex-row items-center justify-center cursor-pointer">
     <div class="relative">
-      <input id="developers_toggle" type="checkbox" onclick="hedyApp.toggle_developers_mode(false)" class="sr-only" />
+      <input id="developers_toggle" type="checkbox" class="sr-only"
+      _="on click hedyApp.toggle_developers_mode() end
+      on load hedyApp.developers_mode(false) end">
       <div class="w-10 h-4 bg-gray-400 rounded-full shadow-inner" id="dev_toggle"></div>
       <div class="toggle-circle absolute w-6 h-6 bg-white rounded-full shadow ltr:-left-1 rtl:-right-1 -top-1 transition" id="toggle_circle" style="top: -5px;"></div>
     </div>
-    <div class="ltr:ml-3 rtl:mr-3">{{_('developers_mode')}}</div>
+    <div class="ltr:ml-3 rtl:mr-3">{{_('developers_mode')}}{{enforce_developers_mode}}</div>
   </label>
 </div>
 {% endif %}
@@ -351,12 +353,3 @@ document.addEventListener('DOMContentLoaded', (event) => {
      });
  });
 </script>
-<!-- If we enforce the developer's mode in customizations -> hide adventures, increase editor and output height -->
-{% if enforce_developers_mode %}
-<script>
-// FIXME: Stop using inline JavaScript
-$(document).ready(function () {
-    hedyApp.toggle_developers_mode(true);
-});
-</script>
-{% endif %}
