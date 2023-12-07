@@ -236,25 +236,18 @@ class Translator(Visitor):
         self.add_rule("_TURN", "turn", tree)
 
     def left(self, tree):
-        if len(tree.children) == 1:
-            token = tree.children[0]
-            rule = Rule("left", token.line, token.column - 1, token.end_column - 2, token.value)
-        else: # somehow for Arabic left and right, we parse into separate tokens instead of one!
-            token_start = tree.children[0]
-            token_end = tree.children[-1]
-            value = ''.join(tree.children)
-            rule = Rule("left", token_start.line, token_start.column - 1, token_end.end_column - 2, value)
+        # somehow for some Arabic rules (left, right, random) the parser returns separate tokens instead of one!
+        token_start = tree.children[0]
+        token_end = tree.children[-1]
+        value = ''.join(tree.children)
+        rule = Rule("left", token_start.line, token_start.column - 1, token_end.end_column - 2, value)
         self.rules.append(rule)
 
     def right(self, tree):
-        if len(tree.children) == 1:
-            token = tree.children[0]
-            rule = Rule("right", token.line, token.column - 1, token.end_column - 2, token.value)
-        else:
-            token_start = tree.children[0]
-            token_end = tree.children[-1]
-            value = ''.join(tree.children)
-            rule = Rule("right", token_start.line, token_start.column - 1, token_end.end_column - 2, value)
+        token_start = tree.children[0]
+        token_end = tree.children[-1]
+        value = ''.join(tree.children)
+        rule = Rule("right", token_start.line, token_start.column - 1, token_end.end_column - 2, value)
         self.rules.append(rule)
 
     def assign_list(self, tree):
@@ -279,8 +272,11 @@ class Translator(Visitor):
         self.add_rule("_FROM", "from", tree)
 
     def random(self, tree):
-        token = tree.children[0]
-        rule = Rule("random", token.line, token.column - 1, token.end_column - 2, token.value)
+        # somehow for Arabic tokens, we parse into separate tokens instead of one!
+        token_start = tree.children[0]
+        token_end = tree.children[-1]
+        value = ''.join(tree.children)
+        rule = Rule("random", token_start.line, token_start.column - 1, token_end.end_column - 2, value)
         self.rules.append(rule)
 
     def error_ask_dep_2(self, tree):
