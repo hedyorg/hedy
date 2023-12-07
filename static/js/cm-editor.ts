@@ -77,7 +77,7 @@ export class HedyCodeMirrorEditor implements HedyEditor {
     constructor(element: HTMLElement, isReadOnly: boolean, _: EditorType, __: string = "ltr") {
         this.themeStyles = {
             "&": {
-                height: "352px",
+                height: "22rem",
                 background: '#272822',
                 fontSize: '15.2px',
                 color: 'white',
@@ -137,7 +137,15 @@ export class HedyCodeMirrorEditor implements HedyEditor {
         if (theLevel) {
             this.setHighlighterForLevel(theLevel);
         }
-
+        // Size the editor depending on the height of its parent
+        this.view.requestMeasure({
+            read: () => {
+                return document.getElementById('editor')!.offsetHeight                                
+            },
+            write(measure, view) {
+                view.dom.style.height = `${measure}px`;                                
+            },
+        })
     }
 
     /**
@@ -222,12 +230,7 @@ export class HedyCodeMirrorEditor implements HedyEditor {
             console.log('Error! When resizing a CodeMirror instance, you need to provide the new height');
             return;
         }
-        // Change the size of the container element of the editor
-        // Via reconfiguring the editors theme
-        this.themeStyles['&'].height = `${newHeight}px`;
-        this.view.dispatch({
-            effects: this.theme.reconfigure(EditorView.theme(this.themeStyles))
-        });
+        this.view.dom.style.height = `${newHeight}px`;
     }
 
     /**
