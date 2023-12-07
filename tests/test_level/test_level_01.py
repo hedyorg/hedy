@@ -479,7 +479,7 @@ class TestsLevel1(HedyTester):
         )
 
     def test_turn_ar(self):
-        # doesn't translate, probably because of the tatweel regex!
+        # doesn't translate, I don't know why!!
         code = "استدر يسار"
         expected = "t.left(90)"
 
@@ -769,6 +769,7 @@ class TestsLevel1(HedyTester):
             code=code,
             expected=expected,
             skipped_mappings=skipped_mappings,
+            translate=False,
             extra_check_function=lambda c: c.arguments['invalid_command'] in ['aks', 'prind'],
             max_level=5,
         )

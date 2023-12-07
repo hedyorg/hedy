@@ -180,17 +180,13 @@ def find_keyword_in_rules(rules, keyword, start_line, end_line, start_column, en
 
 
 def get_original_keyword(keyword_dict, keyword, line):
-    found = False
     for word in keyword_dict[keyword]:
         if word in line:
-            original = word
-            found = True
+            return word
+
     # If we can't find the keyword, it means that it isn't part of the valid keywords for this language
     # so return original instead
-    if found:
-        return original
-    else:
-        return keyword
+    return keyword
 
 
 class Translator(Visitor):
@@ -240,13 +236,25 @@ class Translator(Visitor):
         self.add_rule("_TURN", "turn", tree)
 
     def left(self, tree):
-        token = tree.children[0]
-        rule = Rule("left", token.line, token.column - 1, token.end_column - 2, token.value)
+        if len(tree.children) == 1:
+            token = tree.children[0]
+            rule = Rule("left", token.line, token.column - 1, token.end_column - 2, token.value)
+        else: # somehow for Arabic left and right, we parse into separate tokens instead of one!
+            token_start = tree.children[0]
+            token_end = tree.children[-1]
+            value = ''.join(tree.children)
+            rule = Rule("left", token_start.line, token_start.column - 1, token_end.end_column - 2, value)
         self.rules.append(rule)
 
     def right(self, tree):
-        token = tree.children[0]
-        rule = Rule("right", token.line, token.column - 1, token.end_column - 2, token.value)
+        if len(tree.children) == 1:
+            token = tree.children[0]
+            rule = Rule("right", token.line, token.column - 1, token.end_column - 2, token.value)
+        else:
+            token_start = tree.children[0]
+            token_end = tree.children[-1]
+            value = ''.join(tree.children)
+            rule = Rule("right", token_start.line, token_start.column - 1, token_end.end_column - 2, value)
         self.rules.append(rule)
 
     def assign_list(self, tree):
