@@ -76,8 +76,8 @@ levels:
             mp_choice_options:
             -   option: '`{print}` puudub esimesel real.'
                 feedback: Õige!
-            -   option: 'Käsk`{ask}` real 2 on valesti kirjutatud.'
-                feedback: 'Käsk on õieti kirjutatud.'
+            -   option: Käsk`{ask}` real 2 on valesti kirjutatud.
+                feedback: Käsk on õieti kirjutatud.
             -   option: '`{echo}` ei ole käsk.'
                 feedback: '`{echo}` on küll käsk.'
             -   option: Mitte midagi! Kood on õige!
@@ -880,7 +880,7 @@ levels:
                 _?_ {print} 'My lucky number is 5!'
             mp_choice_options:
             -   option: In level 5 `{print}` works differently than in level 4
-                feedback: 'Siin juba on `{print}` käsk.'
+                feedback: Siin juba on `{print}` käsk.
             -   option: In level 5 `{ask}` works differently than in level 4
                 feedback: '`{if}` käsk on kasutusel rida ülalpool.'
             -   option: In level 5 `{ask}` and `{print}` work differently than in level 4
@@ -1884,7 +1884,10 @@ levels:
                     Good job!
                     Good job!
                 feedback: That's not it!
-            -   option: "```\nArvuti kohe plahvatab 5... 4... 3... 2... 1...\n```"
+            -   option: |-
+                    ```
+                    Arvuti kohe plahvatab 5... 4... 3... 2... 1...
+                    ```
                 feedback: That's not it!
             -   option: |-
                     Good job !

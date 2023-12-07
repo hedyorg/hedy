@@ -1290,8 +1290,7 @@ levels:
                 {print} "J'aime le " couleur
                 {repeat} 7 {times} {print} "da ba di, da ba da"
             mp_choice_options:
-            -   option: |-
-                    `couleur`
+            -   option: '`couleur`'
                 feedback: C'est ça ! La variable est inconnue
             -   option: '`{print}`'
                 feedback: '`{print}` est écrit correctement'
