@@ -268,6 +268,11 @@ export const variableHighlighter = ViewPlugin.fromClass(class {
 })
 
 function highlightVariables(view: EditorView) {
+    const level = view.state.facet(levelFacet);
+    // double equals because level is actually an array with just one element
+    // like: [1]
+    if (level == 1) return Decoration.none;
+
     let variableDeco = new RangeSetBuilder<Decoration>()
     let positions: {from: number, to: number}[] = [];
     let variablesNames = new Set()
@@ -319,7 +324,7 @@ function highlightVariables(view: EditorView) {
     ]
     // in levels 2 and 3 variables are not substitued inside ask
     // not sure if that's intended behaviour or not
-    if (view.state.facet(levelFacet) > 3) commands.push("Ask")
+    if (level > 3) commands.push("Ask")
     // Now that we have the variable names, we can distinguish them from other Text nodes
     for (let {from, to} of view.visibleRanges) {
         syntaxTree(view.state).iterate({
@@ -328,9 +333,9 @@ function highlightVariables(view: EditorView) {
             enter: (node) => {
                 if (commands.includes(node.name)) {
                     const children = node.node.getChildren('Text');
-                    // no need to add again the first child of Assign and Ask since 
+                    // no need to add again the first child of defining commands since 
                     // we already highlighted it in the previous step
-                    let i = node.name === "Assign" || node.name === "Ask" ? 1 : 0
+                    let i = definingCommands.includes(node.name) ? 1 : 0
                     for (; i < children.length; i++) {
                         const child = children[i];
                         const text = view.state.doc.sliceString(child.from, child.to);
@@ -338,7 +343,6 @@ function highlightVariables(view: EditorView) {
                         // It's possible to have several variables in the same text nodes
                         // separated by other characters like: name!!!your_name
                         // Therefore, we need to get the variables names inside this text node
-                        const level = view.state.facet(levelFacet)
                         if (level <= 3) {
                             const varNames = getVarNames(text) || [];
                             // we keep track of the index of the last variable viewed
