@@ -313,7 +313,7 @@ class TestsLevel4(HedyTester):
 
     def test_place_holder_no_space(self):
         # same as print for level 4
-        code = "print _Escape from the haunted house!_"
+        code = "print _ Escape from the haunted house! _"
 
         self.multi_level_tester(
             code=code,

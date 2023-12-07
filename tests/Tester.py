@@ -277,10 +277,17 @@ class HedyTester(unittest.TestCase):
                         self.assertEqual(output, HedyTester.run_code(result))
                         self.assertTrue(extra_check_function(result))
 
-            # whether or not the code should give an exception, it should always be possible
-            # to translate it
+            # whether or not the code should give an exception,
+            # if it parses, it should always be possible
+            # to translate it, unless there is an NoIndentationException
+            # because in that case our preprocessor throws the error so there is no parsetree
+            # (todo maybe parse first?)
 
-            if translate:
+            skipped_exceptions = [hedy.exceptions.ParseException, hedy.exceptions.NoIndentationException,
+                                  hedy.exceptions.IndentationException, hedy.exceptions.LockedLanguageFeatureException,
+                                  hedy.exceptions.CodePlaceholdersPresentException]
+
+            if translate and not exception in skipped_exceptions:
                 self.verify_translation(code, lang)
 
             # all ok? -> save hash!

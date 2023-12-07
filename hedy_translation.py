@@ -117,7 +117,7 @@ def translate_keywords(input_string, from_lang="en", to_lang="nl", level=1):
         result = "\n".join([line for line in result.splitlines()])
         result = result.replace("#ENDBLOCK", "")
 
-        # we have to reverse escaping or translating and retranslating will add an unlimied number of slashes
+        # we have to reverse escaping or translating and retranslating will add an unlimited number of slashes
         if level >= 4:
             result = result.replace("\\\\", "\\")
 
