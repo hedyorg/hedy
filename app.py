@@ -562,11 +562,15 @@ def parse():
 
             if transpile_result.has_turtle:
                 response['has_turtle'] = True
+
+            if transpile_result.has_clear:
+                response['has_clear'] = True
         except Exception:
             pass
 
         with querylog.log_time('detect_sleep'):
             try:
+                # FH, Nov 2023: hmmm I don't love that this is not done in the same place as the other "has"es
                 response['has_sleep'] = 'sleep' in transpile_result.commands
             except BaseException:
                 pass
@@ -985,7 +989,8 @@ def programs_page(user):
              }
         )
 
-    adventure_names = hedy_content.Adventures(g.lang).get_adventure_names()
+    keyword_lang = g.keyword_lang
+    adventure_names = hedy_content.Adventures(g.lang).get_adventure_names(keyword_lang)
 
     next_page_url = url_for('programs_page', **dict(request.args, page=result.next_page_token)
                             ) if result.next_page_token else None
@@ -1523,7 +1528,8 @@ def view_program(user, id):
                            javascript_page_options=dict(
                                page='view-program',
                                lang=g.lang,
-                               level=int(result['level'])),
+                               level=int(result['level']),
+                               code=code),
                            **arguments_dict)
 
 
@@ -1625,10 +1631,11 @@ def get_embedded_code_editor(level):
 
     return render_template("embedded-editor.html", embedded=True, run=run, language=language,
                            keyword_language=keyword_language, readOnly=readOnly,
-                           level=level, program=program, javascript_page_options=dict(
-                               page='code',
+                           level=level, javascript_page_options=dict(
+                               page='view-program',
                                lang=language,
-                               level=level
+                               level=level,
+                               code=program
                            ))
 
 
@@ -1771,17 +1778,16 @@ def profile_page(user):
         for class_id in profile.get('classes'):
             classes.append(DATABASE.get_class(class_id))
 
-    invite = DATABASE.get_username_invite(user['username'])
-    if invite:
-        # We have to keep this in mind as well, can simply be set to 1 for now
-        # But when adding more message structures we have to use a more sophisticated structure
-        session['messages'] = 1
-        # If there is an invite: retrieve the class information
-        class_info = DATABASE.get_class(invite.get('class_id', None))
-        if class_info:
-            invite['teacher'] = class_info.get('teacher')
-            invite['class_name'] = class_info.get('name')
-            invite['join_link'] = class_info.get('link')
+    invitations = DATABASE.get_user_invitations(user['username'])
+    if invitations:
+        session['messages'] = len(invitations)
+        # If there are invitations: retrieve the class information
+        for invite in invitations:
+            class_info = DATABASE.get_class(invite.get('class_id', None))
+            if class_info:
+                invite['teacher'] = class_info.get('teacher')
+                invite['class_name'] = class_info.get('name')
+                invite['join_link'] = class_info.get('link')
     else:
         session['messages'] = 0
 
@@ -1790,7 +1796,7 @@ def profile_page(user):
         page_title=gettext('title_my-profile'),
         programs=programs,
         user_data=profile,
-        invite_data=invite,
+        invitations=invitations,
         public_settings=public_profile_settings,
         user_classes=classes,
         current_page='my-profile')
@@ -1932,7 +1938,8 @@ def explore():
     normalized = normalize_public_programs(list(programs) + list(favourite_programs.records))
     programs, favourite_programs = split_at(len(programs), normalized)
 
-    adventures_names = hedy_content.Adventures(session['lang']).get_adventure_names()
+    keyword_lang = g.keyword_lang
+    adventures_names = hedy_content.Adventures(session['lang']).get_adventure_names(keyword_lang)
 
     return render_template(
         'explore.html',
@@ -2284,8 +2291,8 @@ def get_user_messages():
         # Todo TB: In the future this should contain the class invites + other messages
         # As the class invites are binary (you either have one or you have none, we can possibly simplify this)
         # Simply set it to 1 if we have an invite, otherwise keep at 0
-        invite = DATABASE.get_username_invite(current_user()['username'])
-        session['messages'] = 1 if invite else 0
+        invitations = DATABASE.get_user_invitations(current_user()['username'])
+        session['messages'] = len(invitations) if invitations else 0
     if session.get('messages') > 0:
         return session.get('messages')
     return None

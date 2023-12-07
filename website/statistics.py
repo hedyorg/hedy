@@ -487,6 +487,7 @@ class LiveStatisticsModule(WebsiteModule):
         students, common_errors, selected_levels, quiz_info, attempted_adventures, \
             adventures = self.get_class_live_stats(user, class_)
 
+        keyword_lang = g.keyword_lang
         # Give the template more data in case there's a student selected
         if student:
             class_students = class_.get("students", [])
@@ -513,7 +514,7 @@ class LiveStatisticsModule(WebsiteModule):
                 dashboard_options_args=dashboard_options_args,
                 adventures=adventures,
                 max_level=HEDY_MAX_LEVEL,
-                adventure_names=hedy_content.Adventures(g.lang).get_adventure_names(),
+                adventure_names=hedy_content.Adventures(g.lang).get_adventure_names(keyword_lang),
                 student=selected_student,
                 student_programs=student_programs,
                 data=graph_data,
@@ -571,6 +572,8 @@ class LiveStatisticsModule(WebsiteModule):
 
         student_programs, graph_data, graph_labels, selected_student = self.get_student_data(student, class_)
 
+        keyword_lang = g.keyword_lang
+
         return jinja_partials.render_partial(
             "partial-class-live-stats.html",
             dashboard_options={
@@ -589,7 +592,7 @@ class LiveStatisticsModule(WebsiteModule):
             dashboard_options_args=dashboard_options_args,
             adventures=adventures,
             max_level=HEDY_MAX_LEVEL,
-            adventure_names=hedy_content.Adventures(g.lang).get_adventure_names(),
+            adventure_names=hedy_content.Adventures(g.lang).get_adventure_names(keyword_lang),
             student=selected_student,
             student_programs=student_programs,
             data=graph_data,

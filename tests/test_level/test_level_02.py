@@ -266,6 +266,14 @@ class TestsLevel2(HedyTester):
             max_level=11,
         )
 
+    def test_non_decimal_error(self):
+        code = "sleep ፼"
+
+        self.multi_level_tester(
+            code=code,
+            exception=hedy.exceptions.NonDecimalVariable
+        )
+
     def test_forward_with_string_variable_gives_type_error(self):
         code = textwrap.dedent("""\
             a is test
