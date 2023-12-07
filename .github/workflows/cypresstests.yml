@@ -44,6 +44,11 @@ jobs:
       # Runs in the background
       run: build-tools/github/start-debug-server --daemon
 
+    - name: Create the bundle files
+      run: |
+        build-tools/heroku/generate-typescript
+        build-tools/heroku/tailwind/generate-development-css
+
     - name: Cypress run
       uses: cypress-io/github-action@v6
       with:
