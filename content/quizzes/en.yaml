@@ -3829,13 +3829,29 @@ levels:
                 {for} x in minions:
                     {print} x
             mp_choice_options:
-            -   option: m i n i o n s
+            -   option: |-
+                    ```
+                    m i n i o n s
+                    ```
                 feedback: This is not it.
-            -   option: Bob Kevin Stuart
+            -   option: |-
+                    ```
+                    Bob
+                    Kevin
+                    Stuart
+                    ```
                 feedback: Correct!
-            -   option: minions minions minions
+            -   option: |-
+                    ```
+                    minions
+                    minions
+                    minions
+                    ```
                 feedback: Take a look at the content of your list.
-            -   option: B o b K e v i n S t u a r t
+            -   option: |-
+                    ```
+                    B o b K e v i n S t u a r t
+                    ```
                 feedback: Do not loop through the letters.
             hint: Loop through your list.
             correct_answer: B
@@ -3861,7 +3877,7 @@ levels:
         3:
             question_text: What is wrong with code?
             code: |-
-                color is {ask} 'what is your favorite color?'
+                color = {ask} 'what is your favorite color?'
                 {if} color == 'red':
                   {print} 'yuhuu is a tomato'
                 {elif} color == 'green':
@@ -3873,38 +3889,38 @@ levels:
                 {elif}:
                   {print} 'this fruit-color does not exist'
             mp_choice_options:
-            -   option: the first `elif` should be used before the `print` command
+            -   option: 'The first `{elif}` should be used before the `print` command'
                 feedback: Try again.
-            -   option: '`elif` can only be used once'
+            -   option: '`{elif}` can only be used once'
                 feedback: From now on we can use elif multiple times.
-            -   option: '`==` used with `elif` should be replaced by `=`'
+            -   option: '`==` used with `{elif}` should be replaced by `=`'
                 feedback: Not correct.
-            -   option: '`elif` in the last line should be replaced by `else`'
+            -   option: '`{elif}` in the last line should be replaced by `{else}`'
                 feedback: Great!
-            hint: Think about if, elif, else.
+            hint: Think about `{if}`, `{elif}`, `{else}`.
             correct_answer: D
             question_score: '10'
         4:
             question_text: What is wrong with code?
             code: |-
-                name is {ask} 'what is your name?'
+                name = {ask} 'What is your name?'
                 {if} name == 'Hedy':
-                pwd is {ask} 'what is your password?'
-                  {if} pwd =='turtle123':
-                    print 'yey'
-                  {else}:
-                    print 'access denied'
+                password = {ask} 'What is your password?'
+                    {if} password =='turtle123':
+                        {print} 'Yey'
+                    {else}:
+                        {print} 'Access denied'
                 {else}:
-                 print 'go fish'
+                 {print} 'Go fish'
             mp_choice_options:
-            -   option: '`elif` is missing'
+            -   option: '`{elif}` is missing.'
                 feedback: Try again.
-            -   option: '`else` can only be used once'
+            -   option: '`{else}` can only be used once.'
                 feedback: From now on we can use elif multiple times.
-            -   option: Nothing!
-                feedback: Correct.
-            -   option: From now on when using `ask`, `is` can be replaced by `=`
-                feedback: This is not true.
-            hint: Think about how you can use if and else.
-            correct_answer: C
+            -   option: 'Nothing!'
+                feedback: There is a mistake. Look carefully!
+            -   option: 'There is an indentation mistake in the last line.'
+                feedback: Amazing!
+            hint: There is a mistake somewhere...
+            correct_answer: D
             question_score: '10'
