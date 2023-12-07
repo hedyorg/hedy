@@ -1,0 +1,12 @@
+<!-- Requires #search_tags_input to exist -->
+<div id="tags_dropdown" class="dropdown-menu dropdown-blue z-20 min-w-full flex-wrap !border-gray-400"
+    style="display: none; width: 100%; opacity: 0; border: none; top: 100%; padding: 0px !important; margin: 0px; margin-top: 0.25rem;"
+    _="on click event.stopPropagation() end
+    on keyup or focus from #search_tags_input debounced at 500ms
+        set my *display to 'flex'
+        transition my *opacity to 1 over 500ms end
+        ">
+    {% for tag in tags %}
+        {{ render_partial('htmx-tags-dropdown-item.html', tag=tag, adventure_id=adventure_id) }}
+    {% endfor %}
+</div>

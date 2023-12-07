@@ -45,7 +45,8 @@ CLASSES = dynamo.Table(storage, "classes", "id", indexes=[
 # - tags_id (str): id of tags that describe this adventure.
 ADVENTURES = dynamo.Table(storage, "adventures", "id", indexes=[dynamo.Index("creator"), dynamo.Index("public")])
 INVITATIONS = dynamo.Table(
-    storage, "class_invitations", partition_key="username", indexes=[dynamo.Index("class_id")]
+    storage, "invitations", partition_key="username#class_id",
+    indexes=[dynamo.Index("username"), dynamo.Index("class_id")],
 )
 
 """
@@ -372,14 +373,17 @@ class Database:
         """Forget the given user."""
         classes = USERS.get({"username": username}).get("classes") or []
         USERS.delete({"username": username})
-        INVITATIONS.delete({"username": username})
         # The recover password token may exist, so we delete it
         TOKENS.delete({"id": username})
         PROGRAMS.del_many({"username": username})
-
         # Remove user from classes of which they are a student
         for class_id in classes:
             self.remove_student_from_class(class_id, username)
+
+        # Remove existing invitations.
+        invitations = self.get_user_invitations(username)
+        for invite in invitations:
+            self.remove_user_class_invite(username, invite["class_id"])
 
         # Delete classes owned by the user
         for Class in self.get_teacher_classes(username, False):
@@ -611,6 +615,15 @@ class Database:
     def read_tags(self, tags):
         return [self.read_tag(name) for name in tags]
 
+    def read_public_tags(self):
+        """Public tags are tagged within one or more public adventure or those that aren't in use."""
+        all_tags = TAGS.scan()
+        public_tags = []
+        for tag in all_tags:
+            if not tag["tagged_in"] or any([adv["public"] for adv in tag["tagged_in"]]):
+                public_tags.append(tag)
+        return public_tags
+
     def read_tags_by_username(self, username):
         tags = TAGS.get_many({"creator": username})
         return tags if tags else {}
@@ -644,6 +657,9 @@ class Database:
 
     def all_adventures(self):
         return ADVENTURES.scan()
+
+    def public_adventures(self):
+        return ADVENTURES.get_many({"public": True})
 
     def get_student_classes_ids(self, username):
         ids = USERS.get({"username": username}).get("classes")
@@ -728,16 +744,20 @@ class Database:
     def resolve_class_link(self, link_id):
         return CLASSES.get({"link": link_id})
 
-    def get_username_invite(self, username):
-        return INVITATIONS.get({"username": username}) or None
+    def get_user_class_invite(self, username, class_id):
+        return INVITATIONS.get({"username#class_id": f"{username}#{class_id}"}) or None
 
     def add_class_invite(self, data):
+        data['username#class_id'] = data['username'] + '#' + data['class_id']
         INVITATIONS.put(data)
 
-    def remove_class_invite(self, username):
-        INVITATIONS.delete({"username": username})
+    def remove_user_class_invite(self, username, class_id):
+        return INVITATIONS.delete({"username#class_id": f"{username}#{class_id}"})
 
-    def get_class_invites(self, class_id):
+    def get_user_invitations(self, username):
+        return INVITATIONS.get_many({"username": username}) or []
+
+    def get_class_invitations(self, class_id):
         return INVITATIONS.get_many({"class_id": class_id}) or []
 
     def all_classes(self):
