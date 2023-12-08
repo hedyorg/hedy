@@ -607,7 +607,7 @@ class TestsLevel1(HedyTester):
 
     def test_ask_with_space_gives_invalid(self):
         code = textwrap.dedent("""\
-         ask Hallo welkom bij Hedy?
+        ask Hallo welkom bij Hedy?
         prind skipping""")
 
         expected = textwrap.dedent("""\
@@ -615,7 +615,6 @@ class TestsLevel1(HedyTester):
         pass""")
 
         skipped_mappings = [
-            SkippedMapping(SourceRange(1, 1, 1, 28), hedy.exceptions.InvalidSpaceException),
             SkippedMapping(SourceRange(2, 1, 2, 15), hedy.exceptions.InvalidCommandException),
         ]
 
@@ -624,21 +623,6 @@ class TestsLevel1(HedyTester):
             expected=expected,
             skipped_mappings=skipped_mappings,
             max_level=1)
-
-    def test_lines_with_spaces_gives_invalid(self):
-        code = " print Hallo welkom bij Hedy!\n print Hallo welkom bij Hedy!"
-        expected = "pass\npass"
-
-        skipped_mappings = [
-            SkippedMapping(SourceRange(1, 1, 1, 30), hedy.exceptions.InvalidSpaceException),
-            SkippedMapping(SourceRange(1, 1, 1, 30), hedy.exceptions.InvalidSpaceException),
-        ]
-
-        self.multi_level_tester(
-            code=code,
-            expected=expected,
-            skipped_mappings=skipped_mappings,
-            max_level=3)
 
     def test_word_plus_period_gives_invalid(self):
         code = textwrap.dedent("""\

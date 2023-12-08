@@ -3264,6 +3264,7 @@ def parse_input(input_string, level, lang):
             # print(e.args[0])
             # print(location, character_found, characters_expected)
             fixed_code = program_repair.remove_unexpected_char(input_string, location[0], location[1])
+            # met die fixed code kunnen we ook nog wel eens wat mee doen!!
             raise exceptions.ParseException(
                 level=level,
                 location=location,

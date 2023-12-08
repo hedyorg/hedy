@@ -102,7 +102,7 @@ class TestsLevel4(HedyTester):
 
     def test_print_with_space_gives_invalid(self):
         code = textwrap.dedent("""\
-         print 'Hallo welkom bij Hedy!'
+        print 'Hallo welkom bij Hedy!'
         prind skipping""")
 
         expected = textwrap.dedent("""\
@@ -110,7 +110,6 @@ class TestsLevel4(HedyTester):
         pass""")
 
         skipped_mappings = [
-            SkippedMapping(SourceRange(1, 1, 1, 32), hedy.exceptions.InvalidSpaceException),
             SkippedMapping(SourceRange(2, 1, 2, 15), hedy.exceptions.InvalidCommandException)
         ]
 

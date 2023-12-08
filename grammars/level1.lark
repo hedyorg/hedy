@@ -1,6 +1,6 @@
 start: program
 program: _EOL* (command _EOL+)* command?
-command: print | ask | echo | turtle | error_invalid_space | error_invalid | empty_line
+command: print | ask | echo | turtle | error_invalid | empty_line
 
 print: _PRINT (text)?
 _color_literal : black | blue | brown | gray | green | orange | pink | purple | red | white | yellow
