@@ -243,7 +243,7 @@ adventures:
                     {print} 我选择 动物 {at} {random}
                     ```
                 story_text_2: |
-                    ## Remove from
+                    ## 从...移除
                     如果你可以将项目添加到列表中，当然你也可以将其删除。可以使用 `{remove} {from}` 指令.
                 example_code_2: |
                     ```
@@ -274,8 +274,8 @@ adventures:
                     {print} 动物们 {at} {random}
     and_or_command:
         name: '{and} & {or}'
-        default_save_name: 或者
-        description: 介绍和或
+        default_save_name: 以及或者
+        description: 介绍以及或是
         levels:
             13:
                 story_text: |-
@@ -309,7 +309,7 @@ adventures:
                     {ask}你叫什么名字?
                     ```
                 story_text_2: |
-                    ## 这 echo 命令
+                    ##  `{echo}` 指令
                     如果想让计算机将结果重复一遍，你可以使用 `{echo}` 命令。答案将在程序末尾输出，因此在本例中，结果将在 hello 之后输出。
                 example_code_2: |
                     ```
@@ -319,8 +319,8 @@ adventures:
                     ```
                 story_text_3: |
                     ### 练习
-                    尝试使用“{ask}”和“{echo}”命令，首先，完成填空以使该程序成功运行。
-                    然后使用“{ask}”命令再问 2 个问题，在每个“{ask}”之后使用“{echo}”在屏幕上打印答案。
+                    尝试使用`{ask}`和 `{echo}` 命令，首先，完成填空以使该程序成功运行。
+                    然后使用`{ask}`命令再问 2 个问题，在每个`{ask}`之后使用`{echo}`在屏幕上打印答案。
                 example_code_3: |
                     ```
                     _ 你好吗?
@@ -332,8 +332,8 @@ adventures:
                     {echo} 你好
             2:
                 story_text: |
-                    ## 询问命令
-                    现在我们可以在代码中使用**变量**，我们可以不再使用“{echo}”命令。
+                    ## 询问指令
+                    现在我们可以在代码中使用**变量**，我们可以不再使用`{echo}`命令。
                     我们可以使用变量来保存问题的答案，这样我们就可以在代码中使用多个问题的答案。
                     一探究竟：
                     这样你的代码就变得具有交互性了！
@@ -387,91 +387,16 @@ adventures:
                     The player who gets closest to 21, without going over it, wins!
 
                     Have fun!
-                example_code: |
-                    ```
-                    {print} 'BLACKJACK'
-                    cards = [2, 3, 4, 5, 6, 7, 8, 9, 10, 'Jack', 'Queen','King', 'Ace']
-                    points = 0
-                    dealer_points = 0
-                    card_1 = cards[{random}]
-                    card_2 = cards[{random}]
-                    card_3 = cards [{random}]
-                    dealer_card_1 = cards[{random}]
-                    dealer_card_2 = cards[{random}]
-                    dealer_card_3 = cards[{random}]
-                    # Points for card 1
-                    {if} card_1 == 'Jack' {or} card_1 == 'Queen' {or} card_1 == 'King':
-                        points = points + 10
-                    {elif} card_1 == 'Ace':
-                        points = points + 11
-                    {else}:
-                        points = points + card_1
-                    # Points for card 2
-                    {if} card_2 == 'Jack' {or} card_2 == 'Queen' {or} card_2 == 'King':
-                        points = points + 10
-                    {elif} card_2 == 'Ace':
-                        points = points + 11
-                    {else}:
-                        points = points + card_2
-                    # Points for dealer card 1
-                    {if} dealer_card_1 == 'Jack' {or} dealer_card_1 == 'Queen' {or} dealer_card_1 == 'King':
-                        dealer_points = dealer_points + 10
-                    {elif} dealer_card_1 == 'Ace':
-                        dealer_points = dealer_points + 11
-                    {else}:
-                        dealer_points = dealer_points + dealer_card_1
-                    # Points for dealer card 2
-                    {if} dealer_card_2 == 'Jack' {or} dealer_card_2 == 'Queen' {or} dealer_card_2 == 'King':
-                        dealer_points = dealer_points + 10
-                    {elif} dealer_card_2 == 'Ace':
-                        dealer_points = dealer_points + 11
-                    {else}:
-                        dealer_points = dealer_points + dealer_card_2
-                    # Two Aces
-                    {if} card_1 == 'Ace' {and} card_2 == 'Ace':
-                        points = 12
-                    {if} dealer_card_1 == 'Ace' {and} dealer_card_2 == 'Ace':
-                        dealer_points = 12
-                    # Scoreboard
-                    {print} 'You have a ' card_1 ' and a ' card_2 ' (' points ' points)'
-                    {print} 'The dealer has a ' dealer_card_1 ' and a ' dealer_card_2 ' (' dealer_points ' points)'
-                    # Extra card for the player
-                    hit = {ask} 'Do you want an extra card?'
-                    {if} hit == 'yes':
-                        {if} card_3 == 'Jack' {or} card_3 == 'Queen' {or} card_3 == 'King':
-                            points = points + 10
-                        {elif} card_3 == 'Ace':
-                            {if} points > 11:
-                                points = points + 11
-                            {else}:
-                                points = points + 1
-                        {else}:
-                            points = points + card_3
-                        print 'You get an extra ' card_3 ' (' points ' points)'
-                    {else}:
-                        print 'No extra cards'
-                    # Winner
-                    {if} points > 21 {or} dealer_points > points {or} dealer_points == 21:
-                        {print} 'You lose'
-                    {elif} dealer_points < 17:
-                        {print} 'The dealer takes an extra card. It is a... ' dealer_card_3
-                        {if} dealer_card_3 == 'Jack' {or} dealer_card_3 == 'Queen' {or} dealer_card_3 == 'King':
-                            dealer_points = dealer_points + 10
-                        {elif} dealer_card_3 == 'Ace':
-                            {if} dealer_points < 11:
-                                dealer_points = dealer_points + 11
-                            {else}:
-                                dealer_points = dealer_points + 1
-                        {else}:
-                            dealer_points = dealer_points + dealer_card_3
-                        {print} 'The dealer has ' dealer_points ' points now'
-                        {if} dealer_points < 21 {and} dealer_points > points:
-                            {print} 'You lose'
-                        {else}:
-                            {print} 'You win'
-                    {elif} points > dealer_points {and} points < 21:
-                        {print} 'You win!'
-                    ```
+                example_code: "```\n{print} 'BLACKJACK'\ncards = [2, 3, 4, 5, 6, 7, 8, 9, 10, 'Jack', 'Queen','King', 'Ace']\npoints = 0\ndealer_points = 0\ncard_1 = cards[{random}]\ncard_2 = cards[{random}]\ncard_3 = cards [{random}]\ndealer_card_1 = cards[{random}]\ndealer_card_2 = cards[{random}]\n\
+                    dealer_card_3 = cards[{random}]\n# 卡片 1 的点数\n{if} card_1 == 'Jack' {or} card_1 == 'Queen' {or} card_1 == 'King':\n    points = points + 10\n{elif} card_1 == 'Ace':\n    points = points + 11\n{else}:\n    points = points + card_1\n# 卡片 2 的点数\n{if} card_2 == 'Jack' {or} card_2 == 'Queen'\
+                    \ {or} card_2 == 'King':\n    points = points + 10\n{elif} card_2 == 'Ace':\n    points = points + 11\n{else}:\n    points = points + card_2\n# 庄家第1张牌\n{if} dealer_card_1 == 'Jack' {or} dealer_card_1 == 'Queen' {or} dealer_card_1 == 'King':\n    dealer_points = dealer_points + 10\n\
+                    {elif} dealer_card_1 == 'Ace':\n    dealer_points = dealer_points + 11\n{else}:\n    dealer_points = dealer_points + dealer_card_1\n# 庄家第2张牌\n{if} dealer_card_2 == 'Jack' {or} dealer_card_2 == 'Queen' {or} dealer_card_2 == 'King':\n    dealer_points = dealer_points + 10\n{elif} dealer_card_2\
+                    \ == 'Ace':\n    dealer_points = dealer_points + 11\n{else}:\n    dealer_points = dealer_points + dealer_card_2\n# 两张 Aces\n{if} card_1 == 'Ace' {and} card_2 == 'Ace':\n    points = 12\n{if} dealer_card_1 == 'Ace' {and} dealer_card_2 == 'Ace':\n    dealer_points = 12\n# Scoreboard\n\
+                    {print} '你有张 ' card_1 ' 以及 ' card_2 ' (' points ' points)'\n{print} '庄家有张 ' dealer_card_1 ' 以及 ' dealer_card_2 ' (' dealer_points ' points)'\n# 玩家追加牌\nhit = {ask} '你想追加牌嘛?'\n{if} hit == 'yes':\n    {if} card_3 == 'Jack' {or} card_3 == 'Queen' {or} card_3 == 'King':\n        points\
+                    \ = points + 10\n    {elif} card_3 == 'Ace':\n        {if} points > 11:\n            points = points + 11\n        {else}:\n            points = points + 1\n    {else}:\n        points = points + card_3\n    {print} '你追加了一张 ' card_3 ' (' points ' points)'\n{else}:\n    {print} '不追加牌'\n\
+                    # 获胜者\n{if} points > 21 {or} dealer_points > points {or} dealer_points == 21:\n    {print} '你输了'\n{elif} dealer_points < 17:\n    {print} '庄家要牌.它是... ' dealer_card_3\n    {if} dealer_card_3 == 'Jack' {or} dealer_card_3 == 'Queen' {or} dealer_card_3 == 'King':\n        dealer_points\
+                    \ = dealer_points + 10\n    {elif} dealer_card_3 == 'Ace':\n        {if} dealer_points < 11:\n            dealer_points = dealer_points + 11\n        {else}:\n            dealer_points = dealer_points + 1\n    {else}:\n        dealer_points = dealer_points + dealer_card_3\n    {print}\
+                    \ '现在打印庄家有 ' dealer_points \n    {if} dealer_points < 21 {and} dealer_points > points:\n        {print} '你输了'\n    {else}:\n        {print} '你赢了!'\n{elif} points > dealer_points {and} points < 21:\n    {print} '你赢了!'\n```\n"
                 start_code: '# 在这里输入你的代码'
     calculator:
         name: 计算器
@@ -483,10 +408,10 @@ adventures:
                     现在你可以做数学了，你可以自己做一个计算器！
                 example_code: |
                     ```
-                    数一 是 {ask} '填写第一个数字：'
-                    数二 是 {ask} '填写第二个数字：'
+                    数一 {is} {ask} '填写第一个数字：'
+                    数二 {is} {ask} '填写第二个数字：'
                     正确答案 = 数一 * 数二
-                    {print} 数一 ' 乘以 '数二 ' 是 ' 正确答案
+                    {print} 数一 ' 乘以 ' 数二 ' 是 ' 正确答案
                     ```
                 story_text_2: |
                     ### 练习
@@ -500,15 +425,17 @@ adventures:
                     {else} {print} '错了！是' _
                     ```
                 story_text_3: |
-                    您还可以让计算机自己使用 {random} 求随机数的和。
+                    **额外** 您还可以使用“{random}”让计算机自行生成随机产品。
                 example_code_3: |-
+                    ```
                     numbers = 1, 2, 3, 4, 5, 6, 7, 8, 9, 10
                     number_1 = _
                     number_2 = _
-                    正确答案 = 数一 * 数二
-                    得出答案 ={ask} '什么是 ' 数一 ' 乘以 ' 数二 '?'
+                    correct_answer = number_1 * number_2
+                    given_answer = {ask} '什么是 ' number_1 ' 乘以 ' number_2 '?'
                     {if} _
                     {else} _
+                    ```
                 start_code: '{print} ''欢迎来到这个计算器!'''
             9:
                 story_text: |
@@ -518,7 +445,7 @@ adventures:
                     你能完成第 10 行以使程序工作吗？
 
                     ### 练习 2
-                    输入正确或错误的答案时给出反馈。为此，请使用 `{else}` 来扩展程序。
+                    输入正确或错误的答案时对玩家给出反馈。为此，请使用 `{else}` 来扩展程序。
                 example_code: |
                     ```
                     分数 = 0
@@ -585,10 +512,10 @@ adventures:
                     当然你有准确的答案！**Extra**通过增加生命增加难度：玩家回答错误一次失去一条命，三次回答错误后游戏结束。
                 example_code: |
                     ```
-                    数一 = {ask} '第一个数字是几？'
-                    数二 = {ask} '第二个数字是几？'
-                    答案 = _
-                    {print} 数一 ' 加 ' 数二 '等于 ' 答案
+                    number1 = {ask} '第一个数字是什么？'
+                    number2 = {ask} '第二个数字是多少？'
+                    answer =_
+                    {print} number1 ' 加 ' number2 ' 是 ' _
                     ```
                 start_code: '# 在这里写你的代码'
             13:
@@ -602,12 +529,12 @@ adventures:
                     清空编程字段并且创造你自己的解决方案.
                 example_code: |
                     ```
-                    answer1 = {ask} 'What is 10 times 7?'
-                    answer2 = {ask} 'What is 6 times 7?'
-                    {if} _ _ _ _ _ _ _
-                        {print} _
+                    answer1 = {ask} '10 乘以 7 是多少？'
+                    answer2 = {ask} '6 乘以 7 是多少？'
+                    {如果} _ _ _ _ _ _ _
+                         {打印} _
                     ```
-                start_code: '# Schrijf jouw code hier'
+                start_code: '# 在这里写下你的代码'
             14:
                 story_text: |
                     In this adventure you will build a calculator that calculates your mean grade for you. If you get your calculator to work, you can move on to the next adventure, which allows you to add two extra features.
@@ -698,12 +625,12 @@ adventures:
     clear_command:
         name: '{clear}'
         default_save_name: clear_command
-        description: clear command
+        description: clear 指令
         levels:
             4:
                 story_text: |
-                    Time for a new command! With `{clear}` you can clear all the text form your output screen. This way you can prevent your screen getting too full of text.
-                    Beware! If you are using a `{clear}` command, remember to use a `{sleep}` above it. Otherwise Hedy will clear your screen without giving you the time to read!
+                    是时候发出新命令了！ 使用`{clear}`，您可以清除输出屏幕上的所有文本。 这样您就可以防止屏幕上的文字过多。
+                    谨防！ 如果您使用`{clear}`命令，请记住在其上方使用`{sleep}`。 否则 海蒂 会清空你的屏幕，而不给你时间阅读！
                 example_code: |
                     ```
                     print '3'
@@ -727,155 +654,155 @@ adventures:
                     print '1'
                     sleep
                     clear
-                    print 'SURPRISE!'
+                    print '惊喜!'
     debugging:
-        name: debugging
+        name: 调试
         default_save_name: debugging
-        description: debugging adventure
+        description: 调试 adventure
         levels:
             1:
                 story_text: |-
-                    Welcome to a debugging adventure. Debugging a code means getting rid of mistakes in the code.
-                    That means that in these debugging adventures, we will show you code that does not work yet.
-                    You will have to figure out what's wrong and correct the mistakes.
+                    欢迎来到调试冒险。 调试代码意味着消除代码中的错误。
+                    这意味着在这些调试冒险中，我们将向您展示尚未运行的代码。
+                    你必须找出问题所在并纠正错误。
 
-                    ### Exercise
-                    Debug this code. Good luck!
+                    ### 练习
+                    调试这段代码。 祝你好运！
                 example_code: |
-                    **Warning! This code needs to be debugged!**
+                    **警告！ 这段代码需要调试！**
                     ```
-                    {print} I love programming
-                    Do you love programming too?
+                    {print} 我喜欢编程
+                    你也喜欢编程吗？
                     {echo}
-                    {print} What are your hobbies?
-                    {echo} Your hobbies are
+                    {print} 你的爱好是什么？
+                    {echo} 你的爱好是
                     ```
                 start_code: |
-                    {print} I love programming
-                    Do you love programming too?
+                    {print} 我喜欢编程
+                    你也喜欢编程吗？
                     {echo}
-                    {print} What are your hobbies?
-                    {echo} Your hobbies are
+                    {print} 你的爱好是什么？
+                    {echo} 你的爱好是
             2:
                 story_text: |-
-                    Welcome to a debugging adventure. Debugging a code means getting rid of mistakes in the code.
-                    That means that in these debugging adventures, we will give you a code that does not work yet.
-                    You will have to figure out what's wrong and correct the mistakes.
+                    欢迎来到调试冒险。 调试代码意味着消除代码中的错误。
+                    这意味着在这些调试冒险中，我们将为您提供尚未运行的代码。
+                    你必须找出问题所在并纠正错误。
 
-                    ### Exercise
-                    Debug this code. Good luck!
+                    ### 练习
+                    调试这段代码。 祝你好运！
                 example_code: |
-                    **Warning! This code needs to be debugged!**
+                    **警告！ 这段代码需要调试！**
                     ```
-                    destination {ask} Where are you going on holidays?
-                    {print} The flight to dstination leaves at 3 pm.
-                    {ask} Did you check in your luggage yet?
+                    目的地{ask} 假期你要去哪里？
+                    {print} 飞往目的地的航班于下午 3 点起飞。
+                    {ask} 你托运行李了吗？
                     {echo}
-                    {print} Let me print your boarding pass for you.
+                    {print} 让我为您打印您的登机牌。
                     {sleep}
-                    Here you go! Have a nice trip!
+                    干得好！ 旅行愉快！
                     ```
                 start_code: |
-                    destination {ask} Where are you going on holidays?
-                    {print} The flight to dstination leaves at 3 pm.
-                    {ask} Did you check in your luggage yet?
+                    目的地{ask} 假期你要去哪里？
+                    {print} 飞往目的地的航班于下午 3 点起飞。
+                    {ask} 你托运行李了吗？
                     {echo}
-                    {print} Let me print your boarding pass for you.
+                    {print} 让我为您打印您的登机牌。
                     {sleep}
-                    Here you go! Have a nice trip!
+                    干得好！ 旅行愉快！
             3:
                 story_text: |-
-                    Welcome to a debugging adventure. Debugging a code means getting rid of mistakes in the code.
-                    That means that in these debugging adventures, we will give you a code that does not work yet.
-                    You will have to figure out what's wrong and correct the mistakes.
+                    欢迎来到调试冒险。 调试代码意味着消除代码中的错误。
+                    这意味着在这些调试冒险中，我们将为您提供尚未运行的代码。
+                    你必须找出问题所在并纠正错误。
 
-                    ### Exercise
-                    Debug this code. Good luck!
+                    ### 练习
+                    调试这段代码。 祝你好运！
                 example_code: |
-                    **Warning! This code needs to be debugged!**
-                    ```
-                    movie_choices {is} dracula, fast and furious, home alone, barbie
-                    chosen_movie {is} movies {at} {random}
-                    {print} Tonight we will watch chosen _movies
-                    like {ask} Do you like that movie?
-                    {print} Tomorrow we will watch something else.
-                    {add} chosen_movie {to} movie_choices
-                    {print} Tomorrow we will watch tomorrows_movie
-                    tomorrows_movie {is} movie_choices {at} {random}
-                    I'll go get the popcorn! {print}
-                    ```
+                    **警告！ 这段代码需要调试！**
+                    ````
+                    movie_choices {is} 德古拉、速度与激情、独自在家、芭比娃娃
+                    selected_movie {is} 部电影 {at} {random}
+                    {print} 今晚我们将观看选定的_电影
+                    就像{ask}你喜欢那部电影吗？
+                    {print} 明天我们会看别的东西。
+                    {add} selected_movie {to} movie_choices
+                    {print} 明天我们看Todays_movie
+                    futures_movie {is} movie_choices {at} {random}
+                    我去买爆米花！ {print}
+                    ````
                 start_code: |
-                    movie_choices {is} dracula, fast and furious, home alone, barbie
-                    chosen_movie {is} movies {at} {random}
-                    {print} Tonight we will watch chosen _movies
-                    like {ask} Do you like that movie?
-                    {print} Tomorrow we will watch something else.
-                    {add} chosen_movie {to} movie_choices
-                    {print} Tomorrow we will watch tomorrows_movie
-                    tomorrows_movie {is} movie_choices {at} {random}
-                    I'll go get the popcorn! {print}
+                    movie_choices {is} 德古拉、速度与激情、独自在家、芭比娃娃
+                    selected_movie {is} 部电影 {at} {random}
+                    {print} 今晚我们将观看选定的_电影
+                    就像{ask}你喜欢那部电影吗？
+                    {print} 明天我们会看别的东西。
+                    {add} selected_movie {to} movie_choices
+                    {print} 明天我们看Todays_movie
+                    futures_movie {is} movie_choices {at} {random}
+                    我去买爆米花！ {print}
             4:
                 story_text: |-
-                    ### Exercise
-                    Debug this code. Good luck!
+                    ### 练习
+                    调试这段代码。 祝你好运！
                 example_code: |
-                    **Warning! This code needs to be debugged!**
+                    **警告！ 这段代码需要调试！**
                     ```
-                    {print} 'Welcome to the online library!
-                    {ask} What genre of books do you like?
-                    {print} You like genre
-                    author {is} {ask} 'Who's your favorite author?'
-                    {print} 'author is your favorite author'
-                    {print} Hmmm... i think you should try... books {at} {random}
+                    {print} '欢迎来到在线图书馆！
+                    {ask}你喜欢什么类型的书？
+                    {print} 你喜欢类型
+                    作者{is} {ask}“你最喜欢的作家是谁？”
+                    {print} '作者是你最喜欢的作者'
+                    {print} 嗯...我想你应该尝试...书籍{at} {random}
                     ```
                 start_code: |
-                    {print} 'Welcome to the online library!
-                    {ask} What genre of books do you like?
-                    {print} You like genre
-                    author {is} {ask} 'Who's your favorite author?'
-                    {print} 'author is your favorite author'
-                    {print} Hmmm... I think you should try... books {at} {random}
+                    {print} '欢迎来到在线图书馆！
+                    {ask}你喜欢什么类型的书？
+                    {print} 你喜欢类型
+                    作者{is} {ask}“你最喜欢的作家是谁？”
+                    {print} '作者是你最喜欢的作者'
+                    {print} 嗯...我想你应该尝试...书籍{at} {random}
             5:
                 story_text: |-
-                    ### Exercise
-                    Debug this code. Good luck!
+                    ### 练习
+                    调试这段代码。 祝你好运！
                 example_code: |
-                    **Warning! This code needs to be debugged!**
-                    ```
-                    {print} Welcome to Swimming Pool Hedy!
-                    class {is} {ask} 'Are you here to join a class today?'
-                    {if} class yes
-                        {print} 'Great! You are joining a class!'
-                        {print} {else} 'You will not be joining a class'
-                    discount {is} {ask} 'Do you have a discount code?'
+                    **警告！ 这段代码需要调试！**
+                    ````
+                    {print} 欢迎来到海蒂泳池！
+                    class {is} {ask} '你今天来参加课程吗？'
+                    {if} 类 yes
+                         {print}'太棒了！ 你正在加入一个班级！
+                         {print} {else} '您将不会参加课程'
+                    discount {is} {ask} '您有折扣码吗？'
                     {if} discount {is} yes
-                    discount_answer {is} {ask} 'What is your discount code?'
+                    discount_answer {is} {ask} '您的折扣代码是什么？'
                     discount_codes = Senior4231, Student8786, NewMember6709
-                    {if} discount_answer {is} {in} discount_codes
-                        {print} 'That will be $3,50'
-                            {else} 'That code is not valid'
-                    {else} 'That will be $5,50'
-                    {print} 'Have a nice swim!'
-                    ```
+                    {if}discount_answer {is} {in}discount_codes
+                         {print} '那将是 3,50 美元'
+                             {else} '该代码无效'
+                    {else}“那将是 5,50 美元”
+                    {print} '祝你游得愉快！'
+                    ````
                 start_code: |
-                    {print} Welcome to Swimming Pool Hedy!
-                    class {is} {ask} 'Are you here to join a class today?'
-                    {if} class yes
-                        {print} 'Great! You are joining a class!'
-                        {print} {else} 'You will not be joining a class'
-                    discount {is} {ask} 'Do you have a discount code?'
-                    {if} discount {is} yes
-                    discount_answer {is} {ask} 'What is your discount code?'
+                    {print} 欢迎来到海蒂泳池！
+                    class {is} {ask} '你今天来参加课程吗？'
+                    {if} 类 yes
+                         {print}'太棒了！ 你正在加入一个班级！
+                         {print} {else} '您将不会参加课程'
+                    discount {is} {ask} '您有折扣码吗？'
+                    {if} 折扣 {is} 是
+                    discount_answer {is} {ask} '您的折扣代码是什么？'
                     discount_codes = Senior4231, Student8786, NewMember6709
-                    {if} discount_answer {is} {in} discount_codes
-                        {print} 'That will be $3,50'
-                            {else} 'That code is not valid'
-                    {else} 'That will be $5,50'
-                    {print} 'Have a nice swim!'
+                    {if}discount_answer {is} {in}discount_codes
+                         {print} '那将是 3,50 美元'
+                             {else} '该代码无效'
+                    {else}“那将是 5,50 美元”
+                    {print} '祝你游得愉快！'
             6:
                 story_text: |-
-                    ### Exercise
-                    Debug this code. Good luck!
+                    ### 练习
+                    调试这段代码。 祝你好运！
                 example_code: |
                     **Warning! This code needs to be debugged!**
                     ```
@@ -1378,33 +1305,33 @@ adventures:
                     ```
                 start_code: |4
 
-                                define food_order
-                                    toppings = ask 'pepperoni, tuna, veggie or cheese?'
-                                    size = ask 'big, medium or small?'
-                                    number_of_pizza = ask 'How many these pizzas would you like?'
+                                    define food_order
+                                        toppings = ask 'pepperoni, tuna, veggie or cheese?'
+                                        size = ask 'big, medium or small?'
+                                        number_of_pizza = ask 'How many these pizzas would you like?'
 
-                                    print 'YOU ORDERED'
-                                    print number_of_pizzas ' size  ' topping ' pizza'
+                                        print 'YOU ORDERED'
+                                        print number_of_pizzas ' size  ' topping ' pizza'
 
-                                define drinks_order
-                                    drink = ask 'water, coke, icetea, lemonade or coffee?'
-                                    number_of_drinks = ask 'How many of these drinks would you like?'
+                                    define drinks_order
+                                        drink = ask 'water, coke, icetea, lemonade or coffee?'
+                                        number_of_drinks = ask 'How many of these drinks would you like?'
 
-                                    print 'YOU ORDERED'
-                                    print number_of_drinks ' ' drink
+                                        print 'YOU ORDERED'
+                                        print number_of_drinks ' ' drink
 
-                                'Welcome to Hedy pizza'
-                                more_food = ask 'Would you like to order a pizza?'
-                                while more_food = 'yes'
-                                    return food_order
+                                    'Welcome to Hedy pizza'
                                     more_food = ask 'Would you like to order a pizza?'
-                                more_drinks = ask 'Would you like to order some drinks?'
-                                while more_drinks == 'yes'
-                                    call drink_order
-                                    more_drinks == ask 'Would you like to order more drinks?'
+                                    while more_food = 'yes'
+                                        return food_order
+                                        more_food = ask 'Would you like to order a pizza?'
+                                    more_drinks = ask 'Would you like to order some drinks?'
+                                    while more_drinks == 'yes'
+                                        call drink_order
+                                        more_drinks == ask 'Would you like to order more drinks?'
 
 
-                                print 'Thanks for ordering!'
+                                    print 'Thanks for ordering!'
             18:
                 story_text: |-
                     ### Exercise
@@ -1429,20 +1356,20 @@ adventures:
                     ```
                 start_code: |4
 
-                                animals = ['pig', 'dog', 'cow']
-                                sounds = ['oink', 'woof', 'moo']
-                                for i in range 1 to 3
-                                    animal = animals[i]
-                                    sound = sounds[i]
-                                    print 'Old McDonald had a farm'
-                                    print 'E I E I O!'
-                                    print 'and on that farm he had a ' animal
-                                    print 'E I E I O!'
-                                    print 'with a ' sound sound ' here'
-                                    print 'and a ' sound sound ' there'
-                                    print 'here a ' sound
-                                    print 'there a ' sound
-                                    print 'everywhere a ' sound sound
+                                    animals = ['pig', 'dog', 'cow']
+                                    sounds = ['oink', 'woof', 'moo']
+                                    for i in range 1 to 3
+                                        animal = animals[i]
+                                        sound = sounds[i]
+                                        print 'Old McDonald had a farm'
+                                        print 'E I E I O!'
+                                        print 'and on that farm he had a ' animal
+                                        print 'E I E I O!'
+                                        print 'with a ' sound sound ' here'
+                                        print 'and a ' sound sound ' there'
+                                        print 'here a ' sound
+                                        print 'there a ' sound
+                                        print 'everywhere a ' sound sound
     default:
         name: 介绍
         default_save_name: 介绍
@@ -4668,6 +4595,335 @@ adventures:
                     {call} square
                     {forward} 50
                     {call} square
+    turtle_draw_it:
+        name: Draw it!
+        default_save_name: Draw it
+        description: Draw this picture with the turtle
+        levels:
+            1:
+                story_text: |
+                    ### Exercise
+                    Recreate the drawings with the turtle!
+
+                    <div class="w-full flex flex-row gap-2">
+                        Rectangle <img src="https://github.com/hedyorg/hedy/assets/80678586/77aa99d5-cd8f-4969-b49d-e8fed34ac550" width="100">
+                        Square <img src="https://github.com/hedyorg/hedy/assets/80678586/03b96c2c-7b94-4032-9f9f-3f3b13573623" width="200">
+                        Stairs<img src="https://github.com/hedyorg/hedy/assets/80678586/d4301e62-ec66-4031-827c-7d21f73ba106" width="200">
+                    </div>
+                start_code: '## Recreate the drawings with the turtle!'
+            2:
+                story_text: |
+                    ### Exercise
+                    Recreate the drawings with the turtle!
+
+                    <div class="w-full flex flex-row gap-2">
+                    Triangle <img src="https://github.com/hedyorg/hedy/assets/80678586/e974b62c-f0cf-445a-8bd4-5ad9f1f71204" width="100">
+                    Arrow <img src="https://github.com/hedyorg/hedy/assets/80678586/803d8f42-9708-448c-82ea-d035697f08c9" width="150">
+                    Boat <img src="https://github.com/hedyorg/hedy/assets/80678586/94ef7189-442a-4c8f-827d-12a69203c2e9" width="150">
+                    </div>
+                start_code: '## Recreate the drawings with the turtle!'
+            3:
+                story_text: |
+                    ### Exercise
+                    Recreate the drawings with the turtle!
+
+                    <div class="w-full flex flex-row gap-2">
+                    Triangle <img src="https://github.com/hedyorg/hedy/assets/80678586/71e04d98-9545-4614-9caf-a5f179b756a1" width="150">
+                    Star <img src="https://github.com/hedyorg/hedy/assets/80678586/421c4d28-cb99-424b-be26-dcae30d65c80" width="150">
+                    Arrow <img src="https://github.com/hedyorg/hedy/assets/80678586/3cbebcae-5258-47c5-a6ac-e7ee36c1d1ce" width="200">
+                    </div>
+                start_code: '## Recreate the drawings with the turtle!'
+            4:
+                story_text: |
+                    ### Exercise
+                    Recreate the drawings with the turtle!
+
+                    <div class="w-full flex flex-row gap-2">
+                    Colored Star <img src="https://github.com/hedyorg/hedy/assets/80678586/dbe39006-c050-4833-b5c4-f9d1fb1c0781" width="150">
+                    Rainbow <img src="https://github.com/hedyorg/hedy/assets/80678586/2728b10f-9f7f-45ea-964e-5b284033e4f0" width="500">
+                    Nested squares <img src="https://github.com/hedyorg/hedy/assets/80678586/f013f9fa-bc68-4c60-b778-2c457799d6f7" width="200">
+                    </div>
+                example_code: |
+                    **Extra** Up for a real challenge? Make sure that the colors of these figures are selected randomly, so that each time you run your programs they'll look differently!
+
+                    ```
+                    colors {is} red, orange, yellow, green, blue, purple, pink, brown, gray, black
+                    color _
+                    ```
+                start_code: '## Recreate the drawings with the turtle!'
+            5:
+                story_text: |
+                    ### Exercise
+                    Recreate the drawings with the turtle!
+
+                    **Extra** Make only one code that lets the player decide which letter they'd like to see! And can you add even more letters?
+
+                    <div class="w-full flex flex-row gap-2">
+                    F <img src="https://github.com/hedyorg/hedy/assets/80678586/8a021b76-c24b-4e7c-b960-48d57f3bcb20" width="100">
+                    E <img src="https://github.com/hedyorg/hedy/assets/80678586/12821803-6422-416a-8e36-9902d14e57a4" width="100">
+                    L <img src="https://github.com/hedyorg/hedy/assets/80678586/3af6f919-7b67-4ee7-b923-11e56f2b6b24" width="100">
+                    </div>
+                example_code: |
+                    Hint:
+                    ```
+                    chosen_letter {is} {ask} 'Which letter would you like to see? F, E or L?
+                    {if} _
+                    ```
+                start_code: '## Recreate the drawings with the turtle!'
+            6:
+                story_text: |
+                    ### Exercise
+                    Recreate the drawings with the turtle!
+
+                    **Extra** Let the player decide which color the square should be.
+
+                    ***Extra*** Can you make the letter of your own first name and the flag of your own country too?
+
+                    <div class="w-full flex flex-row gap-2">
+                    Square <img src="https://github.com/hedyorg/hedy/assets/80678586/03b96c2c-7b94-4032-9f9f-3f3b13573623" width="150">
+                    Letters <img src="https://github.com/hedyorg/hedy/assets/80678586/e75f4fa5-f1f5-4b48-806c-916c28e4e8ad" width="100">
+                    Flag <img src="https://github.com/hedyorg/hedy/assets/80678586/877fc337-df80-4185-8005-a6c28904f66e" width="300">
+                    </div>
+                example_code: |
+                    Hint for the square:
+                    ```
+                    chosen_color = {ask} _
+                    ```
+                start_code: '## Recreate the drawings with the turtle!'
+            7:
+                story_text: |
+                    ### Exercise
+                    Recreate the drawings with the turtle!
+
+                    <div class="w-full flex flex-row gap-2">
+                    Hexagon <img src="https://github.com/hedyorg/hedy/assets/80678586/92e492e1-1593-489b-aaf0-51d2a29755f4" width="200">
+                    Triangle <img src="https://github.com/hedyorg/hedy/assets/80678586/3629a5e6-1f02-4851-aab9-c5430ba4a1f1" width="200">
+                    Fan <img src="https://github.com/hedyorg/hedy/assets/80678586/1ba2ff71-1230-4fe3-8255-b2c504cf1b4e" width="200">
+                    </div>
+                start_code: '## Recreate the drawings with the turtle!'
+            8:
+                story_text: |
+                    ### Exercise
+                    Recreate the drawings with the turtle!
+
+                    **Extra** The number in brackets indicates in how many lines of code this figure can be drawn. Can you do it in the same amount of lines?
+
+                    <div class="w-full flex flex-row gap-2">
+                    Square (3) <img src="https://github.com/hedyorg/hedy/assets/80678586/03b96c2c-7b94-4032-9f9f-3f3b13573623" width="200">
+                    Randomly colored star (5) <img src="https://github.com/hedyorg/hedy/assets/80678586/dbe39006-c050-4833-b5c4-f9d1fb1c0781" width="150">
+                    Randomly colored spiral (7) <img src="https://github.com/hedyorg/hedy/assets/80678586/9bcdb3f1-367d-4ae0-878f-d09005424a35" width="150">
+                    </div>
+                start_code: '## Recreate the drawings with the turtle!'
+            9:
+                story_text: |
+                    ### Exercise
+                    Recreate the drawings with the turtle!
+
+                    **Extra** The number in brackets indicates in how many lines of code this figure can be drawn. Can you do it in the same amount of lines?
+
+                    **Extra** Give the player a choice which country they would like to see the flag of.
+
+                    <div class="w-full flex flex-row gap-2">
+                    Cross (7) <img src="https://github.com/hedyorg/hedy/assets/80678586/76e42c76-aa3f-4863-8eee-ead73c09a186" width="150">
+                    Randomly colored nested squares (8) <img src="https://github.com/hedyorg/hedy/assets/80678586/17f878cc-e893-4c10-b32e-a09a50bf08de" width="200">
+                    Flags <img src="https://github.com/hedyorg/hedy/assets/80678586/877fc337-df80-4185-8005-a6c28904f66e" width="300">
+                    </div>
+                example_code: |
+                    Hint for the nested squares:
+                    ```
+                    colors = red, blue, orange, yellow, pink, purple, green, brown, black
+                    distance = 120
+                    repeat 5 times
+                    _
+                    ```
+                    Hint for the flags:
+                    ```
+                    country = ask 'which country would you like to see the flag of?'
+                    if country is 'the Netherlands'
+                        color_1 = red
+                        color_2 = white
+                        color_3 = blue
+                    ```
+                start_code: '## Recreate the drawings with the turtle! '
+            10:
+                story_text: |
+                    ### Exercise
+                    Recreate the drawings with the turtle!
+
+                    <div class="w-full flex flex-row gap-2">
+                    Nested Hexagon <img src="https://github.com/hedyorg/hedy/assets/80678586/3629e908-3cd5-44ac-bbcd-1f1cceb15654" width="150">
+                    Traffic lights  <img src="https://github.com/hedyorg/hedy/assets/80678586/edbbb608-5ff8-4349-85a6-e47809adde43" width="100">
+                    </div>
+                example_code: |
+                    Hint Nested Hexagon:
+                    ```
+                    distances = 100, 80, 60, 40, 20
+                    {for} distance {in} distances
+                    _
+                    ```
+
+                    Hint Traffic Lights:
+                    ```
+                    colors = red, yellow, green
+                    {for} chosen_color {in} colors
+                        color _
+                        {repeat} _
+                    ```
+                story_text_2: |
+                    Christmas lights <img src="https://github.com/hedyorg/hedy/assets/80678586/9637ea6d-6edc-4d88-a6f7-10271bfc5371" width="500">
+                example_code_2: |
+                    Hint Christmas Lights:
+
+                    Start by moving to the left side of the screen with an invisible white line. Then hang up the Christmas lights!
+                    ```
+                    {color} white
+                    {turn} -90
+                    {forward} 300
+                    {turn} 90
+
+                    colors = red, blue, yellow, purple, green, orange, pink
+                    {for} chosen_color {in} colors
+                    _
+                    ```
+                start_code: '## Recreate the drawings with the turtle! '
+            11:
+                story_text: |
+                    ### Exercise
+                    Recreate the drawings with the turtle!
+
+                    <div class="w-full flex flex-row gap-2">
+                    Beehive (6) <img src="https://github.com/hedyorg/hedy/assets/80678586/ec02469c-907b-4695-9382-d39a8f3c00ec" width="200">
+                    Fan (5)  <img src="https://github.com/hedyorg/hedy/assets/80678586/a032ab35-c70c-4e67-9b4e-036a03ecce87" width="200">
+                    </div>
+                example_code: |
+                    Hint Beehive:
+                    ```
+                    {for} amount_of_combs {in} {range} 1 {to} _
+                        {for} walls_of_one_comb {in} {range} 1 {to} _
+                            {forward} _
+                            {turn} _
+                        {forward} _
+                        {turn} _
+                    ```
+
+                    Hint Fan:
+                    Start out like the fan you made in level 7. Or take a peak at the hint for the beehive, because the codes are very similar.
+                start_code: '## Recreate the drawings with the turtle! '
+            12:
+                story_text: |
+                    ### Exercise
+                    Recreate the drawings with the turtle!
+                example_code: |
+                    Hint: Bracelet designing program
+
+
+                    Firstly, define a function **for each shape** you want to use on the bacelet. Then, add the shapes to the bacelet like this:
+
+                    ```
+                    {define} draw_a_square
+                    _
+
+                    {color} white
+                    {turn} -90
+                    {forward} 300
+                    {turn} 180
+
+                    {for} i {in} {range} 1 {to} 5
+                        {color} gray
+                        {forward} 100
+                        shape = {ask} 'What kind of shape would you like next on the bracelet?'
+                        chosen_color = {ask} 'In which color?'
+                        {color} chosen_color
+                        {if} shape = 'square'
+                            {call} draw_a_square
+                    ```
+                start_code: '## Recreate the drawings with the turtle! '
+            13:
+                story_text: |
+                    ### Exercise
+                    Recreate the drawings with the turtle!
+
+                    Street in different sizes <img src="https://github.com/hedyorg/hedy/assets/80678586/cdae9d97-d5ef-46f3-8838-24fa7b5b1bec" width="300">
+                    Colored street  <img src="https://github.com/hedyorg/hedy/assets/80678586/9893e0bd-c0f8-49bc-a5a7-217182407724" width="300">
+                example_code: |
+                    Hint Street in different sizes
+                    ```
+                    {define} draw_a_house {with} size
+                    _
+
+                    {call} draw_a_house {with} 90
+                    {call} draw_a_house {with} 60
+                    {call} draw_a_house {with} 30
+                    ```
+
+                    Hint Colored street
+                    ```
+                    {define} draw_a_house {with} chosen_color
+                    _
+                    ```
+                start_code: '## Recreate the drawings with the turtle! '
+            14:
+                story_text: |
+                    ### Exercise
+                    Create a program that asks the player how many corners their figure should have and then creates that figure.
+                    The figure in the image is the output when the player fills in 10.
+
+                    <div class="w-full flex flex-row gap-2">
+                     <img src="https://github.com/hedyorg/hedy/assets/80678586/ee32f40e-dea1-4e7c-a813-3ef63671254b" width="300">
+                     <img src="https://github.com/hedyorg/hedy/assets/80678586/3621bf77-527d-41e8-a44f-c5a21bb4ffd2" width="200">
+                    </div>
+                example_code: |
+                    ```
+                    {define} calculate_degrees {with} amount_of_corners
+                        _ 360 / amount_of_corners
+
+
+                    {define} draw_figure {with} degrees
+                        _
+                            {forward} 400/amount_of_corners
+                            {turn} _
+
+                    amount_of_corners = {ask} _
+                    degrees = {call} _ {with} _
+
+                    {call} _ {with}
+                    {call} _ {with}
+                    ```
+                start_code: '## Recreate the drawings with the turtle! '
+            15:
+                story_text: |
+                    ### Exercise
+                    Recreate the drawings with the turtle!
+
+                    Spiral <img src="https://github.com/hedyorg/hedy/assets/80678586/6943223c-018b-435b-a391-23723cc7a6ad" width="150">
+                example_code: |
+                    Spiral
+                    ```
+                    distance = 5
+                    {while} distance < 200
+                        distance = distance + 5
+                         _
+                    ```
+                story_text_2: |
+                    Fan <img src="https://github.com/hedyorg/hedy/assets/80678586/cb671065-b47b-49f0-b298-dcbcd2a5e28f" width="150">
+                example_code_2: |
+                    Fan
+                    ```
+                    {define} draw_a_square {with} side
+                    _
+
+                    i = 100
+                    {while} i > 1
+                        _ {with} i
+                        _
+                        i = i - 3
+                    ```
+                story_text_3: |
+                    Star <img src="https://github.com/hedyorg/hedy/assets/80678586/17564e0a-63e1-4794-8d41-15ac8c1a5a93" width="150">
+                example_code_3: |
+                    Star
+                    A star is usually drawn using 144-degree-turns. If you change this slightly to 143 degrees for example and repeat the pattern multiple times with a {while} loop you can make this figure.
+                start_code: '## Recreate the drawings with the turtle! '
     while_command:
         name: '{while}'
         default_save_name: while_command

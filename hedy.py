@@ -1137,73 +1137,103 @@ class IsValid(Filter):
     # this function is used to generate more informative error messages
     # tree is transformed to a node of [Bool, args, command number]
 
-    def __init__(self, level):
+    def __init__(self, level, lang, input_string):
         self.level = level
+        self.lang = lang
+        self.input_string = input_string
 
     def error_invalid_space(self, meta, args):
-        # return space to indicate that line starts in a space
-        return False, InvalidInfo(" ", line=args[0][2].line, column=args[0][2].column), meta
+        line = args[0][2].line
+        # the error here is a space at the beginning of a line, we can fix that!
+        fixed_code, result = repair_leading_space(self.input_string, self.lang, self.level, line)
+        raise exceptions.InvalidSpaceException(
+            level=self.level, line_number=line, fixed_code=fixed_code, fixed_result=result)
 
     def error_print_nq(self, meta, args):
         words = [str(x[1]) for x in args]  # second half of the list is the word
         text = ' '.join(words)
-        return False, InvalidInfo("print without quotes", arguments=[
-                                  text], line=meta.line, column=meta.column), meta
+
+        raise exceptions.UnquotedTextException(
+            level=self.level,
+            unquotedtext=text,
+            line_number=meta.line
+        )
 
     def error_list_access(self, meta, args):
-        error = InvalidInfo('misspelled "at" command', arguments=[str(args[1][1])], line=meta.line)
-        return False, error, meta
+        raise exceptions.MisspelledAtCommand(command='at', arg1=str(args[1][1]), line_number=meta.line)
 
     def error_non_decimal(self, meta, args):
-        error = InvalidInfo('non decimal variable', line=meta.line)
-        return False, error, meta
+        raise exceptions.NonDecimalVariable(line_number=meta.line)
 
     def error_invalid(self, meta, args):
-        error = InvalidInfo('invalid command', command=args[0][1], arguments=[
-                            [a[1] for a in args[1:]]], line=meta.line, column=meta.column)
-        return False, error, meta
+        invalid_command = args[0][1]
+        closest = closest_command(invalid_command, get_suggestions_for_language(self.lang, self.level))
+
+        if closest == 'keyword':  # we couldn't find a suggestion
+            invalid_command_en = hedy_translation.translate_keyword_to_en(invalid_command, lang)
+            if invalid_command_en == Command.turn:
+                arg = args[0][0]
+                raise hedy.exceptions.InvalidArgumentException(command=invalid_command,
+                                                               allowed_types=get_allowed_types(
+                                                                   Command.turn, self.level),
+                                                               invalid_argument=arg,
+                                                               line_number=meta.line)
+            # clearly the error message here should be better or it should be a different one!
+            raise exceptions.ParseException(level=self.level, location=[meta.line, meta.column], found=invalid_command)
+        elif closest is None:
+            raise exceptions.MissingCommandException(level=self.level, line_number=meta.line)
+        else:
+            result = None
+            fixed_code = self.input_string.replace(invalid_command, closest)
+            if fixed_code != self.input_string:  # only if we have made a successful fix
+                try:
+                    fixed_result = transpile_inner(fixed_code, self.level)
+                    result = fixed_result
+                except exceptions.HedyException:
+                    # The fixed code contains another error. Only report the original error for now.
+                    pass
+
+        raise exceptions.InvalidCommandException(invalid_command=invalid_command, level=self.level,
+                                                 guessed_command=closest, line_number=meta.line,
+                                                 fixed_code=fixed_code, fixed_result=result)
 
     def error_unsupported_number(self, meta, args):
-        error = InvalidInfo('unsupported number', arguments=[str(args[0])], line=meta.line, column=meta.column)
-        return False, error, meta
+        # add in , line=meta.line, column=meta.column
+        raise exceptions.UnsupportedFloatException(value=''.join(str(args[0])))
 
     def error_condition(self, meta, args):
-        error = InvalidInfo('invalid condition', arguments=[str(args[0])], line=meta.line, column=meta.column)
-        return False, error, meta
+        raise exceptions.UnquotedEqualityCheckException(line_number=meta.line)
 
     def error_repeat_no_command(self, meta, args):
-        error = InvalidInfo('invalid repeat', arguments=[str(args[0])], line=meta.line, column=meta.column)
-        return False, error, meta
+        raise exceptions.MissingInnerCommandException(command='repeat', level=self.level, line_number=meta.line)
 
     def error_repeat_no_print(self, meta, args):
-        error = InvalidInfo('repeat missing print', arguments=[str(args[0])], line=meta.line, column=meta.column)
-        return False, error, meta
+        raise exceptions.IncompleteRepeatException(command='print', level=self.level, line_number=meta.line)
 
     def error_repeat_no_times(self, meta, args):
-        error = InvalidInfo('repeat missing times', arguments=[str(args[0])], line=meta.line, column=meta.column)
-        return False, error, meta
+        raise exceptions.IncompleteRepeatException(command='times', level=self.level, line_number=meta.line)
 
     def error_text_no_print(self, meta, args):
-        error = InvalidInfo('lonely text', arguments=[str(args[0])], line=meta.line, column=meta.column)
-        return False, error, meta
+        raise exceptions.LonelyTextException(level=self.level, line_number=meta.line)
 
     def error_list_access_at(self, meta, args):
-        error = InvalidInfo('invalid at keyword', arguments=[str(args[0])], line=meta.line, column=meta.column)
-        return False, error, meta
-    # other rules are inherited from Filter
+        raise exceptions.InvalidAtCommandException(command='at', level=self.level, line_number=meta.line)
 
     # flat if no longer allowed in level 8 and up
     def error_ifelse(self, meta, args):
-        error = InvalidInfo('flat if', arguments=[str(args[0])], line=meta.line, column=meta.column)
-        return False, error, meta
+        raise exceptions.WrongLevelException(
+            offending_keyword='if',
+            working_level=7,
+            tip='no_more_flat_if',
+            line_number=meta.line)
 
     def error_ifpressed_missing_else(self, meta, args):
-        error = InvalidInfo('ifpressed missing else', arguments=[str(args[0])], line=meta.line, column=meta.column)
-        return False, error, meta
+        raise exceptions.MissingElseForPressitException(
+            command='ifpressed_else', level=self.level, line_number=meta.line)
 
     def error_nested_define(self, meta, args):
-        error = InvalidInfo('nested function', arguments=[str(args[0])], line=meta.line, column=meta.column)
-        return False, error, meta
+        raise exceptions.NestedFunctionException()
+
     # other rules are inherited from Filter
 
 
@@ -3275,103 +3305,25 @@ def parse_input(input_string, level, lang):
 
 
 def is_program_valid(program_root, input_string, level, lang):
-    # IsValid returns (True,) or (False, args)
-    instance = IsValid(level)
-    is_valid = instance.transform(program_root)
+    # IsValid raises the appropriate exception when an error production (starting with error_)
+    # is found in the parse tree
+    IsValid(level, lang, input_string).transform(program_root)
 
-    if not is_valid[0]:
-        _, invalid_info = is_valid
 
-        # Apparently, sometimes 'args' is a string, sometimes it's a list of
-        # strings ( are these production rule names?). If it's a list of
-        # strings, just take the first string and proceed.
-        if isinstance(invalid_info, list):
-            invalid_info = invalid_info[0]
-
-        line = invalid_info.line
-        column = invalid_info.column
-        if invalid_info.error_type == ' ':
-            # the error here is a space at the beginning of a line, we can fix that!
-            fixed_code = program_repair.remove_leading_spaces(input_string)
-            if fixed_code != input_string:  # only if we have made a successful fix
-                try:
-                    fixed_result = transpile_inner(fixed_code, level, lang)
-                    result = fixed_result
-                    raise exceptions.InvalidSpaceException(
-                        level=level, line_number=line, fixed_code=fixed_code, fixed_result=result)
-                except exceptions.HedyException:
-                    invalid_info.error_type = None
-                    transpile_inner(fixed_code, level)
-                    # The fixed code contains another error. Only report the original error for now.
-                    pass
+def repair_leading_space(input_string, lang, level, line):
+    fixed_code = program_repair.remove_leading_spaces(input_string)
+    result = None
+    if fixed_code != input_string:  # only if we have made a successful fix
+        try:
+            fixed_result = transpile_inner(fixed_code, level, lang)
+            result = fixed_result
             raise exceptions.InvalidSpaceException(
                 level=level, line_number=line, fixed_code=fixed_code, fixed_result=result)
-        elif invalid_info.error_type == 'invalid condition':
-            raise exceptions.UnquotedEqualityCheckException(line_number=line)
-        elif invalid_info.error_type == 'invalid repeat':
-            raise exceptions.MissingInnerCommandException(command='repeat', level=level, line_number=line)
-        elif invalid_info.error_type == 'repeat missing print':
-            raise exceptions.IncompleteRepeatException(command='print', level=level, line_number=line)
-        elif invalid_info.error_type == 'repeat missing times':
-            raise exceptions.IncompleteRepeatException(command='times', level=level, line_number=line)
-        elif invalid_info.error_type == 'print without quotes':
-            unquotedtext = invalid_info.arguments[0]
-            raise exceptions.UnquotedTextException(
-                level=level, unquotedtext=unquotedtext, line_number=invalid_info.line)
-        elif invalid_info.error_type == 'misspelled "at" command':
-            raise exceptions.MisspelledAtCommand(command='at', arg1=invalid_info.arguments[0], line_number=line)
-        elif invalid_info.error_type == 'non decimal variable':
-            raise exceptions.NonDecimalVariable(line_number=line)
-        elif invalid_info.error_type == 'unsupported number':
-            raise exceptions.UnsupportedFloatException(value=''.join(invalid_info.arguments))
-        elif invalid_info.error_type == 'lonely text':
-            raise exceptions.LonelyTextException(level=level, line_number=line)
-        elif invalid_info.error_type == 'flat if':
-            raise exceptions.WrongLevelException(
-                offending_keyword='if',
-                working_level=7,
-                tip='no_more_flat_if',
-                line_number=invalid_info.line)
-        elif invalid_info.error_type == 'invalid at keyword':
-            raise exceptions.InvalidAtCommandException(command='at', level=level, line_number=invalid_info.line)
-        elif invalid_info.error_type == 'ifpressed missing else':
-            raise exceptions.MissingElseForPressitException(
-                command='ifpressed_else', level=level, line_number=invalid_info.line)
-        elif invalid_info.error_type == 'nested function':
-            raise exceptions.NestedFunctionException()
-        else:
-            invalid_command = invalid_info.command
-            closest = closest_command(invalid_command, get_suggestions_for_language(lang, level))
-
-            if closest == 'keyword':  # we couldn't find a suggestion
-                invalid_command_en = hedy_translation.translate_keyword_to_en(invalid_command, lang)
-                if invalid_command_en == Command.turn:
-                    arg = invalid_info.arguments[0][0]
-                    raise hedy.exceptions.InvalidArgumentException(command=invalid_info.command,
-                                                                   allowed_types=get_allowed_types(Command.turn, level),
-                                                                   invalid_argument=arg,
-                                                                   line_number=invalid_info.line)
-                # clearly the error message here should be better or it should be a different one!
-                raise exceptions.ParseException(level=level, location=[line, column], found=invalid_command)
-            elif closest is None:
-                raise exceptions.MissingCommandException(level=level, line_number=line)
-
-            else:
-
-                fixed_code = None
-                result = None
-                fixed_code = input_string.replace(invalid_command, closest)
-                if fixed_code != input_string:  # only if we have made a successful fix
-                    try:
-                        fixed_result = transpile_inner(fixed_code, level)
-                        result = fixed_result
-                    except exceptions.HedyException:
-                        # The fixed code contains another error. Only report the original error for now.
-                        pass
-
-            raise exceptions.InvalidCommandException(invalid_command=invalid_command, level=level,
-                                                     guessed_command=closest, line_number=line,
-                                                     fixed_code=fixed_code, fixed_result=result)
+        except exceptions.HedyException:
+            transpile_inner(fixed_code, level)
+            # The fixed code contains another error. Only report the original error for now.
+            pass
+    return fixed_code, result
 
 
 def is_program_complete(abstract_syntax_tree, level):
@@ -3394,57 +3346,25 @@ def create_lookup_table(abstract_syntax_tree, level, lang, input_string):
     return entries
 
 
-def transpile_inner(input_string, level, lang="en", populate_source_map=False, is_debug=False):
-    check_program_size_is_valid(input_string)
-
-    level = int(level)
-    if level > HEDY_MAX_LEVEL:
-        raise Exception(f'Levels over {HEDY_MAX_LEVEL} not implemented yet')
-
+def create_AST(input_string, level, lang="en"):
     input_string = process_input_string(input_string, level, lang)
     program_root = parse_input(input_string, level, lang)
 
-    if populate_source_map:
-        source_map.clear()
-        source_map.set_level(level)
-        source_map.set_language(lang)
-        source_map.set_hedy_input(input_string)
-
-    # checks whether any error production nodes are present in the parse tree
-    is_program_valid(program_root, input_string, level, lang)
-
     try:
+        # checks whether any error production nodes are present in the parse tree
+        is_program_valid(program_root, input_string, level, lang)
         abstract_syntax_tree = ExtractAST().transform(program_root)
-
         is_program_complete(abstract_syntax_tree, level)
 
         if not valid_echo(abstract_syntax_tree):
             raise exceptions.LonelyEchoException()
 
         lookup_table = create_lookup_table(abstract_syntax_tree, level, lang, input_string)
-
-        # FH, may 2022. for now, we just out arabic numerals when the language is ar
-        # this can be changed into a profile setting or could be detected
-        # in usage of programs
-        if lang == "ar":
-            numerals_language = "Arabic"
-        else:
-            numerals_language = "Latin"
-
-        # grab the right transpiler from the lookup
-        convertToPython = TRANSPILER_LOOKUP[level]
-        python = convertToPython(lookup_table, lang, numerals_language, is_debug).transform(abstract_syntax_tree)
-
         commands = AllCommands(level).transform(program_root)
+        # FH, dec 2023. I don't love how AllCommands works on program root and not on AST,
+        # but his will do for now. One day we should really start to clean up our AST!
 
-        has_clear = "clear" in commands
-        has_turtle = "forward" in commands or "turn" in commands or "color" in commands
-        has_pygame = "ifpressed" in commands or "ifpressed_else" in commands or "assign_button" in commands
-
-        if populate_source_map:
-            source_map.set_python_output(python)
-
-        return ParseResult(python, source_map, has_turtle, has_pygame, has_clear, commands)
+        return abstract_syntax_tree, lookup_table, commands
     except VisitError as E:
         if isinstance(E, VisitError):
             # Exceptions raised inside visitors are wrapped inside VisitError. Unwrap it if it is a
@@ -3453,6 +3373,43 @@ def transpile_inner(input_string, level, lang="en", populate_source_map=False, i
                 raise E.orig_exc
             else:
                 raise E
+
+
+def transpile_inner(input_string, level, lang="en", populate_source_map=False, is_debug=False):
+    check_program_size_is_valid(input_string)
+
+    level = int(level)
+    if level > HEDY_MAX_LEVEL:
+        raise Exception(f'Levels over {HEDY_MAX_LEVEL} not implemented yet')
+
+    if populate_source_map:
+        source_map.clear()
+        source_map.set_level(level)
+        source_map.set_language(lang)
+        source_map.set_hedy_input(input_string)
+
+    # FH, may 2022. for now, we just out arabic numerals when the language is ar
+    # this can be changed into a profile setting or could be detected
+    # in usage of programs
+    if lang == "ar":
+        numerals_language = "Arabic"
+    else:
+        numerals_language = "Latin"
+
+    abstract_syntax_tree, lookup_table, commands = create_AST(input_string, level, lang)
+
+    # grab the right transpiler from the lookup
+    convertToPython = TRANSPILER_LOOKUP[level]
+    python = convertToPython(lookup_table, lang, numerals_language, is_debug).transform(abstract_syntax_tree)
+
+    has_clear = "clear" in commands
+    has_turtle = "forward" in commands or "turn" in commands or "color" in commands
+    has_pygame = "ifpressed" in commands or "ifpressed_else" in commands or "assign_button" in commands
+
+    if populate_source_map:
+        source_map.set_python_output(python)
+
+    return ParseResult(python, source_map, has_turtle, has_pygame, has_clear, commands)
 
 
 def execute(input_string, level):

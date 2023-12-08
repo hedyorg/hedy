@@ -136,7 +136,7 @@ levels:
                 {repeat} 3 {times} {print} 'Daddy shark tututututudu'
                 {print} 'Daddy shark'
         2:
-            story: Crée la chanson « Les roues de l’autobus tournent tournent »
+            story: Écris la chanson « Les roues de l’autobus tournent tournent »
             code: |-
                 {print} "Les roues de l'autobus tournent tournent"
                 {repeat} 2 {times} {print} "Tournent tournent,"
@@ -146,12 +146,12 @@ levels:
         1:
             story: |-
                 Tu joues à Pokémon Go avec quatre amis ! Crée un programme qui va décider pour chacun de vous l'équipe dans laquelle vous allez jouer.
-                Ce sera soit rouge, soit jaune, soit bleu ! Fais une pause après avoir annoncé une équipe.
+                Ce sera soit rouge, soit jaune, soit bleu ! Fais une pause après avoir annoncé une équipe.
             code: |-
                 équipes = rouge, jaune, bleu
-                {print} 'Rouge, Jaune ou Bleu ?'
+                {print} "Rouge, Jaune ou Bleu ?"
                 {repeat} 5 {times}
-                    {print} "Tu es sélectionné dans l'équipe... "
+                    {print} "Tu es sélectionné dans l'équipe… "
                     {print} équipes {at} {random}
                     sleep 2
         2:
