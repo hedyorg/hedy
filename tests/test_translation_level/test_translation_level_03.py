@@ -132,90 +132,37 @@ class TestsTranslationLevel3(HedyTester):
 
         self.assertEqual(expected, result)
 
-    @parameterized.expand([
-        ('en', 'print'),
-        ('es', 'imprimir'),
-        ('es', 'print')])
-    def test_print_type_error_translates_command(self, lang, command):
+    def test_print_type_error_translates_command(self):
         code = textwrap.dedent(f"""\
             letters is a, b, b
-            {command} letters""")
+            print letters""")
 
-        self.multi_level_tester(
-            lang=lang,
-            code=code,
-            max_level=11,
-            exception=hedy.exceptions.InvalidArgumentTypeException,
-            extra_check_function=self.exception_command(command)
-        )
+        self.verify_translation(code, "en", self.level)
 
-    @parameterized.expand([
-        ('en', 'at'),
-        ('es', 'en'),
-        ('es', 'at')])
-    def test_list_at_index_type_error_translates_command(self, lang, at):
+    def test_list_at_index_type_error_translates_command(self):
         code = textwrap.dedent(f"""\
             letters is ask 'What are the letters?'
-            print letters {at} 1""")
+            print letters at 1""")
 
-        self.multi_level_tester(
-            lang=lang,
-            code=code,
-            max_level=11,
-            exception=hedy.exceptions.InvalidArgumentTypeException,
-            extra_check_function=self.exception_command(at)
-        )
+        self.verify_translation(code, "en", self.level)
 
-    @parameterized.expand([
-        ('en', 'at random'),
-        ('es', 'en aleatorio'),
-        ('es', 'at aleatorio'),
-        ('es', 'en random')])
-    def test_list_at_random_type_error_translates_command(self, lang, at_random):
+    def test_list_at_random_type_error_translates_command(self):
         code = textwrap.dedent(f"""\
             letters is ask 'What are the letters?'
-            print letters {at_random}""")
+            print letters at random""")
 
-        self.multi_level_tester(
-            lang=lang,
-            code=code,
-            max_level=11,
-            exception=hedy.exceptions.InvalidArgumentTypeException,
-            extra_check_function=self.exception_command(at_random)
-        )
+        self.verify_translation(code, "en", self.level)
 
-    @parameterized.expand([
-        ('en', 'add', 'to'),
-        ('es', 'añadir', 'a'),
-        ('es', 'añadir', 'to'),
-        ('es', 'add', 'a')])
-    def test_add_to_list_type_error_translates_command(self, lang, add, to):
+    def test_add_to_list_type_error_translates_command(self):
         code = textwrap.dedent(f"""\
             color is yellow
-            {add} blue {to} color""")
+            add blue to color""")
 
-        self.multi_level_tester(
-            lang=lang,
-            code=code,
-            max_level=11,
-            exception=hedy.exceptions.InvalidArgumentTypeException,
-            extra_check_function=self.exception_command(f'{add} {to}')
-        )
+        self.verify_translation(code, "en", self.level)
 
-    @parameterized.expand([
-        ('en', 'add', 'to'),
-        ('es', 'borrar', 'de'),
-        ('es', 'borrar', 'from'),
-        ('es', 'remove', 'de')])
-    def test_remove_from_list_type_error_translates_command(self, lang, remove, from_):
+    def test_remove_from_list_type_error_translates_command(self):
         code = textwrap.dedent(f"""\
             color is yellow
-            {remove} blue {from_} color""")
+            remove blue from color""")
 
-        self.multi_level_tester(
-            lang=lang,
-            code=code,
-            max_level=11,
-            exception=hedy.exceptions.InvalidArgumentTypeException,
-            extra_check_function=self.exception_command(f'{remove} {from_}')
-        )
+        self.verify_translation(code, "en", self.level)

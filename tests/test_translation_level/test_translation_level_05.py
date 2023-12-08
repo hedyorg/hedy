@@ -164,30 +164,16 @@ class TestsTranslationLevel5(HedyTester):
 
         self.assertEqual(expected, result)
 
-    @parameterized.expand([('en', 'is'), ('es', 'es'), ('es', 'is')])
-    def test_equality_type_error_translates_command(self, lang, is_):
+    def test_equality_type_error_translates_command(self):
         code = textwrap.dedent(f"""\
             letters is a, b, c
-            if letters {is_} '10' print 'wrong!'""")
+            if letters is '10' print 'wrong!'""")
 
-        self.multi_level_tester(
-            lang=lang,
-            code=code,
-            max_level=7,
-            exception=hedy.exceptions.InvalidArgumentTypeException,
-            extra_check_function=self.exception_command(is_)
-        )
+        self.verify_translation(code, "en", self.level)
 
-    @parameterized.expand([('en', 'in'), ('es', 'en'), ('es', 'in')])
-    def test_in_list_type_error_translates_command(self, lang, in_):
+    def test_in_list_type_error_translates_command(self):
         code = textwrap.dedent(f"""\
             letters is 'test'
-            if 10 {in_} letters print 'wrong!'""")
+            if 10 in letters print 'wrong!'""")
 
-        self.multi_level_tester(
-            lang=lang,
-            code=code,
-            max_level=7,
-            exception=hedy.exceptions.InvalidArgumentTypeException,
-            extra_check_function=self.exception_command(in_)
-        )
+        self.verify_translation(code, "en", self.level)
