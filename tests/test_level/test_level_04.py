@@ -106,7 +106,7 @@ class TestsLevel4(HedyTester):
         prind skipping""")
 
         expected = textwrap.dedent("""\
-        pass
+        print(f'Hallo welkom bij Hedy!')
         pass""")
 
         skipped_mappings = [

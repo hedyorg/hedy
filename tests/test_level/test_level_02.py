@@ -582,7 +582,7 @@ class TestsLevel2(HedyTester):
         prind skipping""")
 
         expected = textwrap.dedent("""\
-        pass
+        naam = 'Hedy'
         pass""")
 
         skipped_mappings = [

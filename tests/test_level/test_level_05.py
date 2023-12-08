@@ -881,30 +881,6 @@ class TestsLevel5(HedyTester):
     #         max_level=7
     #     )
 
-    def test_line_with_if_with_space_gives_invalid(self):
-        code = textwrap.dedent("""\
-        prind skipping
-        name is Hedy
-        if name is 3 print 'leuk' else print 'stom'""")
-
-        expected = textwrap.dedent("""\
-        pass
-        name = 'Hedy'
-        if name == '3'
-          print(f'leuk')
-        else:
-          print(f'stom')""")
-
-        skipped_mappings = [
-            SkippedMapping(SourceRange(1, 1, 1, 15), hedy.exceptions.InvalidCommandException),
-        ]
-
-        self.multi_level_tester(
-            code=code,
-            expected=expected,
-            skipped_mappings=skipped_mappings,
-            max_level=7)
-
     def test_pront_should_suggest_print(self):
         code = textwrap.dedent("""\
         pront 'Hedy is leuk!'

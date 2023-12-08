@@ -1,4 +1,4 @@
-command:+= error_ifelse | error_ifpressed_missing_else | ifpressed ifpressed_elses? | ifs elses?-= error_invalid_space | ifelse
+command:+= error_ifelse | error_ifpressed_missing_else | ifpressed ifpressed_elses? | ifs elses?-= ifelse
 
 repeat: _REPEAT (INT | var_access) _TIMES _SPACE? _EOL (_SPACE command) (_EOL _SPACE command)* _EOL? _END_BLOCK
 
@@ -20,5 +20,6 @@ ifs: _IF condition _EOL (_SPACE command) (_EOL _SPACE command)* _EOL? _END_BLOCK
 
 
 //old 'flat' ifelse:
-error_ifelse : ifelse
+error_ifelse : _if_clause (_SPACE+ _EOL* | _SPACE* _EOL+) _ELSE (_SPACE+ _EOL* | _SPACE* _EOL+) _if_less_command
+
 

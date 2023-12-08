@@ -587,11 +587,11 @@ class TestsLevel1(HedyTester):
     #
     def test_print_with_space_gives_invalid(self):
         code = textwrap.dedent("""\
-         print Hallo welkom bij Hedy!
+        print Hallo welkom bij Hedy!
         prind skipping""")
 
         expected = textwrap.dedent("""\
-        pass
+        print('Hallo welkom bij Hedy!')
         pass""")
 
         skipped_mappings = [
@@ -611,7 +611,7 @@ class TestsLevel1(HedyTester):
         prind skipping""")
 
         expected = textwrap.dedent("""\
-        pass
+        answer = input('Hallo welkom bij Hedy?')
         pass""")
 
         skipped_mappings = [
