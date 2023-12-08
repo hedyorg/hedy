@@ -285,7 +285,7 @@ class HedyTester(unittest.TestCase):
 
             skipped_exceptions = [hedy.exceptions.ParseException, hedy.exceptions.NoIndentationException,
                                   hedy.exceptions.IndentationException, hedy.exceptions.LockedLanguageFeatureException,
-                                  hedy.exceptions.CodePlaceholdersPresentException]
+                                  hedy.exceptions.CodePlaceholdersPresentException, hedy.exceptions.InvalidCommandException]
 
             if translate and not exception in skipped_exceptions:
                 self.verify_translation(code, lang, level)
