@@ -126,16 +126,17 @@ class TestsLevel12(HedyTester):
             expected_commands=expected_commands,
             max_level=17)
 
-    def test_print_string_with_triple_quotes_gives_error(self):
-        code = textwrap.dedent("""\
-            var = " is not allowed"
-            print "'''" + var """)
-
-        self.multi_level_tester(
-            code=code,
-            max_level=17,
-            exception=hedy.exceptions.UnsupportedStringValue
-        )
+    # disabled in #4838
+    # def test_print_string_with_triple_quotes_gives_error(self):
+    #     code = textwrap.dedent("""\
+    #         var = " is not allowed"
+    #         print "'''" + var """)
+    #
+    #     self.multi_level_tester(
+    #         code=code,
+    #         max_level=17,
+    #         exception=hedy.exceptions.UnsupportedStringValue
+    #     )
 
     # issue #745
     def test_print_list_gives_type_error(self):

@@ -19,7 +19,7 @@ class SurveysModule(WebsiteModule):
         for i, (question, answer) in enumerate(request.form.items(), start=1):
             if not answer:
                 survey_done = False
-            new_db[i] = {'answer': answer, 'question': question}
+            new_db[str(i)] = {'answer': answer, 'question': question}
             responses[question] = answer
         if survey_done is True:
             self.db.add_skip_survey(survey_id)
