@@ -10,9 +10,11 @@ describe('Developers mode', () => {
       goToHedyPage();
       
       cy.get('#toggle_circle').click(); // Developers mode is switched on
+      cy.reload();
       cy.get('#adventures').should('not.be.visible');
 
       cy.get('#toggle_circle').click(); // Developers mode is switched off
+      cy.reload();
       cy.get('#adventures').should('be.visible');
     })
 
@@ -30,6 +32,7 @@ describe('Developers mode', () => {
       loginForStudent(students[0]);
       goToHedyPage();
       
+      cy.reload();
       cy.get('#adventures').should('not.be.visible');
     })
 })
