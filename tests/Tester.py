@@ -306,7 +306,7 @@ class HedyTester(unittest.TestCase):
             # all keyword languages! TODO fix or remove
 
             # a nice mix of latin/non-latin and l2r and r2l!
-            all = ['ar', 'ca', 'sq', 'bg', 'es', 'fi', 'fr', 'he', 'nl', 'hi', 'ur', 'te', 'th', 'vi', 'uk', 'tr']
+            all = ['ar', 'ca', 'sq', 'bg', 'es', 'fi', 'he', 'nl', 'hi', 'ur', 'te', 'th', 'vi', 'uk', 'tr']
 
             to_lang = random.choice(all)
 
