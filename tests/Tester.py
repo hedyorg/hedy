@@ -163,14 +163,6 @@ class HedyTester(unittest.TestCase):
             res.append(t)
         return res
 
-    def codeToInvalidInfo(self, code):
-        instance = hedy.IsValid(self.level)
-        program_root = hedy.parse_input(code, self.level, 'en')
-        is_valid = instance.transform(program_root)
-        _, invalid_info = is_valid
-
-        return invalid_info[0].line, invalid_info[0].column
-
     def multi_level_tester(
             self,
             code,
