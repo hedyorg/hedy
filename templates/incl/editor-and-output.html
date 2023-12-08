@@ -249,14 +249,16 @@
     <label for="developers_toggle" class="flex flex-row items-center justify-center cursor-pointer">
       <div class="relative">
         <input id="developers_toggle" type="checkbox" class="sr-only"
-        _="on load hedyApp.developers_mode() end
-          on click hedyApp.toggle_developers_mode() end">
+        _="on load hedyApp.toggle_developers_mode(false, false) end
+          on click hedyApp.toggle_developers_mode(true, false) end">
         <div class="w-10 h-4 bg-gray-400 rounded-full shadow-inner" id="dev_toggle"></div>
         <div class="toggle-circle absolute w-6 h-6 bg-white rounded-full shadow ltr:-left-1 rtl:-right-1 -top-1 transition" id="toggle_circle" style="top: -5px;"></div>
       </div>
       <div class="ltr:ml-3 rtl:mr-3">{{_('developers_mode')}}</div>
     </label>
   </div>
+{% else %}
+<div _="on load hedyApp.toggle_developers_mode(false, true) end"></div>
 {% endif %}
 <script>
 // FIXME: Stop using inline JavaScript

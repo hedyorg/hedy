@@ -1567,10 +1567,10 @@ function createModal(level:number ){
   modal.repair(editor, 0, title);
 }
 
-export function toggle_developers_mode(load:boolean, enforce_developers_mode:boolean) {
+export function toggleDevelopersMode(on_click:boolean, enforce_dev_mode:boolean) {
   let dev_mode = window.localStorage.getItem('developer_mode');
-  if (enforce_developers_mode == true || load == false && dev_mode == 'False' || load == true && dev_mode == 'True') {
-    if (load == false){
+  if (enforce_dev_mode == true || on_click == false && dev_mode == 'False' || on_click == false && dev_mode == 'True') {
+    if (on_click == true){
       window.localStorage.setItem('developer_mode', 'True');
     } else {
       $('#developers_toggle').prop('checked', true);
@@ -1582,8 +1582,8 @@ export function toggle_developers_mode(load:boolean, enforce_developers_mode:boo
     $('#code_output').css('height', 36 + "em");
     theGlobalEditor.resize(576);
   }
-  else if (load == false && dev_mode == 'True' || dev_mode == null || load == true && dev_mode == 'False'){
-    if (load == false){
+  else {
+    if (on_click == true){
       window.localStorage.setItem('developer_mode', 'False');
     }
     $('#adventures').show();
@@ -1593,44 +1593,6 @@ export function toggle_developers_mode(load:boolean, enforce_developers_mode:boo
     theGlobalEditor.resize(352);
   } 
 }
-
-// export function developers_mode(enforce_developers_mode:boolean){
-//   console.log(enforce_developers_mode)
-//   let dev_mode = window.localStorage.getItem('developer_mode');
-//   if (dev_mode == 'True' || enforce_developers_mode == true){
-//     $('#adventures').hide();
-//     $('#developers_toggle').prop('checked', true);
-//     $('#editor-area').removeClass('mt-5');
-//     $('#code_editor').css('height', 36 + "em");
-//     $('#code_output').css('height', 36 + "em");
-//     theGlobalEditor.resize(576);
-//   } else {
-//     $('#adventures').show();
-//     $('#editor-area').addClass('mt-5');
-//     $('#code_editor').height('22rem');
-//     $('#code_output').height('22rem');
-//     theGlobalEditor.resize(352);
-//   }
-// }
-
-// export function developers_mode(enforce_developers_mode:boolean){
-//   console.log(enforce_developers_mode)
-//   let dev_mode = window.localStorage.getItem('developer_mode');
-//   if (dev_mode == 'True' || enforce_developers_mode == true){
-//     $('#adventures').hide();
-//     $('#developers_toggle').prop('checked', true);
-//     $('#editor-area').removeClass('mt-5');
-//     $('#code_editor').css('height', 36 + "em");
-//     $('#code_output').css('height', 36 + "em");
-//     theGlobalEditor.resize(576);
-//   } else {
-//     $('#adventures').show();
-//     $('#editor-area').addClass('mt-5');
-//     $('#code_editor').height('22rem');
-//     $('#code_output').height('22rem');
-//     theGlobalEditor.resize(352);
-//   }
-// }
 
 /**
  * Run a code block, show an error message if we catch an exception
