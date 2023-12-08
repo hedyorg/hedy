@@ -56,7 +56,6 @@ class WarningException(HedyException):
         self.fixed_code = fixed_code
         self.fixed_result = fixed_result
 
-
 class ParseException(HedyException):
     def __init__(self, level, location, found, fixed_code=None):
         super().__init__('Parse',

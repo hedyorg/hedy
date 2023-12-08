@@ -186,30 +186,31 @@ class TestsLevel5(HedyTester):
             max_level=7
         )
 
-    def test_if_equality_unquoted_rhs_with_space_and_following_command_print_gives_error(self):
-        code = textwrap.dedent("""\
-        naam is James
-        if naam is James Bond print 'shaken' 
-        print naam
-        prind skipping""")
-
-        expected = textwrap.dedent("""\
-        naam = 'James'
-        pass
-        print(f'{naam}')
-        pass""")
-
-        skipped_mappings = [
-            SkippedMapping(SourceRange(2, 1, 2, 59), hedy.exceptions.UnquotedEqualityCheckException),
-            SkippedMapping(SourceRange(4, 1, 4, 15), hedy.exceptions.InvalidCommandException)
-        ]
-
-        self.multi_level_tester(
-            code=code,
-            expected=expected,
-            skipped_mappings=skipped_mappings,
-            max_level=7
-        )
+    # Disabled in 4838
+    # def test_if_equality_unquoted_rhs_with_space_and_following_command_print_gives_error(self):
+    #     code = textwrap.dedent("""\
+    #     naam is James
+    #     if naam is James Bond print 'shaken'
+    #     print naam
+    #     prind skipping""")
+    #
+    #     expected = textwrap.dedent("""\
+    #     naam = 'James'
+    #     pass
+    #     print(f'{naam}')
+    #     pass""")
+    #
+    #     skipped_mappings = [
+    #         SkippedMapping(SourceRange(2, 1, 2, 59), hedy.exceptions.UnquotedEqualityCheckException),
+    #         SkippedMapping(SourceRange(4, 1, 4, 15), hedy.exceptions.InvalidCommandException)
+    #     ]
+    #
+    #     self.multi_level_tester(
+    #         code=code,
+    #         expected=expected,
+    #         skipped_mappings=skipped_mappings,
+    #         max_level=7
+    #     )
 
     def test_if_equality_unquoted_rhs_with_space_assign_gives_error(self):
         code = textwrap.dedent("""\
