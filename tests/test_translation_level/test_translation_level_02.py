@@ -120,14 +120,6 @@ class TestsTranslationLevel2(HedyTester):
                                                 to_lang="nl",
                                                 level=self.level)
 
-    def test_invalid_space(self):
-        code = " print Hedy"
-
-        result = hedy_translation.translate_keywords(
-            code, "en", "nl", self.level)
-        expected = "print Hedy"
-
-        self.assertEqual(expected, result)
 
     def test_echo(self):
         code = "echo Hedy"

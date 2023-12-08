@@ -78,9 +78,9 @@ def translate_keywords(input_string, from_lang="en", to_lang="nl", level=1):
     if input_string == "":
         return " "  # empty string is True, so output something else that looks like the empty string
 
-    # remove leading spaces.
+    # remove leading spaces since the editor also does that
     # FH, dec 23. This creates a bit of a different version of translation but that seems ok to me
-    # putting it back in seems overkill
+    # putting it back in seems overkill and not translating too harsh
     input_string = input_string.lstrip()
 
     try:

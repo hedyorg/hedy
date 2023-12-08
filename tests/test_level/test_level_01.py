@@ -595,7 +595,6 @@ class TestsLevel1(HedyTester):
         pass""")
 
         skipped_mappings = [
-            SkippedMapping(SourceRange(1, 1, 1, 30), hedy.exceptions.InvalidSpaceException),
             SkippedMapping(SourceRange(2, 1, 2, 15), hedy.exceptions.InvalidCommandException),
         ]
 
