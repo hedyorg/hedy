@@ -11,8 +11,21 @@
   </div>
 {% endif %}
 <div class="flex flex-col gap-4">
-    <div id="teacher_classes" class="flex flex-col items-center gap-2 pb-4 border-b">
-        <h2>{{_('my_classes')}}</h2>
+    <div id="teacher_classes" class="flex flex-col items-center gap-3 pb-4 border-b">
+        <div class="flex flex-row gap-3 items-center">
+          <h2 class="m-0"> {{_('my_classes')}} </h2>
+          <button _="on click toggle .hidden on #classes_info">
+            <svg class="fill-current h-4 w-4 text-blue-500 cursor-pointer !m-0 !p-0" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
+              <path
+                d="M2.93 17.07A10 10 0 1 1 17.07 2.93 10 10 0 0 1 2.93 17.07zm12.73-1.41A8 8 0 1 0 4.34 4.34a8 8 0 0 0 11.32 11.32zM9 11V9h2v6H9v-4zm0-6h2v2H9V5z" />
+            </svg>
+          </button>
+        </div>
+        <div class="border border-gray-400 px-4 rounded-lg w-full lg:w-3/4 p-4 text-center hidden" id="classes_info">
+          <p>
+            {{ _('classes_info') }}
+          </p>
+        </div>
         {% if teacher_classes %}
           <table class="table-auto w-full lg:w-3/4 border-separate space-y-6 border border-black rounded-lg">
             <thead class="bg-gray-200">
@@ -41,8 +54,21 @@
       <button class="green-btn mt-4" id="create_class_button" onclick='hedyApp.create_class ({{_('class_name_prompt')|default(None)|tojson}})'
       {% if second_teacher and role == 'viewer' %}disabled{% endif %}>{{_('create_class')}}</button>
     </div>
-    <div id="teacher_adventures" class="flex flex-col items-center gap-2 pb-4 border-b">
-        <h2>{{_('my_adventures')}}</h2>
+    <div id="teacher_adventures" class="flex flex-col items-center gap-3 pb-4 border-b">
+      <div class="flex flex-row gap-3 items-center">
+        <h2 class="m-0"> {{_('my_adventures')}} </h2>
+        <button _="on click toggle .hidden on #adventures_info">
+          <svg class="fill-current h-4 w-4 text-blue-500 cursor-pointer !m-0 !p-0" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
+            <path
+              d="M2.93 17.07A10 10 0 1 1 17.07 2.93 10 10 0 0 1 2.93 17.07zm12.73-1.41A8 8 0 1 0 4.34 4.34a8 8 0 0 0 11.32 11.32zM9 11V9h2v6H9v-4zm0-6h2v2H9V5z" />
+          </svg>
+        </button>
+      </div>
+      <div class="border border-gray-400 px-4 rounded-lg w-full lg:w-3/4 p-4 text-center hidden" id="adventures_info">
+        <p>
+          {{ _('adventures_info') }}
+        </p>
+      </div>
         {% if teacher_adventures %}
             <table class="table-auto w-full lg:w-3/4 border-separate space-y-6 border border-black rounded-lg">
             <thead class="bg-gray-200">
@@ -74,7 +100,7 @@
     </div>
     <div id="slides" class="flex flex-col items-center border-b gap-3">
       <div class="flex flex-row gap-3 items-center">
-        <h2 class="m-0"> Slides </h2>
+        <h2 class="m-0"> {{ _('slides') }} </h2>
         <button _="on click toggle .hidden on #slides_info">
           <svg class="fill-current h-4 w-4 text-blue-500 cursor-pointer !m-0 !p-0" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
             <path
