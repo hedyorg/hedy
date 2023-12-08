@@ -531,10 +531,7 @@ def parse():
                     ACHIEVEMENTS.increase_count("run")
             except hedy.exceptions.WarningException as ex:
                 translated_error = translate_error(ex.error_code, ex.arguments, keyword_lang)
-                if isinstance(ex, hedy.exceptions.InvalidSpaceException):
-                    response['Warning'] = translated_error
-                else:
-                    response['Error'] = translated_error
+                response['Warning'] = translated_error
                 response['Location'] = ex.error_location
                 transpile_result = ex.fixed_result
                 exception = ex

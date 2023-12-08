@@ -1142,13 +1142,6 @@ class IsValid(Filter):
         self.lang = lang
         self.input_string = input_string
 
-    def error_invalid_space(self, meta, args):
-        line = args[0][2].line
-        # the error here is a space at the beginning of a line, we can fix that!
-        fixed_code, result = repair_leading_space(self.input_string, self.lang, self.level, line)
-        raise exceptions.InvalidSpaceException(
-            level=self.level, line_number=line, fixed_code=fixed_code, fixed_result=result)
-
     def error_print_nq(self, meta, args):
         words = [str(x[1]) for x in args]  # second half of the list is the word
         text = ' '.join(words)
@@ -3309,22 +3302,6 @@ def is_program_valid(program_root, input_string, level, lang):
     # IsValid raises the appropriate exception when an error production (starting with error_)
     # is found in the parse tree
     IsValid(level, lang, input_string).transform(program_root)
-
-
-def repair_leading_space(input_string, lang, level, line):
-    fixed_code = program_repair.remove_leading_spaces(input_string)
-    result = None
-    if fixed_code != input_string:  # only if we have made a successful fix
-        try:
-            fixed_result = transpile_inner(fixed_code, level, lang)
-            result = fixed_result
-            raise exceptions.InvalidSpaceException(
-                level=level, line_number=line, fixed_code=fixed_code, fixed_result=result)
-        except exceptions.HedyException:
-            transpile_inner(fixed_code, level)
-            # The fixed code contains another error. Only report the original error for now.
-            pass
-    return fixed_code, result
 
 
 def is_program_complete(abstract_syntax_tree, level):
