@@ -58,7 +58,6 @@ class TestsTranslationLevel10(HedyTester):
 
         self.assertEqual(result, code)
 
-
     def test_for_list_type_error_translates_command(self):
         code = textwrap.dedent(f"""\
             dieren is 'text'

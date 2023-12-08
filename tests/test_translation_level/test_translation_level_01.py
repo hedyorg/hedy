@@ -146,8 +146,8 @@ class TestsTranslationLevel1(HedyTester):
 
         self.assertEqual(code, result)
 
-
     # No translation because of the invalid space error
+
     def test_invalid_space(self):
         # FH, dec 23: We remove leading spaces in the translation, since the editor
         # also does this. It means dropping a space from the program but that, I think, is better

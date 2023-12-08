@@ -285,7 +285,6 @@ class Translator(Visitor):
     def error_echo_dep_2(self, tree):
         self.add_rule("_ECHO", "echo", tree)
 
-
     def ifs(self, tree):
         self.add_rule("_IF", "if", tree)
 
