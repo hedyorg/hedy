@@ -29,7 +29,7 @@ Ask { Text (is+ | Op<"=">) ask+ ( String | ListAccess | Expression )+ }
 AssignList { Text (is+ | Op<"=">) (Text+ | Int ) ~ambig  (Comma (Text+ | Int ))+ } // comma doesn't really parse well if it is not separated by spaces
 Assign { Text (is+ | Op<"=">) (Expression ~ambig  | ListAccess)+ }
 Sleep { sleep+ (Expression | ListAccess )? }
-ListAccess { Text at+ (random+ | Text) }
+ListAccess { Text at+ (random+ | Text | Int) }
 Add { add+ Text toList+ Text }
 Remove { remove+ Text from+ Text }
 Clear { clear+ }

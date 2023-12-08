@@ -1498,6 +1498,10 @@ export function get_active_and_trimmed_code() {
   return theGlobalEditor.getActiveContents(debugLine);
 }
 
+export function getEditorContents() {
+  return theGlobalEditor.contents;
+}
+
 export function confetti_cannon(){
   const canvas = document.getElementById('confetti');
   if (canvas) {
