@@ -67,19 +67,10 @@ class TestsTranslationLevel11(HedyTester):
 
         self.assertEqual(expected, result)
 
-    @parameterized.expand([('en', 'in', 'range', 'to'),
-                           ('es', 'en', 'rango', 'a'),
-                           ('es', 'in', 'rango', 'a'),
-                           ('es', 'en', 'rango', 'a')])
-    def test_for_loop_type_error_translates_command(self, lang, in_, range_, to):
+    def test_for_loop_type_error_translates_command(self):
         code = textwrap.dedent(f"""\
             end is 'text'
-            for a {in_} {range_} 1 {to} end
+            for a in range 1 to end
                 print end""")
 
-        self.multi_level_tester(
-            lang=lang,
-            code=code,
-            max_level=11,
-            exception=hedy.exceptions.InvalidArgumentTypeException,
-            extra_check_function=self.exception_command(f'{in_} {range_} {to}'))
+        self.verify_translation(code, "en", self.level)

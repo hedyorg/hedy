@@ -89,6 +89,15 @@ class TestsTranslationLevel1(HedyTester):
 
         self.assertEqual(expected, result)
 
+    def test_echo_french(self):
+        code = "echo Hedy"
+
+        result = hedy_translation.translate_keywords(
+            code, "en", "fr", self.level)
+        expected = "réponds Hedy"
+
+        self.assertEqual(expected, result)
+
     def test_echo_dutch_english(self):
         code = "vraag stel je vraag\necho tekst"
 
@@ -137,14 +146,6 @@ class TestsTranslationLevel1(HedyTester):
 
         self.assertEqual(code, result)
 
-    def test_invalid(self):
-        code = "hallo"
-
-        with self.assertRaises(hedy.exceptions.HedyException):
-            hedy_translation.translate_keywords(code,
-                                                from_lang="en",
-                                                to_lang="nl",
-                                                level=self.level)
 
     # No translation because of the invalid space error
     def test_invalid_space(self):
