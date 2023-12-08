@@ -1569,7 +1569,7 @@ function createModal(level:number ){
 
 export function toggleDevelopersMode(on_click:boolean, enforce_dev_mode:boolean) {
   let dev_mode = window.localStorage.getItem('developer_mode');
-  if (enforce_dev_mode == true || on_click == false && dev_mode == 'False' || on_click == false && dev_mode == 'True') {
+  if (enforce_dev_mode == true || on_click == true && dev_mode == 'False' || on_click == false && dev_mode == 'True') {
     if (on_click == true){
       window.localStorage.setItem('developer_mode', 'True');
     } else {
