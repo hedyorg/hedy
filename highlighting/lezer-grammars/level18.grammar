@@ -31,7 +31,7 @@ Assign { (Text | ListAccess) (is+ | Op<"=">) (Expression ~ambig )+ }
 Input { Text (is+ | Op<"=">) input+ Op<"("> Arguments? Op<")"> }
 Sleep { sleep+ (Expression | Call)? }
 
-ListAccess { Text Op<"["> (random+ | Text) Op<"]">}
+ListAccess { Text Op<"["> (random+ | Text | Number) Op<"]">}
 
 Turtle[@isGroup=turtle] {
     Forward { forward+ (Expression | Call) } |
