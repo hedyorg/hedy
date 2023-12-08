@@ -146,7 +146,6 @@ class TestsTranslationLevel1(HedyTester):
                                                 to_lang="nl",
                                                 level=self.level)
 
-
     def no_argument_ask(self):
         code = "ask"
 

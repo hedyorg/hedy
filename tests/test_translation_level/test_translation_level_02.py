@@ -120,7 +120,6 @@ class TestsTranslationLevel2(HedyTester):
                                                 to_lang="nl",
                                                 level=self.level)
 
-
     def test_echo(self):
         code = "echo Hedy"
 
