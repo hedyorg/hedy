@@ -859,7 +859,7 @@ class TestsLevel5(HedyTester):
     # negative tests
     #
 
-    #broken without invalidspace?
+    # broken without invalidspace?
     # def test_if_indent_gives_parse_error(self):
     #     code = textwrap.dedent("""\
     #     option is ask 'Rock Paper or Scissors?'
