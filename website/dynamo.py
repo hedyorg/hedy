@@ -1364,7 +1364,7 @@ class string_set:
     def __instancecheck__(self, obj):
         try:
             return all(isinstance(x, str) for x in obj)
-        except:
+        except Exception:
             return False
 
 
@@ -1372,7 +1372,7 @@ class number_set:
     def __instancecheck__(self, obj):
         try:
             return all(isinstance(x, int) for x in obj)
-        except:
+        except Exception:
             return False
 
 
@@ -1380,5 +1380,5 @@ class binary_set:
     def __instancecheck__(self, obj):
         try:
             return all(isinstance(x, bytes) for x in obj)
-        except:
+        except Exception:
             return False

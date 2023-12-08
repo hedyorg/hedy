@@ -49,7 +49,8 @@ PROGRAMS = dynamo.Table(storage, "programs", "id",
                             # For the explore page, this index has 'level', 'lang' and 'adventure_name'
                             dynamo.Index('public', sort_key='date'),
 
-                            # For the filtered view of the 'explore' page (keys_only so we don't duplicate other attributes unnecessarily)
+                            # For the filtered view of the 'explore' page (keys_only so we don't duplicate
+                            # other attributes unnecessarily)
                             dynamo.Index('lang', sort_key='date', keys_only=True),
                             dynamo.Index('level', sort_key='date', keys_only=True),
                             dynamo.Index('adventure_name', sort_key='date', keys_only=True),
