@@ -287,7 +287,7 @@ class HedyTester(unittest.TestCase):
                                   hedy.exceptions.IndentationException, hedy.exceptions.LockedLanguageFeatureException,
                                   hedy.exceptions.CodePlaceholdersPresentException]
 
-            if translate and not exception in skipped_exceptions and skipped_mappings is None:
+            if translate and exception not in skipped_exceptions and skipped_mappings is None:
                 self.verify_translation(code, lang, level)
 
             # all ok? -> save hash!
