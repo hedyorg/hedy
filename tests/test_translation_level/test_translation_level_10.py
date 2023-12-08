@@ -1,8 +1,4 @@
 import textwrap
-
-from parameterized import parameterized
-
-import hedy
 import hedy_translation
 from tests.Tester import HedyTester
 

@@ -1,7 +1,5 @@
 import textwrap
-
 from parameterized import parameterized
-
 import hedy
 import hedy_translation
 from hedy_content import ALL_KEYWORD_LANGUAGES
