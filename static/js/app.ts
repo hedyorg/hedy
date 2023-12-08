@@ -1567,24 +1567,23 @@ function createModal(level:number ){
   modal.repair(editor, 0, title);
 }
 
-export function toggleDevelopersMode(on_click:boolean, enforce_dev_mode:boolean) {
-  let dev_mode = window.localStorage.getItem('developer_mode');
-  if (enforce_dev_mode == true || on_click == true && dev_mode == 'False' || on_click == false && dev_mode == 'True') {
-    if (on_click == true){
-      window.localStorage.setItem('developer_mode', 'True');
+export function toggleDevelopersMode(event='click', enforce_dev_mode:boolean) {
+  let dev_mode = window.localStorage.getItem('developer_mode') === 'true';
+  if (enforce_dev_mode || (event === 'click' && !dev_mode) || (event === 'load' && dev_mode)) {
+    if (event === 'click') {
+      window.localStorage.setItem('developer_mode', 'true');
+      pushAchievement("lets_focus");
     } else {
       $('#developers_toggle').prop('checked', true);
     }
     $('#adventures').hide();
-    pushAchievement("lets_focus");
     $('#editor-area').removeClass('mt-5');
     $('#code_editor').css('height', 36 + "em");
     $('#code_output').css('height', 36 + "em");
     theGlobalEditor.resize(576);
-  }
-  else {
-    if (on_click == true){
-      window.localStorage.setItem('developer_mode', 'False');
+  } else {
+    if (event === 'click') {
+      window.localStorage.setItem('developer_mode', 'false');
     }
     $('#adventures').show();
     $('#editor-area').addClass('mt-5');
