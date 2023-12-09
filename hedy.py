@@ -505,7 +505,8 @@ class InvalidInfo:
 class LookupEntry:
     name: str
     tree: Tree
-    linenumber: int
+    definition_line: int
+    access_line: int
     skip_hashing: bool
     type_: str = None
     currently_inferring: bool = False  # used to detect cyclic type inference
@@ -637,8 +638,8 @@ class LookupEntryCollector(visitors.Visitor):
                                  for x in tree.children[1].children)
         self.add_to_lookup(f"{function_name}({args_str})", tree, tree.meta.line)
 
-    def add_to_lookup(self, name, tree, linenumber, skip_hashing=False):
-        entry = LookupEntry(name, tree, linenumber, skip_hashing)
+    def add_to_lookup(self, name, tree, definition_line=None, access_line=None, skip_hashing=False):
+        entry = LookupEntry(name, tree, definition_line, access_line, skip_hashing)
         hashed_name = escape_var(entry)
         entry.name = hashed_name
         self.lookup.append(entry)
@@ -1327,11 +1328,11 @@ class ConvertToPython(Transformer):
     # is no check on whether the var is defined
     def is_variable(self, variable_name, access_line_number=100):
         all_names = [a.name for a in self.lookup]
-        all_names_before_access_line = [a.name for a in self.lookup if a.linenumber <= access_line_number]
 
+        all_names_before_access_line = [a.name for a in self.lookup if a.definition_line <= access_line_number]
         if variable_name in all_names and variable_name not in all_names_before_access_line:
             # referenced before assignment!
-            definition_line_number = [a.linenumber for a in self.lookup if a.name == variable_name][0]
+            definition_line_number = [a.definition_line for a in self.lookup if a.name == variable_name][0]
             raise hedy.exceptions.AccessBeforeAssignException(
                 name=variable_name,
                 access_line_number=access_line_number,
@@ -1348,12 +1349,21 @@ class ConvertToPython(Transformer):
     def process_variable(self, arg, access_line_number=100):
         # processes a variable by hashing and escaping when needed
         if self.is_variable(arg, access_line_number):
+            # add this access line to the lookup table
+            self.lookup[arg].access_linenumber = access_line_number
             return escape_var(arg)
         if ConvertToPython.is_quoted(arg):
             arg = arg[1:-1]
         return f"'{process_characters_needing_escape(arg)}'"
 
     def process_variable_for_fstring(self, variable_name, access_line_number=100):
+        # store the line of access (or string value) in the lookup table
+        # so we know what variable is used where
+        vars = [a for a in self.lookup if a.name == variable_name]
+        if vars:
+            corresponding_lookup_entry = vars[0]
+            corresponding_lookup_entry.access_line = access_line_number
+
         if self.is_variable(variable_name, access_line_number):
             return "{" + escape_var(variable_name) + "}"
         else:
@@ -1611,7 +1621,7 @@ class ConvertToPython_1(ConvertToPython):
 @source_map_transformer(source_map)
 class ConvertToPython_2(ConvertToPython_1):
 
-    # why doesn't this live in isvalid?
+    # ->>> why doesn't this live in isvalid? refactor now that isvalid is cleaned up!
     def error_ask_dep_2(self, meta, args):
         # ask is no longer usable this way, raise!
         # ask_needs_var is an entry in lang.yaml in texts where we can add extra info on this error
@@ -1692,19 +1702,20 @@ class ConvertToPython_2(ConvertToPython_1):
         return self.make_forward(parameter)
 
     def assign(self, meta, args):
-        parameter = args[0]
+        variable_name = args[0]
         value = args[1]
+
         if self.is_random(value) or self.is_list(value):
             exception = self.make_catch_exception([value])
-            return exception + parameter + " = " + value + self.add_debug_breakpoint()
+            return exception + variable_name + " = " + value + self.add_debug_breakpoint()
         else:
-            if self.is_variable(value):
+            if self.is_variable(value): #if the value is a variable, this is a reassign
                 value = self.process_variable(value, meta.line)
-                return parameter + " = " + value + self.add_debug_breakpoint()
+                return variable_name + " = " + value + self.add_debug_breakpoint()
             else:
                 # if the assigned value is not a variable and contains single quotes, escape them
                 value = process_characters_needing_escape(value)
-                return parameter + " = '" + value + "'" + self.add_debug_breakpoint()
+                return variable_name + " = '" + value + "'" + self.add_debug_breakpoint()
 
     def sleep(self, meta, args):
 
@@ -3401,6 +3412,10 @@ def transpile_inner(input_string, level, lang="en", populate_source_map=False, i
     # grab the right transpiler from the lookup
     convertToPython = TRANSPILER_LOOKUP[level]
     python = convertToPython(lookup_table, lang, numerals_language, is_debug).transform(abstract_syntax_tree)
+
+    for x in lookup_table:
+        if x.access_line is None:
+            raise hedy.exceptions.UnusedVariableException(0,0,'','')
 
     has_clear = "clear" in commands
     has_turtle = "forward" in commands or "turn" in commands or "color" in commands

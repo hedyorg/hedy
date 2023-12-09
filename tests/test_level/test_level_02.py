@@ -603,6 +603,15 @@ class TestsLevel2(HedyTester):
 
         self.multi_level_tester(code=code, expected=expected, max_level=11)
 
+    def test_assign_unused(self):
+        code = textwrap.dedent("""\
+        name is Onno
+        print naam""")
+
+        self.multi_level_tester(code=code,
+                                exception=hedy.exceptions.UnusedVariableException,
+                                max_level=3) #todo:fix higher levels too!
+
     def test_assign_catalan_var_name(self):
         code = textwrap.dedent("""\
             print És hora una nit de Netflix
