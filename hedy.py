@@ -2961,7 +2961,7 @@ def transpile(input_string, level, lang="en", skip_faulty=True, is_debug=False):
     except Exception as original_error:
         hedy_amount_lines = len(input_string.strip().split('\n'))
 
-        if getenv('ENABLE_SKIP_FAULTY', False) and skip_faulty and hedy_amount_lines > 1:
+        if getenv('ENABLE_SKIP_FAULTY', True) and skip_faulty and hedy_amount_lines > 1:
             if isinstance(original_error, source_map.exceptions_not_to_skip):
                 raise original_error
             try:
@@ -3347,7 +3347,6 @@ def create_lookup_table(abstract_syntax_tree, level, lang, input_string):
 
 
 def create_AST(input_string, level, lang="en"):
-    input_string = process_input_string(input_string, level, lang)
     program_root = parse_input(input_string, level, lang)
 
     try:
@@ -3377,6 +3376,7 @@ def create_AST(input_string, level, lang="en"):
 
 def transpile_inner(input_string, level, lang="en", populate_source_map=False, is_debug=False):
     check_program_size_is_valid(input_string)
+    input_string = process_input_string(input_string, level, lang)
 
     level = int(level)
     if level > HEDY_MAX_LEVEL:
