@@ -583,7 +583,6 @@ class LookupEntryCollector(visitors.Visitor):
         var_name = tree.children[0].children[0]
         self.add_to_lookup(var_name, tree, tree.meta.line)
 
-
     def var_access(self, tree):
         variable_name = tree.children[0].children[0]
         # store the line of access (or string value) in the lookup table
@@ -1719,7 +1718,7 @@ class ConvertToPython_2(ConvertToPython_1):
             exception = self.make_catch_exception([value])
             return exception + variable_name + " = " + value + self.add_debug_breakpoint()
         else:
-            if self.is_variable(value): #if the value is a variable, this is a reassign
+            if self.is_variable(value):  # if the value is a variable, this is a reassign
                 value = self.process_variable(value, meta.line)
                 return variable_name + " = " + value + self.add_debug_breakpoint()
             else:
@@ -3425,7 +3424,7 @@ def transpile_inner(input_string, level, lang="en", populate_source_map=False, i
 
     for x in lookup_table:
         if x.access_line is None:
-            raise hedy.exceptions.UnusedVariableException(0,0,'','')
+            raise hedy.exceptions.UnusedVariableException(0, 0, '', '')
 
     has_clear = "clear" in commands
     has_turtle = "forward" in commands or "turn" in commands or "color" in commands
