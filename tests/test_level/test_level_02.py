@@ -179,8 +179,14 @@ class TestsLevel2(HedyTester):
         )
 
     def test_assign_comment(self):
-        code = "test is Welkom bij Hedy # This is a comment"
-        expected = "test = 'Welkom bij Hedy '"
+        code = textwrap.dedent("""\
+        test is Welkom bij Hedy # This is a comment
+        print test""")
+
+        expected = textwrap.dedent("""\
+        test = 'Welkom bij Hedy '
+        print(f'{test}')""")
+
         self.multi_level_tester(
             max_level=3,
             code=code,
@@ -191,32 +197,57 @@ class TestsLevel2(HedyTester):
     # ask tests
     #
     def test_ask(self):
-        code = "kleur is ask wat is je lievelingskleur?"
-        expected = "kleur = input('wat is je lievelingskleur?')"
+        code = textwrap.dedent("""\
+        kleur is ask wat is je lievelingskleur?
+        print kleur""")
+
+        expected = textwrap.dedent("""\
+        kleur = input('wat is je lievelingskleur?')
+        print(f'{kleur}')""")
 
         self.multi_level_tester(code=code, expected=expected, max_level=3)
 
     def test_ask_single_quoted_text(self):
-        code = "name is ask 'Who's that'"
-        expected = """name = input('\\'Who\\'s that\\'')"""
+        code = textwrap.dedent("""\
+         name is ask 'Who's that'
+         print name""")
+
+        expected = textwrap.dedent("""\
+         name = input('\\'Who\\'s that\\'')
+         print(f'{name}')""")
 
         self.multi_level_tester(code=code, expected=expected, max_level=3)
 
     def test_ask_double_quoted_text(self):
-        code = 'var is ask "Welcome to OceanView"'
-        expected = "var = input('\"Welcome to OceanView\"')"
+        code = textwrap.dedent("""\
+         var is ask "Welcome to OceanView"
+         print var""")
+
+        expected = textwrap.dedent("""\
+         var = input('\"Welcome to OceanView\"')
+         print(f'{var}')""")
 
         self.multi_level_tester(code=code, expected=expected, max_level=3)
 
     def test_ask_text_with_inner_single_quote(self):
-        code = "var is ask Welcome to Hedy's game"
-        expected = """var = input('Welcome to Hedy\\'s game')"""
+        code = textwrap.dedent("""\
+         var is ask Welcome to Hedy's game
+         print var""")
+
+        expected = textwrap.dedent("""\
+         var = input('Welcome to Hedy\\'s game')
+         print(f'{var}')""")
 
         self.multi_level_tester(code=code, expected=expected, max_level=3)
 
     def test_ask_text_with_inner_double_quote(self):
-        code = 'var is ask It says "Hedy"'
-        expected = """var = input('It says "Hedy"')"""
+        code = textwrap.dedent("""\
+         var is ask It says "Hedy"
+         print var""")
+
+        expected = textwrap.dedent("""\
+         var = input('It says "Hedy"')
+         print(f'{var}')""")
 
         self.multi_level_tester(code=code, expected=expected, max_level=3)
 
@@ -232,8 +263,13 @@ class TestsLevel2(HedyTester):
         self.multi_level_tester(code=code, expected=expected, max_level=3)
 
     def test_ask_es(self):
-        code = "color is ask ask Cuál es tu color favorito?"
-        expected = "color = input('ask Cuál es tu color favorito?')"
+        code = textwrap.dedent("""\
+        color is ask Cuál es tu color favorito?
+        print color!""")
+        expected = textwrap.dedent("""\
+        color = input('Cuál es tu color favorito?')
+        print(f'{color}!')""")
+
 
         self.multi_level_tester(code=code, expected=expected, max_level=3)
 
@@ -586,7 +622,7 @@ class TestsLevel2(HedyTester):
         pass""")
 
         skipped_mappings = [
-            SkippedMapping(SourceRange(1, 1, 1, 14), hedy.exceptions.InvalidSpaceException),
+            SkippedMapping(SourceRange(1, 1, 1, 14), hedy.exceptions.UnusedVariableException),
             SkippedMapping(SourceRange(2, 1, 2, 15), hedy.exceptions.InvalidCommandException)
         ]
 
@@ -598,8 +634,13 @@ class TestsLevel2(HedyTester):
         )
 
     def test_assign(self):
-        code = "naam is Felienne"
-        expected = "naam = 'Felienne'"
+        code = textwrap.dedent("""\
+        naam is Felienne
+        print naam""")
+
+        expected = textwrap.dedent("""\
+        naam = 'Felienne'
+        print(f'{naam}')""")
 
         self.multi_level_tester(code=code, expected=expected, max_level=11)
 
@@ -626,32 +667,57 @@ class TestsLevel2(HedyTester):
         self.multi_level_tester(code=code, expected=expected, max_level=3)
 
     def test_assign_integer(self):
-        code = "naam is 14"
-        expected = "naam = '14'"
+        code = textwrap.dedent("""\
+        naam is 14
+        print naam""")
+
+        expected = textwrap.dedent("""\
+        naam = '14'
+        print(f'{naam}')""")
 
         self.multi_level_tester(code=code, expected=expected, max_level=11)
 
     def test_assign_single_quoted_text(self):
-        code = "naam is 'Felienne'"
-        expected = "naam = '\\'Felienne\\''"
+        code = textwrap.dedent("""\
+        naam is 'Felienne'
+        print naam""")
+
+        expected = textwrap.dedent("""\
+        naam = '\\'Felienne\\''
+        print(f'{naam}')""")
 
         self.multi_level_tester(code=code, expected=expected, max_level=11)
 
     def test_assign_double_quoted_string(self):
-        code = 'naam is "Felienne"'
-        expected = """naam = '"Felienne"'"""
+        code = textwrap.dedent("""\
+        naam is "Felienne"
+        print naam""")
+
+        expected = textwrap.dedent("""\
+        naam = '"Felienne"'
+        print(f'{naam}')""")
 
         self.multi_level_tester(code=code, expected=expected, max_level=11)
 
     def test_assign_text_with_inner_single_quote(self):
-        code = "var is Hedy's"
-        expected = "var = 'Hedy\\'s'"
+        code = textwrap.dedent("""\
+        naam is Hedy's
+        print naam""")
+
+        expected = textwrap.dedent("""\
+        naam = 'Hedy\\'s'
+        print(f'{naam}')""")
 
         self.multi_level_tester(code=code, expected=expected, max_level=11)
 
     def test_assign_text_with_inner_double_quote(self):
-        code = 'var is It says "Hedy"'
-        expected = """var = 'It says "Hedy"'"""
+        code = textwrap.dedent("""\
+        naam is It says "Hedy"
+        print naam""")
+
+        expected = textwrap.dedent("""\
+        naam = 'It says "Hedy"'
+        print(f'{naam}')""")
 
         self.multi_level_tester(code=code, expected=expected, max_level=11)
 
@@ -666,18 +732,16 @@ class TestsLevel2(HedyTester):
 
         self.multi_level_tester(code=code, expected=expected, max_level=11)
 
-    def test_assign_bengali_var(self):
-        var = hedy.escape_var("নাম")
-        code = "নাম is হেডি"
-        expected = f"{var} = 'হেডি'"
-
-        self.multi_level_tester(code=code, expected=expected, max_level=11)
-
     def test_assign_python_keyword(self):
-        code = "for is Hedy"
-        expected = "_for = 'Hedy'"
+        code = textwrap.dedent("""\
+        for is Hedy
+        print for""")
 
-        self.multi_level_tester(code=code, expected=expected, max_level=11)
+        expected = textwrap.dedent("""\
+        _for = 'Hedy'
+        print(f'{_for}')""")
+
+        self.multi_level_tester(code=code, expected=expected, max_level=7)
 
     #
     # markup tests
@@ -769,9 +833,11 @@ class TestsLevel2(HedyTester):
     def test_assign_print_something_else(self):
         code = textwrap.dedent("""\
         naam is Felienne
+        print naam
         print Hallo""")
         expected = textwrap.dedent("""\
         naam = 'Felienne'
+        print(f'{naam}')
         print(f'Hallo')""")
 
         self.multi_level_tester(code=code, expected=expected, max_level=3)

@@ -1378,6 +1378,7 @@ class ConvertToPython(Transformer):
     def add_variable_access_location(self, variable_name, access_line_number):
         # store the line of access (or string value) in the lookup table
         # so we know what variable is used where
+        variable_name = escape_var(variable_name)
         vars = [a for a in self.lookup if a.name == variable_name]
         for v in vars: #vars can be defined multiple times, access validates all of them
             corresponding_lookup_entry = v
