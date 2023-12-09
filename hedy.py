@@ -591,7 +591,7 @@ class LookupEntryCollector(visitors.Visitor):
         vars = [a for a in self.lookup if a.name == variable_name]
         if vars:
             corresponding_lookup_entry = vars[0]
-            corresponding_lookup_entry.access_line = meta.line
+            corresponding_lookup_entry.access_line = tree.meta.line
 
     def assign(self, tree):
         var_name = tree.children[0].children[0]
