@@ -583,14 +583,14 @@ class LookupEntryCollector(visitors.Visitor):
         var_name = tree.children[0].children[0]
         self.add_to_lookup(var_name, tree, tree.meta.line)
 
-    def var_access(self, tree):
-        variable_name = tree.children[0].children[0]
-        # store the line of access (or string value) in the lookup table
-        # so we know what variable is used where
-        vars = [a for a in self.lookup if a.name == variable_name]
-        if vars:
-            corresponding_lookup_entry = vars[0]
-            corresponding_lookup_entry.access_line = tree.meta.line
+    # def var_access(self, tree):
+    #     variable_name = tree.children[0].children[0]
+    #     # store the line of access (or string value) in the lookup table
+    #     # so we know what variable is used where
+    #     vars = [a for a in self.lookup if a.name == variable_name]
+    #     if vars:
+    #         corresponding_lookup_entry = vars[0]
+    #         corresponding_lookup_entry.access_line = tree.meta.line
 
     def assign(self, tree):
         var_name = tree.children[0].children[0]
@@ -1337,7 +1337,6 @@ class ConvertToPython(Transformer):
     # is no check on whether the var is defined
     def is_variable(self, variable_name, access_line_number=100):
         all_names = [a.name for a in self.lookup]
-
         all_names_before_access_line = [a.name for a in self.lookup if a.definition_line <= access_line_number]
         if variable_name in all_names and variable_name not in all_names_before_access_line:
             # referenced before assignment!
@@ -1346,6 +1345,9 @@ class ConvertToPython(Transformer):
                 name=variable_name,
                 access_line_number=access_line_number,
                 definition_line_number=definition_line_number)
+        else:
+            #valid use, store!
+            self.add_variable_access_location(variable_name, access_line_number)
 
         is_function = False
         if isinstance(variable_name, str):
@@ -1359,24 +1361,27 @@ class ConvertToPython(Transformer):
         # processes a variable by hashing and escaping when needed
         if self.is_variable(arg, access_line_number):
             # add this access line to the lookup table
-            self.lookup[arg].access_linenumber = access_line_number
+            self.add_variable_access_location(arg, access_line_number)
             return escape_var(arg)
         if ConvertToPython.is_quoted(arg):
             arg = arg[1:-1]
         return f"'{process_characters_needing_escape(arg)}'"
 
     def process_variable_for_fstring(self, variable_name, access_line_number=100):
-        # store the line of access (or string value) in the lookup table
-        # so we know what variable is used where
-        vars = [a for a in self.lookup if a.name == variable_name]
-        if vars:
-            corresponding_lookup_entry = vars[0]
-            corresponding_lookup_entry.access_line = access_line_number
+        self.add_variable_access_location(variable_name, access_line_number)
 
         if self.is_variable(variable_name, access_line_number):
             return "{" + escape_var(variable_name) + "}"
         else:
             return process_characters_needing_escape(variable_name)
+
+    def add_variable_access_location(self, variable_name, access_line_number):
+        # store the line of access (or string value) in the lookup table
+        # so we know what variable is used where
+        vars = [a for a in self.lookup if a.name == variable_name]
+        for v in vars: #vars can be defined multiple times, access validates all of them
+            corresponding_lookup_entry = v
+            corresponding_lookup_entry.access_line = access_line_number
 
     def process_variable_for_comparisons(self, name):
         # used to transform variables in comparisons
@@ -1421,7 +1426,11 @@ class ConvertToPython(Transformer):
         unquoted_in_lookup = [self.is_variable(a, var_access_linenumber) for a in unquoted_args]
 
         if unquoted_in_lookup == [] or all(unquoted_in_lookup):
-            # all good? return for further processing
+
+            # all good? store location
+            for a in args:
+                self.add_variable_access_location(str(a), var_access_linenumber)
+            # return for further processing
             return args
         else:
             # return first name with issue
@@ -1707,6 +1716,7 @@ class ConvertToPython_2(ConvertToPython_1):
         else:
             # if not an int, then it is a variable
             parameter = args[0]
+            self.add_variable_access_location(parameter, meta.line)
 
         return self.make_forward(parameter)
 
@@ -1732,6 +1742,8 @@ class ConvertToPython_2(ConvertToPython_1):
             return f"time.sleep(1){self.add_debug_breakpoint()}"
         else:
             value = f'"{args[0]}"' if self.is_int(args[0]) else args[0]
+            if not self.is_int(args[0]):
+                self.add_variable_access_location(value, meta.line)
             exceptions = self.make_catch_exception(args)
             try_prefix = "try:\n" + textwrap.indent(exceptions, "  ")
             exception_text = translate_value_error(Command.sleep, value, 'number')
@@ -1753,14 +1765,18 @@ class ConvertToPython_3(ConvertToPython_2):
 
     def list_access(self, meta, args):
         args = [escape_var(a) for a in args]
+        listname = str(args[0])
 
         # check the arguments (except when they are random or numbers, that is not quoted nor a var but is allowed)
         self.check_var_usage([a for a in args if a != 'random' and not a.isnumeric()], meta.line)
 
+        # store location
+        self.add_variable_access_location(listname, meta.line)
+
         if args[1] == 'random':
-            return 'random.choice(' + args[0] + ')'
+            return 'random.choice(' + listname + ')'
         else:
-            return args[0] + '[int(' + args[1] + ')-1]'
+            return listname + '[int(' + args[1] + ')-1]'
 
     def process_argument(self, meta, arg):
         # only call process_variable if arg is a string, else keep as is (ie.
@@ -1970,6 +1986,8 @@ class ConvertToPython_6(ConvertToPython_5):
                     value = f'{args[0]}'
             else:
                 value = f'"{args[0]}"' if self.is_int(args[0]) else args[0]
+                if not self.is_int(args[0]):
+                    self.add_variable_access_location(value, meta.line)
 
             exceptions = self.make_catch_exception(args)
             try_prefix = "try:\n" + textwrap.indent(exceptions, "  ")
@@ -2027,6 +2045,8 @@ class ConvertToPython_6(ConvertToPython_5):
         if argument.isnumeric():
             latin_numeral = int(argument)
             return f'int({latin_numeral})'
+        # this is a variable
+        self.add_variable_access_location(argument, 0)
         return f'int({argument})'
 
     def process_calculation(self, args, operator):
@@ -2218,6 +2238,9 @@ class ConvertToPython_11(ConvertToPython_10):
     def for_loop(self, meta, args):
         args = [a for a in args if a != ""]  # filter out in|dedent tokens
         iterator = escape_var(args[0])
+        #iterator is always a used variable
+        self.add_variable_access_location(iterator, meta.line)
+
         body = "\n".join([ConvertToPython.indent(x) for x in args[3:]])
         body = add_sleep_to_command(body, True, self.is_debug, location="after")
         stepvar_name = self.get_fresh_var('step')
@@ -3423,7 +3446,7 @@ def transpile_inner(input_string, level, lang="en", populate_source_map=False, i
     python = convertToPython(lookup_table, lang, numerals_language, is_debug).transform(abstract_syntax_tree)
 
     for x in lookup_table:
-        if x.access_line is None:
+        if x.access_line is None and x.name != 'x__x__x__x':
             raise hedy.exceptions.UnusedVariableException(0, 0, '', '')
 
     has_clear = "clear" in commands
