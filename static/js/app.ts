@@ -545,6 +545,7 @@ export async function runit(level: number, lang: string, disabled_prompt: string
         program_data = response;
         console.log('Response', response);
 
+        if (response.Warning && $('#editor').is(":visible")) {
           //storeFixedCode(response, level);
           error.showWarning(ClientMessages['Transpile_warning'], response.Warning);
         }
