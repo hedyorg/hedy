@@ -156,7 +156,7 @@
             function sendChangeEvent() {
                 window.parent.postMessage({
                     'change': true,
-                    'program': hedyApp.get_active_and_trimmed_code()
+                    'program': hedyApp.getEditorContents()
                 }, '*')
             }
 
