@@ -23,8 +23,13 @@ class TestsLevel6(HedyTester):
     # ask tests
     #
     def test_ask_equals(self):
-        code = "antwoord = ask 'wat is je lievelingskleur?'"
-        expected = "antwoord = input(f'wat is je lievelingskleur?')"
+        code = textwrap.dedent("""\
+        antwoord = ask 'wat is je lievelingskleur?'
+        print antwoord""")
+
+        expected = textwrap.dedent("""\
+        antwoord = input(f'wat is je lievelingskleur?')
+        print(f'{antwoord}')""")
 
         self.multi_level_tester(code=code, expected=expected, max_level=11)
 
@@ -58,8 +63,13 @@ class TestsLevel6(HedyTester):
     # assign tests
     #
     def test_assign_with_equals(self):
-        code = "name = Hedy"
-        expected = "name = 'Hedy'"
+        code = textwrap.dedent("""\
+        name = Hedy
+        print name""")
+
+        expected = textwrap.dedent("""\
+        name = 'Hedy'
+        print(f'{name}')""")
 
         self.multi_level_tester(
             max_level=11,
@@ -68,8 +78,13 @@ class TestsLevel6(HedyTester):
         )
 
     def test_assign_with_equals_no_space(self):
-        code = "name=Hedy"
-        expected = "name = 'Hedy'"
+        code = textwrap.dedent("""\
+        name=Hedy
+        print name""")
+
+        expected = textwrap.dedent("""\
+        name = 'Hedy'
+        print(f'{name}')""")
 
         self.multi_level_tester(
             max_level=11,
@@ -78,8 +93,17 @@ class TestsLevel6(HedyTester):
         )
 
     def test_assign_list_with_equals(self):
-        code = "name = Hedy, Lamar"
-        expected = "name = ['Hedy', 'Lamar']"
+        code = textwrap.dedent("""\
+        name = Hedy, Lamar
+        print name at random""")
+
+        expected = textwrap.dedent("""\
+        name = ['Hedy', 'Lamar']
+        try:
+          random.choice(name)
+        except IndexError:
+          raise Exception('catch_index_exception')
+        print(f'{random.choice(name)}')""")
 
         self.multi_level_tester(
             max_level=11,
@@ -266,13 +290,13 @@ class TestsLevel6(HedyTester):
         code = textwrap.dedent("""\
         a is test
         b is 15
-        if a is b c is 1""")
+        if a is b b is 1""")
 
         expected = textwrap.dedent("""\
         a = 'test'
         b = '15'
         if convert_numerals('Latin', a) == convert_numerals('Latin', b):
-          c = '1'""")
+          b = '1'""")
 
         self.multi_level_tester(max_level=7, code=code, expected=expected)
 
@@ -584,8 +608,13 @@ class TestsLevel6(HedyTester):
         self.multi_level_tester(max_level=11, code=code, expected=expected, output='9')
 
     def test_assign_calc_no_space(self):
-        code = "nummer is 4+5"
-        expected = "nummer = int(4) + int(5)"
+        code = textwrap.dedent("""\
+        nummer is 4+5
+        print nummer""")
+
+        expected = textwrap.dedent("""\
+        nummer = int(4) + int(5)
+        print(f'{nummer}')""")
 
         self.multi_level_tester(max_level=11, code=code, expected=expected)
 
@@ -880,7 +909,7 @@ class TestsLevel6(HedyTester):
         order is fries
         if order is fries price is 5
         drink is water
-        print drink""")
+        print drink price""")
 
         expected = textwrap.dedent("""\
         order = 'fries'
@@ -889,7 +918,7 @@ class TestsLevel6(HedyTester):
         else:
           x__x__x__x = '5'
         drink = 'water'
-        print(f'{drink}')""")
+        print(f'{drink}{price}')""")
 
         self.multi_level_tester(max_level=7, code=code, expected=expected, translate=False)
 
