@@ -63,8 +63,6 @@ export class HedyCodeMirrorEditorCreator implements HedyEditorCreator {
 export class HedyCodeMirrorEditor implements HedyEditor {
     private view: EditorView;
     private readMode = new Compartment; // Configuration for the editor read mode
-    private theme = new Compartment;
-    private themeStyles: Record<string, any>;
     private editorEvent = new EventEmitter<EditorEvent>({
         change: true,
         guttermousedown: true,
@@ -75,9 +73,10 @@ export class HedyCodeMirrorEditor implements HedyEditor {
     private incorrectLineMapping: Record<string, number> = {};
 
     constructor(element: HTMLElement, isReadOnly: boolean, _: EditorType, __: string = "ltr") {
-        this.themeStyles = {
+        
+        const mainEditorStyling = EditorView.baseTheme({
             "&": {
-                height: "352px",
+                height: "22rem",
                 background: '#272822',
                 fontSize: '15.2px',
                 color: 'white',
@@ -91,16 +90,14 @@ export class HedyCodeMirrorEditor implements HedyEditor {
 
             ".cm-gutters": {
                 borderRadius: '4px'
-            }
-        }
-
-        const cursorStyle = { ".cm-cursor, .cm-dropCursor": {borderLeftColor: "white", borderLeftWidth: "2px"} }
-        const mainEditorStyling = EditorView.theme(this.themeStyles);
+            },            
+            ".cm-cursor, .cm-dropCursor": {borderLeftColor: "white", borderLeftWidth: "2px"}
+        });
 
         const state = EditorState.create({
             doc: '',
-            extensions: [                
-                EditorView.theme(cursorStyle),
+            extensions: [
+                mainEditorStyling,
                 breakpointGutter,
                 lineNumbers(),
                 highlightActiveLineGutter(),
@@ -119,7 +116,6 @@ export class HedyCodeMirrorEditor implements HedyEditor {
                     ...historyKeymap,
                 ]),
                 monokai,
-                this.theme.of(mainEditorStyling),
                 this.readMode.of(EditorState.readOnly.of(isReadOnly)),
                 errorLineField,
                 debugLineField,
@@ -137,7 +133,15 @@ export class HedyCodeMirrorEditor implements HedyEditor {
         if (theLevel) {
             this.setHighlighterForLevel(theLevel);
         }
-
+        // Size the editor depending on the height of its parent
+        this.view.requestMeasure({
+            read: () => {
+                return document.getElementById('editor')!.offsetHeight                                
+            },
+            write(measure, view) {
+                view.dom.style.height = `${measure}px`;                                
+            },
+        })
     }
 
     /**
@@ -222,12 +226,7 @@ export class HedyCodeMirrorEditor implements HedyEditor {
             console.log('Error! When resizing a CodeMirror instance, you need to provide the new height');
             return;
         }
-        // Change the size of the container element of the editor
-        // Via reconfiguring the editors theme
-        this.themeStyles['&'].height = `${newHeight}px`;
-        this.view.dispatch({
-            effects: this.theme.reconfigure(EditorView.theme(this.themeStyles))
-        });
+        this.view.dom.style.height = `${newHeight}px`;
     }
 
     /**
