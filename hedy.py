@@ -583,6 +583,16 @@ class LookupEntryCollector(visitors.Visitor):
         var_name = tree.children[0].children[0]
         self.add_to_lookup(var_name, tree, tree.meta.line)
 
+
+    def var_access(self, tree):
+        variable_name = tree.children[0].children[0]
+        # store the line of access (or string value) in the lookup table
+        # so we know what variable is used where
+        vars = [a for a in self.lookup if a.name == variable_name]
+        if vars:
+            corresponding_lookup_entry = vars[0]
+            corresponding_lookup_entry.access_line = meta.line
+
     def assign(self, tree):
         var_name = tree.children[0].children[0]
         self.add_to_lookup(var_name, tree.children[1], tree.meta.line)
