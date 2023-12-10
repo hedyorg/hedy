@@ -110,8 +110,8 @@ class TestsLevel13(HedyTester):
                     print "simple_function_3 - 2B"
                     print param_c
         a = "test1"
-        call simple_function_3 with "A", a, 1.0
-        call simple_function_3 with "B", a, 1.0
+        call simple_function_1 with "A"
+        call simple_function_2 with "B"
         call simple_function_3 with "C", a, 1.0
         call simple_function_3 with "C", 3 + 3, 1.0""")
 
@@ -136,14 +136,13 @@ class TestsLevel13(HedyTester):
               print(f'''simple_function_3 - 2B''')
               print(f'''{param_c}''')
         a = 'test1'
-        simple_function_3('A', a, 1.0)
-        simple_function_3('B', a, 1.0)
+        simple_function_1('A')
+        simple_function_2('B')
         simple_function_3('C', a, 1.0)
         simple_function_3('C', 3 + 3, 1.0)""")
 
         output = textwrap.dedent("""\
-        simple_function_3 - 1
-        test1
+        simple_function_1 - 1
         simple_function_3 - 1
         test1
         simple_function_3 - 2

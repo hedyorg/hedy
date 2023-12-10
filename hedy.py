@@ -1378,10 +1378,11 @@ class ConvertToPython(Transformer):
         # store the line of access (or string value) in the lookup table
         # so we know what variable is used where
         variable_name = escape_var(variable_name)
-        vars = [a for a in self.lookup if a.name[:len(variable_name)] == variable_name]
-        for v in vars: #vars can be defined multiple times, access validates all of them
-            corresponding_lookup_entry = v
-            corresponding_lookup_entry.access_line = access_line_number
+        if isinstance(variable_name, str):
+            vars = [a for a in self.lookup if isinstance(a.name, str) and a.name[:len(variable_name)] == variable_name]
+            for v in vars: #vars can be defined multiple times, access validates all of them
+                corresponding_lookup_entry = v
+                corresponding_lookup_entry.access_line = access_line_number
 
     def process_variable_for_comparisons(self, name):
         # used to transform variables in comparisons

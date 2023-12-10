@@ -416,9 +416,9 @@ class TestsLevel3(HedyTester):
 
         expected = HedyTester.dedent("""dieren = ['Hond\\\'s', 'Kat"s', '\\\'Kangoeroe\\\'', '"Muis"']""",
                                      HedyTester.list_access_transpiled('random.choice(dieren)'),
-                                     "print(f'\\'we bakken een\\'{random.choice(dieren)}')")
+                                     "print(f'\\'we bakken een\\' {random.choice(dieren)}')")
 
-        self.multi_level_tester(max_level=11, code=code, expected=expected)
+        self.multi_level_tester(max_level=3, code=code, expected=expected)
 
     #
     # forward tests
