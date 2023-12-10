@@ -1345,7 +1345,7 @@ class ConvertToPython(Transformer):
                 access_line_number=access_line_number,
                 definition_line_number=definition_line_number)
         else:
-            #valid use, store!
+            # valid use, store!
             self.add_variable_access_location(variable_name, access_line_number)
 
         is_function = False
@@ -2244,7 +2244,7 @@ class ConvertToPython_11(ConvertToPython_10):
     def for_loop(self, meta, args):
         args = [a for a in args if a != ""]  # filter out in|dedent tokens
         iterator = escape_var(args[0])
-        #iterator is always a used variable
+        # iterator is always a used variable
         self.add_variable_access_location(iterator, meta.line)
 
         body = "\n".join([ConvertToPython.indent(x) for x in args[3:]])

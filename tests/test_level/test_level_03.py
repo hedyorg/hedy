@@ -262,7 +262,6 @@ class TestsLevel3(HedyTester):
                                      HedyTester.list_access_transpiled("random.choice(dieren)"),
                                      "print(f'{random.choice(dieren)}')")
 
-
         self.multi_level_tester(max_level=11, code=code, expected=expected)
 
     def test_assign_list_to_hungarian_var(self):
