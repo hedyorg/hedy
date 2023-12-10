@@ -1345,7 +1345,7 @@ class ConvertToPython(Transformer):
                 access_line_number=access_line_number,
                 definition_line_number=definition_line_number)
         else:
-            #valid use, store!
+            # valid use, store!
             self.add_variable_access_location(variable_name, access_line_number)
 
         is_function = False
@@ -1379,7 +1379,7 @@ class ConvertToPython(Transformer):
         # so we know what variable is used where
         variable_name = escape_var(variable_name)
         vars = [a for a in self.lookup if a.name[:len(variable_name)] == variable_name]
-        for v in vars: #vars can be defined multiple times, access validates all of them
+        for v in vars:  # vars can be defined multiple times, access validates all of them
             corresponding_lookup_entry = v
             corresponding_lookup_entry.access_line = access_line_number
 
@@ -2243,7 +2243,7 @@ class ConvertToPython_11(ConvertToPython_10):
     def for_loop(self, meta, args):
         args = [a for a in args if a != ""]  # filter out in|dedent tokens
         iterator = escape_var(args[0])
-        #iterator is always a used variable
+        # iterator is always a used variable
         self.add_variable_access_location(iterator, meta.line)
 
         body = "\n".join([ConvertToPython.indent(x) for x in args[3:]])

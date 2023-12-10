@@ -270,7 +270,6 @@ class TestsLevel2(HedyTester):
         color = input('Cuál es tu color favorito?')
         print(f'{color}!')""")
 
-
         self.multi_level_tester(code=code, expected=expected, max_level=3)
 
     def test_ask_bengali_var(self):
