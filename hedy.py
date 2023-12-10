@@ -631,7 +631,6 @@ class LookupEntryCollector(visitors.Visitor):
         self.add_to_lookup(iterator, trimmed_tree, tree.meta.line)
 
     def define(self, tree):
-        # add function name to lookup
         self.add_to_lookup(str(tree.children[0].children[0]) + "()", tree, tree.meta.line)
 
         # add arguments to lookup
@@ -1379,7 +1378,7 @@ class ConvertToPython(Transformer):
         # store the line of access (or string value) in the lookup table
         # so we know what variable is used where
         variable_name = escape_var(variable_name)
-        vars = [a for a in self.lookup if a.name == variable_name]
+        vars = [a for a in self.lookup if a.name[:len(variable_name)] == variable_name]
         for v in vars: #vars can be defined multiple times, access validates all of them
             corresponding_lookup_entry = v
             corresponding_lookup_entry.access_line = access_line_number
@@ -1767,12 +1766,14 @@ class ConvertToPython_3(ConvertToPython_2):
     def list_access(self, meta, args):
         args = [escape_var(a) for a in args]
         listname = str(args[0])
+        location = str(args[0])
 
         # check the arguments (except when they are random or numbers, that is not quoted nor a var but is allowed)
         self.check_var_usage([a for a in args if a != 'random' and not a.isnumeric()], meta.line)
 
-        # store location
+        # store locations of both parts (can be list at var)
         self.add_variable_access_location(listname, meta.line)
+        self.add_variable_access_location(location, meta.line)
 
         if args[1] == 'random':
             return 'random.choice(' + listname + ')'
@@ -2226,6 +2227,9 @@ class ConvertToPython_10(ConvertToPython_8_9):
         args = [a for a in args if a != ""]  # filter out in|dedent tokens
         times = self.process_variable(args[0], meta.line)
 
+        # add the list to the lookup table, this used now too
+        self.add_variable_access_location(args[1], meta.line)
+
         body = "\n".join([ConvertToPython.indent(x) for x in args[2:]])
 
         body = add_sleep_to_command(body, True, self.is_debug, location="after")
@@ -2270,6 +2274,8 @@ class ConvertToPython_12(ConvertToPython_11):
 
     def call(self, meta, args):
         args_str = ""
+        self.add_variable_access_location(args[0], meta.line)
+
         if len(args) > 1:
             args_str = ", ".join(str(x.children[0]) if isinstance(x, Tree) else str(x) for x in args[1].children)
         return f"{args[0]}({args_str})"
@@ -3447,7 +3453,7 @@ def transpile_inner(input_string, level, lang="en", populate_source_map=False, i
     python = convertToPython(lookup_table, lang, numerals_language, is_debug).transform(abstract_syntax_tree)
 
     for x in lookup_table:
-        if x.access_line is None and x.name != 'x__x__x__x':
+        if isinstance(x.name, str) and x.access_line is None and x.name != 'x__x__x__x':
             raise hedy.exceptions.UnusedVariableException(0, 0, '', '')
 
     has_clear = "clear" in commands

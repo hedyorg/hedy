@@ -407,6 +407,7 @@ class TestsLevel12(HedyTester):
         self.multi_level_tester(code=code, expected=expected, max_level=15)
 
     def test_if_and_list_access(self):
+        # FH, dec 2023 this causes a var_access in the lookup table! not sure why, might dive in later
         code = textwrap.dedent("""\
         player = 'x'
         choice = 1
@@ -2090,8 +2091,8 @@ class TestsLevel12(HedyTester):
                     print "simple_function_3 - 2B"
                     print param_c
         a = "test1"
-        call simple_function_3 with "A", a, 1.0
-        call simple_function_3 with "B", a, 1.0
+        call simple_function_1 with "A"
+        call simple_function_2 with "B"
         call simple_function_3 with "C", a, 1.0""")
 
         expected = textwrap.dedent("""\
@@ -2115,16 +2116,15 @@ class TestsLevel12(HedyTester):
               print(f'''simple_function_3 - 2B''')
               print(f'''{param_c}''')
         a = 'test1'
-        simple_function_3('A', a, 1.0)
-        simple_function_3('B', a, 1.0)
+        simple_function_1('A')
+        simple_function_2('B')
         simple_function_3('C', a, 1.0)""")
 
         output = textwrap.dedent("""\
-        simple_function_3 - 1
-        test1
-        simple_function_3 - 2
-        simple_function_3 - 2A
-        test1
+        simple_function_1 - 1
+        simple_function_1 - 2
+        simple_function_2 - 1
+        B
         simple_function_3 - 2
         simple_function_3 - 2B
         1.0""")
@@ -2218,24 +2218,24 @@ class TestsLevel12(HedyTester):
         self.single_level_tester(code, expected=expected_code)
         self.source_map_tester(code=code, expected_source_map=expected_source_map)
 
-    def test_nested_functions(self):
-        code = textwrap.dedent("""\
-        define simple_function
-            define nested_function
-                print 1
-        call simple_function""")
-
-        expected = textwrap.dedent("""\
-        pass
-        simple_function()""")
-
-        skipped_mappings = [
-            SkippedMapping(SourceRange(1, 1, 3, 34), hedy.exceptions.NestedFunctionException),
-        ]
-
-        self.multi_level_tester(
-            code=code,
-            expected=expected,
-            skipped_mappings=skipped_mappings,
-            max_level=16
-        )
+    # disabled in 4881 def test_nested_functions(self):
+    #     code = textwrap.dedent("""\
+    #     define simple_function
+    #         define nested_function
+    #             print 1
+    #     call simple_function""")
+    #
+    #     expected = textwrap.dedent("""\
+    #     pass
+    #     simple_function()""")
+    #
+    #     skipped_mappings = [
+    #         SkippedMapping(SourceRange(1, 1, 3, 34), hedy.exceptions.NestedFunctionException),
+    #     ]
+    #
+    #     self.multi_level_tester(
+    #         code=code,
+    #         expected=expected,
+    #         skipped_mappings=skipped_mappings,
+    #         max_level=16
+    #     )

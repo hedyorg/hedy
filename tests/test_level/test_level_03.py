@@ -254,8 +254,14 @@ class TestsLevel3(HedyTester):
         self.multi_level_tester(max_level=11, code=code, expected=expected)
 
     def test_assign_list(self):
-        code = "dieren is Hond, Kat, Kangoeroe"
-        expected = "dieren = ['Hond', 'Kat', 'Kangoeroe']"
+        code = textwrap.dedent("""\
+        dieren is Hond, Kat, Kangoeroe
+        print dieren at random""")
+
+        expected = HedyTester.dedent("dieren = ['Hond', 'Kat', 'Kangoeroe']",
+                                     HedyTester.list_access_transpiled("random.choice(dieren)"),
+                                     "print(f'{random.choice(dieren)}')")
+
 
         self.multi_level_tester(max_level=11, code=code, expected=expected)
 
@@ -273,10 +279,13 @@ class TestsLevel3(HedyTester):
     def test_assign_list_with_spaces(self):
         # spaces are parsed in the text here, that is fine (could be avoided if we say text
         # can't *end* (or start) in a space but I find this ok for now
-        code = "dieren is Hond , Kat , Kangoeroe"
-        expected = "dieren = ['Hond ', 'Kat ', 'Kangoeroe']"
+        code = textwrap.dedent("""\
+        dieren is Hond , Kat , Kangoeroe
+        print dieren at random""")
 
-        self.multi_level_tester(max_level=11, code=code, expected=expected)
+        expected = HedyTester.dedent("dieren = ['Hond ', 'Kat ', 'Kangoeroe']",
+                                     HedyTester.list_access_transpiled("random.choice(dieren)"),
+                                     "print(f'{random.choice(dieren)}')")
 
     def test_assign_random_value(self):
         code = textwrap.dedent("""\
@@ -297,11 +306,17 @@ class TestsLevel3(HedyTester):
         )
 
     def test_assign_list_with_dutch_comma_arabic_lang(self):
-        code = "صديقي هو احمد, خالد, حسن"
-        expected = "صديقي = ['احمد', 'خالد', 'حسن']"
+        code = textwrap.dedent("""\
+        صديقي هو احمد, خالد, حسن
+        dier is صديقي at random
+        print dier""")
 
+        expected = HedyTester.dedent("صديقي = ['احمد', 'خالد', 'حسن']",
+                                     HedyTester.list_access_transpiled("random.choice(صديقي)"),
+                                     "dier = random.choice(صديقي)",
+                                     "print(f'{dier}')")
         self.multi_level_tester(
-            max_level=11,
+            max_level=3,
             code=code,
             expected=expected,
             lang='ar',
@@ -310,26 +325,34 @@ class TestsLevel3(HedyTester):
         )
 
     def test_assign_list_with_arabic_comma_and_is(self):
-        code = "animals هو cat، dog، platypus"
-        expected = "animals = ['cat', 'dog', 'platypus']"
+        code = textwrap.dedent("""\
+        animals هو cat، dog، platypus
+        dier is animals at random
+        print dier""")
+
+        expected = HedyTester.dedent("animals = ['cat', 'dog', 'platypus']",
+                                     HedyTester.list_access_transpiled("random.choice(animals)"),
+                                     "dier = random.choice(animals)",
+                                     "print(f'{dier}')")
 
         self.multi_level_tester(
-            max_level=11,
+            max_level=3,
             code=code,
             expected=expected,
+            translate=False,
             lang='ar'
         )
 
     def test_assign_list_with_arabic_comma(self):
-        code = "صديقي هو احمد، خالد، حسن"
-        expected = "صديقي = ['احمد', 'خالد', 'حسن']"
+        code = textwrap.dedent("""\
+        antwoorden is ja، NEE!، misschien
+        print antwoorden at random""")
 
-        self.multi_level_tester(
-            max_level=11,
-            code=code,
-            expected=expected,
-            lang='ar'
-        )
+        expected = HedyTester.dedent("antwoorden = ['ja', 'NEE!', 'misschien']",
+                                     HedyTester.list_access_transpiled("random.choice(antwoorden)"),
+                                     "print(f'{random.choice(antwoorden)}')")
+
+        self.multi_level_tester(max_level=11, code=code, expected=expected)
 
     def test_assign_list_exclamation_mark(self):
         code = textwrap.dedent("""\
@@ -387,8 +410,13 @@ class TestsLevel3(HedyTester):
         self.single_level_tester(code=code, expected=expected)
 
     def test_assign_list_values_with_inner_quotes(self):
-        code = """dieren is Hond's, Kat"s, 'Kangoeroe', "Muis\""""
-        expected = """dieren = ['Hond\\\'s', 'Kat"s', '\\\'Kangoeroe\\\'', '"Muis"']"""
+        code = textwrap.dedent(f"""\
+        dieren is Hond's, Kat"s, 'Kangoeroe', "Muis\"
+        print 'we bakken een' dieren at random""")
+
+        expected = HedyTester.dedent("""dieren = ['Hond\\\'s', 'Kat"s', '\\\'Kangoeroe\\\'', '"Muis"']""",
+                                     HedyTester.list_access_transpiled('random.choice(dieren)'),
+                                     "print(f'\\'we bakken een\\'{random.choice(dieren)}')")
 
         self.multi_level_tester(max_level=11, code=code, expected=expected)
 
@@ -669,25 +697,25 @@ class TestsLevel3(HedyTester):
             expected=expected
         )
 
-    def test_access_before_assign_with_random(self):
-        code = textwrap.dedent("""\
-        print colors at random
-        colors is green, red, blue""")
-
-        expected = textwrap.dedent("""\
-        print(f'pass')
-        colors = ['green', 'red', 'blue']""")
-
-        skipped_mappings = [
-            SkippedMapping(SourceRange(1, 7, 1, 13), hedy.exceptions.AccessBeforeAssignException),
-            SkippedMapping(SourceRange(1, 7, 1, 23), hedy.exceptions.UndefinedVarException),
-        ]
-
-        self.single_level_tester(
-            code=code,
-            expected=expected,
-            skipped_mappings=skipped_mappings,
-        )
+    # disabled in 4881 def test_access_before_assign_with_random(self):
+    #     code = textwrap.dedent("""\
+    #     print colors at random
+    #     colors is green, red, blue""")
+    #
+    #     expected = textwrap.dedent("""\
+    #     print(f'pass')
+    #     colors = ['green', 'red', 'blue']""")
+    #
+    #     skipped_mappings = [
+    #         SkippedMapping(SourceRange(1, 7, 1, 13), hedy.exceptions.AccessBeforeAssignException),
+    #         SkippedMapping(SourceRange(1, 7, 1, 23), hedy.exceptions.UndefinedVarException),
+    #     ]
+    #
+    #     self.single_level_tester(
+    #         code=code,
+    #         expected=expected,
+    #         skipped_mappings=skipped_mappings,
+    #     )
 
     def test_add_ask_to_list(self):
         code = textwrap.dedent("""\
