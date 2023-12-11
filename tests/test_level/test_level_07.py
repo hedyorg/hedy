@@ -170,25 +170,24 @@ class TestsLevel7(HedyTester):
             exception=hedy.exceptions.IncompleteRepeatException
         )
 
-    # Disabled in 4838
-    # def test_repeat_with_missing_times_gives_error_skip(self):
-    #     code = textwrap.dedent("""\
-    #     x is 3
-    #     repeat 3 print 'x'""")
-    #
-    #     expected = textwrap.dedent("""\
-    #     x = '3'
-    #     pass""")
-    #
-    #     skipped_mappings = [
-    #         SkippedMapping(SourceRange(2, 1, 2, 17), hedy.exceptions.IncompleteRepeatException),
-    #     ]
-    #
-    #     self.single_level_tester(
-    #         code=code,
-    #         expected=expected,
-    #         skipped_mappings=skipped_mappings,
-    #     )
+    def test_repeat_with_missing_times_gives_error_skip(self):
+        code = textwrap.dedent("""\
+        x is 3
+        repeat 3 print 'x'""")
+
+        expected = textwrap.dedent("""\
+        x = '3'
+        pass""")
+
+        skipped_mappings = [
+            SkippedMapping(SourceRange(2, 1, 2, 19), hedy.exceptions.IncompleteRepeatException),
+        ]
+
+        self.single_level_tester(
+            code=code,
+            expected=expected,
+            skipped_mappings=skipped_mappings,
+        )
 
     def test_repeat_with_missing_print_gives_lonely_text_exc(self):
         code = textwrap.dedent("""\
