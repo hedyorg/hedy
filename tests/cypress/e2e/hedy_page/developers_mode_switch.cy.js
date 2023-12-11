@@ -10,11 +10,9 @@ describe('Developers mode', () => {
       goToHedyPage();
       
       cy.get('#toggle_circle').click(); // Developers mode is switched on
-      cy.reload();
       cy.get('#adventures').should('not.be.visible');
 
       cy.get('#toggle_circle').click(); // Developers mode is switched off
-      cy.reload();
       cy.get('#adventures').should('be.visible');
     })
 
@@ -25,14 +23,13 @@ describe('Developers mode', () => {
       navigateToClass(classname);
 
       cy.get("#customize-class-button").click();
-      cy.get("#developers_mode").click();
+      cy.get("#developers_mode").click(); // Enforced developer mode is switched on
       cy.getBySel("save_customizations").click();
 
       logout();
       loginForStudent(students[0]);
       goToHedyPage();
       
-      cy.reload();
       cy.get('#adventures').should('not.be.visible');
     })
 })

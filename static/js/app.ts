@@ -1580,20 +1580,31 @@ export function toggleDevelopersMode(event='click', enforce_dev_mode:boolean) {
     } else {
       $('#developers_toggle').prop('checked', true);
     }
-    $('#adventures').hide();
-    $('#editor-area').removeClass('mt-5');
-    $('#code_editor').css('height', 36 + "em");
-    $('#code_output').css('height', 36 + "em");
-    theGlobalEditor.resize(576);
+    const adventures = document.getElementById('adventures');
+    const editorArea = document.getElementById('editor-area');
+    const codeEditor = document.getElementById('code_editor');
+    const codeOutput = document.getElementById('code_output');
+    if (adventures && editorArea && codeEditor && codeOutput && theGlobalEditor) {
+      adventures.style.display = 'none';
+      editorArea.classList.remove('mt-5');
+      codeOutput.style.height = '36em';
+      theGlobalEditor.resize(576);
+    }
   } else {
     if (event === 'click') {
       window.localStorage.setItem('developer_mode', 'false');
     }
-    $('#adventures').show();
-    $('#editor-area').addClass('mt-5');
-    $('#code_editor').height('22rem');
-    $('#code_output').height('22rem');
-    theGlobalEditor.resize(352);
+    const adventures = document.getElementById('adventures');
+    const editorArea = document.getElementById('editor-area');
+    const codeEditor = document.getElementById('code_editor');
+    const codeOutput = document.getElementById('code_output');
+    if (adventures && editorArea && codeEditor && codeOutput && theGlobalEditor) {
+      adventures.style.display = 'block';
+      editorArea.classList.add('mt-5');
+      codeEditor.style.height = '22rem';
+      codeOutput.style.height = '22rem';
+      theGlobalEditor.resize(352);
+    }
   } 
 }
 
