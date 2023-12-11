@@ -954,3 +954,10 @@ class TestsLevel4(HedyTester):
 
         self.single_level_tester(code, expected=expected_code)
         self.source_map_tester(code=code, expected_source_map=expected_source_map)
+
+    def test_undefined_list_access(self):
+        code = textwrap.dedent("""\
+        fortunes is you will slip on a banana peel, millionaire, death
+        print fortunes at ddd""")
+
+        self.multi_level_tester(code=code, exception=hedy.exceptions.UndefinedVarException, max_level=11)
