@@ -1,3 +1,4 @@
+import logging
 import collections
 import json
 import os
@@ -31,6 +32,8 @@ from datetime import date
 SLIDES = collections.defaultdict(hedy_content.NoSuchSlides)
 for lang in hedy_content.ALL_LANGUAGES.keys():
     SLIDES[lang] = hedy_content.Slides(lang)
+
+logger = logging.getLogger(__name__)
 
 
 class ForTeachersModule(WebsiteModule):
@@ -67,6 +70,11 @@ class ForTeachersModule(WebsiteModule):
         for level in range(hedy.HEDY_MAX_LEVEL + 1):
             if SLIDES[g.lang].get_slides_for_level(level, keyword_language):
                 slides.append(level)
+
+        for Class in teacher_classes:
+            if Class.get("students"):
+                survey_id, description, unanswered_questions, survey_later = self.class_survey(Class["id"])
+                Class["survey_unanswered_questions"] = unanswered_questions
 
         return render_template(
             "for-teachers.html",
@@ -310,6 +318,12 @@ class ForTeachersModule(WebsiteModule):
                 page='customize-class',
                 class_id=class_id
             ))
+
+    @route("/load-survey/<class_id>", methods=["POST"])
+    def load_survey(self, class_id):
+        survey_id, description, questions, survey_later = self.class_survey(class_id)
+        return render_partial('htmx-survey.html', survey_id=survey_id, description=description,
+                              questions=questions, survey_later=survey_later, click='yes')
 
     def class_survey(self, class_id):
         description = ""

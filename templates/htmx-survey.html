@@ -16,13 +16,14 @@
                 hx-trigger="click"
                 hx-post="/surveys/submit-survey/{{ survey_id }}"
                 hx-include="[name='question']"
-                hx-swap="innerHTML"
+                hx-swap="outerHTML"
                 _="on click toggle .hidden on #survey">
                 {{_('survey_submit')}}</button>
+                {% if not click %}
                 <button id="remind_later" class="red-btn block mx-auto w-40 pb-4 pt-4"
                 hx-trigger="click"
                 hx-post="/surveys/remind-later-survey/{{ survey_id }}"
-                hx-swap="innerHTML"
+                hx-swap="outerHTML"
                 _="on click toggle .hidden on #survey">
                 {{_(survey_later)}}</button>
             </div>
@@ -30,9 +31,10 @@
             <button id="skip" class="text-white m-1 w-40 pb-4 pt-4"
                 hx-trigger="click"
                 hx-post="/surveys/skip-survey/{{ survey_id }}"
-                hx-swap="innerHTML"
+                hx-swap="outerHTML"
                 _="on click toggle .hidden on #survey">
                 <u>{{_('survey_skip')}}</u></button>
+            {% endif %}
             </div>
         </form>
         </div>
