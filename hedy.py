@@ -1380,7 +1380,7 @@ class ConvertToPython(Transformer):
         variable_name = escape_var(variable_name)
         if isinstance(variable_name, str):
             vars = [a for a in self.lookup if isinstance(a.name, str) and a.name[:len(variable_name)] == variable_name]
-            for v in vars: #vars can be defined multiple times, access validates all of them
+            for v in vars:  # vars can be defined multiple times, access validates all of them
                 corresponding_lookup_entry = v
                 corresponding_lookup_entry.access_line = access_line_number
 
