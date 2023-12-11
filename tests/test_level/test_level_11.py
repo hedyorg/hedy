@@ -25,29 +25,24 @@ class TestsLevel11(HedyTester):
     def test_for_loop(self):
         code = textwrap.dedent("""\
         for i in range 1 to 10
-            a is i + 1
-            print a""")
-
+            a is i + 1""")
         expected = textwrap.dedent("""\
         step = 1 if int(1) < int(10) else -1
         for i in range(int(1), int(10) + step, step):
           a = int(i) + int(1)
-          print(f'{a}')
           time.sleep(0.1)""")
 
         self.single_level_tester(
             code=code,
             expected=expected,
-            expected_commands=['for', 'is', 'addition', 'print'])
+            expected_commands=['for', 'is', 'addition'])
 
     def test_for_loop_with_int_vars(self):
         code = textwrap.dedent("""\
         begin = 1
         end = 10
         for i in range begin to end
-            print i
-        print end
-        print begin""")
+            print i""")
 
         expected = textwrap.dedent("""\
         begin = '1'
@@ -55,9 +50,7 @@ class TestsLevel11(HedyTester):
         step = 1 if int(begin) < int(end) else -1
         for i in range(int(begin), int(end) + step, step):
           print(f'{i}')
-          time.sleep(0.1)
-        print(f'{end}')
-        print(f'{begin}')""")
+          time.sleep(0.1)""")
 
         self.single_level_tester(code=code, expected=expected)
 
@@ -92,16 +85,16 @@ class TestsLevel11(HedyTester):
         a is 2
         b is 3
         for a in range 2 to 4
-            a is b + 2
-            print a""")
+            a is a + 2
+            b is b + 2""")
 
         expected = textwrap.dedent("""\
         a = '2'
         b = '3'
         step = 1 if int(2) < int(4) else -1
         for a in range(int(2), int(4) + step, step):
-          a = int(b) + int(2)
-          print(f'{a}')
+          a = int(a) + int(2)
+          b = int(b) + int(2)
           time.sleep(0.1)""")
 
         self.single_level_tester(code=code, expected=expected)
@@ -231,7 +224,7 @@ class TestsLevel11(HedyTester):
             else
                 print 'Dat is goed!'
             if antwoord is 25
-                print i""")
+                i is 10""")
 
         expected = textwrap.dedent("""\
         step = 1 if int(0) < int(10) else -1
@@ -242,7 +235,7 @@ class TestsLevel11(HedyTester):
           else:
             print(f'Dat is goed!')
           if convert_numerals('Latin', antwoord) == convert_numerals('Latin', '25'):
-            print(f'{i}')
+            i = '10'
           time.sleep(0.1)""")
 
         self.single_level_tester(code=code, expected=expected)
@@ -272,13 +265,13 @@ class TestsLevel11(HedyTester):
         code = textwrap.dedent("""\
         for i in range 0 to 10
             if i is 2
-                print i""")
+                print '2'""")
 
         expected = textwrap.dedent("""\
         step = 1 if int(0) < int(10) else -1
         for i in range(int(0), int(10) + step, step):
           if convert_numerals('Latin', i) == convert_numerals('Latin', '2'):
-            print(f'{i}')
+            print(f'2')
           time.sleep(0.1)""")
 
         self.single_level_tester(code=code, expected=expected)
