@@ -2949,7 +2949,7 @@ def get_parser(level, lang="en", keep_all_tokens=False, skip_faulty=False):
 ParseResult = namedtuple('ParseResult', ['code', 'source_map', 'has_turtle', 'has_pygame', 'has_clear', 'commands'])
 
 
-def transpile_inner_with_skipping_faulty(input_string, level, lang="en"):
+def transpile_inner_with_skipping_faulty(input_string, level, lang="en", unused_allowed=True):
     def skipping_faulty(meta, args): return [True]
 
     defined_errors = [method for method in dir(IsValid) if method.startswith('error')]
@@ -2968,7 +2968,9 @@ def transpile_inner_with_skipping_faulty(input_string, level, lang="en"):
 
     try:
         set_error_to_allowed()
-        transpile_result = transpile_inner(input_string, level, lang, populate_source_map=True)
+        transpile_result = transpile_inner(
+            input_string, level, lang, populate_source_map=True, unused_allowed=unused_allowed
+        )
     finally:
         # make sure to always revert IsValid methods to original
         set_errors_to_original()
