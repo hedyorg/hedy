@@ -3466,7 +3466,8 @@ def transpile_inner(input_string, level, lang="en", populate_source_map=False, i
     if not unused_allowed:
         for x in lookup_table:
             if isinstance(x.name, str) and x.access_line is None and x.name != 'x__x__x__x':
-                raise hedy.exceptions.UnusedVariableException(level, x.definition_line, x.name, fixed_code=python, fixed_result=parse_result)
+                raise hedy.exceptions.UnusedVariableException(
+                    level, x.definition_line, x.name, fixed_code=python, fixed_result=parse_result)
 
     return parse_result
 
