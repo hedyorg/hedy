@@ -3365,7 +3365,6 @@ def create_AST(input_string, level, lang="en"):
     return abstract_syntax_tree, lookup_table, commands
 
 
-
 def transpile_inner(input_string, level, lang="en", populate_source_map=False, is_debug=False):
     check_program_size_is_valid(input_string)
     input_string = process_input_string(input_string, level, lang)
@@ -3411,6 +3410,7 @@ def transpile_inner(input_string, level, lang="en", populate_source_map=False, i
                 raise E.orig_exc
             else:
                 raise E
+
 
 def execute(input_string, level):
     python = transpile(input_string, level)
