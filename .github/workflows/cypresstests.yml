@@ -44,11 +44,6 @@ jobs:
       # Runs in the background
       run: build-tools/github/start-debug-server --daemon
 
-    - name: Create the bundle files
-      run: |
-        build-tools/heroku/generate-typescript
-        build-tools/heroku/tailwind/generate-development-css
-
     - name: Cypress run
       uses: cypress-io/github-action@v6
       with:
@@ -57,6 +52,7 @@ jobs:
         working-directory: tests/
         # We have already installed all dependencies
         install: false
+        record: true
       env:
         # pass the Cypress Cloud record key as an environment variable
         CYPRESS_RECORD_KEY: ${{ secrets.CYPRESS_RECORD_KEY }}
