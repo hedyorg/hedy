@@ -2993,7 +2993,7 @@ def transpile_inner_with_skipping_faulty(input_string, level, lang="en"):
     return transpile_result
 
 
-def transpile(input_string, level, lang="en", skip_faulty=True, is_debug=False):
+def transpile(input_string, level, lang="en", skip_faulty=True, is_debug=False, unused_allowed=False):
     """
     Function that transpiles the Hedy code to Python
 
@@ -3007,7 +3007,7 @@ def transpile(input_string, level, lang="en", skip_faulty=True, is_debug=False):
 
     try:
         source_map.set_skip_faulty(False)
-        transpile_result = transpile_inner(input_string, level, lang, populate_source_map=True, is_debug=is_debug)
+        transpile_result = transpile_inner(input_string, level, lang, populate_source_map=True, is_debug=is_debug, unused_allowed=unused_allowed)
 
     except Exception as original_error:
         hedy_amount_lines = len(input_string.strip().split('\n'))
@@ -3425,7 +3425,7 @@ def create_AST(input_string, level, lang="en"):
                 raise E
 
 
-def transpile_inner(input_string, level, lang="en", populate_source_map=False, is_debug=False):
+def transpile_inner(input_string, level, lang="en", populate_source_map=False, is_debug=False, unused_allowed=False):
     check_program_size_is_valid(input_string)
     input_string = process_input_string(input_string, level, lang)
 
@@ -3453,9 +3453,10 @@ def transpile_inner(input_string, level, lang="en", populate_source_map=False, i
     convertToPython = TRANSPILER_LOOKUP[level]
     python = convertToPython(lookup_table, lang, numerals_language, is_debug).transform(abstract_syntax_tree)
 
-    for x in lookup_table:
-        if isinstance(x.name, str) and x.access_line is None and x.name != 'x__x__x__x':
-            raise hedy.exceptions.UnusedVariableException(0, 0, '', '')
+    if not unused_allowed:
+        for x in lookup_table:
+            if isinstance(x.name, str) and x.access_line is None and x.name != 'x__x__x__x':
+                raise hedy.exceptions.UnusedVariableException(0, 0, '', '')
 
     has_clear = "clear" in commands
     has_turtle = "forward" in commands or "turn" in commands or "color" in commands
