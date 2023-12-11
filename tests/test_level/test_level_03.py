@@ -1,8 +1,9 @@
 import textwrap
 
 import hedy
+from hedy_sourcemap import SourceRange
 # from hedy_sourcemap import SourceRange
-from tests.Tester import HedyTester  # , SkippedMapping
+from tests.Tester import HedyTester, SkippedMapping  # , SkippedMapping
 
 
 class TestsLevel3(HedyTester):
@@ -672,26 +673,26 @@ class TestsLevel3(HedyTester):
             expected=expected
         )
 
-    # disabled in 4881 def test_access_before_assign_with_random(self):
-    #     code = textwrap.dedent("""\
-    #     print colors at random
-    #     colors is green, red, blue""")
-    #
-    #     expected = textwrap.dedent("""\
-    #     print(f'pass')
-    #     colors = ['green', 'red', 'blue']""")
-    #
-    #     skipped_mappings = [
-    #         SkippedMapping(SourceRange(1, 7, 1, 13), hedy.exceptions.AccessBeforeAssignException),
-    #         SkippedMapping(SourceRange(1, 7, 1, 23), hedy.exceptions.UndefinedVarException),
-    #     ]
-    #
-    #     self.single_level_tester(
-    #         code=code,
-    #         expected=expected,
-    #         unused_allowed=True,
-    #         skipped_mappings=skipped_mappings,
-    #     )
+    def test_access_before_assign_with_random(self):
+        code = textwrap.dedent("""\
+        print colors at random
+        colors is green, red, blue""")
+
+        expected = textwrap.dedent("""\
+        print(f'pass')
+        colors = ['green', 'red', 'blue']""")
+
+        skipped_mappings = [
+            SkippedMapping(SourceRange(1, 7, 1, 13), hedy.exceptions.AccessBeforeAssignException),
+            SkippedMapping(SourceRange(1, 7, 1, 23), hedy.exceptions.UndefinedVarException),
+        ]
+
+        self.single_level_tester(
+            code=code,
+            expected=expected,
+            unused_allowed=True,
+            skipped_mappings=skipped_mappings,
+        )
 
     def test_add_ask_to_list(self):
         code = textwrap.dedent("""\

@@ -4,8 +4,9 @@ from parameterized import parameterized
 
 import hedy
 from hedy import Command
+from hedy_sourcemap import SourceRange
 # from hedy_sourcemap import SourceRange
-from tests.Tester import HedyTester  # , SkippedMapping
+from tests.Tester import HedyTester, SkippedMapping  # , SkippedMapping
 
 
 class TestsLevel12(HedyTester):
@@ -126,17 +127,16 @@ class TestsLevel12(HedyTester):
             expected_commands=expected_commands,
             max_level=17)
 
-    # disabled in #4838
-    # def test_print_string_with_triple_quotes_gives_error(self):
-    #     code = textwrap.dedent("""\
-    #         var = " is not allowed"
-    #         print "'''" + var """)
-    #
-    #     self.multi_level_tester(
-    #         code=code,
-    #         max_level=17,
-    #         exception=hedy.exceptions.UnsupportedStringValue
-    #     )
+    def test_print_string_with_triple_quotes_gives_error(self):
+        code = textwrap.dedent("""\
+            var = " is not allowed"
+            print "'''" + var """)
+
+        self.multi_level_tester(
+            code=code,
+            max_level=17,
+            exception=hedy.exceptions.UnsupportedStringValue
+        )
 
     # issue #745
     def test_print_list_gives_type_error(self):
@@ -2219,25 +2219,25 @@ class TestsLevel12(HedyTester):
         self.single_level_tester(code, expected=expected_code)
         self.source_map_tester(code=code, expected_source_map=expected_source_map)
 
-    # disabled in 4881 def test_nested_functions(self):
-    #     code = textwrap.dedent("""\
-    #     define simple_function
-    #         define nested_function
-    #             print 1
-    #     call simple_function""")
-    #
-    #     expected = textwrap.dedent("""\
-    #     pass
-    #     simple_function()""")
-    #
-    #     skipped_mappings = [
-    #         SkippedMapping(SourceRange(1, 1, 3, 34), hedy.exceptions.NestedFunctionException),
-    #     ]
-    #
-    #     self.multi_level_tester(
-    #         code=code,
-    #         expected=expected,
-    #         unused_allowed=True,
-    #         skipped_mappings=skipped_mappings,
-    #         max_level=16
-    #     )
+    def test_nested_functions(self):
+        code = textwrap.dedent("""\
+        define simple_function
+            define nested_function
+                print 1
+        call simple_function""")
+
+        expected = textwrap.dedent("""\
+        pass
+        simple_function()""")
+
+        skipped_mappings = [
+            SkippedMapping(SourceRange(1, 1, 3, 34), hedy.exceptions.NestedFunctionException),
+        ]
+
+        self.multi_level_tester(
+            code=code,
+            expected=expected,
+            unused_allowed=True,
+            skipped_mappings=skipped_mappings,
+            max_level=16
+        )

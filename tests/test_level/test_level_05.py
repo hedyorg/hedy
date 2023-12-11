@@ -859,50 +859,50 @@ class TestsLevel5(HedyTester):
     # negative tests
     #
 
-    # disabled in 4881 def test_if_indent_gives_parse_error(self):
-    #     code = textwrap.dedent("""\
-    #     option is ask 'Rock Paper or Scissors?'
-    #     if option is Scissors
-    #         print 'Its a tie!'""")
-    #
-    #     expected = textwrap.dedent("""\
-    #     option = input(f'Rock Paper or Scissors?')
-    #     pass
-    #     pass""")
-    #
-    #     skipped_mappings = [
-    #         SkippedMapping(SourceRange(2, 1, 2, 22), hedy.exceptions.ParseException),
-    #         SkippedMapping(SourceRange(3, 1, 3, 23), hedy.exceptions.InvalidSpaceException),
-    #     ]
-    #
-    #     self.multi_level_tester(
-    #         code=code,
-    #         expected=expected,
-    #         skipped_mappings=skipped_mappings,
-    #         max_level=7
-    #     )
+    def test_if_indent_gives_parse_error(self):
+        code = textwrap.dedent("""\
+        option is ask 'Rock Paper or Scissors?'
+        if option is Scissors
+            print 'Its a tie!'""")
 
-    # disabled in 4881 def test_line_with_if_with_space_gives_invalid(self):
-    #     code = textwrap.dedent("""\
-    #     prind skipping
-    #     name is Hedy
-    #      if name is 3 print 'leuk' else print 'stom'""")
-    #
-    #     expected = textwrap.dedent("""\
-    #     pass
-    #     name = 'Hedy'
-    #     pass""")
-    #
-    #     skipped_mappings = [
-    #         SkippedMapping(SourceRange(1, 1, 1, 15), hedy.exceptions.InvalidCommandException),
-    #         SkippedMapping(SourceRange(3, 1, 3, 45), hedy.exceptions.InvalidSpaceException),
-    #     ]
-    #
-    #     self.multi_level_tester(
-    #         code=code,
-    #         expected=expected,
-    #         skipped_mappings=skipped_mappings,
-    #         max_level=7)
+        expected = textwrap.dedent("""\
+        option = input(f'Rock Paper or Scissors?')
+        pass
+        pass""")
+
+        skipped_mappings = [
+            SkippedMapping(SourceRange(2, 1, 2, 22), hedy.exceptions.ParseException),
+            SkippedMapping(SourceRange(3, 1, 3, 23), hedy.exceptions.InvalidSpaceException),
+        ]
+
+        self.multi_level_tester(
+            code=code,
+            expected=expected,
+            skipped_mappings=skipped_mappings,
+            max_level=7
+        )
+
+    def test_line_with_if_with_space_gives_invalid(self):
+        code = textwrap.dedent("""\
+        prind skipping
+        name is Hedy
+         if name is 3 print 'leuk' else print 'stom'""")
+
+        expected = textwrap.dedent("""\
+        pass
+        name = 'Hedy'
+        pass""")
+
+        skipped_mappings = [
+            SkippedMapping(SourceRange(1, 1, 1, 15), hedy.exceptions.InvalidCommandException),
+            SkippedMapping(SourceRange(3, 1, 3, 45), hedy.exceptions.InvalidSpaceException),
+        ]
+
+        self.multi_level_tester(
+            code=code,
+            expected=expected,
+            skipped_mappings=skipped_mappings,
+            max_level=7)
 
     def test_pront_should_suggest_print(self):
         code = textwrap.dedent("""\
@@ -924,29 +924,29 @@ class TestsLevel5(HedyTester):
             skipped_mappings=skipped_mappings
         )
 
-    # disabled in 4881 def test_print_no_quotes(self):
-    #     code = textwrap.dedent("""\
-    #     print 'Hoi ik ben Hedy de Waarzegger
-    #     print 'Ik kan voorspellen wie morgen de loterij wint!'
-    #     naam is ask 'Wie ben jij?'
-    #     prind skipping""")
-    #
-    #     expected = textwrap.dedent("""\
-    #     pass
-    #     print(f'Ik kan voorspellen wie morgen de loterij wint!')
-    #     naam = input(f'Wie ben jij?')
-    #     pass""")
-    #
-    #     skipped_mappings = [
-    #         SkippedMapping(SourceRange(1, 1, 1, 37), hedy.exceptions.UnquotedTextException),
-    #         SkippedMapping(SourceRange(4, 1, 4, 15), hedy.exceptions.InvalidCommandException)
-    #     ]
-    #
-    #     self.single_level_tester(
-    #         code=code,
-    #         expected=expected,
-    #         skipped_mappings=skipped_mappings
-    #     )
+    def test_print_no_quotes(self):
+        code = textwrap.dedent("""\
+        print 'Hoi ik ben Hedy de Waarzegger
+        print 'Ik kan voorspellen wie morgen de loterij wint!'
+        naam is ask 'Wie ben jij?'
+        prind skipping""")
+
+        expected = textwrap.dedent("""\
+        pass
+        print(f'Ik kan voorspellen wie morgen de loterij wint!')
+        naam = input(f'Wie ben jij?')
+        pass""")
+
+        skipped_mappings = [
+            SkippedMapping(SourceRange(1, 1, 1, 37), hedy.exceptions.UnquotedTextException),
+            SkippedMapping(SourceRange(4, 1, 4, 15), hedy.exceptions.InvalidCommandException)
+        ]
+
+        self.single_level_tester(
+            code=code,
+            expected=expected,
+            skipped_mappings=skipped_mappings
+        )
 
     def test_print_quote_gives_exception(self):
         code = textwrap.dedent("""\

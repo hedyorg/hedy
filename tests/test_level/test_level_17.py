@@ -4,8 +4,9 @@ from parameterized import parameterized
 
 import exceptions
 import hedy
+from hedy_sourcemap import SourceRange
 # from hedy_sourcemap import SourceRange
-from tests.Tester import HedyTester  # , SkippedMapping
+from tests.Tester import HedyTester, SkippedMapping  # , SkippedMapping
 
 
 class TestsLevel17(HedyTester):
@@ -537,26 +538,26 @@ class TestsLevel17(HedyTester):
 
         self.single_level_tester(code=code, expected=expected)
 
-    # disabled in 4881 def test_nested_functions(self):
-    #     code = textwrap.dedent("""\
-    #     define simple_function:
-    #         define nested_function:
-    #             print 1
-    #     call simple_function""")
-    #
-    #     expected = textwrap.dedent("""\
-    #     pass
-    #     simple_function()""")
-    #
-    #     skipped_mappings = [
-    #         SkippedMapping(SourceRange(1, 1, 3, 34), hedy.exceptions.NestedFunctionException),
-    #     ]
-    #
-    #     self.single_level_tester(
-    #         code=code,
-    #         expected=expected,
-    #         skipped_mappings=skipped_mappings,
-    #     )
+    def test_nested_functions(self):
+        code = textwrap.dedent("""\
+        define simple_function:
+            define nested_function:
+                print 1
+        call simple_function""")
+
+        expected = textwrap.dedent("""\
+        pass
+        simple_function()""")
+
+        skipped_mappings = [
+            SkippedMapping(SourceRange(1, 1, 3, 34), hedy.exceptions.NestedFunctionException),
+        ]
+
+        self.single_level_tester(
+            code=code,
+            expected=expected,
+            skipped_mappings=skipped_mappings,
+        )
 
     def test_source_map(self):
         code = textwrap.dedent("""\
