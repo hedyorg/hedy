@@ -567,7 +567,7 @@ def parse():
 
             if transpile_result.has_clear:
                 response['has_clear'] = True
-        except Exception as E:
+        except Exception:
             pass
 
         with querylog.log_time('detect_sleep'):
