@@ -67,6 +67,7 @@ class TestsParsonsPrograms(HedyTester):
                     code=snippet.code,
                     level=int(snippet.level),
                     lang=snippet.language,
+                    unused_allowed=True,
                     translate=False,
                     skip_faulty=False
                 )

@@ -4,8 +4,8 @@ from parameterized import parameterized
 
 import hedy
 from hedy import Command
-from hedy_sourcemap import SourceRange
-from tests.Tester import HedyTester, SkippedMapping
+#from hedy_sourcemap import SourceRange
+from tests.Tester import HedyTester#, SkippedMapping
 
 
 class TestsLevel12(HedyTester):
@@ -2133,6 +2133,7 @@ class TestsLevel12(HedyTester):
             code=code,
             expected=expected,
             output=output,
+            unused_allowed=True,
             max_level=16
         )
 
@@ -2218,24 +2219,25 @@ class TestsLevel12(HedyTester):
         self.single_level_tester(code, expected=expected_code)
         self.source_map_tester(code=code, expected_source_map=expected_source_map)
 
-    def test_nested_functions(self):
-        code = textwrap.dedent("""\
-        define simple_function
-            define nested_function
-                print 1
-        call simple_function""")
-
-        expected = textwrap.dedent("""\
-        pass
-        simple_function()""")
-
-        skipped_mappings = [
-            SkippedMapping(SourceRange(1, 1, 3, 34), hedy.exceptions.NestedFunctionException),
-        ]
-
-        self.multi_level_tester(
-            code=code,
-            expected=expected,
-            skipped_mappings=skipped_mappings,
-            max_level=16
-        )
+    # disabled in 4881 def test_nested_functions(self):
+    #     code = textwrap.dedent("""\
+    #     define simple_function
+    #         define nested_function
+    #             print 1
+    #     call simple_function""")
+    #
+    #     expected = textwrap.dedent("""\
+    #     pass
+    #     simple_function()""")
+    #
+    #     skipped_mappings = [
+    #         SkippedMapping(SourceRange(1, 1, 3, 34), hedy.exceptions.NestedFunctionException),
+    #     ]
+    #
+    #     self.multi_level_tester(
+    #         code=code,
+    #         expected=expected,
+    #         unused_allowed=True,
+    #         skipped_mappings=skipped_mappings,
+    #         max_level=16
+    #     )

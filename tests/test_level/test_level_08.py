@@ -270,13 +270,13 @@ class TestsLevel8(HedyTester):
         a is test
         b is 15
         if a is b
-            c is 1""")
+            b is 1""")
 
         expected = textwrap.dedent("""\
         a = 'test'
         b = '15'
         if convert_numerals('Latin', a) == convert_numerals('Latin', b):
-          c = '1'""")
+          b = '1'""")
 
         self.multi_level_tester(code=code, expected=expected, max_level=11)
 
@@ -392,7 +392,7 @@ class TestsLevel8(HedyTester):
         else:
           x = '222'""")
 
-        self.multi_level_tester(code=code, expected=expected, max_level=11)
+        self.multi_level_tester(code=code, expected=expected, max_level=11, unused_allowed=True)
 
     def test_if_else_followed_by_print(self):
         code = textwrap.dedent("""\
@@ -633,12 +633,12 @@ class TestsLevel8(HedyTester):
     def test_repeat_with_arabic_variable_print(self):
         code = textwrap.dedent("""\
         n is ٥
-        repeat ٥ times
+        repeat n times
             print 'me wants a cookie!'""")
 
         expected = textwrap.dedent("""\
         n = '٥'
-        for i in range(int('5')):
+        for i in range(int(n)):
           print(f'me wants a cookie!')
           time.sleep(0.1)""")
 

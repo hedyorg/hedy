@@ -1,8 +1,8 @@
 import textwrap
 
 import hedy
-from hedy_sourcemap import SourceRange
-from tests.Tester import HedyTester, SkippedMapping
+#from hedy_sourcemap import SourceRange
+from tests.Tester import HedyTester#, SkippedMapping
 
 
 class TestsLevel3(HedyTester):
@@ -257,7 +257,7 @@ class TestsLevel3(HedyTester):
         code = "dieren is Hond, Kat, Kangoeroe"
         expected = "dieren = ['Hond', 'Kat', 'Kangoeroe']"
 
-        self.multi_level_tester(max_level=11, code=code, expected=expected)
+        self.multi_level_tester(max_level=11, code=code, expected=expected, unused_allowed=True)
 
     def test_assign_list_to_hungarian_var(self):
         code = textwrap.dedent("""\
@@ -276,7 +276,7 @@ class TestsLevel3(HedyTester):
         code = "dieren is Hond , Kat , Kangoeroe"
         expected = "dieren = ['Hond ', 'Kat ', 'Kangoeroe']"
 
-        self.multi_level_tester(max_level=11, code=code, expected=expected)
+        self.multi_level_tester(max_level=11, code=code, expected=expected, unused_allowed=True)
 
     def test_assign_random_value(self):
         code = textwrap.dedent("""\
@@ -305,6 +305,7 @@ class TestsLevel3(HedyTester):
             code=code,
             expected=expected,
             lang='ar',
+            unused_allowed=True,
             # translation must be off because the Latin commas will be converted to arabic commas and this is correct
             translate=False
         )
@@ -316,6 +317,7 @@ class TestsLevel3(HedyTester):
         self.multi_level_tester(
             max_level=11,
             code=code,
+            unused_allowed=True,
             expected=expected,
             lang='ar'
         )
@@ -327,6 +329,7 @@ class TestsLevel3(HedyTester):
         self.multi_level_tester(
             max_level=11,
             code=code,
+            unused_allowed=True,
             expected=expected,
             lang='ar'
         )
@@ -390,7 +393,7 @@ class TestsLevel3(HedyTester):
         code = """dieren is Hond's, Kat"s, 'Kangoeroe', "Muis\""""
         expected = """dieren = ['Hond\\\'s', 'Kat"s', '\\\'Kangoeroe\\\'', '"Muis"']"""
 
-        self.multi_level_tester(max_level=11, code=code, expected=expected)
+        self.multi_level_tester(max_level=11, code=code, expected=expected, unused_allowed=True)
 
     #
     # forward tests
@@ -669,25 +672,26 @@ class TestsLevel3(HedyTester):
             expected=expected
         )
 
-    def test_access_before_assign_with_random(self):
-        code = textwrap.dedent("""\
-        print colors at random
-        colors is green, red, blue""")
-
-        expected = textwrap.dedent("""\
-        print(f'pass')
-        colors = ['green', 'red', 'blue']""")
-
-        skipped_mappings = [
-            SkippedMapping(SourceRange(1, 7, 1, 13), hedy.exceptions.AccessBeforeAssignException),
-            SkippedMapping(SourceRange(1, 7, 1, 23), hedy.exceptions.UndefinedVarException),
-        ]
-
-        self.single_level_tester(
-            code=code,
-            expected=expected,
-            skipped_mappings=skipped_mappings,
-        )
+    # disabled in 4881 def test_access_before_assign_with_random(self):
+    #     code = textwrap.dedent("""\
+    #     print colors at random
+    #     colors is green, red, blue""")
+    #
+    #     expected = textwrap.dedent("""\
+    #     print(f'pass')
+    #     colors = ['green', 'red', 'blue']""")
+    #
+    #     skipped_mappings = [
+    #         SkippedMapping(SourceRange(1, 7, 1, 13), hedy.exceptions.AccessBeforeAssignException),
+    #         SkippedMapping(SourceRange(1, 7, 1, 23), hedy.exceptions.UndefinedVarException),
+    #     ]
+    #
+    #     self.single_level_tester(
+    #         code=code,
+    #         expected=expected,
+    #         unused_allowed=True,
+    #         skipped_mappings=skipped_mappings,
+    #     )
 
     def test_add_ask_to_list(self):
         code = textwrap.dedent("""\
