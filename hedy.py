@@ -3398,7 +3398,6 @@ def create_lookup_table(abstract_syntax_tree, level, lang, input_string):
 
 
 def create_AST(input_string, level, lang="en"):
-    input_string = process_input_string(input_string, level, lang)
     program_root = parse_input(input_string, level, lang)
 
     try:
@@ -3428,6 +3427,7 @@ def create_AST(input_string, level, lang="en"):
 
 def transpile_inner(input_string, level, lang="en", populate_source_map=False, is_debug=False):
     check_program_size_is_valid(input_string)
+    input_string = process_input_string(input_string, level, lang)
 
     level = int(level)
     if level > HEDY_MAX_LEVEL:

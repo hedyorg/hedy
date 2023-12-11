@@ -11,7 +11,7 @@
      </div>
     </div>
     <!-- Row 1: editor, output pane -->
-    <div class="flex flex-col order-1 relative" id="code_editor" {% if raw %} style="height: 14rem;" {% else %} style="min-height: 22rem;" {% endif %}>
+    <div class="flex flex-col order-1 relative" id="code_editor" {% if raw %} style="height: 14rem;" {% else %} style="height: 22rem;" {% endif %}>
         <div id="fold_in_toggle_container" class="hidden md:flex absolute z-10 top-16 ltr:-right-1 rtl:-left-1 cursor-pointer" onclick="hedyApp.hide_editor();">
          <div id="text_field" class="bg-green-500 text-white py-3 rounded-lg text-sm">
              <span>←</span>
