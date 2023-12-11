@@ -3453,11 +3453,6 @@ def transpile_inner(input_string, level, lang="en", populate_source_map=False, i
     convertToPython = TRANSPILER_LOOKUP[level]
     python = convertToPython(lookup_table, lang, numerals_language, is_debug).transform(abstract_syntax_tree)
 
-    if not unused_allowed:
-        for x in lookup_table:
-            if isinstance(x.name, str) and x.access_line is None and x.name != 'x__x__x__x':
-                raise hedy.exceptions.UnusedVariableException(0, 0, '', '')
-
     has_clear = "clear" in commands
     has_turtle = "forward" in commands or "turn" in commands or "color" in commands
     has_pygame = "ifpressed" in commands or "ifpressed_else" in commands or "assign_button" in commands
@@ -3465,7 +3460,14 @@ def transpile_inner(input_string, level, lang="en", populate_source_map=False, i
     if populate_source_map:
         source_map.set_python_output(python)
 
-    return ParseResult(python, source_map, has_turtle, has_pygame, has_clear, commands)
+    parse_result = ParseResult(python, source_map, has_turtle, has_pygame, has_clear, commands)
+
+    if not unused_allowed:
+        for x in lookup_table:
+            if isinstance(x.name, str) and x.access_line is None and x.name != 'x__x__x__x':
+                raise hedy.exceptions.UnusedVariableException(level, x.definition_line, x.name, fixed_code=python, fixed_result=parse_result)
+
+    return parse_result
 
 
 def execute(input_string, level):

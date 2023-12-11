@@ -624,6 +624,12 @@ class TestsLevel2(HedyTester):
 
         self.multi_level_tester(code=code, expected=expected, max_level=11, unused_allowed=True)
 
+    def test_assign_unused(self):
+        code = textwrap.dedent("""\
+            x is 10""")
+
+        self.multi_level_tester(max_level=3, code=code, exception=hedy.exceptions.UnusedVariableException)
+
     def test_assign_single_quoted_text(self):
         code = "naam is 'Felienne'"
         expected = "naam = '\\'Felienne\\''"

@@ -533,6 +533,8 @@ def parse():
                 translated_error = translate_error(ex.error_code, ex.arguments, keyword_lang)
                 if isinstance(ex, hedy.exceptions.InvalidSpaceException):
                     response['Warning'] = translated_error
+                elif isinstance(ex, hedy.exceptions.UnusedVariableException):
+                    response['Warning'] = translated_error
                 else:
                     response['Error'] = translated_error
                 response['Location'] = ex.error_location
@@ -565,7 +567,7 @@ def parse():
 
             if transpile_result.has_clear:
                 response['has_clear'] = True
-        except Exception:
+        except Exception as E:
             pass
 
         with querylog.log_time('detect_sleep'):
