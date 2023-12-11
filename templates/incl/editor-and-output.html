@@ -249,8 +249,8 @@
     <label for="developers_toggle" class="flex flex-row items-center justify-center cursor-pointer">
       <div class="relative">
         <input id="developers_toggle" type="checkbox" class="sr-only"
-        _="on load hedyApp.toggleDevelopersMode('load', false) end
-          on click hedyApp.toggleDevelopersMode('click', false) end">
+        _="on load hedyApp.toggleDevelopersMode('load', false)
+          on click hedyApp.toggleDevelopersMode('click', false)">
         <div class="w-10 h-4 bg-gray-400 rounded-full shadow-inner" id="dev_toggle"></div>
         <div
           id="toggle_circle"
@@ -260,7 +260,7 @@
     </label>
   </div>
 {% else %}
-<div _="on load hedyApp.toggleDevelopersMode('load', true) end"></div>
+<div _="on load hedyApp.toggleDevelopersMode('load', true)"></div>
 {% endif %}
 <script>
 // FIXME: Stop using inline JavaScript
