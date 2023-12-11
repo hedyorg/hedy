@@ -3007,7 +3007,8 @@ def transpile(input_string, level, lang="en", skip_faulty=True, is_debug=False, 
 
     try:
         source_map.set_skip_faulty(False)
-        transpile_result = transpile_inner(input_string, level, lang, populate_source_map=True, is_debug=is_debug, unused_allowed=unused_allowed)
+        transpile_result = transpile_inner(input_string, level, lang, populate_source_map=True,
+                                           is_debug=is_debug, unused_allowed=unused_allowed)
 
     except Exception as original_error:
         hedy_amount_lines = len(input_string.strip().split('\n'))
