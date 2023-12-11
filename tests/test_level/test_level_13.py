@@ -143,8 +143,9 @@ class TestsLevel13(HedyTester):
 
         output = textwrap.dedent("""\
         simple_function_1 - 1
-        simple_function_3 - 1
-        test1
+        simple_function_1 - 2
+        simple_function_2 - 1
+        B
         simple_function_3 - 2
         simple_function_3 - 2B
         1.0
