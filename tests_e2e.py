@@ -1630,7 +1630,7 @@ class TestCustomAdventures(AuthHelper):
         # WHEN attempting to update a non-existing adventure
         # THEN receive a 404 error from the server
         body = {
-            'id': '123',
+            'id': '123456',
             'name': 'panda',
             'classes': [],
             'level': '5',
@@ -1652,7 +1652,7 @@ class TestCustomAdventures(AuthHelper):
         # THEN receive an OK response from the server
         body = {
             'id': adventure_id,
-            'name': 'test_adventure',
+            'name': 'AdventureX',
             'classes': [],
             'level': '5',
             'content': 'This is just long enough!',
@@ -1677,7 +1677,7 @@ class TestCustomAdventures(AuthHelper):
         # THEN receive an OK response from the server
         body = {
             'id': '123',
-            'name': 'test_adventure',
+            'name': 'AdventureX',
             'classes': [class_id],
             'level': '5',
             'content': 'This is just long enough!',
