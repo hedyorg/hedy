@@ -915,6 +915,8 @@ class TestsLevel4(HedyTester):
     def test_clear(self):
         code = "clear"
         expected = textwrap.dedent("""\
+        time.sleep(0.1)
+        time.sleep(0.1)
         extensions.clear()
         try:
             # If turtle is being used, reset canvas
@@ -925,7 +927,10 @@ class TestsLevel4(HedyTester):
         except NameError:
             pass""")
 
-        self.multi_level_tester(code=code, expected=expected)
+        self.multi_level_tester(code=code,
+                                expected=expected,
+                                extra_check_function=(lambda result: result.has_clear)
+                                )
 
     def test_source_map(self):
         code = textwrap.dedent("""\
@@ -949,3 +954,13 @@ class TestsLevel4(HedyTester):
 
         self.single_level_tester(code, expected=expected_code)
         self.source_map_tester(code=code, expected_source_map=expected_source_map)
+
+    def test_undefined_list_access(self):
+        code = textwrap.dedent("""\
+        fortunes is you will slip on a banana peel, millionaire, death
+        print fortunes at dxd""")
+
+        self.multi_level_tester(code=code,
+                                exception=hedy.exceptions.UndefinedVarException,
+                                skip_faulty=False,
+                                max_level=11)

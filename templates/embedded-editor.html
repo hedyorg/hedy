@@ -13,7 +13,7 @@
         <div id="editor-area" class="w-full flex flex-grow gap-4 mt-0 mb-0">
             <div class="flex flex-col w-full" id="code_editor">
                 <div class="w-full flex-1 flex flex-col">
-                    <div id="editor" style="background: #272822; font-size:0.95em; color: white" blurred="false" class="w-full flex-1 text-lg rounded" {% if readOnly %}data-readonly="true"{% endif %}>{{program}}</div>
+                    <div id="editor" style="background: #272822; font-size:0.95em; color: white" blurred="false" class="w-full flex-1 text-lg rounded" {% if readOnly %}data-readonly="true"{% endif %}></div>
                     <div id="errorbox"
                       class="flex-0 z-20 mt-0 bg-red-100 border-t-4 border-red-500 rounded-b text-red-900 px-4 py-3 shadow-md" role="alert"
                       style="display: none;">
@@ -130,18 +130,16 @@
 
             // Dynamically add the gutter to the editor when readOnly
             {% if readOnly %}
-                const editor = ace.edit('editor');
-                editor.setOption("showGutter", true);
+                hedyApp.theGlobalEditor.isReadOnly = true;
             {% endif %}
 
             // Listen to message from the host to dynamically toggle readOnly mode
             window.addEventListener('message', function (message) {
                 if (message.data.mode) {
-                    const editor = ace.edit('editor');
                     if (message.data.mode == 'read') {
-                        editor.setReadOnly(true);
+                        hedyApp.theGlobalEditor.isReadOnly = true;
                     } else if (message.data.mode == 'edit') {
-                        editor.setReadOnly(false);
+                        hedyApp.theGlobalEditor.isReadOnly = false;
                     }
                 }
             });
@@ -158,7 +156,7 @@
             function sendChangeEvent() {
                 window.parent.postMessage({
                     'change': true,
-                    'program': hedyApp.returnLinesWithoutBreakpoints(hedyApp.theGlobalEditor)
+                    'program': hedyApp.getEditorContents()
                 }, '*')
             }
 

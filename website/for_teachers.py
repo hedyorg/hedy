@@ -175,11 +175,11 @@ class ForTeachersModule(WebsiteModule):
             achievement = json.dumps(achievement)
 
         invites = []
-        for invite in self.db.get_class_invites(Class["id"]):
+        for invite in self.db.get_class_invitations(Class["id"]):
             invites.append(
                 {
                     "username": invite["username"],
-                    "invited_as": invite["invited_as"],
+                    "invited_as_text": invite["invited_as_text"],
                     "timestamp": utils.localized_date_format(invite["timestamp"], short_format=True),
                     "expire_timestamp": utils.localized_date_format(invite["ttl"], short_format=True),
                 }
@@ -261,7 +261,8 @@ class ForTeachersModule(WebsiteModule):
                  }
             )
 
-        adventure_names = hedy_content.Adventures(g.lang).get_adventure_names()
+        keyword_lang = g.keyword_lang
+        adventure_names = hedy_content.Adventures(g.lang).get_adventure_names(keyword_lang)
 
         next_page_url = url_for('programs_page', **dict(request.args, page=result.next_page_token)
                                 ) if result.next_page_token else None
@@ -561,7 +562,7 @@ class ForTeachersModule(WebsiteModule):
         for level, level_default_adventures in hedy_content.ADVENTURE_ORDER_PER_LEVEL.items():
             for short_name in level_default_adventures:
                 adventure = SortedAdventure(short_name=short_name,
-                                            long_name=adventure_names[short_name],
+                                            long_name=adventure_names.get(short_name, short_name),
                                             is_teacher_adventure=False,
                                             is_command_adventure=short_name in hedy_content.KEYWORDS_ADVENTURES)
                 default_adventures[level].add(adventure)
@@ -614,7 +615,7 @@ class ForTeachersModule(WebsiteModule):
             for adventure in default_adventures:
                 db_adventures[str(lvl)].append({'name': adventure, 'from_teacher': False})
                 sorted_adventure = SortedAdventure(short_name=adventure,
-                                                   long_name=adventure_names[adventure],
+                                                   long_name=adventure_names.get(adventure, adventure),
                                                    is_command_adventure=adventure in hedy_content.KEYWORDS_ADVENTURES,
                                                    is_teacher_adventure=False)
                 adventures[lvl].append(sorted_adventure)

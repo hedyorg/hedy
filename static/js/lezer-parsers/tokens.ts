@@ -434,7 +434,7 @@ const keywordToToken: Record<number, tokenSpecilizer> = {
             "for": for12,
             "to": to12,
             "range": range12,
-            "returns": returns12,
+            "return": returns12,
             "call": call12,
             "define": define12,
             "with": with12
@@ -468,7 +468,7 @@ const keywordToToken: Record<number, tokenSpecilizer> = {
             "for": for13,
             "to": to13,
             "range": range13,
-            "returns": returns13,
+            "return": returns13,
             "call": call13,
             "define": define13,
             "with": with13
@@ -502,7 +502,7 @@ const keywordToToken: Record<number, tokenSpecilizer> = {
             "for": for14,
             "to": to14,
             "range": range14,
-            "returns": returns14,
+            "return": returns14,
             "call": call14,
             "define": define14,
             "with": with14
@@ -539,7 +539,7 @@ const keywordToToken: Record<number, tokenSpecilizer> = {
             "for": for15,
             "to": to15,
             "range": range15,
-            "returns": returns15,
+            "return": returns15,
             "call": call15,
             "define": define15,
             "with": with15
@@ -577,7 +577,7 @@ const keywordToToken: Record<number, tokenSpecilizer> = {
             "for": for16,
             "to": to16,
             "range": range16,
-            "returns": returns16,
+            "return": returns16,
             "call": call16,
             "define": define16,
             "with": with16
@@ -614,7 +614,7 @@ const keywordToToken: Record<number, tokenSpecilizer> = {
             "for": for17,
             "to": to17,
             "range": range17,
-            "returns": returns17,
+            "return": returns17,
             "call": call17,
             "define": define17,
             "with": with17
@@ -660,7 +660,7 @@ const keywordToToken: Record<number, tokenSpecilizer> = {
             "times": times18,
             "range": range18,
             "while": whiles18,
-            "returns": returns18,
+            "return": returns18,
             "for": fors18,
             "elif": elif18
         },
