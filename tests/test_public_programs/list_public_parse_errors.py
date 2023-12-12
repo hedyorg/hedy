@@ -73,4 +73,4 @@ class TestsPublicPrograms(HedyTester):
                         print(f'{error_message} at line {location}')
                         raise PE
             except exceptions.HedyException:
-                pass # we only care about parse errors
+                pass  # we only care about parse errors
