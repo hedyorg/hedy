@@ -1645,7 +1645,8 @@ class TestCustomAdventures(AuthHelper):
 
         # WHEN attempting to create a valid adventure
         # THEN receive an OK response from the server
-        adventure_id = self.get_data('for-teachers/customize-adventure/123', expect_http_code=200)
+        adventure_id = '123'
+        self.get_data('for-teachers/customize-adventure/' + adventure_id, expect_http_code=200)
 
         # WHEN attempting to update an adventure with a valid body
         # THEN receive an OK response from the server
