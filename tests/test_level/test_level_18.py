@@ -154,6 +154,7 @@ class TestsLevel18(HedyTester):
         self.multi_level_tester(
             code=code,
             expected=expected,
+            translate=False,
             expected_commands=['input', 'if', 'print', 'print', 'print', 'print'],
             extra_check_function=self.is_not_turtle()
         )
