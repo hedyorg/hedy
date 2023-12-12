@@ -359,7 +359,8 @@ class TestsLevel8(HedyTester):
 
         # gives the right exception for all levels even though it misses brackets
         # because the indent check happens before parsing
-        self.multi_level_tester(code=code, exception=hedy.exceptions.NoIndentationException)
+        self.multi_level_tester(code=code,
+                                exception=hedy.exceptions.NoIndentationException)
 
     def test_if_equality_print_else_print(self):
         code = textwrap.dedent("""\
