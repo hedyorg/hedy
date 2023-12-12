@@ -195,6 +195,30 @@ class TestsLevel8(HedyTester):
 
         self.multi_level_tester(max_level=11, code=code, expected=expected, output='gelijkspel!')
 
+    def test_unquoted_print_in_body(self):
+        code = textwrap.dedent("""\
+        svar = ask 'Vad är 5 plus 5?'
+        if svar is 10
+            print 'Bra jobbat!
+            print 'Svaret var faktiskt ' svar""")
+
+        self.multi_level_tester(code=code,
+                                skip_faulty=False,
+                                exception=hedy.exceptions.UnquotedTextException,
+                                max_level=16)
+
+    def test_wrongly_quoted_print_in_body(self):
+        code = textwrap.dedent("""\
+        svar = ask 'Vad är 5 plus 5?'
+        if svar is 10
+            print 'Bra jobbat!"
+            print 'Svaret var faktiskt ' svar""")
+
+        self.multi_level_tester(code=code,
+                                skip_faulty=False,
+                                exception=hedy.exceptions.UnquotedTextException,
+                                max_level=16)
+
     def test_if_in_list_print(self):
         code = textwrap.dedent("""\
         items is red, green
@@ -335,7 +359,8 @@ class TestsLevel8(HedyTester):
 
         # gives the right exception for all levels even though it misses brackets
         # because the indent check happens before parsing
-        self.multi_level_tester(code=code, exception=hedy.exceptions.NoIndentationException)
+        self.multi_level_tester(code=code,
+                                exception=hedy.exceptions.NoIndentationException)
 
     def test_if_equality_print_else_print(self):
         code = textwrap.dedent("""\

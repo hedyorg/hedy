@@ -189,7 +189,7 @@ class TestsLevel5(HedyTester):
     def test_if_equality_unquoted_rhs_with_space_and_following_command_print_gives_error(self):
         code = textwrap.dedent("""\
         naam is James
-        if naam is James Bond print 'shaken' 
+        if naam is James Bond print 'shaken'
         print naam
         prind skipping""")
 
@@ -200,7 +200,7 @@ class TestsLevel5(HedyTester):
         pass""")
 
         skipped_mappings = [
-            SkippedMapping(SourceRange(2, 1, 2, 59), hedy.exceptions.UnquotedEqualityCheckException),
+            SkippedMapping(SourceRange(2, 1, 2, 58), hedy.exceptions.UnquotedEqualityCheckException),
             SkippedMapping(SourceRange(4, 1, 4, 15), hedy.exceptions.InvalidCommandException)
         ]
 

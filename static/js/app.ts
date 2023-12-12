@@ -574,7 +574,7 @@ export async function runit(level: number, lang: string, disabled_prompt: string
       program_data = theGlobalDebugger.get_program_data();
     }
     
-    runPythonProgram(program_data.Code, program_data.source_map, program_data.has_turtle, program_data.has_pygame, program_data.has_sleep, program_data.Warning, cb, run_type).catch(function(err: any) {
+    runPythonProgram(program_data.Code, program_data.source_map, program_data.has_turtle, program_data.has_pygame, program_data.has_sleep, program_data.has_clear, program_data.Warning, cb, run_type).catch(function(err: any) {
       // The err is null if we don't understand it -> don't show anything
       if (err != null) {
         error.show(ClientMessages['Execute_error'], err.message);
@@ -827,7 +827,7 @@ window.onerror = function reportClientException(message, source, line_number, co
   });
 }
 
-export function runPythonProgram(this: any, code: string, sourceMap: any, hasTurtle: boolean, hasPygame: boolean, hasSleep: boolean, hasWarnings: boolean, cb: () => void, run_type: "run" | "debug" | "continue") {
+export function runPythonProgram(this: any, code: string, sourceMap: any, hasTurtle: boolean, hasPygame: boolean, hasSleep: boolean, hasClear: boolean, hasWarnings: boolean, cb: () => void, run_type: "run" | "debug" | "continue") {
   // If we are in the Parsons problem -> use a different output
   let outputDiv = $('#output');
   let skip_faulty_found_errors = false;
@@ -1034,13 +1034,13 @@ export function runPythonProgram(this: any, code: string, sourceMap: any, hasTur
       }
   
       // Check if the program was correct but the output window is empty: Return a warning
-      if ($('#output').is(':empty') && $('#turtlecanvas').is(':empty')) {
+      if ((!hasClear) && $('#output').is(':empty') && $('#turtlecanvas').is(':empty')) {
         pushAchievement("error_or_empty");
         error.showWarning(ClientMessages['Transpile_warning'], ClientMessages['Empty_output']);        
         return;
       }
       if (!hasWarnings && code !== last_code) {
-          showSuccesMessage();
+          showSuccesMessage(); //FH nov 2023: typo in success :)
           last_code = code;
       }
       if (cb) cb ();
@@ -1088,7 +1088,8 @@ export function runPythonProgram(this: any, code: string, sourceMap: any, hasTur
       Code: code,
       source_map: sourceMap,
       has_turtle: hasTurtle,
-      has_pygame: hasPygame,
+      has_pygame: hasPygame, //here too: where is hassleep?
+      has_clear: hasClear,
       Warning: hasWarnings
     });
     
@@ -1497,6 +1498,10 @@ export function get_active_and_trimmed_code() {
   return theGlobalEditor.getActiveContents(debugLine);
 }
 
+export function getEditorContents() {
+  return theGlobalEditor.contents;
+}
+
 export function confetti_cannon(){
   const canvas = document.getElementById('confetti');
   if (canvas) {
@@ -1566,36 +1571,83 @@ function createModal(level:number ){
   modal.repair(editor, 0, title);
 }
 
-export function toggle_developers_mode(enforced: boolean) {
-  if ($('#developers_toggle').is(":checked") || enforced) {
-      $('#adventures-tab').hide();
-      $('#blur_toggle_container').show();
+export function toggleDevelopersMode(event='click', enforce_dev_mode:boolean) {
+  let dev_mode = window.localStorage.getItem('developer_mode') === 'true';
+  if (enforce_dev_mode || (event === 'click' && !dev_mode) || (event === 'load' && dev_mode)) {
+    if (event === 'click') {
+      window.localStorage.setItem('developer_mode', 'true');
       pushAchievement("lets_focus");
+    } else {
+      $('#developers_toggle').prop('checked', true);
+    }
+    const adventures = document.getElementById('adventures');
+    const editorArea = document.getElementById('editor-area');
+    const codeEditor = document.getElementById('code_editor');
+    const codeOutput = document.getElementById('code_output');
+    if (adventures && editorArea && codeEditor && codeOutput && theGlobalEditor) {
+      adventures.style.display = 'none';
+      editorArea.classList.remove('mt-5');
+      codeOutput.style.height = '36em';
+      theGlobalEditor.resize(576);
+    }
   } else {
-      $('#blur_toggle_container').hide();
-      $('#adventures-tab').show();
-  }
+    if (event === 'click') {
+      window.localStorage.setItem('developer_mode', 'false');
+    }
+    const adventures = document.getElementById('adventures');
+    const editorArea = document.getElementById('editor-area');
+    const codeEditor = document.getElementById('code_editor');
+    const codeOutput = document.getElementById('code_output');
+    if (adventures && editorArea && codeEditor && codeOutput && theGlobalEditor) {
+      adventures.style.display = 'block';
+      editorArea.classList.add('mt-5');
+      codeEditor.style.height = '22rem';
+      codeOutput.style.height = '22rem';
+      theGlobalEditor.resize(352);
+    }
+  } 
+}
 
-  if ($('#adventures-tab').is(":hidden")) {
-    $('#editor-area').removeClass('mt-5');
-    $('#code_editor').css('height', 36 + "em");
-    $('#code_output').css('height', 36 + "em");
-    theGlobalEditor.resize(576);
-  } else {
-    $('#editor-area').addClass('mt-5');
-    $('#code_editor').height('22rem');
-    $('#code_output').height('22rem');
-    theGlobalEditor.resize(352);
+/**
+ * Run a code block, show an error message if we catch an exception
+ */
+export async function tryCatchErrorBox(cb: () => void | Promise<void>) {
+  try {
+    return await cb();
+  } catch (e: any) {
+    console.log('Error', e);
+    error.show(ClientMessages['Transpile_error'], e.message);
   }
 }
 
-export function toggle_keyword_language(lang: string) {
-  const hash = window.location.hash;
-  const queryString = window.location.search;
-  const urlParams = new URLSearchParams(queryString);
-  urlParams.set('keyword_language', lang)
-  window.location.search = urlParams.toString()
-  window.open(hash, "_self");
+export function toggle_keyword_language(current_lang: string, new_lang: string) {
+  tryCatchErrorBox(async () => {
+    const response = await postJsonWithAchievements('/translate_keywords', {
+      code: theGlobalEditor.contents,
+      start_lang: current_lang,
+      goal_lang: new_lang,
+      level: theLevel,
+    });
+
+  if (response.success) {
+    const code = response.code
+    theGlobalEditor.contents = code;
+    const saveName = saveNameFromInput();
+
+    // save translated code to local storage
+    // such that it can be fetched after reload
+    localSave(currentTabLsKey(), { saveName, code });
+    $('#editor').attr('lang', new_lang);
+
+    // update the whole page (example codes)
+    const hash = window.location.hash;
+    const queryString = window.location.search;
+    const urlParams = new URLSearchParams(queryString);
+    urlParams.set('keyword_language', new_lang)
+    window.location.search = urlParams.toString()
+    window.open(hash, "_self");
+    }
+  });
 }
 
 export function toggle_blur_code() {
@@ -1652,22 +1704,6 @@ async function postJsonWithAchievements(url: string, data: any): Promise<any> {
   return response;
 }
 
-export function change_keyword_language(start_lang: string, new_lang: string) {
-  tryCatchPopup(async () => {
-    const response = await postJsonWithAchievements('/translate_keywords', {
-      code: theGlobalEditor.contents,
-      start_lang: start_lang,
-      goal_lang: new_lang,
-      level: theLevel,
-    });
-
-    if (response.success) {
-      theGlobalEditor.contents = response.code;
-      $('#editor').attr('lang', new_lang);
-      update_view('main_editor_keyword_selector', new_lang);
-    }
-  });
-}
 
 function update_view(selector_container: string, new_lang: string) {
   $('#' + selector_container + ' > div').map(function() {

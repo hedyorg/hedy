@@ -63,7 +63,7 @@ class InvalidSpaceException(WarningException):
                          level=level,
                          line_number=line_number,
                          fixed_code=fixed_code,
-                         fixed_result=fixed_result)
+                         fixed_result=fixed_result)  # what is the difference??
 
 
 class ParseException(HedyException):
@@ -238,6 +238,12 @@ class MisspelledAtCommand(HedyException):
         super().__init__('Misspelled At Command',
                          command=command,
                          invalid_argument=arg1,
+                         line_number=line_number)
+
+
+class NonDecimalVariable(HedyException):
+    def __init__(self, line_number):
+        super().__init__('Non Decimal Variable',
                          line_number=line_number)
 
 
