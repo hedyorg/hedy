@@ -4,10 +4,10 @@
 name: Cypress tests
 
 on:
-  push:
-    branches: [ main, adventure-all-levels ]
-  pull_request:
-    branches: [ main ]
+  workflow_run:
+    workflows: [Unit tests]
+    type:
+      - completed
 
 jobs:
   # This identifier gets used in .mergify.yml
@@ -39,9 +39,6 @@ jobs:
     - name: Feed the dev database
       # This replaces the json file, do it before starting the server
       run: ./feed_dev_database.sh
-
-    - name: Bundle files
-      run: build-tools/github/validate-typescript
 
     - name: Start the server
       # Runs in the background
