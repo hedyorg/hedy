@@ -6,7 +6,7 @@ name: Cypress tests
 on:
   workflow_run:
     workflows: ["Unit tests"]
-    type:
+    types:
       - completed
 
 jobs:
