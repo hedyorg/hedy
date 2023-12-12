@@ -95,8 +95,7 @@
             </tbody>
           </table>
         {% endif %}
-        <button class="green-btn mt-4" id="create_adventure_button" onclick='hedyApp.create_adventure({{_('adventure_prompt')|default(None)|tojson}})'
-        {% if second_teacher and role == 'viewer' %}disabled{% endif %}>{{_('create_adventure')}}</button>
+        <a class="green-btn mt-4" href="for-teachers/customize-adventure/{{newclass_id}}" class="no-underline" data-cy="edit-link"{% if second_teacher and role == 'viewer' %}disabled{% endif %}>{{_('create_adventure')}}</a>
     </div>
     <div id="slides" class="flex flex-col items-center border-b gap-3">
       <div class="flex flex-row gap-3 items-center">

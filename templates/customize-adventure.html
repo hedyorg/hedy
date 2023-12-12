@@ -2,7 +2,7 @@
 
 {% block regular_content %}
 <div class="flex flex-col gap-2">
-    <h2>{{_('customize_adventure')}}: {{adventure.name}}</h2>
+    <h2>{{_('customize_adventure')}}</h2>
     <div class="border-gray-400 border rounded-lg p-4">
         <form onsubmit="event.preventDefault (); hedyApp.update_adventure('{{ adventure.id }}', {% if adventure.content|length > 0 %}false{% else %}true{% endif %}, '{{_('update_adventure_prompt')}}')">
             <div class="flex flex-col lg:flex-row gap-4">
@@ -10,7 +10,7 @@
                     <h3 class="text-center mt-0 mb-4">{{_('general_settings')}}</h3>
                     <div class="flex flex-row items-center mb-4">
                         <label for="name" class="inline-block w-40 text-xl">{{_('name')}}</label>
-                        <input id="custom_adventure_name" required value="{{ adventure.name }}" class="block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 ltr:pr-8 rtl:pl-8 rounded">
+                        <input id="custom_adventure_name" required value="{{ adventure.name }}" class="block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 ltr:pr-8 rtl:pl-8 rounded"{% if focus %}autofocus{% endif %}>
                     </div>
                     <div class="flex flex-row items-center mb-4">
                         <label for="level" class="inline-block w-40 text-xl">{{_('level')}}</label>

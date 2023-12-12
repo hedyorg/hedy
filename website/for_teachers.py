@@ -76,6 +76,7 @@ class ForTeachersModule(WebsiteModule):
             teacher_adventures=adventures,
             welcome_teacher=welcome_teacher,
             slides=slides,
+            newclass_id=uuid.uuid4().hex,
             javascript_page_options=dict(
                 page='for-teachers',
                 welcome_teacher=welcome_teacher,
@@ -852,9 +853,11 @@ class ForTeachersModule(WebsiteModule):
     @route("/customize-adventure/<adventure_id>", methods=["GET"])
     @requires_teacher
     def get_adventure_info(self, user, adventure_id):
+        focus = False
         adventure = self.db.get_adventure(adventure_id)
         if not adventure:
-            return utils.error_page(error=404, ui_message=gettext("no_such_adventure"))
+            adventure = self.create_adventure(user, adventure_id)
+            focus = True
         if adventure["creator"] != user["username"] and not is_teacher(user):
             return utils.error_page(error=403, ui_message=gettext("retrieve_adventure_error"))
         # Now it gets a bit complex, we want to get the teacher classes as well as the customizations
@@ -878,6 +881,7 @@ class ForTeachersModule(WebsiteModule):
             current_page="for-teachers",
             # TODO: update tags to be {name, canEdit} where canEdit is true if currentUser is the creator.
             adventure_tags=adventure.get("tags", []),
+            focus=focus,
         )
 
     @route("/customize-adventure", methods=["POST"])
@@ -972,32 +976,21 @@ class ForTeachersModule(WebsiteModule):
             return gettext("something_went_wrong_keyword_parsing"), 400
         return {"code": code}, 200
 
-    @route("/create_adventure", methods=["POST"])
-    @requires_teacher
-    def create_adventure(self, user):
-        body = request.json
-        # Validations
-        if not isinstance(body, dict):
-            return gettext("ajax_error"), 400
-        if not isinstance(body.get("name"), str):
-            return gettext("adventure_name_invalid"), 400
-        if len(body.get("name")) < 1:
-            return gettext("adventure_empty"), 400
-
+    def create_adventure(self, user, adventure_id):
+        name = "AdventureX"
         adventures = self.db.get_teacher_adventures(user["username"])
         for adventure in adventures:
-            if adventure["name"] == body["name"]:
-                return gettext("adventure_duplicate"), 400
-
+            if adventure["name"] == name:
+                name += 'X'
+                continue
         adventure = {
-            "id": uuid.uuid4().hex,
+            "id": adventure_id,
             "date": utils.timems(),
             "creator": user["username"],
-            "name": body["name"],
+            "name": name,
             "level": 1,
             "content": "",
             "language": g.lang,
         }
-
         self.db.store_adventure(adventure)
-        return {"id": adventure["id"]}, 200
+        return adventure
