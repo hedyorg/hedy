@@ -23,4 +23,5 @@ export * from './browser-helpers/unsaved-changes';
 export * from './initialize';
 export * from './debugging';
 export { getPreviousAndNext } from './tabs';
+export * from './public-adventures';
 export { loadParsonsExercise } from './parsons';

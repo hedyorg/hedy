@@ -1263,6 +1263,12 @@ def valid_echo(ast):
 class IsComplete(Filter):
     def __init__(self, level):
         self.level = level
+
+    # ah so we actually have 2 types of "error productions"!
+    # true ones that live in the grammar like error_ask_dep_2
+    # and these ones where the parser combines valid and not valid
+    # versions, like print: _PRINT (text)?
+
     # print, ask and echo can miss arguments and then are not complete
     # used to generate more informative error messages
     # tree is transformed to a node of [True] or [False, args, line_number]
