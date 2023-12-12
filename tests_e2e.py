@@ -1510,7 +1510,7 @@ class TestCustomAdventures(AuthHelper):
 
         # WHEN trying to create a custom adventure
         # THEN receive a forbidden response code from the server
-        self.post_data('for-teachers/customize-adventure', {'id': 123}, expect_http_code=403)
+        self.post_data('for-teachers/customize-adventure', '123', expect_http_code=403)
 
     def test_invalid_create_adventure(self):
         # GIVEN a new teacher
@@ -1530,9 +1530,9 @@ class TestCustomAdventures(AuthHelper):
         # WHEN attempting to create an adventure that already exists
         # THEN receive an 400 error from the server
         self.post_data('for-teachers/customize-adventure',
-                       {123}, expect_http_code=200)
+                       '123', expect_http_code=200)
         self.post_data('for-teachers/customize-adventure',
-                       {'123'}, expect_http_code=400)
+                       '123', expect_http_code=400)
 
     def test_create_adventure(self):
         # GIVEN a new teacher
@@ -1564,7 +1564,7 @@ class TestCustomAdventures(AuthHelper):
 
         # WHEN attempting to create a valid adventure
         # THEN receive an OK response with the server
-        adventure_id = {'id': '123'}
+        adventure_id = '123'
         self.post_data('for-teachers/customize-adventure', adventure_id, expect_http_code=200)
 
         # WHEN attempting to view the adventure using the id from the returned body
@@ -1578,7 +1578,7 @@ class TestCustomAdventures(AuthHelper):
         # WHEN attempting to create a valid adventure
         # THEN receive an OK response with the server
         adventure_id = self.post_data('for-teachers/customize-adventure',
-                                      {'id': '123456'}, expect_http_code=200)
+                                      '123456', expect_http_code=200)
 
         # WHEN attempting to updating an adventure with invalid data
         invalid_bodies = [
@@ -1654,7 +1654,7 @@ class TestCustomAdventures(AuthHelper):
 
         # WHEN attempting to create a valid adventure
         # THEN receive an OK response from the server
-        adventure_id = {'id': '123'}
+        adventure_id = '123'
         self.post_data('for-teachers/customize-adventure',
                        adventure_id, expect_http_code=200)
 
@@ -1676,7 +1676,7 @@ class TestCustomAdventures(AuthHelper):
 
         # WHEN attempting to create a valid adventure
         # THEN receive an OK response from the server
-        adventure_id = {'id': '123'}
+        adventure_id = '123'
         self.post_data('for-teachers/customize-adventure',
                        adventure_id, expect_http_code=200)
 
@@ -1706,7 +1706,7 @@ class TestCustomAdventures(AuthHelper):
 
         # WHEN attempting to create a valid adventure
         # THEN receive an OK response from the server
-        adventure_id = {'id': '123'}
+        adventure_id = '123'
         self.post_data('for-teachers/customize-adventure',
                        adventure_id, expect_http_code=200)
 
