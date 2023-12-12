@@ -4,10 +4,11 @@
 name: Cypress tests
 
 on:
-  workflow_run:
-    workflows: ["Unit tests"]
-    types:
-      - completed
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
 
 jobs:
   # This identifier gets used in .mergify.yml
@@ -39,6 +40,12 @@ jobs:
     - name: Feed the dev database
       # This replaces the json file, do it before starting the server
       run: ./feed_dev_database.sh
+
+    - name: Bundle files
+      # Generates js and css bundles.
+      run: |
+        build-tools/heroku/generate-typescript
+        build-tools/heroku/tailwind/generate-development-css
 
     - name: Start the server
       # Runs in the background
