@@ -1,3 +1,4 @@
+import random
 import textwrap
 import pickle
 import hashlib
@@ -264,25 +265,6 @@ class HedyTester(unittest.TestCase):
                     if expected is not None:
                         self.assertEqual(expected, result.code)
 
-                    if translate:
-                        if lang == 'en':  # if it is English
-                            # and if the code transpiles (evidenced by the fact that we reach this
-                            # line) we should be able to translate too
-
-                            # TODO FH Feb 2022: we pick Dutch here not really fair or good practice :D
-                            # Maybe we should do a random language?
-                            in_dutch = hedy_translation.translate_keywords(
-                                code, from_lang=lang, to_lang="nl", level=self.level)
-                            back_in_english = hedy_translation.translate_keywords(
-                                in_dutch, from_lang="nl", to_lang=lang, level=self.level).strip()
-                            self.assert_translated_code_equal(code, back_in_english)
-                        else:  # not English? translate to it and back!
-                            in_english = hedy_translation.translate_keywords(
-                                code, from_lang=lang, to_lang="en", level=self.level)
-                            back_in_org = hedy_translation.translate_keywords(
-                                in_english, from_lang="en", to_lang=lang, level=self.level)
-                            self.assert_translated_code_equal(code, back_in_org)
-
                     all_commands = result.commands
                     if expected_commands is not None:
                         self.assertEqual(expected_commands, all_commands)
@@ -295,6 +277,19 @@ class HedyTester(unittest.TestCase):
                         self.assertEqual(output, HedyTester.run_code(result))
                         self.assertTrue(extra_check_function(result))
 
+            # whether or not the code should give an exception,
+            # if it parses, it should always be possible
+            # to translate it, unless there is an NoIndentationException
+            # because in that case our preprocessor throws the error so there is no parsetree
+            # (todo maybe parse first?)
+
+            skipped_exceptions = [hedy.exceptions.ParseException, hedy.exceptions.NoIndentationException,
+                                  hedy.exceptions.IndentationException, hedy.exceptions.LockedLanguageFeatureException,
+                                  hedy.exceptions.CodePlaceholdersPresentException]
+
+            if translate and exception not in skipped_exceptions and skipped_mappings is None:
+                self.verify_translation(code, lang, level)
+
             # all ok? -> save hash!
             hash_of_run = create_hash(get_hedy_source_hash(), test_hash)
             if hash_of_run:
@@ -302,6 +297,30 @@ class HedyTester(unittest.TestCase):
                 os.makedirs(os.path.dirname(filename), mode=0o777, exist_ok=True)
                 with open(filename, "w") as fp:
                     fp.write("")
+
+    def verify_translation(self, code, lang, level):
+        if lang == 'en':  # if it is English
+
+            # pick a random language to translate to
+            # all = list(ALL_KEYWORD_LANGUAGES.keys()) <- this no longer really holds
+            # all keyword languages! TODO fix or remove
+
+            # a nice mix of latin/non-latin and l2r and r2l!
+            all = ['ar', 'ca', 'sq', 'bg', 'es', 'fi', 'fr', 'he', 'nl', 'hi', 'ur', 'te', 'th', 'vi', 'uk', 'tr']
+
+            to_lang = random.choice(all)
+
+            translated = hedy_translation.translate_keywords(
+                code, from_lang=lang, to_lang=to_lang, level=level)
+            back_in_english = hedy_translation.translate_keywords(
+                translated, from_lang=to_lang, to_lang=lang, level=level).strip()
+            self.assert_translated_code_equal(code, back_in_english)
+        else:  # not English? translate to it and back!
+            in_english = hedy_translation.translate_keywords(
+                code, from_lang=lang, to_lang="en", level=level)
+            back_in_org = hedy_translation.translate_keywords(
+                in_english, from_lang="en", to_lang=lang, level=level)
+            self.assert_translated_code_equal(code, back_in_org)
 
     def source_map_tester(self, code, expected_source_map: dict):
         result = hedy.transpile(code, self.level, 'en')
