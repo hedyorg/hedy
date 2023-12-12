@@ -854,6 +854,11 @@ class ForTeachersModule(WebsiteModule):
     @requires_teacher
     def get_adventure_info(self, user, adventure_id):
         focus = False
+        if not adventure_id:
+            return gettext("adventure_empty"), 400
+        if not isinstance(adventure_id, str):
+            return gettext("adventure_name_invalid"), 400
+
         adventure = self.db.get_adventure(adventure_id)
         if not adventure:
             adventure = self.create_adventure(user, adventure_id)
