@@ -8,8 +8,8 @@ msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
 "POT-Creation-Date: 2023-12-08 17:32-0400\n"
-"PO-Revision-Date: 2023-12-09 11:02+0000\n"
-"Last-Translator: Prefill add-on <noreply-addon-prefill@weblate.org>\n"
+"PO-Revision-Date: 2023-12-11 11:54+0000\n"
+"Last-Translator: \"Zoom.Quiet\" <zoomquiet+gh@gmail.com>\n"
 "Language-Team: zh_Hans <LL@li.org>\n"
 "Language: zh_Hans\n"
 "MIME-Version: 1.0\n"
@@ -20,10 +20,10 @@ msgstr ""
 "Generated-By: Babel 2.11.0\n"
 
 msgid "Access Before Assign"
-msgstr "你试图在第 {access_line_number} 行使用变量 {name} ，但在第 {definition_line_number} 行才设置了它。使用的变量要事先设置。"
+msgstr "您尝试在第 {access_line_number} 行使用变量 {name}，但在第 {definition_line_number} 行设置了它。要在使用变量之前设置它。"
 
 msgid "Cyclic Var Definition"
-msgstr "如果你想在是（is）命令的右侧使用变量 {variable}，你需要先给这个变量赋值。"
+msgstr "需要先设置名称 {variable}，然后才能在 {is} 命令的右侧使用它。"
 
 msgid "Has Blanks"
 msgstr "你的代码还不完整。你需要在空白的地方填上代码。"
@@ -32,7 +32,7 @@ msgid "Incomplete"
 msgstr "呀！你漏写了一些代码！在第{line_number}行，你需要在{incomplete_command}后面输入文字。"
 
 msgid "Incomplete Repeat"
-msgstr "看上去你忘了在第{line_number}行给{command}用重复命令了。"
+msgstr "您似乎忘记使用在第 {line_number} 行使用的 {repeat} 命令。"
 
 msgid "Invalid"
 msgstr "{invalid_command} 不是海蒂第{level}关里的命令。你是不是想写 {guessed_command}？"
@@ -44,7 +44,7 @@ msgid "Invalid Argument Type"
 msgstr "你不能在{command}中使用{invalid_argument}，因为它是个{invalid_type}。试着把{invalid_argument}改成{allowed_types}。"
 
 msgid "Invalid At Command"
-msgstr "从 16 级开始，不能使用 {at} 命令。 您可以使用方括号来使用列表中的元素，例如 `friends[i]`、`lucky_numbers[{random}]`。"
+msgstr "从 16 级开始，不能使用 {command} 命令。 您可以使用方括号来使用列表中的元素，例如“friends[i]”、“lucky_numbers[{random}]”。"
 
 msgid "Invalid Space"
 msgstr "呀！你在第{line_number}开头加了一个空格。空格会让电脑产生困惑，你不能能删除这个空格？"
@@ -56,7 +56,7 @@ msgid "Locked Language Feature"
 msgstr "你正在使用{concept}！这很棒，但是{concept}还没有解锁！它会在后续关卡中解锁。"
 
 msgid "Lonely Echo"
-msgstr "你在`ask`之前使用了`echo`，或者根本没有使用`ask`。必须先`ask`，再`echo`。"
+msgstr "您在 {ask} 之前使用了 {echo}，或者在没有 {ask} 的情况下使用了 {echo}。 在 {echo} 之前要放置一个 {ask}。"
 
 msgid "Lonely Text"
 msgstr "看来你忘记在第{line_number}行的文字里使用指令"
@@ -67,16 +67,14 @@ msgstr "看上去你忘记在第{line_number}行写命令了。"
 msgid "Missing Inner Command"
 msgstr "看上去你忘了在第{line_number}行的{command}这一句里加上一个命令。"
 
-#, fuzzy
 msgid "Misspelled At Command"
-msgstr "It looks like you might have misspelled the {command} command, instead you wrote {invalid_argument} in line {line_number}."
+msgstr "看来您可能拼错了 {command} 命令，而是在第 {line_number} 行中写了 {invalid_argument}。"
 
 msgid "No Indentation"
 msgstr "第{line_number}行的空格太少了。你空了{leading_spaces}格，这样不够。每个新的代码块都要比前一行多{indent_size}个空格。"
 
-#, fuzzy
 msgid "Non Decimal Variable"
-msgstr "At line {line_number}, you might have tried using a number which Hedy does not like very much! Try changing it to a decimal number like 2."
+msgstr "在第 {line_number} 行，您可能尝试使用 海蒂 不太喜欢的号码！ 尝试将其更改为十进制数，例如 2。"
 
 msgid "Parse"
 msgstr "你输入的代码不是正确的海蒂代码。错误点在第{location[0]}行，第{location[1]}个字。你输入了一个禁止使用的字符：{character_found}。"
@@ -91,13 +89,13 @@ msgid "Unexpected Indentation"
 msgstr "第{line_number}行的空格太多了。你空了{leading_spaces}格，这样太多。每个新的代码块都要比前一行多{indent_size}个空格。"
 
 msgid "Unquoted Assignment"
-msgstr "从这一关开始，你需要在 `is`右边的文本两边加上引号。你忘了给 text 加。"
+msgstr "从这个级别开始，您需要将文本放置在引号之间的 {is} 右侧。 您忘记了文本 {text} 的内容。"
 
 msgid "Unquoted Equality Check"
 msgstr "如果你想检查一个变量的内容是否是一些词，那就需要用引号将这些词括起来！"
 
 msgid "Unquoted Text"
-msgstr "小心，如果你要提问或者打印了什么东西，必须在打印的内容的开头和结尾加上引号。你在 {unquotedtext} 中忘了加了。"
+msgstr "当心。 如果您{ask}或{print}某些内容，则文本应以引号开头和结尾。 您忘记了文本 {unquotedtext} 的内容。"
 
 msgid "Unsupported Float"
 msgstr "现在暂不支持非整数，但是再过几关就会支持了。当下先把{value}改成整数。"
@@ -132,9 +130,8 @@ msgstr "成就打勾图标"
 msgid "achievements_logo_alt"
 msgstr "成就图标"
 
-#, fuzzy
 msgid "add"
-msgstr "Add"
+msgstr "以及"
 
 msgid "add_students"
 msgstr "添加学生"
@@ -163,9 +160,8 @@ msgstr "在右侧输入您选择的冒险经历。创建冒险后，您可以将
 msgid "adventure_exp_2"
 msgstr "如果你想要展示实际的代码片段，，例如给学生一个模板或代码的例子。请像这样使用预锚:"
 
-#, fuzzy
 msgid "adventure_exp_3"
-msgstr "确保始终用{}包围关键字，这样它们就能被正确识别。你可以使用“预览”按钮来查看你的冒险的风格版本。要在专用页面上查看冒险，请从教师页面中选择“查看”。"
+msgstr "确保始终用 { } 括住关键字，然后才能正确识别它们。 您可以使用“预览”按钮查看冒险的风格版本。 要在专用页面上查看冒险，请从教师页面中选择“查看”。"
 
 msgid "adventure_id_invalid"
 msgstr "这个探险活动的账号是无效的。"
@@ -188,16 +184,14 @@ msgstr "这个探险活动已被更新！"
 msgid "adventures"
 msgstr "可用的冒险"
 
-#, fuzzy
 msgid "adventures_info"
-msgstr "Each Hedy level has built-in exercises for students, which we call adventures. You can create your own adventures and add them to your classes. With your own adventures you can create adventures that are relevant and interesting for your students. You can find more information about creating your own adventures <a href=\"https://hedy.org/for-teachers/manual/features\">here</a>."
+msgstr "每个 海蒂 级别都为学生提供内置练习，我们称之为冒险。 您可以创建自己的冒险并将其添加到您的课程中。 通过您自己的冒险，您可以创造与您的学生相关且有趣的冒险。 您可以在<a href=\"https://hedy.org/for-teachers/manual/features\">此处</a>找到有关创建自己的冒险的更多信息。"
 
 msgid "adventures_restored"
 msgstr "默认的冒险已经恢复！"
 
-#, fuzzy
 msgid "ago"
-msgstr "{timestamp} ago"
+msgstr "{timestamp} 前"
 
 msgid "agree_invalid"
 msgstr "你必须同意隐私条款。"
@@ -253,9 +247,8 @@ msgstr "成为赞助商"
 msgid "birth_year"
 msgstr "出生年份"
 
-#, fuzzy
 msgid "by"
-msgstr "由"
+msgstr "经由"
 
 msgid "cancel"
 msgstr "取消"

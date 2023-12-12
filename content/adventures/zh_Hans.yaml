@@ -89,7 +89,7 @@ adventures:
                 start_code: '{print} 你的故事'
             4:
                 story_text: "你可能注意到了，在之前的级别里还有个问题。你有没有试过打印含有“名字”这个词的句子？即：`{print}` 我的名字是名字。\n 在这一级里你可以解决这个问题。你必须给所有需要打印的东西加上引号。\n\n### 练习1\n复制示例代码并通过添加引号来使其正常工作。 \n\n ### 练习 2 \n返回到上一个级别并复制故事代码。通过在正确的位置添加引号，使代码在此级别中正常工作。 \n注意：你自己故事中的变量应该在引号之外。就像范例代码的第二行一样。在该行中，变量名称放在引号之外。\n"
-                example_code: "```\n名字 {is} {ask}_你的名字是什么? _\n{print}     _ 主人公的名字是_名字 \n {print} 名字     _正准备走进树林_\n{print} 名字 _有点害怕'\n动物们 {is} \U0001F994, \U0001F43F, \U0001F989, \U0001F987\n{print} _他听到了一个_ 动物们{at} {random} 的声音\n{print} 名字_担心这片森林闹鬼_\n```\n"
+                example_code: "```\n名字 {is} {ask}_你的名字是什么? _\n{print}     _ 主人公的名字是_名字 \n {print} 名字     _正准备走进树林_\n{print} 名字 _有点害怕'\n动物们 {is} 🦔, 🐿, 🦉, 🦇\n{print} _他听到了一个_ 动物们{at} {random} 的声音\n{print} 名字_担心这片森林闹鬼_\n```\n"
                 start_code: '{print} ''你的故事会打印在这里！'''
             5:
                 story_text: |
@@ -387,16 +387,7 @@ adventures:
                     The player who gets closest to 21, without going over it, wins!
 
                     Have fun!
-                example_code: "```\n{print} 'BLACKJACK'\ncards = [2, 3, 4, 5, 6, 7, 8, 9, 10, 'Jack', 'Queen','King', 'Ace']\npoints = 0\ndealer_points = 0\ncard_1 = cards[{random}]\ncard_2 = cards[{random}]\ncard_3 = cards [{random}]\ndealer_card_1 = cards[{random}]\ndealer_card_2 = cards[{random}]\n\
-                    dealer_card_3 = cards[{random}]\n# 卡片 1 的点数\n{if} card_1 == 'Jack' {or} card_1 == 'Queen' {or} card_1 == 'King':\n    points = points + 10\n{elif} card_1 == 'Ace':\n    points = points + 11\n{else}:\n    points = points + card_1\n# 卡片 2 的点数\n{if} card_2 == 'Jack' {or} card_2 == 'Queen'\
-                    \ {or} card_2 == 'King':\n    points = points + 10\n{elif} card_2 == 'Ace':\n    points = points + 11\n{else}:\n    points = points + card_2\n# 庄家第1张牌\n{if} dealer_card_1 == 'Jack' {or} dealer_card_1 == 'Queen' {or} dealer_card_1 == 'King':\n    dealer_points = dealer_points + 10\n\
-                    {elif} dealer_card_1 == 'Ace':\n    dealer_points = dealer_points + 11\n{else}:\n    dealer_points = dealer_points + dealer_card_1\n# 庄家第2张牌\n{if} dealer_card_2 == 'Jack' {or} dealer_card_2 == 'Queen' {or} dealer_card_2 == 'King':\n    dealer_points = dealer_points + 10\n{elif} dealer_card_2\
-                    \ == 'Ace':\n    dealer_points = dealer_points + 11\n{else}:\n    dealer_points = dealer_points + dealer_card_2\n# 两张 Aces\n{if} card_1 == 'Ace' {and} card_2 == 'Ace':\n    points = 12\n{if} dealer_card_1 == 'Ace' {and} dealer_card_2 == 'Ace':\n    dealer_points = 12\n# Scoreboard\n\
-                    {print} '你有张 ' card_1 ' 以及 ' card_2 ' (' points ' points)'\n{print} '庄家有张 ' dealer_card_1 ' 以及 ' dealer_card_2 ' (' dealer_points ' points)'\n# 玩家追加牌\nhit = {ask} '你想追加牌嘛?'\n{if} hit == 'yes':\n    {if} card_3 == 'Jack' {or} card_3 == 'Queen' {or} card_3 == 'King':\n        points\
-                    \ = points + 10\n    {elif} card_3 == 'Ace':\n        {if} points > 11:\n            points = points + 11\n        {else}:\n            points = points + 1\n    {else}:\n        points = points + card_3\n    {print} '你追加了一张 ' card_3 ' (' points ' points)'\n{else}:\n    {print} '不追加牌'\n\
-                    # 获胜者\n{if} points > 21 {or} dealer_points > points {or} dealer_points == 21:\n    {print} '你输了'\n{elif} dealer_points < 17:\n    {print} '庄家要牌.它是... ' dealer_card_3\n    {if} dealer_card_3 == 'Jack' {or} dealer_card_3 == 'Queen' {or} dealer_card_3 == 'King':\n        dealer_points\
-                    \ = dealer_points + 10\n    {elif} dealer_card_3 == 'Ace':\n        {if} dealer_points < 11:\n            dealer_points = dealer_points + 11\n        {else}:\n            dealer_points = dealer_points + 1\n    {else}:\n        dealer_points = dealer_points + dealer_card_3\n    {print}\
-                    \ '现在打印庄家有 ' dealer_points \n    {if} dealer_points < 21 {and} dealer_points > points:\n        {print} '你输了'\n    {else}:\n        {print} '你赢了!'\n{elif} points > dealer_points {and} points < 21:\n    {print} '你赢了!'\n```\n"
+                example_code: "```\n{print} 'BLACKJACK'\ncards = [2, 3, 4, 5, 6, 7, 8, 9, 10, 'Jack', 'Queen','King', 'Ace']\npoints = 0\ndealer_points = 0\ncard_1 = cards[{random}]\ncard_2 = cards[{random}]\ncard_3 = cards [{random}]\ndealer_card_1 = cards[{random}]\ndealer_card_2 = cards[{random}]\ndealer_card_3 = cards[{random}]\n# 卡片 1 的点数\n{if} card_1 == 'Jack' {or} card_1 == 'Queen' {or} card_1 == 'King':\n    points = points + 10\n{elif} card_1 == 'Ace':\n    points = points + 11\n{else}:\n    points = points + card_1\n# 卡片 2 的点数\n{if} card_2 == 'Jack' {or} card_2 == 'Queen' {or} card_2 == 'King':\n    points = points + 10\n{elif} card_2 == 'Ace':\n    points = points + 11\n{else}:\n    points = points + card_2\n# 庄家第1张牌\n{if} dealer_card_1 == 'Jack' {or} dealer_card_1 == 'Queen' {or} dealer_card_1 == 'King':\n    dealer_points = dealer_points + 10\n{elif} dealer_card_1 == 'Ace':\n    dealer_points = dealer_points + 11\n{else}:\n    dealer_points = dealer_points + dealer_card_1\n# 庄家第2张牌\n{if} dealer_card_2 == 'Jack' {or} dealer_card_2 == 'Queen' {or} dealer_card_2 == 'King':\n    dealer_points = dealer_points + 10\n{elif} dealer_card_2 == 'Ace':\n    dealer_points = dealer_points + 11\n{else}:\n    dealer_points = dealer_points + dealer_card_2\n# 两张 Aces\n{if} card_1 == 'Ace' {and} card_2 == 'Ace':\n    points = 12\n{if} dealer_card_1 == 'Ace' {and} dealer_card_2 == 'Ace':\n    dealer_points = 12\n# Scoreboard\n{print} '你有张 ' card_1 ' 以及 ' card_2 ' (' points ' points)'\n{print} '庄家有张 ' dealer_card_1 ' 以及 ' dealer_card_2 ' (' dealer_points ' points)'\n# 玩家追加牌\nhit = {ask} '你想追加牌嘛?'\n{if} hit == 'yes':\n    {if} card_3 == 'Jack' {or} card_3 == 'Queen' {or} card_3 == 'King':\n        points = points + 10\n    {elif} card_3 == 'Ace':\n        {if} points > 11:\n            points = points + 11\n        {else}:\n            points = points + 1\n    {else}:\n        points = points + card_3\n    {print} '你追加了一张 ' card_3 ' (' points ' points)'\n{else}:\n    {print} '不追加牌'\n# 获胜者\n{if} points > 21 {or} dealer_points > points {or} dealer_points == 21:\n    {print} '你输了'\n{elif} dealer_points < 17:\n    {print} '庄家要牌.它是... ' dealer_card_3\n    {if} dealer_card_3 == 'Jack' {or} dealer_card_3 == 'Queen' {or} dealer_card_3 == 'King':\n        dealer_points = dealer_points + 10\n    {elif} dealer_card_3 == 'Ace':\n        {if} dealer_points < 11:\n            dealer_points = dealer_points + 11\n        {else}:\n            dealer_points = dealer_points + 1\n    {else}:\n        dealer_points = dealer_points + dealer_card_3\n    {print} '现在打印庄家有 ' dealer_points \n    {if} dealer_points < 21 {and} dealer_points > points:\n        {print} '你输了'\n    {else}:\n        {print} '你赢了!'\n{elif} points > dealer_points {and} points < 21:\n    {print} '你赢了!'\n```\n"
                 start_code: '# 在这里输入你的代码'
     calculator:
         name: 计算器
@@ -531,8 +522,8 @@ adventures:
                     ```
                     answer1 = {ask} '10 乘以 7 是多少？'
                     answer2 = {ask} '6 乘以 7 是多少？'
-                    {如果} _ _ _ _ _ _ _
-                         {打印} _
+                    {if} _ _ _ _ _ _ _
+                         {print} _
                     ```
                 start_code: '# 在这里写下你的代码'
             14:
@@ -633,31 +624,31 @@ adventures:
                     谨防！ 如果您使用`{clear}`命令，请记住在其上方使用`{sleep}`。 否则 海蒂 会清空你的屏幕，而不给你时间阅读！
                 example_code: |
                     ```
-                    print '3'
-                    sleep
-                    clear
-                    print '2'
-                    sleep
-                    clear
-                    print '1'
-                    sleep
-                    clear
-                    print 'SURPRISE!'
+                    {print} '3'
+                    {sleep}
+                    {clear}
+                    {print} '2'
+                    {sleep}
+                    {clear}
+                    {print} '1'
+                    {sleep}
+                    {clear}
+                    {print} '惊喜!'
                     ```
                 start_code: |
-                    print '3'
-                    sleep
-                    clear
-                    print '2'
-                    sleep
-                    clear
-                    print '1'
-                    sleep
-                    clear
-                    print '惊喜!'
+                    {print} '3'
+                    {sleep}
+                    {clear}
+                    {print} '2'
+                    {sleep}
+                    {clear}
+                    {print} '1'
+                    {sleep}
+                    {clear}
+                    {print} '惊喜!'
     debugging:
         name: 调试
-        default_save_name: debugging
+        default_save_name: 调试
         description: 调试 adventure
         levels:
             1:
@@ -838,440 +829,441 @@ adventures:
                     {print} 'That will be $' price 'please'
             7:
                 story_text: |-
-                    ### Exercise
-                    Surprise! This program looks more like an output than a code. And yet, we don't want you to just add `{print}` commands in front of each line.
-                    Fix this program to turn it into the nursery rhyme 'Brother John (Frère Jaques)' by using the {repeat} command of course!
+                    ### 练习
+                    惊喜！ 该程序看起来更像是输出而不是代码。 然而，我们不希望您只在每行前面添加`{print}`命令。
+                    当然，使用 {repeat} 命令修复此程序，将其变成童谣“Brother John (Frère Jacques)”！
                 example_code: |
-                    **Warning! This code needs to be debugged!**
+                    **警告！ 这段代码需要调试！**
                     ```
-                    Are you sleeping?
-                    Brother John!
-                    Morning bells are ringing!
-                    Ding, dang, dong!
+                    你在睡觉？
+                    约翰弟兄！
+                    晨钟已敲响！
+                    叮、当、当！
                     ```
                 start_code: |
-                    Are you sleeping?
-                    Brother John!
-                    Morning bells are ringing!
-                    Ding, dang, dong!
+                    你在睡觉？
+                    约翰弟兄！
+                    晨钟已敲响！
+                    叮、当、当
             8:
                 story_text: |-
-                    ### Exercise
-                    Debug this code. Good luck!
-                example_code: |
-                    **Warning! This code needs to be debugged!**
-                    ```
-                    {print} 'Welcome to Manicures and Pedicures by Hedy'
-                    bodypart = {ask} 'Are you getting your fingernails or toenails done today? Or both?'
-                    {if} bodyparts {is} both
-                            {print} That will be $25'
-                            price = 25
-                        {else}
-                            {print} That will be $18'
-                            price = 18
-                    color = {ask} What color would you like?
-                    sparkles = {ask} 'Would you like some sparkles with that?'
-                    {if} sparkles {is} yes
-                        {print} 'We charge $3 extra for that'
-                    price = price + 3
-                    {else} {print} 'No sparkles' {print} 'So no extra charge'
+                    ### 练习
+                    调试这段代码。 祝你好运！
+                example_code: |-
+                    **警告！ 这段代码需要调试！**
+                    ````
+                    {print}“欢迎来到 Hedy 的美甲和足疗”
+                    bodypart = {ask} '你今天修指甲或脚趾甲了吗？ 或两者？'
+                    {if} 身体部位 {is} 两者
+                             {print} 那将是 25 美元'
+                             价格=25
+                         {else}
+                             {print} 那将是 18 美元'
+                             价格=18
+                    color = {ask} 你想要什么颜色？
+                    Sparkles = {ask} '你想要一些闪闪发光的东西吗？'
+                    {if} 闪闪发光 {is} 是
+                         {print} '我们为此额外收取 3 美元'
+                    price = price +3
+                    {else} {print} '没有闪光' {print} '所以没有额外费用'
                     {sleep} 5
-                    {print} 'All done! That will be $' price ' please!'
-                    {print} 'Thank you! Byebye!'
+                    {print} '全部完成！ 那将是$'价格'拜托！'
+                    {print}'谢谢！ 再见！'
+                    ````
                 start_code: |
-                    {print} 'Welcome to Manicures and Pedicures by Hedy'
-                    bodypart = {ask} 'Are you getting your fingernails or toenails done today? Or both?'
-                    {if} bodyparts {is} both
-                            {print} That will be $25'
-                            price = 25
-                        {else}
-                            {print} That will be $18'
-                            price = 18
-                    color = {ask} What color would you like?
-                    sparkles = {ask} 'Would you like some sparkles with that?'
-                    {if} sparkles {is} yes
-                        {print} 'We charge $3 extra for that'
-                    price = price + 3
-                    {else} {print} 'No sparkles' {print} 'So no extra charge'
+                    {print}“欢迎来到 海蒂 的美甲和足疗”
+                    bodypart = {ask} '你今天修指甲或脚趾甲了吗？ 或两者？'
+                    {if} 身体部位 {is} 两者
+                             {print} 那将是 25 美元'
+                             价格=25
+                         {else}
+                             {print} 那将是 18 美元'
+                             价格=18
+                    color = {ask} 你想要什么颜色？
+                    Sparkles = {ask} '你想要一些闪闪发光的东西吗？'
+                    {if} Sparkles {is} 是
+                         {print} '我们为此额外收取 3 美元'
+                    price = price +3
+                    {else} {print} '没有闪光' {print} '所以没有额外费用'
                     {sleep} 5
-                    {print} 'All done! That will be $' price ' please!'
-                    {print} 'Thank you! Byebye!'
+                    {print} '全部完成！ 那将是$'价格'拜托！'
+                    {print}'谢谢！ 再见！'
             9:
                 story_text: |-
-                    ### Exercise
-                    Debug this code. Good luck!
+                    ### 练习
+                    调试这段代码。 祝你好运！
                 example_code: |
-                    **Warning! This code needs to be debugged!**
-                    ```
-                    {print} 'Welcome to our sandwich shop'
-                    amount 'How many sandwiches would you like to buy?'
-                    {repeat} amount {times}
-                    {ask} {is} {ask} 'What kind or bread would you like your sandwich to be?'
-                    types_of_bread {is} white, wheat, rye, garlic, gluten free
-                    {if} chosen_bread in types_of_bread
-                    {print} 'Lovely!'
+                    **警告！ 这段代码需要调试！**
+                    ````
+                    {print} '欢迎来到我们的三明治店'
+                    amount “您想买多少个三明治？”
+                    {repeat}amoumt{times}
+                    {ask} {is} {ask} '您想要什么类型的三明治或面包？'
+                    types_of_bread {is} 白面包、小麦面包、黑麦面包、大蒜面包、无麸质面包
+                    {if} 在 types_of_bread 中选择了_bread
+                    {print}“可爱！”
                     {else}
-                    'I'm sorry we don't sell that'
-                    topping {is} {ask} 'What kind of topping would you like?'
-                    sauce {is} {ask} 'What kind of sauce would you like?'
-                    {print} One chosen_bread with topping and sauce.
-                    price = amount * 6
-                    {print} 'That will be 'price dollar' please'
-                    ```
+                    “抱歉我们不卖那个”
+                    topping {is} {ask} '您想要什么类型的配料？'
+                    sauce{is} {ask}“您想要什么类型的酱？”
+                    {print} 一份choice_bread，配上配料和酱汁。
+                    price =amount*6
+                    {print} '这将是'价格美元''
+                    ````
                 start_code: |
-                    {print} 'Welcome to our sandwich shop'
-                    amount 'How many sandwiches would you like to buy?'
-                    {repeat} amount {times}
-                    {ask} {is} {ask} 'What kind or bread would you like your sandwich to be?'
-                    types_of_bread {is} white, wheat, rye, garlic, gluten free
-                    {if} chosen_bread in types_of_bread
-                    {print} 'Lovely!'
+                    {print} '欢迎来到我们的三明治店'
+                    amount “您想买多少个三明治？”
+                    {repeat}amount{times}
+                    {ask} {is} {ask} '您想要什么类型的三明治或面包？'
+                    types_of_bread {is} 白面包、小麦面包、黑麦面包、大蒜面包、无麸质面包
+                    {if} chosen_bread 在 types_of_bread 中
+                    {print}“可爱！”
                     {else}
-                    'I'm sorry we don't sell that'
-                    topping {is} {ask} 'What kind of topping would you like?'
-                    sauce {is} {ask} 'What kind of sauce would you like?'
-                    {print} One chosen_bread with topping and sauce.
-                    price = amount * 6
-                    {print} 'That will be 'price dollar' please'
+                    “抱歉我们不卖那个”
+                    topping {is} {ask} '您想要什么类型的配料？'
+                    sauce{is} {ask}“您想要什么类型的酱？”
+                    {print} 一份choice_bread，配上配料和酱汁。
+                    price =amount*6
+                    {print} '这将是'价格美元''
             10:
                 story_text: |-
-                    ### Exercise
-                    Debug this code. Good luck!
+                    ### 练习
+                    调试这段代码。 祝你好运！
                 example_code: |
-                    **Warning! This code needs to be debugged!**
+                    **警告！ 这段代码需要调试！**
                     ```
-                    names = Muad Hasan Samira Noura
-                    activities = fly a kite, go swimming, go hiking, catch tan in the sun
+                    names = 穆阿德·哈桑·萨米拉·努拉
+                    activities = 放风筝、游泳、徒步旅行、晒太阳
                     {for} name {is} names
-                    {print} At the beach name loves to activity at random
+                    {print} 在海滩上，名字喜欢活动 {at} {random}
                     ```
                 start_code: |
-                    names = Muad Hasan Samira Noura
-                    activities = fly a kite, go swimming, go hiking, catch tan in the sun
+                    names = 穆阿德·哈桑·萨米拉·努拉
+                    activities = 放风筝、游泳、徒步旅行、晒太阳
                     {for} name {is} names
-                    {print} At the beach name loves to activity at random
+                    {print} 在海滩名字喜欢随意活动
             11:
                 story_text: |-
-                    ### Exercise
-                    Debug this calender program. The output of this program is supposed to look like a list of dates.
-                    For example:
+                    ### 练习
+                    调试这个日历程序。 该程序的输出应该看起来像一个日期列表。
+                    例如：
 
-                    ```
-                    Hedy calender
-                    Here are all the days of November
-                    November 1
-                    November 2
-                    November 3
-                    ```
-                    And so on.
+                    ````
+                    海蒂日历
+                    这是11月的所有日子
+                    11 月 1 日
+                    11 月 2 日
+                    11 月 3 日
+                    ````
+                    等等。
 
-                    Mind that you have to test your code extra carefully for the month February, because the amount of days in this month changes in leap years.
+                    请注意，您必须特别仔细地测试二月份的代码，因为这个月的天数在闰年中会发生变化。
                 example_code: |
-                    **Warning! This code needs to be debugged!**
-                    ```
-                    print 'Hedy calender'
-                    months_with_31 days = January, March, May, July, September, October, December
-                    months_with_30_days = April, June, August, November
-                    month = ask 'Which month would you like to see?'
+                    **警告！ 这段代码需要调试！**
+                    ````
+                    print '海蒂日历'
+                    months_with_31_days = 一月、三月、五月、七月、九月、十月、十二月
+                    months_with_30_days = 四月、六月、八月、十一月
+                    months = 问“您想查看哪个月份？”
                     if month in months_with_31_days
-                        days = 31
-                        if month in months_with30_days
-                            days = 30
-                    if month = February
-                        leap_years = 2020, 2024, 2028, 2036, 2040, 2044, 2028
-                        year = ask 'What year is it?'
+                         days = 31
+                         if months in months_with30_days
+                             days= 30
+                    if month = 二月
+                         leap_years = 2020, 2024, 2028, 2036, 2040, 2044, 2028
+                         year = ask “现在是哪一年？”
                     if year in leap_years
-                        days = 29
+                         days = 29
                     else
-                        days = 28
+                         days=28
 
-                    print 'Here are all the days of ' moth
-                    for i in range 1 to days
-                        print month i
-                    ```
+                    print '这是 各' 月'的所有日子'
+                    for i in 1 range 1 to days
+                         print month i
+                    ````
                 start_code: |
-                    print 'Hedy calender'
-                    months_with_31 days = January, March, May, July, September, October, December
-                    months_with_30_days = April, June, August, November
-                    month = ask 'Which month would you like to see?'
+                    print '海蒂日历'
+                    months_with_31_days = 一月、三月、五月、七月、九月、十月、十二月
+                    months_with_30_days = 四月、六月、八月、十一月
+                    months = 问“您想查看哪个月份？”
                     if month in months_with_31_days
-                        days = 31
-                        if month in months_with30_days
-                            days = 30
-                    if month = February
-                        leap_years = 2020, 2024, 2028, 2036, 2040, 2044, 2028
-                        year = ask 'What year is it?'
+                         days = 31
+                         if months in months_with30_days
+                             days= 30
+                    if month = 二月
+                         leap_years = 2020, 2024, 2028, 2036, 2040, 2044, 2028
+                         year = ask “现在是哪一年？”
                     if year in leap_years
-                        days = 29
+                         days = 29
                     else
-                        days = 28
+                         days=28
 
-                    print 'Here are all the days of ' moth
-                    for i in range 1 to days
-                        print month i
+                    print '这是 各' 月'的所有日子'
+                    for i in 1 range 1 to days
+                         print month i
             12:
                 story_text: |-
-                    ### Exercise
-                    Debug this code. Good luck!
+                    ### 练习
+                    调试这段代码。 祝你好运！
                 example_code: |
-                    **Warning! This code needs to be debugged!**
+                    **警告！ 这段代码需要调试！**
                     ```
                     define greet
-                    greetings = 'Hello', 'Hi there', 'Goodevening'
+                    greetings = '你好', '嗨', '晚上好'
                         print greetings at random
 
                     define take_order
-                        food = ask 'What would you like to eat?'
-                        print 'One food'
-                        drink = 'What would you like to drink?'
-                        print 'One ' drink
-                        more = ask 'Would you like anything else?'
-                            if more is 'no'
-                        print 'Alright'
+                        food = ask '你想吃什么?'
+                        print '哪种食物'
+                        drink = '你想喝什么?'
+                        print '哪种 ' drink
+                        more = ask '你还想要点别的吗?'
+                            if more is '不'
+                        print '好吧'
                             else
-                            print 'And ' more
-                    print 'Thank you'
+                            print '还有 ' more
+                    print '多谢'
 
-                    print 'Welcome to our restaurant'
-                    people = ask 'How many people are in your party tonight?'
+                    print '欢迎来到我们的餐厅'
+                    people = ask '今晚你们聚会中有多少人?'
                     for i in range 0 to people
                         call greet_costumer
                     ```
                 start_code: |
                     define greet
-                    greetings = 'Hello', 'Hi there', 'Goodevening'
+                    greetings = '你好', '嗨', '晚上好'
                         print greetings at random
 
                     define take_order
-                        food = ask 'What would you like to eat?'
-                        print 'One food'
-                        drink = 'What would you like to drink?'
-                        print 'One ' drink
-                        more = ask 'Would you like anything else?'
-                            if more is 'no'
-                        print 'Alright'
+                        food = ask '你想吃什么?'
+                        print '哪种食物'
+                        drink = '你想喝什么?'
+                        print '哪种 ' drink
+                        more = ask '你还想要点别的吗?'
+                            if more is '不'
+                        print '好吧'
                             else
-                            print 'And ' more
-                    print 'Thank you'
+                            print '还有 ' more
+                    print '多谢'
 
-                    print 'Welcome to our restaurant'
-                    people = ask 'How many people are in your party tonight?'
+                    print '欢迎来到我们的餐厅'
+                    people = ask '今晚你们聚会中有多少人?'
                     for i in range 0 to people
                         call greet_costumer
             13:
                 story_text: |-
-                    ### Exercise
-                    Debug this code. Good luck!
+                    ### 练习
+                    调试这段代码。 祝你好运！
                 example_code: |
-                    **Warning! This code needs to be debugged!**
+                    **警告！ 这段代码需要调试！**
                     ```
                     defin movie_recommendation with name
-                        action_movies == 'Die Hard', 'Fast and Furious', 'Inglorious Bastards'
-                        romance_movies = 'Love Actually', 'The Notebook', 'Titanic'
-                        comedy_movies = 'Mr Bean' 'Barbie''Deadpool'
-                        kids_movies = 'Minions', 'Paddington', 'Encanto'
-                        if name is 'Camila' or name is 'Manuel'
-                            recommended_movie = kids_movie at random
-                        if name is 'Pedro' or 'Gabriella'
-                                mood = ask 'What you in the mood for?'
-                            if mood is 'action'
-                                recommended_movie = comedy_movies at random
-                            if mood is 'romance'
-                                recommended_movie = romance_movies
-                        if mood is 'comedy'
-                                recommended_movie = comedy_movies at random
+                         action_movies ==“虎胆龙威”、“速度与激情”、“无耻混蛋”
+                         romance_movies =“真爱至上”、“恋恋笔记本”、“泰坦尼克号”
+                         comedy_movies = '憨豆先生' '芭比' '死侍'
+                         kids_movies = '小黄人', '帕丁顿熊', 'Encanto'
+                         if name is “Camila” or name is “Manuel”
+                             recommended_movie = kids_movie at random
+                         if name is “Pedro” or “Gabriella”
+                                 mood=ask '现在心情如何？'
+                              if mood is  '行动'
+                                 recommended_movie = comedy_movies at random
+                             if mood is '浪漫'
+                                 recommended_movie = romance_movies
+                          if mood is '喜剧'
+                                 recommended_movie = comedy_movies
 
-                    print 'I would recommend ' recommended_movie ' for ' name
+                    print '我会推荐 'recommend_movie' 作为 'name
 
-                    name = ask 'Who is watching?'
-                    recommendation = ask 'Would you like a recommendation?'
-                    if recommendaion is 'yes'
+                    name = ask “谁来观看？”
+                    recommendation = ask “您想要推荐吗？”
+                    if recommendaion is “是”
                     print movie_recommendation with name
                     else
-                    print 'No problem!'
+                    print “没问题！”
                     ```
                 start_code: |
                     defin movie_recommendation with name
-                        action_movies == 'Die Hard', 'Fast and Furious', 'Inglorious Bastards'
-                        romance_movies = 'Love Actually', 'The Notebook', 'Titanic'
-                        comedy_movies = 'Mr Bean' 'Barbie''Deadpool'
-                        kids_movies = 'Minions', 'Paddington', 'Encanto'
-                        if name is 'Camila' or name is 'Manuel'
-                            recommended_movie = kids_movie at random
-                        if name is 'Pedro' or 'Gabriella'
-                                mood = ask 'What you in the mood for?'
-                            if mood is 'action'
-                                recommended_movie = comedy_movies at random
-                            if mood is 'romance'
-                                recommended_movie = romance_movies
-                        if mood is 'comedy'
-                                recommended_movie = comedy_movies at random
+                         action_movies ==“虎胆龙威”、“速度与激情”、“无耻混蛋”
+                         romance_movies =“真爱至上”、“恋恋笔记本”、“泰坦尼克号”
+                         comedy_movies = '憨豆先生' '芭比' '死侍'
+                         kids_movies = '小黄人', '帕丁顿熊', 'Encanto'
+                         if name is “Camila” or name is “Manuel”
+                             recommended_movie = kids_movie at random
+                         if name is “Pedro” or “Gabriella”
+                                 mood=ask '现在心情如何？'
+                              if mood is  '行动'
+                                 recommended_movie = comedy_movies at random
+                             if mood is '浪漫'
+                                 recommended_movie = romance_movies
+                          if mood is '喜剧'
+                                 recommended_movie = comedy_movies
 
-                    print 'I would recommend ' recommended_movie ' for ' name
+                    print '我会推荐 'recommend_movie' 作为 'name
 
-                    name = ask 'Who is watching?'
-                    recommendation = ask 'Would you like a recommendation?'
-                    if recommendaion is 'yes'
+                    name = ask “谁来观看？”
+                    recommendation = ask “您想要推荐吗？”
+                    if recommendaion is “是”
                     print movie_recommendation with name
                     else
-                    print 'No problem!'
+                    print “没问题！”
             14:
                 story_text: |-
-                    ### Exercise
-                    Debug this code. Good luck!
+                    ### 练习
+                    调试这段代码。 祝你好运！
                 example_code: |
-                    **Warning! This code needs to be debugged!**
+                    **警告！ 这段代码需要调试！**
                     ```
                     define calculate_heartbeat
-                        print 'Press your fingertips gently against the side of your neck'
-                        print '(just under your jawline)'
-                        print 'Count the number of beats you feel for 15 seconds'
-                        beats == ask 'How many beats do you feel in 15 seconds?'
+                        print '将指尖轻轻按在脖子一侧'
+                        print '(就在你的下巴线下方)'
+                        print '记录 15 秒内你感觉到的节拍数'
+                        beats == ask '15 秒内您感觉有多少节拍?'
                         heartbeat = beats*4
-                        print 'Your heartbeat is ' heartbeat
+                        print '你的心跳是' heartbeat
                         if heartbeat >= 60 or heartbeat <= 100
-                            print 'Your heartbeat seems fine'
+                            print '你的心跳看起来不错'
                         else
                             if heartbeat > 60
-                                print 'Your heartbeat seems to be too low'
+                                print '你的心跳似乎太低了'
                             if heartbeat < 100
-                                print 'Your heartbeat seems to be too high'
-                            print 'You might want to contact a medical professional'
+                                print '你的心跳似乎太高了'
+                            print '您可能需要联系医疗专家'
 
-                    measure_heartbeat = ask 'Would you like to measure your heartbeat?'
-                    if measure_heartbeat = 'yes'
+                    measure_heartbeat = ask '你想测量你的心跳吗?'
+                    if measure_heartbeat = '是'
                         call measure_heartbeat
                     else
-                        'no problem'
+                        '没问题'
                     ```
                 start_code: |
                     define calculate_heartbeat
-                        print 'Press your fingertips gently against the side of your neck'
-                        print '(just under your jawline)'
-                        print 'Count the number of beats you feel for 15 seconds'
-                        beats == ask 'How many beats do you feel in 15 seconds?'
+                        print '将指尖轻轻按在脖子一侧'
+                        print '(就在你的下巴线下方)'
+                        print '记录 15 秒内你感觉到的节拍数'
+                        beats == ask '15 秒内您感觉有多少节拍?'
                         heartbeat = beats*4
-                        print 'Your heartbeat is ' heartbeat
+                        print '你的心跳是' heartbeat
                         if heartbeat >= 60 or heartbeat <= 100
-                            print 'Your heartbeat seems fine'
+                            print '你的心跳看起来不错'
                         else
                             if heartbeat > 60
-                                print 'Your heartbeat seems to be too low'
+                                print '你的心跳似乎太低了'
                             if heartbeat < 100
-                                print 'Your heartbeat seems to be too high'
-                            print 'You might want to contact a medical professional'
+                                print '你的心跳似乎太高了'
+                            print '您可能需要联系医疗专家'
 
-                    measure_heartbeat = ask 'Would you like to measure your heartbeat?'
-                    if measure_heartbeat = 'yes'
+                    measure_heartbeat = ask '你想测量你的心跳吗?'
+                    if measure_heartbeat = '是'
                         call measure_heartbeat
                     else
-                        'no problem'
+                        '没问题'
             15:
                 story_text: |-
-                    ### Exercise
-                    Debug this random children's story. Good luck!
+                    ### 练习
+                    调试这个随机的儿童故事。 祝你好运！
                 example_code: |
-                    **Warning! This code needs to be debugged!**
+                    **警告！ 这段代码需要调试！**
                     ```
-                    names = 'Tanya', 'Romy', 'Kayla', 'Aldrin', 'Ali'
-                    verbs='walking', 'skipping', 'cycling', 'driving', 'running'
-                    locations = 'on a mountaintop', 'in the supermarket', 'to the swimming pool'
-                    hiding_spots = 'behind a tree', under a table', in a box'
-                    sounds = 'a trumpet', 'a car crash', 'thunder'
-                    causes_of_noise = 'a television', 'a kid with firecrackers', 'a magic elephant', 'a dream'
+                    names = '坦尼娅'、'罗米'、'凯拉'、'奥尔德林'、'阿里'
+                    verbs='步行'、'跳跃'、'骑自行车'、'驾驶'、'跑步'
+                    locations = '在山顶上', '在超市里', '到游泳池'
+                    hiding_spots = '树后面'、桌子下'、盒子里'
+                    声音 = '喇叭声', '车祸', '雷声'
+                    causes_of_noise = '电视', '放鞭炮的孩子', '神奇大象', '梦'
 
                     chosen_ name = names at random
                     chosen_verb = verbs at random
-                    chosen_location = 'locations at random'
+                    chosen_location = '随机位置'
                     chosen_sounds = noises at random
                     chosen_spot = hiding_spots random
                     chosen_causes = causes_of_noise at random
 
-                    print chosen_name ' was ' chosen_verb ' ' chosen_location
-                    print 'when they suddenly heard a sound like ' sounds at random
-                    print chosen_name ' looked around, but they couldn't discover where the noise came from'
-                    print chosen_name ' hid ' chosen_spot'
-                    print 'They tried to look around, but couldn't see anything from there'
-                    hidden = 'yes'
-                    while hidden = 'yes'
-                        print chosen_name 'still didn't see anything'
-                    answer = ask 'does ' chosen_name ' move from their hiding spot?'
-                        if answer = 'yes'
-                            hidden == 'no'
-                    print 'chosen_name moved from' chosen_spot
-                    print 'And then they saw it was just' chosen_cause
-                    print chosen_name 'laughed and went on with their day'
-                    print The End
+                    print chosen_name ' 是 ' chosen_verb ' ' chosen_location
+                    print '当他们突然随机听到类似' sounds at random
+                    print chosen_name ' 环顾四周，但他们无法发现噪音来自哪里'
+                    print chosen_name ' 躲 ' chosen_spot'
+                    print '们试图环顾四周，但从那里看不到任何东西'
+                    hidden = '是'
+                    while hidden = '是'
+                        print chosen_name '仍然没有看到任何东西'
+                    answer = ask '是否 ' chosen_name ' 从他们的藏身之处移动?'
+                        if answer = '是'
+                            hidden == '否'
+                    print 'chosen_name 移自' chosen_spot
+                    print '然后他们发现这只是' chosen_cause
+                    print chosen_name '笑着继续他们的一天'
+                    print 结束
                     ```
                 start_code: |
-                    names = 'Tanya', 'Romy', 'Kayla', 'Aldrin', 'Ali'
-                    verbs='walking', 'skipping', 'cycling', 'driving', 'running'
-                    locations = 'on a mountaintop', 'in the supermarket', 'to the swimming pool'
-                    hiding_spots = 'behind a tree', under a table', in a box'
-                    sounds = 'a trumpet', 'a car crash', 'thunder'
-                    causes_of_noise = 'a television', 'a kid with firecrackers', 'a magic elephant', 'a dream'
+                    names = '坦尼娅'、'罗米'、'凯拉'、'奥尔德林'、'阿里'
+                    verbs='步行'、'跳跃'、'骑自行车'、'驾驶'、'跑步'
+                    locations = '在山顶上', '在超市里', '到游泳池'
+                    hiding_spots = '树后面'、桌子下'、盒子里'
+                    声音 = '喇叭声', '车祸', '雷声'
+                    causes_of_noise = '电视', '放鞭炮的孩子', '神奇大象', '梦'
 
                     chosen_ name = names at random
                     chosen_verb = verbs at random
-                    chosen_location = 'locations at random'
+                    chosen_location = '随机位置'
                     chosen_sounds = noises at random
                     chosen_spot = hiding_spots random
                     chosen_causes = causes_of_noise at random
 
-                    print chosen_name ' was ' chosen_verb ' ' chosen_location
-                    print 'when they suddenly heard a sound like ' sounds at random
-                    print chosen_name ' looked around, but they couldn't discover where the noise came from'
-                    print chosen_name ' hid ' chosen_spot'
-                    print 'They tried to look around, but couldn't see anything from there'
-                    hidden = 'yes'
-                    while hidden = 'yes'
-                        print chosen_name 'still didn't see anything'
-                    answer = ask 'does ' chosen_name ' move from their hiding spot?'
-                        if answer = 'yes'
-                            hidden == 'no'
-                    print 'chosen_name moved from' chosen_spot
-                    print 'And then they saw it was just' chosen_cause
-                    print chosen_name 'laughed and went on with their day'
-                    print The End
+                    print chosen_name ' 是 ' chosen_verb ' ' chosen_location
+                    print '当他们突然随机听到类似' sounds at random
+                    print chosen_name ' 环顾四周，但他们无法发现噪音来自哪里'
+                    print chosen_name ' 躲 ' chosen_spot'
+                    print '们试图环顾四周，但从那里看不到任何东西'
+                    hidden = '是'
+                    while hidden = '是'
+                        print chosen_name '仍然没有看到任何东西'
+                    answer = ask '是否 ' chosen_name ' 从他们的藏身之处移动?'
+                        if answer = '是'
+                            hidden == '否'
+                    print 'chosen_name 移自' chosen_spot
+                    print '然后他们发现这只是' chosen_cause
+                    print chosen_name '笑着继续他们的一天'
+                    print 结束
             16:
                 story_text: |-
-                    ### Exercise
-                    Debug this code. Good luck!
-                    Tip: Make sure that you only see your score once in the end.
+                    ### 练习
+                    调试这段代码。 祝你好运！
+                    提示: 确保您最终只能看到一次分数。
                 example_code: |
-                    **Warning! This code needs to be debugged!**
+                    **警告！ 这段代码需要调试！**
                     ```
-                    country = ['The Netherlands', 'Poland', 'Turkey', 'Zimbabwe', 'Thailand', 'Brasil', 'Peru', 'Australia', 'India', 'Romania' ]
-                    capitals = 'Amsterdam', 'Warshaw' 'Istanbul', 'Harare', 'Bangkok', 'Brasilia', 'Lima', 'Canberra', 'New Delhi', 'Bucharest'
+                    country = ['荷兰'，'波兰'，'土耳其'，'津巴布韦'，'泰国'，'巴西'，'秘鲁'，'澳大利亚'，'印度'，'罗马尼亚']
+                    capitals = '阿姆斯特丹'、'华沙'、'伊斯坦布尔'、'哈拉雷'、'曼谷'、'巴西利亚'、'利马'、'堪培拉'、'新德里'、'布加勒斯特'
                     score = 0
-                    for i in range 0 to 10
-                        answer = ask 'What's the capital of ' countries[i]
-                        correct = capital[i]
-                        if answer = correct
-                            print 'Correct!'
-                        score = score + 1
-                        else
-                            print 'Wrong,' capitals[i] 'in the capital of' countries[i]
-                        print 'You scored ' score ' out of 10'
+                    for i in range 0 to 1
+                         answer = ask “国家/地区的首都是多少”[i]
+                         correct =capital[i]
+                         if answer = correct
+                             print“ Correct！”
+                         score = score + 1
+                         else
+                             print '错误，' capitals[i] '是' states[i] 的首都
+                         print '你得分 ' score ' 满分 10 分'
 
                     ```
                 start_code: |
-                    country = ['The Netherlands', 'Poland', 'Turkey', 'Zimbabwe', 'Thailand', 'Brasil', 'Peru', 'Australia', 'India', 'Romania' ]
-                    capitals = 'Amsterdam', 'Warshaw' 'Istanbul', 'Harare', 'Bangkok', 'Brasilia', 'Lima', 'Canberra', 'New Delhi', 'Bucharest'
+                    country = ['荷兰'，'波兰'，'土耳其'，'津巴布韦'，'泰国'，'巴西'，'秘鲁'，'澳大利亚'，'印度'，'罗马尼亚']
+                    capitals = '阿姆斯特丹'、'华沙'、'伊斯坦布尔'、'哈拉雷'、'曼谷'、'巴西利亚'、'利马'、'堪培拉'、'新德里'、'布加勒斯特'
                     score = 0
-                    for i in range 0 to 10
-                        answer = ask 'What's the capital of ' countries[i]
-                        correct = capital[i]
-                        if answer = correct
-                            print 'Correct!'
-                        score = score + 1
-                        else
-                            print 'Wrong,' capitals[i] 'in the capital of' countries[i]
-                        print 'You scored ' score ' out of 10'
+                    for i in range 0 to 1
+                         answer = ask “国家/地区的首都是多少”[i]
+                         correct =capital[i]
+                         if answer = correct
+                             print“ Correct！”
+                         score = score + 1
+                         else
+                             print '错误，' capitals[i] '是' states[i] 的首都
+                         print '你得分 ' score ' 满分 10 分'
             17:
                 story_text: |-
-                    ### Exercise
-                    Debug this code. Good luck!
+                    ### 练习
+                    调试这段代码。 祝你好运！
                 example_code: |
                     **Warning! This code needs to be debugged!**
                     ```
@@ -1303,7 +1295,7 @@ adventures:
 
                     print 'Thanks for ordering!'
                     ```
-                start_code: |4
+                start_code: |2
 
                                     define food_order
                                         toppings = ask 'pepperoni, tuna, veggie or cheese?'
@@ -1334,8 +1326,8 @@ adventures:
                                     print 'Thanks for ordering!'
             18:
                 story_text: |-
-                    ### Exercise
-                    Debug this Old MacDonald program from level 16. Good luck!
+                    ### 练习
+                    从第 16 级开始调试这个 Old MacDonald 程序。祝你好运！
                 example_code: |
                     **Warning! This code needs to be debugged!**
                     ```
@@ -1354,7 +1346,7 @@ adventures:
                         print 'there a ' sound
                         print 'everywhere a ' sound sound
                     ```
-                start_code: |4
+                start_code: |2
 
                                     animals = ['pig', 'dog', 'cow']
                                     sounds = ['oink', 'woof', 'moo']
@@ -1380,10 +1372,9 @@ adventures:
                 start_code: '{print} 你好，世界！'
             2:
                 story_text: |
-                    在第2级中，我们学习了两个新的命令：`{is}`和`{sleep}`。
-                    你可以用`{is}`命名一个词，这叫变量。在这个例子中，我们定义了一个变量“名字”和另外一个变量“年龄”。你可以在代码中的任何地方使用“名字”这个词，它将被“海蒂”替换，就像这样：
-
-                    这样，你就不再需要`{echo}`命令了!
+                    恭喜！ 您已达到第 2 级。希望您已经编写了一些很棒的代码！
+                    在第一级中，您可能已经注意到 `{echo}`命令一次只能保存一位信息。
+                    例如，在餐厅冒险中，您可以回应顾客想吃什么或他们想喝什么，但不能在一句话中同时回应两者。
                 example_code: |
                     ```
                     名字 {is} 海蒂
@@ -1864,7 +1855,7 @@ adventures:
     for_command:
         name: '{for}'
         default_save_name: for
-        description: for command
+        description: for 指令
         levels:
             10:
                 story_text: |-
@@ -1941,7 +1932,6 @@ adventures:
                     在上一级，你创造了你的第一台算命机器，但海蒂不会算任何东西，只会“{echo}”。
                     在这一级，你可以用变量和`{at} {random}`命令来真正让海蒂为你选择一个答案。比如看看这段代码：
                 example_code: |
-                    在这个例子里，玩家可以向海蒂{ask}一个是非题，然后海蒂会任意选择一个答案。
                     ```
                     {print} 我是海蒂半仙！
                     问题 {is} {ask} 你想算什么？
@@ -1985,7 +1975,7 @@ adventures:
                     在本级中，你将学会在使用算命仙时，（秘密地）使结果对你有利！
                     通过使用`{if}` 和`{else}` ，你可以确保你总是能得到好运，而其他人可能得不到。
                     看看这个例子就知道了。
-                example_code: "```\n{print} '我是海蒂算命仙!'\n{print} '我可以预测你明天是否会中彩票！'\n人 {is} {ask} '你是谁？'\n{if} 人 {is} 海蒂 {print} '你肯定会中奖！\U0001F929' {else} {print} '你运气不好！别人会中奖！\U0001F62D' \n```\n"
+                example_code: "```\n{print} '我是海蒂算命仙!'\n{print} '我可以预测你明天是否会中彩票！'\n人 {is} {ask} '你是谁？'\n{if} 人 {is} 海蒂 {print} '你肯定会中奖！🤩' {else} {print} '你运气不好！别人会中奖！😭' \n```\n"
                 start_code: '# 在这里写下你的代码'
             6:
                 story_text: |
@@ -2238,15 +2228,15 @@ adventures:
                     ```
                 start_code: '# place your code here'
     harry_potter:
-        name: Harry Potter
-        default_save_name: Harry Potter
-        description: Harry Potter adventures
+        name: 哈利·波特
+        default_save_name: 哈利·波特
+        description: 哈利·波特 探险
         levels:
             10:
                 story_text: |
-                    ### Exercise
-                    We can also make a Harry Potter themed fortune teller. Fill in blanks such that 9 lines are printed.
-                    **Extra** Change the theme of the fortune teller into something else, such as your favorite book, film or tv show.
+                    ### 练习
+                    我们还可以制作一个哈利波特主题的算命师。 填写空白，以便打印 9 行。
+                    **额外** 将算命师的主题更改为其他内容，例如您最喜欢的书籍、电影或电视节目。
                 example_code: |
                     ```
                     houses = Gryffindor, Slytherin, Hufflepuff, Ravenclaw
