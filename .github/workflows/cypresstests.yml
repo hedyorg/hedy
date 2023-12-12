@@ -44,7 +44,7 @@ jobs:
       # Generates js and css files.
       run: |
         build-tools/heroku/tailwind/generate-development-css
-        build-tools/heroku/generate-typescript --tests
+        build-tools/heroku/generate-typescript
 
     - name: Start the server
       # Runs in the background
