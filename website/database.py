@@ -596,6 +596,9 @@ class Database:
         keys = {id: {"id": id} for id in adventure_ids}
         return ADVENTURES.batch_get(keys) if keys else {}
 
+    def get_public_adventures(self):
+        return ADVENTURES.get_many({"public": 1})
+
     def delete_adventure(self, adventure_id):
         ADVENTURES.delete({"id": adventure_id})
 
