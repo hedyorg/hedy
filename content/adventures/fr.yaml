@@ -161,7 +161,7 @@ adventures:
                     ### Exercice 1
                     L'exemple de code montre deux fins différentes, une ou les personnages sautent dans une machine à voyager dans le temps et une où ce n'est pas le cas.
                     Complète les espaces vide avec, au moins, une phrase pour chaque fin.
-                    **Bonus** continue l'histoire. Que se passe-t-il dans l'histoire ? Tu peux aussi ajouter un second `{ask}` avec des options différentes.
+                    **Bonus** Fait une histoire plus longue. Que se passe-t-il dans l'histoire ? Tu peux aussi ajouter une seconde commande `{ask}` avec des options différentes.
 
                     ### Exercice 2
                     Recherche dans tes programmes sauvegardés et choisi une histoire du niveau 5. Maintenant écrit une fin triste et une fin heureuse d'au moins trois lignes de long pour chacune !
@@ -179,21 +179,31 @@ adventures:
                 start_code: '# écris ton code ici'
             9:
                 story_text: |
-                    In this level you can use nesting to put {if}, {repeat} or {for} commands inside other {if}, {repeat} or {for} commands. This gives you many options and really helps you to make your story interactive.
+                    À ce niveau tu peux utiliser les commandes `{if}` et `{repeat}` à l'intérieur d'autres commandes `{if}`et `{repeat}`.
+                    Cela te donne de nombreuses options et t'aide vraiment à rendre ton histoire interactive.
+
+                    ### Exercice
+                    Termine le code pour que les `{if}` fonctionnent correctement.
+
+                    ### Exercice 2
+                    Ajoute aussi un `{if}`et `{else}` pour la partie de l'histoire où Robin rentre à la maison.
+
+                    ### Exercice 3
+                    Retourne chercher ton histoire du niveau 8 et utilise au moins deux `{if}` à l'intérieur d'un `{if}` existant.
                 example_code: |
                     ```
-                    {print} 'Robin is walking downtown'
-                    location = {ask} 'Is Robin going into a shop, or does she go home?'
-                    {if} location {is} shop
-                        {print} 'She enters the shop.'
-                        {print} 'Robin sees an interesting looking book'
-                        book = {ask} 'Does Robin buy the book?'
-                        {if} book {is} yes
-                        _ {print} 'Robin buys the book and goes home'
+                    {print} "Robin se promène en ville"
+                    choix = {ask} "Est-ce que Robin entre dans un magasin ou rentre-t-il à la maison ?"
+                    {if} choix {is} magasin
+                        {print} "Il entre dans un magasin"
+                        {print} "Robin trouve un livre qui a l'air intéressant"
+                        achète = {ask} "Est-ce que Robin achète le livre ?"
+                        {if} achète {is} oui
+                        _ {print} "Robin achète le livre et rentre à la maison"
                         _ {else}
-                        _ {print} 'Robin leaves the shop and goes home'
+                        _ {print} "Robin quitte le magasin et rentre à la maison"
                     {else}
-                        {print} 'Robin goes home'
+                        {print} "Robin rentre à la maison"
                     ```
                 start_code: '# écris ton code ici'
             10:
@@ -559,23 +569,29 @@ adventures:
                     {print} nombre_1 " fois " nombre_2 " fait " bonne_réponse
             9:
                 story_text: |
-                    In previous levels you've learned how to make a calculator, in this level you can expand that code and make it into a little maths game. Like this...
+                    Au niveau 6 tu as créé une calculatrice, à ce niveau, tu peux étendre ce code pour qu'il pose plusieurs questions.
+
+                    ### Exercice
+                    Peux-tu terminer la ligne 10 pour faire fonctionner le programme ?
+
+                    ### Exercice 2
+                    Donne au joueur ou à la joueuse un retour quand il ou elle répond bien ou mal. Pour y parvenir, étant ton programme avec un `{else}`.
                 example_code: |
                     ```
                     score = 0
                     {repeat} 10 {times}
-                        numéros = 1, 2, 3, 4, 5, 6, 7, 8, 9, 10
-                        numéro1 = numéros {at} {random}
-                        numéro2 = numéros {at} {random}
-                        bonne_réponse = numéro1 * numéro2
-                        {print} 'Combien vaut ' numéro1 ' fois ' numéro2 ' ?'
-                        tentative = {ask} 'Entre ta réponse ici...'
-                        {print} 'Ta réponse est' tentative
+                        nombres = 1, 2, 3, 4, 5, 6, 7, 8, 9, 10
+                        nombre1 = nombres {at} {random}
+                        nombre2 = nombres {at} {random}
+                        bonne_réponse = nombre1 * nombre2
+                        {print}"Combien font " nombre1 " fois " nombre2 " ?"
+                        tentative = {ask} "Quel est ta réponse ?"
+                        {print} "Ta réponse est " tentative
                         {if} tentative {is} bonne_réponse
                             score = score + 1
-                    {print} 'Bien joué ! Ton score est... ' score ' sur 10 !'
+                    {print} "Bon travail ! Ton score est… " score " sur 10 !"
                     ```
-                start_code: '{print} ''Welcome to this calculator!'''
+                start_code: '{print} "Bienvenue chez la calculatrice !"'
             10:
                 story_text: |
                     This calculator game helps you practise your tables of multiplication!
@@ -992,40 +1008,40 @@ adventures:
             9:
                 story_text: |-
                     ### Exercise
-                    Debug this code. Good luck!
+                    Débug ce code. Bonne chance !
                 example_code: |
-                    **Warning! This code needs to be debugged!**
+                    **Attention ! Ce code doit être débuggé !**
                     ```
-                    {print} 'Welcome to our sandwich shop'
-                    amount 'How many sandwiches would you like to buy?'
-                    {repeat} amount {times}
-                    {ask} {is} {ask} 'What kind or bread would you like your sandwich to be?'
-                    types_of_bread {is} white, wheat, rye, garlic, gluten free
-                    {if} chosen_bread in types_of_bread
-                    {print} 'Lovely!'
+                    {print} "Bienvenue dans notre sandwicherie"
+                    quantité "Combien de sandwichs voulez-vous acheter ?"
+                    {repeat} quantité {times}
+                    {ask} {is} {ask} "Quel type de pain voulez-vous pour votre sandwich ?"
+                    type_de_pain {is} blanc, complet, seigle, à l'ail, sans gluten
+                    {if} choix_pain in type_de_pain
+                    {print} "Avec plaisir !"
                     {else}
-                    'I'm sorry we don't sell that'
-                    topping {is} {ask} 'What kind of topping would you like?'
-                    sauce {is} {ask} 'What kind of sauce would you like?'
-                    {print} One chosen_bread with topping and sauce.
-                    price = amount * 6
-                    {print} 'That will be 'price dollar' please'
+                    "Je suis désolé mais je n'en vends pas"
+                    garniture {is} {ask} "Quelle garniture voulez-vous ?"
+                    sauce {is} {ask} "Quel type de sauce voulez-vous ?"
+                    {print} Un choix_pain avec garniture et sauce.
+                    prix = quantité * 6
+                    {print} "Ça vous fera " prix euros" s'il vous plait"
                     ```
                 start_code: |
-                    {print} 'Welcome to our sandwich shop'
-                    amount 'How many sandwiches would you like to buy?'
-                    {repeat} amount {times}
-                    {ask} {is} {ask} 'What kind or bread would you like your sandwich to be?'
-                    types_of_bread {is} white, wheat, rye, garlic, gluten free
-                    {if} chosen_bread in types_of_bread
-                    {print} 'Lovely!'
+                    {print} "Bienvenue dans notre sandwicherie"
+                    quantité "Combien de sandwichs voulez-vous acheter ?"
+                    {repeat} quantité {times}
+                    {ask} {is} {ask} "Quel type de pain voulez-vous pour votre sandwich ?"
+                    type_de_pain {is} blanc, complet, seigle, à l'ail, sans gluten
+                    {if} choix_pain in type_de_pain
+                    {print} "Avec plaisir !"
                     {else}
-                    'I'm sorry we don't sell that'
-                    topping {is} {ask} 'What kind of topping would you like?'
-                    sauce {is} {ask} 'What kind of sauce would you like?'
-                    {print} One chosen_bread with topping and sauce.
-                    price = amount * 6
-                    {print} 'That will be 'price dollar' please'
+                    "Je suis désolé mais je n'en vends pas"
+                    garniture {is} {ask} "Quelle garniture voulez-vous ?"
+                    sauce {is} {ask} "Quel type de sauce voulez-vous ?"
+                    {print} Un choix_pain avec garniture et sauce.
+                    prix = quantité * 6
+                    {print} "Ça vous fera " prix euros" s'il vous plait"
             10:
                 story_text: |-
                     ### Exercice
@@ -1396,7 +1412,7 @@ adventures:
 
                     print 'Thanks for ordering!'
                     ```
-                start_code: |4
+                start_code: |2
 
                               define food_order
                                   toppings = ask 'pepperoni, tuna, veggie or cheese?'
@@ -1447,7 +1463,7 @@ adventures:
                         print 'there a ' sound
                         print 'everywhere a ' sound sound
                     ```
-                start_code: |4
+                start_code: |2
 
                               animals = ['pig', 'dog', 'cow']
                               sounds = ['oink', 'woof', 'moo']
@@ -1595,8 +1611,8 @@ adventures:
                 start_code: '{print} "Allons à l''onglet suivant !"'
             9:
                 story_text: |
-                    Super travail ! Vous avez atteint un nouveau niveau ! Dans le niveau précédent, vous avez appris à utiliser plusieurs lignes de code dans une commande {if} ou {repeat}. Mais vous ne pouvez pas encore les combiner…
-                    Bonne nouvelle ! Dans ce niveau, vous aurez la possibilité de mettre un {if} à l'intérieur d'un autre {if}, ou à l'intérieur d'une commande {repeat}.
+                    Bon travail ! Tu as atteint un nouveau niveau ! Au niveau précédent, tu as appris à utiliser plusieurs lignes de code avec une commande {if} ou {repeat}. Mais tu ne pouvais pas encore les combiner…
+                    Bonne nouvelle ! À ce niveau, tu as la possibilité de mettre un {if} à l'intérieur d'un autre {if}, ou à l'intérieur d'une commande {repeat}.
                 example_code: |
                     ```
                     réponse = {ask} "Es-tu prêt·e à apprendre quelque chose de nouveau ?"
@@ -2520,32 +2536,34 @@ adventures:
                 start_code: '# écris ton code ici'
             9:
                 story_text: |
-                    In this level you can use nesting, which allows you to make the haunted house even more interactive!
+                    À ce niveau tu peux utiliser l'imbrication, ce qui te permet de rendre la maison hantée encore plus interactive !
 
-                    Now it's very hard to win this game, can you make it easier to win?
-                    For example by only having 1 wrong door and 2 correct doors instead of 1 correct door and 2 wrong ones?
+                    ### Exercice
+                    Maintenant, c'est vraiment dur de gagner à ce jeu. Pourrais-tu le rendre plus facile à gagner ?
+                    Change ton code pour qu'il n'y ai qu'une seule mauvaise porte et deux bonnes plutôt qu'une correcte et deux mauvaises.
+                    Indice : il te faudra changer la variable `bonne_porte` en `mauvaise_porte`, et échanger les blocs du `{if}` et du `{else}`.
                 example_code: |
                     ```
-                    {print} 'Escape from the Haunted House!'
-                    player = alive
-                    doors = 1, 2, 3
-                    monsters = zombie, vampire, giant spider
+                    {print} "S'échapper de la maison hantée !"
+                    santé = vivant
+                    portes = 1, 2, 3
+                    monstres = un zombie, un vampire, une araignée géante
                     {repeat} 3 {times}
-                        {if} player {is} alive
-                            correct_door {is} doors {at} {random}
-                            {print} 'There are 3 doors in front of you...'
-                            chosen_door = {ask} 'Which door do you choose?'
-                            {if} chosen_door {is} correct_door
-                                {print} 'No monsters here!'
+                        {if} santé {is} vivant
+                            bonne_porte {is} portes {at} {random}
+                            {print} "Il y a trois portes devant toi…"
+                            porte_choisie = {ask} "Quelle porte choisis-tu ?"
+                            {if} porte_choisie {is} bonne_porte
+                                {print} "Aucun monstre ici !"
                             {else}
-                                {print} 'You are eaten by a ' monsters {at} {random}
-                                player = dead
+                                {print} "Tu est mangé par " monstres {at} {random}
+                                santé = mort
                         {else}
-                            {print} 'GAME OVER'
-                    {if} player {is} alive
-                        {print} 'Great! You survived!'
+                            {print} "GAME OVER"
+                    {if} santé {is} vivant
+                        {print} "Génial ! tu as survécu"
                     ```
-                start_code: '{print} ''Escape from the haunted house!'''
+                start_code: '{print} "S''échapper de la maison hantée !"'
             11:
                 story_text: |
                     In this level we've changed the repeat command and we've added a line to our haunted house that tells the player in which room they are.
@@ -2743,29 +2761,29 @@ adventures:
                         {print} "Tu peux jouer sur ton ordinateur !"
             9:
                 story_text: |
-                    In this level you can also put an {if} command inside another {if} command.
+                    À ce niveau, tu peux aussi mettre une commande `{if}` à l'intérieur d'une autre commande `{if}`.
                 example_code: |
                     ```
-                    continue = {ask} 'Do you want to continue?'
-                    {if} continue = yes
-                        sure = {ask} 'Are you sure?'
-                        {if} sure {is} yes
-                            {print} 'We will continue'
+                    continuer = {ask} "Veux-tu continuer ?"
+                    {if} continuer = oui
+                        sûr = {ask} "Es-tu sûr ?"
+                        {if} sûr {is} oui
+                            {print} "Nous allons continuer"
                         {else}
-                            {print} 'You are not sure'
+                            {print} "Tu n'es pas sûr"
                     {else}
-                        {print} 'You do not want to continue'
+                        {print} "Tu ne veux pas continuer"
                     ```
                 start_code: |
-                    continue = ask 'Do you want to continue?'
-                    if continue = yes
-                        sure = ask 'Are you sure?'
-                        if sure is yes
-                            print 'We will continue'
-                        else
-                            print 'You are not sure'
-                    else
-                        print 'You do not want to continue'
+                    continuer = {ask} "Veux-tu continuer ?"
+                    {if} continuer = oui
+                        sûr = {ask} "Es-tu sûr ?"
+                        {if} sûr {is} oui
+                            {print} "Nous allons continuer"
+                        {else}
+                            {print} "Tu n'es pas sûr"
+                    {else}
+                        {print} "Tu ne veux pas continuer"
     in_command:
         name: '{in}'
         default_save_name: in_command
@@ -3155,19 +3173,19 @@ adventures:
                 start_code: '# écris ton code ici'
             9:
                 story_text: |
-                    Now that you know how to combine statements, you can create a touch type tool with `{pressed}`.
+                    Maintenant que tu sais comment combiner les éléments, tu peux créer un jeu tactile avec `{pressed}`.
 
                     ### Exercice
-                    Finish the code. Each time a random letter should be chosen, which you have to press. You get a point for a correct press, and and two points deduction for a wrong press.
-                    **(extra)** Clear the screen after each letter, and show the user how many points they have scored.
+                    Termine le code. À chaque fois, une lettre doit être choisie au hasard, qu'il faut appuyer. Tu gagnes un point par bonne réponse, mais deux points sont retirés si tu te trompes.
+                    **Bonus** Efface l'écran après chaque lettre, et affiche le score à la fin.
                 example_code: |
                     ```
                     points = 0
-                    letters = a, b, c, d, e
+                    lettre = a, b, c, d, e
                     {repeat} 10 {times}
-                        letter = _ _ _
-                        {print} 'Press the letter ' letter
-                        {if} letter {is} {pressed}
+                        lettre = _ _ _
+                        {print} "Presse la touche " letter
+                        {if} lettre {is} {pressed}
                         _
                         _
                         _
@@ -3416,10 +3434,10 @@ adventures:
             8:
                 story_text: |
                     ### La commande `{repeat}` et l'indentation
-                    Dans ce niveau, tu peux répéter plusieurs lignes de code avec une seule commande `{repeat}`.
+                    À ce niveau, tu peux répéter plusieurs lignes de code avec une seule commande `{repeat}`.
                     Tu le fais en faisant un bloc avec les lignes que tu veux répéter.
-                    Les lignes de ce bloc vont avoir besoin d'une **indentation**.
-                    Cela veut dire mettre quatre espaces au début de chaque ligne. Tu devras indenter même si tu veux créer un bloc d'une seule ligne.
+                    Pour faire un bloc, tu ajoutes quatre espaces au début de chaque ligne du bloc. C'est ce qu'on appelle une **indentation**.
+                    Tu devras indenter même pour créer un bloc d'une seule ligne.
                 example_code: |
                     ```
                     {repeat} 5 {times}
@@ -3432,25 +3450,25 @@ adventures:
                         {print} "Ceci sera écrit 5 fois"
             9:
                 story_text: |
-                    Dans ce niveau, tu peux non seulement utiliser plusieurs lignes avec `{if}` et `{repeat}`, mais tu peux aussi mettre ces commandes ensemble !
+                    À ce niveau, tu peux non seulement utiliser un bloc de lignes avec `{if}` et `{repeat}`, mais tu peux aussi mettre ces commandes ensemble !
                     Dans l'exemple, tu vois une commande `{if}` dans une commande `{repeat}`. Ça marche aussi à l'inverse, et un `{if}` peut aussi se trouver dans un autre `{if}` et un `{repeat}` dans un autre `{repeat}`.
                     Essaye !
                 example_code: |
                     ```
                     {repeat} 3 {times}
-                        nourriture = {ask} "Que veux-tu ?"
+                        nourriture = {ask} "Que veux-tu ?"
                         {if} nourriture {is} pizza
-                            {print} "bien !"
+                            {print} "bien !"
                         {else}
-                            {print} "la pizza c'est meilleur"
+                            {print} "La pizza c'est meilleur"
                     ```
                 start_code: |-
                     {repeat} 3 {times}
-                        nourriture = {ask} "Que veux-tu ?"
+                        nourriture = {ask} "Que veux-tu ?"
                         {if} nourriture {is} pizza
-                            {print} "parfait !"
+                            {print} "parfait !"
                         {else}
-                            {print} "pizza c'est meilleur"
+                            {print} "La pizza c'est meilleur"
     repeat_command_2:
         name: '{repeat} 2'
         default_save_name: repeat_command_2
@@ -3680,16 +3698,23 @@ adventures:
                 story_text_2: |
                     ### Exercice
                     Ce code peut être complété avec d'autres éléments de menu, par exemple, proposer des boissons, et/ou plusieurs plats ou desserts. Ajoute au moins un autre élément.
-                    **Bonus** Ajoute encore plus d'éléments. Propose autant de choix que tu veux !
+                    **Bonus** Ajoute encore plus d'éléments. Propose autant de choix que tu veux !
                 start_code: '# écris ton code ici'
             9:
                 story_text: |
-                    In this level you can use nesting to make your restaurant more realistic and more fun!
-                    For example you would {ask} for sauce {if} somebody orders fries, but you wouldn't {if} someone orders pizza!
-                    Check out the example, and try this at your own virtual restaurant!
+                    À ce niveau tu peux utiliser l'imbrication pour rendre ton restaurant plus réaliste et plus amusant !
+
+                    ### Exercice
+                    L'indentation a été retiré du code d'exemple.
+                    Peux-tu trouver combien d'indentations chaque ligne a besoin pour fonctionner correctement ?
+                    Si le client commande une pizza, Hedy doit demander quelle sauce il veut.
+
+                    **Bonus** Un restaurant n'a pas toutes les sauces en réserve. Fait une liste des sauces disponibles et répond pour chaque commande si tu la vends ou pas.<br>
+                    **Bonus** Les pizzas ont des garnitures. Demande au client ce qu'il veut.<br>
+                    **Bonus** Est-ce que le client a soif ? demande lui aussi sa boisson !<br>
                 example_code: |
                     ```
-                    {print} "Bienvenue au restaurant chez Hedy !"
+                    {print} "Bienvenue au restaurant Chez Hedy !"
                     nombre_personnes = {ask} "Combien de personnes se joindront à nous aujourd'hui ?"
                     {print} "Génial !"
                     prix = 0
@@ -3704,7 +3729,7 @@ adventures:
                     _ {else}
                     _ prix = prix + 1
                     _ {print} "avec " sauce
-                    _{if} nourriture {is} pizza
+                    _ {if} nourriture {is} pizza
                     _ prix = prix + 4
                     {print} "Cela fera " prix " euros"
                     {print} "Bon appétit !"
@@ -3888,22 +3913,27 @@ adventures:
                 start_code: '{print} "Bienvenue à ton propre pierre-papier-ciseaux !"'
             9:
                 story_text: |
-                    In this level you can program the whole rock, paper, scissors game by nesting the {if}-commands. Can you finish the code?
+                    À ce niveau tu peux programmer le jeu pierre, papier, ciseaux dans son ensemble, en imbriquant les commandes `{if}`.
+
+                    ### Exercice
+                    Peux-tu terminer ce code ? Le programme doit dire qui gagne pour chaque combinaison.
+
+                    **Bonus** Tu veux jouer plus d'une partie ? Étant le code pour pouvoir jouer plusieurs fois. Tu peux même utiliser une commande `{ask}` pour demander aux joueurs combien de parties ils veulent jouer.
                 example_code: |
                     ```
-                    choices = rock, paper, scissors
-                    your_choice = {ask} 'What do you choose?'
-                    {print} 'You choose ' your_choice
-                    computer_choice = choices {at} {random}
-                    {print} 'The computer chooses ' computer_choice
-                    {if} computer_choice {is} your_choice
-                        {print} 'Tie'
-                    {if} computer_choice {is} rock
-                        {if} your_choice {is} paper
-                            {print} 'You win!'
-                        {if} your_choice {is} scissors
-                            {print} 'You lose!'
-                    # finish this code
+                    choix = pierre, papier, ciseaux
+                    ton_choix = {ask} "Que choisis-tu ?"
+                    {print} "Tu as choisi " ton_Choix
+                    choix_ordinateur = choix {at} {random}
+                    {print} "L'ordinateur a choisi " choix_ordinateur
+                    {if} choix_ordinateur {is} ton_choix
+                        {print} "Égalité"
+                    {if} choix_ordinateur {is} pierre
+                        {if} ton_choix {is} papier
+                            {print} "Tu as gagné !"
+                        {if} ton_choix {is} ciseaux
+                            {print} "Tu as perdu !"
+                    # termine ce code
                     ```
                 start_code: '# écris ton code ici'
             10:
@@ -4092,8 +4122,8 @@ adventures:
                 start_code: '{print} "Baby Shark"'
             8:
                 story_text: |
-                    Aux niveaux précédents, tu as programmé la chanson « Bouteilles vertes ». Mais sans la commande `{repeat}`, tu devais recopier les versets plusieurs fois.
-                    À ce niveau, tu peux répéter la chanson 99 fois, en ajoutant juste une simple ligne !
+                    Aux niveaux précédents, tu as programmé la chanson « Bouteilles vertes ». Mais sans la commande `{repeat}` tu devais recopier les versets plusieurs fois.
+                    À ce niveau, tu peux répéter la chanson 99 fois en ajoutant juste une simple ligne !
 
                     ### Exercice
                     Écris la bonne commande à la place de l'espace vide et indente le code correctement.
@@ -4716,10 +4746,10 @@ adventures:
             8:
                 story_text: |
                     Maintenant que nous pouvons répéter plusieurs lignes, nous pouvons faire des formes plus facilement.
-                    Nous avons juste besoins de rélgler l'angle une fois et ensuite utiliser cette variable dans le `{repeat}`.
+                    Nous avons juste besoins de régler l'angle une fois et ensuite utiliser cette variable dans le `{repeat}`.
 
                     ### Exercice 1
-                    L'exemple de code dessine un caré. Change le code pour qu'il dessine une autre forme, comme un triangle ou un hexagone.
+                    L'exemple de code dessine un carré. Change le code pour qu'il dessine une autre forme, comme un triangle ou un hexagone.
                     Cela demande de changer deux lignes de code.
                     Indice : un cercle entier fait 360 degrés.
 
@@ -4745,12 +4775,12 @@ adventures:
                 start_code: sommets = {ask} "Combien de sommets dois-je dessiner ?"
             9:
                 story_text: |
-                    Now that we can use a `{repeat}` inside a `{repeat}`, we can create more complex figures.
+                    Maintenant que nous pouvons utiliser un `{repeat}` dans un `{repeat}`, nous pouvons dessiner des formes plus complexes.
 
                     ### Exercice 1
-                    This code creates three black triangles, change that into five pink squares.
+                    Ce code dessine trois triangles noirs, change ça en 5 carrés roses.
 
-                     **(extra)** Create a figure of your own choosing consisting of at least two different shapes types.
+                     **Bonus** Crée un dessin de ton choix à partir d'au moins deux types de forme.
                 example_code: |
                     ```
                     {color} {black}

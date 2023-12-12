@@ -1605,7 +1605,7 @@ levels:
             correct_answer: C
             question_score: '10'
         4:
-            question_text: Quelle est la bonne sortie ?
+            question_text: Quel sera le bon résultat ?
             code: |-
                 {print} "Les enfants disaient :"
                 {repeat} 2 {times}
@@ -1816,155 +1816,159 @@ levels:
             question_score: '10'
     9:
         1:
-            question_text: What is wrong with this code?
+            question_text: Qu'est-ce qui ne va pas avec ce code ?
             code: |-
                 {repeat} 3 {times}
-                   eten = {ask} 'What would you like to eat?'
-                   {if} food {is} fries
-                       sauce = {ask} 'What sauce would you like?'
-                       {print} 'One fries with ' sauce
-                   {if} food {is} pizza
-                       topping = {ask} 'What topping would you like?'
-                       {print} 'One pizza with ' topping
-                {print} 'That you for your order'
+                   plat = {ask} "Que voulez-vous manger ?"
+                   {if} plat {is} frites
+                       sauce = {ask} "Quelle sauce voulez-vous ?"
+                       {print} "Une frite avec " sauce
+                   {if} plat {is} pizza
+                       garniture = {ask} "Quelle garniture voulez-vous ?"
+                       {print} "Une pizza avec " garniture
+                {print} "Merci pour votre commande"
             mp_choice_options:
-            -   option: Nothing this code is correct!
-                feedback: That's right!.
-            -   option: You're not allowed to use an `{if}` command after an `{ask}` command.
-                feedback: You are!.
-            -   option: You don't have to use indentation twice.
-                feedback: You always have to use indentation.
-            -   option: The indentation is wrong in the last `{if}` command.
-                feedback: It not, though.
-            hint: all the indentation is done correctly.
+            -   option: Rien, ce code est correct !
+                feedback: C'est vrai !
+            -   option: Il n'est pas possible d'utiliser une commande `{if}` après une commande `{ask}`.
+                feedback: Si, ça l'est !
+            -   option: Ce n'est pas nécessaire d'utiliser l'indentation deux fois.
+                feedback: Il faut toujours utiliser l'indentation.
+            -   option: L'indentation n'est pas bonne pour la dernière commande `{if}`.
+                feedback: Ce n'est pas un problème d'indentation.
+            hint: Toutes les indentations sont bonnes.
             correct_answer: A
             question_score: '10'
         2:
-            question_text: What will be printed after entering the correct password?
+            question_text: Qu'est-ce qui sera affiché après avoir entré le bon mot de passe ?
             code: |-
-                password = {ask} 'What is the password?'
-                correct_password = Hedy
-                {if} password {is} correct_password
+                mot_de_passe = {ask} "Quel est le mot de passe ?"
+                mot_de_passe_correct = Hedy
+                {if} mot_de_passe {is} mot_de_passe_correct
                     {repeat} 2 {times}
-                        {print} 'Good job!'
-                        {print} 'You can use the computer!'
+                        {print} "Bon travail !"
+                        {print} "Tu peux utiliser l'ordinateur !"
                 {else}
-                    {print} 'The computer will explode in 5... 4... 3... 2... 1...'
+                    {print} "L'ordinateur va exploser dans 5… 4… 3… 2… 1…"
             mp_choice_options:
             -   option: |-
-                    Good job!
-                    Good job!
-                feedback: That's not it!
-            -   option: The computer will explode in 5... 4... 3... 2... 1...
-                feedback: That's not it!
+                    ```
+                    Bon travail !
+                    Bon travail !
+                    ```
+                feedback: Ce n'est pas ça !
+            -   option: "```\nL'ordinateur va exploser dans 5… 4… 3… 2… 1…\n```"
+                feedback: Ce n'est pas ça !
             -   option: |-
-                    Good job !
-                    Good job!
-                    You can use the computer!
-                feedback: That's not it!
+                    ```
+                    Bon travail !
+                    Bon travail !
+                    Tu peux utiliser l'ordinateur !
+                    ```
+                feedback: Ce n'est pas ça !
             -   option: |-
-                    Good job!
-                    You can use the computer!
-                    Good job!
-                    You can use the computer!
-                feedback: Correct!
-            hint: Everything under the `{repeat}` command is repeated twice.
+                    Bon travail !
+                    Tu peux utiliser l'ordinateur !
+                    Bon travail !
+                    Tu peux utiliser l'ordinateur !
+                feedback: Correct !
+            hint: Tout ce qui se trouve sous la commande `{repeat}` est répété deux fois.
             correct_answer: D
             question_score: '10'
         3:
-            question_text: Which case should you choose to win a million dollars?
+            question_text: Quelle valise choisis-tu pour gagner un million d'euros ?
             code: |-
-                {print} 'Choose the right case and win!'
-                case = {ask} 'Which case will you pick? 1 or 2?'
-                {if} case {is} 1
-                     action = {ask} 'Open it or sell it?'
-                         {if} action {is} sell
-                             {print} 'You sell your case for 10 dollars'
-                         {if} action {is} open
-                             {print} 'You open the case and win an apple pie'
-                {if} case {is} 2
-                     action = {ask} 'Open it or sell it?'
-                         {if} action {is} sell
-                             {print} 'You sell the case for 500 dollars'
-                         {if} action {is} open
-                             {print} 'You open the case and win a million dollars!'
+                {print} "Choisis la bonne valise pour gagner !"
+                valise = {ask} "Quelle valise choisi-tu ? 1 ou 2 ?"
+                {if} valise {is} 1
+                     action = {ask} "Ouvrir ou vendre ?"
+                         {if} action {is} vendre
+                             {print} "Tu vends la valise pour 10 euros"
+                         {if} action {is} ouvrir
+                             {print} "Tu ouvres la valise et gagne une tarte aux pommes"
+                {if} valise {is} 2
+                     action = {ask} "Ouvrir ou vendre ?"
+                         {if} action {is} vendre
+                             {print} "Tu vends la valise pour 500 euros"
+                         {if} action {is} ouvrir
+                             {print} "Tu ouvres la valise et gagne un million d'euros !"
             mp_choice_options:
-            -   option: case 1, sell
-                feedback: You don't win a million!
-            -   option: case 1, open
-                feedback: You don't win a million
-            -   option: case 2, sell
-                feedback: You don't win a million
-            -   option: case 2, open
+            -   option: valise 1, vendre
+                feedback: Tu ne gagnes pas un million !
+            -   option: valise 1, ouvrir
+                feedback: Tu ne gagnes pas un million !
+            -   option: valise 2, vendre
+                feedback: Tu ne gagnes pas un million !
+            -   option: valise 2, ouvrir
                 feedback: Excellent travail ! C'est gagné !
-            hint: Follow the right path
+            hint: Parcours le bon chemin
             correct_answer: D
             question_score: '10'
         4:
-            question_text: Which statement is true?
+            question_text: Quelle affirmation est vraie ?
             code: |-
-                name = {ask} 'What is your name?'
-                size = {ask} 'What is your shoe size?'
-                {if} size {is} 38
-                    {if} name {is} Cinderella
-                        {print} 'I was looking for you!'
+                nom = {ask} "Quel est ton nom ?"
+                pointure = {ask} "Quelle est ta pointure ?"
+                {if} pointure {is} 38
+                    {if} nom {is} Cendrillon
+                        {print} '❤️❤️❤️'
                     {else}
-                        {print} 'You are not the one!'
+                        {print} "Ce n'est pas toi que je cherche !"
                 {else}
-                    {print} 'Ill keep looking'
+                    {print} "Je vais continuer à chercher"
             mp_choice_options:
-            -   option: Sleeping Beauty with shoe size 38 gets the output 'Ill keep looking'
-                feedback: No, she gets 'You are not the one!'
-            -   option: 'Cinderella with shoe size 40 gets the output: ''I was looking for you!'''
-                feedback: No, she gets 'Ill keep looking'
-            -   option: Sleeping Beauty with shoe size 40 gets the output 'Ill keep looking'
-                feedback: That's right!
-            -   option: Cinderella with shoe size 40 gets the output 'I was looking for you!'
-                feedback: No she gets 'Ill keep looking'
-            hint: No matter what your name is, if you have shoe size 40 you will get the message 'Ill keep looking'.
+            -   option: Belle au bois dormant avec une pointure 38 obtient « Je vais continuer à chercher »
+                feedback: "Non, elle aura : « Ce n'est pas toi que je cherche ! »"
+            -   option: 'Cendrillon avec une pointure 40 obtient « ❤️❤️❤️ »'
+                feedback: 'Non, elle aura : « Je vais continuer à chercher »'
+            -   option: Belle au bois dormant avec une pointure 40 obtient « Je vais continuer à chercher »
+                feedback: C'est juste !
+            -   option: Cendrillon avec une pointure 38 obtient « Je vais continuer à chercher »
+                feedback: 'Non, elle aura : « ❤️❤️❤️ »'
+            hint: Quel que soit ton nom, si tu chausses du 40, tu auras le message « Je vais continuer à chercher »
             correct_answer: C
             question_score: '10'
         5:
-            question_text: Which code produced this output?
+            question_text: Quel code affiche ce résultat ?
             output: |-
-                Icecream is the best!
-                Icecream is the best!
-                Icecream is the best!
+                Vive les glaces !
+                Vive les glaces !
+                Vive les glaces !
             mp_choice_options:
             -   option: |-
                     ```
-                    desert = {ask} 'What is your favorite type of desert?'
-                    {if} desert {is} icecream
+                    dessert = {ask} "Quel est ton dessert préféré ?"
+                    {if} dessert {is} glace
                         {repeat} 3 {times}
-                        {print} 'Icecream is the best!'
+                        {print} 'Vive les glaces !'
                     ```
-                feedback: Don't forget the indentation after `{repeat}` commands.
+                feedback: N'oublie pas l'indentation après la commande `{repeat}`.
             -   option: |-
                     ```
-                    desert = {ask} 'What is your favorite type of desert?'
-                    {if} desert {is} icecream
+                    dessert = {ask} "Quel est ton dessert préféré ?"
+                    {if} dessert {is} glace
                     {repeat} 3 {times}
-                        {print} 'Icecream is the best!'
+                            {print} 'Vive les glaces !'
                     ```
-                feedback: Use indentation after an `{if}` command
+                feedback: Utilise une indentation après une commande `{if}`
             -   option: |-
                     ```
-                    desert = {ask} 'What is your favorite type of desert?'
-                    {if} desert {is} icecream
+                    dessert = {ask} "Quel est ton dessert préféré ?"
+                    {if} dessert {is} glace
                         {repeat} 3 {times}
-                            {print} 'Icecream is the best!'
+                            {print} 'Vive les glaces !'
                     ```
-                feedback: Perfect
+                feedback: Parfait
             -   option: |-
                     ```
                     {repeat} 3 {times}
-                        desert = {ask} 'What is your favorite type of desert?'
-                        {if} desert {is} icecream
+                        dessert = {ask} "Quel est ton dessert préféré ?"
+                        {if} dessert {is} glace
                             {repeat} 3 {times}
-                            {print} 'Icecream is the best!'
+                            {print} 'Vive les glaces !'
                     ```
-                feedback: There are 2 `{repeat}` commands in this code.
-            hint: Watch the indentation
+                feedback: Il y a 2 commande `{repeat}` dans ce code.
+            hint: Attention à l'indentation
             correct_answer: C
             question_score: '10'
         6:
