@@ -71,11 +71,6 @@ class ForTeachersModule(WebsiteModule):
             if SLIDES[g.lang].get_slides_for_level(level, keyword_language):
                 slides.append(level)
 
-        for Class in teacher_classes:
-            if Class.get("students"):
-                survey_id, description, unanswered_questions, survey_later = self.class_survey(Class["id"])
-                Class["survey_unanswered_questions"] = unanswered_questions
-
         return render_template(
             "for-teachers.html",
             current_page="for-teachers",
@@ -146,9 +141,10 @@ class ForTeachersModule(WebsiteModule):
         description = ""
         questions = []
         survey_later = ""
+        total_questions = ""
 
         if Class.get("students"):
-            survey_id, description, questions, survey_later = self.class_survey(class_id)
+            survey_id, description, questions, total_questions, survey_later = self.class_survey(class_id)
 
         for student_username in Class.get("students", []):
             student = self.db.user_by_username(student_username)
@@ -213,6 +209,7 @@ class ForTeachersModule(WebsiteModule):
             survey_id=survey_id,
             description=description,
             questions=questions,
+            total_questions=total_questions,
             survey_later=survey_later,
         )
 
@@ -321,7 +318,7 @@ class ForTeachersModule(WebsiteModule):
 
     @route("/load-survey/<class_id>", methods=["POST"])
     def load_survey(self, class_id):
-        survey_id, description, questions, survey_later = self.class_survey(class_id)
+        survey_id, description, questions, total_questions, survey_later = self.class_survey(class_id)
         return render_partial('htmx-survey.html', survey_id=survey_id, description=description,
                               questions=questions, survey_later=survey_later, click='yes')
 
@@ -331,13 +328,14 @@ class ForTeachersModule(WebsiteModule):
         description = gettext("class_survey_description")
         survey_later = gettext("class_survey_later")
         questions = []
+        total_questions = 4
 
         survey = self.db.get_survey(survey_id)
         if not survey:
             self.db.store_survey(dict(id=f"{survey_id}"))
             survey = self.db.get_survey(survey_id)
         elif survey.get('skip') is True or survey.get('skip') == date.today().isoformat():
-            return "", "", "", ""
+            return "", "", "", "", ""
 
         questions.append(gettext("class_survey_question1"))
         questions.append(gettext("class_survey_question2"))
@@ -346,7 +344,7 @@ class ForTeachersModule(WebsiteModule):
         unanswered_questions, translate_db = utils.get_unanswered_questions(survey, questions)
         if translate_db:
             self.db.add_survey_responses(survey_id, translate_db)
-        return survey_id, description, unanswered_questions, survey_later
+        return survey_id, description, unanswered_questions, total_questions, survey_later
 
     @route("/get-customization-level", methods=["GET"])
     @requires_login
