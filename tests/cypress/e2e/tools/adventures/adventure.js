@@ -7,11 +7,8 @@ export function createAdventure()
     // Click 'Create new class' button
     cy.get('#create_adventure_button').click();
 
-    // Type 'test class'
-    cy.get('#modal-prompt-input').type("test adventure");
-
-    // Click 'ok'
-    cy.get('#modal-ok-button').click();
+    // Click 'Go back to teachers page' button
+    cy.get('#go_back_button').click();
 
     cy.wait(500);
 }
