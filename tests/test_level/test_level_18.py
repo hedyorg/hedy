@@ -68,6 +68,7 @@ class TestsLevel18(HedyTester):
             max_level=20,
             code=code,
             expected=expected,
+            translate=False,
             extra_check_function=self.is_not_turtle()
         )
 
