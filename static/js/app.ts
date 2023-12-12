@@ -1498,6 +1498,10 @@ export function get_active_and_trimmed_code() {
   return theGlobalEditor.getActiveContents(debugLine);
 }
 
+export function getEditorContents() {
+  return theGlobalEditor.contents;
+}
+
 export function confetti_cannon(){
   const canvas = document.getElementById('confetti');
   if (canvas) {
@@ -1567,27 +1571,41 @@ function createModal(level:number ){
   modal.repair(editor, 0, title);
 }
 
-export function toggle_developers_mode(enforced: boolean) {
-  if ($('#developers_toggle').is(":checked") || enforced) {
-      $('#adventures-tab').hide();
-      $('#blur_toggle_container').show();
+export function toggleDevelopersMode(event='click', enforce_dev_mode:boolean) {
+  let dev_mode = window.localStorage.getItem('developer_mode') === 'true';
+  if (enforce_dev_mode || (event === 'click' && !dev_mode) || (event === 'load' && dev_mode)) {
+    if (event === 'click') {
+      window.localStorage.setItem('developer_mode', 'true');
       pushAchievement("lets_focus");
+    } else {
+      $('#developers_toggle').prop('checked', true);
+    }
+    const adventures = document.getElementById('adventures');
+    const editorArea = document.getElementById('editor-area');
+    const codeEditor = document.getElementById('code_editor');
+    const codeOutput = document.getElementById('code_output');
+    if (adventures && editorArea && codeEditor && codeOutput && theGlobalEditor) {
+      adventures.style.display = 'none';
+      editorArea.classList.remove('mt-5');
+      codeOutput.style.height = '36em';
+      theGlobalEditor.resize(576);
+    }
   } else {
-      $('#blur_toggle_container').hide();
-      $('#adventures-tab').show();
-  }
-
-  if ($('#adventures-tab').is(":hidden")) {
-    $('#editor-area').removeClass('mt-5');
-    $('#code_editor').css('height', 36 + "em");
-    $('#code_output').css('height', 36 + "em");
-    theGlobalEditor.resize(576);
-  } else {
-    $('#editor-area').addClass('mt-5');
-    $('#code_editor').height('22rem');
-    $('#code_output').height('22rem');
-    theGlobalEditor.resize(352);
-  }
+    if (event === 'click') {
+      window.localStorage.setItem('developer_mode', 'false');
+    }
+    const adventures = document.getElementById('adventures');
+    const editorArea = document.getElementById('editor-area');
+    const codeEditor = document.getElementById('code_editor');
+    const codeOutput = document.getElementById('code_output');
+    if (adventures && editorArea && codeEditor && codeOutput && theGlobalEditor) {
+      adventures.style.display = 'block';
+      editorArea.classList.add('mt-5');
+      codeEditor.style.height = '22rem';
+      codeOutput.style.height = '22rem';
+      theGlobalEditor.resize(352);
+    }
+  } 
 }
 
 /**

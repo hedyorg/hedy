@@ -1254,6 +1254,12 @@ def valid_echo(ast):
 class IsComplete(Filter):
     def __init__(self, level):
         self.level = level
+
+    # ah so we actually have 2 types of "error productions"!
+    # true ones that live in the grammar like error_ask_dep_2
+    # and these ones where the parser combines valid and not valid
+    # versions, like print: _PRINT (text)?
+
     # print, ask and echo can miss arguments and then are not complete
     # used to generate more informative error messages
     # tree is transformed to a node of [True] or [False, args, line_number]
@@ -3347,36 +3353,27 @@ def create_lookup_table(abstract_syntax_tree, level, lang, input_string):
 
 
 def create_AST(input_string, level, lang="en"):
-    input_string = process_input_string(input_string, level, lang)
     program_root = parse_input(input_string, level, lang)
 
-    try:
-        # checks whether any error production nodes are present in the parse tree
-        is_program_valid(program_root, input_string, level, lang)
-        abstract_syntax_tree = ExtractAST().transform(program_root)
-        is_program_complete(abstract_syntax_tree, level)
+    # checks whether any error production nodes are present in the parse tree
+    is_program_valid(program_root, input_string, level, lang)
+    abstract_syntax_tree = ExtractAST().transform(program_root)
+    is_program_complete(abstract_syntax_tree, level)
 
-        if not valid_echo(abstract_syntax_tree):
-            raise exceptions.LonelyEchoException()
+    if not valid_echo(abstract_syntax_tree):
+        raise exceptions.LonelyEchoException()
 
-        lookup_table = create_lookup_table(abstract_syntax_tree, level, lang, input_string)
-        commands = AllCommands(level).transform(program_root)
-        # FH, dec 2023. I don't love how AllCommands works on program root and not on AST,
-        # but his will do for now. One day we should really start to clean up our AST!
+    lookup_table = create_lookup_table(abstract_syntax_tree, level, lang, input_string)
+    commands = AllCommands(level).transform(program_root)
+    # FH, dec 2023. I don't love how AllCommands works on program root and not on AST,
+    # but his will do for now. One day we should really start to clean up our AST!
 
-        return abstract_syntax_tree, lookup_table, commands
-    except VisitError as E:
-        if isinstance(E, VisitError):
-            # Exceptions raised inside visitors are wrapped inside VisitError. Unwrap it if it is a
-            # HedyException to show the intended error message.
-            if isinstance(E.orig_exc, exceptions.HedyException):
-                raise E.orig_exc
-            else:
-                raise E
+    return abstract_syntax_tree, lookup_table, commands
 
 
 def transpile_inner(input_string, level, lang="en", populate_source_map=False, is_debug=False):
     check_program_size_is_valid(input_string)
+    input_string = process_input_string(input_string, level, lang)
 
     level = int(level)
     if level > HEDY_MAX_LEVEL:
@@ -3396,20 +3393,29 @@ def transpile_inner(input_string, level, lang="en", populate_source_map=False, i
     else:
         numerals_language = "Latin"
 
-    abstract_syntax_tree, lookup_table, commands = create_AST(input_string, level, lang)
+    try:
+        abstract_syntax_tree, lookup_table, commands = create_AST(input_string, level, lang)
 
-    # grab the right transpiler from the lookup
-    convertToPython = TRANSPILER_LOOKUP[level]
-    python = convertToPython(lookup_table, lang, numerals_language, is_debug).transform(abstract_syntax_tree)
+        # grab the right transpiler from the lookup
+        convertToPython = TRANSPILER_LOOKUP[level]
+        python = convertToPython(lookup_table, lang, numerals_language, is_debug).transform(abstract_syntax_tree)
 
-    has_clear = "clear" in commands
-    has_turtle = "forward" in commands or "turn" in commands or "color" in commands
-    has_pygame = "ifpressed" in commands or "ifpressed_else" in commands or "assign_button" in commands
+        has_clear = "clear" in commands
+        has_turtle = "forward" in commands or "turn" in commands or "color" in commands
+        has_pygame = "ifpressed" in commands or "ifpressed_else" in commands or "assign_button" in commands
 
-    if populate_source_map:
-        source_map.set_python_output(python)
+        if populate_source_map:
+            source_map.set_python_output(python)
 
-    return ParseResult(python, source_map, has_turtle, has_pygame, has_clear, commands)
+        return ParseResult(python, source_map, has_turtle, has_pygame, has_clear, commands)
+    except VisitError as E:
+        if isinstance(E, VisitError):
+            # Exceptions raised inside visitors are wrapped inside VisitError. Unwrap it if it is a
+            # HedyException to show the intended error message.
+            if isinstance(E.orig_exc, exceptions.HedyException):
+                raise E.orig_exc
+            else:
+                raise E
 
 
 def execute(input_string, level):
