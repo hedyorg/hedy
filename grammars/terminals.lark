@@ -1,10 +1,11 @@
 COMMENT: _HASH /([^\n]*)/
 %ignore COMMENT
 
-NEGATIVE_NUMBER: _MINUS /[\p{Nl}\p{Nd}\p{No}]+/ ("." /[\p{Nl}\p{Nd}\p{No}]+/)?
-POSITIVE_NUMBER: /[\p{Nl}\p{Nd}\p{No}]+/ ("." /[\p{Nl}\p{Nd}\p{No}]+/)?
+NEGATIVE_NUMBER: _MINUS /\p{Nd}+/ ("." /\p{Nd}+/)?
+POSITIVE_NUMBER: /\p{Nd}+/ ("." /\p{Nd}+/)?
 NUMBER: NEGATIVE_NUMBER | POSITIVE_NUMBER
-INT: _MINUS? /[\p{Nl}\p{Nd}\p{No}]+/
+INT: _MINUS? /\p{Nd}+/
+NON_DECIMAL: _MINUS? /[\p{Nl}\p{No}]+/
 
 // FH Sept 2021: More info on this variable format: https://www.unicode.org/reports/tr31/tr31-1.html
 // Exact grammar stolen from: https://lark-parser.readthedocs.io/en/latest/classes.html
