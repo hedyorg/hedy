@@ -15,7 +15,8 @@
                 <button id="submit" class="green-btn block mx-auto w-40 pb-4 pt-4"
                 hx-trigger="click"
                 hx-post="/surveys/submit-survey/{{ survey_id }}"
-                hx-swap="outerHTML"
+                hx-include="[name='question']"
+                hx-swap="innerHTML"
                 _="on click toggle .hidden on #survey
                 and window.location.reload()">
                 {{_('survey_submit')}}</button>
@@ -23,7 +24,7 @@
                 <button id="remind_later" class="red-btn block mx-auto w-40 pb-4 pt-4"
                 hx-trigger="click"
                 hx-post="/surveys/remind-later-survey/{{ survey_id }}"
-                hx-swap="outerHTML"
+                hx-swap="innerHTML"
                 _="on click toggle .hidden on #survey">
                 {{_(survey_later)}}</button>
             </div>
@@ -31,7 +32,7 @@
             <button id="skip" class="text-white m-1 w-40 pb-4 pt-4"
                 hx-trigger="click"
                 hx-post="/surveys/skip-survey/{{ survey_id }}"
-                hx-swap="outerHTML"
+                hx-swap="innerHTML"
                 _="on click toggle .hidden on #survey">
                 <u>{{_('survey_skip')}}</u></button>
             {% endif %}

@@ -22,7 +22,7 @@
                 hx-trigger="click"
                 hx-post="/for-teachers/load-survey/{{class_info.id}}"
                 hx-swap="outerHTML"
-                >Survey {{total_questions - questions|length}}/{{total_questions}}</a>
+                >{{_('survey')}} {{total_questions - questions|length}}/{{total_questions}}</a>
                 {% endif %}
               {% endif %}
             </div>

@@ -1,4 +1,3 @@
-import logging
 import collections
 import json
 import os
@@ -32,8 +31,6 @@ from datetime import date
 SLIDES = collections.defaultdict(hedy_content.NoSuchSlides)
 for lang in hedy_content.ALL_LANGUAGES.keys():
     SLIDES[lang] = hedy_content.Slides(lang)
-
-logger = logging.getLogger(__name__)
 
 
 class ForTeachersModule(WebsiteModule):
