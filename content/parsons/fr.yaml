@@ -177,8 +177,7 @@ levels:
                     {else}
                         {print} "Non ! La bonne réponse est " bonne_réponse
         2:
-            story: |-
-                Ce code demande à une personne dans un restaurant si elle veut commander un dessert. Si c'est le cas, il demande le type de dessert. Si elle commande un tiramisu, on lui dit qu'il n'y en a plus.
+            story: Ce code demande à une personne dans un restaurant si elle veut commander un dessert. Si c'est le cas, il demande le type de dessert. Si elle commande un tiramisu, on lui dit qu'il n'y en a plus.
             code: |-
                 commande = {ask} "Voulez-vous commander un dessert ?"
                 {if} commande = oui
