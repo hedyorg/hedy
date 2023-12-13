@@ -918,7 +918,7 @@ class ForTeachersModule(WebsiteModule):
             return utils.error_page(error=404, ui_message=gettext("no_such_adventure"))
         # TODO: instead of not allowing the teacher, let them update the adventure in their relevant classes only.
         elif current_adventure["creator"] != user["username"]:
-            return gettext("unauthorized"), 403 + current_adventure["creator"] + user["username"] + "hello"
+            return gettext("unauthorized"), 403, current_adventure["creator"], user["username"], "hello"
 
         adventures = self.db.get_teacher_adventures(user["username"])
         for adventure in adventures:
@@ -962,7 +962,7 @@ class ForTeachersModule(WebsiteModule):
         if not adventure:
             return utils.error_page(error=404, ui_message=gettext("retrieve_adventure_error"))
         elif adventure["creator"] != user["username"]:
-            return gettext("unauthorized"), 403 + adventure["creator"] + user["username"]
+            return gettext("unauthorized"), 403, adventure["creator"], user["username"]
 
         self.db.delete_adventure(adventure_id)
         tags = self.db.read_tags(adventure.get("tags", []))
