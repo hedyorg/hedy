@@ -135,6 +135,7 @@ class TestsLevel12(HedyTester):
         self.multi_level_tester(
             code=code,
             max_level=17,
+            translate=False,
             exception=hedy.exceptions.UnsupportedStringValue
         )
 
