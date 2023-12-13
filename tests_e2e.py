@@ -1510,7 +1510,7 @@ class TestCustomAdventures(AuthHelper):
 
         # WHEN trying to create a custom adventure
         # THEN receive a forbidden response code from the server
-        self.get_data('for-teachers/create-adventure', {}, expect_http_code=403)
+        self.get_data('for-teachers/create-adventure', expect_http_code=403)
 
     def test_create_adventure(self):
         # GIVEN a new teacher
