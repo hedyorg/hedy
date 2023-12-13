@@ -76,7 +76,6 @@ class ForTeachersModule(WebsiteModule):
             teacher_adventures=adventures,
             welcome_teacher=welcome_teacher,
             slides=slides,
-            newclass_id=uuid.uuid4().hex,
             javascript_page_options=dict(
                 page='for-teachers',
                 welcome_teacher=welcome_teacher,
@@ -853,16 +852,12 @@ class ForTeachersModule(WebsiteModule):
     @route("/customize-adventure/<adventure_id>", methods=["GET"])
     @requires_teacher
     def get_adventure_info(self, user, adventure_id):
-        focus = False
         if not adventure_id:
             return gettext("adventure_empty"), 400
         if not isinstance(adventure_id, str):
             return gettext("adventure_name_invalid"), 400
 
         adventure = self.db.get_adventure(adventure_id)
-        if not adventure:
-            adventure = self.create_adventure(user, adventure_id)
-            focus = True
         if adventure["creator"] != user["username"] and not is_teacher(user):
             return utils.error_page(error=403, ui_message=gettext("retrieve_adventure_error"))
         # Now it gets a bit complex, we want to get the teacher classes as well as the customizations
@@ -886,7 +881,6 @@ class ForTeachersModule(WebsiteModule):
             current_page="for-teachers",
             # TODO: update tags to be {name, canEdit} where canEdit is true if currentUser is the creator.
             adventure_tags=adventure.get("tags", []),
-            focus=focus,
         )
 
     @route("/customize-adventure", methods=["POST"])
@@ -981,13 +975,18 @@ class ForTeachersModule(WebsiteModule):
             return gettext("something_went_wrong_keyword_parsing"), 400
         return {"code": code}, 200
 
-    def create_adventure(self, user, adventure_id):
+    @route("/create-adventure", methods=["POST"])
+    @requires_teacher
+    def create_adventure(self, user):
+        adventure_id = uuid.uuid4().hex
         name = "AdventureX"
         adventures = self.db.get_teacher_adventures(user["username"])
+
         for adventure in adventures:
             if adventure["name"] == name:
                 name += 'X'
                 continue
+
         adventure = {
             "id": adventure_id,
             "date": utils.timems(),
@@ -998,4 +997,4 @@ class ForTeachersModule(WebsiteModule):
             "language": g.lang,
         }
         self.db.store_adventure(adventure)
-        return adventure
+        return adventure["id"], 200

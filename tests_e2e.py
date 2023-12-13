@@ -1510,21 +1510,7 @@ class TestCustomAdventures(AuthHelper):
 
         # WHEN trying to create a custom adventure
         # THEN receive a forbidden response code from the server
-        self.get_data('for-teachers/customize-adventure/123', expect_http_code=403)
-
-    def test_invalid_create_adventure(self):
-        # GIVEN a new teacher
-        self.given_fresh_teacher_is_logged_in()
-
-        # WHEN attempting to create an invalid adventure
-        invalid_bodies = [
-            '',
-            {},
-            {'name': 123}
-        ]
-
-        for invalid_body in invalid_bodies:
-            self.get_data('for-teachers/customize-adventure/' + invalid_body, expect_http_code=404)
+        self.post_data('for-teachers/create-adventure', {}, expect_http_code=403)
 
     def test_create_adventure(self):
         # GIVEN a new teacher
@@ -1532,7 +1518,7 @@ class TestCustomAdventures(AuthHelper):
 
         # WHEN attempting to create a valid adventure
         # THEN receive an OK response with the server
-        self.get_data('for-teachers/customize-adventure/123', expect_http_code=200)
+        self.post_data('for-teachers/create-adventure', expect_http_code=200)
 
     def test_invalid_view_adventure(self):
         # GIVEN a new user
@@ -1555,11 +1541,11 @@ class TestCustomAdventures(AuthHelper):
 
         # WHEN attempting to create a valid adventure
         # THEN receive an OK response with the server
-        self.get_data('for-teachers/customize-adventure/123', expect_http_code=200)
+        adventure_id = self.post_data('for-teachers/create-adventure', expect_http_code=200)
 
         # WHEN attempting to view the adventure using the id from the returned body
         # THEN receive an OK response with the server
-        self.get_data('for-teachers/customize-adventure/view/123')
+        self.get_data('for-teachers/customize-adventure/view/' + adventure_id)
 
     def test_invalid_update_adventure(self):
         # GIVEN a new teacher
@@ -1567,8 +1553,7 @@ class TestCustomAdventures(AuthHelper):
 
         # WHEN attempting to create a valid adventure
         # THEN receive an OK response with the server
-        adventure_id = '123'
-        self.get_data('for-teachers/customize-adventure/' + adventure_id, expect_http_code=200)
+        adventure_id = self.post_data('for-teachers/create-adventure', expect_http_code=200)
 
         # WHEN attempting to updating an adventure with invalid data
         invalid_bodies = [
@@ -1629,7 +1614,7 @@ class TestCustomAdventures(AuthHelper):
         # WHEN attempting to update a non-existing adventure
         # THEN receive a 404 error from the server
         body = {
-            'id': '123456',
+            'id': '123',
             'name': 'panda',
             'classes': [],
             'level': '5',
@@ -1644,14 +1629,13 @@ class TestCustomAdventures(AuthHelper):
 
         # WHEN attempting to create a valid adventure
         # THEN receive an OK response from the server
-        adventure_id = '123'
-        self.get_data('for-teachers/customize-adventure/' + adventure_id, expect_http_code=200)
+        adventure_id = self.post_data('for-teachers/create-adventure', expect_http_code=200)
 
         # WHEN attempting to update an adventure with a valid body
         # THEN receive an OK response from the server
         body = {
             'id': adventure_id,
-            'name': 'AdventureX',
+            'name': 'test_adventure',
             'classes': [],
             'level': '5',
             'content': 'This is just long enough!',
@@ -1665,7 +1649,7 @@ class TestCustomAdventures(AuthHelper):
 
         # WHEN attempting to create a valid adventure
         # THEN receive an OK response from the server
-        self.get_data('for-teachers/customize-adventure/123', expect_http_code=200)
+        adventure_id = self.post_data('for-teachers/create-adventure', expect_http_code=200)
 
         # WHEN attempting to create a valid adventure
         # THEN receive an OK response from the server AND retrieve the class_id
@@ -1675,8 +1659,8 @@ class TestCustomAdventures(AuthHelper):
         # WHEN attempting to update an adventure with a valid body
         # THEN receive an OK response from the server
         body = {
-            'id': '123',
-            'name': 'AdventureX',
+            'id': adventure_id,
+            'name': 'test_adventure',
             'classes': [class_id],
             'level': '5',
             'content': 'This is just long enough!',
@@ -1693,11 +1677,12 @@ class TestCustomAdventures(AuthHelper):
 
         # WHEN attempting to create a valid adventure
         # THEN receive an OK response from the server
-        self.get_data('for-teachers/customize-adventure/123', expect_http_code=200)
+        adventure_id = self.post_data('for-teachers/create-adventure', expect_http_code=200)
 
         # WHEN attempting to remove the adventure
         # THEN receive an OK response from the server
-        self.delete_data('for-teachers/customize-adventure/123', expect_http_code=200)
+        self.delete_data('for-teachers/customize-adventure/' +
+                         adventure_id, expect_http_code=200)
 
 
 class TestMultipleAccounts(AuthHelper):
