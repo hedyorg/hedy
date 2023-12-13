@@ -975,7 +975,7 @@ class ForTeachersModule(WebsiteModule):
             return gettext("something_went_wrong_keyword_parsing"), 400
         return {"code": code}, 200
 
-    @route("/create-adventure", methods=["POST"])
+    @route("/create-adventure", methods=["GET"])
     @requires_teacher
     def create_adventure(self, user):
         adventure_id = uuid.uuid4().hex

@@ -97,7 +97,7 @@
         {% endif %}
         <button id="create_adventure_button" class="green-btn mt-4" 
         hx-trigger="click"
-        hx-post="/for-teachers/create-adventure"
+        hx-get="/for-teachers/create-adventure"
         _="on htmx:afterRequest if detail.xhr.response
         window.open('/for-teachers/customize-adventure/' + detail.xhr.response, '_self')"
         data-cy="edit-link"{% if second_teacher and role == 'viewer' %}disabled{% endif %}>{{_('create_adventure')}}</button>
