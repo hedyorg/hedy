@@ -1538,7 +1538,9 @@ class ConvertToPython_1(ConvertToPython):
 
     def play(self, meta, args):
         notes = args[0]
-        return f"play('" + notes + "')" + self.add_debug_breakpoint()
+        return textwrap.dedent(f"""\
+        play('{notes}')
+        time.sleep(0.5)""") + self.add_debug_breakpoint()
 
     def comment(self, meta, args):
         return f"#{''.join(args)}"

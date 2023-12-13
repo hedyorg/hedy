@@ -2,6 +2,7 @@ import { initializeSyntaxHighlighter } from './syntaxModesRules';
 import { ClientMessages } from './client-messages';
 import { modal, error, success, tryCatchPopup } from './modal';
 import JSZip from "jszip";
+import * as Tone from 'tone'
 import { Tabs } from './tabs';
 import { MessageKey } from './message-translations';
 import { turtle_prefix, pygame_prefix, normal_prefix } from './pythonPrefixes'
@@ -19,7 +20,6 @@ import { stopDebug } from "./debugging";
 import { HedyAceEditorCreator } from './ace-editor';
 import { HedyCodeMirrorEditorCreator } from './cm-editor';
 import { initializeTranslation } from './lezer-parsers/tokens';
-import { play_note } from './music';
 
 export let theGlobalDebugger: any;
 export let theGlobalEditor: HedyEditor;
@@ -48,6 +48,11 @@ let theKeywordLanguage: string = 'en';
 let theStaticRoot: string = '';
 let currentTab: string;
 let theUserIsLoggedIn: boolean;
+//create a synth and connect it to the main output (your speakers)
+//const synth = new Tone.Synth().toDestination();
+
+const synth = new Tone.PolySynth(Tone.Synth).toDestination();
+
 
 const pygame_suffix =
 `# coding=utf8
@@ -1018,8 +1023,12 @@ export function runPythonProgram(this: any, code: string, sourceMap: any, hasTur
     });
 
     (Sk as any).builtins.play = new Sk.builtin.func((notes:any) => {
-      const ret = play_note(notes);
-      return new Sk.misceval.promiseToSuspension(ret.then(Sk.ffi.remapToPy));
+        //const now = Tone.now()
+        const note_name = notes.v;
+
+        //play a middle 'C' for the duration of an 8th note
+        synth.triggerAttackRelease(note_name, "16n");
+
     });
   
     return Sk.misceval.asyncToPromise(() =>
