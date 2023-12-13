@@ -7,55 +7,76 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2023-12-11 09:46+0100\n"
-"PO-Revision-Date: 2023-12-05 21:37+0000\n"
+"POT-Creation-Date: 2023-12-08 17:32-0400\n"
+"PO-Revision-Date: 2023-12-13 06:39+0000\n"
 "Last-Translator: Prefill add-on <noreply-addon-prefill@weblate.org>\n"
-"Language: zh_Hans\n"
 "Language-Team: zh_Hans <LL@li.org>\n"
-"Plural-Forms: nplurals=1; plural=0;\n"
+"Language: zh_Hans\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"X-Generator: Weblate 5.3-dev\n"
 "Generated-By: Babel 2.11.0\n"
 
 msgid "Access Before Assign"
-msgstr "你试图在第 {access_line_number} 行使用变量 {name} ，但在第 {definition_line_number} 行才设置了它。使用的变量要事先设置。"
+msgstr ""
+"您尝试在第 {access_line_number} 行使用变量 {name}，但在第 "
+"{definition_line_number} 行设置了它。要在使用变量之前设置它。"
 
 msgid "Cyclic Var Definition"
-msgstr "如果你想在是（is）命令的右侧使用变量 {variable}，你需要先给这个变量赋值。"
+msgstr "需要先设置名称 {variable}，然后才能在 {is} 命令的右侧使用它。"
 
 msgid "Has Blanks"
 msgstr "你的代码还不完整。你需要在空白的地方填上代码。"
 
 msgid "Incomplete"
-msgstr "呀！你漏写了一些代码！在第{line_number}行，你需要在{incomplete_command}后面输入文字。"
+msgstr ""
+"呀！你漏写了一些代码！在第{line_number}行，你需要在{incomplete_command}后面输"
+"入文字。"
 
 msgid "Incomplete Repeat"
-msgstr "看上去你忘了在第{line_number}行给{command}用重复命令了。"
+msgstr "您似乎忘记使用在第 {line_number} 行使用的 {repeat} 命令。"
 
 msgid "Invalid"
-msgstr "{invalid_command} 不是海蒂第{level}关里的命令。你是不是想写 {guessed_command}？"
+msgstr ""
+"{invalid_command} 不是海蒂第{level}关里的命令。你是不是想写 "
+"{guessed_command}？"
 
 msgid "Invalid Argument"
-msgstr "你不能在命令{command}中使用{invalid_argument}。试着把{invalid_argument}改成{allowed_types}。"
+msgstr ""
+"你不能在命令{command}中使用{invalid_argument}。试着把{invalid_argument}改成"
+"{allowed_types}。"
 
 msgid "Invalid Argument Type"
-msgstr "你不能在{command}中使用{invalid_argument}，因为它是个{invalid_type}。试着把{invalid_argument}改成{allowed_types}。"
+msgstr ""
+"你不能在{command}中使用{invalid_argument}，因为它是个{invalid_type}。试着把"
+"{invalid_argument}改成{allowed_types}。"
 
 msgid "Invalid At Command"
-msgstr "从 16 级开始，不能使用 {at} 命令。 您可以使用方括号来使用列表中的元素，例如 `friends[i]`、`lucky_numbers[{random}]`。"
+msgstr ""
+"从 16 级开始，不能使用 {command} 命令。 您可以使用方括号来使用列表中的元素，"
+"例如“friends[i]”、“lucky_numbers[{random}]”。"
 
 msgid "Invalid Space"
-msgstr "呀！你在第{line_number}开头加了一个空格。空格会让电脑产生困惑，你不能能删除这个空格？"
+msgstr ""
+"呀！你在第{line_number}开头加了一个空格。空格会让电脑产生困惑，你不能能删除这"
+"个空格？"
 
 msgid "Invalid Type Combination"
-msgstr "你不能在{command}中使用{invalid_argument}和{invalid_argument_2}，因为它们一个是{invalid_type}，一个是{invalid_type_2}。试着把{invalid_argument}改成{invalid_type_2}，或者把{invalid_argument_2}改成{invalid_type}。"
+msgstr ""
+"你不能在{command}中使用{invalid_argument}和{invalid_argument_2}，因为它们一个"
+"是{invalid_type}，一个是{invalid_type_2}。试着把{invalid_argument}改成"
+"{invalid_type_2}，或者把{invalid_argument_2}改成{invalid_type}。"
 
 msgid "Locked Language Feature"
-msgstr "你正在使用{concept}！这很棒，但是{concept}还没有解锁！它会在后续关卡中解锁。"
+msgstr ""
+"你正在使用{concept}！这很棒，但是{concept}还没有解锁！它会在后续关卡中解锁。"
 
 msgid "Lonely Echo"
-msgstr "你在`ask`之前使用了`echo`，或者根本没有使用`ask`。必须先`ask`，再`echo`。"
+msgstr ""
+"您在 {ask} 之前使用了 {echo}，或者在没有 {ask} 的情况下使用了 {echo}。 在 "
+"{echo} 之前要放置一个 {ask}。"
 
 msgid "Lonely Text"
 msgstr "看来你忘记在第{line_number}行的文字里使用指令"
@@ -66,37 +87,51 @@ msgstr "看上去你忘记在第{line_number}行写命令了。"
 msgid "Missing Inner Command"
 msgstr "看上去你忘了在第{line_number}行的{command}这一句里加上一个命令。"
 
-#, fuzzy
 msgid "Misspelled At Command"
-msgstr "It looks like you might have misspelled the {command} command, instead you wrote {invalid_argument} in line {line_number}."
+msgstr ""
+"看来您可能拼错了 {command} 命令，而是在第 {line_number} 行中写了 "
+"{invalid_argument}。"
 
 msgid "No Indentation"
-msgstr "第{line_number}行的空格太少了。你空了{leading_spaces}格，这样不够。每个新的代码块都要比前一行多{indent_size}个空格。"
+msgstr ""
+"第{line_number}行的空格太少了。你空了{leading_spaces}格，这样不够。每个新的代"
+"码块都要比前一行多{indent_size}个空格。"
 
-#, fuzzy
 msgid "Non Decimal Variable"
-msgstr "At line {line_number}, you might have tried using a number which Hedy does not like very much! Try changing it to a decimal number like 2."
+msgstr ""
+"在第 {line_number} 行，您可能尝试使用 海蒂 不太喜欢的号码！ 尝试将其更改为十"
+"进制数，例如 2。"
 
 msgid "Parse"
-msgstr "你输入的代码不是正确的海蒂代码。错误点在第{location[0]}行，第{location[1]}个字。你输入了一个禁止使用的字符：{character_found}。"
+msgstr ""
+"你输入的代码不是正确的海蒂代码。错误点在第{location[0]}行，第{location[1]}个"
+"字。你输入了一个禁止使用的字符：{character_found}。"
 
 msgid "Pressit Missing Else"
 msgstr "您忘记添加按不同键时会发生的情况，请在代码中添加 {else}"
 
 msgid "Too Big"
-msgstr "哇！你的程序有足足{lines_of_code}行代码！但是这一关只能用{max_lines}行代码。把你的程序改得短一点，然后再试一次。"
+msgstr ""
+"哇！你的程序有足足{lines_of_code}行代码！但是这一关只能用{max_lines}行代码。"
+"把你的程序改得短一点，然后再试一次。"
 
 msgid "Unexpected Indentation"
-msgstr "第{line_number}行的空格太多了。你空了{leading_spaces}格，这样太多。每个新的代码块都要比前一行多{indent_size}个空格。"
+msgstr ""
+"第{line_number}行的空格太多了。你空了{leading_spaces}格，这样太多。每个新的代"
+"码块都要比前一行多{indent_size}个空格。"
 
 msgid "Unquoted Assignment"
-msgstr "从这一关开始，你需要在 `is`右边的文本两边加上引号。你忘了给 text 加。"
+msgstr ""
+"从这个级别开始，您需要将文本放置在引号之间的 {is} 右侧。 您忘记了文本 {text} "
+"的内容。"
 
 msgid "Unquoted Equality Check"
 msgstr "如果你想检查一个变量的内容是否是一些词，那就需要用引号将这些词括起来！"
 
 msgid "Unquoted Text"
-msgstr "小心，如果你要提问或者打印了什么东西，必须在打印的内容的开头和结尾加上引号。你在 {unquotedtext} 中忘了加了。"
+msgstr ""
+"当心。 如果您{ask}或{print}某些内容，则文本应以引号开头和结尾。 您忘记了文本 "
+"{unquotedtext} 的内容。"
 
 msgid "Unsupported Float"
 msgstr "现在暂不支持非整数，但是再过几关就会支持了。当下先把{value}改成整数。"
@@ -104,14 +139,15 @@ msgstr "现在暂不支持非整数，但是再过几关就会支持了。当下
 msgid "Unsupported String Value"
 msgstr "文本值不能包含{invalid_value}。"
 
-msgid "Unused Variable"
-msgstr ""
-
 msgid "Var Undefined"
-msgstr "你试图使用变量 {name}，但你没设置过这个变量。也有可能是你想输入 {name} 这个词，但是忘记加引号了。"
+msgstr ""
+"你试图使用变量 {name}，但你没设置过这个变量。也有可能是你想输入 {name} 这个"
+"词，但是忘记加引号了。"
 
 msgid "Wrong Level"
-msgstr "这是正确的海蒂代码，但不是在正确的关卡。你在第{working_level}关用了{offending_keyword}。提示：{tip}"
+msgstr ""
+"这是正确的海蒂代码，但不是在正确的关卡。你在第{working_level}关用了"
+"{offending_keyword}。提示：{tip}"
 
 msgid "account_overview"
 msgstr "账户概览"
@@ -121,9 +157,10 @@ msgstr "账户已成功创建。"
 
 msgid "accounts_intro"
 msgstr ""
-"在此页面上，您可以同时为多个学生创建帐户。也可以直接将它们添加到您的某个班级中。通过按页面右下角的绿色 "
-"+，您可以添加额外的行。您可以通过按相应的红叉来删除一行。确保按“创建帐户”时没有行为空。请记住，每个用户名和邮件地址必须是唯一的，密码必须<b>至少</b>为"
-" 6 个字符。"
+"在此页面上，您可以同时为多个学生创建帐户。也可以直接将它们添加到您的某个班级"
+"中。通过按页面右下角的绿色 +，您可以添加额外的行。您可以通过按相应的红叉来删"
+"除一行。确保按“创建帐户”时没有行为空。请记住，每个用户名和邮件地址必须是唯一"
+"的，密码必须<b>至少</b>为 6 个字符。"
 
 msgid "achievement_earned"
 msgstr "你已经赢得了一项成就!"
@@ -137,9 +174,8 @@ msgstr "成就打勾图标"
 msgid "achievements_logo_alt"
 msgstr "成就图标"
 
-#, fuzzy
 msgid "add"
-msgstr "Add"
+msgstr "以及"
 
 msgid "add_students"
 msgstr "添加学生"
@@ -156,9 +192,6 @@ msgstr "去到等级 {level}"
 msgid "adventure"
 msgstr "探险活动"
 
-msgid "adventure_cloned"
-msgstr ""
-
 msgid "adventure_duplicate"
 msgstr "您已经使用此名称进行了一次探险活动。"
 
@@ -166,14 +199,19 @@ msgid "adventure_empty"
 msgstr "你没有输入一个探险活动的名字！"
 
 msgid "adventure_exp_1"
-msgstr "在右侧输入您选择的冒险经历。创建冒险后，您可以将其包含在“自定义”下的其中一个类中。如果您想在冒险中包含命令，请使用如下代码锚点："
+msgstr ""
+"在右侧输入您选择的冒险经历。创建冒险后，您可以将其包含在“自定义”下的其中一个"
+"类中。如果您想在冒险中包含命令，请使用如下代码锚点："
 
 msgid "adventure_exp_2"
-msgstr "如果你想要展示实际的代码片段，，例如给学生一个模板或代码的例子。请像这样使用预锚:"
+msgstr ""
+"如果你想要展示实际的代码片段，，例如给学生一个模板或代码的例子。请像这样使用"
+"预锚:"
 
-#, fuzzy
 msgid "adventure_exp_3"
-msgstr "确保始终用{}包围关键字，这样它们就能被正确识别。你可以使用“预览”按钮来查看你的冒险的风格版本。要在专用页面上查看冒险，请从教师页面中选择“查看”。"
+msgstr ""
+"确保始终用 { } 括住关键字，然后才能正确识别它们。 您可以使用“预览”按钮查看冒"
+"险的风格版本。 要在专用页面上查看冒险，请从教师页面中选择“查看”。"
 
 msgid "adventure_id_invalid"
 msgstr "这个探险活动的账号是无效的。"
@@ -198,13 +236,16 @@ msgstr "可用的冒险"
 
 msgid "adventures_info"
 msgstr ""
+"每个 海蒂 级别都为学生提供内置练习，我们称之为冒险。 您可以创建自己的冒险并将"
+"其添加到您的课程中。 通过您自己的冒险，您可以创造与您的学生相关且有趣的冒"
+"险。 您可以在<a href=\"https://hedy.org/for-teachers/manual/features\">此处</"
+"a>找到有关创建自己的冒险的更多信息。"
 
 msgid "adventures_restored"
 msgstr "默认的冒险已经恢复！"
 
-#, fuzzy
 msgid "ago"
-msgstr "{timestamp} ago"
+msgstr "{timestamp} 前"
 
 msgid "agree_invalid"
 msgstr "你必须同意隐私条款。"
@@ -242,9 +283,6 @@ msgstr "程序已保存"
 msgid "amount_submitted"
 msgstr "程序已提交"
 
-msgid "apply_filters"
-msgstr ""
-
 msgid "are_you_sure"
 msgstr "你确定吗？ 你无法撤销此操作。"
 
@@ -263,9 +301,8 @@ msgstr "成为赞助商"
 msgid "birth_year"
 msgstr "出生年份"
 
-#, fuzzy
 msgid "by"
-msgstr "由"
+msgstr "经由"
 
 msgid "cancel"
 msgstr "取消"
@@ -278,7 +315,9 @@ msgstr "你尝试访问列表 {list_name}，但它要么是空的，要么索引
 
 #, fuzzy
 msgid "catch_value_exception"
-msgstr "While running your program the command {command} received the value {value} which is not allowed. {suggestion}."
+msgstr ""
+"While running your program the command {command} received the value {value} "
+"which is not allowed. {suggestion}."
 
 msgid "certificate"
 msgstr "竣工证书"
@@ -317,15 +356,11 @@ msgstr "请输入新班级的名称"
 msgid "class_overview"
 msgstr "课程概述"
 
-msgid "clone"
-msgstr ""
-
-msgid "cloned_times"
-msgstr ""
-
 #, fuzzy
 msgid "class_survey_description"
-msgstr "We would like to get a better overview of our Hedy users. By providing these answers, you would help improve Hedy. Thank you!"
+msgstr ""
+"We would like to get a better overview of our Hedy users. By providing these "
+"answers, you would help improve Hedy. Thank you!"
 
 #, fuzzy
 msgid "class_survey_later"
@@ -347,8 +382,16 @@ msgstr "What is the gender balance in your class?"
 msgid "class_survey_question4"
 msgstr "What distinguishes your students from others?"
 
+#, fuzzy
 msgid "classes_info"
 msgstr ""
+"Create a class to follow the progress of each student in dashboard, and to "
+"customize the adventures your students see, and even adding your own! You "
+"can create as many classes as you like, and each class can have multiple "
+"teachers each one with different roles. You can also add as many students as "
+"you want, but mind that each student can only be in one class at a time. You "
+"can find more information about classes in the <a href=\"https://hedy.org/"
+"for-teachers/manual/preparations#for-teachers\">teacher manual</a>."
 
 #, fuzzy
 msgid "close"
@@ -537,10 +580,9 @@ msgid "echo_and_ask_mismatch_exception"
 msgstr "回声和询问不匹配"
 
 msgid "echo_out"
-msgstr "从第二级起，你不再需要{echo}。你可以用{ask}和{print}来复述答案。比如：名字 {is} {ask} 你叫什么？{print} 你好，名字"
-
-msgid "edit_adventure"
 msgstr ""
+"从第二级起，你不再需要{echo}。你可以用{ask}和{print}来复述答案。比如：名字 "
+"{is} {ask} 你叫什么？{print} 你好，名字"
 
 msgid "edit_code_button"
 msgstr "编辑代码"
@@ -594,7 +636,12 @@ msgid "expiration_date"
 msgstr "过期日期"
 
 msgid "explore_explanation"
-msgstr "在此页面上，你可以浏览其他Hedy用户创建的程序。你可以根据海蒂关卡和冒险进行过滤。单击“查看程序”以打开程序并运行它。带有红色标题的程序包含错误。你仍然可以打开该程序，但运行它会导致错误。你当然可以尝试修复它！如果创建者有公开个人资料，你可以点击其用户名以访问其个人资料。在那里，你可以找到他们所有的共享程序等等！"
+msgstr ""
+"在此页面上，你可以浏览其他Hedy用户创建的程序。你可以根据海蒂关卡和冒险进行过"
+"滤。单击“查看程序”以打开程序并运行它。带有红色标题的程序包含错误。你仍然可以"
+"打开该程序，但运行它会导致错误。你当然可以尝试修复它！如果创建者有公开个人资"
+"料，你可以点击其用户名以访问其个人资料。在那里，你可以找到他们所有的共享程序"
+"等等！"
 
 msgid "explore_programs"
 msgstr "探索程序"
@@ -736,7 +783,9 @@ msgstr "最高测验分"
 
 #, fuzzy
 msgid "highscore_explanation"
-msgstr "你能在这个页面看见以目前所有所收集到的成就数量而获得的最高分。你也能看见每个使用者，你的国家或者你的课室的排名。点击用户名以观看他们的公开资料。"
+msgstr ""
+"你能在这个页面看见以目前所有所收集到的成就数量而获得的最高分。你也能看见每个"
+"使用者，你的国家或者你的课室的排名。点击用户名以观看他们的公开资料。"
 
 msgid "highscore_no_public_profile"
 msgstr "你没有公开个人资料，因此未列在高分榜上。你想创建一个吗？"
@@ -782,7 +831,9 @@ msgstr "无效命令"
 
 #, fuzzy
 msgid "invalid_keyword_language_comment"
-msgstr "# The provided keyword language is invalid, keyword language is set to English"
+msgstr ""
+"# The provided keyword language is invalid, keyword language is set to "
+"English"
 
 #, fuzzy
 msgid "invalid_language_comment"
@@ -957,18 +1008,29 @@ msgstr ""
 "<strong>教师账户可以做什么？ \n"
 "现在为你解锁许多额外的选项。 \n"
 "\n"
-"1.额外的解释可在<a href=\"https://hedy.org/for-teachers/manual\">teacher's manual</a>中找到。 \n"
-"2.您可以通过您的教师帐户创建您的班级。您的学生将能加入您的班级，您也可以看到他们的进度。班级是通过<a href=\"https://hedycode.com/for-teachers\">teachers page</a>创建和管理的。 \n"
-"3.您可以完全自定义您的班级，例如，您可以打开和关闭不同级别，启用或禁用冒险活动，以及编写您自己的冒险活动！ \n"
+"1.额外的解释可在<a href=\"https://hedy.org/for-teachers/manual\">teacher's "
+"manual</a>中找到。 \n"
+"2.您可以通过您的教师帐户创建您的班级。您的学生将能加入您的班级，您也可以看到"
+"他们的进度。班级是通过<a href=\"https://hedycode.com/for-teachers\">teachers "
+"page</a>创建和管理的。 \n"
+"3.您可以完全自定义您的班级，例如，您可以打开和关闭不同级别，启用或禁用冒险活"
+"动，以及编写您自己的冒险活动！ \n"
 "\n"
 "<strong>加入我们的在线社区！</strong> \n"
-"欢迎所有Hedy老师、程序员和其他爱好者加入我们的社区<a href=\"https://discord.gg/8yY7dEme9r\">Discord server</a>。这是谈论Hedy的理想场所：我们有一些频道，你可以展示你很酷的项目和课程，有一些频道可以报告错误，还有一些频道可以与其他教师和Hedy团队聊天。 \n"
+"欢迎所有Hedy老师、程序员和其他爱好者加入我们的社区<a href=\"https://discord."
+"gg/8yY7dEme9r\">Discord server</a>。这是谈论Hedy的理想场所：我们有一些频道，"
+"你可以展示你很酷的项目和课程，有一些频道可以报告错误，还有一些频道可以与其他"
+"教师和Hedy团队聊天。 \n"
 "\n"
 "<strong>如何求助</strong>？ \n"
-"如果有什么不清楚的地方，你可以在Discord上告诉我们，或者在这里给我们发邮件<a href=\"mailto: hello@hedy.org\">send us an email</a>。 \n"
+"如果有什么不清楚的地方，你可以在Discord上告诉我们，或者在这里给我们发邮件<a "
+"href=\"mailto: hello@hedy.org\">send us an email</a>。 \n"
 "\n"
 "<strong>如何报告错误</strong>\n"
-"在 Discord 中，我们有一个报告错误的频道，叫做 #bugs。这是让我们了解您所遇到的问题的最佳场所。如果您知道如何使用GitHub，您可以在那里创建一个<a href=\"https://github.com/hedyorg/hedy/issues/new?assignees=&labels=&template=bug_report.md&title=%5BBUG%5D\">issue</a>。\n"
+"在 Discord 中，我们有一个报告错误的频道，叫做 #bugs。这是让我们了解您所遇到的"
+"问题的最佳场所。如果您知道如何使用GitHub，您可以在那里创建一个<a "
+"href=\"https://github.com/hedyorg/hedy/issues/new?"
+"assignees=&labels=&template=bug_report.md&title=%5BBUG%5D\">issue</a>。\n"
 
 msgid "mail_welcome_teacher_subject"
 msgstr "您的 Hedy 教师帐户已准备就绪"
@@ -1068,9 +1130,6 @@ msgstr "还没有账户？"
 msgid "no_accounts"
 msgstr "没有账户需要创建。"
 
-msgid "no_adventures_yet"
-msgstr ""
-
 msgid "no_certificate"
 msgstr "此用户尚未获得 Hedy 结业证书"
 
@@ -1111,7 +1170,8 @@ msgstr "看来你不在这个班上！"
 
 #, fuzzy
 msgid "not_in_class_no_handin"
-msgstr "You are not in a class, so there's no need for you to hand in anything."
+msgstr ""
+"You are not in a class, so there's no need for you to hand in anything."
 
 #, fuzzy
 msgid "not_logged_in_cantsave"
@@ -1228,7 +1288,9 @@ msgstr "等待邀请"
 
 #, fuzzy
 msgid "people_with_a_link"
-msgstr "Other people with a link can see this program. It also can be found on the \"Explore\" page."
+msgstr ""
+"Other people with a link can see this program. It also can be found on the "
+"\"Explore\" page."
 
 #, fuzzy
 msgid "percentage"
@@ -1326,9 +1388,6 @@ msgstr "Do you want to join this class?"
 msgid "public"
 msgstr "Public"
 
-msgid "public_adventures"
-msgstr ""
-
 #, fuzzy
 msgid "public_invalid"
 msgstr "此协议选择无效"
@@ -1337,7 +1396,9 @@ msgid "public_profile"
 msgstr "公开个人资料"
 
 msgid "public_profile_info"
-msgstr "通过选择此框，我使我的个人资料对所有人可见。请注意不要分享你的姓名或家庭住址等个人信息，因为每个人都能看到这些信息！"
+msgstr ""
+"通过选择此框，我使我的个人资料对所有人可见。请注意不要分享你的姓名或家庭住址"
+"等个人信息，因为每个人都能看到这些信息！"
 
 msgid "public_profile_updated"
 msgstr "公开资料已更新。"
@@ -1512,12 +1573,6 @@ msgstr "Select"
 msgid "select_adventures"
 msgstr "Select adventures"
 
-msgid "select_lang"
-msgstr ""
-
-msgid "select_tag"
-msgstr ""
-
 msgid "self_removal_prompt"
 msgstr "你确定你要退出这个班级吗？"
 
@@ -1561,11 +1616,22 @@ msgstr "单引号"
 msgid "slash"
 msgstr "斜杠"
 
+#, fuzzy
 msgid "slides"
-msgstr ""
+msgstr "Slides"
 
+#, fuzzy
 msgid "slides_info"
 msgstr ""
+"For each level of Hedy, we have created slides to help you teach. The slides "
+"contain explanations of each level, and Hedy examples that you can run "
+"inside the slides. Just click the link and get started! the Introduction "
+"slides are a general explanation of Hedy before level 1 The slides were "
+"created using <a href=\"https://slides.com\">slides.com</a>. If you want to "
+"adapt them yourself, you can download them, and then upload the resulting "
+"zip file to <a href=\"https://slides.com\">slides.com</a>. You can find more "
+"information about the slides in the <a href=\"https://hedy.org/for-teachers/"
+"manual/features\">teacher's manual</a>."
 
 #, fuzzy
 msgid "social_media"
@@ -1573,7 +1639,9 @@ msgstr "Social media"
 
 #, fuzzy
 msgid "something_went_wrong_keyword_parsing"
-msgstr "There is a mistake in your adventure, are all keywords correctly surrounded with { }?"
+msgstr ""
+"There is a mistake in your adventure, are all keywords correctly surrounded "
+"with { }?"
 
 msgid "space"
 msgstr "空格"
@@ -1702,7 +1770,8 @@ msgid "teacher_invalid"
 msgstr "你的教师值无效。"
 
 msgid "teacher_invitation_require_login"
-msgstr "要将您的个人资料设置为教师，我们需要您登录。如果您没有帐户，请创建一个。"
+msgstr ""
+"要将您的个人资料设置为教师，我们需要您登录。如果您没有帐户，请创建一个。"
 
 msgid "teacher_manual"
 msgstr "教师手册"
@@ -1715,7 +1784,9 @@ msgstr "教师教程图标"
 
 #, fuzzy
 msgid "teacher_welcome"
-msgstr "Welcome to Hedy! Your are now the proud owner of a teachers account which allows you to create classes and invite students."
+msgstr ""
+"Welcome to Hedy! Your are now the proud owner of a teachers account which "
+"allows you to create classes and invite students."
 
 #, fuzzy
 msgid "teachers"
@@ -1792,9 +1863,6 @@ msgstr "海蒂 - 隐私条款"
 msgid "title_programs"
 msgstr "海蒂 - 我的程序"
 
-msgid "title_public-adventures"
-msgstr ""
-
 msgid "title_recover"
 msgstr "海蒂 - 恢复帐户"
 
@@ -1820,7 +1888,8 @@ msgid "tooltip_level_locked"
 msgstr "Your teacher disabled this level"
 
 msgid "translate_error"
-msgstr "翻译代码时出了点问题。尝试运行代码以查看它是否有错误。有错误的代码无法翻译。"
+msgstr ""
+"翻译代码时出了点问题。尝试运行代码以查看它是否有错误。有错误的代码无法翻译。"
 
 #, fuzzy
 msgid "translating_hedy"
@@ -1975,6 +2044,47 @@ msgstr "你的个人文本..."
 msgid "your_program"
 msgstr "你的程序"
 
+#, fuzzy
+msgid "apply_filters"
+msgstr "Apply filters"
+
+#, fuzzy
+msgid "cloned_times"
+msgstr "Clones"
+
+#, fuzzy
+msgid "edit_adventure"
+msgstr "Edit adventure"
+
+#, fuzzy
+msgid "clone"
+msgstr "Clone"
+
+#, fuzzy
+msgid "adventure_cloned"
+msgstr "Adventure is cloned"
+
+#, fuzzy
+msgid "select_lang"
+msgstr "Select language"
+
+#, fuzzy
+msgid "select_tag"
+msgstr "Select tag"
+
+#, fuzzy
+msgid "Unused Variable"
+msgstr "You defined the variable {variable_name} on line {line_number}, but you did not use it."
+
+msgid "no_adventures_yet"
+msgstr ""
+
+msgid "public_adventures"
+msgstr ""
+
+msgid "title_public-adventures"
+msgstr ""
+
 #~ msgid "create_account_explanation"
 #~ msgstr "Having your own account allows you to save your programs."
 
@@ -2027,16 +2137,29 @@ msgstr "你的程序"
 #~ msgstr "Available adventures level"
 
 #~ msgid "customize_class_exp_1"
-#~ msgstr "Hi! On this page you can customize your class. By selecting levels and adventures you can choose what your student can see. You can also add your own created adventures to levels. All levels and default adventures will be selected by default. <b>Notice:</b> Not every adventure is available for every level! Settings up your customizations goes as follows:"
+#~ msgstr ""
+#~ "Hi! On this page you can customize your class. By selecting levels and "
+#~ "adventures you can choose what your student can see. You can also add "
+#~ "your own created adventures to levels. All levels and default adventures "
+#~ "will be selected by default. <b>Notice:</b> Not every adventure is "
+#~ "available for every level! Settings up your customizations goes as "
+#~ "follows:"
 
 #~ msgid "customize_class_exp_2"
-#~ msgstr "You can always change these settings later on. For example, you can make specific adventures or levels available while teaching a class. This way it's easy for you to determine which level and adventures your students will be working on. If you want to make everything available for your class it is easiest to remove the customization all together."
+#~ msgstr ""
+#~ "You can always change these settings later on. For example, you can make "
+#~ "specific adventures or levels available while teaching a class. This way "
+#~ "it's easy for you to determine which level and adventures your students "
+#~ "will be working on. If you want to make everything available for your "
+#~ "class it is easiest to remove the customization all together."
 
 #~ msgid "customize_class_step_1"
 #~ msgstr "Select levels for your class by pressing the \"level buttons\""
 
 #~ msgid "customize_class_step_2"
-#~ msgstr "\"Checkboxes\" will appear for the adventures available for the chosen levels"
+#~ msgstr ""
+#~ "\"Checkboxes\" will appear for the adventures available for the chosen "
+#~ "levels"
 
 #~ msgid "customize_class_step_3"
 #~ msgstr "Select the adventures you want to make available"
@@ -2048,7 +2171,8 @@ msgstr "你的程序"
 #~ msgstr "Add personal adventures"
 
 #~ msgid "customize_class_step_6"
-#~ msgstr "Selecting an opening date for each level (you can also leave it empty)"
+#~ msgstr ""
+#~ "Selecting an opening date for each level (you can also leave it empty)"
 
 #~ msgid "customize_class_step_7"
 #~ msgstr "Selection other settings"
@@ -2109,4 +2233,3 @@ msgstr "你的程序"
 
 #~ msgid "no_tags"
 #~ msgstr "No tags yet."
-
