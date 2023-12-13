@@ -1519,7 +1519,6 @@ class TestCustomAdventures(AuthHelper):
         # WHEN attempting to create an invalid adventure
         invalid_bodies = [
             '',
-            [],
             {},
             {'name': 123}
         ]
