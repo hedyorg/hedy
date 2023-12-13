@@ -817,7 +817,6 @@ class ForTeachersModule(WebsiteModule):
 
         # the following is due to the fact that the current user may be a second user.
         teacher = classes[0].get("teacher") if len(classes) else user["username"]
-        print("\n\n\n", teacher, user)
         # Now -> actually store the users in the db
         for account in body.get("accounts", []):
             # Set the current teacher language and keyword language as new account language

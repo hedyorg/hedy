@@ -20,7 +20,7 @@ jobs:
       with:
         fetch-depth: 0
     - name: Set up Python 3.9
-      uses: actions/setup-python@v1
+      uses: actions/setup-python@v4
       with:
         python-version: 3.9
     - name: Install Python dependencies
@@ -42,10 +42,10 @@ jobs:
       run: ./feed_dev_database.sh
 
     - name: Bundle files
-      # Generates js and css bundles.
+      # Generates js and css files.
       run: |
-        build-tools/heroku/generate-typescript
         build-tools/heroku/tailwind/generate-development-css
+        build-tools/heroku/generate-typescript
 
     - name: Start the server
       # Runs in the background
@@ -54,12 +54,12 @@ jobs:
     - name: Cypress run
       uses: cypress-io/github-action@v6
       with:
-        browser: electron
-        # Where cypress.config.js and all the other cypress files live, requires 'install: false'
-        working-directory: tests/
         # We have already installed all dependencies
         install: false
+        # Record to cypress cloud to inspect possible failing tests.
         record: true
+        # Where cypress.config.js and all the other cypress files live, requires 'install: false'
+        working-directory: tests/
       env:
         # pass the Cypress Cloud record key as an environment variable
         CYPRESS_RECORD_KEY: ${{ secrets.CYPRESS_RECORD_KEY }}

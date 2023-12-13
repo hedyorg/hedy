@@ -207,11 +207,20 @@ div[data-te-input-notch-ref] {
   border-radius: 0.25rem;
   border: 2px black solid;
 }
+
 .group[data-te-input-focused] > * {
   border: none !important;
   outline: none !important;
   box-shadow: none !important;
 }
+
+.card-container {
+  display: grid; 
+  grid-template-columns: repeat(auto-fit, minmax(250px, 350px));
+  grid-gap: 1.5rem;
+  justify-content: center;
+}
+
 .current {
   font-weight: bold;
   background-color: #edf2f7;
