@@ -289,7 +289,7 @@ def promote_types(types, rules):
 
 # Commands per Hedy level which are used to suggest the closest command when kids make a mistake
 commands_per_level = {
-    1: ['print', 'ask', 'echo', 'turn', 'forward', 'color'],
+    1: ['print', 'ask', 'echo', 'turn', 'forward', 'color', 'play'],
     2: ['print', 'ask', 'is', 'turn', 'forward', 'color', 'sleep'],
     3: ['ask', 'is', 'print', 'forward', 'turn', 'color', 'sleep', 'at', 'random', 'add', 'to', 'remove', 'from'],
     4: ['ask', 'is', 'print', 'forward', 'turn', 'color', 'sleep', 'at', 'random', 'add', 'to', 'remove', 'from', 'clear'],
@@ -1535,6 +1535,10 @@ class ConvertToPython_1(ConvertToPython):
 
         argument = process_characters_needing_escape(args[0])
         return "print('" + argument + " '+answer)" + self.add_debug_breakpoint()
+
+    def play(self, meta, args):
+        notes = args[0]
+        return f"play('" + notes + "')" + self.add_debug_breakpoint()
 
     def comment(self, meta, args):
         return f"#{''.join(args)}"

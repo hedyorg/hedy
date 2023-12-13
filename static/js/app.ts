@@ -19,6 +19,7 @@ import { stopDebug } from "./debugging";
 import { HedyAceEditorCreator } from './ace-editor';
 import { HedyCodeMirrorEditorCreator } from './cm-editor';
 import { initializeTranslation } from './lezer-parsers/tokens';
+import { play_note } from './music';
 
 export let theGlobalDebugger: any;
 export let theGlobalEditor: HedyEditor;
@@ -1014,6 +1015,11 @@ export function runPythonProgram(this: any, code: string, sourceMap: any, hasTur
         // Set a time-out of either 20 seconds when having a sleep and 5 seconds when not
         return ((hasSleep) ? 20000 : 5000);
       }) ()
+    });
+
+    (Sk as any).builtins.play = new Sk.builtin.func((notes:any) => {
+      const ret = play_note(notes);
+      return new Sk.misceval.promiseToSuspension(ret.then(Sk.ffi.remapToPy));
     });
   
     return Sk.misceval.asyncToPromise(() =>
