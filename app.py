@@ -533,6 +533,8 @@ def parse():
                 translated_error = translate_error(ex.error_code, ex.arguments, keyword_lang)
                 if isinstance(ex, hedy.exceptions.InvalidSpaceException):
                     response['Warning'] = translated_error
+                elif isinstance(ex, hedy.exceptions.UnusedVariableException):
+                    response['Warning'] = translated_error
                 else:
                     response['Error'] = translated_error
                 response['Location'] = ex.error_location
