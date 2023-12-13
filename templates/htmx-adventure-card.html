@@ -1,0 +1,52 @@
+<div class="adventure grid grid-rows-[1fr_100px] bg-white shadow-md rounded-lg transition-shadow hover:shadow-lg outline-blue-400 hover:outline hover:outline-2"
+    data-lang="{{adventure.language or current_language().lang}}"
+    _="on removeMe remove me">
+    <div class="py-4 px-6">
+        {% if adventure["creator"] == user["username"] %}
+        <h2 class="name underline cursor-pointer"
+            _="on click window.open('/for-teachers/customize-adventure/{{adventure.id}}', '_self')">{{adventure.name}}
+        </h2>
+        {% else %}
+        <h2 class="name">{{ adventure.name|e }}</h2>
+        {% endif %}
+        <p class="text-gray-600 mt-1">{{_('creator')}}: {{ adventure.creator }}</p>
+        <p class="text-gray-600 mt-1">
+            {{_('level')}}: {% if adventure.level %}{{ adventure.level }}{% else %}-{% endif %}
+        </p>
+        {% if adventure["cloned_times"] %}
+            <p class="text-gray-600 mt-1">
+                {{_('cloned_times')}}: {{adventure["cloned_times"]}}
+            </p>
+        {%endif%}
+        <p class="text-gray-600 mt-1">{{_('last_update')}}: {{ adventure.date }}</p>
+        </a>
+        {% if adventure["tags"]|length > 0 %}
+            {{ render_partial('htmx-tags-list.html', tags=adventure["tags"], adventure_id=adventure.id) }}
+        {%endif%}
+    </div>
+    <div id="actions"
+        class="flex items-center px-6 py-4 bg-gray-200 shadow-lg">
+        {% if user["username"] != adventure["creator"] %}
+            <a class="green-btn mx-1 no-underline cursor-pointer" href="/for-teachers/customize-adventure/view/{{ adventure.id }}">{{_('preview')}}</a>
+            <button class="green-btn" id="clone_adventure_btn"
+                _="on htmx:afterRequest log detail 
+                if detail.xhr.status == '200'
+                    hedyApp.cloned('{{_('adventure_cloned')}}')
+                    send removeMe
+                else
+                    hedyApp.cloned(detail.xhr.response, false)
+                end"
+                hx-trigger="click"
+                hx-post="/public-adventures/clone/{{adventure.id}}"
+                hx-swap="afterbegin"
+                hx-target="#adventures"
+                ">{{_('clone')}}</button>
+        {%else%}
+            <!-- TODO: button to add to class(es) -->
+            <button
+                class="green-btn" id="edit_adventure_button"
+                _="on click window.open('/for-teachers/customize-adventure/{{adventure.id}}', '_self')">
+                {{_('edit_adventure')}}</button>
+        {% endif %}
+    </div>
+</div>

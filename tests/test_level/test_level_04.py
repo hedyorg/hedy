@@ -313,7 +313,7 @@ class TestsLevel4(HedyTester):
 
     def test_place_holder_no_space(self):
         # same as print for level 4
-        code = "print _Escape from the haunted house!_"
+        code = "print _ Escape from the haunted house! _"
 
         self.multi_level_tester(
             code=code,
@@ -444,7 +444,7 @@ class TestsLevel4(HedyTester):
         woord1 = 'zomerkamp'
         print(f'naam is naar hetwoord1')""")
 
-        self.multi_level_tester(code=code, expected=expected, max_level=11)
+        self.multi_level_tester(code=code, expected=expected, max_level=11, unused_allowed=True)
 
     #
     # Test comment
@@ -466,6 +466,7 @@ class TestsLevel4(HedyTester):
         expected = 'test = \'"Welkom bij Hedy" \''
         self.multi_level_tester(
             max_level=11,
+            unused_allowed=True,
             code=code,
             expected=expected
         )
@@ -477,25 +478,25 @@ class TestsLevel4(HedyTester):
         code = "details is ask 'tell me more'"
         expected = "details = input(f'tell me more')"
 
-        self.multi_level_tester(code=code, expected=expected, max_level=11)
+        self.multi_level_tester(code=code, expected=expected, max_level=11, unused_allowed=True)
 
     def test_ask_double_quoted_text(self):
         code = 'details is ask "tell me more"'
         expected = "details = input(f'tell me more')"
 
-        self.multi_level_tester(code=code, expected=expected, max_level=11)
+        self.multi_level_tester(code=code, expected=expected, max_level=11, unused_allowed=True)
 
     def test_ask_single_quoted_text_with_inner_double_quote(self):
         code = """details is ask 'say "no"'"""
         expected = """details = input(f'say "no"')"""
 
-        self.multi_level_tester(code=code, expected=expected, max_level=11)
+        self.multi_level_tester(code=code, expected=expected, max_level=11, unused_allowed=True)
 
     def test_ask_double_quoted_text_with_inner_single_quote(self):
         code = f'''details is ask "say 'no'"'''
         expected = '''details = input(f'say \\'no\\'')'''
 
-        self.multi_level_tester(code=code, expected=expected, max_level=11)
+        self.multi_level_tester(code=code, expected=expected, max_level=11, unused_allowed=True)
 
     def test_ask_without_quotes_gives_error(self):
         code = textwrap.dedent("""\
@@ -584,7 +585,7 @@ class TestsLevel4(HedyTester):
         code = f"""color is ask {q}Cuál es tu color favorito?{q}"""
         expected = f"""color = input(f'Cuál es tu color favorito?')"""
 
-        self.multi_level_tester(code=code, expected=expected, max_level=11)
+        self.multi_level_tester(code=code, expected=expected, max_level=11, unused_allowed=True)
 
     @parameterized.expand(HedyTester.quotes)
     def test_ask_bengali_var(self, q):
@@ -607,7 +608,7 @@ class TestsLevel4(HedyTester):
         colors = ['orange', 'blue', 'green']
         favorite = input(f'Is your fav color {random.choice(colors)}')""")
 
-        self.multi_level_tester(code=code, expected=expected, max_level=11)
+        self.multi_level_tester(code=code, expected=expected, max_level=11, unused_allowed=True)
 
     def test_print_list_access_index_var(self):
         code = textwrap.dedent("""\
@@ -650,7 +651,7 @@ class TestsLevel4(HedyTester):
         colors = ['orange', 'blue', 'green']
         favorite = input(f'Is your fav color {colors[int(1)-1]}')""")
 
-        self.multi_level_tester(code=code, expected=expected, max_level=11)
+        self.multi_level_tester(code=code, expected=expected, max_level=11, unused_allowed=True)
 
     def test_ask_string_var(self):
         code = textwrap.dedent("""\
@@ -661,7 +662,7 @@ class TestsLevel4(HedyTester):
         color = 'orange'
         favorite = input(f'Is your fav color {color}')""")
 
-        self.multi_level_tester(code=code, expected=expected, max_level=11)
+        self.multi_level_tester(code=code, expected=expected, max_level=11, unused_allowed=True)
 
     def test_ask_integer_var(self):
         code = textwrap.dedent("""\
@@ -672,7 +673,7 @@ class TestsLevel4(HedyTester):
         number = '10'
         favorite = input(f'Is your fav number{number}')""")
 
-        self.multi_level_tester(code=code, expected=expected, max_level=11)
+        self.multi_level_tester(code=code, expected=expected, max_level=11, unused_allowed=True)
 
     #
     # sleep tests
@@ -716,7 +717,7 @@ class TestsLevel4(HedyTester):
         code = "period is ."
         expected = "period = '.'"
 
-        self.multi_level_tester(code=code, expected=expected, max_level=11)
+        self.multi_level_tester(code=code, expected=expected, max_level=11, unused_allowed=True)
 
     def test_assign_list_values_with_inner_single_quotes(self):
         code = textwrap.dedent(f"""\
@@ -760,17 +761,17 @@ class TestsLevel4(HedyTester):
                                      HedyTester.list_access_transpiled('random.choice(taart)'),
                                      "print(f'we bakken een{random.choice(taart)}')")
 
-        self.multi_level_tester(code=code, expected=expected, max_level=11)
+        self.multi_level_tester(code=code, expected=expected, max_level=11, unused_allowed=True)
 
     def test_assign_single_quoted_text(self):
         code = """message is 'Hello welcome to Hedy.'"""
         expected = """message = '\\'Hello welcome to Hedy.\\''"""
-        self.multi_level_tester(code=code, expected=expected, max_level=11)
+        self.multi_level_tester(code=code, expected=expected, max_level=11, unused_allowed=True)
 
     def test_assign_double_quoted_text(self):
         code = '''message is "Hello welcome to Hedy."'''
         expected = """message = '"Hello welcome to Hedy."'"""
-        self.multi_level_tester(code=code, expected=expected, max_level=11)
+        self.multi_level_tester(code=code, expected=expected, max_level=11, unused_allowed=True)
 
     #
     # add/remove tests

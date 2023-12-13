@@ -5,7 +5,8 @@ from parameterized import parameterized
 import exceptions
 import hedy
 from hedy_sourcemap import SourceRange
-from tests.Tester import HedyTester, SkippedMapping
+# from hedy_sourcemap import SourceRange
+from tests.Tester import HedyTester, SkippedMapping  # , SkippedMapping
 
 
 class TestsLevel17(HedyTester):
