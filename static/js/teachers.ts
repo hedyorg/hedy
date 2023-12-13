@@ -119,7 +119,7 @@ export function join_class(id: string, name: string) {
             window.location.pathname = '/login';
          });
       } else {
-          modal.notifyError(ClientMessages['Connection_error']);
+          modal.notifyError(err.responseText || ClientMessages['Connection_error']);
       }
     });
 }
