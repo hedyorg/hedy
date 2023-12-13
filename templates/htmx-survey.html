@@ -15,9 +15,9 @@
                 <button id="submit" class="green-btn block mx-auto w-40 pb-4 pt-4"
                 hx-trigger="click"
                 hx-post="/surveys/submit-survey/{{ survey_id }}"
-                hx-include="[name='question']"
                 hx-swap="outerHTML"
-                _="on click toggle .hidden on #survey">
+                _="on click toggle .hidden on #survey
+                and window.location.reload()">
                 {{_('survey_submit')}}</button>
                 {% if not click %}
                 <button id="remind_later" class="red-btn block mx-auto w-40 pb-4 pt-4"
