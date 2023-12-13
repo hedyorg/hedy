@@ -597,7 +597,7 @@ class Database:
         return ADVENTURES.batch_get(keys) if keys else {}
 
     def get_public_adventures(self):
-        return ADVENTURES.get_many({"public": 1})
+        return ADVENTURES.get_many({"public": True})
 
     def delete_adventure(self, adventure_id):
         ADVENTURES.delete({"id": adventure_id})
