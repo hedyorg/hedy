@@ -597,7 +597,7 @@ class Database:
         return ADVENTURES.batch_get(keys) if keys else {}
 
     def get_public_adventures(self):
-        return ADVENTURES.get_many({"public": True})
+        return ADVENTURES.get_many({"public": 1})
 
     def delete_adventure(self, adventure_id):
         ADVENTURES.delete({"id": adventure_id})
@@ -662,7 +662,7 @@ class Database:
         return ADVENTURES.scan()
 
     def public_adventures(self):
-        return ADVENTURES.get_many({"public": True})
+        return ADVENTURES.get_many({"public": 1})
 
     def get_student_classes_ids(self, username):
         ids = USERS.get({"username": username}).get("classes")
