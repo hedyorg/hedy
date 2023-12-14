@@ -1545,12 +1545,19 @@ def render_code_in_editor(level, code):
     except BaseException:
         return utils.error_page(error=404, ui_message=gettext('no_such_level'))
 
+    # it is very much a hack to grab an adventure and then put the code on that adventure,
+    # but it is the way I got it to work!
+    if level == 0:   # there are no level 0 adventures
+        level = 1
+
+    # grab the fake adventure ----
     initial_tab = "story"
     initial_adventure = "story"
 
     adventures = [x for x in load_adventures_for_level(level) if x.short_name == "story"]
-    adventures[0].start_code = code
+    # grab the fake adventure ----
 
+    adventures[0].start_code = code  # add code to it
 
     return render_template("code-page.html",
                            specific_adventure=True,

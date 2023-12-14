@@ -29,26 +29,32 @@ levels:
             text: |-
                 In Hedy we use special codes, like `{print}`.
             code: |-
-                print Hello from the yamls!
+                {print} Welcome to Hedy!
         6:
             header: Programming in Hedy
             text: |-
                 Code words will be shown in pink.
-                
+            code: |-
+                {print} Welcome to Hedy!
         7:
             header: Programming in Hedy
             text: |-
                 We start the code with the Run code button underneath the code.
-                
+            code: |-
+                {print} Welcome to Hedy!
         8:
             header: Programming in Hedy
             text: |-
                 Output appears on the right-hand side.
-                
+            code: |-
+                {print} Welcome to Hedy!
         9:
             header: Programming in Hedy
             text: |-
                 The output can also be a drawing.
+            code: |-
+                {forward} 100
+                {turn} left
     1:
         1:
             header: Welcome to level 1!
@@ -63,21 +69,24 @@ levels:
 
                 `{print}` is used to show text on the screen.
             code: |-
-                print Hello from the yamls!
+                {print} Put some text on the screen
         3:
             header: The {print} command
             text: |-
                 You can change the text after the print command to whatever you want.
 
                 Or you could print multiple lines by adding another line of code that also starts with `{print}`.
-            editor: <iframe class="fragment" src="/adventure/print_command/1/raw"></iframe>
+            code: |-
+                {print} Welcome to Hedy!
         4:
             header: '{ask}'
             text: |-
                 The second code that you can use in level 1 is `{ask}`.
 
                 `{ask}` is used to ask a question that can be answered.
-            editor: <iframe class="fragment" src="/adventure/rock/1/raw"></iframe>
+            code: |-
+                {print} Welcome to your own rock scissors paper!
+                {ask} What will you choose?
         5:
             header: '{echo}'
             text: |-
@@ -88,12 +97,16 @@ levels:
                 If you do want the answer to show, you can use the final command of this level: `{echo}`.
 
                 `{echo}` is used to repeat the answer of an `{ask}`.
-            editor: <iframe class="fragment" src="/adventure/ask_command/1/raw"></iframe>
+            code: |-
+                {print} Hello!
+                {ask} What is your name?
+                {echo} hello
         6:
             header: Programming!
             text: |-
                 With `{print}`, `{ask}` and `{echo}` you can already create a little story.
                 This is a good time to try the Parrot, Story and Rock, Paper Scissors adventures.
+            editor: <iframe class="fragment" src="/hedy/1"></iframe>
         7:
             header: Programming!
             text: Adventures are shown in tabs.
@@ -109,11 +122,15 @@ levels:
         10:
             header: 'Drawing with the turtle: {forward}'
             text: '`{forward}` is used to move the turtle forward.'
-            editor: <iframe class="fragment" src="/adventure/turtle/1/raw"></iframe>
+            code: |-
+                {forward} 50
+                {turn} left
         11:
             header: 'Drawing with the turtle: {turn}'
             text: '`{turn}` is used to make the turtle turn left or right.'
-            editor: <iframe class="fragment" src="/adventure/turtle/1/raw"></iframe>
+            code: |-
+                {forward} 50
+                {turn} left
     2:
         1:
             header: Welcome to level 2
