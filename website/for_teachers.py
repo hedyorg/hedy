@@ -896,7 +896,7 @@ class ForTeachersModule(WebsiteModule):
             return gettext("content_invalid"), 400
         if len(body.get("content")) < 20:
             return gettext("adventure_length"), 400
-        if not isinstance(body.get("public"), bool) or not isinstance(body.get("public"), int):
+        if not isinstance(body.get("public"), bool) and not isinstance(body.get("public"), int):
             return gettext("public_invalid"), 400
         if not isinstance(body.get("language"), str) or body.get("language") not in hedy_content.ALL_LANGUAGES.keys():
             # we're incrementally integrating language into adventures; i.e., not all adventures have a language field.
