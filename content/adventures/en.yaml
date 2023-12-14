@@ -4194,6 +4194,20 @@ adventures:
                     {if} day {is} monday
                     total_price = total_price * 0.25
                     {print} 'That will be total_price please'
+            7:
+                story_text: ''
+                example_code: ''
+                start_code: |
+                    {print} You gave stranded on a desert island.
+                    {repeat} 3 'Help!'
+                    rescued = {ask} Has anybody come to the rescue?
+                    {if} rescued yes {is}
+                    {print} Lucky!
+                    {else} {repeat} 3 {times} 'HELP!'
+                    rescued = 'What about now?'
+                    {if} yes
+                    {print} 'Hurray!
+                    {else} 'That's a shame... Oh well... time to build a shelter and find some food.'
     songs:
         name: Sing a song!
         default_save_name: Song
