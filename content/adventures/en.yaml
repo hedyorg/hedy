@@ -4135,6 +4135,19 @@ adventures:
                     {print} I'll go get your donut. {sleep}
                     {print} Here you go! A filling donut with toping!
                     {ask} Have a nice day!
+            3:
+                story_text: ''
+                example_code: ''
+                start_code: |
+                    music_genres {is} rock, pop, metal, indie, jazz
+                    chosen_genre is music {at} {random}
+                    {print} Let's listen to chosen genre
+                    nice {ask} Do you like that genre?
+                    {remove} chosen_genre {from} chosen_genre
+                    second_choice {is} music_genres
+                    {print} or do you prefer... second_choice {at} {random}
+                    {remove} second_choice {to} music_genres
+                    {print} I like music_genre {random} best!
     songs:
         name: Sing a song!
         default_save_name: Song
