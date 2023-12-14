@@ -4177,6 +4177,23 @@ adventures:
                     item_to_declare {is} {ask} 'What would you like to declare'
                     {else} Alright
                     {print} Thank you. Please head to gate A22.'
+            6:
+                story_text: ''
+                example_code: ''
+                start_code: |
+                    {print} 'This is the waterpark ticket machine'
+                    {print} 'Price list: Children under 12 $3, Adults $5'
+                    {print} 'Mondays are 25% off'
+                    amount_of_children = 'How many childrens tickets would you like?'
+                    amount_of_adults = 'How many adult tickets would you like?'
+                    day_of_the_week = {ask} 'What day is it?'
+                    {clear}
+                    child_price = amount of children * 3
+                    adult_price = amount_of_adults + 5
+                    total_price = adult_price * child_price
+                    {if} day {is} monday
+                    total_price = total_price * 0.25
+                    {print} 'That will be total_price please'
     songs:
         name: Sing a song!
         default_save_name: Song
