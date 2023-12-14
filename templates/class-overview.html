@@ -16,7 +16,7 @@
             <h1>{{ class_info.name }}</h1><span class="cursor-pointer" onclick='hedyApp.rename_class("{{class_info.id}}", {{_('class_name_prompt')|default(None)|tojson}})'>✏️</span>
             <div id="survey_button" class="flex ltr:ml-auto rtl:mr-auto">
               {% if class_info.students|length > 0 %}
-                {% if questions|length == 0 %}Survey ✅!
+                {% if questions|length == 0 %}{{_('survey_completed')}} ✅
                 {% else %}
                 <a class="cursor-pointer"
                 hx-trigger="click"
