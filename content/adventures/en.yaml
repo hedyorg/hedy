@@ -4148,6 +4148,19 @@ adventures:
                     {print} or do you prefer... second_choice {at} {random}
                     {remove} second_choice {to} music_genres
                     {print} I like music_genre {random} best!
+            4:
+                story_text: ''
+                example_code: ''
+                start_code: |
+                    {clear}
+                    {print} What a nice day to go to the beach!
+                    {ask} 'Do you want to build a sandcastle or swim in the ocean?'
+                    {print} 'You would like to activity '
+                    {print} 'I'd like to do that too'
+                    {print} 'Look at these beautiful seashells!'
+                    colors {is} 'orange, silver, white, brown'
+                    {print} 'I love the colors {at} {random} one!'
+                    choice {is} {ask} Which one do you like?
     songs:
         name: Sing a song!
         default_save_name: Song
