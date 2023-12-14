@@ -22,7 +22,7 @@
 
                     {{ slide['text'] }}
                     {% if slide['code'] %}
-                    <iframe class="fragment" src="/render_code/{{ level }}/{{ slide['code'] }}"></iframe>
+                    <iframe class="fragment" src="/render_code/{{ level }}/{{ slide['code'] | urlencode }}"></iframe>
                     {% endif %}
                     {% if slide['editor'] %}
                     {{ slide['editor'] }}
