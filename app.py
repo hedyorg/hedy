@@ -1564,7 +1564,7 @@ def render_code_in_editor(level, code):
                            level_nr=str(level),
                            commands=commands,
                            level=level,
-                           prev_level=None, # we are not rendering buttons in raw, no lookup needed here
+                           prev_level=None,  # we are not rendering buttons in raw, no lookup needed here
                            next_level=None,
                            customizations=[],
                            hide_cheatsheet=None,
@@ -1588,7 +1588,6 @@ def render_code_in_editor(level, code):
                                initial_tab=initial_tab,
                                current_user_name=current_user()['username'],
                            ))
-
 
 
 @app.route('/adventure/<name>', methods=['GET'], defaults={'level': 1, 'mode': 'full'})
