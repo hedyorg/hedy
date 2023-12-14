@@ -14,7 +14,7 @@
       {% if second_teacher %}<h1>{{_('role')}}: {{role}}</h1>{% endif %}
         <div class="flex flex-row items-center gap-2">
             <h1>{{ class_info.name }}</h1><span class="cursor-pointer" onclick='hedyApp.rename_class("{{class_info.id}}", {{_('class_name_prompt')|default(None)|tojson}})'>✏️</span>
-            <div id="survey_button" class="flex ltr:ml-auto rtl:mr-auto">
+            <h2 id="survey_status_button" class="flex ltr:ml-auto rtl:mr-auto">
               {% if class_info.students|length > 0 %}
                 {% if questions|length == 0 %}{{_('survey_completed')}} ✅
                 {% else %}
@@ -25,7 +25,7 @@
                 >{{_('survey')}} {{total_questions - questions|length}}/{{total_questions}}</a>
                 {% endif %}
               {% endif %}
-            </div>
+            </h2>
         </div>
       <div class="program w-full border-solid border-2 border-orange-400 rounded p-4">
           <table class="table-auto w-full text-sm">
