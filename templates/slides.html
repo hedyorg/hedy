@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Hedy - Slides</title>
+    <title>Hedy - Slides - {{ level }} </title>
     <link rel="stylesheet" href="{{static('css/reveal-js-custom.css')}}">
     <link rel="stylesheet" href="{{static('vendor/reveal/dist/reset.css')}}">
     <link rel="stylesheet" href="{{static('vendor/reveal/dist/reveal.css')}}">
@@ -22,7 +22,7 @@
 
                     {{ slide['text'] }}
 
-                    {{ slide['editor'] }}
+                    <iframe class="fragment" src="/render_code/{{ level }}/{{ slide['code'] }}"></iframe>
                 </textarea>
             </section>
           {% endfor %}

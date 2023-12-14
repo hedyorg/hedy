@@ -1535,6 +1535,55 @@ def view_program(user, id):
                            **arguments_dict)
 
 
+@app.route('/render_code/<level>/<code>', methods=['GET'])
+def render_code_in_editor(level, code):
+    # Add the commands to enable the language switcher dropdown
+    commands = hedy.commands_per_level.get(level)
+
+    try:
+        level = int(level)
+    except BaseException:
+        return utils.error_page(error=404, ui_message=gettext('no_such_level'))
+
+    initial_tab = "story"
+    initial_adventure = "story"
+
+    adventures = [x for x in load_adventures_for_level(level) if x.short_name == "story"]
+    adventures[0].start_code = code
+
+
+    return render_template("code-page.html",
+                           specific_adventure=True,
+                           level_nr=str(level),
+                           commands=commands,
+                           level=level,
+                           prev_level=None, # we are not rendering buttons in raw, no lookup needed here
+                           next_level=None,
+                           customizations=[],
+                           hide_cheatsheet=None,
+                           enforce_developers_mode=None,
+                           teacher_adventures=[],
+                           adventures=adventures,
+                           initial_tab=initial_tab,
+                           initial_adventure=initial_adventure,
+                           latest=version(),
+                           raw=True,
+                           menu=False,
+                           blur_button_available=False,
+                           current_user_is_in_class=len(current_user().get('classes') or []) > 0,
+                           # See initialize.ts
+                           javascript_page_options=dict(
+
+                               page='code',
+                               lang=g.lang,
+                               level=level,
+                               adventures=adventures,
+                               initial_tab=initial_tab,
+                               current_user_name=current_user()['username'],
+                           ))
+
+
+
 @app.route('/adventure/<name>', methods=['GET'], defaults={'level': 1, 'mode': 'full'})
 @app.route('/adventure/<name>/<level>', methods=['GET'], defaults={'mode': 'full'})
 @app.route('/adventure/<name>/<level>/<mode>', methods=['GET'])
@@ -2064,7 +2113,7 @@ def get_slides(level):
         return utils.error_page(error=404, ui_message="Slides do not exist!")
 
     slides = SLIDES[g.lang].get_slides_for_level(level, keyword_language)
-    return render_template('slides.html', slides=slides)
+    return render_template('slides.html', level=level, slides=slides)
 
 
 @app.route('/translate_keywords', methods=['POST'])
