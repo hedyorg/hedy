@@ -1665,7 +1665,7 @@ class TestCustomAdventures(AuthHelper):
             'classes': [],
             'level': '5',
             'content': 'This is just long enough!',
-            'public': True,
+            'public': 1,
             'language': 'en', }
         self.post_data('for-teachers/customize-adventure', body, expect_http_code=200)
 
@@ -1691,7 +1691,7 @@ class TestCustomAdventures(AuthHelper):
             'classes': [class_id],
             'level': '5',
             'content': 'This is just long enough!',
-            'public': True,
+            'public': 1,
             'language': 'en',
         }
 
