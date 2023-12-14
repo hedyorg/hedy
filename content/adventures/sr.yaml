@@ -3989,6 +3989,104 @@ adventures:
                     {print} My favorite colour is...
                     {sleep} 2
                     {print} green!
+    slides_startcodes:
+        name: Startcodes
+        default_save_name: slides_startcodes
+        description: This adventure is only used for startcodes on the slides, not as a real adventure.
+        levels:
+            1:
+                story_text: ''
+                example_code: ''
+                start_code: |
+                    I am DJ Hedy
+                    {print} What song would you like to hear?
+                    {ask} I like that song too!
+                    {print} Next up... {echo}
+            2:
+                story_text: ''
+                example_code: ''
+                start_code: |
+                    {print} Welcome to the donut shop!
+                    filling {is} What kind of filling would you like?
+                    {print} You have chosen... Filling! Yum!
+                    topping {ask} What kind of topping would you like?
+                    topping is delicious!
+                    {print} I'll go get your donut. {sleep}
+                    {print} Here you go! A filling donut with toping!
+                    {ask} Have a nice day!
+            3:
+                story_text: ''
+                example_code: ''
+                start_code: |
+                    music_genres {is} rock, pop, metal, indie, jazz
+                    chosen_genre is music {at} {random}
+                    {print} Let's listen to chosen genre
+                    nice {ask} Do you like that genre?
+                    {remove} chosen_genre {from} chosen_genre
+                    second_choice {is} music_genres
+                    {print} or do you prefer... second_choice {at} {random}
+                    {remove} second_choice {to} music_genres
+                    {print} I like music_genre {random} best!
+            4:
+                story_text: ''
+                example_code: ''
+                start_code: |
+                    {clear}
+                    {print} What a nice day to go to the beach!
+                    {ask} 'Do you want to build a sandcastle or swim in the ocean?'
+                    {print} 'You would like to activity '
+                    {print} 'I'd like to do that too'
+                    {print} 'Look at these beautiful seashells!'
+                    colors {is} 'orange, silver, white, brown'
+                    {print} 'I love the colors {at} {random} one!'
+                    choice {is} {ask} Which one do you like?
+            5:
+                story_text: ''
+                example_code: ''
+                start_code: |
+                    {print} Welcome to HedyAir Security!
+                    boarding_pass {is} {ask} 'Do you have your boarding pass?'
+                    {if} bording_pass yes {print} Great!
+                    {else} Please, get your boarding pass ready.
+                    passport {is} 'Can I see your passport, please?'
+                    {if} passport {is} yes 'thank you'
+                    {else} 'You can't fly without a passport'
+                    declare {is} {ask} Do you have anything to declare?
+                    {if] declare {is} yes
+                    item_to_declare {is} {ask} 'What would you like to declare'
+                    {else} Alright
+                    {print} Thank you. Please head to gate A22.'
+            6:
+                story_text: ''
+                example_code: ''
+                start_code: |
+                    {print} 'This is the waterpark ticket machine'
+                    {print} 'Price list: Children under 12 $3, Adults $5'
+                    {print} 'Mondays are 25% off'
+                    amount_of_children = 'How many childrens tickets would you like?'
+                    amount_of_adults = 'How many adult tickets would you like?'
+                    day_of_the_week = {ask} 'What day is it?'
+                    {clear}
+                    child_price = amount of children * 3
+                    adult_price = amount_of_adults + 5
+                    total_price = adult_price * child_price
+                    {if} day {is} monday
+                    total_price = total_price * 0.25
+                    {print} 'That will be total_price please'
+            7:
+                story_text: ''
+                example_code: ''
+                start_code: |
+                    {print} You gave stranded on a desert island.
+                    {repeat} 3 'Help!'
+                    rescued = {ask} Has anybody come to the rescue?
+                    {if} rescued yes {is}
+                    {print} Lucky!
+                    {else} {repeat} 3 {times} 'HELP!'
+                    rescued = 'What about now?'
+                    {if} yes
+                    {print} 'Hurray!
+                    {else} 'That's a shame... Oh well... time to build a shelter and find some food.'
     songs:
         name: Sing a song!
         default_save_name: Song
