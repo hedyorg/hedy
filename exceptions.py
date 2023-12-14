@@ -63,6 +63,16 @@ class InvalidSpaceException(WarningException):
                          level=level,
                          line_number=line_number,
                          fixed_code=fixed_code,
+                         fixed_result=fixed_result)  # what is the difference??
+
+
+class UnusedVariableException(WarningException):
+    def __init__(self, level, line_number, variable_name, fixed_code, fixed_result):
+        super().__init__('Unused Variable',
+                         level=level,
+                         line_number=line_number,
+                         variable_name=variable_name,
+                         fixed_code=fixed_code,
                          fixed_result=fixed_result)
 
 

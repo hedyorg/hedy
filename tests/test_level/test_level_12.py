@@ -5,7 +5,8 @@ from parameterized import parameterized
 import hedy
 from hedy import Command
 from hedy_sourcemap import SourceRange
-from tests.Tester import HedyTester, SkippedMapping
+# from hedy_sourcemap import SourceRange
+from tests.Tester import HedyTester, SkippedMapping  # , SkippedMapping
 
 
 class TestsLevel12(HedyTester):
@@ -134,6 +135,7 @@ class TestsLevel12(HedyTester):
         self.multi_level_tester(
             code=code,
             max_level=17,
+            translate=False,
             exception=hedy.exceptions.UnsupportedStringValue
         )
 
@@ -2132,6 +2134,7 @@ class TestsLevel12(HedyTester):
             code=code,
             expected=expected,
             output=output,
+            unused_allowed=True,
             max_level=16
         )
 
@@ -2235,6 +2238,7 @@ class TestsLevel12(HedyTester):
         self.multi_level_tester(
             code=code,
             expected=expected,
+            unused_allowed=True,
             skipped_mappings=skipped_mappings,
             max_level=16
         )

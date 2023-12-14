@@ -35,6 +35,7 @@ class TestsLevel11(HedyTester):
         self.single_level_tester(
             code=code,
             expected=expected,
+            unused_allowed=True,
             expected_commands=['for', 'is', 'addition'])
 
     def test_for_loop_with_int_vars(self):
