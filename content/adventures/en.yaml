@@ -4127,10 +4127,14 @@ adventures:
                 story_text: ''
                 example_code: ''
                 start_code: |
-                    I am DJ Hedy
-                    {print} What song would you like to hear?
-                    {ask} I like that song too!
-                    {print} Next up... {echo}
+                    {print} Welcome to the donut shop!
+                    filling {is} What kind of filling would you like?
+                    {print} You have chosen... Filling! Yum!
+                    topping {ask} What kind of topping would you like?
+                    topping is delicious!
+                    {print} I'll go get your donut. {sleep}
+                    {print} Here you go! A filling donut with toping!
+                    {ask} Have a nice day!
     songs:
         name: Sing a song!
         default_save_name: Song
