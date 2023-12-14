@@ -1562,25 +1562,13 @@ def render_code_in_editor(level, code):
     return render_template("code-page.html",
                            specific_adventure=True,
                            level_nr=str(level),
-                           commands=commands,
                            level=level,
-                           prev_level=None,  # we are not rendering buttons in raw, no lookup needed here
-                           next_level=None,
-                           customizations=[],
-                           hide_cheatsheet=None,
-                           enforce_developers_mode=None,
-                           teacher_adventures=[],
                            adventures=adventures,
-                           initial_tab=initial_tab,
-                           initial_adventure=initial_adventure,
-                           latest=version(),
                            raw=True,
                            menu=False,
                            blur_button_available=False,
-                           current_user_is_in_class=len(current_user().get('classes') or []) > 0,
                            # See initialize.ts
                            javascript_page_options=dict(
-
                                page='code',
                                lang=g.lang,
                                level=level,
