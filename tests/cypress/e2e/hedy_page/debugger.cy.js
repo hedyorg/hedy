@@ -261,7 +261,7 @@ describe('Test editor box functionality', () => {
 
     visitLevel(8);
 
-    cy.focused().type("repeat 2 times\n    print 'a'\n    print 'b'");
+    cy.focused().type("repeat 2 times\n    print 'a'\nprint 'b'");
     cy.get('#debug_button').click();
     cy.wait('@parse')
 
@@ -332,7 +332,7 @@ describe('Test editor box functionality', () => {
     cy.intercept('/parse').as('parse');
     visitLevel(8);
 
-    cy.focused().type("if Jesus is Hedy\n    print 'Welcome Hedy'\nelse\n    print 'Not Hedy'");
+    cy.focused().type("if Jesus is Hedy\n    print 'Welcome Hedy'\n{backspace}else\n    print 'Not Hedy'");
 
     cy.get('#debug_button').click();
     cy.wait('@parse')
@@ -387,7 +387,7 @@ describe('Test editor box functionality', () => {
 
     visitLevel(9);
 
-    cy.focused().type("repeat 1 times\n    if pizza is pizza\n        print 'nice!'\n    else\n        print 'pizza is better'");
+    cy.focused().type("repeat 1 times{enter}    if pizza is pizza{enter}    print 'nice!'{enter}{backspace}else\n    print 'pizza is better'");
 
     cy.get('#debug_button').click();
     cy.wait('@parse')
