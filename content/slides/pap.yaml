@@ -326,6 +326,19 @@ levels:
                 {clear}
                 {print} 'SURPRISE!'
         10:
+            header: Debugging
+            text: Let's debug this code!
+            code: |-
+                    {clear}
+                    {print} What a nice day to go to the beach!
+                    {ask} 'Do you want to build a sandcastle or swim in the ocean?'
+                    {print} 'You would like to activity '
+                    {print} 'I'd like to do that too'
+                    {print} 'Look at these beautiful seashells!'
+                    colors {is} 'orange, silver, white, brown'
+                    {print} 'I love the colors {at} {random} one!'
+                    choice {is} {ask} Which one do you like?
+        11:
             header: Ready, Set, Go!
             text: Enjoy the adventures in level 4!
     5:
