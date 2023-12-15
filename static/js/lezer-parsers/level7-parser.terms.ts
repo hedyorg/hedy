@@ -43,5 +43,4 @@ export const
   Condition = 47,
   IfLessCommand = 51,
   Repeat = 52,
-  ErrorInvalid = 53,
-  Else = 54
+  ErrorInvalid = 53
