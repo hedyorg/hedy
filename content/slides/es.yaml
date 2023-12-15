@@ -491,66 +491,66 @@ levels:
             header: Varias líneas después de `{repeat}`
             text: Tienes permitido usar varias líneas después de `{repeat}`.
             code: |-
-                    {repeat} 3 {times}
-                        food = {ask} 'What do you want?'
-                        {if} food {is} pizza
-                            {print} 'nice!'
-                        {else}
-                            {print} 'pizza is better'
+                {repeat} 3 {times}
+                    food = {ask} 'What do you want?'
+                    {if} food {is} pizza
+                        {print} 'nice!'
+                    {else}
+                        {print} 'pizza is better'
         3:
             header: ¡La sangría importa!
             text: La sangría es muy importante para decirle al ordenador qué líneas deberían repetirse y qué líneas deberían ejecutarse una vez.
             code: |-
-                    {repeat} 3 {times}
-                        {print} 'This line will be repeated...'
-                        {print} 'This one too...'
-                    {print} 'but this one will not!'
+                {repeat} 3 {times}
+                    {print} 'This line will be repeated...'
+                    {print} 'This one too...'
+                {print} 'but this one will not!'
         4:
             header: Varias líneas después de `{if}`
             text: Puedes usar varias líneas después de `{if}`
             code: |-
-                    continue = {ask} 'Do you want to continue?'
-                    {if} continue = yes
-                        sure = {ask} 'Are you sure?'
-                        {if} sure {is} yes
-                            {print} 'We will continue'
-                        {else}
-                            {print} 'You are not sure'
+                continue = {ask} 'Do you want to continue?'
+                {if} continue = yes
+                    sure = {ask} 'Are you sure?'
+                    {if} sure {is} yes
+                        {print} 'We will continue'
                     {else}
-                        {print} 'You do not want to continue'
+                        {print} 'You are not sure'
+                {else}
+                    {print} 'You do not want to continue'
         5:
             header: La sangría importa
             text: De nuevo, la sangría es todavía muy importante y puede hacer una gran diferencia en el código.
             code: |-
-                    continue = {ask} 'Do you want to continue?'
-                    {if} continue = yes
-                        sure = {ask} 'Are you sure?'
-                        {if} sure {is} yes
-                            {print} 'We will continue'
-                    {else}
-                        {print} 'You are not sure'
+                continue = {ask} 'Do you want to continue?'
+                {if} continue = yes
+                    sure = {ask} 'Are you sure?'
+                    {if} sure {is} yes
+                        {print} 'We will continue'
+                {else}
+                    {print} 'You are not sure'
         6:
             header: Un `{if}` dentro de un `{repeat}`
             text: |-
                 Ahora que puedes usar varias líneas de código tras estos comandos, también puedes ponerlos dentro de otros.
                 Compruébalo:
             code: |-
-                    {repeat} 3 {times}
-                        food = {ask} 'What do you want?'
-                        {if} food {is} pizza
-                            {print} 'nice!'
-                        {else}
-                            {print} 'pizza is better'
+                {repeat} 3 {times}
+                    food = {ask} 'What do you want?'
+                    {if} food {is} pizza
+                        {print} 'nice!'
+                    {else}
+                        {print} 'pizza is better'
         7:
             header: Cuidado con la sangría
             text: Cuidado que la cuarta y sexta línea de este código empieza con 8 espacios de sangría.
             code: |-
-                    {repeat} 3 {times}
-                        food = {ask} 'What do you want?'
-                        {if} food {is} pizza
-                            {print} 'nice!'
-                        {else}
-                            {print} 'pizza is better'
+                {repeat} 3 {times}
+                    food = {ask} 'What do you want?'
+                    {if} food {is} pizza
+                        {print} 'nice!'
+                    {else}
+                        {print} 'pizza is better'
         8:
             header: ¡Vamos!
             text: ¡Disfruta las aventuras en el nivel 9!
@@ -562,17 +562,17 @@ levels:
             header: El comando para
             text: Con para puedes hacer una lista y usar todos los objectos de esa lista. `{for}` crea un bloque, como repetir y si así que todas las líneas del bloque tienen que empezar con sangría (4 espacios).
             code: |-
-                    animals = dog, cat, blobfish
-                    {for} animal {in} animals
-                        {print} 'I love ' animal
+                animals = dog, cat, blobfish
+                {for} animal {in} animals
+                    {print} 'I love ' animal
         3:
             header: El comando para
             text: 'Aquí puedes ver otro ejemplo del comando `{for}`:'
             code: |-
-                    days = Monday, Tuesday, Wednesday, Thursday, Friday, Saturday, Sunday
-                    names = mom, dad, Emma, Sophie
-                    {for} day {in} days
-                        {print} names {at} {random} ' does the dishes on ' day
+                days = Monday, Tuesday, Wednesday, Thursday, Friday, Saturday, Sunday
+                names = mom, dad, Emma, Sophie
+                {for} day {in} days
+                    {print} names {at} {random} ' does the dishes on ' day
         4:
             header: ¡Hora de programar!
             text: ¡Disfruta las aventuras en el nivel 10!
@@ -587,9 +587,9 @@ levels:
             header: El comando para
             text: 'Así es el nuevo comando para:'
             code: |-
-                    {for} counter {in} {range} 1 {to} 10
-                        {print} counter
-                    {print} 'Ready or not. Here I come!'
+                {for} counter {in} {range} 1 {to} 10
+                    {print} counter
+                {print} 'Ready or not. Here I come!'
         3:
             header: la variable i
             text: |-
@@ -598,9 +598,9 @@ levels:
                 En esta situación el nombre estándar para las variables que se usan en lenguajes de programación como Python es 'i'.
                 Se parece a esto:
             code: |-
-                    number = 10
-                    {for} i {in} {range} 1 {to} 10
-                        {print} i * number
+                number = 10
+                {for} i {in} {range} 1 {to} 10
+                    {print} i * number
         4:
             header: ¡Comencemos a programar!
             text: ¡Disfruta las aventuras en el nivel 11!
@@ -616,8 +616,8 @@ levels:
                 Este nivel trae algunos cambios al uso de las comillas.
                 De ahora en adelante, **todos los textos** tienen que tener comillas. Esto incluye los valores de las variables, objetos en listas y texto tras comandos {if}.
             code: |-
-                    name = 'Hedy the Robot'
-                    {print} 'Hello ' name
+                name = 'Hedy the Robot'
+                {print} 'Hello ' name
         3:
             header: Números decimales
             text: |-
@@ -625,8 +625,8 @@ levels:
 
                 Los números no llevan comillas.
             code: |-
-                    {print} 'decimal numbers now need to use a dot'
-                    {print} 2.5 + 2.5
+                {print} 'decimal numbers now need to use a dot'
+                {print} 2.5 + 2.5
         4:
             header: Functions!
             text: |-
@@ -638,15 +638,15 @@ levels:
             text: |-
                 En este programa ves un ejemplo de una función.
                 ¡Veamos qué ocurre si rellenas el resto!
-            code: |- 
-                   {define} twinkle
-                        {print} 'Twinkle'
-                        {print} '...'
+            code: |-
+                {define} twinkle
+                     {print} 'Twinkle'
+                     {print} '...'
 
-                    {call} twinkle
-                    {print} 'Up above the world so high'
-                    {print} 'Like a diamond in the sky'
-                    {call} twinkle
+                 {call} twinkle
+                 {print} 'Up above the world so high'
+                 {print} 'Like a diamond in the sky'
+                 {call} twinkle
         6:
             header: Funciones
             text: Como has podido ver en el ejemplo una función es un bloque de código que puede ser llamado en cualquier momento. Se usa `{define}` para definir la función y `{call}` para usarla.
@@ -664,21 +664,21 @@ levels:
             text: |-
                 El comando `{and}` siempre se usa en una combinación con el comando {if}.
                 De esta manera puedes comprobar si 2 sentencias son verdaderas. Por ejemplo:
-            code: |- 
-                    name = {ask} 'what is your name?'
-                    age = {ask} 'what is your age?'
-                    {if} name {is} 'Hedy' {and} age {is} 2
-                        {print} 'You are the real Hedy!'
+            code: |-
+                name = {ask} 'what is your name?'
+                age = {ask} 'what is your age?'
+                {if} name {is} 'Hedy' {and} age {is} 2
+                    {print} 'You are the real Hedy!'
         3:
             header: El comando o
             text: |-
                 El `{or}` funciona de la misma manera que el comando `{and}`, pero sólo 1 de las dos sentencias tiene que ser verdadero.
 
                 Veamos que ocurre cuando cambias el `{and}` por `{or}`.
-            code: |- 
-                    name = {ask} 'what is your name?'
-                    {if} name {is} 'Hedy' {or} name {is} 'hedy'
-                        {print} 'Welcome!!'
+            code: |-
+                name = {ask} 'what is your name?'
+                {if} name {is} 'Hedy' {or} name {is} 'hedy'
+                    {print} 'Welcome!!'
         4:
             header: Functions with arguments
             text: Now that you've learned how to use functions, you'll learn how to use a function with an **argument**. An argument is a variable that is used within a function. It is not used outside the function.
@@ -687,13 +687,13 @@ levels:
             text: |-
                 En este ejemplo puedes ver cómo se utiliza el argumento 'place' en la función.
                 Ejecuta el código y cambia 'ocean' y 'sea' por otra cosa, a ver qué pasa.
-            code: |- 
-                    {define} song {with} place
-                        {print} 'My Bonnie is over the ' place
+            code: |-
+                {define} song {with} place
+                    {print} 'My Bonnie is over the ' place
 
-                    {call} song {with} 'ocean'
-                    {call} song {with} 'sea'
-                    {call} song {with} 'ocean'
+                {call} song {with} 'ocean'
+                {call} song {with} 'sea'
+                {call} song {with} 'ocean'
         6:
             header: Un ejemplo con una variable
             text: |-
@@ -707,13 +707,13 @@ levels:
                 La respuesta es preguntar "¿Dónde está mi Bonnie?"
                 llamada a la canción con la respuesta
                 ```
-            code: |- 
-                    {define} song {with} place
-                        {print} 'My Bonnie is over the ' place
+            code: |-
+                {define} song {with} place
+                    {print} 'My Bonnie is over the ' place
 
-                    {call} song {with} 'ocean'
-                    {call} song {with} 'sea'
-                    {call} song {with} 'ocean'
+                {call} song {with} 'ocean'
+                {call} song {with} 'sea'
+                {call} song {with} 'ocean'
         7:
             header: ¡Aún más preguntas!
             text: |-
@@ -729,13 +729,13 @@ levels:
                 el lugar es preguntar '¿Dónde están?'
                 llamar canción con nombre, lugar
                 ```
-            code: |- 
-                    {define} song {with} place
-                        {print} 'My Bonnie is over the ' place
+            code: |-
+                {define} song {with} place
+                    {print} 'My Bonnie is over the ' place
 
-                    {call} song {with} 'ocean'
-                    {call} song {with} 'sea'
-                    {call} song {with} 'ocean'
+                {call} song {with} 'ocean'
+                {call} song {with} 'sea'
+                {call} song {with} 'ocean'
         8:
             header: ¡Vamos!
             text: ¡Disfruta de las aventuras en el nivel 13!
@@ -758,11 +758,11 @@ levels:
 
                 Puedes usarlos así:
             code: |-
-                    age = {ask} 'How old are you?'
-                    {if} age < 13
-                        {print} 'You are younger than me!'
-                    {else}
-                        {print} 'You are older than me!'
+                age = {ask} 'How old are you?'
+                {if} age < 13
+                    {print} 'You are younger than me!'
+                {else}
+                    {print} 'You are older than me!'
         3:
             header: Símbolos
             text: |-
@@ -774,28 +774,29 @@ levels:
 
                 == se usa en sentencias `{if}`.
             code: |-
-                    answer = {ask} 'Do you want to learn more?'
-                    {if} answer == 'yes'
-                        {print} 'Go to the next adventure!'
-                    {if} answer != 'yes'
-                        {print} 'That is a shame!'
+                answer = {ask} 'Do you want to learn more?'
+                {if} answer == 'yes'
+                    {print} 'Go to the next adventure!'
+                {if} answer != 'yes'
+                    {print} 'That is a shame!'
         4:
             header: Return value
-            text: In the previous levels you have learned to create functions and use arguments with them. Another great use of a function is to let it calculate something for you. You can give the function a calculation and it will give you the answer of the calculation. This answer is called a **return value**.
+            text: In the previous levels you have learned to create functions and use arguments with them. Another great use of a function is to let it calculate something for you. You can give the function a calculation and it will give you the answer of the calculation. This answer is called a **return
+                value**.
         5:
             header: Valor devuelto
             text: Por ejemplo, en este código la función calculate_new_price calculará el nuevo precio de cualquier artículo. Le dará el nuevo precio como valor de retorno.
             code: |-
-                    {define} calculate_new_price {with} amount, percentage
-                        percentage = percentage / 100
-                        discount_amount = amount * percentage
-                        return amount - discount_amount
+                {define} calculate_new_price {with} amount, percentage
+                    percentage = percentage / 100
+                    discount_amount = amount * percentage
+                    return amount - discount_amount
 
-                    old_price = {ask} 'How much is on the price tag?'
-                    discount = {ask} 'What percentage is the discount?'
+                old_price = {ask} 'How much is on the price tag?'
+                discount = {ask} 'What percentage is the discount?'
 
-                    new_price = {call} calculate_new_price {with} old_price, discount
-                    {print} 'The new price is ' new_price ' dollar'
+                new_price = {call} calculate_new_price {with} old_price, discount
+                {print} 'The new price is ' new_price ' dollar'
         6:
             header: ¡Manos a la obra!
             text: ¡Disfruta de las aventuras en el nivel 14!
@@ -810,10 +811,10 @@ levels:
 
                 En el código de ejemplo, continuamos hasta que se da una respuesta correcta. Si nunca se da la respuesta correcta, ¡el bucle nunca acabará!
             code: |-
-                    answer = 0
-                    {while} answer != 25
-                        answer = {ask} 'What is 5 times 5?'
-                    {print} 'A correct answer has been given'
+                answer = 0
+                {while} answer != 25
+                    answer = {ask} 'What is 5 times 5?'
+                {print} 'A correct answer has been given'
         3:
             header: ¡Vamos a probarlo!
             text: ¡Disfruta las aventuras en el nivel 15!
@@ -826,14 +827,14 @@ levels:
             text: Vamos a hacer listas a la manera de Python, ¡con corchetes alrededor de las listas! También mantendremos las comillas alrededor de cada objeto como hemos aprendido en los niveles anteriores. Usamos corchetes para apuntar a un lugar en una lista. El comando en aleatorio ya no se puede
                 usar nunca más.
             code: |-
-                    friends = ['Ahmed', 'Ben', 'Cayden']
-                    {print} friends[1] ' is the first friend on the list.'
-                    {print} friends[2] ' is the second friend on the list.'
-                    {print} friends[3] ' is the third friend on the list.'
-                    #now we will match 2 lists using the variable i
-                    lucky_numbers = [15, 18, 6]
-                    {for} i {in} {range} 1 {to} 3
-                        {print} friends[i] 's lucky number is ' lucky_numbers[i]
+                friends = ['Ahmed', 'Ben', 'Cayden']
+                {print} friends[1] ' is the first friend on the list.'
+                {print} friends[2] ' is the second friend on the list.'
+                {print} friends[3] ' is the third friend on the list.'
+                #now we will match 2 lists using the variable i
+                lucky_numbers = [15, 18, 6]
+                {for} i {in} {range} 1 {to} 3
+                    {print} friends[i] 's lucky number is ' lucky_numbers[i]
         3:
             header: ¡Vamos a probarlo!
             text: ¡Disfruta las aventuras en el nivel 16!
@@ -845,27 +846,26 @@ levels:
             header: Dos puntos
             text: 'Ahora vamos a cambiar la sangría un poco. Cada vez que necesitemos una sangría, necesitamos : en la línea de antes de la sangría.'
             code: |-
-                    prices = ['1 million dollars', 'an apple pie', 'nothing']
-                    your_price = prices[{random}]
-                    {print} 'You win ' your_price
-                    {if} your_price == '1 million dollars' :
-                        {print} 'Yeah! You are rich!'
-                    {else}:
-                        {print} 'Better luck next time..'
+                prices = ['1 million dollars', 'an apple pie', 'nothing']
+                your_price = prices[{random}]
+                {print} 'You win ' your_price
+                {if} your_price == '1 million dollars' :
+                    {print} 'Yeah! You are rich!'
+                {else}:
+                    {print} 'Better luck next time..'
         3:
             header: Sino
             text: 'En este nivel también puedes usar un nuevo comando: sino. sino es la abreviatura para si no si y lo necesitas cuando quieras hacer 3 (''o más!) opciones. ¡Compruébalo!'
             code: |-
-                    prices = ['1 million dollars', 'an apple pie', 'nothing']
-                    your_price = prices[{random}]
-                    {print} 'You win ' your_price
-                    {if} your_price == '1 million dollars' :
-                        {print} 'Yeah! You are rich!'
-                    {elif} your_price == 'an apple pie' :
-                        {print} 'Lovely, an apple pie!'
-                    {else}:
-                        {print} 'Better luck next time..'
-
+                prices = ['1 million dollars', 'an apple pie', 'nothing']
+                your_price = prices[{random}]
+                {print} 'You win ' your_price
+                {if} your_price == '1 million dollars' :
+                    {print} 'Yeah! You are rich!'
+                {elif} your_price == 'an apple pie' :
+                    {print} 'Lovely, an apple pie!'
+                {else}:
+                    {print} 'Better luck next time..'
         4:
             header: ¡Vamos a probarlo!
             text: ¡Disfruta las aventuras en el nivel 17!
