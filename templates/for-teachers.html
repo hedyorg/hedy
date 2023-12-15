@@ -95,8 +95,15 @@
             </tbody>
           </table>
         {% endif %}
-        <button class="green-btn mt-4" id="create_adventure_button" onclick='hedyApp.create_adventure({{_('adventure_prompt')|default(None)|tojson}})'
-        {% if second_teacher and role == 'viewer' %}disabled{% endif %}>{{_('create_adventure')}}</button>
+        <div class="flex gap-4">
+        <button id="create_adventure_button" class="green-btn mt-4" 
+        hx-trigger="click"
+        hx-post="/for-teachers/create-adventure"
+        hx-swap="none"
+        _="on htmx:afterRequest if detail.xhr.response
+        window.open('/for-teachers/customize-adventure/' + detail.xhr.response, '_self')"
+        data-cy="edit-link"{% if second_teacher and role == 'viewer' %}disabled{% endif %}>{{_('create_adventure')}}</button>
+        </div>
     </div>
     <div id="slides" class="flex flex-col items-center border-b gap-3">
       <div class="flex flex-row gap-3 items-center">

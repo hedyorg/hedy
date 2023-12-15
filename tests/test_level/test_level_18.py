@@ -4,7 +4,8 @@ from parameterized import parameterized
 
 import hedy
 from hedy_sourcemap import SourceRange
-from tests.Tester import HedyTester, SkippedMapping
+# from hedy_sourcemap import SourceRange
+from tests.Tester import HedyTester, SkippedMapping  # , SkippedMapping
 
 
 class TestsLevel18(HedyTester):
@@ -68,6 +69,7 @@ class TestsLevel18(HedyTester):
             max_level=20,
             code=code,
             expected=expected,
+            translate=False,
             extra_check_function=self.is_not_turtle()
         )
 

@@ -505,7 +505,8 @@ class InvalidInfo:
 class LookupEntry:
     name: str
     tree: Tree
-    linenumber: int
+    definition_line: int
+    access_line: int
     skip_hashing: bool
     type_: str = None
     currently_inferring: bool = False  # used to detect cyclic type inference
@@ -582,6 +583,15 @@ class LookupEntryCollector(visitors.Visitor):
         var_name = tree.children[0].children[0]
         self.add_to_lookup(var_name, tree, tree.meta.line)
 
+    # def var_access(self, tree):
+    #     variable_name = tree.children[0].children[0]
+    #     # store the line of access (or string value) in the lookup table
+    #     # so we know what variable is used where
+    #     vars = [a for a in self.lookup if a.name == variable_name]
+    #     if vars:
+    #         corresponding_lookup_entry = vars[0]
+    #         corresponding_lookup_entry.access_line = tree.meta.line
+
     def assign(self, tree):
         var_name = tree.children[0].children[0]
         self.add_to_lookup(var_name, tree.children[1], tree.meta.line)
@@ -621,7 +631,6 @@ class LookupEntryCollector(visitors.Visitor):
         self.add_to_lookup(iterator, trimmed_tree, tree.meta.line)
 
     def define(self, tree):
-        # add function name to lookup
         self.add_to_lookup(str(tree.children[0].children[0]) + "()", tree, tree.meta.line)
 
         # add arguments to lookup
@@ -637,8 +646,8 @@ class LookupEntryCollector(visitors.Visitor):
                                  for x in tree.children[1].children)
         self.add_to_lookup(f"{function_name}({args_str})", tree, tree.meta.line)
 
-    def add_to_lookup(self, name, tree, linenumber, skip_hashing=False):
-        entry = LookupEntry(name, tree, linenumber, skip_hashing)
+    def add_to_lookup(self, name, tree, definition_line=None, access_line=None, skip_hashing=False):
+        entry = LookupEntry(name, tree, definition_line, access_line, skip_hashing)
         hashed_name = escape_var(entry)
         entry.name = hashed_name
         self.lookup.append(entry)
@@ -1333,15 +1342,17 @@ class ConvertToPython(Transformer):
     # is no check on whether the var is defined
     def is_variable(self, variable_name, access_line_number=100):
         all_names = [a.name for a in self.lookup]
-        all_names_before_access_line = [a.name for a in self.lookup if a.linenumber <= access_line_number]
-
+        all_names_before_access_line = [a.name for a in self.lookup if a.definition_line <= access_line_number]
         if variable_name in all_names and variable_name not in all_names_before_access_line:
             # referenced before assignment!
-            definition_line_number = [a.linenumber for a in self.lookup if a.name == variable_name][0]
+            definition_line_number = [a.definition_line for a in self.lookup if a.name == variable_name][0]
             raise hedy.exceptions.AccessBeforeAssignException(
                 name=variable_name,
                 access_line_number=access_line_number,
                 definition_line_number=definition_line_number)
+        else:
+            # valid use, store!
+            self.add_variable_access_location(variable_name, access_line_number)
 
         is_function = False
         if isinstance(variable_name, str):
@@ -1354,16 +1365,30 @@ class ConvertToPython(Transformer):
     def process_variable(self, arg, access_line_number=100):
         # processes a variable by hashing and escaping when needed
         if self.is_variable(arg, access_line_number):
+            # add this access line to the lookup table
+            self.add_variable_access_location(arg, access_line_number)
             return escape_var(arg)
         if ConvertToPython.is_quoted(arg):
             arg = arg[1:-1]
         return f"'{process_characters_needing_escape(arg)}'"
 
     def process_variable_for_fstring(self, variable_name, access_line_number=100):
+        self.add_variable_access_location(variable_name, access_line_number)
+
         if self.is_variable(variable_name, access_line_number):
             return "{" + escape_var(variable_name) + "}"
         else:
             return process_characters_needing_escape(variable_name)
+
+    def add_variable_access_location(self, variable_name, access_line_number):
+        # store the line of access (or string value) in the lookup table
+        # so we know what variable is used where
+        variable_name = escape_var(variable_name)
+        if isinstance(variable_name, str):
+            vars = [a for a in self.lookup if isinstance(a.name, str) and a.name[:len(variable_name)] == variable_name]
+            for v in vars:  # vars can be defined multiple times, access validates all of them
+                corresponding_lookup_entry = v
+                corresponding_lookup_entry.access_line = access_line_number
 
     def process_variable_for_comparisons(self, name):
         # used to transform variables in comparisons
@@ -1408,7 +1433,11 @@ class ConvertToPython(Transformer):
         unquoted_in_lookup = [self.is_variable(a, var_access_linenumber) for a in unquoted_args]
 
         if unquoted_in_lookup == [] or all(unquoted_in_lookup):
-            # all good? return for further processing
+
+            # all good? store location
+            for a in args:
+                self.add_variable_access_location(str(a), var_access_linenumber)
+            # return for further processing
             return args
         else:
             # return first name with issue
@@ -1617,7 +1646,7 @@ class ConvertToPython_1(ConvertToPython):
 @source_map_transformer(source_map)
 class ConvertToPython_2(ConvertToPython_1):
 
-    # why doesn't this live in isvalid?
+    # ->>> why doesn't this live in isvalid? refactor now that isvalid is cleaned up!
     def error_ask_dep_2(self, meta, args):
         # ask is no longer usable this way, raise!
         # ask_needs_var is an entry in lang.yaml in texts where we can add extra info on this error
@@ -1694,23 +1723,25 @@ class ConvertToPython_2(ConvertToPython_1):
         else:
             # if not an int, then it is a variable
             parameter = args[0]
+            self.add_variable_access_location(parameter, meta.line)
 
         return self.make_forward(parameter)
 
     def assign(self, meta, args):
-        parameter = args[0]
+        variable_name = args[0]
         value = args[1]
+
         if self.is_random(value) or self.is_list(value):
             exception = self.make_catch_exception([value])
-            return exception + parameter + " = " + value + self.add_debug_breakpoint()
+            return exception + variable_name + " = " + value + self.add_debug_breakpoint()
         else:
-            if self.is_variable(value):
+            if self.is_variable(value):  # if the value is a variable, this is a reassign
                 value = self.process_variable(value, meta.line)
-                return parameter + " = " + value + self.add_debug_breakpoint()
+                return variable_name + " = " + value + self.add_debug_breakpoint()
             else:
                 # if the assigned value is not a variable and contains single quotes, escape them
                 value = process_characters_needing_escape(value)
-                return parameter + " = '" + value + "'" + self.add_debug_breakpoint()
+                return variable_name + " = '" + value + "'" + self.add_debug_breakpoint()
 
     def sleep(self, meta, args):
 
@@ -1718,6 +1749,8 @@ class ConvertToPython_2(ConvertToPython_1):
             return f"time.sleep(1){self.add_debug_breakpoint()}"
         else:
             value = f'"{args[0]}"' if self.is_int(args[0]) else args[0]
+            if not self.is_int(args[0]):
+                self.add_variable_access_location(value, meta.line)
             exceptions = self.make_catch_exception(args)
             try_prefix = "try:\n" + textwrap.indent(exceptions, "  ")
             exception_text = translate_value_error(Command.sleep, value, 'number')
@@ -1739,14 +1772,20 @@ class ConvertToPython_3(ConvertToPython_2):
 
     def list_access(self, meta, args):
         args = [escape_var(a) for a in args]
+        listname = str(args[0])
+        location = str(args[0])
 
         # check the arguments (except when they are random or numbers, that is not quoted nor a var but is allowed)
         self.check_var_usage([a for a in args if a != 'random' and not a.isnumeric()], meta.line)
 
+        # store locations of both parts (can be list at var)
+        self.add_variable_access_location(listname, meta.line)
+        self.add_variable_access_location(location, meta.line)
+
         if args[1] == 'random':
-            return 'random.choice(' + args[0] + ')'
+            return 'random.choice(' + listname + ')'
         else:
-            return args[0] + '[int(' + args[1] + ')-1]'
+            return listname + '[int(' + args[1] + ')-1]'
 
     def process_argument(self, meta, arg):
         # only call process_variable if arg is a string, else keep as is (ie.
@@ -1956,6 +1995,8 @@ class ConvertToPython_6(ConvertToPython_5):
                     value = f'{args[0]}'
             else:
                 value = f'"{args[0]}"' if self.is_int(args[0]) else args[0]
+                if not self.is_int(args[0]):
+                    self.add_variable_access_location(value, meta.line)
 
             exceptions = self.make_catch_exception(args)
             try_prefix = "try:\n" + textwrap.indent(exceptions, "  ")
@@ -2013,6 +2054,8 @@ class ConvertToPython_6(ConvertToPython_5):
         if argument.isnumeric():
             latin_numeral = int(argument)
             return f'int({latin_numeral})'
+        # this is a variable
+        self.add_variable_access_location(argument, 0)
         return f'int({argument})'
 
     def process_calculation(self, args, operator):
@@ -2191,6 +2234,9 @@ class ConvertToPython_10(ConvertToPython_8_9):
         args = [a for a in args if a != ""]  # filter out in|dedent tokens
         times = self.process_variable(args[0], meta.line)
 
+        # add the list to the lookup table, this used now too
+        self.add_variable_access_location(args[1], meta.line)
+
         body = "\n".join([ConvertToPython.indent(x) for x in args[2:]])
 
         body = add_sleep_to_command(body, True, self.is_debug, location="after")
@@ -2204,6 +2250,9 @@ class ConvertToPython_11(ConvertToPython_10):
     def for_loop(self, meta, args):
         args = [a for a in args if a != ""]  # filter out in|dedent tokens
         iterator = escape_var(args[0])
+        # iterator is always a used variable
+        self.add_variable_access_location(iterator, meta.line)
+
         body = "\n".join([ConvertToPython.indent(x) for x in args[3:]])
         body = add_sleep_to_command(body, True, self.is_debug, location="after")
         stepvar_name = self.get_fresh_var('step')
@@ -2232,6 +2281,8 @@ class ConvertToPython_12(ConvertToPython_11):
 
     def call(self, meta, args):
         args_str = ""
+        self.add_variable_access_location(args[0], meta.line)
+
         if len(args) > 1:
             args_str = ", ".join(str(x.children[0]) if isinstance(x, Tree) else str(x) for x in args[1].children)
         return f"{args[0]}({args_str})"
@@ -2904,7 +2955,7 @@ def get_parser(level, lang="en", keep_all_tokens=False, skip_faulty=False):
 ParseResult = namedtuple('ParseResult', ['code', 'source_map', 'has_turtle', 'has_pygame', 'has_clear', 'commands'])
 
 
-def transpile_inner_with_skipping_faulty(input_string, level, lang="en"):
+def transpile_inner_with_skipping_faulty(input_string, level, lang="en", unused_allowed=True):
     def skipping_faulty(meta, args): return [True]
 
     defined_errors = [method for method in dir(IsValid) if method.startswith('error')]
@@ -2923,7 +2974,9 @@ def transpile_inner_with_skipping_faulty(input_string, level, lang="en"):
 
     try:
         set_error_to_allowed()
-        transpile_result = transpile_inner(input_string, level, lang, populate_source_map=True)
+        transpile_result = transpile_inner(
+            input_string, level, lang, populate_source_map=True, unused_allowed=unused_allowed
+        )
     finally:
         # make sure to always revert IsValid methods to original
         set_errors_to_original()
@@ -2948,7 +3001,7 @@ def transpile_inner_with_skipping_faulty(input_string, level, lang="en"):
     return transpile_result
 
 
-def transpile(input_string, level, lang="en", skip_faulty=True, is_debug=False):
+def transpile(input_string, level, lang="en", skip_faulty=True, is_debug=False, unused_allowed=False):
     """
     Function that transpiles the Hedy code to Python
 
@@ -2962,7 +3015,8 @@ def transpile(input_string, level, lang="en", skip_faulty=True, is_debug=False):
 
     try:
         source_map.set_skip_faulty(False)
-        transpile_result = transpile_inner(input_string, level, lang, populate_source_map=True, is_debug=is_debug)
+        transpile_result = transpile_inner(input_string, level, lang, populate_source_map=True,
+                                           is_debug=is_debug, unused_allowed=unused_allowed)
 
     except Exception as original_error:
         hedy_amount_lines = len(input_string.strip().split('\n'))
@@ -3371,7 +3425,7 @@ def create_AST(input_string, level, lang="en"):
     return abstract_syntax_tree, lookup_table, commands
 
 
-def transpile_inner(input_string, level, lang="en", populate_source_map=False, is_debug=False):
+def transpile_inner(input_string, level, lang="en", populate_source_map=False, is_debug=False, unused_allowed=False):
     check_program_size_is_valid(input_string)
     input_string = process_input_string(input_string, level, lang)
 
@@ -3404,10 +3458,18 @@ def transpile_inner(input_string, level, lang="en", populate_source_map=False, i
         has_turtle = "forward" in commands or "turn" in commands or "color" in commands
         has_pygame = "ifpressed" in commands or "ifpressed_else" in commands or "assign_button" in commands
 
+        parse_result = ParseResult(python, source_map, has_turtle, has_pygame, has_clear, commands)
+
         if populate_source_map:
             source_map.set_python_output(python)
 
-        return ParseResult(python, source_map, has_turtle, has_pygame, has_clear, commands)
+        if not unused_allowed:
+            for x in lookup_table:
+                if isinstance(x.name, str) and x.access_line is None and x.name != 'x__x__x__x':
+                    raise hedy.exceptions.UnusedVariableException(
+                        level, x.definition_line, x.name, fixed_code=python, fixed_result=parse_result)
+
+        return parse_result
     except VisitError as E:
         if isinstance(E, VisitError):
             # Exceptions raised inside visitors are wrapped inside VisitError. Unwrap it if it is a
