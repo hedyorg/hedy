@@ -441,6 +441,23 @@ levels:
                 correct_answer = number_1 * number_2
                 {print} number_1 ' times ' number_2 ' is ' correct_answer
         9:
+            header: Debugging
+            text: Let's debug this code!
+            code: |- 
+                    {print} 'This is the water park ticket machine'
+                    {print} 'Price list: Children under 12 $3, Adults $5'
+                    {print} 'Mondays are 25% off'
+                    amount_of_children = 'How many kids tickets would you like?'
+                    amount_of_adults = 'How many adult tickets would you like?'
+                    day_of_the_week = {ask} 'What day is it?'
+                    {clear}
+                    child_price = amount of children * 3
+                    adult_price = amount_of_adults + 5
+                    total_price = adult_price * child_price
+                    {if} day {is} monday
+                    total_price = total_price * 0.25
+                    {print} 'That will be total_price please'
+        10:
             header: Let's get to work!
             text: Enjoy the adventures in level 6!
     7:
