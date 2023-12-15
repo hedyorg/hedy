@@ -301,45 +301,41 @@ levels:
         2:
             header: Addition
             text: 덧셈을 계산하려면 더하기 기호를 사용하기만 하면 됩니다.
-            code: |-
-                    {print} '5 plus 5 is ' 5 + 5
+            code: '{print} ''5 plus 5 is '' 5 + 5'
         3:
             header: 뺄셈
             text: 빼기를 원한다면 빼기 기호를 사용하면 된다.
-            code: |-
-                    {print} '5 minus 5 is ' 5 - 5
+            code: '{print} ''5 minus 5 is '' 5 - 5'
         4:
             header: 곱셈
             text: 곱하기를 원하는 경우 별표를 사용할 수 있습니다.
-            code: |-
-                    {print} '5 times 5 is ' 5 * 5
+            code: '{print} ''5 times 5 is '' 5 * 5'
         5:
             header: 나누기
             text: 슬래시를 분할에 사용할 수 있습니다.
-            code: |-
-                    {print} '5 divided by 5 is ' 5 / 5
+            code: '{print} ''5 divided by 5 is '' 5 / 5'
         6:
             header: 요약
             text: 요약하면 +, -, * 및 /를 사용하여 수학을 할 수 있습니다.
             code: |-
-                    {print} '5 plus 5 is ' 5 + 5
-                    {print} '5 minus 5 is ' 5 - 5
-                    {print} '5 times 5 is ' 5 * 5
-                    {print} '5 divided by 5 is ' 5 / 5
+                {print} '5 plus 5 is ' 5 + 5
+                {print} '5 minus 5 is ' 5 - 5
+                {print} '5 times 5 is ' 5 * 5
+                {print} '5 divided by 5 is ' 5 / 5
         7:
             header: The = symbol
             text: "이제부터는 {is} 명령 대신 = 기호를 사용할 수도 있습니다. \n이것은 숫자와 단어 모두에 적용되며, {if} 또는 {flag} 명령 뒤에도 적용됩니다."
             code: |-
-                    name = Hedy
-                    answer = 20 + 4
+                name = Hedy
+                answer = 20 + 4
         8:
             header: 변수를 이용한 계산
             text: '숫자와 함께 계산을 사용할 수도 있지만 변수를 사용하여 다음과 같은 계산을 수행할 수도 있습니다:'
             code: |-
-                    number_1 = {ask} 'Fill in the first number:'
-                    number_2 = {ask} 'Fill in the second number:'
-                    correct_answer = number_1 * number_2
-                    {print} number_1 ' times ' number_2 ' is ' correct_answer
+                number_1 = {ask} 'Fill in the first number:'
+                number_2 = {ask} 'Fill in the second number:'
+                correct_answer = number_1 * number_2
+                {print} number_1 ' times ' number_2 ' is ' correct_answer
         9:
             header: 일을 시작하자!
             text: 레벨 6의 모험을 즐기세요!
@@ -351,21 +347,20 @@ levels:
             header: 세 번을 되풀이하다
             text: "만약 한 줄의 코드를 반복하고 싶다면, {repeat} 3 {times} 코드를 사용할 수 있다. \n만약 한 줄을 더 반복하고 싶다면, 숫자를 바꾸기만 하면 된다. \n\n예를 들어, 만약 당신이 캐릭터가 도움을 요청하는 이야기를 5번 동안 프로그래밍한다면, 다음과 같이 보일 수 있다:"
             code: |-
-                    {print} 'The prince kept calling for help'
-                    {repeat} 5 {times} {print} 'Help!'
-                    {print} 'Why is nobody helping me?'
+                {print} 'The prince kept calling for help'
+                {repeat} 5 {times} {print} 'Help!'
+                {print} 'Why is nobody helping me?'
         3:
             header: 인쇄 명령을 잊지 마십시오
             text: repeat 명령을 사용할 때 '{print}' 명령을 잊지 마십시오.
-            code: |-
-                    {repeat} 5 {times} 'Help!'
+            code: '{repeat} 5 {times} ''Help!'''
         4:
             header: 질문 명령 반복
             text: 또한 '{ask}', '{if}' 또는 '{else}' 명령을 여러 번 반복할 수 있습니다.
             code: |-
-                    {repeat} 2 {times} answer = {ask} 'Did you know you could ask a question multiple times?'
-                    {if} answer {is} yes {repeat} 2 {times} {print} 'You knew that already!'
-                    {else} {repeat} 3 {times} {print} 'You have learned something new!'
+                {repeat} 2 {times} answer = {ask} 'Did you know you could ask a question multiple times?'
+                {if} answer {is} yes {repeat} 2 {times} {print} 'You knew that already!'
+                {else} {repeat} 3 {times} {print} 'You have learned something new!'
         5:
             header: 준비완료!
             text: 레벨 7의 모험을 즐기세요!
@@ -376,22 +371,21 @@ levels:
         2:
             header: '{messages}개 이전의 명령'
             text: "이전 레벨에서 '{repeat}' 명령어는 다음과 같이 보였습니다. \n\n코드 한 줄만 반복할 수 있습니다."
-            code: |-
-                    {repeat} 5 {times} {print} 'Help!'
+            code: '{repeat} 5 {times} {print} ''Help!'''
         3:
             header: 지금 {messages}개의 명령
             text: "이 레벨에서는 여러 줄의 코드를 반복할 수 있다. \n이를 위해서는 어떤 줄이 함께 속하므로 반복해야 하는지 컴퓨터에 말해야 한다. \n\n들여쓰기를 사용하여 이 작업을 수행한다. 반복할 각 줄의 맨 앞에 있는 4개의 공백(또는 하나의 탭)을 다음과 같이 사용한다:"
             code: |-
-                    {repeat} 5 {times}
-                        {print} 'Hello everyone'
-                        {print} 'This will be printed 5 times'
+                {repeat} 5 {times}
+                    {print} 'Hello everyone'
+                    {print} 'This will be printed 5 times'
         4:
             header: 지금 {messages}개의 명령
             text: "원한다면 들여쓰기 없이 '{repeat}' 명령 뒤에 계속 진행할 수 있다. \n들여쓰기로 시작하지 않는 행은 반복되지 않는다."
             code: |-
-                    {repeat} 3 {times}
-                        {print} 'Hello!'
-                    {print} 'We are done repeating!'
+                {repeat} 3 {times}
+                    {print} 'Hello!'
+                {print} 'We are done repeating!'
         5:
             header: if and else before
             text: "{if} 명령어와 {else} 명령어도 마찬가지이다. \n이전의 명령어는 다음과 같다:"
@@ -402,21 +396,15 @@ levels:
             header: if and else now
             text: "이제 {if} 명령어와 {else} 명령어는 다음과 같다. \n{if} 명령어와 {else} 명령어 뒤의 각 행은 들여쓰기로 시작한다."
             code: |-
-                    name = {ask} 'What is your name?'
-                    {if} name {is} Hedy
-                        {print} 'Welcome Hedy'
-                    {else}
-                        {print} 'Welcome programmer!' 
+                name = {ask} 'What is your name?'
+                {if} name {is} Hedy
+                    {print} 'Welcome Hedy'
+                {else}
+                    {print} 'Welcome programmer!'
         7:
             header: 들여쓰기 중지
             text: '''{repeat}'' 명령어와 마찬가지로 들여쓰기 사용을 중지할 수 있으며 줄은 항상 표시됩니다. 문장이 참일 경우에만 해당되는 것은 아닙니다.'
-            code: |-
-                    name = {ask} 'What is your name?'
-                    {if} name {is} Hedy
-                        {print} 'Welcome Hedy'
-                    {else}
-                        {print} 'Welcome programmer!' 
-                    {print} '3..2..1.. Start programming!'
+            code: "name = {ask} 'What is your name?'\n{if} name {is} Hedy\n    {print} 'Welcome Hedy'\n{else}\n    {print} 'Welcome programmer!' \n{print} '3..2..1.. Start programming!'"
         8:
             header: if statements inside if statements
             text: "repeat 명령어 안에 if 명령어를 넣거나, 다른 if 명령어 안에 if 명령어를 넣으려고 생각해봤을 것이다. \n지금으로서는 아직 불가능하다. 상위 단계에서는 가능하겠지만, 일단 적절한 들여쓰기를 가진 {if} {else} 명령어와 {repeat} 명령어를 연습하는 것에 집중하자."

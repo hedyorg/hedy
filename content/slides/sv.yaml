@@ -138,23 +138,23 @@ levels:
 
                 På så sätt behöver vi inte kommandot `{echo}`.
             code: |-
-                    name {is} {ask} What is your name?
-                    {print} Hello name
+                name {is} {ask} What is your name?
+                {print} Hello name
         4:
             header: Flera variabler
             text: Nu när vi använder variabler kan vi använda flera variabler istället för bara ett `{echo}`-kommando.
             code: |-
-                    name {is} {ask} What is your name?
-                    {print} Hello name
-                    age {is} {ask} How old are you?
-                    {print} name is age years old.
+                name {is} {ask} What is your name?
+                {print} Hello name
+                age {is} {ask} How old are you?
+                {print} name is age years old.
         5:
             header: Sov
             text: Du kan också använda kommandot `{sleep}` för att pausa koden ett tag.
             code: |-
-                    {print} My favorite colour is...
-                    {sleep} 2
-                    {print} green!
+                {print} My favorite colour is...
+                {sleep} 2
+                {print} green!
         6:
             header: Sov 5
             text: |-
@@ -162,10 +162,10 @@ levels:
 
                 Om du vill kan du även använda en variabel istället för ett tal för att bestämma längden på sov-kommandot.
             code: |-
-                    pause {is} 10
-                    {print} My favorite colour is...
-                    {sleep} pause
-                    {print} green!
+                pause {is} 10
+                {print} My favorite colour is...
+                {sleep} pause
+                {print} green!
         7:
             header: Låt den roliga programmeringen börja!
             text: Ha det kul med äventyren på nivå 3!
@@ -180,8 +180,8 @@ levels:
 
                 Skriv kommatecken mellan elementen i listan.
             code: |-
-                    animals {is} dogs, cats, kangaroos
-                    ```
+                animals {is} dogs, cats, kangaroos
+                ```
         3:
             header: Slumpmässigt
             text: |-
@@ -189,16 +189,16 @@ levels:
                 Datorn kommer slumpmässigt att välja ett element från listan.
                 Varje gång du kör denna kod kommer utskriften att skilja sig åt.
             code: |-
-                    animals {is} dogs, cats, kangaroos
-                    {print} animals {at} {random}
-                    ```
+                animals {is} dogs, cats, kangaroos
+                {print} animals {at} {random}
+                ```
         4:
             header: Slumpmässigt i en mening
             text: Du kan använda kommandot `{at} {random}` i en mening också.
             code: |-
-                    animals {is} dogs, cats, kangaroos
-                    {print} My favorite animal is animals {at} {random}
-                    ```
+                animals {is} dogs, cats, kangaroos
+                {print} My favorite animal is animals {at} {random}
+                ```
         5:
             header: Lägg till i
             text: |-
@@ -207,20 +207,20 @@ levels:
                 Du kan välja vad som ska läggas till i listan eller så kan du använda kommandot `{add}` `{to}` i kombination med kommandot `{ask}`.
                 På så sätt kan du låta spelaren bestämma vad som ska läggas till i listan.
             code: |-
-                   animals {is} dog, cat, kangaroo
-                   like {is} {ask} What is your favorite animal?
-                   {add} like {to_list} animals
-                   {print} I choose animals {at} {random}
+                animals {is} dog, cat, kangaroo
+                like {is} {ask} What is your favorite animal?
+                {add} like {to_list} animals
+                {print} I choose animals {at} {random}
         6:
             header: Ta bort från
             text: |-
                 Motsatsen till kommandot `{add}` `{to}` är kommandot `{remove}` `{from}`.
                 Detta kommando tar bort ett element från en lista.
             code: |-
-                    animals {is} dog, cat, kangaroo
-                    dislike {is} {ask} What animal do you not like?
-                    {remove} dislike {from} animals
-                    {print} I choose animals {at} {random}
+                animals {is} dog, cat, kangaroo
+                dislike {is} {ask} What animal do you not like?
+                {remove} dislike {from} animals
+                {print} I choose animals {at} {random}
         9:
             header: Nu sätter vi igång!
             text: Ha det kul med äventyren på nivå 3!
@@ -228,13 +228,13 @@ levels:
         1:
             header: Välkommen till nivå 4
             text: På den här nivån får du lära dig använda citattecken.
-            code: "{print} 'print with quotes!'"
+            code: '{print} ''print with quotes!'''
         2:
             header: Problem
             text: 'På de tidigare nivåerna kan du ha stött på det här problemet:'
             code: |-
-                    name {is} Sophie
-                    {print} My name is name
+                name {is} Sophie
+                {print} My name is name
         3:
             header: Fixa det med citattecken
             text: |-
@@ -244,11 +244,11 @@ levels:
         4:
             header: Citattecken med skriv
             text: När du använder kommandot `{print}` måste du sätta texten som du vill ska visas på skärmen inom citattecken.
-            code: "{print} 'print with quotes!'"
+            code: '{print} ''print with quotes!'''
         5:
             header: Citattecken med fråga
             text: Detta gäller också för kommandot `{fråga}`.
-            code: "name {is} {ask} 'name please?'"
+            code: name {is} {ask} 'name please?'
         6:
             header: Citattecken och variabler
             text: |-
@@ -271,8 +271,7 @@ levels:
                 Var försiktig! Nu när du använder citattecken kan du inte använda apostrofer i sammandragningar.
 
                 Försök att skriva ut en sammandragning som engelska "you're" eller "I'm" på skärmen nedan och se vad som händer …
-            code: |-
-                {print} 'This won't work!'
+            code: '{print} ''This won''t work!'''
         9:
             header: Rensa
             text: |-
@@ -281,13 +280,13 @@ levels:
 
                 Var försiktig så att du alltid använder ett sov-kommando också. Om du inte gör det kommer datorn att sudda ut all text innan du hinner läsa den!
             code: |-
-                    {print} '3'
-                    {clear}
-                    {print} '2'
-                    {clear}
-                    {print} '1'
-                    {clear}
-                    {print} 'SURPRISE!'
+                {print} '3'
+                {clear}
+                {print} '2'
+                {clear}
+                {print} '1'
+                {clear}
+                {print} 'SURPRISE!'
         10:
             header: Klara, färdiga, gå!
             text: Ha det kul med äventyren på nivå 4!
@@ -301,22 +300,20 @@ levels:
                 Med kommandot `{if}` kan du välja mellan två alternativ.
                 I exemplet kommer datorn att skriva 'nice' om det givna svaret är Hedy.
                 Om svaret inte är Hedy kommer datorn inte att göra någonting.
-            code: |- 
-                    name {is} {ask} 'what is your name?'
-                    {if} name {is} Hedy {print} 'nice'
+            code: |-
+                name {is} {ask} 'what is your name?'
+                {if} name {is} Hedy {print} 'nice'
         3:
             header: Glöm inte att skriva ut
             text: Glöm inte att använda kommandot `{print}` när du använder kommandot `{if}`.
-            code: |-
-                {if} name {is} Hedy 'nice'
+            code: '{if} name {is} Hedy ''nice'''
         4:
             header: annars
             text: |-
                 När du använder ett `{if}`-kommando kan du också lägga till ett `{else}`-kommando.
                 Om svaret är Hedy kommer datorn att skriva 'nice'.
                 Men om svaret är något annat kommer datorn att skriva 'boo'.
-            code: |-
-                {if} name {is} Hedy {print} 'nice' {else} {print} 'boo!'
+            code: '{if} name {is} Hedy {print} ''nice'' {else} {print} ''boo!'''
         5:
             header: Långa rader
             text: |-
@@ -335,10 +332,10 @@ levels:
 
                 Tänk på att Hedy är skiljer på stora och små bokstäver. Det betyder om du svarar "Grönt" istället för "grönt", kommer Hedy att skriva "meh".
             code: |-
-                    pretty_colors {is} green, yellow
-                    favorite_color {is} {ask} 'What is your favorite color?'
-                    {if} favorite_color {in} pretty_colors {print} 'pretty!'
-                    {else} {print} 'meh'
+                pretty_colors {is} green, yellow
+                favorite_color {is} {ask} 'What is your favorite color?'
+                {if} favorite_color {in} pretty_colors {print} 'pretty!'
+                {else} {print} 'meh'
         7:
             header: Nu kör vi!
             text: Ha det kul med äventyren på nivå 5!
@@ -349,47 +346,43 @@ levels:
         2:
             header: Addition
             text: Om du vill addera så använder du helt enkelt plustecknet.
-            code: |-
-                    {print} '5 plus 5 is ' 5 + 5
+            code: '{print} ''5 plus 5 is '' 5 + 5'
         3:
             header: Subtraktion
             text: För att subtrahera använder du minustecknet.
-            code: |-
-                    {print} '5 minus 5 is ' 5 - 5
+            code: '{print} ''5 minus 5 is '' 5 - 5'
         4:
             header: Multiplikation
             text: Om du vill multiplicera kan du använda asterisk.
-            code: |-
-                    {print} '5 times 5 is ' 5 * 5
+            code: '{print} ''5 times 5 is '' 5 * 5'
         5:
             header: Division
             text: Du kan använda snedstreck för division.
-            code: |-
-                    {print} '5 divided by 5 is ' 5 / 5
+            code: '{print} ''5 divided by 5 is '' 5 / 5'
         6:
             header: Sammanfattning
             text: Sammanfattningsvis kan du använda +, –, * och / för att räkna.
             code: |-
-                    {print} '5 plus 5 is ' 5 + 5
-                    {print} '5 minus 5 is ' 5 - 5
-                    {print} '5 times 5 is ' 5 * 5
-                    {print} '5 divided by 5 is ' 5 / 5
+                {print} '5 plus 5 is ' 5 + 5
+                {print} '5 minus 5 is ' 5 - 5
+                {print} '5 times 5 is ' 5 * 5
+                {print} '5 divided by 5 is ' 5 / 5
         7:
             header: Symbolen =
             text: |-
                 Från och med nu kan du också använda likhetstecken (=) istället för `{is}`-kommandot.
                 Detta gäller både tal och ord, och det gäller även efter kommandona `{if}` eller `{else}`.
             code: |-
-                    name = Hedy
-                    answer = 20 + 4
+                name = Hedy
+                answer = 20 + 4
         8:
             header: Beräkningar med variabler
             text: 'Du kan göra beräkningar med tal, men du kan också använda variabler för att göra beräkningar, t.ex. så här:'
             code: |-
-                    number_1 = {ask} 'Fill in the first number:'
-                    number_2 = {ask} 'Fill in the second number:'
-                    correct_answer = number_1 * number_2
-                    {print} number_1 ' times ' number_2 ' is ' correct_answer
+                number_1 = {ask} 'Fill in the first number:'
+                number_2 = {ask} 'Fill in the second number:'
+                correct_answer = number_1 * number_2
+                {print} number_1 ' times ' number_2 ' is ' correct_answer
         9:
             header: Nu sätter vi igång!
             text: Ha det kul med äventyren på nivå 6!
@@ -405,21 +398,20 @@ levels:
 
                 Till exempel: Om du programmerar en berättelse där din karaktär ropar på hjälp fem gånger, kan det se ut så här:
             code: |-
-                    {print} 'The prince kept calling for help'
-                    {repeat} 5 {times} {print} 'Help!'
-                    {print} 'Why is nobody helping me?'
+                {print} 'The prince kept calling for help'
+                {repeat} 5 {times} {print} 'Help!'
+                {print} 'Why is nobody helping me?'
         3:
             header: Glöm inte kommandot skriv
             text: Glöm inte kommandot `{print}` när du använder kommandot upprepa.
-            code: |-
-                    {repeat} 5 {times} 'Help!'
+            code: '{repeat} 5 {times} ''Help!'''
         4:
             header: Upprepa ett fråga-kommando
             text: Du kan också upprepa ett `{ask}`-, `{if}`- eller `{else}`-kommando flera gånger.
             code: |-
-                    {repeat} 2 {times} answer = {ask} 'Did you know you could ask a question multiple times?'
-                    {if} answer {is} yes {repeat} 2 {times} {print} 'You knew that already!'
-                    {else} {repeat} 3 {times} {print} 'You have learned something new!'
+                {repeat} 2 {times} answer = {ask} 'Did you know you could ask a question multiple times?'
+                {if} answer {is} yes {repeat} 2 {times} {print} 'You knew that already!'
+                {else} {repeat} 3 {times} {print} 'You have learned something new!'
         5:
             header: Klara, färdiga, gå!
             text: Ha det kul med äventyren på nivå 7!
@@ -433,8 +425,7 @@ levels:
                 På de tidigare nivåerna såg kommandot `{repeat}` ut så här:
 
                 Du kunde bara upprepa en kodrad.
-            code: |-
-                    {repeat} 5 {times} {print} 'Help!'
+            code: '{repeat} 5 {times} {print} ''Help!'''
         3:
             header: '{repeat}-kommandon nu'
             text: |-
@@ -443,18 +434,18 @@ levels:
 
                 Använd fyra blanksteg (eller en tabb) i början av varje rad som du vill upprepa, så här:
             code: |-
-                    {repeat} 5 {times}
-                        {print} 'Hello everyone'
-                        {print} 'This will be printed 5 times'
+                {repeat} 5 {times}
+                    {print} 'Hello everyone'
+                    {print} 'This will be printed 5 times'
         4:
             header: '{repeat}-kommandon nu'
             text: |-
                 Om du vill kan du fortsätta efter kommandot `{repeat}` utan indrag.
                 Rader utan indrag kommer inte att upprepas.
             code: |-
-                    {repeat} 3 {times}
-                        {print} 'Hello!'
-                    {print} 'We are done repeating!'
+                {repeat} 3 {times}
+                    {print} 'Hello!'
+                {print} 'We are done repeating!'
         5:
             header: om och annars förut
             text: |-
@@ -469,21 +460,15 @@ levels:
                 Så här är kommandona`{if}` och `{else}` nu.
                 Varje rad efter kommandona `{if}` och `{else}` börjar med indrag.
             code: |-
-                    name = {ask} 'What is your name?'
-                    {if} name {is} Hedy
-                        {print} 'Welcome Hedy'
-                    {else}
-                        {print} 'Welcome programmer!' 
+                name = {ask} 'What is your name?'
+                {if} name {is} Hedy
+                    {print} 'Welcome Hedy'
+                {else}
+                    {print} 'Welcome programmer!'
         7:
             header: stoppa indraget
             text: Precis som med kommandot `{repeat}` kan du sluta använda indrag och raderna kommer alltid att visas, altså inte bara om påståendet är sant.
-            code: |-
-                    name = {ask} 'What is your name?'
-                    {if} name {is} Hedy
-                        {print} 'Welcome Hedy'
-                    {else}
-                        {print} 'Welcome programmer!' 
-                    {print} '3..2..1.. Start programming!'
+            code: "name = {ask} 'What is your name?'\n{if} name {is} Hedy\n    {print} 'Welcome Hedy'\n{else}\n    {print} 'Welcome programmer!' \n{print} '3..2..1.. Start programming!'"
         8:
             header: if-satser inuti if-satser
             text: |-
