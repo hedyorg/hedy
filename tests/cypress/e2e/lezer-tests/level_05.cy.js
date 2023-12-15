@@ -127,6 +127,25 @@ describe('Lezer parser tests for level 5', () => {
                 
                 multiLevelTester('Test if clause with pressit', code, expectedTree, 5, 7);
             })
+
+            describe('Test print command after if', () => {
+                const code = `if name is Jesus print 'cool name'\nprint 'hello world'`
+                const expectedTree =
+                `Program(
+                    Command(
+                        If(
+                            if,
+                            Condition(EqualityCheck(Text,is,Text)),
+                            IfLessCommand(Print(print,String))
+                        )
+                    ),
+                    Command(
+                        Print(print,String)
+                    )
+                )`
+
+                singleLevelTester('Test print command after if', code, expectedTree, 5);
+            })
         });
     });
 })
