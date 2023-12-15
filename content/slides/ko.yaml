@@ -429,64 +429,64 @@ levels:
             header: '''{repeat}'' 뒤에 여러 줄이 있음'
             text: '''{repeat}'' 뒤에는 여러 줄을 사용할 수 있습니다.'
             code: |-
-                    {repeat} 3 {times}
-                        food = {ask} 'What do you want?'
-                        {if} food {is} pizza
-                            {print} 'nice!'
-                        {else}
-                            {print} 'pizza is better'
+                {repeat} 3 {times}
+                    food = {ask} 'What do you want?'
+                    {if} food {is} pizza
+                        {print} 'nice!'
+                    {else}
+                        {print} 'pizza is better'
         3:
             header: Indentation matters!
             text: 들여쓰기는 어떤 선을 반복해야 하는지, 어떤 선을 한 번만 실행해야 하는지 컴퓨터에 알려주는 매우 중요합니다.
             code: |-
-                    {repeat} 3 {times}
-                        {print} 'This line will be repeated...'
-                        {print} 'This one too...'
-                    {print} 'but this one will not!'
+                {repeat} 3 {times}
+                    {print} 'This line will be repeated...'
+                    {print} 'This one too...'
+                {print} 'but this one will not!'
         4:
             header: '''{if}'' 뒤의 다중 행'
             text: '''{if}'' 뒤에 여러 줄을 사용할 수도 있습니다'
             code: |-
-                    continue = {ask} 'Do you want to continue?'
-                    {if} continue = yes
-                        sure = {ask} 'Are you sure?'
-                        {if} sure {is} yes
-                            {print} 'We will continue'
-                        {else}
-                            {print} 'You are not sure'
+                continue = {ask} 'Do you want to continue?'
+                {if} continue = yes
+                    sure = {ask} 'Are you sure?'
+                    {if} sure {is} yes
+                        {print} 'We will continue'
                     {else}
-                        {print} 'You do not want to continue'
+                        {print} 'You are not sure'
+                {else}
+                    {print} 'You do not want to continue'
         5:
             header: Indentation matters
             text: 다시 말하지만 들여쓰기는 여전히 매우 중요하며 코드에 큰 차이를 만들 수 있다.
             code: |-
-                    continue = {ask} 'Do you want to continue?'
-                    {if} continue = yes
-                        sure = {ask} 'Are you sure?'
-                        {if} sure {is} yes
-                            {print} 'We will continue'
-                    {else}
-                        {print} 'You are not sure'
+                continue = {ask} 'Do you want to continue?'
+                {if} continue = yes
+                    sure = {ask} 'Are you sure?'
+                    {if} sure {is} yes
+                        {print} 'We will continue'
+                {else}
+                    {print} 'You are not sure'
         6:
             header: '{repeat} 안에 있는 {if}'
             text: "이제 이 명령어 뒤에 여러 줄의 코드를 사용할 수 있게 되었으므로, 서로 간에 코드를 넣을 수도 있습니다. \n이것을 확인해보세요:"
             code: |-
-                    {repeat} 3 {times}
-                        food = {ask} 'What do you want?'
-                        {if} food {is} pizza
-                            {print} 'nice!'
-                        {else}
-                            {print} 'pizza is better'
+                {repeat} 3 {times}
+                    food = {ask} 'What do you want?'
+                    {if} food {is} pizza
+                        {print} 'nice!'
+                    {else}
+                        {print} 'pizza is better'
         7:
             header: 움푹 들어간 곳에 주의하세요
             text: 이 코드의 네 번째 줄과 여섯 번째 줄은 8칸의 들여쓰기로 시작합니다.
             code: |-
-                    {repeat} 3 {times}
-                        food = {ask} 'What do you want?'
-                        {if} food {is} pizza
-                            {print} 'nice!'
-                        {else}
-                            {print} 'pizza is better'
+                {repeat} 3 {times}
+                    food = {ask} 'What do you want?'
+                    {if} food {is} pizza
+                        {print} 'nice!'
+                    {else}
+                        {print} 'pizza is better'
         8:
             header: 가자!
             text: 레벨 9의 모험을 즐기세요!
@@ -498,17 +498,17 @@ levels:
             header: 명령어
             text: With for you는 목록을 만들고 그 목록의 모든 항목을 사용할 수 있다. '{for}'는 반복과 같은 블록을 만들고, 만약 그렇다면 블록의 모든 줄은 들여쓰기(4칸)로 시작해야 한다.
             code: |-
-                    animals = dog, cat, blobfish
-                    {for} animal {in} animals
-                        {print} 'I love ' animal
+                animals = dog, cat, blobfish
+                {for} animal {in} animals
+                    {print} 'I love ' animal
         3:
             header: 명령어
             text: 'Here you see another example of the `{for}` command:'
             code: |-
-                    days = Monday, Tuesday, Wednesday, Thursday, Friday, Saturday, Sunday
-                    names = mom, dad, Emma, Sophie
-                    {for} day {in} days
-                        {print} names {at} {random} ' does the dishes on ' day
+                days = Monday, Tuesday, Wednesday, Thursday, Friday, Saturday, Sunday
+                names = mom, dad, Emma, Sophie
+                {for} day {in} days
+                    {print} names {at} {random} ' does the dishes on ' day
         4:
             header: 프로그램 할 시간!
             text: 레벨 10의 모험을 즐기세요!
@@ -520,16 +520,16 @@ levels:
             header: 명령어
             text: 'new for 명령어는 다음과 같습니다:'
             code: |-
-                    {for} counter {in} {range} 1 {to} 10
-                        {print} counter
-                    {print} 'Ready or not. Here I come!'
+                {for} counter {in} {range} 1 {to} 10
+                    {print} counter
+                {print} 'Ready or not. Here I come!'
         3:
             header: 변수 i
             text: "이전 슬라이드에서 변수는 카운트다운을 하고 있었기 때문에 'counter'라고 이름 붙여졌다. \n물론 원하는 변수의 이름은 무엇이든 사용할 수 있다. \n이러한 상황에서 파이썬과 같은 프로그래밍 언어에서 사용되는 변수의 표준 명칭은 'i'이다. \n다음과 같다:"
             code: |-
-                    number = 10
-                    {for} i {in} {range} 1 {to} 10
-                        {print} i * number
+                number = 10
+                {for} i {in} {range} 1 {to} 10
+                    {print} i * number
         4:
             header: 프로그래밍 시작!
             text: 레벨 11의 모험을 즐기세요!
@@ -541,14 +541,14 @@ levels:
             header: 따옴표
             text: "이 레벨은 따옴표의 사용에 약간의 변경을 가한다. \n이제부터는 **모든 텍스트**는 따옴표로 표시되어야 한다. 여기에는 변수 값, {if} 명령 뒤의 항목 및 목록의 항목이 포함된다."
             code: |-
-                    name = 'Hedy the Robot'
-                    {print} 'Hello ' name
+                name = 'Hedy the Robot'
+                {print} 'Hello ' name
         3:
             header: 십진법
             text: "이 단계부터 당신은 또한 십진법 숫자를 사용할 수 있습니다. \n\n이것은 당신의 식당과 같은 프로그램들을 훨씬 더 좋게 만들 수 있습니다! 숫자는 따옴표를 만들지 않습니다."
             code: |-
-                    {print} 'decimal numbers now need to use a dot'
-                    {print} 2.5 + 2.5
+                {print} 'decimal numbers now need to use a dot'
+                {print} 2.5 + 2.5
         4:
             header: Functions!
             text: |-
@@ -560,15 +560,15 @@ levels:
             text: |-
                 In this program you see an example of a function.
                 Let's see what happens if you fill in the rest of the song!
-            code: |- 
-                   {define} twinkle
-                        {print} 'Twinkle'
-                        {print} '...'
+            code: |-
+                {define} twinkle
+                     {print} 'Twinkle'
+                     {print} '...'
 
-                    {call} twinkle
-                    {print} 'Up above the world so high'
-                    {print} 'Like a diamond in the sky'
-                    {call} twinkle
+                 {call} twinkle
+                 {print} 'Up above the world so high'
+                 {print} 'Like a diamond in the sky'
+                 {call} twinkle
         6:
             header: Functions
             text: As you could see in the example a function is a block of code that can be called anytime. You use `{define}` to set the function and `{call}` to use it.
@@ -582,18 +582,18 @@ levels:
         2:
             header: 명령어와 명령어
             text: "'{and}' 명령어는 항상 {if} 명령어와 함께 사용된다. \n이 방법으로 두 문장이 참인지 확인할 수 있다. 예를 들어:"
-            code: |- 
-                    name = {ask} 'what is your name?'
-                    age = {ask} 'what is your age?'
-                    {if} name {is} 'Hedy' {and} age {is} 2
-                        {print} 'You are the real Hedy!'
+            code: |-
+                name = {ask} 'what is your name?'
+                age = {ask} 'what is your age?'
+                {if} name {is} 'Hedy' {and} age {is} 2
+                    {print} 'You are the real Hedy!'
         3:
             header: 명령어
             text: "{or}는 {and} 명령어와 같은 방식으로 작동하지만 두 문장 중 하나만 참이어야 한다. \n\n{or}에 대한 {and}를 변경하면 어떤 일이 일어나는지 보자."
-            code: |- 
-                    name = {ask} 'what is your name?'
-                    {if} name {is} 'Hedy' {or} name {is} 'hedy'
-                        {print} 'Welcome!!'
+            code: |-
+                name = {ask} 'what is your name?'
+                {if} name {is} 'Hedy' {or} name {is} 'hedy'
+                    {print} 'Welcome!!'
         4:
             header: Functions with arguments
             text: Now that you've learned how to use functions, you'll learn how to use a function with an **argument**. An argument is a variable that is used within a function. It is not used outside the function.
@@ -602,13 +602,13 @@ levels:
             text: |-
                 In this example you see how the argument 'place' is used in the function.
                 Run the code and change 'ocean' and 'sea' to something else, and see what happens.
-            code: |- 
-                    {define} song {with} place
-                        {print} 'My Bonnie is over the ' place
+            code: |-
+                {define} song {with} place
+                    {print} 'My Bonnie is over the ' place
 
-                    {call} song {with} 'ocean'
-                    {call} song {with} 'sea'
-                    {call} song {with} 'ocean'
+                {call} song {with} 'ocean'
+                {call} song {with} 'sea'
+                {call} song {with} 'ocean'
         6:
             header: Example with variable
             text: |-
@@ -622,13 +622,13 @@ levels:
                 answer is ask 'Where is my Bonnie?'
                 call song with answer
                 ```
-            code: |- 
-                    {define} song {with} place
-                        {print} 'My Bonnie is over the ' place
+            code: |-
+                {define} song {with} place
+                    {print} 'My Bonnie is over the ' place
 
-                    {call} song {with} 'ocean'
-                    {call} song {with} 'sea'
-                    {call} song {with} 'ocean'
+                {call} song {with} 'ocean'
+                {call} song {with} 'sea'
+                {call} song {with} 'ocean'
         7:
             header: Even more questions!
             text: |-
@@ -644,13 +644,13 @@ levels:
                 place is ask 'Where are they?'
                 call song with name, place
                 ```
-            code: |- 
-                    {define} song {with} place
-                        {print} 'My Bonnie is over the ' place
+            code: |-
+                {define} song {with} place
+                    {print} 'My Bonnie is over the ' place
 
-                    {call} song {with} 'ocean'
-                    {call} song {with} 'sea'
-                    {call} song {with} 'ocean'
+                {call} song {with} 'ocean'
+                {call} song {with} 'sea'
+                {call} song {with} 'ocean'
         8:
             header: Let's go!
             text: Enjoy the adventures in level 13!
@@ -673,11 +673,11 @@ levels:
 
                 다음과 같이 사용할 수 있습니다:
             code: |-
-                    age = {ask} 'How old are you?'
-                    {if} age < 13
-                        {print} 'You are younger than me!'
-                    {else}
-                        {print} 'You are older than me!'
+                age = {ask} 'How old are you?'
+                {if} age < 13
+                    {print} 'You are younger than me!'
+                {else}
+                    {print} 'You are older than me!'
         3:
             header: Symbols (심볼)
             text: |-
@@ -689,28 +689,29 @@ levels:
 
                 == is used in `{if}` statements.
             code: |-
-                    answer = {ask} 'Do you want to learn more?'
-                    {if} answer == 'yes'
-                        {print} 'Go to the next adventure!'
-                    {if} answer != 'yes'
-                        {print} 'That is a shame!'
+                answer = {ask} 'Do you want to learn more?'
+                {if} answer == 'yes'
+                    {print} 'Go to the next adventure!'
+                {if} answer != 'yes'
+                    {print} 'That is a shame!'
         4:
             header: Return value
-            text: In the previous levels you have learned to create functions and use arguments with them. Another great use of a function is to let it calculate something for you. You can give the function a calculation and it will give you the answer of the calculation. This answer is called a **return value**.
+            text: In the previous levels you have learned to create functions and use arguments with them. Another great use of a function is to let it calculate something for you. You can give the function a calculation and it will give you the answer of the calculation. This answer is called a **return
+                value**.
         5:
             header: Return value
             text: For example, in this code the function calculate_new_price will calculate the new price of any item. It will give you the new price as a return value.
             code: |-
-                    {define} calculate_new_price {with} amount, percentage
-                        percentage = percentage / 100
-                        discount_amount = amount * percentage
-                        return amount - discount_amount
+                {define} calculate_new_price {with} amount, percentage
+                    percentage = percentage / 100
+                    discount_amount = amount * percentage
+                    return amount - discount_amount
 
-                    old_price = {ask} 'How much is on the price tag?'
-                    discount = {ask} 'What percentage is the discount?'
+                old_price = {ask} 'How much is on the price tag?'
+                discount = {ask} 'What percentage is the discount?'
 
-                    new_price = {call} calculate_new_price {with} old_price, discount
-                    {print} 'The new price is ' new_price ' dollar'
+                new_price = {call} calculate_new_price {with} old_price, discount
+                {print} 'The new price is ' new_price ' dollar'
         6:
             header: Let's get to work!
             text: Enjoy the adventures in level 14!
@@ -722,10 +723,10 @@ levels:
             header: '{while}'
             text: "우리는 새로운 순환 고리, while 순환 고리를 배울 거예요! 순환 고리는 문장이 참인 한 계속됩니다. 그러니 순환 고리의 값을 바꾸는 것을 잊지 마세요. \n\n예제 코드에서, 우리는 정답이 주어질 때까지 계속합니다. 만약 정답이 주어지지 않는다면, 순환 고리는 절대로 끝나지 않을 것입니다!"
             code: |-
-                    answer = 0
-                    {while} answer != 25
-                        answer = {ask} 'What is 5 times 5?'
-                    {print} 'A correct answer has been given'
+                answer = 0
+                {while} answer != 25
+                    answer = {ask} 'What is 5 times 5?'
+                {print} 'A correct answer has been given'
         3:
             header: 한번 해보자!
             text: 레벨 15의 모험을 즐기세요!
@@ -737,14 +738,14 @@ levels:
             header: 대괄호
             text: 우리는 목록을 파이썬 방식으로 만들 것이다. 우리는 또한 이전 레벨에서 배운 것처럼 각 항목의 주변에 따옴표를 유지한다. 우리는 목록의 한 자리를 가리킬 때 대괄호를 사용한다. at random 명령어는 더 이상 사용할 수 없다.
             code: |-
-                    friends = ['Ahmed', 'Ben', 'Cayden']
-                    {print} friends[1] ' is the first friend on the list.'
-                    {print} friends[2] ' is the second friend on the list.'
-                    {print} friends[3] ' is the third friend on the list.'
-                    #now we will match 2 lists using the variable i
-                    lucky_numbers = [15, 18, 6]
-                    {for} i {in} {range} 1 {to} 3
-                        {print} friends[i] 's lucky number is ' lucky_numbers[i]
+                friends = ['Ahmed', 'Ben', 'Cayden']
+                {print} friends[1] ' is the first friend on the list.'
+                {print} friends[2] ' is the second friend on the list.'
+                {print} friends[3] ' is the third friend on the list.'
+                #now we will match 2 lists using the variable i
+                lucky_numbers = [15, 18, 6]
+                {for} i {in} {range} 1 {to} 3
+                    {print} friends[i] 's lucky number is ' lucky_numbers[i]
         3:
             header: 한번 해보자!
             text: 레벨 16의 모험을 즐기세요!
@@ -756,27 +757,26 @@ levels:
             header: Colon (콜론)
             text: 이제 우리는 들여쓰기를 조금 바꿀 것이다. 들여쓰기가 필요할 때마다, 우리는 들여쓰기 전 줄에 다음이 필요하다.
             code: |-
-                    prices = ['1 million dollars', 'an apple pie', 'nothing']
-                    your_price = prices[{random}]
-                    {print} 'You win ' your_price
-                    {if} your_price == '1 million dollars' :
-                        {print} 'Yeah! You are rich!'
-                    {else}:
-                        {print} 'Better luck next time..'
+                prices = ['1 million dollars', 'an apple pie', 'nothing']
+                your_price = prices[{random}]
+                {print} 'You win ' your_price
+                {if} your_price == '1 million dollars' :
+                    {print} 'Yeah! You are rich!'
+                {else}:
+                    {print} 'Better luck next time..'
         3:
             header: Elif
             text: '이 레벨에서 당신은 또한 새로운 명령어를 사용할 수 있다: elif. elif는 다른 경우의 줄임말이고 당신이 3개 이상의 옵션을 만들고 싶을 때 그것이 필요하다. 그것을 확인해봐!'
             code: |-
-                    prices = ['1 million dollars', 'an apple pie', 'nothing']
-                    your_price = prices[{random}]
-                    {print} 'You win ' your_price
-                    {if} your_price == '1 million dollars' :
-                        {print} 'Yeah! You are rich!'
-                    {elif} your_price == 'an apple pie' :
-                        {print} 'Lovely, an apple pie!'
-                    {else}:
-                        {print} 'Better luck next time..'
-
+                prices = ['1 million dollars', 'an apple pie', 'nothing']
+                your_price = prices[{random}]
+                {print} 'You win ' your_price
+                {if} your_price == '1 million dollars' :
+                    {print} 'Yeah! You are rich!'
+                {elif} your_price == 'an apple pie' :
+                    {print} 'Lovely, an apple pie!'
+                {else}:
+                    {print} 'Better luck next time..'
         4:
             header: 한번 해보자!
             text: 레벨 17의 모험을 즐기세요!

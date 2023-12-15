@@ -498,66 +498,66 @@ levels:
             header: Flera rader efter `{repeat}`
             text: Du får ha flera rader efter `{repeat}`.
             code: |-
-                    {repeat} 3 {times}
-                        food = {ask} 'What do you want?'
-                        {if} food {is} pizza
-                            {print} 'nice!'
-                        {else}
-                            {print} 'pizza is better'
+                {repeat} 3 {times}
+                    food = {ask} 'What do you want?'
+                    {if} food {is} pizza
+                        {print} 'nice!'
+                    {else}
+                        {print} 'pizza is better'
         3:
             header: Indrag är viktigt!
             text: Indrag är mycket viktigt för att tala om för datorn vilka rader som ska upprepas och vilka rader som bara ska köras en gång.
             code: |-
-                    {repeat} 3 {times}
-                        {print} 'This line will be repeated...'
-                        {print} 'This one too...'
-                    {print} 'but this one will not!'
+                {repeat} 3 {times}
+                    {print} 'This line will be repeated...'
+                    {print} 'This one too...'
+                {print} 'but this one will not!'
         4:
             header: Flera rader efter `{if}`
             text: Du kan också ha flera rader efter `{if}`
             code: |-
-                    continue = {ask} 'Do you want to continue?'
-                    {if} continue = yes
-                        sure = {ask} 'Are you sure?'
-                        {if} sure {is} yes
-                            {print} 'We will continue'
-                        {else}
-                            {print} 'You are not sure'
+                continue = {ask} 'Do you want to continue?'
+                {if} continue = yes
+                    sure = {ask} 'Are you sure?'
+                    {if} sure {is} yes
+                        {print} 'We will continue'
                     {else}
-                        {print} 'You do not want to continue'
+                        {print} 'You are not sure'
+                {else}
+                    {print} 'You do not want to continue'
         5:
             header: Indrag är viktigt
             text: Indrag är fortfarande mycket viktigt och kan göra stor skillnad i koden.
             code: |-
-                    continue = {ask} 'Do you want to continue?'
-                    {if} continue = yes
-                        sure = {ask} 'Are you sure?'
-                        {if} sure {is} yes
-                            {print} 'We will continue'
-                    {else}
-                        {print} 'You are not sure'
+                continue = {ask} 'Do you want to continue?'
+                {if} continue = yes
+                    sure = {ask} 'Are you sure?'
+                    {if} sure {is} yes
+                        {print} 'We will continue'
+                {else}
+                    {print} 'You are not sure'
         6:
             header: Ett `{if}` inuti en `{repeat}`
             text: |-
                 Nu när du kan ha flera kodrader efter dessa kommandon kan du också placera dem inuti varann.
                 Kolla in det här:
             code: |-
-                    {repeat} 3 {times}
-                        food = {ask} 'What do you want?'
-                        {if} food {is} pizza
-                            {print} 'nice!'
-                        {else}
-                            {print} 'pizza is better'
+                {repeat} 3 {times}
+                    food = {ask} 'What do you want?'
+                    {if} food {is} pizza
+                        {print} 'nice!'
+                    {else}
+                        {print} 'pizza is better'
         7:
             header: Tänk på indraget
             text: Tänk på att den fjärde och sjätte raden i koden börjar med åtta mellanslag.
             code: |-
-                    {repeat} 3 {times}
-                        food = {ask} 'What do you want?'
-                        {if} food {is} pizza
-                            {print} 'nice!'
-                        {else}
-                            {print} 'pizza is better'
+                {repeat} 3 {times}
+                    food = {ask} 'What do you want?'
+                    {if} food {is} pizza
+                        {print} 'nice!'
+                    {else}
+                        {print} 'pizza is better'
         8:
             header: Nu kör vi!
             text: Ha det kul med äventyren på nivå 9!
@@ -569,17 +569,17 @@ levels:
             header: Kommandot 'för'
             text: Med 'för' kan du skapa en lista och använda alla element i listan. `{for}` skapar ett block, som 'upprepa' och 'om', så alla rader i blocket ska börja med indrag (fyra mellanslag).
             code: |-
-                    animals = dog, cat, blobfish
-                    {for} animal {in} animals
-                        {print} 'I love ' animal
+                animals = dog, cat, blobfish
+                {for} animal {in} animals
+                    {print} 'I love ' animal
         3:
             header: Kommandot 'för'
             text: 'Här ser du ett annat exempel på kommandot `{for}`:'
             code: |-
-                    days = Monday, Tuesday, Wednesday, Thursday, Friday, Saturday, Sunday
-                    names = mom, dad, Emma, Sophie
-                    {for} day {in} days
-                        {print} names {at} {random} ' does the dishes on ' day
+                days = Monday, Tuesday, Wednesday, Thursday, Friday, Saturday, Sunday
+                names = mom, dad, Emma, Sophie
+                {for} day {in} days
+                    {print} names {at} {random} ' does the dishes on ' day
         4:
             header: Dags att programmera!
             text: Ha det kul med äventyren på nivå 10!
@@ -594,9 +594,9 @@ levels:
             header: Kommandot 'för'
             text: 'Så här ser det nya för-kommandot ut:'
             code: |-
-                    {for} counter {in} {range} 1 {to} 10
-                        {print} counter
-                    {print} 'Ready or not. Here I come!'
+                {for} counter {in} {range} 1 {to} 10
+                    {print} counter
+                {print} 'Ready or not. Here I come!'
         3:
             header: variabeln i
             text: |-
@@ -605,9 +605,9 @@ levels:
                 Standardnamnet för variabler i den här situationen som används i programspråk som Python är 'i'.
                 Det ser ut så här:
             code: |-
-                    number = 10
-                    {for} i {in} {range} 1 {to} 10
-                        {print} i * number
+                number = 10
+                {for} i {in} {range} 1 {to} 10
+                    {print} i * number
         4:
             header: Låt oss börja programmera!
             text: Ha det kul med äventyren på nivå 11!
@@ -621,8 +621,8 @@ levels:
                 Den här nivån ändrar lite hur citattecken används.
                 Från och med nu måste ** alla texter ** vara inom citattecken. Detta gäller också värden för variabler, element i listor och text efter {if}-kommandon.
             code: |-
-                    name = 'Hedy the Robot'
-                    {print} 'Hello ' name
+                name = 'Hedy the Robot'
+                {print} 'Hello ' name
         3:
             header: Decimaltal
             text: |-
@@ -630,8 +630,8 @@ levels:
 
                 Siffror har inte citattecken.
             code: |-
-                    {print} 'decimal numbers now need to use a dot'
-                    {print} 2.5 + 2.5
+                {print} 'decimal numbers now need to use a dot'
+                {print} 2.5 + 2.5
         4:
             header: Functions!
             text: |-
@@ -643,15 +643,15 @@ levels:
             text: |-
                 In this program you see an example of a function.
                 Let's see what happens if you fill in the rest of the song!
-            code: |- 
-                   {define} twinkle
-                        {print} 'Twinkle'
-                        {print} '...'
+            code: |-
+                {define} twinkle
+                     {print} 'Twinkle'
+                     {print} '...'
 
-                    {call} twinkle
-                    {print} 'Up above the world so high'
-                    {print} 'Like a diamond in the sky'
-                    {call} twinkle
+                 {call} twinkle
+                 {print} 'Up above the world so high'
+                 {print} 'Like a diamond in the sky'
+                 {call} twinkle
         6:
             header: Functions
             text: As you could see in the example a function is a block of code that can be called anytime. You use `{define}` to set the function and `{call}` to use it.
@@ -667,21 +667,21 @@ levels:
             text: |-
                 Kommandot `{och}` används alltid ihop med kommandot {if}.
                 På så sätt kan du kontrollera om två påståenden är sanna. Till exempel:
-            code: |- 
-                    name = {ask} 'what is your name?'
-                    age = {ask} 'what is your age?'
-                    {if} name {is} 'Hedy' {and} age {is} 2
-                        {print} 'You are the real Hedy!'
+            code: |-
+                name = {ask} 'what is your name?'
+                age = {ask} 'what is your age?'
+                {if} name {is} 'Hedy' {and} age {is} 2
+                    {print} 'You are the real Hedy!'
         3:
             header: Kommandot 'eller'
             text: |-
                 Kommandot `{or}` fungerar på samma sätt som kommandot `{and}`, men bara ett av de två påståendena måste vara sant.
 
                 Låt oss se vad som händer när du byter `{and}` mot `{or}`.
-            code: |- 
-                    name = {ask} 'what is your name?'
-                    {if} name {is} 'Hedy' {or} name {is} 'hedy'
-                        {print} 'Welcome!!'
+            code: |-
+                name = {ask} 'what is your name?'
+                {if} name {is} 'Hedy' {or} name {is} 'hedy'
+                    {print} 'Welcome!!'
         4:
             header: Functions with arguments
             text: Now that you've learned how to use functions, you'll learn how to use a function with an **argument**. An argument is a variable that is used within a function. It is not used outside the function.
@@ -690,13 +690,13 @@ levels:
             text: |-
                 In this example you see how the argument 'place' is used in the function.
                 Run the code and change 'ocean' and 'sea' to something else, and see what happens.
-            code: |- 
-                    {define} song {with} place
-                        {print} 'My Bonnie is over the ' place
+            code: |-
+                {define} song {with} place
+                    {print} 'My Bonnie is over the ' place
 
-                    {call} song {with} 'ocean'
-                    {call} song {with} 'sea'
-                    {call} song {with} 'ocean'
+                {call} song {with} 'ocean'
+                {call} song {with} 'sea'
+                {call} song {with} 'ocean'
         6:
             header: Example with variable
             text: |-
@@ -710,13 +710,13 @@ levels:
                 answer is ask 'Where is my Bonnie?'
                 call song with answer
                 ```
-            code: |- 
-                    {define} song {with} place
-                        {print} 'My Bonnie is over the ' place
+            code: |-
+                {define} song {with} place
+                    {print} 'My Bonnie is over the ' place
 
-                    {call} song {with} 'ocean'
-                    {call} song {with} 'sea'
-                    {call} song {with} 'ocean'
+                {call} song {with} 'ocean'
+                {call} song {with} 'sea'
+                {call} song {with} 'ocean'
         7:
             header: Even more questions!
             text: |-
@@ -732,13 +732,13 @@ levels:
                 place is ask 'Where are they?'
                 call song with name, place
                 ```
-            code: |- 
-                    {define} song {with} place
-                        {print} 'My Bonnie is over the ' place
+            code: |-
+                {define} song {with} place
+                    {print} 'My Bonnie is over the ' place
 
-                    {call} song {with} 'ocean'
-                    {call} song {with} 'sea'
-                    {call} song {with} 'ocean'
+                {call} song {with} 'ocean'
+                {call} song {with} 'sea'
+                {call} song {with} 'ocean'
         8:
             header: Let's go!
             text: Enjoy the adventures in level 13!
@@ -761,11 +761,11 @@ levels:
 
                 Du kan använda dem så här:
             code: |-
-                    age = {ask} 'How old are you?'
-                    {if} age < 13
-                        {print} 'You are younger than me!'
-                    {else}
-                        {print} 'You are older than me!'
+                age = {ask} 'How old are you?'
+                {if} age < 13
+                    {print} 'You are younger than me!'
+                {else}
+                    {print} 'You are older than me!'
         3:
             header: Symboler
             text: |-
@@ -777,28 +777,29 @@ levels:
 
                 == används i `{if}`-satser.
             code: |-
-                    answer = {ask} 'Do you want to learn more?'
-                    {if} answer == 'yes'
-                        {print} 'Go to the next adventure!'
-                    {if} answer != 'yes'
-                        {print} 'That is a shame!'
+                answer = {ask} 'Do you want to learn more?'
+                {if} answer == 'yes'
+                    {print} 'Go to the next adventure!'
+                {if} answer != 'yes'
+                    {print} 'That is a shame!'
         4:
             header: Return value
-            text: In the previous levels you have learned to create functions and use arguments with them. Another great use of a function is to let it calculate something for you. You can give the function a calculation and it will give you the answer of the calculation. This answer is called a **return value**.
+            text: In the previous levels you have learned to create functions and use arguments with them. Another great use of a function is to let it calculate something for you. You can give the function a calculation and it will give you the answer of the calculation. This answer is called a **return
+                value**.
         5:
             header: Return value
             text: For example, in this code the function calculate_new_price will calculate the new price of any item. It will give you the new price as a return value.
             code: |-
-                    {define} calculate_new_price {with} amount, percentage
-                        percentage = percentage / 100
-                        discount_amount = amount * percentage
-                        return amount - discount_amount
+                {define} calculate_new_price {with} amount, percentage
+                    percentage = percentage / 100
+                    discount_amount = amount * percentage
+                    return amount - discount_amount
 
-                    old_price = {ask} 'How much is on the price tag?'
-                    discount = {ask} 'What percentage is the discount?'
+                old_price = {ask} 'How much is on the price tag?'
+                discount = {ask} 'What percentage is the discount?'
 
-                    new_price = {call} calculate_new_price {with} old_price, discount
-                    {print} 'The new price is ' new_price ' dollar'
+                new_price = {call} calculate_new_price {with} old_price, discount
+                {print} 'The new price is ' new_price ' dollar'
         6:
             header: Let's get to work!
             text: Enjoy the adventures in level 14!
@@ -813,10 +814,10 @@ levels:
 
                 I exempelkoden fortsätter vi tills ett korrekt svar har getts. Om det rätta svaret aldrig ges kommer loopen aldrig att avslutas!
             code: |-
-                    answer = 0
-                    {while} answer != 25
-                        answer = {ask} 'What is 5 times 5?'
-                    {print} 'A correct answer has been given'
+                answer = 0
+                {while} answer != 25
+                    answer = {ask} 'What is 5 times 5?'
+                {print} 'A correct answer has been given'
         3:
             header: Vi testar det!
             text: Ha det kul med äventyren på nivå 15!
@@ -828,14 +829,14 @@ levels:
             header: Hakparenteser
             text: Vi kommer att göra listor på Python-vis, med hakparenteser runt listorna! Vi behåller också citattecknen runt varje element, som vi har lärt oss i tidigare nivåer. Vi använder hakparenteser för att peka ut en plats i en lista. Kommandot 'på slump' kan inte användas längre.
             code: |-
-                    friends = ['Ahmed', 'Ben', 'Cayden']
-                    {print} friends[1] ' is the first friend on the list.'
-                    {print} friends[2] ' is the second friend on the list.'
-                    {print} friends[3] ' is the third friend on the list.'
-                    #now we will match 2 lists using the variable i
-                    lucky_numbers = [15, 18, 6]
-                    {for} i {in} {range} 1 {to} 3
-                        {print} friends[i] 's lucky number is ' lucky_numbers[i]
+                friends = ['Ahmed', 'Ben', 'Cayden']
+                {print} friends[1] ' is the first friend on the list.'
+                {print} friends[2] ' is the second friend on the list.'
+                {print} friends[3] ' is the third friend on the list.'
+                #now we will match 2 lists using the variable i
+                lucky_numbers = [15, 18, 6]
+                {for} i {in} {range} 1 {to} 3
+                    {print} friends[i] 's lucky number is ' lucky_numbers[i]
         3:
             header: Vi testar det!
             text: Ha det kul med äventyren på nivå 16!
@@ -847,27 +848,26 @@ levels:
             header: Kolon
             text: Nu ska vi ändra indraget lite grann. Varje gång vi behöver en indragning behöver vi kolon (:) på raden före indragningen.
             code: |-
-                    prices = ['1 million dollars', 'an apple pie', 'nothing']
-                    your_price = prices[{random}]
-                    {print} 'You win ' your_price
-                    {if} your_price == '1 million dollars' :
-                        {print} 'Yeah! You are rich!'
-                    {else}:
-                        {print} 'Better luck next time..'
+                prices = ['1 million dollars', 'an apple pie', 'nothing']
+                your_price = prices[{random}]
+                {print} 'You win ' your_price
+                {if} your_price == '1 million dollars' :
+                    {print} 'Yeah! You are rich!'
+                {else}:
+                    {print} 'Better luck next time..'
         3:
             header: Annarsom
             text: 'På den här nivån kan du också använda ett nytt kommando: annarsom. annarsom är en sammandragning av ''annars om'' och du behöver det när du vill skapa tre (eller fler!) alternativ. Kolla in det här!'
             code: |-
-                    prices = ['1 million dollars', 'an apple pie', 'nothing']
-                    your_price = prices[{random}]
-                    {print} 'You win ' your_price
-                    {if} your_price == '1 million dollars' :
-                        {print} 'Yeah! You are rich!'
-                    {elif} your_price == 'an apple pie' :
-                        {print} 'Lovely, an apple pie!'
-                    {else}:
-                        {print} 'Better luck next time..'
-
+                prices = ['1 million dollars', 'an apple pie', 'nothing']
+                your_price = prices[{random}]
+                {print} 'You win ' your_price
+                {if} your_price == '1 million dollars' :
+                    {print} 'Yeah! You are rich!'
+                {elif} your_price == 'an apple pie' :
+                    {print} 'Lovely, an apple pie!'
+                {else}:
+                    {print} 'Better luck next time..'
         4:
             header: Vi testar det!
             text: Ha det kul med äventyren på nivå 17!
