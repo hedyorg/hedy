@@ -431,9 +431,7 @@ levels:
 
                 Anda hanya dapat mengulang satu baris kode.
             code: |-
-                    {print} 'The prince kept calling for help'
                     {repeat} 5 {times} {print} 'Help!'
-                    {print} 'Why is nobody helping me?'
         3:
             header: '{repeat} perintah sebelumnya'
             text: |-
@@ -441,13 +439,19 @@ levels:
                 Caranya dengan menggunakan indentasi.
 
                 Gunakan 4 spasi (atau satu tab) di awal setiap baris yang ingin Anda ulangi, seperti ini:
-            editor: <iframe class="fragment" src="/adventure/repeat_command/8/raw"></iframe>
+            code: |-
+                    {repeat} 5 {times}
+                        {print} 'Hello everyone'
+                        {print} 'This will be printed 5 times'
         4:
             header: '{repeat} perintah sekarang'
             text: |-
                 Jika mau, Anda dapat melanjutkan setelah perintah `{repeat}` tanpa lekukan.
                 Garis yang tidak dimulai dengan lekukan tidak akan terulang.
-            editor: <iframe class="fragment" src="/adventure/repeat_command_2/8/raw"></iframe>
+            code: |-
+                    {repeat} 3 {times}
+                        {print} 'Hello!'
+                    {print} 'We are done repeating!'
         5:
             header: jika dan yang lain sebelumnya
             text: |-
@@ -461,11 +465,22 @@ levels:
             text: |-
                 Ini adalah perintah `{if}` dan `{else}` sekarang.
                 Setiap baris setelah perintah `{if}` dan `{else}` dimulai dengan indentasi.
-            editor: <iframe class="fragment" src="/adventure/if_command/8/raw"></iframe>
+            code: |-
+                    name = {ask} 'What is your name?'
+                    {if} name {is} Hedy
+                        {print} 'Welcome Hedy'
+                    {else}
+                        {print} 'Welcome programmer!' 
         7:
             header: menghentikan lekukan
             text: Sama seperti perintah `{repeat}`, Anda dapat berhenti menggunakan indentasi dan garis akan selalu ditampilkan. Bukan hanya jika pernyataan itu benar.
-            editor: <iframe class="fragment" src="/adventure/if_command/8/raw"></iframe>
+            code: |-
+                    name = {ask} 'What is your name?'
+                    {if} name {is} Hedy
+                        {print} 'Welcome Hedy'
+                    {else}
+                        {print} 'Welcome programmer!' 
+                    {print} '3..2..1.. Start programming!'
         8:
             header: pernyataan if di dalam pernyataan if
             text: |-

@@ -377,17 +377,21 @@ levels:
             header: '{messages}개 이전의 명령'
             text: "이전 레벨에서 '{repeat}' 명령어는 다음과 같이 보였습니다. \n\n코드 한 줄만 반복할 수 있습니다."
             code: |-
-                    {print} 'The prince kept calling for help'
                     {repeat} 5 {times} {print} 'Help!'
-                    {print} 'Why is nobody helping me?'
         3:
             header: 지금 {messages}개의 명령
             text: "이 레벨에서는 여러 줄의 코드를 반복할 수 있다. \n이를 위해서는 어떤 줄이 함께 속하므로 반복해야 하는지 컴퓨터에 말해야 한다. \n\n들여쓰기를 사용하여 이 작업을 수행한다. 반복할 각 줄의 맨 앞에 있는 4개의 공백(또는 하나의 탭)을 다음과 같이 사용한다:"
-            editor: <iframe class="fragment" src="/adventure/repeat_command/8/raw"></iframe>
+            code: |-
+                    {repeat} 5 {times}
+                        {print} 'Hello everyone'
+                        {print} 'This will be printed 5 times'
         4:
             header: 지금 {messages}개의 명령
             text: "원한다면 들여쓰기 없이 '{repeat}' 명령 뒤에 계속 진행할 수 있다. \n들여쓰기로 시작하지 않는 행은 반복되지 않는다."
-            editor: <iframe class="fragment" src="/adventure/repeat_command_2/8/raw"></iframe>
+            code: |-
+                    {repeat} 3 {times}
+                        {print} 'Hello!'
+                    {print} 'We are done repeating!'
         5:
             header: if and else before
             text: "{if} 명령어와 {else} 명령어도 마찬가지이다. \n이전의 명령어는 다음과 같다:"
@@ -397,11 +401,22 @@ levels:
         6:
             header: if and else now
             text: "이제 {if} 명령어와 {else} 명령어는 다음과 같다. \n{if} 명령어와 {else} 명령어 뒤의 각 행은 들여쓰기로 시작한다."
-            editor: <iframe class="fragment" src="/adventure/if_command/8/raw"></iframe>
+            code: |-
+                    name = {ask} 'What is your name?'
+                    {if} name {is} Hedy
+                        {print} 'Welcome Hedy'
+                    {else}
+                        {print} 'Welcome programmer!' 
         7:
             header: 들여쓰기 중지
             text: '''{repeat}'' 명령어와 마찬가지로 들여쓰기 사용을 중지할 수 있으며 줄은 항상 표시됩니다. 문장이 참일 경우에만 해당되는 것은 아닙니다.'
-            editor: <iframe class="fragment" src="/adventure/if_command/8/raw"></iframe>
+            code: |-
+                    name = {ask} 'What is your name?'
+                    {if} name {is} Hedy
+                        {print} 'Welcome Hedy'
+                    {else}
+                        {print} 'Welcome programmer!' 
+                    {print} '3..2..1.. Start programming!'
         8:
             header: if statements inside if statements
             text: "repeat 명령어 안에 if 명령어를 넣거나, 다른 if 명령어 안에 if 명령어를 넣으려고 생각해봤을 것이다. \n지금으로서는 아직 불가능하다. 상위 단계에서는 가능하겠지만, 일단 적절한 들여쓰기를 가진 {if} {else} 명령어와 {repeat} 명령어를 연습하는 것에 집중하자."

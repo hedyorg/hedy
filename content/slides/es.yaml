@@ -441,13 +441,19 @@ levels:
                 Esto lo haces usando la sangría.
 
                 Usa 4 espacios (o una tabulación) al principio de cada línea que quieras repetir, tal que así:
-            editor: <iframe class="fragment" src="/adventure/repeat_command/8/raw"></iframe>
+            code: |-
+                    {repeat} 5 {times}
+                        {print} 'Hello everyone'
+                        {print} 'This will be printed 5 times'
         4:
             header: comandos {repeat} ahora
             text: |-
                 Si quieres, puedes continur tras el comando `{repeat}` sin sangría.
                 Las líneas que no empiecen con sangría no se repetirán.
-            editor: <iframe class="fragment" src="/adventure/repeat_command_2/8/raw"></iframe>
+            code: |-
+                    {repeat} 3 {times}
+                        {print} 'Hello!'
+                    {print} 'We are done repeating!'
         5:
             header: antes si y sino
             text: |-
@@ -461,11 +467,22 @@ levels:
             text: |-
                 Ahora estos son los comandos `{if}` y `{else}`.
                 Cada línea tras los comandos `{if}` y `{else}` empieza con sangría.
-            editor: <iframe class="fragment" src="/adventure/if_command/8/raw"></iframe>
+            code: |-
+                    name = {ask} 'What is your name?'
+                    {if} name {is} Hedy
+                        {print} 'Welcome Hedy'
+                    {else}
+                        {print} 'Welcome programmer!' 
         7:
             header: detener la sangría
             text: Al igual que con el comando `{repeat}`, puedes dejar de usar sangría y las líneas siempre se mostrarán. No sólo si la sentencia es verdadera.
-            editor: <iframe class="fragment" src="/adventure/if_command/8/raw"></iframe>
+            code: |-
+                    name = {ask} 'What is your name?'
+                    {if} name {is} Hedy
+                        {print} 'Welcome Hedy'
+                    {else}
+                        {print} 'Welcome programmer!' 
+                    {print} '3..2..1.. Start programming!'
         8:
             header: sentencias si dentro de sentencias si
             text: |-

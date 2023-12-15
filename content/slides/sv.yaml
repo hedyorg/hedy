@@ -434,9 +434,7 @@ levels:
 
                 Du kunde bara upprepa en kodrad.
             code: |-
-                    {print} 'The prince kept calling for help'
                     {repeat} 5 {times} {print} 'Help!'
-                    {print} 'Why is nobody helping me?'
         3:
             header: '{repeat}-kommandon nu'
             text: |-
@@ -444,13 +442,19 @@ levels:
                 Det gör du genom att använda indrag.
 
                 Använd fyra blanksteg (eller en tabb) i början av varje rad som du vill upprepa, så här:
-            editor: <iframe class="fragment" src="/adventure/repeat_command/8/raw"></iframe>
+            code: |-
+                    {repeat} 5 {times}
+                        {print} 'Hello everyone'
+                        {print} 'This will be printed 5 times'
         4:
             header: '{repeat}-kommandon nu'
             text: |-
                 Om du vill kan du fortsätta efter kommandot `{repeat}` utan indrag.
                 Rader utan indrag kommer inte att upprepas.
-            editor: <iframe class="fragment" src="/adventure/repeat_command_2/8/raw"></iframe>
+            code: |-
+                    {repeat} 3 {times}
+                        {print} 'Hello!'
+                    {print} 'We are done repeating!'
         5:
             header: om och annars förut
             text: |-
@@ -464,11 +468,22 @@ levels:
             text: |-
                 Så här är kommandona`{if}` och `{else}` nu.
                 Varje rad efter kommandona `{if}` och `{else}` börjar med indrag.
-            editor: <iframe class="fragment" src="/adventure/if_command/8/raw"></iframe>
+            code: |-
+                    name = {ask} 'What is your name?'
+                    {if} name {is} Hedy
+                        {print} 'Welcome Hedy'
+                    {else}
+                        {print} 'Welcome programmer!' 
         7:
             header: stoppa indraget
             text: Precis som med kommandot `{repeat}` kan du sluta använda indrag och raderna kommer alltid att visas, altså inte bara om påståendet är sant.
-            editor: <iframe class="fragment" src="/adventure/if_command/8/raw"></iframe>
+            code: |-
+                    name = {ask} 'What is your name?'
+                    {if} name {is} Hedy
+                        {print} 'Welcome Hedy'
+                    {else}
+                        {print} 'Welcome programmer!' 
+                    {print} '3..2..1.. Start programming!'
         8:
             header: if-satser inuti if-satser
             text: |-

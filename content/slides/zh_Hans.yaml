@@ -424,9 +424,7 @@ levels:
 
                 你只能重复一行代码。
             code: |-
-                    {print} 'The prince kept calling for help'
                     {repeat} 5 {times} {print} 'Help!'
-                    {print} 'Why is nobody helping me?'
         3:
             header: '{repeat} commands now'
             text: |-
@@ -434,13 +432,19 @@ levels:
                 你可以通过使用缩进来完成此操作。
 
                 在要重复的每一行的开头使用 4 个空格（或一个制表符），如下所示：
-            editor: <iframe class="fragment" src="/adventure/repeat_command/8/raw"></iframe>
+            code: |-
+                    {repeat} 5 {times}
+                        {print} 'Hello everyone'
+                        {print} 'This will be printed 5 times'
         4:
             header: '{repeat} commands now'
             text: |-
                 如果需要，你可以在 `{repeat}` 命令之后继续，无需缩进。
                 不以缩进开头的行将不会重复。
-            editor: <iframe class="fragment" src="/adventure/repeat_command_2/8/raw"></iframe>
+            code: |-
+                    {repeat} 3 {times}
+                        {print} 'Hello!'
+                    {print} 'We are done repeating!'
         5:
             header: if and else before
             text: |-
@@ -454,11 +458,22 @@ levels:
             text: |-
                 现在这些 `{if}` 和 `{else}` 命令。
                 `{if}` 和 `{else}` 命令后面的每一行都以缩进开头。
-            editor: <iframe class="fragment" src="/adventure/if_command/8/raw"></iframe>
+            code: |-
+                    name = {ask} 'What is your name?'
+                    {if} name {is} Hedy
+                        {print} 'Welcome Hedy'
+                    {else}
+                        {print} 'Welcome programmer!' 
         7:
             header: stopping the indentation
             text: 就像使用 `{repeat}` 命令一样，你可以停止使用缩进，并且行将始终显示。 不仅仅是该陈述是否属实。
-            editor: <iframe class="fragment" src="/adventure/if_command/8/raw"></iframe>
+            code: |-
+                    name = {ask} 'What is your name?'
+                    {if} name {is} Hedy
+                        {print} 'Welcome Hedy'
+                    {else}
+                        {print} 'Welcome programmer!' 
+                    {print} '3..2..1.. Start programming!'
         8:
             header: if statements inside if statements
             text: |-
@@ -483,7 +498,7 @@ levels:
             text: 缩进对于告诉计算机哪些行应该重复以及哪些行只能运行一次非常重要。
             editor: <iframe class="fragment" src="/adventure/repeat_command_2/8/raw"></iframe>
         4:
-            header: Multipe lines after `{if}`
+            header: Multiple lines after `{if}`
             text: 你还可以在“{if}”之后使用多行
             editor: <iframe class="fragment" src="/adventure/if_command/9/raw"></iframe>
         5:

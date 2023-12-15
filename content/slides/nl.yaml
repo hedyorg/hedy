@@ -425,9 +425,7 @@ levels:
                 Voor dit level zag `{repeat}` er zo uit:
                 Je kon het maar gebruiken over 1 regel.
             code: |-
-                    {print} 'The prince kept calling for help'
                     {repeat} 5 {times} {print} 'Help!'
-                    {print} 'Why is nobody helping me?'
         3:
             header: '{repeat} nu'
             text: |-
@@ -435,13 +433,19 @@ levels:
                 Dit doe je door in te springen.
 
                 Inspringen doe je met 4 spaties (of een tab) aan het begin van elke regel die herhaald moet worden. Zoals in het voorbeeld:
-            editor: <iframe class="fragment" src="/adventure/repeat_command/8/raw"></iframe>
+            code: |-
+                    {repeat} 5 {times}
+                        {print} 'Hello everyone'
+                        {print} 'This will be printed 5 times'
         4:
             header: '{repeat} nu'
             text: |-
                 Als je wil kun je onder het blok van regels die herhaald gaan worden gewoon weer verder typen zonder in te springen.
                 De regels die niet inspringen worden dan niet herhaald.
-            editor: <iframe class="fragment" src="/adventure/repeat_command_2/8/raw"></iframe>
+            code: |-
+                    {repeat} 3 {times}
+                        {print} 'Hello!'
+                    {print} 'We are done repeating!'
         5:
             header: '{if} en {else} hiervoor'
             text: |-
@@ -453,11 +457,22 @@ levels:
         6:
             header: '{if} en {else} nu'
             text: Bij {if} en {else} spring je nu ook in.
-            editor: <iframe class="fragment" src="/adventure/if_command/8/raw"></iframe>
+            code: |-
+                    name = {ask} 'What is your name?'
+                    {if} name {is} Hedy
+                        {print} 'Welcome Hedy'
+                    {else}
+                        {print} 'Welcome programmer!' 
         7:
             header: Stoppen met inspringen
             text: Net als bij {repeat}, kun je stoppen met inspringen. Hierdoor worden de regels altijd getoond en niet alleen als de stelling waar is.
-            editor: <iframe class="fragment" src="/adventure/if_command/8/raw"></iframe>
+            code: |-
+                    name = {ask} 'What is your name?'
+                    {if} name {is} Hedy
+                        {print} 'Welcome Hedy'
+                    {else}
+                        {print} 'Welcome programmer!' 
+                    {print} '3..2..1.. Start programming!'
         8:
             header: '{if}jes in {if}jes'
             text: |-

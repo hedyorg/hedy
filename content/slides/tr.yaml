@@ -431,9 +431,7 @@ levels:
 
                 Yalnızca bir satır kodu tekrarlayabilirsiniz.
             code: |-
-                    {print} 'The prince kept calling for help'
                     {repeat} 5 {times} {print} 'Help!'
-                    {print} 'Why is nobody helping me?'
         3:
             header: şimdiki {repeat} komutları
             text: |-
@@ -441,13 +439,19 @@ levels:
                 Bunu girinti kullanarak yaparsınız.
 
                 Tekrarlamak istediğiniz her satırın başında aşağıdaki gibi 4 boşluk (veya bir sekme) kullanın:
-            editor: <iframe class="fragment" src="/adventure/repeat_command/8/raw"></iframe>
+            code: |-
+                    {repeat} 5 {times}
+                        {print} 'Hello everyone'
+                        {print} 'This will be printed 5 times'
         4:
             header: şimdiki {repeat} komutları
             text: |-
                 İsterseniz `{repeat}` komutundan sonra girinti yapmadan devam edebilirsiniz.
                 Girinti ile başlamayan satırlar tekrarlanmayacaktır.
-            editor: <iframe class="fragment" src="/adventure/repeat_command_2/8/raw"></iframe>
+            code: |-
+                    {repeat} 3 {times}
+                        {print} 'Hello!'
+                    {print} 'We are done repeating!'
         5:
             header: önceki eğer ve değilse
             text: |-
@@ -461,11 +465,22 @@ levels:
             text: |-
                 Bunlar şimdiki `{if}` ve `{else}` komutlarıdır.
                 `{if}` ve `{else}` komutlarından sonraki her satır girinti ile başlar.
-            editor: <iframe class="fragment" src="/adventure/if_command/8/raw"></iframe>
+            code: |-
+                    name = {ask} 'What is your name?'
+                    {if} name {is} Hedy
+                        {print} 'Welcome Hedy'
+                    {else}
+                        {print} 'Welcome programmer!' 
         7:
             header: girintiyi durdurmak
             text: Tıpkı `{repeat}` komutunda olduğu gibi, girinti kullanmayı bırakırsanız satırlar her zaman gösterilecektir., sadece ifade doğru olunca değil.
-            editor: <iframe class="fragment" src="/adventure/if_command/8/raw"></iframe>
+            code: |-
+                    name = {ask} 'What is your name?'
+                    {if} name {is} Hedy
+                        {print} 'Welcome Hedy'
+                    {else}
+                        {print} 'Welcome programmer!' 
+                    {print} '3..2..1.. Start programming!'
         8:
             header: eğer ifadeleri içinde eğer ifadeleri
             text: |-

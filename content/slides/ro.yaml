@@ -417,9 +417,7 @@ levels:
 
                 You could only repeat one line of code.
             code: |-
-                    {print} 'The prince kept calling for help'
                     {repeat} 5 {times} {print} 'Help!'
-                    {print} 'Why is nobody helping me?'
         3:
             header: '{repeat} commands now'
             text: |-
@@ -427,13 +425,19 @@ levels:
                 You do this by using indentation.
 
                 Use 4 spaces (or one tab) at the beginning of each line that you want to repeat, like this:
-            editor: <iframe class="fragment" src="/adventure/repeat_command/8/raw"></iframe>
+            code: |-
+                    {repeat} 5 {times}
+                        {print} 'Hello everyone'
+                        {print} 'This will be printed 5 times'
         4:
             header: '{repeat} commands now'
             text: |-
                 If you want to, you can continue after the `{repeat}` command without indentation.
                 The lines that do not start with indentation will not be repeated.
-            editor: <iframe class="fragment" src="/adventure/repeat_command_2/8/raw"></iframe>
+            code: |-
+                    {repeat} 3 {times}
+                        {print} 'Hello!'
+                    {print} 'We are done repeating!'
         5:
             header: if and else before
             text: |-
@@ -447,11 +451,22 @@ levels:
             text: |-
                 These are the `{if}` and `{else}` commands now.
                 Each line after the `{if}` and `{else}` commands start with indentation.
-            editor: <iframe class="fragment" src="/adventure/if_command/8/raw"></iframe>
+            code: |-
+                    name = {ask} 'What is your name?'
+                    {if} name {is} Hedy
+                        {print} 'Welcome Hedy'
+                    {else}
+                        {print} 'Welcome programmer!' 
         7:
             header: stopping the indentation
             text: Just like with the `{repeat}` command, you can stop using indentation and the lines will always be shown. Not just if the statement is true.
-            editor: <iframe class="fragment" src="/adventure/if_command/8/raw"></iframe>
+            code: |-
+                    name = {ask} 'What is your name?'
+                    {if} name {is} Hedy
+                        {print} 'Welcome Hedy'
+                    {else}
+                        {print} 'Welcome programmer!' 
+                    {print} '3..2..1.. Start programming!'
         8:
             header: if statements inside if statements
             text: |-
@@ -476,7 +491,7 @@ levels:
             text: Indentation is very important to tell the computer which lines should be repeated and which lines should only be ran once.
             editor: <iframe class="fragment" src="/adventure/repeat_command_2/8/raw"></iframe>
         4:
-            header: Multipe lines after `{if}`
+            header: Multiple lines after `{if}`
             text: You can also use multiple lines after `{if}`
             editor: <iframe class="fragment" src="/adventure/if_command/9/raw"></iframe>
         5:
