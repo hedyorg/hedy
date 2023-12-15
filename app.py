@@ -1537,27 +1537,14 @@ def view_program(user, id):
 
 @app.route('/render_code/<level>/<code>', methods=['GET'])
 def render_code_in_editor(level, code):
-    # Add the commands to enable the language switcher dropdown
-    commands = hedy.commands_per_level.get(level)
 
     try:
         level = int(level)
     except BaseException:
         return utils.error_page(error=404, ui_message=gettext('no_such_level'))
 
-    # it is very much a hack to grab an adventure and then put the code on that adventure,
-    # but it is the way I got it to work!
-    if level == 0:   # there are no level 0 adventures
-        level = 1
-
-    # grab the fake adventure ----
-    initial_tab = "story"
-    initial_adventure = "story"
-
-    adventures = [x for x in load_adventures_for_level(level) if x.short_name == "story"]
-    # grab the fake adventure ----
-
-    adventures[0].start_code = code  # add code to it
+    a = Adventure('start', 'start', 'start', 'start', code, False, False)
+    adventures = [a]
 
     return render_template("code-page.html",
                            specific_adventure=True,
@@ -1573,7 +1560,7 @@ def render_code_in_editor(level, code):
                                lang=g.lang,
                                level=level,
                                adventures=adventures,
-                               initial_tab=initial_tab,
+                               initial_tab='start',
                                current_user_name=current_user()['username'],
                            ))
 
