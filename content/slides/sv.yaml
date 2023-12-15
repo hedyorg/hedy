@@ -125,7 +125,10 @@ levels:
         2:
             header: Variabler
             text: För att skapa eller sätta en variabels värde använder vi kommandot `{is}`
-            editor: <iframe class="fragment" src="/adventure/is_command/2/raw"></iframe>
+            code: |-
+                name {is} Hedy
+                age {is} 15
+                {print} name is age years old
         3:
             header: Interaktiv
             text: |-
@@ -134,22 +137,35 @@ levels:
                 Svaret på frågan lagras i variabeln.
 
                 På så sätt behöver vi inte kommandot `{echo}`.
-            editor: <iframe class="fragment" src="/adventure/ask_command/2/raw"></iframe>
+            code: |-
+                    name {is} {ask} What is your name?
+                    {print} Hello name
         4:
             header: Flera variabler
             text: Nu när vi använder variabler kan vi använda flera variabler istället för bara ett `{echo}`-kommando.
-            editor: <iframe class="fragment" src="/adventure/ask_command/2/raw"></iframe>
+            code: |-
+                    name {is} {ask} What is your name?
+                    {print} Hello name
+                    age {is} {ask} How old are you?
+                    {print} name is age years old.
         5:
             header: Sov
             text: Du kan också använda kommandot `{sleep}` för att pausa koden ett tag.
-            editor: <iframe class="fragment" src="/adventure/sleep_command/2/raw"></iframe>
+            code: |-
+                    {print} My favorite colour is...
+                    {sleep} 2
+                    {print} green!
         6:
             header: Sov 5
             text: |-
                 Du kan lägga till ett tal efter kommandot `{sleep}` om du vill att pausen ska vara längre.
 
                 Om du vill kan du även använda en variabel istället för ett tal för att bestämma längden på sov-kommandot.
-            editor: <iframe class="fragment" src="/adventure/sleep_command/2/raw"></iframe>
+            code: |-
+                    pause {is} 10
+                    {print} My favorite colour is...
+                    {sleep} pause
+                    {print} green!
         7:
             header: Låt den roliga programmeringen börja!
             text: Ha det kul med äventyren på nivå 3!

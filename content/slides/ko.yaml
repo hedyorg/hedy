@@ -115,7 +115,10 @@ levels:
         2:
             header: Variables (변수)
             text: 변수를 만들거나 설정하려면 '{is}' 명령을 사용합니다
-            editor: <iframe class="fragment" src="/adventure/is_command/2/raw"></iframe>
+            code: |-
+                name {is} Hedy
+                age {is} 15
+                {print} name is age years old
         3:
             header: Interactive (인터렉티브)
             text: |-
@@ -124,22 +127,35 @@ levels:
                 질문에 대한 답은 변수에 저장됩니다.
 
                 이렇게 하면 '{echo}' 명령이 필요 없습니다.
-            editor: <iframe class="fragment" src="/adventure/ask_command/2/raw"></iframe>
+            code: |-
+                    name {is} {ask} What is your name?
+                    {print} Hello name
         4:
             header: Multiple variables(다중변수)
             text: 이제 변수를 사용하므로 하나의 '{echo}' 명령 대신 여러 변수를 사용할 수 있습니다.
-            editor: <iframe class="fragment" src="/adventure/ask_command/2/raw"></iframe>
+            code: |-
+                    name {is} {ask} What is your name?
+                    {print} Hello name
+                    age {is} {ask} How old are you?
+                    {print} name is age years old.
         5:
             header: sleep (슬립)
             text: '`{sleep}` 명령어을 사용하여 코드를 잠시 중지할 수도 있습니다.'
-            editor: <iframe class="fragment" src="/adventure/sleep_command/2/raw"></iframe>
+            code: |-
+                    {print} My favorite colour is...
+                    {sleep} 2
+                    {print} green!
         6:
             header: Sleep 5
             text: |-
                 일시정지 시간을 길게 하려면 `{sleep}`명령 뒤에 숫자를 추가할 수 있습니다.
 
                 원한다면 숫자 대신 변수를 사용하여 sleep 명령의 지속 시간을 결정할 수도 있습니다.
-            editor: <iframe class="fragment" src="/adventure/sleep_command/2/raw"></iframe>
+            code: |-
+                    pause {is} 10
+                    {print} My favorite colour is...
+                    {sleep} pause
+                    {print} green!
         7:
             header: 프로그래밍의 재미를 시작합시다!
             text: 레벨 3의 모험을 즐기세요!

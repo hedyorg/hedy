@@ -80,11 +80,9 @@ levels:
             header: '{echo}'
             text: |-
                 As you could see in the previous example. If you use the `{ask}` command, you can ask a question.
-
                 The answer, however doesn't show in the output screen.
 
                 If you do want the answer to show, you can use the final command of this level: `{echo}`.
-
                 `{echo}` is used to repeat the answer of an `{ask}`.
             code: |-
                 {print} Hello!
@@ -95,16 +93,16 @@ levels:
             text: |-
                 With `{print}`, `{ask}` and `{echo}` you can already create a little story.
                 This is a good time to try the Parrot, Story and Rock, Paper Scissors adventures.
-            editor: <iframe class="fragment" src="/hedy/1"></iframe>
+            editor: hedy/1
         7:
             header: Programming!
             text: Adventures are shown in tabs.
-            editor: <iframe class="fragment" src="/hedy/1"></iframe>
+            editor: /hedy/1
         8:
             header: Programming!
             text: |-
                 The yellow arrow buttons can be used to copy examples.
-                <iframe class="fragment" src="/hedy/1"></iframe>
+            editor: /hedy#print_command
         9:
             header: Drawing with the turtle
             text: Now that we have seen at text codes, we will now look at drawing codes next.
@@ -113,7 +111,6 @@ levels:
             text: '`{forward}` is used to move the turtle forward.'
             code: |-
                 {forward} 50
-                {turn} left
         11:
             header: 'Drawing with the turtle: {turn}'
             text: '`{turn}` is used to make the turtle turn left or right.'
@@ -126,13 +123,16 @@ levels:
             text: |-
                 In this level you will learn to use variables.
 
-                A variable is a word that can be used to store informatie.
+                A variable is a word that can be used to store information.
 
                 For example: a name, age or favorite sports team.
         2:
             header: Variables
             text: To make or 'set' a variable we use the `{is}` command
-            editor: <iframe class="fragment" src="/adventure/is_command/2/raw"></iframe>
+            code: |-
+                name {is} Hedy
+                age {is} 15
+                {print} name is age years old
         3:
             header: Interactive
             text: |-
@@ -140,23 +140,36 @@ levels:
 
                 The answer to the question is stored in the variable.
 
-                This way we don't need the `{echo}`  command.
-            editor: <iframe class="fragment" src="/adventure/ask_command/2/raw"></iframe>
+                This way we don't need the `{echo}` command.
+            code: |-
+                    name {is} {ask} What is your name?
+                    {print} Hello name
         4:
             header: Multiple variables
-            text: Now that we use variables, we can use multiple variables instead of just one `{echo}`command.
-            editor: <iframe class="fragment" src="/adventure/ask_command/2/raw"></iframe>
+            text: Now that we use variables, we can use multiple variables instead of just one `{echo}` command.
+            code: |-
+                    name {is} {ask} What is your name?
+                    {print} Hello name
+                    age {is} {ask} How old are you?
+                    {print} name is age years old.
         5:
             header: Sleep
             text: You can also use the `{sleep}` command to pause the code for a while.
-            editor: <iframe class="fragment" src="/adventure/sleep_command/2/raw"></iframe>
+            code: |-
+                    {print} My favorite colour is...
+                    {sleep} 2
+                    {print} green!
         6:
             header: Sleep 5
             text: |-
                 You can add a number after the `{sleep}` command if you want the pause to be longer.
 
                 If you want, you could even use a variable instead of a number to decide the duration of the sleep command.
-            editor: <iframe class="fragment" src="/adventure/sleep_command/2/raw"></iframe>
+            code: |-
+                    pause {is} 10
+                    {print} My favorite colour is...
+                    {sleep} pause
+                    {print} green!
         7:
             header: Let the programming fun begin!
             text: Enjoy the adventures in level 3!

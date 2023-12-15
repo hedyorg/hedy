@@ -125,7 +125,10 @@ levels:
         2:
             header: Variables
             text: Para crear o 'establecer' una variable usamos el comando `{is}`
-            editor: <iframe class="fragment" src="/adventure/is_command/2/raw"></iframe>
+            code: |-
+                name {is} Hedy
+                age {is} 15
+                {print} name is age years old
         3:
             header: Interactivo
             text: |-
@@ -134,22 +137,35 @@ levels:
                 La respuesta a esta pregunta se guarda en la variable.
 
                 De esta manera no hace falta el comando `{echo}`.
-            editor: <iframe class="fragment" src="/adventure/ask_command/2/raw"></iframe>
+            code: |-
+                    name {is} {ask} What is your name?
+                    {print} Hello name
         4:
             header: Multiples variables
             text: Ahora que usamos variables, podemos usar varias variables en vez de sólo un comando `{echo}`.
-            editor: <iframe class="fragment" src="/adventure/ask_command/2/raw"></iframe>
+            code: |-
+                    name {is} {ask} What is your name?
+                    {print} Hello name
+                    age {is} {ask} How old are you?
+                    {print} name is age years old.
         5:
             header: Dormir
             text: También puedes usar el comando `{sleep}` para pausar el código durante un rato.
-            editor: <iframe class="fragment" src="/adventure/sleep_command/2/raw"></iframe>
+            code: |-
+                    {print} My favorite colour is...
+                    {sleep} 2
+                    {print} green!
         6:
             header: Dormir 5
             text: |-
                 Puedes añadir un número tras el comando `{sleep}` si quieres que la pausa sea más larga.
 
                 Si quieres, incluso podrías usar una variable en vez de un número para decidir la duración del comando dormir.
-            editor: <iframe class="fragment" src="/adventure/sleep_command/2/raw"></iframe>
+            code: |-
+                    pause {is} 10
+                    {print} My favorite colour is...
+                    {sleep} pause
+                    {print} green!
         7:
             header: ¡Que empiece la diversión de programar!
             text: ¡Disfruta las aventuras en el nivel 3!

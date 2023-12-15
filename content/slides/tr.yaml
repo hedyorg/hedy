@@ -125,7 +125,10 @@ levels:
         2:
             header: Değişkenler
             text: Bir değişken oluşturmak veya 'ayarlamak' için `{is}` komutunu kullanırız
-            editor: <iframe class="fragment" src="/adventure/is_command/2/raw"></iframe>
+            code: |-
+                name {is} Hedy
+                age {is} 15
+                {print} name is age years old
         3:
             header: Etkileşimli
             text: |-
@@ -134,22 +137,35 @@ levels:
                 Sorunun yanıtı değişkende saklanır.
 
                 Bu şekilde `{echo}` komutuna ihtiyaç duymayız.
-            editor: <iframe class="fragment" src="/adventure/ask_command/2/raw"></iframe>
+            code: |-
+                    name {is} {ask} What is your name?
+                    {print} Hello name
         4:
             header: Çoklu değişkenler
             text: Artık değişkenleri kullandığımıza göre, tek bir `{echo}` komutu yerine birden fazla değişken kullanabiliriz.
-            editor: <iframe class="fragment" src="/adventure/ask_command/2/raw"></iframe>
+            code: |-
+                    name {is} {ask} What is your name?
+                    {print} Hello name
+                    age {is} {ask} How old are you?
+                    {print} name is age years old.
         5:
             header: Uyku
             text: Kodu bir süreliğine duraklatmak için `{sleep}` komutunu da kullanabilirsiniz.
-            editor: <iframe class="fragment" src="/adventure/sleep_command/2/raw"></iframe>
+            code: |-
+                    {print} My favorite colour is...
+                    {sleep} 2
+                    {print} green!
         6:
             header: Uyku 5
             text: |-
                 Duraklamanın daha uzun olmasını istiyorsanız `{sleep}` komutundan sonra bir sayı ekleyebilirsiniz.
 
                 İsterseniz, uyku komutunun süresine karar vermek için bir sayı yerine bir değişken bile kullanabilirsiniz.
-            editor: <iframe class="fragment" src="/adventure/sleep_command/2/raw"></iframe>
+            code: |-
+                    pause {is} 10
+                    {print} My favorite colour is...
+                    {sleep} pause
+                    {print} green!
         7:
             header: Programlama eğlencesi başlasın!
             text: Seviye 2'deki maceraların tadını çıkarın!

@@ -125,7 +125,10 @@ levels:
         2:
             header: Variabel
             text: Untuk membuat atau 'mengatur' suatu variabel kita menggunakan perintah `{is}`
-            editor: <iframe class="fragment" src="/adventure/is_command/2/raw"></iframe>
+            code: |-
+                name {is} Hedy
+                age {is} 15
+                {print} name is age years old
         3:
             header: Interaktif
             text: |-
@@ -134,22 +137,35 @@ levels:
                 Jawaban atas pertanyaan disimpan dalam variabel.
 
                 Dengan cara ini kita tidak memerlukan perintah `{echo}`.
-            editor: <iframe class="fragment" src="/adventure/ask_command/2/raw"></iframe>
+            code: |-
+                    name {is} {ask} What is your name?
+                    {print} Hello name
         4:
             header: Banyak variabel
             text: Sekarang kita menggunakan variabel, kita bisa menggunakan beberapa variabel, bukan hanya satu perintah `{echo}`.
-            editor: <iframe class="fragment" src="/adventure/ask_command/2/raw"></iframe>
+            code: |-
+                    name {is} {ask} What is your name?
+                    {print} Hello name
+                    age {is} {ask} How old are you?
+                    {print} name is age years old.
         5:
             header: Tidur
             text: Anda juga dapat menggunakan perintah `{sleep}` untuk menjeda kode untuk sementara waktu.
-            editor: <iframe class="fragment" src="/adventure/sleep_command/2/raw"></iframe>
+            code: |-
+                    {print} My favorite colour is...
+                    {sleep} 2
+                    {print} green!
         6:
             header: Tidur 5
             text: |-
                 Anda dapat menambahkan nomor setelah perintah `{sleep}` jika ingin jeda lebih lama.
 
                 Jika mau, Anda bahkan bisa menggunakan variabel alih-alih angka untuk menentukan durasi perintah sleep.
-            editor: <iframe class="fragment" src="/adventure/sleep_command/2/raw"></iframe>
+            code: |-
+                    pause {is} 10
+                    {print} My favorite colour is...
+                    {sleep} pause
+                    {print} green!
         7:
             header: Biarkan kesenangan pemrograman dimulai!
             text: Nikmati petualangan di level 3!

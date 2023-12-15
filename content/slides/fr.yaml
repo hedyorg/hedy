@@ -125,7 +125,10 @@ levels:
         2:
             header: Variables
             text: Pour créer ou 'définir' une variable nous utilisons la commande `{is}`.
-            editor: <iframe class="fragment" src="/adventure/is_command/2/raw"></iframe>
+            code: |-
+                name {is} Hedy
+                age {is} 15
+                {print} name is age years old
         3:
             header: Interactif
             text: |-
@@ -134,22 +137,35 @@ levels:
                 La réponse à la question posée est alors stockée dans la variable..
 
                 De cette façon nous n'avons pas besoin de la commande `{echo}`  .
-            editor: <iframe class="fragment" src="/adventure/ask_command/2/raw"></iframe>
+            code: |-
+                    name {is} {ask} What is your name?
+                    {print} Hello name
         4:
             header: Variables multiples
             text: Maintenant que nous utilisons les variables, nous pouvons utiliser des variables multiples au lieu d'une seule commande `{echo}`.
-            editor: <iframe class="fragment" src="/adventure/ask_command/2/raw"></iframe>
+            code: |-
+                    name {is} {ask} What is your name?
+                    {print} Hello name
+                    age {is} {ask} How old are you?
+                    {print} name is age years old.
         5:
             header: Sleep
             text: Tu peux aussi utiliser la commande `{sleep}` pour mettre le code en pause pendant un moment.
-            editor: <iframe class="fragment" src="/adventure/sleep_command/2/raw"></iframe>
+            code: |-
+                    {print} My favorite colour is...
+                    {sleep} 2
+                    {print} green!
         6:
             header: Sleep 5
             text: |-
                 Tu peux ajouter un nombre après la commande `{sleep}` si tu veux que la pause soit plus longue.
 
                 Si tu le veux, tu peux même utiliser une variable au lieu d'un nombre pour contrôler la durée de la commande sleep.
-            editor: <iframe class="fragment" src="/adventure/sleep_command/2/raw"></iframe>
+            code: |-
+                    pause {is} 10
+                    {print} My favorite colour is...
+                    {sleep} pause
+                    {print} green!
         7:
             header: Que le plaisir de programmer commence!
             text: Profite des aventures du niveau 3!

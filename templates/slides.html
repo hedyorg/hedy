@@ -25,7 +25,7 @@
                     <iframe class="fragment" src="/render_code/{{ level }}/{{ slide['code'] | urlencode }}"></iframe>
                     {% endif %}
                     {% if slide['editor'] %}
-                    {{ slide['editor'] }}
+                    <iframe class="fragment" src="{{ slide['editor'] }}"></iframe>
                     {% endif %}
                 </textarea>
             </section>
