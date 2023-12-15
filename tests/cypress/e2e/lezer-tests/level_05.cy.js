@@ -28,8 +28,10 @@ describe('Lezer parser tests for level 5', () => {
                                 if,
                                 Condition(EqualityCheck(Text,is,Text)),
                                 IfLessCommand(Print(print,String)),
-                                else,
-                                IfLessCommand(Print(print,String))
+                                Else(
+                                    else,
+                                    IfLessCommand(Print(print,String))
+                                )                                
                             )
                         )
                     )`
@@ -45,13 +47,17 @@ describe('Lezer parser tests for level 5', () => {
                             If(
                                 if,
                                 Condition(EqualityCheck(Text,is,Text)),
-                                IfLessCommand(Print(print,String)),
+                                IfLessCommand(Print(print,String)),                                                          
+                            )
+                        ),
+                        Command(
+                            Else(
                                 else,
                                 IfLessCommand(Print(print,String))
                             )
                         )
                     )`
-                
+
                 singleLevelTester('Test if clause with else and if different line', code, expectedTree, 5); 
             });
             
@@ -63,7 +69,11 @@ describe('Lezer parser tests for level 5', () => {
                             If(
                                 if,
                                 Condition(EqualityCheck(Text,is,Text)),
-                                IfLessCommand(Print(print,String)),
+                                IfLessCommand(Print(print,String))                                                                
+                            )
+                        ),
+                        Command(
+                            Else(
                                 else,
                                 IfLessCommand(Print(print,String))
                             )
@@ -81,7 +91,11 @@ describe('Lezer parser tests for level 5', () => {
                         If(
                             if,
                             Condition(InListCheck(Text,in,Text)),
-                            IfLessCommand(Print(print,String)),
+                            IfLessCommand(Print(print,String))                            
+                        )
+                    ),
+                    Command(
+                        Else(
                             else,
                             IfLessCommand(Print(print,String))
                         )
@@ -99,7 +113,11 @@ describe('Lezer parser tests for level 5', () => {
                             If(
                                 if,
                                 Condition(EqualityCheck(Text,is,pressed)),
-                                IfLessCommand(Print(print,String)),
+                                IfLessCommand(Print(print,String)),                                
+                            ),
+                        ),
+                        Command(
+                            Else(
                                 else,
                                 IfLessCommand(Print(print,String))
                             )
@@ -110,6 +128,5 @@ describe('Lezer parser tests for level 5', () => {
                 multiLevelTester('Test if clause with pressit', code, expectedTree, 5, 7);
             })
         });
-
     });
 })

@@ -1,6 +1,6 @@
 @top Program { eol* (Command eol+)* Command? }
 Command {
-    Assign | AssignList | Ask | Clear |Print | Turtle | Sleep | Add | Remove| If | ErrorInvalid
+    Assign | AssignList | Ask | Clear |Print | Turtle | Sleep | Add | Remove| If | Else | ErrorInvalid
 }
 
 IfLessCommand {
@@ -44,8 +44,8 @@ Turtle[@isGroup=turtle] {
     Color { color+ (Expression | ListAccess)  }
 }   
 
-If { ifs+ Condition ~else_ambg eol*  IfLessCommand? (!else eol* ~else_ambg elses+ eol* IfLessCommand)? }
-
+If { ifs+ Condition eol* IfLessCommand Else? }
+Else { !else elses+ eol* IfLessCommand }
 
 Condition { 
     EqualityCheck { Text is+ (String | Expression | pressed+) } |
