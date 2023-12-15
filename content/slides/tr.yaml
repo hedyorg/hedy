@@ -28,27 +28,29 @@ levels:
             header: Hedy'de Programlama
             text: |-
                 Hedy'de `{print}` gibi özel kodlar kullanırız.
-                <iframe class="embedded-hedy" src="/adventure/story/1/raw"></iframe>
+            code: '{print} Welcome to Hedy!'
         6:
             header: Hedy'de Programlama
             text: |-
                 Kod kelimeleri pembe renkte gösterilecektir.
-                <iframe class="embedded-hedy" src="/adventure/story/1/raw"></iframe>
+            code: '{print} Welcome to Hedy!'
         7:
             header: Hedy'de Programlama
             text: |-
                 Kodun altındaki Kodu çalıştır düğmesi ile kodu başlatıyoruz.
-                <iframe class="embedded-hedy" src="/adventure/story/1/raw"></iframe>
+            code: '{print} Welcome to Hedy!'
         8:
             header: Hedy'de Programlama
             text: |-
                 Çıktısı sağ tarafta görünür.
-                <iframe class="embedded-hedy" src="/adventure/story/1/raw"></iframe>
+            code: '{print} Welcome to Hedy!'
         9:
             header: Hedy'de Programlama
             text: |-
                 Çıktı bir çizim de olabilir.
-                <iframe class="embedded-hedy" src="/adventure/turtle/1/raw"></iframe>
+            code: |-
+                {forward} 100
+                {turn} left
     1:
         1:
             header: 1. seviyeye hoş geldiniz!
@@ -62,21 +64,25 @@ levels:
                 Seviye 1'de kullanabileceğiniz ilk kod `{print}`.
 
                 `{print}` ekranda metin göstermek için kullanılır.
-            editor: <iframe class="fragment" src="/adventure/print_command/1/raw"></iframe>
+            code: |-
+                {print} Put text on the screen
         3:
             header: '{print} komutu'
             text: |-
                 Yazdır komutundan sonraki metni istediğiniz şekilde değiştirebilirsiniz.
 
                 Ya da `{print}` ile başlayan başka bir kod satırı ekleyerek birden fazla satır yazdırabilirsiniz.
-            editor: <iframe class="fragment" src="/adventure/print_command/1/raw"></iframe>
+            code: |-
+                {print} Put text on the screen
         4:
             header: '{ask}'
             text: |-
                 Seviye 1`de kullanabileceğiniz ikinci kod `{ask}`.
 
                 `{ask}` cevaplanabilecek bir soru sormak için kullanılır.
-            editor: <iframe class="fragment" src="/adventure/rock/1/raw"></iframe>
+            code: |-
+                {print} Welcome to your own rock scissors paper!
+                {ask} What will you choose?
         5:
             header: '{echo}'
             text: |-
@@ -87,7 +93,7 @@ levels:
                 Eğer cevabın gösterilmesini istiyorsanız, bu seviyenin son komutunu kullanabilirsiniz: `{echo}`.
 
                 `{echo}` bir `{ask}` cevabını tekrarlamak için kullanılır.
-            editor: <iframe class="fragment" src="/adventure/ask_command/1/raw"></iframe>
+            editor: hedy/1
         6:
             header: Programlama!
             text: |-
@@ -96,23 +102,27 @@ levels:
         7:
             header: Programlama!
             text: Maceralar, sekmeler halinde gösterilir.
-            editor: <iframe class="fragment" src="/hedy/1"></iframe>
+            editor: /hedy/1
         8:
             header: Programlama!
             text: |-
                 Sarı ok düğmeleri örnekleri kopyalamak için kullanılabilir.
-                <iframe class="fragment" src="/hedy/1"></iframe>
+            editor: /hedy/1
         9:
             header: Kaplumbağa ile çizim yapmak
             text: Metin ile kodlamayı gördüğümüze göre, şimdi çizim kodlarına bakacağız.
         10:
             header: 'Kaplumbağa ile çizim yapmak: {forward}'
             text: '`{forward}` kaplumbağayı ileri hareket ettirmek için kullanılır.'
-            editor: <iframe class="fragment" src="/adventure/turtle/1/raw"></iframe>
+            code: |-
+                {forward} 50
+                {turn} left
         11:
             header: 'Kaplumbağa ile çizim yapmak: {turn}'
             text: '`{turn}` kaplumbağanın sola veya sağa dönmesini sağlamak için kullanılır.'
-            editor: <iframe class="fragment" src="/adventure/turtle/1/raw"></iframe>
+            code: |-
+                {forward} 50
+                {turn} left
     2:
         1:
             header: Seviye 2'ye hoş geldiniz

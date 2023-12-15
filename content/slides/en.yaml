@@ -59,14 +59,16 @@ levels:
                 The first code that you can use in level 1 is `{print}`.
 
                 `{print}` is used to show text on the screen.
-            code: '{print} Put some text on the screen'
+            code: '{print} Show text on the screen'
         3:
             header: The {print} command
             text: |-
                 You can change the text after the print command to whatever you want.
 
                 Or you could print multiple lines by adding another line of code that also starts with `{print}`.
-            code: '{print} Welcome to Hedy!'
+            code: |-
+                {print} Welcome to Hedy!
+                {print} Start programming now!
         4:
             header: '{ask}'
             text: |-
@@ -97,7 +99,7 @@ levels:
         7:
             header: Programming!
             text: Adventures are shown in tabs.
-            editor: /hedy/1
+            editor: hedy/1
         8:
             header: Programming!
             text: The yellow arrow buttons can be used to copy examples.

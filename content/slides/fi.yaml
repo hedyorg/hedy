@@ -28,27 +28,28 @@ levels:
             header: Programming in Hedy
             text: |-
                 In Hedy we use special codes, like `{print}`.
-                <iframe class="embedded-hedy" src="/adventure/story/1/raw"></iframe>
-        6:
+            code: '{print} Welcome to Hedy!'
             header: Programming in Hedy
             text: |-
                 Code words will be shown in pink.
-                <iframe class="embedded-hedy" src="/adventure/story/1/raw"></iframe>
+            code: '{print} Welcome to Hedy!'
         7:
             header: Programming in Hedy
             text: |-
                 We start the code with the Run code button underneath the code.
-                <iframe class="embedded-hedy" src="/adventure/story/1/raw"></iframe>
+            code: '{print} Welcome to Hedy!'
         8:
             header: Programming in Hedy
             text: |-
                 Output appears on the left-hand side.
-                <iframe class="embedded-hedy" src="/adventure/story/1/raw"></iframe>
+            code: '{print} Welcome to Hedy!'
         9:
             header: Programming in Hedy
             text: |-
                 The output can also be a drawing.
-                <iframe class="embedded-hedy" src="/adventure/turtle/1/raw"></iframe>
+            code: |-
+                {forward} 100
+                {turn} left
     1:
         1:
             header: Welcome to level 1!
@@ -62,36 +63,42 @@ levels:
                 The first code that you can use in level 1 is `{print}`.
 
                 `{print}` is used to show text on the screen.
-            editor: <iframe class="fragment" src="/adventure/story/1/raw"></iframe>
+            code: |-
+                {print} Show text on the screen
         3:
             header: 'Hedy level 1: {ask}'
             text: |-
                 The second code that you can use in level 1 is `{ask}`.
 
                 `{ask}` is used to ask a question that can be answered.
-            editor: <iframe class="fragment" src="/adventure/rock/1/raw"></iframe>
+            code: |-
+                {print} Welcome to your own rock scissors paper!
+                {ask} What will you choose?
         4:
             header: 'Hedy level 1: {echo}'
             text: |-
                 The final text code that you can use in level 1 is `{echo}`.
 
                 `{echo}` is used to repeat the answer of an `{ask}`.
-            editor: <iframe class="fragment" src="/adventure/parrot/1/raw"></iframe>
+            code: |-
+                {print} Hello!
+                {ask} What is your name?
+                {echo} hello
         5:
             header: Programming!
             text: |-
                 with `{print}`, `{ask}` and `{echo}` you can already create a little story.
                 This is a good time to try the Parrot, Story and Rock, Paper Scissors adventures.
-            editor: <iframe class="fragment" src="/adventure/ask_command/1/raw"></iframe>
+            editor: hedy/1
         6:
             header: Programming!
             text: Adventures are shown in tabs.
+            editor: hedy/1
         7:
             header: Programming!
             text: |-
                 The yellow arrow buttons can be used to copy examples.
-                <iframe class="fragment" src="/hedy/1"></iframe>
-            editor: <iframe class="fragment" src="/hedy/1"></iframe>
+            editor: /hedy#print_command
         8:
             header: Drawing with the turtle
             text: Now that we have seen at text codes, we will now look at drawing codes next.
@@ -99,13 +106,15 @@ levels:
             header: 'Drawing with the turtle: {forward}'
             text: '`{forward}` is used to move the turtle forward.'
         10:
-            header: 'Drawing with the turtle: {turn}'
-            text: '`{turn}` is used to make the turtle turn left or right.'
-            editor: <iframe class="fragment" src="/adventure/turtle/1/raw"></iframe>
+            header: 'Drawing with the turtle: {forward}'
+            text: '`{forward}` is used to move the turtle forward.'
+            code: '{forward} 50'
         11:
             header: 'Drawing with the turtle: {turn}'
             text: '`{turn}` is used to make the turtle turn left or right.'
-            editor: <iframe class="fragment" src="/adventure/turtle/1/raw"></iframe>
+            code: |-
+                {forward} 50
+                {turn} left
     2:
         1:
             header: Welcome to level 2

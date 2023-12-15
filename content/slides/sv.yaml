@@ -28,27 +28,29 @@ levels:
             header: Programmering i Hedy
             text: |-
                 I Hedy använder vi speciella koder, som `{print}`.
-                <iframe class="embedded-hedy" src="/adventure/story/1/raw"></iframe>
+            code: '{print} Welcome to Hedy!'
         6:
             header: Programmering i Hedy
             text: |-
                 Kodord visas i rosa.
-                <iframe class="embedded-hedy" src="/adventure/story/1/raw"></iframe>
+            code: '{print} Welcome to Hedy!'
         7:
             header: Programmering i Hedy
             text: |-
                 Vi startar koden med Kör kod-knappen under koden.
-                <iframe class="embedded-hedy" src="/adventure/story/1/raw"></iframe>
+            code: '{print} Welcome to Hedy!'
         8:
             header: Programmering i Hedy
             text: |-
                 Utmatning visas till höger.
-                <iframe class="embedded-hedy" src="/adventure/story/1/raw"></iframe>
+            code: '{print} Welcome to Hedy!'
         9:
             header: Programmering i Hedy
             text: |-
                 Utmatningen kan också vara en teckning.
-                <iframe class="embedded-hedy" src="/adventure/turtle/1/raw"></iframe>
+            code: |-
+                {forward} 100
+                {turn} left
     1:
         1:
             header: Välkommen till nivå 1!
@@ -62,21 +64,25 @@ levels:
                 Den första koden man kan använda i nivå 1 är `{print}`.
 
                 `{print}` används för att visa text på skärmen.
-            editor: <iframe class="fragment" src="/adventure/print_command/1/raw"></iframe>
+            code: |-
+                {print} Put text on the screen
         3:
             header: Kommandot {print}
             text: |-
                 Du kan ändra texten efter skriv-kommandot till vad du vill.
 
                 Eller så kan du skriva ut flera rader genom att lägga till en ny kodrad som också börjar med `{print}`.
-            editor: <iframe class="fragment" src="/adventure/print_command/1/raw"></iframe>
+            code: |-
+                {print} Put text on the screen
         4:
             header: '{ask}'
             text: |-
                 Det andra kommandot som du kan använda på nivå 1 är `{ask}`.
 
                 `{ask}` används för att ställa en fråga som kan besvaras.
-            editor: <iframe class="fragment" src="/adventure/rock/1/raw"></iframe>
+            code: |-
+                {print} Welcome to your own rock scissors paper!
+                {ask} What will you choose?
         5:
             header: '{echo}'
             text: |-
@@ -87,7 +93,7 @@ levels:
                 Om du vill att svaret ska visas kan du använda det sista kommandot på den här nivån: `{echo}`.
 
                 `{echo}` används för att upprepa svaret på en `{ask}`.
-            editor: <iframe class="fragment" src="/adventure/ask_command/1/raw"></iframe>
+            editor: hedy/1
         6:
             header: Programmering!
             text: |-
@@ -96,23 +102,27 @@ levels:
         7:
             header: Programmering!
             text: Äventyren visas i flikar.
-            editor: <iframe class="fragment" src="/hedy/1"></iframe>
+            editor: /hedy/1
         8:
             header: Programmering!
             text: |-
                 De gula pilknapparna används för att kopiera exempel.
-                <iframe class="fragment" src="/hedy/1"></iframe>
+            editor: /hedy/1
         9:
             header: Rita med sköldpaddan
             text: Nu när vi har sett textkod kommer vi att titta på ritkod.
         10:
             header: 'Rita med sköldpaddan: {forward}'
             text: '`{forward}` flyttar sköldpaddan framåt.'
-            editor: <iframe class="fragment" src="/adventure/turtle/1/raw"></iframe>
+            code: |-
+                {forward} 50
+                {turn} left
         11:
             header: 'Rita med sköldpaddan: {turn}'
             text: '`{turn}` används för att få sköldpaddan att svänga vänster eller höger.'
-            editor: <iframe class="fragment" src="/adventure/turtle/1/raw"></iframe>
+            code: |-
+                {forward} 50
+                {turn} left
     2:
         1:
             header: Välkommen till nivå 2

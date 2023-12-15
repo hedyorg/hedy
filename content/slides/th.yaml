@@ -28,27 +28,29 @@ levels:
             header: การเขียนโค้ดด้วย Hedy
             text: |-
                 ในภาษา Hedy เราใช้คำสั่งพิเศษเช่น `{print}`.
-                <iframe class="embedded-hedy" src="/adventure/story/1/raw"></iframe>
+            code: '{print} Welcome to Hedy!'
         6:
             header: การเขียนโค้ดด้วย Hedy
             text: |-
                 คำสั่งและคำที่เป็นคำพิเศษจะเป็นสีชมพู
-                <iframe class="embedded-hedy" src="/adventure/story/1/raw"></iframe>
+            code: '{print} Welcome to Hedy!'
         7:
             header: การเขียนโค้ดด้วย Hedy
             text: |-
                 เราจะเริ่มรันโค้ดได้โดยการกดปุ่มรันที่อยู่ข้างล่างโค้ด
-                <iframe class="embedded-hedy" src="/adventure/story/1/raw"></iframe>
+            code: '{print} Welcome to Hedy!'
         8:
             header: การเขียนโค้ดด้วย Hedy
             text: |-
                 ผลลัพธ์จะอยู่ทางด้านซ้าย
-                <iframe class="embedded-hedy" src="/adventure/story/1/raw"></iframe>
+            code: '{print} Welcome to Hedy!'
         9:
             header: การเขียนโค้ดด้วย Hedy
             text: |-
                 ผลลัพธ์ของโปรแกรมอาจจะเป็นรูปภาพก็ได้
-                <iframe class="embedded-hedy" src="/adventure/turtle/1/raw"></iframe>
+            code: |-
+                {forward} 100
+                {turn} left
     1:
         1:
             header: เริ่มต้น เลเวล 1!
@@ -62,27 +64,33 @@ levels:
                 โค้ดแรกที่เราจะดูกันในเลเวลนี้คือ `{print}`
 
                 `{print}` จะใช้ในการแสดงข้อความลงไปบนจอ
-            editor: <iframe class="fragment" src="/adventure/story/1/raw"></iframe>
+            code: |-
+                {print} Show text on the screen
         3:
             header: 'เฮดี้เลเวล 1: {ask}'
             text: |-
                 โค้ดต่อไปของเลเวลนี้คือ `{ask}`
 
                 `{ask}` จะใช้ในการถามคำถาม และรอให้คนใช้โปรแกรมตอบ
-            editor: <iframe class="fragment" src="/adventure/rock/1/raw"></iframe>
+            code: |-
+                {print} Welcome to your own rock scissors paper!
+                {ask} What will you choose?
         4:
             header: 'เฮดี้เลเวล 1: {echo}'
             text: |-
                 โค้ดสุดท้ายสำหรับเลเวลแรกคือ `{echo}`.
 
                 `{echo}` จะใช้เพื่อแสดงคำตอบที่ได้จากคำสั่ง `{ask}`.
-            editor: <iframe class="fragment" src="/adventure/parrot/1/raw"></iframe>
+            code: |-
+                {print} Hello!
+                {ask} What is your name?
+                {echo} hello
         5:
             header: เขียนโปรแกรม!
             text: |-
                 แค่มีคำสั่ง `{print}` `{ask}` และ `{echo}` เราก็สามารถเขียนเรื่องราวสั้นๆได้แล้ว
                 ตอนนี้ก็ถึงเวลาลองเล่นด่านนกแก้ว (Parrot) ด่านเรื่องราว (Story) และด่านเป่ายิงฉุบ (Rock Paper Scissors) แล้ว
-            editor: <iframe class="fragment" src="/adventure/ask_command/1/raw"></iframe>
+            editor: hedy/1
         6:
             header: เขียนโปรแกรม!
             text: โหมดผจญภัยจะอยู่ในแถบด้านบน.
@@ -90,8 +98,7 @@ levels:
             header: เขียนโปรแกรม!
             text: |-
                 ปุ่มลูกศราีเหลืองใช้เพื่อก็อปปี้โค้ดตัวอย่าง
-                <iframe class="fragment" src="/hedy/1"></iframe>
-            editor: <iframe class="fragment" src="/hedy/1"></iframe>
+            editor: /hedy#print_command
         8:
             header: วาดรูปโดยใช้เต่า
             text: เราได้ลองเขียนโค้ดที่โต้ตอบกันเป็นตัวอักษรแล้ว คราวนี้ลองดูโค้ดที่วาดรูปได้กันบ้าง
@@ -101,11 +108,15 @@ levels:
         10:
             header: 'วาดรูปโดยใช้เต่า: {turn}'
             text: '`{turn}` ใช้เพิ่มสั่งให้เต่าหันไปทางขวาหรือซ้าย'
-            editor: <iframe class="fragment" src="/adventure/turtle/1/raw"></iframe>
+            code: |-
+                {forward} 50
+                {turn} left
         11:
             header: 'Drawing with the turtle: {turn}'
             text: '`{turn}` is used to make the turtle turn left or right.'
-            editor: <iframe class="fragment" src="/adventure/turtle/1/raw"></iframe>
+            code: |-
+                {forward} 50
+                {turn} left
     2:
         1:
             header: Welcome to level 2

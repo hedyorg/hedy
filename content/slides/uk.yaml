@@ -28,27 +28,29 @@ levels:
             header: Програмування в Hedy
             text: |-
                 У Hedy ми використовуємо спеціальні команди, такі як `{print}`.
-                <iframe class="embedded-hedy" src="/adventure/story/1/raw"></iframe>
+            code: '{print} Welcome to Hedy!'
         6:
             header: Програмування в Hedy
             text: |-
                 Слова-команди будуть показані рожевим кольором.
-                <iframe class="embedded-hedy" src="/adventure/story/1/raw"></iframe>
+            code: '{print} Welcome to Hedy!'
         7:
             header: Програмування в Hedy
             text: |-
                 Ми запускаємо команди за допомогою кнопки Запустити код під введеними командами.
-                <iframe class="embedded-hedy" src="/adventure/story/1/raw"></iframe>
+            code: '{print} Welcome to Hedy!'
         8:
             header: Програмування в Hedy
             text: |-
                 Вихідні дані з'являються ліворуч.
-                <iframe class="embedded-hedy" src="/adventure/story/1/raw"></iframe>
+            code: '{print} Welcome to Hedy!'
         9:
             header: Програмування в Hedy
             text: |-
                 Результатом також може бути малюнок.
-                <iframe class="embedded-hedy" src="/adventure/turtle/1/raw"></iframe>
+            code: |-
+                {forward} 100
+                {turn} left
     1:
         1:
             header: Ласкаво просимо на перший рівень!
@@ -62,27 +64,33 @@ levels:
                 Перший команда, яку ви можете використовувати на першому рівні, це `{print}`.
 
                 `{print}` використовується для виведення тексту на екран.
-            editor: <iframe class="fragment" src="/adventure/story/1/raw"></iframe>
+            code: |-
+                {print} Show text on the screen
         3:
             header: 'Hedy перший рівень: {ask}'
             text: |-
                 Другий команда, яку ви можете використовувати на першому рівні - це `{ask}`.
 
                 `{ask}` використовується для того, щоб поставити запитання, на яке можна відповісти.
-            editor: <iframe class="fragment" src="/adventure/rock/1/raw"></iframe>
+            code: |-
+                {print} Welcome to your own rock scissors paper!
+                {ask} What will you choose?
         4:
             header: 'Hedy перший рівень: {echo}'
             text: |-
                 Остання команда, яку ви можете використати на першому рівні - `{echo}`.
 
                 `{echo}` використовується для повторення відповіді на `{ask}`.
-            editor: <iframe class="fragment" src="/adventure/parrot/1/raw"></iframe>
+            code: |-
+                {print} Hello!
+                {ask} What is your name?
+                {echo} hello
         5:
             header: Програмуємо!
             text: |-
                 За допомогою `{print}`, `{ask}` та `{echo}` ви вже можете створити невеличку історію.
                 Це гарний час, щоб спробувати пригоди Папуга, Пригода та Камінь, Папір, Ножиці.
-            editor: <iframe class="fragment" src="/adventure/ask_command/1/raw"></iframe>
+            editor: hedy/1
         6:
             header: Програмуємо!
             text: Пригоди відображаються у вкладках.
@@ -90,8 +98,7 @@ levels:
             header: Програмуємо!
             text: |-
                 Кнопки з жовтими стрілками можна використовувати для копіювання прикладів.
-                <iframe class="fragment" src="/hedy/1"></iframe>
-            editor: <iframe class="fragment" src="/hedy/1"></iframe>
+            editor: /hedy#print_command
         8:
             header: Малюємо з черепахою
             text: Тепер, коли ми розглянули текстові команди, перейдемо до команд для малюнків.
@@ -101,11 +108,15 @@ levels:
         10:
             header: 'Малюємо з черепахою: {turn}'
             text: Команда `{turn}` використовується, щоб змусити черепашку повернути ліворуч або праворуч.
-            editor: <iframe class="fragment" src="/adventure/turtle/1/raw"></iframe>
+            code: |-
+                {forward} 50
+                {turn} left
         11:
             header: 'Drawing with the turtle: {turn}'
             text: '`{turn}` is used to make the turtle turn left or right.'
-            editor: <iframe class="fragment" src="/adventure/turtle/1/raw"></iframe>
+            code: |-
+                {forward} 50
+                {turn} left
     2:
         1:
             header: Welcome to level 2

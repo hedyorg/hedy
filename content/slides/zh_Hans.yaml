@@ -28,27 +28,29 @@ levels:
             header: Hedy编程
             text: |-
                 在Hedy中，我们使用特殊代码，如`{print}`。
-                <iframe class="embedded-hedy" src="/adventure/story/1/raw"></iframe>
+            code: '{print} Welcome to Hedy!'
         6:
             header: Hedy编程
             text: |-
                 代码词将显示为粉红色。
-                <iframe class="embedded-hedy" src="/adventure/story/1/raw"></iframe>
+            code: '{print} Welcome to Hedy!'
         7:
             header: Hedy编程
             text: |-
                 我们使用代码下方的“运行代码”按钮开始运行代码。
-                <iframe class="embedded-hedy" src="/adventure/story/1/raw"></iframe>
+            code: '{print} Welcome to Hedy!'
         8:
             header: Hedy编程
             text: |-
                 输出的内容显示在右侧。
-                <iframe class="embedded-hedy" src="/adventure/story/1/raw"></iframe>
+            code: '{print} Welcome to Hedy!'
         9:
             header: Hedy编程
             text: |-
                 输出也可以是一个图形。
-                <iframe class="embedded-hedy" src="/adventure/turtle/1/raw"></iframe>
+            code: |-
+                {forward} 100
+                {turn} left
     1:
         1:
             header: 欢迎来到第1级!
@@ -62,27 +64,32 @@ levels:
                 在级别1中，你可以使用的第一个代码是 `{打印}`。
 
                 `{打印}`是用来在屏幕上显示文本。
-            editor: <iframe class="fragment" src="/adventure/print_command/1/raw"></iframe>
+            code: |-
+                {print} Put text on the screen
         3:
             header: '{打印} 命令'
             text: |-
                 你可以随意地修改 `{打印}` 命令后面的文字。
 
                 你也可以再添加一行 `{打印}` 命令，来打印多行文字。
-            editor: <iframe class="fragment" src="/adventure/print_command/1/raw"></iframe>
+            code: |-
+                {print} Put text on the screen
         4:
             header: Hedy 第1 级：{echo}
             text: |-
                 在第1级中，你可以使用的最后一个文本代码是`{问}`。
 
                 `{问}`用于重复`{ask}`的答案。
-            editor: <iframe class="fragment" src="/adventure/parrot/1/raw"></iframe>
+            code: |-
+                {print} Hello!
+                {ask} What is your name?
+                {echo} hello
         5:
             header: 编程
             text: |-
                 使用`{print}`、`{ask}`和`{echo}`，你已经可以创作一个小故事。
                 这是尝试冒险活动鹦鹉、石头剪刀布和故事的的好时机。
-            editor: <iframe class="fragment" src="/adventure/ask_command/1/raw"></iframe>
+            editor: hedy/1
         6:
             header: 编程!
             text: 探险活动显示在标签页中。
@@ -90,8 +97,7 @@ levels:
             header: 编程!
             text: |-
                 可以用标记黄色箭头的按钮复制例子。
-                <iframe class="fragment" src="/hedy/1"></iframe>
-            editor: <iframe class="fragment" src="/hedy/1"></iframe>
+            editor: /hedy#print_command
         8:
             header: 用海龟绘图画画！
             text: 现在我们已经看到了文本代码，接下来我们将看到图形代码。
@@ -101,11 +107,15 @@ levels:
         10:
             header: '用海龟绘图画画: {turn}'
             text: '`{turn}` 用于让海龟向左转或向右转。'
-            editor: <iframe class="fragment" src="/adventure/turtle/1/raw"></iframe>
+            code: |-
+                {forward} 50
+                {turn} left
         11:
             header: 'Drawing with the turtle: {turn}'
             text: '`{turn}` is used to make the turtle turn left or right.'
-            editor: <iframe class="fragment" src="/adventure/turtle/1/raw"></iframe>
+            code: |-
+                {forward} 50
+                {turn} left
     2:
         1:
             header: Welcome to level 2

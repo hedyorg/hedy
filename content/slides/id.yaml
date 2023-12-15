@@ -28,27 +28,29 @@ levels:
             header: Pemrograman di Hedy
             text: |-
                 Di Hedy kami menggunakan kode khusus, seperti `{print}`.
-                <iframe class="embedded-hedy" src="/adventure/story/1/raw"></iframe>
+            code: '{print} Welcome to Hedy!'
         6:
             header: Pemrograman di Hedy
             text: |-
                 Kata kode akan ditampilkan dalam warna merah muda.
-                <iframe class="embedded-hedy" src="/adventure/story/1/raw"></iframe>
+            code: '{print} Welcome to Hedy!'
         7:
             header: Pemrograman di Hedy
             text: |-
                 Kami memulai kode dengan tombol Jalankan kode di bawah kode.
-                <iframe class="embedded-hedy" src="/adventure/story/1/raw"></iframe>
+            code: '{print} Welcome to Hedy!'
         8:
             header: Pemrograman di Hedy
             text: |-
                 Output appears on the left-hand side.
-                <iframe class="embedded-hedy" src="/adventure/story/1/raw"></iframe>
+            code: '{print} Welcome to Hedy!'
         9:
             header: Pemrograman di Hedy
             text: |-
                 Outputnya juga bisa berupa gambar.
-                <iframe class="embedded-hedy" src="/adventure/turtle/1/raw"></iframe>
+            code: |-
+                {forward} 100
+                {turn} left
     1:
         1:
             header: Selamat datang di level 1!
@@ -62,21 +64,27 @@ levels:
                 Kode pertama yang bisa Anda gunakan di level 1 adalah `{print}`.
 
                 `{print}` digunakan untuk menampilkan teks di layar.
-            editor: <iframe class="fragment" src="/adventure/story/1/raw"></iframe>
+            code: |-
+                {print} Show text on the screen
         3:
             header: Perintah {print}
             text: |-
                 The second code that you can use in level 1 is `{ask}`.
 
                 `{ask}` is used to ask a question that can be answered.
-            editor: <iframe class="fragment" src="/adventure/rock/1/raw"></iframe>
+            code: |-
+                {print} Welcome to your own rock scissors paper!
+                {ask} What will you choose?
         4:
             header: '{ask}'
             text: |-
                 The final text code that you can use in level 1 is `{echo}`.
 
                 `{echo}` is used to repeat the answer of an `{ask}`.
-            editor: <iframe class="fragment" src="/adventure/parrot/1/raw"></iframe>
+            code: |-
+                {print} Hello!
+                {ask} What is your name?
+                {echo} hello
         5:
             header: '{echo}'
             text: |-
@@ -87,7 +95,7 @@ levels:
                 Jika Anda ingin jawabannya ditampilkan, Anda dapat menggunakan perintah terakhir pada level ini: `{echo}`.
 
                 `{echo}` digunakan untuk mengulang jawaban `{ask}`.
-            editor: <iframe class="fragment" src="/adventure/ask_command/1/raw"></iframe>
+            editor: hedy/1
         6:
             header: Pemrograman!
             text: |-
@@ -96,23 +104,27 @@ levels:
         7:
             header: Pemrograman!
             text: Petualangan ditampilkan di tab.
-            editor: <iframe class="fragment" src="/hedy/1"></iframe>
+            editor: /hedy/1
         8:
             header: Pemrograman!
             text: |-
                 Tombol panah kuning dapat digunakan untuk menyalin contoh.
-                <iframe class="fragment" src="/hedy/1"></iframe>
+            editor: /hedy/1
         9:
             header: Menggambar dengan kura-kura
             text: '`{forward}` is used to move the turtle forward.'
         10:
             header: 'Menggambar dengan kura-kura: {forward}'
             text: '`{turn}` is used to make the turtle turn left or right.'
-            editor: <iframe class="fragment" src="/adventure/turtle/1/raw"></iframe>
+            code: |-
+                {forward} 50
+                {turn} left
         11:
             header: 'Menggambar dengan kura-kura: {turn}'
             text: '`{turn}` digunakan untuk membuat penyu berbelok ke kiri atau ke kanan.'
-            editor: <iframe class="fragment" src="/adventure/turtle/1/raw"></iframe>
+            code: |-
+                {forward} 50
+                {turn} left
     2:
         1:
             header: Selamat datang di level 2

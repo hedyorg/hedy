@@ -28,27 +28,29 @@ levels:
             header: Programació a Hedy
             text: |-
                 A Hedy fem servir codis especials, com `{print}`.
-                <iframe class="embedded-hedy" src="/adventure/story/1/raw"></iframe>
+            code: '{print} Welcome to Hedy!'
         6:
             header: Programació a Hedy
             text: |-
                 Les paraules de codi es mostraran en rosa.
-                <iframe class="embedded-hedy" src="/adventure/story/1/raw"></iframe>
+            code: '{print} Welcome to Hedy!'
         7:
             header: Programació a Hedy
             text: |-
                 Iniciem el codi amb el botó "Executa" a sota del codi.
-                <iframe class="embedded-hedy" src="/adventure/story/1/raw"></iframe>
+            code: '{print} Welcome to Hedy!'
         8:
             header: Programació a Hedy
             text: |-
                 La sortida apareix a la part esquerra.
-                <iframe class="embedded-hedy" src="/adventure/story/1/raw"></iframe>
+            code: '{print} Welcome to Hedy!'
         9:
             header: Programació a Hedy
             text: |-
                 La sortida també pot ser un dibuix.
-                <iframe class="embedded-hedy" src="/adventure/turtle/1/raw"></iframe>
+            code: |-
+                {forward} 100
+                {turn} left
     1:
         1:
             header: Benvingut al nivell 1!
@@ -62,27 +64,33 @@ levels:
                 El primer codi que podeu utilitzar al nivell 1 és `{print}`.
 
                 `{print}` s'utilitza per mostrar text a la pantalla.
-            editor: <iframe class="fragment" src="/adventure/story/1/raw"></iframe>
+            code: |-
+                {print} Show text on the screen
         3:
             header: 'Hedy nivell 1: {ask}'
             text: |-
                 El segon codi que podeu utilitzar al nivell 1 és `{ask}`.
 
                 `{ask}` s'utilitza per fer una pregunta que es pot respondre.
-            editor: <iframe class="fragment" src="/adventure/rock/1/raw"></iframe>
+            code: |-
+                {print} Welcome to your own rock scissors paper!
+                {ask} What will you choose?
         4:
             header: 'Hedy nivell 1: {echo}'
             text: |-
                 El codi de text final que podeu utilitzar al nivell 1 és `{echo}`.
 
                 `{echo}` s'utilitza per repetir la resposta d'un `{ask}`.
-            editor: <iframe class="fragment" src="/adventure/parrot/1/raw"></iframe>
+            code: |-
+                {print} Hello!
+                {ask} What is your name?
+                {echo} hello
         5:
             header: Programació!
             text: |-
                 amb `{print}`, `{ask}` i `{echo}` ja podeu crear una petita història.
                 És un bon moment per provar les aventures del lloro, la història i la roca, les tisores de paper.
-            editor: <iframe class="fragment" src="/adventure/ask_command/1/raw"></iframe>
+            editor: hedy/1
         6:
             header: Programació!
             text: Les aventures es mostren en pestanyes.
@@ -90,8 +98,7 @@ levels:
             header: Programació!
             text: |-
                 Els botons de fletxa groga es poden utilitzar per copiar exemples.
-                <iframe class="fragment" src="/hedy/1"></iframe>
-            editor: <iframe class="fragment" src="/hedy/1"></iframe>
+            editor: /hedy#print_command
         8:
             header: Dibuixant amb la tortuga
             text: Ara que hem vist els codis de text, ara veurem els codis de dibuix a continuació.
@@ -101,11 +108,15 @@ levels:
         10:
             header: 'Dibuix amb la tortuga: {turn}'
             text: '`{turn}` s''utilitza per fer que la tortuga giri a l''esquerra o a la dreta.'
-            editor: <iframe class="fragment" src="/adventure/turtle/1/raw"></iframe>
+            code: |-
+                {forward} 50
+                {turn} left
         11:
             header: 'Drawing with the turtle: {turn}'
             text: '`{turn}` is used to make the turtle turn left or right.'
-            editor: <iframe class="fragment" src="/adventure/turtle/1/raw"></iframe>
+            code: |-
+                {forward} 50
+                {turn} left
     2:
         1:
             header: Welcome to level 2
