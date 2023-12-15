@@ -252,15 +252,15 @@ levels:
             header: Debugging
             text: Let's debug this code!
             editor: |-
-                    music_genres {is} rock, pop, metal, indie, jazz
-                    chosen_genre is music {at} {random}
-                    {print} Let's listen to chosen genre
-                    nice {ask} Do you like that genre?
-                    {remove} chosen_genre {from} chosen_genre
-                    second_choice {is} music_genres
-                    {print} or do you prefer... second_choice {at} {random}
-                    {remove} second_choice {to} music_genres
-                    {print} I like music_genre {random} best!
+                music_genres {is} rock, pop, metal, indie, jazz
+                chosen_genre is music {at} {random}
+                {print} Let's listen to chosen genre
+                nice {ask} Do you like that genre?
+                {remove} chosen_genre {from} chosen_genre
+                second_choice {is} music_genres
+                {print} or do you prefer... second_choice {at} {random}
+                {remove} second_choice {to} music_genres
+                {print} I like music_genre {random} best!
         8:
             header: Let's get to work!
             text: Enjoy the adventures in level 3!
@@ -331,15 +331,15 @@ levels:
             header: Debugging
             text: Let's debug this code!
             code: |-
-                    {clear}
-                    {print} What a nice day to go to the beach!
-                    {ask} 'Do you want to build a sandcastle or swim in the ocean?'
-                    {print} 'You would like to activity '
-                    {print} 'I'd like to do that too'
-                    {print} 'Look at these beautiful seashells!'
-                    colors {is} 'orange, silver, white, brown'
-                    {print} 'I love the colors {at} {random} one!'
-                    choice {is} {ask} Which one do you like?
+                {clear}
+                {print} What a nice day to go to the beach!
+                {ask} 'Do you want to build a sandcastle or swim in the ocean?'
+                {print} 'You would like to activity '
+                {print} 'I'd like to do that too'
+                {print} 'Look at these beautiful seashells!'
+                colors {is} 'orange, silver, white, brown'
+                {print} 'I love the colors {at} {random} one!'
+                choice {is} {ask} Which one do you like?
         11:
             header: Ready, Set, Go!
             text: Enjoy the adventures in level 4!
@@ -395,18 +395,18 @@ levels:
             header: Debugging
             text: Let's debug this code!
             code: |-
-                    {print} Welcome to HedyAir Security!
-                    boarding_pass {is} {ask} 'Do you have your boarding pass?'
-                    {if} bording_pass yes {print} Great!
-                    {else} Please, get your boarding pass ready.
-                    passport {is} 'Can I see your passport, please?'
-                    {if} passport {is} yes 'thank you'
-                    {else} 'You can't fly without a passport'
-                    declare {is} {ask} Do you have anything to declare?
-                    {if] declare {is} yes
-                    item_to_declare {is} {ask} 'What would you like to declare'
-                    {else} Alright
-                    {print} Thank you. Please head to gate A22.'
+                {print} Welcome to HedyAir Security!
+                boarding_pass {is} {ask} 'Do you have your boarding pass?'
+                {if} bording_pass yes {print} Great!
+                {else} Please, get your boarding pass ready.
+                passport {is} 'Can I see your passport, please?'
+                {if} passport {is} yes 'thank you'
+                {else} 'You can't fly without a passport'
+                declare {is} {ask} Do you have anything to declare?
+                {if] declare {is} yes
+                item_to_declare {is} {ask} 'What would you like to declare'
+                {else} Alright
+                {print} Thank you. Please head to gate A22.'
         8:
             header: Let's go!
             text: Enjoy the adventures in level 5!
