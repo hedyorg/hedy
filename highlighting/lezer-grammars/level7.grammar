@@ -44,7 +44,7 @@ Turtle[@isGroup=turtle] {
     Color { color+ (Expression | ListAccess)  }
 }   
 
-If { ifs+ Condition IfLessCommand? (!else elses+ IfLessCommand)? }
+If { ifs+ Condition IfLessCommand? (!else eol* elses+ IfLessCommand)? }
 
 Condition { 
     EqualityCheck { Text is+ (String | Expression | pressed+) } |
