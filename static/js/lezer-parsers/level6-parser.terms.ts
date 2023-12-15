@@ -40,5 +40,4 @@ export const
   If = 44,
   Condition = 45,
   IfLessCommand = 49,
-  ErrorInvalid = 50,
-  Else = 51
+  ErrorInvalid = 50

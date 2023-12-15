@@ -1,6 +1,6 @@
 @top Program { eol* (Command eol+)* Command? }
 Command {
-    Assign | AssignList | Ask | Clear |Print | Turtle | Sleep | Add | Remove| If | Else | ErrorInvalid
+    Assign | AssignList | Ask | Clear |Print | Turtle | Sleep | Add | Remove| If | ErrorInvalid
 }
 
 IfLessCommand {
@@ -44,8 +44,8 @@ Turtle[@isGroup=turtle] {
     Color { color+ (Expression | ListAccess)  }
 }   
 
-If { ifs+ Condition IfLessCommand? Else? }
-Else { elses+ IfLessCommand? }
+If { ifs+ Condition ~else_ambg eol*  IfLessCommand? (!else eol* ~else_ambg elses+ eol* IfLessCommand)? }
+
 
 Condition { 
     EqualityCheck { Text is+ (String | Expression | pressed+) } |
@@ -70,7 +70,9 @@ Expression {
 
 @precedence {
     times @left,
-    plus @right
+    plus @right,
+
+    else
 }
 
 @external specialize { Text } specializeKeyword from "./tokens" {
