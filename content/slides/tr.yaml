@@ -138,23 +138,23 @@ levels:
 
                 Bu şekilde `{echo}` komutuna ihtiyaç duymayız.
             code: |-
-                    name {is} {ask} What is your name?
-                    {print} Hello name
+                name {is} {ask} What is your name?
+                {print} Hello name
         4:
             header: Çoklu değişkenler
             text: Artık değişkenleri kullandığımıza göre, tek bir `{echo}` komutu yerine birden fazla değişken kullanabiliriz.
             code: |-
-                    name {is} {ask} What is your name?
-                    {print} Hello name
-                    age {is} {ask} How old are you?
-                    {print} name is age years old.
+                name {is} {ask} What is your name?
+                {print} Hello name
+                age {is} {ask} How old are you?
+                {print} name is age years old.
         5:
             header: Uyku
             text: Kodu bir süreliğine duraklatmak için `{sleep}` komutunu da kullanabilirsiniz.
             code: |-
-                    {print} My favorite colour is...
-                    {sleep} 2
-                    {print} green!
+                {print} My favorite colour is...
+                {sleep} 2
+                {print} green!
         6:
             header: Uyku 5
             text: |-
@@ -162,10 +162,10 @@ levels:
 
                 İsterseniz, uyku komutunun süresine karar vermek için bir sayı yerine bir değişken bile kullanabilirsiniz.
             code: |-
-                    pause {is} 10
-                    {print} My favorite colour is...
-                    {sleep} pause
-                    {print} green!
+                pause {is} 10
+                {print} My favorite colour is...
+                {sleep} pause
+                {print} green!
         7:
             header: Programlama eğlencesi başlasın!
             text: Seviye 2'deki maceraların tadını çıkarın!
@@ -180,8 +180,8 @@ levels:
 
                 Listenizdeki öğeleri virgülle ayırın.
             code: |-
-                    animals {is} dogs, cats, kangaroos
-                    ```
+                animals {is} dogs, cats, kangaroos
+                ```
         3:
             header: Rastgele
             text: |-
@@ -189,16 +189,16 @@ levels:
                 Bilgisayar listeden rastgele bir öğe seçecektir.
                 Bu kodu her çalıştırdığınızda çıktı farklı olacaktır.
             code: |-
-                    animals {is} dogs, cats, kangaroos
-                    {print} animals {at} {random}
-                    ```
+                animals {is} dogs, cats, kangaroos
+                {print} animals {at} {random}
+                ```
         4:
             header: Cümle içinden rastgele
             text: Bir cümle için de `{at}` `{random}` komutunu kullanabilirsiniz.
             code: |-
-                    animals {is} dogs, cats, kangaroos
-                    {print} My favorite animal is animals {at} {random}
-                    ```
+                animals {is} dogs, cats, kangaroos
+                {print} My favorite animal is animals {at} {random}
+                ```
         5:
             header: Eklemek için
             text: |-
@@ -207,20 +207,20 @@ levels:
                 Listeye neyin ekleneceğini seçebilir veya `{add}` `{to}` komutunu `{ask}` komutuyla birlikte kullanabilirsiniz.
                 Bu şekilde, listeye ne ekleneceğine oyuncunun karar vermesine izin verebilirsiniz.
             code: |-
-                   animals {is} dog, cat, kangaroo
-                   like {is} {ask} What is your favorite animal?
-                   {add} like {to_list} animals
-                   {print} I choose animals {at} {random}
+                animals {is} dog, cat, kangaroo
+                like {is} {ask} What is your favorite animal?
+                {add} like {to_list} animals
+                {print} I choose animals {at} {random}
         6:
             header: İçinden kaldırmak
             text: |-
                 `{add}` `{to}` komutunun tersi `{remove}` `{from}` komutudur.
                 Bu komut listeden bir öğeyi kaldırır.
             code: |-
-                    animals {is} dog, cat, kangaroo
-                    dislike {is} {ask} What animal do you not like?
-                    {remove} dislike {from} animals
-                    {print} I choose animals {at} {random}
+                animals {is} dog, cat, kangaroo
+                dislike {is} {ask} What animal do you not like?
+                {remove} dislike {from} animals
+                {print} I choose animals {at} {random}
         9:
             header: Hadi işe koyulalım!
             text: Seviye 3'teki maceraların tadını çıkarın!
@@ -228,13 +228,13 @@ levels:
         1:
             header: 4. seviyeye hoş geldiniz
             text: Bu seviyede tırnak işaretlerini nasıl kullanacağınızı öğreneceksiniz.
-            code: "{print} 'print with quotes!'"
+            code: '{print} ''print with quotes!'''
         2:
             header: Problem
             text: 'Önceki seviyelerde, bu sorunla karşılaşmış olabilirsiniz:'
             code: |-
-                    name {is} Sophie
-                    {print} My name is name
+                name {is} Sophie
+                {print} My name is name
         3:
             header: Bunu tırnak işaretleri ile düzeltmek
             text: |-
@@ -244,11 +244,11 @@ levels:
         4:
             header: Yazdır ile tırnak işaretleri
             text: '`{print}` komutunu her kullandığınızda, ekranda görünmesini istediğiniz metni tırnak içine almanız gerekir.'
-            code: "{print} 'print with quotes!'"
+            code: '{print} ''print with quotes!'''
         5:
             header: Sor ile tırnak işaretleri
             text: Bu aynı zamanda `{ask}` komutu için de geçerlidir.
-            code: "name {is} {ask} 'name please?'"
+            code: name {is} {ask} 'name please?'
         6:
             header: Tırnak işaretleri ve değişkenler
             text: |-
@@ -271,8 +271,7 @@ levels:
                 Dikkatli olun! Artık tırnak işareti kullandığınıza göre, kısaltmalarda ve özel isimlerde kesme işareti kullanamazsınız.
 
                 Lütfen aşağıdaki ekranda "Hedy'nin" veya "TC'de" gibi bir özel isim veya kısaltma yazdırmayı deneyin ve ne olduğunu görün...
-            code: |-
-                {print} 'This won't work!'
+            code: '{print} ''This won''t work!'''
         9:
             header: Temizle
             text: |-
@@ -281,13 +280,13 @@ levels:
 
                 Her zaman uyku komutu kullanmaya da dikkat edin. Eğer bunu yapmazsanız bilgisayar siz okuyamadan tüm metni silecektir!
             code: |-
-                    {print} '3'
-                    {clear}
-                    {print} '2'
-                    {clear}
-                    {print} '1'
-                    {clear}
-                    {print} 'SURPRISE!'
+                {print} '3'
+                {clear}
+                {print} '2'
+                {clear}
+                {print} '1'
+                {clear}
+                {print} 'SURPRISE!'
         10:
             header: Hazır Ol, Ayarla, Başla!
             text: Seviye 4'teki maceraların tadını çıkarın!
@@ -301,22 +300,20 @@ levels:
                 `{if}` komutu iki seçenek arasında seçim yapmanızı sağlar.
                 Bu örnekte, verilen cevap Hedy ise bilgisayar 'güzel' yazdıracaktır.
                 Eğer cevap Hedy değilse, bilgisayar hiçbir şey yapmayacaktır.
-            code: |- 
-                    name {is} {ask} 'what is your name?'
-                    {if} name {is} Hedy {print} 'nice'
+            code: |-
+                name {is} {ask} 'what is your name?'
+                {if} name {is} Hedy {print} 'nice'
         3:
             header: Yazdırmayı unutmayın
             text: '`{if}` komutunu kullanırken, `{print}` komutunu kullanmayı unutmayın.'
-            code: |-
-                {if} name {is} Hedy 'nice'
+            code: '{if} name {is} Hedy ''nice'''
         4:
             header: değilse
             text: |-
                 Bir `{if}` komutu kullanırken, bir `{else}` komutu da ekleyebilirsiniz.
                 Eğer cevap Hedy ise, bilgisayar 'güzel' yazacaktır.
                 Ancak cevap başka bir şeyse bilgisayar 'böö' yazacaktır.
-            code: |-
-                {if} name {is} Hedy {print} 'nice' {else} {print} 'boo!'
+            code: '{if} name {is} Hedy {print} ''nice'' {else} {print} ''boo!'''
         5:
             header: Uzun satırlar
             text: |-
@@ -335,10 +332,10 @@ levels:
 
                 Hedy'nin büyük/küçük harfe duyarlı olduğunu lütfen unutmayın. Bu, "yeşil" yerine "Yeşil" yanıtını verirseniz, Hedy'nin "eh işte" yazdıracağı anlamına gelir.
             code: |-
-                    pretty_colors {is} green, yellow
-                    favorite_color {is} {ask} 'What is your favorite color?'
-                    {if} favorite_color {in} pretty_colors {print} 'pretty!'
-                    {else} {print} 'meh'
+                pretty_colors {is} green, yellow
+                favorite_color {is} {ask} 'What is your favorite color?'
+                {if} favorite_color {in} pretty_colors {print} 'pretty!'
+                {else} {print} 'meh'
         7:
             header: Hadi başlayalım!
             text: Seviye 5'teki maceraların tadını çıkarın!

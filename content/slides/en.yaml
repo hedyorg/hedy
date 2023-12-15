@@ -100,8 +100,7 @@ levels:
             editor: /hedy/1
         8:
             header: Programming!
-            text: |-
-                The yellow arrow buttons can be used to copy examples.
+            text: The yellow arrow buttons can be used to copy examples.
             editor: /hedy#print_command
         9:
             header: Drawing with the turtle
@@ -109,8 +108,7 @@ levels:
         10:
             header: 'Drawing with the turtle: {forward}'
             text: '`{forward}` is used to move the turtle forward.'
-            code: |-
-                {forward} 50
+            code: '{forward} 50'
         11:
             header: 'Drawing with the turtle: {turn}'
             text: '`{turn}` is used to make the turtle turn left or right.'
@@ -142,23 +140,23 @@ levels:
 
                 This way we don't need the `{echo}` command.
             code: |-
-                    name {is} {ask} What is your name?
-                    {print} Hello name
+                name {is} {ask} What is your name?
+                {print} Hello name
         4:
             header: Multiple variables
             text: Now that we use variables, we can use multiple variables instead of just one `{echo}` command.
             code: |-
-                    name {is} {ask} What is your name?
-                    {print} Hello name
-                    age {is} {ask} How old are you?
-                    {print} name is age years old.
+                name {is} {ask} What is your name?
+                {print} Hello name
+                age {is} {ask} How old are you?
+                {print} name is age years old.
         5:
             header: Sleep
             text: You can also use the `{sleep}` command to pause the code for a while.
             code: |-
-                    {print} My favorite colour is...
-                    {sleep} 2
-                    {print} green!
+                {print} My favorite colour is...
+                {sleep} 2
+                {print} green!
         6:
             header: Sleep 5
             text: |-
@@ -166,10 +164,10 @@ levels:
 
                 If you want, you could even use a variable instead of a number to decide the duration of the sleep command.
             code: |-
-                    pause {is} 10
-                    {print} My favorite colour is...
-                    {sleep} pause
-                    {print} green!
+                pause {is} 10
+                {print} My favorite colour is...
+                {sleep} pause
+                {print} green!
         7:
             header: Let the programming fun begin!
             text: Enjoy the adventures in level 3!
@@ -184,8 +182,8 @@ levels:
 
                 Separate the items on your list with a comma.
             code: |-
-                    animals {is} dogs, cats, kangaroos
-                    ```
+                animals {is} dogs, cats, kangaroos
+                ```
         3:
             header: At random
             text: |-
@@ -193,16 +191,16 @@ levels:
                 The computer will randomly pick one item of the list.
                 Every time you run this code the output will differ.
             code: |-
-                    animals {is} dogs, cats, kangaroos
-                    {print} animals {at} {random}
-                    ```
+                animals {is} dogs, cats, kangaroos
+                {print} animals {at} {random}
+                ```
         4:
             header: At random in a sentence
             text: You can use the `{at}` `{random}` command in a sentence as well.
             code: |-
-                    animals {is} dogs, cats, kangaroos
-                    {print} My favorite animal is animals {at} {random}
-                    ```
+                animals {is} dogs, cats, kangaroos
+                {print} My favorite animal is animals {at} {random}
+                ```
         5:
             header: Add to
             text: |-
@@ -211,20 +209,20 @@ levels:
                 You can choose what to add to the list or you can use the `{add}` `{to}` command in combination with the `{ask}` command.
                 This way you can let the player decide what to add to the list.
             code: |-
-                   animals {is} dog, cat, kangaroo
-                   like {is} {ask} What is your favorite animal?
-                   {add} like {to_list} animals
-                   {print} I choose animals {at} {random}
+                animals {is} dog, cat, kangaroo
+                like {is} {ask} What is your favorite animal?
+                {add} like {to_list} animals
+                {print} I choose animals {at} {random}
         6:
             header: Remove from
             text: |-
                 The opposite of the `{add}` `{to}` command is the  `{remove}` `{from}` command.
                 This command removes an item from a list.
             code: |-
-                    animals {is} dog, cat, kangaroo
-                    dislike {is} {ask} What animal do you not like?
-                    {remove} dislike {from} animals
-                    {print} I choose animals {at} {random}
+                animals {is} dog, cat, kangaroo
+                dislike {is} {ask} What animal do you not like?
+                {remove} dislike {from} animals
+                {print} I choose animals {at} {random}
         9:
             header: Let's get to work!
             text: Enjoy the adventures in level 3!
@@ -232,13 +230,13 @@ levels:
         1:
             header: Welcome to level 4
             text: In this level you will learn how to use quotation marks.
-            code: "{print} 'print with quotes!'"
+            code: '{print} ''print with quotes!'''
         2:
             header: Problem
             text: 'In the previous levels, you might have come across this problem:'
             code: |-
-                    name {is} Sophie
-                    {print} My name is name
+                name {is} Sophie
+                {print} My name is name
         3:
             header: Fixing it with quotation marks
             text: |-
@@ -248,11 +246,11 @@ levels:
         4:
             header: Quotation marks with print
             text: Each time you use the `{print}` command you need to put the text that you want to appear on the screen in quotation marks.
-            code: "{print} 'print with quotes!'"
+            code: '{print} ''print with quotes!'''
         5:
             header: Quotation marks with ask
             text: This also goes for the `{ask}` command.
-            code: "name {is} {ask} 'name please?'"
+            code: name {is} {ask} 'name please?'
         6:
             header: Quotation marks and variables
             text: |-
@@ -275,8 +273,7 @@ levels:
                 Be careful! Now that you are using quotation marks, you can't use apostrophes in contractions.
 
                 Please try to print a contraction like "you're" or "I'm" in the screen below and see what happens....
-            code: |-
-                {print} 'This won't work!'
+            code: '{print} ''This won''t work!'''
         9:
             header: Clear
             text: |-
@@ -285,13 +282,13 @@ levels:
 
                 Be careful that you always use a sleep command too. If you don't the computer will wipe all the text before you can read it!
             code: |-
-                    {print} '3'
-                    {clear}
-                    {print} '2'
-                    {clear}
-                    {print} '1'
-                    {clear}
-                    {print} 'SURPRISE!'
+                {print} '3'
+                {clear}
+                {print} '2'
+                {clear}
+                {print} '1'
+                {clear}
+                {print} 'SURPRISE!'
         10:
             header: Ready, Set, Go!
             text: Enjoy the adventures in level 4!
@@ -305,24 +302,22 @@ levels:
                 The `{if}` command allows you to choose between two options.
                 In this example the computer will print 'nice' if the given answer is Hedy.
                 If the answer is not Hedy, the computer will do nothing.
-            code: |- 
-                    name {is} {ask} 'what is your name?'
-                    {if} name {is} Hedy {print} 'nice'
+            code: |-
+                name {is} {ask} 'what is your name?'
+                {if} name {is} Hedy {print} 'nice'
         3:
             header: Don't forget to print
-            text: |- 
+            text: |-
                 When using the `{if}` command, don't forget to use the `{print}` command.
                 This code will not work!
-            code: |-
-                {if} name {is} Hedy 'nice'
+            code: '{if} name {is} Hedy ''nice'''
         4:
             header: else
             text: |-
                 When using an `{if}` command, you can also add an `{else}` command.
                 If the answer is Hedy, the computer will print 'nice'.
                 But if the answer is something else the computer will print 'boo'
-            code: |-
-                {if} name {is} Hedy {print} 'nice' {else} {print} 'boo!'
+            code: '{if} name {is} Hedy {print} ''nice'' {else} {print} ''boo!'''
         5:
             header: Long lines
             text: |-
@@ -341,10 +336,10 @@ levels:
 
                 Please note that Hedy is case sensitive. This means that if you answer "Green" instead of "green", Hedy will print "meh".
             code: |-
-                    pretty_colors {is} green, yellow
-                    favorite_color {is} {ask} 'What is your favorite color?'
-                    {if} favorite_color {in} pretty_colors {print} 'pretty!'
-                    {else} {print} 'meh'
+                pretty_colors {is} green, yellow
+                favorite_color {is} {ask} 'What is your favorite color?'
+                {if} favorite_color {in} pretty_colors {print} 'pretty!'
+                {else} {print} 'meh'
         7:
             header: Let's go!
             text: Enjoy the adventures in level 5!

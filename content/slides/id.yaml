@@ -138,23 +138,23 @@ levels:
 
                 Dengan cara ini kita tidak memerlukan perintah `{echo}`.
             code: |-
-                    name {is} {ask} What is your name?
-                    {print} Hello name
+                name {is} {ask} What is your name?
+                {print} Hello name
         4:
             header: Banyak variabel
             text: Sekarang kita menggunakan variabel, kita bisa menggunakan beberapa variabel, bukan hanya satu perintah `{echo}`.
             code: |-
-                    name {is} {ask} What is your name?
-                    {print} Hello name
-                    age {is} {ask} How old are you?
-                    {print} name is age years old.
+                name {is} {ask} What is your name?
+                {print} Hello name
+                age {is} {ask} How old are you?
+                {print} name is age years old.
         5:
             header: Tidur
             text: Anda juga dapat menggunakan perintah `{sleep}` untuk menjeda kode untuk sementara waktu.
             code: |-
-                    {print} My favorite colour is...
-                    {sleep} 2
-                    {print} green!
+                {print} My favorite colour is...
+                {sleep} 2
+                {print} green!
         6:
             header: Tidur 5
             text: |-
@@ -162,10 +162,10 @@ levels:
 
                 Jika mau, Anda bahkan bisa menggunakan variabel alih-alih angka untuk menentukan durasi perintah sleep.
             code: |-
-                    pause {is} 10
-                    {print} My favorite colour is...
-                    {sleep} pause
-                    {print} green!
+                pause {is} 10
+                {print} My favorite colour is...
+                {sleep} pause
+                {print} green!
         7:
             header: Biarkan kesenangan pemrograman dimulai!
             text: Nikmati petualangan di level 3!
@@ -180,8 +180,8 @@ levels:
 
                 Pisahkan item di daftar Anda dengan koma.
             code: |-
-                    animals {is} dogs, cats, kangaroos
-                    ```
+                animals {is} dogs, cats, kangaroos
+                ```
         3:
             header: Secara acak
             text: |-
@@ -189,16 +189,16 @@ levels:
                 Komputer akan secara acak memilih satu item dari daftar.
                 Setiap kali Anda menjalankan kode ini, hasilnya akan berbeda.
             code: |-
-                    animals {is} dogs, cats, kangaroos
-                    {print} animals {at} {random}
-                    ```
+                animals {is} dogs, cats, kangaroos
+                {print} animals {at} {random}
+                ```
         4:
             header: Secara acak dalam sebuah kalimat
             text: Anda juga dapat menggunakan perintah `{at}` `{random}` dalam sebuah kalimat.
             code: |-
-                    animals {is} dogs, cats, kangaroos
-                    {print} My favorite animal is animals {at} {random}
-                    ```
+                animals {is} dogs, cats, kangaroos
+                {print} My favorite animal is animals {at} {random}
+                ```
         5:
             header: Tambahkan ke
             text: |-
@@ -207,20 +207,20 @@ levels:
                 Anda dapat memilih apa yang ingin ditambahkan ke daftar atau Anda dapat menggunakan perintah `{add}` `{to}` yang dikombinasikan dengan perintah `{ask}`.
                 Dengan cara ini Anda dapat membiarkan pemain memutuskan apa yang akan ditambahkan ke daftar.
             code: |-
-                   animals {is} dog, cat, kangaroo
-                   like {is} {ask} What is your favorite animal?
-                   {add} like {to_list} animals
-                   {print} I choose animals {at} {random}
+                animals {is} dog, cat, kangaroo
+                like {is} {ask} What is your favorite animal?
+                {add} like {to_list} animals
+                {print} I choose animals {at} {random}
         6:
             header: Hapus dari
             text: |-
                 Kebalikan dari perintah `{add}` `{to}` adalah perintah `{remove}` `{from}`.
                 Perintah ini menghapus item dari daftar.
             code: |-
-                    animals {is} dog, cat, kangaroo
-                    dislike {is} {ask} What animal do you not like?
-                    {remove} dislike {from} animals
-                    {print} I choose animals {at} {random}
+                animals {is} dog, cat, kangaroo
+                dislike {is} {ask} What animal do you not like?
+                {remove} dislike {from} animals
+                {print} I choose animals {at} {random}
         9:
             header: Ayo mulai bekerja!
             text: Nikmati petualangan di level 3!
@@ -228,13 +228,13 @@ levels:
         1:
             header: Selamat datang di level 4
             text: Di level ini Anda akan belajar cara menggunakan tanda kutip.
-            code: "{print} 'print with quotes!'"
+            code: '{print} ''print with quotes!'''
         2:
             header: Masalah
             text: 'Di level sebelumnya, Anda mungkin menemukan masalah ini:'
             code: |-
-                    name {is} Sophie
-                    {print} My name is name
+                name {is} Sophie
+                {print} My name is name
         3:
             header: Memperbaikinya dengan tanda kutip
             text: |-
@@ -244,11 +244,11 @@ levels:
         4:
             header: Tanda kutip dengan cetakan
             text: Setiap kali Anda menggunakan perintah `{print}` Anda harus meletakkan teks yang ingin Anda tampilkan di layar dalam tanda kutip.
-            code: "{print} 'print with quotes!'"
+            code: '{print} ''print with quotes!'''
         5:
             header: Tanda kutip dengan tanya
             text: Ini juga berlaku untuk perintah `{ask}`.
-            code: "name {is} {ask} 'name please?'"
+            code: name {is} {ask} 'name please?'
         6:
             header: Tanda kutip dan variabel
             text: |-
@@ -271,8 +271,7 @@ levels:
                 Hati-hati! Sekarang Anda menggunakan tanda kutip, Anda tidak dapat menggunakan tanda kutip dalam kontraksi.
 
                 Silakan coba mencetak kontraksi seperti "Anda" atau "Saya" pada layar di bawah ini dan lihat apa yang terjadi....
-            code: |-
-                {print} 'This won't work!'
+            code: '{print} ''This won''t work!'''
         9:
             header: Jelas
             text: |-
@@ -281,13 +280,13 @@ levels:
 
                 Berhati-hatilah agar Anda selalu menggunakan perintah tidur juga. Jika tidak, komputer akan menghapus semua teks sebelum Anda dapat membacanya!
             code: |-
-                    {print} '3'
-                    {clear}
-                    {print} '2'
-                    {clear}
-                    {print} '1'
-                    {clear}
-                    {print} 'SURPRISE!'
+                {print} '3'
+                {clear}
+                {print} '2'
+                {clear}
+                {print} '1'
+                {clear}
+                {print} 'SURPRISE!'
         10:
             header: Siap, Bersiap, Ayo!
             text: Nikmati petualangan di level 4!
@@ -301,22 +300,20 @@ levels:
                 Perintah `{if}` memungkinkan Anda memilih di antara dua opsi.
                 Pada contoh ini komputer akan mencetak 'bagus' jika jawaban yang diberikan adalah Hedy.
                 Kalau jawabannya bukan Hedy, komputer tidak akan berbuat apa-apa.
-            code: |- 
-                    name {is} {ask} 'what is your name?'
-                    {if} name {is} Hedy {print} 'nice'
+            code: |-
+                name {is} {ask} 'what is your name?'
+                {if} name {is} Hedy {print} 'nice'
         3:
             header: Jangan lupa untuk mencetak
             text: Saat menggunakan perintah `{if}`, jangan lupa untuk menggunakan perintah `{print}`.
-            code: |-
-                {if} name {is} Hedy 'nice'
+            code: '{if} name {is} Hedy ''nice'''
         4:
             header: pula
             text: |-
                 Saat menggunakan perintah `{if}`, Anda juga dapat menambahkan perintah `{else}`.
                 Jika jawabannya Hedy, maka komputer akan mencetak 'bagus'.
                 Namun jika jawabannya lain komputer akan mencetak 'boo'
-            code: |-
-                {if} name {is} Hedy {print} 'nice' {else} {print} 'boo!'
+            code: '{if} name {is} Hedy {print} ''nice'' {else} {print} ''boo!'''
         5:
             header: Garis panjang
             text: |-
@@ -335,10 +332,10 @@ levels:
 
                 Harap dicatat bahwa Hedy peka terhadap huruf besar-kecil. Artinya jika Anda menjawab "Hijau" dan bukan "hijau", Hedy akan mencetak "meh".
             code: |-
-                    pretty_colors {is} green, yellow
-                    favorite_color {is} {ask} 'What is your favorite color?'
-                    {if} favorite_color {in} pretty_colors {print} 'pretty!'
-                    {else} {print} 'meh'
+                pretty_colors {is} green, yellow
+                favorite_color {is} {ask} 'What is your favorite color?'
+                {if} favorite_color {in} pretty_colors {print} 'pretty!'
+                {else} {print} 'meh'
         7:
             header: Ayo pergi!
             text: Nikmati petualangan di level 5!
