@@ -346,47 +346,43 @@ levels:
         2:
             header: Toplama
             text: Bir toplama işlemini hesaplamak istiyorsanız, artı işaretini kullanmanız yeterlidir.
-            code: |-
-                    {print} '5 plus 5 is ' 5 + 5
+            code: '{print} ''5 plus 5 is '' 5 + 5'
         3:
             header: Çıkarma
             text: Çıkarma işlemi yapmak istiyorsanız, eksi işaretini kullanabilirsiniz.
-            code: |-
-                    {print} '5 minus 5 is ' 5 - 5
+            code: '{print} ''5 minus 5 is '' 5 - 5'
         4:
             header: Çarpma
             text: Eğer çarpma işlemi yapmak istiyorsanız, yıldız işaretini kullanabilirsiniz.
-            code: |-
-                    {print} '5 times 5 is ' 5 * 5
+            code: '{print} ''5 times 5 is '' 5 * 5'
         5:
             header: Bölme
             text: Bölme işlemi için sağa eğik çizgiyi kullanabilirsiniz.
-            code: |-
-                    {print} '5 divided by 5 is ' 5 / 5
+            code: '{print} ''5 divided by 5 is '' 5 / 5'
         6:
             header: Özet
             text: Özetle, matematik yapmak için +, -, * ve / işaretlerini kullanabilirsiniz.
             code: |-
-                    {print} '5 plus 5 is ' 5 + 5
-                    {print} '5 minus 5 is ' 5 - 5
-                    {print} '5 times 5 is ' 5 * 5
-                    {print} '5 divided by 5 is ' 5 / 5
+                {print} '5 plus 5 is ' 5 + 5
+                {print} '5 minus 5 is ' 5 - 5
+                {print} '5 times 5 is ' 5 * 5
+                {print} '5 divided by 5 is ' 5 / 5
         7:
             header: = sembolü
             text: |-
                 Şu andan itibaren `{is}` komutu yerine = sembolünü de kullanabilirsiniz.
                 Bu hem sayılar hem de kelimeler için geçerlidir ve ayrıca `{if}` veya `{else}` komutlarından sonra gelir.
             code: |-
-                    name = Hedy
-                    answer = 20 + 4
+                name = Hedy
+                answer = 20 + 4
         8:
             header: Değişkenlerle hesaplamalar yapmak
             text: 'Hesaplamaları sayılarla yapabilirsiniz, ancak hesaplama yapmak için değişkenleri de kullanabilirsiniz, bunun gibi:'
             code: |-
-                    number_1 = {ask} 'Fill in the first number:'
-                    number_2 = {ask} 'Fill in the second number:'
-                    correct_answer = number_1 * number_2
-                    {print} number_1 ' times ' number_2 ' is ' correct_answer
+                number_1 = {ask} 'Fill in the first number:'
+                number_2 = {ask} 'Fill in the second number:'
+                correct_answer = number_1 * number_2
+                {print} number_1 ' times ' number_2 ' is ' correct_answer
         9:
             header: Hadi işe koyulalım!
             text: Seviye 6'daki maceraların tadını çıkarın!
@@ -402,21 +398,20 @@ levels:
 
                 Örneğin: Karakterinizin 5 kez yardım için bağırdığı bir hikaye programlıyorsanız, bu şöyle görünebilir:
             code: |-
-                    {print} 'The prince kept calling for help'
-                    {repeat} 5 {times} {print} 'Help!'
-                    {print} 'Why is nobody helping me?'
+                {print} 'The prince kept calling for help'
+                {repeat} 5 {times} {print} 'Help!'
+                {print} 'Why is nobody helping me?'
         3:
             header: Yazdır komutunu unutmayın
             text: tekrar komutunu kullanırken `{print}` komutunu unutmayın.
-            code: |-
-                    {repeat} 5 {times} 'Help!'
+            code: '{repeat} 5 {times} ''Help!'''
         4:
             header: Bir sor komutunu tekrarlayın
             text: Ayrıca bir `{ask}`, `{if}` veya `{else}` komutunu birden çok kez tekrarlayabilirsiniz.
             code: |-
-                    {repeat} 2 {times} answer = {ask} 'Did you know you could ask a question multiple times?'
-                    {if} answer {is} yes {repeat} 2 {times} {print} 'You knew that already!'
-                    {else} {repeat} 3 {times} {print} 'You have learned something new!'
+                {repeat} 2 {times} answer = {ask} 'Did you know you could ask a question multiple times?'
+                {if} answer {is} yes {repeat} 2 {times} {print} 'You knew that already!'
+                {else} {repeat} 3 {times} {print} 'You have learned something new!'
         5:
             header: Hazır ol Ayarla Başla!
             text: Seviye 7'deki maceraların tadını çıkarın!
@@ -431,9 +426,9 @@ levels:
 
                 Yalnızca bir satır kodu tekrarlayabilirsiniz.
             code: |-
-                    {print} 'The prince kept calling for help'
-                    {repeat} 5 {times} {print} 'Help!'
-                    {print} 'Why is nobody helping me?'
+                {print} 'The prince kept calling for help'
+                {repeat} 5 {times} {print} 'Help!'
+                {print} 'Why is nobody helping me?'
         3:
             header: şimdiki {repeat} komutları
             text: |-

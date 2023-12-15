@@ -346,47 +346,43 @@ levels:
         2:
             header: Tambahan
             text: Jika ingin menghitung penjumlahan, cukup gunakan tanda tambah.
-            code: |-
-                    {print} '5 plus 5 is ' 5 + 5
+            code: '{print} ''5 plus 5 is '' 5 + 5'
         3:
             header: Pengurangan
             text: Jika ingin melakukan pengurangan, bisa menggunakan tanda minus.
-            code: |-
-                    {print} '5 minus 5 is ' 5 - 5
+            code: '{print} ''5 minus 5 is '' 5 - 5'
         4:
             header: Perkalian
             text: Jika ingin melakukan perkalian bisa menggunakan tanda bintang.
-            code: |-
-                    {print} '5 times 5 is ' 5 * 5
+            code: '{print} ''5 times 5 is '' 5 * 5'
         5:
             header: Divisi
             text: Anda dapat menggunakan garis miring untuk pembagian.
-            code: |-
-                    {print} '5 divided by 5 is ' 5 / 5
+            code: '{print} ''5 divided by 5 is '' 5 / 5'
         6:
             header: Ringkasan
             text: Singkatnya, Anda dapat menggunakan +, -, * dan / untuk mengerjakan matematika.
             code: |-
-                    {print} '5 plus 5 is ' 5 + 5
-                    {print} '5 minus 5 is ' 5 - 5
-                    {print} '5 times 5 is ' 5 * 5
-                    {print} '5 divided by 5 is ' 5 / 5
+                {print} '5 plus 5 is ' 5 + 5
+                {print} '5 minus 5 is ' 5 - 5
+                {print} '5 times 5 is ' 5 * 5
+                {print} '5 divided by 5 is ' 5 / 5
         7:
             header: Simbol =
             text: |-
                 Mulai sekarang Anda juga dapat menggunakan simbol = sebagai ganti perintah `{is}`.
                 Ini berlaku untuk angka dan kata, dan juga setelah perintah `{if}` atau `{else}`.
             code: |-
-                    name = Hedy
-                    answer = 20 + 4
+                name = Hedy
+                answer = 20 + 4
         8:
             header: Perhitungan dengan variabel
             text: 'Anda bisa menggunakan penghitungan dengan angka, namun Anda juga bisa menggunakan variabel untuk melakukan penghitungan, seperti ini:'
             code: |-
-                    number_1 = {ask} 'Fill in the first number:'
-                    number_2 = {ask} 'Fill in the second number:'
-                    correct_answer = number_1 * number_2
-                    {print} number_1 ' times ' number_2 ' is ' correct_answer
+                number_1 = {ask} 'Fill in the first number:'
+                number_2 = {ask} 'Fill in the second number:'
+                correct_answer = number_1 * number_2
+                {print} number_1 ' times ' number_2 ' is ' correct_answer
         9:
             header: Ayo mulai bekerja!
             text: Nikmati petualangan di level 6!
@@ -402,21 +398,20 @@ levels:
 
                 Misalnya: Jika Anda memprogram cerita di mana karakter Anda berteriak minta tolong sebanyak 5 kali, tampilannya akan seperti ini:
             code: |-
-                    {print} 'The prince kept calling for help'
-                    {repeat} 5 {times} {print} 'Help!'
-                    {print} 'Why is nobody helping me?'
+                {print} 'The prince kept calling for help'
+                {repeat} 5 {times} {print} 'Help!'
+                {print} 'Why is nobody helping me?'
         3:
             header: Jangan lupa print command
             text: Saat menggunakan perintah ulangi, jangan lupa perintah `{print}`.
-            code: |-
-                    {repeat} 5 {times} 'Help!'
+            code: '{repeat} 5 {times} ''Help!'''
         4:
             header: Ulangi perintah tanya
             text: Anda juga dapat mengulangi perintah `{ask}`, `{if}`, atau `{else}` beberapa kali.
             code: |-
-                    {repeat} 2 {times} answer = {ask} 'Did you know you could ask a question multiple times?'
-                    {if} answer {is} yes {repeat} 2 {times} {print} 'You knew that already!'
-                    {else} {repeat} 3 {times} {print} 'You have learned something new!'
+                {repeat} 2 {times} answer = {ask} 'Did you know you could ask a question multiple times?'
+                {if} answer {is} yes {repeat} 2 {times} {print} 'You knew that already!'
+                {else} {repeat} 3 {times} {print} 'You have learned something new!'
         5:
             header: Siap Berangkat!
             text: Nikmati petualangan di level 7!
@@ -431,9 +426,9 @@ levels:
 
                 Anda hanya dapat mengulang satu baris kode.
             code: |-
-                    {print} 'The prince kept calling for help'
-                    {repeat} 5 {times} {print} 'Help!'
-                    {print} 'Why is nobody helping me?'
+                {print} 'The prince kept calling for help'
+                {repeat} 5 {times} {print} 'Help!'
+                {print} 'Why is nobody helping me?'
         3:
             header: '{repeat} perintah sebelumnya'
             text: |-
