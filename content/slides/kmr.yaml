@@ -379,6 +379,22 @@ levels:
                 {if} favorite_color {in} pretty_colors {print} 'pretty!'
                 {else} {print} 'meh'
         7:
+            header: Debugging
+            text: Let's debug this code!
+            code: |-
+                    {print} Welcome to HedyAir Security!
+                    boarding_pass {is} {ask} 'Do you have your boarding pass?'
+                    {if} bording_pass yes {print} Great!
+                    {else} Please, get your boarding pass ready.
+                    passport {is} 'Can I see your passport, please?'
+                    {if} passport {is} yes 'thank you'
+                    {else} 'You can't fly without a passport'
+                    declare {is} {ask} Do you have anything to declare?
+                    {if] declare {is} yes
+                    item_to_declare {is} {ask} 'What would you like to declare'
+                    {else} Alright
+                    {print} Thank you. Please head to gate A22.'
+        8:
             header: Let's go!
             text: Enjoy the adventures in level 5!
     6:
