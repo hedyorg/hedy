@@ -179,18 +179,26 @@ levels:
                 Du gör en lista med kommandot `{is}`.
 
                 Skriv kommatecken mellan elementen i listan.
-            editor: <iframe class="fragment" src="/adventure/random_command/3/raw"></iframe>
+            code: |-
+                    animals {is} dogs, cats, kangaroos
+                    ```
         3:
             header: Slumpmässigt
             text: |-
                 Du kan använda listan med kommandot `{at}` `{random}`.
                 Datorn kommer slumpmässigt att välja ett element från listan.
                 Varje gång du kör denna kod kommer utskriften att skilja sig åt.
-            editor: <iframe class="fragment" src="/adventure/dice/3/raw"></iframe>
+            code: |-
+                    animals {is} dogs, cats, kangaroos
+                    {print} animals {at} {random}
+                    ```
         4:
             header: Slumpmässigt i en mening
             text: Du kan använda kommandot `{at} {random}` i en mening också.
-            editor: <iframe class="fragment" src="/adventure/random_command/3/raw"></iframe>
+            code: |-
+                    animals {is} dogs, cats, kangaroos
+                    {print} My favorite animal is animals {at} {random}
+                    ```
         5:
             header: Lägg till i
             text: |-
@@ -198,13 +206,21 @@ levels:
 
                 Du kan välja vad som ska läggas till i listan eller så kan du använda kommandot `{add}` `{to}` i kombination med kommandot `{ask}`.
                 På så sätt kan du låta spelaren bestämma vad som ska läggas till i listan.
-            editor: <iframe class="fragment" src="/adventure/add_remove_command/3/raw"></iframe>
+            code: |-
+                   animals {is} dog, cat, kangaroo
+                   like {is} {ask} What is your favorite animal?
+                   {add} like {to_list} animals
+                   {print} I choose animals {at} {random}
         6:
             header: Ta bort från
             text: |-
                 Motsatsen till kommandot `{add}` `{to}` är kommandot `{remove}` `{from}`.
                 Detta kommando tar bort ett element från en lista.
-            editor: <iframe class="fragment" src="/adventure/add_remove_command/3/raw"></iframe>
+            code: |-
+                    animals {is} dog, cat, kangaroo
+                    dislike {is} {ask} What animal do you not like?
+                    {remove} dislike {from} animals
+                    {print} I choose animals {at} {random}
         9:
             header: Nu sätter vi igång!
             text: Ha det kul med äventyren på nivå 3!
@@ -212,11 +228,13 @@ levels:
         1:
             header: Välkommen till nivå 4
             text: På den här nivån får du lära dig använda citattecken.
-            editor: <iframe class="fragment" src="/adventure/quotation_marks/4/raw"></iframe>
+            code: "{print} 'print with quotes!'"
         2:
             header: Problem
             text: 'På de tidigare nivåerna kan du ha stött på det här problemet:'
-            editor: <iframe class="fragment" src="/adventure/default/4/raw"></iframe>
+            code: |-
+                    name {is} Sophie
+                    {print} My name is name
         3:
             header: Fixa det med citattecken
             text: |-
@@ -226,30 +244,35 @@ levels:
         4:
             header: Citattecken med skriv
             text: När du använder kommandot `{print}` måste du sätta texten som du vill ska visas på skärmen inom citattecken.
-            editor: <iframe class="fragment" src="/adventure/quotation_marks/4/raw"></iframe>
+            code: "{print} 'print with quotes!'"
         5:
             header: Citattecken med fråga
             text: Detta gäller också för kommandot `{fråga}`.
-            editor: <iframe class="fragment" src="/adventure/quotation_marks/4/raw"></iframe>
+            code: "name {is} {ask} 'name please?'"
         6:
             header: Citattecken och variabler
             text: |-
                 Du vill inte att variabelnamn ska skrivas ut på skärmen.
                 Det är därför variabler ska lämnas utanför citattecknen, så här:
-            editor: <iframe class="fragment" src="/adventure/quotation_marks/4/raw"></iframe>
+            code: |-
+                name {is} Harry
+                {print} 'Hello ' name
         7:
             header: Citattecken och variabler
             text: |-
                 När variabelnamn används inuti mening måste variablerna stå utanför citattecknen.
                 Resten av meningen behöver citattecken. Det ser ut så här:
-            editor: <iframe class="fragment" src="/adventure/quotation_marks/4/raw"></iframe>
+            code: |-
+                name {is} Harry
+                {print} 'Hello ' name ', how are you?'
         8:
             header: Citattecken och sammandragningar
             text: |-
                 Var försiktig! Nu när du använder citattecken kan du inte använda apostrofer i sammandragningar.
 
                 Försök att skriva ut en sammandragning som engelska "you're" eller "I'm" på skärmen nedan och se vad som händer …
-            editor: <iframe class="fragment" src="/adventure/rock/4/raw"></iframe>
+            code: |-
+                {print} 'This won't work!'
         9:
             header: Rensa
             text: |-
@@ -257,7 +280,14 @@ levels:
                 Med det kommandot kan du sudda ut all text från din utdataskärm.
 
                 Var försiktig så att du alltid använder ett sov-kommando också. Om du inte gör det kommer datorn att sudda ut all text innan du hinner läsa den!
-            editor: <iframe class="fragment" src="/adventure/clear_command/4/raw"></iframe>
+            code: |-
+                    {print} '3'
+                    {clear}
+                    {print} '2'
+                    {clear}
+                    {print} '1'
+                    {clear}
+                    {print} 'SURPRISE!'
         10:
             header: Klara, färdiga, gå!
             text: Ha det kul med äventyren på nivå 4!
@@ -271,25 +301,31 @@ levels:
                 Med kommandot `{if}` kan du välja mellan två alternativ.
                 I exemplet kommer datorn att skriva 'nice' om det givna svaret är Hedy.
                 Om svaret inte är Hedy kommer datorn inte att göra någonting.
-            editor: <iframe class="fragment" src="/adventure/if_command/5/raw"></iframe>
+            code: |- 
+                    name {is} {ask} 'what is your name?'
+                    {if} name {is} Hedy {print} 'nice'
         3:
             header: Glöm inte att skriva ut
             text: Glöm inte att använda kommandot `{print}` när du använder kommandot `{if}`.
-            editor: <iframe class="fragment" src="/adventure/if_command/5/raw"></iframe>
+            code: |-
+                {if} name {is} Hedy 'nice'
         4:
             header: annars
             text: |-
                 När du använder ett `{if}`-kommando kan du också lägga till ett `{else}`-kommando.
                 Om svaret är Hedy kommer datorn att skriva 'nice'.
                 Men om svaret är något annat kommer datorn att skriva 'boo'.
-            editor: <iframe class="fragment" src="/adventure/if_command/5/raw"></iframe>
+            code: |-
+                {if} name {is} Hedy {print} 'nice' {else} {print} 'boo!'
         5:
             header: Långa rader
             text: |-
                 Du kanske har märkt att dina rader kan bli väldigt långa när du har både ett `{if}`- och ett `{else}`-kommando.
 
                 Du kan välja att dela upp kommandona på två rader, så här:
-            editor: <iframe class="fragment" src="/adventure/if_command/5/raw"></iframe>
+            code: |-
+                {if} name {is} Hedy {print} 'nice'
+                {else} {print} 'boo!'
         6:
             header: Ett till nytt kommando
             text: |-
@@ -298,7 +334,11 @@ levels:
                 Med `{in}` kan du låta datorn kolla om ett element finns i en lista, t.ex:
 
                 Tänk på att Hedy är skiljer på stora och små bokstäver. Det betyder om du svarar "Grönt" istället för "grönt", kommer Hedy att skriva "meh".
-            editor: <iframe class="fragment" src="/adventure/in_command/5/raw"></iframe>
+            code: |-
+                    pretty_colors {is} green, yellow
+                    favorite_color {is} {ask} 'What is your favorite color?'
+                    {if} favorite_color {in} pretty_colors {print} 'pretty!'
+                    {else} {print} 'meh'
         7:
             header: Nu kör vi!
             text: Ha det kul med äventyren på nivå 5!
@@ -392,7 +432,9 @@ levels:
             text: |-
                 Detsamma gäller för kommandona `{if}` och `{else}`.
                 Dessa kommandon användes tidigare:
-            editor: <iframe class="fragment" src="/adventure/if_command/5/raw"></iframe>
+            code: |-
+                {if} name {is} Hedy {print} 'nice'
+                {else} {print} 'boo!'
         6:
             header: om och annars nu
             text: |-

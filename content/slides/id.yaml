@@ -179,18 +179,26 @@ levels:
                 Anda membuat daftar dengan `{is}`.
 
                 Pisahkan item di daftar Anda dengan koma.
-            editor: <iframe class="fragment" src="/adventure/random_command/3/raw"></iframe>
+            code: |-
+                    animals {is} dogs, cats, kangaroos
+                    ```
         3:
             header: Secara acak
             text: |-
                 Anda dapat menggunakan daftar dengan perintah `{at}` `{random}`.
                 Komputer akan secara acak memilih satu item dari daftar.
                 Setiap kali Anda menjalankan kode ini, hasilnya akan berbeda.
-            editor: <iframe class="fragment" src="/adventure/dice/3/raw"></iframe>
+            code: |-
+                    animals {is} dogs, cats, kangaroos
+                    {print} animals {at} {random}
+                    ```
         4:
             header: Secara acak dalam sebuah kalimat
             text: Anda juga dapat menggunakan perintah `{at}` `{random}` dalam sebuah kalimat.
-            editor: <iframe class="fragment" src="/adventure/random_command/3/raw"></iframe>
+            code: |-
+                    animals {is} dogs, cats, kangaroos
+                    {print} My favorite animal is animals {at} {random}
+                    ```
         5:
             header: Tambahkan ke
             text: |-
@@ -198,13 +206,21 @@ levels:
 
                 Anda dapat memilih apa yang ingin ditambahkan ke daftar atau Anda dapat menggunakan perintah `{add}` `{to}` yang dikombinasikan dengan perintah `{ask}`.
                 Dengan cara ini Anda dapat membiarkan pemain memutuskan apa yang akan ditambahkan ke daftar.
-            editor: <iframe class="fragment" src="/adventure/add_remove_command/3/raw"></iframe>
+            code: |-
+                   animals {is} dog, cat, kangaroo
+                   like {is} {ask} What is your favorite animal?
+                   {add} like {to_list} animals
+                   {print} I choose animals {at} {random}
         6:
             header: Hapus dari
             text: |-
                 Kebalikan dari perintah `{add}` `{to}` adalah perintah `{remove}` `{from}`.
                 Perintah ini menghapus item dari daftar.
-            editor: <iframe class="fragment" src="/adventure/add_remove_command/3/raw"></iframe>
+            code: |-
+                    animals {is} dog, cat, kangaroo
+                    dislike {is} {ask} What animal do you not like?
+                    {remove} dislike {from} animals
+                    {print} I choose animals {at} {random}
         9:
             header: Ayo mulai bekerja!
             text: Nikmati petualangan di level 3!
@@ -212,11 +228,13 @@ levels:
         1:
             header: Selamat datang di level 4
             text: Di level ini Anda akan belajar cara menggunakan tanda kutip.
-            editor: <iframe class="fragment" src="/adventure/quotation_marks/4/raw"></iframe>
+            code: "{print} 'print with quotes!'"
         2:
             header: Masalah
             text: 'Di level sebelumnya, Anda mungkin menemukan masalah ini:'
-            editor: <iframe class="fragment" src="/adventure/default/4/raw"></iframe>
+            code: |-
+                    name {is} Sophie
+                    {print} My name is name
         3:
             header: Memperbaikinya dengan tanda kutip
             text: |-
@@ -226,30 +244,35 @@ levels:
         4:
             header: Tanda kutip dengan cetakan
             text: Setiap kali Anda menggunakan perintah `{print}` Anda harus meletakkan teks yang ingin Anda tampilkan di layar dalam tanda kutip.
-            editor: <iframe class="fragment" src="/adventure/quotation_marks/4/raw"></iframe>
+            code: "{print} 'print with quotes!'"
         5:
             header: Tanda kutip dengan tanya
             text: Ini juga berlaku untuk perintah `{ask}`.
-            editor: <iframe class="fragment" src="/adventure/quotation_marks/4/raw"></iframe>
+            code: "name {is} {ask} 'name please?'"
         6:
             header: Tanda kutip dan variabel
             text: |-
                 Anda tidak ingin nama variabel tercetak di layar.
                 Inilah sebabnya mengapa variabel harus dikeluarkan dari tanda kutip, seperti ini:
-            editor: <iframe class="fragment" src="/adventure/quotation_marks/4/raw"></iframe>
+            code: |-
+                name {is} Harry
+                {print} 'Hello ' name
         7:
             header: Tanda kutip dan variabel
             text: |-
                 Jika nama variabel digunakan di tengah kalimat, variabel tersebut harus dikeluarkan dari tanda kutip.
                 Namun sisa kalimatnya memerlukan tanda kutip. Itu terlihat seperti ini:
-            editor: <iframe class="fragment" src="/adventure/quotation_marks/4/raw"></iframe>
+            code: |-
+                name {is} Harry
+                {print} 'Hello ' name ', how are you?'
         8:
             header: Tanda kutip dan kontraksi
             text: |-
                 Hati-hati! Sekarang Anda menggunakan tanda kutip, Anda tidak dapat menggunakan tanda kutip dalam kontraksi.
 
                 Silakan coba mencetak kontraksi seperti "Anda" atau "Saya" pada layar di bawah ini dan lihat apa yang terjadi....
-            editor: <iframe class="fragment" src="/adventure/rock/4/raw"></iframe>
+            code: |-
+                {print} 'This won't work!'
         9:
             header: Jelas
             text: |-
@@ -257,7 +280,14 @@ levels:
                 Dengan perintah ini Anda dapat menghapus semua teks dari layar keluaran Anda.
 
                 Berhati-hatilah agar Anda selalu menggunakan perintah tidur juga. Jika tidak, komputer akan menghapus semua teks sebelum Anda dapat membacanya!
-            editor: <iframe class="fragment" src="/adventure/clear_command/4/raw"></iframe>
+            code: |-
+                    {print} '3'
+                    {clear}
+                    {print} '2'
+                    {clear}
+                    {print} '1'
+                    {clear}
+                    {print} 'SURPRISE!'
         10:
             header: Siap, Bersiap, Ayo!
             text: Nikmati petualangan di level 4!
@@ -271,25 +301,31 @@ levels:
                 Perintah `{if}` memungkinkan Anda memilih di antara dua opsi.
                 Pada contoh ini komputer akan mencetak 'bagus' jika jawaban yang diberikan adalah Hedy.
                 Kalau jawabannya bukan Hedy, komputer tidak akan berbuat apa-apa.
-            editor: <iframe class="fragment" src="/adventure/if_command/5/raw"></iframe>
+            code: |- 
+                    name {is} {ask} 'what is your name?'
+                    {if} name {is} Hedy {print} 'nice'
         3:
             header: Jangan lupa untuk mencetak
             text: Saat menggunakan perintah `{if}`, jangan lupa untuk menggunakan perintah `{print}`.
-            editor: <iframe class="fragment" src="/adventure/if_command/5/raw"></iframe>
+            code: |-
+                {if} name {is} Hedy 'nice'
         4:
             header: pula
             text: |-
                 Saat menggunakan perintah `{if}`, Anda juga dapat menambahkan perintah `{else}`.
                 Jika jawabannya Hedy, maka komputer akan mencetak 'bagus'.
                 Namun jika jawabannya lain komputer akan mencetak 'boo'
-            editor: <iframe class="fragment" src="/adventure/if_command/5/raw"></iframe>
+            code: |-
+                {if} name {is} Hedy {print} 'nice' {else} {print} 'boo!'
         5:
             header: Garis panjang
             text: |-
                 Anda mungkin memperhatikan bahwa baris Anda bisa menjadi sangat panjang ketika Anda memiliki perintah `{if}` dan `{else}` sekaligus.
 
                 Anda dapat memilih untuk memisahkan perintah dan menaruhnya dalam 2 baris, seperti ini:
-            editor: <iframe class="fragment" src="/adventure/if_command/5/raw"></iframe>
+            code: |-
+                {if} name {is} Hedy {print} 'nice'
+                {else} {print} 'boo!'
         6:
             header: Perintah baru lainnya
             text: |-
@@ -298,7 +334,11 @@ levels:
                 Dengan `{in}` Anda dapat membiarkan komputer memeriksa apakah suatu item ada dalam daftar, misalnya:
 
                 Harap dicatat bahwa Hedy peka terhadap huruf besar-kecil. Artinya jika Anda menjawab "Hijau" dan bukan "hijau", Hedy akan mencetak "meh".
-            editor: <iframe class="fragment" src="/adventure/in_command/5/raw"></iframe>
+            code: |-
+                    pretty_colors {is} green, yellow
+                    favorite_color {is} {ask} 'What is your favorite color?'
+                    {if} favorite_color {in} pretty_colors {print} 'pretty!'
+                    {else} {print} 'meh'
         7:
             header: Ayo pergi!
             text: Nikmati petualangan di level 5!
@@ -392,7 +432,9 @@ levels:
             text: |-
                 Hal yang sama berlaku untuk perintah `{if}` dan `{else}`.
                 Ini adalah perintah sebelumnya:
-            editor: <iframe class="fragment" src="/adventure/if_command/5/raw"></iframe>
+            code: |-
+                {if} name {is} Hedy {print} 'nice'
+                {else} {print} 'boo!'
         6:
             header: jika dan yang lain sekarang
             text: |-

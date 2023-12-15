@@ -171,19 +171,26 @@ levels:
             text: |-
                 You make a list with `{is}`.
 
-                Seperate the items on your list with a comma.
-            editor: <iframe class="fragment" src="/adventure/random_command/3/raw"></iframe>
+                Separate the items on your list with a comma.
+            code: |-
+                    animals {is} dogs, cats, kangaroos
+                    ```
         3:
             header: At random
             text: |-
                 You can use the list with the `{at}` `{random}` command.
                 The computer will randomly pick one item of the list.
                 Every time you run this code the output will differ.
-            editor: <iframe class="fragment" src="/adventure/dice/3/raw"></iframe>
+            code: |-
+                    animals {is} dogs, cats, kangaroos
+                    ```
         4:
             header: At random in a sentence
             text: You can use the `{at}` `{random}` command in a sentence as well.
-            editor: <iframe class="fragment" src="/adventure/random_command/3/raw"></iframe>
+            code: |-
+                    animals {is} dogs, cats, kangaroos
+                    {print} My favorite animal is animals {at} {random}
+                    ```
         5:
             header: Add to
             text: |-
@@ -191,13 +198,21 @@ levels:
 
                 You can choose what to add to the list or you can use the `{add}` `{to}` command in combination with the `{ask}` command.
                 This way you can let the player decide what to add to the list.
-            editor: <iframe class="fragment" src="/adventure/add_remove_command/3/raw"></iframe>
+            code: |-
+                   animals {is} dog, cat, kangaroo
+                   like {is} {ask} What is your favorite animal?
+                   {add} like {to_list} animals
+                   {print} I choose animals {at} {random}
         6:
             header: Remove from
             text: |-
                 The opposite of the `{add}` `{to}` command is the  `{remove}` `{from}` command.
                 This command removes an item from a list.
-            editor: <iframe class="fragment" src="/adventure/add_remove_command/3/raw"></iframe>
+            code: |-
+                    animals {is} dog, cat, kangaroo
+                    dislike {is} {ask} What animal do you not like?
+                    {remove} dislike {from} animals
+                    {print} I choose animals {at} {random}
         9:
             header: Let's get to work!
             text: Enjoy the adventures in level 3!
@@ -205,11 +220,13 @@ levels:
         1:
             header: Welcome to level 4
             text: In this level you will learn how to use quotation marks.
-            editor: <iframe class="fragment" src="/adventure/quotation_marks/4/raw"></iframe>
+            code: "{print} 'print with quotes!'"
         2:
             header: Problem
             text: 'In the previous levels, you might have come across this problem:'
-            editor: <iframe class="fragment" src="/adventure/default/4/raw"></iframe>
+            code: |-
+                    name {is} Sophie
+                    {print} My name is name
         3:
             header: Fixing it with quotation marks
             text: |-
@@ -219,34 +236,46 @@ levels:
         4:
             header: Quotation marks with print
             text: Each time you use the `{print}` command you need to put the text that you want to appear on the screen in quotation marks.
-            editor: <iframe class="fragment" src="/adventure/quotation_marks/4/raw"></iframe>
+            code: "{print} 'print with quotes!'"
         5:
             header: Quotation marks with ask
             text: This also goes for the `{ask}` command.
-            editor: <iframe class="fragment" src="/adventure/quotation_marks/4/raw"></iframe>
+            code: "name {is} {ask} 'name please?'"
         6:
             header: Quotation marks and variables
             text: |-
                 You do not want variable names to be printed on the screen.
                 This is why variables should be left out of the quotation marks, like this:
-            editor: <iframe class="fragment" src="/adventure/quotation_marks/4/raw"></iframe>
+            code: |-
+                name {is} Harry
+                {print} 'Hello ' name
         7:
             header: Quotation marks and variables
             text: |-
                 When variable names are used in the middle of a sentence, you have to leave the variables out of the quotation marks.
                 The rest of the sentence however, does need quotation marks. That looks like this:
-            editor: <iframe class="fragment" src="/adventure/quotation_marks/4/raw"></iframe>
+            code: |-
+                name {is} Harry
+                {print} 'Hello ' name ', how are you?'
         8:
             header: Quotation marks and contractions
             text: |-
                 Be careful! Now that you are using quotation marks, you can't use apostrophes in contractions.
 
                 Please try to print a contraction like "you're" or "I'm" in the screen below and see what happens....
-            editor: <iframe class="fragment" src="/adventure/rock/4/raw"></iframe>
+            code: |-
+                {print} 'This won't work!'
         9:
             header: Ready, Set, Go!
             text: Enjoy the adventures in level 4!
-            editor: <iframe class="fragment" src="/adventure/clear_command/4/raw"></iframe>
+            code: |-
+                    {print} '3'
+                    {clear}
+                    {print} '2'
+                    {clear}
+                    {print} '1'
+                    {clear}
+                    {print} 'SURPRISE!'
         10:
             header: Ready, Set, Go!
             text: Enjoy the adventures in level 4!
@@ -260,25 +289,33 @@ levels:
                 The `{if}` command allows you to choose between two options.
                 In this example the computer will print 'nice' if the given answer is Hedy.
                 If the answer is not Hedy, the computer will do nothing.
-            editor: <iframe class="fragment" src="/adventure/if_command/5/raw"></iframe>
+            code: |- 
+                    name {is} {ask} 'what is your name?'
+                    {if} name {is} Hedy {print} 'nice'
         3:
             header: Don't forget to print
-            text: When using the `{if}` command, don't forget to use the `{print}` command.
-            editor: <iframe class="fragment" src="/adventure/if_command/5/raw"></iframe>
+            text: |- 
+                When using the `{if}` command, don't forget to use the `{print}` command.
+                This code will not work!
+            code: |-
+                {if} name {is} Hedy 'nice'
         4:
             header: else
             text: |-
                 When using an `{if}` command, you can also add an `{else}` command.
                 If the answer is Hedy, the computer will print 'nice'.
                 But if the answer is something else the computer will print 'boo'
-            editor: <iframe class="fragment" src="/adventure/if_command/5/raw"></iframe>
+            code: |-
+                {if} name {is} Hedy {print} 'nice' {else} {print} 'boo!'
         5:
             header: Long lines
             text: |-
                 You might have noticed that your lines can get very long when you have both an `{if}` and an `{else}` command.
 
-                You can choose to seperate commands and put them on 2 lines, like this:
-            editor: <iframe class="fragment" src="/adventure/if_command/5/raw"></iframe>
+                You can choose to separate commands and put them on 2 lines, like this:
+            code: |-
+                {if} name {is} Hedy {print} 'nice'
+                {else} {print} 'boo!'
         6:
             header: Another new command
             text: |-
@@ -287,7 +324,11 @@ levels:
                 With `{in}` you can let the computer check if an item is in a list, for example:
 
                 Please note that Hedy is case sensitive. This means that if you answer "Green" instead of "green", Hedy will print "meh".
-            editor: <iframe class="fragment" src="/adventure/in_command/5/raw"></iframe>
+            code: |-
+                    pretty_colors {is} green, yellow
+                    favorite_color {is} {ask} 'What is your favorite color?'
+                    {if} favorite_color {in} pretty_colors {print} 'pretty!'
+                    {else} {print} 'meh'
         7:
             header: Let's go!
             text: Enjoy the adventures in level 5!
@@ -381,7 +422,9 @@ levels:
             text: |-
                 The same goes for the `{if}` and `{else}` commands.
                 These were the commands before:
-            editor: <iframe class="fragment" src="/adventure/if_command/5/raw"></iframe>
+            code: |-
+                {if} name {is} Hedy {print} 'nice'
+                {else} {print} 'boo!'
         6:
             header: if and else now
             text: |-

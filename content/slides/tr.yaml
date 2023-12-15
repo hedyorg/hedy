@@ -179,18 +179,26 @@ levels:
                 Bir listeyi `{is}` ile yaparsınız.
 
                 Listenizdeki öğeleri virgülle ayırın.
-            editor: <iframe class="fragment" src="/adventure/random_command/3/raw"></iframe>
+            code: |-
+                    animals {is} dogs, cats, kangaroos
+                    ```
         3:
             header: Rastgele
             text: |-
                 Listeyi `{at}` `{random}` komutu ile kullanabilirsiniz.
                 Bilgisayar listeden rastgele bir öğe seçecektir.
                 Bu kodu her çalıştırdığınızda çıktı farklı olacaktır.
-            editor: <iframe class="fragment" src="/adventure/dice/3/raw"></iframe>
+            code: |-
+                    animals {is} dogs, cats, kangaroos
+                    {print} animals {at} {random}
+                    ```
         4:
             header: Cümle içinden rastgele
             text: Bir cümle için de `{at}` `{random}` komutunu kullanabilirsiniz.
-            editor: <iframe class="fragment" src="/adventure/random_command/3/raw"></iframe>
+            code: |-
+                    animals {is} dogs, cats, kangaroos
+                    {print} My favorite animal is animals {at} {random}
+                    ```
         5:
             header: Eklemek için
             text: |-
@@ -198,13 +206,21 @@ levels:
 
                 Listeye neyin ekleneceğini seçebilir veya `{add}` `{to}` komutunu `{ask}` komutuyla birlikte kullanabilirsiniz.
                 Bu şekilde, listeye ne ekleneceğine oyuncunun karar vermesine izin verebilirsiniz.
-            editor: <iframe class="fragment" src="/adventure/add_remove_command/3/raw"></iframe>
+            code: |-
+                   animals {is} dog, cat, kangaroo
+                   like {is} {ask} What is your favorite animal?
+                   {add} like {to_list} animals
+                   {print} I choose animals {at} {random}
         6:
             header: İçinden kaldırmak
             text: |-
                 `{add}` `{to}` komutunun tersi `{remove}` `{from}` komutudur.
                 Bu komut listeden bir öğeyi kaldırır.
-            editor: <iframe class="fragment" src="/adventure/add_remove_command/3/raw"></iframe>
+            code: |-
+                    animals {is} dog, cat, kangaroo
+                    dislike {is} {ask} What animal do you not like?
+                    {remove} dislike {from} animals
+                    {print} I choose animals {at} {random}
         9:
             header: Hadi işe koyulalım!
             text: Seviye 3'teki maceraların tadını çıkarın!
@@ -212,11 +228,13 @@ levels:
         1:
             header: 4. seviyeye hoş geldiniz
             text: Bu seviyede tırnak işaretlerini nasıl kullanacağınızı öğreneceksiniz.
-            editor: <iframe class="fragment" src="/adventure/quotation_marks/4/raw"></iframe>
+            code: "{print} 'print with quotes!'"
         2:
             header: Problem
             text: 'Önceki seviyelerde, bu sorunla karşılaşmış olabilirsiniz:'
-            editor: <iframe class="fragment" src="/adventure/default/4/raw"></iframe>
+            code: |-
+                    name {is} Sophie
+                    {print} My name is name
         3:
             header: Bunu tırnak işaretleri ile düzeltmek
             text: |-
@@ -226,30 +244,35 @@ levels:
         4:
             header: Yazdır ile tırnak işaretleri
             text: '`{print}` komutunu her kullandığınızda, ekranda görünmesini istediğiniz metni tırnak içine almanız gerekir.'
-            editor: <iframe class="fragment" src="/adventure/quotation_marks/4/raw"></iframe>
+            code: "{print} 'print with quotes!'"
         5:
             header: Sor ile tırnak işaretleri
             text: Bu aynı zamanda `{ask}` komutu için de geçerlidir.
-            editor: <iframe class="fragment" src="/adventure/quotation_marks/4/raw"></iframe>
+            code: "name {is} {ask} 'name please?'"
         6:
             header: Tırnak işaretleri ve değişkenler
             text: |-
                 Değişken adlarının ekrana yazdırılmasını istemezsiniz.
                 Bu nedenle değişkenler tırnak işaretlerinin dışında bırakılmalıdır, bunun gibi:
-            editor: <iframe class="fragment" src="/adventure/quotation_marks/4/raw"></iframe>
+            code: |-
+                name {is} Harry
+                {print} 'Hello ' name
         7:
             header: Tırnak işaretleri ve değişkenler
             text: |-
                 Değişken adları bir cümlenin ortasında kullanıldığında, değişkenleri tırnak işaretlerinin dışında bırakmanız gerekir.
                 Ancak cümlenin geri kalanında tırnak işaretlerine ihtiyaç vardır. Bu şuna benziyor:
-            editor: <iframe class="fragment" src="/adventure/quotation_marks/4/raw"></iframe>
+            code: |-
+                name {is} Harry
+                {print} 'Hello ' name ', how are you?'
         8:
             header: Tırnak işaretleri ve kısaltmalar
             text: |-
                 Dikkatli olun! Artık tırnak işareti kullandığınıza göre, kısaltmalarda ve özel isimlerde kesme işareti kullanamazsınız.
 
                 Lütfen aşağıdaki ekranda "Hedy'nin" veya "TC'de" gibi bir özel isim veya kısaltma yazdırmayı deneyin ve ne olduğunu görün...
-            editor: <iframe class="fragment" src="/adventure/rock/4/raw"></iframe>
+            code: |-
+                {print} 'This won't work!'
         9:
             header: Temizle
             text: |-
@@ -257,7 +280,14 @@ levels:
                 Bu komut ile çıktı ekranınızdaki tüm metni silebilirsiniz.
 
                 Her zaman uyku komutu kullanmaya da dikkat edin. Eğer bunu yapmazsanız bilgisayar siz okuyamadan tüm metni silecektir!
-            editor: <iframe class="fragment" src="/adventure/clear_command/4/raw"></iframe>
+            code: |-
+                    {print} '3'
+                    {clear}
+                    {print} '2'
+                    {clear}
+                    {print} '1'
+                    {clear}
+                    {print} 'SURPRISE!'
         10:
             header: Hazır Ol, Ayarla, Başla!
             text: Seviye 4'teki maceraların tadını çıkarın!
@@ -271,25 +301,31 @@ levels:
                 `{if}` komutu iki seçenek arasında seçim yapmanızı sağlar.
                 Bu örnekte, verilen cevap Hedy ise bilgisayar 'güzel' yazdıracaktır.
                 Eğer cevap Hedy değilse, bilgisayar hiçbir şey yapmayacaktır.
-            editor: <iframe class="fragment" src="/adventure/if_command/5/raw"></iframe>
+            code: |- 
+                    name {is} {ask} 'what is your name?'
+                    {if} name {is} Hedy {print} 'nice'
         3:
             header: Yazdırmayı unutmayın
             text: '`{if}` komutunu kullanırken, `{print}` komutunu kullanmayı unutmayın.'
-            editor: <iframe class="fragment" src="/adventure/if_command/5/raw"></iframe>
+            code: |-
+                {if} name {is} Hedy 'nice'
         4:
             header: değilse
             text: |-
                 Bir `{if}` komutu kullanırken, bir `{else}` komutu da ekleyebilirsiniz.
                 Eğer cevap Hedy ise, bilgisayar 'güzel' yazacaktır.
                 Ancak cevap başka bir şeyse bilgisayar 'böö' yazacaktır.
-            editor: <iframe class="fragment" src="/adventure/if_command/5/raw"></iframe>
+            code: |-
+                {if} name {is} Hedy {print} 'nice' {else} {print} 'boo!'
         5:
             header: Uzun satırlar
             text: |-
                 Hem `{if}` hem de `{else}` komutuna sahip olduğunuzda satırlarınızın çok uzun olabileceğini fark etmiş olabilirsiniz.
 
                 Komutları ayırmayı ve aşağıdaki gibi 2 satıra koymayı seçebilirsiniz:
-            editor: <iframe class="fragment" src="/adventure/if_command/5/raw"></iframe>
+            code: |-
+                {if} name {is} Hedy {print} 'nice'
+                {else} {print} 'boo!'
         6:
             header: Bir başka yeni komut
             text: |-
@@ -298,7 +334,11 @@ levels:
                 Örneğin `{in}` ile bilgisayarın bir öğenin bir listede olup olmadığını kontrol etmesini sağlayabilirsiniz:
 
                 Hedy'nin büyük/küçük harfe duyarlı olduğunu lütfen unutmayın. Bu, "yeşil" yerine "Yeşil" yanıtını verirseniz, Hedy'nin "eh işte" yazdıracağı anlamına gelir.
-            editor: <iframe class="fragment" src="/adventure/in_command/5/raw"></iframe>
+            code: |-
+                    pretty_colors {is} green, yellow
+                    favorite_color {is} {ask} 'What is your favorite color?'
+                    {if} favorite_color {in} pretty_colors {print} 'pretty!'
+                    {else} {print} 'meh'
         7:
             header: Hadi başlayalım!
             text: Seviye 5'teki maceraların tadını çıkarın!
@@ -392,7 +432,9 @@ levels:
             text: |-
                 Aynı şey `{if}` ve `{else}` komutları için de geçerlidir.
                 Bunlar daha önceki komutlardı:
-            editor: <iframe class="fragment" src="/adventure/if_command/5/raw"></iframe>
+            code: |-
+                {if} name {is} Hedy {print} 'nice'
+                {else} {print} 'boo!'
         6:
             header: şimdiki eğer ve değilse
             text: |-

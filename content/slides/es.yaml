@@ -179,18 +179,26 @@ levels:
                 Creas una lista con `{is}`.
 
                 Separa tus objetos en tu lista con una coma.
-            editor: <iframe class="fragment" src="/adventure/random_command/3/raw"></iframe>
+            code: |-
+                    animals {is} dogs, cats, kangaroos
+                    ```
         3:
             header: En aleatorio
             text: |-
                 Puedes usar la lista con el comando `{at}` `{random}`.
                 El ordenador elegirá al azar un objeto de la lista.
                 Cada vez que ejecutes este código el resultado será diferente.
-            editor: <iframe class="fragment" src="/adventure/dice/3/raw"></iframe>
+            code: |-
+                    animals {is} dogs, cats, kangaroos
+                    {print} animals {at} {random}
+                    ```
         4:
             header: En aleatorio en una frase
             text: También puedes usar el comando `{at}` `{random}` en una frase.
-            editor: <iframe class="fragment" src="/adventure/random_command/3/raw"></iframe>
+            code: |-
+                    animals {is} dogs, cats, kangaroos
+                    {print} My favorite animal is animals {at} {random}
+                    ```
         5:
             header: Añadir a
             text: |-
@@ -198,13 +206,21 @@ levels:
 
                 Puedes elegir qué añadir a la lista o puedes usar el comando `{add}` `{to}` en combinación con el comando `{ask}`.
                 De esta manera puedes dejar que el jugador elija qué añadir a la lista.
-            editor: <iframe class="fragment" src="/adventure/add_remove_command/3/raw"></iframe>
+            code: |-
+                   animals {is} dog, cat, kangaroo
+                   like {is} {ask} What is your favorite animal?
+                   {add} like {to_list} animals
+                   {print} I choose animals {at} {random}
         6:
             header: Eliminar de
             text: |-
                 Lo contrario del comando `{add}` `{to}` es el comando `{remove}` `{from}`.
                 Este comando elimina un objeto de una lista.
-            editor: <iframe class="fragment" src="/adventure/add_remove_command/3/raw"></iframe>
+            code: |-
+                    animals {is} dog, cat, kangaroo
+                    dislike {is} {ask} What animal do you not like?
+                    {remove} dislike {from} animals
+                    {print} I choose animals {at} {random}
         9:
             header: ¡Manos a la obra!
             text: ¡Disfruta las aventuras en el nivel 3!
@@ -212,11 +228,13 @@ levels:
         1:
             header: Bienvenido al nivel 4
             text: En este nivel aprenderás a cómo usar las comillas.
-            editor: <iframe class="fragment" src="/adventure/quotation_marks/4/raw"></iframe>
+            code: "{print} 'print with quotes!'"
         2:
             header: Problema
             text: 'En los niveles anteriores, quizá te hayas encontrado este problema:'
-            editor: <iframe class="fragment" src="/adventure/default/4/raw"></iframe>
+            code: |-
+                    name {is} Sophie
+                    {print} My name is name
         3:
             header: Arreglarlo con comillas
             text: |-
@@ -226,30 +244,35 @@ levels:
         4:
             header: Comillas con imprimir
             text: Cada vez que uses el comando `{print}` necesitas poner el texto que quieras con comillas para que aparezca en la pantalla.
-            editor: <iframe class="fragment" src="/adventure/quotation_marks/4/raw"></iframe>
+            code: "{print} 'print with quotes!'"
         5:
             header: Comillas con preguntar
             text: Esto también ocurre para el comando `{ask}`.
-            editor: <iframe class="fragment" src="/adventure/quotation_marks/4/raw"></iframe>
+            code: "name {is} {ask} 'name please?'"
         6:
             header: Comillas y variables
             text: |-
                 No quieres que se impriman nombres de variables en la pantalla.
                 Esto es por lo que las variables deben dejarse fuera de las comillas, tal que así:
-            editor: <iframe class="fragment" src="/adventure/quotation_marks/4/raw"></iframe>
+            code: |-
+                name {is} Harry
+                {print} 'Hello ' name
         7:
             header: Comillas y variables
             text: |-
                 Cuando los nombres de variables se usan en medio de una frase, tienes que dejar las variables fuera de las comillas.
                 El resto de la frase en cambio, necesita comillas. Que se parece a esto:
-            editor: <iframe class="fragment" src="/adventure/quotation_marks/4/raw"></iframe>
+            code: |-
+                name {is} Harry
+                {print} 'Hello ' name ', how are you?'
         8:
             header: Comillas y contracciones
             text: |-
                 ¡Cuidado! Ahora que estás usando comillas, no puedes usar apóstrofes en las abreviaturas.
 
                 Por favor intenta imprimir una contracción como "you're" o "I'm" en la pantalla de abajo y verás que sucede....
-            editor: <iframe class="fragment" src="/adventure/rock/4/raw"></iframe>
+            code: |-
+                {print} 'This won't work!'
         9:
             header: Limpiar
             text: |-
@@ -257,7 +280,14 @@ levels:
                 Con este comando puedes limpiar todo el texto de tu pantalla de salida.
 
                 Ten cuidado si siempre también usas un comando dormir. Si no lo haces el ordenador ¡limpiará todo el texto antes de que lo puedas leer!
-            editor: <iframe class="fragment" src="/adventure/clear_command/4/raw"></iframe>
+            code: |-
+                    {print} '3'
+                    {clear}
+                    {print} '2'
+                    {clear}
+                    {print} '1'
+                    {clear}
+                    {print} 'SURPRISE!'
         10:
             header: ¡Preparados, Listos, Ya!
             text: ¡Disfruta las aventuras en el nivel 4!
@@ -271,25 +301,31 @@ levels:
                 El comando `{if}` permite elegir entre dos opciones.
                 En este ejemplo el ordenador imprimirá 'bien' si la respuesta dad es Hedy.
                 Si la respuesta no es Hedy, el ordenador no hará nada.
-            editor: <iframe class="fragment" src="/adventure/if_command/5/raw"></iframe>
+            code: |- 
+                    name {is} {ask} 'what is your name?'
+                    {if} name {is} Hedy {print} 'nice'
         3:
             header: No te olvides imprimir
             text: Al usar el comando `{if}`, no te olvides de usar el comando `{print}`.
-            editor: <iframe class="fragment" src="/adventure/if_command/5/raw"></iframe>
+            code: |-
+                {if} name {is} Hedy 'nice'
         4:
             header: sino
             text: |-
                 Al usar el comando `{if}`, también puedes añadir el comando `{else}`.
                 Si la respuesta es Hedy, el ordenador imprimirá 'bien'.
                 Pero si la respuesta es otra cosa el ordenador imprimirá 'boo'
-            editor: <iframe class="fragment" src="/adventure/if_command/5/raw"></iframe>
+            code: |-
+                {if} name {is} Hedy {print} 'nice' {else} {print} 'boo!'
         5:
             header: Líneas largas
             text: |-
                 Quizás te hayas dado cuenta que tus líneas pueden hacerse muy largas cuando tienes ambos comandos `{if}` y `{else}`.
 
                 Puedes elegir separar los comandos y ponerlos en 2 líneas, tal que así:
-            editor: <iframe class="fragment" src="/adventure/if_command/5/raw"></iframe>
+            code: |-
+                {if} name {is} Hedy {print} 'nice'
+                {else} {print} 'boo!'
         6:
             header: Otro comando nuevo
             text: |-
@@ -298,7 +334,11 @@ levels:
                 Con `{in}` puedes dejar que el ordenador compruebe si un objeto está en una lista, por ejemplo:
 
                 Por favor ten en cuenta que Hedy distingue entre mayúsculas y minúsculas. Esto significa que tu respuesta "Verde" en vez de "verde", Hedy imprimirá "meh".
-            editor: <iframe class="fragment" src="/adventure/in_command/5/raw"></iframe>
+            code: |-
+                    pretty_colors {is} green, yellow
+                    favorite_color {is} {ask} 'What is your favorite color?'
+                    {if} favorite_color {in} pretty_colors {print} 'pretty!'
+                    {else} {print} 'meh'
         7:
             header: ¡Vamos!
             text: ¡Disfruta las aventuras en el nivel 5!
@@ -392,7 +432,9 @@ levels:
             text: |-
                 Lo mismo ocurre para los comandos `{if}` y `{else}`.
                 Antes estos eran los comandos:
-            editor: <iframe class="fragment" src="/adventure/if_command/5/raw"></iframe>
+            code: |-
+                {if} name {is} Hedy {print} 'nice'
+                {else} {print} 'boo!'
         6:
             header: ahora si y sino
             text: |-

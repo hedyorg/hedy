@@ -171,19 +171,27 @@ levels:
             text: |-
                 You make a list with `{is}`.
 
-                Seperate the items on your list with a comma.
-            editor: <iframe class="fragment" src="/adventure/random_command/3/raw"></iframe>
+                Separate the items on your list with a comma.
+            code: |-
+                    animals {is} dogs, cats, kangaroos
+                    ```
         3:
             header: At random
             text: |-
                 You can use the list with the `{at}` `{random}` command.
                 The computer will randomly pick one item of the list.
                 Every time you run this code the output will differ.
-            editor: <iframe class="fragment" src="/adventure/dice/3/raw"></iframe>
+            code: |-
+                    animals {is} dogs, cats, kangaroos
+                    {print} animals {at} {random}
+                    ```
         4:
             header: At random in a sentence
             text: You can use the `{at}` `{random}` command in a sentence as well.
-            editor: <iframe class="fragment" src="/adventure/random_command/3/raw"></iframe>
+            code: |-
+                    animals {is} dogs, cats, kangaroos
+                    {print} My favorite animal is animals {at} {random}
+                    ```
         5:
             header: Add to
             text: |-
@@ -191,13 +199,21 @@ levels:
 
                 You can choose what to add to the list or you can use the `{add}` `{to}` command in combination with the `{ask}` command.
                 This way you can let the player decide what to add to the list.
-            editor: <iframe class="fragment" src="/adventure/add_remove_command/3/raw"></iframe>
+            code: |-
+                   animals {is} dog, cat, kangaroo
+                   like {is} {ask} What is your favorite animal?
+                   {add} like {to_list} animals
+                   {print} I choose animals {at} {random}
         6:
             header: Remove from
             text: |-
                 The opposite of the `{add}` `{to}` command is the  `{remove}` `{from}` command.
                 This command removes an item from a list.
-            editor: <iframe class="fragment" src="/adventure/add_remove_command/3/raw"></iframe>
+            code: |-
+                    animals {is} dog, cat, kangaroo
+                    dislike {is} {ask} What animal do you not like?
+                    {remove} dislike {from} animals
+                    {print} I choose animals {at} {random}
         9:
             header: Let's get to work!
             text: Enjoy the adventures in level 3!
@@ -205,11 +221,13 @@ levels:
         1:
             header: Welcome to level 4
             text: In this level you will learn how to use quotation marks.
-            editor: <iframe class="fragment" src="/adventure/quotation_marks/4/raw"></iframe>
+            code: "{print} 'print with quotes!'"
         2:
             header: Problem
             text: 'In the previous levels, you might have come across this problem:'
-            editor: <iframe class="fragment" src="/adventure/default/4/raw"></iframe>
+            code: |-
+                    name {is} Sophie
+                    {print} My name is name
         3:
             header: Fixing it with quotation marks
             text: |-
@@ -219,30 +237,35 @@ levels:
         4:
             header: Quotation marks with print
             text: 每次使用 `{print}` 命令时，都需要将要显示在屏幕上的文本放在引号中。
-            editor: <iframe class="fragment" src="/adventure/quotation_marks/4/raw"></iframe>
+            code: "{print} 'print with quotes!'"
         5:
             header: Quotation marks with ask
             text: This also goes for the `{ask}` command.
-            editor: <iframe class="fragment" src="/adventure/quotation_marks/4/raw"></iframe>
+            code: "name {is} {ask} 'name please?'"
         6:
             header: Quotation marks and variables
             text: |-
                 You do not want variable names to be printed on the screen.
                 This is why variables should be left out of the quotation marks, like this:
-            editor: <iframe class="fragment" src="/adventure/quotation_marks/4/raw"></iframe>
+            code: |-
+                name {is} Harry
+                {print} 'Hello ' name
         7:
             header: Quotation marks and variables
             text: |-
                 当变量名用在句子中间时，必须将变量放在引号之外。
                 然而，句子的其余部分确实需要引号。 看起来像这样:
-            editor: <iframe class="fragment" src="/adventure/quotation_marks/4/raw"></iframe>
+            code: |-
+                name {is} Harry
+                {print} 'Hello ' name ', how are you?'
         8:
             header: Quotation marks and contractions
             text: |-
                 当心！ 既然使用了引号，则不能在缩写中使用引号。
 
                 请尝试在下面的屏幕中打印诸如“you're”或“I'm”之类的缩写，看看会发生什么......
-            editor: <iframe class="fragment" src="/adventure/rock/4/raw"></iframe>
+            code: |-
+                {print} 'This won't work!'
         9:
             header: 清除
             text: |-
@@ -250,7 +273,14 @@ levels:
                 使用此命令，可以擦除输出屏幕上的所有文本。
 
                 请注意，你也应该配合使用睡眠命令。 如果不这样做，计算机将在你阅读之前擦除所有文本！
-            editor: <iframe class="fragment" src="/adventure/clear_command/4/raw"></iframe>
+            code: |-
+                    {print} '3'
+                    {clear}
+                    {print} '2'
+                    {clear}
+                    {print} '1'
+                    {clear}
+                    {print} 'SURPRISE!'
         10:
             header: Ready, Set, Go!
             text: 享受第 4 关的冒险！
@@ -264,25 +294,31 @@ levels:
                 `{if}` 命令允许你在两个选项之间进行选择。
                 在此示例中，如果给定的答案是 `Hedy`，计算机将打印`'nice'`。
                 如果答案不是 `Hedy`，计算机将不执行任何操作。
-            editor: <iframe class="fragment" src="/adventure/if_command/5/raw"></iframe>
+            code: |- 
+                    name {is} {ask} 'what is your name?'
+                    {if} name {is} Hedy {print} 'nice'
         3:
             header: Don't forget to print
             text: 使用 `{if}` 命令时，不要忘记使用`{print}`命令。
-            editor: <iframe class="fragment" src="/adventure/if_command/5/raw"></iframe>
+            code: |-
+                {if} name {is} Hedy 'nice'
         4:
             header: 否则
             text: |-
                 使用 `{if}` 命令时，还可以添加 `{else}` 命令。
                 如果答案是 `Hedy`，计算机会打印`'nice'`。
                 但如果答案是别的，计算机会打印`'boo'`
-            editor: <iframe class="fragment" src="/adventure/if_command/5/raw"></iframe>
+            code: |-
+                {if} name {is} Hedy {print} 'nice' {else} {print} 'boo!'
         5:
             header: Long lines
             text: |-
                 你可能已经注意到，当你同时使用 `{if}` 和 `{else}`命令时，你的代码行可能会变得很长。
 
                 你可以选择将命令分开并将它们放在两行中，如下所示：
-            editor: <iframe class="fragment" src="/adventure/if_command/5/raw"></iframe>
+            code: |-
+                {if} name {is} Hedy {print} 'nice'
+                {else} {print} 'boo!'
         6:
             header: Another new command
             text: |-
@@ -291,7 +327,11 @@ levels:
                 使用 `{in}` ，你可以让计算机检查某个项目是否在列表中，例如：
 
                 请注意 `Hedy` 区分大小写。 这意味着如果您回答`"Green"`而不是`"green"`，`Hedy` 将打印`"meh"`。
-            editor: <iframe class="fragment" src="/adventure/in_command/5/raw"></iframe>
+            code: |-
+                    pretty_colors {is} green, yellow
+                    favorite_color {is} {ask} 'What is your favorite color?'
+                    {if} favorite_color {in} pretty_colors {print} 'pretty!'
+                    {else} {print} 'meh'
         7:
             header: Let's go!
             text: 享受第 5 关的冒险！
@@ -385,7 +425,9 @@ levels:
             text: |-
                 `{if}` 和 `{else}` 命令也是如此。
                 这些是之前的命令：
-            editor: <iframe class="fragment" src="/adventure/if_command/5/raw"></iframe>
+            code: |-
+                {if} name {is} Hedy {print} 'nice'
+                {else} {print} 'boo!'
         6:
             header: if and else now
             text: |-
