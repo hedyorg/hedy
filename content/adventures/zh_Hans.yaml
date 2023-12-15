@@ -1274,103 +1274,87 @@ adventures:
                     ### 练习
                     调试这段代码。 祝你好运！
                 example_code: |
-                    **Warning! This code needs to be debugged!**
+                    **警告！ 这段代码需要调试!**
                     ```
                     define food_order
-                        toppings = ask 'pepperoni, tuna, veggie or cheese?'
-                        size = ask 'big, medium or small?'
-                        number_of_pizza = ask 'How many these pizzas would you like?'
+                        toppings = ask '意大利辣香肠、金枪鱼、蔬菜还是奶酪？'
+                        size = ask '大、中还是小?'
+                        number_of_pizza = ask '您想要多少个披萨？'
 
-                        print 'YOU ORDERED'
+                        print '您订购了'
                         print number_of_pizzas ' size  ' topping ' pizza'
 
                     define drinks_order
-                        drink = ask 'water, coke, icetea, lemonade or coffee?'
-                        number_of_drinks = ask 'How many of these drinks would you like?'
+                        drink = ask '水、可乐、冰茶、柠檬水还是咖啡?'
+                        number_of_drinks = ask '您想要多少这些饮料？'
 
-                        print 'YOU ORDERED'
+                        print '您订购了'
                         print number_of_drinks ' ' drink
 
-                    'Welcome to Hedy pizza'
-                    more_food = ask 'Would you like to order a pizza?'
-                    while more_food = 'yes'
+                    '欢迎来到海蒂披萨'
+                    more_food = ask '您想订一份披萨吗？'
+                    while more_food = '是'
                         return food_order
-                        more_food = ask 'Would you like to order a pizza?'
-                    more_drinks = ask 'Would you like to order some drinks?'
-                    while more_drinks == 'yes'
+                        more_food = ask '您想订一份披萨吗？'
+                    more_drinks = ask '您想点一些饮料吗？'
+                    while more_drinks == '是'
                         call drink_order
-                        more_drinks == ask 'Would you like to order more drinks?'
+                        more_drinks == ask '您想订购更多饮料吗？'
 
 
-                    print 'Thanks for ordering!'
+                    print '感谢订购！'
                     ```
                 start_code: |4
 
-                                      define food_order
-                                          toppings = ask 'pepperoni, tuna, veggie or cheese?'
-                                          size = ask 'big, medium or small?'
-                                          number_of_pizza = ask 'How many these pizzas would you like?'
+                                        define food_order
+                                            toppings = ask 'pepperoni, tuna, veggie or cheese?'
+                                            size = ask 'big, medium or small?'
+                                            number_of_pizza = ask 'How many these pizzas would you like?'
 
-                                          print 'YOU ORDERED'
-                                          print number_of_pizzas ' size  ' topping ' pizza'
+                                            print 'YOU ORDERED'
+                                            print number_of_pizzas ' size  ' topping ' pizza'
 
-                                      define drinks_order
-                                          drink = ask 'water, coke, icetea, lemonade or coffee?'
-                                          number_of_drinks = ask 'How many of these drinks would you like?'
+                                        define drinks_order
+                                            drink = ask 'water, coke, icetea, lemonade or coffee?'
+                                            number_of_drinks = ask 'How many of these drinks would you like?'
 
-                                          print 'YOU ORDERED'
-                                          print number_of_drinks ' ' drink
+                                            print 'YOU ORDERED'
+                                            print number_of_drinks ' ' drink
 
-                                      'Welcome to Hedy pizza'
-                                      more_food = ask 'Would you like to order a pizza?'
-                                      while more_food = 'yes'
-                                          return food_order
-                                          more_food = ask 'Would you like to order a pizza?'
-                                      more_drinks = ask 'Would you like to order some drinks?'
-                                      while more_drinks == 'yes'
-                                          call drink_order
-                                          more_drinks == ask 'Would you like to order more drinks?'
+                                        'Welcome to Hedy pizza'
+                                        more_food = ask 'Would you like to order a pizza?'
+                                        while more_food = 'yes'
+                                            return food_order
+                                            more_food = ask 'Would you like to order a pizza?'
+                                        more_drinks = ask 'Would you like to order some drinks?'
+                                        while more_drinks == 'yes'
+                                            call drink_order
+                                            more_drinks == ask 'Would you like to order more drinks?'
 
 
-                                      print 'Thanks for ordering!'
+                                        print 'Thanks for ordering!'
             18:
                 story_text: |-
                     ### 练习
                     从第 16 级开始调试这个 Old MacDonald 程序。祝你好运！
-                example_code: |
-                    **Warning! This code needs to be debugged!**
-                    ```
-                    animals = ['pig', 'dog', 'cow']
-                    sounds = ['oink', 'woof', 'moo']
-                    for i in range 1 to 3
-                        animal = animals[i]
-                        sound = sounds[i]
-                        print 'Old McDonald had a farm'
-                        print 'E I E I O!'
-                        print 'and on that farm he had a ' animal
-                        print 'E I E I O!'
-                        print 'with a ' sound sound ' here'
-                        print 'and a ' sound sound ' there'
-                        print 'here a ' sound
-                        print 'there a ' sound
-                        print 'everywhere a ' sound sound
-                    ```
+                example_code: "**警告！ 这段代码需要调试！**\n```\nanimals = ['pig', 'dog', 'cow']\nsounds = ['oink', 'woof', 'moo']\nfor i in range 1 to 3\n    animal = animals[i]\n    sound = sounds[i]\n    print '老麦当劳有一个农场'\n    print 'E I E I O!'\n    print '在那个农场他有一只' animal\n    print 'E I E I O!'\n    print\
+                    \ '这里有‘sound sound\n    print '以及那也有' sound sound \n    print '这里有 ' sound\n    print '那也有 ' sound\n    print '到处有 ' sound sound\n```\n"
                 start_code: |4
 
-                                      animals = ['pig', 'dog', 'cow']
-                                      sounds = ['oink', 'woof', 'moo']
-                                      for i in range 1 to 3
-                                          animal = animals[i]
-                                          sound = sounds[i]
-                                          print 'Old McDonald had a farm'
-                                          print 'E I E I O!'
-                                          print 'and on that farm he had a ' animal
-                                          print 'E I E I O!'
-                                          print 'with a ' sound sound ' here'
-                                          print 'and a ' sound sound ' there'
-                                          print 'here a ' sound
-                                          print 'there a ' sound
-                                          print 'everywhere a ' sound sound
+                                        animals = ['pig', 'dog', 'cow']
+                                        sounds = ['oink', 'woof', 'moo']
+                                        for i in range 1 to 3
+                                            animal = animals[i]
+                                            sound = sounds[i]
+                                            print 'Old McDonald had a farm'
+                                            print 'E I E I O!'
+                                            print 'and on that farm he had a ' animal
+                                            print 'E I E I O!'
+                                            print 'with a ' sound sound ' here'
+                                            print 'and a ' sound sound ' there'
+                                            print 'here a ' sound
+                                            print 'there a ' sound
+                                            print 'everywhere a ' sound sound
     default:
         name: 介绍
         default_save_name: 介绍
@@ -1385,17 +1369,28 @@ adventures:
                     在第一级中，您可能已经注意到 `{echo}`命令一次只能保存一位信息。
                     例如，在餐厅冒险中，您可以回应顾客想吃什么或他们想喝什么，但不能在一句话中同时回应两者。
                 example_code: |
+                    **警告！ 此代码不起作用！**
+                    在 Hedy 中，命令有时会发生变化。 例如，`{echo}` 仅适用于级别 1。在本级别中，您将学习一种更好的方法来回显答案。
                     ```
-                    名字 {is} 海蒂
-                    年龄 {is} 15
-                    {print} 名字 今年 年龄 岁
+                    {print} 欢迎来到 Hedy's
+                    {ask}你想吃什么？
+                    {echo}所以你想要
+                    {ask}你想喝什么？
+                    {echo}所以你想要
                     ```
                 story_text_2: |
-                    `{print}` 仍然可以正常工作，但 `{ask}` 命令已更改。 您还需要在 `{ask}` 命令中使用变量。 它看起来像这样：
+                    如果玩家输入汉堡包和可乐，您不能说“所以您想要汉堡包和可乐”，但您必须创建两条单独的行。
+                    此外，`{echo}`命令仅回显句子末尾的单词。 所以你不能说“你的汉堡包马上就来了！”。
+
+                    这在第 2 级中发生了变化。在第 2 级中，您将学习如何使用变量，它允许您保存多条信息并将其打印在您想要的任何位置。
+                    那么让我们转到下一个选项卡！
                 start_code: '{print} 你好世界!'
             3:
                 story_text: |
-                    在第3级你也可以创建一个列表。你可以让计算机从列表中随机选择一些项目。您可以使用 `{at} {random}` 执行此操作。
+                    在上一关中，您已经了解了变量是什么以及如何使用它来使您的冒险更具互动性。
+                    但是...这并不是您可以使用变量做的唯一事情！ 您还可以使用变量来创建列表。
+                    您甚至可以让 Hedy 从列表中随机选择一个单词，这样您就可以制作真正的游戏！
+                    快速浏览下一个选项卡！
                 start_code: '{print} 你好世界!'
             4:
                 story_text: |
