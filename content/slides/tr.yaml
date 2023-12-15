@@ -497,6 +497,20 @@ levels:
                 {if} answer {is} yes {repeat} 2 {times} {print} 'You knew that already!'
                 {else} {repeat} 3 {times} {print} 'You have learned something new!'
         5:
+            header: Debugging
+            text: Let's debug this code!
+            code: |-
+                    {print} You gave stranded on a desert island.
+                    {repeat} 3 'Help!'
+                    rescued = {ask} Has anybody come to the rescue?
+                    {if} rescued yes {is}
+                    {print} Lucky!
+                    {else} {repeat} 3 {times} 'HELP!'
+                    rescued = 'What about now?'
+                    {if} yes
+                    {print} 'Hurray!
+                    {else} 'That's a shame... Oh well... time to build a shelter and find some food.'
+        6:
             header: Hazır ol Ayarla Başla!
             text: Seviye 7'deki maceraların tadını çıkarın!
     8:
