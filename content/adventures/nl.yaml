@@ -618,7 +618,7 @@ adventures:
                     ### Opdracht 2
                     Maak nu weer een rekensommenoefenprogramma, maar dan met kommagetallen.
                     Maak een lijst met getallen, kies er steeds twee uit, maak er een som mee en laat de speler het juiste antwoord invullen.
-                    Controleer natuurlijk ook of het klopt. **(extra)** Maak het progamma moeilijker met levens. Bij een fout gaat er een leven af, en na drie fouten stopt het spel.
+                    Controleer natuurlijk ook of het klopt. **(extra)** Maak het programma moeilijker met levens. Bij een fout gaat er een leven af, en na drie fouten stopt het spel.
                 example_code: |
                     ```
                     getal1 = {ask} 'Wat is het eerste getal?'
@@ -1107,53 +1107,53 @@ adventures:
                         print i maand
             12:
                 story_text: |-
-                    ### Exercise
-                    Debug this code. Good luck!
+                    ### Opdracht
+                    Debug deze code. Succes!
                 example_code: |
-                    **Warning! This code needs to be debugged!**
+                    **Pas op! Deze code bevat fouten!**
                     ```
-                    define greet
-                    greetings = 'Hello', 'Hi there', 'Goodevening'
-                        print greetings at random
+                    define groet
+                    begroetingen = 'Hallo', 'Hoi!', 'Goedenavond'
+                        print begroetingen at random
 
-                    define take_order
-                        food = ask 'What would you like to eat?'
-                        print 'One food'
-                        drink = 'What would you like to drink?'
-                        print 'One ' drink
-                        more = ask 'Would you like anything else?'
-                            if more is 'no'
-                        print 'Alright'
+                    define bestelling
+                        eten = ask 'Wat wil je eten?'
+                        print 'Een eten'
+                        drinken = 'Wat wil je drinken?'
+                        print 'Een ' drinken
+                        extra = ask 'Wil je daar nog iets bij?'
+                            if extra is 'nee'
+                        print 'Oke'
                             else
-                            print 'And ' more
-                    print 'Thank you'
+                            print 'En ' extra
+                    print 'Dankjewel'
 
-                    print 'Welcome to our restaurant'
-                    people = ask 'How many people are in your party tonight?'
-                    for i in range 0 to people
-                        call greet_costumer
+                    print 'Welkom bij ons restaurant'
+                    mensen = ask 'Met hoeveel personen bent u?'
+                    for i in range 0 to mensen
+                        call groet_klant
                     ```
                 start_code: |
-                    define greet
-                    greetings = 'Hello', 'Hi there', 'Goodevening'
-                        print greetings at random
+                    define groet
+                    begroetingen = 'Hallo', 'Hoi!', 'Goedenavond'
+                        print begroetingen at random
 
-                    define take_order
-                        food = ask 'What would you like to eat?'
-                        print 'One food'
-                        drink = 'What would you like to drink?'
-                        print 'One ' drink
-                        more = ask 'Would you like anything else?'
-                            if more is 'no'
-                        print 'Alright'
+                    define bestelling
+                        eten = ask 'Wat wil je eten?'
+                        print 'Een eten'
+                        drinken = 'Wat wil je drinken?'
+                        print 'Een ' drinken
+                        extra = ask 'Wil je daar nog iets bij?'
+                            if extra is 'nee'
+                        print 'Oke'
                             else
-                            print 'And ' more
-                    print 'Thank you'
+                            print 'En ' extra
+                    print 'Dankjewel'
 
-                    print 'Welcome to our restaurant'
-                    people = ask 'How many people are in your party tonight?'
-                    for i in range 0 to people
-                        call greet_costumer
+                    print 'Welkom bij ons restaurant'
+                    mensen = ask 'Met hoeveel personen bent u?'
+                    for i in range 0 to mensen
+                        call groet_klant
             13:
                 story_text: |-
                     ### Exercise
@@ -1401,33 +1401,33 @@ adventures:
                     ```
                 start_code: |4
 
-                                    define food_order
-                                        toppings = ask 'pepperoni, tuna, veggie or cheese?'
-                                        size = ask 'big, medium or small?'
-                                        number_of_pizza = ask 'How many these pizzas would you like?'
+                                          define food_order
+                                              toppings = ask 'pepperoni, tuna, veggie or cheese?'
+                                              size = ask 'big, medium or small?'
+                                              number_of_pizza = ask 'How many these pizzas would you like?'
 
-                                        print 'YOU ORDERED'
-                                        print number_of_pizzas ' size  ' topping ' pizza'
+                                              print 'YOU ORDERED'
+                                              print number_of_pizzas ' size  ' topping ' pizza'
 
-                                    define drinks_order
-                                        drink = ask 'water, coke, icetea, lemonade or coffee?'
-                                        number_of_drinks = ask 'How many of these drinks would you like?'
+                                          define drinks_order
+                                              drink = ask 'water, coke, icetea, lemonade or coffee?'
+                                              number_of_drinks = ask 'How many of these drinks would you like?'
 
-                                        print 'YOU ORDERED'
-                                        print number_of_drinks ' ' drink
+                                              print 'YOU ORDERED'
+                                              print number_of_drinks ' ' drink
 
-                                    'Welcome to Hedy pizza'
-                                    more_food = ask 'Would you like to order a pizza?'
-                                    while more_food = 'yes'
-                                        return food_order
-                                        more_food = ask 'Would you like to order a pizza?'
-                                    more_drinks = ask 'Would you like to order some drinks?'
-                                    while more_drinks == 'yes'
-                                        call drink_order
-                                        more_drinks == ask 'Would you like to order more drinks?'
+                                          'Welcome to Hedy pizza'
+                                          more_food = ask 'Would you like to order a pizza?'
+                                          while more_food = 'yes'
+                                              return food_order
+                                              more_food = ask 'Would you like to order a pizza?'
+                                          more_drinks = ask 'Would you like to order some drinks?'
+                                          while more_drinks == 'yes'
+                                              call drink_order
+                                              more_drinks == ask 'Would you like to order more drinks?'
 
 
-                                    print 'Thanks for ordering!'
+                                          print 'Thanks for ordering!'
             18:
                 story_text: |-
                     ### Exercise
@@ -1452,20 +1452,20 @@ adventures:
                     ```
                 start_code: |4
 
-                                    animals = ['pig', 'dog', 'cow']
-                                    sounds = ['oink', 'woof', 'moo']
-                                    for i in range 1 to 3
-                                        animal = animals[i]
-                                        sound = sounds[i]
-                                        print 'Old McDonald had a farm'
-                                        print 'E I E I O!'
-                                        print 'and on that farm he had a ' animal
-                                        print 'E I E I O!'
-                                        print 'with a ' sound sound ' here'
-                                        print 'and a ' sound sound ' there'
-                                        print 'here a ' sound
-                                        print 'there a ' sound
-                                        print 'everywhere a ' sound sound
+                                          animals = ['pig', 'dog', 'cow']
+                                          sounds = ['oink', 'woof', 'moo']
+                                          for i in range 1 to 3
+                                              animal = animals[i]
+                                              sound = sounds[i]
+                                              print 'Old McDonald had a farm'
+                                              print 'E I E I O!'
+                                              print 'and on that farm he had a ' animal
+                                              print 'E I E I O!'
+                                              print 'with a ' sound sound ' here'
+                                              print 'and a ' sound sound ' there'
+                                              print 'here a ' sound
+                                              print 'there a ' sound
+                                              print 'everywhere a ' sound sound
     default:
         name: Introductie
         default_save_name: intro
@@ -2232,7 +2232,7 @@ adventures:
                     Om een functie te maken, gebruik je `{define}` en geef je de functie een naam. Daarna zet je er regels code onder in een ingesprongen blokje.
                     Sla daarna een regel over om je code mooi en overzichtelijk te houden. Goed werk! Je hebt een functie gemaakt!
 
-                    Als je nu dit blokje wil gebruikne, dan gebruik je  <code>{call}</code>  en de naam van de functie. Zo hieven we de code niet vaker te typen.
+                    Als je nu dit blokje wil gebruiken, dan gebruik je  <code>{call}</code>  en de naam van de functie. Zo hoeven we de code niet vaker te typen.
                     Kijk maar eens naar ons Twistervoorbeeld. De functie 'draai' bevat een blok code dat een kleur en een ledemaat kiest.
 
                     ### Opdracht
@@ -3293,7 +3293,7 @@ adventures:
                     {print} superhelden {at} {random}
                     ```
                 story_text_3: |
-                    **Tekst moet ook aanhalingstekens na een `{if}` commando**
+                    **Tekst moet ook met aanhalingstekens na een `{if}` commando**
                 example_code_3: |
                     ```
                     naam = {ask} 'Wie ben jij?'
