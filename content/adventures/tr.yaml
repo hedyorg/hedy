@@ -330,13 +330,7 @@ adventures:
                     _
                     {print} Size çeşitler {at} {random} milkshake hazırladık
                     ```
-                start_code: |-
-                    hayvanlar {is} köpek, kedi, kanguru
-                    sevilen {is} {ask} En sevdiğin hayvan hangisi?
-                    {add} sevilen {to_list} hayvanlar
-                    sevilmeyen {is} {ask} Hangi hayvanı sevmiyorsun?
-                    {remove} sevilmeyen {from} hayvanlar
-                    {print} Benim seçtiğim bir hayvanlar {at} {random}
+
     and_or_command:
         name: '{and} & {or}'
         default_save_name: ve veya
@@ -354,10 +348,7 @@ adventures:
                     {if} isim {is} 'Hedy' {and} yaş {is} 2
                         {print} "Sen gerçek Hedy'sin!"
                     ```
-                start_code: |-
-                    isim = {ask} 'Adınız nedir?'
-                    yaş = {ask} 'Yaşınız kaç?'
-                    {if} isim {is} 'Hedy' {and} yaş {is} 2
+
                         {print} "Sen gerçek Hedy'sin!"
     ask_command:
         name: '{ask}'
@@ -417,11 +408,7 @@ adventures:
                     favori_hayvan {is} {ask} En sevdiğin hayvan hangisi?
                     {print} En sevdiğim hayvan favori_hayvan
                     ```
-                start_code: |-
-                    isim {is} {ask} Senin adın ne?
-                    {print} Merhaba isim
-                    yaş {is} {ask} Kaç yaşındasın?
-                    {print} name age yaşındadır.
+
             18:
                 story_text: Python kodunu elde etmek için yapmamız gereken son değişiklik `{ask}` ifadesini `{input}` olarak değiştirmektir.
                 example_code: |
@@ -1399,9 +1386,7 @@ adventures:
                     ```
                     şifre {is} {ask} 'Doğru şifre nedir?'
                     ```
-                start_code: |-
-                    isim {is} {ask} 'Senin adın ne?'
-                    {if} isim {is} Hedy {print} 'havalıymış!' {else} {print} 'eh işte'
+
             6:
                 story_text: |
                     Önceki seviyede `{ask}` ve `{if}` ile pratik yaptınız. Örneğin artık konuklara ne yemek istediklerini sorabilirsiniz.
@@ -1865,10 +1850,7 @@ adventures:
                     {for} hayvan {in} hayvanlar
                         {print} 'Benim sevdiğim ' hayvan
                     ```
-                start_code: |-
-                    hayvanlar {is} köpek, kedi, balık
-                    {for} hayvan {in} hayvanlar
-                        {print} 'Benim sevdiğim ' hayvan
+
             11:
                 story_text: |-
                     Bu seviyede, `{for}` in yeni bir şeklini ekliyoruz. Daha önceki seviyelerde `{for}` i bir liste ile kullanmıştık, ancak `{for}` ni sayılarla da kullanabiliriz.
@@ -1881,10 +1863,7 @@ adventures:
                         {print} sayaç
                     {print} 'önüm arkam sağım solum sobe!'
                     ```
-                start_code: |-
-                    {for} sayaç {in} {range} 1 {to} 10
-                        {print} sayaç
-                    {print} 'önüm arkam sağım solum sobe!'
+
             17:
                 story_text: |
                     Şimdi girintilemeyi biraz değiştireceğiz. Girintiye her ihtiyaç duyduğumuzda, girintiden önceki satırda `:` işaretine ihtiyacımız var.
@@ -2550,10 +2529,7 @@ adventures:
                     _ _ _ 4 _ 'Harikasın!'
                     _ _ 'Hayır, 2 + 2 = 4'
                     ```
-                start_code: |-
-                    isim {is} {ask} 'senin adın ne?'
-                    {if} isim {is} Hedy {print} 'güzel'
-                    {else} {print} 'böö!'
+
             8:
                 story_text: |
                     ## eğer... değilse...
@@ -2613,11 +2589,7 @@ adventures:
                     _ cevap _ hayvanlar _ 'Benimki de öyle!'
                     _ _ 'En sevdiğim hayvanlar köpekler, inekler ve koyunlar'
                     ```
-                start_code: |-
-                    güzel_renkler {is} yeşil, sarı
-                    favori_renk {is} {ask} 'En sevdiğin renk nedir?'
-                    {if} favori_renk {in} güzel_renkler {print} 'güzel!'
-                    {else} {print} 'eh işte'
+
     is_command:
         name: '{is}'
         default_save_name: eşit_komutu
@@ -2643,10 +2615,7 @@ adventures:
                     favori_hayvan {is} _
                     {print} En sevdiğim havyan favori_hayvan
                     ```
-                start_code: |-
-                    isim {is} Hedy
-                    yaş {is} 15
-                    {print} name age yaşındadır
+
             6:
                 story_text: |
                     Bir kelimeyi bir değişkende saklama konusunda da bir değişiklik yapıyoruz! Artık bir değişkende bir isim veya sayı sakladığımızda `{is}` yerine `=` kullanabilirsiniz, bunun gibi:
@@ -2687,8 +2656,7 @@ adventures:
                     {if} isim != 'Hedy'
                         {print} 'Sen Hedy değilsin.'
                     ```
-                start_code: |-
-                    yaş = {ask} 'Kaç yaşındasın?'
+
                     {if} yaş < 13
                         {print} 'Sen benden daha gençsin!'
                     {else}
@@ -2781,8 +2749,7 @@ adventures:
                     b = 'world!'
                     {print} a + b
                     ```
-                start_code: |-
-                    {print} 'ondalık sayıların artık bir nokta kullanması gerekiyor'
+
                     {print} 2.5 + 2.5
     parrot:
         name: Papağan
@@ -3033,8 +3000,7 @@ adventures:
                     sıcaklık = 25
                     {print}('Hava dışarıda ', sıcaklık, ' derece')
                     ```
-                start_code: |-
-                    isim = 'Hedy'
+
                     {print}('Benim adım ', isim)
     quizmaster:
         name: Kısa sınav ustası
@@ -3095,10 +3061,7 @@ adventures:
                     {print} 'Ayşe'nin çocuklarına bakıyorum.'
                     {print} 'Çocuklarla oyun'dan daha eğlenceli ne olabilir ki?'
                     ```
-                start_code: |-
-                    {print} 'Şu andan itibaren tırnak işareti kullanmanız gerekiyor!'
-                    cevap {is} {ask} 'Bundan sonra ne kullanmamız gerekiyor?'
-                    {print} 'Bundan sonra ' cevap ' kullanmamız gerekiyor'
+
             12:
                 story_text: |
                     **Tüm metinlerin tırnak içinde olması gerekir**
@@ -3133,10 +3096,7 @@ adventures:
                     puan = 25
                     {print} 'Puanın ' puan
                     ```
-                start_code: |-
-                    isim = {ask} 'Senin adın ne?'
-                    {if} isim = 'Robot Hedy'
-                        {print} 'Merhaba!'
+
     random_command:
         name: '{random}'
         default_save_name: restgele_komutu
@@ -3234,10 +3194,7 @@ adventures:
                         {print} 'Herkese merhaba'
                         {print} 'Bunların hepsi 5 kez tekrarlanır'
                     ```
-                start_code: |-
-                    {repeat} 5 {times}
-                        {print} 'Herkese merhaba'
-                        {print} 'Bu 5 kez yazdırılacaktır'
+
             9:
                 story_text: |
                     Bu seviyede sadece `{if}` ve `{repeat}` ile birden fazla satır kullanmakla kalmaz, aynı zamanda bunları bir araya da getirebilirsiniz!
@@ -3252,13 +3209,7 @@ adventures:
                         {else}
                             {print} 'pizza daha iyi olur'
                     ```
-                start_code: |-
-                    {repeat} 3 {times}
-                        yemek = {ask} 'Ne yemek istiyorsun?'
-                        {if} yemek {is} pizza
-                            {print} 'güzel!'
-                        {else}
-                            {print} 'pizza daha iyi olur'
+
     repeat_command_2:
         name: '{repeat} 2'
         default_save_name: tekrarla_komutu_2
@@ -3284,10 +3235,7 @@ adventures:
                     yaş = {ask} 'Şimdi kaç yaşındasın?'
                     {repeat} yaş {times} {print} 'Hey Çok Yaşa!'
                     ```
-                start_code: |-
-                    {repeat} 2 {times} cevap = {ask} 'Bir soruyu birden fazla kez sorabileceğinizi biliyor muydunuz?'
-                    {if} cevap {is} evet {repeat} 2 {times} {print} 'Demek bunu zaten biliyordunuz'
-                    {else} {repeat} 3 {times} {print} 'Artık yeni bir şey öğrendiniz!'
+
             8:
                 story_text: |
                     ### blok mu değil mi?
@@ -3305,11 +3253,7 @@ adventures:
                     _ {print} 'çörek adamı'
                     _ {print} 'kim tanır çörek adamı, nerede yaşıyor?'
                     ```
-                start_code: |-
-                    {repeat} 3 {times}
-                        {print} 'Bu satır tekrarlanacaktır...'
-                        {print} 'Bu da öyle...'
-                    {print} 'ama bu değil!'
+
     restaurant:
         name: Restoran
         default_save_name: Restoran
@@ -3876,10 +3820,7 @@ adventures:
                     {sleep} 2
                     {print} yeşil!
                     ```
-                start_code: |-
-                    {print} En sevdiğim renk...
-                    {sleep} 2
-                    {print} yeşil!
+
     songs:
         name: Bir şarkı söyle!
         default_save_name: Şarkı
@@ -4372,9 +4313,7 @@ adventures:
                     {turn} {left}
                     {forward} 20
                     ```
-                start_code: |-
-                    {forward} 50
-                    {turn} {left}
+
             2:
                 story_text: |
                     Bu seviyede, kaplumbağayı etkileşimli hale getirmek için değişkenler kullanabilirsiniz. Örneğin oyuncuya kaplumbağanın kaç adım atması gerektiğini sorabilirsiniz.
@@ -4400,11 +4339,7 @@ adventures:
                     {turn} açı
                     {forward} 25
                     ```
-                start_code: |-
-                    {print} Kaplumbağa yarışı!
-                    açı {is} 90
-                    {turn} açı
-                    {forward} 25
+
             3:
                 story_text: |
                     Bu seviyede, çizim kaplumbağamız ile `{at} {random}` kullanabilirsiniz. Rastgele bir seçim, kaplumbağanın her seferinde farklı bir yolda yürümesini sağlar.
@@ -4417,10 +4352,7 @@ adventures:
                     {turn} açılar {at} {random}
                     {forward} 25
                     ```
-                start_code: |-
-                    açılar {is} 10, 50, 90, 150, 250
-                    {turn} açılar {at} {random}
-                    {forward} 25
+
             4:
                 story_text: |
                     4. seviyede, `{print}` ve `{ask}` ile tırnak işareti kullanmanız gerekecek. Ayrıca çizim yaparken de!
@@ -4447,11 +4379,7 @@ adventures:
                     {color} {red}
                     {forward} 50
                     ```
-                start_code: |-
-                    {print} 'Çizim yapılıyor'
-                    açı {is} 90
-                    {turn} açı
-                    {forward} 25
+
             5:
                 story_text: |
                     5. seviyede, `{if}` ile bir seçim yapabilirsiniz. Örneğin farklı şekil türleri arasında.
@@ -4484,12 +4412,7 @@ adventures:
                     {if} yön {is} sağ {turn} _
                     {forward} 100
                     ```
-                start_code: |-
-                    {print} 'Çizim yapılıyor'
-                    şekil {is} {ask} 'Kare mi yoksa üçgen mi istiyorsunuz?'
-                    {if} şekil {is} üçgen açı {is} 120 {else} açı {is} 90
-                    {turn} açı
-                    {forward} 25
+
             6:
                 story_text: |
                     Bu seviyede, farklı şekiller çizmek için hesaplamaları kullanabilirsiniz.
@@ -4955,11 +4878,7 @@ adventures:
                         cevap = {ask} '5 kere 5 kaç eder?'
                     {print} 'Doğru cevap verilmiştir'
                     ```
-                start_code: |-
-                    cevap = 0
-                    {while} cevap != 25
-                        cevap = {ask} '5 kere 5 kaç eder?'
-                    {print} 'Doğru cevap verilmiştir'
+
     years:
         name: Yeni Yıl
         default_save_name: Yeni Yıl Geri Sayımı

@@ -323,8 +323,7 @@ adventures:
                     _
                     {print} Recibe un batido de sabores {at} {random}
                     ```
-                start_code: |-
-                    animales {is} perro, gato, canguro
+
                     gustar {is} {ask} ¿Cuál es tu animal preferido?
                     {add} gustar {to_list} animales
                     no_gustar {is} {ask} ¿Qué animal no te gusta?
@@ -1851,10 +1850,7 @@ adventures:
                     {for} animal {in} animales
                         {print} 'Yo amo ' animal
                     ```
-                start_code: |-
-                    animales {is} perro, gato, pez globo
-                    {for} animal {in} animales
-                        {print} 'Yo amo ' animal
+
             11:
                 story_text: |-
                     En este nivel, añadimos una nueva forma del `{for}`. En niveles anteriores, usamos `{for}` con una lista, pero también podemos usar `{for}` con números.
@@ -1867,10 +1863,7 @@ adventures:
                         {print} contador
                     {print} 'Listos o no, allí voy.'
                     ```
-                start_code: |-
-                    {for} contador {in} {range} 1 {to} 10
-                        {print} contador
-                    {print} 'Listo o no. ¡Allá voy!'
+
             17:
                 story_text: |
                     Ahora vamos a cambiar la sangría un poco. Cada vez que necesitemos una sangría, necesitamos `:` en la línea antes de la sangría.
@@ -2521,10 +2514,7 @@ adventures:
                     _ _ _ 4 _ '¡Gran trabajo!'
                     _ _ 'No 2 + 2 = 4'
                     ```
-                start_code: |-
-                    nombre {is} {ask} '¡cuál es tu nombre?'
-                    {if} nombre {is} Hedy {print} 'genial'
-                    {else} {print} 'boo!'
+
             8:
                 story_text: |
                     ## Si… Sino…
@@ -2588,8 +2578,7 @@ adventures:
                     _ respuesta _ animales _ '¡También el mío!'
                     _ _ 'Mis animales preferidos son perros, vacas y ovejas'
                     ```
-                start_code: |-
-                    colores_bonitos {is} verde, amarillo
+
                     color_favorito {is} {ask} '¿Cuál es tu color preferido?'
                     {if} color_favorito {in} colores_bonitos {print} '¡bonito!'
                     {else} {print} 'meh'
@@ -2618,10 +2607,7 @@ adventures:
                     animales_favoritos {is} _
                     {print} me gusta animales_favoritos
                     ```
-                start_code: |-
-                    nombre {is} Hedy
-                    edad {is} 15
-                    {print} nombre tiene edad años
+
             6:
                 story_text: |
                     ¡También hacemos un cambio al almacenar una palabra en una variable! Ahora se puede utilizar `=` en lugar de `{is}` cuando almacenamos un nombre o un número en una variable, así:
@@ -2756,8 +2742,7 @@ adventures:
                     b = 'world!'
                     {print} a + b
                     ```
-                start_code: |-
-                    {print} 'los números decimales ahora tienen que usar un punto'
+
                     {print} 2.5 + 2.5
     parrot:
         name: Loro
@@ -3011,8 +2996,7 @@ adventures:
                     temperatura = 25
                     {print}('Hay ', temperatura, ' grados fuera')
                     ```
-                start_code: |-
-                    nombre = 'Hedy'
+
                     {print}('Mi nombre es ', nombre)
     quizmaster:
         name: Presentador
@@ -3073,8 +3057,7 @@ adventures:
                     {print} 'I'm babysitting my sister's kids'
                     {print} 'What's more fun than that?'
                     ```
-                start_code: |-
-                    {print} '¡Debes usar comillas a partir de ahora!'
+
                     answer {is} {ask} '¿Qué tenemos que usar a partir de ahora?'
                     {print} 'Necesitamos usar ' answer 'de ahora en adelante'
             12:
@@ -3212,10 +3195,7 @@ adventures:
                         {print} 'Hola a todos'
                         {print} 'Todo esto se repite 5 veces'
                     ```
-                start_code: |-
-                    {repeat} 5 {times}
-                        {print} 'Hola a todos'
-                        {print} 'Esto se imprimirá 5 veces'
+
             9:
                 story_text: |
                     En este nivel no puedes usar varias líneas sólo con `{if}` y `{repeat}`, ¡pero si puedes juntarlas!
@@ -3230,8 +3210,7 @@ adventures:
                         {else}
                             {print} 'la pizza es mejor'
                     ```
-                start_code: |-
-                    {repeat} 3 {times}
+
                         comida = {ask} '¿Qué quieres?'
                         {if} comida {is} pizza
                             {print} '¡genial!'
@@ -3283,11 +3262,7 @@ adventures:
                     _ {print} 'El hombre magdalena'
                     _ {print} '¿Conoces al hombre magdalena, que vive en la Calle Drury?'
                     ```
-                start_code: |-
-                    {repeat} 3 {times}
-                        {print} 'Esta línea se repetirá...'
-                        {print} 'Esta también...'
-                    {print} '¡pero esta no!'
+
     restaurant:
         name: Restaurante
         default_save_name: Restaurante
@@ -3842,10 +3817,7 @@ adventures:
                     {sleep} 2
                     {print} ¡verde!
                     ```
-                start_code: |-
-                    {print} Mi color favorito es...
-                    {sleep} 2
-                    {print} ¡verde!
+
     songs:
         name: ¡Canta una canción!
         default_save_name: Canción
@@ -4329,9 +4301,7 @@ adventures:
                     {turn} {left}
                     {forward} 20
                     ```
-                start_code: |-
-                    {forward} 50
-                    {turn} {left}
+
             2:
                 story_text: |
                     En este nivel puedes utilizar variables para hacer tu tortuga interactiva. Por ejemplo, puedes preguntar al jugador cuantos pasos dará la tortuga.
@@ -4357,11 +4327,7 @@ adventures:
                     {turn} ángulo
                     {forward} 25
                     ```
-                start_code: |-
-                    {print} ¡Carrera de tortugas!
-                    ángulo {is} 90
-                    {turn} ángulo
-                    {forward} 25
+
             3:
                 story_text: |
                     En este nivel, puedes utilizar `{at} {random}` con la tortuga que dibuja. Una elección aleatoria hace que la tortuga camine por un camino diferente cada vez.
@@ -4374,10 +4340,7 @@ adventures:
                     {turn} ángulos {at} {random}
                     {forward} 25
                     ```
-                start_code: |-
-                    angulo {is} 10, 50, 90, 150, 250
-                    {turn} angulo {at} {random}
-                    {forward} 25
+
             4:
                 story_text: |
                     En nivel 3 tienes que usar comillas con `{print}` y `{ask}`. ¡También al dibujar!
@@ -4404,11 +4367,7 @@ adventures:
                     {color} {red}
                     {forward} 50
                     ```
-                start_code: |-
-                    {print} 'Dibujando figuras'
-                    ángulo {is} 90
-                    {turn} ángulo
-                    {forward} 25
+
             5:
                 story_text: |
                     En nivel 5 puede elegir con `{if}`. Por ejemplo, entre diferentes tipos de figuras.
@@ -4441,8 +4400,7 @@ adventures:
                     {if} dirección {is} izquierda {turn} _
                     {forward} 100
                     ```
-                start_code: |-
-                    {print} 'Dibujando figuras'
+
                     figura {is} {ask} '¿Quieres un cuadrado o un triángulo?'
                     {if} figura {is} triángulo ángulo {is} 120 {else} ángulo {is} 90
                     {turn} ángulo
@@ -4904,9 +4862,7 @@ adventures:
                         respuesta = {ask} '¿Cuánto es 5 veces 5?'
                     {print} 'La respuesta es correcta'
                     ```
-                start_code: |-
-                    respuesta = 0
-                    {while} respuesta != 25
+
                         respuesta = {ask} '¿Cuánto es 5 veces 5?'
                     {print} 'La respuesta es correcta'
     years:

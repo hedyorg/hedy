@@ -330,13 +330,7 @@ adventures:
                     _
                     {print} Du får en milkshake med smaker {at} {random}
                     ```
-                start_code: |-
-                    djur {is} hund, katt, känguru
-                    gillar {is} {ask} Vilket är ditt favoritdjur?
-                    {add} gillar {to_list} djur
-                    ogillar {is} {ask} Vilket djur gillar du inte?
-                    {remove} ogillar {from} djur
-                    {print} Jag väljer djur {at} {random}
+
     and_or_command:
         name: '{and} & {or}'
         default_save_name: och eller
@@ -354,11 +348,7 @@ adventures:
                     {if} namn {is} 'Hedy' {and} ålder {is} 2
                         {print} 'Du är den riktiga Hedy!'
                     ```
-                start_code: |-
-                    namn = {ask} 'vad heter du?'
-                    ålder = {ask} 'hur gammal är du?'
-                    {if} namn {is} 'Hedy' {and} ålder {is} 2
-                        {print} 'Du är den riktiga Hedy!'
+
     ask_command:
         name: '{ask}'
         default_save_name: kommandot_fråga
@@ -419,11 +409,7 @@ adventures:
                     favoritdjur is ask Vilket är ditt favoritdjur?
                     print Jag gillar favoritdjur
                     ```
-                start_code: |-
-                    namn {is} {ask} Vad heter du?
-                    {print} Hej namn
-                    ålder {is} {ask} Hur gammal är du?
-                    {print} namn är ålder år gammal.
+
             18:
                 story_text: |
                     Den sista ändringen vi behöver göra för att få Python-kod är att ändra `{ask}` till `{input}`.
@@ -1395,9 +1381,7 @@ adventures:
                     ```
                     lösenord {is} {ask} 'Vad är rätt lösenord?'
                     ```
-                start_code: |-
-                    namn {is} {ask} 'Vad heter du?'
-                    {if} namn {is} Hedy {print} 'cool!' {else} {print} 'meh'
+
             6:
                 story_text: |
                     På föregående nivå har du övat med `{ask}` och `{if}`. Du kan till exempel fråga gästerna vad de skulle vilja äta.
@@ -1857,10 +1841,7 @@ adventures:
                     {for} djuret {in} djur
                         {print} 'Jag älskar ' djuret
                     ```
-                start_code: |-
-                    djur {is} hund, katt, marulk
-                    {for} djuret {in} djur
-                        {print} 'Jag älskar ' djuret
+
             11:
                 story_text: |-
                     På den här nivån lägger vi till en ny form av `{for}`. På tidigare nivåer använde vi `{for}` med en lista, men vi kan också använda `{for}` med tal.
@@ -1873,10 +1854,7 @@ adventures:
                         {print} räknare
                     {print} 'Redo eller icke, nu kommer jag!'
                     ```
-                start_code: |-
-                    {for} räknare {in} {range} 1 {to} 10
-                        {print} räknare
-                    {print} 'Redo eller icke, nu kommer jag!'
+
             17:
                 story_text: |
                     Nu ska vi ändra reglerna för indragning lite. Varje gång vi behöver en indragning måste vi ha `:` på raden före indragningen.
@@ -2523,10 +2501,7 @@ adventures:
                     _ _ _ 4 _ 'Bra jobbat!'
                     _ _ 'Nej, 2 + 2 = 4'
                     ```
-                start_code: |-
-                    namn {is} {ask} 'vad heter du?'
-                    {if} namn {is} Hedy {print} 'nice'
-                    {else} {print} 'bu!'
+
             8:
                 story_text: |
                     ## Om … Annars …
@@ -2588,11 +2563,7 @@ adventures:
                     _ svar _ djur _ 'Mitt också!'
                     _ _ 'Mina favoritdjur är hundar, kor och får'
                     ```
-                start_code: |-
-                    snygga_färger {is} grön, gul
-                    favoritfärg {is} {ask} 'Vilken är din favoritfärg?'
-                    {if} favoritfärg {in} snygga_färger {print} 'snyggt!'
-                    {else} {print} 'meh'
+
     is_command:
         name: '{is}'
         default_save_name: kommandot_är
@@ -2618,10 +2589,7 @@ adventures:
                     favoritdjur är _
                     {print} Jag gillar favoritdjur
                     ```
-                start_code: |-
-                    namn {is} Hedy
-                    ålder {is} 15
-                    {print} namn är ålder år gammal
+
             6:
                 story_text: |
                     We also make a change in storing a word in a variable! You may now use `=` instead of  `{is}` when we store a name or a number in a variable, like this:
@@ -2662,8 +2630,7 @@ adventures:
                     {if} namn != 'Hedy'
                         {print} 'Du är inte Hedy'
                     ```
-                start_code: |-
-                    ålder = {ask} 'Hur gammal är du?'
+
                     {if} ålder < 13
                         {print} 'Du är yngre än jag!'
                     {else}
@@ -2751,8 +2718,7 @@ adventures:
                     b = 'world!'
                     {print} a + b
                     ```
-                start_code: |-
-                    {print} 'decimaltal behöver nu använda en punkt'
+
                     {print} 2.5 + 2.5
     parrot:
         name: Papegoja
@@ -3003,8 +2969,7 @@ adventures:
                     temperatur = 25
                     {print}('Det är ', temperatur, ' grader ute')
                     ```
-                start_code: |-
-                    namn = 'Hedy'
+
                     {print}('Jag heter ', namn)
     quizmaster:
         name: Quizmästare
@@ -3065,10 +3030,7 @@ adventures:
                     {print} 'I'm babysitting my sister's kids'
                     {print} 'What's more fun than that?'
                     ```
-                start_code: |-
-                    {print} 'Du måste använda citattecken från och med nu!'
-                    svar {is} {ask} 'Vad behöver vi använda från och med nu?'
-                    {print} 'Vi måste använda ' svar
+
             12:
                 story_text: |
                     **All text måste stå inom citattecken**
@@ -3103,10 +3065,7 @@ adventures:
                     poäng = 25
                     {print} 'Du har ' poäng ' poäng'
                     ```
-                start_code: |-
-                    namn = {ask} 'Vad heter du?'
-                    {if} namn = 'Roboten Hedy'
-                        {print} 'Hej på dig!'
+
     random_command:
         name: random
         default_save_name: kommandot_random
@@ -3204,10 +3163,7 @@ adventures:
                         {print} 'Hej allihop'
                         {print} 'Allt detta upprepas fem gånger'
                     ```
-                start_code: |-
-                    {repeat} 5 {times}
-                        {print} 'Hej allihop!'
-                        {print} 'Detta kommer att skrivas ut fem gånger'
+
             9:
                 story_text: |
                     På den här nivån kan du inte bara använda flera rader med `{if}` och `{repeat}`, utan du kan också sätta ihop dem!
@@ -3222,13 +3178,7 @@ adventures:
                         {else}
                             {print} 'pizza är bättre'
                     ```
-                start_code: |-
-                    {repeat} 3 {times}
-                        mat = {ask} 'Vad vill du äta?'
-                        {if} mat {is} pizza
-                            {print} 'najs!'
-                        {else}
-                            {print} 'pizza är bättre'
+
     repeat_command_2:
         name: '{repeat} 2'
         default_save_name: kommandot_upprepa_2
@@ -3254,10 +3204,7 @@ adventures:
                     ålder = {ask} 'Hur gammal är du nu?'
                     {repeat} ålder {times} {print} 'Hipp hipp hurra!'
                     ```
-                start_code: |-
-                    {repeat} 2 {times} svar = {ask} 'Visste du att du kan ställa en fråga flera gånger?'
-                    {if} svar {is} ja {repeat} 2 {times} {print} 'Det visste du redan!'
-                    {else} {repeat} 3 {times} {print} 'Du har lärt dig något nytt!'
+
             8:
                 story_text: |
                     ### Inuti blocket eller inte?
@@ -3275,8 +3222,7 @@ adventures:
                     _ {print} 'The muffin man'
                     _ {print} 'Do you know the muffin man, who lives on Drury Lane?'
                     ```
-                start_code: |-
-                    {repeat} 3 {times}
+
                         {print} 'Den här raden kommer att upprepas …'
                         {print} 'Den här också …'
                     {print} 'men inte denna!'
@@ -4332,9 +4278,7 @@ adventures:
                     {turn} {left}
                     {forward} 20
                     ```
-                start_code: |-
-                    {forward} 50
-                    {turn} {left}
+
             2:
                 story_text: |
                     På den här nivån kan du använda variabler för att göra sköldpaddan interaktiv. Du kan t.ex. fråga spelaren hur många steg sköldpaddan ska ta.
@@ -4360,11 +4304,7 @@ adventures:
                     {turn} vinkel
                     {forward} 25
                     ```
-                start_code: |-
-                    {print} Sköldpaddslopp!
-                    vinkel {is} 90
-                    {turn} vinkel
-                    {forward} 25
+
             3:
                 story_text: |
                     På den här nivån kan du använda `{at} {random}` med sköldpaddan. Ett slumpmässigt val gör att sköldpaddan går en annan väg varje gång.
@@ -4377,10 +4317,7 @@ adventures:
                     {turn} vinklar {at} {random}
                     {forward} 25
                     ```
-                start_code: |-
-                    vinklar {is} 10, 50, 90, 150, 250
-                    {turn} vinklar {at} {random}
-                    {forward} 25
+
             4:
                 story_text: |
                     På nivå 4 måste du använda citattecken med `{print}` och `{ask}`. Även när du ritar!
@@ -4407,11 +4344,7 @@ adventures:
                     {color} {red}
                     {forward} 50
                     ```
-                start_code: |-
-                    {print} 'Rita figurer'
-                    vinkel {is} 90
-                    {turn} vinkel
-                    {forward} 25
+
             5:
                 story_text: |
                     På nivå 5 kan du göra ett val med `{if}`, till exempel mellan olika typer av figurer.
@@ -4444,12 +4377,7 @@ adventures:
                     {if} riktning {is} höger {turn} _
                     {forward} 100
                     ```
-                start_code: |-
-                    {print} 'Rita figurer'
-                    figur {is} {ask} 'Vill du ha en kvadrat eller triangel?'
-                    {if} figur {is} triangel vinkel {is} 120 {else} vinkel {is} 90
-                    {turn} vinkel
-                    {forward} 25
+
             6:
                 story_text: |
                     På den här nivån kan du använda beräkningar för att rita olika figurer.
@@ -4906,11 +4834,7 @@ adventures:
                         svar = {ask} 'Vad är 5 gånger 5?'
                     {print} 'Ett korrekt svar har getts'
                     ```
-                start_code: |-
-                    svar = 0
-                    {while} svar != 25
-                        svar = {ask} 'Vad är 5 gånger 5?'
-                    {print} 'Ett korrekt svar har getts'
+
     years:
         name: Nyårsdagen
         default_save_name: Nedräkning till nyår

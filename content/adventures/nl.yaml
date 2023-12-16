@@ -330,11 +330,7 @@ adventures:
                     {if} naam {is} 'Hedy' {and} leeftijd {is} 2
                         {print} 'Jij bent de echte Hedy!'
                     ```
-                start_code: |-
-                    naam = {ask} 'hoe heet jij?'
-                    leeftijd = {ask} 'hoe oud ben jij?'
-                    {if} naam {is} 'Hedy' {and} leeftijd {is} 2
-                        {print} 'Jij bent de echte Hedy!'
+
     ask_command:
         name: '{ask}'
         default_save_name: vraag_commando
@@ -383,11 +379,7 @@ adventures:
                     lievelingsdier {is} {ask} Wat is je lievelingsdier?
                     {print} Ik hou van lievelingsdier
                     ```
-                start_code: |-
-                    naam {is} {ask} Hoe heet je?
-                    {print} Hoi naam
-                    leeftijd {is} {ask} Hoe oud ben je?
-                    {print} naam is leeftijd jaar oud.
+
             18:
                 story_text: Als laatste veranderen we het woord dat je moet gebruiken voor `{ask}`. Vanaf nu noemen we ask`{input}`.
                 example_code: |
@@ -1353,9 +1345,7 @@ adventures:
                     ```
                     wachtwoord {is} {ask} 'Wat is het juiste wachtwoord?'
                     ```
-                start_code: |-
-                    naam {is} {ask} 'Hoe heet jij?'
-                    {if} naam {is} Hedy {print} 'cool!' {else} {print} 'meh'
+
             6:
                 story_text: |
                     In het vorige level heb je geoefend met `{ask}` en `{if}`. Zo heb je in het restaurant bijvoorbeeld aan je klanten gevraagd wat ze wilden eten.
@@ -1814,10 +1804,7 @@ adventures:
                     {for} dier {in} dieren
                       {print} dier ' is een leuk dier!'
                     ```
-                start_code: |-
-                    dieren {is} hond, kat, papegaai
-                    {for} dier {in} dieren
-                      {print} dier ' is een leuk dier!'
+
             11:
                 story_text: |-
                     We gaan nu een extra vorm van de `{for}` toevoegen! In vorige levels gebruikten we de `{for}` altijd met een lijst. Maar nu mag je `{for}` ook gebruiken met getallen.
@@ -1830,10 +1817,7 @@ adventures:
                         {print} i
                     {print} 'Wie niet weg is, is gezien'
                     ```
-                start_code: |-
-                    {for} i {in} {range} 1 {to} 10
-                        {print} i
-                    {print} 'Wie niet weg is, is gezien'
+
             17:
                 story_text: |
                     Er komt nu een kleine verandering in het inspringen. Elke keer als er moet worden ingesprongen, moet je een `:` typen in de regel daarvoor.
@@ -2483,10 +2467,7 @@ adventures:
                     _ _ _ 4 _ 'Goedzo!'
                     _ _ 'Nee 2 + 2 = 4'
                     ```
-                start_code: |-
-                    naam {is} {ask} 'hoe heet jij?'
-                    {if} naam {is} Hedy {print} 'leuk'
-                    {else} {print} 'minder leuk!'
+
             8:
                 story_text: |
                     Je hebt al geleerd hoe je een blok aan regels code kunt herhalen met`{repeat}`.
@@ -2573,10 +2554,7 @@ adventures:
                     lievelingsdier {is} _
                     {print} Ik hou van lievelingsdier
                     ```
-                start_code: |-
-                    naam {is} Hedy
-                    leeftijd {is} 15
-                    {print} naam is leeftijd jaar oud.
+
             6:
                 story_text: |
                     We veranderen ook hoe je een woord opslaat in een variabele! Je mag hierbij vanaf nu een `=` in plaats van een `{is}` gebruiken. Kijk maar:
@@ -2617,8 +2595,7 @@ adventures:
                     {if} name != 'Hedy'
                         {print} 'Jij bent Hedy niet'
                     ```
-                start_code: |-
-                    leeftijd = {ask} 'Hoe oud ben jij?'
+
                     {if} leeftijd < 13
                         {print} 'Dan ben je jonger dan ik!'
                     {else}
@@ -2703,8 +2680,7 @@ adventures:
                     b = 'wereld!'
                     {print} a + b
                     ```
-                start_code: |-
-                    {print} 'kommagetallen gebruiken een punt'
+
                     {print} 2.5 + 2.5
     parrot:
         name: Papegaai
@@ -2946,8 +2922,7 @@ adventures:
                     temperatuur = 25
                     {print}('Het is ', temperatuur, ' graden buiten')
                     ```
-                start_code: |-
-                    naam = 'Hedy'
+
                     {print}('Mijn naam is ', naam)
     quizmaster:
         name: Quizmaster
@@ -3012,10 +2987,7 @@ adventures:
                     {print} 'Daar rijden twee oma's in hun auto's '
                     {print} 'Zouden zij liever 's middags of 's avonds rijden?'
                     ```
-                start_code: |-
-                    {print} 'Vanaf nu gebruik je aanhalingstekens!'
-                    antwoord {is} {ask} 'Wat gebruiken we vanaf nu?'
-                    {print} 'We gebruiken ' antwoord ' vanaf nu'
+
             12:
                 story_text: |
                     **Tekst moet altijd met aanhalingstekens**
@@ -3050,10 +3022,7 @@ adventures:
                     score = 25
                     {print} 'Jij hebt ' score ' gehaald!'
                     ```
-                start_code: |-
-                    name = {ask} 'Wie ben jij?'
-                    {if} name = 'Hedy de Robot'
-                        {print} 'Hoi!'
+
     random_command:
         name: '{random}'
         default_save_name: willekeurig
@@ -3164,10 +3133,7 @@ adventures:
                         {print} 'INDRINGER!'
                         {print} 'Je kunt deze computer niet gebruiken!'
                     ```
-                start_code: |-
-                    {repeat} 5 {times}
-                        {print} 'Hallo allemaal'
-                        {print} 'Dit wordt allemaal 5 keer herhaald'
+
             9:
                 story_text: |
                     In dit level kun je niet alleen meerdere regels gebruiken bij `{if}` en `{repeat}`, maar je kunt ze ook nog eens in elkaar zetten!
@@ -3184,13 +3150,7 @@ adventures:
                         {else}
                             {print} 'pizza is lekkerder'
                     ```
-                start_code: |-
-                    {repeat} 3 {times}
-                        eten = {ask} 'Wat wil je bestellen?'
-                        {if} eten {is} pizza
-                            {print} 'lekker'
-                        {else}
-                            {print} 'pizza is lekkerder'
+
     repeat_command_2:
         name: '{repeat} 2'
         default_save_name: herhaal2
@@ -3233,11 +3193,7 @@ adventures:
                     _ {print} 'de mosselman'
                     _ {print} 'Zeg ken jij de mosselman? Hij woont in Scheveningen'
                     ```
-                start_code: |-
-                    {repeat} 3 {times}
-                        {print} 'Deze regel wordt herhaald...'
-                        {print} 'Deze ook..'
-                    {print} 'maar deze niet!'
+
     restaurant:
         name: Restaurant
         default_save_name: Restaurant
@@ -4272,9 +4228,7 @@ adventures:
                     {turn} {left}
                     {forward} 20
                     ```
-                start_code: |-
-                    {forward} 50
-                    {turn} {left}
+
             2:
                 story_text: |
                     In dit level kun je variabelen gebruiken om de teken-schildpad interactief te maken. Je kunt bijvoorbeeld aan de speler vragen hoeveel stapjes de schildpad moet nemen.
@@ -4294,11 +4248,7 @@ adventures:
                     hoek {is} 90
                     {turn} hoek
                     {forward} 25
-                start_code: |-
-                    {print} Schildpaddenrace!
-                    hoek {is} 90
-                    {turn} hoek
-                    {forward} 25
+
             3:
                 story_text: |
                     Ook bij je teken-schildpad kun je `{at} {random}` gebruiken! Dan loopt hij steeds een ander pad.
@@ -4312,10 +4262,7 @@ adventures:
                     {turn} hoeken {at} {random}
                     {forward} 25
                     ```
-                start_code: |-
-                    hoeken {is} 10, 50, 90, 150, 250
-                    {turn} hoeken {at} {random}
-                    {forward} 25
+
             4:
                 story_text: |
                     In dit level moet je aanhalingstekens gebruiken bij `{print}` en `{ask}`. Ook bij het tekenen dus!
@@ -4342,11 +4289,7 @@ adventures:
                     {color} {red}
                     {forward} 50
                     ```
-                start_code: |-
-                    {print} 'Figuren tekenen'
-                    hoek {is} 90
-                    {turn} hoek
-                    {forward} 25
+
             5:
                 story_text: |
                     In dit level kun je met `{if}` een keuze maken. Bijvoorbeeld tussen verschillende soorten figuren.
@@ -4379,12 +4322,7 @@ adventures:
                     {if} richting  {is} rechts {turn} _
                     {forward} 100
                     ```
-                start_code: |-
-                    {print} 'Figuren tekenen'
-                    figuur {is} {ask} 'Wil je een vierkant of een driehoek?'
-                    {if} figuur {is} driehoek hoek {is} 120 {else} hoek {is} 90
-                    {turn} hoek
-                    {forward} 25
+
             6:
                 story_text: |
                     In dit level kun je gaan rekenen en kun je daarmee verschillende figuren tekenen.
@@ -4836,11 +4774,7 @@ adventures:
                         antwoord = {ask} 'What is 5 times 5?'
                     {print} 'Je hebt een correct antwoord gegeven'
                     ```
-                start_code: |-
-                    antwoord = 0
-                    {while} antwoord != 25
-                        antwoord = {ask} 'Wat is 5 keer 5?'
-                    {print} 'Goed gedaan!'
+
     years:
         name: Oud en Nieuw
         default_save_name: Oud en Nieuw

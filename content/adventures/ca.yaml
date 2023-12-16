@@ -318,13 +318,7 @@ adventures:
                     _
                     {print} T'ha tocat gustos {at} {random} milkshake
                     ```
-                start_code: |-
-                    animals {is} gos, gat, cangur
-                    prefe {is} {ask} Quin és el teu animal preferit?
-                    {add} prefe {to_list} animals
-                    noagrada {is} {ask} Quin animal no t'agrada?
-                    {remove} noagrada {from} animals
-                    {print} Escullo animals {at} {random}
+
     and_or_command:
         name: '{and} & {or}'
         default_save_name: i o
@@ -342,11 +336,7 @@ adventures:
                     {if} nom {is} 'Hedy' {and} edat {is} 2
                         {print} 'Ets el veritable Hedy!'
                     ```
-                start_code: |-
-                    nom = {ask} 'Com et dius?'
-                    edat = {ask} 'Quants anys tens?'
-                    {if} nom {is} 'Hedy' {and} edat {is} 2
-                        {print} 'Ets el veritable Hedy!'
+
     ask_command:
         name: '{ask}'
         default_save_name: comanda_pregunta
@@ -407,11 +397,7 @@ adventures:
                     animals_preferits {is} {ask} Quin són els teus animals preferits?
                     {print} M'agrada els/les animals_preferits
                     ```
-                start_code: |-
-                    nom {is} {ask} Com et dius?
-                    {print} Hola nom
-                    edat {is} {ask} Quants anys tens?
-                    {print} nom té edat anys.
+
             18:
                 story_text: The final change we will need to make to get Python code is changing `{ask}` into `{input}`.
                 example_code: |
@@ -1373,9 +1359,7 @@ adventures:
                     ```
                     contrasenya {is} {ask} 'Quina és la contrassenya correcta?'
                     ```
-                start_code: |-
-                    nom {is} {ask} 'Quin és el teu nom?'
-                    {if} nom {is} Hedy {print}'súper!' {else} {print} 'meh'
+
             6:
                 story_text: |
                     Al nivell anterior has practicat amb `{ask}` i `{if}`. Ara per exemple pots preguntar als convidats què volen per menjar.
@@ -1820,10 +1804,7 @@ adventures:
                     {for} animal {in} animals
                         {print} 'I love ' animal
                     ```
-                start_code: |-
-                    animals = dog, cat, blobfish
-                    {for} animal {in} animals
-                        {print} 'I love ' animal
+
             11:
                 story_text: |-
                     In this level, we add a new form of the `{for}`. In earlier levels, we used `{for}` with a list, but we can also use `{for}` with numbers.
@@ -1835,10 +1816,7 @@ adventures:
                         {print} counter
                     {print} 'Ready or not. Here I come!'
                     ```
-                start_code: |-
-                    {for} counter {in} {range} 1 {to} 10
-                        {print} counter
-                    {print} 'Ready or not. Here I come!'
+
             17:
                 story_text: |
                     Now we are going to change indentation a little bit. Every time that we need an indentation, we need `:` at the line before the indentation.
@@ -2488,10 +2466,7 @@ adventures:
                     _ _ _ 4 _ 'Great job!'
                     _ _ 'No 2 + 2 = 4'
                     ```
-                start_code: |-
-                    name {is} {ask} 'what is your name?'
-                    {if} name {is} Hedy {print} 'nice'
-                    {else} {print} 'boo!'
+
             8:
                 story_text: |
                     ## If... Else...
@@ -2553,11 +2528,7 @@ adventures:
                     _ answer _ animals _ 'Mine too!'
                     _ _ 'My favorite animals are dogs, cows and sheep'
                     ```
-                start_code: |-
-                    pretty_colors {is} green, yellow
-                    favorite_color {is} {ask} 'What is your favorite color?'
-                    {if} favorite_color {in} pretty_colors {print} 'pretty!'
-                    {else} {print} 'meh'
+
     is_command:
         name: '{is}'
         default_save_name: comanda_es
@@ -2579,10 +2550,7 @@ adventures:
                     En el codi d'exemple hem fet un exemple de la variable `animals_preferits`. A la línia 1 es defineix la variable, i a la línia 2 hem utilitzat la variable dins una comanda d'impressió.
                     En primer lloc, acabeu el nostre exemple omplint el vostre animal preferit als espais en blanc. A continuació, feu vosaltres mateixos almenys 3 d'aquests codis. Trieu una variable i configureu-la amb la comanda {is}. A continuació, utilitzeu-lo amb una comanda {print}, tal com hem fet abans.
                 example_code_2: "```\nanimals_preferits {is} _\n{print} M'agraden els/les animals_preferits \n```\n"
-                start_code: |-
-                    nom {is} Hedy
-                    edat {is} 15
-                    {print} nom té edat anys
+
             6:
                 story_text: |
                     We also make a change in storing a word in a variable! You may now use `=` instead of  `{is}` when we store a name or a number in a variable, like this:
@@ -2623,8 +2591,7 @@ adventures:
                     {if} name != 'Hedy'
                         {print} 'You are not Hedy'
                     ```
-                start_code: |-
-                    age = {ask} 'How old are you?'
+
                     {if} age < 13
                         {print} 'You are younger than me!'
                     {else}
@@ -2711,8 +2678,7 @@ adventures:
                     b = 'world!'
                     {print} a + b
                     ```
-                start_code: |-
-                    {print} 'decimal numbers now need to use a dot'
+
                     {print} 2.5 + 2.5
     parrot:
         name: Lloro
@@ -2951,8 +2917,7 @@ adventures:
                     temperatura = 25
                     {print}('Fa ', temperatura , " graus a l'exterior")
                     ```
-                start_code: |-
-                    nom = 'Hedy'
+
                     {print}('Em dic ', nom)
     quizmaster:
         name: Quizmaster
@@ -3014,10 +2979,7 @@ adventures:
                     {print} 'Amb l'Anna hem d'anar a fer de cangur als meus nebots'
                     {print} 'M'encanta! la meva germana n'estarà orgullosa'
                     ```
-                start_code: |-
-                    {print} 'You need to use quotation marks from now on!'
-                    answer {is} {ask} 'What do we need to use from now on?'
-                    {print} 'We need to use ' answer
+
             12:
                 story_text: |
                     **All texts need to be in quotation marks**
@@ -3052,10 +3014,7 @@ adventures:
                     score = 25
                     {print} 'You got ' score
                     ```
-                start_code: |-
-                    name = {ask} 'What is your name?'
-                    {if} name = 'Hedy the Robot'
-                        {print} 'Hi there!'
+
     random_command:
         name: '{random}'
         default_save_name: random_command
@@ -3152,10 +3111,7 @@ adventures:
                         {print} 'Hello everyone'
                         {print} 'This is all repeated 5 times'
                     ```
-                start_code: |-
-                    {repeat} 5 {times}
-                        {print} 'Hello everyone'
-                        {print} 'This will be printed 5 times'
+
             9:
                 story_text: |
                     In this level you can not only use multiple lines with `{if}` and `{repeat}`, but you can also put them together!
@@ -3170,13 +3126,7 @@ adventures:
                         {else}
                             {print} 'pizza is better'
                     ```
-                start_code: |-
-                    {repeat} 3 {times}
-                        food = {ask} 'What do you want?'
-                        {if} food {is} pizza
-                            {print} 'nice!'
-                        {else}
-                            {print} 'pizza is better'
+
     repeat_command_2:
         name: '{repeat} 2'
         default_save_name: repeat_command_2
@@ -3202,10 +3152,7 @@ adventures:
                     age = {ask} 'How old are you now?'
                     {repeat} age {times} {print} 'Hip Hip Hurray!'
                     ```
-                start_code: |-
-                    {repeat} 2 {times} answer = {ask} 'Did you know you could ask a question multiple times?'
-                    {if} answer {is} yes {repeat} 2 {times} {print} 'You knew that already!'
-                    {else} {repeat} 3 {times} {print} 'You have learned something new!'
+
             8:
                 story_text: |
                     ### In the block or not?
@@ -3223,11 +3170,7 @@ adventures:
                     _ {print} 'The muffin man'
                     _ {print} 'Do you know the muffin man, who lives on Drury Lane?'
                     ```
-                start_code: |-
-                    {repeat} 3 {times}
-                        {print} 'This line will be repeated...'
-                        {print} 'This one too...'
-                    {print} 'but this one will not!'
+
     restaurant:
         name: Restaurant
         default_save_name: Restaurant
@@ -3756,10 +3699,7 @@ adventures:
                     {sleep} 2
                     {print} green!
                     ```
-                start_code: |-
-                    {print} My favorite colour is...
-                    {sleep} 2
-                    {print} green!
+
     songs:
         name: Sing a song!
         default_save_name: Song
@@ -4329,9 +4269,7 @@ adventures:
                     {turn} {left}
                     {forward} 20
                     ```
-                start_code: |-
-                    {forward} 50
-                    {turn} {left}
+
             2:
                 story_text: |
                     In this level you can use variables to make the turtle interactive. For example you can ask the player how many steps the turtle must make.
@@ -4357,11 +4295,7 @@ adventures:
                     {turn} angle
                     {forward} 25
                     ```
-                start_code: |-
-                    {print} Turtle race!
-                    angle {is} 90
-                    {turn} angle
-                    {forward} 25
+
             3:
                 story_text: |
                     In this level you can use use `{at} {random}` with the drawing turtle. A random choice makes the turtle walk a different path each time.
@@ -4374,10 +4308,7 @@ adventures:
                     {turn} angles {at} {random}
                     {forward} 25
                     ```
-                start_code: |-
-                    angles {is} 10, 50, 90, 150, 250
-                    {turn} angles {at} {random}
-                    {forward} 25
+
             4:
                 story_text: |
                     In level 4 you have to use quotation marks with `{print}` and `{ask}`. Also when drawing!
@@ -4404,11 +4335,7 @@ adventures:
                     {color} {red}
                     {forward} 50
                     ```
-                start_code: |-
-                    {print} 'Drawing figures'
-                    angle {is} 90
-                    {turn} angle
-                    {forward} 25
+
             5:
                 story_text: |
                     In level 5 you can make a choice with `{if}`. For example between different types of figures.
@@ -4441,12 +4368,7 @@ adventures:
                     if direction is right turn _
                     forward 100
                     ```
-                start_code: |-
-                    {print} 'Drawing Figures'
-                    figure {is} {ask} 'Do you want a square or a triangle?'
-                    {if} figure {is} triangle angle {is} 120 {else} angle {is} 90
-                    {turn} angle
-                    {forward} 25
+
             6:
                 story_text: |
                     In this level you can use calculations to draw different figures.
@@ -4905,11 +4827,7 @@ adventures:
                         answer = {ask} 'What is 5 times 5?'
                     {print} 'A correct answer has been given'
                     ```
-                start_code: |-
-                    answer = 0
-                    {while} answer != 25
-                        answer = {ask} 'What is 5 times 5?'
-                    {print} 'A correct answer has been given'
+
     years:
         name: New Year's
         default_save_name: New Year's Countdown

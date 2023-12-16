@@ -293,13 +293,7 @@ adventures:
                     _
                     {print} Otrzymujesz koktajl o smaku {at} {random}
                     ```
-                start_code: |-
-                    zwierzęta {is} pies, kot, kangur
-                    ulubione {is} {ask} Jakie jest Twoje ulubione zwierzę?
-                    {add} ulubione {to_list} zwierzęta
-                    nielubiane {is} {ask} Którego zwierzęcia nie lubisz?
-                    {remove} nielubiane {from} zwierzęta
-                    {print} Wybieram zwierzęta {at} {random}
+
     and_or_command:
         name: '{and} & {or}'
         default_save_name: and or
@@ -317,11 +311,7 @@ adventures:
                     {if} name {is} 'Hedy' {and} age {is} 2
                         {print} 'You are the real Hedy!'
                     ```
-                start_code: |-
-                    name = {ask} 'what is your name?'
-                    age = {ask} 'what is your age?'
-                    {if} name {is} 'Hedy' {and} age {is} 2
-                        {print} 'You are the real Hedy!'
+
     ask_command:
         name: '{ask}'
         default_save_name: komenda_{ask}
@@ -383,11 +373,7 @@ adventures:
                     ulubione_zwierzę {is} {ask} Jakie jest Twoje ulubione zwierzę?
                     {print} Lubię ulubione_zwierzę
                     ```
-                start_code: |-
-                    imię {is} {ask} Jak się nazywasz?
-                    {print} Cześć imię
-                    wiek {is} {ask} Ile masz lat?
-                    {print} imię ma wiek lat
+
             18:
                 story_text: The final change we will need to make to get Python code is changing `{ask}` into `{input}`.
                 example_code: |
@@ -1302,9 +1288,7 @@ adventures:
                     imię {is} Zosia
                     {print} Moje imię to imię
                     ```
-                start_code: |-
-                    imię {is} Zosia
-                    {print} Moje imię to imię
+
             5:
                 story_text: |
                     W poprzednich poziomach nauczyliśmy się używać `{at} {random}`, które sprawiało, że gry wyglądały inaczej pomiędzy ich odpaleniami.
@@ -1316,9 +1300,7 @@ adventures:
                     ```
                     hasło {is} {ask} 'Jakie jest prawidłowe hasło?'
                     ```
-                start_code: |-
-                    imię {is} {ask} 'Jak masz na imię?'
-                    {if} imię {is} Hedy {print} 'super!' {else} {print} 'eh'
+
             6:
                 story_text: |
                     W tym poziomie nauczysz się czegoś nowego: od teraz możesz również liczyć.
@@ -1365,10 +1347,7 @@ adventures:
                         {print} 'INTRUZ!'
                         {print} 'Nie możesz używać tego komputera!'
                     ```
-                start_code: |-
-                    {repeat} 5 {times}
-                        {print} 'Siema ludziska'
-                        {print} 'To zostanie wypisane 5 razy'
+
             9:
                 story_text: |
                     Na tym poziomie możesz używać nie tylko wielu linii z poleceniem `{if}` oraz `{repeat}`, ale możesz używać ich łącznie!
@@ -1383,13 +1362,7 @@ adventures:
                         {else}
                             {print} 'pizza jest lepsza'
                     ```
-                start_code: |-
-                    {repeat} 3 {times}
-                        jedzenie = {ask} 'Co byś zjadł?'
-                        {if} jedzenie {is} pizza
-                            {print} 'super!'
-                        {else}
-                            {print} 'pizza jest lepsza'
+
             10:
                 story_text: "W tym poziomie nauczysz się nowego polecenia/pętli `{for}`. Z poleceniem/pętlą `{for}`możesz tworzyć listy i możesz używać wszystkich elementów listy. \n`{for}` tworzy blok kodu, jak `{repeat}` i `{if}`  więc wszystkie linie w bloku muszą być wcięte, a więc zaczynać się spacjami."
                 example_code: |
@@ -1398,17 +1371,12 @@ adventures:
                     {for} zwierzę {in} zwierzęta
                       {print} 'Moim ulubionym zwierzakiem jest ' zwierzę
                     ```
-                start_code: |-
-                    zwierzęta {is} pies, kot, blobfish
-                    {for} zwierzę {in} zwierzęta
-                        {print} 'Moim ulubionym zwierzakiem jest ' zwierzę
+
             11:
                 story_text: |
                     You have reached level 11, you're doing great! In the higher levels, Hedy is focussing more and more on teaching you the programming language Python.
                     In Python there is no `{repeat}` command, but there is a command that works like {repeat}. Are you curious to find out how to say `{repeat}` in Python language? Quickly go on to find out!
-                start_code: |-
-                    {for} licznik {in} {range} 1 {to} 5
-                        {print} licznik
+
             12:
                 story_text: |-
                     **Ułamki dziesiętne**
@@ -1418,8 +1386,7 @@ adventures:
                     {print} 'Dwa i pół plus dwa i pół to...'
                     {print} 2.5 + 2.5
                     ```
-                start_code: |-
-                    {print} 'Teraz zapisując ułamki dziesiętne musisz wykorzystać kropkę do oddzielenia części ułamkowej od części całkowitych'
+
                     {print} 2.5 + 2.5
             13:
                 story_text: |-
@@ -1433,11 +1400,7 @@ adventures:
                     {if} imię {is} 'Hedy' {and} wiek {is} 2
                         {print} 'Naprawdę jesteś Hedy!'
                     ```
-                start_code: |-
-                    imię = {ask} 'Jak masz na imię?'
-                    wiek = {ask} 'Ile masz lat?'
-                    {if} imię {is} 'Hedy' {and} wiek {is} 2
-                        {print} 'Naprawdę jesteś Hedy!'
+
             14:
                 story_text: |
                     W tej lekcji nauczymy się zastosowania nowych operatorów logicznych, które możesz pamiętać z lekcji matematyki: operatory `<` i `>`.
@@ -1452,8 +1415,7 @@ adventures:
                     {if} wiek > 12
                         {print} 'Masz więcej lat niż ja!'
                     ```
-                start_code: |-
-                    wiek = {ask} 'Ile masz lat?'
+
                     {if} wiek < 13
                         {print} 'Jesteś młodszy niż ja!'
                     {else}
@@ -1468,11 +1430,7 @@ adventures:
                         odpowiedź = {ask} 'Ile jest 5 razy 5?'
                     {print} 'Dobra odpowiedź'
                     ```
-                start_code: |-
-                    odpowiedź = 0
-                    {while} odpowiedź != 25
-                        odpowiedź = {ask} 'Ile jest 5 razy 5?'
-                    {print} 'Dobra odpowiedź'
+
             16:
                 story_text: |-
                     Tym razem stworzymy listy w sposób podobny do Pythona. Te listy mają kwadratowe nawiasy dookoła listy! Dodatkowo, zostawimy też cudzysłowie dookoła każdego elementu listy tak jak się nauczyliśmy w poprzednich poziomach.
@@ -1502,8 +1460,7 @@ adventures:
                 story_text: |-
                     Dotarliśmy do prawdziwego kodu Pythona! Oznacza to, że od teraz musimy używać nawiasów z `{print}` i `{range}`.
                     Oznacza to również, że jeśli używasz angielskich wersji poleceń możesz używać kodu Hedy z tego poziomu w dowolnym środowisku Pythona. Jeśli jeszcze tego nie zrobiłeś, możesz przełączyć język w menu poleceń, aby to zrobić.
-                start_code: |-
-                    imię = 'Hedy'
+
                     {print}('Mam na imię ', imię)
     dice:
         name: Kostka do gry
@@ -1784,10 +1741,7 @@ adventures:
                     {for} animal {in} animals
                         {print} 'I love ' animal
                     ```
-                start_code: |-
-                    animals = dog, cat, blobfish
-                    {for} animal {in} animals
-                        {print} 'I love ' animal
+
             11:
                 story_text: |-
                     Na tym poziomie dodajemy nową formę `{for}`. Na wcześniejszych poziomach używaliśmy `{for}` z listą, ale możemy też używać `{for}` z liczbami.
@@ -1800,10 +1754,7 @@ adventures:
                         {print} counter
                     {print} 'Ready or not. Here I come!'
                     ```
-                start_code: |-
-                    {for} counter {in} {range} 1 {to} 10
-                        {print} counter
-                    {print} 'Ready or not. Here I come!'
+
             17:
                 story_text: |
                     Now we are going to change indentation a little bit. Every time that we need an indentation, we need `:` at the line before the indentation.
@@ -2414,10 +2365,7 @@ adventures:
                     _ _ _ 4 _ 'Dobra robota!'
                     _ _ 'Nie, 2 + 2 = 4'
                     ```
-                start_code: |-
-                    imię {is} {ask} 'jak masz na imię?'
-                    {if} imię {is} Hedy {print} 'super'
-                    {else} {print} 'eh'
+
             8:
                 story_text: |
                     ## If... Else...
@@ -2479,11 +2427,7 @@ adventures:
                     _ odpowiedź _ animals _ 'Mine too!'
                     _ _ 'Moje ulubione zwierzęta to psy, krowy i owce'
                     ```
-                start_code: |-
-                    ładne_kolory {is} zielony, żółty
-                    wybrany_kolor {is} {ask} 'Jaki jest Twój ulubiony kolor?'
-                    {if} wybrany_kolor {in} ładne_kolory {print} 'ładny!'
-                    {else} {print} 'meh'
+
     is_command:
         name: '{is}'
         default_save_name: komenda_to
@@ -2509,10 +2453,7 @@ adventures:
                     favorite_animals is _
                     {print} I like favorite_animals
                     ```
-                start_code: |-
-                    name {is} Hedy
-                    age {is} 15
-                    {print} name is age years old
+
             6:
                 story_text: |
                     We also make a change in storing a word in a variable! You may now use `=` instead of  `{is}` when we store a name or a number in a variable, like this:
@@ -2553,8 +2494,7 @@ adventures:
                     {if} name != 'Hedy'
                         {print} 'You are not Hedy'
                     ```
-                start_code: |-
-                    age = {ask} 'How old are you?'
+
                     {if} age < 13
                         {print} 'You are younger than me!'
                     {else}
@@ -2641,8 +2581,7 @@ adventures:
                     b = 'world!'
                     {print} a + b
                     ```
-                start_code: |-
-                    {print} 'decimal numbers now need to use a dot'
+
                     {print} 2.5 + 2.5
     parrot:
         name: Papuga
@@ -2865,8 +2804,7 @@ adventures:
                     temperature = 25
                     {print}('It is ', temperature, ' degrees outside')
                     ```
-                start_code: |-
-                    name = 'Hedy'
+
                     {print}('My name is ', name)
     quizmaster:
         name: Mistrz Quizu
@@ -2927,10 +2865,7 @@ adventures:
                     {print} 'I'm babysitting my sister's kids'
                     {print} 'What's more fun than that?'
                     ```
-                start_code: |-
-                    {print} 'Od teraz musimy używać cudzysłowów!'
-                    odpowiedź {is} {ask} 'Czego musimy używać?'
-                    {print} 'Musimy używać ' odpowiedź
+
             12:
                 story_text: |
                     **All texts need to be in quotation marks**
@@ -2965,10 +2900,7 @@ adventures:
                     score = 25
                     {print} 'You got ' score
                     ```
-                start_code: |-
-                    name = {ask} 'What is your name?'
-                    {if} name = 'Hedy the Robot'
-                        {print} 'Hi there!'
+
     random_command:
         name: '{random}'
         default_save_name: Komenda pozycja losowa
@@ -3066,10 +2998,7 @@ adventures:
                         {print} 'Hello everyone'
                         {print} 'This is all repeated 5 times'
                     ```
-                start_code: |-
-                    {repeat} 5 {times}
-                        {print} 'Hello everyone'
-                        {print} 'This will be printed 5 times'
+
             9:
                 story_text: |
                     In this level you can not only use multiple lines with `{if}` and `{repeat}`, but you can also put them together!
@@ -3084,13 +3013,7 @@ adventures:
                         {else}
                             {print} 'pizza is better'
                     ```
-                start_code: |-
-                    {repeat} 3 {times}
-                        food = {ask} 'What do you want?'
-                        {if} food {is} pizza
-                            {print} 'nice!'
-                        {else}
-                            {print} 'pizza is better'
+
     repeat_command_2:
         name: '{repeat} 2'
         default_save_name: repeat_command_2
@@ -3116,10 +3039,7 @@ adventures:
                     age = {ask} 'How old are you now?'
                     {repeat} age {times} {print} 'Hip Hip Hurray!'
                     ```
-                start_code: |-
-                    {repeat} 2 {times} answer = {ask} 'Did you know you could ask a question multiple times?'
-                    {if} answer {is} yes {repeat} 2 {times} {print} 'You knew that already!'
-                    {else} {repeat} 3 {times} {print} 'You have learned something new!'
+
             8:
                 story_text: |
                     ### In the block or not?
@@ -3137,11 +3057,7 @@ adventures:
                     _ {print} 'The muffin man'
                     _ {print} 'Do you know the muffin man, who lives on Drury Lane?'
                     ```
-                start_code: |-
-                    {repeat} 3 {times}
-                        {print} 'This line will be repeated...'
-                        {print} 'This one too...'
-                    {print} 'but this one will not!'
+
     restaurant:
         name: Restauracja
         default_save_name: Restauracja
@@ -3598,10 +3514,7 @@ adventures:
                     {sleep} 2
                     {print} zielony!
                     ```
-                start_code: |-
-                    {print} Moim ulubionym kolorem jest...
-                    {sleep} 2
-                    {print} zielony!
+
     songs:
         name: Zaśpiewaj piosenkę!
         default_save_name: Piosenka
@@ -4120,9 +4033,7 @@ adventures:
                     {turn} {left}
                     {forward} 20
                     ```
-                start_code: |-
-                    {forward} 50
-                    {turn} {left}
+
             2:
                 story_text: |
                     Na tym poziomie możesz używać zmiennych aby uczynić żółwia interaktywnym. Na przykład możesz zapytać użytkownika ile kroków ma zrobić twój żółw.
@@ -4148,11 +4059,7 @@ adventures:
                     {turn} kąt
                     {forward} 25
                     ```
-                start_code: |-
-                    {print} Wyścig żółwi!
-                    kąt {is} 90
-                    {turn} kąt
-                    {forward} 25
+
             3:
                 story_text: |
                     Na tym poziomie możesz użyć `{at} {random}` podczas rysowania żółwiem. Losowy wybór sprawia, że żółw za każdym razem idzie inną ścieżką.
@@ -4165,10 +4072,7 @@ adventures:
                     {turn} kąty {at} {random}
                     {forward} 25
                     ```
-                start_code: |-
-                    kąty {is} 10, 50, 90, 150, 250
-                    {turn} kąty {at} {random}
-                    {forward} 25
+
             4:
                 story_text: |
                     Na poziomie 4 musisz użyć cudzysłowów z poleceniami `{print}` oraz `{ask}`. To samo się dotyczy rysowania!
@@ -4195,11 +4099,7 @@ adventures:
                     {color} {red}
                     {forward} 50
                     ```
-                start_code: |-
-                    {print} 'Rysujemy figury'
-                    kąt {is} 90
-                    {turn} kąt
-                    {forward} 25
+
             5:
                 story_text: |
                     Na poziomie 5 możesz dokonywać wyboru przy użyciu polecenia `{if}`. Przykładem takiego wyboru byłby wybór pomiędzy różnymi typami figur do narysowania.
@@ -4232,12 +4132,7 @@ adventures:
                     {if} kierunek {is} prawo {turn} _
                     {forward} 100
                     ```
-                start_code: |-
-                    {print} 'Rysujemy figury'
-                    figura {is} {ask} 'Czy chciałbyś narysować kwadrat czy też trójkąt?'
-                    {if} figura {is} trójkąt kąt {is} 120 {else} kąt {is} 90
-                    {turn} kąt
-                    {forward} 25
+
             6:
                 story_text: |
                     Na tym poziomie możesz użyć matematyki żeby narysować różne figury.
@@ -4687,11 +4582,7 @@ adventures:
                         answer = {ask} 'What is 5 times 5?'
                     {print} 'A correct answer has been given'
                     ```
-                start_code: |-
-                    answer = 0
-                    {while} answer != 25
-                        answer = {ask} 'What is 5 times 5?'
-                    {print} 'A correct answer has been given'
+
     years:
         name: Nowy Rok
         default_save_name: Odliczanie do Nowego Roku

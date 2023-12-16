@@ -315,10 +315,7 @@ adventures:
                     _
                     {print} Voici un milkshake parfums {at} {random}
                     ```
-                start_code: |-
-                    animaux {is} chien, chat, kangourou
-                    préféré {is} {ask} Quel est ton animal préféré ?
-                    {add} préféré {to_list} animaux
+
                     mal_aimé {is} {ask} Quel animal n'aimes-tu pas ?
                     {remove} mal_aimé {from} animaux
                     {print} Je choisis animaux {at} {random}
@@ -404,9 +401,7 @@ adventures:
                     animaux_préférés {is} {ask} Quel est ton animal préféré ?
                     {print} J'aime les animaux_préférés
                     ```
-                start_code: |-
-                    nom {is} {ask} Quel est ton nom ?
-                    {print} Bonjour nom
+
                     âge {is} {ask} Quel âge as-tu ?
                     {print} nom a âge ans.
             18:
@@ -1907,9 +1902,7 @@ adventures:
                     {for} animal {in} animaux
                         {print} "J'aime les " animal
                     ```
-                start_code: |-
-                    animaux {is} chiens, chats, méduses
-                    {for} animal {in} animaux
+
                         {print} "J'aime les " animal
             11:
                 story_text: |-
@@ -1921,9 +1914,7 @@ adventures:
                     {for} compteur {in} {range} 1 {to} 10
                         {print} compteur
                     {print} "Caché ou pas, j'arrive !"
-                start_code: |-
-                    {for} compteur {in} {range} 1 {to} 10
-                        {print} compteur
+
                     {print} "Caché ou pas, j'arrive !"
             17:
                 story_text: |
@@ -2664,8 +2655,7 @@ adventures:
                     _ réponse _ animaux _ "c'est aussi le mien !"
                     _ _ "mes animaux préférés sont chien, vache et mouton"
                     ```
-                start_code: |-
-                    jolies_couleurs {is} vert, jaune
+
                     couleur_préférée {is} {ask} "Quelle est ta couleur préférée ?"
                     {if} couleur_préférée {in} jolies_couleurs {print} "jolie !"
                     {else} {print} "bof"
@@ -2694,10 +2684,7 @@ adventures:
                     animaux_préférés {is} _
                     {print} J'aime les animaux_préférés
                     ```
-                start_code: |-
-                    nom {is} Hedy
-                    âge {is} 15
-                    {print} nom a âge ans
+
             6:
                 story_text: |
                     Nous avons aussi un changement pour l'enregistrement dans une variable ! Tu peux maintenant utiliser `=` à la place de `{is}` quand tu enregistres un mot ou nombre dans une variable, comme ceci :
@@ -3288,8 +3275,7 @@ adventures:
                         {print} "Salut tout le monde"
                         {print}"Tout ceci sera répété 5 fois"
                     ```
-                start_code: |-
-                    {repeat} 5 {times}
+
                         {print} "Bonjour tout le monde"
                         {print} "Ceci sera écrit 5 fois"
             9:
@@ -3306,8 +3292,7 @@ adventures:
                         {else}
                             {print} "La pizza c'est meilleur"
                     ```
-                start_code: |-
-                    {repeat} 3 {times}
+
                         nourriture = {ask} "Que veux-tu ?"
                         {if} nourriture {is} pizza
                             {print} "parfait !"
@@ -3361,8 +3346,7 @@ adventures:
                     _ {print} "Qui s'en va sifflant, soufflant"
                     _ {print} "Dans les grands sapins verts, oh !"
                     ```
-                start_code: |-
-                    {repeat} 3 {times}
+
                         {print} "Cette ligne sera répétée…"
                         {print} "Cette ligne aussi…"
                     {print} "mais celle-ci ne le sera pas !"
@@ -4428,9 +4412,7 @@ adventures:
                     {turn} {left}
                     {forward} 20
                     ```
-                start_code: |-
-                    {forward} 50
-                    {turn} {left}
+
             2:
                 story_text: |
                     À ce niveau, tu peux utiliser des variables pour rendre la tortue interactive. Par exemple, tu peux demander au joueur de combien de pas la tortue doit avancer.
@@ -4456,11 +4438,7 @@ adventures:
                     {turn} angle
                     {forward} 25
                     ```
-                start_code: |-
-                    {print} Course de la tortue !
-                    angle {is} 90
-                    {turn} angle
-                    {forward} 25
+
             3:
                 story_text: |
                     À ce niveau, tu peux utiliser `{at} {random}` avec la tortue dessinatrice. Un choix aléatoire permet à la tortue de suivre un chemin différent à chaque fois.
@@ -4473,10 +4451,7 @@ adventures:
                     {turn} angles {at} {random}
                     {forward} 25
                     ```
-                start_code: |-
-                    angles {is} 10, 50, 90, 150, 250
-                    {turn} angles {at} {random}
-                    {forward} 25
+
             4:
                 story_text: |
                     Au niveau 4 tu dois utiliser les guillemets avec `{print}` et `{ask}`. Aussi quand tu dessines !
@@ -5011,9 +4986,7 @@ adventures:
                         réponse = {ask} "Combien font 5 fois 5 ?"
                     {print} "Une réponse correcte a été donnée"
                     ```
-                start_code: |-
-                    réponse = 0
-                    {while} réponse != 25
+
                         réponse = {ask} "Combien font 5 fois 5 ?"
                     {print} "Une réponse correcte a été donnée"
     years:
