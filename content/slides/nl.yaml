@@ -395,7 +395,7 @@ levels:
                 {if} passport {is} yes 'thank you'
                 {else} 'You can't fly without a passport'
                 declare {is} {ask} Do you have anything to declare?
-                {if] declare {is} yes
+                {if} declare {is} yes
                 item_to_declare {is} {ask} 'What would you like to declare'
                 {else} Alright
                 {print} Thank you. Please head to gate A22.'
