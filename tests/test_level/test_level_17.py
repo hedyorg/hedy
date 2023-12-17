@@ -337,11 +337,12 @@ class TestsLevel17(HedyTester):
       m = [1, 2]
       n = [1, 2]
       if convert_numerals('Latin', m) == convert_numerals('Latin', n):
-        print('JA!')""")
+        print(f'''JA!''')""")
 
         self.multi_level_tester(
             code=code,
-            expected=expected
+            expected=expected,
+            max_level=17
         )
 
     def test_equality_with_incompatible_types_gives_error(self):

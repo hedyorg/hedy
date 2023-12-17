@@ -2194,7 +2194,7 @@ class TestsLevel12(HedyTester):
         define sum with n1, n2
             return n1 + n2
 
-        print 'hola!''""")
+        print 'hola!'""")
 
         self.multi_level_tester(
             code=code,

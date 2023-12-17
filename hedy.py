@@ -1383,7 +1383,6 @@ class ConvertToPython(Transformer):
     def add_variable_access_location(self, variable_name, access_line_number):
         # store the line of access (or string value) in the lookup table
         # so we know what variable is used where
-        variable_name = escape_var(variable_name)
         if isinstance(variable_name, str):
             vars = [a for a in self.lookup if isinstance(a.name, str) and a.name[:len(variable_name)] == variable_name]
             for v in vars:  # vars can be defined multiple times, access validates all of them
@@ -1793,6 +1792,8 @@ class ConvertToPython_3(ConvertToPython_2):
         if arg.isnumeric() and isinstance(arg, int):  # is int/float
             return arg
         elif (self.is_list(arg)):  # is list indexing
+            list_name = arg.split('[')[0]
+            self.add_variable_access_location(list_name, meta.line)
             before_index, after_index = arg.split(']', 1)
             return before_index + '-1' + ']' + after_index   # account for 1-based indexing
         else:
@@ -1801,11 +1802,20 @@ class ConvertToPython_3(ConvertToPython_2):
     def add(self, meta, args):
         value = self.process_argument(meta, args[0])
         list_var = args[1]
+
+        #both sides have been used now
+        self.add_variable_access_location(value, meta.line)
+        self.add_variable_access_location(list_var, meta.line)
         return f"{list_var}.append({value}){self.add_debug_breakpoint()}"
 
     def remove(self, meta, args):
         value = self.process_argument(meta, args[0])
         list_var = args[1]
+
+        #both sides have been used now
+        self.add_variable_access_location(value, meta.line)
+        self.add_variable_access_location(list_var, meta.line)
+
         return textwrap.dedent(f"""\
         try:
           {list_var}.remove({value}){self.add_debug_breakpoint()}
@@ -2285,6 +2295,9 @@ class ConvertToPython_12(ConvertToPython_11):
 
         if len(args) > 1:
             args_str = ", ".join(str(x.children[0]) if isinstance(x, Tree) else str(x) for x in args[1].children)
+            for x in args[1].children:
+                self.add_variable_access_location(str(x), meta.line)
+
         return f"{args[0]}({args_str})"
 
     def returns(self, meta, args):
@@ -2513,6 +2526,11 @@ class ConvertToPython_16(ConvertToPython_15):
     def change_list_item(self, meta, args):
         left_side = args[0] + '[' + args[1] + '-1]'
         right_side = args[2]
+
+        self.add_variable_access_location(args[0], meta.line)
+        self.add_variable_access_location(args[1], meta.line)
+        self.add_variable_access_location(args[2], meta.line)
+
         exception = _translate_index_error(left_side, args[0])
         return exception + left_side + ' = ' + right_side + self.add_debug_breakpoint()
 
