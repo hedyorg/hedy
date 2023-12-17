@@ -625,7 +625,7 @@ class TestsLevel12(HedyTester):
             max_level=18,
             code=code,
             expected=expected,
-            unused_allowed = True
+            unused_allowed=True
         )
 
     #
@@ -943,7 +943,7 @@ class TestsLevel12(HedyTester):
         self.multi_level_tester(
             code=code,
             expected=expected,
-            unused_allowed = True,
+            unused_allowed=True,
             max_level=15)
 
     def test_assign_list_with_dutch_comma_arabic_lang(self):
@@ -2220,7 +2220,6 @@ class TestsLevel12(HedyTester):
             skip_faulty=False,
             expected=expected
         )
-
 
     def test_return_values(self):
         code = textwrap.dedent("""\

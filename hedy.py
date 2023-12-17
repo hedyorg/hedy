@@ -1803,7 +1803,7 @@ class ConvertToPython_3(ConvertToPython_2):
         value = self.process_argument(meta, args[0])
         list_var = args[1]
 
-        #both sides have been used now
+        # both sides have been used now
         self.add_variable_access_location(value, meta.line)
         self.add_variable_access_location(list_var, meta.line)
         return f"{list_var}.append({value}){self.add_debug_breakpoint()}"
@@ -1812,7 +1812,7 @@ class ConvertToPython_3(ConvertToPython_2):
         value = self.process_argument(meta, args[0])
         list_var = args[1]
 
-        #both sides have been used now
+        # both sides have been used now
         self.add_variable_access_location(value, meta.line)
         self.add_variable_access_location(list_var, meta.line)
 
