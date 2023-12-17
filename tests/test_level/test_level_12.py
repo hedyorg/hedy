@@ -2151,28 +2151,56 @@ class TestsLevel12(HedyTester):
             max_level=16
         )
 
+    def test_function_use(self):
+        code = textwrap.dedent("""\
+        define func with n1, n2
+            return n1 + n2
+
+        print call func with 1, 2""")
+
+        expected = textwrap.dedent("""\
+        def func(n1, n2):
+          return f'''{n1 + n2}'''
+        print(f'''{func(1, 2)}''')""")
+
+        self.multi_level_tester(
+            code=code,
+            max_level=16,
+            skip_faulty=False,
+            expected=expected
+        )
+
     def test_function_use_builtin_name(self):
         code = textwrap.dedent("""\
         define sum with n1, n2
             return n1 + n2
 
         print call sum with 1, 2""")
+
         expected = textwrap.dedent("""\
-        colors = ['orange', 'blue', 'green']
-        favorite = input(f'''Is your fav color{colors}''')
-        try:
-          favorite = int(favorite)
-        except ValueError:
-          try:
-            favorite = float(favorite)
-          except ValueError:
-            pass""")
+        def sum(n1, n2):
+          return f'''{n1 + n2}'''
+        print(f'''{sum(1, 2)}''')""")
 
         self.multi_level_tester(
             code=code,
-            max_level=17,
+            max_level=16,
             skip_faulty=False,
             expected=expected
+        )
+
+    def test_unused_function_use_builtin_name(self):
+        code = textwrap.dedent("""\
+        define sum with n1, n2
+            return n1 + n2
+
+        print 'hola!''""")
+
+        self.multi_level_tester(
+            code=code,
+            max_level=16,
+            skip_faulty=False,
+            exception=hedy.exceptions.UnusedVariableException
         )
 
     def test_addition(self):
@@ -2196,24 +2224,19 @@ class TestsLevel12(HedyTester):
 
     def test_return_values(self):
         code = textwrap.dedent("""\
-        define func with n1
-            return n1
+        define func with n1, n2
+            return n1 + n2
 
-        print call func with 1""")
+        print call func with 1, 2""")
+
         expected = textwrap.dedent("""\
-        colors = ['orange', 'blue', 'green']
-        favorite = input(f'''Is your fav color{colors}''')
-        try:
-          favorite = int(favorite)
-        except ValueError:
-          try:
-            favorite = float(favorite)
-          except ValueError:
-            pass""")
+        def func(n1, n2):
+          return f'''{n1 + n2}'''
+        print(f'''{func(1, 2)}''')""")
 
         self.multi_level_tester(
             code=code,
-            max_level=17,
+            max_level=16,
             skip_faulty=False,
             expected=expected
         )
