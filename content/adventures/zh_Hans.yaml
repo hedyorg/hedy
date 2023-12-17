@@ -466,8 +466,6 @@ adventures:
                     {for} i {in} {range} 1 {to} 10
                         {print} i * 数字
                     ```
-
-                        {print} i *数字
             12:
                 story_text: |
                     在本关，你可以编写一个可以计算小数的计算器。
@@ -2040,16 +2038,6 @@ adventures:
                     new_price = _ calculate_new_price {with} old_price, _
                     {print} 'The new price is ' new_price ' dollar'
                     ```
-
-                        percentage = percentage / 100
-                        discount_amount = amount * percentage
-                        return amount - discount_amount
-
-                    old_price = {ask} 'How much is on the price tag?'
-                    discount = {ask} 'What percentage is the discount?'
-
-                    new_price = _ calculate_new_price {with} old_price, _
-                    {print} 'The new price is ' new_price ' dollar'
     guess_my_number:
         name: Guess my number
         default_save_name: guess my number

@@ -2018,16 +2018,6 @@ adventures:
                     nieuwe_prijs = _ bereken_nieuwe_prijs with oude_prijs, _
                     {print} 'De nieuwe prijs is ' nieuwe_prijs ' euro'
                     ```
-
-                        percentage = percentage / 100
-                        korting_bedrag = bedrag * percentage
-                        {return} bedrag - korting_bedrag
-
-                    oude_prijs = {ask} 'Wat staat er op het prijskaartje?'
-                    korting = {ask} 'Hoeveel procent korting krijg je?'
-
-                    nieuwe_prijs = _ bereken_nieuwe_prijs with oude_prijs, _
-                    {print} 'De nieuwe prijs is ' nieuwe_prijs ' euro'
     guess_my_number:
         name: Raad mijn getal
         default_save_name: guess my number
