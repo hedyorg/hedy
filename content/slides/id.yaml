@@ -26,29 +26,26 @@ levels:
                 * Membangun aplikasi Anda sendiri untuk digunakan di ponsel Anda
         5:
             header: Pemrograman di Hedy
-            text: |-
-                Di Hedy kami menggunakan kode khusus, seperti `{print}`.
-                <iframe class="embedded-hedy" src="/adventure/story/1/raw"></iframe>
+            text: Di Hedy kami menggunakan kode khusus, seperti `{print}`.
+            code: '{print} Welcome to Hedy!'
         6:
             header: Pemrograman di Hedy
-            text: |-
-                Kata kode akan ditampilkan dalam warna merah muda.
-                <iframe class="embedded-hedy" src="/adventure/story/1/raw"></iframe>
+            text: Kata kode akan ditampilkan dalam warna merah muda.
+            code: '{print} Welcome to Hedy!'
         7:
             header: Pemrograman di Hedy
-            text: |-
-                Kami memulai kode dengan tombol Jalankan kode di bawah kode.
-                <iframe class="embedded-hedy" src="/adventure/story/1/raw"></iframe>
+            text: Kami memulai kode dengan tombol Jalankan kode di bawah kode.
+            code: '{print} Welcome to Hedy!'
         8:
             header: Pemrograman di Hedy
-            text: |-
-                Output appears on the left-hand side.
-                <iframe class="embedded-hedy" src="/adventure/story/1/raw"></iframe>
+            text: Output appears on the left-hand side.
+            code: '{print} Welcome to Hedy!'
         9:
             header: Pemrograman di Hedy
-            text: |-
-                Outputnya juga bisa berupa gambar.
-                <iframe class="embedded-hedy" src="/adventure/turtle/1/raw"></iframe>
+            text: Outputnya juga bisa berupa gambar.
+            code: |-
+                {forward} 100
+                {turn} left
     1:
         1:
             header: Selamat datang di level 1!
@@ -62,21 +59,26 @@ levels:
                 Kode pertama yang bisa Anda gunakan di level 1 adalah `{print}`.
 
                 `{print}` digunakan untuk menampilkan teks di layar.
-            editor: <iframe class="fragment" src="/adventure/story/1/raw"></iframe>
+            code: '{print} Show text on the screen'
         3:
             header: Perintah {print}
             text: |-
                 The second code that you can use in level 1 is `{ask}`.
 
                 `{ask}` is used to ask a question that can be answered.
-            editor: <iframe class="fragment" src="/adventure/rock/1/raw"></iframe>
+            code: |-
+                {print} Welcome to your own rock scissors paper!
+                {ask} What will you choose?
         4:
             header: '{ask}'
             text: |-
                 The final text code that you can use in level 1 is `{echo}`.
 
                 `{echo}` is used to repeat the answer of an `{ask}`.
-            editor: <iframe class="fragment" src="/adventure/parrot/1/raw"></iframe>
+            code: |-
+                {print} Hello!
+                {ask} What is your name?
+                {echo} hello
         5:
             header: '{echo}'
             text: |-
@@ -87,7 +89,7 @@ levels:
                 Jika Anda ingin jawabannya ditampilkan, Anda dapat menggunakan perintah terakhir pada level ini: `{echo}`.
 
                 `{echo}` digunakan untuk mengulang jawaban `{ask}`.
-            editor: <iframe class="fragment" src="/adventure/ask_command/1/raw"></iframe>
+            editor: /hedy/1
         6:
             header: Pemrograman!
             text: |-
@@ -96,23 +98,37 @@ levels:
         7:
             header: Pemrograman!
             text: Petualangan ditampilkan di tab.
-            editor: <iframe class="fragment" src="/hedy/1"></iframe>
+            editor: /hedy/1
         8:
             header: Pemrograman!
-            text: |-
-                Tombol panah kuning dapat digunakan untuk menyalin contoh.
-                <iframe class="fragment" src="/hedy/1"></iframe>
+            text: Tombol panah kuning dapat digunakan untuk menyalin contoh.
+            editor: /hedy/1
         9:
             header: Menggambar dengan kura-kura
             text: '`{forward}` is used to move the turtle forward.'
         10:
             header: 'Menggambar dengan kura-kura: {forward}'
             text: '`{turn}` is used to make the turtle turn left or right.'
-            editor: <iframe class="fragment" src="/adventure/turtle/1/raw"></iframe>
+            code: |-
+                {forward} 50
+                {turn} left
         11:
             header: 'Menggambar dengan kura-kura: {turn}'
             text: '`{turn}` digunakan untuk membuat penyu berbelok ke kiri atau ke kanan.'
-            editor: <iframe class="fragment" src="/adventure/turtle/1/raw"></iframe>
+            code: |-
+                {forward} 50
+                {turn} left
+        12:
+            header: Debugging
+            text: Debugging a code means getting rid of mistakes in the code. Let's debug this code together. Click the ladybug button to start the debugger.
+            code: |-
+                I am DJ Hedy
+                {print} What song would you like to hear?
+                {ask} I like that song too!
+                {print} Next up... {echo}
+        13:
+            header: Let the programming fun begin!
+            text: Enjoy the adventures in level 1!
     2:
         1:
             header: Selamat datang di level 2
@@ -125,7 +141,10 @@ levels:
         2:
             header: Variabel
             text: Untuk membuat atau 'mengatur' suatu variabel kita menggunakan perintah `{is}`
-            editor: <iframe class="fragment" src="/adventure/is_command/2/raw"></iframe>
+            code: |-
+                name {is} Hedy
+                age {is} 15
+                {print} name is age years old
         3:
             header: Interaktif
             text: |-
@@ -134,23 +153,48 @@ levels:
                 Jawaban atas pertanyaan disimpan dalam variabel.
 
                 Dengan cara ini kita tidak memerlukan perintah `{echo}`.
-            editor: <iframe class="fragment" src="/adventure/ask_command/2/raw"></iframe>
+            code: |-
+                name {is} {ask} What is your name?
+                {print} Hello name
         4:
             header: Banyak variabel
             text: Sekarang kita menggunakan variabel, kita bisa menggunakan beberapa variabel, bukan hanya satu perintah `{echo}`.
-            editor: <iframe class="fragment" src="/adventure/ask_command/2/raw"></iframe>
+            code: |-
+                name {is} {ask} What is your name?
+                {print} Hello name
+                age {is} {ask} How old are you?
+                {print} name is age years old.
         5:
             header: Tidur
             text: Anda juga dapat menggunakan perintah `{sleep}` untuk menjeda kode untuk sementara waktu.
-            editor: <iframe class="fragment" src="/adventure/sleep_command/2/raw"></iframe>
+            code: |-
+                {print} My favorite colour is...
+                {sleep} 2
+                {print} green!
         6:
             header: Tidur 5
             text: |-
                 Anda dapat menambahkan nomor setelah perintah `{sleep}` jika ingin jeda lebih lama.
 
                 Jika mau, Anda bahkan bisa menggunakan variabel alih-alih angka untuk menentukan durasi perintah sleep.
-            editor: <iframe class="fragment" src="/adventure/sleep_command/2/raw"></iframe>
+            code: |-
+                pause {is} 10
+                {print} My favorite colour is...
+                {sleep} pause
+                {print} green!
         7:
+            header: Debugging
+            text: Debugging a code means getting rid of mistakes in the code. Let's debug this code together. Click the ladybug button to start the debugger.
+            code: |-
+                {print} Welcome to the donut shop!
+                filling {is} What kind of filling would you like?
+                {print} You have chosen... Filling! Yum!
+                topping {ask} What kind of topping would you like?
+                topping is delicious!
+                {print} I'll go get your donut. {sleep}
+                {print} Here you go! A filling donut with toping!
+                {ask} Have a nice day!
+        8:
             header: Biarkan kesenangan pemrograman dimulai!
             text: Nikmati petualangan di level 3!
     3:
@@ -163,18 +207,26 @@ levels:
                 Anda membuat daftar dengan `{is}`.
 
                 Pisahkan item di daftar Anda dengan koma.
-            editor: <iframe class="fragment" src="/adventure/random_command/3/raw"></iframe>
+            code: |-
+                animals {is} dogs, cats, kangaroos
+                ```
         3:
             header: Secara acak
             text: |-
                 Anda dapat menggunakan daftar dengan perintah `{at}` `{random}`.
                 Komputer akan secara acak memilih satu item dari daftar.
                 Setiap kali Anda menjalankan kode ini, hasilnya akan berbeda.
-            editor: <iframe class="fragment" src="/adventure/dice/3/raw"></iframe>
+            code: |-
+                animals {is} dogs, cats, kangaroos
+                {print} animals {at} {random}
+                ```
         4:
             header: Secara acak dalam sebuah kalimat
             text: Anda juga dapat menggunakan perintah `{at}` `{random}` dalam sebuah kalimat.
-            editor: <iframe class="fragment" src="/adventure/random_command/3/raw"></iframe>
+            code: |-
+                animals {is} dogs, cats, kangaroos
+                {print} My favorite animal is animals {at} {random}
+                ```
         5:
             header: Tambahkan ke
             text: |-
@@ -182,25 +234,48 @@ levels:
 
                 Anda dapat memilih apa yang ingin ditambahkan ke daftar atau Anda dapat menggunakan perintah `{add}` `{to}` yang dikombinasikan dengan perintah `{ask}`.
                 Dengan cara ini Anda dapat membiarkan pemain memutuskan apa yang akan ditambahkan ke daftar.
-            editor: <iframe class="fragment" src="/adventure/add_remove_command/3/raw"></iframe>
+            code: |-
+                animals {is} dog, cat, kangaroo
+                like {is} {ask} What is your favorite animal?
+                {add} like {to_list} animals
+                {print} I choose animals {at} {random}
         6:
             header: Hapus dari
             text: |-
                 Kebalikan dari perintah `{add}` `{to}` adalah perintah `{remove}` `{from}`.
                 Perintah ini menghapus item dari daftar.
-            editor: <iframe class="fragment" src="/adventure/add_remove_command/3/raw"></iframe>
-        9:
+            code: |-
+                animals {is} dog, cat, kangaroo
+                dislike {is} {ask} What animal do you not like?
+                {remove} dislike {from} animals
+                {print} I choose animals {at} {random}
+        7:
+            header: Debugging
+            text: Let's debug this code!
+            editor: |-
+                music_genres {is} rock, pop, metal, indie, jazz
+                chosen_genre is music {at} {random}
+                {print} Let's listen to chosen genre
+                nice {ask} Do you like that genre?
+                {remove} chosen_genre {from} chosen_genre
+                second_choice {is} music_genres
+                {print} or do you prefer... second_choice {at} {random}
+                {remove} second_choice {to} music_genres
+                {print} I like music_genre {random} best!
+        8:
             header: Ayo mulai bekerja!
             text: Nikmati petualangan di level 3!
     4:
         1:
             header: Selamat datang di level 4
             text: Di level ini Anda akan belajar cara menggunakan tanda kutip.
-            editor: <iframe class="fragment" src="/adventure/quotation_marks/4/raw"></iframe>
+            code: '{print} ''print with quotes!'''
         2:
             header: Masalah
             text: 'Di level sebelumnya, Anda mungkin menemukan masalah ini:'
-            editor: <iframe class="fragment" src="/adventure/default/4/raw"></iframe>
+            code: |-
+                name {is} Sophie
+                {print} My name is name
         3:
             header: Memperbaikinya dengan tanda kutip
             text: |-
@@ -210,30 +285,34 @@ levels:
         4:
             header: Tanda kutip dengan cetakan
             text: Setiap kali Anda menggunakan perintah `{print}` Anda harus meletakkan teks yang ingin Anda tampilkan di layar dalam tanda kutip.
-            editor: <iframe class="fragment" src="/adventure/quotation_marks/4/raw"></iframe>
+            code: '{print} ''print with quotes!'''
         5:
             header: Tanda kutip dengan tanya
             text: Ini juga berlaku untuk perintah `{ask}`.
-            editor: <iframe class="fragment" src="/adventure/quotation_marks/4/raw"></iframe>
+            code: name {is} {ask} 'name please?'
         6:
             header: Tanda kutip dan variabel
             text: |-
                 Anda tidak ingin nama variabel tercetak di layar.
                 Inilah sebabnya mengapa variabel harus dikeluarkan dari tanda kutip, seperti ini:
-            editor: <iframe class="fragment" src="/adventure/quotation_marks/4/raw"></iframe>
+            code: |-
+                name {is} Harry
+                {print} 'Hello ' name
         7:
             header: Tanda kutip dan variabel
             text: |-
                 Jika nama variabel digunakan di tengah kalimat, variabel tersebut harus dikeluarkan dari tanda kutip.
                 Namun sisa kalimatnya memerlukan tanda kutip. Itu terlihat seperti ini:
-            editor: <iframe class="fragment" src="/adventure/quotation_marks/4/raw"></iframe>
+            code: |-
+                name {is} Harry
+                {print} 'Hello ' name ', how are you?'
         8:
             header: Tanda kutip dan kontraksi
             text: |-
                 Hati-hati! Sekarang Anda menggunakan tanda kutip, Anda tidak dapat menggunakan tanda kutip dalam kontraksi.
 
                 Silakan coba mencetak kontraksi seperti "Anda" atau "Saya" pada layar di bawah ini dan lihat apa yang terjadi....
-            editor: <iframe class="fragment" src="/adventure/rock/4/raw"></iframe>
+            code: '{print} ''This won''t work!'''
         9:
             header: Jelas
             text: |-
@@ -241,8 +320,28 @@ levels:
                 Dengan perintah ini Anda dapat menghapus semua teks dari layar keluaran Anda.
 
                 Berhati-hatilah agar Anda selalu menggunakan perintah tidur juga. Jika tidak, komputer akan menghapus semua teks sebelum Anda dapat membacanya!
-            editor: <iframe class="fragment" src="/adventure/clear_command/4/raw"></iframe>
+            code: |-
+                {print} '3'
+                {clear}
+                {print} '2'
+                {clear}
+                {print} '1'
+                {clear}
+                {print} 'SURPRISE!'
         10:
+            header: Debugging
+            text: Let's debug this code!
+            code: |-
+                {clear}
+                {print} What a nice day to go to the beach!
+                {ask} 'Do you want to build a sandcastle or swim in the ocean?'
+                {print} 'You would like to activity '
+                {print} 'I'd like to do that too'
+                {print} 'Look at these beautiful seashells!'
+                colors {is} 'orange, silver, white, brown'
+                {print} 'I love the colors {at} {random} one!'
+                choice {is} {ask} Which one do you like?
+        11:
             header: Siap, Bersiap, Ayo!
             text: Nikmati petualangan di level 4!
     5:
@@ -255,25 +354,29 @@ levels:
                 Perintah `{if}` memungkinkan Anda memilih di antara dua opsi.
                 Pada contoh ini komputer akan mencetak 'bagus' jika jawaban yang diberikan adalah Hedy.
                 Kalau jawabannya bukan Hedy, komputer tidak akan berbuat apa-apa.
-            editor: <iframe class="fragment" src="/adventure/if_command/5/raw"></iframe>
+            code: |-
+                name {is} {ask} 'what is your name?'
+                {if} name {is} Hedy {print} 'nice'
         3:
             header: Jangan lupa untuk mencetak
             text: Saat menggunakan perintah `{if}`, jangan lupa untuk menggunakan perintah `{print}`.
-            editor: <iframe class="fragment" src="/adventure/if_command/5/raw"></iframe>
+            code: '{if} name {is} Hedy ''nice'''
         4:
             header: pula
             text: |-
                 Saat menggunakan perintah `{if}`, Anda juga dapat menambahkan perintah `{else}`.
                 Jika jawabannya Hedy, maka komputer akan mencetak 'bagus'.
                 Namun jika jawabannya lain komputer akan mencetak 'boo'
-            editor: <iframe class="fragment" src="/adventure/if_command/5/raw"></iframe>
+            code: '{if} name {is} Hedy {print} ''nice'' {else} {print} ''boo!'''
         5:
             header: Garis panjang
             text: |-
                 Anda mungkin memperhatikan bahwa baris Anda bisa menjadi sangat panjang ketika Anda memiliki perintah `{if}` dan `{else}` sekaligus.
 
                 Anda dapat memilih untuk memisahkan perintah dan menaruhnya dalam 2 baris, seperti ini:
-            editor: <iframe class="fragment" src="/adventure/if_command/5/raw"></iframe>
+            code: |-
+                {if} name {is} Hedy {print} 'nice'
+                {else} {print} 'boo!'
         6:
             header: Perintah baru lainnya
             text: |-
@@ -282,8 +385,28 @@ levels:
                 Dengan `{in}` Anda dapat membiarkan komputer memeriksa apakah suatu item ada dalam daftar, misalnya:
 
                 Harap dicatat bahwa Hedy peka terhadap huruf besar-kecil. Artinya jika Anda menjawab "Hijau" dan bukan "hijau", Hedy akan mencetak "meh".
-            editor: <iframe class="fragment" src="/adventure/in_command/5/raw"></iframe>
+            code: |-
+                pretty_colors {is} green, yellow
+                favorite_color {is} {ask} 'What is your favorite color?'
+                {if} favorite_color {in} pretty_colors {print} 'pretty!'
+                {else} {print} 'meh'
         7:
+            header: Debugging
+            text: Let's debug this code!
+            code: |-
+                {print} Welcome to HedyAir Security!
+                boarding_pass {is} {ask} 'Do you have your boarding pass?'
+                {if} bording_pass yes {print} Great!
+                {else} Please, get your boarding pass ready.
+                passport {is} 'Can I see your passport, please?'
+                {if} passport {is} yes 'thank you'
+                {else} 'You can't fly without a passport'
+                declare {is} {ask} Do you have anything to declare?
+                {if} declare {is} yes
+                item_to_declare {is} {ask} 'What would you like to declare'
+                {else} Alright
+                {print} Thank you. Please head to gate A22.'
+        8:
             header: Ayo pergi!
             text: Nikmati petualangan di level 5!
     6:
@@ -293,34 +416,61 @@ levels:
         2:
             header: Tambahan
             text: Jika ingin menghitung penjumlahan, cukup gunakan tanda tambah.
-            editor: <iframe class="fragment" src="/adventure/maths/6/raw"></iframe>
+            code: '{print} ''5 plus 5 is '' 5 + 5'
         3:
             header: Pengurangan
             text: Jika ingin melakukan pengurangan, bisa menggunakan tanda minus.
-            editor: <iframe class="fragment" src="/adventure/maths/6/raw"></iframe>
+            code: '{print} ''5 minus 5 is '' 5 - 5'
         4:
             header: Perkalian
             text: Jika ingin melakukan perkalian bisa menggunakan tanda bintang.
-            editor: <iframe class="fragment" src="/adventure/maths/6/raw"></iframe>
+            code: '{print} ''5 times 5 is '' 5 * 5'
         5:
             header: Divisi
             text: Anda dapat menggunakan garis miring untuk pembagian.
-            editor: <iframe class="fragment" src="/adventure/maths/6/raw"></iframe>
+            code: '{print} ''5 divided by 5 is '' 5 / 5'
         6:
             header: Ringkasan
             text: Singkatnya, Anda dapat menggunakan +, -, * dan / untuk mengerjakan matematika.
-            editor: <iframe class="fragment" src="/adventure/maths/6/raw"></iframe>
+            code: |-
+                {print} '5 plus 5 is ' 5 + 5
+                {print} '5 minus 5 is ' 5 - 5
+                {print} '5 times 5 is ' 5 * 5
+                {print} '5 divided by 5 is ' 5 / 5
         7:
             header: Simbol =
             text: |-
                 Mulai sekarang Anda juga dapat menggunakan simbol = sebagai ganti perintah `{is}`.
                 Ini berlaku untuk angka dan kata, dan juga setelah perintah `{if}` atau `{else}`.
-            editor: <iframe class="fragment" src="/adventure/is_command/6/raw"></iframe>
+            code: |-
+                name = Hedy
+                answer = 20 + 4
         8:
             header: Perhitungan dengan variabel
             text: 'Anda bisa menggunakan penghitungan dengan angka, namun Anda juga bisa menggunakan variabel untuk melakukan penghitungan, seperti ini:'
-            editor: <iframe class="fragment" src="/adventure/calculator/6/raw"></iframe>
+            code: |-
+                number_1 = {ask} 'Fill in the first number:'
+                number_2 = {ask} 'Fill in the second number:'
+                correct_answer = number_1 * number_2
+                {print} number_1 ' times ' number_2 ' is ' correct_answer
         9:
+            header: Debugging
+            text: Let's debug this code!
+            code: |-
+                {print} 'This is the water park ticket machine'
+                {print} 'Price list: Children under 12 $3, Adults $5'
+                {print} 'Mondays are 25% off'
+                amount_of_children = 'How many kids tickets would you like?'
+                amount_of_adults = 'How many adult tickets would you like?'
+                day_of_the_week = {ask} 'What day is it?'
+                {clear}
+                child_price = amount of children * 3
+                adult_price = amount_of_adults + 5
+                total_price = adult_price * child_price
+                {if} day {is} monday
+                total_price = total_price * 0.25
+                {print} 'That will be total_price please'
+        10:
             header: Ayo mulai bekerja!
             text: Nikmati petualangan di level 6!
     7:
@@ -334,16 +484,36 @@ levels:
                 Jika Anda ingin mengulangi baris tersebut lebih sering, cukup ubah nomornya.
 
                 Misalnya: Jika Anda memprogram cerita di mana karakter Anda berteriak minta tolong sebanyak 5 kali, tampilannya akan seperti ini:
-            editor: <iframe class="fragment" src="/adventure/story/7/raw"></iframe>
+            code: |-
+                {print} 'The prince kept calling for help'
+                {repeat} 5 {times} {print} 'Help!'
+                {print} 'Why is nobody helping me?'
         3:
             header: Jangan lupa print command
             text: Saat menggunakan perintah ulangi, jangan lupa perintah `{print}`.
-            editor: <iframe class="fragment" src="/adventure/print/7/raw"></iframe>
+            code: '{repeat} 5 {times} ''Help!'''
         4:
             header: Ulangi perintah tanya
             text: Anda juga dapat mengulangi perintah `{ask}`, `{if}`, atau `{else}` beberapa kali.
-            editor: <iframe class="fragment" src="/adventure/repeat_command_2/7/raw"></iframe>
+            code: |-
+                {repeat} 2 {times} answer = {ask} 'Did you know you could ask a question multiple times?'
+                {if} answer {is} yes {repeat} 2 {times} {print} 'You knew that already!'
+                {else} {repeat} 3 {times} {print} 'You have learned something new!'
         5:
+            header: Debugging
+            text: Let's debug this code!
+            code: |-
+                {print} You gave stranded on a desert island.
+                {repeat} 3 'Help!'
+                rescued = {ask} Has anybody come to the rescue?
+                {if} rescued yes {is}
+                {print} Lucky!
+                {else} {repeat} 3 {times} 'HELP!'
+                rescued = 'What about now?'
+                {if} yes
+                {print} 'Hurray!
+                {else} 'That's a shame... Oh well... time to build a shelter and find some food.'
+        6:
             header: Siap Berangkat!
             text: Nikmati petualangan di level 7!
     8:
@@ -356,7 +526,7 @@ levels:
                 Pada level sebelumnya, perintah `{repeat}` terlihat seperti ini:
 
                 Anda hanya dapat mengulang satu baris kode.
-            editor: <iframe class="fragment" src="/adventure/story/7/raw"></iframe>
+            code: '{repeat} 5 {times} {print} ''Help!'''
         3:
             header: '{repeat} perintah sebelumnya'
             text: |-
@@ -364,29 +534,42 @@ levels:
                 Caranya dengan menggunakan indentasi.
 
                 Gunakan 4 spasi (atau satu tab) di awal setiap baris yang ingin Anda ulangi, seperti ini:
-            editor: <iframe class="fragment" src="/adventure/repeat_command/8/raw"></iframe>
+            code: |-
+                {repeat} 5 {times}
+                    {print} 'Hello everyone'
+                    {print} 'This will be printed 5 times'
         4:
             header: '{repeat} perintah sekarang'
             text: |-
                 Jika mau, Anda dapat melanjutkan setelah perintah `{repeat}` tanpa lekukan.
                 Garis yang tidak dimulai dengan lekukan tidak akan terulang.
-            editor: <iframe class="fragment" src="/adventure/repeat_command_2/8/raw"></iframe>
+            code: |-
+                {repeat} 3 {times}
+                    {print} 'Hello!'
+                {print} 'We are done repeating!'
         5:
             header: jika dan yang lain sebelumnya
             text: |-
                 Hal yang sama berlaku untuk perintah `{if}` dan `{else}`.
                 Ini adalah perintah sebelumnya:
-            editor: <iframe class="fragment" src="/adventure/if_command/5/raw"></iframe>
+            code: |-
+                {if} name {is} Hedy {print} 'nice'
+                {else} {print} 'boo!'
         6:
             header: jika dan yang lain sekarang
             text: |-
                 Ini adalah perintah `{if}` dan `{else}` sekarang.
                 Setiap baris setelah perintah `{if}` dan `{else}` dimulai dengan indentasi.
-            editor: <iframe class="fragment" src="/adventure/if_command/8/raw"></iframe>
+            code: |-
+                name = {ask} 'What is your name?'
+                {if} name {is} Hedy
+                    {print} 'Welcome Hedy'
+                {else}
+                    {print} 'Welcome programmer!'
         7:
             header: menghentikan lekukan
             text: Sama seperti perintah `{repeat}`, Anda dapat berhenti menggunakan indentasi dan garis akan selalu ditampilkan. Bukan hanya jika pernyataan itu benar.
-            editor: <iframe class="fragment" src="/adventure/if_command/8/raw"></iframe>
+            code: "name = {ask} 'What is your name?'\n{if} name {is} Hedy\n    {print} 'Welcome Hedy'\n{else}\n    {print} 'Welcome programmer!' \n{print} '3..2..1.. Start programming!'"
         8:
             header: pernyataan if di dalam pernyataan if
             text: |-
@@ -405,29 +588,67 @@ levels:
         2:
             header: Beberapa baris setelah `{repeat}`
             text: Anda diperbolehkan menggunakan beberapa baris setelah `{repeat}`.
-            editor: <iframe class="fragment" src="/adventure/repeat_command/9/raw"></iframe>
+            code: |-
+                {repeat} 3 {times}
+                    food = {ask} 'What do you want?'
+                    {if} food {is} pizza
+                        {print} 'nice!'
+                    {else}
+                        {print} 'pizza is better'
         3:
             header: Indentasi itu penting!
             text: Indentasi sangat penting untuk memberitahu komputer jalur mana yang harus diulang dan jalur mana yang hanya boleh dijalankan satu kali.
-            editor: <iframe class="fragment" src="/adventure/repeat_command_2/8/raw"></iframe>
+            code: |-
+                {repeat} 3 {times}
+                    {print} 'This line will be repeated...'
+                    {print} 'This one too...'
+                {print} 'but this one will not!'
         4:
             header: Beberapa baris setelah `{if}`
             text: Anda juga dapat menggunakan beberapa baris setelah `{if}`
-            editor: <iframe class="fragment" src="/adventure/if_command/9/raw"></iframe>
+            code: |-
+                continue = {ask} 'Do you want to continue?'
+                {if} continue = yes
+                    sure = {ask} 'Are you sure?'
+                    {if} sure {is} yes
+                        {print} 'We will continue'
+                    {else}
+                        {print} 'You are not sure'
+                {else}
+                    {print} 'You do not want to continue'
         5:
             header: Indentasi penting
             text: Sekali lagi, indentasi masih sangat penting dan dapat membuat perbedaan besar pada kode.
-            editor: <iframe class="fragment" src="/adventure/if_command/9/raw"></iframe>
+            code: |-
+                continue = {ask} 'Do you want to continue?'
+                {if} continue = yes
+                    sure = {ask} 'Are you sure?'
+                    {if} sure {is} yes
+                        {print} 'We will continue'
+                {else}
+                    {print} 'You are not sure'
         6:
             header: Sebuah `{if}` di dalam `{repeat}`
             text: |-
                 Sekarang Anda dapat menggunakan beberapa baris kode setelah perintah ini, Anda juga dapat menempatkannya di dalam satu sama lain.
                 Coba lihat:
-            editor: <iframe class="fragment" src="/adventure/repeat_command/9/raw"></iframe>
+            code: |-
+                {repeat} 3 {times}
+                    food = {ask} 'What do you want?'
+                    {if} food {is} pizza
+                        {print} 'nice!'
+                    {else}
+                        {print} 'pizza is better'
         7:
             header: Perhatikan lekukannya
             text: Ingatlah bahwa baris keempat dan keenam kode ini dimulai dengan 8 spasi indentasi.
-            editor: <iframe class="fragment" src="/adventure/repeat_command/9/raw"></iframe>
+            code: |-
+                {repeat} 3 {times}
+                    food = {ask} 'What do you want?'
+                    {if} food {is} pizza
+                        {print} 'nice!'
+                    {else}
+                        {print} 'pizza is better'
         8:
             header: Ayo pergi!
             text: Nikmati petualangan di level 9!
@@ -438,11 +659,18 @@ levels:
         2:
             header: Perintah untuk
             text: Dengan for Anda dapat membuat daftar dan menggunakan semua item dalam daftar itu. `{for}` membuat blok, seperti pengulangan dan jika demikian, semua baris dalam blok harus diawali dengan indentasi (4 spasi).
-            editor: <iframe class="fragment" src="/adventure/for_command/10/raw"></iframe>
+            code: |-
+                animals = dog, cat, blobfish
+                {for} animal {in} animals
+                    {print} 'I love ' animal
         3:
             header: Perintah untuk
             text: 'Di sini Anda melihat contoh lain dari perintah `{for}`:'
-            editor: <iframe class="fragment" src="/adventure/dishes/10/raw"></iframe>
+            code: |-
+                days = Monday, Tuesday, Wednesday, Thursday, Friday, Saturday, Sunday
+                names = mom, dad, Emma, Sophie
+                {for} day {in} days
+                    {print} names {at} {random} ' does the dishes on ' day
         4:
             header: Saatnya memprogram!
             text: Nikmati petualangan di level 10!
@@ -456,7 +684,10 @@ levels:
         2:
             header: Perintah untuk
             text: 'Seperti inilah tampilan perintah for yang baru:'
-            editor: <iframe class="fragment" src="/adventure/for_command/11/raw"></iframe>
+            code: |-
+                {for} counter {in} {range} 1 {to} 10
+                    {print} counter
+                {print} 'Ready or not. Here I come!'
         3:
             header: variabel i
             text: |-
@@ -464,7 +695,10 @@ levels:
                 Tentu saja Anda dapat menggunakan nama apa pun untuk variabel yang Anda inginkan.
                 Nama standar untuk variabel dalam situasi ini yang digunakan dalam bahasa pemrograman seperti Python adalah 'i'.
                 Itu terlihat seperti ini:
-            editor: <iframe class="fragment" src="/adventure/calculator/11/raw"></iframe>
+            code: |-
+                number = 10
+                {for} i {in} {range} 1 {to} 10
+                    {print} i * number
         4:
             header: Mari kita mulai pemrograman!
             text: Nikmati petualangan di level 11!
@@ -479,14 +713,18 @@ levels:
             text: |-
                 Level ini membuat beberapa perubahan pada penggunaan tanda kutip.
                 Mulai sekarang, **semua teks** harus dalam tanda kutip. Ini termasuk nilai variabel, item pada daftar dan teks setelah perintah {if}.
-            editor: <iframe class="fragment" src="/adventure/quotation_marks/12/raw"></iframe>
+            code: |-
+                name = 'Hedy the Robot'
+                {print} 'Hello ' name
         3:
             header: Angka desimal
             text: |-
                 Mulai level ini Anda juga diperbolehkan menggunakan angka desimal. Ini dapat membuat program seperti restoran Anda menjadi lebih baik!
 
                 Angka tidak diberi tanda petik.
-            editor: <iframe class="fragment" src="/adventure/maths/12/raw"></iframe>
+            code: |-
+                {print} 'decimal numbers now need to use a dot'
+                {print} 2.5 + 2.5
         4:
             header: Fungsi!
             text: |-
@@ -498,7 +736,15 @@ levels:
             text: |-
                 Dalam program ini Anda melihat contoh suatu fungsi.
                 Mari kita lihat apa yang terjadi jika Anda mengisi sisa lagunya!
-            editor: <iframe class="fragment" src="/adventure/songs_2/12/raw"></iframe>
+            code: |-
+                {define} twinkle
+                     {print} 'Twinkle'
+                     {print} '...'
+
+                 {call} twinkle
+                 {print} 'Up above the world so high'
+                 {print} 'Like a diamond in the sky'
+                 {call} twinkle
         6:
             header: Fungsi
             text: Seperti yang Anda lihat pada contoh, fungsi adalah blok kode yang dapat dipanggil kapan saja. Anda menggunakan `{define}` untuk menyetel fungsi dan `{call}` untuk menggunakannya.
@@ -516,14 +762,21 @@ levels:
             text: |-
                 Perintah `{and}` selalu digunakan bersama dengan perintah {if}.
                 Dengan cara ini Anda dapat memeriksa apakah 2 pernyataan benar. Misalnya:
-            editor: <iframe class="fragment" src="/adventure/and_or_command/13/raw"></iframe>
+            code: |-
+                name = {ask} 'what is your name?'
+                age = {ask} 'what is your age?'
+                {if} name {is} 'Hedy' {and} age {is} 2
+                    {print} 'You are the real Hedy!'
         3:
             header: Perintah atau
             text: |-
                 Perintah `{or}` bekerja dengan cara yang sama seperti perintah `{and}`, namun hanya 1 dari dua pernyataan yang harus benar.
 
                 Mari kita lihat apa yang terjadi jika Anda mengubah `{and}` menjadi `{or}`.
-            editor: <iframe class="fragment" src="/adventure/and_or_command/13/raw"></iframe>
+            code: |-
+                name = {ask} 'what is your name?'
+                {if} name {is} 'Hedy' {or} name {is} 'hedy'
+                    {print} 'Welcome!!'
         4:
             header: Fungsi dengan argumen
             text: Sekarang setelah Anda mempelajari cara menggunakan fungsi, Anda akan mempelajari cara menggunakan fungsi dengan **argumen**. Argumen adalah variabel yang digunakan dalam suatu fungsi. Itu tidak digunakan di luar fungsi.
@@ -532,7 +785,13 @@ levels:
             text: |-
                 Dalam contoh ini Anda melihat bagaimana argumen 'tempat' digunakan dalam fungsi.
                 Jalankan kode dan ubah 'ocean' dan 'sea' menjadi sesuatu yang lain, dan lihat apa yang terjadi.
-            editor: <iframe class="fragment" src="/adventure/functions/13/raw"></iframe>
+            code: |-
+                {define} song {with} place
+                    {print} 'My Bonnie is over the ' place
+
+                {call} song {with} 'ocean'
+                {call} song {with} 'sea'
+                {call} song {with} 'ocean'
         6:
             header: Contoh dengan variabel
             text: |-
@@ -546,7 +805,13 @@ levels:
                 jawabannya adalah bertanya 'Di mana Bonnie saya?'
                 panggilan lagu dengan jawaban
                 ```
-            editor: <iframe class="fragment" src="/adventure/functions/13/raw"></iframe>
+            code: |-
+                {define} song {with} place
+                    {print} 'My Bonnie is over the ' place
+
+                {call} song {with} 'ocean'
+                {call} song {with} 'sea'
+                {call} song {with} 'ocean'
         7:
             header: Lebih banyak pertanyaan lagi!
             text: |-
@@ -562,7 +827,13 @@ levels:
                 tempat bertanya 'Di mana mereka?'
                 panggil lagu dengan nama, tempat
                 ```
-            editor: <iframe class="fragment" src="/adventure/functions/13/raw"></iframe>
+            code: |-
+                {define} song {with} place
+                    {print} 'My Bonnie is over the ' place
+
+                {call} song {with} 'ocean'
+                {call} song {with} 'sea'
+                {call} song {with} 'ocean'
         8:
             header: Ayo!
             text: Nikmati petualangan di level 13!
@@ -584,7 +855,12 @@ levels:
                   <= berarti lebih kecil dari atau sama dengan...
 
                 Anda dapat menggunakannya seperti ini:
-            editor: <iframe class="fragment" src="/adventure/is_command/14/raw"></iframe>
+            code: |-
+                age = {ask} 'How old are you?'
+                {if} age < 13
+                    {print} 'You are younger than me!'
+                {else}
+                    {print} 'You are older than me!'
         3:
             header: Simbol
             text: |-
@@ -595,7 +871,12 @@ levels:
                 != tidak
 
                 == digunakan dalam pernyataan `{if}`.
-            editor: <iframe class="fragment" src="/adventure/default/14/raw"></iframe>
+            code: |-
+                answer = {ask} 'Do you want to learn more?'
+                {if} answer == 'yes'
+                    {print} 'Go to the next adventure!'
+                {if} answer != 'yes'
+                    {print} 'That is a shame!'
         4:
             header: Nilai kembalian
             text: Pada level sebelumnya Anda telah belajar membuat fungsi dan menggunakan argumen dengannya. Kegunaan hebat lainnya dari suatu fungsi adalah membiarkannya menghitung sesuatu untuk Anda. Anda dapat memberikan fungsi perhitungan dan itu akan memberi Anda jawaban perhitungannya. Jawaban ini
@@ -603,7 +884,17 @@ levels:
         5:
             header: Nilai kembalian
             text: Misalnya, dalam kode ini fungsi hitung_harga_baru akan menghitung harga baru suatu barang. Ini akan memberi Anda harga baru sebagai nilai pengembalian.
-            editor: <iframe class="fragment" src="/adventure/functions/14/raw"></iframe>
+            code: |-
+                {define} calculate_new_price {with} amount, percentage
+                    percentage = percentage / 100
+                    discount_amount = amount * percentage
+                    return amount - discount_amount
+
+                old_price = {ask} 'How much is on the price tag?'
+                discount = {ask} 'What percentage is the discount?'
+
+                new_price = {call} calculate_new_price {with} old_price, discount
+                {print} 'The new price is ' new_price ' dollar'
         6:
             header: Ayo mulai bekerja!
             text: Nikmati petualangan di level 14!
@@ -617,7 +908,11 @@ levels:
                 Kita akan mempelajari perulangan baru, perulangan while! Perulangan akan terus berlanjut selama pernyataan tersebut benar. Jadi jangan lupa untuk mengubah nilai dalam loop.
 
                 Dalam kode contoh, kami melanjutkan hingga jawaban yang benar diberikan. Jika jawaban yang benar tidak pernah diberikan, perulangan tidak akan pernah berakhir!
-            editor: <iframe class="fragment" src="/adventure/while_command/15/raw"></iframe>
+            code: |-
+                answer = 0
+                {while} answer != 25
+                    answer = {ask} 'What is 5 times 5?'
+                {print} 'A correct answer has been given'
         3:
             header: Mari kita mencobanya!
             text: Nikmati petualangan di level 15!
@@ -629,7 +924,15 @@ levels:
             header: Tanda kurung siku
             text: Kita akan membuat daftar dengan cara Python, dengan tanda kurung siku di sekeliling daftar! Kami juga menyimpan tanda kutip di sekitar setiap item seperti yang telah kami pelajari di level sebelumnya. Kami menggunakan tanda kurung siku untuk menunjukkan suatu tempat dalam daftar. Perintah
                 secara acak tidak dapat digunakan lagi.
-            editor: <iframe class="fragment" src="/adventure/random_command/16/raw"></iframe>
+            code: |-
+                friends = ['Ahmed', 'Ben', 'Cayden']
+                {print} friends[1] ' is the first friend on the list.'
+                {print} friends[2] ' is the second friend on the list.'
+                {print} friends[3] ' is the third friend on the list.'
+                #now we will match 2 lists using the variable i
+                lucky_numbers = [15, 18, 6]
+                {for} i {in} {range} 1 {to} 3
+                    {print} friends[i] 's lucky number is ' lucky_numbers[i]
         3:
             header: Mari kita mencobanya!
             text: Nikmati petualangan di level 16!
@@ -640,11 +943,27 @@ levels:
         2:
             header: Tanda titik dua
             text: 'Sekarang kita akan mengubah indentasinya sedikit. Setiap kali kita memerlukan indentasi, kita memerlukan : pada baris sebelum indentasi.'
-            editor: <iframe class="fragment" src="/adventure/print_command/17/raw"></iframe>
+            code: |-
+                prices = ['1 million dollars', 'an apple pie', 'nothing']
+                your_price = prices[{random}]
+                {print} 'You win ' your_price
+                {if} your_price == '1 million dollars' :
+                    {print} 'Yeah! You are rich!'
+                {else}:
+                    {print} 'Better luck next time..'
         3:
             header: Elif
             text: 'Di level ini Anda juga bisa menggunakan perintah baru: elif. elif adalah kependekan dari else if dan Anda membutuhkannya ketika Anda ingin membuat 3 opsi (atau lebih!). Coba lihat!'
-            editor: <iframe class="fragment" src="/adventure/elif_command/17/raw"></iframe>
+            code: |-
+                prices = ['1 million dollars', 'an apple pie', 'nothing']
+                your_price = prices[{random}]
+                {print} 'You win ' your_price
+                {if} your_price == '1 million dollars' :
+                    {print} 'Yeah! You are rich!'
+                {elif} your_price == 'an apple pie' :
+                    {print} 'Lovely, an apple pie!'
+                {else}:
+                    {print} 'Better luck next time..'
         4:
             header: Mari kita coba!
             text: Nikmati petualangan di level 17!
@@ -663,7 +982,7 @@ levels:
                 Perubahan terakhir yang perlu kita lakukan untuk mendapatkan kode Python adalah mengubah permintaan menjadi input.
 
                 Klik pada tab 'cetak' untuk semua contoh.
-            editor: <iframe class="fragment" src="/hedy/18"></iframe>
+            editor: /hedy/18
         3:
             header: Petualangan terakhir!
             text: Nikmati petualangan terakhir di level 18!

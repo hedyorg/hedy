@@ -26,29 +26,26 @@ levels:
                 * 开发你自己的应用程序也就是APP，并在你的手机上使用这个应用程序
         5:
             header: Hedy编程
-            text: |-
-                在Hedy中，我们使用特殊代码，如`{print}`。
-                <iframe class="embedded-hedy" src="/adventure/story/1/raw"></iframe>
+            text: 在Hedy中，我们使用特殊代码，如`{print}`。
+            code: '{print} Welcome to Hedy!'
         6:
             header: Hedy编程
-            text: |-
-                代码词将显示为粉红色。
-                <iframe class="embedded-hedy" src="/adventure/story/1/raw"></iframe>
+            text: 代码词将显示为粉红色。
+            code: '{print} Welcome to Hedy!'
         7:
             header: Hedy编程
-            text: |-
-                我们使用代码下方的“运行代码”按钮开始运行代码。
-                <iframe class="embedded-hedy" src="/adventure/story/1/raw"></iframe>
+            text: 我们使用代码下方的“运行代码”按钮开始运行代码。
+            code: '{print} Welcome to Hedy!'
         8:
             header: Hedy编程
-            text: |-
-                输出的内容显示在右侧。
-                <iframe class="embedded-hedy" src="/adventure/story/1/raw"></iframe>
+            text: 输出的内容显示在右侧。
+            code: '{print} Welcome to Hedy!'
         9:
             header: Hedy编程
-            text: |-
-                输出也可以是一个图形。
-                <iframe class="embedded-hedy" src="/adventure/turtle/1/raw"></iframe>
+            text: 输出也可以是一个图形。
+            code: |-
+                {forward} 100
+                {turn} left
     1:
         1:
             header: 欢迎来到第1级!
@@ -62,36 +59,37 @@ levels:
                 在级别1中，你可以使用的第一个代码是 `{打印}`。
 
                 `{打印}`是用来在屏幕上显示文本。
-            editor: <iframe class="fragment" src="/adventure/print_command/1/raw"></iframe>
+            code: '{print} Put text on the screen'
         3:
             header: '{打印} 命令'
             text: |-
                 你可以随意地修改 `{打印}` 命令后面的文字。
 
                 你也可以再添加一行 `{打印}` 命令，来打印多行文字。
-            editor: <iframe class="fragment" src="/adventure/print_command/1/raw"></iframe>
+            code: '{print} Put text on the screen'
         4:
             header: Hedy 第1 级：{echo}
             text: |-
                 在第1级中，你可以使用的最后一个文本代码是`{问}`。
 
                 `{问}`用于重复`{ask}`的答案。
-            editor: <iframe class="fragment" src="/adventure/parrot/1/raw"></iframe>
+            code: |-
+                {print} Hello!
+                {ask} What is your name?
+                {echo} hello
         5:
             header: 编程
             text: |-
                 使用`{print}`、`{ask}`和`{echo}`，你已经可以创作一个小故事。
                 这是尝试冒险活动鹦鹉、石头剪刀布和故事的的好时机。
-            editor: <iframe class="fragment" src="/adventure/ask_command/1/raw"></iframe>
+            editor: /hedy/1
         6:
             header: 编程!
             text: 探险活动显示在标签页中。
         7:
             header: 编程!
-            text: |-
-                可以用标记黄色箭头的按钮复制例子。
-                <iframe class="fragment" src="/hedy/1"></iframe>
-            editor: <iframe class="fragment" src="/hedy/1"></iframe>
+            text: 可以用标记黄色箭头的按钮复制例子。
+            editor: /hedy#print_command
         8:
             header: 用海龟绘图画画！
             text: 现在我们已经看到了文本代码，接下来我们将看到图形代码。
@@ -101,24 +99,42 @@ levels:
         10:
             header: '用海龟绘图画画: {turn}'
             text: '`{turn}` 用于让海龟向左转或向右转。'
-            editor: <iframe class="fragment" src="/adventure/turtle/1/raw"></iframe>
+            code: |-
+                {forward} 50
+                {turn} left
         11:
             header: 'Drawing with the turtle: {turn}'
             text: '`{turn}` is used to make the turtle turn left or right.'
-            editor: <iframe class="fragment" src="/adventure/turtle/1/raw"></iframe>
+            code: |-
+                {forward} 50
+                {turn} left
+        12:
+            header: Debugging
+            text: Debugging a code means getting rid of mistakes in the code. Let's debug this code together. Click the ladybug button to start the debugger.
+            code: |-
+                I am DJ Hedy
+                {print} What song would you like to hear?
+                {ask} I like that song too!
+                {print} Next up... {echo}
+        13:
+            header: Let the programming fun begin!
+            text: Enjoy the adventures in level 1!
     2:
         1:
             header: Welcome to level 2
             text: |-
                 In this level you will learn to use variables.
 
-                A variable is a word that can be used to store informatie.
+                A variable is a word that can be used to store information.
 
                 For example: a name, age or favorite sports team.
         2:
             header: Variables
             text: To make or 'set' a variable we use the `{is}` command
-            editor: <iframe class="fragment" src="/adventure/is_command/2/raw"></iframe>
+            code: |-
+                name {is} Hedy
+                age {is} 15
+                {print} name is age years old
         3:
             header: Interactive
             text: |-
@@ -127,23 +143,48 @@ levels:
                 The answer to the question is stored in the variable.
 
                 This way we don't need the `{echo}`  command.
-            editor: <iframe class="fragment" src="/adventure/ask_command/2/raw"></iframe>
+            code: |-
+                name {is} {ask} What is your name?
+                {print} Hello name
         4:
             header: Multiple variables
             text: Now that we use variables, we can use multiple variables instead of just one `{echo}`command.
-            editor: <iframe class="fragment" src="/adventure/ask_command/2/raw"></iframe>
+            code: |-
+                name {is} {ask} What is your name?
+                {print} Hello name
+                age {is} {ask} How old are you?
+                {print} name is age years old.
         5:
             header: Sleep
             text: You can also use the `{sleep}` command to pause the code for a while.
-            editor: <iframe class="fragment" src="/adventure/sleep_command/2/raw"></iframe>
+            code: |-
+                {print} My favorite colour is...
+                {sleep} 2
+                {print} green!
         6:
             header: Sleep 5
             text: |-
                 You can add a number after the `{sleep}` command if you want the pause to be longer.
 
                 If you want, you could even use a variable instead of a number to decide the duration of the sleep command.
-            editor: <iframe class="fragment" src="/adventure/sleep_command/2/raw"></iframe>
+            code: |-
+                pause {is} 10
+                {print} My favorite colour is...
+                {sleep} pause
+                {print} green!
         7:
+            header: Debugging
+            text: Debugging a code means getting rid of mistakes in the code. Let's debug this code together. Click the ladybug button to start the debugger.
+            code: |-
+                {print} Welcome to the donut shop!
+                filling {is} What kind of filling would you like?
+                {print} You have chosen... Filling! Yum!
+                topping {ask} What kind of topping would you like?
+                topping is delicious!
+                {print} I'll go get your donut. {sleep}
+                {print} Here you go! A filling donut with toping!
+                {ask} Have a nice day!
+        8:
             header: Let the programming fun begin!
             text: Enjoy the adventures in level 3!
     3:
@@ -155,19 +196,27 @@ levels:
             text: |-
                 You make a list with `{is}`.
 
-                Seperate the items on your list with a comma.
-            editor: <iframe class="fragment" src="/adventure/random_command/3/raw"></iframe>
+                Separate the items on your list with a comma.
+            code: |-
+                animals {is} dogs, cats, kangaroos
+                ```
         3:
             header: At random
             text: |-
                 You can use the list with the `{at}` `{random}` command.
                 The computer will randomly pick one item of the list.
                 Every time you run this code the output will differ.
-            editor: <iframe class="fragment" src="/adventure/dice/3/raw"></iframe>
+            code: |-
+                animals {is} dogs, cats, kangaroos
+                {print} animals {at} {random}
+                ```
         4:
             header: At random in a sentence
             text: You can use the `{at}` `{random}` command in a sentence as well.
-            editor: <iframe class="fragment" src="/adventure/random_command/3/raw"></iframe>
+            code: |-
+                animals {is} dogs, cats, kangaroos
+                {print} My favorite animal is animals {at} {random}
+                ```
         5:
             header: Add to
             text: |-
@@ -175,25 +224,48 @@ levels:
 
                 You can choose what to add to the list or you can use the `{add}` `{to}` command in combination with the `{ask}` command.
                 This way you can let the player decide what to add to the list.
-            editor: <iframe class="fragment" src="/adventure/add_remove_command/3/raw"></iframe>
+            code: |-
+                animals {is} dog, cat, kangaroo
+                like {is} {ask} What is your favorite animal?
+                {add} like {to_list} animals
+                {print} I choose animals {at} {random}
         6:
             header: Remove from
             text: |-
                 The opposite of the `{add}` `{to}` command is the  `{remove}` `{from}` command.
                 This command removes an item from a list.
-            editor: <iframe class="fragment" src="/adventure/add_remove_command/3/raw"></iframe>
-        9:
+            code: |-
+                animals {is} dog, cat, kangaroo
+                dislike {is} {ask} What animal do you not like?
+                {remove} dislike {from} animals
+                {print} I choose animals {at} {random}
+        7:
+            header: Debugging
+            text: Let's debug this code!
+            editor: |-
+                music_genres {is} rock, pop, metal, indie, jazz
+                chosen_genre is music {at} {random}
+                {print} Let's listen to chosen genre
+                nice {ask} Do you like that genre?
+                {remove} chosen_genre {from} chosen_genre
+                second_choice {is} music_genres
+                {print} or do you prefer... second_choice {at} {random}
+                {remove} second_choice {to} music_genres
+                {print} I like music_genre {random} best!
+        8:
             header: Let's get to work!
             text: Enjoy the adventures in level 3!
     4:
         1:
             header: Welcome to level 4
             text: In this level you will learn how to use quotation marks.
-            editor: <iframe class="fragment" src="/adventure/quotation_marks/4/raw"></iframe>
+            code: '{print} ''print with quotes!'''
         2:
             header: Problem
             text: 'In the previous levels, you might have come across this problem:'
-            editor: <iframe class="fragment" src="/adventure/default/4/raw"></iframe>
+            code: |-
+                name {is} Sophie
+                {print} My name is name
         3:
             header: Fixing it with quotation marks
             text: |-
@@ -203,30 +275,34 @@ levels:
         4:
             header: Quotation marks with print
             text: 每次使用 `{print}` 命令时，都需要将要显示在屏幕上的文本放在引号中。
-            editor: <iframe class="fragment" src="/adventure/quotation_marks/4/raw"></iframe>
+            code: '{print} ''print with quotes!'''
         5:
             header: Quotation marks with ask
             text: This also goes for the `{ask}` command.
-            editor: <iframe class="fragment" src="/adventure/quotation_marks/4/raw"></iframe>
+            code: name {is} {ask} 'name please?'
         6:
             header: Quotation marks and variables
             text: |-
                 You do not want variable names to be printed on the screen.
                 This is why variables should be left out of the quotation marks, like this:
-            editor: <iframe class="fragment" src="/adventure/quotation_marks/4/raw"></iframe>
+            code: |-
+                name {is} Harry
+                {print} 'Hello ' name
         7:
             header: Quotation marks and variables
             text: |-
                 当变量名用在句子中间时，必须将变量放在引号之外。
                 然而，句子的其余部分确实需要引号。 看起来像这样:
-            editor: <iframe class="fragment" src="/adventure/quotation_marks/4/raw"></iframe>
+            code: |-
+                name {is} Harry
+                {print} 'Hello ' name ', how are you?'
         8:
             header: Quotation marks and contractions
             text: |-
                 当心！ 既然使用了引号，则不能在缩写中使用引号。
 
                 请尝试在下面的屏幕中打印诸如“you're”或“I'm”之类的缩写，看看会发生什么......
-            editor: <iframe class="fragment" src="/adventure/rock/4/raw"></iframe>
+            code: '{print} ''This won''t work!'''
         9:
             header: 清除
             text: |-
@@ -234,8 +310,28 @@ levels:
                 使用此命令，可以擦除输出屏幕上的所有文本。
 
                 请注意，你也应该配合使用睡眠命令。 如果不这样做，计算机将在你阅读之前擦除所有文本！
-            editor: <iframe class="fragment" src="/adventure/clear_command/4/raw"></iframe>
+            code: |-
+                {print} '3'
+                {clear}
+                {print} '2'
+                {clear}
+                {print} '1'
+                {clear}
+                {print} 'SURPRISE!'
         10:
+            header: Debugging
+            text: Let's debug this code!
+            code: |-
+                {clear}
+                {print} What a nice day to go to the beach!
+                {ask} 'Do you want to build a sandcastle or swim in the ocean?'
+                {print} 'You would like to activity '
+                {print} 'I'd like to do that too'
+                {print} 'Look at these beautiful seashells!'
+                colors {is} 'orange, silver, white, brown'
+                {print} 'I love the colors {at} {random} one!'
+                choice {is} {ask} Which one do you like?
+        11:
             header: Ready, Set, Go!
             text: 享受第 4 关的冒险！
     5:
@@ -248,25 +344,29 @@ levels:
                 `{if}` 命令允许你在两个选项之间进行选择。
                 在此示例中，如果给定的答案是 `Hedy`，计算机将打印`'nice'`。
                 如果答案不是 `Hedy`，计算机将不执行任何操作。
-            editor: <iframe class="fragment" src="/adventure/if_command/5/raw"></iframe>
+            code: |-
+                name {is} {ask} 'what is your name?'
+                {if} name {is} Hedy {print} 'nice'
         3:
             header: Don't forget to print
             text: 使用 `{if}` 命令时，不要忘记使用`{print}`命令。
-            editor: <iframe class="fragment" src="/adventure/if_command/5/raw"></iframe>
+            code: '{if} name {is} Hedy ''nice'''
         4:
             header: 否则
             text: |-
                 使用 `{if}` 命令时，还可以添加 `{else}` 命令。
                 如果答案是 `Hedy`，计算机会打印`'nice'`。
                 但如果答案是别的，计算机会打印`'boo'`
-            editor: <iframe class="fragment" src="/adventure/if_command/5/raw"></iframe>
+            code: '{if} name {is} Hedy {print} ''nice'' {else} {print} ''boo!'''
         5:
             header: Long lines
             text: |-
                 你可能已经注意到，当你同时使用 `{if}` 和 `{else}`命令时，你的代码行可能会变得很长。
 
                 你可以选择将命令分开并将它们放在两行中，如下所示：
-            editor: <iframe class="fragment" src="/adventure/if_command/5/raw"></iframe>
+            code: |-
+                {if} name {is} Hedy {print} 'nice'
+                {else} {print} 'boo!'
         6:
             header: Another new command
             text: |-
@@ -275,8 +375,28 @@ levels:
                 使用 `{in}` ，你可以让计算机检查某个项目是否在列表中，例如：
 
                 请注意 `Hedy` 区分大小写。 这意味着如果您回答`"Green"`而不是`"green"`，`Hedy` 将打印`"meh"`。
-            editor: <iframe class="fragment" src="/adventure/in_command/5/raw"></iframe>
+            code: |-
+                pretty_colors {is} green, yellow
+                favorite_color {is} {ask} 'What is your favorite color?'
+                {if} favorite_color {in} pretty_colors {print} 'pretty!'
+                {else} {print} 'meh'
         7:
+            header: Debugging
+            text: Let's debug this code!
+            code: |-
+                {print} Welcome to HedyAir Security!
+                boarding_pass {is} {ask} 'Do you have your boarding pass?'
+                {if} bording_pass yes {print} Great!
+                {else} Please, get your boarding pass ready.
+                passport {is} 'Can I see your passport, please?'
+                {if} passport {is} yes 'thank you'
+                {else} 'You can't fly without a passport'
+                declare {is} {ask} Do you have anything to declare?
+                {if} declare {is} yes
+                item_to_declare {is} {ask} 'What would you like to declare'
+                {else} Alright
+                {print} Thank you. Please head to gate A22.'
+        8:
             header: Let's go!
             text: 享受第 5 关的冒险！
     6:
@@ -286,34 +406,61 @@ levels:
         2:
             header: Addition
             text: 如果要计算加法，只需使用加号即可。
-            editor: <iframe class="fragment" src="/adventure/maths/6/raw"></iframe>
+            code: '{print} ''5 plus 5 is '' 5 + 5'
         3:
             header: Subtraction
             text: 如果要减，可以使用减号。
-            editor: <iframe class="fragment" src="/adventure/maths/6/raw"></iframe>
+            code: '{print} ''5 minus 5 is '' 5 - 5'
         4:
             header: Multiplication
             text: 如果要进行乘法，可以使用星号。
-            editor: <iframe class="fragment" src="/adventure/maths/6/raw"></iframe>
+            code: '{print} ''5 times 5 is '' 5 * 5'
         5:
             header: Division
             text: 您可以使用斜杠进行除法。
-            editor: <iframe class="fragment" src="/adventure/maths/6/raw"></iframe>
+            code: '{print} ''5 divided by 5 is '' 5 / 5'
         6:
             header: Summary
             text: 总之，您可以使用 +、-、* 和 / 来进行数学运算。
-            editor: <iframe class="fragment" src="/adventure/maths/6/raw"></iframe>
+            code: |-
+                {print} '5 plus 5 is ' 5 + 5
+                {print} '5 minus 5 is ' 5 - 5
+                {print} '5 times 5 is ' 5 * 5
+                {print} '5 divided by 5 is ' 5 / 5
         7:
             header: The = symbol
             text: |-
                 从现在开始，您还可以使用 = 符号代替 `{is}` 命令。
                 这适用于数字和单词，也适用于 `{if}` 或 `{else}`命令之后。
-            editor: <iframe class="fragment" src="/adventure/is_command/6/raw"></iframe>
+            code: |-
+                name = Hedy
+                answer = 20 + 4
         8:
             header: Calculations with variables
             text: 你可以使用数字进行计算，但也可以使用变量进行计算，如下所示：
-            editor: <iframe class="fragment" src="/adventure/calculator/6/raw"></iframe>
+            code: |-
+                number_1 = {ask} 'Fill in the first number:'
+                number_2 = {ask} 'Fill in the second number:'
+                correct_answer = number_1 * number_2
+                {print} number_1 ' times ' number_2 ' is ' correct_answer
         9:
+            header: Debugging
+            text: Let's debug this code!
+            code: |-
+                {print} 'This is the water park ticket machine'
+                {print} 'Price list: Children under 12 $3, Adults $5'
+                {print} 'Mondays are 25% off'
+                amount_of_children = 'How many kids tickets would you like?'
+                amount_of_adults = 'How many adult tickets would you like?'
+                day_of_the_week = {ask} 'What day is it?'
+                {clear}
+                child_price = amount of children * 3
+                adult_price = amount_of_adults + 5
+                total_price = adult_price * child_price
+                {if} day {is} monday
+                total_price = total_price * 0.25
+                {print} 'That will be total_price please'
+        10:
             header: Let's get to work!
             text: 享受第 6 关的冒险！
     7:
@@ -327,16 +474,36 @@ levels:
                 如果您想多次重复该行，只需更改数字即可。
 
                 例如：如果您正在编写一个故事，其中您的角色大声呼救 5 次，则可能如下所示：
-            editor: <iframe class="fragment" src="/adventure/story/7/raw"></iframe>
+            code: |-
+                {print} 'The prince kept calling for help'
+                {repeat} 5 {times} {print} 'Help!'
+                {print} 'Why is nobody helping me?'
         3:
             header: Don't forget the print command
             text: 使用重复命令时，不要忘记`{print}`命令。
-            editor: <iframe class="fragment" src="/adventure/print/7/raw"></iframe>
+            code: '{repeat} 5 {times} ''Help!'''
         4:
             header: Repeat an ask command
             text: 你还可以多次重复 `{ask}`, `{if}` 或 `{else}` 命令。
-            editor: <iframe class="fragment" src="/adventure/repeat_command_2/7/raw"></iframe>
+            code: |-
+                {repeat} 2 {times} answer = {ask} 'Did you know you could ask a question multiple times?'
+                {if} answer {is} yes {repeat} 2 {times} {print} 'You knew that already!'
+                {else} {repeat} 3 {times} {print} 'You have learned something new!'
         5:
+            header: Debugging
+            text: Let's debug this code!
+            code: |-
+                {print} You gave stranded on a desert island.
+                {repeat} 3 'Help!'
+                rescued = {ask} Has anybody come to the rescue?
+                {if} rescued yes {is}
+                {print} Lucky!
+                {else} {repeat} 3 {times} 'HELP!'
+                rescued = 'What about now?'
+                {if} yes
+                {print} 'Hurray!
+                {else} 'That's a shame... Oh well... time to build a shelter and find some food.'
+        6:
             header: Ready Set Go!
             text: 享受第七关的冒险吧！
     8:
@@ -349,7 +516,7 @@ levels:
                 在前面的关卡中，`{repeat}`命令如下所示：
 
                 你只能重复一行代码。
-            editor: <iframe class="fragment" src="/adventure/story/7/raw"></iframe>
+            code: '{repeat} 5 {times} {print} ''Help!'''
         3:
             header: '{repeat} commands now'
             text: |-
@@ -357,29 +524,42 @@ levels:
                 你可以通过使用缩进来完成此操作。
 
                 在要重复的每一行的开头使用 4 个空格（或一个制表符），如下所示：
-            editor: <iframe class="fragment" src="/adventure/repeat_command/8/raw"></iframe>
+            code: |-
+                {repeat} 5 {times}
+                    {print} 'Hello everyone'
+                    {print} 'This will be printed 5 times'
         4:
             header: '{repeat} commands now'
             text: |-
                 如果需要，你可以在 `{repeat}` 命令之后继续，无需缩进。
                 不以缩进开头的行将不会重复。
-            editor: <iframe class="fragment" src="/adventure/repeat_command_2/8/raw"></iframe>
+            code: |-
+                {repeat} 3 {times}
+                    {print} 'Hello!'
+                {print} 'We are done repeating!'
         5:
             header: if and else before
             text: |-
                 `{if}` 和 `{else}` 命令也是如此。
                 这些是之前的命令：
-            editor: <iframe class="fragment" src="/adventure/if_command/5/raw"></iframe>
+            code: |-
+                {if} name {is} Hedy {print} 'nice'
+                {else} {print} 'boo!'
         6:
             header: if and else now
             text: |-
                 现在这些 `{if}` 和 `{else}` 命令。
                 `{if}` 和 `{else}` 命令后面的每一行都以缩进开头。
-            editor: <iframe class="fragment" src="/adventure/if_command/8/raw"></iframe>
+            code: |-
+                name = {ask} 'What is your name?'
+                {if} name {is} Hedy
+                    {print} 'Welcome Hedy'
+                {else}
+                    {print} 'Welcome programmer!'
         7:
             header: stopping the indentation
             text: 就像使用 `{repeat}` 命令一样，你可以停止使用缩进，并且行将始终显示。 不仅仅是该陈述是否属实。
-            editor: <iframe class="fragment" src="/adventure/if_command/8/raw"></iframe>
+            code: "name = {ask} 'What is your name?'\n{if} name {is} Hedy\n    {print} 'Welcome Hedy'\n{else}\n    {print} 'Welcome programmer!' \n{print} '3..2..1.. Start programming!'"
         8:
             header: if statements inside if statements
             text: |-
@@ -398,29 +578,67 @@ levels:
         2:
             header: Multiple lines after `{repeat}`
             text: 您可以在 `{repeat}`之后使用多行。
-            editor: <iframe class="fragment" src="/adventure/repeat_command/9/raw"></iframe>
+            code: |-
+                {repeat} 3 {times}
+                    food = {ask} 'What do you want?'
+                    {if} food {is} pizza
+                        {print} 'nice!'
+                    {else}
+                        {print} 'pizza is better'
         3:
             header: Indentation matters!
             text: 缩进对于告诉计算机哪些行应该重复以及哪些行只能运行一次非常重要。
-            editor: <iframe class="fragment" src="/adventure/repeat_command_2/8/raw"></iframe>
+            code: |-
+                {repeat} 3 {times}
+                    {print} 'This line will be repeated...'
+                    {print} 'This one too...'
+                {print} 'but this one will not!'
         4:
-            header: Multipe lines after `{if}`
+            header: Multiple lines after `{if}`
             text: 你还可以在“{if}”之后使用多行
-            editor: <iframe class="fragment" src="/adventure/if_command/9/raw"></iframe>
+            code: |-
+                continue = {ask} 'Do you want to continue?'
+                {if} continue = yes
+                    sure = {ask} 'Are you sure?'
+                    {if} sure {is} yes
+                        {print} 'We will continue'
+                    {else}
+                        {print} 'You are not sure'
+                {else}
+                    {print} 'You do not want to continue'
         5:
             header: Indentation matters
             text: 同样，缩进仍然非常重要，可以在代码中产生很大的差异。
-            editor: <iframe class="fragment" src="/adventure/if_command/9/raw"></iframe>
+            code: |-
+                continue = {ask} 'Do you want to continue?'
+                {if} continue = yes
+                    sure = {ask} 'Are you sure?'
+                    {if} sure {is} yes
+                        {print} 'We will continue'
+                {else}
+                    {print} 'You are not sure'
         6:
             header: An `{if}` inside a `{repeat}`
             text: |-
                 现在你可以在这些命令之后使用多行代码，你也可以将它们放在一起。
                 一探究竟:
-            editor: <iframe class="fragment" src="/adventure/repeat_command/9/raw"></iframe>
+            code: |-
+                {repeat} 3 {times}
+                    food = {ask} 'What do you want?'
+                    {if} food {is} pizza
+                        {print} 'nice!'
+                    {else}
+                        {print} 'pizza is better'
         7:
             header: Mind the indentation
             text: 请注意，此代码的第四行和第六行以 8 个缩进空格开头。
-            editor: <iframe class="fragment" src="/adventure/repeat_command/9/raw"></iframe>
+            code: |-
+                {repeat} 3 {times}
+                    food = {ask} 'What do you want?'
+                    {if} food {is} pizza
+                        {print} 'nice!'
+                    {else}
+                        {print} 'pizza is better'
         8:
             header: Let's go!
             text: 享受第9关的冒险吧！
@@ -431,11 +649,18 @@ levels:
         2:
             header: The for command
             text: 使用 for 可以创建一个列表并使用该列表上的所有项目。 `{for}` 创建一个块，就像重复(repeat)一样，块中的所有行都需要以缩进（4 个空格）开头。
-            editor: <iframe class="fragment" src="/adventure/for_command/10/raw"></iframe>
+            code: |-
+                animals = dog, cat, blobfish
+                {for} animal {in} animals
+                    {print} 'I love ' animal
         3:
             header: The for command
             text: 在这里您可以看到 `{for}` 命令的另一个示例：
-            editor: <iframe class="fragment" src="/adventure/dishes/10/raw"></iframe>
+            code: |-
+                days = Monday, Tuesday, Wednesday, Thursday, Friday, Saturday, Sunday
+                names = mom, dad, Emma, Sophie
+                {for} day {in} days
+                    {print} names {at} {random} ' does the dishes on ' day
         4:
             header: Time to program!
             text: 享受第10关的冒险吧！
@@ -449,7 +674,10 @@ levels:
         2:
             header: The for command
             text: 新的 for 命令如下所示：
-            editor: <iframe class="fragment" src="/adventure/for_command/11/raw"></iframe>
+            code: |-
+                {for} counter {in} {range} 1 {to} 10
+                    {print} counter
+                {print} 'Ready or not. Here I come!'
         3:
             header: the variable i
             text: |-
@@ -457,7 +685,10 @@ levels:
                 当然，可以为你想要的变量使用任何名称。
                 在这种情况下，Python 等编程语言中使用的变量的标准名称是`'i'`。
                 看起来像这样：
-            editor: <iframe class="fragment" src="/adventure/calculator/11/raw"></iframe>
+            code: |-
+                number = 10
+                {for} i {in} {range} 1 {to} 10
+                    {print} i * number
         4:
             header: Let's start programming!
             text: 享受第11关的冒险吧！
@@ -472,14 +703,18 @@ levels:
             text: |-
                 此级别对引号的使用进行了一些更改。
                 从现在开始，**所有文本**都需要用引号引起来。 这包括变量值、列表中的项目以及 {if} 命令之后的文本。
-            editor: <iframe class="fragment" src="/adventure/quotation_marks/12/raw"></iframe>
+            code: |-
+                name = 'Hedy the Robot'
+                {print} 'Hello ' name
         3:
             header: Decimal numbers
             text: |-
                 从这个级别开始，你还可以使用十进制数字。 这可以让你的"餐厅"等项目变得更好！
 
                 数字不加引号。
-            editor: <iframe class="fragment" src="/adventure/maths/12/raw"></iframe>
+            code: |-
+                {print} 'decimal numbers now need to use a dot'
+                {print} 2.5 + 2.5
         4:
             header: Functions!
             text: |-
@@ -491,7 +726,15 @@ levels:
             text: |-
                 在此程序中，您将看到一个函数示例。
                 让我们看看如果你填写歌曲的其余部分会发生什么！
-            editor: <iframe class="fragment" src="/adventure/songs_2/12/raw"></iframe>
+            code: |-
+                {define} twinkle
+                     {print} 'Twinkle'
+                     {print} '...'
+
+                 {call} twinkle
+                 {print} 'Up above the world so high'
+                 {print} 'Like a diamond in the sky'
+                 {call} twinkle
         6:
             header: 功能
             text: 正如您在示例中看到的，函数是一个可以随时调用的代码块。您可以使用“{定义}”来设置函数，并使用“{叫}”来使用它。
@@ -509,14 +752,21 @@ levels:
             text: |-
                 `{and}` 命令始终与 {if} 命令结合使用。
                 这样你就可以检查 2 个陈述是否正确。 例如：
-            editor: <iframe class="fragment" src="/adventure/and_or_command/13/raw"></iframe>
+            code: |-
+                name = {ask} 'what is your name?'
+                age = {ask} 'what is your age?'
+                {if} name {is} 'Hedy' {and} age {is} 2
+                    {print} 'You are the real Hedy!'
         3:
             header: The or command
             text: |-
                 `{or}` 与 `{and}` 命令的工作方式相同，但两个语句中只有一个必须为真。
 
                 让我们看看将 `{and}`更改为 `{or}`时会发生什么。
-            editor: <iframe class="fragment" src="/adventure/and_or_command/13/raw"></iframe>
+            code: |-
+                name = {ask} 'what is your name?'
+                {if} name {is} 'Hedy' {or} name {is} 'hedy'
+                    {print} 'Welcome!!'
         4:
             header: Functions with arguments
             text: 现在，您已经学习了如何使用函数，您将学习如何使用带有 **argument** 的函数。参数是在函数中使用的变量。它不在函数外部使用。
@@ -525,7 +775,13 @@ levels:
             text: |-
                 在此示例中，您将看到如何在函数中使用参数“place”。
                 运行代码并将“ocean”和“sea”更改为其他名称，然后查看会发生什么。
-            editor: <iframe class="fragment" src="/adventure/functions/13/raw"></iframe>
+            code: |-
+                {define} song {with} place
+                    {print} 'My Bonnie is over the ' place
+
+                {call} song {with} 'ocean'
+                {call} song {with} 'sea'
+                {call} song {with} 'ocean'
         6:
             header: 变量示例
             text: |-
@@ -539,7 +795,13 @@ levels:
                 答案是问“我的邦妮在哪里？
                 呼叫歌曲与应答
                 ```
-            editor: <iframe class="fragment" src="/adventure/functions/13/raw"></iframe>
+            code: |-
+                {define} song {with} place
+                    {print} 'My Bonnie is over the ' place
+
+                {call} song {with} 'ocean'
+                {call} song {with} 'sea'
+                {call} song {with} 'ocean'
         7:
             header: 还有更多问题！
             text: |-
@@ -555,7 +817,13 @@ levels:
                 地方是问“他们在哪里？”
                 用名字、地点叫歌
                 ```
-            editor: <iframe class="fragment" src="/adventure/functions/13/raw"></iframe>
+            code: |-
+                {define} song {with} place
+                    {print} 'My Bonnie is over the ' place
+
+                {call} song {with} 'ocean'
+                {call} song {with} 'sea'
+                {call} song {with} 'ocean'
         8:
             header: 出发！
             text: 享受 13 级的冒险！
@@ -577,7 +845,12 @@ levels:
                    <= 表示小于或等于...
 
                 你可以像这样使用它们：
-            editor: <iframe class="fragment" src="/adventure/is_command/14/raw"></iframe>
+            code: |-
+                age = {ask} 'How old are you?'
+                {if} age < 13
+                    {print} 'You are younger than me!'
+                {else}
+                    {print} 'You are older than me!'
         3:
             header: Symbols
             text: |-
@@ -588,14 +861,29 @@ levels:
                 != 意思是 不是
 
                 == 用于 `{if}` 语句中。
-            editor: <iframe class="fragment" src="/adventure/default/14/raw"></iframe>
+            code: |-
+                answer = {ask} 'Do you want to learn more?'
+                {if} answer == 'yes'
+                    {print} 'Go to the next adventure!'
+                {if} answer != 'yes'
+                    {print} 'That is a shame!'
         4:
             header: Return value
             text: 在前面的级别中，您已经学习了创建函数并对其使用参数。函数的另一个重要用途是让它为您计算一些东西。你可以给函数一个计算，它会给你计算的答案。此答案称为**返回值**。
         5:
             header: 返回值
             text: 例如，在此代码中，函数 算新价将计算任何项目的新价格。它将为您提供新价格作为返回值。
-            editor: <iframe class="fragment" src="/adventure/functions/14/raw"></iframe>
+            code: |-
+                {define} calculate_new_price {with} amount, percentage
+                    percentage = percentage / 100
+                    discount_amount = amount * percentage
+                    return amount - discount_amount
+
+                old_price = {ask} 'How much is on the price tag?'
+                discount = {ask} 'What percentage is the discount?'
+
+                new_price = {call} calculate_new_price {with} old_price, discount
+                {print} 'The new price is ' new_price ' dollar'
         6:
             header: 让我们开始工作吧！
             text: 享受14级的冒险！
@@ -609,7 +897,11 @@ levels:
                 我们将学习一种新循环，即 while 循环！ 只要语句为真，循环就会继续。 所以不要忘记更改循环中的值。
 
                 在示例代码中，我们将继续下去，直到给出正确答案。 如果从未给出正确答案，循环将永远不会结束！
-            editor: <iframe class="fragment" src="/adventure/while_command/15/raw"></iframe>
+            code: |-
+                answer = 0
+                {while} answer != 25
+                    answer = {ask} 'What is 5 times 5?'
+                {print} 'A correct answer has been given'
         3:
             header: Let's try it out!
             text: 享受15级的冒险吧！
@@ -620,7 +912,15 @@ levels:
         2:
             header: Square brackets
             text: 我们将以 Python 方式创建列表，用方括号将列表括起来！ 我们还保留每个项目周围的引号，就像我们在之前的级别中学到的那样。 我们使用方括号来指出列表中的位置。 at random 命令不能再使用。
-            editor: <iframe class="fragment" src="/adventure/random_command/16/raw"></iframe>
+            code: |-
+                friends = ['Ahmed', 'Ben', 'Cayden']
+                {print} friends[1] ' is the first friend on the list.'
+                {print} friends[2] ' is the second friend on the list.'
+                {print} friends[3] ' is the third friend on the list.'
+                #now we will match 2 lists using the variable i
+                lucky_numbers = [15, 18, 6]
+                {for} i {in} {range} 1 {to} 3
+                    {print} friends[i] 's lucky number is ' lucky_numbers[i]
         3:
             header: Let's try it out!
             text: 享受16级的冒险吧！
@@ -631,11 +931,27 @@ levels:
         2:
             header: Colon
             text: '现在我们要稍微改变一下缩进。 每次我们需要缩进时，我们都需要在缩进之前的行添加 : 。'
-            editor: <iframe class="fragment" src="/adventure/print_command/17/raw"></iframe>
+            code: |-
+                prices = ['1 million dollars', 'an apple pie', 'nothing']
+                your_price = prices[{random}]
+                {print} 'You win ' your_price
+                {if} your_price == '1 million dollars' :
+                    {print} 'Yeah! You are rich!'
+                {else}:
+                    {print} 'Better luck next time..'
         3:
             header: Elif
             text: 在这个关卡中你还可以使用一个新命令：elif。 elif 是 else if 的缩写，当您想要创建 3 个（或更多！）选项时需要它。 一起来一探究竟！
-            editor: <iframe class="fragment" src="/adventure/elif_command/17/raw"></iframe>
+            code: |-
+                prices = ['1 million dollars', 'an apple pie', 'nothing']
+                your_price = prices[{random}]
+                {print} 'You win ' your_price
+                {if} your_price == '1 million dollars' :
+                    {print} 'Yeah! You are rich!'
+                {elif} your_price == 'an apple pie' :
+                    {print} 'Lovely, an apple pie!'
+                {else}:
+                    {print} 'Better luck next time..'
         4:
             header: 我们来试一下！
             text: 享受第17关的冒险吧！
@@ -653,7 +969,7 @@ levels:
                 为了获取 Python 代码，我们需要进行的最后一个更改是将询问更改为输入。
 
                 单击 'print' 选项卡查看所有示例。
-            editor: <iframe class="fragment" src="/hedy/18"></iframe>
+            editor: /hedy/18
         3:
             header: 最后的冒险！
             text: 享受第 18 关的最后冒险吧！
