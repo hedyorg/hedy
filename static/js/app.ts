@@ -275,7 +275,7 @@ export function initializeCodePage(options: InitializeCodePageOptions) {
 function attachMainEditorEvents(editor: HedyEditor) {
 
   editor.on('change', () => {
-    theLocalSaveWarning.setProgramLength(theGlobalEditor.contents.split('\n').length);    
+    theLocalSaveWarning.setProgramLength(theGlobalEditor.contents.split('\n').length);
   });
 
   // If prompt is shown and user enters text in the editor, hide the prompt.
@@ -532,14 +532,14 @@ export async function runit(level: number, lang: string, disabled_prompt: string
           tutorial: $('#code_output').hasClass("z-40"), // if so -> tutorial mode
           read_aloud : !!$('#speak_dropdown').val(),
           adventure_name: adventureName,
-  
+
           // Save under an existing id if this field is set
           program_id: isServerSaveInfo(adventure?.save_info) ? adventure.save_info.id : undefined,
           save_name: saveNameFromInput(),
         };
 
         let response = await postJsonWithAchievements('/parse', data);
-        
+
         program_data = response;
         console.log('Response', response);
 
@@ -576,7 +576,7 @@ export async function runit(level: number, lang: string, disabled_prompt: string
     } else {
       program_data = theGlobalDebugger.get_program_data();
     }
-    
+
     runPythonProgram(program_data.Code, program_data.source_map, program_data.has_turtle, program_data.has_pygame, program_data.has_sleep, program_data.has_clear, program_data.Warning, cb, run_type).catch(function(err: any) {
       // The err is null if we don't understand it -> don't show anything
       if (err != null) {
@@ -584,8 +584,8 @@ export async function runit(level: number, lang: string, disabled_prompt: string
         reportClientError(level, code, err.message);
       }
     });
-  
-  
+
+
   } catch (e: any) {
     modal.notifyError(e.responseText);
   }
@@ -1574,11 +1574,12 @@ function createModal(level:number ){
 }
 
 export function toggleDevelopersMode(event='click', enforceDevMode: boolean) {
-  let enable;
+  let enable: boolean = false;
   switch (event) {
     case 'load':
       const lastSelection = window.localStorage.getItem('developer_mode') === 'true';
       enable = enforceDevMode || lastSelection;
+      $('#developers_toggle').prop('checked', enable);
       break;
 
     case 'click':
@@ -1591,22 +1592,14 @@ export function toggleDevelopersMode(event='click', enforceDevMode: boolean) {
       break;
   }
 
-  $('#developers_toggle').prop('checked', enable);
-
-  // DevMode hides the tabs and makes the editor area larger
+  // DevMode hides the tabs and makes resizable elements track the appropriate size.
+  // (Driving from HTML attributes is more flexible on what gets resized, and avoids duplicating
+  // size literals between HTML and JavaScript).
   $('#adventures').toggle(!enable);
-  const editorArea = $('#editor-area');
-  if (enable) {
-    // Store the current height in an attribute
-    editorArea.data('prev-height', editorArea.css('height'));
-    editorArea.css('height', '36rem');
-  } else {
-    // Restore the previous height
-    const prevHeight = editorArea.data('prev-height');
-    if (prevHeight) {
-      editorArea.css('height', prevHeight);
-    }
-  }
+  $('[data-devmodeheight]').each((_, el) => {
+    const heights = $(el).data('devmodeheight').split(',') as string[];
+    $(el).css('height', heights[enable ? 1 : 0]);
+  });
 }
 
 /**
