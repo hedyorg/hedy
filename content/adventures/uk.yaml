@@ -27,7 +27,6 @@ adventures:
                     Використовуйте принаймні одну команду `{ask}` і одну команду `{echo}`.
                     Ви можете написати історію на будь-яку тему, яка вам подобається.
                     Якщо ви не можете придумати тему, скористайтеся одним з наших варіантів: похід у кіно, спортивний матч або день у зоопарку.
-                
             2:
                 story_text: |
                     У 2 рівні ви можете зробити свою історію ще веселішою. Ім'я вашого головного героя тепер може бути в будь-якому місці речення.
@@ -53,7 +52,6 @@ adventures:
                     Змініть команди `{ask}` та `{echo}` у вашому коді на правильну форму, яку ви вивчили у цьому рівні.
 
                     **Додатково** Додайте до коду команду `{sleep}`, щоб створити напругу у вашій історії.
-                
             3:
                 story_text: |
                     На третьому рівні ви можете зробити свою історію веселішою. Ви можете використовувати випадковість для будь-якого монстра, тварини або іншої перешкоди, наприклад, так:
@@ -86,7 +84,6 @@ adventures:
                     викинути {is} {ask} Який предмет він повинен викинути?
                     {remove} викинути {from} рюкзак
                     ```
-                
             4:
                 story_text: |
                     Ви могли помітити, що у попередніх рівнях залишилась проблема. Ви намагались надрукувати речення, яке містить слово name, тобто `{print}` моє ім'я - name.
@@ -108,7 +105,6 @@ adventures:
                     {print} _ Він чує звук _ animals {at} {random}
                     {print} name _ боїться, що це ліс з привидами _
                     ```
-                
             5:
                 story_text: |
                     У цьому рівні ви можете запрограмувати різні кінцівки, які зроблять вашу історію ще веселішою.
@@ -134,7 +130,6 @@ adventures:
                     {if} кінець {is} хороший {print} мення 'бере меч і монстр швидко тікає'
                     {else} {print} "Монстр з'їдає" мення
                     ```
-                
             7:
                 story_text: |
                     В історії хтось вимовляє слова кілька разів. Наприклад, коли хтось кличе на допомогу або співає пісню.
@@ -149,7 +144,6 @@ adventures:
                     {repeat} 5 {times} {print} 'Допоможіть!!!'
                     {print} 'Чому мені ніхто не допомагає?'
                     ```
-                
             8:
                 story_text: |
                     У цьому рівні ви можете використовувати декілька рядків у командах `{if}`, таким чином ви можете покращити свій щасливий або сумний кінець!
@@ -172,7 +166,6 @@ adventures:
                         {print} 'О ні! Річард занадто повільний...'
                         {print} _
                     ```
-                
             9:
                 story_text: "У цьому рівні ви можете використовувати команди `{if}` і `{repeat}` всередині інших команд `{if}` і `{repeat}`. \nЦе дає вам багато можливостей і дійсно допомагає зробити вашу історію інтерактивною.\n\n### Вправа 1\n Закінчіть код, щоб `{if}` працював коректно.\n\n### Вправа\
                     \ 2\nДодайте `{if}` та `{else}` для тієї частини історії, де Робін також повертається додому.\n \n### Вправа 3\nПоверніться до своєї історії 8-го рівня і використайте принаймні два `{if}` всередині іншого `{if}`.\n"
@@ -191,7 +184,6 @@ adventures:
                     {else}
                         {print} 'Робін йде додому'
                     ```
-                
             10:
                 story_text: |
                     На цьому рівні ви можете використовувати команду {for} у своїй історії. Таким чином ви можете легко запрограмувати дитячу книжку 'Бурий ведмедик, бурий ведмедик, що ти бачиш'.
@@ -205,7 +197,6 @@ adventures:
                     {print} 'Бурий ведмідь, Бурий ведмідь'
                     {print} 'Що ти бачиш?'
                     ```
-                
             12:
                 story_text: |-
                     На цьому рівні лапки знадобляться для збереження кількох слів у змінній.
@@ -218,7 +209,6 @@ adventures:
                     хто = 'Королева Англії'
                     {print} хто ' їла шматок торта, як раптом...'
                     ```
-                
             13:
                 story_text: |
                     Використовуючи команди `{and}` та `{or}`, ви можете зробити свої історії більш універсальними. Ви можете поставити два запитання і відреагувати на комбінацію відповідей.
@@ -237,7 +227,6 @@ adventures:
                     {if} шлях {is} 'лівий' {and} зброя {is} 'меч'
                         _
                     ```
-                
             15:
                 story_text: |
                     Використання циклу `{while}` може зробити ваші історії цікавішими. Наприклад, ви можете використати `{while} гра == 'продовжується'`, щоб гравець міг грати, доки гра не закінчиться.
@@ -260,7 +249,6 @@ adventures:
                             {print} 'Ні, їх немає в ' місце
                     {print} 'Тепер ви можете зайти в будинок!'
                     ```
-                
             18:
                 story_text: |
                     Ми збираємося надрукувати ще одну історію, але тепер нам потрібно використовувати дужки з `{print}`.
@@ -281,7 +269,6 @@ adventures:
                     name = {input}('Як тебе звати?')
                     {print}('Ласкаво просимо до цієї історії!')
                     ```
-                
     add_remove_command:
         name: '{add} {to} & {remove} {from}'
         default_save_name: add_remove_command
@@ -321,7 +308,6 @@ adventures:
                     _
                     {print} You get a flavors {at} {random} milkshake
                     ```
-
     and_or_command:
         name: '{and} & {or}'
         default_save_name: and or
@@ -339,7 +325,6 @@ adventures:
                     {if} name {is} 'Hedy' {and} age {is} 2
                         {print} 'You are the real Hedy!'
                     ```
-
     ask_command:
         name: '{ask}'
         default_save_name: ask_command
@@ -372,7 +357,6 @@ adventures:
                     _ How are you doing?
                     _
                     ```
-
             2:
                 story_text: |
                     ## The ask command
@@ -400,7 +384,6 @@ adventures:
                     favorite_animals is ask What is your favorite animal?
                     print I like favorite_animals
                     ```
-
             18:
                 story_text: The final change we will need to make to get Python code is changing `{ask}` into `{input}`.
                 example_code: |
@@ -512,7 +495,6 @@ adventures:
                     {elif} points > dealer_points {and} points < 21:
                         {print} 'You win!'
                     ```
-                
     calculator:
         name: Calculator
         default_save_name: Calculator
@@ -551,7 +533,6 @@ adventures:
                     given_answer = 'What is ' number_1 ' times ' number_2 '?'
                     {if} _
                     {else} _
-                
             9:
                 story_text: |
                     In previous levels you've learned how to make a calculator, in this level you can expand that code and make it into a little maths game. Like this...
@@ -570,7 +551,6 @@ adventures:
                             score = score + 1
                     {print} 'Great job! Your score is... ' score ' out of 10!'
                     ```
-                
             10:
                 story_text: |
                     This calculator game helps you practise your tables of multiplication!
@@ -587,7 +567,6 @@ adventures:
                             {else}
                                 {print} 'Thats wrong. The right answer is ' correct
                     ```
-                
             11:
                 story_text: |
                     With a `{for}` you can simplify tables of multiplication practise program.
@@ -603,7 +582,6 @@ adventures:
                     {for} i {in} {range} 1 to 10
                         {print} i * number
                     ```
-                
             12:
                 story_text: |
                     Now you can make a calculator that works for decimal numbers.
@@ -614,7 +592,6 @@ adventures:
                     answer = number1 + number2
                     {print} number1 ' plus ' number2 ' is ' answer
                     ```
-                
             13:
                 story_text: |
                     ### Exercise 1
@@ -631,7 +608,6 @@ adventures:
                     {if} _ _ _ _ _ _ _
                         {print} _
                     ```
-                
             14:
                 story_text: |
                     In this adventure you will build a calculator that calculates your mean grade for you. If you get your calculator to work, you can move on to the next adventure, which allows you to add two extra features.
@@ -688,7 +664,6 @@ adventures:
                         _
                     {print} 'You win!'
                     ```
-                
     calculator_2:
         name: Calculator 2
         default_save_name: Calculator 2
@@ -737,7 +712,6 @@ adventures:
                     clear
                     print 'SURPRISE!'
                     ```
-
     debugging:
         name: debugging
         default_save_name: debugging
@@ -760,7 +734,6 @@ adventures:
                     {print} What are your hobbies?
                     {echo} Your hobbies are
                     ```
-
             2:
                 story_text: |-
                     Welcome to a debugging adventure. Debugging a code means getting rid of mistakes in the code.
@@ -780,7 +753,6 @@ adventures:
                     {sleep}
                     Here you go! Have a nice trip!
                     ```
-
             3:
                 story_text: |-
                     Welcome to a debugging adventure. Debugging a code means getting rid of mistakes in the code.
@@ -802,7 +774,6 @@ adventures:
                     tomorrows_movie {is} movie_choices {at} {random}
                     I'll go get the popcorn! {print}
                     ```
-
             4:
                 story_text: |-
                     ### Exercise
@@ -817,7 +788,6 @@ adventures:
                     {print} 'author is your favorite author'
                     {print} Hmmm... i think you should try... books {at} {random}
                     ```
-
             5:
                 story_text: |-
                     ### Exercise
@@ -883,7 +853,6 @@ adventures:
                     Morning bells are ringing!
                     Ding, dang, dong!
                     ```
-
             8:
                 story_text: |-
                     ### Exercise
@@ -960,7 +929,6 @@ adventures:
                     {for} name {is} names
                     {print} At the beach name loves to activity at random
                     ```
-
             11:
                 story_text: |-
                     ### Exercise
@@ -1000,7 +968,6 @@ adventures:
                     for i in range 1 to days
                         print month i
                     ```
-
             12:
                 story_text: |-
                     ### Exercise
@@ -1029,7 +996,6 @@ adventures:
                     for i in range 0 to people
                         call greet_costumer
                     ```
-
             13:
                 story_text: |-
                     ### Exercise
@@ -1062,7 +1028,6 @@ adventures:
                     else
                     print 'No problem!'
                     ```
-
             14:
                 story_text: |-
                     ### Exercise
@@ -1149,7 +1114,6 @@ adventures:
                     print chosen_name 'laughed and went on with their day'
                     print The End
                     ```
-
             16:
                 story_text: |-
                     ### Exercise
@@ -1295,7 +1259,6 @@ adventures:
             1:
                 story_text: "На першому рівні ви можете використовувати команди `{print}`, `{ask}` та `{echo}`.\nНаберіть свій код у полі для програмування. Або натисніть зелену кнопку в блоці прикладу коду, і код буде набраний за вас!\nСпробуйте код самостійно, натиснувши зелену кнопку \"Запустити код\"\
                     \ під полем програмування.\n \nВивести текст на екран можна за допомогою команди `{print}`.     \n"
-                
             2:
                 story_text: |
                     На 2-му рівні ми вивчимо дві нові команди: `{is}` та `{sleep}`.
@@ -1310,11 +1273,9 @@ adventures:
                     ```
                 story_text_2: |
                     Команда `{print}` працює так само, але змінилася команда `{ask}`. У команді `{ask}` також потрібно використовувати змінну. Виглядає це наступним чином:
-                
             3:
                 story_text: |
                     На рівні 3 ви можете скласти список. Ви можете дозволити комп'ютеру вибрати щось випадкове зі списку. Для цього використовується команда `{at} {random}`.
-                
             4:
                 story_text: |
                     На 4-му рівні змінилися `{ask}` та `{print}`.
@@ -1327,7 +1288,6 @@ adventures:
                     відповідь {is} {ask} 'Що нам потрібно використовувати з цього моменту'
                     {print} 'Нам потрібно використовувати ' відповідь
                     ```
-                
             5:
                 story_text: |
                     У 5 рівні з'явилося дещо нове - `{if}`! За допомогою `{if}` ви можете вибирати між двома різними варіантами.
@@ -1338,7 +1298,6 @@ adventures:
                     імʼя {is} {ask} 'як тебе звати?'
                     {if} імʼя {is} Хейді {print} 'класно' {else} {print} 'фе!'
                     ```
-
             6:
                 story_text: |
                     У цьому рівні ви дізнаєтесь дещо нове: тепер ви вмієте ще й рахувати.
@@ -1361,7 +1320,6 @@ adventures:
                     ```
                     {repeat} 3 {times} {print} 'Hedy is fun!'
                     ```
-                
             8:
                 story_text: |
                     `{ask}` і `{print}` все ще працюють так, як ви їх знаєте. Але `{if}`, `{else}`, і `{repeat}` змінилися!
@@ -1385,7 +1343,6 @@ adventures:
                         {print} 'ПОРУШНИК!'
                         {print} 'Не можеш користуватись цим компʼютером!'
                     ```
-
             9:
                 story_text: |
                     У цьому рівні можна не тільки використовувати кілька рядків з `{if}` та `{repeat}`, але й об'єднувати їх разом!
@@ -1400,7 +1357,6 @@ adventures:
                         {else}
                             {print} 'pizza is better'
                     ```
-
             10:
                 story_text: |-
                     У цьому рівні ми вивчаємо новий код, який називається `{for}`. За допомогою `{for}` можна скласти список і використовувати всі елементи.
@@ -1411,12 +1367,10 @@ adventures:
                     {for} animal {in} animals
                       {print} 'I love ' animal
                     ```
-
             11:
                 story_text: |
                     You have reached level 11, you're doing great! In the higher levels, Hedy is focussing more and more on teaching you the programming language Python.
                     In Python there is no `{repeat}` command, but there is a command that works like {repeat}. Are you curious to find out how to say `{repeat}` in Python language? Quickly go on to find out!
-
             12:
                 story_text: |-
                     **Десяткові числа**
@@ -1438,7 +1392,6 @@ adventures:
                     {if} name {is} 'Hedy' {and} age {is} 2
                         {print} 'You are the real Hedy!'
                     ```
-
             14:
                 story_text: |
                     Ми з вами будемо вивчати нові елементи. Можливо, ви вже знаєте їх з математики - це `<` та `>`.
@@ -1472,7 +1425,6 @@ adventures:
                         answer = {ask} 'What is 5 times 5?'
                     {print} 'A correct answer has been given'
                     ```
-
             16:
                 story_text: |-
                     Ми будемо складати списки у стилі Python, з квадратними дужками навколо списків! Ми також зберігаємо лапки навколо кожного елемента, як ми вже навчилися на попередніх рівнях.
@@ -1533,12 +1485,10 @@ adventures:
                     ```
                     choices {is} _
                     ```
-                
             4:
                 story_text: |
                     In this level we can make sentences with the die value in the sentence, with quotes of course.
                     This time the sample code is not quite complete. Can you finish the code?
-                
             5:
                 story_text: |
                     You can also make a die again in this level using the `{if}`.
@@ -1552,7 +1502,6 @@ adventures:
                     {print} 'you have' _ 'thrown'
                     {if} _ {is} earthworm {print} 'You can stop throwing.' _ {print} 'You have to hear it again!'
                     ```
-                
             6:
                 story_text: |
                     You can also make an Earthworm die again in this, but now you can also calculate how many points have been rolled.
@@ -1570,7 +1519,6 @@ adventures:
                     Can you make the code so that you get the total score for 8 dice? To do that, you have to cut and paste some lines of the code.
                 example_code_2: |
                     Did you manage to calculate the score for 8 dice? That required a lot of cutting and pasting, right? We are going to make that easier in level 7!
-                
             7:
                 story_text: |
                     You can also make a die again in level 5. With the `{repeat}` code you can easily roll a whole hand of dice.
@@ -1582,7 +1530,6 @@ adventures:
                     choices = 1, 2, 3, 4, 5, earthworm
                     {repeat} _ _ {print} _ _ _
                     ```
-                
             10:
                 story_text: |
                     Is everybody taking too long throwing the dice? In this level you can let Hedy throw all the dice at once!
@@ -1594,7 +1541,6 @@ adventures:
                         {print} player ' throws ' choices {at} {random}
                         {sleep}
                     ```
-                
             15:
                 story_text: |
                     ### Exercise
@@ -1619,7 +1565,6 @@ adventures:
                     _
                     {print} 'Yes! You have thrown 6 in ' tries ' tries.'
                     ```
-                
     dishes:
         name: Dishes?
         default_save_name: Dishes
@@ -1637,7 +1582,6 @@ adventures:
                     ```
                 story_text_2: |
                     Don't feel like doing the dishes yourself? Hack the program to remove your name from the list.
-                
             4:
                 story_text: |
                     With quotation marks you can make your dishwashing planning more beautiful.
@@ -1653,7 +1597,6 @@ adventures:
                     {sleep}
                     {print} people {at} _
                     ```
-                
             5:
                 story_text: |
                     With the `{if}` you can now have more fun with choice in the program. You can have your program respond to the choice that the computer has made.
@@ -1661,7 +1604,6 @@ adventures:
                     Can you finish the code so that it prints 'too bad' when it is your turn and otherwise 'yes!'?
                     Don't forget the quotes!
                 example_code: "```\npeople {is} mom, dad, Emma, Sophie\ndishwasher {is} people {at} {random}\n{if} dishwasher {is} Sophie {print} _ too bad I have to do the dishes _ \n{else} {print} 'luckily no dishes because' _ 'is already washing up'\n```\n"
-                
             6:
                 story_text: |
                     How often is everyone going to do the dishes? Is that fair? You can count it in this level.
@@ -1694,7 +1636,6 @@ adventures:
                     {remove} dishwasher {from} people
                     dishwasher = people {at} {random}
                     ```
-                
             7:
                 story_text: |
                     With the `{repeat}` you can repeat pieces of code. You can use this to calculate who will be washing dishes for the entire week.
@@ -1703,7 +1644,6 @@ adventures:
                     people = mom, dad, Emma, Sophie
                     {repeat} _ _ {print} 'the dishwasher is' _
                     ```
-                
             10:
                 story_text: |
                     In this level you could make an even better dish washing shedule.
@@ -1714,7 +1654,6 @@ adventures:
                     {for} day {in} days
                         {print} names {at} {random} ' does the dishes on ' day
                     ```
-                
     elif_command:
         name: '{elif}'
         default_save_name: elif
@@ -1762,7 +1701,6 @@ adventures:
                     {for} animal {in} animals
                         {print} 'I love ' animal
                     ```
-
             11:
                 story_text: |-
                     На цьому рівні ми додаємо нову форму `{for}`. На попередніх рівнях ми використовували `{for}` зі списком, але ми також можемо використовувати `{for}` з числами.
@@ -1775,7 +1713,6 @@ adventures:
                         {print} counter
                     {print} 'Ready or not. Here I come!'
                     ```
-
             17:
                 story_text: |
                     Now we are going to change indentation a little bit. Every time that we need an indentation, we need `:` at the line before the indentation.
@@ -1815,7 +1752,6 @@ adventures:
                     Hedy now only tells you your name. Can you expand the code so that Hedy can predict more things about you?
                     Obviously, Hedy isn't a very good fortune teller yet, as she can only repeat the answers that were given by the players!
                     Take a look in level 2 to improve your fortune teller.
-                
             3:
                 story_text: |
                     In the previous levels you've created your first fortune telling machine, but Hedy couldn't really predict anything, only {echo}.
@@ -1833,7 +1769,6 @@ adventures:
                 story_text_2: |
                     ### Exercises
                     Now, Hedy can only answer yes, no or maybe. Can you give Hedy more answer options, like 'definitely' or '{ask} again'.
-                
             4:
                 story_text: |
                     This level has no new functions, but allows you to practice with using the quotation marks.
@@ -1854,7 +1789,6 @@ adventures:
                     {sleep} 2
                     {print} answers {at} {random}
                     ```
-                
             5:
                 story_text: |
                     In this level you'll learn to (secretly) tip the odds in your favor, when using the fortune teller!
@@ -1867,7 +1801,6 @@ adventures:
                     person {is} {ask} 'Who are you?'
                     {if} person {is} Hedy {print} 'You will definitely win!🤩' {else} {print} 'Bad luck! Someone {else} will win!😭'
                     ```
-                
             6:
                 story_text: |
                     In this level you can use math in your predictions as a fortune teller. This allows you to make up (silly) formulas to calculate the future.
@@ -1898,7 +1831,6 @@ adventures:
                     result = result * football
                     {print} 'You are ' result ' percent smart.'
                     ```
-                
             7:
                 story_text: |
                     In this level you can use the `{repeat}` command to make your machine tell multiple fortunes at once.
@@ -1910,7 +1842,6 @@ adventures:
                     answer = yes, no, maybe
                     {repeat} 3 {times} {print} 'My crystal ball says... ' answer {at} {random}
                     ```
-                
             8:
                 story_text: |
                     In the previous levels you've learned how to use repeat to make the fortune teller answer 3 questions in a row, but we had a problem with printing the questions.
@@ -1927,7 +1858,6 @@ adventures:
                        {sleep}
                        {print} 'My crystal ball says...' answers {at} {random}
                     ```
-                
             10:
                 story_text: |
                     In this level you'll learn how to program the game MASH (mansion, apartement, shack, house). In this game you can predict for all the players at once, what their future will look like.
@@ -1943,7 +1873,6 @@ adventures:
                         {print} name ' will get a ' pets {at} {random} ' as their pet.'
                         {sleep}
                     ```
-                
             12:
                 story_text: |
                     In this level you can make your fortunes multiple words. Like in this example below:
@@ -1955,7 +1884,6 @@ adventures:
                     {sleep}
                     {print} fortunes {at} {random}
                     ```
-                
     functions:
         name: functions
         default_save_name: functions
@@ -1995,7 +1923,6 @@ adventures:
                         {call} turn
                         {sleep} 2
                     ```
-
             13:
                 story_text: |
                     Now that you've learned how to use functions, you'll learn how to use a function with an argument.
@@ -2024,7 +1951,6 @@ adventures:
                     {call} song {with} 'sea'
                     {call} song {with} 'ocean'
                     ```
-
             14:
                 story_text: |
                     In the previous levels you have learned to create functions and use arguments with them. Another great use of a function is to let it calculate something for you.
@@ -2086,7 +2012,6 @@ adventures:
                                 {print} 'You win!'
                                 game = 'over'
                     ```
-                
     harry_potter:
         name: Harry Potter
         default_save_name: Harry Potter
@@ -2108,7 +2033,6 @@ adventures:
                     _ {print} name ' is great at ' subjects {at} {random}
                     _ {print} name 's greatest fear is ' fears {at} {random}
                     ```
-                
     haunted:
         name: Haunted House
         default_save_name: Haunted House
@@ -2138,7 +2062,6 @@ adventures:
                 story_text_2: |
                     ### Exercise
                     Can you finish the scary story? Or make up your own haunted house story?
-                
             2:
                 story_text: |
                     In this haunted house you can choose your monsters with emojis. Of course you could also use words.
@@ -2185,7 +2108,6 @@ adventures:
                     {sleep}
                     _ _ _ _
                     ```
-                
             4:
                 story_text: |
                     In this level you learn how to use quotation marks in your games.
@@ -2201,7 +2123,6 @@ adventures:
                     {sleep}
                     {print} monsters {at} {random}
                      ```
-                
             5:
                 story_text: |
                     Up until this level the haunted house game always asked the player to choose a door, but as you might have noticed, they didn't really have to answer correctly.
@@ -2220,7 +2141,6 @@ adventures:
                     {if} chosen_door {is} correct_door {print} 'Great! Youve escaped!'
                     {else} {print} 'Oh no! You are being eaten by a...' monsters {at} {random}
                     ```
-                
             9:
                 story_text: |
                     In this level you can use nesting, which allows you to make the haunted house even more interactive!
@@ -2249,7 +2169,6 @@ adventures:
                     {if} player {is} alive
                         {print} 'Great! You survived!'
                     ```
-                
             11:
                 story_text: |
                     In this level we've changed the repeat command and we've added a line to our haunted house that tells the player in which room they are.
@@ -2275,7 +2194,6 @@ adventures:
                     {if} player {is} alive
                         {print} 'Great! You survived!'
                     ```
-                
             14:
                 story_text: |
                     ### Exercise
@@ -2304,7 +2222,6 @@ adventures:
                         {else}
                             {print} 'GAME OVER'
                     ```
-                
             16:
                 story_text: |
                     ### Exercise
@@ -2338,7 +2255,6 @@ adventures:
                         {print} _
                         {print} 'GAME OVER'
                     ```
-                
     hotel:
         name: hotel
         default_save_name: hotel
@@ -2408,7 +2324,6 @@ adventures:
                     _ _ _ 4 _ 'Great job!'
                     _ _ 'No 2 + 2 = 4'
                     ```
-
             8:
                 story_text: |
                     ## If... Else...
@@ -2425,7 +2340,6 @@ adventures:
                         {print} 'Welcome Hedy'
                         {print} 'You can play on your computer!'
                     ```
-
             9:
                 story_text: |
                     In this level you can also put an {if} command inside another {if} command.
@@ -2441,7 +2355,6 @@ adventures:
                     {else}
                         {print} 'You do not want to continue'
                     ```
-
     in_command:
         name: '{in}'
         default_save_name: in_command
@@ -2470,7 +2383,6 @@ adventures:
                     _ answer _ animals _ 'Mine too!'
                     _ _ 'My favorite animals are dogs, cows and sheep'
                     ```
-
     is_command:
         name: '{is}'
         default_save_name: is_command
@@ -2496,7 +2408,6 @@ adventures:
                     favorite_animals is _
                     {print} I like favorite_animals
                     ```
-
             6:
                 story_text: |
                     We also make a change in storing a word in a variable! You may now use `=` instead of  `{is}` when we store a name or a number in a variable, like this:
@@ -2560,7 +2471,6 @@ adventures:
                     {if} frog {is} grenouille {print} 'Super!'
                     {else} {print} 'No, frog is grenouille'
                     ```
-                
             16:
                 story_text: |
                     ### Exercise
@@ -2581,7 +2491,6 @@ adventures:
                             {print} 'Wrong, ' french_words[i] ' means ' translation[i]
                     {print} 'You gave ' score ' correct answers.'
                     ```
-                
     maths:
         name: maths
         default_save_name: maths
@@ -2671,7 +2580,6 @@ adventures:
                 story_text_2: |
                     ### Exercise
                     You can use variables to make the parrot say more than only your name. Can you complete this code?
-                
             3:
                 story_text: |
                     Teach your parrot a new word with `{add}`.
@@ -2684,7 +2592,6 @@ adventures:
                     {print} 🧒 Say new_word , Hedy!
                     {print} 🦜 words {at} {random}
                     ```
-                
             4:
                 story_text: |
                     In this level we have to use quotation marks with the commands `{ask}` and `{print}`.
@@ -2698,7 +2605,6 @@ adventures:
                     {print} _ 🧒 Say _ new_word _, Hedy!_
                     {print} _ 🦜 _ words {at} {random}
                     ```
-                
             5:
                 story_text: |
                     Reward your parrot if it says the correct word!
@@ -2714,7 +2620,6 @@ adventures:
                     _ сказане_слово {is} нове_слово ' 🧒 Молодець, Хеді! 🍪'
                     _ _ ' 🧒 Ні, Хеді! Скажи ' нове_слово
                     ```
-                
     piggybank:
         name: Piggy Bank
         default_save_name: Piggy Bank
@@ -2734,7 +2639,6 @@ adventures:
                     weeks = to_save / allowance
                     {print} 'You can buy a ' wish ' in ' weeks ' weeks.'
                     ```
-                
             14:
                 story_text: |
                     ### Exercise
@@ -2758,7 +2662,6 @@ adventures:
 
                     {call} calculate_budget with _, _, _
                     ```
-                
     pressit:
         name: Key presses
         default_save_name: Pressed
@@ -2787,7 +2690,6 @@ adventures:
                     {if} y {is} {pressed} {forward} 15
                     {else} {turn} 90
                     ```
-                
             7:
                 story_text: |
                     Now that you have learned about `{repeat}`, we can press keys multiple times.
@@ -2800,7 +2702,6 @@ adventures:
                     ```
                     {if} x {is} {pressed} {forward} 15 {else} {turn} 90
                     ```
-                
             9:
                 story_text: |
                     Now that you know how to combine statements, you can create a touch type tool with `{pressed}`.
@@ -2820,7 +2721,6 @@ adventures:
                         _
                         _
                     ```
-                
     print_command:
         name: '{print}'
         default_save_name: print
@@ -2846,7 +2746,6 @@ adventures:
                     ```
                     _ Hello!
                     ```
-
             18:
                 story_text: |-
                     We arrived at real Python code! That means we need to use parentheses with `{print}` and `{range}` from now on.
@@ -2895,7 +2794,6 @@ adventures:
                     {if} points_b > points_a
                         {print} 'You belong to the B club'
                     ```
-                
     quotation_marks:
         name: '''quotation marks'''
         default_save_name: quotation_marks
@@ -2925,7 +2823,6 @@ adventures:
                     {print} 'I'm babysitting my sister's kids'
                     {print} 'What's more fun than that?'
                     ```
-
             12:
                 story_text: |
                     **All texts need to be in quotation marks**
@@ -2960,7 +2857,6 @@ adventures:
                     score = 25
                     {print} 'You got ' score
                     ```
-
     random_command:
         name: '{random}'
         default_save_name: random_command
@@ -2994,7 +2890,6 @@ adventures:
                     prices {is} _
                     _
                     ```
-
             16:
                 story_text: |-
                     We are going to make lists the Python way, with square brackets around the lists! We also keep the quotation marks around each item like we have learned in previous levels.
@@ -3043,7 +2938,6 @@ adventures:
                     ```
                     {repeat} 3 {times} {print} 'Hedy is fun!'
                     ```
-
             8:
                 story_text: |
                     ### Repeat commands and indentation
@@ -3057,7 +2951,6 @@ adventures:
                         {print} 'Hello everyone'
                         {print} 'This is all repeated 5 times'
                     ```
-
             9:
                 story_text: |
                     In this level you can not only use multiple lines with `{if}` and `{repeat}`, but you can also put them together!
@@ -3072,7 +2965,6 @@ adventures:
                         {else}
                             {print} 'pizza is better'
                     ```
-
     repeat_command_2:
         name: '{repeat} 2'
         default_save_name: repeat_command_2
@@ -3098,7 +2990,6 @@ adventures:
                     age = {ask} 'How old are you now?'
                     {repeat} age {times} {print} 'Hip Hip Hurray!'
                     ```
-
             8:
                 story_text: |
                     ### In the block or not?
@@ -3116,7 +3007,6 @@ adventures:
                     _ {print} 'The muffin man'
                     _ {print} 'Do you know the muffin man, who lives on Drury Lane?'
                     ```
-
     restaurant:
         name: Restaurant
         default_save_name: Restaurant
@@ -3136,7 +3026,6 @@ adventures:
                 story_text_2: |
                     ### Exercise
                     Can you think of more lines to add to your restaurant code? For example, can you {ask} the guests what they'd like to drink, tell them the price, or wish them a pleasant meal?
-                
             2:
                 story_text: |
                     In level 2 you could expand your restaurant by using variables. In level 1 Hedy could only {echo} the order once and only remember the last thing that was ordered.
@@ -3156,7 +3045,6 @@ adventures:
                 story_text_2: |
                     ### Exercise
                     Can you make this code more elaborate? For example by adding drinks to the order? Or...?
-                
             3:
                 story_text: |
                     Having trouble to decide what you wanna have for dinner? You can let Hedy choose for you!
@@ -3188,7 +3076,6 @@ adventures:
                     {remove} allergies {from} flavors
                     {print} You get a flavors {at} {random} milkshake
                     ```
-                
             4:
                 story_text: |
                     In this level you have to use quotation marks when using the `{print}` command.
@@ -3208,7 +3095,6 @@ adventures:
                     {print} 'Thank you for your order.'
                     {print} 'Your ' food ' and ' drinks ' will be right there!'
                     ```
-                
             5:
                 story_text: |
                     На цьому рівні команда `{if}` дозволяє вам `{ask}` питання клієнтам і давати різні реакції на відповіді.
@@ -3229,7 +3115,6 @@ adventures:
                     {if} anything {is} no {print} 'Thats it!' {else} {print} 'One ' anything
                     {print} 'Thank you for your order and enjoy your meal!'
                     ```
-                
             6:
                 story_text: |
                     In this level you can use maths to calculate the total price of your customer's order, which can make your virtual restaurant more realistic.
@@ -3248,7 +3133,6 @@ adventures:
                     {print} 'That will be ' price ' dollars, please'
                     {print} 'Thank you, enjoy your meal!'
                     ```
-                
             7:
                 story_text: |
                     У цьому рівні ви навчилися використовувати команду `{repeat}` для повторення рядка коду певну кількість разів.
@@ -3260,7 +3144,6 @@ adventures:
                     {repeat} people times food = {ask} 'What would you like to eat?'
                     {print} 'Thanks for your order! Its coming right up!'
                     ```
-                
             8:
                 story_text: |
                     In this level you can make your virtual restaurant more elaborate by repeating multiple lines of code. Like this:
@@ -3278,7 +3161,6 @@ adventures:
                 story_text_2: |
                     ### Exercise
                     Of course, this code can be expanded with more items on the menu, offering drinks, and/or multiple courses, so feel free to add as many options as you like!
-                
             9:
                 story_text: |
                     У цьому рівні ви можете використовувати кластеризацію, щоб зробити ваш ресторан більш реалістичним та веселим!
@@ -3306,7 +3188,6 @@ adventures:
                     {print} 'That will be ' price ' dollar'
                     {print} 'Enjoy your meal!'
                     ```
-                
             10:
                 story_text: |
                     In this level you'll learn how to easily {ask} your guests' orders in a short code.
@@ -3350,7 +3231,6 @@ adventures:
                     price = 4 * people
                     {print} 'That will be ' price ' dollars, please!'
                     ```
-                
             12:
                 story_text: |
                     From this level on you can use decimal numbers to make you menu more realistic.
@@ -3369,7 +3249,6 @@ adventures:
                         price = price + 2.35
                     {print} 'That will be ' price ' dollar, please'
                     ```
-                
             13:
                 story_text: |
                     In this level we can use the new commands to upgrade our restaurant.
@@ -3384,7 +3263,6 @@ adventures:
                         price = price - 3
                     {print} 'That will be ' price ' dollars'
                     ```
-                
             15:
                 story_text: |
                     With the `{while}` you can make sure your costumers can keep adding orders until they are done.
@@ -3401,7 +3279,6 @@ adventures:
                         more = {ask} 'Would you like to order anything else?'
                     {print} 'Thank you!'
                     ```
-                
     rock:
         name: Rock, paper, scissors
         default_save_name: Rock
@@ -3429,7 +3306,6 @@ adventures:
                     {ask} choose from _
                     {echo} so your choice was:
                     ```
-                
             2:
                 story_text: |
                     In this level you can practise using the variables, so that you can make the rock, paper, scissors game in the next level!
@@ -3438,7 +3314,6 @@ adventures:
                     choice {is} _
                     {print} I choose choice
                     ```
-                
             3:
                 story_text: |
                     You can use the `{at} {random}` command to let the computer pick rock, paper or scissors!
@@ -3460,12 +3335,10 @@ adventures:
                     {print} player 1 chooses... choices {at} {random}
                     {print} player 2 _
                     ```
-                
             4:
                 story_text: |
                     In this level we can further program rock, paper, scissors. But {if} you want to add text, you have to use quotation marks here too.
                     Do you complete the code by entering the correct commands or characters on the underscores?
-                
             5:
                 story_text: |
                     In this level we can determine who won.
@@ -3485,7 +3358,6 @@ adventures:
                     ```
 
                     Fill in the correct code on the blanks to see {if} it is a draw.
-                
             9:
                 story_text: |
                     In this level you can program the whole rock, paper, scissors game by nesting the {if}-commands. Can you finish the code?
@@ -3505,7 +3377,6 @@ adventures:
                             {print} 'You lose!'
                     # finish this code
                     ```
-                
             10:
                 story_text: |
                     Feeling too lazy to play the game yourself? Let Hedy play it for you!
@@ -3516,7 +3387,6 @@ adventures:
                     {for} player {in} players
                          {print} player ' chooses ' choices {at} {random}
                     ```
-                
             13:
                 story_text: |
                     With the `{and}` command you can shorten your rock, paper, scissors code! Check out the example code below and try to finish it.
@@ -3534,7 +3404,6 @@ adventures:
                     {if} computer_choice {is} 'rock' {and} your_choice {is} 'scissors'
                         {print} 'The computer wins!'
                     ```
-                
             15:
                 story_text: |
                     ### Exercise
@@ -3556,7 +3425,6 @@ adventures:
                             {print} 'You win!'
                             won = 'yes'
                     ```
-                
     rock_2:
         name: Rock, paper, scissors 2
         default_save_name: rock_2
@@ -3573,7 +3441,6 @@ adventures:
                     choice is _
                     {print} I choose choice
                     ```
-                
     secret:
         name: SuperSpy
         default_save_name: SuperSpy
@@ -3597,7 +3464,6 @@ adventures:
                         b {is} 'today at 10.00'
                     {print} _ _ _
                     ```
-                
             13:
                 story_text: |
                     The code you made in the previous level can be made a lot easier in this one with the `{and}` command.
@@ -3610,7 +3476,6 @@ adventures:
                     {else}
                         {print} 'Go to the trainstation at 10.00'
                      ```
-                
     sleep_command:
         name: '{sleep}'
         default_save_name: sleep_command
@@ -3626,7 +3491,6 @@ adventures:
                     {sleep} 2
                     {print} green!
                     ```
-
     songs:
         name: Sing a song!
         default_save_name: Song
@@ -3660,7 +3524,6 @@ adventures:
                     print 'NO MORE MONKEYS JUMPING ON THE BED!'
                     sleep
                     ```
-                
             7:
                 story_text: |
                     Songs often contain a lot of repetition. For example... Baby Shark! If you sing it, you keep singing the same thing:
@@ -3678,7 +3541,6 @@ adventures:
                     ```
 
                     After Baby Shark you can of course also program other songs. There are many songs with repetition.
-                
             8:
                 story_text: |
                     In a previous level you've programmed the song 'Bottles of beer'. You made one verse and then had to copy the verses 99 times. In level 7 you can repeat the song 99 times, just by adding one simple line!
@@ -3692,7 +3554,6 @@ adventures:
                         verse = verse - 1
                         {print} verse ' bottles of beer on the wall'
                     ```
-                
             10:
                 story_text: |
                     У цьому рівні ви з легкістю зможете зробити дитячу пісеньку "П'ять маленьких мавпочок". Чи зможете ви скласти останній приспів?
@@ -3744,7 +3605,6 @@ adventures:
                     ```
                     monkeys = 5, 4, 3, 2, 1
                     ```
-                
             11:
                 story_text: |
                     In this level you can use the `{for} i {in} {range}` command to make songs that use counting.
@@ -3759,7 +3619,6 @@ adventures:
                         {else}
                             {print} 'NO MORE MONKEYS JUMPING ON THE BED!'
                     ```
-                
             12:
                 story_text: |
                     In this song we can make it even easier to program '{if} you're happy and you know it, clap your hands'. Because we can put all of the actions in a variable, check it out:
@@ -3774,7 +3633,6 @@ adventures:
                         {print} 'if youre happy and you know it'
                         {print} action
                     ```
-                
             13:
                 story_text: |
                     In the previous adventure you have learned how to use an argument in a function, but did you know that you could combine them with {ask} commands as well?
@@ -3791,7 +3649,6 @@ adventures:
                     {call} song {with} synonym
                     {call} song {with} chosen_place
                     ```
-
             16:
                 story_text: |
                     In this level, you can program a song like OldMacDonald even more quickly. You can connect the right animal to the right sound by simply putting them in the same place in the list.
@@ -3827,7 +3684,6 @@ adventures:
                             {print} 'way hay and up she rises'
                         {print} 'early in the morning'
                     ```
-                
             18:
                 story_text: |
                     In level 16 we made songs using lists. These programs however are no longer working properly in this level. The colons from level 17 and the brackets from level 18 still need to be added.
@@ -3849,7 +3705,6 @@ adventures:
                             {print} 'way hay and up she rises'
                         {print} 'early in the morning'
                     ```
-                
     songs_2:
         name: Sing a song! 2
         default_save_name: Song 2
@@ -3871,7 +3726,6 @@ adventures:
                     {print} 'Like a diamond in the sky'
                     {call} _
                     ```
-
     tic:
         name: Tic Tac Toe
         default_save_name: Tic
@@ -3939,7 +3793,6 @@ adventures:
                                 {else}
                                     sign = 'x'
                     ```
-                
             14:
                 story_text: |
                     In the previous levels you've made a tic tac toe game. Now you've learned how to use the = sign, the == sign and the != sign.
@@ -4002,7 +3855,6 @@ adventures:
                                 {else}
                                     sign = 'x'
                     ```
-                
             15:
                 story_text: |
                     In this level you can improve your Tic Tac Toe game with the {while} loop. With this loop you can combine the `{if} game != 'over'` and the `{for} i {in} {range} 1 to 9` into one simple line.
@@ -4064,7 +3916,6 @@ adventures:
                             {else}
                                 sign = 'x'
                     ```
-                
             17:
                 story_text: |
                     In the previous levels the tic tac toe game had an annoying feature. After every move, you had to fill in yourself if you had won or not.
@@ -4151,7 +4002,6 @@ adventures:
                             {else}:
                                 sign = 'x'
                     ```
-                
     turtle:
         name: Turtle
         default_save_name: Turtle
@@ -4173,7 +4023,6 @@ adventures:
                     {turn} {left}
                     {forward} 20
                     ```
-
             2:
                 story_text: |
                     In this level you can use variables to make the turtle interactive. For example you can ask the player how many steps the turtle must make.
@@ -4197,7 +4046,6 @@ adventures:
                     {turn} angle
                     {forward} 25
                     ```
-
             3:
                 story_text: |
                     In this level you can use use `{at} {random}` with the drawing turtle. A random choice makes the turtle walk a different path each time.
@@ -4208,7 +4056,6 @@ adventures:
                     {turn} angles {at} {random}
                     {forward} 25
                     ```
-
             4:
                 story_text: |
                     In level 4 you have to use quotation marks with `{print}` and `{ask}`. Also when drawing!
@@ -4235,7 +4082,6 @@ adventures:
                     {color} {red}
                     {forward} 50
                     ```
-
             5:
                 story_text: |
                     In level 5 you can make a choice with `{if}`. For example between different types of figures.
@@ -4268,7 +4114,6 @@ adventures:
                     if direction is right turn _
                     forward 100
                     ```
-
             6:
                 story_text: |
                     In this level you can use calculations to draw different figures.
@@ -4292,7 +4137,6 @@ adventures:
                     {forward} 50
                     {turn} angle
                     ```
-                
             8:
                 story_text: |
                     Now that we can repeat several lines, we can make figures more easily.
@@ -4335,7 +4179,6 @@ adventures:
                         {forward} 50
                         {color} {black}
                     ```
-                
             10:
                 story_text: |
                     In this level you can make the turtle draw a figure.
@@ -4353,7 +4196,6 @@ adventures:
                     {for} distance {in} distances
                         {forward} distance
                     ```
-                
             12:
                 story_text: |
                     We can use functions to draw more complex figures with less code.
@@ -4378,7 +4220,6 @@ adventures:
                     {forward} 50
                     {call} square
                     ```
-
     turtle_draw_it:
         name: Draw it!
         default_save_name: Draw it
@@ -4394,7 +4235,6 @@ adventures:
                         Square <img src="https://github.com/hedyorg/hedy/assets/80678586/03b96c2c-7b94-4032-9f9f-3f3b13573623" width="200">
                         Stairs<img src="https://github.com/hedyorg/hedy/assets/80678586/d4301e62-ec66-4031-827c-7d21f73ba106" width="200">
                     </div>
-                
             2:
                 story_text: |
                     ### Exercise
@@ -4405,7 +4245,6 @@ adventures:
                     Arrow <img src="https://github.com/hedyorg/hedy/assets/80678586/803d8f42-9708-448c-82ea-d035697f08c9" width="150">
                     Boat <img src="https://github.com/hedyorg/hedy/assets/80678586/94ef7189-442a-4c8f-827d-12a69203c2e9" width="150">
                     </div>
-                
             3:
                 story_text: |
                     ### Exercise
@@ -4416,7 +4255,6 @@ adventures:
                     Star <img src="https://github.com/hedyorg/hedy/assets/80678586/421c4d28-cb99-424b-be26-dcae30d65c80" width="150">
                     Arrow <img src="https://github.com/hedyorg/hedy/assets/80678586/3cbebcae-5258-47c5-a6ac-e7ee36c1d1ce" width="200">
                     </div>
-                
             4:
                 story_text: |
                     ### Exercise
@@ -4434,7 +4272,6 @@ adventures:
                     colors {is} red, orange, yellow, green, blue, purple, pink, brown, gray, black
                     color _
                     ```
-                
             5:
                 story_text: |
                     ### Exercise
@@ -4453,7 +4290,6 @@ adventures:
                     chosen_letter {is} {ask} 'Which letter would you like to see? F, E or L?
                     {if} _
                     ```
-                
             6:
                 story_text: |
                     ### Exercise
@@ -4473,7 +4309,6 @@ adventures:
                     ```
                     chosen_color = {ask} _
                     ```
-                
             7:
                 story_text: |
                     ### Exercise
@@ -4484,7 +4319,6 @@ adventures:
                     Triangle <img src="https://github.com/hedyorg/hedy/assets/80678586/3629a5e6-1f02-4851-aab9-c5430ba4a1f1" width="200">
                     Fan <img src="https://github.com/hedyorg/hedy/assets/80678586/1ba2ff71-1230-4fe3-8255-b2c504cf1b4e" width="200">
                     </div>
-                
             8:
                 story_text: |
                     ### Exercise
@@ -4497,7 +4331,6 @@ adventures:
                     Randomly colored star (5) <img src="https://github.com/hedyorg/hedy/assets/80678586/dbe39006-c050-4833-b5c4-f9d1fb1c0781" width="150">
                     Randomly colored spiral (7) <img src="https://github.com/hedyorg/hedy/assets/80678586/9bcdb3f1-367d-4ae0-878f-d09005424a35" width="150">
                     </div>
-                
             9:
                 story_text: |
                     ### Exercise
@@ -4528,7 +4361,6 @@ adventures:
                         color_2 = white
                         color_3 = blue
                     ```
-                
             10:
                 story_text: |
                     ### Exercise
@@ -4569,7 +4401,6 @@ adventures:
                     {for} chosen_color {in} colors
                     _
                     ```
-                
             11:
                 story_text: |
                     ### Exercise
@@ -4592,7 +4423,6 @@ adventures:
 
                     Hint Fan:
                     Start out like the fan you made in level 7. Or take a peak at the hint for the beehive, because the codes are very similar.
-                
             12:
                 story_text: |
                     ### Exercise
@@ -4621,7 +4451,6 @@ adventures:
                         {if} shape = 'square'
                             {call} draw_a_square
                     ```
-                
             13:
                 story_text: |
                     ### Exercise
@@ -4645,7 +4474,6 @@ adventures:
                     {define} draw_a_house {with} chosen_color
                     _
                     ```
-                
             14:
                 story_text: |
                     ### Exercise
@@ -4673,7 +4501,6 @@ adventures:
                     {call} _ {with}
                     {call} _ {with}
                     ```
-                
             15:
                 story_text: |
                     ### Exercise
@@ -4707,7 +4534,6 @@ adventures:
                 example_code_3: |
                     Star
                     A star is usually drawn using 144-degree-turns. If you change this slightly to 143 degrees for example and repeat the pattern multiple times with a {while} loop you can make this figure.
-                
     while_command:
         name: '{while}'
         default_save_name: while_command
@@ -4727,7 +4553,6 @@ adventures:
                         answer = {ask} 'What is 5 times 5?'
                     {print} 'A correct answer has been given'
                     ```
-
     years:
         name: Новий рік
         default_save_name: Новорічний відлік
@@ -4745,4 +4570,3 @@ adventures:
                         {print} номер
                     {print}'З Новим роком!'
                     ```
-                
