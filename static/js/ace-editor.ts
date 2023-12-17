@@ -170,6 +170,7 @@ export class HedyAceEditor implements HedyEditor {
    * Resizes the editor after changing its size programatically
    */
   resize(): void {
+    console.warn('Oops! editor.resize() should not have been called anymore');
     this._editor.resize()
   }
 
@@ -192,7 +193,7 @@ export class HedyAceEditor implements HedyEditor {
     }
   }
 
-  /**     
+  /**
    * Moves to the cursor to the end of the current file
    */
   moveCursorToEndOfFile(): void {
@@ -333,7 +334,7 @@ export class HedyAceEditor implements HedyEditor {
       this.currentLineMarker = undefined;
       return;
     }
-    line = line - 1;    
+    line = line - 1;
     let id: number;
     if (startPos === undefined || finishPos === undefined) {
       id = this.addMarker(new ace.Range(line, 0, line, 999), 'debugger-current-line', 'fullLine');
@@ -388,7 +389,7 @@ export class HedyAceEditor implements HedyEditor {
   public getActiveContents(debugLine: string | null): string {
     let code = this._editor.session.getValue();
     const breakpoints = this.getDeactivatedLines();
-    
+
     if (code) {
       let lines = code.split('\n');
       if(debugLine != null){
@@ -401,14 +402,14 @@ export class HedyAceEditor implements HedyEditor {
       }
       code = lines.join('\n');
     }
-  
+
     return code;
   }
 
   public skipFaultyHandler(): void {
     $(document).on("click", 'div[class*=ace_content], div[class*=ace_incorrect_hedy_code]', function(e) {
       let className = e.target.className;
-  
+
       // Only do this if skipping faulty is used
       if ($('div[class*=ace_incorrect_hedy_code]')[0]) {
         if (className === 'ace_content') {
@@ -422,7 +423,7 @@ export class HedyAceEditor implements HedyEditor {
           mapIndex = mapIndex.replace('ace_incorrect_hedy_code_', '');
           mapIndex = mapIndex.replace('ace_start ace_br15', '');
           let mapError = theGlobalSourcemap[Number(mapIndex)];
-  
+
           $('#okbox').hide();
           $('#warningbox').hide();
           $('#errorbox').hide();
