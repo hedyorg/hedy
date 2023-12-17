@@ -3,7 +3,7 @@ import {goToHedyPage} from "../tools/navigation/nav";
 describe('when the user changes their language to Arabic', () => {
   beforeEach(() => {
     goToHedyPage();
-
+    cy.get('#editor').type("print Hallo!'\n");
     cy.getBySel('language-dropdown').click();
     cy.getBySel('switch-lang-ar').click();
   });
