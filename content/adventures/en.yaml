@@ -1444,7 +1444,6 @@ adventures:
                 story_text: |
                     Congratulations! You have reached the last level of Hedy! The code you have created here can be copied to real Python environments like replit or PyCharm, and you can continue learning there!
                     Note however that Python can only read English commands, so if you have been using other languages, you will need to switch to English now.
-    songs:
     dice:
         name: Dice
         default_save_name: Dice
@@ -2094,7 +2093,6 @@ adventures:
                     {print} Oh no! Quickly get to the kitchen.
                     {print} But as you enter monster_3 attacks you!
                     ```
-    songs:
             3:
                 story_text: |
                     In the previous levels you've made an introduction to your haunted house game, but as you might have noticed the story would always have a dreadful end.
@@ -3230,7 +3228,6 @@ adventures:
                     _ food = {ask} name ', what would you like to eat as your ' course '?'
                     _ {print} name ' orders ' food ' as their ' course
                     ```
-    songs:
             11:
                 story_text: |
                     We can use the `{for}` with `{range}` to print the orders from multiple customers in an orderly manner.
@@ -4159,69 +4156,7 @@ adventures:
                     {repeat} figure {times}
                         {turn} _
                         {forward} _
-                    ```
-    songs:
-            9:
-                story_text: |
-                    Now that we can use a `{repeat}` inside a `{repeat}`, we can create more complex figures.
-
-                    ### Exercise 1
-                    This code creates three black triangles, change that into five pink squares.
-
-                     **Extra** Create a figure of your own choosing consisting of at least two different shapes types.
-                example_code: |
-                    ```
-                    {color} {black}
-                    {repeat} 3 {times}
-                        {repeat} 3 {times}
-                            {forward} 10
-                            {turn} 120
-                        {color} {white}
-                        {forward} 50
-                        {color} {black}
-                    ```
-            10:
-                story_text: |
-                    In this level you can make the turtle draw a figure.
-                    The turtle will travel the distances in the list, one by one, making bigger and bigger steps.
-                    ### Exercise 1
-                    Add a 90 degree turn in the loop, so that a spiral is drawn.
-                    Add at least 5 numbers to the list, so the spiral grows larger.
-                    **(extra)** can you change the spiral into another shape? Experiment with numbers for the turn!
-                    ### Exercise 2
-                    The spiral is drawn outwards, make it go inwards?
-                example_code: |
-                    ```
-                    {turn} 90
-                    distances = 10, 20, 30, 40, 50, 60
-                    {for} distance {in} distances
-                        {forward} distance
-                    ```
-                    ```
-            12:
-                story_text: |
-                    We can use functions to draw more complex figures with less code.
-                    ### Exercise 1
-                    Fill the function so that three squares are created. If you want the image to look nicer, you can make the lines between the squares white.
-
-                    ### Exercise 2
-                    The code can be made even shorter. Place the final lines into a `{repeat}` so the figure remains the same.
-
-                    ### Exercise 3
-                    Create your own drawing with different figures.
-                    Change both the number of figures with the `{repeat}` and the shape of the figures in the `{define}`
-                example_code: |
-                    ```
-                    {define} square
-                        {repeat} 4 {times}
-                            {turn} _
-                            {forward} _
-                    {call} square
-                    {forward} 50
-                    {call} square
-                    {forward} 50
-                    {call} square
-                    ```
+                    ``
     turtle_draw_it:
         name: Draw it!
         default_save_name: Draw it
