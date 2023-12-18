@@ -1691,16 +1691,6 @@ adventures:
                     {else}:
                         {print} 'Bir dahaki sefere iyi şanslar...'
                     ```
-                start_code: |-
-                    ödüller = ['1 milyon lira', 'bir elmalı turta', 'hiçbir şey']
-                    senin_ödülün = ödüller[{random}]
-                    {print} 'Kazandığın ödül ' senin_ödülün
-                    {if} senin_ödülün == '1 milyon lira' :
-                        {print} 'Evet! Sen artık zenginsin!'
-                    {elif} senin_ödülün == 'bir elmalı turta' :
-                        {print} 'Çok güzel, bir elmalı turta!'
-                    {else}:
-                        {print} 'Bir dahaki sefere iyi şanslar...'
     for_command:
         name: '{for}'
         default_save_name: for

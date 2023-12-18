@@ -1674,16 +1674,6 @@ adventures:
                     {else}:
                         {print} '다음 기회를..'
                     ```
-                start_code: |-
-                    prices = ['백만달러', '사과파이', '아무것도없음']
-                    your_price = prices[{random}]
-                    {print} 'You win ' your_price
-                    {if} your_price == '백만달러' :
-                        {print} '예! 너는 부자야!'
-                    {elif} your_price == '사과파이' :
-                        {print} 'Lovely, 사과파이!'
-                    {else}:
-                        {print} '다음 기회를..'
     for_command:
         name: '{for}'
         default_save_name: for

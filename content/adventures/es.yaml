@@ -336,11 +336,6 @@ adventures:
                     {if} nombre {is} 'Hedy' {and} edad {is} 2
                         {print} '¡Tú eres el verdadero Hedy!'
                     ```
-                start_code: |-
-                    nombre = {ask} '¿cómo te llamas?'
-                    edad = {ask} '¿cuántos años tienes?'
-                    {if} nombre {is} 'Hedy' {and} edad {is} 2
-                        {print} '¡Tú eres el verdadero Hedy!'
     ask_command:
         name: '{ask}'
         default_save_name: comando_preguntar
@@ -403,11 +398,7 @@ adventures:
                     animales_favoritos {is} {ask} ¿Cuál es tu animal favorito?
                     {print} Me gusta animales_favoritos
                     ```
-                start_code: |-
-                    nombre {is} {ask} ¿Cómo te llamas?
-                    {print} Hola nombre
-                    edad {is} {ask} ¿Cuántos años tienes?
-                    {print} nombre tiene edad años.
+
             18:
                 story_text: El último cambio que tenemos que hacer para conseguir el código en Python es cambiar `{ask}` por `{input}`.
                 example_code: |
@@ -1707,16 +1698,6 @@ adventures:
                     {else}:
                         {print} 'Más suerte la próxima vez..'
                     ```
-                start_code: |-
-                    premios = ['1 millón de dólares', 'una tarta de manzana', 'nada']
-                    tu_premio = premios[{random}]
-                    {print} 'Ganaste ' tu_premio
-                    {if} tu_premio == '1 millón de dólares' :
-                        {print} '¡Sí! ¡Eres rico!'
-                    {elif} tu_premio == 'una tarta de manzana' :
-                        {print} '¡Delicioso, una tarta de manzana!'
-                    {else}:
-                        {print} 'Más suerte la próxima vez..'
     for_command:
         name: '{for}'
         default_save_name: para
