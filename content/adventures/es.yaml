@@ -2458,12 +2458,6 @@ adventures:
                     {if} nombre != 'Hedy'
                         {print} 'Tu no eres Hedy'
                     ```
-                start_code: |-
-                    edad = {ask} '¿Cuántos años tienes?'
-                    {if} edad < 13
-                        {print} '¡Eres más joven que yo!'
-                    {else}
-                        {print} '¡Eres mayor que yo!'
     language:
         name: Idioma
         default_save_name: Idioma
@@ -2887,10 +2881,6 @@ adventures:
                     puntuación = 25
                     {print} 'Obtuviste ' puntuación
                     ```
-                start_code: |-
-                    nombre = {ask} '¿Cuál es tu nombre?'
-                    {if} nombre = 'El Robot Hedy'
-                        {print} '¡Hola!'
     random_command:
         name: '{random}'
         default_save_name: comando_aleatorio
@@ -2948,15 +2938,6 @@ adventures:
                     fruit = ['apple', 'banana', 'cherry']
                     {print} fruit[random]
                     ```
-                start_code: |-
-                    friends = ['Ahmed', 'Ben', 'Cayden']
-                    {print} friends[1] ' is the first friend on the list.'
-                    {print} friends[2] ' is the second friend on the list.'
-                    {print} friends[3] ' is the third friend on the list.'
-                    #now we will match 2 lists using the variable i
-                    lucky_numbers = [15, 18, 6]
-                    {for} i {in} {range} 1 {to} 3
-                        {print} friends[i] 's lucky number is ' lucky_numbers[i]
     repeat_command:
         name: '{repeat}'
         default_save_name: comando_repetir
@@ -3031,10 +3012,6 @@ adventures:
                     edad = {ask} '¿Cuántos años tienes?'
                     {repeat} edad {times} {print} '¡Hip Hip Hurra!'
                     ```
-                start_code: |-
-                    {repeat} 2 {times} respuesta = {ask} '¿Sabías que puedes hacer una pregunta varias veces?'
-                    {if} respuesta {is} sí {repeat} 2 {times} {print} '¡Ya lo sabías!'
-                    {else} {repeat} 3 {times} {print} '¡Has aprendido algo nuevo!'
             8:
                 story_text: |
                     ### ¿En el bloque o no?

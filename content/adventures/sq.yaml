@@ -1249,7 +1249,7 @@ adventures:
                     {print} '5 minus 5 është ' 5 - 5
                     {print} '5 herë 5 është ' 5 * 5
                     ```
-                start_code: '{print} ''5 herë 5 është '' 5 * 5'
+
             7:
                 story_text: |
                     Niveli 7 shton komandën `{repeat}`.  `{repeat}` komanda mund të përdoret që të ekzekutoni rreshtin e kodit disa herë.
@@ -2001,7 +2001,7 @@ adventures:
                     {print} Oh jo! Shkoni shpejt në kuzhinë.
                     {print} Por ndërsa hyni, përbindësh_3 ju sulmon!
                     ```
-                start_code: përbindëshi1 {is} _
+    songs:
             3:
                 story_text: |
                     Në nivelet e mëparshme ju keni bërë një hyrje në lojën tuaj të shtëpisë së përhumbur, por siç mund ta keni vënë re, historia do të kishte gjithmonë një fund të tmerrshëm.
@@ -2430,7 +2430,7 @@ adventures:
                     {print} '5 minus 5 is ' 5 - 5
                     {print} '5 times 5 is ' 5 * 5
                     ```
-                start_code: '{print} ''5 times 5 is '' 5 * 5'
+    songs:
             12:
                 story_text: |-
                     **Decimal numbers**
@@ -2823,15 +2823,6 @@ adventures:
                     fruit = ['apple', 'banana', 'cherry']
                     {print} fruit[random]
                     ```
-                start_code: |-
-                    friends = ['Ahmed', 'Ben', 'Cayden']
-                    {print} friends[1] ' is the first friend on the list.'
-                    {print} friends[2] ' is the second friend on the list.'
-                    {print} friends[3] ' is the third friend on the list.'
-                    #now we will match 2 lists using the variable i
-                    lucky_numbers = [15, 18, 6]
-                    {for} i {in} {range} 1 {to} 3
-                        {print} friends[i] 's lucky number is ' lucky_numbers[i]
     repeat_command:
         name: '{repeat}'
         default_save_name: repeat_command
@@ -3123,7 +3114,7 @@ adventures:
                     _ ushqimi = {ask} emri ', çfarë do të dëshironit të hani si 'kurs' tuaj?'
                     _ {print} emri ' porositën ' ushqimi ' si ' kurs
                     ```
-                start_code: kurset = meze, pjatë kryesore, ëmbëlsirë
+    songs:
             11:
                 story_text: |
                     Mund ta përdorim `{for} i {in} {range} 1 {to} 5` për të `{print}` porositë nga shumë klientë në mënyrë të rregullt.
@@ -4090,7 +4081,7 @@ adventures:
                     Gjithashtu, mund ta përmirësojmë programin që vizaton figura.
                     A mund ta kuptoni sa herë duhet që breshka të kthehet këtu? Përfundojeni kodin dhe pastaj mund të vizatoni çdo poligon që dëshironi!
                 example_code_2: "```\nkëndet = {ask} 'Sa kënde duhet të vizatoj?'\nkëndi = 360 / këndet \n{repeat} këndet {times}\n    {turn} _\n    {forward} _\n```\n"
-                start_code: këndet = {ask} 'Sa kënde duhet të vizatoj?'
+
             9:
                 story_text: |
                     Now that we can use a `{repeat}` inside a `{repeat}`, we can create more complex figures.

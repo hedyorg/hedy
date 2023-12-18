@@ -1686,16 +1686,6 @@ adventures:
                     {else}:
                         {print} 'Bättre tur nästa gång …'
                     ```
-                start_code: |-
-                    priser = ['1 miljon dollar', 'en äppelpaj', 'ingenting']
-                    ditt_pris = priser[{random}]
-                    {print} 'Du vinner ' ditt_pris
-                    {if} ditt_pris == '1 miljon dollar' :
-                        {print} 'Hurra! Du är rik!'
-                    {elif} ditt_pris == 'en äppelpaj' :
-                        {print} 'Härligt, en äppelpaj!'
-                    {else}:
-                        {print} 'Bättre tur nästa gång …'
     for_command:
         name: '{for}'
         default_save_name: för
@@ -2936,15 +2926,6 @@ adventures:
                     fruit = ['apple', 'banana', 'cherry']
                     {print} fruit[random]
                     ```
-                start_code: |-
-                    friends = ['Ahmed', 'Ben', 'Cayden']
-                    {print} friends[1] ' is the first friend on the list.'
-                    {print} friends[2] ' is the second friend on the list.'
-                    {print} friends[3] ' is the third friend on the list.'
-                    #now we will match 2 lists using the variable i
-                    lucky_numbers = [15, 18, 6]
-                    {for} i {in} {range} 1 {to} 3
-                        {print} friends[i] 's lucky number is ' lucky_numbers[i]
     repeat_command:
         name: Upprepa
         default_save_name: kommandot_upprepa
@@ -3565,10 +3546,6 @@ adventures:
                     {sleep} 2
                     {print} grön!
                     ```
-                start_code: |-
-                    {print} Min favoritfärg är …
-                    {sleep} 2
-                    {print} grön!
     songs:
         name: Sjung en sång!
         default_save_name: Sång

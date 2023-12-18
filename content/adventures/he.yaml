@@ -1289,10 +1289,6 @@ adventures:
                     {for} חיה {in} חיות
                       {print} 'אני אוהבת ' חיה
                     ```
-                start_code: |-
-                    חיות {is} כלב, חתול, אבו-נפחא
-                    {for} חיה {in} חיות
-                      {print} 'אני אוהבת ' חיה
             11:
                 story_text: |
                     You have reached level 11, you're doing great! In the higher levels, Hedy is focussing more and more on teaching you the programming language Python.
@@ -2464,7 +2460,6 @@ adventures:
                 story_text_2: |
                     ### Exercise
                     You can use variables to make the parrot say more than only your name. Can you complete this code?
-                start_code: '{print} אני הֶדִי התוכי!'
             3:
                 story_text: |
                     למדו את התוכי שלכם.ן מילה חדשה עם `{add}`.
@@ -2798,15 +2793,6 @@ adventures:
                     fruit = ['apple', 'banana', 'cherry']
                     {print} fruit[random]
                     ```
-                start_code: |-
-                    friends = ['Ahmed', 'Ben', 'Cayden']
-                    {print} friends[1] ' is the first friend on the list.'
-                    {print} friends[2] ' is the second friend on the list.'
-                    {print} friends[3] ' is the third friend on the list.'
-                    #now we will match 2 lists using the variable i
-                    lucky_numbers = [15, 18, 6]
-                    {for} i {in} {range} 1 {to} 3
-                        {print} friends[i] 's lucky number is ' lucky_numbers[i]
     repeat_command:
         name: '{repeat}'
         default_save_name: repeat_command

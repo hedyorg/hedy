@@ -87,7 +87,7 @@ adventures:
             4:
                 story_text: "你可能注意到了，在之前的级别里还有个问题。你有没有试过打印含有“名字”这个词的句子？即：`{print}` 我的名字是名字。\n 在这一级里你可以解决这个问题。你必须给所有需要打印的东西加上引号。\n\n### 练习1\n复制示例代码并通过添加引号来使其正常工作。 \n\n ### 练习 2 \n返回到上一个级别并复制故事代码。通过在正确的位置添加引号，使代码在此级别中正常工作。 \n注意：你自己故事中的变量应该在引号之外。就像范例代码的第二行一样。在该行中，变量名称放在引号之外。\n"
                 example_code: "```\n名字 {is} {ask}_你的名字是什么? _\n{print}     _ 主人公的名字是_名字 \n {print} 名字     _正准备走进树林_\n{print} 名字 _有点害怕'\n动物们 {is} \U0001F994, \U0001F43F, \U0001F989, \U0001F987\n{print} _他听到了一个_ 动物们{at} {random} 的声音\n{print} 名字_担心这片森林闹鬼_\n```\n"
-                start_code: '{print} ''你的故事会打印在这里！'''
+
             5:
                 story_text: |
                     在此级别中，你可以设计不同的结局，这将使你的故事更加有趣。
@@ -113,7 +113,7 @@ adventures:
                     {if} 结局 {is} 好 {print} 名字 '拔出了剑，怪物立即逃跑了'
                     {else} {print} '怪物吃掉了' 名字
                     ```
-                start_code: '{print} ''你的故事从这里开始！'''
+
             7:
                 story_text: "在故事里，有人会重复同一个词好几次。比如，当有人在呼救或者唱歌。\n在这一级，你可以通过`{repeat}`在故事中加入这种重复。\n \n### 练习 \n在你自己的故事中加入重复的内容。返回你保存的程序中，选择第6级的故事程序，找到一个包含`{print}` 的行，然后重复它！\n"
                 example_code: |
@@ -122,7 +122,7 @@ adventures:
                     {repeat} 5 {times} {print} '救命啊！'
                     {print} '为什么没有人来救我？'
                     ```
-                start_code: '{repeat} 5 {times} {print} ''救命！'''
+
             8:
                 story_text: "在这一级中，你可以在你的{if} 条件语句中使用多行，这样你就可以升级你的好的或坏的结局！\n\n### 练习1\n代码范例中显示了两种不同的结局；一种是主人公跳上时光机，另一种是没有跳上时光机。\n 每个结局都至少需要用一个句子完成空格。 \n**（额外的）**使故事更长。故事中会发生什么？您还可以添加具有不同选项的第二个 `{ask}`\n \n### 练习2\n返回你保存的程序中，从第5级选择你的故事程序。现在写一个好的和一个坏的结局，每个结局至少有三行长! \n"
                 example_code: |
@@ -666,16 +666,6 @@ adventures:
                     futures_movie {is} movie_choices {at} {random}
                     我去买爆米花！ {print}
                     ````
-                start_code: |
-                    movie_choices {is} 德古拉、速度与激情、独自在家、芭比娃娃
-                    selected_movie {is} 部电影 {at} {random}
-                    {print} 今晚我们将观看选定的_电影
-                    就像{ask}你喜欢那部电影吗？
-                    {print} 明天我们会看别的东西。
-                    {add} selected_movie {to} movie_choices
-                    {print} 明天我们看Todays_movie
-                    futures_movie {is} movie_choices {at} {random}
-                    我去买爆米花！ {print}
             4:
                 story_text: |-
                     ### 练习
@@ -690,13 +680,6 @@ adventures:
                     {print} '作者是你最喜欢的作者'
                     {print} 嗯...我想你应该尝试...书籍{at} {random}
                     ```
-                start_code: |
-                    {print} '欢迎来到在线图书馆！
-                    {ask}你喜欢什么类型的书？
-                    {print} 你喜欢类型
-                    作者{is} {ask}“你最喜欢的作家是谁？”
-                    {print} '作者是你最喜欢的作者'
-                    {print} 嗯...我想你应该尝试...书籍{at} {random}
             5:
                 story_text: |-
                     ### 练习
@@ -719,21 +702,7 @@ adventures:
                     {else}“那将是 5,50 美元”
                     {print} '祝你游得愉快！'
                     ````
-                start_code: |
-                    {print} 欢迎来到海蒂泳池！
-                    class {is} {ask} '你今天来参加课程吗？'
-                    {if} 类 yes
-                         {print}'太棒了！ 你正在加入一个班级！
-                         {print} {else} '您将不会参加课程'
-                    discount {is} {ask} '您有折扣码吗？'
-                    {if} 折扣 {is} 是
-                    discount_answer {is} {ask} '您的折扣代码是什么？'
-                    discount_codes = Senior4231, Student8786, NewMember6709
-                    {if}discount_answer {is} {in}discount_codes
-                         {print} '那将是 3,50 美元'
-                             {else} '该代码无效'
-                    {else}“那将是 5,50 美元”
-                    {print} '祝你游得愉快！'
+
             6:
                 story_text: |-
                     ### 练习
@@ -797,24 +766,6 @@ adventures:
                     {print} '全部完成！ 那将是$'价格'拜托！'
                     {print}'谢谢！ 再见！'
                     ````
-                start_code: |
-                    {print}“欢迎来到 海蒂 的美甲和足疗”
-                    bodypart = {ask} '你今天修指甲或脚趾甲了吗？ 或两者？'
-                    {if} 身体部位 {is} 两者
-                             {print} 那将是 25 美元'
-                             价格=25
-                         {else}
-                             {print} 那将是 18 美元'
-                             价格=18
-                    color = {ask} 你想要什么颜色？
-                    Sparkles = {ask} '你想要一些闪闪发光的东西吗？'
-                    {if} Sparkles {is} 是
-                         {print} '我们为此额外收取 3 美元'
-                    price = price +3
-                    {else} {print} '没有闪光' {print} '所以没有额外费用'
-                    {sleep} 5
-                    {print} '全部完成！ 那将是$'价格'拜托！'
-                    {print}'谢谢！ 再见！'
             9:
                 story_text: |-
                     ### 练习
@@ -863,11 +814,6 @@ adventures:
                     {for} name {is} names
                     {print} 在海滩上，名字喜欢活动 {at} {random}
                     ```
-                start_code: |
-                    names = 穆阿德·哈桑·萨米拉·努拉
-                    activities = 放风筝、游泳、徒步旅行、晒太阳
-                    {for} name {is} names
-                    {print} 在海滩名字喜欢随意活动
             11:
                 story_text: |-
                     ### 练习
@@ -1166,7 +1112,6 @@ adventures:
         levels:
             1:
                 story_text: "在第1级，你可以使用命令`{print}`、`{ask}`和`{echo}`。\n在编程栏里面输入你的代码。或者按下代码范例框里面的绿色按钮，它会为你输入代码!\n 你可以用左边编程栏下方绿色的 “运行程序” 按钮测试你的代码。\n\n你可以使用`{print}`命令将文本打印到屏幕上。     \n"
-                start_code: '{print} 你好，世界！'
             2:
                 story_text: |
                     恭喜！ 您已达到第 2 级。希望您已经编写了一些很棒的代码！
@@ -1247,7 +1192,7 @@ adventures:
                     total_price {is} food_price + drink_price
                     {print} '请付'total_price'美元'
                     ```
-                start_code: '# 将你的代码放在这里'
+
             7:
                 story_text: |
                     做得好！ 您已经达到了下一个级别，这意味着您已经练习了`{if}`和`{else}`。 您可能已经注意到您的代码变得越来越长。
@@ -1261,11 +1206,6 @@ adventures:
                     {print} '亲爱的海蒂，生日快乐'
                     {print} '祝你生日快乐'
                     ```
-                start_code: |
-                    {print} '祝你生日快乐'
-                    {print} '祝你生日快乐'
-                    {print} '亲爱的海蒂，生日快乐'
-                    {print} '祝你生日快乐'
             8:
                 story_text: |
                     现在您已经学会了如何重复一行代码。 这很有用，但并不总是足够的。 有时您想一次重复多行。
@@ -1288,7 +1228,6 @@ adventures:
                          {print}“万岁！”
                     {else}
                          {print} '也许你应该在上一关多练习一下'
-                start_code: '{print} 让我们转到下一个选项卡！'
             10:
                 story_text: |
                     你做得很好！ 在前面的关卡中，我们仍然面临一个小问题。 您已经学会了重复台词，但如果您想稍微更改台词怎么办？
@@ -1304,7 +1243,7 @@ adventures:
                     {print} '如果你很高兴并且你知道这一点并且你真的想表现出来'
                     {print} '如果你高兴并且知道的话，请拍手'
                     ````
-                start_code: '{print} ''让我们转到下一个选项卡！'''
+
             11:
                 story_text: |
                     你已经达到11级了，你做得很好！ 在更高级别中, 海蒂 越来越专注于教您编程语言 Python。
@@ -1386,14 +1325,14 @@ adventures:
                     {for} i {in} {range} 1 {to} 3
                         {print} friends[i] 's lucky number is ' lucky_numbers[i]
                     ```
-                start_code: '{print} ''让我们转到下一个选项卡！'''
+
             17:
                 story_text: |
                     现在我们要稍微改变一下缩进。 每次我们需要缩进时，我们都需要在缩进之前的行添加`:`。
 
                     在此级别中，您还可以使用新命令：`{elif}`。 `{elif}` 是 {else} {if} 的缩写，当您想要创建 3 个（或更多！）选项时需要它。
                     一探究竟！
-                start_code: '{print} ''让我们转到下一个选项卡！'''
+
             18:
                 story_text: |
                     恭喜！ 您已到达 Hedy 的最后一关！ 您在此处创建的代码可以复制到真实的 Python 环境（例如 replit 或 PyCharm），并且您可以在那里继续学习！
@@ -1428,7 +1367,7 @@ adventures:
                 story_text: |
                     在这一级，我们可以用骰子的点数来造句，当然要用引号。
                     这次的示例代码没有全部完成。你能把代码补全吗？
-                start_code: '{print} ''骰子这次会投出什么？'''
+
             5:
                 story_text: |
                     在这一级，你可以用`{if}`再制作一个骰子。
@@ -1443,7 +1382,7 @@ adventures:
                     _ throw {is} 蚯蚓 {print} '你可以停止投掷了。'
                     _ {print} '你必须再扔一次！'
                     ```
-                start_code: '{print} ''骰子这次会投出什么？'''
+
             6:
                 story_text: |
                     你也可以让一条蚯蚓再次死亡，但现在你还可以计算已经滚动了多少点。
@@ -1463,7 +1402,7 @@ adventures:
                     ```
                 example_code_2: |
                     你能算出 8 个骰子的分数吗？ 这需要大量的复制和粘贴，对吗？ 我们将在第 7 级中让这一切变得更容易！
-                start_code: '{print} ''骰子这次会投出什么？'''
+
             7:
                 story_text: |
                     您还可以在此级别再次掷骰子。 使用`{repeat}`代码，您可以轻松掷整手骰子。
@@ -1475,7 +1414,7 @@ adventures:
                     选项 = 1, 2, 3, 4, 5, 6
                     _ _ _ _ _ _ _
                     ```
-                start_code: '{print} ''骰子这次会投出什么？'''
+
             10:
                 story_text: |
                     ### 练习
@@ -1533,7 +1472,7 @@ adventures:
                     然后想一个需要完成的任务，让计算机用`{at} {random}`命令决定谁来做这个任务。
 
                     **额外的**不想洗碗？用`{remove}` `{from}` 命令将你的名字从名单上删除，从而破解程序。
-                start_code: '{print} 谁负责洗碗？'
+
             4:
                 story_text: |
                     使用引号，可以使你的洗碗程序更加出色。
@@ -1548,7 +1487,7 @@ adventures:
                     {sleep}
                     {print} 人们 {at} _
                     ```
-                start_code: '{print} ''谁负责洗碗？'''
+
             5:
                 story_text: |
                     你可以用`{if}`给程序加入选项，来让它更有趣。你可以让你的程序对电脑做出的选择进行回应。
@@ -1562,7 +1501,7 @@ adventures:
                     _洗碗的 {is} 索菲 {print} _ 太糟了，轮到我洗碗 _
                     _{print} '运气真好，' _ '把碗洗了'
                     ```
-                start_code: '{print} ''谁负责洗碗？'''
+
             6:
                 story_text: |
                     每个人洗了多少次碗？是否公平？在这一级你可以进行统计。
@@ -1595,7 +1534,7 @@ adventures:
                     {remove} 洗碗的 {from} 人们
                     洗碗的 = 人们 {at} {random}
                     ```
-                start_code: '{print} ''谁负责洗碗？'''
+
             7:
                 story_text: |
                     使用`{repeat}`您可以重复代码片段。 您可以使用它来计算谁将在多天内洗碗！
@@ -1607,7 +1546,7 @@ adventures:
                     人 = 妈妈, 爸爸, 艾玛, 索菲
                     {repeat} _ _ {print} '洗碗工作将由' _ _ _完成
                     ```
-                start_code: '{print} ''谁负责洗碗？'''
+
             10:
                 story_text: |
                     在这个级别中，您可以轻松地制定整周的日程安排！
@@ -2021,7 +1960,7 @@ adventures:
                     点击黄色按钮，将范例代码复制到你的输入屏。
                     现在通过添加至少5行代码来完成这个故事。
                     记住，每行代码都要以`{print}` 命令开始。
-                start_code: '{print} 我如何到这的？'
+
             2:
                 story_text: |
                     在这个鬼屋里，你既可以用表情符号也可以用文字选择你会遇到的怪物。
@@ -2051,7 +1990,7 @@ adventures:
                     {print} 哦不！快往厨房跑。
                     {print} 但是当你进入厨房后怪物_3攻击了你！
                     ```
-                start_code: 怪物1 {is} _
+
             3:
                 story_text: |
                     在前面的级别中，你已经对你的鬼屋游戏做了介绍，但你可能已经注意到，故事总会有一个可怕的结局。
@@ -2136,7 +2075,6 @@ adventures:
                     {if} player {is} alive
                         {print} 'Great! You survived!'
                     ```
-                start_code: '{print} ‘逃出鬼屋！’'
             11:
                 story_text: |
                     在这个关卡中，我们改变了`{for}`命令，所以我们可以告诉玩家他们在哪里。
@@ -2160,7 +2098,6 @@ adventures:
                         {print} '房间' i
                         怪物 = 怪物们 {at} {random}
                     ```
-                start_code: '{print} ‘逃离鬼屋！’'
             14:
                 story_text: |
                     ### Exercise
@@ -2478,7 +2415,7 @@ adventures:
                     {print} '5 minus 5 is ' 5 - 5
                     {print} '5 times 5 is ' 5 * 5
                     ```
-                start_code: '{print} ''5 times 5 is '' 5 * 5'
+
             12:
                 story_text: |-
                     **Decimal numbers**
@@ -2545,7 +2482,7 @@ adventures:
                 story_text_2: |
                     ### 练习
                     你可以使用变量来使鹦鹉说的不仅仅是你的名字。你能完成这段代码吗？
-                start_code: '{print} 我是鹦鹉海蒂！'
+
             3:
                 story_text: "用`{add}`教你的鹦鹉一个新词。\n### 练习 \n你如何让你的鹦鹉说多个词？\n"
                 example_code: |
@@ -2860,15 +2797,6 @@ adventures:
                     fruit = ['apple', 'banana', 'cherry']
                     {print} fruit[random]
                     ```
-                start_code: |-
-                    friends = ['Ahmed', 'Ben', 'Cayden']
-                    {print} friends[1] ' is the first friend on the list.'
-                    {print} friends[2] ' is the second friend on the list.'
-                    {print} friends[3] ' is the third friend on the list.'
-                    #now we will match 2 lists using the variable i
-                    lucky_numbers = [15, 18, 6]
-                    {for} i {in} {range} 1 {to} 3
-                        {print} friends[i] 's lucky number is ' lucky_numbers[i]
     repeat_command:
         name: '{repeat}'
         default_save_name: repeat_command
@@ -3165,7 +3093,7 @@ adventures:
                             食物 = {ask} 客人 '，你想要吃什么' 餐品 '？'
                             {print} 客人 '点了' 食物 '作为' 餐品
                     ```
-                start_code: 全餐 = 前菜, 主菜, 甜点
+
             11:
                 story_text: "我们可以用`{for}`和`{range}`来按顺序打印多个客人的订单。\n\n### 练习 \n完成餐厅的代码，这样就可以按顺序询问多个客人的订单了。每次都按顺序打印订单：'订单1'，'订单2'，等等。 \n你不确定如何去做吗？请看一下你的第8级代码吧。\n\n **（另外）**在第9级中，餐厅也使用了价格。你也可以在这里添加价格！\n"
                 example_code: |
@@ -3269,13 +3197,13 @@ adventures:
                     {print} 玩家1选择...在选项中 {at} {random}
                     {print} 玩家2 _
                     ```
-                start_code: '{print} 欢迎来到属于你自己的石头剪刀布！'
+
             4:
                 story_text: |
                     在这一级，我们可以进一步对石头剪刀布游戏编程。但是如果你想要添加文字，你同样需要使用引号。
                     ### 练习
                     复制上一级的代码并在每个`{print}` 或`{ask}` 命令后使用引号使其正常工作。
-                start_code: '{print} ''欢迎来到属于你自己的石头剪刀布！'''
+
             5:
                 story_text: |
                     在这一级，我们可以判定谁赢了。
@@ -3295,7 +3223,7 @@ adventures:
                     ```
 
                     在空白处填上正确的代码，来判断{if}这是平局。
-                start_code: '{print} ''欢迎来到属于你自己的石头剪刀布！'''
+
             9:
                 story_text: |
                     在这一级，你可以用嵌套的`{if}`命令来编程石头剪刀布。你能完成这段代码吗？
@@ -3477,7 +3405,7 @@ adventures:
                     {print} '不能再有猴子在床上跳了！'
                     {sleep}
                     ```
-                start_code: '{print} ''让我们唱歌吧！'''
+
             7:
                 story_text: "歌曲经常包含大量的重复。例如...小鲨鱼!如果你唱这首歌，其实你就是一直在唱同一句歌词：\n\n小鲨鱼图图图杜杜 <br>\n 小鲨鱼图图图杜杜 <br>\n小鲨鱼图图图杜杜 <br>\n小鲨鱼\n\n### 练习 \n你可以用`{repeat}` 来打印歌曲《小鲨鱼》？ 完成代码，替换空白处？ \n**另外* 在《小鲨鱼》之后，你当然还可以为其他歌曲编程。很多歌曲都有重复的句子！你能想出更多的歌曲吗？ \n你能再想出一首歌曲并打印出来吗？\n"
                 example_code: |
@@ -3961,11 +3889,6 @@ adventures:
                     {turn} 角度
                     {forward} 25
                     ```
-                start_code: |-
-                    {print} 海龟赛跑！
-                    角度 {is} 90
-                    {turn} 角度
-                    {forward} 25
             3:
                 story_text: |
                     在这个级别中，您可以将 `{at} {random}` 与海龟绘图一起使用。使用随机选择使乌龟每次走不同的路径。
@@ -4083,7 +4006,7 @@ adventures:
                         {turn} _
                         {forward} _
                     ```
-                start_code: 图形 = {ask} '我应该画几边形？'
+
             9:
                 story_text: |
                     我们现在可以在 `{repeat}`中使用 `{repeat}`了，我们可以创建更复杂的图形了。
