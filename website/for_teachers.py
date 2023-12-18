@@ -3,7 +3,7 @@ import json
 import os
 import uuid
 
-from flask import g, jsonify, request, session, url_for
+from flask import g, jsonify, request, session, url_for, redirect
 from jinja_partials import render_partial
 from flask_babel import gettext
 
@@ -207,6 +207,29 @@ class ForTeachersModule(WebsiteModule):
             questions=questions,
             survey_later=survey_later,
         )
+
+    @route("/class/<class_id>/preview", methods=["GET"])
+    @requires_login
+    def preview_class_as_teacher(self, user, class_id):
+        if not is_teacher(user) and not is_admin(user):
+            return utils.error_page(error=403, ui_message=gettext("retrieve_class_error"))
+        Class = self.db.get_class(class_id)
+        if not Class or (not utils.can_edit_class(user, Class) and not is_admin(user)):
+            return utils.error_page(error=404, ui_message=gettext("no_such_class"))
+        session["preview_class"] = {
+            "id": Class["id"],
+            "name": Class["name"],
+        }
+        return redirect("/hedy")
+
+    @route("/clear-preview-class", methods=["GET"])
+    # Note: we explicitly do not need login here, anyone can exit preview mode
+    def clear_preview_class(self):
+        try:
+            del session["preview_class"]
+        except KeyError:
+            pass
+        return redirect("/for-teachers")
 
     @route("/class/<class_id>/programs/<username>", methods=["GET", "POST"])
     @requires_teacher
