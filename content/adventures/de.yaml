@@ -1210,35 +1210,35 @@ adventures:
 
                     print 'Thanks for ordering!'
                     ```
-                start_code: |2
+                start_code: |4
 
-                          define food_order
-                              toppings = ask 'pepperoni, tuna, veggie or cheese?'
-                              size = ask 'big, medium or small?'
-                              number_of_pizza = ask 'How many these pizzas would you like?'
+                            define food_order
+                                toppings = ask 'pepperoni, tuna, veggie or cheese?'
+                                size = ask 'big, medium or small?'
+                                number_of_pizza = ask 'How many these pizzas would you like?'
 
-                              print 'YOU ORDERED'
-                              print number_of_pizzas ' size  ' topping ' pizza'
+                                print 'YOU ORDERED'
+                                print number_of_pizzas ' size  ' topping ' pizza'
 
-                          define drinks_order
-                              drink = ask 'water, coke, icetea, lemonade or coffee?'
-                              number_of_drinks = ask 'How many of these drinks would you like?'
+                            define drinks_order
+                                drink = ask 'water, coke, icetea, lemonade or coffee?'
+                                number_of_drinks = ask 'How many of these drinks would you like?'
 
-                              print 'YOU ORDERED'
-                              print number_of_drinks ' ' drink
+                                print 'YOU ORDERED'
+                                print number_of_drinks ' ' drink
 
-                          'Welcome to Hedy pizza'
-                          more_food = ask 'Would you like to order a pizza?'
-                          while more_food = 'yes'
-                              return food_order
-                              more_food = ask 'Would you like to order a pizza?'
-                          more_drinks = ask 'Would you like to order some drinks?'
-                          while more_drinks == 'yes'
-                              call drink_order
-                              more_drinks == ask 'Would you like to order more drinks?'
+                            'Welcome to Hedy pizza'
+                            more_food = ask 'Would you like to order a pizza?'
+                            while more_food = 'yes'
+                                return food_order
+                                more_food = ask 'Would you like to order a pizza?'
+                            more_drinks = ask 'Would you like to order some drinks?'
+                            while more_drinks == 'yes'
+                                call drink_order
+                                more_drinks == ask 'Would you like to order more drinks?'
 
 
-                          print 'Thanks for ordering!'
+                            print 'Thanks for ordering!'
             18:
                 story_text: |-
                     ### Exercise
@@ -1261,22 +1261,22 @@ adventures:
                         print 'there a ' sound
                         print 'everywhere a ' sound sound
                     ```
-                start_code: |2
+                start_code: |4
 
-                          animals = ['pig', 'dog', 'cow']
-                          sounds = ['oink', 'woof', 'moo']
-                          for i in range 1 to 3
-                              animal = animals[i]
-                              sound = sounds[i]
-                              print 'Old McDonald had a farm'
-                              print 'E I E I O!'
-                              print 'and on that farm he had a ' animal
-                              print 'E I E I O!'
-                              print 'with a ' sound sound ' here'
-                              print 'and a ' sound sound ' there'
-                              print 'here a ' sound
-                              print 'there a ' sound
-                              print 'everywhere a ' sound sound
+                            animals = ['pig', 'dog', 'cow']
+                            sounds = ['oink', 'woof', 'moo']
+                            for i in range 1 to 3
+                                animal = animals[i]
+                                sound = sounds[i]
+                                print 'Old McDonald had a farm'
+                                print 'E I E I O!'
+                                print 'and on that farm he had a ' animal
+                                print 'E I E I O!'
+                                print 'with a ' sound sound ' here'
+                                print 'and a ' sound sound ' there'
+                                print 'here a ' sound
+                                print 'there a ' sound
+                                print 'everywhere a ' sound sound
     default:
         name: Einführung
         default_save_name: Einleitung
@@ -1498,7 +1498,7 @@ adventures:
                     Es bedeutet auch, dass du Hedy-Code aus diesem Level in jeder Python-Umgebung benutzen kannst, solange du die englischen Befehle nutzt. Falls du es bisher noch nicht gemacht hast, kannst du den Schalter im Befehlsmenü zum Umschalten benutzen.
 
                     {print}('Ich heiße ', name)
-                start_code: "{print} ('Great job!!!')"
+                start_code: '{print} (''Great job!!!'')'
     dice:
         name: Würfel
         default_save_name: Würfel
@@ -2792,7 +2792,8 @@ adventures:
                     {if} x {is} {pressed} {forward} 15 {else} {turn} 90
                     ```
             9:
-                story_text: "Da du jetzt weißt wie man Befehle kombiniert, kannst du mit Hilfe von `{pressed}` ein Touch-Type-Tool erstellen. \n\n### Übung\nVervollständige den Code. Jedes Mal soll ein zufälliger Buchstabe ausgewählt werden. Diesen muss man drücken. Du bekommst einen Punkt für die richtige Taste und zwei Punkte Abzug für die falsche Taste.\n**(extra)** Lösche den Bildschirm nach jedem Buchstaben und zeige dem Benutzer, wie viele Punkte er erreicht hat.\n"
+                story_text: "Da du jetzt weißt wie man Befehle kombiniert, kannst du mit Hilfe von `{pressed}` ein Touch-Type-Tool erstellen. \n\n### Übung\nVervollständige den Code. Jedes Mal soll ein zufälliger Buchstabe ausgewählt werden. Diesen muss man drücken. Du bekommst einen Punkt für die richtige\
+                    \ Taste und zwei Punkte Abzug für die falsche Taste.\n**(extra)** Lösche den Bildschirm nach jedem Buchstaben und zeige dem Benutzer, wie viele Punkte er erreicht hat.\n"
                 example_code: "```\nPunkte = 0\nBuchstaben = a, b, c, d, e\n{repeat} 10 {times}\n    Buchstabe = _ _ _ \n    {print} 'Drück den Buchstaben ' Buchstabe\n    {if} Buchstabe {is} {pressed}\n    _\n    _\n    _\n```\n"
     print_command:
         name: '{print}'
@@ -3245,7 +3246,9 @@ adventures:
                     Dieser Code kann mit mehr Gerichten auf der Karte erweitert werden, zum Beispiel einem Getränkeangebot, und/oder mehreren Gängen oder Nachtisch. Füge mindestens ein Gericht hinzu.
                     **(extra)** Füge so viele Gerichte hinzu wie du magst!
             9:
-                story_text: "In diesem Level kannst du Verschachtelung benutzen, um dein Restaurant realistischer und spaßiger zu machen!\n\n### Übung\nDie Einrückung im Beispiel-Code wurde entfernt.\nKannst du herausfinden wie viel Einrückung jede Zeile benötigt, damit der Code ordentlich funktioniert?\nFalls der Kunde Pizza bestellt, sollte Hedy nicht fragen, welche Soße der Kunde möchte.\n\n**(extra)** Ein Restaurant lagert nicht alle möglichen Soßen. Erstelle eine Liste mit verfügbaren Soßen und gib eine Antwort bei jeder Bestellung, ob du sie auf Lager hast. <br>\n**(extra)** Pizzen haben Beläge. Frag die Kunden, was sie möchten.<br>\n **(extra)** Möchten die Kunden etwas trinken? Frag sie! <br>                    \n"
+                story_text: "In diesem Level kannst du Verschachtelung benutzen, um dein Restaurant realistischer und spaßiger zu machen!\n\n### Übung\nDie Einrückung im Beispiel-Code wurde entfernt.\nKannst du herausfinden wie viel Einrückung jede Zeile benötigt, damit der Code ordentlich funktioniert?\n\
+                    Falls der Kunde Pizza bestellt, sollte Hedy nicht fragen, welche Soße der Kunde möchte.\n\n**(extra)** Ein Restaurant lagert nicht alle möglichen Soßen. Erstelle eine Liste mit verfügbaren Soßen und gib eine Antwort bei jeder Bestellung, ob du sie auf Lager hast. <br>\n**(extra)**\
+                    \ Pizzen haben Beläge. Frag die Kunden, was sie möchten.<br>\n **(extra)** Möchten die Kunden etwas trinken? Frag sie! <br>                    \n"
                 example_code: |
                     ```
                     {print} 'Willkommen im Restaurant Chez Hedy!'
@@ -3648,7 +3651,8 @@ adventures:
                     {sleep}
                     ```
             7:
-                story_text: "In Liedern wiederholt sich oft einiges. So auch im Lied \"Baby Hai\"! Wenn du es singst, singst du eigentlich immer das gleiche:\n\nBaby Hai tututudutudu <br>\nBaby Hai tututudutudu <br>\nBaby Hai tututudutudu <br>\nBaby Hai \n\n### Übung\nKannst du das Lied mit Hilfe des `{repeat}` Befehls ausgeben? Vervollständige den Code, indem du die Lücken füllst!\n **Extra** Nach dem Baby-Hai kannst du natürlich auch andere Lieder programmieren. Es gibt viele Lieder mit Wiederholung!\nKannst du an ein weiteres Lied denken und es ausgeben?\n"
+                story_text: "In Liedern wiederholt sich oft einiges. So auch im Lied \"Baby Hai\"! Wenn du es singst, singst du eigentlich immer das gleiche:\n\nBaby Hai tututudutudu <br>\nBaby Hai tututudutudu <br>\nBaby Hai tututudutudu <br>\nBaby Hai \n\n### Übung\nKannst du das Lied mit Hilfe des\
+                    \ `{repeat}` Befehls ausgeben? Vervollständige den Code, indem du die Lücken füllst!\n **Extra** Nach dem Baby-Hai kannst du natürlich auch andere Lieder programmieren. Es gibt viele Lieder mit Wiederholung!\nKannst du an ein weiteres Lied denken und es ausgeben?\n"
                 example_code: |
                     ```
                     {repeat} _ _ {print} 'Baby Hai tututudutudu'

@@ -86,7 +86,7 @@ adventures:
                     ```
             4:
                 story_text: "你可能注意到了，在之前的级别里还有个问题。你有没有试过打印含有“名字”这个词的句子？即：`{print}` 我的名字是名字。\n 在这一级里你可以解决这个问题。你必须给所有需要打印的东西加上引号。\n\n### 练习1\n复制示例代码并通过添加引号来使其正常工作。 \n\n ### 练习 2 \n返回到上一个级别并复制故事代码。通过在正确的位置添加引号，使代码在此级别中正常工作。 \n注意：你自己故事中的变量应该在引号之外。就像范例代码的第二行一样。在该行中，变量名称放在引号之外。\n"
-                example_code: "```\n名字 {is} {ask}_你的名字是什么? _\n{print}     _ 主人公的名字是_名字 \n {print} 名字     _正准备走进树林_\n{print} 名字 _有点害怕'\n动物们 {is} 🦔, 🐿, 🦉, 🦇\n{print} _他听到了一个_ 动物们{at} {random} 的声音\n{print} 名字_担心这片森林闹鬼_\n```\n"
+                example_code: "```\n名字 {is} {ask}_你的名字是什么? _\n{print}     _ 主人公的名字是_名字 \n {print} 名字     _正准备走进树林_\n{print} 名字 _有点害怕'\n动物们 {is} \U0001F994, \U0001F43F, \U0001F989, \U0001F987\n{print} _他听到了一个_ 动物们{at} {random} 的声音\n{print} 名字_担心这片森林闹鬼_\n```\n"
             5:
                 story_text: |
                     在此级别中，你可以设计不同的结局，这将使你的故事更加有趣。
@@ -359,7 +359,16 @@ adventures:
                     The player who gets closest to 21, without going over it, wins!
 
                     Have fun!
-                example_code: "```\n{print} 'BLACKJACK'\ncards = [2, 3, 4, 5, 6, 7, 8, 9, 10, 'Jack', 'Queen','King', 'Ace']\npoints = 0\ndealer_points = 0\ncard_1 = cards[{random}]\ncard_2 = cards[{random}]\ncard_3 = cards [{random}]\ndealer_card_1 = cards[{random}]\ndealer_card_2 = cards[{random}]\ndealer_card_3 = cards[{random}]\n# 卡片 1 的点数\n{if} card_1 == 'Jack' {or} card_1 == 'Queen' {or} card_1 == 'King':\n    points = points + 10\n{elif} card_1 == 'Ace':\n    points = points + 11\n{else}:\n    points = points + card_1\n# 卡片 2 的点数\n{if} card_2 == 'Jack' {or} card_2 == 'Queen' {or} card_2 == 'King':\n    points = points + 10\n{elif} card_2 == 'Ace':\n    points = points + 11\n{else}:\n    points = points + card_2\n# 庄家第1张牌\n{if} dealer_card_1 == 'Jack' {or} dealer_card_1 == 'Queen' {or} dealer_card_1 == 'King':\n    dealer_points = dealer_points + 10\n{elif} dealer_card_1 == 'Ace':\n    dealer_points = dealer_points + 11\n{else}:\n    dealer_points = dealer_points + dealer_card_1\n# 庄家第2张牌\n{if} dealer_card_2 == 'Jack' {or} dealer_card_2 == 'Queen' {or} dealer_card_2 == 'King':\n    dealer_points = dealer_points + 10\n{elif} dealer_card_2 == 'Ace':\n    dealer_points = dealer_points + 11\n{else}:\n    dealer_points = dealer_points + dealer_card_2\n# 两张 Aces\n{if} card_1 == 'Ace' {and} card_2 == 'Ace':\n    points = 12\n{if} dealer_card_1 == 'Ace' {and} dealer_card_2 == 'Ace':\n    dealer_points = 12\n# Scoreboard\n{print} '你有张 ' card_1 ' 以及 ' card_2 ' (' points ' points)'\n{print} '庄家有张 ' dealer_card_1 ' 以及 ' dealer_card_2 ' (' dealer_points ' points)'\n# 玩家追加牌\nhit = {ask} '你想追加牌嘛?'\n{if} hit == 'yes':\n    {if} card_3 == 'Jack' {or} card_3 == 'Queen' {or} card_3 == 'King':\n        points = points + 10\n    {elif} card_3 == 'Ace':\n        {if} points > 11:\n            points = points + 11\n        {else}:\n            points = points + 1\n    {else}:\n        points = points + card_3\n    {print} '你追加了一张 ' card_3 ' (' points ' points)'\n{else}:\n    {print} '不追加牌'\n# 获胜者\n{if} points > 21 {or} dealer_points > points {or} dealer_points == 21:\n    {print} '你输了'\n{elif} dealer_points < 17:\n    {print} '庄家要牌.它是... ' dealer_card_3\n    {if} dealer_card_3 == 'Jack' {or} dealer_card_3 == 'Queen' {or} dealer_card_3 == 'King':\n        dealer_points = dealer_points + 10\n    {elif} dealer_card_3 == 'Ace':\n        {if} dealer_points < 11:\n            dealer_points = dealer_points + 11\n        {else}:\n            dealer_points = dealer_points + 1\n    {else}:\n        dealer_points = dealer_points + dealer_card_3\n    {print} '现在打印庄家有 ' dealer_points \n    {if} dealer_points < 21 {and} dealer_points > points:\n        {print} '你输了'\n    {else}:\n        {print} '你赢了!'\n{elif} points > dealer_points {and} points < 21:\n    {print} '你赢了!'\n```\n"
+                example_code: "```\n{print} 'BLACKJACK'\ncards = [2, 3, 4, 5, 6, 7, 8, 9, 10, 'Jack', 'Queen','King', 'Ace']\npoints = 0\ndealer_points = 0\ncard_1 = cards[{random}]\ncard_2 = cards[{random}]\ncard_3 = cards [{random}]\ndealer_card_1 = cards[{random}]\ndealer_card_2 = cards[{random}]\n\
+                    dealer_card_3 = cards[{random}]\n# 卡片 1 的点数\n{if} card_1 == 'Jack' {or} card_1 == 'Queen' {or} card_1 == 'King':\n    points = points + 10\n{elif} card_1 == 'Ace':\n    points = points + 11\n{else}:\n    points = points + card_1\n# 卡片 2 的点数\n{if} card_2 == 'Jack' {or} card_2 == 'Queen'\
+                    \ {or} card_2 == 'King':\n    points = points + 10\n{elif} card_2 == 'Ace':\n    points = points + 11\n{else}:\n    points = points + card_2\n# 庄家第1张牌\n{if} dealer_card_1 == 'Jack' {or} dealer_card_1 == 'Queen' {or} dealer_card_1 == 'King':\n    dealer_points = dealer_points + 10\n\
+                    {elif} dealer_card_1 == 'Ace':\n    dealer_points = dealer_points + 11\n{else}:\n    dealer_points = dealer_points + dealer_card_1\n# 庄家第2张牌\n{if} dealer_card_2 == 'Jack' {or} dealer_card_2 == 'Queen' {or} dealer_card_2 == 'King':\n    dealer_points = dealer_points + 10\n{elif} dealer_card_2\
+                    \ == 'Ace':\n    dealer_points = dealer_points + 11\n{else}:\n    dealer_points = dealer_points + dealer_card_2\n# 两张 Aces\n{if} card_1 == 'Ace' {and} card_2 == 'Ace':\n    points = 12\n{if} dealer_card_1 == 'Ace' {and} dealer_card_2 == 'Ace':\n    dealer_points = 12\n# Scoreboard\n\
+                    {print} '你有张 ' card_1 ' 以及 ' card_2 ' (' points ' points)'\n{print} '庄家有张 ' dealer_card_1 ' 以及 ' dealer_card_2 ' (' dealer_points ' points)'\n# 玩家追加牌\nhit = {ask} '你想追加牌嘛?'\n{if} hit == 'yes':\n    {if} card_3 == 'Jack' {or} card_3 == 'Queen' {or} card_3 == 'King':\n        points\
+                    \ = points + 10\n    {elif} card_3 == 'Ace':\n        {if} points > 11:\n            points = points + 11\n        {else}:\n            points = points + 1\n    {else}:\n        points = points + card_3\n    {print} '你追加了一张 ' card_3 ' (' points ' points)'\n{else}:\n    {print} '不追加牌'\n\
+                    # 获胜者\n{if} points > 21 {or} dealer_points > points {or} dealer_points == 21:\n    {print} '你输了'\n{elif} dealer_points < 17:\n    {print} '庄家要牌.它是... ' dealer_card_3\n    {if} dealer_card_3 == 'Jack' {or} dealer_card_3 == 'Queen' {or} dealer_card_3 == 'King':\n        dealer_points\
+                    \ = dealer_points + 10\n    {elif} dealer_card_3 == 'Ace':\n        {if} dealer_points < 11:\n            dealer_points = dealer_points + 11\n        {else}:\n            dealer_points = dealer_points + 1\n    {else}:\n        dealer_points = dealer_points + dealer_card_3\n    {print}\
+                    \ '现在打印庄家有 ' dealer_points \n    {if} dealer_points < 21 {and} dealer_points > points:\n        {print} '你输了'\n    {else}:\n        {print} '你赢了!'\n{elif} points > dealer_points {and} points < 21:\n    {print} '你赢了!'\n```\n"
     calculator:
         name: 计算器
         default_save_name: 计算器
@@ -398,7 +407,11 @@ adventures:
                     {if} _
                     {else} _
                     ```
-                start_code: "number_1 = {ask} 'Fill in the first number:'\nnumber_2 = {ask} 'Fill in the second number:'\ncorrect_answer = number_1 * number_2\n{print} number_1 ' times ' number_2 ' is ' correct_answer\n"
+                start_code: |
+                    number_1 = {ask} 'Fill in the first number:'
+                    number_2 = {ask} 'Fill in the second number:'
+                    correct_answer = number_1 * number_2
+                    {print} number_1 ' times ' number_2 ' is ' correct_answer
             9:
                 story_text: |
                     在第 6 级中，您编写了一个计算器程序，在此级别中，您可以扩展该程序来提出多个问题。
@@ -1105,56 +1118,57 @@ adventures:
 
                     print '感谢订购！'
                     ```
-                start_code: |2
+                start_code: |4
 
-                                                define food_order
-                                                    toppings = ask 'pepperoni, tuna, veggie or cheese?'
-                                                    size = ask 'big, medium or small?'
-                                                    number_of_pizza = ask 'How many these pizzas would you like?'
+                                                  define food_order
+                                                      toppings = ask 'pepperoni, tuna, veggie or cheese?'
+                                                      size = ask 'big, medium or small?'
+                                                      number_of_pizza = ask 'How many these pizzas would you like?'
 
-                                                    print 'YOU ORDERED'
-                                                    print number_of_pizzas ' size  ' topping ' pizza'
+                                                      print 'YOU ORDERED'
+                                                      print number_of_pizzas ' size  ' topping ' pizza'
 
-                                                define drinks_order
-                                                    drink = ask 'water, coke, icetea, lemonade or coffee?'
-                                                    number_of_drinks = ask 'How many of these drinks would you like?'
+                                                  define drinks_order
+                                                      drink = ask 'water, coke, icetea, lemonade or coffee?'
+                                                      number_of_drinks = ask 'How many of these drinks would you like?'
 
-                                                    print 'YOU ORDERED'
-                                                    print number_of_drinks ' ' drink
+                                                      print 'YOU ORDERED'
+                                                      print number_of_drinks ' ' drink
 
-                                                'Welcome to Hedy pizza'
-                                                more_food = ask 'Would you like to order a pizza?'
-                                                while more_food = 'yes'
-                                                    return food_order
-                                                    more_food = ask 'Would you like to order a pizza?'
-                                                more_drinks = ask 'Would you like to order some drinks?'
-                                                while more_drinks == 'yes'
-                                                    call drink_order
-                                                    more_drinks == ask 'Would you like to order more drinks?'
+                                                  'Welcome to Hedy pizza'
+                                                  more_food = ask 'Would you like to order a pizza?'
+                                                  while more_food = 'yes'
+                                                      return food_order
+                                                      more_food = ask 'Would you like to order a pizza?'
+                                                  more_drinks = ask 'Would you like to order some drinks?'
+                                                  while more_drinks == 'yes'
+                                                      call drink_order
+                                                      more_drinks == ask 'Would you like to order more drinks?'
 
 
-                                                print 'Thanks for ordering!'
+                                                  print 'Thanks for ordering!'
             18:
                 story_text: |-
                     ### 练习
                     从第 16 级开始调试这个 Old MacDonald 程序。祝你好运！
-                example_code: "**警告！ 这段代码需要调试！**\n```\nanimals = ['pig', 'dog', 'cow']\nsounds = ['oink', 'woof', 'moo']\nfor i in range 1 to 3\n    animal = animals[i]\n    sound = sounds[i]\n    print '老麦当劳有一个农场'\n    print 'E I E I O!'\n    print '在那个农场他有一只' animal\n    print 'E I E I O!'\n    print '这里有‘sound sound\n    print '以及那也有' sound sound \n    print '这里有 ' sound\n    print '那也有 ' sound\n    print '到处有 ' sound sound\n```\n"
-                start_code: |2
+                example_code: "**警告！ 这段代码需要调试！**\n```\nanimals = ['pig', 'dog', 'cow']\nsounds = ['oink', 'woof', 'moo']\nfor i in range 1 to 3\n    animal = animals[i]\n    sound = sounds[i]\n    print '老麦当劳有一个农场'\n    print 'E I E I O!'\n    print '在那个农场他有一只' animal\n    print 'E I E I O!'\n    print\
+                    \ '这里有‘sound sound\n    print '以及那也有' sound sound \n    print '这里有 ' sound\n    print '那也有 ' sound\n    print '到处有 ' sound sound\n```\n"
+                start_code: |4
 
-                                                animals = ['pig', 'dog', 'cow']
-                                                sounds = ['oink', 'woof', 'moo']
-                                                for i in range 1 to 3
-                                                    animal = animals[i]
-                                                    sound = sounds[i]
-                                                    print 'Old McDonald had a farm'
-                                                    print 'E I E I O!'
-                                                    print 'and on that farm he had a ' animal
-                                                    print 'E I E I O!'
-                                                    print 'with a ' sound sound ' here'
-                                                    print 'and a ' sound sound ' there'
-                                                    print 'here a ' sound
-                                                    print 'there a ' sound
-                                                    print 'everywhere a ' sound sound
+                                                  animals = ['pig', 'dog', 'cow']
+                                                  sounds = ['oink', 'woof', 'moo']
+                                                  for i in range 1 to 3
+                                                      animal = animals[i]
+                                                      sound = sounds[i]
+                                                      print 'Old McDonald had a farm'
+                                                      print 'E I E I O!'
+                                                      print 'and on that farm he had a ' animal
+                                                      print 'E I E I O!'
+                                                      print 'with a ' sound sound ' here'
+                                                      print 'and a ' sound sound ' there'
+                                                      print 'here a ' sound
+                                                      print 'there a ' sound
+                                                      print 'everywhere a ' sound sound
     default:
         name: 介绍
         default_save_name: 介绍
@@ -1383,7 +1397,7 @@ adventures:
                 story_text: |
                     恭喜！ 您已到达 Hedy 的最后一关！ 您在此处创建的代码可以复制到真实的 Python 环境（例如 replit 或 PyCharm），并且您可以在那里继续学习！
                     但请注意，Python 只能读取英文命令，因此如果您一直在使用其他语言，则现在需要切换到英文。
-                start_code: "{print} ('Great job!!!')"
+                start_code: '{print} (''Great job!!!'')'
     dice:
         name: 骰子
         default_save_name: 骰子

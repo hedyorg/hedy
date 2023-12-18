@@ -529,7 +529,11 @@ adventures:
                     given_answer = 'What is ' number_1 ' times ' number_2 '?'
                     {if} _
                     {else} _
-                start_code: "number_1 = {ask} 'Fill in the first number:'\nnumber_2 = {ask} 'Fill in the second number:'\ncorrect_answer = number_1 * number_2\n{print} number_1 ' times ' number_2 ' is ' correct_answer\n"
+                start_code: |
+                    number_1 = {ask} 'Fill in the first number:'
+                    number_2 = {ask} 'Fill in the second number:'
+                    correct_answer = number_1 * number_2
+                    {print} number_1 ' times ' number_2 ' is ' correct_answer
             9:
                 story_text: |
                     In previous levels you've learned how to make a calculator, in this level you can expand that code and make it into a little maths game.
@@ -1184,35 +1188,35 @@ adventures:
 
                     print 'Thanks for ordering!'
                     ```
-                start_code: |2
+                start_code: |4
 
-                        define food_order
-                            toppings = ask 'pepperoni, tuna, veggie or cheese?'
-                            size = ask 'big, medium or small?'
-                            number_of_pizza = ask 'How many these pizzas would you like?'
+                          define food_order
+                              toppings = ask 'pepperoni, tuna, veggie or cheese?'
+                              size = ask 'big, medium or small?'
+                              number_of_pizza = ask 'How many these pizzas would you like?'
 
-                            print 'YOU ORDERED'
-                            print number_of_pizzas ' size  ' topping ' pizza'
+                              print 'YOU ORDERED'
+                              print number_of_pizzas ' size  ' topping ' pizza'
 
-                        define drinks_order
-                            drink = ask 'water, coke, icetea, lemonade or coffee?'
-                            number_of_drinks = ask 'How many of these drinks would you like?'
+                          define drinks_order
+                              drink = ask 'water, coke, icetea, lemonade or coffee?'
+                              number_of_drinks = ask 'How many of these drinks would you like?'
 
-                            print 'YOU ORDERED'
-                            print number_of_drinks ' ' drink
+                              print 'YOU ORDERED'
+                              print number_of_drinks ' ' drink
 
-                        'Welcome to Hedy pizza'
-                        more_food = ask 'Would you like to order a pizza?'
-                        while more_food = 'yes'
-                            return food_order
-                            more_food = ask 'Would you like to order a pizza?'
-                        more_drinks = ask 'Would you like to order some drinks?'
-                        while more_drinks == 'yes'
-                            call drink_order
-                            more_drinks == ask 'Would you like to order more drinks?'
+                          'Welcome to Hedy pizza'
+                          more_food = ask 'Would you like to order a pizza?'
+                          while more_food = 'yes'
+                              return food_order
+                              more_food = ask 'Would you like to order a pizza?'
+                          more_drinks = ask 'Would you like to order some drinks?'
+                          while more_drinks == 'yes'
+                              call drink_order
+                              more_drinks == ask 'Would you like to order more drinks?'
 
 
-                        print 'Thanks for ordering!'
+                          print 'Thanks for ordering!'
             18:
                 story_text: |-
                     ### Exercise
@@ -1235,22 +1239,22 @@ adventures:
                         print 'there a ' sound
                         print 'everywhere a ' sound sound
                     ```
-                start_code: |2
+                start_code: |4
 
-                        animals = ['pig', 'dog', 'cow']
-                        sounds = ['oink', 'woof', 'moo']
-                        for i in range 1 to 3
-                            animal = animals[i]
-                            sound = sounds[i]
-                            print 'Old McDonald had a farm'
-                            print 'E I E I O!'
-                            print 'and on that farm he had a ' animal
-                            print 'E I E I O!'
-                            print 'with a ' sound sound ' here'
-                            print 'and a ' sound sound ' there'
-                            print 'here a ' sound
-                            print 'there a ' sound
-                            print 'everywhere a ' sound sound
+                          animals = ['pig', 'dog', 'cow']
+                          sounds = ['oink', 'woof', 'moo']
+                          for i in range 1 to 3
+                              animal = animals[i]
+                              sound = sounds[i]
+                              print 'Old McDonald had a farm'
+                              print 'E I E I O!'
+                              print 'and on that farm he had a ' animal
+                              print 'E I E I O!'
+                              print 'with a ' sound sound ' here'
+                              print 'and a ' sound sound ' there'
+                              print 'here a ' sound
+                              print 'there a ' sound
+                              print 'everywhere a ' sound sound
     default:
         name: 簡介
         default_save_name: 介紹
@@ -1384,7 +1388,8 @@ adventures:
 
                     {print} 2.5 + 2.5
             13:
-                story_text: We are now going to learn `{and}` and `{or}`! If you want to check two statements, you don't have to use two {if}'s but can use `{and}` and `{or}`. If you use `{and}`, both statements, left and right of the `{and}` need to be true. We can also use `{or}`. Then only one statement needs to be correct.
+                story_text: We are now going to learn `{and}` and `{or}`! If you want to check two statements, you don't have to use two {if}'s but can use `{and}` and `{or}`. If you use `{and}`, both statements, left and right of the `{and}` need to be true. We can also use `{or}`. Then only one statement
+                    needs to be correct.
                 example_code: |
                     ```
                     name = {ask} 'what is your name?'
@@ -1450,7 +1455,7 @@ adventures:
                 story_text: |-
                     We arrived at real Python code! That means we need to use parentheses with {print} and {range} from now on.
                     {print}('My name is ', name)
-                start_code: "{print} ('Great job!!!')"
+                start_code: '{print} (''Great job!!!'')'
     dice:
         name: Dice
         default_save_name: Dice

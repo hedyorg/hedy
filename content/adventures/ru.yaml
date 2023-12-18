@@ -542,7 +542,11 @@ adventures:
                     given_answer = 'What is ' number_1 ' times ' number_2 '?'
                     {if} _
                     {else} _
-                start_code: "number_1 = {ask} 'Fill in the first number:'\nnumber_2 = {ask} 'Fill in the second number:'\ncorrect_answer = number_1 * number_2\n{print} number_1 ' times ' number_2 ' is ' correct_answer\n"
+                start_code: |
+                    number_1 = {ask} 'Fill in the first number:'
+                    number_2 = {ask} 'Fill in the second number:'
+                    correct_answer = number_1 * number_2
+                    {print} number_1 ' times ' number_2 ' is ' correct_answer
             9:
                 story_text: |
                     На предыдущих уровнях вы научились создавать калькулятор, а на этом уровне вы можете расширить этот код и превратить его в небольшую математическую игру.
@@ -1196,35 +1200,35 @@ adventures:
 
                     print 'Thanks for ordering!'
                     ```
-                start_code: |2
+                start_code: |4
 
-                        define food_order
-                            toppings = ask 'pepperoni, tuna, veggie or cheese?'
-                            size = ask 'big, medium or small?'
-                            number_of_pizza = ask 'How many these pizzas would you like?'
+                          define food_order
+                              toppings = ask 'pepperoni, tuna, veggie or cheese?'
+                              size = ask 'big, medium or small?'
+                              number_of_pizza = ask 'How many these pizzas would you like?'
 
-                            print 'YOU ORDERED'
-                            print number_of_pizzas ' size  ' topping ' pizza'
+                              print 'YOU ORDERED'
+                              print number_of_pizzas ' size  ' topping ' pizza'
 
-                        define drinks_order
-                            drink = ask 'water, coke, icetea, lemonade or coffee?'
-                            number_of_drinks = ask 'How many of these drinks would you like?'
+                          define drinks_order
+                              drink = ask 'water, coke, icetea, lemonade or coffee?'
+                              number_of_drinks = ask 'How many of these drinks would you like?'
 
-                            print 'YOU ORDERED'
-                            print number_of_drinks ' ' drink
+                              print 'YOU ORDERED'
+                              print number_of_drinks ' ' drink
 
-                        'Welcome to Hedy pizza'
-                        more_food = ask 'Would you like to order a pizza?'
-                        while more_food = 'yes'
-                            return food_order
-                            more_food = ask 'Would you like to order a pizza?'
-                        more_drinks = ask 'Would you like to order some drinks?'
-                        while more_drinks == 'yes'
-                            call drink_order
-                            more_drinks == ask 'Would you like to order more drinks?'
+                          'Welcome to Hedy pizza'
+                          more_food = ask 'Would you like to order a pizza?'
+                          while more_food = 'yes'
+                              return food_order
+                              more_food = ask 'Would you like to order a pizza?'
+                          more_drinks = ask 'Would you like to order some drinks?'
+                          while more_drinks == 'yes'
+                              call drink_order
+                              more_drinks == ask 'Would you like to order more drinks?'
 
 
-                        print 'Thanks for ordering!'
+                          print 'Thanks for ordering!'
             18:
                 story_text: |-
                     ### Exercise
@@ -1247,22 +1251,22 @@ adventures:
                         print 'there a ' sound
                         print 'everywhere a ' sound sound
                     ```
-                start_code: |2
+                start_code: |4
 
-                        animals = ['pig', 'dog', 'cow']
-                        sounds = ['oink', 'woof', 'moo']
-                        for i in range 1 to 3
-                            animal = animals[i]
-                            sound = sounds[i]
-                            print 'Old McDonald had a farm'
-                            print 'E I E I O!'
-                            print 'and on that farm he had a ' animal
-                            print 'E I E I O!'
-                            print 'with a ' sound sound ' here'
-                            print 'and a ' sound sound ' there'
-                            print 'here a ' sound
-                            print 'there a ' sound
-                            print 'everywhere a ' sound sound
+                          animals = ['pig', 'dog', 'cow']
+                          sounds = ['oink', 'woof', 'moo']
+                          for i in range 1 to 3
+                              animal = animals[i]
+                              sound = sounds[i]
+                              print 'Old McDonald had a farm'
+                              print 'E I E I O!'
+                              print 'and on that farm he had a ' animal
+                              print 'E I E I O!'
+                              print 'with a ' sound sound ' here'
+                              print 'and a ' sound sound ' there'
+                              print 'here a ' sound
+                              print 'there a ' sound
+                              print 'everywhere a ' sound sound
     default:
         name: Вступление
         default_save_name: вступление
@@ -1401,7 +1405,8 @@ adventures:
 
                     {print} 2.5 + 2.5
             13:
-                story_text: Сейчас мы изучим `{and}` и `{or}`! Если вы хотите проверить два утверждения, вам не обязательно использовать два {if}, но можно использовать `{and}` и `{or}`. Если вы используете `{and}`, оба утверждения, слева и справа от `{and}`, должны быть истинными. Можно также использовать `{or}`. Тогда только одно утверждение должно быть верным.
+                story_text: Сейчас мы изучим `{and}` и `{or}`! Если вы хотите проверить два утверждения, вам не обязательно использовать два {if}, но можно использовать `{and}` и `{or}`. Если вы используете `{and}`, оба утверждения, слева и справа от `{and}`, должны быть истинными. Можно также использовать
+                    `{or}`. Тогда только одно утверждение должно быть верным.
                 example_code: |
                     ```
                     имя = {ask} 'как вас зовут?'
@@ -1467,7 +1472,7 @@ adventures:
                 story_text: |-
                     We arrived at real Python code! That means we need to use parentheses with {print} and {range} from now on.
                     {print}('Меня зовут ', имя)
-                start_code: "{print} ('Great job!!!')"
+                start_code: '{print} (''Great job!!!'')'
     dice:
         name: Кубики
         default_save_name: Кубики
@@ -2150,7 +2155,9 @@ adventures:
                     {else} {print} 'О нет! Вас съедает...' монстры {at} {random}
                     ```
             9:
-                story_text: "В этом уровне вы можете использовать вложенность, которая позволяет сделать дом с привидениями еще более интерактивным!\n\n### Упражнение\n Сейчас очень трудно выиграть в этой игре, можете ли вы сделать так, чтобы выиграть было легче?\nИзмените свой код так, чтобы в нем была только одна неправильная дверь и две правильные, а не одна правильная дверь и две неправильные? \nПодсказка: Это означает замену переменной correct_door на wrong_door, а также изменение кода `{if}` и `{else}`.\nИ, конечно, вы можете изменить историю и сделать ее своей. Измените монстров или сделайте это счастливым игровым шоу, в котором вы получаете подарок!\n"
+                story_text: "В этом уровне вы можете использовать вложенность, которая позволяет сделать дом с привидениями еще более интерактивным!\n\n### Упражнение\n Сейчас очень трудно выиграть в этой игре, можете ли вы сделать так, чтобы выиграть было легче?\nИзмените свой код так, чтобы в нем была\
+                    \ только одна неправильная дверь и две правильные, а не одна правильная дверь и две неправильные? \nПодсказка: Это означает замену переменной correct_door на wrong_door, а также изменение кода `{if}` и `{else}`.\nИ, конечно, вы можете изменить историю и сделать ее своей. Измените монстров\
+                    \ или сделайте это счастливым игровым шоу, в котором вы получаете подарок!\n"
                 example_code: |
                     ```
                     {print} 'Escape from the Haunted House!'
@@ -2173,7 +2180,9 @@ adventures:
                         {print} 'Great! You survived!'
                     ```
             11:
-                story_text: "В этом уровне мы изменили команду `{for}`, чтобы сообщить игроку, где он находится. \n\n### Упражнение 1\nЗавершите программу, чтобы игрок знал, в какой комнате он находится.\n\n### Упражнение 2\nПревратите программу в приключение, выполнив следующие шаги:\n\n1. Составьте список вариантов действий (например: борьба или бегство).\n2. Убедитесь, что игрок может выбрать вариант с `{ask}`\n3. Ответ правильный? Тогда они могут перейти к следующему монстру. Ответили неправильно? Сообщите игроку об этом с помощью `{print}`. \n\n**(дополнительно)** Если вы сделали неправильный выбор, монстр все равно будет показан! Как вы можете это изменить?\n"
+                story_text: "В этом уровне мы изменили команду `{for}`, чтобы сообщить игроку, где он находится. \n\n### Упражнение 1\nЗавершите программу, чтобы игрок знал, в какой комнате он находится.\n\n### Упражнение 2\nПревратите программу в приключение, выполнив следующие шаги:\n\n1. Составьте\
+                    \ список вариантов действий (например: борьба или бегство).\n2. Убедитесь, что игрок может выбрать вариант с `{ask}`\n3. Ответ правильный? Тогда они могут перейти к следующему монстру. Ответили неправильно? Сообщите игроку об этом с помощью `{print}`. \n\n**(дополнительно)** Если вы\
+                    \ сделали неправильный выбор, монстр все равно будет показан! Как вы можете это изменить?\n"
                 example_code: |
                     ```
                     {print} 'Побег из дома с привидениями!
@@ -3175,7 +3184,9 @@ adventures:
 
                     **Дополнительное задание** Добавьте ещё больше вариантов - столько, сколько вам нравится!
             9:
-                story_text: "В этом уровне вы можете использовать вложенность, чтобы сделать ваш ресторан более реалистичным и веселым!\n\n### Упражнение\nВ коде примера были удалены отступы. \nМожете ли вы определить, сколько отступов должно быть в каждой строке, чтобы код работал правильно?\nЕсли клиент заказывает пиццу, Хеди не должна спрашивать, какой соус хочет клиент.\n\n**(экстра)** В ресторане не все соусы имеются в наличии. Составьте список доступных соусов и при каждом заказе отвечайте, продаете ли вы его. <br>\n**(дополнительно)** У пиццы есть начинка. Спросите клиентов, что они хотят.<br>\n**(дополнительно)** Хотят ли клиенты напитки? Спросите и их! <br>                    \n"
+                story_text: "В этом уровне вы можете использовать вложенность, чтобы сделать ваш ресторан более реалистичным и веселым!\n\n### Упражнение\nВ коде примера были удалены отступы. \nМожете ли вы определить, сколько отступов должно быть в каждой строке, чтобы код работал правильно?\nЕсли клиент\
+                    \ заказывает пиццу, Хеди не должна спрашивать, какой соус хочет клиент.\n\n**(экстра)** В ресторане не все соусы имеются в наличии. Составьте список доступных соусов и при каждом заказе отвечайте, продаете ли вы его. <br>\n**(дополнительно)** У пиццы есть начинка. Спросите клиентов,\
+                    \ что они хотят.<br>\n**(дополнительно)** Хотят ли клиенты напитки? Спросите и их! <br>                    \n"
                 example_code: |
                     ```
                     {print} 'Добро пожаловать в ресторан Хеди!'
@@ -3336,7 +3347,8 @@ adventures:
                     choices {is} rock, paper, scissors
                     {print} choices {at} {random}
                     ```
-                story_text_2: "### Задача\nСкопируйте код примера и заполните в нём проблелы, чтобы добавить ещё одного игрока.\n\n**Дополнительное задание** Сейчас игроков зовут \"игрок 1\" и \"игрок 2\". Можете добавить несколько команд `{ask}` (конечно же с переменными), чтобы дать игрокам имена? \nТаким образом, вы сможете получить вывод вроде `Ваня выбрал... бумагу`\n"
+                story_text_2: "### Задача\nСкопируйте код примера и заполните в нём проблелы, чтобы добавить ещё одного игрока.\n\n**Дополнительное задание** Сейчас игроков зовут \"игрок 1\" и \"игрок 2\". Можете добавить несколько команд `{ask}` (конечно же с переменными), чтобы дать игрокам имена? \n\
+                    Таким образом, вы сможете получить вывод вроде `Ваня выбрал... бумагу`\n"
                 example_code_2: |
                     ```
                     выбор {is} камень, бумага, ножницы
