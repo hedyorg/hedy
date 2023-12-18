@@ -27,6 +27,7 @@ adventures:
                     En az bir tane `{ask}` ve bir tane `{echo}` komutu kullanın.
                     İstediğiniz herhangi bir konu hakkında yapabilirsiniz.
                     Aklınıza bir konu gelmiyorsa, seçeneklerimizden birini kullanın: sinemaya gitmek, bir spor karşılaşması veya hayvanat bahçesinde bir gün.
+                start_code: '{print} Hikayeniz burada başlıyor'
             2:
                 story_text: |
                     Bu 2. seviyede, hikayenizi daha eğlenceli hale getirebilirsiniz. Ana karakterinizin adı artık cümle içinde herhangi bir yerde olabilir.
@@ -52,6 +53,7 @@ adventures:
                     Kodunuzdaki `{ask}` komutlarını ve `{echo}` komutlarını bu seviyede öğrendiğiniz doğru şekilleriyle değiştirin.
 
                     **Ek Görev** Hikayenizde gerilim oluşturmak için kodunuza bir `{sleep}` komutu ekleyin.
+                start_code: '{print} Sizin hikayeniz'
             3:
                 story_text: |
                     3. seviyede, hikayenizi daha eğlenceli hale getirebilirsiniz. Bunun gibi herhangi bir canavar, hayvan veya diğer engeller için rastgelelik kullanabilirsiniz:
@@ -85,6 +87,7 @@ adventures:
                     çıkar {is} {ask} Hangi eşyayı atmalı?
                     {remove} çıkar {from} çanta
                     ```
+                start_code: '{print} Sizin hikayeniz'
             4:
                 story_text: |
                     Önceki seviyelerde hala bir sorun olduğunu fark etmiş olabilirsiniz. İsim kelimesini içeren bir cümle yazdırmayı denediniz mi? Örneğin: `{print}` benim adım adım dır.
@@ -109,6 +112,7 @@ adventures:
                     {print} _ Şunun sesini duyuyor _ hayvanlar {at} {random}
                     {print} isim _ buranın perili bir orman olmasından korkuyor _
                     ```
+                start_code: '{print} ''Hikayeniz buraya yazılacak!'''
             5:
                 story_text: |
                     Bu seviyede, hikayenizi daha da eğlenceli hale getirecek farklı sonlar programlayabilirsiniz.
@@ -134,6 +138,7 @@ adventures:
                     {if} son {is} iyi {print} isim ' kılıcını çıkarır ve canavar hızla kaçar'
                     {else} {print} isim ' canavar tarafından yendi'
                     ```
+                start_code: '{print} ''Hikayeniz burada başlayacak!'''
             7:
                 story_text: |
                     Bir hikayede, birileri kelimeleri birkaç kez söyler. Örneğin, birisi yardım istediğinde veya şarkı söylediğinde.
@@ -148,6 +153,7 @@ adventures:
                     {repeat} 5 {times} {print} 'Yardım edin!'
                     {print} 'Neden kimse bana yardım etmiyor?'
                     ```
+                start_code: '{repeat} 5 {times} {print} ''Yardım edin!'''
             8:
                 story_text: |
                     Bu seviyede `{if}` komutlarınızda birden fazla satır kullanabilirsiniz, bu şekilde mutlu veya üzücü sonunuzu güncellemiş olacaksınız!
@@ -170,6 +176,7 @@ adventures:
                         {print} 'Olamaz! Ali çok yavaştı ve....'
                         {print} _
                     ```
+                start_code: '# kodunuzu buraya yazın'
             9:
                 story_text: |
                     Bu seviyede artık `{if}` ve `{repeat}` komutlarını, diğer `{if}` ve `{repeat}` komutlarının içinde kullanabilirsiniz.
@@ -198,6 +205,7 @@ adventures:
                     {else}
                         {print} 'Ayşe eve gider'
                     ```
+                start_code: '# kodunuzu buraya yazın'
             10:
                 story_text: |
                     Bu seviyede {for} komutunu hikayenizde kullanabilirsiniz. Bu şekilde 'Brown bear, Brown bear, what do you see' adlı çocuk kitabını kolayca programlayabilirsiniz.
@@ -206,6 +214,7 @@ adventures:
 
                     Eğer bilmiyorsanız <a href="https://www.yonkerspublicschools.org/cms/lib/NY01814060/Centricity/Domain/1621/Brown%20Bear%20Book.pdf"> hikayeye bir göz atın</a> , ve kitapta yazıldığı gibi yazdığınızdan emin olun. (Bunun gibi bir Türkçe kitap biliyorsanız onu da yazabilirsiniz)
                 example_code: "```\nhayvanlar = _ , _ , _ \n{print} 'Brown bear, Brown bear'\n {print} 'What do you see?'\n```\n"
+                start_code: '# kodunuzu buraya yazın'
             12:
                 story_text: |-
                     Bu seviyede, bir değişkene birden fazla kelimeyi kaydetmek için tırnak işaretlerine ihtiyaç duyulacaktır.
@@ -218,6 +227,7 @@ adventures:
                     isim = 'İngiltere Kraliçesi'
                     {print} isim ' bir parça kek yiyordu, sonra aniden...'
                     ```
+                start_code: '# kodunuzu buraya yazın'
             13:
                 story_text: |
                     `{and}` ve `{or}` komutlarını kullanarak hikayelerinizi çok yönlü hale getirebilirsiniz. İki soru sorabilir ve cevapların bir karışımına yanıt verebilirsiniz.
@@ -236,6 +246,7 @@ adventures:
                     {if} yol {is} 'sol' {and} silah {is} 'kılıç'
                         _
                     ```
+                start_code: '# kodunuzu buraya yazın'
             15:
                 story_text: |
                     `{while}` döngüsünü kullanmak hikayelerinizi daha ilginç hale getirebilir. Örneğin, oyun bitene kadar oynayabilmek için `{while} oyun == 'devam'` kullanabilirsiniz.
@@ -258,6 +269,7 @@ adventures:
                             {print} 'Hayır, burada değiller: ' yer
                     {print} 'Şimdi eve girebilirsiniz!'
                     ```
+                start_code: '# kodunuzu buraya yazın'
             18:
                 story_text: |
                     Başka bir hikaye yazdıracağız, ancak şimdi `{print}` ile parantez kullanmak zorundayız.
@@ -278,6 +290,7 @@ adventures:
                     isim = {input}("Senin adın ne?")
                     {print}('Bu hikayeye hoş geldin!')
                     ```
+                start_code: '# kodunuzu buraya yazın'
     add_remove_command:
         name: '{add} {to} & {remove} {from}'
         default_save_name: ekle_çıkar_komutu
@@ -317,6 +330,13 @@ adventures:
                     _
                     {print} Size çeşitler {at} {random} milkshake hazırladık
                     ```
+                start_code: |-
+                    hayvanlar {is} köpek, kedi, kanguru
+                    sevilen {is} {ask} En sevdiğin hayvan hangisi?
+                    {add} sevilen {to_list} hayvanlar
+                    sevilmeyen {is} {ask} Hangi hayvanı sevmiyorsun?
+                    {remove} sevilmeyen {from} hayvanlar
+                    {print} Benim seçtiğim bir hayvanlar {at} {random}
     and_or_command:
         name: '{and} & {or}'
         default_save_name: ve veya
@@ -334,7 +354,10 @@ adventures:
                     {if} isim {is} 'Hedy' {and} yaş {is} 2
                         {print} "Sen gerçek Hedy'sin!"
                     ```
-
+                start_code: |-
+                    isim = {ask} 'Adınız nedir?'
+                    yaş = {ask} 'Yaşınız kaç?'
+                    {if} isim {is} 'Hedy' {and} yaş {is} 2
                         {print} "Sen gerçek Hedy'sin!"
     ask_command:
         name: '{ask}'
@@ -366,6 +389,10 @@ adventures:
                     _ Nasılsın?
                     _
                     ```
+                start_code: |
+                    {print} Merhaba!
+                    {ask} Senin adın ne?
+                    {echo} merhaba
             2:
                 story_text: |
                     ## sor komutu
@@ -393,6 +420,11 @@ adventures:
                     favori_hayvan {is} {ask} En sevdiğin hayvan hangisi?
                     {print} En sevdiğim hayvan favori_hayvan
                     ```
+                start_code: |-
+                    isim {is} {ask} Senin adın ne?
+                    {print} Merhaba isim
+                    yaş {is} {ask} Kaç yaşındasın?
+                    {print} name age yaşındadır.
             18:
                 story_text: Python kodunu elde etmek için yapmamız gereken son değişiklik `{ask}` ifadesini `{input}` olarak değiştirmektir.
                 example_code: |
@@ -504,6 +536,7 @@ adventures:
                     {elif} puanlar > dağıtıcı_puanları {and} puanlar < 21:
                         {print} 'Sen kazandın!'
                     ```
+                start_code: '# kodunuzu buraya yazın'
     calculator:
         name: Hesap Makinesi
         default_save_name: Hesap Makinesi
@@ -569,6 +602,7 @@ adventures:
                             puan = puan + 1
                     {print} 'Aferin, iyi işti! Toplam puanın... 10 üzerinden ' puan
                     ```
+                start_code: '{print} ''Hesap makinesine hoş geldiniz!'''
             10:
                 story_text: |
                     Bu hesap makinesi oyunu, çarpım tablosu alıştırması yapmanıza yardımcı olur!
@@ -586,6 +620,7 @@ adventures:
                             {else}
                                 {print} 'Bu yanlış. Doğru cevap ' doğrucevap
                     ```
+                start_code: '# kodunuzu buraya yazın'
             11:
                 story_text: |
                     Bir `{for}` ile çarpım tablosu alıştırma programını basitleştirebilirsiniz.
@@ -601,6 +636,10 @@ adventures:
                     {for} i {in} {range} 1 {to} 10
                         {print} i * sayı
                     ```
+                start_code: |
+                    sayı = 10
+                    {for} i {in} {range} 1 {to} 10
+                        {print} i * sayı
             12:
                 story_text: |
                     Bu seviyede, ondalık sayılar ile çalışan bir hesap makinesi yapabilirsiniz.
@@ -619,6 +658,7 @@ adventures:
                     cevap = _
                     {print} sayı1 ' artı ' sayı2 ' eşittir ' _
                     ```
+                start_code: '# kodunuzu buraya yazın'
             13:
                 story_text: |
                     ### Alıştırma 1
@@ -635,6 +675,7 @@ adventures:
                     {if} _ _ _ _ _ _ _
                         {print} _
                     ```
+                start_code: '# Kodunuzu buraya yazın'
             14:
                 story_text: |
                     In this adventure you will build a calculator that calculates your mean grade for you. If you get your calculator to work, you can move on to the next adventure, which allows you to add two extra features.
@@ -659,7 +700,11 @@ adventures:
                     mean_grade = {call} _
                     {print} 'Your mean grade is ' mean_grade
                     ```
-
+                start_code: |
+                    {define} calculate_mean_grade
+                        total = 0
+                        {for} i {in} {range} 1 {to} 4
+                            grade = {ask} _
                             total = total + _
                             return _ / 4
 
@@ -691,6 +736,7 @@ adventures:
                         _
                     {print} 'You win!'
                     ```
+                start_code: '# kodunuzu buraya yazın'
     calculator_2:
         name: Calculator 2
         default_save_name: Calculator 2
@@ -739,6 +785,17 @@ adventures:
                     {clear}
                     {print} 'SÜRPRİZ!'
                     ```
+                start_code: |
+                    {print} '3'
+                    {sleep}
+                    {clear}
+                    {print} '2'
+                    {sleep}
+                    {clear}
+                    {print} '1'
+                    {sleep}
+                    {clear}
+                    {print} 'SÜRPRİZ!'
     debugging:
         name: hata ayıklama
         default_save_name: hata ayıklama
@@ -761,6 +818,12 @@ adventures:
                     {print} What are your hobbies?
                     {echo} Your hobbies are
                     ```
+                start_code: |
+                    {print} I love programming
+                    Do you love programming too?
+                    {echo}
+                    {print} What are your hobbies?
+                    {echo} Your hobbies are
             2:
                 story_text: |-
                     Welcome to a debugging adventure. Debugging a code means getting rid of mistakes in the code.
@@ -780,6 +843,14 @@ adventures:
                     {sleep}
                     Here you go! Have a nice trip!
                     ```
+                start_code: |
+                    destination {ask} Where are you going on holidays?
+                    {print} The flight to dstination leaves at 3 pm.
+                    {ask} Did you check in your luggage yet?
+                    {echo}
+                    {print} Let me print your boarding pass for you.
+                    {sleep}
+                    Here you go! Have a nice trip!
             3:
                 story_text: |-
                     Welcome to a debugging adventure. Debugging a code means getting rid of mistakes in the code.
@@ -801,6 +872,16 @@ adventures:
                     tomorrows_movie {is} movie_choices {at} {random}
                     I'll go get the popcorn! {print}
                     ```
+                start_code: |
+                    movie_choices {is} dracula, fast and furious, home alone, barbie
+                    chosen_movie {is} movies {at} {random}
+                    {print} Tonight we will watch chosen _movies
+                    like {ask} Do you like that movie?
+                    {print} Tomorrow we will watch something else.
+                    {add} chosen_movie {to} movie_choices
+                    {print} Tomorrow we will watch tomorrows_movie
+                    tomorrows_movie {is} movie_choices {at} {random}
+                    I'll go get the popcorn! {print}
             4:
                 story_text: |-
                     ### Exercise
@@ -815,6 +896,13 @@ adventures:
                     {print} 'author is your favorite author'
                     {print} Hmmm... i think you should try... books {at} {random}
                     ```
+                start_code: |
+                    {print} 'Welcome to the online library!
+                    {ask} What genre of books do you like?
+                    {print} You like genre
+                    author {is} {ask} 'Who's your favorite author?'
+                    {print} 'author is your favorite author'
+                    {print} Hmmm... I think you should try... books {at} {random}
             5:
                 story_text: |-
                     ### Exercise
@@ -837,7 +925,17 @@ adventures:
                     {else} 'That will be $5,50'
                     {print} 'Have a nice swim!'
                     ```
-
+                start_code: |
+                    {print} Welcome to Swimming Pool Hedy!
+                    class {is} {ask} 'Are you here to join a class today?'
+                    {if} class yes
+                        {print} 'Great! You are joining a class!'
+                        {print} {else} 'You will not be joining a class'
+                    discount {is} {ask} 'Do you have a discount code?'
+                    {if} discount {is} yes
+                    discount_answer {is} {ask} 'What is your discount code?'
+                    discount_codes = Senior4231, Student8786, NewMember6709
+                    {if} discount_answer {is} {in} discount_codes
                         {print} 'That will be $3,50'
                             {else} 'That code is not valid'
                     {else} 'That will be $5,50'
@@ -864,7 +962,19 @@ adventures:
                     total = price + amount_of_product
                     {print} 'That will be $' price 'please'
                     ```
-
+                start_code: |
+                    {print} 'Vending machine'
+                    chosen_product = {ask} 'Please select a product'
+                    1_dollar_products = coke orange juice water
+                    2_dollar_products = chocolate, cookie, museli bar
+                    3dollar_prodcuts = potato chips, beef jerky, banana bread
+                    {if} chosen {is} {in} 1_dollar_products
+                    price = 1
+                    {if} chosen_product {is} 2_dollar_products
+                    price = 2
+                    {else} chosen_product {in} 3_dollar_products
+                    price = 3
+                    amount_of_products = '{ask} How many of ' chosen_product would you like to have?'
                     total = price + amount_of_product
                     {print} 'That will be $' price 'please'
             7:
@@ -880,6 +990,11 @@ adventures:
                     Morning bells are ringing!
                     Ding, dang, dong!
                     ```
+                start_code: |
+                    Are you sleeping?
+                    Brother John!
+                    Morning bells are ringing!
+                    Ding, dang, dong!
             8:
                 story_text: |-
                     ### Exercise
@@ -904,7 +1019,10 @@ adventures:
                     {sleep} 5
                     {print} 'All done! That will be $' price ' please!'
                     {print} 'Thank you! Byebye!'
-
+                start_code: |
+                    {print} 'Welcome to Manicures and Pedicures by Hedy'
+                    bodypart = {ask} 'Are you getting your fingernails or toenails done today? Or both?'
+                    {if} bodyparts {is} both
                             {print} That will be $25'
                             price = 25
                         {else}
@@ -941,7 +1059,19 @@ adventures:
                     price = amount * 6
                     {print} 'That will be 'price dollar' please'
                     ```
-
+                start_code: |
+                    {print} 'Welcome to our sandwich shop'
+                    amount 'How many sandwiches would you like to buy?'
+                    {repeat} amount {times}
+                    {ask} {is} {ask} 'What kind or bread would you like your sandwich to be?'
+                    types_of_bread {is} white, wheat, rye, garlic, gluten free
+                    {if} chosen_bread in types_of_bread
+                    {print} 'Lovely!'
+                    {else}
+                    'I'm sorry we don't sell that'
+                    topping {is} {ask} 'What kind of topping would you like?'
+                    sauce {is} {ask} 'What kind of sauce would you like?'
+                    {print} One chosen_bread with topping and sauce.
                     price = amount * 6
                     {print} 'That will be 'price dollar' please'
             10:
@@ -956,6 +1086,11 @@ adventures:
                     {for} name {is} names
                     {print} At the beach name loves to activity at random
                     ```
+                start_code: |
+                    names = Muad Hasan Samira Noura
+                    activities = fly a kite, go swimming, go hiking, catch tan in the sun
+                    {for} name {is} names
+                    {print} At the beach name loves to activity at random
             11:
                 story_text: |-
                     ### Exercise
@@ -995,6 +1130,26 @@ adventures:
                     for i in range 1 to days
                         print month i
                     ```
+                start_code: |
+                    print 'Hedy calender'
+                    months_with_31 days = January, March, May, July, September, October, December
+                    months_with_30_days = April, June, August, November
+                    month = ask 'Which month would you like to see?'
+                    if month in months_with_31_days
+                        days = 31
+                        if month in months_with30_days
+                            days = 30
+                    if month = February
+                        leap_years = 2020, 2024, 2028, 2036, 2040, 2044, 2028
+                        year = ask 'What year is it?'
+                    if year in leap_years
+                        days = 29
+                    else
+                        days = 28
+
+                    print 'Here are all the days of ' moth
+                    for i in range 1 to days
+                        print month i
             12:
                 story_text: |-
                     ### Exercise
@@ -1023,6 +1178,27 @@ adventures:
                     for i in range 0 to people
                         call greet_costumer
                     ```
+                start_code: |
+                    define greet
+                    greetings = 'Hello', 'Hi there', 'Goodevening'
+                        print greetings at random
+
+                    define take_order
+                        food = ask 'What would you like to eat?'
+                        print 'One food'
+                        drink = 'What would you like to drink?'
+                        print 'One ' drink
+                        more = ask 'Would you like anything else?'
+                            if more is 'no'
+                        print 'Alright'
+                            else
+                            print 'And ' more
+                    print 'Thank you'
+
+                    print 'Welcome to our restaurant'
+                    people = ask 'How many people are in your party tonight?'
+                    for i in range 0 to people
+                        call greet_costumer
             13:
                 story_text: |-
                     ### Exercise
@@ -1055,6 +1231,31 @@ adventures:
                     else
                     print 'No problem!'
                     ```
+                start_code: |
+                    defin movie_recommendation with name
+                        action_movies == 'Die Hard', 'Fast and Furious', 'Inglorious Bastards'
+                        romance_movies = 'Love Actually', 'The Notebook', 'Titanic'
+                        comedy_movies = 'Mr Bean' 'Barbie''Deadpool'
+                        kids_movies = 'Minions', 'Paddington', 'Encanto'
+                        if name is 'Camila' or name is 'Manuel'
+                            recommended_movie = kids_movie at random
+                        if name is 'Pedro' or 'Gabriella'
+                                mood = ask 'What you in the mood for?'
+                            if mood is 'action'
+                                recommended_movie = comedy_movies at random
+                            if mood is 'romance'
+                                recommended_movie = romance_movies
+                        if mood is 'comedy'
+                                recommended_movie = comedy_movies at random
+
+                    print 'I would recommend ' recommended_movie ' for ' name
+
+                    name = ask 'Who is watching?'
+                    recommendation = ask 'Would you like a recommendation?'
+                    if recommendaion is 'yes'
+                    print movie_recommendation with name
+                    else
+                    print 'No problem!'
             14:
                 story_text: |-
                     ### Exercise
@@ -1084,7 +1285,9 @@ adventures:
                     else
                         'no problem'
                     ```
-
+                start_code: |
+                    define calculate_heartbeat
+                        print 'Press your fingertips gently against the side of your neck'
                         print '(just under your jawline)'
                         print 'Count the number of beats you feel for 15 seconds'
                         beats == ask 'How many beats do you feel in 15 seconds?'
@@ -1141,6 +1344,36 @@ adventures:
                     print chosen_name 'laughed and went on with their day'
                     print The End
                     ```
+                start_code: |
+                    names = 'Tanya', 'Romy', 'Kayla', 'Aldrin', 'Ali'
+                    verbs='walking', 'skipping', 'cycling', 'driving', 'running'
+                    locations = 'on a mountaintop', 'in the supermarket', 'to the swimming pool'
+                    hiding_spots = 'behind a tree', under a table', in a box'
+                    sounds = 'a trumpet', 'a car crash', 'thunder'
+                    causes_of_noise = 'a television', 'a kid with firecrackers', 'a magic elephant', 'a dream'
+
+                    chosen_ name = names at random
+                    chosen_verb = verbs at random
+                    chosen_location = 'locations at random'
+                    chosen_sounds = noises at random
+                    chosen_spot = hiding_spots random
+                    chosen_causes = causes_of_noise at random
+
+                    print chosen_name ' was ' chosen_verb ' ' chosen_location
+                    print 'when they suddenly heard a sound like ' sounds at random
+                    print chosen_name ' looked around, but they couldn't discover where the noise came from'
+                    print chosen_name ' hid ' chosen_spot'
+                    print 'They tried to look around, but couldn't see anything from there'
+                    hidden = 'yes'
+                    while hidden = 'yes'
+                        print chosen_name 'still didn't see anything'
+                    answer = ask 'does ' chosen_name ' move from their hiding spot?'
+                        if answer = 'yes'
+                            hidden == 'no'
+                    print 'chosen_name moved from' chosen_spot
+                    print 'And then they saw it was just' chosen_cause
+                    print chosen_name 'laughed and went on with their day'
+                    print The End
             16:
                 story_text: |-
                     ### Exercise
@@ -1290,6 +1523,7 @@ adventures:
                     Programlama alanının altındaki yeşil 'Kodu çalıştır' düğmesini kullanarak kodu kendiniz deneyin.
 
                     Hazır mısınız? O zaman ilk komutunuzu öğrenmek için bir sonraki sekmeye gidin!
+                start_code: '{print} Merhaba Dünya!'
             2:
                 story_text: |
                     Tebrikler! Seviye 2'ye ulaştınız. Umarım şimdiden bazı harika kodlar yapmışsınızdır!
@@ -1311,12 +1545,14 @@ adventures:
 
                     Seviye 2'de bu durum değişiyor. Seviye 2'de, birden fazla bilgi parçasını kaydetmenize ve bunları istediğiniz yere yazdırmanıza olanak tanıyan değişkenlerle çalışmayı öğreneceksiniz.
                     O halde hadi bir sonraki sekmeye geçelim!
+                start_code: '{print} Merhaba Dünya!'
             3:
                 story_text: |
                     Bir önceki seviyede değişkenin ne olduğunu ve maceralarınızı daha etkileşimli hale getirmek için nasıl kullanabileceğinizi öğrendiniz.
                     Ancak... değişkenlerle yapabileceğiniz tek şey bu değil! Değişkenleri liste yapmak için de kullanabilirsiniz.
                     Ve hatta Hedy'nin bir listeden rastgele bir kelime seçmesini sağlayabilirsiniz, bu da gerçek oyunlar yapmanıza olanak tanır!
                     Bir sonraki sekmeye hızlıca göz atın!
+                start_code: '{print} Merhaba Dünya!'
             4:
                 story_text: |
                     Önceki seviyelerde değişkenlerle pratik yaptınız, ancak bu problemle karşılaşmış olabilirsiniz.
@@ -1336,6 +1572,9 @@ adventures:
                     adım {is} Sophie
                     {print} Benim adım adım
                     ```
+                start_code: |
+                    adım {is} Sophie
+                    {print} Benim adım adım
             5:
                 story_text: |
                     Önceki seviyelerde, kodu her çalıştırdığınızda oyunlarınızı farklı kılan `{at} {random}` kullanmayı zaten öğrenmiştiniz.
@@ -1347,6 +1586,9 @@ adventures:
                     ```
                     şifre {is} {ask} 'Doğru şifre nedir?'
                     ```
+                start_code: |-
+                    isim {is} {ask} 'Senin adın ne?'
+                    {if} isim {is} Hedy {print} 'havalıymış!' {else} {print} 'eh işte'
             6:
                 story_text: |
                     Önceki seviyede `{ask}` ve `{if}` ile pratik yaptınız. Örneğin artık konuklara ne yemek istediklerini sorabilirsiniz.
@@ -1370,6 +1612,7 @@ adventures:
                     toplam_ücret {is} yemek_ücreti + içecek_ücreti
                     {print} 'Toplamda 'toplam_ücret ' lira ödeyin, lütfen'
                     ```
+                start_code: '# kodunuzu buraya yazın'
             7:
                 story_text: |
                     Harika bir iş çıkardınız! Bir sonraki seviyeye ulaştınız, bu da `{if}` ve `{else}` ile pratik yaptığınız anlamına geliyor. Muhtemelen kodlarınızın gittikçe uzadığını fark etmişsinizdir.
@@ -1383,6 +1626,11 @@ adventures:
                     {print} 'Mutlu yıllar sevgili Hedy'
                     {print} 'mutlu yıllar sana'
                     ```
+                start_code: |
+                    {print} 'mutlu yıllar sana'
+                    {print} 'mutlu yıllar sana'
+                    {print} 'mutlu yıllar sevgili Hedy'
+                    {print} 'mutlu yıllar sana'
             8:
                 story_text: |
                     Artık tek bir kod satırını nasıl tekrarlayacağınızı öğrendiniz. Bu kullanışlı olabilir, ancak her zaman yeterli değildir. Bazen aynı anda birden fazla satırı tekrarlamak istersiniz.
@@ -1391,6 +1639,7 @@ adventures:
                     ```
                     {repeat} 5 {times} {print} 'Bir sonraki sekmede birden fazla kod satırını aynı anda tekrarlayabilirsiniz!'
                     ```
+                start_code: '{print} ''Hadi bir sonraki sekmeye geçelim!'''
             9:
                 story_text: |
                     Harika bir iş! Yeni bir seviyeye daha ulaştınız! Bir önceki seviyede {if} veya {repeat} komutunda birden fazla kod satırı kullanmayı öğrendiniz. Ancak henüz ikisini birleştiremiyorsunuz...
@@ -1405,6 +1654,7 @@ adventures:
                         {print} 'Yaşasın!'
                     {else}
                         {print} 'Belki de bir önceki seviyede biraz daha pratik yapmalısınız'
+                start_code: '{print} Bir sonraki sekmeye geçelim!'
             10:
                 story_text: |
                     Harika gidiyorsunuz! Önceki seviyelerde hep küçük bir sorunla karşılaştık. Satırları tekrarlamayı öğrendiniz, ama ya satırı biraz değiştirmek isterseniz?
@@ -1420,10 +1670,12 @@ adventures:
                     {print} 'eğer mutluysanız ve bunu biliyorsanız ve gerçekten göstermek istiyorsanız'
                     {print} 'eğer mutluysanız ve bunu biliyorsanız ellerinizi çırpın'
                     ```
+                start_code: '{print} ''Hadi bir sonraki sekmeye geçelim!'''
             11:
                 story_text: |
                     Seviye 11'e ulaştınız, harika gidiyorsunuz! Daha yüksek seviyelerde, Hedy size Python programlama dilini öğretmeye daha fazla odaklanıyor.
                     Python'da `{repeat}` komutu yoktur, ancak {repeat} gibi çalışan bir komut vardır. Python dilinde `{repeat}` komutunun nasıl söylendiğini merak ediyor musunuz? Öğrenmek için hemen devam edin!
+                start_code: '{print} ''Hadi bir sonraki sekmeye geçelim!'''
             12:
                 story_text: |
                     Belki restoran maceranızda ondalık sayıları kullanmayı denemişsinizdir. Eğer denediyseniz, muhtemelen Hedy'nin bunları henüz anlamadığını ve her zaman yuvarladığını fark etmişsinizdir.
@@ -1436,6 +1688,7 @@ adventures:
                     print 'Bir hamburger ve içecek sipariş ettiniz'
                     print 'Toplam ' toplam ' lira ödeyin lütfen'
                     ```
+                start_code: '{print} ''Hadi bir sonraki sekmeye geçelim!'''
             13:
                 story_text: |
                     Önceki seviyelerde iki `{if}` komutunu birbirinin içine nasıl yerleştireceğinizi öğrendiniz. Bu sorunsuz çalışır, ancak size bunun gibi çok uzun ve kullanışsız kodlar verir:
@@ -1455,6 +1708,7 @@ adventures:
                     {else}
                         {print} 'Erişim reddedildi!'
                     ```
+                start_code: '{print} ''Hadi bir sonraki sekmeye geçelim!'''
             14:
                 story_text: |
                     Aşağıdaki program ile okulda bir dersi geçip geçmediğinizi hesaplayabilirsiniz (yani, altı yada daha yüksek bir not).
@@ -1471,6 +1725,12 @@ adventures:
                     {else}
                         {print} 'Harika! Bu dersi geçtiniz!'
                     ```
+                start_code: |
+                    cevap = {ask} 'Daha fazlasını öğrenmek ister misiniz?'
+                    {if} cevap == 'evet.'
+                        {print} 'Bir sonraki maceraya gidin!'
+                    {if} cevap != 'evet.'
+                        {print} 'Burada biraz daha pratik yapın'
             15:
                 story_text: |
                     Aşağıdaki bu oyunda, oyuncunun istediği kadar oynayabilmesini sağlamak için bir kod yapılmıştır...
@@ -1488,6 +1748,7 @@ adventures:
                             {if} cevap {is} 'evet'
                                 {print} 'Tamamdır, devam ediyoruz.'
                     ```
+                start_code: '{print} ''Hadi bir sonraki sekmeye geçelim!'''
             16:
                 story_text: |
                     Bu seviyede gerçek Python koduna doğru biraz daha yakınlaşacağız. Ayrıca iki listeyi nasıl eşleştireceğinizi de öğreneceksiniz.
@@ -1509,12 +1770,14 @@ adventures:
                             {print} 'Bir ' hayvan ' ses çıkarıyor ' ses
                     ```
                     Not: Bu kodlar, bu bölümde bu haldeyken çalışmaz. Neresini düzelteceğinizi görmek için sonraki sekmeye gidin.
+                start_code: '{print} ''Hadi bir sonraki sekmeye geçelim!'''
             17:
                 story_text: |
                     Şimdi girintilemeyi biraz değiştireceğiz. Her girintiye ihtiyaç duyduğumuzda, girintiden önceki satırda `:` işaretine ihtiyacımız var.
 
                     Bu seviyede yeni bir komut da kullanabilirsiniz: `{elif}`. `{elif}` {else} {if}'in kısaltmasıdır ve 3 (veya daha fazla!) seçenek arasından seçim yapmak istediğinizde buna ihtiyacınız vardır.
                     Şuna bir bakın!
+                start_code: '{print} ''Hadi bir sonraki sekmeye geçelim!'''
             18:
                 story_text: |
                     Tebrikler! Hedy'nin son seviyesine ulaştınız! Burada oluşturduğunuz kodu replit veya PyCharm gibi gerçek Python ortamlarına kopyalayabilir ve orada öğrenmeye devam edebilirsiniz!
@@ -1546,6 +1809,9 @@ adventures:
                     ```
                     seçimler {is} _
                     ```
+                start_code: |
+                    seçimler {is} 1, 2, 3, 4, 5, solucan
+                    {print} Attığın zar _ {at} {random} !
             4:
                 story_text: |
                     Bu seviyede, ayrıca zar da oluşturabilirsiniz. Ancak bu sefer örnek bir kod olmadan kendiniz deneyebilirsiniz!
@@ -1553,6 +1819,7 @@ adventures:
                     ### Alıştırma
                     Bu seviyede kendi zarınızı yapın.
                     İpucu: Nasıl zar atılacağı hakkında hiçbir fikriniz yoksa. Bir önceki seviyedeki zarlarınıza bir göz atın, ancak tırnak işareti eklemeyi unutmayın.
+                start_code: '{print} ''Bu sefer zar kaçı gösterecek?'''
             5:
                 story_text: |
                     Zarımıza `{if}` ve `{else}` komutlarını ekleyeceğiz!
@@ -1568,6 +1835,7 @@ adventures:
                     _ atılan {is} solucan {print} 'Atmayı bırakabilirsin.'
                     _ {print} 'Tekrar atmalısın!'
                     ```
+                start_code: '{print} ''Bu sefer zar kaçı gösterecek?'''
             6:
                 story_text: |
                     Burada da yine bir Solucan zarı yapabilirsiniz, ancak şimdi kaç puan atıldığını da hesaplayabilirsiniz.
@@ -1587,6 +1855,7 @@ adventures:
                     ```
                 example_code_2: |
                     Sekiz zar için puan hesaplamayı başardınız mı? Bu çok fazla kesme ve yapıştırma gerektiriyordu, değil mi? Seviye 7'de bunu daha kolay hale getireceğiz!
+                start_code: '{print} ''Bu sefer zar kaçı gösterecek?'''
             7:
                 story_text: |
                     Bu seviyede de yine zar atabilirsiniz. `{repeat}` kodu ile kolayca bir el dolusu zar atabilirsiniz.
@@ -1598,6 +1867,7 @@ adventures:
                     seçimler = 1, 2, 3, 4, 5, 6
                     _ _ _ _ _ _ _
                     ```
+                start_code: '{print} ''Bu sefer zar kaçı gösterecek?'''
             10:
                 story_text: |
                     ### Alıştırma
@@ -1611,6 +1881,7 @@ adventures:
                         {print} oyuncu ' atıyor ve gelen ' seçimler {at} {random}
                         {sleep}
                     ```
+                start_code: '# kodunuzu buraya yazın'
             15:
                 story_text: |
                     ### Exercise
@@ -1635,6 +1906,7 @@ adventures:
                     _
                     {print} 'Yes! You have thrown 6 in ' tries ' tries.'
                     ```
+                start_code: '# kodunuzu buraya yazın'
     dishes:
         name: Bulaşıklar mı?
         default_save_name: Bulaşıklar
@@ -1655,6 +1927,7 @@ adventures:
                     Ardından yapılması gereken bir görev düşünün ve bilgisayarın `{at} {random}` komutuyla görevi kimin yapması gerektiğine karar vermesini sağlayın.
 
                     **Ek Görev** Bulaşıkları kendiniz yıkamak istemiyor musunuz? Adınızı `{remove}` `{from}` komutuyla listeden kaldırarak programda hile yapın.
+                start_code: '{print} Bulaşıkları kim yıkıyor?'
             4:
                 story_text: |
                     Tırnak işaretleri ile bulaşık yıkama programınızı daha da iyi hale getirebilirsiniz.
@@ -1669,6 +1942,7 @@ adventures:
                     {sleep}
                     {print} kişiler {at} _
                     ```
+                start_code: '{print} ''Bulaşıkları kim yıkıyor?'''
             5:
                 story_text: |
                     `{if}` ile artık programda seçim yaparak daha fazla eğlenebilirsiniz. Programınızın bilgisayarın yaptığı seçime yanıt vermesini sağlayabilirsiniz.
@@ -1682,6 +1956,7 @@ adventures:
                     _ bulaşıkçı {is} Ayşe {print} _ Bulaşıkları yıkamak zorunda olmam çok kötü. _
                     _ {print} 'Neyse ki bulaşık yok çünkü ' _ ' zaten yıkıyor'
                     ```
+                start_code: '{print} ''Bulaşıkları kim yıkıyor?'''
             6:
                 story_text: |
                     Herkes bulaşıkları ne sıklıkla yıkayacak? Bu adil mi? Bunu bu seviyede sayabilirsiniz.
@@ -1713,6 +1988,7 @@ adventures:
                     {print} 'Salı günü bulaşıkçımız: ' bulaşıkçı
                     {remove} bulaşıkçı {from} kişiler
                     ```
+                start_code: '{print} ''Bulaşıkları kim yıkıyor?'''
             7:
                 story_text: |
                     `{repeat}` ile kod parçalarını tekrarlayabilirsiniz. Bunu, birden fazla gün boyunca bulaşıkları kimin yıkayacağını hesaplamak için kullanabilirsiniz!
@@ -1724,6 +2000,7 @@ adventures:
                     kişiler = anne, baba, Ali, Ayşe
                     {repeat} _ _ {print} 'Bugün bulaşıkçımız ' _ _ _
                     ```
+                start_code: '{print} ''Bulaşıkları kim yıkıyor?'''
             10:
                 story_text: |
                     Bu seviyede, kolay bir şekilde tüm hafta için bir program yapabilirsiniz!
@@ -1738,6 +2015,11 @@ adventures:
                     {for} gün {in} günler
                         {print} isimler {at} {random} ' bulaşıkları ' gün ' günü yıkayacak'
                     ```
+                start_code: |
+                    günler = Pazartesi, Salı, Çarşamba, Perşembe, Cuma, Cumartesi, Pazar
+                    isimler = anne, baba., Emma, Sophie
+                    {for} gün {in} günler
+                        {print} isimler {at} {random} ' bulaşıkları ' gün ' günü yıkayacak'
     elif_command:
         name: '{elif}'
         default_save_name: değileğer
@@ -1785,6 +2067,10 @@ adventures:
                     {for} hayvan {in} hayvanlar
                         {print} 'Benim sevdiğim ' hayvan
                     ```
+                start_code: |-
+                    hayvanlar {is} köpek, kedi, balık
+                    {for} hayvan {in} hayvanlar
+                        {print} 'Benim sevdiğim ' hayvan
             11:
                 story_text: |-
                     Bu seviyede, `{for}` in yeni bir şeklini ekliyoruz. Daha önceki seviyelerde `{for}` i bir liste ile kullanmıştık, ancak `{for}` ni sayılarla da kullanabiliriz.
@@ -1797,6 +2083,10 @@ adventures:
                         {print} sayaç
                     {print} 'önüm arkam sağım solum sobe!'
                     ```
+                start_code: |-
+                    {for} sayaç {in} {range} 1 {to} 10
+                        {print} sayaç
+                    {print} 'önüm arkam sağım solum sobe!'
             17:
                 story_text: |
                     Şimdi girintilemeyi biraz değiştireceğiz. Girintiye her ihtiyaç duyduğumuzda, girintiden önceki satırda `:` işaretine ihtiyacımız var.
@@ -1835,6 +2125,7 @@ adventures:
                     ### Alıştırma
                     Örnek kodu girdi ekranınıza kopyalayın ve kodun çalışması için boşlukları doldurun.
                     **Ek Görev** Kodu değiştirin ve falcının yalnızca adınızı değil, yaşınızı, tuttuğunuz spor takımını veya kendinizle ilgili başka bir şeyi de tahmin etmesini sağlayın.
+                start_code: '# kodunuzu buraya yazın'
             3:
                 story_text: |
                     Önceki seviyelerde ilk fal makinenizi yapmıştınız, ancak Hedy gerçekten hiçbir şey tahmin edemedi, sadece `{echo}` kullandı.
@@ -1852,6 +2143,7 @@ adventures:
                 story_text_2: |
                     ### Alıştırma
                     Şimdilik, Hedy sadece evet, hayır veya belki cevaplarını verebiliyor. Hedy'ye 'kesinlikle' veya 'tekrar sor' gibi daha fazla cevap seçeneği verebilir misiniz?
+                start_code: '# kodunuzu buraya yazın'
             4:
                 story_text: |
                     Bu seviyede yeni bir işlev yok, ancak tırnak işaretlerini kullanarak pratik yapmanızı sağlar.
@@ -1876,6 +2168,7 @@ adventures:
                     {sleep} 2
                     {print} cevaplar {at} {random}
                     ```
+                start_code: '# kodunuzu buraya yazın'
             5:
                 story_text: |
                     ### Alıştırma
@@ -1899,6 +2192,7 @@ adventures:
                     {if} kişi {in} arkadaşlar {print} iyi_cevap {at} {random}
                     {else} {print} kötü_cevap {at} {random}
                     ```
+                start_code: '# kodunuzu buraya yazın'
             6:
                 story_text: |
                     Bu seviyede artık bir falcı olarak tahminlerinizde matematiği kullanabilirsiniz. Bu, geleceği hesaplamak için (aptalca) formüller oluşturmanıza olanak tanır.
@@ -1921,6 +2215,7 @@ adventures:
                     {sleep}
                     {print} çocuklar ' çocuğun olacak!'
                     ```
+                start_code: '# kodunuzu buraya yazın'
             7:
                 story_text: |
                     ### Alıştırma
@@ -1933,6 +2228,7 @@ adventures:
                     seçenekler = seni seviyor, seni sevmiyor
                     _ _ _ _ seçenekler {at} {random}
                     ```
+                start_code: '# kodunuzu buraya yazın'
             8:
                 story_text: |
                     Bir sonraki örnekte, falcınızın birden fazla soru sormasını ve bunları yazdırmasını sağlayabilirsiniz!
@@ -1950,6 +2246,7 @@ adventures:
                        {sleep}
                        {print} 'Kristal kürem diyor ki... ' cevaplar {at} {random}
                     ```
+                start_code: '# kodunuzu buraya yazın'
             10:
                 story_text: |
                     Bu seviyede MASH (konak, apartman, kulübe, ev) oyununu nasıl programlayacağınızı öğreneceksiniz. Bu oyunda tüm oyuncular için aynı anda geleceklerinin neye benzeyeceğini tahmin edebilirsiniz.
@@ -1968,6 +2265,7 @@ adventures:
                         {print} isim ' evcil hayvan olarak ' pets {at} {random} ' besleyecek.'
                         {sleep}
                     ```
+                start_code: '# kodunuzu buraya yazın'
             12:
                 story_text: |-
                     12. seviyeden itibaren artık, listelerde her öğeden önce ve sonra tırnak işareti kullanmanız gerekecektir.
@@ -1982,6 +2280,7 @@ adventures:
                     {sleep}
                     {print} fallar {at} {random}
                     ```
+                start_code: '# kodunuzu buraya yazın'
     functions:
         name: functions
         default_save_name: functions
@@ -2021,6 +2320,21 @@ adventures:
                         {call} turn
                         {sleep} 2
                     ```
+                start_code: |
+                    sides = 'left', 'right'
+                    limbs = 'hand', 'foot'
+                    colors = 'red', 'blue', 'green', 'yellow'
+
+                    {define} turn
+                        chosen_side = sides {at} {random}
+                        chosen_limb = limbs _
+                        chosen_color = colors _
+                        {print} chosen_side ' ' chosen_limb ' on ' chosen_color
+
+                    {print} 'Lets play a game of Twister!'
+                    {for} i {in} {range} 1 to _
+                        {call} turn
+                        {sleep} 2
             13:
                 story_text: |
                     Now that you've learned how to use functions, you'll learn how to use a function with an argument.
@@ -2049,6 +2363,13 @@ adventures:
                     {call} song {with} 'sea'
                     {call} song {with} 'ocean'
                     ```
+                start_code: |
+                    {define} song {with} place
+                        {print} 'My Bonnie is over the ' place
+
+                    {call} song {with} 'ocean'
+                    {call} song {with} 'sea'
+                    {call} song {with} 'ocean'
             14:
                 story_text: |
                     In the previous levels you have learned to create functions and use arguments with them. Another great use of a function is to let it calculate something for you.
@@ -2072,6 +2393,17 @@ adventures:
                     new_price = _ calculate_new_price {with} old_price, _
                     {print} 'The new price is ' new_price ' dollar'
                     ```
+                start_code: |
+                    {define} calculate_new_price {with} amount, percentage
+                        percentage = percentage / 100
+                        discount_amount = amount * percentage
+                        return amount - discount_amount
+
+                    old_price = {ask} 'How much is on the price tag?'
+                    discount = {ask} 'What percentage is the discount?'
+
+                    new_price = _ calculate_new_price {with} old_price, _
+                    {print} 'The new price is ' new_price ' dollar'
     guess_my_number:
         name: Guess my number
         default_save_name: guess my number
@@ -2100,6 +2432,7 @@ adventures:
                                 {print} 'You win!'
                                 game = 'over'
                     ```
+                start_code: '# place your code here'
     harry_potter:
         name: Harry Potter
         default_save_name: Harry Potter
@@ -2121,6 +2454,7 @@ adventures:
                     _ {print} isim ' şu konuda çok iyi: ' konular {at} {random}
                     _ {print} isim ' en çok şundan korkuyor: ' korkular {at} {random}
                     ```
+                start_code: '# kodunuzu buraya yazın'
     haunted:
         name: Perili Ev
         default_save_name: Perili Ev
@@ -2152,6 +2486,7 @@ adventures:
                     Sarı düğmeye tıklayarak örnek kodu girdi ekranınıza kopyalayın.
                     Şimdi en az 5 satır kod ekleyerek hikayeyi bitirin.
                     Her kod satırına `{print}` komutuyla başlamayı unutmayın.
+                start_code: '{print} Buraya nasıl geldim?'
             2:
                 story_text: |
                     Bu perili evde canavarlarınızı emojilerle seçebilirsiniz. Tabii ki yine kelimeleri de kullanabilirsiniz.
@@ -2206,6 +2541,7 @@ adventures:
                     {sleep}
                     _ _ _ _
                     ```
+                start_code: '# kodunuzu buraya yazın'
             4:
                 story_text: |
                     Bu seviyede oyunlarınızda tırnak işaretlerini nasıl kullanacağınızı öğreneceksiniz.
@@ -2227,6 +2563,7 @@ adventures:
                     {sleep}
                     {print} canavarlar {at} {random}
                      ```
+                start_code: '# kodunuzu buraya yazın'
             5:
                 story_text: |
                     Bu seviyeye kadar perili ev oyunu her zaman oyuncudan bir kapı seçmesini istedi, ancak fark etmiş olabileceğiniz gibi, gerçekten doğru cevap vermek zorunda değillerdi.
@@ -2248,6 +2585,7 @@ adventures:
                     _ _ _ _ {print} 'Harika! Kaçmayı başardınız!'
                     {else} {print} 'Olamaz! Bir ' canavarlar {at} {random} ' sizi yedi!'
                     ```
+                start_code: '# kodunuzu buraya yazın'
             9:
                 story_text: |
                     Bu seviyede, perili evi daha da etkileşimli hale getirmenize olanak tanıyan iç içe geçirme özelliğini kullanabilirsiniz!
@@ -2278,6 +2616,7 @@ adventures:
                     {if} oyuncu {is} canlı
                         {print} 'Harika! Hayatta kaldınız!'
                     ```
+                start_code: '{print} ''Perili evden kaçış!'''
             11:
                 story_text: |
                     Bu seviyede, `{for}` komutunu değiştirdik, böylece oyuncuya nerede olduklarını söyleyebiliyoruz.
@@ -2301,6 +2640,7 @@ adventures:
                         {print} 'Oda ' i
                         canavar = canavarlar {at} {random}
                     ```
+                start_code: '{print} ''Perili evden kaçış!'''
             14:
                 story_text: |
                     ### Exercise
@@ -2329,6 +2669,7 @@ adventures:
                         {else}
                             {print} 'GAME OVER'
                     ```
+                start_code: '# place your code here'
             16:
                 story_text: |
                     ### Exercise
@@ -2362,6 +2703,7 @@ adventures:
                         {print} _
                         {print} 'GAME OVER'
                     ```
+                start_code: '# place your code here'
     hotel:
         name: hotel
         default_save_name: hotel
@@ -2392,7 +2734,18 @@ adventures:
 
                     {call} welcome_message {with} title, name, homecountry, 105
                     ```
+                start_code: |
+                    {define} welcome_message {with} title, last_name, country, room_number
+                        {print} 'Welcome to Hotel Hedy, ' title ' ' last_name
+                        nice_trip {is} {ask} 'Did you have a nice trip from, ' country '?'
+                        {if} nice_trip {is} 'yes'
+                            {print} 'Lovely!'
+                        {else}
+                            {print} 'Sorry to hear that.'
+                            {print} 'Hopefully you can take a nice rest in you room.'
+                        {print} 'Your room number is ' room_number
 
+                    {print} 'Hello. Please fill in your information to check in.'
                     title = {ask} 'What is your title (mr, mrs, ms, dr, etc.)?'
                     name = {ask} 'What is you last name?'
                     homecountry = {ask} 'What country do you come from?'
@@ -2431,6 +2784,10 @@ adventures:
                     _ _ _ 4 _ 'Harikasın!'
                     _ _ 'Hayır, 2 + 2 = 4'
                     ```
+                start_code: |-
+                    isim {is} {ask} 'senin adın ne?'
+                    {if} isim {is} Hedy {print} 'güzel'
+                    {else} {print} 'böö!'
             8:
                 story_text: |
                     ## eğer... değilse...
@@ -2447,10 +2804,25 @@ adventures:
                         {print} 'Hoşgeldin Hedy'
                         {print} 'Bilgisayarında oynayabilirsin!'
                     ```
+                start_code: |
+                    isim = {ask} 'Senin adın ne?'
+                    {if} isim {is} Hedy
+                        {print} 'Hoşgeldin Hedy'
+                        {print} 'Bilgisayarında oynayabilirsin!'
             9:
                 story_text: |
                     Bu seviyede bir {if} komutunu başka bir {if} komutunun içine de koyabilirsiniz.
                 example_code: |
+                    devam = {ask} 'Devam etmek istiyor musun?'
+                    {if} devam = evet
+                        emin = {ask} 'Emin misin?'
+                        {if} emin {is} evet
+                            {print} 'Devam edeceğiz'
+                        {else}
+                            {print} 'Emin değilsin'
+                    {else}
+                        {print} 'Devam etmek istemiyorsun'
+                start_code: |
                     devam = {ask} 'Devam etmek istiyor musun?'
                     {if} devam = evet
                         emin = {ask} 'Emin misin?'
@@ -2488,6 +2860,11 @@ adventures:
                     _ cevap _ hayvanlar _ 'Benimki de öyle!'
                     _ _ 'En sevdiğim hayvanlar köpekler, inekler ve koyunlar'
                     ```
+                start_code: |-
+                    güzel_renkler {is} yeşil, sarı
+                    favori_renk {is} {ask} 'En sevdiğin renk nedir?'
+                    {if} favori_renk {in} güzel_renkler {print} 'güzel!'
+                    {else} {print} 'eh işte'
     is_command:
         name: '{is}'
         default_save_name: eşit_komutu
@@ -2513,6 +2890,10 @@ adventures:
                     favori_hayvan {is} _
                     {print} En sevdiğim havyan favori_hayvan
                     ```
+                start_code: |-
+                    isim {is} Hedy
+                    yaş {is} 15
+                    {print} name age yaşındadır
             6:
                 story_text: |
                     Bir kelimeyi bir değişkende saklama konusunda da bir değişiklik yapıyoruz! Artık bir değişkende bir isim veya sayı sakladığımızda `{is}` yerine `=` kullanabilirsiniz, bunun gibi:
@@ -2521,7 +2902,8 @@ adventures:
                     isim = Hedy
                     cevap = 20 + 4
                     ```
-
+                start_code: |
+                    isim = Hedy
                     cevap = 20 + 4
             14:
                 story_text: |
@@ -2553,7 +2935,8 @@ adventures:
                     {if} isim != 'Hedy'
                         {print} 'Sen Hedy değilsin.'
                     ```
-
+                start_code: |-
+                    yaş = {ask} 'Kaç yaşındasın?'
                     {if} yaş < 13
                         {print} 'Sen benden daha gençsin!'
                     {else}
@@ -2580,6 +2963,7 @@ adventures:
                     {if} kurbağa {is} grenouille {print} 'Süper!'
                     {else} {print} 'Hayır, kurbağanın karşılığı grenouille'
                     ```
+                start_code: '# kodunuzu buraya yazın'
             16:
                 story_text: |
                     ### Exercise
@@ -2600,6 +2984,7 @@ adventures:
                             {print} 'Yanlış, ' fransızca_kelimeler[i] ' kelimesi ' çevirisi[i] ' anlamına geliyor'
                     {print} 'Toplam ' puan ' doğru cevap verdin.'
                     ```
+                start_code: '# kodunuzu buraya yazın'
     maths:
         name: matematik
         default_save_name: matematik
@@ -2644,7 +3029,8 @@ adventures:
                     b = 'world!'
                     {print} a + b
                     ```
-
+                start_code: |-
+                    {print} 'ondalık sayıların artık bir nokta kullanması gerekiyor'
                     {print} 2.5 + 2.5
     parrot:
         name: Papağan
@@ -2672,6 +3058,11 @@ adventures:
                     {ask} _
                     {echo}
                     {echo}
+                start_code: |
+                    {print} Ben papağan Hedy.
+                    {ask} Adın ne senin?
+                    {echo}
+                    {echo}
             2:
                 story_text: |
                     Bir önceki seviyede, sizden sonra tekrar eden bir papağan yapmıştınız. Bu seviyede papağanı bir değişken ve `{ask}` komutu kullanarak etkileşimli hale getireceğiz.
@@ -2692,6 +3083,7 @@ adventures:
                     Ardından papağanın bir süre sessiz kalmasını sağlamak için 4. ve 6. satırlara `{sleep}` komutunu girin.
 
                     **Ek Görev** Daha fazla kod satırı ekleyerek papağanın sadece adınızdan daha fazlasını sormasını sağlayabilir misiniz?
+                start_code: '{print} Ben papağan Hedy!'
             3:
                 story_text: |
                     Papağanınıza `{add}` ile yeni bir kelime öğretin.
@@ -2706,6 +3098,7 @@ adventures:
                     {print} 🧒 hadi yeni_kelime de, Hedy!
                     {print} 🦜 kelimeler {at} {random}
                     ```
+                start_code: '# kodunuzu buraya yazın'
             4:
                 story_text: |
                     Bu seviyede `{ask}` ve `{print}` komutları ile tırnak işaretlerini kullanmamız gerekiyor.
@@ -2720,6 +3113,7 @@ adventures:
                     {print} _ 🧒 Hadi _ new_word _ de, Hedy!_
                     {print} _ 🦜 _ kelimeler {at} {random}
                     ```
+                start_code: '# Kodunuzu buraya yazın'
             5:
                 story_text: |
                     Doğru kelimeyi söylerse papağanınızı ödüllendirin!
@@ -2738,6 +3132,7 @@ adventures:
                     _ dediği_kelime {is} yeni_kelime _ '🧒 Aferin, Hedy! 🍪'
                     _ _ '🧒 Hayır, Hedy! ' yeni_kelime ' de!'
                     ```
+                start_code: '# kodunuzu buraya yazın'
     piggybank:
         name: Kumbara
         default_save_name: Kumbara
@@ -2761,6 +3156,7 @@ adventures:
                     haftalar = birikmesi_gereken / haftalık
                     {print} 'Yeni bir ' _ ' almak için ' _ ' hafta biriktirmek gerekiyor.'
                     ```
+                start_code: '# kodunuzu buraya yazın'
             14:
                 story_text: |
                     ### Exercise
@@ -2784,6 +3180,7 @@ adventures:
 
                     {call} calculate_budget with _, _, _
                     ```
+                start_code: '# place your code here'
     pressit:
         name: Tuşa basma
         default_save_name: Basılı
@@ -2812,6 +3209,7 @@ adventures:
                     {if} i {is} {pressed} {forward} 15
                     {else} {turn} 90
                     ```
+                start_code: '# kodunuzu buraya yazın'
             7:
                 story_text: |
                     Artık `{repeat}` hakkında bilgi sahibi olduğunuza göre, tuşlara birden çok kez basabiliriz.
@@ -2824,6 +3222,7 @@ adventures:
                     ```
                     {if} x {is} {pressed} {forward} 15 {else} {turn} 90
                     ```
+                start_code: '# kodunuzu buraya yazın'
             9:
                 story_text: |
                     Artık ifadeleri nasıl birleştireceğinizi bildiğinize göre, `{pressed}` ile dokunma-türü bir araç oluşturabilirsiniz.
@@ -2843,6 +3242,7 @@ adventures:
                         _
                         _
                     ```
+                start_code: '# kodunuzu buraya yazın'
     print_command:
         name: '{print}'
         default_save_name: yazdır
@@ -2868,6 +3268,8 @@ adventures:
                     ```
                     _ Merhaba!
                     ```
+                start_code: |
+                    {print} Hedy'ye hoş geldin!
             18:
                 story_text: |-
                     Gerçek Python koduna ulaştık! Yani bu, bundan sonra `{print}` ve `{range}` ile beraber artık bir de parantez kullanmamız gerektiği anlamına geliyor.
@@ -2884,7 +3286,8 @@ adventures:
                     sıcaklık = 25
                     {print}('Hava dışarıda ', sıcaklık, ' derece')
                     ```
-
+                start_code: |-
+                    isim = 'Hedy'
                     {print}('Benim adım ', isim)
     quizmaster:
         name: Kısa sınav ustası
@@ -2915,6 +3318,7 @@ adventures:
                     {if} puanlar_b > puanlar_a
                         {print} 'Sen B kulübüne aitsin.'
                     ```
+                start_code: '# kodunuzu buraya yazın'
     quotation_marks:
         name: '''tırnak işaretleri'''
         default_save_name: quotation_marks
@@ -2944,6 +3348,10 @@ adventures:
                     {print} 'Ayşe'nin çocuklarına bakıyorum.'
                     {print} 'Çocuklarla oyun'dan daha eğlenceli ne olabilir ki?'
                     ```
+                start_code: |-
+                    {print} 'Şu andan itibaren tırnak işareti kullanmanız gerekiyor!'
+                    cevap {is} {ask} 'Bundan sonra ne kullanmamız gerekiyor?'
+                    {print} 'Bundan sonra ' cevap ' kullanmamız gerekiyor'
             12:
                 story_text: |
                     **Tüm metinlerin tırnak içinde olması gerekir**
@@ -2978,6 +3386,10 @@ adventures:
                     puan = 25
                     {print} 'Puanın ' puan
                     ```
+                start_code: |-
+                    isim = {ask} 'Senin adın ne?'
+                    {if} isim = 'Robot Hedy'
+                        {print} 'Merhaba!'
     random_command:
         name: '{random}'
         default_save_name: restgele_komutu
@@ -3011,6 +3423,9 @@ adventures:
                     ödüller {is} _
                     _
                     ```
+                start_code: |
+                    hayvanlar {is} köpek, kedi, kanguru
+                    {print} hayvanlar {at} {random}
             16:
                 story_text: |-
                     We are going to make lists the Python way, with square brackets around the lists! We also keep the quotation marks around each item like we have learned in previous levels.
@@ -3060,6 +3475,11 @@ adventures:
                     ```
                     {repeat} 3 {times} {print} 'Hedy çok eğlenceli!'
                     ```
+                start_code: |
+                    {print} 'mutlu yıllar sana'
+                    {print} 'mutlu yıllar sana'
+                    {print} 'Mutlu yıllar sevgili Hedy'
+                    {print} 'mutlu yıllar sana'
             8:
                 story_text: |
                     ### Tekrarla komutları ve girinti
@@ -3073,6 +3493,10 @@ adventures:
                         {print} 'Herkese merhaba'
                         {print} 'Bunların hepsi 5 kez tekrarlanır'
                     ```
+                start_code: |-
+                    {repeat} 5 {times}
+                        {print} 'Herkese merhaba'
+                        {print} 'Bu 5 kez yazdırılacaktır'
             9:
                 story_text: |
                     Bu seviyede sadece `{if}` ve `{repeat}` ile birden fazla satır kullanmakla kalmaz, aynı zamanda bunları bir araya da getirebilirsiniz!
@@ -3087,6 +3511,13 @@ adventures:
                         {else}
                             {print} 'pizza daha iyi olur'
                     ```
+                start_code: |-
+                    {repeat} 3 {times}
+                        yemek = {ask} 'Ne yemek istiyorsun?'
+                        {if} yemek {is} pizza
+                            {print} 'güzel!'
+                        {else}
+                            {print} 'pizza daha iyi olur'
     repeat_command_2:
         name: '{repeat} 2'
         default_save_name: tekrarla_komutu_2
@@ -3112,6 +3543,10 @@ adventures:
                     yaş = {ask} 'Şimdi kaç yaşındasın?'
                     {repeat} yaş {times} {print} 'Hey Çok Yaşa!'
                     ```
+                start_code: |-
+                    {repeat} 2 {times} cevap = {ask} 'Bir soruyu birden fazla kez sorabileceğinizi biliyor muydunuz?'
+                    {if} cevap {is} evet {repeat} 2 {times} {print} 'Demek bunu zaten biliyordunuz'
+                    {else} {repeat} 3 {times} {print} 'Artık yeni bir şey öğrendiniz!'
             8:
                 story_text: |
                     ### blok mu değil mi?
@@ -3129,6 +3564,11 @@ adventures:
                     _ {print} 'çörek adamı'
                     _ {print} 'kim tanır çörek adamı, nerede yaşıyor?'
                     ```
+                start_code: |-
+                    {repeat} 3 {times}
+                        {print} 'Bu satır tekrarlanacaktır...'
+                        {print} 'Bu da öyle...'
+                    {print} 'ama bu değil!'
     restaurant:
         name: Restoran
         default_save_name: Restoran
@@ -3152,6 +3592,7 @@ adventures:
                     Ardından restoran programına en az 4 satır kod daha ekleyin.
                     Müşteriye ne içmek istediklerini sorun ve nakit mi yoksa kartla mı ödeme yapmak istediklerini sorun.
                     Son olarak, müşterinize veda etmek için güzel bir yol düşünün.
+                start_code: '# kodunuzu buraya yazın'
             2:
                 story_text: |
                     Seviye 2'de, değişkenler kullanarak restoranınızı genişletebilirsiniz. Seviye 1'de Hedy siparişi sadece bir kez `{echo}` yapabiliyordu ve sadece en son sipariş edilen şeyi hatırlayabiliyordu.
@@ -3176,6 +3617,7 @@ adventures:
                     Şimdi müşteriniz tarafından sipariş edilen yiyecek ve içeceklerin özetini kendiniz ekleyin.
 
                     **Ek Görev** Artık değişkenleri nasıl kullanacağınızı öğrendiğinize göre, bir satırda istediğiniz kadar değişken kullanabilirsiniz. Kodunuza daha fazla değişken ekleyebilir misiniz, örneğin masada yemek ya da paket servis, nakit ya da kart, pipetli ya da pipetsiz gibi.
+                start_code: '# kodunuzu buraya yazın'
             3:
                 story_text: |
                     Akşam yemeğinde ne yemek istediğinize karar vermekte zorlanıyor musunuz? Hedy'nin sizin için seçmesini sağlayabilirsiniz!
@@ -3203,6 +3645,7 @@ adventures:
                     fiyatlar {is} _
                     _
                     ```
+                start_code: '# kodunuzu buraya yazın'
             4:
                 story_text: |
                     Bu seviyede, `{print}` veya `{ask}` komutunu kullanırken artık tırnak işareti kullanmanız gerekiyor.
@@ -3226,6 +3669,7 @@ adventures:
                     {print} Siparişiniz için teşekkür ederiz.
                     {print} yemek ve içecek hemen hazır olacak!
                     ```
+                start_code: '# kodunuzu buraya yazın'
             5:
                 story_text: |
                     ### Alıştırma
@@ -3242,6 +3686,7 @@ adventures:
                     {if} içecek {in} depodaki_içecekler {print} 'Bir ' içecek ' hemen geliyor!'
                     {else} {print} 'Üzgünüm, ondan satmıyoruz'
                     ```
+                start_code: '# kodunuzu buraya yazın'
             6:
                 story_text: |
                     Bu seviyede, müşterinizin siparişinin toplam fiyatını hesaplamak için matematiği kullanabilirsiniz, bu da sanal restoranınızı daha gerçekçi hale getirecektir.
@@ -3269,6 +3714,7 @@ adventures:
                     {print} 'Ücret toplamı ' fiyat ' lira, lütfen'
                     {print} 'Teşekkürler, afiyet olsun!'
                     ```
+                start_code: '# kodunuzu buraya yazın'
             7:
                 story_text: |
                     Bu seviyede, bir kod satırını belirli sayıda tekrarlamak için `{repeat}` komutunu nasıl kullanacağınızı öğrendiniz.
@@ -3282,6 +3728,7 @@ adventures:
                     {print} "Restaurant Chez Hedy'ye Hoş Geldiniz"
                     kişiler = {ask} 'Bugün bize kaç kişi katılıyor?'
                     ```
+                start_code: '# kodunuzu buraya yazın'
             8:
                 story_text: |
                     Bu seviyede, birden fazla kod satırını tekrarlayarak sanal restoranınızı daha ayrıntılı hale getirebilirsiniz. Bunun gibi:
@@ -3300,6 +3747,7 @@ adventures:
                     ### Alıştırma
                     Bu kod, menüde daha fazla öğe eklenerek genişletilebilir, örneğin içecekler ve/veya birden fazla yemek veya tatlı sunulabilir. En az bir öğe daha ekleyin.
                     **Ek Görev** Daha da fazla ürün ekleyin, istediğiniz kadar seçenek olsun!
+                start_code: '# kodunuzu buraya yazın'
             9:
                 story_text: |
                     Bu seviyede restoranınızı daha gerçekçi ve daha eğlenceli hale getirmek için iç içe geçmeyi kullanabilirsiniz!
@@ -3334,6 +3782,7 @@ adventures:
                     {print} 'Toplam ücret ' price ' lira'
                     {print} 'Afiyet olsun!'
                     ```
+                start_code: '# kodunuzu buraya yazın'
             10:
                 story_text: |
                     Bu seviyede, farklı çeşitler için nasıl kolayca sipariş vereceğinizi öğreneceksiniz.
@@ -3372,6 +3821,7 @@ adventures:
                     {print} 'Demek ' kişiler ' kişi için sipariş vermek istiyorsunuz'
                     {print} 'Tamam, başlayalım!'
                     ```
+                start_code: '# kodunuzu buraya yazın'
             12:
                 story_text: |
                     Bu seviyeden itibaren menünüzü daha gerçekçi hale getirmek için ondalık sayıları kullanabilirsiniz.
@@ -3393,6 +3843,7 @@ adventures:
                         fiyat = fiyat + 2.35
                     {print} 'Toplam ' fiyat ' lira, lütfen'
                     ```
+                start_code: '# kodunuzu buraya yazın'
             13:
                 story_text: |
                     Bu seviyede kodunuzu daha da genişletmek için yeni komutlar öğreneceksiniz.
@@ -3416,6 +3867,7 @@ adventures:
                         {print} 'Bu sağlıklı bir seçim'
                     {print} 'Toplam ' ücret ' lira ediyor'
                     ```
+                start_code: '# kodunuzu buraya yazın'
             15:
                 story_text: |
                     `{while}` ile müşterilerinizin istekleri bitene kadar sipariş eklemeye devam edebilmelerini sağlayabilirsiniz.
@@ -3431,6 +3883,7 @@ adventures:
                         dahafazla = {ask} 'Başka bir şey sipariş etmek ister misiniz?'
                     {print} 'Teşekkür ederiz!'
                     ```
+                start_code: '# kodunuzu buraya yazın'
     rock:
         name: Taş, kağıt, makas
         default_save_name: Rock_2
@@ -3457,6 +3910,9 @@ adventures:
                     {ask} Bunlardan birini seçin _
                     {echo} Demek senin seçimin:
                     ```
+                start_code: |
+                    {print} Kendi taş kağıt makasınıza hoş geldiniz!
+                    {ask} Neyi seçeceksiniz?
             2:
                 story_text: |
                     Bu seviyede değişkenleri kullanarak pratik yapabilir, böylece taş, kağıt, makas oyununuzu yeni bir seviyeye taşımız olursunuz!
@@ -3468,6 +3924,7 @@ adventures:
                     seçim {is} taş
                     {print} Benim seçimim _
                     ```
+                start_code: '# kodunuzu buraya yazın'
             3:
                 story_text: |
                     Bilgisayarın taş, kağıt veya makas seçmesini sağlamak için `{at} {random}` komutunu kullanabilirsiniz!
@@ -3487,11 +3944,13 @@ adventures:
                     oyuncu_1 {is} {ask} 1 numaralı oyuncunun adı:
                     _
                     ```
+                start_code: '{print} Kendi taş kağıt makasınıza hoş geldiniz!'
             4:
                 story_text: |
                     Bu seviyede, taş, kağıt, makas programını daha da geliştirebiliriz. Ancak metin eklemek istiyorsanız, burada da tırnak işareti kullanmanız gerekir.
                     ### Alıştırma
                     Kodunuzu önceki seviyeden kopyalayın ve her `{print}` veya `{ask}` komutundan sonra tırnak işareti kullanarak çalışmasını sağlayın.
+                start_code: '{print} ''Kendi taş kağıt makasınıza hoş geldiniz!'''
             5:
                 story_text: |
                     Bu seviyede beraberlik olup olmadığını belirleyebiliriz. Bunun için yeni `{if}` koduna ihtiyacınız var.
@@ -3513,6 +3972,7 @@ adventures:
                     ```
 
                     Beraberlik olup olmadığını görmek için boşluklara doğru kodu girin.
+                start_code: '{print} ''Kendi taş kağıt makasınıza hoş geldiniz!'''
             9:
                 story_text: |
                     Bu seviyede `{if}` komutlarını iç içe geçirerek tüm taş, kağıt, makas oyununu programlayabilirsiniz.
@@ -3537,6 +3997,7 @@ adventures:
                             {print} 'Kaybettin!'
                     # bu kodu tamamlayın
                     ```
+                start_code: '# kodunuzu buraya yazın'
             10:
                 story_text: |
                     ### Alıştırma
@@ -3547,6 +4008,7 @@ adventures:
                     oyuncular = _
                     {for} _
                     ```
+                start_code: '# kodunuzu buraya yazın'
             13:
                 story_text: |
                     `{and}` komutu ile taş, kağıt, makas kodunuzu kısaltabilirsiniz! Örnek koda göz atın.
@@ -3568,6 +4030,7 @@ adventures:
                         {print} 'Bilgisayar kazandı!'
                     _
                     ```
+                start_code: '# kodunuzu buraya yazın'
             15:
                 story_text: |
                     ### Alıştırma
@@ -3590,6 +4053,7 @@ adventures:
                             kazandı = 'evet'
                     _
                     ```
+                start_code: '# kodunuzu buraya yazın'
     rock_2:
         name: Taş, kağıt, makas 2
         default_save_name: rock_2
@@ -3606,6 +4070,7 @@ adventures:
                     seçim {is} _
                     {print} Benim seçimim seçim
                     ```
+                start_code: '# kodunuzu buraya yazın'
     secret:
         name: SüperCasus
         default_save_name: SüperCasus
@@ -3635,6 +4100,7 @@ adventures:
                         b = 'bugün sabah saat 10.00'da'
                     {print} _ _ _
                     ```
+                start_code: '# kodunuzu buraya yazın'
             13:
                 story_text: |
                     Süpercasus kodunu `{and}` ile basitleştirebiliriz, böylece bize sadece bir `{if}` gerekir.
@@ -3653,6 +4119,7 @@ adventures:
                     {else}
                         {print} 'Sabah 10.00'da tren istasyonuna git.'
                      ```
+                start_code: '# kodunuzu buraya yazın'
     sleep_command:
         name: '{sleep}'
         default_save_name: uyu_komutu
@@ -3670,6 +4137,10 @@ adventures:
                     {sleep} 2
                     {print} yeşil!
                     ```
+                start_code: |-
+                    {print} En sevdiğim renk...
+                    {sleep} 2
+                    {print} yeşil!
     songs:
         name: Bir şarkı söyle!
         default_save_name: Şarkı
@@ -3707,6 +4178,7 @@ adventures:
                     {print} 'ARTIK YATAKTA ZIPLAYAN MAYMUN OLMASIN!'
                     {sleep}
                     ```
+                start_code: '{print} ''Şarkı söyleyelim!'''
             7:
                 story_text: |
                     Şarkılar genellikle çok fazla tekrarlama içerir. Örneğin. Bebek Köpekbalığı! Eğer söylerseniz, aynı şeyi söylemeye devam edersiniz:
@@ -3725,6 +4197,7 @@ adventures:
                     {repeat} _ _ {print} 'Bebek Köpekbalığı tututudutudu'
                     {print} 'Bebek Köpekbalığı'
                     ```
+                start_code: '{print} ''Bebek Köpekbalığı'''
             8:
                 story_text: |
                     Önceki bir seviyede, 'Bira şişeleri' şarkısını programladınız. Ancak `{repeat}` komutu olmadan, dizeleri birçok kez kopyalamak zorunda kaldınız.
@@ -3742,6 +4215,7 @@ adventures:
                     mısra = mısra - 1
                     {print} mısra ' bira şişesi duvarda dizili'
                     ```
+                start_code: '# kodunuzu buraya yazın'
             10:
                 story_text: |
                     `{for}` ile tüm yavru köpekbalığı şarkısını (ailedeki diğer tüm köpekbalıkları da dahil olmak üzere) sadece 6 satırda yazdırabilirsiniz!
@@ -3758,6 +4232,7 @@ adventures:
                     ```
                     maymunlar = 5, 4, 3, 2, 1
                     ```
+                start_code: '# kodunuzu buraya yazın'
             11:
                 story_text: |
                     Bu seviyede `{for}` ile `{range}` kullanarak, 5 küçük maymun gibi, saymayı kullanan şarkılar yapabilirsiniz.
@@ -3773,6 +4248,7 @@ adventures:
                         {print} maymunlar ' küçük maymun yatağın üzerinde zıplıyor'
                         _
                     ```
+                start_code: '# kodunuzu buraya yazın'
             12:
                 story_text: |
                     Bu şarkıda 'eğer mutluysan ve bunu biliyorsan, ellerini çırp' cümlesini programlamayı daha da kolaylaştırabiliriz. Çünkü tüm eylemleri bir değişkene koyabiliriz, bir göz atın:
@@ -3791,6 +4267,7 @@ adventures:
                     _ {print} 'eğer mutluysan ve bunu biliyorsan'
                     _ {print} eylem
                     ```
+                start_code: '# kodunuzu buraya yazın'
             13:
                 story_text: |
                     In the previous adventure you have learned how to use an argument in a function, but did you know that you could combine them with {ask} commands as well?
@@ -3807,6 +4284,16 @@ adventures:
                     {call} song {with} synonym
                     {call} song {with} chosen_place
                     ```
+                start_code: |
+                    {define} song {with} place
+                        {print} 'My Bonnie is ' place
+
+                    chosen_place = {ask} 'Where do you want Bonnie to be?'
+                    synonym = {ask} 'What is another word for that?'
+
+                    {call} song {with} chosen_place
+                    {call} song {with} synonym
+                    {call} song {with} chosen_place
             16:
                 story_text: |
                     Bu seviyede Ali Babanın çiftliği gibi bir şarkıyı daha da hızlı bir şekilde programlayabilirsiniz. Sadece listede aynı yere koyarak doğru hayvanı doğru sese bağlayabilirsiniz.
@@ -3839,6 +4326,7 @@ adventures:
                             {print} 'hey heyy ve işte doğuyor'
                         {print} 'sabah erkenden'
                     ```
+                start_code: '# kodunuzu buraya yazın'
             18:
                 story_text: |
                     Seviye 16'da listeleri kullanarak şarkılar yaptık. Ancak bu programlar bu seviyede artık düzgün çalışmazlar. Seviye 17'deki iki nokta üst üste ve seviye 18'deki parantezlerin hala eklenmesi gerekiyor.
@@ -3860,6 +4348,7 @@ adventures:
                             {print} 'hey heyy ve işte doğuyor'
                         {print} 'sabah erkenden'
                     ```
+                start_code: '# kodunuzu buraya yazın'
     songs_2:
         name: Sing a song! 2
         default_save_name: Song 2
@@ -3881,6 +4370,15 @@ adventures:
                     {print} 'Like a diamond in the sky'
                     {call} _
                     ```
+                start_code: |
+                    {define} twinkle
+                        {print} 'Twinkle'
+                        {print} '...'
+
+                    {call} twinkle
+                    {print} 'Up above the world so high'
+                    {print} 'Like a diamond in the sky'
+                    {call} _
     tic:
         name: Tic Tac Toe
         default_save_name: Tic
@@ -3916,6 +4414,7 @@ adventures:
                         {else}
                             oyuncu = 'x'
                     ```
+                start_code: '# Kodunuzu buraya yazın'
             14:
                 story_text: |
                     Önceki seviyelerde bir tic tac toe oyunu yaptınız. Şimdi de = işaretini, == işaretini ve != işaretini nasıl kullanacağınızı öğrendiniz.
@@ -3978,6 +4477,7 @@ adventures:
                                 {else}
                                     işaret = 'x'
                     ```
+                start_code: '# kodunuzu buraya yazın'
             15:
                 story_text: |
                     Bu seviyede, Tic Tac Toe oyununuzu {while} döngüsü ile geliştirebilirsiniz. Bu döngü ile `{if} oyun != 'bitti'` ve `{for} i {in} {range} 1 {to} 9` satırları basit tek bir satıra dönüştürülür.
@@ -4039,6 +4539,7 @@ adventures:
                             {else}
                                 işaret = 'x'
                     ```
+                start_code: '# kodunuzu buraya yazın'
             17:
                 story_text: |
                     Önceki seviyelerde, tic tac toe oyununun can sıkıcı bir özelliği vardı. Her hamleden sonra, kazanıp kazanmadığınızı kendiniz doldurmanız gerekiyordu.
@@ -4125,6 +4626,7 @@ adventures:
                             {else}:
                                 işaret = 'x'
                     ```
+                start_code: '# kodunuzu buraya yazın'
     turtle:
         name: Kaplumbağa
         default_save_name: Kaplumbağa
@@ -4148,6 +4650,9 @@ adventures:
                     {turn} {left}
                     {forward} 20
                     ```
+                start_code: |-
+                    {forward} 50
+                    {turn} {left}
             2:
                 story_text: |
                     Bu seviyede, kaplumbağayı etkileşimli hale getirmek için değişkenler kullanabilirsiniz. Örneğin oyuncuya kaplumbağanın kaç adım atması gerektiğini sorabilirsiniz.
@@ -4173,6 +4678,11 @@ adventures:
                     {turn} açı
                     {forward} 25
                     ```
+                start_code: |-
+                    {print} Kaplumbağa yarışı!
+                    açı {is} 90
+                    {turn} açı
+                    {forward} 25
             3:
                 story_text: |
                     Bu seviyede, çizim kaplumbağamız ile `{at} {random}` kullanabilirsiniz. Rastgele bir seçim, kaplumbağanın her seferinde farklı bir yolda yürümesini sağlar.
@@ -4185,6 +4695,10 @@ adventures:
                     {turn} açılar {at} {random}
                     {forward} 25
                     ```
+                start_code: |-
+                    açılar {is} 10, 50, 90, 150, 250
+                    {turn} açılar {at} {random}
+                    {forward} 25
             4:
                 story_text: |
                     4. seviyede, `{print}` ve `{ask}` ile tırnak işareti kullanmanız gerekecek. Ayrıca çizim yaparken de!
@@ -4211,6 +4725,11 @@ adventures:
                     {color} {red}
                     {forward} 50
                     ```
+                start_code: |-
+                    {print} 'Çizim yapılıyor'
+                    açı {is} 90
+                    {turn} açı
+                    {forward} 25
             5:
                 story_text: |
                     5. seviyede, `{if}` ile bir seçim yapabilirsiniz. Örneğin farklı şekil türleri arasında.
@@ -4243,6 +4762,12 @@ adventures:
                     {if} yön {is} sağ {turn} _
                     {forward} 100
                     ```
+                start_code: |-
+                    {print} 'Çizim yapılıyor'
+                    şekil {is} {ask} 'Kare mi yoksa üçgen mi istiyorsunuz?'
+                    {if} şekil {is} üçgen açı {is} 120 {else} açı {is} 90
+                    {turn} açı
+                    {forward} 25
             6:
                 story_text: |
                     Bu seviyede, farklı şekiller çizmek için hesaplamaları kullanabilirsiniz.
@@ -4266,6 +4791,7 @@ adventures:
                     {forward} 50
                     {turn} açı
                     ```
+                start_code: '{print} ''Şekiller çizmek'''
             8:
                 story_text: |
                     Artık birkaç satırı tekrarlayabildiğimize göre, şekilleri daha kolay oluşturabiliriz.
@@ -4315,6 +4841,7 @@ adventures:
                         {forward} 50
                         {color} {black}
                     ```
+                start_code: '# kodunuzu buraya yazın'
             10:
                 story_text: |
                     In this level you can make the turtle draw a figure.
@@ -4332,6 +4859,7 @@ adventures:
                     {for} distance {in} distances
                         {forward} distance
                     ```
+                start_code: '# kodunuzu buraya yerleştirin'
             12:
                 story_text: |
                     We can use functions to draw more complex figures with less code.
@@ -4356,6 +4884,16 @@ adventures:
                     {forward} 50
                     {call} square
                     ```
+                start_code: |
+                    {define} square
+                        {repeat} 4 {times}
+                            {turn} _
+                            {forward} _
+                    {call} square
+                    {forward} 50
+                    {call} square
+                    {forward} 50
+                    {call} square
     turtle_draw_it:
         name: Draw it!
         default_save_name: Draw it
@@ -4371,6 +4909,7 @@ adventures:
                         Square <img src="https://github.com/hedyorg/hedy/assets/80678586/03b96c2c-7b94-4032-9f9f-3f3b13573623" width="200">
                         Stairs<img src="https://github.com/hedyorg/hedy/assets/80678586/d4301e62-ec66-4031-827c-7d21f73ba106" width="200">
                     </div>
+                start_code: '## Recreate the drawings with the turtle!'
             2:
                 story_text: |
                     ### Exercise
@@ -4381,6 +4920,7 @@ adventures:
                     Arrow <img src="https://github.com/hedyorg/hedy/assets/80678586/803d8f42-9708-448c-82ea-d035697f08c9" width="150">
                     Boat <img src="https://github.com/hedyorg/hedy/assets/80678586/94ef7189-442a-4c8f-827d-12a69203c2e9" width="150">
                     </div>
+                start_code: '## Recreate the drawings with the turtle!'
             3:
                 story_text: |
                     ### Exercise
@@ -4391,6 +4931,7 @@ adventures:
                     Star <img src="https://github.com/hedyorg/hedy/assets/80678586/421c4d28-cb99-424b-be26-dcae30d65c80" width="150">
                     Arrow <img src="https://github.com/hedyorg/hedy/assets/80678586/3cbebcae-5258-47c5-a6ac-e7ee36c1d1ce" width="200">
                     </div>
+                start_code: '## Recreate the drawings with the turtle!'
             4:
                 story_text: |
                     ### Exercise
@@ -4408,6 +4949,7 @@ adventures:
                     colors {is} red, orange, yellow, green, blue, purple, pink, brown, gray, black
                     color _
                     ```
+                start_code: '## Recreate the drawings with the turtle!'
             5:
                 story_text: |
                     ### Exercise
@@ -4426,6 +4968,7 @@ adventures:
                     chosen_letter {is} {ask} 'Which letter would you like to see? F, E or L?
                     {if} _
                     ```
+                start_code: '## Recreate the drawings with the turtle!'
             6:
                 story_text: |
                     ### Exercise
@@ -4445,6 +4988,7 @@ adventures:
                     ```
                     chosen_color = {ask} _
                     ```
+                start_code: '## Recreate the drawings with the turtle!'
             7:
                 story_text: |
                     ### Exercise
@@ -4455,6 +4999,7 @@ adventures:
                     Triangle <img src="https://github.com/hedyorg/hedy/assets/80678586/3629a5e6-1f02-4851-aab9-c5430ba4a1f1" width="200">
                     Fan <img src="https://github.com/hedyorg/hedy/assets/80678586/1ba2ff71-1230-4fe3-8255-b2c504cf1b4e" width="200">
                     </div>
+                start_code: '## Recreate the drawings with the turtle!'
             8:
                 story_text: |
                     ### Exercise
@@ -4467,6 +5012,7 @@ adventures:
                     Randomly colored star (5) <img src="https://github.com/hedyorg/hedy/assets/80678586/dbe39006-c050-4833-b5c4-f9d1fb1c0781" width="150">
                     Randomly colored spiral (7) <img src="https://github.com/hedyorg/hedy/assets/80678586/9bcdb3f1-367d-4ae0-878f-d09005424a35" width="150">
                     </div>
+                start_code: '## Recreate the drawings with the turtle!'
             9:
                 story_text: |
                     ### Exercise
@@ -4497,6 +5043,7 @@ adventures:
                         color_2 = white
                         color_3 = blue
                     ```
+                start_code: '## Recreate the drawings with the turtle! '
             10:
                 story_text: |
                     ### Exercise
@@ -4537,6 +5084,7 @@ adventures:
                     {for} chosen_color {in} colors
                     _
                     ```
+                start_code: '## Recreate the drawings with the turtle! '
             11:
                 story_text: |
                     ### Exercise
@@ -4559,6 +5107,7 @@ adventures:
 
                     Hint Fan:
                     Start out like the fan you made in level 7. Or take a peak at the hint for the beehive, because the codes are very similar.
+                start_code: '## Recreate the drawings with the turtle! '
             12:
                 story_text: |
                     ### Exercise
@@ -4587,6 +5136,7 @@ adventures:
                         {if} shape = 'square'
                             {call} draw_a_square
                     ```
+                start_code: '## Recreate the drawings with the turtle! '
             13:
                 story_text: |
                     ### Exercise
@@ -4610,6 +5160,7 @@ adventures:
                     {define} draw_a_house {with} chosen_color
                     _
                     ```
+                start_code: '## Recreate the drawings with the turtle! '
             14:
                 story_text: |
                     ### Exercise
@@ -4637,6 +5188,7 @@ adventures:
                     {call} _ {with}
                     {call} _ {with}
                     ```
+                start_code: '## Recreate the drawings with the turtle! '
             15:
                 story_text: |
                     ### Exercise
@@ -4670,6 +5222,7 @@ adventures:
                 example_code_3: |
                     Star
                     A star is usually drawn using 144-degree-turns. If you change this slightly to 143 degrees for example and repeat the pattern multiple times with a {while} loop you can make this figure.
+                start_code: '## Recreate the drawings with the turtle! '
     while_command:
         name: '{while}'
         default_save_name: iken_komutu
@@ -4689,6 +5242,11 @@ adventures:
                         cevap = {ask} '5 kere 5 kaç eder?'
                     {print} 'Doğru cevap verilmiştir'
                     ```
+                start_code: |-
+                    cevap = 0
+                    {while} cevap != 25
+                        cevap = {ask} '5 kere 5 kaç eder?'
+                    {print} 'Doğru cevap verilmiştir'
     years:
         name: Yeni Yıl
         default_save_name: Yeni Yıl Geri Sayımı
@@ -4706,3 +5264,4 @@ adventures:
                         {print} sayı
                     {print} 'Yeni yılınız kutlu olsun!'
                     ```
+                start_code: '# kodunuzu buraya yazın'

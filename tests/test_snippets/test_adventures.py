@@ -10,7 +10,7 @@ import utils
 from tests.Tester import HedyTester, Snippet
 from website.yaml_file import YamlFile
 
-fix_error = True
+fix_error = False
 # set this to True to revert broken snippets to their en counterpart automatically
 # this is useful for large Weblate PRs that need to go through, this fixes broken snippets
 if os.getenv('fix_for_weblate'):
@@ -30,7 +30,7 @@ def collect_snippets(path, filtered_language=None):
     files = [f for f in os.listdir(path) if os.path.isfile(os.path.join(path, f)) and f.endswith('.yaml')]
     for f in files:
         lang = f.split(".")[0]
-        # we always store the English snippets, to use them if we need to restore broken code
+        # we always grab the en snippets to restore broken code
         if not filtered_language or (filtered_language and (lang == filtered_language or lang == 'en')):
             f = os.path.join(path, f)
             yaml = YamlFile.for_file(f)
@@ -46,10 +46,17 @@ def collect_snippets(path, filtered_language=None):
                             adventure_name = adventure['name']
 
                             for adventure_part, text in level.items():
-                                # This block is markdown, and there can be multiple code blocks inside it
-                                codes = [tag.contents[0].contents[0]
-                                         for tag in utils.markdown_to_html_tags(text)
-                                         if tag.name == 'pre' and tag.contents and tag.contents[0].contents]
+                                is_markdown = adventure_part != 'start_code'
+
+                                if is_markdown:
+                                    # If we have Markdown, there can be multiple code blocks inside it
+                                    codes = [tag.contents[0].contents[0]
+                                             for tag in utils.markdown_to_html_tags(text)
+                                             if tag.name == 'pre' and tag.contents and tag.contents[0].contents]
+                                else:
+                                    # If we don't have Markdown (this happensin the start_code field)
+                                    # the entire field is a single code block
+                                    codes = [text]
 
                                 if check_stories and adventure_part == 'story_text' and codes != []:
                                     # Can be used to catch languages with example codes in the story_text
@@ -73,7 +80,7 @@ def collect_snippets(path, filtered_language=None):
     return Hedy_snippets
 
 
-# filtered_language = 'zh_hans'
+# filtered_language = 'tr'
 # use this to filter on 1 lang, zh_Hans for Chinese, nb_NO for Norwegian, pt_PT for Portuguese
 
 

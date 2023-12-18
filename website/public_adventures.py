@@ -80,7 +80,7 @@ class PublicAdventuresModule(WebsiteModule):
             "cloned_from": adventure_id,
             "name": current_adventure.get("name"),
             "content": current_adventure.get("content"),
-            "public": 1,
+            "public": True,
             "creator": user["username"],
             "date": utils.timems(),
             "level": current_adventure.get("level"),

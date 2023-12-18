@@ -165,29 +165,31 @@ levels:
                 {print} "Caché(e) ou pas, j'arrive !"
     9:
         1:
-            story: Ce jeu te pose trois questions de maths. À chaque fois une question différente. Peux-tu trouver le bon ordre ?
+            story: This game will give you three maths assignments. Each time the question is different. Can you figure out the order?
             code: |-
-                nombres = 1, 2, 3, 4, 5, 6, 7, 8, 9, 10
+                numbers = 1, 2, 3, 4, 5, 6, 7, 8, 9, 10
                 {repeat} 3 {times}
-                    nombre = nombres {at} {random}
-                    bonne_réponse = 5 * nombre
-                    réponse = {ask} "Combien font 5 fois " nombre " ?"
-                    {if} réponse = bonne_réponse
-                        {print} "Bon travail !"
+                    number = numbers {at} {random}
+                    correct_answer = 5 * number
+                    answer = {ask} 'What is 5 times' number '?'
+                    {if} answer = correct_answer
+                        {print} 'Good job!'
                     {else}
-                        {print} "Non ! La bonne réponse est " bonne_réponse
+                        {print} 'No! The correct answer is ' correct_answer
         2:
-            story: Ce code demande à une personne dans un restaurant si elle veut commander un dessert. Si c'est le cas, il demande le type de dessert. Si elle commande un tiramisu, on lui dit qu'il n'y en a plus.
+            story: |-
+                This code asks the costumers in a restaurant if they would like to order dessert. If they do, it asks them what kind of dessert. If they order tiramisu they are told that the tiramisu is sold out.
+                Can you get the code to work?
             code: |-
-                commande = {ask} "Voulez-vous commander un dessert ?"
-                {if} commande = oui
-                    dessert = {ask} "Quel dessert voulez-vous ?"
+                order = {ask} 'Would you like to order dessert?'
+                {if} order = yes
+                    dessert = {ask} 'What kind of dessert would you like?'
                     {if} dessert = tiramisu
-                        {print} "Désolé, nous n'avons plus de tiramisus."
+                        {print} 'Sorry, we are out of tiramisu.'
                     {else}
-                        {print} "un " dessert ". Ce sera prêt dans une minute !"
+                        {print} 'One ' dessert ' coming right up!'
                 {else}
-                    {print} "Vous ne voulez pas de dessert. Pas de problème !"
+                    {print} 'You dont want a dessert. No problem!'
     10:
         1:
             story: |-

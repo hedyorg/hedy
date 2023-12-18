@@ -851,12 +851,9 @@ class ForTeachersModule(WebsiteModule):
     @route("/customize-adventure/<adventure_id>", methods=["GET"])
     @requires_teacher
     def get_adventure_info(self, user, adventure_id):
-        if not adventure_id:
-            return gettext("adventure_empty"), 400
-        if not isinstance(adventure_id, str):
-            return gettext("adventure_name_invalid"), 400
-
         adventure = self.db.get_adventure(adventure_id)
+        if not adventure:
+            return utils.error_page(error=404, ui_message=gettext("no_such_adventure"))
         if adventure["creator"] != user["username"] and not is_teacher(user):
             return utils.error_page(error=403, ui_message=gettext("retrieve_adventure_error"))
         # Now it gets a bit complex, we want to get the teacher classes as well as the customizations
@@ -899,7 +896,7 @@ class ForTeachersModule(WebsiteModule):
             return gettext("content_invalid"), 400
         if len(body.get("content")) < 20:
             return gettext("adventure_length"), 400
-        if not isinstance(body.get("public"), bool) and not isinstance(body.get("public"), int):
+        if not isinstance(body.get("public"), bool):
             return gettext("public_invalid"), 400
         if not isinstance(body.get("language"), str) or body.get("language") not in hedy_content.ALL_LANGUAGES.keys():
             # we're incrementally integrating language into adventures; i.e., not all adventures have a language field.
@@ -932,7 +929,7 @@ class ForTeachersModule(WebsiteModule):
             "name": body["name"],
             "level": body["level"],
             "content": body["content"],
-            "public": 1 if body["public"] else 0,
+            "public": body["public"],
             "language": body["language"],
         }
 
@@ -974,26 +971,32 @@ class ForTeachersModule(WebsiteModule):
             return gettext("something_went_wrong_keyword_parsing"), 400
         return {"code": code}, 200
 
-    @route("/create-adventure", methods=["POST"])
+    @route("/create_adventure", methods=["POST"])
     @requires_teacher
     def create_adventure(self, user):
-        adventure_id = uuid.uuid4().hex
-        name = "AdventureX"
-        adventures = self.db.get_teacher_adventures(user["username"])
+        body = request.json
+        # Validations
+        if not isinstance(body, dict):
+            return gettext("ajax_error"), 400
+        if not isinstance(body.get("name"), str):
+            return gettext("adventure_name_invalid"), 400
+        if len(body.get("name")) < 1:
+            return gettext("adventure_empty"), 400
 
+        adventures = self.db.get_teacher_adventures(user["username"])
         for adventure in adventures:
-            if adventure["name"] == name:
-                name += 'X'
-                continue
+            if adventure["name"] == body["name"]:
+                return gettext("adventure_duplicate"), 400
 
         adventure = {
-            "id": adventure_id,
+            "id": uuid.uuid4().hex,
             "date": utils.timems(),
             "creator": user["username"],
-            "name": name,
+            "name": body["name"],
             "level": 1,
             "content": "",
             "language": g.lang,
         }
+
         self.db.store_adventure(adventure)
-        return adventure["id"], 200
+        return {"id": adventure["id"]}, 200

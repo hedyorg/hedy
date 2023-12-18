@@ -18,10 +18,14 @@ ALL_KEYWORD_LANGUAGES = {}
 # Babel has a different naming convention than Weblate and doesn't support some languages -> fix this manually
 CUSTOM_BABEL_LANGUAGES = {'pa_PK': 'pa_Arab_PK',
                           'kmr': 'ku_TR',
+                          'tn': 'en',
+                          'pap': 'en',
                           'tl': 'en'}
 
 # For the non-existing language manually overwrite the display language to make sure it is displayed correctly
 CUSTOM_LANGUAGE_TRANSLATIONS = {'kmr': 'Kurdî (Tirkiye)',
+                                'tn': 'Setswana',
+                                'pap': 'Papiamentu',
                                 'tl': 'ᜆᜄᜎᜓᜄ᜔'}
 
 customize_babel_locale(CUSTOM_BABEL_LANGUAGES)

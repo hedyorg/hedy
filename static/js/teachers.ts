@@ -181,6 +181,24 @@ export function remove_student(class_id: string, student_id: string, prompt: str
   });
 }
 
+export function create_adventure(prompt: string) {
+    modal.prompt (prompt, '', function (adventure_name) {
+        $.ajax({
+          type: 'POST',
+          url: '/for-teachers/create_adventure',
+          data: JSON.stringify({
+            name: adventure_name
+          }),
+          contentType: 'application/json',
+          dataType: 'json'
+        }).done(function(response) {
+          window.location.pathname = '/for-teachers/customize-adventure/' + response.id ;
+        }).fail(function(err) {
+          return modal.notifyError(err.responseText);
+        });
+    });
+}
+
 function update_db_adventure(adventure_id: string) {
    // Todo TB: It would be nice if we improve this with the formToJSON() function once #3077 is merged
 

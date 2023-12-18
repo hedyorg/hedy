@@ -21,7 +21,6 @@ module.exports = defineConfig({
     login_page: '/login',
     recover_page: '/recover',
     hedy_page: '/hedy',
-    hedy_english_keywords: '/hedy?keyword_language=en',
     hedy_level2_page: '/hedy/2',
     hedy_level5_page: '/hedy/5',
     adventure_page: '/hedy/1#print_command',

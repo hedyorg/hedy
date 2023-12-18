@@ -104,8 +104,8 @@
         color {is} {ask} 'What {is} your favorite color?'
         {if} color {in} pretty_colors {print} 'pretty!' {else} {print} 'meh'
 -   name: '{pressed}'
-    explanation: Controlla quando un pulsante dato della tastiera è `{pressed}`.
-    demo_code: '{if} un {is} {pressed} {print} ''Hai premuto A!'' {else} {print} ''Hai premuto un altro pulsante!'''
+    explanation: Check whether a given key on the keyboard is `{pressed}`.
+    demo_code: '{if} a {is} {pressed} {print} ''You pressed A!'' {else} {print} ''You pressed another key!'''
 6:
 -   name: print
     explanation: Scrivi esattamente quello che metti tra virgolette
@@ -159,12 +159,12 @@
             {turn} 90
             {forward} 50
 -   name: '{pressed}'
-    explanation: Controlla quando un pulsante dato della tastiera `{pressed}`.
+    explanation: Check whether a given key on the keyboard is `{pressed}`.
     demo_code: |-
-        {if} un {is} {pressed}
-            {print} 'Hai premuto A!'
+        {if} a {is} {pressed}
+            {print} 'You pressed A!'
         {else}
-            {print} 'Hai premuto un altro pulsante!'
+            {print} 'You pressed another key!'
 9:
 -   name: '`{if}` with multiple lines'
     explanation: The answer of a sum of questions with '{ask}' and see if it is correct. Now we print out two lines.
@@ -316,7 +316,7 @@
         firstfruit = fruit[1]
         {print} firstfruit
 -   name: Get a random item from a list
-    explanation: Per ottenere un elemento casuale da una lista usiamo [random] quindi fruit[random] significa ottieni un frutto casuale dalla lista!
+    explanation: To get a random item from a list we use [random] so fruit[random] means, get a random fruit from the list!
     demo_code: |-
         fruit = ['banana', 'apple', 'cherry']
         random_fruit = fruit[random]

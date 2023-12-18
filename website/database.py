@@ -41,7 +41,7 @@ CLASSES = dynamo.Table(storage, "classes", "id", indexes=[
 # - date (int): timestamp of last update
 # - level (int | str): level number, sometimes as an int, sometimes as a str
 # - name (str): adventure name
-# - public (int): 1 or 0 whether it can be shared
+# - public (bool): whether it can be shared
 # - tags_id (str): id of tags that describe this adventure.
 ADVENTURES = dynamo.Table(storage, "adventures", "id", indexes=[dynamo.Index("creator"), dynamo.Index("public")])
 INVITATIONS = dynamo.Table(
@@ -662,7 +662,7 @@ class Database:
         return ADVENTURES.scan()
 
     def public_adventures(self):
-        return ADVENTURES.get_many({"public": 1})
+        return ADVENTURES.get_many({"public": True})
 
     def get_student_classes_ids(self, username):
         ids = USERS.get({"username": username}).get("classes")
