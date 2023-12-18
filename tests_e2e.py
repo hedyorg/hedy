@@ -1617,7 +1617,7 @@ class TestCustomAdventures(AuthHelper):
             'id': '123',
             'name': 'panda',
             'classes': [],
-            'level': '5',
+            'levels': ['5'],
             'content': 'This is just long enough!',
             'public': True,
             'language': 'en', }
@@ -1637,7 +1637,7 @@ class TestCustomAdventures(AuthHelper):
             'id': adventure_id,
             'name': 'test_adventure',
             'classes': [],
-            'level': '5',
+            'levels': ['5'],
             'content': 'This is just long enough!',
             'public': 1,
             'language': 'en', }
@@ -1662,7 +1662,7 @@ class TestCustomAdventures(AuthHelper):
             'id': adventure_id,
             'name': 'test_adventure',
             'classes': [class_id],
-            'level': '5',
+            'levels': ['5'],
             'content': 'This is just long enough!',
             'public': 1,
             'language': 'en',

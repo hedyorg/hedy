@@ -3,15 +3,26 @@
     _="on removeMe remove me">
     <div class="py-4 px-6">
         {% if adventure["creator"] == user["username"] %}
-        <h2 class="name underline cursor-pointer"
-            _="on click window.open('/for-teachers/customize-adventure/{{adventure.id}}', '_self')">{{adventure.name}}
-        </h2>
+            <h2 class="name underline cursor-pointer"
+                _="on click window.open('/for-teachers/customize-adventure/{{adventure.id}}', '_self')">{{adventure.name}}
+            </h2>
         {% else %}
-        <h2 class="name">{{ adventure.name|e }}</h2>
+            <h2 class="name">{{ adventure.name|e }}</h2>
         {% endif %}
-        <p class="text-gray-600 mt-1">{{_('creator')}}: {{ adventure.creator }}</p>
+        {% if adventure["creator_public_profile"] %}
+            <p class="text-gray-600 mt-1">{{_('creator')}}: <a href="/user/{{adventure.creator}}">{{ adventure.creator }}</a></p>
+        {% else %}
+            <p class="text-gray-600 mt-1">{{_('creator')}}: {{ adventure.creator }}</p>
+        {% endif %}
         <p class="text-gray-600 mt-1">
-            {{_('level')}}: {% if adventure.level %}{{ adventure.level }}{% else %}-{% endif %}
+            <!-- adventure.level will gradually be removed until we have all adventures using only levels. -->
+            {% if adventure.levels %}
+                {{_('levels')}}: {% for level in adventure.levels %}
+                    {{level}}{% if loop.index != adventure.levels|length %}, {% endif %}
+                {% endfor %}
+            {% else %}
+                {{_('level')}}: {{ adventure.level }}
+            {% endif %}
         </p>
         {% if adventure["cloned_times"] %}
             <p class="text-gray-600 mt-1">
