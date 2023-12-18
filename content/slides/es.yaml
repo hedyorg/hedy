@@ -86,12 +86,16 @@ levels:
                 Si quieres que la respuesta se muestre, puedes usar el último comando de este nivel: `{echo}`.
 
                 `{echo}` se usa para repetir la respuesta de una `{ask}`.
-            editor: /hedy/1
+            code: |-
+                {print} Hello!
+                {ask} What is your name?
+                {echo} hello
         6:
             header: ¡Programando!
             text: |-
                 Con `{print}`, `{ask}` y `{echo}` ya puedes crear una pequeña historia.
                 Este es un buen momento para probar las aventuras Loro, Cuento y Piedra, papel o tijera.
+            editor: /hedy/1
         7:
             header: ¡Programando!
             text: Las aventuras se muestran en pestañas.
