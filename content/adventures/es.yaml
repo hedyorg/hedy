@@ -551,11 +551,6 @@ adventures:
                     given_answer = 'What is ' number_1 ' times ' number_2 '?'
                     {if} _
                     {else} _
-                start_code: |
-                    número_1 = {ask} 'Introduce el primer número:'
-                    número_2 = {ask} 'Escribe el segundo número:'
-                    respuesta_correcta = número_1 * número_2
-                    {print} número_1 ' por ' número_2 ' es ' respuesta_correcta
             9:
                 story_text: |
                     En el nivel 6 creaste una calculadora, en este nivel puedes ampliar el código para que haga varias preguntas.
@@ -783,14 +778,6 @@ adventures:
                     {sleep}
                     ¡Aquí tiene! ¡Buen viaje!
                     ```
-                start_code: |
-                    destino {ask} ¿Adónde vas de vacaciones?
-                    {print} El vuelo a dstino sale a las 3 pm.
-                    {ask} ¿Has facturado ya tu equipaje?
-                    {echo}
-                    {print} Déjeme imprimirle su tarjeta de embarque.
-                    {sleep}
-                    ¡Aquí tiene! ¡Buen viaje!
             3:
                 story_text: |-
                     Bienvenido a una aventura de depuración. Depurar un código significa deshacerse de los errores en el código.
@@ -1187,19 +1174,6 @@ adventures:
                         print 'You scored ' score ' out of 10'
 
                     ```
-                start_code: |
-                    country = ['The Netherlands', 'Poland', 'Turkey', 'Zimbabwe', 'Thailand', 'Brasil', 'Peru', 'Australia', 'India', 'Romania' ]
-                    capitals = 'Amsterdam', 'Warshaw' 'Istanbul', 'Harare', 'Bangkok', 'Brasilia', 'Lima', 'Canberra', 'New Delhi', 'Bucharest'
-                    score = 0
-                    for i in range 0 to 10
-                        answer = ask 'What's the capital of ' countries[i]
-                        correct = capital[i]
-                        if answer = correct
-                            print 'Correct!'
-                        score = score + 1
-                        else
-                            print 'Wrong,' capitals[i] 'in the capital of' countries[i]
-                        print 'You scored ' score ' out of 10'
             17:
                 story_text: |-
                     ### Exercise
@@ -1235,35 +1209,6 @@ adventures:
 
                     print 'Thanks for ordering!'
                     ```
-                start_code: |4
-
-                              define food_order
-                                  toppings = ask 'pepperoni, tuna, veggie or cheese?'
-                                  size = ask 'big, medium or small?'
-                                  number_of_pizza = ask 'How many these pizzas would you like?'
-
-                                  print 'YOU ORDERED'
-                                  print number_of_pizzas ' size  ' topping ' pizza'
-
-                              define drinks_order
-                                  drink = ask 'water, coke, icetea, lemonade or coffee?'
-                                  number_of_drinks = ask 'How many of these drinks would you like?'
-
-                                  print 'YOU ORDERED'
-                                  print number_of_drinks ' ' drink
-
-                              'Welcome to Hedy pizza'
-                              more_food = ask 'Would you like to order a pizza?'
-                              while more_food = 'yes'
-                                  return food_order
-                                  more_food = ask 'Would you like to order a pizza?'
-                              more_drinks = ask 'Would you like to order some drinks?'
-                              while more_drinks == 'yes'
-                                  call drink_order
-                                  more_drinks == ask 'Would you like to order more drinks?'
-
-
-                              print 'Thanks for ordering!'
             18:
                 story_text: |-
                     ### Exercise
@@ -1503,12 +1448,6 @@ adventures:
                     {else}
                         {print} '¡Genial! ¡Has aprobado la asignatura!'
                     ```
-                start_code: |
-                    contesta = {ask} '¿Quieres saber más?'
-                    {if} contesta == 'Si'
-                        {print} '¡A la siguiente aventura!'
-                    {if} ¡Contesta != 'si'
-                        {print} '¡Qué pena!'
             15:
                 story_text: |
                     En el juego de abajo, se ha preparado un código para asegurarse que el jugador pueda jugar tanto como quieran...
@@ -2460,11 +2399,6 @@ adventures:
                         {print} 'Bienvenido Hedy'
                         {print} '¡Puedes jugar en tu ordenador!'
                     ```
-                start_code: |
-                    nombre = {ask} '¿Cómo te llamas?'
-                    {if} nombre {is} Hedy
-                        {print} 'Bienvenido Hedy'
-                        {print} '¡Puedes jugar en tu ordenador!'
             9:
                 story_text: |
                     En este nivel también puedes poner un comando {if} dentro de otro comando {if}.
