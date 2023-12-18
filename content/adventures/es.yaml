@@ -109,7 +109,7 @@ adventures:
                     {print} _ Él escucha el ruido de un _ animales {at} {random}
                     {print} nombre _ teme que éste sea un bosque encantado _
                     ```
-                start_code: '{print} ''¡Tu historia se imprimirá aquí!'''
+
             5:
                 story_text: |
                     En este nivel puedes programar distintos finales, lo que hará que tu historia sea incluso más divertida.
@@ -135,7 +135,7 @@ adventures:
                     {if} final {is} bueno {print} nombre ' coge la espada y el monstruo huye rápidamente'
                     {else} {print} 'El monstruo se come' nombre
                     ```
-                start_code: '{print} ''¡Aquí viene tu historia!'''
+
             7:
                 story_text: |
                     En una historia, alguien dice algunas palabras varias veces. Por ejemplo, cuando alguien pide ayuda o canta una canción.
@@ -150,7 +150,7 @@ adventures:
                     {repeat} 5 {times} {print} '¡Ayuda!'
                     {print} 'Por qué nadie viene en mi ayuda?'
                     ```
-                start_code: '{repeat} 5 {times} {print} ''¡Ayuda!'''
+
             8:
                 story_text: "En este nivel puedes usar varias líneas en tus comandos `{if}`, ¡de esta manera puedes mejorar tu final malo o bueno!\n\n### Ejercicio 1\n El código de ejemplo muestra dos finales diferentes; uno donde los personajes usan una máquina del tiempo y otro en el que no.\nCompleta\
                     \ los espacios en blanco con al menos una frase por cada final. \n**Extra** Haz que la historia dure más. ¿Qué ocurre en la historia? Puedes también añadir un segundo `{ask}` con diferentes opciones.\n\n### Ejercicio 2\nVuelve a tus historias guardadas, escoge la historia del nivel\
@@ -562,7 +562,7 @@ adventures:
                     Dale al jugador información cuando introduzcan una pregunta acertada o errónea. Para conseguir eso, amplía tu programa con un `{else}`.
                 example_code: "```\npuntuación = 0\n{repeat} 10 {times}\n    números = 1, 2, 3, 4, 5, 6, 7, 8, 9, 10\n    número1 = números {at} {random}\n    número2 = números {at} {random}\n    respuesta_correcta = numero1 * numero2\n    {print} '¿Cuánto es 'número1' multiplicado por 'número2'?'\n \
                     \   respuesta = {ask} 'Escriba su respuesta aquí...'\n    {print} 'Tu respuesta es' respuesta\n    {if}_{is}_ \n        puntuación = puntuación + 1\n{print} '¡Buen trabajo! Tu puntuación es... 'puntuación' sobre 10!'\n```\n"
-                start_code: '{print} ''¡Bienvenido a esta calculadora!'''
+
             10:
                 story_text: |
                     ¡Este juego de cálculo te ayuda a practicar las tablas de multiplicar!
@@ -1231,22 +1231,6 @@ adventures:
                         print 'there a ' sound
                         print 'everywhere a ' sound sound
                     ```
-                start_code: |4
-
-                              animales = ['cerdo', 'perro', 'vaca']
-                              sonidos = ['oink', 'woof', 'moo']
-                              para i en el intervalo de 1 a 3
-                                  animal = animales[i]
-                                  sonido = sonidos[i]
-                                  print 'El viejo McDonald tenía una granja'
-                                  print '¡E I E I O!'
-                                  print 'y en esa granja tenía un ' animal
-                                  print 'E I E I O!'
-                                  print 'con un ' sonido sonido ' aquí'
-                                  print 'y un ' sonido ' allí'
-                                  print 'aquí un ' sonido
-                                  print 'allí un ' sonido
-                                  print 'por todas partes un ' sonido sonido
     default:
         name: Introducción
         default_save_name: intro
@@ -1259,7 +1243,7 @@ adventures:
                     Prueba el código por ti mismo con el botón verde 'Ejecutar código' bajo el bloque de programación.
 
                     ¿Preparado? ¡Entonces ve a la siguiente pestaña para aprender tu primer comando!
-                start_code: '{print} ¡hola mundo!'
+
             2:
                 story_text: |
                     ¡Enhorabuena! Has alcanzado el nivel 2. ¡Espero que ya hayas hecho algunos códigos increíbles!
@@ -1364,7 +1348,7 @@ adventures:
                     ```
                     {repeat} 5 {times} {print} '¡En la siguiente pestaña puedes repetir varias líneas de código a la vez!'
                     ```
-                start_code: '{print} ''¡Vayamos a la siguiente pestaña!'''
+
             9:
                 story_text: |
                     ¡Buen trabajo! ¡Has alcanzado otro nuevo nivel! En el nivel anterior aprendiste a usar varias líneas de código en un comando {if} o {repeat}. Pero todavía no puedes combinar los dos...
@@ -1379,7 +1363,7 @@ adventures:
                         {print} '¡Hurra!'
                     {else}
                         {print} 'Quizás deberías practicar un poco más en el nivel anterior'
-                start_code: '{print} ¡Vayamos a la siguiente pestaña!'
+
             10:
                 story_text: |
                     ¡Lo estás haciendo genial! En el nivel anterior todavía nos encontramos con un pequeño problema. Has aprendido a repetir líneas, pero ¿y si quisieras cambiar ligeramente la línea?
@@ -1411,7 +1395,7 @@ adventures:
                     imprimir 'Has pedido una hamburguesa y una bebida'
                     imprimir 'Eso cuesta ' total ' dólares por favor'
                     ```
-                start_code: '{print} ''¡Vayamos a la siguiente pestaña!'''
+
             13:
                 story_text: |
                     En los niveles anteriores aprendiste cómo poner dos comandos `{if}` uno dentro de otro. Esto funciona bien, pero resulta en códigos extensos e inmanejables como este:
@@ -1431,7 +1415,7 @@ adventures:
                     {else}
                         {print} '¡Acceso denegado!'
                     ```
-                start_code: '{print} ''¡Vamos a la siguiente pestaña!'''
+
             14:
                 story_text: |
                     Con el programa de abajo puedes calcular si has aprobado una asignatura en el colegio (por lo tanto, una nota de seis o superior).
@@ -1465,7 +1449,7 @@ adventures:
                             {if} respuesta {is} 'si'
                                 {print} 'Ok continuemos'
                     ```
-                start_code: '{print} ''¡Vamos a la siguiente pestaña!'''
+
             16:
                 story_text: |
                     En este nivel creceremos un poco más hacia código real de Python. También aprenderás como hacer que dos listas coincidan.
@@ -1487,19 +1471,19 @@ adventures:
                             {print} 'Un ' animal ' dice ' sonido
                     ```
                     Nota: Estos códigos no funcionarán así en este nivel. Dirígete a la siguiente pestaña para ver qué partes necesitas corregir.
-                start_code: '{print} ''¡Vayamos a la siguiente pestaña!'''
+
             17:
                 story_text: |
                     Ahora vamos a cambiar un poco la indentación. Cada vez que necesitemos una sangría, necesitaremos `:` en la línea anterior a la sangría.
 
                     En este nivel también se puede utilizar un nuevo comando: `{elif}`. `{elif}` es la abreviatura de {else} {if} y lo necesitas cuando quieres hacer 3 (¡o más!) opciones.
                     ¡Compruébalo!
-                start_code: '{print} ''¡Vamos a la siguiente pestaña!'''
+
             18:
                 story_text: |
                     ¡Enhorabuena! Has alcanzado el último nivel de Hedy! El código que has creado aquí se puede copiar a entornos reales de Python como replit o PyCharm, ¡y puedes continuar aprendiendo allí!
                     Sin embargo ten en cuenta que Python sólo puede leer comando en inglés, así que si has estado usando otros idiomas, ahora los tendrás que cambiar a inglés.
-                start_code: '{print} (''¡¡¡Gran trabajo!!!'')'
+
     dice:
         name: Dados
         default_save_name: Dados
@@ -1533,7 +1517,7 @@ adventures:
                     ### Ejercicio
                     Haz tu propio dado en este nivel.
                     Nota: Si no tienes idea de como hacer dados. Mira tus dados del nivel anterior, pero no olvides las comillas.
-                start_code: '{print} ''¿Qué salió esta vez?'''
+
             5:
                 story_text: |
                     Vamos a añadir los comandos `{if}` y `{else}` a nuestros dados!
@@ -1542,7 +1526,7 @@ adventures:
                     Completa el código de ejemplo para que diga "Ya puedes dejar de lanzar" una vez que lances un gusano. Debería decir "Debes lanzarlo otra vez" si no has lanzado nada mas.
                     **Extra** Tal vez quieras recrear una muerte de un juego totalmente diferente. También esta bien! Luego haz tu propia reacción, por ejemplo, 'Si!' para 6 y 'Lastima!' para algo mas.
                 example_code: "```\nopciones {is} 1, 2, 3, 4, 5, lombriz\ntirada {is} opciones {at}{random}\n{print} 'haz tirado ' opciones\n_ lanzar{is} lombriz {print} 'Puedes dejar de tirar los dados' \n_ {print} '!Debes tirar los dados otra vez!'\n```\n"
-                start_code: '{print} ''¿Qué salió esta vez?'''
+
             6:
                 story_text: |
                     Puedes hacer un dado de gusanito otra vez en este nivel, pero ahora también puedes calcular cuantos puntos han sido tirados.
@@ -1562,7 +1546,7 @@ adventures:
                     ```
                 example_code_2: |
                     ¿Conseguiste calcular la puntuación de 8 dados? Eso requirió mucho copiar y pegar, ¿verdad? ¡Vamos a hacerlo más fácil en el nivel 7!
-                start_code: '{print} ''¿Qué salió esta vez?'''
+
             7:
                 story_text: |
                     Puedes hacer un dado otra vez en este nivel. Con el código `{repeat}` puedes tirar fácilmente una mano entera de dados.
@@ -1574,7 +1558,7 @@ adventures:
                     opciones = 1, 2, 3, 4, 5, 6
                     _ _ _ _ _ _ _
                     ```
-                start_code: '{print} ''¿Qué indicará el dado esta vez?'''
+
             10:
                 story_text: |
                     ### Ejercicio
@@ -1632,7 +1616,7 @@ adventures:
                     Luego piensa en una tarea que tenga que ser hecha, y deja que la computadora decida quien debe hacer la tarea con el comando `{at} {random}`.
 
                     **Extra** ¿No quieres lavar los platos por ti mismo? Hackea el programa quitando tu nombre de la lista con `{remove}``{from}`.
-                start_code: '{print} ¿Quién lavará los platos hoy?'
+
             4:
                 story_text: |
                     Usando comillas puedes hacer más interesante tu programa.
@@ -1647,7 +1631,7 @@ adventures:
                     {sleep}
                     {print} personas {at} _
                     ```
-                start_code: '{print} ''¿Quien lavará los platos hoy?'''
+
             5:
                 story_text: |
                     Usando el comando `{if}` ahora puedes hacer tu programa todavía más divertido. Ahora tu programa puede reaccionar de acuerdo a la elección de quien lavará los platos.
@@ -1661,7 +1645,7 @@ adventures:
                     lavavajillas {is} Sofía {print} _ lástima que tengo que lavar los platos _
                     {print} 'afortunadamente no hay platos porque' _ 'ya los está lavando'
                     ```
-                start_code: '{print} ''¿Quien lavará los platos hoy?'''
+
             6:
                 story_text: |
                     ¿Todo el mundo lava los platos por igual? ¿Te parece justo? Puedes contarlo en este nivel.
@@ -1675,7 +1659,7 @@ adventures:
                     Y... ¿se te ocurre alguna solución para cuando tu lista esté vacía?
                 example_code_2: "```\npersonas = mamá, papá, Emma, Sofía\nlavavajillas = personas {at} {random}\n{print} 'El lunes los platos serán lavados por ' lavavajillas \n{remove} lavavajillas {from} personas\nlavavajillas = personas {at} {random}\n{print} 'El martes los platos serán lavados por\
                     \ ' lavavajillas \n{remove} lavavajillas {from} personas\n```\n"
-                start_code: '{print} ''¿Quién lavará los platos?'''
+
             7:
                 story_text: |
                     Con `{repeat}` puedes repetir partes del código. Puedes usarlo para calcular quién va a lavar los platos por varios días!
@@ -1687,7 +1671,7 @@ adventures:
                     gente = mamá, papá, Emma, Sofía
                     {repeat} _ _ {print} 'el lavaplatos es ' _
                     ```
-                start_code: '{print} ''¿Quien lavará los platos esta semana?'''
+
             10:
                 story_text: |
                     En este nivel puedes hacer un horario de lavado de platos de forma fácil.
@@ -2112,7 +2096,7 @@ adventures:
                     Copia el código de ejemplo a tu entrada de pantalla haciendo clic en el botón amarillo.
                     Ahora completa la historia añadiendo al menos 5 líneas de código.
                     Recuerda que cada línea de código empiece con un comando `{print}` .
-                start_code: '{print} ¿Cómo llegue aquí?'
+
             2:
                 story_text: |
                     En esta casa embrujada puedes escoger tus monstruos con emojis. Claro que también puedes usar palabras.
@@ -2144,7 +2128,7 @@ adventures:
                     {print} ¡Oh no! Rápido, ve a la cocina.
                     {print} ¡Pero tan pronto entras allí el monstruo_3 te ataca!
                     ```
-                start_code: monstruo1 {is} _
+
             3:
                 story_text: |
                     En los niveles anteriores hiciste la introducción al juego de la casa embrujada, pero como te habrás dado cuenta, la historia siempre termina en un final tenebroso.
@@ -2239,7 +2223,7 @@ adventures:
                     {if} jugador {is} vivo
                         {print} '¡Genial! ¡Sobreviviste!'
                     ```
-                start_code: '{print} ''¡Escapa de la casa encantada!'''
+
             11:
                 story_text: "En este nivel hemos cambiado el comando `{for}` para que podamos decirle al jugador donde están. \n\n### Ejercicio 1\nCompleta el programa para que el jugador sepa en qué habitación están.\n\n### Ejercicio 2\nConvierte el programa en una aventura siguiendo estos pasos:\n\n\
                     1. Haz una lista de opciones (como: pelear o volar)\n2. Asegúrate que el jugador puede elegir una opción con `{ask}`\n3. ¿Es la respuesta correcta? Entonces pueden pasar al siguiente monstruo. ¿Dieron una respuesta incorrecta? Házselo saber con un `{print}`. \n\n**Extra** Si haces\
@@ -2252,7 +2236,7 @@ adventures:
                         {print} '¡Habitación ' i
                         monstruo = monstruos {at} {random}
                     ```
-                start_code: '{print} ''¡Escapa de la casa encantada!'''
+
             14:
                 story_text: |
                     ### Exercise
