@@ -27,7 +27,6 @@ adventures:
                     至少要使用一个`{ask}`和一个`{echo}`命令。
                     你可以把它写成任何你喜欢的主题。
                     如果你想不出来，可以使用我们的给你的选择：看电影、体育比赛或动物园的一天。
-                start_code: '{print} 你的故事从这里开始'
             2:
                 story_text: |
                     在第2关，你可以让你的故事更有趣些。你的主人公的名字可以放在句子里的任何位置了。
@@ -52,7 +51,6 @@ adventures:
                     把你代码中的`{ask}`命令和`{echo}`命令改成你在本关学到的正确形式。
 
                     **另外**在你的代码中添加一个`{sleep}`命令，在你的故事中建立起紧张感。
-                start_code: '{print} 你的故事'
             3:
                 story_text: |
                     在第3关，你可以让你的故事更有趣些。你可以随机选择怪物、动物或者其它障碍，比如：
@@ -86,7 +84,6 @@ adventures:
                     扔掉的 {is} {ask} 他应该扔掉哪个东西？
                     {remove} 扔掉的 {from} 包
                     ```
-                start_code: '{print} 你的故事'
             4:
                 story_text: "你可能注意到了，在之前的级别里还有个问题。你有没有试过打印含有“名字”这个词的句子？即：`{print}` 我的名字是名字。\n 在这一级里你可以解决这个问题。你必须给所有需要打印的东西加上引号。\n\n### 练习1\n复制示例代码并通过添加引号来使其正常工作。 \n\n ### 练习 2 \n返回到上一个级别并复制故事代码。通过在正确的位置添加引号，使代码在此级别中正常工作。 \n注意：你自己故事中的变量应该在引号之外。就像范例代码的第二行一样。在该行中，变量名称放在引号之外。\n"
                 example_code: "```\n名字 {is} {ask}_你的名字是什么? _\n{print}     _ 主人公的名字是_名字 \n {print} 名字     _正准备走进树林_\n{print} 名字 _有点害怕'\n动物们 {is} \U0001F994, \U0001F43F, \U0001F989, \U0001F987\n{print} _他听到了一个_ 动物们{at} {random} 的声音\n{print} 名字_担心这片森林闹鬼_\n```\n"
@@ -139,7 +136,6 @@ adventures:
                         {print} '哦，不！理查德太慢了……'
                         {print} _
                     ```
-                start_code: '# 在这里写你的代码'
             9:
                 story_text: "在这一级，你可以通过嵌套，在一个 `{if}`和`{repeat}` 语句里包含其它 `{if}`和`{repeat}`语句。\n 这让你有了很多选择，极大地提高了故事地互动性。\n\n### 练习1 \n完成代码，使`{if}` 能正常工作。 \n\n### 练习2 \n 为故事中罗宾也回家的部分添加一个`{if}` 和`{else}`语句 。 \n\n### 练习3 \n回到你第8级的故事中，在另一个`{if}` 条件语句里面至少使用两个`{if}`条件语句。\n"
                 example_code: |
@@ -157,11 +153,9 @@ adventures:
                     {else}
                         {print} '罗宾回了家'
                     ```
-                start_code: '# 在这里写你的代码'
             10:
                 story_text: "在这一级，你可以在你的故事里使用 {for} 命令。这样很容易就能写出儿童书里的“棕熊，棕熊，你看到了什么”的故事。\n\n ### 练习\n\n请看\n<a \nhref=\"https://www.yonkerspublicschools.org/cms/lib/NY01814060/Centricity/Domain/1621/Brown%20Bear%20Book.pdf\"> the story</a> 如果你不知道这个故事，请确保它是按照书中的内容打印的。\n"
                 example_code: "```\n动物们 = _ , _ , _ \n{print} '棕熊，棕熊 '\n{print} '你看到了什么？'\n```\n"
-                start_code: '# 在这里写你的代码'
             12:
                 story_text: 在此级别中，您可以使用引号将多个单词保存在一个变量中。
                 example_code: |
@@ -169,7 +163,6 @@ adventures:
                     名字 = '英国女王'
                     {print} 名字'正在吃一块蛋糕，突然......'
                     ```
-                start_code: '# 在这里写你的代码'
             13:
                 story_text: "通过使用`{and}`和`{or}`命令，你可以把故事写得更短。比如这个龙的故事。\n\n### 练习 \n你能像这样制作你自己的迷你冒险游戏吗？\n"
                 example_code: |
@@ -181,7 +174,6 @@ adventures:
                     {if} 路径 {is} “左” {and} 武器 {is} “剑”
                         _
                     ```
-                start_code: '# 在这里写你的代码'
             15:
                 story_text: |
                     运用`{while}`循环能让你的故事更有趣。比如，用`{while} game == 'on'`可以让游戏一直进行到结束为止。
@@ -204,7 +196,6 @@ adventures:
                             {print} '没有，他们不在'位置
                     {print} '现在你可以进入房子了！'
                     ```
-                start_code: '# 在这里写你的代码'
             18:
                 story_text: |
                     We are going to print another story, but now we have to use brackets with `{print}`.
@@ -225,7 +216,6 @@ adventures:
                     naam = {input}("你叫什么名字？")
                     {print}('欢迎来到这个故事！')
                     ```
-                start_code: '# 在此处键入代码'
     add_remove_command:
         name: '{add} {to} & {remove} {from}'
         default_save_name: 添加_删除_命令
@@ -265,8 +255,7 @@ adventures:
                     _
                     {print} You get a flavors {at} {random} milkshake
                     ```
-                start_code: |-
-                    动物们 {is} 狗, 猫, 袋鼠
+
                     喜欢 {is} {ask} 你最喜欢的动物是什么？
                     {add} 喜欢 {to_list} 动物们
                     不喜欢 {is} {ask} 你不喜欢什么动物?
@@ -289,11 +278,6 @@ adventures:
                     {if} 名字 {is} '海蒂' {and} 年龄 {is} 2
                         {print} '你就是真的海蒂!'
                     ```
-                start_code: |-
-                    名字 = {ask} '你叫什么名字?'
-                    年龄 = {ask} '你多少岁了?'
-                    {if} 名字 {is} '海蒂' {and} 年龄 {is} 2
-                        {print} '你就是真的海蒂!'
     ask_command:
         name: '{ask}'
         default_save_name: 要求命令
@@ -326,10 +310,6 @@ adventures:
                     _ 你好吗?
                     _
                     ```
-                start_code: |
-                    {print} 你好!
-                    {ask} 你叫什么名字?
-                    {echo} 你好
             2:
                 story_text: |
                     ## 询问指令
@@ -356,11 +336,6 @@ adventures:
                     favorite_animals {is} {ask} 你喜欢什么 动物?
                     {print} 我喜欢 favorite_animals
                     ```
-                start_code: |-
-                    名字 {is} {ask} 你叫什么名字?
-                    {print} 你好名字
-                    年龄 {is} {ask} 你多大了?
-                    {print} 名字是年龄.
             18:
                 story_text: The final change we will need to make to get Python code is changing `{ask}` into `{input}`.
                 example_code: |
@@ -397,7 +372,6 @@ adventures:
                     # 获胜者\n{if} points > 21 {or} dealer_points > points {or} dealer_points == 21:\n    {print} '你输了'\n{elif} dealer_points < 17:\n    {print} '庄家要牌.它是... ' dealer_card_3\n    {if} dealer_card_3 == 'Jack' {or} dealer_card_3 == 'Queen' {or} dealer_card_3 == 'King':\n        dealer_points\
                     \ = dealer_points + 10\n    {elif} dealer_card_3 == 'Ace':\n        {if} dealer_points < 11:\n            dealer_points = dealer_points + 11\n        {else}:\n            dealer_points = dealer_points + 1\n    {else}:\n        dealer_points = dealer_points + dealer_card_3\n    {print}\
                     \ '现在打印庄家有 ' dealer_points \n    {if} dealer_points < 21 {and} dealer_points > points:\n        {print} '你输了'\n    {else}:\n        {print} '你赢了!'\n{elif} points > dealer_points {and} points < 21:\n    {print} '你赢了!'\n```\n"
-                start_code: '# 在这里输入你的代码'
     calculator:
         name: 计算器
         default_save_name: 计算器
@@ -436,7 +410,6 @@ adventures:
                     {if} _
                     {else} _
                     ```
-                start_code: '{print} ''欢迎来到这个计算器!'''
             9:
                 story_text: |
                     在第 6 级中，您编写了一个计算器程序，在此级别中，您可以扩展该程序来提出多个问题。
@@ -461,7 +434,6 @@ adventures:
                             分数 = 分数 + 1
                     {print} '做得好！你的分数是' 分数 '分，满分是10分！'
                     ```
-                start_code: '{print} ''欢迎来到这个计算器!'''
             10:
                 story_text: |
                     这个计算器游戏帮助您练习你的乘法口诀表！ 
@@ -479,7 +451,6 @@ adventures:
                             {else}
                                 {print} '回答错误。正确答案是' 正确答案
                     ```
-                start_code: '# 在这里写你的代码'
             11:
                 story_text: |
                     使用 `{for}`你可以简化乘法运算表的程序。
@@ -495,10 +466,6 @@ adventures:
                     {for} i {in} {range} 1 {to} 10
                         {print} i * 数字
                     ```
-                start_code: |
-                    数字 = 10
-                    {for} i {in} {range} 1 {to} 10
-                        {print} i *数字
             12:
                 story_text: |
                     在本关，你可以编写一个可以计算小数的计算器。
@@ -517,7 +484,6 @@ adventures:
                     answer =_
                     {print} number1 ' 加 ' number2 ' 是 ' _
                     ```
-                start_code: '# 在这里写你的代码'
             13:
                 story_text: |
                     ### 练习1
@@ -534,7 +500,6 @@ adventures:
                     {if} _ _ _ _ _ _ _
                          {print} _
                     ```
-                start_code: '# 在这里写下你的代码'
             14:
                 story_text: |
                     In this adventure you will build a calculator that calculates your mean grade for you. If you get your calculator to work, you can move on to the next adventure, which allows you to add two extra features.
@@ -559,11 +524,7 @@ adventures:
                     mean_grade = {call} _
                     {print} 'Your mean grade is ' mean_grade
                     ```
-                start_code: |
-                    {define} calculate_mean_grade
-                        total = 0
-                        {for} i {in} {range} 1 {to} 4
-                            grade = {ask} _
+
                             total = total + _
                             return _ / 4
 
@@ -595,7 +556,6 @@ adventures:
                         _
                     {print} 'You win!'
                     ```
-                start_code: '# 在这里写你的代码'
     calculator_2:
         name: Calculator 2
         default_save_name: Calculator 2
@@ -644,17 +604,6 @@ adventures:
                     {clear}
                     {print} '惊喜!'
                     ```
-                start_code: |
-                    {print} '3'
-                    {sleep}
-                    {clear}
-                    {print} '2'
-                    {sleep}
-                    {clear}
-                    {print} '1'
-                    {sleep}
-                    {clear}
-                    {print} '惊喜!'
     debugging:
         name: 调试
         default_save_name: 调试
@@ -677,8 +626,7 @@ adventures:
                     {print} 你的爱好是什么？
                     {echo} 你的爱好是
                     ```
-                start_code: |
-                    {print} 我喜欢编程
+
                     你也喜欢编程吗？
                     {echo}
                     {print} 你的爱好是什么？
@@ -821,19 +769,7 @@ adventures:
                     total = price + amount_of_product
                     {print} 'That will be $' price 'please'
                     ```
-                start_code: |
-                    {print} 'Vending machine'
-                    chosen_product = {ask} 'Please select a product'
-                    1_dollar_products = coke orange juice water
-                    2_dollar_products = chocolate, cookie, museli bar
-                    3dollar_prodcuts = potato chips, beef jerky, banana bread
-                    {if} chosen {is} {in} 1_dollar_products
-                    price = 1
-                    {if} chosen_product {is} 2_dollar_products
-                    price = 2
-                    {else} chosen_product {in} 3_dollar_products
-                    price = 3
-                    amount_of_products = '{ask} How many of ' chosen_product would you like to have?'
+
                     total = price + amount_of_product
                     {print} 'That will be $' price 'please'
             7:
@@ -919,8 +855,7 @@ adventures:
                     price =amount*6
                     {print} '这将是'价格美元''
                     ````
-                start_code: |
-                    {print} '欢迎来到我们的三明治店'
+
                     amount “您想买多少个三明治？”
                     {repeat}amount{times}
                     {ask} {is} {ask} '您想要什么类型的三明治或面包？'
@@ -990,8 +925,7 @@ adventures:
                     for i in 1 range 1 to days
                          print month i
                     ````
-                start_code: |
-                    print '海蒂日历'
+
                     months_with_31_days = 一月、三月、五月、七月、九月、十月、十二月
                     months_with_30_days = 四月、六月、八月、十一月
                     months = 问“您想查看哪个月份？”
@@ -1038,27 +972,6 @@ adventures:
                     for i in range 0 to people
                         call greet_costumer
                     ```
-                start_code: |
-                    define greet
-                    greetings = '你好', '嗨', '晚上好'
-                        print greetings at random
-
-                    define take_order
-                        food = ask '你想吃什么?'
-                        print '哪种食物'
-                        drink = '你想喝什么?'
-                        print '哪种 ' drink
-                        more = ask '你还想要点别的吗?'
-                            if more is '不'
-                        print '好吧'
-                            else
-                            print '还有 ' more
-                    print '多谢'
-
-                    print '欢迎来到我们的餐厅'
-                    people = ask '今晚你们聚会中有多少人?'
-                    for i in range 0 to people
-                        call greet_costumer
             13:
                 story_text: |-
                     ### 练习
@@ -1091,8 +1004,7 @@ adventures:
                     else
                     print “没问题！”
                     ```
-                start_code: |
-                    defin movie_recommendation with name
+
                          action_movies ==“虎胆龙威”、“速度与激情”、“无耻混蛋”
                          romance_movies =“真爱至上”、“恋恋笔记本”、“泰坦尼克号”
                          comedy_movies = '憨豆先生' '芭比' '死侍'
@@ -1145,9 +1057,7 @@ adventures:
                     else
                         '没问题'
                     ```
-                start_code: |
-                    define calculate_heartbeat
-                        print '将指尖轻轻按在脖子一侧'
+
                         print '(就在你的下巴线下方)'
                         print '记录 15 秒内你感觉到的节拍数'
                         beats == ask '15 秒内您感觉有多少节拍?'
@@ -1384,14 +1294,12 @@ adventures:
 
                     这在第 2 级中发生了变化。在第 2 级中，您将学习如何使用变量，它允许您保存多条信息并将其打印在您想要的任何位置。
                     那么让我们转到下一个选项卡！
-                start_code: '{print} 你好世界!'
             3:
                 story_text: |
                     在上一关中，您已经了解了变量是什么以及如何使用它来使您的冒险更具互动性。
                     但是...这并不是您可以使用变量做的唯一事情！ 您还可以使用变量来创建列表。
                     您甚至可以让 Hedy 从列表中随机选择一个单词，这样您就可以制作真正的游戏！
                     快速浏览下一个选项卡！
-                start_code: '{print} 你好世界!'
             4:
                 story_text: |
                     在前面的级别中，您一直在练习变量，但您可能遇到过这个问题。
@@ -1411,9 +1319,6 @@ adventures:
                     名字{is}苏菲
                     {print} 我的名字是名字
                     ````
-                start_code: |
-                    名字{is}苏菲
-                    {print} 我的名字是名字
             5:
                 story_text: |
                     在前面的级别中，您已经学会了使用`{at} {random}`，这使得您每次运行代码时的游戏都不同。
@@ -1425,9 +1330,6 @@ adventures:
                     ````
                     密码 {is} {ask} '正确的密码是什么？'
                     ````
-                start_code: |-
-                    名字 {is} {ask} '你的名字是什么?'
-                    {if} 名字 {is} 海蒂 {print} '酷!' {else} {print} '呵呵'
             6:
                 story_text: |
                     在上一级别中，您已经练习了`{ask}`和`{if}`。 例如，您可以询问客人想吃什么。
@@ -1478,7 +1380,6 @@ adventures:
                     ````
                     {repeat} 5 {times} {print} '在下一个选项卡中，您可以一次重复多行代码！'
                     ````
-                start_code: '{print} ''让我们转到下一个选项卡！'''
             9:
                 story_text: |
                     做得好！ 您已达到另一个新水平！ 在上一级别中，您学习了如何在 {if} 或 {repeat} 命令中使用多行代码。 但你还不能将两者结合起来......
@@ -1514,20 +1415,14 @@ adventures:
                 story_text: |
                     你已经达到11级了，你做得很好！ 在更高级别中, 海蒂 越来越专注于教您编程语言 Python。
                     Python 中没有`{repeat}`命令，但有一个类似于 {repeat} 的命令。 您是否想知道如何用 Python 语言表达`{repeat}`？ 赶紧去了解一下吧！
-                start_code: '{print} ''让我们转到下一个选项卡！'''
             12:
                 story_text: |
                     也许您在餐厅冒险中尝试过使用十进制数字。 如果你这样做了，你可能会注意到海蒂还不明白它们并且总是四舍五入。
                     从这个级别开始，您可以使用十进制数字。
                 example_code: |
                     ```
-                    burger=5
-                    drink=2
-                    total = burger + drink
-                    print '您点了一份汉堡和一杯饮料'
-                    print '总共花费'total'美元'
+                    {print} 2.5 + 2.5
                     ```
-                start_code: '{print} ''让我们转到下一个选项卡！'''
             13:
                 story_text: |
                     在前面的级别中，您学习了如何将两个`{if}`命令彼此放在一起。 这工作得很好，但它确实会给你带来非常长且不方便的代码，如下所示：
@@ -1547,7 +1442,11 @@ adventures:
                     {else}
                          {print} '访问被拒绝！'
                     ```
-                start_code: '{print} ''让我们转到下一个选项卡！'''
+                    ```
+                    年龄 = {ask} '你的年龄是多少？ '
+                    {if} 名字 {is} '海蒂' {and} 年龄 {is} 2
+                        {print} '你才是真正的海蒂！'
+                    ```
             14:
                 story_text: |
                     使用以下程序，您可以计算出您在学校的主题（因此，六个或更高的等级）。
@@ -1583,7 +1482,6 @@ adventures:
                              {if} answer == '是'
                                  {print} '好的，我们继续'
                     ```
-                start_code: '{print} ''让我们转到下一个选项卡！'''
             16:
                 story_text: |
                     在这个级别中，我们将更加接近真正的 Python 代码。 您还将学习如何将两个列表匹配在一起。
@@ -1612,7 +1510,6 @@ adventures:
                 story_text: |
                     恭喜！ 您已到达 Hedy 的最后一关！ 您在此处创建的代码可以复制到真实的 Python 环境（例如 replit 或 PyCharm），并且您可以在那里继续学习！
                     但请注意，Python 只能读取英文命令，因此如果您一直在使用其他语言，则现在需要切换到英文。
-                start_code: '{print}（''干得好！！！''）'
     dice:
         name: 骰子
         default_save_name: 骰子
@@ -1707,7 +1604,6 @@ adventures:
                         {print} 玩家 '投出了' 选项 {at} {random}
                         {sleep}
                     ```
-                start_code: '# 在这里写你的代码'
             15:
                 story_text: |
                     ### Exercise
@@ -1732,7 +1628,6 @@ adventures:
                     _
                     {print} 'Yes! You have thrown 6 in ' tries ' tries.'
                     ```
-                start_code: '# 在这里写你的代码'
     dishes:
         name: 洗碗？
         default_save_name: 洗碗
@@ -1842,11 +1737,6 @@ adventures:
                     {for} 日期 {in} 日期们
                         {print} 名字们 {at} {random} '负责在' 日期 '洗碗'
                     ```
-                start_code: |
-                    days=周一、周二、周三、周四、周五、周六、周日
-                    names=妈妈、爸爸、艾玛、苏菲
-                    {for} day {in} days
-                         {print} names {at} {random} ' 在 ' day '洗碗'
     elif_command:
         name: '{elif}'
         default_save_name: elif
@@ -1894,10 +1784,6 @@ adventures:
                     {for} animal {in} animals
                         {print} 'I love ' animal
                     ```
-                start_code: |-
-                    animals = dog, cat, blobfish
-                    {for} animal {in} animals
-                        {print} 'I love ' animal
             11:
                 story_text: |-
                     在本关中，我们增加了一种新的`{for}`形式。在前面的关卡中，我们将`{for}`用于列表，我们也可以将`{for}`用于数字。
@@ -1910,10 +1796,6 @@ adventures:
                         {print} counter
                     {print} 'Ready or not. Here I come!'
                     ```
-                start_code: |-
-                    {for} counter {in} {range} 1 {to} 10
-                        {print} counter
-                    {print} 'Ready or not. Here I come!'
             17:
                 story_text: |
                     Now we are going to change indentation a little bit. Every time that we need an indentation, we need `:` at the line before the indentation.
@@ -1952,7 +1834,6 @@ adventures:
                     ### 练习
                     将示例代码复制到你的输入屏幕上，并填入空白处，使代码生效。
                     **另外**改变代码，让魔法师不仅能算出你的名字，还能算出你的年龄、你最喜欢的运动队或其他关于你的事情。
-                start_code: '# 在这里写下你的代码'
             3:
                 story_text: |
                     在上一级，你创造了你的第一台算命机器，但海蒂不会算任何东西，只会“{echo}”。
@@ -1970,7 +1851,6 @@ adventures:
                 story_text_2: |
                     ### 练习
                     现在，海蒂 只能回答是、否或也许。 你能给 Hedy 更多的答案选项吗，比如“肯定”或“再问一次”。
-                start_code: '# 在这里写你的代码'
             4:
                 story_text: |
                     此级别没有新功能，但允许您练习使用引号。
@@ -1995,7 +1875,6 @@ adventures:
                     {sleep} 2
                     {print} 答案 {at} {random}
                     ```
-                start_code: '# 在这里写下你的代码'
             5:
                 story_text: |
                     ### 练习
@@ -2019,7 +1898,6 @@ adventures:
                     {if} person {in} friends {print} good_answer {at} {random}
                     {else} {print} bad_answer {at} {random}
                     ```
-                start_code: '# 在这里写下你的代码'
             6:
                 story_text: |
                     在本级中，作为一个算命仙你可以用数学帮你算命。这使你可以编造（傻傻的）公式来算命。
@@ -2042,7 +1920,6 @@ adventures:
                     {sleep}
                     {print} kids ' kids!'
                     ```
-                start_code: '# 在这里写下你的代码'
             7:
                 story_text: |
                     ### 练习
@@ -2055,7 +1932,6 @@ adventures:
                     回答=是，否，有可能
                     {repeat} 3 {times} {print} '我掐指一算...' 回答 {at} {random}
                     ```
-                start_code: '# 在这里写下你的代码'
             8:
                 story_text: |
                     在前几级中，你已经学会了如何使用一行`{repeat}`命令 ，让算命仙连续回答3个问题，但我们在打印问题时遇到了问题。
@@ -2075,7 +1951,6 @@ adventures:
                        {sleep}
                        {print} '我掐指一算...' 答案 {at} {random}
                     ```
-                start_code: '# 在这里写下你的代码'
             10:
                 story_text: |
                     在此级中，你将学习如何为MASH（豪宅、公寓、棚屋、别墅）游戏编程。在这个游戏中，你可以一次为所有玩家预测他们的未来的住宅是什么样子的。
@@ -2094,7 +1969,6 @@ adventures:
                         {print} 名字 ' 将得到一个 ' 宠物 {at} {random} ' 作为他们的宠物。'
                         {sleep}
                     ```
-                start_code: '# 在这里写下你的代码'
             12:
                 story_text: |
                     在这个关卡中，你可以用多个字来算命。你可以将不同的命运加入列表中吗？
@@ -2106,7 +1980,6 @@ adventures:
                     {sleep}
                     {print} 命运 {at} {random}
                     ```
-                start_code: '# 在这里写下你的代码'
     functions:
         name: functions
         default_save_name: functions
@@ -2146,21 +2019,6 @@ adventures:
                         {call} turn
                         {sleep} 2
                     ```
-                start_code: |
-                    sides = 'left', 'right'
-                    limbs = 'hand', 'foot'
-                    colors = 'red', 'blue', 'green', 'yellow'
-
-                    {define} turn
-                        chosen_side = sides {at} {random}
-                        chosen_limb = limbs _
-                        chosen_color = colors _
-                        {print} chosen_side ' ' chosen_limb ' on ' chosen_color
-
-                    {print} 'Lets play a game of Twister!'
-                    {for} i {in} {range} 1 to _
-                        {call} turn
-                        {sleep} 2
             13:
                 story_text: |
                     Now that you've learned how to use functions, you'll learn how to use a function with an argument.
@@ -2189,13 +2047,6 @@ adventures:
                     {call} song {with} 'sea'
                     {call} song {with} 'ocean'
                     ```
-                start_code: |
-                    {define} song {with} place
-                        {print} 'My Bonnie is over the ' place
-
-                    {call} song {with} 'ocean'
-                    {call} song {with} 'sea'
-                    {call} song {with} 'ocean'
             14:
                 story_text: |
                     In the previous levels you have learned to create functions and use arguments with them. Another great use of a function is to let it calculate something for you.
@@ -2219,17 +2070,6 @@ adventures:
                     new_price = _ calculate_new_price {with} old_price, _
                     {print} 'The new price is ' new_price ' dollar'
                     ```
-                start_code: |
-                    {define} calculate_new_price {with} amount, percentage
-                        percentage = percentage / 100
-                        discount_amount = amount * percentage
-                        return amount - discount_amount
-
-                    old_price = {ask} 'How much is on the price tag?'
-                    discount = {ask} 'What percentage is the discount?'
-
-                    new_price = _ calculate_new_price {with} old_price, _
-                    {print} 'The new price is ' new_price ' dollar'
     guess_my_number:
         name: Guess my number
         default_save_name: guess my number
@@ -2258,7 +2098,6 @@ adventures:
                                 {print} 'You win!'
                                 game = 'over'
                     ```
-                start_code: '# place your code here'
     harry_potter:
         name: 哈利·波特
         default_save_name: 哈利·波特
@@ -2280,7 +2119,6 @@ adventures:
                     _ {print} name ' is great at ' subjects {at} {random}
                     _ {print} name 's greatest fear is ' fears {at} {random}
                     ```
-                start_code: '# place your code here'
     haunted:
         name: 鬼屋
         default_save_name: 鬼屋
@@ -2359,7 +2197,6 @@ adventures:
                     {sleep}
                     _ _ _ _
                     ```
-                start_code: '# 将你的代码写在这里'
             4:
                 story_text: |
                     ##鬼屋
@@ -2377,7 +2214,6 @@ adventures:
                     {sleep}
                     {print} 怪物们{at} {random}
                      ```
-                start_code: '# 将你的代码写在这里'
             5:
                 story_text: |
                     在这一关之前，鬼屋游戏总是要求玩家选择一扇门，但你可能已经注意到了，他们并不是真的要正确回答。
@@ -2399,7 +2235,6 @@ adventures:
                     _ _ _ _ {print} ‘干得漂亮！你成功逃出去了！’
                     {else} {print} ‘哦 不！你要被一个...'怪物 {at} {random}'吃掉了
                     ```
-                start_code: '# 将你的代码写在这里'
             9:
                 story_text: |
                     在这一关中，你可以使用嵌套，这可以让你的鬼屋变得更有互动性!
@@ -2483,7 +2318,6 @@ adventures:
                         {else}
                             {print} 'GAME OVER'
                     ```
-                start_code: '# place your code here'
             16:
                 story_text: |
                     ### Exercise
@@ -2517,7 +2351,6 @@ adventures:
                         {print} _
                         {print} 'GAME OVER'
                     ```
-                start_code: '# place your code here'
     hotel:
         name: hotel
         default_save_name: hotel
@@ -2548,18 +2381,7 @@ adventures:
 
                     {call} welcome_message {with} title, name, homecountry, 105
                     ```
-                start_code: |
-                    {define} welcome_message {with} title, last_name, country, room_number
-                        {print} 'Welcome to Hotel Hedy, ' title ' ' last_name
-                        nice_trip {is} {ask} 'Did you have a nice trip from, ' country '?'
-                        {if} nice_trip {is} 'yes'
-                            {print} 'Lovely!'
-                        {else}
-                            {print} 'Sorry to hear that.'
-                            {print} 'Hopefully you can take a nice rest in you room.'
-                        {print} 'Your room number is ' room_number
 
-                    {print} 'Hello. Please fill in your information to check in.'
                     title = {ask} 'What is your title (mr, mrs, ms, dr, etc.)?'
                     name = {ask} 'What is you last name?'
                     homecountry = {ask} 'What country do you come from?'
@@ -2598,10 +2420,6 @@ adventures:
                     _ _ _ 4 _ 'Great job!'
                     _ _ 'No 2 + 2 = 4'
                     ```
-                start_code: |-
-                    name {is} {ask} 'what is your name?'
-                    {if} name {is} Hedy {print} 'nice'
-                    {else} {print} 'boo!'
             8:
                 story_text: |
                     ## If... Else...
@@ -2618,11 +2436,6 @@ adventures:
                         {print} 'Welcome Hedy'
                         {print} 'You can play on your computer!'
                     ```
-                start_code: |
-                    name = {ask} 'What is your name?'
-                    {if} name {is} Hedy
-                        {print} 'Welcome Hedy'
-                        {print} 'You can play on your computer!'
             9:
                 story_text: |
                     In this level you can also put an {if} command inside another {if} command.
@@ -2638,16 +2451,6 @@ adventures:
                     {else}
                         {print} 'You do not want to continue'
                     ```
-                start_code: |
-                    continue = ask 'Do you want to continue?'
-                    if continue = yes
-                        sure = ask 'Are you sure?'
-                        if sure is yes
-                            print 'We will continue'
-                        else
-                            print 'You are not sure'
-                    else
-                        print 'You do not want to continue'
     in_command:
         name: '{in}'
         default_save_name: in_command
@@ -2676,11 +2479,6 @@ adventures:
                     _ answer _ animals _ 'Mine too!'
                     _ _ 'My favorite animals are dogs, cows and sheep'
                     ```
-                start_code: |-
-                    pretty_colors {is} green, yellow
-                    favorite_color {is} {ask} 'What is your favorite color?'
-                    {if} favorite_color {in} pretty_colors {print} 'pretty!'
-                    {else} {print} 'meh'
     is_command:
         name: '{is}'
         default_save_name: is_command
@@ -2706,10 +2504,6 @@ adventures:
                     favorite_animals is _
                     {print} I like favorite_animals
                     ```
-                start_code: |-
-                    name {is} Hedy
-                    age {is} 15
-                    {print} name is age years old
             6:
                 story_text: |
                     We also make a change in storing a word in a variable! You may now use `=` instead of  `{is}` when we store a name or a number in a variable, like this:
@@ -2718,8 +2512,7 @@ adventures:
                     name = Hedy
                     answer = 20 + 4
                     ```
-                start_code: |
-                    name = Hedy
+
                     answer = 20 + 4
             14:
                 story_text: |
@@ -2751,8 +2544,7 @@ adventures:
                     {if} name != 'Hedy'
                         {print} 'You are not Hedy'
                     ```
-                start_code: |-
-                    age = {ask} 'How old are you?'
+
                     {if} age < 13
                         {print} 'You are younger than me!'
                     {else}
@@ -2775,7 +2567,6 @@ adventures:
                     {if} frog {is} grenouille {print} 'Super!'
                     {else} {print} 'No, frog is grenouille'
                     ```
-                start_code: '# 在这里写下你的代码'
             16:
                 story_text: |
                     ### Exercise
@@ -2796,7 +2587,6 @@ adventures:
                             {print} 'Wrong, ' french_words[i] ' means ' translation[i]
                     {print} 'You gave ' score ' correct answers.'
                     ```
-                start_code: '# 在这里写下你的代码'
     maths:
         name: maths
         default_save_name: maths
@@ -2836,8 +2626,7 @@ adventures:
                     b = 'world!'
                     {print} a + b
                     ```
-                start_code: |-
-                    {print} 'decimal numbers now need to use a dot'
+
                     {print} 2.5 + 2.5
     parrot:
         name: 鹦鹉
@@ -2865,8 +2654,7 @@ adventures:
                     {ask} _
                     {echo}
                     {echo}
-                start_code: |
-                    {print}我是鹦鹉海蒂
+
                     {ask}你的名字是什么？
                     {echo}
                     {echo}
@@ -2898,7 +2686,6 @@ adventures:
                     {print} 🧒 新词，说 新词！
                     {print} 🦜 词汇表 {at} {random}
                     ```
-                start_code: '# 在这里写你的代码'
             4:
                 story_text: "在这一级中，我们必须在`{ask}` 和`{print}` 的命令中使用引号。\n### 练习 \n在空白处填上引号，完成代码。\n"
                 example_code: |
@@ -2910,7 +2697,6 @@ adventures:
                     {print} _ 🧒 Say _ 新词 _, 海蒂 _
                     {print} _ 🦜 _ 词汇表 {at} {random}
                     ```
-                start_code: '# 在这里写下你的代码'
             5:
                 story_text: |
                     如果你的鹦鹉说出了正确的词，给它一些奖励！
@@ -2927,7 +2713,6 @@ adventures:
                     _说了的词 {is} 新词 _ '🧒 干得好！海蒂！🍪'
                     _ _'🧒 不对，海蒂！说' 新词
                     ```
-                start_code: '# 在这里写你的代码'
     piggybank:
         name: 小猪银行
         default_save_name: 小猪银行
@@ -2948,7 +2733,6 @@ adventures:
                     周数 = 需要_再存/ 零花钱
                     {print} '你可以在'周数'周内买一个'愿望'。'
                     ```
-                start_code: '# 将你的代码写在这里'
             14:
                 story_text: |
                     ### Exercise
@@ -2972,7 +2756,6 @@ adventures:
 
                     {call} calculate_budget with _, _, _
                     ```
-                start_code: '# place your code here'
     pressit:
         name: 按键
         default_save_name: 按下
@@ -3001,7 +2784,6 @@ adventures:
                     {if} y {is} {pressed} {forward} 15
                     {else} {turn} 90
                     ```
-                start_code: '# 在此处键入代码'
             7:
                 story_text: |
                     现在你已经了解了`{repeat}` ，我们可以多次按下按键!你可以用它来使海龟向前走和转弯。
@@ -3012,11 +2794,9 @@ adventures:
                     ```
                     {if} x {is} {pressed} {forward} 15 {else} {turn} 90
                     ```
-                start_code: '# 把你的代码放在这里'
             9:
                 story_text: "现在你知道了如何组合不同的语句，你可以用`{pressed}`创建一个触摸式工具。 \n\n### 练习\n完成这段代码。每一次都随机选择一个字母，你必须按下对应的按键。按对了可以得一分，按错了扣两分。\n"
                 example_code: "```\n积分们 = 0\n字母们 = a, b, c, d, e\n{repeat} 10{times}\n    字母 = _ _ _ \n    {print} '按下字母' 字母\n    {if} 字母{is} {pressed}\n    _\n    _\n    _\n```\n"
-                start_code: '# 把你的代码放在这里'
     print_command:
         name: '{print}'
         default_save_name: print
@@ -3042,8 +2822,6 @@ adventures:
                     ```
                     _ Hello!
                     ```
-                start_code: |
-                    {print} Welcome to Hedy!
             18:
                 story_text: |-
                     We arrived at real Python code! That means we need to use parentheses with `{print}` and `{range}` from now on.
@@ -3060,8 +2838,7 @@ adventures:
                     temperature = 25
                     {print}('It is ', temperature, ' degrees outside')
                     ```
-                start_code: |-
-                    name = 'Hedy'
+
                     {print}('My name is ', name)
     quizmaster:
         name: 测验人员
@@ -3093,7 +2870,6 @@ adventures:
                     {if} points_b > points_a
                         {print} 'You belong to the B club'
                     ```
-                start_code: '# 在这里写下你的代码'
     quotation_marks:
         name: '''quotation marks'''
         default_save_name: quotation_marks
@@ -3123,10 +2899,6 @@ adventures:
                     {print} 'I'm babysitting my sister's kids'
                     {print} 'What's more fun than that?'
                     ```
-                start_code: |-
-                    {print} 'You need to use quotation marks from now on!'
-                    answer {is} {ask} 'What do we need to use from now on?'
-                    {print} 'We need to use ' answer
             12:
                 story_text: |
                     **All texts need to be in quotation marks**
@@ -3161,10 +2933,6 @@ adventures:
                     score = 25
                     {print} 'You got ' score
                     ```
-                start_code: |-
-                    name = {ask} 'What is your name?'
-                    {if} name = 'Hedy the Robot'
-                        {print} 'Hi there!'
     random_command:
         name: '{random}'
         default_save_name: random_command
@@ -3198,9 +2966,6 @@ adventures:
                     prices {is} _
                     _
                     ```
-                start_code: |
-                    animals {is} dog, cat, kangaroo
-                    {print} animals {at} {random}
             16:
                 story_text: |-
                     We are going to make lists the Python way, with square brackets around the lists! We also keep the quotation marks around each item like we have learned in previous levels.
@@ -3249,11 +3014,6 @@ adventures:
                     ```
                     {repeat} 3 {times} {print} 'Hedy is fun!'
                     ```
-                start_code: |
-                    {print} 'happy birthday to you'
-                    {print} 'happy birthday to you'
-                    {print} 'happy birthday dear Hedy'
-                    {print} 'happy birthday to you'
             8:
                 story_text: |
                     ### Repeat commands and indentation
@@ -3267,10 +3027,6 @@ adventures:
                         {print} 'Hello everyone'
                         {print} 'This is all repeated 5 times'
                     ```
-                start_code: |-
-                    {repeat} 5 {times}
-                        {print} 'Hello everyone'
-                        {print} 'This will be printed 5 times'
             9:
                 story_text: |
                     In this level you can not only use multiple lines with `{if}` and `{repeat}`, but you can also put them together!
@@ -3285,13 +3041,6 @@ adventures:
                         {else}
                             {print} 'pizza is better'
                     ```
-                start_code: |-
-                    {repeat} 3 {times}
-                        food = {ask} 'What do you want?'
-                        {if} food {is} pizza
-                            {print} 'nice!'
-                        {else}
-                            {print} 'pizza is better'
     repeat_command_2:
         name: '{repeat} 2'
         default_save_name: repeat_command_2
@@ -3317,10 +3066,6 @@ adventures:
                     age = {ask} 'How old are you now?'
                     {repeat} age {times} {print} 'Hip Hip Hurray!'
                     ```
-                start_code: |-
-                    {repeat} 2 {times} answer = {ask} 'Did you know you could ask a question multiple times?'
-                    {if} answer {is} yes {repeat} 2 {times} {print} 'You knew that already!'
-                    {else} {repeat} 3 {times} {print} 'You have learned something new!'
             8:
                 story_text: |
                     ### In the block or not?
@@ -3338,11 +3083,6 @@ adventures:
                     _ {print} 'The muffin man'
                     _ {print} 'Do you know the muffin man, who lives on Drury Lane?'
                     ```
-                start_code: |-
-                    {repeat} 3 {times}
-                        {print} 'This line will be repeated...'
-                        {print} 'This one too...'
-                    {print} 'but this one will not!'
     restaurant:
         name: 餐厅
         default_save_name: 餐厅
@@ -3366,7 +3106,6 @@ adventures:
                     然后在餐厅程序中至少再添加 4 行代码。
                     询问顾客他们想喝什么，并询问他们是否愿意用现金或信用卡支付。
                     最后，想出一个与顾客说再见的好方法。
-                start_code: '# 在这里写你的代码'
             2:
                 story_text: |
                     在第 2 关你可以使用变量来扩展你的餐厅。在第 1 关 海蒂只能 {echo} 订单一次，并记住最后一个点的东西。
@@ -3391,7 +3130,6 @@ adventures:
                     现在让你的顾客添加食物和饮料的订单概要。
 
                     **另外** 现在你已经学会了如何使用变量，你可以根据需要在一行中使用任意数量的变量。你能在你的代码中添加更多变量，比如堂食或外卖，现金或银行卡支付，要或不要吸管等？
-                start_code: '# 将代码写在这里'
             3:
                 story_text: |
                     在选择晚饭吃什么时选择困难了吗？你可以让海蒂帮你选！
@@ -3415,7 +3153,6 @@ adventures:
                     价格 {is} _
                     _
                     ```
-                start_code: '# 在这里写你的代码'
             4:
                 story_text: |
                     在此级别中，使用 `{print}` 或 `{ask}` 命令时必须使用引号。
@@ -3435,7 +3172,6 @@ adventures:
                     {print} '谢谢您的点单。'
                     {print} '您的' 食物 '和' 饮料 '马上就来！'
                     ```
-                start_code: '# 在这里写你的代码'
             5:
                 story_text: |
                     在这一级，你可以用`{if}`命令向顾客`{ask}`，并对其回答做出不同的回应。
@@ -3457,7 +3193,6 @@ adventures:
                     {if} 别的 {is} 不用 {print} '就是这些' {else} {print} '一份' 别的
                     {print} '谢谢您的点单。祝您用餐愉快！'
                     ```
-                start_code: '# 在这里写你的代码'
             6:
                 story_text: |
                     在这一关，你可以用数学计算客人的订单总价，这会让你的虚拟餐厅更真实。
@@ -3476,7 +3211,6 @@ adventures:
                     {print} '请付' 价格 '元'
                     {print} '谢谢，祝您用餐愉快！'
                     ```
-                start_code: '# 在这里写你的代码'
             7:
                 story_text: |
                     在本关中，你已经学会了如何使用`{repeat}`命令来重复一行代码一定的次数。
@@ -3490,7 +3224,6 @@ adventures:
                     {print} '欢迎来到海蒂餐厅！'
                     人数 = {ask} '今天来了多少人？'
                     ```
-                start_code: '# 在这里写你的代码'
             8:
                 story_text: |
                     在这一关，你可以通过重复多行代码，让你的虚拟餐厅更加细化。像这样：
@@ -3509,7 +3242,6 @@ adventures:
                     ### 练习
                     这个代码可以用菜单上的更多项目来扩展，例如，提供饮料，和、或多道菜或甜点。至少增加一个项目。
                     **(另外)** 添加更多的项目，只要你喜欢，有多少选择都可以!
-                start_code: '# 在这里写你的代码'
             9:
                 story_text: "在这一级，你可以用嵌套让你的餐厅更真实更有趣！\n\n### 练习 \n范例代码中删除了缩进。 \n你能算出每行需要多少缩进才能使代码正常工作吗？ \n如果顾客点了披萨，海蒂不应该问顾客想要哪种蘸酱。 \n\n**（另外）** 餐厅不会准备所有的蘸酱。列出一个可用的蘸酱的清单，并在每个订单中回复是否有存货。 <br> \n**（另外）** 披萨有配料。询问顾客他们想要哪一种配料。<br>   \n**（另外）** 顾客想喝一杯饮料吗？也问问他们！ <br>                    \n"
                 example_code: |
@@ -3534,7 +3266,6 @@ adventures:
                     {print} '一共' 价格 '元'
                     {print} '祝您用餐愉快！'
                     ```
-                start_code: '# 在这里写你的代码'
             10:
                 story_text: |
                     在本级别中，你将学习如何轻松地询问不同课程的订单。
@@ -3573,7 +3304,6 @@ adventures:
                     {print} '所以你想为'人数'人下单。'
                     {print} '我们走吧！'
                     ```
-                start_code: '# 在这里写你的代码'
             12:
                 story_text: |
                     从这一层开始，你可以使用小数点后的数字来使你的菜单更加真实。
@@ -3595,11 +3325,9 @@ adventures:
                         价格 = 价格 + 2.35
                     {print} '请付' 价格 '元'
                     ```
-                start_code: '# 在这里写你的代码'
             13:
                 story_text: "在这一级，我们可以用新的命令来升级我们的餐厅。\n我们用`{and}`来判断 {if} 命令中的两个条件是否同时成立。\n \n ### 练习 \n在右边的空白处填写`{and}`和`{or}` 。\n"
                 example_code: "```\n价格 = 10\n食物 = {ask} '您想吃什么？'\n饮料们 = {ask} '您想喝什么？'\n{if}食物 {is} '三明治'_ 饮料们 {is} '果汁'\n          {print} '这是我们的优惠套餐'\n          价格 = 价格 - 3\n{if}饮料们{is} '果汁' _饮料们{is} '矿泉水'。 \n          {print} '你的选择真健康！\n {print} '一共' 价格 '元'\n```\n"
-                start_code: '# 在这里写你的代码'
             15:
                 story_text: |
                     通过`{while}`命令，你可以确保你的客人能不断追加点单，直到点完。
@@ -3615,7 +3343,6 @@ adventures:
                         还有 = {ask} '您还要点别的吗？'
                     {print} '谢谢惠顾！'
                     ```
-                start_code: '# 在这里写你的代码'
     rock:
         name: 石头剪刀布
         default_save_name: 石头
@@ -3653,7 +3380,6 @@ adventures:
                     _ {is} {ask} 石头、剪刀还是布？
                     {print}我选择 _
                     ```
-                start_code: '# 在这里写你的代码'
             3:
                 story_text: |
                     在这一级，我们可以输入列表并从列表中选择。
@@ -3726,7 +3452,6 @@ adventures:
                             {print} '你输了！'
                     # 完成这段代码
                     ```
-                start_code: '# 在这里写你的代码'
             10:
                 story_text: |
                     你觉得自己太懒了，不想自己玩游戏？让海蒂帮你玩吧!
@@ -3746,7 +3471,6 @@ adventures:
                     {for} 玩家 {in} 玩家们
                          {print} 玩家 '选择' 选项 {at} {random}
                     ```
-                start_code: '# 在这里写你的代码'
             13:
                 story_text: |
                     你可以用`{and}`命令缩短你的石头剪刀布代码！阅读下面的示例代码，并尝试完成它。
@@ -3765,7 +3489,6 @@ adventures:
                         {print} '电脑赢了！'
                     _
                     ```
-                start_code: '# 在这里写你的代码'
             15:
                 story_text: |
                     玩到你打败电脑为止！但首先，你要补全示例代码……
@@ -3787,7 +3510,6 @@ adventures:
                             赢 = '是'
                     _
                     ```
-                start_code: '# 在这里写你的代码'
     rock_2:
         name: Rock, paper, scissors 2
         default_save_name: rock_2
@@ -3804,7 +3526,6 @@ adventures:
                     choice is _
                     {print} I choose choice
                     ```
-                start_code: '# place your code here'
     secret:
         name: 超级间谍
         default_save_name: 超级间谍
@@ -3831,7 +3552,6 @@ adventures:
                         b = '今天10.00'
                     {print} a + b
                     ```
-                start_code: '# 在这里写下你的代码'
             13:
                 story_text: |
                     你能在空白处填上正确的命令吗？注意：超级间谍必须同时回答正确两个问题，然后才能获取机密情报!
@@ -3844,7 +3564,6 @@ adventures:
                     {else}
                         {print} '10.00去火车站'
                     ```
-                start_code: '# place your code here'
     sleep_command:
         name: '{sleep}'
         default_save_name: sleep_command
@@ -3860,10 +3579,6 @@ adventures:
                     {sleep} 2
                     {print} green!
                     ```
-                start_code: |-
-                    {print} My favorite colour is...
-                    {sleep} 2
-                    {print} green!
     songs:
         name: 唱支歌！
         default_save_name: 歌
@@ -3902,7 +3617,6 @@ adventures:
                     {repeat} _ _{print} '小鲨鱼图图图杜杜'
                     {print} '小鲨鱼'
                     ```
-                start_code: '{print} ''小鲨鱼'''
             8:
                 story_text: |
                     在上一级中，你已经为歌曲 "啤酒瓶"编写了程序。但由于没有`{repeat}` ，你不得不多次复制一段歌词。
@@ -3920,7 +3634,6 @@ adventures:
                         歌词 = 歌词 - 1
                         {print} 歌词 '瓶啤酒在墙上'
                     ```
-                start_code: '# 在这里写你的代码'
             10:
                 story_text: |
                     使用`{for}`，你只需6行即可打印整首小鲨鱼的歌曲（包括家庭中的所有其他鲨鱼）！
@@ -3937,7 +3650,6 @@ adventures:
                     ```
                     猴子们 = 5, 4, 3, 2, 1
                     ```
-                start_code: '# 在这里写你的代码'
             11:
                 story_text: |
                     在这一级，你可以同时使用`{for}` 和`{range}`命令 ，做一些使用计数的歌曲，如5只小猴子们。
@@ -3953,7 +3665,6 @@ adventures:
                         {print} 猴子们 ‘小猴子们在床上跳来跳去’
                         _
                     ```
-                start_code: '# 把你的代码放在这里'
             12:
                 story_text: "在这首歌中，我们可以使编程变得更加容易 '如果你很快乐，你意识到了，拍拍你的手'。因为我们可以把所有的动作放在一个变量中，看看吧。\n \n### 练习 \n你能在每一行中加入适量的缩进，使歌曲正确播放吗？ \n注意：不是所有的行都需要缩进\n"
                 example_code: |
@@ -3967,7 +3678,6 @@ adventures:
                     _ {print} '如果你快乐并意识到它'
                     _ {print} 动作
                     ```
-                start_code: '# 把你的代码放在这里'
             13:
                 story_text: |
                     In the previous adventure you have learned how to use an argument in a function, but did you know that you could combine them with {ask} commands as well?
@@ -3984,16 +3694,6 @@ adventures:
                     {call} song {with} synonym
                     {call} song {with} chosen_place
                     ```
-                start_code: |
-                    {define} song {with} place
-                        {print} 'My Bonnie is ' place
-
-                    chosen_place = {ask} 'Where do you want Bonnie to be?'
-                    synonym = {ask} 'What is another word for that?'
-
-                    {call} song {with} chosen_place
-                    {call} song {with} synonym
-                    {call} song {with} chosen_place
             16:
                 story_text: |
                     在这一级中，你可以更快速地编排一首像《老麦当劳》这样的歌曲。你可以把正确的动物和正确的声音联系起来，只要把它们放在列表的同一位置。
@@ -4026,7 +3726,6 @@ adventures:
                             {print} '头昏脑涨的睁开眼'
                         {print} '一大清早'
                     ```
-                start_code: '# 把你的代码放在这里'
             18:
                 story_text: |
                     In level 16 we made songs using lists. These programs however are no longer working properly in this level. The colons from level 17 and the brackets from level 18 still need to be added.
@@ -4048,7 +3747,6 @@ adventures:
                              {print} 'way hay and up she rises'
                          {print} '凌晨'
                     ```
-                start_code: '# 在此处键入代码'
     songs_2:
         name: Sing a song! 2
         default_save_name: Song 2
@@ -4070,15 +3768,6 @@ adventures:
                     {print} 'Like a diamond in the sky'
                     {call} _
                     ```
-                start_code: |
-                    {define} twinkle
-                        {print} 'Twinkle'
-                        {print} '...'
-
-                    {call} twinkle
-                    {print} 'Up above the world so high'
-                    {print} 'Like a diamond in the sky'
-                    {call} _
     tic:
         name: Tic Tac Toe
         default_save_name: Tic
@@ -4146,7 +3835,6 @@ adventures:
                                 {else}
                                     sign = 'x'
                     ```
-                start_code: '#  在这里写下你的代码'
             14:
                 story_text: |
                     In the previous levels you've made a tic tac toe game. Now you've learned how to use the = sign, the == sign and the != sign.
@@ -4209,7 +3897,6 @@ adventures:
                                 {else}
                                     sign = 'x'
                     ```
-                start_code: '# place your code here'
             15:
                 story_text: |
                     In this level you can improve your Tic Tac Toe game with the {while} loop/ With this loop you can combine the `{if} game != 'over'` and the `{for} i {in} {range} 1 to 9` into one simple line.
@@ -4271,7 +3958,6 @@ adventures:
                             {else}
                                 sign = 'x'
                     ```
-                start_code: '# place your code here'
             17:
                 story_text: |
                     In the previous levels the tic tac toe game had an annoying feature. After every move, you had to fill in yourself if you had won or not.
@@ -4358,7 +4044,6 @@ adventures:
                             {else}:
                                 sign = 'x'
                     ```
-                start_code: '# place your code here'
     turtle:
         name: 海龟
         default_save_name: turtle
@@ -4383,9 +4068,6 @@ adventures:
                     {turn} {left}
                     {forward} 20
                     ```
-                start_code: |-
-                    {forward} 50
-                    {turn} {left}
             2:
                 story_text: |
                     在这一级，你可以使用变量来使海龟互动。例如，你可以问玩家海龟必须走多少步。
@@ -4428,10 +4110,6 @@ adventures:
                     {turn} 角度 {at} {random}
                     {forward} 25
                     ```
-                start_code: |-
-                    角度 {is} 10, 50, 90, 150, 250
-                    {turn} 角度 {at} {random}
-                    {forward} 25
             4:
                 story_text: |
                     在第4级，你必须在`{print}`和`{ask}`语句中使用引号。在画画时也一样！
@@ -4458,11 +4136,6 @@ adventures:
                     {color} {red}
                     {forward} 50
                     ```
-                start_code: |-
-                    {print} '绘图'
-                    角度 {is} 90
-                    {turn} 角度
-                    {forward} 25
             5:
                 story_text: |
                     在第5级，你可以用`{if}`来做出选择。比如选择不同类型的图案。
@@ -4495,8 +4168,7 @@ adventures:
                     {if} 方向 {is} 右 {turn} _
                     {forward} 100
                     ```
-                start_code: |-
-                    {print} '绘图'
+
                     图形 {is} {ask} '你想要一个正方形还是三角形？'
                     {if} 图形 {is} 三角形 角度 {is} 120 {else} 角度 {is} 90
                     {turn} 角度
@@ -4524,7 +4196,6 @@ adventures:
                     {forward} 50
                     {turn} 角度
                     ```
-                start_code: '{print} ''绘图'''
             8:
                 story_text: "现在我们能重复多行了，可以更容易地画图。\n我们只需要设置一下角度，然后在`{repeat}`中使用这个变量。\n\n### 练习1 \n用这个代码范例画了一个正方形。改变代码，使其画另一个图形，如一个三角形或一个六边形。 \n这需要对两行代码进行修改。\n 提示：一个完整的圆是360度。\n \n ### 练习2 \n现在画一个至少由两个多边形组成的图形。\n"
                 example_code: |
@@ -4564,7 +4235,6 @@ adventures:
                         {forward} 50
                         {color} {black}
                     ```
-                start_code: '#将你的代码放在这里'
             10:
                 story_text: |
                     In this level you can make the turtle draw a figure.
@@ -4582,7 +4252,6 @@ adventures:
                     {for} distance {in} distances
                         {forward} distance
                     ```
-                start_code: '# Write your code here'
             12:
                 story_text: |
                     We can use functions to draw more complex figures with less code.
@@ -4607,16 +4276,6 @@ adventures:
                     {forward} 50
                     {call} square
                     ```
-                start_code: |
-                    {define} square
-                        {repeat} 4 {times}
-                            {turn} _
-                            {forward} _
-                    {call} square
-                    {forward} 50
-                    {call} square
-                    {forward} 50
-                    {call} square
     turtle_draw_it:
         name: Draw it!
         default_save_name: Draw it
@@ -4632,7 +4291,6 @@ adventures:
                         Square <img src="https://github.com/hedyorg/hedy/assets/80678586/03b96c2c-7b94-4032-9f9f-3f3b13573623" width="200">
                         Stairs<img src="https://github.com/hedyorg/hedy/assets/80678586/d4301e62-ec66-4031-827c-7d21f73ba106" width="200">
                     </div>
-                start_code: '## Recreate the drawings with the turtle!'
             2:
                 story_text: |
                     ### Exercise
@@ -4643,7 +4301,6 @@ adventures:
                     Arrow <img src="https://github.com/hedyorg/hedy/assets/80678586/803d8f42-9708-448c-82ea-d035697f08c9" width="150">
                     Boat <img src="https://github.com/hedyorg/hedy/assets/80678586/94ef7189-442a-4c8f-827d-12a69203c2e9" width="150">
                     </div>
-                start_code: '## Recreate the drawings with the turtle!'
             3:
                 story_text: |
                     ### Exercise
@@ -4654,7 +4311,6 @@ adventures:
                     Star <img src="https://github.com/hedyorg/hedy/assets/80678586/421c4d28-cb99-424b-be26-dcae30d65c80" width="150">
                     Arrow <img src="https://github.com/hedyorg/hedy/assets/80678586/3cbebcae-5258-47c5-a6ac-e7ee36c1d1ce" width="200">
                     </div>
-                start_code: '## Recreate the drawings with the turtle!'
             4:
                 story_text: |
                     ### Exercise
@@ -4672,7 +4328,6 @@ adventures:
                     colors {is} red, orange, yellow, green, blue, purple, pink, brown, gray, black
                     color _
                     ```
-                start_code: '## Recreate the drawings with the turtle!'
             5:
                 story_text: |
                     ### Exercise
@@ -4691,7 +4346,6 @@ adventures:
                     chosen_letter {is} {ask} 'Which letter would you like to see? F, E or L?
                     {if} _
                     ```
-                start_code: '## Recreate the drawings with the turtle!'
             6:
                 story_text: |
                     ### Exercise
@@ -4711,7 +4365,6 @@ adventures:
                     ```
                     chosen_color = {ask} _
                     ```
-                start_code: '## Recreate the drawings with the turtle!'
             7:
                 story_text: |
                     ### Exercise
@@ -4722,7 +4375,6 @@ adventures:
                     Triangle <img src="https://github.com/hedyorg/hedy/assets/80678586/3629a5e6-1f02-4851-aab9-c5430ba4a1f1" width="200">
                     Fan <img src="https://github.com/hedyorg/hedy/assets/80678586/1ba2ff71-1230-4fe3-8255-b2c504cf1b4e" width="200">
                     </div>
-                start_code: '## Recreate the drawings with the turtle!'
             8:
                 story_text: |
                     ### Exercise
@@ -4735,7 +4387,6 @@ adventures:
                     Randomly colored star (5) <img src="https://github.com/hedyorg/hedy/assets/80678586/dbe39006-c050-4833-b5c4-f9d1fb1c0781" width="150">
                     Randomly colored spiral (7) <img src="https://github.com/hedyorg/hedy/assets/80678586/9bcdb3f1-367d-4ae0-878f-d09005424a35" width="150">
                     </div>
-                start_code: '## Recreate the drawings with the turtle!'
             9:
                 story_text: |
                     ### Exercise
@@ -4766,7 +4417,6 @@ adventures:
                         color_2 = white
                         color_3 = blue
                     ```
-                start_code: '## Recreate the drawings with the turtle! '
             10:
                 story_text: |
                     ### Exercise
@@ -4807,7 +4457,6 @@ adventures:
                     {for} chosen_color {in} colors
                     _
                     ```
-                start_code: '## Recreate the drawings with the turtle! '
             11:
                 story_text: |
                     ### Exercise
@@ -4830,7 +4479,6 @@ adventures:
 
                     Hint Fan:
                     Start out like the fan you made in level 7. Or take a peak at the hint for the beehive, because the codes are very similar.
-                start_code: '## Recreate the drawings with the turtle! '
             12:
                 story_text: |
                     ### Exercise
@@ -4859,7 +4507,6 @@ adventures:
                         {if} shape = 'square'
                             {call} draw_a_square
                     ```
-                start_code: '## Recreate the drawings with the turtle! '
             13:
                 story_text: |
                     ### Exercise
@@ -4883,7 +4530,6 @@ adventures:
                     {define} draw_a_house {with} chosen_color
                     _
                     ```
-                start_code: '## Recreate the drawings with the turtle! '
             14:
                 story_text: |
                     ### Exercise
@@ -4911,7 +4557,6 @@ adventures:
                     {call} _ {with}
                     {call} _ {with}
                     ```
-                start_code: '## Recreate the drawings with the turtle! '
             15:
                 story_text: |
                     ### Exercise
@@ -4945,7 +4590,6 @@ adventures:
                 example_code_3: |
                     Star
                     A star is usually drawn using 144-degree-turns. If you change this slightly to 143 degrees for example and repeat the pattern multiple times with a {while} loop you can make this figure.
-                start_code: '## Recreate the drawings with the turtle! '
     while_command:
         name: '{while}'
         default_save_name: while_command
@@ -4965,11 +4609,6 @@ adventures:
                         answer = {ask} '5重复5次是多少?'
                     {print} '一个正确的回答给出'
                     ```
-                start_code: |-
-                    answer = 0
-                    {while} answer != 25
-                        answer = {ask} '5重复5次是多少?'
-                    {print} '一个正确的回答给出'
     years:
         name: 新年
         default_save_name: 新年倒计时
@@ -4987,4 +4626,3 @@ adventures:
                         {print} 数字
                     {print} '新年快乐！'
                     ```
-                start_code: '# 在这里写你的代码'
