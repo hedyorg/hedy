@@ -1239,7 +1239,7 @@ adventures:
                     {print} '5 minus 5 estas ' 5 - 5
                     {print} '5 multiplikite per 5 estas ' 5 * 5
                     ```
-                start_code: '{print} ''5 multiplikite per 5 estas '' 5 * 5'
+
             7:
                 story_text: |
                     Nivelo 7 enkondukas la komandon `{repeat}`. `{repeat}` povas esti uzata por ruli unu linion da kodo plurfoje.
@@ -1412,7 +1412,7 @@ adventures:
                 story_text: |
                     En ĉi tiu nivelo ni povas fari frazojn kun la die valoro en la frazo, kun citaĵoj kompreneble.
                     Ĉi-foje la ekzempla kodo ne estas tute kompleta. Ĉu vi povas fini la kodon?
-                start_code: '{print} ''Kion indikos la ĵetkubo ĉi-foje?'''
+
             5:
                 story_text: |
                     You can also make a die again in this level using the `{if}`.
@@ -1426,7 +1426,7 @@ adventures:
                     {print} 'la rezulto de via ĵeto estas' _
                     {if} _ {is} lumbriko {print} 'You can stop throwing.' _ {print} 'You have to hear it again!'
                     ```
-                start_code: '{print} ''Kion indikos la ĵetkubo ĉi-foje?'''
+
             6:
                 story_text: |
                     Vi ankaŭ povas igi Lumbrikon morti denove en ĉi tio, sed nun vi ankaŭ povas kalkuli kiom da poentoj estis rulitaj.
@@ -1444,7 +1444,7 @@ adventures:
                     Can you make the code so that you get the total score for 8 dice? To do that, you have to cut and paste some lines of the code.
                 example_code_2: |
                     Ĉu vi sukcesis kalkuli la poentaron por 8 ĵetkuboj? Tio postulis multe da tranĉado kaj algluado, ĉu ne? Ni faciligos tion en la nivelo 7!
-                start_code: '{print} ''Kion indikos la ĵetkubo ĉi-foje?'''
+
             7:
                 story_text: |
                     Vi ankaŭ povas fari ĵetkubon denove en la nivelo 5. Per la kodo `{repeat}` vi povas facile ruliĝi tutan manon da ĵetkuboj.
@@ -1456,7 +1456,7 @@ adventures:
                     elektoj = 1, 2, 3, 4, 5, lumbriko
                     {repeat} _ _ {print} _ _ _
                     ```
-                start_code: '{print} ''Kion indikos la ĵetkubo ĉi-foje?'''
+
             10:
                 story_text: |
                     Ĉu la ĵetado de la ĵetkuboj daŭras tro longe? En ĉi tiu nivelo, vi povas lasi Hedy ĵeti ĉiujn ĵetkubojn samtempe!
@@ -2011,7 +2011,7 @@ adventures:
                     {print} Oh no! Quickly get to the kitchen.
                     {print} But as you enter monster_3 attacks you!
                     ```
-                start_code: monstro1 {is} _
+
             3:
                 story_text: |
                     In the previous levels you've made an introduction to your haunted house game, but as you might have noticed the story would always have a dreadful end.
@@ -2431,7 +2431,7 @@ adventures:
                     {print} '5 minus 5 is ' 5 - 5
                     {print} '5 times 5 is ' 5 * 5
                     ```
-                start_code: '{print} ''5 times 5 is '' 5 * 5'
+
             12:
                 story_text: |-
                     **Decimal numbers**
@@ -3119,7 +3119,7 @@ adventures:
                             manĝaĵo = {ask} nomo ', kion vi volas manĝi por via ' plado '?'
                             {print} nomo ' mendas ' manĝaĵo 'n por sia ' plado
                     ```
-                start_code: pladoj = entreo, ĉefplado, deserto
+
             11:
                 story_text: |
                     Oni povas uzi `{for} i {in} {range} 1 {to} 5` por orde presi (kune kun `{print}`) la mendojn de pluraj klientoj.
@@ -4056,7 +4056,7 @@ adventures:
                     Ankaŭ ni nun povas plibonigi la programon, kiu desegnas malsamajn figurojn.
                     Ĉu vi povas eltrovi kiom malproksimen la testudo devas turni ĉi tien? Finu la kodon kaj vi povas desegni ajnan plurangulon, kiun vi ŝatus!
                 example_code_2: "```\nanguloj = {ask} 'Kiom da anguloj mi desegnu?'\nangulo = 360 / anguloj \n{repeat} anguloj {times}\n    {turn} _\n    {forward} _\n```\n"
-                start_code: anguloj = {ask} 'Kiom da anguloj desegni?'
+
             9:
                 story_text: |
                     Now that we can use a `{repeat}` inside a `{repeat}`, we can create more complex figures.

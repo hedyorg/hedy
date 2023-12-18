@@ -674,8 +674,6 @@ adventures:
                     ```
                     # Gebruik je eigen code van het vorige avontuur
                     ```
-                start_code: |
-                    # Gebruik je eigen code van het vorige avontuur
     clear_command:
         name: '{clear}'
         default_save_name: clear_command
@@ -1649,16 +1647,6 @@ adventures:
                     {else}:
                         {print} 'Veel geluk de volgende keer..'
                     ```
-                start_code: |
-                    prijzen = ['1 miljoen euro', 'een appeltaart', 'niets']
-                    jouw_prijs = prijzen[{random}]
-                    {print} 'Je wint ' jouw_prijs
-                    {if} jouw_prijs == '1 miljoen euro' :
-                        {print} 'Joepie, je bent rijk!'
-                    {elif} jouw_prijs == 'een appeltaart' :
-                        {print} 'Lekker, een appeltaart!'
-                    {else}:
-                        {print} 'Veel geluk de volgende keer..'
     for_command:
         name: '{for}'
         default_save_name: voor
@@ -2488,11 +2476,6 @@ adventures:
                     {print} '5 keer 5 is ' 5 * 5
                     {print} '5 gedeeld door 5 is ' 5 / 5
                     ```
-                start_code: |
-                    {print} '5 plus 5 is ' 5 + 5
-                    {print} '5 min 5 is ' 5 - 5
-                    {print} '5 keer 5 is ' 5 * 5
-                    {print} '5 gedeeld door 5 is ' 5 / 5
             12:
                 story_text: |-
                     **Kommagetallen**

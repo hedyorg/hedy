@@ -400,10 +400,6 @@ adventures:
                     nom = {input}("quel est ton nom ?")
                     {print}("Ainsi ton nom est ", nom)
                     ```
-                start_code: |
-                    {print}("Mon nom est hedy !")
-                    nom = {input}("quel est ton nom ?")
-                    {print}("Ainsi ton nom est ", nom)
     blackjack:
         name: Blackjack
         default_save_name: Blackjack
@@ -541,11 +537,6 @@ adventures:
                     {if} _
                     {else} _
                     ```
-                start_code: |
-                    nombre_1 = {ask} "Saisi le premier nombre :"
-                    nombre_2 = {ask} "Saisi le deuxième nombre :"
-                    bonne_réponse = nombre_1 * nombre_2
-                    {print} nombre_1 " fois " nombre_2 " fait " bonne_réponse
             9:
                 story_text: |
                     Au niveau 6 tu as créé une calculatrice, à ce niveau, tu peux étendre ce code pour qu'il pose plusieurs questions.
@@ -721,17 +712,6 @@ adventures:
                     {clear}
                     {print} "SURPRISE !"
                     ```
-                start_code: |
-                    {print} "3"
-                    {sleep}
-                    {clear}
-                    {print} "2"
-                    {sleep}
-                    {clear}
-                    {print} "1"
-                    {sleep}
-                    {clear}
-                    {print} "SURPRISE !"
     debugging:
         name: débugage
         default_save_name: débugage
@@ -778,14 +758,6 @@ adventures:
                     {sleep}
                     Voila ! Fait un bon voyage !
                     ```
-                start_code: |
-                    destination {ask} Où vas-tu partir en vacances ?
-                    {print} L'avion pour dstination décolle à 15h00
-                    {ask} as-tu déjà enregistré tes bagages ?
-                    {echo}
-                    {print} Permets-moi d'imprimer ta carte d'embarquement.
-                    {sleep}
-                    Voila ! Fait un bon voyage !
             3:
                 story_text: |-
                     Bienvenue à l'aventure de débugage. Débuguer un code signifie éliminer toutes les erreurs dans le code.
@@ -828,13 +800,6 @@ adventures:
                     {print} "C'est nom que tu préfères"
                     {print} Hmmm… je pense que tu devrais essayer de lire… livres {at} {random}
                     ```
-                start_code: |
-                    {print} "Bienvenue à la bibliothèque en ligne !
-                    {ask} Quel genre de livre aimes-tu ?
-                    {print} Tu aimes le genre
-                    nom {is} {ask} "Quel est ton auteur ou ton autrice préférée ?"
-                    {print} "C'est nom que tu préfères"
-                    {print} Hmmm… je pense que tu devrais essayer de lire… livres {at} {random}
             5:
                 story_text: |-
                     ### Exercice
@@ -893,21 +858,6 @@ adventures:
                     total = prix + nombre_de_produits
                     {print} "Ça vous fera" prix " €, s'il vous plait"
                     ```
-                start_code: |
-                    {print} "Distributeur automatique"
-                    produit_choisi = {ask} "Veuillez sélectionner un produit"
-                    1_euro = coca jus d'orange eau
-                    2_euros = chocolat, cookie, barre muesli
-                    3eruos = chips, charcuterie, gâteau à la banane
-                    {if} produit {is} {in} 1_euro
-                    prix = 1
-                    {if} produit_choisi {is} 2_euros
-                    prix = 2
-                    {else} produit_choisi {in} 3_euros
-                    prix = 3
-                    nombre_de_produits = "{ask} combien de " produit_choisi voulez-vous ?"
-                    total = prix + nombre_de_produits
-                    {print} "Ça vous fera" prix " €, s'il vous plait"
             7:
                 story_text: |-
                     ### Exercice
@@ -950,24 +900,6 @@ adventures:
                     {print} "Tout est bon ! ça vous fera " prix " €, s'il vous plait !"
                     {print} "Merci et au revoir !"
                     ```
-                start_code: |
-                    {print} "Bienvenue a Manucure et Pédicures par Hedy"
-                    choix = {ask} "Voulez-vous que l'on vous fasse les ongles de main ou les ongles de pieds aujourd'hui ? ou les deux ?"
-                    {if} choix {is} les deux
-                            {print} Ça vous fera 25 €
-                            prix = 25
-                        {else}
-                            {print} Ça vous fera 18 €
-                            prix = 18
-                    color = {ask} Quelle couleur vous plairait ?
-                    paillettes = {ask} "Voulez-vous qu'on ajoute des paillettes ?"
-                    {if} paillettes {is} oui
-                        {print} "Ça coûte 3 € de plus"
-                    prix = prix + 3
-                    {else} {print} "Pas de paillette" {print} "Pas de coût supplémentaire"
-                    {sleep} 5
-                    {print} "Tout est bon ! ça vous fera " prix " €, s'il vous plait !"
-                    {print} "Merci et au revoir !"
             9:
                 story_text: |-
                     ### Exercise
@@ -990,21 +922,6 @@ adventures:
                     prix = quantité * 6
                     {print} "Ça vous fera " prix euros" s'il vous plait"
                     ```
-                start_code: |
-                    {print} "Bienvenue dans notre sandwicherie"
-                    quantité "Combien de sandwichs voulez-vous acheter ?"
-                    {repeat} quantité {times}
-                    {ask} {is} {ask} "Quel type de pain voulez-vous pour votre sandwich ?"
-                    type_de_pain {is} blanc, complet, seigle, à l'ail, sans gluten
-                    {if} choix_pain in type_de_pain
-                    {print} "Avec plaisir !"
-                    {else}
-                    "Je suis désolé mais je n'en vends pas"
-                    garniture {is} {ask} "Quelle garniture voulez-vous ?"
-                    sauce {is} {ask} "Quel type de sauce voulez-vous ?"
-                    {print} Un choix_pain avec garniture et sauce.
-                    prix = quantité * 6
-                    {print} "Ça vous fera " prix euros" s'il vous plait"
             10:
                 story_text: |-
                     ### Exercice
@@ -1390,11 +1307,6 @@ adventures:
                     {print} "Joyeux anniversaire, Hedy"
                     {print} "Joyeux anniversaire"
                     ```
-                start_code: |
-                    {print} "Joyeux anniversaire"
-                    {print} "Joyeux anniversaire"
-                    {print} "Joyeux anniversaire, Hedy"
-                    {print} "Joyeux anniversaire"
             8:
                 story_text: |
                     Maintenant, vous avez appris comment répéter une seule ligne de code. C'est pratique, mais ce n'est pas toujours suffisant. Parfois, vous voulez répéter plusieurs lignes en même temps.
@@ -2471,11 +2383,6 @@ adventures:
                         {print} "Bienvenue Hedy"
                         {print} "Tu peux jouer sur ton ordinateur !"
                     ```
-                start_code: |
-                    nom {is} {ask} "Quel est ton nom ?"
-                    {if} nom {is} Hedy
-                        {print} "Bienvenue Hedy"
-                        {print} "Tu peux jouer sur ton ordinateur !"
             9:
                 story_text: |
                     À ce niveau, tu peux aussi mettre une commande `{if}` à l'intérieur d'une autre commande `{if}`.
@@ -2491,16 +2398,6 @@ adventures:
                     {else}
                         {print} "Tu ne veux pas continuer"
                     ```
-                start_code: |
-                    continuer = {ask} "Veux-tu continuer ?"
-                    {if} continuer = oui
-                        sûr = {ask} "Es-tu sûr ?"
-                        {if} sûr {is} oui
-                            {print} "Nous allons continuer"
-                        {else}
-                            {print} "Tu n'es pas sûr"
-                    {else}
-                        {print} "Tu ne veux pas continuer"
     in_command:
         name: '{in}'
         default_save_name: in_command
@@ -2668,11 +2565,6 @@ adventures:
                     {print} "5 fois 5 fait " 5 * 5
                     {print} "5 divisé par 5 fait " 5 / 5
                     ```
-                start_code: |
-                    {print} "5 plus 5 fait " 5 + 5
-                    {print} "5 moins 5 fait " 5 - 5
-                    {print} "5 fois 5 fait " 5 * 5
-                    {print} "5 divisé par 5 fait " 5 / 5
             12:
                 story_text: |-
                     **Nombres décimaux**
@@ -3115,11 +3007,6 @@ adventures:
                     ```
                     {repeat} 3 {times} {print} "Hedy est amusante !"
                     ```
-                start_code: |
-                    {print} "Joyeux anniversaire"
-                    {print} "Joyeux anniversaire"
-                    {print} "Joyeux anniversaire, Hedy"
-                    {print} "Joyeux anniversaire"
             8:
                 story_text: |
                     ### La commande `{repeat}` et l'indentation
@@ -3521,9 +3408,6 @@ adventures:
                     {ask} Choisis parmi _
                     {echo} ainsi, tu as choisi :
                     ```
-                start_code: |
-                    {print} Bienvenue à ton propre pierre-papier-ciseaux !
-                    {ask} Que choisis-tu ?
             2:
                 story_text: |
                     À ce niveau tu peux t'entrainer à utiliser les variables pour faire passer le jeu pierre, papier, ciseaux au niveau supérieur !

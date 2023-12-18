@@ -645,14 +645,6 @@ adventures:
                     {sleep}
                     干得好！ 旅行愉快！
                     ```
-                start_code: |
-                    目的地{ask} 假期你要去哪里？
-                    {print} 飞往目的地的航班于下午 3 点起飞。
-                    {ask} 你托运行李了吗？
-                    {echo}
-                    {print} 让我为您打印您的登机牌。
-                    {sleep}
-                    干得好！ 旅行愉快！
             3:
                 story_text: |-
                     欢迎来到调试冒险。 调试代码意味着消除代码中的错误。
@@ -780,11 +772,6 @@ adventures:
                     晨钟已敲响！
                     叮、当、当！
                     ```
-                start_code: |
-                    你在睡觉？
-                    约翰弟兄！
-                    晨钟已敲响！
-                    叮、当、当
             8:
                 story_text: |-
                     ### 练习
@@ -1109,36 +1096,6 @@ adventures:
                     print chosen_name '笑着继续他们的一天'
                     print 结束
                     ```
-                start_code: |
-                    names = '坦尼娅'、'罗米'、'凯拉'、'奥尔德林'、'阿里'
-                    verbs='步行'、'跳跃'、'骑自行车'、'驾驶'、'跑步'
-                    locations = '在山顶上', '在超市里', '到游泳池'
-                    hiding_spots = '树后面'、桌子下'、盒子里'
-                    声音 = '喇叭声', '车祸', '雷声'
-                    causes_of_noise = '电视', '放鞭炮的孩子', '神奇大象', '梦'
-
-                    chosen_ name = names at random
-                    chosen_verb = verbs at random
-                    chosen_location = '随机位置'
-                    chosen_sounds = noises at random
-                    chosen_spot = hiding_spots random
-                    chosen_causes = causes_of_noise at random
-
-                    print chosen_name ' 是 ' chosen_verb ' ' chosen_location
-                    print '当他们突然随机听到类似' sounds at random
-                    print chosen_name ' 环顾四周，但他们无法发现噪音来自哪里'
-                    print chosen_name ' 躲 ' chosen_spot'
-                    print '们试图环顾四周，但从那里看不到任何东西'
-                    hidden = '是'
-                    while hidden = '是'
-                        print chosen_name '仍然没有看到任何东西'
-                    answer = ask '是否 ' chosen_name ' 从他们的藏身之处移动?'
-                        if answer = '是'
-                            hidden == '否'
-                    print 'chosen_name 移自' chosen_spot
-                    print '然后他们发现这只是' chosen_cause
-                    print chosen_name '笑着继续他们的一天'
-                    print 结束
             16:
                 story_text: |-
                     ### 练习
@@ -1161,19 +1118,6 @@ adventures:
                          print '你得分 ' score ' 满分 10 分'
 
                     ```
-                start_code: |
-                    country = ['荷兰'，'波兰'，'土耳其'，'津巴布韦'，'泰国'，'巴西'，'秘鲁'，'澳大利亚'，'印度'，'罗马尼亚']
-                    capitals = '阿姆斯特丹'、'华沙'、'伊斯坦布尔'、'哈拉雷'、'曼谷'、'巴西利亚'、'利马'、'堪培拉'、'新德里'、'布加勒斯特'
-                    score = 0
-                    for i in range 0 to 1
-                         answer = ask “国家/地区的首都是多少”[i]
-                         correct =capital[i]
-                         if answer = correct
-                             print“ Correct！”
-                         score = score + 1
-                         else
-                             print '错误，' capitals[i] '是' states[i] 的首都
-                         print '你得分 ' score ' 满分 10 分'
             17:
                 story_text: |-
                     ### 练习
@@ -1413,12 +1357,6 @@ adventures:
                     {else}
                          {print}'太棒了！ 你已经通过了这个主题！
                     ```
-                start_code: |
-                    answer = {ask} '你想了解更多吗？'
-                    {if} answer == '是'
-                         {print} '前往下一次冒险！'
-                    {if} answer != '是'
-                         {print} '这太可惜了！'
             15:
                 story_text: "我们将要学习一个新的循环, 就是`{while}` 循环！只要语句为真/有效，我们就不停的执行循环语句！\n所以别忘了改变循环语句中的变量值。\n \n因此在范例代码中，我们一直不停的执行循环语句直到一个正确的答案被给出。 \n如果正确答案一直没有被给出, 这个循环语句就不会结束!"
                 example_code: |
@@ -1486,9 +1424,6 @@ adventures:
                     ```
                     选择 {is} _
                     ```
-                start_code: |
-                    选项{is} 1, 2, 3, 4, 5, 蚯蚓
-                    {print} 你把 _ {at} {random} 扔了！
             4:
                 story_text: |
                     在这一级，我们可以用骰子的点数来造句，当然要用引号。
@@ -3319,9 +3254,6 @@ adventures:
                     {ask} 从_中选择
                     {echo} 所以你的选择是：
                     ```
-                start_code: |
-                    {print} 欢迎来到属于你自己的石头剪刀布！
-                    {ask}你会选择什么？
             2:
                 story_text: |
                     在这一级，你可以练习使用变量，这样你就能在下一级中完成石头剪刀布游戏！

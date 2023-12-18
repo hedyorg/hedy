@@ -2387,16 +2387,6 @@ adventures:
                 story_text: |
                     En este nivel también puedes poner un comando {if} dentro de otro comando {if}.
                 example_code: "continuar = {ask} \"¿Deseas continuar?\n{if} continuar = sí\n    seguro = {ask} '¿Estás seguro?'\n    {if} seguro {is} sí\n        {print} 'Continuamos' \n    {else}\n        {print} 'No estás seguro'\n{else}\n    {print} 'No deseas continuar'\n"
-                start_code: |
-                    continuar = {ask} '¿Deseas continuar?'
-                    {if} continuar = sí
-                        seguro = {ask} '¿Está seguro?'
-                        {if} seguro {is} sí
-                            {print} 'Continuaremos'
-                        {else}
-                            {print} 'No estás seguro'
-                    {else}
-                        {print} 'No deseas continuar'
     in_command:
         name: '{in}'
         default_save_name: comando_en
@@ -2563,11 +2553,6 @@ adventures:
                     {print} '5 veces 5 es ' 5 * 5
                     {print} '5 dividido por 5 es ' 5 / 5
                     ```
-                start_code: |
-                    {print} '5 más 5 es ' 5 + 5
-                    {print} '5 menos 5 es ' 5 - 5
-                    {print} '5 veces 5 es ' 5 * 5
-                    {print} '5 dividido por 5 es ' 5 / 5
             12:
                 story_text: |-
                     **Números decimales**
@@ -2638,7 +2623,7 @@ adventures:
                     Después pon un comando `{sleep}` en la línea 4 y 6 para dejar al loro tranquilo durante un rato.
 
                     **Extra** ¿Puedes hacer que el loro pregunte algo más que tu nombre añadiendo más líneas de código?
-                start_code: '{print} ¡Soy Hedy el loro!'
+
             3:
                 story_text: |
                     Enseña a tu loro una nueva palabra con `{add}`.
@@ -3311,7 +3296,7 @@ adventures:
                     _ comida = {ask} '¿Que te gustaría ordenar como tu ' plato '?'
                     _ {print} nombre ' ordenó ' comida ' como su ' plato
                     ```
-                start_code: platos = aperitivo, plato principal, postre
+
             11:
                 story_text: |
                     Podemos usar el `{for}` con `{range}` para imprimir los pedidos de varios clientes de manera ordenada.
@@ -3444,7 +3429,7 @@ adventures:
                     jugador_1 {is} {ask} Nombre del jugador 1:
                     _
                     ```
-                start_code: '{print} ¡Bienvenido a tu propio piedra papel o tijera!'
+
             4:
                 story_text: |
                     En este nivel podemos programar el juego de piedra, papel, tijera. Pero si quieres añadir texto, aquí también tienes que usar comillas.
@@ -3660,7 +3645,7 @@ adventures:
                     {print} '¡NO MÁS MONOS SALTANDO EN LA CAMA!'
                     {sleep}
                     ```
-                start_code: '{print} ''¡Vamos a cantar!'''
+
             7:
                 story_text: |
                     Las canciones suelen tener mucha repetición. Por ejemplo... ¡Baby Shark! Si la cantas, dirás una y otra vez lo mismo:
@@ -4238,7 +4223,7 @@ adventures:
                 story_text_2: |
                     **Extra** Podemos mejorar el programa que dibuja diferentes figuras. Completa el código y ¡puedes dibujar cualquier polígono que te guste!
                 example_code_2: "```\nángulos = {ask} '¿Cuántos ángulos debo dibujar?'\nángulo = 360 / ángulos \n{repeat} ángulos {times}\n    {turn} _\n    {forward} _\n```\n"
-                start_code: figura = {ask} '¿Cuántos ángulos debo dibujar?'
+
             9:
                 story_text: |
                     Ahora que podemos usar un `{repeat}` dentro de otro `{repeat}`, podemos crear figuras más complejas
