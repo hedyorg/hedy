@@ -149,6 +149,7 @@ import {
 }  from "./level18-parser.terms";
 
 import TRADUCTION_IMPORT from '../../../highlighting/highlighting-trad.json';
+import { Stack } from "@lezer/lr";
 export interface InitializeCodeMirrorSyntaxHighlighterOptions {
     readonly keywordLanguage: string;
     readonly level: number;
@@ -690,21 +691,25 @@ export function initializeTranslation(options: InitializeCodeMirrorSyntaxHighlig
     }
 }
 
-export function specializeKeyword(name: string, _: any) {      
+export function specializeKeyword(name: string, stack: Stack) {      
     for (const [key, value] of specializeTranslations) {
         const regexString =  value.replace(' ', '|');
         if (new RegExp(`^(${regexString})$`, 'gu').test(name)) {
-          return keywordToToken[level].specialize[key];
+            if (stack.canShift(keywordToToken[level].specialize[key])) {
+                return keywordToToken[level].specialize[key];
+            }            
         }
     }
     return -1;
 }
 
-export function extendKeyword(name: string, _: any) {
+export function extendKeyword(name: string, stack: Stack) {
     for (const [key, value] of extendTranslations) {
         const regexString =  value.replace(' ', '|');
-        if (new RegExp(`^(${regexString})$`, 'gu').test(name)) {
-          return keywordToToken[level].extend[key];
+        if (new RegExp(`^(${regexString})$`, 'gu').test(name)) {                   
+            if (stack.canShift(keywordToToken[level].extend[key])) {
+                return keywordToToken[level].extend[key];
+            }            
         }
     }
     return -1;
