@@ -406,10 +406,6 @@ adventures:
                     name = {input}('What is your name?')
                     {print}('So your name is ', name)
                     ```
-                start_code: |
-                    {print}('My name is Hedy!')
-                    name = {input}('What is your name?')
-                    {print}('So your name is ', name)
     blackjack:
         name: Jack nero
         default_save_name: Jack nero
@@ -545,11 +541,6 @@ adventures:
                     given_answer = 'What is ' number_1 ' times ' number_2 '?'
                     {if} _
                     {else} _
-                start_code: |
-                    numero_1 = {ask} 'Compila il primo numero:'
-                    numero_2 = {ask} 'Compila il secondo numero:'
-                    risposta_corretta = numero_1 * numero_2
-                    {print} numero_1 ' volte ' numero_2 ' è 'risposta_corretta
             9:
                 story_text: |
                     Nel livello 6 hai creato una calcolatrice, in questo livello puoi espandere quel codice in modo che ponga più domande.
@@ -720,8 +711,6 @@ adventures:
                     ```
                     # Use your own code from the previous adventure.
                     ```
-                start_code: |
-                    # Use your own code from the previous adventure.
     clear_command:
         name: '{clear}'
         default_save_name: clear_command
@@ -1168,19 +1157,6 @@ adventures:
                         print 'You scored ' score ' out of 10'
 
                     ```
-                start_code: |
-                    country = ['The Netherlands', 'Poland', 'Turkey', 'Zimbabwe', 'Thailand', 'Brasil', 'Peru', 'Australia', 'India', 'Romania' ]
-                    capitals = 'Amsterdam', 'Warshaw' 'Istanbul', 'Harare', 'Bangkok', 'Brasilia', 'Lima', 'Canberra', 'New Delhi', 'Bucharest'
-                    score = 0
-                    for i in range 0 to 10
-                        answer = ask 'What's the capital of ' countries[i]
-                        correct = capital[i]
-                        if answer = correct
-                            print 'Correct!'
-                        score = score + 1
-                        else
-                            print 'Wrong,' capitals[i] 'in the capital of' countries[i]
-                        print 'You scored ' score ' out of 10'
             17:
                 story_text: |-
                     ### Exercise
@@ -1216,35 +1192,6 @@ adventures:
 
                     print 'Thanks for ordering!'
                     ```
-                start_code: |4
-
-                        define food_order
-                            toppings = ask 'pepperoni, tuna, veggie or cheese?'
-                            size = ask 'big, medium or small?'
-                            number_of_pizza = ask 'How many these pizzas would you like?'
-
-                            print 'YOU ORDERED'
-                            print number_of_pizzas ' size  ' topping ' pizza'
-
-                        define drinks_order
-                            drink = ask 'water, coke, icetea, lemonade or coffee?'
-                            number_of_drinks = ask 'How many of these drinks would you like?'
-
-                            print 'YOU ORDERED'
-                            print number_of_drinks ' ' drink
-
-                        'Welcome to Hedy pizza'
-                        more_food = ask 'Would you like to order a pizza?'
-                        while more_food = 'yes'
-                            return food_order
-                            more_food = ask 'Would you like to order a pizza?'
-                        more_drinks = ask 'Would you like to order some drinks?'
-                        while more_drinks == 'yes'
-                            call drink_order
-                            more_drinks == ask 'Would you like to order more drinks?'
-
-
-                        print 'Thanks for ordering!'
             18:
                 story_text: |-
                     ### Exercise
@@ -1267,22 +1214,6 @@ adventures:
                         print 'there a ' sound
                         print 'everywhere a ' sound sound
                     ```
-                start_code: |4
-
-                        animals = ['pig', 'dog', 'cow']
-                        sounds = ['oink', 'woof', 'moo']
-                        for i in range 1 to 3
-                            animal = animals[i]
-                            sound = sounds[i]
-                            print 'Old McDonald had a farm'
-                            print 'E I E I O!'
-                            print 'and on that farm he had a ' animal
-                            print 'E I E I O!'
-                            print 'with a ' sound sound ' here'
-                            print 'and a ' sound sound ' there'
-                            print 'here a ' sound
-                            print 'there a ' sound
-                            print 'everywhere a ' sound sound
     default:
         name: Introduzione
         default_save_name: intro
@@ -1347,7 +1278,6 @@ adventures:
                     print '5 meno 5 è ' 5 - 5
                     print '5 per 5 è ' 5 * 5
                     ```
-                start_code: print '5 per 5 è ' 5 * 5
             7:
                 story_text: |
                     `ask`, `print` e `if` funzionano esattamente come funzionavano nel livello 6.
@@ -1490,19 +1420,12 @@ adventures:
                             {print} 'Un 'animale' dice 'suono
                     ```
                     Nota: questi codici non funzioneranno in questo modo in questo livello. Vai alla scheda successiva per vedere quali parti devi correggere.
-                start_code: |-
-                    frutta = ['mela', 'banana', 'ciliegia']
-                    {print} frutta
             17:
                 story_text: |
                     Ora cambieremo leggermente il rientro. Ogni volta che abbiamo bisogno di un rientro, abbiamo bisogno di `:` nella riga prima del rientro.
 
                     In questo livello puoi anche utilizzare un nuovo comando: `{elif}`. `{elif}` è l'abbreviazione di {else} {if} e ti serve quando vuoi fare 3 (o più!) opzioni.
                     Controlla!
-                start_code: |-
-                    {for} i {in} {range} 1 {to} 10:
-                        {print} i
-                    {print} 'Pronti o no, io arrivo!'
             18:
                 story_text: |
                     Congratulazioni! Hai raggiunto l'ultimo livello di Hedy! Il codice che hai creato qui può essere copiato in ambienti Python reali come replit o PyCharm e puoi continuare ad imparare lì!
@@ -1739,16 +1662,6 @@ adventures:
                     {else}:
                         {print} 'Better luck next time..'
                     ```
-                start_code: |-
-                    prices = ['1 million dollars', 'an apple pie', 'nothing']
-                    your_price = prices[{random}]
-                    {print} 'You win ' your_price
-                    {if} your_price == '1 million dollars' :
-                        {print} 'Yeah! You are rich!'
-                    {elif} your_price == 'an apple pie' :
-                        {print} 'Lovely, an apple pie!'
-                    {else}:
-                        {print} 'Better luck next time..'
     for_command:
         name: '{for}'
         default_save_name: for
@@ -1786,10 +1699,6 @@ adventures:
                         {print} i
                     {print} 'Ready or not, here I come!'
                     ```
-                start_code: |-
-                    {for} i {in} {range} 1 {to} 10:
-                        {print} i
-                    {print} 'Ready or not, here I come!'
     fortune:
         name: Indovino
         default_save_name: Fortune Teller
@@ -2142,7 +2051,6 @@ adventures:
                     {print} Oh no! Quickly get to the kitchen.
                     {print} But as you enter monster_3 attacks you!
                     ```
-                start_code: monster1 {is} _
             3:
                 story_text: |
                     In the previous levels you've made an introduction to your haunted house game, but as you might have noticed the story would always have a dreadful end.
@@ -2561,7 +2469,6 @@ adventures:
                     {print} '5 minus 5 is ' 5 - 5
                     {print} '5 times 5 is ' 5 * 5
                     ```
-                start_code: '{print} ''5 times 5 is '' 5 * 5'
             12:
                 story_text: |-
                     **Decimal numbers**
@@ -2955,15 +2862,6 @@ adventures:
                     fruit = ['apple', 'banana', 'cherry']
                     {print} fruit[random]
                     ```
-                start_code: |-
-                    friends = ['Ahmed', 'Ben', 'Cayden']
-                    {print} friends[1] ' is the first friend on the list.'
-                    {print} friends[2] ' is the second friend on the list.'
-                    {print} friends[3] ' is the third friend on the list.'
-                    #now we will match 2 lists using the variable i
-                    lucky_numbers = [15, 18, 6]
-                    {for} i {in} {range} 1 {to} 3
-                        {print} friends[i] 's lucky number is ' lucky_numbers[i]
     repeat_command:
         name: '{repeat}'
         default_save_name: repeat_command
@@ -3252,7 +3150,6 @@ adventures:
                             food = {ask} name ', what would you like to eat as your ' course '?'
                             {print} name ' orders ' food ' as their ' course
                     ```
-                start_code: courses = appetizer, main course, dessert
             11:
                 story_text: |
                     We can use the `{for} i {in} {range} 1 {to} 5` to {print} the orders from multiple customers in an orderly manner.
@@ -4162,7 +4059,6 @@ adventures:
                         {turn} _
                         {forward} _
                     ```
-                start_code: angles = {ask} 'How many angles should I draw?'
             9:
                 story_text: |
                     Now that we can use a `{repeat}` inside a `{repeat}`, we can create more complex figures.

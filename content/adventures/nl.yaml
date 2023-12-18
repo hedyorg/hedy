@@ -371,10 +371,6 @@ adventures:
                     naam = {input}('Hoe heet je?')
                     {print}('Dus jouw naam is ', naam)
                     ```
-                start_code: |
-                    {print}('Mijn naam is Hedy!')
-                    naam = {input}('Hoe heet je?')
-                    {print}('Dus jouw naam is ', naam)
     blackjack:
         name: Blackjack
         default_save_name: Blackjack
@@ -505,11 +501,6 @@ adventures:
                     given_answer = 'What is ' number_1 ' times ' number_2 '?'
                     {if} _
                     {else} _
-                start_code: |
-                    getal_1 = {ask} 'Het eerste getal is:'
-                    getal_2 = {ask} 'Het tweede getal is:'
-                    correct_antwoord = getal_1 * getal_2
-                    {print} getal_1 ' keer ' getal_2 ' is ' correct_antwoord
             9:
                 story_text: |
                     In dit level kunnen we de rekenmachine van level 6 uitbreiden en meerdere sommen achter elkaar vragen.
@@ -683,8 +674,6 @@ adventures:
                     ```
                     # Gebruik je eigen code van het vorige avontuur
                     ```
-                start_code: |
-                    # Gebruik je eigen code van het vorige avontuur
     clear_command:
         name: '{clear}'
         default_save_name: clear_command
@@ -1125,19 +1114,6 @@ adventures:
                         print 'You scored ' score ' out of 10'
 
                     ```
-                start_code: |
-                    country = ['The Netherlands', 'Poland', 'Turkey', 'Zimbabwe', 'Thailand', 'Brasil', 'Peru', 'Australia', 'India', 'Romania' ]
-                    capitals = 'Amsterdam', 'Warshaw' 'Istanbul', 'Harare', 'Bangkok', 'Brasilia', 'Lima', 'Canberra', 'New Delhi', 'Bucharest'
-                    score = 0
-                    for i in range 0 to 10
-                        answer = ask 'What's the capital of ' countries[i]
-                        correct = capital[i]
-                        if answer = correct
-                            print 'Correct!'
-                        score = score + 1
-                        else
-                            print 'Wrong,' capitals[i] 'in the capital of' countries[i]
-                        print 'You scored ' score ' out of 10'
             17:
                 story_text: |-
                     ### Exercise
@@ -1173,35 +1149,6 @@ adventures:
 
                     print 'Thanks for ordering!'
                     ```
-                start_code: |4
-
-                                            define food_order
-                                                toppings = ask 'pepperoni, tuna, veggie or cheese?'
-                                                size = ask 'big, medium or small?'
-                                                number_of_pizza = ask 'How many these pizzas would you like?'
-
-                                                print 'YOU ORDERED'
-                                                print number_of_pizzas ' size  ' topping ' pizza'
-
-                                            define drinks_order
-                                                drink = ask 'water, coke, icetea, lemonade or coffee?'
-                                                number_of_drinks = ask 'How many of these drinks would you like?'
-
-                                                print 'YOU ORDERED'
-                                                print number_of_drinks ' ' drink
-
-                                            'Welcome to Hedy pizza'
-                                            more_food = ask 'Would you like to order a pizza?'
-                                            while more_food = 'yes'
-                                                return food_order
-                                                more_food = ask 'Would you like to order a pizza?'
-                                            more_drinks = ask 'Would you like to order some drinks?'
-                                            while more_drinks == 'yes'
-                                                call drink_order
-                                                more_drinks == ask 'Would you like to order more drinks?'
-
-
-                                            print 'Thanks for ordering!'
             18:
                 story_text: |-
                     ### Exercise
@@ -1224,22 +1171,6 @@ adventures:
                         print 'there a ' sound
                         print 'everywhere a ' sound sound
                     ```
-                start_code: |4
-
-                                            animals = ['pig', 'dog', 'cow']
-                                            sounds = ['oink', 'woof', 'moo']
-                                            for i in range 1 to 3
-                                                animal = animals[i]
-                                                sound = sounds[i]
-                                                print 'Old McDonald had a farm'
-                                                print 'E I E I O!'
-                                                print 'and on that farm he had a ' animal
-                                                print 'E I E I O!'
-                                                print 'with a ' sound sound ' here'
-                                                print 'and a ' sound sound ' there'
-                                                print 'here a ' sound
-                                                print 'there a ' sound
-                                                print 'everywhere a ' sound sound
     default:
         name: Introductie
         default_save_name: intro
@@ -1481,7 +1412,6 @@ adventures:
                 story_text: |
                     Hoera! Je hebt het einde van Hedy bereikt! De codes die je hier in het laaste level maakt kun je kopiëren naar andere Python omgevingen, zoals replit or PyCharm. Daar kun je verder Python leren!
                     Let wel op! Python kan alleen Engelse commando's lezen. Dus heb je de commando's geprogrammeerd in een andere taal, zet ze dan nu om naar het Engels.
-                start_code: '{print} (''Geweldig gedaan!!!'')'
     dice:
         name: Dobbelsteen
         default_save_name: Dobbelsteen
@@ -1716,16 +1646,6 @@ adventures:
                     {else}:
                         {print} 'Veel geluk de volgende keer..'
                     ```
-                start_code: |
-                    prijzen = ['1 miljoen euro', 'een appeltaart', 'niets']
-                    jouw_prijs = prijzen[{random}]
-                    {print} 'Je wint ' jouw_prijs
-                    {if} jouw_prijs == '1 miljoen euro' :
-                        {print} 'Joepie, je bent rijk!'
-                    {elif} jouw_prijs == 'een appeltaart' :
-                        {print} 'Lekker, een appeltaart!'
-                    {else}:
-                        {print} 'Veel geluk de volgende keer..'
     for_command:
         name: '{for}'
         default_save_name: voor
@@ -1763,10 +1683,6 @@ adventures:
                         {print} i
                     {print} 'Wie niet weg is, is gezien! Ik kom!'
                     ```
-                start_code: |-
-                    {for} i {in} {range} 1 {to} 10:
-                        {print} i
-                    {print} 'Wie niet weg is, is gezien! Ik kom!'
     fortune:
         name: Waarzegger
         default_save_name: Waarzegger
@@ -2129,7 +2045,6 @@ adventures:
                     {print} HELP!
                     {print} Je rent naar de keuken, maar wordt daar aangevallen door een monster3
                     ```
-                start_code: monster1 {is} _
             3:
                 story_text: |
                     In het vorige level heb je een spannende intro bedacht voor je spookhuis, maar een echt spel is het nog niet: Het loopt namelijk altijd hetzelfde af.
@@ -2555,11 +2470,6 @@ adventures:
                     {print} '5 keer 5 is ' 5 * 5
                     {print} '5 gedeeld door 5 is ' 5 / 5
                     ```
-                start_code: |
-                    {print} '5 plus 5 is ' 5 + 5
-                    {print} '5 min 5 is ' 5 - 5
-                    {print} '5 keer 5 is ' 5 * 5
-                    {print} '5 gedeeld door 5 is ' 5 / 5
             12:
                 story_text: |-
                     **Kommagetallen**
@@ -2966,16 +2876,6 @@ adventures:
                     fruit = ['appel', 'banaan', 'kers']
                     {print} fruit[random]
                     ```
-                start_code: |-
-                    vrienden = ['Ahmed', 'Ben', 'Cayden']
-                    {print} vrienden[1] ' is de eerste vriend op mijn lijstje'
-                    {print} vrienden[2] ' is de tweede vriend op mijn lijstje'
-                    {print} vrienden[3] ' is de derde vriend op mijn lijstje'
-                    #nu matchen we 2 lijstjes door de variabele i te gebruiken
-                    geluksgetallen = [15, 18, 6]
-                    {for} i {in} {range} 1 {to} 3
-                       {print} 'het geluksgetal van ' vrienden[i]
-                       {print} 'is ' geluksgetallen[i]
     repeat_command:
         name: '{repeat}'
         default_save_name: herhaal
@@ -3294,7 +3194,6 @@ adventures:
                     _ eten = {ask} naam ', Wat wil jij bestellen als ' gang '?'
                     _ {print} naam ' bestelt ' eten ' als ' gang
                     ```
-                start_code: gangen = voorgerecht, hoofdgerecht, nagerecht
             11:
                 story_text: |
                     Je kunt nu `{for}`met een `{range}` gebruiken om een bestelling voor meerdere mensen te tonen.
@@ -4199,7 +4098,6 @@ adventures:
                         {turn} _
                         {forward} _
                     ```
-                start_code: hoeken = {ask} 'Hoeveel hoeken krijgt dit figuur?'
             9:
                 story_text: |
                     We kunnen met een `{repeat}` in een `{repeat}` complexere figuren maken.

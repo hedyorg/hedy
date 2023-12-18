@@ -391,10 +391,6 @@ adventures:
                     name = {input}('What is your name?')
                     {print}('So your name is ', name)
                     ```
-                start_code: |
-                    {print}('My name is Hedy!')
-                    name = {input}('What is your name?')
-                    {print}('So your name is ', name)
     blackjack:
         name: Blackjack
         default_save_name: Blackjack
@@ -532,11 +528,6 @@ adventures:
                     {if} _
                     {else} _
                     ```
-                start_code: |
-                    number_1 = {ask} 'Fill in the first number:'
-                    number_2 = {ask} 'Fill in the second number:'
-                    correct_answer = number_1 * number_2
-                    {print} number_1 ' times ' number_2 ' is ' correct_answer
             9:
                 story_text: |
                     In level 6 you created a calculator, in this level you can expand that code so it asks multiple questions.
@@ -707,8 +698,6 @@ adventures:
                     ```
                     # Use your own code from the previous adventure.
                     ```
-                start_code: |
-                    # Use your own code from the previous adventure.
     clear_command:
         name: '{clear}'
         default_save_name: clear_command
@@ -1156,19 +1145,6 @@ adventures:
                         print 'You scored ' score ' out of 10'
 
                     ```
-                start_code: |
-                    country = ['The Netherlands', 'Poland', 'Turkey', 'Zimbabwe', 'Thailand', 'Brasil', 'Peru', 'Australia', 'India', 'Romania' ]
-                    capitals = 'Amsterdam', 'Warshaw' 'Istanbul', 'Harare', 'Bangkok', 'Brasilia', 'Lima', 'Canberra', 'New Delhi', 'Bucharest'
-                    score = 0
-                    for i in range 0 to 10
-                        answer = ask 'What's the capital of ' countries[i]
-                        correct = capital[i]
-                        if answer = correct
-                            print 'Correct!'
-                        score = score + 1
-                        else
-                            print 'Wrong,' capitals[i] 'in the capital of' countries[i]
-                        print 'You scored ' score ' out of 10'
             17:
                 story_text: |-
                     ### Exercise
@@ -1204,35 +1180,6 @@ adventures:
 
                     print 'Thanks for ordering!'
                     ```
-                start_code: |4
-
-                              define food_order
-                                  toppings = ask 'pepperoni, tuna, veggie or cheese?'
-                                  size = ask 'big, medium or small?'
-                                  number_of_pizza = ask 'How many these pizzas would you like?'
-
-                                  print 'YOU ORDERED'
-                                  print number_of_pizzas ' size  ' topping ' pizza'
-
-                              define drinks_order
-                                  drink = ask 'water, coke, icetea, lemonade or coffee?'
-                                  number_of_drinks = ask 'How many of these drinks would you like?'
-
-                                  print 'YOU ORDERED'
-                                  print number_of_drinks ' ' drink
-
-                              'Welcome to Hedy pizza'
-                              more_food = ask 'Would you like to order a pizza?'
-                              while more_food = 'yes'
-                                  return food_order
-                                  more_food = ask 'Would you like to order a pizza?'
-                              more_drinks = ask 'Would you like to order some drinks?'
-                              while more_drinks == 'yes'
-                                  call drink_order
-                                  more_drinks == ask 'Would you like to order more drinks?'
-
-
-                              print 'Thanks for ordering!'
             18:
                 story_text: |-
                     ### Exercise
@@ -1255,22 +1202,6 @@ adventures:
                         print 'there a ' sound
                         print 'everywhere a ' sound sound
                     ```
-                start_code: |4
-
-                              animals = ['pig', 'dog', 'cow']
-                              sounds = ['oink', 'woof', 'moo']
-                              for i in range 1 to 3
-                                  animal = animals[i]
-                                  sound = sounds[i]
-                                  print 'Old McDonald had a farm'
-                                  print 'E I E I O!'
-                                  print 'and on that farm he had a ' animal
-                                  print 'E I E I O!'
-                                  print 'with a ' sound sound ' here'
-                                  print 'and a ' sound sound ' there'
-                                  print 'here a ' sound
-                                  print 'there a ' sound
-                                  print 'everywhere a ' sound sound
     default:
         name: Introduction
         default_save_name: intro
@@ -1512,7 +1443,6 @@ adventures:
                 story_text: |
                     Congratulations! You have reached the last level of Hedy! The code you have created here can be copied to real Python environments like replit or PyCharm, and you can continue learning there!
                     Note however that Python can only read English commands, so if you have been using other languages, you will need to switch to English now.
-                start_code: '{print} (''Great job!!!'')'
     dice:
         name: Dice
         default_save_name: Dice
@@ -1752,16 +1682,6 @@ adventures:
                     {else}:
                         {print} 'Better luck next time..'
                     ```
-                start_code: |-
-                    prices = ['1 million dollars', 'an apple pie', 'nothing']
-                    your_price = prices[{random}]
-                    {print} 'You win ' your_price
-                    {if} your_price == '1 million dollars' :
-                        {print} 'Yeah! You are rich!'
-                    {elif} your_price == 'an apple pie' :
-                        {print} 'Lovely, an apple pie!'
-                    {else}:
-                        {print} 'Better luck next time..'
     for_command:
         name: '{for}'
         default_save_name: for
@@ -1799,10 +1719,6 @@ adventures:
                         {print} i
                     {print} 'Ready or not, here I come!'
                     ```
-                start_code: |-
-                    {for} i {in} {range} 1 {to} 10:
-                        {print} i
-                    {print} 'Ready or not, here I come!'
     fortune:
         name: Fortune teller
         default_save_name: Fortune Teller
@@ -2176,7 +2092,6 @@ adventures:
                     {print} Oh no! Quickly get to the kitchen.
                     {print} But as you enter monster_3 attacks you!
                     ```
-                start_code: monster1 {is} _
             3:
                 story_text: |
                     In the previous levels you've made an introduction to your haunted house game, but as you might have noticed the story would always have a dreadful end.
@@ -2599,11 +2514,6 @@ adventures:
                     {print} '5 times 5 is ' 5 * 5
                     {print} '5 divided by 5 is ' 5 / 5
                     ```
-                start_code: |
-                    {print} '5 plus 5 is ' 5 + 5
-                    {print} '5 minus 5 is ' 5 - 5
-                    {print} '5 times 5 is ' 5 * 5
-                    {print} '5 divided by 5 is ' 5 / 5
             12:
                 story_text: |-
                     **Decimal numbers**
@@ -3014,15 +2924,6 @@ adventures:
                     fruit = ['apple', 'banana', 'cherry']
                     {print} fruit[random]
                     ```
-                start_code: |-
-                    friends = ['Ahmed', 'Ben', 'Cayden']
-                    {print} friends[1] ' is the first friend on the list.'
-                    {print} friends[2] ' is the second friend on the list.'
-                    {print} friends[3] ' is the third friend on the list.'
-                    #now we will match 2 lists using the variable i
-                    lucky_numbers = [15, 18, 6]
-                    {for} i {in} {range} 1 {to} 3
-                        {print} friends[i] 's lucky number is ' lucky_numbers[i]
     repeat_command:
         name: '{repeat}'
         default_save_name: repeat_command
@@ -3326,7 +3227,6 @@ adventures:
                     _ food = {ask} name ', what would you like to eat as your ' course '?'
                     _ {print} name ' orders ' food ' as their ' course
                     ```
-                start_code: courses = appetizer, main course, dessert
             11:
                 story_text: |
                     We can use the `{for}` with `{range}` to print the orders from multiple customers in an orderly manner.
@@ -4255,69 +4155,7 @@ adventures:
                     {repeat} figure {times}
                         {turn} _
                         {forward} _
-                    ```
-                start_code: figure = {ask} 'How many angles should I draw?'
-            9:
-                story_text: |
-                    Now that we can use a `{repeat}` inside a `{repeat}`, we can create more complex figures.
-
-                    ### Exercise 1
-                    This code creates three black triangles, change that into five pink squares.
-
-                     **Extra** Create a figure of your own choosing consisting of at least two different shapes types.
-                example_code: |
-                    ```
-                    {color} {black}
-                    {repeat} 3 {times}
-                        {repeat} 3 {times}
-                            {forward} 10
-                            {turn} 120
-                        {color} {white}
-                        {forward} 50
-                        {color} {black}
-                    ```
-            10:
-                story_text: |
-                    In this level you can make the turtle draw a figure.
-                    The turtle will travel the distances in the list, one by one, making bigger and bigger steps.
-                    ### Exercise 1
-                    Add a 90 degree turn in the loop, so that a spiral is drawn.
-                    Add at least 5 numbers to the list, so the spiral grows larger.
-                    **(extra)** can you change the spiral into another shape? Experiment with numbers for the turn!
-                    ### Exercise 2
-                    The spiral is drawn outwards, make it go inwards?
-                example_code: |
-                    ```
-                    {turn} 90
-                    distances = 10, 20, 30, 40, 50, 60
-                    {for} distance {in} distances
-                        {forward} distance
-                    ```
-                    ```
-            12:
-                story_text: |
-                    We can use functions to draw more complex figures with less code.
-                    ### Exercise 1
-                    Fill the function so that three squares are created. If you want the image to look nicer, you can make the lines between the squares white.
-
-                    ### Exercise 2
-                    The code can be made even shorter. Place the final lines into a `{repeat}` so the figure remains the same.
-
-                    ### Exercise 3
-                    Create your own drawing with different figures.
-                    Change both the number of figures with the `{repeat}` and the shape of the figures in the `{define}`
-                example_code: |
-                    ```
-                    {define} square
-                        {repeat} 4 {times}
-                            {turn} _
-                            {forward} _
-                    {call} square
-                    {forward} 50
-                    {call} square
-                    {forward} 50
-                    {call} square
-                    ```
+                    ``
     turtle_draw_it:
         name: Draw it!
         default_save_name: Draw it

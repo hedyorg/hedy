@@ -374,10 +374,6 @@ adventures:
                     name = {input}('What is your name?')
                     {print}('So your name is ', name)
                     ```
-                start_code: |
-                    {print}('My name is Hedy!')
-                    name = {input}('What is your name?')
-                    {print}('So your name is ', name)
     blackjack:
         name: Nigra fanto
         default_save_name: Nigra fanto
@@ -671,8 +667,6 @@ adventures:
                     ```
                     # Use your own code from the previous adventure.
                     ```
-                start_code: |
-                    # Use your own code from the previous adventure.
     clear_command:
         name: '{clear}'
         default_save_name: clear_command
@@ -1119,19 +1113,6 @@ adventures:
                         print 'You scored ' score ' out of 10'
 
                     ```
-                start_code: |
-                    country = ['The Netherlands', 'Poland', 'Turkey', 'Zimbabwe', 'Thailand', 'Brasil', 'Peru', 'Australia', 'India', 'Romania' ]
-                    capitals = 'Amsterdam', 'Warshaw' 'Istanbul', 'Harare', 'Bangkok', 'Brasilia', 'Lima', 'Canberra', 'New Delhi', 'Bucharest'
-                    score = 0
-                    for i in range 0 to 10
-                        answer = ask 'What's the capital of ' countries[i]
-                        correct = capital[i]
-                        if answer = correct
-                            print 'Correct!'
-                        score = score + 1
-                        else
-                            print 'Wrong,' capitals[i] 'in the capital of' countries[i]
-                        print 'You scored ' score ' out of 10'
             17:
                 story_text: |-
                     ### Exercise
@@ -1167,35 +1148,6 @@ adventures:
 
                     print 'Thanks for ordering!'
                     ```
-                start_code: |4
-
-                      define food_order
-                          toppings = ask 'pepperoni, tuna, veggie or cheese?'
-                          size = ask 'big, medium or small?'
-                          number_of_pizza = ask 'How many these pizzas would you like?'
-
-                          print 'YOU ORDERED'
-                          print number_of_pizzas ' size  ' topping ' pizza'
-
-                      define drinks_order
-                          drink = ask 'water, coke, icetea, lemonade or coffee?'
-                          number_of_drinks = ask 'How many of these drinks would you like?'
-
-                          print 'YOU ORDERED'
-                          print number_of_drinks ' ' drink
-
-                      'Welcome to Hedy pizza'
-                      more_food = ask 'Would you like to order a pizza?'
-                      while more_food = 'yes'
-                          return food_order
-                          more_food = ask 'Would you like to order a pizza?'
-                      more_drinks = ask 'Would you like to order some drinks?'
-                      while more_drinks == 'yes'
-                          call drink_order
-                          more_drinks == ask 'Would you like to order more drinks?'
-
-
-                      print 'Thanks for ordering!'
             18:
                 story_text: |-
                     ### Exercise
@@ -1218,22 +1170,6 @@ adventures:
                         print 'there a ' sound
                         print 'everywhere a ' sound sound
                     ```
-                start_code: |4
-
-                      animals = ['pig', 'dog', 'cow']
-                      sounds = ['oink', 'woof', 'moo']
-                      for i in range 1 to 3
-                          animal = animals[i]
-                          sound = sounds[i]
-                          print 'Old McDonald had a farm'
-                          print 'E I E I O!'
-                          print 'and on that farm he had a ' animal
-                          print 'E I E I O!'
-                          print 'with a ' sound sound ' here'
-                          print 'and a ' sound sound ' there'
-                          print 'here a ' sound
-                          print 'there a ' sound
-                          print 'everywhere a ' sound sound
     default:
         name: Enkonduko
         default_save_name: enkonduko
@@ -1302,7 +1238,6 @@ adventures:
                     {print} '5 minus 5 estas ' 5 - 5
                     {print} '5 multiplikite per 5 estas ' 5 * 5
                     ```
-                start_code: '{print} ''5 multiplikite per 5 estas '' 5 * 5'
             7:
                 story_text: |
                     Nivelo 7 enkondukas la komandon `{repeat}`. `{repeat}` povas esti uzata por ruli unu linion da kodo plurfoje.
@@ -1370,9 +1305,6 @@ adventures:
                     {print} 'Du kaj duono plus du kaj duono estas…'
                     {print} 2.5 + 2.5
                     ```
-                start_code: |-
-                    {print} 'Decimalaj nombroj nun postulas punkton (ne komon)'
-                    {print} 2.5 + 2.5
             13:
                 story_text: Ni nun lernos `{and}` kaj `{or}`! Se oni volas kontroli du kondiĉojn, oni ne devas uzi du `{if}`-ojn sed povas uzi `{and}` kaj `{or}`. Se oni uzas `{and}`, ambaŭ kondiĉoj, maldekstra kaj dekstra de la `{and}`, devas esti veraj. Oni ankaŭ povas uzi `{or}`. Tiam nur unu kondiĉo
                     devas esti vera.
@@ -1428,19 +1360,12 @@ adventures:
                         {print} 'la bonŝanca numero de ' amikoj[i]
                         {print} 'estas ' bonŝancaj_numeroj[i]
                     ```
-                start_code: |-
-                    fruktoj = ['pomo', 'banano', 'ĉerizo']
-                    {print} fruktoj
             17:
                 story_text: |-
                     Nun ni iom ŝanĝos la regulojn pri la deŝovo. Ĉiufoje kiam oni bezonas deŝovon, oni uzu dupunkton `:` ĉe la fino de la linio antaŭ la deŝovo.
 
                     En ĉi tiu nivelo, oni povas ankaŭ uzi novan komandon: `{elif}`. `{elif}` estas mallongigo de `{else} {if}`, kaj oni bezonas ĝin kiam oni volas havi 3 (aŭ pli da) opciojn.
                     Jen:
-                start_code: |-
-                    {for} i {in} {range} 1 {to} 10:
-                        {print} i
-                    {print} 'Jen mi venas!'
             18:
                 story_text: |-
                     Ni alvenis al vera Python-kodo! Tio signifas, ke ni devas uzi rondajn krampojn kun {print} kaj {range} de nun.
@@ -1475,7 +1400,6 @@ adventures:
                 story_text: |
                     En ĉi tiu nivelo ni povas fari frazojn kun la die valoro en la frazo, kun citaĵoj kompreneble.
                     Ĉi-foje la ekzempla kodo ne estas tute kompleta. Ĉu vi povas fini la kodon?
-                start_code: '{print} ''Kion indikos la ĵetkubo ĉi-foje?'''
             5:
                 story_text: |
                     You can also make a die again in this level using the `{if}`.
@@ -1489,7 +1413,6 @@ adventures:
                     {print} 'la rezulto de via ĵeto estas' _
                     {if} _ {is} lumbriko {print} 'You can stop throwing.' _ {print} 'You have to hear it again!'
                     ```
-                start_code: '{print} ''Kion indikos la ĵetkubo ĉi-foje?'''
             6:
                 story_text: |
                     Vi ankaŭ povas igi Lumbrikon morti denove en ĉi tio, sed nun vi ankaŭ povas kalkuli kiom da poentoj estis rulitaj.
@@ -1507,7 +1430,6 @@ adventures:
                     Can you make the code so that you get the total score for 8 dice? To do that, you have to cut and paste some lines of the code.
                 example_code_2: |
                     Ĉu vi sukcesis kalkuli la poentaron por 8 ĵetkuboj? Tio postulis multe da tranĉado kaj algluado, ĉu ne? Ni faciligos tion en la nivelo 7!
-                start_code: '{print} ''Kion indikos la ĵetkubo ĉi-foje?'''
             7:
                 story_text: |
                     Vi ankaŭ povas fari ĵetkubon denove en la nivelo 5. Per la kodo `{repeat}` vi povas facile ruliĝi tutan manon da ĵetkuboj.
@@ -1519,7 +1441,6 @@ adventures:
                     elektoj = 1, 2, 3, 4, 5, lumbriko
                     {repeat} _ _ {print} _ _ _
                     ```
-                start_code: '{print} ''Kion indikos la ĵetkubo ĉi-foje?'''
             10:
                 story_text: |
                     Ĉu la ĵetado de la ĵetkuboj daŭras tro longe? En ĉi tiu nivelo, vi povas lasi Hedy ĵeti ĉiujn ĵetkubojn samtempe!
@@ -1670,16 +1591,6 @@ adventures:
                     {else}:
                         {print} 'Better luck next time..'
                     ```
-                start_code: |-
-                    prices = ['1 million dollars', 'an apple pie', 'nothing']
-                    your_price = prices[{random}]
-                    {print} 'You win ' your_price
-                    {if} your_price == '1 million dollars' :
-                        {print} 'Yeah! You are rich!'
-                    {elif} your_price == 'an apple pie' :
-                        {print} 'Lovely, an apple pie!'
-                    {else}:
-                        {print} 'Better luck next time..'
     for_command:
         name: '{for}'
         default_save_name: for
@@ -1716,10 +1627,6 @@ adventures:
                         {print} i
                     {print} 'Ready or not, here I come!'
                     ```
-                start_code: |-
-                    {for} i {in} {range} 1 {to} 10:
-                        {print} i
-                    {print} 'Ready or not, here I come!'
     fortune:
         name: Aŭguristo
         default_save_name: Aŭguristo
@@ -2074,7 +1981,6 @@ adventures:
                     {print} Oh no! Quickly get to the kitchen.
                     {print} But as you enter monster_3 attacks you!
                     ```
-                start_code: monstro1 {is} _
             3:
                 story_text: |
                     In the previous levels you've made an introduction to your haunted house game, but as you might have noticed the story would always have a dreadful end.
@@ -2494,7 +2400,6 @@ adventures:
                     {print} '5 minus 5 is ' 5 - 5
                     {print} '5 times 5 is ' 5 * 5
                     ```
-                start_code: '{print} ''5 times 5 is '' 5 * 5'
             12:
                 story_text: |-
                     **Decimal numbers**
@@ -2887,15 +2792,6 @@ adventures:
                     fruit = ['apple', 'banana', 'cherry']
                     {print} fruit[random]
                     ```
-                start_code: |-
-                    friends = ['Ahmed', 'Ben', 'Cayden']
-                    {print} friends[1] ' is the first friend on the list.'
-                    {print} friends[2] ' is the second friend on the list.'
-                    {print} friends[3] ' is the third friend on the list.'
-                    #now we will match 2 lists using the variable i
-                    lucky_numbers = [15, 18, 6]
-                    {for} i {in} {range} 1 {to} 3
-                        {print} friends[i] 's lucky number is ' lucky_numbers[i]
     repeat_command:
         name: '{repeat}'
         default_save_name: repeat_command
@@ -3182,7 +3078,6 @@ adventures:
                             manĝaĵo = {ask} nomo ', kion vi volas manĝi por via ' plado '?'
                             {print} nomo ' mendas ' manĝaĵo 'n por sia ' plado
                     ```
-                start_code: pladoj = entreo, ĉefplado, deserto
             11:
                 story_text: |
                     Oni povas uzi `{for} i {in} {range} 1 {to} 5` por orde presi (kune kun `{print}`) la mendojn de pluraj klientoj.
@@ -4119,7 +4014,6 @@ adventures:
                     Ankaŭ ni nun povas plibonigi la programon, kiu desegnas malsamajn figurojn.
                     Ĉu vi povas eltrovi kiom malproksimen la testudo devas turni ĉi tien? Finu la kodon kaj vi povas desegni ajnan plurangulon, kiun vi ŝatus!
                 example_code_2: "```\nanguloj = {ask} 'Kiom da anguloj mi desegnu?'\nangulo = 360 / anguloj \n{repeat} anguloj {times}\n    {turn} _\n    {forward} _\n```\n"
-                start_code: anguloj = {ask} 'Kiom da anguloj desegni?'
             9:
                 story_text: |
                     Now that we can use a `{repeat}` inside a `{repeat}`, we can create more complex figures.

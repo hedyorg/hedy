@@ -402,10 +402,6 @@ adventures:
                     namn = {input}('Vad heter du?')
                     {print}('Du heter alltså ', namn)
                     ```
-                start_code: |
-                    {print}('Jag heter Hedy!')
-                    namn = {input}('Vad heter du?')
-                    {print}('Du heter alltså ', namn)
     blackjack:
         name: Blackjack
         default_save_name: Blackjack
@@ -711,8 +707,6 @@ adventures:
                     ```
                     # Use your own code from the previous adventure.
                     ```
-                start_code: |
-                    # Use your own code from the previous adventure.
     clear_command:
         name: '{clear}'
         default_save_name: kommandot_sudda
@@ -1159,19 +1153,6 @@ adventures:
                         print 'You scored ' score ' out of 10'
 
                     ```
-                start_code: |
-                    country = ['The Netherlands', 'Poland', 'Turkey', 'Zimbabwe', 'Thailand', 'Brasil', 'Peru', 'Australia', 'India', 'Romania' ]
-                    capitals = 'Amsterdam', 'Warshaw' 'Istanbul', 'Harare', 'Bangkok', 'Brasilia', 'Lima', 'Canberra', 'New Delhi', 'Bucharest'
-                    score = 0
-                    for i in range 0 to 10
-                        answer = ask 'What's the capital of ' countries[i]
-                        correct = capital[i]
-                        if answer = correct
-                            print 'Correct!'
-                        score = score + 1
-                        else
-                            print 'Wrong,' capitals[i] 'in the capital of' countries[i]
-                        print 'You scored ' score ' out of 10'
             17:
                 story_text: |-
                     ### Exercise
@@ -1207,35 +1188,6 @@ adventures:
 
                     print 'Thanks for ordering!'
                     ```
-                start_code: |4
-
-                      define food_order
-                          toppings = ask 'pepperoni, tuna, veggie or cheese?'
-                          size = ask 'big, medium or small?'
-                          number_of_pizza = ask 'How many these pizzas would you like?'
-
-                          print 'YOU ORDERED'
-                          print number_of_pizzas ' size  ' topping ' pizza'
-
-                      define drinks_order
-                          drink = ask 'water, coke, icetea, lemonade or coffee?'
-                          number_of_drinks = ask 'How many of these drinks would you like?'
-
-                          print 'YOU ORDERED'
-                          print number_of_drinks ' ' drink
-
-                      'Welcome to Hedy pizza'
-                      more_food = ask 'Would you like to order a pizza?'
-                      while more_food = 'yes'
-                          return food_order
-                          more_food = ask 'Would you like to order a pizza?'
-                      more_drinks = ask 'Would you like to order some drinks?'
-                      while more_drinks == 'yes'
-                          call drink_order
-                          more_drinks == ask 'Would you like to order more drinks?'
-
-
-                      print 'Thanks for ordering!'
             18:
                 story_text: |-
                     ### Exercise
@@ -1258,22 +1210,6 @@ adventures:
                         print 'there a ' sound
                         print 'everywhere a ' sound sound
                     ```
-                start_code: |4
-
-                      animals = ['pig', 'dog', 'cow']
-                      sounds = ['oink', 'woof', 'moo']
-                      for i in range 1 to 3
-                          animal = animals[i]
-                          sound = sounds[i]
-                          print 'Old McDonald had a farm'
-                          print 'E I E I O!'
-                          print 'and on that farm he had a ' animal
-                          print 'E I E I O!'
-                          print 'with a ' sound sound ' here'
-                          print 'and a ' sound sound ' there'
-                          print 'here a ' sound
-                          print 'there a ' sound
-                          print 'everywhere a ' sound sound
     default:
         name: Introduction
         default_save_name: introduktion
@@ -1509,7 +1445,6 @@ adventures:
                 story_text: |
                     Grattis! Du har nått den sista nivån i Hedy! Koden du skrivit här kan kopieras till riktiga Python-miljöer som replit eller PyCharm och du kan fortsätta lära dig där!
                     Notera att Python bara kan läsa engelska kommandon, så om du har använt andra språk måste du byta till engelska nu.
-                start_code: '{print} (''Bra jobbat!!!'')'
     dice:
         name: Tärning
         default_save_name: Tärning
@@ -1749,16 +1684,6 @@ adventures:
                     {else}:
                         {print} 'Bättre tur nästa gång …'
                     ```
-                start_code: |-
-                    priser = ['1 miljon dollar', 'en äppelpaj', 'ingenting']
-                    ditt_pris = priser[{random}]
-                    {print} 'Du vinner ' ditt_pris
-                    {if} ditt_pris == '1 miljon dollar' :
-                        {print} 'Hurra! Du är rik!'
-                    {elif} ditt_pris == 'en äppelpaj' :
-                        {print} 'Härligt, en äppelpaj!'
-                    {else}:
-                        {print} 'Bättre tur nästa gång …'
     for_command:
         name: '{for}'
         default_save_name: för
@@ -1796,10 +1721,6 @@ adventures:
                         {print} i
                     {print} 'Klar eller inte, här kommer jag!'
                     ```
-                start_code: |-
-                    {for} i {in} {range} 1 {to} 10:
-                        {print} i
-                    {print} 'Klar eller inte, här kommer jag!'
     fortune:
         name: Spådam
         default_save_name: Spådam
@@ -2170,7 +2091,6 @@ adventures:
                     {print} Åh, nej! Gå snabbt till köket.
                     {print} Men när du går in anfaller monster_3 dig!
                     ```
-                start_code: monster1 {is} _
             3:
                 story_text: |
                     På de tidigare nivåerna har du gjort en början till ditt spökhusspel, men som du kanske har märkt har berättelsen alltid haft ett hemskt slut.
@@ -2593,7 +2513,6 @@ adventures:
                     {print} '5 minus 5 är ' 5 - 5
                     {print} '5 gånger 5 är ' 5 * 5
                     ```
-                start_code: '{print} ''5 gånger 5 är '' 5 * 5'
             12:
                 story_text: |-
                     **Decimaltal**
@@ -3003,15 +2922,6 @@ adventures:
                     fruit = ['apple', 'banana', 'cherry']
                     {print} fruit[random]
                     ```
-                start_code: |-
-                    friends = ['Ahmed', 'Ben', 'Cayden']
-                    {print} friends[1] ' is the first friend on the list.'
-                    {print} friends[2] ' is the second friend on the list.'
-                    {print} friends[3] ' is the third friend on the list.'
-                    #now we will match 2 lists using the variable i
-                    lucky_numbers = [15, 18, 6]
-                    {for} i {in} {range} 1 {to} 3
-                        {print} friends[i] 's lucky number is ' lucky_numbers[i]
     repeat_command:
         name: Upprepa
         default_save_name: kommandot_upprepa
@@ -3326,7 +3236,6 @@ adventures:
                     _ mat = {ask} namnet ', vad vill du ha till ' rätt '?'
                     _ {print} namnet ' beställer ' mat ' till ' rätt
                     ```
-                start_code: rätter = förrätt, huvudrätt, efterrätt
             11:
                 story_text: |
                     Vi kan använda `{for}` med `{range}` för att skriva ut beställningar från flera kunder på ett ordnat sätt.
@@ -3632,10 +3541,6 @@ adventures:
                     {sleep} 2
                     {print} grön!
                     ```
-                start_code: |-
-                    {print} Min favoritfärg är …
-                    {sleep} 2
-                    {print} grön!
     songs:
         name: Sjung en sång!
         default_save_name: Sång
@@ -4252,7 +4157,6 @@ adventures:
                         {turn} _
                         {forward} _
                     ```
-                start_code: figur = {ask} 'Hur många vinklar ska jag rita?'
             9:
                 story_text: |
                     Nu när vi kan använda en `{repeat}` inuti en `{repeat}`, kan vi skapa mer komplexa figurer.

@@ -401,10 +401,6 @@ adventures:
                     isim = {input}('Senin adın ne?')
                     {print}('Demek senin ismin ', isim)
                     ```
-                start_code: |
-                    {print}('Benim adım Hedy!')
-                    isim = {input}('Senin adın ne?')
-                    {print}('Demek senin ismin ', isim)
     blackjack:
         name: Yirmibir
         default_save_name: Yirmibir
@@ -540,11 +536,6 @@ adventures:
                     given_answer = 'What is ' number_1 ' times ' number_2 '?'
                     {if} _
                     {else} _
-                start_code: |
-                    sayı_1 = {ask} 'İlk numarayı girin:'
-                    sayı_2 = {ask} 'İkinci numarayı girin:'
-                    doğru_cevap = sayı_1 * sayı_2
-                    {print} sayı_1 ' kere ' sayı_2 ' eder ' doğru_cevap
             9:
                 story_text: |
                     Seviye 6'da bir hesap makinesi oluşturmuştunuz, bu seviyede bu kodu birden fazla soru soracak şekilde genişletebilirsiniz.
@@ -715,8 +706,6 @@ adventures:
                     ```
                     # Use your own code from the previous adventure.
                     ```
-                start_code: |
-                    # Use your own code from the previous adventure.
     clear_command:
         name: '{clear}'
         default_save_name: temizle_komutu
@@ -1163,19 +1152,6 @@ adventures:
                         print 'You scored ' score ' out of 10'
 
                     ```
-                start_code: |
-                    country = ['The Netherlands', 'Poland', 'Turkey', 'Zimbabwe', 'Thailand', 'Brasil', 'Peru', 'Australia', 'India', 'Romania' ]
-                    capitals = 'Amsterdam', 'Warshaw' 'Istanbul', 'Harare', 'Bangkok', 'Brasilia', 'Lima', 'Canberra', 'New Delhi', 'Bucharest'
-                    score = 0
-                    for i in range 0 to 10
-                        answer = ask 'What's the capital of ' countries[i]
-                        correct = capital[i]
-                        if answer = correct
-                            print 'Correct!'
-                        score = score + 1
-                        else
-                            print 'Wrong,' capitals[i] 'in the capital of' countries[i]
-                        print 'You scored ' score ' out of 10'
             17:
                 story_text: |-
                     ### Exercise
@@ -1211,35 +1187,6 @@ adventures:
 
                     print 'Thanks for ordering!'
                     ```
-                start_code: |4
-
-                        define food_order
-                            toppings = ask 'pepperoni, tuna, veggie or cheese?'
-                            size = ask 'big, medium or small?'
-                            number_of_pizza = ask 'How many these pizzas would you like?'
-
-                            print 'YOU ORDERED'
-                            print number_of_pizzas ' size  ' topping ' pizza'
-
-                        define drinks_order
-                            drink = ask 'water, coke, icetea, lemonade or coffee?'
-                            number_of_drinks = ask 'How many of these drinks would you like?'
-
-                            print 'YOU ORDERED'
-                            print number_of_drinks ' ' drink
-
-                        'Welcome to Hedy pizza'
-                        more_food = ask 'Would you like to order a pizza?'
-                        while more_food = 'yes'
-                            return food_order
-                            more_food = ask 'Would you like to order a pizza?'
-                        more_drinks = ask 'Would you like to order some drinks?'
-                        while more_drinks == 'yes'
-                            call drink_order
-                            more_drinks == ask 'Would you like to order more drinks?'
-
-
-                        print 'Thanks for ordering!'
             18:
                 story_text: |-
                     ### Exercise
@@ -1262,22 +1209,6 @@ adventures:
                         print 'there a ' sound
                         print 'everywhere a ' sound sound
                     ```
-                start_code: |4
-
-                        animals = ['pig', 'dog', 'cow']
-                        sounds = ['oink', 'woof', 'moo']
-                        for i in range 1 to 3
-                            animal = animals[i]
-                            sound = sounds[i]
-                            print 'Old McDonald had a farm'
-                            print 'E I E I O!'
-                            print 'and on that farm he had a ' animal
-                            print 'E I E I O!'
-                            print 'with a ' sound sound ' here'
-                            print 'and a ' sound sound ' there'
-                            print 'here a ' sound
-                            print 'there a ' sound
-                            print 'everywhere a ' sound sound
     default:
         name: Giriş
         default_save_name: giriş
@@ -1519,7 +1450,6 @@ adventures:
                 story_text: |
                     Tebrikler! Hedy'nin son seviyesine ulaştınız! Burada oluşturduğunuz kodu replit veya PyCharm gibi gerçek Python ortamlarına kopyalayabilir ve orada öğrenmeye devam edebilirsiniz!
                     Ancak Python'un yalnızca İngilizce komutları okuyabildiğini unutmayın. Şimdiye kadar gördüğünüz komutları İngilizce olanları ile değiştirmeniz gerekecek. Komutları yazarken cümledeki yerlerinin biraz Tarzan'ca olduğunu farketmişsinizdir. Bunun sebebi, komut kelimelerinin aynı oldukları yerlere İngilizcelerini yazınca, kodunuzun gerçek bir Python programına dönüşebilmesiydi (tabi biraz da Türkçemizin bazı harflerini değiştirmek gerekecek ama bu pek bir sorun değil).
-                start_code: '{print} (''Harika iş çıkardınız!!!'')'
     dice:
         name: Zar
         default_save_name: Zar
@@ -1759,16 +1689,6 @@ adventures:
                     {else}:
                         {print} 'Bir dahaki sefere iyi şanslar...'
                     ```
-                start_code: |-
-                    ödüller = ['1 milyon lira', 'bir elmalı turta', 'hiçbir şey']
-                    senin_ödülün = ödüller[{random}]
-                    {print} 'Kazandığın ödül ' senin_ödülün
-                    {if} senin_ödülün == '1 milyon lira' :
-                        {print} 'Evet! Sen artık zenginsin!'
-                    {elif} senin_ödülün == 'bir elmalı turta' :
-                        {print} 'Çok güzel, bir elmalı turta!'
-                    {else}:
-                        {print} 'Bir dahaki sefere iyi şanslar...'
     for_command:
         name: '{for}'
         default_save_name: for
@@ -1806,10 +1726,6 @@ adventures:
                         {print} i
                     {print} 'Önüm arkam sağım solum sobe, saklanmayan ebe!'
                     ```
-                start_code: |-
-                    {for} i {in} {range} 1 {to} 10:
-                        {print} i
-                    {print} 'Önüm arkam sağım solum sobe, saklanmayan ebe!'
     fortune:
         name: Falcı
         default_save_name: Falcı
@@ -2183,7 +2099,6 @@ adventures:
                     {print} Olamaz! Çabuk mutfağa gidin.
                     {print} Ama siz içeri girerken canavar_3 size saldırıyor!
                     ```
-                start_code: canavar_1 {is} _
             3:
                 story_text: |
                     Önceki seviyelerde, perili ev oyununuza bir giriş yaptınız, ancak fark etmiş olabileceğiniz gibi hikaye her zaman korkunç bir sona sahip oluyordu.
@@ -2621,11 +2536,6 @@ adventures:
                     {print} '5 çarpı 5 eder ' 5 * 5
                     {print} '5 bölü 5 eder ' 5 / 5
                     ```
-                start_code: |
-                    {print} '5 artı 5 eder ' 5 + 5
-                    {print} '5 eksi 5 eder ' 5 - 5
-                    {print} '5 çarpı 5 eder ' 5 * 5
-                    {print} '5 bölü 5 eder ' 5 / 5
             12:
                 story_text: |-
                     **Ondalık sayılar**
@@ -3035,15 +2945,6 @@ adventures:
                     fruit = ['apple', 'banana', 'cherry']
                     {print} fruit[random]
                     ```
-                start_code: |-
-                    friends = ['Ahmed', 'Ben', 'Cayden']
-                    {print} friends[1] ' is the first friend on the list.'
-                    {print} friends[2] ' is the second friend on the list.'
-                    {print} friends[3] ' is the third friend on the list.'
-                    #now we will match 2 lists using the variable i
-                    lucky_numbers = [15, 18, 6]
-                    {for} i {in} {range} 1 {to} 3
-                        {print} friends[i] 's lucky number is ' lucky_numbers[i]
     repeat_command:
         name: '{repeat}'
         default_save_name: tekrarla_komutu
@@ -3355,7 +3256,6 @@ adventures:
                     _ yemek = {ask} isim ', yemekte ' course ' olarak ne yemek istersin?'
                     _ {print} isim ' yemekte ' çeşit ' olarak ' yemek ' sipariş ediyor'
                     ```
-                start_code: çeşitler = meze, ana yemek, tatlı
             11:
                 story_text: |
                     Birden fazla müşteriden gelen siparişleri düzenli bir şekilde yazdırmak için `{for}` ile `{range}` kullanabiliriz.
@@ -4295,7 +4195,6 @@ adventures:
                         {turn} _
                         {forward} _
                     ```
-                start_code: şekil = {ask} 'Kaç tane açı çizmeliyim?'
             9:
                 story_text: |
                     Artık bir `{repeat}` içinde bir `{repeat}` kullanabildiğimize göre, daha karmaşık şekiller oluşturabiliriz.
