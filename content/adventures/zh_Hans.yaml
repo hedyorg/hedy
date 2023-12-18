@@ -1297,33 +1297,33 @@ adventures:
                     ```
                 start_code: |2
 
-                                        define food_order
-                                            toppings = ask 'pepperoni, tuna, veggie or cheese?'
-                                            size = ask 'big, medium or small?'
-                                            number_of_pizza = ask 'How many these pizzas would you like?'
+                                            define food_order
+                                                toppings = ask 'pepperoni, tuna, veggie or cheese?'
+                                                size = ask 'big, medium or small?'
+                                                number_of_pizza = ask 'How many these pizzas would you like?'
 
-                                            print 'YOU ORDERED'
-                                            print number_of_pizzas ' size  ' topping ' pizza'
+                                                print 'YOU ORDERED'
+                                                print number_of_pizzas ' size  ' topping ' pizza'
 
-                                        define drinks_order
-                                            drink = ask 'water, coke, icetea, lemonade or coffee?'
-                                            number_of_drinks = ask 'How many of these drinks would you like?'
+                                            define drinks_order
+                                                drink = ask 'water, coke, icetea, lemonade or coffee?'
+                                                number_of_drinks = ask 'How many of these drinks would you like?'
 
-                                            print 'YOU ORDERED'
-                                            print number_of_drinks ' ' drink
+                                                print 'YOU ORDERED'
+                                                print number_of_drinks ' ' drink
 
-                                        'Welcome to Hedy pizza'
-                                        more_food = ask 'Would you like to order a pizza?'
-                                        while more_food = 'yes'
-                                            return food_order
+                                            'Welcome to Hedy pizza'
                                             more_food = ask 'Would you like to order a pizza?'
-                                        more_drinks = ask 'Would you like to order some drinks?'
-                                        while more_drinks == 'yes'
-                                            call drink_order
-                                            more_drinks == ask 'Would you like to order more drinks?'
+                                            while more_food = 'yes'
+                                                return food_order
+                                                more_food = ask 'Would you like to order a pizza?'
+                                            more_drinks = ask 'Would you like to order some drinks?'
+                                            while more_drinks == 'yes'
+                                                call drink_order
+                                                more_drinks == ask 'Would you like to order more drinks?'
 
 
-                                        print 'Thanks for ordering!'
+                                            print 'Thanks for ordering!'
             18:
                 story_text: |-
                     ### 练习
@@ -1331,20 +1331,20 @@ adventures:
                 example_code: "**警告！ 这段代码需要调试！**\n```\nanimals = ['pig', 'dog', 'cow']\nsounds = ['oink', 'woof', 'moo']\nfor i in range 1 to 3\n    animal = animals[i]\n    sound = sounds[i]\n    print '老麦当劳有一个农场'\n    print 'E I E I O!'\n    print '在那个农场他有一只' animal\n    print 'E I E I O!'\n    print '这里有‘sound sound\n    print '以及那也有' sound sound \n    print '这里有 ' sound\n    print '那也有 ' sound\n    print '到处有 ' sound sound\n```\n"
                 start_code: |2
 
-                                        animals = ['pig', 'dog', 'cow']
-                                        sounds = ['oink', 'woof', 'moo']
-                                        for i in range 1 to 3
-                                            animal = animals[i]
-                                            sound = sounds[i]
-                                            print 'Old McDonald had a farm'
-                                            print 'E I E I O!'
-                                            print 'and on that farm he had a ' animal
-                                            print 'E I E I O!'
-                                            print 'with a ' sound sound ' here'
-                                            print 'and a ' sound sound ' there'
-                                            print 'here a ' sound
-                                            print 'there a ' sound
-                                            print 'everywhere a ' sound sound
+                                            animals = ['pig', 'dog', 'cow']
+                                            sounds = ['oink', 'woof', 'moo']
+                                            for i in range 1 to 3
+                                                animal = animals[i]
+                                                sound = sounds[i]
+                                                print 'Old McDonald had a farm'
+                                                print 'E I E I O!'
+                                                print 'and on that farm he had a ' animal
+                                                print 'E I E I O!'
+                                                print 'with a ' sound sound ' here'
+                                                print 'and a ' sound sound ' there'
+                                                print 'here a ' sound
+                                                print 'there a ' sound
+                                                print 'everywhere a ' sound sound
     default:
         name: 介绍
         default_save_name: 介绍
@@ -1678,8 +1678,8 @@ adventures:
                     points = 0
                     throw=choices{at} {random}
                     {print} '你扔了 ' throw
-                    {if}throw{is}蚯蚓 points=points+5  {else} points=points+throw
-                    {print} '这些是'points'点'
+                    {if} throw {is} 蚯蚓 points=points+5  {else} points=points+throw
+                    {print} '这些是' points '点'
                     ````
                 example_code_2: |
                     你能算出 8 个骰子的分数吗？ 这需要大量的复制和粘贴，对吗？ 我们将在第 7 级中让这一切变得更容易！
@@ -1840,7 +1840,7 @@ adventures:
                     {for} 日期 {in} 日期们
                         {print} 名字们 {at} {random} '负责在' 日期 '洗碗'
                     ```
-                start_code: "days=周一、周二、周三、周四、周五、周六、周日\nnames=妈妈、爸爸、艾玛、苏菲\n{for} day {in} days\n     {print} names {at} {random} ' 在 ' day '洗碗\n"
+                start_code: "days=周一、周二、周三、周四、周五、周六、周日\nnames=妈妈、爸爸、艾玛、苏菲\n{for} day {in} days\n     {print} names {at} {random} ' 在 ' day '洗碗'\n"
     elif_command:
         name: '{elif}'
         default_save_name: elif
@@ -1855,9 +1855,9 @@ adventures:
                     prices = ['100 万美元', '苹果派', '什么都没有']
                     your_price = prices[{random}]
                     {print} '你赢了 ' your_price
-                    {if} your_price == '100万美元' ：
+                    {if} your_price == '100万美元' :
                          {print}'是啊！ 你好有钱！'
-                    {elif} your_price == '一个苹果派'：
+                    {elif} your_price == '一个苹果派':
                          {print} '可爱的苹果派！'
                     {else}：
                          {print} '下次祝你好运..'
@@ -1866,9 +1866,9 @@ adventures:
                     prices = ['100 万美元', '苹果派', '什么都没有']
                     your_price = prices[{random}]
                     {print} '你赢了 ' your_price
-                    {if} your_price == '100万美元' ：
+                    {if} your_price == '100万美元' :
                          {print}'是啊！ 你好有钱！'
-                    {elif} your_price == '一个苹果派'：
+                    {elif} your_price == '一个苹果派':
                          {print} '可爱的苹果派！'
                     {else}：
                          {print} '下次祝你好运..'
@@ -2020,8 +2020,8 @@ adventures:
                     {print}“我可以预测你长大后会生几个孩子！”
                     age = {ask} '你多大了？
                     siblings = {ask} '你有多少个兄弟姐妹？'
-                    length = {ask} '你有多高（厘米）？
-                    kids=身长/年龄
+                    length = {ask} '你有多高（厘米）？'
+                    kids=length/age
                     kids=kids-siblings
                     {print} '你会得到......'
                     {sleep}
