@@ -19,8 +19,9 @@ describe('Is able to preview class', () => {
     cy.get("#hedybutton").click();
 
     goToLevel(1);
-    // we expect a "print_command" tab
+    // we expect a "print_command" and an "ask_command" tab
     cy.get("#adventures-buttons [data-tab='print_command']");
+    cy.get("#adventures-buttons [data-tab='ask_command']");
     // assert that no preview_class_banner is shown right now
     cy.get("[data-cy='preview_class_banner']").should("not.exist");
 
@@ -39,7 +40,7 @@ describe('Is able to preview class', () => {
     // check the banner is there
     cy.get("[data-cy='preview_class_banner']");
     // check the is_command is there
-    cy.get("#adventures-buttons [data-tab='is_command']");
+    cy.get("#adventures-buttons [data-tab='ask_command']");
     // check that the print_command is absent
     cy.get("#adventures-buttons [data-tab='print_command']").should("not.exist");
 
