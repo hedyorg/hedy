@@ -1216,7 +1216,7 @@ adventures:
 
                     print 'Thanks for ordering!'
                     ```
-                start_code: |4
+                start_code: |2
 
                         define food_order
                             toppings = ask 'pepperoni, tuna, veggie or cheese?'
@@ -1267,7 +1267,7 @@ adventures:
                         print 'there a ' sound
                         print 'everywhere a ' sound sound
                     ```
-                start_code: |4
+                start_code: |2
 
                         animals = ['pig', 'dog', 'cow']
                         sounds = ['oink', 'woof', 'moo']
@@ -1347,7 +1347,6 @@ adventures:
                     print '5 meno 5 è ' 5 - 5
                     print '5 per 5 è ' 5 * 5
                     ```
-                start_code: print '5 per 5 è ' 5 * 5
             7:
                 story_text: |
                     `ask`, `print` e `if` funzionano esattamente come funzionavano nel livello 6.
@@ -1490,19 +1489,12 @@ adventures:
                             {print} 'Un 'animale' dice 'suono
                     ```
                     Nota: questi codici non funzioneranno in questo modo in questo livello. Vai alla scheda successiva per vedere quali parti devi correggere.
-                start_code: |-
-                    frutta = ['mela', 'banana', 'ciliegia']
-                    {print} frutta
             17:
                 story_text: |
                     Ora cambieremo leggermente il rientro. Ogni volta che abbiamo bisogno di un rientro, abbiamo bisogno di `:` nella riga prima del rientro.
 
                     In questo livello puoi anche utilizzare un nuovo comando: `{elif}`. `{elif}` è l'abbreviazione di {else} {if} e ti serve quando vuoi fare 3 (o più!) opzioni.
                     Controlla!
-                start_code: |-
-                    {for} i {in} {range} 1 {to} 10:
-                        {print} i
-                    {print} 'Pronti o no, io arrivo!'
             18:
                 story_text: |
                     Congratulazioni! Hai raggiunto l'ultimo livello di Hedy! Il codice che hai creato qui può essere copiato in ambienti Python reali come replit o PyCharm e puoi continuare ad imparare lì!
@@ -4543,8 +4535,7 @@ adventures:
         description: while
         levels:
             15:
-                story_text: "Stiamo per imparare un nuovo loop, il `{while}` loop!Continuiamo il ciclo finché la condizione è vera. \nQuindi, non dimenticare di modificare il valore nel loop.\n\nNel codice di esempio, continuiamo fino a quando non viene fornita una risposta corretta.\n Se la risposta\
-                    \ corretta non viene mai fornita, il loop non termina mai!"
+                story_text: "Stiamo per imparare un nuovo loop, il `{while}` loop!Continuiamo il ciclo finché la condizione è vera. \nQuindi, non dimenticare di modificare il valore nel loop.\n\nNel codice di esempio, continuiamo fino a quando non viene fornita una risposta corretta.\n Se la risposta corretta non viene mai fornita, il loop non termina mai!"
                 example_code: |
                     ```
                     risposta = 0

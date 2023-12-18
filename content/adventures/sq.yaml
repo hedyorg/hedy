@@ -1181,7 +1181,7 @@ adventures:
 
                     print 'Thanks for ordering!'
                     ```
-                start_code: |4
+                start_code: |2
 
                       define food_order
                           toppings = ask 'pepperoni, tuna, veggie or cheese?'
@@ -1232,7 +1232,7 @@ adventures:
                         print 'there a ' sound
                         print 'everywhere a ' sound sound
                     ```
-                start_code: |4
+                start_code: |2
 
                       animals = ['pig', 'dog', 'cow']
                       sounds = ['oink', 'woof', 'moo']
@@ -1254,8 +1254,7 @@ adventures:
         description: Shpjegim i niveleve
         levels:
             1:
-                story_text: "Në level 1 mund ti përdorni komandat `{print}`, `{ask}` dhe `{echo}`.\n Shkruani kodin në fushën e programimit. Ose shtypeni butonin e gjelbër në bllokun që tregon shembull, dhe kodi do të shkruhet për ju!\nProvojeni kodin tuaj duke shtypur butonin 'Ekzekuto kodin' ndër fushën\
-                    \ e programimit.\n\n Mund të printoni tekst në ekran duke përdorur komandën `{print}`.     \n"
+                story_text: "Në level 1 mund ti përdorni komandat `{print}`, `{ask}` dhe `{echo}`.\n Shkruani kodin në fushën e programimit. Ose shtypeni butonin e gjelbër në bllokun që tregon shembull, dhe kodi do të shkruhet për ju!\nProvojeni kodin tuaj duke shtypur butonin 'Ekzekuto kodin' ndër fushën e programimit.\n\n Mund të printoni tekst në ekran duke përdorur komandën `{print}`.     \n"
             2:
                 story_text: |
                     Në level 2 do të mësojmë komandat: `{is}` dhe `{sleep}`.
@@ -1312,7 +1311,6 @@ adventures:
                     {print} '5 minus 5 është ' 5 - 5
                     {print} '5 herë 5 është ' 5 * 5
                     ```
-                start_code: '{print} ''5 herë 5 është '' 5 * 5'
             7:
                 story_text: |
                     Niveli 7 shton komandën `{repeat}`.  `{repeat}` komanda mund të përdoret që të ekzekutoni rreshtin e kodit disa herë.
@@ -1383,8 +1381,7 @@ adventures:
 
                     {print} 2.5 + 2.5
             13:
-                story_text: Ne tash do të mësojmë për komandën `{and}` dhe `{or}`! Nëse doni të kontrolloni dy deklarata, nuk ka nevojë për dy komanda {if} por mund të përdorni `{and}` dhe `{or}`. Nëse përdorni `{and}`, të dyja deklaratat, majtë edhe djathtë `{and}` duhet të jenë të vërteta. Ne gjithashtu
-                    mund të përdorim `{or}` atëherë vetëm njëra deklaratë duhet të jetë e vërtetë.
+                story_text: Ne tash do të mësojmë për komandën `{and}` dhe `{or}`! Nëse doni të kontrolloni dy deklarata, nuk ka nevojë për dy komanda {if} por mund të përdorni `{and}` dhe `{or}`. Nëse përdorni `{and}`, të dyja deklaratat, majtë edhe djathtë `{and}` duhet të jenë të vërteta. Ne gjithashtu mund të përdorim `{or}` atëherë vetëm njëra deklaratë duhet të jetë e vërtetë.
                 example_code: |
                     ```
                     emri= {ask} 'Si e ke emrin?'
@@ -1437,19 +1434,12 @@ adventures:
                         {print} 'numri me fatë i ' shokët[i]
                         {print} 'është ' numrat_me_fat[i]
                     ```
-                start_code: |-
-                    fruta = ['molla', 'banane', 'qershi']
-                    {print} fruta
             17:
                 story_text: |-
                     Tani do të ndryshojmë mënyrën e hapësirave para kodit. Çdoherë kur do na duhet hapësirë para kodit, neve na duhet `:` tek rreshti para hapësirës.
 
                     Në këtë nivel gjithashtu mund të përdorni: `{elif}`. `{elif}` është shkurt për {else} {if} dhe ju duhet kur doni të kontrolloni 3 apo më shumë opsione.
                     Shiheni!
-                start_code: |-
-                    {for} i {in} {range} 1 {to} 10:
-                        {print} i
-                    {print} 'Gati apo jo, ja ku vi!'
             18:
                 story_text: |-
                     Ne mbërritëm në kodin e vërtetë të gjuhës Python! Kjo do të thotë se duhet të përdorim kllapa në komandën {print} dhe {range} prej tani.
@@ -4070,8 +4060,7 @@ adventures:
                     {forward} 25
                     ```
             3:
-                story_text: "Në këtë nivel ju mund të përdorni komandën `{at} {random}` me vizatimin e breshkës. Një zgjedhje random e bën breshkën të ecë rrugë të ndryshme çdo herë. Përdorni `{at} {random}` për të zgjedhur një vlerë nga një listë. \n\n### Sfidë\nA mund të bëni kopjoni rreshtat 2 dhe\
-                    \ 3 për të krijuar një rrugë më të gjatë random.\n"
+                story_text: "Në këtë nivel ju mund të përdorni komandën `{at} {random}` me vizatimin e breshkës. Një zgjedhje random e bën breshkën të ecë rrugë të ndryshme çdo herë. Përdorni `{at} {random}` për të zgjedhur një vlerë nga një listë. \n\n### Sfidë\nA mund të bëni kopjoni rreshtat 2 dhe 3 për të krijuar një rrugë më të gjatë random.\n"
                 example_code: |
                     ```
                     kënde {is} 10, 50, 90, 150, 250

@@ -1168,7 +1168,7 @@ adventures:
 
                     print 'Thanks for ordering!'
                     ```
-                start_code: |4
+                start_code: |2
 
                       define food_order
                           toppings = ask 'pepperoni, tuna, veggie or cheese?'
@@ -1219,7 +1219,7 @@ adventures:
                         print 'there a ' sound
                         print 'everywhere a ' sound sound
                     ```
-                start_code: |4
+                start_code: |2
 
                       animals = ['pig', 'dog', 'cow']
                       sounds = ['oink', 'woof', 'moo']
@@ -1242,7 +1242,6 @@ adventures:
         levels:
             1:
                 story_text: 'স্বাগত হেডিতে! স্তর 1 একে আপানি `print` `ask` ` echo` নির্দেশের ব্যবহার করতে  পারবেন | নীল বোতামটা  চাপা মাত্রই  আপনার কোড আপনার জন্য টাইপ হয়ে যাবে| নিজে থেকে কোডটা চেষ্ঠা করুন প্ৰোগ্র্যামিং ক্ষেত্রতে নিচে বাদিকে সবুজ “ Run the Code “ বোতামটা চেপে '
-                start_code: print হ্যালো  বিশ্ব !
             2:
                 story_text: স্তর 1 একে `print` যেভাবে কাজ করেছে  ঠিক (তমনি ভাবেই কাজ করবে |কিন্তু `ask` এখন  বদলে গেছে| আর এখন কোন নামের প্রয়োজন হবে ,তারপর আপনি সেটিকে print করতে পারবেন  | `echo` আর প্রয়োজন নেই | আপনি এখন এই নির্দেশ গুলোর ব্যবহার, করতে পারেন
                 example_code: |
@@ -1253,10 +1252,8 @@ adventures:
                     ```
                 story_text_2: |
                     `{print}` still works the same, but the `{ask}` command has changed. You need to use a variable in the `{ask}` command as well. It looks like this:
-                start_code: print  হ্যালো  বিশ্ব !
             3:
                 story_text: 'আপনি এখন এই নির্দেশ গুলোর ব্যবহার, করতে পারেন '
-                start_code: print  হ্যালো  বিশ্ব !
             4:
                 story_text: স্তর 3 তিনে `ask` ঠিক একই  ভাবেই কাজ করবে, কিন্তু `print` এখন  বদলে গেছে যে বাক্যটি আপনি print করতে চান সেটি কোটেশন চিহ্নের ভেতরে লিখতে হবে
                 example_code: |
@@ -1265,7 +1262,6 @@ adventures:
                     answer is ask 'What do we need to use from now on?'
                     print 'We need to use ' answer
                     ```
-                start_code: print 'হ্যালো  বিশ্ব !'
             5:
                 story_text: স্তর 3 তিনের মতই `ask` আর `print` ঠিক একই  ভাবেই কাজ করবে | স্তর 4 চার থেকে `if` যুক্ত হয়ে যায়
                 example_code: |
@@ -1273,9 +1269,6 @@ adventures:
                     name {is} {ask} 'what is your name?'
                     {if} name {is} Hedy {print} 'nice' {else} {print} 'boo!'
                     ```
-                start_code: |
-                    নাম is ask 'আপনার নাম কি?'
-                    if নাম is হেডি print 'ভালো!' else print 'মন্দ'
             6:
                 story_text: |
                     স্তর 4 চার এবং পাঁচে `ask`, `print` এবং  `if` ঠিক একই  ভাবেই কাজ করবে. স্তর 5  ছয়ে একটা নতুন নির্দেশ যুক্ত হয়ে যায়.. আপনি এখন গণণা করতে পারবেন
@@ -1285,18 +1278,14 @@ adventures:
                     {print} '5 minus 5 is ' 5 - 5
                     {print} '5 {times} 5 is ' 5 * 5
                     ```
-                start_code: print '5 বার 5 is  ' 5 * 5
             7:
                 story_text: স্তর 4 & 5 চারের মতই  {ask}, {if} আর {print} ঠিক একই  ভাবেই কাজ করবে | স্তর 6  থেকে “পুনরাবৃত্তি” যুক্ত হয়ে যায় “পুনরাবৃত্তি” ব্যবহার করতে পারেন যে কোন বাক্য একাধিকবার এক্সিকিউট করার জন্যে
                 example_code: |
                     ```
                     {repeat} 3 {times} {print} 'Hedy is fun!'
                     ```
-                start_code: |
-                    repeat 3 times print 'হেডি মজাদার!'
             8:
-                story_text: "ask এবং print ঠিক একই ভাবেই কাজ করবে. কিন্তু if এবং repeat পরিবর্তিত হয়েছে! আপনি এখন কোডের গ্রুপ গুলোকে একসাথে এক্সিকিউট করতে পারেন , তবে আপনাকে কোডটিকে ইন্ডেণ্ট করতে হবে . তার মানে লাইনের শুরুতে চারটা স্পেশ দেওয়া. একটি লাইনের ব্লক তৈরি করেতে চাইলেও ঠিক একই কাজ করতে হবে\t\
-                    if আপনি একটি  `পুনরাবৃত্তি` এবং একটি  `if ` একত্রিত করতে চান আপনাকে প্রত্রেকটি ব্লক ইন্ডেণ্ট করতে হবে.  আরও বিশদের জন্যে উদাহরণ কোডটি দেখুন!\n"
+                story_text: "ask এবং print ঠিক একই ভাবেই কাজ করবে. কিন্তু if এবং repeat পরিবর্তিত হয়েছে! আপনি এখন কোডের গ্রুপ গুলোকে একসাথে এক্সিকিউট করতে পারেন , তবে আপনাকে কোডটিকে ইন্ডেণ্ট করতে হবে . তার মানে লাইনের শুরুতে চারটা স্পেশ দেওয়া. একটি লাইনের ব্লক তৈরি করেতে চাইলেও ঠিক একই কাজ করতে হবে\tif আপনি একটি  `পুনরাবৃত্তি` এবং একটি  `if ` একত্রিত করতে চান আপনাকে প্রত্রেকটি ব্লক ইন্ডেণ্ট করতে হবে.  আরও বিশদের জন্যে উদাহরণ কোডটি দেখুন!\n"
                 example_code: |
                     ```
                     {repeat} 5 {times}
@@ -1346,8 +1335,7 @@ adventures:
 
                     {print} 2.5 + 2.5
             13:
-                story_text: We are now going to learn `{and}` and `{or}`! If you want to check two statements, you don't have to use two if's but can use `{and}` and `{or}`. If you use `{and}`, both statements, left and right of the `{and}` need to be true. We can also use `{or}`. Then only one statement
-                    needs to be correct.
+                story_text: We are now going to learn `{and}` and `{or}`! If you want to check two statements, you don't have to use two if's but can use `{and}` and `{or}`. If you use `{and}`, both statements, left and right of the `{and}` need to be true. We can also use `{or}`. Then only one statement needs to be correct.
                 example_code: |
                     ```
                     name = {ask} 'what is your name?'
@@ -1403,19 +1391,12 @@ adventures:
                     {for} i {in} {range} 1 {to} 3
                         {print} friends[i] 's lucky number is ' lucky_numbers[i]
                     ```
-                start_code: |-
-                    fruit = ['apple', 'banana', 'cherry']
-                    {print} fruit
             17:
                 story_text: |-
                     Now we are going to change indentation a little bit. Every time that we need an indentation, we need `:` at the line before the indentation.
 
                     In this level you can also use a new command: `{elif}`. `{elif}` is short for {else} {if} and you need it when you want to make 3 (or more!) options.
                     Check it out!
-                start_code: |-
-                    {for} i {in} {range} 1 {to} 10:
-                        {print} i
-                    {print} 'Ready or not, here I come!'
             18:
                 story_text: |-
                     We arrived at real Python code! That means we need to use parentheses with {print} and {range} from now on.

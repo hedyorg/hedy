@@ -20,8 +20,7 @@ adventures:
                     {print} Ele ouve barulhos estranhos em todos os lugares
                     {print} Ele tem medo que esta seja uma floresta assombrada
                     ```
-                story_text_2: "### Exercício \nAgora crie sua própria história com pelo menos 6 linhas de código.\nEssa história não pode ser a mesma do código de exemplo.\nUse pelo menos um comando `{ask}` e um comando `{echo}`.\nVocê pode escolher qualquer tópico para a história.\nSe não conseguir pensar\
-                    \ em um tópico, pode usar uma das nossas sugestões: ir ao cinema, uma partida esportiva ou um dia no zoológico.\n"
+                story_text_2: "### Exercício \nAgora crie sua própria história com pelo menos 6 linhas de código.\nEssa história não pode ser a mesma do código de exemplo.\nUse pelo menos um comando `{ask}` e um comando `{echo}`.\nVocê pode escolher qualquer tópico para a história.\nSe não conseguir pensar em um tópico, pode usar uma das nossas sugestões: ir ao cinema, uma partida esportiva ou um dia no zoológico.\n"
             2:
                 story_text: |
                     No nível 2 você pode tornar sua história mais divertida. O nome do seu personagem principal agora pode estar em qualquer lugar dentro da frase.
@@ -1161,7 +1160,7 @@ adventures:
 
                     print 'Thanks for ordering!'
                     ```
-                start_code: |4
+                start_code: |2
 
                         define food_order
                             toppings = ask 'pepperoni, tuna, veggie or cheese?'
@@ -1212,7 +1211,7 @@ adventures:
                         print 'there a ' sound
                         print 'everywhere a ' sound sound
                     ```
-                start_code: |4
+                start_code: |2
 
                         animals = ['pig', 'dog', 'cow']
                         sounds = ['oink', 'woof', 'moo']
@@ -1304,7 +1303,6 @@ adventures:
                     {print} '5 menos 5 é ' 5 - 5
                     {print} '5 vezes 5 é ' 5 * 5
                     ```
-                start_code: '{print} ''5 vezes 5 é '' 5 * 5'
             7:
                 story_text: |
                     O nível 7 adiciona o comando `{repeat}`. `{repeat}` pode ser usado para executar uma linha de código várias vezes.
@@ -1376,8 +1374,7 @@ adventures:
 
                     {print} 2.5 + 2.5
             13:
-                story_text: Agora vamos aprender `{and}` e `{or}`! Se você quiser verificar duas declarações, você não precisa usar dois `{if}`s, mas pode usar `{and}` e `{or}`. Se você usar `{and}`, ambas as declarações, à esquerda e à direita de `{and}` precisam ser verdadeiras. Também podemos usar
-                    `{or}`. Então, apenas uma afirmação precisa estar correta.
+                story_text: Agora vamos aprender `{and}` e `{or}`! Se você quiser verificar duas declarações, você não precisa usar dois `{if}`s, mas pode usar `{and}` e `{or}`. Se você usar `{and}`, ambas as declarações, à esquerda e à direita de `{and}` precisam ser verdadeiras. Também podemos usar `{or}`. Então, apenas uma afirmação precisa estar correta.
                 example_code: |
                     ```
                     nome = {ask} 'qual o seu nome?'
@@ -1430,19 +1427,12 @@ adventures:
                         {print} 'o número da sorte de ' amigos[i]
                         {print} 'é ' números_da_sorte[i]
                     ```
-                start_code: |-
-                    fruta = ['maçã', 'banana', 'cereja']
-                    {print} fruta
             17:
                 story_text: |-
                     Agora vamos mudar um pouco a indentação. Toda vez que precisamos de um recuo, precisamos de `:` na linha antes do recuo.
 
                     Neste nível você também pode usar um novo comando: `{elif}`. `{elif}` é a abreviação de {else} {if} e você precisa dele quando quiser fazer 3 (ou mais!) opções.
                     Confira!
-                start_code: |-
-                    {for} i {in} {range} 1 {to} 10:
-                        {print} i
-                    {print} 'Preparado(a) ou não, aqui vou eu!'
             18:
                 story_text: |-
                     Chegamos ao código Python real! Isso significa que precisamos usar parênteses com {print} e {range} de agora em diante.
@@ -3238,7 +3228,6 @@ adventures:
                     {ask} choose from _
                     {echo} so your choice was:
                     ```
-                start_code: '{print} Bem-vindo ao seu próprio papel, pedra e tesoura!'
             2:
                 story_text: |
                     In this level you can practise using the variables, so that you can make the rock, paper, scissors game in the next level!
