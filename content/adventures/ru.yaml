@@ -403,10 +403,6 @@ adventures:
                     name = {input}('What is your name?')
                     {print}('So your name is ', name)
                     ```
-                start_code: |
-                    {print}('My name is Hedy!')
-                    name = {input}('What is your name?')
-                    {print}('So your name is ', name)
     blackjack:
         name: Блэкджек
         default_save_name: Блэкджек
@@ -699,8 +695,6 @@ adventures:
                     ```
                     # Use your own code from the previous adventure.
                     ```
-                start_code: |
-                    # Use your own code from the previous adventure.
     clear_command:
         name: '{clear}'
         default_save_name: clear_command
@@ -1147,19 +1141,6 @@ adventures:
                         print 'You scored ' score ' out of 10'
 
                     ```
-                start_code: |
-                    country = ['The Netherlands', 'Poland', 'Turkey', 'Zimbabwe', 'Thailand', 'Brasil', 'Peru', 'Australia', 'India', 'Romania' ]
-                    capitals = 'Amsterdam', 'Warshaw' 'Istanbul', 'Harare', 'Bangkok', 'Brasilia', 'Lima', 'Canberra', 'New Delhi', 'Bucharest'
-                    score = 0
-                    for i in range 0 to 10
-                        answer = ask 'What's the capital of ' countries[i]
-                        correct = capital[i]
-                        if answer = correct
-                            print 'Correct!'
-                        score = score + 1
-                        else
-                            print 'Wrong,' capitals[i] 'in the capital of' countries[i]
-                        print 'You scored ' score ' out of 10'
             17:
                 story_text: |-
                     ### Exercise
@@ -1195,35 +1176,6 @@ adventures:
 
                     print 'Thanks for ordering!'
                     ```
-                start_code: |4
-
-                      define food_order
-                          toppings = ask 'pepperoni, tuna, veggie or cheese?'
-                          size = ask 'big, medium or small?'
-                          number_of_pizza = ask 'How many these pizzas would you like?'
-
-                          print 'YOU ORDERED'
-                          print number_of_pizzas ' size  ' topping ' pizza'
-
-                      define drinks_order
-                          drink = ask 'water, coke, icetea, lemonade or coffee?'
-                          number_of_drinks = ask 'How many of these drinks would you like?'
-
-                          print 'YOU ORDERED'
-                          print number_of_drinks ' ' drink
-
-                      'Welcome to Hedy pizza'
-                      more_food = ask 'Would you like to order a pizza?'
-                      while more_food = 'yes'
-                          return food_order
-                          more_food = ask 'Would you like to order a pizza?'
-                      more_drinks = ask 'Would you like to order some drinks?'
-                      while more_drinks == 'yes'
-                          call drink_order
-                          more_drinks == ask 'Would you like to order more drinks?'
-
-
-                      print 'Thanks for ordering!'
             18:
                 story_text: |-
                     ### Exercise
@@ -1246,22 +1198,6 @@ adventures:
                         print 'there a ' sound
                         print 'everywhere a ' sound sound
                     ```
-                start_code: |4
-
-                      animals = ['pig', 'dog', 'cow']
-                      sounds = ['oink', 'woof', 'moo']
-                      for i in range 1 to 3
-                          animal = animals[i]
-                          sound = sounds[i]
-                          print 'Old McDonald had a farm'
-                          print 'E I E I O!'
-                          print 'and on that farm he had a ' animal
-                          print 'E I E I O!'
-                          print 'with a ' sound sound ' here'
-                          print 'and a ' sound sound ' there'
-                          print 'here a ' sound
-                          print 'there a ' sound
-                          print 'everywhere a ' sound sound
     default:
         name: Вступление
         default_save_name: вступление
@@ -1330,7 +1266,6 @@ adventures:
                     {print} '5 minus 5 is ' 5 - 5
                     {print} '5 times 5 is ' 5 * 5
                     ```
-                start_code: '{print} ''5 раз по 5 это '' 5 * 5'
             7:
                 story_text: |
                     Уровень 7 добавляет команду `{repeat}`. `{repeat}` можно использовать для многократного выполнения одной строки кода.
@@ -1385,10 +1320,6 @@ adventures:
                     {for} animal {in} animals
                       {print} 'I love ' animal
                     ```
-                start_code: |-
-                    животные {is} собака, кошка, рыба-глобус
-                    {for} животное {in} животные
-                      {print} 'Я люблю' животное
             11:
                 story_text: |
                     You have reached level 11, you're doing great! In the higher levels, Hedy is focussing more and more on teaching you the programming language Python.
@@ -1462,19 +1393,12 @@ adventures:
                     {for} i {in} {range} 1 {to} 3
                         {print} friends[i] 's lucky number is ' lucky_numbers[i]
                     ```
-                start_code: |-
-                    фрукты = ['яблоко', 'банан', 'вишня']
-                    {print} фрукты
             17:
                 story_text: |-
                     Now we are going to change indentation a little bit. Every time that we need an indentation, we need `:` at the line before the indentation.
 
                     In this level you can also use a new command: `{elif}`. `{elif}` is short for {else} {if} and you need it when you want to make 3 (or more!) options.
                     Check it out!
-                start_code: |-
-                    {for} i {in} {range} 1 {to} 10:
-                        {print} i
-                    {print} 'Готов или нет, но я иду!'
             18:
                 story_text: |-
                     We arrived at real Python code! That means we need to use parentheses with {print} and {range} from now on.
@@ -1698,16 +1622,6 @@ adventures:
                     {else}:
                         {print} 'Better luck next time..'
                     ```
-                start_code: |-
-                    prices = ['1 million dollars', 'an apple pie', 'nothing']
-                    your_price = prices[{random}]
-                    {print} 'You win ' your_price
-                    {if} your_price == '1 million dollars' :
-                        {print} 'Yeah! You are rich!'
-                    {elif} your_price == 'an apple pie' :
-                        {print} 'Lovely, an apple pie!'
-                    {else}:
-                        {print} 'Better luck next time..'
     for_command:
         name: '{for}'
         default_save_name: for
@@ -1744,10 +1658,6 @@ adventures:
                         {print} i
                     {print} 'Ready or not, here I come!'
                     ```
-                start_code: |-
-                    {for} i {in} {range} 1 {to} 10:
-                        {print} i
-                    {print} 'Ready or not, here I come!'
     fortune:
         name: Предсказатель
         default_save_name: Гадалка
@@ -1857,7 +1767,6 @@ adventures:
                     результат = результат * футбол
                     {print} 'Ты ' результат ' процент умных'
                     ```
-                start_code: '# разместите здес"Я Хеди - предсказательница!ь свой код'
             7:
                 story_text: |
                     На этом уровне вы можете использовать команду `{repeat}`, чтобы заставить машину предсказывать несколько предсказаний одновременно.
@@ -2108,7 +2017,6 @@ adventures:
                     {print} О нет! Быстро бегите на кухню.
                     {print} Но когда вы входите, на вас нападает монстр_3!
                     ```
-                start_code: monster1 {is} _
             3:
                 story_text: |
                     Дом с привидениями
@@ -2531,7 +2439,6 @@ adventures:
                     {print} '5 minus 5 is ' 5 - 5
                     {print} '5 times 5 is ' 5 * 5
                     ```
-                start_code: '{print} ''5 times 5 is '' 5 * 5'
             12:
                 story_text: |-
                     **Decimal numbers**
@@ -2934,15 +2841,6 @@ adventures:
                     fruit = ['apple', 'banana', 'cherry']
                     {print} fruit[random]
                     ```
-                start_code: |-
-                    friends = ['Ahmed', 'Ben', 'Cayden']
-                    {print} friends[1] ' is the first friend on the list.'
-                    {print} friends[2] ' is the second friend on the list.'
-                    {print} friends[3] ' is the third friend on the list.'
-                    #now we will match 2 lists using the variable i
-                    lucky_numbers = [15, 18, 6]
-                    {for} i {in} {range} 1 {to} 3
-                        {print} friends[i] 's lucky number is ' lucky_numbers[i]
     repeat_command:
         name: '{repeat}'
         default_save_name: repeat_command
@@ -3239,7 +3137,6 @@ adventures:
                     _ еда = {ask} имя ', что бы вы хотели съесть в качестве своего ''блюда''?
                     _ {print} имя ' заказывает ' еду ' в качестве своего ' блюда
                     ```
-                start_code: блюда = закуска, основное блюдо, десерт
             11:
                 story_text: |
                     Мы можем использовать `{for} i {in} {range} 1 {to} 5`{in}, чтобы `{print}` заказы от нескольких клиентов в упорядоченном порядке.
@@ -3336,9 +3233,6 @@ adventures:
                     {ask} Выбери из _
                     {echo} Итак, твой выбор был:
                     ```
-                start_code: |
-                    {print} Добро пожаловать в свой собственный камень-ножницы-бумага!
-                    {ask} Что ты выберешь?
             2:
                 story_text: |
                     В этом уровне вы можете попрактиковаться в использовании переменных, чтобы в следующем уровне вы могли провести игру "Камень, ножницы, бумага"!
@@ -3365,12 +3259,10 @@ adventures:
                     {print} игрок 1 выбирает... выбор {at} {random}
                     {print} игрок 2 _
                     ```
-                start_code: '{print} Добро пожаловать в свой собственный камень-ножницы-бумага!'
             4:
                 story_text: |
                     На этом уровне мы можем дальше программировать камень, бумагу, ножницы. Но {if} вы хотите добавить текст, здесь тоже нужно использовать кавычки.
                     Завершите код, введя правильные команды или символы на подчеркиваниях?
-                start_code: '{print} ''Добро пожаловать в свой собственный камень-ножницы-бумага!'''
             5:
                 story_text: |
                     В этом уровне мы можем определить, кто победил.
@@ -3390,7 +3282,6 @@ adventures:
                     ```
 
                     Fill in the correct code on the blanks to see {if} it is a draw.
-                start_code: '{print} ''Добро пожаловать в свой собственный камень-ножницы-бумага!'''
             9:
                 story_text: |
                     В этом уровне вы можете запрограммировать целую игру "Камень, ножницы, бумага" путем вложения команд `{if}`. Сможете ли вы закончить код?
@@ -4217,7 +4108,6 @@ adventures:
                         {turn} _
                         {forward} _
                     ```
-                start_code: angles = {ask} 'Сколько углов я должен нарисовать?'
             9:
                 story_text: |
                     Now that we can use a `{repeat}` inside a `{repeat}`, we can create more complex figures.
