@@ -16,7 +16,6 @@ import { postJson } from './comm';
 import { LocalSaveWarning } from './local-save-warning';
 import { HedyEditor, EditorType } from './editor';
 import { stopDebug } from "./debugging";
-import { HedyAceEditorCreator } from './ace-editor';
 import { HedyCodeMirrorEditorCreator } from './cm-editor';
 import { initializeTranslation } from './lezer-parsers/tokens';
 
@@ -26,7 +25,6 @@ export let theModalEditor: HedyEditor;
 export let theGlobalSourcemap: { [x: string]: any; };
 export const theLocalSaveWarning = new LocalSaveWarning();
 const editorCreator: HedyCodeMirrorEditorCreator = new HedyCodeMirrorEditorCreator();
-const aceEditorCreator: HedyAceEditorCreator = new HedyAceEditorCreator();
 let last_code: string;
 
 /**
@@ -136,7 +134,6 @@ export function initializeApp(options: InitializeAppOptions) {
   initializeSyntaxHighlighter({
     keywordLanguage: options.keywordLanguage,
   });
-  initializeHighlightedCodeBlocks(document.body);
   initializeCopyToClipboard();
 
   // Close the dropdown menu if the user clicks outside of it
@@ -362,7 +359,6 @@ export function initializeViewProgramPage(options: InitializeViewProgramPageOpti
 
 export function initializeHighlightedCodeBlocks(where: Element) {
   const dir = $("body").attr("dir");
-
   // Any code blocks we find inside 'turn-pre-into-ace' get turned into
   // read-only editors (for syntax highlighting)
   for (const container of $(where).find('.turn-pre-into-ace').get()) {
@@ -375,9 +371,12 @@ export function initializeHighlightedCodeBlocks(where: Element) {
       // Only turn into an editor if the editor scrolls into view
       // Otherwise, the teacher manual Frequent Mistakes page is SUPER SLOW to load.
       onElementBecomesVisible(preview, () => {
+        const code = preview.querySelector('code')
+        if(code) code.hidden = true;
         // Create this example editor
-        const exampleEditor = aceEditorCreator.initializeReadOnlyEditor(preview, dir);
+        const exampleEditor = editorCreator.initializeReadOnlyEditor(preview, dir);
         // Strip trailing newline, it renders better
+        exampleEditor.contents = code?.innerText || "";
         exampleEditor.contents = exampleEditor.contents.trimRight();
         // And add an overlay button to the editor if requested via a show-copy-button class, either
         // on the <pre> itself OR on the element that has the '.turn-pre-into-ace' class.

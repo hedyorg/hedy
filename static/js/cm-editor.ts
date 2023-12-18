@@ -1,15 +1,17 @@
 import { HedyEditor, EditorType, HedyEditorCreator, EditorEvent, SourceRange } from "./editor";
-import { EditorView, ViewUpdate, drawSelection, dropCursor, highlightActiveLine, 
-        highlightActiveLineGutter, highlightSpecialChars, keymap, lineNumbers } from '@codemirror/view'
+import {
+    EditorView, ViewUpdate, drawSelection, dropCursor, highlightActiveLine,
+    highlightActiveLineGutter, highlightSpecialChars, keymap, lineNumbers
+} from '@codemirror/view'
 import { EditorState, Compartment, StateEffect, Prec } from '@codemirror/state'
 import { EventEmitter } from "./event-emitter";
 import { deleteTrailingWhitespace, defaultKeymap, historyKeymap, indentWithTab } from '@codemirror/commands'
 import { history } from "@codemirror/commands"
-import { indentOnInput, defaultHighlightStyle, syntaxHighlighting ,LanguageSupport, indentUnit, indentService } from "@codemirror/language"
+import { indentOnInput, defaultHighlightStyle, syntaxHighlighting, LanguageSupport, indentUnit, indentService } from "@codemirror/language"
 import { highlightSelectionMatches, searchKeymap } from "@codemirror/search";
-import { 
-    errorLineField, debugLineField, decorationsTheme, addDebugLine, 
-    addErrorLine, addErrorWord, removeDebugLine, removeErrorMarkers, 
+import {
+    errorLineField, debugLineField, decorationsTheme, addDebugLine,
+    addErrorLine, addErrorWord, removeDebugLine, removeErrorMarkers,
     breakpointGutterState, breakpointGutter, addIncorrectLineEffect,
     incorrectLineField,
     removeIncorrectLineEffect,
@@ -17,7 +19,7 @@ import {
     placeholders,
     basicIndent
 } from "./cm-decorations";
-import {LRLanguage} from "@codemirror/language"
+import { LRLanguage } from "@codemirror/language"
 import { languagePerLevel } from "./lezer-parsers/language-packages";
 import { theGlobalSourcemap, theLevel } from "./app";
 import { monokai } from "./cm-monokai-theme";
@@ -77,79 +79,101 @@ export class HedyCodeMirrorEditor implements HedyEditor {
     private currentDebugLine?: number;
     private incorrectLineMapping: Record<string, number> = {};
 
-    constructor(element: HTMLElement, isReadOnly: boolean, _: EditorType, __: string = "ltr") {
-        
-        const mainEditorStyling = EditorView.baseTheme({
-            "&": {
-                height: "22rem",
-                background: '#272822',
-                fontSize: '15.2px',
-                color: 'white',
-                borderRadius: '4px',
-                marginRight: '5px'
-            },
+    constructor(element: HTMLElement, isReadOnly: boolean, editorType: EditorType, __: string = "ltr") {
+        let state: EditorState;
+        if (editorType === EditorType.MAIN) {
 
-            ".cm-scroller": {
-                overflow: "auto"
-            },
+            const mainEditorStyling = EditorView.theme({
+                "&": {
+                    height: "22rem",
+                    background: '#272822',
+                    fontSize: '15.2px',
+                    color: 'white',
+                    borderRadius: '4px',
+                    marginRight: '5px'
+                },
 
-            ".cm-gutters": {
-                borderRadius: '4px'
-            },            
-            ".cm-cursor, .cm-dropCursor": {borderLeftColor: "white", borderLeftWidth: "2px"}
-        });
+                ".cm-scroller": {
+                    overflow: "auto"
+                },
 
-        const state = EditorState.create({
-            doc: '',
-            extensions: [
-                mainEditorStyling,
-                breakpointGutter,
-                lineNumbers(),
-                highlightActiveLineGutter(),
-                highlightSpecialChars(),
-                history(),
-                drawSelection(),
-                dropCursor(),                
-                // When we finish doing the language package for Hedy, we need to add a configuration for this field to work
-                indentOnInput(),
-                syntaxHighlighting(defaultHighlightStyle, {fallback: true}),                
-                highlightActiveLine(),
-                highlightSelectionMatches(),
-                keymap.of([
-                    ...defaultKeymap,
-                    ...searchKeymap, // we need to replace this with our own search widget
-                    ...historyKeymap,
-                    indentWithTab,
-                ]),
-                indentUnit.of(indentSize),
-                indentService.of(basicIndent),
-                monokai,
-                this.readMode.of(EditorState.readOnly.of(isReadOnly)),
-                errorLineField,
-                debugLineField,
-                incorrectLineField,
-                Prec.high(decorationsTheme),
-                placeholders
-            ]
-        });
-        
+                ".cm-gutters": {
+                    borderRadius: '4px'
+                },            
+                ".cm-cursor, .cm-dropCursor": {borderLeftColor: "white", borderLeftWidth: "2px"}
+            });
+
+            state = EditorState.create({
+                doc: '',
+                extensions: [
+                    mainEditorStyling,
+                    breakpointGutter,
+                    lineNumbers(),
+                    highlightActiveLineGutter(),
+                    highlightSpecialChars(),
+                    history(),
+                    drawSelection(),
+                    dropCursor(),
+                    // When we finish doing the language package for Hedy, we need to add a configuration for this field to work
+                    indentOnInput(),
+                    syntaxHighlighting(defaultHighlightStyle, { fallback: true }),
+                    highlightActiveLine(),
+                    highlightSelectionMatches(),
+                    keymap.of([
+                        ...defaultKeymap,
+                        ...searchKeymap, // we need to replace this with our own search widget
+                        ...historyKeymap,
+                        indentWithTab,
+                    ]),
+                    indentUnit.of(indentSize),
+                    indentService.of(basicIndent),
+                    monokai,
+                    this.readMode.of(EditorState.readOnly.of(isReadOnly)),
+                    errorLineField,
+                    debugLineField,
+                    incorrectLineField,
+                    Prec.high(decorationsTheme),
+                    placeholders
+                ]
+            });
+        } else {
+            state = EditorState.create({
+                doc: '',
+                extensions: [
+                    EditorView.theme({
+                        ".cm-cursor, .cm-dropCursor": { border: "none"}
+                    }),
+                    highlightSpecialChars(),
+                    drawSelection(),
+                    syntaxHighlighting(defaultHighlightStyle, { fallback: true }),
+                    monokai,
+                    this.readMode.of(EditorState.readOnly.of(isReadOnly)),
+                    placeholders
+                ]
+            });
+
+        }
+
         this.view = new EditorView({
             parent: element,
             state: state
         });
 
+        if (editorType === EditorType.MAIN) {
+            // Size the editor depending on the height of its parent
+            this.view.requestMeasure({
+                read: () => {
+                    return document.getElementById('editor')!.offsetHeight
+                },
+                write(measure, view) {
+                    view.dom.style.height = `${measure}px`;
+                },
+            })
+        }
+
         if (theLevel) {
             this.setHighlighterForLevel(theLevel);
         }
-        // Size the editor depending on the height of its parent
-        this.view.requestMeasure({
-            read: () => {
-                return document.getElementById('editor')!.offsetHeight                                
-            },
-            write(measure, view) {
-                view.dom.style.height = `${measure}px`;                                
-            },
-        })
     }
 
     /**
@@ -172,27 +196,27 @@ export class HedyCodeMirrorEditor implements HedyEditor {
             "define call": t.operatorKeyword,
             "Command/ErrorInvalid/Text": t.invalid,
         }
-        
+
         const parserWithMetadata = language.configure({
             props: [
                 styleTags(hedyStyleTags)
-           ]
+            ]
         })
-            
+
         const langPackage = LRLanguage.define({
             parser: parserWithMetadata,
             languageData: {
-                commentTokens: {line: "#"}
+                commentTokens: { line: "#" }
             }
         })
-        
+
         function hedy() {
             return new LanguageSupport(langPackage)
         }
 
         const effect = StateEffect.appendConfig.of(hedy());
 
-        this.view.dispatch({effects: effect});
+        this.view.dispatch({ effects: effect });
     }
     /**
     * @returns the string of the current program in the editor
@@ -249,7 +273,7 @@ export class HedyCodeMirrorEditor implements HedyEditor {
      */
     clearErrors(): void {
         let effect: StateEffect<void> = removeErrorMarkers.of();
-        this.view.dispatch({effects: effect});
+        this.view.dispatch({ effects: effect });
     }
 
     /**     
@@ -299,7 +323,7 @@ export class HedyCodeMirrorEditor implements HedyEditor {
         // that hooks to the DOM, We can use the domEventHandlers configuration for that
         if (key === 'change') {
             const transaction = this.view.state.update({
-                effects: StateEffect.appendConfig.of(EditorView.updateListener.of((v: ViewUpdate) => {                
+                effects: StateEffect.appendConfig.of(EditorView.updateListener.of((v: ViewUpdate) => {
                     if (v.docChanged) {
                         handler();
                     }
@@ -308,10 +332,10 @@ export class HedyCodeMirrorEditor implements HedyEditor {
             this.view.dispatch(transaction);
         } else if (key === 'click') {
             const eventHandler = EditorView.domEventHandlers({
-                click:  handler
+                click: handler
             });
             const effect = StateEffect.appendConfig.of(eventHandler);
-            this.view.dispatch({effects: effect});
+            this.view.dispatch({ effects: effect });
         }
     }
 
@@ -330,13 +354,13 @@ export class HedyCodeMirrorEditor implements HedyEditor {
      * 'row' and 'col' are 1-based.
      */
     highlightError(row: number, col?: number) {
-        let effect: StateEffect<{row: number, col?: number}>;
+        let effect: StateEffect<{ row: number, col?: number }>;
         if (col === undefined) {
-            effect = addErrorLine.of({row});
+            effect = addErrorLine.of({ row });
         } else {
-            effect = addErrorWord.of({row, col});
+            effect = addErrorWord.of({ row, col });
         }
-        this.view.dispatch({effects: effect})
+        this.view.dispatch({ effects: effect })
     }
 
     /**
@@ -347,7 +371,7 @@ export class HedyCodeMirrorEditor implements HedyEditor {
     /**
      * Set the current line in the debugger
      */
-    setDebuggerCurrentLine(line?: number, startPos?: number, finishPos?: number) {                
+    setDebuggerCurrentLine(line?: number, startPos?: number, finishPos?: number) {
         if (this.currentDebugLine) {
             this.view.dispatch({ effects: removeDebugLine.of() });
         }
@@ -359,16 +383,16 @@ export class HedyCodeMirrorEditor implements HedyEditor {
 
         this.currentDebugLine = line;
         if (startPos !== undefined && finishPos !== undefined) {
-            let effect: StateEffect<{from: number, to: number}>
+            let effect: StateEffect<{ from: number, to: number }>
             const docLine = this.view.state.doc.line(line);
             const from = docLine.from + startPos - 1;
             const to = docLine.from + finishPos;
-            effect = addDebugWords.of({from, to});
-            this.view.dispatch({effects: effect});
+            effect = addDebugWords.of({ from, to });
+            this.view.dispatch({ effects: effect });
         } else {
-            let effect: StateEffect<{row: number}>;
-            effect = addDebugLine.of({row: line});
-            this.view.dispatch({effects: effect});
+            let effect: StateEffect<{ row: number }>;
+            effect = addDebugLine.of({ row: line });
+            this.view.dispatch({ effects: effect });
         }
     }
 
@@ -393,7 +417,7 @@ export class HedyCodeMirrorEditor implements HedyEditor {
         }
         gutterMarkers.between(0, to, (from: number) => {
             deactivatedLines.push(this.view.state.doc.lineAt(from).number);
-        });        
+        });
         const resultingLines = [];
         for (let i = 0; i < lines.length; i++) {
             if (deactivatedLines.includes(i + 1)) {
@@ -414,18 +438,18 @@ export class HedyCodeMirrorEditor implements HedyEditor {
         // Sometimes to exceeds the length of the line
         to = to > endLine.to ? endLine.to : to;
         this.incorrectLineMapping[`${from}-${to}`] = lineIndex;
-        let effect = addIncorrectLineEffect.of({from, to});
-        this.view.dispatch({effects: effect});
+        let effect = addIncorrectLineEffect.of({ from, to });
+        this.view.dispatch({ effects: effect });
     }
 
     clearIncorrectLines(): void {
         this.incorrectLineMapping = {};
         const effect = removeIncorrectLineEffect.of();
-        this.view.dispatch({effects: effect});
+        this.view.dispatch({ effects: effect });
     }
 
     getPosFromCoord(x: number, y: number): number | null {
-        return this.view.posAtCoords({x, y});
+        return this.view.posAtCoords({ x, y });
     }
 
     /**
@@ -443,12 +467,12 @@ export class HedyCodeMirrorEditor implements HedyEditor {
     hasIncorrectLinesDecorations(): boolean {
         const incorrectLineSet = this.view.state.field(incorrectLineField);
         let hasIncorrectLines = false;
-        incorrectLineSet.between(0, this.view.state.doc.length, () => { hasIncorrectLines = true });        
+        incorrectLineSet.between(0, this.view.state.doc.length, () => { hasIncorrectLines = true });
         return hasIncorrectLines
     }
 
     public skipFaultyHandler(event: MouseEvent): void {
-    if (!this.hasIncorrectLinesDecorations()) return;
+        if (!this.hasIncorrectLinesDecorations()) return;
         const pos = this.getPosFromCoord(event.x, event.y);
         if (pos == null) return;
         const index = this.indexOfErrorInPos(pos)
