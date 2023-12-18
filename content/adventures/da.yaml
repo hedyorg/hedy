@@ -1377,19 +1377,12 @@ adventures:
                         {print} 'Lykketallet til ' venner[i]
                         {print} 'er ' lykke_tal[i]
                     ```
-                start_code: |-
-                    frugt = ['æble', 'banan', 'kirsebær']
-                    {print} frugt
             17:
                 story_text: |-
                     Nu skal vi ændre indrykning en lille smule. Hver gang vi har brug for indrykning, skal vi bruge `:` på linjen før indrykningen.
 
                     På dette niveau kan du også bruge en ny kommando: `{elif}`. `{elif}` er en forkortelse for {else} {if} når du vil lave 3 (eller flere!) muligheder.
                     Se en gang!
-                start_code: |-
-                    {for} i {in} {range} 1 {to} 10:
-                        {print} i
-                    {print} 'Klar eller ej, her kommer jeg!'
             18:
                 story_text: |-
                     Vi er nået til ægte Python kode! Det betyder at vi er nødt til at bruge parenteser til {print} og {range} fra nu af.
@@ -1652,10 +1645,6 @@ adventures:
                         {print} i
                     {print} 'Ready or not, here I come!'
                     ```
-                start_code: |-
-                    {for} i {in} {range} 1 {to} 10:
-                        {print} i
-                    {print} 'Ready or not, here I come!'
     fortune:
         name: Fortune teller
         default_save_name: Fortune Teller
