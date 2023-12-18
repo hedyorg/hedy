@@ -649,7 +649,6 @@ adventures:
                     ```
                     # Use your own code from the previous adventure.
                     ```
-
     clear_command:
         name: '{clear}'
         default_save_name: clear_command
@@ -1189,7 +1188,6 @@ adventures:
 
                     معظم لغات البرمجة تستخدم علامات الاقتباس عند طباعة الكلام على الشاشة باستخدام الكود، لذلك نحن نتقدم خطوة أخرى باتجاه البرمجة الحقيقية!
                 example_code: "```\n{print} \"يجب عليك استعمال علامات الاقتباس من الان وصاعداً!\"\nالجواب {is} {ask} \"ما الذي يجب علينا استعماله من الان وصاعداً؟\"\n{print} \"يجب علينا استعمال \" الجواب \n```\n"
-
             5:
                 story_text: |
                     في المستوى الخامس لدينا شيء جديد: الأمر `{if}`! باستخدام الأمر `{if}` يمكنك أن تفحص شيئا ما وتقوم بالاختيار بين أمرين مختلفين بناء على نتيجة ذلك الفحص.
@@ -1214,7 +1212,6 @@ adventures:
                     {print}  "٥ ناقص ٥ تساوي " ٥-٥
                     {print}  "٥ ضرب ٥ تساوي " ٥*٥
                     ```
-
             7:
                 story_text: |
                     في المستوى السابع أضفنا الأمر `{repeat}`. باستخدام الأمر `{repeat}` يمكننا أن نكرر تنفيذ سطر واحد من الكود عدة مرات.
@@ -1337,7 +1334,6 @@ adventures:
                     ```
                     الخيارات هي _
                     ```
-
             4:
                 story_text: |
                     في هذا المستوى يمكنك إنشاء جمل مفيدة باستخدام القيمة التي تظهر على حجر النرد، ولا تنسَ علامات الإقتباس.
@@ -1355,7 +1351,6 @@ adventures:
                     {print} 'لديك' _ 'تم القاءها'
                     {if} _ {is} دودة ارض {print} 'تستطيع التوقف عن الرمي.' _ {print} 'عليك أن تسمعه مرة أخرى!'
                     ```
-
             6:
                 story_text: |
                     يمكنك أيضاً في هذا المستوى صنع حجر نرد دودة الأرض مرة أخرى، ولكن الآن يمكنك حساب عدد النقاط التي جمعتها.
@@ -1374,7 +1369,6 @@ adventures:
                     ```
                 example_code_2: |
                     Did you manage to calculate the score for 8 dice? That required a lot of cutting and pasting, right? We are going to make that easier in level 7!
-
             7:
                 story_text: |
                     You can also make a die again in level 5. With the `{repeat}` code you can easily roll a whole hand of dice.
@@ -1438,7 +1432,6 @@ adventures:
                     ```
                 story_text_2: |
                     تشعر بعدم الرغبة في غسل الأطباق اليوم؟ اخترق البرنامج وإمسح اسمك من قائمة أفراد العائلة بإستخدام الأمر `{remove}` `{from}`
-
             4:
                 story_text: |
                     باستخدام علامات الاقتباس، يمكنك جعل التخطيط لغسل الأطباق أكثر جمالًا.
@@ -1454,7 +1447,6 @@ adventures:
                     {sleep}
                     {print} أشخاص{at} _
                     ```
-
             5:
                 story_text: |
                     باستخدام `{if}` يمكنك الآن الحصول على مزيد من المرح مع الاختيار في البرنامج. يمكنك جعل برنامجك يستجيب للاختيار الذي اتخذه الكمبيوتر.
@@ -1468,7 +1460,6 @@ adventures:
                     {if} آلة غسيل الاطباق {is} احمد {print} _ سيء للغاية عليّ غسل الصحون _
                     {else} {print} 'لحسن الحظ لا توجد أطباق لأن' _ 'تغسل بالفعل'
                     ```
-
             6:
                 story_text: |
                     كم مرة يجب على كل شخص أن يغسل الأطباق؟ هل ذلك عادل؟ قم بعد ذلك في هذا المستوى.
@@ -1501,7 +1492,6 @@ adventures:
                     {remove} غسيل_الأطباق {from} الأشخاص
                     غسيل_الأطباق = الأشخاص {at} {random}
                     ```
-
             7:
                 story_text: |
                     With the `{repeat}` you can repeat pieces of code. You can use this to calculate who will be washing dishes for the entire week.
@@ -1510,7 +1500,6 @@ adventures:
                     people = mom, dad, Emma, Sophie
                     {repeat} _ _ {print} 'the dishwasher is' _
                     ```
-
             10:
                 story_text: |
                     In this level you could make an even better dish washing shedule.
@@ -1884,7 +1873,6 @@ adventures:
                     \ الهي! اعتقد انني لست الوحيد في هذا القصر!\n{print} يجب علي الخروج من هنا!\n{print} هناك ٣ ابواب امامي..\n{ask} ما الباب الذي علي اختباره للخروج؟\n{echo} اختار الباب \n{print} ...؟\n```\n"
                 story_text_2: |
                     هل يمكنك تكملة القصة المخيفة هذه؟ او ابتكار قصتك الخاصة لبيت الأشباح؟
-
             2:
                 story_text: |
                     في بيت الأشباح في هذا المستوى يمكنك اختيار الأشباح الخاصة بك باستخدام الرموز التعبيرية، أو باستخدام الكلمات طبعًا.
@@ -1913,7 +1901,6 @@ adventures:
                     {print} أوه! لا. تصل سريعًا إلى المطبخ.
                     {print} لكن سرعان ما تدخله الشبح_٣ يهاجمك!
                     ```
-
             3:
                 story_text: |
                     في المستويات السابقة استطعت كتابة مقدمة للعبة بيت الأشباح الخاصة بك، ولكن ربما لاحظت أن القصة غالباً ما ستنتهي نهاية مروعة.
@@ -2323,7 +2310,6 @@ adventures:
                     {print} '5 minus 5 is ' 5 - 5
                     {print} '5 times 5 is ' 5 * 5
                     ```
-
             12:
                 story_text: |-
                     **Decimal numbers**
@@ -3000,7 +2986,6 @@ adventures:
                             food = {ask} name ', what would you like to eat as your ' course '?'
                             {print} name ' orders ' food ' as their ' course
                     ```
-
             11:
                 story_text: |
                     We can use the `{for} i {in} {range} 1 {to} 5` to {print} the orders from multiple customers in an orderly manner.
@@ -3954,7 +3939,6 @@ adventures:
                     {forward} ٥٠
                     {turn} الزاوية
                     ```
-
             8:
                 story_text: |
                     بما أننا قادرون على تكرار عدة أسطر برمجية الآن فيمكننا أن نرسم الأشكال بسهولة أكثر.
@@ -3968,7 +3952,6 @@ adventures:
                     ```
                 story_text_2: "كذلك يمكننا تحسين البرنامج الذي يرسم الأشكال المختلفة. \nهل يمكنك حاسب كم يجب على الرسام أن يستدير هنا؟ أكمل الكود وسيصبح بإمكانك أن تطبع الشكل المضلع الذي تريد!\n"
                 example_code_2: "```\nعدد_الزوايا = {ask} \"كم عدد الزوايا التي يجب أن أقوم بها؟\"\nالزاوية = ٣٦٠ / عدد_الزوايا \n{repeat} عدد_الزوايا {times} \n    {turn} _\n    {forward} _\n```\n"
-
             9:
                 story_text: |
                     Now that we can use a `{repeat}` inside a `{repeat}`, we can create more complex figures.
