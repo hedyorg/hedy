@@ -10,7 +10,7 @@ import utils
 from tests.Tester import HedyTester, Snippet
 from website.yaml_file import YamlFile
 
-fix_error = False
+fix_error = True
 # set this to True to revert broken snippets to their en counterpart automatically
 # this is useful for large Weblate PRs that need to go through, this fixes broken snippets
 if os.getenv('fix_for_weblate'):
@@ -80,7 +80,7 @@ def collect_snippets(path, filtered_language=None):
     return Hedy_snippets
 
 
-# filtered_language = 'tr'
+# filtered_language = 'zh_hans'
 # use this to filter on 1 lang, zh_Hans for Chinese, nb_NO for Norwegian, pt_PT for Portuguese
 
 

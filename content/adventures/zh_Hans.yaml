@@ -387,16 +387,9 @@ adventures:
                     The player who gets closest to 21, without going over it, wins!
 
                     Have fun!
-                example_code: "```\n{print} 'BLACKJACK'\ncards = [2, 3, 4, 5, 6, 7, 8, 9, 10, 'Jack', 'Queen','King', 'Ace']\npoints = 0\ndealer_points = 0\ncard_1 = cards[{random}]\ncard_2 = cards[{random}]\ncard_3 = cards [{random}]\ndealer_card_1 = cards[{random}]\ndealer_card_2 = cards[{random}]\n\
-                    dealer_card_3 = cards[{random}]\n# 卡片 1 的点数\n{if} card_1 == 'Jack' {or} card_1 == 'Queen' {or} card_1 == 'King':\n    points = points + 10\n{elif} card_1 == 'Ace':\n    points = points + 11\n{else}:\n    points = points + card_1\n# 卡片 2 的点数\n{if} card_2 == 'Jack' {or} card_2 == 'Queen'\
-                    \ {or} card_2 == 'King':\n    points = points + 10\n{elif} card_2 == 'Ace':\n    points = points + 11\n{else}:\n    points = points + card_2\n# 庄家第1张牌\n{if} dealer_card_1 == 'Jack' {or} dealer_card_1 == 'Queen' {or} dealer_card_1 == 'King':\n    dealer_points = dealer_points + 10\n\
-                    {elif} dealer_card_1 == 'Ace':\n    dealer_points = dealer_points + 11\n{else}:\n    dealer_points = dealer_points + dealer_card_1\n# 庄家第2张牌\n{if} dealer_card_2 == 'Jack' {or} dealer_card_2 == 'Queen' {or} dealer_card_2 == 'King':\n    dealer_points = dealer_points + 10\n{elif} dealer_card_2\
-                    \ == 'Ace':\n    dealer_points = dealer_points + 11\n{else}:\n    dealer_points = dealer_points + dealer_card_2\n# 两张 Aces\n{if} card_1 == 'Ace' {and} card_2 == 'Ace':\n    points = 12\n{if} dealer_card_1 == 'Ace' {and} dealer_card_2 == 'Ace':\n    dealer_points = 12\n# Scoreboard\n\
-                    {print} '你有张 ' card_1 ' 以及 ' card_2 ' (' points ' points)'\n{print} '庄家有张 ' dealer_card_1 ' 以及 ' dealer_card_2 ' (' dealer_points ' points)'\n# 玩家追加牌\nhit = {ask} '你想追加牌嘛?'\n{if} hit == 'yes':\n    {if} card_3 == 'Jack' {or} card_3 == 'Queen' {or} card_3 == 'King':\n        points\
-                    \ = points + 10\n    {elif} card_3 == 'Ace':\n        {if} points > 11:\n            points = points + 11\n        {else}:\n            points = points + 1\n    {else}:\n        points = points + card_3\n    {print} '你追加了一张 ' card_3 ' (' points ' points)'\n{else}:\n    {print} '不追加牌'\n\
-                    # 获胜者\n{if} points > 21 {or} dealer_points > points {or} dealer_points == 21:\n    {print} '你输了'\n{elif} dealer_points < 17:\n    {print} '庄家要牌.它是... ' dealer_card_3\n    {if} dealer_card_3 == 'Jack' {or} dealer_card_3 == 'Queen' {or} dealer_card_3 == 'King':\n        dealer_points\
-                    \ = dealer_points + 10\n    {elif} dealer_card_3 == 'Ace':\n        {if} dealer_points < 11:\n            dealer_points = dealer_points + 11\n        {else}:\n            dealer_points = dealer_points + 1\n    {else}:\n        dealer_points = dealer_points + dealer_card_3\n    {print}\
-                    \ '现在打印庄家有 ' dealer_points \n    {if} dealer_points < 21 {and} dealer_points > points:\n        {print} '你输了'\n    {else}:\n        {print} '你赢了!'\n{elif} points > dealer_points {and} points < 21:\n    {print} '你赢了!'\n```\n"
+                example_code: "```\n{print} 'BLACKJACK'\ncards = [2, 3, 4, 5, 6, 7, 8, 9, 10, 'Jack', 'Queen','King', 'Ace']\npoints = 0\ndealer_points = 0\ncard_1 = cards[{random}]\ncard_2 = cards[{random}]\ncard_3 = cards [{random}]\ndealer_card_1 = cards[{random}]\ndealer_card_2 = cards[{random}]\ndealer_card_3 = cards[{random}]\n# 卡片 1 的点数\n{if} card_1 == 'Jack' {or} card_1 == 'Queen' {or} card_1 == 'King':\n    points = points + 10\n{elif} card_1 == 'Ace':\n    points = points + 11\n{else}:\n    points = points + card_1\n# 卡片 2 的点数\n{if} card_2 == 'Jack' {or} card_2 == 'Queen' {or} card_2 == 'King':\n    points = points + 10\n{elif} card_2 == 'Ace':\n    points = points + 11\n{else}:\n    points = points + card_2\n# 庄家第1张牌\n{if} dealer_card_1 == 'Jack' {or} dealer_card_1 == 'Queen' {or} dealer_card_1 == 'King':\n    dealer_points = dealer_points + 10\n{elif} dealer_card_1 == 'Ace':\n    dealer_points = dealer_points + 11\n{else}:\n    dealer_points = dealer_points + dealer_card_1\n\
+                    # 庄家第2张牌\n{if} dealer_card_2 == 'Jack' {or} dealer_card_2 == 'Queen' {or} dealer_card_2 == 'King':\n    dealer_points = dealer_points + 10\n{elif} dealer_card_2 == 'Ace':\n    dealer_points = dealer_points + 11\n{else}:\n    dealer_points = dealer_points + dealer_card_2\n# 两张 Aces\n{if} card_1 == 'Ace' {and} card_2 == 'Ace':\n    points = 12\n{if} dealer_card_1 == 'Ace' {and} dealer_card_2 == 'Ace':\n    dealer_points = 12\n# Scoreboard\n{print} '你有张 ' card_1 ' 以及 ' card_2 ' (' points ' points)'\n{print} '庄家有张 ' dealer_card_1 ' 以及 ' dealer_card_2 ' (' dealer_points ' points)'\n# 玩家追加牌\nhit = {ask} '你想追加牌嘛?'\n{if} hit == 'yes':\n    {if} card_3 == 'Jack' {or} card_3 == 'Queen' {or} card_3 == 'King':\n        points = points + 10\n    {elif} card_3 == 'Ace':\n        {if} points > 11:\n            points = points + 11\n        {else}:\n            points = points + 1\n    {else}:\n        points = points + card_3\n    {print} '你追加了一张 ' card_3 ' (' points ' points)'\n{else}:\n\
+                    \    {print} '不追加牌'\n# 获胜者\n{if} points > 21 {or} dealer_points > points {or} dealer_points == 21:\n    {print} '你输了'\n{elif} dealer_points < 17:\n    {print} '庄家要牌.它是... ' dealer_card_3\n    {if} dealer_card_3 == 'Jack' {or} dealer_card_3 == 'Queen' {or} dealer_card_3 == 'King':\n        dealer_points = dealer_points + 10\n    {elif} dealer_card_3 == 'Ace':\n        {if} dealer_points < 11:\n            dealer_points = dealer_points + 11\n        {else}:\n            dealer_points = dealer_points + 1\n    {else}:\n        dealer_points = dealer_points + dealer_card_3\n    {print} '现在打印庄家有 ' dealer_points \n    {if} dealer_points < 21 {and} dealer_points > points:\n        {print} '你输了'\n    {else}:\n        {print} '你赢了!'\n{elif} points > dealer_points {and} points < 21:\n    {print} '你赢了!'\n```\n"
                 start_code: '# 在这里输入你的代码'
     calculator:
         name: 计算器
@@ -1337,8 +1330,7 @@ adventures:
                 story_text: |-
                     ### 练习
                     从第 16 级开始调试这个 Old MacDonald 程序。祝你好运！
-                example_code: "**警告！ 这段代码需要调试！**\n```\nanimals = ['pig', 'dog', 'cow']\nsounds = ['oink', 'woof', 'moo']\nfor i in range 1 to 3\n    animal = animals[i]\n    sound = sounds[i]\n    print '老麦当劳有一个农场'\n    print 'E I E I O!'\n    print '在那个农场他有一只' animal\n    print 'E I E I O!'\n    print\
-                    \ '这里有‘sound sound\n    print '以及那也有' sound sound \n    print '这里有 ' sound\n    print '那也有 ' sound\n    print '到处有 ' sound sound\n```\n"
+                example_code: "**警告！ 这段代码需要调试！**\n```\nanimals = ['pig', 'dog', 'cow']\nsounds = ['oink', 'woof', 'moo']\nfor i in range 1 to 3\n    animal = animals[i]\n    sound = sounds[i]\n    print '老麦当劳有一个农场'\n    print 'E I E I O!'\n    print '在那个农场他有一只' animal\n    print 'E I E I O!'\n    print '这里有‘sound sound\n    print '以及那也有' sound sound \n    print '这里有 ' sound\n    print '那也有 ' sound\n    print '到处有 ' sound sound\n```\n"
                 start_code: |4
 
                                               animals = ['pig', 'dog', 'cow']
@@ -1671,14 +1663,14 @@ adventures:
                     ### 练习
                     你能编写代码以便得到 8 个骰子的总分吗？ 为此，您必须复制并粘贴一些代码行。
                 example_code: |
-                    ````
-                    choices = 1, 2, 3, 4, 5, 蚯蚓
+                    ```
+                    choices = 1, 2, 3, 4, 5, earthworm
                     points = 0
-                    throw=choices{at} {random}
-                    {print} '你扔了 ' throw
-                    {if} throw {is} 蚯蚓 points=points+5  {else} points=points+throw
-                    {print} '这些是' points '点'
-                    ````
+                    throw = choices {at} {random}
+                    {print} 'you threw ' throw
+                    {if} throw {is} earthworm points = points + 5 {else} points = points + throw
+                    {print} 'those are ' points ' points'
+                    ```
                 example_code_2: |
                     你能算出 8 个骰子的分数吗？ 这需要大量的复制和粘贴，对吗？ 我们将在第 7 级中让这一切变得更容易！
                 start_code: '{print} ''骰子这次会投出什么？'''
@@ -1858,26 +1850,26 @@ adventures:
                     Check it out!
                 example_code: |
                     ```
-                    prices = ['100 万美元', '苹果派', '什么都没有']
+                    prices = ['1 million dollars', 'an apple pie', 'nothing']
                     your_price = prices[{random}]
-                    {print} '你赢了 ' your_price
-                    {if} your_price == '100万美元' :
-                         {print}'是啊！ 你好有钱！'
-                    {elif} your_price == '一个苹果派':
-                         {print} '可爱的苹果派！'
-                    {else}：
-                         {print} '下次祝你好运..'
+                    {print} 'You win ' your_price
+                    {if} your_price == '1 million dollars' :
+                        {print} 'Yeah! You are rich!'
+                    {elif} your_price == 'an apple pie' :
+                        {print} 'Lovely, an apple pie!'
+                    {else}:
+                        {print} 'Better luck next time..'
                     ```
                 start_code: |-
-                    prices = ['100 万美元', '苹果派', '什么都没有']
+                    prices = ['1 million dollars', 'an apple pie', 'nothing']
                     your_price = prices[{random}]
-                    {print} '你赢了 ' your_price
-                    {if} your_price == '100万美元' :
-                         {print}'是啊！ 你好有钱！'
-                    {elif} your_price == '一个苹果派':
-                         {print} '可爱的苹果派！'
-                    {else}：
-                         {print} '下次祝你好运..'
+                    {print} 'You win ' your_price
+                    {if} your_price == '1 million dollars' :
+                        {print} 'Yeah! You are rich!'
+                    {elif} your_price == 'an apple pie' :
+                        {print} 'Lovely, an apple pie!'
+                    {else}:
+                        {print} 'Better luck next time..'
     for_command:
         name: '{for}'
         default_save_name: for
@@ -2011,11 +2003,11 @@ adventures:
                     您的程序必须存在至少 10 行代码，并且需要至少有一个`{if}`和`{else}`命令。
                 example_code: |
                     ```
-                    friends{is}乔丹、露西、戴夫
-                    {print} '我可以预测你明天是否会中彩票！'
-                    person{is} {ask}“你是谁？”
-                    good_answer {is} 万岁！ 你赢了！，你一定会赢！，我们有赢家了！
-                    bad_answer {is} 运气不好！ 再试一次！，别人赢了，你输了！
+                    friends {is} Jordan, Lucy, Dave
+                    {print} 'I can predict if you will win the lottery tomorrow!'
+                    person {is} {ask} 'Who are you?'
+                    good_answer {is} Hurray! You win!, You will definitely win!, We have a winner!
+                    bad_answer {is} Bad luck! Try again!, Another person will win, You lose!
                     {if} person {in} friends {print} good_answer {at} {random}
                     {else} {print} bad_answer {at} {random}
                     ```
@@ -2030,18 +2022,18 @@ adventures:
                     ### 练习
                     你能自己设计一个（傻傻的）算命机器吗？
                 example_code: |
-                    ````
-                    {print}“我是算命师海蒂！”
-                    {print}“我可以预测你长大后会生几个孩子！”
-                    age = {ask} '你多大了？
-                    siblings = {ask} '你有多少个兄弟姐妹？'
-                    length = {ask} '你有多高（厘米）？'
-                    kids=length/age
-                    kids=kids-siblings
-                    {print} '你会得到......'
+                    ```
+                    {print} 'I am Hedy the fortune teller!'
+                    {print} 'I can predict how many kids youll get when you grow up!'
+                    age = {ask} 'How old are you?'
+                    siblings = {ask} 'How many siblings do you have?'
+                    length = {ask} 'How tall are you in centimetres?'
+                    kids = length / age
+                    kids = kids - siblings
+                    {print} 'You will get ...'
                     {sleep}
-                    {print} kids '孩子们！'
-                    ````
+                    {print} kids ' kids!'
+                    ```
                 start_code: '# 在这里写下你的代码'
             7:
                 story_text: |
