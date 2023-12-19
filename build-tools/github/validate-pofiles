@@ -56,22 +56,46 @@ def check_for_duplicates(filename):
 
 
 def check_for_wrapping(filename):
+    """Check that strings in the source files are not wrapped, except at newlines.
+
+    Wrapped entries start with `msgstr ""`; this is only allowed if all strings on subsequent
+    lines end in `\n`.
+    """
     with open(filename, 'r', encoding='utf-8') as f:
-        lines = f.read().splitlines()
+        lines = [l.strip() for l in f.read().splitlines()]
 
-    failed = False
+    any_failed = False
 
-    # Check for `msgstr ""`, which a wrapped entry always starts with.
-    # The first 20 or so lines are the header which always contain a `msgstr ""`. Skip those.
-    for nr, line in enumerate(lines):
-        if nr < 20:
-            continue
+    # Add a sentinel empty line at the end so we have to do fewer boundary checks
+    lines.append('')
 
-        if 'msgstr ""' in line:
-            print(f'{path.relpath(filename)}:{nr + 1}: msgstr has been wrapped!')
-            failed = True
+    # Below is a 2-state state machine. Find the next `msgstr ""`, then check that all
+    # lines in it confrm to the requirements.
+    # Skip the header, which always contains a `msgstr ""` we're not interested in.
+    nr = 20
+    while nr < len(lines):
+        while nr < len(lines) and is_msgstr_start(lines[nr]):
+            nr += 1
 
-    return failed
+        msg_start = nr
+        nr += 1
+        failed = False
+        # Stop at empty line, or a line containing 'msgid'
+        while nr < len(lines) and not is_msgstr_end(lines[nr]):
+            # Lines must end in '\n"', or be the last line in a block
+            if not (lines[nr].endswith('\\n"') or is_msgstr_end(lines[nr + 1])) and not failed:
+                print(f'{path.relpath(filename)}:{msg_start + 1}: msgstr has been wrapped!')
+                any_failed = failed = True
+            nr += 1
+
+    return any_failed
+
+
+def is_msgstr_start(line):
+    return 'msgstr ""' not in line
+
+def is_msgstr_end(line):
+    return not line.strip() or 'msgid' in line
 
 
 if __name__ == '__main__':
