@@ -94,6 +94,7 @@ def check_for_wrapping(filename):
 def is_msgstr_start(line):
     return 'msgstr ""' not in line
 
+
 def is_msgstr_end(line):
     return not line.strip() or 'msgid' in line
 
