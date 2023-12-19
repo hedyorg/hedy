@@ -4,6 +4,8 @@ describe('Is able to run code', () => {
     it('Passes', () => {
       goToHedyPage();
 
+      cy.get('.cm-content').click();
+      cy.focused().type("print Hallo!'\n");
       // Run with correct code
       cy.get('#runit').click();
       cy.get('#okbox').should('be.visible');

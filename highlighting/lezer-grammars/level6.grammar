@@ -44,8 +44,8 @@ Turtle[@isGroup=turtle] {
     Color { color+ (Expression | ListAccess)  }
 }   
 
-If { ifs+ Condition IfLessCommand? Else? }
-Else { elses+ IfLessCommand? }
+If { ifs+ Condition eol* IfLessCommand Else? }
+Else { !else elses+ eol* IfLessCommand }
 
 Condition { 
     EqualityCheck { Text is+ (String | Expression | pressed+) } |
@@ -70,7 +70,9 @@ Expression {
 
 @precedence {
     times @left,
-    plus @right
+    plus @right,
+
+    else
 }
 
 @external specialize { Text } specializeKeyword from "./tokens" {
