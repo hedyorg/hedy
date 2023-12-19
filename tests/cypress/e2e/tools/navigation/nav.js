@@ -47,6 +47,11 @@ export function goToHedyPage()
     return goToPage(Cypress.env('hedy_page'));
 }
 
+export function goToHedyPageWithEnKeywords()
+{
+    return goToPage(Cypress.env('hedy_english_keywords'));
+}
+
 export function goToAdventurePage()
 {
     return goToPage(Cypress.env('adventure_page'));

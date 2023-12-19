@@ -3,7 +3,7 @@ import json
 import os
 import uuid
 
-from flask import g, jsonify, request, session, url_for
+from flask import g, jsonify, request, session, url_for, redirect
 from jinja_partials import render_partial
 from flask_babel import gettext
 
@@ -208,6 +208,29 @@ class ForTeachersModule(WebsiteModule):
             survey_later=survey_later,
         )
 
+    @route("/class/<class_id>/preview", methods=["GET"])
+    @requires_login
+    def preview_class_as_teacher(self, user, class_id):
+        if not is_teacher(user) and not is_admin(user):
+            return utils.error_page(error=403, ui_message=gettext("retrieve_class_error"))
+        Class = self.db.get_class(class_id)
+        if not Class or (not utils.can_edit_class(user, Class) and not is_admin(user)):
+            return utils.error_page(error=404, ui_message=gettext("no_such_class"))
+        session["preview_class"] = {
+            "id": Class["id"],
+            "name": Class["name"],
+        }
+        return redirect("/hedy")
+
+    @route("/clear-preview-class", methods=["GET"])
+    # Note: we explicitly do not need login here, anyone can exit preview mode
+    def clear_preview_class(self):
+        try:
+            del session["preview_class"]
+        except KeyError:
+            pass
+        return redirect("/for-teachers")
+
     @route("/class/<class_id>/programs/<username>", methods=["GET", "POST"])
     @requires_teacher
     def public_programs(self, user, class_id, username):
@@ -302,6 +325,8 @@ class ForTeachersModule(WebsiteModule):
             adventures=adventures,
             adventure_names=adventure_names,
             available_adventures=available_adventures,
+            custom_adventures=list(dict.fromkeys(
+                [item for sublist in available_adventures.values() for item in sublist if item.is_teacher_adventure])),
             adventures_default_order=hedy_content.ADVENTURE_ORDER_PER_LEVEL,
             current_page="for-teachers",
             min_level=min_level,
@@ -569,8 +594,10 @@ class ForTeachersModule(WebsiteModule):
             adventure = SortedAdventure(short_name=teacher_adventure['id'],
                                         long_name=teacher_adventure['name'],
                                         is_teacher_adventure=True,
-                                        is_command_adventure=False)
-            teacher_adventures[int(teacher_adventure['level'])].add(adventure)
+                                        is_command_adventure=False,)
+            # levels=teacher_adventure.get("levels", []))
+            for level in teacher_adventure.get("levels", [teacher_adventure.get("level")]):
+                teacher_adventures[int(level)].add(adventure)
 
         for level in range(1, hedy.HEDY_MAX_LEVEL + 1):
             adventures_set = set(adventures[level])
@@ -886,6 +913,7 @@ class ForTeachersModule(WebsiteModule):
     @requires_teacher
     def update_adventure(self, user):
         body = request.json
+
         # Validations
         if not isinstance(body, dict):
             return gettext("ajax_error"), 400
@@ -893,7 +921,7 @@ class ForTeachersModule(WebsiteModule):
             return gettext("adventure_id_invalid"), 400
         if not isinstance(body.get("name"), str):
             return gettext("adventure_name_invalid"), 400
-        if not isinstance(body.get("level"), str):
+        if not isinstance(body.get("levels"), list) or (isinstance(body.get("levels"), list) and not body["levels"]):
             return gettext("level_invalid"), 400
         if not isinstance(body.get("content"), str):
             return gettext("content_invalid"), 400
@@ -930,7 +958,8 @@ class ForTeachersModule(WebsiteModule):
             "date": utils.timems(),
             "creator": user["username"],
             "name": body["name"],
-            "level": body["level"],
+            "level": body["levels"][0],  # TODO: this should be removed gradually.
+            "levels": body["levels"],
             "content": body["content"],
             "public": 1 if body["public"] else 0,
             "language": body["language"],
