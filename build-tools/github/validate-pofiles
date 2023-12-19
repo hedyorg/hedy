@@ -62,7 +62,7 @@ def check_for_wrapping(filename):
     lines end in `\n`.
     """
     with open(filename, 'r', encoding='utf-8') as f:
-        lines = [l.strip() for l in f.read().splitlines()]
+        lines = [x.strip() for x in f.read().splitlines()]
 
     any_failed = False
 
@@ -87,7 +87,7 @@ def check_for_wrapping(filename):
             nr += 1
 
         # Check that all message lines except the last one end in `\n"`:
-        if not all(l.endswith('\\n"') for l in msg_lines[:-1]):
+        if not all(x.endswith('\\n"') for x in msg_lines[:-1]):
             print(f'{path.relpath(filename)}:{msg_start + 1}: msgstr has been wrapped!')
             any_failed = True
 
