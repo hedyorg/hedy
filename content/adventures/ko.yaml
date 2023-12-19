@@ -171,7 +171,8 @@ adventures:
                         {print} _
                     ```
             9:
-                story_text: "이 레벨에서는 다른 `{if}` 및 `{repeat}` 명령어 내에서 {if} 및 {repeat} 명령어를 사용할 수 있습니다. \n이것은 여러분에게 많은 선택권을 주고 여러분의 이야기를 상호작용적으로 만드는 데 정말로 도움을 줍니다.\n\n ### 연습문제 1\n코드를 완료하여 `{if}`가 올바르게 작동하도록 하십시오.\n\n### 연습문제 2\n로빈이 집에 가는 스토리의 부분도 `{if}`와 `{else}`를 붙인다.\n\n### 연습문제 3\n레벨 8 스토리로 돌아가서 다른 `{if}` 안에 최소한 두 개의 `{if}`을 사용합니다.\n"
+                story_text: "이 레벨에서는 다른 `{if}` 및 `{repeat}` 명령어 내에서 {if} 및 {repeat} 명령어를 사용할 수 있습니다. \n이것은 여러분에게 많은 선택권을 주고 여러분의 이야기를 상호작용적으로 만드는 데 정말로 도움을 줍니다.\n\n ### 연습문제 1\n코드를 완료하여 `{if}`가 올바르게 작동하도록 하십시오.\n\n### 연습문제 2\n로빈이 집에 가는 스토리의 부분도 `{if}`와 `{else}`를 붙인다.\n\n### 연습문제 3\n레벨 8 스토리로 돌아가서 다른 `{if}`\
+                    \ 안에 최소한 두 개의 `{if}`을 사용합니다.\n"
                 example_code: |
                     ```
                     {print} 'Robin is walking downtown'
@@ -2146,7 +2147,8 @@ adventures:
                     {else} {print} 'Oh no! You are being eaten by a...' monsters {at} {random}
                     ```
             9:
-                story_text: "In this level you can use nesting, which allows you to make the haunted house even more interactive!\n\n### 연습문제\nNow it's very hard to win this game, can you make it easier to win?\nChange your code so it only has one wrong door and two correct doors instead of one correct door and two wrong ones? \nTip: This means changing the variable correct_door into wrong_door, and switching the `{if}` and `{else}` code.\nAnd of course you may also change the story and make it your own. Change the monsters or make it a happy game show where you get a gift!\n"
+                story_text: "In this level you can use nesting, which allows you to make the haunted house even more interactive!\n\n### 연습문제\nNow it's very hard to win this game, can you make it easier to win?\nChange your code so it only has one wrong door and two correct doors instead of one correct\
+                    \ door and two wrong ones? \nTip: This means changing the variable correct_door into wrong_door, and switching the `{if}` and `{else}` code.\nAnd of course you may also change the story and make it your own. Change the monsters or make it a happy game show where you get a gift!\n"
                 example_code: |
                     ```
                     {print} 'Escape from the Haunted House!'
@@ -2169,7 +2171,9 @@ adventures:
                         {print} 'Great! You survived!'
                     ```
             11:
-                story_text: "In this level we've changed the `{for}` command so we can tell the player where they are. \n\n### 연습문제 1\nFinish the program so the player knows which room they are in.\n\n### 연습문제 2\nMake the program into an adventure by following these steps:\n\n1. Make a list of choices (like: fight or flight)\n 2. Make sure the player can choose an option with `{ask}`\n3. Is answer correct? Then they may proceed to the next monster. Do they give a wrong answer? Let the player know with a `{print}`. \n\n**Extra** If you make a wrong choice, a monster is still shown! How could you change that?\n"
+                story_text: "In this level we've changed the `{for}` command so we can tell the player where they are. \n\n### 연습문제 1\nFinish the program so the player knows which room they are in.\n\n### 연습문제 2\nMake the program into an adventure by following these steps:\n\n1. Make a list of choices\
+                    \ (like: fight or flight)\n 2. Make sure the player can choose an option with `{ask}`\n3. Is answer correct? Then they may proceed to the next monster. Do they give a wrong answer? Let the player know with a `{print}`. \n\n**Extra** If you make a wrong choice, a monster is still shown!\
+                    \ How could you change that?\n"
                 example_code: |
                     ```
                     {print} 'Escape from the Haunted House!'
@@ -3165,7 +3169,9 @@ adventures:
                     This code can be expanded with more items on the menu, for example offering drinks, and/or multiple courses or desserts. Add at least one more item.
                     **Extra** Add even more items, as many options as you like!
             9:
-                story_text: "In this level you can use nesting to make your restaurant more realistic and more fun!\n\n### 연습문제\nThe indentation was removed in the example code. \nCan you figure out how much indentation each line needs in order for the code to work properly?\nIf the customer orders pizza, Hedy shouldn't ask what sauce the costumer wants.\n\n**Extra** A restaurant does not stock all sauces. Make a list of available sauces and give a reply with each order whether you sell it. <br>\n**Extra** Pizzas have toppings. Ask customers what they want.<br>\n**Extra** Do customers want a drink? Ask them too! <br>\n"
+                story_text: "In this level you can use nesting to make your restaurant more realistic and more fun!\n\n### 연습문제\nThe indentation was removed in the example code. \nCan you figure out how much indentation each line needs in order for the code to work properly?\nIf the customer orders pizza,\
+                    \ Hedy shouldn't ask what sauce the costumer wants.\n\n**Extra** A restaurant does not stock all sauces. Make a list of available sauces and give a reply with each order whether you sell it. <br>\n**Extra** Pizzas have toppings. Ask customers what they want.<br>\n**Extra** Do customers\
+                    \ want a drink? Ask them too! <br>\n"
                 example_code: |
                     ```
                     {print} 'Welcome to Restaurant Chez Hedy!'
@@ -3368,7 +3374,8 @@ adventures:
 
                     비겼는지 확인하려면 빈칸에 정확한 코드를 입력하세요.
             9:
-                story_text: "In this level you can program the whole rock, paper, scissors game by nesting the `{if}` commands. \n\n### 연습문제\nCan you finish the code? The program must tell who has won for every combination.\n\n**Extra** Want to play more than one game? Expand the code so that you can play multiple rounds. You can even use an `{ask}` to ask the user how many rounds they want to play.\n"
+                story_text: "In this level you can program the whole rock, paper, scissors game by nesting the `{if}` commands. \n\n### 연습문제\nCan you finish the code? The program must tell who has won for every combination.\n\n**Extra** Want to play more than one game? Expand the code so that you can\
+                    \ play multiple rounds. You can even use an `{ask}` to ask the user how many rounds they want to play.\n"
                 example_code: |
                     ```
                     choices = rock, paper, scissors
@@ -4114,7 +4121,8 @@ adventures:
                     {turn} angle
                     ```
             8:
-                story_text: "Now that we can repeat several lines, we can make figures more easily.\nWe only have to set the angle once and then use that variable in the `{repeat}`.\n\n### 연습문제 1\nThe example code creates a square. Change the code so that it create another figure, such as a triangle or a hexagon. \nThis requires a change to two lines of code.\nTip: An entire circle is 360 degrees.\n\n### 연습문제 2\nNow create a drawing consisting of at least two polygons.\n"
+                story_text: "Now that we can repeat several lines, we can make figures more easily.\nWe only have to set the angle once and then use that variable in the `{repeat}`.\n\n### 연습문제 1\nThe example code creates a square. Change the code so that it create another figure, such as a triangle or\
+                    \ a hexagon. \nThis requires a change to two lines of code.\nTip: An entire circle is 360 degrees.\n\n### 연습문제 2\nNow create a drawing consisting of at least two polygons.\n"
                 example_code: |
                     ```
                     angle = 90
@@ -4132,15 +4140,67 @@ adventures:
                         {turn} _
                         {forward} _
                     ```
-            12:
-                example_code: "```\n{define} square\n    {repeat} 4 {times}\n        {turn} _\n        {forward} _\n{call} square\n{forward} 50\n{call} square\n{forward} 50\n{call} square\n```\n"
-                story_text: "We can use functions to draw more complex figures with less code.\n### Exercise 1\nFill the function so that three squares are created. If you want the image to look nicer, you can make the lines between the squares white.\n\n### Exercise 2\nThe code can be made even shorter. Place the final lines into a `{repeat}` so the figure remains the same.\n\n### Exercise 3\nCreate your own drawing with different figures.\nChange both the number of figures with the `{repeat}` and the shape of the figures in the `{define}`\n"
             9:
-                story_text: "Now that we can use a `{repeat}` inside a `{repeat}`, we can create more complex figures.\n\n### Exercise 1\nThis code creates three black triangles, change that into five pink squares.\n\n **Extra** Create a figure of your own choosing consisting of at least two different shapes types.\n"
-                example_code: "```\n{color} {black}\n{repeat} 3 {times}\n    {repeat} 3 {times}\n        {forward} 10\n        {turn} 120\n    {color} {white}\n    {forward} 50\n    {color} {black}\n```\n"
+                story_text: |
+                    Now that we can use a `{repeat}` inside a `{repeat}`, we can create more complex figures.
+
+                    ### Exercise 1
+                    This code creates three black triangles, change that into five pink squares.
+
+                     **Extra** Create a figure of your own choosing consisting of at least two different shapes types.
+                example_code: |
+                    ```
+                    {color} {black}
+                    {repeat} 3 {times}
+                        {repeat} 3 {times}
+                            {forward} 10
+                            {turn} 120
+                        {color} {white}
+                        {forward} 50
+                        {color} {black}
+                    ```
             10:
-                example_code: "```\n{turn} 90\ndistances = 10, 20, 30, 40, 50, 60\n{for} distance {in} distances\n    {forward} distance\n```\n```\n"
-                story_text: "In this level you can make the turtle draw a figure.\nThe turtle will travel the distances in the list, one by one, making bigger and bigger steps.\n### Exercise 1\nAdd a 90 degree turn in the loop, so that a spiral is drawn.\nAdd at least 5 numbers to the list, so the spiral grows larger.\n**(extra)** can you change the spiral into another shape? Experiment with numbers for the turn!\n### Exercise 2\nThe spiral is drawn outwards, make it go inwards?\n"
+                story_text: |
+                    In this level you can make the turtle draw a figure.
+                    The turtle will travel the distances in the list, one by one, making bigger and bigger steps.
+                    ### Exercise 1
+                    Add a 90 degree turn in the loop, so that a spiral is drawn.
+                    Add at least 5 numbers to the list, so the spiral grows larger.
+                    **(extra)** can you change the spiral into another shape? Experiment with numbers for the turn!
+                    ### Exercise 2
+                    The spiral is drawn outwards, make it go inwards?
+                example_code: |
+                    ```
+                    {turn} 90
+                    distances = 10, 20, 30, 40, 50, 60
+                    {for} distance {in} distances
+                        {forward} distance
+                    ```
+                    ```
+            12:
+                story_text: |
+                    We can use functions to draw more complex figures with less code.
+                    ### Exercise 1
+                    Fill the function so that three squares are created. If you want the image to look nicer, you can make the lines between the squares white.
+
+                    ### Exercise 2
+                    The code can be made even shorter. Place the final lines into a `{repeat}` so the figure remains the same.
+
+                    ### Exercise 3
+                    Create your own drawing with different figures.
+                    Change both the number of figures with the `{repeat}` and the shape of the figures in the `{define}`
+                example_code: |
+                    ```
+                    {define} square
+                        {repeat} 4 {times}
+                            {turn} _
+                            {forward} _
+                    {call} square
+                    {forward} 50
+                    {call} square
+                    {forward} 50
+                    {call} square
+                    ```
     turtle_draw_it:
         name: Draw it!
         default_save_name: Draw it

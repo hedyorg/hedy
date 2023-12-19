@@ -20,7 +20,8 @@ adventures:
                     {print} Ele ouve barulhos estranhos em todos os lugares
                     {print} Ele tem medo que esta seja uma floresta assombrada
                     ```
-                story_text_2: "### Exercício \nAgora crie sua própria história com pelo menos 6 linhas de código.\nEssa história não pode ser a mesma do código de exemplo.\nUse pelo menos um comando `{ask}` e um comando `{echo}`.\nVocê pode escolher qualquer tópico para a história.\nSe não conseguir pensar em um tópico, pode usar uma das nossas sugestões: ir ao cinema, uma partida esportiva ou um dia no zoológico.\n"
+                story_text_2: "### Exercício \nAgora crie sua própria história com pelo menos 6 linhas de código.\nEssa história não pode ser a mesma do código de exemplo.\nUse pelo menos um comando `{ask}` e um comando `{echo}`.\nVocê pode escolher qualquer tópico para a história.\nSe não conseguir pensar\
+                    \ em um tópico, pode usar uma das nossas sugestões: ir ao cinema, uma partida esportiva ou um dia no zoológico.\n"
             2:
                 story_text: |
                     No nível 2 você pode tornar sua história mais divertida. O nome do seu personagem principal agora pode estar em qualquer lugar dentro da frase.
@@ -1310,7 +1311,8 @@ adventures:
 
                     {print} 2.5 + 2.5
             13:
-                story_text: Agora vamos aprender `{and}` e `{or}`! Se você quiser verificar duas declarações, você não precisa usar dois `{if}`s, mas pode usar `{and}` e `{or}`. Se você usar `{and}`, ambas as declarações, à esquerda e à direita de `{and}` precisam ser verdadeiras. Também podemos usar `{or}`. Então, apenas uma afirmação precisa estar correta.
+                story_text: Agora vamos aprender `{and}` e `{or}`! Se você quiser verificar duas declarações, você não precisa usar dois `{if}`s, mas pode usar `{and}` e `{or}`. Se você usar `{and}`, ambas as declarações, à esquerda e à direita de `{and}` precisam ser verdadeiras. Também podemos usar
+                    `{or}`. Então, apenas uma afirmação precisa estar correta.
                 example_code: |
                     ```
                     nome = {ask} 'qual o seu nome?'
@@ -3990,15 +3992,67 @@ adventures:
                         {turn} _
                         {forward} _
                     ```
-            12:
-                example_code: "```\n{define} square\n    {repeat} 4 {times}\n        {turn} _\n        {forward} _\n{call} square\n{forward} 50\n{call} square\n{forward} 50\n{call} square\n```\n"
-                story_text: "We can use functions to draw more complex figures with less code.\n### Exercise 1\nFill the function so that three squares are created. If you want the image to look nicer, you can make the lines between the squares white.\n\n### Exercise 2\nThe code can be made even shorter. Place the final lines into a `{repeat}` so the figure remains the same.\n\n### Exercise 3\nCreate your own drawing with different figures.\nChange both the number of figures with the `{repeat}` and the shape of the figures in the `{define}`\n"
             9:
-                story_text: "Now that we can use a `{repeat}` inside a `{repeat}`, we can create more complex figures.\n\n### Exercise 1\nThis code creates three black triangles, change that into five pink squares.\n\n **Extra** Create a figure of your own choosing consisting of at least two different shapes types.\n"
-                example_code: "```\n{color} {black}\n{repeat} 3 {times}\n    {repeat} 3 {times}\n        {forward} 10\n        {turn} 120\n    {color} {white}\n    {forward} 50\n    {color} {black}\n```\n"
+                story_text: |
+                    Now that we can use a `{repeat}` inside a `{repeat}`, we can create more complex figures.
+
+                    ### Exercise 1
+                    This code creates three black triangles, change that into five pink squares.
+
+                     **Extra** Create a figure of your own choosing consisting of at least two different shapes types.
+                example_code: |
+                    ```
+                    {color} {black}
+                    {repeat} 3 {times}
+                        {repeat} 3 {times}
+                            {forward} 10
+                            {turn} 120
+                        {color} {white}
+                        {forward} 50
+                        {color} {black}
+                    ```
             10:
-                example_code: "```\n{turn} 90\ndistances = 10, 20, 30, 40, 50, 60\n{for} distance {in} distances\n    {forward} distance\n```\n```\n"
-                story_text: "In this level you can make the turtle draw a figure.\nThe turtle will travel the distances in the list, one by one, making bigger and bigger steps.\n### Exercise 1\nAdd a 90 degree turn in the loop, so that a spiral is drawn.\nAdd at least 5 numbers to the list, so the spiral grows larger.\n**(extra)** can you change the spiral into another shape? Experiment with numbers for the turn!\n### Exercise 2\nThe spiral is drawn outwards, make it go inwards?\n"
+                story_text: |
+                    In this level you can make the turtle draw a figure.
+                    The turtle will travel the distances in the list, one by one, making bigger and bigger steps.
+                    ### Exercise 1
+                    Add a 90 degree turn in the loop, so that a spiral is drawn.
+                    Add at least 5 numbers to the list, so the spiral grows larger.
+                    **(extra)** can you change the spiral into another shape? Experiment with numbers for the turn!
+                    ### Exercise 2
+                    The spiral is drawn outwards, make it go inwards?
+                example_code: |
+                    ```
+                    {turn} 90
+                    distances = 10, 20, 30, 40, 50, 60
+                    {for} distance {in} distances
+                        {forward} distance
+                    ```
+                    ```
+            12:
+                story_text: |
+                    We can use functions to draw more complex figures with less code.
+                    ### Exercise 1
+                    Fill the function so that three squares are created. If you want the image to look nicer, you can make the lines between the squares white.
+
+                    ### Exercise 2
+                    The code can be made even shorter. Place the final lines into a `{repeat}` so the figure remains the same.
+
+                    ### Exercise 3
+                    Create your own drawing with different figures.
+                    Change both the number of figures with the `{repeat}` and the shape of the figures in the `{define}`
+                example_code: |
+                    ```
+                    {define} square
+                        {repeat} 4 {times}
+                            {turn} _
+                            {forward} _
+                    {call} square
+                    {forward} 50
+                    {call} square
+                    {forward} 50
+                    {call} square
+                    ```
     turtle_draw_it:
         name: Draw it!
         default_save_name: Draw it
