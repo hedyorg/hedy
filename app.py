@@ -1320,7 +1320,9 @@ def index(level, program_id):
 
     customizations = {}
     if current_user()['username']:
-        customizations = DATABASE.get_student_class_customizations(current_user()['username'])
+        # class_to_preview is for teachers to preview a class they own
+        customizations = DATABASE.get_student_class_customizations(
+            current_user()['username'], class_to_preview=session.get("preview_class", {}).get("id"))
 
     if 'levels' in customizations:
         available_levels = customizations['levels']
@@ -1533,6 +1535,36 @@ def view_program(user, id):
                                level=int(result['level']),
                                code=code),
                            **arguments_dict)
+
+
+@app.route('/render_code/<level>/<code>', methods=['GET'])
+def render_code_in_editor(level, code):
+
+    try:
+        level = int(level)
+    except BaseException:
+        return utils.error_page(error=404, ui_message=gettext('no_such_level'))
+
+    a = Adventure('start', 'start', 'start', 'start', code, False, False)
+    adventures = [a]
+
+    return render_template("code-page.html",
+                           specific_adventure=True,
+                           level_nr=str(level),
+                           level=level,
+                           adventures=adventures,
+                           raw=True,
+                           menu=False,
+                           blur_button_available=False,
+                           # See initialize.ts
+                           javascript_page_options=dict(
+                               page='code',
+                               lang=g.lang,
+                               level=level,
+                               adventures=adventures,
+                               initial_tab='start',
+                               current_user_name=current_user()['username'],
+                           ))
 
 
 @app.route('/adventure/<name>', methods=['GET'], defaults={'level': 1, 'mode': 'full'})
@@ -2064,7 +2096,7 @@ def get_slides(level):
         return utils.error_page(error=404, ui_message="Slides do not exist!")
 
     slides = SLIDES[g.lang].get_slides_for_level(level, keyword_language)
-    return render_template('slides.html', slides=slides)
+    return render_template('slides.html', level=level, slides=slides)
 
 
 @app.route('/translate_keywords', methods=['POST'])

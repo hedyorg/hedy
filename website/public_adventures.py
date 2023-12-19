@@ -32,14 +32,17 @@ class PublicAdventuresModule(WebsiteModule):
         for adventure in public_adventures:
             if included.get(adventure["name"]):
                 continue
+            public_profile = self.db.get_public_profile_settings(adventure.get('creator'))
             included[adventure["name"]] = True
             adventures.append(
                 {
                     "id": adventure.get("id"),
                     "name": adventure.get("name"),
                     "creator": adventure.get("creator"),
+                    "creator_public_profile": public_profile,
                     "date": utils.localized_date_format(adventure.get("date")),
                     "level": adventure.get("level"),
+                    "levels": adventure.get("levels"),
                     "language": adventure.get("language", None),
                     "cloned_times": adventure.get("cloned_times"),
                     "tags": adventure.get("tags", []),
@@ -80,10 +83,11 @@ class PublicAdventuresModule(WebsiteModule):
             "cloned_from": adventure_id,
             "name": current_adventure.get("name"),
             "content": current_adventure.get("content"),
-            "public": True,
+            "public": 1,
             "creator": user["username"],
             "date": utils.timems(),
             "level": current_adventure.get("level"),
+            "levels": current_adventure.get("levels"),
             "language": current_adventure.get("language", ""),
             "tags": current_adventure.get("tags", []),
         }

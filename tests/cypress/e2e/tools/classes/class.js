@@ -30,18 +30,18 @@ export function createClass()
  */
 export function ensureClass()
 {
-    const classname = `test class ${Math.random()}`;
+    let classname = `test class ${Math.random()}`;
     goToTeachersPage();
 
-    return new Promise(ok => {
-        cy.getBySel('view_class_link').then(viewClassLink => {
-            if (viewClassLink.length === 0) {
-                ok(createClass());
-            } else {
-                ok(viewClassLink.text());
-            }
-        });
+    cy.getBySel('view_class_link').then(viewClassLink => {
+        if (viewClassLink.length === 0) {
+            createClass();
+        } else {
+            classname = viewClassLink.text();
+        }
     });
+
+    return classname
 }
 
 export function addStudents(classname, count) {
