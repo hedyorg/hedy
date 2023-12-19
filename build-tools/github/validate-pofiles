@@ -74,28 +74,24 @@ def check_for_wrapping(filename):
     # Skip the header, which always contains a `msgstr ""` we're not interested in.
     nr = 20
     while nr < len(lines):
-        while nr < len(lines) and is_msgstr_start(lines[nr]):
+        while nr < len(lines) and 'msgstr ""' not in lines[nr]:
             nr += 1
 
         msg_start = nr
         nr += 1
-        failed = False
-        # Stop at empty line, or a line containing 'msgid'
-        while nr < len(lines) and not is_msgstr_end(lines[nr]):
-            # Lines must end in '\n"', or be the last line in a block
-            if not (lines[nr].endswith('\\n"') or is_msgstr_end(lines[nr + 1])) and not failed:
-                print(f'{path.relpath(filename)}:{msg_start + 1}: msgstr has been wrapped!')
-                any_failed = failed = True
+
+        # Accumulate all lines starting with `"`
+        msg_lines = []
+        while nr < len(lines) and lines[nr].startswith('"'):
+            msg_lines.append(lines[nr])
             nr += 1
 
+        # Check that all message lines except the last one end in `\n"`:
+        if not all(l.endswith('\\n"') for l in msg_lines[:-1]):
+            print(f'{path.relpath(filename)}:{msg_start + 1}: msgstr has been wrapped!')
+            any_failed = True
+
     return any_failed
-
-
-def is_msgstr_start(line):
-    return 'msgstr ""' not in line
-
-def is_msgstr_end(line):
-    return not line.strip() or 'msgid' in line
 
 
 if __name__ == '__main__':
