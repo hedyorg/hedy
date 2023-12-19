@@ -132,7 +132,7 @@
             {% for invite in invites %}
                 <tr>
                     <td class="username_cell">{{invite.username}}</td>
-                    <td>{{invite.invited_as}}</td>
+                    <td>{{invite.invited_as_text}}</td>
                     <td>{{invite.timestamp}}</td>
                     <td>{{invite.expire_timestamp}}</td>
                     {% if not is_second_teacher %}<td class="remove_user_invitation text-center"><a href="#" onclick='hedyApp.remove_student_invite("{{invite.username}}", "{{ class_info.id }}", {{_('delete_invite_prompt')|default(None)|tojson}})'>🗑️</a></td>{% endif %}

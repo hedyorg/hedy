@@ -505,7 +505,8 @@ class InvalidInfo:
 class LookupEntry:
     name: str
     tree: Tree
-    linenumber: int
+    definition_line: int
+    access_line: int
     skip_hashing: bool
     type_: str = None
     currently_inferring: bool = False  # used to detect cyclic type inference
@@ -582,6 +583,15 @@ class LookupEntryCollector(visitors.Visitor):
         var_name = tree.children[0].children[0]
         self.add_to_lookup(var_name, tree, tree.meta.line)
 
+    # def var_access(self, tree):
+    #     variable_name = tree.children[0].children[0]
+    #     # store the line of access (or string value) in the lookup table
+    #     # so we know what variable is used where
+    #     vars = [a for a in self.lookup if a.name == variable_name]
+    #     if vars:
+    #         corresponding_lookup_entry = vars[0]
+    #         corresponding_lookup_entry.access_line = tree.meta.line
+
     def assign(self, tree):
         var_name = tree.children[0].children[0]
         self.add_to_lookup(var_name, tree.children[1], tree.meta.line)
@@ -621,7 +631,6 @@ class LookupEntryCollector(visitors.Visitor):
         self.add_to_lookup(iterator, trimmed_tree, tree.meta.line)
 
     def define(self, tree):
-        # add function name to lookup
         self.add_to_lookup(str(tree.children[0].children[0]) + "()", tree, tree.meta.line)
 
         # add arguments to lookup
@@ -637,8 +646,8 @@ class LookupEntryCollector(visitors.Visitor):
                                  for x in tree.children[1].children)
         self.add_to_lookup(f"{function_name}({args_str})", tree, tree.meta.line)
 
-    def add_to_lookup(self, name, tree, linenumber, skip_hashing=False):
-        entry = LookupEntry(name, tree, linenumber, skip_hashing)
+    def add_to_lookup(self, name, tree, definition_line=None, access_line=None, skip_hashing=False):
+        entry = LookupEntry(name, tree, definition_line, access_line, skip_hashing)
         hashed_name = escape_var(entry)
         entry.name = hashed_name
         self.lookup.append(entry)
@@ -1137,69 +1146,103 @@ class IsValid(Filter):
     # this function is used to generate more informative error messages
     # tree is transformed to a node of [Bool, args, command number]
 
-    def __init__(self, level):
+    def __init__(self, level, lang, input_string):
         self.level = level
+        self.lang = lang
+        self.input_string = input_string
 
     def error_invalid_space(self, meta, args):
-        # return space to indicate that line starts in a space
-        return False, InvalidInfo(" ", line=args[0][2].line, column=args[0][2].column), meta
+        line = args[0][2].line
+        # the error here is a space at the beginning of a line, we can fix that!
+        fixed_code, result = repair_leading_space(self.input_string, self.lang, self.level, line)
+        raise exceptions.InvalidSpaceException(
+            level=self.level, line_number=line, fixed_code=fixed_code, fixed_result=result)
 
     def error_print_nq(self, meta, args):
         words = [str(x[1]) for x in args]  # second half of the list is the word
         text = ' '.join(words)
-        return False, InvalidInfo("print without quotes", arguments=[
-                                  text], line=meta.line, column=meta.column), meta
+
+        raise exceptions.UnquotedTextException(
+            level=self.level,
+            unquotedtext=text,
+            line_number=meta.line
+        )
 
     def error_list_access(self, meta, args):
-        error = InvalidInfo('misspelled "at" command', arguments=[str(args[1][1])], line=meta.line)
-        return False, error, meta
+        raise exceptions.MisspelledAtCommand(command='at', arg1=str(args[1][1]), line_number=meta.line)
+
+    def error_non_decimal(self, meta, args):
+        raise exceptions.NonDecimalVariable(line_number=meta.line)
 
     def error_invalid(self, meta, args):
-        error = InvalidInfo('invalid command', command=args[0][1], arguments=[
-                            [a[1] for a in args[1:]]], line=meta.line, column=meta.column)
-        return False, error, meta
+        invalid_command = args[0][1]
+        closest = closest_command(invalid_command, get_suggestions_for_language(self.lang, self.level))
+
+        if closest == 'keyword':  # we couldn't find a suggestion
+            invalid_command_en = hedy_translation.translate_keyword_to_en(invalid_command, lang)
+            if invalid_command_en == Command.turn:
+                arg = args[0][0]
+                raise hedy.exceptions.InvalidArgumentException(command=invalid_command,
+                                                               allowed_types=get_allowed_types(
+                                                                   Command.turn, self.level),
+                                                               invalid_argument=arg,
+                                                               line_number=meta.line)
+            # clearly the error message here should be better or it should be a different one!
+            raise exceptions.ParseException(level=self.level, location=[meta.line, meta.column], found=invalid_command)
+        elif closest is None:
+            raise exceptions.MissingCommandException(level=self.level, line_number=meta.line)
+        else:
+            result = None
+            fixed_code = self.input_string.replace(invalid_command, closest)
+            if fixed_code != self.input_string:  # only if we have made a successful fix
+                try:
+                    fixed_result = transpile_inner(fixed_code, self.level)
+                    result = fixed_result
+                except exceptions.HedyException:
+                    # The fixed code contains another error. Only report the original error for now.
+                    pass
+
+        raise exceptions.InvalidCommandException(invalid_command=invalid_command, level=self.level,
+                                                 guessed_command=closest, line_number=meta.line,
+                                                 fixed_code=fixed_code, fixed_result=result)
 
     def error_unsupported_number(self, meta, args):
-        error = InvalidInfo('unsupported number', arguments=[str(args[0])], line=meta.line, column=meta.column)
-        return False, error, meta
+        # add in , line=meta.line, column=meta.column
+        raise exceptions.UnsupportedFloatException(value=''.join(str(args[0])))
 
     def error_condition(self, meta, args):
-        error = InvalidInfo('invalid condition', arguments=[str(args[0])], line=meta.line, column=meta.column)
-        return False, error, meta
+        raise exceptions.UnquotedEqualityCheckException(line_number=meta.line)
 
     def error_repeat_no_command(self, meta, args):
-        error = InvalidInfo('invalid repeat', arguments=[str(args[0])], line=meta.line, column=meta.column)
-        return False, error, meta
+        raise exceptions.MissingInnerCommandException(command='repeat', level=self.level, line_number=meta.line)
 
     def error_repeat_no_print(self, meta, args):
-        error = InvalidInfo('repeat missing print', arguments=[str(args[0])], line=meta.line, column=meta.column)
-        return False, error, meta
+        raise exceptions.IncompleteRepeatException(command='print', level=self.level, line_number=meta.line)
 
     def error_repeat_no_times(self, meta, args):
-        error = InvalidInfo('repeat missing times', arguments=[str(args[0])], line=meta.line, column=meta.column)
-        return False, error, meta
+        raise exceptions.IncompleteRepeatException(command='times', level=self.level, line_number=meta.line)
 
     def error_text_no_print(self, meta, args):
-        error = InvalidInfo('lonely text', arguments=[str(args[0])], line=meta.line, column=meta.column)
-        return False, error, meta
+        raise exceptions.LonelyTextException(level=self.level, line_number=meta.line)
 
     def error_list_access_at(self, meta, args):
-        error = InvalidInfo('invalid at keyword', arguments=[str(args[0])], line=meta.line, column=meta.column)
-        return False, error, meta
-    # other rules are inherited from Filter
+        raise exceptions.InvalidAtCommandException(command='at', level=self.level, line_number=meta.line)
 
     # flat if no longer allowed in level 8 and up
     def error_ifelse(self, meta, args):
-        error = InvalidInfo('flat if', arguments=[str(args[0])], line=meta.line, column=meta.column)
-        return False, error, meta
+        raise exceptions.WrongLevelException(
+            offending_keyword='if',
+            working_level=7,
+            tip='no_more_flat_if',
+            line_number=meta.line)
 
     def error_ifpressed_missing_else(self, meta, args):
-        error = InvalidInfo('ifpressed missing else', arguments=[str(args[0])], line=meta.line, column=meta.column)
-        return False, error, meta
+        raise exceptions.MissingElseForPressitException(
+            command='ifpressed_else', level=self.level, line_number=meta.line)
 
     def error_nested_define(self, meta, args):
-        error = InvalidInfo('nested function', arguments=[str(args[0])], line=meta.line, column=meta.column)
-        return False, error, meta
+        raise exceptions.NestedFunctionException()
+
     # other rules are inherited from Filter
 
 
@@ -1220,6 +1263,12 @@ def valid_echo(ast):
 class IsComplete(Filter):
     def __init__(self, level):
         self.level = level
+
+    # ah so we actually have 2 types of "error productions"!
+    # true ones that live in the grammar like error_ask_dep_2
+    # and these ones where the parser combines valid and not valid
+    # versions, like print: _PRINT (text)?
+
     # print, ask and echo can miss arguments and then are not complete
     # used to generate more informative error messages
     # tree is transformed to a node of [True] or [False, args, line_number]
@@ -1293,15 +1342,17 @@ class ConvertToPython(Transformer):
     # is no check on whether the var is defined
     def is_variable(self, variable_name, access_line_number=100):
         all_names = [a.name for a in self.lookup]
-        all_names_before_access_line = [a.name for a in self.lookup if a.linenumber <= access_line_number]
-
+        all_names_before_access_line = [a.name for a in self.lookup if a.definition_line <= access_line_number]
         if variable_name in all_names and variable_name not in all_names_before_access_line:
             # referenced before assignment!
-            definition_line_number = [a.linenumber for a in self.lookup if a.name == variable_name][0]
+            definition_line_number = [a.definition_line for a in self.lookup if a.name == variable_name][0]
             raise hedy.exceptions.AccessBeforeAssignException(
                 name=variable_name,
                 access_line_number=access_line_number,
                 definition_line_number=definition_line_number)
+        else:
+            # valid use, store!
+            self.add_variable_access_location(variable_name, access_line_number)
 
         is_function = False
         if isinstance(variable_name, str):
@@ -1314,16 +1365,29 @@ class ConvertToPython(Transformer):
     def process_variable(self, arg, access_line_number=100):
         # processes a variable by hashing and escaping when needed
         if self.is_variable(arg, access_line_number):
+            # add this access line to the lookup table
+            self.add_variable_access_location(arg, access_line_number)
             return escape_var(arg)
         if ConvertToPython.is_quoted(arg):
             arg = arg[1:-1]
         return f"'{process_characters_needing_escape(arg)}'"
 
     def process_variable_for_fstring(self, variable_name, access_line_number=100):
+        self.add_variable_access_location(variable_name, access_line_number)
+
         if self.is_variable(variable_name, access_line_number):
             return "{" + escape_var(variable_name) + "}"
         else:
             return process_characters_needing_escape(variable_name)
+
+    def add_variable_access_location(self, variable_name, access_line_number):
+        # store the line of access (or string value) in the lookup table
+        # so we know what variable is used where
+        if isinstance(variable_name, str):
+            vars = [a for a in self.lookup if isinstance(a.name, str) and a.name[:len(variable_name)] == variable_name]
+            for v in vars:  # vars can be defined multiple times, access validates all of them
+                corresponding_lookup_entry = v
+                corresponding_lookup_entry.access_line = access_line_number
 
     def process_variable_for_comparisons(self, name):
         # used to transform variables in comparisons
@@ -1368,7 +1432,11 @@ class ConvertToPython(Transformer):
         unquoted_in_lookup = [self.is_variable(a, var_access_linenumber) for a in unquoted_args]
 
         if unquoted_in_lookup == [] or all(unquoted_in_lookup):
-            # all good? return for further processing
+
+            # # all good? store location
+            for a in args:
+                self.add_variable_access_location(str(a), var_access_linenumber)
+            # return for further processing
             return args
         else:
             # return first name with issue
@@ -1475,7 +1543,7 @@ class ConvertToPython_1(ConvertToPython):
 
     def forward(self, meta, args):
         if len(args) == 0:
-            return sleep_after(f't.forward(50){self.add_debug_breakpoint()}', False, self.is_debug)
+            return add_sleep_to_command(f't.forward(50){self.add_debug_breakpoint()}', False, self.is_debug, location="after")
         return self.make_forward(int(args[0]))
 
     def color(self, meta, args):
@@ -1527,7 +1595,7 @@ class ConvertToPython_1(ConvertToPython):
               raise Exception({exception_text})
             t.{command_text}(min(600, {variable}) if {variable} > 0 else max(-600, {variable})){self.add_debug_breakpoint()}""")
         if add_sleep and not self.is_debug:
-            return sleep_after(transpiled, False, self.is_debug)
+            return add_sleep_to_command(transpiled, False, self.is_debug, location="after")
         return transpiled
 
     def make_turtle_color_command(self, parameter, command, command_text, language):
@@ -1577,7 +1645,7 @@ class ConvertToPython_1(ConvertToPython):
 @source_map_transformer(source_map)
 class ConvertToPython_2(ConvertToPython_1):
 
-    # why doesn't this live in isvalid?
+    # ->>> why doesn't this live in isvalid? refactor now that isvalid is cleaned up!
     def error_ask_dep_2(self, meta, args):
         # ask is no longer usable this way, raise!
         # ask_needs_var is an entry in lang.yaml in texts where we can add extra info on this error
@@ -1647,30 +1715,32 @@ class ConvertToPython_2(ConvertToPython_1):
 
     def forward(self, meta, args):
         if len(args) == 0:
-            return sleep_after(f't.forward(50){self.add_debug_breakpoint()}', False, self.is_debug)
+            return add_sleep_to_command(f't.forward(50){self.add_debug_breakpoint()}', False, self.is_debug, location="after")
 
         if ConvertToPython.is_int(args[0]):
             parameter = int(args[0])
         else:
             # if not an int, then it is a variable
             parameter = args[0]
+            self.add_variable_access_location(parameter, meta.line)
 
         return self.make_forward(parameter)
 
     def assign(self, meta, args):
-        parameter = args[0]
+        variable_name = args[0]
         value = args[1]
+
         if self.is_random(value) or self.is_list(value):
             exception = self.make_catch_exception([value])
-            return exception + parameter + " = " + value + self.add_debug_breakpoint()
+            return exception + variable_name + " = " + value + self.add_debug_breakpoint()
         else:
-            if self.is_variable(value):
+            if self.is_variable(value):  # if the value is a variable, this is a reassign
                 value = self.process_variable(value, meta.line)
-                return parameter + " = " + value + self.add_debug_breakpoint()
+                return variable_name + " = " + value + self.add_debug_breakpoint()
             else:
                 # if the assigned value is not a variable and contains single quotes, escape them
                 value = process_characters_needing_escape(value)
-                return parameter + " = '" + value + "'" + self.add_debug_breakpoint()
+                return variable_name + " = '" + value + "'" + self.add_debug_breakpoint()
 
     def sleep(self, meta, args):
 
@@ -1678,6 +1748,8 @@ class ConvertToPython_2(ConvertToPython_1):
             return f"time.sleep(1){self.add_debug_breakpoint()}"
         else:
             value = f'"{args[0]}"' if self.is_int(args[0]) else args[0]
+            if not self.is_int(args[0]):
+                self.add_variable_access_location(value, meta.line)
             exceptions = self.make_catch_exception(args)
             try_prefix = "try:\n" + textwrap.indent(exceptions, "  ")
             exception_text = translate_value_error(Command.sleep, value, 'number')
@@ -1699,14 +1771,20 @@ class ConvertToPython_3(ConvertToPython_2):
 
     def list_access(self, meta, args):
         args = [escape_var(a) for a in args]
+        listname = str(args[0])
+        location = str(args[0])
 
         # check the arguments (except when they are random or numbers, that is not quoted nor a var but is allowed)
         self.check_var_usage([a for a in args if a != 'random' and not a.isnumeric()], meta.line)
 
+        # store locations of both parts (can be list at var)
+        self.add_variable_access_location(listname, meta.line)
+        self.add_variable_access_location(location, meta.line)
+
         if args[1] == 'random':
-            return 'random.choice(' + args[0] + ')'
+            return 'random.choice(' + listname + ')'
         else:
-            return args[0] + '[int(' + args[1] + ')-1]'
+            return listname + '[int(' + args[1] + ')-1]'
 
     def process_argument(self, meta, arg):
         # only call process_variable if arg is a string, else keep as is (ie.
@@ -1714,6 +1792,8 @@ class ConvertToPython_3(ConvertToPython_2):
         if arg.isnumeric() and isinstance(arg, int):  # is int/float
             return arg
         elif (self.is_list(arg)):  # is list indexing
+            list_name = arg.split('[')[0]
+            self.add_variable_access_location(list_name, meta.line)
             before_index, after_index = arg.split(']', 1)
             return before_index + '-1' + ']' + after_index   # account for 1-based indexing
         else:
@@ -1722,11 +1802,20 @@ class ConvertToPython_3(ConvertToPython_2):
     def add(self, meta, args):
         value = self.process_argument(meta, args[0])
         list_var = args[1]
+
+        # both sides have been used now
+        self.add_variable_access_location(value, meta.line)
+        self.add_variable_access_location(list_var, meta.line)
         return f"{list_var}.append({value}){self.add_debug_breakpoint()}"
 
     def remove(self, meta, args):
         value = self.process_argument(meta, args[0])
         list_var = args[1]
+
+        # both sides have been used now
+        self.add_variable_access_location(value, meta.line)
+        self.add_variable_access_location(list_var, meta.line)
+
         return textwrap.dedent(f"""\
         try:
           {list_var}.remove({value}){self.add_debug_breakpoint()}
@@ -1780,8 +1869,14 @@ class ConvertToPython_4(ConvertToPython_3):
     def error_print_nq(self, meta, args):
         return ConvertToPython_2.print(self, meta, args)
 
-    def clear(self, meta, args):  # todo not sure about it being here
-        return f"""extensions.clear(){self.add_debug_breakpoint()}
+    def clear(self, meta, args):
+        command = "extensions.clear()"
+
+        # add two sleeps, one is a bit brief
+        command = add_sleep_to_command(command, False, self.is_debug, "before")
+        command = add_sleep_to_command(command, False, self.is_debug, "before")
+
+        return f"""{command}{self.add_debug_breakpoint()}
 try:
     # If turtle is being used, reset canvas
     t.hideturtle()
@@ -1910,6 +2005,8 @@ class ConvertToPython_6(ConvertToPython_5):
                     value = f'{args[0]}'
             else:
                 value = f'"{args[0]}"' if self.is_int(args[0]) else args[0]
+                if not self.is_int(args[0]):
+                    self.add_variable_access_location(value, meta.line)
 
             exceptions = self.make_catch_exception(args)
             try_prefix = "try:\n" + textwrap.indent(exceptions, "  ")
@@ -1961,34 +2058,36 @@ class ConvertToPython_6(ConvertToPython_5):
                 value = process_characters_needing_escape(value)
                 return parameter + " = '" + value + "'" + self.add_debug_breakpoint()
 
-    def process_token_or_tree(self, argument):
+    def process_token_or_tree(self, argument, meta):
         if type(argument) is Tree:
             return f'{str(argument.children[0])}'
         if argument.isnumeric():
             latin_numeral = int(argument)
             return f'int({latin_numeral})'
+        # this is a variable
+        self.add_variable_access_location(argument, meta.line)
         return f'int({argument})'
 
-    def process_calculation(self, args, operator):
+    def process_calculation(self, args, operator, meta):
         # arguments of a sum are either a token or a
         # tree resulting from earlier processing
         # for trees we need to grap the inner string
         # for tokens we add int around them
 
-        args = [self.process_token_or_tree(a) for a in args]
+        args = [self.process_token_or_tree(a, meta) for a in args]
         return Tree('sum', [f'{args[0]} {operator} {args[1]}'])
 
     def addition(self, meta, args):
-        return self.process_calculation(args, '+')
+        return self.process_calculation(args, '+', meta)
 
     def subtraction(self, meta, args):
-        return self.process_calculation(args, '-')
+        return self.process_calculation(args, '-', meta)
 
     def multiplication(self, meta, args):
-        return self.process_calculation(args, '*')
+        return self.process_calculation(args, '*', meta)
 
     def division(self, meta, args):
-        return self.process_calculation(args, '//')
+        return self.process_calculation(args, '//', meta)
 
     def turn(self, meta, args):
         if len(args) == 0:
@@ -2002,7 +2101,7 @@ class ConvertToPython_6(ConvertToPython_5):
 
     def forward(self, meta, args):
         if len(args) == 0:
-            return sleep_after('t.forward(50)' + self.add_debug_breakpoint(), False, self.is_debug)
+            return add_sleep_to_command('t.forward(50)' + self.add_debug_breakpoint(), False, self.is_debug, location="after")
         arg = args[0]
         if self.is_variable(arg):
             return self.make_forward(escape_var(arg))
@@ -2011,7 +2110,7 @@ class ConvertToPython_6(ConvertToPython_5):
         return self.make_forward(int(args[0]))
 
 
-def sleep_after(commands, indent=True, is_debug=False):
+def add_sleep_to_command(commands, indent=True, is_debug=False, location="after"):
     if is_debug:
         return commands
 
@@ -2020,7 +2119,10 @@ def sleep_after(commands, indent=True, is_debug=False):
         return commands
 
     sleep_command = "time.sleep(0.1)" if indent is False else "  time.sleep(0.1)"
-    return commands + "\n" + sleep_command
+    if location == "after":
+        return commands + "\n" + sleep_command
+    else:  # location is before
+        return sleep_command + "\n" + commands
 
 
 @v_args(meta=True)
@@ -2032,7 +2134,7 @@ class ConvertToPython_7(ConvertToPython_6):
         times = self.process_variable(args[0], meta.line)
         command = args[1]
         # in level 7, repeats can only have 1 line as their arguments
-        command = sleep_after(command, False, self.is_debug)
+        command = add_sleep_to_command(command, False, self.is_debug, location="after")
         return f"""for {var_name} in range(int({str(times)})):{self.add_debug_breakpoint()}
 {ConvertToPython.indent(command)}"""
 
@@ -2056,7 +2158,7 @@ class ConvertToPython_8_9(ConvertToPython_7):
 
         all_lines = [ConvertToPython.indent(x) for x in args[1:]]
         body = "\n".join(all_lines)
-        body = sleep_after(body, indent=True, is_debug=self.is_debug)
+        body = add_sleep_to_command(body, indent=True, is_debug=self.is_debug, location="after")
 
         return f"for {var_name} in range(int({times})):{self.add_debug_breakpoint()}\n{body}"
 
@@ -2142,9 +2244,12 @@ class ConvertToPython_10(ConvertToPython_8_9):
         args = [a for a in args if a != ""]  # filter out in|dedent tokens
         times = self.process_variable(args[0], meta.line)
 
+        # add the list to the lookup table, this used now too
+        self.add_variable_access_location(args[1], meta.line)
+
         body = "\n".join([ConvertToPython.indent(x) for x in args[2:]])
 
-        body = sleep_after(body, True, self.is_debug)
+        body = add_sleep_to_command(body, True, self.is_debug, location="after")
         return f"for {times} in {args[1]}:{ self.add_debug_breakpoint() }\n{body}"
 
 
@@ -2155,11 +2260,14 @@ class ConvertToPython_11(ConvertToPython_10):
     def for_loop(self, meta, args):
         args = [a for a in args if a != ""]  # filter out in|dedent tokens
         iterator = escape_var(args[0])
+        # iterator is always a used variable
+        self.add_variable_access_location(iterator, meta.line)
+
         body = "\n".join([ConvertToPython.indent(x) for x in args[3:]])
-        body = sleep_after(body, True, self.is_debug)
+        body = add_sleep_to_command(body, True, self.is_debug, location="after")
         stepvar_name = self.get_fresh_var('step')
-        begin = self.process_token_or_tree(args[1])
-        end = self.process_token_or_tree(args[2])
+        begin = self.process_token_or_tree(args[1], meta)
+        end = self.process_token_or_tree(args[2], meta)
         return f"""{stepvar_name} = 1 if {begin} < {end} else -1
 for {iterator} in range({begin}, {end} + {stepvar_name}, {stepvar_name}):{self.add_debug_breakpoint()}
 {body}"""
@@ -2183,8 +2291,13 @@ class ConvertToPython_12(ConvertToPython_11):
 
     def call(self, meta, args):
         args_str = ""
+        self.add_variable_access_location(args[0], meta.line)
+
         if len(args) > 1:
             args_str = ", ".join(str(x.children[0]) if isinstance(x, Tree) else str(x) for x in args[1].children)
+            for x in args[1].children:
+                self.add_variable_access_location(str(x), meta.line)
+
         return f"{args[0]}({args_str})"
 
     def returns(self, meta, args):
@@ -2218,10 +2331,12 @@ class ConvertToPython_12(ConvertToPython_11):
             return f'"{text}"'
         return f"'{text}'"
 
-    def process_token_or_tree(self, argument):
+    def process_token_or_tree(self, argument, meta):
         if isinstance(argument, Tree):
             return f'{str(argument.children[0])}'
         else:
+            # this is a variable, add to the table
+            self.add_variable_access_location(argument, meta.line)
             return argument
 
     def print_ask_args(self, meta, args):
@@ -2284,7 +2399,7 @@ class ConvertToPython_12(ConvertToPython_11):
 
     def var(self, meta, args):
         name = args[0]
-        self.check_var_usage(args, meta.line)
+        # self.check_var_usage(args, meta.line)
         return escape_var(name)
 
     def turn(self, meta, args):
@@ -2299,7 +2414,7 @@ class ConvertToPython_12(ConvertToPython_11):
 
     def forward(self, meta, args):
         if len(args) == 0:
-            return sleep_after('t.forward(50)' + self.add_debug_breakpoint(), False, self.is_debug)
+            return add_sleep_to_command('t.forward(50)' + self.add_debug_breakpoint(), False, self.is_debug, location="after")
         arg = args[0]
         if self.is_variable(arg):
             return self.make_forward(escape_var(arg))
@@ -2314,7 +2429,7 @@ class ConvertToPython_12(ConvertToPython_11):
         return self.make_turtle_command(parameter, Command.forward, 'forward', True, 'float')
 
     def division(self, meta, args):
-        return self.process_calculation(args, '/')
+        return self.process_calculation(args, '/', meta)
 
 
 @v_args(meta=True)
@@ -2371,7 +2486,7 @@ class ConvertToPython_15(ConvertToPython_14):
         args = [a for a in args if a != ""]  # filter out in|dedent tokens
         all_lines = [ConvertToPython.indent(x) for x in args[1:]]
         body = "\n".join(all_lines)
-        body = sleep_after(body, True, self.is_debug)
+        body = add_sleep_to_command(body, True, self.is_debug, location="after")
         exceptions = self.make_catch_exception([args[0]])
         return exceptions + "while " + args[0] + ":" + self.add_debug_breakpoint() + "\n" + body
 
@@ -2411,6 +2526,11 @@ class ConvertToPython_16(ConvertToPython_15):
     def change_list_item(self, meta, args):
         left_side = args[0] + '[' + args[1] + '-1]'
         right_side = args[2]
+
+        self.add_variable_access_location(args[0], meta.line)
+        self.add_variable_access_location(args[1], meta.line)
+        self.add_variable_access_location(args[2], meta.line)
+
         exception = _translate_index_error(left_side, args[0])
         return exception + left_side + ' = ' + right_side + self.add_debug_breakpoint()
 
@@ -2852,10 +2972,10 @@ def get_parser(level, lang="en", keep_all_tokens=False, skip_faulty=False):
     return lark
 
 
-ParseResult = namedtuple('ParseResult', ['code', 'source_map', 'has_turtle', 'has_pygame', 'commands'])
+ParseResult = namedtuple('ParseResult', ['code', 'source_map', 'has_turtle', 'has_pygame', 'has_clear', 'commands'])
 
 
-def transpile_inner_with_skipping_faulty(input_string, level, lang="en"):
+def transpile_inner_with_skipping_faulty(input_string, level, lang="en", unused_allowed=True):
     def skipping_faulty(meta, args): return [True]
 
     defined_errors = [method for method in dir(IsValid) if method.startswith('error')]
@@ -2874,7 +2994,9 @@ def transpile_inner_with_skipping_faulty(input_string, level, lang="en"):
 
     try:
         set_error_to_allowed()
-        transpile_result = transpile_inner(input_string, level, lang, populate_source_map=True)
+        transpile_result = transpile_inner(
+            input_string, level, lang, populate_source_map=True, unused_allowed=unused_allowed
+        )
     finally:
         # make sure to always revert IsValid methods to original
         set_errors_to_original()
@@ -2899,7 +3021,7 @@ def transpile_inner_with_skipping_faulty(input_string, level, lang="en"):
     return transpile_result
 
 
-def transpile(input_string, level, lang="en", skip_faulty=True, is_debug=False):
+def transpile(input_string, level, lang="en", skip_faulty=True, is_debug=False, unused_allowed=False):
     """
     Function that transpiles the Hedy code to Python
 
@@ -2913,7 +3035,8 @@ def transpile(input_string, level, lang="en", skip_faulty=True, is_debug=False):
 
     try:
         source_map.set_skip_faulty(False)
-        transpile_result = transpile_inner(input_string, level, lang, populate_source_map=True, is_debug=is_debug)
+        transpile_result = transpile_inner(input_string, level, lang, populate_source_map=True,
+                                           is_debug=is_debug, unused_allowed=unused_allowed)
 
     except Exception as original_error:
         hedy_amount_lines = len(input_string.strip().split('\n'))
@@ -3262,102 +3385,25 @@ def parse_input(input_string, level, lang):
 
 
 def is_program_valid(program_root, input_string, level, lang):
-    # IsValid returns (True,) or (False, args)
-    instance = IsValid(level)
-    is_valid = instance.transform(program_root)
+    # IsValid raises the appropriate exception when an error production (starting with error_)
+    # is found in the parse tree
+    IsValid(level, lang, input_string).transform(program_root)
 
-    if not is_valid[0]:
-        _, invalid_info = is_valid
 
-        # Apparently, sometimes 'args' is a string, sometimes it's a list of
-        # strings ( are these production rule names?). If it's a list of
-        # strings, just take the first string and proceed.
-        if isinstance(invalid_info, list):
-            invalid_info = invalid_info[0]
-
-        line = invalid_info.line
-        column = invalid_info.column
-        if invalid_info.error_type == ' ':
-
-            # the error here is a space at the beginning of a line, we can fix that!
-            fixed_code = program_repair.remove_leading_spaces(input_string)
-            if fixed_code != input_string:  # only if we have made a successful fix
-                try:
-                    fixed_result = transpile_inner(fixed_code, level, lang)
-                    result = fixed_result
-                    raise exceptions.InvalidSpaceException(
-                        level=level, line_number=line, fixed_code=fixed_code, fixed_result=result)
-                except exceptions.HedyException:
-                    invalid_info.error_type = None
-                    transpile_inner(fixed_code, level)
-                    # The fixed code contains another error. Only report the original error for now.
-                    pass
+def repair_leading_space(input_string, lang, level, line):
+    fixed_code = program_repair.remove_leading_spaces(input_string)
+    result = None
+    if fixed_code != input_string:  # only if we have made a successful fix
+        try:
+            fixed_result = transpile_inner(fixed_code, level, lang)
+            result = fixed_result
             raise exceptions.InvalidSpaceException(
                 level=level, line_number=line, fixed_code=fixed_code, fixed_result=result)
-        elif invalid_info.error_type == 'invalid condition':
-            raise exceptions.UnquotedEqualityCheckException(line_number=line)
-        elif invalid_info.error_type == 'invalid repeat':
-            raise exceptions.MissingInnerCommandException(command='repeat', level=level, line_number=line)
-        elif invalid_info.error_type == 'repeat missing print':
-            raise exceptions.IncompleteRepeatException(command='print', level=level, line_number=line)
-        elif invalid_info.error_type == 'repeat missing times':
-            raise exceptions.IncompleteRepeatException(command='times', level=level, line_number=line)
-        elif invalid_info.error_type == 'print without quotes':
-            unquotedtext = invalid_info.arguments[0]
-            raise exceptions.UnquotedTextException(
-                level=level, unquotedtext=unquotedtext, line_number=invalid_info.line)
-        elif invalid_info.error_type == 'misspelled "at" command':
-            raise exceptions.MisspelledAtCommand(command='at', arg1=invalid_info.arguments[0], line_number=line)
-        elif invalid_info.error_type == 'unsupported number':
-            raise exceptions.UnsupportedFloatException(value=''.join(invalid_info.arguments))
-        elif invalid_info.error_type == 'lonely text':
-            raise exceptions.LonelyTextException(level=level, line_number=line)
-        elif invalid_info.error_type == 'flat if':
-            raise exceptions.WrongLevelException(
-                offending_keyword='if',
-                working_level=7,
-                tip='no_more_flat_if',
-                line_number=invalid_info.line)
-        elif invalid_info.error_type == 'invalid at keyword':
-            raise exceptions.InvalidAtCommandException(command='at', level=level, line_number=invalid_info.line)
-        elif invalid_info.error_type == 'ifpressed missing else':
-            raise exceptions.MissingElseForPressitException(
-                command='ifpressed_else', level=level, line_number=invalid_info.line)
-        elif invalid_info.error_type == 'nested function':
-            raise exceptions.NestedFunctionException()
-        else:
-            invalid_command = invalid_info.command
-            closest = closest_command(invalid_command, get_suggestions_for_language(lang, level))
-
-            if closest == 'keyword':  # we couldn't find a suggestion
-                invalid_command_en = hedy_translation.translate_keyword_to_en(invalid_command, lang)
-                if invalid_command_en == Command.turn:
-                    arg = invalid_info.arguments[0][0]
-                    raise hedy.exceptions.InvalidArgumentException(command=invalid_info.command,
-                                                                   allowed_types=get_allowed_types(Command.turn, level),
-                                                                   invalid_argument=arg,
-                                                                   line_number=invalid_info.line)
-                # clearly the error message here should be better or it should be a different one!
-                raise exceptions.ParseException(level=level, location=[line, column], found=invalid_command)
-            elif closest is None:
-                raise exceptions.MissingCommandException(level=level, line_number=line)
-
-            else:
-
-                fixed_code = None
-                result = None
-                fixed_code = input_string.replace(invalid_command, closest)
-                if fixed_code != input_string:  # only if we have made a successful fix
-                    try:
-                        fixed_result = transpile_inner(fixed_code, level)
-                        result = fixed_result
-                    except exceptions.HedyException:
-                        # The fixed code contains another error. Only report the original error for now.
-                        pass
-
-            raise exceptions.InvalidCommandException(invalid_command=invalid_command, level=level,
-                                                     guessed_command=closest, line_number=line,
-                                                     fixed_code=fixed_code, fixed_result=result)
+        except exceptions.HedyException:
+            transpile_inner(fixed_code, level)
+            # The fixed code contains another error. Only report the original error for now.
+            pass
+    return fixed_code, result
 
 
 def is_program_complete(abstract_syntax_tree, level):
@@ -3380,15 +3426,32 @@ def create_lookup_table(abstract_syntax_tree, level, lang, input_string):
     return entries
 
 
-def transpile_inner(input_string, level, lang="en", populate_source_map=False, is_debug=False):
+def create_AST(input_string, level, lang="en"):
+    program_root = parse_input(input_string, level, lang)
+
+    # checks whether any error production nodes are present in the parse tree
+    is_program_valid(program_root, input_string, level, lang)
+    abstract_syntax_tree = ExtractAST().transform(program_root)
+    is_program_complete(abstract_syntax_tree, level)
+
+    if not valid_echo(abstract_syntax_tree):
+        raise exceptions.LonelyEchoException()
+
+    lookup_table = create_lookup_table(abstract_syntax_tree, level, lang, input_string)
+    commands = AllCommands(level).transform(program_root)
+    # FH, dec 2023. I don't love how AllCommands works on program root and not on AST,
+    # but his will do for now. One day we should really start to clean up our AST!
+
+    return abstract_syntax_tree, lookup_table, commands
+
+
+def transpile_inner(input_string, level, lang="en", populate_source_map=False, is_debug=False, unused_allowed=False):
     check_program_size_is_valid(input_string)
+    input_string = process_input_string(input_string, level, lang)
 
     level = int(level)
     if level > HEDY_MAX_LEVEL:
         raise Exception(f'Levels over {HEDY_MAX_LEVEL} not implemented yet')
-
-    input_string = process_input_string(input_string, level, lang)
-    program_root = parse_input(input_string, level, lang)
 
     if populate_source_map:
         source_map.clear()
@@ -3396,40 +3459,37 @@ def transpile_inner(input_string, level, lang="en", populate_source_map=False, i
         source_map.set_language(lang)
         source_map.set_hedy_input(input_string)
 
-    # checks whether any error production nodes are present in the parse tree
-    is_program_valid(program_root, input_string, level, lang)
+    # FH, may 2022. for now, we just out arabic numerals when the language is ar
+    # this can be changed into a profile setting or could be detected
+    # in usage of programs
+    if lang == "ar":
+        numerals_language = "Arabic"
+    else:
+        numerals_language = "Latin"
 
     try:
-        abstract_syntax_tree = ExtractAST().transform(program_root)
-
-        is_program_complete(abstract_syntax_tree, level)
-
-        if not valid_echo(abstract_syntax_tree):
-            raise exceptions.LonelyEchoException()
-
-        lookup_table = create_lookup_table(abstract_syntax_tree, level, lang, input_string)
-
-        # FH, may 2022. for now, we just out arabic numerals when the language is ar
-        # this can be changed into a profile setting or could be detected
-        # in usage of programs
-        if lang == "ar":
-            numerals_language = "Arabic"
-        else:
-            numerals_language = "Latin"
+        abstract_syntax_tree, lookup_table, commands = create_AST(input_string, level, lang)
 
         # grab the right transpiler from the lookup
         convertToPython = TRANSPILER_LOOKUP[level]
         python = convertToPython(lookup_table, lang, numerals_language, is_debug).transform(abstract_syntax_tree)
 
-        commands = AllCommands(level).transform(program_root)
-
+        has_clear = "clear" in commands
         has_turtle = "forward" in commands or "turn" in commands or "color" in commands
         has_pygame = "ifpressed" in commands or "ifpressed_else" in commands or "assign_button" in commands
+
+        parse_result = ParseResult(python, source_map, has_turtle, has_pygame, has_clear, commands)
 
         if populate_source_map:
             source_map.set_python_output(python)
 
-        return ParseResult(python, source_map, has_turtle, has_pygame, commands)
+        if not unused_allowed:
+            for x in lookup_table:
+                if isinstance(x.name, str) and x.access_line is None and x.name != 'x__x__x__x':
+                    raise hedy.exceptions.UnusedVariableException(
+                        level, x.definition_line, x.name, fixed_code=python, fixed_result=parse_result)
+
+        return parse_result
     except VisitError as E:
         if isinstance(E, VisitError):
             # Exceptions raised inside visitors are wrapped inside VisitError. Unwrap it if it is a
