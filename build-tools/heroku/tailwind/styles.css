@@ -848,9 +848,12 @@ div[class^="ace_incorrect_hedy_code"] {
 }
 
 /* Make the CodeMirror editor take up the entire available height of its container
-   and add a scroll bar (source: https://discuss.codemirror.net/t/how-to-set-max-height-of-the-editor/2882) */
-.cm-editor { @apply h-full; }
-.cm-scroller { @apply overflow-x-auto };
+   and add a scroll bar (source: https://discuss.codemirror.net/t/how-to-set-max-height-of-the-editor/2882)
+
+   But only for the editor page (readonly editors can be as high as is necessary)
+   */
+.fixed-editor-height .cm-editor { @apply h-full; }
+.fixed-editor-height .cm-scroller { @apply overflow-x-auto };
 
 /* Remove the margin between the scroll bar and the side of the container */
 .cm-editor { margin-right: 0px !important; }

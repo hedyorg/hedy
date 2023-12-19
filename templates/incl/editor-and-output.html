@@ -29,7 +29,7 @@
         <!-- The actual editor -->
         <div id="editor" style="background: #272822; font-size:0.95em; color: white; direction: {{ g.dir }};" lang="en" blurred='false'
           {% if editor_readonly %}data-readonly="true"{% endif %}
-          class="w-full flex-1 text-lg rounded min-h-0 overflow-hidden"></div>
+          class="w-full flex-1 text-lg rounded min-h-0 overflow-hidden fixed-editor-height"></div>
         <div id="parsons_code_container" class="w-full flex flex-col mx-auto gap-2 items-center hover:cursor" style="display: none;">
             {% for i in range(1, 11) %}
                 <div class="turn-pre-into-ace relative w-full p-2 border-4 border-black rounded-lg parsons_goal_line_container cursor-grab" style="background-color: #272822;" id="parsons_goal_line_container_{{ i }}">
