@@ -1564,6 +1564,7 @@ def render_code_in_editor(level, code):
                                adventures=adventures,
                                initial_tab='start',
                                current_user_name=current_user()['username'],
+                               suppress_save_and_load_for_slides=True,
                            ))
 
 
