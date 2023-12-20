@@ -42,8 +42,8 @@ from logging_config import LOGGING_CONFIG
 from utils import dump_yaml_rt, is_debug_mode, load_yaml_rt, timems, version, strip_accents
 from website import (ab_proxying, achievements, admin, auth_pages, aws_helpers,
                      cdn, classes, database, for_teachers, s3_logger, parsons,
-                     profile, programs, querylog, quiz, statistics, surveys,
-                     translating, tags)
+                     profile, programs, querylog, quiz, statistics,
+                     translating, tags, surveys, public_adventures)
 from website.auth import (current_user, is_admin, is_teacher, is_second_teacher, has_public_profile,
                           login_user_from_token_cookie, requires_login, requires_login_redirect, requires_teacher,
                           forget_current_user)
@@ -532,6 +532,8 @@ def parse():
             except hedy.exceptions.WarningException as ex:
                 translated_error = translate_error(ex.error_code, ex.arguments, keyword_lang)
                 if isinstance(ex, hedy.exceptions.InvalidSpaceException):
+                    response['Warning'] = translated_error
+                elif isinstance(ex, hedy.exceptions.UnusedVariableException):
                     response['Warning'] = translated_error
                 else:
                     response['Error'] = translated_error
@@ -1318,7 +1320,9 @@ def index(level, program_id):
 
     customizations = {}
     if current_user()['username']:
-        customizations = DATABASE.get_student_class_customizations(current_user()['username'])
+        # class_to_preview is for teachers to preview a class they own
+        customizations = DATABASE.get_student_class_customizations(
+            current_user()['username'], class_to_preview=session.get("preview_class", {}).get("id"))
 
     if 'levels' in customizations:
         available_levels = customizations['levels']
@@ -1531,6 +1535,37 @@ def view_program(user, id):
                                level=int(result['level']),
                                code=code),
                            **arguments_dict)
+
+
+@app.route('/render_code/<level>/<code>', methods=['GET'])
+def render_code_in_editor(level, code):
+
+    try:
+        level = int(level)
+    except BaseException:
+        return utils.error_page(error=404, ui_message=gettext('no_such_level'))
+
+    a = Adventure('start', 'start', 'start', 'start', code, False, False)
+    adventures = [a]
+
+    return render_template("code-page.html",
+                           specific_adventure=True,
+                           level_nr=str(level),
+                           level=level,
+                           adventures=adventures,
+                           raw=True,
+                           menu=False,
+                           blur_button_available=False,
+                           # See initialize.ts
+                           javascript_page_options=dict(
+                               page='code',
+                               lang=g.lang,
+                               level=level,
+                               adventures=adventures,
+                               initial_tab='start',
+                               current_user_name=current_user()['username'],
+                               suppress_save_and_load_for_slides=True,
+                           ))
 
 
 @app.route('/adventure/<name>', methods=['GET'], defaults={'level': 1, 'mode': 'full'})
@@ -2062,7 +2097,7 @@ def get_slides(level):
         return utils.error_page(error=404, ui_message="Slides do not exist!")
 
     slides = SLIDES[g.lang].get_slides_for_level(level, keyword_language)
-    return render_template('slides.html', slides=slides)
+    return render_template('slides.html', level=level, slides=slides)
 
 
 @app.route('/translate_keywords', methods=['POST'])
@@ -2493,6 +2528,7 @@ app.register_blueprint(parsons.ParsonsModule(PARSONS))
 app.register_blueprint(statistics.StatisticsModule(DATABASE))
 app.register_blueprint(statistics.LiveStatisticsModule(DATABASE))
 app.register_blueprint(tags.TagsModule(DATABASE, ACHIEVEMENTS))
+app.register_blueprint(public_adventures.PublicAdventuresModule(DATABASE, ACHIEVEMENTS))
 app.register_blueprint(surveys.SurveysModule(DATABASE))
 
 

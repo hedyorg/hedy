@@ -186,6 +186,7 @@ export interface InitializeCodePageOptions {
   readonly start_tutorial?: boolean;
   readonly initial_tab: string;
   readonly current_user_name?: string;
+  readonly suppress_save_and_load_for_slides?: boolean;
 }
 
 /**
@@ -240,13 +241,15 @@ export function initializeCodePage(options: InitializeCodePageOptions) {
     currentTab = ev.newTab;
     const adventure = theAdventures[currentTab];
 
-    // Load initial code from local storage, if available
-    const programFromLs = localLoad(currentTabLsKey());
-    // if we are in raw (used in slides) we don't want to load from local storage, we always want to show startcode
-    if (programFromLs && adventure && ($('#turtlecanvas').attr("raw") != 'yes')) {
-      adventure.start_code = programFromLs.code;
-      adventure.save_name = programFromLs.saveName;
-      adventure.save_info = 'local-storage';
+    if (!options.suppress_save_and_load_for_slides) {
+      // Load initial code from local storage, if available
+      const programFromLs = localLoad(currentTabLsKey());
+      // if we are in raw (used in slides) we don't want to load from local storage, we always want to show startcode
+      if (programFromLs && adventure) {
+        adventure.start_code = programFromLs.code;
+        adventure.save_name = programFromLs.saveName;
+        adventure.save_info = 'local-storage';
+      }
     }
 
     reconfigurePageBasedOnTab();
@@ -266,6 +269,10 @@ export function initializeCodePage(options: InitializeCodePageOptions) {
   initializeShareProgramButtons();
   initializeHandInButton();
 
+  if (options.suppress_save_and_load_for_slides) {
+    disableAutomaticSaving();
+  }
+
   // Save if user navigates away
   window.addEventListener('beforeunload', () => saveIfNecessary(), { capture: true });
 
@@ -276,7 +283,7 @@ export function initializeCodePage(options: InitializeCodePageOptions) {
 function attachMainEditorEvents(editor: HedyEditor) {
 
   editor.on('change', () => {
-    theLocalSaveWarning.setProgramLength(theGlobalEditor.contents.split('\n').length);    
+    theLocalSaveWarning.setProgramLength(theGlobalEditor.contents.split('\n').length);
   });
 
   // If prompt is shown and user enters text in the editor, hide the prompt.
@@ -534,16 +541,21 @@ export async function runit(level: number, lang: string, disabled_prompt: string
           tutorial: $('#code_output').hasClass("z-40"), // if so -> tutorial mode
           read_aloud : !!$('#speak_dropdown').val(),
           adventure_name: adventureName,
-  
+
           // Save under an existing id if this field is set
           program_id: isServerSaveInfo(adventure?.save_info) ? adventure.save_info.id : undefined,
           save_name: saveNameFromInput(),
         };
 
         let response = await postJsonWithAchievements('/parse', data);
-        
+
         program_data = response;
         console.log('Response', response);
+
+        if (response.Warning && $('#editor').is(":visible")) {
+          //storeFixedCode(response, level);
+          error.showWarning(ClientMessages['Transpile_warning'], response.Warning);
+        }
 
         showAchievements(response.achievements, false, "");
         if (adventure && response.save_info) {
@@ -573,7 +585,7 @@ export async function runit(level: number, lang: string, disabled_prompt: string
     } else {
       program_data = theGlobalDebugger.get_program_data();
     }
-    
+
     runPythonProgram(program_data.Code, program_data.source_map, program_data.has_turtle, program_data.has_pygame, program_data.has_sleep, program_data.has_clear, program_data.Warning, cb, run_type).catch(function(err: any) {
       // The err is null if we don't understand it -> don't show anything
       if (err != null) {
@@ -581,8 +593,8 @@ export async function runit(level: number, lang: string, disabled_prompt: string
         reportClientError(level, code, err.message);
       }
     });
-  
-  
+
+
   } catch (e: any) {
     modal.notifyError(e.responseText);
   }
@@ -2050,7 +2062,18 @@ function cancelPendingAutomaticSave() {
   }
 }
 
+
+let autoSaveEnabled = true;
+
+function disableAutomaticSaving() {
+  autoSaveEnabled = false;
+}
+
 async function saveIfNecessary() {
+  if (!autoSaveEnabled) {
+    return;
+  }
+
   // Async-safe copy of current tab
   const adventureName = currentTab;
   const adventure = theAdventures[adventureName];
