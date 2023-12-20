@@ -148,6 +148,9 @@ class ClassModule(WebsiteModule):
             if invited_as == "second_teacher":
                 self.db.add_second_teacher_to_class(Class, user)
             elif invited_as == "student":
+                student_classes = self.db.get_student_classes(username)
+                if len(student_classes):
+                    return gettext("student_not_allowed_in_class"), 400
                 self.db.add_student_to_class(Class["id"], username)
 
             refresh_current_user_from_db()
@@ -177,8 +180,14 @@ class ClassModule(WebsiteModule):
         if not username:
             return gettext("join_prompt"), 403
 
+        student_classes = self.db.get_student_classes(username)
+        if len(student_classes):
+            return gettext("student_not_allowed_in_class"), 400
+
         self.db.add_student_to_class(Class["id"], username)
         refresh_current_user_from_db()
+        achievement = self.achievements.add_single_achievement(username, "epic_education")
+
         # We only want to remove the invite if the user joins the class with an actual pending invite
         invite = self.db.get_user_class_invite(username, Class["id"])
         if invite:
@@ -186,10 +195,10 @@ class ClassModule(WebsiteModule):
             # Also remove the pending message in this case
             session["messages"] = session["messages"] - 1 if session["messages"] else 0
 
-        achievement = self.achievements.add_single_achievement(username, "epic_education")
         if achievement:
             return {"achievement": achievement}, 200
-        return {}, 200
+        else:
+            return {}, 200
 
     @route("/<class_id>/student/<student_id>", methods=["DELETE"])
     @requires_login
@@ -292,9 +301,15 @@ class MiscClassPages(WebsiteModule):
             customizations["id"] = class_id
             self.db.update_class_customizations(customizations)
 
+        new_second_teachers = {}
+        if body.get("second_teacher") is True:
+            new_second_teachers = Class.get("second_teachers")
+
         achievement = self.achievements.add_single_achievement(current_user()["username"], "one_for_money")
         if achievement:
             return {"achievement": achievement}, 200
+        if new_second_teachers:
+            return {"id": new_class["id"], "second_teachers": new_second_teachers}, 200
         return {"id": new_class["id"]}, 200
 
     @route("/invite-student", methods=["POST"])
@@ -323,6 +338,10 @@ class MiscClassPages(WebsiteModule):
             return gettext("student_not_existing"), 400
         if "students" in Class and user["username"] in Class["students"]:
             return gettext("student_already_in_class"), 400
+        else:
+            student_classes = self.db.get_student_classes(username)
+            if len(student_classes):
+                return gettext("student_not_allowed_in_class"), 400
         if self.db.get_user_invitations(user["username"]):
             return gettext("student_already_invite"), 400
 

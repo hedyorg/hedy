@@ -186,6 +186,7 @@ export interface InitializeCodePageOptions {
   readonly start_tutorial?: boolean;
   readonly initial_tab: string;
   readonly current_user_name?: string;
+  readonly suppress_save_and_load_for_slides?: boolean;
 }
 
 /**
@@ -239,13 +240,15 @@ export function initializeCodePage(options: InitializeCodePageOptions) {
     currentTab = ev.newTab;
     const adventure = theAdventures[currentTab];
 
-    // Load initial code from local storage, if available
-    const programFromLs = localLoad(currentTabLsKey());
-    // if we are in raw (used in slides) we don't want to load from local storage, we always want to show startcode
-    if (programFromLs && adventure && ($('#turtlecanvas').attr("raw") != 'yes')) {
-      adventure.start_code = programFromLs.code;
-      adventure.save_name = programFromLs.saveName;
-      adventure.save_info = 'local-storage';
+    if (!options.suppress_save_and_load_for_slides) {
+      // Load initial code from local storage, if available
+      const programFromLs = localLoad(currentTabLsKey());
+      // if we are in raw (used in slides) we don't want to load from local storage, we always want to show startcode
+      if (programFromLs && adventure) {
+        adventure.start_code = programFromLs.code;
+        adventure.save_name = programFromLs.saveName;
+        adventure.save_info = 'local-storage';
+      }
     }
 
     reconfigurePageBasedOnTab();
@@ -264,6 +267,10 @@ export function initializeCodePage(options: InitializeCodePageOptions) {
   $('#hand_in_button').on('click', () => $('#hand-in-modal').show());
   initializeShareProgramButtons();
   initializeHandInButton();
+
+  if (options.suppress_save_and_load_for_slides) {
+    disableAutomaticSaving();
+  }
 
   // Save if user navigates away
   window.addEventListener('beforeunload', () => saveIfNecessary(), { capture: true });
@@ -2044,7 +2051,18 @@ function cancelPendingAutomaticSave() {
   }
 }
 
+
+let autoSaveEnabled = true;
+
+function disableAutomaticSaving() {
+  autoSaveEnabled = false;
+}
+
 async function saveIfNecessary() {
+  if (!autoSaveEnabled) {
+    return;
+  }
+
   // Async-safe copy of current tab
   const adventureName = currentTab;
   const adventure = theAdventures[adventureName];

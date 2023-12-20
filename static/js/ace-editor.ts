@@ -61,7 +61,7 @@ export class HedyAceEditor implements HedyEditor {
   private strikeMarkers = new Map<number, number>();
 
   /**
-   * 
+   *
    * @param {HTMLElement} element the element that will contain this editor
    * @param {boolean} isReadOnly to decide weather to remove the cursor
    * @param {EditorType} editorType the type of the editor, could be a main editor, a parsons editor, etc.
@@ -118,7 +118,7 @@ export class HedyAceEditor implements HedyEditor {
       }
     }
 
-    // Everything turns into 'ace/mode/levelX', except what's in    
+    // Everything turns into 'ace/mode/levelX', except what's in
     if (theLevel) {
       this.setHighlighterForLevel(theLevel)
     }
@@ -130,7 +130,7 @@ export class HedyAceEditor implements HedyEditor {
 
   /**
   * Set the highlither rules for a particular level
-  * @param level      
+  * @param level
   */
   setHighlighterForLevel(level: number): void {
     const mode = this.getHighlighter(level);
@@ -152,7 +152,7 @@ export class HedyAceEditor implements HedyEditor {
     this._editor.setValue(content, MOVE_CURSOR_TO_END);
   }
 
-  /**     
+  /**
    * @returns if the editor is set to read-only mode
    */
   public get isReadOnly(): boolean {
