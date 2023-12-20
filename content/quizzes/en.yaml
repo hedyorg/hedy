@@ -3962,7 +3962,7 @@ levels:
             correct_answer: D
             question_score: '10'
         5:
-            question_text: What is the result of this code?
+            question_text: What is the output of this code?
             code: |-
                 numbers = [7, 19, 29, 41, 53, 71, 79, 97]
                 {for} prime in numbers:
@@ -4051,50 +4051,38 @@ levels:
             correct_answer: D
             question_score: '10'
         7:
-            question_text: Which of the following codes will print the number 121 on the screen?
+            question_text: Which of the following codes will print five times 'the result is 3' on the screen?
             mp_choice_options:
             -   option: |-
                     ```
-                     numbers = [43, 68 , 88, 23, 121]
-                     max_num = numbers [0]
+                     numbers = [1, 2 , 3, 4, 5]
                      {for} n in numbers：
-                       {if} n < max_num:
-                         max_num = n
-                     {print} 'The maximum number is ' max_num
+                         result = n * 1
+                     {print} 'The result is ' result
                     ```
                 feedback: Try again!
             -   option: |-
                     ```
-                    numbers = [43, 68 , 88, 23, 121]
-                     max_num = numbers [0]
-                     {for} n in numbers：
-                       {if} n <= max_num:
-                         max_num = n
-                       {elif} n > max_num:
-                         max_num = n
-                     {print} 'The maximum number is ' max_num
+                    numbers = [1, 2, 3, 4, 5]
+                     {for} u in numbers：
+                         number = u
+                     {print} 'The result is ' number
                     ```
                 feedback: That is not it.
             -   option: |-
                     ```
-                    numbers = [43, 68 , 88, 23, 121]
-                     max_num = numbers [0]
-                     {for} n in numbers：
-                       {if} n > max_num:
-                         max_num = n
-                     {print} 'The maximum number is ' max_num
+                    numbers = [1, 2, 3, 4, 5]
+                     {for} number in numbers：
+                         number = 3
+                     {print} 'The result is ' number
                     ```
                 feedback: Very good!
             -   option: |-
                     ```
-                    numbers = [43, 68 , 88, 23, 121]
-                     max_num = numbers [0]
+                    numbers = [1, 2 , 3, 4, 5]
                      {for} n in numbers：
-                       {if} n = max_num:
-                         max_num = n
-                       {elif} n <= max_num:
-                         max_num = n
-                     {print} 'The maximum number is ' max_num
+                         n = result
+                     {print} 'The result is ' result
                     ```
                 feedback: That is not it.
             hint: Think about mathematical symbols.
@@ -4105,7 +4093,7 @@ levels:
             code: |-
                 insects = ['🐝', '🦋', '🕷', '🐞']
                 your_favorite = {ask} 'what is your favorite insect?'
-                {for} insects in insects:
+                {for} insect in insects:
                  {if} your_favorite == '🐝' {or} your_favorite == '🐞':
                   {print} 'very useful'
                  {elif} your_favorite == '🕷':
@@ -4115,7 +4103,7 @@ levels:
             mp_choice_options:
             -   option: '`{or}` cannot be used with `{if}`.'
                 feedback: Try again.
-            -   option: In the `{for}` command `insects` can only be used once.
+            -   option: 'In the `{for}` command `insect` should be `insects`.'
                 feedback: Not true.
             -   option: Nothing!
                 feedback: Well done!
@@ -4125,7 +4113,7 @@ levels:
             correct_answer: C
             question_score: '10'
         9:
-            question_text: Which one of the codes bellow gave this answer?
+            question_text: Which one of the codes below gave this output?
             code: |-
                 -5 is negative
                 -4 is negative
@@ -4137,15 +4125,15 @@ levels:
                 2 is positive
                 3 is positive
             mp_choice_options:
-            -   option: "```\n {for} number in range -5 to 3:\n  {if} number > 0: \n   {print} number ' is positive'\n  {elif} number < 0: \n   {print} number ' is negative' \n  {else}: \n   {print} number ' is zero'\n```"
+            -   option: "```\n {for} number in range -5 to 3:\n     {if} number > 0: \n      {print} number ' is positive'\n     {elif} number < 0: \n      {print} number ' is negative' \n    {else}: \n     {print} number ' is zero'\n```"
                 feedback: Try again!
-            -   option: "```\n {for} number in range -5 to 3:\n  {if} number > 0: \n   {print} number ' is positive'\n  {elif} number <= 0: \n   {print} number ' is negative' \n  {else}: \n   {print} number ' is zero'\n```"
+            -   option: "```\n {for} number in range -5 to 3:\n     {if} number > 0: \n      {print} number ' is positive'\n     {elif} number <= 0: \n     {print} number ' is negative' \n    {else}: \n     {print} number ' is zero'\n```"
                 feedback: That is not it.
-            -   option: "```\n {for} number in range -5 to 3:\n  {if} number >= 0: \n   {print} number ' is positive'\n  {elif} number < 0: \n   {print} number ' is negative' \n  {else}: \n   {print} number ' is zero'\n```"
+            -   option: "```\n {for} number in range -5 to 3:\n     {if} number >= 0: \n     {print} number ' is positive'\n     {elif} number < 0: \n     {print} number ' is negative' \n     {else}: \n     {print} number ' is zero'\n```"
                 feedback: Very good!
-            -   option: "```\n {for} number in range -5 to 3:\n  {if} number < 0: \n   {print} number ' is positive'\n  {elif} number <=0: \n   {print} number ' is negative' \n  {else}: \n   {print} number ' is zero'\n```"
+            -   option: "```\n {for} number in range -5 to 3:\n     {if} number < 0: \n      {print} number ' is positive'\n     {elif} number <=0: \n     {print} number ' is negative' \n     {else}: \n     {print} number ' is zero'\n```"
                 feedback: That is not it.
-            hint: Think about mathematical symbols.
+            hint: Read the code carefully.
             correct_answer: C
             question_score: '10'
         10:
@@ -4154,21 +4142,23 @@ levels:
                 {for} number in range 1 to 5:
                   volume_room = num * num * num
                   {print} volume_room ' cubic meters'
-                  {if} volume_room > 100:
-                   {print} 'this is a large room'
-                  {elif} volume_room < 100:
-                   {print} 'small room but cosy'
-                  {else}:
-                   {print} 'i will look for something else'
+                    {if} volume_room > 100:
+                      {print} 'this is a large room'
+                    {elif} volume_room < 100:
+                      {print} 'small room but cosy'
+                    {else}:
+                      {print} 'i will look for something else'
             mp_choice_options:
             -   option: The word num needs quotation marks.
                 feedback: Try again.
-            -   option: You forgot to set the variable num.
+            -   option: 'The `{if}` command is not used correctly.'
                 feedback: Not true.
-            -   option: By volume_room instead of num you should have used number.
+            -   option: Line 3 should be `volume_room = number * number * number`.
                 feedback: Well done!
             -   option: There is an indentation mistake in the last line.
                 feedback: Nope.
             hint: Read the code carefully.
             correct_answer: C
             question_score: '10'
+
+
