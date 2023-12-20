@@ -54,18 +54,47 @@ export function rename_class(id: string, class_name_prompt: string) {
     });
 }
 
-export function duplicate_class(id: string, prompt: string, defaultValue: string = '') {
+export function duplicate_class(id: string, teacher_classes: string[], second_teacher_prompt: string, prompt: string, defaultValue: string = '') {
+  if (teacher_classes){
+    modal.confirm(second_teacher_prompt, function () {
+      apiDuplicateClass(id, prompt, true, defaultValue);
+    }, function () {
+      apiDuplicateClass(id, prompt, false, defaultValue);
+    });
+  } else {
+    apiDuplicateClass(id, prompt, false, defaultValue);
+  }
+}
+
+function apiDuplicateClass(id: string, prompt: string, second_teacher: boolean, defaultValue: string = '') {
     modal.prompt (prompt, defaultValue, function (class_name) {
     $.ajax({
       type: 'POST',
       url: '/duplicate_class',
       data: JSON.stringify({
         id: id,
-        name: class_name
+        name: class_name,
+        second_teacher: second_teacher,
       }),
       contentType: 'application/json',
       dataType: 'json'
     }).done(function(response) {
+      if (response.second_teachers && second_teacher == true){
+        for (const secondTeacher of response.second_teachers) {
+          $.ajax({
+            type: 'POST',
+            url: '/invite-second-teacher',
+            data: JSON.stringify({
+              username: secondTeacher.username,
+              class_id: response.id
+            }),
+            contentType: 'application/json',
+            dataType: 'json'
+            }).fail(function(err) {
+                modal.notifyError(err.responseText);
+            });
+        }
+      }
       if (response.achievement) {
             showAchievements(response.achievement, true, "");
           } else {

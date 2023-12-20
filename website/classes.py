@@ -301,9 +301,15 @@ class MiscClassPages(WebsiteModule):
             customizations["id"] = class_id
             self.db.update_class_customizations(customizations)
 
+        new_second_teachers = {}
+        if body.get("second_teacher") is True:
+            new_second_teachers = Class.get("second_teachers")
+
         achievement = self.achievements.add_single_achievement(current_user()["username"], "one_for_money")
         if achievement:
             return {"achievement": achievement}, 200
+        if new_second_teachers:
+            return {"id": new_class["id"], "second_teachers": new_second_teachers}, 200
         return {"id": new_class["id"]}, 200
 
     @route("/invite-student", methods=["POST"])
