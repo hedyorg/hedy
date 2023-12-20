@@ -2,21 +2,14 @@ import { createClass } from '../../tools/classes/class.js';
 import {loginForTeacher, logout} from '../../tools/login/login.js'
 import { goToTeachersPage } from '../../tools/navigation/nav.js';
 
+
 describe('Is able to click on duplicate class', () => {
   it('Passes', () => {
     loginForTeacher();
     createClass();
-    goToTeachersPage();
 
     // Click on duplicate icon
     cy.get('.no-underline > .fas').first().click();
-
-    //Checks for Second Teachers duplication
-    cy.get('#modal-yes-button').should('be.visible');
-    cy.get('#modal-yes-button').should('be.enabled');
-
-    cy.get('#modal-no-button').should('be.visible');
-    cy.get('#modal-no-button').should('be.enabled').click();
 
     // Checks for duplicate class name
     cy.get('#modal-prompt-input').should('be.empty');

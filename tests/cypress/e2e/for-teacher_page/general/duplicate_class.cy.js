@@ -13,9 +13,6 @@ describe('Duplicate class tests', () => {
     // Click on duplicate icon
     cy.get('.no-underline > .fas').first().click();
 
-    //`Check for Second Teachers option
-    cy.get('#modal-no-button').should('be.enabled').click();
-
     // Checks for input field
     cy.get('#modal-prompt-input').type(duplicate_class);
     cy.get('#modal-ok-button').click();
@@ -30,15 +27,19 @@ describe('Duplicate class tests', () => {
 
   it('Is able to duplicate class with adding second teachers', () => {
     loginForTeacher();
-    const classname = createClass();
-    addCustomizations(classname);
     goToTeachersPage();
-    const duplicate_class = `test class ${Math.random()}`;
 
-    cy.get('.no-underline > .fas').first().click();
+    cy.get("tr") // This class has second teachers.
+    cy.get("#teacher_classes tbody .view_class")
+      .each(($class, i) => {
+          if ($class.text().includes("CLASS1")) {
+            cy.get(`tbody :nth-child(${i+1}) .no-underline > .fas`).first().click();
+          }
+      })
 
     cy.get('#modal-yes-button').should('be.enabled').click();
 
+    const duplicate_class = `test class ${Math.random()}`;
     cy.get('#modal-prompt-input').type(duplicate_class);
     cy.get('#modal-ok-button').click();
 
