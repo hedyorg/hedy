@@ -1,6 +1,10 @@
 #!/usr/bin/env python3
 # Check all .po files, and make sure they don't have duplicate msgid's in there.
 # (Perhaps normal and commented out).
+#
+# As well as checking for files that have been wrapped, which they shouldn't be.
+# Our extraction scripts make sure the files are extracted unwrapped, and we
+# *should have configured* Weblate to do the same, but sometimes Weblate still wraps.
 from os import path
 import collections
 import os
@@ -8,21 +12,21 @@ import re
 import sys
 
 
-def scan_pofiles(root):
+def scan_pofiles(root, scanner):
     """Return True if there are any problems."""
     ret = False
     for dir, _, files in os.walk(root):
         for file in files:
             if file.endswith('.po'):
                 fullpath = path.join(dir, file)
-                ret |= scan_file(fullpath)
+                ret |= scanner(fullpath)
     return ret
 
 
 PAT = re.compile('^(?:#~ )?msgid "(.*)"')
 
 
-def scan_file(filename):
+def check_for_duplicates(filename):
     with open(filename, 'r', encoding='utf-8') as f:
         lines = f.read().splitlines()
 
@@ -51,10 +55,56 @@ def scan_file(filename):
     return True
 
 
+def check_for_wrapping(filename):
+    """Check that strings in the source files are not wrapped, except at newlines.
+
+    Wrapped entries start with `msgstr ""`; this is only allowed if all strings on subsequent
+    lines end in `\n`.
+    """
+    with open(filename, 'r', encoding='utf-8') as f:
+        lines = [x.strip() for x in f.read().splitlines()]
+
+    any_failed = False
+
+    # Add a sentinel empty line at the end so we have to do fewer boundary checks
+    lines.append('')
+
+    # Below is a 2-state state machine. Find the next `msgstr ""`, then check that all
+    # lines in it confrm to the requirements.
+    # Skip the header, which always contains a `msgstr ""` we're not interested in.
+    nr = 20
+    while nr < len(lines):
+        while nr < len(lines) and 'msgstr ""' not in lines[nr]:
+            nr += 1
+
+        msg_start = nr
+        nr += 1
+
+        # Accumulate all lines starting with `"`
+        msg_lines = []
+        while nr < len(lines) and lines[nr].startswith('"'):
+            msg_lines.append(lines[nr])
+            nr += 1
+
+        # Check that all message lines except the last one end in `\n"`:
+        if not all(x.endswith('\\n"') for x in msg_lines[:-1]):
+            print(f'{path.relpath(filename)}:{msg_start + 1}: msgstr has been wrapped!')
+            any_failed = True
+
+    return any_failed
+
+
 if __name__ == '__main__':
-    fail = scan_pofiles(path.join(path.dirname(__file__), '..', '..', 'translations'))
+    pofilespath = path.join(path.dirname(__file__), '..', '..', 'translations')
+    fail = False
+    fail |= scan_pofiles(pofilespath, check_for_duplicates)
+    fail |= scan_pofiles(pofilespath, check_for_wrapping)
     if fail:
-        print('Something went wrong with the gettext translation files, some entries were duplicated.')
-        print('See above for the list. Please make sure every msgid occurs only once,')
-        print('not commented out, with the right translation.')
+        print('Something went wrong with the gettext translation files.')
+        print('See above for the problems.')
+        print('')
+        print('- If duplicates were found, please make sure every msgid occurs only once,')
+        print('  not commented out, with the right translation.')
+        print('- If lines were wrapped, run the extraction script again to remove wrapping')
+        print('  and double-check the Weblate configuration.')
         sys.exit(1)

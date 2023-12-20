@@ -127,7 +127,7 @@ levels:
                 {print} "Tu dois acheter " nombre_gâteaux " gâteaux"
     7:
         1:
-            story: Complete the baby shark song. First comes baby shark, then mommy and finally daddy shark.
+            story: Remets dans l'ordre la chanson Baby Shark. Baby Shark arrive en premier, puis Mommy Shark et finalement Daddy Shark.
             code: |-
                 {repeat} 3 {times} {print} 'Baby shark tututututudu'
                 {print} 'Baby shark'
@@ -136,22 +136,22 @@ levels:
                 {repeat} 3 {times} {print} 'Daddy shark tututututudu'
                 {print} 'Daddy shark'
         2:
-            story: Create the song 'The wheels on the bus go round and round'
+            story: Écris la chanson « Les roues de l’autobus tournent tournent »
             code: |-
-                {print} "Les roues de l'autobus "
-                {repeat} 3 {times} {print} 'tournent et tournent, '
-                {print} "Les roues de l'autobus tournent et tournent "
+                {print} "Les roues de l'autobus tournent tournent"
+                {repeat} 2 {times} {print} "Tournent tournent,"
+                {print} "Les roues de l'autobus tournent tournent"
                 {print} "Dans toute la ville"
     8:
         1:
             story: |-
                 Tu joues à Pokémon Go avec quatre amis ! Crée un programme qui va décider pour chacun de vous l'équipe dans laquelle vous allez jouer.
-                Ce sera soit rouge, soit jaune, soit bleu ! Fais une pause après avoir annoncé une équipe.
+                Ce sera soit rouge, soit jaune, soit bleu ! Fais une pause après avoir annoncé une équipe.
             code: |-
                 équipes = rouge, jaune, bleu
-                {print} 'Rouge, Jaune ou Bleu ?'
+                {print} "Rouge, Jaune ou Bleu ?"
                 {repeat} 5 {times}
-                    {print} "Tu es sélectionné dans l'équipe... "
+                    {print} "Tu es sélectionné dans l'équipe… "
                     {print} équipes {at} {random}
                     sleep 2
         2:
@@ -162,34 +162,32 @@ levels:
                     compteur = compteur - 1
                     {print} compteur
                     {sleep} 1
-                    {print} "Prêt ou pas, j'arrive!!"
+                {print} "Caché(e) ou pas, j'arrive !"
     9:
         1:
-            story: This game will give you three maths assignments. Each time the question is different. Can you figure out the order?
+            story: Ce jeu te pose trois questions de maths. À chaque fois une question différente. Peux-tu trouver le bon ordre ?
             code: |-
-                numbers = 1, 2, 3, 4, 5, 6, 7, 8, 9, 10
+                nombres = 1, 2, 3, 4, 5, 6, 7, 8, 9, 10
                 {repeat} 3 {times}
-                    number = numbers {at} {random}
-                    correct_answer = 5 * number
-                    answer = {ask} 'What is 5 times' number '?'
-                    {if} answer = correct_answer
-                        {print} 'Good job!'
+                    nombre = nombres {at} {random}
+                    bonne_réponse = 5 * nombre
+                    réponse = {ask} "Combien font 5 fois " nombre " ?"
+                    {if} réponse = bonne_réponse
+                        {print} "Bon travail !"
                     {else}
-                        {print} 'No! The correct answer is ' correct_answer
+                        {print} "Non ! La bonne réponse est " bonne_réponse
         2:
-            story: |-
-                This code asks the costumers in a restaurant if they would like to order dessert. If they do, it asks them what kind of dessert. If they order tiramisu they are told that the tiramisu is sold out.
-                Can you get the code to work?
+            story: Ce code demande à une personne dans un restaurant si elle veut commander un dessert. Si c'est le cas, il demande le type de dessert. Si elle commande un tiramisu, on lui dit qu'il n'y en a plus.
             code: |-
-                order = {ask} 'Would you like to order dessert?'
-                {if} order = yes
-                    dessert = {ask} 'What kind of dessert would you like?'
+                commande = {ask} "Voulez-vous commander un dessert ?"
+                {if} commande = oui
+                    dessert = {ask} "Quel dessert voulez-vous ?"
                     {if} dessert = tiramisu
-                        {print} 'Sorry, we are out of tiramisu.'
+                        {print} "Désolé, nous n'avons plus de tiramisus."
                     {else}
-                        {print} 'One ' dessert ' coming right up!'
+                        {print} "un " dessert ". Ce sera prêt dans une minute !"
                 {else}
-                    {print} 'You dont want a dessert. No problem!'
+                    {print} "Vous ne voulez pas de dessert. Pas de problème !"
     10:
         1:
             story: |-

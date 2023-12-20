@@ -3,25 +3,24 @@
 # This file is distributed under the same license as the PROJECT project.
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2023.
 #
-#, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2023-11-30 15:33+0100\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"POT-Creation-Date: 2023-12-19 19:41+0100\n"
+"PO-Revision-Date: 2023-12-18 20:12+0000\n"
+"Last-Translator: Prefill add-on <noreply-addon-prefill@weblate.org>\n"
 "Language: ar\n"
 "Language-Team: ar <LL@li.org>\n"
 "Plural-Forms: nplurals=6; plural=(n==0 ? 0 : n==1 ? 1 : n==2 ? 2 : n%100>=3 && n%100<=10 ? 3 : n%100>=0 && n%100<=2 ? 4 : 5);\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Generated-By: Babel 2.11.0\n"
+"Generated-By: Babel 2.14.0\n"
 
 #, fuzzy
 msgid "Access Before Assign"
-msgstr "You tried to use the variable {name} on line {access_line_number}, but you set it on line {definition_line_number}. Set a variable before using it."
+msgstr "لقد حاولت استخدام المتغير {name} في السطر {access_line_number}، لكنك قمت بتعيينه على السطر {definition_line_number}. قم بتعيين متغير قبل استخدامه."
 
 msgid "Cyclic Var Definition"
 msgstr "يجب أن تضبط قيمة المتغير {variable} قبل أن تستعمله على الجانب الأيسر من من الأمر هو."
@@ -34,7 +33,7 @@ msgstr "أوه! لقد نسيت أن تكمل جزءاً من البرنامج! 
 
 #, fuzzy
 msgid "Incomplete Repeat"
-msgstr "It looks like you forgot to use {command} with the repeat command you used on line {line_number}."
+msgstr "يبدو أنك نسيت إستخدام أمر مع أمر {repeat} الذي إستخدمته في السطر {line_number}."
 
 msgid "Invalid"
 msgstr "{invalid_command} ليس أمراً برمجياً ضمن المستوى {level} من هيدي. هل كنت تقصد الأمر {guessed_command}؟"
@@ -78,6 +77,10 @@ msgstr "It looks like you might have misspelled the {command} command, instead y
 msgid "No Indentation"
 msgstr "لقد استخدمت عدداً غير كافي من الفراغات كإزاحة في السطر رقم {line_number}. لقد استخدمت {leading_spaces} إزاحات وهذا غير كافٍ. يجب عليك أن تبدأ كل مجموعة جديدة من الكود ب {indent_size} إزاحات أكثر من السطر الذي يسبقها."
 
+#, fuzzy
+msgid "Non Decimal Variable"
+msgstr "At line {line_number}, you might have tried using a number which Hedy does not like very much! Try changing it to a decimal number like 2."
+
 msgid "Parse"
 msgstr "الكود الذي أدخلته ليس مطابقاً لبرمجيات هيدي. يوجد خطأفي في السطر رقم {location[0]} والموضع {location[1]}. لقد أدخلت الرمز {character_found} لكن هذا غير مسموح به."
 
@@ -105,6 +108,10 @@ msgstr "لا ندعم الأرقام غير الصحيحة (الأرقام ال�
 
 msgid "Unsupported String Value"
 msgstr "النصوص لا يمكن أن تحتوي على {invalid_value}."
+
+#, fuzzy
+msgid "Unused Variable"
+msgstr "You defined the variable {variable_name} on line {line_number}, but you did not use it."
 
 msgid "Var Undefined"
 msgstr "لقد قمت باستعمال المتغير {name} لكنك لم تقم بضبط قيمته ابتداء. من الممكن أيضاً أنك كنت تريد استعمال الكلمة {name} ولكن نسيت وضع علامات الاقتباس."
@@ -156,6 +163,9 @@ msgstr "الذهاب الى المستوى {level}"
 msgid "adventure"
 msgstr "مغامرة"
 
+msgid "adventure_cloned"
+msgstr "المغامرة قد نُسخت"
+
 msgid "adventure_duplicate"
 msgstr "لديك بالفعل مغامرة بنفس هذا الإسم."
 
@@ -192,6 +202,10 @@ msgstr "تم تحديث المغامرة!"
 #, fuzzy
 msgid "adventures"
 msgstr "Available Adventures"
+
+#, fuzzy
+msgid "adventures_info"
+msgstr "Each Hedy level has built-in exercises for students, which we call adventures. You can create your own adventures and add them to your classes. With your own adventures you can create adventures that are relevant and interesting for your students. You can find more information about creating your own adventures <a href=\"https://hedy.org/for-teachers/manual/features\">here</a>."
 
 #, fuzzy
 msgid "adventures_restored"
@@ -240,6 +254,9 @@ msgstr "البرامج المحفوظة"
 
 msgid "amount_submitted"
 msgstr "البرامج المرسلة"
+
+msgid "apply_filters"
+msgstr "فلترة"
 
 msgid "are_you_sure"
 msgstr "هل أنت متأكد؟ لا يمكنك التراجع عن هذا الإجراء."
@@ -341,6 +358,16 @@ msgstr "What is the gender balance in your class?"
 #, fuzzy
 msgid "class_survey_question4"
 msgstr "What distinguishes your students from others?"
+
+#, fuzzy
+msgid "classes_info"
+msgstr "Create a class to follow the progress of each student in dashboard, and to customize the adventures your students see, and even adding your own! You can create as many classes as you like, and each class can have multiple teachers each one with different roles. You can also add as many students as you want, but mind that each student can only be in one class at a time. You can find more information about classes in the <a href=\"https://hedy.org/for-teachers/manual/preparations#for-teachers\">teacher manual</a>."
+
+msgid "clone"
+msgstr "انسخ"
+
+msgid "cloned_times"
+msgstr "عدد النسخ"
 
 #, fuzzy
 msgid "close"
@@ -551,6 +578,9 @@ msgstr "Echo and ask mismatch"
 msgid "echo_out"
 msgstr "لم نعد بحاجة الى الأمر ردد ابتداء من المستوى الثاني. يمكنك أن تكرر اجابة سؤال ما من خلال استخدام الأمر اسأل والأمر قول. مثال: الاسم هو اسأل ما اسمك؟ قول مرحبا الاسم"
 
+msgid "edit_adventure"
+msgstr "عدّل المغامرة"
+
 msgid "edit_code_button"
 msgstr "تعديل البرنامج"
 
@@ -595,6 +625,10 @@ msgstr "البريد الاإلكتروني هذا قيد الإستخدام ب�
 
 msgid "exists_username"
 msgstr "اسم المستخدم هذا قيد الإستخدام بالفعل."
+
+#, fuzzy
+msgid "exit_preview_mode"
+msgstr "Exit preview mode"
 
 msgid "experience_invalid"
 msgstr "الرجاء اختيار الخبرة بشكل صحيح (نعم ، لا)."
@@ -926,6 +960,9 @@ msgstr "هذا المستوى ليس متاحا لصفك الدراسي بعد"
 msgid "level_title"
 msgstr "مستوى"
 
+msgid "levels"
+msgstr ""
+
 msgid "link"
 msgstr "الرابط"
 
@@ -1105,6 +1142,9 @@ msgstr "ليس لديك حساب؟"
 
 msgid "no_accounts"
 msgstr "لا يوجد حسابات ليتم انشاءها."
+
+msgid "no_adventures_yet"
+msgstr "لا يوجد مغامرات عامة بعد..."
 
 #, fuzzy
 msgid "no_certificate"
@@ -1289,6 +1329,10 @@ msgstr "اللغة المفضلة"
 
 msgid "preview"
 msgstr "معاينة"
+
+#, fuzzy
+msgid "previewing_class"
+msgstr "You are previewing class <em>{class_name}</em> as a teacher."
 
 msgid "previous_campaigns"
 msgstr "عرض الحملات السابقة"
@@ -1503,9 +1547,6 @@ msgstr "البحث"
 msgid "second_teacher"
 msgstr "معلم ثاني"
 
-msgid "second_teacher_copy_prompt"
-msgstr ""
-
 msgid "second_teacher_prompt"
 msgstr "أدخل إسم المعلم لدعوته"
 
@@ -1521,6 +1562,18 @@ msgstr "اختر"
 
 msgid "select_adventures"
 msgstr "اختيار المغامرات"
+
+msgid "select_all"
+msgstr ""
+
+msgid "select_lang"
+msgstr "اختر اللغة"
+
+msgid "select_tag"
+msgstr "اختر العلامة"
+
+msgid "selected"
+msgstr ""
 
 msgid "self_removal_prompt"
 msgstr "هل أنت متأكد أنك تريد مغادرة هذا الصف؟"
@@ -1563,6 +1616,14 @@ msgstr "علامة اقتباس أحادية"
 
 msgid "slash"
 msgstr "علامة الخط المائل ناحية اليمين"
+
+#, fuzzy
+msgid "slides"
+msgstr "Slides"
+
+#, fuzzy
+msgid "slides_info"
+msgstr "For each level of Hedy, we have created slides to help you teach. The slides contain explanations of each level, and Hedy examples that you can run inside the slides. Just click the link and get started! the Introduction slides are a general explanation of Hedy before level 1 The slides were created using <a href=\"https://slides.com\">slides.com</a>. If you want to adapt them yourself, you can download them, and then upload the resulting zip file to <a href=\"https://slides.com\">slides.com</a>. You can find more information about the slides in the <a href=\"https://hedy.org/for-teachers/manual/features\">teacher's manual</a>."
 
 #, fuzzy
 msgid "social_media"
@@ -1618,6 +1679,9 @@ msgstr ""
 #, fuzzy
 msgid "student_list"
 msgstr "Student list"
+
+msgid "student_not_allowed_in_class"
+msgstr ""
 
 msgid "student_not_existing"
 msgstr "اسم المستخدم غير موجود."
@@ -1787,6 +1851,9 @@ msgstr "هيدي - شروط الخصوصية"
 msgid "title_programs"
 msgstr "هيدي -برامجي"
 
+msgid "title_public-adventures"
+msgstr ""
+
 msgid "title_recover"
 msgstr "هيدي - استرجاع الحساب"
 
@@ -1804,6 +1871,10 @@ msgstr "هيدي - عرض مغامرة"
 
 msgid "token_invalid"
 msgstr "الرمز الخاص بك غير صالح."
+
+#, fuzzy
+msgid "tooltip_level_locked"
+msgstr "Your teacher disabled this level"
 
 msgid "translate_error"
 msgstr "حدث خطأ ما خلال ترجمة البرنامج. حاول تنفيذ البرنامج وافحص وجود خطأ فيه. البرنامج الذي يحتوي على خطأ لا يمكن أن تتم ترجمته."
@@ -2093,6 +2164,6 @@ msgstr "Your program"
 #~ msgid "tag_deleted"
 #~ msgstr "لقد تم حذف العلامة"
 
-#~ msgid "no_tags"
-#~ msgstr "لا يوجد علامات"
+#~ msgid "public_adventures"
+#~ msgstr "المغامرات العامة"
 

@@ -38,8 +38,8 @@ const blockCommands = [
   'ifpressed_elifs',
 ]
 
-const ifRegex = "^((__if__) *[^\n ]+ *((__is__)|(__in__)) *[^\n ]+) *.+$";
-const repeatRegex = "^((__repeat__) *[^\n ]+ *(__times__)) *[^\n ]+ *.+$";
+const ifRegex = "((__if__) *[^\n ]+ *((__is__)|(__in__)) *[^\n ]+) *.*";
+const repeatRegex = "((__repeat__) *[^\n ]+ *(__times__)) *[^\n ]+ *.+";
 const elseRegex = "^(__else__) *[^\n ]+.+$";
 
 /**
@@ -357,8 +357,13 @@ export function incrementDebugLine() {
         break
       } else if (theLevel <= 7 && blockCommands.includes(map.command)){
         const lines = theGlobalEditor.contents.split('\n');
-        const fullLine = lines[map.hedy_range.from_line - 1];
-        const line = fullLine.substring(map.hedy_range.from_column - 1, map.hedy_range.to_column - 1);        
+        let line: string;
+        if (map.hedy_range.from_line < map.hedy_range.to_line) {
+          line = lines[map.hedy_range.from_line - 1];
+        } else {
+          const fullLine = lines[map.hedy_range.from_line - 1];
+          line = fullLine.substring(map.hedy_range.from_column - 1, map.hedy_range.to_column - 1);
+        }       
         const activeLine: string = theGlobalDebugger.get_source_line(lineNumber - 1);
 
         if (activeLine.match(/ *if/)) {

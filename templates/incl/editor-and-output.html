@@ -11,37 +11,12 @@
      </div>
     </div>
     <!-- Row 1: editor, output pane -->
-    <div class="flex flex-col order-1 relative" id="code_editor" {% if raw %} style="height: 14rem;" {% else %} style="min-height: 22rem;" {% endif %}>
+    <div class="flex flex-col order-1 relative" id="code_editor" {% if raw %} style="height: 14rem;" {% else %} style="height: 22rem;" {% endif %}>
         <div id="fold_in_toggle_container" class="hidden md:flex absolute z-10 top-16 ltr:-right-1 rtl:-left-1 cursor-pointer" onclick="hedyApp.hide_editor();">
          <div id="text_field" class="bg-green-500 text-white py-3 rounded-lg text-sm">
              <span>←</span>
          </div>
         </div>
-      <!-- language selector overlay -->
-      {% if is_admin and other_keyword_language() %}
-          <div id="main_editor_keyword_selector">
-              <div class="dropdown inline-block ltr:right-0 rtl:left-0 absolute z-10 mx-2 mt-2 mb-0 text-white" lang="{{ current_keyword_language().lang }}">
-                  <button class="inline-flex items-center text-xl px-2 bg-blue-600 rounded-lg" type="button" onclick="$('.language-switcher-menu').slideToggle('medium');">
-                      {{ current_keyword_language().sym }} <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round"  d="M19 9l-7 7-7-7"></path></svg>
-                  </button>
-                  <div class="language-switcher-menu absolute hidden ltr:right-0 rtl:left-0">
-                      <ul class="list-none text-xl z-10 text-white px-4 ltr:mr-1 rtl:ml-1 bg-blue-600 rounded-lg mt-2">
-                            <a class="no-underline text-white" href="#" onclick="hedyApp.change_keyword_language ('{{ current_keyword_language().lang }}', '{{ other_keyword_language().lang }}');$('.language-switcher-menu').hide();event.preventDefault();"><li>{{ other_keyword_language().sym }}</li></a>
-                      </ul>
-                  </div>
-              </div>
-              <div class="dropdown inline-block ltr:right-0 rtl:left-0 absolute z-10 mx-2 mt-2 mb-0 text-white hidden" lang="{{ other_keyword_language().lang }}">
-                  <button class="inline-flex items-center text-xl px-2 bg-blue-600 rounded-lg" type="button" onclick="$('.language-switcher-menu').slideToggle('medium');">
-                      {{ other_keyword_language().sym }} <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round"  d="M19 9l-7 7-7-7"></path></svg>
-                  </button>
-                  <div class="language-switcher-menu absolute hidden ltr:right-0 rtl:left-0">
-                      <ul class="list-none text-xl z-10 text-white px-4 ltr:mr-1 rtl:ml-1 bg-blue-600 rounded-lg mt-2">
-                            <a class="no-underline text-white" href="#" onclick="hedyApp.change_keyword_language ('{{ other_keyword_language().lang }}', '{{ current_keyword_language().lang }}');$('.language-switcher-menu').hide();event.preventDefault();"><li>{{ current_keyword_language().sym }}</li></a>
-                      </ul>
-                  </div>
-              </div>
-          </div>
-        {% endif %}
         <!--The div below is used to send translation of search to Ace through the frontend-->
         <div id="search_placeholder" style="display: none":>{{_('search')}}</div>
       <div class="w-full flex-1 flex flex-col">
@@ -269,17 +244,23 @@
     </div>
   </div>
 <!-- developer mode toggle -->
-{% if not raw %}
-<div class="mx-auto mt-4 w-64 border-gray-400 border-2 rounded-full py-2 px-4{% if editor_readonly or enforce_developers_mode %} hidden{% endif %}" id="developers_toggle_container">
-  <label for="developers_toggle" class="flex flex-row items-center justify-center cursor-pointer">
-    <div class="relative">
-      <input id="developers_toggle" type="checkbox" onclick="hedyApp.toggle_developers_mode(false)" class="sr-only" />
-      <div class="w-10 h-4 bg-gray-400 rounded-full shadow-inner" id="dev_toggle"></div>
-      <div class="toggle-circle absolute w-6 h-6 bg-white rounded-full shadow ltr:-left-1 rtl:-right-1 -top-1 transition" id="toggle_circle" style="top: -5px;"></div>
-    </div>
-    <div class="ltr:ml-3 rtl:mr-3">{{_('developers_mode')}}</div>
-  </label>
-</div>
+{% if not enforce_developers_mode and not raw and not editor_readonly %}
+  <div class="mx-auto mt-4 w-64 border-gray-400 border-2 rounded-full py-2 px-4" id="developers_toggle_container">
+    <label for="developers_toggle" class="flex flex-row items-center justify-center cursor-pointer">
+      <div class="relative">
+        <input id="developers_toggle" type="checkbox" class="sr-only"
+        _="on load hedyApp.toggleDevelopersMode('load', false)
+          on click hedyApp.toggleDevelopersMode('click', false)">
+        <div class="w-10 h-4 bg-gray-400 rounded-full shadow-inner" id="dev_toggle"></div>
+        <div
+          id="toggle_circle"
+          class="toggle-circle absolute w-6 h-6 bg-white rounded-full shadow ltr:-left-1 rtl:-right-1 -top-1 transition" style="top: -5px;"></div>
+      </div>
+      <div class="ltr:ml-3 rtl:mr-3">{{_('developers_mode')}}</div>
+    </label>
+  </div>
+{% else %}
+<div _="on load hedyApp.toggleDevelopersMode('load', true)"></div>
 {% endif %}
 <script>
 // FIXME: Stop using inline JavaScript
@@ -351,12 +332,3 @@ document.addEventListener('DOMContentLoaded', (event) => {
      });
  });
 </script>
-<!-- If we enforce the developer's mode in customizations -> hide adventures, increase editor and output height -->
-{% if enforce_developers_mode %}
-<script>
-// FIXME: Stop using inline JavaScript
-$(document).ready(function () {
-    hedyApp.toggle_developers_mode(true);
-});
-</script>
-{% endif %}

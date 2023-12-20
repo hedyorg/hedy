@@ -33,7 +33,7 @@ Ask { Text (is+ | Op<"=">) ask+ ( String | ListAccess | Expression )+ }
 AssignList { Text (is+ | Op<"=">) (Text+ | Int ) ~ambig  (Comma (Text+ | Int ))+ } // comma doesn't really parse well if it is not separated by spaces
 Assign { Text (is+ | Op<"=">) (Expression ~ambig  | ListAccess)+ }
 Sleep { sleep+ (Expression | ListAccess )? }
-ListAccess { Text at+ (random+ | Text) }
+ListAccess { Text at+ (random+ | Text | Int) }
 Add { add+ Text toList+ Text }
 Remove { remove+ Text from+ Text }
 Clear { clear+ }
@@ -44,8 +44,8 @@ Turtle[@isGroup=turtle] {
     Color { color+ (Expression | ListAccess)  }
 }   
 
-If { ifs+ Condition IfLessCommand? Else? }
-Else { elses+ IfLessCommand? }
+If { ifs+ Condition eol* IfLessCommand Else? }
+Else { !else elses+ eol* IfLessCommand }
 
 Condition { 
     EqualityCheck { Text is+ (String | Expression | pressed+) } |
@@ -70,7 +70,9 @@ Expression {
 
 @precedence {
     times @left,
-    plus @right
+    plus @right,
+
+    else
 }
 
 @external specialize { Text } specializeKeyword from "./tokens" {

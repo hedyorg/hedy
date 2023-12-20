@@ -3,9 +3,9 @@ import { EditorView, ViewUpdate, drawSelection, dropCursor, highlightActiveLine,
         highlightActiveLineGutter, highlightSpecialChars, keymap, lineNumbers } from '@codemirror/view'
 import { EditorState, Compartment, StateEffect, Prec } from '@codemirror/state'
 import { EventEmitter } from "./event-emitter";
-import { deleteTrailingWhitespace, defaultKeymap, historyKeymap } from '@codemirror/commands'
+import { deleteTrailingWhitespace, defaultKeymap, historyKeymap, indentWithTab } from '@codemirror/commands'
 import { history } from "@codemirror/commands"
-import { indentOnInput, defaultHighlightStyle, syntaxHighlighting ,LanguageSupport } from "@codemirror/language"
+import { indentOnInput, defaultHighlightStyle, syntaxHighlighting ,LanguageSupport, indentUnit, indentService } from "@codemirror/language"
 import { highlightSelectionMatches, searchKeymap } from "@codemirror/search";
 import { 
     errorLineField, debugLineField, decorationsTheme, addDebugLine, 
@@ -14,7 +14,8 @@ import {
     incorrectLineField,
     removeIncorrectLineEffect,
     addDebugWords,
-    placeholders
+    placeholders,
+    basicIndent
 } from "./cm-decorations";
 import {LRLanguage} from "@codemirror/language"
 import { languagePerLevel } from "./lezer-parsers/language-packages";
@@ -23,6 +24,10 @@ import { monokai } from "./cm-monokai-theme";
 import { error } from "./modal";
 import { ClientMessages } from "./client-messages";
 import { Tag, styleTags, tags as t } from "@lezer/highlight";
+
+
+// CodeMirror requires # of indentation to be in spaces.
+const indentSize = ' '.repeat(4);
 
 export class HedyCodeMirrorEditorCreator implements HedyEditorCreator {
     /**
@@ -63,8 +68,6 @@ export class HedyCodeMirrorEditorCreator implements HedyEditorCreator {
 export class HedyCodeMirrorEditor implements HedyEditor {
     private view: EditorView;
     private readMode = new Compartment; // Configuration for the editor read mode
-    private theme = new Compartment;
-    private themeStyles: Record<string, any>;
     private editorEvent = new EventEmitter<EditorEvent>({
         change: true,
         guttermousedown: true,
@@ -75,9 +78,10 @@ export class HedyCodeMirrorEditor implements HedyEditor {
     private incorrectLineMapping: Record<string, number> = {};
 
     constructor(element: HTMLElement, isReadOnly: boolean, _: EditorType, __: string = "ltr") {
-        this.themeStyles = {
+        
+        const mainEditorStyling = EditorView.baseTheme({
             "&": {
-                height: "352px",
+                height: "22rem",
                 background: '#272822',
                 fontSize: '15.2px',
                 color: 'white',
@@ -91,16 +95,14 @@ export class HedyCodeMirrorEditor implements HedyEditor {
 
             ".cm-gutters": {
                 borderRadius: '4px'
-            }
-        }
-
-        const cursorStyle = { ".cm-cursor, .cm-dropCursor": {borderLeftColor: "white", borderLeftWidth: "2px"} }
-        const mainEditorStyling = EditorView.theme(this.themeStyles);
+            },            
+            ".cm-cursor, .cm-dropCursor": {borderLeftColor: "white", borderLeftWidth: "2px"}
+        });
 
         const state = EditorState.create({
             doc: '',
-            extensions: [                
-                EditorView.theme(cursorStyle),
+            extensions: [
+                mainEditorStyling,
                 breakpointGutter,
                 lineNumbers(),
                 highlightActiveLineGutter(),
@@ -117,9 +119,11 @@ export class HedyCodeMirrorEditor implements HedyEditor {
                     ...defaultKeymap,
                     ...searchKeymap, // we need to replace this with our own search widget
                     ...historyKeymap,
+                    indentWithTab,
                 ]),
+                indentUnit.of(indentSize),
+                indentService.of(basicIndent),
                 monokai,
-                this.theme.of(mainEditorStyling),
                 this.readMode.of(EditorState.readOnly.of(isReadOnly)),
                 errorLineField,
                 debugLineField,
@@ -137,7 +141,15 @@ export class HedyCodeMirrorEditor implements HedyEditor {
         if (theLevel) {
             this.setHighlighterForLevel(theLevel);
         }
-
+        // Size the editor depending on the height of its parent
+        this.view.requestMeasure({
+            read: () => {
+                return document.getElementById('editor')!.offsetHeight                                
+            },
+            write(measure, view) {
+                view.dom.style.height = `${measure}px`;                                
+            },
+        })
     }
 
     /**
@@ -222,12 +234,7 @@ export class HedyCodeMirrorEditor implements HedyEditor {
             console.log('Error! When resizing a CodeMirror instance, you need to provide the new height');
             return;
         }
-        // Change the size of the container element of the editor
-        // Via reconfiguring the editors theme
-        this.themeStyles['&'].height = `${newHeight}px`;
-        this.view.dispatch({
-            effects: this.theme.reconfigure(EditorView.theme(this.themeStyles))
-        });
+        this.view.dom.style.height = `${newHeight}px`;
     }
 
     /**

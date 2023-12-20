@@ -42,8 +42,8 @@ from logging_config import LOGGING_CONFIG
 from utils import dump_yaml_rt, is_debug_mode, load_yaml_rt, timems, version, strip_accents
 from website import (ab_proxying, achievements, admin, auth_pages, aws_helpers,
                      cdn, classes, database, for_teachers, s3_logger, parsons,
-                     profile, programs, querylog, quiz, statistics, surveys,
-                     translating, tags)
+                     profile, programs, querylog, quiz, statistics,
+                     translating, tags, surveys, public_adventures)
 from website.auth import (current_user, is_admin, is_teacher, is_second_teacher, has_public_profile,
                           login_user_from_token_cookie, requires_login, requires_login_redirect, requires_teacher,
                           forget_current_user)
@@ -533,6 +533,8 @@ def parse():
                 translated_error = translate_error(ex.error_code, ex.arguments, keyword_lang)
                 if isinstance(ex, hedy.exceptions.InvalidSpaceException):
                     response['Warning'] = translated_error
+                elif isinstance(ex, hedy.exceptions.UnusedVariableException):
+                    response['Warning'] = translated_error
                 else:
                     response['Error'] = translated_error
                 response['Location'] = ex.error_location
@@ -562,11 +564,15 @@ def parse():
 
             if transpile_result.has_turtle:
                 response['has_turtle'] = True
+
+            if transpile_result.has_clear:
+                response['has_clear'] = True
         except Exception:
             pass
 
         with querylog.log_time('detect_sleep'):
             try:
+                # FH, Nov 2023: hmmm I don't love that this is not done in the same place as the other "has"es
                 response['has_sleep'] = 'sleep' in transpile_result.commands
             except BaseException:
                 pass
@@ -985,7 +991,8 @@ def programs_page(user):
              }
         )
 
-    adventure_names = hedy_content.Adventures(g.lang).get_adventure_names()
+    keyword_lang = g.keyword_lang
+    adventure_names = hedy_content.Adventures(g.lang).get_adventure_names(keyword_lang)
 
     next_page_url = url_for('programs_page', **dict(request.args, page=result.next_page_token)
                             ) if result.next_page_token else None
@@ -1313,7 +1320,9 @@ def index(level, program_id):
 
     customizations = {}
     if current_user()['username']:
-        customizations = DATABASE.get_student_class_customizations(current_user()['username'])
+        # class_to_preview is for teachers to preview a class they own
+        customizations = DATABASE.get_student_class_customizations(
+            current_user()['username'], class_to_preview=session.get("preview_class", {}).get("id"))
 
     if 'levels' in customizations:
         available_levels = customizations['levels']
@@ -1528,6 +1537,37 @@ def view_program(user, id):
                            **arguments_dict)
 
 
+@app.route('/render_code/<level>/<code>', methods=['GET'])
+def render_code_in_editor(level, code):
+
+    try:
+        level = int(level)
+    except BaseException:
+        return utils.error_page(error=404, ui_message=gettext('no_such_level'))
+
+    a = Adventure('start', 'start', 'start', 'start', code, False, False)
+    adventures = [a]
+
+    return render_template("code-page.html",
+                           specific_adventure=True,
+                           level_nr=str(level),
+                           level=level,
+                           adventures=adventures,
+                           raw=True,
+                           menu=False,
+                           blur_button_available=False,
+                           # See initialize.ts
+                           javascript_page_options=dict(
+                               page='code',
+                               lang=g.lang,
+                               level=level,
+                               adventures=adventures,
+                               initial_tab='start',
+                               current_user_name=current_user()['username'],
+                               suppress_save_and_load_for_slides=True,
+                           ))
+
+
 @app.route('/adventure/<name>', methods=['GET'], defaults={'level': 1, 'mode': 'full'})
 @app.route('/adventure/<name>/<level>', methods=['GET'], defaults={'mode': 'full'})
 @app.route('/adventure/<name>/<level>/<mode>', methods=['GET'])
@@ -1625,10 +1665,11 @@ def get_embedded_code_editor(level):
 
     return render_template("embedded-editor.html", embedded=True, run=run, language=language,
                            keyword_language=keyword_language, readOnly=readOnly,
-                           level=level, program=program, javascript_page_options=dict(
-                               page='code',
+                           level=level, javascript_page_options=dict(
+                               page='view-program',
                                lang=language,
-                               level=level
+                               level=level,
+                               code=program
                            ))
 
 
@@ -1771,17 +1812,16 @@ def profile_page(user):
         for class_id in profile.get('classes'):
             classes.append(DATABASE.get_class(class_id))
 
-    invite = DATABASE.get_username_invite(user['username'])
-    if invite:
-        # We have to keep this in mind as well, can simply be set to 1 for now
-        # But when adding more message structures we have to use a more sophisticated structure
-        session['messages'] = 1
-        # If there is an invite: retrieve the class information
-        class_info = DATABASE.get_class(invite.get('class_id', None))
-        if class_info:
-            invite['teacher'] = class_info.get('teacher')
-            invite['class_name'] = class_info.get('name')
-            invite['join_link'] = class_info.get('link')
+    invitations = DATABASE.get_user_invitations(user['username'])
+    if invitations:
+        session['messages'] = len(invitations)
+        # If there are invitations: retrieve the class information
+        for invite in invitations:
+            class_info = DATABASE.get_class(invite.get('class_id', None))
+            if class_info:
+                invite['teacher'] = class_info.get('teacher')
+                invite['class_name'] = class_info.get('name')
+                invite['join_link'] = class_info.get('link')
     else:
         session['messages'] = 0
 
@@ -1790,7 +1830,7 @@ def profile_page(user):
         page_title=gettext('title_my-profile'),
         programs=programs,
         user_data=profile,
-        invite_data=invite,
+        invitations=invitations,
         public_settings=public_profile_settings,
         user_classes=classes,
         current_page='my-profile')
@@ -1932,7 +1972,8 @@ def explore():
     normalized = normalize_public_programs(list(programs) + list(favourite_programs.records))
     programs, favourite_programs = split_at(len(programs), normalized)
 
-    adventures_names = hedy_content.Adventures(session['lang']).get_adventure_names()
+    keyword_lang = g.keyword_lang
+    adventures_names = hedy_content.Adventures(session['lang']).get_adventure_names(keyword_lang)
 
     return render_template(
         'explore.html',
@@ -2056,7 +2097,7 @@ def get_slides(level):
         return utils.error_page(error=404, ui_message="Slides do not exist!")
 
     slides = SLIDES[g.lang].get_slides_for_level(level, keyword_language)
-    return render_template('slides.html', slides=slides)
+    return render_template('slides.html', level=level, slides=slides)
 
 
 @app.route('/translate_keywords', methods=['POST'])
@@ -2284,8 +2325,8 @@ def get_user_messages():
         # Todo TB: In the future this should contain the class invites + other messages
         # As the class invites are binary (you either have one or you have none, we can possibly simplify this)
         # Simply set it to 1 if we have an invite, otherwise keep at 0
-        invite = DATABASE.get_username_invite(current_user()['username'])
-        session['messages'] = 1 if invite else 0
+        invitations = DATABASE.get_user_invitations(current_user()['username'])
+        session['messages'] = len(invitations) if invitations else 0
     if session.get('messages') > 0:
         return session.get('messages')
     return None
@@ -2487,6 +2528,7 @@ app.register_blueprint(parsons.ParsonsModule(PARSONS))
 app.register_blueprint(statistics.StatisticsModule(DATABASE))
 app.register_blueprint(statistics.LiveStatisticsModule(DATABASE))
 app.register_blueprint(tags.TagsModule(DATABASE, ACHIEVEMENTS))
+app.register_blueprint(public_adventures.PublicAdventuresModule(DATABASE, ACHIEVEMENTS))
 app.register_blueprint(surveys.SurveysModule(DATABASE))
 
 
