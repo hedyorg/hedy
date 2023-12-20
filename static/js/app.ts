@@ -369,7 +369,7 @@ export function initializeHighlightedCodeBlocks(where: Element) {
   for (const container of $(where).find('.turn-pre-into-ace').get()) {
     for (const preview of $(container).find('pre').get()) {
       $(preview)
-        .addClass('text-lg rounded overflow-x-hidden')
+        .addClass('relative text-lg rounded overflow-x-hidden')
         // We set the language of the editor to the current keyword_language -> needed when copying to main editor
         .attr('lang', theKeywordLanguage);
 
@@ -386,7 +386,7 @@ export function initializeHighlightedCodeBlocks(where: Element) {
         // And add an overlay button to the editor if requested via a show-copy-button class, either
         // on the <pre> itself OR on the element that has the '.turn-pre-into-ace' class.
         if ($(preview).hasClass('show-copy-button') || $(container).hasClass('show-copy-button')) {
-          const buttonContainer = $('<div>').addClass('absolute ltr:-right-1 rtl:left-2 w-16').css({top: 5}).appendTo(preview);
+          const buttonContainer = $('<div>').addClass('absolute ltr:right-0 rtl:left-0 top-0 mx-1 mt-1').appendTo(preview);
           let symbol = "⇥";
           if (dir === "rtl") {
             symbol = "⇤";

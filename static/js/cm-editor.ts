@@ -138,7 +138,8 @@ export class HedyCodeMirrorEditor implements HedyEditor {
                 doc: '',
                 extensions: [
                     EditorView.theme({
-                        ".cm-cursor, .cm-dropCursor": { border: "none"}
+                        ".cm-cursor, .cm-dropCursor": { border: "none"},
+                        ".cm-scroller": { "overflow": "auto", "min-height": "3.5rem" }
                     }),
                     highlightSpecialChars(),
                     drawSelection(),
