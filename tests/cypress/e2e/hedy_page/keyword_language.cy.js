@@ -1,11 +1,16 @@
-import {goToHedyPage} from "../tools/navigation/nav";
+import {goToHedyPageWithEnKeywords} from "../tools/navigation/nav";
 
 describe('when the user changes their language to Arabic', () => {
   beforeEach(() => {
-    goToHedyPage();
-
+    goToHedyPageWithEnKeywords();
+    cy.get('.cm-content').click();
+    cy.get('#editor').type("print Hallo!'\n");
     cy.getBySel('language-dropdown').click();
     cy.getBySel('switch-lang-ar').click();
+
+    // switch back and forth
+    cy.getBySel('kwlang-switch-btn').click();
+    cy.getBySel('kwlang-switch-toggle').click();
   });
 
   it('initially has keywords in Arabic', () => {

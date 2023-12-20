@@ -163,15 +163,24 @@ class TestsLevel7(HedyTester):
 
     def test_repeat_with_missing_print_gives_error(self):
         code = textwrap.dedent("""\
+        repeat 3 print 'x'""")
+
+        self.single_level_tester(
+            code=code,
+            exception=hedy.exceptions.IncompleteRepeatException
+        )
+
+    def test_repeat_with_missing_times_gives_error_skip(self):
+        code = textwrap.dedent("""\
         x is 3
-        repeat 3 times x""")
+        repeat 3 print 'x'""")
 
         expected = textwrap.dedent("""\
         x = '3'
         pass""")
 
         skipped_mappings = [
-            SkippedMapping(SourceRange(2, 1, 2, 17), hedy.exceptions.IncompleteRepeatException),
+            SkippedMapping(SourceRange(2, 1, 2, 19), hedy.exceptions.IncompleteRepeatException),
         ]
 
         self.single_level_tester(
@@ -205,8 +214,7 @@ class TestsLevel7(HedyTester):
     def test_repeat_with_missing_times_gives_error(self):
         code = textwrap.dedent("""\
         prind skipping
-        repeat 3 print 'n'
-        """)
+        repeat 3 print 'n'""")
 
         expected = textwrap.dedent("""\
         pass
@@ -435,7 +443,7 @@ class TestsLevel7(HedyTester):
                 try:
                   __trtl = int(__trtl)
                 except ValueError:
-                  raise Exception(f'While running your program the command <span class="command-highlighted">forward</span> received the value <span class="command-highlighted">{__trtl}</span> which is not allowed. Try changing the value to a number.')
+                  raise Exception('catch_value_exception')
                 t.forward(min(600, __trtl) if __trtl > 0 else max(-600, __trtl))
                 time.sleep(0.1)
                 break
@@ -444,7 +452,7 @@ class TestsLevel7(HedyTester):
                 try:
                   __trtl = int(__trtl)
                 except ValueError:
-                  raise Exception(f'While running your program the command <span class="command-highlighted">forward</span> received the value <span class="command-highlighted">{__trtl}</span> which is not allowed. Try changing the value to a number.')
+                  raise Exception('catch_value_exception')
                 t.forward(min(600, __trtl) if __trtl > 0 else max(-600, __trtl))
                 time.sleep(0.1)
                 break
@@ -465,7 +473,7 @@ class TestsLevel7(HedyTester):
                 try:
                   __trtl = int(__trtl)
                 except ValueError:
-                  raise Exception(f'While running your program the command <span class="command-highlighted">forward</span> received the value <span class="command-highlighted">{__trtl}</span> which is not allowed. Try changing the value to a number.')
+                  raise Exception('catch_value_exception')
                 t.forward(min(600, __trtl) if __trtl > 0 else max(-600, __trtl))
                 time.sleep(0.1)
                 break
@@ -474,7 +482,7 @@ class TestsLevel7(HedyTester):
                 try:
                   __trtl = int(__trtl)
                 except ValueError:
-                  raise Exception(f'While running your program the command <span class="command-highlighted">forward</span> received the value <span class="command-highlighted">{__trtl}</span> which is not allowed. Try changing the value to a number.')
+                  raise Exception('catch_value_exception')
                 t.forward(min(600, __trtl) if __trtl > 0 else max(-600, __trtl))
                 time.sleep(0.1)
                 break
@@ -495,7 +503,7 @@ class TestsLevel7(HedyTester):
                 try:
                   __trtl = int(__trtl)
                 except ValueError:
-                  raise Exception(f'While running your program the command <span class="command-highlighted">forward</span> received the value <span class="command-highlighted">{__trtl}</span> which is not allowed. Try changing the value to a number.')
+                  raise Exception('catch_value_exception')
                 t.forward(min(600, __trtl) if __trtl > 0 else max(-600, __trtl))
                 time.sleep(0.1)
                 break
@@ -504,7 +512,7 @@ class TestsLevel7(HedyTester):
                 try:
                   __trtl = int(__trtl)
                 except ValueError:
-                  raise Exception(f'While running your program the command <span class="command-highlighted">forward</span> received the value <span class="command-highlighted">{__trtl}</span> which is not allowed. Try changing the value to a number.')
+                  raise Exception('catch_value_exception')
                 t.forward(min(600, __trtl) if __trtl > 0 else max(-600, __trtl))
                 time.sleep(0.1)
                 break

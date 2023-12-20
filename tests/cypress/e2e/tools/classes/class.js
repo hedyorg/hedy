@@ -30,18 +30,18 @@ export function createClass()
  */
 export function ensureClass()
 {
-    const classname = `test class ${Math.random()}`;
+    let classname = `test class ${Math.random()}`;
     goToTeachersPage();
 
-    return new Promise(ok => {
-        cy.getBySel('view_class_link').then(viewClassLink => {
-            if (viewClassLink.length === 0) {
-                ok(createClass());
-            } else {
-                ok(viewClassLink.text());
-            }
-        });
+    cy.getBySel('view_class_link').then(viewClassLink => {
+        if (viewClassLink.length === 0) {
+            createClass();
+        } else {
+            classname = viewClassLink.text();
+        }
     });
+
+    return classname
 }
 
 export function addStudents(classname, count) {
@@ -53,6 +53,7 @@ export function addStudents(classname, count) {
     cy.get(".view_class").contains(new RegExp(`^${classname}$`)).click();
     cy.wait(500);
 
+    cy.get('body').then($b => $b.find("#survey")).then($s => $s.length && $s.hide())
     cy.get('#add-student').click();
     cy.get('#create-accounts').click();
     cy.wrap(students).each((student, index) => {
@@ -63,6 +64,16 @@ export function addStudents(classname, count) {
     cy.get('#modal-yes-button').click();
 
     return students;
+}
+
+export function addCustomizations(classname){
+    goToTeachersPage();
+
+    cy.get(".view_class").contains(classname).click();
+    cy.get('#customize-class-button').click();
+    cy.get('#enable_level_7').parent('.switch').click();
+    cy.getBySel("save_customizations").click();
+    cy.get("#back_to_class").click();
 }
 
 export function createClassAndAddStudents(){
@@ -76,6 +87,7 @@ export function navigateToClass(classname) {
     cy.wait(500);
     cy.get(".view_class").contains(new RegExp(`^${classname}$`)).click();
     cy.wait(500);
+    cy.get('body').then($b => $b.find("#survey")).then($s => $s.length && $s.hide())
 }
 
 export default {createClassAndAddStudents};

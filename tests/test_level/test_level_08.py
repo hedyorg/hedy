@@ -195,6 +195,30 @@ class TestsLevel8(HedyTester):
 
         self.multi_level_tester(max_level=11, code=code, expected=expected, output='gelijkspel!')
 
+    def test_unquoted_print_in_body(self):
+        code = textwrap.dedent("""\
+        svar = ask 'Vad är 5 plus 5?'
+        if svar is 10
+            print 'Bra jobbat!
+            print 'Svaret var faktiskt ' svar""")
+
+        self.multi_level_tester(code=code,
+                                skip_faulty=False,
+                                exception=hedy.exceptions.UnquotedTextException,
+                                max_level=16)
+
+    def test_wrongly_quoted_print_in_body(self):
+        code = textwrap.dedent("""\
+        svar = ask 'Vad är 5 plus 5?'
+        if svar is 10
+            print 'Bra jobbat!"
+            print 'Svaret var faktiskt ' svar""")
+
+        self.multi_level_tester(code=code,
+                                skip_faulty=False,
+                                exception=hedy.exceptions.UnquotedTextException,
+                                max_level=16)
+
     def test_if_in_list_print(self):
         code = textwrap.dedent("""\
         items is red, green
@@ -246,13 +270,13 @@ class TestsLevel8(HedyTester):
         a is test
         b is 15
         if a is b
-            c is 1""")
+            b is 1""")
 
         expected = textwrap.dedent("""\
         a = 'test'
         b = '15'
         if convert_numerals('Latin', a) == convert_numerals('Latin', b):
-          c = '1'""")
+          b = '1'""")
 
         self.multi_level_tester(code=code, expected=expected, max_level=11)
 
@@ -335,7 +359,8 @@ class TestsLevel8(HedyTester):
 
         # gives the right exception for all levels even though it misses brackets
         # because the indent check happens before parsing
-        self.multi_level_tester(code=code, exception=hedy.exceptions.NoIndentationException)
+        self.multi_level_tester(code=code,
+                                exception=hedy.exceptions.NoIndentationException)
 
     def test_if_equality_print_else_print(self):
         code = textwrap.dedent("""\
@@ -368,7 +393,7 @@ class TestsLevel8(HedyTester):
         else:
           x = '222'""")
 
-        self.multi_level_tester(code=code, expected=expected, max_level=11)
+        self.multi_level_tester(code=code, expected=expected, max_level=11, unused_allowed=True)
 
     def test_if_else_followed_by_print(self):
         code = textwrap.dedent("""\
@@ -609,12 +634,12 @@ class TestsLevel8(HedyTester):
     def test_repeat_with_arabic_variable_print(self):
         code = textwrap.dedent("""\
         n is ٥
-        repeat ٥ times
+        repeat n times
             print 'me wants a cookie!'""")
 
         expected = textwrap.dedent("""\
         n = '٥'
-        for i in range(int('5')):
+        for i in range(int(n)):
           print(f'me wants a cookie!')
           time.sleep(0.1)""")
 

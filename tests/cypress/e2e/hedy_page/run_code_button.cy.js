@@ -4,6 +4,8 @@ describe('Is able to run code', () => {
     it('Passes', () => {
       goToHedyPage();
 
+      cy.get('.cm-content').click();
+      cy.focused().type("print Hallo!'\n");
       // Run with correct code
       cy.get('#runit').click();
       cy.get('#okbox').should('be.visible');
@@ -14,7 +16,8 @@ describe('Is able to run code', () => {
 
       // Run with incorrect code when skipping faulty code is not possible
       goToHedyLevel5Page();
-      cy.get('#editor').type("anders prind 'minder leuk!'\n");
+      cy.get('.cm-editor').click(); // Wait for the editor to be initialized
+      cy.focused().type("anders prind 'minder leuk!'\n");
       cy.get('#runit').click();
       cy.get('#errorbox').should('be.visible');
     })

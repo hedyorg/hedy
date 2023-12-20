@@ -207,7 +207,63 @@ class TestsLevel4(HedyTester):
             max_level=5,
         )
 
-    def test_print_without_quotes_gives_error_from_transpiler(self):
+    def test_print_without_ending_quote_gives_UnquotedException(self):
+
+        code = "print 'hallo wereld"
+
+        self.multi_level_tester(
+            code=code,
+            max_level=17,
+            exception=hedy.exceptions.UnquotedTextException,
+        )
+
+    def test_print_comma_without_ending_quote_gives_UnquotedException(self):
+        code = "print 'hallo, wereld"
+
+        self.multi_level_tester(
+            code=code,
+            max_level=17,
+            exception=hedy.exceptions.UnquotedTextException,
+        )
+
+    def test_print_comma_starting_ending_quote_gives_UnquotedException(self):
+        code = "print hallo, wereld'"
+
+        self.multi_level_tester(
+            code=code,
+            max_level=17,
+            exception=hedy.exceptions.UnquotedTextException,
+        )
+
+    def test_print_comma_without_ending_double_quote_gives_UnquotedException(self):
+        code = 'print "hallo, wereld'
+
+        self.multi_level_tester(
+            code=code,
+            max_level=17,
+            exception=hedy.exceptions.UnquotedTextException,
+        )
+
+    def test_print_comma_without_starting_double_quote_gives_UnquotedException(self):
+        code = 'print hallo, wereld"'
+
+        self.multi_level_tester(
+            code=code,
+            max_level=17,
+            exception=hedy.exceptions.UnquotedTextException,
+        )
+
+    def test_print_without_starting_quote_gives_UnquotedException(self):
+
+        code = "print hallo wereld'"
+
+        self.multi_level_tester(
+            code=code,
+            max_level=17,
+            exception=hedy.exceptions.UnquotedTextException,
+        )
+
+    def test_print_without_all_quotes_gives_UnquotedException(self):
         # in other cases, there might be two different problems
         # is this unquoted? or did we forget an initialization of a variable?
 
@@ -257,7 +313,7 @@ class TestsLevel4(HedyTester):
 
     def test_place_holder_no_space(self):
         # same as print for level 4
-        code = "print _Escape from the haunted house!_"
+        code = "print _ Escape from the haunted house! _"
 
         self.multi_level_tester(
             code=code,
@@ -388,7 +444,7 @@ class TestsLevel4(HedyTester):
         woord1 = 'zomerkamp'
         print(f'naam is naar hetwoord1')""")
 
-        self.multi_level_tester(code=code, expected=expected, max_level=11)
+        self.multi_level_tester(code=code, expected=expected, max_level=11, unused_allowed=True)
 
     #
     # Test comment
@@ -410,6 +466,7 @@ class TestsLevel4(HedyTester):
         expected = 'test = \'"Welkom bij Hedy" \''
         self.multi_level_tester(
             max_level=11,
+            unused_allowed=True,
             code=code,
             expected=expected
         )
@@ -421,25 +478,25 @@ class TestsLevel4(HedyTester):
         code = "details is ask 'tell me more'"
         expected = "details = input(f'tell me more')"
 
-        self.multi_level_tester(code=code, expected=expected, max_level=11)
+        self.multi_level_tester(code=code, expected=expected, max_level=11, unused_allowed=True)
 
     def test_ask_double_quoted_text(self):
         code = 'details is ask "tell me more"'
         expected = "details = input(f'tell me more')"
 
-        self.multi_level_tester(code=code, expected=expected, max_level=11)
+        self.multi_level_tester(code=code, expected=expected, max_level=11, unused_allowed=True)
 
     def test_ask_single_quoted_text_with_inner_double_quote(self):
         code = """details is ask 'say "no"'"""
         expected = """details = input(f'say "no"')"""
 
-        self.multi_level_tester(code=code, expected=expected, max_level=11)
+        self.multi_level_tester(code=code, expected=expected, max_level=11, unused_allowed=True)
 
     def test_ask_double_quoted_text_with_inner_single_quote(self):
         code = f'''details is ask "say 'no'"'''
         expected = '''details = input(f'say \\'no\\'')'''
 
-        self.multi_level_tester(code=code, expected=expected, max_level=11)
+        self.multi_level_tester(code=code, expected=expected, max_level=11, unused_allowed=True)
 
     def test_ask_without_quotes_gives_error(self):
         code = textwrap.dedent("""\
@@ -528,7 +585,7 @@ class TestsLevel4(HedyTester):
         code = f"""color is ask {q}Cuál es tu color favorito?{q}"""
         expected = f"""color = input(f'Cuál es tu color favorito?')"""
 
-        self.multi_level_tester(code=code, expected=expected, max_level=11)
+        self.multi_level_tester(code=code, expected=expected, max_level=11, unused_allowed=True)
 
     @parameterized.expand(HedyTester.quotes)
     def test_ask_bengali_var(self, q):
@@ -551,7 +608,7 @@ class TestsLevel4(HedyTester):
         colors = ['orange', 'blue', 'green']
         favorite = input(f'Is your fav color {random.choice(colors)}')""")
 
-        self.multi_level_tester(code=code, expected=expected, max_level=11)
+        self.multi_level_tester(code=code, expected=expected, max_level=11, unused_allowed=True)
 
     def test_print_list_access_index_var(self):
         code = textwrap.dedent("""\
@@ -572,6 +629,19 @@ class TestsLevel4(HedyTester):
             extra_check_function=check_in_list
         )
 
+    def test_list_access_misspelled_at_gives_error(self):
+        code = textwrap.dedent("""\
+        dieren is Hond, Kat, Kangoeroe, Kaketoe
+        print dieren ad random""")
+
+        self.multi_level_tester(
+            max_level=5,
+            skip_faulty=False,
+            code=code,
+            extra_check_function=lambda c: c.exception.arguments['line_number'] == 2,
+            exception=hedy.exceptions.MisspelledAtCommand
+        )
+
     def test_ask_list_access_index(self):
         code = textwrap.dedent("""\
         colors is orange, blue, green
@@ -581,7 +651,7 @@ class TestsLevel4(HedyTester):
         colors = ['orange', 'blue', 'green']
         favorite = input(f'Is your fav color {colors[int(1)-1]}')""")
 
-        self.multi_level_tester(code=code, expected=expected, max_level=11)
+        self.multi_level_tester(code=code, expected=expected, max_level=11, unused_allowed=True)
 
     def test_ask_string_var(self):
         code = textwrap.dedent("""\
@@ -592,7 +662,7 @@ class TestsLevel4(HedyTester):
         color = 'orange'
         favorite = input(f'Is your fav color {color}')""")
 
-        self.multi_level_tester(code=code, expected=expected, max_level=11)
+        self.multi_level_tester(code=code, expected=expected, max_level=11, unused_allowed=True)
 
     def test_ask_integer_var(self):
         code = textwrap.dedent("""\
@@ -603,7 +673,7 @@ class TestsLevel4(HedyTester):
         number = '10'
         favorite = input(f'Is your fav number{number}')""")
 
-        self.multi_level_tester(code=code, expected=expected, max_level=11)
+        self.multi_level_tester(code=code, expected=expected, max_level=11, unused_allowed=True)
 
     #
     # sleep tests
@@ -647,7 +717,7 @@ class TestsLevel4(HedyTester):
         code = "period is ."
         expected = "period = '.'"
 
-        self.multi_level_tester(code=code, expected=expected, max_level=11)
+        self.multi_level_tester(code=code, expected=expected, max_level=11, unused_allowed=True)
 
     def test_assign_list_values_with_inner_single_quotes(self):
         code = textwrap.dedent(f"""\
@@ -691,17 +761,17 @@ class TestsLevel4(HedyTester):
                                      HedyTester.list_access_transpiled('random.choice(taart)'),
                                      "print(f'we bakken een{random.choice(taart)}')")
 
-        self.multi_level_tester(code=code, expected=expected, max_level=11)
+        self.multi_level_tester(code=code, expected=expected, max_level=11, unused_allowed=True)
 
     def test_assign_single_quoted_text(self):
         code = """message is 'Hello welcome to Hedy.'"""
         expected = """message = '\\'Hello welcome to Hedy.\\''"""
-        self.multi_level_tester(code=code, expected=expected, max_level=11)
+        self.multi_level_tester(code=code, expected=expected, max_level=11, unused_allowed=True)
 
     def test_assign_double_quoted_text(self):
         code = '''message is "Hello welcome to Hedy."'''
         expected = """message = '"Hello welcome to Hedy."'"""
-        self.multi_level_tester(code=code, expected=expected, max_level=11)
+        self.multi_level_tester(code=code, expected=expected, max_level=11, unused_allowed=True)
 
     #
     # add/remove tests
@@ -814,12 +884,12 @@ class TestsLevel4(HedyTester):
         )
 
     def test_repair_incorrect_print_argument(self):
-        code = "print ,'Hello'"
+        code = "print ,Hello"
 
         self.multi_level_tester(
             code=code,
             exception=hedy.exceptions.ParseException,
-            extra_check_function=lambda c: c.exception.fixed_code == "print 'Hello'"
+            extra_check_function=lambda c: c.exception.fixed_code == "print ,Hello"
         )
 
     def test_lonely_text(self):
@@ -846,6 +916,8 @@ class TestsLevel4(HedyTester):
     def test_clear(self):
         code = "clear"
         expected = textwrap.dedent("""\
+        time.sleep(0.1)
+        time.sleep(0.1)
         extensions.clear()
         try:
             # If turtle is being used, reset canvas
@@ -856,7 +928,10 @@ class TestsLevel4(HedyTester):
         except NameError:
             pass""")
 
-        self.multi_level_tester(code=code, expected=expected)
+        self.multi_level_tester(code=code,
+                                expected=expected,
+                                extra_check_function=(lambda result: result.has_clear)
+                                )
 
     def test_source_map(self):
         code = textwrap.dedent("""\
@@ -880,3 +955,13 @@ class TestsLevel4(HedyTester):
 
         self.single_level_tester(code, expected=expected_code)
         self.source_map_tester(code=code, expected_source_map=expected_source_map)
+
+    def test_undefined_list_access(self):
+        code = textwrap.dedent("""\
+        fortunes is you will slip on a banana peel, millionaire, death
+        print fortunes at dxd""")
+
+        self.multi_level_tester(code=code,
+                                exception=hedy.exceptions.UndefinedVarException,
+                                skip_faulty=False,
+                                max_level=11)

@@ -2,7 +2,8 @@ import textwrap
 
 import hedy
 from hedy_sourcemap import SourceRange
-from tests.Tester import HedyTester, SkippedMapping
+# from hedy_sourcemap import SourceRange
+from tests.Tester import HedyTester, SkippedMapping  # , SkippedMapping
 
 
 class TestsLevel3(HedyTester):
@@ -189,9 +190,24 @@ class TestsLevel3(HedyTester):
             raise Exception('catch_index_exception')
           time.sleep(int(n[int(1)-1]))
         except ValueError:
-          raise Exception(f'While running your program the command <span class=\"command-highlighted\">sleep</span> received the value <span class=\"command-highlighted\">{n[int(1)-1]}</span> which is not allowed. Try changing the value to a number.')""")
+          raise Exception('catch_value_exception')""")
 
         self.multi_level_tester(max_level=11, code=code, expected=expected)
+
+    def test_sleep_with_time_variable(self):
+        code = textwrap.dedent("""\
+            time is 10
+            sleep time""")
+
+        expected = HedyTester.dedent("""\
+            _time = '10'""",
+                                     HedyTester.sleep_command_transpiled('_time')
+                                     )
+
+        self.multi_level_tester(
+            code=code,
+            expected=expected,
+            max_level=11)
 
     def test_sleep_with_list_random(self):
         self.maxDiff = None
@@ -207,7 +223,7 @@ class TestsLevel3(HedyTester):
             raise Exception('catch_index_exception')
           time.sleep(int(random.choice(n)))
         except ValueError:
-          raise Exception(f'While running your program the command <span class=\"command-highlighted\">sleep</span> received the value <span class=\"command-highlighted\">{random.choice(n)}</span> which is not allowed. Try changing the value to a number.')""")
+          raise Exception('catch_value_exception')""")
 
         self.multi_level_tester(max_level=11, code=code, expected=expected)
 
@@ -242,7 +258,7 @@ class TestsLevel3(HedyTester):
         code = "dieren is Hond, Kat, Kangoeroe"
         expected = "dieren = ['Hond', 'Kat', 'Kangoeroe']"
 
-        self.multi_level_tester(max_level=11, code=code, expected=expected)
+        self.multi_level_tester(max_level=11, code=code, expected=expected, unused_allowed=True)
 
     def test_assign_list_to_hungarian_var(self):
         code = textwrap.dedent("""\
@@ -261,7 +277,7 @@ class TestsLevel3(HedyTester):
         code = "dieren is Hond , Kat , Kangoeroe"
         expected = "dieren = ['Hond ', 'Kat ', 'Kangoeroe']"
 
-        self.multi_level_tester(max_level=11, code=code, expected=expected)
+        self.multi_level_tester(max_level=11, code=code, expected=expected, unused_allowed=True)
 
     def test_assign_random_value(self):
         code = textwrap.dedent("""\
@@ -290,6 +306,7 @@ class TestsLevel3(HedyTester):
             code=code,
             expected=expected,
             lang='ar',
+            unused_allowed=True,
             # translation must be off because the Latin commas will be converted to arabic commas and this is correct
             translate=False
         )
@@ -301,6 +318,7 @@ class TestsLevel3(HedyTester):
         self.multi_level_tester(
             max_level=11,
             code=code,
+            unused_allowed=True,
             expected=expected,
             lang='ar'
         )
@@ -312,6 +330,7 @@ class TestsLevel3(HedyTester):
         self.multi_level_tester(
             max_level=11,
             code=code,
+            unused_allowed=True,
             expected=expected,
             lang='ar'
         )
@@ -375,7 +394,7 @@ class TestsLevel3(HedyTester):
         code = """dieren is Hond's, Kat"s, 'Kangoeroe', "Muis\""""
         expected = """dieren = ['Hond\\\'s', 'Kat"s', '\\\'Kangoeroe\\\'', '"Muis"']"""
 
-        self.multi_level_tester(max_level=11, code=code, expected=expected)
+        self.multi_level_tester(max_level=11, code=code, expected=expected, unused_allowed=True)
 
     #
     # forward tests
@@ -479,7 +498,7 @@ class TestsLevel3(HedyTester):
         print dieren ad random""")
 
         self.multi_level_tester(
-            max_level=11,
+            max_level=3,
             code=code,
             extra_check_function=lambda c: c.exception.arguments['line_number'] == 2,
             exception=hedy.exceptions.InvalidArgumentTypeException
@@ -671,6 +690,7 @@ class TestsLevel3(HedyTester):
         self.single_level_tester(
             code=code,
             expected=expected,
+            unused_allowed=True,
             skipped_mappings=skipped_mappings,
         )
 

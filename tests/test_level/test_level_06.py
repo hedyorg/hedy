@@ -26,7 +26,7 @@ class TestsLevel6(HedyTester):
         code = "antwoord = ask 'wat is je lievelingskleur?'"
         expected = "antwoord = input(f'wat is je lievelingskleur?')"
 
-        self.multi_level_tester(code=code, expected=expected, max_level=11)
+        self.multi_level_tester(code=code, expected=expected, max_level=11, unused_allowed=True)
 
     def test_ask_chained(self):
         code = textwrap.dedent("""\
@@ -64,7 +64,8 @@ class TestsLevel6(HedyTester):
         self.multi_level_tester(
             max_level=11,
             code=code,
-            expected=expected
+            expected=expected,
+            unused_allowed=True
         )
 
     def test_assign_with_equals_no_space(self):
@@ -74,6 +75,7 @@ class TestsLevel6(HedyTester):
         self.multi_level_tester(
             max_level=11,
             code=code,
+            unused_allowed=True,
             expected=expected
         )
 
@@ -84,6 +86,7 @@ class TestsLevel6(HedyTester):
         self.multi_level_tester(
             max_level=11,
             code=code,
+            unused_allowed=True,
             expected=expected
         )
 
@@ -274,7 +277,7 @@ class TestsLevel6(HedyTester):
         if convert_numerals('Latin', a) == convert_numerals('Latin', b):
           c = '1'""")
 
-        self.multi_level_tester(max_level=7, code=code, expected=expected)
+        self.multi_level_tester(max_level=7, code=code, expected=expected, unused_allowed=True)
 
     def test_if_equality_assign_calc(self):
         code = textwrap.dedent("""\
@@ -587,7 +590,7 @@ class TestsLevel6(HedyTester):
         code = "nummer is 4+5"
         expected = "nummer = int(4) + int(5)"
 
-        self.multi_level_tester(max_level=11, code=code, expected=expected)
+        self.multi_level_tester(max_level=11, code=code, expected=expected, unused_allowed=True)
 
     def test_print_calc_with_var(self):
         code = textwrap.dedent("""\
@@ -891,7 +894,7 @@ class TestsLevel6(HedyTester):
         drink = 'water'
         print(f'{drink}')""")
 
-        self.multi_level_tester(max_level=7, code=code, expected=expected, translate=False)
+        self.multi_level_tester(max_level=7, code=code, expected=expected, translate=False, unused_allowed=True)
 
     def test_consecutive_if_else_statements(self):
         code = textwrap.dedent("""\
@@ -947,13 +950,13 @@ class TestsLevel6(HedyTester):
         try:
           __trtl = int(__trtl)
         except ValueError:
-          raise Exception(f'While running your program the command <span class=\"command-highlighted\">turn</span> received the value <span class=\"command-highlighted\">{__trtl}</span> which is not allowed. Try changing the value to a number.')
+          raise Exception('catch_value_exception')
         t.right(min(600, __trtl) if __trtl > 0 else max(-600, __trtl))
         __trtl = int(10) + int(num)
         try:
           __trtl = int(__trtl)
         except ValueError:
-          raise Exception(f'While running your program the command <span class=\"command-highlighted\">forward</span> received the value <span class=\"command-highlighted\">{__trtl}</span> which is not allowed. Try changing the value to a number.')
+          raise Exception('catch_value_exception')
         t.forward(min(600, __trtl) if __trtl > 0 else max(-600, __trtl))
         time.sleep(0.1)""")
 

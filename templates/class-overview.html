@@ -10,10 +10,23 @@
     </script>
     {% endif %}
     <div class="flex flex-col gap-4">
-
+      <div id="survey" class="hidden"></div>
       {% if second_teacher %}<h1>{{_('role')}}: {{role}}</h1>{% endif %}
         <div class="flex flex-row items-center gap-2">
             <h1>{{ class_info.name }}</h1><span class="cursor-pointer" onclick='hedyApp.rename_class("{{class_info.id}}", {{_('class_name_prompt')|default(None)|tojson}})'>✏️</span>
+            {% if class_info.students|length > 0 %}
+              <h2 id="survey_status_button" class="flex ltr:ml-auto rtl:mr-auto">
+                {% if questions|length == 0 %}
+                  {{_('survey_completed')}} ✅
+                {% else %}
+                  <a class="cursor-pointer"
+                    hx-post="/for-teachers/load-survey/{{class_info.id}}"
+                    hx-target="#survey"
+                    hx-swap="outerHTML"
+                  >{{_('survey')}} {{total_questions - questions|length}}/{{total_questions}}</a>
+                {% endif %}
+              </h2>
+            {% endif %}
         </div>
       <div class="program w-full border-solid border-2 border-orange-400 rounded p-4">
           <table class="table-auto w-full text-sm">
@@ -132,7 +145,7 @@
             {% for invite in invites %}
                 <tr>
                     <td class="username_cell">{{invite.username}}</td>
-                    <td>{{invite.invited_as}}</td>
+                    <td>{{invite.invited_as_text}}</td>
                     <td>{{invite.timestamp}}</td>
                     <td>{{invite.expire_timestamp}}</td>
                     {% if not is_second_teacher %}<td class="remove_user_invitation text-center"><a href="#" onclick='hedyApp.remove_student_invite("{{invite.username}}", "{{ class_info.id }}", {{_('delete_invite_prompt')|default(None)|tojson}})'>🗑️</a></td>{% endif %}

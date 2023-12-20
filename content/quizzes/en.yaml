@@ -786,7 +786,7 @@ levels:
                     ```
                     {print} 'So you pick ' door door
                     ```
-                feedback: If the player chooses door 3, Hedy will say 'So you pick 3 3
+                feedback: If the player chooses door 3, Hedy will say 'So you pick 3 3'
             -   option: |-
                     ```
                     {print} 'So you pick door ' door
@@ -796,7 +796,7 @@ levels:
                     ```
                     {print} 'So you pick door door'
                     ```
-                feedback: Hedy will literally print 'So you pick door door
+                feedback: Hedy will literally print 'So you pick door door'
             hint: The second word door should be replaced with the number, the first should still be the word door...
             correct_answer: C
             question_score: '10'
@@ -881,7 +881,7 @@ levels:
             -   option: Correct!
                 feedback: This is printed when you type in the correct password
             -   option: SECRET
-                feedback: That's right!'
+                feedback: That's right!
             -   option: password
                 feedback: The password isn't password...
             -   option: ALARM INTRUDER
@@ -1079,7 +1079,7 @@ levels:
             -   option: '30'
                 feedback: This would be the right answer if there were no quotation marks.
             -   option: '13'
-                feedback: Try again..
+                feedback: Try again…
             -   option: 3*10
                 feedback: Correct! There are quotation marks, so Hedy will print it literally.
             -   option: Nothing, Hedy will give an error message.
@@ -1153,7 +1153,7 @@ levels:
                 price = 0
                 {if} food {is} hamburger price = price + 15
                 {if} food {is} fries price = price + 6
-                drinks is {ask} 'What would you like to drink?'
+                drinks = {ask} 'What would you like to drink?'
                 {if} drinks {is} coke price = price + 3
                 {if} drinks {is} water price = price + 1
                 {print} price ' dollars please'
@@ -1230,7 +1230,7 @@ levels:
             question_score: '10'
     7:
         1:
-            question_text: How many lines can you repeat at once with the repeat command at this level?
+            question_text: How many lines can you repeat at once with the `{repeat}` command at this level?
             mp_choice_options:
             -   option: '0'
                 feedback: No you can repeat a line.
@@ -1290,10 +1290,7 @@ levels:
                 {print} 'I'm blue'
                 {repeat} 7 {times} {print} 'da ba dee, da ba da'
             mp_choice_options:
-            -   option: |-
-                    ```
-                    I'm
-                    ```
+            -   option: '`I''m`'
                 feedback: That's right!
             -   option: '`{print}`'
                 feedback: '`{print}` is spelled correctly'
@@ -1322,28 +1319,36 @@ levels:
                 {repeat} 3 {times} {print} ' round and round'
             mp_choice_options:
             -   option: |-
+                    ```
                     the wheels on the bus go
                     round and round
+                    ```
                 feedback: Only the second line is repeated 3 times
             -   option: |-
+                    ```
                     the wheels on the bus go
                     the wheels on the bus go
                     the wheels on the bus go
                     round and round
+                    ```
                 feedback: Only the second line is repeated 3 times
             -   option: |-
+                    ```
                     the wheels on the bus go
                     round and round
                     the wheels on the bus go
                     round and round
                     the wheels on the bus go
                     round and round
+                    ```
                 feedback: Only the second line is repeated 3 times
             -   option: |-
+                    ```
                     the wheels on the bus go
                     round and round
                     round and round
                     round and round
+                    ```
                 feedback: All through the town! Perfect!
             hint: Only 'round and round' is repeated 3 times.
             correct_answer: D
@@ -1355,24 +1360,32 @@ levels:
                 {print} 'ROCK YOU!'
             mp_choice_options:
             -   option: |-
+                    ```
                     We will We will
                     ROCK YOU!
+                    ```
                 feedback: '''We will'' won''t appear twice in the same line'
             -   option: |-
+                    ```
                     We will
                     We will
                     ROCK YOU!
+                    ```
                 feedback: Great!
             -   option: |-
+                    ```
                     We will
                     ROCK YOU!
                     We will
                     ROCK YOU!
+                    ```
                 feedback: ROCK YOU! won't be repeated
             -   option: |-
+                    ```
                     We will
                     ROCK YOU!
-                feedback: Mind the repeat command
+                    ```
+                feedback: Mind the `{repeat}` command
             hint: Mind the `{repeat}` command.
             correct_answer: B
             question_score: '10'
@@ -1399,6 +1412,7 @@ levels:
                     {repeat} 2 {times} {print} 'Here comes the sun'
                     {print} 'And I say'
                     {print} 'Its alright'
+                    ```
                 feedback: Where did you leave 'Do do do do'?
             -   option: |-
                     ```
@@ -1407,7 +1421,7 @@ levels:
                     {print} 'And I say'
                     {print} 'Its alright'
                     ```
-                feedback: This is not the correct order..
+                feedback: This is not the correct order.
             -   option: |-
                     ```
                     {repeat} 2 {times} {print} 'Here comes the sun'
@@ -1415,7 +1429,7 @@ levels:
                     {print} 'And I say'
                     {print} 'Its alright'
                     ```
-                feedback: This is not the correct order..
+                feedback: This is not the correct order.
             hint: '`{repeat}` can only be used if you want to execute the same line multiple times in a row.'
             correct_answer: A
             question_score: '10'
@@ -1432,7 +1446,7 @@ levels:
             -   option: |-
                     ```
                     {print} 'Batman was flying through Gotham. '
-                    {print} 'When suddenly he heard someone screaming!'
+                    {print} 'When suddenly he heard someone screaming…'
                     {print} 'Help!'
                     {repeat} 3 {times} {print} 'Please help me!'
                     ```
@@ -1440,7 +1454,7 @@ levels:
             -   option: |-
                     ```
                     {print} 'Batman was flying through Gotham.'
-                    {print} 'When suddenly he heard someone screaming!'
+                    {print} 'When suddenly he heard someone screaming…'
                     {repeat} 3 {times} 'Help!'
                     {print} 'Please help me!'
                     ```
@@ -1448,7 +1462,7 @@ levels:
             -   option: |-
                     ```
                     {print} Batman was flying through Gotham.
-                    {print} When suddenly he heard someone screaming!
+                    {print} When suddenly he heard someone screaming…
                     {repeat} 3 {times} {print} Help!
                     {print} Please help me!
                     ```
@@ -1456,7 +1470,7 @@ levels:
             -   option: |-
                     ```
                     {print} 'Batman was flying through Gotham.'
-                    {print} 'When suddenly he heard someone screaming!'
+                    {print} 'When suddenly he heard someone screaming…'
                     {repeat} 3 {times} {print} 'Help!'
                     {print} 'Please help me!'
                     ```
@@ -1582,7 +1596,7 @@ levels:
                     Baby shark
                     Baby shark
                     Baby shark
-                feedback: What is being repeated and what isn't.
+                feedback: What is being repeated and what isn't ?
             hint: What is being repeated and what is not?
             correct_answer: C
             question_score: '10'

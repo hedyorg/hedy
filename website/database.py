@@ -41,11 +41,12 @@ CLASSES = dynamo.Table(storage, "classes", "id", indexes=[
 # - date (int): timestamp of last update
 # - level (int | str): level number, sometimes as an int, sometimes as a str
 # - name (str): adventure name
-# - public (bool): whether it can be shared
+# - public (int): 1 or 0 whether it can be shared
 # - tags_id (str): id of tags that describe this adventure.
 ADVENTURES = dynamo.Table(storage, "adventures", "id", indexes=[dynamo.Index("creator"), dynamo.Index("public")])
 INVITATIONS = dynamo.Table(
-    storage, "class_invitations", partition_key="username", indexes=[dynamo.Index("class_id")]
+    storage, "invitations", partition_key="username#class_id",
+    indexes=[dynamo.Index("username"), dynamo.Index("class_id")],
 )
 
 """
@@ -56,6 +57,13 @@ INVITATIONS = dynamo.Table(
     - popularity (int): # of adventures it's been tagged in.
 """
 TAGS = dynamo.Table(storage, "tags", "id", indexes=[dynamo.Index("name", sort_key="popularity")])
+
+# A survey
+# - id (str): the identifier of the survey + the response identifier ex. "class_teacher1" or "students_student1"
+# - responses (str []): the response per question
+# - skip (str): if the survey should never be shown or today date to be reminded later
+
+SURVEYS = dynamo.Table(storage, "surveys", "id")
 
 # Class customizations
 #
@@ -365,14 +373,17 @@ class Database:
         """Forget the given user."""
         classes = USERS.get({"username": username}).get("classes") or []
         USERS.delete({"username": username})
-        INVITATIONS.delete({"username": username})
         # The recover password token may exist, so we delete it
         TOKENS.delete({"id": username})
         PROGRAMS.del_many({"username": username})
-
         # Remove user from classes of which they are a student
         for class_id in classes:
             self.remove_student_from_class(class_id, username)
+
+        # Remove existing invitations.
+        invitations = self.get_user_invitations(username)
+        for invite in invitations:
+            self.remove_user_class_invite(username, invite["class_id"])
 
         # Delete classes owned by the user
         for Class in self.get_teacher_classes(username, False):
@@ -585,6 +596,9 @@ class Database:
         keys = {id: {"id": id} for id in adventure_ids}
         return ADVENTURES.batch_get(keys) if keys else {}
 
+    def get_public_adventures(self):
+        return ADVENTURES.get_many({"public": 1})
+
     def delete_adventure(self, adventure_id):
         ADVENTURES.delete({"id": adventure_id})
 
@@ -603,6 +617,15 @@ class Database:
 
     def read_tags(self, tags):
         return [self.read_tag(name) for name in tags]
+
+    def read_public_tags(self):
+        """Public tags are tagged within one or more public adventure or those that aren't in use."""
+        all_tags = TAGS.scan()
+        public_tags = []
+        for tag in all_tags:
+            if not tag["tagged_in"] or any([adv["public"] for adv in tag["tagged_in"]]):
+                public_tags.append(tag)
+        return public_tags
 
     def read_tags_by_username(self, username):
         tags = TAGS.get_many({"creator": username})
@@ -638,6 +661,9 @@ class Database:
     def all_adventures(self):
         return ADVENTURES.scan()
 
+    def public_adventures(self):
+        return ADVENTURES.get_many({"public": 1})
+
     def get_student_classes_ids(self, username):
         ids = USERS.get({"username": username}).get("classes")
         return list(ids) if ids else []
@@ -662,6 +688,21 @@ class Database:
     def update_class_data(self, id, class_data):
         """Updates a class."""
         CLASSES.update({"id": id}, class_data)
+
+    def store_survey(self, survey):
+        SURVEYS.create(survey)
+
+    def get_survey(self, id):
+        return SURVEYS.get({"id": id})
+
+    def add_survey_responses(self, id, responses):
+        SURVEYS.update({"id": id}, {"responses":  responses})
+
+    def add_skip_survey(self, id):
+        SURVEYS.update({"id": id}, {"skip": True})
+
+    def add_remind_later_survey(self, id):
+        SURVEYS.update({"id": id}, {"skip": date.today().isoformat()})
 
     def add_student_to_class(self, class_id, student_id):
         """Adds a student to a class."""
@@ -706,16 +747,20 @@ class Database:
     def resolve_class_link(self, link_id):
         return CLASSES.get({"link": link_id})
 
-    def get_username_invite(self, username):
-        return INVITATIONS.get({"username": username}) or None
+    def get_user_class_invite(self, username, class_id):
+        return INVITATIONS.get({"username#class_id": f"{username}#{class_id}"}) or None
 
     def add_class_invite(self, data):
+        data['username#class_id'] = data['username'] + '#' + data['class_id']
         INVITATIONS.put(data)
 
-    def remove_class_invite(self, username):
-        INVITATIONS.delete({"username": username})
+    def remove_user_class_invite(self, username, class_id):
+        return INVITATIONS.delete({"username#class_id": f"{username}#{class_id}"})
 
-    def get_class_invites(self, class_id):
+    def get_user_invitations(self, username):
+        return INVITATIONS.get_many({"username": username}) or []
+
+    def get_class_invitations(self, class_id):
         return INVITATIONS.get_many({"class_id": class_id}) or []
 
     def all_classes(self):
@@ -731,16 +776,23 @@ class Database:
         customizations = CUSTOMIZATIONS.get({"id": class_id})
         return customizations
 
-    def get_student_class_customizations(self, user):
+    def get_student_class_customizations(self, user, class_to_preview=None):
         """Return customizations for the very first class this user is part of.
 
         If the user is part of multiple classes, they will only get the customizations
         of the first class.
+
+        Class_to_preview is a mode for teachers to preview a custom class that they own.
         """
         student_classes = self.get_student_classes(user)
         if student_classes:
             class_customizations = self.get_class_customizations(student_classes[0]["id"])
             return class_customizations or {}
+        elif class_to_preview:
+            for Class in self.get_teacher_classes(user):
+                if class_to_preview == Class["id"]:
+                    class_customizations = self.get_class_customizations(class_to_preview)
+                    return class_customizations or {}
         return {}
 
     def progress_by_username(self, username):

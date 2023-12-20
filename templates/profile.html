@@ -11,25 +11,30 @@
    {% endif %}
    <h2 class="mx-4 lg:mx-16 px-2 mb-4">{{_('account_overview')}}</h2>
    <div class="flex flex-col gap-4 mx-4 lg:mx-16">
-       {% if invite_data %}
+       {% if invitations %}
            <h1 class="section-header" id="my-messages" onclick="$ ('#messages').toggle()">{{_('my_messages')}}</h1>
            <div id="messages" class="profile-section-body" style="display: block;">
              <h2 class="profile-section-body-header">{{_('my_messages')}}</h2>
-             {% if invite_data %}
-                 <div>
+             {% for invite_data in invitations %}
+                 <div class="[&:not(:last-child)]:mb-4" id="invitation_{{loop.index}}">
                      {{_('invite_message')}} "<span class="font-bold italic">{{ invite_data['class_name'] }}</span>".<br>
                      {{_('sent_by')}} "<span class="font-bold italic">{{ invite_data['teacher'] }}</span>". {{_('prompt_join_class')}}
                      <div class="flex flex-row mt-4">
                             <button type="reset" class="green-btn" id="join" 
                                 hx-post="/class/join/{{invite_data['class_id']}}"
                                 hx-swap="none"
-                                _="on htmx:afterRequest if detail.xhr.status == '302' then set window.location.pathname to {% if is_teacher %}'/for-teachers'{% else %}'/programs'{% endif %} 
-                                    else hide #messages end"
+                                _="on htmx:afterRequest
+                                    if detail.xhr.status == '302'
+                                        set window.location.pathname to {% if is_teacher %}'/for-teachers'{% else %}'/programs'{% endif %} 
+                                    else if detail.xhr.status == '200'
+                                         hide #messages
+                                         remove #invitation_{{loop.index}}
+                                    end"
                                 >{{_('join_class')}}</button>
                             <button type="submit" class="red-btn mx-4 px-4" onclick="hedyApp.remove_student_invite('{{user_data['username']}}', '{{invite_data['class_id']}}', '{{_('delete_invite_prompt')}}')">{{_('delete_invite')}}</button>
                     </div>
                  </div>
-             {% endif %}
+             {% endfor %}
            </div>
        {% endif %}
        <h1 class="section-header" onclick="$ ('#public_profile_body').toggle()">{{_('public_profile')}}</h1>
