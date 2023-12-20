@@ -10,10 +10,23 @@
     </script>
     {% endif %}
     <div class="flex flex-col gap-4">
-
+      <div id="survey" class="hidden"></div>
       {% if second_teacher %}<h1>{{_('role')}}: {{role}}</h1>{% endif %}
         <div class="flex flex-row items-center gap-2">
             <h1>{{ class_info.name }}</h1><span class="cursor-pointer" onclick='hedyApp.rename_class("{{class_info.id}}", {{_('class_name_prompt')|default(None)|tojson}})'>✏️</span>
+            {% if class_info.students|length > 0 %}
+              <h2 id="survey_status_button" class="flex ltr:ml-auto rtl:mr-auto">
+                {% if questions|length == 0 %}
+                  {{_('survey_completed')}} ✅
+                {% else %}
+                  <a class="cursor-pointer"
+                    hx-post="/for-teachers/load-survey/{{class_info.id}}"
+                    hx-target="#survey"
+                    hx-swap="outerHTML"
+                  >{{_('survey')}} {{total_questions - questions|length}}/{{total_questions}}</a>
+                {% endif %}
+              </h2>
+            {% endif %}
         </div>
       <div class="program w-full border-solid border-2 border-orange-400 rounded p-4">
           <table class="table-auto w-full text-sm">
@@ -144,8 +157,5 @@
         </div>
       {% endif %}
     </div>
-    {% if survey_id and description and questions and survey_later %}
-      {{ render_partial('htmx-survey.html', survey_id=survey_id, description=description, questions=questions, survey_later=survey_later) }}
-    {% endif %}
 </div>
 {% endblock %}
