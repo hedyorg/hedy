@@ -1,8 +1,6 @@
 import { HedyEditor, EditorType, HedyEditorCreator, EditorEvent, SourceRange } from "./editor";
-import {
-    EditorView, ViewUpdate, drawSelection, dropCursor, highlightActiveLine,
-    highlightActiveLineGutter, highlightSpecialChars, keymap, lineNumbers
-} from '@codemirror/view'
+import { EditorView, ViewUpdate, drawSelection, dropCursor, highlightActiveLine,
+        highlightActiveLineGutter, highlightSpecialChars, keymap, lineNumbers } from '@codemirror/view'
 import { EditorState, Compartment, StateEffect, Prec } from '@codemirror/state'
 import { EventEmitter } from "./event-emitter";
 import { deleteTrailingWhitespace, defaultKeymap, historyKeymap, indentWithTab } from '@codemirror/commands'
@@ -85,7 +83,6 @@ export class HedyCodeMirrorEditor implements HedyEditor {
 
             const mainEditorStyling = EditorView.theme({
                 "&": {
-                    height: "22rem",
                     background: '#272822',
                     fontSize: '15.2px',
                     color: 'white',
@@ -159,18 +156,6 @@ export class HedyCodeMirrorEditor implements HedyEditor {
             state: state
         });
 
-        if (editorType === EditorType.MAIN) {
-            // Size the editor depending on the height of its parent
-            this.view.requestMeasure({
-                read: () => {
-                    return document.getElementById('editor')!.offsetHeight
-                },
-                write(measure, view) {
-                    view.dom.style.height = `${measure}px`;
-                },
-            })
-        }
-
         if (theLevel) {
             this.setHighlighterForLevel(theLevel);
         }
@@ -178,7 +163,7 @@ export class HedyCodeMirrorEditor implements HedyEditor {
 
     /**
     * Set the highlither rules for a particular level
-    * @param level      
+    * @param level
     */
     setHighlighterForLevel(level: number): void {
         const language = languagePerLevel[level];
@@ -234,7 +219,7 @@ export class HedyCodeMirrorEditor implements HedyEditor {
         this.view.dispatch(transaction);
     }
 
-    /**     
+    /**
      * @returns if the editor is set to read-only mode
      */
     public get isReadOnly(): boolean {
@@ -251,14 +236,14 @@ export class HedyCodeMirrorEditor implements HedyEditor {
     }
 
     /**
-     * Resizes the editor after changing its size programatically
+     * Resizes the editor after changing its size programatically (provide size in rem)
      */
-    resize(newHeight?: number): void {
-        if (newHeight === undefined) {
+    resize(newHeightRem?: number): void {
+        if (newHeightRem === undefined) {
             console.log('Error! When resizing a CodeMirror instance, you need to provide the new height');
             return;
         }
-        this.view.dom.style.height = `${newHeight}px`;
+        console.warn('Oops! editor.resize() should not have been called anymore');
     }
 
     /**
@@ -276,7 +261,7 @@ export class HedyCodeMirrorEditor implements HedyEditor {
         this.view.dispatch({ effects: effect });
     }
 
-    /**     
+    /**
      * Moves to the cursor to the end of the current file
      */
     moveCursorToEndOfFile(): void {
@@ -348,7 +333,7 @@ export class HedyCodeMirrorEditor implements HedyEditor {
      * If 'col' is not given, the entire line will be highlighted red. Otherwise
      * the character at 'col' will be highlighted, optionally extending for
      * 'length' characters, unless the length of the string to highlight is 0.
-     * 
+     *
      * If that's the case, highlight the whole line
      *
      * 'row' and 'col' are 1-based.
@@ -455,7 +440,7 @@ export class HedyCodeMirrorEditor implements HedyEditor {
     /**
      * Returns index of the error in the source map for this position
      * null if there's no error here
-     * @param pos      
+     * @param pos
      */
     indexOfErrorInPos(pos: number): number | null {
         const incorrectLineSet = this.view.state.field(incorrectLineField);

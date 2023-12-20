@@ -19,7 +19,7 @@
                 {% elif adventure.is_command_adventure %}
                     {{ adventure_tab(adventure.short_name, adventure.name, adventure.short_name == initial_tab, 'adventure' + loop.index|string, 'command_tab', loop.index ) }}
                 {% else %}
-                    {{ adventure_tab(adventure.short_name, adventure.name, adventure.short_name == initial_tab, 'adventure' + loop.index|string, '', loop.index) }}                    
+                    {{ adventure_tab(adventure.short_name, adventure.name, adventure.short_name == initial_tab, 'adventure' + loop.index|string, '', loop.index) }}
                 {% endif %}
             {% endfor %}
             <!-- Add the tab for the parsons problem (if it exists) -->
@@ -33,7 +33,7 @@
         </div>
       </div>
       {# PANES #}
-      <div id="adventures-tab" class="w-full overflow-auto bg-white mb-8 shadow-md">
+      <div id="adventures-tab" class="w-full overflow-auto bg-white mb-5 shadow-md">
         {% for adventure in adventures %}
             <div
                 data-tabtarget="{{adventure.short_name}}" class="
