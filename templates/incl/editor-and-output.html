@@ -32,7 +32,7 @@
           class="w-full flex-1 text-lg rounded min-h-0 overflow-hidden fixed-editor-height"></div>
         <div id="parsons_code_container" class="w-full flex flex-col mx-auto gap-2 items-center hover:cursor" style="display: none;">
             {% for i in range(1, 11) %}
-                <div class="turn-pre-into-ace relative w-full p-2 border-4 border-black rounded-lg parsons_goal_line_container cursor-grab" style="background-color: #272822;" id="parsons_goal_line_container_{{ i }}">
+                <div class="relative w-full p-2 border-4 border-black rounded-lg parsons_goal_line_container cursor-grab" style="background-color: #272822;" id="parsons_goal_line_container_{{ i }}">
                     <div index="-" draggable="true" code="" class="compiler-parsons-box w-full absolute inset-0 z-10 rounded-lg"></div>
                     <pre level="{{ level }}" id="goal_parsons_{{ i }}" class="goal_parsons parsons text-sm m-0"></pre>
                 </div>
@@ -303,17 +303,17 @@ document.addEventListener('DOMContentLoaded', (event) => {
 
          if (dragSrcEl !== this) {
              // Now it gets complex: also update both ace editors
-             let start_ace = ace.edit(dragSrcEl.parentNode.childNodes[3].getAttribute('id'));
-             let goal_ace = ace.edit(this.parentNode.childNodes[3].getAttribute('id'));
+            //  let start_ace = ace.edit(dragSrcEl.parentNode.childNodes[3].getAttribute('id'));
+            //  let goal_ace = ace.edit(this.parentNode.childNodes[3].getAttribute('id'));
 
-             start_ace.session.setValue(this.getAttribute('code').replace(/\n+$/, ''), -1);
-             goal_ace.session.setValue(e.dataTransfer.getData('code').replace(/\n+$/, ''), -1);
+            //  start_ace.session.setValue(this.getAttribute('code').replace(/\n+$/, ''), -1);
+            //  goal_ace.session.setValue(e.dataTransfer.getData('code').replace(/\n+$/, ''), -1);
 
-             dragSrcEl.setAttribute('index', this.getAttribute('index'));
-             dragSrcEl.setAttribute('code', this.getAttribute('code'));
+            //  dragSrcEl.setAttribute('index', this.getAttribute('index'));
+            //  dragSrcEl.setAttribute('code', this.getAttribute('code'));
 
-             this.setAttribute('index', e.dataTransfer.getData('text/plain'));
-             this.setAttribute('code', e.dataTransfer.getData('code'));
+            //  this.setAttribute('index', e.dataTransfer.getData('text/plain'));
+            //  this.setAttribute('code', e.dataTransfer.getData('code'));
          }
          return false;
      }

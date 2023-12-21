@@ -134,13 +134,18 @@ export class HedyCodeMirrorEditor implements HedyEditor {
                 ]
             });
         } else {
+            let theme: Record<string, any> = {
+                ".cm-cursor, .cm-dropCursor": { border: "none"}
+            }
+
+            if (editorType !== EditorType.PARSONS) {
+                theme[".cm-scroller"] = { "overflow": "auto", "min-height": "3.5rem" }
+            }
+
             state = EditorState.create({
                 doc: '',
                 extensions: [
-                    EditorView.theme({
-                        ".cm-cursor, .cm-dropCursor": { border: "none"},
-                        ".cm-scroller": { "overflow": "auto", "min-height": "3.5rem" }
-                    }),
+                    EditorView.theme(theme),
                     highlightSpecialChars(),
                     drawSelection(),
                     syntaxHighlighting(defaultHighlightStyle, { fallback: true }),

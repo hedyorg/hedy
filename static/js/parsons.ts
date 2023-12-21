@@ -1,5 +1,7 @@
 import {modal} from "./modal";
 import {stopit} from "./app";
+import { HedyEditor } from "./editor";
+import { HedyCodeMirrorEditor, HedyCodeMirrorEditorCreator } from "./cm-editor";
 
 interface ParsonsExercise {
     readonly story: number;
@@ -40,7 +42,7 @@ function resetView() {
     $('.compiler-parsons-box').attr('index', '-');
     $('.compiler-parsons-box').attr('code', '');
     $( ".goal_parsons" ).each(function(  ) {
-        ace.edit($(this).attr('id')).setValue('');
+       //  ace.edit($(this).attr('id')).setValue('');
     });
 }
 
@@ -51,7 +53,8 @@ function updateHeader(exercise: number) {
     $('#parsons_header_text_' + exercise).show();
     $('#parsons_header_' + exercise).addClass('current');
 }
-
+let startEditorDict: Record<number, HedyEditor> = {}
+let goalEditorDict: Record<number, HedyEditor> = {}
 function showExercise(response: ParsonsExercise) {
     const code_lines = parse_code_string_into_dict(response.code);
     let keys = Object.keys(code_lines);
@@ -66,10 +69,10 @@ function showExercise(response: ParsonsExercise) {
         const valueObj = code_lines[key];   
         const counter = i + 1;     
         // Temp output to console to make sure TypeScript compiles
-        ace.edit('start_parsons_' + counter).session.setValue(valueObj.replace(/\n+$/, ''), -1);
+        const startEditor = startEditorDict[i + 1];
+        startEditor.contents = valueObj;
         $('#start_parsons_div_' + counter).attr('index', key);
         $('#start_parsons_div_' + counter).attr('code', valueObj);
-        ace.edit('goal_parsons_' + counter).session.setValue("");
 
         $('#parsons_start_line_container_' + counter).show();
         $('#parsons_goal_line_container_' + counter).show();
@@ -112,4 +115,19 @@ function fisherYatesShuffle<A>(xs: A[]) {
         xs[j] = xs[i];
         xs[i] = h;
     }
+}
+
+export function initializeParsons() {
+    const parsonContainers = document.querySelectorAll('#parsons_code_lines > div > pre');
+    const editorCreator = new HedyCodeMirrorEditorCreator();
+    parsonContainers.forEach((container, i) => {
+        const editor = editorCreator.initializeReadOnlyEditor(container as HTMLElement, 'ltr');
+        startEditorDict[i + 1] = editor;
+    })
+
+    const parsonCodeContainers = document.querySelectorAll('#parsons_code_container > div > pre');    
+    parsonCodeContainers.forEach((container, i) => {
+        const editor = editorCreator.initializeReadOnlyEditor(container as HTMLElement, 'ltr');
+        goalEditorDict[i + 1] = editor;
+    })
 }

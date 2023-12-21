@@ -7,7 +7,7 @@ import { MessageKey } from './message-translations';
 import { turtle_prefix, pygame_prefix, normal_prefix } from './pythonPrefixes'
 import { Achievement, Adventure, isServerSaveInfo, ServerSaveInfo } from './types';
 import { startIntroTutorial } from './tutorials/tutorial';
-import { loadParsonsExercise } from './parsons';
+import { initializeParsons, loadParsonsExercise } from './parsons';
 import { checkNow, onElementBecomesVisible } from './browser-helpers/on-element-becomes-visible';
 import { incrementDebugLine, initializeDebugger, load_variables, startDebug } from './debugging';
 import { localDelete, localLoad, localSave } from './local';
@@ -18,6 +18,7 @@ import { HedyEditor, EditorType } from './editor';
 import { stopDebug } from "./debugging";
 import { HedyCodeMirrorEditorCreator } from './cm-editor';
 import { initializeTranslation } from './lezer-parsers/tokens';
+import { HedyAceEditorCreator } from './ace-editor';
 
 export let theGlobalDebugger: any;
 export let theGlobalEditor: HedyEditor;
@@ -382,7 +383,7 @@ export function initializeHighlightedCodeBlocks(where: Element) {
         const exampleEditor = editorCreator.initializeReadOnlyEditor(preview, dir);
         // Strip trailing newline, it renders better
         exampleEditor.contents = code?.innerText || "";
-        exampleEditor.contents = exampleEditor.contents.trimRight();
+        exampleEditor.contents = exampleEditor.contents.trimEnd();
         // And add an overlay button to the editor if requested via a show-copy-button class, either
         // on the <pre> itself OR on the element that has the '.turn-pre-into-ace' class.
         if ($(preview).hasClass('show-copy-button') || $(container).hasClass('show-copy-button')) {
@@ -408,6 +409,7 @@ export function initializeHighlightedCodeBlocks(where: Element) {
       });
     }
   }
+  initializeParsons();
 }
 
 export function getHighlighter(level: number) {
