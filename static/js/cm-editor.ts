@@ -1,7 +1,7 @@
 import { HedyEditor, EditorType, HedyEditorCreator, EditorEvent, SourceRange } from "./editor";
 import { EditorView, ViewUpdate, drawSelection, dropCursor, highlightActiveLine,
         highlightActiveLineGutter, highlightSpecialChars, keymap, lineNumbers } from '@codemirror/view'
-import { EditorState, Compartment, StateEffect, Prec } from '@codemirror/state'
+import { EditorState, Compartment, StateEffect, Prec, Extension } from '@codemirror/state'
 import { EventEmitter } from "./event-emitter";
 import { deleteTrailingWhitespace, defaultKeymap, historyKeymap, indentWithTab } from '@codemirror/commands'
 import { history } from "@codemirror/commands"
@@ -133,28 +133,50 @@ export class HedyCodeMirrorEditor implements HedyEditor {
                     placeholders
                 ]
             });
-        } else {
+        } else { // the editor is a read only editor
             let theme: Record<string, any> = {
                 ".cm-cursor, .cm-dropCursor": { border: "none"}
             }
+            // base set of extensions for every type of read-only editor
+            let extensions: Extension[] = [
+                highlightSpecialChars(),
+                drawSelection(),
+                syntaxHighlighting(defaultHighlightStyle, { fallback: true }),
+                monokai,
+                this.readMode.of(EditorState.readOnly.of(isReadOnly)),
+                placeholders
+            ];
 
-            if (editorType !== EditorType.PARSONS) {
-                theme[".cm-scroller"] = { "overflow": "auto", "min-height": "3.5rem" }
+            switch(editorType) {
+                case EditorType.CHEATSHEET:
+                case EditorType.EXAMPLE:
+                    extensions.push(EditorView.theme(theme));
+                    break;
+                case EditorType.PARSONS:
+                    theme[".cm-scroller"] = { "overflow": "auto", "min-height": "3.5rem" }
+                    extensions.push(EditorView.theme(theme));
+                    break;
+                case EditorType.COMMON_MISTAKES: 
+                    theme["&"] = {
+                        background: '#272822',
+                        fontSize: '15.2px',
+                        color: 'white',
+                        borderRadius: '4px',
+                        marginRight: '5px'
+                    }                
+                    extensions.push([
+                        EditorView.theme(theme),
+                        lineNumbers(),
+                        highlightActiveLine(),
+                        highlightActiveLineGutter()
+                    ]);
+                    break;
             }
-
+            
             state = EditorState.create({
                 doc: '',
-                extensions: [
-                    EditorView.theme(theme),
-                    highlightSpecialChars(),
-                    drawSelection(),
-                    syntaxHighlighting(defaultHighlightStyle, { fallback: true }),
-                    monokai,
-                    this.readMode.of(EditorState.readOnly.of(isReadOnly)),
-                    placeholders
-                ]
+                extensions: extensions
             });
-
         }
 
         this.view = new EditorView({
