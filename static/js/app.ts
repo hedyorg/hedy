@@ -2143,10 +2143,11 @@ function change_shared (shared: boolean, index: number) {
 }
 
 export function goToLevel(level: any) {
-  window.location.hash = '' // the hash will be set to the first adventure.
-  let newPath = window.location.pathname.replace(/\d+/, level);
+  const hash = window.location.hash
+  let newPath = window.location.pathname.replace(/\/\d+/, `/${level}`);
   if (!newPath.includes(level)) {
     newPath = window.location.pathname + `/${level}`
   }
   window.location.pathname = newPath
+  window.location.hash = hash
 }
