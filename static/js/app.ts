@@ -365,6 +365,12 @@ export function initializeViewProgramPage(options: InitializeViewProgramPageOpti
 export function initializeHighlightedCodeBlocks(where: Element) {
   const dir = $("body").attr("dir");
   initializeParsons();
+  if (theLevel) {
+    initializeTranslation({
+      keywordLanguage: theKeywordLanguage,
+      level: theLevel
+    })
+  }
   // Any code blocks we find inside 'turn-pre-into-ace' get turned into
   // read-only editors (for syntax highlighting)
   for (const container of $(where).find('.turn-pre-into-ace').get()) {
