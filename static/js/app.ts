@@ -410,9 +410,13 @@ export function initializeHighlightedCodeBlocks(where: Element) {
             clearOutput();
           });
         }
-
         const levelStr = $(preview).attr('level');
-        if (levelStr) {
+        const lang = $(preview).attr('lang');
+        if (levelStr && lang) {
+          initializeTranslation({
+            keywordLanguage: lang,
+            level: parseInt(levelStr, 10),
+          })
           exampleEditor.setHighlighterForLevel(parseInt(levelStr, 10));
         }
       });
