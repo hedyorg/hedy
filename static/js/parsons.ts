@@ -1,7 +1,8 @@
 import {modal} from "./modal";
-import {stopit} from "./app";
+import {stopit, store_parsons_attempt} from "./app";
 import { HedyEditor } from "./editor";
-import { HedyCodeMirrorEditor, HedyCodeMirrorEditorCreator } from "./cm-editor";
+import { HedyCodeMirrorEditorCreator } from "./cm-editor";
+import Sortable from "sortablejs";
 
 interface ParsonsExercise {
     readonly story: number;
@@ -37,13 +38,12 @@ export function loadParsonsExercise(level: number, exercise: number) {
 
 function resetView() {
     stopit();
+    // Initialize in case it hasn't been initialized before
+    if (Object.keys(editorDict).length === 0) {
+        initializeParsons();
+    }
     $('#output').empty();
     $('.parsons_goal_line_container').removeClass('border-green-500 border-red-500');
-    $('.compiler-parsons-box').attr('index', '-');
-    $('.compiler-parsons-box').attr('code', '');
-    $( ".goal_parsons" ).each(function(  ) {
-       //  ace.edit($(this).attr('id')).setValue('');
-    });
 }
 
 function updateHeader(exercise: number) {
@@ -53,8 +53,7 @@ function updateHeader(exercise: number) {
     $('#parsons_header_text_' + exercise).show();
     $('#parsons_header_' + exercise).addClass('current');
 }
-let startEditorDict: Record<number, HedyEditor> = {}
-let goalEditorDict: Record<number, HedyEditor> = {}
+let editorDict: Record<number, HedyEditor> = {}
 function showExercise(response: ParsonsExercise) {
     const code_lines = parse_code_string_into_dict(response.code);
     let keys = Object.keys(code_lines);
@@ -66,16 +65,24 @@ function showExercise(response: ParsonsExercise) {
     fisherYatesShuffle(keys);
 
     keys.forEach((key, i) => {
-        const valueObj = code_lines[key];   
-        const counter = i + 1;     
+        const valueObj = code_lines[key];
+        const counter = i + 1;
         // Temp output to console to make sure TypeScript compiles
-        const startEditor = startEditorDict[i + 1];
-        startEditor.contents = valueObj;
-        $('#start_parsons_div_' + counter).attr('index', key);
-        $('#start_parsons_div_' + counter).attr('code', valueObj);
+        const goalEditor = editorDict[i + 1];
+        goalEditor.contents = valueObj;
 
-        $('#parsons_start_line_container_' + counter).show();
-        $('#parsons_goal_line_container_' + counter).show();
+        document.getElementById('parsons_line_data_' + counter)!.dataset['index'] = key;
+        document.getElementById('parsons_line_data_' + counter)!.dataset['code'] = valueObj;
+        $('#parsons_line_' + counter).show();
+    });
+
+    let parsons = document.getElementById('parsons_code_container')!
+
+    Sortable.create(parsons,{
+        animation: 150,
+        onStart: () => {
+            $('.parsons_goal_line_container').removeClass('border-green-500 border-red-500');
+        },
     });
 
     $('#parsons_explanation_story').text(response.story);
@@ -105,6 +112,43 @@ function parse_code_string_into_dict(code: string) {
     return code_lines;
 }
 
+export function get_parsons_code() {
+    let code = "";
+    let order = new Array();
+    let mistake = false;
+    document.querySelectorAll<HTMLElement>('#parsons_code_container > div > div').forEach((element, key) => {        
+     // We are not interested in elements that are hidden
+      if (!$(element).is(':visible')) {
+        return;
+      }
+      // the parent is the one that has the borders...
+      const parent = element.parentElement!
+      let text = element.dataset['code'] || "";
+      if (text.length > 1) {
+        // Also add a newline as we removed this from the YAML structure
+        code += text + "\n";
+      }
+      parent.classList.remove('border-green-500');
+      parent.classList.remove('border-red-500');
+      const index = element.dataset['index'] || 999;
+      if (index == key + 1) {
+        parent.classList.add('border-green-500');
+      } else {
+        mistake = true;
+        parent.classList.add('border-red-500');
+      }
+      order.push(index);
+    });
+
+    // Before returning the code we want to a-sync store the attempt in the database
+    // We only have to set the order and level, rest is handled by the back-end
+    store_parsons_attempt(order, !mistake);
+    if (mistake) {
+      return "";
+    }
+    return code.replace(/ +$/mg, '');
+}
+
 /**
  * Shuffle an array in-place
  */
@@ -118,16 +162,14 @@ function fisherYatesShuffle<A>(xs: A[]) {
 }
 
 export function initializeParsons() {
-    const parsonContainers = document.querySelectorAll('#parsons_code_lines > div > pre');
+    // Do not initialize twice
+    if (Object.keys(editorDict).length > 0) {
+        return;
+    }
     const editorCreator = new HedyCodeMirrorEditorCreator();
-    parsonContainers.forEach((container, i) => {
-        const editor = editorCreator.initializeReadOnlyEditor(container as HTMLElement, 'ltr');
-        startEditorDict[i + 1] = editor;
-    })
-
-    const parsonCodeContainers = document.querySelectorAll('#parsons_code_container > div > pre');    
+    const parsonCodeContainers = document.querySelectorAll('#parsons_code_container > div > pre');
     parsonCodeContainers.forEach((container, i) => {
         const editor = editorCreator.initializeReadOnlyEditor(container as HTMLElement, 'ltr');
-        goalEditorDict[i + 1] = editor;
+        editorDict[i + 1] = editor;
     })
 }

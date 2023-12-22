@@ -7,7 +7,7 @@ import { MessageKey } from './message-translations';
 import { turtle_prefix, pygame_prefix, normal_prefix } from './pythonPrefixes'
 import { Achievement, Adventure, isServerSaveInfo, ServerSaveInfo } from './types';
 import { startIntroTutorial } from './tutorials/tutorial';
-import { initializeParsons, loadParsonsExercise } from './parsons';
+import { get_parsons_code, initializeParsons, loadParsonsExercise } from './parsons';
 import { checkNow, onElementBecomesVisible } from './browser-helpers/on-element-becomes-visible';
 import { incrementDebugLine, initializeDebugger, load_variables, startDebug } from './debugging';
 import { localDelete, localLoad, localSave } from './local';
@@ -18,7 +18,6 @@ import { HedyEditor, EditorType } from './editor';
 import { stopDebug } from "./debugging";
 import { HedyCodeMirrorEditorCreator } from './cm-editor';
 import { initializeTranslation } from './lezer-parsers/tokens';
-import { HedyAceEditorCreator } from './ace-editor';
 
 export let theGlobalDebugger: any;
 export let theGlobalEditor: HedyEditor;
@@ -1458,7 +1457,7 @@ export function showVariableView() {
   }
 }
 
-async function store_parsons_attempt(order: Array<string>, correct: boolean) {
+export async function store_parsons_attempt(order: Array<string>, correct: boolean) {
   try {
     await postJsonWithAchievements('/store_parsons_order', {
       level: theLevel,
@@ -1470,44 +1469,6 @@ async function store_parsons_attempt(order: Array<string>, correct: boolean) {
     // Let's do nothing: saving is not a user relevant action -> no feedback required
     console.error(e);
   };
-}
-
-// Todo: As the parsons functionality will rapidly increase, we should probably all store this in a dedicated file (?)
-function get_parsons_code() {
-    let code = "";
-    let count = 1;
-    let order = new Array();
-    let mistake = false;
-
-    $('.compiler-parsons-box').each(function() {
-      // We are only interested in the visible code lines
-      if ($(this).parent().is(':visible')) {
-        // When the value is 0 there is no code box in the expected spot
-        let text = $(this).attr('code') || "";
-        if (text.length > 1) {
-          // Also add a newline as we removed this from the YAML structure
-          code += text + "\n";
-        }
-        $(this).parents().removeClass('border-black');
-        let index = $(this).attr('index') || 999;
-        if (index == count) {
-          $(this).parents().addClass('border-green-500');
-        } else {
-          mistake = true;
-          $(this).parents().addClass('border-red-500');
-        }
-        order.push(index);
-        count += 1;
-      }
-    });
-    // Before returning the code we want to a-sync store the attempt in the database
-    // We only have to set the order and level, rest is handled by the back-end
-    store_parsons_attempt(order, !mistake);
-    if (mistake) {
-      return "";
-    }
-
-    return code.replace(/ +$/mg, '');
 }
 
 export function get_active_and_trimmed_code() {
