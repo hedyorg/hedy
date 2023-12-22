@@ -1578,11 +1578,30 @@ def get_specific_adventure(name, level, mode):
         return utils.error_page(error=404, ui_message=gettext('no_such_level'))
 
     adventures = [x for x in load_adventures_for_level(level) if x.short_name == name]
-    if not adventures:
-        return utils.error_page(error=404, ui_message=gettext('no_such_adventure'))
-
+    customizations = {}
     prev_level = None  # we are not rendering buttons in raw, no lookup needed here
     next_level = None
+    if not adventures:
+        adventure = database.ADVENTURES.get({"name": name})
+        if not adventure or (adventure and str(level) not in adventure.get("levels", [level])):
+            return utils.error_page(error=404, ui_message=gettext('no_such_adventure'))
+
+        adventure["content"] = safe_format(adventure["content"], **hedy_content.KEYWORDS.get(g.keyword_lang))
+        customizations["available_levels"] = [int(adv_level) for adv_level in adventure.get("levels", [])]
+        customizations["only_available"] = True
+
+        current_adventure = Adventure(
+            short_name="level",
+            name=adventure["name"],
+            image=adventure.get("image", None),
+            text=adventure["content"],
+            is_teacher_adventure=True,
+            is_command_adventure=False,
+            save_name=f"{name} {level}",
+            start_code=None)
+
+        adventures.append(current_adventure)
+        prev_level, next_level = utils.find_prev_next_levels(customizations["available_levels"], level)
 
     # Add the commands to enable the language switcher dropdown
     commands = hedy.commands_per_level.get(level)
@@ -1597,7 +1616,8 @@ def get_specific_adventure(name, level, mode):
                            level=level,
                            prev_level=prev_level,
                            next_level=next_level,
-                           customizations=[],
+                           #    max_level=max_level,
+                           customizations=customizations,
                            hide_cheatsheet=None,
                            enforce_developers_mode=None,
                            teacher_adventures=[],
@@ -1616,7 +1636,7 @@ def get_specific_adventure(name, level, mode):
                                lang=g.lang,
                                level=level,
                                adventures=adventures,
-                               initial_tab=initial_tab,
+                               initial_tab='',
                                current_user_name=current_user()['username'],
                            ))
 

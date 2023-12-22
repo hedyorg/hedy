@@ -43,7 +43,8 @@ CLASSES = dynamo.Table(storage, "classes", "id", indexes=[
 # - name (str): adventure name
 # - public (int): 1 or 0 whether it can be shared
 # - tags_id (str): id of tags that describe this adventure.
-ADVENTURES = dynamo.Table(storage, "adventures", "id", indexes=[dynamo.Index("creator"), dynamo.Index("public")])
+ADVENTURES = dynamo.Table(storage, "adventures", "id", indexes=[
+                          dynamo.Index("creator"), dynamo.Index("public"), dynamo.Index("name")])
 INVITATIONS = dynamo.Table(
     storage, "invitations", partition_key="username#class_id",
     indexes=[dynamo.Index("username"), dynamo.Index("class_id")],
