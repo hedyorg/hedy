@@ -1574,6 +1574,8 @@ export function toggleDevelopersMode(event='click', enforceDevMode: boolean) {
   // (Driving from HTML attributes is more flexible on what gets resized, and avoids duplicating
   // size literals between HTML and JavaScript).
   $('#adventures').toggle(!enable);
+  // Parsons dont need a fixed height
+  if (currentTab === 'parsons') return
   $('[data-devmodeheight]').each((_, el) => {
     const heights = $(el).data('devmodeheight').split(',') as string[];
     $(el).css('height', heights[enable ? 1 : 0]);
@@ -1883,10 +1885,17 @@ function reconfigurePageBasedOnTab() {
   resetWindow();
 
   updatePageElements();
-
   if (currentTab === 'parsons') {
     loadParsonsExercise(theLevel, 1);
+    // remove the fixed height from the editor
+    document.getElementById('code_editor')!.style.height = '100%'
+    document.getElementById('code_output')!.style.height = '100%'
     return;
+  } else {
+    $('[data-devmodeheight]').each((_, el) => {
+      const heights = $(el).data('devmodeheight').split(',') as string[];
+      $(el).css('height', heights[0]);
+    });
   }
 
   const adventure = theAdventures[currentTab];
