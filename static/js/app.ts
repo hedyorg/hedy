@@ -365,6 +365,7 @@ export function initializeViewProgramPage(options: InitializeViewProgramPageOpti
 
 export function initializeHighlightedCodeBlocks(where: Element) {
   const dir = $("body").attr("dir");
+  initializeParsons();
   // Any code blocks we find inside 'turn-pre-into-ace' get turned into
   // read-only editors (for syntax highlighting)
   for (const container of $(where).find('.turn-pre-into-ace').get()) {
@@ -377,12 +378,21 @@ export function initializeHighlightedCodeBlocks(where: Element) {
       // Only turn into an editor if the editor scrolls into view
       // Otherwise, the teacher manual Frequent Mistakes page is SUPER SLOW to load.
       onElementBecomesVisible(preview, () => {
-        const code = preview.querySelector('code')
-        if(code) code.hidden = true;
+        const codeNode = preview.querySelector('code')
+        let code: string;
+        // In case it has a child <code> node
+        if(codeNode) {
+          codeNode.hidden = true
+          code = codeNode.innerText          
+        } else {
+          code = preview.textContent || "";
+          preview.textContent = "";
+        }
+
         // Create this example editor
         const exampleEditor = editorCreator.initializeReadOnlyEditor(preview, dir);
         // Strip trailing newline, it renders better
-        exampleEditor.contents = code?.innerText || "";
+        exampleEditor.contents = code;
         exampleEditor.contents = exampleEditor.contents.trimEnd();
         // And add an overlay button to the editor if requested via a show-copy-button class, either
         // on the <pre> itself OR on the element that has the '.turn-pre-into-ace' class.
@@ -409,7 +419,6 @@ export function initializeHighlightedCodeBlocks(where: Element) {
       });
     }
   }
-  initializeParsons();
 }
 
 export function getHighlighter(level: number) {
