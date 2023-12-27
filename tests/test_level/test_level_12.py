@@ -667,7 +667,6 @@ class TestsLevel12(HedyTester):
             max_level=17
         )
 
-
     def test_ask_with_list_var(self):
         code = textwrap.dedent("""\
         colors is 'orange', 'blue', 'green'

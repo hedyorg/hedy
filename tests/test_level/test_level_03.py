@@ -57,9 +57,6 @@ class TestsLevel3(HedyTester):
             extra_check_function=check_in_list
         )
 
-
-
-
     def test_color_basic(self):
         code = textwrap.dedent("""\
         color red
