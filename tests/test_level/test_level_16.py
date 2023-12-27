@@ -656,9 +656,7 @@ class TestsLevel16(HedyTester):
             skipped_mappings=skipped_mappings,
         )
 
-
-# music tests
-
+    # music tests
     def test_play_random(self):
         code = textwrap.dedent("""\
         notes = ['C4', 'E4', 'D4', 'F4', 'G4']
