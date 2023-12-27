@@ -290,13 +290,13 @@ class TestsLevel1(HedyTester):
         code = "play A"
         expected = textwrap.dedent("""\
         play('A')
-        time.sleep(1)""")
+        time.sleep(0.5)""")
 
         self.multi_level_tester(
             code=code,
             translate=False,
             expected=expected,
-            max_level=1
+            max_level=17
         )
 
     def test_mixes_languages_nl_en(self):
