@@ -1184,7 +1184,6 @@ class TestsLevel8(HedyTester):
             repeat 10 times
                 notes is C4, E4, D4, F4, G4
                 note is notes at random
-            
                 print note
                 play note""")
 
