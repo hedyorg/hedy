@@ -333,8 +333,6 @@ class TestsLevel7(HedyTester):
             code=code,
             expected=expected)
 
-
-
     def test_if_pressed_repeat(self):
         code = "if x is pressed repeat 5 times print 'doe het 5 keer!' else print 'iets anders'"
 

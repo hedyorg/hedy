@@ -460,7 +460,6 @@ class TestsLevel2(HedyTester):
             max_level=10
         )
 
-
     def test_color_with_var(self):
         code = textwrap.dedent("""\
             foo is white
@@ -831,7 +830,6 @@ class TestsLevel2(HedyTester):
         )
 
 # music tests
-
 
     def test_play(self):
         code = textwrap.dedent("""\
