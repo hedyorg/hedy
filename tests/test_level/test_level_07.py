@@ -621,5 +621,3 @@ class TestsLevel7(HedyTester):
             expected=expected,
             max_level=7
         )
-
-
