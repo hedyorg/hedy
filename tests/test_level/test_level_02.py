@@ -460,22 +460,6 @@ class TestsLevel2(HedyTester):
             max_level=10
         )
 
-    def test_play(self):
-        code = textwrap.dedent("""\
-            n is C4
-            play n""")
-
-        expected = textwrap.dedent("""\
-            n = 'C4'
-            play(n)
-            time.sleep(0.5)""")
-
-        self.multi_level_tester(
-            code=code,
-            translate=False,
-            expected=expected,
-            max_level=11
-        )
 
     def test_color_with_var(self):
         code = textwrap.dedent("""\
@@ -844,4 +828,24 @@ class TestsLevel2(HedyTester):
             max_level=17,
             code=code,
             exception=hedy.exceptions.IncompleteCommandException
+        )
+
+# music tests
+
+
+    def test_play(self):
+        code = textwrap.dedent("""\
+            n is C4
+            play n""")
+
+        expected = textwrap.dedent("""\
+            n = 'C4'
+            play(n)
+            time.sleep(0.5)""")
+
+        self.multi_level_tester(
+            code=code,
+            translate=False,
+            expected=expected,
+            max_level=11
         )

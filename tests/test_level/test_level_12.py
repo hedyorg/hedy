@@ -669,6 +669,8 @@ class TestsLevel12(HedyTester):
         )
 
 
+
+
     def test_ask_with_list_var(self):
         code = textwrap.dedent("""\
         colors is 'orange', 'blue', 'green'
@@ -2362,4 +2364,24 @@ class TestsLevel12(HedyTester):
             unused_allowed=True,
             skipped_mappings=skipped_mappings,
             max_level=16
+        )
+
+# music tests
+    def test_play_random(self):
+        code = textwrap.dedent("""\
+        notes = 'C4', 'E4', 'D4', 'F4', 'G4'
+        play notes at random""")
+
+        expected = textwrap.dedent("""\
+        notes = ['C4', 'E4', 'D4', 'F4', 'G4']
+        play(random.choice(notes))
+        time.sleep(0.5)""")
+
+        self.multi_level_tester(
+            code=code,
+            translate=False,
+            skip_faulty=False,
+            unused_allowed=True,
+            expected=expected,
+            max_level=15
         )
