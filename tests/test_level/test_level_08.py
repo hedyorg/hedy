@@ -1178,3 +1178,34 @@ class TestsLevel8(HedyTester):
 
         self.single_level_tester(code, expected=expected_code)
         self.source_map_tester(code=code, expected_source_map=expected_source_map)
+
+    def test_play_repeat_random(self):
+        code = textwrap.dedent("""\
+            repeat 10 times
+                notes is C4, E4, D4, F4, G4
+                note is notes at random
+            
+                print note
+                play note""")
+
+        expected = textwrap.dedent("""\
+            for i in range(int('10')):
+              notes = ['C4', 'E4', 'D4', 'F4', 'G4']
+              try:
+                random.choice(notes)
+              except IndexError:
+                raise Exception('catch_index_exception')
+              note = random.choice(notes)
+              print(f'{note}')
+              play(note)
+              time.sleep(0.5)
+              time.sleep(0.1)""")
+
+        self.multi_level_tester(
+            code=code,
+            translate=False,
+            skip_faulty=False,
+            unused_allowed=True,
+            expected=expected,
+            max_level=11
+        )
