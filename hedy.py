@@ -1537,10 +1537,11 @@ class ConvertToPython_1(ConvertToPython):
         return "print('" + argument + " '+answer)" + self.add_debug_breakpoint()
 
     def play(self, meta, args):
-        notes = args[0]
-        return textwrap.dedent(f"""\
-        play('{notes}')
-        time.sleep(0.5)""") + self.add_debug_breakpoint()
+        if len(args) == 0:
+            return self.make_play('C4') + self.add_debug_breakpoint()
+
+        note = args[0] # will we also support multiple notes at once?
+        return self.make_play(note) + self.add_debug_breakpoint()
 
     def comment(self, meta, args):
         return f"#{''.join(args)}"
@@ -1584,6 +1585,16 @@ class ConvertToPython_1(ConvertToPython):
 
     def make_forward(self, parameter):
         return self.make_turtle_command(parameter, Command.forward, 'forward', True, 'int')
+
+    def make_play(self, note):
+        return textwrap.dedent(f"""\
+                play('{note}')
+                time.sleep(0.5)""")
+
+    def make_play_var(self, note):
+        return textwrap.dedent(f"""\
+                play({note})
+                time.sleep(0.5)""")
 
     def make_color(self, parameter, language):
         return self.make_turtle_color_command(parameter, Command.color, 'pencolor', language)
@@ -1732,6 +1743,20 @@ class ConvertToPython_2(ConvertToPython_1):
             self.add_variable_access_location(parameter, meta.line)
 
         return self.make_forward(parameter)
+
+    def play(self, meta, args):
+        if len(args) == 0:
+            return self.make_play('C4') + self.add_debug_breakpoint()
+
+        # if ConvertToPython.is_int(args[0]): #handig ff laten staan als ik nog integers ga ondersteunen in this PR or the next
+        #     parameter = int(args[0])
+        # else:
+        # if not an int, then it is a variable
+
+        parameter = args[0]
+        self.add_variable_access_location(parameter, meta.line)
+        return self.make_play_var(parameter)
+
 
     def assign(self, meta, args):
         variable_name = args[0]
@@ -3466,7 +3491,7 @@ def transpile_inner(input_string, level, lang="en", populate_source_map=False, i
         source_map.set_language(lang)
         source_map.set_hedy_input(input_string)
 
-    # FH, may 2022. for now, we just out arabic numerals when the language is ar
+    # FH, may 2022. for now, we just output arabic numerals when the language is ar
     # this can be changed into a profile setting or could be detected
     # in usage of programs
     if lang == "ar":

@@ -650,6 +650,25 @@ class TestsLevel12(HedyTester):
 
         self.multi_level_tester(code=code, unused_allowed=True, expected=expected, max_level=17)
 
+
+    def test_play(self):
+        code = textwrap.dedent("""\
+            n = 'C4' #
+            play n""")
+
+        expected = textwrap.dedent("""\
+            n = 'C4'
+            play(n)
+            time.sleep(0.5)""")
+
+        self.multi_level_tester(
+            code=code,
+            translate=False,
+            expected=expected,
+            max_level=17
+        )
+
+
     def test_ask_with_list_var(self):
         code = textwrap.dedent("""\
         colors is 'orange', 'blue', 'green'

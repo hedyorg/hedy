@@ -57,6 +57,24 @@ class TestsLevel3(HedyTester):
             extra_check_function=check_in_list
         )
 
+    def test_play_random(self):
+        code = textwrap.dedent("""\
+        notes is C4, E4, D4, F4, G4
+        play notes at random""")
+
+        expected = textwrap.dedent("""\
+        play('A')
+        time.sleep(0.5)""")
+
+        self.multi_level_tester(
+            code=code,
+            translate=False,
+            skip_faulty=False,
+            unused_allowed=True,
+            expected=expected,
+            max_level=17
+        )
+
     def test_color_basic(self):
         code = textwrap.dedent("""\
         color red
