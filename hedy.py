@@ -1540,7 +1540,7 @@ class ConvertToPython_1(ConvertToPython):
         if len(args) == 0:
             return self.make_play('C4') + self.add_debug_breakpoint()
 
-        note = args[0] # will we also support multiple notes at once?
+        note = args[0]  # will we also support multiple notes at once?
         return self.make_play(note) + self.add_debug_breakpoint()
 
     def comment(self, meta, args):
@@ -1756,7 +1756,6 @@ class ConvertToPython_2(ConvertToPython_1):
         parameter = args[0]
         self.add_variable_access_location(parameter, meta.line)
         return self.make_play_var(parameter)
-
 
     def assign(self, meta, args):
         variable_name = args[0]
