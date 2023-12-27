@@ -9,11 +9,11 @@
         <link rel="stylesheet" href="{{static('/css/additional.css')}}">
         <link rel="stylesheet" href="{{static('/fontawesome/css/all.min.css')}}"/>
     </head>
-    <body class="flex flex-col gap-2 min-h-screen" dir="ltr">
-        <div id="editor-area" class="relative grid grid-cols-1 {% if run %}md:grid-cols-2{% endif %} md:grid-flow-row-dense gap-2">
+    <body class="flex flex-col gap-2" dir="ltr" style="height: 100vh">
+        <div id="editor-area" class="h-full relative grid grid-cols-1 {% if run %}md:grid-cols-2{% endif %} md:grid-flow-row-dense gap-2">
             <div class="w-full flex flex-col" id="code_editor">
                 <div class="w-full flex-1 flex flex-col">
-                    <div id="editor" style="background: #272822; font-size:0.95em; color: white" blurred="false" class="w-full flex-1 text-lg rounded" {% if readOnly %}data-readonly="true"{% endif %}></div>
+                    <div id="editor" style="background: #272822; font-size:0.95em; color: white" blurred="false" class="w-full flex-1 text-lg rounded min-h-0 overflow-hidden fixed-editor-height" {% if readOnly %}data-readonly="true"{% endif %}></div>
                     <div id="errorbox"
                       class="flex-0 z-20 mt-0 bg-red-100 border-t-4 border-red-500 rounded-b text-red-900 px-4 py-3 shadow-md" role="alert"
                       style="display: none;">
