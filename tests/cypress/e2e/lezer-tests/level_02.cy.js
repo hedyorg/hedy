@@ -79,7 +79,7 @@ describe('Lezer parser tets for level 2', () => {
             const expectedTree = `
                 Program(
                     Command(
-                        ErrorInvalid(Text,⚠(ask),Text,Text,Text,Text,Text,Text)
+                        ErrorInvalid(Text,Text,Text,Text,Text,Text,Text,Text)
                     )
                 )`
 

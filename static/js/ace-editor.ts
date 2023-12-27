@@ -61,7 +61,7 @@ export class HedyAceEditor implements HedyEditor {
   private strikeMarkers = new Map<number, number>();
 
   /**
-   * 
+   *
    * @param {HTMLElement} element the element that will contain this editor
    * @param {boolean} isReadOnly to decide weather to remove the cursor
    * @param {EditorType} editorType the type of the editor, could be a main editor, a parsons editor, etc.
@@ -118,7 +118,7 @@ export class HedyAceEditor implements HedyEditor {
       }
     }
 
-    // Everything turns into 'ace/mode/levelX', except what's in    
+    // Everything turns into 'ace/mode/levelX', except what's in
     if (theLevel) {
       this.setHighlighterForLevel(theLevel)
     }
@@ -130,7 +130,7 @@ export class HedyAceEditor implements HedyEditor {
 
   /**
   * Set the highlither rules for a particular level
-  * @param level      
+  * @param level
   */
   setHighlighterForLevel(level: number): void {
     const mode = this.getHighlighter(level);
@@ -152,7 +152,7 @@ export class HedyAceEditor implements HedyEditor {
     this._editor.setValue(content, MOVE_CURSOR_TO_END);
   }
 
-  /**     
+  /**
    * @returns if the editor is set to read-only mode
    */
   public get isReadOnly(): boolean {
@@ -170,6 +170,7 @@ export class HedyAceEditor implements HedyEditor {
    * Resizes the editor after changing its size programatically
    */
   resize(): void {
+    console.warn('Oops! editor.resize() should not have been called anymore');
     this._editor.resize()
   }
 
@@ -192,7 +193,7 @@ export class HedyAceEditor implements HedyEditor {
     }
   }
 
-  /**     
+  /**
    * Moves to the cursor to the end of the current file
    */
   moveCursorToEndOfFile(): void {
@@ -333,7 +334,7 @@ export class HedyAceEditor implements HedyEditor {
       this.currentLineMarker = undefined;
       return;
     }
-    line = line - 1;    
+    line = line - 1;
     let id: number;
     if (startPos === undefined || finishPos === undefined) {
       id = this.addMarker(new ace.Range(line, 0, line, 999), 'debugger-current-line', 'fullLine');
@@ -388,7 +389,7 @@ export class HedyAceEditor implements HedyEditor {
   public getActiveContents(debugLine: string | null): string {
     let code = this._editor.session.getValue();
     const breakpoints = this.getDeactivatedLines();
-    
+
     if (code) {
       let lines = code.split('\n');
       if(debugLine != null){
@@ -401,14 +402,14 @@ export class HedyAceEditor implements HedyEditor {
       }
       code = lines.join('\n');
     }
-  
+
     return code;
   }
 
   public skipFaultyHandler(): void {
     $(document).on("click", 'div[class*=ace_content], div[class*=ace_incorrect_hedy_code]', function(e) {
       let className = e.target.className;
-  
+
       // Only do this if skipping faulty is used
       if ($('div[class*=ace_incorrect_hedy_code]')[0]) {
         if (className === 'ace_content') {
@@ -422,7 +423,7 @@ export class HedyAceEditor implements HedyEditor {
           mapIndex = mapIndex.replace('ace_incorrect_hedy_code_', '');
           mapIndex = mapIndex.replace('ace_start ace_br15', '');
           let mapError = theGlobalSourcemap[Number(mapIndex)];
-  
+
           $('#okbox').hide();
           $('#warningbox').hide();
           $('#errorbox').hide();

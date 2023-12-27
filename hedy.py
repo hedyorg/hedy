@@ -1383,7 +1383,6 @@ class ConvertToPython(Transformer):
     def add_variable_access_location(self, variable_name, access_line_number):
         # store the line of access (or string value) in the lookup table
         # so we know what variable is used where
-        variable_name = escape_var(variable_name)
         if isinstance(variable_name, str):
             vars = [a for a in self.lookup if isinstance(a.name, str) and a.name[:len(variable_name)] == variable_name]
             for v in vars:  # vars can be defined multiple times, access validates all of them
@@ -1434,7 +1433,7 @@ class ConvertToPython(Transformer):
 
         if unquoted_in_lookup == [] or all(unquoted_in_lookup):
 
-            # all good? store location
+            # # all good? store location
             for a in args:
                 self.add_variable_access_location(str(a), var_access_linenumber)
             # return for further processing
@@ -1799,6 +1798,8 @@ class ConvertToPython_3(ConvertToPython_2):
         if arg.isnumeric() and isinstance(arg, int):  # is int/float
             return arg
         elif (self.is_list(arg)):  # is list indexing
+            list_name = arg.split('[')[0]
+            self.add_variable_access_location(list_name, meta.line)
             before_index, after_index = arg.split(']', 1)
             return before_index + '-1' + ']' + after_index   # account for 1-based indexing
         else:
@@ -1807,11 +1808,20 @@ class ConvertToPython_3(ConvertToPython_2):
     def add(self, meta, args):
         value = self.process_argument(meta, args[0])
         list_var = args[1]
+
+        # both sides have been used now
+        self.add_variable_access_location(value, meta.line)
+        self.add_variable_access_location(list_var, meta.line)
         return f"{list_var}.append({value}){self.add_debug_breakpoint()}"
 
     def remove(self, meta, args):
         value = self.process_argument(meta, args[0])
         list_var = args[1]
+
+        # both sides have been used now
+        self.add_variable_access_location(value, meta.line)
+        self.add_variable_access_location(list_var, meta.line)
+
         return textwrap.dedent(f"""\
         try:
           {list_var}.remove({value}){self.add_debug_breakpoint()}
@@ -2054,36 +2064,36 @@ class ConvertToPython_6(ConvertToPython_5):
                 value = process_characters_needing_escape(value)
                 return parameter + " = '" + value + "'" + self.add_debug_breakpoint()
 
-    def process_token_or_tree(self, argument):
+    def process_token_or_tree(self, argument, meta):
         if type(argument) is Tree:
             return f'{str(argument.children[0])}'
         if argument.isnumeric():
             latin_numeral = int(argument)
             return f'int({latin_numeral})'
         # this is a variable
-        self.add_variable_access_location(argument, 0)
+        self.add_variable_access_location(argument, meta.line)
         return f'int({argument})'
 
-    def process_calculation(self, args, operator):
+    def process_calculation(self, args, operator, meta):
         # arguments of a sum are either a token or a
         # tree resulting from earlier processing
         # for trees we need to grap the inner string
         # for tokens we add int around them
 
-        args = [self.process_token_or_tree(a) for a in args]
+        args = [self.process_token_or_tree(a, meta) for a in args]
         return Tree('sum', [f'{args[0]} {operator} {args[1]}'])
 
     def addition(self, meta, args):
-        return self.process_calculation(args, '+')
+        return self.process_calculation(args, '+', meta)
 
     def subtraction(self, meta, args):
-        return self.process_calculation(args, '-')
+        return self.process_calculation(args, '-', meta)
 
     def multiplication(self, meta, args):
-        return self.process_calculation(args, '*')
+        return self.process_calculation(args, '*', meta)
 
     def division(self, meta, args):
-        return self.process_calculation(args, '//')
+        return self.process_calculation(args, '//', meta)
 
     def turn(self, meta, args):
         if len(args) == 0:
@@ -2262,8 +2272,8 @@ class ConvertToPython_11(ConvertToPython_10):
         body = "\n".join([ConvertToPython.indent(x) for x in args[3:]])
         body = add_sleep_to_command(body, True, self.is_debug, location="after")
         stepvar_name = self.get_fresh_var('step')
-        begin = self.process_token_or_tree(args[1])
-        end = self.process_token_or_tree(args[2])
+        begin = self.process_token_or_tree(args[1], meta)
+        end = self.process_token_or_tree(args[2], meta)
         return f"""{stepvar_name} = 1 if {begin} < {end} else -1
 for {iterator} in range({begin}, {end} + {stepvar_name}, {stepvar_name}):{self.add_debug_breakpoint()}
 {body}"""
@@ -2291,6 +2301,9 @@ class ConvertToPython_12(ConvertToPython_11):
 
         if len(args) > 1:
             args_str = ", ".join(str(x.children[0]) if isinstance(x, Tree) else str(x) for x in args[1].children)
+            for x in args[1].children:
+                self.add_variable_access_location(str(x), meta.line)
+
         return f"{args[0]}({args_str})"
 
     def returns(self, meta, args):
@@ -2324,10 +2337,12 @@ class ConvertToPython_12(ConvertToPython_11):
             return f'"{text}"'
         return f"'{text}'"
 
-    def process_token_or_tree(self, argument):
+    def process_token_or_tree(self, argument, meta):
         if isinstance(argument, Tree):
             return f'{str(argument.children[0])}'
         else:
+            # this is a variable, add to the table
+            self.add_variable_access_location(argument, meta.line)
             return argument
 
     def print_ask_args(self, meta, args):
@@ -2390,7 +2405,7 @@ class ConvertToPython_12(ConvertToPython_11):
 
     def var(self, meta, args):
         name = args[0]
-        self.check_var_usage(args, meta.line)
+        # self.check_var_usage(args, meta.line)
         return escape_var(name)
 
     def turn(self, meta, args):
@@ -2420,7 +2435,7 @@ class ConvertToPython_12(ConvertToPython_11):
         return self.make_turtle_command(parameter, Command.forward, 'forward', True, 'float')
 
     def division(self, meta, args):
-        return self.process_calculation(args, '/')
+        return self.process_calculation(args, '/', meta)
 
 
 @v_args(meta=True)
@@ -2517,6 +2532,11 @@ class ConvertToPython_16(ConvertToPython_15):
     def change_list_item(self, meta, args):
         left_side = args[0] + '[' + args[1] + '-1]'
         right_side = args[2]
+
+        self.add_variable_access_location(args[0], meta.line)
+        self.add_variable_access_location(args[1], meta.line)
+        self.add_variable_access_location(args[2], meta.line)
+
         exception = _translate_index_error(left_side, args[0])
         return exception + left_side + ' = ' + right_side + self.add_debug_breakpoint()
 

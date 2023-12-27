@@ -8,6 +8,7 @@ module.exports = {
       '../../../main/**/*.md',
       '../../../content/**/*.md',
       '../../../static/js/*.ts',
+      '../../../node_modules/tw-elements/dist/js/**/*.js',
   ],
   theme: {
     extend: {},
@@ -176,5 +177,6 @@ module.exports = {
   variants: {},
   corePlugins: {
   },
-  plugins: [],
+  plugins: [require("tw-elements/dist/plugin.cjs")],
+  darkMode: 'class'
 }

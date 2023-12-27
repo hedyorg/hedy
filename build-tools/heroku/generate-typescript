@@ -70,7 +70,7 @@ else
     # Use tsc to generate .js
     npx tsc --outDir __tmp__
 
-    npx esbuild __tmp__/static/js/index.js \
+    npx esbuild static/js/index.ts \
         --bundle \
         --sourcemap \
         --minify \
