@@ -41,7 +41,7 @@ let askPromptOpen = false;
 let theAdventures: Record<string, Adventure> = {};
 export let theLevel: number = 0;
 export let theLanguage: string = '';
-let theKeywordLanguage: string = 'en';
+export let theKeywordLanguage: string = 'en';
 let theStaticRoot: string = '';
 let currentTab: string;
 let theUserIsLoggedIn: boolean;
