@@ -10,8 +10,8 @@
         <link rel="stylesheet" href="{{static('/fontawesome/css/all.min.css')}}"/>
     </head>
     <body class="flex flex-col gap-2 min-h-screen" dir="ltr">
-        <div id="editor-area" class="w-full flex flex-grow gap-4 mt-0 mb-0">
-            <div class="flex flex-col w-full" id="code_editor">
+        <div id="editor-area" class="w-full flex flex-grow gap-2 mt-0 mb-0">
+            <div class="{% if run %}w-1/2{% else %}w-full{% endif %} flex flex-col" id="code_editor">
                 <div class="w-full flex-1 flex flex-col">
                     <div id="editor" style="background: #272822; font-size:0.95em; color: white" blurred="false" class="w-full flex-1 text-lg rounded" {% if readOnly %}data-readonly="true"{% endif %}></div>
                     <div id="errorbox"
