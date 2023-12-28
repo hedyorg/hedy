@@ -13,7 +13,7 @@
         <div id="editor-area" class="h-full relative grid grid-cols-1 {% if run %}md:grid-cols-2{% endif %} md:grid-flow-row-dense gap-2">
             <div class="w-full flex flex-col" id="code_editor">
                 <div class="w-full flex-1 flex flex-col">
-                    <div id="editor" style="background: #272822; font-size:0.95em; color: white" blurred="false" class="w-full flex-1 text-lg rounded min-h-0 overflow-hidden fixed-editor-height" {% if readOnly %}data-readonly="true"{% endif %}></div>
+                    <div id="editor" style="background: #272822; height: calc(100vh - 3.5em); font-size:0.95em; color: white" blurred="false" class="w-full flex-1 text-lg rounded min-h-0 overflow-hidden fixed-editor-height" {% if readOnly %}data-readonly="true"{% endif %}></div>
                     <div id="errorbox"
                       class="flex-0 z-20 mt-0 bg-red-100 border-t-4 border-red-500 rounded-b text-red-900 px-4 py-3 shadow-md" role="alert"
                       style="display: none;">
@@ -62,7 +62,7 @@
                 </div>
             </div>
             {% if run %}
-                <div class="w-full flex flex-col order-2 relative" id="code_output">
+                <div class="w-full flex flex-col order-2 relative" id="code_output" style="height: calc(100vh - 3.5em);">
                       <!-- tabindex=0 makes the div focusable -->
                       <div id="output" tabindex=0 class="flex-1 rounded p-2 px-3 bg-gray-900 color-white w-full text-lg overflow-auto" style="min-height: 3rem;"></div>
                       <div id="turtlecanvas" class="flex-0 ltr:pl-4 rtl:pr-4"></div>
