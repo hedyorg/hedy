@@ -1757,7 +1757,7 @@ class ConvertToPython_2(ConvertToPython_1):
         # if not an int, then it is a variable
 
         note = args[0]
-        if note in list(notes_mapping.values()) + list(notes_mapping.keys()):   #this is a supported note
+        if note in list(notes_mapping.values()) + list(notes_mapping.keys()):  # this is a supported note
             return self.make_play(note)
 
         # no note? it must be a variable!
