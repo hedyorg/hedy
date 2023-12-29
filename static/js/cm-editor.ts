@@ -150,8 +150,6 @@ export class HedyCodeMirrorEditor implements HedyEditor {
             switch(editorType) {
                 case EditorType.CHEATSHEET:
                 case EditorType.EXAMPLE:
-                    extensions.push(EditorView.theme(theme));
-                    break;
                 case EditorType.PARSONS:
                     theme[".cm-scroller"] = { "overflow": "auto", "min-height": "3.5rem" }
                     extensions.push(EditorView.theme(theme));
