@@ -567,6 +567,10 @@ def parse():
 
             if transpile_result.has_clear:
                 response['has_clear'] = True
+
+            if transpile_result.has_music:
+                response['has_music'] = True
+
         except Exception:
             pass
 
