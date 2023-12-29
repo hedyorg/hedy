@@ -31,6 +31,9 @@ import utils
 from hedy_content import KEYWORDS
 from hedy_sourcemap import SourceMap, source_map_transformer
 
+from prefixes.music import notes_mapping
+
+
 HEDY_MAX_LEVEL = 18
 HEDY_MAX_LEVEL_SKIPPING_FAULTY = 5
 MAX_LINES = 100
@@ -1753,9 +1756,13 @@ class ConvertToPython_2(ConvertToPython_1):
         # else:
         # if not an int, then it is a variable
 
-        parameter = args[0]
-        self.add_variable_access_location(parameter, meta.line)
-        return self.make_play_var(parameter)
+        note = args[0]
+        if note in list(notes_mapping.values()) + list(notes_mapping.keys()):   #this is a supported note
+            return self.make_play(note)
+
+        # no note? it must be a variable!
+        self.add_variable_access_location(note, meta.line)
+        return self.make_play_var(note)
 
     def assign(self, meta, args):
         variable_name = args[0]

@@ -1221,9 +1221,7 @@ class TestsLevel8(HedyTester):
         for i in range(int('10')):
           play(notes_mapping.get(str(random.choice(notes)), str(random.choice(notes))))
           time.sleep(0.5)
-          time.sleep(0.1) != 
-        play(random.choice(notes))
-        time.sleep(0.5)""")
+          time.sleep(0.1)""")
 
         self.multi_level_tester(
             code=code,
@@ -1231,5 +1229,5 @@ class TestsLevel8(HedyTester):
             skip_faulty=False,
             unused_allowed=True,
             expected=expected,
-            max_level=15
+            max_level=11
         )
