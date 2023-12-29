@@ -1,5 +1,5 @@
 import {
-    print as print1, echo as echo1, ask as ask1, color as color1,
+    print as print1, echo as echo1, play as play1, ask as ask1, color as color1,
     forward as forward1, turn as turn1
 } from "./level1-parser.terms";
 
@@ -166,6 +166,7 @@ const keywordToToken: Record<number, tokenSpecilizer> = {
         extend: {
             "ask": ask1,
             "print": print1,
+            "play": play1,
             "echo": echo1,
             "forward": forward1,
             "turn": turn1,
