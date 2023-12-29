@@ -150,6 +150,13 @@ def convert_numerals(alphabet, number):
 export const music_prefix = 
 `
 notes_mapping = {
+    'C': 'C4',
+    'D': 'D4',
+    'E': 'E4',
+    'F': 'F4',
+    'G': 'G4',
+    'A': 'A4',
+    'B': 'B4',
     '1': 'C0',
     '2': 'D0',
     '3': 'E0',
