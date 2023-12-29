@@ -588,7 +588,7 @@ class TestsLevel7(HedyTester):
 
         expected = textwrap.dedent("""\
             for __i__ in range(int('3')):
-              play(C4)
+              play(notes_mapping.get(str(C4), str(C4)))
               time.sleep(0.5)
               time.sleep(0.1)""")
 
@@ -609,7 +609,7 @@ class TestsLevel7(HedyTester):
         expected = textwrap.dedent("""\
             notes = ['C4', 'E4', 'D4', 'F4', 'G4']
             for __i__ in range(int('3')):
-              play(random.choice(notes))
+              play(notes_mapping.get(str(random.choice(notes)), str(random.choice(notes))))
               time.sleep(0.5)
               time.sleep(0.1)""")
 

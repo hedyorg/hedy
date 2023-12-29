@@ -664,7 +664,7 @@ class TestsLevel16(HedyTester):
 
         expected = textwrap.dedent("""\
         notes = ['C4', 'E4', 'D4', 'F4', 'G4']
-        play(random.choice(notes))
+        play(notes_mapping.get(str(random.choice(notes)), str(random.choice(notes))))
         time.sleep(0.5)""")
 
         self.multi_level_tester(

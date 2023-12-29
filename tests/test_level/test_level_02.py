@@ -838,7 +838,7 @@ class TestsLevel2(HedyTester):
 
         expected = textwrap.dedent("""\
             n = 'C4'
-            play(n)
+            play(notes_mapping.get(str(n), str(n)))
             time.sleep(0.5)""")
 
         self.multi_level_tester(

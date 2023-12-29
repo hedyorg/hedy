@@ -912,6 +912,7 @@ export function runPythonProgram(this: any, code: string, sourceMap: any, hasTur
     $('#turtlecanvas').show();
   }
 
+
   if (hasPygame){
     skulptExternalLibraries = {
       './extensions.js': {

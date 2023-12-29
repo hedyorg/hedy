@@ -19,7 +19,7 @@ cat <<EOF > $python_prefix_ts
 *******************************************************************************/
 EOF
 
-for prefix in turtle pygame normal; do
+for prefix in turtle pygame normal music; do
   echo >> $python_prefix_ts
   echo "export const ${prefix}_prefix = " >> $python_prefix_ts
   echo -n '`' >> $python_prefix_ts

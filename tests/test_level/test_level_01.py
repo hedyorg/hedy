@@ -289,7 +289,7 @@ class TestsLevel1(HedyTester):
     def test_play(self):
         code = "play A"
         expected = textwrap.dedent("""\
-        play('A')
+        play(notes_mapping.get(str('A'), str('A')))
         time.sleep(0.5)""")
 
         self.multi_level_tester(

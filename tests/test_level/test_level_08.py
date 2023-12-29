@@ -1196,7 +1196,7 @@ class TestsLevel8(HedyTester):
                 raise Exception('catch_index_exception')
               note = random.choice(notes)
               print(f'{note}')
-              play(note)
+              play(notes_mapping.get(str(note), str(note)))
               time.sleep(0.5)
               time.sleep(0.1)""")
 
@@ -1207,4 +1207,29 @@ class TestsLevel8(HedyTester):
             unused_allowed=True,
             expected=expected,
             max_level=11
+        )
+
+    def test_play_integers(self):
+        code = textwrap.dedent("""\
+        notes = 1, 2, 3
+
+        repeat 10 times
+            play notes at random""")
+
+        expected = textwrap.dedent("""\
+        notes = ['1', '2', '3']
+        for i in range(int('10')):
+          play(notes_mapping.get(str(random.choice(notes)), str(random.choice(notes))))
+          time.sleep(0.5)
+          time.sleep(0.1) != 
+        play(random.choice(notes))
+        time.sleep(0.5)""")
+
+        self.multi_level_tester(
+            code=code,
+            translate=False,
+            skip_faulty=False,
+            unused_allowed=True,
+            expected=expected,
+            max_level=15
         )
