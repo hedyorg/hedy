@@ -3003,7 +3003,8 @@ def get_parser(level, lang="en", keep_all_tokens=False, skip_faulty=False):
     return lark
 
 
-ParseResult = namedtuple('ParseResult', ['code', 'source_map', 'has_turtle', 'has_pygame', 'has_clear', 'has_music', 'commands'])
+ParseResult = namedtuple('ParseResult', ['code', 'source_map', 'has_turtle',
+                         'has_pygame', 'has_clear', 'has_music', 'commands'])
 
 
 def transpile_inner_with_skipping_faulty(input_string, level, lang="en", unused_allowed=True):
