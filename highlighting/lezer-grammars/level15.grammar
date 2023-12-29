@@ -1,7 +1,7 @@
 @top Program { eol* (Command eol+)* Command? }
 
 Command {
-    Assign | AssignList | Ask | Clear |Print | Turtle | Sleep | Add | Remove | If | Else | Repeat | For | Define | Call | Return | While | ErrorInvalid
+    Assign | AssignList | Ask | Clear |Print | Play | Turtle | Sleep | Add | Remove | If | Else | Repeat | For | Define | Call | Return | While | ErrorInvalid
 }
 
 @local tokens {    
@@ -35,6 +35,7 @@ ListAccess { Text at+ (random+ | Text | Number) }
 Add { add+ (Expression | Call ) toList+ Text }
 Remove { remove+ (Expression | Call) from+ Text }
 Clear { clear+ }
+Play { play+ Text+ }
 
 Turtle[@isGroup=turtle] {
     Forward { forward+ (Expression | ListAccess | Call) } |

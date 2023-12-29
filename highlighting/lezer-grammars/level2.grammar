@@ -1,12 +1,13 @@
 @top Program { eol* (Command eol+)* Command? }
 Command {
-    Assign | Ask | Print | Turtle | Sleep | ErrorInvalid
+    Assign | Ask | Print | Play | Turtle | Sleep | ErrorInvalid
 }
 
 Assign { Text is+ Text+ }
 Ask { Text is+ ask+ Text+ }
 Print { print+ Text+ }
 Sleep { sleep+ Text* }
+Play { play+ Text+ }
 
 Turtle[@isGroup=turtle] {
     Forward { forward+ Text } |

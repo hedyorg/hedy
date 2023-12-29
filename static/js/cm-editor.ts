@@ -150,7 +150,7 @@ export class HedyCodeMirrorEditor implements HedyEditor {
         const language = languagePerLevel[level];
         // Contains all of the keywords for every level
         const hedyStyleTags: Record<string, Tag> = {
-            "print forward turn color ask is echo sleep Comma": t.keyword,
+            "print forward turn play color ask is echo sleep Comma": t.keyword,
             "at random remove from add to if else in not Op": t.keyword,
             "repeat times for range with return and or while": t.keyword,
             "elif def input toList": t.keyword,
