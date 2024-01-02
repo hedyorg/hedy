@@ -204,6 +204,7 @@ def load_saved_programs(level, into_adventures, preferential_program: Optional[P
             continue
 
         adventure.save_name = program.name
+        adventure.editor_contents = program.code
         adventure.save_info = SaveInfo.from_program(program)
 
 
