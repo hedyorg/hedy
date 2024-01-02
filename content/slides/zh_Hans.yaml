@@ -27,19 +27,19 @@ levels:
         5:
             header: Hedy编程
             text: 在Hedy中，我们使用特殊代码，如`{print}`。
-            code: '{print} Welcome to Hedy!'
+            code: '{print} 欢迎进入海蒂!'
         6:
             header: Hedy编程
             text: 代码词将显示为粉红色。
-            code: '{print} Welcome to Hedy!'
+            code: '{print} 欢迎来海蒂!'
         7:
             header: Hedy编程
             text: 我们使用代码下方的“运行代码”按钮开始运行代码。
-            code: '{print} Welcome to Hedy!'
+            code: '{print} 欢迎来海蒂!'
         8:
             header: Hedy编程
             text: 输出的内容显示在右侧。
-            code: '{print} Welcome to Hedy!'
+            code: '{print} 欢迎来海蒂!'
         9:
             header: Hedy编程
             text: 输出也可以是一个图形。
@@ -80,12 +80,15 @@ levels:
         5:
             header: 编程
             text: |-
-                使用`{print}`、`{ask}`和`{echo}`，你已经可以创作一个小故事。
-                这是尝试冒险活动鹦鹉、石头剪刀布和故事的的好时机。
+                正如您在前面的示例中所看到的。 如果您使用`{ask}`命令，您可以提出问题。
+                但是答案不会显示在输出屏幕中。
+
+                如果您确实希望显示答案，可以使用此级别的最后一个命令：`{echo}`。
+                `{echo}` 用于重复 `{ask}` 的答案。
             code: |-
-                {print} Hello!
-                {ask} What is your name?
-                {echo} hello
+                {print} 你好！
+                {ask}你叫什么名字？
+                {echo}你好
         6:
             header: 编程!
             text: 探险活动显示在标签页中。
@@ -96,7 +99,7 @@ levels:
             editor: /hedy#print_command
         8:
             header: 用海龟绘图画画！
-            text: 现在我们已经看到了文本代码，接下来我们将看到图形代码。
+            text: 黄色箭头按钮可用于复制示例。
             editor: /hedy#print_command
         9:
             header: 用海龟画画：{forward}
@@ -114,16 +117,16 @@ levels:
                 {forward} 50
                 {turn} left
         12:
-            header: Debugging
-            text: Debugging a code means getting rid of mistakes in the code. Let's debug this code together. Click the ladybug button to start the debugger.
+            header: 调试
+            text: 调试代码意味着消除代码中的错误。 我们一起调试一下这段代码。 单击瓢虫按钮启动调试器。
             code: |-
-                I am DJ Hedy
-                {print} What song would you like to hear?
-                {ask} I like that song too!
-                {print} Next up... {echo}
+                我是 DJ 海蒂
+                {print}你想听什么歌？
+                {ask}我也喜欢那首歌！
+                {print} 接下来... {echo}
         13:
-            header: Let the programming fun begin!
-            text: Enjoy the adventures in level 1!
+            header: 来开始体验编程的乐趣吧！
+            text: 享受第一关的冒险！
     2:
         1:
             header: Welcome to level 2
@@ -137,35 +140,35 @@ levels:
             header: Variables
             text: To make or 'set' a variable we use the `{is}` command
             code: |-
-                name {is} Hedy
-                age {is} 15
-                {print} name is age years old
+                名字{is}海蒂
+                年龄 {is} 15
+                {print} 姓名年龄 岁
         3:
             header: Interactive
             text: |-
-                We can also set a variable by asking questions.
+                我们还可以通过提问来设置变量。
 
-                The answer to the question is stored in the variable.
+                问题的答案存储在变量中。
 
-                This way we don't need the `{echo}`  command.
+                这样我们就不需要`{echo}`命令。
             code: |-
-                name {is} {ask} What is your name?
-                {print} Hello name
+                姓名 {is} {ask} 你叫什么名字？
+                {print} 你好名字
         4:
             header: Multiple variables
-            text: Now that we use variables, we can use multiple variables instead of just one `{echo}`command.
+            text: 既然我们使用了变量，我们就可以使用多个变量，而不仅仅是一个`{echo}`命令。
             code: |-
-                name {is} {ask} What is your name?
-                {print} Hello name
-                age {is} {ask} How old are you?
-                {print} name is age years old.
+                姓名 {is} {ask} 你叫什么名字？
+                {print} 你好名字
+                年龄 {is} {ask} 你多大了？
+                {print} 姓名年龄 岁。
         5:
             header: Sleep
             text: You can also use the `{sleep}` command to pause the code for a while.
             code: |-
-                {print} My favorite colour is...
+                {print} 我最喜欢的颜色是...
                 {sleep} 2
-                {print} green!
+                {print}绿色！
         6:
             header: Sleep 5
             text: |-
@@ -173,25 +176,25 @@ levels:
 
                 If you want, you could even use a variable instead of a number to decide the duration of the sleep command.
             code: |-
-                pause {is} 10
-                {print} My favorite colour is...
-                {sleep} pause
-                {print} green!
+                暂停 {is} 10
+                {print} 我最喜欢的颜色是...
+                {sleeo}暂停
+                {print}绿色！
         7:
             header: Debugging
             text: Debugging a code means getting rid of mistakes in the code. Let's debug this code together. Click the ladybug button to start the debugger.
             code: |-
-                {print} Welcome to the donut shop!
-                filling {is} What kind of filling would you like?
-                {print} You have chosen... Filling! Yum!
-                topping {ask} What kind of topping would you like?
-                topping is delicious!
-                {print} I'll go get your donut. {sleep}
-                {print} Here you go! A filling donut with toping!
-                {ask} Have a nice day!
+                {print} 欢迎来到甜甜圈店！
+                填充 {is} 您想要什么样的填充？
+                {print} 您已选择...填充！ 嗯！
+                配料 {ask}您想要什么类型的配料？
+                浇头很好吃！
+                {print} 我去拿你的甜甜圈。 {睡觉}
+                {print} 给你！ 一个带有馅料的甜甜圈！
+                {ask}祝你有美好的一天！
         8:
-            header: Let the programming fun begin!
-            text: Enjoy the adventures in level 3!
+            header: 来开始编程的乐趣吧！
+            text: 享受第 3 关的冒险！
     3:
         1:
             header: Welcome to level 3
@@ -203,7 +206,7 @@ levels:
 
                 Separate the items on your list with a comma.
             code: |-
-                animals {is} dogs, cats, kangaroos
+                动物{is}狗,猫,袋鼠
                 ```
         3:
             header: At random
@@ -212,15 +215,15 @@ levels:
                 The computer will randomly pick one item of the list.
                 Every time you run this code the output will differ.
             code: |-
-                animals {is} dogs, cats, kangaroos
-                {print} animals {at} {random}
+                动物{is}狗,猫,袋鼠
+                {print}动物{at} {random}
                 ```
         4:
             header: At random in a sentence
             text: You can use the `{at}` `{random}` command in a sentence as well.
             code: |-
-                animals {is} dogs, cats, kangaroos
-                {print} My favorite animal is animals {at} {random}
+                动物{is}狗,猫,袋鼠
+                {print}我最喜欢的动物是动物{at} {random}
                 ```
         5:
             header: Add to
@@ -230,47 +233,47 @@ levels:
                 You can choose what to add to the list or you can use the `{add}` `{to}` command in combination with the `{ask}` command.
                 This way you can let the player decide what to add to the list.
             code: |-
-                animals {is} dog, cat, kangaroo
-                like {is} {ask} What is your favorite animal?
-                {add} like {to_list} animals
-                {print} I choose animals {at} {random}
+                animals{is}狗,猫,袋鼠
+                like {is} {ask}你最喜欢的动物是什么？
+                {add} like {to_list}动物
+                {print}我选择 animals {at} {random}
         6:
             header: Remove from
             text: |-
                 The opposite of the `{add}` `{to}` command is the  `{remove}` `{from}` command.
                 This command removes an item from a list.
             code: |-
-                animals {is} dog, cat, kangaroo
-                dislike {is} {ask} What animal do you not like?
-                {remove} dislike {from} animals
-                {print} I choose animals {at} {random}
+                animals{is}狗,猫,袋鼠
+                dislike {is} {ask}你不喜欢什么 animals ？
+                {remove}dislike{from} animals
+                {print}我选择 animals {at} {random}
         7:
-            header: Debugging
-            text: Let's debug this code!
+            header: 调试
+            text: 我们来调试一下这段代码吧！
             editor: |-
-                music_genres {is} rock, pop, metal, indie, jazz
-                chosen_genre is music {at} {random}
-                {print} Let's listen to chosen genre
-                nice {ask} Do you like that genre?
-                {remove} chosen_genre {from} chosen_genre
+                music_genres {is}摇滚,流行,金属,独立,爵士乐
+                chosen_genre 是音乐{at} {random}
+                {print} 让我们听听当选的流派
+                不错{ask}你喜欢这种类型吗？
+                {from} chosen_genre {remove} selected_genre
                 second_choice {is} music_genres
-                {print} or do you prefer... second_choice {at} {random}
+                {print} 还是您更喜欢... second_choice {at} {random}
                 {remove} second_choice {to} music_genres
-                {print} I like music_genre {random} best!
+                {print} 我最喜欢music_genre {random}！
         8:
-            header: Let's get to work!
-            text: Enjoy the adventures in level 3!
+            header: 让我们开始工作吧！
+            text: 享受第 3 关的冒险！
     4:
         1:
             header: Welcome to level 4
             text: In this level you will learn how to use quotation marks.
-            code: '{print} ''print with quotes!'''
+            code: '{print} ''带引号打印！'''
         2:
             header: Problem
             text: 'In the previous levels, you might have come across this problem:'
             code: |-
-                name {is} Sophie
-                {print} My name is name
+                name {is}苏菲
+                {print} 我的名字是name
         3:
             header: Fixing it with quotation marks
             text: |-
@@ -280,34 +283,34 @@ levels:
         4:
             header: Quotation marks with print
             text: 每次使用 `{print}` 命令时，都需要将要显示在屏幕上的文本放在引号中。
-            code: '{print} ''print with quotes!'''
+            code: '{print} ''带引号打印！'''
         5:
             header: Quotation marks with ask
             text: This also goes for the `{ask}` command.
-            code: name {is} {ask} 'name please?'
+            code: name {is} {ask} '请问你的姓名？'
         6:
             header: Quotation marks and variables
             text: |-
                 You do not want variable names to be printed on the screen.
                 This is why variables should be left out of the quotation marks, like this:
             code: |-
-                name {is} Harry
-                {print} 'Hello ' name
+                name{is}哈利
+                {print} '你好' name
         7:
             header: Quotation marks and variables
             text: |-
                 当变量名用在句子中间时，必须将变量放在引号之外。
                 然而，句子的其余部分确实需要引号。 看起来像这样:
             code: |-
-                name {is} Harry
-                {print} 'Hello ' name ', how are you?'
+                name{is}哈利
+                {print} '你好'name'，你好吗？'
         8:
             header: Quotation marks and contractions
             text: |-
                 当心！ 既然使用了引号，则不能在缩写中使用引号。
 
                 请尝试在下面的屏幕中打印诸如“you're”或“I'm”之类的缩写，看看会发生什么......
-            code: '{print} ''This won''t work!'''
+            code: '{print} ''这行不通！'''
         9:
             header: 清除
             text: |-
@@ -322,7 +325,7 @@ levels:
                 {clear}
                 {print} '1'
                 {clear}
-                {print} 'SURPRISE!'
+                {print} '惊喜!'
         10:
             header: Debugging
             text: Let's debug this code!
