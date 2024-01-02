@@ -529,15 +529,17 @@ adventures:
                     {else} {print} '¡Incorrecto! Era ' _
                     ```
                 story_text_3: |
-                    **Extra** También puedes dejar que el ordenador haga sumas aleatorias por sí mismo usando `{random}`.
-                example_code_3: |
+                    **Extra** También puedes dejar que el ordenador haga productos aleatorios por sí mismo usando `{random}`.
+                example_code_3: |-
+                    ```
                     numbers = 1, 2, 3, 4, 5, 6, 7, 8, 9, 10
                     number_1 = _
                     number_2 = _
                     correct_answer = number_1 * number_2
-                    given_answer = 'What is ' number_1 ' times ' number_2 '?'
+                    given_answer = {ask} 'What is ' number_1 ' times ' number_2 '?'
                     {if} _
                     {else} _
+                    ```
             9:
                 story_text: |
                     En el nivel 6 creaste una calculadora, en este nivel puedes ampliar el código para que haga varias preguntas.
@@ -865,21 +867,21 @@ adventures:
                     {print} 'That will be $' price 'please'
             7:
                 story_text: |-
-                    ### Exercise
-                    Surprise! This program looks more like an output than a code. And yet, we don't want you to just add `{print}` commands in front of each line.
-                    Fix this program to turn it into the nursery rhyme 'Brother John (Frère Jaques)' by using the {repeat} command of course!
+                    ### Ejercicio
+                    Sorpresa! Este programa parece mas una salida que un código. Y aún, no queremos que solo agregues comandos `{print}` frente a cada linea.
+                    Arregla este programa para convertirlo en the nursery rhyme 'Brother John (Frère Jaques)' usando por su puesto el comando {repeat} !
                 example_code: |
-                    **Warning! This code needs to be debugged!**
+                    **¡Atención! Este código necesita ser depurado!**
                     ```
-                    Are you sleeping?
-                    Brother John!
-                    Morning bells are ringing!
+                    ¿Estás durmiendo?
+                    ¡Hermano John!
+                    Las campanas de la mañana están sonando!
                     Ding, dang, dong!
                     ```
             8:
                 story_text: |-
-                    ### Exercise
-                    Debug this code. Good luck!
+                    ### Ejercicio
+                    Depura este código. ¡Buena suerte!
                 example_code: |
                     **Warning! This code needs to be debugged!**
                     ```
@@ -917,8 +919,8 @@ adventures:
                     {print} 'Thank you! Byebye!'
             9:
                 story_text: |-
-                    ### Exercise
-                    Debug this code. Good luck!
+                    ### Ejercicio
+                    Depura este código. ¡Buena suerte!
                 example_code: |
                     **Warning! This code needs to be debugged!**
                     ```
@@ -942,15 +944,15 @@ adventures:
                     {print} 'That will be 'price dollar' please'
             10:
                 story_text: |-
-                    ### Exercise
-                    Debug this code. Good luck!
+                    ### Ejercicio
+                    Depurar este código. ¡Buena suerte!
                 example_code: |
-                    **Warning! This code needs to be debugged!**
+                    **¡Atención! Este código necesita ser depurado!**
                     ```
-                    names = Muad Hasan Samira Noura
-                    activities = fly a kite, go swimming, go hiking, catch tan in the sun
-                    {for} name {is} names
-                    {print} At the beach name loves to activity at random
+                    nombres = Muad Hasan Samira Noura
+                    actividades = fly a kite, go swimming, go hiking, catch tan in the sun
+                    {for} nombre {is} nombres
+                    {print} At the beach name loves to activity {at}{random}
                     ```
             11:
                 story_text: |-

@@ -976,121 +976,121 @@ adventures:
                     ```
             13:
                 story_text: |-
-                    ### Exercise
-                    Debug this code. Good luck!
+                    ### Opdracht
+                    Debug deze code. Succes!
                 example_code: |
-                    **Warning! This code needs to be debugged!**
+                    **Pas op! Deze code bevat fouten!**
                     ```
-                    defin movie_recommendation with name
-                        action_movies == 'Die Hard', 'Fast and Furious', 'Inglorious Bastards'
-                        romance_movies = 'Love Actually', 'The Notebook', 'Titanic'
-                        comedy_movies = 'Mr Bean' 'Barbie''Deadpool'
-                        kids_movies = 'Minions', 'Paddington', 'Encanto'
-                        if name is 'Camila' or name is 'Manuel'
-                            recommended_movie = kids_movie at random
-                        if name is 'Pedro' or 'Gabriella'
-                                mood = ask 'What you in the mood for?'
-                            if mood is 'action'
-                                recommended_movie = comedy_movies at random
-                            if mood is 'romance'
-                                recommended_movie = romance_movies
-                        if mood is 'comedy'
-                                recommended_movie = comedy_movies at random
+                    defin film_aanrader with naam
+                        actie_films == 'Die Hard', 'Fast and Furious', 'Inglorious Bastards'
+                        romantische_films = 'Love Actually', 'The Notebook', 'Titanic'
+                        grappige_films = 'Mr Bean' 'Barbie''Deadpool'
+                        kinder_films = 'Minions', 'Paddington', 'Encanto'
+                        if naam is 'Camila' or naam is 'Manuel'
+                            film_tip = kinder_film at random
+                        if naam is 'Pedro' or 'Gabriella'
+                                stemming = ask 'Waarvoor ben je in de stemming?'
+                            if stemming is 'actie'
+                                film_tip = grappige_films at random
+                            if stemming is 'romantiek'
+                                film_tip = romantische_films
+                        if mood is 'komedie'
+                                film_tip = grappige_films at random
 
-                    print 'I would recommend ' recommended_movie ' for ' name
+                    print 'Ik zou ' film_tip ' aanbevelen aan ' naam
 
-                    name = ask 'Who is watching?'
-                    recommendation = ask 'Would you like a recommendation?'
-                    if recommendaion is 'yes'
-                    print movie_recommendation with name
+                    naam = ask 'Wie kijkt er?'
+                    kijktip = ask 'Wil je een kijktip?'
+                    if kijtip is 'ja'
+                    print film_tip with naam
                     else
-                    print 'No problem!'
+                    print 'Geen probleem!'
                     ```
             14:
                 story_text: |-
-                    ### Exercise
-                    Debug this code. Good luck!
+                    ### Opdracht
+                    Debug deze code. Succes!
                 example_code: |
-                    **Warning! This code needs to be debugged!**
+                    **Pas op! Deze code bevat fouten!**
                     ```
-                    define calculate_heartbeat
-                        print 'Press your fingertips gently against the side of your neck'
-                        print '(just under your jawline)'
-                        print 'Count the number of beats you feel for 15 seconds'
-                        beats == ask 'How many beats do you feel in 15 seconds?'
-                        heartbeat = beats*4
-                        print 'Your heartbeat is ' heartbeat
-                        if heartbeat >= 60 or heartbeat <= 100
-                            print 'Your heartbeat seems fine'
+                    define bereken_hartslag
+                        print 'Druk je vingers voorzichtig tegen de zijkant van je nek'
+                        print '(net onder je kaaklijn)'
+                        print 'Tel het aantal kloppingen dat je voelt voor 15 seconden'
+                        kloppingen == ask 'Hoeveel kloppingen voelde je in 15 seconden?'
+                        hartslag = kloppingen*4
+                        print 'Je hartslag is ' hartslag
+                        if hartslag >= 60 or hartslag <= 100
+                            print 'Je hartslag is normaal'
                         else
-                            if heartbeat > 60
-                                print 'Your heartbeat seems to be too low'
-                            if heartbeat < 100
-                                print 'Your heartbeat seems to be too high'
-                            print 'You might want to contact a medical professional'
+                            if hartslag > 60
+                                print 'Je hartslag is te laag'
+                            if hartslag < 100
+                                print 'Je hartslag is te hoog'
+                            print 'Misschien moet je naar de dokter'
 
-                    measure_heartbeat = ask 'Would you like to measure your heartbeat?'
-                    if measure_heartbeat = 'yes'
-                        call measure_heartbeat
+                    hartslag_meten = ask 'Wil je je hartslag meten?'
+                    if hartslag_meten = 'ja'
+                        call bereken_hartslag
                     else
-                        'no problem'
+                        'Geen probleem'
                     ```
 
-                        print '(just under your jawline)'
-                        print 'Count the number of beats you feel for 15 seconds'
-                        beats == ask 'How many beats do you feel in 15 seconds?'
-                        heartbeat = beats*4
-                        print 'Your heartbeat is ' heartbeat
-                        if heartbeat >= 60 or heartbeat <= 100
-                            print 'Your heartbeat seems fine'
+                        print '(net onder je kaaklijn)'
+                        print 'Tel het aantal kloppingen dat je voelt voor 15 seconden'
+                        kloppingen == ask 'Hoeveel kloppingen voelde je in 15 seconden?'
+                        hartslag = kloppingen*4
+                        print 'Je hartslag is ' hartslag
+                        if hartslag >= 60 or hartslag <= 100
+                            print 'Je hartslag is normaal'
                         else
-                            if heartbeat > 60
-                                print 'Your heartbeat seems to be too low'
-                            if heartbeat < 100
-                                print 'Your heartbeat seems to be too high'
-                            print 'You might want to contact a medical professional'
+                            if hartslag > 60
+                                print 'Je hartslag is te laag'
+                            if hartslag < 100
+                                print 'Je hartslag is te hoog'
+                            print 'Misschien moet je naar de dokter'
 
-                    measure_heartbeat = ask 'Would you like to measure your heartbeat?'
-                    if measure_heartbeat = 'yes'
-                        call measure_heartbeat
+                    hartslag_meten = ask 'Wil je je hartslag meten?'
+                    if hartslag_meten = 'ja'
+                        call bereken_hartslag
                     else
-                        'no problem'
+                        'Geen probleem'
             15:
                 story_text: |-
-                    ### Exercise
-                    Debug this random children's story. Good luck!
+                    ### Opdracht
+                    Debug dit willekeurige kinderverhaal. Succes!
                 example_code: |
-                    **Warning! This code needs to be debugged!**
+                    **Pas op! Deze code bevat fouten!**
                     ```
-                    names = 'Tanya', 'Romy', 'Kayla', 'Aldrin', 'Ali'
-                    verbs='walking', 'skipping', 'cycling', 'driving', 'running'
-                    locations = 'on a mountaintop', 'in the supermarket', 'to the swimming pool'
-                    hiding_spots = 'behind a tree', under a table', in a box'
-                    sounds = 'a trumpet', 'a car crash', 'thunder'
-                    causes_of_noise = 'a television', 'a kid with firecrackers', 'a magic elephant', 'a dream'
+                    namen = 'Tanya', 'Romy', 'Kayla', 'Aldrin', 'Ali'
+                    werkwoorden='aan het lopen', 'aan het huppelen', 'aan het fietsen', 'aan het rijden', 'aan het rennen'
+                    locaties = 'op de top van een berg', 'in de supermarkt', 'naar het zwembad'
+                    verstopplekken = 'achter een boom', onder een tafel', in een doos'
+                    geluiden = 'een trompet', 'een auto-ongeluk', 'donder'
+                    oorzaken_van_geluid = 'een televisie, 'een kind met vuurwerk', 'een magische olifant', 'een droom'
 
-                    chosen_ name = names at random
-                    chosen_verb = verbs at random
-                    chosen_location = 'locations at random'
-                    chosen_sounds = noises at random
-                    chosen_spot = hiding_spots random
-                    chosen_causes = causes_of_noise at random
+                    gekozen_ naam = namen at random
+                    gekozen_werkwoord = werkwoorden at random
+                    gekozen_locatie = 'locaties at random'
+                    gekozen_geluiden = geluid at random
+                    gekozen_plek = verstopplekken random
+                    gekozen_oorzaken = oorzaken_van_geluid at random
 
-                    print chosen_name ' was ' chosen_verb ' ' chosen_location
-                    print 'when they suddenly heard a sound like ' sounds at random
-                    print chosen_name ' looked around, but they couldn't discover where the noise came from'
-                    print chosen_name ' hid ' chosen_spot'
-                    print 'They tried to look around, but couldn't see anything from there'
-                    hidden = 'yes'
-                    while hidden = 'yes'
-                        print chosen_name 'still didn't see anything'
-                    answer = ask 'does ' chosen_name ' move from their hiding spot?'
-                        if answer = 'yes'
-                            hidden == 'no'
-                    print 'chosen_name moved from' chosen_spot
-                    print 'And then they saw it was just' chosen_cause
-                    print chosen_name 'laughed and went on with their day'
-                    print The End
+                    print gekozen_naam ' was ' gekozen_werkwoord ' ' gekozen_locatie
+                    print 'toen die ineens het geluid van ' geluiden at random ' hoorde'
+                    print gekozen_naam ' keek om zich heen, maar kon niet uitvogelen waar het geluid vandaan kwam
+                    print gekozen_naam ' verstopte zich ' gekozen_plek'
+                    print 'Hen probeerde rond te kijken, maar kon vanaf 'daar niks zien'
+                    verstopt = 'ja'
+                    while verstopt = 'ja'
+                        print gekozen_naam 'zag nog steeds niks
+                    antwoord = ask 'zal ' gekozen_naam ' diens verstopplek verlaten?'
+                        if antwoord = 'ja'
+                            verstopt == 'nee'
+                    print 'gekozen_naam komt' gekozen_plek ' vandaan'
+                    print 'En toen zag die dat het gewoon ' chosen_cause ' was'
+                    print gekozen_naam 'lachte en ging door met hun dag'
+                    print Einde
                     ```
             16:
                 story_text: |-
@@ -4482,7 +4482,7 @@ adventures:
                     ```
                     antwoord = 0
                     {while} antwoord != 25
-                        antwoord = {ask} 'What is 5 times 5?'
+                        antwoord = {ask} 'What is 5 keer 5?'
                     {print} 'Je hebt een correct antwoord gegeven'
                     ```
     years:
