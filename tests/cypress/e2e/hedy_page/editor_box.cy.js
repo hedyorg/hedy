@@ -98,5 +98,5 @@ function clearViaBackspace() {
 }
 
 function codeMirrorContent() {
-  return cy.get('.cm-content');
+  return cy.get('#editor > .cm-editor > .cm-scroller > .cm-content');
 }

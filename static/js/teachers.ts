@@ -1,14 +1,14 @@
 import { modal } from './modal';
-import { showAchievements } from "./app";
+import { showAchievements, theKeywordLanguage } from "./app";
 import { markUnsavedChanges, clearUnsavedChanges, hasUnsavedChanges } from './browser-helpers/unsaved-changes';
 import { ClientMessages } from './client-messages';
-
 import DOMPurify from 'dompurify'
 import { startTeacherTutorial } from './tutorials/tutorial';
-import { HedyAceEditorCreator } from './ace-editor';
+import { HedyCodeMirrorEditorCreator } from './cm-editor';
+import { initializeTranslation } from './lezer-parsers/tokens';
 
 declare const htmx: typeof import('./htmx');
-const editorCreator = new HedyAceEditorCreator();
+const editorCreator = new HedyCodeMirrorEditorCreator();
 
 export function create_class(class_name_prompt: string) {
   modal.prompt (class_name_prompt, '', function (class_name) {
@@ -266,9 +266,23 @@ function show_preview(content: string) {
     for (const preview of $('.preview pre').get()) {
         $(preview).addClass('text-lg rounded');
         const dir = $("body").attr("dir");
+        const codeNode = preview.querySelector('code')
+        let code: string;
+        // In case it has a child <code> node
+        if(codeNode) {
+          codeNode.hidden = true
+          code = codeNode.innerText          
+        } else {
+          code = preview.textContent || "";
+          preview.textContent = "";
+        }
         const exampleEditor = editorCreator.initializeReadOnlyEditor(preview, dir);
-        exampleEditor.contents = exampleEditor.contents.replace(/\n+$/, '');
+        exampleEditor.contents = code.trimEnd();        
         for (const level of levels) {
+          initializeTranslation({
+            keywordLanguage: theKeywordLanguage,
+            level: parseInt(level, 10),
+          })
           exampleEditor.setHighlighterForLevel(parseInt(level, 10));                
         }
     }

@@ -8,7 +8,7 @@ import { MessageKey } from './message-translations';
 import { turtle_prefix, pygame_prefix, normal_prefix, music_prefix } from './pythonPrefixes'
 import { Achievement, Adventure, isServerSaveInfo, ServerSaveInfo } from './types';
 import { startIntroTutorial } from './tutorials/tutorial';
-import { loadParsonsExercise } from './parsons';
+import { get_parsons_code, initializeParsons, loadParsonsExercise } from './parsons';
 import { checkNow, onElementBecomesVisible } from './browser-helpers/on-element-becomes-visible';
 import { incrementDebugLine, initializeDebugger, load_variables, startDebug } from './debugging';
 import { localDelete, localLoad, localSave } from './local';
@@ -17,7 +17,6 @@ import { postJson } from './comm';
 import { LocalSaveWarning } from './local-save-warning';
 import { HedyEditor, EditorType } from './editor';
 import { stopDebug } from "./debugging";
-import { HedyAceEditorCreator } from './ace-editor';
 import { HedyCodeMirrorEditorCreator } from './cm-editor';
 import { initializeTranslation } from './lezer-parsers/tokens';
 
@@ -27,7 +26,6 @@ export let theModalEditor: HedyEditor;
 export let theGlobalSourcemap: { [x: string]: any; };
 export const theLocalSaveWarning = new LocalSaveWarning();
 const editorCreator: HedyCodeMirrorEditorCreator = new HedyCodeMirrorEditorCreator();
-const aceEditorCreator: HedyAceEditorCreator = new HedyAceEditorCreator();
 let last_code: string;
 
 /**
@@ -44,7 +42,7 @@ let askPromptOpen = false;
 let theAdventures: Record<string, Adventure> = {};
 export let theLevel: number = 0;
 export let theLanguage: string = '';
-let theKeywordLanguage: string = 'en';
+export let theKeywordLanguage: string = 'en';
 let theStaticRoot: string = '';
 let currentTab: string;
 let theUserIsLoggedIn: boolean;
@@ -142,7 +140,6 @@ export function initializeApp(options: InitializeAppOptions) {
   initializeSyntaxHighlighter({
     keywordLanguage: options.keywordLanguage,
   });
-  initializeHighlightedCodeBlocks(document.body);
   initializeCopyToClipboard();
 
   // Close the dropdown menu if the user clicks outside of it
@@ -373,27 +370,45 @@ export function initializeViewProgramPage(options: InitializeViewProgramPageOpti
 
 export function initializeHighlightedCodeBlocks(where: Element) {
   const dir = $("body").attr("dir");
-
+  initializeParsons();
+  if (theLevel) {
+    initializeTranslation({
+      keywordLanguage: theKeywordLanguage,
+      level: theLevel
+    })
+  }
   // Any code blocks we find inside 'turn-pre-into-ace' get turned into
   // read-only editors (for syntax highlighting)
   for (const container of $(where).find('.turn-pre-into-ace').get()) {
     for (const preview of $(container).find('pre').get()) {
       $(preview)
-        .addClass('text-lg rounded overflow-x-hidden')
+        .addClass('relative text-lg rounded overflow-x-hidden')
         // We set the language of the editor to the current keyword_language -> needed when copying to main editor
         .attr('lang', theKeywordLanguage);
 
       // Only turn into an editor if the editor scrolls into view
       // Otherwise, the teacher manual Frequent Mistakes page is SUPER SLOW to load.
       onElementBecomesVisible(preview, () => {
+        const codeNode = preview.querySelector('code')
+        let code: string;
+        // In case it has a child <code> node
+        if(codeNode) {
+          codeNode.hidden = true
+          code = codeNode.innerText          
+        } else {
+          code = preview.textContent || "";
+          preview.textContent = "";
+        }
+
         // Create this example editor
-        const exampleEditor = aceEditorCreator.initializeReadOnlyEditor(preview, dir);
+        const exampleEditor = editorCreator.initializeReadOnlyEditor(preview, dir);
         // Strip trailing newline, it renders better
-        exampleEditor.contents = exampleEditor.contents.trimRight();
+        exampleEditor.contents = code;
+        exampleEditor.contents = exampleEditor.contents.trimEnd();
         // And add an overlay button to the editor if requested via a show-copy-button class, either
         // on the <pre> itself OR on the element that has the '.turn-pre-into-ace' class.
         if ($(preview).hasClass('show-copy-button') || $(container).hasClass('show-copy-button')) {
-          const buttonContainer = $('<div>').addClass('absolute ltr:-right-1 rtl:left-2 w-16').css({top: 5}).appendTo(preview);
+          const buttonContainer = $('<div>').addClass('absolute ltr:right-0 rtl:left-0 top-0 mx-1 mt-1').appendTo(preview);
           let symbol = "⇥";
           if (dir === "rtl") {
             symbol = "⇤";
@@ -407,9 +422,13 @@ export function initializeHighlightedCodeBlocks(where: Element) {
             clearOutput();
           });
         }
-
         const levelStr = $(preview).attr('level');
-        if (levelStr) {
+        const lang = $(preview).attr('lang');
+        if (levelStr && lang) {
+          initializeTranslation({
+            keywordLanguage: lang,
+            level: parseInt(levelStr, 10),
+          })
           exampleEditor.setHighlighterForLevel(parseInt(levelStr, 10));
         }
       });
@@ -1470,7 +1489,7 @@ export function showVariableView() {
   }
 }
 
-async function store_parsons_attempt(order: Array<string>, correct: boolean) {
+export async function store_parsons_attempt(order: Array<string>, correct: boolean) {
   try {
     await postJsonWithAchievements('/store_parsons_order', {
       level: theLevel,
@@ -1482,44 +1501,6 @@ async function store_parsons_attempt(order: Array<string>, correct: boolean) {
     // Let's do nothing: saving is not a user relevant action -> no feedback required
     console.error(e);
   };
-}
-
-// Todo: As the parsons functionality will rapidly increase, we should probably all store this in a dedicated file (?)
-function get_parsons_code() {
-    let code = "";
-    let count = 1;
-    let order = new Array();
-    let mistake = false;
-
-    $('.compiler-parsons-box').each(function() {
-      // We are only interested in the visible code lines
-      if ($(this).parent().is(':visible')) {
-        // When the value is 0 there is no code box in the expected spot
-        let text = $(this).attr('code') || "";
-        if (text.length > 1) {
-          // Also add a newline as we removed this from the YAML structure
-          code += text + "\n";
-        }
-        $(this).parents().removeClass('border-black');
-        let index = $(this).attr('index') || 999;
-        if (index == count) {
-          $(this).parents().addClass('border-green-500');
-        } else {
-          mistake = true;
-          $(this).parents().addClass('border-red-500');
-        }
-        order.push(index);
-        count += 1;
-      }
-    });
-    // Before returning the code we want to a-sync store the attempt in the database
-    // We only have to set the order and level, rest is handled by the back-end
-    store_parsons_attempt(order, !mistake);
-    if (mistake) {
-      return "";
-    }
-
-    return code.replace(/ +$/mg, '');
 }
 
 export function get_active_and_trimmed_code() {
@@ -1625,6 +1606,8 @@ export function toggleDevelopersMode(event='click', enforceDevMode: boolean) {
   // (Driving from HTML attributes is more flexible on what gets resized, and avoids duplicating
   // size literals between HTML and JavaScript).
   $('#adventures').toggle(!enable);
+  // Parsons dont need a fixed height
+  if (currentTab === 'parsons') return
   $('[data-devmodeheight]').each((_, el) => {
     const heights = $(el).data('devmodeheight').split(',') as string[];
     $(el).css('height', heights[enable ? 1 : 0]);
@@ -1934,10 +1917,17 @@ function reconfigurePageBasedOnTab() {
   resetWindow();
 
   updatePageElements();
-
   if (currentTab === 'parsons') {
     loadParsonsExercise(theLevel, 1);
+    // remove the fixed height from the editor
+    document.getElementById('code_editor')!.style.height = '100%'
+    document.getElementById('code_output')!.style.height = '100%'
     return;
+  } else {
+    $('[data-devmodeheight]').each((_, el) => {
+      const heights = $(el).data('devmodeheight').split(',') as string[];
+      $(el).css('height', heights[0]);
+    });
   }
 
   const adventure = theAdventures[currentTab];
