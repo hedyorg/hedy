@@ -127,12 +127,3 @@ class Adventure:
             text=row['content'],
             is_teacher_adventure=True,
             is_command_adventure=False)
-
-
-a = Adventure(
-    'start',
-    name='start',
-    text='start',
-    save_name='start',
-    editor_contents='xyz')
-print(a)
