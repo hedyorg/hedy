@@ -264,7 +264,7 @@ def task_frontend():
     return dict(
         actions=None,
         task_dep=[
-            'lezer_parsers'
+            'lezer_parsers',
             'tailwind',
             'typescript',
         ]
