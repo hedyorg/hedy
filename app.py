@@ -1544,7 +1544,12 @@ def render_code_in_editor(level, code):
     except BaseException:
         return utils.error_page(error=404, ui_message=gettext('no_such_level'))
 
-    a = Adventure('start', 'start', 'start', 'start', code, False, False)
+    a = Adventure(
+        short_name='start',
+        name='start',
+        text='start',
+        save_name='start',
+        editor_contents=code)
     adventures = [a]
 
     return render_template("code-page.html",

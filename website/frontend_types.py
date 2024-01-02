@@ -10,11 +10,25 @@ template code expects to index as `object['field']`, so we put a magic method
 on every object so that method of accessing also works.
 """
 
+import functools
 from typing import Optional, List
 from dataclasses import dataclass, field
 import utils
 
 
+def require_kwargs(klass):
+    """Decorator to require keyword arguments when instantiating a class."""
+    ctr = klass.__init__
+    @functools.wraps(ctr)
+    def wrapper(self, *args, **kwargs):
+        if args:
+            raise RuntimeError(f'You must use only keyword arguments when instantiating {klass.__name__}')
+        return ctr(self, **kwargs)
+    klass.__init__ = wrapper
+    return klass
+
+
+@require_kwargs
 @dataclass
 class ExtraStory:
     text: str
@@ -24,6 +38,7 @@ class ExtraStory:
         return getattr(self, key)
 
 
+@require_kwargs
 @dataclass
 class Program:
     id: str
@@ -57,6 +72,7 @@ class Program:
             submitted=r.get('submitted'))
 
 
+@require_kwargs
 @dataclass
 class SaveInfo:
     id: str
@@ -77,6 +93,7 @@ class SaveInfo:
         )
 
 
+@require_kwargs
 @dataclass
 class Adventure:
     short_name: str
@@ -84,8 +101,8 @@ class Adventure:
     text: str
     save_name: str
     editor_contents: str = field(default='')
-    is_teacher_adventure: bool
-    is_command_adventure: bool
+    is_teacher_adventure: bool = field(default=False)
+    is_command_adventure: bool = field(default=False)
     image: Optional[str] = None
     example_code: Optional[str] = None
     extra_stories: Optional[List[ExtraStory]] = field(default_factory=list)
@@ -104,3 +121,12 @@ class Adventure:
             text=row['content'],
             is_teacher_adventure=True,
             is_command_adventure=False)
+
+
+a = Adventure(
+    'start',
+    name='start',
+    text='start',
+    save_name='start',
+    editor_contents='xyz')
+print(a)
