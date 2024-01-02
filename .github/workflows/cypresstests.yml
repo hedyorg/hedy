@@ -37,8 +37,7 @@ jobs:
     - name: Bundle files
       # Generates js and css files.
       run: |
-        build-tools/heroku/tailwind/generate-development-css
-        build-tools/heroku/generate-typescript
+        doit frontend
 
     - name: Start the server
       # Runs in the background
