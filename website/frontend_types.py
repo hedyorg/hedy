@@ -24,6 +24,7 @@ def require_kwargs(klass):
     have to install a newer Python version.
     """
     ctr = klass.__init__
+
     @functools.wraps(ctr)
     def wrapper(self, *args, **kwargs):
         if args:
