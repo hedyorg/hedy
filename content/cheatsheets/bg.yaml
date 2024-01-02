@@ -101,8 +101,8 @@
     explanation: Check elements with `{in}`
     demo_code: |-
         красиви_цветове {is} зелено, жълто
-        цвят {is} {ask} 'Кой{is} е любимият ти цвят?'
-        {if} цвят{in} красиви_цветове{print} 'красиво!!' {else} {print} 'meh'
+        цвят {is} {ask} 'Кой is е любимият ти цвят?'
+        {if} цвят {in} красиви_цветове {print} 'красиво!!' {else}  {print} 'meh'
 -   name: '{pressed}'
     explanation: Проверете дали даден клавиш на клавиатурата е `{pressed}`.
     demo_code: '{if} a {is} {pressed} {print} "Ти натисна A!" {else} {print} "Ти натисна друг клавиш!"'
@@ -364,5 +364,5 @@
 -   name: питай нещо със {input}
     explanation: Използвай`{input}` ,а не `{ask}`за да питаш нещо.
     demo_code: |-
-        Име = {input}('Какво е твоето име?')
+        име = {input}('Какво е твоето име?')
         {print}('Значи твоето име е ', име)
