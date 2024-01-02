@@ -412,20 +412,20 @@ class TestsLevel12(HedyTester):
 
     def test_if_and_list_access(self):
         code = textwrap.dedent("""\
-        plyer = 'x'
+        player = 'x'
         choice = 1
         field = '.', '.', '.', '.', '.', '.', '.', '.', '.'
         if field at choice = '.'
-            field at choice = plyer
+            field at choice = player
         else
             print 'illegal move!'""")
 
         expected = textwrap.dedent("""\
-        plyer = 'x'
+        player = 'x'
         choice = 1
         field = ['.', '.', '.', '.', '.', '.', '.', '.', '.']
         if convert_numerals('Latin', field[int(choice)-1]) == convert_numerals('Latin', '.'):
-          field[int(choice)-1] = plyer
+          field[int(choice)-1] = player
         else:
           print(f'''illegal move!''')""")
 
