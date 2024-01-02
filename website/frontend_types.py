@@ -19,6 +19,7 @@ import utils
 def require_kwargs(klass):
     """Decorator to require keyword arguments when instantiating a class."""
     ctr = klass.__init__
+
     @functools.wraps(ctr)
     def wrapper(self, *args, **kwargs):
         if args:
