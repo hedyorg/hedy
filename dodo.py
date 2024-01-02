@@ -54,7 +54,7 @@ def task_tailwind():
             *glob('main/**/*.md'),
             *glob('content/**/*.md'),
             # exclude files generated for translations
-            *[file for file in glob('static/js/*.ts') if file not in \ 
+            *[file for file in glob('static/js/*.ts') if file not in \
                 ['static/js/message-translations.ts', 'static/js/client-messages.ts']
             ],
             script,
@@ -264,6 +264,7 @@ def task_frontend():
     return dict(
         actions=None,
         task_dep=[
+            'lezer_parsers'
             'tailwind',
             'typescript',
         ]
