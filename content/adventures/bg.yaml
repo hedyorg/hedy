@@ -33,11 +33,12 @@ adventures:
                     За тази цел ти ще напишеш малко повече код. Ха!
                 example_code: |-
                     ```
-                    name is ask Как се нарича главаната героиня?
+                    name{is}{ask}Как се нарича главната героиня?
                     print name сега навлиза в гората.
-                    print Тя е малко разтревожена.
-                    print Наоколо се долавят странни шумове и звуци.
-                    print name се опасява че гората може би е омагьосана.
+                    {print} Тя е малко разтревожена.
+                    {print} Наоколо се долавят странни шумове и звуци.
+                    {sleep}
+                    {print} name се опасява че гората може би е омагьосана.
                     ```
                 story_text_2: |
                     ### Exercise
@@ -1322,8 +1323,7 @@ adventures:
 
                     {print} 2.5 + 2.5
             13:
-                story_text: We are now going to learn `{and}` and `{or}`! If you want to check two statements, you don't have to use two {if}'s but can use `{and}` and `{or}`. If you use `{and}`, both statements, left and right of the `{and}` need to be true. We can also use `{or}`. Then only one statement
-                    needs to be correct.
+                story_text: We are now going to learn `{and}` and `{or}`! If you want to check two statements, you don't have to use two {if}'s but can use `{and}` and `{or}`. If you use `{and}`, both statements, left and right of the `{and}` need to be true. We can also use `{or}`. Then only one statement needs to be correct.
                 example_code: |
                     ```
                     name = {ask} 'what is your name?'

@@ -30,7 +30,7 @@
         име {is} Галя
         {print} добре дошъл име.
 -   name: '{ask}'
-    explanation: Запитай с командата `{ask}`. Важно е да запомниш, че трябва да назовеш отговора си с командата `{is}`.
+    explanation: Питай с командата `{ask}`. Важно е да запомниш, че трябва да назовеш отговора си с командата `{is}`.
     demo_code: |-
         цвят {is} {ask} Кой е любимият ти цвят?
         {print} цвят е твоят любим.
@@ -100,9 +100,9 @@
 -   name: '{in}'
     explanation: Check elements with `{in}`
     demo_code: |-
-        pretty_colors {is} green, yellow
-        color {is} {ask} 'What {is} your favorite color?'
-        {if} color {in} pretty_colors {print} 'pretty!' {else} {print} 'meh'
+        красиви_цветове {is} зелено, жълто
+        цвят {is} {ask} 'Кой{is} е любимият ти цвят?'
+        {if} цвят{in} красиви_цветове{print} 'красиво!!' {else} {print} 'meh'
 -   name: '{pressed}'
     explanation: Проверете дали даден клавиш на клавиатурата е `{pressed}`.
     demo_code: '{if} a {is} {pressed} {print} "Ти натисна A!" {else} {print} "Ти натисна друг клавиш!"'
@@ -188,14 +188,14 @@
     explanation: print something. Remember to use a quotation mark for literal printing.
     demo_code: '{print} ''5 times 5 is '' 5 * 5'
 -   name: '{for} with a list'
-    explanation: print all things in a list
+    explanation: Принтирай всички работи в списък.
     demo_code: |-
         animals {is} dog, cat, blobfish
         {for} animal {in} animals
           {print} 'I love ' animal
 11:
 -   name: '{for} loop'
-    explanation: We can use `{for}` with a {range}
+    explanation: Може да използваме `{for}` със `{range}`
     demo_code: |-
         {for} counter {in} {range} 1 {to} 5
             {print} counter
@@ -317,7 +317,7 @@
         firstfruit = fruit[1]
         {print} firstfruit
 -   name: Get a random item from a list
-    explanation: To get a random item from a list we use [random] so fruit[random] means, get a random fruit from the list!
+    explanation: За да вземем случаен предмет от списък ние използваме [{random}] затова плод [{random}] означава, че вземате случаен плод от списъка!
     demo_code: |-
         fruit = ['banana', 'apple', 'cherry']
         random_fruit = fruit[random]
@@ -356,13 +356,13 @@
     demo_code: |-
         name = 'Hedy'
         {print}('my name is ', name)
--   name: '{print} with var'
-    explanation: With `{print}` you need to use parentheses and commas if you {print} more items
+-   name: '{print} със променлива'
+    explanation: Със `{print}`трябва да използваш скоби и запетайки, ако принтираш повече предмети.
     demo_code: |-
-        name = 'Hedy'
-        {print}('my name is ', name)
--   name: ask something with {input}
-    explanation: Use `{input}` instead of `{ask}` to ask something
+        име= 'Hedy'
+        {print}('моето име е ', име)
+-   name: питай нещо със {input}
+    explanation: Използвай`{input}` ,а не `{ask}`за да питаш нещо.
     demo_code: |-
-        name = {input}('What is your name?')
-        {print}('So your name is ', name)
+        Име = {input}('Какво е твоето име?')
+        {print}('Значи твоето име е ', име)
