@@ -56,7 +56,7 @@ def task_tailwind():
             # exclude files generated for translations
             *[file for file in glob('static/js/*.ts') if file not in \
                 ['static/js/message-translations.ts', 'static/js/client-messages.ts']
-            ],
+              ],
             script,
         ],
         title=lambda _: 'Generate Tailwind CSS',
