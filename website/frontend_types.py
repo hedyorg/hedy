@@ -83,7 +83,7 @@ class Adventure:
     name: str
     text: str
     save_name: str
-    start_code: str
+    editor_contents: str = field(default='')
     is_teacher_adventure: bool
     is_command_adventure: bool
     image: Optional[str] = None
@@ -100,7 +100,7 @@ class Adventure:
             short_name=row['id'],
             name=row['name'],
             save_name=row['name'],
-            start_code='',  # Teacher adventures don't seem to have this
+            editor_contents='',  # Teacher adventures don't seem to have this
             text=row['content'],
             is_teacher_adventure=True,
             is_command_adventure=False)

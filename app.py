@@ -161,8 +161,7 @@ def load_adventures_for_level(level, subset=None):
                 extra_stories=extra_stories,
                 is_teacher_adventure=False,
                 is_command_adventure=short_name in KEYWORDS_ADVENTURES,
-                save_name=f'{default_save_name} {level}',
-                start_code=adventure['levels'][level].get('start_code', ""))
+                save_name=f'{default_save_name} {level}')
 
             all_adventures.append(current_adventure)
 
@@ -179,7 +178,7 @@ def load_adventures_for_level(level, subset=None):
 def load_saved_programs(level, into_adventures, preferential_program: Optional[Program]):
     """Load saved previous saved programs by the current user into the given adventures array.
 
-    Mutates the adventures in-place, by setting the 'save_name', 'start_code'
+    Mutates the adventures in-place, by setting the 'save_name'
     and 'save_info' attributes of adventures.
     """
     if not current_user()['username']:
@@ -205,7 +204,6 @@ def load_saved_programs(level, into_adventures, preferential_program: Optional[P
             continue
 
         adventure.save_name = program.name
-        adventure.start_code = program.code
         adventure.save_info = SaveInfo.from_program(program)
 
 
@@ -1221,7 +1219,7 @@ def hour_of_code(level, program_id=None):
                 name=gettext('your_program'),
                 text='',
                 example_code='',
-                start_code=loaded_program.code,
+                editor_contents=loaded_program.code,
                 save_name=loaded_program.name,
                 is_teacher_adventure=False,
                 is_command_adventure=loaded_program.adventure_name in KEYWORDS_ADVENTURES
@@ -1390,7 +1388,7 @@ def index(level, program_id):
                 name=gettext('your_program'),
                 text='',
                 example_code='',
-                start_code=loaded_program.code,
+                editor_contents=loaded_program.code,
                 save_name=loaded_program.name,
                 is_teacher_adventure=False,
                 is_command_adventure=loaded_program.adventure_name in KEYWORDS_ADVENTURES
@@ -1514,7 +1512,7 @@ def view_program(user, id):
     arguments_dict['page_title'] = f'{result["name"]} – Hedy'
     arguments_dict['level'] = result['level']  # Necessary for running
     arguments_dict['initial_adventure'] = dict(result,
-                                               start_code=code,
+                                               editor_contents=code,
                                                )
     arguments_dict['editor_readonly'] = True
 
