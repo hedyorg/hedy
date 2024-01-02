@@ -17,7 +17,12 @@ import utils
 
 
 def require_kwargs(klass):
-    """Decorator to require keyword arguments when instantiating a class."""
+    """Decorator to require keyword arguments when instantiating a class.
+
+    This decorator avoids having to take a dependency on Python 3.10 (which adds
+    support for `@dataclass(kw_only=True)`), so people working on this project don't
+    have to install a newer Python version.
+    """
     ctr = klass.__init__
     @functools.wraps(ctr)
     def wrapper(self, *args, **kwargs):
