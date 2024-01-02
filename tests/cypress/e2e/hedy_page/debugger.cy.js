@@ -11,14 +11,14 @@ describe('Test editor box functionality', () => {
     cy.get('#debug_button').click();
     cy.wait('@parse')
 
-    cy.get('.cm-line')
+    codeMirrorLines()
       .eq(0)
       .should('have.class', 'cm-debugger-current-line');
 
     cy.get('#debug_continue').click();
     cy.get('#output').should('contain.text', 'Hello world');
 
-    cy.get('.cm-line')
+    codeMirrorLines()
       .eq(1)
       .should('have.class', 'cm-debugger-current-line');
 
@@ -27,7 +27,7 @@ describe('Test editor box functionality', () => {
     cy.get('#ask-modal > form > div > input[type="text"]').type('Hedy!');
     cy.get('#ask-modal > form > div > input[type="submit"]').click();
 
-    cy.get('.cm-line')
+    codeMirrorLines()
       .eq(2)
       .should('have.class', 'cm-debugger-current-line');
 
@@ -45,7 +45,7 @@ describe('Test editor box functionality', () => {
     cy.get('#debug_button').click();
     cy.wait('@parse')
 
-    cy.get('.cm-line')
+    codeMirrorLines()
       .eq(0)
       .should('have.class', 'cm-debugger-current-line');
 
@@ -54,19 +54,19 @@ describe('Test editor box functionality', () => {
     cy.get('#ask-modal > form > div > input[type="text"]').type('Hedy');
     cy.get('#ask-modal > form > div > input[type="submit"]').click();
 
-    cy.get('.cm-line')
+    codeMirrorLines()
       .eq(1)
       .should('have.class', 'cm-debugger-current-line');
 
     cy.get('#debug_continue').click();
     cy.get('#output').should('contain.text', 'Hello Hedy');
 
-    cy.get('.cm-line')
+    codeMirrorLines()
       .eq(2)
       .should('have.class', 'cm-debugger-current-line');
     cy.get('#debug_continue').click();
 
-    cy.get('.cm-line')
+    codeMirrorLines()
       .eq(3)
       .should('have.class', 'cm-debugger-current-line');
 
@@ -83,21 +83,21 @@ describe('Test editor box functionality', () => {
     cy.get('#debug_button').click();
     cy.wait('@parse')
 
-    cy.get('.cm-line')
+    codeMirrorLines()
       .eq(0)
       .should('have.class', 'cm-debugger-current-line');
 
     cy.get('#debug_continue').click();
     cy.get('#output').should('contain.text', '3');
 
-    cy.get('.cm-line')
+    codeMirrorLines()
       .eq(1)
       .should('have.class', 'cm-debugger-current-line');
 
     cy.get('#debug_continue').click();
     cy.wait(1000) // next command is sleep so wait 1 second
 
-    cy.get('.cm-line')
+    codeMirrorLines()
       .eq(2)
       .should('have.class', 'cm-debugger-current-line');
 
@@ -115,7 +115,7 @@ describe('Test editor box functionality', () => {
     cy.get('#debug_button').click();
     cy.wait('@parse')
 
-    cy.get('.cm-line')
+    codeMirrorLines()
       .eq(0)
       .should('have.class', 'cm-debugger-current-line');
     cy.get('#debug_continue').click();
@@ -143,7 +143,7 @@ describe('Test editor box functionality', () => {
     cy.get('#debug_button').click();
     cy.wait('@parse')
 
-    cy.get('.cm-line')
+    codeMirrorLines()
       .eq(0)
       .should('have.class', 'cm-debugger-current-line');
     cy.get('#debug_continue').click();
@@ -261,46 +261,46 @@ describe('Test editor box functionality', () => {
 
     visitLevel(8);
 
-    cy.focused().type("repeat 2 times\n    print 'a'\n    print 'b'");
+    cy.focused().type("repeat 2 times\n    print 'a'\nprint 'b'");
     cy.get('#debug_button').click();
     cy.wait('@parse')
 
-    cy.get('.cm-line')
+    codeMirrorLines()
       .eq(0)
       .should('have.class', 'cm-debugger-current-line');
     cy.get('#debug_continue').click();
 
     // For some reason not yet known to me we have to pass two times on a for statement
     // the first time it executes
-    cy.get('.cm-line')
+    codeMirrorLines()
       .eq(0)
       .should('have.class', 'cm-debugger-current-line');
     cy.get('#debug_continue').click();
 
-    cy.get('.cm-line')
+    codeMirrorLines()
       .eq(1)
       .should('have.class', 'cm-debugger-current-line');
     cy.get('#debug_continue').click();
     cy.get('#output').should('contain.text', 'a');
 
-    cy.get('.cm-line')
+    codeMirrorLines()
       .eq(2)
       .should('have.class', 'cm-debugger-current-line');
     cy.get('#debug_continue').click();
     cy.get('#output').should('contain.text', 'a\nb');
 
-    cy.get('.cm-line')
+    codeMirrorLines()
       .eq(0)
       .should('have.class', 'cm-debugger-current-line');
     cy.get('#debug_continue').click();
 
-    cy.get('.cm-line')
+    codeMirrorLines()
       .eq(1)
       .should('have.class', 'cm-debugger-current-line');
     cy.get('#debug_continue').click();
     cy.get('#output').should('contain.text', 'a\nb\na');
 
-    cy.get('.cm-line')
+    codeMirrorLines()
       .eq(2)
       .should('have.class', 'cm-debugger-current-line');
     cy.get('#debug_continue').click();
@@ -317,12 +317,12 @@ describe('Test editor box functionality', () => {
     cy.get('#debug_button').click();
     cy.wait('@parse')
 
-    cy.get('.cm-line')
+    codeMirrorLines()
       .eq(0)
       .should('have.class', 'cm-debugger-current-line');
     cy.get('#debug_continue').click();
 
-    cy.get('.cm-line')
+    codeMirrorLines()
       .eq(1)
       .should('have.class', 'cm-debugger-current-line');
     cy.get('#debug_continue').click();
@@ -332,17 +332,17 @@ describe('Test editor box functionality', () => {
     cy.intercept('/parse').as('parse');
     visitLevel(8);
 
-    cy.focused().type("if Jesus is Hedy\n    print 'Welcome Hedy'\nelse\n    print 'Not Hedy'");
+    cy.focused().type("if Jesus is Hedy\n    print 'Welcome Hedy'\n{backspace}else\n    print 'Not Hedy'");
 
     cy.get('#debug_button').click();
     cy.wait('@parse')
 
-    cy.get('.cm-line')
+    codeMirrorLines()
       .eq(0)
       .should('have.class', 'cm-debugger-current-line');
     cy.get('#debug_continue').click();
 
-    cy.get('.cm-line')
+    codeMirrorLines()
       .eq(3)
       .should('have.class', 'cm-debugger-current-line');
     cy.get('#debug_continue').click();
@@ -357,24 +357,24 @@ describe('Test editor box functionality', () => {
     cy.get('#debug_button').click();
     cy.wait('@parse')
 
-    cy.get('.cm-line')
+    codeMirrorLines()
       .eq(0)
       .should('have.class', 'cm-debugger-current-line');
     cy.get('#debug_continue').click();
 
     // For some reason not yet known to me we have to pass two times on a for statement
     // the first time it executes
-    cy.get('.cm-line')
+    codeMirrorLines()
       .eq(0)
       .should('have.class', 'cm-debugger-current-line');
     cy.get('#debug_continue').click();
 
-    cy.get('.cm-line')
+    codeMirrorLines()
       .eq(1)
       .should('have.class', 'cm-debugger-current-line');
     cy.get('#debug_continue').click();
 
-    cy.get('.cm-line')
+    codeMirrorLines()
       .eq(2)
       .should('have.class', 'cm-debugger-current-line');
     cy.get('#debug_continue').click();
@@ -387,34 +387,98 @@ describe('Test editor box functionality', () => {
 
     visitLevel(9);
 
-    cy.focused().type("repeat 1 times\n    if pizza is pizza\n        print 'nice!'\n    else\n        print 'pizza is better'");
+    cy.focused().type("repeat 1 times{enter}    if pizza is pizza{enter}    print 'nice!'{enter}{backspace}else\n    print 'pizza is better'");
 
     cy.get('#debug_button').click();
     cy.wait('@parse')
 
-    cy.get('.cm-line')
+    codeMirrorLines()
       .eq(0)
       .should('have.class', 'cm-debugger-current-line');
     cy.get('#debug_continue').click();
 
     // For some reason not yet known to me we have to pass two times on a for statement
     // the first time it executes
-    cy.get('.cm-line')
+    codeMirrorLines()
       .eq(0)
       .should('have.class', 'cm-debugger-current-line');
     cy.get('#debug_continue').click();
 
-    cy.get('.cm-line')
+    codeMirrorLines()
       .eq(1)
       .should('have.class', 'cm-debugger-current-line');
     cy.get('#debug_continue').click();
 
-    cy.get('.cm-line')
+    codeMirrorLines()
       .eq(2)
       .should('have.class', 'cm-debugger-current-line');
     cy.get('#debug_continue').click();
 
     cy.get('#output').should('contain.text', 'nice!');
+  });
+
+  it('Test flat if split between lines', () => {
+    cy.intercept('/parse').as('parse');
+
+    visitLevel(5);
+
+    cy.focused().type("if x is y\nprint '!bonito!'\nelse print 'meh'");
+
+    cy.get('#debug_button').click();
+    cy.wait('@parse')
+
+    cy.get('.cm-debugger-current-line > span').then(els => {
+      const texts = [...els].map(getText);
+      expect(texts).to.deep.eq('if x is y'.split(' '));
+    });
+    cy.get('#debug_continue').click();
+
+    cy.get('.cm-debugger-current-line > span').then(els => {
+      const texts = [...els].map(getText);
+      expect(texts).to.deep.eq(['print', "'meh'"]);
+    });
+
+    cy.get('#debug_continue').click();
+
+    cy.get('#output').should('contain.text', 'meh');
+  });
+
+  it('Test repeat with flat if split between lines inside', () => {
+    cy.intercept('/parse').as('parse');
+
+    visitLevel(7);
+
+    cy.focused().type("repeat 1 times if x is x print 'a'\nelse print 'b'");
+
+    cy.get('#debug_button').click();
+    cy.wait('@parse')
+
+    cy.get('.cm-debugger-current-line > span').then(els => {
+      const texts = [...els].map(getText);
+      expect(texts).to.deep.eq('repeat 1 times'.split(' '));
+    });
+    cy.get('#debug_continue').click();
+
+    cy.get('.cm-debugger-current-line > span').then(els => {
+      const texts = [...els].map(getText);
+      expect(texts).to.deep.eq('repeat 1 times'.split(' '));
+    });
+    cy.get('#debug_continue').click();
+    
+    cy.get('.cm-debugger-current-line > span').then(els => {
+      const texts = [...els].map(getText);
+      expect(texts).to.deep.eq('if x is x'.split(' '));
+    });
+    cy.get('#debug_continue').click();
+    
+    cy.get('.cm-debugger-current-line > span').then(els => {
+      const texts = [...els].map(getText);
+      expect(texts).to.deep.eq(['print', "'a'"]);
+    });
+
+    cy.get('#debug_continue').click();
+
+    cy.get('#output').should('contain.text', 'a');
   });
 });
 
@@ -432,7 +496,11 @@ function clearViaBackspace() {
 }
 
 function codeMirrorContent() {
-  return cy.get('.cm-content');
+  return cy.get('#editor > .cm-editor > .cm-scroller > .cm-content');
+}
+
+function codeMirrorLines() {
+  return cy.get('#editor > .cm-editor > .cm-scroller > .cm-content > .cm-line');
 }
 
 function checkFullDebugLine(lineHeight, line) {

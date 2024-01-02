@@ -37,6 +37,7 @@ class TestsLevel16(HedyTester):
         self.multi_level_tester(
             code=code,
             max_level=17,
+            unused_allowed=True,
             expected=expected
         )
 
@@ -50,6 +51,7 @@ class TestsLevel16(HedyTester):
             code=code,
             max_level=17,
             expected=expected,
+            unused_allowed=True,
             extra_check_function=check_in_list
         )
 
@@ -96,12 +98,10 @@ class TestsLevel16(HedyTester):
     def test_print_list_commas(self):
         code = textwrap.dedent("""\
             szamok1 = ['1' , '2' , '3' , '4' , '5']
-            szamok2 = ['6' , '7' , '8' , '9']
             print szamok1[random]""")
 
         expected = textwrap.dedent("""\
             szamok1 = ['1', '2', '3', '4', '5']
-            szamok2 = ['6', '7', '8', '9']
             print(f'''{random.choice(szamok1)}''')""")
 
         szamok1 = ['1', '2', '3', '4', '5']
@@ -292,6 +292,7 @@ class TestsLevel16(HedyTester):
             code=code,
             max_level=17,
             expected=expected,
+            unused_allowed=True,
             extra_check_function=self.is_not_turtle()
         )
 
@@ -314,10 +315,12 @@ class TestsLevel16(HedyTester):
         self.multi_level_tester(
             code=code,
             max_level=17,
+            unused_allowed=True,
             expected=expected
         )
 
     # add/remove tests
+
     def test_add_to_list(self):
         code = textwrap.dedent("""\
         color is ask 'what is your favorite color? '

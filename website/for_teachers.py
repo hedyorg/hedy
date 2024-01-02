@@ -3,7 +3,7 @@ import json
 import os
 import uuid
 
-from flask import g, jsonify, request, session, url_for
+from flask import g, jsonify, request, session, url_for, redirect
 from jinja_partials import render_partial
 from flask_babel import gettext
 
@@ -138,9 +138,10 @@ class ForTeachersModule(WebsiteModule):
         description = ""
         questions = []
         survey_later = ""
+        total_questions = ""
 
         if Class.get("students"):
-            survey_id, description, questions, survey_later = self.class_survey(class_id)
+            survey_id, description, questions, total_questions, survey_later = self.class_survey(class_id)
 
         for student_username in Class.get("students", []):
             student = self.db.user_by_username(student_username)
@@ -175,11 +176,11 @@ class ForTeachersModule(WebsiteModule):
             achievement = json.dumps(achievement)
 
         invites = []
-        for invite in self.db.get_class_invites(Class["id"]):
+        for invite in self.db.get_class_invitations(Class["id"]):
             invites.append(
                 {
                     "username": invite["username"],
-                    "invited_as": invite["invited_as"],
+                    "invited_as_text": invite["invited_as_text"],
                     "timestamp": utils.localized_date_format(invite["timestamp"], short_format=True),
                     "expire_timestamp": utils.localized_date_format(invite["ttl"], short_format=True),
                 }
@@ -205,8 +206,32 @@ class ForTeachersModule(WebsiteModule):
             survey_id=survey_id,
             description=description,
             questions=questions,
+            total_questions=total_questions,
             survey_later=survey_later,
         )
+
+    @route("/class/<class_id>/preview", methods=["GET"])
+    @requires_login
+    def preview_class_as_teacher(self, user, class_id):
+        if not is_teacher(user) and not is_admin(user):
+            return utils.error_page(error=403, ui_message=gettext("retrieve_class_error"))
+        Class = self.db.get_class(class_id)
+        if not Class or (not utils.can_edit_class(user, Class) and not is_admin(user)):
+            return utils.error_page(error=404, ui_message=gettext("no_such_class"))
+        session["preview_class"] = {
+            "id": Class["id"],
+            "name": Class["name"],
+        }
+        return redirect("/hedy")
+
+    @route("/clear-preview-class", methods=["GET"])
+    # Note: we explicitly do not need login here, anyone can exit preview mode
+    def clear_preview_class(self):
+        try:
+            del session["preview_class"]
+        except KeyError:
+            pass
+        return redirect("/for-teachers")
 
     @route("/class/<class_id>/programs/<username>", methods=["GET", "POST"])
     @requires_teacher
@@ -261,7 +286,8 @@ class ForTeachersModule(WebsiteModule):
                  }
             )
 
-        adventure_names = hedy_content.Adventures(g.lang).get_adventure_names()
+        keyword_lang = g.keyword_lang
+        adventure_names = hedy_content.Adventures(g.lang).get_adventure_names(keyword_lang)
 
         next_page_url = url_for('programs_page', **dict(request.args, page=result.next_page_token)
                                 ) if result.next_page_token else None
@@ -301,6 +327,8 @@ class ForTeachersModule(WebsiteModule):
             adventures=adventures,
             adventure_names=adventure_names,
             available_adventures=available_adventures,
+            custom_adventures=list(dict.fromkeys(
+                [item for sublist in available_adventures.values() for item in sublist if item.is_teacher_adventure])),
             adventures_default_order=hedy_content.ADVENTURE_ORDER_PER_LEVEL,
             current_page="for-teachers",
             min_level=min_level,
@@ -310,19 +338,26 @@ class ForTeachersModule(WebsiteModule):
                 class_id=class_id
             ))
 
+    @route("/load-survey/<class_id>", methods=["POST"])
+    def load_survey(self, class_id):
+        survey_id, description, questions, total_questions, survey_later = self.class_survey(class_id)
+        return render_partial('htmx-survey.html', survey_id=survey_id, description=description,
+                              questions=questions, survey_later=survey_later, click='yes')
+
     def class_survey(self, class_id):
         description = ""
         survey_id = "class" + '_' + class_id
         description = gettext("class_survey_description")
         survey_later = gettext("class_survey_later")
         questions = []
+        total_questions = 4
 
         survey = self.db.get_survey(survey_id)
         if not survey:
             self.db.store_survey(dict(id=f"{survey_id}"))
             survey = self.db.get_survey(survey_id)
         elif survey.get('skip') is True or survey.get('skip') == date.today().isoformat():
-            return "", "", "", ""
+            return "", "", "", "", ""
 
         questions.append(gettext("class_survey_question1"))
         questions.append(gettext("class_survey_question2"))
@@ -331,7 +366,7 @@ class ForTeachersModule(WebsiteModule):
         unanswered_questions, translate_db = utils.get_unanswered_questions(survey, questions)
         if translate_db:
             self.db.add_survey_responses(survey_id, translate_db)
-        return survey_id, description, unanswered_questions, survey_later
+        return survey_id, description, unanswered_questions, total_questions, survey_later
 
     @route("/get-customization-level", methods=["GET"])
     @requires_login
@@ -559,7 +594,7 @@ class ForTeachersModule(WebsiteModule):
         for level, level_default_adventures in hedy_content.ADVENTURE_ORDER_PER_LEVEL.items():
             for short_name in level_default_adventures:
                 adventure = SortedAdventure(short_name=short_name,
-                                            long_name=adventure_names[short_name],
+                                            long_name=adventure_names.get(short_name, short_name),
                                             is_teacher_adventure=False,
                                             is_command_adventure=short_name in hedy_content.KEYWORDS_ADVENTURES)
                 default_adventures[level].add(adventure)
@@ -568,8 +603,10 @@ class ForTeachersModule(WebsiteModule):
             adventure = SortedAdventure(short_name=teacher_adventure['id'],
                                         long_name=teacher_adventure['name'],
                                         is_teacher_adventure=True,
-                                        is_command_adventure=False)
-            teacher_adventures[int(teacher_adventure['level'])].add(adventure)
+                                        is_command_adventure=False,)
+            # levels=teacher_adventure.get("levels", []))
+            for level in teacher_adventure.get("levels", [teacher_adventure.get("level")]):
+                teacher_adventures[int(level)].add(adventure)
 
         for level in range(1, hedy.HEDY_MAX_LEVEL + 1):
             adventures_set = set(adventures[level])
@@ -610,7 +647,7 @@ class ForTeachersModule(WebsiteModule):
             for adventure in default_adventures:
                 db_adventures[str(lvl)].append({'name': adventure, 'from_teacher': False})
                 sorted_adventure = SortedAdventure(short_name=adventure,
-                                                   long_name=adventure_names[adventure],
+                                                   long_name=adventure_names.get(adventure, adventure),
                                                    is_command_adventure=adventure in hedy_content.KEYWORDS_ADVENTURES,
                                                    is_teacher_adventure=False)
                 adventures[lvl].append(sorted_adventure)
@@ -812,7 +849,6 @@ class ForTeachersModule(WebsiteModule):
 
         # the following is due to the fact that the current user may be a second user.
         teacher = classes[0].get("teacher") if len(classes) else user["username"]
-        print("\n\n\n", teacher, user)
         # Now -> actually store the users in the db
         for account in body.get("accounts", []):
             # Set the current teacher language and keyword language as new account language
@@ -851,9 +887,12 @@ class ForTeachersModule(WebsiteModule):
     @route("/customize-adventure/<adventure_id>", methods=["GET"])
     @requires_teacher
     def get_adventure_info(self, user, adventure_id):
+        if not adventure_id:
+            return gettext("adventure_empty"), 400
+        if not isinstance(adventure_id, str):
+            return gettext("adventure_name_invalid"), 400
+
         adventure = self.db.get_adventure(adventure_id)
-        if not adventure:
-            return utils.error_page(error=404, ui_message=gettext("no_such_adventure"))
         if adventure["creator"] != user["username"] and not is_teacher(user):
             return utils.error_page(error=403, ui_message=gettext("retrieve_adventure_error"))
         # Now it gets a bit complex, we want to get the teacher classes as well as the customizations
@@ -883,6 +922,7 @@ class ForTeachersModule(WebsiteModule):
     @requires_teacher
     def update_adventure(self, user):
         body = request.json
+
         # Validations
         if not isinstance(body, dict):
             return gettext("ajax_error"), 400
@@ -890,13 +930,13 @@ class ForTeachersModule(WebsiteModule):
             return gettext("adventure_id_invalid"), 400
         if not isinstance(body.get("name"), str):
             return gettext("adventure_name_invalid"), 400
-        if not isinstance(body.get("level"), str):
+        if not isinstance(body.get("levels"), list) or (isinstance(body.get("levels"), list) and not body["levels"]):
             return gettext("level_invalid"), 400
         if not isinstance(body.get("content"), str):
             return gettext("content_invalid"), 400
         if len(body.get("content")) < 20:
             return gettext("adventure_length"), 400
-        if not isinstance(body.get("public"), bool):
+        if not isinstance(body.get("public"), bool) and not isinstance(body.get("public"), int):
             return gettext("public_invalid"), 400
         if not isinstance(body.get("language"), str) or body.get("language") not in hedy_content.ALL_LANGUAGES.keys():
             # we're incrementally integrating language into adventures; i.e., not all adventures have a language field.
@@ -927,9 +967,10 @@ class ForTeachersModule(WebsiteModule):
             "date": utils.timems(),
             "creator": user["username"],
             "name": body["name"],
-            "level": body["level"],
+            "level": body["levels"][0],  # TODO: this should be removed gradually.
+            "levels": body["levels"],
             "content": body["content"],
-            "public": body["public"],
+            "public": 1 if body["public"] else 0,
             "language": body["language"],
         }
 
@@ -971,32 +1012,26 @@ class ForTeachersModule(WebsiteModule):
             return gettext("something_went_wrong_keyword_parsing"), 400
         return {"code": code}, 200
 
-    @route("/create_adventure", methods=["POST"])
+    @route("/create-adventure", methods=["POST"])
     @requires_teacher
     def create_adventure(self, user):
-        body = request.json
-        # Validations
-        if not isinstance(body, dict):
-            return gettext("ajax_error"), 400
-        if not isinstance(body.get("name"), str):
-            return gettext("adventure_name_invalid"), 400
-        if len(body.get("name")) < 1:
-            return gettext("adventure_empty"), 400
-
+        adventure_id = uuid.uuid4().hex
+        name = "AdventureX"
         adventures = self.db.get_teacher_adventures(user["username"])
+
         for adventure in adventures:
-            if adventure["name"] == body["name"]:
-                return gettext("adventure_duplicate"), 400
+            if adventure["name"] == name:
+                name += 'X'
+                continue
 
         adventure = {
-            "id": uuid.uuid4().hex,
+            "id": adventure_id,
             "date": utils.timems(),
             "creator": user["username"],
-            "name": body["name"],
+            "name": name,
             "level": 1,
             "content": "",
             "language": g.lang,
         }
-
         self.db.store_adventure(adventure)
-        return {"id": adventure["id"]}, 200
+        return adventure["id"], 200

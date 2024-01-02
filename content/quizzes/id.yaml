@@ -1079,7 +1079,7 @@ levels:
             -   option: '30'
                 feedback: Ini akan menjadi jawaban yang tepat jika tidak ada tanda kutip.
             -   option: '13'
-                feedback: Coba lagi..
+                feedback: Coba lagi…
             -   option: 3*10
                 feedback: Benar! Ada tanda petiknya, jadi Hedy akan mencetaknya secara harafiah.
             -   option: Tidak ada, Hedy akan memberikan pesan error.
@@ -1153,7 +1153,7 @@ levels:
                 harga = 0
                 {if} makanan {is} harga hamburger = harga + 15
                 {if} makanan {is} harga kentang goreng = harga + 6
-                minumannya adalah {ask} 'Kamu ingin minum apa?'
+                minuman = {ask} 'Kamu ingin minum apa?'
                 {if} minuman {is} harga coke = harga + 3
                 {if} minuman {is} harga air = harga + 1
                 {print} harga 'tolong dolar'
@@ -1230,7 +1230,7 @@ levels:
             question_score: '10'
     7:
         1:
-            question_text: Berapa banyak baris yang dapat Anda ulangi sekaligus dengan perintah ulangi pada level ini?
+            question_text: Berapa banyak baris yang dapat Anda ulangi sekaligus dengan perintah `{repeat}` pada level ini?
             mp_choice_options:
             -   option: '0'
                 feedback: Tidak, Anda dapat mengulangi satu baris.
@@ -1290,10 +1290,7 @@ levels:
                 {print} 'Aku biru'
                 {repeat} 7 {times} {print} 'da ba dee, da ba da'
             mp_choice_options:
-            -   option: |-
-                    ```
-                    I'm
-                    ```
+            -   option: '`I''m`'
                 feedback: Itu benar!
             -   option: '`{print}`'
                 feedback: '`{print}` dieja dengan benar'
@@ -1322,28 +1319,36 @@ levels:
                 {repeat} 3 {times} {print} 'berputar-putar'
             mp_choice_options:
             -   option: |-
+                    ```
                     roda bus melaju
                     berputar-putar
+                    ```
                 feedback: Hanya baris kedua yang diulang sebanyak 3 kali
             -   option: |-
+                    ```
                     roda bus melaju
                     roda bus melaju
                     roda bus melaju
                     berputar-putar
+                    ```
                 feedback: Hanya baris kedua yang diulang sebanyak 3 kali
             -   option: |-
+                    ```
                     roda bus melaju
                     berputar-putar
                     roda bus melaju
                     berputar-putar
                     roda bus melaju
                     berputar-putar
+                    ```
                 feedback: Hanya baris kedua yang diulang sebanyak 3 kali
             -   option: |-
+                    ```
                     roda bus melaju
                     berputar-putar
                     berputar-putar
                     berputar-putar
+                    ```
                 feedback: Di seluruh kota! Sempurna!
             hint: Hanya 'berputar-putar' yang diulang sebanyak 3 kali.
             correct_answer: D
@@ -1355,24 +1360,32 @@ levels:
                 {print} 'ROCK YOU!'
             mp_choice_options:
             -   option: |-
+                    ```
                     We will We will
                     ROCK YOU!
+                    ```
                 feedback: '''We will'' tidak akan muncul dua kali dalam baris yang sama'
             -   option: |-
+                    ```
                     We will
                     We will
                     ROCK YOU!
+                    ```
                 feedback: Hebat!
             -   option: |-
+                    ```
                     We will
                     ROCK YOU!
                     We will
                     ROCK YOU!
+                    ```
                 feedback: ROCK YOU! tidak akan terulang
             -   option: |-
+                    ```
                     We will
                     ROCK YOU!
-                feedback: Perhatikan perintah ulangi
+                    ```
+                feedback: Perhatikan perintah `{repeat}`
             hint: Perhatikan perintah `{repeat}`.
             correct_answer: B
             question_score: '10'
@@ -1399,6 +1412,7 @@ levels:
                     {repeat} 2 {times} {print} 'Here comes the sun'
                     {print} 'And I say'
                     {print} 'Its alright'"
+                    ```
                 feedback: Di mana Anda meninggalkan 'Do do do do'?
             -   option: |-
                     ```
@@ -1407,7 +1421,7 @@ levels:
                     {print} 'And I say'
                     {print} 'Its alright'
                     ```
-                feedback: Ini bukan urutan yang benar..
+                feedback: Ini bukan urutan yang benar.
             -   option: |-
                     ```
                     {repeat} 2 {times} {print} 'Here comes the sun'
@@ -1415,7 +1429,7 @@ levels:
                     {print} 'And I say'
                     {print} 'Its alright'"
                     ```
-                feedback: Ini bukan urutan yang benar..
+                feedback: Ini bukan urutan yang benar.
             hint: '`{repeat}` hanya dapat digunakan jika Anda ingin mengeksekusi baris yang sama beberapa kali berturut-turut.'
             correct_answer: A
             question_score: '10'
@@ -1432,7 +1446,7 @@ levels:
             -   option: |-
                     ```
                     {print} 'Batman sedang terbang melalui Gotham. '
-                    {print} 'Saat tiba-tiba dia mendengar seseorang berteriak!'
+                    {print} 'Saat tiba-tiba dia mendengar seseorang berteriak!...'
                     {print} 'Bantuan!'
                     {repeat} 3 {times} {print} 'Tolong bantu saya!'
                     ```
@@ -1440,7 +1454,7 @@ levels:
             -   option: |-
                     ```
                     {print} 'Batman sedang terbang melalui Gotham.'
-                    {print} 'Saat tiba-tiba dia mendengar seseorang berteriak!'
+                    {print} 'Saat tiba-tiba dia mendengar seseorang berteriak!...'
                     {repeat} 3 {times} 'Bantuan!'
                     {print} 'Tolong bantu saya!'
                     ```
@@ -1448,7 +1462,7 @@ levels:
             -   option: |-
                     ```
                     {print} Batman sedang terbang melalui Gotham.
-                    {print} Tiba-tiba dia mendengar seseorang berteriak!
+                    {print} Tiba-tiba dia mendengar seseorang berteriak!...
                     {repeat} 3 {times} {print} Bantuan!
                     {print} Tolong bantu saya!
                     ```
@@ -1456,7 +1470,7 @@ levels:
             -   option: |-
                     ```
                     {print} 'Batman sedang terbang melalui Gotham.'
-                    {print} 'Saat tiba-tiba dia mendengar seseorang berteriak!'
+                    {print} 'Saat tiba-tiba dia mendengar seseorang berteriak!...'
                     {repeat} 3 {times} {print} 'Bantuan!'
                     {print} 'Tolong bantu saya!'
                     ```
@@ -1582,7 +1596,7 @@ levels:
                     Baby shark
                     Baby shark
                     Baby shark
-                feedback: Apa yang diulang dan apa yang tidak.
+                feedback: Apa yang diulang dan apa yang tidak ?
             hint: Apa yang diulang dan apa yang tidak?
             correct_answer: C
             question_score: '10'

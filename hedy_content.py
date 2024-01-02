@@ -15,21 +15,13 @@ COUNTRIES = static_babel_content.COUNTRIES
 ALL_LANGUAGES = {}
 ALL_KEYWORD_LANGUAGES = {}
 
-# Todo TB -> We create this list manually, but it would be nice if we find
-# a way to automate this as well
-NON_LATIN_LANGUAGES = ['ar', 'bg', 'bn', 'el', 'fa', 'hi', 'he', 'pa_PK', 'ru', 'zh_Hans']
-
 # Babel has a different naming convention than Weblate and doesn't support some languages -> fix this manually
 CUSTOM_BABEL_LANGUAGES = {'pa_PK': 'pa_Arab_PK',
                           'kmr': 'ku_TR',
-                          'tn': 'en',
-                          'pap': 'en',
                           'tl': 'en'}
 
 # For the non-existing language manually overwrite the display language to make sure it is displayed correctly
 CUSTOM_LANGUAGE_TRANSLATIONS = {'kmr': 'Kurdî (Tirkiye)',
-                                'tn': 'Setswana',
-                                'pap': 'Papiamentu',
                                 'tl': 'ᜆᜄᜎᜓᜄ᜔'}
 
 customize_babel_locale(CUSTOM_BABEL_LANGUAGES)
@@ -50,6 +42,7 @@ ADVENTURE_ORDER_PER_LEVEL = {
         'haunted',
         'story',
         'turtle',
+        'turtle_draw_it',
         'restaurant',
         'fortune',
         'debugging'
@@ -66,6 +59,7 @@ ADVENTURE_ORDER_PER_LEVEL = {
         'story',
         'restaurant',
         'turtle',
+        'turtle_draw_it',
         'debugging'
     ],
     3: [
@@ -81,6 +75,7 @@ ADVENTURE_ORDER_PER_LEVEL = {
         'story',
         'haunted',
         'turtle',
+        'turtle_draw_it',
         'debugging'
     ],
     4: [
@@ -91,6 +86,7 @@ ADVENTURE_ORDER_PER_LEVEL = {
         'dishes',
         'parrot',
         'turtle',
+        'turtle_draw_it',
         'clear_command',
         'story',
         'haunted',
@@ -113,6 +109,7 @@ ADVENTURE_ORDER_PER_LEVEL = {
         'fortune',
         'pressit',
         'turtle',
+        'turtle_draw_it',
         'debugging'
     ],
     6: [
@@ -123,6 +120,7 @@ ADVENTURE_ORDER_PER_LEVEL = {
         'dice',
         'dishes',
         'turtle',
+        'turtle_draw_it',
         'calculator',
         'fortune',
         'restaurant',
@@ -139,6 +137,7 @@ ADVENTURE_ORDER_PER_LEVEL = {
         'fortune',
         'restaurant',
         'pressit',
+        'turtle_draw_it',
         'debugging'
     ],
     8: [
@@ -152,6 +151,7 @@ ADVENTURE_ORDER_PER_LEVEL = {
         'haunted',
         'restaurant',
         'turtle',
+        'turtle_draw_it',
         'debugging'
     ],
     9: [
@@ -165,6 +165,7 @@ ADVENTURE_ORDER_PER_LEVEL = {
         'haunted',
         'pressit',
         'turtle',
+        'turtle_draw_it',
         'debugging'
     ],
     10: [
@@ -174,6 +175,7 @@ ADVENTURE_ORDER_PER_LEVEL = {
         'dice',
         'fortune',
         'turtle',
+        'turtle_draw_it',
         'harry_potter',
         'songs',
         'story',
@@ -190,6 +192,7 @@ ADVENTURE_ORDER_PER_LEVEL = {
         'songs',
         'restaurant',
         'haunted',
+        'turtle_draw_it',
         'debugging'
     ],
     12: [
@@ -206,6 +209,7 @@ ADVENTURE_ORDER_PER_LEVEL = {
         'turtle',
         'piggybank',
         'secret',
+        'turtle_draw_it',
         'debugging'
     ],
     13: [
@@ -213,10 +217,9 @@ ADVENTURE_ORDER_PER_LEVEL = {
         'and_or_command',
         'secret',
         'functions',
-        # 'functions_2',
-        # 'functions_3',
         'story',
         'rock',
+        'turtle_draw_it',
         'restaurant',
         'calculator',
         'tic',
@@ -228,6 +231,7 @@ ADVENTURE_ORDER_PER_LEVEL = {
         'guess_my_number',
         'haunted',
         'functions',
+        'turtle_draw_it',
         'hotel',
         'calculator',
         'calculator_2',
@@ -239,6 +243,7 @@ ADVENTURE_ORDER_PER_LEVEL = {
     15: [
         'default',
         'while_command',
+        'turtle_draw_it',
         'restaurant',
         'story',
         'dice',
@@ -493,8 +498,9 @@ class Adventures(StructuredDataFile):
     def get_adventure_keyname_name_levels(self):
         return {aid: {adv['name']: list(adv['levels'].keys())} for aid, adv in self.file.get('adventures', {}).items()}
 
-    def get_adventure_names(self):
-        return {aid: adv['name'] for aid, adv in self.file.get('adventures', {}).items()}
+    def get_adventure_names(self, keyword_lang):
+        return {aid: adv['name'] for aid, adv in deep_translate_keywords(
+            self.file.get('adventures'), keyword_lang).items()}
 
     def get_adventures(self, keyword_lang="en"):
         return deep_translate_keywords(self.file.get('adventures'), keyword_lang)

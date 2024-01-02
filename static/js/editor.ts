@@ -26,7 +26,7 @@ export interface EditorEvent {
   readonly click: string
 }
 
-export interface HedyEditorCreator {  
+export interface HedyEditorCreator {
   /**
    * This function should initialize the editor and set up all the required
    * event handlers
@@ -34,7 +34,7 @@ export interface HedyEditorCreator {
    * @param {EditorType} editorType the type of the editor
    */
   initializeEditorWithGutter($editor: JQuery, editorType: EditorType, dir?: string): HedyEditor;
-  
+
   /**
    * Initializes a read only editor
    *
@@ -61,7 +61,7 @@ export interface HedyEditor {
 
   /**
    * Resizes the editor after changing its size programatically
-   * @param newHeight the new height of the editor, if supplied
+   * @param newHeight the new height of the editor in rem, if supplied
    */
   resize(newHeight?: number): void;
 
@@ -75,7 +75,7 @@ export interface HedyEditor {
    */
   clearErrors(): void;
 
-  /**     
+  /**
    * Moves to the cursor to the end of the current file
    */
   moveCursorToEndOfFile(): void;
@@ -91,7 +91,7 @@ export interface HedyEditor {
   clearBreakpoints(): void;
 
   /**
-   * An event handler for the HedyEditor 
+   * An event handler for the HedyEditor
    * @param key the event
    * @param handler  the event handler function
    */
