@@ -2,6 +2,11 @@
 
 {% block full_width_content %}
 {% if not raw %}
+{% if customizations and customizations["teachers_adventure"] %}
+  <div class="bg-red-500 text-white text-sm font-bold px-4 py-3" data-cy="preview_class_banner" role="alert">
+      <div class="text-center center-text">{{_('previewing_adventure')}} <a class="text-white" href="/for-teachers/customize-adventure/{{initial_adventure.id}}">{{_('edit_adventure')}}</a></div>
+  </div>
+{% endif %}
 <div id="level-header" class="bg-blue-200">
   <div class="ltr:pl-8 rtl:pr-8 py-2 flex gap-2 px-4 items-center justify-between w-full max-w-screen-2xl mx-auto">
     {% if customizations and customizations["available_levels"]%}
@@ -24,7 +29,7 @@
               else if not arrow.classList.contains('rotate-180')
                   add .rotate-180 to arrow
               end">
-            {% set dropdown_levels = customizations["available_levels"] if customizations["only_available"] else range(1, max_level + 1) %}
+            {% set dropdown_levels = customizations["available_levels"] if customizations["teachers_adventure"] else range(1, max_level + 1) %}
             {% for dropdown_level in dropdown_levels %}
               <button id="level_button_{{ dropdown_level }}" class="flex justify-between items-center gap-2 px-2 py-2 border-b border-dashed border-blue-500
               {% if dropdown_level == level %}bg-white{% elif dropdown_level not in customizations['available_levels'] %}bg-gray-400 tooltip{% else %}hover:bg-blue-100 bg-blue-200c{% endif %}"

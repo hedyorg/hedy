@@ -1588,9 +1588,10 @@ def get_specific_adventure(name, level, mode):
 
         adventure["content"] = safe_format(adventure["content"], **hedy_content.KEYWORDS.get(g.keyword_lang))
         customizations["available_levels"] = [int(adv_level) for adv_level in adventure.get("levels", [])]
-        customizations["only_available"] = True
+        customizations["teachers_adventure"] = True
 
         current_adventure = Adventure(
+            id=adventure["id"],
             short_name="level",
             name=adventure["name"],
             image=adventure.get("image", None),
