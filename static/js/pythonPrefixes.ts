@@ -2,7 +2,7 @@
 *
 * !!! THIS FILE HAS BEEN GENERATED. DO NOT EDIT !!!
 *
-* Make desired changes to prefixes/{normal,pygame,turtle}.py
+* Make desired changes to prefixes/{normal,pygame,turtle,music}.py
 *
 * Add/edit tests for those changes in tests/test_python_prefixes.py
 *
@@ -145,4 +145,87 @@ def convert_numerals(alphabet, number):
                 T = int
         number = ''.join(all_numerals_converted)
     return T(f'{sign}{number}')
+`;
+
+export const music_prefix = 
+`
+notes_mapping = {
+    'C': 'C4',
+    'D': 'D4',
+    'E': 'E4',
+    'F': 'F4',
+    'G': 'G4',
+    'A': 'A4',
+    'B': 'B4',
+    '1': 'C0',
+    '2': 'D0',
+    '3': 'E0',
+    '4': 'F0',
+    '5': 'G0',
+    '6': 'A0',
+    '7': 'B0',
+    '8': 'C1',
+    '9': 'D1',
+    '10': 'E1',
+    '11': 'F1',
+    '12': 'G1',
+    '13': 'A1',
+    '14': 'B1',
+    '15': 'C2',
+    '16': 'D2',
+    '17': 'E2',
+    '18': 'F2',
+    '19': 'G2',
+    '20': 'A2',
+    '21': 'B2',
+    '22': 'C3',
+    '23': 'D3',
+    '24': 'E3',
+    '25': 'F3',
+    '26': 'G3',
+    '27': 'A3',
+    '28': 'B3',
+    '29': 'C4',
+    '30': 'D4',
+    '31': 'E4',
+    '32': 'F4',
+    '33': 'G4',
+    '34': 'A4',
+    '35': 'B4',
+    '36': 'C5',
+    '37': 'D5',
+    '38': 'E5',
+    '39': 'F5',
+    '40': 'G5',
+    '41': 'A5',
+    '42': 'B5',
+    '43': 'C6',
+    '44': 'D6',
+    '45': 'E6',
+    '46': 'F6',
+    '47': 'G6',
+    '48': 'A6',
+    '49': 'B6',
+    '50': 'C7',
+    '51': 'D7',
+    '52': 'E7',
+    '53': 'F7',
+    '54': 'G7',
+    '55': 'A7',
+    '56': 'B7',
+    '57': 'C8',
+    '58': 'D8',
+    '59': 'E8',
+    '60': 'F8',
+    '61': 'G8',
+    '62': 'A8',
+    '63': 'B8',
+    '64': 'C9',
+    '65': 'D9',
+    '66': 'E9',
+    '67': 'F9',
+    '68': 'G9',
+    '69': 'A9',
+    '70': 'B9',
+}
 `;
