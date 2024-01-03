@@ -3399,10 +3399,10 @@ def repair_leading_space(input_string, lang, level, line):
             result = fixed_result
             raise exceptions.InvalidSpaceException(
                 level=level, line_number=line, fixed_code=fixed_code, fixed_result=result)
-        except exceptions.HedyException:
-            transpile_inner(fixed_code, level)
-            # The fixed code contains another error. Only report the original error for now.
-            pass
+        except exceptions.HedyException as E:
+            if type(E) is not exceptions.InvalidSpaceException:
+                transpile_inner(fixed_code, level)
+                # The fixed code contains another error. Only report the original error for now.
     return fixed_code, result
 
 
