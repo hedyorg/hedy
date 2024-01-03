@@ -3,20 +3,20 @@ import {LRParser} from "@lezer/lr"
 import {extendKeyword} from "./tokens"
 export const parser = LRParser.deserialize({
   version: 14,
-  states: "%vQYQPOOOOQO'#Co'#CoQYQPOOOOQO'#Cq'#CqOtQPO'#CfOOQO'#Cr'#CrO|QPO'#CnOOQO'#Cs'#CsO!XQPO'#ChOOQO'#Ct'#CtO!aQPO'#CiOOQO'#Cu'#CuO!oQPO'#CkOOQO'#Cv'#CvO!wQPO'#ClOOQO'#Cw'#CwO#PQPO'#CmOOQO'#Cj'#CjOOQO'#Ce'#CeQoQPO'#CpQ#XQPOOOOQO-E6m-E6mOOQO-E6o-E6oO#pQPO,59QOOQO-E6p-E6pO#{QPO,59SOOQO-E6q-E6qO$WQPO,59TOOQO-E6r-E6rOOQO-E6s-E6sOOQO,59V,59VOOQO-E6t-E6tOOQO,59W,59WOOQO-E6u-E6uOOQO,59X,59XO$cQPO,59[OOQO-E6n-E6n",
-  stateData: "%Q~OVOSnOS~OPROQZOR]OSXOTVOU_OZTOoPO~OPROZTO~OZTOlbXobX~OTVOZTO~OSXOZTOl]Xo]X~OQZOZnO~OR]OZpO~OU_OZrO~OPROQZOR]OSXOTVOU_OZTO~OZTOlYaoYa~OZTOl[ao[a~OZTOl]ao]a~OoPOPdaQdaRdaSdaTdaUdaZdalda~O",
-  goto: "#ulPPPPPPPPPmrPrrrwwwr|!W!_!g!{#T#]#e#mVcOQdVbOQdVaOQdQQOSeQsRscSdOQRtdUSOQdRfSUUOQdQgSWhUgikQiWRkYUWOQdRjWUYOQdRlYU[OQdRm[U^OQdRo^U`OQdRq`",
-  nodeNames: "⚠ print forward turn echo ask color Comment Program Command Print Text Ask Echo Turtle Forward Turn Color ErrorInvalid",
-  maxTerm: 31,
+  states: "&`QYQPOOOOQO'#Cq'#CqQYQPOOOOQO'#Cs'#CsOwQPO'#CgOOQO'#Ct'#CtO!PQPO'#CpOOQO'#Cu'#CuO![QPO'#CiOOQO'#Cv'#CvO!dQPO'#CjOOQO'#Cw'#CwO!rQPO'#CkOOQO'#Cx'#CxO!zQPO'#CmOOQO'#Cy'#CyO#SQPO'#CnOOQO'#Cz'#CzO#[QPO'#CoOOQO'#Cl'#ClOOQO'#Cf'#CfQrQPO'#CrQ#dQPOOOOQO-E6o-E6oOOQO-E6q-E6qO$OQPO,59ROOQO-E6r-E6rO$ZQPO,59TOOQO-E6s-E6sO$fQPO,59UOOQO-E6t-E6tO$qQPO,59VOOQO-E6u-E6uOOQO-E6v-E6vOOQO,59X,59XOOQO-E6w-E6wOOQO,59Y,59YOOQO-E6x-E6xOOQO,59Z,59ZO$|QPO,59^OOQO-E6p-E6p",
+  stateData: "%n~OWOSqOS~OPROQ]OR_OSXOTZOUVOVaO[TOrPO~OPRO[TO~O[TOodXrdX~OUVO[TO~OSXO[TOo^Xr^X~OTZO[TO~OQ]O[rO~OR_O[tO~OVaO[vO~OPROQ]OR_OSXOTZOUVOVaO[TO~O[TOoZarZa~O[TOo]ar]a~O[TOo^ar^a~O[TOo_ar_a~OrPOPfaQfaRfaSfaTfaUfaVfa[faofa~O",
+  goto: "$UoPPPPPPPPPPpuPuuuuzzzu!P!Z!b!j#S#[#d#l#t#|VeOQfVdOQfVcOQfQQOSgQwRweSfOQRxfUSOQfRhSUUOQfQiSYjUikmoQkWQmYRo[UWOQfRlWUYOQfRnYU[OQfRp[U^OQfRq^U`OQfRs`UbOQfRub",
+  nodeNames: "⚠ print forward turn echo play ask color Comment Program Command Print Text Ask Echo Play Turtle Forward Turn Color ErrorInvalid",
+  maxTerm: 34,
   nodeProps: [
-    ["group", 14,"turtle"]
+    ["group", 16,"turtle"]
   ],
-  skippedNodes: [0,7],
-  repeatNodeCount: 9,
-  tokenData: "#O~RXOYnYZ!]Zpnpq!bqsnst!gt;'Sn;'S;=`!V<%lOn~sUZ~OYnZpnqsnt;'Sn;'S;=`!V<%lOn~!YP;=`<%ln~!bOo~~!gOn~~!lSV~OY!gZ;'S!g;'S;=`!x<%lO!g~!{P;=`<%l!g",
+  skippedNodes: [0,8],
+  repeatNodeCount: 10,
+  tokenData: "#O~RXOYnYZ!]Zpnpq!bqsnst!gt;'Sn;'S;=`!V<%lOn~sU[~OYnZpnqsnt;'Sn;'S;=`!V<%lOn~!YP;=`<%ln~!bOr~~!gOq~~!lSW~OY!gZ;'S!g;'S;=`!x<%lO!g~!{P;=`<%l!g",
   tokenizers: [0],
-  topRules: {"Program":[0,8]},
-  dynamicPrecedences: {"18":-10},
-  specialized: [{term: 11, get: (value: any, stack: any) => (extendKeyword(value, stack) << 1) | 1, external: extendKeyword, extend: true}],
+  topRules: {"Program":[0,9]},
+  dynamicPrecedences: {"20":-10},
+  specialized: [{term: 12, get: (value: any, stack: any) => (extendKeyword(value, stack) << 1) | 1, external: extendKeyword, extend: true}],
   tokenPrec: 0
 })

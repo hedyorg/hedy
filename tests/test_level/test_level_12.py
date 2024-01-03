@@ -650,6 +650,23 @@ class TestsLevel12(HedyTester):
 
         self.multi_level_tester(code=code, unused_allowed=True, expected=expected, max_level=17)
 
+    def test_play(self):
+        code = textwrap.dedent("""\
+            n = 'C4' #
+            play n""")
+
+        expected = textwrap.dedent("""\
+            n = 'C4'
+            play(notes_mapping.get(str(n), str(n)))
+            time.sleep(0.5)""")
+
+        self.multi_level_tester(
+            code=code,
+            translate=False,
+            expected=expected,
+            max_level=17
+        )
+
     def test_ask_with_list_var(self):
         code = textwrap.dedent("""\
         colors is 'orange', 'blue', 'green'
@@ -2170,6 +2187,28 @@ class TestsLevel12(HedyTester):
             expected=expected
         )
 
+    def test_undefined_function_without_params(self):
+        code = textwrap.dedent("""\
+        call func""")
+
+        self.multi_level_tester(
+            code=code,
+            max_level=16,
+            skip_faulty=False,
+            exception=hedy.exceptions.UndefinedFunctionException
+        )
+
+    def test_undefined_function_with_params(self):
+        code = textwrap.dedent("""\
+        print call func with 1, 2""")
+
+        self.multi_level_tester(
+            code=code,
+            max_level=16,
+            skip_faulty=False,
+            exception=hedy.exceptions.UndefinedFunctionException
+        )
+
     def test_function_use_builtin_name(self):
         code = textwrap.dedent("""\
         define sum with n1, n2
@@ -2343,4 +2382,47 @@ class TestsLevel12(HedyTester):
             unused_allowed=True,
             skipped_mappings=skipped_mappings,
             max_level=16
+        )
+
+# music tests
+    def test_play_random(self):
+        code = textwrap.dedent("""\
+        notes = 'C4', 'E4', 'D4', 'F4', 'G4'
+        play notes at random""")
+
+        expected = textwrap.dedent("""\
+        notes = ['C4', 'E4', 'D4', 'F4', 'G4']
+        play(notes_mapping.get(str(random.choice(notes)), str(random.choice(notes))))
+        time.sleep(0.5)""")
+
+        self.multi_level_tester(
+            code=code,
+            translate=False,
+            skip_faulty=False,
+            unused_allowed=True,
+            expected=expected,
+            max_level=15
+        )
+
+    def test_play_integers(self):
+        code = textwrap.dedent("""\
+        notes = 1, 2, 3
+
+        repeat 10 times
+            play notes at random""")
+
+        expected = textwrap.dedent("""\
+        notes = [1, 2, 3]
+        for i in range(int('10')):
+          play(notes_mapping.get(str(random.choice(notes)), str(random.choice(notes))))
+          time.sleep(0.5)
+          time.sleep(0.1)""")
+
+        self.multi_level_tester(
+            code=code,
+            translate=False,
+            skip_faulty=False,
+            unused_allowed=True,
+            expected=expected,
+            max_level=15
         )

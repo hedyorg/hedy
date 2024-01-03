@@ -567,6 +567,10 @@ def parse():
 
             if transpile_result.has_clear:
                 response['has_clear'] = True
+
+            if transpile_result.has_music:
+                response['has_music'] = True
+
         except Exception:
             pass
 
@@ -2106,7 +2110,7 @@ def translate_keywords():
     try:
         translated_code = hedy_translation.translate_keywords(body.get('code'), body.get(
             'start_lang'), body.get('goal_lang'), level=int(body.get('level', 1)))
-        if translated_code:
+        if translated_code or translated_code == '':  # empty string is False, so explicitly allow it
             return jsonify({'success': 200, 'code': translated_code})
         else:
             return gettext('translate_error'), 400
