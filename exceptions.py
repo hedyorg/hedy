@@ -317,12 +317,14 @@ class NestedFunctionException(HedyException):
     def __init__(self):
         super().__init__('Nested Function')
 
+
 class WrongNumberofArguments(HedyException):
     def __init__(self, defined_number, used_number, line_number):
         super().__init__('Wrong Number of Arguments',
                          defined_number=defined_number,
                          used_number=used_number,
                          line_number=line_number)
+
 
 class InvalidErrorSkippedException(HedyException):
     def __init__(self):
