@@ -248,7 +248,7 @@ export function initializeCodePage(options: InitializeCodePageOptions) {
       const programFromLs = localLoad(currentTabLsKey());
       // if we are in raw (used in slides) we don't want to load from local storage, we always want to show startcode
       if (programFromLs && adventure) {
-        adventure.start_code = programFromLs.code;
+        adventure.editor_contents = programFromLs.code;
         adventure.save_name = programFromLs.saveName;
         adventure.save_info = 'local-storage';
       }
@@ -394,7 +394,7 @@ export function initializeHighlightedCodeBlocks(where: Element) {
         // In case it has a child <code> node
         if(codeNode) {
           codeNode.hidden = true
-          code = codeNode.innerText          
+          code = codeNode.innerText
         } else {
           code = preview.textContent || "";
           preview.textContent = "";
@@ -583,7 +583,7 @@ export async function runit(level: number, lang: string, disabled_prompt: string
         showAchievements(response.achievements, false, "");
         if (adventure && response.save_info) {
           adventure.save_info = response.save_info;
-          adventure.start_code = code;
+          adventure.editor_contents = code;
         }
 
         if (response.Error) {
@@ -1933,7 +1933,7 @@ function reconfigurePageBasedOnTab() {
   const adventure = theAdventures[currentTab];
   if (adventure) {
     $ ('#program_name').val(adventure.save_name);
-    theGlobalEditor.contents = adventure.start_code;
+    theGlobalEditor.contents = adventure.editor_contents;
   }
 }
 
@@ -2032,7 +2032,7 @@ function programNeedsSaving(adventureName: string) {
   // We need to save if the content changed, OR if we have the opportunity to
   // save a program that was loaded from local storage to the server.
   // (Submitted programs are never saved again).
-  const programChanged = theGlobalEditor.contents !== adventure.start_code;
+  const programChanged = theGlobalEditor.contents !== adventure.editor_contents;
   const nameChanged = $('#program_name').val() !== adventure.save_name;
   const localStorageCanBeSavedToServer = theUserIsLoggedIn && adventure.save_info === 'local-storage';
   const isUnchangeable = isServerSaveInfo(adventure.save_info) ? adventure.save_info.submitted : false;
@@ -2042,7 +2042,7 @@ function programNeedsSaving(adventureName: string) {
   // "Run" button will always save regardless of size.
   const wasSavedBefore = adventure.save_info !== undefined;
   const suspiciouslySmallFraction = 0.5;
-  const programSuspiciouslyShrunk = wasSavedBefore && theGlobalEditor.contents.length < adventure.start_code.length * suspiciouslySmallFraction;
+  const programSuspiciouslyShrunk = wasSavedBefore && theGlobalEditor.contents.length < adventure.editor_contents.length * suspiciouslySmallFraction;
 
   return (programChanged || nameChanged || localStorageCanBeSavedToServer) && !isUnchangeable && !programSuspiciouslyShrunk;
 }
@@ -2102,14 +2102,14 @@ async function saveIfNecessary() {
     });
 
     // Record that we saved successfully
-    adventure.start_code = code;
+    adventure.editor_contents = code;
     if (response.save_info) {
       adventure.save_info = response.save_info;
     }
     localDelete(currentTabLsKey());
   } else {
     localSave(currentTabLsKey(), { saveName, code });
-    adventure.start_code = code;
+    adventure.editor_contents = code;
   }
 }
 
