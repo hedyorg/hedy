@@ -2293,12 +2293,25 @@ class ConvertToPython_12(ConvertToPython_11):
         args_str = ""
         self.add_variable_access_location(args[0], meta.line)
 
+        function_name = args[0]
+        function_tree = [x.tree for x in self.lookup if x.name == function_name + "()"]
+        tree_arguments = [x for x in function_tree[0].children if x.data == 'arguments']
+
+        number_of_defined_arguments = len(tree_arguments[0].children)
+        number_of_used_arguments = len(args[1].children)
+
+        if number_of_used_arguments != number_of_defined_arguments:
+            raise hedy.exceptions.WrongNumberofArguments(
+                number_of_defined_arguments,
+                number_of_used_arguments,
+                meta.line)
+
         if len(args) > 1:
             args_str = ", ".join(str(x.children[0]) if isinstance(x, Tree) else str(x) for x in args[1].children)
             for x in args[1].children:
                 self.add_variable_access_location(str(x), meta.line)
 
-        return f"{args[0]}({args_str})"
+        return f"{function_name}({args_str})"
 
     def returns(self, meta, args):
         argument_string = self.print_ask_args(meta, args)
