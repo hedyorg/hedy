@@ -1,10 +1,10 @@
 @top Program { eol* (Command eol+)* Command? }
 Command {
-    Assign | AssignList | Ask | Clear |Print | Turtle | Sleep | Add | Remove| If | Else | Repeat | ErrorInvalid
+    Assign | AssignList | Ask | Clear |Print | Play | Turtle | Sleep | Add | Remove| If | Else | Repeat | ErrorInvalid
 }
 
 IfLessCommand {
-    Assign | AssignList | Ask | Clear |Print | Turtle | Sleep | Add | Remove | Repeat | ErrorInvalid
+    Assign | AssignList | Ask | Clear |Print | Play | Turtle | Sleep | Add | Remove | Repeat | ErrorInvalid
 }
 
 @local tokens {    
@@ -37,6 +37,7 @@ ListAccess { Text at+ (random+ | Text | Int) }
 Add { add+ Text toList+ Text }
 Remove { remove+ Text from+ Text }
 Clear { clear+ }
+Play { play+ Text+ }
 
 Turtle[@isGroup=turtle] {
     Forward { forward+ (Expression | ListAccess ) } |
@@ -92,6 +93,7 @@ Expression {
     turn[@name="turn"],
     color[@name="color"],
     sleep[@name="sleep"],
+    play[@name="play"],
     is[@name="is"],
     add[@name="add"],
     from[@name="from"],

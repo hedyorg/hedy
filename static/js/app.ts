@@ -2,9 +2,10 @@ import { initializeSyntaxHighlighter } from './syntaxModesRules';
 import { ClientMessages } from './client-messages';
 import { modal, error, success, tryCatchPopup } from './modal';
 import JSZip from "jszip";
+import * as Tone from 'tone'
 import { Tabs } from './tabs';
 import { MessageKey } from './message-translations';
-import { turtle_prefix, pygame_prefix, normal_prefix } from './pythonPrefixes'
+import { turtle_prefix, pygame_prefix, normal_prefix, music_prefix } from './pythonPrefixes'
 import { Achievement, Adventure, isServerSaveInfo, ServerSaveInfo } from './types';
 import { startIntroTutorial } from './tutorials/tutorial';
 import { get_parsons_code, initializeParsons, loadParsonsExercise } from './parsons';
@@ -45,6 +46,11 @@ export let theKeywordLanguage: string = 'en';
 let theStaticRoot: string = '';
 let currentTab: string;
 let theUserIsLoggedIn: boolean;
+//create a synth and connect it to the main output (your speakers)
+//const synth = new Tone.Synth().toDestination();
+
+const synth = new Tone.PolySynth(Tone.Synth).toDestination();
+
 
 const pygame_suffix =
 `# coding=utf8
@@ -603,7 +609,7 @@ export async function runit(level: number, lang: string, disabled_prompt: string
       program_data = theGlobalDebugger.get_program_data();
     }
 
-    runPythonProgram(program_data.Code, program_data.source_map, program_data.has_turtle, program_data.has_pygame, program_data.has_sleep, program_data.has_clear, program_data.Warning, cb, run_type).catch(function(err: any) {
+    runPythonProgram(program_data.Code, program_data.source_map, program_data.has_turtle, program_data.has_pygame, program_data.has_sleep, program_data.has_clear, program_data.has_music, program_data.Warning, cb, run_type).catch(function(err: any) {
       // The err is null if we don't understand it -> don't show anything
       if (err != null) {
         error.show(ClientMessages['Execute_error'], err.message);
@@ -855,7 +861,7 @@ window.onerror = function reportClientException(message, source, line_number, co
   });
 }
 
-export function runPythonProgram(this: any, code: string, sourceMap: any, hasTurtle: boolean, hasPygame: boolean, hasSleep: boolean, hasClear: boolean, hasWarnings: boolean, cb: () => void, run_type: "run" | "debug" | "continue") {
+export function runPythonProgram(this: any, code: string, sourceMap: any, hasTurtle: boolean, hasPygame: boolean, hasSleep: boolean, hasClear: boolean, hasMusic: boolean, hasWarnings: boolean, cb: () => void, run_type: "run" | "debug" | "continue") {
   // If we are in the Parsons problem -> use a different output
   let outputDiv = $('#output');
   let skip_faulty_found_errors = false;
@@ -922,6 +928,11 @@ export function runPythonProgram(this: any, code: string, sourceMap: any, hasTur
 
   if (hasTurtle) {
     code_prefix += turtle_prefix;
+    $('#turtlecanvas').show();
+  }
+
+  if (hasMusic) {
+    code_prefix += music_prefix;
     $('#turtlecanvas').show();
   }
 
@@ -1014,6 +1025,7 @@ export function runPythonProgram(this: any, code: string, sourceMap: any, hasTur
         // If the timeout is 1 this is due to us stopping the program: don't show "too long" warning
         $('#stopit').hide();
         $('#runit').show();
+        $('#runit').show();
         if (Sk.execLimit != 1) {
           pushAchievement("hedy_hacking");
           return ClientMessages ['Program_too_long'];
@@ -1023,11 +1035,11 @@ export function runPythonProgram(this: any, code: string, sourceMap: any, hasTur
       },
       // We want to make the timeout function a bit more sophisticated that simply setting a value
       // In levels 1-6 users are unable to create loops and programs with a lot of lines are caught server-sided
-      // So: a very large limit in these levels, keep the limit on other onces.
+      // So: a very large limit in these levels, keep the limit on other ones.
       execLimit: (function () {
         const level = theLevel;
-        if (hasTurtle || hasPygame) {
-          // We don't want a timeout when using the turtle or pygame -> just set one for 10 minutes
+        if (hasTurtle || hasPygame || hasMusic) {
+          // We don't want a timeout when using the turtle or pygame or music -> just set one for 10 minutes
           return (6000000);
         }
         if (level < 7) {
@@ -1037,6 +1049,15 @@ export function runPythonProgram(this: any, code: string, sourceMap: any, hasTur
         // Set a time-out of either 20 seconds when having a sleep and 5 seconds when not
         return ((hasSleep) ? 20000 : 5000);
       }) ()
+    });
+
+    (Sk as any).builtins.play = new Sk.builtin.func((notes:any) => {
+        //const now = Tone.now()
+        const note_name = notes.v;
+
+        //play note_name for the duration of an 16th note
+        synth.triggerAttackRelease(note_name, "16n");
+
     });
 
     return Sk.misceval.asyncToPromise(() =>
@@ -1118,6 +1139,7 @@ export function runPythonProgram(this: any, code: string, sourceMap: any, hasTur
       has_turtle: hasTurtle,
       has_pygame: hasPygame, //here too: where is hassleep?
       has_clear: hasClear,
+      has_music: hasMusic,
       Warning: hasWarnings
     });
 
