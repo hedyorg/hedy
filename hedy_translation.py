@@ -77,7 +77,7 @@ def translate_keywords(input_string, from_lang="en", to_lang="nl", level=1):
     """ "Return code with keywords translated to language of choice in level of choice"""
 
     if input_string == "":
-        return " "  # empty string is True, so output something else that looks like the empty string
+        return ""
 
     # remove leading spaces.
     # FH, dec 23. This creates a bit of a different version of translation but that seems ok to me
