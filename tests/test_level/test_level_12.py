@@ -2170,6 +2170,38 @@ class TestsLevel12(HedyTester):
             expected=expected
         )
 
+    def test_undefined_function_without_params(self):
+        code = textwrap.dedent("""\
+        print call func""")
+
+        expected = textwrap.dedent("""\
+        def func(n1, n2):
+          return f'''{n1 + n2}'''
+        print(f'''{func(1, 2)}''')""")
+
+        self.multi_level_tester(
+            code=code,
+            max_level=16,
+            skip_faulty=False,
+            expected=expected
+        )
+
+    def test_undefined_function_with_params(self):
+        code = textwrap.dedent("""\
+        print call func with 1, 2""")
+
+        expected = textwrap.dedent("""\
+        def func(n1, n2):
+          return f'''{n1 + n2}'''
+        print(f'''{func(1, 2)}''')""")
+
+        self.multi_level_tester(
+            code=code,
+            max_level=16,
+            skip_faulty=False,
+            expected=expected
+        )
+
     def test_function_use_builtin_name(self):
         code = textwrap.dedent("""\
         define sum with n1, n2
