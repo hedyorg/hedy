@@ -1230,6 +1230,10 @@ class IsValid(Filter):
     def error_repeat_no_times(self, meta, args):
         raise exceptions.IncompleteRepeatException(command='times', level=self.level, line_number=meta.line)
 
+    def error_repeat_dep_8(self, meta, args):
+        # repeat is no longer usable this way, raise!
+        raise hedy.exceptions.WrongLevelException(7, 'repeat', "repeat_dep", meta.line)
+
     def error_text_no_print(self, meta, args):
         raise exceptions.LonelyTextException(level=self.level, line_number=meta.line)
 
