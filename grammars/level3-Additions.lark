@@ -4,6 +4,7 @@ ask: var _IS _ASK ((_SPACE | text_ask)*)?
 
 assign: var _IS (list_access | text) -> assign
 assign_list: var _IS text_list (_COMMA text_list)+
+play: _PLAY (list_access | text)
 
 list_access: var_access _AT (INT | random)
 turtle: _FORWARD ((NUMBER | list_access | textwithoutspaces))? -> forward | _TURN ((NUMBER | list_access | textwithoutspaces))? -> turn | _COLOR (_color_literal | list_access | textwithoutspaces)? -> color
