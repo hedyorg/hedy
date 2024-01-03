@@ -640,6 +640,10 @@ class LookupEntryCollector(visitors.Visitor):
 
     def call(self, tree):
         function_name = tree.children[0].children[0]
+        names = [x.name for x in self.lookup]
+        if function_name + "()" not in names:
+            raise exceptions.UndefinedFunctionException(function_name, tree.meta.line)
+
         args_str = ""
         if len(tree.children) > 1:
             args_str = ", ".join(str(x.children[0]) if isinstance(x, Tree) else str(x)
