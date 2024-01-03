@@ -2297,8 +2297,8 @@ class ConvertToPython_12(ConvertToPython_11):
         function_tree = [x.tree for x in self.lookup if x.name == function_name + "()"]
         tree_arguments = [x for x in function_tree[0].children if x.data == 'arguments']
 
-        number_of_defined_arguments = len(tree_arguments[0].children)
-        number_of_used_arguments = len(args[1].children)
+        number_of_defined_arguments = 0 if tree_arguments == [] else len(tree_arguments[0].children)
+        number_of_used_arguments = 0 if len(args)==1 else len(args[1].children)
 
         if number_of_used_arguments != number_of_defined_arguments:
             raise hedy.exceptions.WrongNumberofArguments(
