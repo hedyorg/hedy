@@ -2228,6 +2228,34 @@ class TestsLevel12(HedyTester):
             expected=expected
         )
 
+    def test_too_many_parameters(self):
+        code = textwrap.dedent("""\
+        define func with n1, n2
+            return n1 + n2
+
+        print call func with 1, 2, 3""")
+
+        self.multi_level_tester(
+            code=code,
+            max_level=16,
+            skip_faulty=False,
+            exception=hedy.exceptions.WrongNumberofArguments
+        )
+
+    def test_too_few_parameters(self):
+        code = textwrap.dedent("""\
+        define func with n1, n2
+            return n1 + n2
+
+        print call func with 1""")
+
+        self.multi_level_tester(
+            code=code,
+            max_level=16,
+            skip_faulty=False,
+            exception=hedy.exceptions.WrongNumberofArguments
+        )
+
     def test_unused_function_use_builtin_name(self):
         code = textwrap.dedent("""\
         define sum with n1, n2
