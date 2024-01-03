@@ -2189,6 +2189,25 @@ class TestsLevel12(HedyTester):
             expected=expected
         )
 
+    def test_too_many_parameters(self):
+        code = textwrap.dedent("""\
+        define func with n1, n2
+            return n1 + n2
+
+        print call func with 1, 2, 3""")
+
+        expected = textwrap.dedent("""\
+        def func(n1, n2):
+          return f'''{n1 + n2}'''
+        print(f'''{func(1, 2)}''')""")
+
+        self.multi_level_tester(
+            code=code,
+            max_level=16,
+            skip_faulty=False,
+            expected=expected
+        )
+
     def test_unused_function_use_builtin_name(self):
         code = textwrap.dedent("""\
         define sum with n1, n2
