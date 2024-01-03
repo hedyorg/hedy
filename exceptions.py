@@ -113,6 +113,13 @@ class UndefinedVarException(HedyException):
                          line_number=line_number)
 
 
+class UndefinedFunctionException(HedyException):
+    def __init__(self, name, line_number):
+        super().__init__('Function Undefined',
+                         name=name,
+                         line_number=line_number)
+
+
 class CyclicVariableDefinitionException(HedyException):
     def __init__(self, variable, line_number):
         super().__init__('Cyclic Var Definition',

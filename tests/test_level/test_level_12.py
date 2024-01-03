@@ -2187,6 +2187,28 @@ class TestsLevel12(HedyTester):
             expected=expected
         )
 
+    def test_undefined_function_without_params(self):
+        code = textwrap.dedent("""\
+        call func""")
+
+        self.multi_level_tester(
+            code=code,
+            max_level=16,
+            skip_faulty=False,
+            exception=hedy.exceptions.UndefinedFunctionException
+        )
+
+    def test_undefined_function_with_params(self):
+        code = textwrap.dedent("""\
+        print call func with 1, 2""")
+
+        self.multi_level_tester(
+            code=code,
+            max_level=16,
+            skip_faulty=False,
+            exception=hedy.exceptions.UndefinedFunctionException
+        )
+
     def test_function_use_builtin_name(self):
         code = textwrap.dedent("""\
         define sum with n1, n2
