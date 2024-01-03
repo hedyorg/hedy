@@ -660,7 +660,6 @@ class TestsLevel1(HedyTester):
             lang='fr',
             max_level=3)
 
-
     def test_lines_with_spaces_gives_invalid(self):
         code = " print Hallo welkom bij Hedy!\n print Hallo welkom bij Hedy!"
         expected = "pass\npass"
