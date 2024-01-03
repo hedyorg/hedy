@@ -2302,9 +2302,10 @@ class ConvertToPython_12(ConvertToPython_11):
 
         if number_of_used_arguments != number_of_defined_arguments:
             raise hedy.exceptions.WrongNumberofArguments(
-                number_of_defined_arguments,
-                number_of_used_arguments,
-                meta.line)
+                name=function_name,
+                defined_number=number_of_defined_arguments,
+                used_number=number_of_used_arguments,
+                line_number=meta.line)
 
         if len(args) > 1:
             args_str = ", ".join(str(x.children[0]) if isinstance(x, Tree) else str(x) for x in args[1].children)
