@@ -5,7 +5,7 @@ import { initializeHighlightedCodeBlocks, showAchievements } from './app';
 import { ClientMessages } from './client-messages';
 import { modal } from './modal';
 import { Achievement } from './types';
-import Sortable = require("sortablejs");
+import Sortable from 'sortablejs';
 
 declare const htmx: typeof import('./htmx');
 

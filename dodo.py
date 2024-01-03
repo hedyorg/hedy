@@ -153,12 +153,15 @@ def task_typescript():
         task_dep=['generate_highlighting', 'client_messages'],
         title=lambda _: 'Compile TypeScript',
         actions=[
-            # Use tsc to generate .js (this downlevels to old JavaScript versions for old browsers)
+            # Use tsc to generate .js (this downlevels modern runtime features
+            # like `Object.entries()` and `Array.flatMap()` etc to old
+            # JavaScript versions for old browsers -- something that esbuild
+            # cannot do by itself)
             ['npx', 'tsc', '--outDir', '__tmp__'],
 
             # Then bundle JavaScript into a single bundle
             ['npx', 'esbuild', '__tmp__/static/js/index.js',
-             '--bundle', '--sourcemap', '--minify', '--target=es2017',
+             '--bundle', '--sourcemap', '--target=es2017',
              '--global-name=hedyApp', '--platform=browser',
              '--outfile=static/js/appbundle.js'],
 
