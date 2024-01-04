@@ -160,7 +160,7 @@ def task_typescript():
             ['npx', 'tsc', '--outDir', '__tmp__'],
 
             # Then bundle JavaScript into a single bundle
-            ['npx', 'esbuild', '__tmp__/static/js/index.js',
+            ['npx', 'esbuild', '__tmp__/static/js/index.mjs',
              '--bundle', '--sourcemap', '--target=es2017',
              '--global-name=hedyApp', '--platform=browser',
              '--outfile=static/js/appbundle.js'],
