@@ -1,8 +1,8 @@
 ---
 name: Idea for the Hedy interface
 about: Suggest an idea for the Hedy interface
-title: "[UI idea]"
-labels: ''
+title: "💻"
+labels: 'frontend'
 assignees: ''
 
 ---
