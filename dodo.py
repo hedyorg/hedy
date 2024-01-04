@@ -156,7 +156,7 @@ def task_typescript():
             # Use tsc to do type checking of the .ts files, but don't actually emit.
             # We will bundle using `esbuild`, which will properly handle including the `tw-elements`
             # library (which is ESM-only) from otherwise CommonJS packages.
-            ['npx', 'tsc', '--no-emit'],
+            ['npx', 'tsc', '--noEmit'],
 
             # Then bundle JavaScript into a single bundle
             ['npx', 'esbuild', 'static/js/index.ts',
