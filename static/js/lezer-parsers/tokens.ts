@@ -1,29 +1,29 @@
 import {
-    print as print1, echo as echo1, ask as ask1, color as color1,
+    print as print1, echo as echo1, play as play1, ask as ask1, color as color1,
     forward as forward1, turn as turn1
 } from "./level1-parser.terms";
 
 import {
-    print as print2, ask as ask2, color as color2,
+    print as print2, ask as ask2, play as play2, color as color2,
     forward as forward2, turn as turn2, sleep as sleep2, is as is2
 } from "./level2-parser.terms";
 
 import {
-    print as print3, ask as ask3, color as color3,
+    print as print3, ask as ask3, play as play3, color as color3,
     forward as forward3, turn as turn3, sleep as sleep3, is as is3,
     add as add3, remove as remove3, from as from3, toList as toList3,
     at as at3, random as random3
 } from "./level3-parser.terms"
 
 import {
-    print as print4, ask as ask4, color as color4,
+    print as print4, ask as ask4, play as play4, color as color4,
     forward as forward4, turn as turn4, sleep as sleep4, is as is4,
     add as add4, remove as remove4, from as from4, toList as toList4,
     at as at4, random as random4, clear as clear4
 } from "./level4-parser.terms"
 
 import {
-    print as print5, ask as ask5, color as color5,
+    print as print5, ask as ask5, play as play5, color as color5,
     forward as forward5, turn as turn5, sleep as sleep5, is as is5,
     add as add5, remove as remove5, from as from5, toList as toList5,
     at as at5, random as random5, clear as clear5, ifs as if5,
@@ -31,7 +31,7 @@ import {
 } from "./level5-parser.terms"
 
 import {
-    print as print6, ask as ask6, color as color6,
+    print as print6, ask as ask6, play as play6, color as color6,
     forward as forward6, turn as turn6, sleep as sleep6, is as is6,
     add as add6, remove as remove6, from as from6, toList as toList6,
     at as at6, random as random6, clear as clear6, ifs as if6,
@@ -39,7 +39,7 @@ import {
 } from "./level6-parser.terms"
 
 import {
-    print as print7, ask as ask7, color as color7,
+    print as print7, ask as ask7, play as play7, color as color7,
     forward as forward7, turn as turn7, sleep as sleep7, is as is7,
     add as add7, remove as remove7, from as from7, toList as toList7,
     at as at7, random as random7, clear as clear7, ifs as if7,
@@ -48,7 +48,7 @@ import {
 } from "./level7-parser.terms"
 
 import {
-    print as print8, ask as ask8, color as color8,
+    print as print8, ask as ask8, play as play8, color as color8,
     forward as forward8, turn as turn8, sleep as sleep8, is as is8,
     add as add8, remove as remove8, from as from8, toList as toList8,
     at as at8, random as random8, clear as clear8, ifs as if8,
@@ -57,7 +57,7 @@ import {
 } from "./level8-parser.terms"
 
 import {
-    print as print10, ask as ask10, color as color10,
+    print as print10, ask as ask10, play as play10, color as color10,
     forward as forward10, turn as turn10, sleep as sleep10, is as is10,
     add as add10, remove as remove10, from as from10, toList as toList10,
     at as at10, random as random10, clear as clear10, ifs as if10,
@@ -66,7 +66,7 @@ import {
 } from "./level10-parser.terms"
 
 import {
-    print as print11, ask as ask11, color as color11,
+    print as print11, ask as ask11, play as play11, color as color11,
     forward as forward11, turn as turn11, sleep as sleep11, is as is11,
     add as add11, remove as remove11, from as from11, toList as toList11,
     at as at11, random as random11, clear as clear11, ifs as if11,
@@ -75,7 +75,7 @@ import {
 } from "./level11-parser.terms"
 
 import {
-    print as print12, ask as ask12, color as color12,
+    print as print12, ask as ask12, play as play12, color as color12,
     forward as forward12, turn as turn12, sleep as sleep12, is as is12,
     add as add12, remove as remove12, from as from12, toList as toList12,
     at as at12, random as random12, clear as clear12, ifs as if12,
@@ -85,7 +85,7 @@ import {
 } from "./level12-parser.terms"
 
 import {
-    print as print13, ask as ask13, color as color13,
+    print as print13, ask as ask13, play as play13, color as color13,
     forward as forward13, turn as turn13, sleep as sleep13, is as is13,
     add as add13, remove as remove13, from as from13, toList as toList13,
     at as at13, random as random13, clear as clear13, ifs as if13,
@@ -96,7 +96,7 @@ import {
 } from "./level13-parser.terms"
 
 import {
-    print as print14, ask as ask14, color as color14,
+    print as print14, ask as ask14, play as play14, color as color14,
     forward as forward14, turn as turn14, sleep as sleep14, is as is14,
     add as add14, remove as remove14, from as from14, toList as toList14,
     at as at14, random as random14, clear as clear14, ifs as if14,
@@ -107,7 +107,7 @@ import {
 } from "./level14-parser.terms"
 
 import {
-    print as print15, ask as ask15, color as color15,
+    print as print15, ask as ask15, play as play15, color as color15,
     forward as forward15, turn as turn15, sleep as sleep15, is as is15,
     add as add15, remove as remove15, from as from15, toList as toList15,
     at as at15, random as random15, clear as clear15, ifs as if15,
@@ -118,7 +118,7 @@ import {
 } from "./level15-parser.terms"
 
 import {
-    print as print16, ask as ask16, color as color16,
+    print as print16, ask as ask16, play as play16, color as color16,
     forward as forward16, turn as turn16, sleep as sleep16, is as is16,
     add as add16, remove as remove16, from as from16, toList as toList16,
     random as random16, clear as clear16, ifs as if16,
@@ -129,7 +129,7 @@ import {
 } from "./level16-parser.terms"
 
 import {
-    print as print17, ask as ask17, color as color17,
+    print as print17, ask as ask17, play as play17, color as color17,
     forward as forward17, turn as turn17, sleep as sleep17, is as is17,
     add as add17, remove as remove17, from as from17, toList as toList17,
     random as random17, clear as clear17, ifs as if17,
@@ -141,7 +141,7 @@ import {
 
 import {
     print as print18, is as is18, input as input18, sleep as sleep18, random as random18, 
-    forward as forward18, turn as turn18, color as color18, add as add18,
+    forward as forward18, turn as turn18, play as play18, color as color18, add as add18,
     remove as remove18, from as from18, clear as clear18, ifs as ifs18,
     elses as elses18, and as and18, or as or18, pressed as pressed18, notIn as notIn18, ins as ins18,
     repeat as repeat18, times as times18, range as range18, whiles as whiles18,
@@ -166,6 +166,7 @@ const keywordToToken: Record<number, tokenSpecilizer> = {
         extend: {
             "ask": ask1,
             "print": print1,
+            "play": play1,
             "echo": echo1,
             "forward": forward1,
             "turn": turn1,
@@ -179,6 +180,7 @@ const keywordToToken: Record<number, tokenSpecilizer> = {
             "forward": forward2,
             "turn": turn2,
             "color": color2,
+            "play": play2,
             "sleep": sleep2,
             "is": is2
         },
@@ -192,6 +194,7 @@ const keywordToToken: Record<number, tokenSpecilizer> = {
             "forward": forward3,
             "turn": turn3,
             "color": color3,
+            "play": play3,
             "sleep": sleep3,
             "is": is3,
             "add": add3,
@@ -211,6 +214,7 @@ const keywordToToken: Record<number, tokenSpecilizer> = {
             "forward": forward4,
             "turn": turn4,
             "color": color4,
+            "play": play4,
             "sleep": sleep4,
             "is": is4,
             "add": add4,
@@ -231,6 +235,7 @@ const keywordToToken: Record<number, tokenSpecilizer> = {
             "forward": forward5,
             "turn": turn5,
             "color": color5,
+            "play": play5,
             "sleep": sleep5,
             "is": is5,
             "add": add5,
@@ -256,6 +261,7 @@ const keywordToToken: Record<number, tokenSpecilizer> = {
             "forward": forward6,
             "turn": turn6,
             "color": color6,
+            "play": play6,
             "sleep": sleep6,
             "is": is6,
             "add": add6,
@@ -281,6 +287,7 @@ const keywordToToken: Record<number, tokenSpecilizer> = {
             "forward": forward7,
             "turn": turn7,
             "color": color7,
+            "play": play7,
             "sleep": sleep7,
             "is": is7,
             "add": add7,
@@ -308,6 +315,7 @@ const keywordToToken: Record<number, tokenSpecilizer> = {
             "forward": forward8,
             "turn": turn8,
             "color": color8,
+            "play": play8,
             "sleep": sleep8,
             "is": is8,
             "add": add8,
@@ -336,6 +344,7 @@ const keywordToToken: Record<number, tokenSpecilizer> = {
             "forward": forward8,
             "turn": turn8,
             "color": color8,
+            "play": play8,
             "sleep": sleep8,
             "is": is8,
             "add": add8,
@@ -363,6 +372,7 @@ const keywordToToken: Record<number, tokenSpecilizer> = {
             "forward": forward10,
             "turn": turn10,
             "color": color10,
+            "play": play10,
             "sleep": sleep10,
             "is": is10,
             "add": add10,
@@ -391,6 +401,7 @@ const keywordToToken: Record<number, tokenSpecilizer> = {
             "forward": forward11,
             "turn": turn11,
             "color": color11,
+            "play": play11,
             "sleep": sleep11,
             "is": is11,
             "add": add11,
@@ -421,6 +432,7 @@ const keywordToToken: Record<number, tokenSpecilizer> = {
             "forward": forward12,
             "turn": turn12,
             "color": color12,
+            "play": play12,
             "sleep": sleep12,
             "is": is12,
             "add": add12,
@@ -455,6 +467,7 @@ const keywordToToken: Record<number, tokenSpecilizer> = {
             "forward": forward13,
             "turn": turn13,
             "color": color13,
+            "play": play13,
             "sleep": sleep13,
             "is": is13,
             "add": add13,
@@ -491,7 +504,8 @@ const keywordToToken: Record<number, tokenSpecilizer> = {
             "forward": forward14,
             "turn": turn14,
             "color": color14,
-            "sleep": sleep14,           
+            "play": play14,
+            "sleep": sleep14,
             "add": add14,
             "remove": remove14,
             "from": from14,
@@ -527,6 +541,7 @@ const keywordToToken: Record<number, tokenSpecilizer> = {
             "forward": forward15,
             "turn": turn15,
             "color": color15,
+            "play": play15,
             "sleep": sleep15,
             "is": is15,
             "add": add15,
@@ -565,6 +580,7 @@ const keywordToToken: Record<number, tokenSpecilizer> = {
             "forward": forward16,
             "turn": turn16,
             "color": color16,
+            "play": play16,
             "sleep": sleep16,
             "is": is16,
             "add": add16,
@@ -602,6 +618,7 @@ const keywordToToken: Record<number, tokenSpecilizer> = {
             "forward": forward17,
             "turn": turn17,
             "color": color17,
+            "play": play17,
             "sleep": sleep17,
             "is": is17,
             "add": add17,
@@ -644,6 +661,7 @@ const keywordToToken: Record<number, tokenSpecilizer> = {
             "print": print18,
             "is": is18,
             "input": input18,
+            "play": play18,
             "sleep": sleep18,
             "random": random18,
             "forward": forward18,

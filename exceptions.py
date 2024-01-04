@@ -113,6 +113,13 @@ class UndefinedVarException(HedyException):
                          line_number=line_number)
 
 
+class UndefinedFunctionException(HedyException):
+    def __init__(self, name, line_number):
+        super().__init__('Function Undefined',
+                         name=name,
+                         line_number=line_number)
+
+
 class CyclicVariableDefinitionException(HedyException):
     def __init__(self, variable, line_number):
         super().__init__('Cyclic Var Definition',
@@ -316,6 +323,15 @@ class MissingElseForPressitException(HedyException):
 class NestedFunctionException(HedyException):
     def __init__(self):
         super().__init__('Nested Function')
+
+
+class WrongNumberofArguments(HedyException):
+    def __init__(self, name, defined_number, used_number, line_number):
+        super().__init__('Wrong Number of Arguments',
+                         name=name,
+                         defined_number=defined_number,
+                         used_number=used_number,
+                         line_number=line_number)
 
 
 class InvalidErrorSkippedException(HedyException):
