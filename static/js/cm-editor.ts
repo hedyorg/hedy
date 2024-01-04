@@ -1,7 +1,7 @@
 import { HedyEditor, EditorType, HedyEditorCreator, EditorEvent, SourceRange } from "./editor";
 import { EditorView, ViewUpdate, drawSelection, dropCursor, highlightActiveLine,
         highlightActiveLineGutter, highlightSpecialChars, keymap, lineNumbers } from '@codemirror/view'
-import { EditorState, Compartment, StateEffect, Prec, Extension } from '@codemirror/state'
+import { EditorState, Compartment, StateEffect, Prec, Extension, Facet } from '@codemirror/state'
 import { EventEmitter } from "./event-emitter";
 import { deleteTrailingWhitespace, defaultKeymap, historyKeymap, indentWithTab } from '@codemirror/commands'
 import { history } from "@codemirror/commands"
@@ -15,7 +15,8 @@ import {
     removeIncorrectLineEffect,
     addDebugWords,
     placeholders,
-    basicIndent
+    basicIndent,
+    variableHighlighter
 } from "./cm-decorations";
 import { LRLanguage } from "@codemirror/language"
 import { languagePerLevel } from "./lezer-parsers/language-packages";
@@ -28,6 +29,7 @@ import { Tag, styleTags, tags as t } from "@lezer/highlight";
 
 // CodeMirror requires # of indentation to be in spaces.
 const indentSize = ' '.repeat(4);
+export const level = Facet.define<number, number>();
 
 export class HedyCodeMirrorEditorCreator implements HedyEditorCreator {
     /**
@@ -97,7 +99,11 @@ export class HedyCodeMirrorEditor implements HedyEditor {
                 ".cm-gutters": {
                     borderRadius: '4px'
                 },            
-                ".cm-cursor, .cm-dropCursor": {borderLeftColor: "white", borderLeftWidth: "2px"}
+                ".cm-cursor, .cm-dropCursor": {borderLeftColor: "white", borderLeftWidth: "2px"},
+                
+                ".cm-name": {
+                    color: '#009975'
+                },
             });
 
             state = EditorState.create({
@@ -130,12 +136,18 @@ export class HedyCodeMirrorEditor implements HedyEditor {
                     debugLineField,
                     incorrectLineField,
                     Prec.high(decorationsTheme),
-                    placeholders
+                    placeholders,
+                    theLevel ? level.of(theLevel) : [],
+                    Prec.highest(variableHighlighter)
                 ]
             });
         } else { // the editor is a read only editor
             let theme: Record<string, any> = {
-                ".cm-cursor, .cm-dropCursor": { border: "none"}
+                ".cm-cursor, .cm-dropCursor": { border: "none"},
+                
+                ".cm-name": {
+                    color: '#009975'
+                },
             }
             // base set of extensions for every type of read-only editor
             let extensions: Extension[] = [
@@ -144,7 +156,10 @@ export class HedyCodeMirrorEditor implements HedyEditor {
                 syntaxHighlighting(defaultHighlightStyle, { fallback: true }),
                 monokai,
                 this.readMode.of(EditorState.readOnly.of(isReadOnly)),
-                placeholders
+                placeholders,
+                theLevel ? level.of(theLevel) : [],
+                Prec.high(decorationsTheme),
+                Prec.highest(variableHighlighter)
             ];
 
             switch(editorType) {
