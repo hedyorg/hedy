@@ -1618,8 +1618,7 @@ def get_specific_adventure(name, level, mode):
             text=adventure["content"],
             is_teacher_adventure=True,
             is_command_adventure=False,
-            save_name=f"{name} {level}",
-            start_code=None)
+            save_name=f"{name} {level}")
 
         adventures.append(current_adventure)
         prev_level, next_level = utils.find_prev_next_levels(customizations["available_levels"], level)
