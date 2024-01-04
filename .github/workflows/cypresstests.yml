@@ -34,11 +34,6 @@ jobs:
       run: |
         doit run deploy devdb
 
-    - name: Bundle files
-      # Generates js and css files.
-      run: |
-        doit run frontend
-
     - name: Start the server
       # Runs in the background
       run: build-tools/github/start-debug-server --daemon
