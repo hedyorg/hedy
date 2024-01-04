@@ -1,5 +1,7 @@
 #!/bin/bash
 set -eu
+scriptdir=$(cd $(dirname $0) && pwd)
+cd $scriptdir
 
 # Generate the lezer parsers from the grammars specified in  highlighting/lezer-grammars/
 for grammarFile in ../../highlighting/lezer-grammars/level*.grammar ; do
