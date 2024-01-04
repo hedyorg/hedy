@@ -153,20 +153,16 @@ def task_typescript():
         task_dep=['generate_highlighting', 'client_messages'],
         title=lambda _: 'Compile TypeScript',
         actions=[
-            # Use tsc to generate .js (this downlevels modern runtime features
-            # like `Object.entries()` and `Array.flatMap()` etc to old
-            # JavaScript versions for old browsers -- something that esbuild
-            # cannot do by itself)
-            ['npx', 'tsc', '--outDir', '__tmp__'],
+            # Use tsc to do type checking of the .ts files, but don't actually emit.
+            # We will bundle using `esbuild`, which will properly handle including the `tw-elements`
+            # library (which is ESM-only) from otherwise CommonJS packages.
+            ['npx', 'tsc', '--no-emit'],
 
             # Then bundle JavaScript into a single bundle
-            ['npx', 'esbuild', '__tmp__/static/js/index.mjs',
+            ['npx', 'esbuild', 'static/js/index.ts',
              '--bundle', '--sourcemap', '--target=es2017',
              '--global-name=hedyApp', '--platform=browser',
              '--outfile=static/js/appbundle.js'],
-
-            # Delete tempdir
-            ['rm', '-rf', '__tmp__'],
         ],
         targets=['static/js/appbundle.js'],
         verbosity=0,  # stderr is too noisy by default

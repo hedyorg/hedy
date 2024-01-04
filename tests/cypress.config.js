@@ -1,5 +1,4 @@
 const { defineConfig } = require("cypress");
-const webpackPreprocessor = require('@cypress/webpack-preprocessor')
 
 module.exports = defineConfig({
   projectId: 'a1fbb9',
@@ -12,16 +11,7 @@ module.exports = defineConfig({
     baseUrl: 'http://localhost:8080',
     setupNodeEvents(on, config) {
       require('@cypress/code-coverage/task')(on, config)
-
-      // Configure the WebPack preprocessor that will bundle up all test .js files, to be served
-      // up to the tests running in the Electron browser. Since WebPack will include and transpile
-      // some of the .ts files that we include directly from the .js tests here, we need to fiddle
-      // with the settings a bit to make this work.
-      on('file:preprocessor', webpackPreprocessor({
-        webpackOptions: {
-          devtool: 'source-map',
-        },
-      }));
+      // include any other plugin code...
 
       // It's IMPORTANT to return the config object
       // with any changed environment variables
