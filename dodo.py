@@ -176,7 +176,7 @@ def task_lark():
     grammars = ['grammars/keywords-' + replace_ext(path.basename(y), '.lark') for y in keyword_yamls]
 
     return dict(
-        title=lambda _: 'Creating Lark grammar files',
+        title=lambda _: 'Create Lark grammar files',
         file_dep=[
             script,
             'grammars/keywords-template.lark',
