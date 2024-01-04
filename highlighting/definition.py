@@ -25,6 +25,7 @@ TRANSLATE_WORDS = [
     "def",
     "return",
     "print",
+    "play",
     "ask",
     "echo",
     "forward",

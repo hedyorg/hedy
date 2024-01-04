@@ -36,6 +36,10 @@ with open('prefixes/normal.py', encoding='utf-8') as f:
 with open('prefixes/pygame.py', encoding='utf-8') as f:
     PYGAME_PREFIX_CODE = f.read()
 
+# Define code that will be used if music code is used
+with open('prefixes/music.py', encoding='utf-8') as f:
+    MUSIC_PREFIX_CODE = f.read()
+
 
 class Timer:
     """A quick and dirty timer."""
