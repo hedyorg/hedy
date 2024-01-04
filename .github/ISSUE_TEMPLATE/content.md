@@ -1,8 +1,8 @@
 ---
 name: Content issue
 about: Tell us about an issue with content to make Hedy better!
-title: "[CONTENT]"
-labels: ''
+title: "📜"
+labels: 'content'
 assignees: ''
 
 ---
