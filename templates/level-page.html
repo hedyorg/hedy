@@ -3,8 +3,14 @@
 {% block full_width_content %}
 {% if not raw %}
 {% if customizations and customizations["teachers_adventure"] %}
-  <div class="bg-red-500 text-white text-sm font-bold px-4 py-3" data-cy="preview_class_banner" role="alert">
-      <div class="text-center center-text">{{_('previewing_adventure')}} <a class="text-white" href="/for-teachers/customize-adventure/{{initial_adventure.id}}">{{_('edit_adventure')}}</a></div>
+  <div class="bg-red-500 text-white text-sm font-bold px-4 py-3" data-cy="preview_adventure_banner" role="alert">
+      <div class="text-center center-text">{{_('previewing_adventure')}} 
+        {% if initial_adventure.author == username %}
+          <a class="text-white" href="/for-teachers/customize-adventure/{{initial_adventure.id}}">{{_('edit_adventure')}}</a>
+        {% else %}
+          <a class="text-white" href="/public-adventures">{{_('public_adventures')}}</a>
+        {% endif %}
+      </div>
   </div>
 {% endif %}
 <div id="level-header" class="bg-blue-200">

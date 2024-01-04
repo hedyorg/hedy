@@ -126,6 +126,7 @@ def load_adventures_for_level(level, subset=None):
     keyword_lang = g.keyword_lang
 
     all_adventures = []
+    # NOTE: if we ever have ADVENTURES in the DB, adjust how the "levels" field is used.
     if subset:
         adventures = ADVENTURES[g.lang].get_adventures_subset(subset, keyword_lang)
     else:
@@ -1582,9 +1583,19 @@ def get_specific_adventure(name, level, mode):
     prev_level = None  # we are not rendering buttons in raw, no lookup needed here
     next_level = None
     if not adventures:
-        adventure = database.ADVENTURES.get({"name": name})
-        if not adventure or (adventure and str(level) not in adventure.get("levels", [level])):
+        # By adventure's name and creator; since an adventure can be clone in /public-adventures
+        if request.args.get("creator"):
+            user = DATABASE.user_by_username(request.args["creator"])
+        else:
+            user = current_user()
+        adventure = None
+        if user and is_teacher(user):
+            adventure = database.ADVENTURES.get({"name": name, "creator": user["username"]})
+
+        if not adventure:
             return utils.error_page(error=404, ui_message=gettext('no_such_adventure'))
+        elif str(level) not in adventure.get("levels", [level]):
+            level = int(adventure.get("levels", [level])[0])
 
         adventure["content"] = safe_format(adventure["content"], **hedy_content.KEYWORDS.get(g.keyword_lang))
         customizations["available_levels"] = [int(adv_level) for adv_level in adventure.get("levels", [])]
@@ -1592,6 +1603,7 @@ def get_specific_adventure(name, level, mode):
 
         current_adventure = Adventure(
             id=adventure["id"],
+            author=adventure["creator"],
             short_name="level",
             name=adventure["name"],
             image=adventure.get("image", None),

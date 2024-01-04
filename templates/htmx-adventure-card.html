@@ -9,14 +9,19 @@
         {% else %}
             <h2 class="name">{{ adventure.name|e }}</h2>
         {% endif %}
+
+        {% set creator = _('owner') if adventure["author"] != adventure["creator"] else _('creator') %}
         {% if adventure["creator_public_profile"] %}
-            <p class="text-gray-600 mt-1">{{_('creator')}}: <a href="/user/{{adventure.creator}}">{{ adventure.creator }}</a></p>
+            <p class="text-gray-600 mt-1">{{ creator }}: <a href="/user/{{adventure.creator}}">{{ adventure.creator }}</a></p>
         {% else %}
-            <p class="text-gray-600 mt-1">{{_('creator')}}: {{ adventure.creator }}</p>
+            <p class="text-gray-600 mt-1">{{ creator }}: {{ adventure.creator }}</p>
+        {% endif %}
+        {% if adventure["author"] != adventure["creator"] %}
+            <p class="text-gray-600 mt-1">{{_('creator')}}: {{ adventure.author }}</p>
         {% endif %}
         <p class="text-gray-600 mt-1">
             <!-- adventure.level will gradually be removed until we have all adventures using only levels. -->
-            {% if adventure.levels %}
+            {% if adventure.levels and adventure.levels|length > 1 %}
                 {{_('levels')}}: {% for level in adventure.levels %}
                     {{level}}{% if loop.index != adventure.levels|length %}, {% endif %}
                 {% endfor %}
@@ -24,13 +29,14 @@
                 {{_('level')}}: {{ adventure.level }}
             {% endif %}
         </p>
+        <p class="text-gray-600 mt-1">{{_('language')}}: {{ lang_to_sym(adventure.language) }}</p>
         {% if adventure["cloned_times"] %}
             <p class="text-gray-600 mt-1">
                 {{_('cloned_times')}}: {{adventure["cloned_times"]}}
             </p>
         {%endif%}
         <p class="text-gray-600 mt-1">{{_('last_update')}}: {{ adventure.date }}</p>
-        </a>
+
         {% if adventure["tags"]|length > 0 %}
             {{ render_partial('htmx-tags-list.html', tags=adventure["tags"], adventure_id=adventure.id) }}
         {%endif%}
