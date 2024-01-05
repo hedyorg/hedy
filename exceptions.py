@@ -250,6 +250,13 @@ class UnquotedTextException(HedyException):
                          line_number=line_number)
 
 
+class MissingAdditionalCommand(HedyException):
+    def __init__(self, command, line_number):
+        super().__init__('Missing Additional Command',
+                         command=command,
+                         line_number=line_number)
+
+
 class MisspelledAtCommand(HedyException):
     def __init__(self, command, arg1, line_number):
         super().__init__('Misspelled At Command',

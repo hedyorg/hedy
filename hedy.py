@@ -1179,6 +1179,12 @@ class IsValid(Filter):
     def error_list_access(self, meta, args):
         raise exceptions.MisspelledAtCommand(command='at', arg1=str(args[1][1]), line_number=meta.line)
 
+    def error_add_missing_to(self, meta, args):
+        raise exceptions.MissingAdditionalCommand(command='add to', line_number=meta.line)
+
+    def error_remove_missing_from(self, meta, args):
+        raise exceptions.MissingAdditionalCommand(command='remove from', line_number=meta.line)
+
     def error_non_decimal(self, meta, args):
         raise exceptions.NonDecimalVariable(line_number=meta.line)
 
