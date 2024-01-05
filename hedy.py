@@ -1166,9 +1166,6 @@ class IsValid(Filter):
         raise exceptions.InvalidSpaceException(
             level=self.level, line_number=line, fixed_code=fixed_code, fixed_result=result)
 
-    def error_ask_missing_variable(self, meta, args):
-        raise exceptions.MissingVariableException(command='is', level=self.level, line_number=meta.line)
-
     def error_print_nq(self, meta, args):
         words = [str(x[1]) for x in args]  # second half of the list is the word
         text = ' '.join(words)
