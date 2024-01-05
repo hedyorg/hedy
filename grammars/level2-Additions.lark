@@ -1,8 +1,9 @@
 //add the rules after += remove those after -= and the ones after > should be at the end
-command:+= error_ask_dep_2 | assign | error_echo_dep_2 | error_non_decimal | sleep -= echo > error_invalid
+command:+= error_ask_dep_2 | error_ask_missing_variable | assign | error_echo_dep_2 | error_non_decimal | sleep -= echo > error_invalid
 print: _PRINT (_print_argument)?
 _print_argument: (_SPACE | textwithoutspaces)*
 ask: var _IS _ASK ((_SPACE | text)*)?
+error_ask_missing_variable: _STANDALONE_IS _ASK ((_SPACE | text)*)?
 
 error_non_decimal: ((textwithoutspaces | _SPACE)*)? NON_DECIMAL (text*)?
 //level 1 deprecated commands, for now manually added for better errors
