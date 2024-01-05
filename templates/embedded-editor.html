@@ -1,5 +1,9 @@
 {% if run %}
-    {% set editorHeight = 'calc(100vh - 4em)' %}
+    {% if fullWidth %}
+        {% set editorHeight = 'calc(50vh - 2em)' %}
+    {% else %}
+        {% set editorHeight = 'calc(100vh - 4em)' %}
+    {% endif %}
 {% else %}
     {% set editorHeight = '100vh' %}
 {% endif %}
@@ -15,7 +19,7 @@
         <link rel="stylesheet" href="{{static('/fontawesome/css/all.min.css')}}"/>
     </head>
     <body class="flex flex-col gap-2 h-screen" dir="{{ g.dir }}">
-        <div id="editor-area" class="relative grid grid-cols-1 {% if run %}md:grid-cols-2{% endif %} md:grid-flow-row-dense gap-2">
+        <div id="editor-area" class="relative grid grid-cols-1 {% if run and not fullWidth %}md:grid-cols-2{% endif %} md:grid-flow-row-dense gap-2">
             <div class="flex flex-col order-1 relative" id="code_editor" style="height: {{ editorHeight }};">
                 <div id="editor" style="background: #272822; max-height: {{ editorHeight }}; font-size:0.95em; color: white" blurred="false" class="h-full w-full flex-1 text-lg rounded min-h-0 overflow-hidden fixed-editor-height" {% if readOnly %}data-readonly="true"{% endif %}></div>
                 <div id="errorbox"
@@ -65,7 +69,7 @@
                 </div>
             </div>
             {% if run %}
-                <div class="w-full flex flex-col order-2 relative" id="code_output" style="height: calc(100vh - 4em);">
+                <div class="w-full flex flex-col order-2 relative" id="code_output" style="height: {{ editorHeight }}">
                       <!-- tabindex=0 makes the div focusable -->
                       <div id="output" tabindex=0 class="flex-1 rounded p-2 px-3 bg-gray-900 color-white w-full text-lg overflow-auto" style="min-height: 3rem;"></div>
                       <div id="turtlecanvas" class="flex-0 ltr:pl-4 rtl:pr-4"></div>
