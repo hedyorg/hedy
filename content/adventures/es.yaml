@@ -310,12 +310,6 @@ adventures:
                     _
                     {print} Recibe un batido de sabores {at} {random}
                     ```
-
-                    gustar {is} {ask} ¿Cuál es tu animal preferido?
-                    {add} gustar {to_list} animales
-                    no_gustar {is} {ask} ¿Qué animal no te gusta?
-                    {remove} no_gustar {from} animales
-                    {print} Elijo animales {at} {random}
     and_or_command:
         name: '{and} & {or}'
         default_save_name: y o
@@ -365,9 +359,6 @@ adventures:
                     _ ¿Qué tal estás?
                     _
                     ```
-
-                    {ask} ¿Cómo te llamas?
-                    {echo} hola
             2:
                 story_text: |
                     ## El comando preguntar
@@ -882,7 +873,7 @@ adventures:
                 story_text: |-
                     ### Ejercicio
                     Depura este código. ¡Buena suerte!
-                example_code: |
+                example_code: |-
                     **Warning! This code needs to be debugged!**
                     ```
                     {print} 'Welcome to Manicures and Pedicures by Hedy'
@@ -1419,13 +1410,13 @@ adventures:
                     !En este nivel aprenderás un comando que hará todo esto mucho más fácil!
                 example_code: |
                     ```
-                    juego {is} 'iniciado'
+                    juego = 'iniciado'
                     {for} i {in} {range} 1 {to} 100
-                        {if} juego {is} 'iniciado'
+                        {if} juego == 'iniciado'
                             respuesta = {ask} '¿Quieres continuar?'
-                            {if} respuesta {is} 'no'
-                                juego {is} 'finalizado'
-                            {if} respuesta {is} 'si'
+                            {if} respuesta == 'no'
+                                juego == 'finalizado'
+                            {if} respuesta == 'si'
                                 {print} 'Ok continuemos'
                     ```
             16:
@@ -2363,10 +2354,6 @@ adventures:
                     _ respuesta _ animales _ '¡También el mío!'
                     _ _ 'Mis animales preferidos son perros, vacas y ovejas'
                     ```
-
-                    color_favorito {is} {ask} '¿Cuál es tu color preferido?'
-                    {if} color_favorito {in} colores_bonitos {print} '¡bonito!'
-                    {else} {print} 'meh'
     is_command:
         name: '{is}'
         default_save_name: comando_es
@@ -2432,6 +2419,11 @@ adventures:
                     {if} nombre != 'Hedy'
                         {print} 'Tu no eres Hedy'
                     ```
+
+                    {if} edad < 13
+                        {print} '¡Eres más joven que yo!'
+                    {else}
+                        {print} '¡Eres mayor que yo!'
     language:
         name: Idioma
         default_save_name: Idioma
@@ -2641,7 +2633,7 @@ adventures:
                     Finish this code by filling in the blanks!
                 example_code: |
                     ```
-                    _ calculate_budget with wish, money, allowance
+                    _ calculate_budget {with} wish, money, allowance
                         to_save = wish - money
                         weeks = to_save / allowance
                         {if} wish _ money
@@ -2655,7 +2647,7 @@ adventures:
                     wish = {ask} 'How much money do you need?'
                     allowance = {ask} 'How much pocket money do you get each week?'
 
-                    {call} calculate_budget with _, _, _
+                    {call} _
                     ```
     pressit:
         name: Presiónalo
@@ -2817,9 +2809,6 @@ adventures:
                     {print} 'I'm babysitting my sister's kids'
                     {print} 'What's more fun than that?'
                     ```
-
-                    answer {is} {ask} '¿Qué tenemos que usar a partir de ahora?'
-                    {print} 'Necesitamos usar ' answer 'de ahora en adelante'
             12:
                 story_text: |
                     **Todos los textos tienen que ir entre comillas**
@@ -4094,11 +4083,6 @@ adventures:
                     {if} dirección {is} izquierda {turn} _
                     {forward} 100
                     ```
-
-                    figura {is} {ask} '¿Quieres un cuadrado o un triángulo?'
-                    {if} figura {is} triángulo ángulo {is} 120 {else} ángulo {is} 90
-                    {turn} ángulo
-                    {forward} 25
             6:
                 story_text: |
                     En nivel 5 puede usar cálculos para dibujar diferentes figuras.
@@ -4268,9 +4252,9 @@ adventures:
                     L <img src="https://github.com/hedyorg/hedy/assets/80678586/3af6f919-7b67-4ee7-b923-11e56f2b6b24" width="100">
                     </div>
                 example_code: |
-                    Hint:
+                    Pista:
                     ```
-                    chosen_letter {is} {ask} 'Which letter would you like to see? F, E or L?
+                    letra_elegida {is} {ask} '¿Qué letra te gustaría ver? F, E o L?
                     {if} _
                     ```
             6:
@@ -4288,9 +4272,9 @@ adventures:
                     Flag <img src="https://github.com/hedyorg/hedy/assets/80678586/877fc337-df80-4185-8005-a6c28904f66e" width="300">
                     </div>
                 example_code: |
-                    Hint for the square:
+                    Pista para el cuadrado:
                     ```
-                    chosen_color = {ask} _
+                    color_elegido = {ask} _
                     ```
             7:
                 story_text: |
@@ -4346,12 +4330,12 @@ adventures:
                     ```
             10:
                 story_text: |
-                    ### Exercise
-                    Recreate the drawings with the turtle!
+                    ### Ejercicio
+                    ¡Vuelve a crear los dibujos con la tortuga!
 
                     <div class="w-full flex flex-row gap-2">
-                    Nested Hexagon <img src="https://github.com/hedyorg/hedy/assets/80678586/3629e908-3cd5-44ac-bbcd-1f1cceb15654" width="150">
-                    Traffic lights  <img src="https://github.com/hedyorg/hedy/assets/80678586/edbbb608-5ff8-4349-85a6-e47809adde43" width="100">
+                    Hexágono anidado <img src="https://github.com/hedyorg/hedy/assets/80678586/3629e908-3cd5-44ac-bbcd-1f1cceb15654" width="150">
+                    Semáforo  <img src="https://github.com/hedyorg/hedy/assets/80678586/edbbb608-5ff8-4349-85a6-e47809adde43" width="100">
                     </div>
                 example_code: |
                     Hint Nested Hexagon:
@@ -4369,7 +4353,7 @@ adventures:
                         {repeat} _
                     ```
                 story_text_2: |
-                    Christmas lights <img src="https://github.com/hedyorg/hedy/assets/80678586/9637ea6d-6edc-4d88-a6f7-10271bfc5371" width="500">
+                    Luces de Navidad <img src="https://github.com/hedyorg/hedy/assets/80678586/9637ea6d-6edc-4d88-a6f7-10271bfc5371" width="500">
                 example_code_2: |
                     Hint Christmas Lights:
 
@@ -4386,12 +4370,12 @@ adventures:
                     ```
             11:
                 story_text: |
-                    ### Exercise
-                    Recreate the drawings with the turtle!
+                    ### Ejercicio
+                    ¡Vuelve a crear los dibujos con la tortuga!
 
                     <div class="w-full flex flex-row gap-2">
-                    Beehive (6) <img src="https://github.com/hedyorg/hedy/assets/80678586/ec02469c-907b-4695-9382-d39a8f3c00ec" width="200">
-                    Fan (5)  <img src="https://github.com/hedyorg/hedy/assets/80678586/a032ab35-c70c-4e67-9b4e-036a03ecce87" width="200">
+                    Colmena (6) <img src="https://github.com/hedyorg/hedy/assets/80678586/ec02469c-907b-4695-9382-d39a8f3c00ec" width="200">
+                    Abanico (5)  <img src="https://github.com/hedyorg/hedy/assets/80678586/a032ab35-c70c-4e67-9b4e-036a03ecce87" width="200">
                     </div>
                 example_code: |
                     Hint Beehive:
@@ -4408,8 +4392,8 @@ adventures:
                     Start out like the fan you made in level 7. Or take a peak at the hint for the beehive, because the codes are very similar.
             12:
                 story_text: |
-                    ### Exercise
-                    Recreate the drawings with the turtle!
+                    ### Ejercicio
+                    ¡Vuelve a crear los dibujos con la tortuga!
                 example_code: |
                     Hint: Bracelet designing program
 
@@ -4436,32 +4420,32 @@ adventures:
                     ```
             13:
                 story_text: |
-                    ### Exercise
-                    Recreate the drawings with the turtle!
+                    ### Ejercicio
+                    ¡Vuelve a crear los dibujos con la tortuga!
 
-                    Street in different sizes <img src="https://github.com/hedyorg/hedy/assets/80678586/cdae9d97-d5ef-46f3-8838-24fa7b5b1bec" width="300">
-                    Colored street  <img src="https://github.com/hedyorg/hedy/assets/80678586/9893e0bd-c0f8-49bc-a5a7-217182407724" width="300">
+                    Calle en diferentes tamaños <img src="https://github.com/hedyorg/hedy/assets/80678586/cdae9d97-d5ef-46f3-8838-24fa7b5b1bec" width="300">
+                    Calle coloreada  <img src="https://github.com/hedyorg/hedy/assets/80678586/9893e0bd-c0f8-49bc-a5a7-217182407724" width="300">
                 example_code: |
-                    Hint Street in different sizes
+                    La Calle de la Pista en diferentes tamaños
                     ```
-                    {define} draw_a_house {with} size
+                    {define} dibuja_una_casa {with} tamaño
                     _
 
-                    {call} draw_a_house {with} 90
-                    {call} draw_a_house {with} 60
-                    {call} draw_a_house {with} 30
+                    {call} dibuja_una_casa {with} 90
+                    {call} dibuja_una_casa {with} 60
+                    {call} dibuja_una_casa {with} 30
                     ```
 
-                    Hint Colored street
+                    Calle de la Pista Coloreada
                     ```
-                    {define} draw_a_house {with} chosen_color
+                    {define} dibuja_una_casa {with} color_elegido
                     _
                     ```
             14:
                 story_text: |
-                    ### Exercise
-                    Create a program that asks the player how many corners their figure should have and then creates that figure.
-                    The figure in the image is the output when the player fills in 10.
+                    ### Ejercicio
+                    Crea un programa que pregunte al jugador cuántas esquinas debería tener su figura y después crea esa figura.
+                    La figura in la imagen es el resultado cuando el jugador introduzca 10.
 
                     <div class="w-full flex flex-row gap-2">
                      <img src="https://github.com/hedyorg/hedy/assets/80678586/ee32f40e-dea1-4e7c-a813-3ef63671254b" width="300">
@@ -4469,41 +4453,41 @@ adventures:
                     </div>
                 example_code: |
                     ```
-                    {define} calculate_degrees {with} amount_of_corners
-                        _ 360 / amount_of_corners
+                    {define} calcular_angulos {with} cantidad_de_esquinas
+                        _ 360 / cantidad_de_esquinas
 
 
-                    {define} draw_figure {with} degrees
+                    {define} dibujar_figura {with} ángulos
                         _
-                            {forward} 400/amount_of_corners
+                            {forward} 400/cantidad_de_esquinas
                             {turn} _
 
-                    amount_of_corners = {ask} _
-                    degrees = {call} _ {with} _
+                    cantidad_de_esquinas = {ask} _
+                    ángulos = {call} _ {with} _
 
                     {call} _ {with}
                     {call} _ {with}
                     ```
             15:
                 story_text: |
-                    ### Exercise
-                    Recreate the drawings with the turtle!
+                    ### Ejercicio
+                    ¡Vuelve a crear estos dibujos con la tortuga!
 
-                    Spiral <img src="https://github.com/hedyorg/hedy/assets/80678586/6943223c-018b-435b-a391-23723cc7a6ad" width="150">
+                    Espiral <img src="https://github.com/hedyorg/hedy/assets/80678586/6943223c-018b-435b-a391-23723cc7a6ad" width="150">
                 example_code: |
-                    Spiral
+                    Espiral
                     ```
-                    distance = 5
-                    {while} distance < 200
-                        distance = distance + 5
+                    distancia = 5
+                    {while} distancia < 200
+                        distancia = distancia + 5
                          _
                     ```
                 story_text_2: |
-                    Fan <img src="https://github.com/hedyorg/hedy/assets/80678586/cb671065-b47b-49f0-b298-dcbcd2a5e28f" width="150">
+                    Abanico <img src="https://github.com/hedyorg/hedy/assets/80678586/cb671065-b47b-49f0-b298-dcbcd2a5e28f" width="150">
                 example_code_2: |
-                    Fan
+                    Abanico
                     ```
-                    {define} draw_a_square {with} side
+                    {define} dibuja_un_cuadrado {with} lado
                     _
 
                     i = 100
@@ -4513,10 +4497,10 @@ adventures:
                         i = i - 3
                     ```
                 story_text_3: |
-                    Star <img src="https://github.com/hedyorg/hedy/assets/80678586/17564e0a-63e1-4794-8d41-15ac8c1a5a93" width="150">
+                    Estrella <img src="https://github.com/hedyorg/hedy/assets/80678586/17564e0a-63e1-4794-8d41-15ac8c1a5a93" width="150">
                 example_code_3: |
-                    Star
-                    A star is usually drawn using 144-degree-turns. If you change this slightly to 143 degrees for example and repeat the pattern multiple times with a {while} loop you can make this figure.
+                    Estrella
+                    Una estrella se suele dibujar usando ángulos de 144 grados. Si por ejemplo lo cambias ligeramente a 143 grados y repites el patrón varias veces con un bucle {while} puedes hacer esta figura.
     while_command:
         name: '{while}'
         default_save_name: comando_mientras

@@ -834,3 +834,23 @@ class TestsLevel3(HedyTester):
                                      "print(f'{random.choice(l)}')")
 
         self.multi_level_tester(code=code, expected=expected, max_level=11)
+
+# music tests
+    def test_play_random(self):
+        code = textwrap.dedent("""\
+        notes is C4, E4, D4, F4, G4
+        play notes at random""")
+
+        expected = textwrap.dedent("""\
+        notes = ['C4', 'E4', 'D4', 'F4', 'G4']
+        play(notes_mapping.get(str(random.choice(notes)), str(random.choice(notes))))
+        time.sleep(0.5)""")
+
+        self.multi_level_tester(
+            code=code,
+            translate=False,
+            skip_faulty=False,
+            unused_allowed=True,
+            expected=expected,
+            max_level=11
+        )
