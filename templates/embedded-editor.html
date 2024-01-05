@@ -21,7 +21,7 @@
     <body class="flex flex-col gap-2 h-screen" dir="{{ g.dir }}">
         <div id="editor-area" class="relative grid grid-cols-1 {% if run and not fullWidth %}grid-cols-2{% endif %} md:grid-flow-row-dense gap-2">
             <div class="flex flex-col order-1 relative" id="code_editor" style="height: {{ editorHeight }};">
-                <div id="editor" style="background: #272822; max-height: {{ editorHeight }}; font-size:0.95em; color: white" blurred="false" class="h-full w-full flex-1 text-lg rounded min-h-0 overflow-hidden fixed-editor-height" {% if readOnly %}data-readonly="true"{% endif %}></div>
+                <div id="editor" style="background: #272822; font-size:0.95em; color: white" blurred="false" class="h-full w-full flex-1 text-lg rounded min-h-0 overflow-hidden fixed-editor-height" {% if readOnly %}data-readonly="true"{% endif %}></div>
                 <div id="errorbox"
                   class="flex-0 z-20 mt-0 bg-red-100 border-t-4 border-red-500 rounded-b text-red-900 px-4 py-3 shadow-md" role="alert"
                   style="display: none;">
