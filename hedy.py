@@ -1856,7 +1856,7 @@ class ConvertToPython_3(ConvertToPython_2):
 @source_map_transformer(source_map)
 class ConvertToPython_4(ConvertToPython_3):
 
-    def process_variable_for_fstring(self, name, access_line):
+    def process_variable_for_fstring(self, name):
         if self.is_variable(name):
             if self.numerals_language == "Latin":
                 converted = escape_var(name)
@@ -1880,7 +1880,7 @@ class ConvertToPython_4(ConvertToPython_3):
         args = self.check_var_usage(args, meta.line)
         result = ''
         for argument in args:
-            argument = self.process_variable_for_fstring(argument, meta.line)
+            argument = self.process_variable_for_fstring(argument)
             result += argument
         return result
 
@@ -2055,7 +2055,7 @@ class ConvertToPython_6(ConvertToPython_5):
             if isinstance(a, Tree):
                 args_new.append(self.convert_tree_to_number(a))
             else:
-                args_new.append(self.process_variable_for_fstring(a, meta.line))
+                args_new.append(self.process_variable_for_fstring(a))
 
         return ''.join(args_new)
 
