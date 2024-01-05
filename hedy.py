@@ -1380,7 +1380,7 @@ class ConvertToPython(Transformer):
             arg = arg[1:-1]
         return f"'{process_characters_needing_escape(arg)}'"
 
-    def process_variable_for_fstring(self, variable_name, access_line_number=100):
+    def process_variable_for_fstring(self, variable_name, access_line_number):
         self.add_variable_access_location(variable_name, access_line_number)
 
         if self.is_variable(variable_name, access_line_number):
@@ -1674,7 +1674,7 @@ class ConvertToPython_2(ConvertToPython_1):
         if not isinstance(arg, str):
             arg = arg.data
 
-        arg = self.process_variable_for_fstring(arg)
+        arg = self.process_variable_for_fstring(arg, meta.line)
 
         return self.make_color(arg, self.language)
 
