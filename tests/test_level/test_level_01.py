@@ -650,6 +650,29 @@ class TestsLevel1(HedyTester):
             skipped_mappings=skipped_mappings,
             max_level=1)
 
+    def test_lines_with_spaces_english_gives_invalid(self):
+        code = textwrap.dedent("""\
+         print Hallo welkom bij Hedy!
+            print Hallo welkom bij Hedy!""")
+
+        self.multi_level_tester(
+            code=code,
+            exception=hedy.exceptions.InvalidSpaceException,
+            skip_faulty=False,
+            max_level=3)
+
+    def test_lines_with_spaces_french_gives_invalid(self):
+        code = textwrap.dedent("""\
+         affiche Bonjour Hedy!
+            affiche Bonjour Hedy!""")
+
+        self.multi_level_tester(
+            code=code,
+            exception=hedy.exceptions.InvalidSpaceException,
+            skip_faulty=False,
+            lang='fr',
+            max_level=3)
+
     def test_lines_with_spaces_gives_invalid(self):
         code = " print Hallo welkom bij Hedy!\n print Hallo welkom bij Hedy!"
         expected = "pass\npass"
