@@ -1180,10 +1180,10 @@ class IsValid(Filter):
         raise exceptions.MisspelledAtCommand(command='at', arg1=str(args[1][1]), line_number=meta.line)
 
     def error_add_missing_to(self, meta, args):
-        raise exceptions.MissingAdditionalCommand(command='add', missing_command='to', line_number=meta.line)
+        raise exceptions.MissingAdditionalCommand(command='add', line_number=meta.line)
 
     def error_remove_missing_from(self, meta, args):
-        raise exceptions.MissingAdditionalCommand(command='remove', missing_command='from', line_number=meta.line)
+        raise exceptions.MissingAdditionalCommand(command='remove', line_number=meta.line)
 
     def error_non_decimal(self, meta, args):
         raise exceptions.NonDecimalVariable(line_number=meta.line)
@@ -1259,16 +1259,13 @@ class IsValid(Filter):
             command='ifpressed_else', level=self.level, line_number=meta.line)
 
     def error_for_missing_in(self, meta, args):
-        raise exceptions.InvalidForCommandException(
-            command='for', missing_command='in', level=self.level, line_number=meta.line)
+        raise exceptions.InvalidForCommandException(command='in', level=self.level, line_number=meta.line)
 
     def error_for_missing_to(self, meta, args):
-        raise exceptions.InvalidForCommandException(
-            command='for', missing_command='to', level=self.level, line_number=meta.line)
+        raise exceptions.InvalidForCommandException(command='to', level=self.level, line_number=meta.line)
 
     def error_for_missing_command(self, meta, args):
-        raise exceptions.IncompleteCommandException(
-            incomplete_command='for', level=self.level, line_number=meta.line + 1)
+        raise exceptions.IncompleteCommandException(incomplete_command='for', level=self.level, line_number=meta.line)
 
     def error_nested_define(self, meta, args):
         raise exceptions.NestedFunctionException()

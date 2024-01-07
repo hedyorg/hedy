@@ -254,7 +254,6 @@ class MissingAdditionalCommand(HedyException):
     def __init__(self, command, missing_command, line_number):
         super().__init__('Missing Additional Command',
                          command=command,
-                         missing_command=missing_command,
                          line_number=line_number)
 
 
