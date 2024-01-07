@@ -3,6 +3,6 @@ command:+= for_loop | error_for_missing_in | error_for_missing_to | error_for_mi
 //new : for loop
 for_loop: _FOR var _IN _RANGE (INT | var_access) _TO (INT | var_access) _EOL (_SPACE command) (_EOL _SPACE command)*  _EOL? _END_BLOCK
 
-error_for_missing_in: _FOR var _SPACE _RANGE (INT | var_access) _TO (INT | var_access) _EOL
+error_for_missing_in: _FOR var _SPACE _RANGE (INT | var_access)? (_SPACE (INT | var_access))*
 error_for_missing_to: _FOR var _IN _RANGE (INT | var_access) _SPACE (INT | var_access) _EOL
 error_for_missing_command: _FOR var _IN _RANGE (INT | var_access) _TO (INT | var_access) _EOL
