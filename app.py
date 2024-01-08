@@ -1650,6 +1650,7 @@ def get_embedded_code_editor(level):
         level = 1
 
     run = True if request.args.get('run') == 'true' else False
+    fullWidth = True if request.args.get('fullWidth') == 'true' else False
     readOnly = True if request.args.get('readOnly') == 'true' else False
     encoded_program = request.args.get('program')
 
@@ -1674,7 +1675,7 @@ def get_embedded_code_editor(level):
         except binascii.Error:
             program = gettext('invalid_program_comment')
 
-    return render_template("embedded-editor.html", embedded=True, run=run, language=language,
+    return render_template("embedded-editor.html", fullWidth=fullWidth, run=run, language=language,
                            keyword_language=keyword_language, readOnly=readOnly,
                            level=level, javascript_page_options=dict(
                                page='view-program',
