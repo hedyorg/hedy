@@ -29,7 +29,9 @@
                 {{_('level')}}: {{ adventure.level }}
             {% endif %}
         </p>
-        <p class="text-gray-600 mt-1">{{_('language')}}: {{ lang_to_sym(adventure.language) }}</p>
+        {% if adventure.get("language") %}
+            <p class="text-gray-600 mt-1">{{_('language')}}: {{ lang_to_sym(adventure.language) }}</p>
+        {% endif %}
         {% if adventure["cloned_times"] %}
             <p class="text-gray-600 mt-1">
                 {{_('cloned_times')}}: {{adventure["cloned_times"]}}
@@ -43,7 +45,7 @@
     </div>
     <div id="actions"
         class="flex items-center px-6 py-4 bg-gray-200 shadow-lg">
-        <a class="green-btn mr-1 no-underline cursor-pointer" href="/adventure/{{ adventure.name }}">{{_('preview')}}</a>
+        <a class="green-btn mr-1 no-underline cursor-pointer" href="/adventure/{{ adventure.name }}?creator={{ adventure.creator }}">{{_('preview')}}</a>
         {% if user["username"] != adventure["creator"] %}
             <button class="green-btn" id="clone_adventure_btn"
                 _="on htmx:afterRequest log detail 

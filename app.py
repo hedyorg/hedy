@@ -1602,11 +1602,14 @@ def get_specific_adventure(name, level, mode):
 
         if not adventure:
             return utils.error_page(error=404, ui_message=gettext('no_such_adventure'))
-        elif str(level) not in adventure.get("levels", [level]):
-            level = int(adventure.get("levels", [level])[0])
 
-        adventure["content"] = safe_format(adventure["content"], **hedy_content.KEYWORDS.get(g.keyword_lang))
-        customizations["available_levels"] = [int(adv_level) for adv_level in adventure.get("levels", [])]
+        available_levels = adventure["levels"] if adventure.get("levels") else [adventure["level"]]
+
+        customizations["available_levels"] = [int(adv_level) for adv_level in available_levels]
+        if level not in customizations["available_levels"]:
+            return utils.error_page(error=404, ui_message=gettext('no_such_adventure'))
+
+        adventure["content"] = safe_format(adventure.get("content", ""), **hedy_content.KEYWORDS.get(g.keyword_lang))
         customizations["teachers_adventure"] = True
 
         current_adventure = Adventure(
