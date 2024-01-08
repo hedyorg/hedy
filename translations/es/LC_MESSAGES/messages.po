@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2024-01-07 15:20+0100\n"
-"PO-Revision-Date: 2023-12-18 20:12+0000\n"
+"POT-Creation-Date: 2024-01-08 14:01+0100\n"
+"PO-Revision-Date: 2024-01-03 19:58+0000\n"
 "Last-Translator: Prefill add-on <noreply-addon-prefill@weblate.org>\n"
 "Language: es\n"
 "Language-Team: es <LL@li.org>\n"
@@ -23,6 +23,9 @@ msgstr "Has intentado usar la variable {name} en la línea {access_line_number},
 
 msgid "Cyclic Var Definition"
 msgstr "Debes declarar la variable {variable} antes de poder usarla en el lado derecho del comando {is}."
+
+msgid "Function Undefined"
+msgstr "Has intentado utilizar la función {name}, pero no la has definido."
 
 msgid "Has Blanks"
 msgstr "Tu código es incompleto. Contiene huecos que debes reemplazar con código."
@@ -46,7 +49,7 @@ msgid "Invalid Argument Type"
 msgstr "No puedes usar {command} con {invalid_argument} porque es {invalid_type}. Intenta cambiar {invalid_argument} a {allowed_types}."
 
 msgid "Invalid At Command"
-msgstr "El comando {at} no puede utilizarse a partir del nivel 16. Puedes usar corchetes para usar un elemento de una lista, por ejemplo `amigos[i]`, `números_de_suerte[{random}]`."
+msgstr "El comando {command} no puede utilizarse a partir del nivel 16. Puedes usar corchetes para usar un elemento de una lista, por ejemplo `friends[i]`, `lucky_numbers[{random}]`."
 
 msgid "Invalid Space"
 msgstr "¡Oops! Has comenzado una línea con un espacio en la línea {line_number}. Los espacios confunden a los ordenadores, ¿podrías quitarlos?"
@@ -108,15 +111,18 @@ msgstr "Números no enteros no se soportan pero estarán disponibles en unos niv
 msgid "Unsupported String Value"
 msgstr "El texto no puede contener {invalid_value}."
 
-#, fuzzy
 msgid "Unused Variable"
-msgstr "You defined the variable {variable_name} on line {line_number}, but you did not use it."
+msgstr "Ha definido la variable {variable_name} en la línea {line_number}, pero no la ha utilizado."
 
 msgid "Var Undefined"
 msgstr "Intentaste usar la variable {name}, pero no la estableciste. También es posible que estés intentando usar la palabra {name} pero olvidaste las comillas."
 
 msgid "Wrong Level"
 msgstr "Ese código es correcto, pero no pertenece al nivel correcto. Has escrito código {offending_keyword} para el nivel {working_level}.Tip: {tip}"
+
+#, fuzzy
+msgid "Wrong Number of Arguments"
+msgstr "Your function used the wrong number of arguments. You provided {used_number} but the function {name} needs {defined_number}"
 
 msgid "account_overview"
 msgstr "Resumen de cuenta"
@@ -157,9 +163,8 @@ msgstr "Ir al nivel {level}"
 msgid "adventure"
 msgstr "Aventura"
 
-#, fuzzy
 msgid "adventure_cloned"
-msgstr "Adventure is cloned"
+msgstr "La aventura es clonada"
 
 msgid "adventure_duplicate"
 msgstr "Ya tienes una aventura con este nombre."
@@ -198,7 +203,7 @@ msgid "adventures"
 msgstr "Aventuras Disponibles"
 
 msgid "adventures_info"
-msgstr "Puedes crear tus propiar aventuras y agregarlas a tus clases. Estas aventuras tienen el objetivo de servir como ejercicio que tus estudiantes pueden completar y subir para que lo revises en la sección Vista general de los programas por aventura en la página de la clase. Puedes ver más información acerca de crear tus propias aventuras <a href=\"https://hedy.org/for-teachers/manual/features\">aquí</a>"
+msgstr "Puedes crear tus propiar aventuras y agregarlas a tus clases. Estas aventuras tienen el objetivo de servir como ejercicio que tus estudiantes pueden completar y subir para que lo revises en la sección Vista general de los programas por aventura en la página de la clase. Puedes ver más información acerca de crear tus propias aventuras <a href=\"https://hedy.org/for-teachers/manual/features\">aquí</a>."
 
 msgid "adventures_restored"
 msgstr "Se han restaurado las aventuras por defecto."
@@ -242,9 +247,8 @@ msgstr "programas guardados"
 msgid "amount_submitted"
 msgstr "programas enviados"
 
-#, fuzzy
 msgid "apply_filters"
-msgstr "Apply filters"
+msgstr "Aplicar los filtros"
 
 msgid "are_you_sure"
 msgstr "¿Estás segura/o? No puedes revertir esta acción."
@@ -334,13 +338,11 @@ msgid "class_survey_question4"
 msgstr "¿Qué distingue a sus alumnos de los demás?"
 
 msgid "classes_info"
-msgstr "En Hedy, puedes crear tantas clases como quieras. Cada clase también puede tener varios profesores, cada uno con un rol específico. También puedes personalizar tus clases ordenando las aventuras ¡o incluso agregando las tuyas! Puedes ver más información acerca de las clases en el <a href=\"https://hedy.org/for-teachers/manual/preparations#for-teachers\">manual de profesores</a>"
+msgstr "En Hedy, puedes crear tantas clases como quieras. Cada clase también puede tener varios profesores, cada uno con un rol específico. También puedes personalizar tus clases ordenando las aventuras ¡o incluso agregando las tuyas! Puedes ver más información acerca de las clases en el <a href=\"https://hedy.org/for-teachers/manual/preparations#for-teachers\">manual de profesores</a>."
 
-#, fuzzy
 msgid "clone"
-msgstr "Clone"
+msgstr "Clonar"
 
-#, fuzzy
 msgid "cloned_times"
 msgstr "Clones"
 
@@ -527,9 +529,8 @@ msgstr "Desajuste entre eco y pregunta"
 msgid "echo_out"
 msgstr "A partir del nivel 2, `{echo}` ya no es necesario. Ahora puedes repetir una respuesta con `{ask}` y `{print}`. Ejemplo: `nombre {is} {ask} ¿Cómo te llamas? {print} hola nombre`"
 
-#, fuzzy
 msgid "edit_adventure"
-msgstr "Edit adventure"
+msgstr "Editar la aventura"
 
 msgid "edit_code_button"
 msgstr "Editar código"
@@ -573,9 +574,8 @@ msgstr "Esa dirección de correo electrónico ya está en uso."
 msgid "exists_username"
 msgstr "Ese nombre de usuario ya está en uso."
 
-#, fuzzy
 msgid "exit_preview_mode"
-msgstr "Exit preview mode"
+msgstr "Salir del modo vista previa"
 
 msgid "experience_invalid"
 msgstr "Por favor, selecciona una experiencia válida. Escoge (sí, no)."
@@ -1043,9 +1043,8 @@ msgstr "¿Todavía no tienes una cuenta?"
 msgid "no_accounts"
 msgstr "No hay cuentas por crear."
 
-#, fuzzy
 msgid "no_adventures_yet"
-msgstr "There are no public adventures yet..."
+msgstr "Aún no hay aventuras públicas..."
 
 msgid "no_certificate"
 msgstr "Este usuario no ha conseguido el Certificado Hedy de Finalización"
@@ -1218,9 +1217,8 @@ msgstr "Lenguaje favorito"
 msgid "preview"
 msgstr "Previsualizar"
 
-#, fuzzy
 msgid "previewing_class"
-msgstr "You are previewing class <em>{class_name}</em> as a teacher."
+msgstr "Está previsualizando la clase <em>{class_name}</em> como profesor."
 
 msgid "previous_campaigns"
 msgstr "Ver campañas anteriores"
@@ -1444,13 +1442,11 @@ msgstr "Seleccionar y encargar aventuras"
 msgid "select_all"
 msgstr ""
 
-#, fuzzy
 msgid "select_lang"
-msgstr "Select language"
+msgstr "Selecciona el idioma"
 
-#, fuzzy
 msgid "select_tag"
-msgstr "Select tag"
+msgstr "Seleccionar etiqueta"
 
 msgid "selected"
 msgstr ""
@@ -1498,7 +1494,7 @@ msgid "slides"
 msgstr "Diapositivas"
 
 msgid "slides_info"
-msgstr "¡Estas son diapositivas que hemos creado para ayudarte a enseñar con Hedy! Cada diapositiva contiene una explicación de cada nivel, junto con algunos ejemplos.Las diapositivas fueron creadas mediante el servicio <a href=\"https://slides.com\">slides.com</a>; si crear tus propias diapositivas usando estas como partida, puedes descargarlas, y luego subir el archivo zip resultante a <a href=\"https://slides.com\">slides.com</a>. Puedes ver más información acerca de las diapositivas en el <a href=\"https://hedy.org/for-teachers/manual/features\">manual de profesores</a>"
+msgstr "¡Estas son diapositivas que hemos creado para ayudarte a enseñar con Hedy! Cada diapositiva contiene una explicación de cada nivel, junto con algunos ejemplos.Las diapositivas fueron creadas mediante el servicio <a href=\"https://slides.com\">slides.com</a>; si crear tus propias diapositivas usando estas como partida, puedes descargarlas, y luego subir el archivo zip resultante a <a href=\"https://slides.com\">slides.com</a>. Puedes ver más información acerca de las diapositivas en el <a href=\"https://hedy.org/for-teachers/manual/features\">manual de profesores</a>."
 
 msgid "social_media"
 msgstr "Redes sociales"
