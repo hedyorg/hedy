@@ -1,4 +1,5 @@
 import uuid
+from flask import g
 from flask_babel import gettext
 
 import utils
@@ -45,7 +46,7 @@ class PublicAdventuresModule(WebsiteModule):
                     "date": utils.localized_date_format(adventure.get("date")),
                     "level": adventure.get("level"),
                     "levels": adventure.get("levels"),
-                    "language": adventure.get("language", None),
+                    "language": adventure.get("language", g.lang),
                     "cloned_times": adventure.get("cloned_times"),
                     "tags": adventure.get("tags", []),
                 }
@@ -80,6 +81,7 @@ class PublicAdventuresModule(WebsiteModule):
             if adventure["name"] == current_adventure["name"]:
                 return gettext("adventure_duplicate"), 400
 
+        level = current_adventure.get("level")
         adventure = {
             "id": uuid.uuid4().hex,
             "cloned_from": adventure_id,
@@ -91,9 +93,9 @@ class PublicAdventuresModule(WebsiteModule):
             "creator": user["username"],
             "author": current_adventure.get("creator"),
             "date": utils.timems(),
-            "level": current_adventure.get("level"),
-            "levels": current_adventure.get("levels"),
-            "language": current_adventure.get("language", ""),
+            "level": level,
+            "levels": current_adventure.get("levels", [level]),
+            "language": current_adventure.get("language", g.lang),
             "tags": current_adventure.get("tags", []),
         }
 
