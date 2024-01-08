@@ -30,22 +30,9 @@ jobs:
     - name: Install Nodejs dependencies
       run: |
         npm ci
-    - name: Generate grammar files
+    - name: Run the deploy script and prepare the dev database
       run: |
-        python ./content/yaml_to_lark_utils.py
-    - name: Compiling Babel translations
-      run: |
-        pybabel compile -f -d translations
-
-    - name: Feed the dev database
-      # This replaces the json file, do it before starting the server
-      run: ./feed_dev_database.sh
-
-    - name: Bundle files
-      # Generates js and css files.
-      run: |
-        build-tools/heroku/tailwind/generate-development-css
-        build-tools/heroku/generate-typescript
+        doit run deploy devdb
 
     - name: Start the server
       # Runs in the background
