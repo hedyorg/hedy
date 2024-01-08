@@ -8,7 +8,7 @@
     "url": "git+https://github.com/hedyorg/hedy.git"
   },
   "scripts": {
-    "build": "build-tools/heroku/on-deploy.sh",
+    "build": "doit run deploy",
     "cypress-gui": "cd tests && cypress open",
     "cypress": "cd tests && cypress run --spec \"cypress/e2e/**/*\""
   },
@@ -24,13 +24,13 @@
     "nyc": "^15.1.0",
     "pajv": "^1.2.0",
     "tailwindcss": "^3.0.13",
-    "typescript": "^4.4.3",
+    "typescript": "^5.0.0",
     "yaml": "2.2.2"
   },
   "license": "ISC",
   "dependencies": {
     "@codemirror/commands": "^6.2.5",
-    "@codemirror/state": "^6.2.1",
+    "@codemirror/state": "^6.4.0",
     "@codemirror/theme-one-dark": "^6.1.2",
     "@codemirror/view": "^6.22.1",
     "@istanbuljs/nyc-config-typescript": "^1.0.2",

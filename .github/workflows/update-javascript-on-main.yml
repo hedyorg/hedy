@@ -40,14 +40,9 @@ jobs:
         python3 -m pip install --upgrade pip
         pip3 install -r requirements.txt
 
-    # This is necessary for the TypeScript to contain translations
-    # from Gettex.
-    - name: Compiling Babel translations
+    - name: Generating TypeScript
       run: |
-        pybabel compile -f -d translations
-
-    - name: Compile TypeScript to JavaScript
-      run: build-tools/heroku/generate-grammars-and-js
+        doit run typescript
 
     - name: Commit changed files
       uses: stefanzweifel/git-auto-commit-action@v2.3.0
