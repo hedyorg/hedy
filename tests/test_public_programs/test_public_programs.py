@@ -76,7 +76,6 @@ class TestsPublicPrograms(HedyTester):
                         print(f'{error_message} at line {location}')
                         raise E
 
-
         # # test if we are not validating previously incorrect programs
         # if snippet is not None and len(snippet.code) > 0 and snippet.error:
         #     self.single_level_tester(
