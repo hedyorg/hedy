@@ -33589,6 +33589,7 @@ notes_mapping = {
       return this.lineInner(n, true, 1, 0);
     }
     replace(from17, to10, text) {
+      [from17, to10] = clip(this, from17, to10);
       let parts = [];
       this.decompose(0, from17, parts, 2);
       if (text.length)
@@ -33600,6 +33601,7 @@ notes_mapping = {
       return this.replace(this.length, this.length, other);
     }
     slice(from17, to10 = this.length) {
+      [from17, to10] = clip(this, from17, to10);
       let parts = [];
       this.decompose(from17, to10, parts, 0);
       return TextNode.from(parts, to10 - from17);
@@ -33697,6 +33699,7 @@ notes_mapping = {
     replace(from17, to10, text) {
       if (!(text instanceof TextLeaf))
         return super.replace(from17, to10, text);
+      [from17, to10] = clip(this, from17, to10);
       let lines = appendText(this.text, appendText(text.text, sliceText(this.text, 0, from17)), to10);
       let newLen = this.length + text.length - (to10 - from17);
       if (lines.length <= 32)
@@ -33704,6 +33707,7 @@ notes_mapping = {
       return TextNode.from(TextLeaf.split(lines, []), newLen);
     }
     sliceString(from17, to10 = this.length, lineSep = "\n") {
+      [from17, to10] = clip(this, from17, to10);
       let result = "";
       for (let pos = 0, i = 0; pos <= to10 && i < this.text.length; i++) {
         let line = this.text[i], end = pos + line.length;
@@ -33770,6 +33774,7 @@ notes_mapping = {
       }
     }
     replace(from17, to10, text) {
+      [from17, to10] = clip(this, from17, to10);
       if (text.lines < this.lines)
         for (let i = 0, pos = 0; i < this.children.length; i++) {
           let child = this.children[i], end = pos + child.length;
@@ -33788,6 +33793,7 @@ notes_mapping = {
       return super.replace(from17, to10, text);
     }
     sliceString(from17, to10 = this.length, lineSep = "\n") {
+      [from17, to10] = clip(this, from17, to10);
       let result = "";
       for (let i = 0, pos = 0; i < this.children.length && pos <= to10; i++) {
         let child = this.children[i], end = pos + child.length;
@@ -33999,7 +34005,10 @@ notes_mapping = {
     }
     next(skip2 = 0) {
       let { done, lineBreak, value } = this.inner.next(skip2);
-      if (done) {
+      if (done && this.afterBreak) {
+        this.value = "";
+        this.afterBreak = false;
+      } else if (done) {
         this.done = true;
         this.value = "";
       } else if (lineBreak) {
@@ -34038,6 +34047,10 @@ notes_mapping = {
       return this.to - this.from;
     }
   };
+  function clip(text, from17, to10) {
+    from17 = Math.max(0, Math.min(text.length, from17));
+    return [from17, Math.max(from17, Math.min(text.length, to10))];
+  }
   var extend = /* @__PURE__ */ "lc,34,7n,7,7b,19,,,,2,,2,,,20,b,1c,l,g,,2t,7,2,6,2,2,,4,z,,u,r,2j,b,1m,9,9,,o,4,,9,,3,,5,17,3,3b,f,,w,1j,,,,4,8,4,,3,7,a,2,t,,1m,,,,2,4,8,,9,,a,2,q,,2,2,1l,,4,2,4,2,2,3,3,,u,2,3,,b,2,1l,,4,5,,2,4,,k,2,m,6,,,1m,,,2,,4,8,,7,3,a,2,u,,1n,,,,c,,9,,14,,3,,1l,3,5,3,,4,7,2,b,2,t,,1m,,2,,2,,3,,5,2,7,2,b,2,s,2,1l,2,,,2,4,8,,9,,a,2,t,,20,,4,,2,3,,,8,,29,,2,7,c,8,2q,,2,9,b,6,22,2,r,,,,,,1j,e,,5,,2,5,b,,10,9,,2u,4,,6,,2,2,2,p,2,4,3,g,4,d,,2,2,6,,f,,jj,3,qa,3,t,3,t,2,u,2,1s,2,,7,8,,2,b,9,,19,3,3b,2,y,,3a,3,4,2,9,,6,3,63,2,2,,1m,,,7,,,,,2,8,6,a,2,,1c,h,1r,4,1c,7,,,5,,14,9,c,2,w,4,2,2,,3,1k,,,2,3,,,3,1m,8,2,2,48,3,,d,,7,4,,6,,3,2,5i,1m,,5,ek,,5f,x,2da,3,3x,,2o,w,fe,6,2x,2,n9w,4,,a,w,2,28,2,7k,,3,,4,,p,2,5,,47,2,q,i,d,,12,8,p,b,1a,3,1c,,2,4,2,2,13,,1v,6,2,2,2,2,c,,8,,1b,,1f,,,3,2,2,5,2,,,16,2,8,,6m,,2,,4,,fn4,,kh,g,g,g,a6,2,gt,,6a,,45,5,1ae,3,,2,5,4,14,3,4,,4l,2,fx,4,ar,2,49,b,4w,,1i,f,1k,3,1d,4,2,2,1x,3,10,5,,8,1q,,c,2,1g,9,a,4,2,,2n,3,2,,,2,6,,4g,,3,8,l,2,1l,2,,,,,m,,e,7,3,5,5f,8,2,3,,,n,,29,,2,6,,,2,,,2,,2,6j,,2,4,6,2,,2,r,2,2d,8,2,,,2,2y,,,,2,6,,,2t,3,2,4,,5,77,9,,2,6t,,a,2,,,4,,40,4,2,2,4,,w,a,14,6,2,4,8,,9,6,2,3,1a,d,,2,ba,7,,6,,,2a,m,2,7,,2,,2,3e,6,3,,,2,,7,,,20,2,3,,,,9n,2,f0b,5,1n,7,t4,,1r,4,29,,f5k,2,43q,,,3,4,5,8,8,2,7,u,4,44,3,1iz,1j,4,1e,8,,e,,m,5,,f,11s,7,,h,2,7,,2,,5,79,7,c5,4,15s,7,31,7,240,5,gx7k,2o,3k,6o".split(",").map((s) => s ? parseInt(s, 36) : 1);
   for (let i = 1; i < extend.length; i++)
     extend[i] += extend[i - 1];
@@ -34585,24 +34598,24 @@ notes_mapping = {
       this.flags = flags;
     }
     get anchor() {
-      return this.flags & 16 ? this.to : this.from;
+      return this.flags & 32 ? this.to : this.from;
     }
     get head() {
-      return this.flags & 16 ? this.from : this.to;
+      return this.flags & 32 ? this.from : this.to;
     }
     get empty() {
       return this.from == this.to;
     }
     get assoc() {
-      return this.flags & 4 ? -1 : this.flags & 8 ? 1 : 0;
+      return this.flags & 8 ? -1 : this.flags & 16 ? 1 : 0;
     }
     get bidiLevel() {
-      let level2 = this.flags & 3;
-      return level2 == 3 ? null : level2;
+      let level2 = this.flags & 7;
+      return level2 == 7 ? null : level2;
     }
     get goalColumn() {
-      let value = this.flags >> 5;
-      return value == 33554431 ? void 0 : value;
+      let value = this.flags >> 6;
+      return value == 16777215 ? void 0 : value;
     }
     map(change, assoc = -1) {
       let from17, to10;
@@ -34620,8 +34633,8 @@ notes_mapping = {
       let head = Math.abs(from17 - this.anchor) > Math.abs(to10 - this.anchor) ? from17 : to10;
       return EditorSelection.range(this.anchor, head);
     }
-    eq(other) {
-      return this.anchor == other.anchor && this.head == other.head;
+    eq(other, includeAssoc = false) {
+      return this.anchor == other.anchor && this.head == other.head && (!includeAssoc || !this.empty || this.assoc == other.assoc);
     }
     toJSON() {
       return { anchor: this.anchor, head: this.head };
@@ -34645,11 +34658,11 @@ notes_mapping = {
         return this;
       return EditorSelection.create(this.ranges.map((r) => r.map(change, assoc)), this.mainIndex);
     }
-    eq(other) {
+    eq(other, includeAssoc = false) {
       if (this.ranges.length != other.ranges.length || this.mainIndex != other.mainIndex)
         return false;
       for (let i = 0; i < this.ranges.length; i++)
-        if (!this.ranges[i].eq(other.ranges[i]))
+        if (!this.ranges[i].eq(other.ranges[i], includeAssoc))
           return false;
       return true;
     }
@@ -34690,11 +34703,11 @@ notes_mapping = {
       return new EditorSelection(ranges, mainIndex);
     }
     static cursor(pos, assoc = 0, bidiLevel, goalColumn) {
-      return SelectionRange.create(pos, pos, (assoc == 0 ? 0 : assoc < 0 ? 4 : 8) | (bidiLevel == null ? 3 : Math.min(2, bidiLevel)) | (goalColumn !== null && goalColumn !== void 0 ? goalColumn : 33554431) << 5);
+      return SelectionRange.create(pos, pos, (assoc == 0 ? 0 : assoc < 0 ? 8 : 16) | (bidiLevel == null ? 7 : Math.min(6, bidiLevel)) | (goalColumn !== null && goalColumn !== void 0 ? goalColumn : 16777215) << 6);
     }
     static range(anchor, head, goalColumn, bidiLevel) {
-      let flags = (goalColumn !== null && goalColumn !== void 0 ? goalColumn : 33554431) << 5 | (bidiLevel == null ? 3 : Math.min(2, bidiLevel));
-      return head < anchor ? SelectionRange.create(head, anchor, 16 | 8 | flags) : SelectionRange.create(anchor, head, (head > anchor ? 4 : 0) | flags);
+      let flags = (goalColumn !== null && goalColumn !== void 0 ? goalColumn : 16777215) << 6 | (bidiLevel == null ? 7 : Math.min(6, bidiLevel));
+      return head < anchor ? SelectionRange.create(head, anchor, 32 | 16 | flags) : SelectionRange.create(anchor, head, (head > anchor ? 8 : 0) | flags);
     }
     static normalized(ranges, mainIndex = 0) {
       let main = ranges[mainIndex];
@@ -34727,6 +34740,9 @@ notes_mapping = {
       this.id = nextID++;
       this.default = combine([]);
       this.extensions = typeof enables == "function" ? enables(this) : enables;
+    }
+    get reader() {
+      return this;
     }
     static define(config = {}) {
       return new Facet(config.combine || ((a) => a), config.compareInput || ((a, b) => a === b), config.compare || (!config.combine ? sameArray : (a, b) => a === b), !!config.static, config.enables);
@@ -35398,7 +35414,8 @@ notes_mapping = {
       } else {
         startValues = tr3.startState.values.slice();
       }
-      new EditorState(conf, tr3.newDoc, tr3.newSelection, startValues, (state, slot) => slot.update(state, tr3), tr3);
+      let selection2 = tr3.startState.facet(allowMultipleSelections) ? tr3.newSelection : tr3.newSelection.asSingle();
+      new EditorState(conf, tr3.newDoc, selection2, startValues, (state, slot) => slot.update(state, tr3), tr3);
     }
     replaceSelection(text) {
       if (typeof text == "string")
@@ -35816,6 +35833,16 @@ notes_mapping = {
         build.add(range10.from, range10.to, range10.value);
       return build.finish();
     }
+    static join(sets) {
+      if (!sets.length)
+        return RangeSet.empty;
+      let result = sets[sets.length - 1];
+      for (let i = sets.length - 2; i >= 0; i--) {
+        for (let layer2 = sets[i]; layer2 != RangeSet.empty; layer2 = layer2.nextLayer)
+          result = new RangeSet(layer2.chunkPos, layer2.chunk, result, Math.max(layer2.maxPoint, result.maxPoint));
+      }
+      return result;
+    }
   };
   RangeSet.empty = /* @__PURE__ */ new RangeSet([], [], null, -1);
   function lazySort(ranges) {
@@ -36103,7 +36130,7 @@ notes_mapping = {
     }
     addActive(trackOpen) {
       let i = 0, { value, to: to10, rank } = this.cursor;
-      while (i < this.activeRank.length && this.activeRank[i] <= rank)
+      while (i < this.activeRank.length && (rank - this.activeRank[i] || to10 - this.activeTo[i]) > 0)
         i++;
       insert(this.active, i, value);
       insert(this.activeTo, i, to10);
@@ -66501,8 +66528,8 @@ pygame.quit()
     }
     _drawDataset(meta2) {
       const ctx = this.ctx;
-      const clip = meta2._clip;
-      const useClip = !clip.disabled;
+      const clip2 = meta2._clip;
+      const useClip = !clip2.disabled;
       const area = this.chartArea;
       const args = {
         meta: meta2,
@@ -66514,10 +66541,10 @@ pygame.quit()
       }
       if (useClip) {
         clipArea(ctx, {
-          left: clip.left === false ? 0 : area.left - clip.left,
-          right: clip.right === false ? this.width : area.right + clip.right,
-          top: clip.top === false ? 0 : area.top - clip.top,
-          bottom: clip.bottom === false ? this.height : area.bottom + clip.bottom
+          left: clip2.left === false ? 0 : area.left - clip2.left,
+          right: clip2.right === false ? this.width : area.right + clip2.right,
+          top: clip2.top === false ? 0 : area.top - clip2.top,
+          bottom: clip2.bottom === false ? this.height : area.bottom + clip2.bottom
         });
       }
       meta2.controller.draw();
