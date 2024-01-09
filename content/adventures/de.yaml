@@ -734,12 +734,12 @@ adventures:
         levels:
             1:
                 story_text: |-
-                    Welcome to a debugging adventure. Debugging a code means getting rid of mistakes in the code.
-                    That means that in these debugging adventures, we will show you code that does not work yet.
-                    You will have to figure out what's wrong and correct the mistakes.
+                    Willkommen zu einem Debugging-Abenteuer. Einen Code zu debuggen bedeutet, Fehler im Code zu beseitigen.
+                    Das bedeutet, dass wir dir in diesen Debugging-Abenteuern Code zeigen werden, der noch nicht funktioniert.
+                    Du musst herausfinden, was falsch ist und die Fehler korrigieren.
 
-                    ### Exercise
-                    Debug this code. Good luck!
+                    ### Übung
+                    Debugge den Code. Viel Glück!
                 example_code: |
                     **Warning! This code needs to be debugged!**
                     ```
@@ -751,12 +751,12 @@ adventures:
                     ```
             2:
                 story_text: |-
-                    Welcome to a debugging adventure. Debugging a code means getting rid of mistakes in the code.
-                    That means that in these debugging adventures, we will give you a code that does not work yet.
-                    You will have to figure out what's wrong and correct the mistakes.
+                    Willkommen zu einem Debugging-Abenteuer. Einen Code zu debuggen bedeutet, Fehler im Code zu beseitigen.
+                    Das bedeutet, dass wir dir in diesen Debugging-Abenteuern Code zeigen werden, der noch nicht funktioniert.
+                    Du musst herausfinden, was falsch ist und die Fehler korrigieren.
 
-                    ### Exercise
-                    Debug this code. Good luck!
+                    ### Übung
+                    Debugge den Code. Viel Glück!
                 example_code: |
                     **Warning! This code needs to be debugged!**
                     ```
@@ -770,12 +770,12 @@ adventures:
                     ```
             3:
                 story_text: |-
-                    Welcome to a debugging adventure. Debugging a code means getting rid of mistakes in the code.
-                    That means that in these debugging adventures, we will give you a code that does not work yet.
-                    You will have to figure out what's wrong and correct the mistakes.
+                    Willkommen zu einem Debugging-Abenteuer. Einen Code zu debuggen bedeutet, Fehler im Code zu beseitigen.
+                    Das bedeutet, dass wir dir in diesen Debugging-Abenteuern Code zeigen werden, der noch nicht funktioniert.
+                    Du musst herausfinden, was falsch ist und die Fehler korrigieren.
 
-                    ### Exercise
-                    Debug this code. Good luck!
+                    ### Übung
+                    Debugge den Code. Viel Glück!
                 example_code: |
                     **Warning! This code needs to be debugged!**
                     ```
@@ -2706,8 +2706,7 @@ adventures:
                     {if} x {is} {pressed} {forward} 15 {else} {turn} 90
                     ```
             9:
-                story_text: "Da du jetzt weißt wie man Befehle kombiniert, kannst du mit Hilfe von `{pressed}` ein Touch-Type-Tool erstellen. \n\n### Übung\nVervollständige den Code. Jedes Mal soll ein zufälliger Buchstabe ausgewählt werden. Diesen muss man drücken. Du bekommst einen Punkt für die richtige\
-                    \ Taste und zwei Punkte Abzug für die falsche Taste.\n**(extra)** Lösche den Bildschirm nach jedem Buchstaben und zeige dem Benutzer, wie viele Punkte er erreicht hat.\n"
+                story_text: "Da du jetzt weißt wie man Befehle kombiniert, kannst du mit Hilfe von `{pressed}` ein Touch-Type-Tool erstellen. \n\n### Übung\nVervollständige den Code. Jedes Mal soll ein zufälliger Buchstabe ausgewählt werden. Diesen muss man drücken. Du bekommst einen Punkt für die richtige Taste und zwei Punkte Abzug für die falsche Taste.\n**(extra)** Lösche den Bildschirm nach jedem Buchstaben und zeige dem Benutzer, wie viele Punkte er erreicht hat.\n"
                 example_code: "```\nPunkte = 0\nBuchstaben = a, b, c, d, e\n{repeat} 10 {times}\n    Buchstabe = _ _ _ \n    {print} 'Drück den Buchstaben ' Buchstabe\n    {if} Buchstabe {is} {pressed}\n    _\n    _\n    _\n```\n"
     print_command:
         name: '{print}'
@@ -3151,9 +3150,7 @@ adventures:
                     Dieser Code kann mit mehr Gerichten auf der Karte erweitert werden, zum Beispiel einem Getränkeangebot, und/oder mehreren Gängen oder Nachtisch. Füge mindestens ein Gericht hinzu.
                     **(extra)** Füge so viele Gerichte hinzu wie du magst!
             9:
-                story_text: "In diesem Level kannst du Verschachtelung benutzen, um dein Restaurant realistischer und spaßiger zu machen!\n\n### Übung\nDie Einrückung im Beispiel-Code wurde entfernt.\nKannst du herausfinden wie viel Einrückung jede Zeile benötigt, damit der Code ordentlich funktioniert?\n\
-                    Falls der Kunde Pizza bestellt, sollte Hedy nicht fragen, welche Soße der Kunde möchte.\n\n**(extra)** Ein Restaurant lagert nicht alle möglichen Soßen. Erstelle eine Liste mit verfügbaren Soßen und gib eine Antwort bei jeder Bestellung, ob du sie auf Lager hast. <br>\n**(extra)**\
-                    \ Pizzen haben Beläge. Frag die Kunden, was sie möchten.<br>\n **(extra)** Möchten die Kunden etwas trinken? Frag sie! <br>                    \n"
+                story_text: "In diesem Level kannst du Verschachtelung benutzen, um dein Restaurant realistischer und spaßiger zu machen!\n\n### Übung\nDie Einrückung im Beispiel-Code wurde entfernt.\nKannst du herausfinden wie viel Einrückung jede Zeile benötigt, damit der Code ordentlich funktioniert?\nFalls der Kunde Pizza bestellt, sollte Hedy nicht fragen, welche Soße der Kunde möchte.\n\n**(extra)** Ein Restaurant lagert nicht alle möglichen Soßen. Erstelle eine Liste mit verfügbaren Soßen und gib eine Antwort bei jeder Bestellung, ob du sie auf Lager hast. <br>\n**(extra)** Pizzen haben Beläge. Frag die Kunden, was sie möchten.<br>\n **(extra)** Möchten die Kunden etwas trinken? Frag sie! <br>                    \n"
                 example_code: |
                     ```
                     {print} 'Willkommen im Restaurant Chez Hedy!'
@@ -3304,10 +3301,10 @@ adventures:
                     ```
             3:
                 story_text: |
-                    You can use the `{at} {random}` command to let the computer pick rock, paper or scissors!
+                    Du kannst den `{at} {random}` Befehl verwenden, um den Computer Stein, Papier oder Schere wählen zu lassen!
 
-                    ### Exercise
-                    Finish the code by using the `{at} {random}` command.
+                    ### Übung
+                    Vervollständige den Code, in dem du den `{at} {random}` Befehl verwendest.
                 example_code: |
                     ```
                     choices {is} rock, paper, scissors
@@ -3555,8 +3552,7 @@ adventures:
                     {sleep}
                     ```
             7:
-                story_text: "In Liedern wiederholt sich oft einiges. So auch im Lied \"Baby Hai\"! Wenn du es singst, singst du eigentlich immer das gleiche:\n\nBaby Hai tututudutudu <br>\nBaby Hai tututudutudu <br>\nBaby Hai tututudutudu <br>\nBaby Hai \n\n### Übung\nKannst du das Lied mit Hilfe des\
-                    \ `{repeat}` Befehls ausgeben? Vervollständige den Code, indem du die Lücken füllst!\n **Extra** Nach dem Baby-Hai kannst du natürlich auch andere Lieder programmieren. Es gibt viele Lieder mit Wiederholung!\nKannst du an ein weiteres Lied denken und es ausgeben?\n"
+                story_text: "In Liedern wiederholt sich oft einiges. So auch im Lied \"Baby Hai\"! Wenn du es singst, singst du eigentlich immer das gleiche:\n\nBaby Hai tututudutudu <br>\nBaby Hai tututudutudu <br>\nBaby Hai tututudutudu <br>\nBaby Hai \n\n### Übung\nKannst du das Lied mit Hilfe des `{repeat}` Befehls ausgeben? Vervollständige den Code, indem du die Lücken füllst!\n **Extra** Nach dem Baby-Hai kannst du natürlich auch andere Lieder programmieren. Es gibt viele Lieder mit Wiederholung!\nKannst du an ein weiteres Lied denken und es ausgeben?\n"
                 example_code: |
                     ```
                     {repeat} _ _ {print} 'Baby Hai tututudutudu'
@@ -4199,43 +4195,43 @@ adventures:
         levels:
             1:
                 story_text: |
-                    ### Exercise
-                    Recreate the drawings with the turtle!
+                    ### Übung
+                    Mache die Zeichnungen mit der Schildkröte nach!
 
                     <div class="w-full flex flex-row gap-2">
-                        Rectangle <img src="https://github.com/hedyorg/hedy/assets/80678586/77aa99d5-cd8f-4969-b49d-e8fed34ac550" width="100">
-                        Square <img src="https://github.com/hedyorg/hedy/assets/80678586/03b96c2c-7b94-4032-9f9f-3f3b13573623" width="200">
-                        Stairs<img src="https://github.com/hedyorg/hedy/assets/80678586/d4301e62-ec66-4031-827c-7d21f73ba106" width="200">
+                        Rechteck <img src="https://github.com/hedyorg/hedy/assets/80678586/77aa99d5-cd8f-4969-b49d-e8fed34ac550" width="100">
+                        Quadrat <img src="https://github.com/hedyorg/hedy/assets/80678586/03b96c2c-7b94-4032-9f9f-3f3b13573623" width="200">
+                        Stufen<img src="https://github.com/hedyorg/hedy/assets/80678586/d4301e62-ec66-4031-827c-7d21f73ba106" width="200">
                     </div>
             2:
                 story_text: |
-                    ### Exercise
-                    Recreate the drawings with the turtle!
+                    ### Übung
+                    Mache die Zeichnungen mit der Schildkröte nach!
 
                     <div class="w-full flex flex-row gap-2">
-                    Triangle <img src="https://github.com/hedyorg/hedy/assets/80678586/e974b62c-f0cf-445a-8bd4-5ad9f1f71204" width="100">
-                    Arrow <img src="https://github.com/hedyorg/hedy/assets/80678586/803d8f42-9708-448c-82ea-d035697f08c9" width="150">
-                    Boat <img src="https://github.com/hedyorg/hedy/assets/80678586/94ef7189-442a-4c8f-827d-12a69203c2e9" width="150">
+                    Dreieck <img src="https://github.com/hedyorg/hedy/assets/80678586/e974b62c-f0cf-445a-8bd4-5ad9f1f71204" width="100">
+                    Pfeil <img src="https://github.com/hedyorg/hedy/assets/80678586/803d8f42-9708-448c-82ea-d035697f08c9" width="150">
+                    Boot <img src="https://github.com/hedyorg/hedy/assets/80678586/94ef7189-442a-4c8f-827d-12a69203c2e9" width="150">
                     </div>
             3:
                 story_text: |
-                    ### Exercise
-                    Recreate the drawings with the turtle!
+                    ### Übung
+                    Mache die Zeichnungen mit der Schildkröte nach!
 
                     <div class="w-full flex flex-row gap-2">
-                    Triangle <img src="https://github.com/hedyorg/hedy/assets/80678586/71e04d98-9545-4614-9caf-a5f179b756a1" width="150">
-                    Star <img src="https://github.com/hedyorg/hedy/assets/80678586/421c4d28-cb99-424b-be26-dcae30d65c80" width="150">
-                    Arrow <img src="https://github.com/hedyorg/hedy/assets/80678586/3cbebcae-5258-47c5-a6ac-e7ee36c1d1ce" width="200">
+                    Dreieck <img src="https://github.com/hedyorg/hedy/assets/80678586/71e04d98-9545-4614-9caf-a5f179b756a1" width="150">
+                    Stern <img src="https://github.com/hedyorg/hedy/assets/80678586/421c4d28-cb99-424b-be26-dcae30d65c80" width="150">
+                    Pfeil <img src="https://github.com/hedyorg/hedy/assets/80678586/3cbebcae-5258-47c5-a6ac-e7ee36c1d1ce" width="200">
                     </div>
             4:
                 story_text: |
-                    ### Exercise
-                    Recreate the drawings with the turtle!
+                    ### Übung
+                    Mache die Zeichnungen mit der Schildkröte nach!
 
                     <div class="w-full flex flex-row gap-2">
-                    Colored Star <img src="https://github.com/hedyorg/hedy/assets/80678586/dbe39006-c050-4833-b5c4-f9d1fb1c0781" width="150">
-                    Rainbow <img src="https://github.com/hedyorg/hedy/assets/80678586/2728b10f-9f7f-45ea-964e-5b284033e4f0" width="500">
-                    Nested squares <img src="https://github.com/hedyorg/hedy/assets/80678586/f013f9fa-bc68-4c60-b778-2c457799d6f7" width="200">
+                    Farbiger Stern <img src="https://github.com/hedyorg/hedy/assets/80678586/dbe39006-c050-4833-b5c4-f9d1fb1c0781" width="150">
+                    Regenbogen <img src="https://github.com/hedyorg/hedy/assets/80678586/2728b10f-9f7f-45ea-964e-5b284033e4f0" width="500">
+                    Verschachtelte Quadrate <img src="https://github.com/hedyorg/hedy/assets/80678586/f013f9fa-bc68-4c60-b778-2c457799d6f7" width="200">
                     </div>
                 example_code: |
                     **Extra** Up for a real challenge? Make sure that the colors of these figures are selected randomly, so that each time you run your programs they'll look differently!
@@ -4246,10 +4242,10 @@ adventures:
                     ```
             5:
                 story_text: |
-                    ### Exercise
-                    Recreate the drawings with the turtle!
+                    ### Übung
+                    Mache die Zeichnungen mit der Schildkröte nach!
 
-                    **Extra** Make only one code that lets the player decide which letter they'd like to see! And can you add even more letters?
+                    **Extra** Erstelle nur einen Code, der die Spielerin oder den Spieler entscheiden lässt, welchen Buchstaben sie oder er sehen möchte! Und kannst du noch mehr Buchstaben hinzufügen?
 
                     <div class="w-full flex flex-row gap-2">
                     F <img src="https://github.com/hedyorg/hedy/assets/80678586/8a021b76-c24b-4e7c-b960-48d57f3bcb20" width="100">
