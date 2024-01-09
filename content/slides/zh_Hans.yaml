@@ -12,8 +12,8 @@ levels:
         3:
             header: 编程语言
             text: |-
-                Maybe you already know some programming languages?
-                Some examples are:
+                也许您已经了解一些编程语言？
+                一些例子是：
                 * Scratch
                 * Python
                 * HTML
@@ -45,7 +45,7 @@ levels:
             text: 输出也可以是一个图形。
             code: |-
                 {forward} 100
-                {turn} left
+                {turn} 左
     1:
         1:
             header: 欢迎来到第1级!
@@ -56,9 +56,9 @@ levels:
         2:
             header: '{打印}'
             text: |-
-                在级别1中，你可以使用的第一个代码是 `{打印}`。
+                在级别1中，你可以使用的第一个代码是 `{print}`。
 
-                `{打印}`是用来在屏幕上显示文本。
+                `{print}`是用来在屏幕上显示文本。
             code: '{print} Put text on the screen'
         3:
             header: '{打印} 命令'
@@ -66,17 +66,18 @@ levels:
                 你可以随意地修改 `{打印}` 命令后面的文字。
 
                 你也可以再添加一行 `{打印}` 命令，来打印多行文字。
-            code: '{print} Put text on the screen'
+            code: |-
+                {print}欢迎来到海蒂！
+                {print} 现在就开始编程吧！
         4:
             header: Hedy 第1 级：{echo}
             text: |-
-                在第1级中，你可以使用的最后一个文本代码是`{问}`。
+                在第1级中，你可以使用的最后一个文本代码是`{ask}`。
 
-                `{问}`用于重复`{ask}`的答案。
+                `{ask}`用于重复`{ask}`的答案。
             code: |-
-                {print} Hello!
-                {ask} What is your name?
-                {echo} hello
+                {print} 欢迎来到你自己的石头剪刀布！
+                {ask}你会选择什么？
         5:
             header: 编程
             text: |-
@@ -91,7 +92,9 @@ levels:
                 {echo}你好
         6:
             header: 编程!
-            text: 探险活动显示在标签页中。
+            text: |-
+                使用`{print}`, `{ask}` 和 `{echo}` ，您已经可以创建一个小故事了。
+                现在是尝试鹦鹉、故事和石头剪刀布冒险的好时机。
             editor: /hedy/1
         7:
             header: 编程!
@@ -107,15 +110,13 @@ levels:
         10:
             header: '用海龟绘图画画: {turn}'
             text: '`{turn}` 用于让海龟向左转或向右转。'
-            code: |-
-                {forward} 50
-                {turn} left
+            code: '{forward} 50'
         11:
-            header: 'Drawing with the turtle: {turn}'
-            text: '`{turn}` is used to make the turtle turn left or right.'
+            header: 与乌龟一起画画：{turn}
+            text: '`{turn}` 用于让海龟向左或向右转。'
             code: |-
                 {forward} 50
-                {turn} left
+                {turn} 左
         12:
             header: 调试
             text: 调试代码意味着消除代码中的错误。 我们一起调试一下这段代码。 单击瓢虫按钮启动调试器。
@@ -129,22 +130,22 @@ levels:
             text: 享受第一关的冒险！
     2:
         1:
-            header: Welcome to level 2
+            header: 欢迎来到第 2 级
             text: |-
-                In this level you will learn to use variables.
+                在这个级别中，你将学习使用变量。
 
-                A variable is a word that can be used to store information.
+                变量是一个可以用来存储信息的词。
 
-                For example: a name, age or favorite sports team.
+                例如：姓名、年龄或最喜欢的运动队。
         2:
             header: Variables
-            text: To make or 'set' a variable we use the `{is}` command
+            text: 要创建或“ set”变量，我们使用 `{is}`命令
             code: |-
                 名字{is}海蒂
                 年龄 {is} 15
                 {print} 姓名年龄 岁
         3:
-            header: Interactive
+            header: 交互的
             text: |-
                 我们还可以通过提问来设置变量。
 
@@ -163,26 +164,26 @@ levels:
                 年龄 {is} {ask} 你多大了？
                 {print} 姓名年龄 岁。
         5:
-            header: Sleep
-            text: You can also use the `{sleep}` command to pause the code for a while.
+            header: 暂停
+            text: 您还可以使用`{sleep}` 命令暂停代码一段时间。
             code: |-
                 {print} 我最喜欢的颜色是...
                 {sleep} 2
                 {print}绿色！
         6:
-            header: Sleep 5
+            header: 暂停 5
             text: |-
-                You can add a number after the `{sleep}` command if you want the pause to be longer.
+                如果希望暂停时间更长，可以在`{sleep}`命令后添加一个数字。
 
-                If you want, you could even use a variable instead of a number to decide the duration of the sleep command.
+                如果需要，甚至可以使用变量而不是数字来决定睡眠命令的持续时间。
             code: |-
                 暂停 {is} 10
                 {print} 我最喜欢的颜色是...
                 {sleeo}暂停
                 {print}绿色！
         7:
-            header: Debugging
-            text: Debugging a code means getting rid of mistakes in the code. Let's debug this code together. Click the ladybug button to start the debugger.
+            header: 调试
+            text: 调试代码意味着消除代码中的错误。 我们一起调试一下这段代码。 单击瓢虫按钮启动调试器。
             code: |-
                 {print} 欢迎来到甜甜圈店！
                 填充 {is} 您想要什么样的填充？
@@ -197,30 +198,30 @@ levels:
             text: 享受第 3 关的冒险！
     3:
         1:
-            header: Welcome to level 3
-            text: In this level you'll learn how to make a list, add and remove items form your lists and pick a random item off that list.
+            header: 欢迎来到第 3 级
+            text: 在此级别中，您将学习如何创建列表、添加和删除列表中的项目以及从该列表中随机选择一个项目。
         2:
-            header: Making a list
+            header: 列一个清单
             text: |-
-                You make a list with `{is}`.
+                您可以使用 `{is}`创建一个列表。
 
-                Separate the items on your list with a comma.
+                用逗号分隔列表中的项目。
             code: |-
-                动物{is}狗,猫,袋鼠
-                ```
+                动物{is}狗、猫、袋鼠
+                ````
         3:
-            header: At random
+            header: 随机
             text: |-
-                You can use the list with the `{at}` `{random}` command.
-                The computer will randomly pick one item of the list.
-                Every time you run this code the output will differ.
+                您可以通过 `{at}` `{random}`命令使用该列表。
+                计算机将随机选择列表中的一项。
+                每次运行此代码时，输出都会有所不同。
             code: |-
                 动物{is}狗,猫,袋鼠
                 {print}动物{at} {random}
                 ```
         4:
-            header: At random in a sentence
-            text: You can use the `{at}` `{random}` command in a sentence as well.
+            header: 随意造句
+            text: 您也可以在句子中使用`{at}` `{random}`命令。
             code: |-
                 动物{is}狗,猫,袋鼠
                 {print}我最喜欢的动物是动物{at} {random}
@@ -228,20 +229,20 @@ levels:
         5:
             header: Add to
             text: |-
-                You can add items to a list with the `{add}` `{to}` command.
+                您可以使用`{add}` `{to}`命令将项目添加到列表中。
 
-                You can choose what to add to the list or you can use the `{add}` `{to}` command in combination with the `{ask}` command.
-                This way you can let the player decide what to add to the list.
+                您可以选择要添加到列表中的内容，也可以将`{add}` `{to}`命令与`{ask}` 命令结合使用。
+                这样您就可以让玩家决定将哪些内容添加到列表中。
             code: |-
                 animals{is}狗,猫,袋鼠
                 like {is} {ask}你最喜欢的动物是什么？
                 {add} like {to_list}动物
                 {print}我选择 animals {at} {random}
         6:
-            header: Remove from
+            header: 从......中去除
             text: |-
-                The opposite of the `{add}` `{to}` command is the  `{remove}` `{from}` command.
-                This command removes an item from a list.
+                与`{add}` `{to}`命令相反的是  `{remove}` `{from}` 命令。
+                该命令从列表中删除一个项目。
             code: |-
                 animals{is}狗,猫,袋鼠
                 dislike {is} {ask}你不喜欢什么 animals ？
@@ -265,39 +266,39 @@ levels:
             text: 享受第 3 关的冒险！
     4:
         1:
-            header: Welcome to level 4
-            text: In this level you will learn how to use quotation marks.
+            header: 欢迎来到第 4 级
+            text: 在本级别中，你将学习如何使用引号。
             code: '{print} ''带引号打印！'''
         2:
-            header: Problem
-            text: 'In the previous levels, you might have come across this problem:'
+            header: 问题
+            text: 在前面的关卡中，你可能遇到过这个问题：
             code: |-
                 name {is}苏菲
                 {print} 我的名字是name
         3:
-            header: Fixing it with quotation marks
+            header: 用引号修复它
             text: |-
-                In this level we will fix this problem by using quotation marks.
+                在本关卡中，我们将通过使用引号来解决这个问题。
 
-                This also makes our code look more like 'real' Python code.
+                这也使我们的代码看起来更像“真正的”Python 代码。
         4:
-            header: Quotation marks with print
+            header: 带引号的打印
             text: 每次使用 `{print}` 命令时，都需要将要显示在屏幕上的文本放在引号中。
             code: '{print} ''带引号打印！'''
         5:
-            header: Quotation marks with ask
-            text: This also goes for the `{ask}` command.
+            header: 带引号的ask
+            text: 这也适用于 `{ask}` 命令。
             code: name {is} {ask} '请问你的姓名？'
         6:
-            header: Quotation marks and variables
+            header: 引号和变量
             text: |-
-                You do not want variable names to be printed on the screen.
-                This is why variables should be left out of the quotation marks, like this:
+                你不希望变量名称打印在屏幕上。
+                这就是为什么变量应该被排除在引号之外，如下所示：
             code: |-
                 name{is}哈利
                 {print} '你好' name
         7:
-            header: Quotation marks and variables
+            header: 引号和变量
             text: |-
                 当变量名用在句子中间时，必须将变量放在引号之外。
                 然而，句子的其余部分确实需要引号。 看起来像这样:
@@ -305,7 +306,7 @@ levels:
                 name{is}哈利
                 {print} '你好'name'，你好吗？'
         8:
-            header: Quotation marks and contractions
+            header: 引号和缩写
             text: |-
                 当心！ 既然使用了引号，则不能在缩写中使用引号。
 
@@ -327,8 +328,8 @@ levels:
                 {clear}
                 {print} '惊喜!'
         10:
-            header: Debugging
-            text: Let's debug this code!
+            header: 调试
+            text: 来调试一下这段代码吧！
             code: |-
                 {clear}
                 {print} What a nice day to go to the beach!
@@ -344,7 +345,7 @@ levels:
             text: 享受第 4 关的冒险！
     5:
         1:
-            header: Welcome to level 5
+            header: 欢迎来到第 5 级
             text: 在本级别中，你将学习使用 3 个新命令：`{if}`, `{else}` 和 `{in}`.。
         2:
             header: if
@@ -356,7 +357,7 @@ levels:
                 name {is} {ask} 'what is your name?'
                 {if} name {is} Hedy {print} 'nice'
         3:
-            header: Don't forget to print
+            header: 不要忘记打印
             text: 使用 `{if}` 命令时，不要忘记使用`{print}`命令。
             code: '{if} name {is} Hedy ''nice'''
         4:
@@ -367,7 +368,7 @@ levels:
                 但如果答案是别的，计算机会打印`'boo'`
             code: '{if} name {is} Hedy {print} ''nice'' {else} {print} ''boo!'''
         5:
-            header: Long lines
+            header: 长行
             text: |-
                 你可能已经注意到，当你同时使用 `{if}` 和 `{else}`命令时，你的代码行可能会变得很长。
 
@@ -376,7 +377,7 @@ levels:
                 {if} name {is} Hedy {print} 'nice'
                 {else} {print} 'boo!'
         6:
-            header: Another new command
+            header: 另一个新命令
             text: |-
                 如果你已经练习过`{if}` 和 `{else}`命令，也可以尝试 `{in}` 命令。
 
@@ -389,8 +390,8 @@ levels:
                 {if} favorite_color {in} pretty_colors {print} 'pretty!'
                 {else} {print} 'meh'
         7:
-            header: Debugging
-            text: Let's debug this code!
+            header: 调试
+            text: 来调试一下这段代码吧！
             code: |-
                 {print} Welcome to HedyAir Security!
                 boarding_pass {is} {ask} 'Do you have your boarding pass?'
@@ -409,10 +410,10 @@ levels:
             text: 享受第 5 关的冒险！
     6:
         1:
-            header: Welcome to level 6
+            header: 欢迎来到第 6 级
             text: 在这个级别中，我们将在代码中添加数学。
         2:
-            header: Addition
+            header: 添加
             text: 如果要计算加法，只需使用加号即可。
             code: '{print} ''5 plus 5 is '' 5 + 5'
         3:

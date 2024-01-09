@@ -21,31 +21,31 @@ levels:
             header: Programación
             text: |-
                 Si sabes programar, puedes hacer muchas cosas chulas:
-                * Construir historias interactivas
+                * Crear historias interactivas
                 * Crear dibujos por ordenador y dibujarlos en papel o tela.
-                * Construir tus propias aplicaciones para usarlas en tu teléfono.
+                * Construir tus propias aplicaciones para usarlas en tu teléfono
         5:
             header: Programar en Hedy
             text: En Hedy usamos códigos especiales, como `{print}`.
-            code: '{print} Welcome to Hedy!'
+            code: '{print} ¡Bienvenido/a a Hedy!'
         6:
             header: Programar en Hedy
             text: Las palabras del código se mostrarán en rosa.
-            code: '{print} Welcome to Hedy!'
+            code: '{print} ¡Bienvenido/a a Hedy!'
         7:
             header: Programar en Hedy
             text: Iniciamos el código con el botón Ejecutar código debajo del código.
-            code: '{print} Welcome to Hedy!'
+            code: '{print} ¡Bienvenido/a a Hedy!'
         8:
             header: Programar en Hedy
             text: El resultado aparece en el lado derecho.
-            code: '{print} Welcome to Hedy!'
+            code: '{print} ¡Bienvenido/a a Hedy!'
         9:
             header: Programar en Hedy
             text: La salida también puede ser un dibujo.
             code: |-
                 {forward} 100
-                {turn} left
+                {turn} izquierda
     1:
         1:
             header: ¡Bienvenido al nivel 1!
@@ -66,7 +66,9 @@ levels:
                 Puedes cambiar el texto después del comando imprimir al que tu quieras.
 
                 O puedes imprimir varias líneas añadiendo otra línea de código que también empiece con `{print}`.
-            code: '{print} Put text on the screen'
+            code: |-
+                {print} ¡Bienvenido/a a Hedy!
+                {print} ¡Empieza a programar ya!
         4:
             header: '{ask}'
             text: |-
@@ -74,22 +76,20 @@ levels:
 
                 `{ask}` se usa para hacer una pregunta que se puede responder.
             code: |-
-                {print} Welcome to your own rock scissors paper!
-                {ask} What will you choose?
+                {print} ¡Bienvenido/a a tu propio piedra papel tijera!
+                {ask} ¿Qué elegirás?
         5:
             header: '{echo}'
             text: |-
                 Como puedes ver en el ejemplo anterior. Si usas el comando `{ask}`, puedes hacer una pregunta.
-
                 En cambio, la respuesta no se muestra en la pantalla de salida.
 
                 Si quieres que la respuesta se muestre, puedes usar el último comando de este nivel: `{echo}`.
-
                 `{echo}` se usa para repetir la respuesta de una `{ask}`.
             code: |-
-                {print} Hello!
-                {ask} What is your name?
-                {echo} hello
+                {print} ¡Hola!
+                {ask} ¿Cómo te llamas?
+                {echo} hola
         6:
             header: ¡Programando!
             text: |-
@@ -110,26 +110,24 @@ levels:
         10:
             header: 'Dibujando con la tortuga: {forward}'
             text: '`{forward}` se utiliza para mover la tortuga hacia adelante.'
-            code: |-
-                {forward} 50
-                {turn} left
+            code: '{forward} 50'
         11:
             header: 'Dibuja con la tortuga: {turn}'
             text: '`{turn}` se utiliza para hacer que la tortuga gire a la izquierda o a la derecha.'
             code: |-
                 {forward} 50
-                {turn} left
+                {turn} izquierda
         12:
-            header: Debugging
-            text: Debugging a code means getting rid of mistakes in the code. Let's debug this code together. Click the ladybug button to start the debugger.
+            header: Depurar
+            text: Depurar un código significa eliminar los errores en el código. Depuremos este código juntos. Haz clic en el botón de la mariquita para iniciar el depurador.
             code: |-
-                I am DJ Hedy
-                {print} What song would you like to hear?
-                {ask} I like that song too!
-                {print} Next up... {echo}
+                Soy DJ Hedy
+                {print} ¿Qué canción quieres escuchar?
+                {ask} ¡También me gusta esa canción!
+                {print} La siguiente... {echo}
         13:
-            header: Let the programming fun begin!
-            text: Enjoy the adventures in level 1!
+            header: ¡Que empiece la diversión de programar!
+            text: ¡Disfruta las aventuras del nivel 1!
     2:
         1:
             header: Bienvenido al nivel 2
@@ -143,9 +141,9 @@ levels:
             header: Variables
             text: Para crear o 'establecer' una variable usamos el comando `{is}`
             code: |-
-                name {is} Hedy
-                age {is} 15
-                {print} name is age years old
+                nombre {is} Hedy
+                edad {is} 15
+                {print} nombre tiene edad
         3:
             header: Interactivo
             text: |-
@@ -155,8 +153,8 @@ levels:
 
                 De esta manera no hace falta el comando `{echo}`.
             code: |-
-                name {is} {ask} What is your name?
-                {print} Hello name
+                nombre {is} {ask} ¿Cómo te llamas?
+                {print} Hola nombre
         4:
             header: Multiples variables
             text: Ahora que usamos variables, podemos usar varias variables en vez de sólo un comando `{echo}`.
@@ -169,9 +167,9 @@ levels:
             header: Dormir
             text: También puedes usar el comando `{sleep}` para pausar el código durante un rato.
             code: |-
-                {print} My favorite colour is...
+                {print} Mi color favorito es...
                 {sleep} 2
-                {print} green!
+                {print} ¡verde!
         6:
             header: Dormir 5
             text: |-
@@ -179,10 +177,10 @@ levels:
 
                 Si quieres, incluso podrías usar una variable en vez de un número para decidir la duración del comando dormir.
             code: |-
-                pause {is} 10
-                {print} My favorite colour is...
-                {sleep} pause
-                {print} green!
+                pausa {is} 10
+                {print} Mi color favorito es...
+                {sleep} pausa
+                {print} ¡verde!
         7:
             header: Debugging
             text: Debugging a code means getting rid of mistakes in the code. Let's debug this code together. Click the ladybug button to start the debugger.
@@ -207,9 +205,9 @@ levels:
             text: |-
                 Creas una lista con `{is}`.
 
-                Separa tus objetos en tu lista con una coma.
+                Separa los objetos de tu lista con una coma.
             code: |-
-                animals {is} dogs, cats, kangaroos
+                animales {is} perros, gatos, canguros
                 ```
         3:
             header: En aleatorio
@@ -218,15 +216,15 @@ levels:
                 El ordenador elegirá al azar un objeto de la lista.
                 Cada vez que ejecutes este código el resultado será diferente.
             code: |-
-                animals {is} dogs, cats, kangaroos
-                {print} animals {at} {random}
+                animales {is} perros, gatos, canguros
+                {print} animales {at} {random}
                 ```
         4:
             header: En aleatorio en una frase
             text: También puedes usar el comando `{at}` `{random}` en una frase.
             code: |-
-                animals {is} dogs, cats, kangaroos
-                {print} My favorite animal is animals {at} {random}
+                animales {is} perros, gatos, canguros
+                {print} Mi animal favorito es animales {at} {random}
                 ```
         5:
             header: Añadir a
@@ -251,7 +249,7 @@ levels:
                 {remove} dislike {from} animals
                 {print} I choose animals {at} {random}
         7:
-            header: Debugging
+            header: Depurar
             text: Let's debug this code!
             editor: |-
                 music_genres {is} rock, pop, metal, indie, jazz
@@ -360,7 +358,9 @@ levels:
                 {if} name {is} Hedy {print} 'nice'
         3:
             header: No te olvides imprimir
-            text: Al usar el comando `{if}`, no te olvides de usar el comando `{print}`.
+            text: |-
+                Al usar el comando `{if}`, no te olvides de usar el comando `{print}`.
+                ¡Este código no funcionará!
             code: '{if} name {is} Hedy ''nice'''
         4:
             header: sino
@@ -591,7 +591,7 @@ levels:
                 Incluso puedes poner un comando `{repeat}` dentro de otro comando `{repeat}`.
         2:
             header: Varias líneas después de `{repeat}`
-            text: Tienes permitido usar varias líneas después de `{repeat}`.
+            text: Tienes permitido combinar `{repeat}` y `{if}` en este nivel.
             code: |-
                 {repeat} 3 {times}
                     food = {ask} 'What do you want?'
