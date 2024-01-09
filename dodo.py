@@ -33,6 +33,36 @@ python3 = sys.executable
 DOIT_CONFIG = {'default_tasks': ['deploy']}
 
 
+def task_npm():
+    """Install NPM dependencies.
+
+    If the `package-lock.json` file changes, we will automatically re-install
+    NPM dependencies.
+
+    This makes sure everyone's NPM dependencies are at the same version when
+    scripts are being run, so build results are consistent and (for example)
+    generated Tailwind CSS files are the exact same and don't introduce random
+    floating diffs.
+
+    NPM works like this:
+
+    ```
+        package.json          # contains version RANGES that you would like to use
+            ---> npm install  # install the most recent POINT VERSIONs that match the requested ranges
+        package-lock.json     # contains the point versions selected by the last `npm install`
+            ---> npm ci       # install exactly the point versions found in the lock file
+    ```
+    """
+    return dict(
+        # `package-lock.json` contains the actual dependency versions that `npm ci` will install
+        file_dep=['package-lock.json'],
+        title=lambda _: 'Install NPM dependencies',
+        actions=[
+            'npm ci',
+        ],
+    )
+
+
 def task_tailwind():
     """Build Tailwind.
 
@@ -59,6 +89,7 @@ def task_tailwind():
               ],
             script,
         ],
+        task_dep=['npm'],
         title=lambda _: 'Generate Tailwind CSS',
         actions=[
             [script],
@@ -150,7 +181,7 @@ def task_typescript():
             'static/js/buttons.js',
             'static/js/skulpt_debugger.js',
         ],
-        task_dep=['generate_highlighting', 'client_messages'],
+        task_dep=['generate_highlighting', 'client_messages', 'npm'],
         title=lambda _: 'Compile TypeScript',
         actions=[
             # Use tsc to do type checking of the .ts files, but don't actually emit.
@@ -224,6 +255,7 @@ def task_lezer_parsers():
             *grammars,
             script,
         ],
+        task_dep=['npm'],
         actions=[
             [script],
         ],

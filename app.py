@@ -1345,15 +1345,18 @@ def index(level, program_id):
     # - But, if there is a quiz threshold we have to check again if the user has reached it
 
     if 'level_thresholds' in customizations:
-        if 'quiz' in customizations.get('level_thresholds'):
+        show_quiz = 'other_settings' in customizations and 'hide_quiz' not in customizations['other_settings']
+        if show_quiz and 'quiz' in customizations.get('level_thresholds'):
             # Temporary store the threshold
             threshold = customizations.get('level_thresholds').get('quiz')
+            level_quiz_data = QUIZZES[g.lang].get_quiz_data_for_level(level)
             # Get the max quiz score of the user in the previous level
             # A bit out-of-scope, but we want to enable the next level button directly after finishing the quiz
             # Todo: How can we fix this without a re-load?
             quiz_stats = DATABASE.get_quiz_stats([current_user()['username']])
-            # Only check the quiz threshold if there is a quiz to obtain a score on the previous level
-            if level > 1 and QUIZZES[g.lang].get_quiz_data_for_level(level - 1):
+            # Not current leve-quiz's data because some levels may have no data for quizes,
+            # but we still need to check for the threshold.
+            if level > 1 and (not level_quiz_data or QUIZZES[g.lang].get_quiz_data_for_level(level - 1)):
                 scores = [x.get('scores', []) for x in quiz_stats if x.get('level') == level - 1]
                 scores = [score for week_scores in scores for score in week_scores]
                 max_score = 0 if len(scores) < 1 else max(scores)
@@ -1363,7 +1366,7 @@ def index(level, program_id):
 
             # We also have to check if the next level should be removed from the available_levels
             # Only check the quiz threshold if there is a quiz to obtain a score on the current level
-            if level < hedy.HEDY_MAX_LEVEL and QUIZZES[g.lang].get_quiz_data_for_level(level):
+            if level <= hedy.HEDY_MAX_LEVEL and level_quiz_data:
                 scores = [x.get('scores', []) for x in quiz_stats if x.get('level') == level]
                 scores = [score for week_scores in scores for score in week_scores]
                 max_score = 0 if len(scores) < 1 else max(scores)
@@ -1647,6 +1650,7 @@ def get_embedded_code_editor(level):
         level = 1
 
     run = True if request.args.get('run') == 'true' else False
+    fullWidth = True if request.args.get('fullWidth') == 'true' else False
     readOnly = True if request.args.get('readOnly') == 'true' else False
     encoded_program = request.args.get('program')
 
@@ -1671,7 +1675,7 @@ def get_embedded_code_editor(level):
         except binascii.Error:
             program = gettext('invalid_program_comment')
 
-    return render_template("embedded-editor.html", embedded=True, run=run, language=language,
+    return render_template("embedded-editor.html", fullWidth=fullWidth, run=run, language=language,
                            keyword_language=keyword_language, readOnly=readOnly,
                            level=level, javascript_page_options=dict(
                                page='view-program',
