@@ -386,7 +386,7 @@ def babel_version_unchanged(task, values):
 
 
 def is_running_on_heroku():
-  return 'ON_HEROKU' in os.environ
+    return 'ON_HEROKU' in os.environ
 
 # These are used in more than one task. Find all .po files, and calculate the
 # .mo files that would be generated from them.
