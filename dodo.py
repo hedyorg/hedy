@@ -55,6 +55,10 @@ def task_npm():
             ---> npm ci       # install exactly the point versions found in the lock file
     ```
     """
+    # This task gives problems whhen deploying to Heroku, so not execute it if we are there
+    if is_running_on_heroku():
+        return dict(title=lambda _: 'Do not install NPM on Heroku', action=[])
+
     return dict(
         # `package-lock.json` contains the actual dependency versions that `npm ci` will install
         file_dep=['package-lock.json'],
@@ -380,6 +384,9 @@ def babel_version_unchanged(task, values):
 
     return values.get('babel-version') == babel_version
 
+
+def is_running_on_heroku():
+  return 'ON_HEROKU' in os.environ
 
 # These are used in more than one task. Find all .po files, and calculate the
 # .mo files that would be generated from them.
