@@ -57,7 +57,7 @@ def task_npm():
     """
     # This task gives problems whhen deploying to Heroku, so not execute it if we are there
     if is_running_on_heroku():
-        return dict(title=lambda _: 'Do not install NPM on Heroku', action=[])
+        return dict(title=lambda _: 'Do not install NPM on Heroku', actions=[])
 
     return dict(
         # `package-lock.json` contains the actual dependency versions that `npm ci` will install
