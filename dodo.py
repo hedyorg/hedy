@@ -275,6 +275,7 @@ def task_extract():
         ],
     )
 
+
 def task_devserver():
     """Run a copy of the development server.
 
