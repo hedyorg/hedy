@@ -1870,10 +1870,12 @@ levels:
                     ```
                 feedback: Ce n'est pas ça !
             -   option: |-
-                    Bon travail !
-                    Tu peux utiliser l'ordinateur !
-                    Bon travail !
-                    Tu peux utiliser l'ordinateur !
+                    ```
+                    Bon travail !
+                    Tu peux utiliser l'ordinateur !
+                    Bon travail !
+                    Tu peux utiliser l'ordinateur !
+                    ```
                 feedback: Correct !
             hint: Tout ce qui se trouve sous la commande `{repeat}` est répété deux fois.
             correct_answer: D
@@ -1910,13 +1912,13 @@ levels:
         4:
             question_text: Quelle affirmation est vraie ?
             code: |-
-                nom = {ask} "Quel est ton nom ?"
-                pointure = {ask} "Quelle est ta pointure ?"
+                nom = {ask} "Quel est ton nom ?"
+                pointure = {ask} "Quelle est ta pointure ?"
                 {if} pointure {is} 38
                     {if} nom {is} Cendrillon
-                        {print} '❤️❤️❤️'
+                        {print} "❤️❤️❤️"
                     {else}
-                        {print} "Ce n'est pas toi que je cherche !"
+                        {print} "Ce n'est pas toi que je cherche !"
                 {else}
                     {print} "Je vais continuer à chercher"
             mp_choice_options:
@@ -1932,7 +1934,7 @@ levels:
             correct_answer: C
             question_score: '10'
         5:
-            question_text: Quel code affiche ce résultat ?
+            question_text: Quel code affiche ce résultat ?
             output: |-
                 Vive les glaces !
                 Vive les glaces !
@@ -1940,147 +1942,147 @@ levels:
             mp_choice_options:
             -   option: |-
                     ```
-                    dessert = {ask} "Quel est ton dessert préféré ?"
+                    dessert = {ask} "Quel est ton dessert préféré ?"
                     {if} dessert {is} glace
                         {repeat} 3 {times}
-                        {print} 'Vive les glaces !'
+                        {print} "Vive les glaces !"
                     ```
                 feedback: N'oublie pas l'indentation après la commande `{repeat}`.
             -   option: |-
                     ```
-                    dessert = {ask} "Quel est ton dessert préféré ?"
+                    dessert = {ask} "Quel est ton dessert préféré ?"
                     {if} dessert {is} glace
                     {repeat} 3 {times}
-                            {print} 'Vive les glaces !'
+                            {print} "Vive les glaces !"
                     ```
                 feedback: Utilise une indentation après une commande `{if}`
             -   option: |-
                     ```
-                    dessert = {ask} "Quel est ton dessert préféré ?"
+                    dessert = {ask} "Quel est ton dessert préféré ?"
                     {if} dessert {is} glace
                         {repeat} 3 {times}
-                            {print} 'Vive les glaces !'
+                            {print} "Vive les glaces !"
                     ```
                 feedback: Parfait
             -   option: |-
                     ```
                     {repeat} 3 {times}
-                        dessert = {ask} "Quel est ton dessert préféré ?"
+                        dessert = {ask} "Quel est ton dessert préféré ?"
                         {if} dessert {is} glace
                             {repeat} 3 {times}
-                            {print} 'Vive les glaces !'
+                            {print} "Vive les glaces !"
                     ```
                 feedback: Il y a 2 commande `{repeat}` dans ce code.
             hint: Attention à l'indentation
             correct_answer: C
             question_score: '10'
         6:
-            question_text: After which command(s) should you use indentation (starting the next line with 4 spaces)?
+            question_text: Après quelle commande(s) dois-tu utiliser une indentation (commencer la ligne suivante avec 4 espaces) ?
             mp_choice_options:
             -   option: '`{if}`'
-                feedback: Don't forget the others
+                feedback: N'oublie pas les autres
             -   option: '`{if}` `{repeat}`'
-                feedback: Don't forget `{else}`!
+                feedback: N'oublie pas `{else}` !
             -   option: '`{if}` `{else}` `{repeat}`'
-                feedback: Keep it up!
+                feedback: Continue comme ça !
             -   option: '`{if}` `{else}` `{repeat}` `{print}`'
-                feedback: Not with print
-            hint: Indentation happens on the line below some commands
+                feedback: Pas avec `{print}`
+            hint: Il faut une indentation pour les lignes en dessous de certaines commandes
             correct_answer: C
             question_score: '10'
         7:
-            question_text: "In this code from a pizza restaurant. \nYoull get a 5 dollar discount if you order a medium pizza with coke.\n What should you do to debug this code?"
+            question_text: "Tu auras une réduction de 5 euros si tu commandes une pizza de taille moyenne avec un coca.<br>Mais ce code a une erreur ! Comment le débuggé ?"
             code: |-
-                {if} food {is} pizza
-                {if} size {is} medium
-                {if} drink {is} coke
-                price = price - 2
+                {if} plat {is} pizza
+                {if} taille {is} moyenne
+                {if} boisson {is} coca
+                price = price - 5
             mp_choice_options:
             -   option: |-
                     ```
-                    {if} food {is} pizza
-                        {if} size {is} medium
-                            {if} drink {is} coke
-                                price = price - 2
+                    {if} plat {is} pizza
+                        {if} taille {is} moyenne
+                            {if} drink {is} coca
+                                prix = prix - 5
                     ```
-                feedback: Amazing!
+                feedback: Incroyable !
             -   option: |-
                     ```
-                    {if} food {is} pizza
-                        {if} size {is} medium
-                    {if} drink {is} coke
-                        price = price - 2
+                    {if} plat {is} pizza
+                        {if} taille {is} moyenne
+                    {if} boisson {is} coca
+                        prix = prix - 5
                     ```
-                feedback: Try again!
+                feedback: Le second `{if}` n'a pas de code !
             -   option: |-
                     ```
-                    {if} food {is} pizza
-                    {if} size {is} medium
-                    {if} drink {is} coke
-                            price = price - 2
+                    {if} plat {is} pizza
+                    {if} taille {is} moyenne
+                    {if} boisson {is} coca
+                            prix = prix - 5
                     ```
-                feedback: Try again
+                feedback: Ce n'est jamais correct d'avoir deux `{if}` consécutifs.
             -   option: |-
                     ```
-                    {if} food {is} pizza
-                        {if} size {is} medium
-                            {if} drink {is} coke
-                            price = price - 2
+                    {if} plat {is} pizza
+                        {if} taille {is} moyenne
+                            {if} boisson {is} coca
+                            prix = prix - 5
                     ```
-                feedback: Try again
-            hint: After each `{if}` command, the line below should indent
+                feedback: Presque. Regarde de nouveau la dernière ligne.
+            hint: Après chaque commande `{if}`, la ligne en dessous doit être indentée
             correct_answer: A
             question_score: '10'
         8:
-            question_text: What is wrong is this code?
+            question_text: Qu'est-ce qui ne va pas avec ce code ?
             code: |-
-                age = {ask} 'Happy Birthday! How old are you?'
-                singing = {ask} 'Would you like us to sing?'
-                    if singing {is} yes
-                        {repeat} years {times}
-                        {print} 'Hip Hip Hooray'
+                âge = {ask} "Joyeux anniversaire ! Quel âge as-tu ?"
+                chanter = {ask} "Veux-tu que nous chantions ?"
+                    if chanter {is} oui
+                        {repeat} années {times}
+                            {print} "Hip Hip Hip… Houra !"
             mp_choice_options:
-            -   option: You can't put two questions in a row
-                feedback: Yes you can.
-            -   option: The variable called 'age' is later on used as 'years'
-                feedback: Keen eye! Good job!
-            -   option: You're not allowed to start with 8 spaces, like line 4 and 5 do
-                feedback: You actually must start like that.
-            -   option: A code must always start with a `{print}` command in the first line
-                feedback: That's not true.
-            hint: The indentation is done right this time
+            -   option: On ne peut pas mettre deux questions à la suite
+                feedback: Si, on peut.
+            -   option: La variable appelée « âge » est nommée « années » quand elle est utilisée plus bas
+                feedback: Bien vu ! Bon travail !
+            -   option: On ne peut pas commencer une ligne avec 8 espaces, comme c'est le cas en ligne 5.
+                feedback: Tu es, en fait, obligé de commencer cette ligne comme ça.
+            -   option: Un code doit toujours commencer par une commande `{print}` en première ligne
+                feedback: Ce n'est pas vrai.
+            hint: L'indentation est bien faite cette fois.
             correct_answer: B
             question_score: '10'
         9:
-            question_text: How many `{if}` commands can be placed inside another `{if}` command?
+            question_text: Combien de commande `{if}` peut être placée à l'intérieur d'une autre commande `{if}` ?
             mp_choice_options:
-            -   option: None, that is not allowed
-                feedback: You are allowed to
-            -   option: Only 1
-                feedback: You could use more if you like
+            -   option: Aucune. Ce n'est pas autorisé
+                feedback: Tu as le droit de le faire
+            -   option: seulement 1
+                feedback: Tu peux en utiliser plus si tu veux
             -   option: '3'
-                feedback: You could use more if you like
-            -   option: Infinite, as long as you keep using indentation correctly
-                feedback: That is true
-            hint: You can put an `{if}` command inside an `{if}` command.
+                feedback: Tu peux en utiliser plus si tu veux
+            -   option: Infinie, tant que tu utilises bien l'indentation correctement
+                feedback: C'est vrai
+            hint: Tu peux mettre une commande `{if}` à l'intérieur d'une commande `{if}`.
             correct_answer: D
             question_score: '10'
         10:
-            question_text: Which statement is true?
+            question_text: Quelle affirmation est vraie ?
             code: |-
                 1 {repeat} 2 {times}
                 2 {if} niveau {is} 9
-                3 {print} Excellent travail !
+                3 {print} "Excellent travail !"
             mp_choice_options:
-            -   option: All lines should start with 4 spaces
-                feedback: Only line 2 and 3 start with spaces
-            -   option: Line 2 and 3 should start with 4 spaces
-                feedback: Line 3 should start with 8
-            -   option: Line 2 and 3 should start with 8 spaces
-                feedback: Line 2 should start with 4
-            -   option: line 2 should atart with 4 spaces and line 3 with 8
-                feedback: You are correct!
-            hint: The first line doens't start with any spaces
+            -   option: Toutes les lignes doivent commencer par 4 espaces
+                feedback: Seules les ligne 2 et 3 commencent par des espaces
+            -   option: Les lignes 2 et 3 doivent commencer par 4 espaces
+                feedback: La ligne 3 doit en avoir 8
+            -   option: Les lignes 2 et 3 doivent commencer par 8 espaces
+                feedback: La ligne 2 doit en avoir 4
+            -   option: La ligne 2 doit démarrer par 4 espaces et la ligne 3 par 8
+                feedback: Tu as raison !
+            hint: La première ligne ne doit pas commencer par des espaces
             correct_answer: D
             question_score: '10'
     10:
