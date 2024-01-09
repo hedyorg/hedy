@@ -25,6 +25,8 @@ from os import path
 from glob import glob
 import sys
 
+from doit.tools import LongRunning
+
 
 # The current Python interpreter, use to run other Python scripts as well
 python3 = sys.executable
@@ -271,6 +273,31 @@ def task_extract():
             'pybabel extract -F babel.cfg -o messages.pot . --no-location --sort-output',
             'pybabel update -i messages.pot -d translations -N --no-wrap',
         ],
+    )
+
+
+def task_devserver():
+    """Run a copy of the development server.
+
+    This server is configured to be useful for running cypress tests against.
+
+    No file dependencies, so this task is never skipped.
+
+    Be careful to only depend on `backend` tasks, not `frontend` tasks, so that
+    the people running this command still don't need to have Node installed
+    if they don't want to work on the frontend.
+    """
+    return dict(
+        title=lambda _: 'Run development server',
+        task_dep=['backend'],
+        actions=[
+            LongRunning([python3, 'app.py'], shell=False, env=dict(
+                os.environ,
+                # These are required to make some local features work.
+                BASE_URL="http://localhost:8080/",
+                ADMIN_USER="admin"))
+        ],
+        verbosity=2,  # show everything live
     )
 
 

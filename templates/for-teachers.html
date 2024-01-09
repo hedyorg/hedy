@@ -76,7 +76,8 @@
             <thead class="bg-gray-200">
               <tr>
                   <th class="px-4 py-2 text-left">{{_('name')}}</th>
-                  <th class="px-4 py-2 text-left">{{_('teacher')}}</th>
+                  <th class="px-4 py-2 text-left">{{_('creator')}}</th>
+                  <th class="px-4 py-2 text-left">{{_('owner')}}</th>
                   <th class="p-2">{{_('level')}}</th>
                   <th class="p-2 hidden sm:block">{{_('last_update')}}</th>
                   <th class="p-2">{{_('preview')}}</th>
@@ -87,10 +88,21 @@
               {% for adventure in teacher_adventures %}
                 <tr>
                   <td class="px-4 py-2"><a href="for-teachers/customize-adventure/{{adventure.id}}" class="no-underline" data-cy="edit-link">{{adventure.name|e}}</a></td>
+                  <td class="owner_username_cell">{{adventure.author or adventure.creator}}</td>
                   <td class="username_cell">{{adventure.creator}}</td>
-                  <td class="text-center p-2">{% if adventure.level %}{{adventure.level}}{% else %}-{% endif %}</td>
+                  <td class="text-center p-2">
+                    {% if adventure.levels %}
+                      {% for level in adventure.levels %}
+                          {{level}}{% if loop.index != adventure.levels|length %}, {% endif %}
+                      {% endfor %}
+                    {% elif adventure.level %}
+                      {{adventure.level}}
+                    {% else %}
+                        -
+                    {% endif %}
+                  </td>
                   <td class="text-center p-2 hidden sm:block">{{adventure.date}}</td>
-                  <td class="text-center p-2"><a class="no-underline cursor-pointer" href="/for-teachers/customize-adventure/view/{{ adventure.id }}">👁</a></td>
+                  <td class="text-center p-2"><a class="no-underline cursor-pointer" href="/adventure/{{ adventure.name }}?creator={{ adventure.creator }}">👁</a></td>
                   <td class="text-center p-2"><a class="no-underline cursor-pointer" onclick='hedyApp.delete_adventure("{{adventure.id}}", {{_('delete_adventure_prompt')|default(None)|tojson}})'>🗑️</a></td>
                 </tr>
               {% endfor %}
@@ -98,13 +110,14 @@
           </table>
         {% endif %}
         <div class="flex gap-4">
-        <button id="create_adventure_button" class="green-btn mt-4" 
-        hx-trigger="click"
-        hx-post="/for-teachers/create-adventure"
-        hx-swap="none"
-        _="on htmx:afterRequest if detail.xhr.response
-        window.open('/for-teachers/customize-adventure/' + detail.xhr.response, '_self')"
-        data-cy="edit-link"{% if second_teacher and role == 'viewer' %}disabled{% endif %}>{{_('create_adventure')}}</button>
+          <button id="create_adventure_button" class="green-btn mt-4" 
+            hx-trigger="click"
+            hx-post="/for-teachers/create-adventure"
+            hx-swap="none"
+            _="on htmx:afterRequest if detail.xhr.response
+            window.open('/for-teachers/customize-adventure/' + detail.xhr.response, '_self')"
+            data-cy="edit-link"{% if second_teacher and role == 'viewer' %}disabled{% endif %}>{{_('create_adventure')}}</button>
+          <a href="/public-adventures" class="white-btn mt-4">{{_('public_adventures')}}</a>
         </div>
     </div>
     <div id="slides" class="flex flex-col items-center border-b gap-3">

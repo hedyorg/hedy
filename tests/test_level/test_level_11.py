@@ -81,6 +81,30 @@ class TestsLevel11(HedyTester):
             extra_check_function=lambda c: c.exception.arguments['line_number'] == 3,
             exception=hedy.exceptions.InvalidArgumentTypeException)
 
+    def test_for_loop_without_in_var_gives_error(self):
+        code = "for no_in range 1 to 5"
+
+        self.multi_level_tester(
+            code=code,
+            max_level=16,
+            exception=hedy.exceptions.InvalidForCommandException)
+
+    def test_for_loop_without_to_var_gives_error(self):
+        code = "for no_to in range 1 5"
+
+        self.multi_level_tester(
+            code=code,
+            max_level=16,
+            exception=hedy.exceptions.InvalidForCommandException)
+
+    def test_for_loop_without_command_var_gives_error(self):
+        code = "for no_command in range 1 to 5"
+
+        self.multi_level_tester(
+            code=code,
+            max_level=16,
+            exception=hedy.exceptions.IncompleteCommandException)
+
     def test_for_loop_multiline_body(self):
         code = textwrap.dedent("""\
         a is 2

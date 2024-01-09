@@ -35,7 +35,8 @@
                                 >
                                 {% for i in range(1, (max_level + 1)) %}
                                     <option value="{{ i }}"
-                                        {% if i|string in adventure.levels or i|string == adventure.level|string %}selected{% endif %}>
+                                        {% set adv_levels = adventure.levels if adventure.get("levels") else [adventure.level|string] %}
+                                        {% if i|string in adv_levels %}selected{% endif %}>
                                         {{ i }}
                                     </option>
                                 {% endfor %}

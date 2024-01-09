@@ -738,6 +738,14 @@ class TestsLevel8(HedyTester):
             exception=hedy.exceptions.InvalidArgumentTypeException,
             max_level=15)
 
+    def test_repeat_deprecated_gives_deprecated_error(self):
+        code = "repeat 5 times print 'In the next tab you can repeat multiple lines of code at once!'"
+
+        self.multi_level_tester(
+            code=code,
+            exception=hedy.exceptions.WrongLevelException,
+            max_level=17)
+
     def test_repeat_ask(self):
         code = textwrap.dedent("""\
         n is ask 'How many times?'
