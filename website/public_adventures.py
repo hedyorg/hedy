@@ -1,4 +1,5 @@
 import uuid
+from flask import g
 from flask_babel import gettext
 
 import utils
@@ -30,6 +31,7 @@ class PublicAdventuresModule(WebsiteModule):
         adventures = []
         included = {}
         for adventure in public_adventures:
+            # NOTE: what if another author has an adventure with the same name? Perhaps we could make this name#creator!
             if included.get(adventure["name"]):
                 continue
             public_profile = self.db.get_public_profile_settings(adventure.get('creator'))
@@ -38,12 +40,13 @@ class PublicAdventuresModule(WebsiteModule):
                 {
                     "id": adventure.get("id"),
                     "name": adventure.get("name"),
+                    "author": adventure.get("author", adventure["creator"]),
                     "creator": adventure.get("creator"),
                     "creator_public_profile": public_profile,
                     "date": utils.localized_date_format(adventure.get("date")),
                     "level": adventure.get("level"),
                     "levels": adventure.get("levels"),
-                    "language": adventure.get("language", None),
+                    "language": adventure.get("language", g.lang),
                     "cloned_times": adventure.get("cloned_times"),
                     "tags": adventure.get("tags", []),
                 }
@@ -78,17 +81,21 @@ class PublicAdventuresModule(WebsiteModule):
             if adventure["name"] == current_adventure["name"]:
                 return gettext("adventure_duplicate"), 400
 
+        level = current_adventure.get("level")
         adventure = {
             "id": uuid.uuid4().hex,
             "cloned_from": adventure_id,
             "name": current_adventure.get("name"),
             "content": current_adventure.get("content"),
             "public": 1,
+            # creator here is the new owner; we don't change it to owner because that'd introduce many conflicts.
+            # Instead handle it in html.
             "creator": user["username"],
+            "author": current_adventure.get("creator"),
             "date": utils.timems(),
-            "level": current_adventure.get("level"),
-            "levels": current_adventure.get("levels"),
-            "language": current_adventure.get("language", ""),
+            "level": level,
+            "levels": current_adventure.get("levels", [level]),
+            "language": current_adventure.get("language", g.lang),
             "tags": current_adventure.get("tags", []),
         }
 

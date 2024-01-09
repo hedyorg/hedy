@@ -126,6 +126,7 @@ def load_adventures_for_level(level, subset=None):
     keyword_lang = g.keyword_lang
 
     all_adventures = []
+    # NOTE: if we ever have ADVENTURES in the DB, adjust how the "levels" field is used.
     if subset:
         adventures = ADVENTURES[g.lang].get_adventures_subset(subset, keyword_lang)
     else:
@@ -1589,11 +1590,44 @@ def get_specific_adventure(name, level, mode):
         return utils.error_page(error=404, ui_message=gettext('no_such_level'))
 
     adventures = [x for x in load_adventures_for_level(level) if x.short_name == name]
-    if not adventures:
-        return utils.error_page(error=404, ui_message=gettext('no_such_adventure'))
-
+    customizations = {}
     prev_level = None  # we are not rendering buttons in raw, no lookup needed here
     next_level = None
+    if not adventures:
+        # By adventure's name and creator; since an adventure can be clone in /public-adventures
+        if request.args.get("creator"):
+            user = DATABASE.user_by_username(request.args["creator"])
+        else:
+            user = current_user()
+        adventure = None
+        if user and is_teacher(user):
+            adventure = database.ADVENTURES.get({"name": name, "creator": user["username"]})
+
+        if not adventure:
+            return utils.error_page(error=404, ui_message=gettext('no_such_adventure'))
+
+        available_levels = adventure["levels"] if adventure.get("levels") else [adventure["level"]]
+
+        customizations["available_levels"] = [int(adv_level) for adv_level in available_levels]
+        if level not in customizations["available_levels"]:
+            return utils.error_page(error=404, ui_message=gettext('no_such_adventure'))
+
+        adventure["content"] = safe_format(adventure.get("content", ""), **hedy_content.KEYWORDS.get(g.keyword_lang))
+        customizations["teachers_adventure"] = True
+
+        current_adventure = Adventure(
+            id=adventure["id"],
+            author=adventure["creator"],
+            short_name="level",
+            name=adventure["name"],
+            image=adventure.get("image", None),
+            text=adventure["content"],
+            is_teacher_adventure=True,
+            is_command_adventure=False,
+            save_name=f"{name} {level}")
+
+        adventures.append(current_adventure)
+        prev_level, next_level = utils.find_prev_next_levels(customizations["available_levels"], level)
 
     # Add the commands to enable the language switcher dropdown
     commands = hedy.commands_per_level.get(level)
@@ -1608,7 +1642,8 @@ def get_specific_adventure(name, level, mode):
                            level=level,
                            prev_level=prev_level,
                            next_level=next_level,
-                           customizations=[],
+                           #    max_level=max_level,
+                           customizations=customizations,
                            hide_cheatsheet=None,
                            enforce_developers_mode=None,
                            teacher_adventures=[],
@@ -1627,7 +1662,7 @@ def get_specific_adventure(name, level, mode):
                                lang=g.lang,
                                level=level,
                                adventures=adventures,
-                               initial_tab=initial_tab,
+                               initial_tab='',
                                current_user_name=current_user()['username'],
                            ))
 
