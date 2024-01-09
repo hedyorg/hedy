@@ -1290,8 +1290,7 @@ levels:
                 {print} 'Soy azul'
                 {repeat} 7 {times} {print} 'da ba dee, da ba da'
             mp_choice_options:
-            -   option: |-
-                    `I'm`
+            -   option: '`I''m`'
                 feedback: ¡Eso es!
             -   option: '`{print}`'
                 feedback: '`{print}` está mal escrito'
@@ -3657,7 +3656,7 @@ levels:
                 feedback: ¡Bien visto!
             -   option: Line 4 should say 'lucky_number', not 'lucky number
                 feedback: No es una variable, sólo es texto.
-            -   option: 'Se debería borrar {in} en la línea 3'
+            -   option: Se debería borrar {in} en la línea 3
                 feedback: No es eso
             hint: There's nothing wrong with line 4
             correct_answer: B

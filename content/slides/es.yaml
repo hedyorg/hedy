@@ -66,9 +66,9 @@ levels:
                 Puedes cambiar el texto después del comando imprimir al que tu quieras.
 
                 O puedes imprimir varias líneas añadiendo otra línea de código que también empiece con `{print}`.
-            code: '{print} ¡Bienvenido/a a Hedy!
-
-                {print} ¡Empieza a programar ya!'
+            code: |-
+                {print} ¡Bienvenido/a a Hedy!
+                {print} ¡Empieza a programar ya!
         4:
             header: '{ask}'
             text: |-
@@ -110,8 +110,7 @@ levels:
         10:
             header: 'Dibujando con la tortuga: {forward}'
             text: '`{forward}` se utiliza para mover la tortuga hacia adelante.'
-            code: |-
-                {forward} 50
+            code: '{forward} 50'
         11:
             header: 'Dibuja con la tortuga: {turn}'
             text: '`{turn}` se utiliza para hacer que la tortuga gire a la izquierda o a la derecha.'
@@ -359,7 +358,9 @@ levels:
                 {if} name {is} Hedy {print} 'nice'
         3:
             header: No te olvides imprimir
-            text: "Al usar el comando `{if}`, no te olvides de usar el comando `{print}`.\n¡Este código no funcionará!"
+            text: |-
+                Al usar el comando `{if}`, no te olvides de usar el comando `{print}`.
+                ¡Este código no funcionará!
             code: '{if} name {is} Hedy ''nice'''
         4:
             header: sino
@@ -882,7 +883,8 @@ levels:
                     {print} 'That is a shame!'
         4:
             header: Return value
-            text: In the previous levels you have learned to create functions and use arguments with them. Another great use of a function is to let it calculate something for you. You can give the function a calculation and it will give you the answer of the calculation. This answer is called a **return value**.
+            text: In the previous levels you have learned to create functions and use arguments with them. Another great use of a function is to let it calculate something for you. You can give the function a calculation and it will give you the answer of the calculation. This answer is called a **return
+                value**.
         5:
             header: Valor devuelto
             text: Por ejemplo, en este código la función calculate_new_price calculará el nuevo precio de cualquier artículo. Le dará el nuevo precio como valor de retorno.
@@ -924,7 +926,8 @@ levels:
             text: En este nivel aprenderás sobre los [corchetes] y cómo se usan.
         2:
             header: Corchetes
-            text: Vamos a hacer listas a la manera de Python, ¡con corchetes alrededor de las listas! También mantendremos las comillas alrededor de cada objeto como hemos aprendido en los niveles anteriores. Usamos corchetes para apuntar a un lugar en una lista. El comando en aleatorio ya no se puede usar nunca más.
+            text: Vamos a hacer listas a la manera de Python, ¡con corchetes alrededor de las listas! También mantendremos las comillas alrededor de cada objeto como hemos aprendido en los niveles anteriores. Usamos corchetes para apuntar a un lugar en una lista. El comando en aleatorio ya no se puede
+                usar nunca más.
             code: |-
                 friends = ['Ahmed', 'Ben', 'Cayden']
                 {print} friends[1] ' is the first friend on the list.'
@@ -971,7 +974,8 @@ levels:
     18:
         1:
             header: Bienvenido al nivel 18
-            text: ¡Enhorabuena! ¡Has alcanzado el último nivel de Hedy! El código que has creado se puede copiar a un entorno de Python como replit o PyCharm, ¡y puedes continuar aprendiendo allí! Sin embargo ten en cuenta que Python sólo puede ller comandos en inglés, así que si has usado otros lenguajes, tendrás ahora que cambiar a inglés.
+            text: ¡Enhorabuena! ¡Has alcanzado el último nivel de Hedy! El código que has creado se puede copiar a un entorno de Python como replit o PyCharm, ¡y puedes continuar aprendiendo allí! Sin embargo ten en cuenta que Python sólo puede ller comandos en inglés, así que si has usado otros lenguajes,
+                tendrás ahora que cambiar a inglés.
         2:
             header: Al estilo Python
             text: |-

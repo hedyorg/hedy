@@ -66,9 +66,9 @@ levels:
                 你可以随意地修改 `{打印}` 命令后面的文字。
 
                 你也可以再添加一行 `{打印}` 命令，来打印多行文字。
-            code: '{print}欢迎来到海蒂！
-
-                {print} 现在就开始编程吧！'
+            code: |-
+                {print}欢迎来到海蒂！
+                {print} 现在就开始编程吧！
         4:
             header: Hedy 第1 级：{echo}
             text: |-
@@ -92,7 +92,9 @@ levels:
                 {echo}你好
         6:
             header: 编程!
-            text: "使用`{print}`, `{ask}` 和 `{echo}` ，您已经可以创建一个小故事了。\n现在是尝试鹦鹉、故事和石头剪刀布冒险的好时机。"
+            text: |-
+                使用`{print}`, `{ask}` 和 `{echo}` ，您已经可以创建一个小故事了。
+                现在是尝试鹦鹉、故事和石头剪刀布冒险的好时机。
             editor: /hedy/1
         7:
             header: 编程!
@@ -108,10 +110,9 @@ levels:
         10:
             header: '用海龟绘图画画: {turn}'
             text: '`{turn}` 用于让海龟向左转或向右转。'
-            code: |-
-                {forward} 50
+            code: '{forward} 50'
         11:
-            header: '与乌龟一起画画：{turn}'
+            header: 与乌龟一起画画：{turn}
             text: '`{turn}` 用于让海龟向左或向右转。'
             code: |-
                 {forward} 50
@@ -270,7 +271,7 @@ levels:
             code: '{print} ''带引号打印！'''
         2:
             header: 问题
-            text: '在前面的关卡中，你可能遇到过这个问题：'
+            text: 在前面的关卡中，你可能遇到过这个问题：
             code: |-
                 name {is}苏菲
                 {print} 我的名字是name
