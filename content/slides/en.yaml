@@ -26,29 +26,26 @@ levels:
                 * Build your own apps to use on your phone
         5:
             header: Programming in Hedy
-            text: |-
-                In Hedy we use special codes, like `{print}`.
-                <iframe class="embedded-hedy" src="/adventure/story/1/raw"></iframe>
+            text: In Hedy we use special codes, like `{print}`.
+            code: '{print} Welcome to Hedy!'
         6:
             header: Programming in Hedy
-            text: |-
-                Code words will be shown in pink.
-                <iframe class="embedded-hedy" src="/adventure/story/1/raw"></iframe>
+            text: Code words will be shown in pink.
+            code: '{print} Welcome to Hedy!'
         7:
             header: Programming in Hedy
-            text: |-
-                We start the code with the Run code button underneath the code.
-                <iframe class="embedded-hedy" src="/adventure/story/1/raw"></iframe>
+            text: We start the code with the Run code button underneath the code.
+            code: '{print} Welcome to Hedy!'
         8:
             header: Programming in Hedy
-            text: |-
-                Output appears on the right-hand side.
-                <iframe class="embedded-hedy" src="/adventure/story/1/raw"></iframe>
+            text: Output appears on the right-hand side.
+            code: '{print} Welcome to Hedy!'
         9:
             header: Programming in Hedy
-            text: |-
-                The output can also be a drawing.
-                <iframe class="embedded-hedy" src="/adventure/turtle/1/raw"></iframe>
+            text: The output can also be a drawing.
+            code: |-
+                {forward} 100
+                {turn} left
     1:
         1:
             header: Welcome to level 1!
@@ -62,70 +59,91 @@ levels:
                 The first code that you can use in level 1 is `{print}`.
 
                 `{print}` is used to show text on the screen.
-            editor: <iframe class="fragment" src="/adventure/print_command/1/raw"></iframe>
+            code: '{print} Show text on the screen'
         3:
             header: The {print} command
             text: |-
                 You can change the text after the print command to whatever you want.
 
                 Or you could print multiple lines by adding another line of code that also starts with `{print}`.
-            editor: <iframe class="fragment" src="/adventure/print_command/1/raw"></iframe>
+            code: |-
+                {print} Welcome to Hedy!
+                {print} Start programming now!
         4:
             header: '{ask}'
             text: |-
                 The second code that you can use in level 1 is `{ask}`.
 
                 `{ask}` is used to ask a question that can be answered.
-            editor: <iframe class="fragment" src="/adventure/rock/1/raw"></iframe>
+            code: |-
+                {print} Welcome to your own rock scissors paper!
+                {ask} What will you choose?
         5:
             header: '{echo}'
             text: |-
                 As you could see in the previous example. If you use the `{ask}` command, you can ask a question.
-
                 The answer, however doesn't show in the output screen.
 
                 If you do want the answer to show, you can use the final command of this level: `{echo}`.
-
                 `{echo}` is used to repeat the answer of an `{ask}`.
-            editor: <iframe class="fragment" src="/adventure/ask_command/1/raw"></iframe>
+            code: |-
+                {print} Hello!
+                {ask} What is your name?
+                {echo} hello
         6:
             header: Programming!
             text: |-
                 With `{print}`, `{ask}` and `{echo}` you can already create a little story.
                 This is a good time to try the Parrot, Story and Rock, Paper Scissors adventures.
+            editor: /hedy/1
         7:
             header: Programming!
             text: Adventures are shown in tabs.
-            editor: <iframe class="fragment" src="/hedy/1"></iframe>
+            editor: /hedy/1
         8:
             header: Programming!
-            text: |-
-                The yellow arrow buttons can be used to copy examples.
-                <iframe class="fragment" src="/hedy/1"></iframe>
+            text: The yellow arrow buttons can be used to copy examples.
+            editor: /hedy#print_command
         9:
             header: Drawing with the turtle
             text: Now that we have seen at text codes, we will now look at drawing codes next.
         10:
             header: 'Drawing with the turtle: {forward}'
             text: '`{forward}` is used to move the turtle forward.'
-            editor: <iframe class="fragment" src="/adventure/turtle/1/raw"></iframe>
+            code: '{forward} 50'
         11:
             header: 'Drawing with the turtle: {turn}'
             text: '`{turn}` is used to make the turtle turn left or right.'
-            editor: <iframe class="fragment" src="/adventure/turtle/1/raw"></iframe>
+            code: |-
+                {forward} 50
+                {turn} left
+        12:
+            header: Debugging
+            text: Debugging a code means getting rid of mistakes in the code. Let's debug this code together. Click the ladybug button to start the debugger.
+            code: |-
+                I am DJ Hedy
+                {print} What song would you like to hear?
+                {ask} I like that song too!
+                {print} Next up... {echo}
+        13:
+            header: Let the programming fun begin!
+            text: Enjoy the adventures in level 1!
     2:
         1:
             header: Welcome to level 2
             text: |-
                 In this level you will learn to use variables.
 
-                A variable is a word that can be used to store informatie.
+                A variable is a word that can be used to store information.
 
                 For example: a name, age or favorite sports team.
         2:
             header: Variables
             text: To make or 'set' a variable we use the `{is}` command
-            editor: <iframe class="fragment" src="/adventure/is_command/2/raw"></iframe>
+            code: |-
+                name {is} Hedy
+                age {is} 15
+                {print} name is age years old
         3:
             header: Interactive
             text: |-
@@ -133,24 +151,49 @@ levels:
 
                 The answer to the question is stored in the variable.
 
-                This way we don't need the `{echo}`  command.
-            editor: <iframe class="fragment" src="/adventure/ask_command/2/raw"></iframe>
+                This way we don't need the `{echo}` command.
+            code: |-
+                name {is} {ask} What is your name?
+                {print} Hello name
         4:
             header: Multiple variables
-            text: Now that we use variables, we can use multiple variables instead of just one `{echo}`command.
-            editor: <iframe class="fragment" src="/adventure/ask_command/2/raw"></iframe>
+            text: Now that we use variables, we can use multiple variables instead of just one `{echo}` command.
+            code: |-
+                name {is} {ask} What is your name?
+                {print} Hello name
+                age {is} {ask} How old are you?
+                {print} name is age years old.
         5:
             header: Sleep
             text: You can also use the `{sleep}` command to pause the code for a while.
-            editor: <iframe class="fragment" src="/adventure/sleep_command/2/raw"></iframe>
+            code: |-
+                {print} My favorite colour is...
+                {sleep} 2
+                {print} green!
         6:
             header: Sleep 5
             text: |-
                 You can add a number after the `{sleep}` command if you want the pause to be longer.
 
                 If you want, you could even use a variable instead of a number to decide the duration of the sleep command.
-            editor: <iframe class="fragment" src="/adventure/sleep_command/2/raw"></iframe>
+            code: |-
+                pause {is} 10
+                {print} My favorite colour is...
+                {sleep} pause
+                {print} green!
         7:
+            header: Debugging
+            text: Debugging a code means getting rid of mistakes in the code. Let's debug this code together. Click the ladybug button to start the debugger.
+            code: |-
+                {print} Welcome to the donut shop!
+                filling {is} What kind of filling would you like?
+                {print} You have chosen... Filling! Yum!
+                topping {ask} What kind of topping would you like?
+                topping is delicious!
+                {print} I'll go get your donut. {sleep}
+                {print} Here you go! A filling donut with toping!
+                {ask} Have a nice day!
+        8:
             header: Let the programming fun begin!
             text: Enjoy the adventures in level 3!
     3:
@@ -162,19 +205,27 @@ levels:
             text: |-
                 You make a list with `{is}`.
 
-                Seperate the items on your list with a comma.
-            editor: <iframe class="fragment" src="/adventure/random_command/3/raw"></iframe>
+                Separate the items on your list with a comma.
+            code: |-
+                animals {is} dogs, cats, kangaroos
+                ```
         3:
             header: At random
             text: |-
                 You can use the list with the `{at}` `{random}` command.
                 The computer will randomly pick one item of the list.
                 Every time you run this code the output will differ.
-            editor: <iframe class="fragment" src="/adventure/dice/3/raw"></iframe>
+            code: |-
+                animals {is} dogs, cats, kangaroos
+                {print} animals {at} {random}
+                ```
         4:
             header: At random in a sentence
             text: You can use the `{at}` `{random}` command in a sentence as well.
-            editor: <iframe class="fragment" src="/adventure/random_command/3/raw"></iframe>
+            code: |-
+                animals {is} dogs, cats, kangaroos
+                {print} My favorite animal is animals {at} {random}
+                ```
         5:
             header: Add to
             text: |-
@@ -182,25 +233,48 @@ levels:
 
                 You can choose what to add to the list or you can use the `{add}` `{to}` command in combination with the `{ask}` command.
                 This way you can let the player decide what to add to the list.
-            editor: <iframe class="fragment" src="/adventure/add_remove_command/3/raw"></iframe>
+            code: |-
+                animals {is} dog, cat, kangaroo
+                like {is} {ask} What is your favorite animal?
+                {add} like {to_list} animals
+                {print} I choose animals {at} {random}
         6:
             header: Remove from
             text: |-
                 The opposite of the `{add}` `{to}` command is the  `{remove}` `{from}` command.
                 This command removes an item from a list.
-            editor: <iframe class="fragment" src="/adventure/add_remove_command/3/raw"></iframe>
-        9:
+            code: |-
+                animals {is} dog, cat, kangaroo
+                dislike {is} {ask} What animal do you not like?
+                {remove} dislike {from} animals
+                {print} I choose animals {at} {random}
+        7:
+            header: Debugging
+            text: Let's debug this code!
+            editor: |-
+                music_genres {is} rock, pop, metal, indie, jazz
+                chosen_genre is music {at} {random}
+                {print} Let's listen to chosen genre
+                nice {ask} Do you like that genre?
+                {remove} chosen_genre {from} chosen_genre
+                second_choice {is} music_genres
+                {print} or do you prefer... second_choice {at} {random}
+                {remove} second_choice {to} music_genres
+                {print} I like music_genre {random} best!
+        8:
             header: Let's get to work!
             text: Enjoy the adventures in level 3!
     4:
         1:
             header: Welcome to level 4
             text: In this level you will learn how to use quotation marks.
-            editor: <iframe class="fragment" src="/adventure/quotation_marks/4/raw"></iframe>
+            code: '{print} ''print with quotes!'''
         2:
             header: Problem
             text: 'In the previous levels, you might have come across this problem:'
-            editor: <iframe class="fragment" src="/adventure/default/4/raw"></iframe>
+            code: |-
+                name {is} Sophie
+                {print} My name is name
         3:
             header: Fixing it with quotation marks
             text: |-
@@ -210,30 +284,34 @@ levels:
         4:
             header: Quotation marks with print
             text: Each time you use the `{print}` command you need to put the text that you want to appear on the screen in quotation marks.
-            editor: <iframe class="fragment" src="/adventure/quotation_marks/4/raw"></iframe>
+            code: '{print} ''print with quotes!'''
         5:
             header: Quotation marks with ask
             text: This also goes for the `{ask}` command.
-            editor: <iframe class="fragment" src="/adventure/quotation_marks/4/raw"></iframe>
+            code: name {is} {ask} 'name please?'
         6:
             header: Quotation marks and variables
             text: |-
                 You do not want variable names to be printed on the screen.
                 This is why variables should be left out of the quotation marks, like this:
-            editor: <iframe class="fragment" src="/adventure/quotation_marks/4/raw"></iframe>
+            code: |-
+                name {is} Harry
+                {print} 'Hello ' name
         7:
             header: Quotation marks and variables
             text: |-
                 When variable names are used in the middle of a sentence, you have to leave the variables out of the quotation marks.
                 The rest of the sentence however, does need quotation marks. That looks like this:
-            editor: <iframe class="fragment" src="/adventure/quotation_marks/4/raw"></iframe>
+            code: |-
+                name {is} Harry
+                {print} 'Hello ' name ', how are you?'
         8:
             header: Quotation marks and contractions
             text: |-
                 Be careful! Now that you are using quotation marks, you can't use apostrophes in contractions.
 
                 Please try to print a contraction like "you're" or "I'm" in the screen below and see what happens....
-            editor: <iframe class="fragment" src="/adventure/rock/4/raw"></iframe>
+            code: '{print} ''This won''t work!'''
         9:
             header: Clear
             text: |-
@@ -241,8 +319,28 @@ levels:
                 With this command you can wipe all the text from your output screen.
 
                 Be careful that you always use a sleep command too. If you don't the computer will wipe all the text before you can read it!
-            editor: <iframe class="fragment" src="/adventure/clear_command/4/raw"></iframe>
+            code: |-
+                {print} '3'
+                {clear}
+                {print} '2'
+                {clear}
+                {print} '1'
+                {clear}
+                {print} 'SURPRISE!'
         10:
+            header: Debugging
+            text: Let's debug this code!
+            code: |-
+                {clear}
+                {print} What a nice day to go to the beach!
+                {ask} 'Do you want to build a sandcastle or swim in the ocean?'
+                {print} 'You would like to activity '
+                {print} 'I'd like to do that too'
+                {print} 'Look at these beautiful seashells!'
+                colors {is} 'orange, silver, white, brown'
+                {print} 'I love the colors {at} {random} one!'
+                choice {is} {ask} Which one do you like?
+        11:
             header: Ready, Set, Go!
             text: Enjoy the adventures in level 4!
     5:
@@ -255,25 +353,31 @@ levels:
                 The `{if}` command allows you to choose between two options.
                 In this example the computer will print 'nice' if the given answer is Hedy.
                 If the answer is not Hedy, the computer will do nothing.
-            editor: <iframe class="fragment" src="/adventure/if_command/5/raw"></iframe>
+            code: |-
+                name {is} {ask} 'what is your name?'
+                {if} name {is} Hedy {print} 'nice'
         3:
             header: Don't forget to print
-            text: When using the `{if}` command, don't forget to use the `{print}` command.
-            editor: <iframe class="fragment" src="/adventure/if_command/5/raw"></iframe>
+            text: |-
+                When using the `{if}` command, don't forget to use the `{print}` command.
+                This code will not work!
+            code: '{if} name {is} Hedy ''nice'''
         4:
             header: else
             text: |-
                 When using an `{if}` command, you can also add an `{else}` command.
                 If the answer is Hedy, the computer will print 'nice'.
                 But if the answer is something else the computer will print 'boo'
-            editor: <iframe class="fragment" src="/adventure/if_command/5/raw"></iframe>
+            code: '{if} name {is} Hedy {print} ''nice'' {else} {print} ''boo!'''
         5:
             header: Long lines
             text: |-
                 You might have noticed that your lines can get very long when you have both an `{if}` and an `{else}` command.
 
-                You can choose to seperate commands and put them on 2 lines, like this:
-            editor: <iframe class="fragment" src="/adventure/if_command/5/raw"></iframe>
+                You can choose to separate commands and put them on 2 lines, like this:
+            code: |-
+                {if} name {is} Hedy {print} 'nice'
+                {else} {print} 'boo!'
         6:
             header: Another new command
             text: |-
@@ -282,8 +386,28 @@ levels:
                 With `{in}` you can let the computer check if an item is in a list, for example:
 
                 Please note that Hedy is case sensitive. This means that if you answer "Green" instead of "green", Hedy will print "meh".
-            editor: <iframe class="fragment" src="/adventure/in_command/5/raw"></iframe>
+            code: |-
+                pretty_colors {is} green, yellow
+                favorite_color {is} {ask} 'What is your favorite color?'
+                {if} favorite_color {in} pretty_colors {print} 'pretty!'
+                {else} {print} 'meh'
         7:
+            header: Debugging
+            text: Let's debug this code!
+            code: |-
+                {print} Welcome to HedyAir Security!
+                boarding_pass {is} {ask} 'Do you have your boarding pass?'
+                {if} bording_pass yes {print} Great!
+                {else} Please, get your boarding pass ready.
+                passport {is} 'Can I see your passport, please?'
+                {if} passport {is} yes 'thank you'
+                {else} 'You can't fly without a passport'
+                declare {is} {ask} Do you have anything to declare?
+                {if} declare {is} yes
+                item_to_declare {is} {ask} 'What would you like to declare'
+                {else} Alright
+                {print} Thank you. Please head to gate A22.'
+        8:
             header: Let's go!
             text: Enjoy the adventures in level 5!
     6:
@@ -293,34 +417,61 @@ levels:
         2:
             header: Addition
             text: If you want to calculate an addition, simply use the plus sign.
-            editor: <iframe class="fragment" src="/adventure/maths/6/raw"></iframe>
+            code: '{print} ''5 plus 5 is '' 5 + 5'
         3:
             header: Subtraction
             text: If you want to subtract, you can use the minus sign.
-            editor: <iframe class="fragment" src="/adventure/maths/6/raw"></iframe>
+            code: '{print} ''5 minus 5 is '' 5 - 5'
         4:
             header: Multiplication
             text: If you want to do multiplications, you can use the asterisk.
-            editor: <iframe class="fragment" src="/adventure/maths/6/raw"></iframe>
+            code: '{print} ''5 times 5 is '' 5 * 5'
         5:
             header: Division
             text: You can use the slash for division.
-            editor: <iframe class="fragment" src="/adventure/maths/6/raw"></iframe>
+            code: '{print} ''5 divided by 5 is '' 5 / 5'
         6:
             header: Summary
             text: In summary, you can use +, -, * and / to do maths.
-            editor: <iframe class="fragment" src="/adventure/maths/6/raw"></iframe>
+            code: |-
+                {print} '5 plus 5 is ' 5 + 5
+                {print} '5 minus 5 is ' 5 - 5
+                {print} '5 times 5 is ' 5 * 5
+                {print} '5 divided by 5 is ' 5 / 5
         7:
             header: The = symbol
             text: |-
                 From now on you can also use the = symbol instead of the `{is}` command.
                 This goes for both numbers and words, and it also goes after the `{if}` or `{else}` commands.
-            editor: <iframe class="fragment" src="/adventure/is_command/6/raw"></iframe>
+            code: |-
+                name = Hedy
+                answer = 20 + 4
         8:
             header: Calculations with variables
             text: 'You can use calculations with numbers, but you can also use variables to do calculations, like this:'
-            editor: <iframe class="fragment" src="/adventure/calculator/6/raw"></iframe>
+            code: |-
+                number_1 = {ask} 'Fill in the first number:'
+                number_2 = {ask} 'Fill in the second number:'
+                correct_answer = number_1 * number_2
+                {print} number_1 ' times ' number_2 ' is ' correct_answer
         9:
+            header: Debugging
+            text: Let's debug this code!
+            code: |-
+                {print} 'This is the water park ticket machine'
+                {print} 'Price list: Children under 12 $3, Adults $5'
+                {print} 'Mondays are 25% off'
+                amount_of_children = 'How many kids tickets would you like?'
+                amount_of_adults = 'How many adult tickets would you like?'
+                day_of_the_week = {ask} 'What day is it?'
+                {clear}
+                child_price = amount of children * 3
+                adult_price = amount_of_adults + 5
+                total_price = adult_price * child_price
+                {if} day {is} monday
+                total_price = total_price * 0.25
+                {print} 'That will be total_price please'
+        10:
             header: Let's get to work!
             text: Enjoy the adventures in level 6!
     7:
@@ -334,16 +485,36 @@ levels:
                 If you want to repeat the line more times, simply change the number.
 
                 For example: If you are programming a story where your character shouts for help for 5 times, it could look like this:
-            editor: <iframe class="fragment" src="/adventure/story/7/raw"></iframe>
+            code: |-
+                {print} 'The prince kept calling for help'
+                {repeat} 5 {times} {print} 'Help!'
+                {print} 'Why is nobody helping me?'
         3:
             header: Don't forget the print command
             text: When using the repeat command, do not forget the `{print}` command.
-            editor: <iframe class="fragment" src="/adventure/print/7/raw"></iframe>
+            code: '{repeat} 5 {times} ''Help!'''
         4:
             header: Repeat an ask command
             text: You can also repeat an `{ask}`, `{if}` or `{else}` command multiple times.
-            editor: <iframe class="fragment" src="/adventure/repeat_command_2/7/raw"></iframe>
+            code: |-
+                {repeat} 2 {times} answer = {ask} 'Did you know you could ask a question multiple times?'
+                {if} answer {is} yes {repeat} 2 {times} {print} 'You knew that already!'
+                {else} {repeat} 3 {times} {print} 'You have learned something new!'
         5:
+            header: Debugging
+            text: Let's debug this code!
+            code: |-
+                {print} You gave stranded on a desert island.
+                {repeat} 3 'Help!'
+                rescued = {ask} Has anybody come to the rescue?
+                {if} rescued yes {is}
+                {print} Lucky!
+                {else} {repeat} 3 {times} 'HELP!'
+                rescued = 'What about now?'
+                {if} yes
+                {print} 'Hurray!
+                {else} 'That's a shame... Oh well... time to build a shelter and find some food.'
+        6:
             header: Ready Set Go!
             text: Enjoy the adventures in level 7!
     8:
@@ -356,7 +527,7 @@ levels:
                 In the previous levels, the `{repeat}` command looked like this:
 
                 You could only repeat one line of code.
-            editor: <iframe class="fragment" src="/adventure/story/7/raw"></iframe>
+            code: '{repeat} 5 {times} {print} ''Help!'''
         3:
             header: '{repeat} commands now'
             text: |-
@@ -364,29 +535,42 @@ levels:
                 You do this by using indentation.
 
                 Use 4 spaces (or one tab) at the beginning of each line that you want to repeat, like this:
-            editor: <iframe class="fragment" src="/adventure/repeat_command/8/raw"></iframe>
+            code: |-
+                {repeat} 5 {times}
+                    {print} 'Hello everyone'
+                    {print} 'This will be printed 5 times'
         4:
             header: '{repeat} commands now'
             text: |-
                 If you want to, you can continue after the `{repeat}` command without indentation.
                 The lines that do not start with indentation will not be repeated.
-            editor: <iframe class="fragment" src="/adventure/repeat_command_2/8/raw"></iframe>
+            code: |-
+                {repeat} 3 {times}
+                    {print} 'Hello!'
+                {print} 'We are done repeating!'
         5:
             header: if and else before
             text: |-
                 The same goes for the `{if}` and `{else}` commands.
                 These were the commands before:
-            editor: <iframe class="fragment" src="/adventure/if_command/5/raw"></iframe>
+            code: |-
+                {if} name {is} Hedy {print} 'nice'
+                {else} {print} 'boo!'
         6:
             header: if and else now
             text: |-
                 These are the `{if}` and `{else}` commands now.
                 Each line after the `{if}` and `{else}` commands start with indentation.
-            editor: <iframe class="fragment" src="/adventure/if_command/8/raw"></iframe>
+            code: |-
+                name = {ask} 'What is your name?'
+                {if} name {is} Hedy
+                    {print} 'Welcome Hedy'
+                {else}
+                    {print} 'Welcome programmer!'
         7:
             header: stopping the indentation
             text: Just like with the `{repeat}` command, you can stop using indentation and the lines will always be shown. Not just if the statement is true.
-            editor: <iframe class="fragment" src="/adventure/if_command/8/raw"></iframe>
+            code: "name = {ask} 'What is your name?'\n{if} name {is} Hedy\n    {print} 'Welcome Hedy'\n{else}\n    {print} 'Welcome programmer!' \n{print} '3..2..1.. Start programming!'"
         8:
             header: if statements inside if statements
             text: |-
@@ -404,30 +588,68 @@ levels:
                 You can even put a `{repeat}` command within another `{repeat}`  command.
         2:
             header: Multiple lines after `{repeat}`
-            text: You are allowed to use multiple lines after `{repeat}`.
-            editor: <iframe class="fragment" src="/adventure/repeat_command/9/raw"></iframe>
+            text: You are allowed to combine `{repeat}` and `{if}` in this level.
+            code: |-
+                {repeat} 3 {times}
+                    food = {ask} 'What do you want?'
+                    {if} food {is} pizza
+                        {print} 'nice!'
+                    {else}
+                        {print} 'pizza is better'
         3:
             header: Indentation matters!
             text: Indentation is very important to tell the computer which lines should be repeated and which lines should only be ran once.
-            editor: <iframe class="fragment" src="/adventure/repeat_command_2/8/raw"></iframe>
+            code: |-
+                {repeat} 3 {times}
+                    {print} 'This line will be repeated...'
+                    {print} 'This one too...'
+                {print} 'but this one will not!'
         4:
-            header: Multipe lines after `{if}`
+            header: Multiple lines after `{if}`
             text: You can also use multiple lines after `{if}`
-            editor: <iframe class="fragment" src="/adventure/if_command/9/raw"></iframe>
+            code: |-
+                continue = {ask} 'Do you want to continue?'
+                {if} continue = yes
+                    sure = {ask} 'Are you sure?'
+                    {if} sure {is} yes
+                        {print} 'We will continue'
+                    {else}
+                        {print} 'You are not sure'
+                {else}
+                    {print} 'You do not want to continue'
         5:
             header: Indentation matters
             text: Again, indentation is still very important and can make a big difference in the code.
-            editor: <iframe class="fragment" src="/adventure/if_command/9/raw"></iframe>
+            code: |-
+                continue = {ask} 'Do you want to continue?'
+                {if} continue = yes
+                    sure = {ask} 'Are you sure?'
+                    {if} sure {is} yes
+                        {print} 'We will continue'
+                {else}
+                    {print} 'You are not sure'
         6:
             header: An `{if}` inside a `{repeat}`
             text: |-
                 Now that you can use multiple lines of code after these command, you can also put them within each other.
                 Check it out:
-            editor: <iframe class="fragment" src="/adventure/repeat_command/9/raw"></iframe>
+            code: |-
+                {repeat} 3 {times}
+                    food = {ask} 'What do you want?'
+                    {if} food {is} pizza
+                        {print} 'nice!'
+                    {else}
+                        {print} 'pizza is better'
         7:
             header: Mind the indentation
             text: Mind that the fourth and sixth line of this code starts with 8 spaces of indentation.
-            editor: <iframe class="fragment" src="/adventure/repeat_command/9/raw"></iframe>
+            code: |-
+                {repeat} 3 {times}
+                    food = {ask} 'What do you want?'
+                    {if} food {is} pizza
+                        {print} 'nice!'
+                    {else}
+                        {print} 'pizza is better'
         8:
             header: Let's go!
             text: Enjoy the adventures in level 9!
@@ -438,11 +660,18 @@ levels:
         2:
             header: The for command
             text: With for you can make a list and use all items on that list. `{for}` creates a block, like repeat and if so all lines in the block need to start with indentation (4 spaces).
-            editor: <iframe class="fragment" src="/adventure/for_command/10/raw"></iframe>
+            code: |-
+                animals = dog, cat, blobfish
+                {for} animal {in} animals
+                    {print} 'I love ' animal
         3:
             header: The for command
             text: 'Here you see another example of the `{for}` command:'
-            editor: <iframe class="fragment" src="/adventure/dishes/10/raw"></iframe>
+            code: |-
+                days = Monday, Tuesday, Wednesday, Thursday, Friday, Saturday, Sunday
+                names = mom, dad, Emma, Sophie
+                {for} day {in} days
+                    {print} names {at} {random} ' does the dishes on ' day
         4:
             header: Time to program!
             text: Enjoy the adventures in level 10!
@@ -456,7 +685,10 @@ levels:
         2:
             header: The for command
             text: 'This is what the new for command looks like:'
-            editor: <iframe class="fragment" src="/adventure/for_command/11/raw"></iframe>
+            code: |-
+                {for} counter {in} {range} 1 {to} 10
+                    {print} counter
+                {print} 'Ready or not. Here I come!'
         3:
             header: the variable i
             text: |-
@@ -464,7 +696,10 @@ levels:
                 You can of course use any name for the variable you want.
                 The standard name  for variables in this situation that is used in programming languages like Python is 'i'.
                 That looks like this:
-            editor: <iframe class="fragment" src="/adventure/calculator/11/raw"></iframe>
+            code: |-
+                number = 10
+                {for} i {in} {range} 1 {to} 10
+                    {print} i * number
         4:
             header: Let's start programming!
             text: Enjoy the adventures in level 11!
@@ -479,14 +714,18 @@ levels:
             text: |-
                 This level makes some changes to the usage of quotation marks.
                 From now on, **all texts** need to be in quotation marks. This includes values of variables, items on lists and text after {if} commands.
-            editor: <iframe class="fragment" src="/adventure/quotation_marks/12/raw"></iframe>
+            code: |-
+                name = 'Hedy the Robot'
+                {print} 'Hello ' name
         3:
             header: Decimal numbers
             text: |-
                 From this level on you are also allowed to use decimal numbers. This can make programs like your restaurant even better!
 
-                Numbers do not quotation marks.
-            editor: <iframe class="fragment" src="/adventure/maths/12/raw"></iframe>
+                Numbers do not need quotation marks.
+            code: |-
+                {print} 'decimal numbers now need to use a dot'
+                {print} 2.5 + 2.5
         4:
             header: Functions!
             text: |-
@@ -498,7 +737,15 @@ levels:
             text: |-
                 In this program you see an example of a function.
                 Let's see what happens if you fill in the rest of the song!
-            editor: <iframe class="fragment" src="/adventure/songs_2/12/raw"></iframe>
+            code: |-
+                {define} twinkle
+                     {print} 'Twinkle'
+                     {print} '...'
+
+                 {call} twinkle
+                 {print} 'Up above the world so high'
+                 {print} 'Like a diamond in the sky'
+                 {call} twinkle
         6:
             header: Functions
             text: As you could see in the example a function is a block of code that can be called anytime. You use `{define}` to set the function and `{call}` to use it.
@@ -516,14 +763,21 @@ levels:
             text: |-
                 The `{and}` command is always used in a combination with the {if} command.
                 This way you can check if 2 statements are true. For example:
-            editor: <iframe class="fragment" src="/adventure/and_or_command/13/raw"></iframe>
+            code: |-
+                name = {ask} 'what is your name?'
+                age = {ask} 'what is your age?'
+                {if} name {is} 'Hedy' {and} age {is} 2
+                    {print} 'You are the real Hedy!'
         3:
             header: The or command
             text: |-
                 The `{or}` works in the same way as the `{and}` command, but only 1 of the two statements has to be true.
 
                 Let's see what happens when you change the `{and}` for `{or}`.
-            editor: <iframe class="fragment" src="/adventure/and_or_command/13/raw"></iframe>
+            code: |-
+                name = {ask} 'what is your name?'
+                {if} name {is} 'Hedy' {or} name {is} 'hedy'
+                    {print} 'Welcome!!'
         4:
             header: Functions with arguments
             text: Now that you've learned how to use functions, you'll learn how to use a function with an **argument**. An argument is a variable that is used within a function. It is not used outside the function.
@@ -532,11 +786,17 @@ levels:
             text: |-
                 In this example you see how the argument 'place' is used in the function.
                 Run the code and change 'ocean' and 'sea' to something else, and see what happens.
-            editor: <iframe class="fragment" src="/adventure/functions/13/raw"></iframe>
+            code: |-
+                {define} song {with} place
+                    {print} 'My Bonnie is over the ' place
+
+                {call} song {with} 'ocean'
+                {call} song {with} 'sea'
+                {call} song {with} 'ocean'
         6:
             header: Example with variable
             text: |-
-                Now you've ssen how arguments work, you could also combine function with a question.
+                You can also combine functions with a question.
 
                 What happens if you make these changes:
                 ```
@@ -546,7 +806,13 @@ levels:
                 answer is ask 'Where is my Bonnie?'
                 call song with answer
                 ```
-            editor: <iframe class="fragment" src="/adventure/functions/13/raw"></iframe>
+            code: |-
+                {define} song {with} place
+                    {print} 'My Bonnie is over the ' place
+
+                {call} song {with} 'ocean'
+                {call} song {with} 'sea'
+                {call} song {with} 'ocean'
         7:
             header: Even more questions!
             text: |-
@@ -562,7 +828,13 @@ levels:
                 place is ask 'Where are they?'
                 call song with name, place
                 ```
-            editor: <iframe class="fragment" src="/adventure/functions/13/raw"></iframe>
+            code: |-
+                {define} song {with} place
+                    {print} 'My Bonnie is over the ' place
+
+                {call} song {with} 'ocean'
+                {call} song {with} 'sea'
+                {call} song {with} 'ocean'
         8:
             header: Let's go!
             text: Enjoy the adventures in level 13!
@@ -584,7 +856,12 @@ levels:
                   The <= means smaller than or the same as...
 
                 You can use them like this:
-            editor: <iframe class="fragment" src="/adventure/is_command/14/raw"></iframe>
+            code: |-
+                age = {ask} 'How old are you?'
+                {if} age < 13
+                    {print} 'You are younger than me!'
+                {else}
+                    {print} 'You are older than me!'
         3:
             header: Symbols
             text: |-
@@ -595,7 +872,12 @@ levels:
                 != is not
 
                 == is used in `{if}` statements.
-            editor: <iframe class="fragment" src="/adventure/default/14/raw"></iframe>
+            code: |-
+                answer = {ask} 'Do you want to learn more?'
+                {if} answer == 'yes'
+                    {print} 'Go to the next adventure!'
+                {if} answer != 'yes'
+                    {print} 'That is a shame!'
         4:
             header: Return value
             text: In the previous levels you have learned to create functions and use arguments with them. Another great use of a function is to let it calculate something for you. You can give the function a calculation and it will give you the answer of the calculation. This answer is called a **return
@@ -603,7 +885,17 @@ levels:
         5:
             header: Return value
             text: For example, in this code the function calculate_new_price will calculate the new price of any item. It will give you the new price as a return value.
-            editor: <iframe class="fragment" src="/adventure/functions/14/raw"></iframe>
+            code: |-
+                {define} calculate_new_price {with} amount, percentage
+                    percentage = percentage / 100
+                    discount_amount = amount * percentage
+                    return amount - discount_amount
+
+                old_price = {ask} 'How much is on the price tag?'
+                discount = {ask} 'What percentage is the discount?'
+
+                new_price = {call} calculate_new_price {with} old_price, discount
+                {print} 'The new price is ' new_price ' dollar'
         6:
             header: Let's get to work!
             text: Enjoy the adventures in level 14!
@@ -617,7 +909,11 @@ levels:
                 We are going to learn a new loop, the while loop! The loop continues as long as the statement is true. So don't forget to change the value in the loop.
 
                 In the example code, we continue until a correct answer has been given. If the correct answer is never given, the loop will never end!
-            editor: <iframe class="fragment" src="/adventure/while_command/15/raw"></iframe>
+            code: |-
+                answer = 0
+                {while} answer != 25
+                    answer = {ask} 'What is 5 times 5?'
+                {print} 'A correct answer has been given'
         3:
             header: Let's try it out!
             text: Enjoy the adventures in level 15!
@@ -628,7 +924,15 @@ levels:
         2:
             header: Square brackets
             text: We are going to make lists the Python way, with square brackets around the lists! We also keep the quotation marks around each item like we have learned in previous levels. We use square brackets to point out a place in a list. The at random command can not be used anymore.
-            editor: <iframe class="fragment" src="/adventure/random_command/16/raw"></iframe>
+            code: |-
+                friends = ['Ahmed', 'Ben', 'Cayden']
+                {print} friends[1] ' is the first friend on the list.'
+                {print} friends[2] ' is the second friend on the list.'
+                {print} friends[3] ' is the third friend on the list.'
+                #now we will match 2 lists using the variable i
+                lucky_numbers = [15, 18, 6]
+                {for} i {in} {range} 1 {to} 3
+                    {print} friends[i] 's lucky number is ' lucky_numbers[i]
         3:
             header: Let's try it out!
             text: Enjoy the adventures in level 16!
@@ -639,11 +943,27 @@ levels:
         2:
             header: Colon
             text: 'Now we are going to change indentation a little bit. Every time that we need an indentation, we need : at the line before the indentation.'
-            editor: <iframe class="fragment" src="/adventure/print_command/17/raw"></iframe>
+            code: |-
+                prices = ['1 million dollars', 'an apple pie', 'nothing']
+                your_price = prices[{random}]
+                {print} 'You win ' your_price
+                {if} your_price == '1 million dollars' :
+                    {print} 'Yeah! You are rich!'
+                {else}:
+                    {print} 'Better luck next time..'
         3:
             header: Elif
             text: 'In this level you can also use a new command: elif. elif is short for else if and you need it when you want to make 3 (or more!) options. Check it out!'
-            editor: <iframe class="fragment" src="/adventure/elif_command/17/raw"></iframe>
+            code: |-
+                prices = ['1 million dollars', 'an apple pie', 'nothing']
+                your_price = prices[{random}]
+                {print} 'You win ' your_price
+                {if} your_price == '1 million dollars' :
+                    {print} 'Yeah! You are rich!'
+                {elif} your_price == 'an apple pie' :
+                    {print} 'Lovely, an apple pie!'
+                {else}:
+                    {print} 'Better luck next time..'
         4:
             header: Let's try it out!
             text: Enjoy the adventures in level 17!
@@ -662,7 +982,7 @@ levels:
                 The final change we will need to make to get Python code is changing ask into input.
 
                 Click on the 'print' tab for all the examples.
-            editor: <iframe class="fragment" src="/hedy/18"></iframe>
+            editor: /hedy/18
         3:
             header: The very last adventures!
             text: Enjoy the very last adventures in level 18!

@@ -66,6 +66,16 @@ class InvalidSpaceException(WarningException):
                          fixed_result=fixed_result)  # what is the difference??
 
 
+class UnusedVariableException(WarningException):
+    def __init__(self, level, line_number, variable_name, fixed_code, fixed_result):
+        super().__init__('Unused Variable',
+                         level=level,
+                         line_number=line_number,
+                         variable_name=variable_name,
+                         fixed_code=fixed_code,
+                         fixed_result=fixed_result)
+
+
 class ParseException(HedyException):
     def __init__(self, level, location, found, fixed_code=None):
         super().__init__('Parse',
@@ -99,6 +109,13 @@ class AccessBeforeAssignException(HedyException):
 class UndefinedVarException(HedyException):
     def __init__(self, name, line_number):
         super().__init__('Var Undefined',
+                         name=name,
+                         line_number=line_number)
+
+
+class UndefinedFunctionException(HedyException):
+    def __init__(self, name, line_number):
+        super().__init__('Function Undefined',
                          name=name,
                          line_number=line_number)
 
@@ -306,6 +323,15 @@ class MissingElseForPressitException(HedyException):
 class NestedFunctionException(HedyException):
     def __init__(self):
         super().__init__('Nested Function')
+
+
+class WrongNumberofArguments(HedyException):
+    def __init__(self, name, defined_number, used_number, line_number):
+        super().__init__('Wrong Number of Arguments',
+                         name=name,
+                         defined_number=defined_number,
+                         used_number=used_number,
+                         line_number=line_number)
 
 
 class InvalidErrorSkippedException(HedyException):

@@ -42,6 +42,7 @@ class TestsPublicPrograms(HedyTester):
                     code=snippet.code,
                     level=int(snippet.level),
                     lang=snippet.language,
+                    unused_allowed=True,
                     translate=False,
                     skip_faulty=False
                 )
@@ -75,6 +76,7 @@ class TestsPublicPrograms(HedyTester):
                         print(f'{error_message} at line {location}')
                         raise E
 
+
         # # test if we are not validating previously incorrect programs
         # if snippet is not None and len(snippet.code) > 0 and snippet.error:
         #     self.single_level_tester(
@@ -85,3 +87,14 @@ class TestsPublicPrograms(HedyTester):
         #         exception=exceptions.HedyException,
         #         skip_faulty=False
         #     )
+        # test if we are not validating previously incorrect programs
+        if snippet is not None and len(snippet.code) > 0 and snippet.error:
+            self.single_level_tester(
+                code=snippet.code,
+                level=int(snippet.level),
+                lang=snippet.language,
+                translate=False,
+                unused_allowed=True,
+                exception=exceptions.HedyException,
+                skip_faulty=False
+            )

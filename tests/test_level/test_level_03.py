@@ -2,7 +2,8 @@ import textwrap
 
 import hedy
 from hedy_sourcemap import SourceRange
-from tests.Tester import HedyTester, SkippedMapping
+# from hedy_sourcemap import SourceRange
+from tests.Tester import HedyTester, SkippedMapping  # , SkippedMapping
 
 
 class TestsLevel3(HedyTester):
@@ -257,7 +258,7 @@ class TestsLevel3(HedyTester):
         code = "dieren is Hond, Kat, Kangoeroe"
         expected = "dieren = ['Hond', 'Kat', 'Kangoeroe']"
 
-        self.multi_level_tester(max_level=11, code=code, expected=expected)
+        self.multi_level_tester(max_level=11, code=code, expected=expected, unused_allowed=True)
 
     def test_assign_list_to_hungarian_var(self):
         code = textwrap.dedent("""\
@@ -276,7 +277,7 @@ class TestsLevel3(HedyTester):
         code = "dieren is Hond , Kat , Kangoeroe"
         expected = "dieren = ['Hond ', 'Kat ', 'Kangoeroe']"
 
-        self.multi_level_tester(max_level=11, code=code, expected=expected)
+        self.multi_level_tester(max_level=11, code=code, expected=expected, unused_allowed=True)
 
     def test_assign_random_value(self):
         code = textwrap.dedent("""\
@@ -305,6 +306,7 @@ class TestsLevel3(HedyTester):
             code=code,
             expected=expected,
             lang='ar',
+            unused_allowed=True,
             # translation must be off because the Latin commas will be converted to arabic commas and this is correct
             translate=False
         )
@@ -316,6 +318,7 @@ class TestsLevel3(HedyTester):
         self.multi_level_tester(
             max_level=11,
             code=code,
+            unused_allowed=True,
             expected=expected,
             lang='ar'
         )
@@ -327,6 +330,7 @@ class TestsLevel3(HedyTester):
         self.multi_level_tester(
             max_level=11,
             code=code,
+            unused_allowed=True,
             expected=expected,
             lang='ar'
         )
@@ -390,7 +394,7 @@ class TestsLevel3(HedyTester):
         code = """dieren is Hond's, Kat"s, 'Kangoeroe', "Muis\""""
         expected = """dieren = ['Hond\\\'s', 'Kat"s', '\\\'Kangoeroe\\\'', '"Muis"']"""
 
-        self.multi_level_tester(max_level=11, code=code, expected=expected)
+        self.multi_level_tester(max_level=11, code=code, expected=expected, unused_allowed=True)
 
     #
     # forward tests
@@ -686,6 +690,7 @@ class TestsLevel3(HedyTester):
         self.single_level_tester(
             code=code,
             expected=expected,
+            unused_allowed=True,
             skipped_mappings=skipped_mappings,
         )
 
@@ -829,3 +834,23 @@ class TestsLevel3(HedyTester):
                                      "print(f'{random.choice(l)}')")
 
         self.multi_level_tester(code=code, expected=expected, max_level=11)
+
+# music tests
+    def test_play_random(self):
+        code = textwrap.dedent("""\
+        notes is C4, E4, D4, F4, G4
+        play notes at random""")
+
+        expected = textwrap.dedent("""\
+        notes = ['C4', 'E4', 'D4', 'F4', 'G4']
+        play(notes_mapping.get(str(random.choice(notes)), str(random.choice(notes))))
+        time.sleep(0.5)""")
+
+        self.multi_level_tester(
+            code=code,
+            translate=False,
+            skip_faulty=False,
+            unused_allowed=True,
+            expected=expected,
+            max_level=11
+        )

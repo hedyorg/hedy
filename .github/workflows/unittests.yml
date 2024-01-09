@@ -34,13 +34,9 @@ jobs:
     - name: Install Nodejs dependencies
       run: |
         npm ci
-    # we already run this in build-tools/github/validate-tests
-    #- name: Generate grammar files
-    #  run: |
-    #    python ./content/yaml_to_lark_utils.py
-    - name: Compiling Babel translations
+    - name: Prepare backend
       run: |
-        pybabel compile -f -d translations
+        doit run backend
     - name: Calculate hedy cache key
       run: "echo value=$(ls -1 hedy.py grammars/* | sort | xargs tail -n 99999999 | sha256sum | cut -f 1 -d ' ') >> $GITHUB_OUTPUT"
       id: hedy_cache_key
