@@ -590,7 +590,7 @@ levels:
                 feedback: ¡Super!
             -   option: |-
                     ```
-                    {remove} caminado ayer {to} senderistas
+                    {remove} caminado_ayer {to} senderistas
                     ```
                 feedback: '`{remove} {from}` o `{add} {to}`, no `{remove} {to}`'
             -   option: |-
@@ -786,7 +786,7 @@ levels:
                     ```
                     {print} 'Así que eliges la ' puerta puerta
                     ```
-                feedback: Si el jugador elige puerta 3, Hedy dirá 'Así que eliges 3 3
+                feedback: Si el jugador elige la puerta 3, Hedy dirá 'Así que eliges 3 3'
             -   option: |-
                     ```
                     {print} 'Así que eliges la puerta ' puerta
@@ -796,7 +796,7 @@ levels:
                     ```
                     {print} 'Así que eliges la puerta puerta'
                     ```
-                feedback: Hedy literalmente imprimirá 'Así que eliges la puerta puerta
+                feedback: Hedy literalmente imprimirá 'Así que eliges la puerta puerta'
             hint: La segunda palabra puerta se debe reemplazar con el número, la primera aun debe seguir siendo la palabra puerta...
             correct_answer: C
             question_score: '10'
@@ -1153,7 +1153,7 @@ levels:
                 precio = 0
                 {if} comida {is} hamburguesa precio = precio + 15
                 {if} comida {is} patatas fritas precio = precio + 6
-                bebidas es {ask} '¿Qué le gustaría beber?'
+                bebidas = {ask} '¿Qué le gustaría beber?'
                 {if} bebidas {is} refresco precio = precio + 3
                 {if} bebidas {is} agua precio = precio + 1
                 {print} precio ' dólares por favor'
@@ -1230,7 +1230,7 @@ levels:
             question_score: '10'
     7:
         1:
-            question_text: ¿Cuántas líneas puedes repetir de una vez con el comando repetir en este nivel?
+            question_text: ¿Cuántas líneas puedes repetir de una vez con el comando `{repeat}` en este nivel?
             mp_choice_options:
             -   option: '0'
                 feedback: No, puedes repetir una línea.
@@ -1291,9 +1291,7 @@ levels:
                 {repeat} 7 {times} {print} 'da ba dee, da ba da'
             mp_choice_options:
             -   option: |-
-                    ```
-                    I'm
-                    ```
+                    `I'm`
                 feedback: ¡Eso es!
             -   option: '`{print}`'
                 feedback: '`{print}` está mal escrito'
@@ -1322,28 +1320,32 @@ levels:
                 {repeat} 3 {times} {print} ' giran y giran'
             mp_choice_options:
             -   option: |-
+                    ```
                     las ruedas del bus
-                    giran y giran
+                    giran y giran```
                 feedback: Sólo la segunda línea se repite 3 veces
             -   option: |-
+                    ```
                     las ruedas del bus
                     las ruedas del bus
                     las ruedas del bus
-                    giran y giran
+                    giran y giran```
                 feedback: Sólo la segunda línea se repite 3 veces
             -   option: |-
+                    ```
                     las ruedas del bus
                     giran y giran
                     las ruedas del bus
                     giran y giran
                     las ruedas del bus
-                    giran y giran
+                    giran y giran```
                 feedback: Sólo la segunda línea se repite 3 veces
             -   option: |-
+                    ```
                     las ruedas del bus
                     giran y giran
                     giran y giran
-                    giran y giran
+                    giran y giran```
                 feedback: ¡Por toda la ciudad! ¡Perfecto!
             hint: Sólo 'giran y giran' se repite 3 veces.
             correct_answer: D
@@ -1355,24 +1357,32 @@ levels:
                 {print} '¡A SACUDIRTE!'
             mp_choice_options:
             -   option: |-
+                    ```
                     Vamos Vamos
                     ¡A SACUDIRTE!
+                    ```
                 feedback: '''Vamos'' no aparecerá dos veces en la misma línea'
             -   option: |-
+                    ```
                     Vamos
                     Vamos
                     ¡A SACUDIRTE!
+                    ```
                 feedback: Great!
             -   option: |-
+                    ```
                     Vamos
                     ¡A SACUDIRTE!
                     Vamos
                     ¡A SACUDIRTE!
+                    ```
                 feedback: ¡A SACUDIRTE! no sé repetirá
             -   option: |-
+                    ```
                     Vamos
                     ¡A SACUDIRTE!
-                feedback: Cuidado con el comando repetir
+                    ```
+                feedback: Cuidado con el comando `{repeat}`
             hint: Cuidado con el comando `{repeat}`.
             correct_answer: B
             question_score: '10'
@@ -1398,7 +1408,7 @@ levels:
                     ```
                     {repeat} 2 {times} {print} 'Ahí viene el Sol'
                     {print} 'Y digo'
-                    {print} 'Todo está bien'
+                    {print} 'Todo está bien'```
                 feedback: ¿Dónde dejaste 'Do do do do'?
             -   option: |-
                     ```
@@ -1407,7 +1417,7 @@ levels:
                     {print} 'Y digo'
                     {print} 'Todo está bien'
                     ```
-                feedback: Este no es el orden correcto..
+                feedback: Este no es el orden correcto.
             -   option: |-
                     ```
                     {repeat} 2 {times} {print} 'Ahí viene el Sol'
@@ -1415,7 +1425,7 @@ levels:
                     {print} 'Y digo'
                     {print} 'Todo está bien'
                     ```
-                feedback: Este no es el orden correcto..
+                feedback: Este no es el orden correcto.
             hint: '`{repeat}` sólo se puede usar si quieres ejecutar la misma línea varias veces seguidas.'
             correct_answer: A
             question_score: '10'
@@ -1432,7 +1442,7 @@ levels:
             -   option: |-
                     ```
                     {print} 'Batman estaba volando por Gotham. '
-                    {print} '¡Cuando de repente oyó a alguien gritar!'
+                    {print} 'Cuando de repente oyó a alguien gritar…'
                     {print} '¡Ayuda!'
                     {repeat} 3 {times} {print} '¡Por favor ayúdadme!'
                     ```
@@ -1440,7 +1450,7 @@ levels:
             -   option: |-
                     ```
                     {print} 'Batman estaba volando por Gotham.'
-                    {print} '¡Cuando de repente oyó a alguien gritar!'
+                    {print} 'Cuando de repente oyó a alguien gritar…'
                     {repeat} 3 {times} '¡Ayuda!'
                     {print} '¡Por favor ayúdadme!'
                     ```
@@ -1448,7 +1458,7 @@ levels:
             -   option: |-
                     ```
                     {print} Batman estaba volando por Gotham.
-                    {print} ¡Cuando de repente oyó a alguien gritar!
+                    {print} Cuando de repente oyó a alguien gritar…
                     {repeat} 3 {times} {print} ¡Ayuda!
                     {print} ¡Por favor ayúdadme!
                     ```
@@ -1456,7 +1466,7 @@ levels:
             -   option: |-
                     ```
                     {print} 'Batman estaba volando por Gotham.'
-                    {print} '¡Cuando de repente oyó a alguien gritar!'
+                    {print} 'Cuando de repente oyó a alguien gritar…'
                     {repeat} 3 {times} {print} '¡Ayuda!'
                     {print} '¡Por favor ayúdadme!'
                     ```
@@ -1582,7 +1592,7 @@ levels:
                     Baby shark
                     Baby shark
                     Baby shark
-                feedback: Qué se repite y qué no.
+                feedback: ¿Qué se repite y qué no ?
             hint: ¿Qué se está repitiendo y qué no?
             correct_answer: C
             question_score: '10'
@@ -1952,7 +1962,7 @@ levels:
             -   option: '`{if}` `{else}` `{repeat}`'
                 feedback: ¡Sigue así!
             -   option: '`{if}` `{else}` `{repeat}` `{print}`'
-                feedback: No con {print}
+                feedback: No con `{print}`
             hint: La sangría ocurre en la línea inferior de algunos comandos
             correct_answer: C
             question_score: '10'
@@ -2038,7 +2048,7 @@ levels:
             code: |-
                 1 {repeat} 2 {times}
                 2 {if} nivel {is} 9
-                3 {print} ¡Gran trabajo!
+                3 {print} '¡Gran trabajo!'
             mp_choice_options:
             -   option: Todas las líneas deberían empezar con 4 espacios
                 feedback: Sólo las líneas 2 y 3 deberían empezar con espacios
@@ -3548,18 +3558,18 @@ levels:
         1:
             question_text: ¿Qué comando debería rellenar los espacios en blancos para imprimir un snack aleatorio?
             code: |-
-                snacks = nachos, chips, cucumber, sweets
+                aperitivos = nachos, patatas, pepino, dulces
                 {print} _
             mp_choice_options:
-            -   option: '`snacks {at} {random}`'
-                feedback: This is the old way.
-            -   option: '`[{random} snack]`'
+            -   option: '`aperitivos {at} {random}`'
+                feedback: Esta es la manera antigua.
+            -   option: '`[{random} aperitivo]`'
                 feedback: El orden está mal.
-            -   option: '`snacks[{random}]`'
-                feedback: Correct
-            -   option: '`snacks[{at} {random}]`'
-                feedback: We do not need `at`anymore
-            hint: We no longer use {at}
+            -   option: '`aperitivos[{random}]`'
+                feedback: Correcto
+            -   option: '`aperitivos[{at} {random}]`'
+                feedback: Ya no vamos a necesitar `at` más
+            hint: Ya no vamos a usar {at}
             correct_answer: C
             question_score: '10'
         2:
@@ -3572,29 +3582,29 @@ levels:
             mp_choice_options:
             -   option: |-
                     ```
-                    friends[i] has to do chores [i]
+                    amigos[i] tiene que hacer tareas_de_casa [i]
                     ```
-                feedback: Mind the spacing.
+                feedback: Cuidado con el espacio.
             -   option: |-
                     ```
-                    friends[1] has to do chores[1]
+                    amigos[1] tiene que hacer tareas_de_casa[1]
                     ```
                 feedback: It will print 3 times that Wesley has to do the cooking
             -   option: |-
                     ```
-                    chores[i] ' has to do ' friends[random]
+                    tareas_de_casa[i] ' tiene que hacer ' amigos[random]
                     ```
-                feedback: The person has to do the chore, not the other way around
+                feedback: La persona tiene que hacer la tarea, no al revés
             -   option: |-
                     ```
-                    friends[i] ' has to do ' chores[i]
+                    amigos[i] ' tiene que hacer ' tareas_de_casa[i]
                     ```
-                feedback: Fantastic!
-            hint: '`i` tells us what item in the list it is. So friend 1 does chore 1 etc.'
+                feedback: ¡Fantastico!
+            hint: '`i` nos dice que objeto de la lista es. Así que amigo 1 hace tarea 1 etc.'
             correct_answer: D
             question_score: '10'
         3:
-            question_text: What is a possible output for this program?
+            question_text: ¿Cuál es un resultado posible para este programa?
             code: |-
                 friends = ['Wesley', 'Eric', 'Kaylee']
                 chore = [the cooking, the cleaning, nothing]
@@ -3603,37 +3613,37 @@ levels:
             mp_choice_options:
             -   option: |-
                     ```
-                    Wesley has to do the cooking
-                    Eric has to do the cleaning
-                    Kaylee has to do nothing
+                    Wesley tiene que cocinar
+                    Eric tiene que limpiar
+                    Kaylee tiene que hacer nada
                     ```
-                feedback: Super!
+                feedback: ¡Super!
             -   option: |-
                     ```
-                    Kaylee has to do the cooking
-                    Wesley has to do the cleaning
-                    Eric has to do nothing
+                    Kaylee tiene que cocinar
+                    Wesley tiene que limpiar
+                    Eric tiene que hacer nada
                     ```
-                feedback: No, it is not random.
+                feedback: No, no es aleatorio.
             -   option: |-
                     ```
-                    Wesley has to do the cooking
-                    Wesley has to do the cleaning
-                    Wesley has to do the nothing
+                    Wesley tiene que cocinar
+                    Wesley tiene que limpiar
+                    Wesley tiene que hacer nada
                     ```
-                feedback: Poor Wesley!
+                feedback: ¡Pobre Wesley!
             -   option: |-
                     ```
-                    Wesley has to do the cooking
-                    Wesley has to do the cooking
-                    Wesley has to do the cooking
+                    Wesley tiene que cocinar
+                    Wesley tiene que cocinar
+                    Wesley tiene que cocinar
                     ```
-                feedback: That's not it
-            hint: It's not random...
+                feedback: No es así
+            hint: No es aleatorio...
             correct_answer: A
             question_score: '10'
         4:
-            question_text: What is wrong with this code?
+            question_text: ¿Qué está mal en este código?
             code: |-
                 friends = ['Jaylee', 'Erin', 'Fay']
                 lucky_numbers = [15, 18, 6]
@@ -3641,27 +3651,27 @@ levels:
                     print 'the lucky number of ' friends[i]
                     print 'is ' lucky_numbers[i]
             mp_choice_options:
-            -   option: The variable in line 4 should be 'friend[i]', not 'friends[i]'
-                feedback: That is not right.
-            -   option: Line 3 should say 'in range 1 to 3' not 'in range 0 to 3'
-                feedback: Good catch!
+            -   option: En la línea 4 la variable debería ser 'amigo[i]', no 'amigos[i]'
+                feedback: Eso no es cierto.
+            -   option: La línea 3 debería decir 'en rango 1 a 3' no 'en rango 0 a 3'
+                feedback: ¡Bien visto!
             -   option: Line 4 should say 'lucky_number', not 'lucky number
-                feedback: It's not a variable, it's just text.
-            -   option: '{in} in line 3 should be removed'
-                feedback: That's not it
+                feedback: No es una variable, sólo es texto.
+            -   option: 'Se debería borrar {in} en la línea 3'
+                feedback: No es eso
             hint: There's nothing wrong with line 4
             correct_answer: B
             question_score: '10'
         5:
-            question_text: Which line should be filled in in the blank?
+            question_text: ¿Qué línea debería llenar el espacio en blanco?
             code: |-
                 animals = ['dog', 'cow', 'horse']
                 _
                 {for} i {in} {range} 1 {to} 3
                     {print} 'the ' animals[i] ' says ' sounds[i]
             mp_choice_options:
-            -   option: noises = ['moo', 'woof', 'neigh']
-                feedback: Mind the variable name and the order of the sounds.
+            -   option: ruidos = ['moo', 'woof', 'neigh']
+                feedback: Cuidado con el nombre de la variable y el orden de los sonidos.
             -   option: sounds = '[woof], [moo], [neigh]'.
                 feedback: Look at line one to see how brackets are supposed to be used.
             -   option: sounds = [woof, moo, neigh]
