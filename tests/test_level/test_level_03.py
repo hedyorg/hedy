@@ -882,3 +882,21 @@ class TestsLevel3(HedyTester):
             expected=expected,
             max_level=11
         )
+
+
+def test_play_chord(self):
+    code = textwrap.dedent("""\
+    play C4 E4 D4""")
+
+    expected = textwrap.dedent("""\
+    play(notes_mapping.get(str(C4), notes_mapping.get(str(C4), notes_mapping.get(str(C4))))
+    time.sleep(0.5)""")
+
+    self.multi_level_tester(
+        code=code,
+        translate=False,
+        skip_faulty=False,
+        unused_allowed=True,
+        expected=expected,
+        max_level=11
+    )
