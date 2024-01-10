@@ -386,7 +386,11 @@ def babel_version_unchanged(task, values):
 
 
 def is_running_on_heroku():
-    return 'ON_HEROKU' in os.environ
+    """Return True if we are running on Heroku.
+
+    Check an environment variable that Heroku sets by default.
+    """
+    return 'DYNO' in os.environ
 
 
 # These are used in more than one task. Find all .po files, and calculate the
