@@ -45815,9 +45815,9 @@ notes_mapping = {
   function styleTags(spec) {
     let byName = Object.create(null);
     for (let prop in spec) {
-      let tags2 = spec[prop];
-      if (!Array.isArray(tags2))
-        tags2 = [tags2];
+      let tags3 = spec[prop];
+      if (!Array.isArray(tags3))
+        tags3 = [tags3];
       for (let part of prop.split(" "))
         if (part) {
           let pieces = [], mode = 2, rest = part;
@@ -45845,7 +45845,7 @@ notes_mapping = {
           let last = pieces.length - 1, inner = pieces[last];
           if (!inner)
             throw new RangeError("Invalid path: " + part);
-          let rule = new Rule(tags2, mode, last > 0 ? pieces.slice(0, last) : null);
+          let rule = new Rule(tags3, mode, last > 0 ? pieces.slice(0, last) : null);
           byName[inner] = rule.sort(byName[inner]);
         }
     }
@@ -45853,8 +45853,8 @@ notes_mapping = {
   }
   var ruleNodeProp = new NodeProp();
   var Rule = class {
-    constructor(tags2, mode, context2, next) {
-      this.tags = tags2;
+    constructor(tags3, mode, context2, next) {
+      this.tags = tags3;
       this.mode = mode;
       this.context = context2;
       this.next = next;
@@ -45878,9 +45878,9 @@ notes_mapping = {
     }
   };
   Rule.empty = new Rule([], 2, null);
-  function tagHighlighter(tags2, options) {
+  function tagHighlighter(tags3, options) {
     let map3 = Object.create(null);
-    for (let style of tags2) {
+    for (let style of tags3) {
       if (!Array.isArray(style.tag))
         map3[style.tag.id] = style.class;
       else
@@ -45889,9 +45889,9 @@ notes_mapping = {
     }
     let { scope, all = null } = options || {};
     return {
-      style: (tags3) => {
+      style: (tags4) => {
         let cls = all;
-        for (let tag of tags3) {
+        for (let tag of tags4) {
           for (let sub of tag.set) {
             let tagClass = map3[sub.id];
             if (tagClass) {
@@ -45905,10 +45905,10 @@ notes_mapping = {
       scope
     };
   }
-  function highlightTags(highlighters, tags2) {
+  function highlightTags(highlighters, tags3) {
     let result = null;
     for (let highlighter of highlighters) {
-      let value = highlighter.style(tags2);
+      let value = highlighter.style(tags3);
       if (value)
         result = result ? result + " " + value : value;
     }
@@ -58215,12 +58215,13 @@ pygame.quit()
     }
   }
   function goToLevel(level2) {
-    window.location.hash = "";
-    let newPath = window.location.pathname.replace(/\d+/, level2);
+    const hash = window.location.hash;
+    let newPath = window.location.pathname.replace(/\/\d+/, `/${level2}`);
     if (!newPath.includes(level2)) {
       newPath = window.location.pathname + `/${level2}`;
     }
     window.location.pathname = newPath;
+    window.location.hash = hash;
   }
 
   // static/js/htmx-integration.ts
@@ -76695,7 +76696,8 @@ pygame.quit()
   function applyFilter(term, type, filtered) {
     var _a3, _b;
     term = term.trim();
-    filtered[type] = filtered[type] || { term, exclude: [] };
+    filtered[type] = filtered[type] || { exclude: [] };
+    filtered[type]["term"] = term;
     const filterExist = document.querySelector("#search_adventure").value || document.querySelector("#language").value || document.querySelector("#tag").value;
     if (!term) {
       filtered[type] = { term, exclude: [] };
@@ -76710,18 +76712,26 @@ pygame.quit()
     }
     for (const adv of adventures) {
       let toValidate;
+      let skip2 = false;
       if (type === "search") {
         toValidate = (_a3 = adv.querySelector(".name")) == null ? void 0 : _a3.innerHTML;
       } else if (type === "lang") {
         toValidate = adv.getAttribute("data-lang");
       } else {
-        const tags2 = ((_b = adv.querySelector("#tags-list")) == null ? void 0 : _b.children) || [];
-        const tagNames = [];
-        for (const t2 of tags2) {
-          tagNames.push(t2.innerHTML);
+        const advTags = ((_b = adv.querySelector("#tags-list")) == null ? void 0 : _b.children) || [];
+        for (const t2 of advTags) {
+          const value = t2.innerHTML.trim();
+          if (term.includes(value)) {
+            if (filtered[type].exclude.some((a) => a === adv)) {
+              filtered[type].exclude = filtered[type].exclude.filter((a) => a !== adv);
+            }
+            skip2 = true;
+            break;
+          }
         }
-        toValidate = tagNames.join(" ");
       }
+      if (skip2)
+        continue;
       if (term && (toValidate == null ? void 0 : toValidate.includes(term))) {
         if (filtered[type].exclude.some((a) => a === adv)) {
           filtered[type].exclude = filtered[type].exclude.filter((a) => a !== adv);
@@ -76746,6 +76756,12 @@ pygame.quit()
       }
     }
   }
+  var tags2 = document.getElementById("tag");
+  var tagsInstance = _r.getInstance(tags2);
+  tags2 == null ? void 0 : tags2.addEventListener("valueChange.te.select", () => {
+    const value = tagsInstance.value.join(",");
+    applyFilter(value.replaceAll(",", " "), "tags", window.$filtered || {});
+  });
   return js_exports;
 })();
 /*!

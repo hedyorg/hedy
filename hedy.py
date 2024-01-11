@@ -1179,6 +1179,12 @@ class IsValid(Filter):
     def error_list_access(self, meta, args):
         raise exceptions.MisspelledAtCommand(command='at', arg1=str(args[1][1]), line_number=meta.line)
 
+    def error_add_missing_to(self, meta, args):
+        raise exceptions.MissingAdditionalCommand(command='add', line_number=meta.line)
+
+    def error_remove_missing_from(self, meta, args):
+        raise exceptions.MissingAdditionalCommand(command='remove', line_number=meta.line)
+
     def error_non_decimal(self, meta, args):
         raise exceptions.NonDecimalVariable(line_number=meta.line)
 
@@ -1230,6 +1236,10 @@ class IsValid(Filter):
     def error_repeat_no_times(self, meta, args):
         raise exceptions.IncompleteRepeatException(command='times', level=self.level, line_number=meta.line)
 
+    def error_repeat_dep_8(self, meta, args):
+        # repeat is no longer usable this way, raise!
+        raise hedy.exceptions.WrongLevelException(7, 'repeat', "repeat_dep", meta.line)
+
     def error_text_no_print(self, meta, args):
         raise exceptions.LonelyTextException(level=self.level, line_number=meta.line)
 
@@ -1247,6 +1257,15 @@ class IsValid(Filter):
     def error_ifpressed_missing_else(self, meta, args):
         raise exceptions.MissingElseForPressitException(
             command='ifpressed_else', level=self.level, line_number=meta.line)
+
+    def error_for_missing_in(self, meta, args):
+        raise exceptions.InvalidForCommandException(command='in', level=self.level, line_number=meta.line)
+
+    def error_for_missing_to(self, meta, args):
+        raise exceptions.InvalidForCommandException(command='to', level=self.level, line_number=meta.line)
+
+    def error_for_missing_command(self, meta, args):
+        raise exceptions.IncompleteCommandException(incomplete_command='for', level=self.level, line_number=meta.line)
 
     def error_nested_define(self, meta, args):
         raise exceptions.NestedFunctionException()
