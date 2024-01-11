@@ -2657,6 +2657,80 @@ adventures:
                     {if} answer {is} Harare {play} C6
                     _
                     ```
+            6:
+                story_text: |
+                    Instead of playing notes, you can also play numbers now. Simply type `{play} 1` for the lowest note, `{play} 70 for the highest note, or anything in between.
+
+                    ### Exercise
+                     This calls for musical maths! Play the note that belongs to the sum of both numbers.
+
+                    Then, see if you can compose a song using the numbers.
+                example_code: |
+                    ```
+                    number_1 = {ask} 'Say a random number'
+                    number_2 {is} {ask} 'Say another one!'
+                    sum = number_1 + number_2
+                    {print} number_1 ' and ' number_2 ' together is ' sum
+                    {print} 'This is what ' sum ' sounds like:
+                    {play} _
+                    ```
+            7:
+                story_code: |
+                    Using the `{repeat}` command can make your codes for melodies a lot shorter!
+
+                    ### Exercise
+                    Finish the code for Twinkle Twinkle Little Star by using the `{repeat}`command.
+                    Then go back to the songs you've made in the previous levels. Can you shorten those codes too?
+
+                example_code: |
+                    ```
+                    {print} 'Twinkle Twinkle Little Star'
+                    {repeat} 2 {times} {play} C4
+                    {repeat} 2 {times} {play} G4
+                    _
+                    ```
+            8:
+                story_text: |
+                    Now that we can use the `{repeat}` command for multiple lines, we can make songs even more easily!
+
+                    ### Exercise
+                    Finish the song of Brother John (Frère Jaques). Don't forget to use `{repeat}`!
+                example_code: |
+                    ```
+                    {print} 'Borther John'
+                    {repeat} 2 {times}
+                        {play} C
+                        {play} D
+                        {play} E
+                        {play} C
+                    {repeat} 2 {times}
+                        {play} E
+                        {play} F
+                        {play} G
+                        {sleep} 1
+                    ```
+            9:
+                story_text: |
+                    From this level on you can - among other things - use a {repeat} command inside a {repeat} command.
+                    That makes songs like 'Happy birthday' even shorter!
+
+                    ### Exercise
+                    Finish the song!
+                example_code: |
+                    ```
+                    first_time {is} yes
+                    {repeat} 2 {times}
+                        {repeat} 2 {times}
+                            {play} D
+                        {play} E
+                        {play} D
+                        {if} first_time {is} yes
+                            {play} G
+                            first_time {is} no
+                        {else} {play} A
+                        {play} F
+                    _
+                    ```
     parrot:
         name: Parrot
         default_save_name: Parrot
