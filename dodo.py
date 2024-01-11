@@ -25,6 +25,8 @@ from os import path
 from glob import glob
 import sys
 
+from doit.tools import LongRunning
+
 
 # The current Python interpreter, use to run other Python scripts as well
 python3 = sys.executable
@@ -53,6 +55,10 @@ def task_npm():
             ---> npm ci       # install exactly the point versions found in the lock file
     ```
     """
+    # This task gives problems whhen deploying to Heroku, so not execute it if we are there
+    if is_running_on_heroku():
+        return dict(title=lambda _: 'Do not install NPM on Heroku', actions=[])
+
     return dict(
         # `package-lock.json` contains the actual dependency versions that `npm ci` will install
         file_dep=['package-lock.json'],
@@ -274,6 +280,31 @@ def task_extract():
     )
 
 
+def task_devserver():
+    """Run a copy of the development server.
+
+    This server is configured to be useful for running cypress tests against.
+
+    No file dependencies, so this task is never skipped.
+
+    Be careful to only depend on `backend` tasks, not `frontend` tasks, so that
+    the people running this command still don't need to have Node installed
+    if they don't want to work on the frontend.
+    """
+    return dict(
+        title=lambda _: 'Run development server',
+        task_dep=['backend'],
+        actions=[
+            LongRunning([python3, 'app.py'], shell=False, env=dict(
+                os.environ,
+                # These are required to make some local features work.
+                BASE_URL="http://localhost:8080/",
+                ADMIN_USER="admin"))
+        ],
+        verbosity=2,  # show everything live
+    )
+
+
 ######################################################################################
 # Some useful task groups
 #
@@ -352,6 +383,14 @@ def babel_version_unchanged(task, values):
     task.value_savers.append(save_on_success)
 
     return values.get('babel-version') == babel_version
+
+
+def is_running_on_heroku():
+    """Return True if we are running on Heroku.
+
+    Check an environment variable that Heroku sets by default.
+    """
+    return 'DYNO' in os.environ
 
 
 # These are used in more than one task. Find all .po files, and calculate the
