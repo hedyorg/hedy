@@ -17,16 +17,38 @@
                     hedyApp.applyFilter(searchTerm, 'search', $filtered)">
         </div>
         <div class="flex gap-2">
+            <div id="levels">
+                <select id="level"
+                    data-te-select-init
+                    name="level"
+                    required
+                    class="block appearance-none w-full border border-gray-200 text-gray-700 p-2 rounded"
+                    hx-trigger="change"
+                    hx-get="/public-adventures/filter"
+                    hx-include="[name='adv-language'], [name='level']"
+                    hx-target="#public-adventures-body"
+                        >
+                    <option value="">{{_('select_level')}}</option>
+                    {% for level in customizations["available_levels"] %}
+                        <option value="{{ level }}"
+                          {% if selectedLevel|string == level|string %}selected{% endif %}
+                        >{{ level }}</option>
+                    {% endfor %}
+                </select>
+            </div>
             <div id="languages">
                 <select id="language"
                     data-te-select-init
                     data-te-select-placeholder="{{_('select_lang')}}"
-                    name="language"
+                    name="adv-language"
                     required
                     class="block appearance-none w-full border border-gray-200 text-gray-700 p-2 rounded"
-                    _="on change set lang to my value
-                        hedyApp.applyFilter(lang, 'lang', $filtered)">
-                    <option value="" selected>{{_('select_lang')}}</option>
+                    hx-trigger="change"
+                    hx-get="/public-adventures/filter"
+                    hx-include="[name='adv-language'], [name='level']"
+                    hx-target="#public-adventures-body"
+                    >
+                    <option value="">{{_('select_lang')}}</option>
                     {% for lang in available_languages %}
                         <option value="{{lang or current_language().lang}}">{{lang_to_sym(lang or current_language().lang)}}</option>
                     {% endfor %}
@@ -49,18 +71,11 @@
             </div>
         </div>
     </div>
-    <div id="adventures" class="card-container gap-2">
-        {% if adventures|length == 0 %}
-            <div class="grid p-5 text-center bg-white shadow-md rounded-lg transition-shadow hover:shadow-lg outline-blue-400 hover:outline hover:outline-2">
-                {{_('no_adventures_yet')}}
-                <button class="green-btn mt-4" id="create_adventure_button"
-                    onclick='hedyApp.create_adventure({{_('adventure_prompt')|default(None)|tojson}})'
-                    {% if second_teacher and role=='viewer' %}disabled{% endif %}>{{_('create_adventure')}}</button>
-            </div>
-        {%endif%}
-        {% for adventure in adventures %}
-            {{ render_partial('htmx-adventure-card.html', user=user, adventure=adventure) }}
-        {% endfor %}
-    </div>
+
+    <!-- <div id="adventures" class="card-container gap-2"> -->
+      <div id="public-adventures-body">
+        {% include "public-adventures-body.html" %}
+      </div>
+
 
 {% endblock %}
