@@ -2561,44 +2561,101 @@ adventures:
                     ```
             2:
                 story_text: |-
-                    Finish the songs!
+                    Finish the songs! We have started the codes for 3 melodies.
+                    As you can see, you can also use the `{sleep}` command to add a little pause in the song.
                 example_code: |
                     ```
-                    print Twinkle Twinkle Little Star
-                    play C
-                    play C
-                    play G
-                    play G
-                    play A
-                    play A
-                    play G
-                    sleep 1
-                    play F
-                    play F
+                    {print} Twinkle Twinkle Little Star
+                    {play} C
+                    {play} C
+                    {play} G
+                    {play} G
+                    {play} A
+                    {play} A
+                    {play} G
+                    {sleep} 1
+                    {play} F
+                    {play} F
                 example_code_2: |
                     ```
-                    print Happy Birthday
-                    play G4
-                    play G4
-                    play A4
-                    play G4
-                    play C5
-                    play B4
-                    sleep 1
-                    play G4
-                    play G4
+                    {print} Happy Birthday
+                    {play} G4
+                    {play} G4
+                    {play} A4
+                    {play} G4
+                    {play} C5
+                    {play} B4
+                    {sleep} 1
+                    {play} G4
+                    {play} G4
                     ```
                 example_code_3: |
-                    print Old Mac Donald had a farm
-                    play C5
-                    play C5
-                    play C5
-                    play G4
-                    play A4
-                    play A4
-                    play G4
-                    sleep 1
-                    play E5
+                    {print} Old Mac Donald had a farm
+                    {play} C5
+                    {play} C5
+                    {play} C5
+                    {play} G4
+                    {play} A4
+                    {play} A4
+                    {play} G4
+                    ```
+            3:
+                story_text: |
+                    Create a random melody!
+
+                    ### Exercise
+                    The example code creates a random melody, but it's very short and not many notes are used.
+                    Add more notes to the list and create a longer melody by copying the last line a couple more times.
+
+                example_code: |
+                    ```
+                    notes {is} A4, B4, C4
+                    {play} notes {at} {random}
+                    {play} notes {at} {random}
+                    {play} notes {at} {random}
+                    ```
+            4:
+                story_text: |
+                    Use the `{clear}` command to create a karaokemachine!
+
+                    ### Exercise
+                    Finish the karaoke version of 'Mary had a little lamb'.
+                    Then, create a karaoke version of any song you'd like!
+                example_code: |
+                    ```
+                    {print} 'Mary had a little lamb'
+                    {play} E
+                    {play} D
+                    {play} C
+                    {play} D
+                    {play} E
+                    {play} E
+                    {play} E
+                    {clear}
+                    {print} 'Little lamb, little lamb'
+                    {play} D
+                    {play} D
+                    {play} D
+                    {play} E
+                    {play} E
+                    {play} E
+                    {clear}
+                    {print} 'Mary had a little lamb'
+                    {play} E
+                    ```
+            5:
+                story_text: |
+                    You don't always have to use the `{play}` command to play a whole song, sometimes you just want to play one note.
+                    For example, if you want to make a quiz, you can play a happy high note if the answer is right and a sad low note if the answer is wrong.
+
+                    ### Exercise
+                    Finish the first question by adding a line of code that plays a C3 note if the wrong answer is given.
+                    Then think of 3 more questions to add to this quiz.
+                example_code: |
+                    ```
+                    answer {is} {ask} 'What is the capital of Zimbabwe?'
+                    {if} answer {is} Harare {play} C6
+                    _
                     ```
     parrot:
         name: Parrot

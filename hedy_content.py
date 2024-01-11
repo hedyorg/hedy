@@ -69,6 +69,7 @@ ADVENTURE_ORDER_PER_LEVEL = {
         'random_command',
         'dice',
         'rock',
+        'music',
         'fortune',
         'restaurant',
         'add_remove_command',
@@ -90,6 +91,7 @@ ADVENTURE_ORDER_PER_LEVEL = {
         'turtle',
         'turtle_draw_it',
         'clear_command',
+        'music',
         'story',
         'haunted',
         'fortune',
@@ -99,6 +101,7 @@ ADVENTURE_ORDER_PER_LEVEL = {
     5: [
         'default',
         'if_command',
+        'music',
         'language',
         'dice',
         'dishes',
