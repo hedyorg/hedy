@@ -2531,6 +2531,66 @@ adventures:
                     ```
 
                     {print} 2.5 + 2.5
+    music:
+        name: music
+        default_save_name: music
+        description: "Play a tune!"
+        levels:
+            1:
+                story_text: |-
+                    uitleg
+                example_code: |-
+                    ```
+                    play C4
+                    play D4
+                    play E4
+                    play F4
+                    play G4
+                    play A4
+                    play B4
+                    play C5
+                    ```
+            2:
+                story_text: |-
+                    Finish the songs!
+                example_code: |
+                    ```
+                    print Twinkle Twinkle Little Star
+                    play C
+                    play C
+                    play G
+                    play G
+                    play A
+                    play A
+                    play G
+                    sleep 1
+                    play F
+                    play F
+                example_code_2: |
+                    ```
+                    print Happy Birthday
+                    play G4
+                    play G4
+                    play A4
+                    play G4
+                    play C5
+                    play B4
+                    sleep 1
+                    play G4
+                    play G4
+                    ```
+                example_code_3: |
+                    print Old Mac Donald had a farm
+                    play C5
+                    play C5
+                    play C5
+                    play G4
+                    play A4
+                    play A4
+                    play G4
+                    sleep 1
+                    play E5
+                    ```
     parrot:
         name: Parrot
         default_save_name: Parrot
