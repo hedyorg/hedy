@@ -777,7 +777,6 @@ def translate_error(code, arguments, keyword_lang):
         'else',
         'command',
         'incomplete_command',
-        'guessed_command',
         'print',
         'ask',
         'echo',
