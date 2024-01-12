@@ -777,6 +777,7 @@ def translate_error(code, arguments, keyword_lang):
         'else',
         'command',
         'incomplete_command',
+        'missing_command',
         'print',
         'ask',
         'echo',
@@ -786,6 +787,7 @@ def translate_error(code, arguments, keyword_lang):
     arguments_that_require_highlighting = [
         'command',
         'incomplete_command',
+        'missing_command',
         'guessed_command',
         'invalid_argument',
         'invalid_argument_2',
