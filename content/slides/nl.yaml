@@ -27,25 +27,25 @@ levels:
         5:
             header: Programmeren met Hedy
             text: In Hedy gebruiken we speciale codes, zoals `{print}`.
-            code: '{print} Welcome to Hedy!'
+            code: '{print} Welkom bij Hedy!'
         6:
             header: Programmeren met Hedy
             text: De code woorden worden in Hedy altijd roze.
-            code: '{print} Welcome to Hedy!'
+            code: '{print} Welkom bij Hedy!'
         7:
             header: Programmeren met Hedy
             text: Je kan je code opstarten met de Voer code uit knop onder het programmeerveld.
-            code: '{print} Welcome to Hedy!'
+            code: '{print} Welkom bij Hedy!'
         8:
             header: Programmeren met Hedy
             text: De uitvoer verschijnt dan aan de rechterkant.
-            code: '{print} Welcome to Hedy!'
+            code: '{print} Welkom bij Hedy!'
         9:
             header: Programmeren met Hedy
             text: De uitvoer kan ook een tekening zijn.
             code: |-
-                {forward} 100
-                {turn} left
+                {vooruit} 100
+                {draai} links
     1:
         1:
             header: Welkom bij level 1!
@@ -59,7 +59,7 @@ levels:
                 De eerste code die je kan gebruiken in level 1 is `{print}`.
 
                 `print` zorgt ervoor dat er tekst in het uitvoerveld komt.
-            code: '{print} Show text on the screen'
+            code: '{print} Presenteer tekst op het scherm'
         3:
             header: 'Hedy level 1: {ask}'
             text: |-
@@ -67,8 +67,8 @@ levels:
 
                 Met `{ask}` kan je een vraag stellen die moet worden beantwoord.
             code: |-
-                {print} Welcome to your own rock scissors paper!
-                {ask} What will you choose?
+                {print} Welkom bij Hedy!
+                {print} Start nu met programmeren!
         4:
             header: 'Hedy level 1: {echo}'
             text: |-
@@ -76,56 +76,55 @@ levels:
 
                 Met `{echo}` kan je de invoer van een `{ask}` herhalen.
             code: |-
-                {print} Hello!
-                {ask} What is your name?
-                {echo} hello
+                {print} Welkom bij je eigen steen papier schaar!
+                {ask} Wat is je keuze?
         5:
-            header: Programmeren maar!
+            header: '{echo}'
             text: |-
                 Met `{print}`, `{ask}` en `{echo}` kun je al een klein verhaal programmeren.
                 Dit is een goed moment om de Papegaai, Verhaal en Steen, Schaar, Papier avonturen te proberen.
             code: |-
-                {print} Hello!
-                {ask} What is your name?
-                {echo} hello
+                {print} Hallo!
+                {vraag} Wat is je naam?
+                {echo} Hallo
         6:
             header: Programmeren maar!
-            text: Advonturen staan in de tabbladen.
+            text: |-
+                Met `{print}`, `{vraag}` en `{echo}` kun je al een klein verhaal programmeren.
+                Dit is een goed moment om de Papegaai, Verhaal en Steen, Schaar, Papier avonturen te proberen.
             editor: /hedy/1
         7:
             header: Programmeren maar!
             text: Je kan de gele knopjes gebruiken om voorbeeldcodes te kopiëren.
             editor: /hedy#print_command
         8:
-            header: Tekenen met de schildpad
+            header: Programmeren!
             text: Nu we de tekstcodes hebben leren kennen, gaan we tekenen.
-            editor: /hedy#print_command
+            editor: /hedy#print_commando
         9:
-            header: 'Tekenen met de schildpad: {forward}'
+            header: Tekenen met de schildpad
             text: Met `{forward}` kun je de schildpad vooruit laten bewegen.
         10:
-            header: 'Tekenen met de schildpad: {turn}'
-            text: Met `{turn}` draait de schildpad links (`{turn} {left}`) of rechts (`{turn} {right}`).
-            code: |-
-                {forward} 50
-                {turn} left
+            header: 'Tekenen met de schildpad: {vooruit}'
+            text: '`{vooruit}` wordt gebruikt om de schildpad naar voren te bewegen.'
+            code: '{vooruit} 50'
         11:
-            header: 'Drawing with the turtle: {turn}'
-            text: '`{turn}` is used to make the turtle turn left or right.'
+            header: 'Tekenen met de schildpad: {draai}'
+            text: '`{draai}` wordt gebruikt om de schildpad links of rechtsom te laten draaien.'
             code: |-
-                {forward} 50
-                {turn} left
+                {vooruit} 50
+                {draai} links
         12:
-            header: Debugging
-            text: Debugging a code means getting rid of mistakes in the code. Let's debug this code together. Click the ladybug button to start the debugger.
+            header: Debugging (foutzoeken)
+            text: Debugging van de code betekent het oplossen van fouten in de code. Laten we deze code samen debuggen. Klik op de ladybug knop (lieveheersbeestje) om de debugger te starten.
             code: |-
-                I am DJ Hedy
-                {print} What song would you like to hear?
-                {ask} I like that song too!
-                {print} Next up... {echo}
+                Ik ben DJ Hedy
+                {print} Welk liedje wil je horen?
+                {ask} Ik vind dar ook een leuk liedje!
+                {print} Volgende... {echo}
         13:
-            header: Let the programming fun begin!
-            text: Enjoy the adventures in level 1!
+            header: Laat het programmeer feest beginnen!
+            text: Veel plezier met de avonturen in level 1!
     2:
         1:
             header: Welkom bij level 2
@@ -139,9 +138,9 @@ levels:
             header: Variabelen
             text: Om een variabele te maken of 'in te stellen' gebruiken we het `{is}` commando.
             code: |-
-                name {is} Hedy
-                age {is} 15
-                {print} name is age years old
+                naam {is} Hedy
+                leeftijd{is} 15
+                {print} naam is leeftijd jaar
         3:
             header: Interactief
             text: |-
@@ -151,23 +150,19 @@ levels:
 
                 Zo hebben we het `{echo}`  commando niet meer nodig.
             code: |-
-                name {is} {ask} What is your name?
-                {print} Hello name
+                naam {is} {ask} Wat is je naam?
+                {print} Hallo naam
         4:
             header: Meerdere variabelen
             text: Nu we variabelen kunnen gebruiken, kunnen we meteen ook meerdere variabelen gebruiken in tegenstelling tot maar één `{echo}`commando.
-            code: |-
-                name {is} {ask} What is your name?
-                {print} Hello name
-                age {is} {ask} How old are you?
-                {print} name is age years old.
+            code: "naam {is} {vraag} Wat is je naam ?\n{print} Hallo naam \nleeftijd {is} {vraag} Hoe oud ben je?\n{print} naam is leeftijd jaar"
         5:
             header: '{Sleep}'
             text: Je kunt het `{sleep}` commando gebruiken om de code een tijdje op pauze te zetten.
             code: |-
-                {print} My favorite colour is...
-                {sleep} 2
-                {print} green!
+                {print} Mijn favoriete kleur is...
+                {slaap} 2
+                {print} groen!
         6:
             header: '{Sleep} 5'
             text: |-
@@ -175,13 +170,13 @@ levels:
 
                 Als je wil, kun je een zelfs een variabele gebruiken in plaats van een nummer om te bepalen hoe lang het programma moet pauseren.
             code: |-
-                pause {is} 10
-                {print} My favorite colour is...
-                {sleep} pause
-                {print} green!
+                pauze {is} 10
+                {print} Mijn favoriete kleur is...
+                {slaap} pauze
+                {print} groen!
         7:
-            header: Debugging
-            text: Debugging a code means getting rid of mistakes in the code. Let's debug this code together. Click the ladybug button to start the debugger.
+            header: Debugging (foutzoeken)
+            text: Debugging van de code betekent het oplossen van fouten in de code. Laten we deze code samen debuggen. Klik op de ladybug knop (lieveheersbeestje) om de debugger te starten.
             code: |-
                 {print} Welcome to the donut shop!
                 filling {is} What kind of filling would you like?
@@ -193,7 +188,7 @@ levels:
                 {ask} Have a nice day!
         8:
             header: Veel programmeerplezier!
-            text: Veel plezier met de avonturen in level 3!
+            text: Veel plezier met de avonturen in level 2!
     3:
         1:
             header: Welkom bij level 3
@@ -247,8 +242,8 @@ levels:
                 {remove} dislike {from} animals
                 {print} I choose animals {at} {random}
         7:
-            header: Debugging
-            text: Let's debug this code!
+            header: Debugging (foutzoeken)
+            text: Laten we deze code debuggen!
             editor: |-
                 music_genres {is} rock, pop, metal, indie, jazz
                 chosen_genre is music {at} {random}
@@ -327,8 +322,8 @@ levels:
                 {clear}
                 {print} 'SURPRISE!'
         10:
-            header: Debugging
-            text: Let's debug this code!
+            header: Debugging (foutzoeken)
+            text: Laten we deze code debuggen!
             code: |-
                 {clear}
                 {print} What a nice day to go to the beach!
@@ -390,7 +385,7 @@ levels:
                 {else} {print} 'meh'
         7:
             header: Debugging
-            text: Let's debug this code!
+            text: Laten we deze code debuggen!
             code: |-
                 {print} Welcome to HedyAir Security!
                 boarding_pass {is} {ask} 'Do you have your boarding pass?'
@@ -500,7 +495,7 @@ levels:
                 {else} {repeat} 3 {times} {print} 'You have learned something new!'
         5:
             header: Debugging
-            text: Let's debug this code!
+            text: Laten we deze code debuggen!
             code: |-
                 {print} You gave stranded on a desert island.
                 {repeat} 3 'Help!'
@@ -830,7 +825,7 @@ levels:
     14:
         1:
             header: Welkom bij level 14
-            text: In dit level leer je een aantal nieuwe symbolen die je programma's kunnen verbeteren, zoals >.
+            text: In dit level leer je een aantal nieuwe symbolen die je programma's kunnen verbeteren, zoals >. Je leert ook werken met een terugkeer variabelen van een functie.
         2:
             header: Symbolen
             text: |-
@@ -868,7 +863,7 @@ levels:
                 {if} answer != 'yes'
                     {print} 'That is a shame!'
         4:
-            header: Return value
+            header: Return value (terugkeer variabele)
             text: In de vorige levels heb je over functies met argumenten geleerd. Waar je functies ook goed voor kunt gebruiken is om ze iets uit te laten rekenen. Je kunt de fucntie een som geven en de fucntie berekent dan het antwoord voor je. Het antwoord dat je terugkrijgt noem je de **return value**.
         5:
             header: Return value

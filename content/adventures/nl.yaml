@@ -492,15 +492,17 @@ adventures:
                     {else} {print} 'Helaas! Het was ' _
                     ```
                 story_text_3: |
-                    Je kunt ook de computer zelf willekeurige sommen laten maken met `{random}`.
-                example_code_3: |
-                    numbers = 1, 2, 3, 4, 5, 6, 7, 8, 9, 10
-                    number_1 = _
-                    number_2 = _
-                    correct_answer = number_1 * number_2
-                    given_answer = 'What is ' number_1 ' times ' number_2 '?'
+                    **Extra** Je kunt ook de computer zelf willekeurige sommen laten maken met `{random}`.
+                example_code_3: |-
+                    ```
+                    nummers = 1, 2, 3, 4, 5, 6, 7, 8, 9, 10
+                    nummer_1 = _
+                    nummer_2 = _
+                    goed_antwoord = nummer_1 * nummer_2
+                    gegeven_antwoord = {ask} 'Wat is ' nummer_1 ' keer ' nummer_2 '?'
                     {if} _
                     {else} _
+                    ```
             9:
                 story_text: |
                     In dit level kunnen we de rekenmachine van level 6 uitbreiden en meerdere sommen achter elkaar vragen.
@@ -801,11 +803,6 @@ adventures:
                     {else} 'Dat wordt dan €5,50'
                     {print} 'Veel plezier!'
                     ```
-
-                        {print} 'Dat wordt dan €3,50'
-                            {else} 'Die code is niet geldig'
-                    {else} 'Dat wordt dan €5,50'
-                    {print} 'Veel plezier!'
             6:
                 story_text: |-
                     ### Opdracht
@@ -1094,82 +1091,82 @@ adventures:
                     ```
             16:
                 story_text: |-
-                    ### Exercise
-                    Debug this code. Good luck!
-                    Tip: Make sure that you only see your score once in the end.
+                    ### Opdracht
+                    Debug deze code. Succes!
+                    Tip: Zorg ervoor dat je op het einde je score maar één keer ziet.
                 example_code: |
-                    **Warning! This code needs to be debugged!**
+                    **Pas op! Deze code bevat fouten!**
                     ```
-                    country = ['The Netherlands', 'Poland', 'Turkey', 'Zimbabwe', 'Thailand', 'Brasil', 'Peru', 'Australia', 'India', 'Romania' ]
-                    capitals = 'Amsterdam', 'Warshaw' 'Istanbul', 'Harare', 'Bangkok', 'Brasilia', 'Lima', 'Canberra', 'New Delhi', 'Bucharest'
+                    land = ['Nederland', 'Polen', 'Turkije', 'Zimbabwe', 'Thailand', 'Brazilië', 'Peru', 'Australië', 'India', 'Roemenië' ]
+                    hoofdsteden = 'Amsterdam', 'Warschau' 'Istanbul', 'Harare', 'Bangkok', 'Brasilia', 'Lima', 'Canberra', 'New Delhi', 'Boekarest'
                     score = 0
                     for i in range 0 to 10
-                        answer = ask 'What's the capital of ' countries[i]
-                        correct = capital[i]
-                        if answer = correct
+                        antwoord = ask 'Wat 'is de hoofdstad van ' landen[i]
+                        correct = hoofdstad[i]
+                        if antwoord = correct
                             print 'Correct!'
                         score = score + 1
                         else
-                            print 'Wrong,' capitals[i] 'in the capital of' countries[i]
-                        print 'You scored ' score ' out of 10'
+                            print 'Fout,' hoofdsteden[i] 'is de hoofdstad van ' landen[i]
+                        print 'Jij had ' score ' van de 10 goed'
 
                     ```
             17:
                 story_text: |-
-                    ### Exercise
-                    Debug this code. Good luck!
+                    ### Opdracht
+                    Debug deze code. Succes!
                 example_code: |
-                    **Warning! This code needs to be debugged!**
+                    **Pas op! Deze code bevat fouten!**
                     ```
-                    define food_order
-                        toppings = ask 'pepperoni, tuna, veggie or cheese?'
-                        size = ask 'big, medium or small?'
-                        number_of_pizza = ask 'How many these pizzas would you like?'
+                    define eten_bestelling
+                        toppings = ask 'pepperoni, tonijn, groenten of kaas?'
+                        formaat = ask 'groot, medium of klein?'
+                        hoeveel_pizza = ask 'Hoeveel van deze pizzas wil je?'
 
-                        print 'YOU ORDERED'
-                        print number_of_pizzas ' size  ' topping ' pizza'
+                        print 'JE BESTELLING'
+                        print hoeveel_pizzas ' formaat  ' topping ' pizza'
 
-                    define drinks_order
-                        drink = ask 'water, coke, icetea, lemonade or coffee?'
-                        number_of_drinks = ask 'How many of these drinks would you like?'
+                    define drinken_bestelling
+                        drinken = ask 'water, cola, ijsthee, limonade of koffie?'
+                        hoeveel_drinken = ask 'Hoeveel drankjes wilt u?'
 
-                        print 'YOU ORDERED'
-                        print number_of_drinks ' ' drink
+                        print 'JE BESTELLING'
+                        print hoeveel_drinken ' ' drankje
 
-                    'Welcome to Hedy pizza'
-                    more_food = ask 'Would you like to order a pizza?'
-                    while more_food = 'yes'
-                        return food_order
-                        more_food = ask 'Would you like to order a pizza?'
-                    more_drinks = ask 'Would you like to order some drinks?'
-                    while more_drinks == 'yes'
-                        call drink_order
-                        more_drinks == ask 'Would you like to order more drinks?'
+                    'Welkom bij Hedy pizza'
+                    meer_eten = ask 'Wil je een pizza bestellen?'
+                    while meer_eten = 'ja'
+                        return eten_bestelling
+                        meer_eten = ask 'Wil je een pizza bestellen?'
+                    meer_drinken = ask 'Wil je wat te drinken bestellen?'
+                    while meer_drinken == 'ja'
+                        call drinken_bestelling
+                        meer_drinken == ask 'Wil je meer drankjes bestellen?'
 
 
-                    print 'Thanks for ordering!'
+                    print 'Bedankt voor je bestelling!'
                     ```
             18:
                 story_text: |-
-                    ### Exercise
-                    Debug this Old MacDonald program from level 16. Good luck!
+                    ### Opdracht
+                    Debug dit Old MacDonald programma van level 16. Succes!
                 example_code: |
-                    **Warning! This code needs to be debugged!**
+                    **Pas op! Deze code bevat fouten!**
                     ```
-                    animals = ['pig', 'dog', 'cow']
-                    sounds = ['oink', 'woof', 'moo']
+                    dieren = ['big', 'hond', 'koe']
+                    geluiden = ['knor', 'woef', 'boe']
                     for i in range 1 to 3
-                        animal = animals[i]
-                        sound = sounds[i]
-                        print 'Old McDonald had a farm'
-                        print 'E I E I O!'
-                        print 'and on that farm he had a ' animal
-                        print 'E I E I O!'
-                        print 'with a ' sound sound ' here'
-                        print 'and a ' sound sound ' there'
-                        print 'here a ' sound
-                        print 'there a ' sound
-                        print 'everywhere a ' sound sound
+                        dier = dieren[i]
+                        geluid = geluiden[i]
+                        print 'Old McDonald had een wei'
+                        print 'hi ja hi ja ho!'
+                        print 'en in die wei daar stond een ' dier
+                        print 'hi ja hi ja ho!'
+                        print 'met een ' geluid geluid ' hier'
+                        print 'en een ' geluid geluid ' daarr'
+                        print 'hier een ' geluid
+                        print 'daar een ' geluid
+                        print 'overal een ' geluid geluid
                     ```
     default:
         name: Introductie
@@ -1385,7 +1382,7 @@ adventures:
                 story_text: |
                     In dit level komen we weer een stukje dichter bij Pythoncode. Je gaat leren hoe je twee lijstjes met elkaar kunt matchen.
                     Zo kun je bijvoorbeeld een lijstje met dieren matchen aan het bijpassende geluid.
-                    Want als je dat tot nu toe probeerde, kom je uit op de codes hieronder. En die slaan duideijk nergens op!
+                    Want als je dat tot nu toe probeerde, kom je uit op de codes hieronder. En die slaan duidelijk nergens op!
                 example_code: |-
                     ```
                     dieren = 'kip', 'paard', 'koe'
@@ -1396,7 +1393,7 @@ adventures:
                     Dit kun je ook proberen, maar....
                     ```
                     dieren = 'kip', 'paard', 'koe'
-                    sounds = 'tok', 'pffffff', 'boe'
+                    geluiden = 'tok', 'pffffff', 'boe'
                     {for} dier {in} dieren
                         {for} geluid {in} geluiden
                             {print} 'Een ' dier ' zegt ' geluid
@@ -1746,7 +1743,7 @@ adventures:
                     ```
             5:
                 story_text: |
-                    ##Opdracht
+                    ### Opdracht
                     In dit level leer je hoe je er (stiekem) voor kunt zorgen dat Hedy altijd goede voorspellingen voor jou heeft.
 
                     Gebruik deze kennis in een eigen programma, wees creatief! Je zou bijvoorbeeld code kunnen schrijven die voorspelt dat:
@@ -1791,7 +1788,7 @@ adventures:
             7:
                 story_text: |
                     ### Opdracht
-                    Maak het programma af zodat het je verteld of de ander ook verliefd op jouw is.
+                    Maak het programma af zodat het je vertelt of de ander ook verliefd op jouw is.
                 example_code: |
                     ```
                     {print} 'Ik heb een bloem met tover-blaadjes'
@@ -2378,8 +2375,6 @@ adventures:
                     naam = Hedy
                     antwoord = 20 + 4
                     ```
-
-                    antwoord = 20 + 4
             14:
                 story_text: |
                     We gaan nieuwe tekens leren, je kent ze misschien wel van rekenen/wiskunde, `<` en `>`.
@@ -2870,7 +2865,7 @@ adventures:
                     ```
                 story_text_2: |-
                     Nu je hebt geleerd om de rechte haken te gebruiken bij je lijstjes, kun je ook {at} {random} leren gebruiken op de Pythonmanier!
-                    Je typt simpleweg de naam van de lijst en typt er [random] achter.
+                    Je typt simpelweg de naam van de lijst en typt er [random] achter.
                 example_code_2: |-
                     ```
                     fruit = ['appel', 'banaan', 'kers']
@@ -3063,7 +3058,7 @@ adventures:
                     ```
             5:
                 story_text: |
-                    ###Opdracht
+                    ### Opdracht
                     De voorbeeldcode laat zien wat je kunt doen als een gerecht op is.
                     Pak jouw eigen restaurant code van een vorig level en bedenk een probleem en lost het op zoals in het voorbeeld.
                     Je kunt bijvoorbeeld ook een gerecht hebben dat op is, of je accepteert geen creditkaart, of de ijsmachine is kapot.
@@ -3866,7 +3861,7 @@ adventures:
                     ```
             17:
                 story_text: "In de vorige levels was je boter kaas en eieren spel nog vervelend om te spelen. Na elke x of o die je zette vroeg het spel namelijk of je gewonnen had of niet. \nDit maakte het spel wel speelbaar, maar erg traag. In dit level heb je het `{elif}` commando geleerd, dat dit\
-                    \ probleem kan oplossen. \nMet `{elif}` kun je Hedy laten checken of er een speler gewonnen heeft. Hiervoor heb je wel wat extra regels nodig.\n\nIn de voorbeeld code zie je dat we de voorwaarden om te winnen (3 op een rij)hebben toegevoegd. \nJe vindt ze op regel 46 tot 69. Je kunt\
+                    \ probleem kan oplossen. \nMet `{elif}` kun je Hedy laten checken of er een speler gewonnen heeft. Hiervoor heb je wel wat extra regels nodig.\n\nIn de voorbeeld code zie je dat we de voorwaarden om te winnen (3 op een rij) hebben toegevoegd. \nJe vindt ze op regel 46 tot 69. Je kunt\
                     \ zien dat elke keer als een speler 3 op een rij heeft, het spel de variabele spel op 'uit' zet. \nDit betekent dat de `{while}` lus wordt gestopt en dat het spel stopgezet wordt.\n"
                 example_code: |
                     ```

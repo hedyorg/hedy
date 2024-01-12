@@ -231,6 +231,15 @@ class TestsLevel7(HedyTester):
             skipped_mappings=skipped_mappings,
         )
 
+    def test_repeat_with_missing_times_gives_error_2(self):
+        code = "repeat 5"
+
+        self.multi_level_tester(
+            code=code,
+            max_level=8,
+            exception=hedy.exceptions.IncompleteRepeatException
+        )
+
     def test_repeat_ask(self):
         code = textwrap.dedent("""\
         n is ask 'How many times?'

@@ -113,6 +113,8 @@ class Adventure:
     example_code: Optional[str] = None
     extra_stories: Optional[List[ExtraStory]] = field(default_factory=list)
     save_info: Optional[SaveInfo] = None
+    id: Optional[str] = ""
+    author: Optional[str] = ""
 
     def __getitem__(self, key):
         return getattr(self, key)
