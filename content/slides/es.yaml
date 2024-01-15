@@ -458,19 +458,19 @@ levels:
             header: Depurar
             text: ¡Depuremos este código!
             code: |-
-                {print} 'This is the water park ticket machine'
-                {print} 'Price list: Children under 12 $3, Adults $5'
-                {print} 'Mondays are 25% off'
-                amount_of_children = 'How many kids tickets would you like?'
-                amount_of_adults = 'How many adult tickets would you like?'
-                day_of_the_week = {ask} 'What day is it?'
+                {print} 'Esta es la máquina expendedora de billetes para parques acuáticos'
+                {print} 'Lista de precios: Niños menores de 12 $3, adultos $5'
+                {print} 'Los lunes tienen un 25% de descuento'
+                amount_of_children = '¿Cuántas entradas para niños quieres?'
+                amount_of_adults = '¿Cuántas entradas de adulto quieres?'
+                day_of_the_week = {ask} '¿Qué día es hoy?'
                 {clear}
-                child_price = amount of children * 3
+                child_price = cantidad de hijos * 3
                 adult_price = amount_of_adults + 5
                 total_price = adult_price * child_price
-                {if} day {is} monday
-                total_price = total_price * 0.25
-                {print} 'That will be total_price please'
+                {if} día {is} lunes
+                precio_total = precio_total * 0,25
+                {print} 'Este será el precio total por favor'
         10:
             header: ¡Manos a la obra!
             text: ¡Disfruta las aventuras en el nivel 6!
@@ -504,16 +504,16 @@ levels:
             header: Depurar
             text: ¡Depuremos este código!
             code: |-
-                {print} You gave stranded on a desert island.
-                {repeat} 3 'Help!'
-                rescued = {ask} Has anybody come to the rescue?
-                {if} rescued yes {is}
-                {print} Lucky!
-                {else} {repeat} 3 {times} 'HELP!'
-                rescued = 'What about now?'
-                {if} yes
-                {print} 'Hurray!
-                {else} 'That's a shame... Oh well... time to build a shelter and find some food.'
+                {print} Te diste varado en una isla desierta.
+                {repeat} 3 '¡Ayuda!'
+                rescatado = {ask} ¿Alguien ha venido al rescate?
+                {if} rescatado sí {is}
+                {print} ¡Suerte!
+                {else} {repeat} 3 {times} '¡AYUDA!'
+                rescatado = '¿Y ahora qué?'
+                {if} sí
+                {print} ¡Viva!
+                {else} 'Eso es una lástima... Bueno... es hora de construir un refugio y encontrar algo de comida'
         6:
             header: ¡Preparado Listo Ya!
             text: ¡Disfruta las aventuras en el nivel 7!
@@ -797,15 +797,15 @@ levels:
         6:
             header: Un ejemplo con una variable
             text: |-
-                Ahora has ssen cómo funcionan los argumentos, también podría combinar función con una pregunta.
+                También puedes combinar funciones con una pregunta.
 
-                ¿Qué sucede si usted hace estos cambios?:
+                ¿Qué pasa si haces estos cambios:
                 ```
                 definir canción con lugar
-                    Imprimir 'Mi Bonnie es ' lugar
+                    print 'Mi Bonnie está ' lugar
 
-                La respuesta es preguntar "¿Dónde está mi Bonnie?"
-                llamada a la canción con la respuesta
+                answer is pregunta '¿Dónde está mi Bonnie?
+                llamar canción con respuesta
                 ```
             code: |-
                 {define} cancion {with} lugar
@@ -886,16 +886,16 @@ levels:
             header: Valor devuelto
             text: Por ejemplo, en este código la función calculate_new_price calculará el nuevo precio de cualquier artículo. Le dará el nuevo precio como valor de retorno.
             code: |-
-                {define} calculate_new_price {with} amount, percentage
-                    percentage = percentage / 100
-                    discount_amount = amount * percentage
-                    return amount - discount_amount
+                {define} calculate_new_price {with} cantidad, porcentaje
+                    porcentaje = porcentaje / 100
+                    discount_amount = cantidad * porcentaje
+                    cantidad devuelta - discount_amount
 
-                old_price = {ask} 'How much is on the price tag?'
-                discount = {ask} 'What percentage is the discount?'
+                old_price = {ask} '¿Cuánto hay en la etiqueta de precio?'
+                descuento = {pregunta} '¿Qué porcentaje es el descuento?'
 
-                new_price = {call} calculate_new_price {with} old_price, discount
-                {print} 'The new price is ' new_price ' dollar'
+                new_price = {call} calculate_new_price {with} old_price, descuento
+                {print} 'El nuevo precio es ' new_price ' dólares'
         6:
             header: ¡Manos a la obra!
             text: ¡Disfruta de las aventuras en el nivel 14!
