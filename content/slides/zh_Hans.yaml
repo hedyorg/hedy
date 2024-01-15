@@ -358,7 +358,9 @@ levels:
                 {if} name {is} 海蒂 {print} '赞'
         3:
             header: 不要忘记打印
-            text: "使用`{if}`命令时，不要忘记使用`{print}`命令。\n这段代码不会工作！"
+            text: |-
+                使用`{if}`命令时，不要忘记使用`{print}`命令。
+                这段代码不会工作！
             code: '{if} name {is} 海蒂 ''赞'''
         4:
             header: 否则
@@ -568,7 +570,13 @@ levels:
         7:
             header: stopping the indentation
             text: 就像使用 `{repeat}` 命令一样，你可以停止使用缩进，并且行将始终显示。 不仅仅是该陈述是否属实。
-            code: "name = {ask} '你叫什么名字？\n{if} name {is} 海蒂\n     {print}“欢迎海蒂”\n{else}\n     {print} '欢迎程序员！'\n{print} '3..2..1.. 开始编程！'"
+            code: |-
+                name = {ask} '你叫什么名字？
+                {if} name {is} 海蒂
+                     {print}“欢迎海蒂”
+                {else}
+                     {print} '欢迎程序员！'
+                {print} '3..2..1.. 开始编程！'
         8:
             header: if statements inside if statements
             text: |-
