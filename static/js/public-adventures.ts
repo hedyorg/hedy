@@ -1,5 +1,8 @@
 import { Select } from "tw-elements";
 import { modal } from './modal';
+import { initialize } from "./initialize";
+// import { postJson } from "./comm";
+// import { initialize } from "./initialize";
 
 export function cloned(message: string, success: Boolean = true) {
     if (success) {
@@ -85,9 +88,66 @@ declare global {
     }
 }
 
+
+// Get and initialize needed variables
+const level = document.getElementById("level");
+const language = document.getElementById("language");
 const tags = document.getElementById("tag");
+
+const searchInput = document.getElementById('search_adventure') as HTMLInputElement | null;
+let searchTimeout: NodeJS.Timeout;
+
+const levelInstance = Select.getInstance(level);
+const languageInstance = Select.getInstance(language);
 const tagsInstance = Select.getInstance(tags);
-tags?.addEventListener('valueChange.te.select', () => {
-    const value = tagsInstance.value.join(",")
-    applyFilter(value.replaceAll(",", " "), "tags", window.$filtered || {})
-})
+
+// Attach needed events for updating the DOM 
+level?.addEventListener('valueChange.te.select', updateDOM)
+language?.addEventListener('valueChange.te.select', updateDOM)
+tags?.addEventListener('valueChange.te.select', updateDOM)
+searchInput?.addEventListener('input', handleSearchInput);
+
+
+// document.addEventListener("DOMContentLoaded", updateDOM)
+
+
+function handleSearchInput() {
+    clearTimeout(searchTimeout);
+    searchTimeout = setTimeout(updateDOM, 500);
+}
+
+
+function updateURL() {
+    const queryString = window.location.search;
+    const urlParams = new URLSearchParams(queryString);
+    urlParams.set('level', levelInstance.value)
+    urlParams.set('lang', languageInstance.value)
+    urlParams.set('tag', tagsInstance.value)
+    if (searchInput) {
+        urlParams.set('search', searchInput.value)
+    }
+    window.history.pushState({}, '', `${window.location.pathname}?${urlParams.toString()}`);
+
+}
+
+async function updateDOM() {
+    const response = await fetch(`public-adventures/filter?tag=${tagsInstance.value}`
+                    + `&lang=${languageInstance.value}&level=${levelInstance.value}`
+                    + `&search=${searchInput?.value}`, {
+      method: 'GET',
+      keepalive: true,
+      headers: {
+        'Content-Type': 'application/json; charset=utf-8',
+        'Accept': 'application/json',
+      },
+    });
+    const { html, js } = await response.json()
+    updateURL()
+
+    const publicAdventuresBody = document.getElementById('public-adventures-body') ;
+    if (js.state_changed && publicAdventuresBody) {
+        publicAdventuresBody.innerHTML = html
+        initialize({lang: js.lang, level: js.level, keyword_language: js.lang,
+            javascriptPageOptions: js})
+    }
+}

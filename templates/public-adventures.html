@@ -11,10 +11,10 @@
         <div id="search" class="flex-1">
             <input id="search_adventure"
                 type="search"
+                value="{{currentSearch}}"
                 placeholder="{{_('search')}}"
                 class="border text-black border-gray-500 rounded h-8 px-2 w-full"
-                _="on keyup debounced at 500ms set searchTerm to my value 
-                    hedyApp.applyFilter(searchTerm, 'search', $filtered)">
+                >
         </div>
         <div class="flex gap-2">
             <div id="levels">
@@ -23,12 +23,7 @@
                     name="level"
                     required
                     class="block appearance-none w-full border border-gray-200 text-gray-700 p-2 rounded"
-                    hx-trigger="change"
-                    hx-get="/public-adventures/filter"
-                    hx-include="[name='adv-language'], [name='level']"
-                    hx-target="#public-adventures-body"
                         >
-                    <option value="">{{_('select_level')}}</option>
                     {% for level in customizations["available_levels"] %}
                         <option value="{{ level }}"
                           {% if selectedLevel|string == level|string %}selected{% endif %}
@@ -39,18 +34,16 @@
             <div id="languages">
                 <select id="language"
                     data-te-select-init
-                    data-te-select-placeholder="{{_('select_lang')}}"
-                    name="adv-language"
+                    name="lang"
                     required
                     class="block appearance-none w-full border border-gray-200 text-gray-700 p-2 rounded"
-                    hx-trigger="change"
-                    hx-get="/public-adventures/filter"
-                    hx-include="[name='adv-language'], [name='level']"
-                    hx-target="#public-adventures-body"
                     >
                     <option value="">{{_('select_lang')}}</option>
                     {% for lang in available_languages %}
-                        <option value="{{lang or current_language().lang}}">{{lang_to_sym(lang or current_language().lang)}}</option>
+                    
+                        <option data-test="{{selectedLang == lang}}" value="{{lang}}"
+                          {% if selectedLang == lang %}selected{% endif %}
+                        >{{lang_to_sym(lang)}}</option>
                     {% endfor %}
                 </select>
             </div>
@@ -62,10 +55,13 @@
                     multiple
                     name="tag"
                     required
-                    class="block appearance-none w-full border border-gray-200 text-gray-700 p-2 rounded">
+                    class="block appearance-none w-full border border-gray-200 text-gray-700 p-2 rounded"
+                    >
                     <!-- onChange is handled dynamically within public-adventures.ts due to multiple -->
                     {% for tag in available_tags %}
-                        <option value="{{tag}}">{{tag}}</option>
+                        <option value="{{tag}}"
+                          {% if tag in selectedTag %}selected{% endif %}
+                        >{{tag}}</option>
                     {% endfor %}
                 </select>
             </div>
