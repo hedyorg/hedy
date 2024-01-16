@@ -3,6 +3,7 @@ import { RangeSet, RangeSetBuilder, StateEffect, StateField } from '@codemirror/
 import { IndentContext } from '@codemirror/language'
 import {syntaxTree} from "@codemirror/language"
 import { WidgetType } from "@codemirror/view"
+import { SyntaxNode } from "@lezer/common"
 import { level as levelFacet } from './cm-editor';
 
 export const addErrorLine = StateEffect.define<{ row: number }>();
@@ -158,6 +159,7 @@ const debugWord = Decoration.mark({ class: "cm-debugger-current-line" });
 const incorrectCodeMark = Decoration.mark({ class: "cm-incorrect-hedy-code" });
 const deactivateLineMarker = Decoration.line({ class: "cm-disabled-line" })
 const highlightVariableMarker = Decoration.mark({ class: "cm-highlight-var"})
+const highlightFunctionMarker = Decoration.mark({ class: "cm-highlight-fun"})
 
 export const decorationsTheme = EditorView.theme({
     ".cm-error-editor": {
@@ -173,6 +175,9 @@ export const decorationsTheme = EditorView.theme({
     },
     ".cm-highlight-var": {
         color: '#EDF492 ',
+    },
+    ".cm-highlight-fun": {
+        color: "#9CDCFE",
     }
 });
 
@@ -268,23 +273,27 @@ export const variableHighlighter = ViewPlugin.fromClass(class {
   }, {
     decorations: v => v.decorations
 })
+interface VariableData { 
+    name: string, 
+    type: "function" | "variable",
+    pos: { from: number, to: number } 
+}
 
 function highlightVariables(view: EditorView) {
     const level = view.state.facet(levelFacet);
     // double equals because level is actually an array with just one element
     // like: [1]
     if (level == 1) return Decoration.none;
-    let variableDeco = new RangeSetBuilder<Decoration>()
-    let positions: {from: number, to: number}[] = [];
-    let variablesNames = new Set()
+    let variableDeco = new RangeSetBuilder<Decoration>();
+    let variableData: VariableData[] = []
+    let functionsNames = new Set<string>()
+    let variablesNames = new Set<string>()
+
     let definingCommands = [
         'Assign' , 
         'Ask' , 
         'AssignList' , 
         'For',
-        //TODO: Give a different color to functions
-        //TODO: color variables defined as function parameters
-        'Define',
         "Input"
     ]
     // First we iterate through the tree to find all var assignments
@@ -297,14 +306,22 @@ function highlightVariables(view: EditorView) {
             enter: (node) => {
                 if (definingCommands.includes(node.node.name)) {
                     const child = node.node.getChild('Text');
-                    if (child && isVarName(view.state.doc.sliceString(child.from, child.to))) {
-                        variablesNames.add(view.state.doc.sliceString(child.from, child.to))
-                        positions.push({from: child.from, to: child.to})
-                    }
+                    addVar(child, variableData, 'variable', view, functionsNames, variablesNames);                    
+                } else if (node.node.name  === 'Define') {                    
+                   const textChild = node.node.getChild('Text')
+                    addVar(textChild, variableData, 'function', view, functionsNames, variablesNames)
+                    // we need to get the parameter nodes that are within define nodes
+                    const argumentChild = node.node.getChild('Arguments')
+                    const expressions = argumentChild?.getChildren('Expression');
+                    expressions?.map(expression => {
+                        const textChild = expression.getChild('Text')
+                        addVar(textChild, variableData, 'variable', view, functionsNames, variablesNames);
+                    })
                 }
             }
         })
     }
+
     let commands = [
         "Assign" , 
         "Print" , 
@@ -351,12 +368,20 @@ function highlightVariables(view: EditorView) {
                             for (const name of varNames) {
                                 if (variablesNames.has(name)) {
                                     const index = text.indexOf(name, startIndex)
-                                    positions.push({from: child.from + index, to: child.from + index + name.length})
+                                    variableData.push({
+                                        name: name,
+                                        type: 'variable', // there aren't functions until level 12
+                                        pos: {from: child.from + index, to: child.from + index + name.length}
+                                    })
                                     startIndex = index + name.length
                                 }
                             }
-                        } else if (variablesNames.has(text)) {                                 
-                            positions.push({from: child.from, to: child.to})                   
+                        } else if (variablesNames.has(text) || functionsNames.has(text)) {                  
+                            variableData.push({
+                                name: text,
+                                type: variablesNames.has(text) ? 'variable' : 'function',
+                                pos: {from: child.from, to: child.to}
+                            })
                         }
                     }
                 }
@@ -364,10 +389,14 @@ function highlightVariables(view: EditorView) {
         })
     }
     // I don't think we're going to have a huge document, so this won't overflow
-    positions.sort((a, b) => a.from - b.from)
+    variableData.sort((a, b) => a.pos.from - b.pos.from)
     // If the decorations aren't sorted by starting position, CodeMirror complains, hence the need to do it like this
-    positions.forEach(pos => {
-        variableDeco.add(pos.from, pos.to, highlightVariableMarker)
+    variableData.forEach(data => {
+        if (data.type === "function") {
+            variableDeco.add(data.pos.from, data.pos.to, highlightFunctionMarker)
+        } else {
+            variableDeco.add(data.pos.from, data.pos.to, highlightVariableMarker)
+        }
     })
 
     return variableDeco.finish()
@@ -397,4 +426,24 @@ export function basicIndent(context: IndentContext, pos: number) {
     );
     return indentBy;
 
+}
+
+function addVar(child: SyntaxNode | null, variableData: VariableData[], type: "function" | "variable", view: EditorView, functionsNames: Set<string>, variablesNames: Set<string>) {
+    if (child && isVarName(view.state.doc.sliceString(child.from, child.to))) {
+        const name = view.state.doc.sliceString(child.from, child.to);
+        const data: VariableData = {
+            name: name,
+            type: type,
+            pos: {from: child.from, to: child.to}
+        }
+        variableData.push(data);
+        switch(type) {
+            case 'function':
+                functionsNames.add(name);
+                break;
+            case 'variable':
+                variablesNames.add(name);
+                break;
+        }
+    } 
 }
