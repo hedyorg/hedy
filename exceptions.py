@@ -207,6 +207,14 @@ class MissingInnerCommandException(HedyException):
                          line_number=line_number)
 
 
+class MissingVariableException(HedyException):
+    def __init__(self, command, level, line_number):
+        super().__init__('Missing Variable',
+                         command=command,
+                         level=level,
+                         line_number=line_number)
+
+
 class InvalidAtCommandException(HedyException):
     def __init__(self, command, level, line_number):
         super().__init__('Invalid At Command',

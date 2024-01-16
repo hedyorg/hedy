@@ -249,6 +249,15 @@ class TestsLevel2(HedyTester):
 
         self.multi_level_tester(code=code, expected=expected, max_level=3)
 
+    def test_is_ask_without_var_gives_error(self):
+        code = "is ask did you forget a var?"
+
+        self.multi_level_tester(
+            code=code,
+            max_level=3,
+            exception=hedy.exceptions.MissingVariableException
+        )
+
     #
     # forward tests
     #
