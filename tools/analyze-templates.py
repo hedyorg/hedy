@@ -48,7 +48,6 @@ def main():
         lines = '\n'.join(f'L{l}' for l in sorted(linenos))
         print(f'"{python_file}" -> "{template_name}" [label={json.dumps(lines)}];')
 
-
     print('}')
 
     # Parse template files using Jinja
