@@ -78,12 +78,18 @@ class PublicAdventuresModule(WebsiteModule):
             available_levels = adventure["levels"] if adventure.get("levels") else [adventure["level"]]
             self.customizations["available_levels"].update([int(adv_level) for adv_level in available_levels])
 
-        level = request.args.get("level") or level
-        level = int(level)
-        adventures = self.adventures[level]
+        if not request.args.get("level"):
+            level = 1
+            adventures = self.adventures.get(level, [])
+        else:
+            level = int(request.args["level"])
+            adventures = self.adventures.get(level, [])
 
-        initial_tab = adventures[0]["name"]
-        initial_adventure = adventures[0]
+        initial_tab = None
+        initial_adventure = None
+        if adventures:
+            initial_tab = adventures[0]["name"]
+            initial_adventure = adventures[0]
 
         # Add the commands to enable the language switcher dropdown
         commands = hedy.commands_per_level.get(initial_adventure["level"])
@@ -116,6 +122,7 @@ class PublicAdventuresModule(WebsiteModule):
 
             customizations=self.customizations,
 
+            public_adventures_page=True,
             javascript_page_options=dict(
                 page='code',
                 lang=g.lang,
@@ -133,7 +140,8 @@ class PublicAdventuresModule(WebsiteModule):
         tags = request.args.get("tag")
         search = request.args.get("search")
 
-        adventures = self.adventures[int(level)]
+        adventures = self.adventures.get(level, [])
+
         available_languages = set([adv["language"] for adv in adventures if adv["language"]])
         available_tags = set([tag for adv in adventures for tag in adv.get("tags", [])])
 
@@ -184,6 +192,8 @@ class PublicAdventuresModule(WebsiteModule):
                 max_level=18,
                 prev_level=prev_level,
                 next_level=next_level,
+
+                public_adventures_page=True,
                 customizations=self.customizations),
 
             "js": dict(
