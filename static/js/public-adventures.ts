@@ -1,8 +1,8 @@
 import { Select } from "tw-elements";
 import { modal } from './modal';
 import { initialize } from "./initialize";
-// import { postJson } from "./comm";
-// import { initialize } from "./initialize";
+import { initializeHighlightedCodeBlocks } from "./app";
+import { getPreviousAndNext } from "./tabs";
 
 export function cloned(message: string, success: Boolean = true) {
     if (success) {
@@ -108,7 +108,7 @@ tags?.addEventListener('valueChange.te.select', updateDOM)
 searchInput?.addEventListener('input', handleSearchInput);
 
 
-// document.addEventListener("DOMContentLoaded", updateDOM)
+document.addEventListener("DOMContentLoaded", updateDOM)
 
 
 function handleSearchInput() {
@@ -147,7 +147,11 @@ async function updateDOM() {
     const publicAdventuresBody = document.getElementById('public-adventures-body') ;
     if (js.state_changed && publicAdventuresBody) {
         publicAdventuresBody.innerHTML = html
+
         initialize({lang: js.lang, level: js.level, keyword_language: js.lang,
             javascriptPageOptions: js})
+
+        initializeHighlightedCodeBlocks(publicAdventuresBody)
+        console.log('prev and next', getPreviousAndNext())
     }
 }
