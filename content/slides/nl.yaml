@@ -123,7 +123,7 @@ levels:
             code: |-
                 Ik ben DJ Hedy
                 {print} Welk liedje wil je horen?
-                {ask} Ik vind dar ook een leuk liedje!
+                {ask} Ik vind dat ook een leuk liedje!
                 {print} Volgende... {echo}
         13:
             header: Laat het programmeer feest beginnen!
@@ -171,7 +171,7 @@ levels:
             text: |-
                 Je kunt een getal achter het `{sleep}` commando typen als je een langere stilte wilt.
 
-                Als je wil, kun je een zelfs een variabele gebruiken in plaats van een nummer om te bepalen hoe lang het programma moet pauseren.
+                Als je wil, kun je een zelfs een variabele gebruiken in plaats van een nummer om te bepalen hoe lang het programma moet pauzeren.
             code: |-
                 pauze {is} 10
                 {print} Mijn favoriete kleur is...
@@ -206,7 +206,7 @@ levels:
                 dieren {is} honden, katten, kangoeroes
                 ```
         3:
-            header: '{At} {random}'
+            header: '{at} {random}'
             text: |-
                 Je kunt na het maken van een lijstje het `{at}` `{random}` commando gebruiken.
                 De computer kiest dan een willekeurig item van het lijstje.
@@ -223,7 +223,7 @@ levels:
                 {print} Mijn favoriete dier is dieren {at} {random}
                 ```
         5:
-            header: '{Add} {to}'
+            header: '{add} {to}'
             text: |-
                 Je kunt items aan een lijst toevoegen met het `{add}` `{to}` commando.
 
@@ -246,9 +246,9 @@ levels:
                 nice {ask} Houd je van dat genre?
                 {remove} gekozen_genre {from} gekozen_genre
                 tweede_keus {is} muziek_genres
-                {print} or do you prefer... tweede_keus {at} {random}
+                {print} of houd je meer van... tweede_keus {at} {random}
                 {remove} tweede_keus {to} muziek_genres
-                {print} Ik houd van muziek_genre {random} best!
+                {print} Ik houd het meest van muziek_genre {random} !
         8:
             header: Aan de slag!
             text: Veel plezier met de avonturen in level 3!
@@ -369,11 +369,11 @@ levels:
         6:
             header: Nog iets nieuws
             text: |-
-                Als je hebt geoefend met `{if}` en `{else}`, kun je aan de slag met het`{in}` commando.
+                Als je hebt geoefend met `{if}` en `{else}`, kun je aan de slag met het `{in}` commando.
 
                 Met `{in}` kun je de computer laten checken of iets in jouw lijstje staat. Kijk maar naar het voorbeeld:
 
-                Let daarbij wel op dat Hedy hoofdlettergevoelig is. Als je "Groen" intikt in plaats van "groen", dan zegt Hedy "meh".
+                Let daarbij wel op dat Hedy hoofdlettergevoelig is. Als je "Groen" intikt in plaats van "groen", dan zegt Hedy "minder mooi".
             code: |-
                 leuke_kleuren {is} groen, geel
                 favoriete_kleur {is} {ask} 'What is your favorite color?'
@@ -429,11 +429,11 @@ levels:
         7:
             header: Het = symbool
             text: |-
-                Vanaf nu kun je het = symbool gebruiken in plaats van het`{is}` commando.
+                Vanaf nu kun je het = symbool gebruiken in plaats van het `{is}` commando.
                 Dit geldt voor getallen en woorden, en het geldt ook na `{if}` of `{else}` commando's.
             code: |-
                 naam = Hedy
-                antwoord= 20 + 4
+                antwoord = 20 + 4
         8:
             header: Rekenen met variabelen
             text: 'Je kunt rekenen met getallen, maar je kunt ook variabelen gebruiken in je berekeningen. Kijk maar:'
@@ -485,7 +485,7 @@ levels:
             header: '{repeat} met {ask}'
             text: Je kunt {repeat} ook gebruiken met `{ask}`, `{if}` of `{else}`.
             code: |-
-                {repeat} 2 {times} antwoord= {ask} 'Wist je dat je een vraag meerdere keren kunt stellen?'
+                {repeat} 2 {times} antwoord = {ask} 'Wist je dat je een vraag meerdere keren kunt stellen?'
                 {if} antwoord {is} ja {repeat} 2 {times} {print} 'Je wist het al!'
                 {else} {repeat} 3 {times} {print} 'Je hebt wat nieuws geleerd!'
         5:
@@ -704,7 +704,7 @@ levels:
             text: |-
                 Vanaf nu kun je decimale getallen gebruiken. Dit kan bijvoorbeeld leuk zijn in jouw restaurantprogramma!
 
-                Getallen hoeven geen aanhalingstekens.
+                Getallen hebben geen aanhalingstekens nodig.
             code: |-
                 {print} 'Decimale nummers moeten vanaf nu met een punt'
                 {print} 2.5 + 2.5
@@ -727,7 +727,7 @@ levels:
                  {call} schitter
                  {print} 'Hoog boven de wereld'
                  {print} 'Als een diamant aan de hemel'
-                 {call} twinkle
+                 {call} schitter
         6:
             header: Functies
             text: Zoals je kunt zien in de voorbeelden is een functie een blokje code dat je vaker kunt oproepen. Je gebruikt `{define}` om de functie te maken en `{call}` om hem te gebruiken.
@@ -776,11 +776,11 @@ levels:
 
                 Wat gebeurt er als je deze aanpassingen maakt?
                 ```
-                define lied with plaats
-                    print 'My Bonnie is ' plaats
+                {define} lied {with} plaats
+                    {print} 'My Bonnie is ' plaats
 
-                antwoord = ask 'Waar is Bonnie?'
-                call song with antwoord
+                antwoord = {ask} 'Waar is Bonnie?'
+                {call} song {with} antwoord
                 ```
             code: |-
                 {define} lied {with} plaats
@@ -797,12 +797,12 @@ levels:
                 Let op! Zie je hoe de variabele en de argumenten nu dezelfde naam hebben. Dat mag!
                 Raak je hiervan in de war? Gebruik dan verschillende namen, want dat mag ook gewoon.
                 ```
-                define lied with naam, plaats
-                    print 'My ' naam ' is ' plaats
+                {define} lied {with} naam, plaats
+                    {print} 'Mijn' naam ' is ' plaats
 
-                naam = vraag 'Wie?'
-                plaats = vraag 'Waar is diegene?'
-                call lied with naam, plaats
+                naam = {vraag} 'Wie?'
+                plaats = {vraag} 'Waar zijn zij?'
+                {call} lied {with} naam, plaats
                 ```
             code: |-
                 {define} lied {with} plaats
