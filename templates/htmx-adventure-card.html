@@ -21,7 +21,7 @@
         {{ adventure.name|e }}
     </h2>
 
-    <div class="pb-4 px-6">
+    <div class="py-2 px-6">
 
         {% set creator = _('owner') if adventure["author"] != adventure["creator"] else _('creator') %}
         {% if adventure["creator_public_profile"] or adventure["public_user"] %}
