@@ -47,7 +47,8 @@
         class="flex items-center px-6 py-4 bg-gray-200 shadow-lg">
         <a class="green-btn mr-1 no-underline cursor-pointer" href="/adventure/{{ adventure.name }}?creator={{ adventure.creator }}">{{_('preview')}}</a>
         {% if user["username"] != adventure["creator"] %}
-            <button class="green-btn" id="clone_adventure_btn"
+            <button class="green-btn" id="clone_adventure_btn_{{level}}"
+                data-id="{{adventure.id}}"
                 _="on htmx:afterRequest log detail 
                 if detail.xhr.status == '200'
                     hedyApp.cloned('{{_('adventure_cloned')}}')
@@ -62,10 +63,10 @@
                 ">{{_('clone')}}</button>
         {%else%}
             <!-- TODO: button to add to class(es) -->
-            <button
-                class="green-btn" id="edit_adventure_button"
-                _="on click window.open('/for-teachers/customize-adventure/{{adventure.id}}', '_self')">
-                {{_('edit_adventure')}}</button>
+            <a
+                href="/for-teachers/customize-adventure/{{adventure.id}}"
+                class="green-btn" id="edit_adventure_button">
+                {{_('edit_adventure')}}</a>
         {% endif %}
     </div>
 </div>

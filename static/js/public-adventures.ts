@@ -2,7 +2,7 @@ import { Select } from "tw-elements";
 import { modal } from './modal';
 import { initialize } from "./initialize";
 import { initializeHighlightedCodeBlocks } from "./app";
-import { getPreviousAndNext } from "./tabs";
+import { postJson } from "./comm";
 
 export function cloned(message: string, success: Boolean = true) {
     if (success) {
@@ -107,9 +107,28 @@ language?.addEventListener('valueChange.te.select', updateDOM)
 tags?.addEventListener('valueChange.te.select', updateDOM)
 searchInput?.addEventListener('input', handleSearchInput);
 
+document.addEventListener("DOMContentLoaded", () => {
+    updateDOM()
+    setTimeout(() => {
+        // Since we render html as a string, the js is lost and thus any js needed
+        // has to be applied again.
+        const cloneBtn = document.getElementById(`clone_adventure_btn_${levelInstance.value}`);
+        cloneBtn?.addEventListener('click', handleCloning);
+    }, 500)
+})
 
-document.addEventListener("DOMContentLoaded", updateDOM)
 
+async function handleCloning(e: MouseEvent) {
+    const target = e.target as HTMLElement;
+    const adventureId = target.getAttribute("data-id");
+    try {
+        const data = await postJson(`public-adventures/clone/${adventureId}`);
+        modal.notifySuccess(data.message)
+        await updateDOM();
+    } catch (error: any) {
+        modal.notifyError(error.responseText)
+    }
+}
 
 function handleSearchInput() {
     clearTimeout(searchTimeout);
@@ -148,10 +167,14 @@ async function updateDOM() {
     if (js.state_changed && publicAdventuresBody) {
         publicAdventuresBody.innerHTML = html
 
+        // Since we render html as a string, the js is lost and thus any js needed
+        // has to be applied again.
         initialize({lang: js.lang, level: js.level, keyword_language: js.lang,
             javascriptPageOptions: js})
 
         initializeHighlightedCodeBlocks(publicAdventuresBody)
-        console.log('prev and next', getPreviousAndNext())
+        
+        const cloneBtn = document.getElementById(`clone_adventure_btn_${levelInstance.value}`);
+        cloneBtn?.addEventListener('click', handleCloning);
     }
 }

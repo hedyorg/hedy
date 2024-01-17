@@ -52,6 +52,11 @@
                           {{ adventure.example_code|commonmark }}
                       </div>
                   {% endif %}
+                  {% if public_adventures_page %}
+                      <div class="lg:w-1/2 w-full p-2 ltr:ml-2 rtl:mr-2">
+                        {{ render_partial('htmx-adventure-card.html', user={"username": username}, adventure=adventure, level=level ) }}
+                      </div>
+                  {% endif %}
               </div>
             {% for story in adventure.extra_stories %}
                 <div class="lg:flex lg:flex-row border-t-2">

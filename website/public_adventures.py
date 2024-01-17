@@ -7,7 +7,6 @@ import utils
 from config import config
 from website.auth import requires_teacher
 from website.flask_helpers import render_template
-from jinja_partials import render_partial
 
 from .achievements import Achievements
 from .database import Database
@@ -84,7 +83,6 @@ class PublicAdventuresModule(WebsiteModule):
         else:
             level = int(request.args["level"])
             adventures = self.adventures.get(level, [])
-
         initial_tab = None
         initial_adventure = None
         if adventures:
@@ -104,8 +102,8 @@ class PublicAdventuresModule(WebsiteModule):
             available_tags=available_tags,
             selectedLevel=level,
             selectedLang=request.args.get("lang"),
-            selectedTag=request.args.get("tag"),
-            currentSearch=request.args.get("search"),
+            selectedTag=request.args.get("tag", []),
+            currentSearch=request.args.get("search", ""),
 
             user=user,
             current_page="public-adventures",
@@ -179,6 +177,7 @@ class PublicAdventuresModule(WebsiteModule):
                 available_languages=available_languages,
                 available_tags=available_tags,
                 selectedLevel=level,
+                selectedTag=request.args.get("tag", []),
 
                 user=user,
                 current_page="public-adventures-body",
@@ -201,7 +200,7 @@ class PublicAdventuresModule(WebsiteModule):
                 lang=g.lang,
                 level=level,
                 adventures=adventures,
-                initial_tab='',
+                initial_tab=initial_tab,
                 current_user_name=user['username'],
                 state_changed=state_changed,)
         }
@@ -209,6 +208,7 @@ class PublicAdventuresModule(WebsiteModule):
     @route("/clone/<adventure_id>", methods=["POST"])
     @requires_teacher
     def clone_adventure(self, user, adventure_id):
+        # TODO: perhaps get it from self.adventures
         current_adventure = self.db.get_adventure(adventure_id)
         if not current_adventure:
             return utils.error_page(error=404, ui_message=gettext("no_such_adventure"))
@@ -236,11 +236,23 @@ class PublicAdventuresModule(WebsiteModule):
             "levels": current_adventure.get("levels", [level]),
             "language": current_adventure.get("language", g.lang),
             "tags": current_adventure.get("tags", []),
+            "is_teacher_adventure": True,
         }
 
         self.db.update_adventure(adventure_id, {"cloned_times": current_adventure.get("cloned_times", 0) + 1})
         self.db.store_adventure(adventure)
-        adventure["date"] = utils.localized_date_format(adventure.get("date"))
-        return render_partial('htmx-adventure-card.html',
-                              adventure=adventure,
-                              user=user,)
+
+        # update cloned adv. that's saved in this class
+        for _level in current_adventure.get("levels", [level]):
+            _level = int(_level)
+            for i, adv in enumerate(self.adventures.get(_level, [])):
+                if adv.get("id") == current_adventure.get("id"):
+                    adventure["short_name"] = adventure.get("name")
+                    adventure["text"] = adventure.get("content")
+                    # Replace the old adventure with the new adventure
+                    self.adventures[_level][i] = adventure
+                    # del self.included[adventure.get("name")]
+                    self.filtered_names = set()
+                    break
+        # TODO: add achievement
+        return {"message": gettext("adventure_cloned")}
