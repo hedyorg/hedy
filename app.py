@@ -2273,6 +2273,13 @@ def chunk(x, size):
     return (x[pos:pos + size] for pos in range(0, len(x), size))
 
 
+@app.template_filter()
+def format_date(date):
+    if not isinstance(date, int):
+        return date
+    return utils.localized_date_format(date)
+
+
 @app.template_global()
 def hedy_link(level_nr, assignment_nr, subpage=None):
     """Make a link to a Hedy page."""
