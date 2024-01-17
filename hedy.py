@@ -1166,6 +1166,9 @@ class IsValid(Filter):
         raise exceptions.InvalidSpaceException(
             level=self.level, line_number=line, fixed_code=fixed_code, fixed_result=result)
 
+    def error_ask_missing_variable(self, meta, args):
+        raise exceptions.MissingVariableException(command='is ask', level=self.level, line_number=meta.line)
+
     def error_print_nq(self, meta, args):
         words = [str(x[1]) for x in args]  # second half of the list is the word
         text = ' '.join(words)
@@ -1180,10 +1183,10 @@ class IsValid(Filter):
         raise exceptions.MisspelledAtCommand(command='at', arg1=str(args[1][1]), line_number=meta.line)
 
     def error_add_missing_to(self, meta, args):
-        raise exceptions.MissingAdditionalCommand(command='add', line_number=meta.line)
+        raise exceptions.MissingAdditionalCommand(command='add', missing_command='to', line_number=meta.line)
 
     def error_remove_missing_from(self, meta, args):
-        raise exceptions.MissingAdditionalCommand(command='remove', line_number=meta.line)
+        raise exceptions.MissingAdditionalCommand(command='remove', missing_command='from', line_number=meta.line)
 
     def error_non_decimal(self, meta, args):
         raise exceptions.NonDecimalVariable(line_number=meta.line)
@@ -1259,10 +1262,10 @@ class IsValid(Filter):
             command='ifpressed_else', level=self.level, line_number=meta.line)
 
     def error_for_missing_in(self, meta, args):
-        raise exceptions.InvalidForCommandException(command='in', level=self.level, line_number=meta.line)
+        raise exceptions.MissingAdditionalCommand(command='for', missing_command='in', line_number=meta.line)
 
     def error_for_missing_to(self, meta, args):
-        raise exceptions.InvalidForCommandException(command='to', level=self.level, line_number=meta.line)
+        raise exceptions.MissingAdditionalCommand(command='for', missing_command='to', line_number=meta.line)
 
     def error_for_missing_command(self, meta, args):
         raise exceptions.IncompleteCommandException(incomplete_command='for', level=self.level, line_number=meta.line)
