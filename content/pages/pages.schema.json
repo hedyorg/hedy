@@ -4,7 +4,7 @@
   "additionalProperties": false,
   "properties": {
     "title": { "type": "string" },
-    "sections": { "type": "array", "items": { "$ref": "#/definitions/DocSection" } },
+    "teacher-guide": { "type": "array", "items": { "$ref": "#/definitions/DocSection" } },
 
     "learn-more-sections": { "$ref": "#/definitions/BasicSections" },
     "join-sections": { "$ref": "#/definitions/BasicSections" },
@@ -58,7 +58,7 @@
       "additionalProperties": false,
       "properties": {
         "level": { "type": "string" },
-        "sections": { "type": "array", "items": { "$ref": "#/definitions/DocMistakeLevelSection" } }
+        "teacher-guide": { "type": "array", "items": { "$ref": "#/definitions/DocMistakeLevelSection" } }
       },
       "required": ["level", "teacher-guide"]
     },
