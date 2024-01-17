@@ -174,10 +174,10 @@ export const decorationsTheme = EditorView.theme({
         textDecoration: "red wavy underline",
     },
     ".cm-highlight-var": {
-        color: '#EDF492 ',
+        color: '#c2e3ff ',
     },
     ".cm-highlight-fun": {
-        color: "#9CDCFE",
+        color: "#EDF492",
     }
 });
 
