@@ -93,6 +93,7 @@ def task_tailwind():
             *[file for file in glob('static/js/*.ts') if file not in \
                 ['static/js/message-translations.ts', 'static/js/client-messages.ts']
               ],
+            'build-tools/heroku/tailwind/styles.css',
             script,
         ],
         task_dep=['npm'],
