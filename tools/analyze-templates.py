@@ -45,7 +45,7 @@ def main():
 
     for (python_file, template_name), linenos in app_template_mappings.items():
         print(f'"{python_file}" [shape=rectangle, style=filled, fillcolor=palegreen2];')
-        lines = '\n'.join(f'L{l}' for l in sorted(linenos))
+        lines = '\n'.join(f'L{line}' for line in sorted(linenos))
         print(f'"{python_file}" -> "{template_name}" [label={json.dumps(lines)}];')
 
     print('}')
@@ -83,9 +83,9 @@ def find_string_literals(strings, asts):
 
 def extract_template_info(parsed_templates):
     ret = {}
-    for name, ast in parsed_templates.items():
-        variables = meta.find_undeclared_variables(ast) - set(['_'])
-        references = set(meta.find_referenced_templates(ast))
+    for name, abstract_syntax_tree in parsed_templates.items():
+        variables = meta.find_undeclared_variables(abstract_syntax_tree) - set(['_'])
+        references = set(meta.find_referenced_templates(abstract_syntax_tree))
         if None in references:
             references = references - set([None]) | set(['«dynamic»'])
         ret[name] = TemplateInfo(references=references, variables=variables)
