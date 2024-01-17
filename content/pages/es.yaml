@@ -384,7 +384,7 @@ teacher-guide:
         Especialmente mientras el código crece junto a al progreso de los niveles. Es por esto que hemos hecho una lista de los errores frecuentes en cada nivel y sus soluciones.
     levels:
     -   level: '1'
-        sections:
+        teacher-guide:
         -   title: Los estudiantes olvidan escribir los comandos
             example:
                 error_text: Por ejemplo, escribir una frase sin usar imprimir.
@@ -436,7 +436,7 @@ teacher-guide:
                 solution_text: 'Para que la tortuga retroceda, debes uitlizar el comando adelante un número negativo. Por ejemplo:'
                 solution_code: adelante -100
     -   level: '2'
-        sections:
+        teacher-guide:
         -   title: Los estudiantes hacen errores de escritura en sus comandos
             example:
                 error_text: Hedy no puede reconocer un comando mal escrito.
@@ -486,7 +486,7 @@ teacher-guide:
                     nombre es preguntar ¿Cómo se llama tu caballo?
                     imprimit Tu caballo se llama nombre
     -   level: '3'
-        sections:
+        teacher-guide:
         -   title: Los estudiantes intentan imprimir listas enteras
             example:
                 error_text: No se puede imprimir una lista. Con {at} {random} sólo puedes imprimir un elemento de la lista.
@@ -592,7 +592,7 @@ teacher-guide:
                     borrar dado de aventuras
                     imprimir Me encanta aventuras en aleatorio
     -   level: '4'
-        sections:
+        teacher-guide:
         -   title: Los alumnos olvidan utilizar las comillas en ambos lados del texto
             example:
                 error_text: En este nivel imprimir y preguntar necesitan un conjunto de comillas. Una antes del texto y otra después.
@@ -622,7 +622,7 @@ teacher-guide:
                     imprimir 'Se permite que escribas esto (Youre)'
                     imprimir 'Y también puedes escribir esto (you`re)'
     -   level: '5'
-        sections:
+        teacher-guide:
         -   title: Los alumnos olvidan utilizar `{print}` en un comando `{if}`
             example:
                 error_text: Después de que los alumnos usen `{if}` o `{else}` se olvidan de usar un segundo comando como `{print}` o `{ask}`.
@@ -703,7 +703,7 @@ teacher-guide:
                     {if} contraseña_secreta {is} contraseña {print} '¡Acceso permitido!'
                     {else} {print} '¡Acceso denegado!'
     -   level: '6'
-        sections:
+        teacher-guide:
         -   title: Los alumnos tienen problemas con las comillas
             example:
                 error_text: Algunos alumnos tienen problemas al añadir o no comillas. Si añades comillas, la pantalla de salida mostrará literalmente '5+5'.
@@ -726,7 +726,7 @@ teacher-guide:
                     si bebida = sí precio = precio + 4
                     imprimir 'Serán ' precio ' euros por favor'
     -   level: '7'
-        sections:
+        teacher-guide:
         -   title: Los alumnos olvidan una de las palabras en el comando repetir, u olvidan el comando imprimir
             example:
                 error_text: Asegúrate que los alumnos saben usar tanto el comando repetir completo y el comando imprimir.
@@ -758,7 +758,7 @@ teacher-guide:
                 solution_text: Asegúrate que los códigos no son demasiado largos
                 solution_code: repetir 20 veces imprimir 'Esto es suficiente'
     -   level: '8'
-        sections:
+        teacher-guide:
         -   title: Los alumnos usan la sangría mal
             example:
                 error_text: La sangría es un nuevo concepto de este nivel, es complicada de usar para algunos alumnos. Asegúrate que practican algunos códigos sencillos antes de hacer un programa entero con ella.
@@ -830,7 +830,7 @@ teacher-guide:
                     si no
                         imprimir 'No puedes entrar'
     -   level: '9'
-        sections:
+        teacher-guide:
         -   title: Los alumnos cometen errores con la sangría
             example:
                 error_text: La parte más dificil sobre este nivel es conseguir la sangría correcta. A los alumnos les encanta anidar sentencias `{if}`, a veces incluso dentro de otras sentencias anidadas `{if}`. Llevar la cuenta de la sangría puede ser bastante difícil.
@@ -862,7 +862,7 @@ teacher-guide:
                     si no
                         imprimir 'Robin se va a casa'
     -   level: '10'
-        sections:
+        teacher-guide:
         -   title: Los alumnos no utilizan correctamente el comando para
             example:
                 error_text: Con frecuencia vemos que los alumnos intentan imprimir la lista (animales, en el ejemplo) en vez de los objetos de la lista.
@@ -888,7 +888,7 @@ teacher-guide:
                     para animal en animales
                       imprimir 'Amo ' animal
     -   level: '11'
-        sections:
+        teacher-guide:
         -   title: Los alumnos olvidan usar sangría
             example:
                 error_text: Asegúrate que los alumnos usan sangría.
@@ -912,7 +912,7 @@ teacher-guide:
                     para plátano en rango 1 a 5
                         imprimir plátano
     -   level: '12'
-        sections:
+        teacher-guide:
         -   title: Los alumnos olvidan las comillas
             example:
                 error_text: Los alumnos necesitan mas comillas ahora que en los niveles anteriores. En este ejemplo se olvidaron las comillas en la lista y en el comando `{if}`.
@@ -952,7 +952,7 @@ teacher-guide:
                 solution_text: 'Este es el código correcto:'
                 solution_code: imprimir 2.5 + 2.5
     -   level: '13'
-        sections:
+        teacher-guide:
         -   title: Los alumnos confunden `and` con `or`
             example:
                 error_text: Ambos comandos podrían parecer similares, pero su función es muy diferente.
@@ -968,7 +968,7 @@ teacher-guide:
                     si juego es 'sí' y tiempo es 'sí'
                         imprimir '¡Juguemos!'
     -   level: '14'
-        sections:
+        teacher-guide:
         -   title: Los alumnos confunden los signos < y >
             example:
                 error_text: A menudo, los alumnos ya están familiarizados con estos signos de sus clases de matemáticas. Pero si tus alumnos no conocen todavía estos signos, quizá tengan un desafío con esto.
@@ -1006,7 +1006,7 @@ teacher-guide:
                     si nombre == 'Hedy'
                         imprimir '¡Eres genial!'
     -   level: '15'
-        sections:
+        teacher-guide:
         -   title: Los alumnos olvidan la sangría en el bucle mientras
             example:
                 error_text: La sangría suele ser complicada para los alumnos.
@@ -1022,7 +1022,7 @@ teacher-guide:
                         respuesta = preguntar '¿Cuánto es 5 veces 5?'
                     imprimir 'Se ha dado una respuesta correcta'
     -   level: '16'
-        sections:
+        teacher-guide:
         -   title: Los alumnos olvidan los corchetes
             example:
                 error_text: Desde este nivel en adelante las listas deben ir entre corchetes.
@@ -1074,7 +1074,7 @@ teacher-guide:
                     helado = ['fresa', 'chocolate']
                     imprimir 'Me encanta el helado de ' helado[aleatorio]
     -   level: '17'
-        sections:
+        teacher-guide:
         -   title: Los alumnos usan `{elif}` como `{else}`, sin una condición
             example:
                 error_text: El comando `{elif}` necesita una condición tras él. No se puede usar como `{else}`, sin una condición.
@@ -1114,7 +1114,7 @@ teacher-guide:
                     sino:
                         imprimir '¡Estoy genial!'
     -   level: '18'
-        sections:
+        teacher-guide:
         -   title: Los alumnos olvidan usar los paréntesis
             example:
                 error_text: Los alumnos olvidarán poner paréntesis alrededor de sus textos.
