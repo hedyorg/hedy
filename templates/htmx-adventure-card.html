@@ -5,6 +5,7 @@
     {% else %} outline-blue-600
     {% endif %}
     "
+    data-cy="{{ adventure.id }}"
     data-lang="{{adventure.language or current_language().lang}}"
     _="on removeMe remove me">
 
