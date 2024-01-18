@@ -847,6 +847,12 @@ class TestsLevel2(HedyTester):
 
         expected = textwrap.dedent("""\
             n = 'C4'
+            try:
+                int_note = int(n)
+                if int_note < 0 or int_note > 70:
+                    raise Exception('catch_value_exception')
+            except:
+                raise Exception('catch_value_exception')
             play(notes_mapping.get(str(n), str(n)))
             time.sleep(0.5)""")
 

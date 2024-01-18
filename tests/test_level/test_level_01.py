@@ -289,6 +289,8 @@ class TestsLevel1(HedyTester):
     def test_play(self):
         code = "play A"
         expected = textwrap.dedent("""\
+        if int(A) < 0 or int(A) > 70:
+            raise Exception('catch_value_exception')
         play(notes_mapping.get(str('A'), str('A')))
         time.sleep(0.5)""")
 
