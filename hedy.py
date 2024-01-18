@@ -191,12 +191,15 @@ def _translate_index_error(code, list_name):
 
 def translate_value_error(command, value, suggestion_type):
     exception_text = gettext('catch_value_exception')
-    # Right now we only have two types of suggestion
+    # Right now we only have three types of suggestion
     # In the future we might change this if the number increases
     if suggestion_type == 'number':
         suggestion_text = gettext('suggestion_number')
     elif suggestion_type == 'color':
         suggestion_text = gettext('suggestion_color')
+    elif suggestion_type == 'note':
+        suggestion_text = gettext('suggestion_note')
+
 
     exception_text = exception_text.replace('{command}', style_command(command))
     exception_text = exception_text.replace('{value}', style_command(value))
@@ -1602,7 +1605,11 @@ class ConvertToPython_1(ConvertToPython):
         return self.make_turtle_command(parameter, Command.forward, 'forward', True, 'int')
 
     def make_play(self, note):
+        exception_text = translate_value_error('play', note, 'note')
+        
         return textwrap.dedent(f"""\
+                if int({note}) < 0 or int({note}) > 70:
+                    raise Exception({exception_text})
                 play(notes_mapping.get(str('{note}'), str('{note}')))
                 time.sleep(0.5)""")
 
