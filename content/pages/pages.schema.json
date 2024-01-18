@@ -12,7 +12,7 @@
     "start-sections": { "$ref": "#/definitions/BasicSections" }
   },
   "required": [
-    "title", "teacher-guide", "learn-more-sections", "join-sections", "home-sections"
+    "title", "sections", "learn-more-sections", "join-sections", "home-sections"
   ],
 
   "definitions": {
@@ -60,7 +60,7 @@
         "level": { "type": "string" },
         "teacher-guide": { "type": "array", "items": { "$ref": "#/definitions/DocMistakeLevelSection" } }
       },
-      "required": ["level", "teacher-guide"]
+      "required": ["level", "sections"]
     },
     "DocMistakeLevelSection": {
       "type": "object",

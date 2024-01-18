@@ -377,7 +377,7 @@ teacher-guide:
         Särskilt när koden blir längre och längre i takt med att nivåerna utvecklas. Därför har vi gjort en lista med vanliga misstag på varje nivå och deras lösningar.
     levels:
     -   level: '1'
-        teacher-guide:
+        sections:
         -   title: Eleverna glömmer att skriva kommandon
             example:
                 error_text: De skriver t.ex. en mening utan att använda print.
@@ -429,7 +429,7 @@ teacher-guide:
                 solution_text: För att få sköldpaddan att gå baklänges används kommandot framåt och ett negativt tal. Till exempel
                 solution_code: framåt -100
     -   level: '2'
-        teacher-guide:
+        sections:
         -   title: Eleverna har stavfel i sina kommandon
             example:
                 error_text: Hedy kan inte känna igen ett felstavat kommando.
@@ -480,7 +480,7 @@ teacher-guide:
                     namn är fråga Vad heter din häst?
                     print Din häst heter namn
     -   level: '3'
-        teacher-guide:
+        sections:
         -   title: Eleverna försöker skriva ut hela listor
             example:
                 error_text: En hel lista kan inte skrivas ut. Du kan bara skriva ut ett element i taget från listan med {at} {random}.
@@ -586,7 +586,7 @@ teacher-guide:
                     ta bort tärningar från äventyr
                     print Jag älskar äventyr på slump
     -   level: '4'
-        teacher-guide:
+        sections:
         -   title: Eleverna glömmer att det behövs citattecken på båda sidor om texten
             example:
                 error_text: På den här nivån behöver skriv och fråga ett par citattecken. Ett före och ett efter texten.
@@ -616,7 +616,7 @@ teacher-guide:
                     skriv 'Du kan skriva rock-n-roll'
                     skriv 'Och du kan skriva rock`n roll'
     -   level: '5'
-        teacher-guide:
+        sections:
         -   title: Eleverna glömmer att använda `{print}` i ett `{if}`-kommando
             example:
                 error_text: När eleverna har använt `{if}` eller `{else}` glömmer de att ha ett andra kommando som `{print}` eller `{ ask}`.
@@ -697,7 +697,7 @@ teacher-guide:
                     {if} hemligt_lösenord {is} lösenord {print} 'Åtkomst beviljad!'
                     {else} {print} 'Ingen åtkomst'
     -   level: '6'
-        teacher-guide:
+        sections:
         -   title: Eleverna kämpar med citattecken
             example:
                 error_text: Vissa elever kämpar med att lägga till citattecken eller inte. Om du lägger till citattecken blir utskriften bokstavligen '5+5'.
@@ -720,7 +720,7 @@ teacher-guide:
                     om dryck = ja pris = pris + 4
                     skriv 'Det blir ' pris ' euro tack'
     -   level: '7'
-        teacher-guide:
+        sections:
         -   title: Eleverna glömmer något av orden i repetera-kommandot, eller så glömmer de skriv-kommandot
             example:
                 error_text: Se till att eleverna vet att de ska använda både det fullständiga repetera-kommandot och utskriftskommandot.
@@ -752,7 +752,7 @@ teacher-guide:
                 solution_text: Se till att koden inte är för lång
                 solution_code: upprepa 20 gånger skriv 'Detta räcker'
     -   level: '8'
-        teacher-guide:
+        sections:
         -   title: Eleverna gör fel indrag
             example:
                 error_text: Indrag är ett nytt begrepp på den här nivån, som är svårt att använda för vissa elever. Se till att de tränar på enkel kod innan du gör ett helt program med det.
@@ -824,7 +824,7 @@ teacher-guide:
                     annars
                         print 'Du får inte komma in'
     -   level: '9'
-        teacher-guide:
+        sections:
         -   title: Elever gör fel på indrag
             example:
                 error_text: Det svåraste med den här nivån är att ha rätt indrag. Elever älskar att kapsla `{if}`-satser, ibland även inuti andra kapslade `{if}`-satser. Att hålla reda på indragen kan bli ganska svårt.
@@ -856,7 +856,7 @@ teacher-guide:
                     annars
                         skriv 'Robin går hem'
     -   level: '10'
-        teacher-guide:
+        sections:
         -   title: Eleverna använder inte för-kommandot rätt
             example:
                 error_text: Vi ser ofta att elever försöker skriva ut listan (i exemplet djur) istället för elementen i listan.
@@ -882,7 +882,7 @@ teacher-guide:
                     för djuret i djur
                       skriv 'Jag älskar ' djuret
     -   level: '11'
-        teacher-guide:
+        sections:
         -   title: Eleverna glömmer att använda indrag
             example:
                 error_text: Se till att eleverna använder indrag.
@@ -906,7 +906,7 @@ teacher-guide:
                     för banan i intervallet 1 till 5
                         skriv banan
     -   level: '12'
-        teacher-guide:
+        sections:
         -   title: Eleverna glömmer citattecken
             example:
                 error_text: Eleverna behöver fler citattecken nu än på de tidigare nivåerna. I det här exemplet glömdes citattecken i listan och i kommandot `{if}`.
@@ -946,7 +946,7 @@ teacher-guide:
                 solution_text: 'Detta är rätt kod:'
                 solution_code: skriv 2.5 + 2.5
     -   level: '13'
-        teacher-guide:
+        sections:
         -   title: Elever förväxlar `och` med `eller`
             example:
                 error_text: De båda kommandona kan verka snarlika, men de fungerar helt olika.
@@ -962,7 +962,7 @@ teacher-guide:
                     om spel är 'ja' och tid är 'ja'
                         skriv 'Nu spelar vi!'
     -   level: '14'
-        teacher-guide:
+        sections:
         -   title: Eleverna blandar ihop symbolerna < och >
             example:
                 error_text: Ofta är eleverna redan bekanta med de symbolerna från matten. Men om dina elever inte känner till tecknen än kan de få problem med det.
@@ -1000,7 +1000,7 @@ teacher-guide:
                     om namn == 'Hedy'
                         skriv 'Du är cool!'
     -   level: '15'
-        teacher-guide:
+        sections:
         -   title: Eleverna glömmer indrag i while-loopen
             example:
                 error_text: Indrag är ofta svårt för eleverna.
@@ -1016,7 +1016,7 @@ teacher-guide:
                         svar = fråga 'Vad är 5 gånger 5?'
                     print 'Rätt svar har getts'
     -   level: '16'
-        teacher-guide:
+        sections:
         -   title: Eleverna glömmer klamrar
             example:
                 error_text: Från och med den här nivån ska listor anges inom klammer.
@@ -1068,7 +1068,7 @@ teacher-guide:
                     glass = ['jordgubbs', 'choklad']
                     skriv 'Jag älskar ' glass[slump] 'glass'
     -   level: '17'
-        teacher-guide:
+        sections:
         -   title: Eleverna använder `{elif}` som `{else}`, alltså utan ett villkor
             example:
                 error_text: Kommandot `{elif}` behöver ett villkor efter. Det kan inte användas som `{else}`, alltså utan ett villkor.
@@ -1108,7 +1108,7 @@ teacher-guide:
                     annars:
                         skriv 'Jag är jättebra!'
     -   level: '18'
-        teacher-guide:
+        sections:
         -   title: Eleverna glömmer hakparenteser
             example:
                 error_text: Eleverna glömmer att ha parenteser runt text.

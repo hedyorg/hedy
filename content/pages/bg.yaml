@@ -327,7 +327,7 @@ teacher-guide:
         Especially as the codes get longer and longer as the levels progress. That's why we've made a list with frequently made mistakes in each level, and their solutions.
     levels:
     -   level: '1'
-        teacher-guide:
+        sections:
         -   title: Students forget to type commandos
             example:
                 error_text: For example they type a sentence without using print.
@@ -379,7 +379,7 @@ teacher-guide:
                 solution_text: 'To make the turtle go backwards, you use the forward command and a negative number. For example:'
                 solution_code: forward -100
     -   level: '2'
-        teacher-guide:
+        sections:
         -   title: Students make typos in their commands
             example:
                 error_text: Hedy can't recognize a command with a typo.
@@ -429,7 +429,7 @@ teacher-guide:
                     name is ask What is your horse called?
                     print Your horse is called name
     -   level: '3'
-        teacher-guide:
+        sections:
         -   title: Students try to print whole lists
             example:
                 error_text: A list can't be printed. You can only print one item from the list with at random.
@@ -535,7 +535,7 @@ teacher-guide:
                     remove dice from adventures
                     print I love adventures at random
     -   level: '4'
-        teacher-guide:
+        sections:
         -   title: Students forget to use quotation marks on both sides of the text
             example:
                 error_text: In this level print and ask need a set of quotation marks. One before of the text and one after.
@@ -565,7 +565,7 @@ teacher-guide:
                     print 'Youre allowed to type this'
                     print 'And you`re able to do this'
     -   level: '5'
-        teacher-guide:
+        sections:
         -   title: Students forget to use print in an if command
             example:
                 error_text: After students use if or else they forget to use a second command like print or ask.
@@ -646,7 +646,7 @@ teacher-guide:
                     if secret_password is password print 'Access granted!'
                     else print 'Access denied!'
     -   level: '6'
-        teacher-guide:
+        sections:
         -   title: Students struggle with quotation marks
             example:
                 error_text: Some students struggle with adding quotattion marks or not. If you add quotation marks, the output screen will literally show '5+5'.
@@ -669,7 +669,7 @@ teacher-guide:
                     if drink = yes price = price + 4
                     print 'That will be ' price ' euros please'
     -   level: '7'
-        teacher-guide:
+        sections:
         -   title: Students forget one of the word of the repeat command, or they forget the print command
             example:
                 error_text: Make sure that the students know to use both the full repeat command and the print command.
@@ -701,7 +701,7 @@ teacher-guide:
                 solution_text: Make sure the codes aren't too long
                 solution_code: repeat 20 times print 'This is enough'
     -   level: '8'
-        teacher-guide:
+        sections:
         -   title: Students use the indentation wrong
             example:
                 error_text: Indentation is a new concept in this level, that is hard to use for some students. Make sure they practise some simple codes before making a whole program with it.
@@ -773,7 +773,7 @@ teacher-guide:
                     else
                         print 'You are not allowed'
     -   level: '9'
-        teacher-guide:
+        sections:
         -   title: Students make mistakes with indentation
             example:
                 error_text: The hardest part about this level is getting the indentation right. Students love nesting if statements, sometimes even inside other nested if statements. Keeping track of indentation can get pretty tough.
@@ -805,7 +805,7 @@ teacher-guide:
                     else
                         print 'Robin goes home'
     -   level: '10'
-        teacher-guide:
+        sections:
         -   title: Students so not use the for command correctly
             example:
                 error_text: We often see that students try to print the list (in the example animals) instead of the items of the list.
@@ -831,7 +831,7 @@ teacher-guide:
                     for animal in animals
                       print 'I love ' animal
     -   level: '11'
-        teacher-guide:
+        sections:
         -   title: Students forget to use indentation
             example:
                 error_text: Make sure that the students use indentation.
@@ -855,7 +855,7 @@ teacher-guide:
                     for banana in range 1 to 5
                         print banana
     -   level: '12'
-        teacher-guide:
+        sections:
         -   title: Students forget quotation marks
             example:
                 error_text: Students need more quotation marks now than in the previous levels. In this example quotation marks were forgotten in the list and in the if command.
@@ -895,7 +895,7 @@ teacher-guide:
                 solution_text: 'This is the correct code:'
                 solution_code: print 2.5 + 2.5
     -   level: '13'
-        teacher-guide:
+        sections:
         -   title: Students confuse `and` with `or`
             example:
                 error_text: Both commands might appear similar, but their functions are very different.
@@ -911,7 +911,7 @@ teacher-guide:
                     if game is 'yes' and time is 'yes'
                         print 'Lets play!'
     -   level: '14'
-        teacher-guide:
+        sections:
         -   title: Students confuse the < and > signs
             example:
                 error_text: Often, students are already familiar with these signs from maths class. But if your students don't know these signs yet, they might have a challenge with it.
@@ -949,7 +949,7 @@ teacher-guide:
                     if name == 'Hedy'
                         print 'You are cool!'
     -   level: '15'
-        teacher-guide:
+        sections:
         -   title: Students forget indentation in the while loop
             example:
                 error_text: Indentation is often hard for students.
@@ -965,7 +965,7 @@ teacher-guide:
                         answer = ask 'What is 5 times 5?'
                     print 'A correct answer has been given'
     -   level: '16'
-        teacher-guide:
+        sections:
         -   title: Students forget the brackets
             example:
                 error_text: From this level on lists should be in brackets.
@@ -1017,7 +1017,7 @@ teacher-guide:
                     icecream = ['starwberry', 'chocolate']
                     print 'I love ' icecream[random] ' icecream'
     -   level: '17'
-        teacher-guide:
+        sections:
         -   title: Students use elif like else, so without a condition
             example:
                 error_text: The elif command needs a condition behind it. It cannot be used like else, without a condition.
@@ -1057,7 +1057,7 @@ teacher-guide:
                     else:
                         print 'Im great!'
     -   level: '18'
-        teacher-guide:
+        sections:
         -   title: Students forget to use the brackets
             example:
                 error_text: Students will forget to put brackets around their text.

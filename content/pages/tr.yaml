@@ -388,7 +388,7 @@ teacher-guide:
         Özellikle de seviyeler ilerledikçe kodlar uzadıkça uzar. Bu yüzden her seviyede sıkça yapılan hataları ve çözümlerini içeren bir liste hazırladık.
     levels:
     -   level: '1'
-        teacher-guide:
+        sections:
         -   title: Öğrenciler komutları yazmayı unutmuş olabilir
             example:
                 error_text: Örneğin, yazdır kullanmadan bir cümle yazarlar.
@@ -440,7 +440,7 @@ teacher-guide:
                 solution_text: 'Kaplumbağanın geriye doğru gitmesini sağlamak için ileri komutu ile negatif bir sayı kullanırsınız. Örneğin:'
                 solution_code: ileri -100
     -   level: '2'
-        teacher-guide:
+        sections:
         -   title: Öğrenciler komutlarında yazım hataları yapmış olabilirler
             example:
                 error_text: Hedy yazım hatası olan bir komutu tanıyamaz.
@@ -490,7 +490,7 @@ teacher-guide:
                     isim eşit sor Atının adı ne?
                     yazdır Demek, atınızın adı isim
     -   level: '3'
-        teacher-guide:
+        sections:
         -   title: Öğrenciler bir listenin tamamını yazdırmaya çalışıyor olabilir
             example:
                 error_text: Bir listenin tamamı yazdırılamaz. (şimdilik) yalnızca listeden bir öğeyi şuradan rastgele kullanarak yazdırabilirsiniz.
@@ -596,7 +596,7 @@ teacher-guide:
                     kaldır zar şuradan maceralar
                     yazdır Benim sevdiğim adventures şurada rastgele
     -   level: '4'
-        teacher-guide:
+        sections:
         -   title: Öğrenciler metnin her iki tarafında da tırnak işareti kullanmayı unutmuş olabilirler
             example:
                 error_text: Bu seviyede yazdırmak ve sormak için artık bir çift tırnak işareti kullanmak gerekiyor. Biri metinden önce ve diğeri sonra.
@@ -626,7 +626,7 @@ teacher-guide:
                     yazdır 'Hedy de böyle yazmana izin var.'
                     yazdır 'Hedy`de böyle de yazabilirsin'
     -   level: '5'
-        teacher-guide:
+        sections:
         -   title: Öğrenciler bir `{if}` komutunda `{print}` kullanmayı unutmuş olabilirler
             example:
                 error_text: Öğrenciler `{if}` veya `{else}` komutlarını kullandıktan sonra `{print}` veya `{ask}` gibi ikinci bir komut kullanmayı unutabilirler.
@@ -707,7 +707,7 @@ teacher-guide:
                     eğer gizli_parola eşit parola yazdır 'Erişim izni verildi!'
                     değilse yazdır 'Erişim reddedildi!'
     -   level: '6'
-        teacher-guide:
+        sections:
         -   title: Öğrenciler tırnak işaretleriyle mücadele etmeye devam ediyor
             example:
                 error_text: Bazı öğrenciler tırnak işareti ekleyip eklememekte zorlanırlar. Tırnak işareti eklerseniz, çıktı ekranı tam anlamıyla '5+5' gösterecektir.
@@ -730,7 +730,7 @@ teacher-guide:
                     eğer içecek = evet ücret = ücret + 4
                     yazdır 'Borcunuz ' ücret ' lira, lütfen'
     -   level: '7'
-        teacher-guide:
+        sections:
         -   title: Öğrenciler tekrarla komutunun bir kelimesini veya yazdır komutunu kullanmayı unutabilirler
             example:
                 error_text: Öğrencilerin hem tekrarla komutunun tamamını hem de yazdır komutunu kullanmayı bildiklerinden emin olun.
@@ -762,7 +762,7 @@ teacher-guide:
                 solution_text: Kodların çok uzun olmadığından emin olun
                 solution_code: tekrarla 20 kere yazdır 'Bu kadar yeterli olur'
     -   level: '8'
-        teacher-guide:
+        sections:
         -   title: Öğrenciler girintiyi yanlış kullanabilirler
             example:
                 error_text: Girintileme, bu seviyede gelen yeni bir kavramdır ve bazı öğrenciler için kullanımını anlamak zordur. Bununla bütün bir program yapmadan önce bazı basit kodları uyguladıklarından emin olun.
@@ -834,7 +834,7 @@ teacher-guide:
                     değilse
                         yazdır 'Giriş iznin yok'
     -   level: '9'
-        teacher-guide:
+        sections:
         -   title: Öğrenciler girintilemede hata yapıyor
             example:
                 error_text: Bu seviyenin en zor kısmı girintileri doğru yapmaktır. Öğrenciler `{if}` deyimlerini iç içe geçirmeye bayılırlar, hatta bazen iç içe geçmiş başka `{if}` deyimlerinin içinde bile. Bu durumda girintilemeyi takip etmek oldukça zor olabilir.
@@ -866,7 +866,7 @@ teacher-guide:
                     değilse
                         yazdır 'Robin eve gider'
     -   level: '10'
-        teacher-guide:
+        sections:
         -   title: Öğrenciler için komutunu doğru kullanmıyor olabilirler
             example:
                 error_text: Öğrencilerin listedeki öğeler yerine listeyi (hayvanlar örneğinde olduğu gibi) yazdırmaya çalıştıklarını sık görüyoruz.
@@ -892,7 +892,7 @@ teacher-guide:
                     için hayvan içinde hayvanlar
                       yazdır 'Benim sevdiğim ' hayvan
     -   level: '11'
-        teacher-guide:
+        sections:
         -   title: Öğrenciler girinti kullanmayı unutuyorlar
             example:
                 error_text: Öğrencilerin girinti kullandıklarından emin olun.
@@ -916,7 +916,7 @@ teacher-guide:
                     için muzlu_süt içinde aralık 1 şuraya 5
                         yazdır muzlu_süt
     -   level: '12'
-        teacher-guide:
+        sections:
         -   title: Öğrenciler tırnak işaretlerini unutmuş olabilirler
             example:
                 error_text: Öğrenciler artık önceki seviyelere göre daha fazla tırnak işaretine ihtiyaç duymaktadır. Bu örnekte tırnak işaretleri listede ve `{if}` komutunda unutulmuştur.
@@ -956,7 +956,7 @@ teacher-guide:
                 solution_text: 'Doğru olan kod:'
                 solution_code: yazdır 2.5 + 2.5
     -   level: '13'
-        teacher-guide:
+        sections:
         -   title: Öğrenciler `ve` ile `veya`yı karıştırıyor
             example:
                 error_text: Her iki komut da benzer görünebilir, ancak işlevleri çok farklıdır.
@@ -972,7 +972,7 @@ teacher-guide:
                     eğer oyun eşit 'evet' ve zaman eşit 'evet'
                         yazdır 'Hadi oynayalım!'
     -   level: '14'
-        teacher-guide:
+        sections:
         -   title: Öğrenciler < ve > işaretlerini karıştırabilir
             example:
                 error_text: 'Öğrenciler genellikle bu işaretlere matematik dersinden aşinadır. Ancak öğrencileriniz bu işaretleri henüz bilmiyorsa, bununla ilgili bir zorluk yaşayabilirler. (Buna yardımcı olmak için "büyük" ve "küçük" kelimelerinin ilk harflerinin yazımından dik çizgiyi kaldırmayı gösterebilirsiniz:
@@ -1011,7 +1011,7 @@ teacher-guide:
                     eğer isim == 'Hedy'
                         yazdır 'Çok havalısın!'
     -   level: '15'
-        teacher-guide:
+        sections:
         -   title: Öğrenciler iken döngüsünde girintilemeyi unutabilir
             example:
                 error_text: Girinti yapmak öğrenciler için genellikle zordur.
@@ -1027,7 +1027,7 @@ teacher-guide:
                         cevap = sor '5 kere 5 kaç eder?'
                     yazdır 'Doğru bir cevap verilmiştir'
     -   level: '16'
-        teacher-guide:
+        sections:
         -   title: Öğrenciler parantezleri unutur
             example:
                 error_text: Bu seviyeden itibaren listeler köşeli parantez içinde olmalıdır.
@@ -1079,7 +1079,7 @@ teacher-guide:
                     dondurma = ['çilek', 'çikolata']
                     yazdır 'En sevdiğim ' dondurma[rastgele] ' tadında dondurma'
     -   level: '17'
-        teacher-guide:
+        sections:
         -   title: Öğrenciler `{elif}` ifadesini `{else}` gibi kullanmaya çalışabilirler; yanına bir koşul yazmadan
             example:
                 error_text: '`{elif}` komutunun arkasında bir koşul olması gerekir. Bir koşul olmadan `{else}` gibi kullanılamaz.'
@@ -1119,7 +1119,7 @@ teacher-guide:
                     {else}:
                         {print} 'Harikayım!'
     -   level: '18'
-        teacher-guide:
+        sections:
         -   title: Öğrenciler parantezleri kullanmayı unutuyorlar
             example:
                 error_text: Öğrenciler metinlerinin etrafına parantez koymayı unutabilirler. Bu seviyede bir çok komutta artık parantez kullanılmalıdır.

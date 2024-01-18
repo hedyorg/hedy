@@ -376,7 +376,7 @@ teacher-guide:
         特别是随着级别的提高，程序变得越来越长。这就是为什么我们列出了每个级别中常犯的错误，以及它们的改正方法。
     levels:
     -   level: '1'
-        teacher-guide:
+        sections:
         -   title: 学生忘记键入命令
             example:
                 error_text: 例如，他们在不使用打印命令的情况下键入句子。
@@ -428,7 +428,7 @@ teacher-guide:
                 solution_text: 要使海龟后退，你要使用向前命令和一个负数。比如说：
                 solution_code: 向前 -100
     -   level: '2'
-        teacher-guide:
+        sections:
         -   title: 学生在键入命令中出现拼写错误
             example:
                 error_text: Hedy无法识别带有拼写错误的命令。
@@ -478,7 +478,7 @@ teacher-guide:
                     名字是问你的马叫什么？
                     打印你的马叫名字
     -   level: '3'
-        teacher-guide:
+        sections:
         -   title: 学生们尝试打印整个列表
             example:
                 error_text: 无法打印列表。您只能用{at} {random} 命令打印列表中的一个项目。
@@ -584,7 +584,7 @@ teacher-guide:
                     从冒险活动中删除骰子
                     打印我爱随机选择的冒险活动
     -   level: '4'
-        teacher-guide:
+        sections:
         -   title: 学生忘记在文本的两边使用引号
             example:
                 error_text: 在这个级别打印和询问需要一组引号。一个在文本之前，一个在文本之后。
@@ -614,7 +614,7 @@ teacher-guide:
                     打印'允许键入此内容'
                     打印'并且您可以执行此操作'
     -   level: '5'
-        teacher-guide:
+        sections:
         -   title: 学生忘记在如果命令中使用打印
             example:
                 error_text: 在学生使用“如果”或“否则”后，他们忘记使用第二个命令，如打印或询问。
@@ -695,7 +695,7 @@ teacher-guide:
                     如果 保密_密码 是密码 打印'授予访问权限！'
                     否则打印 '访问被拒绝！'
     -   level: '6'
-        teacher-guide:
+        sections:
         -   title: 学生在引号中挣扎
             example:
                 error_text: 有些学生在添加引号或不添加引号时很纠结。如果你加了引号，输出屏幕上就会真的显示'5+5'。
@@ -711,7 +711,7 @@ teacher-guide:
                 solution_text: 或者像这样更进一步。
                 solution_code: "价格=0\n打印 '欢迎来到我们的汉堡店' \n汉堡 = 询问 '你想吃汉堡吗？'\n如果汉堡 =是 价格 = 价格 + 10\n饮料 = 询问 '你想喝饮料吗？'\n如果饮料 = 是 价格 = 价格 + 4\n打印 '那将是 ' 价格 ' 欧元"
     -   level: '7'
-        teacher-guide:
+        sections:
         -   title: 学生们忘记了重复命令中的一个词，或者他们忘记了打印命令
             example:
                 error_text: 确保学生知道同时使用完整的重复命令和打印命令。
@@ -743,7 +743,7 @@ teacher-guide:
                 solution_text: 确保代码不会太长
                 solution_code: 重复20次打印'这就足够了'
     -   level: '8'
-        teacher-guide:
+        sections:
         -   title: 学生用错了缩进
             example:
                 error_text: 缩进是这个级别的一个新概念，对于一些学生来说很难使用。确保他们在使用它编写整个程序之前先练习编写一些简单的代码。
@@ -815,7 +815,7 @@ teacher-guide:
                      否则
                         打印'您不许进来'
     -   level: '9'
-        teacher-guide:
+        sections:
         -   title: 学生使用缩进时出错
             example:
                 error_text: 这个级别最困难的部分是正确的使用缩进。学生喜欢嵌套if（如果）语句，有时甚至在其他嵌套if（如果）语句中。追踪缩进可能会变得非常困难。
@@ -847,7 +847,7 @@ teacher-guide:
                     否则
                         打印'罗宾回家了'
     -   level: '10'
-        teacher-guide:
+        sections:
         -   title: 学生不能正确使用for（取）命令
             example:
                 error_text: 我们经常看到学生尝试打印列表（在示例中的动物们）而不是列表中的项目。
@@ -873,7 +873,7 @@ teacher-guide:
                     取动物们中的动物
                       打印'我爱'动物
     -   level: '11'
-        teacher-guide:
+        sections:
         -   title: 学生忘记使用行首空格
             example:
                 error_text: 确保学生使用缩进。
@@ -897,7 +897,7 @@ teacher-guide:
                     取香蕉在 1 到 5 的范围内
                         打印香蕉
     -   level: '12'
-        teacher-guide:
+        sections:
         -   title: 学生们忘记引号了
             example:
                 error_text: 与以前的级别相比，学生现在需要使用更多的引号。在此示例中，引号在列表和 if （如果）命令中被遗忘。
@@ -937,7 +937,7 @@ teacher-guide:
                 solution_text: '这是正确的代码:'
                 solution_code: 打印 2.5 + 2.5
     -   level: '13'
-        teacher-guide:
+        sections:
         -   title: 学生搞混了 `和` 与 `或`
             example:
                 error_text: 两个指令虽然可能看起来类似，然而它们拥有不同的功能.
@@ -953,7 +953,7 @@ teacher-guide:
                     如果游戏是“是”或时间是“是”
                          打印“让我们玩吧！”
     -   level: '14'
-        teacher-guide:
+        sections:
         -   title: 学生混淆“<” 和 “> ”符号
             example:
                 error_text: 通常，学生已经从数学课上熟悉了这些符号。 但是，如果您的学生还不知道这些标志，他们可能会遇到挑战。
@@ -991,7 +991,7 @@ teacher-guide:
                     if name == 'Hedy'
                         print 'You are cool!'
     -   level: '15'
-        teacher-guide:
+        sections:
         -   title: Students forget indentation in the while loop
             example:
                 error_text: Indentation is often hard for students.
@@ -1007,7 +1007,7 @@ teacher-guide:
                         answer = ask 'What is 5 times 5?'
                     print 'A correct answer has been given'
     -   level: '16'
-        teacher-guide:
+        sections:
         -   title: Students forget the brackets
             example:
                 error_text: From this level on lists should be in brackets.
@@ -1059,7 +1059,7 @@ teacher-guide:
                     icecream = ['starwberry', 'chocolate']
                     print 'I love ' icecream[random] ' icecream'
     -   level: '17'
-        teacher-guide:
+        sections:
         -   title: 学生们像`{else}`一样使用 `{elif}`，所以没有条件
             example:
                 error_text: '`{elif}` 命令后面需要一个条件。 它不能像`{else}`一样无条件地使用。'
@@ -1099,7 +1099,7 @@ teacher-guide:
                     else:
                         print '我很好!'
     -   level: '18'
-        teacher-guide:
+        sections:
         -   title: 学生忘记使用括号
             example:
                 error_text: 学生会忘记在文本两边加上括号。

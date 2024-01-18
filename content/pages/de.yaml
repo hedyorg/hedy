@@ -381,7 +381,7 @@ teacher-guide:
         Ganz besonders, wenn die Programme länger werden je weiter die Level fortschreiten. Deshalb haben wir eine Liste mit den häufigsten Fehlern und ihren Lösungen für jedes Level erstellt.
     levels:
     -   level: '1'
-        teacher-guide:
+        sections:
         -   title: Schülerinnen und Schüler vergessen Befehle einzutippen
             example:
                 error_text: Beispielsweise schreiben sie einen Satz ohne den drucke-Befehl zu benutzen.
@@ -433,7 +433,7 @@ teacher-guide:
                 solution_text: 'Um die Schildkröte rückwärts gehen zu lassen, benutzt man den vorwärts-Befehl und eine negative Zahl. Zum Beispiel:'
                 solution_code: vorwärts -100
     -   level: '2'
-        teacher-guide:
+        sections:
         -   title: Schülerinnen und Schüler machen Tippfehler in ihren Befehlen
             example:
                 error_text: Hedy kann keinen Befehl mit Tippfehler erkennen.
@@ -484,7 +484,7 @@ teacher-guide:
                     Name ist frage Wie heißt dein Pferd?
                     drucke Dein Pferd heißt Name
     -   level: '3'
-        teacher-guide:
+        sections:
         -   title: Schülerinnen und Schüler versuchen ganze Listen zu drucken
             example:
                 error_text: Eine Liste kann nicht gedruckt werden. Du kannst nur ein Element der Liste ausgeben mit `{at}` `{random}`.
@@ -590,7 +590,7 @@ teacher-guide:
                     entferne Würfel von Abenteuer
                     drucke Ich mag Abenteuer at random
     -   level: '4'
-        teacher-guide:
+        sections:
         -   title: Schülerinnen und Schüler vergessen Anführungszeichen auf beiden Seiten des Textes
             example:
                 error_text: In diesem Level benötigen drucke und frage Anführungszeichen. Eines vor dem Text und eines dahinter.
@@ -620,7 +620,7 @@ teacher-guide:
                     drucke 'Hedys ist erlaubt zu tippen'
                     drucke 'Und Hedy`s ist erlaubt'
     -   level: '5'
-        teacher-guide:
+        sections:
         -   title: Schülerinnen und Schüler vergessen `{print}` innerhalb eines `{if}`-Befehls zu verwenden
             example:
                 error_text: Schülerinnen und Schüler vergessen nach einem `{if}` oder `{else}` einen zweiten Befehl wie `{print}` oder `{ask}` zu verwenden.
@@ -701,7 +701,7 @@ teacher-guide:
                     falls geheimes_passwort {is} passwort {print} 'Zugang gewährt'
                     {else} {print} 'Zugang verwehrt!'
     -   level: '6'
-        teacher-guide:
+        sections:
         -   title: Schülerinnen und Schüler kämpfen mit Anführungszeichen
             example:
                 error_text: Einige Schüler haben Probleme damit, Anführungszeichen hinzuzufügen oder nicht. Wenn du Anführungszeichen hinzufügst, wird auf dem Ausgabebildschirm buchstäblich "5+5" angezeigt.
@@ -724,7 +724,7 @@ teacher-guide:
                     falls getränk = ja preis = preis + 4
                     drucke 'Das macht dann ' preis ' Euro bitte'
     -   level: '7'
-        teacher-guide:
+        sections:
         -   title: Schülerinnen und Schüler vergessen ein Wort des Wiederholungsbefehls oder sie vergessen den Ausgabebefehl
             example:
                 error_text: Stelle sicher, dass die Schülerinnen und Schüler wissen wie man sowohl den vollständigen Wiederholungsbefehl als auch den Ausgabebefehl verwendet.
@@ -756,7 +756,7 @@ teacher-guide:
                 solution_text: Stelle sicher, dass der Code nicht zu lang ist
                 solution_code: wiederhole 20 mal drucke 'Dies ist genug'
     -   level: '8'
-        teacher-guide:
+        sections:
         -   title: Schülerinnen und Schüler benutzen die falsche Einrückung
             example:
                 error_text: Einrückung ist ein neues Konzept in diesem Level, welches einigen Schülerinnen und Schülern schwerfällt. Stelle sicher, dass sie einige einfache Beispiele üben, bevor sie ein ganzes Programm damit erstellen.
@@ -828,7 +828,7 @@ teacher-guide:
                     sonst
                         drucke 'Du hast keine Erlaubnis'
     -   level: '9'
-        teacher-guide:
+        sections:
         -   title: Schülerinnen und Schüler machen Fehler bei der Einrückung
             example:
                 error_text: Der schwerste Teil an diesem Level ist, die Einrückung hinzubekommen. Schülerinnen und Schüler lieben es, `{if}`-Befehle zu verschachteln, manchmal sogar innerhalb anderer verschachtelter `{if}`-Befehle. Mit der Einrückung Schritt zu halten kann ziemlich schwer sein.
@@ -860,7 +860,7 @@ teacher-guide:
                     sonst
                         drucke 'Robin geht nach Hause'
     -   level: '10'
-        teacher-guide:
+        sections:
         -   title: Schülerinnen und Schüler benutzen den für-Befehl nicht richtig
             example:
                 error_text: Wir sehen oft, dass die Schülerinnen und Schüler versuchen die Liste (in diesem Beispiel tiere) auszugeben, anstatt die Elemente in der Liste auszugeben.
@@ -886,7 +886,7 @@ teacher-guide:
                     für tier in tiere
                       drucke 'Ich liebe ' tier
     -   level: '11'
-        teacher-guide:
+        sections:
         -   title: Schülerinnen und Schüler vergessen Einrückung zu benutzen
             example:
                 error_text: Stelle sicher, dass die Schülerinnen und Schüler Einrückung verwenden.
@@ -910,7 +910,7 @@ teacher-guide:
                     für banane in bereich 1 bis 5
                         drucke banane
     -   level: '12'
-        teacher-guide:
+        sections:
         -   title: Schülerinnen und Schüler vergessen Anführungszeichen
             example:
                 error_text: Schülerinnen und Schüler brauchen nun mehr Anführungszeichen als in vorigen Leveln. In diesem Beispiel wurden Anführungszeichen in der Liste und im `{if}`-Befehl vergessen.
@@ -950,7 +950,7 @@ teacher-guide:
                 solution_text: 'Dies ist der korrekte Code:'
                 solution_code: drucke 2.5 + 2.5
     -   level: '13'
-        teacher-guide:
+        sections:
         -   title: Schülerinnen und Schüler verwechseln `und` mit `oder`
             example:
                 error_text: Beide Befehle können ähnlich erscheinen, aber ihre Funktion ist sehr verschieden.
@@ -966,7 +966,7 @@ teacher-guide:
                     falls spiel ist 'ja' und zeit ist 'ja'
                         drucke 'Lass uns spielen!'
     -   level: '14'
-        teacher-guide:
+        sections:
         -   title: Schülerinnen und Schüler verwechseln die < und > Zeichen
             example:
                 error_text: Oft kennen die Schülerinnen und Schüler diese Zeichen bereits aus dem Mathematikunterricht. Aber, falls deine Schülerinnen und Schüler diese Zeichen noch nicht kennen, könnte es eine Hürde darstellen.
@@ -1004,7 +1004,7 @@ teacher-guide:
                     falls name == 'Hedy'
                         drucke 'Du bist cool!'
     -   level: '15'
-        teacher-guide:
+        sections:
         -   title: Schülerinnen und Schüler vergessen die Einrückung in der Wiederholungsschleife
             example:
                 error_text: Einrückung ist oft schwer für Schülerinnen und Schüler.
@@ -1020,7 +1020,7 @@ teacher-guide:
                         antwort = frage 'Was ist 5 mal 5?'
                     drucke 'Eine richtige Antwort wurde gegeben'
     -   level: '16'
-        teacher-guide:
+        sections:
         -   title: Schülerinnen und Schüler vergessen die Klammern
             example:
                 error_text: Ab diesem Level sollten Listen in Klammern stehen.
@@ -1072,7 +1072,7 @@ teacher-guide:
                     eis = ['Erdbeer', 'Schokoladen']
                     drucke 'Ich liebe ' eis[zufällig] 'eis'
     -   level: '17'
-        teacher-guide:
+        sections:
         -   title: Schülerinnen und Schüler benutzen `{elif}` wie `{else}`, also ohne Bedingung
             example:
                 error_text: Der `{elif}` Befehl benötigt eine Bedingung dahinter. Er kann nicht wie `{else}` benutzt werden, ohne Bedingung.
@@ -1112,7 +1112,7 @@ teacher-guide:
                     sonst:
                         drucke 'Großartig!'
     -   level: '18'
-        teacher-guide:
+        sections:
         -   title: Schülerinnen und Schüler vergessen die Klammern
             example:
                 error_text: Schülerinnen und Schüler vergessen Klammern um ihren Text zu setzen

@@ -371,7 +371,7 @@ teacher-guide:
         특히 레벨이 올라갈수록 코드가 점점 길어지기 때문에 레벨별로 실수가 자주 발생하는 리스트와 그 해결책을 만들어 보았습니다.
     levels:
     -   level: '1'
-        teacher-guide:
+        sections:
         -   title: 학생들이 명령어를 입력하는 것을 잊어버린다
             example:
                 error_text: 예를 들어 학생들은 print 명령어를 사용하지 않고 문장을 타이핑한다.
@@ -423,7 +423,7 @@ teacher-guide:
                 solution_text: '거북이를 뒤로 가게 하려면 forward 명령어와 음수(마이너스)를 사용합니다. 예를 들어:'
                 solution_code: forward -100
     -   level: '2'
-        teacher-guide:
+        sections:
         -   title: 학생들은 가끔 잘못된 명령어를 입력한다
             example:
                 error_text: Hedy는 타이핑하는 명령어를 인식하지 못한다.
@@ -473,7 +473,7 @@ teacher-guide:
                     이름 is ask 너의 강아지는 뭐라고 부르니?
                     print 너의 강아지 이름
     -   level: '3'
-        teacher-guide:
+        sections:
         -   title: 학생들은 전체 목록을 print하려고 한다
             example:
                 error_text: 목록을 인쇄할 수 없습니다. {at} {random}(으)로 목록에서 항목 하나만 인쇄할 수 있습니다.
@@ -579,7 +579,7 @@ teacher-guide:
                     remove dice from 모험
                     print 나는 모험 at random
     -   level: '4'
-        teacher-guide:
+        sections:
         -   title: 학생들은 본문 양쪽에 따옴표'를 사용하는 것을 잊는다
             example:
                 error_text: 이 레벨에서는 따옴표'가 필요하다. 본문 앞에 하나, 뒤에 하나.
@@ -609,7 +609,7 @@ teacher-guide:
                     print 'Youre allowed to type this'
                     print 'And you`re able to do this'
     -   level: '5'
-        teacher-guide:
+        sections:
         -   title: 학생들이 {if} 명령어에서 {print}를 사용하는 것을 잊어버립니다
             example:
                 error_text: 학생들이 `{if}`나 `{else}`를 사용한 후에는 `{print}`나 `{ask}` 같은 두 번째 명령어를 사용하는 것을 잊어버립니다.
@@ -690,7 +690,7 @@ teacher-guide:
                     {if} 비밀_암호 {is} 암호 {print} '승인 되었습니다!'
                     {else} {print} '거부 되었습니다!'
     -   level: '6'
-        teacher-guide:
+        sections:
         -   title: 학생들은 따옴표' 때문에 어려움을 겪는다
             example:
                 error_text: 일부 학생들은 따옴표'를 붙이거나 붙이지 않기도 한다. 따옴표'를 추가하면 출력 화면에 문자 그대로 '5+5'가 표시됩니다.
@@ -713,7 +713,7 @@ teacher-guide:
                     if 음료수 = 네 가격 = 가격 + 4
                     print '결제 금액은 ' 가격 ' 달러 입니다'
     -   level: '7'
-        teacher-guide:
+        sections:
         -   title: 학생들은 repeat 명령어 중 하나를 잊어버리거나, print 명령어를 잊어버립니다
             example:
                 error_text: 학생들이 전체 repeat 명령어과 print 명령어를 모두 사용하는 것을 알고 있는지 확인합니다.
@@ -745,7 +745,7 @@ teacher-guide:
                 solution_text: 코드가 너무 길지 않은지 확인합니다
                 solution_code: repeat 20 times print '이정도면 충분해요'
     -   level: '8'
-        teacher-guide:
+        sections:
         -   title: 학생들은 들여쓰기를 잘못 사용한다
             example:
                 error_text: 들여쓰기는 이 레벨의 새로운 개념이며, 일부 학생들에게는 사용하기 어려운 것이다. 전체 프로그램을 만들기 전에 간단한 코드를 연습해야 한다.
@@ -817,7 +817,7 @@ teacher-guide:
                     else
                         print '들어 오시면 안되요'
     -   level: '9'
-        teacher-guide:
+        sections:
         -   title: 학생들은 들여쓰기로 실수를 한다
             example:
                 error_text: 이 레벨에서 가장 어려운 점은 들여쓰기를 맞추는 것이다. 학생들은 `{if`} 문장을 묶는 것을 매우 좋아하는데, 때로는 다른 `{if}` 문장 안에 묶어서 쓰기도 한다. 들여쓰기를 추적하는 것은 상당히 어려워질 수 있다.
@@ -849,7 +849,7 @@ teacher-guide:
                     else
                         print '로빈은 집에 간다'
     -   level: '10'
-        teacher-guide:
+        sections:
         -   title: 학생들이 for 명령어을 올바르게 사용하지 않아요
             example:
                 error_text: '우리는 종종 학생들이 목록의 항목 대신에 목록을 print하려고 노력하는 것을 봅니다. (예: 동물들).'
@@ -875,7 +875,7 @@ teacher-guide:
                     for 동물 in 동물들
                       print '나는 좋아해 ' 동물
     -   level: '11'
-        teacher-guide:
+        sections:
         -   title: 학생들이 들여쓰기를 잊어버립니다
             example:
                 error_text: 학생들이 들여쓰기를 사용하는지 확인합니다.
@@ -899,7 +899,7 @@ teacher-guide:
                     for 바나나 in range 1 to 5
                         print 바나나
     -   level: '12'
-        teacher-guide:
+        sections:
         -   title: 학생들은 따옴표'를 잊어버린다
             example:
                 error_text: 학생들은 이전 레벨보다 지금 더 많은 따옴표를 필요로 한다. 이 예제에서 따옴표는 목록과 `{if}` 명령에서 잊혀졌다.
@@ -939,7 +939,7 @@ teacher-guide:
                 solution_text: '이것이 정확한 코드입니다:'
                 solution_code: print 2.5 + 2.5
     -   level: '13'
-        teacher-guide:
+        sections:
         -   title: 학생들은 `and`와 `or`를 혼동한다
             example:
                 error_text: 두 명령은 유사하게 보일 수 있지만 기능은 매우 다릅니다.
@@ -955,7 +955,7 @@ teacher-guide:
                     if 게임 is '네' and 시간 is '네'
                         print '놀자!'
     -   level: '14'
-        teacher-guide:
+        sections:
         -   title: 학생들은 < 및 > 기호를 혼동한다
             example:
                 error_text: 종종, 학생들은 이미 수학 수업에서 나온 이러한 기호들에 익숙합니다. 하지만 학생들이 아직 이러한 기호들을 모른다면, 그들은 그것에 대해 어려움을 겪을 수 있습니다.
@@ -993,7 +993,7 @@ teacher-guide:
                     if 이름 == 'Hedy'
                         print '멋진데!'
     -   level: '15'
-        teacher-guide:
+        sections:
         -   title: 학생들은 그 동안 들여쓰기를 잊어버립니다
             example:
                 error_text: 학생들은 보통 들여쓰기가 어렵다.
@@ -1009,7 +1009,7 @@ teacher-guide:
                         대답 = ask '5 곱하기 5 는 무엇이지?'
                     print '정답은 '
     -   level: '16'
-        teacher-guide:
+        sections:
         -   title: 학생들은 괄호를 잊어버린다
             example:
                 error_text: 이 레벨부터 목록은 괄호 안에 있어야 한다.
@@ -1061,7 +1061,7 @@ teacher-guide:
                     아이스크림 = ['딸기', '초콜렛']
                     print '나는 ' 아이스크림[random] ' 아이스크림을 좋아해'
     -   level: '17'
-        teacher-guide:
+        sections:
         -   title: Students use `{elif}` like `{else}`, so without a condition
             example:
                 error_text: '`{elif}` 명령어는 조건이 있어야 한다. 조건 없이는 `{else}`처럼 사용할 수 없다.'
@@ -1101,7 +1101,7 @@ teacher-guide:
                     else:
                         print '나는 좋아!'
     -   level: '18'
-        teacher-guide:
+        sections:
         -   title: 학생들은 괄호를 사용하는 것을 잊는다
             example:
                 error_text: 학생들은 그들의 텍스트에서 괄호를 사용하는 것을 잊게 될 수 있다.
