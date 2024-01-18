@@ -21,7 +21,7 @@
             </svg>
           </button>
         </div>
-        <div class="border border-gray-400 px-4 rounded-lg w-full lg:w-3/4 p-4 text-center hidden" id="classes_info">
+        <div class="border border-gray-400 px-4 rounded-lg w-full lg:w-3/4 p-4 text-center {% if teacher_classes %}hidden{% endif %}" id="classes_info">
           <p>
             {{ _('classes_info') }}
           </p>
@@ -66,7 +66,7 @@
           </svg>
         </button>
       </div>
-      <div class="border border-gray-400 px-4 rounded-lg w-full lg:w-3/4 p-4 text-center hidden" id="adventures_info">
+      <div class="border border-gray-400 px-4 rounded-lg w-full lg:w-3/4 p-4 text-center {% if teacher_adventures %}hidden{% endif %}" id="adventures_info">
         <p>
           {{ _('adventures_info') }}
         </p>
