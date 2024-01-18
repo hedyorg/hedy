@@ -719,13 +719,14 @@ adventures:
                 example_code: |
                     ```
                     {print} '3'
-                    sov
                     {clear}
                     {print} '2'
-                    {sleep}
                     {clear}
                     {print} '1'
-                    {sleep}
+                    {clear}
+                    {print} '
+                             vänta...'
+                    {sleep} 3
                     {clear}
                     {print} 'SURPRISE!'
                     ```
@@ -2408,8 +2409,6 @@ adventures:
                     name = Hedy
                     answer = 20 + 4
                     ```
-
-                    answer = 20 + 4
             14:
                 story_text: |
                     Vi kommer att lära oss fler nya saker. Du kanske redan känner till dem från matematiken, `<` och `>`.

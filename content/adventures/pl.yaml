@@ -645,13 +645,13 @@ adventures:
                 example_code: |
                     ```
                     {print} '3'
-                    {sleep}
                     {clear}
                     {print} '2'
-                    {sleep}
                     {clear}
                     {print} '1'
-                    {sleep}
+                    {clear}
+                    {print} 'wait for it...'
+                    {sleep} 3
                     {clear}
                     {print} 'NIESPODZIANKA!'
                     ```
@@ -2270,8 +2270,6 @@ adventures:
                     name = Hedy
                     answer = 20 + 4
                     ```
-
-                    answer = 20 + 4
             14:
                 story_text: |
                     We are going to learn more new items. You might know them already from mathematics, the `<` and `>`.

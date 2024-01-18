@@ -700,13 +700,13 @@ adventures:
                 example_code: |
                     ```
                     {print} '3'
-                    {sleep}
                     {clear}
                     {print} '2'
-                    {sleep}
                     {clear}
                     {print} '1'
-                    {sleep}
+                    {clear}
+                    {print} 'wait for it...'
+                    {sleep} 3
                     {clear}
                     {print} '¡SORPRESA!'
                     ```
@@ -2373,8 +2373,6 @@ adventures:
                     nombre = Hedy
                     respuesta = 20 + 4
                     ```
-
-                    respuesta = 20 + 4
             14:
                 story_text: |
                     Vamos a aprender más cosas nuevas. Quizá ya las conozcas de matemáticas, el `<` y `>`.

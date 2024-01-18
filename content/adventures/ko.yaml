@@ -706,13 +706,13 @@ adventures:
                 example_code: |
                     ```
                     {print} '3'
-                    {sleep}
                     {clear}
                     {print} '2'
-                    {sleep}
                     {clear}
                     {print} '1'
-                    {sleep}
+                    {clear}
+                    {print} '기다리다'
+                    {sleep} 3
                     {clear}
                     {print} '서프라이즈!'
                     ```
@@ -2398,8 +2398,6 @@ adventures:
                     name = Hedy
                     answer = 20 + 4
                     ```
-
-                    answer = 20 + 4
             14:
                 story_text: |
                     우리는 새로운 것들을 더 배울 거예요. 여러분은 수학, `<`와 `>`에서 이미 알고 있을 거예요.
