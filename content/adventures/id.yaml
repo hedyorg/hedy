@@ -790,23 +790,18 @@ adventures:
                     {print} Selamat datang di Kolam Renang Hedy!
                     kelas {is} {ask} 'Apakah Anda di sini untuk bergabung dengan kelas hari ini?'
                     {if} kelas ya
-                        {print} 'Bagus! Anda bergabung dengan kelas!'
-                        {print} {else} 'Anda tidak akan bergabung dengan kelas'
+                    {print} 'Bagus! Anda bergabung dengan kelas!'
+                    {print} {else} 'Anda tidak akan bergabung dengan kelas'
                     diskon {is} {ask} 'Apakah Anda punya kode diskon?'
                     {if} diskon {is} ya
                     discount_answer {is} {ask} 'Apa kode diskon Anda?'
                     discount_codes = Senior4231, Student8786, NewMember6709
                     {if} discount_answer {is} {in} discount_codes
-                        {print} 'Harganya $3,50'
-                            {else} 'Kode itu tidak valid'
+                    {print} 'Harganya $3,50'
+                    {else} 'Kode itu tidak valid
                     {else} 'Harganya $5,50'
                     {print} 'Selamat berenang!'
                     ```
-
-                        {print} 'Harganya $3,50'
-                            {else} 'Kode itu tidak valid'
-                    {else} 'Harganya $5,50'
-                    {print} 'Selamat berenang!'
             6:
                 story_text: |-
                     ### Latihan
