@@ -2023,6 +2023,9 @@ def explore():
     normalized = normalize_public_programs(list(programs) + list(favourite_programs.records))
     programs, favourite_programs = split_at(len(programs), normalized)
 
+    # Filter out programs that are Hedy favorite choice.
+    programs = [program for program in programs if program['id'] not in {fav['id'] for fav in favourite_programs}]
+
     keyword_lang = g.keyword_lang
     adventures_names = hedy_content.Adventures(session['lang']).get_adventure_names(keyword_lang)
 

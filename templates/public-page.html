@@ -90,7 +90,7 @@
             <div class="border rounded-lg border-yellow-500 mb-4 py-2 w-full">
                 <h3 class="text-center z-10 font-bold pb-0 mb-0 text-2xl">{{_('favorite_program')}}</h3>
                 <div class="flex flex-wrap mx-auto justify-center gap-4 turn-pre-into-ace" id="user_favourite_program">
-                    {{ public_programs.program_box(favourite_program, true) }}                    
+                    {{ render_partial('htmx-adventure-card.html', user={}, adventure=favorite_program, is_program=true, is_admin=is_admin, is_favorite=true) }}
                 </div>
             </div>            
         {% endif %}
@@ -100,7 +100,7 @@
                         {{_('no_programs')}}
                     {% else %}
                         {% for program in programs %}
-                            {{ public_programs.program_box(program, false) }}                            
+                            {{ render_partial('htmx-adventure-card.html', user={}, adventure=program, is_program=true, is_admin=is_admin) }}
                         {% endfor %}
                     {% endif %}
                 </div>
