@@ -1,3 +1,4 @@
+import logging
 import uuid
 from typing import Dict, List, Optional
 from dataclasses import dataclass, asdict, field
@@ -18,6 +19,8 @@ from .website_module import WebsiteModule, route
 
 MAX_ATTEMPTS = 2
 NO_SUCH_QUESTION = 'No such question'
+
+logger = logging.getLogger(__name__)
 
 
 class QuizLogic:
@@ -146,9 +149,22 @@ class QuizModule(WebsiteModule):
                                next_question=next_question,
                                is_correct=is_correct)
 
+    @route("/previous_question/<question_nr>", methods=["POST"])
+    def previous_question(self, question_nr):
+        progress, question = self.progress_and_question(int(question_nr))
+
+        return render_template('quiz/partial-question.html',
+                               level=progress.level,
+                               question_count=self.question_count(progress.level),
+                               correct_answers_so_far=progress.correct_answers_so_far,
+                               incorrect_answers_so_far=progress.incorrect_answers_so_far,
+                               progress=progress,
+                               question=question)
+
     @route("/next_question", methods=["POST"])
     def next_question(self):
         """Advance the progress object and redirect to the next question."""
+        logger.debug("NEXT")
         progress, _ = self.current_progress_and_question()
         progress.advance_cypress_page_counter()
         progress.next_question()
@@ -279,6 +295,19 @@ class QuizModule(WebsiteModule):
         q = self.my_quiz().get_quiz_data_for_level_question(
             level, question, request.args.get('keyword_lang_override', g.keyword_lang))
         return Question.from_yaml(question, q) if q else None
+
+    def progress_and_question(self, question_nr):
+        """Return the current progress and question objects."""
+        progress = self.current_progress()
+        if not progress:
+            raise RequestRedirect(url_for('.begin', level=1))
+
+        logger.debug(question_nr)
+        question = self.get_question(progress.level, question_nr)
+        if not question:
+            # We shouldn't have gotten here
+            return abort(400, NO_SUCH_QUESTION)
+        return progress, question
 
     def current_progress_and_question(self):
         """Return the current progress and question objects."""
