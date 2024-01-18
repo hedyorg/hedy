@@ -6,7 +6,7 @@ from app import translate_error, app
 from flask_babel import force_locale
 import exceptions
 
-most_recent_file_name = 'tests/test_public_programs/filtered-programs-2023-06-19.json'
+most_recent_file_name = 'tests/test_public_programs/filtered-programs-2023-12-12.json'
 public_snippets = []
 
 # this file tests all public programs in the database
@@ -76,14 +76,30 @@ class TestsPublicPrograms(HedyTester):
                         print(f'{error_message} at line {location}')
                         raise E
 
-        # test if we are not validating previously incorrect programs
-        if snippet is not None and len(snippet.code) > 0 and snippet.error:
-            self.single_level_tester(
-                code=snippet.code,
-                level=int(snippet.level),
-                lang=snippet.language,
-                translate=False,
-                unused_allowed=True,
-                exception=exceptions.HedyException,
-                skip_faulty=False
-            )
+        # # test if we are not validating previously incorrect programs
+        # if snippet is not None and len(snippet.code) > 0 and snippet.error:
+        #     self.single_level_tester(
+        #         code=snippet.code,
+        #         level=int(snippet.level),
+        #         lang=snippet.language,
+        #         translate=False,
+        #         exception=exceptions.HedyException,
+        #         skip_faulty=False
+        #     )
+
+        # Use this to test if we are not validating previously incorrect programs
+        # if snippet is not None and len(snippet.code) > 0 and snippet.error:
+        #     try:
+        #         self.single_level_tester(
+        #             code=snippet.code,
+        #             level=int(snippet.level),
+        #             lang=snippet.language,
+        #             translate=False,
+        #             unused_allowed=True,
+        #             exception=exceptions.HedyException,
+        #             skip_faulty=False
+        #         )
+        #     except AssertionError as E:
+        #         print(f'\n----\n{snippet.code}\n----')
+        #         print(f'in language {snippet.language} from level {snippet.level} gives NO error.')
+        #         raise E

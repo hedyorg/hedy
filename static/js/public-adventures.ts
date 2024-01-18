@@ -1,4 +1,4 @@
-
+import { Select } from "tw-elements";
 import { modal } from './modal';
 
 export function cloned(message: string, success: Boolean = true) {
@@ -11,7 +11,8 @@ export function cloned(message: string, success: Boolean = true) {
 
 export function applyFilter(term: string, type: string, filtered: any) {
     term = term.trim()
-    filtered[type] = filtered[type] || {term, exclude: []}
+    filtered[type] = filtered[type] || {exclude: []}
+    filtered[type]['term'] = term
     const filterExist = (<HTMLInputElement>document.querySelector('#search_adventure')).value ||
         (<HTMLInputElement>document.querySelector('#language')).value ||
         (<HTMLInputElement>document.querySelector('#tag')).value
@@ -31,25 +32,32 @@ export function applyFilter(term: string, type: string, filtered: any) {
     }
     for (const adv of adventures) {
         let toValidate;
+        let skip = false;
         if (type === 'search') {
             toValidate = adv.querySelector('.name')?.innerHTML
         } else if (type === 'lang') {
             toValidate = adv.getAttribute('data-lang')
         } else {
-            const tags = adv.querySelector('#tags-list')?.children || []
-            const tagNames = []
-            for (const t of tags) {
-                tagNames.push(t.innerHTML)
+            const advTags = adv.querySelector('#tags-list')?.children || []
+            for (const t of advTags) {
+                const value = t.innerHTML.trim()
+                if (term.includes(value)) {
+                    if (filtered[type].exclude.some((a: Element) => a === adv)) {
+                        filtered[type].exclude = filtered[type].exclude.filter((a: Element) => a !== adv)
+                    }
+                    skip = true; // at least one tag is found in the current adventure.
+                    break
+                }
             }
-            toValidate = tagNames.join(' ')
         }
+        if (skip)
+            continue;
 
         if (term && toValidate?.includes(term)) {
             if (filtered[type].exclude.some((a: Element) => a === adv)) {
                 filtered[type].exclude = filtered[type].exclude.filter((a: Element) => a !== adv)
             }
-        } 
-        else if (term) {
+        } else if (term) {
             if (filtered.term !== term && !filtered[type].exclude.some((a: Element) => a === adv)) {
                 filtered[type].exclude.push(adv)
             }
@@ -70,3 +78,16 @@ export function applyFilter(term: string, type: string, filtered: any) {
         }
     }
 }
+
+declare global {
+    interface Window {
+        $filtered: any;
+    }
+}
+
+const tags = document.getElementById("tag");
+const tagsInstance = Select.getInstance(tags);
+tags?.addEventListener('valueChange.te.select', () => {
+    const value = tagsInstance.value.join(",")
+    applyFilter(value.replaceAll(",", " "), "tags", window.$filtered || {})
+})

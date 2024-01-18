@@ -14,7 +14,7 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - uses: actions/checkout@v3
+    - uses: actions/checkout@v4
       name: Checkout branch (with token)
       if: github.event_name == 'push'
       with:
@@ -22,7 +22,7 @@ jobs:
 
         # We need to pass the token here -- the commit action below will not overwrite the token to push.
         token: ${{ secrets.FELIENNE_GITHUB_ACCESS_TOKEN }}
-    - uses: actions/checkout@v3
+    - uses: actions/checkout@v4
       name: Checkout branch (on pull requests)
       if: github.event_name != 'push'
       with:

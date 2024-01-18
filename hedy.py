@@ -1166,6 +1166,9 @@ class IsValid(Filter):
         raise exceptions.InvalidSpaceException(
             level=self.level, line_number=line, fixed_code=fixed_code, fixed_result=result)
 
+    def error_ask_missing_variable(self, meta, args):
+        raise exceptions.MissingVariableException(command='is ask', level=self.level, line_number=meta.line)
+
     def error_print_nq(self, meta, args):
         words = [str(x[1]) for x in args]  # second half of the list is the word
         text = ' '.join(words)
@@ -1178,6 +1181,12 @@ class IsValid(Filter):
 
     def error_list_access(self, meta, args):
         raise exceptions.MisspelledAtCommand(command='at', arg1=str(args[1][1]), line_number=meta.line)
+
+    def error_add_missing_to(self, meta, args):
+        raise exceptions.MissingAdditionalCommand(command='add', missing_command='to', line_number=meta.line)
+
+    def error_remove_missing_from(self, meta, args):
+        raise exceptions.MissingAdditionalCommand(command='remove', missing_command='from', line_number=meta.line)
 
     def error_non_decimal(self, meta, args):
         raise exceptions.NonDecimalVariable(line_number=meta.line)
@@ -1230,6 +1239,10 @@ class IsValid(Filter):
     def error_repeat_no_times(self, meta, args):
         raise exceptions.IncompleteRepeatException(command='times', level=self.level, line_number=meta.line)
 
+    def error_repeat_dep_8(self, meta, args):
+        # repeat is no longer usable this way, raise!
+        raise hedy.exceptions.WrongLevelException(7, 'repeat', "repeat_dep", meta.line)
+
     def error_text_no_print(self, meta, args):
         raise exceptions.LonelyTextException(level=self.level, line_number=meta.line)
 
@@ -1247,6 +1260,15 @@ class IsValid(Filter):
     def error_ifpressed_missing_else(self, meta, args):
         raise exceptions.MissingElseForPressitException(
             command='ifpressed_else', level=self.level, line_number=meta.line)
+
+    def error_for_missing_in(self, meta, args):
+        raise exceptions.MissingAdditionalCommand(command='for', missing_command='in', line_number=meta.line)
+
+    def error_for_missing_to(self, meta, args):
+        raise exceptions.MissingAdditionalCommand(command='for', missing_command='to', line_number=meta.line)
+
+    def error_for_missing_command(self, meta, args):
+        raise exceptions.IncompleteCommandException(incomplete_command='for', level=self.level, line_number=meta.line)
 
     def error_nested_define(self, meta, args):
         raise exceptions.NestedFunctionException()
@@ -1406,20 +1428,6 @@ class ConvertToPython(Transformer):
         elif ConvertToPython.is_quoted(name):
             return f"{name}"
 
-    def make_f_string(self, args):
-        argument_string = ''
-        for argument in args:
-            if self.is_variable(argument):
-                # variables are placed in {} in the f string
-                argument_string += "{" + escape_var(argument) + "}"
-            else:
-                # strings are written regularly
-                # however we no longer need the enclosing quotes in the f-string
-                # the quotes are only left on the argument to check if they are there.
-                argument_string += argument.replace("'", '')
-
-        return f"print(f'{argument_string}')"
-
     def get_fresh_var(self, name):
         while self.is_variable(name):
             name = '_' + name
@@ -1462,8 +1470,8 @@ class ConvertToPython(Transformer):
 
     @staticmethod
     def is_quoted(s):
-        opening_quotes = ['‘', "'", '"', "“", "«"]
-        closing_quotes = ['’', "'", '"', "”", "»"]
+        opening_quotes = ['‘', "'", '"', "“", "«", "„"]
+        closing_quotes = ['’', "'", '"', "”", "»", "“"]
         return len(s) > 1 and (s[0] in opening_quotes and s[-1] in closing_quotes)
 
     @staticmethod
@@ -1696,7 +1704,7 @@ class ConvertToPython_2(ConvertToPython_1):
         if len(args) == 0:
             return f"t.right(90){self.add_debug_breakpoint()}"  # no arguments defaults to a right turn
         arg = args[0]
-        if self.is_variable(arg):
+        if self.is_variable(arg, meta.line):
             return self.make_turn(escape_var(arg))
         if arg.lstrip("-").isnumeric():
             return self.make_turn(arg)
@@ -1776,7 +1784,7 @@ class ConvertToPython_2(ConvertToPython_1):
             exception = self.make_catch_exception([value])
             return exception + variable_name + " = " + value + self.add_debug_breakpoint()
         else:
-            if self.is_variable(value):  # if the value is a variable, this is a reassign
+            if self.is_variable(value, meta.line):  # if the value is a variable, this is a reassign
                 value = self.process_variable(value, meta.line)
                 return variable_name + " = " + value + self.add_debug_breakpoint()
             else:
@@ -1993,7 +2001,7 @@ else:{self.add_debug_breakpoint()}
 
     def ifpressed_else(self, meta, args):
         var_or_button = args[0]
-        if self.is_variable(var_or_button):
+        if self.is_variable(var_or_button, meta.line):
             return self.make_ifpressed_command(f"""\
 if event.key == {var_or_button}:
 {ConvertToPython.indent(args[1])}
@@ -2088,7 +2096,7 @@ class ConvertToPython_6(ConvertToPython_5):
         if type(value) is Tree:
             return parameter + " = " + value.children[0] + self.add_debug_breakpoint()
         else:
-            if self.is_variable(value):
+            if self.is_variable(value, meta.line):
                 value = self.process_variable(value, meta.line)
                 if self.is_list(value) or self.is_random(value):
                     exception = self.make_catch_exception([value])
@@ -2135,7 +2143,7 @@ class ConvertToPython_6(ConvertToPython_5):
         if len(args) == 0:
             return "t.right(90)" + self.add_debug_breakpoint()  # no arguments defaults to a right turn
         arg = args[0]
-        if self.is_variable(arg):
+        if self.is_variable(arg, meta.line):
             return self.make_turn(escape_var(arg))
         if isinstance(arg, Tree):
             return self.make_turn(arg.children[0])
@@ -2145,7 +2153,7 @@ class ConvertToPython_6(ConvertToPython_5):
         if len(args) == 0:
             return add_sleep_to_command('t.forward(50)' + self.add_debug_breakpoint(), False, self.is_debug, location="after")
         arg = args[0]
-        if self.is_variable(arg):
+        if self.is_variable(arg, meta.line):
             return self.make_forward(escape_var(arg))
         if isinstance(arg, Tree):
             return self.make_forward(arg.children[0])
@@ -2208,14 +2216,14 @@ class ConvertToPython_8_9(ConvertToPython_7):
         all_lines = [ConvertToPython.indent(x) for x in args[1:]]
         return "if " + args[0] + ":" + self.add_debug_breakpoint() + "\n" + "\n".join(all_lines)
 
-    def ifpressed(self, met, args):
+    def ifpressed(self, meta, args):
         args = [a for a in args if a != ""]  # filter out in|dedent tokens
 
         all_lines = '\n'.join([x for x in args[1:]])
         all_lines = ConvertToPython.indent(all_lines)
         var_or_key = args[0]
         # if this is a variable, we assume it is a key (for now)
-        if self.is_variable(var_or_key):
+        if self.is_variable(var_or_key, meta.line):
             return self.make_ifpressed_command(f"""\
 if event.unicode == {args[0]}:
 {all_lines}
@@ -2226,7 +2234,7 @@ if event.unicode == '{args[0]}':
 {all_lines}
   break""", button=False)
         else:  # otherwise we mean a button
-            button_name = self.process_variable(args[0], met.line)
+            button_name = self.process_variable(args[0], meta.line)
             return self.make_ifpressed_command(f"""\
 if event.key == {button_name}:
 {all_lines}
@@ -2462,7 +2470,7 @@ class ConvertToPython_12(ConvertToPython_11):
         if len(args) == 0:
             return "t.right(90)" + self.add_debug_breakpoint()  # no arguments defaults to a right turn
         arg = args[0]
-        if self.is_variable(arg):
+        if self.is_variable(arg, meta.line):
             return self.make_turn(escape_var(arg))
         if isinstance(arg, Tree):
             return self.make_turn(arg.children[0])
@@ -2472,7 +2480,7 @@ class ConvertToPython_12(ConvertToPython_11):
         if len(args) == 0:
             return add_sleep_to_command('t.forward(50)' + self.add_debug_breakpoint(), False, self.is_debug, location="after")
         arg = args[0]
-        if self.is_variable(arg):
+        if self.is_variable(arg, meta.line):
             return self.make_forward(escape_var(arg))
         if isinstance(arg, Tree):
             return self.make_forward(arg.children[0])
@@ -2553,7 +2561,7 @@ class ConvertToPython_15(ConvertToPython_14):
         body = "\n".join(all_lines)
 
         # for now we assume a var is a letter, we can check this lateron by searching for a ... = button
-        if self.is_variable(var_or_button):
+        if self.is_variable(var_or_button, meta.line):
             return self.make_ifpressed_command(f"""\
 if event.unicode == {args[0]}:
 {body}
@@ -2612,7 +2620,7 @@ class ConvertToPython_17(ConvertToPython_16):
         all_lines = ConvertToPython.indent(all_lines)
         var_or_key = args[0]
         # if this is a variable, we assume it is a key (for now)
-        if self.is_variable(var_or_key):
+        if self.is_variable(var_or_key, meta.line):
             return self.make_ifpressed_command(f"""\
 if event.unicode == {args[0]}:
 {all_lines}

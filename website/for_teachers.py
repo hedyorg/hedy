@@ -57,8 +57,10 @@ class ForTeachersModule(WebsiteModule):
                     "id": adventure.get("id"),
                     "name": adventure.get("name"),
                     "creator": adventure.get("creator"),
+                    "author": adventure.get("author"),
                     "date": utils.localized_date_format(adventure.get("date")),
                     "level": adventure.get("level"),
+                    "levels": adventure.get("levels"),
                 }
             )
 

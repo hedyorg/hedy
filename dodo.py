@@ -25,12 +25,48 @@ from os import path
 from glob import glob
 import sys
 
+from doit.tools import LongRunning
+
 
 # The current Python interpreter, use to run other Python scripts as well
 python3 = sys.executable
 
 # When run without arguments, run deploy
 DOIT_CONFIG = {'default_tasks': ['deploy']}
+
+
+def task_npm():
+    """Install NPM dependencies.
+
+    If the `package-lock.json` file changes, we will automatically re-install
+    NPM dependencies.
+
+    This makes sure everyone's NPM dependencies are at the same version when
+    scripts are being run, so build results are consistent and (for example)
+    generated Tailwind CSS files are the exact same and don't introduce random
+    floating diffs.
+
+    NPM works like this:
+
+    ```
+        package.json          # contains version RANGES that you would like to use
+            ---> npm install  # install the most recent POINT VERSIONs that match the requested ranges
+        package-lock.json     # contains the point versions selected by the last `npm install`
+            ---> npm ci       # install exactly the point versions found in the lock file
+    ```
+    """
+    # This task gives problems whhen deploying to Heroku, so not execute it if we are there
+    if is_running_on_heroku():
+        return dict(title=lambda _: 'Do not install NPM on Heroku', actions=[])
+
+    return dict(
+        # `package-lock.json` contains the actual dependency versions that `npm ci` will install
+        file_dep=['package-lock.json'],
+        title=lambda _: 'Install NPM dependencies',
+        actions=[
+            'npm ci',
+        ],
+    )
 
 
 def task_tailwind():
@@ -57,8 +93,10 @@ def task_tailwind():
             *[file for file in glob('static/js/*.ts') if file not in \
                 ['static/js/message-translations.ts', 'static/js/client-messages.ts']
               ],
+            'build-tools/heroku/tailwind/styles.css',
             script,
         ],
+        task_dep=['npm'],
         title=lambda _: 'Generate Tailwind CSS',
         actions=[
             [script],
@@ -150,7 +188,7 @@ def task_typescript():
             'static/js/buttons.js',
             'static/js/skulpt_debugger.js',
         ],
-        task_dep=['generate_highlighting', 'client_messages'],
+        task_dep=['generate_highlighting', 'client_messages', 'npm'],
         title=lambda _: 'Compile TypeScript',
         actions=[
             # Use tsc to do type checking of the .ts files, but don't actually emit.
@@ -224,6 +262,7 @@ def task_lezer_parsers():
             *grammars,
             script,
         ],
+        task_dep=['npm'],
         actions=[
             [script],
         ],
@@ -239,6 +278,31 @@ def task_extract():
             'pybabel extract -F babel.cfg -o messages.pot . --no-location --sort-output',
             'pybabel update -i messages.pot -d translations -N --no-wrap',
         ],
+    )
+
+
+def task_devserver():
+    """Run a copy of the development server.
+
+    This server is configured to be useful for running cypress tests against.
+
+    No file dependencies, so this task is never skipped.
+
+    Be careful to only depend on `backend` tasks, not `frontend` tasks, so that
+    the people running this command still don't need to have Node installed
+    if they don't want to work on the frontend.
+    """
+    return dict(
+        title=lambda _: 'Run development server',
+        task_dep=['backend'],
+        actions=[
+            LongRunning([python3, 'app.py'], shell=False, env=dict(
+                os.environ,
+                # These are required to make some local features work.
+                BASE_URL="http://localhost:8080/",
+                ADMIN_USER="admin"))
+        ],
+        verbosity=2,  # show everything live
     )
 
 
@@ -320,6 +384,14 @@ def babel_version_unchanged(task, values):
     task.value_savers.append(save_on_success)
 
     return values.get('babel-version') == babel_version
+
+
+def is_running_on_heroku():
+    """Return True if we are running on Heroku.
+
+    Check an environment variable that Heroku sets by default.
+    """
+    return 'DYNO' in os.environ
 
 
 # These are used in more than one task. Find all .po files, and calculate the

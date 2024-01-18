@@ -7,16 +7,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2024-01-03 13:11+0100\n"
-"PO-Revision-Date: 2024-01-03 19:58+0000\n"
+"POT-Creation-Date: 2024-01-15 21:27+0100\n"
+"PO-Revision-Date: 2024-01-09 09:25+0000\n"
 "Last-Translator: Prefill add-on <noreply-addon-prefill@weblate.org>\n"
-"Language-Team: ru <LL@li.org>\n"
 "Language: ru\n"
+"Language-Team: ru <LL@li.org>\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
-"X-Generator: Weblate 5.4-dev\n"
 "Generated-By: Babel 2.14.0\n"
 
 #, fuzzy
@@ -66,11 +65,19 @@ msgstr "Вы использовали команду {echo} до команды 
 msgid "Lonely Text"
 msgstr "Кажется, вы забыли использовать команду вместе с текстом, написанным на строке {line_number}"
 
+#, fuzzy
+msgid "Missing Additional Command"
+msgstr "It looks like you forgot to complete writing {command} on line {line_number}."
+
 msgid "Missing Command"
 msgstr "Кажется, вы забыли использовать команду на строке {line_number}."
 
 msgid "Missing Inner Command"
 msgstr "Кажется, вы забыли использовать команду с выражением {command} на строке {line_number}."
+
+#, fuzzy
+msgid "Missing Variable"
+msgstr "It looks like your {command} is missing a variable at the start of the line."
 
 #, fuzzy
 msgid "Misspelled At Command"
@@ -120,6 +127,10 @@ msgstr "Вы пытались использовать переменную {nam
 
 msgid "Wrong Level"
 msgstr "Это был правильный код Hedy, но не на том уровне. Вы написали {offending_keyword} для уровня {working_level}. Подсказка: {tip}"
+
+#, fuzzy
+msgid "Wrong Number of Arguments"
+msgstr "Your function used the wrong number of arguments. You provided {used_number} but the function {name} needs {defined_number}"
 
 msgid "account_overview"
 msgstr "Обзор учетной записи"
@@ -1194,6 +1205,9 @@ msgstr "Другой язык текста"
 msgid "overwrite_warning"
 msgstr "У вас уже есть программа с таким наванием. Вы точно хотите перезаписать уже существующую программу?"
 
+msgid "owner"
+msgstr ""
+
 msgid "page"
 msgstr "страница"
 
@@ -1266,6 +1280,9 @@ msgstr "Предпочитаемый язык"
 msgid "preview"
 msgstr "Предварительный просмотр"
 
+msgid "previewing_adventure"
+msgstr ""
+
 #, fuzzy
 msgid "previewing_class"
 msgstr "You are previewing class <em>{class_name}</em> as a teacher."
@@ -1328,6 +1345,9 @@ msgstr "Вы хотите присоединиться к этому класс�
 msgid "public"
 msgstr "Общественный"
 
+msgid "public_adventures"
+msgstr ""
+
 msgid "public_invalid"
 msgstr "Выбор данного соглашения является недействительным"
 
@@ -1388,6 +1408,10 @@ msgstr "Confirm removing this user from the class."
 
 msgid "repair_program_logo_alt"
 msgstr "Восстановление значка программы"
+
+#, fuzzy
+msgid "repeat_dep"
+msgstr "Starting in level 8, {repeat} needs to be used with indentation. You can see examples on the {repeat} tab in level 8."
 
 msgid "repeat_match_password"
 msgstr "Повторный пароль не совпадает."
@@ -2084,9 +2108,3 @@ msgstr "Ваша программа"
 #~ msgid "no_tags"
 #~ msgstr "No tags yet."
 
-#~ msgid "public_adventures"
-#~ msgstr "Public adventures"
-
-#, fuzzy
-msgid "Wrong Number of Arguments"
-msgstr "Your function used the wrong number of arguments. You provided {used_number} but the function {name} needs {defined_number}"
