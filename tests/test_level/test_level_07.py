@@ -163,15 +163,24 @@ class TestsLevel7(HedyTester):
 
     def test_repeat_with_missing_print_gives_error(self):
         code = textwrap.dedent("""\
+        repeat 3 print 'x'""")
+
+        self.single_level_tester(
+            code=code,
+            exception=hedy.exceptions.IncompleteRepeatException
+        )
+
+    def test_repeat_with_missing_times_gives_error_skip(self):
+        code = textwrap.dedent("""\
         x is 3
-        repeat 3 times x""")
+        repeat 3 print 'x'""")
 
         expected = textwrap.dedent("""\
         x = '3'
         pass""")
 
         skipped_mappings = [
-            SkippedMapping(SourceRange(2, 1, 2, 17), hedy.exceptions.IncompleteRepeatException),
+            SkippedMapping(SourceRange(2, 1, 2, 19), hedy.exceptions.IncompleteRepeatException),
         ]
 
         self.single_level_tester(
@@ -205,8 +214,7 @@ class TestsLevel7(HedyTester):
     def test_repeat_with_missing_times_gives_error(self):
         code = textwrap.dedent("""\
         prind skipping
-        repeat 3 print 'n'
-        """)
+        repeat 3 print 'n'""")
 
         expected = textwrap.dedent("""\
         pass
@@ -221,6 +229,15 @@ class TestsLevel7(HedyTester):
             code=code,
             expected=expected,
             skipped_mappings=skipped_mappings,
+        )
+
+    def test_repeat_with_missing_times_gives_error_2(self):
+        code = "repeat 5"
+
+        self.multi_level_tester(
+            code=code,
+            max_level=8,
+            exception=hedy.exceptions.IncompleteRepeatException
         )
 
     def test_repeat_ask(self):
@@ -571,3 +588,45 @@ class TestsLevel7(HedyTester):
 
         self.single_level_tester(code, expected=expected_code)
         self.source_map_tester(code=code, expected_source_map=expected_source_map)
+
+# music tests
+
+    def test_play_repeat(self):
+        code = textwrap.dedent("""\
+            repeat 3 times play C4""")
+
+        expected = textwrap.dedent("""\
+            for __i__ in range(int('3')):
+              play(notes_mapping.get(str('C4'), str('C4')))
+              time.sleep(0.5)
+              time.sleep(0.1)""")
+
+        self.multi_level_tester(
+            code=code,
+            translate=False,
+            skip_faulty=False,
+            unused_allowed=True,
+            expected=expected,
+            max_level=7
+        )
+
+    def test_play_repeat_random(self):
+        code = textwrap.dedent("""\
+            notes is C4, E4, D4, F4, G4
+            repeat 3 times play notes at random""")
+
+        expected = textwrap.dedent("""\
+            notes = ['C4', 'E4', 'D4', 'F4', 'G4']
+            for __i__ in range(int('3')):
+              play(notes_mapping.get(str(random.choice(notes)), str(random.choice(notes))))
+              time.sleep(0.5)
+              time.sleep(0.1)""")
+
+        self.multi_level_tester(
+            code=code,
+            translate=False,
+            skip_faulty=False,
+            unused_allowed=True,
+            expected=expected,
+            max_level=7
+        )

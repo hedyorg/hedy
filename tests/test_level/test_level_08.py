@@ -270,13 +270,13 @@ class TestsLevel8(HedyTester):
         a is test
         b is 15
         if a is b
-            c is 1""")
+            b is 1""")
 
         expected = textwrap.dedent("""\
         a = 'test'
         b = '15'
         if convert_numerals('Latin', a) == convert_numerals('Latin', b):
-          c = '1'""")
+          b = '1'""")
 
         self.multi_level_tester(code=code, expected=expected, max_level=11)
 
@@ -359,7 +359,8 @@ class TestsLevel8(HedyTester):
 
         # gives the right exception for all levels even though it misses brackets
         # because the indent check happens before parsing
-        self.multi_level_tester(code=code, exception=hedy.exceptions.NoIndentationException)
+        self.multi_level_tester(code=code,
+                                exception=hedy.exceptions.NoIndentationException)
 
     def test_if_equality_print_else_print(self):
         code = textwrap.dedent("""\
@@ -392,7 +393,7 @@ class TestsLevel8(HedyTester):
         else:
           x = '222'""")
 
-        self.multi_level_tester(code=code, expected=expected, max_level=11)
+        self.multi_level_tester(code=code, expected=expected, max_level=11, unused_allowed=True)
 
     def test_if_else_followed_by_print(self):
         code = textwrap.dedent("""\
@@ -633,12 +634,12 @@ class TestsLevel8(HedyTester):
     def test_repeat_with_arabic_variable_print(self):
         code = textwrap.dedent("""\
         n is ٥
-        repeat ٥ times
+        repeat n times
             print 'me wants a cookie!'""")
 
         expected = textwrap.dedent("""\
         n = '٥'
-        for i in range(int('5')):
+        for i in range(int(n)):
           print(f'me wants a cookie!')
           time.sleep(0.1)""")
 
@@ -736,6 +737,14 @@ class TestsLevel8(HedyTester):
             extra_check_function=lambda c: c.exception.arguments['line_number'] == 2,
             exception=hedy.exceptions.InvalidArgumentTypeException,
             max_level=15)
+
+    def test_repeat_deprecated_gives_deprecated_error(self):
+        code = "repeat 5 times print 'In the next tab you can repeat multiple lines of code at once!'"
+
+        self.multi_level_tester(
+            code=code,
+            exception=hedy.exceptions.WrongLevelException,
+            max_level=17)
 
     def test_repeat_ask(self):
         code = textwrap.dedent("""\
@@ -1177,3 +1186,56 @@ class TestsLevel8(HedyTester):
 
         self.single_level_tester(code, expected=expected_code)
         self.source_map_tester(code=code, expected_source_map=expected_source_map)
+
+    def test_play_repeat_random(self):
+        code = textwrap.dedent("""\
+            repeat 10 times
+                notes is C4, E4, D4, F4, G4
+                note is notes at random
+                print note
+                play note""")
+
+        expected = textwrap.dedent("""\
+            for i in range(int('10')):
+              notes = ['C4', 'E4', 'D4', 'F4', 'G4']
+              try:
+                random.choice(notes)
+              except IndexError:
+                raise Exception('catch_index_exception')
+              note = random.choice(notes)
+              print(f'{note}')
+              play(notes_mapping.get(str(note), str(note)))
+              time.sleep(0.5)
+              time.sleep(0.1)""")
+
+        self.multi_level_tester(
+            code=code,
+            translate=False,
+            skip_faulty=False,
+            unused_allowed=True,
+            expected=expected,
+            max_level=11
+        )
+
+    def test_play_integers(self):
+        code = textwrap.dedent("""\
+        notes = 1, 2, 3
+
+        repeat 10 times
+            play notes at random""")
+
+        expected = textwrap.dedent("""\
+        notes = ['1', '2', '3']
+        for i in range(int('10')):
+          play(notes_mapping.get(str(random.choice(notes)), str(random.choice(notes))))
+          time.sleep(0.5)
+          time.sleep(0.1)""")
+
+        self.multi_level_tester(
+            code=code,
+            translate=False,
+            skip_faulty=False,
+            unused_allowed=True,
+            expected=expected,
+            max_level=11
+        )

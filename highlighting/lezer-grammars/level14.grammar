@@ -1,7 +1,7 @@
 @top Program { eol* (Command eol+)* Command? }
 
 Command {
-    Assign | AssignList | Ask | Clear |Print | Turtle | Sleep | Add | Remove | If | Else | Repeat | For | Define | Call | Return | ErrorInvalid
+    Assign | AssignList | Ask | Clear |Print | Play | Turtle | Sleep | Add | Remove | If | Else | Repeat | For | Define | Call | Return | ErrorInvalid
 }
 
 @local tokens {    
@@ -29,12 +29,13 @@ Print { print+ ( ListAccess | Expression | Call )+ }
 Ask { Text (is+ | Op<"=">) ask+ ( ListAccess | Expression )+ }
 
 AssignList { Text (is+ | Op<"=">) (Text+ | Number ) ~ambig  (Comma (Text+ | Number ))+ }
-Assign { Text (is+ | Op<"=">) (Expression ~ambig  | ListAccess)+ }
+Assign { (Text | ListAccess) (is+ | Op<"=">) (Expression ~ambig  | ListAccess)+ }
 Sleep { sleep+ (Expression | ListAccess | Call)? }
-ListAccess { Text at+ (random+ | Text) }
+ListAccess { Text at+ (random+ | Text | Number) }
 Add { add+ (Expression | Call ) toList+ Text }
 Remove { remove+ (Expression | Call) from+ Text }
 Clear { clear+ }
+Play { play+ Text+ }
 
 Turtle[@isGroup=turtle] {
     Forward { forward+ (Expression | ListAccess | Call) } |
@@ -105,6 +106,7 @@ Expression {
     turn[@name="turn"],
     color[@name="color"],
     sleep[@name="sleep"],
+    play[@name="play"],
     add[@name="add"],
     from[@name="from"],
     remove[@name="remove"],
@@ -119,7 +121,7 @@ Expression {
     range[@name="range"],
     call[@name="call"],
     define[@name="define"],
-    returns[@name="resturns"],
+    returns[@name="return"],
     with[@name="with"]
 }
 

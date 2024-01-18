@@ -7,22 +7,25 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2023-11-27 20:54+0100\n"
-"PO-Revision-Date: 2023-11-24 14:12+0000\n"
-"Last-Translator: Jesús Pelay <pelayjesus@gmail.com>\n"
+"POT-Creation-Date: 2024-01-15 21:27+0100\n"
+"PO-Revision-Date: 2024-01-16 21:26+0000\n"
+"Last-Translator: gallegonovato <fran-carro@hotmail.es>\n"
 "Language: es\n"
 "Language-Team: es <LL@li.org>\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Generated-By: Babel 2.11.0\n"
+"Generated-By: Babel 2.14.0\n"
 
 msgid "Access Before Assign"
 msgstr "Has intentado usar la variable {name} en la línea {access_line_number}, pero ya la has definido en la línea {definition_line_number}. Define una variable antes de usarla."
 
 msgid "Cyclic Var Definition"
 msgstr "Debes declarar la variable {variable} antes de poder usarla en el lado derecho del comando {is}."
+
+msgid "Function Undefined"
+msgstr "Has intentado utilizar la función {name}, pero no la has definido."
 
 msgid "Has Blanks"
 msgstr "Tu código es incompleto. Contiene huecos que debes reemplazar con código."
@@ -43,7 +46,7 @@ msgid "Invalid Argument Type"
 msgstr "No puedes usar {command} con {invalid_argument} porque es {invalid_type}. Intenta cambiar {invalid_argument} a {allowed_types}."
 
 msgid "Invalid At Command"
-msgstr "El comando {at} no puede utilizarse a partir del nivel 16. Puedes usar corchetes para usar un elemento de una lista, por ejemplo `amigos[i]`, `números_de_suerte[{random}]`."
+msgstr "El comando {command} no puede utilizarse a partir del nivel 16. Puedes usar corchetes para usar un elemento de una lista, por ejemplo `friends[i]`, `lucky_numbers[{random}]`."
 
 msgid "Invalid Space"
 msgstr "¡Oops! Has comenzado una línea con un espacio en la línea {line_number}. Los espacios confunden a los ordenadores, ¿podrías quitarlos?"
@@ -60,17 +63,26 @@ msgstr "Has utilizado un {echo} antes de un {ask}, o un {echo} sin un {ask}. Col
 msgid "Lonely Text"
 msgstr "Parece que olvidaste usar un comando con el texto que pusiste en la línea {line_number}"
 
+msgid "Missing Additional Command"
+msgstr "Parece que te olvidaste de terminar de escribir {command} en la línea {line_number}."
+
 msgid "Missing Command"
 msgstr "Parece que has olvidado de usar un comando en la línea {line_number}."
 
 msgid "Missing Inner Command"
 msgstr "Parece que has olvidad usar un comando en el {command} que has usado en la línea {line_number}."
 
+msgid "Missing Variable"
+msgstr "Parece que a tu {command} le falta una variable al principio de la línea."
+
 msgid "Misspelled At Command"
 msgstr "Parece que haz escrito incorrectamente el comando {command}, en su lugar escribiste {invalid_argument} en la línea {line_number}."
 
 msgid "No Indentation"
 msgstr "Has utilizado demasiado pocos espacios en la línea {line_number}. Has usado {leading_spaces} espacios, lo que es insuficiente. Empieza cada nuevo bloque con {indent_size} espacios más que la línea anterior."
+
+msgid "Non Decimal Variable"
+msgstr "En la línea {line_number}, ¡podrías haber intentado usar un número que a Hedy no le gusta mucho! Intente cambiarlo a un número decimal como 2."
 
 msgid "Parse"
 msgstr "El servidor no puede traducir este programa de Hedy. Hay un error en la línea {location[0]}, carácter {location[1]}. Tu has ingresado {character_found}, pero eso no está permitido."
@@ -99,11 +111,17 @@ msgstr "Números no enteros no se soportan pero estarán disponibles en unos niv
 msgid "Unsupported String Value"
 msgstr "El texto no puede contener {invalid_value}."
 
+msgid "Unused Variable"
+msgstr "Ha definido la variable {variable_name} en la línea {line_number}, pero no la ha utilizado."
+
 msgid "Var Undefined"
 msgstr "Intentaste usar la variable {name}, pero no la estableciste. También es posible que estés intentando usar la palabra {name} pero olvidaste las comillas."
 
 msgid "Wrong Level"
 msgstr "Ese código es correcto, pero no pertenece al nivel correcto. Has escrito código {offending_keyword} para el nivel {working_level}.Tip: {tip}"
+
+msgid "Wrong Number of Arguments"
+msgstr "Tu función usó el número incorrecto de argumentos. Pasaste {used_number} pero la función {name} necesita {defined_number}"
 
 msgid "account_overview"
 msgstr "Resumen de cuenta"
@@ -144,6 +162,9 @@ msgstr "Ir al nivel {level}"
 msgid "adventure"
 msgstr "Aventura"
 
+msgid "adventure_cloned"
+msgstr "La aventura es clonada"
+
 msgid "adventure_duplicate"
 msgstr "Ya tienes una aventura con este nombre."
 
@@ -179,6 +200,9 @@ msgstr "¡La aventura ha sido actualizada!"
 
 msgid "adventures"
 msgstr "Aventuras Disponibles"
+
+msgid "adventures_info"
+msgstr "Puedes crear tus propiar aventuras y agregarlas a tus clases. Estas aventuras tienen el objetivo de servir como ejercicio que tus estudiantes pueden completar y subir para que lo revises en la sección Vista general de los programas por aventura en la página de la clase. Puedes ver más información acerca de crear tus propias aventuras <a href=\"https://hedy.org/for-teachers/manual/features\">aquí</a>."
 
 msgid "adventures_restored"
 msgstr "Se han restaurado las aventuras por defecto."
@@ -221,6 +245,9 @@ msgstr "programas guardados"
 
 msgid "amount_submitted"
 msgstr "programas enviados"
+
+msgid "apply_filters"
+msgstr "Aplicar los filtros"
 
 msgid "are_you_sure"
 msgstr "¿Estás segura/o? No puedes revertir esta acción."
@@ -308,6 +335,15 @@ msgstr "¿Cuántos niños y niñas hay en tu clase?"
 
 msgid "class_survey_question4"
 msgstr "¿Qué distingue a sus alumnos de los demás?"
+
+msgid "classes_info"
+msgstr "En Hedy, puedes crear tantas clases como quieras. Cada clase también puede tener varios profesores, cada uno con un rol específico. También puedes personalizar tus clases ordenando las aventuras ¡o incluso agregando las tuyas! Puedes ver más información acerca de las clases en el <a href=\"https://hedy.org/for-teachers/manual/preparations#for-teachers\">manual de profesores</a>."
+
+msgid "clone"
+msgstr "Clonar"
+
+msgid "cloned_times"
+msgstr "Clones"
 
 msgid "close"
 msgstr "Cerrar"
@@ -492,6 +528,9 @@ msgstr "Desajuste entre eco y pregunta"
 msgid "echo_out"
 msgstr "A partir del nivel 2, `{echo}` ya no es necesario. Ahora puedes repetir una respuesta con `{ask}` y `{print}`. Ejemplo: `nombre {is} {ask} ¿Cómo te llamas? {print} hola nombre`"
 
+msgid "edit_adventure"
+msgstr "Editar la aventura"
+
 msgid "edit_code_button"
 msgstr "Editar código"
 
@@ -533,6 +572,9 @@ msgstr "Esa dirección de correo electrónico ya está en uso."
 
 msgid "exists_username"
 msgstr "Ese nombre de usuario ya está en uso."
+
+msgid "exit_preview_mode"
+msgstr "Salir del modo vista previa"
 
 msgid "experience_invalid"
 msgstr "Por favor, selecciona una experiencia válida. Escoge (sí, no)."
@@ -822,6 +864,9 @@ msgstr "Este nivel todavía no está disponible en tu clase"
 msgid "level_title"
 msgstr "Nivel"
 
+msgid "levels"
+msgstr ""
+
 msgid "link"
 msgstr "Enlace"
 
@@ -997,6 +1042,9 @@ msgstr "¿Todavía no tienes una cuenta?"
 msgid "no_accounts"
 msgstr "No hay cuentas por crear."
 
+msgid "no_adventures_yet"
+msgstr "Aún no hay aventuras públicas..."
+
 msgid "no_certificate"
 msgstr "Este usuario no ha conseguido el Certificado Hedy de Finalización"
 
@@ -1096,6 +1144,9 @@ msgstr "Otro lenguaje basado en texto"
 msgid "overwrite_warning"
 msgstr "Ya tienes un programa con este nombre, guardar este programa reemplazará al anterior. ¿Estás seguro/a?"
 
+msgid "owner"
+msgstr ""
+
 msgid "page"
 msgstr "página"
 
@@ -1168,6 +1219,12 @@ msgstr "Lenguaje favorito"
 msgid "preview"
 msgstr "Previsualizar"
 
+msgid "previewing_adventure"
+msgstr ""
+
+msgid "previewing_class"
+msgstr "Está previsualizando la clase <em>{class_name}</em> como profesor."
+
 msgid "previous_campaigns"
 msgstr "Ver campañas anteriores"
 
@@ -1224,6 +1281,9 @@ msgstr "Deseas unirte a la clase?"
 
 msgid "public"
 msgstr "Público"
+
+msgid "public_adventures"
+msgstr ""
 
 msgid "public_invalid"
 msgstr "La selección de conformidad no es correcta"
@@ -1284,6 +1344,9 @@ msgstr "Confirmar la eliminación de este usuario de la clase."
 
 msgid "repair_program_logo_alt"
 msgstr "Icono de reparación de programa"
+
+msgid "repeat_dep"
+msgstr "Empezando en el nivel 8, {repeat} necesita ser usado con sangría. Puedes ver ejemplos en la pestaña {repeat} en el nivel 8."
 
 msgid "repeat_match_password"
 msgstr "La contraseña repetida es distinta."
@@ -1366,6 +1429,9 @@ msgstr "Buscar"
 msgid "second_teacher"
 msgstr "Segundo profesor"
 
+msgid "second_teacher_copy_prompt"
+msgstr ""
+
 msgid "second_teacher_prompt"
 msgstr "Introduce el nombre del usuario de un profesor para invitarle."
 
@@ -1380,6 +1446,18 @@ msgstr "Seleccionar"
 
 msgid "select_adventures"
 msgstr "Seleccionar y encargar aventuras"
+
+msgid "select_all"
+msgstr ""
+
+msgid "select_lang"
+msgstr "Selecciona el idioma"
+
+msgid "select_tag"
+msgstr "Seleccionar etiqueta"
+
+msgid "selected"
+msgstr ""
 
 msgid "self_removal_prompt"
 msgstr "¿Estás seguro de que quieres abandonar esta clase?"
@@ -1419,6 +1497,12 @@ msgstr "una comilla simple"
 
 msgid "slash"
 msgstr "una barra"
+
+msgid "slides"
+msgstr "Diapositivas"
+
+msgid "slides_info"
+msgstr "¡Estas son diapositivas que hemos creado para ayudarte a enseñar con Hedy! Cada diapositiva contiene una explicación de cada nivel, junto con algunos ejemplos.Las diapositivas fueron creadas mediante el servicio <a href=\"https://slides.com\">slides.com</a>; si crear tus propias diapositivas usando estas como partida, puedes descargarlas, y luego subir el archivo zip resultante a <a href=\"https://slides.com\">slides.com</a>. Puedes ver más información acerca de las diapositivas en el <a href=\"https://hedy.org/for-teachers/manual/features\">manual de profesores</a>."
 
 msgid "social_media"
 msgstr "Redes sociales"
@@ -1471,6 +1555,9 @@ msgstr ""
 msgid "student_list"
 msgstr "Lista de alumnos"
 
+msgid "student_not_allowed_in_class"
+msgstr ""
+
 msgid "student_not_existing"
 msgstr "Este nombre de usuario no existe."
 
@@ -1512,6 +1599,12 @@ msgstr "Intenta cambiar el valor a un número"
 
 msgid "surname"
 msgstr "Nombre"
+
+msgid "survey"
+msgstr ""
+
+msgid "survey_completed"
+msgstr ""
 
 msgid "survey_skip"
 msgstr "No vuelvas a mostrar esto"
@@ -1624,6 +1717,9 @@ msgstr "Hedy - Términos de privacidad"
 msgid "title_programs"
 msgstr "Hedy - Mis programas"
 
+msgid "title_public-adventures"
+msgstr ""
+
 msgid "title_recover"
 msgstr "Hedy - Recuperar cuenta"
 
@@ -1643,7 +1739,7 @@ msgid "token_invalid"
 msgstr "Tu token no es válido."
 
 msgid "tooltip_level_locked"
-msgstr ""
+msgstr "Su profesor desactivó este nivel"
 
 msgid "translate_error"
 msgstr "Algo salió mal al traducir el código. Intenta ejecutar el código para ver si tiene un error. El código con errores no se puede traducir."

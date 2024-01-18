@@ -110,7 +110,9 @@
                                         data-cy="quiz_input" id="quiz" {% if "quiz" in
                                         customizations['level_thresholds']
                                         %}value="{{ customizations['level_thresholds']['quiz'] }}" {% endif %} min="1"
-                                        max="100" placeholder="e.g. 75 ({{_('percentage')}})" type="number">
+                                        max="100" placeholder="e.g. 75 ({{_('percentage')}})" type="number"
+                                        _="on load or change from #hide_quiz throttled at 500ms
+                                            set my disabled to #hide_quiz.checked">
                                 </td>
                             </tr>
                         </tbody>
@@ -184,6 +186,7 @@
                             onclick="hedyApp.save_customizations('{{class_info.id}}')">
                                 {{_('save')}}
                     </button>
+                    <a href="/for-teachers/class/{{class_info.id}}/preview" class="green-btn" data-cy="preview_class_link">{{_('preview')}}</a>
                 </div>
                 <div class="flex flex-row ml-auto gap-2">
                     <button class="red-btn {% if not customizations %}hidden{% endif %}"

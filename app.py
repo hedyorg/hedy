@@ -42,8 +42,8 @@ from logging_config import LOGGING_CONFIG
 from utils import dump_yaml_rt, is_debug_mode, load_yaml_rt, timems, version, strip_accents
 from website import (ab_proxying, achievements, admin, auth_pages, aws_helpers,
                      cdn, classes, database, for_teachers, s3_logger, parsons,
-                     profile, programs, querylog, quiz, statistics, surveys,
-                     translating, tags)
+                     profile, programs, querylog, quiz, statistics,
+                     translating, tags, surveys, public_adventures)
 from website.auth import (current_user, is_admin, is_teacher, is_second_teacher, has_public_profile,
                           login_user_from_token_cookie, requires_login, requires_login_redirect, requires_teacher,
                           forget_current_user)
@@ -126,6 +126,7 @@ def load_adventures_for_level(level, subset=None):
     keyword_lang = g.keyword_lang
 
     all_adventures = []
+    # NOTE: if we ever have ADVENTURES in the DB, adjust how the "levels" field is used.
     if subset:
         adventures = ADVENTURES[g.lang].get_adventures_subset(subset, keyword_lang)
     else:
@@ -161,8 +162,7 @@ def load_adventures_for_level(level, subset=None):
                 extra_stories=extra_stories,
                 is_teacher_adventure=False,
                 is_command_adventure=short_name in KEYWORDS_ADVENTURES,
-                save_name=f'{default_save_name} {level}',
-                start_code=adventure['levels'][level].get('start_code', ""))
+                save_name=f'{default_save_name} {level}')
 
             all_adventures.append(current_adventure)
 
@@ -179,7 +179,7 @@ def load_adventures_for_level(level, subset=None):
 def load_saved_programs(level, into_adventures, preferential_program: Optional[Program]):
     """Load saved previous saved programs by the current user into the given adventures array.
 
-    Mutates the adventures in-place, by setting the 'save_name', 'start_code'
+    Mutates the adventures in-place, by setting the 'save_name'
     and 'save_info' attributes of adventures.
     """
     if not current_user()['username']:
@@ -205,7 +205,7 @@ def load_saved_programs(level, into_adventures, preferential_program: Optional[P
             continue
 
         adventure.save_name = program.name
-        adventure.start_code = program.code
+        adventure.editor_contents = program.code
         adventure.save_info = SaveInfo.from_program(program)
 
 
@@ -533,6 +533,8 @@ def parse():
                 translated_error = translate_error(ex.error_code, ex.arguments, keyword_lang)
                 if isinstance(ex, hedy.exceptions.InvalidSpaceException):
                     response['Warning'] = translated_error
+                elif isinstance(ex, hedy.exceptions.UnusedVariableException):
+                    response['Warning'] = translated_error
                 else:
                     response['Error'] = translated_error
                 response['Location'] = ex.error_location
@@ -565,6 +567,10 @@ def parse():
 
             if transpile_result.has_clear:
                 response['has_clear'] = True
+
+            if transpile_result.has_music:
+                response['has_music'] = True
+
         except Exception:
             pass
 
@@ -770,6 +776,8 @@ def translate_error(code, arguments, keyword_lang):
         'tip',
         'else',
         'command',
+        'incomplete_command',
+        'missing_command',
         'print',
         'ask',
         'echo',
@@ -778,6 +786,8 @@ def translate_error(code, arguments, keyword_lang):
         'repeat']
     arguments_that_require_highlighting = [
         'command',
+        'incomplete_command',
+        'missing_command',
         'guessed_command',
         'invalid_argument',
         'invalid_argument_2',
@@ -989,7 +999,8 @@ def programs_page(user):
              }
         )
 
-    adventure_names = hedy_content.Adventures(g.lang).get_adventure_names()
+    keyword_lang = g.keyword_lang
+    adventure_names = hedy_content.Adventures(g.lang).get_adventure_names(keyword_lang)
 
     next_page_url = url_for('programs_page', **dict(request.args, page=result.next_page_token)
                             ) if result.next_page_token else None
@@ -1218,7 +1229,7 @@ def hour_of_code(level, program_id=None):
                 name=gettext('your_program'),
                 text='',
                 example_code='',
-                start_code=loaded_program.code,
+                editor_contents=loaded_program.code,
                 save_name=loaded_program.name,
                 is_teacher_adventure=False,
                 is_command_adventure=loaded_program.adventure_name in KEYWORDS_ADVENTURES
@@ -1317,7 +1328,9 @@ def index(level, program_id):
 
     customizations = {}
     if current_user()['username']:
-        customizations = DATABASE.get_student_class_customizations(current_user()['username'])
+        # class_to_preview is for teachers to preview a class they own
+        customizations = DATABASE.get_student_class_customizations(
+            current_user()['username'], class_to_preview=session.get("preview_class", {}).get("id"))
 
     if 'levels' in customizations:
         available_levels = customizations['levels']
@@ -1337,15 +1350,18 @@ def index(level, program_id):
     # - But, if there is a quiz threshold we have to check again if the user has reached it
 
     if 'level_thresholds' in customizations:
-        if 'quiz' in customizations.get('level_thresholds'):
+        show_quiz = 'other_settings' in customizations and 'hide_quiz' not in customizations['other_settings']
+        if show_quiz and 'quiz' in customizations.get('level_thresholds'):
             # Temporary store the threshold
             threshold = customizations.get('level_thresholds').get('quiz')
+            level_quiz_data = QUIZZES[g.lang].get_quiz_data_for_level(level)
             # Get the max quiz score of the user in the previous level
             # A bit out-of-scope, but we want to enable the next level button directly after finishing the quiz
             # Todo: How can we fix this without a re-load?
             quiz_stats = DATABASE.get_quiz_stats([current_user()['username']])
-            # Only check the quiz threshold if there is a quiz to obtain a score on the previous level
-            if level > 1 and QUIZZES[g.lang].get_quiz_data_for_level(level - 1):
+            # Not current leve-quiz's data because some levels may have no data for quizes,
+            # but we still need to check for the threshold.
+            if level > 1 and (not level_quiz_data or QUIZZES[g.lang].get_quiz_data_for_level(level - 1)):
                 scores = [x.get('scores', []) for x in quiz_stats if x.get('level') == level - 1]
                 scores = [score for week_scores in scores for score in week_scores]
                 max_score = 0 if len(scores) < 1 else max(scores)
@@ -1355,7 +1371,7 @@ def index(level, program_id):
 
             # We also have to check if the next level should be removed from the available_levels
             # Only check the quiz threshold if there is a quiz to obtain a score on the current level
-            if level < hedy.HEDY_MAX_LEVEL and QUIZZES[g.lang].get_quiz_data_for_level(level):
+            if level <= hedy.HEDY_MAX_LEVEL and level_quiz_data:
                 scores = [x.get('scores', []) for x in quiz_stats if x.get('level') == level]
                 scores = [score for week_scores in scores for score in week_scores]
                 max_score = 0 if len(scores) < 1 else max(scores)
@@ -1385,7 +1401,7 @@ def index(level, program_id):
                 name=gettext('your_program'),
                 text='',
                 example_code='',
-                start_code=loaded_program.code,
+                editor_contents=loaded_program.code,
                 save_name=loaded_program.name,
                 is_teacher_adventure=False,
                 is_command_adventure=loaded_program.adventure_name in KEYWORDS_ADVENTURES
@@ -1509,7 +1525,7 @@ def view_program(user, id):
     arguments_dict['page_title'] = f'{result["name"]} – Hedy'
     arguments_dict['level'] = result['level']  # Necessary for running
     arguments_dict['initial_adventure'] = dict(result,
-                                               start_code=code,
+                                               editor_contents=code,
                                                )
     arguments_dict['editor_readonly'] = True
 
@@ -1532,6 +1548,42 @@ def view_program(user, id):
                            **arguments_dict)
 
 
+@app.route('/render_code/<level>/<code>', methods=['GET'])
+def render_code_in_editor(level, code):
+
+    try:
+        level = int(level)
+    except BaseException:
+        return utils.error_page(error=404, ui_message=gettext('no_such_level'))
+
+    a = Adventure(
+        short_name='start',
+        name='start',
+        text='start',
+        save_name='start',
+        editor_contents=code)
+    adventures = [a]
+
+    return render_template("code-page.html",
+                           specific_adventure=True,
+                           level_nr=str(level),
+                           level=level,
+                           adventures=adventures,
+                           raw=True,
+                           menu=False,
+                           blur_button_available=False,
+                           # See initialize.ts
+                           javascript_page_options=dict(
+                               page='code',
+                               lang=g.lang,
+                               level=level,
+                               adventures=adventures,
+                               initial_tab='start',
+                               current_user_name=current_user()['username'],
+                               suppress_save_and_load_for_slides=True,
+                           ))
+
+
 @app.route('/adventure/<name>', methods=['GET'], defaults={'level': 1, 'mode': 'full'})
 @app.route('/adventure/<name>/<level>', methods=['GET'], defaults={'mode': 'full'})
 @app.route('/adventure/<name>/<level>/<mode>', methods=['GET'])
@@ -1542,11 +1594,44 @@ def get_specific_adventure(name, level, mode):
         return utils.error_page(error=404, ui_message=gettext('no_such_level'))
 
     adventures = [x for x in load_adventures_for_level(level) if x.short_name == name]
-    if not adventures:
-        return utils.error_page(error=404, ui_message=gettext('no_such_adventure'))
-
+    customizations = {}
     prev_level = None  # we are not rendering buttons in raw, no lookup needed here
     next_level = None
+    if not adventures:
+        # By adventure's name and creator; since an adventure can be clone in /public-adventures
+        if request.args.get("creator"):
+            user = DATABASE.user_by_username(request.args["creator"])
+        else:
+            user = current_user()
+        adventure = None
+        if user and is_teacher(user):
+            adventure = database.ADVENTURES.get({"name": name, "creator": user["username"]})
+
+        if not adventure:
+            return utils.error_page(error=404, ui_message=gettext('no_such_adventure'))
+
+        available_levels = adventure["levels"] if adventure.get("levels") else [adventure["level"]]
+
+        customizations["available_levels"] = [int(adv_level) for adv_level in available_levels]
+        if level not in customizations["available_levels"]:
+            return utils.error_page(error=404, ui_message=gettext('no_such_adventure'))
+
+        adventure["content"] = safe_format(adventure.get("content", ""), **hedy_content.KEYWORDS.get(g.keyword_lang))
+        customizations["teachers_adventure"] = True
+
+        current_adventure = Adventure(
+            id=adventure["id"],
+            author=adventure["creator"],
+            short_name="level",
+            name=adventure["name"],
+            image=adventure.get("image", None),
+            text=adventure["content"],
+            is_teacher_adventure=True,
+            is_command_adventure=False,
+            save_name=f"{name} {level}")
+
+        adventures.append(current_adventure)
+        prev_level, next_level = utils.find_prev_next_levels(customizations["available_levels"], level)
 
     # Add the commands to enable the language switcher dropdown
     commands = hedy.commands_per_level.get(level)
@@ -1561,7 +1646,8 @@ def get_specific_adventure(name, level, mode):
                            level=level,
                            prev_level=prev_level,
                            next_level=next_level,
-                           customizations=[],
+                           #    max_level=max_level,
+                           customizations=customizations,
                            hide_cheatsheet=None,
                            enforce_developers_mode=None,
                            teacher_adventures=[],
@@ -1580,7 +1666,7 @@ def get_specific_adventure(name, level, mode):
                                lang=g.lang,
                                level=level,
                                adventures=adventures,
-                               initial_tab=initial_tab,
+                               initial_tab='',
                                current_user_name=current_user()['username'],
                            ))
 
@@ -1603,6 +1689,7 @@ def get_embedded_code_editor(level):
         level = 1
 
     run = True if request.args.get('run') == 'true' else False
+    fullWidth = True if request.args.get('fullWidth') == 'true' else False
     readOnly = True if request.args.get('readOnly') == 'true' else False
     encoded_program = request.args.get('program')
 
@@ -1627,7 +1714,7 @@ def get_embedded_code_editor(level):
         except binascii.Error:
             program = gettext('invalid_program_comment')
 
-    return render_template("embedded-editor.html", embedded=True, run=run, language=language,
+    return render_template("embedded-editor.html", fullWidth=fullWidth, run=run, language=language,
                            keyword_language=keyword_language, readOnly=readOnly,
                            level=level, javascript_page_options=dict(
                                page='view-program',
@@ -1936,7 +2023,8 @@ def explore():
     normalized = normalize_public_programs(list(programs) + list(favourite_programs.records))
     programs, favourite_programs = split_at(len(programs), normalized)
 
-    adventures_names = hedy_content.Adventures(session['lang']).get_adventure_names()
+    keyword_lang = g.keyword_lang
+    adventures_names = hedy_content.Adventures(session['lang']).get_adventure_names(keyword_lang)
 
     return render_template(
         'explore.html',
@@ -2060,7 +2148,7 @@ def get_slides(level):
         return utils.error_page(error=404, ui_message="Slides do not exist!")
 
     slides = SLIDES[g.lang].get_slides_for_level(level, keyword_language)
-    return render_template('slides.html', slides=slides)
+    return render_template('slides.html', level=level, slides=slides)
 
 
 @app.route('/translate_keywords', methods=['POST'])
@@ -2069,7 +2157,7 @@ def translate_keywords():
     try:
         translated_code = hedy_translation.translate_keywords(body.get('code'), body.get(
             'start_lang'), body.get('goal_lang'), level=int(body.get('level', 1)))
-        if translated_code:
+        if translated_code or translated_code == '':  # empty string is False, so explicitly allow it
             return jsonify({'success': 200, 'code': translated_code})
         else:
             return gettext('translate_error'), 400
@@ -2491,6 +2579,7 @@ app.register_blueprint(parsons.ParsonsModule(PARSONS))
 app.register_blueprint(statistics.StatisticsModule(DATABASE))
 app.register_blueprint(statistics.LiveStatisticsModule(DATABASE))
 app.register_blueprint(tags.TagsModule(DATABASE, ACHIEVEMENTS))
+app.register_blueprint(public_adventures.PublicAdventuresModule(DATABASE, ACHIEVEMENTS))
 app.register_blueprint(surveys.SurveysModule(DATABASE))
 
 

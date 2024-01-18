@@ -75,8 +75,9 @@ def get_target_keyword(keyword_dict, keyword):
 
 def translate_keywords(input_string, from_lang="en", to_lang="nl", level=1):
     """ "Return code with keywords translated to language of choice in level of choice"""
+
     if input_string == "":
-        return " "  # empty string is True, so output something else that looks like the empty string
+        return ""
 
     # remove leading spaces.
     # FH, dec 23. This creates a bit of a different version of translation but that seems ok to me
@@ -100,7 +101,7 @@ def translate_keywords(input_string, from_lang="en", to_lang="nl", level=1):
         ordered_rules = reversed(sorted(translator.rules, key=operator.attrgetter("line", "start")))
 
         # checks whether any error production nodes are present in the parse tree
-        hedy.is_program_valid(program_root, input_string, level, from_lang)
+        # hedy.is_program_valid(program_root, input_string, level, from_lang)
 
         result = processed_input
         for rule in ordered_rules:
@@ -116,7 +117,7 @@ def translate_keywords(input_string, from_lang="en", to_lang="nl", level=1):
         result = "\n".join([line for line in result.splitlines()])
         result = result.replace("#ENDBLOCK", "")
 
-        # we have to reverse escaping or translating and retranslating will add an unlimied number of slashes
+        # we have to reverse escaping or translating and retranslating will add an unlimited number of slashes
         if level >= 4:
             result = result.replace("\\\\", "\\")
 
@@ -179,17 +180,13 @@ def find_keyword_in_rules(rules, keyword, start_line, end_line, start_column, en
 
 
 def get_original_keyword(keyword_dict, keyword, line):
-    found = False
     for word in keyword_dict[keyword]:
         if word in line:
-            original = word
-            found = True
+            return word
+
     # If we can't find the keyword, it means that it isn't part of the valid keywords for this language
     # so return original instead
-    if found:
-        return original
-    else:
-        return keyword
+    return keyword
 
 
 class Translator(Visitor):
@@ -239,13 +236,18 @@ class Translator(Visitor):
         self.add_rule("_TURN", "turn", tree)
 
     def left(self, tree):
-        token = tree.children[0]
-        rule = Rule("left", token.line, token.column - 1, token.end_column - 2, token.value)
+        # somehow for some Arabic rules (left, right, random) the parser returns separate tokens instead of one!
+        token_start = tree.children[0]
+        token_end = tree.children[-1]
+        value = ''.join(tree.children)
+        rule = Rule("left", token_start.line, token_start.column - 1, token_end.end_column - 2, value)
         self.rules.append(rule)
 
     def right(self, tree):
-        token = tree.children[0]
-        rule = Rule("right", token.line, token.column - 1, token.end_column - 2, token.value)
+        token_start = tree.children[0]
+        token_end = tree.children[-1]
+        value = ''.join(tree.children)
+        rule = Rule("right", token_start.line, token_start.column - 1, token_end.end_column - 2, value)
         self.rules.append(rule)
 
     def assign_list(self, tree):
@@ -270,9 +272,18 @@ class Translator(Visitor):
         self.add_rule("_FROM", "from", tree)
 
     def random(self, tree):
-        token = tree.children[0]
-        rule = Rule("random", token.line, token.column - 1, token.end_column - 2, token.value)
+        # somehow for Arabic tokens, we parse into separate tokens instead of one!
+        token_start = tree.children[0]
+        token_end = tree.children[-1]
+        value = ''.join(tree.children)
+        rule = Rule("random", token_start.line, token_start.column - 1, token_end.end_column - 2, value)
         self.rules.append(rule)
+
+    def error_ask_dep_2(self, tree):
+        self.add_rule("_ASK", "ask", tree)
+
+    def error_echo_dep_2(self, tree):
+        self.add_rule("_ECHO", "echo", tree)
 
     def ifs(self, tree):
         self.add_rule("_IF", "if", tree)

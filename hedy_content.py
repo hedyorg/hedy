@@ -15,21 +15,13 @@ COUNTRIES = static_babel_content.COUNTRIES
 ALL_LANGUAGES = {}
 ALL_KEYWORD_LANGUAGES = {}
 
-# Todo TB -> We create this list manually, but it would be nice if we find
-# a way to automate this as well
-NON_LATIN_LANGUAGES = ['ar', 'bg', 'bn', 'el', 'fa', 'hi', 'he', 'pa_PK', 'ru', 'zh_Hans']
-
 # Babel has a different naming convention than Weblate and doesn't support some languages -> fix this manually
 CUSTOM_BABEL_LANGUAGES = {'pa_PK': 'pa_Arab_PK',
                           'kmr': 'ku_TR',
-                          'tn': 'en',
-                          'pap': 'en',
                           'tl': 'en'}
 
 # For the non-existing language manually overwrite the display language to make sure it is displayed correctly
 CUSTOM_LANGUAGE_TRANSLATIONS = {'kmr': 'Kurdî (Tirkiye)',
-                                'tn': 'Setswana',
-                                'pap': 'Papiamentu',
                                 'tl': 'ᜆᜄᜎᜓᜄ᜔'}
 
 customize_babel_locale(CUSTOM_BABEL_LANGUAGES)
@@ -506,8 +498,9 @@ class Adventures(StructuredDataFile):
     def get_adventure_keyname_name_levels(self):
         return {aid: {adv['name']: list(adv['levels'].keys())} for aid, adv in self.file.get('adventures', {}).items()}
 
-    def get_adventure_names(self):
-        return {aid: adv['name'] for aid, adv in self.file.get('adventures', {}).items()}
+    def get_adventure_names(self, keyword_lang):
+        return {aid: adv['name'] for aid, adv in deep_translate_keywords(
+            self.file.get('adventures'), keyword_lang).items()}
 
     def get_adventures(self, keyword_lang="en"):
         return deep_translate_keywords(self.file.get('adventures'), keyword_lang)
