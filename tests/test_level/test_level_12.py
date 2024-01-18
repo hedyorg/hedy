@@ -657,7 +657,7 @@ class TestsLevel12(HedyTester):
 
         expected = textwrap.dedent("""\
             n = 'C4'
-            chosen_note = random.choice(notes)
+            chosen_note =  n.upper()
             if chosen_note not in notes_mapping.keys() and chosen_note not in notes_mapping.values():
                 raise Exception('catch_value_exception')
             play(notes_mapping.get(str(chosen_note), str(chosen_note)))
@@ -2423,7 +2423,7 @@ class TestsLevel12(HedyTester):
 
         expected = textwrap.dedent("""\
         notes = ['C4', 'E4', 'D4', 'F4', 'G4']
-        chosen_note = random.choice(notes)
+        chosen_note = random.choice(notes).upper()
         if chosen_note not in notes_mapping.keys() and chosen_note not in notes_mapping.values():
             raise Exception('catch_value_exception')
         play(notes_mapping.get(str(chosen_note), str(chosen_note)))
@@ -2448,9 +2448,9 @@ class TestsLevel12(HedyTester):
         expected = textwrap.dedent("""\
         notes = [1, 2, 3]
         for i in range(int('10')):
-          chosen_note = random.choice(notes)
+          chosen_note = random.choice(notes).upper()
           if chosen_note not in notes_mapping.keys() and chosen_note not in notes_mapping.values():
-            raise Exception('catch_value_exception')
+              raise Exception('catch_value_exception')
           play(notes_mapping.get(str(chosen_note), str(chosen_note)))
           time.sleep(0.5)
           time.sleep(0.1)""")
