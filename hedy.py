@@ -1607,7 +1607,7 @@ class ConvertToPython_1(ConvertToPython):
         exception_text = translate_value_error('play', note, 'note')
 
         return textwrap.dedent(f"""\
-                if '{note}' not in notes_mapping.keys() and '{note}' not in notes_mapping.values():
+                if '{note}'.upper() not in notes_mapping.keys() and '{note}'.upper() not in notes_mapping.values():
                     raise Exception({exception_text})
                 play(notes_mapping.get(str('{note}'), str('{note}')))
                 time.sleep(0.5)""")
@@ -1617,7 +1617,7 @@ class ConvertToPython_1(ConvertToPython):
         self.check_var_usage([note], meta.line)
 
         return textwrap.dedent(f"""\
-                chosen_note = {note}
+                chosen_note = {note}.upper()
                 if chosen_note not in notes_mapping.keys() and chosen_note not in notes_mapping.values():
                     raise Exception({exception_text})
                 play(notes_mapping.get(str(chosen_note), str(chosen_note)))
@@ -1780,7 +1780,7 @@ class ConvertToPython_2(ConvertToPython_1):
         # else:
         # if not an int, then it is a variable
 
-        note = args[0]
+        note = args[0].upper()
         if note in list(notes_mapping.values()) + list(notes_mapping.keys()):  # this is a supported note
             return self.make_play(note, meta)
 
