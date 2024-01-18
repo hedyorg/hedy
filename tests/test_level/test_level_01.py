@@ -316,7 +316,6 @@ class TestsLevel1(HedyTester):
             max_level=17
         )
 
-
     def test_mixes_languages_nl_en(self):
         code = textwrap.dedent("""\
         vraag Heb je er zin in?
