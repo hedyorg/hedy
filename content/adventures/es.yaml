@@ -794,25 +794,20 @@ adventures:
                     **¡Atención! ¡Este código necesita ser depurado!**
                     ```
                     {print} ¡Bienvenido a la Piscina Hedy!
-                    class {is} {ask} '¿Está aquí para unirse a una clase hoy?'
+                    class {is} '¿Está aquí para unirse a una clase hoy?'
                     {if} clase sí
-                        {print} '¡Genial! ¡Te apuntas a una clase!
-                        {print} {else} 'No se apuntará a ninguna clase'.
+                    {print} '¡Genial! ¡Te apuntas a una clase!
+                    {print} {else} 'No se apuntará a ninguna clase'.
                     descuento {is} {ask} ¿Tiene un código de descuento?
                     {if} descuento {is} si
                     respuesta_descuento {is} {ask} ¿Cuál es su código de descuento?
                     codigos_descuento = Senior4231, Student8786, NewMember6709
                     {if} respuesta_descuento {is} {in} codigos_descuento
-                        {print} 'Son 3.50€'.
-                            {else} 'Ese código no es válido'
+                    {print} 'Son 3.50€'.
+                    {else} 'Ese código no es válido'
                     {else} 'Serán 5.50€'
                     {print} '¡Buen baño!'
                     ```
-
-                        {print} 'Serán 3.50€'
-                            {else} 'Ese código no es válido'
-                    {else} 'Serán 5.50€'
-                    {print} '¡Buen baño!'
             6:
                 story_text: |-
                     ### Ejercicio

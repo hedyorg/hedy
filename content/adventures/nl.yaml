@@ -791,15 +791,15 @@ adventures:
                     {print} Welkom bij Zwembad Hedy!
                     les {is} {ask} 'Wil je vandaag een zwemles volgen?'
                     {if} les ja
-                        {print} 'Mooi! Jij gaat meedoen aan een les!'
-                        {print} {else} 'Je gaat geen zwemles volgen'
+                    'Mooi! Jij gaat meedoen aan een les!'
+                    {print} {else} 'Je gaat geen zwemles volgen'
                     korting {is} {ask} 'Heb je een kortingscode?'
                     {if} korting {is} ja
                     korting_antwoord {is} {ask} 'Welke kortingscode heb je?'
                     kortingscode = Senior4231, Student8786, NewMember6709
                     {if} korting_antwoord {is} {in} kortingscode
-                        {print} 'Dat wordt dan €3,50'
-                            {else} 'Die code is niet geldig'
+                    {print} 'Dat wordt dan €3,50'
+                    {else} 'Die code is niet geldig
                     {else} 'Dat wordt dan €5,50'
                     {print} 'Veel plezier!'
                     ```
