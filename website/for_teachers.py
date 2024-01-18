@@ -89,12 +89,12 @@ class ForTeachersModule(WebsiteModule):
         # Code very defensively around types here -- Weblate has a tendency to mess up the YAML,
         # so the structure cannot be trusted.
         page_title = content.get('title', '')
-        sections = {section['key']: section for section in content['sections']}
-        section_titles = [(section['key'], section.get('title', '')) for section in content['sections']]
+        sections = {section['key']: section for section in content['teacher-guide']}
+        section_titles = [(section['key'], section.get('title', '')) for section in content['teacher-guide']]
         try:
             current_section = sections[section_key]
         except KeyError:
-            current_section = content['sections'][0]
+            current_section = content['teacher-guide'][0]
 
         if not current_section:
             return utils.error_page(error=404, ui_message=gettext("page_not_found"))
