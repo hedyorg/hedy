@@ -48,19 +48,7 @@
         <a class="green-btn mr-1 no-underline cursor-pointer" href="/adventure/{{ adventure.name }}?creator={{ adventure.creator }}">{{_('preview')}}</a>
         {% if user["username"] != adventure["creator"] %}
             <button class="green-btn" id="clone_adventure_btn_{{level}}"
-                data-id="{{adventure.id}}"
-                _="on htmx:afterRequest log detail 
-                if detail.xhr.status == '200'
-                    hedyApp.cloned('{{_('adventure_cloned')}}')
-                    send removeMe
-                else
-                    hedyApp.cloned(detail.xhr.response, false)
-                end"
-                hx-trigger="click"
-                hx-post="/public-adventures/clone/{{adventure.id}}"
-                hx-swap="afterbegin"
-                hx-target="#adventures"
-                ">{{_('clone')}}</button>
+                data-id="{{adventure.id}}">{{_('clone')}}</button>
         {%else%}
             <!-- TODO: button to add to class(es) -->
             <a
