@@ -200,7 +200,6 @@ def translate_value_error(command, value, suggestion_type):
     elif suggestion_type == 'note':
         suggestion_text = gettext('suggestion_note')
 
-
     exception_text = exception_text.replace('{command}', style_command(command))
     exception_text = exception_text.replace('{value}', style_command(value))
     exception_text = exception_text.replace('{suggestion}', suggestion_text)
@@ -1606,7 +1605,7 @@ class ConvertToPython_1(ConvertToPython):
 
     def make_play(self, note):
         exception_text = translate_value_error('play', note, 'note')
-        
+
         return textwrap.dedent(f"""\
                 if int({note}) < 0 or int({note}) > 70:
                     raise Exception({exception_text})
