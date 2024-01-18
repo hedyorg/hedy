@@ -1607,7 +1607,7 @@ class ConvertToPython_1(ConvertToPython):
         exception_text = translate_value_error('play', note, 'note')
 
         return textwrap.dedent(f"""\
-                if int({note}) < 0 or int({note}) > 70:
+                if '{note}' not in notes_mapping.keys() and '{note}' not in notes_mapping.values():
                     raise Exception({exception_text})
                 play(notes_mapping.get(str('{note}'), str('{note}')))
                 time.sleep(0.5)""")
@@ -1616,11 +1616,7 @@ class ConvertToPython_1(ConvertToPython):
         exception_text = translate_value_error('play', note, 'note')
 
         return textwrap.dedent(f"""\
-                try:
-                    int_note = int({note})
-                    if int_note < 0 or int_note > 70:
-                        raise Exception({exception_text})
-                except:
+                if {note} not in notes_mapping.keys() and {note} not in notes_mapping.values():
                     raise Exception({exception_text})
                 play(notes_mapping.get(str({note}), str({note})))
                 time.sleep(0.5)""")
