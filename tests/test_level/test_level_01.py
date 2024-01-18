@@ -301,7 +301,7 @@ class TestsLevel1(HedyTester):
             max_level=17
         )
 
-    def test_play(self):
+    def test_play_lowercase(self):
         code = "play a"
         expected = textwrap.dedent("""\
         if 'A' not in notes_mapping.keys() and 'A' not in notes_mapping.values():

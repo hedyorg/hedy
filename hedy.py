@@ -1557,7 +1557,7 @@ class ConvertToPython_1(ConvertToPython):
         if len(args) == 0:
             return self.make_play('C4', meta) + self.add_debug_breakpoint()
 
-        note = args[0]  # will we also support multiple notes at once?
+        note = args[0].upper()  # will we also support multiple notes at once?
         return self.make_play(note, meta) + self.add_debug_breakpoint()
 
     def comment(self, meta, args):
@@ -1607,7 +1607,7 @@ class ConvertToPython_1(ConvertToPython):
         exception_text = translate_value_error('play', note, 'note')
 
         return textwrap.dedent(f"""\
-                if '{note}'.upper() not in notes_mapping.keys() and '{note}'.upper() not in notes_mapping.values():
+                if '{note}' not in notes_mapping.keys() and '{note}' not in notes_mapping.values():
                     raise Exception({exception_text})
                 play(notes_mapping.get(str('{note}'), str('{note}')))
                 time.sleep(0.5)""")
@@ -1780,9 +1780,10 @@ class ConvertToPython_2(ConvertToPython_1):
         # else:
         # if not an int, then it is a variable
 
-        note = args[0].upper()
-        if note in list(notes_mapping.values()) + list(notes_mapping.keys()):  # this is a supported note
-            return self.make_play(note, meta)
+        note = args[0]
+        uppercase_note = note.upper()
+        if uppercase_note in list(notes_mapping.values()) + list(notes_mapping.keys()):  # this is a supported note
+            return self.make_play(uppercase_note, meta)
 
         # no note? it must be a variable!
         self.add_variable_access_location(note, meta.line)
