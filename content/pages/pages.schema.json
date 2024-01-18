@@ -58,9 +58,9 @@
       "additionalProperties": false,
       "properties": {
         "level": { "type": "string" },
-        "sections": { "type": "array", "items": { "$ref": "#/definitions/DocMistakeLevelSection" } }
+        "teacher-guide": { "type": "array", "items": { "$ref": "#/definitions/DocMistakeLevelSection" } }
       },
-      "required": ["level", "sections"]
+      "required": ["level", "teacher-guide"]
     },
     "DocMistakeLevelSection": {
       "type": "object",
