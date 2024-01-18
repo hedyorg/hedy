@@ -24,58 +24,60 @@ class PublicAdventuresModule(WebsiteModule):
         self.achievements = achievements
         self.initial_level = 1
         self.adventures = {}
-        self.included = {}
         self.customizations = {"available_levels": set()}
-        self.filtered_names = set()
+        self.current_filters = {}
+        self.available_languages = set()
+        self.available_tags = set()
 
     @route("/", methods=["GET"], defaults={'level': 1})
     @route("/<level>", methods=["GET"])
     @requires_teacher
     def index(self, user, level):
-        self.filtered_names = set()
-        public_adventures = self.db.get_public_adventures()
-        public_adventures = sorted(public_adventures, key=lambda a: a["creator"] == user["username"], reverse=True)
         adventures = []
-        available_languages = set()
-        available_tags = set()
-        for adventure in public_adventures:
-            available_languages.update([adventure["language"]])
-            available_tags.update(adventure["tags"])
-            # NOTE: what if another author has an adventure with the same name?
-            # Perhaps we could make this name#creator!
-            if self.included.get(adventure["name"]):
-                continue
-            public_profile = self.db.get_public_profile_settings(adventure.get('creator'))
-            self.included[adventure["name"]] = True
-            adventures.append(
-                {
-                    "id": adventure.get("id"),
-                    "name": adventure.get("name"),
-                    "short_name": adventure.get("name"),
-                    "author": adventure.get("author", adventure["creator"]),
-                    "creator": adventure.get("creator"),
-                    "creator_public_profile": public_profile,
-                    "date": utils.localized_date_format(adventure.get("date")),
-                    "level": adventure.get("level"),
-                    "levels": adventure.get("levels"),
-                    "language": adventure.get("language", g.lang),
-                    "cloned_times": adventure.get("cloned_times"),
-                    "tags": adventure.get("tags", []),
-                    "text": adventure.get("content"),
-                    "is_teacher_adventure": True,
-                    # "content": adventure.get("content")
-                }
-            )
-            # save adventures for later usage.
-            for _level in adventure.get("levels", [adventure.get("level")]):
-                _level = int(_level)
-                if self.adventures.get(_level):
-                    self.adventures[_level].append(adventures[-1])
-                else:
-                    self.adventures[_level] = [adventures[-1]]
+        if self.filters_changed():
+            included = {}
+            self.adventures = {}
 
-            available_levels = adventure["levels"] if adventure.get("levels") else [adventure["level"]]
-            self.customizations["available_levels"].update([int(adv_level) for adv_level in available_levels])
+            public_adventures = self.db.get_public_adventures()
+            public_adventures = sorted(public_adventures, key=lambda a: a["creator"] == user["username"], reverse=True)
+            for adventure in public_adventures:
+                self.available_languages.update([adventure["language"]])
+                self.available_tags.update(adventure["tags"])
+                # NOTE: what if another author has an adventure with the same name?
+                # Perhaps we could make this name#creator!
+                if included.get(adventure["name"]):
+                    continue
+                public_profile = self.db.get_public_profile_settings(adventure.get('creator'))
+                included[adventure["name"]] = True
+                adventures.append(
+                    {
+                        "id": adventure.get("id"),
+                        "name": adventure.get("name"),
+                        "short_name": adventure.get("name"),
+                        "author": adventure.get("author", adventure["creator"]),
+                        "creator": adventure.get("creator"),
+                        "creator_public_profile": public_profile,
+                        "date": utils.localized_date_format(adventure.get("date")),
+                        "level": adventure.get("level"),
+                        "levels": adventure.get("levels"),
+                        "language": adventure.get("language", g.lang),
+                        "cloned_times": adventure.get("cloned_times"),
+                        "tags": adventure.get("tags", []),
+                        "text": adventure.get("content"),
+                        "is_teacher_adventure": True,
+                        # "content": adventure.get("content")
+                    }
+                )
+                # save adventures for later usage.
+                for _level in adventure.get("levels", [adventure.get("level")]):
+                    _level = int(_level)
+                    if self.adventures.get(_level):
+                        self.adventures[_level].append(adventures[-1])
+                    else:
+                        self.adventures[_level] = [adventures[-1]]
+
+                available_levels = adventure["levels"] if adventure.get("levels") else [adventure["level"]]
+                self.customizations["available_levels"].update([int(adv_level) for adv_level in available_levels])
 
         if not request.args.get("level"):
             level = 1
@@ -85,21 +87,25 @@ class PublicAdventuresModule(WebsiteModule):
             adventures = self.adventures.get(level, [])
         initial_tab = None
         initial_adventure = None
+        commands = {}
+        prev_level = None
+        next_level = None
         if adventures:
             initial_tab = adventures[0]["name"]
             initial_adventure = adventures[0]
 
-        # Add the commands to enable the language switcher dropdown
-        commands = hedy.commands_per_level.get(initial_adventure["level"])
-        prev_level, next_level = utils.find_prev_next_levels(
-            list(self.customizations["available_levels"]), int(initial_adventure["level"]))
+            # Add the commands to enable the language switcher dropdown
+            commands = hedy.commands_per_level.get(initial_adventure["level"])
+            prev_level, next_level = utils.find_prev_next_levels(
+                list(self.customizations["available_levels"]), int(initial_adventure["level"]))
 
+        self.save_filters()
         return render_template(
             "public-adventures.html",
             adventures=adventures,
             teacher_adventures=adventures,
-            available_languages=available_languages,
-            available_tags=available_tags,
+            available_languages=self.available_languages,
+            available_tags=self.available_tags,
             selectedLevel=level,
             selectedLang=request.args.get("lang"),
             selectedTag=request.args.get("tag", []),
@@ -140,9 +146,6 @@ class PublicAdventuresModule(WebsiteModule):
 
         adventures = self.adventures.get(level, [])
 
-        available_languages = set([adv["language"] for adv in adventures if adv["language"]])
-        available_tags = set([tag for adv in adventures for tag in adv.get("tags", [])])
-
         if language:
             adventures = [adv for adv in adventures if adv.get("language") == language]
         if tags:
@@ -154,28 +157,24 @@ class PublicAdventuresModule(WebsiteModule):
 
         initial_tab = None
         initial_adventure = None
-        state_changed = True
-
+        commands = {}
+        prev_level = None
+        next_level = None
         if adventures:
-            new_filtered_names = {adv["name"] for adv in adventures}
-            # Check if the filtered names are different from the last filter call
-            state_changed = new_filtered_names != self.filtered_names
-            self.filtered_names = new_filtered_names.copy()
             initial_tab = adventures[0]["name"]
             initial_adventure = adventures[-1]
-        else:
-            self.filtered_names = set()
-        # Add the commands to enable the language switcher dropdown
-        commands = hedy.commands_per_level.get(level)
-        prev_level, next_level = utils.find_prev_next_levels(list(self.customizations["available_levels"]), level)
+
+            # Add the commands to enable the language switcher dropdown
+            commands = hedy.commands_per_level.get(level)
+            prev_level, next_level = utils.find_prev_next_levels(list(self.customizations["available_levels"]), level)
 
         return {
             "html": render_template(
                 "public-adventures-body.html",
                 adventures=adventures,
                 teacher_adventures=adventures,
-                available_languages=available_languages,
-                available_tags=available_tags,
+                available_languages=self.available_languages,
+                available_tags=self.available_tags,
                 selectedLevel=level,
                 selectedTag=request.args.get("tag", []),
 
@@ -201,8 +200,7 @@ class PublicAdventuresModule(WebsiteModule):
                 level=level,
                 adventures=adventures,
                 initial_tab=initial_tab,
-                current_user_name=user['username'],
-                state_changed=state_changed,)
+                current_user_name=user['username'],)
         }
 
     @route("/clone/<adventure_id>", methods=["POST"])
@@ -251,8 +249,16 @@ class PublicAdventuresModule(WebsiteModule):
                     adventure["text"] = adventure.get("content")
                     # Replace the old adventure with the new adventure
                     self.adventures[_level][i] = adventure
-                    # del self.included[adventure.get("name")]
-                    self.filtered_names = set()
                     break
         # TODO: add achievement
         return {"message": gettext("adventure_cloned")}
+
+    def save_filters(self):
+        for key, value in request.args.items():
+            self.current_filters[key] = value
+
+    def filters_changed(self):
+        for key, value in request.args.items():
+            if self.current_filters.get(key) != value:
+                return True
+        return not self.current_filters  # initially it's empty, therefore.

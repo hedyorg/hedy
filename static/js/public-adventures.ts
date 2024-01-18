@@ -150,8 +150,10 @@ function updateURL() {
 }
 
 async function updateDOM() {
+    // Since the select has no default values, we don't want to pass undefined to the backend.
+    const level = levelInstance.value ? levelInstance.value : ""
     const response = await fetch(`public-adventures/filter?tag=${tagsInstance.value}`
-                    + `&lang=${languageInstance.value}&level=${levelInstance.value}`
+                    + `&lang=${languageInstance.value}&level=${level}`
                     + `&search=${searchInput?.value}`, {
       method: 'GET',
       keepalive: true,
@@ -164,7 +166,7 @@ async function updateDOM() {
     updateURL()
 
     const publicAdventuresBody = document.getElementById('public-adventures-body') ;
-    if (js.state_changed && publicAdventuresBody) {
+    if (publicAdventuresBody) {
         publicAdventuresBody.innerHTML = html
 
         // Since we render html as a string, the js is lost and thus any js needed
