@@ -2729,6 +2729,106 @@ adventures:
                         {play} F
                     _
                     ```
+            12:
+                story_text: |
+                    Use functions in you songs! As you can see in the example code, you can make a function for each line of Twinkle Twinkle little star. Once you've programmed the first three lines, all you have to do is call the functions in the order you want them played in.
+
+                    ### Exercise
+                    Finish the song of Twinkle Twinkle little star.
+                    Then look back at all the songs you've programmed in the levels before, can you make those codes better and shorter using functions too?
+                example_code: |
+                    ```
+                    {define} first_line
+                        {play} C
+                        {play} C
+                        {play} G
+                        {play} G
+                        {play} A
+                        {play} A
+                        {play} G
+                        {sleep}
+
+                    {define} second_line
+                        {play} F
+                        {play} F
+                        {play} E
+                        {play} E
+                        {play} D
+                        {play} D
+                        {play} C
+                        {sleep}
+
+                    {define} third_line
+                        {play} G
+                        {play} G
+                        {play} F
+                        {play} F
+                        {play} E
+                        {play} E
+                        {play} D
+                        {sleep}
+
+                    {call} _
+                    {call} _
+                    {call} _
+                    {call} _
+                    {call} _
+                    {call} _
+                    ```
+            13:
+                story_text: |
+                    You can use a function with an argument for songs that have line taht are almost the same, but slightly different each time.
+                    One example is the song 'Yankee Doodle'. The first 4 notes of the first lines are the same, buyt each time they are followed by a different couple of notes.
+
+                    ### Exercise
+                    Can you finish the song of Yankee Doodle?
+                    Can you think of another song to programm this way?
+                example_code: |
+                    ```
+                    {print} 'Yankee Doodle'
+                    {define} _ {with} note_1, note_2, note_3
+                        {play} C4
+                        {play} C4
+                        {play} D4
+                        {play} E4
+                        {play} _
+                        {play} _
+                        {play} _
+
+                    {call} line_1 {with} 29, 31, 30
+                    {call} line_1 {with} 29, 28, 0
+                    {call} line_1 {with} 32, 31, 30
+
+                    {play} C4
+                    {play} B3
+                    {play} G3
+                    {play} A3
+                    {play} B3
+                    {play} C4
+                    {play} C4
+                    ```
+            14:
+                story_text: |
+                    You can programm music for fun, but you can also use the musical notes to make something useful like a fire alarm!
+
+                    ### Exercise
+                    Make sure the fire alarm rings when there is a fire!
+                example_code: |
+                    ```
+                    {define} fire_alarm
+                        {print} 'FIRE!'
+                        note = 40
+                        {for} i {in} {range} 1 {to} 100
+                            {if} note _ 50
+                                note = note + 5
+                                {play} _
+                            {else}
+                                note = 40
+
+                    fire = {ask} 'Is there a fire?'
+                    {if} fire _ 'yes'
+                        {call} fire_alarm
+                    ```
     parrot:
         name: Parrot
         default_save_name: Parrot
