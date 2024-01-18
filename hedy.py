@@ -1613,7 +1613,15 @@ class ConvertToPython_1(ConvertToPython):
                 time.sleep(0.5)""")
 
     def make_play_var(self, note):
+        exception_text = translate_value_error('play', note, 'note')
+
         return textwrap.dedent(f"""\
+                try:
+                    int_note = int({note})
+                    if int_note < 0 or int_note > 70:
+                        raise Exception({exception_text})
+                except:
+                    raise Exception({exception_text})
                 play(notes_mapping.get(str({note}), str({note})))
                 time.sleep(0.5)""")
 
