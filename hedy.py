@@ -1555,10 +1555,10 @@ class ConvertToPython_1(ConvertToPython):
 
     def play(self, meta, args):
         if len(args) == 0:
-            return self.make_play('C4') + self.add_debug_breakpoint()
+            return self.make_play('C4', meta) + self.add_debug_breakpoint()
 
         note = args[0]  # will we also support multiple notes at once?
-        return self.make_play(note) + self.add_debug_breakpoint()
+        return self.make_play(note, meta) + self.add_debug_breakpoint()
 
     def comment(self, meta, args):
         return f"#{''.join(args)}"
