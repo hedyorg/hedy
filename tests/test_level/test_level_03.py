@@ -871,13 +871,10 @@ class TestsLevel3(HedyTester):
 
         expected = textwrap.dedent("""\
         notes = ['C4', 'E4', 'D4', 'F4', 'G4']
-        try:
-            int_note = int(random.choice(notes))
-            if int_note < 0 or int_note > 70:
-                raise Exception('catch_value_exception')
-        except:
+        chosen_note = random.choice(notes)
+        if chosen_note not in notes_mapping.keys() and chosen_note not in notes_mapping.values():
             raise Exception('catch_value_exception')
-        play(notes_mapping.get(str(random.choice(notes)), str(random.choice(notes))))
+        play(notes_mapping.get(str(chosen_note), str(chosen_note)))
         time.sleep(0.5)""")
 
         self.multi_level_tester(

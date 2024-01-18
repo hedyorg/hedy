@@ -847,18 +847,26 @@ class TestsLevel2(HedyTester):
 
         expected = textwrap.dedent("""\
             n = 'C4'
-            try:
-                int_note = int(n)
-                if int_note < 0 or int_note > 70:
-                    raise Exception('catch_value_exception')
-            except:
+            chosen_note = n
+            if chosen_note not in notes_mapping.keys() and chosen_note not in notes_mapping.values():
                 raise Exception('catch_value_exception')
-            play(notes_mapping.get(str(n), str(n)))
+            play(notes_mapping.get(str(chosen_note), str(chosen_note)))
             time.sleep(0.5)""")
 
         self.multi_level_tester(
             code=code,
             translate=False,
             expected=expected,
+            max_level=11
+        )
+
+    def test_play_undefined(self):
+        code = textwrap.dedent("""\
+            play n""")
+
+        self.multi_level_tester(
+            code=code,
+            translate=False,
+            exception=hedy.exceptions.UndefinedVarException,
             max_level=11
         )

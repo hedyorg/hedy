@@ -1603,7 +1603,7 @@ class ConvertToPython_1(ConvertToPython):
     def make_forward(self, parameter):
         return self.make_turtle_command(parameter, Command.forward, 'forward', True, 'int')
 
-    def make_play(self, note):
+    def make_play(self, note, meta):
         exception_text = translate_value_error('play', note, 'note')
 
         return textwrap.dedent(f"""\
@@ -1612,13 +1612,15 @@ class ConvertToPython_1(ConvertToPython):
                 play(notes_mapping.get(str('{note}'), str('{note}')))
                 time.sleep(0.5)""")
 
-    def make_play_var(self, note):
+    def make_play_var(self, note, meta):
         exception_text = translate_value_error('play', note, 'note')
+        self.check_var_usage([note], meta.line)
 
         return textwrap.dedent(f"""\
-                if {note} not in notes_mapping.keys() and {note} not in notes_mapping.values():
+                chosen_note = {note}
+                if chosen_note not in notes_mapping.keys() and chosen_note not in notes_mapping.values():
                     raise Exception({exception_text})
-                play(notes_mapping.get(str({note}), str({note})))
+                play(notes_mapping.get(str(chosen_note), str(chosen_note)))
                 time.sleep(0.5)""")
 
     def make_color(self, parameter, language):
@@ -1771,7 +1773,7 @@ class ConvertToPython_2(ConvertToPython_1):
 
     def play(self, meta, args):
         if len(args) == 0:
-            return self.make_play('C4') + self.add_debug_breakpoint()
+            return self.make_play('C4', meta) + self.add_debug_breakpoint()
 
         # if ConvertToPython.is_int(args[0]): #handig ff laten staan als ik nog integers ga ondersteunen in this PR or the next
         #     parameter = int(args[0])
@@ -1780,11 +1782,11 @@ class ConvertToPython_2(ConvertToPython_1):
 
         note = args[0]
         if note in list(notes_mapping.values()) + list(notes_mapping.keys()):  # this is a supported note
-            return self.make_play(note)
+            return self.make_play(note, meta)
 
         # no note? it must be a variable!
         self.add_variable_access_location(note, meta.line)
-        return self.make_play_var(note)
+        return self.make_play_var(note, meta)
 
     def assign(self, meta, args):
         variable_name = args[0]

@@ -597,7 +597,7 @@ class TestsLevel7(HedyTester):
 
         expected = textwrap.dedent("""\
             for __i__ in range(int('3')):
-              if int(C4) < 0 or int(C4) > 70:
+              if 'C4' not in notes_mapping.keys() and 'C4' not in notes_mapping.values():
                   raise Exception('catch_value_exception')
               play(notes_mapping.get(str('C4'), str('C4')))
               time.sleep(0.5)
