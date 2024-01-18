@@ -301,6 +301,22 @@ class TestsLevel1(HedyTester):
             max_level=17
         )
 
+    def test_play(self):
+        code = "play a"
+        expected = textwrap.dedent("""\
+        if 'A' not in notes_mapping.keys() and 'A' not in notes_mapping.values():
+            raise Exception('catch_value_exception')
+        play(notes_mapping.get(str('A'), str('A')))
+        time.sleep(0.5)""")
+
+        self.multi_level_tester(
+            code=code,
+            translate=False,
+            expected=expected,
+            max_level=17
+        )
+
+
     def test_mixes_languages_nl_en(self):
         code = textwrap.dedent("""\
         vraag Heb je er zin in?
