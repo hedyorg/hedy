@@ -1547,7 +1547,6 @@ class TestsLevel5(HedyTester):
         self.single_level_tester(code, expected=expected_code)
         self.source_map_tester(code=code, expected_source_map=expected_source_map)
 
-
     def test_turn_if_play(self):
         code = textwrap.dedent("""\
             answer is ask 'What is the capital of Zimbabwe?'
