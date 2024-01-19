@@ -700,13 +700,13 @@ adventures:
                 example_code: |
                     ```
                     {print} '3'
-                    {sleep}
                     {clear}
                     {print} '2'
-                    {sleep}
                     {clear}
                     {print} '1'
-                    {sleep}
+                    {clear}
+                    {print} 'wait for it...'
+                    {sleep} 3
                     {clear}
                     {print} '¡SORPRESA!'
                     ```
@@ -794,25 +794,20 @@ adventures:
                     **¡Atención! ¡Este código necesita ser depurado!**
                     ```
                     {print} ¡Bienvenido a la Piscina Hedy!
-                    class {is} {ask} '¿Está aquí para unirse a una clase hoy?'
+                    class {is} '¿Está aquí para unirse a una clase hoy?'
                     {if} clase sí
-                        {print} '¡Genial! ¡Te apuntas a una clase!
-                        {print} {else} 'No se apuntará a ninguna clase'.
+                    {print} '¡Genial! ¡Te apuntas a una clase!
+                    {print} {else} 'No se apuntará a ninguna clase'.
                     descuento {is} {ask} ¿Tiene un código de descuento?
                     {if} descuento {is} si
                     respuesta_descuento {is} {ask} ¿Cuál es su código de descuento?
                     codigos_descuento = Senior4231, Student8786, NewMember6709
                     {if} respuesta_descuento {is} {in} codigos_descuento
-                        {print} 'Son 3.50€'.
-                            {else} 'Ese código no es válido'
+                    {print} 'Son 3.50€'.
+                    {else} 'Ese código no es válido'
                     {else} 'Serán 5.50€'
                     {print} '¡Buen baño!'
                     ```
-
-                        {print} 'Serán 3.50€'
-                            {else} 'Ese código no es válido'
-                    {else} 'Serán 5.50€'
-                    {print} '¡Buen baño!'
             6:
                 story_text: |-
                     ### Ejercicio
@@ -2378,8 +2373,6 @@ adventures:
                     nombre = Hedy
                     respuesta = 20 + 4
                     ```
-
-                    respuesta = 20 + 4
             14:
                 story_text: |
                     Vamos a aprender más cosas nuevas. Quizá ya las conozcas de matemáticas, el `<` y `>`.
@@ -2463,14 +2456,13 @@ adventures:
         description: Introducción a cálculos
         levels:
             6:
-                story_text: |4
-
+                story_text: |
                     En este nivel aprenderás algo nuevo: ahora también puedes calcular.
 
                     La suma es fácil, se escribe como en matemáticas: `5 + 5` por ejemplo. La resta funciona igual, es `5 - 5`.
 
-                    La multiplicación es un poco diferente, porque no hay símbolo de multiplicar en tu teclado. 'Sólo busca, no hay realmente!
-                    Eso es porque multiplicamos con el asterisco sobre el 8: `5 * 5`. Léelo como "5 veces 5" para recordarlo mejor.
+                    La multiplicación es un poco diferente, porque no hay símbolo de multiplicar en tu teclado. Sólo busca, ¡no hay realmente!
+                    Eso es por lo que multiplicamos con el asterisco sobre el 8: `5 * 5`. Léelo como "5 veces 5" para recordarlo mejor.
                 example_code: |
                     ```
                     {print} '5 más 5 es ' 5 + 5
