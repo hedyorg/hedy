@@ -2023,6 +2023,9 @@ def explore():
     normalized = normalize_public_programs(list(programs) + list(favourite_programs.records))
     programs, favourite_programs = split_at(len(programs), normalized)
 
+    # Filter out programs that are Hedy favorite choice.
+    programs = [program for program in programs if program['id'] not in {fav['id'] for fav in favourite_programs}]
+
     keyword_lang = g.keyword_lang
     adventures_names = hedy_content.Adventures(session['lang']).get_adventure_names(keyword_lang)
 
@@ -2275,6 +2278,13 @@ def slugify(s):
 def chunk(x, size):
     """Chunk a list into groups of size at most 'size'."""
     return (x[pos:pos + size] for pos in range(0, len(x), size))
+
+
+@app.template_filter()
+def format_date(date):
+    if not isinstance(date, int):
+        return date
+    return utils.localized_date_format(date)
 
 
 @app.template_global()
