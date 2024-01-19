@@ -1546,3 +1546,22 @@ class TestsLevel5(HedyTester):
 
         self.single_level_tester(code, expected=expected_code)
         self.source_map_tester(code=code, expected_source_map=expected_source_map)
+
+
+    def test_turn_if_play(self):
+        code = textwrap.dedent("""\
+            answer is ask 'What is the capital of Zimbabwe?'
+            if answer is Harare play C6""")
+
+        expected = textwrap.dedent("""\
+        answer = input(f'What is the capital of Zimbabwe?')
+        if answer == 'Harare':
+          if 'C6' not in notes_mapping.keys() and 'C6' not in notes_mapping.values():
+              raise Exception('catch_value_exception')
+          play(notes_mapping.get(str('C6'), str('C6')))
+          time.sleep(0.5)""")
+
+        self.single_level_tester(
+            code=code,
+            skip_faulty=True,
+            expected=expected)
