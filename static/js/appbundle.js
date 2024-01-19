@@ -16458,7 +16458,7 @@ var hedyApp = (() => {
       "unsaved_class_changes": "There are unsaved changes, are you sure you want to leave this page?"
     },
     "bn": {
-      "CheckInternet": "Have a look if your Internet connection is working properly.",
+      "CheckInternet": "Check whether your Internet connection is working.",
       "Connection_error": "We couldn't reach the server.",
       "Empty_output": "This code works but does not print anything. Add a print command to your code or use the turtle to get output.",
       "Errors_found": "You made a mistake! Don't worry, Hedy is trying to find the mistakes",
@@ -16578,7 +16578,7 @@ var hedyApp = (() => {
       "unsaved_class_changes": "There are unsaved changes, are you sure you want to leave this page?"
     },
     "da": {
-      "CheckInternet": "Have a look if your Internet connection is working properly.",
+      "CheckInternet": "Check whether your Internet connection is working.",
       "Connection_error": "We couldn't reach the server.",
       "Empty_output": "This code works but does not print anything. Add a print command to your code or use the turtle to get output.",
       "Errors_found": "You made a mistake! Don't worry, Hedy is trying to find the mistakes",
@@ -16668,7 +16668,7 @@ var hedyApp = (() => {
       "unsaved_class_changes": "There are unsaved changes, are you sure you want to leave this page?"
     },
     "en": {
-      "CheckInternet": "Have a look if your Internet connection is working properly.",
+      "CheckInternet": "Check whether your Internet connection is working.",
       "Connection_error": "We couldn't reach the server.",
       "Empty_output": "This code works but does not print anything. Add a print command to your code or use the turtle to get output.",
       "Errors_found": "You made a mistake! Don't worry, we still ran the program",
@@ -16818,7 +16818,7 @@ var hedyApp = (() => {
       "unsaved_class_changes": "There are unsaved changes, are you sure you want to leave this page?"
     },
     "fi": {
-      "CheckInternet": "Have a look if your Internet connection is working properly.",
+      "CheckInternet": "Check whether your Internet connection is working.",
       "Connection_error": "We couldn't reach the server.",
       "Empty_output": "This code works but does not print anything. Add a print command to your code or use the turtle to get output.",
       "Errors_found": "You made a mistake! Don't worry, Hedy is trying to find the mistakes",
@@ -17088,7 +17088,7 @@ var hedyApp = (() => {
       "unsaved_class_changes": "There are unsaved changes, are you sure you want to leave this page?"
     },
     "kmr": {
-      "CheckInternet": "Have a look if your Internet connection is working properly.",
+      "CheckInternet": "Check whether your Internet connection is working.",
       "Connection_error": "We couldn't reach the server.",
       "Empty_output": "This code works but does not print anything. Add a print command to your code or use the turtle to get output.",
       "Errors_found": "You made a mistake! Don't worry, Hedy is trying to find the mistakes",
@@ -17148,7 +17148,7 @@ var hedyApp = (() => {
       "unsaved_class_changes": "There are unsaved changes, are you sure you want to leave this page?"
     },
     "mi": {
-      "CheckInternet": "Have a look if your Internet connection is working properly.",
+      "CheckInternet": "Check whether your Internet connection is working.",
       "Connection_error": "We couldn't reach the server.",
       "Empty_output": "This code works but does not print anything. Add a print command to your code or use the turtle to get output.",
       "Errors_found": "You made a mistake! Don't worry, we still ran the program",
@@ -17238,7 +17238,7 @@ var hedyApp = (() => {
       "unsaved_class_changes": "There are unsaved changes, are you sure you want to leave this page?"
     },
     "pa_PK": {
-      "CheckInternet": "Have a look if your Internet connection is working properly.",
+      "CheckInternet": "Check whether your Internet connection is working.",
       "Connection_error": "We couldn't reach the server.",
       "Empty_output": "This code works but does not print anything. Add a print command to your code or use the turtle to get output.",
       "Errors_found": "You made a mistake! Don't worry, Hedy is trying to find the mistakes",
@@ -17268,7 +17268,7 @@ var hedyApp = (() => {
       "unsaved_class_changes": "There are unsaved changes, are you sure you want to leave this page?"
     },
     "pap": {
-      "CheckInternet": "Have a look if your Internet connection is working properly.",
+      "CheckInternet": "Check whether your Internet connection is working.",
       "Connection_error": "We couldn't reach the server.",
       "Empty_output": "This code works but does not print anything. Add a print command to your code or use the turtle to get output.",
       "Errors_found": "You made a mistake! Don't worry, we still ran the program",
@@ -17538,7 +17538,7 @@ var hedyApp = (() => {
       "unsaved_class_changes": "Det finns osparade \xE4ndringar; \xE4r du s\xE4ker p\xE5 att du vill l\xE4mna sidan?"
     },
     "sw": {
-      "CheckInternet": "Have a look if your Internet connection is working properly.",
+      "CheckInternet": "Check whether your Internet connection is working.",
       "Connection_error": "Hatukuweza kufikia seva.",
       "Empty_output": "This code works but does not print anything. Add a print command to your code or use the turtle to get output.",
       "Errors_found": "You made a mistake! Don't worry, Hedy is trying to find the mistakes",
@@ -17568,7 +17568,7 @@ var hedyApp = (() => {
       "unsaved_class_changes": "There are unsaved changes, are you sure you want to leave this page?"
     },
     "te": {
-      "CheckInternet": "Have a look if your Internet connection is working properly.",
+      "CheckInternet": "Check whether your Internet connection is working.",
       "Connection_error": "We couldn't reach the server.",
       "Empty_output": "This code works but does not print anything. Add a print command to your code or use the turtle to get output.",
       "Errors_found": "You made a mistake! Don't worry, Hedy is trying to find the mistakes",
@@ -17628,7 +17628,7 @@ var hedyApp = (() => {
       "unsaved_class_changes": "There are unsaved changes, are you sure you want to leave this page?"
     },
     "tl": {
-      "CheckInternet": "Have a look if your Internet connection is working properly.",
+      "CheckInternet": "Check whether your Internet connection is working.",
       "Connection_error": "We couldn't reach the server.",
       "Empty_output": "This code works but does not print anything. Add a print command to your code or use the turtle to get output.",
       "Errors_found": "You made a mistake! Don't worry, Hedy is trying to find the mistakes",
@@ -17658,7 +17658,7 @@ var hedyApp = (() => {
       "unsaved_class_changes": "There are unsaved changes, are you sure you want to leave this page?"
     },
     "tn": {
-      "CheckInternet": "Have a look if your Internet connection is working properly.",
+      "CheckInternet": "Check whether your Internet connection is working.",
       "Connection_error": "We couldn't reach the server.",
       "Empty_output": "This code works but does not print anything. Add a print command to your code or use the turtle to get output.",
       "Errors_found": "You made a mistake! Don't worry, Hedy is trying to find the mistakes",
@@ -17748,7 +17748,7 @@ var hedyApp = (() => {
       "unsaved_class_changes": "There are unsaved changes, are you sure you want to leave this page?"
     },
     "ur": {
-      "CheckInternet": "Have a look if your Internet connection is working properly.",
+      "CheckInternet": "Check whether your Internet connection is working.",
       "Connection_error": "We couldn't reach the server.",
       "Empty_output": "This code works but does not print anything. Add a print command to your code or use the turtle to get output.",
       "Errors_found": "You made a mistake! Don't worry, Hedy is trying to find the mistakes",
@@ -17838,7 +17838,7 @@ var hedyApp = (() => {
       "unsaved_class_changes": "There are unsaved changes, are you sure you want to leave this page?"
     },
     "zh_Hant": {
-      "CheckInternet": "Have a look if your Internet connection is working properly.",
+      "CheckInternet": "Check whether your Internet connection is working.",
       "Connection_error": "We couldn't reach the server.",
       "Empty_output": "This code works but does not print anything. Add a print command to your code or use the turtle to get output.",
       "Errors_found": "You made a mistake! Don't worry, Hedy is trying to find the mistakes",
