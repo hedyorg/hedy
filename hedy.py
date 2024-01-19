@@ -191,12 +191,14 @@ def _translate_index_error(code, list_name):
 
 def translate_value_error(command, value, suggestion_type):
     exception_text = gettext('catch_value_exception')
-    # Right now we only have two types of suggestion
+    # Right now we only have three types of suggestion
     # In the future we might change this if the number increases
     if suggestion_type == 'number':
         suggestion_text = gettext('suggestion_number')
     elif suggestion_type == 'color':
         suggestion_text = gettext('suggestion_color')
+    elif suggestion_type == 'note':
+        suggestion_text = gettext('suggestion_note')
 
     exception_text = exception_text.replace('{command}', style_command(command))
     exception_text = exception_text.replace('{value}', style_command(value))
@@ -1553,10 +1555,10 @@ class ConvertToPython_1(ConvertToPython):
 
     def play(self, meta, args):
         if len(args) == 0:
-            return self.make_play('C4') + self.add_debug_breakpoint()
+            return self.make_play('C4', meta) + self.add_debug_breakpoint()
 
-        note = args[0]  # will we also support multiple notes at once?
-        return self.make_play(note) + self.add_debug_breakpoint()
+        note = args[0].upper()  # will we also support multiple notes at once?
+        return self.make_play(note, meta) + self.add_debug_breakpoint()
 
     def comment(self, meta, args):
         return f"#{''.join(args)}"
@@ -1601,14 +1603,24 @@ class ConvertToPython_1(ConvertToPython):
     def make_forward(self, parameter):
         return self.make_turtle_command(parameter, Command.forward, 'forward', True, 'int')
 
-    def make_play(self, note):
+    def make_play(self, note, meta):
+        exception_text = translate_value_error('play', note, 'note')
+
         return textwrap.dedent(f"""\
+                if '{note}' not in notes_mapping.keys() and '{note}' not in notes_mapping.values():
+                    raise Exception({exception_text})
                 play(notes_mapping.get(str('{note}'), str('{note}')))
                 time.sleep(0.5)""")
 
-    def make_play_var(self, note):
+    def make_play_var(self, note, meta):
+        exception_text = translate_value_error('play', note, 'note')
+        self.check_var_usage([note], meta.line)
+
         return textwrap.dedent(f"""\
-                play(notes_mapping.get(str({note}), str({note})))
+                chosen_note = {note}.upper()
+                if chosen_note not in notes_mapping.keys() and chosen_note not in notes_mapping.values():
+                    raise Exception({exception_text})
+                play(notes_mapping.get(str(chosen_note), str(chosen_note)))
                 time.sleep(0.5)""")
 
     def make_color(self, parameter, language):
@@ -1761,7 +1773,7 @@ class ConvertToPython_2(ConvertToPython_1):
 
     def play(self, meta, args):
         if len(args) == 0:
-            return self.make_play('C4') + self.add_debug_breakpoint()
+            return self.make_play('C4', meta) + self.add_debug_breakpoint()
 
         # if ConvertToPython.is_int(args[0]): #handig ff laten staan als ik nog integers ga ondersteunen in this PR or the next
         #     parameter = int(args[0])
@@ -1769,12 +1781,13 @@ class ConvertToPython_2(ConvertToPython_1):
         # if not an int, then it is a variable
 
         note = args[0]
-        if note in list(notes_mapping.values()) + list(notes_mapping.keys()):  # this is a supported note
-            return self.make_play(note)
+        uppercase_note = note.upper()
+        if uppercase_note in list(notes_mapping.values()) + list(notes_mapping.keys()):  # this is a supported note
+            return self.make_play(uppercase_note, meta)
 
         # no note? it must be a variable!
         self.add_variable_access_location(note, meta.line)
-        return self.make_play_var(note)
+        return self.make_play_var(note, meta)
 
     def assign(self, meta, args):
         variable_name = args[0]
