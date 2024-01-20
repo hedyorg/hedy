@@ -695,8 +695,8 @@ adventures:
         levels:
             4:
                 story_text: |
-                    ¡Hora para un nuevo comando! Con `{clear}` puedes limpiar todo el texto de la pantalla de salida. De esta manera puedes evitar que tu pantalla se llene de texto.
-                    ¡Atención! Si usas un comando `{clear}`, recuerda usar un `{sleep}` encima de él. En caso contrario, ¡Hedy limpiará tu pantalla sin darte tiempo a leer lo que pone!
+                    ¡Es hora de un nuevo comando! Con `{clear}` puedes borrar todo el texto de tu pantalla de salida. De esta forma puedes evitar que tu pantalla se llene demasiado de texto.
+                    Atención. Si estas usando un comando `{clear}`, puede que necesites usar un `{sleep}` encima. ¡De lo contrario Hedy limpiará tu pantalla sin darte tiempo a leer como puedes ver en el ejemplo!
                 example_code: |
                     ```
                     {print} '3'
@@ -791,21 +791,20 @@ adventures:
                     ### Ejercicio
                     Depura este código. ¡Buena suerte!
                 example_code: |
-                    **¡Atención! ¡Este código necesita ser depurado!**
+                    **¡Atención! ¡Este código necesita ser depurado!
                     ```
                     {print} ¡Bienvenido a la Piscina Hedy!
-                    class {is} '¿Está aquí para unirse a una clase hoy?'
-                    {if} clase sí
+                    class {is} {ask} '¿Está aquí para unirse a una clase hoy?'
+                    {if} class yes
                     {print} '¡Genial! ¡Te apuntas a una clase!
                     {print} {else} 'No se apuntará a ninguna clase'.
-                    descuento {is} {ask} ¿Tiene un código de descuento?
-                    {if} descuento {is} si
-                    respuesta_descuento {is} {ask} ¿Cuál es su código de descuento?
-                    codigos_descuento = Senior4231, Student8786, NewMember6709
-                    {if} respuesta_descuento {is} {in} codigos_descuento
-                    {print} 'Son 3.50€'.
-                    {else} 'Ese código no es válido'
-                    {else} 'Serán 5.50€'
+                    discount {is} '¿Tienes un código de descuento?'
+                    {if} discount {is} yes
+                    discount_answer {is} {ask} '¿Cuál es su código de descuento?'
+                    discount_codes = Senior4231, Student8786, NewMember6709
+                    {if} descuento_respuesta {is} {in} cod_descuento
+                    {print} 'Serán $3,50'
+                    Son 5,50
                     {print} '¡Buen baño!'
                     ```
             6:
@@ -1691,9 +1690,9 @@ adventures:
                     Así:
                 example_code: |
                     ```
-                    _¡Hola, soy Hedy la adivina!
+                    _ ¡Hola, soy Hedy la adivina!
                     _ ¿Quién eres tú?
-                    _ Déjame echar un vistazo en mi bola de cristal.
+                    _ Déjame echar un vistazo a mi bola de cristal.
                     _ Veo... Veo...
                     _ Tu nombre es
                     ```
@@ -1838,11 +1837,11 @@ adventures:
                 story_text: "Desde el nivel 12, tendrás que usar comillas en las listas, antes y después de cada elemento.\n\n### Ejercicio \nAñade dos predicciones a la lista"
                 example_code: |
                     ```
-                    fortuna = 'te resbalarás en una cáscara de plátano', _
-                    {print} 'Echaré un vistazo a tu futuro en mi bola de cristal.'
-                    {print} 'Veo... Veo...'
+                    fortunes = 'te resbalarás en una cáscara de plátano', _
+                    {print} 'Echaré un vistazo a mi bola de cristal para tu futuro.'
+                    {print} 'Ya veo... Ya veo...
                     {sleep}
-                    {print} tu fortuna {at} {random}
+                    {print} fortunes {at} {random}
                     ```
     functions:
         name: functions
