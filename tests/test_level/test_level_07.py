@@ -231,6 +231,15 @@ class TestsLevel7(HedyTester):
             skipped_mappings=skipped_mappings,
         )
 
+    def test_repeat_with_missing_times_gives_error_2(self):
+        code = "repeat 5"
+
+        self.multi_level_tester(
+            code=code,
+            max_level=8,
+            exception=hedy.exceptions.IncompleteRepeatException
+        )
+
     def test_repeat_ask(self):
         code = textwrap.dedent("""\
         n is ask 'How many times?'
@@ -579,3 +588,50 @@ class TestsLevel7(HedyTester):
 
         self.single_level_tester(code, expected=expected_code)
         self.source_map_tester(code=code, expected_source_map=expected_source_map)
+
+# music tests
+
+    def test_play_repeat(self):
+        code = textwrap.dedent("""\
+            repeat 3 times play C4""")
+
+        expected = textwrap.dedent("""\
+            for __i__ in range(int('3')):
+              if 'C4' not in notes_mapping.keys() and 'C4' not in notes_mapping.values():
+                  raise Exception('catch_value_exception')
+              play(notes_mapping.get(str('C4'), str('C4')))
+              time.sleep(0.5)
+              time.sleep(0.1)""")
+
+        self.multi_level_tester(
+            code=code,
+            translate=False,
+            skip_faulty=False,
+            unused_allowed=True,
+            expected=expected,
+            max_level=7
+        )
+
+    def test_play_repeat_random(self):
+        code = textwrap.dedent("""\
+            notes is C4, E4, D4, F4, G4
+            repeat 3 times play notes at random""")
+
+        expected = textwrap.dedent("""\
+            notes = ['C4', 'E4', 'D4', 'F4', 'G4']
+            for __i__ in range(int('3')):
+              chosen_note = random.choice(notes).upper()
+              if chosen_note not in notes_mapping.keys() and chosen_note not in notes_mapping.values():
+                  raise Exception('catch_value_exception')
+              play(notes_mapping.get(str(chosen_note), str(chosen_note)))
+              time.sleep(0.5)
+              time.sleep(0.1)""")
+
+        self.multi_level_tester(
+            code=code,
+            translate=False,
+            skip_faulty=False,
+            unused_allowed=True,
+            expected=expected,
+            max_level=7
+        )

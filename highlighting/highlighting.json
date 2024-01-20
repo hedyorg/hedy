@@ -49,6 +49,15 @@
                     "unicode": true
                 },
                 {
+                    "regex": "(^ *)(__play__)",
+                    "token": [
+                        "text",
+                        "keyword"
+                    ],
+                    "next": "value",
+                    "unicode": true
+                },
+                {
                     "regex": "(^ *)(__forward__)",
                     "token": [
                         "text",

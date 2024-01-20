@@ -31,6 +31,9 @@ import utils
 from hedy_content import KEYWORDS
 from hedy_sourcemap import SourceMap, source_map_transformer
 
+from prefixes.music import notes_mapping
+
+
 HEDY_MAX_LEVEL = 18
 HEDY_MAX_LEVEL_SKIPPING_FAULTY = 5
 MAX_LINES = 100
@@ -188,12 +191,14 @@ def _translate_index_error(code, list_name):
 
 def translate_value_error(command, value, suggestion_type):
     exception_text = gettext('catch_value_exception')
-    # Right now we only have two types of suggestion
+    # Right now we only have three types of suggestion
     # In the future we might change this if the number increases
     if suggestion_type == 'number':
         suggestion_text = gettext('suggestion_number')
     elif suggestion_type == 'color':
         suggestion_text = gettext('suggestion_color')
+    elif suggestion_type == 'note':
+        suggestion_text = gettext('suggestion_note')
 
     exception_text = exception_text.replace('{command}', style_command(command))
     exception_text = exception_text.replace('{value}', style_command(value))
@@ -288,25 +293,26 @@ def promote_types(types, rules):
 
 
 # Commands per Hedy level which are used to suggest the closest command when kids make a mistake
+# FH, dec 2023: TODO: Lots of duplication here! Could be made nicer?
 commands_per_level = {
-    1: ['print', 'ask', 'echo', 'turn', 'forward', 'color'],
-    2: ['print', 'ask', 'is', 'turn', 'forward', 'color', 'sleep'],
-    3: ['ask', 'is', 'print', 'forward', 'turn', 'color', 'sleep', 'at', 'random', 'add', 'to', 'remove', 'from'],
-    4: ['ask', 'is', 'print', 'forward', 'turn', 'color', 'sleep', 'at', 'random', 'add', 'to', 'remove', 'from', 'clear'],
-    5: ['ask', 'is', 'print', 'forward', 'turn', 'color', 'sleep', 'at', 'random', 'add', 'to', 'remove', 'from', 'in', 'not in', 'if', 'else', 'ifpressed', 'assign_button', 'clear'],
-    6: ['ask', 'is', 'print', 'forward', 'turn', 'color', 'sleep', 'at', 'random', 'add', 'to', 'remove', 'from', 'in', 'not in', 'if', 'else', 'ifpressed', 'assign_button', 'clear'],
-    7: ['ask', 'is', 'print', 'forward', 'turn', 'color', 'sleep', 'at', 'random', 'add', 'to', 'remove', 'from', 'in', 'not in', 'if', 'else', 'ifpressed', 'assign_button', 'repeat', 'times', 'clear'],
-    8: ['ask', 'is', 'print', 'forward', 'turn', 'color', 'sleep', 'at', 'random', 'add', 'to', 'remove', 'from', 'in', 'not in', 'if', 'else', 'ifpressed', 'assign_button', 'repeat', 'times', 'clear'],
-    9: ['ask', 'is', 'print', 'forward', 'turn', 'color', 'sleep', 'at', 'random', 'add', 'to', 'remove', 'from', 'in', 'not in', 'if', 'else', 'ifpressed', 'assign_button', 'repeat', 'times', 'clear'],
-    10: ['ask', 'is', 'print', 'forward', 'turn', 'color', 'sleep', 'at', 'random', 'add', 'to', 'remove', 'from', 'in', 'not in', 'if', 'else', 'ifpressed', 'assign_button', 'repeat', 'times', 'for', 'clear'],
-    11: ['ask', 'is', 'print', 'forward', 'turn', 'color', 'sleep', 'at', 'random', 'add', 'to', 'remove', 'from', 'in', 'not in', 'if', 'else', 'ifpressed', 'assign_button', 'for', 'range', 'repeat', 'clear'],
-    12: ['ask', 'is', 'print', 'forward', 'turn', 'color', 'sleep', 'at', 'random', 'add', 'to', 'remove', 'from', 'in', 'not in', 'if', 'else', 'ifpressed', 'assign_button', 'for', 'range', 'repeat', 'clear', 'define', 'call'],
-    13: ['ask', 'is', 'print', 'forward', 'turn', 'color', 'sleep', 'at', 'random', 'add', 'to', 'remove', 'from', 'in', 'not in', 'if', 'else', 'ifpressed', 'assign_button', 'for', 'range', 'repeat', 'and', 'or', 'clear', 'define', 'call'],
-    14: ['ask', 'is', 'print', 'forward', 'turn', 'color', 'sleep', 'at', 'random', 'add', 'to', 'remove', 'from', 'in', 'not in', 'if', 'else', 'ifpressed', 'assign_button', 'for', 'range', 'repeat', 'and', 'or', 'clear', 'define', 'call'],
-    15: ['ask', 'is', 'print', 'forward', 'turn', 'color', 'sleep', 'at', 'random', 'add', 'to', 'remove', 'from', 'in', 'not in', 'if', 'else', 'ifpressed', 'assign_button', 'for', 'range', 'repeat', 'and', 'or', 'while', 'clear', 'define', 'call'],
-    16: ['ask', 'is', 'print', 'forward', 'turn', 'color', 'sleep', 'at', 'random', 'add', 'to', 'remove', 'from', 'in', 'not in', 'if', 'else', 'ifpressed', 'assign_button', 'for', 'range', 'repeat', 'and', 'or', 'while', 'clear', 'define', 'call'],
-    17: ['ask', 'is', 'print', 'forward', 'turn', 'color', 'sleep', 'at', 'random', 'add', 'to', 'remove', 'from', 'in', 'not in', 'if', 'else', 'ifpressed', 'assign_button', 'for', 'range', 'repeat', 'and', 'or', 'while', 'elif', 'clear', 'define', 'call'],
-    18: ['is', 'print', 'forward', 'turn', 'color', 'sleep', 'at', 'random', 'add', 'to', 'remove', 'from', 'in', 'if', 'not in', 'else', 'for', 'ifpressed', 'assign_button', 'range', 'repeat', 'and', 'or', 'while', 'elif', 'input', 'clear', 'define', 'call'],
+    1: ['print', 'ask', 'echo', 'turn', 'forward', 'color', 'play'],
+    2: ['print', 'ask', 'is', 'turn', 'forward', 'color', 'sleep', 'play'],
+    3: ['ask', 'is', 'print', 'forward', 'turn', 'color', 'sleep', 'at', 'random', 'add', 'to', 'remove', 'from', 'play'],
+    4: ['ask', 'is', 'print', 'forward', 'turn', 'color', 'sleep', 'at', 'random', 'add', 'to', 'remove', 'from', 'clear', 'play'],
+    5: ['ask', 'is', 'print', 'forward', 'turn', 'color', 'sleep', 'at', 'random', 'add', 'to', 'remove', 'from', 'in', 'not in', 'if', 'else', 'ifpressed', 'assign_button', 'clear', 'play'],
+    6: ['ask', 'is', 'print', 'forward', 'turn', 'color', 'sleep', 'at', 'random', 'add', 'to', 'remove', 'from', 'in', 'not in', 'if', 'else', 'ifpressed', 'assign_button', 'clear', 'play'],
+    7: ['ask', 'is', 'print', 'forward', 'turn', 'color', 'sleep', 'at', 'random', 'add', 'to', 'remove', 'from', 'in', 'not in', 'if', 'else', 'ifpressed', 'assign_button', 'repeat', 'times', 'clear', 'play'],
+    8: ['ask', 'is', 'print', 'forward', 'turn', 'color', 'sleep', 'at', 'random', 'add', 'to', 'remove', 'from', 'in', 'not in', 'if', 'else', 'ifpressed', 'assign_button', 'repeat', 'times', 'clear', 'play'],
+    9: ['ask', 'is', 'print', 'forward', 'turn', 'color', 'sleep', 'at', 'random', 'add', 'to', 'remove', 'from', 'in', 'not in', 'if', 'else', 'ifpressed', 'assign_button', 'repeat', 'times', 'clear', 'play'],
+    10: ['ask', 'is', 'print', 'forward', 'turn', 'color', 'sleep', 'at', 'random', 'add', 'to', 'remove', 'from', 'in', 'not in', 'if', 'else', 'ifpressed', 'assign_button', 'repeat', 'times', 'for', 'clear', 'play'],
+    11: ['ask', 'is', 'print', 'forward', 'turn', 'color', 'sleep', 'at', 'random', 'add', 'to', 'remove', 'from', 'in', 'not in', 'if', 'else', 'ifpressed', 'assign_button', 'for', 'range', 'repeat', 'clear', 'play'],
+    12: ['ask', 'is', 'print', 'forward', 'turn', 'color', 'sleep', 'at', 'random', 'add', 'to', 'remove', 'from', 'in', 'not in', 'if', 'else', 'ifpressed', 'assign_button', 'for', 'range', 'repeat', 'clear', 'define', 'call', 'play'],
+    13: ['ask', 'is', 'print', 'forward', 'turn', 'color', 'sleep', 'at', 'random', 'add', 'to', 'remove', 'from', 'in', 'not in', 'if', 'else', 'ifpressed', 'assign_button', 'for', 'range', 'repeat', 'and', 'or', 'clear', 'define', 'call', 'play'],
+    14: ['ask', 'is', 'print', 'forward', 'turn', 'color', 'sleep', 'at', 'random', 'add', 'to', 'remove', 'from', 'in', 'not in', 'if', 'else', 'ifpressed', 'assign_button', 'for', 'range', 'repeat', 'and', 'or', 'clear', 'define', 'call', 'play'],
+    15: ['ask', 'is', 'print', 'forward', 'turn', 'color', 'sleep', 'at', 'random', 'add', 'to', 'remove', 'from', 'in', 'not in', 'if', 'else', 'ifpressed', 'assign_button', 'for', 'range', 'repeat', 'and', 'or', 'while', 'clear', 'define', 'call', 'play'],
+    16: ['ask', 'is', 'print', 'forward', 'turn', 'color', 'sleep', 'at', 'random', 'add', 'to', 'remove', 'from', 'in', 'not in', 'if', 'else', 'ifpressed', 'assign_button', 'for', 'range', 'repeat', 'and', 'or', 'while', 'clear', 'define', 'call', 'play'],
+    17: ['ask', 'is', 'print', 'forward', 'turn', 'color', 'sleep', 'at', 'random', 'add', 'to', 'remove', 'from', 'in', 'not in', 'if', 'else', 'ifpressed', 'assign_button', 'for', 'range', 'repeat', 'and', 'or', 'while', 'elif', 'clear', 'define', 'call', 'play'],
+    18: ['is', 'print', 'forward', 'turn', 'color', 'sleep', 'at', 'random', 'add', 'to', 'remove', 'from', 'in', 'if', 'not in', 'else', 'for', 'ifpressed', 'assign_button', 'range', 'repeat', 'and', 'or', 'while', 'elif', 'input', 'clear', 'define', 'call', 'play'],
 }
 
 command_turn_literals = ['right', 'left']
@@ -640,6 +646,10 @@ class LookupEntryCollector(visitors.Visitor):
 
     def call(self, tree):
         function_name = tree.children[0].children[0]
+        names = [x.name for x in self.lookup]
+        if function_name + "()" not in names:
+            raise exceptions.UndefinedFunctionException(function_name, tree.meta.line)
+
         args_str = ""
         if len(tree.children) > 1:
             args_str = ", ".join(str(x.children[0]) if isinstance(x, Tree) else str(x)
@@ -1158,6 +1168,9 @@ class IsValid(Filter):
         raise exceptions.InvalidSpaceException(
             level=self.level, line_number=line, fixed_code=fixed_code, fixed_result=result)
 
+    def error_ask_missing_variable(self, meta, args):
+        raise exceptions.MissingVariableException(command='is ask', level=self.level, line_number=meta.line)
+
     def error_print_nq(self, meta, args):
         words = [str(x[1]) for x in args]  # second half of the list is the word
         text = ' '.join(words)
@@ -1170,6 +1183,12 @@ class IsValid(Filter):
 
     def error_list_access(self, meta, args):
         raise exceptions.MisspelledAtCommand(command='at', arg1=str(args[1][1]), line_number=meta.line)
+
+    def error_add_missing_to(self, meta, args):
+        raise exceptions.MissingAdditionalCommand(command='add', missing_command='to', line_number=meta.line)
+
+    def error_remove_missing_from(self, meta, args):
+        raise exceptions.MissingAdditionalCommand(command='remove', missing_command='from', line_number=meta.line)
 
     def error_non_decimal(self, meta, args):
         raise exceptions.NonDecimalVariable(line_number=meta.line)
@@ -1222,6 +1241,10 @@ class IsValid(Filter):
     def error_repeat_no_times(self, meta, args):
         raise exceptions.IncompleteRepeatException(command='times', level=self.level, line_number=meta.line)
 
+    def error_repeat_dep_8(self, meta, args):
+        # repeat is no longer usable this way, raise!
+        raise hedy.exceptions.WrongLevelException(7, 'repeat', "repeat_dep", meta.line)
+
     def error_text_no_print(self, meta, args):
         raise exceptions.LonelyTextException(level=self.level, line_number=meta.line)
 
@@ -1239,6 +1262,15 @@ class IsValid(Filter):
     def error_ifpressed_missing_else(self, meta, args):
         raise exceptions.MissingElseForPressitException(
             command='ifpressed_else', level=self.level, line_number=meta.line)
+
+    def error_for_missing_in(self, meta, args):
+        raise exceptions.MissingAdditionalCommand(command='for', missing_command='in', line_number=meta.line)
+
+    def error_for_missing_to(self, meta, args):
+        raise exceptions.MissingAdditionalCommand(command='for', missing_command='to', line_number=meta.line)
+
+    def error_for_missing_command(self, meta, args):
+        raise exceptions.IncompleteCommandException(incomplete_command='for', level=self.level, line_number=meta.line)
 
     def error_nested_define(self, meta, args):
         raise exceptions.NestedFunctionException()
@@ -1398,20 +1430,6 @@ class ConvertToPython(Transformer):
         elif ConvertToPython.is_quoted(name):
             return f"{name}"
 
-    def make_f_string(self, args):
-        argument_string = ''
-        for argument in args:
-            if self.is_variable(argument):
-                # variables are placed in {} in the f string
-                argument_string += "{" + escape_var(argument) + "}"
-            else:
-                # strings are written regularly
-                # however we no longer need the enclosing quotes in the f-string
-                # the quotes are only left on the argument to check if they are there.
-                argument_string += argument.replace("'", '')
-
-        return f"print(f'{argument_string}')"
-
     def get_fresh_var(self, name):
         while self.is_variable(name):
             name = '_' + name
@@ -1454,8 +1472,8 @@ class ConvertToPython(Transformer):
 
     @staticmethod
     def is_quoted(s):
-        opening_quotes = ['‘', "'", '"', "“", "«"]
-        closing_quotes = ['’', "'", '"', "”", "»"]
+        opening_quotes = ['‘', "'", '"', "“", "«", "„"]
+        closing_quotes = ['’', "'", '"', "”", "»", "“"]
         return len(s) > 1 and (s[0] in opening_quotes and s[-1] in closing_quotes)
 
     @staticmethod
@@ -1535,6 +1553,13 @@ class ConvertToPython_1(ConvertToPython):
         argument = process_characters_needing_escape(args[0])
         return "print('" + argument + " '+answer)" + self.add_debug_breakpoint()
 
+    def play(self, meta, args):
+        if len(args) == 0:
+            return self.make_play('C4', meta) + self.add_debug_breakpoint()
+
+        note = args[0].upper()  # will we also support multiple notes at once?
+        return self.make_play(note, meta) + self.add_debug_breakpoint()
+
     def comment(self, meta, args):
         return f"#{''.join(args)}"
 
@@ -1577,6 +1602,26 @@ class ConvertToPython_1(ConvertToPython):
 
     def make_forward(self, parameter):
         return self.make_turtle_command(parameter, Command.forward, 'forward', True, 'int')
+
+    def make_play(self, note, meta):
+        exception_text = translate_value_error('play', note, 'note')
+
+        return textwrap.dedent(f"""\
+                if '{note}' not in notes_mapping.keys() and '{note}' not in notes_mapping.values():
+                    raise Exception({exception_text})
+                play(notes_mapping.get(str('{note}'), str('{note}')))
+                time.sleep(0.5)""")
+
+    def make_play_var(self, note, meta):
+        exception_text = translate_value_error('play', note, 'note')
+        self.check_var_usage([note], meta.line)
+
+        return textwrap.dedent(f"""\
+                chosen_note = {note}.upper()
+                if chosen_note not in notes_mapping.keys() and chosen_note not in notes_mapping.values():
+                    raise Exception({exception_text})
+                play(notes_mapping.get(str(chosen_note), str(chosen_note)))
+                time.sleep(0.5)""")
 
     def make_color(self, parameter, language):
         return self.make_turtle_color_command(parameter, Command.color, 'pencolor', language)
@@ -1671,7 +1716,7 @@ class ConvertToPython_2(ConvertToPython_1):
         if len(args) == 0:
             return f"t.right(90){self.add_debug_breakpoint()}"  # no arguments defaults to a right turn
         arg = args[0]
-        if self.is_variable(arg):
+        if self.is_variable(arg, meta.line):
             return self.make_turn(escape_var(arg))
         if arg.lstrip("-").isnumeric():
             return self.make_turn(arg)
@@ -1726,6 +1771,24 @@ class ConvertToPython_2(ConvertToPython_1):
 
         return self.make_forward(parameter)
 
+    def play(self, meta, args):
+        if len(args) == 0:
+            return self.make_play('C4', meta) + self.add_debug_breakpoint()
+
+        # if ConvertToPython.is_int(args[0]): #handig ff laten staan als ik nog integers ga ondersteunen in this PR or the next
+        #     parameter = int(args[0])
+        # else:
+        # if not an int, then it is a variable
+
+        note = args[0]
+        uppercase_note = note.upper()
+        if uppercase_note in list(notes_mapping.values()) + list(notes_mapping.keys()):  # this is a supported note
+            return self.make_play(uppercase_note, meta)
+
+        # no note? it must be a variable!
+        self.add_variable_access_location(note, meta.line)
+        return self.make_play_var(note, meta)
+
     def assign(self, meta, args):
         variable_name = args[0]
         value = args[1]
@@ -1734,7 +1797,7 @@ class ConvertToPython_2(ConvertToPython_1):
             exception = self.make_catch_exception([value])
             return exception + variable_name + " = " + value + self.add_debug_breakpoint()
         else:
-            if self.is_variable(value):  # if the value is a variable, this is a reassign
+            if self.is_variable(value, meta.line):  # if the value is a variable, this is a reassign
                 value = self.process_variable(value, meta.line)
                 return variable_name + " = " + value + self.add_debug_breakpoint()
             else:
@@ -1951,7 +2014,7 @@ else:{self.add_debug_breakpoint()}
 
     def ifpressed_else(self, meta, args):
         var_or_button = args[0]
-        if self.is_variable(var_or_button):
+        if self.is_variable(var_or_button, meta.line):
             return self.make_ifpressed_command(f"""\
 if event.key == {var_or_button}:
 {ConvertToPython.indent(args[1])}
@@ -2046,7 +2109,7 @@ class ConvertToPython_6(ConvertToPython_5):
         if type(value) is Tree:
             return parameter + " = " + value.children[0] + self.add_debug_breakpoint()
         else:
-            if self.is_variable(value):
+            if self.is_variable(value, meta.line):
                 value = self.process_variable(value, meta.line)
                 if self.is_list(value) or self.is_random(value):
                     exception = self.make_catch_exception([value])
@@ -2093,7 +2156,7 @@ class ConvertToPython_6(ConvertToPython_5):
         if len(args) == 0:
             return "t.right(90)" + self.add_debug_breakpoint()  # no arguments defaults to a right turn
         arg = args[0]
-        if self.is_variable(arg):
+        if self.is_variable(arg, meta.line):
             return self.make_turn(escape_var(arg))
         if isinstance(arg, Tree):
             return self.make_turn(arg.children[0])
@@ -2103,7 +2166,7 @@ class ConvertToPython_6(ConvertToPython_5):
         if len(args) == 0:
             return add_sleep_to_command('t.forward(50)' + self.add_debug_breakpoint(), False, self.is_debug, location="after")
         arg = args[0]
-        if self.is_variable(arg):
+        if self.is_variable(arg, meta.line):
             return self.make_forward(escape_var(arg))
         if isinstance(arg, Tree):
             return self.make_forward(arg.children[0])
@@ -2166,14 +2229,14 @@ class ConvertToPython_8_9(ConvertToPython_7):
         all_lines = [ConvertToPython.indent(x) for x in args[1:]]
         return "if " + args[0] + ":" + self.add_debug_breakpoint() + "\n" + "\n".join(all_lines)
 
-    def ifpressed(self, met, args):
+    def ifpressed(self, meta, args):
         args = [a for a in args if a != ""]  # filter out in|dedent tokens
 
         all_lines = '\n'.join([x for x in args[1:]])
         all_lines = ConvertToPython.indent(all_lines)
         var_or_key = args[0]
         # if this is a variable, we assume it is a key (for now)
-        if self.is_variable(var_or_key):
+        if self.is_variable(var_or_key, meta.line):
             return self.make_ifpressed_command(f"""\
 if event.unicode == {args[0]}:
 {all_lines}
@@ -2184,7 +2247,7 @@ if event.unicode == '{args[0]}':
 {all_lines}
   break""", button=False)
         else:  # otherwise we mean a button
-            button_name = self.process_variable(args[0], met.line)
+            button_name = self.process_variable(args[0], meta.line)
             return self.make_ifpressed_command(f"""\
 if event.key == {button_name}:
 {all_lines}
@@ -2293,12 +2356,26 @@ class ConvertToPython_12(ConvertToPython_11):
         args_str = ""
         self.add_variable_access_location(args[0], meta.line)
 
+        function_name = args[0]
+        function_tree = [x.tree for x in self.lookup if x.name == function_name + "()"]
+        tree_arguments = [x for x in function_tree[0].children if x.data == 'arguments']
+
+        number_of_defined_arguments = 0 if tree_arguments == [] else len(tree_arguments[0].children)
+        number_of_used_arguments = 0 if len(args) == 1 else len(args[1].children)
+
+        if number_of_used_arguments != number_of_defined_arguments:
+            raise hedy.exceptions.WrongNumberofArguments(
+                name=function_name,
+                defined_number=number_of_defined_arguments,
+                used_number=number_of_used_arguments,
+                line_number=meta.line)
+
         if len(args) > 1:
             args_str = ", ".join(str(x.children[0]) if isinstance(x, Tree) else str(x) for x in args[1].children)
             for x in args[1].children:
                 self.add_variable_access_location(str(x), meta.line)
 
-        return f"{args[0]}({args_str})"
+        return f"{function_name}({args_str})"
 
     def returns(self, meta, args):
         argument_string = self.print_ask_args(meta, args)
@@ -2406,7 +2483,7 @@ class ConvertToPython_12(ConvertToPython_11):
         if len(args) == 0:
             return "t.right(90)" + self.add_debug_breakpoint()  # no arguments defaults to a right turn
         arg = args[0]
-        if self.is_variable(arg):
+        if self.is_variable(arg, meta.line):
             return self.make_turn(escape_var(arg))
         if isinstance(arg, Tree):
             return self.make_turn(arg.children[0])
@@ -2416,7 +2493,7 @@ class ConvertToPython_12(ConvertToPython_11):
         if len(args) == 0:
             return add_sleep_to_command('t.forward(50)' + self.add_debug_breakpoint(), False, self.is_debug, location="after")
         arg = args[0]
-        if self.is_variable(arg):
+        if self.is_variable(arg, meta.line):
             return self.make_forward(escape_var(arg))
         if isinstance(arg, Tree):
             return self.make_forward(arg.children[0])
@@ -2497,7 +2574,7 @@ class ConvertToPython_15(ConvertToPython_14):
         body = "\n".join(all_lines)
 
         # for now we assume a var is a letter, we can check this lateron by searching for a ... = button
-        if self.is_variable(var_or_button):
+        if self.is_variable(var_or_button, meta.line):
             return self.make_ifpressed_command(f"""\
 if event.unicode == {args[0]}:
 {body}
@@ -2556,7 +2633,7 @@ class ConvertToPython_17(ConvertToPython_16):
         all_lines = ConvertToPython.indent(all_lines)
         var_or_key = args[0]
         # if this is a variable, we assume it is a key (for now)
-        if self.is_variable(var_or_key):
+        if self.is_variable(var_or_key, meta.line):
             return self.make_ifpressed_command(f"""\
 if event.unicode == {args[0]}:
 {all_lines}
@@ -2972,7 +3049,8 @@ def get_parser(level, lang="en", keep_all_tokens=False, skip_faulty=False):
     return lark
 
 
-ParseResult = namedtuple('ParseResult', ['code', 'source_map', 'has_turtle', 'has_pygame', 'has_clear', 'commands'])
+ParseResult = namedtuple('ParseResult', ['code', 'source_map', 'has_turtle',
+                         'has_pygame', 'has_clear', 'has_music', 'commands'])
 
 
 def transpile_inner_with_skipping_faulty(input_string, level, lang="en", unused_allowed=True):
@@ -3399,10 +3477,10 @@ def repair_leading_space(input_string, lang, level, line):
             result = fixed_result
             raise exceptions.InvalidSpaceException(
                 level=level, line_number=line, fixed_code=fixed_code, fixed_result=result)
-        except exceptions.HedyException:
-            transpile_inner(fixed_code, level)
-            # The fixed code contains another error. Only report the original error for now.
-            pass
+        except exceptions.HedyException as E:
+            if type(E) is not exceptions.InvalidSpaceException:
+                transpile_inner(fixed_code, level)
+                # The fixed code contains another error. Only report the original error for now.
     return fixed_code, result
 
 
@@ -3459,7 +3537,7 @@ def transpile_inner(input_string, level, lang="en", populate_source_map=False, i
         source_map.set_language(lang)
         source_map.set_hedy_input(input_string)
 
-    # FH, may 2022. for now, we just out arabic numerals when the language is ar
+    # FH, may 2022. for now, we just output arabic numerals when the language is ar
     # this can be changed into a profile setting or could be detected
     # in usage of programs
     if lang == "ar":
@@ -3477,8 +3555,9 @@ def transpile_inner(input_string, level, lang="en", populate_source_map=False, i
         has_clear = "clear" in commands
         has_turtle = "forward" in commands or "turn" in commands or "color" in commands
         has_pygame = "ifpressed" in commands or "ifpressed_else" in commands or "assign_button" in commands
+        has_music = "play" in commands
 
-        parse_result = ParseResult(python, source_map, has_turtle, has_pygame, has_clear, commands)
+        parse_result = ParseResult(python, source_map, has_turtle, has_pygame, has_clear, has_music, commands)
 
         if populate_source_map:
             source_map.set_python_output(python)

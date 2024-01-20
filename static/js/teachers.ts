@@ -1,14 +1,14 @@
 import { modal } from './modal';
-import { showAchievements } from "./app";
+import { showAchievements, theKeywordLanguage } from "./app";
 import { markUnsavedChanges, clearUnsavedChanges, hasUnsavedChanges } from './browser-helpers/unsaved-changes';
 import { ClientMessages } from './client-messages';
-
 import DOMPurify from 'dompurify'
 import { startTeacherTutorial } from './tutorials/tutorial';
-import { HedyAceEditorCreator } from './ace-editor';
+import { HedyCodeMirrorEditorCreator } from './cm-editor';
+import { initializeTranslation } from './lezer-parsers/tokens';
 
 declare const htmx: typeof import('./htmx');
-const editorCreator = new HedyAceEditorCreator();
+const editorCreator = new HedyCodeMirrorEditorCreator();
 
 export function create_class(class_name_prompt: string) {
   modal.prompt (class_name_prompt, '', function (class_name) {
@@ -54,18 +54,47 @@ export function rename_class(id: string, class_name_prompt: string) {
     });
 }
 
-export function duplicate_class(id: string, prompt: string, defaultValue: string = '') {
+export function duplicate_class(id: string, teacher_classes: string[], second_teacher_prompt: string, prompt: string, defaultValue: string = '') {
+  if (teacher_classes){
+    modal.confirm(second_teacher_prompt, function () {
+      apiDuplicateClass(id, prompt, true, defaultValue);
+    }, function () {
+      apiDuplicateClass(id, prompt, false, defaultValue);
+    });
+  } else {
+    apiDuplicateClass(id, prompt, false, defaultValue);
+  }
+}
+
+function apiDuplicateClass(id: string, prompt: string, second_teacher: boolean, defaultValue: string = '') {
     modal.prompt (prompt, defaultValue, function (class_name) {
     $.ajax({
       type: 'POST',
       url: '/duplicate_class',
       data: JSON.stringify({
         id: id,
-        name: class_name
+        name: class_name,
+        second_teacher: second_teacher,
       }),
       contentType: 'application/json',
       dataType: 'json'
     }).done(function(response) {
+      if (response.second_teachers && second_teacher == true){
+        for (const secondTeacher of response.second_teachers) {
+          $.ajax({
+            type: 'POST',
+            url: '/invite-second-teacher',
+            data: JSON.stringify({
+              username: secondTeacher.username,
+              class_id: response.id
+            }),
+            contentType: 'application/json',
+            dataType: 'json'
+            }).fail(function(err) {
+                modal.notifyError(err.responseText);
+            });
+        }
+      }
       if (response.achievement) {
             showAchievements(response.achievement, true, "");
           } else {
@@ -119,7 +148,7 @@ export function join_class(id: string, name: string) {
             window.location.pathname = '/login';
          });
       } else {
-          modal.notifyError(ClientMessages['Connection_error']);
+          modal.notifyError(err.responseText || ClientMessages['Connection_error']);
       }
     });
 }
@@ -237,9 +266,23 @@ function show_preview(content: string) {
     for (const preview of $('.preview pre').get()) {
         $(preview).addClass('text-lg rounded');
         const dir = $("body").attr("dir");
+        const codeNode = preview.querySelector('code')
+        let code: string;
+        // In case it has a child <code> node
+        if(codeNode) {
+          codeNode.hidden = true
+          code = codeNode.innerText          
+        } else {
+          code = preview.textContent || "";
+          preview.textContent = "";
+        }
         const exampleEditor = editorCreator.initializeReadOnlyEditor(preview, dir);
-        exampleEditor.contents = exampleEditor.contents.replace(/\n+$/, '');
+        exampleEditor.contents = code.trimEnd();        
         for (const level of levels) {
+          initializeTranslation({
+            keywordLanguage: theKeywordLanguage,
+            level: parseInt(level, 10),
+          })
           exampleEditor.setHighlighterForLevel(parseInt(level, 10));                
         }
     }
