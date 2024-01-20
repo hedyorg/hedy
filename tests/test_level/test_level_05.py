@@ -1576,6 +1576,11 @@ class TestsLevel5(HedyTester):
           if 'C6' not in notes_mapping.keys() and 'C6' not in notes_mapping.values():
               raise Exception('catch_value_exception')
           play(notes_mapping.get(str('C6'), str('C6')))
+          time.sleep(0.5)
+        else:
+          if 'C1' not in notes_mapping.keys() and 'C1' not in notes_mapping.values():
+              raise Exception('catch_value_exception')
+          play(notes_mapping.get(str('C1'), str('C1')))
           time.sleep(0.5)""")
 
         self.single_level_tester(
