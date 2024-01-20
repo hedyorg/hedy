@@ -1565,7 +1565,6 @@ class TestsLevel5(HedyTester):
             skip_faulty=True,
             expected=expected)
 
-
     def test_turn_if_else_play(self):
         code = textwrap.dedent("""\
             answer is ask 'What is the capital of Zimbabwe?'
