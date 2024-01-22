@@ -62,6 +62,7 @@
                 <div class="turn-pre-into-ace relative py-4 px-1 border-4 rounded-lg shadow-lg transition
                     {{container_colors.next()}}
                     {% if choice.number == progress.last_wrong_answer %}incorrect-option{% endif %}
+                    {% if progress.question > question.number and question.correct_answer == choice.number %}focused-option{% endif %}
                     "
                     data-cy="quiz-choice"
                     _="on click if I do not match .incorrect-option then
