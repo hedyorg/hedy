@@ -127,9 +127,11 @@ adventures:
             7:
                 story_text: |
                     В рассказе кто-то произносит слова несколько раз. Например, когда кто-то зовет на помощь или поет песню.
-                    Вы можете вставить такие повторы в свой рассказ, на этом уровне с `{repeat}`.
+                    Вы можете вставить такие повторы в свой рассказ, на этом уровне с помощью `{repeat}`.
 
-                    Можете ли вы создать свою собственную историю с повторами?
+                    ### Упражнение
+                    Добавьте повторы в свою собственную историю. Вернитесь к сохраненным программам, выберите свою программу рассказа с предыдущего уровня и
+                    найдите строку, содержащую `{print}`, и повторите ее!
                 example_code: |
                     ```
                     {print} 'The prince kept calling for help'
@@ -150,17 +152,14 @@ adventures:
                     Вернитесь к своим сохраненным программам, выберите свою программу истории из уровня 5. Теперь напишите хорошую и плохую концовку длиной не менее трех строк каждая!
                 example_code: |
                     ```
-                    {print} 'О НЕТ! Т-Рекс приближается!'
-                    end = {ask} 'Вы хотите счастливую или плохую концовку?'
+                    {print} 'О НЕТ! Т-рекс приближается!'
+                    end = {ask} 'Вы хотите счастливый или грустный конец?'
                     {if} end {is} happy
-                        {print} 'Как раз вовремя Ричард запрыгивает в машину времени!'
-                        {print} 'Майкл водит код и...'
-                        {print} '💥ЗАП!💥'
-                        {print} 'Они снова в своём гараже'
+                        {print} 'Как раз вовремя Ричард запрыгивает обратно в машину времени!
+                        {print} _
                     {else}
-                        {print} 'Майкл кричит ДАВАЙ РИЧАРД! БЕЖИ БЫСТРЕЕ!'
-                        {print} 'Но Ричард очень медленный...'
-                        {print} 'И Т-Рекс приближается и с одного укуса сьедает его!🦖'
+                        {print} 'О нет! Ричард слишком медленный...
+                        {print} _
                     ```
             9:
                 story_text: |
@@ -187,19 +186,7 @@ adventures:
                     ### Задание
 
                     Посмотрите на  <a href="https://www.yonkerspublicschools.org/cms/lib/NY01814060/Centricity/Domain/1621/Brown%20Bear%20Book.pdf">рассказ</a> если вы его не видели раньше и убедитесь что ваш рассказ напечатан так же как и в книге.
-                example_code: |
-                    ```
-                    animals = red bird, black sheep, green frog, yellow duck, little child
-                    {print} 'brown bear'
-                    {print} 'brown bear'
-                    {print} 'What do you see?'
-                    {for} animal {in} animals
-                        {print} 'I see a ' animal ' looking at me'
-                        {print} animal
-                        {print} animal
-                        {print} 'What do you see?'
-                    {print} 'I see all the animals looking at me!'
-                    ```
+                example_code: "```\nanimals = _ , _ , _ \n{print} 'Brown bear, Brown bear'\n{print} 'What do you see?'\n```\n"
             12:
                 story_text: На этом уровне вы можете использовать кавычки для сохранения нескольких слов в переменной.
                 example_code: |
@@ -214,29 +201,12 @@ adventures:
                     Сможете ли вы создать свою собственную приключенческую мини-игру, подобную этой?
                 example_code: |
                     ```
-                    sword = 'lost'
-                    game = 'on'
-                    {print} 'Our hero is walking through the forest'
-                    {print} 'The path splits two ways'
-                    {for} i {in} {range} 0 {to} 2
-                        {if} game {is} 'on'
-                            path = {ask} 'Which path should she choose?'
-                            {if} path {is} 'left' {and} sword {is} 'found'
-                                {print} 'Our hero comes across a dragon!'
-                                {print} 'Luckily our hero has a sword to defeat the beast!'
-                                game = 'over'
-                            {if} path {is} 'left' {and} sword {is} 'lost'
-                                {print} 'Our hero finds a dragon, but she doesnt have any weapons!'
-                                {print} 'Our hero is beaten by the dragon...'
-                                {print} 'Try again'
-                                game = 'over'
-                            {if} path {is} 'right' {and} sword {is} 'found'
-                                {print} 'You have already found the sword. There is nothing left here.'
-                                {print} 'She walks back'
-                            {if} path {is} 'right' {and} sword {is} 'lost'
-                                {print} 'Our hero finds a sword'
-                                {print} 'This could come in very handy'
-                                sword = 'found'
+                    {print} 'Наш герой идет через лес'
+                    {print} 'Путь расходится в две стороны'
+                    path = {ask} 'Какой путь она должна выбрать?'
+                    weapon = {ask} 'Какое оружие она нарисует?'
+                    {if} path {is} 'налево' {and} weapon {is} 'меч'
+                        _
                     ```
             15:
                 story_text: |
@@ -268,7 +238,7 @@ adventures:
                     Create a story of at least 5 sentences. You don't have to use 'name' just yet.
                 example_code: |
                     ```
-                    {print}('Welcome to this story!')
+                    {print}('Добро пожаловать в историю!')
                     ```
                 story_text_2: |
                     ### Exercise 2
@@ -703,19 +673,19 @@ adventures:
             4:
                 story_text: |
                     Time for a new command! With `{clear}` you can clear all the text form your output screen. This way you can prevent your screen getting too full of text.
-                    Beware! If you are using a `{clear}` command, remember to use a `{sleep}` above it. Otherwise Hedy will clear your screen without giving you the time to read!
+                    Beware! If you are using a `{clear}` command, you might need to use a `{sleep}` above it. Otherwise Hedy will clear your screen without giving you the time to read as you can see in the example!
                 example_code: |
                     ```
-                    print '3'
-                    sleep
-                    clear
-                    print '2'
-                    sleep
-                    clear
-                    print '1'
-                    sleep
-                    clear
-                    print 'SURPRISE!'
+                    {print} '3'
+                    {clear}
+                    {print} '2'
+                    {clear}
+                    {print} '1'
+                    {clear}
+                    {print} 'wait for it...'
+                    {sleep} 3
+                    {clear}
+                    {print} 'SURPRISE!'
                     ```
     debugging:
         name: debugging
@@ -803,23 +773,17 @@ adventures:
                     {print} Welcome to Swimming Pool Hedy!
                     class {is} {ask} 'Are you here to join a class today?'
                     {if} class yes
-                        {print} 'Great! You are joining a class!'
-                        {print} {else} 'You will not be joining a class'
-                    discount {is} {ask} 'Do you have a discount code?'
+                    {print} 'Great! You're joining a class!
+                    {print} {else} 'You will not be joining a class'
+                    discount {is} 'Do you have a discount code?'
                     {if} discount {is} yes
-                    discount_answer {is} {ask} 'What is your discount code?'
+                    discount_answer {is} {ask} 'What's your discount code?'
                     discount_codes = Senior4231, Student8786, NewMember6709
-                    {if} discount_answer {is} {in} discount_codes
-                        {print} 'That will be $3,50'
-                            {else} 'That code is not valid'
-                    {else} 'That will be $5,50'
+                    {if} discount_answer {is} {in} discount_cods
+                    {print} 'That will be $3,50'
+                    'That will be $5,50'
                     {print} 'Have a nice swim!'
                     ```
-
-                        {print} 'That will be $3,50'
-                            {else} 'That code is not valid'
-                    {else} 'That will be $5,50'
-                    {print} 'Have a nice swim!'
             6:
                 story_text: |-
                     ### Exercise
@@ -2342,8 +2306,6 @@ adventures:
                     name = Hedy
                     answer = 20 + 4
                     ```
-
-                    answer = 20 + 4
             14:
                 story_text: |
                     We are going to learn more new items. You might know them already from mathematics, the `<` and `>`.
@@ -2427,12 +2389,12 @@ adventures:
             6:
                 story_text: |4
 
-                    In this level you learn something new: you can now also calculate.
+                      In this level you learn something new: you can now also calculate.
 
-                    The plus is easy, you write it like with math: `5 + 5` for example. The minus also works fine, it is `5 - 5`.
+                      The plus is easy, you write it like with math: `5 + 5` for example. The minus also works fine, it is `5 - 5`.
 
-                    The times is a bit different, because there is no times symbol on your keyboard. Just search, there really isn't!
-                    That is why we multiply with the asterisk above 8: `5 * 5`. Read that as "5 times 5" that helps you remember it best.
+                      The times is a bit different, because there is no times symbol on your keyboard. Just search, there really isn't!
+                      That is why we multiply with the asterisk above 8: `5 * 5`. Read that as "5 times 5" that helps you remember it best.
                 example_code: |
                     ```
                     {print} '5 plus 5 is ' 5 + 5

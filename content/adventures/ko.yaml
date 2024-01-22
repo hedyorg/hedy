@@ -706,13 +706,13 @@ adventures:
                 example_code: |
                     ```
                     {print} '3'
-                    {sleep}
                     {clear}
                     {print} '2'
-                    {sleep}
                     {clear}
                     {print} '1'
-                    {sleep}
+                    {clear}
+                    {print} '기다리다'
+                    {sleep} 3
                     {clear}
                     {print} '서프라이즈!'
                     ```
@@ -802,23 +802,17 @@ adventures:
                     {print} Welcome to Swimming Pool Hedy!
                     class {is} {ask} 'Are you here to join a class today?'
                     {if} class yes
-                        {print} 'Great! You are joining a class!'
-                        {print} {else} 'You will not be joining a class'
-                    discount {is} {ask} 'Do you have a discount code?'
+                    {print} 'Great! You're joining a class!
+                    {print} {else} 'You will not be joining a class'
+                    discount {is} 'Do you have a discount code?'
                     {if} discount {is} yes
-                    discount_answer {is} {ask} 'What is your discount code?'
+                    discount_answer {is} {ask} 'What's your discount code?'
                     discount_codes = Senior4231, Student8786, NewMember6709
-                    {if} discount_answer {is} {in} discount_codes
-                        {print} 'That will be $3,50'
-                            {else} 'That code is not valid'
-                    {else} 'That will be $5,50'
+                    {if} discount_answer {is} {in} discount_cods
+                    {print} 'That will be $3,50'
+                    'That will be $5,50'
                     {print} 'Have a nice swim!'
                     ```
-
-                        {print} 'That will be $3,50'
-                            {else} 'That code is not valid'
-                    {else} 'That will be $5,50'
-                    {print} 'Have a nice swim!'
             6:
                 story_text: |-
                     ### Exercise
@@ -2404,8 +2398,6 @@ adventures:
                     name = Hedy
                     answer = 20 + 4
                     ```
-
-                    answer = 20 + 4
             14:
                 story_text: |
                     우리는 새로운 것들을 더 배울 거예요. 여러분은 수학, `<`와 `>`에서 이미 알고 있을 거예요.
@@ -2491,12 +2483,12 @@ adventures:
             6:
                 story_text: |4
 
-                    이 레벨에서 새로운 것을 배울 수 있습니다. 이제 계산도 할 수 있습니다.
+                      이 레벨에서 새로운 것을 배울 수 있습니다. 이제 계산도 할 수 있습니다.
 
-                    좋은 점은 쉽다. 예를 들어 수학으로 `5 + 5`처럼 쓴다. 마이너스도 `5 - 5`로 잘 맞는다.
+                      좋은 점은 쉽다. 예를 들어 수학으로 `5 + 5`처럼 쓴다. 마이너스도 `5 - 5`로 잘 맞는다.
 
-                    여러분의 키보드에 기호가 없기 때문에 시대는 조금 다릅니다. 그냥 검색해보세요, 정말로 없습니다!
-                    그래서 우리는 위의 별표 8에 `5 * 5`를 곱한다. 이를 가장 잘 기억할 수 있도록 도와주는 5 곱하기 5로 읽어보라.
+                      여러분의 키보드에 기호가 없기 때문에 시대는 조금 다릅니다. 그냥 검색해보세요, 정말로 없습니다!
+                      그래서 우리는 위의 별표 8에 `5 * 5`를 곱한다. 이를 가장 잘 기억할 수 있도록 도와주는 5 곱하기 5로 읽어보라.
                 example_code: |
                     ```
                     {print} '5 plus 5 is ' 5 + 5

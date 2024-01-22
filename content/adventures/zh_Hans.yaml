@@ -585,13 +585,13 @@ adventures:
                 example_code: |
                     ```
                     {print} '3'
-                    {sleep}
                     {clear}
                     {print} '2'
-                    {sleep}
                     {clear}
                     {print} '1'
-                    {sleep}
+                    {clear}
+                    {print} 'wait for it...'
+                    {sleep} 3
                     {clear}
                     {print} '惊喜!'
                     ```
@@ -686,15 +686,15 @@ adventures:
                     {print} 欢迎来到海蒂泳池！
                     class {is} {ask} '你今天来参加课程吗？'
                     {if} 类 yes
-                         {print}'太棒了！ 你正在加入一个班级！
-                         {print} {else} '您将不会参加课程'
-                    discount {is} {ask} '您有折扣码吗？'
+                    {print}'太棒了！ 你正在加入一个班级！
+                    {print} {else} '您将不会参加课程'
+                    discount {is} {ask} '您有折扣码吗？
                     {if} discount {is} yes
                     discount_answer {is} {ask} '您的折扣代码是什么？'
                     discount_codes = Senior4231, Student8786, NewMember6709
                     {if}discount_answer {is} {in}discount_codes
-                         {print} '那将是 3,50 美元'
-                             {else} '该代码无效'
+                    {print} '那将是 3,50 美元'
+                    {else} '该代码无效'
                     {else}“那将是 5,50 美元”
                     {print} '祝你游得愉快！'
                     ```
@@ -2300,8 +2300,6 @@ adventures:
                     name = Hedy
                     answer = 20 + 4
                     ```
-
-                    answer = 20 + 4
             14:
                 story_text: |
                     We are going to learn more new items. You might know them already from mathematics, the `<` and `>`.
@@ -2383,12 +2381,12 @@ adventures:
             6:
                 story_text: |4
 
-                    In this level you learn something new: you can now also calculate.
+                      In this level you learn something new: you can now also calculate.
 
-                    The plus is easy, you write it like with math: `5 + 5` for example. The minus also works fine, it is `5 - 5`.
+                      The plus is easy, you write it like with math: `5 + 5` for example. The minus also works fine, it is `5 - 5`.
 
-                    The times is a bit different, because there is no times symbol on your keyboard. Just search, there really isn't!
-                    That is why we multiply with the asterisk above 8: `5 * 5`. Read that as "5 times 5" that helps you remember it best.
+                      The times is a bit different, because there is no times symbol on your keyboard. Just search, there really isn't!
+                      That is why we multiply with the asterisk above 8: `5 * 5`. Read that as "5 times 5" that helps you remember it best.
                 example_code: |
                     ```
                     {print} '5 plus 5 is ' 5 + 5

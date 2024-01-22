@@ -693,13 +693,13 @@ adventures:
                 example_code: |
                     ```
                     {print} "3"
-                    {sleep}
                     {clear}
                     {print} "2"
-                    {sleep}
                     {clear}
                     {print} "1"
-                    {sleep}
+                    {clear}
+                    {print} "Attendez..."
+                    {sleep} 3
                     {clear}
                     {print} "SURPRISE !"
                     ```
@@ -801,15 +801,15 @@ adventures:
                     {print} Bienvenue à la piscine Hedy !
                     cours {is} {ask} "Es-tu ici pour un cours de natation ?"
                     {if} cours oui
-                        {print} "Génial ! Tu as cours !"
-                        {print} {else} "Tu n'as pas cours"
+                    {print} "Génial ! Tu as cours !
+                    {print} {else} "Tu n'as pas cours"
                     réduction {is} {ask} "As-tu un code de réduction ?"
                     {if} réduction {is} oui
                     réponse_reduction {is} {ask} "Quel est ton code de réduction ?"
                     codes_reduction = Senior4231, élève8786, NouveauMembre6709
                     {if} réponse_reduction {is} {in} codes_reduction
-                        {print} "Ça fera 3,50 €"
-                            {else} "Ce code n'est pas valide"
+                    {print} "Ça fera 3,50 €"
+                    {else} "Ce code n'est pas valide"
                     {else} "Ça fera 5,50 €"
                     {print} "Bonne baignade !"
                     ```
@@ -2420,8 +2420,6 @@ adventures:
                     nom = Hedy
                     réponse = 20 + 4
                     ```
-
-                    réponse = 20 + 4
             14:
                 story_text: |
                     Nous allons apprendre d'autres nouveaux éléments. Tu les connais peut-être déjà grâce aux mathématiques, le `<` et `>`.
@@ -2503,12 +2501,12 @@ adventures:
             6:
                 story_text: |4
 
-                    À ce niveau, tu apprends quelque chose de nouveau : tu peux maintenant faire des calculs.
+                      À ce niveau, tu apprends quelque chose de nouveau : tu peux maintenant faire des calculs.
 
-                    L'addition est facile, tu écris comme en math : `5 + 5` par exemple. Le moins aussi fonctionne bien, c'est `5 - 5`.
+                      L'addition est facile, tu écris comme en math : `5 + 5` par exemple. Le moins aussi fonctionne bien, c'est `5 - 5`.
 
-                    La multiplication est un peu différente parce qu'il n'y a pas la croix de la multiplication sur ton clavier. Cherche là, elle n'y est pas !
-                    Voilà pourquoi on multiplie avec l'étoile : `5 * 5`. Lit le « 5 fois 5 » pour t'aider à t'en souvenir plus facilement.
+                      La multiplication est un peu différente parce qu'il n'y a pas la croix de la multiplication sur ton clavier. Cherche là, elle n'y est pas !
+                      Voilà pourquoi on multiplie avec l'étoile : `5 * 5`. Lit le « 5 fois 5 » pour t'aider à t'en souvenir plus facilement.
                 example_code: |
                     ```
                     {print} "5 plus 5 fait " 5 + 5
