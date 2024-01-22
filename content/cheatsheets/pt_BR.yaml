@@ -35,7 +35,7 @@
         cor {is} {ask} Qual a sua cor favorita?
         {print} cor é a sua favorita!
 -   name: '{sleep}'
-    explanation: '`{sleep}` deixe Hedy pausar por um (ou mais) segundo(s).'
+    explanation: 'Com `{sleep}`, você pode deixar o Hedy fazer uma pausa por alguns segundos.'
     demo_code: |-
         {print} Deixe-me pensar por um segundo...
         {sleep}
@@ -101,7 +101,7 @@
     explanation: Verifique elementos com `{in}`.
     demo_code: |-
         cores_bonitas {is} verde, amarelo
-        cor {is} {ask} 'Qual {is} a sua cor favorita?'
+        cor {is} {ask} 'Qual é a sua cor favorita?'
         {if} cor {in} cores_bonitas {print} 'bonita!' {else} {print} 'não gostei'
 -   name: '{pressed}'
     explanation: Verifique se uma determinada tecla no teclado está `{pressed}`.
@@ -316,7 +316,7 @@
         primeira_fruta = fruta[1]
         {print} primeira_fruta
 -   name: Obtenha um elemento aleatório de uma lista
-    explanation: Para obter um elemento aleatório de uma lista nós usamos [random], então fruta[random] significa obter uma fruta qualquer da lista!
+    explanation: Para obter um item aleatório de uma lista, usamos [{random}] então fruta[{random}] significa obter uma fruta aleatória da lista!
     demo_code: |-
         fruta = ['banana', 'maçã', 'cereja']
         qualquer_fruta = fruta[{random}]
