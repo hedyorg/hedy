@@ -18,7 +18,7 @@
         <div class="flex w-full sm:basis-1/2 gap-2">
             <div id="levels" class="flex-1">
                 <div class="dropdown relative" data-type="single" id="level-select" data-value="{{selectedLevel}}">
-                  <button class="toggle-button font-semibold rounded inline-flex justify-around 
+                  <button class="toggle-button font-semibold rounded inline-flex justify-between 
                      appearance-none w-full border border-gray-200 text-gray-700 p-2 rounded"
                     onclick="$('#level_dropdown').slideToggle('medium');">
                     <span class="label" data-value="{{_('select_lang')}}">{{selectedLevel or _('select_lang')}}</span>
@@ -46,7 +46,7 @@
 
             <div id="languages" class="flex-1">
                 <div class="dropdown relative" data-type="single" id="language-select" data-value="{{selectedLang}}">
-                  <button class="toggle-button font-semibold rounded inline-flex justify-around 
+                  <button class="toggle-button font-semibold rounded inline-flex justify-between 
                      appearance-none w-full border border-gray-200 text-gray-700 p-2 rounded"
                     onclick="$('#lang_dropdown').slideToggle('medium');">
                     <span class="label" data-value="{{_('select_lang')}}">{{lang_to_sym(selectedLang) if selectedLang else _('select_lang')}}</span>
@@ -73,7 +73,7 @@
                 
             <div id="tags" class="flex-1">
                 <div class="dropdown relative" id="tag-select" data-value="{{selectedTag}}">
-                  <button class="toggle-button font-semibold rounded inline-flex justify-around 
+                  <button class="toggle-button font-semibold rounded inline-flex justify-between 
                      appearance-none w-full border border-gray-200 text-gray-700 p-2 rounded"
                     onclick="$('#tags_dropdown').slideToggle('medium');">
                     <span class="label" data-value="{{_('select_tag')}}">{{selectedTag or _('select_tag')}}</span>

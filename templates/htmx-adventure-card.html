@@ -11,13 +11,10 @@
 
     {% set ownAdventure = True if adventure["creator"] == user["username"] else False %}
     <h2 class="name text-white rounded-t-lg px-6 flex items-center m-0
-        {% if not is_program and ownAdventure %} underline cursor-pointer {% endif %}
         {% if is_favorite %} bg-yellow-500
         {% elif adventure.error %} bg-red-500
         {% else %} bg-blue-600
         {% endif %}"
-        {% if not is_program and ownAdventure %}
-        _="on click window.open('/for-teachers/customize-adventure/{{adventure.id}}', '_self')"{% endif %}
         >
         {{ adventure.name|e }}
     </h2>
