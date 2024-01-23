@@ -59,10 +59,10 @@
         <div class="grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-16 mb-8 w-full max-w-screen-lg mx-auto">
             {% for choice in question.choices %}
             <div>
+                {% if progress.question == question.number %}
                 <div class="turn-pre-into-ace relative py-4 px-1 border-4 rounded-lg shadow-lg transition
                     {{container_colors.next()}}
                     {% if choice.number == progress.last_wrong_answer %}incorrect-option{% endif %}
-                    {% if progress.question > question.number and question.correct_answer == choice.number %}focused-option{% endif %}
                     "
                     data-cy="quiz-choice"
                     _="on click if I do not match .incorrect-option then
@@ -82,13 +82,27 @@
                     {% if choice.code %}
                     <pre class="mt-8" level="{{ level }}">{{choice.code}}</pre>
                     {% endif %}
-
                     <form>
                         <input type="hidden" name="answer" value="{{choice.number}}">
                         <button class="pick-answer-button hidden blue-btn absolute px-4 py-2 w-56" style="bottom: -30px; right: 10px"
                             hx-post="/quiz/submit_answer">{{_('submit_answer')}}</button>
                     </form>
                 </div>
+                {% else %}
+                <div class="turn-pre-into-ace relative py-4 px-1 border-4 rounded-lg shadow-lg transition
+                    {% if question.correct_answer == choice.number %}bg-green-300 border-green-600 focused-option{% else %}bg-red-200 border-red-400{% endif %}">
+                    <div class="absolute z-10 mx-4">
+                        <svg class="quiz-icons" viewBox="0 0 50 50">{{ svg_contents.next()|safe }}</svg>
+                    </div>
+                    <div class="pt-8 px-2 mx-2 mb-2 text-lg no-copy-button">
+                        {{choice.text|markdown_retain_newlines|commonmark}}
+                    </div>
+
+                    {% if choice.code %}
+                    <pre class="mt-8" level="{{ level }}">{{choice.code}}</pre>
+                    {% endif %}
+                </div>
+                {% endif %}
                 {% if progress.wrong_answer_feedback %}
                 <div class="text-red-600 text-xl text-center my-2 font-semibold">
                     {% if choice.number == progress.last_wrong_answer %}
