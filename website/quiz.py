@@ -148,7 +148,7 @@ class QuizModule(WebsiteModule):
 
     @route("/previous_question/<question_nr>", methods=["POST"])
     def previous_question(self, question_nr):
-        progress, question = self.progress_and_question(int(question_nr))
+        progress, question = self.question_progress_and_question(int(question_nr))
 
         return render_template('quiz/partial-question.html',
                                level=progress.level,
@@ -292,7 +292,7 @@ class QuizModule(WebsiteModule):
             level, question, request.args.get('keyword_lang_override', g.keyword_lang))
         return Question.from_yaml(question, q) if q else None
 
-    def progress_and_question(self, question_nr):
+    def question_progress_and_question(self, question_nr):
         """Return the current progress and question objects."""
         progress = self.current_progress()
         if not progress:
