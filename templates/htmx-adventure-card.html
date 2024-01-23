@@ -1,60 +1,84 @@
-<div class="adventure grid grid-rows-[1fr_100px] bg-white shadow-md rounded-lg transition-shadow hover:shadow-lg outline-blue-400 hover:outline hover:outline-2"
+<div class="adventure grid grid-rows-[3rem_1fr_100px] bg-white shadow-md rounded-lg
+    transition-shadow hover:shadow-xl hover:outline hover:outline-2 {% if is_program %}grid-cols-[350px]{%endif%}
+    {% if is_favorite %} outline-yellow-500
+    {% elif adventure.error %} outline-red-500
+    {% else %} outline-blue-600
+    {% endif %}
+    "
+    data-cy="{{ adventure.id }}"
     data-lang="{{adventure.language or current_language().lang}}"
     _="on removeMe remove me">
-    <div class="py-4 px-6">
-        {% if adventure["creator"] == user["username"] %}
-            <h2 class="name underline cursor-pointer"
-                _="on click window.open('/for-teachers/customize-adventure/{{adventure.id}}', '_self')">{{adventure.name}}
-            </h2>
-        {% else %}
-            <h2 class="name">{{ adventure.name|e }}</h2>
-        {% endif %}
+
+    {% set ownAdventure = True if adventure["creator"] == user["username"] else False %}
+    <h2 class="name text-white rounded-t-lg px-6 flex items-center m-0
+        {% if not is_program and ownAdventure %} underline cursor-pointer {% endif %}
+        {% if is_favorite %} bg-yellow-500
+        {% elif adventure.error %} bg-red-500
+        {% else %} bg-blue-600
+        {% endif %}"
+        {% if not is_program and ownAdventure %}
+        _="on click window.open('/for-teachers/customize-adventure/{{adventure.id}}', '_self')"{% endif %}
+        >
+        {{ adventure.name|e }}
+    </h2>
+
+    <div class="py-2 px-6">
 
         {% set creator = _('owner') if adventure["author"] != adventure["creator"] else _('creator') %}
-        {% if adventure["creator_public_profile"] %}
-            <p class="text-gray-600 mt-1">{{ creator }}: <a href="/user/{{adventure.creator}}">{{ adventure.creator }}</a></p>
+        {% if adventure["creator_public_profile"] or adventure["public_user"] %}
+            <p class="text-gray-600 mt-1"><strong>{{ creator }}:</strong> <a href="/user/{{adventure.creator or adventure.username}}">{{ adventure.creator or adventure.username }}</a></p>
         {% else %}
-            <p class="text-gray-600 mt-1">{{ creator }}: {{ adventure.creator }}</p>
+            <p class="text-gray-600 mt-1"><strong>{{ creator }}:</strong> {{ adventure.creator or adventure.username }}</p>
         {% endif %}
         {% if adventure["author"] != adventure["creator"] %}
-            <p class="text-gray-600 mt-1">{{_('creator')}}: {{ adventure.author }}</p>
+            <p class="text-gray-600 mt-1"><strong>{{_('creator')}}:</strong> {{ adventure.author or adventure.username }}</p>
         {% endif %}
         <p class="text-gray-600 mt-1">
             <!-- adventure.level will gradually be removed until we have all adventures using only levels. -->
             {% if adventure.levels and adventure.levels|length > 1 %}
-                {{_('levels')}}: {% for level in adventure.levels %}
+                <strong>{{_('levels')}}:</strong> {% for level in adventure.levels %}
                     {{level}}{% if loop.index != adventure.levels|length %}, {% endif %}
                 {% endfor %}
             {% else %}
-                {{_('level')}}: {{ adventure.level }}
+                <strong>{{_('level')}}:</strong> {{ adventure.level }}
             {% endif %}
         </p>
         {% if adventure.get("language") %}
-            <p class="text-gray-600 mt-1">{{_('language')}}: {{ lang_to_sym(adventure.language) }}</p>
+            <p class="text-gray-600 mt-1"><strong>{{_('language')}}:</strong> {{ lang_to_sym(adventure.language) }}</p>
         {% endif %}
         {% if adventure["cloned_times"] %}
             <p class="text-gray-600 mt-1">
-                {{_('cloned_times')}}: {{adventure["cloned_times"]}}
+                <strong>{{_('cloned_times')}}:</strong> {{adventure["cloned_times"]}}
             </p>
         {%endif%}
-        <p class="text-gray-600 mt-1">{{_('last_update')}}: {{ adventure.date }}</p>
+        <p class="text-gray-600 mt-1"><strong>{{_('last_update')}}:</strong> {{ adventure.date|format_date }}</p>
 
         {% if adventure["tags"]|length > 0 %}
             {{ render_partial('htmx-tags-list.html', tags=adventure["tags"], adventure_id=adventure.id) }}
         {%endif%}
+
+        {% if adventure["code"] %}
+            <p class="text-gray-600 mt-1"><strong>{{_('number_lines')}}:</strong> {{ adventure.number_lines }}</p>
+            <pre level="{{ adventure.level }}">{{ adventure.code }}</pre>
+        {%endif%}
     </div>
     <div id="actions"
         class="flex items-center px-6 py-4 bg-gray-200 shadow-lg">
-        <a class="green-btn mr-1 no-underline cursor-pointer" href="/adventure/{{ adventure.name }}?creator={{ adventure.creator }}">{{_('preview')}}</a>
-        {% if user["username"] != adventure["creator"] %}
-            <button class="green-btn" id="clone_adventure_btn_{{level}}"
-                data-id="{{adventure.id}}">{{_('clone')}}</button>
-        {%else%}
-            <!-- TODO: button to add to class(es) -->
-            <a
-                href="/for-teachers/customize-adventure/{{adventure.id}}"
-                class="green-btn" id="edit_adventure_button">
-                {{_('edit_adventure')}}</a>
+        {% if is_program %}
+            <button class="green-btn" onclick="window.open (hedyApp.viewProgramLink('{{adventure.id}}'))">{{_('view_program')}}</button>
+            <span class="fa fa-flag bg-blue-300 hover:bg-blue-600 p-2 mx-4 rounded-full text-white cursor-pointer" onclick="hedyApp.report_program('{{_('report_program')}}','{{ adventure.id }}')"></span>
+            {% if is_admin %}
+                <i class="fa fa-star p-2 bg-blue-300 {% if adventure.hedy_choice %}text-yellow-500{% else %}text-white{% endif %} rounded-full cursor-pointer hover:bg-blue-600" id="{{adventure.id}}" onclick="hedyApp.set_explore_favourite('{{ adventure.id }}', {% if adventure.hedy_choice %}0{% else %}1{% endif %});" aria-hidden="true"></i>
+            {% endif %}
+        {% else %}
+            {% if user["username"] != adventure["creator"] %}
+                <button class="green-btn" id="clone_adventure_btn_{{level}}"
+                    data-id="{{adventure.id}}">{{_('clone')}}</button>
+            {% else %}
+                <a href="/for-teachers/customize-adventure/{{adventure.id}}"
+                    class="green-btn" id="edit_adventure_button">
+                    {{_('edit_adventure')}}</a>
+            {% endif %}
         {% endif %}
     </div>
 </div>
