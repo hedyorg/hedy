@@ -37,6 +37,8 @@ class PublicAdventuresModule(WebsiteModule):
         if self.filters_changed():
             included = {}
             self.adventures = {}
+            self.available_languages = set()
+            self.available_tags = set()
 
             public_adventures = self.db.get_public_adventures()
             public_adventures = sorted(public_adventures, key=lambda a: a["creator"] == user["username"], reverse=True)
@@ -151,9 +153,8 @@ class PublicAdventuresModule(WebsiteModule):
         if tags:
             tags = tags.split(",")
             adventures = [adv for i, adv in enumerate(adventures) if any(tag in tags for tag in adv.get("tags"))]
-
         if search:
-            adventures = [adv for adv in adventures if search in adv.get("name")]
+            adventures = [adv for adv in adventures if search in adv.get("name").lower()]
 
         initial_tab = None
         initial_adventure = None

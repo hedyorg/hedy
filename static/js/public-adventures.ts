@@ -1,38 +1,91 @@
-import { Select } from "tw-elements";
 import { modal } from './modal';
 import { initialize } from "./initialize";
 import { initializeHighlightedCodeBlocks } from "./app";
 import { postJson } from "./comm";
 
 // Get and initialize needed variables
-const level = document.getElementById("level");
-const language = document.getElementById("language");
-const tags = document.getElementById("tag");
+const levelSelect = document.getElementById("level-select") as Element;
+const languageSelect = document.getElementById("language-select") as Element;
+const tagsSelect = document.getElementById("tag-select") as Element;
 
 const searchInput = document.getElementById('search_adventure') as HTMLInputElement | null;
 let searchTimeout: NodeJS.Timeout;
 
-const levelInstance = Select.getInstance(level);
-const languageInstance = Select.getInstance(language);
-const tagsInstance = Select.getInstance(tags);
-
-// Attach needed events for updating the DOM 
-level?.addEventListener('valueChange.te.select', updateDOM)
-language?.addEventListener('valueChange.te.select', updateDOM)
-tags?.addEventListener('valueChange.te.select', updateDOM)
 searchInput?.addEventListener('input', handleSearchInput);
 
 document.addEventListener("DOMContentLoaded", () => {
+
+    const options = document.querySelectorAll('.option');
+
+    options.forEach(function (option) {
+        option.addEventListener('click', function () {
+            const dropdown = option.closest(".dropdown") as Element;
+            if (!dropdown) {
+                return;
+            }
+            const isSingleSelect = dropdown?.getAttribute('data-type') === 'single';
+
+            if (isSingleSelect && !option.classList.contains('selected')) {
+                // Deselect other options within the same dropdown
+                const otherOptions = dropdown.querySelectorAll('.option.selected');
+                otherOptions.forEach(otherOption => otherOption.classList.remove('selected'));
+            }
+
+            // Update value of the relative select dropdown.
+            let nextValue = dropdown.getAttribute("data-value") as string;
+            if (option.classList.contains("selected")) {
+                nextValue = nextValue?.replace(option.getAttribute("data-value") as string, "") as string;
+                if (!isSingleSelect) {
+                    nextValue = nextValue.split(",").filter(v => v).join(","); // remove standalone ,
+                } else {
+                    // it's selected and dropdown is single, so skip and do nothing.
+                    return;
+                }
+            } else if (!isSingleSelect) {
+                const currentValue = dropdown.getAttribute("data-value") || "";
+                nextValue = [currentValue, option.getAttribute("data-value") || ""].filter(v => v).join(",");
+            } else {
+                nextValue =  option.getAttribute("data-value") || "";
+            }
+            dropdown.setAttribute("data-value", nextValue)
+            option.classList.toggle('selected');
+
+            updateLabelText(dropdown);
+            updateDOM()
+        });
+    });
+    
+    
+    
+    
     updateDOM()
     setTimeout(() => {
-        if (!levelInstance)
+        if (!levelSelect)
             return
         // Since we render html as a string, the js is lost and thus any js needed
         // has to be applied again.
-        const cloneBtn = document.getElementById(`clone_adventure_btn_${levelInstance.value}`);
+        const level = levelSelect.getAttribute("data-value") || "";
+        const cloneBtn = document.getElementById(`clone_adventure_btn_${level}`);
         cloneBtn?.addEventListener('click', handleCloning);
     }, 500)
 })
+
+
+function getSelectedOptions(_options: NodeListOf<Element>) {
+    return Array.from(_options)
+        .filter(option => option.classList.contains('selected'))
+        .map(option => option.textContent?.trim());
+}
+
+
+function updateLabelText(dropdown: Element) {
+    const toggleButton = dropdown.querySelector('.toggle-button') as Element;
+    const relativeOptions = dropdown.querySelectorAll(".option") as NodeListOf<Element>;
+    const label = toggleButton.querySelector(".label") as Element;
+    const selectedOptions = getSelectedOptions(relativeOptions);
+    label.textContent = selectedOptions.length === 0 ? label.getAttribute("data-value") : selectedOptions.join(', ');
+}
+
 
 
 async function handleCloning(e: MouseEvent) {
@@ -56,9 +109,12 @@ function handleSearchInput() {
 function updateURL() {
     const queryString = window.location.search;
     const urlParams = new URLSearchParams(queryString);
-    urlParams.set('level', levelInstance.value)
-    urlParams.set('lang', languageInstance.value)
-    urlParams.set('tag', tagsInstance.value)
+    const level = levelSelect.getAttribute("data-value") || "";
+    const lanugage = languageSelect.getAttribute("data-value") || "";
+    const tags = tagsSelect.getAttribute("data-value") || "";
+    urlParams.set('level', level)
+    urlParams.set('lang', lanugage)
+    urlParams.set('tag', tags)
     if (searchInput) {
         urlParams.set('search', searchInput.value)
     }
@@ -67,12 +123,14 @@ function updateURL() {
 }
 
 async function updateDOM() {
-    if (!levelInstance || !languageInstance || !tagsInstance)
+    if (!levelSelect || !languageSelect || !tagsSelect)
         return
     // Since the select has no default values, we don't want to pass undefined to the backend.
-    const level = levelInstance.value ? levelInstance.value : ""
-    const response = await fetch(`public-adventures/filter?tag=${tagsInstance.value}`
-                    + `&lang=${languageInstance.value}&level=${level}`
+    const level = levelSelect.getAttribute("data-value") || "";
+    const lanugage = languageSelect.getAttribute("data-value") || "";
+    const tags = tagsSelect.getAttribute("data-value") || "";
+    const response = await fetch(`public-adventures/filter?tag=${tags}`
+                    + `&lang=${lanugage}&level=${level}`
                     + `&search=${searchInput?.value}`, {
       method: 'GET',
       keepalive: true,
@@ -95,7 +153,7 @@ async function updateDOM() {
 
         initializeHighlightedCodeBlocks(publicAdventuresBody)
         
-        const cloneBtn = document.getElementById(`clone_adventure_btn_${levelInstance.value}`);
+        const cloneBtn = document.getElementById(`clone_adventure_btn_${level}`);
         cloneBtn?.addEventListener('click', handleCloning);
     }
 }
