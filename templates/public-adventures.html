@@ -22,14 +22,14 @@
                      appearance-none w-full border border-gray-200 text-gray-700 p-2 rounded"
                     onclick="$('#level_dropdown').slideToggle('medium');">
                     <span class="label" data-value="{{_('select_lang')}}">{{selectedLevel or _('select_lang')}}</span>
-                    <svg id="keyword-arrow" class="fill-current h-6 w-6" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
+                    <svg id="keyword-arrow_level" class="fill-current h-6 w-6" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
                       <path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z" />
                     </svg>
                   </button>
                   <div class="dropdown-menu dropdown-blue z-30 mt-2 w-full" id="level_dropdown"
                     style="display: none; width: 100%;"
                     _="on mutation of @style
-                        set arrow to #keyword-arrow
+                        set arrow to #keyword-arrow_level
                         if *display == 'none'
                             remove .rotate-180 from arrow
                         else if not arrow.classList.contains('rotate-180')
@@ -50,14 +50,14 @@
                      appearance-none w-full border border-gray-200 text-gray-700 p-2 rounded"
                     onclick="$('#lang_dropdown').slideToggle('medium');">
                     <span class="label" data-value="{{_('select_lang')}}">{{lang_to_sym(selectedLang) if selectedLang else _('select_lang')}}</span>
-                    <svg id="keyword-arrow" class="fill-current h-6 w-6" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
+                    <svg id="keyword-arrow_lang" class="fill-current h-6 w-6" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
                       <path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z" />
                     </svg>
                   </button>
                   <div class="dropdown-menu dropdown-blue z-30 mt-2 w-full" id="lang_dropdown"
                     style="display: none; width: 100%;"
                     _="on mutation of @style
-                        set arrow to #keyword-arrow
+                        set arrow to #keyword-arrow_lang
                         if *display == 'none'
                             remove .rotate-180 from arrow
                         else if not arrow.classList.contains('rotate-180')
@@ -77,14 +77,14 @@
                      appearance-none w-full border border-gray-200 text-gray-700 p-2 rounded"
                     onclick="$('#tags_dropdown').slideToggle('medium');">
                     <span class="label" data-value="{{_('select_tag')}}">{{selectedTag or _('select_tag')}}</span>
-                    <svg id="keyword-arrow" class="fill-current h-6 w-6" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
+                    <svg id="keyword-arrow_tag" class="fill-current h-6 w-6" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
                       <path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z" />
                     </svg>
                   </button>
                   <div class="dropdown-menu dropdown-blue z-30 mt-2 w-full" id="tags_dropdown"
                     style="display: none; width: 100%;"
                     _="on mutation of @style
-                        set arrow to #keyword-arrow
+                        set arrow to #keyword-arrow_tag
                         if *display == 'none'
                             remove .rotate-180 from arrow
                         else if not arrow.classList.contains('rotate-180')
