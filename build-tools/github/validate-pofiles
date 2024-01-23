@@ -93,6 +93,7 @@ def check_for_wrapping(filename):
 
     return any_failed
 
+
 def check_for_empty_in_En(filename):
     """Check that strings in the English file are not empty.
     (Other languages can be empty as Weblate will fill them)
@@ -106,7 +107,7 @@ def check_for_empty_in_En(filename):
             for l in lines[20:]:
                 if l == 'msgstr ""':
                     any_failed = True
-                    print (f"String {lines[line_number-1]} is empty!!")
+                    print(f"String {lines[line_number-1]} is empty!!")
                 line_number += 1
 
             if any_failed:
@@ -115,11 +116,8 @@ def check_for_empty_in_En(filename):
     else:
         any_failed = False
 
-
-
-
-
     return any_failed
+
 
 if __name__ == '__main__':
     pofilespath = path.join(path.dirname(__file__), '..', '..', 'translations')
