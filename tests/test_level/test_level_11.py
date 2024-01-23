@@ -87,7 +87,7 @@ class TestsLevel11(HedyTester):
         self.multi_level_tester(
             code=code,
             max_level=16,
-            exception=hedy.exceptions.InvalidForCommandException)
+            exception=hedy.exceptions.MissingAdditionalCommand)
 
     def test_for_loop_without_to_var_gives_error(self):
         code = "for no_to in range 1 5"
@@ -95,7 +95,7 @@ class TestsLevel11(HedyTester):
         self.multi_level_tester(
             code=code,
             max_level=16,
-            exception=hedy.exceptions.InvalidForCommandException)
+            exception=hedy.exceptions.MissingAdditionalCommand)
 
     def test_for_loop_without_command_var_gives_error(self):
         code = "for no_command in range 1 to 5"

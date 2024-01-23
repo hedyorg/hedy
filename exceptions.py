@@ -207,6 +207,14 @@ class MissingInnerCommandException(HedyException):
                          line_number=line_number)
 
 
+class MissingVariableException(HedyException):
+    def __init__(self, command, level, line_number):
+        super().__init__('Missing Variable',
+                         command=command,
+                         level=level,
+                         line_number=line_number)
+
+
 class InvalidAtCommandException(HedyException):
     def __init__(self, command, level, line_number):
         super().__init__('Invalid At Command',
@@ -251,9 +259,10 @@ class UnquotedTextException(HedyException):
 
 
 class MissingAdditionalCommand(HedyException):
-    def __init__(self, command, line_number):
+    def __init__(self, command, missing_command, line_number):
         super().__init__('Missing Additional Command',
                          command=command,
+                         missing_command=missing_command,
                          line_number=line_number)
 
 
@@ -322,14 +331,6 @@ class UnsupportedStringValue(HedyException):
 class MissingElseForPressitException(HedyException):
     def __init__(self, command, level, line_number):
         super().__init__('Pressit Missing Else',
-                         command=command,
-                         level=level,
-                         line_number=line_number)
-
-
-class InvalidForCommandException(HedyException):
-    def __init__(self, command, level, line_number):
-        super().__init__('Incomplete For Command',
                          command=command,
                          level=level,
                          line_number=line_number)

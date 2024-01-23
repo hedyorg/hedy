@@ -1966,7 +1966,7 @@ levels:
             -   option: '`{if}` `{else}` `{repeat}`'
                 feedback: Keep it up!
             -   option: '`{if}` `{else}` `{repeat}` `{print}`'
-                feedback: Not with {print}
+                feedback: Not with `{print}`
             hint: Indentation happens on the line below some commands
             correct_answer: C
             question_score: '10'
@@ -2052,7 +2052,7 @@ levels:
             code: |-
                 1 {repeat} 2 {times}
                 2 {if} level {is} 9
-                3 {print} Great job!
+                3 {print} 'Great job!'
             mp_choice_options:
             -   option: All lines should start with 4 spaces
                 feedback: Only line 2 and 3 start with spaces
