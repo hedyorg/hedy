@@ -1,11 +1,9 @@
-{% extends hx_layout %}
-{% block regular_content %}
 {% if question_count %}
     <div class="mx-auto w-fit flex items-center justify-around">
         {% for i in range(1, question_count + 1) %}
         <div class="w-14">
             {% if i <= progress.question %}
-                <button type="button" hx-post="/quiz/previous_question/{{i}}" data-cy="advance-quiz" class="rounded-full text-sm text-white text-center leading-6 w-6 h-6
+                <button type="question_button" hx-post="/quiz/previous_question/{{i}}" class="rounded-full text-sm text-white text-center leading-6 w-6 h-6
                 {% if i in correct_answers_so_far %}bg-green-500
                 {% elif i == progress.question %}bg-blue-600
                 {% else %}bg-red-500
@@ -18,5 +16,3 @@
         {% endfor %}
     </div>
 {% endif %}
-
-{% endblock %}
