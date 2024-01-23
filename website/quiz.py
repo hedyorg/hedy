@@ -1,4 +1,3 @@
-import logging
 import uuid
 from typing import Dict, List, Optional
 from dataclasses import dataclass, asdict, field
@@ -19,8 +18,6 @@ from .website_module import WebsiteModule, route
 
 MAX_ATTEMPTS = 2
 NO_SUCH_QUESTION = 'No such question'
-
-logger = logging.getLogger(__name__)
 
 
 class QuizLogic:
@@ -164,7 +161,6 @@ class QuizModule(WebsiteModule):
     @route("/next_question", methods=["POST"])
     def next_question(self):
         """Advance the progress object and redirect to the next question."""
-        logger.debug("NEXT")
         progress, _ = self.current_progress_and_question()
         progress.advance_cypress_page_counter()
         progress.next_question()
@@ -302,7 +298,6 @@ class QuizModule(WebsiteModule):
         if not progress:
             raise RequestRedirect(url_for('.begin', level=1))
 
-        logger.debug(question_nr)
         question = self.get_question(progress.level, question_nr)
         if not question:
             # We shouldn't have gotten here
