@@ -903,17 +903,20 @@ class ForTeachersModule(WebsiteModule):
         Classes = self.db.get_teacher_classes(user["username"])
         class_data = []
         for Class in Classes:
-            temp = {"name": Class.get("name"), "id": Class.get("id"), "checked": False}
             customizations = self.db.get_class_customizations(Class.get("id"))
-            if customizations and adventure_id in customizations.get("teacher_adventures", []):
-                temp["checked"] = True
-            class_data.append(temp)
+            for level in adventure.get("levels", []):
+                # TODO: change name to id in sorted_adventures (probably it's only teachers' adventures!)
+                if customizations and any(adv for adv in customizations.get("sorted_adventures", {}).get(level)
+                                          if adv.get("name") == adventure.get("id")):
+                    temp = {"name": Class.get("name"), "id": Class.get("id")}
+                    class_data.append(temp)
+                    break
 
         return render_template(
             "customize-adventure.html",
             page_title=gettext("title_customize-adventure"),
             adventure=adventure,
-            class_data=class_data,
+            adventure_classes=class_data,
             max_level=hedy.HEDY_MAX_LEVEL,
             current_page="for-teachers",
             # TODO: update tags to be {name, canEdit} where canEdit is true if currentUser is the creator.
