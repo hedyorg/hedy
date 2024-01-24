@@ -45,5 +45,6 @@ module.exports = defineConfig({
     admin_classes_page: '/admin/classes',
     programs_page: '/programs',
     explore_programs_page: '/explore',
+    embedded_page: '/embedded'
   }
 });
