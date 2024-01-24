@@ -16352,13 +16352,13 @@ var hedyApp = (() => {
     var data_tr = convertReg(data, TRADUCTION3);
     var LEVELS = JSON.parse(data_tr);
     if (window.define) {
-      for (const level2 of LEVELS) {
-        define("ace/mode/" + level2.name, [], function(require2, exports, _module) {
+      for (const level3 of LEVELS) {
+        define("ace/mode/" + level3.name, [], function(require2, exports, _module) {
           var oop = require2("ace/lib/oop");
           var TextMode = require2("ace/mode/text").Mode;
           var TextHighlightRules = require2("ace/mode/text_highlight_rules").TextHighlightRules;
           function ThisLevelHighlightRules() {
-            this.$rules = level2.rules;
+            this.$rules = level3.rules;
             this.normalizeRules();
           }
           ;
@@ -33544,10 +33544,10 @@ notes_mapping = {
     current_level = "intro";
     startIntro();
   }
-  function startLevelTutorial(level2) {
+  function startLevelTutorial(level3) {
     $("#tutorial-mask").show();
-    current_level = level2;
-    startLevel(level2);
+    current_level = level3;
+    startLevel(level3);
   }
   function startTeacherTutorial() {
     $("#tutorial-mask").show();
@@ -34610,8 +34610,8 @@ notes_mapping = {
       return this.flags & 8 ? -1 : this.flags & 16 ? 1 : 0;
     }
     get bidiLevel() {
-      let level2 = this.flags & 7;
-      return level2 == 7 ? null : level2;
+      let level3 = this.flags & 7;
+      return level3 == 7 ? null : level3;
     }
     get goalColumn() {
       let value = this.flags >> 6;
@@ -38273,18 +38273,18 @@ notes_mapping = {
       point() {
       },
       span(from18, to11, active, open) {
-        let level2 = result;
+        let level3 = result;
         for (let i = active.length - 1; i >= 0; i--, open--) {
           let iso = active[i].spec.bidiIsolate, update;
           if (iso == null)
             continue;
-          if (open > 0 && level2.length && (update = level2[level2.length - 1]).to == from18 && update.direction == iso) {
+          if (open > 0 && level3.length && (update = level3[level3.length - 1]).to == from18 && update.direction == iso) {
             update.to = to11;
-            level2 = update.inner;
+            level3 = update.inner;
           } else {
             let add17 = { from: from18, to: to11, direction: iso, inner: [] };
-            level2.push(add17);
-            level2 = add17.inner;
+            level3.push(add17);
+            level3 = add17.inner;
           }
         }
       }
@@ -38428,20 +38428,20 @@ notes_mapping = {
     get dir() {
       return this.level % 2 ? RTL : LTR;
     }
-    constructor(from17, to10, level2) {
+    constructor(from17, to10, level3) {
       this.from = from17;
       this.to = to10;
-      this.level = level2;
+      this.level = level3;
     }
     side(end, dir) {
       return this.dir == dir == end ? this.to : this.from;
     }
-    static find(order, index3, level2, assoc) {
+    static find(order, index3, level3, assoc) {
       let maybe = -1;
       for (let i = 0; i < order.length; i++) {
         let span = order[i];
         if (span.from <= index3 && span.to >= index3) {
-          if (span.level == level2)
+          if (span.level == level3)
             return i;
           if (maybe < 0 || (assoc != 0 ? assoc < 0 ? span.from < index3 : span.to > index3 : order[maybe].level > span.level))
             maybe = i;
@@ -38582,9 +38582,9 @@ notes_mapping = {
       }
     }
   }
-  function emitSpans(line, from17, to10, level2, baseLevel, isolates, order) {
-    let ourType = level2 % 2 ? 2 : 1;
-    if (level2 % 2 == baseLevel % 2) {
+  function emitSpans(line, from17, to10, level3, baseLevel, isolates, order) {
+    let ourType = level3 % 2 ? 2 : 1;
+    if (level3 % 2 == baseLevel % 2) {
       for (let iCh = from17, iI = 0; iCh < to10; ) {
         let sameDir = true, isNum = false;
         if (iI == isolates.length || iCh < isolates[iI].from) {
@@ -38595,7 +38595,7 @@ notes_mapping = {
           }
         }
         let recurse = !sameDir && ourType == 1 ? [] : null;
-        let localLevel = sameDir ? level2 : level2 + 1;
+        let localLevel = sameDir ? level3 : level3 + 1;
         let iScan = iCh;
         run:
           for (; ; ) {
@@ -38621,7 +38621,7 @@ notes_mapping = {
                 if (iso.from > iCh)
                   order.push(new BidiSpan(iCh, iso.from, localLevel));
                 let dirSwap = iso.direction == LTR != !(localLevel % 2);
-                computeSectionOrder(line, dirSwap ? level2 + 1 : level2, baseLevel, iso.inner, iso.from, iso.to, order);
+                computeSectionOrder(line, dirSwap ? level3 + 1 : level3, baseLevel, iso.inner, iso.from, iso.to, order);
                 iCh = iso.to;
               }
               iScan = iso.to;
@@ -38632,7 +38632,7 @@ notes_mapping = {
             }
           }
         if (recurse)
-          emitSpans(line, iCh, iScan, level2 + 1, baseLevel, recurse, order);
+          emitSpans(line, iCh, iScan, level3 + 1, baseLevel, recurse, order);
         else if (iCh < iScan)
           order.push(new BidiSpan(iCh, iScan, localLevel));
         iCh = iScan;
@@ -38648,7 +38648,7 @@ notes_mapping = {
           }
         }
         let recurse = !sameDir && ourType == 1 ? [] : null;
-        let localLevel = sameDir ? level2 : level2 + 1;
+        let localLevel = sameDir ? level3 : level3 + 1;
         let iScan = iCh;
         run:
           for (; ; ) {
@@ -38673,7 +38673,7 @@ notes_mapping = {
                 if (iso.to < iCh)
                   order.push(new BidiSpan(iso.to, iCh, localLevel));
                 let dirSwap = iso.direction == LTR != !(localLevel % 2);
-                computeSectionOrder(line, dirSwap ? level2 + 1 : level2, baseLevel, iso.inner, iso.from, iso.to, order);
+                computeSectionOrder(line, dirSwap ? level3 + 1 : level3, baseLevel, iso.inner, iso.from, iso.to, order);
                 iCh = iso.from;
               }
               iScan = iso.from;
@@ -38684,19 +38684,19 @@ notes_mapping = {
             }
           }
         if (recurse)
-          emitSpans(line, iScan, iCh, level2 + 1, baseLevel, recurse, order);
+          emitSpans(line, iScan, iCh, level3 + 1, baseLevel, recurse, order);
         else if (iScan < iCh)
           order.push(new BidiSpan(iScan, iCh, localLevel));
         iCh = iScan;
       }
     }
   }
-  function computeSectionOrder(line, level2, baseLevel, isolates, from17, to10, order) {
-    let outerType = level2 % 2 ? 2 : 1;
+  function computeSectionOrder(line, level3, baseLevel, isolates, from17, to10, order) {
+    let outerType = level3 % 2 ? 2 : 1;
     computeCharTypes(line, from17, to10, isolates, outerType);
     processBracketPairs(line, from17, to10, isolates, outerType);
     processNeutrals(from17, to10, isolates, outerType);
-    emitSpans(line, from17, to10, level2, baseLevel, isolates, order);
+    emitSpans(line, from17, to10, level3, baseLevel, isolates, order);
   }
   function computeOrder(line, direction, isolates) {
     if (!line)
@@ -38706,8 +38706,8 @@ notes_mapping = {
     if (isolates.length)
       while (line.length > types.length)
         types[types.length] = 256;
-    let order = [], level2 = direction == LTR ? 0 : 1;
-    computeSectionOrder(line, level2, level2, isolates, 0, line.length, order);
+    let order = [], level3 = direction == LTR ? 0 : 1;
+    computeSectionOrder(line, level3, level3, isolates, 0, line.length, order);
     return order;
   }
   function trivialOrder(length) {
@@ -49324,6 +49324,8 @@ notes_mapping = {
   var debugWord = Decoration.mark({ class: "cm-debugger-current-line" });
   var incorrectCodeMark = Decoration.mark({ class: "cm-incorrect-hedy-code" });
   var deactivateLineMarker = Decoration.line({ class: "cm-disabled-line" });
+  var highlightVariableMarker = Decoration.mark({ class: "cm-highlight-var" });
+  var highlightFunctionMarker = Decoration.mark({ class: "cm-highlight-fun" });
   var decorationsTheme = EditorView.theme({
     ".cm-error-editor": {
       outline: "2px solid #F56565",
@@ -49335,6 +49337,12 @@ notes_mapping = {
     },
     ".cm-incorrect-hedy-code": {
       textDecoration: "red wavy underline"
+    },
+    ".cm-highlight-var": {
+      color: "#c2e3ff "
+    },
+    ".cm-highlight-fun": {
+      color: "#EDF492"
     }
   });
   var deactivateGutterMarker = new class extends GutterMarker {
@@ -49417,6 +49425,129 @@ notes_mapping = {
       return ((_a3 = view.plugin(plugin)) == null ? void 0 : _a3.placeholders) || Decoration.none;
     })
   });
+  var variableHighlighter = ViewPlugin.fromClass(class {
+    constructor(view) {
+      this.decorations = highlightVariables(view);
+    }
+    update(update) {
+      if (update.docChanged || update.viewportChanged) {
+        this.decorations = highlightVariables(update.view);
+      }
+    }
+  }, {
+    decorations: (v) => v.decorations
+  });
+  function highlightVariables(view) {
+    const level3 = view.state.facet(level);
+    if (level3 == 1)
+      return Decoration.none;
+    let variableDeco = new RangeSetBuilder();
+    let variableData = [];
+    let functionsNames = new Set();
+    let variablesNames = new Set();
+    let definingCommands = [
+      "Assign",
+      "Ask",
+      "AssignList",
+      "For",
+      "Input"
+    ];
+    for (let { from: from17, to: to10 } of view.visibleRanges) {
+      syntaxTree(view.state).iterate({
+        from: from17,
+        to: to10,
+        enter: (node) => {
+          if (definingCommands.includes(node.node.name)) {
+            const child = node.node.getChild("Text");
+            addVar(child, variableData, "variable", view, functionsNames, variablesNames);
+          } else if (node.node.name === "Define") {
+            const textChild = node.node.getChild("Text");
+            addVar(textChild, variableData, "function", view, functionsNames, variablesNames);
+            const argumentChild = node.node.getChild("Arguments");
+            const expressions = argumentChild == null ? void 0 : argumentChild.getChildren("Expression");
+            expressions == null ? void 0 : expressions.map((expression) => {
+              const textChild2 = expression.getChild("Text");
+              addVar(textChild2, variableData, "variable", view, functionsNames, variablesNames);
+            });
+          }
+        }
+      });
+    }
+    let commands = [
+      "Assign",
+      "Print",
+      "Forward",
+      "Turn",
+      "Color",
+      "Sleep",
+      "ListAccess",
+      "Add",
+      "Remove",
+      "EqualityCheck",
+      "InListCheck",
+      "NotInListCheck",
+      "Expression",
+      "Repeat",
+      "For",
+      "Call"
+    ];
+    if (level3 > 3)
+      commands.push("Ask");
+    for (let { from: from17, to: to10 } of view.visibleRanges) {
+      syntaxTree(view.state).iterate({
+        from: from17,
+        to: to10,
+        enter: (node) => {
+          if (commands.includes(node.name)) {
+            const children = node.node.getChildren("Text");
+            let i = definingCommands.includes(node.name) ? 1 : 0;
+            for (; i < children.length; i++) {
+              const child = children[i];
+              const text = view.state.doc.sliceString(child.from, child.to);
+              if (level3 <= 3) {
+                const varNames = getVarNames(text) || [];
+                let startIndex = 0;
+                for (const name2 of varNames) {
+                  if (variablesNames.has(name2)) {
+                    const index3 = text.indexOf(name2, startIndex);
+                    variableData.push({
+                      name: name2,
+                      type: "variable",
+                      pos: { from: child.from + index3, to: child.from + index3 + name2.length }
+                    });
+                    startIndex = index3 + name2.length;
+                  }
+                }
+              } else if (variablesNames.has(text) || functionsNames.has(text)) {
+                variableData.push({
+                  name: text,
+                  type: variablesNames.has(text) ? "variable" : "function",
+                  pos: { from: child.from, to: child.to }
+                });
+              }
+            }
+          }
+        }
+      });
+    }
+    variableData.sort((a, b) => a.pos.from - b.pos.from);
+    variableData.forEach((data) => {
+      if (data.type === "function") {
+        variableDeco.add(data.pos.from, data.pos.to, highlightFunctionMarker);
+      } else {
+        variableDeco.add(data.pos.from, data.pos.to, highlightVariableMarker);
+      }
+    });
+    return variableDeco.finish();
+  }
+  function getVarNames(name2) {
+    const varRegex = /^[\p{Lu}\p{Ll}\p{Lt}\p{Lm}\p{Lo}\p{Nl}_]+([\p{Lu}\p{Ll}\p{Lt}\p{Lm}\p{Lo}\p{Nl}_]+|[\p{Mn}\p{Mc}\p{Nd}\p{Pc}·]+)*$/gmu;
+    return name2.match(varRegex);
+  }
+  function isVarName(name2) {
+    const varRegex = /^[\p{Lu}\p{Ll}\p{Lt}\p{Lm}\p{Lo}\p{Nl}_]+([\p{Lu}\p{Ll}\p{Lt}\p{Lm}\p{Lo}\p{Nl}_]+|[\p{Mn}\p{Mc}\p{Nd}\p{Pc}·]+)*$/gmu;
+    return varRegex.test(name2);
+  }
   function basicIndent(context2, pos) {
     const nextIndentationSize = context2.lineIndent(pos, -1);
     let prevIndentationSize;
@@ -49427,6 +49558,25 @@ notes_mapping = {
     }
     const indentBy = Math.max(prevIndentationSize, nextIndentationSize);
     return indentBy;
+  }
+  function addVar(child, variableData, type, view, functionsNames, variablesNames) {
+    if (child && isVarName(view.state.doc.sliceString(child.from, child.to))) {
+      const name2 = view.state.doc.sliceString(child.from, child.to);
+      const data = {
+        name: name2,
+        type,
+        pos: { from: child.from, to: child.to }
+      };
+      variableData.push(data);
+      switch (type) {
+        case "function":
+          functionsNames.add(name2);
+          break;
+        case "variable":
+          variablesNames.add(name2);
+          break;
+      }
+    }
   }
 
   // node_modules/@lezer/lr/dist/index.js
@@ -51268,7 +51418,7 @@ notes_mapping = {
 
   // static/js/lezer-parsers/tokens.ts
   var TRADUCTION;
-  var level;
+  var level2;
   var keywordToToken = {
     1: {
       extend: {
@@ -51797,7 +51947,7 @@ notes_mapping = {
   var extendTranslations;
   function initializeTranslation(options) {
     const TRADUCTIONS = convert2(highlighting_trad_default);
-    level = options.level;
+    level2 = options.level;
     let lang = options.keywordLanguage;
     if (!TRADUCTIONS.has(lang)) {
       lang = "en";
@@ -51806,9 +51956,9 @@ notes_mapping = {
     specializeTranslations = new Map();
     extendTranslations = new Map();
     for (const [key, value] of TRADUCTION) {
-      if (key in keywordToToken[level].specialize) {
+      if (key in keywordToToken[level2].specialize) {
         specializeTranslations.set(key, value);
-      } else if (key in keywordToToken[level].extend) {
+      } else if (key in keywordToToken[level2].extend) {
         extendTranslations.set(key, value);
       }
     }
@@ -51817,8 +51967,8 @@ notes_mapping = {
     for (const [key, value] of specializeTranslations) {
       const regexString = value.replace(" ", "|");
       if (new RegExp(`^(${regexString})$`, "gu").test(name2)) {
-        if (stack.canShift(keywordToToken[level].specialize[key])) {
-          return keywordToToken[level].specialize[key];
+        if (stack.canShift(keywordToToken[level2].specialize[key])) {
+          return keywordToToken[level2].specialize[key];
         }
       }
     }
@@ -51828,8 +51978,8 @@ notes_mapping = {
     for (const [key, value] of extendTranslations) {
       const regexString = value.replace(" ", "|");
       if (new RegExp(`^(${regexString})$`, "gu").test(name2)) {
-        if (stack.canShift(keywordToToken[level].extend[key])) {
-          return keywordToToken[level].extend[key];
+        if (stack.canShift(keywordToToken[level2].extend[key])) {
+          return keywordToToken[level2].extend[key];
         }
       }
     }
@@ -52396,6 +52546,7 @@ notes_mapping = {
 
   // static/js/cm-editor.ts
   var indentSize = " ".repeat(4);
+  var level = Facet.define();
   var HedyCodeMirrorEditorCreator = class {
     initializeEditorWithGutter($editor, editorType, dir = "ltr") {
       let editor = new HedyCodeMirrorEditor($editor.get(0), $editor.data("readonly"), editorType, dir);
@@ -52441,7 +52592,10 @@ notes_mapping = {
           ".cm-gutters": {
             borderRadius: "4px"
           },
-          ".cm-cursor, .cm-dropCursor": { borderLeftColor: "white", borderLeftWidth: "2px" }
+          ".cm-cursor, .cm-dropCursor": { borderLeftColor: "white", borderLeftWidth: "2px" },
+          ".cm-name": {
+            color: "#009975"
+          }
         });
         state = EditorState.create({
           doc: "",
@@ -52472,12 +52626,17 @@ notes_mapping = {
             debugLineField,
             incorrectLineField,
             Prec.high(decorationsTheme),
-            placeholders
+            placeholders,
+            theLevel ? level.of(theLevel) : [],
+            Prec.highest(variableHighlighter)
           ]
         });
       } else {
         let theme2 = {
-          ".cm-cursor, .cm-dropCursor": { border: "none" }
+          ".cm-cursor, .cm-dropCursor": { border: "none" },
+          ".cm-name": {
+            color: "#009975"
+          }
         };
         let extensions = [
           highlightSpecialChars(),
@@ -52485,7 +52644,10 @@ notes_mapping = {
           syntaxHighlighting(defaultHighlightStyle, { fallback: true }),
           monokai,
           this.readMode.of(EditorState.readOnly.of(isReadOnly)),
-          placeholders
+          placeholders,
+          theLevel ? level.of(theLevel) : [],
+          Prec.high(decorationsTheme),
+          Prec.highest(variableHighlighter)
         ];
         switch (editorType) {
           case EditorType.CHEATSHEET:
@@ -52523,8 +52685,8 @@ notes_mapping = {
         this.setHighlighterForLevel(theLevel);
       }
     }
-    setHighlighterForLevel(level2) {
-      const language2 = languagePerLevel[level2];
+    setHighlighterForLevel(level3) {
+      const language2 = languagePerLevel[level3];
       const hedyStyleTags = {
         "print forward turn play color ask is echo sleep Comma": tags.keyword,
         "at random remove from add to if else in not Op": tags.keyword,
@@ -52597,8 +52759,8 @@ notes_mapping = {
     }
     configureMainEditor() {
     }
-    getHighlighter(level2) {
-      return `${level2}`;
+    getHighlighter(level3) {
+      return `${level3}`;
     }
     trimTrailingSpace() {
       deleteTrailingWhitespace(this.view);
@@ -54914,10 +55076,10 @@ notes_mapping = {
   var sortable_esm_default = Sortable;
 
   // static/js/parsons.ts
-  function loadParsonsExercise(level2, exercise) {
+  function loadParsonsExercise(level3, exercise) {
     $("#next_parson_button").hide();
     let parameters = new URLSearchParams(window.location.search);
-    let url = "/parsons/get-exercise/" + level2 + "/" + exercise;
+    let url = "/parsons/get-exercise/" + level3 + "/" + exercise;
     if (parameters.has("keyword_language")) {
       url += "/" + parameters.get("keyword_language");
     }
@@ -54931,7 +55093,7 @@ notes_mapping = {
       resetView();
       updateHeader(exercise);
       showExercise(response);
-      updateNextExerciseButton(level2, exercise);
+      updateNextExerciseButton(level3, exercise);
     }).fail(function(err) {
       modal.notifyError(err.responseText);
     });
@@ -54975,10 +55137,10 @@ notes_mapping = {
     });
     $("#parsons_explanation_story").text(response.story);
   }
-  function updateNextExerciseButton(level2, exercise) {
+  function updateNextExerciseButton(level3, exercise) {
     const max_exercise = $("#next_parson_button").attr("max_exercise") || 1;
     if (exercise < max_exercise) {
-      $("#next_parson_button").on("click", () => loadParsonsExercise(level2, exercise + 1));
+      $("#next_parson_button").on("click", () => loadParsonsExercise(level3, exercise + 1));
     } else {
       $("#next_parson_button").off("click");
     }
@@ -55128,8 +55290,8 @@ notes_mapping = {
         this._editor.setOptions({ rtl: true });
       }
     }
-    setHighlighterForLevel(level2) {
-      const mode = this.getHighlighter(level2);
+    setHighlighterForLevel(level3) {
+      const mode = this.getHighlighter(level3);
       this._editor.session.setMode(mode);
     }
     get contents() {
@@ -55169,8 +55331,8 @@ notes_mapping = {
     getDeactivatedLines() {
       return this._editor.session.getBreakpoints();
     }
-    getHighlighter(level2) {
-      return `ace/mode/level${level2}`;
+    getHighlighter(level3) {
+      return `ace/mode/level${level3}`;
     }
     trimTrailingSpace() {
       try {
@@ -55410,15 +55572,15 @@ notes_mapping = {
       $("#variable_button").hide();
     }
     if (options.level > 0) {
-      let level2 = options.level;
-      step_debugger = level2 <= 700;
+      let level3 = options.level;
+      step_debugger = level3 <= 700;
     }
     if (!step_debugger) {
       $("#debug_button").hide();
     }
     if (options.level != 0) {
-      let level2 = options.level;
-      variable_view = level2 >= 2;
+      let level3 = options.level;
+      variable_view = level3 >= 2;
       hide_if_no_variables();
     }
     initializeBreakpoints(options.editor);
@@ -55888,12 +56050,12 @@ notes_mapping = {
       }
       const exampleEditor = editorCreator.initializeReadOnlyEditor(preview, dir);
       exampleEditor.contents = code.trimEnd();
-      for (const level2 of levels) {
+      for (const level3 of levels) {
         initializeTranslation({
           keywordLanguage: theKeywordLanguage,
-          level: parseInt(level2, 10)
+          level: parseInt(level3, 10)
         });
-        exampleEditor.setHighlighterForLevel(parseInt(level2, 10));
+        exampleEditor.setHighlighterForLevel(parseInt(level3, 10));
       }
     }
   }
@@ -56028,28 +56190,28 @@ notes_mapping = {
       });
     });
   }
-  function enable_level(level2) {
+  function enable_level(level3) {
     markUnsavedChanges();
-    if ($("#enable_level_" + level2).is(":checked")) {
-      $("#opening_date_level_" + level2).prop("disabled", false).attr("type", "text").attr("placeholder", ClientMessages.directly_available).removeClass("bg-green-300").addClass("bg-gray-200");
+    if ($("#enable_level_" + level3).is(":checked")) {
+      $("#opening_date_level_" + level3).prop("disabled", false).attr("type", "text").attr("placeholder", ClientMessages.directly_available).removeClass("bg-green-300").addClass("bg-gray-200");
     } else {
-      $("#opening_date_level_" + level2).prop("disabled", true).attr("type", "text").attr("placeholder", ClientMessages.disabled).val("");
+      $("#opening_date_level_" + level3).prop("disabled", true).attr("type", "text").attr("placeholder", ClientMessages.disabled).val("");
     }
-    if ($("#level-" + level2).is(":visible")) {
-      setLevelStateIndicator(level2);
+    if ($("#level-" + level3).is(":visible")) {
+      setLevelStateIndicator(level3);
     }
   }
-  function setDateLevelInputColor(level2) {
-    var date_string = $("#opening_date_level_" + level2).val();
+  function setDateLevelInputColor(level3) {
+    var date_string = $("#opening_date_level_" + level3).val();
     var input_date = new Date(date_string);
     var today_date = new Date();
     if (input_date > today_date) {
-      $("#opening_date_level_" + level2).removeClass("bg-gray-200").addClass("bg-green-300");
+      $("#opening_date_level_" + level3).removeClass("bg-gray-200").addClass("bg-green-300");
     } else {
-      $("#opening_date_level_" + level2).removeClass("bg-green-300").addClass("bg-gray-200");
+      $("#opening_date_level_" + level3).removeClass("bg-green-300").addClass("bg-gray-200");
     }
-    if ($("#level-" + level2).is(":visible")) {
-      setLevelStateIndicator(level2);
+    if ($("#level-" + level3).is(":visible")) {
+      setLevelStateIndicator(level3);
     }
   }
   function add_account_placeholder() {
@@ -56175,14 +56337,14 @@ notes_mapping = {
       startTeacherTutorial();
     }
   }
-  function setLevelStateIndicator(level2) {
+  function setLevelStateIndicator(level3) {
     $("[id^=state-]").addClass("hidden");
-    if ($("#opening_date_level_" + level2).is(":disabled")) {
+    if ($("#opening_date_level_" + level3).is(":disabled")) {
       $("#state-disabled").removeClass("hidden");
-    } else if ($("#opening_date_level_" + level2).val() === "") {
+    } else if ($("#opening_date_level_" + level3).val() === "") {
       $("#state-accessible").removeClass("hidden");
     } else {
-      var date_string = $("#opening_date_level_" + level2).val();
+      var date_string = $("#opening_date_level_" + level3).val();
       var input_date = new Date(date_string);
       var today_date = new Date();
       if (input_date > today_date) {
@@ -56215,8 +56377,8 @@ notes_mapping = {
         setDateLevelInputColor($(this).attr("level"));
       });
       $("#levels-dropdown").on("change", function() {
-        var level2 = $(this).val();
-        setLevelStateIndicator(level2);
+        var level3 = $(this).val();
+        setLevelStateIndicator(level3);
       });
     });
   }
@@ -56915,8 +57077,8 @@ pygame.quit()
       }
     }
   }
-  function getHighlighter(level2) {
-    return `ace/mode/level${level2}`;
+  function getHighlighter(level3) {
+    return `ace/mode/level${level3}`;
   }
   function stopit() {
     if (pygameRunning) {
@@ -56953,7 +57115,7 @@ pygame.quit()
     buttonsDiv.empty();
     buttonsDiv.hide();
   }
-  async function runit(level2, lang, disabled_prompt, run_type, cb2) {
+  async function runit(level3, lang, disabled_prompt, run_type, cb2) {
     const adventureName = currentTab;
     if (askPromptOpen) {
       if (disabled_prompt) {
@@ -57002,7 +57164,7 @@ pygame.quit()
         try {
           cancelPendingAutomaticSave();
           let data = {
-            level: `${level2}`,
+            level: `${level3}`,
             code,
             lang,
             skip_faulty: false,
@@ -57047,7 +57209,7 @@ pygame.quit()
       runPythonProgram(program_data.Code, program_data.source_map, program_data.has_turtle, program_data.has_pygame, program_data.has_sleep, program_data.has_clear, program_data.has_music, program_data.Warning, cb2, run_type).catch(function(err) {
         if (err != null) {
           error.show(ClientMessages["Execute_error"], err.message);
-          reportClientError(level2, code, err.message);
+          reportClientError(level3, code, err.message);
         }
       });
     } catch (e) {
@@ -57228,9 +57390,9 @@ pygame.quit()
     modal.hide();
     modal.notifySuccess(prompt, 3e3);
   }
-  function reportClientError(level2, code, client_error) {
+  function reportClientError(level3, code, client_error) {
     postJsonWithAchievements("/report_error", {
-      level: `${level2}`,
+      level: `${level3}`,
       code,
       page: window.location.href,
       client_error
@@ -57391,11 +57553,11 @@ pygame.quit()
           }
         },
         execLimit: function() {
-          const level2 = theLevel;
+          const level3 = theLevel;
           if (hasTurtle || hasPygame || hasMusic) {
             return 6e6;
           }
-          if (level2 < 7) {
+          if (level3 < 7) {
             return 3e6;
           }
           return hasSleep ? 2e4 : 5e3;
@@ -57709,8 +57871,8 @@ pygame.quit()
       return window.speechSynthesis.getVoices().filter((voice) => voice.lang.startsWith(simpleLang));
     }
   }
-  function load_quiz(level2) {
-    $('*[data-tabtarget="quiz"]').html('<iframe id="quiz-iframe" class="w-full" title="Quiz" src="/quiz/start/' + level2 + '"></iframe>');
+  function load_quiz(level3) {
+    $('*[data-tabtarget="quiz"]').html('<iframe id="quiz-iframe" class="w-full" title="Quiz" src="/quiz/start/' + level3 + '"></iframe>');
   }
   function showVariableView() {
     const variables = $("#variables");
@@ -57780,8 +57942,8 @@ pygame.quit()
     const outputDiv = $("#output");
     outputDiv.scrollTop(outputDiv.prop("scrollHeight"));
   }
-  function modalStepOne(level2) {
-    createModal(level2);
+  function modalStepOne(level3) {
+    createModal(level3);
     let $modalEditor = $("#modal-editor");
     if ($modalEditor.length) {
       const dir = $("body").attr("dir");
@@ -57794,8 +57956,8 @@ pygame.quit()
     var randomnum = Math.floor(Math.random() * allsuccessmessages.length);
     success.show(allsuccessmessages[randomnum]);
   }
-  function createModal(level2) {
-    let editor = `<div id='modal-editor' class="w-full flex-1 text-lg rounded" style='height:200px; width:50vw;'></div>`.replace("{level}", level2.toString());
+  function createModal(level3) {
+    let editor = `<div id='modal-editor' class="w-full flex-1 text-lg rounded" style='height:200px; width:50vw;'></div>`.replace("{level}", level3.toString());
     let title = ClientMessages["Program_repair"];
     modal.repair(editor, 0, title);
   }
@@ -57958,10 +58120,10 @@ pygame.quit()
     timers.forEach(clearTimeout);
     timers = [];
   };
-  function downloadSlides(level2) {
-    var iframe = document.getElementById(`level-${level2}-slides`);
-    iframe.setAttribute("src", `/slides/${level2}`);
-    $(`#level-${level2}-slides`).on("load", function() {
+  function downloadSlides(level3) {
+    var iframe = document.getElementById(`level-${level3}-slides`);
+    iframe.setAttribute("src", `/slides/${level3}`);
+    $(`#level-${level3}-slides`).on("load", function() {
       var innerDoc = iframe.contentDocument || iframe.contentWindow.document;
       var slides = innerDoc.getElementsByTagName("section");
       var slidesHTML = "";
@@ -57980,9 +58142,9 @@ pygame.quit()
       var zip = (0, import_jszip.default)();
       zip.file("index.html", template);
       zip.folder("lib");
-      zip.folder(`hedy-level-${level2}`);
+      zip.folder(`hedy-level-${level3}`);
       zip.generateAsync({ type: "blob" }).then(function(content2) {
-        download(content2, `hedy-level-${level2}.zip`, "zip");
+        download(content2, `hedy-level-${level3}.zip`, "zip");
       });
     });
   }
@@ -58214,11 +58376,11 @@ pygame.quit()
       $("#favourite_program_container_" + index3).addClass("text-white");
     }
   }
-  function goToLevel(level2) {
+  function goToLevel(level3) {
     const hash = window.location.hash;
-    let newPath = window.location.pathname.replace(/\/\d+/, `/${level2}`);
-    if (!newPath.includes(level2)) {
-      newPath = window.location.pathname + `/${level2}`;
+    let newPath = window.location.pathname.replace(/\/\d+/, `/${level3}`);
+    if (!newPath.includes(level3)) {
+      newPath = window.location.pathname + `/${level3}`;
     }
     window.location.pathname = newPath;
     window.location.hash = hash;
