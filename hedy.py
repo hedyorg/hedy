@@ -191,12 +191,14 @@ def _translate_index_error(code, list_name):
 
 def translate_value_error(command, value, suggestion_type):
     exception_text = gettext('catch_value_exception')
-    # Right now we only have two types of suggestion
+    # Right now we only have three types of suggestion
     # In the future we might change this if the number increases
     if suggestion_type == 'number':
         suggestion_text = gettext('suggestion_number')
     elif suggestion_type == 'color':
         suggestion_text = gettext('suggestion_color')
+    elif suggestion_type == 'note':
+        suggestion_text = gettext('suggestion_note')
 
     exception_text = exception_text.replace('{command}', style_command(command))
     exception_text = exception_text.replace('{value}', style_command(value))
@@ -1166,6 +1168,9 @@ class IsValid(Filter):
         raise exceptions.InvalidSpaceException(
             level=self.level, line_number=line, fixed_code=fixed_code, fixed_result=result)
 
+    def error_ask_missing_variable(self, meta, args):
+        raise exceptions.MissingVariableException(command='is ask', level=self.level, line_number=meta.line)
+
     def error_print_nq(self, meta, args):
         words = [str(x[1]) for x in args]  # second half of the list is the word
         text = ' '.join(words)
@@ -1180,10 +1185,10 @@ class IsValid(Filter):
         raise exceptions.MisspelledAtCommand(command='at', arg1=str(args[1][1]), line_number=meta.line)
 
     def error_add_missing_to(self, meta, args):
-        raise exceptions.MissingAdditionalCommand(command='add', line_number=meta.line)
+        raise exceptions.MissingAdditionalCommand(command='add', missing_command='to', line_number=meta.line)
 
     def error_remove_missing_from(self, meta, args):
-        raise exceptions.MissingAdditionalCommand(command='remove', line_number=meta.line)
+        raise exceptions.MissingAdditionalCommand(command='remove', missing_command='from', line_number=meta.line)
 
     def error_non_decimal(self, meta, args):
         raise exceptions.NonDecimalVariable(line_number=meta.line)
@@ -1259,10 +1264,10 @@ class IsValid(Filter):
             command='ifpressed_else', level=self.level, line_number=meta.line)
 
     def error_for_missing_in(self, meta, args):
-        raise exceptions.InvalidForCommandException(command='in', level=self.level, line_number=meta.line)
+        raise exceptions.MissingAdditionalCommand(command='for', missing_command='in', line_number=meta.line)
 
     def error_for_missing_to(self, meta, args):
-        raise exceptions.InvalidForCommandException(command='to', level=self.level, line_number=meta.line)
+        raise exceptions.MissingAdditionalCommand(command='for', missing_command='to', line_number=meta.line)
 
     def error_for_missing_command(self, meta, args):
         raise exceptions.IncompleteCommandException(incomplete_command='for', level=self.level, line_number=meta.line)
@@ -1550,10 +1555,10 @@ class ConvertToPython_1(ConvertToPython):
 
     def play(self, meta, args):
         if len(args) == 0:
-            return self.make_play('C4') + self.add_debug_breakpoint()
+            return self.make_play('C4', meta) + self.add_debug_breakpoint()
 
-        note = args[0]  # will we also support multiple notes at once?
-        return self.make_play(note) + self.add_debug_breakpoint()
+        note = args[0].upper()  # will we also support multiple notes at once?
+        return self.make_play(note, meta) + self.add_debug_breakpoint()
 
     def comment(self, meta, args):
         return f"#{''.join(args)}"
@@ -1598,14 +1603,24 @@ class ConvertToPython_1(ConvertToPython):
     def make_forward(self, parameter):
         return self.make_turtle_command(parameter, Command.forward, 'forward', True, 'int')
 
-    def make_play(self, note):
+    def make_play(self, note, meta):
+        exception_text = translate_value_error('play', note, 'note')
+
         return textwrap.dedent(f"""\
+                if '{note}' not in notes_mapping.keys() and '{note}' not in notes_mapping.values():
+                    raise Exception({exception_text})
                 play(notes_mapping.get(str('{note}'), str('{note}')))
                 time.sleep(0.5)""")
 
-    def make_play_var(self, note):
+    def make_play_var(self, note, meta):
+        exception_text = translate_value_error('play', note, 'note')
+        self.check_var_usage([note], meta.line)
+
         return textwrap.dedent(f"""\
-                play(notes_mapping.get(str({note}), str({note})))
+                chosen_note = {note}.upper()
+                if chosen_note not in notes_mapping.keys() and chosen_note not in notes_mapping.values():
+                    raise Exception({exception_text})
+                play(notes_mapping.get(str(chosen_note), str(chosen_note)))
                 time.sleep(0.5)""")
 
     def make_color(self, parameter, language):
@@ -1758,7 +1773,7 @@ class ConvertToPython_2(ConvertToPython_1):
 
     def play(self, meta, args):
         if len(args) == 0:
-            return self.make_play('C4') + self.add_debug_breakpoint()
+            return self.make_play('C4', meta) + self.add_debug_breakpoint()
 
         # if ConvertToPython.is_int(args[0]): #handig ff laten staan als ik nog integers ga ondersteunen in this PR or the next
         #     parameter = int(args[0])
@@ -1766,12 +1781,13 @@ class ConvertToPython_2(ConvertToPython_1):
         # if not an int, then it is a variable
 
         note = args[0]
-        if note in list(notes_mapping.values()) + list(notes_mapping.keys()):  # this is a supported note
-            return self.make_play(note)
+        uppercase_note = note.upper()
+        if uppercase_note in list(notes_mapping.values()) + list(notes_mapping.keys()):  # this is a supported note
+            return self.make_play(uppercase_note, meta)
 
         # no note? it must be a variable!
         self.add_variable_access_location(note, meta.line)
-        return self.make_play_var(note)
+        return self.make_play_var(note, meta)
 
     def assign(self, meta, args):
         variable_name = args[0]
@@ -3358,7 +3374,7 @@ def preprocess_ifs(code, lang='en'):
         # if this line starts with if but does not contain an else, and the next non-empty line too is not an else.
         if (starts_with('if', line) or starts_with_after_repeat('if', line)) and (not starts_with('else', next_non_empty_line(lines, i))) and (not contains('else', line)):
             # is this line just a condition and no other keyword (because that is no problem)
-            commands = ["print", "ask", "forward", "turn"]
+            commands = ["print", "ask", "forward", "turn", "play"]
             excluded_commands = ["pressed"]
 
             if (

@@ -719,13 +719,14 @@ adventures:
                 example_code: |
                     ```
                     {print} '3'
-                    sov
                     {clear}
                     {print} '2'
-                    {sleep}
                     {clear}
                     {print} '1'
-                    {sleep}
+                    {clear}
+                    {print} '
+                             vänta...'
+                    {sleep} 3
                     {clear}
                     {print} 'SURPRISE!'
                     ```
@@ -815,23 +816,17 @@ adventures:
                     {print} Welcome to Swimming Pool Hedy!
                     class {is} {ask} 'Are you here to join a class today?'
                     {if} class yes
-                        {print} 'Great! You are joining a class!'
-                        {print} {else} 'You will not be joining a class'
-                    discount {is} {ask} 'Do you have a discount code?'
+                    {print} 'Great! You're joining a class!
+                    {print} {else} 'You will not be joining a class'
+                    discount {is} 'Do you have a discount code?'
                     {if} discount {is} yes
-                    discount_answer {is} {ask} 'What is your discount code?'
+                    discount_answer {is} {ask} 'What's your discount code?'
                     discount_codes = Senior4231, Student8786, NewMember6709
-                    {if} discount_answer {is} {in} discount_codes
-                        {print} 'That will be $3,50'
-                            {else} 'That code is not valid'
-                    {else} 'That will be $5,50'
+                    {if} discount_answer {is} {in} discount_cods
+                    {print} 'That will be $3,50'
+                    'That will be $5,50'
                     {print} 'Have a nice swim!'
                     ```
-
-                        {print} 'That will be $3,50'
-                            {else} 'That code is not valid'
-                    {else} 'That will be $5,50'
-                    {print} 'Have a nice swim!'
             6:
                 story_text: |-
                     ### Exercise
@@ -2414,8 +2409,6 @@ adventures:
                     name = Hedy
                     answer = 20 + 4
                     ```
-
-                    answer = 20 + 4
             14:
                 story_text: |
                     Vi kommer att lära oss fler nya saker. Du kanske redan känner till dem från matematiken, `<` och `>`.
@@ -2499,14 +2492,14 @@ adventures:
         description: Introduktion till matte
         levels:
             6:
-                story_text: |
-                    ## 1 + 1
-                    På den här nivån lär du dig något nytt: du kan nu också räkna ut saker.
+                story_text: |4
 
-                    Plus är enkelt, du skriver det som med matematik: `5 + 5` till exempel. Minus fungerar också bra, det är `5 - 5`.
+                      På den här nivån lär du dig något nytt: du kan nu också räkna ut saker.
 
-                    Gånger är lite annorlunda, eftersom det inte finns någon gångersymbol på tangentbordet. Sök bara, det finns verkligen inte!
-                    Det är därför vi multiplicerar med asterisken till vänster om ä: `5 * 5`. Läs det som '5 gånger 5' – det är bästa minnesregeln.
+                      Plus är enkelt, du skriver det som med matematik: `5 + 5` till exempel. Minus fungerar också bra, det är `5 - 5`.
+
+                      Gånger är lite annorlunda, eftersom det inte finns någon gångersymbol på tangentbordet. Sök bara, det finns verkligen inte!
+                      Det är därför vi multiplicerar med asterisken till vänster om ä: `5 * 5`. Läs det som '5 gånger 5' – det är bästa minnesregeln.
                 example_code: |
                     ```
                     {print} '5 plus 5 är ' 5 + 5
