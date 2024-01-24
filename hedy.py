@@ -3374,7 +3374,7 @@ def preprocess_ifs(code, lang='en'):
         # if this line starts with if but does not contain an else, and the next non-empty line too is not an else.
         if (starts_with('if', line) or starts_with_after_repeat('if', line)) and (not starts_with('else', next_non_empty_line(lines, i))) and (not contains('else', line)):
             # is this line just a condition and no other keyword (because that is no problem)
-            commands = ["print", "ask", "forward", "turn"]
+            commands = ["print", "ask", "forward", "turn", "play"]
             excluded_commands = ["pressed"]
 
             if (
