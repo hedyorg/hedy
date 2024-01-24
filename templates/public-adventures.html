@@ -63,7 +63,7 @@
                         else if not arrow.classList.contains('rotate-180')
                             add .rotate-180 to arrow
                         end">
-                    <div class="option" value="">{{_('select_lang')}}</div>
+                    <div class="option default" value="">{{_('select_lang')}}</div>
                     {% for lang in available_languages %}
                         <div class="option {% if lang == selectedLang %}selected{% endif %}" data-value="{{lang}}">{{lang_to_sym(lang)}}</div>
                     {% endfor %}

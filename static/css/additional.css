@@ -234,7 +234,7 @@ div[data-te-input-notch-ref] {
     background-color: rgb(0 0 0 / 0.05);
   }
 
-  &.selected::after {
+  &:not(.default).selected::after {
     content: "✓";
     margin: 1em;
   }
