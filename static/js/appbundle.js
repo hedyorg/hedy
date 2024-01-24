@@ -76889,8 +76889,8 @@ pygame.quit()
     setTimeout(() => {
       if (!levelSelect)
         return;
-      const level2 = levelSelect.getAttribute("data-value") || "";
-      const cloneBtn = document.getElementById(`clone_adventure_btn_${level2}`);
+      const level3 = levelSelect.getAttribute("data-value") || "";
+      const cloneBtn = document.getElementById(`clone_adventure_btn_${level3}`);
       cloneBtn == null ? void 0 : cloneBtn.addEventListener("click", handleCloning);
     }, 500);
   });
@@ -76925,10 +76925,10 @@ pygame.quit()
   function updateURL() {
     const queryString = window.location.search;
     const urlParams = new URLSearchParams(queryString);
-    const level2 = levelSelect.getAttribute("data-value") || "";
+    const level3 = levelSelect.getAttribute("data-value") || "";
     const lanugage = languageSelect.getAttribute("data-value") || "";
     const tags2 = tagsSelect.getAttribute("data-value") || "";
-    urlParams.set("level", level2);
+    urlParams.set("level", level3);
     urlParams.set("lang", lanugage);
     urlParams.set("tag", tags2);
     if (searchInput) {
@@ -76939,10 +76939,10 @@ pygame.quit()
   async function updateDOM() {
     if (!levelSelect || !languageSelect || !tagsSelect)
       return;
-    const level2 = levelSelect.getAttribute("data-value") || "";
+    const level3 = levelSelect.getAttribute("data-value") || "";
     const lanugage = languageSelect.getAttribute("data-value") || "";
     const tags2 = tagsSelect.getAttribute("data-value") || "";
-    const response = await fetch(`public-adventures/filter?tag=${tags2}&lang=${lanugage}&level=${level2}&search=${searchInput == null ? void 0 : searchInput.value}`, {
+    const response = await fetch(`public-adventures/filter?tag=${tags2}&lang=${lanugage}&level=${level3}&search=${searchInput == null ? void 0 : searchInput.value}`, {
       method: "GET",
       keepalive: true,
       headers: {
@@ -76962,7 +76962,7 @@ pygame.quit()
         javascriptPageOptions: js
       });
       initializeHighlightedCodeBlocks(publicAdventuresBody);
-      const cloneBtn = document.getElementById(`clone_adventure_btn_${level2}`);
+      const cloneBtn = document.getElementById(`clone_adventure_btn_${level3}`);
       cloneBtn == null ? void 0 : cloneBtn.addEventListener("click", handleCloning);
     }
   }
