@@ -36,6 +36,10 @@ with open('prefixes/normal.py', encoding='utf-8') as f:
 with open('prefixes/pygame.py', encoding='utf-8') as f:
     PYGAME_PREFIX_CODE = f.read()
 
+# Define code that will be used if music code is used
+with open('prefixes/music.py', encoding='utf-8') as f:
+    MUSIC_PREFIX_CODE = f.read()
+
 
 class Timer:
     """A quick and dirty timer."""
@@ -379,3 +383,13 @@ def get_unanswered_questions(survey, new_questions):
             i += 1
 
     return unanswered_questions, db
+
+
+def find_prev_next_levels(level_list, target_level):
+    sorted_levels = level_list
+    index = sorted_levels.index(target_level)
+
+    prev_level = sorted_levels[index - 1] if index > 0 else None
+    next_level = sorted_levels[index + 1] if index < len(sorted_levels) - 1 else None
+
+    return prev_level, next_level

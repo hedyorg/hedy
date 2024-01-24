@@ -7,16 +7,17 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2023-12-08 17:32-0400\n"
-"PO-Revision-Date: 2023-12-05 21:36+0000\n"
+"POT-Creation-Date: 2024-01-18 10:49+0100\n"
+"PO-Revision-Date: 2024-01-19 14:28+0000\n"
 "Last-Translator: Prefill add-on <noreply-addon-prefill@weblate.org>\n"
-"Language: hi\n"
 "Language-Team: hi <LL@li.org>\n"
-"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"Language: hi\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Generated-By: Babel 2.11.0\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 5.4-dev\n"
+"Generated-By: Babel 2.14.0\n"
 
 #, fuzzy
 msgid "Access Before Assign"
@@ -24,6 +25,10 @@ msgstr "You tried to use the variable {name} on line {access_line_number}, but y
 
 msgid "Cyclic Var Definition"
 msgstr "नाम {variable} को is कमांड के दाईं ओर उपयोग करने से पहले सेट करने की आवश्यकता है"
+
+#, fuzzy
+msgid "Function Undefined"
+msgstr "You tried to use the function {name}, but you didn't define it।"
 
 msgid "Has Blanks"
 msgstr "आपका कोड अधूरा है। इसमें रिक्त स्थान हैं जिन्हें आपको कोड से बदलना होगा।"
@@ -64,12 +69,20 @@ msgstr "आपने ask से पहले एक echo का उपयोग 
 msgid "Lonely Text"
 msgstr "It looks like you forgot to use a command with the text you put in line {line_number}"
 
+#, fuzzy
+msgid "Missing Additional Command"
+msgstr "It looks like you forgot to complete writing {command} on line {line_number}।"
+
 msgid "Missing Command"
 msgstr "ऐसा लगता है कि आप {line_number} लाइन पर कमांड का उपयोग करना भूल गए हैं।"
 
 #, fuzzy
 msgid "Missing Inner Command"
 msgstr "ऐसा लगता है कि आप {line_number} लाइन पर कमांड का उपयोग करना भूल गए हैं।"
+
+#, fuzzy
+msgid "Missing Variable"
+msgstr "It looks like your {command} is missing a variable at the start of the line."
 
 #, fuzzy
 msgid "Misspelled At Command"
@@ -112,11 +125,19 @@ msgstr "गैर-पूर्णांक संख्याएं अभी �
 msgid "Unsupported String Value"
 msgstr "Text values cannot contain {invalid_value}."
 
+#, fuzzy
+msgid "Unused Variable"
+msgstr "You defined the variable {variable_name} on line {line_number}, but you did not use it।"
+
 msgid "Var Undefined"
 msgstr "आपने वेरिएबल {name} का उपयोग करने का प्रयास किया, लेकिन आपने इसे सेट नहीं किया। यह भी संभव है कि आप {name} शब्द का उपयोग करने की कोशिश कर रहे थे लेकिन उद्धरण चिह्नों को भूल गए।"
 
 msgid "Wrong Level"
 msgstr "वह सही हैडी कोड था, लेकिन सही स्तर पर नहीं। आपने {offending_keyword}  स्तर  {working_level} के लिए लिखा है। युक्ति: {tip}"
+
+#, fuzzy
+msgid "Wrong Number of Arguments"
+msgstr "Your function used the wrong number of arguments. You provided {used_number} but the function {name} needs {defined_number}"
 
 msgid "account_overview"
 msgstr "खाता निरीक्षण"
@@ -165,6 +186,10 @@ msgstr "स्तर {level} पर जाएँ"
 msgid "adventure"
 msgstr "साहसिक कार्य "
 
+#, fuzzy
+msgid "adventure_cloned"
+msgstr "Adventure is cloned"
+
 msgid "adventure_duplicate"
 msgstr "आपके पास पहले से ही इस नाम का एक adventure है"
 
@@ -202,8 +227,9 @@ msgstr "adventure अद्यतन किया गया है!"
 msgid "adventures"
 msgstr "Available Adventures"
 
+#, fuzzy
 msgid "adventures_info"
-msgstr ""
+msgstr "Each Hedy level has built-in exercises for students, which we call adventures. You can create your own adventures and add them to your classes. With your own adventures you can create adventures that are relevant and interesting for your students. You can find more information about creating your own adventures <a href=\"https://hedy.org/for-teachers/manual/features\">here</a>।"
 
 #, fuzzy
 msgid "adventures_restored"
@@ -255,6 +281,10 @@ msgstr "प्रोग्राम सहेजे गए"
 
 msgid "amount_submitted"
 msgstr "्रस्तुत प्रोग्राम "
+
+#, fuzzy
+msgid "apply_filters"
+msgstr "Apply filters"
 
 msgid "are_you_sure"
 msgstr "क्या आपको यकीन है? आप इस क्रिया को लौटा नहीं सकते| "
@@ -359,8 +389,17 @@ msgstr "What is the gender balance in your class?"
 msgid "class_survey_question4"
 msgstr "What distinguishes your students from others?"
 
+#, fuzzy
 msgid "classes_info"
-msgstr ""
+msgstr "Create a class to follow the progress of each student in dashboard, and to customize the adventures your students see, and even adding your own! You can create as many classes as you like, and each class can have multiple teachers each one with different roles. You can also add as many students as you want, but mind that each student can only be in one class at a time. You can find more information about classes in the <a href=\"https://hedy.org/for-teachers/manual/preparations#for-teachers\">teacher manual</a>।"
+
+#, fuzzy
+msgid "clone"
+msgstr "Clone"
+
+#, fuzzy
+msgid "cloned_times"
+msgstr "Clones"
 
 #, fuzzy
 msgid "close"
@@ -577,6 +616,10 @@ msgstr "Echo and ask mismatch"
 msgid "echo_out"
 msgstr "स्तर 2  में शुरू करने पर  अब echo की आवश्यकता नहीं है। आप एक उत्तर को ask के साथ दोहरा सकते हैं और अभी प्रिंट कर सकते हैं। उदाहरण: name is ask आपको क्या कहा जाता है? print हैलो name"
 
+#, fuzzy
+msgid "edit_adventure"
+msgstr "Edit adventure"
+
 msgid "edit_code_button"
 msgstr "कोड को संपादित करें"
 
@@ -622,6 +665,10 @@ msgstr "वह ईमेल पहले से ही उपयोग में
 
 msgid "exists_username"
 msgstr "वह उपयोगकर्तानाम पहले से ही उपयोग में है|"
+
+#, fuzzy
+msgid "exit_preview_mode"
+msgstr "Exit preview mode"
 
 msgid "experience_invalid"
 msgstr "कृपया एक मान्य अनुभव चुनें, चुनें (हां, नहीं)"
@@ -966,6 +1013,9 @@ msgstr "You're in a class where this level has not been made available yet"
 msgid "level_title"
 msgstr "स्तर"
 
+msgid "levels"
+msgstr ""
+
 #, fuzzy
 msgid "link"
 msgstr "लॉगिन"
@@ -1160,6 +1210,10 @@ msgid "no_accounts"
 msgstr "There are no accounts to create."
 
 #, fuzzy
+msgid "no_adventures_yet"
+msgstr "There are no public adventures yet..।"
+
+#, fuzzy
 msgid "no_certificate"
 msgstr "This user hasn't earned the Hedy Certificate of Completion"
 
@@ -1275,6 +1329,9 @@ msgstr "एक और पाठ भाषा"
 msgid "overwrite_warning"
 msgstr "आपके पास पहले से ही इस नाम का एक प्रोग्राम है, इस प्रोग्राम को सहेजने से पुराना प्रोग्राम अधिलेखित हो जाएगा। क्या आपको यकीन है?"
 
+msgid "owner"
+msgstr ""
+
 msgid "page"
 msgstr "पृष्ठ"
 
@@ -1354,6 +1411,13 @@ msgstr "पसंदीदा भाषा"
 msgid "preview"
 msgstr "पूर्वावलोकन"
 
+msgid "previewing_adventure"
+msgstr ""
+
+#, fuzzy
+msgid "previewing_class"
+msgstr "You are previewing class <em>{class_name}</em> as a teacher।"
+
 #, fuzzy
 msgid "previous_campaigns"
 msgstr "View previous campaigns"
@@ -1422,6 +1486,9 @@ msgstr "क्या आप इस कक्षा में शामिल ह
 msgid "public"
 msgstr "Public"
 
+msgid "public_adventures"
+msgstr "Browse public adventures"
+
 msgid "public_invalid"
 msgstr "यह अनुबंध चयन अमान्य है"
 
@@ -1488,6 +1555,10 @@ msgstr "Confirm removing this user from the class।"
 #, fuzzy
 msgid "repair_program_logo_alt"
 msgstr "Repair program icon"
+
+#, fuzzy
+msgid "repeat_dep"
+msgstr "Starting in level 8, {repeat} needs to be used with indentation. You can see examples on the {repeat} tab in level 8।"
 
 msgid "repeat_match_password"
 msgstr "दोहराया हुआ सांकेतिक शब्द मेल नहीं खाता|"
@@ -1583,6 +1654,9 @@ msgstr "कोड को सहेजें और साझा करें"
 msgid "second_teacher"
 msgstr "Second teacher"
 
+msgid "second_teacher_copy_prompt"
+msgstr ""
+
 #, fuzzy
 msgid "second_teacher_prompt"
 msgstr "Enter a teacher username to invite them।"
@@ -1600,6 +1674,20 @@ msgstr "चुनें"
 
 msgid "select_adventures"
 msgstr "adventures का चयन करें"
+
+msgid "select_all"
+msgstr ""
+
+#, fuzzy
+msgid "select_lang"
+msgstr "Select language"
+
+#, fuzzy
+msgid "select_tag"
+msgstr "Select tag"
+
+msgid "selected"
+msgstr ""
 
 msgid "self_removal_prompt"
 msgstr "क्या आप वाकई इस कक्षा को छोड़ना चाहते हैं?"
@@ -1643,11 +1731,13 @@ msgstr "एक उद्धरण चिन्ह"
 msgid "slash"
 msgstr "एक स्लैश"
 
+#, fuzzy
 msgid "slides"
-msgstr ""
+msgstr "Slides"
 
+#, fuzzy
 msgid "slides_info"
-msgstr ""
+msgstr "For each level of Hedy, we have created slides to help you teach. The slides contain explanations of each level, and Hedy examples that you can run inside the slides. Just click the link and get started! the Introduction slides are a general explanation of Hedy before level 1 The slides were created using <a href=\"https://slides.com\">slides.com</a>. If you want to adapt them yourself, you can download them, and then upload the resulting zip file to <a href=\"https://slides.com\">slides.com</a>. You can find more information about the slides in the <a href=\"https://hedy.org/for-teachers/manual/features\">teacher's manual</a>।"
 
 #, fuzzy
 msgid "social_media"
@@ -1709,6 +1799,9 @@ msgstr ""
 msgid "student_list"
 msgstr "Student list"
 
+msgid "student_not_allowed_in_class"
+msgstr ""
+
 msgid "student_not_existing"
 msgstr "यह उपयोगकर्ता नाम मौजूद नहीं है"
 
@@ -1751,12 +1844,22 @@ msgid "suggestion_color"
 msgstr "Try using another color"
 
 #, fuzzy
+msgid "suggestion_note"
+msgstr "Use a note between C0 and B9 or a number between 1 and 70"
+
+#, fuzzy
 msgid "suggestion_number"
 msgstr "Try changing the value to a number"
 
 #, fuzzy
 msgid "surname"
 msgstr "उपयोगकर्ता नाम"
+
+msgid "survey"
+msgstr ""
+
+msgid "survey_completed"
+msgstr ""
 
 #, fuzzy
 msgid "survey_skip"
@@ -1897,6 +2000,9 @@ msgstr "Hedy - Privacy terms"
 #, fuzzy
 msgid "title_programs"
 msgstr "Hedy - My programs"
+
+msgid "title_public-adventures"
+msgstr ""
 
 #, fuzzy
 msgid "title_recover"
@@ -2226,4 +2332,3 @@ msgstr "Your program"
 
 #~ msgid "no_tags"
 #~ msgstr "No tags yet।"
-

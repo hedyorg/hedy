@@ -173,6 +173,7 @@ class HedyTester(unittest.TestCase):
             skipped_mappings: 'list[SkippedMapping]' = None,
             extra_check_function=None,
             expected_commands=None,
+            unused_allowed=False,
             lang='en',
             translate=True,
             output=None,
@@ -204,6 +205,7 @@ class HedyTester(unittest.TestCase):
                 skipped_mappings=skipped_mappings,
                 extra_check_function=extra_check_function,
                 expected_commands=expected_commands,
+                unused_allowed=unused_allowed,
                 lang=lang,
                 translate=translate,
                 output=output,
@@ -220,6 +222,7 @@ class HedyTester(unittest.TestCase):
             extra_check_function=None,
             output=None,
             expected_commands=None,
+            unused_allowed=False,
             lang='en',
             translate=True,
             skip_faulty=True,
@@ -247,7 +250,7 @@ class HedyTester(unittest.TestCase):
 
         if not self.snippet_already_tested_with_current_hedy_version(test_hash):
             if skipped_mappings is not None:
-                result = hedy.transpile(code, level, lang, skip_faulty=skip_faulty)
+                result = hedy.transpile(code, level, lang, skip_faulty=skip_faulty, unused_allowed=unused_allowed)
                 for skipped in skipped_mappings:
                     result_error = result.source_map.get_error_from_hedy_source_range(skipped.source_range)
                     self.assertEqual(expected, result.code)
@@ -257,11 +260,12 @@ class HedyTester(unittest.TestCase):
             else:
                 if exception is not None:
                     with self.assertRaises(exception) as context:
-                        result = hedy.transpile(code, level, lang, skip_faulty=skip_faulty)
+                        result = hedy.transpile(code, level, lang, skip_faulty=skip_faulty,
+                                                unused_allowed=unused_allowed)
                     if extra_check_function is not None:
                         self.assertTrue(extra_check_function(context))
                 else:
-                    result = hedy.transpile(code, level, lang, skip_faulty=skip_faulty)
+                    result = hedy.transpile(code, level, lang, skip_faulty=skip_faulty, unused_allowed=unused_allowed)
                     if expected is not None:
                         self.assertEqual(expected, result.code)
 
@@ -269,7 +273,8 @@ class HedyTester(unittest.TestCase):
                     if expected_commands is not None:
                         self.assertEqual(expected_commands, all_commands)
                     # <- use this to run tests locally with unittest
-                    if ('ask' not in all_commands) and ('input' not in all_commands) and ('clear' not in all_commands):
+                    skipped_commands = ['ask', 'input', 'clear', 'play']
+                    if not any(x for x in all_commands):
                         self.assertTrue(self.validate_Python_code(result))
                     if output is not None:
                         if extra_check_function is None:  # most programs have no turtle so make that the default

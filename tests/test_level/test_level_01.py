@@ -286,6 +286,36 @@ class TestsLevel1(HedyTester):
             translate=False  # we are trying a Dutch keyword in en, can't be translated
         )
 
+    def test_play(self):
+        code = "play A"
+        expected = textwrap.dedent("""\
+        if 'A' not in notes_mapping.keys() and 'A' not in notes_mapping.values():
+            raise Exception('catch_value_exception')
+        play(notes_mapping.get(str('A'), str('A')))
+        time.sleep(0.5)""")
+
+        self.multi_level_tester(
+            code=code,
+            translate=False,
+            expected=expected,
+            max_level=17
+        )
+
+    def test_play_lowercase(self):
+        code = "play a"
+        expected = textwrap.dedent("""\
+        if 'A' not in notes_mapping.keys() and 'A' not in notes_mapping.values():
+            raise Exception('catch_value_exception')
+        play(notes_mapping.get(str('A'), str('A')))
+        time.sleep(0.5)""")
+
+        self.multi_level_tester(
+            code=code,
+            translate=False,
+            expected=expected,
+            max_level=17
+        )
+
     def test_mixes_languages_nl_en(self):
         code = textwrap.dedent("""\
         vraag Heb je er zin in?
@@ -636,6 +666,29 @@ class TestsLevel1(HedyTester):
             expected=expected,
             skipped_mappings=skipped_mappings,
             max_level=1)
+
+    def test_lines_with_spaces_english_gives_invalid(self):
+        code = textwrap.dedent("""\
+         print Hallo welkom bij Hedy!
+            print Hallo welkom bij Hedy!""")
+
+        self.multi_level_tester(
+            code=code,
+            exception=hedy.exceptions.InvalidSpaceException,
+            skip_faulty=False,
+            max_level=3)
+
+    def test_lines_with_spaces_french_gives_invalid(self):
+        code = textwrap.dedent("""\
+         affiche Bonjour Hedy!
+            affiche Bonjour Hedy!""")
+
+        self.multi_level_tester(
+            code=code,
+            exception=hedy.exceptions.InvalidSpaceException,
+            skip_faulty=False,
+            lang='fr',
+            max_level=3)
 
     def test_lines_with_spaces_gives_invalid(self):
         code = " print Hallo welkom bij Hedy!\n print Hallo welkom bij Hedy!"

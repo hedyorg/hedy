@@ -7,16 +7,17 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2023-12-08 17:32-0400\n"
-"PO-Revision-Date: 2023-12-05 21:36+0000\n"
+"POT-Creation-Date: 2024-01-18 10:49+0100\n"
+"PO-Revision-Date: 2024-01-19 14:28+0000\n"
 "Last-Translator: Prefill add-on <noreply-addon-prefill@weblate.org>\n"
-"Language: nb_NO\n"
 "Language-Team: nb_NO <LL@li.org>\n"
-"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"Language: nb_NO\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Generated-By: Babel 2.11.0\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 5.4-dev\n"
+"Generated-By: Babel 2.14.0\n"
 
 #, fuzzy
 msgid "Access Before Assign"
@@ -24,6 +25,10 @@ msgstr "You tried to use the variable {name} on line {access_line_number}, but y
 
 msgid "Cyclic Var Definition"
 msgstr "Variabelen {variable} må opprettes og gis en verdi før du kan bruke den på høyre siden av hvis-kommandoen"
+
+#, fuzzy
+msgid "Function Undefined"
+msgstr "You tried to use the function {name}, but you didn't define it."
 
 msgid "Has Blanks"
 msgstr "Koden din er uferdig. Den inneholder tomrom du må erstatte med kode."
@@ -64,12 +69,20 @@ msgstr "Du brukte ekko før spør-kommandoen, eller ekko uten å bruke spør-kom
 msgid "Lonely Text"
 msgstr "It looks like you forgot to use a command with the text you put in line {line_number}"
 
+#, fuzzy
+msgid "Missing Additional Command"
+msgstr "It looks like you forgot to complete writing {command} on line {line_number}."
+
 msgid "Missing Command"
 msgstr "Det ser ut som du glemte å bruke en kommando på linje line {line_number}."
 
 #, fuzzy
 msgid "Missing Inner Command"
 msgstr "Det ser ut som du glemte å bruke en kommando på linje line {line_number}."
+
+#, fuzzy
+msgid "Missing Variable"
+msgstr "It looks like your {command} is missing a variable at the start of the line."
 
 #, fuzzy
 msgid "Misspelled At Command"
@@ -111,11 +124,19 @@ msgstr "Desimaltall er ikke støttet enda, men de er det om noen nivåer. Du må
 msgid "Unsupported String Value"
 msgstr "Text values cannot contain {invalid_value}."
 
+#, fuzzy
+msgid "Unused Variable"
+msgstr "You defined the variable {variable_name} on line {line_number}, but you did not use it."
+
 msgid "Var Undefined"
 msgstr "Du prøvde å bruke variabelen {name}, men den finnes ikke. Det kan også være at du prøvde å bruke ordet {name} men at du glemte apostrof-tegnene."
 
 msgid "Wrong Level"
 msgstr "Det var korrekt Hedy kode, men det var feil nivå. Du skrev {offending_keyword} for nivå {working_level}. Tips: {tip}"
+
+#, fuzzy
+msgid "Wrong Number of Arguments"
+msgstr "Your function used the wrong number of arguments. You provided {used_number} but the function {name} needs {defined_number}"
 
 msgid "account_overview"
 msgstr "Kontooversikt"
@@ -162,6 +183,10 @@ msgstr "Gå til nivå {level}"
 msgid "adventure"
 msgstr "Eventyr"
 
+#, fuzzy
+msgid "adventure_cloned"
+msgstr "Adventure is cloned"
+
 msgid "adventure_duplicate"
 msgstr "Du har allerede et eventyr med dette navnet."
 
@@ -199,8 +224,9 @@ msgstr "Eventyret har blitt oppdatert!"
 msgid "adventures"
 msgstr "Available Adventures"
 
+#, fuzzy
 msgid "adventures_info"
-msgstr ""
+msgstr "Each Hedy level has built-in exercises for students, which we call adventures. You can create your own adventures and add them to your classes. With your own adventures you can create adventures that are relevant and interesting for your students. You can find more information about creating your own adventures <a href=\"https://hedy.org/for-teachers/manual/features\">here</a>."
 
 #, fuzzy
 msgid "adventures_restored"
@@ -250,6 +276,10 @@ msgstr "programmer lagret"
 
 msgid "amount_submitted"
 msgstr "programmer sendt inn"
+
+#, fuzzy
+msgid "apply_filters"
+msgstr "Apply filters"
 
 msgid "are_you_sure"
 msgstr "Er du sikker? Du kan ikke angre på denne handlingen."
@@ -352,8 +382,17 @@ msgstr "What is the gender balance in your class?"
 msgid "class_survey_question4"
 msgstr "What distinguishes your students from others?"
 
+#, fuzzy
 msgid "classes_info"
-msgstr ""
+msgstr "Create a class to follow the progress of each student in dashboard, and to customize the adventures your students see, and even adding your own! You can create as many classes as you like, and each class can have multiple teachers each one with different roles. You can also add as many students as you want, but mind that each student can only be in one class at a time. You can find more information about classes in the <a href=\"https://hedy.org/for-teachers/manual/preparations#for-teachers\">teacher manual</a>."
+
+#, fuzzy
+msgid "clone"
+msgstr "Clone"
+
+#, fuzzy
+msgid "cloned_times"
+msgstr "Clones"
 
 #, fuzzy
 msgid "close"
@@ -568,6 +607,10 @@ msgstr ""
 "navn er spør Hva heter du?\n"
 "skriv hallo navn"
 
+#, fuzzy
+msgid "edit_adventure"
+msgstr "Edit adventure"
+
 msgid "edit_code_button"
 msgstr "Endre kode"
 
@@ -613,6 +656,10 @@ msgstr "Eposten er allerede i bruk."
 
 msgid "exists_username"
 msgstr "Brukernavn er allerede i bruk."
+
+#, fuzzy
+msgid "exit_preview_mode"
+msgstr "Exit preview mode"
 
 msgid "experience_invalid"
 msgstr "Vennligst velg svar på spørsmål om programmeringserfaring (Ja/Nei)."
@@ -948,6 +995,9 @@ msgstr "Klassen din har ikke tilgang til dette nivået enda"
 msgid "level_title"
 msgstr "Nivå"
 
+msgid "levels"
+msgstr ""
+
 #, fuzzy
 msgid "link"
 msgstr "Logg inn"
@@ -1134,6 +1184,10 @@ msgid "no_accounts"
 msgstr "Det er ingen oppgitte kontoer å opprette."
 
 #, fuzzy
+msgid "no_adventures_yet"
+msgstr "There are no public adventures yet..."
+
+#, fuzzy
 msgid "no_certificate"
 msgstr "This user hasn't earned the Hedy Certificate of Completion"
 
@@ -1244,6 +1298,9 @@ msgstr "Et annet tekstspråk"
 msgid "overwrite_warning"
 msgstr "Du har allerede et program med dette navnet. Hvis du lagrer programmet vil det overskrive det gamle, er du sikker?"
 
+msgid "owner"
+msgstr ""
+
 msgid "page"
 msgstr "side"
 
@@ -1321,6 +1378,13 @@ msgstr "Foretrukket språk"
 msgid "preview"
 msgstr "Forhåndsvis"
 
+msgid "previewing_adventure"
+msgstr ""
+
+#, fuzzy
+msgid "previewing_class"
+msgstr "You are previewing class <em>{class_name}</em> as a teacher."
+
 msgid "previous_campaigns"
 msgstr "Se tidligere kampanjer"
 
@@ -1381,6 +1445,9 @@ msgstr "Vil du bli med i denne klassen?"
 #, fuzzy
 msgid "public"
 msgstr "Public"
+
+msgid "public_adventures"
+msgstr "Browse public adventures"
 
 msgid "public_invalid"
 msgstr "Dette avtale valget er ugyldig"
@@ -1448,6 +1515,10 @@ msgstr "Confirm removing this user from the class."
 #, fuzzy
 msgid "repair_program_logo_alt"
 msgstr "Repair program icon"
+
+#, fuzzy
+msgid "repeat_dep"
+msgstr "Starting in level 8, {repeat} needs to be used with indentation. You can see examples on the {repeat} tab in level 8."
 
 msgid "repeat_match_password"
 msgstr "Passordene du fylte inn er ikke like."
@@ -1539,6 +1610,9 @@ msgstr "Search"
 msgid "second_teacher"
 msgstr "Second teacher"
 
+msgid "second_teacher_copy_prompt"
+msgstr ""
+
 #, fuzzy
 msgid "second_teacher_prompt"
 msgstr "Enter a teacher username to invite them."
@@ -1556,6 +1630,20 @@ msgstr "Velg"
 
 msgid "select_adventures"
 msgstr "Velg eventyr"
+
+msgid "select_all"
+msgstr ""
+
+#, fuzzy
+msgid "select_lang"
+msgstr "Select language"
+
+#, fuzzy
+msgid "select_tag"
+msgstr "Select tag"
+
+msgid "selected"
+msgstr ""
 
 msgid "self_removal_prompt"
 msgstr "Er du sikker på at du vil forlate denne klassen?"
@@ -1599,11 +1687,13 @@ msgstr "en enkelapostrof"
 msgid "slash"
 msgstr "en skråstrek"
 
+#, fuzzy
 msgid "slides"
-msgstr ""
+msgstr "Slides"
 
+#, fuzzy
 msgid "slides_info"
-msgstr ""
+msgstr "For each level of Hedy, we have created slides to help you teach. The slides contain explanations of each level, and Hedy examples that you can run inside the slides. Just click the link and get started! the Introduction slides are a general explanation of Hedy before level 1 The slides were created using <a href=\"https://slides.com\">slides.com</a>. If you want to adapt them yourself, you can download them, and then upload the resulting zip file to <a href=\"https://slides.com\">slides.com</a>. You can find more information about the slides in the <a href=\"https://hedy.org/for-teachers/manual/features\">teacher's manual</a>."
 
 #, fuzzy
 msgid "social_media"
@@ -1666,6 +1756,9 @@ msgstr ""
 msgid "student_list"
 msgstr "Student list"
 
+msgid "student_not_allowed_in_class"
+msgstr ""
+
 msgid "student_not_existing"
 msgstr "Dette brukernavnet eksisterer ikke."
 
@@ -1707,11 +1800,21 @@ msgid "suggestion_color"
 msgstr "Try using another color"
 
 #, fuzzy
+msgid "suggestion_note"
+msgstr "Use a note between C0 and B9 or a number between 1 and 70"
+
+#, fuzzy
 msgid "suggestion_number"
 msgstr "Try changing the value to a number"
 
 msgid "surname"
 msgstr "Fornavn"
+
+msgid "survey"
+msgstr ""
+
+msgid "survey_completed"
+msgstr ""
 
 #, fuzzy
 msgid "survey_skip"
@@ -1836,6 +1939,9 @@ msgstr "Hedy - Personvernsvilkår"
 
 msgid "title_programs"
 msgstr "Hedy - Mine programmer"
+
+msgid "title_public-adventures"
+msgstr ""
 
 msgid "title_recover"
 msgstr "Hedy - Gjennopprett konto"
@@ -2160,4 +2266,3 @@ msgstr "Your program"
 
 #~ msgid "no_tags"
 #~ msgstr "No tags yet."
-

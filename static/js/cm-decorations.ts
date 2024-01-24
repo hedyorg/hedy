@@ -1,6 +1,10 @@
 import { Decoration, DecorationSet, EditorView, GutterMarker, MatchDecorator, ViewPlugin, ViewUpdate, gutter, } from '@codemirror/view'
-import { RangeSet, StateEffect, StateField } from '@codemirror/state'
-
+import { RangeSet, RangeSetBuilder, StateEffect, StateField } from '@codemirror/state'
+import { IndentContext } from '@codemirror/language'
+import {syntaxTree} from "@codemirror/language"
+import { WidgetType } from "@codemirror/view"
+import { SyntaxNode } from "@lezer/common"
+import { level as levelFacet } from './cm-editor';
 
 export const addErrorLine = StateEffect.define<{ row: number }>();
 export const addErrorWord = StateEffect.define<{ row: number, col: number }>();
@@ -154,6 +158,8 @@ const debugLine = Decoration.line({ class: "cm-debugger-current-line" });
 const debugWord = Decoration.mark({ class: "cm-debugger-current-line" });
 const incorrectCodeMark = Decoration.mark({ class: "cm-incorrect-hedy-code" });
 const deactivateLineMarker = Decoration.line({ class: "cm-disabled-line" })
+const highlightVariableMarker = Decoration.mark({ class: "cm-highlight-var"})
+const highlightFunctionMarker = Decoration.mark({ class: "cm-highlight-fun"})
 
 export const decorationsTheme = EditorView.theme({
     ".cm-error-editor": {
@@ -166,6 +172,12 @@ export const decorationsTheme = EditorView.theme({
     },
     ".cm-incorrect-hedy-code": {
         textDecoration: "red wavy underline",
+    },
+    ".cm-highlight-var": {
+        color: '#c2e3ff ',
+    },
+    ".cm-highlight-fun": {
+        color: "#EDF492",
     }
 });
 
@@ -210,7 +222,6 @@ export const breakpointGutter = [
         }
     })
 ]
-import { WidgetType } from "@codemirror/view"
 
 class PlacheholderWidget extends WidgetType {
     constructor(readonly space: string, readonly placeholder: string) { super() }
@@ -248,3 +259,191 @@ export const placeholders = ViewPlugin.fromClass(class {
       return view.plugin(plugin)?.placeholders || Decoration.none
     })
 })
+
+export const variableHighlighter = ViewPlugin.fromClass(class {
+    decorations: DecorationSet
+    constructor(view: EditorView) {
+      this.decorations = highlightVariables(view)
+    }
+    update(update: ViewUpdate) {
+      if (update.docChanged || update.viewportChanged) {
+        this.decorations = highlightVariables(update.view)
+      }
+    }
+  }, {
+    decorations: v => v.decorations
+})
+interface VariableData { 
+    name: string, 
+    type: "function" | "variable",
+    pos: { from: number, to: number } 
+}
+
+function highlightVariables(view: EditorView) {
+    const level = view.state.facet(levelFacet);
+    // double equals because level is actually an array with just one element
+    // like: [1]
+    if (level == 1) return Decoration.none;
+    let variableDeco = new RangeSetBuilder<Decoration>();
+    let variableData: VariableData[] = []
+    let functionsNames = new Set<string>()
+    let variablesNames = new Set<string>()
+
+    let definingCommands = [
+        'Assign' , 
+        'Ask' , 
+        'AssignList' , 
+        'For',
+        "Input"
+    ]
+    // First we iterate through the tree to find all var assignments
+    // To highlight them, but also to find the names of the variables
+    // For later use in other rules
+    for (let {from, to} of view.visibleRanges) {
+        syntaxTree(view.state).iterate({
+            from: from,
+            to: to,
+            enter: (node) => {
+                if (definingCommands.includes(node.node.name)) {
+                    const child = node.node.getChild('Text');
+                    addVar(child, variableData, 'variable', view, functionsNames, variablesNames);                    
+                } else if (node.node.name  === 'Define') {                    
+                   const textChild = node.node.getChild('Text')
+                    addVar(textChild, variableData, 'function', view, functionsNames, variablesNames)
+                    // we need to get the parameter nodes that are within define nodes
+                    const argumentChild = node.node.getChild('Arguments')
+                    const expressions = argumentChild?.getChildren('Expression');
+                    expressions?.map(expression => {
+                        const textChild = expression.getChild('Text')
+                        addVar(textChild, variableData, 'variable', view, functionsNames, variablesNames);
+                    })
+                }
+            }
+        })
+    }
+
+    let commands = [
+        "Assign" , 
+        "Print" , 
+        "Forward", 
+        "Turn", 
+        "Color", 
+        "Sleep", 
+        "ListAccess", 
+        "Add", 
+        "Remove",
+        "EqualityCheck",
+        "InListCheck",
+        "NotInListCheck",
+        "Expression",
+        "Repeat",
+        "For",
+        "Call"   
+    ]
+    // in levels 2 and 3 variables are not substitued inside ask
+    // not sure if that's intended behaviour or not
+    if (level > 3) commands.push("Ask")
+    // Now that we have the variable names, we can distinguish them from other Text nodes
+    for (let {from, to} of view.visibleRanges) {
+        syntaxTree(view.state).iterate({
+            from: from,
+            to: to,
+            enter: (node) => {
+                if (commands.includes(node.name)) {
+                    const children = node.node.getChildren('Text');
+                    // no need to add again the first child of defining commands since 
+                    // we already highlighted it in the previous step
+                    let i = definingCommands.includes(node.name) ? 1 : 0
+                    for (; i < children.length; i++) {
+                        const child = children[i];
+                        const text = view.state.doc.sliceString(child.from, child.to);
+                        // On level 2, since there aren't distinctions between strings and variable names
+                        // It's possible to have several variables in the same text nodes
+                        // separated by other characters like: name!!!your_name
+                        // Therefore, we need to get the variables names inside this text node
+                        if (level <= 3) {
+                            const varNames = getVarNames(text) || [];
+                            // we keep track of the index of the last variable viewed
+                            let startIndex = 0;
+                            for (const name of varNames) {
+                                if (variablesNames.has(name)) {
+                                    const index = text.indexOf(name, startIndex)
+                                    variableData.push({
+                                        name: name,
+                                        type: 'variable', // there aren't functions until level 12
+                                        pos: {from: child.from + index, to: child.from + index + name.length}
+                                    })
+                                    startIndex = index + name.length
+                                }
+                            }
+                        } else if (variablesNames.has(text) || functionsNames.has(text)) {                  
+                            variableData.push({
+                                name: text,
+                                type: variablesNames.has(text) ? 'variable' : 'function',
+                                pos: {from: child.from, to: child.to}
+                            })
+                        }
+                    }
+                }
+            }
+        })
+    }
+    // I don't think we're going to have a huge document, so this won't overflow
+    variableData.sort((a, b) => a.pos.from - b.pos.from)
+    // If the decorations aren't sorted by starting position, CodeMirror complains, hence the need to do it like this
+    variableData.forEach(data => {
+        if (data.type === "function") {
+            variableDeco.add(data.pos.from, data.pos.to, highlightFunctionMarker)
+        } else {
+            variableDeco.add(data.pos.from, data.pos.to, highlightVariableMarker)
+        }
+    })
+
+    return variableDeco.finish()
+}
+
+function getVarNames(name: string) {
+    const varRegex = /^[\p{Lu}\p{Ll}\p{Lt}\p{Lm}\p{Lo}\p{Nl}_]+([\p{Lu}\p{Ll}\p{Lt}\p{Lm}\p{Lo}\p{Nl}_]+|[\p{Mn}\p{Mc}\p{Nd}\p{Pc}·]+)*$/gmu
+    return name.match(varRegex);
+}
+
+function isVarName(name: string) {
+    const varRegex = /^[\p{Lu}\p{Ll}\p{Lt}\p{Lm}\p{Lo}\p{Nl}_]+([\p{Lu}\p{Ll}\p{Lt}\p{Lm}\p{Lo}\p{Nl}_]+|[\p{Mn}\p{Mc}\p{Nd}\p{Pc}·]+)*$/gmu
+    return varRegex.test(name);
+}
+
+export function basicIndent(context: IndentContext, pos: number) {
+    const nextIndentationSize = context.lineIndent(pos, -1);
+    let prevIndentationSize;
+    try {
+        prevIndentationSize = context.lineIndent(pos + 1, -1);
+    } catch (error) {
+        prevIndentationSize = 0;
+    }
+    const indentBy = Math.max(
+        prevIndentationSize,
+        nextIndentationSize
+    );
+    return indentBy;
+
+}
+
+function addVar(child: SyntaxNode | null, variableData: VariableData[], type: "function" | "variable", view: EditorView, functionsNames: Set<string>, variablesNames: Set<string>) {
+    if (child && isVarName(view.state.doc.sliceString(child.from, child.to))) {
+        const name = view.state.doc.sliceString(child.from, child.to);
+        const data: VariableData = {
+            name: name,
+            type: type,
+            pos: {from: child.from, to: child.to}
+        }
+        variableData.push(data);
+        switch(type) {
+            case 'function':
+                functionsNames.add(name);
+                break;
+            case 'variable':
+                variablesNames.add(name);
+                break;
+        }
+    } 
+}

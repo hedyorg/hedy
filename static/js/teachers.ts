@@ -1,14 +1,14 @@
 import { modal } from './modal';
-import { showAchievements } from "./app";
+import { showAchievements, theKeywordLanguage } from "./app";
 import { markUnsavedChanges, clearUnsavedChanges, hasUnsavedChanges } from './browser-helpers/unsaved-changes';
 import { ClientMessages } from './client-messages';
-
 import DOMPurify from 'dompurify'
 import { startTeacherTutorial } from './tutorials/tutorial';
-import { HedyAceEditorCreator } from './ace-editor';
+import { HedyCodeMirrorEditorCreator } from './cm-editor';
+import { initializeTranslation } from './lezer-parsers/tokens';
 
 declare const htmx: typeof import('./htmx');
-const editorCreator = new HedyAceEditorCreator();
+const editorCreator = new HedyCodeMirrorEditorCreator();
 
 export function create_class(class_name_prompt: string) {
   modal.prompt (class_name_prompt, '', function (class_name) {
@@ -54,18 +54,47 @@ export function rename_class(id: string, class_name_prompt: string) {
     });
 }
 
-export function duplicate_class(id: string, prompt: string, defaultValue: string = '') {
+export function duplicate_class(id: string, teacher_classes: string[], second_teacher_prompt: string, prompt: string, defaultValue: string = '') {
+  if (teacher_classes){
+    modal.confirm(second_teacher_prompt, function () {
+      apiDuplicateClass(id, prompt, true, defaultValue);
+    }, function () {
+      apiDuplicateClass(id, prompt, false, defaultValue);
+    });
+  } else {
+    apiDuplicateClass(id, prompt, false, defaultValue);
+  }
+}
+
+function apiDuplicateClass(id: string, prompt: string, second_teacher: boolean, defaultValue: string = '') {
     modal.prompt (prompt, defaultValue, function (class_name) {
     $.ajax({
       type: 'POST',
       url: '/duplicate_class',
       data: JSON.stringify({
         id: id,
-        name: class_name
+        name: class_name,
+        second_teacher: second_teacher,
       }),
       contentType: 'application/json',
       dataType: 'json'
     }).done(function(response) {
+      if (response.second_teachers && second_teacher == true){
+        for (const secondTeacher of response.second_teachers) {
+          $.ajax({
+            type: 'POST',
+            url: '/invite-second-teacher',
+            data: JSON.stringify({
+              username: secondTeacher.username,
+              class_id: response.id
+            }),
+            contentType: 'application/json',
+            dataType: 'json'
+            }).fail(function(err) {
+                modal.notifyError(err.responseText);
+            });
+        }
+      }
       if (response.achievement) {
             showAchievements(response.achievement, true, "");
           } else {
@@ -119,7 +148,7 @@ export function join_class(id: string, name: string) {
             window.location.pathname = '/login';
          });
       } else {
-          modal.notifyError(ClientMessages['Connection_error']);
+          modal.notifyError(err.responseText || ClientMessages['Connection_error']);
       }
     });
 }
@@ -181,29 +210,11 @@ export function remove_student(class_id: string, student_id: string, prompt: str
   });
 }
 
-export function create_adventure(prompt: string) {
-    modal.prompt (prompt, '', function (adventure_name) {
-        $.ajax({
-          type: 'POST',
-          url: '/for-teachers/create_adventure',
-          data: JSON.stringify({
-            name: adventure_name
-          }),
-          contentType: 'application/json',
-          dataType: 'json'
-        }).done(function(response) {
-          window.location.pathname = '/for-teachers/customize-adventure/' + response.id ;
-        }).fail(function(err) {
-          return modal.notifyError(err.responseText);
-        });
-    });
-}
-
 function update_db_adventure(adventure_id: string) {
    // Todo TB: It would be nice if we improve this with the formToJSON() function once #3077 is merged
 
    const adventure_name = $('#custom_adventure_name').val();
-   const level = $('#custom_adventure_level').val();
+   const levels = $('#custom_adventure_levels').val();
    const content = DOMPurify.sanitize(<string>$('#custom_adventure_content').val());
    const agree_public = $('#agree_public').prop('checked');
    const language = $('#language').val();
@@ -214,10 +225,10 @@ function update_db_adventure(adventure_id: string) {
       data: JSON.stringify({
         id: adventure_id,
         name: adventure_name,
-        level: level,
         content: content,
         public: agree_public,
         language,
+        levels,
       }),
       contentType: 'application/json',
       dataType: 'json'
@@ -241,8 +252,8 @@ export function update_adventure(adventure_id: string, first_edit: boolean, prom
 function show_preview(content: string) {
     const name = $('#custom_adventure_name').val();
     if (typeof name !== 'string') { throw new Error(`Expected name to be string, got '${name}'`); }
-    const level = $('#custom_adventure_level').val();
-    if (typeof level !== 'string') { throw new Error(`Expected level to be string, got '${name}'`); }
+    const levels = $('#custom_adventure_levels').val();
+    if (typeof levels !== 'object') { throw new Error(`Expected level to be a list, got '${levels}'`); }
 
     let container = $('<div>');
     container.addClass('preview border border-black px-8 py-4 text-left rounded-lg bg-gray-200 text-black');
@@ -255,9 +266,25 @@ function show_preview(content: string) {
     for (const preview of $('.preview pre').get()) {
         $(preview).addClass('text-lg rounded');
         const dir = $("body").attr("dir");
+        const codeNode = preview.querySelector('code')
+        let code: string;
+        // In case it has a child <code> node
+        if(codeNode) {
+          codeNode.hidden = true
+          code = codeNode.innerText          
+        } else {
+          code = preview.textContent || "";
+          preview.textContent = "";
+        }
         const exampleEditor = editorCreator.initializeReadOnlyEditor(preview, dir);
-        exampleEditor.contents = exampleEditor.contents.replace(/\n+$/, '');
-        exampleEditor.setHighlighterForLevel(parseInt(level, 10));                
+        exampleEditor.contents = code.trimEnd();        
+        for (const level of levels) {
+          initializeTranslation({
+            keywordLanguage: theKeywordLanguage,
+            level: parseInt(level, 10),
+          })
+          exampleEditor.setHighlighterForLevel(parseInt(level, 10));                
+        }
     }
 }
 

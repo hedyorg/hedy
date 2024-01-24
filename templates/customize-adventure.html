@@ -2,24 +2,46 @@
 
 {% block regular_content %}
 <div class="flex flex-col gap-2">
-    <h2>{{_('customize_adventure')}}: {{adventure.name}}</h2>
+    <h2>{{_('customize_adventure')}}</h2>
     <div class="border-gray-400 border rounded-lg p-4">
-        <form onsubmit="event.preventDefault (); hedyApp.update_adventure('{{ adventure.id }}', {% if adventure.content|length > 0 %}false{% else %}true{% endif %}, '{{_('update_adventure_prompt')}}')">
+        <form onsubmit="event.preventDefault (); hedyApp.update_adventure('{{ adventure.id }}', {% if adventure.content|length > 0 %}false{% else %}true{% endif %}, '{{_('update_adventure_prompt')}}')"
+            data-te-validation-init>
             <div class="flex flex-col lg:flex-row gap-4">
                 <div class="flex flex-col w-full lg:w-1/2">
                     <h3 class="text-center mt-0 mb-4">{{_('general_settings')}}</h3>
                     <div class="flex flex-row items-center mb-4">
                         <label for="name" class="inline-block w-40 text-xl">{{_('name')}}</label>
-                        <input id="custom_adventure_name" required value="{{ adventure.name }}" class="block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 ltr:pr-8 rtl:pl-8 rounded">
+                        <input id="custom_adventure_name" required value="{{ adventure.name }}" class="block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 ltr:pr-8 rtl:pl-8 rounded"{% if 'AdventureX' in adventure.name %}autofocus{% endif %}>
                     </div>
                     <div class="flex flex-row items-center mb-4">
-                        <label for="level" class="inline-block w-40 text-xl">{{_('level')}}</label>
-                        <select id="custom_adventure_level" required class="block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 ltr:pr-8 rtl:pl-8 rounded">
-                            <option disabled selected value="">{{_('level')}}</option>
-                            {% for i in range(1, (max_level + 1)) %}
-                                <option value="{{ i }}" {% if i|string == adventure.level or i == adventure.level %}selected{% endif %}>{{ i }}</option>
-                            {% endfor %}
-                        </select>
+                        <label for="custom_adventure_levels" class="inline-block w-40 text-xl"  data-te-select-label-ref>{{_('levels')}}</label>
+                                <!-- data-te-class-notch-trailing-normal="!border-gray-200" -->
+                        <div
+                            id="custom_adventure_levels_container"
+                            data-te-input-wrapper-init
+                            class="block appearance-none w-full bg-gray-200 text-gray-700 rounded">
+                            <select 
+                                id="custom_adventure_levels"
+                                name="levels"
+                                required
+                                multiple
+                                data-te-select-init
+                                data-te-select-visible-options="10"
+                                data-te-select-size="lg"
+                                data-te-select-options-selected-label="{{_('selected')}}"
+                                data-te-select-all-label="{{_('select_all')}}"
+                                data-te-class-select-arrow="hidden"
+                                data-te-select-validation="true"
+                                >
+                                {% for i in range(1, (max_level + 1)) %}
+                                    <option value="{{ i }}"
+                                        {% set adv_levels = adventure.levels if adventure.get("levels") else [adventure.level|string] %}
+                                        {% if i|string in adv_levels %}selected{% endif %}>
+                                        {{ i }}
+                                    </option>
+                                {% endfor %}
+                            </select>
+                        </div>
                     </div>
 
                     <div class="flex flex-row items-center mb-4">
@@ -33,7 +55,7 @@
                     </div>
 
                     <div class="flex flex-row items-center mb-4">  
-                        <label for="tags" class="inline-block w-40 text-xl">{{_('tags')}}</label>
+                        <label for="search_tags_input" class="inline-block w-40 text-xl">{{_('tags')}}</label>
                         <div class="flex flex-row w-full relative" id="add_tags">
                                 <input type="text" name="tag" autocomplete="off" placeholder="{{_('tag_input_placeholder')}}" id="search_tags_input"
                                     class="appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 ltr:pr-8 rtl:pl-8 rounded"
@@ -93,7 +115,7 @@
             </div>
             <div class="flex flex-row justify-end gap-2 my-4">
                 <button class="blue-btn" id="preview_adventure_button" onclick="hedyApp.preview_adventure();event.preventDefault();">{{_('preview')}}</button>
-                <button type="submit" class="green-btn" id="save_adventure_button">{{_('save')}}</button>
+                <button type="submit" class="green-btn" id="save_adventure_button" data-te-submit-btn-ref>{{_('save')}}</button>
                 <button type="reset" class="red-btn" id="remove_adventure_button" onclick="hedyApp.delete_adventure('{{ adventure.id }}', '{{_('delete_adventure_prompt')}}')">{{_('remove')}}</button>
             </div>
         </form>
