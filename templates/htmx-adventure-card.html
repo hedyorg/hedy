@@ -11,13 +11,10 @@
 
     {% set ownAdventure = True if adventure["creator"] == user["username"] else False %}
     <h2 class="name text-white rounded-t-lg px-6 flex items-center m-0
-        {% if not is_program and ownAdventure %} underline cursor-pointer {% endif %}
         {% if is_favorite %} bg-yellow-500
         {% elif adventure.error %} bg-red-500
         {% else %} bg-blue-600
         {% endif %}"
-        {% if not is_program and ownAdventure %}
-        _="on click window.open('/for-teachers/customize-adventure/{{adventure.id}}', '_self')"{% endif %}
         >
         {{ adventure.name|e }}
     </h2>
@@ -71,27 +68,13 @@
                 <i class="fa fa-star p-2 bg-blue-300 {% if adventure.hedy_choice %}text-yellow-500{% else %}text-white{% endif %} rounded-full cursor-pointer hover:bg-blue-600" id="{{adventure.id}}" onclick="hedyApp.set_explore_favourite('{{ adventure.id }}', {% if adventure.hedy_choice %}0{% else %}1{% endif %});" aria-hidden="true"></i>
             {% endif %}
         {% else %}
-            <a class="green-btn mr-1 no-underline cursor-pointer" href="/adventure/{{ adventure.name }}?creator={{ adventure.creator }}">{{_('preview')}}</a>
             {% if user["username"] != adventure["creator"] %}
-                <button class="green-btn" id="clone_adventure_btn"
-                    _="on htmx:afterRequest log detail 
-                    if detail.xhr.status == '200'
-                        hedyApp.cloned('{{_('adventure_cloned')}}')
-                        send removeMe
-                    else
-                        hedyApp.cloned(detail.xhr.response, false)
-                    end"
-                    hx-trigger="click"
-                    hx-post="/public-adventures/clone/{{adventure.id}}"
-                    hx-swap="afterbegin"
-                    hx-target="#adventures"
-                    ">{{_('clone')}}</button>
-            {%else%}
-                <!-- TODO: button to add to class(es) -->
-                <button
-                    class="green-btn" id="edit_adventure_button"
-                    _="on click window.open('/for-teachers/customize-adventure/{{adventure.id}}', '_self')">
-                    {{_('edit_adventure')}}</button>
+                <button class="green-btn" id="clone_adventure_btn_{{level}}"
+                    data-id="{{adventure.id}}">{{_('clone')}}</button>
+            {% else %}
+                <a href="/for-teachers/customize-adventure/{{adventure.id}}"
+                    class="green-btn" id="edit_adventure_button">
+                    {{_('edit_adventure')}}</a>
             {% endif %}
         {% endif %}
     </div>
