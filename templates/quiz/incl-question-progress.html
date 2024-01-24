@@ -4,8 +4,9 @@
         <div class="w-14">
             {% if i <= progress.question %}
                 <button type="question_button" hx-post="/quiz/previous_question/{{i}}" class="rounded-full text-sm text-white text-center leading-6 w-6 h-6
-                {% if i in correct_answers_so_far %}bg-green-500
-                {% elif i == progress.question %}bg-blue-600
+                {% if i == question.number %}bg-blue-600
+                {% elif i in correct_answers_so_far %}bg-green-500
+                {% elif i == progress.question %}bg-gray-400
                 {% else %}bg-red-500
                 {% endif %}">{{ i }}
                 </button>
