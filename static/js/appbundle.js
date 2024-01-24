@@ -15755,7 +15755,7 @@ var hedyApp = (() => {
     blue: "blue",
     brown: "brown",
     call: "call",
-    clear: "clear",
+    clear: "\u0C24\u0C41\u0C21\u0C3F\u0C1A\u0C3F\u0C35\u0C47\u0C2F\u0C3F|clear",
     color: "color",
     comma: ",",
     def: "def",
@@ -16966,7 +16966,7 @@ var hedyApp = (() => {
       "unsaved_class_changes": "There are unsaved changes, are you sure you want to leave this page?"
     },
     "hu": {
-      "CheckInternet": "Ellen\u0151rizd, hogy az internetkapcsolat megfelel\u0151en m\u0171k\xF6dik-e!",
+      "CheckInternet": "Ellen\u0151rizd, hogy az internetkapcsolat megfelel\u0151en m\u0171k\xF6dik-e.",
       "Connection_error": "Nem tudjuk el\xE9rni a szervert.",
       "Empty_output": "M\u0171k\xF6dik a program, de nem \xEDr ki semmit. Helyezz el egy ki\xEDr\xE1st a k\xF3dban, vagy haszn\xE1ld a tekn\u0151st, hogy kimenetet kapj!",
       "Errors_found": "Hib\xE1t k\xF6vett\xE9l el! Ne agg\xF3djon, m\xE9g mindig futtatjuk a programot",
@@ -17326,10 +17326,10 @@ var hedyApp = (() => {
       "unsaved_class_changes": "Strona zawiera niezapisane zmiany. Czy jeste\u015B pewien, \u017Ce chcesz wyj\u015B\u0107 bez zapisania zmian?"
     },
     "pt_BR": {
-      "CheckInternet": "Verifique se a sua conex\xE3o com a Internet est\xE1 funcionando corretamente.",
+      "CheckInternet": "Verifique se sua conex\xE3o com a Internet est\xE1 funcionando.",
       "Connection_error": "N\xF3s n\xE3o conseguimos conectar ao servidor.",
       "Empty_output": "Este c\xF3digo funciona mas n\xE3o imprime nada. Adicione um comando de impress\xE3o ou use a tartaruga para ter alguma sa\xEDda.",
-      "Errors_found": "You made a mistake! Don't worry, Hedy is trying to find the mistakes",
+      "Errors_found": "Voc\xEA cometeu um erro! N\xE3o se preocupe, ainda executamos o programa",
       "Execute_error": "Alguma coisa deu errado enquanto o programa era executado.",
       "Other_error": "Opa! Talvez n\xF3s fizemos alguma coisa errada.",
       "Program_repair": "Este poderia ser o c\xF3digo correto, voc\xEA poderia corrigir ele?",
