@@ -2668,7 +2668,8 @@ levels:
             question_score: '10'
         6:
             question_text: Welche Zeile soll bei ??? eingefügt werden?
-            code: "{print} 'Willkommen bei McHedy!'\nbestellung = {ask} 'Möchtest du einen Hamburger oder Pommes?'\n{if} bestellung = 'Hamburger'\n\tpreis = 12\n{if} bestellung = 'Pommes'\n\tpreis = 4\ngetränk = {ask} 'Möchtest du einen Getränk dazu für 2 Euro?'\n{if} getränk = 'Ja'\n\t???\n{print} 'Das macht dann ' preis ' Euro bitte'"
+            code: "{print} 'Willkommen bei McHedy!'\nbestellung = {ask} 'Möchtest du einen Hamburger oder Pommes?'\n{if} bestellung = 'Hamburger'\n\tpreis = 12\n{if} bestellung = 'Pommes'\n\tpreis = 4\ngetränk = {ask} 'Möchtest du einen Getränk dazu für 2 Euro?'\n{if} getränk = 'Ja'\n\t???\n{print} 'Das\
+                \ macht dann ' preis ' Euro bitte'"
             mp_choice_options:
             -   option: |-
                     ```
@@ -2695,7 +2696,8 @@ levels:
             question_score: '10'
         7:
             question_text: Welche Ausgabe erhält eine Veganerin?
-            code: "menü = 'Kekse', 'Käse', 'Weintrauben'\n{print} \"Es ist mein Geburtstag! Ich habe ein paar Snacks mitgebracht!\"\ndiät = {ask} \"Haben Sie irgendwelche diätetischen Einschränkungen?\n{if} diät = 'glutenfrei'\n\t{remove} 'Kekse' {from} menü\n{if} diät = 'vegan'\n\t{remove} 'Käse' {from} menü\n{print} 'Für dich habe ich mitgebracht: '\n{for} snack {in} menü\n\t{print} snack"
+            code: "menü = 'Kekse', 'Käse', 'Weintrauben'\n{print} \"Es ist mein Geburtstag! Ich habe ein paar Snacks mitgebracht!\"\ndiät = {ask} \"Haben Sie irgendwelche diätetischen Einschränkungen?\n{if} diät = 'glutenfrei'\n\t{remove} 'Kekse' {from} menü\n{if} diät = 'vegan'\n\t{remove} 'Käse' {from}\
+                \ menü\n{print} 'Für dich habe ich mitgebracht: '\n{for} snack {in} menü\n\t{print} snack"
             mp_choice_options:
             -   option: |-
                     Es ist mein Geburtstag! Ich habe ein paar Snacks mitgebracht!
@@ -2781,7 +2783,8 @@ levels:
             question_score: '10'
         10:
             question_text: Welche Codezeile soll bei ??? ausgefüllt werden um das Lied zu vervollständigen?
-            code: "aktionen = 'clap your hands', 'stomp your feet', 'shout Hurray!'\n???\n\t{for} i {in} range 0 {to} 1\n\t\t{print} 'if youre happy and you know it'\n\t\t{print} aktion\n\t{print} 'if youre happy and you know it and you really want to show it'\n\t{print} 'if youre happy and you know it'\n\t{print} aktion"
+            code: "aktionen = 'clap your hands', 'stomp your feet', 'shout Hurray!'\n???\n\t{for} i {in} range 0 {to} 1\n\t\t{print} 'if youre happy and you know it'\n\t\t{print} aktion\n\t{print} 'if youre happy and you know it and you really want to show it'\n\t{print} 'if youre happy and you know it'\n\
+                \t{print} aktion"
             mp_choice_options:
             -   option: |-
                     ```
@@ -3772,112 +3775,320 @@ levels:
             correct_answer: D
             question_score: '10'
     17:
-        3:
+        1:
+            question_text: What is the output of this code?
+            code: |-
+                minions = ['Bob', 'Kevin', 'Stuart']
+                {for} x in minions:
+                    {print} x
             mp_choice_options:
-            -   option: "```\n🦔\n🦔\n🦔\n```"
+            -   option: |-
+                    ```
+                    m i n i o n s
+                    ```
+                feedback: This is not it.
+            -   option: |-
+                    ```
+                    Bob
+                    Kevin
+                    Stuart
+                    ```
+                feedback: Correct!
+            -   option: |-
+                    ```
+                    minions
+                    minions
+                    minions
+                    ```
+                feedback: Take a look at the content of your list.
+            -   option: |-
+                    ```
+                    B o b K e v i n S t u a r t
+                    ```
+                feedback: Do not loop through the letters.
+            hint: Loop through your list.
+            correct_answer: B
+            question_score: '10'
+        2:
+            question_text: What is wrong with this code?
+            code: |-
+                seconds_minute = 60
+                minute_hour = 60
+                hour_day = 24
+                leap_year = 366
+                no_leap_year = 365
+                years = ask 'what year is it?'
+                {if} years = 2024:
+                 print seconds_minute * minute_hour * hour_day * leap_year
+                {else}:
+                 print seconds_minute * minute_hour * hour_day * noleap_year
+            mp_choice_options:
+            -   option: You cannot have so many variables.
+                feedback: This is not it.
+            -   option: The way the variables are multiplied is incorrect.
+                feedback: Not true!
+            -   option: One of the variables `noleap_year` does not belong with the `{if}` statement.
+                feedback: Keep looking for the mistake.
+            -   option: The `noleap_year` has to be identical in both cases.
+                feedback: Correct!
+            hint: Read the code carefully.
+            correct_answer: D
+            question_score: '10'
+        3:
+            question_text: How many hedgehogs will this code print?
+            code: |-
+                {for} x in range 1 to 3:
+                  {for} y in range 1 to 2:
+                    {print} 🦔
+            mp_choice_options:
+            -   option: |-
+                    ```
+                    🦔
+                    🦔
+                    🦔
+                    ```
                 feedback: Try again.
-            -   feedback: One more try.
-                option: "```\n🦔\n🦔\n```"
-            -   option: "```\n🦔\n🦔\n🦔\n🦔\n🦔\n🦔\n```"
+            -   option: |-
+                    ```
+                    🦔
+                    🦔
+                    ```
+                feedback: One more try.
+            -   option: |-
+                    ```
+                    🦔
+                    🦔
+                    🦔
+                    🦔
+                    🦔
+                    🦔
+                    ```
                 feedback: Well done!
-            -   feedback: That is not it.
-                option: "```\n🦔\n🦔\n🦔\n🦔\n🦔\n```"
-            code: "{for} x in range 1 to 3:\n  {for} y in range 1 to 2:\n    {print} 🦔"
+            -   option: |-
+                    ```
+                    🦔
+                    🦔
+                    🦔
+                    🦔
+                    🦔
+                    ```
+                feedback: That is not it.
+            hint: Think about how many times you need repeating.
             correct_answer: C
             question_score: '10'
-            question_text: How many hedgehogs will this code print?
-            hint: Think about how many times you need repeating.
-        6:
-            correct_answer: D
-            code: "name = {ask} 'What is your name?'\n{if} name == 'Hedy':\npassword = {ask} 'What is your password?'\n    {if} password =='turtle123':\n        {print} 'Yey'\n    {else}:\n        {print} 'Access denied'\n{else}:\n {print} 'Go fish'"
+        4:
+            question_text: What is wrong with code?
+            code: |-
+                name_color = {ask} 'What is your favorite color?'
+                {if} name_color == 'red':
+                  {print} 'the color of a tomato'
+                {elif} name_color == 'green':
+                  {print} 'the color of an apple'
+                {elif} name_color == 'blue':
+                  {print} 'the color of a blueberry'
+                {elif} name_color == 'yellow':
+                  {print} 'the color of a banana'
+                {elif}:
+                  {print} 'this fruit-color does not exist'
             mp_choice_options:
-            -   feedback: Try again.
-                option: '`{elif}` is missing.'
+            -   option: The first `{elif}` should be used before the `print` command
+                feedback: Try again.
+            -   option: '`{elif}` can only be used once'
+                feedback: From now on we can use elif multiple times.
+            -   option: '`==` used with `{elif}` should be replaced by `=`'
+                feedback: Not correct.
+            -   option: '`{elif}` in the last line should be replaced by `{else}`'
+                feedback: Great!
+            hint: Think about `{if}`, `{elif}`, `{else}`.
+            correct_answer: D
+            question_score: '10'
+        5:
+            question_text: What is the output of this code?
+            code: |-
+                numbers = [7, 19, 29, 41, 53, 71, 79, 97]
+                {for} prime in numbers:
+                  {if} prime <= 10：
+                    {print} prime
+                  {elif} prime >= 60:
+                    {print} prime
+                  {elif} prime >= 90:
+                    {print} prime
+                  {else}:
+                    {print} 'another number'
+            mp_choice_options:
+            -   option: |-
+                    ```
+                    7
+                    another number
+                    another number
+                    another number
+                    another number
+                    71
+                    79
+                    97
+                    ```
+                feedback: Well done!
+            -   option: |-
+                    ```
+                    another number
+                    19
+                    29
+                    41
+                    53
+                    71
+                    79
+                    97
+                    ```
+                feedback: Try again.
+            -   option: |-
+                    ```
+                    7
+                    19
+                    29
+                    41
+                    53
+                    71
+                    79
+                    another number
+                    ```
+                feedback: One more try.
+            -   option: |-
+                    ```
+                    7
+                    19
+                    29
+                    41
+                    53
+                    71
+                    79
+                    97
+                    ```
+                feedback: That is not it.
+            hint: Think about how many times you need repeating and the values of if and elif.
+            correct_answer: A
+            question_score: '10'
+        6:
+            question_text: What is wrong with code?
+            code: |-
+                name = {ask} 'What is your name?'
+                {if} name == 'Hedy':
+                password = {ask} 'What is your password?'
+                    {if} password =='turtle123':
+                        {print} 'Yey'
+                    {else}:
+                        {print} 'Access denied'
+                {else}:
+                 {print} 'Go fish'
+            mp_choice_options:
+            -   option: '`{elif}` is missing.'
+                feedback: Try again.
             -   option: '`{else}` can only be used once.'
                 feedback: From now on we can use elif multiple times.
             -   option: Nothing!
                 feedback: There is a mistake. Look carefully!
-            -   feedback: Amazing!
-                option: There is an indentation mistake in the last line.
+            -   option: There is an indentation mistake in the last line.
+                feedback: Amazing!
             hint: There is a mistake somewhere...
-            question_score: '10'
-            question_text: What is wrong with code?
-        4:
             correct_answer: D
-            mp_choice_options:
-            -   feedback: Try again.
-                option: The first `{elif}` should be used before the `print` command
-            -   feedback: From now on we can use elif multiple times.
-                option: '`{elif}` can only be used once'
-            -   feedback: Not correct.
-                option: '`==` used with `{elif}` should be replaced by `=`'
-            -   feedback: Great!
-                option: '`{elif}` in the last line should be replaced by `{else}`'
-            question_text: What is wrong with code?
-            code: "name_color = {ask} 'What is your favorite color?'\n{if} name_color == 'red':\n  {print} 'the color of a tomato'\n{elif} name_color == 'green':\n  {print} 'the color of an apple'\n{elif} name_color == 'blue':\n  {print} 'the color of a blueberry'\n{elif} name_color == 'yellow':\n  {print} 'the color of a banana'\n{elif}:\n  {print} 'this fruit-color does not exist'"
             question_score: '10'
-            hint: Think about `{if}`, `{elif}`, `{else}`.
+        7:
+            question_text: Which of the following codes will print five times 'the result is 3' on the screen?
+            mp_choice_options:
+            -   option: |-
+                    ```
+                     numbers = [1, 2 , 3, 4, 5]
+                     {for} n in numbers：
+                         result = n * 1
+                     {print} 'The result is ' result
+                    ```
+                feedback: Try again!
+            -   option: |-
+                    ```
+                    numbers = [1, 2, 3, 4, 5]
+                     {for} u in numbers：
+                         number = u
+                     {print} 'The result is ' number
+                    ```
+                feedback: That is not it.
+            -   option: |-
+                    ```
+                    numbers = [1, 2, 3, 4, 5]
+                     {for} number in numbers：
+                         number = 3
+                     {print} 'The result is ' number
+                    ```
+                feedback: Very good!
+            -   option: |-
+                    ```
+                    numbers = [1, 2 , 3, 4, 5]
+                     {for} n in numbers：
+                         n = result
+                     {print} 'The result is ' result
+                    ```
+                feedback: That is not it.
+            hint: Think about mathematical symbols.
+            correct_answer: C
+            question_score: '10'
         8:
+            question_text: What is wrong with code?
+            code: |-
+                insects = ['🐝', '🦋', '🕷', '🐞']
+                your_favorite = {ask} 'what is your favorite insect?'
+                {for} insect in insects:
+                 {if} your_favorite == '🐝' {or} your_favorite == '🐞':
+                  {print} 'very useful'
+                 {elif} your_favorite == '🕷':
+                  {print} 'it can catch mosquitoes'
+                 {else}:
+                  {print} 'almost all insects can be useful one way or another'
             mp_choice_options:
             -   option: '`{or}` cannot be used with `{if}`.'
                 feedback: Try again.
             -   option: In the `{for}` command `insect` should be `insects`.
                 feedback: Not true.
-            -   feedback: Well done!
-                option: Nothing!
+            -   option: Nothing!
+                feedback: Well done!
             -   option: There is an indentation mistake in the last line.
                 feedback: Nope.
-            question_score: '10'
-            question_text: What is wrong with code?
+            hint: Read the code carefully.
             correct_answer: C
-            code: "insects = ['🐝', '🦋', '🕷', '🐞']\nyour_favorite = {ask} 'what is your favorite insect?'\n{for} insect in insects:\n {if} your_favorite == '🐝' {or} your_favorite == '🐞':\n  {print} 'very useful'\n {elif} your_favorite == '🕷':\n  {print} 'it can catch mosquitoes'\n {else}:\n  {print} 'almost all insects can be useful one way or another'"
-            hint: Read the code carefully.
-        2:
-            correct_answer: D
-            hint: Read the code carefully.
-            mp_choice_options:
-            -   feedback: This is not it.
-                option: You cannot have so many variables.
-            -   feedback: Not true!
-                option: The way the variables are multiplied is incorrect.
-            -   feedback: Keep looking for the mistake.
-                option: One of the variables `noleap_year` does not belong with the `{if}` statement.
-            -   option: The `noleap_year` has to be identical in both cases.
-                feedback: Correct!
-            code: "seconds_minute = 60\nminute_hour = 60\nhour_day = 24\nleap_year = 366\nno_leap_year = 365\nyears = ask 'what year is it?'\n{if} years = 2024:\n print seconds_minute * minute_hour * hour_day * leap_year\n{else}:\n print seconds_minute * minute_hour * hour_day * noleap_year"
-            question_text: What is wrong with this code?
             question_score: '10'
-        5:
-            mp_choice_options:
-            -   option: "```\n7\nanother number\nanother number\nanother number\nanother number\n71\n79\n97\n```"
-                feedback: Well done!
-            -   option: "```\nanother number\n19\n29\n41\n53\n71\n79\n97\n```"
-                feedback: Try again.
-            -   option: "```\n7\n19\n29\n41\n53\n71\n79\nanother number\n```"
-                feedback: One more try.
-            -   feedback: That is not it.
-                option: "```\n7\n19\n29\n41\n53\n71\n79\n97\n```"
-            question_score: '10'
-            code: "numbers = [7, 19, 29, 41, 53, 71, 79, 97]\n{for} prime in numbers:\n  {if} prime <= 10：\n    {print} prime\n  {elif} prime >= 60:\n    {print} prime\n  {elif} prime >= 90:\n    {print} prime\n  {else}:\n    {print} 'another number'"
-            question_text: What is the output of this code?
-            hint: Think about how many times you need repeating and the values of if and elif.
-            correct_answer: A
         9:
             question_text: Which one of the codes below gave this output?
+            code: |-
+                -5 is negative
+                -4 is negative
+                -3 is negative
+                -2 is negative
+                -1 is negative
+                0 is positive
+                1 is positive
+                2 is positive
+                3 is positive
             mp_choice_options:
             -   option: "```\n {for} number in range -5 to 3:\n     {if} number > 0: \n      {print} number ' is positive'\n     {elif} number < 0: \n      {print} number ' is negative' \n    {else}: \n     {print} number ' is zero'\n```"
                 feedback: Try again!
-            -   feedback: That is not it.
-                option: "```\n {for} number in range -5 to 3:\n     {if} number > 0: \n      {print} number ' is positive'\n     {elif} number <= 0: \n     {print} number ' is negative' \n    {else}: \n     {print} number ' is zero'\n```"
+            -   option: "```\n {for} number in range -5 to 3:\n     {if} number > 0: \n      {print} number ' is positive'\n     {elif} number <= 0: \n     {print} number ' is negative' \n    {else}: \n     {print} number ' is zero'\n```"
+                feedback: That is not it.
             -   option: "```\n {for} number in range -5 to 3:\n     {if} number >= 0: \n     {print} number ' is positive'\n     {elif} number < 0: \n     {print} number ' is negative' \n     {else}: \n     {print} number ' is zero'\n```"
                 feedback: Very good!
             -   option: "```\n {for} number in range -5 to 3:\n     {if} number < 0: \n      {print} number ' is positive'\n     {elif} number <=0: \n     {print} number ' is negative' \n     {else}: \n     {print} number ' is zero'\n```"
                 feedback: That is not it.
-            code: "-5 is negative\n-4 is negative\n-3 is negative\n-2 is negative\n-1 is negative\n0 is positive\n1 is positive\n2 is positive\n3 is positive"
+            hint: Read the code carefully.
             correct_answer: C
             question_score: '10'
-            hint: Read the code carefully.
         10:
+            question_text: What is wrong with this code?
+            code: |-
+                {for} number in range 1 to 5:
+                  volume_room = num * num * num
+                  {print} volume_room ' cubic meters'
+                    {if} volume_room > 100:
+                      {print} 'this is a large room'
+                    {elif} volume_room < 100:
+                      {print} 'small room but cosy'
+                    {else}:
+                      {print} 'i will look for something else'
             mp_choice_options:
             -   option: The word num needs quotation marks.
                 feedback: Try again.
@@ -3887,37 +4098,6 @@ levels:
                 feedback: Well done!
             -   option: There is an indentation mistake in the last line.
                 feedback: Nope.
-            question_score: '10'
-            question_text: What is wrong with this code?
             hint: Read the code carefully.
-            code: "{for} number in range 1 to 5:\n  volume_room = num * num * num\n  {print} volume_room ' cubic meters'\n    {if} volume_room > 100:\n      {print} 'this is a large room'\n    {elif} volume_room < 100:\n      {print} 'small room but cosy'\n    {else}:\n      {print} 'i will look for something else'"
             correct_answer: C
-        1:
-            mp_choice_options:
-            -   option: "```\nm i n i o n s\n```"
-                feedback: This is not it.
-            -   feedback: Correct!
-                option: "```\nBob\nKevin\nStuart\n```"
-            -   option: "```\nminions\nminions\nminions\n```"
-                feedback: Take a look at the content of your list.
-            -   option: "```\nB o b K e v i n S t u a r t\n```"
-                feedback: Do not loop through the letters.
-            correct_answer: B
-            question_text: What is the output of this code?
             question_score: '10'
-            hint: Loop through your list.
-            code: "minions = ['Bob', 'Kevin', 'Stuart']\n{for} x in minions:\n    {print} x"
-        7:
-            mp_choice_options:
-            -   feedback: Try again!
-                option: "```\n numbers = [1, 2 , 3, 4, 5]\n {for} n in numbers：\n     result = n * 1\n {print} 'The result is ' result\n```"
-            -   option: "```\nnumbers = [1, 2, 3, 4, 5]\n {for} u in numbers：\n     number = u\n {print} 'The result is ' number\n```"
-                feedback: That is not it.
-            -   option: "```\nnumbers = [1, 2, 3, 4, 5]\n {for} number in numbers：\n     number = 3\n {print} 'The result is ' number\n```"
-                feedback: Very good!
-            -   option: "```\nnumbers = [1, 2 , 3, 4, 5]\n {for} n in numbers：\n     n = result\n {print} 'The result is ' result\n```"
-                feedback: That is not it.
-            hint: Think about mathematical symbols.
-            question_text: Which of the following codes will print five times 'the result is 3' on the screen?
-            question_score: '10'
-            correct_answer: C
