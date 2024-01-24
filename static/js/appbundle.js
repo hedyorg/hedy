@@ -58158,7 +58158,7 @@ pygame.quit()
     console.info("Saving program automatically...");
     const code = theGlobalEditor.contents;
     const saveName = saveNameFromInput();
-    if (theUserIsLoggedIn) {
+    if (theUserIsLoggedIn && saveName) {
       const saveInfo = isServerSaveInfo(adventure.save_info) ? adventure.save_info : void 0;
       const response = await postJsonWithAchievements("/programs", {
         level: theLevel,

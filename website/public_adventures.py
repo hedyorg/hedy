@@ -43,8 +43,10 @@ class PublicAdventuresModule(WebsiteModule):
             public_adventures = self.db.get_public_adventures()
             public_adventures = sorted(public_adventures, key=lambda a: a["creator"] == user["username"], reverse=True)
             for adventure in public_adventures:
-                self.available_languages.update([adventure["language"]])
-                self.available_tags.update(adventure["tags"])
+                adv_lang = adventure.get("language", g.lang)
+                adv_tags = adventure.get("tags", [])
+                self.available_languages.update([adv_lang])
+                self.available_tags.update(adv_tags)
                 # NOTE: what if another author has an adventure with the same name?
                 # Perhaps we could make this name#creator!
                 if included.get(adventure["name"]):
@@ -62,9 +64,9 @@ class PublicAdventuresModule(WebsiteModule):
                         "date": utils.localized_date_format(adventure.get("date")),
                         "level": adventure.get("level"),
                         "levels": adventure.get("levels"),
-                        "language": adventure.get("language", g.lang),
+                        "language": adv_lang,
                         "cloned_times": adventure.get("cloned_times"),
-                        "tags": adventure.get("tags", []),
+                        "tags": adv_tags,
                         "text": adventure.get("content"),
                         "is_teacher_adventure": True,
                         # "content": adventure.get("content")
