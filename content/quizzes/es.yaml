@@ -3949,9 +3949,9 @@ levels:
             correct_answer: D
             code: "name = {ask} 'What is your name?'\n{if} name == 'Hedy':\npassword = {ask} 'What is your password?'\n    {if} password =='turtle123':\n        {print} 'Yey'\n    {else}:\n        {print} 'Access denied'\n{else}:\n {print} 'Go fish'"
             mp_choice_options:
-            -   feedback: Try again.
-                option: '`{elif}` is missing.'
-            -   option: '`{else}` can only be used once.'
+            -   feedback: Inténtalo de nuevo.
+                option: 'Falta `{elif}`.'
+            -   option: '`{else}` sólo puede utilizarse una vez.'
                 feedback: From now on we can use elif multiple times.
             -   option: Nothing!
                 feedback: There is a mistake. Look carefully!
