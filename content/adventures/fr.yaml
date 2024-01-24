@@ -693,13 +693,13 @@ adventures:
                 example_code: |
                     ```
                     {print} "3"
-                    {sleep}
                     {clear}
                     {print} "2"
-                    {sleep}
                     {clear}
                     {print} "1"
-                    {sleep}
+                    {clear}
+                    {print} "Attendez..."
+                    {sleep} 3
                     {clear}
                     {print} "SURPRISE !"
                     ```
@@ -801,15 +801,15 @@ adventures:
                     {print} Bienvenue à la piscine Hedy !
                     cours {is} {ask} "Es-tu ici pour un cours de natation ?"
                     {if} cours oui
-                        {print} "Génial ! Tu as cours !"
-                        {print} {else} "Tu n'as pas cours"
+                    {print} "Génial ! Tu as cours !
+                    {print} {else} "Tu n'as pas cours"
                     réduction {is} {ask} "As-tu un code de réduction ?"
                     {if} réduction {is} oui
                     réponse_reduction {is} {ask} "Quel est ton code de réduction ?"
                     codes_reduction = Senior4231, élève8786, NouveauMembre6709
                     {if} réponse_reduction {is} {in} codes_reduction
-                        {print} "Ça fera 3,50 €"
-                            {else} "Ce code n'est pas valide"
+                    {print} "Ça fera 3,50 €"
+                    {else} "Ce code n'est pas valide"
                     {else} "Ça fera 5,50 €"
                     {print} "Bonne baignade !"
                     ```
@@ -1639,7 +1639,7 @@ adventures:
 
                     ### Exercice
                     Ajoute une deuxième corvée, comme passer l'aspirateur ou ranger, et assure-toi qu'elle est aussi répartie sur toute la semaine.
-                    <b>**Bonus** Le programme n'est pas équitable, tu pourrais jouer de malchance et faire la vaisselle toute la semaine. Comment pourrais-tu modifier le programme pour le rendre plus juste ?
+                    <br>**Bonus** Le programme n'est pas équitable, tu pourrais jouer de malchance et faire la vaisselle toute la semaine. Comment pourrais-tu modifier le programme pour le rendre plus juste ?
                 example_code: |
                     ```
                     jours = Lundi, Mardi, Mercredi, Jeudi, Vendredi, Samedi, Dimanche
@@ -1675,9 +1675,9 @@ adventures:
         levels:
             10:
                 story_text: |-
-                    ## `{For}`
+                    ## `{for}`
                     À ce niveau nous apprenons une nouvelle commande appelée `{for}`. Avec `{for}`, tu peux répéter quelque chose pour tous les éléments d'une liste.
-                    `{for}` crée un bloc, comme `{repeat}` et `{if}`. Il faut donc ajouter 4 espaces devant toutes les lignes du bloc.
+                    La commande `{for}` crée un bloc, comme `{repeat}` et `{if}`. Il faut donc ajouter 4 espaces devant toutes les lignes du bloc.
                 example_code: |
                     ```
                     animaux = chiens, chats, méduses
@@ -1847,17 +1847,17 @@ adventures:
                     ```
             10:
                 story_text: |
-                    À ce niveau, tu vas apprendre comment programmer le jeu MASH. Dans ce jeu, tu peux prédire pour tous les joueurs simultanément, quel sera leur future.
+                    À ce niveau, tu vas apprendre comment programmer le jeu MASH. Dans ce jeu, tu peux prédire pour tous les joueurs, quel sera leur avenir.
 
                     ### Exercice
-                    Complète les espaces vide en utilisant la nouvelle commande que tu viens d'apprendre à ce niveau.
+                    Complète l'espace vide en utilisant la nouvelle commande que tu viens d'apprendre à ce niveau.
                 example_code: |
                     ```
                     habitations = un manoir, un appartement, une cabane, une maison
                     amours = personne, une célébrité, son voisin, son véritable amour
                     annimaux = chien, chat, éléphant
                     noms = Jeanne, Salomon, Mohamed
-                    {for} nom {in} noms
+                    _
                         {print} nom " habitera " habitations {at} {random}
                         {print} nom " se marira avec " amours {at} {random}
                         {print} nom " aura un " annimaux {at} {random} " comme animal de compagnie"
@@ -2003,18 +2003,18 @@ adventures:
             10:
                 story_text: |
                     ### Exercice
-                    We can also make a Harry Potter themed fortune teller. Fill in blanks such that 9 lines are printed.
-                    **Extra** Change the theme of the fortune teller into something else, such as your favorite book, film or tv show.
+                    On peut aussi faire une voyante sur le thème de Harry Potter. Complète les espaces vides pour écrire 9 lignes de prédictions.
+                    **Bonus** Donne un autre sujet à la voyante, comme ton livre préféré, un film ou une émission de télé.
                 example_code: |
                     ```
-                    houses = Gryffindor, Slytherin, Hufflepuff, Ravenclaw
-                    subjects = potions, defence against the dark arts, charms, transfiguration
-                    fears = Voldemort, spiders, failing your OWL test
-                    names = Harry, Ron, Hermione
+                    maisons = Gryffondor, Serpentard, Poufsouffle, Serdaigle
+                    sujets = potions, défense contre les forces du mal, charmes, transfiguration
+                    peurs = Voldemort, les araignées, d'échouer à son examen de BUSE
+                    noms = Harry, Ron, Hermione
                     _
-                    _ {print} name ' is placed in ' houses {at} {random}
-                    _ {print} name ' is great at ' subjects {at} {random}
-                    _ {print} name 's greatest fear is ' fears {at} {random}
+                    _ {print} nom ' est membre de ' maisons {at} {random}
+                    _ {print} nom ' est fort en ' sujets {at} {random}
+                    _ {print} "La plus grande peur de " nom " est " peurs {at} {random}
                     ```
     haunted:
         name: La maison hantée
@@ -2420,8 +2420,6 @@ adventures:
                     nom = Hedy
                     réponse = 20 + 4
                     ```
-
-                    réponse = 20 + 4
             14:
                 story_text: |
                     Nous allons apprendre d'autres nouveaux éléments. Tu les connais peut-être déjà grâce aux mathématiques, le `<` et `>`.
@@ -2501,14 +2499,14 @@ adventures:
         description: Introduction des maths
         levels:
             6:
-                story_text: |
-                    ## 1 + 1
-                    À ce niveau, tu apprends quelque chose de nouveau : tu peux maintenant faire des calculs.
+                story_text: |4
 
-                    L'addition est facile, tu écris comme en math : `5 + 5` par exemple. Le moins aussi fonctionne bien, c'est `5 - 5`.
+                      À ce niveau, tu apprends quelque chose de nouveau : tu peux maintenant faire des calculs.
 
-                    La multiplication est un peu différente parce qu'il n'y a pas la croix de la multiplication sur ton clavier. Cherche là, elle n'y est pas !
-                    Voilà pourquoi on multiplie avec l'étoile : `5 * 5`. Lit le « 5 fois 5 » pour t'aider à t'en souvenir plus facilement.
+                      L'addition est facile, tu écris comme en math : `5 + 5` par exemple. Le moins aussi fonctionne bien, c'est `5 - 5`.
+
+                      La multiplication est un peu différente parce qu'il n'y a pas la croix de la multiplication sur ton clavier. Cherche là, elle n'y est pas !
+                      Voilà pourquoi on multiplie avec l'étoile : `5 * 5`. Lit le « 5 fois 5 » pour t'aider à t'en souvenir plus facilement.
                 example_code: |
                     ```
                     {print} "5 plus 5 fait " 5 + 5
@@ -3602,18 +3600,19 @@ adventures:
                     ```
             10:
                 story_text: |
-                    In this level you can easily make the childrens' song 'Five little monkeys'. Can you make the last chorus?
-                    You can also make the whole baby shark song (including all the other sharks in the family) in only 6 lines!
-                    Or you can make Old McDonald with all the different animals.
+                    With `{for}` tu peux programmer la chanson « baby shark » en entier (y compris tous les autres requins de la famille) en seulement 6 lignes !
+
+                    ### Exercice 1
+                    Peux-tu rendre le code de la chanson « baby shark » encore plus courte en utilisant une commande `{for}` ? termine le code.
                 example_code: "```\nfamille = bébé, maman, papa, mamie, papi\n_ _ _ _ \n  {print} _\n```\n"
                 story_text_2: |
                     ### Exercice 2
-                    Print the song Five little moneys jumping on the bed. Look up the text if you don't remember.
+                    Fais afficher la chanson « cinq petits singes sautant sur le lit ». Recherche le texte si tu ne t'en souviens pas.
 
-                    **(extra)** Print the song Old MacDonald had a farm, and make sure all animals make a different sound, using an `{if}`.
+                    **Bonus** Fait afficher la chanson « Le vieux MacDonald a une ferme », et assure-toi que tous les animaux font un cri différent en utilisant un `{if}`.
                 example_code_2: |
                     ```
-                    monkeys = 5, 4, 3, 2, 1
+                    singes = 5, 4, 3, 2, 1
                     ```
             11:
                 story_text: |
@@ -4203,14 +4202,14 @@ adventures:
                     ```
             10:
                 story_text: |
-                    In this level you can make the turtle draw a figure.
-                    The turtle will travel the distances in the list, one by one, making bigger and bigger steps.
-                    ### Exercise 1
-                    Add a 90 degree turn in the loop, so that a spiral is drawn.
-                    Add at least 5 numbers to the list, so the spiral grows larger.
-                     **(extra)** can you change the spiral into another shape? Experiment with numbers for the turn!
-                    ### Exercise 2
-                    The spiral is drawn outwards, make it go inwards?
+                    À ce niveau, tu peux faire dessiner une forme à la tortue.
+                    La tortue va avancer en fonction des distances de la liste, une par une, en faisant des pas de plus en plus grands.
+                    ### Exercice 1
+                    Ajoute un tournant de 90 degrés dans la boucle, pour faire une spirale.
+                    Ajoute au moins 5 nombre dans la liste, pour que la spirale grossisse encore plus.
+                    **Bonus** peux-tu transformer la spirale en une autre forme ? Fais des expériences en utilisant les nombres pour les tournants !
+                    ### Exercice 2
+                    La spirale est dessinée vers l'extérieur, fais-la se dessiner vers l'intérieur.
                 example_code: |
                     ```
                     {turn} 90
@@ -4385,42 +4384,42 @@ adventures:
                     ```
             10:
                 story_text: |
-                    ### Exercise
-                    Recreate the drawings with the turtle!
+                    ### Exercice
+                    Refait les dessins avec la tortue !
 
                     <div class="w-full flex flex-row gap-2">
-                    Nested Hexagon <img src="https://github.com/hedyorg/hedy/assets/80678586/3629e908-3cd5-44ac-bbcd-1f1cceb15654" width="150">
-                    Traffic lights  <img src="https://github.com/hedyorg/hedy/assets/80678586/edbbb608-5ff8-4349-85a6-e47809adde43" width="100">
+                    Hexagones imbriqués <img src="https://github.com/hedyorg/hedy/assets/80678586/3629e908-3cd5-44ac-bbcd-1f1cceb15654" width="150">
+                    Feux de circulation <img src="https://github.com/hedyorg/hedy/assets/80678586/edbbb608-5ff8-4349-85a6-e47809adde43" width="100">
                     </div>
                 example_code: |
-                    Hint Nested Hexagon:
+                    Aide pour les hexagones imbriqués :
                     ```
                     distances = 100, 80, 60, 40, 20
                     {for} distance {in} distances
                     _
                     ```
 
-                    Hint Traffic Lights:
+                    Aide pour les feux de circulation :
                     ```
-                    colors = red, yellow, green
-                    {for} chosen_color {in} colors
-                        color _
+                    couleurs = rouge, jaune, vert
+                    {for} couleur_choisie {in} couleurs
+                        {color} _
                         {repeat} _
                     ```
                 story_text_2: |
-                    Christmas lights <img src="https://github.com/hedyorg/hedy/assets/80678586/9637ea6d-6edc-4d88-a6f7-10271bfc5371" width="500">
+                    Guirlande de Noël <img src="https://github.com/hedyorg/hedy/assets/80678586/9637ea6d-6edc-4d88-a6f7-10271bfc5371" width="500">
                 example_code_2: |
-                    Hint Christmas Lights:
+                    Aide pour la guirlande de Noël :
 
-                    Start by moving to the left side of the screen with an invisible white line. Then hang up the Christmas lights!
+                    Commence par bouger jusqu'au côté gauche de l'écran avec une ligne blanche invisible. Ensuite suspend les lumières de Noël !
                     ```
-                    {color} white
+                    {color} blanc
                     {turn} -90
                     {forward} 300
                     {turn} 90
 
-                    colors = red, blue, yellow, purple, green, orange, pink
-                    {for} chosen_color {in} colors
+                    couleurs = rouge, bleu, jaune, violet, vert, orange, rose
+                    {for} couleur_choisie {in} couleurs
                     _
                     ```
             11:

@@ -44,8 +44,8 @@ levels:
             header: Programmeren met Hedy
             text: De uitvoer kan ook een tekening zijn.
             code: |-
-                {vooruit} 100
-                {draai} links
+                {forward} 100
+                {turn} links
     1:
         1:
             header: Welkom bij level 1!
@@ -61,37 +61,40 @@ levels:
                 `print` zorgt ervoor dat er tekst in het uitvoerveld komt.
             code: '{print} Presenteer tekst op het scherm'
         3:
-            header: 'Hedy level 1: {ask}'
+            header: Het {print} commando
             text: |-
-                De tweede code die je kan gebruiken in level 1 is `{ask}`.
+                Je kunt de tekst na het print veranderen met je eigen tekst
 
-                Met `{ask}` kan je een vraag stellen die moet worden beantwoord.
+                Of je kunt meerdere regels printen door extra regels code toe te voegen die ook starten met `{print}`.
             code: |-
                 {print} Welkom bij Hedy!
                 {print} Start nu met programmeren!
         4:
             header: 'Hedy level 1: {echo}'
             text: |-
-                De laatste tekstcode in level 1 is `{echo}`.
+                De tweede code die je kunt gebruiken in level 1 is `{ask}`.
 
-                Met `{echo}` kan je de invoer van een `{ask}` herhalen.
+                `{ask}` wordt gebruikt om een vraag te stellen die beantwoord kan worden.
             code: |-
                 {print} Welkom bij je eigen steen papier schaar!
                 {ask} Wat is je keuze?
         5:
             header: '{echo}'
             text: |-
-                Met `{print}`, `{ask}` en `{echo}` kun je al een klein verhaal programmeren.
-                Dit is een goed moment om de Papegaai, Verhaal en Steen, Schaar, Papier avonturen te proberen.
+                Zoals je kon zien in het vorige voorbeeld. Als je het `{ask}` commando gebruikt kun je een vraag stellen.
+                Alleen wordt het antwoord niet gepresenteerd in het uitvoer scherm.
+
+                Als je het antwoord wilt presenteren kun je het laatste commando van dit level gebruiken: `{echo}`.
+                `{echo}` is gebruikt on het antwoord van een `{ask}`te presenteren.
             code: |-
                 {print} Hallo!
-                {vraag} Wat is je naam?
+                {ask} Wat is je naam?
                 {echo} Hallo
         6:
             header: Programmeren maar!
             text: |-
-                Met `{print}`, `{vraag}` en `{echo}` kun je al een klein verhaal programmeren.
-                Dit is een goed moment om de Papegaai, Verhaal en Steen, Schaar, Papier avonturen te proberen.
+                Met `{print}`, `{ask}` en `{echo}` kun je al een klein verhaal programmeren.
+                Dit is een goed moment om de Papegaai, Verhaal en Steen, Papier, Schaar avonturen te proberen.
             editor: /hedy/1
         7:
             header: Programmeren maar!
@@ -99,28 +102,28 @@ levels:
             editor: /hedy#print_command
         8:
             header: Programmeren!
-            text: Nu we de tekstcodes hebben leren kennen, gaan we tekenen.
+            text: De gele pijlen knoppen kunnen gebruikt worden om de voorbeelden te kopiëren.
             editor: /hedy#print_commando
         9:
             header: Tekenen met de schildpad
             text: Met `{forward}` kun je de schildpad vooruit laten bewegen.
         10:
-            header: 'Tekenen met de schildpad: {vooruit}'
-            text: '`{vooruit}` wordt gebruikt om de schildpad naar voren te bewegen.'
-            code: '{vooruit} 50'
+            header: 'Tekenen met de schildpad: {forward}'
+            text: '`{forward}` wordt gebruikt om de schildpad naar voren te bewegen.'
+            code: '{forward} 50'
         11:
-            header: 'Tekenen met de schildpad: {draai}'
-            text: '`{draai}` wordt gebruikt om de schildpad links of rechtsom te laten draaien.'
+            header: 'Tekenen met de schildpad: {turn}'
+            text: '`{turn}` wordt gebruikt om de schildpad links of rechtsom te laten draaien.'
             code: |-
-                {vooruit} 50
-                {draai} links
+                {forward} 50
+                {turn} links
         12:
             header: Debugging (foutzoeken)
             text: Debugging van de code betekent het oplossen van fouten in de code. Laten we deze code samen debuggen. Klik op de ladybug knop (lieveheersbeestje) om de debugger te starten.
             code: |-
                 Ik ben DJ Hedy
                 {print} Welk liedje wil je horen?
-                {ask} Ik vind dar ook een leuk liedje!
+                {ask} Ik vind dat ook een leuk liedje!
                 {print} Volgende... {echo}
         13:
             header: Laat het programmeer feest beginnen!
@@ -136,10 +139,10 @@ levels:
                 Bijvoorbeeld: jouw naam, leeftijd of favoriete sportteam.
         2:
             header: Variabelen
-            text: Om een variabele te maken of 'in te stellen' gebruiken we het `{is}` commando.
+            text: Om een variabele te maken of 'in te stellen' gebruiken we het `{is}` commando
             code: |-
                 naam {is} Hedy
-                leeftijd{is} 15
+                leeftijd {is} 15
                 {print} naam is leeftijd jaar
         3:
             header: Interactief
@@ -148,44 +151,44 @@ levels:
 
                 Het antwoord op de vraag wordt dan opgeslagen in de variabele.
 
-                Zo hebben we het `{echo}`  commando niet meer nodig.
+                Zo hebben we het `{echo}` commando niet meer nodig.
             code: |-
                 naam {is} {ask} Wat is je naam?
                 {print} Hallo naam
         4:
             header: Meerdere variabelen
-            text: Nu we variabelen kunnen gebruiken, kunnen we meteen ook meerdere variabelen gebruiken in tegenstelling tot maar één `{echo}`commando.
-            code: "naam {is} {vraag} Wat is je naam ?\n{print} Hallo naam \nleeftijd {is} {vraag} Hoe oud ben je?\n{print} naam is leeftijd jaar"
+            text: Nu we variabelen kunnen gebruiken, kunnen we meteen ook meerdere variabelen gebruiken in tegenstelling tot maar één `{echo}` commando.
+            code: "naam {is} {ask} Wat is je naam ?\n{print} Hallo naam \nleeftijd {is} {ask} Hoe oud ben je?\n{print} naam is leeftijd jaar."
         5:
-            header: '{Sleep}'
+            header: Slaap
             text: Je kunt het `{sleep}` commando gebruiken om de code een tijdje op pauze te zetten.
             code: |-
                 {print} Mijn favoriete kleur is...
-                {slaap} 2
+                {sleep} 2
                 {print} groen!
         6:
-            header: '{Sleep} 5'
+            header: '{sleep} 5'
             text: |-
                 Je kunt een getal achter het `{sleep}` commando typen als je een langere stilte wilt.
 
-                Als je wil, kun je een zelfs een variabele gebruiken in plaats van een nummer om te bepalen hoe lang het programma moet pauseren.
+                Als je wil, kun je een zelfs een variabele gebruiken in plaats van een nummer om te bepalen hoe lang het programma moet pauzeren.
             code: |-
                 pauze {is} 10
                 {print} Mijn favoriete kleur is...
-                {slaap} pauze
+                {sleep} pauze
                 {print} groen!
         7:
             header: Debugging (foutzoeken)
             text: Debugging van de code betekent het oplossen van fouten in de code. Laten we deze code samen debuggen. Klik op de ladybug knop (lieveheersbeestje) om de debugger te starten.
             code: |-
-                {print} Welcome to the donut shop!
-                filling {is} What kind of filling would you like?
-                {print} You have chosen... Filling! Yum!
-                topping {ask} What kind of topping would you like?
-                topping is delicious!
-                {print} I'll go get your donut. {sleep}
-                {print} Here you go! A filling donut with toping!
-                {ask} Have a nice day!
+                {print} Welkom in de donut winkel!
+                vulling {is} Wat voor vulling wil je graag?
+                {print} Je hebt gekozen voor... vulling ! Lekkerr!
+                topping {ask} Wat voor topping wil je graag?
+                topping is heerlijk!
+                {print} Ik ga je donut.halen {sleep}
+                {print} Asjeblieft! Een vulling donut met topping!
+                {ask} Fijne dag nog!
         8:
             header: Veel programmeerplezier!
             text: Veel plezier met de avonturen in level 2!
@@ -200,60 +203,52 @@ levels:
 
                 Scheid de items op de lijst met een komma.
             code: |-
-                animals {is} dogs, cats, kangaroos
+                dieren {is} honden, katten, kangoeroes
                 ```
         3:
-            header: '{At} {random}'
+            header: '{at} {random}'
             text: |-
                 Je kunt na het maken van een lijstje het `{at}` `{random}` commando gebruiken.
                 De computer kiest dan een willekeurig item van het lijstje.
                 Je krijgt bij deze code dus elke keer dat je het uitvoert een verschillende uitvoer.
             code: |-
-                animals {is} dogs, cats, kangaroos
-                {print} animals {at} {random}
+                dieren {is} honden, katten, kangoeroes
+                {print} dieren {at} {random}
                 ```
         4:
             header: '{at} {random} in een zin'
             text: Je kunt `{at}` `{random}` ook midden in een zin gebruiken.
             code: |-
-                animals {is} dogs, cats, kangaroos
-                {print} My favorite animal is animals {at} {random}
+                dieren {is} honden, katten, kangoeroes
+                {print} Mijn favoriete dier is dieren {at} {random}
                 ```
         5:
-            header: '{Add} {to}'
+            header: '{add} {to}'
             text: |-
                 Je kunt items aan een lijst toevoegen met het `{add}` `{to}` commando.
 
-                Je kunt  zelf kiezen wat je aan de lijst toevoegt, of je kunt de speler laten kiezen.
+                Je kunt zelf kiezen wat je aan de lijst toevoegt, of je kunt de speler laten kiezen.
                 Dat doe je door `{add}` `{to}` te gebruiken in combinatie met een `{ask}` commando.
-            code: |-
-                animals {is} dog, cat, kangaroo
-                like {is} {ask} What is your favorite animal?
-                {add} like {to_list} animals
-                {print} I choose animals {at} {random}
+            code: "dieren {is} honden, katten, kangoeroes\nfavoriet {is} {ask} Wat is je favoriete dier?\n{add} favoriet {to_list} dieren \n{print} Ik kies dieren {at} {random}"
         6:
             header: '{remove} {from}'
             text: |-
                 Het tegenovergestelde van `{add}` `{to}` is  `{remove}` `{from}`.
                 Met dit commando haal je dus juist items van het lijstje af.
-            code: |-
-                animals {is} dog, cat, kangaroo
-                dislike {is} {ask} What animal do you not like?
-                {remove} dislike {from} animals
-                {print} I choose animals {at} {random}
+            code: "dieren {is} honden, katten, kangoeroes\nnietleuk {is} {ask} Welk dier vind je niet leuk?\n{remove} nietleuk {from} dieren \n{print} I choose dieren {at} {random}"
         7:
             header: Debugging (foutzoeken)
             text: Laten we deze code debuggen!
             editor: |-
-                music_genres {is} rock, pop, metal, indie, jazz
-                chosen_genre is music {at} {random}
-                {print} Let's listen to chosen genre
-                nice {ask} Do you like that genre?
-                {remove} chosen_genre {from} chosen_genre
-                second_choice {is} music_genres
-                {print} or do you prefer... second_choice {at} {random}
-                {remove} second_choice {to} music_genres
-                {print} I like music_genre {random} best!
+                muziek_genres {is} rock, pop, metal, indie, jazz
+                gekozen_genre is muziek {at} {random}
+                {print} Laten we luisteren naar gekozen genre
+                nice {ask} Houd je van dat genre?
+                {remove} gekozen_genre {from} gekozen_genre
+                tweede_keus {is} muziek_genres
+                {print} of houd je meer van... tweede_keus {at} {random}
+                {remove} tweede_keus {to} muziek_genres
+                {print} Ik houd het meest van muziek_genre {random} !
         8:
             header: Aan de slag!
             text: Veel plezier met de avonturen in level 3!
@@ -261,13 +256,13 @@ levels:
         1:
             header: Welkom bij level 4
             text: In dit level leer je aanhalingstekens te gebruiken.
-            code: '{print} ''print with quotes!'''
+            code: '{print} ''print met quotes!'''
         2:
             header: Probleem
             text: 'In de vorige levels heb je dit probleem misschien gezien:'
             code: |-
-                name {is} Sophie
-                {print} My name is name
+                naam {is} Sophie
+                {print} Mijn naam is naam
         3:
             header: Aanhalingstekens zijn de oplossing
             text: |-
@@ -277,35 +272,34 @@ levels:
         4:
             header: Aanhalingstekens en {print}
             text: Elke keer als je het `{print}` commando gebruikt, moet je de tekst die je letterlijk op het uitvoerscherm wil zien tussen aanhalingstekens zetten.
-            code: '{print} ''print with quotes!'''
+            code: '{print} ''print met quotes!'''
         5:
             header: Aanhalingstekens en {ask}
             text: Dit geldt ook voor `{ask}` .
-            code: name {is} {ask} 'name please?'
+            code: naam {is} {ask} 'naam graag?'
         6:
             header: Aanhalingstekens en variabelen
             text: |-
                 De naam van je variabele wil je niet letterlijk in het uitvoerscherm zien verschijnen.
                 Daarom moeten variabelenamen buiten de aanhalingstekens gehouden worden! Kijk maar:
             code: |-
-                name {is} Harry
-                {print} 'Hello ' name
+                naam {is} Harry
+                {print} 'Hallo ' naam
         7:
             header: Aanhalingstekens en variabelen
             text: |-
                 Als een variabele midden in een zin staat, moet de variabele nog steeds buiten de aanhalingstekens gezet worden.
                 De rest van de zin moet daarentegen wel binnen aanhalingstekens. Dat ziet er dan zo uit:
             code: |-
-                name {is} Harry
-                {print} 'Hello ' name ', how are you?'
+                naam {is} Harry
+                {print} 'Hallo ' naam ', hoe gaat het met jou?'
         8:
             header: Aanhalingstekens en hoge komma's
             text: |-
                 Let op! Nu we aanhalingstekens gebruiken, kun je geen hoge komma's gebruiken voor andere doeleinden.
 
-                Een hoge komma voor een meervoudsvorm, zoals auto's, of een hoge komma voor 's middags, maken Hedy in de war.
-                Kijk maar eens wat er gebeurt als je deze woorden probeert te typen...
-            code: '{print} ''This won''t work!'''
+                Kijk maar eens wat er gebeurt als je een hoge komma voor auto's, of voor 's middags, deze maken Hedy in de war....
+            code: '{print} ''Dit gaat niet werken!'''
         9:
             header: '{clear}'
             text: |-
@@ -326,21 +320,21 @@ levels:
             text: Laten we deze code debuggen!
             code: |-
                 {clear}
-                {print} What a nice day to go to the beach!
-                {ask} 'Do you want to build a sandcastle or swim in the ocean?'
-                {print} 'You would like to activity '
-                {print} 'I'd like to do that too'
-                {print} 'Look at these beautiful seashells!'
-                colors {is} 'orange, silver, white, brown'
-                {print} 'I love the colors {at} {random} one!'
-                choice {is} {ask} Which one do you like?
+                {print} Wat een mooie dag om naar het strand te gaan!
+                {ask} 'Wil je een zandkasteel bouwen of in zee zwemmen?'
+                {print} 'Dus je wilt activiteit'
+                {print} 'Dat wil ik ook'
+                {print} 'Kijk eens wat een mooie zeeschelpen!'
+                kleuren {is} 'oranje, zilver, wit, bruin'
+                {print} 'Ik houd van kleuren {at} {random} !'
+                keuze {is} {ask} Welke kleur vind jij mooi?
         11:
             header: Klaar voor de start? Af!
             text: Veel plezier met de avonturen in level 4!
     5:
         1:
             header: Welkom bij level 5
-            text: 'In dit level leer je 3 nieuwe commando''s:  `{if}`, `{else}` en `{in}`.'
+            text: 'In dit level leer je 3 nieuwe commando''s: `{if}`, `{else}` en `{in}`.'
         2:
             header: '{if}'
             text: |-
@@ -348,57 +342,59 @@ levels:
                 In dit voorbeeld wordt er bijvoorbeeld 'nice' geprint als de speler 'Hedy' antwoordt.
                 Antwoordt de speler iets anders, dan doet de computer niets.
             code: |-
-                name {is} {ask} 'what is your name?'
-                {if} name {is} Hedy {print} 'nice'
+                naam {is} {ask} 'wat is je naam?'
+                {if} naam {is} Hedy {print} 'leuk'
         3:
             header: Vergeet het print commando niet
-            text: Als je een `{if}` commando gebruikt, vergeet dan niet om ook een `{print}` commando te gebruiken.
-            code: '{if} name {is} Hedy ''nice'''
+            text: |-
+                Als je een `{if}` commando gebruikt, vergeet dan niet om ook een `{print}` commando te gebruiken.
+                Deze code werkt niet!
+            code: '{if} naam {is} Hedy ''leuk'''
         4:
             header: '{else}'
             text: |-
                 Als je een {if} gebruikt, kun je ook een {else} toevoegen.
                 Als het antwoord op de vraag 'Hedy' is, zegt de computer 'leuk'.
-                Is het antwoord iets anders, dan print de computer 'minder leuk'.
-            code: '{if} name {is} Hedy {print} ''nice'' {else} {print} ''boo!'''
+                Is het antwoord iets anders, dan print de computer 'minder leuk'
+            code: '{if} naam {is} Hedy {print} ''leuk'' {else} {print} ''minder leuk!'''
         5:
             header: Lange regels
             text: |-
                 Door {if} en {else} te gebruiken in één regel, kunnen je regels erg lang worden.
-
-                Daarom mag je de commando's ook op twee losse regels gerbuiken.
+                :
+                Daarom mag je de commando's ook op twee losse regels gebruiken, zoals hier:
             code: |-
-                {if} name {is} Hedy {print} 'nice'
-                {else} {print} 'boo!'
+                {if} naam {is} Hedy {print} 'leuk'
+                {else} {print} 'minder leuk'
         6:
-            header: Nog iets nieuws!
+            header: Nog iets nieuws
             text: |-
-                Als je hebt geoefend met  `{if}` en `{else}`, kun je aan de slag met het`{in}` commando.
+                Als je hebt geoefend met `{if}` en `{else}`, kun je aan de slag met het `{in}` commando.
 
-                Met `{in}`  kun je de computer laten checken of iets in jouw lijstje staat. Kijk maar naar het voorbeeld:
+                Met `{in}` kun je de computer laten checken of iets in jouw lijstje staat. Kijk maar naar het voorbeeld:
 
-                Let daarbij wel op dat Hedy hoofdlettergevoelig is. Als je "Groen" intikt inplaats van "groen", dan zegt Hedy "meh".
+                Let daarbij wel op dat Hedy hoofdlettergevoelig is. Als je "Groen" intikt in plaats van "groen", dan zegt Hedy "minder mooi".
             code: |-
-                pretty_colors {is} green, yellow
-                favorite_color {is} {ask} 'What is your favorite color?'
-                {if} favorite_color {in} pretty_colors {print} 'pretty!'
-                {else} {print} 'meh'
+                leuke_kleuren {is} groen, geel
+                favoriete_kleur {is} {ask} 'What is your favorite color?'
+                {if} favoriete_kleur {in} leuke_kleuren {print} 'mooi!'
+                {else} {print} 'minder mooi'
         7:
-            header: Debugging
+            header: Debugging (foutzoeken)
             text: Laten we deze code debuggen!
             code: |-
-                {print} Welcome to HedyAir Security!
-                boarding_pass {is} {ask} 'Do you have your boarding pass?'
-                {if} bording_pass yes {print} Great!
-                {else} Please, get your boarding pass ready.
-                passport {is} 'Can I see your passport, please?'
-                {if} passport {is} yes 'thank you'
-                {else} 'You can't fly without a passport'
-                declare {is} {ask} Do you have anything to declare?
-                {if} declare {is} yes
-                item_to_declare {is} {ask} 'What would you like to declare'
-                {else} Alright
-                {print} Thank you. Please head to gate A22.'
+                {print} Welkom bij HedyAir Security!
+                instapkaart {is} {ask} 'Heeft U een instapkaart bij de hand?'
+                {if} instaapkaart ja{print} Prima!
+                {else} Houd je instapkaart bij de hand alstublieft.
+                paspoort {is} 'Mag ik Uw paspoort zien?'
+                {if} paspoort {is} ja 'dank U'
+                {else} 'U kunt niet vliegen zonder paspoort'
+                aangeven {is} {ask} Heeft U iets aan te geven?
+                {if} aangeven {is} ja
+                aangeef_voorwerp {is} {ask} 'Wat wilt U aangeven'
+                {else} OK
+                {print} Dank U. Gaat U naar gate A22 alstublieft.'
         8:
             header: Werken maar!
             text: Veel plezier met de avonturen in level 5!
@@ -417,52 +413,52 @@ levels:
         4:
             header: Vermenigvuldigen
             text: Wil je vermenigvuldigen, gebruik dan het sterretje.
-            code: '{print} ''5 times 5 is '' 5 * 5'
+            code: '{print} ''5 maal 5 is '' 5 * 5'
         5:
             header: Delen
             text: Voor delen gebruik je de slash.
-            code: '{print} ''5 divided by 5 is '' 5 / 5'
+            code: '{print} ''5 gedeeld door 5 is '' 5 / 5'
         6:
             header: Samenvatting
-            text: 'Je kan deze tekens dus gebuiken om mee te rekenen: +, -, * en /.'
+            text: 'Je kan deze tekens dus gebruiken om mee te rekenen: +, -, * en /.'
             code: |-
                 {print} '5 plus 5 is ' 5 + 5
-                {print} '5 minus 5 is ' 5 - 5
-                {print} '5 times 5 is ' 5 * 5
-                {print} '5 divided by 5 is ' 5 / 5
+                {print} '5 min 5 is ' 5 - 5
+                {print} '5 maal 5 is ' 5 * 5
+                {print} '5 gedeeld door 5 is ' 5 / 5
         7:
             header: Het = symbool
             text: |-
-                Vanaf nu kun je het = symbool gebruiken in plaats van het`{is}` commando.
-                Dit geldt voor getallen en woorden, en het geldt ook na  `{if}` of `{else}` commando's.
+                Vanaf nu kun je het = symbool gebruiken in plaats van het `{is}` commando.
+                Dit geldt voor getallen en woorden, en het geldt ook na `{if}` of `{else}` commando's.
             code: |-
-                name = Hedy
-                answer = 20 + 4
+                naam = Hedy
+                antwoord = 20 + 4
         8:
             header: Rekenen met variabelen
             text: 'Je kunt rekenen met getallen, maar je kunt ook variabelen gebruiken in je berekeningen. Kijk maar:'
             code: |-
-                number_1 = {ask} 'Fill in the first number:'
-                number_2 = {ask} 'Fill in the second number:'
-                correct_answer = number_1 * number_2
-                {print} number_1 ' times ' number_2 ' is ' correct_answer
+                nummer_1 = {ask} 'Vul eerste nummer in:'
+                nummer_2 = {ask} 'Vul tweede nummer in:'
+                correct_antwoord = nummer_1 * nummer_2
+                {print} nummer_1 ' maal ' numner_2 ' is ' correct_antwoord
         9:
-            header: Debugging
-            text: Let's debug this code!
+            header: Debugging (foutzoeken)
+            text: Laten we deze code debuggen!
             code: |-
-                {print} 'This is the water park ticket machine'
-                {print} 'Price list: Children under 12 $3, Adults $5'
-                {print} 'Mondays are 25% off'
-                amount_of_children = 'How many kids tickets would you like?'
-                amount_of_adults = 'How many adult tickets would you like?'
-                day_of_the_week = {ask} 'What day is it?'
+                {print} 'Dit is het water park kaartjes automaat'
+                {print} 'Priislijst: Kinderen onder 12 €3, Volwassenen €5'
+                {print} 'Maandag 25% korting'
+                aantal_kinderen = 'Hoeveel kinder kaartjes wilt U?'
+                aantal_volwassenen = 'Hoeveel volwassenen kaartjes wilt U ?'
+                dag_van_de_week = {ask} 'Welke dag is het vandaag?'
                 {clear}
-                child_price = amount of children * 3
-                adult_price = amount_of_adults + 5
-                total_price = adult_price * child_price
-                {if} day {is} monday
-                total_price = total_price * 0.25
-                {print} 'That will be total_price please'
+                kinder_prijs = aantal_kinderen * 3
+                volwassen_prijs = aantal_volwassenen + 5
+                total_price = volwassen_prijs * kinder_prijs
+                {if} dag {is} maandag
+                totaal = total_price * 0.25
+                {print} 'Totaal prijs is totaal'
         10:
             header: Aan de slag!
             text: Veel plezier met de avonturen in level 6!
@@ -474,50 +470,50 @@ levels:
             header: '{repeat} 3 {times}'
             text: |-
                 Wil je een regel code herhalen, gebruik dan deze code `{repeat}` 3 `{times}`.
-
-                Wil je de regel vaker herhalen dan 3 keer, verander dan simpleweg het getal.
+                Wil je de regel vaker herhalen dan 3 keer, verander dan simpelweg het getal.
 
                 Bijvoorbeeld: Wil je in je spannende verhaal een personage 5x om hulp laten schreeuwen. Doe dat dan zo:
             code: |-
-                {print} 'The prince kept calling for help'
+                {print} 'De prins bleef om hulp roepen'
                 {repeat} 5 {times} {print} 'Help!'
-                {print} 'Why is nobody helping me?'
+                {print} 'Waarom helpt niemand mij?'
         3:
-            header: Vergeet print niet!
-            text: Als je {repeat} gebruikt, vergeet dan {print} niet!
+            header: Vergeet print niet
+            text: Als je {repeat} gebruikt, vergeet dan {print} niet.
             code: '{repeat} 5 {times} ''Help!'''
         4:
             header: '{repeat} met {ask}'
             text: Je kunt {repeat} ook gebruiken met `{ask}`, `{if}` of `{else}`.
             code: |-
-                {repeat} 2 {times} answer = {ask} 'Did you know you could ask a question multiple times?'
-                {if} answer {is} yes {repeat} 2 {times} {print} 'You knew that already!'
-                {else} {repeat} 3 {times} {print} 'You have learned something new!'
+                {repeat} 2 {times} antwoord = {ask} 'Wist je dat je een vraag meerdere keren kunt stellen?'
+                {if} antwoord {is} ja {repeat} 2 {times} {print} 'Je wist het al!'
+                {else} {repeat} 3 {times} {print} 'Je hebt wat nieuws geleerd!'
         5:
-            header: Debugging
+            header: Debugging (foutzoeken)
             text: Laten we deze code debuggen!
             code: |-
-                {print} You gave stranded on a desert island.
+                {print} Je bent gestrand op een onbewoond eiland.
                 {repeat} 3 'Help!'
-                rescued = {ask} Has anybody come to the rescue?
-                {if} rescued yes {is}
-                {print} Lucky!
+                gered = {ask} Is er iemand gekomen om je te redden?
+                {if} gered yes {is}
+                {print} Geluksvogel!
                 {else} {repeat} 3 {times} 'HELP!'
-                rescued = 'What about now?'
-                {if} yes
-                {print} 'Hurray!
-                {else} 'That's a shame... Oh well... time to build a shelter and find some food.'
+                gered = 'Ben je nu gered?'
+                {if} ja
+                {print} 'Hoera!
+                {else} 'Dat is jammer.. Nou ja... tijd om een hut te bouwen en wat eten te zoeken.'
         6:
             header: Klaar voor de start? Af!
             text: Veel plezier met de avonturen in level 7!
     8:
         1:
             header: Welkom bij level 8
-            text: In dit level leer je inspringen bij  `{repeat}`, `{if}` en `{else}`, om de commando's te gebruiken over meerdere regels code.
+            text: In dit level leer je inspringen bij `{repeat}`, `{if}` en `{else}`, om de commando's te gebruiken over meerdere regels code.
         2:
             header: '{repeat} hiervoor'
             text: |-
                 Voor dit level zag `{repeat}` er zo uit:
+
                 Je kon het maar gebruiken over 1 regel.
             code: '{repeat} 5 {times} {print} ''Help!'''
         3:
@@ -529,8 +525,8 @@ levels:
                 Inspringen doe je met 4 spaties (of een tab) aan het begin van elke regel die herhaald moet worden. Zoals in het voorbeeld:
             code: |-
                 {repeat} 5 {times}
-                    {print} 'Hello everyone'
-                    {print} 'This will be printed 5 times'
+                    {print} 'Hallo iedereen'
+                    {print} 'Dit wordt 5 keer geprint'
         4:
             header: '{repeat} nu'
             text: |-
@@ -538,29 +534,31 @@ levels:
                 De regels die niet inspringen worden dan niet herhaald.
             code: |-
                 {repeat} 3 {times}
-                    {print} 'Hello!'
-                {print} 'We are done repeating!'
+                    {print} 'Hallo!'
+                {print} 'We zijn klaar met herhalen!'
         5:
             header: '{if} en {else} hiervoor'
             text: |-
                 Hetzelfde geldt voor `{if}` en `{else}`.
                 Hiervoor gebruikte je deze commando's zo:
             code: |-
-                {if} name {is} Hedy {print} 'nice'
-                {else} {print} 'boo!'
+                {if} naam{is} Hedy {print} 'leuk'
+                {else} {print} 'minder leuk!'
         6:
             header: '{if} en {else} nu'
-            text: Bij {if} en {else} spring je nu ook in.
+            text: |-
+                Zo zien de `{if}` and `{else}` commando's er nu uit.
+                Bij {if} en {else} spring je nu ook in.
             code: |-
-                name = {ask} 'What is your name?'
-                {if} name {is} Hedy
-                    {print} 'Welcome Hedy'
+                naam = {ask} 'Wat is je naam?'
+                {if} naam {is} Hedy
+                    {print} 'Welkom Hedy'
                 {else}
-                    {print} 'Welcome programmer!'
+                    {print} 'Welkom programmeur!'
         7:
             header: Stoppen met inspringen
             text: Net als bij {repeat}, kun je stoppen met inspringen. Hierdoor worden de regels altijd getoond en niet alleen als de stelling waar is.
-            code: "name = {ask} 'What is your name?'\n{if} name {is} Hedy\n    {print} 'Welcome Hedy'\n{else}\n    {print} 'Welcome programmer!' \n{print} '3..2..1.. Start programming!'"
+            code: "naam = {ask} 'Wat is je naam ?'\n{if} naam {is} Hedy\n    {print} 'Welkom Hedy'\n{else}\n    {print} 'Welkom programmeur!' \n{print} '3..2..1.. Start met programmeren!'"
         8:
             header: '{if}jes in {if}jes'
             text: |-
@@ -581,43 +579,43 @@ levels:
             text: Je mag meerdere regels gebruiken na `{repeat}`.
             code: |-
                 {repeat} 3 {times}
-                    food = {ask} 'What do you want?'
-                    {if} food {is} pizza
-                        {print} 'nice!'
+                    eten= {ask} 'Wat wil je eten?'
+                    {if} eten {is} pizza
+                        {print} 'lekker!'
                     {else}
-                        {print} 'pizza is better'
+                        {print} 'pizza is beter'
         3:
             header: Inspringen is belangrijk!
-            text: Inspringen is erg belanrgijk om de computer te vertellen welke regels herhaald moeten worden en welke niet.
+            text: Inspringen is erg belangrijk om de computer te vertellen welke regels herhaald moeten worden en welke niet.
             code: |-
                 {repeat} 3 {times}
-                    {print} 'This line will be repeated...'
-                    {print} 'This one too...'
-                {print} 'but this one will not!'
+                    {print} 'Deze regel wordt herhaald...'
+                    {print} 'Deze regel ook...'
+                {print} 'Maar deze regel niet!'
         4:
             header: Meerdere regels na `{if}`
-            text: Je mag ook meerdere regels gebruiken na een `{if}`.
+            text: Je mag ook meerdere regels gebruiken na een `{if}`
             code: |-
-                continue = {ask} 'Do you want to continue?'
-                {if} continue = yes
-                    sure = {ask} 'Are you sure?'
-                    {if} sure {is} yes
-                        {print} 'We will continue'
+                doorgaan= {ask} 'Wil je doorgaan?'
+                {if} doorgaan= yes
+                    zeker = {ask} 'Weet je het zeker ?'
+                    {if} zeker  {is} ja
+                        {print} 'We zullen doorgaan'
                     {else}
-                        {print} 'You are not sure'
+                        {print} 'Je weet het niet zeker'
                 {else}
-                    {print} 'You do not want to continue'
+                    {print} 'Je wilt niet doorgaan'
         5:
             header: Inspringen is belangrijk
             text: Ook hier is inspringen superbelangrijk! Het kan een groot verschil maken in je code.
             code: |-
-                continue = {ask} 'Do you want to continue?'
-                {if} continue = yes
-                    sure = {ask} 'Are you sure?'
-                    {if} sure {is} yes
-                        {print} 'We will continue'
+                doorgaan = {ask} 'Wil je doorgaan ?'
+                {if} doorgaan = yes
+                    zeker= {ask} 'Weet je het zeker?'
+                    {if} zeker{is} ja
+                        {print} 'We zullen doorgaan '
                 {else}
-                    {print} 'You are not sure'
+                    {print} 'Je weet het niet zeker'
         6:
             header: Een `{if}` in een `{repeat}`
             text: |-
@@ -625,23 +623,23 @@ levels:
                 Bekijk dit voorbeeld maar eens:
             code: |-
                 {repeat} 3 {times}
-                    food = {ask} 'What do you want?'
-                    {if} food {is} pizza
-                        {print} 'nice!'
+                    eten = {ask} 'Wat wil je eten?'
+                    {if} eten {is} pizza
+                        {print} 'lekker!'
                     {else}
-                        {print} 'pizza is better'
+                        {print} 'pizza is beter'
         7:
             header: Let op het inspringen
-            text: Zie je hoe de 4e en 6e regel van deze code beginnen met 8 spaties?
+            text: Zie hoe de 4e en 6e regel van deze code beginnen met 8 spaties.
             code: |-
                 {repeat} 3 {times}
-                    food = {ask} 'What do you want?'
-                    {if} food {is} pizza
-                        {print} 'nice!'
+                    eten= {ask} 'Wat wil je eten?'
+                    {if} eten{is} pizza
+                        {print} 'lekker!'
                     {else}
-                        {print} 'pizza is better'
+                        {print} 'pizza is beter'
         8:
-            header: Let's go!
+            header: Aan de slag!
             text: Veel plezier met de avonturen in level 9!
     10:
         1:
@@ -650,18 +648,15 @@ levels:
         2:
             header: '{for}'
             text: Met {for} kun je een lijst maken en alle items op die lijst gebruiken. `{for}` creëert net als {repeat} en {if} een blok waarbij je 4 spaties moet inspringen.
-            code: |-
-                animals = dog, cat, blobfish
-                {for} animal {in} animals
-                    {print} 'I love ' animal
+            code: "dieren = hond, kat, goudvis\n{for} dier{in} dieren \n    {print} 'I love ' dier"
         3:
             header: '{for}'
             text: 'Hier zie je een ander voorbeeld van `{for}`:'
             code: |-
-                days = Monday, Tuesday, Wednesday, Thursday, Friday, Saturday, Sunday
-                names = mom, dad, Emma, Sophie
-                {for} day {in} days
-                    {print} names {at} {random} ' does the dishes on ' day
+                dagen= Maandag, Dinsdag, Woensdag, Donderdag, Vrijdag, Zaterdag, Zondag
+                namen= Mama, Papa, Emma, Sophie
+                {for} dag {in} dagen
+                    {print} namen {at} {random} ' doet de afwas on ' dag
         4:
             header: Programmeertijd!
             text: Veel plezier met de avonturen in level 10!
@@ -670,20 +665,19 @@ levels:
             header: Welkom bij level 11
             text: |-
                 In dit level leer je een nieuwe vorm van `{for}`. In de eerdere levels gebruikte je `{for}` voor een lijstje, maar we kunnen het ook gebruiken met getallen.
+
                 Hierdoor hebben we het `{repeat}` commando niet meer nodig.
         2:
             header: '{for}'
             text: 'Zo ziet de nieuwe vorm van `{for}` eruit:'
-            code: |-
-                {for} counter {in} {range} 1 {to} 10
-                    {print} counter
-                {print} 'Ready or not. Here I come!'
+            code: "{for} teller {in} {range} 1 {to} 10\n    {print} teller \n{print} 'Klaar of niet. Ik kom eraan!'"
         3:
             header: De variabele i
             text: |-
                 In de vorige slide heette de variabele 'teller', omdat hij aan het aftellen was.
                 Je kunt een variabele natuurlijk alle namen geven die je wil.
                 In Python is de standaard naam die in deze situatie voor variabelen gebruikt wordt 'i'.
+                Dat ziet er zo uit:
             code: |-
                 number = 10
                 {for} i {in} {range} 1 {to} 10
@@ -694,64 +688,68 @@ levels:
     12:
         1:
             header: Welkom bij level 12
-            text: Vanaf dit level kun je decimale getallen gebruiken en er is een aantal aanpassingen gedaan bij de aanhalingstekens.
+            text: |-
+                Vanaf dit level kun je decimale getallen gebruiken en er is een aantal aanpassingen gedaan bij de aanhalingstekens.
+                Vanaf dit level kun je ook functies gebruiken!
         2:
             header: Aanhalingstekens
             text: |-
                 In dit level is er iets aangepast aan de aanhalingstekens.
                 Vanaf nu moet **alle tekst** in aanhalingstekens. Dus ook de waarden die je aan variabelen geeft, items op lijsten en tekst na {if} commando's.
             code: |-
-                name = 'Hedy the Robot'
-                {print} 'Hello ' name
+                naam = 'Hedy de Robot'
+                {print} 'Hallo ' naam
         3:
             header: Decimale getallen
             text: |-
                 Vanaf nu kun je decimale getallen gebruiken. Dit kan bijvoorbeeld leuk zijn in jouw restaurantprogramma!
 
-                Getallen hoeven geen aanhalingstekens.
+                Getallen hebben geen aanhalingstekens nodig.
             code: |-
-                {print} 'decimal numbers now need to use a dot'
+                {print} 'Decimale nummers moeten vanaf nu met een punt'
                 {print} 2.5 + 2.5
         4:
             header: Functies!
             text: |-
-                In dit level leer je functies te gebruiken. Een fucntie is een blokje code dat je gemakkelijk meerdere keren kunt gebruiken. Functies helpen je de code te organiseren en stuken steeds opnieuw te gebruiken. Gebruik {define} om een functie te maken en een naam te geven. Typ daarna alle regels die je in de functie wil hebben in een ingesprongen blokje onder de regel met {define}. Laat een regel leeg om je code er netjes uit te laten zien. Fantastisch! Je hebt een functie gemaakt!
+                In dit level leer je functies te gebruiken. Een functie is een blokje code dat je gemakkelijk meerdere keren kunt gebruiken. Functies helpen je de code te organiseren en stuken steeds opnieuw te gebruiken. Gebruik {define} om een functie te maken en een naam te geven. Typ daarna alle regels die je in de functie wil hebben in een ingesprongen blokje onder de regel met {define}. Laat een regel leeg om je code er netjes uit te laten zien. Fantastisch! Je hebt een functie gemaakt!
 
                 Nu kun je dit blokje code meermaals gebruiken. Je roept de functie op met {call}! Je hoeft de code dan niet helemaal opnieuw te typen.
         5:
-            header: Twinkle Twinkle little star!
+            header: Schitter Schitter klein sterretje!
             text: |-
                 In dit programma zie je een voorbeeld van een functie.
                 Laten we kijken wat er gebeurt als je de rest van het lied aanvult!
             code: |-
-                {define} twinkle
-                     {print} 'Twinkle'
+                {define} schitter
+                     {print} 'Schitter'
                      {print} '...'
 
-                 {call} twinkle
-                 {print} 'Up above the world so high'
-                 {print} 'Like a diamond in the sky'
-                 {call} twinkle
+                 {call} schitter
+                 {print} 'Hoog boven de wereld'
+                 {print} 'Als een diamant aan de hemel'
+                 {call} schitter
         6:
             header: Functies
-            text: Zoals je kunt zien in de voobeelden is een functie een blokje code dat je vaker kunt oproepen. Je gebruikt `{define}` om de functie te maken en `{call}` om hem te gebruiken.
+            text: Zoals je kunt zien in de voorbeelden is een functie een blokje code dat je vaker kunt oproepen. Je gebruikt `{define}` om de functie te maken en `{call}` om hem te gebruiken.
         7:
             header: Klaar om het te gaan proberen?
             text: Veel plezier met de avonturen in level 12!
     13:
         1:
             header: Welkom bij level 13
-            text: We gaan dit level `{and}` en `{or}` leren! Als je 2 stellingen wil checken, komen deze commando's goed van pas.
+            text: |-
+                We gaan dit level `{and}` en `{or}` leren! Als je 2 stellingen wil checken, komen deze commando's goed van pas.
+                Vanaf nu kun je argumenten in je functies gebruiken.
         2:
             header: '{and}'
             text: |-
                 {and} gebruik je altijd in combinatie met een {if}.
                 Met dit commando kun je checken of 2 stellingen allebei waar zijn. Bijvoorbeeld:
             code: |-
-                name = {ask} 'what is your name?'
-                age = {ask} 'what is your age?'
-                {if} name {is} 'Hedy' {and} age {is} 2
-                    {print} 'You are the real Hedy!'
+                naam = {ask} 'wat is je naam?'
+                leeftijd = {ask} 'wat is je leeftijd ?'
+                {if} naam {is} 'Hedy' {and} leeftijd {is} 2
+                        {print} 'Je bent de echte Hedy!'
         3:
             header: '{or}'
             text: |-
@@ -759,24 +757,18 @@ levels:
 
                 Laten we kijken wat er gebeurt als je de `{and}` in het voorbeeld verandert naar `{or}`.
             code: |-
-                name = {ask} 'what is your name?'
-                {if} name {is} 'Hedy' {or} name {is} 'hedy'
-                    {print} 'Welcome!!'
+                naam = {ask} 'wat is je naam ?'
+                {if} naam {is} 'Hedy' {or} naam  {is} 'hedy'
+                         {print} 'Welkom!!'
         4:
             header: Functies met argumenten
-            text: In het vorige level heb je geleerd om functies te gebruiken. Nu leer je functies te gebruiken met **argumenten**. Een argument is een variabele die je alleen gebruikt in een functie.Daarbuiten wordt de variabele niet gebruikt.
+            text: In het vorige level heb je geleerd om functies te gebruiken. Nu leer je functies te gebruiken met **argumenten**. Een argument is een variabele die je alleen gebruikt in een functie. Daarbuiten wordt de variabele niet gebruikt.
         5:
             header: Voorbeeld
             text: |-
-                In dit voorbeeld zie je hoe het argument 'plaats' gebruikt wortd bij een functie.
+                In dit voorbeeld zie je hoe het argument 'plaats' gebruikt wordt bij een functie.
                 Voer de code uit en verander 'ocean' en 'sea' naar iets anders en zie wat er gebeurt...
-            code: |-
-                {define} song {with} place
-                    {print} 'My Bonnie is over the ' place
-
-                {call} song {with} 'ocean'
-                {call} song {with} 'sea'
-                {call} song {with} 'ocean'
+            code: "{define} lied {with} plaats\n    {print} 'My Bonnie is over the ' naam \n\n{call} lied {with} 'ocean'\n{call} lied {with} 'sea'\n{call} lied {with} 'ocean'"
         6:
             header: Voorbeeld met variabele
             text: |-
@@ -784,43 +776,43 @@ levels:
 
                 Wat gebeurt er als je deze aanpassingen maakt?
                 ```
-                define lied with plaats
-                    print 'My Bonnie is ' plaats
+                {define} lied {with} plaats
+                    {print} 'My Bonnie is ' plaats
 
-                antwoord = ask 'Waar is Bonnie?'
-                call song with antwoord
+                antwoord = {ask} 'Waar is Bonnie?'
+                {call} song {with} antwoord
                 ```
             code: |-
-                {define} song {with} place
-                    {print} 'My Bonnie is over the ' place
+                {define} lied {with} plaats
+                    {print} 'My Bonnie is over the ' plaats
 
-                {call} song {with} 'ocean'
-                {call} song {with} 'sea'
-                {call} song {with} 'ocean'
+                {call} lied {with} 'ocean'
+                {call} lied {with} 'sea'
+                {call} lied {with} 'ocean'
         7:
             header: Nog meer vragen!
             text: |-
-                Je kunt zelfs meerdere vragen combineren met de fucnties. Type deze code en kijk maar wat er gebeurt.
+                Je kunt zelfs meerdere vragen combineren met de functie. Type deze code en kijk maar wat er gebeurt.
 
-                Let op! Zie je hoe de variabele en de argumenetn nu dezelfde naam hebben. Dat mag!
+                Let op! Zie je hoe de variabele en de argumenten nu dezelfde naam hebben. Dat mag!
                 Raak je hiervan in de war? Gebruik dan verschillende namen, want dat mag ook gewoon.
                 ```
-                define lied with naam, plaats
-                    print 'My ' naam ' is ' plaats
+                {define} lied {with} naam, plaats
+                    {print} 'Mijn' naam ' is ' plaats
 
-                naam = ask 'Wie?'
-                place = ask 'Waar is diegene?'
-                call lied with naam, plaats
+                naam = {vraag} 'Wie?'
+                plaats = {vraag} 'Waar zijn zij?'
+                {call} lied {with} naam, plaats
                 ```
             code: |-
-                {define} song {with} place
-                    {print} 'My Bonnie is over the ' place
+                {define} lied {with} plaats
+                    {print} 'My Bonnie is over the ' plaats
 
-                {call} song {with} 'ocean'
-                {call} song {with} 'sea'
-                {call} song {with} 'ocean'
+                {call} lied {with} 'ocean'
+                {call} lied {with} 'sea'
+                {call} lied {with} 'ocean'
         8:
-            header: Let's go!
+            header: Aan de slag!
             text: Veel plezier met de avonturen in level 13!
     14:
         1:
@@ -839,66 +831,66 @@ levels:
 
                   De <= betekent kleiner dan of gelijk aan...
 
-                Hier zie je een voorbeeld van hoe je deze symbolen kunt gebruiken.
+                Hier zie je een voorbeeld van hoe je deze symbolen kunt gebruiken:
             code: |-
-                age = {ask} 'How old are you?'
-                {if} age < 13
-                    {print} 'You are younger than me!'
+                leeftijd = {ask} 'Hoe oud ben je?'
+                {if} leeftijd < 13
+                    {print} 'Je bent jonger dan ik!'
                 {else}
-                    {print} 'You are older than me!'
+                    {print} 'Je bent ouder dan ik!'
         3:
             header: Symbolen
             text: |-
                 Je kunt ook deze twee symbolen gebruiken:
 
-                  == is hetzelfde als.
+                 == is hetzelfde als.
 
-                  != is niet
+                 != is niet
 
-                  == gebruik je bij een `{if}`. Kijk maar:
+                 == gebruik je bij een `{if}`.
             code: |-
-                answer = {ask} 'Do you want to learn more?'
-                {if} answer == 'yes'
-                    {print} 'Go to the next adventure!'
-                {if} answer != 'yes'
-                    {print} 'That is a shame!'
+                antwoord= {ask} 'Wil je nog meer leren?'
+                {if} antwoord== 'ja'
+                    {print} 'Ga naar het volgende avontuur!'
+                {if} antwoord != 'ja'
+                    {print} 'Dat i jammer!'
         4:
             header: Return value (terugkeer variabele)
-            text: In de vorige levels heb je over functies met argumenten geleerd. Waar je functies ook goed voor kunt gebruiken is om ze iets uit te laten rekenen. Je kunt de fucntie een som geven en de fucntie berekent dan het antwoord voor je. Het antwoord dat je terugkrijgt noem je de **return value**.
+            text: In de vorige levels heb je over functies met argumenten geleerd. Waar je functies ook goed voor kunt gebruiken is om ze iets uit te laten rekenen. Je kunt de functie een som geven en de functie berekent dan het antwoord voor je. Het antwoord dat je terugkrijgt noem je de **return value**.
         5:
-            header: Return value
+            header: Return waarde
             text: Bijvoorbeeld, in deze code wordt de nieuwe prijs van een item berekend door de functie bereken_nieuwe_prijs. De nieuwe prijs is hierbij dus de return value.
             code: |-
-                {define} calculate_new_price {with} amount, percentage
+                {define} bereken_nieuwe_prijs {with} hoogte, percentage
                     percentage = percentage / 100
-                    discount_amount = amount * percentage
-                    return amount - discount_amount
+                    kortings_hoogte = hoogte * percentage
+                    return hoogte - kortings_hoogte
 
-                old_price = {ask} 'How much is on the price tag?'
-                discount = {ask} 'What percentage is the discount?'
+                oude_prijs = {ask} 'Wat staat er op het prijskaartje?'
+                korting = {ask} 'Wat is de kortingspercentage?'
 
-                new_price = {call} calculate_new_price {with} old_price, discount
-                {print} 'The new price is ' new_price ' dollar'
+                nieuwe_prijs = {call} bereken_nieuwe_prijs  {with} oude_prijs, korting
+                {print} 'De nieuwe prijs is ' nieuwe_prijs ' euro'
         6:
             header: Aan de slag!
             text: Veel plezier met de avonturen in level 14!
     15:
         1:
             header: Welkom bij level 15
-            text: In dit level leer je over de  `{while}` lus.
+            text: In dit level leer je over de `{while}` lus.
         2:
             header: '{while}'
             text: |-
-                Nu gaan we een nieuwe lus leren: De {zolang} lus! We gaan door zo lang het statement dat we hebben waar is. Vergeet dus niet in de loop de waarde te veranderen.
+                Nu gaan we een nieuwe lus leren: De {while} lus! We gaan door zo lang het statement dat we hebben waar is. Vergeet dus niet in de loop de waarde te veranderen.
 
                 Dus bij de voorbeeldcode gaan we door totdat er een goed antwoord is gegeven. Als er nooit een goed antwoord wordt gegeven, dan stopt de lus nooit!
             code: |-
-                answer = 0
-                {while} answer != 25
-                    answer = {ask} 'What is 5 times 5?'
-                {print} 'A correct answer has been given'
+                antwoord = 0
+                {while} antwoord  != 25
+                    answer = {ask} 'Hoeveel is 5 maal 5?'
+                {print} 'Je antwoord is goed'
         3:
-            header: Let's try it out!
+            header: Proberen maar!
             text: Veel plezier met de avonturen in level 15!
     16:
         1:
@@ -906,16 +898,16 @@ levels:
             text: In dit level leer je over de [vierkante haken] en hoe je ze moet gebruiken.
         2:
             header: Vierkante haken
-            text: We gaan lijstjes maken op de Pyhton manier, met vierkante haken om de lijst! We zetten nog steeds aanhalingsteken om elk item, zoals je eerste hebt geleerd. We gebruiken vierkante haken om de plek in de lijst aan te geven. Het {at} {random} ziet er nu ook anders uit.
+            text: We gaan lijstjes maken op de Python manier, met vierkante haken om de lijst! We zetten nog steeds aanhalingsteken om elk item, zoals je eerste hebt geleerd. We gebruiken vierkante haken om de plek in de lijst aan te geven. Het {at} {random} ziet er nu ook anders uit.
             code: |-
-                friends = ['Ahmed', 'Ben', 'Cayden']
-                {print} friends[1] ' is the first friend on the list.'
-                {print} friends[2] ' is the second friend on the list.'
-                {print} friends[3] ' is the third friend on the list.'
-                #now we will match 2 lists using the variable i
-                lucky_numbers = [15, 18, 6]
+                vrienden = ['Ahmed', 'Ben', 'Cayden']
+                {print} vrienden [1] ' is de eerste vriend op de lijst.'
+                {print} vrienden [2] ' is de tweede vriend op de lijst.'
+                {print} vrienden [3] ' is de derde vriend op de lijst.'
+                #nu zullen we  2 lijsten samenvoegen met gebruik van de variabele i
+                geluks_nummers = [15, 18, 6]
                 {for} i {in} {range} 1 {to} 3
-                    {print} friends[i] 's lucky number is ' lucky_numbers[i]
+                    {print} vrienden[i] 'zijn geluks nummer is ' geluks_nummers[i]
         3:
             header: Proberen maar!
             text: Veel plezier met de avonturen in level 16!
@@ -927,26 +919,26 @@ levels:
             header: Dubbele punt
             text: Het inspringen verandert weer een klein beetje. Elke keer als er ingesprongen moet worden, hebben we ook een dubbele punt nodig in de zin daarvoor.
             code: |-
-                prices = ['1 million dollars', 'an apple pie', 'nothing']
-                your_price = prices[{random}]
-                {print} 'You win ' your_price
-                {if} your_price == '1 million dollars' :
-                    {print} 'Yeah! You are rich!'
+                prijzen = ['1 miljoen', 'een appletaart', 'niks']
+                jouw_prijs = prijzen [{random}]
+                {print} 'Je wint ' jouw_prijs
+                {if} jouw_prijs == '1 miljoen' :
+                    {print} 'Yess. Je bent rijk!'
                 {else}:
-                    {print} 'Better luck next time..'
+                    {print} 'Meer geluk volgende keer..'
         3:
             header: '{elif}'
             text: 'In dit level kun je ook een nieuw commando gebruiken: {elif}. {elif} is een samenvoeging van {else} en {if}. Je kunt het gebruiken om een 3e optie te creëren (of zelfs meer!). Kijk maar!'
             code: |-
-                prices = ['1 million dollars', 'an apple pie', 'nothing']
-                your_price = prices[{random}]
-                {print} 'You win ' your_price
-                {if} your_price == '1 million dollars' :
-                    {print} 'Yeah! You are rich!'
-                {elif} your_price == 'an apple pie' :
-                    {print} 'Lovely, an apple pie!'
+                prijzen = ['1 miljoen', 'een appeltaart', 'niks']
+                jouw_prijs = prijzen [{random}]
+                {print} 'Je wint ' jouw_prijs
+                {if} jouw_prijs== '1 miljoen' :
+                    {print} 'Yess! Je bent rijk!'
+                {elif} your_price == 'een appeltaart' :
+                    {print} 'Heerlijk, een appeltaart!'
                 {else}:
-                    {print} 'Better luck next time..'
+                    {print} 'Meer geluk volgende keer..'
         4:
             header: Aan het werk!
             text: Veel plezier met de avonturen in level 17!
@@ -967,4 +959,4 @@ levels:
             editor: /hedy/18
         3:
             header: De laatste avonturen!
-            text: Veel plezier bij de laatse avonturen in level 18!
+            text: Veel plezier bij de laatste avonturen in level 18!
