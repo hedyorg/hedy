@@ -109,8 +109,8 @@ class PublicAdventuresModule(WebsiteModule):
             available_languages=self.available_languages,
             available_tags=self.available_tags,
             selectedLevel=level,
-            selectedLang=request.args.get("lang"),
-            selectedTag=request.args.get("tag", []),
+            selectedLang=request.args.get("lang", ""),
+            selectedTag=request.args.get("tag", ""),
             currentSearch=request.args.get("search", ""),
 
             user=user,
@@ -176,8 +176,6 @@ class PublicAdventuresModule(WebsiteModule):
                 teacher_adventures=adventures,
                 available_languages=self.available_languages,
                 available_tags=self.available_tags,
-                selectedLevel=level,
-                selectedTag=request.args.get("tag", []),
 
                 user=user,
                 current_page="public-adventures-body",
