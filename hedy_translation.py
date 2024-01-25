@@ -112,6 +112,8 @@ def translate_keywords(input_string, from_lang="en", to_lang="nl", level=1, tran
                 target = get_target_keyword(keyword_dict_to, rule.keyword)
                 replaced_line = replace_token_in_line(line, rule, original, target)
                 result = replace_line(lines, rule.line - 1, replaced_line)
+            else:
+                # this is a text string that needs to be translated
 
         # For now the needed post processing is only removing the 'end-block's added during pre-processing
         result = "\n".join([line for line in result.splitlines()])
@@ -364,7 +366,7 @@ class Translator(Visitor):
         if token_name[:4] == "text":  # this is not superduper pretty but for now it works!
             token = self.get_keyword_token('text', tree)
             rule = Rule(
-                token_name, tree.line, tree.column - 1, tree.end_column - 2, token.value
+                token_name, token.line, token.column - 1, token.end_column, token.value
             )
             self.rules.append(rule)
         else:
