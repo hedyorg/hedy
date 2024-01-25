@@ -1,5 +1,5 @@
 from collections import namedtuple
-from lark import Token, Visitor
+from lark import Token, Visitor, Tree
 from lark.exceptions import VisitError
 import hedy
 import operator
@@ -361,23 +361,27 @@ class Translator(Visitor):
         self.add_rule("_PRESSED", "pressed", tree)
 
     def add_rule(self, token_name, token_keyword, tree):
-        token = self.get_keyword_token(token_name, tree)
-        if token:
+        if token_name[:4] == "text":  # this is not superduper pretty but for now it works!
+            token = self.get_keyword_token('text', tree)
             rule = Rule(
-                token_keyword, token.line, token.column - 1, token.end_column - 2, token.value
+                token_name, tree.line, tree.column - 1, tree.end_column - 2, token.value
             )
             self.rules.append(rule)
-        elif token_name[:4] == "text": # this is not superduper pretty but for now it works!
+        else:
+            token = self.get_keyword_token(token_name, tree)
+            if token:
+                rule = Rule(
+                    token_keyword, token.line, token.column - 1, token.end_column - 2, token.value
+                )
+                self.rules.append(rule)
 
-            rule = Rule(
-                token_name, tree.line, tree.column - 1, tree.end_column - 2, "value"
-            )
-            self.rules.append(rule)
 
     def get_keyword_token(self, token_type, tree):
         for c in tree.children:
             if type(c) is Token and c.type == token_type:
                 return c
+            if type(c) is Tree and c.data == token_type:
+                return c.children[0]
         return None
 
     def get_keyword_tokens(self, token_type, node):
