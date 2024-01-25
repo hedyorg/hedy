@@ -717,7 +717,22 @@ levels:
                 names =妈妈、爸爸、艾玛、苏菲
                 {for} day {in} days
                      {print} 命名 {at} {random} ' 在 ' day '洗碗'
-        4:
+        4
+            header: Debugging
+            text: Let's debug this code
+            code: |-
+                {print} 'Ladies and gentlemen!'
+                {print} 'For one night and one night only in circus Hedy!'
+                acts = shoot out of a canon, walk the tightrope, pack themself in a suitcase,
+                people = Iris the Incredible Achmed the Amazing Francis the Fantastic
+                    {for} people {in} acts
+                chosen_person {is} people {random}
+                    chosen_person ' will ' act
+                {add} chosen_person {from} people
+                {print} 'Come and watch our show tonight!'
+                {print} 'Tickets are only available at the counter
+
+        5:
             header: Time to program!
             text: 享受第10关的冒险吧！
     11:

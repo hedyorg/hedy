@@ -697,6 +697,20 @@ levels:
                 {for} dag {in} dagen
                     {print} namen {at} {random} ' doet de afwas on ' dag
         4:
+            header: Debugging (foutzoeken)
+            text: Laten we deze code debuggen!
+            code: |-
+                {print} 'Dames en heren!'
+                {print} 'Komt dat zien! Vanavond in circus Hedy!'
+                acts = uit een kanon schieten, koortdansen , zichzelf inpakken in een koffertje,
+                mensen = Gina de Geweldige Olly de Ongelooflijke Francis de Fantastische
+                    {for} mensen {in} acts
+                gekozen_persoon {is} mensen {random}
+                    gekozen_persoon ' zal ' act
+                {add} gekozen_persoon {from} mensen
+                {print} 'Komt dat zien! Alleen vanavond!'
+                {print} 'Laatste tickets verkrijgbaar aan de kassa
+        5:
             header: Programmeertijd!
             text: Veel plezier met de avonturen in level 10!
     11:
