@@ -123,7 +123,7 @@ def translate_keywords(input_string, from_lang="en", to_lang="nl", level=1, tran
                 replaced_line = replace_token_in_line(line, rule, original, target)
                 result = replace_line(lines, rule.line - 1, replaced_line)
 
-        # For now the needed post processing is only removing the 'end-block's added during pre-processing
+                # For now the needed post processing is only removing the 'end-block's added during pre-processing
         result = "\n".join([line for line in result.splitlines()])
         result = result.replace("#ENDBLOCK", "")
 
