@@ -72,8 +72,10 @@ def get_target_keyword(keyword_dict, keyword):
     else:
         return keyword
 
+
 def translate(string):
     return 'Hallo welkom bij Hedy!'  # clearly we need to call a real translation api here!
+
 
 def translate_keywords(input_string, from_lang="en", to_lang="nl", level=1, translate_strings=False):
     """ "Return code with keywords translated to language of choice in level of choice"""
@@ -116,7 +118,7 @@ def translate_keywords(input_string, from_lang="en", to_lang="nl", level=1, tran
                 result = replace_line(lines, rule.line - 1, replaced_line)
             else:
                 # this is a text string that needs to be translated
-                lines = result.splitlines() # do we need to do this for each rule??
+                lines = result.splitlines()  # do we need to do this for each rule??
                 line = lines[rule.line - 1]
                 original = rule.value
                 target = translate(original)
