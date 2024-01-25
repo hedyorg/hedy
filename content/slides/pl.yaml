@@ -753,6 +753,14 @@ levels:
                 {for} i {in} {range} 1 {to} 10
                     {print} i * number
         4:
+            header: Debugging
+            text: Let's debug this code!
+            code: |-
+                factor {is} {ask} 'Which table of multiplication do you need?'
+                {repeat} {for} numbers {in} {range} 1 {to} 10 {times}
+                    {print} This is the table of multiplications for factor
+                    {print} number ' x ' factor ' = ' i * factor
+        5:
             header: Let's start programming!
             text: Enjoy the adventures in level 11!
     12:

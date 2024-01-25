@@ -736,6 +736,14 @@ levels:
                 {for} i {in} {range} 1 {to} 10
                     {print} i * number
         4:
+            header: Debugging (foutzoeken)
+            text: Laten we deze code debuggen!
+            code: |-
+                factor {is} {ask} 'Welke maaltafel heb je nodig?'
+                {repeat} {for} nummers {in} {range} 1 {to} 10 {times}
+                    {print} Dit is de tafel van factor
+                    {print} nummer ' x ' factor ' = ' i * factor
+        5:
             header: Lekker programmeren!
             text: Veel plezier met de avonturen in level 11!
     12:
