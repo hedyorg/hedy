@@ -818,6 +818,21 @@ levels:
             header: 功能
             text: 正如您在示例中看到的，函数是一个可以随时调用的代码块。您可以使用“{定义}”来设置函数，并使用“{叫}”来使用它。
         7:
+            header: Debugging
+            text: Let's debug this code!
+            code: |-
+                {call} new_member
+                {print} 'Hi new member!'
+                username = {ask} 'What is your username?'
+                password = 'What is your password?'
+                {print} 'Welcome to our club!'
+
+                username = {ask} 'Please enter your username. Are you a new member? Type New Member'
+                {if} username = New Member
+                {call} new member
+                    {else}
+                        password = {ask} 'Please enter password'
+        8:
             header: 准备好尝试了吗？
             text: 享受12级的冒险！
     13:

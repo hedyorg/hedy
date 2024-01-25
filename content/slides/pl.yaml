@@ -810,6 +810,21 @@ levels:
             header: Functions
             text: As you could see in the example a function is a block of code that can be called anytime. You use `{define}` to set the function and `{call}` to use it.
         7:
+            header: Debugging
+            text: Let's debug this code!
+            code: |-
+                {call} new_member
+                {print} 'Hi new member!'
+                username = {ask} 'What is your username?'
+                password = 'What is your password?'
+                {print} 'Welcome to our club!'
+
+                username = {ask} 'Please enter your username. Are you a new member? Type New Member'
+                {if} username = New Member
+                {call} new member
+                    {else}
+                        password = {ask} 'Please enter password'
+        8:
             header: Ready to try it out?
             text: Enjoy the adventures in level 12!
     13:

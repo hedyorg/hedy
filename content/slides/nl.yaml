@@ -793,6 +793,21 @@ levels:
             header: Functies
             text: Zoals je kunt zien in de voorbeelden is een functie een blokje code dat je vaker kunt oproepen. Je gebruikt `{define}` om de functie te maken en `{call}` om hem te gebruiken.
         7:
+            header: Debugging (foutzoeken)
+            text: Laten we deze code debuggen!
+            code: |-
+                {call} nieuw_lid
+                {print} 'Hallo nieuw lid!'
+                gebruikersnaam = {ask} 'Wat is je gebruikersnaam?'
+                wachtwoord = 'Wat is je wachtwoord?'
+                {print} 'Welkom bij de club!'
+
+                gebruikersnaam = {ask} 'Voer je gebruikersnaam in. Ben je nieuw? Typ Nieuw Lid'
+                {if} gebruikersnaam = Nieuw Lid
+                {call} nieuw lid
+                    {else}
+                        wachtwoord = {ask} 'Voer je wachtwoord in'
+        8:
             header: Klaar om het te gaan proberen?
             text: Veel plezier met de avonturen in level 12!
     13:

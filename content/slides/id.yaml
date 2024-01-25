@@ -815,6 +815,21 @@ levels:
             header: Fungsi
             text: Seperti yang Anda lihat pada contoh, fungsi adalah blok kode yang dapat dipanggil kapan saja. Anda menggunakan `{define}` untuk menyetel fungsi dan `{call}` untuk menggunakannya.
         7:
+            header: Debugging
+            text: Let's debug this code!
+            code: |-
+                {call} new_member
+                {print} 'Hi new member!'
+                username = {ask} 'What is your username?'
+                password = 'What is your password?'
+                {print} 'Welcome to our club!'
+
+                username = {ask} 'Please enter your username. Are you a new member? Type New Member'
+                {if} username = New Member
+                {call} new member
+                    {else}
+                        password = {ask} 'Please enter password'
+        8:
             header: Siap mencobanya?
             text: Nikmati petualangan di level 12!
     13:
