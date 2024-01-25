@@ -376,10 +376,11 @@ class Translator(Visitor):
     def add_rule(self, token_name, token_keyword, tree):
         if token_name[:4] == "text":  # this is not superduper pretty but for now it works!
             token = self.get_keyword_token('text', tree)
-            rule = Rule(
-                token_name, token.line, token.column - 1, token.end_column, token.value
-            )
-            self.rules.append(rule)
+            if token:
+                rule = Rule(
+                    token_name, token.line, token.column - 1, token.end_column, token.value
+                )
+                self.rules.append(rule)
         else:
             token = self.get_keyword_token(token_name, tree)
             if token:
