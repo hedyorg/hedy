@@ -119,7 +119,7 @@ def translate_keywords(input_string, from_lang="en", to_lang="nl", level=1, tran
             else:
                 if translate_strings:
                     # this is a text string that needs to be translated
-                    lines = result.splitlines() # do we need to do this for each rule??
+                    lines = result.splitlines()  # do we need to do this for each rule??
                     line = lines[rule.line - 1]
                     original = rule.value
                     target = translate(original)
