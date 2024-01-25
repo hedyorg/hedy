@@ -115,7 +115,7 @@ def translate_keywords(input_string, from_lang="en", to_lang="nl", level=1, tran
             else:
                 # this is a text string that needs to be translated
 
-        # For now the needed post processing is only removing the 'end-block's added during pre-processing
+                # For now the needed post processing is only removing the 'end-block's added during pre-processing
         result = "\n".join([line for line in result.splitlines()])
         result = result.replace("#ENDBLOCK", "")
 
