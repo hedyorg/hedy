@@ -25,6 +25,14 @@ class TestsTranslationLevel1(HedyTester):
 
         self.assertEqual(expected, result)
 
+    def test_print_english_dutch_including_string(self):
+        code = 'print Hello welcome to Hedy!'
+
+        result = hedy_translation.translate_keywords(code, from_lang="en", to_lang="nl", level=self.level, translate_strings=True)
+        expected = 'print Hallo welkom bij Hedy!'
+
+        self.assertEqual(expected, result)
+
     def test_ask_english_dutch(self):
         code = "ask Hallo welkom bij Hedy!"
 
