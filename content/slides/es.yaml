@@ -577,6 +577,28 @@ levels:
                 Quizás hayas pensado en intentar poner un comando si dentro de un comando repetir, o dentro de otro comando si.
                 Por ahora, esto todavía no es posible. En niveles superiores, esto se permitirá, pero por ahora centrémosnos primero en practicar los comandos `{if}` `{else}` y `{repeat}` con la sangría adecuada.
         9:
+            header: Debugging
+            text: Let's debug this code!
+            code: |-
+                {print} 'HedyWheels bus tickets machine'
+                zone_1 = Town Hall, Library, Campus, Market Place
+                zone_2 = Swimming Pool, Skate Park, Mall, Airport
+                destination = 'Where do you want to go?'
+                {if} destination {in} zone 1
+                {print} destination 'is in zone 1'
+                price = 3 euros
+                    {if} destination {is} zone_2
+                {print} destination 'is in zone 2'
+                price = 6
+                ticket_types = {ask} 'Press 1 for a single use ticket.
+                Press 2 for a round trip ticket:'
+                {if} ticket_type = 1
+                {print} 'You chose a single use ticket'
+                {else}
+                        {print} You chose a round trip ticket'
+                price * 2
+                {print} 'That will be ' price ' euros please'
+        10:
             header: ¡Vamos a ver las aventuras!
             text: ¡Disfruta las aventuras en el nivel 8!
     9:

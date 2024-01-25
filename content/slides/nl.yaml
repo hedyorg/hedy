@@ -565,6 +565,28 @@ levels:
                 Misschien heb je al bedacht om te proberen om een {if} in een {repeat} te stoppen, of andersom.
                 Voor nu kan dit nog niet. In hoger levels mag dit wel, maar we willen je eerst even goed laten oefenen met het inspringen bij deze commando's.
         9:
+            header: Debugging (foutzoeken)
+            text: Laten we deze code debuggen!
+            code: |-
+                {print} 'HedyBus bustickets'
+                zone_1 = Stadhuis, Bibliotheek, Campus, Markt
+                zone_2 = Zwembad, Skatepark, Winkelcentrum, Luchthaven
+                bestemming = 'Waar wilt u heen?'
+                {if} bestemming {in} zone 1
+                {print} bestemming 'is in zone 1'
+                prijs = 3 euro
+                    {if} bestemming {is} zone_2
+                {print} bestemmming 'is in zone 2'
+                price = 6
+                ticket_types = {ask} 'Druk op 1 voor een enkeltje.
+                Druk op 2 voor een retourtje.'
+                {if} ticket_type = 1
+                {print} 'Je koos voor een enkele reis'
+                {else}
+                        {print} Je koos voor een retour ticket'
+                prijs * 2
+                {print} 'Dat wordt dan ' prijs ' euro alstublieft'
+        10:
             header: Op naar de avonturen!
             text: Veel plezier met de avonturen in level 8!
     9:
