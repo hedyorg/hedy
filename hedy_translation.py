@@ -72,8 +72,10 @@ def get_target_keyword(keyword_dict, keyword):
     else:
         return keyword
 
+
 def translate(string):
     return 'Hallo welkom bij Hedy!'  # clearly we need to call a real translation api here!
+
 
 def translate_keywords(input_string, from_lang="en", to_lang="nl", level=1, translate_strings=False):
     """ "Return code with keywords translated to language of choice in level of choice"""
