@@ -220,7 +220,7 @@ class Translator(Visitor):
         # like print arguments to the list of things that need to be translated
 
         argument = str(tree.children[1].children[0])
-        self.add_rule("text1", argument, tree) # this of course only support 1 string
+        self.add_rule("text1", argument, tree)  # this of course only support 1 string
         # you will have to introduce a counter in the class that increases when we see a string
 
     def print_empty_brackets(self, tree):
@@ -367,7 +367,7 @@ class Translator(Visitor):
                 token_keyword, token.line, token.column - 1, token.end_column - 2, token.value
             )
             self.rules.append(rule)
-        elif token_name[:4] == "text": # this is not superduper pretty but for now it works!
+        elif token_name[:4] == "text":  # this is not superduper pretty but for now it works!
 
             rule = Rule(
                 token_name, tree.line, tree.column - 1, tree.end_column - 2, "value"
