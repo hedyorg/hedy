@@ -673,6 +673,23 @@ levels:
                     {else}
                         {print} 'pizza is better'
         8:
+            header: Debugging
+            text: Let's debug this code!
+            code: |-
+                {print} 'Welcome to HedyJumps, your parachute jump adventure!'
+                people = {ask} 'How many people are you jumping with today?
+                {print} 'We'll ask all of you some questions for safety reasons.'
+                extra_instructions_people = a, b
+                {repeat} 3 {times}
+                    name = {ask} 'What is your name?'
+                jumped_before = 'Have you ever done a parachute jump before, ' name '?'
+                {if} jumped_before  no
+                {print} 'No worries, you'll get an extra safety instruction in room 13'
+                {add} name {to} extra_instructions_people
+                {else}
+                {print} 'Fun!'
+                {print} 'Thanks for filling in the safety questions everyone. Enjoy your jump!'
+        9:
             header: Nu kör vi!
             text: Ha det kul med äventyren på nivå 9!
     10:

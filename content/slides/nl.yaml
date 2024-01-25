@@ -661,6 +661,23 @@ levels:
                     {else}
                         {print} 'pizza is beter'
         8:
+            header: Debugging (foutzoeken)
+            text: Laten we deze code debuggen!
+            code: |-
+                {print} 'Welkom bij HedyJumps, voor jouw parachutesprong!'
+                mensen = {ask} 'Hoeveel mensen willen er vandaag de sprong wagen?
+                {print} 'Leuk!' We hebben wat vragen voor iedereen.'
+                extra_instructies_mensen = a, b
+                {repeat} 3 {times}
+                    naam = {ask} 'Hoe heet je?'
+                sprong_ervaring = 'Heb je al eens eerder parachute gesprongen, naam ?'
+                {if} ervaring  nee
+                {print} 'Geen probleem! Ga zo naar kamer 13 voor extra instructies.'
+                {add} naam {to} extra_instructies_mensen
+                {else}
+                {print} 'Gaaf!'
+                {print} 'Bedankt voor het invullen allemaal! Veel plezier vandaag!'
+        9:
             header: Aan de slag!
             text: Veel plezier met de avonturen in level 9!
     10:
