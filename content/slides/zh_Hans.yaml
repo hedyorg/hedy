@@ -919,6 +919,29 @@ levels:
                 {call} song {with} 'sea'
                 {call} song {with} 'ocean'
         8:
+            header: Debugging
+            text: Let's debug this code!
+            code: |-
+                {define} happiness {with} name
+                    {print} '🥳'
+                {play} G
+                {play} A
+                {play} B
+                {print} 'Party on, ' name
+                {define} sadness
+                {print} '😞'
+                {play} E
+                {play} D
+                {play} C
+                {print} 'Hope you feel better, ' name
+
+                name = {ask} 'What is your' name '?'
+                mood = {ask} 'Are you happy or sad?'
+                {if} mood = happy
+                    {call} happiness {with} person
+                {else} mood = sad
+                    {define} sadness {to} name
+        9:
             header: 出发！
             text: 享受 13 级的冒险！
     14:

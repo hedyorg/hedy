@@ -888,6 +888,29 @@ levels:
                 {call} lied {with} 'sea'
                 {call} lied {with} 'ocean'
         8:
+            header: Debugging (foutzoeken)
+            text: Laten we deze code debuggen!
+            code: |-
+                {define} blijdschap {with} naam
+                    {print} '🥳'
+                {play} G
+                {play} A
+                {play} B
+                {print} 'Lekker bezig, ' name
+                {define} verdriet
+                {print} '😞'
+                {play} E
+                {play} D
+                {play} C
+                {print} 'Hopelijk knap je snel op, ' name
+
+                naam = {ask} 'Wat is jouw' naam '?'
+                gevoel = {ask} 'Ben je blij of verdrietig?'
+                {if} stemming = blij
+                    {call} blijdschap {with} persoon
+                {else} gevoel = verdrietig
+                    {define} verdriet {to} naam
+        9:
             header: Aan de slag!
             text: Veel plezier met de avonturen in level 13!
     14:
