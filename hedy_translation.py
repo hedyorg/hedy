@@ -73,7 +73,7 @@ def get_target_keyword(keyword_dict, keyword):
         return keyword
 
 
-def translate_keywords(input_string, from_lang="en", to_lang="nl", level=1):
+def translate_keywords(input_string, from_lang="en", to_lang="nl", level=1, translate_strings=False):
     """ "Return code with keywords translated to language of choice in level of choice"""
 
     if input_string == "":
@@ -215,6 +215,13 @@ class Translator(Visitor):
 
     def print(self, tree):
         self.add_rule("_PRINT", "print", tree)
+
+        # in addition to keywords, we atr now also adding plain text strings
+        # like print arguments to the list of things that need to be translated
+
+        argument = str(tree.children[1].children[0])
+        self.add_rule("text1", argument, tree) # this of course only support 1 string
+        # you will have to introduce a counter in the class that increases when we see a string
 
     def print_empty_brackets(self, tree):
         self.print(tree)
@@ -360,9 +367,15 @@ class Translator(Visitor):
                 token_keyword, token.line, token.column - 1, token.end_column - 2, token.value
             )
             self.rules.append(rule)
+        elif token_name[:4] == "text": # this is not superduper pretty but for now it works!
 
-    def get_keyword_token(self, token_type, node):
-        for c in node.children:
+            rule = Rule(
+                token_name, tree.line, tree.column - 1, tree.end_column - 2, "value"
+            )
+            self.rules.append(rule)
+
+    def get_keyword_token(self, token_type, tree):
+        for c in tree.children:
             if type(c) is Token and c.type == token_type:
                 return c
         return None
