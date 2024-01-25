@@ -352,7 +352,7 @@ def task_devdb():
         actions=[
             'cp data-for-testing.json dev_database.json',
         ],
-        file_dep=['data-for-testing.json'],
+        # No dependencies, so that this script will always run when you invoke it
         targets=['dev_database.json'],
     )
 
