@@ -200,8 +200,12 @@ adventures:
                     ```
             10:
                 story_text: |
-                    In this level you can use the {for} command in your story. In this way you could easily program the children's book 'brown bear, brown bear, what do you see'.
-                example_code: "```\nanimaux = _ , _ , _ \n{print} 'Ours brun, Ours brun'\n {print} 'Que vois-tu?'\n```\n"
+                    À ce niveau, tu peux utiliser la commande {for} dans ton histoire. Par exemple, tu peux facilement programmer le livre pour enfant « Ours brun, dis-moi ce que tu vois ? »
+
+                    ### Exercice
+
+                    Regarde <a href="https://fr.slideshare.net/smt786/our-brun-dismoi">l'histoire</a> si tu ne la connais pas et assure-toi ensuite de la programmer comme dans le livre.
+                example_code: "```\nanimaux = _ , _ , _ \n{print} \"Ours brun, Ours brun\"\n{print} \"Que vois-tu ?\"\n```\n"
             12:
                 story_text: In this level you can use the quotation marks to save multiple words in a variable.
                 example_code: |
@@ -556,19 +560,20 @@ adventures:
                     ```
             10:
                 story_text: |
-                    This calculator game helps you practise your tables of multiplication!
-                    If you add more numbers to the list, you can practise all the multiplications.
+                    Ce jeu de la calculatrice t'aide à apprendre tes tables de multiplication !
+                    ### Exercice
+                    Peux-tu ajouter d'autres nombres à la liste, pour t'entrainer aux multiplications jusqu'à la table de 10 ?
                 example_code: |
                     ```
-                    numbers = 1, 2, 3
-                    {for} number1 {in} numbers
-                        {for} number2 {in} numbers
-                            answer = {ask} 'How much is ' number2 ' times ' number1 '?'
-                            correct = number1 * number2
-                            {if} answer {is} correct
-                                {print} 'Great job!'
+                    nombres = 1, 2, 3
+                    {for} nombre1 {in} nombres
+                        {for} nombre2 {in} nombres
+                            réponse = {ask} "Combien font " nombre2 " fois " nombre1 " ?"
+                            correcte = nombre1 * nombre2
+                            {if} réponse {is} correcte
+                                {print} "Bon travail !"
                             {else}
-                                {print} 'Thats wrong. The right answer is ' correct
+                                {print} "C'est faut, la bonne réponse est " correcte
                     ```
             11:
                 story_text: |
@@ -2501,12 +2506,12 @@ adventures:
             6:
                 story_text: |4
 
-                      À ce niveau, tu apprends quelque chose de nouveau : tu peux maintenant faire des calculs.
+                            À ce niveau, tu apprends quelque chose de nouveau : tu peux maintenant faire des calculs.
 
-                      L'addition est facile, tu écris comme en math : `5 + 5` par exemple. Le moins aussi fonctionne bien, c'est `5 - 5`.
+                            L'addition est facile, tu écris comme en math : `5 + 5` par exemple. Le moins aussi fonctionne bien, c'est `5 - 5`.
 
-                      La multiplication est un peu différente parce qu'il n'y a pas la croix de la multiplication sur ton clavier. Cherche là, elle n'y est pas !
-                      Voilà pourquoi on multiplie avec l'étoile : `5 * 5`. Lit le « 5 fois 5 » pour t'aider à t'en souvenir plus facilement.
+                            La multiplication est un peu différente parce qu'il n'y a pas la croix de la multiplication sur ton clavier. Cherche là, elle n'y est pas !
+                            Voilà pourquoi on multiplie avec l'étoile : `5 * 5`. Lit le « 5 fois 5 » pour t'aider à t'en souvenir plus facilement.
                 example_code: |
                     ```
                     {print} "5 plus 5 fait " 5 + 5
@@ -2809,17 +2814,17 @@ adventures:
                     La plupart des langages de programmation utilisent aussi des guillemets pour afficher, donc on s'approche un peu plus de la vraie programmation !
                 example_code: |
                     ```
-                    {print} "Tu as besoins d'utiliser les guillemets à partir de maintenant !"
-                    réponse {is} {ask} "Qu'avons nous besoins d'utiliser à partir de maintenant ?"
+                    {print} "Tu as besoins d'utiliser les guillemets à partir de maintenant !"
+                    réponse {is} {ask} "Qu'avons nous besoins d'utiliser à partir de maintenant ?"
                     {print} "Nous avons besoins d'utiliser " réponse
                     ```
                 story_text_2: |
                     ## Apostrophes
-                    Important ! Hedy accepte que tu utilises les guillemets ou les apostrophes pour entourer tes textes. En anglais, on utilise généralement les apostrophes car cela ne pose pas trop de problème, mais en français, cela pose un problème avec, par exemple, « aujourd'hui » ou « s'il vous plait »
+                    Important ! Hedy accepte que tu utilises les guillemets ou les apostrophes pour entourer tes textes. En anglais, on utilise généralement les apostrophes car cela ne pose pas trop de problème, mais en français, cela pose un problème avec, par exemple, « aujourd'hui » ou « s'il vous plait »
 
-                    Astuce : Nous te recommandons d'utiliser les guillemets qui fonctionnent bien dans la plupart des cas.
+                    Astuce : Nous te recommandons d'utiliser les guillemets qui fonctionnent bien dans la plupart des cas.
 
-                    L'exemple montre le problème avec les apostrophes. Peux-tu le corriger en remplaçant par des guillemets ?
+                    L'exemple montre le problème si tu entoures ton texte avec les apostrophes. Peux-tu le corriger en remplaçant par des guillemets ?
                 example_code_2: |
                     ```
                     {print} _ Voici comment ça ne marche pas avec les apostrophes : _
@@ -3223,27 +3228,30 @@ adventures:
                     ```
             10:
                 story_text: |
-                    In this level you'll learn how to easily {ask} your guests' orders in a short code.
+                    À ce niveau, tu vas apprendre comme demander facilement les commandes pour les différents plats.
+
+                    ### Exercice 1
+                    Termine le code avec une commande `{ask}` à la place des espaces vides, pour demander au client ce qu'il veut manger pour chaque plat.
                 example_code: |
                     ```
-                    courses = appetizer, main course, dessert
-                    {for} course {in} courses
-                        food = {ask} 'What would you like to eat as your ' course '?'
-                        {print} food ' will be your ' course
+                    menu = appéritif, plat principal, dessert
+                    {for} service {in} menu
+                        plat = {ask} "Que voulez-vous commander pour votre " service " ?"
+                        {print} plat "sera servi pour ton " service
                     ```
                 story_text_2: |
                     ### Exercice
-                    Bien sûr, vous pouvez aussi commander pour plusieurs personnes !
-                    Pouvez-vous ajouter la bonne quantité d'indentation avant chaque ligne pour que le code fonctionne correctement ?
-                    Conseil : certaines lignes n'ont pas besoin d'être indentées.
+                    Bien sûr, tu peux aussi commander pour plusieurs personnes !
+                    Peux-tu ajouter la bonne quantité d'indentations avant chaque ligne pour que le code fonctionne correctement ?
+                    Conseil : certaines lignes n'ont pas besoin d'être indentées.
                 example_code_2: |
                     ```
-                    courses = appetizer, main course, dessert
-                    names = Timon, Onno
-                    {for} name {in} names
-                        {for} course {in} courses
-                            food = {ask} name ', what would you like to eat as your ' course '?'
-                            {print} name ' orders ' food ' as their ' course
+                    _ menu = appéritif, plat principal, dessert
+                    _ noms = Timon, Onno
+                    _ {for} nom {in} noms
+                    _ {for} service {in} menu
+                    _ plat = {ask} nom ", que voulez-vous manger pour votre " service " ?"
+                    _ {print} nom " a commandé " plat " pour son " service
                     ```
             11:
                 story_text: |
@@ -3412,7 +3420,7 @@ adventures:
             10:
                 story_text: |
                     ### Exercice
-                    Aux niveaus précédents, tu as souvent commencé ton propre jeu pierre-papier-ciseau. Peux-tu le finir en utilisant la commande `{for}` correctement pour que le jeu fonctionne ?
+                    Aux niveaux précédents, tu as déjà fait ton propre jeu pierre-papier-ciseau. Peux-tu finir l'exemple suivant en utilisant la commande `{for}` correctement pour que le jeu fonctionne ?
                 example_code: |
                     ```
                     choix = _
@@ -3600,11 +3608,18 @@ adventures:
                     ```
             10:
                 story_text: |
-                    With `{for}` tu peux programmer la chanson « baby shark » en entier (y compris tous les autres requins de la famille) en seulement 6 lignes !
+                    Avec `{for}` tu peux programmer la chanson « baby shark » en entier (y compris tous les autres requins de la famille) en seulement 6 lignes !
 
                     ### Exercice 1
-                    Peux-tu rendre le code de la chanson « baby shark » encore plus courte en utilisant une commande `{for}` ? termine le code.
-                example_code: "```\nfamille = bébé, maman, papa, mamie, papi\n_ _ _ _ \n  {print} _\n```\n"
+                    Peux-tu rendre le code de la chanson « baby shark » aussi court en utilisant la commande `{for}` ? termine le code de l'exemple.
+                example_code: |
+                    ```
+                    famille = Baby, Mammy, Daddy, Grandma, Grandpa
+                    _ _ _ _
+                        {repeat} 3 {times}
+                            {print} _
+                        {print} _
+                    ```
                 story_text_2: |
                     ### Exercice 2
                     Fais afficher la chanson « cinq petits singes sautant sur le lit ». Recherche le texte si tu ne t'en souviens pas.

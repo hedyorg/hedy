@@ -16,11 +16,6 @@ describe("Tags of adventures", () => {
       .should("be.visible")
   })
 
-  it("has no tags initially", () => {
-    cy.get("#tags-list")
-      .should("be.not.visible")
-  })
-
   it("adds a tag to adventure by pressing enter within the input field", () => {
     cy.get("#search_tags_input")
       .should("be.empty")
@@ -71,10 +66,10 @@ describe("Tags of adventures", () => {
     }).as("deleteTag")
 
     cy.wait(500)
-    cy.get("#tag_1")
+    cy.get("#tag_2")
       .should("be.visible")
       .should("include.text", "statements")
-    cy.get("#tag_1 .fa-circle-xmark")
+    cy.get("#tag_2 .fa-circle-xmark")
       .click()
     cy.wait("@deleteTag").should('have.nested.property', 'response.statusCode', 200)
     cy.get("#tags-list li")

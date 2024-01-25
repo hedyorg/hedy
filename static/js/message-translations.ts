@@ -574,7 +574,7 @@ export const TRANSLATIONS: Record<string, Record<MessageKey, string>> = {
     "unsaved_class_changes": "There are unsaved changes, are you sure you want to leave this page?"
   },
   "hu": {
-    "CheckInternet": "Ellenőrizd, hogy az internetkapcsolat megfelelően működik-e!",
+    "CheckInternet": "Ellenőrizd, hogy az internetkapcsolat megfelelően működik-e.",
     "Connection_error": "Nem tudjuk elérni a szervert.",
     "Empty_output": "Működik a program, de nem ír ki semmit. Helyezz el egy kiírást a kódban, vagy használd a teknőst, hogy kimenetet kapj!",
     "Errors_found": "Hibát követtél el! Ne aggódjon, még mindig futtatjuk a programot",
@@ -934,10 +934,10 @@ export const TRANSLATIONS: Record<string, Record<MessageKey, string>> = {
     "unsaved_class_changes": "Strona zawiera niezapisane zmiany. Czy jesteś pewien, że chcesz wyjść bez zapisania zmian?"
   },
   "pt_BR": {
-    "CheckInternet": "Verifique se a sua conexão com a Internet está funcionando corretamente.",
+    "CheckInternet": "Verifique se sua conexão com a Internet está funcionando.",
     "Connection_error": "Nós não conseguimos conectar ao servidor.",
     "Empty_output": "Este código funciona mas não imprime nada. Adicione um comando de impressão ou use a tartaruga para ter alguma saída.",
-    "Errors_found": "You made a mistake! Don't worry, Hedy is trying to find the mistakes",
+    "Errors_found": "Você cometeu um erro! Não se preocupe, ainda executamos o programa",
     "Execute_error": "Alguma coisa deu errado enquanto o programa era executado.",
     "Other_error": "Opa! Talvez nós fizemos alguma coisa errada.",
     "Program_repair": "Este poderia ser o código correto, você poderia corrigir ele?",
