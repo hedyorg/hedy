@@ -955,6 +955,9 @@ def programs_page(user):
         return redirect(url, code=302)
 
     from_user = request.args.get('user') or None
+    if from_user and from_user == "None":
+        from_user = None
+
     # If from_user -> A teacher is trying to view the user programs
     if from_user and not is_admin(user):
         if not is_teacher(user):
