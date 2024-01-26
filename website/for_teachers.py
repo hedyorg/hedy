@@ -908,7 +908,9 @@ class ForTeachersModule(WebsiteModule):
                 # TODO: change name to id in sorted_adventures (probably it's only teachers' adventures!)
                 if customizations and any(adv for adv in customizations.get("sorted_adventures", {}).get(level)
                                           if adv.get("name") == adventure.get("id")):
-                    temp = {"name": Class.get("name"), "id": Class.get("id")}
+                    temp = {"name": Class.get("name"), "id": Class.get("id"),
+                            "teacher": Class.get("teacher"), "students": Class.get("students", []),
+                            "date": Class.get("date")}
                     class_data.append(temp)
                     break
 
@@ -917,10 +919,15 @@ class ForTeachersModule(WebsiteModule):
             page_title=gettext("title_customize-adventure"),
             adventure=adventure,
             adventure_classes=class_data,
+            username=user["username"],
             max_level=hedy.HEDY_MAX_LEVEL,
             current_page="for-teachers",
             # TODO: update tags to be {name, canEdit} where canEdit is true if currentUser is the creator.
             adventure_tags=adventure.get("tags", []),
+            js=dict(
+                content=adventure.get("content"),
+                lang=g.lang,
+            )
         )
 
     @route("/customize-adventure", methods=["POST"])

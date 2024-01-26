@@ -6,7 +6,7 @@
     <div class="border-gray-400 border rounded-lg p-4">
         <form onsubmit="event.preventDefault (); hedyApp.update_adventure('{{ adventure.id }}', {% if adventure.content|length > 0 %}false{% else %}true{% endif %}, '{{_('update_adventure_prompt')}}')"
             data-te-validation-init>
-            <div class="flex flex-col gap-4">
+            <div class="flex  gap-4">
                 <div class="flex flex-col w-full">
                     <h3 class="text-center mt-0 mb-4">{{_('general_settings')}}</h3>
                     <div class="flex flex-row items-center mb-4">
@@ -84,17 +84,8 @@
                         </div>
                     </div>
                     {{ render_partial('htmx-tags-list.html', tags=adventure_tags, adventure_id=adventure.id, creator=adventure.creator) }}
-
-                    <div class="mb-4 text-xl">  
-                        <p>Adv. used in: 
-                            {% for cls in adventure_classes %}
-                                <a href="/for-teachers/customize-class/{{cls.id}}" target="_blank">{{cls.name}}</a>{% if loop.index != adventure_classes|length %}, {% endif %}
-                            {% endfor %}
-                        </p>
-                    </div>
-                    
-
                 </div>
+
                 <div class="flex flex-col w-full">
                     <h3 class="text-center mt-0 mb-4">{{ _('adventure') }}
                         <button type="button" _="on click event.stopPropagation()
@@ -107,27 +98,12 @@
                     </h3>
                     <div class="flex">
 
-                        <textarea id="custom_adventure_content" class="block appearance-none w-full h-96 bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 rounded">{% if adventure.content|length > 0 %}{{ adventure.content }}{% else %}{{_('template_code')}}{% endif %}</textarea>
+                        <!-- <textarea id="custom_adventure_content" class="block appearance-none w-full h-96 bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 rounded">{% if adventure.content|length > 0 %}{{ adventure.content }}{% else %}{{_('template_code')}}{% endif %}</textarea> -->
 
-                        <div class="border border-black rounded-lg p-4 text-sm hidden" id="explaination">
-                            {{_('adventure_exp_1')}}
-                            <div class="flex flex-row my-2 items-center">
-                                <pre class="code-teacher">&lt;code&gt;&#123;{{parse_keyword('print')}}&#125;&lt;/code&gt;</pre>
-                                <b class="mx-4">&rarr;</b>
-                                <code class="text-base">{{parse_keyword('print')}}</code>
-                            </div>
-                            {{_('adventure_exp_2')}}
-                            <div class="flex flex-row items-center">
-                                <pre class="code-teacher">&lt;pre&gt;<br>&#123;{{parse_keyword('print')}}&#125; {{_('hello_world')}}<br>&lt;/pre&gt;</pre>
-                                <b class="mx-4">&rarr;</b>
-                                <div class="turn-pre-into-ace w-64" style="white-space: pre-wrap;">
-                                    <pre level="1">{{parse_keyword('print')}} {{_('hello_world')}}</pre>
-                                </div>
-                            </div>
-                            {{_('adventure_exp_3')}}
-                        </div>
+                        <div id="adventure-editor"></div>
+
                     </div>
-
+                    
                     <div class="mt-2 mb-0 flex flex-row items-center text-center border-gray-500 border p-4 rounded-lg">
                         <input type="checkbox" name="agree_public" id="agree_public" class="mr-4" {% if adventure.public %}checked{% endif %}>
                         <label for="agree_public" class="text-sm italic w-full">{{_('adventure_terms')}}</label>
@@ -140,9 +116,53 @@
                 <button type="reset" class="red-btn" id="remove_adventure_button" onclick="hedyApp.delete_adventure('{{ adventure.id }}', '{{_('delete_adventure_prompt')}}')">{{_('remove')}}</button>
             </div>
         </form>
+
+
+        <div id="explaination" class="">
+            <hr
+            class="my-12 mx-16 h-2 border-t-4 bg-neutral-100" />
+
+            <div class=" grid gap-2 ">
+                <!-- <div>{{_('adventure_classes')}}</div>
+                <div>{{_('adventure_exp')}}</div> -->
+                
+                <div class="flex gap-2 flex-wrap">
+                    {% for cls in adventure_classes %}
+                    <!-- <a href="/for-teachers/customize-class/{{cls.id}}" target="_blank">{{cls.name}}</a>{% if loop.index != adventure_classes|length %}, {% endif %} -->
+                        {{ render_partial('htmx-class-card.html', class=cls, username=username,) }}
+                        {{ render_partial('htmx-class-card.html', class=cls, username=username,) }}
+                        {{ render_partial('htmx-class-card.html', class=cls, username=username,) }}
+                    {% endfor %}
+                </div>
+                
+                <div class="border border-black rounded-lg p-4 text-sm hidden">
+                    {{_('adventure_exp_1')}}
+                    <div class="flex flex-row my-2 items-center">
+                        <pre class="code-teacher">&lt;code&gt;&#123;{{parse_keyword('print')}}&#125;&lt;/code&gt;</pre>
+                        <b class="mx-4">&rarr;</b>
+                        <code class="text-base">{{parse_keyword('print')}}</code>
+                    </div>
+                    {{_('adventure_exp_2')}}
+                    <div class="flex flex-row items-center">
+                        <pre class="code-teacher">&lt;pre&gt;<br>&#123;{{parse_keyword('print')}}&#125; {{_('hello_world')}}<br>&lt;/pre&gt;</pre>
+                        <b class="mx-4">&rarr;</b>
+                        <div class="turn-pre-into-ace w-64" style="white-space: pre-wrap;">
+                            <pre level="1">{{parse_keyword('print')}} {{_('hello_world')}}</pre>
+                        </div>
+                    </div>
+                    {{_('adventure_exp_3')}}
+                </div>
+            </div>
+        </div>
     </div>
     <div>
         <button class="blue-btn" id="go_back_button" onclick="window.open('/for-teachers', '_self');">{{_('back_to_teachers_page')}}</button>
     </div>
 </div>
+
+<script>
+    setTimeout(() => {
+        hedyApp.initialize_adv_editor({{ js|tojson|safe }})
+    }, 100)
+</script>
 {% endblock %}

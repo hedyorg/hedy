@@ -216,7 +216,7 @@ div[data-te-input-notch-ref] {
 
 .card-container {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 350px));
+  grid-template-columns: repeat(auto-fit, minmax(350px, 400px));
   grid-gap: 1.5rem;
   justify-content: center;
 }
@@ -243,4 +243,16 @@ div[data-te-input-notch-ref] {
     background-color: rgb(0 0 0 / 0.05);
   }
   
+}
+
+.ck-balloon-panel {
+  display: none !important;
+}
+
+
+.ck-editor__editable {
+    height: 24rem;
+}
+.ck-toolbar__items, .ck-editor__editable {
+    background-color: var(--tw-bg-gray-200) !important;
 }
