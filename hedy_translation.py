@@ -100,7 +100,7 @@ def translate_keywords(input_string, from_lang="en", to_lang="nl", level=1, tran
 
         program_root = parser.parse(processed_input + "\n").children[0]
 
-        translator = Translator(processed_input)
+        translator = Translator(processed_input, translate_strings)
         translator.visit(program_root)
         ordered_rules = reversed(sorted(translator.rules, key=operator.attrgetter("line", "start")))
 
@@ -207,9 +207,10 @@ class Translator(Visitor):
     in the user input string and original value. The information is later used to replace the token in
     the original user input with the translated token value."""
 
-    def __init__(self, input_string):
+    def __init__(self, input_string, translate_strings=False):
         self.input_string = input_string
         self.rules = []
+        self.translate_strings = translate_strings
 
     def define(self, tree):
         self.add_rule("_DEFINE", "define", tree)
@@ -229,12 +230,13 @@ class Translator(Visitor):
     def print(self, tree):
         self.add_rule("_PRINT", "print", tree)
 
-        # in addition to keywords, we atr now also adding plain text strings
-        # like print arguments to the list of things that need to be translated
-
-        argument = str(tree.children[1].children[0])
-        self.add_rule("text1", argument, tree)  # this of course only support 1 string
-        # you will have to introduce a counter in the class that increases when we see a string
+        if self.translate_strings:
+            # in addition to keywords, we atr now also adding plain text strings
+            # like print arguments to the list of things that need to be translated
+            if len(tree.children) > 1:
+                argument = str(tree.children[1].children[0])
+                self.add_rule("text1", argument, tree)  # this of course only support 1 string
+                # you will have to introduce a counter in the class that increases when we see a string
 
     def print_empty_brackets(self, tree):
         self.print(tree)
