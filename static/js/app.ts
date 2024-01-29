@@ -2088,7 +2088,7 @@ async function saveIfNecessary() {
   const saveName = saveNameFromInput();
 
 
-  if (theUserIsLoggedIn) {
+  if (theUserIsLoggedIn && saveName) {
     const saveInfo = isServerSaveInfo(adventure.save_info) ? adventure.save_info : undefined;
     const response = await postJsonWithAchievements('/programs', {
       level: theLevel,
