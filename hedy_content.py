@@ -498,6 +498,13 @@ class Adventures(StructuredDataFile):
     def get_adventure_keyname_name_levels(self):
         return {aid: {adv['name']: list(adv['levels'].keys())} for aid, adv in self.file.get('adventures', {}).items()}
 
+    def get_adventure_levels_name(self):
+        levels_dict = {}
+        for aid, adv in self.file.get('adventures', {}).items():
+            for level in adv['levels']:
+                levels_dict.setdefault(level, []).append(adv['name'])
+        return {level: sorted(adventures) for level, adventures in sorted(levels_dict.items())}
+
     def get_adventure_names(self, keyword_lang):
         return {aid: adv['name'] for aid, adv in deep_translate_keywords(
             self.file.get('adventures'), keyword_lang).items()}

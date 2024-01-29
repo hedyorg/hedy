@@ -1001,6 +1001,7 @@ def programs_page(user):
 
     keyword_lang = g.keyword_lang
     adventure_names = hedy_content.Adventures(g.lang).get_adventure_names(keyword_lang)
+    adventure_levels_names = hedy_content.Adventures(g.lang).get_adventure_levels_name()
 
     next_page_url = url_for('programs_page', **dict(request.args, page=result.next_page_token)
                             ) if result.next_page_token else None
@@ -1012,6 +1013,7 @@ def programs_page(user):
         current_page='programs',
         from_user=from_user,
         public_profile=public_profile,
+        adventure_levels_names=adventure_levels_names,
         adventure_names=adventure_names,
         max_level=hedy.HEDY_MAX_LEVEL,
         next_page_url=next_page_url)
