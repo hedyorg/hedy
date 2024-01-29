@@ -4079,12 +4079,10 @@ var hedyApp = (() => {
     InitLineChart: () => InitLineChart,
     add_account_placeholder: () => add_account_placeholder,
     append_classname: () => append_classname,
-    applyFilter: () => applyFilter,
     changeUserEmail: () => changeUserEmail,
     change_language: () => change_language,
     change_password_student: () => change_password_student,
     clearUnsavedChanges: () => clearUnsavedChanges,
-    cloned: () => cloned,
     closeAchievement: () => closeAchievement,
     closeContainingModal: () => closeContainingModal,
     comeBackHereAfterLogin: () => comeBackHereAfterLogin,
@@ -15757,7 +15755,7 @@ var hedyApp = (() => {
     blue: "blue",
     brown: "brown",
     call: "call",
-    clear: "clear",
+    clear: "\u0C24\u0C41\u0C21\u0C3F\u0C1A\u0C3F\u0C35\u0C47\u0C2F\u0C3F|clear",
     color: "color",
     comma: ",",
     def: "def",
@@ -16968,7 +16966,7 @@ var hedyApp = (() => {
       "unsaved_class_changes": "There are unsaved changes, are you sure you want to leave this page?"
     },
     "hu": {
-      "CheckInternet": "Ellen\u0151rizd, hogy az internetkapcsolat megfelel\u0151en m\u0171k\xF6dik-e!",
+      "CheckInternet": "Ellen\u0151rizd, hogy az internetkapcsolat megfelel\u0151en m\u0171k\xF6dik-e.",
       "Connection_error": "Nem tudjuk el\xE9rni a szervert.",
       "Empty_output": "M\u0171k\xF6dik a program, de nem \xEDr ki semmit. Helyezz el egy ki\xEDr\xE1st a k\xF3dban, vagy haszn\xE1ld a tekn\u0151st, hogy kimenetet kapj!",
       "Errors_found": "Hib\xE1t k\xF6vett\xE9l el! Ne agg\xF3djon, m\xE9g mindig futtatjuk a programot",
@@ -17328,10 +17326,10 @@ var hedyApp = (() => {
       "unsaved_class_changes": "Strona zawiera niezapisane zmiany. Czy jeste\u015B pewien, \u017Ce chcesz wyj\u015B\u0107 bez zapisania zmian?"
     },
     "pt_BR": {
-      "CheckInternet": "Verifique se a sua conex\xE3o com a Internet est\xE1 funcionando corretamente.",
+      "CheckInternet": "Verifique se sua conex\xE3o com a Internet est\xE1 funcionando.",
       "Connection_error": "N\xF3s n\xE3o conseguimos conectar ao servidor.",
       "Empty_output": "Este c\xF3digo funciona mas n\xE3o imprime nada. Adicione um comando de impress\xE3o ou use a tartaruga para ter alguma sa\xEDda.",
-      "Errors_found": "You made a mistake! Don't worry, Hedy is trying to find the mistakes",
+      "Errors_found": "Voc\xEA cometeu um erro! N\xE3o se preocupe, ainda executamos o programa",
       "Execute_error": "Alguma coisa deu errado enquanto o programa era executado.",
       "Other_error": "Opa! Talvez n\xF3s fizemos alguma coisa errada.",
       "Program_repair": "Este poderia ser o c\xF3digo correto, voc\xEA poderia corrigir ele?",
@@ -45815,9 +45813,9 @@ notes_mapping = {
   function styleTags(spec) {
     let byName = Object.create(null);
     for (let prop in spec) {
-      let tags3 = spec[prop];
-      if (!Array.isArray(tags3))
-        tags3 = [tags3];
+      let tags2 = spec[prop];
+      if (!Array.isArray(tags2))
+        tags2 = [tags2];
       for (let part of prop.split(" "))
         if (part) {
           let pieces = [], mode = 2, rest = part;
@@ -45845,7 +45843,7 @@ notes_mapping = {
           let last = pieces.length - 1, inner = pieces[last];
           if (!inner)
             throw new RangeError("Invalid path: " + part);
-          let rule = new Rule(tags3, mode, last > 0 ? pieces.slice(0, last) : null);
+          let rule = new Rule(tags2, mode, last > 0 ? pieces.slice(0, last) : null);
           byName[inner] = rule.sort(byName[inner]);
         }
     }
@@ -45853,8 +45851,8 @@ notes_mapping = {
   }
   var ruleNodeProp = new NodeProp();
   var Rule = class {
-    constructor(tags3, mode, context2, next) {
-      this.tags = tags3;
+    constructor(tags2, mode, context2, next) {
+      this.tags = tags2;
       this.mode = mode;
       this.context = context2;
       this.next = next;
@@ -45878,9 +45876,9 @@ notes_mapping = {
     }
   };
   Rule.empty = new Rule([], 2, null);
-  function tagHighlighter(tags3, options) {
+  function tagHighlighter(tags2, options) {
     let map3 = Object.create(null);
-    for (let style of tags3) {
+    for (let style of tags2) {
       if (!Array.isArray(style.tag))
         map3[style.tag.id] = style.class;
       else
@@ -45889,9 +45887,9 @@ notes_mapping = {
     }
     let { scope, all = null } = options || {};
     return {
-      style: (tags4) => {
+      style: (tags3) => {
         let cls = all;
-        for (let tag of tags4) {
+        for (let tag of tags3) {
           for (let sub of tag.set) {
             let tagClass = map3[sub.id];
             if (tagClass) {
@@ -45905,10 +45903,10 @@ notes_mapping = {
       scope
     };
   }
-  function highlightTags(highlighters, tags3) {
+  function highlightTags(highlighters, tags2) {
     let result = null;
     for (let highlighter of highlighters) {
-      let value = highlighter.style(tags3);
+      let value = highlighter.style(tags2);
       if (value)
         result = result ? result + " " + value : value;
     }
@@ -48967,13 +48965,13 @@ notes_mapping = {
   var openSearchPanel = (view) => {
     let state = view.state.field(searchState, false);
     if (state && state.panel) {
-      let searchInput = getSearchInput(view);
-      if (searchInput && searchInput != view.root.activeElement) {
+      let searchInput2 = getSearchInput(view);
+      if (searchInput2 && searchInput2 != view.root.activeElement) {
         let query = defaultQuery(view.state, state.query.spec);
         if (query.valid)
           view.dispatch({ effects: setSearchQuery.of(query) });
-        searchInput.focus();
-        searchInput.select();
+        searchInput2.focus();
+        searchInput2.select();
       }
     } else {
       view.dispatch({ effects: [
@@ -58322,7 +58320,7 @@ pygame.quit()
     console.info("Saving program automatically...");
     const code = theGlobalEditor.contents;
     const saveName = saveNameFromInput();
-    if (theUserIsLoggedIn) {
+    if (theUserIsLoggedIn && saveName) {
       const saveInfo = isServerSaveInfo(adventure.save_info) ? adventure.save_info : void 0;
       const response = await postJsonWithAchievements("/programs", {
         level: theLevel,
@@ -76848,82 +76846,126 @@ pygame.quit()
   ZC({ Validation: Ch, Select: _r });
 
   // static/js/public-adventures.ts
-  function cloned(message, success2 = true) {
-    if (success2) {
-      modal.notifySuccess(message);
-    } else {
-      modal.notifyError(message);
-    }
-  }
-  function applyFilter(term, type, filtered) {
-    var _a3, _b;
-    term = term.trim();
-    filtered[type] = filtered[type] || { exclude: [] };
-    filtered[type]["term"] = term;
-    const filterExist = document.querySelector("#search_adventure").value || document.querySelector("#language").value || document.querySelector("#tag").value;
-    if (!term) {
-      filtered[type] = { term, exclude: [] };
-    }
-    const adventures = document.querySelectorAll(".adventure");
-    if (!filterExist) {
-      for (const adv of adventures) {
-        adv.classList.remove("hidden");
-      }
-      filtered = {};
-      return;
-    }
-    for (const adv of adventures) {
-      let toValidate;
-      let skip2 = false;
-      if (type === "search") {
-        toValidate = (_a3 = adv.querySelector(".name")) == null ? void 0 : _a3.innerHTML;
-      } else if (type === "lang") {
-        toValidate = adv.getAttribute("data-lang");
-      } else {
-        const advTags = ((_b = adv.querySelector("#tags-list")) == null ? void 0 : _b.children) || [];
-        for (const t2 of advTags) {
-          const value = t2.innerHTML.trim();
-          if (term.includes(value)) {
-            if (filtered[type].exclude.some((a) => a === adv)) {
-              filtered[type].exclude = filtered[type].exclude.filter((a) => a !== adv);
-            }
-            skip2 = true;
-            break;
+  var levelSelect = document.getElementById("level-select");
+  var languageSelect = document.getElementById("language-select");
+  var tagsSelect = document.getElementById("tag-select");
+  var searchInput = document.getElementById("search_adventure");
+  var searchTimeout;
+  searchInput == null ? void 0 : searchInput.addEventListener("input", handleSearchInput);
+  document.addEventListener("DOMContentLoaded", () => {
+    const options = document.querySelectorAll(".option");
+    options.forEach(function(option2) {
+      option2.addEventListener("click", function() {
+        const dropdown = option2.closest(".dropdown");
+        if (!dropdown) {
+          return;
+        }
+        const isSingleSelect = (dropdown == null ? void 0 : dropdown.getAttribute("data-type")) === "single";
+        if (isSingleSelect && !option2.classList.contains("selected")) {
+          const otherOptions = dropdown.querySelectorAll(".option.selected");
+          otherOptions.forEach((otherOption) => otherOption.classList.remove("selected"));
+        }
+        let nextValue = dropdown.getAttribute("data-value");
+        if (option2.classList.contains("selected")) {
+          nextValue = nextValue == null ? void 0 : nextValue.replace(option2.getAttribute("data-value"), "");
+          if (!isSingleSelect) {
+            nextValue = nextValue.split(",").filter((v) => v).join(",");
+          } else {
+            return;
           }
+        } else if (!isSingleSelect) {
+          const currentValue = dropdown.getAttribute("data-value") || "";
+          nextValue = [currentValue, option2.getAttribute("data-value") || ""].filter((v) => v).join(",");
+        } else {
+          nextValue = option2.getAttribute("data-value") || "";
         }
-      }
-      if (skip2)
-        continue;
-      if (term && (toValidate == null ? void 0 : toValidate.includes(term))) {
-        if (filtered[type].exclude.some((a) => a === adv)) {
-          filtered[type].exclude = filtered[type].exclude.filter((a) => a !== adv);
-        }
-      } else if (term) {
-        if (filtered.term !== term && !filtered[type].exclude.some((a) => a === adv)) {
-          filtered[type].exclude.push(adv);
-        }
-      }
-    }
-    for (const adv of adventures) {
-      let allFiltersPassed = true;
-      for (const t2 in filtered) {
-        if (filtered[t2].exclude.some((a) => a === adv)) {
-          allFiltersPassed = false;
-        }
-      }
-      if (allFiltersPassed) {
-        adv.classList.remove("hidden");
-      } else {
-        adv.classList.add("hidden");
-      }
+        dropdown.setAttribute("data-value", nextValue);
+        option2.classList.toggle("selected");
+        updateLabelText(dropdown);
+        updateDOM();
+      });
+    });
+    updateDOM();
+    setTimeout(() => {
+      if (!levelSelect)
+        return;
+      const level3 = levelSelect.getAttribute("data-value") || "";
+      const cloneBtn = document.getElementById(`clone_adventure_btn_${level3}`);
+      cloneBtn == null ? void 0 : cloneBtn.addEventListener("click", handleCloning);
+    }, 500);
+  });
+  function getSelectedOptions(_options) {
+    return Array.from(_options).filter((option2) => option2.classList.contains("selected")).map((option2) => {
+      var _a3;
+      return (_a3 = option2.textContent) == null ? void 0 : _a3.trim();
+    });
+  }
+  function updateLabelText(dropdown) {
+    const toggleButton = dropdown.querySelector(".toggle-button");
+    const relativeOptions = dropdown.querySelectorAll(".option");
+    const label = toggleButton.querySelector(".label");
+    const selectedOptions = getSelectedOptions(relativeOptions);
+    label.textContent = selectedOptions.length === 0 ? label.getAttribute("data-value") : selectedOptions.join(", ");
+  }
+  async function handleCloning(e) {
+    const target = e.target;
+    const adventureId = target.getAttribute("data-id");
+    try {
+      const data = await postJson(`public-adventures/clone/${adventureId}`);
+      modal.notifySuccess(data.message);
+      await updateDOM();
+    } catch (error2) {
+      modal.notifyError(error2.responseText);
     }
   }
-  var tags2 = document.getElementById("tag");
-  var tagsInstance = _r.getInstance(tags2);
-  tags2 == null ? void 0 : tags2.addEventListener("valueChange.te.select", () => {
-    const value = tagsInstance.value.join(",");
-    applyFilter(value.replaceAll(",", " "), "tags", window.$filtered || {});
-  });
+  function handleSearchInput() {
+    clearTimeout(searchTimeout);
+    searchTimeout = setTimeout(updateDOM, 500);
+  }
+  function updateURL() {
+    const queryString = window.location.search;
+    const urlParams = new URLSearchParams(queryString);
+    const level3 = levelSelect.getAttribute("data-value") || "";
+    const lanugage = languageSelect.getAttribute("data-value") || "";
+    const tags2 = tagsSelect.getAttribute("data-value") || "";
+    urlParams.set("level", level3);
+    urlParams.set("lang", lanugage);
+    urlParams.set("tag", tags2);
+    if (searchInput) {
+      urlParams.set("search", searchInput.value);
+    }
+    window.history.pushState({}, "", `${window.location.pathname}?${urlParams.toString()}`);
+  }
+  async function updateDOM() {
+    if (!levelSelect || !languageSelect || !tagsSelect)
+      return;
+    const level3 = levelSelect.getAttribute("data-value") || "";
+    const lanugage = languageSelect.getAttribute("data-value") || "";
+    const tags2 = tagsSelect.getAttribute("data-value") || "";
+    const response = await fetch(`public-adventures/filter?tag=${tags2}&lang=${lanugage}&level=${level3}&search=${searchInput == null ? void 0 : searchInput.value}`, {
+      method: "GET",
+      keepalive: true,
+      headers: {
+        "Content-Type": "application/json; charset=utf-8",
+        "Accept": "application/json"
+      }
+    });
+    const { html, js } = await response.json();
+    updateURL();
+    const publicAdventuresBody = document.getElementById("public-adventures-body");
+    if (publicAdventuresBody) {
+      publicAdventuresBody.innerHTML = html;
+      initialize({
+        lang: js.lang,
+        level: js.level,
+        keyword_language: js.lang,
+        javascriptPageOptions: js
+      });
+      initializeHighlightedCodeBlocks(publicAdventuresBody);
+      const cloneBtn = document.getElementById(`clone_adventure_btn_${level3}`);
+      cloneBtn == null ? void 0 : cloneBtn.addEventListener("click", handleCloning);
+    }
+  }
   return js_exports;
 })();
 /*!

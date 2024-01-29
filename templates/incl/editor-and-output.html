@@ -162,6 +162,7 @@
         {% endif %}
       </div>
     </div>
+    {% if not public_adventures_page %}
     <div class="order-5">
           <div class="flex justify-between" id="pagination_container">
             <button class="green-btn previous-tab ltr:ml-1 rtl:mr-1"
@@ -234,6 +235,7 @@
             {% endif %}
           </div>
     </div>
+    {% endif %}
   </div>
   {% if not raw %}
   <div id="speak_container" class="hidden mt-4 flex flex-row items-center w-max overflow-visible">
@@ -244,7 +246,7 @@
   </div>
   {% endif %}
 <!-- developer mode toggle -->
-{% if raw %}
+{% if raw or public_adventures_page %}
   <div _="on load hedyApp.toggleDevelopersMode('load', false)"></div>
 {% elif not enforce_developers_mode and not editor_readonly %}
   <div class="mx-auto mt-4 w-64 border-gray-400 border-2 rounded-full py-2 px-4" id="developers_toggle_container">

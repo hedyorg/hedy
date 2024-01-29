@@ -191,32 +191,32 @@ levels:
     10:
         1:
             story: |-
-                Help this family out by creating a schedule of who is cooking and what they should be making this week. The remove commands make sure nobody has to cook twice and they have a differnet dinner every day.
-                **Mind!** the variable order should be first days, then people, and lastly dinner_options. This goes for the lines with the remove commands too.
+                Aide cette famille en créant un planning indiquant qui va cuisiner et ce qu'il ou elle devra préparer cette semaine. Les commandes `{remove}` son là pour éviter que quelqu'un cuisine deux fois et qu'il y ai un dinner différent tous les jours.
+                **Attention !** l'ordre des variable est en premier jours, ensuite personnes, et finalement choix_dinner. Et c'est aussi le cas pour les commandes `{remove}`.
             code: |-
-                days = Monday, Tuesday, Wednesday, Thursday, Friday
-                people = mom, dad, Martin, Abby, Jesse
-                dinner_options = pizza, tacos, pancakes, a salad, lasagne
-                {for} day {in} days
-                    chosen_person = people {at} {random}
-                    chosen_dinner = dinner_options {at} {random}
-                    {print} 'On ' day ' ' chosen_person ' is making ' chosen_dinner
-                    {remove} chosen_person {from} people
-                    {remove} chosen_dinner {from} dinner_options
+                jours = lundi, mardi, mercredi, jeudi, vendredi
+                personnes = maman, papa, Martin, Gabrielle, Julie
+                choix_dîner = une pizza, un tacos, des crêpes, une salade, des lasagnes
+                {for} jour {in} jours
+                    personne_choisie = personnes {at} {random}
+                    dîner_choisi = choix_dîner {at} {random}
+                    {print} jours " " personne_choisie " doit préparer " dîner_choisi
+                    {remove} personne_choisie {from} personnes
+                    {remove} dîner_choisi {from} choix_dîner
         2:
             story: |-
-                This make-over robot will decide your new hairstyle for you. If you do not agree with the first choice, you can try again.
-                **Mind** The variable people is defined in the first line. The variable hairstyles in the second.
+                Ce robot coiffeur va décider de ta nouvelle coupe de cheveux. Si tu n'es pas d'accord avec son premier choix, tu peux réessayer.
+                **Attention** La variable `personne` est définie à la première ligne. La variable `coupe_de_cheveux` à la seconde.
             code: |-
-                people = Betty, Amanda, Marc
-                hairstyles = a bald head, a mohawk, a ponytail, spikes
-                {for} person {in} people
-                    {print} person ' will get ' hairstyles {at} {random}
-                    happy = {ask} person ', are you happy with this choice?'
-                    {if} happy {is} yes
-                        {print} 'Great'
+                personnes = Betty, Amanda, Marc
+                coupe_de_cheveux = la tête rasée, une crête, une queue de cheval, des pointes
+                {for} personne {in} personnes
+                    {print} personne " aura " coupe_de_cheveux {at} {random}
+                    accord = {ask} personne ", cette coupe de cheveux te plaira-t-elle ?"
+                    {if} accord {is} oui
+                        {print} "Génial"
                     {else}
-                        {print} 'Lets try again... Then 'person ' will get ' hairstyles {at} {random}
+                        {print} " Essayons encore… " personne " aura " coupe_de_cheveux {at} {random}
     11:
         1:
             story: Create the count down clock for New Year's eve! The program should show the numbers from 10 to 1 for a second and then wish you a happy new year.
