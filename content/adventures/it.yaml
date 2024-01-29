@@ -14,11 +14,11 @@ adventures:
                     Usa `{echo}`  se vuoi che il tuo personaggio principale sia alla fine della frase.
                 example_code: |
                     ```
-                    {ask} The main character of this story is
-                    {print} The main character is now going to walk in the forest
-                    {echo} He's a bit scared,
-                    {print} He hears crazy noises everywhere
-                    {print} He's afraid this is a haunted forest
+                    {ask} Il personaggio principale di questa storia è
+                    {print} Il personaggio principale ora camminerà nella foresta
+                    {echo} È un po' spaventato,
+                    {print} Sente rumori assurdi ovunque
+                    {print} Ha paura che questa sia una foresta infestata
                     ```
                 story_text_2: |
                     ### Esercizio
@@ -36,12 +36,12 @@ adventures:
                     Puoi quindi inserire quel nome ovunque in una frase.
                 example_code: |-
                     ```
-                    name {is} {ask} What is the name of the main character?
-                    {print} name is now going to run in the woods
-                    {print} name is a bit scared
-                    {print} Suddenly he hears a crazy noise...
+                    name {is} {ask} Qual è il nome del personaggio principale?
+                    Il nome {print} ora verrà eseguito nel bosco
+                    Il nome {print} è un po' spaventato
+                    {print} All'improvviso sente un rumore pazzesco...
                     {sleep}
-                    {print} name is afraid this is a haunted forest
+                    Il nome di {print} teme che questa sia una foresta infestata
                     ```
                 story_text_2: |
                     ### Esercizio
@@ -140,7 +140,7 @@ adventures:
                     Puoi inserire tali ripetizioni nella tua storia, in questo livello con `{repeat}`.
 
                     ### Esercizio
-                    Aggiungi ripetizione alla tua storia. Torna ai programmi salvati, scegli il programma della storia dal livello 6 e
+                    Aggiungi ripetizione alla tua storia. Torna ai programmi salvati, scegli il programma della storia dal livello precedente e
                     trova una riga contenente `{print}` e ripetila!
                 example_code: |
                     ```
@@ -310,8 +310,8 @@ adventures:
                     {print} Scelgo gli animali {at} {random}
                     ```
                 story_text_3: |
-                    ### Exercise
-                    Try out the new commands in this virtual restaurant. Add the flavor the player is hpoing for to the list and remove the flavors they are allergic to.
+                    ### Esercizio
+                    Prova i nuovi comandi in questo ristorante virtuale. Aggiungi il gusto che il giocatore desidera alla lista e rimuovi i sapori ai quali è allergico.
                 example_code_3: |
                     ```
                     {print} Mystery milkshake
@@ -2449,12 +2449,12 @@ adventures:
             6:
                 story_text: |4
 
-                    In this level you learn something new: you can now also calculate.
+                        In this level you learn something new: you can now also calculate.
 
-                    The plus is easy, you write it like with math: `5 + 5` for example. The minus also works fine, it is `5 - 5`.
+                        The plus is easy, you write it like with math: `5 + 5` for example. The minus also works fine, it is `5 - 5`.
 
-                    The times is a bit different, because there is no times symbol on your keyboard. Just search, there really isn't!
-                    That is why we multiply with the asterisk above 8: `5 * 5`. Read that as "5 times 5" that helps you remember it best.
+                        The times is a bit different, because there is no times symbol on your keyboard. Just search, there really isn't!
+                        That is why we multiply with the asterisk above 8: `5 * 5`. Read that as "5 times 5" that helps you remember it best.
                 example_code: |
                     ```
                     {print} '5 plus 5 is ' 5 + 5

@@ -119,6 +119,9 @@ class Adventure:
     def __getitem__(self, key):
         return getattr(self, key)
 
+    def get(self, key, default=None):
+        return getattr(self, key, default)
+
     @staticmethod
     def from_teacher_adventure_database_row(row):
         return Adventure(

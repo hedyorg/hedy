@@ -565,6 +565,28 @@ levels:
                 Misschien heb je al bedacht om te proberen om een {if} in een {repeat} te stoppen, of andersom.
                 Voor nu kan dit nog niet. In hoger levels mag dit wel, maar we willen je eerst even goed laten oefenen met het inspringen bij deze commando's.
         9:
+            header: Debugging (foutzoeken)
+            text: Laten we deze code debuggen!
+            code: |-
+                {print} 'HedyBus bustickets'
+                zone_1 = Stadhuis, Bibliotheek, Campus, Markt
+                zone_2 = Zwembad, Skatepark, Winkelcentrum, Luchthaven
+                bestemming = 'Waar wilt u heen?'
+                {if} bestemming {in} zone 1
+                {print} bestemming 'is in zone 1'
+                prijs = 3 euro
+                    {if} bestemming {is} zone_2
+                {print} bestemmming 'is in zone 2'
+                price = 6
+                ticket_types = {ask} 'Druk op 1 voor een enkeltje.
+                Druk op 2 voor een retourtje.'
+                {if} ticket_type = 1
+                {print} 'Je koos voor een enkele reis'
+                {else}
+                        {print} Je koos voor een retour ticket'
+                prijs * 2
+                {print} 'Dat wordt dan ' prijs ' euro alstublieft'
+        10:
             header: Op naar de avonturen!
             text: Veel plezier met de avonturen in level 8!
     9:
@@ -639,6 +661,23 @@ levels:
                     {else}
                         {print} 'pizza is beter'
         8:
+            header: Debugging (foutzoeken)
+            text: Laten we deze code debuggen!
+            code: |-
+                {print} 'Welkom bij HedyJumps, voor jouw parachutesprong!'
+                mensen = {ask} 'Hoeveel mensen willen er vandaag de sprong wagen?
+                {print} 'Leuk!' We hebben wat vragen voor iedereen.'
+                extra_instructies_mensen = a, b
+                {repeat} 3 {times}
+                    naam = {ask} 'Hoe heet je?'
+                sprong_ervaring = 'Heb je al eens eerder parachute gesprongen, naam ?'
+                {if} ervaring  nee
+                {print} 'Geen probleem! Ga zo naar kamer 13 voor extra instructies.'
+                {add} naam {to} extra_instructies_mensen
+                {else}
+                {print} 'Gaaf!'
+                {print} 'Bedankt voor het invullen allemaal! Veel plezier vandaag!'
+        9:
             header: Aan de slag!
             text: Veel plezier met de avonturen in level 9!
     10:
@@ -658,6 +697,20 @@ levels:
                 {for} dag {in} dagen
                     {print} namen {at} {random} ' doet de afwas on ' dag
         4:
+            header: Debugging (foutzoeken)
+            text: Laten we deze code debuggen!
+            code: |-
+                {print} 'Dames en heren!'
+                {print} 'Komt dat zien! Vanavond in circus Hedy!'
+                acts = uit een kanon schieten, koortdansen , zichzelf inpakken in een koffertje,
+                mensen = Gina de Geweldige Olly de Ongelooflijke Francis de Fantastische
+                    {for} mensen {in} acts
+                gekozen_persoon {is} mensen {random}
+                    gekozen_persoon ' zal ' act
+                {add} gekozen_persoon {from} mensen
+                {print} 'Komt dat zien! Alleen vanavond!'
+                {print} 'Laatste tickets verkrijgbaar aan de kassa
+        5:
             header: Programmeertijd!
             text: Veel plezier met de avonturen in level 10!
     11:
@@ -683,6 +736,14 @@ levels:
                 {for} i {in} {range} 1 {to} 10
                     {print} i * number
         4:
+            header: Debugging (foutzoeken)
+            text: Laten we deze code debuggen!
+            code: |-
+                factor {is} {ask} 'Welke maaltafel heb je nodig?'
+                {repeat} {for} nummers {in} {range} 1 {to} 10 {times}
+                    {print} Dit is de tafel van factor
+                    {print} nummer ' x ' factor ' = ' i * factor
+        5:
             header: Lekker programmeren!
             text: Veel plezier met de avonturen in level 11!
     12:
@@ -732,6 +793,21 @@ levels:
             header: Functies
             text: Zoals je kunt zien in de voorbeelden is een functie een blokje code dat je vaker kunt oproepen. Je gebruikt `{define}` om de functie te maken en `{call}` om hem te gebruiken.
         7:
+            header: Debugging (foutzoeken)
+            text: Laten we deze code debuggen!
+            code: |-
+                {call} nieuw_lid
+                {print} 'Hallo nieuw lid!'
+                gebruikersnaam = {ask} 'Wat is je gebruikersnaam?'
+                wachtwoord = 'Wat is je wachtwoord?'
+                {print} 'Welkom bij de club!'
+
+                gebruikersnaam = {ask} 'Voer je gebruikersnaam in. Ben je nieuw? Typ Nieuw Lid'
+                {if} gebruikersnaam = Nieuw Lid
+                {call} nieuw lid
+                    {else}
+                        wachtwoord = {ask} 'Voer je wachtwoord in'
+        8:
             header: Klaar om het te gaan proberen?
             text: Veel plezier met de avonturen in level 12!
     13:
@@ -812,6 +888,29 @@ levels:
                 {call} lied {with} 'sea'
                 {call} lied {with} 'ocean'
         8:
+            header: Debugging (foutzoeken)
+            text: Laten we deze code debuggen!
+            code: |-
+                {define} blijdschap {with} naam
+                    {print} '🥳'
+                {play} G
+                {play} A
+                {play} B
+                {print} 'Lekker bezig, ' name
+                {define} verdriet
+                {print} '😞'
+                {play} E
+                {play} D
+                {play} C
+                {print} 'Hopelijk knap je snel op, ' name
+
+                naam = {ask} 'Wat is jouw' naam '?'
+                gevoel = {ask} 'Ben je blij of verdrietig?'
+                {if} stemming = blij
+                    {call} blijdschap {with} persoon
+                {else} gevoel = verdrietig
+                    {define} verdriet {to} naam
+        9:
             header: Aan de slag!
             text: Veel plezier met de avonturen in level 13!
     14:

@@ -7,6 +7,7 @@
   <div class="w-full mb-8" id="program_filter">
     <form>
         <input type="hidden" name="page" value=""> <!-- Submitting the form resets the page -->
+        <input type="hidden" name="user" value="{{ from_user }}">
         <div class="flex flex-row px-4 w-full items-center border border-gray-400 py-2 rounded-lg gap-4">
             <select name="level" class="block appearance-none w-1/3 bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 ltr:pr-8 rtl:pl-8 rounded" data-autosubmit="true">
                 <option selected value="">&mdash; {{_('level')}} &mdash;</option>
@@ -35,6 +36,9 @@
     </form>
   </div>
   <div class="programs w-full">
+    {% if programs|length == 0 %}
+        <p class="text-xl" >{{_('no_programs')}}</p>
+    {% endif %}
   {% for program in programs %}
     <div id="program_{{ loop.index }}" class="program w-full border-solid border-2 {% if program.submitted %} border-gray-400 bg-gray-400 {% else %} border-orange-400 {% endif %} rounded p-4 mb-4">
         <h3 id="submitted_header_{{ loop.index }}" class="mt-0 mb-4 text-red-500 text-center {% if not program.submitted %} hidden{% endif %}">{{_('submitted_header')}}</h3>
@@ -105,12 +109,6 @@
         </div>
     {% endif %}
 
-  {% if programs|length == 0 and not from_user and not filtered_level and not filtered_adventure %}
-    <p>{{_('no_programs')}}
-        <br><br>
-        <button class="btn block flex-none self-end" onclick="window.open ('/hedy', '_self')">{{_('write_first_program')}}</button>
-    </p>
-  {% endif %}
   {% if next_page_url %}
     <p>
         <a href="{{next_page_url}}" class="btn green-btn">{{_('next_page')}}</a>
