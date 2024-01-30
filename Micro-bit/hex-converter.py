@@ -12,7 +12,7 @@ import uflash
 def create_hex(input_file):
     try:
         uflash.flash(input_file)
-        print(f"Hex file created successfully:")
+        print("Hex file created successfully")
     except Exception as e:
         print(f"Error creating hex file: {e}")
 
