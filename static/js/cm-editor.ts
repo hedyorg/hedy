@@ -243,6 +243,17 @@ export class HedyCodeMirrorEditor implements HedyEditor {
         const effect = StateEffect.appendConfig.of(hedy());
 
         this.view.dispatch({ effects: effect });
+
+        const transaction = this.view.state.update({
+            effects: StateEffect.appendConfig.of(EditorView.updateListener.of((v: ViewUpdate) => {
+                if (v.docChanged) {
+                    console.log(language.parse(v.view.state.doc.toString()).toString())
+                }
+            }))
+        })
+        this.view.dispatch(transaction);
+
+
     }
     /**
     * @returns the string of the current program in the editor
