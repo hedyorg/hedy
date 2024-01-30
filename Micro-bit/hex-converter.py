@@ -2,10 +2,10 @@ import uflash
 
 # The uflash module takes a Micro:bit script and converts it to a hex file(its not saved) and then
 #   flashes it to the Micro:bit automatically.
-# If there is no Micro:bit connected, it will give an error. 
+# If there is no Micro:bit connected, it will give an error.
 # I managed to save the hex file to a specific location only if i run the code from the terminal
-#   (uflash Micro-bit/Micro-bit.py C:\Users\Teodor\Desktop\hex). 
-# Saving the hex file to a specific location is not nessesary at the moment but 
+#   (uflash Micro-bit/Micro-bit.py C:\Users\Teodor\Desktop\hex).
+# Saving the hex file to a specific location is not nessesary at the moment but
 #   if we want to emulate the Micro:bit we need it.
 
 
