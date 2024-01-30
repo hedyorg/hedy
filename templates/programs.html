@@ -74,7 +74,7 @@
             {% endif %}
         </div>
         <div class="w-3/4 turn-pre-into-ace mb-4">
-          <pre level="{{ program.level }}">{{program.code }}</pre>
+          <pre level="{{ program.level }}">{{program.preview_code }}</pre>
         </div>
         <div id="submitted_button_container_{{ loop.index }}" class="flex flex-row gap-2" {% if not program.submitted %} style="display: none;" {% endif %}>
             <button class="green-btn" onclick="window.open (hedyApp.viewProgramLink('{{program.id}}'))">{{_('open')}}</button>
@@ -87,6 +87,7 @@
             <a href="/hedy/{{program.level|string}}/{{program.id}}"><button class="green-btn">{{_('open')}}</button></a>
             {% if not second_teachers_programs %}
             <button class="red-btn" data-cy="delete_non_submitted_program_{{ loop.index }}" onclick="hedyApp.delete_program('{{ program.id }}', {{ loop.index }}, '{{_('delete_confirm')}}')">{{_('delete')}}</button>
+            <button class="white-btn" onclick="hedyApp.copy_to_clipboard(`{{program.code}}`, '{{_('copy_clipboard')}}')">{{_('copy_code')}}</button>
             <div id="public_button_container_{{ loop.index }}" class="flex flex-row w-full gap-2" {% if not program.public %}style="display: none;"{% endif %}> <!-- ml-auto alignment doesn't work with hidden but does with display: none; -->
                 <button class="blue-btn" data-cy="unshare_program_{{ loop.index }}" onclick="hedyApp.share_program('{{program.id}}', {{ loop.index }}, false, '{{_('unshare_confirm')}}')">{{_('unshare')}}</button>
                 <button class="blue-btn" onclick="hedyApp.copy_to_clipboard(hedyApp.viewProgramLink('{{program.id}}'), '{{_('copy_clipboard')}}')">{{_('copy_link_to_share')}}</button>
