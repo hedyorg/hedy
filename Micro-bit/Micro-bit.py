@@ -4,3 +4,4 @@ while True:
     sleep(200)
     display.show(Image.HEART)
     sleep(2000)
+    
