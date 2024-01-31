@@ -89,7 +89,8 @@
                 <div class="flex flex-col w-full">
                     <h3 class="text-center mt-0 mb-4">{{ _('adventure') }}
                         <button type="button" _="on click event.stopPropagation()
-                            toggle .hidden on #explaination">
+                            toggle .hidden on #explanation
+                            go to the top of #explanation">
                             <svg class="fill-current h-4 w-4 text-blue-500 cursor-pointer !m-0 !p-0" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
                                 <path
                                 d="M2.93 17.07A10 10 0 1 1 17.07 2.93 10 10 0 0 1 2.93 17.07zm12.73-1.41A8 8 0 1 0 4.34 4.34a8 8 0 0 0 11.32 11.32zM9 11V9h2v6H9v-4zm0-6h2v2H9V5z" />
@@ -97,11 +98,7 @@
                         </button>
                     </h3>
                     <div class="flex">
-
-                        <!-- <textarea id="custom_adventure_content" class="block appearance-none w-full h-96 bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 rounded">{% if adventure.content|length > 0 %}{{ adventure.content }}{% else %}{{_('template_code')}}{% endif %}</textarea> -->
-
-                        <div id="adventure-editor"></div>
-
+                        <textarea id="adventure-editor" class="hidden">{% if adventure.content|length > 0 %}{{ adventure.content }}{% else %}{{_('template_code')}}{% endif %}</textarea>
                     </div>
                     
                     <div class="mt-2 mb-0 flex flex-row items-center text-center border-gray-500 border p-4 rounded-lg">
@@ -118,19 +115,16 @@
         </form>
 
 
-        <div id="explaination" class="">
+        <div id="explanation" class="hidden">
             <hr
             class="my-12 mx-16 h-2 border-t-4 bg-neutral-100" />
 
             <div class=" grid gap-2 ">
-                <!-- <div>{{_('adventure_classes')}}</div>
-                <div>{{_('adventure_exp')}}</div> -->
+                <div>{{_('adventure_classes')}}</div>
+                <!-- <div>{{_('adventure_exp')}}</div> -->
                 
                 <div class="flex gap-2 flex-wrap">
                     {% for cls in adventure_classes %}
-                    <!-- <a href="/for-teachers/customize-class/{{cls.id}}" target="_blank">{{cls.name}}</a>{% if loop.index != adventure_classes|length %}, {% endif %} -->
-                        {{ render_partial('htmx-class-card.html', class=cls, username=username,) }}
-                        {{ render_partial('htmx-class-card.html', class=cls, username=username,) }}
                         {{ render_partial('htmx-class-card.html', class=cls, username=username,) }}
                     {% endfor %}
                 </div>
@@ -159,10 +153,4 @@
         <button class="blue-btn" id="go_back_button" onclick="window.open('/for-teachers', '_self');">{{_('back_to_teachers_page')}}</button>
     </div>
 </div>
-
-<script>
-    setTimeout(() => {
-        hedyApp.initialize_adv_editor({{ js|tojson|safe }})
-    }, 100)
-</script>
 {% endblock %}

@@ -250,9 +250,31 @@ div[data-te-input-notch-ref] {
 }
 
 
-.ck-editor__editable {
-    height: 24rem;
+.ck-editor, .ck-editor__editable {
+    min-height: 24rem;
+    width: 100% !important;
 }
 .ck-toolbar__items, .ck-editor__editable {
     background-color: var(--tw-bg-gray-200) !important;
+}
+
+.ck-editor pre code {
+  background-color: unset !important;
+  color: var(--tw-bg-gray-300);
+}
+
+.ck-editor[dir=rtl] pre code {
+  text-align: right;
+}
+
+.ck-editor[dir=rtl] pre[data-language]:after {
+  left: 10px;
+  right: unset !important;
+}
+
+.ck-editor {
+  & ol, ul {
+    margin-left: 2rem;
+    margin-right: 2rem;
+  }
 }
