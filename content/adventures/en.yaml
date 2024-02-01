@@ -2640,17 +2640,19 @@ adventures:
                     Instead of playing notes, you can also play numbers now. Simply type `{play} 1` for the lowest note, `{play} 70` for the highest note, or anything in between.
 
                     ### Exercise
-                     This calls for musical maths! Play the note that belongs to the sum of both numbers.
-
+                     This calls for musical maths! Try out the example code a couple of times with different starting numbers. 
                     Then, see if you can compose a song using the numbers.
                 example_code: |
                     ```
-                    number_1 = {ask} 'Say a random number'
-                    number_2 {is} {ask} 'Say another one!'
-                    sum = number_1 + number_2
-                    {print} number_1 ' and ' number_2 ' together is ' sum
-                    {print} 'This is what ' sum ' sounds like:'
-                    {play} _
+                    number = {ask} 'Say a starting number between 1 and 67'
+                    {print} number
+                    {play} number
+                    number = number + 1
+                    {print} number
+                    {play} number
+                    number = number + 1
+                    {print} number
+                    {play} number
                     ```
             7:
                 story_text: |
