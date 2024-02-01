@@ -51,7 +51,7 @@ Hedy_snippets = [(s.name, s) for s in collect_snippets(
 Hedy_snippets = HedyTester.translate_keywords_in_snippets(Hedy_snippets)
 
 lang = None
-lang = 'nl' #useful if you want to test just 1 language
+# lang = 'nl' #useful if you want to test just 1 language
 
 if lang:
     Hedy_snippets = [(name, snippet) for (name, snippet) in Hedy_snippets if snippet.language[:2] == lang]
