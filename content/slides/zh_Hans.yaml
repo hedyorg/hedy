@@ -627,8 +627,8 @@ levels:
             code: |-
                 {repeat} 3 {times}
                      food = {ask} '你想要什么？'
-                     {if} food{is}披萨
-                         {print}“好极了！”
+                     {if} food {is} 披萨
+                         {print} '好极了！'
                      {else}
                          {print} '披萨更好吃'
         3:
