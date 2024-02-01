@@ -119,6 +119,7 @@ levels:
                 {turn} 左
         12:
             header: 调试
+            debug: true
             text: 调试代码意味着消除代码中的错误。 我们一起调试一下这段代码。 单击瓢虫按钮启动调试器。
             code: |-
                 我是 DJ 海蒂
@@ -141,7 +142,7 @@ levels:
             header: Variables
             text: 要创建或“ set”变量，我们使用 `{is}`命令
             code: |-
-                名字{is}海蒂
+                名字 {is} 海蒂
                 年龄 {is} 15
                 {print} 姓名年龄 岁
         3:
@@ -183,6 +184,7 @@ levels:
                 {print} 绿色！
         7:
             header: 调试
+            debug: true
             text: 调试代码意味着消除代码中的错误。 我们一起调试一下这段代码。 单击瓢虫按钮启动调试器。
             code: |-
                 {print} 欢迎来到甜甜圈店！
@@ -207,8 +209,7 @@ levels:
 
                 用逗号分隔列表中的项目。
             code: |-
-                动物{is}狗、猫、袋鼠
-                ````
+                动物 {is} 狗、猫、袋鼠
         3:
             header: 随机
             text: |-
@@ -216,16 +217,14 @@ levels:
                 计算机将随机选择列表中的一项。
                 每次运行此代码时，输出都会有所不同。
             code: |-
-                动物{is}狗,猫,袋鼠
-                {print}动物{at} {random}
-                ```
+                动物 {is} 狗, 猫, 袋鼠
+                {print} 动物 {at} {random}
         4:
             header: 随意造句
             text: 您也可以在句子中使用`{at}` `{random}`命令。
             code: |-
-                动物{is}狗,猫,袋鼠
-                {print}我最喜欢的动物是动物{at} {random}
-                ```
+                我最喜欢的动物是动物 {is} 狗, 猫, 袋鼠
+                {print} 我最喜欢的动物是动物 {at} {random}
         5:
             header: Add to
             text: |-
@@ -234,22 +233,23 @@ levels:
                 您可以选择要添加到列表中的内容，也可以将`{add}` `{to}`命令与`{ask}` 命令结合使用。
                 这样您就可以让玩家决定将哪些内容添加到列表中。
             code: |-
-                animals{is}狗,猫,袋鼠
-                like {is} {ask}你最喜欢的动物是什么？
-                {add} like {to_list}动物
-                {print}我选择 animals {at} {random}
+                animals {is} 狗, 猫, 袋鼠
+                like {is} {ask} 你最喜欢的动物是什么？
+                {add} like {to_list} animals
+                {print} 我选择 animals {at} {random}
         6:
             header: 从......中去除
             text: |-
                 与`{add}` `{to}`命令相反的是  `{remove}` `{from}` 命令。
                 该命令从列表中删除一个项目。
             code: |-
-                animals{is}狗,猫,袋鼠
-                dislike {is} {ask}你不喜欢什么 animals ？
-                {remove}dislike{from} animals
-                {print}我选择 animals {at} {random}
+                animals {is} 狗, 猫, 袋鼠
+                dislike {is} {ask} 你不喜欢什么 animals ？
+                {remove} dislike {from} animals
+                {print} 我选择 animals {at} {random}
         7:
             header: 调试
+            debug: true
             text: 我们来调试一下这段代码吧！
             editor: |-
                 music_genres {is}摇滚,流行,金属,独立,爵士乐
@@ -271,10 +271,11 @@ levels:
             code: '{print} ''带引号打印！'''
         2:
             header: 问题
+            debug: true
             text: 在前面的关卡中，你可能遇到过这个问题：
             code: |-
-                name {is}苏菲
-                {print} 我的名字是name
+                name {is} 苏菲
+                {print} 我的名字是 name
         3:
             header: 用引号修复它
             text: |-
@@ -295,7 +296,7 @@ levels:
                 你不希望变量名称打印在屏幕上。
                 这就是为什么变量应该被排除在引号之外，如下所示：
             code: |-
-                name{is}哈利
+                name {is} 哈利
                 {print} '你好' name
         7:
             header: 引号和变量
@@ -303,8 +304,8 @@ levels:
                 当变量名用在句子中间时，必须将变量放在引号之外。
                 然而，句子的其余部分确实需要引号。 看起来像这样:
             code: |-
-                name{is}哈利
-                {print} '你好'name'，你好吗？'
+                name {is} 哈利
+                {print} '你好' name '，你好吗？'
         8:
             header: 引号和缩写
             text: |-
@@ -330,6 +331,7 @@ levels:
                 {print} '惊喜!'
         10:
             header: 调试
+            debug: true
             text: 来调试一下这段代码吧！
             code: |-
                 {clear}
@@ -359,6 +361,7 @@ levels:
                 {if} name {is} 海蒂 {print} '赞'
         3:
             header: 不要忘记打印
+            debug: true
             text: |-
                 使用`{if}`命令时，不要忘记使用`{print}`命令。
                 这段代码不会工作！
@@ -394,6 +397,7 @@ levels:
                 {else} {print} '嗯'
         7:
             header: 调试
+            debug: true
             text: 来调试一下这段代码吧！
             code: |-
                 {print} 欢迎来到七彩航空安全！
@@ -512,8 +516,8 @@ levels:
                 {repeat} 3 '救命！'
                 rescued = {ask} 有人来救援吗？
                 {if} rescued 是 {is}
-                {print}幸运！
-                {else} {repeat} 3 {次}“救命！”
+                {print} 幸运！
+                {else} {repeat} 3 次 “救命！”
                 rescued =“现在怎么样？”
                 {if}是
                 {print} '万岁！'
@@ -527,6 +531,7 @@ levels:
             text: 在本级别中，你将学习使用缩进使 `{repeat}`, `{if}` 和 `{else}` c命令适用于多行代码。
         2:
             header: '{repeat} commands before'
+            debug: true
             text: |-
                 在前面的关卡中，`{repeat}`命令如下所示：
 
@@ -554,6 +559,7 @@ levels:
                 {print} '我们已经完成重复了！'
         5:
             header: if and else before
+            debug: true
             text: |-
                 `{if}` 和 `{else}` 命令也是如此。
                 这些是之前的命令：
@@ -624,18 +630,18 @@ levels:
             text: 您可以在此级别中组合 `{repeat}`和`{if}`。
             code: |-
                 {repeat} 3 {times}
-                     food = {ask} '你想要什么？'
-                     {if} food {is} 披萨
-                         {print} '好极了！'
-                     {else}
-                         {print} '披萨更好吃'
+                    food = {ask} '你想要什么？'
+                    {if} food {is} 披萨
+                        {print} '好极了！'
+                    {else}
+                        {print} '披萨更好吃'
         3:
             header: Indentation matters!
             text: 缩进对于告诉计算机哪些行应该重复以及哪些行只能运行一次非常重要。
             code: |-
-                {repeat} 3 {次}
-                     {print} '此行将重复...'
-                     {print} '这也是......'
+                {repeat} 3 {times}
+                    {print} '此行将重复...'
+                    {print} '这也是......'
                 {print} '但是这个不会！'
         4:
             header: Multiple lines after `{if}`
@@ -643,24 +649,24 @@ levels:
             code: |-
                 continue = {ask} '你想继续吗？'
                 {if} 继续 = 是
-                     sure = {ask} '你确定吗？'
-                     {if} sure{is}是的
-                         {print} '我们将继续'
-                     {else}
-                         {print} '你不确定'
+                    sure = {ask} '你确定吗？'
+                    {if} sure {is} 是的
+                        {print} '我们将继续'
+                    {else}
+                        {print} '你不确定'
                 {else}
-                     {print} '您不想继续'
+                    {print} '您不想继续'
         5:
             header: Indentation matters
             text: 同样，缩进仍然非常重要，可以在代码中产生很大的差异。
             code: |-
                 continue = {ask} '你想继续吗？'
                 {if} continue = yes
-                     sure = {ask} '你确定吗？'
-                     {if} sure{is}yes
-                         {print} '我们将继续'
+                    sure = {ask} '你确定吗？'
+                    {if} sure {is} yes
+                        {print} '我们将继续'
                 {else}
-                     {print} '你不确定'
+                    {print} '你不确定'
         6:
             header: An `{if}` inside a `{repeat}`
             text: |-
@@ -668,21 +674,21 @@ levels:
                 一探究竟:
             code: |-
                 {repeat} 3 {times}
-                     food = {ask} '你想要什么？'
-                     {if} food{is}披萨
-                         {print}“好极了！”
-                     {else}
-                         {print} '披萨更好吃'
+                    food = {ask} '你想要什么？'
+                    {if} food {is} 披萨
+                        {print} '好极了！'
+                    {else}
+                        {print} '披萨更好吃'
         7:
             header: Mind the indentation
             text: 请注意，此代码的第四行和第六行以 8 个缩进空格开头。
             code: |-
                 {repeat} 3 {times}
-                     food = {ask} '你想要什么？'
-                     {if} food{is}披萨
-                         {print}“好极了！”
-                     {else}
-                         {print} '披萨更好吃'
+                    food = {ask} '你想要什么？'
+                    {if} food {is} 披萨
+                        {print} “好极了！”
+                    {else}
+                        {print} '披萨更好吃'
         8:
             header: Debugging
             debug: true
@@ -719,8 +725,8 @@ levels:
             header: The for command
             text: 在这里您可以看到 `{for}` 命令的另一个示例：
             code: |-
-                days =周一、周二、周三、周四、周五、周六、周日
-                names =妈妈、爸爸、艾玛、苏菲
+                days = 周一、周二、周三、周四、周五、周六、周日
+                命名 = 妈妈、爸爸、艾玛、苏菲
                 {for} day {in} days
                      {print} 命名 {at} {random} ' 在 ' day '洗碗'
         4:
@@ -817,10 +823,10 @@ levels:
                      {print} 'Twinkle'
                      {print} '...'
 
-                 {call} twinkle
-                 {print} 'Up above the world so high'
-                 {print} 'Like a diamond in the sky'
-                 {call} twinkle
+                {call} twinkle
+                {print} 'Up above the world so high'
+                {print} 'Like a diamond in the sky'
+                {call} twinkle
         6:
             header: 功能
             text: 正如您在示例中看到的，函数是一个可以随时调用的代码块。您可以使用“{定义}”来设置函数，并使用“{叫}”来使用它。
@@ -1003,7 +1009,7 @@ levels:
                 {define} calculate_new_price {with} amount, percentage
                     percentage = percentage / 100
                     discount_amount = amount * percentage
-                    return amount - discount_amount
+                    {return} amount - discount_amount
 
                 old_price = {ask} 'How much is on the price tag?'
                 discount = {ask} 'What percentage is the discount?'
@@ -1069,7 +1075,7 @@ levels:
             header: Elif
             text: 在这个关卡中你还可以使用一个新命令：elif。 elif 是 else if 的缩写，当您想要创建 3 个（或更多！）选项时需要它。 一起来一探究竟！
             code: |-
-                prices = ['100 万美元', '苹果派', '什么都没有']
+                价格 = ['100 万美元', '苹果派', '什么都没有']
                 your_price = 价格[{random}]
                 {print} '你赢了 ' your_price
                 {if} your_price == '100万美元':

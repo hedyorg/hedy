@@ -211,7 +211,6 @@ levels:
                 Sépare les éléments de ta liste avec une virgule.
             code: |-
                 animals {is} dogs, cats, kangaroos
-                ```
         3:
             header: Au hasard
             text: |-
@@ -221,14 +220,12 @@ levels:
             code: |-
                 animals {is} dogs, cats, kangaroos
                 {print} animals {at} {random}
-                ```
         4:
             header: Au hasard dans une phrase
             text: Tu peux également utiliser la commande `{at}` `{random}` dans une phrase.
             code: |-
                 animals {is} dogs, cats, kangaroos
                 {print} My favorite animal is animals {at} {random}
-                ```
         5:
             header: Ajouter à
             text: |-
@@ -275,6 +272,7 @@ levels:
             code: '{print} ''print with quotes!'''
         2:
             header: Problème
+            debug: true
             text: 'Dans les niveaux précédents, tu as peut-être été confronté à ce problème:'
             code: |-
                 name {is} Sophie
@@ -360,6 +358,7 @@ levels:
                 {if} name {is} Hedy {print} 'nice'
         3:
             header: Don't forget to print
+            debug: true
             text: |-
                 When using the `{if}` command, don't forget to use the `{print}` command.
                 This code will not work!
@@ -529,6 +528,7 @@ levels:
             text: In this level you will learn to use indentation to make the `{repeat}`, `{if}` and `{else}` commands work for multiple lines of code.
         2:
             header: '{repeat} commands before'
+            debug: true
             text: |-
                 In the previous levels, the `{repeat}` command looked like this:
 
@@ -556,6 +556,7 @@ levels:
                 {print} 'We are done repeating!'
         5:
             header: if and else before
+            debug: true
             text: |-
                 The same goes for the `{if}` and `{else}` commands.
                 These were the commands before:
@@ -813,10 +814,10 @@ levels:
                      {print} 'Twinkle'
                      {print} '...'
 
-                 {call} twinkle
-                 {print} 'Up above the world so high'
-                 {print} 'Like a diamond in the sky'
-                 {call} twinkle
+                {call} twinkle
+                {print} 'Up above the world so high'
+                {print} 'Like a diamond in the sky'
+                {call} twinkle
         6:
             header: Functions
             text: As you could see in the example a function is a block of code that can be called anytime. You use `{define}` to set the function and `{call}` to use it.
@@ -1000,7 +1001,7 @@ levels:
                 {define} calculate_new_price {with} amount, percentage
                     percentage = percentage / 100
                     discount_amount = amount * percentage
-                    return amount - discount_amount
+                    {return} amount - discount_amount
 
                 old_price = {ask} 'How much is on the price tag?'
                 discount = {ask} 'What percentage is the discount?'

@@ -199,7 +199,6 @@ levels:
             text: "{is}로 목록을 작성합니다. \n\n목록의 항목을 쉼표로 구분합니다."
             code: |-
                 animals {is} dogs, cats, kangaroos
-                ```
         3:
             header: At random
             text: |-
@@ -209,14 +208,12 @@ levels:
             code: |-
                 animals {is} dogs, cats, kangaroos
                 {print} animals {at} {random}
-                ```
         4:
             header: At random in a sentence (문장에서 랜덤)
             text: 문장에서도 '{at}' '{random}' 명령을 사용할 수 있습니다.
             code: |-
                 animals {is} dogs, cats, kangaroos
                 {print} My favorite animal is animals {at} {random}
-                ```
         5:
             header: Add to
             text: "{add} {to} 명령을 사용하여 목록에 항목을 추가할 수 있습니다. \n\n목록에 추가할 항목을 선택하거나 {add} {to} 명령을 {ask} 명령과 함께 사용할 수 있습니다. \n이렇게 하면 플레이어가 목록에 추가할 항목을 결정할 수 있습니다."
@@ -259,6 +256,7 @@ levels:
             code: '{print} ''print with quotes!'''
         2:
             header: 문제
+            debug: true
             text: '이전 레벨에서는 다음과 같은 문제가 발생했을 수 있습니다:'
             code: |-
                 name {is} Sophie
@@ -333,6 +331,7 @@ levels:
             header: 인쇄하는 것을 잊지 마세요
             text: '''{if}'' 명령을 사용할 때는 ''{print}'' 명령을 사용하는 것을 잊지 마십시오.'
             code: '{if} name {is} Hedy ''nice'''
+            debug: true
         4:
             header: else
             text: "'{if}' 명령어를 사용할 때는 '{else}' 명령어를 추가할 수도 있다. \n만약 그 답이 Hedy이면 컴퓨터는 nice를 출력할 것이다. \n그러나 만약 그 답이 다른 것이라면 컴퓨터는 boo를 출력할 것이다"
@@ -483,6 +482,7 @@ levels:
             header: '{messages}개 이전의 명령'
             text: "이전 레벨에서 '{repeat}' 명령어는 다음과 같이 보였습니다. \n\n코드 한 줄만 반복할 수 있습니다."
             code: '{repeat} 5 {times} {print} ''Help!'''
+            debug: true
         3:
             header: 지금 {messages}개의 명령
             text: "이 레벨에서는 여러 줄의 코드를 반복할 수 있다. \n이를 위해서는 어떤 줄이 함께 속하므로 반복해야 하는지 컴퓨터에 말해야 한다. \n\n들여쓰기를 사용하여 이 작업을 수행한다. 반복할 각 줄의 맨 앞에 있는 4개의 공백(또는 하나의 탭)을 다음과 같이 사용한다:"
@@ -499,6 +499,7 @@ levels:
                 {print} 'We are done repeating!'
         5:
             header: if and else before
+            debug: true
             text: "{if} 명령어와 {else} 명령어도 마찬가지이다. \n이전의 명령어는 다음과 같다:"
             code: |-
                 {if} name {is} Hedy {print} 'nice'
@@ -731,10 +732,10 @@ levels:
                      {print} 'Twinkle'
                      {print} '...'
 
-                 {call} twinkle
-                 {print} 'Up above the world so high'
-                 {print} 'Like a diamond in the sky'
-                 {call} twinkle
+                {call} twinkle
+                {print} 'Up above the world so high'
+                {print} 'Like a diamond in the sky'
+                {call} twinkle
         6:
             header: Functions
             text: As you could see in the example a function is a block of code that can be called anytime. You use `{define}` to set the function and `{call}` to use it.
@@ -911,7 +912,7 @@ levels:
                 {define} calculate_new_price {with} amount, percentage
                     percentage = percentage / 100
                     discount_amount = amount * percentage
-                    return amount - discount_amount
+                    {return} amount - discount_amount
 
                 old_price = {ask} 'How much is on the price tag?'
                 discount = {ask} 'What percentage is the discount?'

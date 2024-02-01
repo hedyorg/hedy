@@ -119,6 +119,7 @@ levels:
                 {turn} izquierda
         12:
             header: Depurar
+            debug: true
             text: Depurar un código significa eliminar los errores en el código. Depuremos este código juntos. Haz clic en el botón de la mariquita para iniciar el depurador.
             code: |-
                 Soy DJ Hedy
@@ -183,6 +184,7 @@ levels:
                 {print} ¡verde!
         7:
             header: Depurar
+            debug: true
             text: Depurar un código significa eliminar los errores en el código. Depuremos este código juntos. Haz clic en el botón mariquita para iniciar el depurador.
             code: |-
                 {print} ¡Bienvenido/a a la tienda de donuts!
@@ -208,7 +210,6 @@ levels:
                 Separa los objetos de tu lista con una coma.
             code: |-
                 animales {is} perros, gatos, canguros
-                ```
         3:
             header: En aleatorio
             text: |-
@@ -218,14 +219,12 @@ levels:
             code: |-
                 animales {is} perros, gatos, canguros
                 {print} animales {at} {random}
-                ```
         4:
             header: En aleatorio en una frase
             text: También puedes usar el comando `{at}` `{random}` en una frase.
             code: |-
                 animales {is} perros, gatos, canguros
                 {print} Mi animal favorito es animales {at} {random}
-                ```
         5:
             header: Añadir a
             text: |-
@@ -250,6 +249,7 @@ levels:
                 {print} Elijo animales {at} {random}
         7:
             header: Depurar
+            debug: true
             text: ¡Depuremos este código!
             editor: |-
                 generos_musicales {is} rock, pop, metal, indie, jazz
@@ -271,6 +271,7 @@ levels:
             code: '{print} ''¡imprimir con comillas!'''
         2:
             header: Problema
+            debug: true
             text: 'En los niveles anteriores, quizá te hayas encontrado este problema:'
             code: |-
                 nombre {is} Sophie
@@ -330,6 +331,7 @@ levels:
                 {print} '¡SORPRESA!'
         10:
             header: Depurar
+            debug: true
             text: ¡Depuremos este código!
             code: |-
                 {clear}
@@ -340,7 +342,7 @@ levels:
                 {print} '¡Mira estas maravillosas conchas!'
                 colores {is} 'naranja, plata, silver, blanco, marrón'
                 {print} 'Me encanta el colores {at} {random}!'
-                opcion {is} {ask} ¿Cuál quieres?
+                opcion {is} {ask} '¿Cuál quieres?'
         11:
             header: ¡Preparados, Listos, Ya!
             text: ¡Disfruta las aventuras en el nivel 4!
@@ -359,6 +361,7 @@ levels:
                 {if} nombre {is} Hedy {print} 'genial'
         3:
             header: No te olvides imprimir
+            debug: true
             text: |-
                 Al usar el comando `{if}`, no te olvides de usar el comando `{print}`.
                 ¡Este código no funcionará!
@@ -394,6 +397,7 @@ levels:
                 {else} {print} 'meh'
         7:
             header: Depurar
+            debug: debug
             text: ¡Depuremos este código!
             code: |-
                 {print} ¡Bienvenido a Seguridad HedyAir!
@@ -457,6 +461,7 @@ levels:
                 {print} numero_1 ' veces ' numero_2 ' es ' respuesta_correcta
         9:
             header: Depurar
+            debug: true
             text: ¡Depuremos este código!
             code: |-
                 {print} 'Esta es la máquina expendedora de billetes para parques acuáticos'
@@ -504,6 +509,7 @@ levels:
                 {else} {repeat} 3 {times} {print} '¡Has aprendido algo nuevo!'
         5:
             header: Depurar
+            debug: true
             text: ¡Depuremos este código!
             code: |-
                 {print} Te diste varado en una isla desierta.
@@ -525,6 +531,7 @@ levels:
             text: En este nivel aprenderás a usar la sangría para hacer funcionar los comandos `{repeat}`, `{if}` and `{else}` para varias líneas de código.
         2:
             header: comandos {repeat} antes
+            debug: true
             text: |-
                 En los niveles anteriores, el comando `{repeat}` se parecía a esto:
 
@@ -552,6 +559,7 @@ levels:
                 {print} '¡Hemos terminado de repetir!'
         5:
             header: antes si y sino
+            debug: true
             text: |-
                 Lo mismo ocurre para los comandos `{if}` y `{else}`.
                 Antes estos eran los comandos:
@@ -809,10 +817,10 @@ levels:
                      {print} 'Brilla'
                      {print} '...'
 
-                 {call} brilla
-                 {print} 'Por encima del mundo tan alto'
-                 {print} 'Como un diamante en el cielo'
-                 {call} brilla
+                {call} brilla
+                {print} 'Por encima del mundo tan alto'
+                {print} 'Como un diamante en el cielo'
+                {call} brilla
         6:
             header: Funciones
             text: Como has podido ver en el ejemplo una función es un bloque de código que puede ser llamado en cualquier momento. Se usa `{define}` para definir la función y `{call}` para usarla.
@@ -992,13 +1000,13 @@ levels:
             header: Valor devuelto
             text: Por ejemplo, en este código la función calculate_new_price calculará el nuevo precio de cualquier artículo. Le dará el nuevo precio como valor de retorno.
             code: |-
-                {define} calculate_new_price {with} cantidad, porcentaje
+                {define} calculate_new_price {with} devuelta, porcentaje
                     porcentaje = porcentaje / 100
-                    discount_amount = cantidad * porcentaje
-                    cantidad devuelta - discount_amount
+                    discount_amount = devuelta * porcentaje
+                    {return} devuelta - discount_amount
 
                 old_price = {ask} '¿Cuánto hay en la etiqueta de precio?'
-                descuento = {pregunta} '¿Qué porcentaje es el descuento?'
+                descuento = {ask} '¿Qué porcentaje es el descuento?'
 
                 new_price = {call} calculate_new_price {with} old_price, descuento
                 {print} 'El nuevo precio es ' new_price ' dólares'

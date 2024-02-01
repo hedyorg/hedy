@@ -215,7 +215,6 @@ levels:
                 Pisahkan item di daftar Anda dengan koma.
             code: |-
                 animals {is} dogs, cats, kangaroos
-                ```
         3:
             header: Secara acak
             text: |-
@@ -225,14 +224,12 @@ levels:
             code: |-
                 animals {is} dogs, cats, kangaroos
                 {print} animals {at} {random}
-                ```
         4:
             header: Secara acak dalam sebuah kalimat
             text: Anda juga dapat menggunakan perintah `{at}` `{random}` dalam sebuah kalimat.
             code: |-
                 animals {is} dogs, cats, kangaroos
                 {print} My favorite animal is animals {at} {random}
-                ```
         5:
             header: Tambahkan ke
             text: |-
@@ -279,6 +276,7 @@ levels:
             code: '{print} ''print with quotes!'''
         2:
             header: Masalah
+            debug: true
             text: 'Di level sebelumnya, Anda mungkin menemukan masalah ini:'
             code: |-
                 name {is} Sophie
@@ -370,6 +368,7 @@ levels:
             header: Jangan lupa untuk mencetak
             text: Saat menggunakan perintah `{if}`, jangan lupa untuk menggunakan perintah `{print}`.
             code: '{if} name {is} Hedy ''nice'''
+            debug: true
         4:
             header: pula
             text: |-
@@ -535,6 +534,7 @@ levels:
             text: Di level ini Anda akan belajar menggunakan indentasi agar perintah `{repeat}`, `{if}` dan `{else}` berfungsi untuk beberapa baris kode.
         2:
             header: '{repeat} perintah sebelumnya'
+            debug: true
             text: |-
                 Pada level sebelumnya, perintah `{repeat}` terlihat seperti ini:
 
@@ -562,6 +562,7 @@ levels:
                 {print} 'We are done repeating!'
         5:
             header: jika dan yang lain sebelumnya
+            debug: true
             text: |-
                 Hal yang sama berlaku untuk perintah `{if}` dan `{else}`.
                 Ini adalah perintah sebelumnya:
@@ -819,10 +820,10 @@ levels:
                      {print} 'Twinkle'
                      {print} '...'
 
-                 {call} twinkle
-                 {print} 'Up above the world so high'
-                 {print} 'Like a diamond in the sky'
-                 {call} twinkle
+                {call} twinkle
+                {print} 'Up above the world so high'
+                {print} 'Like a diamond in the sky'
+                {call} twinkle
         6:
             header: Fungsi
             text: Seperti yang Anda lihat pada contoh, fungsi adalah blok kode yang dapat dipanggil kapan saja. Anda menggunakan `{define}` untuk menyetel fungsi dan `{call}` untuk menggunakannya.
@@ -1006,7 +1007,7 @@ levels:
                 {define} calculate_new_price {with} amount, percentage
                     percentage = percentage / 100
                     discount_amount = amount * percentage
-                    return amount - discount_amount
+                    {return} amount - discount_amount
 
                 old_price = {ask} 'How much is on the price tag?'
                 discount = {ask} 'What percentage is the discount?'

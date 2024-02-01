@@ -212,7 +212,6 @@ levels:
                 Listenizdeki öğeleri virgülle ayırın.
             code: |-
                 animals {is} dogs, cats, kangaroos
-                ```
         3:
             header: Rastgele
             text: |-
@@ -222,14 +221,12 @@ levels:
             code: |-
                 animals {is} dogs, cats, kangaroos
                 {print} animals {at} {random}
-                ```
         4:
             header: Cümle içinden rastgele
             text: Bir cümle için de `{at}` `{random}` komutunu kullanabilirsiniz.
             code: |-
                 animals {is} dogs, cats, kangaroos
                 {print} My favorite animal is animals {at} {random}
-                ```
         5:
             header: Eklemek için
             text: |-
@@ -276,6 +273,7 @@ levels:
             code: '{print} ''print with quotes!'''
         2:
             header: Problem
+            debug: true
             text: 'Önceki seviyelerde, bu sorunla karşılaşmış olabilirsiniz:'
             code: |-
                 name {is} Sophie
@@ -365,6 +363,7 @@ levels:
                 {if} name {is} Hedy {print} 'nice'
         3:
             header: Yazdırmayı unutmayın
+            debug: true
             text: '`{if}` komutunu kullanırken, `{print}` komutunu kullanmayı unutmayın.'
             code: '{if} name {is} Hedy ''nice'''
         4:
@@ -537,6 +536,7 @@ levels:
 
                 Yalnızca bir satır kodu tekrarlayabilirsiniz.
             code: '{repeat} 5 {times} {print} ''Help!'''
+            debug: true
         3:
             header: şimdiki {repeat} komutları
             text: |-
@@ -565,6 +565,7 @@ levels:
             code: |-
                 {if} name {is} Hedy {print} 'nice'
                 {else} {print} 'boo!'
+            debug: true
         6:
             header: şimdiki eğer ve değilse
             text: |-
@@ -814,10 +815,10 @@ levels:
                      {print} 'Twinkle'
                      {print} '...'
 
-                 {call} twinkle
-                 {print} 'Up above the world so high'
-                 {print} 'Like a diamond in the sky'
-                 {call} twinkle
+                {call} twinkle
+                {print} 'Up above the world so high'
+                {print} 'Like a diamond in the sky'
+                {call} twinkle
         6:
             header: Functions
             text: As you could see in the example a function is a block of code that can be called anytime. You use `{define}` to set the function and `{call}` to use it.
@@ -999,7 +1000,7 @@ levels:
                 {define} calculate_new_price {with} amount, percentage
                     percentage = percentage / 100
                     discount_amount = amount * percentage
-                    return amount - discount_amount
+                    {return} amount - discount_amount
 
                 old_price = {ask} 'How much is on the price tag?'
                 discount = {ask} 'What percentage is the discount?'

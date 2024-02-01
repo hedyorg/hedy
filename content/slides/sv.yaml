@@ -212,7 +212,6 @@ levels:
                 Skriv kommatecken mellan elementen i listan.
             code: |-
                 animals {is} dogs, cats, kangaroos
-                ```
         3:
             header: Slumpmässigt
             text: |-
@@ -222,14 +221,12 @@ levels:
             code: |-
                 animals {is} dogs, cats, kangaroos
                 {print} animals {at} {random}
-                ```
         4:
             header: Slumpmässigt i en mening
             text: Du kan använda kommandot `{at} {random}` i en mening också.
             code: |-
                 animals {is} dogs, cats, kangaroos
                 {print} My favorite animal is animals {at} {random}
-                ```
         5:
             header: Lägg till i
             text: |-
@@ -276,6 +273,7 @@ levels:
             code: '{print} ''print with quotes!'''
         2:
             header: Problem
+            debug: true
             text: 'På de tidigare nivåerna kan du ha stött på det här problemet:'
             code: |-
                 name {is} Sophie
@@ -367,6 +365,7 @@ levels:
             header: Glöm inte att skriva ut
             text: Glöm inte att använda kommandot `{print}` när du använder kommandot `{if}`.
             code: '{if} name {is} Hedy ''nice'''
+            debug: true
         4:
             header: annars
             text: |-
@@ -532,6 +531,7 @@ levels:
             text: På den här nivån lär du dig att använda indrag för att få kommandona `{repeat}`, `{if}` och `{else}` att fungera för flera rader kod.
         2:
             header: '{repeat}-kommandon förut'
+            debug: true
             text: |-
                 På de tidigare nivåerna såg kommandot `{repeat}` ut så här:
 
@@ -559,6 +559,7 @@ levels:
                 {print} 'We are done repeating!'
         5:
             header: om och annars förut
+            debug: true
             text: |-
                 Detsamma gäller för kommandona `{if}` och `{else}`.
                 Dessa kommandon användes tidigare:
@@ -814,10 +815,10 @@ levels:
                      {print} 'Twinkle'
                      {print} '...'
 
-                 {call} twinkle
-                 {print} 'Up above the world so high'
-                 {print} 'Like a diamond in the sky'
-                 {call} twinkle
+                {call} twinkle
+                {print} 'Up above the world so high'
+                {print} 'Like a diamond in the sky'
+                {call} twinkle
         6:
             header: Functions
             text: As you could see in the example a function is a block of code that can be called anytime. You use `{define}` to set the function and `{call}` to use it.
@@ -999,7 +1000,7 @@ levels:
                 {define} calculate_new_price {with} amount, percentage
                     percentage = percentage / 100
                     discount_amount = amount * percentage
-                    return amount - discount_amount
+                    {return} amount - discount_amount
 
                 old_price = {ask} 'How much is on the price tag?'
                 discount = {ask} 'What percentage is the discount?'
