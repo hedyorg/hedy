@@ -119,13 +119,13 @@ levels:
                 {turn} 左
         12:
             header: 调试
-            debug: true
             text: 调试代码意味着消除代码中的错误。 我们一起调试一下这段代码。 单击瓢虫按钮启动调试器。
             code: |-
                 我是 DJ 海蒂
                 {print}你想听什么歌？
                 {ask}我也喜欢那首歌！
                 {print} 接下来... {echo}
+            debug: true
         13:
             header: 来开始体验编程的乐趣吧！
             text: 享受第一关的冒险！
@@ -184,7 +184,6 @@ levels:
                 {print} 绿色！
         7:
             header: 调试
-            debug: true
             text: 调试代码意味着消除代码中的错误。 我们一起调试一下这段代码。 单击瓢虫按钮启动调试器。
             code: |-
                 {print} 欢迎来到甜甜圈店！
@@ -195,6 +194,7 @@ levels:
                 {print} 我去拿你的甜甜圈。 {睡觉}
                 {print} 给你！ 一个带有馅料的甜甜圈！
                 {ask} 祝你有美好的一天！
+            debug: true
         8:
             header: 来开始编程的乐趣吧！
             text: 享受第 2 关的冒险！
@@ -208,8 +208,7 @@ levels:
                 您可以使用 `{is}`创建一个列表。
 
                 用逗号分隔列表中的项目。
-            code: |-
-                动物 {is} 狗、猫、袋鼠
+            code: 动物 {is} 狗、猫、袋鼠
         3:
             header: 随机
             text: |-
@@ -249,7 +248,6 @@ levels:
                 {print} 我选择 animals {at} {random}
         7:
             header: 调试
-            debug: true
             text: 我们来调试一下这段代码吧！
             editor: |-
                 music_genres {is}摇滚,流行,金属,独立,爵士乐
@@ -261,6 +259,7 @@ levels:
                 {print} 还是您更喜欢... second_choice {at} {random}
                 {remove} second_choice {to} music_genres
                 {print} 我最喜欢music_genre {random}！
+            debug: true
         8:
             header: 让我们开始工作吧！
             text: 享受第 3 关的冒险！
@@ -271,11 +270,11 @@ levels:
             code: '{print} ''带引号打印！'''
         2:
             header: 问题
-            debug: true
             text: 在前面的关卡中，你可能遇到过这个问题：
             code: |-
                 name {is} 苏菲
                 {print} 我的名字是 name
+            debug: true
         3:
             header: 用引号修复它
             text: |-
@@ -331,7 +330,6 @@ levels:
                 {print} '惊喜!'
         10:
             header: 调试
-            debug: true
             text: 来调试一下这段代码吧！
             code: |-
                 {clear}
@@ -343,6 +341,7 @@ levels:
                 颜色 {is} '橙色、银色、白色、棕色'
                 {print}“我喜欢{随机}的颜色！”
                 选择{is} {ask}你喜欢哪一个？
+            debug: true
         11:
             header: 预备，准备，开始！
             text: 享受第 4 关的冒险！
@@ -361,11 +360,11 @@ levels:
                 {if} name {is} 海蒂 {print} '赞'
         3:
             header: 不要忘记打印
-            debug: true
             text: |-
                 使用`{if}`命令时，不要忘记使用`{print}`命令。
                 这段代码不会工作！
             code: '{if} name {is} 海蒂 ''赞'''
+            debug: true
         4:
             header: 否则
             text: |-
@@ -397,7 +396,6 @@ levels:
                 {else} {print} '嗯'
         7:
             header: 调试
-            debug: true
             text: 来调试一下这段代码吧！
             code: |-
                 {print} 欢迎来到七彩航空安全！
@@ -412,6 +410,7 @@ levels:
                 item_to_declare {is} {ask} '您想声明什么'
                 {else} 好吧
                 {print}谢谢。 请前往 A22 登机口。
+            debug: true
         8:
             header: 我们走吧！
             text: 享受第 5 关的冒险！
@@ -531,12 +530,12 @@ levels:
             text: 在本级别中，你将学习使用缩进使 `{repeat}`, `{if}` 和 `{else}` c命令适用于多行代码。
         2:
             header: '{repeat} commands before'
-            debug: true
             text: |-
                 在前面的关卡中，`{repeat}`命令如下所示：
 
                 你只能重复一行代码。
             code: '{repeat} 5 {times} {print} ''救命!'''
+            debug: true
         3:
             header: '{repeat} commands now'
             text: |-
@@ -559,13 +558,13 @@ levels:
                 {print} '我们已经完成重复了！'
         5:
             header: if and else before
-            debug: true
             text: |-
                 `{if}` 和 `{else}` 命令也是如此。
                 这些是之前的命令：
             code: |-
                 {if} name {is} 海蒂 {print} '赞'
                 {else} {print} '吁！'
+            debug: true
         6:
             header: if and else now
             text: |-

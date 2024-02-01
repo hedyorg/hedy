@@ -208,8 +208,7 @@ levels:
                 You make a list with `{is}`.
 
                 Separate the items on your list with a comma.
-            code: |-
-                animals {is} dogs, cats, kangaroos
+            code: animals {is} dogs, cats, kangaroos
         3:
             header: At random
             text: |-
@@ -271,11 +270,11 @@ levels:
             code: '{print} ''print with quotes!'''
         2:
             header: Problem
-            debug: true
             text: 'In the previous levels, you might have come across this problem:'
             code: |-
                 name {is} Sophie
                 {print} My name is name
+            debug: true
         3:
             header: Fixing it with quotation marks
             text: |-
@@ -357,11 +356,11 @@ levels:
                 {if} name {is} Hedy {print} 'nice'
         3:
             header: Don't forget to print
-            debug: true
             text: |-
                 When using the `{if}` command, don't forget to use the `{print}` command.
                 This code will not work!
             code: '{if} name {is} Hedy ''nice'''
+            debug: true
         4:
             header: else
             text: |-
@@ -527,12 +526,12 @@ levels:
             text: In this level you will learn to use indentation to make the `{repeat}`, `{if}` and `{else}` commands work for multiple lines of code.
         2:
             header: '{repeat} commands before'
-            debug: true
             text: |-
                 In the previous levels, the `{repeat}` command looked like this:
 
                 You could only repeat one line of code.
             code: '{repeat} 5 {times} {print} ''Help!'''
+            debug: true
         3:
             header: '{repeat} commands now'
             text: |-
@@ -555,13 +554,13 @@ levels:
                 {print} 'We are done repeating!'
         5:
             header: if and else before
-            debug: true
             text: |-
                 The same goes for the `{if}` and `{else}` commands.
                 These were the commands before:
             code: |-
                 {if} name {is} Hedy {print} 'nice'
                 {else} {print} 'boo!'
+            debug: true
         6:
             header: if and else now
             text: |-
