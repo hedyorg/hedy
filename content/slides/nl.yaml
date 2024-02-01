@@ -971,6 +971,27 @@ levels:
                 nieuwe_prijs = {call} bereken_nieuwe_prijs  {with} oude_prijs, korting
                 {print} 'De nieuwe prijs is ' nieuwe_prijs ' euro'
         6:
+            header: Debugging (foutzoeken)
+            text: Laten we deze code debuggen!
+            code: |-
+                artikel = 'niet gekocht'
+                {print} 'Ik wil graag dit artikel kopen'
+                prijs == {ask} 'Hoe duur is het?'
+                {if} prijs is minder dan of gelijk aan 10
+                    {print} 'Superdeal!'
+                    artikel = 'gekocht'
+                {if} prijs is meer dan 10 {and} minder dan of gelijk aan 20
+                    {print} 'Vooruit'
+                    artikel = 'gekocht'
+                {if} prijs is meer dan 20 {and} minder dan 50
+                    {print} 'Dat is wel erg veel!'
+                {if} prijs is meer dan of gelijk aan 50
+                    {print} 'Geen haar op mijn hoofd die eraan denkt!'
+                {if} artikel =! gekocht
+                    {print} 'Jammer... ik koop het niet'
+                {else}
+                    {print} 'Ik koop het! Bedankt!'
+        7:
             header: Aan de slag!
             text: Veel plezier met de avonturen in level 14!
     15:

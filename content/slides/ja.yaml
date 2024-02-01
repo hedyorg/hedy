@@ -988,6 +988,27 @@ levels:
                 new_price = {call} calculate_new_price {with} old_price, discount
                 {print} 'The new price is ' new_price ' dollar'
         6:
+            header: Debugging
+            text: Let's debug this code!
+            code: |-
+                item = 'not bought'
+                {print} 'I would like to buy this item'
+                price == {ask} 'What is the price?'
+                {if} price less than or the same as 10
+                    {print} 'Thats a great deal!'
+                    item = 'bought'
+                {if} price is more than 10 {and} less than or the same as 20
+                    {print} 'Alright'
+                    item = 'bought'
+                {if} price is more than 20 {and} less than 50
+                    {print} 'That is a bit much!'
+                {if} price is more than or the same as 50
+                    {print} 'No way!'
+                {if} item =! bought
+                    {print} 'Shame.. I wont buy it'
+                {else}
+                    {print} 'I will buy it! Thank you!'
+        7:
             header: Let's get to work!
             text: Enjoy the adventures in level 14!
     15:
