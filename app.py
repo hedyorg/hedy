@@ -1442,6 +1442,8 @@ def index(level, program_id):
 
     max_level = hedy.HEDY_MAX_LEVEL
     level_number = int(level)
+    prev_level, next_level = utils.find_prev_next_levels(
+        list(available_levels), level_number)
 
     commands = hedy.commands_per_level.get(level)
     return render_template(
@@ -1449,9 +1451,9 @@ def index(level, program_id):
         level_nr=str(level_number),
         level=level_number,
         current_page='hedy',
-        prev_level=level_number - 1 if level_number > 1 else None,
-        next_level=level_number + 1 if level_number < max_level else None,
-        max_level=hedy.HEDY_MAX_LEVEL,
+        max_level=max_level,
+        prev_level=prev_level,
+        next_level=next_level,
         customizations=customizations,
         hide_cheatsheet=hide_cheatsheet,
         enforce_developers_mode=enforce_developers_mode,
