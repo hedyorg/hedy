@@ -86,7 +86,18 @@ adventures:
                     ```
             4:
                 story_text: "你可能注意到了，在之前的级别里还有个问题。你有没有试过打印含有“名字”这个词的句子？即：`{print}` 我的名字是名字。\n 在这一级里你可以解决这个问题。你必须给所有需要打印的东西加上引号。\n\n### 练习1\n复制示例代码并通过添加引号来使其正常工作。 \n\n ### 练习 2 \n返回到上一个级别并复制故事代码。通过在正确的位置添加引号，使代码在此级别中正常工作。 \n注意：你自己故事中的变量应该在引号之外。就像范例代码的第二行一样。在该行中，变量名称放在引号之外。\n"
-                example_code: "```\n名字 {is} {ask}_你的名字是什么? _\n{print}     _ 主人公的名字是_名字 \n {print} 名字     _正准备走进树林_\n{print} 名字 _有点害怕'\n动物们 {is} \U0001F994, \U0001F43F, \U0001F989, \U0001F987\n{print} _他听到了一个_ 动物们{at} {random} 的声音\n{print} 名字_担心这片森林闹鬼_\n```\n"
+                example_code: |
+                    ```
+                    姓名 {is} {ask} _ 你叫什么名字？ _
+                    {print} _主角叫_名字
+                    _
+                    _
+                    {print} name _ 现在要去树林里散步 _
+                    {print}名字_有点害怕_
+                    动物{is} 🦔、🐿、🦉、🦇
+                    {print} _ 他听到 _ 动物的声音 {at} {random}
+                    {print}名字_恐怕这是一个闹鬼的森林_
+                    ```
             5:
                 story_text: |
                     在此级别中，你可以设计不同的结局，这将使你的故事更加有趣。
@@ -580,8 +591,8 @@ adventures:
         levels:
             4:
                 story_text: |
-                    是时候发出新命令了！ 使用`{clear}`，您可以清除输出屏幕上的所有文本。 这样您就可以防止屏幕上的文字过多。
-                    谨防！ 如果您使用`{clear}`命令，请记住在其上方使用`{sleep}`。 否则 海蒂 会清空你的屏幕，而不给你时间阅读！
+                    是时候学习新命令了！ 使用`{clear}`，您可以清除输出屏幕上的所有文本。 这样您就可以防止屏幕上的文字过多。
+                    小心！ 如果你使用`{clear}`命令，请记住在其上方使用`{sleep}`。 否则 海蒂 会清空你的屏幕，而不给你时间阅读，就像在例子中看到的一样！
                 example_code: |
                     ```
                     {print} '3'
@@ -2381,12 +2392,12 @@ adventures:
             6:
                 story_text: |4
 
-                      In this level you learn something new: you can now also calculate.
+                          In this level you learn something new: you can now also calculate.
 
-                      The plus is easy, you write it like with math: `5 + 5` for example. The minus also works fine, it is `5 - 5`.
+                          The plus is easy, you write it like with math: `5 + 5` for example. The minus also works fine, it is `5 - 5`.
 
-                      The times is a bit different, because there is no times symbol on your keyboard. Just search, there really isn't!
-                      That is why we multiply with the asterisk above 8: `5 * 5`. Read that as "5 times 5" that helps you remember it best.
+                          The times is a bit different, because there is no times symbol on your keyboard. Just search, there really isn't!
+                          That is why we multiply with the asterisk above 8: `5 * 5`. Read that as "5 times 5" that helps you remember it best.
                 example_code: |
                     ```
                     {print} '5 plus 5 is ' 5 + 5
