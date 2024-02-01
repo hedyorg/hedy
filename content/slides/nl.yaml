@@ -125,7 +125,7 @@ levels:
                 {print} Welk liedje wil je horen?
                 {ask} Ik vind dat ook een leuk liedje!
                 {print} Volgende... {echo}
-            debug: true
+            debug: True
         13:
             header: Laat het programmeerfeest beginnen!
             text: Veel plezier met de avonturen in level 1!
@@ -190,7 +190,7 @@ levels:
                 {print} Ik ga je donut.halen {sleep}
                 {print} Asjeblieft! Een vulling donut met topping!
                 {ask} Fijne dag nog!
-            debug: true
+            debug: True
         8:
             header: Veel programmeerplezier!
             text: Veel plezier met de avonturen in level 2!
@@ -255,7 +255,7 @@ levels:
                 {print} of houd je meer van... tweede_keus {at} {random}
                 {remove} tweede_keus {to} muziek_genres
                 {print} Ik houd het meest van muziek_genre {random} !
-            debug: true
+            debug: True
         8:
             header: Aan de slag!
             text: Veel plezier met de avonturen in level 3!
@@ -270,7 +270,7 @@ levels:
             code: |-
                 naam {is} Sophie
                 {print} Mijn naam is naam
-            debug: true
+            debug: True
         3:
             header: Aanhalingstekens zijn de oplossing
             text: |-
@@ -308,7 +308,7 @@ levels:
 
                 Kijk maar eens wat er gebeurt als je een hoge komma voor auto's, of voor 's middags, deze maken Hedy in de war....
             code: '{print} ''De oma''s rijden in de auto''s.'''
-            debug: true
+            debug: True
         9:
             header: '{clear}'
             text: |-
@@ -337,7 +337,7 @@ levels:
                 kleuren {is} 'oranje, zilver, wit, bruin'
                 {print} 'Ik houd van kleuren {at} {random} !'
                 keuze {is} {ask} Welke kleur vind jij mooi?
-            debug: true
+            debug: True
         11:
             header: Klaar voor de start? Af!
             text: Veel plezier met de avonturen in level 4!
@@ -360,7 +360,7 @@ levels:
                 Als je een `{if}` commando gebruikt, vergeet dan niet om ook een `{print}` commando te gebruiken.
                 Deze code werkt niet!
             code: '{if} naam {is} Hedy ''leuk'''
-            debug: true
+            debug: True
         4:
             header: '{else}'
             text: |-
@@ -406,7 +406,7 @@ levels:
                 aangeef_voorwerp {is} {ask} 'Wat wilt U aangeven'
                 {else} OK
                 {print} Dank U. Gaat U naar gate A22 alstublieft.'
-            debug: true
+            debug: True
         8:
             header: Werken maar!
             text: Veel plezier met de avonturen in level 5!
@@ -471,7 +471,7 @@ levels:
                 {if} dag {is} maandag
                 totaal = total_price * 0.25
                 {print} 'Totaal prijs is totaal'
-            debug: true
+            debug: True
         10:
             header: Aan de slag!
             text: Veel plezier met de avonturen in level 6!
@@ -493,8 +493,9 @@ levels:
         3:
             header: Vergeet print niet
             text: Als je {repeat} gebruikt, vergeet dan {print} niet.
-            code: '{repeat} 5 {times} ''Help!'''
-            debug: true
+            code: |-
+                {repeat} 5 {times} 'Help!'
+            debug: True
         4:
             header: '{repeat} met {ask}'
             text: Je kunt {repeat} ook gebruiken met `{ask}`, `{if}` of `{else}`.
@@ -516,7 +517,7 @@ levels:
                 {if} ja
                 {print} 'Hoera!
                 {else} 'Dat is jammer.. Nou ja... tijd om een hut te bouwen en wat eten te zoeken.'
-            debug: true
+            debug: True
         6:
             header: Klaar voor de start? Af!
             text: Veel plezier met de avonturen in level 7!
@@ -531,7 +532,7 @@ levels:
 
                 Je kon het maar gebruiken over 1 regel.
             code: '{repeat} 5 {times} {print} ''Help!'''
-            debug: true
+            debug: True
         3:
             header: '{repeat} nu'
             text: |-
@@ -560,7 +561,7 @@ levels:
             code: |-
                 {if} naam {is} Hedy {print} 'leuk'
                 {else} {print} 'minder leuk!'
-            debug: true
+            debug: True
         6:
             header: '{if} en {else} nu'
             text: |-
@@ -603,7 +604,7 @@ levels:
                         {print} Je koos voor een retour ticket'
                 prijs * 2
                 {print} 'Dat wordt dan ' prijs ' euro alstublieft'
-            debug: true
+            debug: True
         10:
             header: Op naar de avonturen!
             text: Veel plezier met de avonturen in level 8!
@@ -695,7 +696,7 @@ levels:
                 {else}
                 {print} 'Gaaf!'
                 {print} 'Bedankt voor het invullen allemaal! Veel plezier vandaag!'
-            debug: true
+            debug: True
         9:
             header: Aan de slag!
             text: Veel plezier met de avonturen in level 9!
@@ -732,7 +733,7 @@ levels:
                 {add} gekozen_persoon {from} mensen
                 {print} 'Komt dat zien! Alleen vanavond!'
                 {print} 'Laatste tickets verkrijgbaar aan de kassa
-            debug: true
+            debug: True
         5:
             header: Programmeertijd!
             text: Veel plezier met de avonturen in level 10!
@@ -766,7 +767,7 @@ levels:
                 {repeat} {for} nummers {in} {range} 1 {to} 10 {times}
                     {print} Dit is de tafel van factor
                     {print} nummer ' x ' factor ' = ' i * factor
-            debug: true
+            debug: True
         5:
             header: Lekker programmeren!
             text: Veel plezier met de avonturen in level 11!
@@ -831,7 +832,7 @@ levels:
                 {call} nieuw lid
                     {else}
                         wachtwoord = {ask} 'Voer je wachtwoord in'
-            debug: true
+            debug: True
         8:
             header: Klaar om het te gaan proberen?
             text: Veel plezier met de avonturen in level 12!
@@ -935,7 +936,7 @@ levels:
                     {call} blijdschap {with} persoon
                 {else} gevoel = verdrietig
                     {define} verdriet {to} naam
-            debug: true
+            debug: True
         9:
             header: Aan de slag!
             text: Veel plezier met de avonturen in level 13!
