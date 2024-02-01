@@ -311,7 +311,8 @@ levels:
                 ¡Cuidado! Ahora que estás usando comillas, no puedes usar apóstrofes en las abreviaturas.
 
                 Por favor intenta imprimir una contracción como "you're" o "I'm" en la pantalla de abajo y verás que sucede....
-            code: '{print} ''¡Esto no funcionará!'''
+            code: '{print} '¡Esto no' funcionará!'
+            debug: true
         9:
             header: Limpiar
             text: |-
@@ -492,7 +493,8 @@ levels:
         3:
             header: No te olvides el comando imprimir
             text: Al usar el comando repetir, no te olvides el comando `{print}`.
-            code: '{repeat} 5 {times} ''¡Ayuda!'''
+            code: '''{repeat} 5 {times} ''¡Ayuda!'''
+            debug: true
         4:
             header: Repetir un comando preguntar
             text: También puedes repetir un comando `{ask}`, `{if}` or `{else}` varias veces.
@@ -946,13 +948,13 @@ levels:
             text: |-
                 Estos son los nuevos símbolos que puedes usar:
 
-                  El >  significa mayor que...
+                El >  significa mayor que...
 
-                  El >= significa mayor o igual que...
+                El >= significa mayor o igual que...
 
-                  El <  significa menor que...
+                El <  significa menor que...
 
-                  El <= significa menor o igual que...
+                El <= significa menor o igual que...
 
                 Puedes usarlos así:
             code: |-

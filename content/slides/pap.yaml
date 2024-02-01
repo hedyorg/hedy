@@ -313,7 +313,9 @@ levels:
                 Be careful! Now that you are using quotation marks, you can't use apostrophes in contractions.
 
                 Please try to print a contraction like "you're" or "I'm" in the screen below and see what happens....
-            code: '{print} ''This won''t work!'''
+            code: |-
+                '{print} 'This won't work!'
+            debug: true
         9:
             header: Clear
             text: |-
@@ -495,6 +497,7 @@ levels:
             header: Don't forget the print command
             text: When using the repeat command, do not forget the `{print}` command.
             code: '{repeat} 5 {times} ''Help!'''
+            debug: true
         4:
             header: Repeat an ask command
             text: You can also repeat an `{ask}`, `{if}` or `{else}` command multiple times.

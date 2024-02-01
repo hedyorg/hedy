@@ -31,15 +31,15 @@ levels:
         6:
             header: Programmazione a Hedy
             text: Le parole in codice verranno visualizzate in rosa.
-            code: '{stampa} Benvenuto a Hedy!'
+            code: '{print} Benvenuto a Hedy!'
         7:
             header: Programmazione a Hedy
             text: Iniziamo il codice con il pulsante Esegui codice sotto il codice.
-            code: '{stampa} Benvenuto a Hedy!'
+            code: '{print} Benvenuto a Hedy!'
         8:
             header: Programmazione a Hedy
             text: Output appears on the left-hand side.
-            code: '{stampa} Benvenuto a Hedy!'
+            code: '{print} Benvenuto a Hedy!'
         9:
             header: Programmazione a Hedy
             text: L'output può anche essere un disegno.
@@ -54,55 +54,59 @@ levels:
 
                 Abbiamo bisogno di tre codici di testo per creare storie interattive.
         2:
-            header: '{stampa}'
+            header: '{print}'
             text: |-
                 Il primo codice che puoi utilizzare nel livello 1 è `{print}`.
 
-                "{print}" viene utilizzato per mostrare il testo sullo schermo.
+                `{print}` viene utilizzato per mostrare il testo sullo schermo.
             code: '{print} Mostra il testo sullo schermo'
         3:
-            header: Il comando {stampa}
+            header: Il comando {print}
             text: |-
                 The second code that you can use in level 1 is `{ask}`.
 
                 `{ask}` is used to ask a question that can be answered.
             code: |-
-                {stampa} Benvenuto a Hedy!
+                {print} Benvenuto a Hedy!
                 {print} Inizia a programmare adesso!
         4:
-            header: 'Hedy level 1: {echo}'
+            header: '{ask}'
             text: |-
-                The final text code that you can use in level 1 is `{echo}`.
+                The second code that you can use in level 1 is `{ask}`.
 
-                `{echo}` is used to repeat the answer of an `{ask}`.
+                `{ask}` is used to ask a question that can be answered.
             code: |-
-                {print} Hello!
-                {ask} What is your name?
-                {echo} hello
+                {print} Welcome to your own rock scissors paper!
+                {ask} What will you choose?
         5:
-            header: Programming!
+            header: '{echo}'
             text: |-
-                with `{print}`, `{ask}` and `{echo}` you can already create a little story.
-                This is a good time to try the Parrot, Story and Rock, Paper Scissors adventures.
+                As you could see in the previous example. If you use the `{ask}` command, you can ask a question.
+                The answer, however doesn't show in the output screen.
+
+                If you do want the answer to show, you can use the final command of this level: `{echo}`.
+                `{echo}` is used to repeat the answer of an `{ask}`.
             code: |-
                 {print} Hello!
                 {ask} What is your name?
                 {echo} hello
         6:
             header: Programming!
-            text: Adventures are shown in tabs.
+            text: |-
+                With `{print}`, `{ask}` and `{echo}` you can already create a little story.
+                This is a good time to try the Parrot, Story and Rock, Paper Scissors adventures.
             editor: /hedy/1
         7:
             header: Programming!
+            text: Adventures are shown in tabs.
+            editor: /hedy/1
+        8:
+            header: Programming!
             text: The yellow arrow buttons can be used to copy examples.
             editor: /hedy#print_command
-        8:
+        9:
             header: Drawing with the turtle
             text: Now that we have seen at text codes, we will now look at drawing codes next.
-            editor: /hedy#print_command
-        9:
-            header: 'Drawing with the turtle: {forward}'
-            text: '`{forward}` is used to move the turtle forward.'
         10:
             header: 'Drawing with the turtle: {forward}'
             text: '`{forward}` is used to move the turtle forward.'
@@ -307,7 +311,9 @@ levels:
                 Be careful! Now that you are using quotation marks, you can't use apostrophes in contractions.
 
                 Please try to print a contraction like "you're" or "I'm" in the screen below and see what happens....
-            code: '{print} ''This won''t work!'''
+            code: |-
+                '{print} 'This won't work!'
+            debug: true
         9:
             header: Ready, Set, Go!
             text: Enjoy the adventures in level 4!
@@ -484,7 +490,9 @@ levels:
         3:
             header: Don't forget the print command
             text: When using the repeat command, do not forget the `{print}` command.
-            code: '{repeat} 5 {times} ''Help!'''
+            code: |-
+                {repeat} 5 {times} 'Help!'
+            debug: true
         4:
             header: Repeat an ask command
             text: You can also repeat an `{ask}`, `{if}` or `{else}` command multiple times.

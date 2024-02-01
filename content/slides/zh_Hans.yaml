@@ -169,7 +169,7 @@ levels:
             code: |-
                 {print} 我最喜欢的颜色是...
                 {sleep} 2
-                {print}绿色！
+                {print} 绿色！
         6:
             header: 暂停 5
             text: |-
@@ -179,8 +179,8 @@ levels:
             code: |-
                 暂停 {is} 10
                 {print} 我最喜欢的颜色是...
-                {sleeo}暂停
-                {print}绿色！
+                {sleep} 暂停
+                {print} 绿色！
         7:
             header: 调试
             text: 调试代码意味着消除代码中的错误。 我们一起调试一下这段代码。 单击瓢虫按钮启动调试器。
@@ -188,11 +188,11 @@ levels:
                 {print} 欢迎来到甜甜圈店！
                 填充 {is} 您想要什么样的填充？
                 {print} 您已选择...填充！ 嗯！
-                配料 {ask}您想要什么类型的配料？
+                配料 {ask} 您想要什么类型的配料？
                 浇头很好吃！
                 {print} 我去拿你的甜甜圈。 {睡觉}
                 {print} 给你！ 一个带有馅料的甜甜圈！
-                {ask}祝你有美好的一天！
+                {ask} 祝你有美好的一天！
         8:
             header: 来开始编程的乐趣吧！
             text: 享受第 2 关的冒险！
@@ -311,7 +311,9 @@ levels:
                 当心！ 既然使用了引号，则不能在缩写中使用引号。
 
                 请尝试在下面的屏幕中打印诸如“you're”或“I'm”之类的缩写，看看会发生什么......
-            code: '{print} ''这行不通！'''
+            code: |-
+                {print} ''这行不通！'
+            debug: true
         9:
             header: 清除
             text: |-
@@ -493,6 +495,7 @@ levels:
             header: Don't forget the print command
             text: 使用重复命令时，不要忘记`{print}`命令。
             code: '{repeat} 5 {times} ''救命!'''
+            debug: true
         4:
             header: Repeat an ask command
             text: 你还可以多次重复 `{ask}`, `{if}` 或 `{else}` 命令。
@@ -620,8 +623,8 @@ levels:
             code: |-
                 {repeat} 3 {times}
                      food = {ask} '你想要什么？'
-                     {if} food{is}披萨
-                         {print}“好极了！”
+                     {if} food {is} 披萨
+                         {print} '好极了！'
                      {else}
                          {print} '披萨更好吃'
         3:
@@ -706,9 +709,9 @@ levels:
             header: The for command
             text: 使用 for 可以创建一个列表并使用该列表上的所有项目。 `{for}` 创建一个块，就像重复(repeat)一样，块中的所有行都需要以缩进（4 个空格）开头。
             code: |-
-                animals =狗、猫、水滴鱼
-                {for}动物 {在} animals 中
-                     {print}“我爱”动物
+                animals = 狗、猫、水滴鱼
+                {for} 动物 {in} animals
+                     {print} '我爱' 动物
         3:
             header: The for command
             text: 在这里您可以看到 `{for}` 命令的另一个示例：
@@ -1060,13 +1063,13 @@ levels:
             text: 在这个关卡中你还可以使用一个新命令：elif。 elif 是 else if 的缩写，当您想要创建 3 个（或更多！）选项时需要它。 一起来一探究竟！
             code: |-
                 prices = ['100 万美元', '苹果派', '什么都没有']
-                your_price = 价格[{随机}]
+                your_price = 价格[{random}]
                 {print} '你赢了 ' your_price
-                {if} your_price == '100万美元' ：
+                {if} your_price == '100万美元':
                      {print}'是啊！ 你好有钱！'
-                {elif} your_price == '一个苹果派'：
+                {elif} your_price == '一个苹果派':
                      {print} '可爱的苹果派！'
-                {else}：
+                {else}:
                      {print} '下次祝你好运..'
         4:
             header: 我们来试一下！
