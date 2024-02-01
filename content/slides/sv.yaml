@@ -210,8 +210,7 @@ levels:
                 Du gör en lista med kommandot `{is}`.
 
                 Skriv kommatecken mellan elementen i listan.
-            code: |-
-                animals {is} dogs, cats, kangaroos
+            code: animals {is} dogs, cats, kangaroos
         3:
             header: Slumpmässigt
             text: |-
@@ -273,11 +272,11 @@ levels:
             code: '{print} ''print with quotes!'''
         2:
             header: Problem
-            debug: true
             text: 'På de tidigare nivåerna kan du ha stött på det här problemet:'
             code: |-
                 name {is} Sophie
                 {print} My name is name
+            debug: true
         3:
             header: Fixa det med citattecken
             text: |-
@@ -531,12 +530,12 @@ levels:
             text: På den här nivån lär du dig att använda indrag för att få kommandona `{repeat}`, `{if}` och `{else}` att fungera för flera rader kod.
         2:
             header: '{repeat}-kommandon förut'
-            debug: true
             text: |-
                 På de tidigare nivåerna såg kommandot `{repeat}` ut så här:
 
                 Du kunde bara upprepa en kodrad.
             code: '{repeat} 5 {times} {print} ''Help!'''
+            debug: true
         3:
             header: '{repeat}-kommandon nu'
             text: |-
@@ -559,13 +558,13 @@ levels:
                 {print} 'We are done repeating!'
         5:
             header: om och annars förut
-            debug: true
             text: |-
                 Detsamma gäller för kommandona `{if}` och `{else}`.
                 Dessa kommandon användes tidigare:
             code: |-
                 {if} name {is} Hedy {print} 'nice'
                 {else} {print} 'boo!'
+            debug: true
         6:
             header: om och annars nu
             text: |-

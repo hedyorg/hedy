@@ -197,8 +197,7 @@ levels:
         2:
             header: 목록 만들기
             text: "{is}로 목록을 작성합니다. \n\n목록의 항목을 쉼표로 구분합니다."
-            code: |-
-                animals {is} dogs, cats, kangaroos
+            code: animals {is} dogs, cats, kangaroos
         3:
             header: At random
             text: |-
@@ -256,11 +255,11 @@ levels:
             code: '{print} ''print with quotes!'''
         2:
             header: 문제
-            debug: true
             text: '이전 레벨에서는 다음과 같은 문제가 발생했을 수 있습니다:'
             code: |-
                 name {is} Sophie
                 {print} My name is name
+            debug: true
         3:
             header: 따옴표로 고정하기
             text: "이 레벨에서 우리는 따옴표를 사용하여 이 문제를 해결할 것이다. \n\n이것은 또한 우리의 코드를 '진짜' 파이썬 코드처럼 보이게 한다."
@@ -499,11 +498,11 @@ levels:
                 {print} 'We are done repeating!'
         5:
             header: if and else before
-            debug: true
             text: "{if} 명령어와 {else} 명령어도 마찬가지이다. \n이전의 명령어는 다음과 같다:"
             code: |-
                 {if} name {is} Hedy {print} 'nice'
                 {else} {print} 'boo!'
+            debug: true
         6:
             header: if and else now
             text: "이제 {if} 명령어와 {else} 명령어는 다음과 같다. \n{if} 명령어와 {else} 명령어 뒤의 각 행은 들여쓰기로 시작한다."

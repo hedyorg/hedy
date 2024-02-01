@@ -213,8 +213,7 @@ levels:
                 Anda membuat daftar dengan `{is}`.
 
                 Pisahkan item di daftar Anda dengan koma.
-            code: |-
-                animals {is} dogs, cats, kangaroos
+            code: animals {is} dogs, cats, kangaroos
         3:
             header: Secara acak
             text: |-
@@ -276,11 +275,11 @@ levels:
             code: '{print} ''print with quotes!'''
         2:
             header: Masalah
-            debug: true
             text: 'Di level sebelumnya, Anda mungkin menemukan masalah ini:'
             code: |-
                 name {is} Sophie
                 {print} My name is name
+            debug: true
         3:
             header: Memperbaikinya dengan tanda kutip
             text: |-
@@ -534,12 +533,12 @@ levels:
             text: Di level ini Anda akan belajar menggunakan indentasi agar perintah `{repeat}`, `{if}` dan `{else}` berfungsi untuk beberapa baris kode.
         2:
             header: '{repeat} perintah sebelumnya'
-            debug: true
             text: |-
                 Pada level sebelumnya, perintah `{repeat}` terlihat seperti ini:
 
                 Anda hanya dapat mengulang satu baris kode.
             code: '{repeat} 5 {times} {print} ''Help!'''
+            debug: true
         3:
             header: '{repeat} perintah sebelumnya'
             text: |-
@@ -562,13 +561,13 @@ levels:
                 {print} 'We are done repeating!'
         5:
             header: jika dan yang lain sebelumnya
-            debug: true
             text: |-
                 Hal yang sama berlaku untuk perintah `{if}` dan `{else}`.
                 Ini adalah perintah sebelumnya:
             code: |-
                 {if} name {is} Hedy {print} 'nice'
                 {else} {print} 'boo!'
+            debug: true
         6:
             header: jika dan yang lain sekarang
             text: |-
