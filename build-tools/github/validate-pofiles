@@ -103,9 +103,13 @@ def check_for_empty_in_En(filename):
     if language == 'en':
         with open(filename, 'r', encoding='utf-8') as f:
             lines = [x.strip() for x in f.read().splitlines() if x.strip() != '']
+            lines_len = len(lines)
             line_number = 20
-            for l in lines[20:]:
-                if l == 'msgstr ""':
+            for line in lines[20:]:
+                # the following checks whether the current msgstr consists of one or more lines.
+                # check tutorial_code_snippet for an example.
+                next_line_empty = line_number + 1 < lines_len and "msgid" in lines[line_number+1]
+                if line == 'msgstr ""' and next_line_empty:
                     any_failed = True
                     print(f"String {lines[line_number-1]} is empty!!")
                 line_number += 1
