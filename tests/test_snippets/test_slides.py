@@ -40,7 +40,7 @@ def collect_snippets(path):
                                 code=y['code'])
                             Hedy_snippets.append(snippet)
                             number += 1
-                except BaseException as E:
+                except BaseException:
                     print(f'Problem reading commands yaml for {lang} level {level}')
 
     return Hedy_snippets
@@ -85,7 +85,7 @@ class TestsSlidesPrograms(HedyTester):
                 pass
             except OSError:
                 return None  # programs with ask cannot be tested with output :(
-            except exceptions.HedyException:
+            except exceptions.HedyException as E:
                 try:
                     location = E.error_location
                 except BaseException:
