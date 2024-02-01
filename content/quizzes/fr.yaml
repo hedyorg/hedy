@@ -2098,15 +2098,20 @@ levels:
                     {for} tous compliment
                     ```
                 feedback: Ce n'est pas ça
-            -   option: "```\n{for} compliment {in} compliments\n```"
+            -   option: |-
+                    ```
+                    {for} compliment {in} compliments
+                    ```
                 feedback: Tu mérites tous ces compliments !
-            -   option: "```\n{if} compliment {in} compliments\n```"
+            -   option: |-
+                    ```
+                    {if} compliment {in} compliments
+                    ```
                 feedback: Ce n'est pas ça !
-            -   option: '```
-
+            -   option: |-
+                    ```
                     {for} compliments {in} compliment
-
-                    ```'
+                    ```
                 feedback: Tu y es presque !
             hint: '`{for}` chaque compliment dans la liste des compliments…'
             correct_answer: B
@@ -2118,21 +2123,17 @@ levels:
                 {for} plat {in} plats
                     {print} "J'aime les " plat
             mp_choice_options:
-            -   option: |-
-                    J'aime les pizzas
+            -   option: J'aime les pizzas
                 feedback: La ligne 2 dit « pour chaque plat dans la liste des plats ». Donc chaque plat est affiché.
-            -   option: |-
-                    J'aime les pâtes
+            -   option: J'aime les pâtes
                 feedback: La ligne 2 dit « pour chaque plat dans la liste des plats ». Donc chaque plat est affiché.
-            -   option: |-
-                    J'aime les crêpes
-                feedback: |-
-                    La ligne 2 dit « pour chaque plat dans la liste des plats ». Donc chaque plat est affiché.
+            -   option: J'aime les crêpes
+                feedback: La ligne 2 dit « pour chaque plat dans la liste des plats ». Donc chaque plat est affiché.
             -   option: |-
                     J'aime les pizzas
                     J'aime les pâtes
                     J'aime les crêpes
-                feedback: 'Super !'
+                feedback: Super !
             hint: La ligne 2 dit « pour chaque plat dans la liste des plats ». Donc chaque plat est affiché.
             correct_answer: D
             question_score: '10'
@@ -2143,11 +2144,9 @@ levels:
                 {for} animal {in} animaux
                     {print} "Les " animal " sont d'adorables animaux de compagnie"
             mp_choice_options:
-            -   option: |-
-                    Les chiens sont d'adorables animaux de compagnie
+            -   option: Les chiens sont d'adorables animaux de compagnie
                 feedback: La ligne 2 dit « pour chaque animal dans la liste des animaux ». Donc chaque animal est affiché.
-            -   option: |-
-                    Les chiens, chats, hamsters, poulets sont d'adorables animaux de compagnie
+            -   option: Les chiens, chats, hamsters, poulets sont d'adorables animaux de compagnie
                 feedback: Chaque animal aura sa propre ligne.
             -   option: |-
                     Les chiens sont d'adorables animaux de compagnie
@@ -2155,8 +2154,7 @@ levels:
                     Les hamsters sont d'adorables animaux de compagnie
                     Les poulets sont d'adorables animaux de compagnie
                 feedback: Super !
-            -   option: |-
-                    Tu ne sais pas encore. Car le code choisi un animal au hasard
+            -   option: Tu ne sais pas encore. Car le code choisi un animal au hasard
                 feedback: La ligne 2 dit « pour chaque animal dans la liste des animaux ». Donc chaque animal est affiché.
             hint: La ligne 2 dit « pour chaque animal dans la liste des animaux ». Donc chaque animal est affiché.
             correct_answer: C
@@ -2285,17 +2283,13 @@ levels:
                 {for} prix {in} les_prix
                     {print} prix " a été gagné par " noms {at} {random}
             mp_choice_options:
-            -   option: |-
-                    Tout le monde gagne un prix.
+            -   option: Tout le monde gagne un prix.
                 feedback: Ce n'est pas vrai, il est possible de ne pas repartir avec un prix.
-            -   option: |-
-                    Chaque prix sera distribué à une seule personne.
+            -   option: Chaque prix sera distribué à une seule personne.
                 feedback: Ce n'est pas vrai. Tous les prix sont distribués, mais a des personnes au hasard
-            -   option: |-
-                    Larry ne gagnera jamais aucun prix
+            -   option: Larry ne gagnera jamais aucun prix
                 feedback: Ce n'est pas vrai. Larry a autant de chance que les autres
-            -   option: |-
-                    Une personne peut gagner deux prix
+            -   option: Une personne peut gagner deux prix
                 feedback: Tu as bien compris !
             hint: Essaye d'imaginer ce qui sera écrit.
             correct_answer: D
