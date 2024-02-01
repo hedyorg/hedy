@@ -1366,7 +1366,8 @@ def index(level, program_id):
             quiz_stats = DATABASE.get_quiz_stats([current_user()['username']])
             # Not current leve-quiz's data because some levels may have no data for quizes,
             # but we still need to check for the threshold.
-            if level > 1 and (not level_quiz_data or QUIZZES[g.lang].get_quiz_data_for_level(level - 1)):
+            if level - 1 in available_levels and level > 1 and \
+                    (not level_quiz_data or QUIZZES[g.lang].get_quiz_data_for_level(level - 1)):
                 scores = [x.get('scores', []) for x in quiz_stats if x.get('level') == level - 1]
                 scores = [score for week_scores in scores for score in week_scores]
                 max_score = 0 if len(scores) < 1 else max(scores)
