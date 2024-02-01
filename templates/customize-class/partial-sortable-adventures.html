@@ -26,7 +26,7 @@
             hx-target="#adventure-dragger"
             hx-trigger="change"
             hx-indicator="#indicator">
-        <option value="none" selected disabled>{{_('adventures')}}</option>
+        <option value="none" selected disabled>{{_('add')}}</option>
         {% for adventure in available_adventures[level|int] %}
             <option value="{{ adventure.short_name }}"> 
                 {{ adventure.long_name }} 
