@@ -1551,8 +1551,9 @@ def view_program(user, id):
                            **arguments_dict)
 
 
-@app.route('/render_code/<level>/<code>', methods=['GET'])
-def render_code_in_editor(level, code):
+@app.route('/render_code/<level>/', methods=['GET'])
+def render_code_in_editor(level):
+    code = request.args['code']
 
     try:
         level = int(level)
