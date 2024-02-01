@@ -2504,7 +2504,7 @@ adventures:
         description: Introduction des maths
         levels:
             6:
-                story_text: |4
+                story_text: |2
 
                             À ce niveau, tu apprends quelque chose de nouveau : tu peux maintenant faire des calculs.
 
@@ -3236,8 +3236,9 @@ adventures:
                     ```
                     menu = appéritif, plat principal, dessert
                     {for} service {in} menu
-                        plat = {ask} "Que voulez-vous commander pour votre " service " ?"
-                        {print} plat "sera servi pour ton " service
+                        {print} "Que voulez-vous commander pour votre " service " ?"
+                        _
+                        _
                     ```
                 story_text_2: |
                     ### Exercice

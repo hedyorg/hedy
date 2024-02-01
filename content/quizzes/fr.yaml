@@ -2087,126 +2087,115 @@ levels:
             question_score: '10'
     10:
         1:
-            question_text: Quelle sera la sortie de ce code ?
+            question_text: Par quoi devons-nous remplacer le `_` si nous voulons afficher chaque compliment ?
             code: |-
-                for i in range 1 to 3
-                    print i
+                compliments = parfait, bon travail, incroyable
+                _
+                    {print} compliment
             mp_choice_options:
             -   option: |-
-                    1
-                    2
-                    3
-                feedback: Correct !
-            -   option: 1 2 3
-                feedback: Ce n'est pas ça !
-            -   option: 1, 2, 3
-                feedback: Ce n'est pas ça !
-            -   option: '123'
-                feedback: Ce n'est pas ça !
-            hint: '`{for}` chaque compliment dans les listes de compliments...'
-            correct_answer: A
+                    ```
+                    {for} tous compliment
+                    ```
+                feedback: Ce n'est pas ça
+            -   option: "```\n{for} compliment {in} compliments\n```"
+                feedback: Tu mérites tous ces compliments !
+            -   option: "```\n{if} compliment {in} compliments\n```"
+                feedback: Ce n'est pas ça !
+            -   option: '```
+
+                    {for} compliments {in} compliment
+
+                    ```'
+                feedback: Tu y es presque !
+            hint: '`{for}` chaque compliment dans la liste des compliments…'
+            correct_answer: B
             question_score: '10'
         2:
-            question_text: Quel sera le code pour avoir cette sortie ?
+            question_text: Que va-t-il s'afficher ?
             code: |-
-                1
-                2
-                3
-                4
-                5
-                Je suis là !
+                plats = pizzas, pâtes, crêpes
+                {for} plat {in} plats
+                    {print} "J'aime les " plat
             mp_choice_options:
             -   option: |-
-                    for i in range 1 to 5
-                        print i
-                    print 'Je suis là !'
-                feedback: Parfait !
+                    J'aime les pizzas
+                feedback: La ligne 2 dit « pour chaque plat dans la liste des plats ». Donc chaque plat est affiché.
             -   option: |-
-                    for i in range 1 to 5
-                    print i
-                    print 'Je suis là !'
-                feedback: Ce code ne fonctionnera pas. Tu as besoin d'une indentation après for.
+                    J'aime les pâtes
+                feedback: La ligne 2 dit « pour chaque plat dans la liste des plats ». Donc chaque plat est affiché.
             -   option: |-
-                    for i in range 1 to 5
-                        print i
-                        print 'Je suis là !'
+                    J'aime les crêpes
                 feedback: |-
-                    Hedy fera '1
-                    Je suis là !, 2
-                    Je suis là ! etc.
+                    La ligne 2 dit « pour chaque plat dans la liste des plats ». Donc chaque plat est affiché.
             -   option: |-
-                    for i in range 1 to 5
-                        print 'i'
-                    print 'Je suis là !'
-                feedback: '`i` est une variable et ne devrait pas avoir de guillemets'
-            hint: D'abord tous les nombres, puis la phrase !
-            correct_answer: A
+                    J'aime les pizzas
+                    J'aime les pâtes
+                    J'aime les crêpes
+                feedback: 'Super !'
+            hint: La ligne 2 dit « pour chaque plat dans la liste des plats ». Donc chaque plat est affiché.
+            correct_answer: D
             question_score: '10'
         3:
-            question_text: Quel sera le code pour avoir cette sortie ?
+            question_text: Que va-t-il s'afficher ?
             code: |-
-                10
-                9
-                8
-                7
-                6
-                5
-                4
-                3
-                2
-                1
-                0
+                animaux = chiens, chats, hamsters, poulets
+                {for} animal {in} animaux
+                    {print} "Les " animal " sont d'adorables animaux de compagnie"
             mp_choice_options:
             -   option: |-
-                    for i in range 0 to 10
-                        print i
-                feedback: Les nombres ne seront pas dans le bon sens
+                    Les chiens sont d'adorables animaux de compagnie
+                feedback: La ligne 2 dit « pour chaque animal dans la liste des animaux ». Donc chaque animal est affiché.
             -   option: |-
-                    for i in range 0 to 10
-                        print - i
-                feedback: Les nombres seront négatifs
+                    Les chiens, chats, hamsters, poulets sont d'adorables animaux de compagnie
+                feedback: Chaque animal aura sa propre ligne.
             -   option: |-
-                    for i in range 10 to 0
-                        print i
-                feedback: Hélas, cela ne marchera pas
+                    Les chiens sont d'adorables animaux de compagnie
+                    Les chats sont d'adorables animaux de compagnie
+                    Les hamsters sont d'adorables animaux de compagnie
+                    Les poulets sont d'adorables animaux de compagnie
+                feedback: Super !
             -   option: |-
-                    for i in range 0 to 10
-                        print 10 - i
-                feedback: Bien joué !
-            hint: Cela nécessite un peu de calcul..
-            correct_answer: D
+                    Tu ne sais pas encore. Car le code choisi un animal au hasard
+                feedback: La ligne 2 dit « pour chaque animal dans la liste des animaux ». Donc chaque animal est affiché.
+            hint: La ligne 2 dit « pour chaque animal dans la liste des animaux ». Donc chaque animal est affiché.
+            correct_answer: C
             question_score: '10'
         4:
-            question_text: Quel est le problème avec ce code ?
+            question_text: Quel est le problème avec ce code ?
             code: |-
-                for i in range 1 to 10
-                print i
+                courses = pommes, pain, lait
+                {for} produit {in} courses
+                    {print} "Nous avons besoin de " courses
             mp_choice_options:
-            -   option: Le `i` de la dernière ligne a besoin de guillemets
-                feedback: Non, il n'y en a pas besoin
-            -   option: Tu ne peux pas utiliser 'range 1 to 5' mais seulement 'range 1 to 10'.
-                feedback: Tu peux choisir l'intervalle que tu veux
-            -   option: La ligne 1 doit commencer par un alinéa.
-                feedback: Pas sur la ligne 1...
-            -   option: La ligne 2 doit commencer par un alinéa.
-                feedback: Parfait !
-            hint: Il manque un alinéa..
-            correct_answer: D
+            -   option: La ligne 2 doit commencer par une indentation de 4 espaces
+                feedback: Non, ce n'est pas le cas. Seule la ligne 3 doit avoir une indentation et c'est le cas.
+            -   option: La ligne 3 ne doit pas commencer par une indentation de 4 espaces
+                feedback: La ligne 2 est une commande `{for}` donc la ligne 3 doit commencer par une indentation.
+            -   option: La ligne 3 doit dire « produit » à la place de « courses »
+                feedback: Bon travail !
+            -   option: La ligne 2 doit dire « produit » à la place de « courses »
+                feedback: Non, ce n'est pas le cas.
+            hint: La ligne 2 dit « Pour chaque produit de la liste de courses »
+            correct_answer: C
             question_score: '10'
         5:
-            question_text: Quel est la commande manquante ?
+            question_text: Quel mot doit être écrit à la place de `_` ?
             code: |-
-                for i in _?_ 1 to 10
-                    print i
+                {print} "Bienvenue aux dés numériques !"
+                joueurs = Anne, Jean, Julie
+                nombres = 1, 2, 3, 4, 5, 6
+                {for} joueur {in} joueurs
+                    {print} joueur " obtient " _ {at} {random}
             mp_choice_options:
-            -   option: rang
-                feedback: Non !
-            -   option: range
-                feedback: Correct !
-            -   option: ragne
-                feedback: Non !
-            -   option: ranch
-                feedback: Non !
+            -   option: joueurs
+                feedback: Cela afficherait « Anne obtient Julie », au lieu de « Anne obtient 6 ».
+            -   option: nombres
+                feedback: Correct !
+            -   option: nombre
+                feedback: Tu chauffes. Mais Hedy doit choisir au hasard dans la liste appelée « nombres » pas « nombre »…
+            -   option: dés
+                feedback: Regarde le nom des variables.
             hint: Hedy doit choisir un nombre `{at} {random}`
             correct_answer: B
             question_score: '10'
@@ -2289,35 +2278,27 @@ levels:
             correct_answer: D
             question_score: '10'
         10:
-            question_text: Qu'est-ce qui est vrai dans ce code ?
+            question_text: Qu'est-ce qui est vrai dans ce code ?
             code: |-
-                les_prix = Le million de dollars,La voiture,Le sandwich
+                les_prix = Le million de dollars, La voiture, Le sandwich
                 noms = Bob, Patrick, Sandy, Larry
                 {for} prix {in} les_prix
-                    {print} prix 'a été gagné par' noms {at} {random}
+                    {print} prix " a été gagné par " noms {at} {random}
             mp_choice_options:
             -   option: |-
-                    for i in range 1 to 3
-                        print blablablabla
-                        print blabliblo
-                feedback: Hélas non !
+                    Tout le monde gagne un prix.
+                feedback: Ce n'est pas vrai, il est possible de ne pas repartir avec un prix.
             -   option: |-
-                    for i in range 1 to 3
-                        print blablablabla
-                    print blabliblo
-                feedback: C'est ça !
+                    Chaque prix sera distribué à une seule personne.
+                feedback: Ce n'est pas vrai. Tous les prix sont distribués, mais a des personnes au hasard
             -   option: |-
-                    for i in range 0 to 3
-                        print blablablabla
-                        print blabliblo
-                feedback: 0,1,2,3 cela fait 4 chiffres.
+                    Larry ne gagnera jamais aucun prix
+                feedback: Ce n'est pas vrai. Larry a autant de chance que les autres
             -   option: |-
-                    for i in range 0 to 3
-                        print blablablabla
-                    print blabliblo
-                feedback: 0,1,2,3 cela fait 4 chiffres.
-            hint: Fais attention aux indentations
-            correct_answer: B
+                    Une personne peut gagner deux prix
+                feedback: Tu as bien compris !
+            hint: Essaye d'imaginer ce qui sera écrit.
+            correct_answer: D
             question_score: '10'
     11:
         1:
