@@ -1358,11 +1358,12 @@ def hedy_transpiler(level):
 
 @v_args(meta=True)
 class ConvertToPython(Transformer):
-    def __init__(self, lookup, language="en", numerals_language="Latin", is_debug=False):
+    def __init__(self, lookup, language="en", numerals_language="Latin", is_debug=False, microbit=False):
         self.lookup = lookup
         self.language = language
         self.numerals_language = numerals_language
         self.is_debug = is_debug
+        self.microbit = microbit
 
     def add_debug_breakpoint(self):
         if self.is_debug:
@@ -1511,11 +1512,12 @@ class ConvertToPython(Transformer):
 @source_map_transformer(source_map)
 class ConvertToPython_1(ConvertToPython):
 
-    def __init__(self, lookup, language, numerals_language, is_debug):
+    def __init__(self, lookup, language, numerals_language, is_debug, microbit=False):
         self.numerals_language = numerals_language
         self.language = language
         self.lookup = lookup
         self.is_debug = is_debug
+        self.microbit = microbit
         __class__.level = 1
 
     def program(self, meta, args):
@@ -1540,7 +1542,14 @@ class ConvertToPython_1(ConvertToPython):
     def print(self, meta, args):
         # escape needed characters
         argument = process_characters_needing_escape(args[0])
-        return f"print('" + argument + "')" + self.add_debug_breakpoint()
+        if not self.microbit:
+            return f"print('" + argument + "')" + self.add_debug_breakpoint()
+        else:
+            textwrap.dedent(f"""
+            from microbit import *
+            while True:
+                display.scroll('{argument}')
+            """)
 
     def ask(self, meta, args):
         argument = process_characters_needing_escape(args[0])
@@ -3547,10 +3556,11 @@ def transpile_inner(input_string, level, lang="en", populate_source_map=False, i
 
     try:
         abstract_syntax_tree, lookup_table, commands = create_AST(input_string, level, lang)
+        microbit = True
 
         # grab the right transpiler from the lookup
         convertToPython = TRANSPILER_LOOKUP[level]
-        python = convertToPython(lookup_table, lang, numerals_language, is_debug).transform(abstract_syntax_tree)
+        python = convertToPython(lookup_table, lang, numerals_language, is_debug, microbit).transform(abstract_syntax_tree)
 
         has_clear = "clear" in commands
         has_turtle = "forward" in commands or "turn" in commands or "color" in commands
