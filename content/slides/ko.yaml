@@ -511,28 +511,6 @@ levels:
             header: if statements inside if statements
             text: "repeat 명령어 안에 if 명령어를 넣거나, 다른 if 명령어 안에 if 명령어를 넣으려고 생각해봤을 것이다. \n지금으로서는 아직 불가능하다. 상위 단계에서는 가능하겠지만, 일단 적절한 들여쓰기를 가진 {if} {else} 명령어와 {repeat} 명령어를 연습하는 것에 집중하자."
         9:
-            header: Debugging
-            text: Let's debug this code!
-            code: |-
-                {print} 'HedyWheels bus tickets machine'
-                zone_1 = Town Hall, Library, Campus, Market Place
-                zone_2 = Swimming Pool, Skate Park, Mall, Airport
-                destination = 'Where do you want to go?'
-                {if} destination {in} zone 1
-                {print} destination 'is in zone 1'
-                price = 3 euros
-                    {if} destination {is} zone_2
-                {print} destination 'is in zone 2'
-                price = 6
-                ticket_types = {ask} 'Press 1 for a single use ticket.
-                Press 2 for a round trip ticket:'
-                {if} ticket_type = 1
-                {print} 'You chose a single use ticket'
-                {else}
-                        {print} You chose a round trip ticket'
-                price * 2
-                {print} 'That will be ' price ' euros please'
-        10:
             header: 모험을 확인해 봅시다!
             text: 레벨 8의 모험을 즐기세요!
     9:
@@ -602,23 +580,6 @@ levels:
                     {else}
                         {print} 'pizza is better'
         8:
-            header: Debugging
-            text: Let's debug this code!
-            code: |-
-                {print} 'Welcome to HedyJumps, your parachute jump adventure!'
-                people = {ask} 'How many people are you jumping with today?
-                {print} 'We'll ask all of you some questions for safety reasons.'
-                extra_instructions_people = a, b
-                {repeat} 3 {times}
-                    name = {ask} 'What is your name?'
-                jumped_before = 'Have you ever done a parachute jump before, ' name '?'
-                {if} jumped_before  no
-                {print} 'No worries, you'll get an extra safety instruction in room 13'
-                {add} name {to} extra_instructions_people
-                {else}
-                {print} 'Fun!'
-                {print} 'Thanks for filling in the safety questions everyone. Enjoy your jump!'
-        9:
             header: 가자!
             text: 레벨 9의 모험을 즐기세요!
     10:
@@ -641,20 +602,6 @@ levels:
                 {for} day {in} days
                     {print} names {at} {random} ' does the dishes on ' day
         4:
-            header: Debugging
-            text: Let's debug this code
-            code: |-
-                {print} 'Ladies and gentlemen!'
-                {print} 'For one night and one night only in circus Hedy!'
-                acts = shoot out of a canon, walk the tightrope, pack themself in a suitcase,
-                people = Iris the Incredible Achmed the Amazing Francis the Fantastic
-                    {for} people {in} acts
-                chosen_person {is} people {random}
-                    chosen_person ' will ' act
-                {add} chosen_person {from} people
-                {print} 'Come and watch our show tonight!'
-                {print} 'Tickets are only available at the counter
-        5:
             header: 프로그램 할 시간!
             text: 레벨 10의 모험을 즐기세요!
     11:
@@ -676,14 +623,6 @@ levels:
                 {for} i {in} {range} 1 {to} 10
                     {print} i * number
         4:
-            header: Debugging
-            text: Let's debug this code!
-            code: |-
-                factor {is} {ask} 'Which table of multiplication do you need?'
-                {repeat} {for} numbers {in} {range} 1 {to} 10 {times}
-                    {print} This is the table of multiplications for factor
-                    {print} number ' x ' factor ' = ' i * factor
-        5:
             header: 프로그래밍 시작!
             text: 레벨 11의 모험을 즐기세요!
     12:
@@ -726,21 +665,6 @@ levels:
             header: Functions
             text: As you could see in the example a function is a block of code that can be called anytime. You use `{define}` to set the function and `{call}` to use it.
         7:
-            header: Debugging
-            text: Let's debug this code!
-            code: |-
-                {call} new_member
-                {print} 'Hi new member!'
-                username = {ask} 'What is your username?'
-                password = 'What is your password?'
-                {print} 'Welcome to our club!'
-
-                username = {ask} 'Please enter your username. Are you a new member? Type New Member'
-                {if} username = New Member
-                {call} new member
-                    {else}
-                        password = {ask} 'Please enter password'
-        8:
             header: Ready to try it out?
             text: Enjoy the adventures in level 12!
     13:
@@ -820,29 +744,6 @@ levels:
                 {call} song {with} 'sea'
                 {call} song {with} 'ocean'
         8:
-            header: Debugging
-            text: Let's debug this code!
-            code: |-
-                {define} happiness {with} name
-                    {print} '🥳'
-                {play} G
-                {play} A
-                {play} B
-                {print} 'Party on, ' name
-                {define} sadness
-                {print} '😞'
-                {play} E
-                {play} D
-                {play} C
-                {print} 'Hope you feel better, ' name
-
-                name = {ask} 'What is your' name '?'
-                mood = {ask} 'Are you happy or sad?'
-                {if} mood = happy
-                    {call} happiness {with} person
-                {else} mood = sad
-                    {define} sadness {to} name
-        9:
             header: Let's go!
             text: Enjoy the adventures in level 13!
     14:

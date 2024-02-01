@@ -575,28 +575,6 @@ levels:
                 You might have thought of trying to put an if command inside a repeat command, or inside another if command.
                 For now, this is not possible yet. In the higher levels, it will be allowed, but for now let's focus on practising the `{if}` `{else}` and `{repeat}` commands with proper indentation first.
         9:
-            header: Debugging
-            text: Let's debug this code!
-            code: |-
-                {print} 'HedyWheels bus tickets machine'
-                zone_1 = Town Hall, Library, Campus, Market Place
-                zone_2 = Swimming Pool, Skate Park, Mall, Airport
-                destination = 'Where do you want to go?'
-                {if} destination {in} zone 1
-                {print} destination 'is in zone 1'
-                price = 3 euros
-                    {if} destination {is} zone_2
-                {print} destination 'is in zone 2'
-                price = 6
-                ticket_types = {ask} 'Press 1 for a single use ticket.
-                Press 2 for a round trip ticket:'
-                {if} ticket_type = 1
-                {print} 'You chose a single use ticket'
-                {else}
-                        {print} You chose a round trip ticket'
-                price * 2
-                {print} 'That will be ' price ' euros please'
-        10:
             header: Let's check out the adventures!
             text: Enjoy the adventures in level 8!
     9:
@@ -671,23 +649,6 @@ levels:
                     {else}
                         {print} 'pizza is better'
         8:
-            header: Debugging
-            text: Let's debug this code!
-            code: |-
-                {print} 'Welcome to HedyJumps, your parachute jump adventure!'
-                people = {ask} 'How many people are you jumping with today?
-                {print} 'We'll ask all of you some questions for safety reasons.'
-                extra_instructions_people = a, b
-                {repeat} 3 {times}
-                    name = {ask} 'What is your name?'
-                jumped_before = 'Have you ever done a parachute jump before, ' name '?'
-                {if} jumped_before  no
-                {print} 'No worries, you'll get an extra safety instruction in room 13'
-                {add} name {to} extra_instructions_people
-                {else}
-                {print} 'Fun!'
-                {print} 'Thanks for filling in the safety questions everyone. Enjoy your jump!'
-        9:
             header: Let's go!
             text: Enjoy the adventures in level 9!
     10:
@@ -710,6 +671,7 @@ levels:
                 {for} day {in} days
                     {print} names {at} {random} ' does the dishes on ' day
         4:
+<<<<<<< Updated upstream
             header: Debugging
             text: Let's debug this code
             code: |-
@@ -725,6 +687,8 @@ levels:
                 {print} 'Tickets are only available at the counter
 
         5:
+=======
+>>>>>>> Stashed changes
             header: Time to program!
             text: Enjoy the adventures in level 10!
     11:
@@ -753,14 +717,6 @@ levels:
                 {for} i {in} {range} 1 {to} 10
                     {print} i * number
         4:
-            header: Debugging
-            text: Let's debug this code!
-            code: |-
-                factor {is} {ask} 'Which table of multiplication do you need?'
-                {repeat} {for} numbers {in} {range} 1 {to} 10 {times}
-                    {print} This is the table of multiplications for factor
-                    {print} number ' x ' factor ' = ' i * factor
-        5:
             header: Let's start programming!
             text: Enjoy the adventures in level 11!
     12:
@@ -810,21 +766,6 @@ levels:
             header: Functions
             text: As you could see in the example a function is a block of code that can be called anytime. You use `{define}` to set the function and `{call}` to use it.
         7:
-            header: Debugging
-            text: Let's debug this code!
-            code: |-
-                {call} new_member
-                {print} 'Hi new member!'
-                username = {ask} 'What is your username?'
-                password = 'What is your password?'
-                {print} 'Welcome to our club!'
-
-                username = {ask} 'Please enter your username. Are you a new member? Type New Member'
-                {if} username = New Member
-                {call} new member
-                    {else}
-                        password = {ask} 'Please enter password'
-        8:
             header: Ready to try it out?
             text: Enjoy the adventures in level 12!
     13:
@@ -911,29 +852,6 @@ levels:
                 {call} song {with} 'sea'
                 {call} song {with} 'ocean'
         8:
-            header: Debugging
-            text: Let's debug this code!
-            code: |-
-                {define} happiness {with} name
-                    {print} '🥳'
-                {play} G
-                {play} A
-                {play} B
-                {print} 'Party on, ' name
-                {define} sadness
-                {print} '😞'
-                {play} E
-                {play} D
-                {play} C
-                {print} 'Hope you feel better, ' name
-
-                name = {ask} 'What is your' name '?'
-                mood = {ask} 'Are you happy or sad?'
-                {if} mood = happy
-                    {call} happiness {with} person
-                {else} mood = sad
-                    {define} sadness {to} name
-        9:
             header: Let's go!
             text: Enjoy the adventures in level 13!
     14:
