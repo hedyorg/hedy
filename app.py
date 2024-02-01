@@ -1346,6 +1346,8 @@ def index(level, program_id):
                     print("Error: there is an openings date without a level")
 
     if 'levels' in customizations and level not in available_levels:
+        if available_levels:
+            return index(available_levels[0], program_id)
         return utils.error_page(error=403, ui_message=gettext('level_not_class'))
 
     # At this point we can have the following scenario:
