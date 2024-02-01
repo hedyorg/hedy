@@ -313,8 +313,7 @@ levels:
                 Var försiktig! Nu när du använder citattecken kan du inte använda apostrofer i sammandragningar.
 
                 Försök att skriva ut en sammandragning som engelska "you're" eller "I'm" på skärmen nedan och se vad som händer …
-            code: |-
-                '{print} 'This won't work!'
+            code: '''{print} ''This won''t work!'''
             debug: true
         9:
             header: Rensa
@@ -494,8 +493,7 @@ levels:
         3:
             header: Glöm inte kommandot skriv
             text: Glöm inte kommandot `{print}` när du använder kommandot upprepa.
-            code: |-
-                {repeat} 5 {times} 'Help!'
+            code: '{repeat} 5 {times} ''Help!'''
             debug: true
         4:
             header: Upprepa ett fråga-kommando
