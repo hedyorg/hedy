@@ -1229,12 +1229,12 @@ levels:
                 {print} '欢迎来到 海蒂 餐厅'
                 food = {ask} '你想吃什么？'
                 price = 0
-                {if} food {is} 汉堡price = price + 15
-                {if} food {is} 薯条price = price + 6
-                饮料是{ask} '你想喝什么？'
-                {if} 饮料 {is} 可乐price = price + 3
-                {if}饮料{is}水price=price+1
-                {print} price'请付美元'
+                {if} food {is} 汉堡 price = price + 15
+                {if} food {is} 薯条 price = price + 6
+                drinks is{ask} '你想喝什么？'
+                {if} drinks {is} 可乐 price = price + 3
+                {if}drinks{is}水 price=price+1
+                {print} price '请付美元'
             mp_choice_options:
             -   option: 也可以是 `price = 3`。
                 feedback: 不，那不是真的。 海蒂 需要在总数中添加 3 美元。
