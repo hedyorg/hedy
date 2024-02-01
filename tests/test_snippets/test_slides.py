@@ -85,7 +85,7 @@ class TestsSlidesPrograms(HedyTester):
                 pass
             except OSError:
                 return None  # programs with ask cannot be tested with output :(
-            except exceptions.HedyException as E:
+            except exceptions.HedyException:
                 try:
                     location = E.error_location
                 except BaseException:
