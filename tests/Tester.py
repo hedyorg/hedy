@@ -268,7 +268,8 @@ class HedyTester(unittest.TestCase):
                     if extra_check_function is not None:
                         self.assertTrue(extra_check_function(context))
                 else:
-                    result = hedy.transpile(code, level, lang, skip_faulty=skip_faulty, unused_allowed=unused_allowed, microbit=microbit)
+                    result = hedy.transpile(code, level, lang, skip_faulty=skip_faulty,
+                                            unused_allowed=unused_allowed, microbit=microbit)
                     if expected is not None:
                         self.assertEqual(expected, result.code)
 

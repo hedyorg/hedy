@@ -301,7 +301,6 @@ class TestsLevel1(HedyTester):
             max_level=17
         )
 
-
     def test_print_microbit(self):
         code = "print a"
         expected = textwrap.dedent(f"""\
@@ -314,7 +313,7 @@ class TestsLevel1(HedyTester):
             translate=False,
             skip_faulty=False,
             expected=expected,
-            max_level=1, #teodor, set this to 17, see the test fail and moke sure that it then does not fail anymore!
+            max_level=1,  # teodor, set this to 17, see the test fail and moke sure that it then does not fail anymore!
             microbit=True
         )
 
