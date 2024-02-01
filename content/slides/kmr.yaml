@@ -485,7 +485,9 @@ levels:
         3:
             header: Don't forget the print command
             text: When using the repeat command, do not forget the `{print}` command.
-            code: '{repeat} 5 {times} ''Help!'''
+            code: |-
+                {repeat} 5 {times} 'Help!'
+            debug: true
         4:
             header: Repeat an ask command
             text: You can also repeat an `{ask}`, `{if}` or `{else}` command multiple times.

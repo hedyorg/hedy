@@ -443,7 +443,9 @@ levels:
         3:
             header: 인쇄 명령을 잊지 마십시오
             text: repeat 명령을 사용할 때 '{print}' 명령을 잊지 마십시오.
-            code: '{repeat} 5 {times} ''Help!'''
+            code: |-
+                {repeat} 5 {times} 'Help!'
+            debug: true
         4:
             header: 질문 명령 반복
             text: 또한 '{ask}', '{if}' 또는 '{else}' 명령을 여러 번 반복할 수 있습니다.

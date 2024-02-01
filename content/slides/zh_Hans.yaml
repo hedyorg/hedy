@@ -497,7 +497,9 @@ levels:
         3:
             header: Don't forget the print command
             text: 使用重复命令时，不要忘记`{print}`命令。
-            code: '{repeat} 5 {times} ''救命!'''
+            code: |-
+                {repeat} 5 {times} '救命!'
+            debug: true
         4:
             header: Repeat an ask command
             text: 你还可以多次重复 `{ask}`, `{if}` 或 `{else}` 命令。
