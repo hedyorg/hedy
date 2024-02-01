@@ -10,6 +10,10 @@ declare let window: CustomWindow;
 let $editor: ClassicEditor;
 const editorContainer = document.querySelector('#adventure-editor') as HTMLElement;
 const lang = document.querySelector('html')?.getAttribute('lang') || 'en';
+// Initialize the editor with the default language
+if (editorContainer) {
+    initializeEditor(lang);
+}
 
 function initializeEditor(language: string): Promise<void> {
     return new Promise((resolve, reject) => {
@@ -40,8 +44,6 @@ function initializeEditor(language: string): Promise<void> {
     });
 }
 
-// Initialize the editor with the default language
-initializeEditor(lang);
 
 // Update the editor with new data
 // export async function update_adv_editor(js: any) {
