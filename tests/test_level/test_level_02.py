@@ -847,10 +847,10 @@ class TestsLevel2(HedyTester):
 
         expected = textwrap.dedent("""\
             n = 'C4'
-            chosen_note = n.upper()
+            chosen_note = str(n).upper()
             if chosen_note not in notes_mapping.keys() and chosen_note not in notes_mapping.values():
                 raise Exception('catch_value_exception')
-            play(notes_mapping.get(str(chosen_note), str(chosen_note)))
+            play(notes_mapping.get(chosen_note, chosen_note))
             time.sleep(0.5)""")
 
         self.multi_level_tester(
