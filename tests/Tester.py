@@ -177,7 +177,8 @@ class HedyTester(unittest.TestCase):
             lang='en',
             translate=True,
             output=None,
-            skip_faulty=True
+            skip_faulty=True,
+            microbit=False
     ):
         # used to test the same code snippet over multiple levels
         # Use exception to check for an exception
@@ -209,7 +210,8 @@ class HedyTester(unittest.TestCase):
                 lang=lang,
                 translate=translate,
                 output=output,
-                skip_faulty=skip_faulty)
+                skip_faulty=skip_faulty,
+                microbit=microbit)
             print(f'Passed for level {level}')
 
     def single_level_tester(
@@ -226,6 +228,7 @@ class HedyTester(unittest.TestCase):
             lang='en',
             translate=True,
             skip_faulty=True,
+            microbit=False
     ):
         if level is None:  # no level set (from the multi-tester)? grap current level from class
             level = self.level
@@ -265,7 +268,7 @@ class HedyTester(unittest.TestCase):
                     if extra_check_function is not None:
                         self.assertTrue(extra_check_function(context))
                 else:
-                    result = hedy.transpile(code, level, lang, skip_faulty=skip_faulty, unused_allowed=unused_allowed)
+                    result = hedy.transpile(code, level, lang, skip_faulty=skip_faulty, unused_allowed=unused_allowed, microbit=microbit)
                     if expected is not None:
                         self.assertEqual(expected, result.code)
 

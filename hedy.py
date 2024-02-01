@@ -1545,11 +1545,10 @@ class ConvertToPython_1(ConvertToPython):
         if not self.microbit:
             return f"print('" + argument + "')" + self.add_debug_breakpoint()
         else:
-            textwrap.dedent(f"""
+            return textwrap.dedent(f"""\
             from microbit import *
             while True:
-                display.scroll('{argument}')
-            """)
+                display.scroll('{argument}')""")
 
     def ask(self, meta, args):
         argument = process_characters_needing_escape(args[0])
@@ -3108,7 +3107,7 @@ def transpile_inner_with_skipping_faulty(input_string, level, lang="en", unused_
     return transpile_result
 
 
-def transpile(input_string, level, lang="en", skip_faulty=True, is_debug=False, unused_allowed=False):
+def transpile(input_string, level, lang="en", skip_faulty=True, is_debug=False, unused_allowed=False, microbit=False):
     """
     Function that transpiles the Hedy code to Python
 
@@ -3123,7 +3122,7 @@ def transpile(input_string, level, lang="en", skip_faulty=True, is_debug=False, 
     try:
         source_map.set_skip_faulty(False)
         transpile_result = transpile_inner(input_string, level, lang, populate_source_map=True,
-                                           is_debug=is_debug, unused_allowed=unused_allowed)
+                                           is_debug=is_debug, unused_allowed=unused_allowed, microbit=microbit)
 
     except Exception as original_error:
         hedy_amount_lines = len(input_string.strip().split('\n'))
@@ -3532,7 +3531,7 @@ def create_AST(input_string, level, lang="en"):
     return abstract_syntax_tree, lookup_table, commands
 
 
-def transpile_inner(input_string, level, lang="en", populate_source_map=False, is_debug=False, unused_allowed=False):
+def transpile_inner(input_string, level, lang="en", populate_source_map=False, is_debug=False, unused_allowed=False, microbit=False):
     check_program_size_is_valid(input_string)
     input_string = process_input_string(input_string, level, lang)
 

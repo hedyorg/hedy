@@ -301,6 +301,23 @@ class TestsLevel1(HedyTester):
             max_level=17
         )
 
+
+    def test_print_microbit(self):
+        code = "print a"
+        expected = textwrap.dedent(f"""\
+            from microbit import *
+            while True:
+                display.scroll('a')""")
+
+        self.multi_level_tester(
+            code=code,
+            translate=False,
+            skip_faulty=False,
+            expected=expected,
+            max_level=1, #teodor, set this to 17, see the test fail and moke sure that it then does not fail anymore!
+            microbit=True
+        )
+
     def test_play_lowercase(self):
         code = "play a"
         expected = textwrap.dedent("""\
