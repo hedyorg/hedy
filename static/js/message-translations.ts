@@ -784,7 +784,7 @@ export const TRANSLATIONS: Record<string, Record<MessageKey, string>> = {
     "unsaved_class_changes": "There are unsaved changes, are you sure you want to leave this page?"
   },
   "nl": {
-    "CheckInternet": "Controleer even of je internetverbinding het nog doet.",
+    "CheckInternet": "Controleer of jouw internetverbinding wel goed werkt.",
     "Connection_error": "We konden niet goed met de server praten.",
     "Empty_output": "Deze code werkt wel, maar print niks. Voeg een print commando toe aan je code of gebruik de schildpad om output te krijgen.",
     "Errors_found": "Je hebt een foutje gemaakt! Maak je geen zorgen, Hedy probeert de fouten te vinden",
@@ -1414,7 +1414,7 @@ export const TRANSLATIONS: Record<string, Record<MessageKey, string>> = {
     "unsaved_class_changes": "There are unsaved changes, are you sure you want to leave this page?"
   },
   "zh_Hans": {
-    "CheckInternet": "查看一下你的网络连接是否正常.",
+    "CheckInternet": "检查您的互联网连接是否正常。",
     "Connection_error": "我们无法连接到服务器。",
     "Empty_output": "这段代码可以工作，但没有打印任何东西。在你的代码中添加一个打印命令，或者使用乌龟来获得输出。",
     "Errors_found": "你搞错了！不要着急，我们仍然运行该程序",
