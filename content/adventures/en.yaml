@@ -2695,18 +2695,18 @@ adventures:
                     Finish the song!
                 example_code: |
                     ```
-                    first_time {is} yes
+                    first_time = yes
                     {repeat} 2 {times}
                         {repeat} 2 {times}
-                            {play} D
-                        {play} E
+                            {play} C
                         {play} D
+                        {play} C
                         {if} first_time {is} yes
-                            {play} G
+                            {play} F
+                            {play} E
                             first_time {is} no
-                        {else} {play} A
-                        {play} F
-                    _
+                        {else}
+                            _
                     ```
             12:
                 story_text: |
