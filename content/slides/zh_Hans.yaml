@@ -157,8 +157,7 @@ levels:
                 {print} 你好名字
         4:
             header: Multiple variables
-            text: |-
-                既然我们使用了变量，我们就可以使用多个变量，而不仅仅是一个`{echo}`命令。
+            text: 既然我们使用了变量，我们就可以使用多个变量，而不仅仅是一个`{echo}`命令。
             code: |-
                 姓名 {is} {ask} 你叫什么名字？
                 {print} 你好名字
@@ -166,8 +165,7 @@ levels:
                 {print} 姓名年龄 岁。
         5:
             header: 暂停
-            text: |-
-                您还可以使用`{sleep}` 命令暂停代码一段时间。
+            text: 您还可以使用`{sleep}` 命令暂停代码一段时间。
             code: |-
                 {print} 我最喜欢的颜色是...
                 {sleep} 2
@@ -185,8 +183,7 @@ levels:
                 {print} 绿色！
         7:
             header: 调试
-            text: |-
-                调试代码意味着消除代码中的错误。 我们一起调试一下这段代码。 单击瓢虫按钮启动调试器。
+            text: 调试代码意味着消除代码中的错误。 我们一起调试一下这段代码。 单击瓢虫按钮启动调试器。
             code: |-
                 {print} 欢迎来到甜甜圈店！
                 填充 {is} 您想要什么样的填充？
@@ -198,8 +195,7 @@ levels:
                 {ask} 祝你有美好的一天！
         8:
             header: 来开始编程的乐趣吧！
-            text: |-
-                享受第 2 关的冒险！
+            text: 享受第 2 关的冒险！
     3:
         1:
             header: 欢迎来到第 3 级
@@ -315,8 +311,7 @@ levels:
                 当心！ 既然使用了引号，则不能在缩写中使用引号。
 
                 请尝试在下面的屏幕中打印诸如“you're”或“I'm”之类的缩写，看看会发生什么......
-            code: |-
-                {print} ''这行不通！'
+            code: '{print} ''''这行不通！'''
         9:
             header: 清除
             text: |-
@@ -497,8 +492,7 @@ levels:
         3:
             header: Don't forget the print command
             text: 使用重复命令时，不要忘记`{print}`命令。
-            code: |-
-                {repeat} 5 {times} '救命!'
+            code: '{repeat} 5 {times} ''救命!'''
             debug: true
         4:
             header: Repeat an ask command
@@ -1053,8 +1047,7 @@ levels:
             text: 在本级别中，你将学习如何使用冒号以及 elif 命令。
         2:
             header: Colon
-            text: |-
-                现在我们要稍微改变一下缩进。 每次我们需要缩进时，我们都需要在缩进之前的行添加 : 。
+            text: '现在我们要稍微改变一下缩进。 每次我们需要缩进时，我们都需要在缩进之前的行添加 : 。'
             code: |-
                 prices = ['1 million dollars', 'an apple pie', 'nothing']
                 your_price = prices[{random}]
