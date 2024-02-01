@@ -461,7 +461,6 @@ levels:
                 {print} number_1 ' 乘以 ' number_2 ' 为 ' correct_answer
         9:
             header: Debugging
-            debug: true
             text: Let's debug this code!
             code: |-
                 {print} '这是水上乐园售票机'
@@ -477,6 +476,7 @@ levels:
                 {if} 天 {is} 星期一
                 总total_price = total_price* 0.25
                 {print} '这将是' total_price
+            debug: true
         10:
             header: 让我们开始工作吧！
             text: 享受第 6 关的冒险！
@@ -509,7 +509,6 @@ levels:
                 {else} {repeat} 3 {times} {print} '你学到了新东西！'
         5:
             header: Debugging
-            debug: true
             text: Let's debug this code!
             code: |-
                 {print} 你被困在荒岛上。
@@ -522,6 +521,7 @@ levels:
                 {if}是
                 {print} '万岁！'
                 {else}“太可惜了……哦，好吧……是时候建造一个避难所并寻找一些食物了。”
+            debug: true
         6:
             header: 预备，准备，开始！
             text: 享受第七关的冒险吧！
@@ -594,7 +594,6 @@ levels:
                 目前，这还不可能。 在更高的级别中，这是允许的，但现在让我们首先集中练习使用适当缩进的 `{if}` `{else}` 和 `{repeat}` 命令。
         9:
             header: Debugging
-            debug: true
             text: Let's debug this code!
             code: |-
                 {print} 'HedyWheels bus tickets machine'
@@ -615,6 +614,7 @@ levels:
                         {print} You chose a round trip ticket'
                 price * 2
                 {print} 'That will be ' price ' euros please'
+            debug: true
         10:
             header: Let's check out the adventures!
             text: 享受第8关的冒险吧！
@@ -691,7 +691,6 @@ levels:
                         {print} '披萨更好吃'
         8:
             header: Debugging
-            debug: true
             text: Let's debug this code!
             code: |-
                 {print} 'Welcome to HedyJumps, your parachute jump adventure!'
@@ -707,6 +706,7 @@ levels:
                 {else}
                 {print} 'Fun!'
                 {print} 'Thanks for filling in the safety questions everyone. Enjoy your jump!'
+            debug: true
         9:
             header: Let's go!
             text: 享受第9关的冒险吧！
@@ -731,7 +731,6 @@ levels:
                      {print} 命名 {at} {random} ' 在 ' day '洗碗'
         4:
             header: Debugging
-            debug: true
             text: Let's debug this code
             code: |-
                 {print} 'Ladies and gentlemen!'
@@ -744,6 +743,7 @@ levels:
                 {add} chosen_person {from} people
                 {print} 'Come and watch our show tonight!'
                 {print} 'Tickets are only available at the counter
+            debug: true
         5:
             header: Time to program!
             text: 享受第10关的冒险吧！
@@ -774,13 +774,13 @@ levels:
                     {print} i * number
         4:
             header: Debugging
-            debug: true
             text: Let's debug this code!
             code: |-
                 factor {is} {ask} 'Which table of multiplication do you need?'
                 {repeat} {for} numbers {in} {range} 1 {to} 10 {times}
                     {print} This is the table of multiplications for factor
                     {print} number ' x ' factor ' = ' i * factor
+            debug: true
         5:
             header: Let's start programming!
             text: 享受第11关的冒险吧！
@@ -832,7 +832,6 @@ levels:
             text: 正如您在示例中看到的，函数是一个可以随时调用的代码块。您可以使用“{定义}”来设置函数，并使用“{叫}”来使用它。
         7:
             header: Debugging
-            debug: true
             text: Let's debug this code!
             code: |-
                 {call} new_member
@@ -846,6 +845,7 @@ levels:
                 {call} new member
                     {else}
                         password = {ask} 'Please enter password'
+            debug: true
         8:
             header: 准备好尝试了吗？
             text: 享受12级的冒险！
@@ -934,7 +934,6 @@ levels:
                 {call} song {with} 'ocean'
         8:
             header: Debugging
-            debug: true
             text: Let's debug this code!
             code: |-
                 {define} happiness {with} name
@@ -956,6 +955,7 @@ levels:
                     {call} happiness {with} person
                 {else} mood = sad
                     {define} sadness {to} name
+            debug: true
         9:
             header: 出发！
             text: 享受 13 级的冒险！

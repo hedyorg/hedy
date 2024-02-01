@@ -588,7 +588,6 @@ levels:
                 Por ahora, esto todavía no es posible. En niveles superiores, esto se permitirá, pero por ahora centrémosnos primero en practicar los comandos `{if}` `{else}` y `{repeat}` con la sangría adecuada.
         9:
             header: Debugging
-            debug: true
             text: Let's debug this code!
             code: |-
                 {print} 'HedyWheels bus tickets machine'
@@ -609,6 +608,7 @@ levels:
                         {print} You chose a round trip ticket'
                 price * 2
                 {print} 'That will be ' price ' euros please'
+            debug: true
         10:
             header: ¡Vamos a ver las aventuras!
             text: ¡Disfruta las aventuras en el nivel 8!
@@ -685,7 +685,6 @@ levels:
                         {print} 'la pizza es mejor'
         8:
             header: Debugging
-            debug: true
             text: Let's debug this code!
             code: |-
                 {print} 'Welcome to HedyJumps, your parachute jump adventure!'
@@ -701,6 +700,7 @@ levels:
                 {else}
                 {print} 'Fun!'
                 {print} 'Thanks for filling in the safety questions everyone. Enjoy your jump!'
+            debug: true
         9:
             header: ¡Vamos!
             text: ¡Disfruta las aventuras en el nivel 9!
@@ -725,7 +725,6 @@ levels:
                     {print} nombres {at} {random} ' friega los platos el ' dia
         4:
             header: Debugging
-            debug: true
             text: Let's debug this code
             code: |-
                 {print} 'Ladies and gentlemen!'
@@ -738,6 +737,7 @@ levels:
                 {add} chosen_person {from} people
                 {print} 'Come and watch our show tonight!'
                 {print} 'Tickets are only available at the counter
+            debug: true
         5:
             header: ¡Hora de programar!
             text: ¡Disfruta las aventuras en el nivel 10!
@@ -768,13 +768,13 @@ levels:
                     {print} i * numero
         4:
             header: Debugging
-            debug: true
             text: Let's debug this code!
             code: |-
                 factor {is} {ask} 'Which table of multiplication do you need?'
                 {repeat} {for} numbers {in} {range} 1 {to} 10 {times}
                     {print} This is the table of multiplications for factor
                     {print} number ' x ' factor ' = ' i * factor
+            debug: true
         5:
             header: ¡Comencemos a programar!
             text: ¡Disfruta las aventuras en el nivel 11!
@@ -826,7 +826,6 @@ levels:
             text: Como has podido ver en el ejemplo una función es un bloque de código que puede ser llamado en cualquier momento. Se usa `{define}` para definir la función y `{call}` para usarla.
         7:
             header: Debugging
-            debug: true
             text: Let's debug this code!
             code: |-
                 {call} new_member
@@ -840,6 +839,7 @@ levels:
                 {call} new member
                     {else}
                         password = {ask} 'Please enter password'
+            debug: true
         8:
             header: ¿Listo para probarlo?
             text: ¡Disfruta de las aventuras en el nivel 12!
@@ -928,7 +928,6 @@ levels:
                 {call} cancion {with} 'océano'
         8:
             header: Debugging
-            debug: true
             text: Let's debug this code!
             code: |-
                 {define} happiness {with} name
@@ -950,6 +949,7 @@ levels:
                     {call} happiness {with} person
                 {else} mood = sad
                     {define} sadness {to} name
+            debug: true
         9:
             header: ¡Vamos!
             text: ¡Disfruta de las aventuras en el nivel 13!

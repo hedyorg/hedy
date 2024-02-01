@@ -116,13 +116,13 @@ levels:
                 {turn} left
         12:
             header: Debugging
-            debug: true
             text: Debugging a code means getting rid of mistakes in the code. Let's debug this code together. Click the ladybug button to start the debugger.
             code: |-
                 I am DJ Hedy
                 {print} What song would you like to hear?
                 {ask} I like that song too!
                 {print} Next up... {echo}
+            debug: true
         13:
             header: Let the programming fun begin!
             text: Enjoy the adventures in level 1!
@@ -176,7 +176,6 @@ levels:
                 {print} green!
         7:
             header: Debugging
-            debug: true
             text: Debugging a code means getting rid of mistakes in the code. Let's debug this code together. Click the ladybug button to start the debugger.
             code: |-
                 {print} Welcome to the donut shop!
@@ -187,6 +186,7 @@ levels:
                 {print} I'll go get your donut. {sleep}
                 {print} Here you go! A filling donut with toping!
                 {ask} Have a nice day!
+            debug: true
         8:
             header: 프로그래밍의 재미를 시작합시다!
             text: 레벨 2의 모험을 즐기세요!
@@ -234,7 +234,6 @@ levels:
                 {print} I choose animals {at} {random}
         7:
             header: Debugging
-            debug: true
             text: Let's debug this code!
             editor: |-
                 music_genres {is} rock, pop, metal, indie, jazz
@@ -246,6 +245,7 @@ levels:
                 {print} or do you prefer... second_choice {at} {random}
                 {remove} second_choice {to} music_genres
                 {print} I like music_genre {random} best!
+            debug: true
         8:
             header: 일을 시작하자!
             text: 레벨 3의 모험을 즐기세요!
@@ -302,7 +302,6 @@ levels:
                 {print} 'SURPRISE!'
         10:
             header: Debugging
-            debug: true
             text: Let's debug this code!
             code: |-
                 {clear}
@@ -314,6 +313,7 @@ levels:
                 colors {is} 'orange, silver, white, brown'
                 {print} 'I love the colors {at} {random} one!'
                 choice {is} {ask} Which one do you like?
+            debug: true
         11:
             header: 자, 준비, 시작!
             text: 레벨 4의 모험을 즐기세요!
@@ -352,7 +352,6 @@ levels:
                 {else} {print} 'meh'
         7:
             header: Debugging
-            debug: true
             text: Let's debug this code!
             code: |-
                 {print} Welcome to HedyAir Security!
@@ -367,6 +366,7 @@ levels:
                 item_to_declare {is} {ask} 'What would you like to declare'
                 {else} Alright
                 {print} Thank you. Please head to gate A22.'
+            debug: true
         8:
             header: 가자!
             text: 레벨 5의 모험을 즐기세요!
@@ -414,7 +414,6 @@ levels:
                 {print} number_1 ' times ' number_2 ' is ' correct_answer
         9:
             header: Debugging
-            debug: true
             text: Let's debug this code!
             code: |-
                 {print} 'This is the water park ticket machine'
@@ -430,6 +429,7 @@ levels:
                 {if} day {is} monday
                 total_price = total_price * 0.25
                 {print} 'That will be total_price please'
+            debug: true
         10:
             header: 일을 시작하자!
             text: 레벨 6의 모험을 즐기세요!
@@ -458,7 +458,6 @@ levels:
                 {else} {repeat} 3 {times} {print} 'You have learned something new!'
         5:
             header: Debugging
-            debug: true
             text: Let's debug this code!
             code: |-
                 {print} You gave stranded on a desert island.
@@ -471,6 +470,7 @@ levels:
                 {if} yes
                 {print} 'Hurray!
                 {else} 'That's a shame... Oh well... time to build a shelter and find some food.'
+            debug: true
         6:
             header: 준비완료!
             text: 레벨 7의 모험을 즐기세요!
@@ -522,7 +522,6 @@ levels:
             text: "repeat 명령어 안에 if 명령어를 넣거나, 다른 if 명령어 안에 if 명령어를 넣으려고 생각해봤을 것이다. \n지금으로서는 아직 불가능하다. 상위 단계에서는 가능하겠지만, 일단 적절한 들여쓰기를 가진 {if} {else} 명령어와 {repeat} 명령어를 연습하는 것에 집중하자."
         9:
             header: Debugging
-            debug: true
             text: Let's debug this code!
             code: |-
                 {print} 'HedyWheels bus tickets machine'
@@ -543,6 +542,7 @@ levels:
                         {print} You chose a round trip ticket'
                 price * 2
                 {print} 'That will be ' price ' euros please'
+            debug: true
         10:
             header: 모험을 확인해 봅시다!
             text: 레벨 8의 모험을 즐기세요!
@@ -614,7 +614,6 @@ levels:
                         {print} 'pizza is better'
         8:
             header: Debugging
-            debug: true
             text: Let's debug this code!
             code: |-
                 {print} 'Welcome to HedyJumps, your parachute jump adventure!'
@@ -630,6 +629,7 @@ levels:
                 {else}
                 {print} 'Fun!'
                 {print} 'Thanks for filling in the safety questions everyone. Enjoy your jump!'
+            debug: true
         9:
             header: 가자!
             text: 레벨 9의 모험을 즐기세요!
@@ -654,7 +654,6 @@ levels:
                     {print} names {at} {random} ' does the dishes on ' day
         4:
             header: Debugging
-            debug: true
             text: Let's debug this code
             code: |-
                 {print} 'Ladies and gentlemen!'
@@ -667,6 +666,7 @@ levels:
                 {add} chosen_person {from} people
                 {print} 'Come and watch our show tonight!'
                 {print} 'Tickets are only available at the counter
+            debug: true
         5:
             header: 프로그램 할 시간!
             text: 레벨 10의 모험을 즐기세요!
@@ -690,13 +690,13 @@ levels:
                     {print} i * number
         4:
             header: Debugging
-            debug: true
             text: Let's debug this code!
             code: |-
                 factor {is} {ask} 'Which table of multiplication do you need?'
                 {repeat} {for} numbers {in} {range} 1 {to} 10 {times}
                     {print} This is the table of multiplications for factor
                     {print} number ' x ' factor ' = ' i * factor
+            debug: true
         5:
             header: 프로그래밍 시작!
             text: 레벨 11의 모험을 즐기세요!
@@ -741,7 +741,6 @@ levels:
             text: As you could see in the example a function is a block of code that can be called anytime. You use `{define}` to set the function and `{call}` to use it.
         7:
             header: Debugging
-            debug: true
             text: Let's debug this code!
             code: |-
                 {call} new_member
@@ -755,6 +754,7 @@ levels:
                 {call} new member
                     {else}
                         password = {ask} 'Please enter password'
+            debug: true
         8:
             header: Ready to try it out?
             text: Enjoy the adventures in level 12!
@@ -836,7 +836,6 @@ levels:
                 {call} song {with} 'ocean'
         8:
             header: Debugging
-            debug: true
             text: Let's debug this code!
             code: |-
                 {define} happiness {with} name
@@ -858,6 +857,7 @@ levels:
                     {call} happiness {with} person
                 {else} mood = sad
                     {define} sadness {to} name
+            debug: true
         9:
             header: Let's go!
             text: Enjoy the adventures in level 13!

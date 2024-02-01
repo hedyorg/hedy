@@ -121,13 +121,13 @@ levels:
                 {turn} left
         12:
             header: Debugging
-            debug: true
             text: Debugging a code means getting rid of mistakes in the code. Let's debug this code together. Click the ladybug button to start the debugger.
             code: |-
                 I am DJ Hedy
                 {print} What song would you like to hear?
                 {ask} I like that song too!
                 {print} Next up... {echo}
+            debug: true
         13:
             header: Let the programming fun begin!
             text: Enjoy the adventures in level 1!
@@ -186,7 +186,6 @@ levels:
                 {print} green!
         7:
             header: Debugging
-            debug: true
             text: Debugging a code means getting rid of mistakes in the code. Let's debug this code together. Click the ladybug button to start the debugger.
             code: |-
                 {print} Welcome to the donut shop!
@@ -197,6 +196,7 @@ levels:
                 {print} I'll go get your donut. {sleep}
                 {print} Here you go! A filling donut with toping!
                 {ask} Have a nice day!
+            debug: true
         8:
             header: Låt den roliga programmeringen börja!
             text: Ha det kul med äventyren på nivå 2!
@@ -251,7 +251,6 @@ levels:
                 {print} I choose animals {at} {random}
         7:
             header: Debugging
-            debug: true
             text: Let's debug this code!
             editor: |-
                 music_genres {is} rock, pop, metal, indie, jazz
@@ -263,6 +262,7 @@ levels:
                 {print} or do you prefer... second_choice {at} {random}
                 {remove} second_choice {to} music_genres
                 {print} I like music_genre {random} best!
+            debug: true
         8:
             header: Nu sätter vi igång!
             text: Ha det kul med äventyren på nivå 3!
@@ -333,7 +333,6 @@ levels:
                 {print} 'SURPRISE!'
         10:
             header: Debugging
-            debug: true
             text: Let's debug this code!
             code: |-
                 {clear}
@@ -345,6 +344,7 @@ levels:
                 colors {is} 'orange, silver, white, brown'
                 {print} 'I love the colors {at} {random} one!'
                 choice {is} {ask} Which one do you like?
+            debug: true
         11:
             header: Klara, färdiga, gå!
             text: Ha det kul med äventyren på nivå 4!
@@ -397,7 +397,6 @@ levels:
                 {else} {print} 'meh'
         7:
             header: Debugging
-            debug: true
             text: Let's debug this code!
             code: |-
                 {print} Welcome to HedyAir Security!
@@ -412,6 +411,7 @@ levels:
                 item_to_declare {is} {ask} 'What would you like to declare'
                 {else} Alright
                 {print} Thank you. Please head to gate A22.'
+            debug: true
         8:
             header: Nu kör vi!
             text: Ha det kul med äventyren på nivå 5!
@@ -461,7 +461,6 @@ levels:
                 {print} number_1 ' times ' number_2 ' is ' correct_answer
         9:
             header: Debugging
-            debug: true
             text: Let's debug this code!
             code: |-
                 {print} 'This is the water park ticket machine'
@@ -477,6 +476,7 @@ levels:
                 {if} day {is} monday
                 total_price = total_price * 0.25
                 {print} 'That will be total_price please'
+            debug: true
         10:
             header: Nu sätter vi igång!
             text: Ha det kul med äventyren på nivå 6!
@@ -509,7 +509,6 @@ levels:
                 {else} {repeat} 3 {times} {print} 'You have learned something new!'
         5:
             header: Debugging
-            debug: true
             text: Let's debug this code!
             code: |-
                 {print} You gave stranded on a desert island.
@@ -522,6 +521,7 @@ levels:
                 {if} yes
                 {print} 'Hurray!
                 {else} 'That's a shame... Oh well... time to build a shelter and find some food.'
+            debug: true
         6:
             header: Klara, färdiga, gå!
             text: Ha det kul med äventyren på nivå 7!
@@ -588,7 +588,6 @@ levels:
                 För närvarande är detta inte möjligt. På de högre nivåerna kommer det att bli tillåtet, men nu ska vi fokusera på att öva kommandona `{if}` `{else}` och `{repeat}` med korrekt indrag först.
         9:
             header: Debugging
-            debug: true
             text: Let's debug this code!
             code: |-
                 {print} 'HedyWheels bus tickets machine'
@@ -609,6 +608,7 @@ levels:
                         {print} You chose a round trip ticket'
                 price * 2
                 {print} 'That will be ' price ' euros please'
+            debug: true
         10:
             header: Vi kollar in äventyren!
             text: Ha det kul med äventyren på nivå 8!
@@ -685,7 +685,6 @@ levels:
                         {print} 'pizza is better'
         8:
             header: Debugging
-            debug: true
             text: Let's debug this code!
             code: |-
                 {print} 'Welcome to HedyJumps, your parachute jump adventure!'
@@ -701,6 +700,7 @@ levels:
                 {else}
                 {print} 'Fun!'
                 {print} 'Thanks for filling in the safety questions everyone. Enjoy your jump!'
+            debug: true
         9:
             header: Nu kör vi!
             text: Ha det kul med äventyren på nivå 9!
@@ -725,7 +725,6 @@ levels:
                     {print} names {at} {random} ' does the dishes on ' day
         4:
             header: Debugging
-            debug: true
             text: Let's debug this code
             code: |-
                 {print} 'Ladies and gentlemen!'
@@ -738,6 +737,7 @@ levels:
                 {add} chosen_person {from} people
                 {print} 'Come and watch our show tonight!'
                 {print} 'Tickets are only available at the counter
+            debug: true
         5:
             header: Dags att programmera!
             text: Ha det kul med äventyren på nivå 10!
@@ -768,13 +768,13 @@ levels:
                     {print} i * number
         4:
             header: Debugging
-            debug: true
             text: Let's debug this code!
             code: |-
                 factor {is} {ask} 'Which table of multiplication do you need?'
                 {repeat} {for} numbers {in} {range} 1 {to} 10 {times}
                     {print} This is the table of multiplications for factor
                     {print} number ' x ' factor ' = ' i * factor
+            debug: true
         5:
             header: Låt oss börja programmera!
             text: Ha det kul med äventyren på nivå 11!
@@ -824,7 +824,6 @@ levels:
             text: As you could see in the example a function is a block of code that can be called anytime. You use `{define}` to set the function and `{call}` to use it.
         7:
             header: Debugging
-            debug: true
             text: Let's debug this code!
             code: |-
                 {call} new_member
@@ -838,6 +837,7 @@ levels:
                 {call} new member
                     {else}
                         password = {ask} 'Please enter password'
+            debug: true
         8:
             header: Ready to try it out?
             text: Enjoy the adventures in level 12!
@@ -924,7 +924,6 @@ levels:
                 {call} song {with} 'ocean'
         8:
             header: Debugging
-            debug: true
             text: Let's debug this code!
             code: |-
                 {define} happiness {with} name
@@ -946,6 +945,7 @@ levels:
                     {call} happiness {with} person
                 {else} mood = sad
                     {define} sadness {to} name
+            debug: true
         9:
             header: Let's go!
             text: Enjoy the adventures in level 13!
