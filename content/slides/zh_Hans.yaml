@@ -713,9 +713,9 @@ levels:
             header: The for command
             text: 使用 for 可以创建一个列表并使用该列表上的所有项目。 `{for}` 创建一个块，就像重复(repeat)一样，块中的所有行都需要以缩进（4 个空格）开头。
             code: |-
-                animals =狗、猫、水滴鱼
-                {for}动物 {在} animals 中
-                     {print}“我爱”动物
+                animals = 狗、猫、水滴鱼
+                {for} 动物 {in} animals
+                     {print} '我爱' 动物
         3:
             header: The for command
             text: 在这里您可以看到 `{for}` 命令的另一个示例：
@@ -1053,7 +1053,8 @@ levels:
             text: 在本级别中，你将学习如何使用冒号以及 elif 命令。
         2:
             header: Colon
-            text: '现在我们要稍微改变一下缩进。 每次我们需要缩进时，我们都需要在缩进之前的行添加 : 。'
+            text: |-
+                现在我们要稍微改变一下缩进。 每次我们需要缩进时，我们都需要在缩进之前的行添加 : 。
             code: |-
                 prices = ['1 million dollars', 'an apple pie', 'nothing']
                 your_price = prices[{random}]
@@ -1067,13 +1068,13 @@ levels:
             text: 在这个关卡中你还可以使用一个新命令：elif。 elif 是 else if 的缩写，当您想要创建 3 个（或更多！）选项时需要它。 一起来一探究竟！
             code: |-
                 prices = ['100 万美元', '苹果派', '什么都没有']
-                your_price = 价格[{随机}]
+                your_price = 价格[{random}]
                 {print} '你赢了 ' your_price
-                {if} your_price == '100万美元' ：
+                {if} your_price == '100万美元':
                      {print}'是啊！ 你好有钱！'
-                {elif} your_price == '一个苹果派'：
+                {elif} your_price == '一个苹果派':
                      {print} '可爱的苹果派！'
-                {else}：
+                {else}:
                      {print} '下次祝你好运..'
         4:
             header: 我们来试一下！
