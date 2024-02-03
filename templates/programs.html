@@ -11,14 +11,14 @@
         <div class="flex flex-row px-4 w-full items-center border border-gray-400 py-2 rounded-lg gap-4">
             <select name="level" class="block appearance-none w-1/3 bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 ltr:pr-8 rtl:pl-8 rounded" data-autosubmit="true">
                 <option selected value="">&mdash; {{_('level')}} &mdash;</option>
-                {% for i in range(1, (max_level + 1)) %}
-                    <option value="{{ i }}" {% if request.args.get('level') == i|string %}selected{% endif %}>{{ i }}</option>
+                {% for i in option_programs_levels %}
+                        <option value="{{ i }}" {% if request.args.get('level') == i|string %}selected{% endif %}>{{ i }}</option>
                 {% endfor %}
             </select>
             <select name="adventure" class="block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 ltr:pr-8 rtl:pl-8 rounded" data-autosubmit="true">
                 <option selected value="">&mdash; {{ _('adventure') }} &mdash;</option>
-                {% for name in adventure_levels_names[request.args.get('level')|int] %}
-                    <option value="{{ adventure_key }}" {% if request.args.get('adventure') == adventure_key %}selected{% endif %}>{{ name }}</option>
+                {% for name in option_programs_levels[request.args.get('level')|int] %}
+                    <option value="{{ name }}" {% if request.args.get('adventure') == name %}selected{% endif %}>{{ name }}</option>
                 {% endfor %}
             </select>
             <div class="flex flex-col mx-2">
@@ -98,7 +98,8 @@
             {% endif %}
         </div>
     </div>
-  {% endfor %}
+    {% endif %}
+{% endfor %}
 
     {% if second_teachers_programs %}
     {% if programs|length == 0 %}
