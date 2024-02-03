@@ -1567,11 +1567,14 @@ def view_program(user, id):
                            **arguments_dict)
 
 
-@app.route('/render_code/<level>/<code>', methods=['GET'])
-def render_code_in_editor(level, code):
+@app.route('/render_code/<level>/', methods=['GET'])
+def render_code_in_editor(level):
+    code = request.args['code']
 
     try:
         level = int(level)
+        if level == 0:  # in level 0, the intro slides, we use codes from level 1
+            level = 1
     except BaseException:
         return utils.error_page(error=404, ui_message=gettext('no_such_level'))
 
