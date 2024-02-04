@@ -12,7 +12,7 @@
             <select name="level" class="block appearance-none w-1/3 bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 ltr:pr-8 rtl:pl-8 rounded" data-autosubmit="true">
                 <option selected value="">&mdash; {{_('level')}} &mdash;</option>
                 {% for i in option_programs_levels %}
-                        <option value="{{ i }}" {% if request.args.get('level') == i|string %}selected{% endif %}>{{ i }}</option>
+                    <option value="{{ i }}" {% if request.args.get('level') == i|string %}selected{% endif %}>{{ i }}</option>
                 {% endfor %}
             </select>
             <select name="adventure" class="block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 ltr:pr-8 rtl:pl-8 rounded" data-autosubmit="true">
@@ -98,7 +98,7 @@
             {% endif %}
         </div>
     </div>
-{% endfor %}
+    {% endfor %}
 
     {% if second_teachers_programs %}
     {% if programs|length == 0 %}
