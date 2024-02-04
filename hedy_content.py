@@ -517,8 +517,8 @@ class Adventures(StructuredDataFile):
                 my_program_adventure_level[program['level']].append(adventure_names.get(program['adventure_name']))
             else:
                 my_program_adventure_level[program['level']] = [adventure_names.get(program['adventure_name'])]
-        for level in my_program_adventure_level:
-            my_program_adventure_level[level] = sorted(my_program_adventure_level[level], key=lambda s: s.lower())
+        for level, adventures in my_program_adventure_level.copy().items():
+            my_program_adventure_level[level] = sorted(adventures, key=lambda s: s.lower())
 
         return dict(sorted(my_program_adventure_level.items(), key=lambda item: item[0]))
 
