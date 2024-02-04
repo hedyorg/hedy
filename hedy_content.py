@@ -517,6 +517,9 @@ class Adventures(StructuredDataFile):
                 my_program_adventure_level[program['level']].append(adventure_names.get(program['adventure_name']))
             else:
                 my_program_adventure_level[program['level']] = [adventure_names.get(program['adventure_name'])]
+        for level in my_program_adventure_level:
+            my_program_adventure_level[level] = sorted(my_program_adventure_level[level], key=lambda s: s.lower())
+
         return dict(sorted(my_program_adventure_level.items(), key=lambda item: item[0]))
 
     def get_adventure_names(self, keyword_lang):
