@@ -1617,10 +1617,10 @@ class ConvertToPython_1(ConvertToPython):
         self.check_var_usage([note], meta.line)
 
         return textwrap.dedent(f"""\
-                chosen_note = {note}.upper()
+                chosen_note = str({note}).upper()
                 if chosen_note not in notes_mapping.keys() and chosen_note not in notes_mapping.values():
                     raise Exception({exception_text})
-                play(notes_mapping.get(str(chosen_note), str(chosen_note)))
+                play(notes_mapping.get(chosen_note, chosen_note))
                 time.sleep(0.5)""")
 
     def make_color(self, parameter, language):
