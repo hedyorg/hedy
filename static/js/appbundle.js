@@ -58035,8 +58035,9 @@ pygame.quit()
         if (urlParams.get("keyword_language") !== null) {
           urlParams.set("keyword_language", "en");
         }
-        if (urlParams.get("language") !== null) {
+        if (lang === "en" || urlParams.get("language") !== null) {
           urlParams.set("language", lang);
+          urlParams.set("keyword_language", lang);
           window.location.search = urlParams.toString();
         } else {
           location.reload();
