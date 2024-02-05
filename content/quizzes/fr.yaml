@@ -2123,16 +2123,18 @@ levels:
                 {for} plat {in} plats
                     {print} "J'aime les " plat
             mp_choice_options:
-            -   option: J'aime les pizzas
+            -   option: "```\nJ'aime les pizzas\n```"
                 feedback: La ligne 2 dit « pour chaque plat dans la liste des plats ». Donc chaque plat est affiché.
-            -   option: J'aime les pâtes
+            -   option: "```\nJ'aime les pâtes\n```"
                 feedback: La ligne 2 dit « pour chaque plat dans la liste des plats ». Donc chaque plat est affiché.
-            -   option: J'aime les crêpes
+            -   option: "```\nJ'aime les crêpes\n```"
                 feedback: La ligne 2 dit « pour chaque plat dans la liste des plats ». Donc chaque plat est affiché.
             -   option: |-
+                    ```
                     J'aime les pizzas
                     J'aime les pâtes
                     J'aime les crêpes
+                    ```
                 feedback: Super !
             hint: La ligne 2 dit « pour chaque plat dans la liste des plats ». Donc chaque plat est affiché.
             correct_answer: D
@@ -2144,15 +2146,17 @@ levels:
                 {for} animal {in} animaux
                     {print} "Les " animal " sont d'adorables animaux de compagnie"
             mp_choice_options:
-            -   option: Les chiens sont d'adorables animaux de compagnie
+            -   option: "```\nLes chiens sont d'adorables animaux de compagnie\n```"
                 feedback: La ligne 2 dit « pour chaque animal dans la liste des animaux ». Donc chaque animal est affiché.
-            -   option: Les chiens, chats, hamsters, poulets sont d'adorables animaux de compagnie
+            -   option: "```\nLes chiens, chats, hamsters, poulets sont d'adorables animaux de compagnie\n```"
                 feedback: Chaque animal aura sa propre ligne.
             -   option: |-
+                    ```
                     Les chiens sont d'adorables animaux de compagnie
                     Les chats sont d'adorables animaux de compagnie
                     Les hamsters sont d'adorables animaux de compagnie
                     Les poulets sont d'adorables animaux de compagnie
+                    ```
                 feedback: Super !
             -   option: Tu ne sais pas encore. Car le code choisi un animal au hasard
                 feedback: La ligne 2 dit « pour chaque animal dans la liste des animaux ». Donc chaque animal est affiché.
@@ -2198,85 +2202,91 @@ levels:
             correct_answer: B
             question_score: '10'
         6:
-            question_text: Combien de fois le mot 'Hello' apparaît-il sur ton écran lorsque tu exécutes le code ?
+            question_text: Laquelle des réponses ci-dessous est un affichage possible quand tu exécutes le code ?
             code: |-
-                for i in range 0 to 2
-                    print 'Hello'
+                choix = pierre, papier, ciseaux
+                joueuses = Nadine, Martine
+                {for} joueuse {in} joueuses
+                    {print} joueuse " choisi " choix {at}{random}
             mp_choice_options:
-            -   option: 1 fois
-                feedback: Non !
-            -   option: 2 fois
-                feedback: Non !
-            -   option: 3 fois
-                feedback: C'est ça !
-            -   option: 0 fois
-                feedback: Non !
-            hint: 0, 1, 2, cela fait 3 chiffres !
-            correct_answer: C
+            -   option: "```\nNadine choisi pierre\n```"
+                feedback: Martine veut jouer aussi !
+            -   option: "```\nMartine choisi ciseaux\nNadine choisi pierre\n```"
+                feedback: Tu étais vraiment près ! Mais, Nadine est la première dans la liste, donc elle choisira en premier.
+            -   option: "```\nMartine choisi papier\n```"
+                feedback: Nadine veut jouer aussi !
+            -   option: "```\nNadine choisi papier\nMartine choisi ciseaux\n```"
+                feedback: Génial !
+            hint: Chaque joueuse choisira un objet. La première joueuse dans la liste commence
+            correct_answer: D
             question_score: '10'
         7:
-            question_text: Quel est la ligne manquante ?
+            question_text: Quelle ligne doit être à la place de `_` dans ce code qui décide ce que les personnes vont manger pour dîner ?
             code: |-
-                print 'Bienvenue chez Hedy'
-                gens is ask 'Combien de personnes vont manger ici ce soir ?'
-                _?_
-                    plat is ask 'Que voulez-vous commander ?'
-                    print plat
+                noms = Ronan, Lucile, Anne, André
+                plats = pâtes, frites, salade
+                _
+                    {print} nom " devra manger " plats {at} {random} " pour le dîner"
             mp_choice_options:
-            -   option: for i in range 0 to 3
-                feedback: Il peut ne pas avoir 3 personnes
-            -   option: for i in range 1 to personnes
-                feedback: La variable `personnes` n'existe pas
-            -   option: for i in range 1 to gens
-                feedback: Bien !
-            -   option: for i in range 0 to gens
-                feedback: Il y aura une personne en trop !
-            hint: Il faut utiliser un for et la variable `gens`
-            correct_answer: C
+            -   option: "```\n{for} nom {in} noms\n```"
+                feedback: Bravo !
+            -   option: "```\n{for} noms {in} nom\n```"
+                feedback: Non, ce doit être pour chaque nom dans la liste nomS, donc dans l'autre sens
+            -   option: "```\n{for} plat {in} plats\n```"
+                feedback: Il faut dire à chaque nom ce qu'il doit manger pour dîner.
+            -   option: "```\n{for} nom {in} plats\n```"
+                feedback: Il faut dire à chaque nom ce qu'il doit manger pour dîner.
+            hint: Il faut dire à chaque nom ce qu'il doit manger pour dîner.
+            correct_answer: A
             question_score: '10'
         8:
-            question_text: Quelle sera la sortie de ce code ?
+            question_text: Que doit-on écrire à la place du `_` dans ce code qui décide quelle couleur de T-shirt chacun recevra ?
             code: |-
-                for i in range 23 to 25
-                    print 'hi'
+                noms = Diane, Thomas, Benoit
+                couleurs = bleu, rouge, violet
+                {for} nom {in} noms
+                    {print} _
             mp_choice_options:
             -   option: |-
-                    23
-                    24
-                    25
-                feedback: Attention aux guillemets !
-            -   option: 23 hi 24 hi 25 hi
+                    ```
+                    "nom recevra un T-shirt couleur"
+                    ```
+                feedback: Attention aux guillemets !
+            -   option: "```\nnom \" recevra un T-shirt \" couleurs {at}{random}\n```"
                 feedback: Excellent travail ! C'était difficile !
             -   option: |-
                     ```
-                    noms 'obtient une chemise de ' couleur  {at} {random}
+                    noms " recevra un T-shirt " couleurs {at}{random}
                     ```
-                feedback: Correct
-            -   option: Le mot 'hi' apparaîtra 25 fois
-                feedback: Attention on part de 23 !
-            hint: On n'affiche pas 'i'
-            correct_answer: C
+                feedback: Tu veux que chaque nom soit affiché séparément. Donc le premier mot ne doit pas être « noms » mais…
+            -   option: "```\nchacun recevra un T-shirt de couleur\n```"
+                feedback: Il n'y a aucune variable qui s'appelle « chacun »
+            hint: Fais attention aux guillemets et aux noms des variables
+            correct_answer: B
             question_score: '10'
         9:
-            question_text: Combien de fois Hedy chante 'Hip hip Hourra !' ?
+            question_text: Quelle est la première question que Hedy te pose quand tu exécutes ce programme ?
             code: |-
-                âge is ask 'Quel âge as-tu ?'
-                for i in range 1 to âge
-                    print is 'Hip hip Hourra !'
+                services = apéritif, plat principal, dessert
+                noms = Simon, Olivier
+                {for}  nom {in} noms
+                    {for} service {in} services
+                        plat = {ask} nom ", que veux-tu manger pour ton " service " ?"
+                        {print} nom " a commandé " plat " en " service
             mp_choice_options:
-            -   option: Timon, que veux-tu manger en guise d'entrée ?
-                feedback: Hélas non !
-            -   option: Onno, que veux-tu manger en guise d'entrée ?
-                feedback: Hélas non !
-            -   option: Timon, que veux-tu manger comme dessert ?
-                feedback: Hélas non !
-            -   option: Cela dépend de ton âge.
-                feedback: C'est ça !
-            hint: for i in range 1 to âge
-            correct_answer: D
+            -   option: Simon, que veux-tu manger pour ton apéritif ?
+                feedback: Parfait !
+            -   option: Olivier, que veux-tu manger pour ton apéritif ?
+                feedback: Simon est en premier dans la liste !
+            -   option: Simon, que veux-tu manger pour ton dessert ?
+                feedback: Apéritif est en premier dans la liste
+            -   option: Tu ne sais pas. Hedy choisira `{at} {random}`
+                feedback: Il n'y a pas de `{at} {random}` dans ce code…
+            hint: Ce sera le premier élément de chaque liste.
+            correct_answer: A
             question_score: '10'
         10:
-            question_text: Qu'est-ce qui est vrai dans ce code ?
+            question_text: Quelle affirmation est vraie à propos de ce code ?
             code: |-
                 les_prix = Le million de dollars, La voiture, Le sandwich
                 noms = Bob, Patrick, Sandy, Larry
