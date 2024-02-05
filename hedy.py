@@ -832,7 +832,7 @@ class TypeValidator(Transformer):
         return self.to_sum_typed_tree(tree, Command.division)
 
     def to_sum_typed_tree(self, tree, command):
-        rules = [int_to_float, input_to_int, input_to_float]
+        rules = [int_to_float, input_to_int, input_to_float, input_to_string]
         prom_left_type, prom_right_type = self.validate_binary_command_args_type(command, tree, rules)
         return TypedTree(tree.data, tree.children, tree.meta, prom_left_type)
 

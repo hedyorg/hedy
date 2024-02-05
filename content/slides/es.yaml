@@ -580,24 +580,24 @@ levels:
             header: Debugging
             text: Let's debug this code!
             code: |-
-                {print} 'HedyWheels bus tickets machine'
-                zone_1 = Town Hall, Library, Campus, Market Place
-                zone_2 = Swimming Pool, Skate Park, Mall, Airport
-                destination = 'Where do you want to go?'
-                {if} destination {in} zone 1
-                {print} destination 'is in zone 1'
-                price = 3 euros
-                    {if} destination {is} zone_2
-                {print} destination 'is in zone 2'
-                price = 6
-                ticket_types = {ask} 'Press 1 for a single use ticket.
-                Press 2 for a round trip ticket:'
-                {if} ticket_type = 1
-                {print} 'You chose a single use ticket'
+                {print} 'Máquina de billetes para el autobus HedyWheels'
+                zona_1 = Ayuntamiento, Biblioteca, Campus, Mercado
+                zona_2 = Piscina, Pista de patinaje, Centro comercial, Aeropuerto
+                destino = '¿Dónde quieres ir?'
+                {if} destino {in} zona 1
+                {print} destino 'está en zona 1'
+                precio = 3 euros
+                    {if} destino {is} zona_2
+                {print} destino 'está en zona 2'
+                precio = 6
+                tipos_billetes = {ask} 'Pulsa 1 para un billete sencillo.
+                Pulsa 2 para un ticket de ida y vuelta:'
+                {if} tipos_billetes = 1
+                {print} 'Elegiste un billete sencillo'
                 {else}
-                        {print} You chose a round trip ticket'
-                price * 2
-                {print} 'That will be ' price ' euros please'
+                        {print} Elegiste un billete de ida y vuelta'
+                precio * 2
+                {print} 'Serán ' precio ' euros por favor'
         10:
             header: ¡Vamos a ver las aventuras!
             text: ¡Disfruta las aventuras en el nivel 8!
@@ -676,19 +676,19 @@ levels:
             header: Debugging
             text: Let's debug this code!
             code: |-
-                {print} 'Welcome to HedyJumps, your parachute jump adventure!'
-                people = {ask} 'How many people are you jumping with today?
-                {print} 'We'll ask all of you some questions for safety reasons.'
-                extra_instructions_people = a, b
+                {print} '¡Bienvenido a HedyJumps, ¡tu aventura de salto en paracaídas!'
+                gente = {ask} '¡Con cuánta gente vas a saltar hoy?
+                {print} 'Por motivos de seguridad te haremos unas preguntas.'
+                instrucciones_extra_gente = a, b
                 {repeat} 3 {times}
-                    name = {ask} 'What is your name?'
-                jumped_before = 'Have you ever done a parachute jump before, ' name '?'
-                {if} jumped_before  no
-                {print} 'No worries, you'll get an extra safety instruction in room 13'
-                {add} name {to} extra_instructions_people
+                    nombre = {ask} '¿Cómo te llamas?'
+                experiencia_previa = '¿Has saltado alguna vez anterior en paracaídas, ' nombre '?'
+                {if} experiencia_previa  no
+                {print} 'No te preocupes, recibirás instrucciones de seguridad extra en la sala 13'
+                {add} nombre {to} instrucciones_extra_gente
                 {else}
-                {print} 'Fun!'
-                {print} 'Thanks for filling in the safety questions everyone. Enjoy your jump!'
+                {print} '¡Guay!'
+                {print} 'Gracias a todos por rellenar las preguntas de seguridad. ¡Disfruta tu salto!'
         9:
             header: ¡Vamos!
             text: ¡Disfruta las aventuras en el nivel 9!
@@ -715,16 +715,16 @@ levels:
             header: Debugging
             text: Let's debug this code
             code: |-
-                {print} 'Ladies and gentlemen!'
-                {print} 'For one night and one night only in circus Hedy!'
-                acts = shoot out of a canon, walk the tightrope, pack themself in a suitcase,
-                people = Iris the Incredible Achmed the Amazing Francis the Fantastic
-                    {for} people {in} acts
-                chosen_person {is} people {random}
-                    chosen_person ' will ' act
-                {add} chosen_person {from} people
-                {print} 'Come and watch our show tonight!'
-                {print} 'Tickets are only available at the counter
+                {print} '¡Señoras y señores!'
+                {print} '¡Por una noche y sólo una noche en el circo Hedy!'
+                actos = disparar desde un cañón, funambulismo, meterse en una maleta,
+                gente = Iris la Increíble Achmed el Maravilloso Francis el Fantástico
+                    {for} gente {in} actos
+                persona_elegida {is} gente {random}
+                    persona_elegida ' hará ' act
+                {add} persona_elegida {from} gente
+                {print} '¡Ven a ver nuestro espectáculo esta noche!'
+                {print} 'Las entradas sólo están disponibles en la taquilla
         5:
             header: ¡Hora de programar!
             text: ¡Disfruta las aventuras en el nivel 10!
@@ -757,10 +757,10 @@ levels:
             header: Debugging
             text: Let's debug this code!
             code: |-
-                factor {is} {ask} 'Which table of multiplication do you need?'
-                {repeat} {for} numbers {in} {range} 1 {to} 10 {times}
-                    {print} This is the table of multiplications for factor
-                    {print} number ' x ' factor ' = ' i * factor
+                factor {is} {ask} '¿Qué tabla de multiplicar necesitas?'
+                {repeat} {for} números {in} {range} 1 {to} 10 {times}
+                    {print} Esta es la tabla de multiplicaciones por un factor
+                    {print} número ' x ' factor ' = ' i * factor
         5:
             header: ¡Comencemos a programar!
             text: ¡Disfruta las aventuras en el nivel 11!
@@ -814,17 +814,17 @@ levels:
             header: Debugging
             text: Let's debug this code!
             code: |-
-                {call} new_member
-                {print} 'Hi new member!'
-                username = {ask} 'What is your username?'
-                password = 'What is your password?'
-                {print} 'Welcome to our club!'
+                {call} nuevo_miembro
+                {print} '¡Hola nuevo miembro!'
+                nombre_usuario = {ask} '¿Cuál es tu nombre de usuario?'
+                contraseña = '¿Cuál es tu contraseña?'
+                {print} '¡Bienvenido/a nuestro club!'
 
-                username = {ask} 'Please enter your username. Are you a new member? Type New Member'
-                {if} username = New Member
-                {call} new member
+                nombre_usuario = {ask} 'Por favor, introduce tu nombre de usuario. ¡Eres ya un miembro? Escribe Nuevo Miembro'
+                {if} nombre_usuario = Nuevo Miembro
+                {call} nuevo miembro
                     {else}
-                        password = {ask} 'Please enter password'
+                        contraseña = {ask} 'Por favor, introduce contraseña'
         8:
             header: ¿Listo para probarlo?
             text: ¡Disfruta de las aventuras en el nivel 12!
@@ -915,25 +915,25 @@ levels:
             header: Debugging
             text: Let's debug this code!
             code: |-
-                {define} happiness {with} name
+                {define} felicidad {with} nombre
                     {print} '🥳'
                 {play} G
                 {play} A
                 {play} B
-                {print} 'Party on, ' name
-                {define} sadness
+                {print} 'Fiesta, ' nombre
+                {define} tristeza
                 {print} '😞'
                 {play} E
                 {play} D
                 {play} C
-                {print} 'Hope you feel better, ' name
+                {print} 'Espero que te sientas mejor, ' nombre
 
-                name = {ask} 'What is your' name '?'
-                mood = {ask} 'Are you happy or sad?'
-                {if} mood = happy
-                    {call} happiness {with} person
-                {else} mood = sad
-                    {define} sadness {to} name
+                nombre = {ask} '¿Cómo te llamas '?'
+                estado = {ask} 'Estás contento o triste?'
+                {if} estado = contento
+                    {call} felicidad {with} persona
+                {else} estado = triste
+                    {define} tristeza {to} nombre
         9:
             header: ¡Vamos!
             text: ¡Disfruta de las aventuras en el nivel 13!
