@@ -1044,7 +1044,6 @@ def programs_page(user):
         public_profile=public_profile,
         sorted_level_programs=sorted_level_programs,
         sorted_adventure_programs=sorted_adventure_programs,
-        swapped_adventure_names=swapped_adventure_names,
         adventure_names=adventure_names,
         max_level=hedy.HEDY_MAX_LEVEL,
         next_page_url=next_page_url)
