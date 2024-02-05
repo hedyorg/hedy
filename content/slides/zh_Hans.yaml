@@ -54,18 +54,18 @@ levels:
 
                 我们需要三个文本代码来创作互动故事。
         2:
-            header: '{打印}'
+            header: '{print}'
             text: |-
                 可以在级别 1 中使用的第一个指令是`{print}`。
 
                 `{print}` 用于在屏幕上显示文本。
             code: '{print} Put text on the screen'
         3:
-            header: '{打印} 命令'
+            header: '{print} 命令'
             text: |-
-                你可以随意地修改 `{打印}` 命令后面的文字。
+                你可以随意地修改 `{print}` 命令后面的文字。
 
-                你也可以再添加一行 `{打印}` 命令，来打印多行文字。
+                你也可以再添加一行 `{print}` 命令，来打印多行文字。
             code: |-
                 {print}欢迎来到海蒂！
                 {print} 现在就开始编程吧！
@@ -571,7 +571,7 @@ levels:
                 现在这些 `{if}` 和 `{else}` 命令。
                 `{if}` 和 `{else}` 命令后面的每一行都以缩进开头。
             code: |-
-                name = {ask} '你叫什么名字？
+                name = {ask} '你叫什么名字？'
                 {if} 名字 {is} 海蒂
                      {print}“欢迎海蒂”
                 {else}
@@ -580,7 +580,7 @@ levels:
             header: stopping the indentation
             text: 就像使用 `{repeat}` 命令一样，你可以停止使用缩进，并且行将始终显示。 不仅仅是该陈述是否属实。
             code: |-
-                name = {ask} '你叫什么名字？
+                name = {ask} '你叫什么名字？'
                 {if} name {is} 海蒂
                      {print}“欢迎海蒂”
                 {else}
@@ -860,19 +860,19 @@ levels:
                 `{and}` 命令始终与 {if} 命令结合使用。
                 这样你就可以检查 2 个陈述是否正确。 例如：
             code: |-
-                name = {ask} '你叫什么名字？
-                age = {ask} '你的年龄是多少？'
+                name = {ask} '你叫什么名字？'
+                年龄 = {ask} '你的年龄是多少？'
                 {if} name {is} 'Hedy' {and} 年龄 {is} 2
-                     {print}“你是真正的海蒂！”
+                     {print} “你是真正的海蒂！”
         3:
-            header: The or command
+            header: The {or} command
             text: |-
                 `{or}` 与 `{and}` 命令的工作方式相同，但两个语句中只有一个必须为真。
 
                 让我们看看将 `{and}`更改为 `{or}`时会发生什么。
             code: |-
-                name = {ask} '你叫什么名字？
-                {if} name {is} 'Hedy' {或} name {is} 'hedy'
+                name = {ask} '你叫什么名字？'
+                {if} name {is} 'Hedy' {or} name {is} 'hedy'
                      {print}“欢迎！！”
         4:
             header: Functions with arguments
@@ -883,12 +883,12 @@ levels:
                 在此示例中，您将看到如何在函数中使用参数“place”。
                 运行代码并将“ocean”和“sea”更改为其他名称，然后查看会发生什么。
             code: |-
-                {define} song{with}地点
-                     {print}“我的邦妮在这个地方”
+                {define} song {with} 地点
+                     {print} "我的邦妮在这个地方"
 
-                {call} song{with}“海洋”
-                {call} song{with}“海”
-                {call} song{with}“海洋”
+                {call} song {with} "海洋"
+                {call} song {with} "海"
+                {call} song {with} "海洋"
         6:
             header: 变量示例
             text: |-
@@ -896,19 +896,19 @@ levels:
 
                 如果您进行这些更改，会发生什么：
                 ```
-                define song with place
+                {define} song {with} place
                     print '我的邦妮在' place
 
-                answer is ask '我的邦妮在哪里？'
-                call song with answer
+                answer {is} {ask} '我的邦妮在哪里？'
+                {call} song {with} answer
                 ```
             code: |-
-                {define} song{with} place
+                {define} song {with} place
                      {print} '我的邦妮在' place
 
-                {call}song{with}“海洋”
-                {call}song{with}“海”
-                {call}song{with}“海洋”
+                {call} song {with} "海洋"
+                {call} song {with} "海"
+                {call} song {with} "海洋"
         7:
             header: 还有更多问题！
             text: |-
@@ -925,12 +925,12 @@ levels:
                 用名字、地点叫歌
                 ```
             code: |-
-                {define} song{with} place
+                {define} song {with} place
                      {print} '我的邦妮在' place
 
-                {call}song{with}“海洋”
-                {call}song{with}“海”
-                {call}song{with}“海洋”
+                {call} song {with} "海洋"
+                {call} song {with} "海"
+                {call} song {with} "海洋"
         8:
             header: Debugging
             text: Let's debug this code!
@@ -977,7 +977,7 @@ levels:
 
                 你可以像这样使用它们：
             code: |-
-                age = {ask} '你多大了？
+                age = {ask} '你多大了？'
                 {if} age < 13
                      {print} '你比我年轻！'
                 {else}
@@ -1030,7 +1030,7 @@ levels:
                 在示例代码中，我们将继续下去，直到给出正确答案。 如果从未给出正确答案，循环将永远不会结束！
             code: |-
                 answer = 0
-                {while}answer！= 25
+                {while} answer != 25
                      answer = {ask} '5 乘以 5 是多少？'
                 {print} '已给出正确答案'
         3:
@@ -1045,10 +1045,9 @@ levels:
             text: 我们将以 Python 方式创建列表，用方括号将列表括起来！ 我们还保留每个项目周围的引号，就像我们在之前的级别中学到的那样。 我们使用方括号来指出列表中的位置。 at random 命令不能再使用。
             code: |-
                 friends = ['艾哈迈德'，'本'，'凯登']
-                {print} Friends[1] '是列表中的第一个朋友。'
-                {print} Friends[2] '是列表中的第二个朋友。'
-                {print} Friends[3] '是列表中的第三位朋友。'
-                #现在我们将使用变量 i 匹配 2 个列表
+                {print} friends[1] '是列表中的第一个朋友。'
+                {print} friends[2] '是列表中的第二个朋友。'
+                {print} friends[3] '是列表中的第三位朋友。'
                 lucky_numbers = [15, 18, 6]
                 {for} i {in} {range} 1 {to} 3
                      {print} friends[i] '的幸运数字是 ' lucky_numbers[i]
@@ -1068,7 +1067,7 @@ levels:
                 {print} '你赢了 ' your_price
                 {if} your_price == '100万美元' ：
                      {print}'是啊！ 你好有钱！'
-                {else}：
+                {else}:
                      {print} '下次祝你好运..'
         3:
             header: Elif
