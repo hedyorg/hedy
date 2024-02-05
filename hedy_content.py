@@ -522,6 +522,20 @@ class Adventures(StructuredDataFile):
 
         return dict(sorted(my_program_adventure_level.items(), key=lambda item: item[0]))
 
+    def get_my_program_adventure_levels2(self, programs2, adventure_names):
+        my_program_adventure_level2 = {}
+        for program in programs2:
+            if program['adventure_name'] in my_program_adventure_level2:
+                my_program_adventure_level2[program['adventure_name']].append(program['level'])
+            else:
+                my_program_adventure_level2[program['adventure_name']] = [program['level']]
+        for adventure, levels in my_program_adventure_level2.copy().items():
+            my_program_adventure_level2[adventure] = sorted(levels, key=lambda item: item)
+
+        # return dict(sorted(my_program_adventure_level2, key=lambda s: s.lower()))
+        return {key: my_program_adventure_level2[key]
+                for key in sorted(my_program_adventure_level2.keys(), key=lambda s: s.lower())}
+
     def get_adventure_names(self, keyword_lang):
         return {aid: adv['name'] for aid, adv in deep_translate_keywords(
             self.file.get('adventures'), keyword_lang).items()}

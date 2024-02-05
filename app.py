@@ -984,6 +984,12 @@ def programs_page(user):
                                                  pagination_token=page,
                                                  limit=10)
 
+    logger.debug(level)
+    logger.debug(adventure)
+    logger.debug(type(adventure))
+    logger.debug(result)
+    logger.debug("HAI")
+
     programs = []
     for item in result:
         date = utils.delta_timestamp(item['date'])
@@ -1017,8 +1023,19 @@ def programs_page(user):
 
     keyword_lang = g.keyword_lang
     adventure_names = hedy_content.Adventures(g.lang).get_adventure_names(keyword_lang)
+
+    option_programs2 = []
+    for item in all_programs:
+        option_programs2.append(
+            {'adventure_name': adventure_names.get(item.get('adventure_name')),
+             'level': item['level'],
+             }
+        )
+
     option_programs_levels = hedy_content.Adventures(
         g.lang).get_my_program_adventure_levels(option_programs, adventure_names)
+    option_programs_levels2 = hedy_content.Adventures(
+        g.lang).get_my_program_adventure_levels2(option_programs2, adventure_names)
 
     next_page_url = url_for('programs_page', **dict(request.args, page=result.next_page_token)
                             ) if result.next_page_token else None
@@ -1031,6 +1048,7 @@ def programs_page(user):
         from_user=from_user,
         public_profile=public_profile,
         option_programs_levels=option_programs_levels,
+        option_programs_levels2=option_programs_levels2,
         adventure_names=adventure_names,
         max_level=hedy.HEDY_MAX_LEVEL,
         next_page_url=next_page_url)
