@@ -231,8 +231,8 @@ adventures:
         levels:
             3:
                 story_text: |
-                    ## 添加到
-                    您可以使用“{add} {to}”令将项目添加到列表中。要将项目添加到列表中，您只需键入：“{add} 企鹅 {to} 动物”或者您可以使用“{ask}”命令，如示例代码所示。
+                    ## 添加
+                    您可以使用`{add} {to_list}`命令将项目添加到列表中。 要将项目添加到列表中，您只需键入：`{add} penguin {to_list} animals`，或者您可以使用`{ask}`命令，如示例代码中所示。
                 example_code: |
                     ```
                     动物 {is} 狗， 猫， 袋鼠
@@ -744,7 +744,7 @@ adventures:
                     调试这段代码。 祝你好运！
                 example_code: |-
                     **警告！ 这段代码需要调试！**
-                    ````
+                    ```
                     {print}“欢迎来到 Hedy 的美甲和足疗”
                     bodypart = {ask} '你今天修指甲或脚趾甲了吗？ 或两者？'
                     {if} 身体部位 {is} 两者
@@ -762,14 +762,29 @@ adventures:
                     {sleep} 5
                     {print} '全部完成！ 那将是$'价格'拜托！'
                     {print}'谢谢！ 再见！'
-                    ````
+                    ```
+
+                            {print} That will be $25'
+                            price = 25
+                        {else}
+                            {print} That will be $18'
+                            price = 18
+                    color = {ask} What color would you like?
+                    sparkles = {ask} 'Would you like some sparkles with that?'
+                    {if} sparkles {is} yes
+                        {print} 'We charge $3 extra for that'
+                    price = price + 3
+                    {else} {print} 'No sparkles' {print} 'So no extra charge'
+                    {sleep} 5
+                    {print} 'All done! That will be $' price ' please!'
+                    {print} 'Thank you! Byebye!'
             9:
                 story_text: |-
                     ### 练习
                     调试这段代码。 祝你好运！
                 example_code: |
                     **警告！ 这段代码需要调试！**
-                    ````
+                    ```
                     {print} '欢迎来到我们的三明治店'
                     amount “您想买多少个三明治？”
                     {repeat}amoumt{times}
@@ -784,21 +799,7 @@ adventures:
                     {print} 一份choice_bread，配上配料和酱汁。
                     price =amount*6
                     {print} '这将是'价格美元''
-                    ````
-
-                    amount “您想买多少个三明治？”
-                    {repeat}amount{times}
-                    {ask} {is} {ask} '您想要什么类型的三明治或面包？'
-                    types_of_bread {is} 白面包、小麦面包、黑麦面包、大蒜面包、无麸质面包
-                    {if} chosen_bread 在 types_of_bread 中
-                    {print}“可爱！”
-                    {else}
-                    “抱歉我们不卖那个”
-                    topping {is} {ask} '您想要什么类型的配料？'
-                    sauce{is} {ask}“您想要什么类型的酱？”
-                    {print} 一份choice_bread，配上配料和酱汁。
-                    price =amount*6
-                    {print} '这将是'价格美元''
+                    ```
             10:
                 story_text: |-
                     ### 练习
@@ -2243,7 +2244,7 @@ adventures:
     in_command:
         name: '{in}'
         default_save_name: in_command
-        description: Introducing the in command
+        description: 介绍 in 命令
         levels:
             5:
                 story_text: |
@@ -2382,12 +2383,12 @@ adventures:
             6:
                 story_text: |2
 
-                            In this level you learn something new: you can now also calculate.
+                                In this level you learn something new: you can now also calculate.
 
-                            The plus is easy, you write it like with math: `5 + 5` for example. The minus also works fine, it is `5 - 5`.
+                                The plus is easy, you write it like with math: `5 + 5` for example. The minus also works fine, it is `5 - 5`.
 
-                            The times is a bit different, because there is no times symbol on your keyboard. Just search, there really isn't!
-                            That is why we multiply with the asterisk above 8: `5 * 5`. Read that as "5 times 5" that helps you remember it best.
+                                The times is a bit different, because there is no times symbol on your keyboard. Just search, there really isn't!
+                                That is why we multiply with the asterisk above 8: `5 * 5`. Read that as "5 times 5" that helps you remember it best.
                 example_code: |
                     ```
                     {print} '5 plus 5 is ' 5 + 5
