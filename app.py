@@ -971,6 +971,10 @@ def programs_page(user):
     if not from_user:
         public_profile = DATABASE.get_public_profile_settings(username)
 
+    keyword_lang = g.keyword_lang
+    adventure_names = hedy_content.Adventures(g.lang).get_adventure_names(keyword_lang)
+    swapped_adventure_names = {value: key for key, value in adventure_names.items()}
+
     level = request.args.get('level', default=None, type=str) or None
     adventure = request.args.get('adventure', default=None, type=str) or None
     page = request.args.get('page', default=None, type=str)
@@ -979,16 +983,10 @@ def programs_page(user):
 
     result = DATABASE.filtered_programs_for_user(from_user or username,
                                                  level=level,
-                                                 adventure=adventure,
+                                                 adventure=swapped_adventure_names.get(adventure),
                                                  submitted=submitted,
                                                  pagination_token=page,
                                                  limit=10)
-
-    logger.debug(level)
-    logger.debug(adventure)
-    logger.debug(type(adventure))
-    logger.debug(result)
-    logger.debug("HAI")
 
     programs = []
     for item in result:
@@ -1013,29 +1011,26 @@ def programs_page(user):
                                                        pagination_token=page,
                                                        limit=10)
 
-    option_programs = []
+    programs_by_level = []
     for item in all_programs:
-        option_programs.append(
+        programs_by_level.append(
             {'level': item['level'],
              'adventure_name': item.get('adventure_name'),
              }
         )
 
-    keyword_lang = g.keyword_lang
-    adventure_names = hedy_content.Adventures(g.lang).get_adventure_names(keyword_lang)
-
-    option_programs2 = []
+    programs_by_adventure = []
     for item in all_programs:
-        option_programs2.append(
+        programs_by_adventure.append(
             {'adventure_name': adventure_names.get(item.get('adventure_name')),
              'level': item['level'],
              }
         )
 
-    option_programs_levels = hedy_content.Adventures(
-        g.lang).get_my_program_adventure_levels(option_programs, adventure_names)
-    option_programs_levels2 = hedy_content.Adventures(
-        g.lang).get_my_program_adventure_levels2(option_programs2, adventure_names)
+    sorted_level_programs = hedy_content.Adventures(
+        g.lang).get_sorted_level_programs(programs_by_level, adventure_names)
+    sorted_adventure_programs = hedy_content.Adventures(
+        g.lang).get_sorted_adventure_programs(programs_by_adventure)
 
     next_page_url = url_for('programs_page', **dict(request.args, page=result.next_page_token)
                             ) if result.next_page_token else None
@@ -1047,8 +1042,9 @@ def programs_page(user):
         current_page='programs',
         from_user=from_user,
         public_profile=public_profile,
-        option_programs_levels=option_programs_levels,
-        option_programs_levels2=option_programs_levels2,
+        sorted_level_programs=sorted_level_programs,
+        sorted_adventure_programs=sorted_adventure_programs,
+        swapped_adventure_names=swapped_adventure_names,
         adventure_names=adventure_names,
         max_level=hedy.HEDY_MAX_LEVEL,
         next_page_url=next_page_url)

@@ -510,31 +510,30 @@ class Adventures(StructuredDataFile):
     def get_adventure_keyname_name_levels(self):
         return {aid: {adv['name']: list(adv['levels'].keys())} for aid, adv in self.file.get('adventures', {}).items()}
 
-    def get_my_program_adventure_levels(self, programs, adventure_names):
-        my_program_adventure_level = {}
+    def get_sorted_level_programs(self, programs, adventure_names):
+        sort = {}
         for program in programs:
-            if program['level'] in my_program_adventure_level:
-                my_program_adventure_level[program['level']].append(adventure_names.get(program['adventure_name']))
+            if program['level'] in sort:
+                sort[program['level']].append(adventure_names.get(program['adventure_name']))
             else:
-                my_program_adventure_level[program['level']] = [adventure_names.get(program['adventure_name'])]
-        for level, adventures in my_program_adventure_level.copy().items():
-            my_program_adventure_level[level] = sorted(adventures, key=lambda s: s.lower())
+                sort[program['level']] = [adventure_names.get(program['adventure_name'])]
+        for level, adventures in sort.copy().items():
+            sort[level] = sorted(adventures, key=lambda s: s.lower())
 
-        return dict(sorted(my_program_adventure_level.items(), key=lambda item: item[0]))
+        return dict(sorted(sort.items(), key=lambda item: item[0]))
 
-    def get_my_program_adventure_levels2(self, programs2, adventure_names):
-        my_program_adventure_level2 = {}
-        for program in programs2:
-            if program['adventure_name'] in my_program_adventure_level2:
-                my_program_adventure_level2[program['adventure_name']].append(program['level'])
+    def get_sorted_adventure_programs(self, programs):
+        sort = {}
+        for program in programs:
+            if program['adventure_name'] in sort:
+                sort[program['adventure_name']].append(program['level'])
             else:
-                my_program_adventure_level2[program['adventure_name']] = [program['level']]
-        for adventure, levels in my_program_adventure_level2.copy().items():
-            my_program_adventure_level2[adventure] = sorted(levels, key=lambda item: item)
+                sort[program['adventure_name']] = [program['level']]
+        for adventure, levels in sort.copy().items():
+            sort[adventure] = sorted(levels, key=lambda item: item)
 
-        # return dict(sorted(my_program_adventure_level2, key=lambda s: s.lower()))
-        return {key: my_program_adventure_level2[key]
-                for key in sorted(my_program_adventure_level2.keys(), key=lambda s: s.lower())}
+        return {key: sort[key]
+                for key in sorted(sort.keys(), key=lambda s: s.lower())}
 
     def get_adventure_names(self, keyword_lang):
         return {aid: adv['name'] for aid, adv in deep_translate_keywords(

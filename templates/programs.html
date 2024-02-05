@@ -4,7 +4,6 @@
 <div class="px-8 py-12 max-w-screen-xl mx-auto">
   {% if from_user %}<h2>{{from_user}}'s recent programs</h2>
   {% else %}<h2>{{_('recent')}}</h2>{% endif %}
-  {{option_programs_levels2}}
   <div class="w-full mb-8" id="program_filter">
     <form>
         <input type="hidden" name="page" value=""> <!-- Submitting the form resets the page -->
@@ -13,11 +12,11 @@
             <select name="level" class="block appearance-none w-1/3 bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 ltr:pr-8 rtl:pl-8 rounded" data-autosubmit="true">
                 <option selected value="">&mdash; {{_('level')}} &mdash;</option>
                 {% if not request.args.get('adventure') %}
-                    {% for i in option_programs_levels %}
+                    {% for i in sorted_level_programs %}
                         <option value="{{ i }}" {% if request.args.get('level') == i|string %}selected{% endif %}>{{ i }}</option>
                     {% endfor %}
                 {% else %}
-                    {% for i in option_programs_levels2[request.args.get('adventure')] %}
+                    {% for i in sorted_adventure_programs[request.args.get('adventure')] %}
                         <option value="{{ i }}" {% if request.args.get('level') == i|string %}selected{% endif %}>{{ i }}</option>
                     {% endfor %}
                 {% endif %}
@@ -25,11 +24,11 @@
             <select name="adventure" class="block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 ltr:pr-8 rtl:pl-8 rounded" data-autosubmit="true">
                 <option selected value="">&mdash; {{ _('adventure') }} &mdash;</option>
                 {% if request.args.get('level') %}
-                    {% for name in option_programs_levels[request.args.get('level')|int] %}
+                    {% for name in sorted_level_programs[request.args.get('level')|int] %}
                         <option value="{{ name }}" {% if request.args.get('adventure') == name %}selected{% endif %}>{{ name }}</option>
                     {% endfor %}
                 {% else %}
-                    {% for name in option_programs_levels2 %}
+                    {% for name in sorted_adventure_programs %}
                         <option value="{{ name }}" {% if request.args.get('adventure') == name %}selected{% endif %}>{{ name }}</option>
                     {% endfor %}
                 {% endif %}
