@@ -14184,7 +14184,7 @@ var hedyApp = (() => {
     add: "aldonu|add",
     and: "kaj|and",
     ask: "demandu|ask",
-    at: "la\u016D|at",
+    at: "la\u016D|lau|laux|at",
     black: "nigra|black",
     blue: "blua|blue",
     brown: "bruna|brown",
@@ -14194,11 +14194,11 @@ var hedyApp = (() => {
     comma: ",",
     def: "def",
     define: "define",
-    echo: "e\u0125u|echo",
+    echo: "e\u0125u|ehhu|ehxu|e^hu|eh^u|echo",
     elif: "alie se|elif",
     else: "alie|else",
     for: "por|for",
-    forward: "anta\u016Den|forward",
+    forward: "anta\u016Den|antauen|antauxen|forward",
     from: "el|from",
     gray: "griza|gray",
     green: "verda|green",
@@ -14208,8 +14208,8 @@ var hedyApp = (() => {
     is: "estas|is",
     left: "maldekstren|left",
     length: "longo|length",
-    or: "a\u016D|or",
-    orange: "oran\u011Da|orange",
+    or: "a\u016D|au|aux|or",
+    orange: "oran\u011Da|orangha|orangxa|oran^ga|orang^a|orange",
     pink: "rozkolora|pink",
     play: "play",
     pressed: "pressed",
@@ -14217,15 +14217,15 @@ var hedyApp = (() => {
     purple: "purpura|purple",
     random: "hazardo|random",
     range: "intervalo|range",
-    red: "ru\u011Da|red",
+    red: "ru\u011Da|rugha|rugxa|ru^ga|rug^a|red",
     remove: "forigu|remove",
     repeat: "ripetu|repeat",
     return: "return",
     right: "dekstren|right",
     sleep: "dormu|sleep",
-    step: "pa\u015Do|step",
+    step: "pa\u015Do|pasho|pasxo|pa^so|pas^o|step",
     times: "fojojn|times",
-    to: "\u011Dis|to",
+    to: "\u011Dis|ghis|gxis|^gis|g^is|to",
     to_list: "al|to",
     turn: "turnu|turn",
     while: "dum|while",
@@ -15360,7 +15360,7 @@ var hedyApp = (() => {
     step: "passo|step",
     times: "vezes|times",
     to: "para|to",
-    to_list: "at\xE9|to",
+    to_list: "a|to",
     turn: "gire|turn",
     while: "enquanto|while",
     white: "branco|white",
@@ -16186,12 +16186,12 @@ var hedyApp = (() => {
     black: "\u9ED1\u8272|black",
     blue: "\u84DD\u8272|blue",
     brown: "\u68D5\u8272|brown",
-    call: "call",
+    call: "\u8C03\u7528|call",
     clear: "\u6E05\u9664|clear",
     color: "\u989C\u8272|color",
-    comma: "\uFF0C|\u3001|,",
-    def: "def",
-    define: "define",
+    comma: "\uFF0C|,",
+    def: "\u5B9A\u4E49\u51FD\u6570|def",
+    define: "\u5B9A\u4E49|define",
     echo: "\u56DE\u58F0|echo",
     elif: "\u5426\u5219\u5982\u679C|elif",
     else: "\u5426\u5219|else",
@@ -16209,7 +16209,7 @@ var hedyApp = (() => {
     or: "\u6216|or",
     orange: "\u6A59\u8272|orange",
     pink: "\u7C89\u7EA2\u8272|pink",
-    play: "play",
+    play: "\u8FD0\u884C|play",
     pressed: "\u6309\u4E0B|pressed",
     print: "\u6253\u5370|print",
     purple: "\u7D2B\u8272|purple",
@@ -16218,7 +16218,7 @@ var hedyApp = (() => {
     red: "\u7EA2\u8272|red",
     remove: "\u79FB\u9664|remove",
     repeat: "\u91CD\u590D|repeat",
-    return: "return",
+    return: "\u8FD4\u56DE|return",
     right: "\u53F3|right",
     sleep: "\u7761\u7720|sleep",
     step: "\u6B65|step",
@@ -16226,9 +16226,9 @@ var hedyApp = (() => {
     to: "\u5230|to",
     to_list: "\u5230|to",
     turn: "\u65CB\u8F6C|turn",
-    while: "\u5F53\u7684\u65F6\u5019|while",
+    while: "\u5F53|while",
     white: "\u767D\u8272|white",
-    with: "with",
+    with: "\u5BF9|with",
     yellow: "\u9EC4\u8272|yellow",
     DIGIT: "0123456789"
   };
@@ -17176,7 +17176,7 @@ var hedyApp = (() => {
       "unsaved_class_changes": "There are unsaved changes, are you sure you want to leave this page?"
     },
     "nl": {
-      "CheckInternet": "Controleer even of je internetverbinding het nog doet.",
+      "CheckInternet": "Controleer of jouw internetverbinding wel goed werkt.",
       "Connection_error": "We konden niet goed met de server praten.",
       "Empty_output": "Deze code werkt wel, maar print niks. Voeg een print commando toe aan je code of gebruik de schildpad om output te krijgen.",
       "Errors_found": "Je hebt een foutje gemaakt! Maak je geen zorgen, Hedy probeert de fouten te vinden",
@@ -17806,7 +17806,7 @@ var hedyApp = (() => {
       "unsaved_class_changes": "There are unsaved changes, are you sure you want to leave this page?"
     },
     "zh_Hans": {
-      "CheckInternet": "\u67E5\u770B\u4E00\u4E0B\u4F60\u7684\u7F51\u7EDC\u8FDE\u63A5\u662F\u5426\u6B63\u5E38.",
+      "CheckInternet": "\u68C0\u67E5\u60A8\u7684\u4E92\u8054\u7F51\u8FDE\u63A5\u662F\u5426\u6B63\u5E38\u3002",
       "Connection_error": "\u6211\u4EEC\u65E0\u6CD5\u8FDE\u63A5\u5230\u670D\u52A1\u5668\u3002",
       "Empty_output": "\u8FD9\u6BB5\u4EE3\u7801\u53EF\u4EE5\u5DE5\u4F5C\uFF0C\u4F46\u6CA1\u6709\u6253\u5370\u4EFB\u4F55\u4E1C\u897F\u3002\u5728\u4F60\u7684\u4EE3\u7801\u4E2D\u6DFB\u52A0\u4E00\u4E2A\u6253\u5370\u547D\u4EE4\uFF0C\u6216\u8005\u4F7F\u7528\u4E4C\u9F9F\u6765\u83B7\u5F97\u8F93\u51FA\u3002",
       "Errors_found": "\u4F60\u641E\u9519\u4E86\uFF01\u4E0D\u8981\u7740\u6025\uFF0C\u6211\u4EEC\u4ECD\u7136\u8FD0\u884C\u8BE5\u7A0B\u5E8F",
@@ -17831,9 +17831,9 @@ var hedyApp = (() => {
       "restaurant": "\u{1F363}, \u{1F355}, \u{1F354}",
       "rock": "\u2702\uFE0F, \u{1F4DC}, \u{1F5FB}",
       "songs": "\u{1F3B5},\u{1F3B6}",
-      "teacher_welcome": "Welcome to Hedy! Your are now the proud owner of a teachers account which allows you to create classes and invite students.",
+      "teacher_welcome": "\u6B22\u8FCE\u6765\u5230\u6D77\u8482\uFF01 \u60A8\u73B0\u5728\u662F\u6559\u5E08\u5E10\u6237\u7684\u81EA\u8C6A\u62E5\u6709\u8005\uFF0C\u8BE5\u5E10\u6237\u5141\u8BB8\u60A8\u521B\u5EFA\u8BFE\u7A0B\u5E76\u9080\u8BF7\u5B66\u751F\u3002",
       "turtle": "\u{1F422}",
-      "unsaved_class_changes": "There are unsaved changes, are you sure you want to leave this page?"
+      "unsaved_class_changes": "\u6709\u672A\u4FDD\u5B58\u7684\u66F4\u6539\uFF0C\u60A8\u786E\u5B9A\u8981\u79BB\u5F00\u6B64\u9875\u9762\u5417\uFF1F"
     },
     "zh_Hant": {
       "CheckInternet": "Check whether your Internet connection is working.",
@@ -58032,11 +58032,9 @@ pygame.quit()
       if (response.succes) {
         const queryString = window.location.search;
         const urlParams = new URLSearchParams(queryString);
-        if (urlParams.get("keyword_language") !== null) {
-          urlParams.set("keyword_language", "en");
-        }
-        if (urlParams.get("language") !== null) {
+        if (lang === "en" || urlParams.get("language") !== null) {
           urlParams.set("language", lang);
+          urlParams.set("keyword_language", lang);
           window.location.search = urlParams.toString();
         } else {
           location.reload();

@@ -832,7 +832,7 @@ class TypeValidator(Transformer):
         return self.to_sum_typed_tree(tree, Command.division)
 
     def to_sum_typed_tree(self, tree, command):
-        rules = [int_to_float, input_to_int, input_to_float]
+        rules = [int_to_float, input_to_int, input_to_float, input_to_string]
         prom_left_type, prom_right_type = self.validate_binary_command_args_type(command, tree, rules)
         return TypedTree(tree.data, tree.children, tree.meta, prom_left_type)
 
@@ -1617,10 +1617,10 @@ class ConvertToPython_1(ConvertToPython):
         self.check_var_usage([note], meta.line)
 
         return textwrap.dedent(f"""\
-                chosen_note = {note}.upper()
+                chosen_note = str({note}).upper()
                 if chosen_note not in notes_mapping.keys() and chosen_note not in notes_mapping.values():
                     raise Exception({exception_text})
-                play(notes_mapping.get(str(chosen_note), str(chosen_note)))
+                play(notes_mapping.get(chosen_note, chosen_note))
                 time.sleep(0.5)""")
 
     def make_color(self, parameter, language):

@@ -31,21 +31,21 @@ levels:
         6:
             header: Programmazione a Hedy
             text: Le parole in codice verranno visualizzate in rosa.
-            code: '{stampa} Benvenuto a Hedy!'
+            code: '{print} Benvenuto a Hedy!'
         7:
             header: Programmazione a Hedy
             text: Iniziamo il codice con il pulsante Esegui codice sotto il codice.
-            code: '{stampa} Benvenuto a Hedy!'
+            code: '{print} Benvenuto a Hedy!'
         8:
             header: Programmazione a Hedy
             text: Output appears on the left-hand side.
-            code: '{stampa} Benvenuto a Hedy!'
+            code: '{print} Benvenuto a Hedy!'
         9:
             header: Programmazione a Hedy
             text: L'output può anche essere un disegno.
             code: |-
-                {avanti} 100
-                {Gira} a sinistra
+                {forward} 100
+                {turn} sinistra
     1:
         1:
             header: Benvenuti al livello 1!
@@ -54,55 +54,59 @@ levels:
 
                 Abbiamo bisogno di tre codici di testo per creare storie interattive.
         2:
-            header: '{stampa}'
+            header: '{print}'
             text: |-
                 Il primo codice che puoi utilizzare nel livello 1 è `{print}`.
 
-                "{print}" viene utilizzato per mostrare il testo sullo schermo.
+                `{print}` viene utilizzato per mostrare il testo sullo schermo.
             code: '{print} Mostra il testo sullo schermo'
         3:
-            header: Il comando {stampa}
+            header: Il comando {print}
             text: |-
                 The second code that you can use in level 1 is `{ask}`.
 
                 `{ask}` is used to ask a question that can be answered.
             code: |-
-                {stampa} Benvenuto a Hedy!
+                {print} Benvenuto a Hedy!
                 {print} Inizia a programmare adesso!
         4:
-            header: 'Hedy level 1: {echo}'
+            header: '{ask}'
             text: |-
-                The final text code that you can use in level 1 is `{echo}`.
+                The second code that you can use in level 1 is `{ask}`.
 
-                `{echo}` is used to repeat the answer of an `{ask}`.
+                `{ask}` is used to ask a question that can be answered.
             code: |-
-                {print} Hello!
-                {ask} What is your name?
-                {echo} hello
+                {print} Welcome to your own rock scissors paper!
+                {ask} What will you choose?
         5:
-            header: Programming!
+            header: '{echo}'
             text: |-
-                with `{print}`, `{ask}` and `{echo}` you can already create a little story.
-                This is a good time to try the Parrot, Story and Rock, Paper Scissors adventures.
+                As you could see in the previous example. If you use the `{ask}` command, you can ask a question.
+                The answer, however doesn't show in the output screen.
+
+                If you do want the answer to show, you can use the final command of this level: `{echo}`.
+                `{echo}` is used to repeat the answer of an `{ask}`.
             code: |-
                 {print} Hello!
                 {ask} What is your name?
                 {echo} hello
         6:
             header: Programming!
-            text: Adventures are shown in tabs.
+            text: |-
+                With `{print}`, `{ask}` and `{echo}` you can already create a little story.
+                This is a good time to try the Parrot, Story and Rock, Paper Scissors adventures.
             editor: /hedy/1
         7:
             header: Programming!
+            text: Adventures are shown in tabs.
+            editor: /hedy/1
+        8:
+            header: Programming!
             text: The yellow arrow buttons can be used to copy examples.
             editor: /hedy#print_command
-        8:
+        9:
             header: Drawing with the turtle
             text: Now that we have seen at text codes, we will now look at drawing codes next.
-            editor: /hedy#print_command
-        9:
-            header: 'Drawing with the turtle: {forward}'
-            text: '`{forward}` is used to move the turtle forward.'
         10:
             header: 'Drawing with the turtle: {forward}'
             text: '`{forward}` is used to move the turtle forward.'
@@ -121,6 +125,7 @@ levels:
                 {print} What song would you like to hear?
                 {ask} I like that song too!
                 {print} Next up... {echo}
+            debug: true
         13:
             header: Let the programming fun begin!
             text: Enjoy the adventures in level 1!
@@ -189,6 +194,7 @@ levels:
                 {print} I'll go get your donut. {sleep}
                 {print} Here you go! A filling donut with toping!
                 {ask} Have a nice day!
+            debug: true
         8:
             header: Let the programming fun begin!
             text: Enjoy the adventures in level 2!
@@ -202,9 +208,7 @@ levels:
                 You make a list with `{is}`.
 
                 Separate the items on your list with a comma.
-            code: |-
-                animals {is} dogs, cats, kangaroos
-                ```
+            code: animals {is} dogs, cats, kangaroos
         3:
             header: At random
             text: |-
@@ -214,14 +218,12 @@ levels:
             code: |-
                 animals {is} dogs, cats, kangaroos
                 {print} animals {at} {random}
-                ```
         4:
             header: At random in a sentence
             text: You can use the `{at}` `{random}` command in a sentence as well.
             code: |-
                 animals {is} dogs, cats, kangaroos
                 {print} My favorite animal is animals {at} {random}
-                ```
         5:
             header: Add to
             text: |-
@@ -257,6 +259,7 @@ levels:
                 {print} or do you prefer... second_choice {at} {random}
                 {remove} second_choice {to} music_genres
                 {print} I like music_genre {random} best!
+            debug: true
         8:
             header: Let's get to work!
             text: Enjoy the adventures in level 3!
@@ -271,6 +274,7 @@ levels:
             code: |-
                 name {is} Sophie
                 {print} My name is name
+            debug: true
         3:
             header: Fixing it with quotation marks
             text: |-
@@ -308,6 +312,7 @@ levels:
 
                 Please try to print a contraction like "you're" or "I'm" in the screen below and see what happens....
             code: '{print} ''This won''t work!'''
+            debug: true
         9:
             header: Ready, Set, Go!
             text: Enjoy the adventures in level 4!
@@ -332,6 +337,7 @@ levels:
                 colors {is} 'orange, silver, white, brown'
                 {print} 'I love the colors {at} {random} one!'
                 choice {is} {ask} Which one do you like?
+            debug: true
         11:
             header: Ready, Set, Go!
             text: Enjoy the adventures in level 4!
@@ -354,6 +360,7 @@ levels:
                 When using the `{if}` command, don't forget to use the `{print}` command.
                 This code will not work!
             code: '{if} name {is} Hedy ''nice'''
+            debug: true
         4:
             header: else
             text: |-
@@ -399,6 +406,7 @@ levels:
                 item_to_declare {is} {ask} 'What would you like to declare'
                 {else} Alright
                 {print} Thank you. Please head to gate A22.'
+            debug: true
         8:
             header: Let's go!
             text: Enjoy the adventures in level 5!
@@ -463,6 +471,7 @@ levels:
                 {if} day {is} monday
                 total_price = total_price * 0.25
                 {print} 'That will be total_price please'
+            debug: true
         10:
             header: Let's get to work!
             text: Enjoy the adventures in level 6!
@@ -485,6 +494,7 @@ levels:
             header: Don't forget the print command
             text: When using the repeat command, do not forget the `{print}` command.
             code: '{repeat} 5 {times} ''Help!'''
+            debug: true
         4:
             header: Repeat an ask command
             text: You can also repeat an `{ask}`, `{if}` or `{else}` command multiple times.
@@ -506,6 +516,7 @@ levels:
                 {if} yes
                 {print} 'Hurray!
                 {else} 'That's a shame... Oh well... time to build a shelter and find some food.'
+            debug: true
         6:
             header: Ready Set Go!
             text: Enjoy the adventures in level 7!
@@ -520,6 +531,7 @@ levels:
 
                 You could only repeat one line of code.
             code: '{repeat} 5 {times} {print} ''Help!'''
+            debug: true
         3:
             header: '{repeat} commands now'
             text: |-
@@ -548,6 +560,7 @@ levels:
             code: |-
                 {if} name {is} Hedy {print} 'nice'
                 {else} {print} 'boo!'
+            debug: true
         6:
             header: if and else now
             text: |-
@@ -590,6 +603,7 @@ levels:
                         {print} You chose a round trip ticket'
                 price * 2
                 {print} 'That will be ' price ' euros please'
+            debug: true
         10:
             header: Let's check out the adventures!
             text: Enjoy the adventures in level 8!
@@ -681,6 +695,7 @@ levels:
                 {else}
                 {print} 'Fun!'
                 {print} 'Thanks for filling in the safety questions everyone. Enjoy your jump!'
+            debug: true
         9:
             header: Let's go!
             text: Enjoy the adventures in level 9!
@@ -717,6 +732,7 @@ levels:
                 {add} chosen_person {from} people
                 {print} 'Come and watch our show tonight!'
                 {print} 'Tickets are only available at the counter
+            debug: true
         5:
             header: Time to program!
             text: Enjoy the adventures in level 10!
@@ -753,6 +769,7 @@ levels:
                 {repeat} {for} numbers {in} {range} 1 {to} 10 {times}
                     {print} This is the table of multiplications for factor
                     {print} number ' x ' factor ' = ' i * factor
+            debug: true
         5:
             header: Let's start programming!
             text: Enjoy the adventures in level 11!
@@ -795,10 +812,10 @@ levels:
                      {print} 'Twinkle'
                      {print} '...'
 
-                 {call} twinkle
-                 {print} 'Up above the world so high'
-                 {print} 'Like a diamond in the sky'
-                 {call} twinkle
+                {call} twinkle
+                {print} 'Up above the world so high'
+                {print} 'Like a diamond in the sky'
+                {call} twinkle
         6:
             header: Functions
             text: As you could see in the example a function is a block of code that can be called anytime. You use `{define}` to set the function and `{call}` to use it.
@@ -817,6 +834,7 @@ levels:
                 {call} new member
                     {else}
                         password = {ask} 'Please enter password'
+            debug: true
         8:
             header: Ready to try it out?
             text: Enjoy the adventures in level 12!
@@ -926,6 +944,7 @@ levels:
                     {call} happiness {with} person
                 {else} mood = sad
                     {define} sadness {to} name
+            debug: true
         9:
             header: Let's go!
             text: Enjoy the adventures in level 13!
@@ -980,7 +999,7 @@ levels:
                 {define} calculate_new_price {with} amount, percentage
                     percentage = percentage / 100
                     discount_amount = amount * percentage
-                    return amount - discount_amount
+                    {return} amount - discount_amount
 
                 old_price = {ask} 'How much is on the price tag?'
                 discount = {ask} 'What percentage is the discount?'
