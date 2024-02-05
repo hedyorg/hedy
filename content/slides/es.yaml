@@ -725,18 +725,9 @@ levels:
         4:
             header: Debugging
             text: Let's debug this code
-            code: |-
-            debug: true
-                {print} '¡Señoras y señores!'
-                {print} '¡Por una noche y sólo una noche en el circo Hedy!'
-                actos = disparar desde un cañón, funambulismo, meterse en una maleta,
-                gente = Iris la Increíble Achmed el Maravilloso Francis el Fantástico
-                    {for} gente {in} actos
-                persona_elegida {is} gente {random}
-                    persona_elegida ' hará ' act
-                {add} persona_elegida {from} gente
-                {print} '¡Ven a ver nuestro espectáculo esta noche!'
-                {print} 'Las entradas sólo están disponibles en la taquilla
+            code: ''
+            debug: true {print} '¡Señoras y señores!' {print} '¡Por una noche y sólo una noche en el circo Hedy!' actos = disparar desde un cañón, funambulismo, meterse en una maleta, gente = Iris la Increíble Achmed el Maravilloso Francis el Fantástico {for} gente {in} actos persona_elegida {is} gente
+                {random} persona_elegida ' hará ' act {add} persona_elegida {from} gente {print} '¡Ven a ver nuestro espectáculo esta noche!' {print} 'Las entradas sólo están disponibles en la taquilla
         5:
             header: ¡Hora de programar!
             text: ¡Disfruta las aventuras en el nivel 10!
@@ -768,13 +759,12 @@ levels:
         4:
             header: Debugging
             text: Let's debug this code!
-            debug: true
             code: |-
-
                 factor {is} {ask} '¿Qué tabla de multiplicar necesitas?'
                 {repeat} {for} números {in} {range} 1 {to} 10 {times}
                     {print} Esta es la tabla de multiplicaciones por un factor
                     {print} número ' x ' factor ' = ' i * factor
+            debug: true
         5:
             header: ¡Comencemos a programar!
             text: ¡Disfruta las aventuras en el nivel 11!
