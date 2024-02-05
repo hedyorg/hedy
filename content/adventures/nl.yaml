@@ -75,7 +75,7 @@ adventures:
 
                     ### Opdracht
                     Kopieer jouw verhaal uit het vorige level in dit level.
-                    In dit level leerde je 3 nieuwe commando's: `{at} {random}` , `{add} {to}` en `{remove} {from}`.
+                    In dit level leerde je 3 nieuwe commando's: `{at} {random}` , `{add} {to_list}` en `{remove} {from}`.
                     Voeg nieuwe regels code toe aan jouw verhaal, zodat deze 3 nieuwe commando's allemaal minstens 1x gebruikt worden.
                 example_code_3: |
                     ```
@@ -261,14 +261,14 @@ adventures:
                     {print}('Welkom bij dit verhaal!')
                     ```
     add_remove_command:
-        name: '{add} {to} & {remove} {from}'
+        name: '{add} {to_list} & {remove} {from}'
         default_save_name: add_remove_command
         description: Introduceert voeg to en verwijder uit
         levels:
             3:
                 story_text: |
                     ### Toevoegen
-                    Je kunt items aan een lijst toevoegen met het `{add} {to}` commando. Om iets aan een lijst toe te voegen typ je bijvoorbeeld: `{add} pinguïn {to} dieren`. Je kunt het ook gebruiken in combinatie met `{ask}` zoals in het voorbeeld.
+                    Je kunt items aan een lijst toevoegen met het `{add} {to_list}` commando. Om iets aan een lijst toe te voegen typ je bijvoorbeeld: `{add} pinguïn {to_list} dieren`. Je kunt het ook gebruiken in combinatie met `{ask}` zoals in het voorbeeld.
                 example_code: |
                     ```
                     dieren {is} hond, kat, kangoeroe
@@ -753,7 +753,7 @@ adventures:
                     {print} Vanavond gaan we gekozen_films kijken
                     leuk {ask} Vind je dat een leuke film?
                     {print} Morgen zullen we iets anders gaan kijken.
-                    {add} gekozen_film {to} film_keuzes
+                    {add} gekozen_film {to_list} film_keuzes
                     {print} Morgen zullen we film_morgen gaan kijken
                     film_morgen {is} film_keuzes {at} {random}
                     Ik ga de popcorn pakken! {print}
@@ -2525,7 +2525,7 @@ adventures:
                 story_text: |
                     Leer je papegaai nieuwe woordjes met het `{add}` commando!
                     ### Opdracht
-                    Kun jij de code laten werken door `{add} {to}` toe te voegen?
+                    Kun jij de code laten werken door `{add} {to_list}` toe te voegen?
                 example_code: |
                     ```
                     woorden {is} lorre, Hedy
