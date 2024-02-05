@@ -595,27 +595,27 @@ levels:
             header: Debugging
             text: Let's debug this code!
             code: |-
-                {print} 'HedyWheels bus tickets machine'
-                zone_1 = Town Hall, Library, Campus, Market Place
-                zone_2 = Swimming Pool, Skate Park, Mall, Airport
-                destination = 'Where do you want to go?'
-                {if} destination {in} zone 1
-                {print} destination 'is in zone 1'
-                price = 3 euros
-                    {if} destination {is} zone_2
-                {print} destination 'is in zone 2'
-                price = 6
-                ticket_types = {ask} 'Press 1 for a single use ticket.
-                Press 2 for a round trip ticket:'
+                {print} '海蒂轮 巴士票机'
+                区域 1 = 市政厅、图书馆、校园、市场
+                区域 2 = 游泳池、滑板公园、购物中心、机场
+                destination = '你想去哪里？'
+                {if} destination {in} 区域 1
+                {print} destination '位于区域 1'
+                price=3欧元
+                     {if} destination {is} 区域2
+                {print} destination '位于区域 2'
+                price=6
+                ticket_type = {ask} '按 1 获取单次使用票。
+                按 2 购买往返机票：'
                 {if} ticket_type = 1
-                {print} 'You chose a single use ticket'
+                {print} '您选择了一次性门票'
                 {else}
-                        {print} You chose a round trip ticket'
-                price * 2
-                {print} 'That will be ' price ' euros please'
+                         {print} '您选择了往返机票'
+                price*2
+                {print} '这将付'price'欧元'
             debug: true
         10:
-            header: Let's check out the adventures!
+            header: 让我们来看看冒险吧！
             text: 享受第8关的冒险吧！
     9:
         1:
@@ -692,22 +692,22 @@ levels:
             header: Debugging
             text: Let's debug this code!
             code: |-
-                {print} 'Welcome to HedyJumps, your parachute jump adventure!'
-                people = {ask} 'How many people are you jumping with today?
-                {print} 'We'll ask all of you some questions for safety reasons.'
+                {print}'欢迎来到 海蒂跳，你的跳伞冒险！'
+                people = {ask} '今天你和多少人一起跳？'
+                {print}'出于安全原因，我们会问你们所有人一些问题。'
                 extra_instructions_people = a, b
                 {repeat} 3 {times}
-                    name = {ask} 'What is your name?'
-                jumped_before = 'Have you ever done a parachute jump before, ' name '?'
-                {if} jumped_before  no
-                {print} 'No worries, you'll get an extra safety instruction in room 13'
-                {add} name {to} extra_instructions_people
+                     name = {ask} '你叫什么名字？'
+                jumped_before = '你以前跳过伞吗，'name'？'
+                {if} jumped_before no
+                {print} '不用担心，您会在 13 号房间获得额外的安全说明'
+                {add}name{to} extra_instructions_people
                 {else}
-                {print} 'Fun!'
-                {print} 'Thanks for filling in the safety questions everyone. Enjoy your jump!'
+                {print}'有趣！'
+                {print} '感谢大家填写安全问题。 享受你的跳跃吧！'
             debug: true
         9:
-            header: Let's go!
+            header: 我们走吧！
             text: 享受第9关的冒险吧！
     10:
         1:
@@ -732,19 +732,19 @@ levels:
             header: Debugging
             text: Let's debug this code
             code: |-
-                {print} 'Ladies and gentlemen!'
-                {print} 'For one night and one night only in circus Hedy!'
-                acts = shoot out of a canon, walk the tightrope, pack themself in a suitcase,
-                people = Iris the Incredible Achmed the Amazing Francis the Fantastic
-                    {for} people {in} acts
-                chosen_person {is} people {random}
-                    chosen_person ' will ' act
-                {add} chosen_person {from} people
-                {print} 'Come and watch our show tonight!'
-                {print} 'Tickets are only available at the counter
+                {print} '女士们先生们！'
+                {print}“一晚，只在马戏团海蒂住一晚！”
+                acts=从大炮中射出,走钢丝,把自己装进手提箱,
+                people = 不可思议的艾里斯, 艾哈迈德, 神奇的弗朗西斯,
+                     {for}people{in}行为
+                selected_person {is}个人{random}
+                     selected_person ' will ' 行动
+                {add} selected_person {from} 人
+                {print} '今晚来看我们的节目！'
+                {print} '门票只能在柜台购买'
             debug: true
         5:
-            header: Time to program!
+            header: 是时候编程了!
             text: 享受第10关的冒险吧！
     11:
         1:
@@ -775,13 +775,13 @@ levels:
             header: Debugging
             text: Let's debug this code!
             code: |-
-                factor {is} {ask} 'Which table of multiplication do you need?'
-                {repeat} {for} numbers {in} {range} 1 {to} 10 {times}
-                    {print} This is the table of multiplications for factor
-                    {print} number ' x ' factor ' = ' i * factor
+                factor {is} {ask} '您需要哪个乘法表？'
+                {repeat} {for} numbers{in} {range} 1 {to} 10 {times}
+                     {print} 这是 factor 的乘法表
+                     {print} 数字 'x' factor ' = 'i * factor
             debug: true
         5:
-            header: Let's start programming!
+            header: 让我们开始编程!
             text: 享受第11关的冒险吧！
     12:
         1:
@@ -834,16 +834,15 @@ levels:
             text: Let's debug this code!
             code: |-
                 {call} new_member
-                {print} 'Hi new member!'
-                username = {ask} 'What is your username?'
-                password = 'What is your password?'
-                {print} 'Welcome to our club!'
-
-                username = {ask} 'Please enter your username. Are you a new member? Type New Member'
-                {if} username = New Member
-                {call} new member
-                    {else}
-                        password = {ask} 'Please enter password'
+                {print} '新会员你好！'
+                用户名 = {ask} '您的用户名是什么？'
+                密码 = '你的密码是什么？'
+                {print} '欢迎来到我们的俱乐部！'
+                用户名 = {ask} '请输入您的用户名。 您是新会员吗？ 输入新会员'
+                {if} 用户名 = 新会员
+                {call}新会员
+                     {else}
+                         密码 = {ask} '请输入密码'
             debug: true
         8:
             header: 准备好尝试了吗？
@@ -935,25 +934,24 @@ levels:
             header: Debugging
             text: Let's debug this code!
             code: |-
-                {define} happiness {with} name
-                    {print} '🥳'
-                {play} G
-                {play} A
-                {play} B
-                {print} 'Party on, ' name
-                {define} sadness
-                {print} '😞'
-                {play} E
-                {play} D
-                {play} C
-                {print} 'Hope you feel better, ' name
-
-                name = {ask} 'What is your' name '?'
-                mood = {ask} 'Are you happy or sad?'
-                {if} mood = happy
-                    {call} happiness {with} person
-                {else} mood = sad
-                    {define} sadness {to} name
+                {define}幸福{with}名字
+                     {print} '🥳'
+                {print} G
+                {print} A
+                {print}B
+                {print} '聚会，' 名字
+                {define}悲伤
+                {print}'😞'
+                {print} E
+                {print}D
+                {print} C
+                {print} '希望你感觉好点，' name
+                name = {ask} '你的'name'是什么？'
+                mood = {ask} '你高兴还是悲伤？'
+                {if}mood=快乐
+                     {call}幸福{with}name
+                {else}mood=悲伤
+                     {define}悲伤{to}name
             debug: true
         9:
             header: 出发！
