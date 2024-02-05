@@ -52714,14 +52714,6 @@ notes_mapping = {
       }
       const effect = StateEffect.appendConfig.of(hedy());
       this.view.dispatch({ effects: effect });
-      const transaction = this.view.state.update({
-        effects: StateEffect.appendConfig.of(EditorView.updateListener.of((v) => {
-          if (v.docChanged) {
-            console.log(language2.parse(v.view.state.doc.toString()).toString());
-          }
-        }))
-      });
-      this.view.dispatch(transaction);
     }
     get contents() {
       return this.view.state.doc.toString();
