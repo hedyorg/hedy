@@ -101,7 +101,7 @@
     explanation: Kijk of een onderdeel erin zit met `{in}`.
     demo_code: |-
         mooie_kleuren {is} groen, geel
-        kleur {is} {ask} 'Wat {is} je lievelingskleur?'
+        kleur {is} {ask} 'Wat is jouw lievelingskleur?'
         {if} kleur {in} mooie_kleuren {print} 'mooi!' {else} {print} 'bah'
 -   name: '{pressed}'
     explanation: Controleer of een toets op het toetsenbord is `{pressed}`.
@@ -317,7 +317,7 @@
         eerstefruit = fruit[1]
         {print} eerstefruit
 -   name: Pak een random item uit een lijst
-    explanation: Om een willekeurig item uit een lijst te pakken, gebruiken we `[{random}]`. Dus `fruit[{random}]` pakt een willekeurig fruit uit de lijst!
+    explanation: Om een willekeurig item uit een lijst te kiezen, gebruiken we [{random}]. Dus fruit[{random}] kiest een willekeurig fruit uit de lijst!
     demo_code: |-
         fruit = ['banaan', 'appel', 'kers']
         willekeurig_fruit = fruit[{random}]

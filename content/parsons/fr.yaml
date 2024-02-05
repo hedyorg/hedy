@@ -191,8 +191,8 @@ levels:
     10:
         1:
             story: |-
-                Aide cette famille en créant un planning indiquant qui va cuisiner et ce qu'il ou elle devra préparer cette semaine. Les commandes `{remove}` son là pour éviter que quelqu'un cuisine deux fois et qu'il y ai un dinner différent tous les jours.
-                **Attention !** l'ordre des variable est en premier jours, ensuite personnes, et finalement choix_dinner. Et c'est aussi le cas pour les commandes `{remove}`.
+                Aide cette famille en créant un planning indiquant qui va cuisiner et ce qu'il ou elle devra préparer cette semaine. Les commandes `{remove}` sont là pour éviter que la même personne cuisine deux fois et que ce soit le même dîner tous les jours.
+                **Attention !** l'ordre des variables est en premier « jours », ensuite « personnes », et finalement « choix_dinner ». Et c'est aussi le cas pour les commandes `{remove}`.
             code: |-
                 jours = lundi, mardi, mercredi, jeudi, vendredi
                 personnes = maman, papa, Martin, Gabrielle, Julie
@@ -200,13 +200,13 @@ levels:
                 {for} jour {in} jours
                     personne_choisie = personnes {at} {random}
                     dîner_choisi = choix_dîner {at} {random}
-                    {print} jours " " personne_choisie " doit préparer " dîner_choisi
+                    {print} jour " " personne_choisie " doit préparer " dîner_choisi
                     {remove} personne_choisie {from} personnes
                     {remove} dîner_choisi {from} choix_dîner
         2:
             story: |-
                 Ce robot coiffeur va décider de ta nouvelle coupe de cheveux. Si tu n'es pas d'accord avec son premier choix, tu peux réessayer.
-                **Attention** La variable `personne` est définie à la première ligne. La variable `coupe_de_cheveux` à la seconde.
+                **Attention** La variable « personne » est définie à la première ligne. La variable « coupe_de_cheveux » à la seconde.
             code: |-
                 personnes = Betty, Amanda, Marc
                 coupe_de_cheveux = la tête rasée, une crête, une queue de cheval, des pointes

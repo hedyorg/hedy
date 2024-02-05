@@ -98,13 +98,13 @@
         réponse {is} {ask} "Jusqu'où dois-je marcher ?"
         {if} réponse {is} loin {forward} 100 {else} {forward} 5
 -   name: '{in}'
-    explanation: Check elements with `{in}`.
+    explanation: Reconnaitre des éléments avec `{in}`.
     demo_code: |-
         jolies_couleurs {is} vert, jaune
         couleur {is} {ask} "Quelle est ta couleur préférée ?"
         {if} couleur {in} jolies_couleurs {print} "joli !" {else} {print} "moche"
 -   name: '{pressed}'
-    explanation: Vérifiez si une touche donnée du clavier est `{pressed}`.
+    explanation: Vérifier si une touche donnée du clavier est `{pressed}`.
     demo_code: '{if} a {is} {pressed} {print} "Vous avez appuyé sur A !" {else} {print} "Vous avez appuyé sur une autre touche !"'
 6:
 -   name: '{print}'

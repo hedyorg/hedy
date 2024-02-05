@@ -955,6 +955,9 @@ def programs_page(user):
         return redirect(url, code=302)
 
     from_user = request.args.get('user') or None
+    if from_user and from_user == "None":
+        from_user = None
+
     # If from_user -> A teacher is trying to view the user programs
     if from_user and not is_admin(user):
         if not is_teacher(user):
@@ -1548,11 +1551,14 @@ def view_program(user, id):
                            **arguments_dict)
 
 
-@app.route('/render_code/<level>/<code>', methods=['GET'])
-def render_code_in_editor(level, code):
+@app.route('/render_code/<level>/', methods=['GET'])
+def render_code_in_editor(level):
+    code = request.args['code']
 
     try:
         level = int(level)
+        if level == 0:  # in level 0, the intro slides, we use codes from level 1
+            level = 1
     except BaseException:
         return utils.error_page(error=404, ui_message=gettext('no_such_level'))
 
