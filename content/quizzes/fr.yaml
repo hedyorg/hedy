@@ -2123,11 +2123,20 @@ levels:
                 {for} plat {in} plats
                     {print} "J'aime les " plat
             mp_choice_options:
-            -   option: "```\nJ'aime les pizzas\n```"
+            -   option: |-
+                    ```
+                    J'aime les pizzas
+                    ```
                 feedback: La ligne 2 dit « pour chaque plat dans la liste des plats ». Donc chaque plat est affiché.
-            -   option: "```\nJ'aime les pâtes\n```"
+            -   option: |-
+                    ```
+                    J'aime les pâtes
+                    ```
                 feedback: La ligne 2 dit « pour chaque plat dans la liste des plats ». Donc chaque plat est affiché.
-            -   option: "```\nJ'aime les crêpes\n```"
+            -   option: |-
+                    ```
+                    J'aime les crêpes
+                    ```
                 feedback: La ligne 2 dit « pour chaque plat dans la liste des plats ». Donc chaque plat est affiché.
             -   option: |-
                     ```
@@ -2146,9 +2155,15 @@ levels:
                 {for} animal {in} animaux
                     {print} "Les " animal " sont d'adorables animaux de compagnie"
             mp_choice_options:
-            -   option: "```\nLes chiens sont d'adorables animaux de compagnie\n```"
+            -   option: |-
+                    ```
+                    Les chiens sont d'adorables animaux de compagnie
+                    ```
                 feedback: La ligne 2 dit « pour chaque animal dans la liste des animaux ». Donc chaque animal est affiché.
-            -   option: "```\nLes chiens, chats, hamsters, poulets sont d'adorables animaux de compagnie\n```"
+            -   option: |-
+                    ```
+                    Les chiens, chats, hamsters, poulets sont d'adorables animaux de compagnie
+                    ```
                 feedback: Chaque animal aura sa propre ligne.
             -   option: |-
                     ```
@@ -2209,13 +2224,27 @@ levels:
                 {for} joueuse {in} joueuses
                     {print} joueuse " choisi " choix {at}{random}
             mp_choice_options:
-            -   option: "```\nNadine choisi pierre\n```"
+            -   option: |-
+                    ```
+                    Nadine choisi pierre
+                    ```
                 feedback: Martine veut jouer aussi !
-            -   option: "```\nMartine choisi ciseaux\nNadine choisi pierre\n```"
+            -   option: |-
+                    ```
+                    Martine choisi ciseaux
+                    Nadine choisi pierre
+                    ```
                 feedback: Tu étais vraiment près ! Mais, Nadine est la première dans la liste, donc elle choisira en premier.
-            -   option: "```\nMartine choisi papier\n```"
+            -   option: |-
+                    ```
+                    Martine choisi papier
+                    ```
                 feedback: Nadine veut jouer aussi !
-            -   option: "```\nNadine choisi papier\nMartine choisi ciseaux\n```"
+            -   option: |-
+                    ```
+                    Nadine choisi papier
+                    Martine choisi ciseaux
+                    ```
                 feedback: Génial !
             hint: Chaque joueuse choisira un objet. La première joueuse dans la liste commence
             correct_answer: D
@@ -2228,13 +2257,25 @@ levels:
                 _
                     {print} nom " devra manger " plats {at} {random} " pour le dîner"
             mp_choice_options:
-            -   option: "```\n{for} nom {in} noms\n```"
+            -   option: |-
+                    ```
+                    {for} nom {in} noms
+                    ```
                 feedback: Bravo !
-            -   option: "```\n{for} noms {in} nom\n```"
+            -   option: |-
+                    ```
+                    {for} noms {in} nom
+                    ```
                 feedback: Non, ce doit être pour chaque nom dans la liste nomS, donc dans l'autre sens
-            -   option: "```\n{for} plat {in} plats\n```"
+            -   option: |-
+                    ```
+                    {for} plat {in} plats
+                    ```
                 feedback: Il faut dire à chaque nom ce qu'il doit manger pour dîner.
-            -   option: "```\n{for} nom {in} plats\n```"
+            -   option: |-
+                    ```
+                    {for} nom {in} plats
+                    ```
                 feedback: Il faut dire à chaque nom ce qu'il doit manger pour dîner.
             hint: Il faut dire à chaque nom ce qu'il doit manger pour dîner.
             correct_answer: A
@@ -2252,14 +2293,20 @@ levels:
                     "nom recevra un T-shirt couleur"
                     ```
                 feedback: Attention aux guillemets !
-            -   option: "```\nnom \" recevra un T-shirt \" couleurs {at}{random}\n```"
+            -   option: |-
+                    ```
+                    nom " recevra un T-shirt " couleurs {at}{random}
+                    ```
                 feedback: Excellent travail ! C'était difficile !
             -   option: |-
                     ```
                     noms " recevra un T-shirt " couleurs {at}{random}
                     ```
                 feedback: Tu veux que chaque nom soit affiché séparément. Donc le premier mot ne doit pas être « noms » mais…
-            -   option: "```\nchacun recevra un T-shirt de couleur\n```"
+            -   option: |-
+                    ```
+                    chacun recevra un T-shirt de couleur
+                    ```
                 feedback: Il n'y a aucune variable qui s'appelle « chacun »
             hint: Fais attention aux guillemets et aux noms des variables
             correct_answer: B

@@ -85,7 +85,17 @@ adventures:
                     {remove} 扔掉的 {from} 包
                     ```
             4:
-                story_text: "你可能已经注意到在之前的关卡中仍然存在一个问题。您是否尝试打印包含单词name的句子?即`{print}`我的名字是name。\n你可以在这一层解决这个问题。要打印的所有内容都必须使用引号。\n\n# # #练习\n复制示例代码，并通过在第1行和第2行空白处添加引号来完成它。\n第3行和第4行中的空白不应该用引号替换，而应该用`{sleep}`和`{clear}`命令替换。你能做到吗?\n\n###练习2\n回到上一个关卡，复制你的故事代码。通过在适当的位置添加引号，让代码在这个关卡中工作。\n注意：你的故事中的变量应该在引号之外。就像示例代码的第二行一样。在这一行中，变量名放在引号之外。\n"
+                story_text: |
+                    你可能已经注意到在之前的关卡中仍然存在一个问题。您是否尝试打印包含单词name的句子?即`{print}`我的名字是name。
+                    你可以在这一层解决这个问题。要打印的所有内容都必须使用引号。
+
+                    # # #练习
+                    复制示例代码，并通过在第1行和第2行空白处添加引号来完成它。
+                    第3行和第4行中的空白不应该用引号替换，而应该用`{sleep}`和`{clear}`命令替换。你能做到吗?
+
+                    ###练习2
+                    回到上一个关卡，复制你的故事代码。通过在适当的位置添加引号，让代码在这个关卡中工作。
+                    注意：你的故事中的变量应该在引号之外。就像示例代码的第二行一样。在这一行中，变量名放在引号之外。
                 example_code: |
                     ```
                     姓名 {is} {ask} _ 你叫什么名字？ _
@@ -162,17 +172,35 @@ adventures:
                         {print} '罗宾回了家'
                     ```
             10:
-                story_text: "在这一级，你可以在你的故事里使用 {for} 命令。这样很容易就能写出儿童书里的“棕熊，棕熊，你看到了什么”的故事。\n\n ### 练习\n\n请看\n<a href=\"https://www.yonkerspublicschools.org/cms/lib/NY01814060/Centricity/Domain/1621/Brown%20Bear%20Book.pdf\"> the story</a> 如果你不知道这个故事，请确保它是按照书中的内容打印的。\n"
+                story_text: |
+                    在这一级，你可以在你的故事里使用 {for} 命令。这样很容易就能写出儿童书里的“棕熊，棕熊，你看到了什么”的故事。
+
+                     ### 练习
+
+                    请看
+                    <a href="https://www.yonkerspublicschools.org/cms/lib/NY01814060/Centricity/Domain/1621/Brown%20Bear%20Book.pdf"> the story</a> 如果你不知道这个故事，请确保它是按照书中的内容打印的。
                 example_code: "```\n动物们 = _ , _ , _ \n{print} '棕熊，棕熊 '\n{print} '你看到了什么？'\n```\n"
             12:
-                story_text: "在这个级别中，需要使用引号来保存变量中的多个单词。\n\n# # #练习\n\n从之前的关卡中找到一个故事，任何关卡都可以。现在，请确保在正确的位置添加了引号。"
+                story_text: |-
+                    在这个级别中，需要使用引号来保存变量中的多个单词。
+
+                    # # #练习
+
+                    从之前的关卡中找到一个故事，任何关卡都可以。现在，请确保在正确的位置添加了引号。
                 example_code: |
                     ```
                     名字 = '英国女王'
                     {print} 名字'正在吃一块蛋糕，突然......'
                     ```
             13:
-                story_text: "通过使用`{and}`和`{or}`命令，你可以让你的故事更通用。你可以问两个问题，然后对两个答案的组合做出回应。\n\n###练习1\n查看示例代码并完成它。然后再添加至少2个带有`{and}`或`{or}`的`{if}`代码。\n\n###练习2\n从之前的关卡中找到一个故事，并添加一个`{and}`或`{or}`。\n"
+                story_text: |
+                    通过使用`{and}`和`{or}`命令，你可以让你的故事更通用。你可以问两个问题，然后对两个答案的组合做出回应。
+
+                    ###练习1
+                    查看示例代码并完成它。然后再添加至少2个带有`{and}`或`{or}`的`{if}`代码。
+
+                    ###练习2
+                    从之前的关卡中找到一个故事，并添加一个`{and}`或`{or}`。
                 example_code: |
                     ```
                     {print} '我们的英雄正在穿过森林'
@@ -360,7 +388,91 @@ adventures:
                     最接近21但没有超过它的玩家获胜。
 
                     好好享受游戏吧！
-                example_code: "```\n{print} 'BLACKJACK'\ncards = [2, 3, 4, 5, 6, 7, 8, 9, 10, 'Jack', 'Queen','King', 'Ace']\npoints = 0\ndealer_points = 0\ncard_1 = cards[{random}]\ncard_2 = cards[{random}]\ncard_3 = cards [{random}]\ndealer_card_1 = cards[{random}]\ndealer_card_2 = cards[{random}]\ndealer_card_3 = cards[{random}]\n# Points for card 1\n{if} card_1 == 'Jack' {or} card_1 == 'Queen' {or} card_1 == 'King':\n    points = points + 10\n{elif} card_1 == 'Ace':\n    points = points + 11\n{else}:\n    points = points + card_1\n# Points for card 2\n{if} card_2 == 'Jack' {or} card_2 == 'Queen' {or} card_2 == 'King':\n    points = points + 10\n{elif} card_2 == 'Ace':\n    points = points + 11\n{else}:\n    points = points + card_2\n# Points for dealer card 1\n{if} dealer_card_1 == 'Jack' {or} dealer_card_1 == 'Queen' {or} dealer_card_1 == 'King':\n    dealer_points = dealer_points + 10\n{elif} dealer_card_1 == 'Ace':\n    dealer_points = dealer_points + 11\n{else}:\n    dealer_points = dealer_points + dealer_card_1\n# Points for dealer card 2\n{if} dealer_card_2 == 'Jack' {or} dealer_card_2 == 'Queen' {or} dealer_card_2 == 'King':\n    dealer_points = dealer_points + 10\n{elif} dealer_card_2 == 'Ace':\n    dealer_points = dealer_points + 11\n{else}:\n    dealer_points = dealer_points + dealer_card_2\n# Two Aces\n{if} card_1 == 'Ace' {and} card_2 == 'Ace':\n    points = 12\n{if} dealer_card_1 == 'Ace' {and} dealer_card_2 == 'Ace':\n    dealer_points = 12\n# Scoreboard\n{print} 'You have a ' card_1 ' and a ' card_2 ' (' points ' points)'\n{print} 'The dealer has a ' dealer_card_1 ' and a ' dealer_card_2 ' (' dealer_points ' points)'\n# Extra card for the player\nhit = {ask} 'Do you want an extra card?'\n{if} hit == 'yes':\n    {if} card_3 == 'Jack' {or} card_3 == 'Queen' {or} card_3 == 'King':\n        points = points + 10\n    {elif} card_3 == 'Ace':\n        {if} points > 11:\n            points = points + 11\n        {else}:\n            points = points + 1\n    {else}:\n        points = points + card_3\n    {print} 'You get an extra ' card_3 ' (' points ' points)'\n{else}:\n    {print} 'No extra cards'\n# Winner\n{if} points > 21 {or} dealer_points > points {or} dealer_points == 21:\n    {print} 'You lose'\n{elif} dealer_points < 17:\n    {print} 'The dealer takes an extra card. It is a... ' dealer_card_3\n    {if} dealer_card_3 == 'Jack' {or} dealer_card_3 == 'Queen' {or} dealer_card_3 == 'King':\n        dealer_points = dealer_points + 10\n    {elif} dealer_card_3 == 'Ace':\n        {if} dealer_points < 11:\n            dealer_points = dealer_points + 11\n        {else}:\n            dealer_points = dealer_points + 1\n    {else}:\n        dealer_points = dealer_points + dealer_card_3\n    {print} 'The dealer has ' dealer_points ' points now'\n    {if} dealer_points < 21 {and} dealer_points > points:\n        {print} 'You lose'\n    {else}:\n        {print} 'You win'\n{elif} points > dealer_points {and} points < 21:\n    {print} 'You win!'\n```\n"
+                example_code: |
+                    ```
+                    {print} 'BLACKJACK'
+                    cards = [2, 3, 4, 5, 6, 7, 8, 9, 10, 'Jack', 'Queen','King', 'Ace']
+                    points = 0
+                    dealer_points = 0
+                    card_1 = cards[{random}]
+                    card_2 = cards[{random}]
+                    card_3 = cards [{random}]
+                    dealer_card_1 = cards[{random}]
+                    dealer_card_2 = cards[{random}]
+                    dealer_card_3 = cards[{random}]
+                    # Points for card 1
+                    {if} card_1 == 'Jack' {or} card_1 == 'Queen' {or} card_1 == 'King':
+                        points = points + 10
+                    {elif} card_1 == 'Ace':
+                        points = points + 11
+                    {else}:
+                        points = points + card_1
+                    # Points for card 2
+                    {if} card_2 == 'Jack' {or} card_2 == 'Queen' {or} card_2 == 'King':
+                        points = points + 10
+                    {elif} card_2 == 'Ace':
+                        points = points + 11
+                    {else}:
+                        points = points + card_2
+                    # Points for dealer card 1
+                    {if} dealer_card_1 == 'Jack' {or} dealer_card_1 == 'Queen' {or} dealer_card_1 == 'King':
+                        dealer_points = dealer_points + 10
+                    {elif} dealer_card_1 == 'Ace':
+                        dealer_points = dealer_points + 11
+                    {else}:
+                        dealer_points = dealer_points + dealer_card_1
+                    # Points for dealer card 2
+                    {if} dealer_card_2 == 'Jack' {or} dealer_card_2 == 'Queen' {or} dealer_card_2 == 'King':
+                        dealer_points = dealer_points + 10
+                    {elif} dealer_card_2 == 'Ace':
+                        dealer_points = dealer_points + 11
+                    {else}:
+                        dealer_points = dealer_points + dealer_card_2
+                    # Two Aces
+                    {if} card_1 == 'Ace' {and} card_2 == 'Ace':
+                        points = 12
+                    {if} dealer_card_1 == 'Ace' {and} dealer_card_2 == 'Ace':
+                        dealer_points = 12
+                    # Scoreboard
+                    {print} 'You have a ' card_1 ' and a ' card_2 ' (' points ' points)'
+                    {print} 'The dealer has a ' dealer_card_1 ' and a ' dealer_card_2 ' (' dealer_points ' points)'
+                    # Extra card for the player
+                    hit = {ask} 'Do you want an extra card?'
+                    {if} hit == 'yes':
+                        {if} card_3 == 'Jack' {or} card_3 == 'Queen' {or} card_3 == 'King':
+                            points = points + 10
+                        {elif} card_3 == 'Ace':
+                            {if} points > 11:
+                                points = points + 11
+                            {else}:
+                                points = points + 1
+                        {else}:
+                            points = points + card_3
+                        {print} 'You get an extra ' card_3 ' (' points ' points)'
+                    {else}:
+                        {print} 'No extra cards'
+                    # Winner
+                    {if} points > 21 {or} dealer_points > points {or} dealer_points == 21:
+                        {print} 'You lose'
+                    {elif} dealer_points < 17:
+                        {print} 'The dealer takes an extra card. It is a... ' dealer_card_3
+                        {if} dealer_card_3 == 'Jack' {or} dealer_card_3 == 'Queen' {or} dealer_card_3 == 'King':
+                            dealer_points = dealer_points + 10
+                        {elif} dealer_card_3 == 'Ace':
+                            {if} dealer_points < 11:
+                                dealer_points = dealer_points + 11
+                            {else}:
+                                dealer_points = dealer_points + 1
+                        {else}:
+                            dealer_points = dealer_points + dealer_card_3
+                        {print} 'The dealer has ' dealer_points ' points now'
+                        {if} dealer_points < 21 {and} dealer_points > points:
+                            {print} 'You lose'
+                        {else}:
+                            {print} 'You win'
+                    {elif} points > dealer_points {and} points < 21:
+                        {print} 'You win!'
+                    ```
     calculator:
         name: 计算器
         default_save_name: 计算器
@@ -771,24 +883,8 @@ adventures:
                 story_text: |-
                     ### 练习
                     调试这段代码。 祝你好运！
-                example_code: |
-                    **警告！ 这段代码需要调试！**
-                    ```
-                    {print} '欢迎来到我们的三明治店'
-                    个数 “您想买多少个三明治？”
-                    {repeat}个数{times}
-                    {ask} {is} {ask} '您想要什么类型的三明治或面包？'
-                    面包刀种类 {is} 白面包、小麦面包、黑麦面包、大蒜面包、无麸质面包
-                    {if}  选中的面包  in 面包的种类 
-                    {print}“美妙！”
-                    {else}
-                    “抱歉我们不卖那个”
-                    蘸料 {is} {ask} '您想要什么类型的配料？'
-                    沙司{is} {ask}“您想要什么类型的酱？”
-                    {print} 一份 选中的面包，配上配料和酱汁。
-                    价格 =数量*6
-                    {print} '这将是' 价格 '美元'
-                    ```
+                example_code: "**警告！ 这段代码需要调试！**\n```\n{print} '欢迎来到我们的三明治店'\n个数 “您想买多少个三明治？”\n{repeat}个数{times}\n{ask} {is} {ask} '您想要什么类型的三明治或面包？'\n面包刀种类 {is} 白面包、小麦面包、黑麦面包、大蒜面包、无麸质面包\n{if}  选中的面包  in 面包的种类 \n{print}“美妙！”\n{else}\n“抱歉我们不卖那个”\n蘸料 {is} {ask} '您想要什么类型的配料？'\n沙司{is} {ask}“您想要什么类型的酱？”\n{print}\
+                    \ 一份 选中的面包，配上配料和酱汁。\n价格 =数量*6\n{print} '这将是' 价格 '美元'\n```\n"
             10:
                 story_text: |-
                     ### 练习
@@ -1066,14 +1162,20 @@ adventures:
                 story_text: |-
                     ### 练习
                     从第 16 级开始调试这个 Old MacDonald 程序。祝你好运！
-                example_code: "**警告！ 这段代码需要调试！**\n```\nanimals = ['pig', 'dog', 'cow']\nsounds = ['oink', 'woof', 'moo']\nfor i in range 1 to 3\n    animal = animals[i]\n    sound = sounds[i]\n    print '老麦当劳有一个农场'\n    print 'E I E I O!'\n    print '在那个农场他有一只' animal\n    print 'E I E I O!'\n    print '这里有‘sound sound\n    print '以及那也有' sound sound \n    print '这里有 ' sound\n    print '那也有 ' sound\n    print '到处有 ' sound sound\n```\n"
+                example_code: "**警告！ 这段代码需要调试！**\n```\nanimals = ['pig', 'dog', 'cow']\nsounds = ['oink', 'woof', 'moo']\nfor i in range 1 to 3\n    animal = animals[i]\n    sound = sounds[i]\n    print '老麦当劳有一个农场'\n    print 'E I E I O!'\n    print '在那个农场他有一只' animal\n    print 'E I E I O!'\n    print\
+                    \ '这里有‘sound sound\n    print '以及那也有' sound sound \n    print '这里有 ' sound\n    print '那也有 ' sound\n    print '到处有 ' sound sound\n```\n"
     default:
         name: 介绍
         default_save_name: 介绍
         description: 级别说明
         levels:
             1:
-                story_text: "欢迎来到海蒂！在第1关你将从打印一个故事开始。\n\n试着自己编写代码，使用绿色的“运行代码”按钮运行代码。\n\n准备好了吗？试着在下一个标签页开始你的第一行命令！\n"
+                story_text: |
+                    欢迎来到海蒂！在第1关你将从打印一个故事开始。
+
+                    试着自己编写代码，使用绿色的“运行代码”按钮运行代码。
+
+                    准备好了吗？试着在下一个标签页开始你的第一行命令！
             2:
                 story_text: |
                     恭喜！ 您已达到第 2 级。希望您已经编写了一些很棒的代码！
@@ -1714,18 +1816,7 @@ adventures:
 
                     ### 练习
                     使用您已学过此级别的新命令填入空白。
-                example_code: |
-                    ```
-                    房屋=豪宅，公寓，棚屋，房子
-                    爱人=没有人，皇室成员，他们的邻居，他们的真爱
-                    宠物 = 狗、猫、大象
-                    名字 = Jenna、Ryan、Jim
-                    _
-                    {print} 名字 ' 住在 ' 房子 {at} {random}
-                    {print} 名字 ' 将会结婚与 ' 爱人 {at} {random}
-                    {print} 名字 ' 将得到 ' 宠物 {at} {random} ' 作为他们的宠物。'
-                    {sleep} 
-                    ```
+                example_code: "```\n房屋=豪宅，公寓，棚屋，房子\n爱人=没有人，皇室成员，他们的邻居，他们的真爱\n宠物 = 狗、猫、大象\n名字 = Jenna、Ryan、Jim\n_\n{print} 名字 ' 住在 ' 房子 {at} {random}\n{print} 名字 ' 将会结婚与 ' 爱人 {at} {random}\n{print} 名字 ' 将得到 ' 宠物 {at} {random} ' 作为他们的宠物。'\n{sleep} \n```\n"
             12:
                 story_text: |
                     在这个关卡中，你可以用多个字来算命。你可以将不同的命运加入列表中吗？
@@ -2344,14 +2435,14 @@ adventures:
         description: Introducing maths
         levels:
             6:
-                story_text: |2
+                story_text: |4
 
-                                    In this level you learn something new: you can now also calculate.
+                                      In this level you learn something new: you can now also calculate.
 
-                                    The plus is easy, you write it like with math: `5 + 5` for example. The minus also works fine, it is `5 - 5`.
+                                      The plus is easy, you write it like with math: `5 + 5` for example. The minus also works fine, it is `5 - 5`.
 
-                                    The times is a bit different, because there is no times symbol on your keyboard. Just search, there really isn't!
-                                    That is why we multiply with the asterisk above 8: `5 * 5`. Read that as "5 times 5" that helps you remember it best.
+                                      The times is a bit different, because there is no times symbol on your keyboard. Just search, there really isn't!
+                                      That is why we multiply with the asterisk above 8: `5 * 5`. Read that as "5 times 5" that helps you remember it best.
                 example_code: |
                     ```
                     {print} '5 plus 5 is ' 5 + 5
@@ -2378,6 +2469,290 @@ adventures:
                     ```
 
                     {print} 2.5 + 2.5
+    music:
+        name: music
+        default_save_name: music
+        description: Play a tune!
+        levels:
+            1:
+                story_text: |-
+                    In this level you'll learn how to use the `{play}` command to play a tune!
+
+                    Type `{play}` followed by the note you want to play. The scale goes C-D-E-F-G-A-B.
+                    As you can see there are 7 different letters, but we can play more than just 7 notes.
+                    Type a number between 1 and 10 behind the letter to choose the scale, for example after B4 comes C5.
+                    C1 is the lowest note you can play, C10 is the highest.
+
+                    ### Exercise
+                    Try out the example code and thenplay around with it! Can you create your own melody?
+                    In the next level you'll learn how to play some existing songs.
+                example_code: |-
+                    ```
+                    play C4
+                    play D4
+                    play E4
+                    play F4
+                    play G4
+                    play A4
+                    play B4
+                    play C5
+                    ```
+            2:
+                story_text: Finish the songs! We have started the codes for some melodies.
+                example_code: |
+                    ```
+                    {print} Old Mac Donald had a farm
+                    {play} C5
+                    {play} C5
+                    {play} C5
+                    {play} G4
+                    {play} A4
+                    {play} A4
+                    {play} G4
+                    ```
+                story_text_2: As you can see, you can also use the `{sleep}` command to add a little pause in the song.
+                example_code_2: |
+                    ```
+                    {print} Twinkle Twinkle Little Star
+                    {play} C
+                    {play} C
+                    {play} G
+                    {play} G
+                    {play} A
+                    {play} A
+                    {play} G
+                    {sleep} 1
+                    {play} F
+                    {play} F
+                    ```
+            3:
+                story_text: |
+                    Create a random melody!
+
+                    ### Exercise
+                    The example code creates a random melody, but it's very short and not many notes are used.
+                    Add more notes to the list and create a longer melody by copying the last line a couple more times.
+                example_code: |
+                    ```
+                    notes {is} A4, B4, C4
+                    {play} notes {at} {random}
+                    {play} notes {at} {random}
+                    {play} notes {at} {random}
+                    ```
+            4:
+                story_text: |
+                    Use the `{clear}` command to create a karaokemachine!
+
+                    ### Exercise
+                    Finish the karaoke version of 'Mary had a little lamb'.
+                    Then, create a karaoke version of any song you'd like!
+                example_code: |
+                    ```
+                    {print} 'Mary had a little lamb'
+                    {play} E
+                    {play} D
+                    {play} C
+                    {play} D
+                    {play} E
+                    {play} E
+                    {play} E
+                    {clear}
+                    {print} 'Little lamb, little lamb'
+                    {play} D
+                    {play} D
+                    {play} D
+                    {play} E
+                    {play} E
+                    {play} E
+                    {clear}
+                    {print} 'Mary had a little lamb'
+                    {play} E
+                    ```
+            5:
+                story_text: |
+                    You don't always have to use the `{play}` command to play a whole song, sometimes you just want to play one note.
+                    For example, if you want to make a quiz, you can play a happy high note if the answer is right and a sad low note if the answer is wrong.
+
+                    ### Exercise
+                    Finish the first question by adding a line of code that plays a C3 note if the wrong answer is given.
+                    Then think of 3 more questions to add to this quiz.
+                example_code: |
+                    ```
+                    answer {is} {ask} 'What is the capital of Zimbabwe?'
+                    {if} answer {is} Harare {play} C6
+                    _
+                    ```
+            6:
+                story_text: "Instead of playing notes, you can also play numbers now. Simply type `{play} 1` for the lowest note, `{play} 70` for the highest note, or anything in between.\n\n### Exercise\n This calls for musical maths! Try out the example code a couple of times with different starting\
+                    \ numbers. \nThen, see if you can compose a song using the numbers.\n"
+                example_code: |
+                    ```
+                    number = {ask} 'Say a starting number between 1 and 67'
+                    {print} number
+                    {play} number
+                    number = number + 1
+                    {print} number
+                    {play} number
+                    number = number + 1
+                    {print} number
+                    {play} number
+                    ```
+            7:
+                story_text: |
+                    Using the `{repeat}` command can make your codes for melodies a lot shorter!
+
+                    ### Exercise
+                    Finish the code for Twinkle Twinkle Little Star by using the `{repeat}`command.
+                    Then go back to the songs you've made in the previous levels. Can you shorten those codes too?
+                example_code: |
+                    ```
+                    {print} 'Twinkle Twinkle Little Star'
+                    {repeat} 2 {times} {play} C4
+                    {repeat} 2 {times} {play} G4
+                    _
+                    ```
+            8:
+                story_text: |
+                    Now that we can use the `{repeat}` command for multiple lines, we can make songs even more easily!
+
+                    ### Exercise
+                    Finish the song of Brother John (Frère Jacques). Don't forget to use `{repeat}`!
+                example_code: |
+                    ```
+                    {print} 'Brother John'
+                    {repeat} 2 {times}
+                        {play} C
+                        {play} D
+                        {play} E
+                        {play} C
+                    {repeat} 2 {times}
+                        {play} E
+                        {play} F
+                        {play} G
+                        {sleep} 1
+                    ```
+            9:
+                story_text: |
+                    From this level on you can - among other things - use a {repeat} command inside a {repeat} command.
+                    That makes songs like 'Happy birthday' even shorter!
+
+                    ### Exercise
+                    Finish the song!
+                example_code: |
+                    ```
+                    first_time = yes
+                    {repeat} 2 {times}
+                        {repeat} 2 {times}
+                            {play} C
+                        {play} D
+                        {play} C
+                        {if} first_time {is} yes
+                            {play} F
+                            {play} E
+                            first_time {is} no
+                        {else}
+                            _
+                    ```
+            12:
+                story_text: |
+                    Use functions in you songs! As you can see in the example code, you can make a function for each line of Twinkle Twinkle little star. Once you've programmed the first three lines, all you have to do is call the functions in the order you want them played in.
+
+                    ### Exercise
+                    Finish the song of Twinkle Twinkle little star.
+                    Then look back at all the songs you've programmed in the levels before, can you make those codes better and shorter using functions too?
+                example_code: |
+                    ```
+                    {define} first_line
+                        {play} C
+                        {play} C
+                        {play} G
+                        {play} G
+                        {play} A
+                        {play} A
+                        {play} G
+                        {sleep}
+
+                    {define} second_line
+                        {play} F
+                        {play} F
+                        {play} E
+                        {play} E
+                        {play} D
+                        {play} D
+                        {play} C
+                        {sleep}
+
+                    {define} third_line
+                        {play} G
+                        {play} G
+                        {play} F
+                        {play} F
+                        {play} E
+                        {play} E
+                        {play} D
+                        {sleep}
+
+                    {call} _
+                    {call} _
+                    {call} _
+                    {call} _
+                    {call} _
+                    {call} _
+                    ```
+            13:
+                story_text: |
+                    You can use a function with an argument for songs that have line taht are almost the same, but slightly different each time.
+                    One example is the song 'Yankee Doodle'. The first 4 notes of the first lines are the same, buyt each time they are followed by a different couple of notes.
+
+                    ### Exercise
+                    Can you finish the song of Yankee Doodle?
+                    Can you think of another song to programm this way?
+                example_code: |
+                    ```
+                    {print} 'Yankee Doodle'
+                    {define} _ {with} note_1, note_2, note_3
+                        {play} C4
+                        {play} C4
+                        {play} D4
+                        {play} E4
+                        {play} _
+                        {play} _
+                        {play} _
+
+                    {call} line_1 {with} 29, 31, 30
+                    {call} line_1 {with} 29, 28, 0
+                    {call} line_1 {with} 32, 31, 30
+
+                    {play} C4
+                    {play} B3
+                    {play} G3
+                    {play} A3
+                    {play} B3
+                    {play} C4
+                    {play} C4
+                    ```
+            14:
+                story_text: |
+                    You can programm music for fun, but you can also use the musical notes to make something useful like a fire alarm!
+
+                    ### Exercise
+                    Make sure the fire alarm rings when there is a fire!
+                example_code: |
+                    ```
+                    {define} fire_alarm
+                        {print} 'FIRE!'
+                        note = 40
+                        {for} i {in} {range} 1 {to} 100
+                            {if} note _ 50
+                                note = note + 5
+                                {play} _
+                            {else}
+                                note = 40
+
+                    fire = {ask} 'Is there a fire?'
+                    {if} fire _ 'yes'
+                        {call} fire_alarm
+                    ```
     parrot:
         name: 鹦鹉
         default_save_name: 鹦鹉
@@ -4352,46 +4727,3 @@ adventures:
                         {print} 数字
                     {print} '新年快乐！'
                     ```
-    music:
-        levels:
-            7:
-                example_code: "```\n{print} 'Twinkle Twinkle Little Star'\n{repeat} 2 {times} {play} C4\n{repeat} 2 {times} {play} G4\n_\n```\n"
-                story_text: "Using the `{repeat}` command can make your codes for melodies a lot shorter!\n\n### Exercise\nFinish the code for Twinkle Twinkle Little Star by using the `{repeat}`command.\nThen go back to the songs you've made in the previous levels. Can you shorten those codes too?\n"
-            2:
-                story_text: Finish the songs! We have started the codes for some melodies.
-                story_text_2: As you can see, you can also use the `{sleep}` command to add a little pause in the song.
-                example_code_2: "```\n{print} Twinkle Twinkle Little Star\n{play} C\n{play} C\n{play} G\n{play} G\n{play} A\n{play} A\n{play} G\n{sleep} 1\n{play} F\n{play} F\n```\n"
-                example_code: "```\n{print} Old Mac Donald had a farm\n{play} C5\n{play} C5\n{play} C5\n{play} G4\n{play} A4\n{play} A4\n{play} G4\n```\n"
-            6:
-                example_code: "```\nnumber = {ask} 'Say a starting number between 1 and 67'\n{print} number\n{play} number\nnumber = number + 1\n{print} number\n{play} number\nnumber = number + 1\n{print} number\n{play} number\n```\n"
-                story_text: "Instead of playing notes, you can also play numbers now. Simply type `{play} 1` for the lowest note, `{play} 70` for the highest note, or anything in between.\n\n### Exercise\n This calls for musical maths! Try out the example code a couple of times with different starting numbers. \nThen, see if you can compose a song using the numbers.\n"
-            9:
-                story_text: "From this level on you can - among other things - use a {repeat} command inside a {repeat} command.\nThat makes songs like 'Happy birthday' even shorter!\n\n### Exercise\nFinish the song!\n"
-                example_code: "```\nfirst_time = yes\n{repeat} 2 {times}\n    {repeat} 2 {times}\n        {play} C\n    {play} D\n    {play} C\n    {if} first_time {is} yes\n        {play} F\n        {play} E\n        first_time {is} no\n    {else}\n        _\n```\n"
-            4:
-                example_code: "```\n{print} 'Mary had a little lamb'\n{play} E\n{play} D\n{play} C\n{play} D\n{play} E\n{play} E\n{play} E\n{clear}\n{print} 'Little lamb, little lamb'\n{play} D\n{play} D\n{play} D\n{play} E\n{play} E\n{play} E\n{clear}\n{print} 'Mary had a little lamb'\n{play} E\n```\n"
-                story_text: "Use the `{clear}` command to create a karaokemachine!\n\n### Exercise\nFinish the karaoke version of 'Mary had a little lamb'.\nThen, create a karaoke version of any song you'd like!\n"
-            3:
-                example_code: "```\nnotes {is} A4, B4, C4\n{play} notes {at} {random}\n{play} notes {at} {random}\n{play} notes {at} {random}\n```\n"
-                story_text: "Create a random melody!\n\n### Exercise\nThe example code creates a random melody, but it's very short and not many notes are used.\nAdd more notes to the list and create a longer melody by copying the last line a couple more times.\n"
-            13:
-                example_code: "```\n{print} 'Yankee Doodle'\n{define} _ {with} note_1, note_2, note_3\n    {play} C4\n    {play} C4\n    {play} D4\n    {play} E4\n    {play} _\n    {play} _\n    {play} _\n\n{call} line_1 {with} 29, 31, 30\n{call} line_1 {with} 29, 28, 0\n{call} line_1 {with} 32, 31, 30\n\n{play} C4\n{play} B3\n{play} G3\n{play} A3\n{play} B3\n{play} C4\n{play} C4\n```\n"
-                story_text: "You can use a function with an argument for songs that have line taht are almost the same, but slightly different each time.\nOne example is the song 'Yankee Doodle'. The first 4 notes of the first lines are the same, buyt each time they are followed by a different couple of notes.\n\n### Exercise\nCan you finish the song of Yankee Doodle?\nCan you think of another song to programm this way?\n"
-            14:
-                story_text: "You can programm music for fun, but you can also use the musical notes to make something useful like a fire alarm!\n\n### Exercise\nMake sure the fire alarm rings when there is a fire!\n"
-                example_code: "```\n{define} fire_alarm\n    {print} 'FIRE!'\n    note = 40\n    {for} i {in} {range} 1 {to} 100\n        {if} note _ 50\n            note = note + 5\n            {play} _\n        {else}\n            note = 40\n\nfire = {ask} 'Is there a fire?'\n{if} fire _ 'yes'\n    {call} fire_alarm\n```\n"
-            5:
-                story_text: "You don't always have to use the `{play}` command to play a whole song, sometimes you just want to play one note.\nFor example, if you want to make a quiz, you can play a happy high note if the answer is right and a sad low note if the answer is wrong.\n\n### Exercise\nFinish the first question by adding a line of code that plays a C3 note if the wrong answer is given.\nThen think of 3 more questions to add to this quiz.\n"
-                example_code: "```\nanswer {is} {ask} 'What is the capital of Zimbabwe?'\n{if} answer {is} Harare {play} C6\n_\n```\n"
-            1:
-                story_text: "In this level you'll learn how to use the `{play}` command to play a tune!\n\nType `{play}` followed by the note you want to play. The scale goes C-D-E-F-G-A-B.\nAs you can see there are 7 different letters, but we can play more than just 7 notes.\nType a number between 1 and 10 behind the letter to choose the scale, for example after B4 comes C5.\nC1 is the lowest note you can play, C10 is the highest.\n\n### Exercise\nTry out the example code and thenplay around with it! Can you create your own melody?\nIn the next level you'll learn how to play some existing songs."
-                example_code: "```\nplay C4\nplay D4\nplay E4\nplay F4\nplay G4\nplay A4\nplay B4\nplay C5\n```"
-            8:
-                example_code: "```\n{print} 'Brother John'\n{repeat} 2 {times}\n    {play} C\n    {play} D\n    {play} E\n    {play} C\n{repeat} 2 {times}\n    {play} E\n    {play} F\n    {play} G\n    {sleep} 1\n```\n"
-                story_text: "Now that we can use the `{repeat}` command for multiple lines, we can make songs even more easily!\n\n### Exercise\nFinish the song of Brother John (Frère Jacques). Don't forget to use `{repeat}`!\n"
-            12:
-                story_text: "Use functions in you songs! As you can see in the example code, you can make a function for each line of Twinkle Twinkle little star. Once you've programmed the first three lines, all you have to do is call the functions in the order you want them played in.\n\n### Exercise\nFinish the song of Twinkle Twinkle little star.\nThen look back at all the songs you've programmed in the levels before, can you make those codes better and shorter using functions too?\n"
-                example_code: "```\n{define} first_line\n    {play} C\n    {play} C\n    {play} G\n    {play} G\n    {play} A\n    {play} A\n    {play} G\n    {sleep}\n\n{define} second_line\n    {play} F\n    {play} F\n    {play} E\n    {play} E\n    {play} D\n    {play} D\n    {play} C\n    {sleep}\n\n{define} third_line\n    {play} G\n    {play} G\n    {play} F\n    {play} F\n    {play} E\n    {play} E\n    {play} D\n    {sleep}\n\n{call} _\n{call} _\n{call} _\n{call} _\n{call} _\n{call} _\n```\n"
-        default_save_name: music
-        name: music
-        description: Play a tune!

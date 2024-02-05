@@ -2183,7 +2183,10 @@ levels:
                 {for} player {in} players
                     {print} player ' chooses ' choices {at} {random}
             mp_choice_options:
-            -   option: "```\nKelly chooses rock\n```"
+            -   option: |-
+                    ```
+                    Kelly chooses rock
+                    ```
                 feedback: Meredith wants to play too!
             -   option: |-
                     ```
@@ -2191,7 +2194,10 @@ levels:
                     Kelly chooses rock
                     ```
                 feedback: So close! But Kelly is first in the list, so she goes first
-            -   option: "```\nMeredith chooses paper\n```"
+            -   option: |-
+                    ```
+                    Meredith chooses paper
+                    ```
                 feedback: Kelly wants to play too!
             -   option: |-
                     ```
