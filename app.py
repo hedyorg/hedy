@@ -1008,8 +1008,7 @@ def programs_page(user):
 
     all_programs = DATABASE.filtered_programs_for_user(from_user or username,
                                                        submitted=submitted,
-                                                       pagination_token=page,
-                                                       limit=10)
+                                                       pagination_token=page)
 
     programs_by_level = []
     for item in all_programs:
