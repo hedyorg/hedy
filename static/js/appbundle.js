@@ -4079,12 +4079,10 @@ var hedyApp = (() => {
     InitLineChart: () => InitLineChart,
     add_account_placeholder: () => add_account_placeholder,
     append_classname: () => append_classname,
-    applyFilter: () => applyFilter,
     changeUserEmail: () => changeUserEmail,
     change_language: () => change_language,
     change_password_student: () => change_password_student,
     clearUnsavedChanges: () => clearUnsavedChanges,
-    cloned: () => cloned,
     closeAchievement: () => closeAchievement,
     closeContainingModal: () => closeContainingModal,
     comeBackHereAfterLogin: () => comeBackHereAfterLogin,
@@ -14186,7 +14184,7 @@ var hedyApp = (() => {
     add: "aldonu|add",
     and: "kaj|and",
     ask: "demandu|ask",
-    at: "la\u016D|at",
+    at: "la\u016D|lau|laux|at",
     black: "nigra|black",
     blue: "blua|blue",
     brown: "bruna|brown",
@@ -14196,11 +14194,11 @@ var hedyApp = (() => {
     comma: ",",
     def: "def",
     define: "define",
-    echo: "e\u0125u|echo",
+    echo: "e\u0125u|ehhu|ehxu|e^hu|eh^u|echo",
     elif: "alie se|elif",
     else: "alie|else",
     for: "por|for",
-    forward: "anta\u016Den|forward",
+    forward: "anta\u016Den|antauen|antauxen|forward",
     from: "el|from",
     gray: "griza|gray",
     green: "verda|green",
@@ -14210,8 +14208,8 @@ var hedyApp = (() => {
     is: "estas|is",
     left: "maldekstren|left",
     length: "longo|length",
-    or: "a\u016D|or",
-    orange: "oran\u011Da|orange",
+    or: "a\u016D|au|aux|or",
+    orange: "oran\u011Da|orangha|orangxa|oran^ga|orang^a|orange",
     pink: "rozkolora|pink",
     play: "play",
     pressed: "pressed",
@@ -14219,15 +14217,15 @@ var hedyApp = (() => {
     purple: "purpura|purple",
     random: "hazardo|random",
     range: "intervalo|range",
-    red: "ru\u011Da|red",
+    red: "ru\u011Da|rugha|rugxa|ru^ga|rug^a|red",
     remove: "forigu|remove",
     repeat: "ripetu|repeat",
     return: "return",
     right: "dekstren|right",
     sleep: "dormu|sleep",
-    step: "pa\u015Do|step",
+    step: "pa\u015Do|pasho|pasxo|pa^so|pas^o|step",
     times: "fojojn|times",
-    to: "\u011Dis|to",
+    to: "\u011Dis|ghis|gxis|^gis|g^is|to",
     to_list: "al|to",
     turn: "turnu|turn",
     while: "dum|while",
@@ -15362,7 +15360,7 @@ var hedyApp = (() => {
     step: "passo|step",
     times: "vezes|times",
     to: "para|to",
-    to_list: "at\xE9|to",
+    to_list: "a|to",
     turn: "gire|turn",
     while: "enquanto|while",
     white: "branco|white",
@@ -15757,7 +15755,7 @@ var hedyApp = (() => {
     blue: "blue",
     brown: "brown",
     call: "call",
-    clear: "clear",
+    clear: "\u0C24\u0C41\u0C21\u0C3F\u0C1A\u0C3F\u0C35\u0C47\u0C2F\u0C3F|clear",
     color: "color",
     comma: ",",
     def: "def",
@@ -16188,12 +16186,12 @@ var hedyApp = (() => {
     black: "\u9ED1\u8272|black",
     blue: "\u84DD\u8272|blue",
     brown: "\u68D5\u8272|brown",
-    call: "call",
+    call: "\u8C03\u7528|call",
     clear: "\u6E05\u9664|clear",
     color: "\u989C\u8272|color",
-    comma: "\uFF0C|\u3001|,",
-    def: "def",
-    define: "define",
+    comma: "\uFF0C|,",
+    def: "\u5B9A\u4E49\u51FD\u6570|def",
+    define: "\u5B9A\u4E49|define",
     echo: "\u56DE\u58F0|echo",
     elif: "\u5426\u5219\u5982\u679C|elif",
     else: "\u5426\u5219|else",
@@ -16211,7 +16209,7 @@ var hedyApp = (() => {
     or: "\u6216|or",
     orange: "\u6A59\u8272|orange",
     pink: "\u7C89\u7EA2\u8272|pink",
-    play: "play",
+    play: "\u8FD0\u884C|play",
     pressed: "\u6309\u4E0B|pressed",
     print: "\u6253\u5370|print",
     purple: "\u7D2B\u8272|purple",
@@ -16220,7 +16218,7 @@ var hedyApp = (() => {
     red: "\u7EA2\u8272|red",
     remove: "\u79FB\u9664|remove",
     repeat: "\u91CD\u590D|repeat",
-    return: "return",
+    return: "\u8FD4\u56DE|return",
     right: "\u53F3|right",
     sleep: "\u7761\u7720|sleep",
     step: "\u6B65|step",
@@ -16228,9 +16226,9 @@ var hedyApp = (() => {
     to: "\u5230|to",
     to_list: "\u5230|to",
     turn: "\u65CB\u8F6C|turn",
-    while: "\u5F53\u7684\u65F6\u5019|while",
+    while: "\u5F53|while",
     white: "\u767D\u8272|white",
-    with: "with",
+    with: "\u5BF9|with",
     yellow: "\u9EC4\u8272|yellow",
     DIGIT: "0123456789"
   };
@@ -16352,13 +16350,13 @@ var hedyApp = (() => {
     var data_tr = convertReg(data, TRADUCTION3);
     var LEVELS = JSON.parse(data_tr);
     if (window.define) {
-      for (const level2 of LEVELS) {
-        define("ace/mode/" + level2.name, [], function(require2, exports, _module) {
+      for (const level3 of LEVELS) {
+        define("ace/mode/" + level3.name, [], function(require2, exports, _module) {
           var oop = require2("ace/lib/oop");
           var TextMode = require2("ace/mode/text").Mode;
           var TextHighlightRules = require2("ace/mode/text_highlight_rules").TextHighlightRules;
           function ThisLevelHighlightRules() {
-            this.$rules = level2.rules;
+            this.$rules = level3.rules;
             this.normalizeRules();
           }
           ;
@@ -16458,7 +16456,7 @@ var hedyApp = (() => {
       "unsaved_class_changes": "There are unsaved changes, are you sure you want to leave this page?"
     },
     "bn": {
-      "CheckInternet": "Have a look if your Internet connection is working properly.",
+      "CheckInternet": "Check whether your Internet connection is working.",
       "Connection_error": "We couldn't reach the server.",
       "Empty_output": "This code works but does not print anything. Add a print command to your code or use the turtle to get output.",
       "Errors_found": "You made a mistake! Don't worry, Hedy is trying to find the mistakes",
@@ -16578,7 +16576,7 @@ var hedyApp = (() => {
       "unsaved_class_changes": "There are unsaved changes, are you sure you want to leave this page?"
     },
     "da": {
-      "CheckInternet": "Have a look if your Internet connection is working properly.",
+      "CheckInternet": "Check whether your Internet connection is working.",
       "Connection_error": "We couldn't reach the server.",
       "Empty_output": "This code works but does not print anything. Add a print command to your code or use the turtle to get output.",
       "Errors_found": "You made a mistake! Don't worry, Hedy is trying to find the mistakes",
@@ -16668,7 +16666,7 @@ var hedyApp = (() => {
       "unsaved_class_changes": "There are unsaved changes, are you sure you want to leave this page?"
     },
     "en": {
-      "CheckInternet": "Have a look if your Internet connection is working properly.",
+      "CheckInternet": "Check whether your Internet connection is working.",
       "Connection_error": "We couldn't reach the server.",
       "Empty_output": "This code works but does not print anything. Add a print command to your code or use the turtle to get output.",
       "Errors_found": "You made a mistake! Don't worry, we still ran the program",
@@ -16728,7 +16726,7 @@ var hedyApp = (() => {
       "unsaved_class_changes": "There are unsaved changes, are you sure you want to leave this page?"
     },
     "es": {
-      "CheckInternet": "Revisa si tu conexi\xF3n de Internet est\xE1 funcionando correctamente.",
+      "CheckInternet": "Comprueba si tu conexi\xF3n a Internet funciona.",
       "Connection_error": "No se ha podido conectar con el servidor.",
       "Empty_output": "Este c\xF3digo funciona pero no imprime nada. Agrega un comando print a tu c\xF3digo o usa una tortuga para mostrar salida.",
       "Errors_found": "\xA1Has cometido un error! No te preocupes, seguimos ejecutando el programa",
@@ -16818,7 +16816,7 @@ var hedyApp = (() => {
       "unsaved_class_changes": "There are unsaved changes, are you sure you want to leave this page?"
     },
     "fi": {
-      "CheckInternet": "Have a look if your Internet connection is working properly.",
+      "CheckInternet": "Check whether your Internet connection is working.",
       "Connection_error": "We couldn't reach the server.",
       "Empty_output": "This code works but does not print anything. Add a print command to your code or use the turtle to get output.",
       "Errors_found": "You made a mistake! Don't worry, Hedy is trying to find the mistakes",
@@ -16968,13 +16966,13 @@ var hedyApp = (() => {
       "unsaved_class_changes": "There are unsaved changes, are you sure you want to leave this page?"
     },
     "hu": {
-      "CheckInternet": "Ellen\u0151rizd, hogy az internetkapcsolat megfelel\u0151en m\u0171k\xF6dik-e!",
+      "CheckInternet": "Ellen\u0151rizd, hogy az internetkapcsolat megfelel\u0151en m\u0171k\xF6dik-e.",
       "Connection_error": "Nem tudjuk el\xE9rni a szervert.",
       "Empty_output": "M\u0171k\xF6dik a program, de nem \xEDr ki semmit. Helyezz el egy ki\xEDr\xE1st a k\xF3dban, vagy haszn\xE1ld a tekn\u0151st, hogy kimenetet kapj!",
-      "Errors_found": "You made a mistake! Don't worry, Hedy is trying to find the mistakes",
+      "Errors_found": "Hib\xE1t k\xF6vett\xE9l el! Ne agg\xF3djon, m\xE9g mindig futtatjuk a programot",
       "Execute_error": "Hiba t\xF6rt\xE9nt a program futtat\xE1sa k\xF6zben.",
       "Other_error": "Hopp\xE1! Tal\xE1n elk\xF6vett\xFCnk egy kis hib\xE1t.",
-      "Program_repair": "This could be the correct code, can you fix it?",
+      "Program_repair": "Ez lehet a helyes k\xF3d, meg tudod jav\xEDtani?",
       "Program_too_long": "T\xFAl hossz\xFA ideig tart programod futtat\xE1sa.",
       "ServerError": "Olyan programot \xEDrt\xE1l, amire nem sz\xE1m\xEDtottunk. Ha seg\xEDteni szeretn\xE9l, k\xFCldj nek\xFCnk egy emailt a szinttel \xE9s a programmal a hello@hedy.org c\xEDmre! Id\u0151k\xF6zben pr\xF3b\xE1ld ki egy kicsit m\xE1sk\xE9pp, \xE9s n\xE9zd meg a p\xE9ld\xE1kat! K\xF6sz\xF6nj\xFCk!",
       "Transpile_error": "Nem tudjuk futtatni a k\xF3dodat.",
@@ -17088,7 +17086,7 @@ var hedyApp = (() => {
       "unsaved_class_changes": "There are unsaved changes, are you sure you want to leave this page?"
     },
     "kmr": {
-      "CheckInternet": "Have a look if your Internet connection is working properly.",
+      "CheckInternet": "Check whether your Internet connection is working.",
       "Connection_error": "We couldn't reach the server.",
       "Empty_output": "This code works but does not print anything. Add a print command to your code or use the turtle to get output.",
       "Errors_found": "You made a mistake! Don't worry, Hedy is trying to find the mistakes",
@@ -17148,7 +17146,7 @@ var hedyApp = (() => {
       "unsaved_class_changes": "There are unsaved changes, are you sure you want to leave this page?"
     },
     "mi": {
-      "CheckInternet": "Have a look if your Internet connection is working properly.",
+      "CheckInternet": "Check whether your Internet connection is working.",
       "Connection_error": "We couldn't reach the server.",
       "Empty_output": "This code works but does not print anything. Add a print command to your code or use the turtle to get output.",
       "Errors_found": "You made a mistake! Don't worry, we still ran the program",
@@ -17178,7 +17176,7 @@ var hedyApp = (() => {
       "unsaved_class_changes": "There are unsaved changes, are you sure you want to leave this page?"
     },
     "nl": {
-      "CheckInternet": "Controleer even of je internetverbinding het nog doet.",
+      "CheckInternet": "Controleer of jouw internetverbinding wel goed werkt.",
       "Connection_error": "We konden niet goed met de server praten.",
       "Empty_output": "Deze code werkt wel, maar print niks. Voeg een print commando toe aan je code of gebruik de schildpad om output te krijgen.",
       "Errors_found": "Je hebt een foutje gemaakt! Maak je geen zorgen, Hedy probeert de fouten te vinden",
@@ -17238,7 +17236,7 @@ var hedyApp = (() => {
       "unsaved_class_changes": "There are unsaved changes, are you sure you want to leave this page?"
     },
     "pa_PK": {
-      "CheckInternet": "Have a look if your Internet connection is working properly.",
+      "CheckInternet": "Check whether your Internet connection is working.",
       "Connection_error": "We couldn't reach the server.",
       "Empty_output": "This code works but does not print anything. Add a print command to your code or use the turtle to get output.",
       "Errors_found": "You made a mistake! Don't worry, Hedy is trying to find the mistakes",
@@ -17268,7 +17266,7 @@ var hedyApp = (() => {
       "unsaved_class_changes": "There are unsaved changes, are you sure you want to leave this page?"
     },
     "pap": {
-      "CheckInternet": "Have a look if your Internet connection is working properly.",
+      "CheckInternet": "Check whether your Internet connection is working.",
       "Connection_error": "We couldn't reach the server.",
       "Empty_output": "This code works but does not print anything. Add a print command to your code or use the turtle to get output.",
       "Errors_found": "You made a mistake! Don't worry, we still ran the program",
@@ -17328,10 +17326,10 @@ var hedyApp = (() => {
       "unsaved_class_changes": "Strona zawiera niezapisane zmiany. Czy jeste\u015B pewien, \u017Ce chcesz wyj\u015B\u0107 bez zapisania zmian?"
     },
     "pt_BR": {
-      "CheckInternet": "Verifique se a sua conex\xE3o com a Internet est\xE1 funcionando corretamente.",
+      "CheckInternet": "Verifique se sua conex\xE3o com a Internet est\xE1 funcionando.",
       "Connection_error": "N\xF3s n\xE3o conseguimos conectar ao servidor.",
       "Empty_output": "Este c\xF3digo funciona mas n\xE3o imprime nada. Adicione um comando de impress\xE3o ou use a tartaruga para ter alguma sa\xEDda.",
-      "Errors_found": "You made a mistake! Don't worry, Hedy is trying to find the mistakes",
+      "Errors_found": "Voc\xEA cometeu um erro! N\xE3o se preocupe, ainda executamos o programa",
       "Execute_error": "Alguma coisa deu errado enquanto o programa era executado.",
       "Other_error": "Opa! Talvez n\xF3s fizemos alguma coisa errada.",
       "Program_repair": "Este poderia ser o c\xF3digo correto, voc\xEA poderia corrigir ele?",
@@ -17538,7 +17536,7 @@ var hedyApp = (() => {
       "unsaved_class_changes": "Det finns osparade \xE4ndringar; \xE4r du s\xE4ker p\xE5 att du vill l\xE4mna sidan?"
     },
     "sw": {
-      "CheckInternet": "Have a look if your Internet connection is working properly.",
+      "CheckInternet": "Check whether your Internet connection is working.",
       "Connection_error": "Hatukuweza kufikia seva.",
       "Empty_output": "This code works but does not print anything. Add a print command to your code or use the turtle to get output.",
       "Errors_found": "You made a mistake! Don't worry, Hedy is trying to find the mistakes",
@@ -17568,7 +17566,7 @@ var hedyApp = (() => {
       "unsaved_class_changes": "There are unsaved changes, are you sure you want to leave this page?"
     },
     "te": {
-      "CheckInternet": "Have a look if your Internet connection is working properly.",
+      "CheckInternet": "Check whether your Internet connection is working.",
       "Connection_error": "We couldn't reach the server.",
       "Empty_output": "This code works but does not print anything. Add a print command to your code or use the turtle to get output.",
       "Errors_found": "You made a mistake! Don't worry, Hedy is trying to find the mistakes",
@@ -17628,7 +17626,7 @@ var hedyApp = (() => {
       "unsaved_class_changes": "There are unsaved changes, are you sure you want to leave this page?"
     },
     "tl": {
-      "CheckInternet": "Have a look if your Internet connection is working properly.",
+      "CheckInternet": "Check whether your Internet connection is working.",
       "Connection_error": "We couldn't reach the server.",
       "Empty_output": "This code works but does not print anything. Add a print command to your code or use the turtle to get output.",
       "Errors_found": "You made a mistake! Don't worry, Hedy is trying to find the mistakes",
@@ -17658,7 +17656,7 @@ var hedyApp = (() => {
       "unsaved_class_changes": "There are unsaved changes, are you sure you want to leave this page?"
     },
     "tn": {
-      "CheckInternet": "Have a look if your Internet connection is working properly.",
+      "CheckInternet": "Check whether your Internet connection is working.",
       "Connection_error": "We couldn't reach the server.",
       "Empty_output": "This code works but does not print anything. Add a print command to your code or use the turtle to get output.",
       "Errors_found": "You made a mistake! Don't worry, Hedy is trying to find the mistakes",
@@ -17748,7 +17746,7 @@ var hedyApp = (() => {
       "unsaved_class_changes": "There are unsaved changes, are you sure you want to leave this page?"
     },
     "ur": {
-      "CheckInternet": "Have a look if your Internet connection is working properly.",
+      "CheckInternet": "Check whether your Internet connection is working.",
       "Connection_error": "We couldn't reach the server.",
       "Empty_output": "This code works but does not print anything. Add a print command to your code or use the turtle to get output.",
       "Errors_found": "You made a mistake! Don't worry, Hedy is trying to find the mistakes",
@@ -17808,7 +17806,7 @@ var hedyApp = (() => {
       "unsaved_class_changes": "There are unsaved changes, are you sure you want to leave this page?"
     },
     "zh_Hans": {
-      "CheckInternet": "\u67E5\u770B\u4E00\u4E0B\u4F60\u7684\u7F51\u7EDC\u8FDE\u63A5\u662F\u5426\u6B63\u5E38.",
+      "CheckInternet": "\u68C0\u67E5\u60A8\u7684\u4E92\u8054\u7F51\u8FDE\u63A5\u662F\u5426\u6B63\u5E38\u3002",
       "Connection_error": "\u6211\u4EEC\u65E0\u6CD5\u8FDE\u63A5\u5230\u670D\u52A1\u5668\u3002",
       "Empty_output": "\u8FD9\u6BB5\u4EE3\u7801\u53EF\u4EE5\u5DE5\u4F5C\uFF0C\u4F46\u6CA1\u6709\u6253\u5370\u4EFB\u4F55\u4E1C\u897F\u3002\u5728\u4F60\u7684\u4EE3\u7801\u4E2D\u6DFB\u52A0\u4E00\u4E2A\u6253\u5370\u547D\u4EE4\uFF0C\u6216\u8005\u4F7F\u7528\u4E4C\u9F9F\u6765\u83B7\u5F97\u8F93\u51FA\u3002",
       "Errors_found": "\u4F60\u641E\u9519\u4E86\uFF01\u4E0D\u8981\u7740\u6025\uFF0C\u6211\u4EEC\u4ECD\u7136\u8FD0\u884C\u8BE5\u7A0B\u5E8F",
@@ -17833,12 +17831,12 @@ var hedyApp = (() => {
       "restaurant": "\u{1F363}, \u{1F355}, \u{1F354}",
       "rock": "\u2702\uFE0F, \u{1F4DC}, \u{1F5FB}",
       "songs": "\u{1F3B5},\u{1F3B6}",
-      "teacher_welcome": "Welcome to Hedy! Your are now the proud owner of a teachers account which allows you to create classes and invite students.",
+      "teacher_welcome": "\u6B22\u8FCE\u6765\u5230\u6D77\u8482\uFF01 \u60A8\u73B0\u5728\u662F\u6559\u5E08\u5E10\u6237\u7684\u81EA\u8C6A\u62E5\u6709\u8005\uFF0C\u8BE5\u5E10\u6237\u5141\u8BB8\u60A8\u521B\u5EFA\u8BFE\u7A0B\u5E76\u9080\u8BF7\u5B66\u751F\u3002",
       "turtle": "\u{1F422}",
-      "unsaved_class_changes": "There are unsaved changes, are you sure you want to leave this page?"
+      "unsaved_class_changes": "\u6709\u672A\u4FDD\u5B58\u7684\u66F4\u6539\uFF0C\u60A8\u786E\u5B9A\u8981\u79BB\u5F00\u6B64\u9875\u9762\u5417\uFF1F"
     },
     "zh_Hant": {
-      "CheckInternet": "Have a look if your Internet connection is working properly.",
+      "CheckInternet": "Check whether your Internet connection is working.",
       "Connection_error": "We couldn't reach the server.",
       "Empty_output": "This code works but does not print anything. Add a print command to your code or use the turtle to get output.",
       "Errors_found": "You made a mistake! Don't worry, Hedy is trying to find the mistakes",
@@ -33544,10 +33542,10 @@ notes_mapping = {
     current_level = "intro";
     startIntro();
   }
-  function startLevelTutorial(level2) {
+  function startLevelTutorial(level3) {
     $("#tutorial-mask").show();
-    current_level = level2;
-    startLevel(level2);
+    current_level = level3;
+    startLevel(level3);
   }
   function startTeacherTutorial() {
     $("#tutorial-mask").show();
@@ -34610,8 +34608,8 @@ notes_mapping = {
       return this.flags & 8 ? -1 : this.flags & 16 ? 1 : 0;
     }
     get bidiLevel() {
-      let level2 = this.flags & 7;
-      return level2 == 7 ? null : level2;
+      let level3 = this.flags & 7;
+      return level3 == 7 ? null : level3;
     }
     get goalColumn() {
       let value = this.flags >> 6;
@@ -38273,18 +38271,18 @@ notes_mapping = {
       point() {
       },
       span(from18, to11, active, open) {
-        let level2 = result;
+        let level3 = result;
         for (let i = active.length - 1; i >= 0; i--, open--) {
           let iso = active[i].spec.bidiIsolate, update;
           if (iso == null)
             continue;
-          if (open > 0 && level2.length && (update = level2[level2.length - 1]).to == from18 && update.direction == iso) {
+          if (open > 0 && level3.length && (update = level3[level3.length - 1]).to == from18 && update.direction == iso) {
             update.to = to11;
-            level2 = update.inner;
+            level3 = update.inner;
           } else {
             let add17 = { from: from18, to: to11, direction: iso, inner: [] };
-            level2.push(add17);
-            level2 = add17.inner;
+            level3.push(add17);
+            level3 = add17.inner;
           }
         }
       }
@@ -38428,20 +38426,20 @@ notes_mapping = {
     get dir() {
       return this.level % 2 ? RTL : LTR;
     }
-    constructor(from17, to10, level2) {
+    constructor(from17, to10, level3) {
       this.from = from17;
       this.to = to10;
-      this.level = level2;
+      this.level = level3;
     }
     side(end, dir) {
       return this.dir == dir == end ? this.to : this.from;
     }
-    static find(order, index3, level2, assoc) {
+    static find(order, index3, level3, assoc) {
       let maybe = -1;
       for (let i = 0; i < order.length; i++) {
         let span = order[i];
         if (span.from <= index3 && span.to >= index3) {
-          if (span.level == level2)
+          if (span.level == level3)
             return i;
           if (maybe < 0 || (assoc != 0 ? assoc < 0 ? span.from < index3 : span.to > index3 : order[maybe].level > span.level))
             maybe = i;
@@ -38582,9 +38580,9 @@ notes_mapping = {
       }
     }
   }
-  function emitSpans(line, from17, to10, level2, baseLevel, isolates, order) {
-    let ourType = level2 % 2 ? 2 : 1;
-    if (level2 % 2 == baseLevel % 2) {
+  function emitSpans(line, from17, to10, level3, baseLevel, isolates, order) {
+    let ourType = level3 % 2 ? 2 : 1;
+    if (level3 % 2 == baseLevel % 2) {
       for (let iCh = from17, iI = 0; iCh < to10; ) {
         let sameDir = true, isNum = false;
         if (iI == isolates.length || iCh < isolates[iI].from) {
@@ -38595,7 +38593,7 @@ notes_mapping = {
           }
         }
         let recurse = !sameDir && ourType == 1 ? [] : null;
-        let localLevel = sameDir ? level2 : level2 + 1;
+        let localLevel = sameDir ? level3 : level3 + 1;
         let iScan = iCh;
         run:
           for (; ; ) {
@@ -38621,7 +38619,7 @@ notes_mapping = {
                 if (iso.from > iCh)
                   order.push(new BidiSpan(iCh, iso.from, localLevel));
                 let dirSwap = iso.direction == LTR != !(localLevel % 2);
-                computeSectionOrder(line, dirSwap ? level2 + 1 : level2, baseLevel, iso.inner, iso.from, iso.to, order);
+                computeSectionOrder(line, dirSwap ? level3 + 1 : level3, baseLevel, iso.inner, iso.from, iso.to, order);
                 iCh = iso.to;
               }
               iScan = iso.to;
@@ -38632,7 +38630,7 @@ notes_mapping = {
             }
           }
         if (recurse)
-          emitSpans(line, iCh, iScan, level2 + 1, baseLevel, recurse, order);
+          emitSpans(line, iCh, iScan, level3 + 1, baseLevel, recurse, order);
         else if (iCh < iScan)
           order.push(new BidiSpan(iCh, iScan, localLevel));
         iCh = iScan;
@@ -38648,7 +38646,7 @@ notes_mapping = {
           }
         }
         let recurse = !sameDir && ourType == 1 ? [] : null;
-        let localLevel = sameDir ? level2 : level2 + 1;
+        let localLevel = sameDir ? level3 : level3 + 1;
         let iScan = iCh;
         run:
           for (; ; ) {
@@ -38673,7 +38671,7 @@ notes_mapping = {
                 if (iso.to < iCh)
                   order.push(new BidiSpan(iso.to, iCh, localLevel));
                 let dirSwap = iso.direction == LTR != !(localLevel % 2);
-                computeSectionOrder(line, dirSwap ? level2 + 1 : level2, baseLevel, iso.inner, iso.from, iso.to, order);
+                computeSectionOrder(line, dirSwap ? level3 + 1 : level3, baseLevel, iso.inner, iso.from, iso.to, order);
                 iCh = iso.from;
               }
               iScan = iso.from;
@@ -38684,19 +38682,19 @@ notes_mapping = {
             }
           }
         if (recurse)
-          emitSpans(line, iScan, iCh, level2 + 1, baseLevel, recurse, order);
+          emitSpans(line, iScan, iCh, level3 + 1, baseLevel, recurse, order);
         else if (iScan < iCh)
           order.push(new BidiSpan(iScan, iCh, localLevel));
         iCh = iScan;
       }
     }
   }
-  function computeSectionOrder(line, level2, baseLevel, isolates, from17, to10, order) {
-    let outerType = level2 % 2 ? 2 : 1;
+  function computeSectionOrder(line, level3, baseLevel, isolates, from17, to10, order) {
+    let outerType = level3 % 2 ? 2 : 1;
     computeCharTypes(line, from17, to10, isolates, outerType);
     processBracketPairs(line, from17, to10, isolates, outerType);
     processNeutrals(from17, to10, isolates, outerType);
-    emitSpans(line, from17, to10, level2, baseLevel, isolates, order);
+    emitSpans(line, from17, to10, level3, baseLevel, isolates, order);
   }
   function computeOrder(line, direction, isolates) {
     if (!line)
@@ -38706,8 +38704,8 @@ notes_mapping = {
     if (isolates.length)
       while (line.length > types.length)
         types[types.length] = 256;
-    let order = [], level2 = direction == LTR ? 0 : 1;
-    computeSectionOrder(line, level2, level2, isolates, 0, line.length, order);
+    let order = [], level3 = direction == LTR ? 0 : 1;
+    computeSectionOrder(line, level3, level3, isolates, 0, line.length, order);
     return order;
   }
   function trivialOrder(length) {
@@ -45815,9 +45813,9 @@ notes_mapping = {
   function styleTags(spec) {
     let byName = Object.create(null);
     for (let prop in spec) {
-      let tags3 = spec[prop];
-      if (!Array.isArray(tags3))
-        tags3 = [tags3];
+      let tags2 = spec[prop];
+      if (!Array.isArray(tags2))
+        tags2 = [tags2];
       for (let part of prop.split(" "))
         if (part) {
           let pieces = [], mode = 2, rest = part;
@@ -45845,7 +45843,7 @@ notes_mapping = {
           let last = pieces.length - 1, inner = pieces[last];
           if (!inner)
             throw new RangeError("Invalid path: " + part);
-          let rule = new Rule(tags3, mode, last > 0 ? pieces.slice(0, last) : null);
+          let rule = new Rule(tags2, mode, last > 0 ? pieces.slice(0, last) : null);
           byName[inner] = rule.sort(byName[inner]);
         }
     }
@@ -45853,8 +45851,8 @@ notes_mapping = {
   }
   var ruleNodeProp = new NodeProp();
   var Rule = class {
-    constructor(tags3, mode, context2, next) {
-      this.tags = tags3;
+    constructor(tags2, mode, context2, next) {
+      this.tags = tags2;
       this.mode = mode;
       this.context = context2;
       this.next = next;
@@ -45878,9 +45876,9 @@ notes_mapping = {
     }
   };
   Rule.empty = new Rule([], 2, null);
-  function tagHighlighter(tags3, options) {
+  function tagHighlighter(tags2, options) {
     let map3 = Object.create(null);
-    for (let style of tags3) {
+    for (let style of tags2) {
       if (!Array.isArray(style.tag))
         map3[style.tag.id] = style.class;
       else
@@ -45889,9 +45887,9 @@ notes_mapping = {
     }
     let { scope, all = null } = options || {};
     return {
-      style: (tags4) => {
+      style: (tags3) => {
         let cls = all;
-        for (let tag of tags4) {
+        for (let tag of tags3) {
           for (let sub of tag.set) {
             let tagClass = map3[sub.id];
             if (tagClass) {
@@ -45905,10 +45903,10 @@ notes_mapping = {
       scope
     };
   }
-  function highlightTags(highlighters, tags3) {
+  function highlightTags(highlighters, tags2) {
     let result = null;
     for (let highlighter of highlighters) {
-      let value = highlighter.style(tags3);
+      let value = highlighter.style(tags2);
       if (value)
         result = result ? result + " " + value : value;
     }
@@ -48967,13 +48965,13 @@ notes_mapping = {
   var openSearchPanel = (view) => {
     let state = view.state.field(searchState, false);
     if (state && state.panel) {
-      let searchInput = getSearchInput(view);
-      if (searchInput && searchInput != view.root.activeElement) {
+      let searchInput2 = getSearchInput(view);
+      if (searchInput2 && searchInput2 != view.root.activeElement) {
         let query = defaultQuery(view.state, state.query.spec);
         if (query.valid)
           view.dispatch({ effects: setSearchQuery.of(query) });
-        searchInput.focus();
-        searchInput.select();
+        searchInput2.focus();
+        searchInput2.select();
       }
     } else {
       view.dispatch({ effects: [
@@ -49324,6 +49322,8 @@ notes_mapping = {
   var debugWord = Decoration.mark({ class: "cm-debugger-current-line" });
   var incorrectCodeMark = Decoration.mark({ class: "cm-incorrect-hedy-code" });
   var deactivateLineMarker = Decoration.line({ class: "cm-disabled-line" });
+  var highlightVariableMarker = Decoration.mark({ class: "cm-highlight-var" });
+  var highlightFunctionMarker = Decoration.mark({ class: "cm-highlight-fun" });
   var decorationsTheme = EditorView.theme({
     ".cm-error-editor": {
       outline: "2px solid #F56565",
@@ -49335,6 +49335,12 @@ notes_mapping = {
     },
     ".cm-incorrect-hedy-code": {
       textDecoration: "red wavy underline"
+    },
+    ".cm-highlight-var": {
+      color: "#c2e3ff "
+    },
+    ".cm-highlight-fun": {
+      color: "#EDF492"
     }
   });
   var deactivateGutterMarker = new class extends GutterMarker {
@@ -49417,6 +49423,129 @@ notes_mapping = {
       return ((_a3 = view.plugin(plugin)) == null ? void 0 : _a3.placeholders) || Decoration.none;
     })
   });
+  var variableHighlighter = ViewPlugin.fromClass(class {
+    constructor(view) {
+      this.decorations = highlightVariables(view);
+    }
+    update(update) {
+      if (update.docChanged || update.viewportChanged) {
+        this.decorations = highlightVariables(update.view);
+      }
+    }
+  }, {
+    decorations: (v) => v.decorations
+  });
+  function highlightVariables(view) {
+    const level3 = view.state.facet(level);
+    if (level3 == 1)
+      return Decoration.none;
+    let variableDeco = new RangeSetBuilder();
+    let variableData = [];
+    let functionsNames = new Set();
+    let variablesNames = new Set();
+    let definingCommands = [
+      "Assign",
+      "Ask",
+      "AssignList",
+      "For",
+      "Input"
+    ];
+    for (let { from: from17, to: to10 } of view.visibleRanges) {
+      syntaxTree(view.state).iterate({
+        from: from17,
+        to: to10,
+        enter: (node) => {
+          if (definingCommands.includes(node.node.name)) {
+            const child = node.node.getChild("Text");
+            addVar(child, variableData, "variable", view, functionsNames, variablesNames);
+          } else if (node.node.name === "Define") {
+            const textChild = node.node.getChild("Text");
+            addVar(textChild, variableData, "function", view, functionsNames, variablesNames);
+            const argumentChild = node.node.getChild("Arguments");
+            const expressions = argumentChild == null ? void 0 : argumentChild.getChildren("Expression");
+            expressions == null ? void 0 : expressions.map((expression) => {
+              const textChild2 = expression.getChild("Text");
+              addVar(textChild2, variableData, "variable", view, functionsNames, variablesNames);
+            });
+          }
+        }
+      });
+    }
+    let commands = [
+      "Assign",
+      "Print",
+      "Forward",
+      "Turn",
+      "Color",
+      "Sleep",
+      "ListAccess",
+      "Add",
+      "Remove",
+      "EqualityCheck",
+      "InListCheck",
+      "NotInListCheck",
+      "Expression",
+      "Repeat",
+      "For",
+      "Call"
+    ];
+    if (level3 > 3)
+      commands.push("Ask");
+    for (let { from: from17, to: to10 } of view.visibleRanges) {
+      syntaxTree(view.state).iterate({
+        from: from17,
+        to: to10,
+        enter: (node) => {
+          if (commands.includes(node.name)) {
+            const children = node.node.getChildren("Text");
+            let i = definingCommands.includes(node.name) ? 1 : 0;
+            for (; i < children.length; i++) {
+              const child = children[i];
+              const text = view.state.doc.sliceString(child.from, child.to);
+              if (level3 <= 3) {
+                const varNames = getVarNames(text) || [];
+                let startIndex = 0;
+                for (const name2 of varNames) {
+                  if (variablesNames.has(name2)) {
+                    const index3 = text.indexOf(name2, startIndex);
+                    variableData.push({
+                      name: name2,
+                      type: "variable",
+                      pos: { from: child.from + index3, to: child.from + index3 + name2.length }
+                    });
+                    startIndex = index3 + name2.length;
+                  }
+                }
+              } else if (variablesNames.has(text) || functionsNames.has(text)) {
+                variableData.push({
+                  name: text,
+                  type: variablesNames.has(text) ? "variable" : "function",
+                  pos: { from: child.from, to: child.to }
+                });
+              }
+            }
+          }
+        }
+      });
+    }
+    variableData.sort((a, b) => a.pos.from - b.pos.from);
+    variableData.forEach((data) => {
+      if (data.type === "function") {
+        variableDeco.add(data.pos.from, data.pos.to, highlightFunctionMarker);
+      } else {
+        variableDeco.add(data.pos.from, data.pos.to, highlightVariableMarker);
+      }
+    });
+    return variableDeco.finish();
+  }
+  function getVarNames(name2) {
+    const varRegex = /^[\p{Lu}\p{Ll}\p{Lt}\p{Lm}\p{Lo}\p{Nl}_]+([\p{Lu}\p{Ll}\p{Lt}\p{Lm}\p{Lo}\p{Nl}_]+|[\p{Mn}\p{Mc}\p{Nd}\p{Pc}·]+)*$/gmu;
+    return name2.match(varRegex);
+  }
+  function isVarName(name2) {
+    const varRegex = /^[\p{Lu}\p{Ll}\p{Lt}\p{Lm}\p{Lo}\p{Nl}_]+([\p{Lu}\p{Ll}\p{Lt}\p{Lm}\p{Lo}\p{Nl}_]+|[\p{Mn}\p{Mc}\p{Nd}\p{Pc}·]+)*$/gmu;
+    return varRegex.test(name2);
+  }
   function basicIndent(context2, pos) {
     const nextIndentationSize = context2.lineIndent(pos, -1);
     let prevIndentationSize;
@@ -49427,6 +49556,25 @@ notes_mapping = {
     }
     const indentBy = Math.max(prevIndentationSize, nextIndentationSize);
     return indentBy;
+  }
+  function addVar(child, variableData, type, view, functionsNames, variablesNames) {
+    if (child && isVarName(view.state.doc.sliceString(child.from, child.to))) {
+      const name2 = view.state.doc.sliceString(child.from, child.to);
+      const data = {
+        name: name2,
+        type,
+        pos: { from: child.from, to: child.to }
+      };
+      variableData.push(data);
+      switch (type) {
+        case "function":
+          functionsNames.add(name2);
+          break;
+        case "variable":
+          variablesNames.add(name2);
+          break;
+      }
+    }
   }
 
   // node_modules/@lezer/lr/dist/index.js
@@ -51268,7 +51416,7 @@ notes_mapping = {
 
   // static/js/lezer-parsers/tokens.ts
   var TRADUCTION;
-  var level;
+  var level2;
   var keywordToToken = {
     1: {
       extend: {
@@ -51797,7 +51945,7 @@ notes_mapping = {
   var extendTranslations;
   function initializeTranslation(options) {
     const TRADUCTIONS = convert2(highlighting_trad_default);
-    level = options.level;
+    level2 = options.level;
     let lang = options.keywordLanguage;
     if (!TRADUCTIONS.has(lang)) {
       lang = "en";
@@ -51806,9 +51954,9 @@ notes_mapping = {
     specializeTranslations = new Map();
     extendTranslations = new Map();
     for (const [key, value] of TRADUCTION) {
-      if (key in keywordToToken[level].specialize) {
+      if (key in keywordToToken[level2].specialize) {
         specializeTranslations.set(key, value);
-      } else if (key in keywordToToken[level].extend) {
+      } else if (key in keywordToToken[level2].extend) {
         extendTranslations.set(key, value);
       }
     }
@@ -51817,8 +51965,8 @@ notes_mapping = {
     for (const [key, value] of specializeTranslations) {
       const regexString = value.replace(" ", "|");
       if (new RegExp(`^(${regexString})$`, "gu").test(name2)) {
-        if (stack.canShift(keywordToToken[level].specialize[key])) {
-          return keywordToToken[level].specialize[key];
+        if (stack.canShift(keywordToToken[level2].specialize[key])) {
+          return keywordToToken[level2].specialize[key];
         }
       }
     }
@@ -51828,8 +51976,8 @@ notes_mapping = {
     for (const [key, value] of extendTranslations) {
       const regexString = value.replace(" ", "|");
       if (new RegExp(`^(${regexString})$`, "gu").test(name2)) {
-        if (stack.canShift(keywordToToken[level].extend[key])) {
-          return keywordToToken[level].extend[key];
+        if (stack.canShift(keywordToToken[level2].extend[key])) {
+          return keywordToToken[level2].extend[key];
         }
       }
     }
@@ -52396,6 +52544,7 @@ notes_mapping = {
 
   // static/js/cm-editor.ts
   var indentSize = " ".repeat(4);
+  var level = Facet.define();
   var HedyCodeMirrorEditorCreator = class {
     initializeEditorWithGutter($editor, editorType, dir = "ltr") {
       let editor = new HedyCodeMirrorEditor($editor.get(0), $editor.data("readonly"), editorType, dir);
@@ -52441,7 +52590,10 @@ notes_mapping = {
           ".cm-gutters": {
             borderRadius: "4px"
           },
-          ".cm-cursor, .cm-dropCursor": { borderLeftColor: "white", borderLeftWidth: "2px" }
+          ".cm-cursor, .cm-dropCursor": { borderLeftColor: "white", borderLeftWidth: "2px" },
+          ".cm-name": {
+            color: "#009975"
+          }
         });
         state = EditorState.create({
           doc: "",
@@ -52472,12 +52624,17 @@ notes_mapping = {
             debugLineField,
             incorrectLineField,
             Prec.high(decorationsTheme),
-            placeholders
+            placeholders,
+            theLevel ? level.of(theLevel) : [],
+            Prec.highest(variableHighlighter)
           ]
         });
       } else {
         let theme2 = {
-          ".cm-cursor, .cm-dropCursor": { border: "none" }
+          ".cm-cursor, .cm-dropCursor": { border: "none" },
+          ".cm-name": {
+            color: "#009975"
+          }
         };
         let extensions = [
           highlightSpecialChars(),
@@ -52485,7 +52642,10 @@ notes_mapping = {
           syntaxHighlighting(defaultHighlightStyle, { fallback: true }),
           monokai,
           this.readMode.of(EditorState.readOnly.of(isReadOnly)),
-          placeholders
+          placeholders,
+          theLevel ? level.of(theLevel) : [],
+          Prec.high(decorationsTheme),
+          Prec.highest(variableHighlighter)
         ];
         switch (editorType) {
           case EditorType.CHEATSHEET:
@@ -52523,8 +52683,8 @@ notes_mapping = {
         this.setHighlighterForLevel(theLevel);
       }
     }
-    setHighlighterForLevel(level2) {
-      const language2 = languagePerLevel[level2];
+    setHighlighterForLevel(level3) {
+      const language2 = languagePerLevel[level3];
       const hedyStyleTags = {
         "print forward turn play color ask is echo sleep Comma": tags.keyword,
         "at random remove from add to if else in not Op": tags.keyword,
@@ -52597,8 +52757,8 @@ notes_mapping = {
     }
     configureMainEditor() {
     }
-    getHighlighter(level2) {
-      return `${level2}`;
+    getHighlighter(level3) {
+      return `${level3}`;
     }
     trimTrailingSpace() {
       deleteTrailingWhitespace(this.view);
@@ -54914,10 +55074,10 @@ notes_mapping = {
   var sortable_esm_default = Sortable;
 
   // static/js/parsons.ts
-  function loadParsonsExercise(level2, exercise) {
+  function loadParsonsExercise(level3, exercise) {
     $("#next_parson_button").hide();
     let parameters = new URLSearchParams(window.location.search);
-    let url = "/parsons/get-exercise/" + level2 + "/" + exercise;
+    let url = "/parsons/get-exercise/" + level3 + "/" + exercise;
     if (parameters.has("keyword_language")) {
       url += "/" + parameters.get("keyword_language");
     }
@@ -54931,7 +55091,7 @@ notes_mapping = {
       resetView();
       updateHeader(exercise);
       showExercise(response);
-      updateNextExerciseButton(level2, exercise);
+      updateNextExerciseButton(level3, exercise);
     }).fail(function(err) {
       modal.notifyError(err.responseText);
     });
@@ -54975,10 +55135,10 @@ notes_mapping = {
     });
     $("#parsons_explanation_story").text(response.story);
   }
-  function updateNextExerciseButton(level2, exercise) {
+  function updateNextExerciseButton(level3, exercise) {
     const max_exercise = $("#next_parson_button").attr("max_exercise") || 1;
     if (exercise < max_exercise) {
-      $("#next_parson_button").on("click", () => loadParsonsExercise(level2, exercise + 1));
+      $("#next_parson_button").on("click", () => loadParsonsExercise(level3, exercise + 1));
     } else {
       $("#next_parson_button").off("click");
     }
@@ -55128,8 +55288,8 @@ notes_mapping = {
         this._editor.setOptions({ rtl: true });
       }
     }
-    setHighlighterForLevel(level2) {
-      const mode = this.getHighlighter(level2);
+    setHighlighterForLevel(level3) {
+      const mode = this.getHighlighter(level3);
       this._editor.session.setMode(mode);
     }
     get contents() {
@@ -55169,8 +55329,8 @@ notes_mapping = {
     getDeactivatedLines() {
       return this._editor.session.getBreakpoints();
     }
-    getHighlighter(level2) {
-      return `ace/mode/level${level2}`;
+    getHighlighter(level3) {
+      return `ace/mode/level${level3}`;
     }
     trimTrailingSpace() {
       try {
@@ -55410,15 +55570,15 @@ notes_mapping = {
       $("#variable_button").hide();
     }
     if (options.level > 0) {
-      let level2 = options.level;
-      step_debugger = level2 <= 700;
+      let level3 = options.level;
+      step_debugger = level3 <= 700;
     }
     if (!step_debugger) {
       $("#debug_button").hide();
     }
     if (options.level != 0) {
-      let level2 = options.level;
-      variable_view = level2 >= 2;
+      let level3 = options.level;
+      variable_view = level3 >= 2;
       hide_if_no_variables();
     }
     initializeBreakpoints(options.editor);
@@ -55888,12 +56048,12 @@ notes_mapping = {
       }
       const exampleEditor = editorCreator.initializeReadOnlyEditor(preview, dir);
       exampleEditor.contents = code.trimEnd();
-      for (const level2 of levels) {
+      for (const level3 of levels) {
         initializeTranslation({
           keywordLanguage: theKeywordLanguage,
-          level: parseInt(level2, 10)
+          level: parseInt(level3, 10)
         });
-        exampleEditor.setHighlighterForLevel(parseInt(level2, 10));
+        exampleEditor.setHighlighterForLevel(parseInt(level3, 10));
       }
     }
   }
@@ -56028,28 +56188,28 @@ notes_mapping = {
       });
     });
   }
-  function enable_level(level2) {
+  function enable_level(level3) {
     markUnsavedChanges();
-    if ($("#enable_level_" + level2).is(":checked")) {
-      $("#opening_date_level_" + level2).prop("disabled", false).attr("type", "text").attr("placeholder", ClientMessages.directly_available).removeClass("bg-green-300").addClass("bg-gray-200");
+    if ($("#enable_level_" + level3).is(":checked")) {
+      $("#opening_date_level_" + level3).prop("disabled", false).attr("type", "text").attr("placeholder", ClientMessages.directly_available).removeClass("bg-green-300").addClass("bg-gray-200");
     } else {
-      $("#opening_date_level_" + level2).prop("disabled", true).attr("type", "text").attr("placeholder", ClientMessages.disabled).val("");
+      $("#opening_date_level_" + level3).prop("disabled", true).attr("type", "text").attr("placeholder", ClientMessages.disabled).val("");
     }
-    if ($("#level-" + level2).is(":visible")) {
-      setLevelStateIndicator(level2);
+    if ($("#level-" + level3).is(":visible")) {
+      setLevelStateIndicator(level3);
     }
   }
-  function setDateLevelInputColor(level2) {
-    var date_string = $("#opening_date_level_" + level2).val();
+  function setDateLevelInputColor(level3) {
+    var date_string = $("#opening_date_level_" + level3).val();
     var input_date = new Date(date_string);
     var today_date = new Date();
     if (input_date > today_date) {
-      $("#opening_date_level_" + level2).removeClass("bg-gray-200").addClass("bg-green-300");
+      $("#opening_date_level_" + level3).removeClass("bg-gray-200").addClass("bg-green-300");
     } else {
-      $("#opening_date_level_" + level2).removeClass("bg-green-300").addClass("bg-gray-200");
+      $("#opening_date_level_" + level3).removeClass("bg-green-300").addClass("bg-gray-200");
     }
-    if ($("#level-" + level2).is(":visible")) {
-      setLevelStateIndicator(level2);
+    if ($("#level-" + level3).is(":visible")) {
+      setLevelStateIndicator(level3);
     }
   }
   function add_account_placeholder() {
@@ -56175,14 +56335,14 @@ notes_mapping = {
       startTeacherTutorial();
     }
   }
-  function setLevelStateIndicator(level2) {
+  function setLevelStateIndicator(level3) {
     $("[id^=state-]").addClass("hidden");
-    if ($("#opening_date_level_" + level2).is(":disabled")) {
+    if ($("#opening_date_level_" + level3).is(":disabled")) {
       $("#state-disabled").removeClass("hidden");
-    } else if ($("#opening_date_level_" + level2).val() === "") {
+    } else if ($("#opening_date_level_" + level3).val() === "") {
       $("#state-accessible").removeClass("hidden");
     } else {
-      var date_string = $("#opening_date_level_" + level2).val();
+      var date_string = $("#opening_date_level_" + level3).val();
       var input_date = new Date(date_string);
       var today_date = new Date();
       if (input_date > today_date) {
@@ -56215,8 +56375,8 @@ notes_mapping = {
         setDateLevelInputColor($(this).attr("level"));
       });
       $("#levels-dropdown").on("change", function() {
-        var level2 = $(this).val();
-        setLevelStateIndicator(level2);
+        var level3 = $(this).val();
+        setLevelStateIndicator(level3);
       });
     });
   }
@@ -56915,8 +57075,8 @@ pygame.quit()
       }
     }
   }
-  function getHighlighter(level2) {
-    return `ace/mode/level${level2}`;
+  function getHighlighter(level3) {
+    return `ace/mode/level${level3}`;
   }
   function stopit() {
     if (pygameRunning) {
@@ -56953,7 +57113,7 @@ pygame.quit()
     buttonsDiv.empty();
     buttonsDiv.hide();
   }
-  async function runit(level2, lang, disabled_prompt, run_type, cb2) {
+  async function runit(level3, lang, disabled_prompt, run_type, cb2) {
     const adventureName = currentTab;
     if (askPromptOpen) {
       if (disabled_prompt) {
@@ -57002,7 +57162,7 @@ pygame.quit()
         try {
           cancelPendingAutomaticSave();
           let data = {
-            level: `${level2}`,
+            level: `${level3}`,
             code,
             lang,
             skip_faulty: false,
@@ -57047,7 +57207,7 @@ pygame.quit()
       runPythonProgram(program_data.Code, program_data.source_map, program_data.has_turtle, program_data.has_pygame, program_data.has_sleep, program_data.has_clear, program_data.has_music, program_data.Warning, cb2, run_type).catch(function(err) {
         if (err != null) {
           error.show(ClientMessages["Execute_error"], err.message);
-          reportClientError(level2, code, err.message);
+          reportClientError(level3, code, err.message);
         }
       });
     } catch (e) {
@@ -57228,9 +57388,9 @@ pygame.quit()
     modal.hide();
     modal.notifySuccess(prompt, 3e3);
   }
-  function reportClientError(level2, code, client_error) {
+  function reportClientError(level3, code, client_error) {
     postJsonWithAchievements("/report_error", {
-      level: `${level2}`,
+      level: `${level3}`,
       code,
       page: window.location.href,
       client_error
@@ -57391,11 +57551,11 @@ pygame.quit()
           }
         },
         execLimit: function() {
-          const level2 = theLevel;
+          const level3 = theLevel;
           if (hasTurtle || hasPygame || hasMusic) {
             return 6e6;
           }
-          if (level2 < 7) {
+          if (level3 < 7) {
             return 3e6;
           }
           return hasSleep ? 2e4 : 5e3;
@@ -57709,8 +57869,8 @@ pygame.quit()
       return window.speechSynthesis.getVoices().filter((voice) => voice.lang.startsWith(simpleLang));
     }
   }
-  function load_quiz(level2) {
-    $('*[data-tabtarget="quiz"]').html('<iframe id="quiz-iframe" class="w-full" title="Quiz" src="/quiz/start/' + level2 + '"></iframe>');
+  function load_quiz(level3) {
+    $('*[data-tabtarget="quiz"]').html('<iframe id="quiz-iframe" class="w-full" title="Quiz" src="/quiz/start/' + level3 + '"></iframe>');
   }
   function showVariableView() {
     const variables = $("#variables");
@@ -57780,8 +57940,8 @@ pygame.quit()
     const outputDiv = $("#output");
     outputDiv.scrollTop(outputDiv.prop("scrollHeight"));
   }
-  function modalStepOne(level2) {
-    createModal(level2);
+  function modalStepOne(level3) {
+    createModal(level3);
     let $modalEditor = $("#modal-editor");
     if ($modalEditor.length) {
       const dir = $("body").attr("dir");
@@ -57794,8 +57954,8 @@ pygame.quit()
     var randomnum = Math.floor(Math.random() * allsuccessmessages.length);
     success.show(allsuccessmessages[randomnum]);
   }
-  function createModal(level2) {
-    let editor = `<div id='modal-editor' class="w-full flex-1 text-lg rounded" style='height:200px; width:50vw;'></div>`.replace("{level}", level2.toString());
+  function createModal(level3) {
+    let editor = `<div id='modal-editor' class="w-full flex-1 text-lg rounded" style='height:200px; width:50vw;'></div>`.replace("{level}", level3.toString());
     let title = ClientMessages["Program_repair"];
     modal.repair(editor, 0, title);
   }
@@ -57872,11 +58032,9 @@ pygame.quit()
       if (response.succes) {
         const queryString = window.location.search;
         const urlParams = new URLSearchParams(queryString);
-        if (urlParams.get("keyword_language") !== null) {
-          urlParams.set("keyword_language", "en");
-        }
-        if (urlParams.get("language") !== null) {
+        if (lang === "en" || urlParams.get("language") !== null) {
           urlParams.set("language", lang);
+          urlParams.set("keyword_language", lang);
           window.location.search = urlParams.toString();
         } else {
           location.reload();
@@ -57958,10 +58116,10 @@ pygame.quit()
     timers.forEach(clearTimeout);
     timers = [];
   };
-  function downloadSlides(level2) {
-    var iframe = document.getElementById(`level-${level2}-slides`);
-    iframe.setAttribute("src", `/slides/${level2}`);
-    $(`#level-${level2}-slides`).on("load", function() {
+  function downloadSlides(level3) {
+    var iframe = document.getElementById(`level-${level3}-slides`);
+    iframe.setAttribute("src", `/slides/${level3}`);
+    $(`#level-${level3}-slides`).on("load", function() {
       var innerDoc = iframe.contentDocument || iframe.contentWindow.document;
       var slides = innerDoc.getElementsByTagName("section");
       var slidesHTML = "";
@@ -57980,9 +58138,9 @@ pygame.quit()
       var zip = (0, import_jszip.default)();
       zip.file("index.html", template);
       zip.folder("lib");
-      zip.folder(`hedy-level-${level2}`);
+      zip.folder(`hedy-level-${level3}`);
       zip.generateAsync({ type: "blob" }).then(function(content2) {
-        download(content2, `hedy-level-${level2}.zip`, "zip");
+        download(content2, `hedy-level-${level3}.zip`, "zip");
       });
     });
   }
@@ -58160,7 +58318,7 @@ pygame.quit()
     console.info("Saving program automatically...");
     const code = theGlobalEditor.contents;
     const saveName = saveNameFromInput();
-    if (theUserIsLoggedIn) {
+    if (theUserIsLoggedIn && saveName) {
       const saveInfo = isServerSaveInfo(adventure.save_info) ? adventure.save_info : void 0;
       const response = await postJsonWithAchievements("/programs", {
         level: theLevel,
@@ -58214,11 +58372,11 @@ pygame.quit()
       $("#favourite_program_container_" + index3).addClass("text-white");
     }
   }
-  function goToLevel(level2) {
+  function goToLevel(level3) {
     const hash = window.location.hash;
-    let newPath = window.location.pathname.replace(/\/\d+/, `/${level2}`);
-    if (!newPath.includes(level2)) {
-      newPath = window.location.pathname + `/${level2}`;
+    let newPath = window.location.pathname.replace(/\/\d+/, `/${level3}`);
+    if (!newPath.includes(level3)) {
+      newPath = window.location.pathname + `/${level3}`;
     }
     window.location.pathname = newPath;
     window.location.hash = hash;
@@ -76686,82 +76844,126 @@ pygame.quit()
   ZC({ Validation: Ch, Select: _r });
 
   // static/js/public-adventures.ts
-  function cloned(message, success2 = true) {
-    if (success2) {
-      modal.notifySuccess(message);
-    } else {
-      modal.notifyError(message);
-    }
-  }
-  function applyFilter(term, type, filtered) {
-    var _a3, _b;
-    term = term.trim();
-    filtered[type] = filtered[type] || { exclude: [] };
-    filtered[type]["term"] = term;
-    const filterExist = document.querySelector("#search_adventure").value || document.querySelector("#language").value || document.querySelector("#tag").value;
-    if (!term) {
-      filtered[type] = { term, exclude: [] };
-    }
-    const adventures = document.querySelectorAll(".adventure");
-    if (!filterExist) {
-      for (const adv of adventures) {
-        adv.classList.remove("hidden");
-      }
-      filtered = {};
-      return;
-    }
-    for (const adv of adventures) {
-      let toValidate;
-      let skip2 = false;
-      if (type === "search") {
-        toValidate = (_a3 = adv.querySelector(".name")) == null ? void 0 : _a3.innerHTML;
-      } else if (type === "lang") {
-        toValidate = adv.getAttribute("data-lang");
-      } else {
-        const advTags = ((_b = adv.querySelector("#tags-list")) == null ? void 0 : _b.children) || [];
-        for (const t2 of advTags) {
-          const value = t2.innerHTML.trim();
-          if (term.includes(value)) {
-            if (filtered[type].exclude.some((a) => a === adv)) {
-              filtered[type].exclude = filtered[type].exclude.filter((a) => a !== adv);
-            }
-            skip2 = true;
-            break;
+  var levelSelect = document.getElementById("level-select");
+  var languageSelect = document.getElementById("language-select");
+  var tagsSelect = document.getElementById("tag-select");
+  var searchInput = document.getElementById("search_adventure");
+  var searchTimeout;
+  searchInput == null ? void 0 : searchInput.addEventListener("input", handleSearchInput);
+  document.addEventListener("DOMContentLoaded", () => {
+    const options = document.querySelectorAll(".option");
+    options.forEach(function(option2) {
+      option2.addEventListener("click", function() {
+        const dropdown = option2.closest(".dropdown");
+        if (!dropdown) {
+          return;
+        }
+        const isSingleSelect = (dropdown == null ? void 0 : dropdown.getAttribute("data-type")) === "single";
+        if (isSingleSelect && !option2.classList.contains("selected")) {
+          const otherOptions = dropdown.querySelectorAll(".option.selected");
+          otherOptions.forEach((otherOption) => otherOption.classList.remove("selected"));
+        }
+        let nextValue = dropdown.getAttribute("data-value");
+        if (option2.classList.contains("selected")) {
+          nextValue = nextValue == null ? void 0 : nextValue.replace(option2.getAttribute("data-value"), "");
+          if (!isSingleSelect) {
+            nextValue = nextValue.split(",").filter((v) => v).join(",");
+          } else {
+            return;
           }
+        } else if (!isSingleSelect) {
+          const currentValue = dropdown.getAttribute("data-value") || "";
+          nextValue = [currentValue, option2.getAttribute("data-value") || ""].filter((v) => v).join(",");
+        } else {
+          nextValue = option2.getAttribute("data-value") || "";
         }
-      }
-      if (skip2)
-        continue;
-      if (term && (toValidate == null ? void 0 : toValidate.includes(term))) {
-        if (filtered[type].exclude.some((a) => a === adv)) {
-          filtered[type].exclude = filtered[type].exclude.filter((a) => a !== adv);
-        }
-      } else if (term) {
-        if (filtered.term !== term && !filtered[type].exclude.some((a) => a === adv)) {
-          filtered[type].exclude.push(adv);
-        }
-      }
-    }
-    for (const adv of adventures) {
-      let allFiltersPassed = true;
-      for (const t2 in filtered) {
-        if (filtered[t2].exclude.some((a) => a === adv)) {
-          allFiltersPassed = false;
-        }
-      }
-      if (allFiltersPassed) {
-        adv.classList.remove("hidden");
-      } else {
-        adv.classList.add("hidden");
-      }
+        dropdown.setAttribute("data-value", nextValue);
+        option2.classList.toggle("selected");
+        updateLabelText(dropdown);
+        updateDOM();
+      });
+    });
+    updateDOM();
+    setTimeout(() => {
+      if (!levelSelect)
+        return;
+      const level3 = levelSelect.getAttribute("data-value") || "";
+      const cloneBtn = document.getElementById(`clone_adventure_btn_${level3}`);
+      cloneBtn == null ? void 0 : cloneBtn.addEventListener("click", handleCloning);
+    }, 500);
+  });
+  function getSelectedOptions(_options) {
+    return Array.from(_options).filter((option2) => option2.classList.contains("selected")).map((option2) => {
+      var _a3;
+      return (_a3 = option2.textContent) == null ? void 0 : _a3.trim();
+    });
+  }
+  function updateLabelText(dropdown) {
+    const toggleButton = dropdown.querySelector(".toggle-button");
+    const relativeOptions = dropdown.querySelectorAll(".option");
+    const label = toggleButton.querySelector(".label");
+    const selectedOptions = getSelectedOptions(relativeOptions);
+    label.textContent = selectedOptions.length === 0 ? label.getAttribute("data-value") : selectedOptions.join(", ");
+  }
+  async function handleCloning(e) {
+    const target = e.target;
+    const adventureId = target.getAttribute("data-id");
+    try {
+      const data = await postJson(`public-adventures/clone/${adventureId}`);
+      modal.notifySuccess(data.message);
+      await updateDOM();
+    } catch (error2) {
+      modal.notifyError(error2.responseText);
     }
   }
-  var tags2 = document.getElementById("tag");
-  var tagsInstance = _r.getInstance(tags2);
-  tags2 == null ? void 0 : tags2.addEventListener("valueChange.te.select", () => {
-    const value = tagsInstance.value.join(",");
-    applyFilter(value.replaceAll(",", " "), "tags", window.$filtered || {});
-  });
+  function handleSearchInput() {
+    clearTimeout(searchTimeout);
+    searchTimeout = setTimeout(updateDOM, 500);
+  }
+  function updateURL() {
+    const queryString = window.location.search;
+    const urlParams = new URLSearchParams(queryString);
+    const level3 = levelSelect.getAttribute("data-value") || "";
+    const lanugage = languageSelect.getAttribute("data-value") || "";
+    const tags2 = tagsSelect.getAttribute("data-value") || "";
+    urlParams.set("level", level3);
+    urlParams.set("lang", lanugage);
+    urlParams.set("tag", tags2);
+    if (searchInput) {
+      urlParams.set("search", searchInput.value);
+    }
+    window.history.pushState({}, "", `${window.location.pathname}?${urlParams.toString()}`);
+  }
+  async function updateDOM() {
+    if (!levelSelect || !languageSelect || !tagsSelect)
+      return;
+    const level3 = levelSelect.getAttribute("data-value") || "";
+    const lanugage = languageSelect.getAttribute("data-value") || "";
+    const tags2 = tagsSelect.getAttribute("data-value") || "";
+    const response = await fetch(`public-adventures/filter?tag=${tags2}&lang=${lanugage}&level=${level3}&search=${searchInput == null ? void 0 : searchInput.value}`, {
+      method: "GET",
+      keepalive: true,
+      headers: {
+        "Content-Type": "application/json; charset=utf-8",
+        "Accept": "application/json"
+      }
+    });
+    const { html, js } = await response.json();
+    updateURL();
+    const publicAdventuresBody = document.getElementById("public-adventures-body");
+    if (publicAdventuresBody) {
+      publicAdventuresBody.innerHTML = html;
+      initialize({
+        lang: js.lang,
+        level: js.level,
+        keyword_language: js.lang,
+        javascriptPageOptions: js
+      });
+      initializeHighlightedCodeBlocks(publicAdventuresBody);
+      const cloneBtn = document.getElementById(`clone_adventure_btn_${level3}`);
+      cloneBtn == null ? void 0 : cloneBtn.addEventListener("click", handleCloning);
+    }
+  }
   return js_exports;
 })();
 /*!

@@ -93,6 +93,7 @@ def task_tailwind():
             *[file for file in glob('static/js/*.ts') if file not in \
                 ['static/js/message-translations.ts', 'static/js/client-messages.ts']
               ],
+            'build-tools/heroku/tailwind/styles.css',
             script,
         ],
         task_dep=['npm'],
@@ -351,7 +352,7 @@ def task_devdb():
         actions=[
             'cp data-for-testing.json dev_database.json',
         ],
-        file_dep=['data-for-testing.json'],
+        # No dependencies, so that this script will always run when you invoke it
         targets=['dev_database.json'],
     )
 

@@ -7,9 +7,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2024-01-08 14:01+0100\n"
-"PO-Revision-Date: 2024-01-09 09:25+0000\n"
-"Last-Translator: Prefill add-on <noreply-addon-prefill@weblate.org>\n"
+"POT-Creation-Date: 2024-01-18 10:49+0100\n"
+"PO-Revision-Date: 2024-01-27 13:06+0000\n"
+"Last-Translator: gallegonovato <fran-carro@hotmail.es>\n"
 "Language-Team: es <LL@li.org>\n"
 "Language: es\n"
 "MIME-Version: 1.0\n"
@@ -33,10 +33,6 @@ msgstr "Tu código es incompleto. Contiene huecos que debes reemplazar con códi
 
 msgid "Incomplete"
 msgstr "¡Oops! ¡Has olvidado una parte de código! En la línea {line_number}, debes agregar texto después de {incomplete_command}."
-
-#, fuzzy
-msgid "Incomplete For Command"
-msgstr "It looks like you forgot to add a bit of code! On line {line_number} you need to add {command} to your code."
 
 msgid "Incomplete Repeat"
 msgstr "Parece que has olvidado usar un comando con el comando {repeat} que usaste en la línea {line_number}."
@@ -68,15 +64,17 @@ msgstr "Has utilizado un {echo} antes de un {ask}, o un {echo} sin un {ask}. Col
 msgid "Lonely Text"
 msgstr "Parece que olvidaste usar un comando con el texto que pusiste en la línea {line_number}"
 
-#, fuzzy
 msgid "Missing Additional Command"
-msgstr "It looks like you forgot to complete writing {command} on line {line_number}."
+msgstr "Parece que olvidaste terminar de escribir {command} en la línea {line_number}. Intenta añadir {missing_command} a tu código."
 
 msgid "Missing Command"
 msgstr "Parece que has olvidado de usar un comando en la línea {line_number}."
 
 msgid "Missing Inner Command"
 msgstr "Parece que has olvidad usar un comando en el {command} que has usado en la línea {line_number}."
+
+msgid "Missing Variable"
+msgstr "Parece que a tu {command} le falta una variable al principio de la línea."
 
 msgid "Misspelled At Command"
 msgstr "Parece que haz escrito incorrectamente el comando {command}, en su lugar escribiste {invalid_argument} en la línea {line_number}."
@@ -123,9 +121,8 @@ msgstr "Intentaste usar la variable {name}, pero no la estableciste. También es
 msgid "Wrong Level"
 msgstr "Ese código es correcto, pero no pertenece al nivel correcto. Has escrito código {offending_keyword} para el nivel {working_level}.Tip: {tip}"
 
-#, fuzzy
 msgid "Wrong Number of Arguments"
-msgstr "Your function used the wrong number of arguments. You provided {used_number} but the function {name} needs {defined_number}"
+msgstr "Tu función usó el número incorrecto de argumentos. Pasaste {used_number} pero la función {name} necesita {defined_number}"
 
 msgid "account_overview"
 msgstr "Resumen de cuenta"
@@ -1056,7 +1053,7 @@ msgid "no_more_flat_if"
 msgstr "A partir del nivel 8, el código tras {if} tiene que ponerse en la siguiente línea y debe empezar con 4 espacios."
 
 msgid "no_programs"
-msgstr "Todavía no tienes programas guardados."
+msgstr "No hay programas."
 
 msgid "no_public_profile"
 msgstr "No tienes un texto de perfil público todavía..."
@@ -1148,6 +1145,9 @@ msgstr "Otro lenguaje basado en texto"
 msgid "overwrite_warning"
 msgstr "Ya tienes un programa con este nombre, guardar este programa reemplazará al anterior. ¿Estás seguro/a?"
 
+msgid "owner"
+msgstr ""
+
 msgid "page"
 msgstr "página"
 
@@ -1220,6 +1220,9 @@ msgstr "Lenguaje favorito"
 msgid "preview"
 msgstr "Previsualizar"
 
+msgid "previewing_adventure"
+msgstr ""
+
 msgid "previewing_class"
 msgstr "Está previsualizando la clase <em>{class_name}</em> como profesor."
 
@@ -1279,6 +1282,9 @@ msgstr "Deseas unirte a la clase?"
 
 msgid "public"
 msgstr "Público"
+
+msgid "public_adventures"
+msgstr "Explorar las aventuras públicas"
 
 msgid "public_invalid"
 msgstr "La selección de conformidad no es correcta"
@@ -1340,9 +1346,8 @@ msgstr "Confirmar la eliminación de este usuario de la clase."
 msgid "repair_program_logo_alt"
 msgstr "Icono de reparación de programa"
 
-#, fuzzy
 msgid "repeat_dep"
-msgstr "Starting in level 8, {repeat} needs to be used with indentation. You can see examples on the {repeat} tab in level 8."
+msgstr "Empezando en el nivel 8, {repeat} necesita ser usado con sangría. Puedes ver ejemplos en la pestaña {repeat} en el nivel 8."
 
 msgid "repeat_match_password"
 msgstr "La contraseña repetida es distinta."
@@ -1590,6 +1595,9 @@ msgstr "Subscribirse al newsletter"
 msgid "suggestion_color"
 msgstr "Intenta usar otro color"
 
+msgid "suggestion_note"
+msgstr "Utilice una nota entre C0 y B9 o un número entre 1 y 70"
+
 msgid "suggestion_number"
 msgstr "Intenta cambiar el valor a un número"
 
@@ -1714,7 +1722,7 @@ msgid "title_programs"
 msgstr "Hedy - Mis programas"
 
 msgid "title_public-adventures"
-msgstr ""
+msgstr "Hedy - Aventuras en público"
 
 msgid "title_recover"
 msgstr "Hedy - Recuperar cuenta"
@@ -2005,6 +2013,3 @@ msgstr "Tu programa"
 
 #~ msgid "no_tags"
 #~ msgstr "Aún no hay etiquetas."
-
-#~ msgid "public_adventures"
-#~ msgstr "Public adventures"

@@ -1229,12 +1229,12 @@ levels:
                 {print} '欢迎来到 海蒂 餐厅'
                 food = {ask} '你想吃什么？'
                 price = 0
-                {if} food {is} 汉堡price = price + 15
-                {if} food {is} 薯条price = price + 6
-                饮料是{ask} '你想喝什么？'
-                {if} 饮料 {is} 可乐price = price + 3
-                {if}饮料{is}水price=price+1
-                {print} price'请付美元'
+                {if} food {is} 汉堡 price = price + 15
+                {if} food {is} 薯条 price = price + 6
+                drinks is{ask} '你想喝什么？'
+                {if} drinks {is} 可乐 price = price + 3
+                {if}drinks{is}水 price=price+1
+                {print} price '请付美元'
             mp_choice_options:
             -   option: 也可以是 `price = 3`。
                 feedback: 不，那不是真的。 海蒂 需要在总数中添加 3 美元。
@@ -1308,7 +1308,7 @@ levels:
             question_score: '10'
     7:
         1:
-            question_text: 使用此级别的repeat命令可以一次重复多少行？
+            question_text: 使用此级别的`{repeat}`命令可以一次重复多少行？
             mp_choice_options:
             -   option: '0'
                 feedback: 不，您可以重复一行。
@@ -1368,10 +1368,7 @@ levels:
                 {print}'我很忧郁'
                 {repeat} 7 {times} {print} 'da ba dee, da ba da'
             mp_choice_options:
-            -   option: |-
-                    ```
-                    I'm
-                    ```
+            -   option: '`我是`'
                 feedback: 这是正确的！
             -   option: |-
                     ```
@@ -1409,28 +1406,36 @@ levels:
                 {repeat} 3{times}{print}' 一轮又一轮'
             mp_choice_options:
             -   option: |-
+                    ```
                     公共汽车上的轮子走起来
                     一遍又一遍
+                    ```
                 feedback: 仅第二行重复3次
             -   option: |-
-                    the wheels on the bus go
-                    the wheels on the bus go
-                    the wheels on the bus go
-                    round and round
+                    ```
+                    公共汽车上的轮子走起来
+                    公共汽车上的轮子走起来
+                    公共汽车上的轮子走起来
+                    一遍又一遍
+                    ```
                 feedback: 仅第二行重复3次
             -   option: |-
-                    the wheels on the bus go
-                    round and round
-                    the wheels on the bus go
-                    round and round
-                    the wheels on the bus go
-                    round and round
+                    ```
+                    公共汽车上的轮子走起来
+                    一遍又一遍
+                    公共汽车上的轮子走起来
+                    一遍又一遍
+                    公共汽车上的轮子走起来
+                    一遍又一遍
+                    ```
                 feedback: 仅第二行重复3次
             -   option: |-
-                    the wheels on the bus go
-                    round and round
-                    round and round
-                    round and round
+                    ```
+                    公共汽车上的轮子走起来
+                    一遍又一遍
+                    一遍又一遍
+                    一遍又一遍
+                    ```
                 feedback: 遍布整个城镇！ 完美的！
             hint: 只‘round and round'重复了3次。
             correct_answer: D
@@ -1442,24 +1447,32 @@ levels:
                 {print} 'ROCK YOU!'
             mp_choice_options:
             -   option: |-
-                    We will We will
-                    ROCK YOU!
+                    ```
+                    我们会 我们会
+                    摇滚你！
+                    ```
                 feedback: '''We will''不会在同一行中出现两次'
             -   option: |-
-                    We will
-                    We will
-                    ROCK YOU!
+                    ```
+                    我们将
+                    我们将
+                    摇滚你！
+                    ```
                 feedback: Great!
             -   option: |-
-                    We will
-                    ROCK YOU!
-                    We will
-                    ROCK YOU!
+                    ```
+                    我们将
+                    摇滚你！
+                    我们将
+                    摇滚你！
+                    ```
                 feedback: ROCK YOU! 不会重复
             -   option: |-
-                    We will
-                    ROCK YOU!
-                feedback: 注意重复命令
+                    ```
+                    我们将
+                    摇滚你！
+                    ```
+                feedback: 注意 `{repeat}`命令
             hint: 注意`{repeat}`命令。
             correct_answer: B
             question_score: '10'
@@ -1483,9 +1496,10 @@ levels:
                 feedback: 太棒了，你不能在这里使用 `{repeat}` 命令。
             -   option: |-
                     ```
-                    {repeat} 2 {times} {print} 'Here comes the sun'
-                    {print} 'And I say'
-                    {print} 'Its alright'"
+                    {repeat} 2 {times} {print} '太阳来了'
+                    {print} '我说'
+                    {print}“没关系”
+                    ```
                 feedback: 你把“Do do do do”留在哪里了？
             -   option: |-
                     ```
@@ -1494,7 +1508,7 @@ levels:
                     {print} 'And I say'
                     {print} 'Its alright'
                     ```
-                feedback: 这不是正确的顺序..
+                feedback: 这不是正确的顺序.
             -   option: |-
                     ```
                     {repeat} 2 {times} {print} 'Here comes the sun'
@@ -1502,7 +1516,7 @@ levels:
                     {print} 'And I say'
                     {print} 'Its alright'"
                     ```
-                feedback: 这不是正确的顺序..
+                feedback: 这不是正确的顺序.
             hint: 仅当您想连续多次执行同一行时才可以使用`{repeat}`。
             correct_answer: A
             question_score: '10'
@@ -1518,34 +1532,34 @@ levels:
             mp_choice_options:
             -   option: |-
                     ```
-                    {print} 'Batman was flying through Gotham. '
-                    {print} 'When suddenly he heard someone screaming...'
-                    {print} 'Help !'
-                    {repeat} 3 {times} {print} 'Please help me !'
+                    {print} '蝙蝠侠正在飞过哥谭。 '
+                    {print}“突然他听到有人尖叫……”
+                    {print} '救命！'
+                    {repeat} 3 {times} {print} '请帮助我！'
                     ```
                 feedback: 你重复的行不正确。
             -   option: |-
                     ```
-                    {print} 'Batman was flying through Gotham.'
-                    {print} 'When suddenly he heard someone screaming...'
-                    {repeat} 3 {times} 'Help !'
-                    {print} 'Please help me !'
+                    {print}“蝙蝠侠正在飞过哥谭。”
+                    {print}“突然他听到有人尖叫……”
+                    {repeat} 3 {times}“救命！”
+                    {print} '请帮助我！'
                     ```
                 feedback: 第三行缺少了`{print}`命令。
             -   option: |-
                     ```
-                    {print} Batman was flying through Gotham.
-                    {print} When suddenly he heard someone screaming...
-                    {repeat} 3 {times} {print} Help !
-                    {print} Please help me !
+                    {print} 蝙蝠侠正在飞过哥谭。
+                    {print} 突然他听到有人尖叫……
+                    {repeat} 3 {times} {print} 救命!
+                    {print} '救命!'
                     ```
                 feedback: 你漏掉了引号
             -   option: |-
                     ```
-                    {print} 'Batman was flying through Gotham.'
-                    {print} 'When suddenly he heard someone screaming...'
-                    {repeat} 3 {times} {print} 'Help !'
-                    {print} 'Please help me !'
+                    {print} 蝙蝠侠正在飞过哥谭。
+                    {print} 突然他听到有人尖叫……
+                    {repeat} 3 {times} {print} '救命!'
+                    {print} '救命!'
                     ```
                 feedback: 完美
             hint: '''Help！'' 重复3次。'
@@ -1665,7 +1679,7 @@ levels:
                     Baby shark
                     Baby shark
                     Baby shark
-                feedback: 什么是重复的，什么不是。
+                feedback: 什么是重复的，什么不是？
             hint: 什么是重复的，什么不是？
             correct_answer: C
             question_score: '10'
@@ -2018,7 +2032,7 @@ levels:
             -   option: '`{if}` `{else}` `{repeat}`'
                 feedback: 继续加油！
             -   option: '`{if}` `{else}` `{repeat}` `{print}`'
-                feedback: 不使用{print}
+                feedback: 不使用`{print}`
             hint: 缩进发生在某些命令下方的行上
             correct_answer: C
             question_score: '10'
@@ -2098,7 +2112,7 @@ levels:
             question_text: 哪种说法是正确的？
             code: |-
                 1 {repeat} 2 {times}
-                2 {if} 水平{is} 9
+                2 {if} level{is} 9
                 3 {print} 干得好!
             mp_choice_options:
             -   option: 所有行都应以 4 个空格开头
@@ -2284,70 +2298,76 @@ levels:
                 names = Donna, Tommy, Ben
                 colors = blue, red, purple
                 {for} name {in} names
-                    {print} _?_
+                    {print} _
             mp_choice_options:
             -   option: |-
                     ```
                     'name gets a color shirt'
                     ```
-                feedback: That's not it!
+                feedback: 不是这个！
             -   option: |-
                     ```
                     name 'gets a ' colors {at} {random} ' shirt'
                     ```
-                feedback: Great job! This was a hard one!
+                feedback: 做得好！ 这个可难了！
             -   option: |-
                     ```
                     names 'gets a ' color {at} {random} ' shirt'
                     ```
-                feedback: You want each name printed. So the first word should not be names but...
+                feedback: 你想要打印每个 name. 所以第一个词不应该是 names ，而是......
             -   option: |-
                     ```
                     'people gets a colors shirt'
                     ```
-                feedback: There is no variable named people..
-            hint: Mind the quotation marks and the names of the variables
+                feedback: 没有名为 people 的变量..
+            hint: 注意引号和变量名称
             correct_answer: B
             question_score: '10'
         9:
             question_text: 当你运行程序时海蒂会问你的第一个问题是什么？
-            code: "套餐=前菜，主菜，甜点\n名字们 = 蒂蒙、奥诺\n{for} 名字 {in} 名字们\n\t{for}菜{in}套餐\n        \t食物 = {ask}名字‘，你想吃哪道’菜‘？’\n        \t{print} 名字‘点的’菜‘是’食物"
+            code: |-
+                courses = 开胃菜,主菜,甜点
+                names = 丁满, 小野
+                {for} name {in} names
+                     {for} course{in} courses
+                         food = {ask} name '，想吃什么作为您的'course'？'
+                         {print} name '点'food'作为他们的'course
             mp_choice_options:
-            -   option: Timon, what would you like to eat as your appetizer?
-                feedback: Perfect!
-            -   option: Onno, what would you like to eat as your appetizer?
-                feedback: Timon is first on the list!
-            -   option: Timon, what would you like to eat as your dessert?
-                feedback: Appetizers are first in the list
-            -   option: You don't know that. Hedy will choose `{at} {random}`.
-                feedback: There is no `{at} {random}` in this code...
-            hint: The first options from both lists are chosen.
+            -   option: 丁满，你想吃什么作为开胃菜？
+                feedback: 完美!
+            -   option: 小野，你想吃什么作为开胃菜？
+                feedback: 丁满是列表中上的第一个！
+            -   option: 丁满，你想吃什么作为甜点？
+                feedback: 开胃菜排在第一位
+            -   option: 你不知道这一点。 海蒂 将选择`{at} {random}`.
+                feedback: 此代码中没有`{at} {random}`...
+            hint: 从两个列表中选择第一个选项。
             correct_answer: A
             question_score: '10'
         10:
-            question_text: What is true about this code?
+            question_text: 这段代码的真实情况是什么？
             code: |-
-                prices = 1 million dollars, car, sandwich
+                prizes =100万美元,汽车,三明治
                 names = Bob, Patrick, Sandy, Larry
-                {for} price {in} prices
-                    {print} 'The ' price 'is won by ' names {at} {random}
+                {for} prize {in} names
+                     {print} prize'由'names{at} {random}'赢得'
             mp_choice_options:
-            -   option: Everybody will always win a price.
-                feedback: That is not true, you could end up without a price.
-            -   option: All the prices always go to one single person.
-                feedback: That is not true. All the prices are given away, but to random people
-            -   option: Larry will never win a price
-                feedback: That is not true. Larry has the same odds as the others
-            -   option: Someone might win with two prices
-                feedback: You get it!
-            hint: Try to imagine the output of this code.
+            -   option: 每个人总会赢得奖品。
+                feedback: 事实并非如此，最终你可能没有奖品。
+            -   option: 所有奖品始终颁发给一个人。
+                feedback: 那不是真的。 所有奖品都是赠送的，但是随机赠送给不同的人
+            -   option: Larry 永远不会获奖
+                feedback: 那不是真的。 Larry 和其他人的赔率相同
+            -   option: 有人可能赢得两个奖品
+                feedback: 你懂了！
+            hint: 尝试想象这段代码的输出。
             correct_answer: D
             question_score: '10'
     11:
         1:
-            question_text: 问号处应该填什么？
+            question_text: 空格处应该填什么？
             code: |-
-                {for} i {in} _?_ 1 {to} 10
+                {for} i {in} _ 1 {to} 10
                     {print} i
             mp_choice_options:
             -   option: |-
@@ -2494,25 +2514,25 @@ levels:
             correct_answer: D
             question_score: '10'
         6:
-            question_text: How many times does the word Hello appear on your screen when you run the code?
+            question_text: 当运行代码时，“Hello”一词在屏幕上出现了多少次？
             code: |-
                 {for} i {in} {range} 0 {to} 2
                     {print} 'Hello'
             mp_choice_options:
-            -   option: 1 time
+            -   option: 1 次
                 feedback: 'No'
-            -   option: 2 times
+            -   option: 2 次
                 feedback: 'No'
-            -   option: 3 times
-                feedback: That's right!
-            -   option: Never
+            -   option: 3 次
+                feedback: 对了!
+            -   option: 永不
                 feedback: 'No'
-            hint: 0 also counts. So 0,1,2 that's 3 times.
+            hint: 0也算。 所以 0,1,2 是 3 倍。
             correct_answer: C
             question_score: '10'
         7:
-            question_text: What should be on the place of the question mark?
-            code: "{print}‘欢迎来到海蒂快餐店’\n人 是 {ask}‘今晚有多少人会在这里吃饭？’\n_?_\n\t食物{is} {ask}‘你想点些什么？’\n\t{print}食物"
+            question_text: 空白处应该填什么？
+            code: "{print} '欢迎来到海蒂快餐店'\npeople= {ask}'今晚有多少人会在这里吃饭？'\n_\n\tfood= {ask}'你想点些什么？'\n\t{print}food"
             mp_choice_options:
             -   option: |-
                     ```
@@ -2523,7 +2543,7 @@ levels:
                     ```
                     {for} i {in} {range} 1 {to} guests
                     ```
-                feedback: The variable is not named guests
+                feedback: 该变量未命名为 guest
             -   option: |-
                     ```
                     {for} i {in} {range} 1 {to} people
@@ -2533,12 +2553,12 @@ levels:
                     ```
                     {for} i {in} {range} 0 {to} people
                     ```
-                feedback: That's one order too many!
-            hint: Use the variable 'people'
+                feedback: 这一份订单太多了！
+            hint: 使用变量 'people'
             correct_answer: C
             question_score: '10'
         8:
-            question_text: What will be the output from this code?
+            question_text: 这段代码的输出是什么？
             code: |-
                 {for} i {in} {range} 23 {to} 25
                     {print} 'hi'
@@ -2547,9 +2567,9 @@ levels:
                     23
                     24
                     25
-                feedback: The numbers don't appear. It doesn't say `{print}` i.
+                feedback: 数字没有出现。 它没有说`{print}`i.
             -   option: 23 hi 24 hi 25 hi
-                feedback: The numbers don't appear. It doesn't say `{print}` i
+                feedback: 数字没有出现。 它没有说`{print}` i
             -   option: |-
                     hi
                     hi
@@ -2709,93 +2729,93 @@ levels:
             question_text: 当 007 输入正确的密码时，他们会得到什么输出？
             code: |-
                 name {is} {ask} '你叫什么名字？
-                {if} name {is} 'Agent007'
+                {if} 名称 {is} 'Agent007'
                      a {is} '去机场 '
-                {else}
-                     a {is} '{print}{print}去火车站 '
-                密码 {is} {ask} '密码是什么？'
-                {if} 密码 {is} 'TOPSECRET'
+                别的
+                     a {is} '去火车站 '
+                password {is} {ask} '密码是什么？'
+                {if} password {is} 'TOPSECRET'
                      b {is} '明天 02:00'
-                {别的}
+                {else}
                      b {is} '今天 10 点'
                 {print} a + b
             mp_choice_options:
-            -   option: Go to the train station today at 10.00
-                feedback: The agent won't be catching any bad guys here
-            -   option: Go to the airport tomorrow at 02.00
-                feedback: You've cracked the code!
-            -   option: Go to the train station tomorrow at 02.00
-                feedback: The agent won't be catching any bad guys here
-            -   option: Go to the airport tomorrow at 10.00
-                feedback: The agent won't be catching any bad guys here
-            hint: The correct password is TOPSECRET
+            -   option: 今天10点去火车站
+                feedback: 特工不会在这里抓到任何坏人
+            -   option: 明天 02:00 去机场
+                feedback: 你已经破解了密码！
+            -   option: 明天 02:00 去火车站
+                feedback: 特工不会在这里抓到任何坏人
+            -   option: 明天10点去机场
+                feedback: 特工不会在这里抓到任何坏人
+            hint: 正确的密码是 TOPSECRET
             correct_answer: B
             question_score: '10'
         6:
-            question_text: Which line should be filled in at the ???
+            question_text: 应该填写哪一行,在???
             code: "{print}‘欢迎来到麦克海蒂！’\norder={ask}‘你想吃汉堡包还是薯条？’\n {if}订单=‘汉堡包’\n\t价格=12\n{if} 订单=‘薯条’\n\t价格=4\n饮料={ask}‘你想用2美元买一杯饮料吗？’\n{if}饮料=‘是的’\n\t？？？\n{print}‘请付’price‘元， 谢谢！’"
             mp_choice_options:
             -   option: |-
                     ```
                     price = 14
                     ```
-                feedback: What if you only order fries and a drink?
+                feedback: 如果你只点薯条和饮料怎么办？
             -   option: |-
                     ```
                     price = '14'
                     ```
-                feedback: What if you only order fries and a drink?
+                feedback: 如果你只点薯条和饮料怎么办？
             -   option: |-
                     ```
                     price = price + 2
                     ```
-                feedback: Excellent!
+                feedback: 出色!
             -   option: |-
                     ```
                     price = + 2
                     ```
-                feedback: Almost there!
-            hint: What if you only order fries and a drink?
+                feedback: 差不多了！
+            hint: 如果你只点薯条和饮料怎么办？
             correct_answer: C
             question_score: '10'
         7:
-            question_text: Which output does a vegan get?
+            question_text: 素食主义者会得到什么输出？
             code: |-
-                菜单 = '饼干', '奶酪', '葡萄'
+                menu = '饼干','奶酪','葡萄'
                 {print}“今天是我的生日！我带了一些零食！”
-                饮食 = {ask} '你有什么饮食限制吗？'
-                {if} 饮食 = '无麸质'
-                {remove} '饼干' {from} 菜单
-                {if} 饮食 = '素食主义者'
-                {remove} '奶酪' {from} 菜单
-                {print} '我给你带了：'
-                {for}零食{in}菜单
-                {print} 零食
+                diet = {ask} '您有饮食限制吗？'
+                {if}diet='无麸质'
+                     {remove}'饼干'{from} menu
+                {if} diet = '素食'
+                     {remove}'奶酪'{from} menu
+                {print} '我为你带来了：'
+                {for}snack{in} menu
+                     {print}snack
             mp_choice_options:
             -   option: |-
-                    It's my birthday! I've brought some snacks!
-                    For you I have brought:
-                    cookies
-                    grapes
-                feedback: Terrific!
+                    今天是我的生日！ 我带了一些零食来了！
+                    我为你带来了：
+                    饼干
+                    葡萄
+                feedback: 了不起！
             -   option: |-
-                    It's my birthday! I've brought some snacks!
-                    For you I have brought:
-                    grapes
-                feedback: There's more options than just one
+                    今天是我的生日！ 我带了一些零食来了！
+                    我为你带来了：
+                    葡萄
+                feedback: 有更多的选择，而不仅仅是一种
             -   option: |-
-                    It's my birthday! I've brought some snacks!
-                    For you I have brought:
-                    cheese
-                    grapes
-                feedback: A vegan person can't have cheese
+                    今天是我的生日！ 我带了一些零食来了！
+                    我为你带来了：
+                    奶酪
+                    葡萄
+                feedback: 素食者不能吃奶酪
             -   option: |-
-                    It's my birthday! I've brought some snacks!
-                    For you I have brought:
-                    grapes
-                    cookies
-                feedback: Almost there, but look at the order of snacks in the list
-            hint: What item is removed from the list when you answer 'vegan'?
+                    今天是我的生日！ 我带了一些零食来了！
+                    我为你带来了：
+                    葡萄
+                    饼干
+                feedback: 差不多了，不过看一下列表中零食的顺序
+            hint: 当您回答“素食主义者”时，哪些项目将从列表中删除？
             correct_answer: A
             question_score: '10'
         8:
@@ -3837,4 +3857,331 @@ levels:
                 feedback: Fantastic!
             hint: You need to use the {remove} command
             correct_answer: D
+            question_score: '10'
+    17:
+        1:
+            question_text: What is the output of this code?
+            code: |-
+                minions = ['Bob', 'Kevin', 'Stuart']
+                {for} x in minions:
+                    {print} x
+            mp_choice_options:
+            -   option: |-
+                    ```
+                    m i n i o n s
+                    ```
+                feedback: This is not it.
+            -   option: |-
+                    ```
+                    Bob
+                    Kevin
+                    Stuart
+                    ```
+                feedback: Correct!
+            -   option: |-
+                    ```
+                    minions
+                    minions
+                    minions
+                    ```
+                feedback: Take a look at the content of your list.
+            -   option: |-
+                    ```
+                    B o b K e v i n S t u a r t
+                    ```
+                feedback: Do not loop through the letters.
+            hint: Loop through your list.
+            correct_answer: B
+            question_score: '10'
+        2:
+            question_text: What is wrong with this code?
+            code: |-
+                seconds_minute = 60
+                minute_hour = 60
+                hour_day = 24
+                leap_year = 366
+                no_leap_year = 365
+                years = ask 'what year is it?'
+                {if} years = 2024:
+                 print seconds_minute * minute_hour * hour_day * leap_year
+                {else}:
+                 print seconds_minute * minute_hour * hour_day * noleap_year
+            mp_choice_options:
+            -   option: You cannot have so many variables.
+                feedback: This is not it.
+            -   option: The way the variables are multiplied is incorrect.
+                feedback: Not true!
+            -   option: One of the variables `noleap_year` does not belong with the `{if}` statement.
+                feedback: Keep looking for the mistake.
+            -   option: The `noleap_year` has to be identical in both cases.
+                feedback: Correct!
+            hint: Read the code carefully.
+            correct_answer: D
+            question_score: '10'
+        3:
+            question_text: How many hedgehogs will this code print?
+            code: |-
+                {for} x in range 1 to 3:
+                  {for} y in range 1 to 2:
+                    {print} 🦔
+            mp_choice_options:
+            -   option: |-
+                    ```
+                    🦔
+                    🦔
+                    🦔
+                    ```
+                feedback: Try again.
+            -   option: |-
+                    ```
+                    🦔
+                    🦔
+                    ```
+                feedback: One more try.
+            -   option: |-
+                    ```
+                    🦔
+                    🦔
+                    🦔
+                    🦔
+                    🦔
+                    🦔
+                    ```
+                feedback: Well done!
+            -   option: |-
+                    ```
+                    🦔
+                    🦔
+                    🦔
+                    🦔
+                    🦔
+                    ```
+                feedback: That is not it.
+            hint: Think about how many times you need repeating.
+            correct_answer: C
+            question_score: '10'
+        4:
+            question_text: What is wrong with code?
+            code: |-
+                name_color = {ask} 'What is your favorite color?'
+                {if} name_color == 'red':
+                  {print} 'the color of a tomato'
+                {elif} name_color == 'green':
+                  {print} 'the color of an apple'
+                {elif} name_color == 'blue':
+                  {print} 'the color of a blueberry'
+                {elif} name_color == 'yellow':
+                  {print} 'the color of a banana'
+                {elif}:
+                  {print} 'this fruit-color does not exist'
+            mp_choice_options:
+            -   option: The first `{elif}` should be used before the `print` command
+                feedback: Try again.
+            -   option: '`{elif}` can only be used once'
+                feedback: From now on we can use elif multiple times.
+            -   option: '`==` used with `{elif}` should be replaced by `=`'
+                feedback: Not correct.
+            -   option: '`{elif}` in the last line should be replaced by `{else}`'
+                feedback: Great!
+            hint: Think about `{if}`, `{elif}`, `{else}`.
+            correct_answer: D
+            question_score: '10'
+        5:
+            question_text: What is the output of this code?
+            code: |-
+                numbers = [7, 19, 29, 41, 53, 71, 79, 97]
+                {for} prime in numbers:
+                  {if} prime <= 10：
+                    {print} prime
+                  {elif} prime >= 60:
+                    {print} prime
+                  {elif} prime >= 90:
+                    {print} prime
+                  {else}:
+                    {print} 'another number'
+            mp_choice_options:
+            -   option: |-
+                    ```
+                    7
+                    another number
+                    another number
+                    another number
+                    another number
+                    71
+                    79
+                    97
+                    ```
+                feedback: Well done!
+            -   option: |-
+                    ```
+                    another number
+                    19
+                    29
+                    41
+                    53
+                    71
+                    79
+                    97
+                    ```
+                feedback: Try again.
+            -   option: |-
+                    ```
+                    7
+                    19
+                    29
+                    41
+                    53
+                    71
+                    79
+                    another number
+                    ```
+                feedback: One more try.
+            -   option: |-
+                    ```
+                    7
+                    19
+                    29
+                    41
+                    53
+                    71
+                    79
+                    97
+                    ```
+                feedback: That is not it.
+            hint: Think about how many times you need repeating and the values of if and elif.
+            correct_answer: A
+            question_score: '10'
+        6:
+            question_text: What is wrong with code?
+            code: |-
+                name = {ask} 'What is your name?'
+                {if} name == 'Hedy':
+                password = {ask} 'What is your password?'
+                    {if} password =='turtle123':
+                        {print} 'Yey'
+                    {else}:
+                        {print} 'Access denied'
+                {else}:
+                 {print} 'Go fish'
+            mp_choice_options:
+            -   option: '`{elif}` is missing.'
+                feedback: Try again.
+            -   option: '`{else}` can only be used once.'
+                feedback: From now on we can use elif multiple times.
+            -   option: Nothing!
+                feedback: There is a mistake. Look carefully!
+            -   option: There is an indentation mistake in the last line.
+                feedback: Amazing!
+            hint: There is a mistake somewhere...
+            correct_answer: D
+            question_score: '10'
+        7:
+            question_text: Which of the following codes will print five times 'the result is 3' on the screen?
+            mp_choice_options:
+            -   option: |-
+                    ```
+                     numbers = [1, 2 , 3, 4, 5]
+                     {for} n in numbers：
+                         result = n * 1
+                     {print} 'The result is ' result
+                    ```
+                feedback: Try again!
+            -   option: |-
+                    ```
+                    numbers = [1, 2, 3, 4, 5]
+                     {for} u in numbers：
+                         number = u
+                     {print} 'The result is ' number
+                    ```
+                feedback: That is not it.
+            -   option: |-
+                    ```
+                    numbers = [1, 2, 3, 4, 5]
+                     {for} number in numbers：
+                         number = 3
+                     {print} 'The result is ' number
+                    ```
+                feedback: Very good!
+            -   option: |-
+                    ```
+                    numbers = [1, 2 , 3, 4, 5]
+                     {for} n in numbers：
+                         n = result
+                     {print} 'The result is ' result
+                    ```
+                feedback: That is not it.
+            hint: Think about mathematical symbols.
+            correct_answer: C
+            question_score: '10'
+        8:
+            question_text: What is wrong with code?
+            code: |-
+                insects = ['🐝', '🦋', '🕷', '🐞']
+                your_favorite = {ask} 'what is your favorite insect?'
+                {for} insect in insects:
+                 {if} your_favorite == '🐝' {or} your_favorite == '🐞':
+                  {print} 'very useful'
+                 {elif} your_favorite == '🕷':
+                  {print} 'it can catch mosquitoes'
+                 {else}:
+                  {print} 'almost all insects can be useful one way or another'
+            mp_choice_options:
+            -   option: '`{or}` cannot be used with `{if}`.'
+                feedback: Try again.
+            -   option: In the `{for}` command `insect` should be `insects`.
+                feedback: Not true.
+            -   option: Nothing!
+                feedback: Well done!
+            -   option: There is an indentation mistake in the last line.
+                feedback: Nope.
+            hint: Read the code carefully.
+            correct_answer: C
+            question_score: '10'
+        9:
+            question_text: Which one of the codes below gave this output?
+            code: |-
+                -5 is negative
+                -4 is negative
+                -3 is negative
+                -2 is negative
+                -1 is negative
+                0 is positive
+                1 is positive
+                2 is positive
+                3 is positive
+            mp_choice_options:
+            -   option: "```\n {for} number in range -5 to 3:\n     {if} number > 0: \n      {print} number ' is positive'\n     {elif} number < 0: \n      {print} number ' is negative' \n    {else}: \n     {print} number ' is zero'\n```"
+                feedback: Try again!
+            -   option: "```\n {for} number in range -5 to 3:\n     {if} number > 0: \n      {print} number ' is positive'\n     {elif} number <= 0: \n     {print} number ' is negative' \n    {else}: \n     {print} number ' is zero'\n```"
+                feedback: That is not it.
+            -   option: "```\n {for} number in range -5 to 3:\n     {if} number >= 0: \n     {print} number ' is positive'\n     {elif} number < 0: \n     {print} number ' is negative' \n     {else}: \n     {print} number ' is zero'\n```"
+                feedback: Very good!
+            -   option: "```\n {for} number in range -5 to 3:\n     {if} number < 0: \n      {print} number ' is positive'\n     {elif} number <=0: \n     {print} number ' is negative' \n     {else}: \n     {print} number ' is zero'\n```"
+                feedback: That is not it.
+            hint: Read the code carefully.
+            correct_answer: C
+            question_score: '10'
+        10:
+            question_text: What is wrong with this code?
+            code: |-
+                {for} number in range 1 to 5:
+                  volume_room = num * num * num
+                  {print} volume_room ' cubic meters'
+                    {if} volume_room > 100:
+                      {print} 'this is a large room'
+                    {elif} volume_room < 100:
+                      {print} 'small room but cosy'
+                    {else}:
+                      {print} 'i will look for something else'
+            mp_choice_options:
+            -   option: The word num needs quotation marks.
+                feedback: Try again.
+            -   option: The `{if}` command is not used correctly.
+                feedback: Not true.
+            -   option: Line 3 should be `volume_room = number * number * number`.
+                feedback: Well done!
+            -   option: There is an indentation mistake in the last line.
+                feedback: Nope.
+            hint: Read the code carefully.
+            correct_answer: C
             question_score: '10'

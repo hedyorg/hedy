@@ -64,7 +64,7 @@ export const TRANSLATIONS: Record<string, Record<MessageKey, string>> = {
     "unsaved_class_changes": "There are unsaved changes, are you sure you want to leave this page?"
   },
   "bn": {
-    "CheckInternet": "Have a look if your Internet connection is working properly.",
+    "CheckInternet": "Check whether your Internet connection is working.",
     "Connection_error": "We couldn't reach the server.",
     "Empty_output": "This code works but does not print anything. Add a print command to your code or use the turtle to get output.",
     "Errors_found": "You made a mistake! Don't worry, Hedy is trying to find the mistakes",
@@ -184,7 +184,7 @@ export const TRANSLATIONS: Record<string, Record<MessageKey, string>> = {
     "unsaved_class_changes": "There are unsaved changes, are you sure you want to leave this page?"
   },
   "da": {
-    "CheckInternet": "Have a look if your Internet connection is working properly.",
+    "CheckInternet": "Check whether your Internet connection is working.",
     "Connection_error": "We couldn't reach the server.",
     "Empty_output": "This code works but does not print anything. Add a print command to your code or use the turtle to get output.",
     "Errors_found": "You made a mistake! Don't worry, Hedy is trying to find the mistakes",
@@ -274,7 +274,7 @@ export const TRANSLATIONS: Record<string, Record<MessageKey, string>> = {
     "unsaved_class_changes": "There are unsaved changes, are you sure you want to leave this page?"
   },
   "en": {
-    "CheckInternet": "Have a look if your Internet connection is working properly.",
+    "CheckInternet": "Check whether your Internet connection is working.",
     "Connection_error": "We couldn't reach the server.",
     "Empty_output": "This code works but does not print anything. Add a print command to your code or use the turtle to get output.",
     "Errors_found": "You made a mistake! Don't worry, we still ran the program",
@@ -334,7 +334,7 @@ export const TRANSLATIONS: Record<string, Record<MessageKey, string>> = {
     "unsaved_class_changes": "There are unsaved changes, are you sure you want to leave this page?"
   },
   "es": {
-    "CheckInternet": "Revisa si tu conexión de Internet está funcionando correctamente.",
+    "CheckInternet": "Comprueba si tu conexión a Internet funciona.",
     "Connection_error": "No se ha podido conectar con el servidor.",
     "Empty_output": "Este código funciona pero no imprime nada. Agrega un comando print a tu código o usa una tortuga para mostrar salida.",
     "Errors_found": "¡Has cometido un error! No te preocupes, seguimos ejecutando el programa",
@@ -424,7 +424,7 @@ export const TRANSLATIONS: Record<string, Record<MessageKey, string>> = {
     "unsaved_class_changes": "There are unsaved changes, are you sure you want to leave this page?"
   },
   "fi": {
-    "CheckInternet": "Have a look if your Internet connection is working properly.",
+    "CheckInternet": "Check whether your Internet connection is working.",
     "Connection_error": "We couldn't reach the server.",
     "Empty_output": "This code works but does not print anything. Add a print command to your code or use the turtle to get output.",
     "Errors_found": "You made a mistake! Don't worry, Hedy is trying to find the mistakes",
@@ -574,13 +574,13 @@ export const TRANSLATIONS: Record<string, Record<MessageKey, string>> = {
     "unsaved_class_changes": "There are unsaved changes, are you sure you want to leave this page?"
   },
   "hu": {
-    "CheckInternet": "Ellenőrizd, hogy az internetkapcsolat megfelelően működik-e!",
+    "CheckInternet": "Ellenőrizd, hogy az internetkapcsolat megfelelően működik-e.",
     "Connection_error": "Nem tudjuk elérni a szervert.",
     "Empty_output": "Működik a program, de nem ír ki semmit. Helyezz el egy kiírást a kódban, vagy használd a teknőst, hogy kimenetet kapj!",
-    "Errors_found": "You made a mistake! Don't worry, Hedy is trying to find the mistakes",
+    "Errors_found": "Hibát követtél el! Ne aggódjon, még mindig futtatjuk a programot",
     "Execute_error": "Hiba történt a program futtatása közben.",
     "Other_error": "Hoppá! Talán elkövettünk egy kis hibát.",
-    "Program_repair": "This could be the correct code, can you fix it?",
+    "Program_repair": "Ez lehet a helyes kód, meg tudod javítani?",
     "Program_too_long": "Túl hosszú ideig tart programod futtatása.",
     "ServerError": "Olyan programot írtál, amire nem számítottunk. Ha segíteni szeretnél, küldj nekünk egy emailt a szinttel és a programmal a hello@hedy.org címre! Időközben próbáld ki egy kicsit másképp, és nézd meg a példákat! Köszönjük!",
     "Transpile_error": "Nem tudjuk futtatni a kódodat.",
@@ -694,7 +694,7 @@ export const TRANSLATIONS: Record<string, Record<MessageKey, string>> = {
     "unsaved_class_changes": "There are unsaved changes, are you sure you want to leave this page?"
   },
   "kmr": {
-    "CheckInternet": "Have a look if your Internet connection is working properly.",
+    "CheckInternet": "Check whether your Internet connection is working.",
     "Connection_error": "We couldn't reach the server.",
     "Empty_output": "This code works but does not print anything. Add a print command to your code or use the turtle to get output.",
     "Errors_found": "You made a mistake! Don't worry, Hedy is trying to find the mistakes",
@@ -754,7 +754,7 @@ export const TRANSLATIONS: Record<string, Record<MessageKey, string>> = {
     "unsaved_class_changes": "There are unsaved changes, are you sure you want to leave this page?"
   },
   "mi": {
-    "CheckInternet": "Have a look if your Internet connection is working properly.",
+    "CheckInternet": "Check whether your Internet connection is working.",
     "Connection_error": "We couldn't reach the server.",
     "Empty_output": "This code works but does not print anything. Add a print command to your code or use the turtle to get output.",
     "Errors_found": "You made a mistake! Don't worry, we still ran the program",
@@ -784,7 +784,7 @@ export const TRANSLATIONS: Record<string, Record<MessageKey, string>> = {
     "unsaved_class_changes": "There are unsaved changes, are you sure you want to leave this page?"
   },
   "nl": {
-    "CheckInternet": "Controleer even of je internetverbinding het nog doet.",
+    "CheckInternet": "Controleer of jouw internetverbinding wel goed werkt.",
     "Connection_error": "We konden niet goed met de server praten.",
     "Empty_output": "Deze code werkt wel, maar print niks. Voeg een print commando toe aan je code of gebruik de schildpad om output te krijgen.",
     "Errors_found": "Je hebt een foutje gemaakt! Maak je geen zorgen, Hedy probeert de fouten te vinden",
@@ -844,7 +844,7 @@ export const TRANSLATIONS: Record<string, Record<MessageKey, string>> = {
     "unsaved_class_changes": "There are unsaved changes, are you sure you want to leave this page?"
   },
   "pa_PK": {
-    "CheckInternet": "Have a look if your Internet connection is working properly.",
+    "CheckInternet": "Check whether your Internet connection is working.",
     "Connection_error": "We couldn't reach the server.",
     "Empty_output": "This code works but does not print anything. Add a print command to your code or use the turtle to get output.",
     "Errors_found": "You made a mistake! Don't worry, Hedy is trying to find the mistakes",
@@ -874,7 +874,7 @@ export const TRANSLATIONS: Record<string, Record<MessageKey, string>> = {
     "unsaved_class_changes": "There are unsaved changes, are you sure you want to leave this page?"
   },
   "pap": {
-    "CheckInternet": "Have a look if your Internet connection is working properly.",
+    "CheckInternet": "Check whether your Internet connection is working.",
     "Connection_error": "We couldn't reach the server.",
     "Empty_output": "This code works but does not print anything. Add a print command to your code or use the turtle to get output.",
     "Errors_found": "You made a mistake! Don't worry, we still ran the program",
@@ -934,10 +934,10 @@ export const TRANSLATIONS: Record<string, Record<MessageKey, string>> = {
     "unsaved_class_changes": "Strona zawiera niezapisane zmiany. Czy jesteś pewien, że chcesz wyjść bez zapisania zmian?"
   },
   "pt_BR": {
-    "CheckInternet": "Verifique se a sua conexão com a Internet está funcionando corretamente.",
+    "CheckInternet": "Verifique se sua conexão com a Internet está funcionando.",
     "Connection_error": "Nós não conseguimos conectar ao servidor.",
     "Empty_output": "Este código funciona mas não imprime nada. Adicione um comando de impressão ou use a tartaruga para ter alguma saída.",
-    "Errors_found": "You made a mistake! Don't worry, Hedy is trying to find the mistakes",
+    "Errors_found": "Você cometeu um erro! Não se preocupe, ainda executamos o programa",
     "Execute_error": "Alguma coisa deu errado enquanto o programa era executado.",
     "Other_error": "Opa! Talvez nós fizemos alguma coisa errada.",
     "Program_repair": "Este poderia ser o código correto, você poderia corrigir ele?",
@@ -1144,7 +1144,7 @@ export const TRANSLATIONS: Record<string, Record<MessageKey, string>> = {
     "unsaved_class_changes": "Det finns osparade ändringar; är du säker på att du vill lämna sidan?"
   },
   "sw": {
-    "CheckInternet": "Have a look if your Internet connection is working properly.",
+    "CheckInternet": "Check whether your Internet connection is working.",
     "Connection_error": "Hatukuweza kufikia seva.",
     "Empty_output": "This code works but does not print anything. Add a print command to your code or use the turtle to get output.",
     "Errors_found": "You made a mistake! Don't worry, Hedy is trying to find the mistakes",
@@ -1174,7 +1174,7 @@ export const TRANSLATIONS: Record<string, Record<MessageKey, string>> = {
     "unsaved_class_changes": "There are unsaved changes, are you sure you want to leave this page?"
   },
   "te": {
-    "CheckInternet": "Have a look if your Internet connection is working properly.",
+    "CheckInternet": "Check whether your Internet connection is working.",
     "Connection_error": "We couldn't reach the server.",
     "Empty_output": "This code works but does not print anything. Add a print command to your code or use the turtle to get output.",
     "Errors_found": "You made a mistake! Don't worry, Hedy is trying to find the mistakes",
@@ -1234,7 +1234,7 @@ export const TRANSLATIONS: Record<string, Record<MessageKey, string>> = {
     "unsaved_class_changes": "There are unsaved changes, are you sure you want to leave this page?"
   },
   "tl": {
-    "CheckInternet": "Have a look if your Internet connection is working properly.",
+    "CheckInternet": "Check whether your Internet connection is working.",
     "Connection_error": "We couldn't reach the server.",
     "Empty_output": "This code works but does not print anything. Add a print command to your code or use the turtle to get output.",
     "Errors_found": "You made a mistake! Don't worry, Hedy is trying to find the mistakes",
@@ -1264,7 +1264,7 @@ export const TRANSLATIONS: Record<string, Record<MessageKey, string>> = {
     "unsaved_class_changes": "There are unsaved changes, are you sure you want to leave this page?"
   },
   "tn": {
-    "CheckInternet": "Have a look if your Internet connection is working properly.",
+    "CheckInternet": "Check whether your Internet connection is working.",
     "Connection_error": "We couldn't reach the server.",
     "Empty_output": "This code works but does not print anything. Add a print command to your code or use the turtle to get output.",
     "Errors_found": "You made a mistake! Don't worry, Hedy is trying to find the mistakes",
@@ -1354,7 +1354,7 @@ export const TRANSLATIONS: Record<string, Record<MessageKey, string>> = {
     "unsaved_class_changes": "There are unsaved changes, are you sure you want to leave this page?"
   },
   "ur": {
-    "CheckInternet": "Have a look if your Internet connection is working properly.",
+    "CheckInternet": "Check whether your Internet connection is working.",
     "Connection_error": "We couldn't reach the server.",
     "Empty_output": "This code works but does not print anything. Add a print command to your code or use the turtle to get output.",
     "Errors_found": "You made a mistake! Don't worry, Hedy is trying to find the mistakes",
@@ -1414,7 +1414,7 @@ export const TRANSLATIONS: Record<string, Record<MessageKey, string>> = {
     "unsaved_class_changes": "There are unsaved changes, are you sure you want to leave this page?"
   },
   "zh_Hans": {
-    "CheckInternet": "查看一下你的网络连接是否正常.",
+    "CheckInternet": "检查您的互联网连接是否正常。",
     "Connection_error": "我们无法连接到服务器。",
     "Empty_output": "这段代码可以工作，但没有打印任何东西。在你的代码中添加一个打印命令，或者使用乌龟来获得输出。",
     "Errors_found": "你搞错了！不要着急，我们仍然运行该程序",
@@ -1439,12 +1439,12 @@ export const TRANSLATIONS: Record<string, Record<MessageKey, string>> = {
     "restaurant": "🍣, 🍕, 🍔",
     "rock": "✂️, 📜, 🗻",
     "songs": "🎵,🎶",
-    "teacher_welcome": "Welcome to Hedy! Your are now the proud owner of a teachers account which allows you to create classes and invite students.",
+    "teacher_welcome": "欢迎来到海蒂！ 您现在是教师帐户的自豪拥有者，该帐户允许您创建课程并邀请学生。",
     "turtle": "🐢",
-    "unsaved_class_changes": "There are unsaved changes, are you sure you want to leave this page?"
+    "unsaved_class_changes": "有未保存的更改，您确定要离开此页面吗？"
   },
   "zh_Hant": {
-    "CheckInternet": "Have a look if your Internet connection is working properly.",
+    "CheckInternet": "Check whether your Internet connection is working.",
     "Connection_error": "We couldn't reach the server.",
     "Empty_output": "This code works but does not print anything. Add a print command to your code or use the turtle to get output.",
     "Errors_found": "You made a mistake! Don't worry, Hedy is trying to find the mistakes",

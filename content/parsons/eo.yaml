@@ -61,26 +61,26 @@ levels:
                 Create a program that decides which two players have to play against each other first.
                 Start by printing the two players who play the first match, then print against which player the winner will play.
             code: |-
-                players {is} Liam, Noah, Sophie
-                player_1 {is} players {at} {random}
-                {remove} player_1 {from} players
-                player_2 {is} players {at} {random}
-                {print} player_1 ' first plays against ' player_2
-                {remove} player_2 {from} players
-                {print} 'The winner plays against ' players {at} {random}
+                ludantoj {is} Liam, Noah, Sophie
+                ludanto_1 {is} ludantoj {at} {random}
+                {remove} ludanto_1 {from} ludantoj
+                ludanto_2 {is} ludantoj {at} {random}
+                {print} ludanto_1 ' unue ludas kontraŭ ' ludanto_2
+                {remove} ludanto_2 {from} ludantoj
+                {print} 'La gajnanto ludas kontraŭ ' ludantoj {at} {random}
     4:
         1:
             story: |-
-                You are the newest Pokémon trainer from Pallet Town!
-                Make a program that selects your first Pokémon.
-                Let the program wait a minute before revealing your first pokémon.
+                Vi estas la plej nova trejnisto de pokémoj el Paleturbo!
+                Skribu programaĵon kiu elektos vian unuan pokémon.
+                Lasu la programaĵon atendi minuton antaŭ publikigi vian unuan pokémon.
             code: |-
                 pokemons {is} Pikachu, Charmander, Bulbasaur, Squirtle
                 {print} 'This is going to be your first pokémon!'
                 {sleep}
                 {print} pokemons {at} {random}
         2:
-            story: Create a lottery that lets you choose an extra price that you might win.
+            story: Kreu loterion kiu farigas vin elekti krompremion kiun vi povus gajni.
             code: |-
                 prices {is} car, hamster, 1 million euros
                 price {is} {ask} 'What would you like to win?'
@@ -192,8 +192,8 @@ levels:
     10:
         1:
             story: |-
-                Help this family out by creating a schedule of who is cooking and what they should be making this week. The remove commands make sure nobody has to cook twice and they have a differnet dinner every day.
-                **Mind!** the variable order should be first days, then people, and lastly dinner_options. This goes for the lines with the remove commands too.
+                Helpu tiun ĉi familion kreante hortabelon pri kiu kaj kion ili devas kuiri ĉi semajne. La komando `{remove}` certigas ke neniu devas kuiru dufoje, kaj ke ili havu ĉiuvespere malsaman manĝon.
+                **Atentu!** la ordo de la variabloj devas esti unue «tagoj», poste «familianoj», kaj laste «manĝelektoj». Tio ankaŭ devas esti por la linioj kun la komando `{remove}`.
             code: |-
                 days = Monday, Tuesday, Wednesday, Thursday, Friday
                 people = mom, dad, Martin, Abby, Jesse

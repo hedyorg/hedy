@@ -138,7 +138,7 @@ levels:
             -   option: Puedes utilizarlo para repetir una respuesta.
                 feedback: ¡Buen trabajo!
             -   option: Puedes utilizarlo para hacer que el texto desaparezca.
-                feedback: Eso no es correcto...
+                feedback: Eso no es correcto....
             hint: '`{echo}` de usa después de un comando para `{ask}`.'
             correct_answer: C
             question_score: '10'
@@ -1321,14 +1321,16 @@ levels:
             -   option: |-
                     ```
                     las ruedas del bus
-                    giran y giran```
+                    giran y giran
+                    ```
                 feedback: Sólo la segunda línea se repite 3 veces
             -   option: |-
                     ```
                     las ruedas del bus
                     las ruedas del bus
                     las ruedas del bus
-                    giran y giran```
+                    giran y giran
+                    ```
                 feedback: Sólo la segunda línea se repite 3 veces
             -   option: |-
                     ```
@@ -1337,14 +1339,16 @@ levels:
                     las ruedas del bus
                     giran y giran
                     las ruedas del bus
-                    giran y giran```
+                    giran y giran
+                    ```
                 feedback: Sólo la segunda línea se repite 3 veces
             -   option: |-
                     ```
                     las ruedas del bus
                     giran y giran
                     giran y giran
-                    giran y giran```
+                    giran y giran
+                    ```
                 feedback: ¡Por toda la ciudad! ¡Perfecto!
             hint: Sólo 'giran y giran' se repite 3 veces.
             correct_answer: D
@@ -1407,7 +1411,8 @@ levels:
                     ```
                     {repeat} 2 {times} {print} 'Ahí viene el Sol'
                     {print} 'Y digo'
-                    {print} 'Todo está bien'```
+                    {print} 'Todo está bien'
+                    ```
                 feedback: ¿Dónde dejaste 'Do do do do'?
             -   option: |-
                     ```
@@ -3412,7 +3417,7 @@ levels:
             -   option: En la línea 1 debe utilizarse == en vez de =
                 feedback: No es eso
             -   option: Faltan comillas en la línea 2
-                feedback: Eso no está bien
+                feedback: Eso no es correcto
             -   option: En la línea 5 debería haberse utilizado {if} en lugar de {while}
                 feedback: No es eso
             -   option: En la línea 5 se debería haber usado != en vez de ==
@@ -3560,22 +3565,22 @@ levels:
                 aperitivos = nachos, patatas, pepino, dulces
                 {print} _
             mp_choice_options:
-            -   option: '`aperitivos {at} {random}`'
+            -   option: '`snacks {at} {random}`'
                 feedback: Esta es la manera antigua.
-            -   option: '`[{random} aperitivo]`'
+            -   option: '`[{random} snack]`'
                 feedback: El orden está mal.
-            -   option: '`aperitivos[{random}]`'
+            -   option: '`snacks[{random}]`'
                 feedback: Correcto
-            -   option: '`aperitivos[{at} {random}]`'
+            -   option: '`snacks[{at} {random}]`'
                 feedback: Ya no vamos a necesitar `at` más
             hint: Ya no vamos a usar {at}
             correct_answer: C
             question_score: '10'
         2:
-            question_text: What should be filled in on the blanks if you want a list of what chores are done by whom?
+            question_text: ¿Qué debería rellenarse en los espacios en blanco si quieres una lista de qué tareas de casa son hechas por quien?
             code: |-
-                friends = ['Wesley', 'Eric', 'Kaylee']
-                chores = [the cooking, the cleaning, nothing]
+                amigos = ['Wesley', 'Eric', 'Kaylee']
+                tareas = [cocinar, limpiar, nada]
                 {for} i {in} {range} 1 {to} 3
                     {print}  _
             mp_choice_options:
@@ -3588,7 +3593,7 @@ levels:
                     ```
                     amigos[1] tiene que hacer tareas_de_casa[1]
                     ```
-                feedback: It will print 3 times that Wesley has to do the cooking
+                feedback: Imprimirá 3 veces que Wesley tiene que cocinar
             -   option: |-
                     ```
                     tareas_de_casa[i] ' tiene que hacer ' amigos[random]
@@ -3605,10 +3610,10 @@ levels:
         3:
             question_text: ¿Cuál es un resultado posible para este programa?
             code: |-
-                friends = ['Wesley', 'Eric', 'Kaylee']
-                chore = [the cooking, the cleaning, nothing]
+                amigos = ['Wesley', 'Eric', 'Kaylee']
+                tarea = [cocinar, limpiar, nada]
                 {for} i {in} {range} 1 {to} 3
-                    {print}  friends[i] has to do chores[i]
+                    {print}  amigos[i] tiene que tareas[i]
             mp_choice_options:
             -   option: |-
                     ```
@@ -3644,193 +3649,520 @@ levels:
         4:
             question_text: ¿Qué está mal en este código?
             code: |-
-                friends = ['Jaylee', 'Erin', 'Fay']
-                lucky_numbers = [15, 18, 6]
+                amigos = ['Jaylee', 'Erin', 'Fay']
+                numeros_suerte = [15, 18, 6]
                 {for} i {in} {range} 0 {to} 3
-                    print 'the lucky number of ' friends[i]
-                    print 'is ' lucky_numbers[i]
+                    imprimir 'el número de la suerte de ' amigos[i]
+                    imprimir 'es ' numeros_suerte[i]
             mp_choice_options:
             -   option: En la línea 4 la variable debería ser 'amigo[i]', no 'amigos[i]'
-                feedback: Eso no es cierto.
+                feedback: Eso no es correcto.
             -   option: La línea 3 debería decir 'en rango 1 a 3' no 'en rango 0 a 3'
                 feedback: ¡Bien visto!
-            -   option: Line 4 should say 'lucky_number', not 'lucky number
+            -   option: La línea 4 debería decir 'numero_suerte', no 'número suerte
                 feedback: No es una variable, sólo es texto.
             -   option: Se debería borrar {in} en la línea 3
                 feedback: No es eso
-            hint: There's nothing wrong with line 4
+            hint: No hay ningún error en la línea 4
             correct_answer: B
             question_score: '10'
         5:
             question_text: ¿Qué línea debería llenar el espacio en blanco?
             code: |-
-                animals = ['dog', 'cow', 'horse']
+                animales = ['perro', 'vaca', 'caballo']
                 _
                 {for} i {in} {range} 1 {to} 3
-                    {print} 'the ' animals[i] ' says ' sounds[i]
+                    {print} 'el ' animales[i] ' dice ' sonidos[i]
             mp_choice_options:
             -   option: ruidos = ['moo', 'woof', 'neigh']
                 feedback: Cuidado con el nombre de la variable y el orden de los sonidos.
-            -   option: sounds = '[woof], [moo], [neigh]'.
-                feedback: Look at line one to see how brackets are supposed to be used.
-            -   option: sounds = [woof, moo, neigh]
-                feedback: Don't forget the quotation marks!
-            -   option: sounds = ['woof', 'moo', 'neigh']
-                feedback: Great job!
-            hint: Look at line 1 to see proper use of brackets and quotation marks.
+            -   option: sonidos = '[woof], [moo], [neigh]'.
+                feedback: Mira la línea uno para ver como se deben usar los corchetes.
+            -   option: sonidos = [woof, moo, neigh]
+                feedback: ¡No te olvides las comillas!
+            -   option: sonidos = ['woof', 'moo', 'neigh']
+                feedback: ¡Buen trabajo!
+            hint: Mira la línea 1 para ver el uso apropiado de los corchetes y las comillas.
             correct_answer: D
             question_score: '10'
         6:
-            question_text: Which statement is true?
+            question_text: ¿Qué sentencia es verdadera?
             code: |-
-                people = ['Chris', 'Jaylino', 'Ryan']
-                games = ['fortnite', 'minecraft', 'fifa']
+                gente = ['Chris', 'Jaylino', 'Ryan']
+                juegos = ['fortnite', 'minecraft', 'fifa']
                 {for} o {in} {range} 1 {to} 3
-                  {print} people[o] ' likes ' games[o]
+                  {print} gente[o] ' le gusta ' juegos[o]
             mp_choice_options:
-            -   option: You are not allowed to use the variable o. It should be named i.
-                feedback: i is the most commonly used variable name in this case, but it's not mandatory to use i.
-            -   option: The output will say that Jaylino likes fortnite.
-                feedback: No, he likes minecraft.
-            -   option: The output will say that Ryan likes fifa
-                feedback: Correct
-            -   option: This code will not work. It will give and error.
-                feedback: No, the code is correct.
-            hint: There is nothing wrong with this code.
+            -   option: No se te permite usar la variable o. Debería llamarse i.
+                feedback: i es el nombre de variable comunmente usada en este caso, pero no es obligatorio usar i.
+            -   option: El resultado dirá que a Jaylino le gusta fortnite.
+                feedback: No, a él le gusta minecraft.
+            -   option: El resultado dirá que a Ryan le gusta fifa
+                feedback: Correcto
+            -   option: Este código no funcionará. Dará y error.
+                feedback: No, el código es correcto.
+            hint: Este código no tiene nada de malo.
             correct_answer: C
             question_score: '10'
         7:
-            question_text: What's wrong with this code?
+            question_text: ¿Qué le pasa a este código?
             code: |-
-                people = ['Savi', 'Senna', 'Fayenne']
-                transportation = ['bike', 'train', 'car']
+                gente = ['Savi', 'Senna', 'Fayenne']
+                transporte = ['bicicleta', 'tren', 'coche']
                 {for} i {in} {range} 1 {to} 3
-                  {print} people[i] goes to school by transportation[i]
+                  {print} gente[i] va al colegio en transporte[i]
             mp_choice_options:
-            -   option: Line 1 needs less quotation marks
-                feedback: That is not right.
-            -   option: Line 3 should start with indentation
-                feedback: It should not!
-            -   option: Line 4 should start without indentation
-                feedback: It should not
-            -   option: Line 4 needs more quotation marks.
-                feedback: Amazing!
-            hint: There is a mistake made in the usage of quotation marks.
+            -   option: La línea 1 necesita menos comillas
+                feedback: Esto no es correcto.
+            -   option: La línea 3 debería empezar con sangría
+                feedback: ¡No debería!
+            -   option: La línea 4 debería empezar sin sangría
+                feedback: No debería
+            -   option: La línea 4 necesita más comillas.
+                feedback: ¡Genial!
+            hint: Hay un error en el uso de las comillas.
             correct_answer: D
             question_score: '10'
         8:
-            question_text: Which of these codes belongs to this output?
+            question_text: ¿Cuál de estos códigos pertenece a este resultado?
             code: |-
-                Macy and Kate get to go first
-                Lionell and Raj get to go second
-                Kim and Leroy get to go third
+                Macy y Kate van primeros
+                Lionell y Raj van segundos
+                Kim y Leroy van terceros
             mp_choice_options:
             -   option: |-
                     ```
-                    teams = ['Macy and Kate', 'Lionell and Raj', 'Kim and Leroy']
-                    position = ['first', 'second', 'third']
+                    equipos = ['Macy y Kate', 'Lionell y Raj', 'Kim y Leroy']
+                    posicion = ['primeros', 'segundos', 'terceros']
                     {for} i {in} {range} 0 {to} 3
-                    {print} teams[random] ' get to go ' position[i]
+                    {print} equipos[aleatorio] ' van ' posicion[i]
                     ```
-                feedback: This is not right
+                feedback: Esto no es correcto
             -   option: |-
                     ```
-                    teams = ['Macy and Kate', 'Lionell and Raj', 'Kim and Leroy']
-                    position = ['first', 'second', 'third']
+                    equipos = ['Macy y Kate', 'Lionell y Raj', 'Kim y Leroy']
+                    posicion = ['primeros', 'segundos', 'terceros']
                     {for} i {in} {range} 1 {to} 3
-                      {print} teams[i] ' get to go ' position[i]
+                      {print} equipos[i] ' van ' posicion[i]
                     ```
-                feedback: Amazing!
+                feedback: ¡Genial!
             -   option: |-
                     ```
-                    teams = ['Macy', 'Kate', 'Lionell', 'Raj', 'Kim', 'Leroy']
-                    position = ['first', 'second', 'third']
+                    equipos = ['Macy', 'Kate', 'Lionell', 'Raj', 'Kim', 'Leroy']
+                    posicion = ['primeros', 'segundos', 'terceros']
                     {for} i {in} {range} 1 {to} 6
-                      {print} teams[random] ' get to go ' position[random]
+                      {print} equipos[aleatorio] ' van ' posicion[aleatorio]
                     ```
-                feedback: This is not it.
+                feedback: Esto no es.
             -   option: |-
                     ```
-                    teams = ['Macy and Kate' 'Lionell and Raj' 'Kim and Leroy']
-                    position = ['first' 'second' 'third']
-                    {for} teams {in} {range} 0 {to} 3
-                        {print} teams[i] ' get to go ' position[i]
+                    equipos = ['Macy y Kate' 'Lionell y Raj' 'Kim y Leroy']
+                    posicion = ['primero' 'segundo' 'tercero']
+                    {for} equipos {in} {range} 0 {to} 3
+                        {print} equipos[i] ' van ' posicion[i]
                     ```
-                feedback: This is not going to work!
-            hint: If you look carefully at the first line, you'll see that only the first two answers are possibly correct.
+                feedback: ¡Esto no va a funcionar!
+            hint: Si prestas atención a la primera línea, verás que sólo las primeras dos respuestas probablemente sean correctas.
             correct_answer: B
             question_score: '10'
         9:
-            question_text: What is a possible output for this code?
+            question_text: ¿Qué resultado es probable para este código?
             code: |-
-                countries = ['Canada', 'Zimbabwe', 'New Zealand']
+                paises = ['Canadá', 'Zimbabwe', 'Nueva Zelanda']
                 {for} i {in} {range} 0 {to} 1
-                  {print} 'I will travel to ' countries[random]
+                  {print} 'Viajaré a ' paises[random]
             mp_choice_options:
             -   option: |-
                     ```
-                    I will travel to Canada
-                    I will travel to Canada
+                    Viajaré a Canadá
+                    Viajaré a Canadá
                     ```
-                feedback: Great job!
+                feedback: ¡Gran trabajo!
             -   option: |-
                     ```
-                    I will travel to Canada
+                    Viajaré a Canadá
                     ```
-                feedback: It will be repeated twice
+                feedback: Se repetirá dos veces
             -   option: |-
                     ```
-                    I will travel to Canada, Zimbabwe and New Zealand
+                    Viajaré a Canadá, Zimbabwe y Nueva Zelanda
                     ```
-                feedback: This is not it.
+                feedback: Esto no es.
             -   option: |-
                     ```
-                    I will travel to Canada
-                    I will travel to Zimbabwe
-                    I will travel to New Zealand
+                    Viajaré a Canadá
+                    Viajaré a Zimbabwe
+                    Viajaré a Nueva Zelanda
                     ```
-                feedback: It's only repeated twice
-            hint: Range 0 to 1 is 2 times
+                feedback: Sólo se repite dos veces
+            hint: Rango 0 a 1 es 2 veces
             correct_answer: A
             question_score: '10'
         10:
-            question_text: Which 3 lines will complete this code correctly?
+            question_text: ¿Qué 3 línea completarán este código correctamente?
             code: |-
-                {print} 'The book raffle will start soon'
-                {print} 'Get your tickets now!'
-                {books} = ['Narnia', 'The Hobbit', 'Oliver Twist', 'Harry Potter', 'Green eggs and ham']
-                people = {ask} 'How many raffle tickets are sold?'
-                list_of_raffle_numbers = [1, 2]
-                {for} i {in} {range} 3 {to} people
-                    {add} i {to} list_of_raffle_numbers
+                {print} 'El sorteo de libros va a empezar pronto'
+                {print} '¡Compra tus boletos ahora!'
+                {books} = ['Narnia', 'El Hobbit', 'Oliver Twist', 'Harry Potter', 'Huevos verdes con jamón']
+                gente = {ask} '¿Cuántos tickets has vendido?'
+                lista_numeros_sorteo = [1, 2]
+                {for} i {in} {range} 3 {to} gente
+                    {add} i {to} lista_numeros_sorteo
                 {for} i {in} {range} 1 {to} 5
             mp_choice_options:
             -   option: |-
                     ```
-                    chosen_number = list_of_numbers at random
-                    print books[i] ' will go to person number ' chosen_number
-                    {add} chosen_number {to} list_of_numbers
+                    numero_elegido = lista_de_numeros en aleatorio
+                    imprimir libros[i] ' va para la persona con el número ' numero_elegido
+                    {add} numero_elegido {to} lista_de_numeros
                     ```
-                feedback: Almost there... but adding the winner to the list makes this raffle unfair
+                feedback: Casí... pero añadir el ganador a la lista hace este sorteo ser injusto
             -   option: |-
                     ```
-                    print person[i] ' wins ' book[i]
+                    imprimir persona[i] ' gana ' libro[i]
                     ```
-                feedback: There is no list called 'person'
+                feedback: No hay una lista llamada 'persona'
             -   option: |-
                     ```
-                    chosen_number = list_of_numbers[people]
-                    print books[people] ' will go to person number ' chosen_number
-                    {remove} chosen_number {from} list_of_numbers
+                    numero_elegido = lista_de_numeros[gente]
+                    imprimir libros[gente] ' va para la persona con el número ' numero_elegido
+                    {remove} numero_elegido {from} lista_de_numeros
+                    ```
+                feedback: Esto no es.
+            -   option: |-
+                    ```
+                    numero_elegido = lista_de_numeros[aleatorio]
+                    imprimir libros[i] ' va para la persona con el número ' numero_elegido
+                    {remove} numero_elegido {from} lista_de_numeros
+                    ```
+                feedback: ¡Fantastico!
+            hint: Tienes que usar el comando {remove}
+            correct_answer: D
+            question_score: '10'
+    17:
+        1:
+            question_text: What is the output of this code?
+            code: |-
+                minions = ['Bob', 'Kevin', 'Stuart']
+                {for} x in minions:
+                    {print} x
+            mp_choice_options:
+            -   option: |-
+                    ```
+                    m i n i o n s
                     ```
                 feedback: This is not it.
             -   option: |-
                     ```
-                    chosen_number = list_of_numbers[random]
-                    print books[i] ' will go to person number ' chosen_number
-                    {remove} chosen_number {from} list_of_numbers
+                    Bob
+                    Kevin
+                    Stuart
                     ```
-                feedback: Fantastic!
-            hint: You need to use the {remove} command
+                feedback: Correct!
+            -   option: |-
+                    ```
+                    minions
+                    minions
+                    minions
+                    ```
+                feedback: Take a look at the content of your list.
+            -   option: |-
+                    ```
+                    B o b K e v i n S t u a r t
+                    ```
+                feedback: Do not loop through the letters.
+            hint: Loop through your list.
+            correct_answer: B
+            question_score: '10'
+        2:
+            question_text: What is wrong with this code?
+            code: |-
+                seconds_minute = 60
+                minute_hour = 60
+                hour_day = 24
+                leap_year = 366
+                no_leap_year = 365
+                years = ask 'what year is it?'
+                {if} years = 2024:
+                 print seconds_minute * minute_hour * hour_day * leap_year
+                {else}:
+                 print seconds_minute * minute_hour * hour_day * noleap_year
+            mp_choice_options:
+            -   option: You cannot have so many variables.
+                feedback: This is not it.
+            -   option: The way the variables are multiplied is incorrect.
+                feedback: Not true!
+            -   option: One of the variables `noleap_year` does not belong with the `{if}` statement.
+                feedback: Keep looking for the mistake.
+            -   option: The `noleap_year` has to be identical in both cases.
+                feedback: Correct!
+            hint: Read the code carefully.
             correct_answer: D
+            question_score: '10'
+        3:
+            question_text: How many hedgehogs will this code print?
+            code: |-
+                {for} x in range 1 to 3:
+                  {for} y in range 1 to 2:
+                    {print} 🦔
+            mp_choice_options:
+            -   option: |-
+                    ```
+                    🦔
+                    🦔
+                    🦔
+                    ```
+                feedback: Try again.
+            -   option: |-
+                    ```
+                    🦔
+                    🦔
+                    ```
+                feedback: One more try.
+            -   option: |-
+                    ```
+                    🦔
+                    🦔
+                    🦔
+                    🦔
+                    🦔
+                    🦔
+                    ```
+                feedback: Well done!
+            -   option: |-
+                    ```
+                    🦔
+                    🦔
+                    🦔
+                    🦔
+                    🦔
+                    ```
+                feedback: That is not it.
+            hint: Think about how many times you need repeating.
+            correct_answer: C
+            question_score: '10'
+        4:
+            question_text: What is wrong with code?
+            code: |-
+                name_color = {ask} 'What is your favorite color?'
+                {if} name_color == 'red':
+                  {print} 'the color of a tomato'
+                {elif} name_color == 'green':
+                  {print} 'the color of an apple'
+                {elif} name_color == 'blue':
+                  {print} 'the color of a blueberry'
+                {elif} name_color == 'yellow':
+                  {print} 'the color of a banana'
+                {elif}:
+                  {print} 'this fruit-color does not exist'
+            mp_choice_options:
+            -   option: The first `{elif}` should be used before the `print` command
+                feedback: Try again.
+            -   option: '`{elif}` can only be used once'
+                feedback: From now on we can use elif multiple times.
+            -   option: '`==` used with `{elif}` should be replaced by `=`'
+                feedback: Not correct.
+            -   option: '`{elif}` in the last line should be replaced by `{else}`'
+                feedback: Great!
+            hint: Think about `{if}`, `{elif}`, `{else}`.
+            correct_answer: D
+            question_score: '10'
+        5:
+            question_text: What is the output of this code?
+            code: |-
+                numbers = [7, 19, 29, 41, 53, 71, 79, 97]
+                {for} prime in numbers:
+                  {if} prime <= 10：
+                    {print} prime
+                  {elif} prime >= 60:
+                    {print} prime
+                  {elif} prime >= 90:
+                    {print} prime
+                  {else}:
+                    {print} 'another number'
+            mp_choice_options:
+            -   option: |-
+                    ```
+                    7
+                    another number
+                    another number
+                    another number
+                    another number
+                    71
+                    79
+                    97
+                    ```
+                feedback: Well done!
+            -   option: |-
+                    ```
+                    another number
+                    19
+                    29
+                    41
+                    53
+                    71
+                    79
+                    97
+                    ```
+                feedback: Try again.
+            -   option: |-
+                    ```
+                    7
+                    19
+                    29
+                    41
+                    53
+                    71
+                    79
+                    another number
+                    ```
+                feedback: One more try.
+            -   option: |-
+                    ```
+                    7
+                    19
+                    29
+                    41
+                    53
+                    71
+                    79
+                    97
+                    ```
+                feedback: That is not it.
+            hint: Think about how many times you need repeating and the values of if and elif.
+            correct_answer: A
+            question_score: '10'
+        6:
+            question_text: What is wrong with code?
+            code: |-
+                name = {ask} 'What is your name?'
+                {if} name == 'Hedy':
+                password = {ask} 'What is your password?'
+                    {if} password =='turtle123':
+                        {print} 'Yey'
+                    {else}:
+                        {print} 'Access denied'
+                {else}:
+                 {print} 'Go fish'
+            mp_choice_options:
+            -   option: Falta `{elif}`.
+                feedback: Inténtalo de nuevo.
+            -   option: '`{else}` sólo puede utilizarse una vez.'
+                feedback: From now on we can use elif multiple times.
+            -   option: Nothing!
+                feedback: There is a mistake. Look carefully!
+            -   option: There is an indentation mistake in the last line.
+                feedback: Amazing!
+            hint: There is a mistake somewhere...
+            correct_answer: D
+            question_score: '10'
+        7:
+            question_text: Which of the following codes will print five times 'the result is 3' on the screen?
+            mp_choice_options:
+            -   option: |-
+                    ```
+                     numbers = [1, 2 , 3, 4, 5]
+                     {for} n in numbers：
+                         result = n * 1
+                     {print} 'The result is ' result
+                    ```
+                feedback: Try again!
+            -   option: |-
+                    ```
+                    numbers = [1, 2, 3, 4, 5]
+                     {for} u in numbers：
+                         number = u
+                     {print} 'The result is ' number
+                    ```
+                feedback: That is not it.
+            -   option: |-
+                    ```
+                    numbers = [1, 2, 3, 4, 5]
+                     {for} number in numbers：
+                         number = 3
+                     {print} 'The result is ' number
+                    ```
+                feedback: Very good!
+            -   option: |-
+                    ```
+                    numbers = [1, 2 , 3, 4, 5]
+                     {for} n in numbers：
+                         n = result
+                     {print} 'The result is ' result
+                    ```
+                feedback: That is not it.
+            hint: Think about mathematical symbols.
+            correct_answer: C
+            question_score: '10'
+        8:
+            question_text: What is wrong with code?
+            code: |-
+                insects = ['🐝', '🦋', '🕷', '🐞']
+                your_favorite = {ask} 'what is your favorite insect?'
+                {for} insect in insects:
+                 {if} your_favorite == '🐝' {or} your_favorite == '🐞':
+                  {print} 'very useful'
+                 {elif} your_favorite == '🕷':
+                  {print} 'it can catch mosquitoes'
+                 {else}:
+                  {print} 'almost all insects can be useful one way or another'
+            mp_choice_options:
+            -   option: '`{or}` cannot be used with `{if}`.'
+                feedback: Try again.
+            -   option: In the `{for}` command `insect` should be `insects`.
+                feedback: Not true.
+            -   option: Nothing!
+                feedback: Well done!
+            -   option: There is an indentation mistake in the last line.
+                feedback: Nope.
+            hint: Read the code carefully.
+            correct_answer: C
+            question_score: '10'
+        9:
+            question_text: Which one of the codes below gave this output?
+            code: |-
+                -5 is negative
+                -4 is negative
+                -3 is negative
+                -2 is negative
+                -1 is negative
+                0 is positive
+                1 is positive
+                2 is positive
+                3 is positive
+            mp_choice_options:
+            -   option: "```\n {for} number in range -5 to 3:\n     {if} number > 0: \n      {print} number ' is positive'\n     {elif} number < 0: \n      {print} number ' is negative' \n    {else}: \n     {print} number ' is zero'\n```"
+                feedback: Try again!
+            -   option: "```\n {for} number in range -5 to 3:\n     {if} number > 0: \n      {print} number ' is positive'\n     {elif} number <= 0: \n     {print} number ' is negative' \n    {else}: \n     {print} number ' is zero'\n```"
+                feedback: That is not it.
+            -   option: "```\n {for} number in range -5 to 3:\n     {if} number >= 0: \n     {print} number ' is positive'\n     {elif} number < 0: \n     {print} number ' is negative' \n     {else}: \n     {print} number ' is zero'\n```"
+                feedback: Very good!
+            -   option: "```\n {for} number in range -5 to 3:\n     {if} number < 0: \n      {print} number ' is positive'\n     {elif} number <=0: \n     {print} number ' is negative' \n     {else}: \n     {print} number ' is zero'\n```"
+                feedback: That is not it.
+            hint: Read the code carefully.
+            correct_answer: C
+            question_score: '10'
+        10:
+            question_text: What is wrong with this code?
+            code: |-
+                {for} number in range 1 to 5:
+                  volume_room = num * num * num
+                  {print} volume_room ' cubic meters'
+                    {if} volume_room > 100:
+                      {print} 'this is a large room'
+                    {elif} volume_room < 100:
+                      {print} 'small room but cosy'
+                    {else}:
+                      {print} 'i will look for something else'
+            mp_choice_options:
+            -   option: The word num needs quotation marks.
+                feedback: Try again.
+            -   option: The `{if}` command is not used correctly.
+                feedback: Not true.
+            -   option: Line 3 should be `volume_room = number * number * number`.
+                feedback: Well done!
+            -   option: There is an indentation mistake in the last line.
+                feedback: Nope.
+            hint: Read the code carefully.
+            correct_answer: C
             question_score: '10'

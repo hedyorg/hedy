@@ -21,7 +21,7 @@
             </svg>
           </button>
         </div>
-        <div class="border border-gray-400 px-4 rounded-lg w-full lg:w-3/4 p-4 text-center hidden" id="classes_info">
+        <div class="border border-gray-400 px-4 rounded-lg w-full lg:w-3/4 p-4 text-center {% if teacher_classes %}hidden{% endif %}" id="classes_info">
           <p>
             {{ _('classes_info') }}
           </p>
@@ -66,7 +66,7 @@
           </svg>
         </button>
       </div>
-      <div class="border border-gray-400 px-4 rounded-lg w-full lg:w-3/4 p-4 text-center hidden" id="adventures_info">
+      <div class="border border-gray-400 px-4 rounded-lg w-full lg:w-3/4 p-4 text-center {% if teacher_adventures %}hidden{% endif %}" id="adventures_info">
         <p>
           {{ _('adventures_info') }}
         </p>
@@ -117,7 +117,7 @@
             _="on htmx:afterRequest if detail.xhr.response
             window.open('/for-teachers/customize-adventure/' + detail.xhr.response, '_self')"
             data-cy="edit-link"{% if second_teacher and role == 'viewer' %}disabled{% endif %}>{{_('create_adventure')}}</button>
-          <a href="/public-adventures" class="white-btn mt-4">{{_('public_adventures')}}</a>
+          <a href="/public-adventures" id="public-adventures-link" class="white-btn mt-4">{{_('public_adventures')}}</a>
         </div>
     </div>
     <div id="slides" class="flex flex-col items-center border-b gap-3">
