@@ -56961,7 +56961,13 @@ pygame.quit()
     });
     editor.on("change", function() {
       if (askPromptOpen) {
-        stopit();
+        Sk.execLimit = 1;
+        clearTimeouts();
+        $("#stopit").hide();
+        $("#runit").show();
+        $("#ask-modal form").submit();
+        $("#ask-modal").hide();
+        askPromptOpen = false;
         theGlobalEditor.focus();
       }
       if ($("#ask-modal").is(":visible"))

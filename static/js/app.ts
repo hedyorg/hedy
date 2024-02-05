@@ -291,7 +291,13 @@ function attachMainEditorEvents(editor: HedyEditor) {
   // If prompt is shown and user enters text in the editor, hide the prompt.
   editor.on('change', function() {
     if (askPromptOpen) {
-      stopit();
+      Sk.execLimit = 1;
+      clearTimeouts();
+      $('#stopit').hide();
+      $('#runit').show();
+      $('#ask-modal form').submit();
+      $('#ask-modal').hide();
+      askPromptOpen = false;
       theGlobalEditor.focus(); // Make sure the editor has focus, so we can continue typing
     }
     if ($('#ask-modal').is(':visible')) $('#inline-modal').hide();
