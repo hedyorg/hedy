@@ -144,6 +144,7 @@
         </div>
         <div id="saveFilesContainer" class="hidden">
           <button id="saveFiles" class="green-btn" onclick="hedyApp.saveMachineFiles();">💾</button>
+          <button id="saveMicrobit" class="green-btn" onclick="hedyApp.saveMachineFiles();">⚡</button>
         </div>
         <div id="debug_container" class="ltr:ml-auto rtl:mr-auto">
           <button id="debug_button" class="green-btn" onclick='hedyApp.runit({{ level }}, "{{ g.lang }}", {{_('already_program_running')|default(None)|tojson}}, "debug")'>🐞</button>

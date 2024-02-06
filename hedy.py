@@ -1759,7 +1759,16 @@ class ConvertToPython_2(ConvertToPython_1):
                 args_new.append(''.join([self.process_variable_for_fstring(x, meta.line) for x in res]))
         exception = self.make_catch_exception(args)
         argument_string = ' '.join(args_new)
-        return exception + f"print(f'{argument_string}'){self.add_debug_breakpoint()}"
+
+
+        if not mb:
+            return exception + f"print(f'{argument_string}'){self.add_debug_breakpoint()}"
+        else:
+            return textwrap.dedent(f"""\
+                from microbit import *
+                while True:
+                    display.scroll('{argument_string}')""")
+
 
     def ask(self, meta, args):
         var = args[0]
