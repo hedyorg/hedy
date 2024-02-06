@@ -224,6 +224,7 @@ class Command:
     remove_from_list = 'remove from list'
     list_access = 'at random'
     in_list = 'in list'
+    not_in_list = 'not in list'
     equality = 'is (equality)'
     repeat = 'repeat'
     for_list = 'for in'
@@ -255,6 +256,7 @@ translatable_commands = {Command.print: ['print'],
                          Command.remove_from_list: ['remove', 'from'],
                          Command.list_access: ['at', 'random'],
                          Command.in_list: ['in'],
+                         Command.not_in_list: ['not in'],
                          Command.equality: ['is', '=', '=='],
                          Command.repeat: ['repeat', 'times'],
                          Command.for_list: ['for', 'in'],
@@ -357,6 +359,7 @@ commands_and_types_per_level = {
                        },
     Command.list_access: {1: [HedyType.list]},
     Command.in_list: {1: [HedyType.list]},
+    Command.not_in_list: {1: [HedyType.list]},
     Command.add_to_list: {1: [HedyType.list]},
     Command.remove_from_list: {1: [HedyType.list]},
     Command.equality: {1: [HedyType.string, HedyType.integer, HedyType.input, HedyType.float],
@@ -752,6 +755,10 @@ class TypeValidator(Transformer):
 
     def in_list_check(self, tree):
         self.validate_args_type_allowed(Command.in_list, tree.children[1], tree.meta)
+        return self.to_typed_tree(tree, HedyType.boolean)
+
+    def not_in_list_check(self, tree):
+        self.validate_args_type_allowed(Command.not_in_list, tree.children[1], tree.meta)
         return self.to_typed_tree(tree, HedyType.boolean)
 
     def equality_check(self, tree):
