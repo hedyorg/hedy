@@ -8,6 +8,9 @@ from utils import timems, times
 from . import dynamo, auth
 from . import querylog
 
+import logging
+logger = logging.getLogger(__name__)
+
 storage = dynamo.AwsDynamoStorage.from_env() or dynamo.MemoryStorage("dev_database.json")
 
 USERS = dynamo.Table(storage, "users", "username", indexes=[
@@ -231,9 +234,7 @@ class Database:
             if level and program.get('level') != int(level):
                 continue
             if adventure:
-                if adventure == 'default' and program.get('adventure_name') != '':
-                    continue
-                if adventure != 'default' and program.get('adventure_name') != adventure:
+                if program.get('adventure_name') != adventure:
                     continue
             if submitted is not None:
                 if program.get('submitted') != submitted:
