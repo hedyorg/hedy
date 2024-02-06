@@ -8,12 +8,7 @@
                         hx-target="#adventure-dragger"
                         hx-swap="outerHTML"
                         hx-trigger="input"
-                        hx-indicator="#indicator"
-                        _="on htmx:afterRequest 
-                            set level to detail.requestConfig.parameters.level
-                            wait 500ms
-                            hedyApp.setLevelStateIndicator(level)"
-                        >
+                        hx-indicator="#indicator">
                     {% for i in range(1, max_level + 1) %}
                     <option id="select-{{i}}" value="{{ i }}" {% if i|string == level|string %} selected {% endif %}>
                         {{ _('level_title') }} {{ i }}
@@ -78,4 +73,11 @@
                 {% endfor %}
         </div>
     </div>
+        <script>
+                if (window.hedyApp) {
+                    hedyApp.initializeCustomizeClassPage({
+                        level:  '{{  level }}',
+                    })
+                }
+        </script>
 </div> 
