@@ -106,6 +106,22 @@ class TestsLevel12(HedyTester):
             max_level=15
         )
 
+    def test_print_microbit(self):
+        code = "print 'a'"
+        expected = textwrap.dedent(f"""\
+            from microbit import *
+            while True:
+                display.scroll('a')""")
+
+        self.multi_level_tester(
+            code=code,
+            translate=False,
+            skip_faulty=False,
+            expected=expected,
+            max_level=17,
+            microbit=True
+        )    
+
     def test_print_literal_strings(self):
         code = """print "It's " '"Hedy"!'"""
         expected = """print(f'''It\\'s "Hedy"!''')"""

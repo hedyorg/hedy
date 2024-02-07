@@ -1936,13 +1936,13 @@ class ConvertToPython_4(ConvertToPython_3):
     def print(self, meta, args):
         argument_string = self.print_ask_args(meta, args)
         exceptions = self.make_catch_exception(args)
-        # if not self.microbit:
-        return exceptions + f"print(f'{argument_string}'){self.add_debug_breakpoint()}"
-        # else:
-            # return textwrap.dedent(f"""\
-            #     from microbit import *
-            #     while True:
-            #         display.scroll('{"argument_string"}')""")
+        if not self.microbit:
+            return exceptions + f"print(f'{argument_string}'){self.add_debug_breakpoint()}"
+        else:
+            return textwrap.dedent(f"""\
+                from microbit import *
+                while True:
+                    display.scroll('{argument_string}')""")
 
     def ask(self, meta, args):
         var = args[0]
@@ -1974,8 +1974,9 @@ except NameError:
 @hedy_transpiler(level=5)
 @source_map_transformer(source_map)
 class ConvertToPython_5(ConvertToPython_4):
-    def __init__(self, lookup, language, numerals_language, is_debug):
-        super().__init__(lookup, language, numerals_language, is_debug)
+
+    # def __init__(self, lookup, language, numerals_language, is_debug, microbit):
+    #         super().__init__(lookup, language, numerals_language, is_debug, microbit= False)
 
     def ifs(self, meta, args):  # might be worth asking if we want a debug breakpoint here
         return f"""if {args[0]}:{self.add_debug_breakpoint()}
@@ -2445,8 +2446,14 @@ class ConvertToPython_12(ConvertToPython_11):
     def print(self, meta, args):
         argument_string = self.print_ask_args(meta, args)
         exception = self.make_catch_exception(args)
-        return exception + f"print(f'''{argument_string}''')" + self.add_debug_breakpoint()
-
+        if not self.microbit:
+            return exception + f"print(f'''{argument_string}''')" + self.add_debug_breakpoint()
+        else:
+            return textwrap.dedent(f"""\
+                from microbit import *
+                while True:
+                    display.scroll('{argument_string}')""")
+        
     def ask(self, meta, args):
         var = args[0]
         argument_string = self.print_ask_args(meta, args[1:])
