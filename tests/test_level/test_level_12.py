@@ -120,7 +120,7 @@ class TestsLevel12(HedyTester):
             expected=expected,
             max_level=17,
             microbit=True
-        )    
+        )
 
     def test_print_literal_strings(self):
         code = """print "It's " '"Hedy"!'"""

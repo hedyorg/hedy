@@ -2453,7 +2453,7 @@ class ConvertToPython_12(ConvertToPython_11):
                 from microbit import *
                 while True:
                     display.scroll('{argument_string}')""")
-        
+
     def ask(self, meta, args):
         var = args[0]
         argument_string = self.print_ask_args(meta, args[1:])
