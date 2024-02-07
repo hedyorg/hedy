@@ -784,7 +784,7 @@ export const TRANSLATIONS: Record<string, Record<MessageKey, string>> = {
     "unsaved_class_changes": "There are unsaved changes, are you sure you want to leave this page?"
   },
   "nl": {
-    "CheckInternet": "Controleer even of je internetverbinding het nog doet.",
+    "CheckInternet": "Controleer of jouw internetverbinding wel goed werkt.",
     "Connection_error": "We konden niet goed met de server praten.",
     "Empty_output": "Deze code werkt wel, maar print niks. Voeg een print commando toe aan je code of gebruik de schildpad om output te krijgen.",
     "Errors_found": "Je hebt een foutje gemaakt! Maak je geen zorgen, Hedy probeert de fouten te vinden",
@@ -1414,7 +1414,7 @@ export const TRANSLATIONS: Record<string, Record<MessageKey, string>> = {
     "unsaved_class_changes": "There are unsaved changes, are you sure you want to leave this page?"
   },
   "zh_Hans": {
-    "CheckInternet": "查看一下你的网络连接是否正常.",
+    "CheckInternet": "检查您的互联网连接是否正常。",
     "Connection_error": "我们无法连接到服务器。",
     "Empty_output": "这段代码可以工作，但没有打印任何东西。在你的代码中添加一个打印命令，或者使用乌龟来获得输出。",
     "Errors_found": "你搞错了！不要着急，我们仍然运行该程序",
@@ -1439,9 +1439,9 @@ export const TRANSLATIONS: Record<string, Record<MessageKey, string>> = {
     "restaurant": "🍣, 🍕, 🍔",
     "rock": "✂️, 📜, 🗻",
     "songs": "🎵,🎶",
-    "teacher_welcome": "Welcome to Hedy! Your are now the proud owner of a teachers account which allows you to create classes and invite students.",
+    "teacher_welcome": "欢迎来到海蒂！ 您现在是教师帐户的自豪拥有者，该帐户允许您创建课程并邀请学生。",
     "turtle": "🐢",
-    "unsaved_class_changes": "There are unsaved changes, are you sure you want to leave this page?"
+    "unsaved_class_changes": "有未保存的更改，您确定要离开此页面吗？"
   },
   "zh_Hant": {
     "CheckInternet": "Check whether your Internet connection is working.",

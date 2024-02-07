@@ -448,9 +448,7 @@ const keywordToToken: Record<number, tokenSpecilizer> = {
             "to": to12,
             "range": range12,
             "return": returns12,
-            "call": call12,
             "define": define12,
-            "with": with12
         },
         specialize: {
             "if": if12,
@@ -458,7 +456,9 @@ const keywordToToken: Record<number, tokenSpecilizer> = {
             "ask": ask12,
             "at": at12,
             "random": random12,
-            "else": else12
+            "else": else12,
+            "call": call12,
+            "with": with12
         },
     },
     13: {
@@ -483,9 +483,7 @@ const keywordToToken: Record<number, tokenSpecilizer> = {
             "to": to13,
             "range": range13,
             "return": returns13,
-            "call": call13,
-            "define": define13,
-            "with": with13
+            "define": define13
         },
         specialize: {
             "if": if13,
@@ -495,7 +493,9 @@ const keywordToToken: Record<number, tokenSpecilizer> = {
             "random": random13,
             "else": else13,
             "and": and13,
-            "or": or13
+            "or": or13,
+            "call": call13,
+            "with": with13
         },
     },
     14: {
@@ -518,9 +518,7 @@ const keywordToToken: Record<number, tokenSpecilizer> = {
             "to": to14,
             "range": range14,
             "return": returns14,
-            "call": call14,
-            "define": define14,
-            "with": with14
+            "define": define14,            
         },
         specialize: {
             "if": if14,
@@ -533,6 +531,8 @@ const keywordToToken: Record<number, tokenSpecilizer> = {
             "or": or14,
             "in": in14,
             "is": is14,
+            "call": call14,
+            "with": with14
         },
     },
     15: {
@@ -556,9 +556,7 @@ const keywordToToken: Record<number, tokenSpecilizer> = {
             "to": to15,
             "range": range15,
             "return": returns15,
-            "call": call15,
-            "define": define15,
-            "with": with15
+            "define": define15            
         },
         specialize: {
             "if": if15,
@@ -571,7 +569,9 @@ const keywordToToken: Record<number, tokenSpecilizer> = {
             "or": or15,
             "in": in15,
             "is": is15,
-            "while": while15
+            "while": while15,
+            "call": call15,
+            "with": with15
         },
     },
     16: {
@@ -595,9 +595,7 @@ const keywordToToken: Record<number, tokenSpecilizer> = {
             "to": to16,
             "range": range16,
             "return": returns16,
-            "call": call16,
-            "define": define16,
-            "with": with16
+            "define": define16            
         },
         specialize: {
             "if": if16,
@@ -609,7 +607,9 @@ const keywordToToken: Record<number, tokenSpecilizer> = {
             "or": or16,
             "in": in16,
             "is": is16,
-            "while": while16
+            "while": while16,
+            "call": call16,
+            "with": with16
         },
     },
     17: {
@@ -633,9 +633,7 @@ const keywordToToken: Record<number, tokenSpecilizer> = {
             "to": to17,
             "range": range17,
             "return": returns17,
-            "call": call17,
-            "define": define17,
-            "with": with17
+            "define": define17
         },
         specialize: {
             "if": if17,
@@ -648,7 +646,9 @@ const keywordToToken: Record<number, tokenSpecilizer> = {
             "in": in17,
             "is": is17,
             "while": while17,
-            "elif": elif17
+            "elif": elif17,
+            "call": call17,
+            "with": with17
         },
     },
     18 : {
@@ -709,13 +709,13 @@ export function initializeTranslation(options: InitializeCodeMirrorSyntaxHighlig
     }
 }
 
-export function specializeKeyword(name: string, stack: Stack) {      
+export function specializeKeyword(name: string, stack: Stack) {
     for (const [key, value] of specializeTranslations) {
         const regexString =  value.replace(' ', '|');
         if (new RegExp(`^(${regexString})$`, 'gu').test(name)) {
             if (stack.canShift(keywordToToken[level].specialize[key])) {
                 return keywordToToken[level].specialize[key];
-            }            
+            }
         }
     }
     return -1;
@@ -724,7 +724,7 @@ export function specializeKeyword(name: string, stack: Stack) {
 export function extendKeyword(name: string, stack: Stack) {
     for (const [key, value] of extendTranslations) {
         const regexString =  value.replace(' ', '|');
-        if (new RegExp(`^(${regexString})$`, 'gu').test(name)) {                   
+        if (new RegExp(`^(${regexString})$`, 'gu').test(name)) {
             if (stack.canShift(keywordToToken[level].extend[key])) {
                 return keywordToToken[level].extend[key];
             }            
