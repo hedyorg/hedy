@@ -15,8 +15,7 @@
     }}
 
     <div class="flex flex-col lg:flex-row gap-4">
-        <div class="flex flex-col gap- w-full">
-            <div>
+        <div class="flex flex-col gap- w-full"> 
             <div class="flex flex-col">
                 <h3 class="px-4"><u>{{_('unlock_thresholds')}}</u></h3>
                 <div class="border border-gray-400 py-2 px-4 rounded-lg w-full">
@@ -105,76 +104,82 @@
                 </div>
             </div>
 
+            <div class="flex flex-col w-1/2">
+                <h3 class="px-4 cursor-pointer"
+                    _="on click
+                        set t to the next <div />
+                        toggle .rotate-180 on #opening-dates-arrow
+                        if t.classList.contains('hidden')
+                            toggle .hidden on t
+                            transition the next <div />'s opacity to 1
+                        else
+                            transition the next <div />'s opacity to 0
+                            toggle .hidden on t
+                        end">
+                    <u>{{_('opening_dates')}}
+                        <svg id="opening-dates-arrow" class="fill-current inline h-6 w-6" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"/></svg>
+                    </u>
+                </h3>
+                <div class="border border-gray-400 w-full py-2 px-4 rounded-lg hidden opacity-0">
+                    <table class="table-auto text-center opening_dates_overview">
+                        <thead>
+                            <tr>
+                                <th class="w-64 border-r border-gray-400 text-left px-4">{{ _('level_title') }}</th>
+                                <th class="w-full">{{_('opening_date')}}</th>
+                                <th class="w-auto">{{_('disable')}}</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for i in range(1, max_level + 1) %}
+                            <tr class="opening_date_container">
+                                <td class="border-r border-t border-gray-400">{{ _('level_title') }} {{ i }}</td>
+                                <td class="border-t border-gray-400 ltr:pl-2 rtl:pr-2">
+                                    <input level="{{ i }}" id="opening_date_level_{{ i }}"
+                                        data-cy="opening_date_level_{{ i }}" {% if customizations %} 
+                                        {% if i in customizations['levels'] %}
+                                            {% if i|string in customizations['opening_dates'] %}
+                                                type="date" onfocus="(this.type='date')" onchange="hedyApp.test({{i}})"
+                                                value="{{ customizations['opening_dates'][i|string] }}"
+                                                placeholder="{{_('directly_available')}}"
+                                            {% else %} 
+                                                type="text"
+                                                onfocus="(this.type='date')" onchange="hedyApp.setDateLevelInputColor({{i}})"
+                                                placeholder="{{_('directly_available')}}"
+                                            {% endif %}
+                                        {% else %} 
+                                            type="text"
+                                            onfocus="(this.type='date')" onchange="hedyApp.setDateLevelInputColor({{i}})" placeholder="Disabled"
+                                            disabled {% endif %} {% else %} type="text" onfocus="(this.type='date')"
+                                            placeholder="{{_('directly_available')}}" onchange="hedyApp.setDateLevelInputColor({{i}})"
+                                        {% endif %}
+                                        class="opening_date_input inline-block text-center appearance-none bg-gray-200 border border-0 w-full h-10 my-1 text-gray-700 py-2 px-4 rounded">
+                                </td>
+                                <td class="border-r border-t border-gray-400">
+                                    <label class="switch">
+                                        <input type="checkbox" id="enable_level_{{ i }}"
+                                            onchange="hedyApp.enable_level({{i}})"
+                                            {% if customizations and i in customizations['levels'] %} checked {% endif %}
+                                            level="{{ i }}"
+                                            data-cy="enable_level_{{ i }}">
+                                        <span class="slider round"></span>
+                                    </label>
+                                </td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
             </div>
-        <div class="flex flex-col w-1/2">
-            <h3 class="px-4 cursor-pointer"
-                _="on click
-                    set t to the next <div />
-                    toggle .rotate-180 on #opening-dates-arrow
-                    if t.classList.contains('hidden')
-                        toggle .hidden on t
-                        transition the next <div />'s opacity to 1
-                    else
-                        transition the next <div />'s opacity to 0
-                        toggle .hidden on t
-                    end">
-                <u>{{_('opening_dates')}}
-                    <svg id="opening-dates-arrow" class="fill-current inline h-6 w-6" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"/></svg>
-                </u>
-            </h3>
-            <div class="border border-gray-400 w-full py-2 px-4 rounded-lg hidden opacity-0">
-                <table class="table-auto text-center opening_dates_overview">
-                    <thead>
-                        <tr>
-                            <th class="w-64 border-r border-gray-400 text-left px-4">{{ _('level_title') }}</th>
-                            <th class="w-full">{{_('opening_date')}}</th>
-                            <th class="w-auto">{{_('disable')}}</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {% for i in range(1, max_level + 1) %}
-                        <tr class="opening_date_container">
-                            <td class="border-r border-t border-gray-400">{{ _('level_title') }} {{ i }}</td>
-                            <td class="border-t border-gray-400 ltr:pl-2 rtl:pr-2">
-                                <input level="{{ i }}" id="opening_date_level_{{ i }}"
-                                    data-cy="opening_date_level_{{ i }}" {% if customizations %} {% if i in
-                                    customizations['levels'] %} {% if i|string in customizations['opening_dates'] %}
-                                    type="date" onfocus="(this.type='date')" onchange="hedyApp.test({{i}})"
-                                    value="{{ customizations['opening_dates'][i|string] }}"
-                                    placeholder="{{_('directly_available')}}" {% else %} type="text"
-                                    onfocus="(this.type='date')" onchange="hedyApp.setDateLevelInputColor({{i}})"
-                                    placeholder="{{_('directly_available')}}" {% endif %} {% else %} type="text"
-                                    onfocus="(this.type='date')" onchange="hedyApp.setDateLevelInputColor({{i}})" placeholder="Disabled"
-                                    disabled {% endif %} {% else %} type="text" onfocus="(this.type='date')"
-                                    placeholder="{{_('directly_available')}}" onchange="hedyApp.setDateLevelInputColor({{i}})" {% endif %}
-                                    class="opening_date_input inline-block text-center appearance-none bg-gray-200 border border-0 w-full h-10 my-1 text-gray-700 py-2 px-4 rounded">
-                            </td>
-                            <td class="border-r border-t border-gray-400">
-                                <label class="switch">
-                                    <input type="checkbox" id="enable_level_{{ i }}"
-                                        onchange="hedyApp.enable_level({{i}})" {% if (customizations and i in
-                                        customizations['levels']) or not customizations %} checked {% endif %}
-                                        level="{{ i }}"
-                                        data-cy="enable_level_{{ i }}">
-                                    <span class="slider round"></span>
-                                </label>
-                            </td>
-                        </tr>
-                        {% endfor %}
-                    </tbody>
-                </table>
-            </div>
-        </div>
             {% if not (is_admin and class_info.teacher != username) %}
             <div class="flex flex-col gap-2 mt-4">
-                <div class="flex flex-row ml-auto gap-2">
+                <div class="flex ml-auto gap-2">
                     <button data-cy="save_customizations" class="blue-btn"
                             onclick="hedyApp.save_customizations('{{class_info.id}}')">
                                 {{_('save')}}
                     </button>
                     <a href="/for-teachers/class/{{class_info.id}}/preview" class="green-btn" data-cy="preview_class_link">{{_('preview')}}</a>
                 </div>
-                <div class="flex flex-row ml-auto gap-2">
+                <div class="flex ml-auto gap-2">
                     <button class="red-btn {% if not customizations %}hidden{% endif %}"
                         id="remove_customizations_button" data-cy="remove_customizations_button"
                         onclick='hedyApp.restore_customization_to_default({{_('remove_customizations_prompt')|default(None)|tojson}})'>
