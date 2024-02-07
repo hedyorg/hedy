@@ -8,9 +8,6 @@ from utils import timems, times
 from . import dynamo, auth
 from . import querylog
 
-import logging
-logger = logging.getLogger(__name__)
-
 storage = dynamo.AwsDynamoStorage.from_env() or dynamo.MemoryStorage("dev_database.json")
 
 USERS = dynamo.Table(storage, "users", "username", indexes=[
