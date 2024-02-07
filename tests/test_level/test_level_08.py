@@ -1204,10 +1204,10 @@ class TestsLevel8(HedyTester):
                 raise Exception('catch_index_exception')
               note = random.choice(notes)
               print(f'{note}')
-              chosen_note = note.upper()
+              chosen_note = str(note).upper()
               if chosen_note not in notes_mapping.keys() and chosen_note not in notes_mapping.values():
                   raise Exception('catch_value_exception')
-              play(notes_mapping.get(str(chosen_note), str(chosen_note)))
+              play(notes_mapping.get(chosen_note, chosen_note))
               time.sleep(0.5)
               time.sleep(0.1)""")
 
@@ -1230,10 +1230,10 @@ class TestsLevel8(HedyTester):
         expected = textwrap.dedent("""\
         notes = ['1', '2', '3']
         for i in range(int('10')):
-          chosen_note = random.choice(notes).upper()
+          chosen_note = str(random.choice(notes)).upper()
           if chosen_note not in notes_mapping.keys() and chosen_note not in notes_mapping.values():
               raise Exception('catch_value_exception')
-          play(notes_mapping.get(str(chosen_note), str(chosen_note)))
+          play(notes_mapping.get(chosen_note, chosen_note))
           time.sleep(0.5)
           time.sleep(0.1)""")
 
