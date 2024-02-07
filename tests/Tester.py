@@ -466,10 +466,10 @@ class HedyTester(unittest.TestCase):
                     snippet[1].code = snippet[1].code.format(**english_keywords)
             except KeyError:
                 print("This following snippet contains an invalid placeholder...")
-                print(snippet)
+                print(snippet[1].code)
             except ValueError:
                 print("This following snippet contains an unclosed invalid placeholder...")
-                print(snippet)
+                print(snippet[1].code)
 
         return snippets
 

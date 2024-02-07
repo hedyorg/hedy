@@ -125,8 +125,9 @@ levels:
                 {print} Welk liedje wil je horen?
                 {ask} Ik vind dat ook een leuk liedje!
                 {print} Volgende... {echo}
+            debug: true
         13:
-            header: Laat het programmeer feest beginnen!
+            header: Laat het programmeerfeest beginnen!
             text: Veel plezier met de avonturen in level 1!
     2:
         1:
@@ -189,6 +190,7 @@ levels:
                 {print} Ik ga je donut.halen {sleep}
                 {print} Asjeblieft! Een vulling donut met topping!
                 {ask} Fijne dag nog!
+            debug: true
         8:
             header: Veel programmeerplezier!
             text: Veel plezier met de avonturen in level 2!
@@ -202,9 +204,7 @@ levels:
                 Je maakt een lijst met `{is}`.
 
                 Scheid de items op de lijst met een komma.
-            code: |-
-                dieren {is} honden, katten, kangoeroes
-                ```
+            code: dieren {is} honden, katten, kangoeroes
         3:
             header: '{at} {random}'
             text: |-
@@ -214,28 +214,34 @@ levels:
             code: |-
                 dieren {is} honden, katten, kangoeroes
                 {print} dieren {at} {random}
-                ```
         4:
             header: '{at} {random} in een zin'
             text: Je kunt `{at}` `{random}` ook midden in een zin gebruiken.
             code: |-
                 dieren {is} honden, katten, kangoeroes
                 {print} Mijn favoriete dier is dieren {at} {random}
-                ```
         5:
             header: '{add} {to}'
             text: |-
                 Je kunt items aan een lijst toevoegen met het `{add}` `{to_list}` commando.
 
                 Je kunt zelf kiezen wat je aan de lijst toevoegt, of je kunt de speler laten kiezen.
-                Dat doe je door `{add}` `{to_list}` te gebruiken in combinatie met een `{ask}` commando.
-            code: "dieren {is} honden, katten, kangoeroes\nfavoriet {is} {ask} Wat is je favoriete dier?\n{add} favoriet {to_list} dieren \n{print} Ik kies dieren {at} {random}"
+                Dat doe je door `{add}` `{to}` te gebruiken in combinatie met een `{ask}` commando.
+            code: |-
+                dieren {is} honden, katten, kangoeroes
+                favoriet {is} {ask} Wat is je favoriete dier?
+                {add} favoriet {to_list} dieren
+                {print} Ik kies dieren {at} {random}
         6:
             header: '{remove} {from}'
             text: |-
                 Het tegenovergestelde van `{add}` `{to}` is  `{remove}` `{from}`.
                 Met dit commando haal je dus juist items van het lijstje af.
-            code: "dieren {is} honden, katten, kangoeroes\nnietleuk {is} {ask} Welk dier vind je niet leuk?\n{remove} nietleuk {from} dieren \n{print} I choose dieren {at} {random}"
+            code: |-
+                dieren {is} honden, katten, kangoeroes
+                nietleuk {is} {ask} Welk dier vind je niet leuk?
+                {remove} nietleuk {from} dieren
+                {print} I choose dieren {at} {random}
         7:
             header: Debugging (foutzoeken)
             text: Laten we deze code debuggen!
@@ -249,6 +255,7 @@ levels:
                 {print} of houd je meer van... tweede_keus {at} {random}
                 {remove} tweede_keus {to} muziek_genres
                 {print} Ik houd het meest van muziek_genre {random} !
+            debug: true
         8:
             header: Aan de slag!
             text: Veel plezier met de avonturen in level 3!
@@ -263,6 +270,7 @@ levels:
             code: |-
                 naam {is} Sophie
                 {print} Mijn naam is naam
+            debug: true
         3:
             header: Aanhalingstekens zijn de oplossing
             text: |-
@@ -299,7 +307,8 @@ levels:
                 Let op! Nu we aanhalingstekens gebruiken, kun je geen hoge komma's gebruiken voor andere doeleinden.
 
                 Kijk maar eens wat er gebeurt als je een hoge komma voor auto's, of voor 's middags, deze maken Hedy in de war....
-            code: '{print} ''Dit gaat niet werken!'''
+            code: '{print} ''De oma''s rijden in de auto''s.'''
+            debug: true
         9:
             header: '{clear}'
             text: |-
@@ -328,6 +337,7 @@ levels:
                 kleuren {is} 'oranje, zilver, wit, bruin'
                 {print} 'Ik houd van kleuren {at} {random} !'
                 keuze {is} {ask} Welke kleur vind jij mooi?
+            debug: true
         11:
             header: Klaar voor de start? Af!
             text: Veel plezier met de avonturen in level 4!
@@ -350,6 +360,7 @@ levels:
                 Als je een `{if}` commando gebruikt, vergeet dan niet om ook een `{print}` commando te gebruiken.
                 Deze code werkt niet!
             code: '{if} naam {is} Hedy ''leuk'''
+            debug: true
         4:
             header: '{else}'
             text: |-
@@ -395,6 +406,7 @@ levels:
                 aangeef_voorwerp {is} {ask} 'Wat wilt U aangeven'
                 {else} OK
                 {print} Dank U. Gaat U naar gate A22 alstublieft.'
+            debug: true
         8:
             header: Werken maar!
             text: Veel plezier met de avonturen in level 5!
@@ -441,7 +453,7 @@ levels:
                 nummer_1 = {ask} 'Vul eerste nummer in:'
                 nummer_2 = {ask} 'Vul tweede nummer in:'
                 correct_antwoord = nummer_1 * nummer_2
-                {print} nummer_1 ' maal ' numner_2 ' is ' correct_antwoord
+                {print} nummer_1 ' maal ' nummer_2 ' is ' correct_antwoord
         9:
             header: Debugging (foutzoeken)
             text: Laten we deze code debuggen!
@@ -459,6 +471,7 @@ levels:
                 {if} dag {is} maandag
                 totaal = total_price * 0.25
                 {print} 'Totaal prijs is totaal'
+            debug: true
         10:
             header: Aan de slag!
             text: Veel plezier met de avonturen in level 6!
@@ -481,6 +494,7 @@ levels:
             header: Vergeet print niet
             text: Als je {repeat} gebruikt, vergeet dan {print} niet.
             code: '{repeat} 5 {times} ''Help!'''
+            debug: true
         4:
             header: '{repeat} met {ask}'
             text: Je kunt {repeat} ook gebruiken met `{ask}`, `{if}` of `{else}`.
@@ -502,6 +516,7 @@ levels:
                 {if} ja
                 {print} 'Hoera!
                 {else} 'Dat is jammer.. Nou ja... tijd om een hut te bouwen en wat eten te zoeken.'
+            debug: true
         6:
             header: Klaar voor de start? Af!
             text: Veel plezier met de avonturen in level 7!
@@ -516,6 +531,7 @@ levels:
 
                 Je kon het maar gebruiken over 1 regel.
             code: '{repeat} 5 {times} {print} ''Help!'''
+            debug: true
         3:
             header: '{repeat} nu'
             text: |-
@@ -542,8 +558,9 @@ levels:
                 Hetzelfde geldt voor `{if}` en `{else}`.
                 Hiervoor gebruikte je deze commando's zo:
             code: |-
-                {if} naam{is} Hedy {print} 'leuk'
+                {if} naam {is} Hedy {print} 'leuk'
                 {else} {print} 'minder leuk!'
+            debug: true
         6:
             header: '{if} en {else} nu'
             text: |-
@@ -586,6 +603,7 @@ levels:
                         {print} Je koos voor een retour ticket'
                 prijs * 2
                 {print} 'Dat wordt dan ' prijs ' euro alstublieft'
+            debug: true
         10:
             header: Op naar de avonturen!
             text: Veel plezier met de avonturen in level 8!
@@ -618,10 +636,10 @@ levels:
             header: Meerdere regels na `{if}`
             text: Je mag ook meerdere regels gebruiken na een `{if}`
             code: |-
-                doorgaan= {ask} 'Wil je doorgaan?'
-                {if} doorgaan= yes
-                    zeker = {ask} 'Weet je het zeker ?'
-                    {if} zeker  {is} ja
+                doorgaan = {ask} 'Wil je doorgaan?'
+                {if} doorgaan = yes
+                    zeker = {ask} 'Weet je het zeker?'
+                    {if} zeker {is} ja
                         {print} 'We zullen doorgaan'
                     {else}
                         {print} 'Je weet het niet zeker'
@@ -634,7 +652,7 @@ levels:
                 doorgaan = {ask} 'Wil je doorgaan ?'
                 {if} doorgaan = yes
                     zeker= {ask} 'Weet je het zeker?'
-                    {if} zeker{is} ja
+                    {if} zeker {is} ja
                         {print} 'We zullen doorgaan '
                 {else}
                     {print} 'Je weet het niet zeker'
@@ -655,8 +673,8 @@ levels:
             text: Zie hoe de 4e en 6e regel van deze code beginnen met 8 spaties.
             code: |-
                 {repeat} 3 {times}
-                    eten= {ask} 'Wat wil je eten?'
-                    {if} eten{is} pizza
+                    eten = {ask} 'Wat wil je eten?'
+                    {if} eten {is} pizza
                         {print} 'lekker!'
                     {else}
                         {print} 'pizza is beter'
@@ -677,6 +695,7 @@ levels:
                 {else}
                 {print} 'Gaaf!'
                 {print} 'Bedankt voor het invullen allemaal! Veel plezier vandaag!'
+            debug: true
         9:
             header: Aan de slag!
             text: Veel plezier met de avonturen in level 9!
@@ -687,7 +706,10 @@ levels:
         2:
             header: '{for}'
             text: Met {for} kun je een lijst maken en alle items op die lijst gebruiken. `{for}` creëert net als {repeat} en {if} een blok waarbij je 4 spaties moet inspringen.
-            code: "dieren = hond, kat, goudvis\n{for} dier{in} dieren \n    {print} 'I love ' dier"
+            code: |-
+                dieren = hond, kat, goudvis
+                {for} dier {in} dieren
+                    {print} 'I love ' dier
         3:
             header: '{for}'
             text: 'Hier zie je een ander voorbeeld van `{for}`:'
@@ -710,6 +732,7 @@ levels:
                 {add} gekozen_persoon {from} mensen
                 {print} 'Komt dat zien! Alleen vanavond!'
                 {print} 'Laatste tickets verkrijgbaar aan de kassa
+            debug: true
         5:
             header: Programmeertijd!
             text: Veel plezier met de avonturen in level 10!
@@ -743,6 +766,7 @@ levels:
                 {repeat} {for} nummers {in} {range} 1 {to} 10 {times}
                     {print} Dit is de tafel van factor
                     {print} nummer ' x ' factor ' = ' i * factor
+            debug: true
         5:
             header: Lekker programmeren!
             text: Veel plezier met de avonturen in level 11!
@@ -785,10 +809,10 @@ levels:
                      {print} 'Schitter'
                      {print} '...'
 
-                 {call} schitter
-                 {print} 'Hoog boven de wereld'
-                 {print} 'Als een diamant aan de hemel'
-                 {call} schitter
+                {call} schitter
+                {print} 'Hoog boven de wereld'
+                {print} 'Als een diamant aan de hemel'
+                {call} schitter
         6:
             header: Functies
             text: Zoals je kunt zien in de voorbeelden is een functie een blokje code dat je vaker kunt oproepen. Je gebruikt `{define}` om de functie te maken en `{call}` om hem te gebruiken.
@@ -807,6 +831,7 @@ levels:
                 {call} nieuw lid
                     {else}
                         wachtwoord = {ask} 'Voer je wachtwoord in'
+            debug: true
         8:
             header: Klaar om het te gaan proberen?
             text: Veel plezier met de avonturen in level 12!
@@ -844,7 +869,7 @@ levels:
             text: |-
                 In dit voorbeeld zie je hoe het argument 'plaats' gebruikt wordt bij een functie.
                 Voer de code uit en verander 'ocean' en 'sea' naar iets anders en zie wat er gebeurt...
-            code: "{define} lied {with} plaats\n    {print} 'My Bonnie is over the ' naam \n\n{call} lied {with} 'ocean'\n{call} lied {with} 'sea'\n{call} lied {with} 'ocean'"
+            code: "{define} lied {with} plaats\n    {print} 'My Bonnie is over the ' plaats \n\n{call} lied {with} 'ocean'\n{call} lied {with} 'sea'\n{call} lied {with} 'ocean'"
         6:
             header: Voorbeeld met variabele
             text: |-
@@ -910,6 +935,7 @@ levels:
                     {call} blijdschap {with} persoon
                 {else} gevoel = verdrietig
                     {define} verdriet {to} naam
+            debug: true
         9:
             header: Aan de slag!
             text: Veel plezier met de avonturen in level 13!
