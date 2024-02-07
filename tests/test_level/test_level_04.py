@@ -35,6 +35,22 @@ class TestsLevel4(HedyTester):
             max_level=11,
             expected=expected)
 
+    def test_print_microbit(self):
+        code = "print 'a'"
+        expected = textwrap.dedent(f"""\
+            from microbit import *
+            while True:
+                display.scroll('a')""")
+
+        self.multi_level_tester(
+            code=code,
+            translate=False,
+            skip_faulty=False,
+            expected=expected,
+            max_level=11,  # teodor, set this to 17, see the test fail and moke sure that it then does not fail anymore!
+            microbit=True
+        )
+
     def test_print_bulgarian_quoted_text(self):
         code = "print „Здравейте!“"
         expected = "print(f'Здравейте!')"
