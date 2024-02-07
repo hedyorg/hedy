@@ -1766,7 +1766,7 @@ class ConvertToPython_2(ConvertToPython_1):
                 from microbit import *
                 while True:
                     display.scroll('{argument_string}')""")
-      
+
     def ask(self, meta, args):
         var = args[0]
         all_parameters = ["'" + process_characters_needing_escape(a) + "'" for a in args[1:]]
