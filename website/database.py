@@ -234,7 +234,9 @@ class Database:
             if level and program.get('level') != int(level):
                 continue
             if adventure:
-                if program.get('adventure_name') != adventure:
+                if adventure == 'default' and program.get('adventure_name') != '':
+                    continue
+                if adventure != 'default' and program.get('adventure_name') != adventure:
                     continue
             if submitted is not None:
                 if program.get('submitted') != submitted:
