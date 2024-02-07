@@ -94,7 +94,7 @@
             </div>
             <div id="non_public_button_container_{{ loop.index }}" class="{% if program.public %} hidden {% endif %}">
                 <button class="blue-btn" onclick="hedyApp.share_program ('{{program.id}}', {{ loop.index }}, true, '{{_('share_confirm')}}')">{{_('share')}}</button>
-            </div>
+            </div>  
             <button class="red-btn ltr:ml-auto rtl:mr-auto" data-cy="delete_non_submitted_program_{{ loop.index }}" onclick="hedyApp.delete_program('{{ program.id }}', {{ loop.index }}, '{{_('delete_confirm')}}')">{{_('delete')}}</button>
             {% endif %}
         </div>
