@@ -657,10 +657,10 @@ class TestsLevel12(HedyTester):
 
         expected = textwrap.dedent("""\
             n = 'C4'
-            chosen_note = n.upper()
+            chosen_note = str(n).upper()
             if chosen_note not in notes_mapping.keys() and chosen_note not in notes_mapping.values():
                 raise Exception('catch_value_exception')
-            play(notes_mapping.get(str(chosen_note), str(chosen_note)))
+            play(notes_mapping.get(chosen_note, chosen_note))
             time.sleep(0.5)""")
 
         self.multi_level_tester(
@@ -1923,6 +1923,72 @@ class TestsLevel12(HedyTester):
             extra_check_function=lambda c: c.exception.arguments['line_number'] == 1,
             exception=hedy.exceptions.InvalidArgumentTypeException)
 
+    def test_concat_promotes_ask_input_to_string(self):
+        code = textwrap.dedent("""\
+            answer is ask 'Yes or No?'
+            print 'The answer is ' + answer""")
+
+        expected = textwrap.dedent("""\
+            answer = input(f'''Yes or No?''')
+            try:
+              answer = int(answer)
+            except ValueError:
+              try:
+                answer = float(answer)
+              except ValueError:
+                pass
+            print(f'''{'The answer is ' + answer}''')""")
+
+        self.multi_level_tester(
+            code=code,
+            max_level=17,
+            expected=expected
+        )
+
+    def test_concat_promotes_ask_input_to_int(self):
+        code = textwrap.dedent("""\
+            answer is ask '1 or 2?'
+            print 5 + answer""")
+
+        expected = textwrap.dedent("""\
+            answer = input(f'''1 or 2?''')
+            try:
+              answer = int(answer)
+            except ValueError:
+              try:
+                answer = float(answer)
+              except ValueError:
+                pass
+            print(f'''{5 + answer}''')""")
+
+        self.multi_level_tester(
+            code=code,
+            max_level=17,
+            expected=expected
+        )
+
+    def test_concat_promotes_ask_input_to_float(self):
+        code = textwrap.dedent("""\
+            answer is ask '1 or 2?'
+            print 0.5 + answer""")
+
+        expected = textwrap.dedent("""\
+            answer = input(f'''1 or 2?''')
+            try:
+              answer = int(answer)
+            except ValueError:
+              try:
+                answer = float(answer)
+              except ValueError:
+                pass
+            print(f'''{0.5 + answer}''')""")
+
+        self.multi_level_tester(
+            code=code,
+            max_level=17,
+            expected=expected
+        )
+
     # def test_access_variable_before_definition(self):
     #   code = textwrap.dedent("""\
     #           a is b
@@ -2423,10 +2489,10 @@ class TestsLevel12(HedyTester):
 
         expected = textwrap.dedent("""\
         notes = ['C4', 'E4', 'D4', 'F4', 'G4']
-        chosen_note = random.choice(notes).upper()
+        chosen_note = str(random.choice(notes)).upper()
         if chosen_note not in notes_mapping.keys() and chosen_note not in notes_mapping.values():
             raise Exception('catch_value_exception')
-        play(notes_mapping.get(str(chosen_note), str(chosen_note)))
+        play(notes_mapping.get(chosen_note, chosen_note))
         time.sleep(0.5)""")
 
         self.multi_level_tester(
@@ -2448,10 +2514,10 @@ class TestsLevel12(HedyTester):
         expected = textwrap.dedent("""\
         notes = [1, 2, 3]
         for i in range(int('10')):
-          chosen_note = random.choice(notes).upper()
+          chosen_note = str(random.choice(notes)).upper()
           if chosen_note not in notes_mapping.keys() and chosen_note not in notes_mapping.values():
               raise Exception('catch_value_exception')
-          play(notes_mapping.get(str(chosen_note), str(chosen_note)))
+          play(notes_mapping.get(chosen_note, chosen_note))
           time.sleep(0.5)
           time.sleep(0.1)""")
 
