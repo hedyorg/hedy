@@ -313,7 +313,7 @@ class TestsLevel1(HedyTester):
             translate=False,
             skip_faulty=False,
             expected=expected,
-            max_level=3,
+            max_level=5,
             microbit=True
         )
 
