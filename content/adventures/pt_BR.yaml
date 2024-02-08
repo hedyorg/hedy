@@ -1,6 +1,6 @@
 adventures:
     story:
-        name: Stories
+        name: Histórias
         default_save_name: História
         description: História
         levels:
@@ -204,10 +204,10 @@ adventures:
             15:
                 story_text: |
                     Usar o laço `{while}` pode tornar suas histórias mais interessantes. Por exemplo, você pode usar `{while} jogo == 'ligado'` para poder jogar até que o jogo termine.
-                    Ou você pode usar `{while} espada == 'perdida'` para que o jogador não possa continuar o jogo até encontrar algo.
+                    Ou você pode usar `{while} espada == 'perdida'` para que o(a) jogador(a) não possa continuar o jogo até encontrar algo.
 
-                    ### Exercise
-                    The example code shows you how to use the `{while}` loop in a story. Now **think of your own scenario** in which the player has to find something before they can continue.
+                    ### Exercício
+                    O código exemplo mostra como usar o laço `{while}` em uma história. Agora **invente o seu próprio cenário** em que o(a) jogador(a) precisa encontrar algo antes de continuar.
                 example_code: |
                     ```
                     chaves = 'perdidas'
@@ -225,10 +225,10 @@ adventures:
                     ```
             18:
                 story_text: |
-                    We are going to print another story, but now we have to use brackets with `{print}`.
+                    Vamos agora imprimir outra história, mas desta vez usando parênteses com o `{print}`.
 
-                    ### Exercise 1
-                    Create a story of at least 5 sentences. You don't have to use 'name' just yet.
+                    ### Exercício 1
+                    Crie uma história de pelo menos 5 frases. Você não precisa usar 'nome' ainda.
                 example_code: |
                     ```
                     {print}('Bem-vindo(a) a esta história!')
@@ -245,8 +245,8 @@ adventures:
                     ```
     add_remove_command:
         name: '{add} {to} & {remove} {from}'
-        default_save_name: add_remove_command
-        description: introducing add to and remove from
+        default_save_name: comando_some_remova
+        description: introduzindo some a e remova de
         levels:
             3:
                 story_text: |
@@ -301,7 +301,7 @@ adventures:
                     ```
     ask_command:
         name: '{ask}'
-        default_save_name: ask_command
+        default_save_name: comando_pergunte
         description: Introdução ao comando pergunte
         levels:
             1:
@@ -672,8 +672,8 @@ adventures:
                     ```
     clear_command:
         name: '{clear}'
-        default_save_name: clear_command
-        description: clear command
+        default_save_name: comando_limpe
+        description: comando limpe
         levels:
             4:
                 story_text: |
@@ -829,8 +829,8 @@ adventures:
                     ```
             8:
                 story_text: |-
-                    ### Exercise
-                    Debug this code. Good luck!
+                    ### Exercício
+                    Depure este código. Boa sorte!
                 example_code: |
                     **Warning! This code needs to be debugged!**
                     ```
@@ -868,193 +868,170 @@ adventures:
                     {print} 'Thank you! Byebye!'
             9:
                 story_text: |-
-                    ### Exercise
-                    Debug this code. Good luck!
+                    ### Exercício
+                    Depure este código. Boa sorte!
                 example_code: |
-                    **Warning! This code needs to be debugged!**
+                    **Atenção! Este código precisa ser depurado!**
                     ```
-                    {print} 'Welcome to our sandwich shop'
-                    amount 'How many sandwiches would you like to buy?'
-                    {repeat} amount {times}
-                    {ask} {is} {ask} 'What kind or bread would you like your sandwich to be?'
-                    types_of_bread {is} white, wheat, rye, garlic, gluten free
-                    {if} chosen_bread in types_of_bread
-                    {print} 'Lovely!'
+                    {print} 'Bem-vindo(a) à nossa sanduicheria'
+                    quantidade 'Quantos sanduíches você gostaria de comprar?'
+                    {repeat} quantidade {times}
+                    {ask} {is} {ask} 'Que tipo de pão você gostaria no seu sanduíche?'
+                    tipos_de_pão {is} branco, integral, francês, alho, sem glúten
+                    {if} pão_escolhido em tipos_de_pão
+                    {print} 'Ótima escolha!'
                     {else}
-                    'I'm sorry we don't sell that'
-                    topping {is} {ask} 'What kind of topping would you like?'
-                    sauce {is} {ask} 'What kind of sauce would you like?'
-                    {print} One chosen_bread with topping and sauce.
-                    price = amount * 6
-                    {print} 'That will be 'price dollar' please'
+                    'Desculpe, não temos esse'
+                    cobertura {is} {ask} 'De que cobertura você gostaria?'
+                    molho {is} {ask} 'De que molho você gostaria?'
+                    {print} Um pão_escolhido com cobertura e molho.
+                    preço = quantidade * 6
+                    {print} 'Vai custar 'preço reais', por gentileza'
                     ```
-
-                    price = amount * 6
-                    {print} 'That will be 'price dollar' please'
             10:
                 story_text: |-
-                    ### Exercise
-                    Debug this code. Good luck!
+                    ### Exercício
+                    Depure este código. Boa sorte!
                 example_code: |
-                    **Warning! This code needs to be debugged!**
+                    **Atenção! Este código precisa ser depurado!**
                     ```
-                    names = Muad Hasan Samira Noura
-                    activities = fly a kite, go swimming, go hiking, catch tan in the sun
-                    {for} name {is} names
-                    {print} At the beach name loves to activity at random
+                    nomes = Marcos Helena Samuel Natália
+                    atividades = soltar pipa, nadar, fazer caminhadas, se bronzear
+                    {for} nome {is} nomes
+                    {print} nome adora atividade {at} {random} na praia
                     ```
             11:
                 story_text: |-
-                    ### Exercise
-                    Debug this calender program. The output of this program is supposed to look like a list of dates.
-                    For example:
+                    ### Exercício
+                    Depure este programa de calendário. A saída deste programa precisa se parecer com uma lista de datas.
+                    Por exemplo:
 
                     ```
-                    Hedy calender
-                    Here are all the days of November
-                    November 1
-                    November 2
-                    November 3
+                    Calendário Hedy
+                    Aqui estão todos os dias de Novembro
+                    1 de Novembro
+                    2 de Novembro
+                    3 de Novembro
                     ```
-                    And so on.
+                    E assim por diante.
 
-                    Mind that you have to test your code extra carefully for the month February, because the amount of days in this month changes in leap years.
+                    Note que você deve testar o seu código com atenção extra para o mês de Fevereiro, visto que a quantidade de dias deste mês muda em anos bissextos.
                 example_code: |
-                    **Warning! This code needs to be debugged!**
+                    **Atenção! Este código precisa ser depurado!**
                     ```
-                    print 'Hedy calender'
-                    months_with_31 days = January, March, May, July, September, October, December
-                    months_with_30_days = April, June, August, November
-                    month = ask 'Which month would you like to see?'
-                    if month in months_with_31_days
-                        days = 31
-                        if month in months_with30_days
-                            days = 30
-                    if month = February
-                        leap_years = 2020, 2024, 2028, 2036, 2040, 2044, 2028
-                        year = ask 'What year is it?'
-                    if year in leap_years
-                        days = 29
-                    else
-                        days = 28
+                    {print} 'Calendário Hedy'
+                    meses_com_31 dias = Janeiro, Março, Maio, Julho, Setembro, Outubro, Dezembro
+                    meses_com_30_dias = Abril, Junho, Agosto, Novembro
+                    mês = {ask} 'Qual mês você gostaria de ver?'
+                    {if} mês {in} meses_com_31_dias
+                        dias = 31
+                        {if} mês {in} meses_com30_dias
+                            dias = 30
+                    {if} mês = Fevereiro
+                        anos_bissextos = 2020, 2024, 2028, 2036, 2040, 2044, 2028
+                        ano = {ask} 'De que ano?'
+                    {if} ano {in} anos_bissextos
+                        dias = 29
+                    {else}
+                        dias = 28
 
-                    print 'Here are all the days of ' moth
-                    for i in range 1 to days
-                        print month i
+                    {print} 'Aqui estão todos os dias de ' ms
+                    {for} i {in} {range} 1 {to} dias
+                        {print} i de mês
                     ```
             12:
                 story_text: |-
-                    ### Exercise
-                    Debug this code. Good luck!
+                    ### Exercício
+                    Depure este código. Boa sorte!
                 example_code: |
-                    **Warning! This code needs to be debugged!**
+                    **Atenção! Este código precisa ser depurado!**
                     ```
-                    define greet
-                    greetings = 'Hello', 'Hi there', 'Goodevening'
-                        print greetings at random
+                    {define} cumprimentar
+                    cumprimentos = 'Olá', 'Como vai?', 'Boa tarde'
+                        {print} cumprimentos {at} {random}
 
-                    define take_order
-                        food = ask 'What would you like to eat?'
-                        print 'One food'
-                        drink = 'What would you like to drink?'
-                        print 'One ' drink
-                        more = ask 'Would you like anything else?'
-                            if more is 'no'
-                        print 'Alright'
-                            else
-                            print 'And ' more
-                    print 'Thank you'
+                    {define} anotar_pedido
+                        comida = {ask} 'O que gostaria de comer?'
+                        {print} '1 comida'
+                        bebida = 'O que gostaria de beber?'
+                        {print} '1 ' bebida
+                        mais = {ask} 'Gostaria de algo mais?'
+                            {if} mais {is} 'não'
+                        {print} 'OK'
+                            {else}
+                            {print} 'E ' mais
+                    {print} 'Obrigado'
 
-                    print 'Welcome to our restaurant'
-                    people = ask 'How many people are in your party tonight?'
-                    for i in range 0 to people
-                        call greet_costumer
+                    {print} 'Bem-vindo(a) ao nosso restaurante'
+                    pessoas = {ask} 'Há quantas pessoas em seu grupo?'
+                    {for} i {in} {range} 0 {to} pessoas
+                        {call} cumprimentar_cliente
                     ```
             13:
                 story_text: |-
-                    ### Exercise
-                    Debug this code. Good luck!
+                    ### Exercício
+                    Depure este código. Boa sorte!
                 example_code: |
-                    **Warning! This code needs to be debugged!**
+                    **Atenção! Este código precisa ser depurado!**
                     ```
-                    defin movie_recommendation with name
-                        action_movies == 'Die Hard', 'Fast and Furious', 'Inglorious Bastards'
-                        romance_movies = 'Love Actually', 'The Notebook', 'Titanic'
-                        comedy_movies = 'Mr Bean' 'Barbie''Deadpool'
-                        kids_movies = 'Minions', 'Paddington', 'Encanto'
-                        if name is 'Camila' or name is 'Manuel'
-                            recommended_movie = kids_movie at random
-                        if name is 'Pedro' or 'Gabriella'
-                                mood = ask 'What you in the mood for?'
-                            if mood is 'action'
-                                recommended_movie = comedy_movies at random
-                            if mood is 'romance'
-                                recommended_movie = romance_movies
-                        if mood is 'comedy'
-                                recommended_movie = comedy_movies at random
+                    {define}recomendação_de_filme {with} nome
+                        filmes_de_ação == 'Duro de Matar', 'Velozes e Furiosos', 'Bastardos Inglórios'
+                        filmes_de_romance = 'Simplesmente Amor', 'Diário de uma Paixão', 'Titanic'
+                        filmes_de_comédia = 'Mr Bean' 'Barbie''Deadpool'
+                        filmes_infantis = 'Minions', 'As Aventuras de Paddington', 'Encanto'
+                        {if} nome {is} 'Camila' {or} nome {is} 'Manuel'
+                            filme_recomendado = filme_infantil {at} {random}
+                        {if} nome {is} 'Pedro' {or} 'Gabriela'
+                                humor = {ask} 'Está no humor de assistir o quê?'
+                            {if} humor {is} 'ação'
+                                filme_recomendado = filmes_de_comédia {at} {random}
+                            {if} humor {is} 'romance'
+                                filme_recomendado = filmes_de_romance
+                        {if} humor {is} 'comédia'
+                                filme_recomendado = filmes_de_comédia {at} {random}
 
-                    print 'I would recommend ' recommended_movie ' for ' name
+                    {print} 'Eu recomendaria ' filme_recomendado ' para ' nome
 
-                    name = ask 'Who is watching?'
-                    recommendation = ask 'Would you like a recommendation?'
-                    if recommendaion is 'yes'
-                    print movie_recommendation with name
-                    else
-                    print 'No problem!'
+                    nome = {ask} 'Quem está assistindo?'
+                    recomendação = {ask} 'Gostaria de uma recomendação?'
+                    {if} recomendaão {is} 'sim'
+                    {print} recomendação_de_filme {with} nome
+                    {else}
+                    {print} 'Sem problemas!'
                     ```
             14:
                 story_text: |-
-                    ### Exercise
-                    Debug this code. Good luck!
+                    ### Exercício
+                    Depure este código. Boa sorte!
                 example_code: |
-                    **Warning! This code needs to be debugged!**
+                    **Atenção! Este código precisa ser depurado!**
                     ```
-                    define calculate_heartbeat
-                        print 'Press your fingertips gently against the side of your neck'
-                        print '(just under your jawline)'
-                        print 'Count the number of beats you feel for 15 seconds'
-                        beats == ask 'How many beats do you feel in 15 seconds?'
-                        heartbeat = beats*4
-                        print 'Your heartbeat is ' heartbeat
-                        if heartbeat >= 60 or heartbeat <= 100
-                            print 'Your heartbeat seems fine'
-                        else
-                            if heartbeat > 60
-                                print 'Your heartbeat seems to be too low'
-                            if heartbeat < 100
-                                print 'Your heartbeat seems to be too high'
-                            print 'You might want to contact a medical professional'
+                    {define} calcular_batimentos
+                        {print} 'Pressione levemente seus dedos à lateral do seu pescoço'
+                        {print} '(logo abaixo do queixo)'
+                        {print} 'Conte quantas batidas você sente em 15 segundos'
+                        batidas == {ask} 'Quantas batidas você sente em 15 segundos?'
+                        batimentos = batidas*4
+                        {print} 'Seus batimentos são de ' batimento
+                        {if} batimentos >= 60 {or} batimentos <= 100
+                            {print} 'Seus batimentos parecem normais'
+                        {else}
+                            {if} batimentos > 60
+                                {print} 'Seus batimentos parecem estar muito baixos'
+                            {if} batimentos < 100
+                                {print} 'Seus batimentos parecem estar muito altos'
+                            {print} 'Considere procurar um médico'
 
-                    measure_heartbeat = ask 'Would you like to measure your heartbeat?'
-                    if measure_heartbeat = 'yes'
-                        call measure_heartbeat
-                    else
-                        'no problem'
+                    medir_batimentos = {ask} 'Gostaria de medir seus batimentos cardíacos?'
+                    {if} medir_batimentos = 'sim'
+                        {call} medir_batimentos
+                    {else}
+                        'sem problemas'
                     ```
-
-                        print '(just under your jawline)'
-                        print 'Count the number of beats you feel for 15 seconds'
-                        beats == ask 'How many beats do you feel in 15 seconds?'
-                        heartbeat = beats*4
-                        print 'Your heartbeat is ' heartbeat
-                        if heartbeat >= 60 or heartbeat <= 100
-                            print 'Your heartbeat seems fine'
-                        else
-                            if heartbeat > 60
-                                print 'Your heartbeat seems to be too low'
-                            if heartbeat < 100
-                                print 'Your heartbeat seems to be too high'
-                            print 'You might want to contact a medical professional'
-
-                    measure_heartbeat = ask 'Would you like to measure your heartbeat?'
-                    if measure_heartbeat = 'yes'
-                        call measure_heartbeat
-                    else
-                        'no problem'
             15:
                 story_text: |-
-                    ### Exercise
-                    Debug this random children's story. Good luck!
+                    ### Exercício
+                    Depure este gerador de histórias aleatórias. Boa sorte!
                 example_code: |
                     **Warning! This code needs to be debugged!**
                     ```
@@ -1090,9 +1067,9 @@ adventures:
                     ```
             16:
                 story_text: |-
-                    ### Exercise
-                    Debug this code. Good luck!
-                    Tip: Make sure that you only see your score once in the end.
+                    ### Exercício
+                    Depure este código. Boa sorte!
+                    Dica: Certifique-se de mostrar a pontuação só uma vez, no fim.
                 example_code: |
                     **Warning! This code needs to be debugged!**
                     ```
@@ -1112,8 +1089,8 @@ adventures:
                     ```
             17:
                 story_text: |-
-                    ### Exercise
-                    Debug this code. Good luck!
+                    ### Exercício
+                    Depure este código. Boa sorte!
                 example_code: |
                     **Warning! This code needs to be debugged!**
                     ```
@@ -1219,9 +1196,8 @@ adventures:
                     A maioria das linguagens de programação também usa aspas simples ao imprimir, então também estamos nos aproximando da programação real!
                 example_code: |
                     ```
-                    {print} 'Você precisa usar aspas de agora em diante!'
-                    resposta {is} {ask} 'O que precisamos usar de agora em diante?'
-                    {print} 'Precisamos usar ' resposta
+                    nome {is} Sofia
+                    {print} Meu nome é nome
                     ```
             5:
                 story_text: |
@@ -1230,8 +1206,7 @@ adventures:
                     `{ask}` e `{print}` ainda funcionam como no nível 4.
                 example_code: |
                     ```
-                    nome {is} {ask} 'qual o seu nome?'
-                    {if} nome {is} Hedy {print} 'legal' {else} {print} 'não tão legal'
+                    senha {is} {ask} 'Qual é a senha correta?'
                     ```
             6:
                 story_text: |
@@ -1252,7 +1227,10 @@ adventures:
                     O nível 7 adiciona o comando `{repeat}`. `{repeat}` pode ser usado para executar uma linha de código várias vezes.
                 example_code: |
                     ```
-                    {repeat} 3 {times} {print} 'Hedy é divertida!'
+                    {print} 'parabéns pra você'
+                    {print} 'parabéns pra você'
+                    {print} 'parabéns querida Hedy'
+                    {print} 'parabéns pra você'
                     ```
             8:
                 story_text: |
@@ -1260,22 +1238,8 @@ adventures:
                     Agora você pode executar grupos de códigos em conjunto, mas você terá que *indentar* os mesmos.
                     Isso significa colocar quatro espaços no começo da linha. O mesmo vale para quando você queira criar um bloco só com um linha.
                 example_code: |
-                    Veja como o comando `{repeat}` funciona agora:
                     ```
-                    {repeat} 5 {times}
-                        {print} 'Olá pessoal'
-                        {print} 'Isso vai ser impresso 5 vezes'
-                    ```
-                    Veja como os comandos `{if}` e `{else}` funcionam agora:
-
-                    ```
-                    nome {is} {ask} 'Qual o seu nome?'
-                    {if} nome {is} Hedy
-                        {print} 'Bem-vinda Hedy'
-                        {print} 'Você pode jogar no seu computador!'
-                    {else}
-                        {print} 'INVASOR!'
-                        {print} 'Você não pode usar esse computador'
+                    {repeat} 5 {times} {print} 'Na próxima aba você vai poder repetir várias linhas de código por vez!'
                     ```
             9:
                 story_text: |
@@ -1298,9 +1262,10 @@ adventures:
                     `{for}` cria um bloco, assim como `{repeat}` e `{if}`, de modo que todas as linhas dentro do bloco precisam começar com espaços.
                 example_code: |
                     ```
-                    animais {is} cachorro, gato, peixe
-                    {for} animal {in} animais
-                      {print} 'Eu adoro ' animal
+                    {repeat} 2 {times}
+                        {print} 'se você está contente bata palmas'
+                    {print} 'se você está contente e quer mostrar pra toda gente'
+                    {print} 'se você está contente bata palmas'
                     ```
             11:
                 story_text: |
@@ -1322,10 +1287,15 @@ adventures:
                     `{or}`. Então, apenas uma afirmação precisa estar correta.
                 example_code: |
                     ```
-                    nome = {ask} 'qual o seu nome?'
-                    idade = {ask} 'qual a sua idade?'
-                    {if} nome {is} 'Hedy' {and} idade {is} 2
-                        {print} 'Você é a verdadeira Hedy!'
+                    usuário = {ask} 'Qual é o seu nome de usuário?'
+                    senha = {ask} 'Qual é a sua senha?'
+                    {if} usuário {is} 'Hedy'
+                        {if} senha {is} 'secreta'
+                            {print} 'Bem-vinda Hedy!'
+                        {else}
+                            {print} 'Acesso negado'
+                    {else}
+                        {print} 'Acesso negado!'
                     ```
             14:
                 story_text: |
@@ -1355,10 +1325,14 @@ adventures:
                     Se a resposta correta nunca for dada, o laço nunca termina!
                 example_code: |
                     ```
-                    resultado = 0
-                    {while} resultado != 25
-                        resultado = {ask} 'Quanto é 5 vezes 5?'
-                    {print} 'Uma resposta correta foi dada'
+                    jogo = 'ligado'
+                    {for} i {in} {range} 1 {to} 100
+                        {if} jogo == 'ligado'
+                            resposta = {ask} 'Você quer continuar?'
+                            {if} resposta == 'não'
+                                jogo = 'terminado'
+                            {if} resposta == 'sim'
+                                {print} 'Certo, vamos continuar'
                     ```
             16:
                 story_text: |-
@@ -1385,7 +1359,7 @@ adventures:
     dice:
         name: Dado
         default_save_name: Dado
-        description: Make your own dice
+        description: Faça seu próprio dado
         levels:
             3:
                 story_text: |
@@ -1397,8 +1371,8 @@ adventures:
                     ![Die of earthworms with 1 to 5 and an earthworm on it](https://cdn.jsdelivr.net/gh/felienne/hedy@24f19e9ac16c981517e7243120bc714912407eb5/coursedata/img/dobbelsteen.jpeg)
                 example_code: |
                     ```
-                    choices {is} 1, 2, 3, 4, 5, earthworm
-                    {print} You threw _ {at} {random} !
+                    escolhas {is} 1, 2, 3, 4, 5, minhoca
+                    {print} Você tirou _ {at} {random} !
                     ```
                 story_text_2: |
                     ### Exercise
@@ -1406,7 +1380,7 @@ adventures:
                     Or other special dice from a different game?
                 example_code_2: |
                     ```
-                    choices {is} _
+                    escolhas {is} _
                     ```
             4:
                 story_text: |
@@ -1420,11 +1394,11 @@ adventures:
                     But maybe you want to recreate a die from a completely different game. That's fine too! Then make up your own reaction. Eg 'yes' for 6 and 'pity' for something {else}.
                 example_code: |
                     ```
-                    choices {is} 1, 2, 3, 4, 5, earthworm
-                    throw {is} choices {at} {random}
-                    {print} 'you have thrown ' throw
-                    _ throw {is} earthworm {print} 'You can stop throwing.'
-                    _ {print} 'You have to throw it again!'
+                    escolhas {is} 1, 2, 3, 4, 5, minhoca
+                    jogada {is} escolhas {at} {random}
+                    {print} 'você tirou ' jogada
+                    _ jogada {is} minhoca {print} 'Você pode parar de jogar.'
+                    _ {print} 'Você terá de jogar de novo!'
                     ```
             6:
                 story_text: |
@@ -2381,12 +2355,12 @@ adventures:
             6:
                 story_text: |4
 
-                                  In this level you learn something new: you can now also calculate.
+                                              In this level you learn something new: you can now also calculate.
 
-                                  The plus is easy, you write it like with math: `5 + 5` for example. The minus also works fine, it is `5 - 5`.
+                                              The plus is easy, you write it like with math: `5 + 5` for example. The minus also works fine, it is `5 - 5`.
 
-                                  The times is a bit different, because there is no times symbol on your keyboard. Just search, there really isn't!
-                                  That is why we multiply with the asterisk above 8: `5 * 5`. Read that as "5 times 5" that helps you remember it best.
+                                              The times is a bit different, because there is no times symbol on your keyboard. Just search, there really isn't!
+                                              That is why we multiply with the asterisk above 8: `5 * 5`. Read that as "5 times 5" that helps you remember it best.
                 example_code: |
                     ```
                     {print} '5 plus 5 is ' 5 + 5
