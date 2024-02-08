@@ -1205,6 +1205,8 @@ def hour_of_code(level, program_id=None):
                     print("Error: there is an openings date without a level")
 
     if 'levels' in customizations and level not in available_levels:
+        if available_levels:
+            return index(available_levels[0], program_id)
         return utils.error_page(error=403, ui_message=gettext('level_not_class'))
 
     # At this point we can have the following scenario:
@@ -1220,7 +1222,7 @@ def hour_of_code(level, program_id=None):
             # Todo: How can we fix this without a re-load?
             quiz_stats = DATABASE.get_quiz_stats([current_user()['username']])
             # Only check the quiz threshold if there is a quiz to obtain a score on the previous level
-            if level > 1 and QUIZZES[g.lang].get_quiz_data_for_level(level - 1):
+            if level - 1 in available_levels and level > 1 and QUIZZES[g.lang].get_quiz_data_for_level(level - 1):
                 scores = [x.get('scores', []) for x in quiz_stats if x.get('level') == level - 1]
                 scores = [score for week_scores in scores for score in week_scores]
                 max_score = 0 if len(scores) < 1 else max(scores)
@@ -1289,6 +1291,8 @@ def hour_of_code(level, program_id=None):
 
     max_level = hedy.HEDY_MAX_LEVEL
     level_number = int(level)
+    prev_level, next_level = utils.find_prev_next_levels(
+        list(available_levels), level_number)
 
     commands = hedy.commands_per_level.get(level)
     return render_template(
@@ -1296,8 +1300,9 @@ def hour_of_code(level, program_id=None):
         level_nr=str(level_number),
         level=level_number,
         current_page='Hour of Code',
-        prev_level=level_number - 1 if level_number > 1 else None,
-        next_level=level_number + 1 if level_number < max_level else None,
+        max_level=max_level,
+        prev_level=prev_level,
+        next_level=next_level,
         HOC_tracking_pixel=True,
         customizations=customizations,
         hide_cheatsheet=hide_cheatsheet,
@@ -1312,7 +1317,6 @@ def hour_of_code(level, program_id=None):
         tutorial=tutorial,
         latest=version(),
         quiz=quiz,
-        max_level=hedy.HEDY_MAX_LEVEL,
         quiz_questions=quiz_questions,
         cheatsheet=cheatsheet,
         blur_button_available=False,
@@ -1374,6 +1378,8 @@ def index(level, program_id):
                     print("Error: there is an openings date without a level")
 
     if 'levels' in customizations and level not in available_levels:
+        if available_levels:
+            return index(available_levels[0], program_id)
         return utils.error_page(error=403, ui_message=gettext('level_not_class'))
 
     # At this point we can have the following scenario:
@@ -1392,7 +1398,8 @@ def index(level, program_id):
             quiz_stats = DATABASE.get_quiz_stats([current_user()['username']])
             # Not current leve-quiz's data because some levels may have no data for quizes,
             # but we still need to check for the threshold.
-            if level > 1 and (not level_quiz_data or QUIZZES[g.lang].get_quiz_data_for_level(level - 1)):
+            if level - 1 in available_levels and level > 1 and \
+                    (not level_quiz_data or QUIZZES[g.lang].get_quiz_data_for_level(level - 1)):
                 scores = [x.get('scores', []) for x in quiz_stats if x.get('level') == level - 1]
                 scores = [score for week_scores in scores for score in week_scores]
                 max_score = 0 if len(scores) < 1 else max(scores)
@@ -1467,6 +1474,8 @@ def index(level, program_id):
 
     max_level = hedy.HEDY_MAX_LEVEL
     level_number = int(level)
+    prev_level, next_level = utils.find_prev_next_levels(
+        list(available_levels), level_number)
 
     commands = hedy.commands_per_level.get(level)
     return render_template(
@@ -1474,9 +1483,9 @@ def index(level, program_id):
         level_nr=str(level_number),
         level=level_number,
         current_page='hedy',
-        prev_level=level_number - 1 if level_number > 1 else None,
-        next_level=level_number + 1 if level_number < max_level else None,
-        max_level=hedy.HEDY_MAX_LEVEL,
+        max_level=max_level,
+        prev_level=prev_level,
+        next_level=next_level,
         customizations=customizations,
         hide_cheatsheet=hide_cheatsheet,
         enforce_developers_mode=enforce_developers_mode,

@@ -571,6 +571,40 @@ class TestsLevel16(HedyTester):
             extra_check_function=self.is_turtle(),
         )
 
+    def test_if_in_list_print(self):
+        code = textwrap.dedent("""\
+            letters = ['a', 'b', 'c']
+            if 'a' in letters
+              print 'Found'""")
+
+        expected = textwrap.dedent("""\
+            letters = ['a', 'b', 'c']
+            if 'a' in letters:
+              print(f'''Found''')""")
+
+        self.single_level_tester(
+            code=code,
+            expected=expected,
+            output='Found'
+        )
+
+    def test_if_not_in_list_print(self):
+        code = textwrap.dedent("""\
+            letters = ['a', 'b', 'c']
+            if 'd' not in letters
+              print 'Not found'""")
+
+        expected = textwrap.dedent("""\
+            letters = ['a', 'b', 'c']
+            if 'd' not in letters:
+              print(f'''Not found''')""")
+
+        self.single_level_tester(
+            code=code,
+            expected=expected,
+            output='Not found'
+        )
+
     #
     # forward tests
     #

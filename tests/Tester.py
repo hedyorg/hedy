@@ -82,6 +82,7 @@ class HedyTester(unittest.TestCase):
     number_comparison_commands = ['>', '>=', '<', '<=']
     comparison_commands = number_comparison_commands + ['!=']
     arithmetic_operations = ['+', '-', '*', '/']
+    in_not_in_list_commands = ['in', 'not in']
     quotes = ["'", '"']
     commands_level_4 = [("print 'hello'", "print(f'hello')"),
                         ("name is ask 'who?'", "name = input(f'who?')"),
