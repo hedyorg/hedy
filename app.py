@@ -2547,6 +2547,7 @@ def public_user_page(username):
         user_achievements = DATABASE.progress_by_username(username) or {}
 
         all_programs = DATABASE.filtered_programs_for_user(username,
+                                                           public=True,
                                                            pagination_token=page)
 
         programs_by_level = []
