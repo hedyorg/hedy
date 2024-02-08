@@ -1334,7 +1334,8 @@ adventures:
                     {print} 2.5 + 2.5
                     ```
             13:
-                story_text: अब हम `{and}` और `{or}` सीखने जा रहे हैं! यदि आप दो कथनों की जाँच करना चाहते हैं, तो आपको दो if's का उपयोग करने की आवश्यकता नहीं है, लेकिन `{and}` और `{or}` का उपयोग कर सकते हैं। यदि आप `{and}` का उपयोग करते हैं, तो `{and}` के बाएं और दाएं दोनों कथन सत्य होने चाहिए। हम `या` का भी उपयोग कर सकते हैं। तब केवल एक कथन सही होना चाहिए।
+                story_text: अब हम `{and}` और `{or}` सीखने जा रहे हैं! यदि आप दो कथनों की जाँच करना चाहते हैं, तो आपको दो if's का उपयोग करने की आवश्यकता नहीं है, लेकिन `{and}` और `{or}` का उपयोग कर सकते हैं। यदि आप `{and}` का उपयोग करते हैं, तो `{and}` के बाएं और दाएं दोनों कथन सत्य होने चाहिए। हम `या`
+                    का भी उपयोग कर सकते हैं। तब केवल एक कथन सही होना चाहिए।
                 example_code: |
                     ```
                     name = ask 'what is your name?'
@@ -2431,14 +2432,14 @@ adventures:
         description: Introducing maths
         levels:
             6:
-                story_text: |2
+                story_text: |4
 
-                        In this level you learn something new: you can now also calculate.
+                          In this level you learn something new: you can now also calculate.
 
-                        The plus is easy, you write it like with math: `5 + 5` for example. The minus also works fine, it is `5 - 5`.
+                          The plus is easy, you write it like with math: `5 + 5` for example. The minus also works fine, it is `5 - 5`.
 
-                        The times is a bit different, because there is no times symbol on your keyboard. Just search, there really isn't!
-                        That is why we multiply with the asterisk above 8: `5 * 5`. Read that as "5 times 5" that helps you remember it best.
+                          The times is a bit different, because there is no times symbol on your keyboard. Just search, there really isn't!
+                          That is why we multiply with the asterisk above 8: `5 * 5`. Read that as "5 times 5" that helps you remember it best.
                 example_code: |
                     ```
                     {print} '5 plus 5 is ' 5 + 5
@@ -2579,7 +2580,8 @@ adventures:
                     _
                     ```
             6:
-                story_text: "Instead of playing notes, you can also play numbers now. Simply type `{play} 1` for the lowest note, `{play} 70` for the highest note, or anything in between.\n\n### Exercise\n This calls for musical maths! Try out the example code a couple of times with different starting numbers. \nThen, see if you can compose a song using the numbers.\n"
+                story_text: "Instead of playing notes, you can also play numbers now. Simply type `{play} 1` for the lowest note, `{play} 70` for the highest note, or anything in between.\n\n### Exercise\n This calls for musical maths! Try out the example code a couple of times with different starting\
+                    \ numbers. \nThen, see if you can compose a song using the numbers.\n"
                 example_code: |
                     ```
                     number = {ask} 'Say a starting number between 1 and 67'

@@ -884,7 +884,8 @@ adventures:
                 story_text: |-
                     ### 练习
                     调试这段代码。 祝你好运！
-                example_code: "**警告！ 这段代码需要调试！**\n```\n{print} '欢迎来到我们的三明治店'\n个数 “您想买多少个三明治？”\n{repeat}个数{times}\n{ask} {is} {ask} '您想要什么类型的三明治或面包？'\n面包刀种类 {is} 白面包、小麦面包、黑麦面包、大蒜面包、无麸质面包\n{if}  选中的面包  in 面包的种类 \n{print}“美妙！”\n{else}\n“抱歉我们不卖那个”\n蘸料 {is} {ask} '您想要什么类型的配料？'\n沙司{is} {ask}“您想要什么类型的酱？”\n{print} 一份 选中的面包，配上配料和酱汁。\n价格 =数量*6\n{print} '这将是' 价格 '美元'\n```\n"
+                example_code: "**警告！ 这段代码需要调试！**\n```\n{print} '欢迎来到我们的三明治店'\n个数 “您想买多少个三明治？”\n{repeat}个数{times}\n{ask} {is} {ask} '您想要什么类型的三明治或面包？'\n面包刀种类 {is} 白面包、小麦面包、黑麦面包、大蒜面包、无麸质面包\n{if}  选中的面包  in 面包的种类 \n{print}“美妙！”\n{else}\n“抱歉我们不卖那个”\n蘸料 {is} {ask} '您想要什么类型的配料？'\n沙司{is} {ask}“您想要什么类型的酱？”\n{print}\
+                    \ 一份 选中的面包，配上配料和酱汁。\n价格 =数量*6\n{print} '这将是' 价格 '美元'\n```\n"
             10:
                 story_text: |-
                     ### 练习
@@ -940,30 +941,8 @@ adventures:
                 story_text: |-
                     ### 练习
                     调试这段代码。 祝你好运！
-                example_code: |
-                    **警告！ 这段代码需要调试！**
-                    ```
-                    {define} 问候
-                    问候语 = 'Hello', 'Hi there', 'Goodevening'
-                        {print} 问候语 {at} {random}
-
-                    {define} 点单
-                        食物 = {ask} '您想吃什么?'
-                        {print} '一份食物'
-                        饮料 = '您想喝什么?'
-                        {print} '一份饮料' 
-                        更多 = {ask} '您还要点别的吗?'
-                            {if} 更多 {is} ' 不'
-                        {print} '好的'
-                            {else}
-                            {print} '和 ' 更多
-                    {print} '谢谢你'
-
-                    {print} '欢迎来到我的餐馆'
-                    人数 = {ask} '你们今晚有多少人?'
-                    {for} i {in} {range} 0 {to} 人数
-                        {call} 欢迎顾客
-                    ```
+                example_code: "**警告！ 这段代码需要调试！**\n```\n{define} 问候\n问候语 = 'Hello', 'Hi there', 'Goodevening'\n    {print} 问候语 {at} {random}\n\n{define} 点单\n    食物 = {ask} '您想吃什么?'\n    {print} '一份食物'\n    饮料 = '您想喝什么?'\n    {print} '一份饮料' \n    更多 = {ask} '您还要点别的吗?'\n        {if} 更多 {is} ' 不'\n    {print}\
+                    \ '好的'\n        {else}\n        {print} '和 ' 更多\n{print} '谢谢你'\n\n{print} '欢迎来到我的餐馆'\n人数 = {ask} '你们今晚有多少人?'\n{for} i {in} {range} 0 {to} 人数\n    {call} 欢迎顾客\n```\n"
             13:
                 story_text: |-
                     ### 练习
@@ -1122,7 +1101,8 @@ adventures:
                 story_text: |-
                     ### 练习
                     从第 16 级开始调试这个 Old MacDonald 程序。祝你好运！
-                example_code: "**警告！ 这段代码需要调试！**\n```\nanimals = ['pig', 'dog', 'cow']\nsounds = ['oink', 'woof', 'moo']\n{for} i {in} {range} 1 {to} 3\n    animal = animals[i]\n    sound = sounds[i]\n    {print} '老麦当劳有一个农场'\n    {print} 'E I E I O!'\n    {print} '在那个农场他有一只' animal\n    {print} 'E I E I O!'\n    {print} '这里有‘sound sound\n    {print} '以及那也有' sound sound \n    {print} '这里有 ' sound\n    {print} '那也有 ' sound\n    {print} '到处有 ' sound sound\n```\n"
+                example_code: "**警告！ 这段代码需要调试！**\n```\nanimals = ['pig', 'dog', 'cow']\nsounds = ['oink', 'woof', 'moo']\n{for} i {in} {range} 1 {to} 3\n    animal = animals[i]\n    sound = sounds[i]\n    {print} '老麦当劳有一个农场'\n    {print} 'E I E I O!'\n    {print} '在那个农场他有一只' animal\n    {print} 'E I E\
+                    \ I O!'\n    {print} '这里有‘sound sound\n    {print} '以及那也有' sound sound \n    {print} '这里有 ' sound\n    {print} '那也有 ' sound\n    {print} '到处有 ' sound sound\n```\n"
     default:
         name: 介绍
         default_save_name: 介绍
@@ -1317,7 +1297,11 @@ adventures:
                          {print}'太棒了！ 你已经通过了这个科目！
                     ```
             15:
-                story_text: "在这款游戏中，我们设置了一个代码，以确保玩家可以想玩多久就玩多久。\n但是代码既无效又太长。此外，如果玩家想玩101款游戏而不是100款游戏怎么办?\n你不能玩到无限远?\n在这个级别中，你将学习一个命令，使这一切变得容易得多!\n"
+                story_text: |
+                    在这款游戏中，我们设置了一个代码，以确保玩家可以想玩多久就玩多久。
+                    但是代码既无效又太长。此外，如果玩家想玩101款游戏而不是100款游戏怎么办?
+                    你不能玩到无限远?
+                    在这个级别中，你将学习一个命令，使这一切变得容易得多!
                 example_code: |
                     ```
                     game=“开”
@@ -2568,7 +2552,12 @@ adventures:
                     ＿
                     ' ' '
             6:
-                story_text: "除了弹奏音符，你现在还可以弹奏数字。只需输入`{play} 1`表示最低音符，`{play} 70`表示最高音符，或介于两者之间的任何内容。\n\n### 练习\n这需要音乐数学!用不同的起始数字尝试几次示例代码。\n然后，看看你是否可以用这些数字创作一首歌。\n"
+                story_text: |
+                    除了弹奏音符，你现在还可以弹奏数字。只需输入`{play} 1`表示最低音符，`{play} 70`表示最高音符，或介于两者之间的任何内容。
+
+                    ### 练习
+                    这需要音乐数学!用不同的起始数字尝试几次示例代码。
+                    然后，看看你是否可以用这些数字创作一首歌。
                 example_code: |
                     ```
                     number = {ask} '从1到67中间说一个开始的数字'
@@ -2784,7 +2773,10 @@ adventures:
 
                     **额外**你能通过添加更多的代码行使鹦鹉要求更多而不仅仅是你的名字吗?
             3:
-                story_text: "用`{add}`教你的鹦鹉一个新单词。\n### 练习\n您可以添加`{add} {to}`命令来让代码工作吗?\n"
+                story_text: |
+                    用`{add}`教你的鹦鹉一个新单词。
+                    ### 练习
+                    您可以添加`{add} {to}`命令来让代码工作吗?
                 example_code: |
                     ```
                     词汇表 {is} 叽叽喳喳, 海蒂
@@ -2910,7 +2902,12 @@ adventures:
                     {if} x {is} {pressed} {forward} 15 {else} {turn} 90
                     ```
             9:
-                story_text: "现在你知道了如何组合语句，你可以用`{pressed}`创建一个触摸类型工具。\n\n### 练习\n完成代码。每次随机选择一个字母，你必须按下。按对得一分，按错扣两分。\n**额外**在每个字母之后清除屏幕，并显示用户他们得了多少分。\n"
+                story_text: |
+                    现在你知道了如何组合语句，你可以用`{pressed}`创建一个触摸类型工具。
+
+                    ### 练习
+                    完成代码。每次随机选择一个字母，你必须按下。按对得一分，按错扣两分。
+                    **额外**在每个字母之后清除屏幕，并显示用户他们得了多少分。
                 example_code: "```\n积分 = 0\n字母们 = a, b, c, d, e\n{repeat} 10{times}\n    字母 = _ _ _ \n    {print} '按下字母' 字母\n    {if} 字母{is} {pressed}\n    _\n    _\n    _\n```\n"
     print_command:
         name: '{print}'
@@ -3440,7 +3437,16 @@ adventures:
                     {print} '请付' 价格 '元'
                     ```
             13:
-                story_text: "在这个级别中，您将学习新的命令来进一步扩展您的代码。\n\n### 练习1\n在程序需要逻辑判断的位置放置`{and}`和`{or}`'。\n\n### 练习2\n用至少一个`{and}`和一个`{or}`来扩展你的餐厅代码。\n例如，创建一个只适用于披萨的特别折扣券，或者给你的客户一杯免费饮料\n还有薯条和煎饼。或者是完全不同的东西!\n"
+                story_text: |
+                    在这个级别中，您将学习新的命令来进一步扩展您的代码。
+
+                    ### 练习1
+                    在程序需要逻辑判断的位置放置`{and}`和`{or}`'。
+
+                    ### 练习2
+                    用至少一个`{and}`和一个`{or}`来扩展你的餐厅代码。
+                    例如，创建一个只适用于披萨的特别折扣券，或者给你的客户一杯免费饮料
+                    还有薯条和煎饼。或者是完全不同的东西!
                 example_code: "```\n价格 = 10\n食物 = {ask} '您想吃什么？'\n饮料 = {ask} '您想喝什么？'\n{if}食物 {is} '三明治'_ 饮料 {is} '果汁'\n          {print} '这是我们的优惠套餐'\n          价格 = 价格 - 3\n{if}饮料{is} '果汁' _饮料{is} '矿泉水'。 \n          {print} '你的选择真健康！\n {print} '一共' 价格 '元'\n```\n"
             15:
                 story_text: |
