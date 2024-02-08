@@ -3,6 +3,7 @@ import datetime
 from flask import jsonify, make_response, redirect, request, session
 from flask_babel import gettext
 
+from app import limiter
 from config import config
 from safe_format import safe_format
 from hedy_content import ALL_LANGUAGES, COUNTRIES
@@ -367,6 +368,7 @@ class AuthModule(WebsiteModule):
             return jsonify({"message": gettext("sent_password_recovery")}), 200
 
     @ route("/reset", methods=["POST"])
+    @limiter.limit("100/day;10/hour;1/minute")
     def reset(self):
         body = request.json
         # Validations
