@@ -2225,8 +2225,7 @@ def teacher_feedback():
 
     # Process the feedback
 
-    feedback = {};
-
+    feedback = {}
 
     DATABASE.store_feedback(feedback)
 
