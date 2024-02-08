@@ -42,14 +42,15 @@
             <div id="modal-feedback-text" class="text-white mb-4 text-xl"></div>
             <div class="mx-auto flex flex-col gap-4">
                 <div class="mt-4 flex flex-row justify-between gap-x-2">
-                    <button id="modal-bug-button" class="green-btn block w-40 py-2">{{_('Bug 🐛')}}</button>
-                    <button id="modal-feature-button" class="green-btn block w-40 py-2">{{_('Feature 💭')}}</button>
-                    <button id="modal-feedback-button" class="green-btn block w-40 py-2">{{_('Feedback 💬')}}</button>
+                    <button id="modal-bug-button" onclick="$('#modal-feedback-category').val('bug')" class="green-btn block w-40 py-2">{{_('Bug 🐛')}}</button>
+                    <button id="modal-feature-button" onclick="$('#modal-feedback-category').val('feature')" class="green-btn block w-40 py-2">{{_('Feature 💭')}}</button>
+                    <button id="modal-feedback-button" onclick="$('#modal-feedback-category').val('feedback')" class="green-btn block w-40 py-2">{{_('Feedback 💬')}}</button>
                 </div>
-                <textarea name="feedback_message" id="modal-feedback-input" type="text" class="border border-green-400 rounded py-2 px-2 w-full h-32" placeholder="Please provide your message"></textarea>
+                <input type="hidden" id="modal-feedback-category"/>
+                <textarea id="modal-feedback-input" type="text" class="border border-green-400 rounded py-2 px-2 w-full h-32" placeholder="Please provide your message"></textarea>
             </div>
             <div class="mt-4 flex flex-row justify-center">
-                <button hx-post="/teacher_feedback" hx-swap="none" hx-include="#modal-feedback-input" id="modal-send-feedback-button" class="green-btn block m-4 w-40 pb-4 pt-4">{{_('send')}}</button>
+                <button hx-post="/teacher_feedback" hx-swap="none" hx-include="#modal-feedback-input, #modal-feedback-category" id="modal-send-feedback-button" class="green-btn block m-4 w-40 pb-4 pt-4">{{_('send')}}</button>
                 <button id="modal-cancel-button" class="red-btn block m-4 w-40 pb-4 pt-4">{{_('cancel')}}</button>
             </div>
         </div>
