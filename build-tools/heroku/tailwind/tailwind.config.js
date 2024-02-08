@@ -177,6 +177,9 @@ module.exports = {
   variants: {},
   corePlugins: {
   },
-  plugins: [require("tw-elements/dist/plugin.cjs")],
+  plugins: [
+      require("tw-elements/dist/plugin.cjs"),
+      require("nightwind")
+  ],
   darkMode: 'class'
 }
