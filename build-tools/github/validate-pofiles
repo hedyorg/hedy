@@ -99,6 +99,7 @@ def check_for_empty_in_En(filename):
     (Other languages can be empty as Weblate will fill them)
 
     """
+    any_failed = False
     language = filename.split('LC_')[0][-3:-1]
     if language == 'en':
         with open(filename, 'r', encoding='utf-8') as f:
