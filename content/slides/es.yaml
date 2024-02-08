@@ -125,7 +125,7 @@ levels:
                 {print} ¿Qué canción quieres escuchar?
                 {ask} ¡También me gusta esa canción!
                 {print} La siguiente... {echo}
-            debug: true
+            debug: 'True'
         13:
             header: ¡Que empiece la diversión de programar!
             text: ¡Disfruta las aventuras del nivel 1!
@@ -194,7 +194,7 @@ levels:
                 {print} Iré a por tu donut. {sleep}
                 {print} ¡Aquí lo tienes! ¡Un donut relleno con cobertura!
                 {ask} ¡Que tengas un buen día!
-            debug: true
+            debug: 'True'
         8:
             header: ¡Que empiece la diversión de programar!
             text: ¡Disfruta las aventuras en el nivel 2!
@@ -259,7 +259,7 @@ levels:
                 {print} o prefieres... segunda_opcion {at} {random}
                 {remove} segunda_opcion {to} generos_musicales
                 {print} ¡Me gusta genero_musical {random} más!
-            debug: true
+            debug: 'True'
         8:
             header: ¡Manos a la obra!
             text: ¡Disfruta las aventuras en el nivel 3!
@@ -274,7 +274,7 @@ levels:
             code: |-
                 nombre {is} Sophie
                 {print} Mi nombre es nombre
-            debug: true
+            debug: 'True'
         3:
             header: Arreglarlo con comillas
             text: |-
@@ -312,7 +312,7 @@ levels:
 
                 Por favor intenta imprimir una contracción como "you're" o "I'm" en la pantalla de abajo y verás que sucede....
             code: '{print} ''¡Esto no'' funcionará!'''
-            debug: true
+            debug: 'True'
         9:
             header: Limpiar
             text: |-
@@ -341,7 +341,7 @@ levels:
                 colores {is} 'naranja, plata, silver, blanco, marrón'
                 {print} 'Me encanta el colores {at} {random}!'
                 opcion {is} {ask} '¿Cuál quieres?'
-            debug: true
+            debug: 'True'
         11:
             header: ¡Preparados, Listos, Ya!
             text: ¡Disfruta las aventuras en el nivel 4!
@@ -364,7 +364,7 @@ levels:
                 Al usar el comando `{if}`, no te olvides de usar el comando `{print}`.
                 ¡Este código no funcionará!
             code: '{if} nombre {is} Hedy ''genial'''
-            debug: true
+            debug: 'True'
         4:
             header: sino
             text: |-
@@ -475,7 +475,7 @@ levels:
                 {if} día {is} lunes
                 precio_total = precio_total * 0,25
                 {print} 'Este será el precio total por favor'
-            debug: true
+            debug: 'True'
         10:
             header: ¡Manos a la obra!
             text: ¡Disfruta las aventuras en el nivel 6!
@@ -498,7 +498,7 @@ levels:
             header: No te olvides el comando imprimir
             text: Al usar el comando repetir, no te olvides el comando `{print}`.
             code: '{repeat} 5 {times} ''¡Ayuda!'''
-            debug: true
+            debug: 'True'
         4:
             header: Repetir un comando preguntar
             text: También puedes repetir un comando `{ask}`, `{if}` or `{else}` varias veces.
@@ -520,7 +520,7 @@ levels:
                 {if} sí
                 {print} ¡Viva!
                 {else} 'Eso es una lástima... Bueno... es hora de construir un refugio y encontrar algo de comida'
-            debug: true
+            debug: 'True'
         6:
             header: ¡Preparado Listo Ya!
             text: ¡Disfruta las aventuras en el nivel 7!
@@ -535,7 +535,7 @@ levels:
 
                 Sólo podías repetir una línea de código.
             code: '{repeat} 5 {times} {print} ''¡Ayuda!'''
-            debug: true
+            debug: 'True'
         3:
             header: comandos {repeat} ahora
             text: |-
@@ -564,7 +564,7 @@ levels:
             code: |-
                 {if} nombre {is} Hedy {print} 'genial'
                 {else} {print} '¡boo!'
-            debug: true
+            debug: 'True'
         6:
             header: ahora si y sino
             text: |-
@@ -607,7 +607,7 @@ levels:
                         {print} Elegiste un billete de ida y vuelta'
                 precio * 2
                 {print} 'Serán ' precio ' euros por favor'
-            debug: true
+            debug: 'True'
         10:
             header: ¡Vamos a ver las aventuras!
             text: ¡Disfruta las aventuras en el nivel 8!
@@ -699,7 +699,7 @@ levels:
                 {else}
                 {print} 'Fun!'
                 {print} 'Thanks for filling in the safety questions everyone. Enjoy your jump!'
-            debug: true
+            debug: 'True'
         9:
             header: ¡Vamos!
             text: ¡Disfruta las aventuras en el nivel 9!
@@ -725,9 +725,8 @@ levels:
         4:
             header: Debugging
             text: Let's debug this code
-            code: ''
-            debug: true {print} '¡Señoras y señores!' {print} '¡Por una noche y sólo una noche en el circo Hedy!' actos = disparar desde un cañón, funambulismo, meterse en una maleta, gente = Iris la Increíble Achmed el Maravilloso Francis el Fantástico {for} gente {in} actos persona_elegida {is} gente
-                {random} persona_elegida ' hará ' act {add} persona_elegida {from} gente {print} '¡Ven a ver nuestro espectáculo esta noche!' {print} 'Las entradas sólo están disponibles en la taquilla
+            code: "{print} 'Ladies and gentlemen!'\n{print} 'For one night and one night only in circus Hedy!'\nacts = shoot out of a canon, walk the tightrope, pack themself in a suitcase,\npeople = Iris the Incredible Achmed the Amazing Francis the Fantastic\n    {for} people {in} acts\nchosen_person {is} people {random}\n    chosen_person ' will ' act\n{add} chosen_person {from} people\n{print} 'Come and watch our show tonight!'\n{print} 'Tickets are only available at the counter"
+            debug: true {print} '¡Señoras y señores!' {print} '¡Por una noche y sólo una noche en el circo Hedy!' actos = disparar desde un cañón, funambulismo, meterse en una maleta, gente = Iris la Increíble Achmed el Maravilloso Francis el Fantástico {for} gente {in} actos persona_elegida {is} gente {random} persona_elegida ' hará ' act {add} persona_elegida {from} gente {print} '¡Ven a ver nuestro espectáculo esta noche!' {print} 'Las entradas sólo están disponibles en la taquilla
         5:
             header: ¡Hora de programar!
             text: ¡Disfruta las aventuras en el nivel 10!
@@ -764,7 +763,7 @@ levels:
                 {repeat} {for} números {in} {range} 1 {to} 10 {times}
                     {print} Esta es la tabla de multiplicaciones por un factor
                     {print} número ' x ' factor ' = ' i * factor
-            debug: true
+            debug: 'True'
         5:
             header: ¡Comencemos a programar!
             text: ¡Disfruta las aventuras en el nivel 11!
@@ -829,7 +828,7 @@ levels:
                 {call} nuevo miembro
                     {else}
                         contraseña = {ask} 'Por favor, introduce contraseña'
-            debug: true
+            debug: 'True'
         8:
             header: ¿Listo para probarlo?
             text: ¡Disfruta de las aventuras en el nivel 12!
@@ -938,7 +937,7 @@ levels:
                     {call} felicidad {with} persona
                 {else} estado = triste
                     {define} tristeza {to} nombre
-            debug: true
+            debug: 'True'
         9:
             header: ¡Vamos!
             text: ¡Disfruta de las aventuras en el nivel 13!
@@ -1048,8 +1047,7 @@ levels:
             text: En este nivel aprenderás sobre los [corchetes] y cómo se usan.
         2:
             header: Corchetes
-            text: Vamos a hacer listas a la manera de Python, ¡con corchetes alrededor de las listas! También mantendremos las comillas alrededor de cada objeto como hemos aprendido en los niveles anteriores. Usamos corchetes para apuntar a un lugar en una lista. El comando en aleatorio ya no se puede
-                usar nunca más.
+            text: Vamos a hacer listas a la manera de Python, ¡con corchetes alrededor de las listas! También mantendremos las comillas alrededor de cada objeto como hemos aprendido en los niveles anteriores. Usamos corchetes para apuntar a un lugar en una lista. El comando en aleatorio ya no se puede usar nunca más.
             code: |-
                 amigos = ['Ahmed', 'Ben', 'Cayden']
                 {print} amigos[1] ' es el primer amigo en la lista.'
@@ -1096,8 +1094,7 @@ levels:
     18:
         1:
             header: Bienvenido al nivel 18
-            text: ¡Enhorabuena! ¡Has alcanzado el último nivel de Hedy! El código que has creado se puede copiar a un entorno de Python como replit o PyCharm, ¡y puedes continuar aprendiendo allí! Sin embargo ten en cuenta que Python sólo puede ller comandos en inglés, así que si has usado otros lenguajes,
-                tendrás ahora que cambiar a inglés.
+            text: ¡Enhorabuena! ¡Has alcanzado el último nivel de Hedy! El código que has creado se puede copiar a un entorno de Python como replit o PyCharm, ¡y puedes continuar aprendiendo allí! Sin embargo ten en cuenta que Python sólo puede ller comandos en inglés, así que si has usado otros lenguajes, tendrás ahora que cambiar a inglés.
         2:
             header: Al estilo Python
             text: |-
