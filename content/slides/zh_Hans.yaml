@@ -819,12 +819,12 @@ levels:
                 让我们看看如果你填写歌曲的其余部分会发生什么！
             code: |-
                 {define} twinkle
-                      {print} '闪烁'
-                      {print} '...'
+                    {print} '闪烁'
+                    {print} '...'
 
                 {call} twinkle
                 {print} '高于世界如此之高'
-                {print}“就像天空中的钻石”
+                {print} “就像天空中的钻石”
                 {call} twinkle
         6:
             header: 功能
@@ -884,7 +884,7 @@ levels:
                 运行代码并将“ocean”和“sea”更改为其他名称，然后查看会发生什么。
             code: |-
                 {define} song {with} 地点
-                     {print} "我的邦妮在这个地方"
+                    {print} "我的邦妮在这个地方"
 
                 {call} song {with} "海洋"
                 {call} song {with} "海"
@@ -904,7 +904,7 @@ levels:
                 ```
             code: |-
                 {define} song {with} place
-                     {print} '我的邦妮在' place
+                    {print} '我的邦妮在' place
 
                 {call} song {with} "海洋"
                 {call} song {with} "海"
