@@ -1427,7 +1427,7 @@ export const TRANSLATIONS: Record<string, Record<MessageKey, string>> = {
     "Transpile_success": "好样的！\n了不起！\n做的很好！\n棒极了！\n做的真棒！",
     "Transpile_warning": "警告！",
     "Unsaved_Changes": "你有一个未保存的程序。你想不保存就离开吗？",
-    "adventures_restored": "默认的冒险已经恢复！",
+    "adventures_restored": "默认的冒险已经恢复。",
     "copy_link_to_share": "复制链接以分享",
     "customization_deleted": "已成功删除自定义项。",
     "dice": "🎲",
