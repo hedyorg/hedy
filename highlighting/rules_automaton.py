@@ -23,6 +23,11 @@ def rule_level1():
             'next': 'value',
             'unicode': True
         }, {
+            'regex': START_LINE + get_translated_keyword("play"),
+            'token': ["text", 'keyword'],
+            'next': 'value',
+            'unicode': True
+        }, {
             'regex': START_LINE + get_translated_keyword("forward"),
             'token': ["text", 'keyword'],
             'next': 'value',

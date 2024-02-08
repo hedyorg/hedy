@@ -3,52 +3,40 @@ levels:
         1:
             question_text: بماذا تسمى لغة البرمجة هذه؟
             mp_choice_options:
-            -   option: Hedy
+            -   option: هيدي
                 feedback: أحسنت!
-            -   option: Heddy
+            -   option: هيددي
                 feedback: حاول مرة اخرى!
-            -   option: Haydie
+            -   option: هايدي
                 feedback: حاول مرة اخرى!
-            -   option: Heidi
+            -   option: هييدي
                 feedback: حاول مرة اخرى!
             hint: سميت على اسم هيدي لامار.
             correct_answer: A
             question_score: '10'
         2:
-            question_text: أي الأوامر التالية يطبع النص على الشاشة؟
-            code: ___ Hello!
+            question_text: أي الخيارات التالية يجب ملؤها في الفراغ لجعل النص "مرحبا" يظهر؟
+            code: _ مرحبا!
             mp_choice_options:
-            -   option: |-
-                    ```
-                    {echo}
-                    ```
+            -   option: '`{أجب}`'
                 feedback: '`{echo}` يعيد تكرار إجابة سؤال.'
-            -   option: |-
-                    ```
-                    {print}
-                     ```
+            -   option: '`{إطبع}`'
                 feedback: إجابة صحيحة!
-            -   option: |-
-                    ```
-                    اهلاً
-                    ```
-                feedback: مرحباً ليس أمراً.
-            -   option: |-
-                    ```
-                    {ask}
-                    ```
+            -   option: '`أهلا`'
+                feedback: أهلا ليست أمراً.
+            -   option: '`{إسأل}`'
                 feedback: مع `{ask}`، يمكنك طرح سؤال.
-            hint: _؟_ مرحبًا يا عالم!
+            hint: _أهلا يا عالم!
             correct_answer: B
             question_score: '10'
         3:
-            question_text: كيف تسأل شخص ما هو لونه المفضل؟
+            question_text: كيف تسأل ما هو اللون المفضل لشخص ما؟
             mp_choice_options:
             -   option: |-
                     ```
                     {print} ما هو لونك المفضل؟
                     ```
-                feedback: '`{print}` تطبع الكلام، ولكن لا يمكن استخدامها للسؤال.'
+                feedback: '`{print}` تطبع الكلام، ولكن هي لا تطرح الأسئلة.'
             -   option: |-
                     ```
                     {ask} {print} ما هو لونك المفضل؟
@@ -76,8 +64,8 @@ levels:
             mp_choice_options:
             -   option: '`{print}` مفقودة في السطر الاول.'
                 feedback: إجابة صحيحة!
-            -   option: التهجئة خاطئة في السطر الاول.
-                feedback: لا، التهجئة الخاطئة للنص لا تسبب مشكلة إلا إذا كان الخطأ فالأمر البرمجي فقط.
+            -   option: الأمر على السطر الثاني تهجأته خاطئة.
+                feedback: الأمر تهجأته صحيحة.
             -   option: '`{echo}` ليس أمراً.'
                 feedback: '`{echo}` يستخدم كأمر بالفعل، هناك خطأ أخر.'
             -   option: لا شئ! إنه كود ممتاز!
@@ -89,7 +77,7 @@ levels:
             question_text: ما هو الأمر المفقود في السطر 2؟
             code: |-
                 {ask} ما الحيوان الأليف المفضل لديك؟
-                _؟_ إذًا حيوانك الأليف المفضل هو...
+                _ إذًا حيوانك الأليف المفضل هو...
             mp_choice_options:
             -   option: |-
                     ```
@@ -157,7 +145,7 @@ levels:
             mp_choice_options:
             -   option: يمكن إستخدامه ل`{ask}` سؤال.
                 feedback: هذا ما يفعله الأمر `{ask}`!
-            -   option: يمكن إستخدامه لأطبع الكلام.
+            -   option: يمكن إستخدامه بنفس طريقة`{print}`.
                 feedback: هذا ما يفعله الأمر `{print}`!
             -   option: يمكن إستخدامه لتكرار إجابة سؤال.
                 feedback: أحسنت!
@@ -185,24 +173,24 @@ levels:
             correct_answer: B
             question_score: '10'
         10:
-            question_text: Which output will be in your outputscreen after you've run this code?
+            question_text: ما هو المخرج الذي سيكون على شاشة الإخراج بعد قيامك بتشغيل هذا الرمز؟
             code: |-
                 {ask} Are you ready to go to level 2?
                 {echo}
                 {echo}
             mp_choice_options:
             -   option: Are you ready to go to level 2?
-                feedback: There are two echo commands
+                feedback: هنالك أمرين لـ`{echo}`
             -   option: |-
                     Yes!
                     Yes!
                 feedback: Great job!
             -   option: Yes!
-                feedback: There are two echo commands
+                feedback: هنالك أمرين لـ`{echo}`
             -   option: |-
                     Are you ready to go to level 2?
                     Yes!
-                feedback: There are two echo commands
+                feedback: هنالك أمرين لـ`{echo}`
             hint: Let's go!
             correct_answer: B
             question_score: '10'
@@ -210,7 +198,7 @@ levels:
         1:
             question_text: اختر الجملة الصحيحة
             mp_choice_options:
-            -   option: يمكنك استخدام الأمر `{print}` لإنشاء سؤال
+            -   option: يمكنك استخدام الأمر `{print}` لطرح سؤال.
                 feedback: هذا عمل الأمر `{ask}`
             -   option: يمكنك استخدام الأمر `{ask}` لإعادة ترديد إجابتك
                 feedback: هذا ليس صحيحًا
@@ -3863,4 +3851,331 @@ levels:
                 feedback: Fantastic!
             hint: You need to use the {remove} command
             correct_answer: D
+            question_score: '10'
+    17:
+        1:
+            question_text: What is the output of this code?
+            code: |-
+                minions = ['Bob', 'Kevin', 'Stuart']
+                {for} x in minions:
+                    {print} x
+            mp_choice_options:
+            -   option: |-
+                    ```
+                    m i n i o n s
+                    ```
+                feedback: This is not it.
+            -   option: |-
+                    ```
+                    Bob
+                    Kevin
+                    Stuart
+                    ```
+                feedback: Correct!
+            -   option: |-
+                    ```
+                    minions
+                    minions
+                    minions
+                    ```
+                feedback: Take a look at the content of your list.
+            -   option: |-
+                    ```
+                    B o b K e v i n S t u a r t
+                    ```
+                feedback: Do not loop through the letters.
+            hint: Loop through your list.
+            correct_answer: B
+            question_score: '10'
+        2:
+            question_text: What is wrong with this code?
+            code: |-
+                seconds_minute = 60
+                minute_hour = 60
+                hour_day = 24
+                leap_year = 366
+                no_leap_year = 365
+                years = ask 'what year is it?'
+                {if} years = 2024:
+                 print seconds_minute * minute_hour * hour_day * leap_year
+                {else}:
+                 print seconds_minute * minute_hour * hour_day * noleap_year
+            mp_choice_options:
+            -   option: You cannot have so many variables.
+                feedback: This is not it.
+            -   option: The way the variables are multiplied is incorrect.
+                feedback: Not true!
+            -   option: One of the variables `noleap_year` does not belong with the `{if}` statement.
+                feedback: Keep looking for the mistake.
+            -   option: The `noleap_year` has to be identical in both cases.
+                feedback: Correct!
+            hint: Read the code carefully.
+            correct_answer: D
+            question_score: '10'
+        3:
+            question_text: How many hedgehogs will this code print?
+            code: |-
+                {for} x in range 1 to 3:
+                  {for} y in range 1 to 2:
+                    {print} 🦔
+            mp_choice_options:
+            -   option: |-
+                    ```
+                    🦔
+                    🦔
+                    🦔
+                    ```
+                feedback: Try again.
+            -   option: |-
+                    ```
+                    🦔
+                    🦔
+                    ```
+                feedback: One more try.
+            -   option: |-
+                    ```
+                    🦔
+                    🦔
+                    🦔
+                    🦔
+                    🦔
+                    🦔
+                    ```
+                feedback: Well done!
+            -   option: |-
+                    ```
+                    🦔
+                    🦔
+                    🦔
+                    🦔
+                    🦔
+                    ```
+                feedback: That is not it.
+            hint: Think about how many times you need repeating.
+            correct_answer: C
+            question_score: '10'
+        4:
+            question_text: What is wrong with code?
+            code: |-
+                name_color = {ask} 'What is your favorite color?'
+                {if} name_color == 'red':
+                  {print} 'the color of a tomato'
+                {elif} name_color == 'green':
+                  {print} 'the color of an apple'
+                {elif} name_color == 'blue':
+                  {print} 'the color of a blueberry'
+                {elif} name_color == 'yellow':
+                  {print} 'the color of a banana'
+                {elif}:
+                  {print} 'this fruit-color does not exist'
+            mp_choice_options:
+            -   option: The first `{elif}` should be used before the `print` command
+                feedback: Try again.
+            -   option: '`{elif}` can only be used once'
+                feedback: From now on we can use elif multiple times.
+            -   option: '`==` used with `{elif}` should be replaced by `=`'
+                feedback: Not correct.
+            -   option: '`{elif}` in the last line should be replaced by `{else}`'
+                feedback: Great!
+            hint: Think about `{if}`, `{elif}`, `{else}`.
+            correct_answer: D
+            question_score: '10'
+        5:
+            question_text: What is the output of this code?
+            code: |-
+                numbers = [7, 19, 29, 41, 53, 71, 79, 97]
+                {for} prime in numbers:
+                  {if} prime <= 10：
+                    {print} prime
+                  {elif} prime >= 60:
+                    {print} prime
+                  {elif} prime >= 90:
+                    {print} prime
+                  {else}:
+                    {print} 'another number'
+            mp_choice_options:
+            -   option: |-
+                    ```
+                    7
+                    another number
+                    another number
+                    another number
+                    another number
+                    71
+                    79
+                    97
+                    ```
+                feedback: Well done!
+            -   option: |-
+                    ```
+                    another number
+                    19
+                    29
+                    41
+                    53
+                    71
+                    79
+                    97
+                    ```
+                feedback: Try again.
+            -   option: |-
+                    ```
+                    7
+                    19
+                    29
+                    41
+                    53
+                    71
+                    79
+                    another number
+                    ```
+                feedback: One more try.
+            -   option: |-
+                    ```
+                    7
+                    19
+                    29
+                    41
+                    53
+                    71
+                    79
+                    97
+                    ```
+                feedback: That is not it.
+            hint: Think about how many times you need repeating and the values of if and elif.
+            correct_answer: A
+            question_score: '10'
+        6:
+            question_text: What is wrong with code?
+            code: |-
+                name = {ask} 'What is your name?'
+                {if} name == 'Hedy':
+                password = {ask} 'What is your password?'
+                    {if} password =='turtle123':
+                        {print} 'Yey'
+                    {else}:
+                        {print} 'Access denied'
+                {else}:
+                 {print} 'Go fish'
+            mp_choice_options:
+            -   option: '`{elif}` is missing.'
+                feedback: Try again.
+            -   option: '`{else}` can only be used once.'
+                feedback: From now on we can use elif multiple times.
+            -   option: Nothing!
+                feedback: There is a mistake. Look carefully!
+            -   option: There is an indentation mistake in the last line.
+                feedback: Amazing!
+            hint: There is a mistake somewhere...
+            correct_answer: D
+            question_score: '10'
+        7:
+            question_text: Which of the following codes will print five times 'the result is 3' on the screen?
+            mp_choice_options:
+            -   option: |-
+                    ```
+                     numbers = [1, 2 , 3, 4, 5]
+                     {for} n in numbers：
+                         result = n * 1
+                     {print} 'The result is ' result
+                    ```
+                feedback: Try again!
+            -   option: |-
+                    ```
+                    numbers = [1, 2, 3, 4, 5]
+                     {for} u in numbers：
+                         number = u
+                     {print} 'The result is ' number
+                    ```
+                feedback: That is not it.
+            -   option: |-
+                    ```
+                    numbers = [1, 2, 3, 4, 5]
+                     {for} number in numbers：
+                         number = 3
+                     {print} 'The result is ' number
+                    ```
+                feedback: Very good!
+            -   option: |-
+                    ```
+                    numbers = [1, 2 , 3, 4, 5]
+                     {for} n in numbers：
+                         n = result
+                     {print} 'The result is ' result
+                    ```
+                feedback: That is not it.
+            hint: Think about mathematical symbols.
+            correct_answer: C
+            question_score: '10'
+        8:
+            question_text: What is wrong with code?
+            code: |-
+                insects = ['🐝', '🦋', '🕷', '🐞']
+                your_favorite = {ask} 'what is your favorite insect?'
+                {for} insect in insects:
+                 {if} your_favorite == '🐝' {or} your_favorite == '🐞':
+                  {print} 'very useful'
+                 {elif} your_favorite == '🕷':
+                  {print} 'it can catch mosquitoes'
+                 {else}:
+                  {print} 'almost all insects can be useful one way or another'
+            mp_choice_options:
+            -   option: '`{or}` cannot be used with `{if}`.'
+                feedback: Try again.
+            -   option: In the `{for}` command `insect` should be `insects`.
+                feedback: Not true.
+            -   option: Nothing!
+                feedback: Well done!
+            -   option: There is an indentation mistake in the last line.
+                feedback: Nope.
+            hint: Read the code carefully.
+            correct_answer: C
+            question_score: '10'
+        9:
+            question_text: Which one of the codes below gave this output?
+            code: |-
+                -5 is negative
+                -4 is negative
+                -3 is negative
+                -2 is negative
+                -1 is negative
+                0 is positive
+                1 is positive
+                2 is positive
+                3 is positive
+            mp_choice_options:
+            -   option: "```\n {for} number in range -5 to 3:\n     {if} number > 0: \n      {print} number ' is positive'\n     {elif} number < 0: \n      {print} number ' is negative' \n    {else}: \n     {print} number ' is zero'\n```"
+                feedback: Try again!
+            -   option: "```\n {for} number in range -5 to 3:\n     {if} number > 0: \n      {print} number ' is positive'\n     {elif} number <= 0: \n     {print} number ' is negative' \n    {else}: \n     {print} number ' is zero'\n```"
+                feedback: That is not it.
+            -   option: "```\n {for} number in range -5 to 3:\n     {if} number >= 0: \n     {print} number ' is positive'\n     {elif} number < 0: \n     {print} number ' is negative' \n     {else}: \n     {print} number ' is zero'\n```"
+                feedback: Very good!
+            -   option: "```\n {for} number in range -5 to 3:\n     {if} number < 0: \n      {print} number ' is positive'\n     {elif} number <=0: \n     {print} number ' is negative' \n     {else}: \n     {print} number ' is zero'\n```"
+                feedback: That is not it.
+            hint: Read the code carefully.
+            correct_answer: C
+            question_score: '10'
+        10:
+            question_text: What is wrong with this code?
+            code: |-
+                {for} number in range 1 to 5:
+                  volume_room = num * num * num
+                  {print} volume_room ' cubic meters'
+                    {if} volume_room > 100:
+                      {print} 'this is a large room'
+                    {elif} volume_room < 100:
+                      {print} 'small room but cosy'
+                    {else}:
+                      {print} 'i will look for something else'
+            mp_choice_options:
+            -   option: The word num needs quotation marks.
+                feedback: Try again.
+            -   option: The `{if}` command is not used correctly.
+                feedback: Not true.
+            -   option: Line 3 should be `volume_room = number * number * number`.
+                feedback: Well done!
+            -   option: There is an indentation mistake in the last line.
+                feedback: Nope.
+            hint: Read the code carefully.
+            correct_answer: C
             question_score: '10'

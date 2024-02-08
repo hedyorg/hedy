@@ -50,7 +50,7 @@ the desired level.
 it will allow you to see in the `highlighting-*.json` files the new regexes
 
 - If you want to see the changes in Hedy, you will also have to
-regenerate the javascript. This is done by running the
-`./build-tools/heroku/generate-typescript` file
+regenerate the javascript. This is done by running `doit run typescript`
+on the command line.
 
 

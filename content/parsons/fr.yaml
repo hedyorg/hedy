@@ -136,7 +136,7 @@ levels:
                 {repeat} 3 {times} {print} 'Daddy shark tututututudu'
                 {print} 'Daddy shark'
         2:
-            story: Crée la chanson « Les roues de l’autobus tournent tournent »
+            story: Écris la chanson « Les roues de l’autobus tournent tournent »
             code: |-
                 {print} "Les roues de l'autobus tournent tournent"
                 {repeat} 2 {times} {print} "Tournent tournent,"
@@ -146,12 +146,12 @@ levels:
         1:
             story: |-
                 Tu joues à Pokémon Go avec quatre amis ! Crée un programme qui va décider pour chacun de vous l'équipe dans laquelle vous allez jouer.
-                Ce sera soit rouge, soit jaune, soit bleu ! Fais une pause après avoir annoncé une équipe.
+                Ce sera soit rouge, soit jaune, soit bleu ! Fais une pause après avoir annoncé une équipe.
             code: |-
                 équipes = rouge, jaune, bleu
-                {print} 'Rouge, Jaune ou Bleu ?'
+                {print} "Rouge, Jaune ou Bleu ?"
                 {repeat} 5 {times}
-                    {print} "Tu es sélectionné dans l'équipe... "
+                    {print} "Tu es sélectionné dans l'équipe… "
                     {print} équipes {at} {random}
                     sleep 2
         2:
@@ -165,60 +165,58 @@ levels:
                 {print} "Caché(e) ou pas, j'arrive !"
     9:
         1:
-            story: This game will give you three maths assignments. Each time the question is different. Can you figure out the order?
+            story: Ce jeu te pose trois questions de maths. À chaque fois une question différente. Peux-tu trouver le bon ordre ?
             code: |-
-                numbers = 1, 2, 3, 4, 5, 6, 7, 8, 9, 10
+                nombres = 1, 2, 3, 4, 5, 6, 7, 8, 9, 10
                 {repeat} 3 {times}
-                    number = numbers {at} {random}
-                    correct_answer = 5 * number
-                    answer = {ask} 'What is 5 times' number '?'
-                    {if} answer = correct_answer
-                        {print} 'Good job!'
+                    nombre = nombres {at} {random}
+                    bonne_réponse = 5 * nombre
+                    réponse = {ask} "Combien font 5 fois " nombre " ?"
+                    {if} réponse = bonne_réponse
+                        {print} "Bon travail !"
                     {else}
-                        {print} 'No! The correct answer is ' correct_answer
+                        {print} "Non ! La bonne réponse est " bonne_réponse
         2:
-            story: |-
-                This code asks the costumers in a restaurant if they would like to order dessert. If they do, it asks them what kind of dessert. If they order tiramisu they are told that the tiramisu is sold out.
-                Can you get the code to work?
+            story: Ce code demande à une personne dans un restaurant si elle veut commander un dessert. Si c'est le cas, il demande le type de dessert. Si elle commande un tiramisu, on lui dit qu'il n'y en a plus.
             code: |-
-                order = {ask} 'Would you like to order dessert?'
-                {if} order = yes
-                    dessert = {ask} 'What kind of dessert would you like?'
+                commande = {ask} "Voulez-vous commander un dessert ?"
+                {if} commande = oui
+                    dessert = {ask} "Quel dessert voulez-vous ?"
                     {if} dessert = tiramisu
-                        {print} 'Sorry, we are out of tiramisu.'
+                        {print} "Désolé, nous n'avons plus de tiramisus."
                     {else}
-                        {print} 'One ' dessert ' coming right up!'
+                        {print} "un " dessert ". Ce sera prêt dans une minute !"
                 {else}
-                    {print} 'You dont want a dessert. No problem!'
+                    {print} "Vous ne voulez pas de dessert. Pas de problème !"
     10:
         1:
             story: |-
-                Help this family out by creating a schedule of who is cooking and what they should be making this week. The remove commands make sure nobody has to cook twice and they have a differnet dinner every day.
-                **Mind!** the variable order should be first days, then people, and lastly dinner_options. This goes for the lines with the remove commands too.
+                Aide cette famille en créant un planning indiquant qui va cuisiner et ce qu'il ou elle devra préparer cette semaine. Les commandes `{remove}` sont là pour éviter que la même personne cuisine deux fois et que ce soit le même dîner tous les jours.
+                **Attention !** l'ordre des variables est en premier « jours », ensuite « personnes », et finalement « choix_dinner ». Et c'est aussi le cas pour les commandes `{remove}`.
             code: |-
-                days = Monday, Tuesday, Wednesday, Thursday, Friday
-                people = mom, dad, Martin, Abby, Jesse
-                dinner_options = pizza, tacos, pancakes, a salad, lasagne
-                {for} day {in} days
-                    chosen_person = people {at} {random}
-                    chosen_dinner = dinner_options {at} {random}
-                    {print} 'On ' day ' ' chosen_person ' is making ' chosen_dinner
-                    {remove} chosen_person {from} people
-                    {remove} chosen_dinner {from} dinner_options
+                jours = lundi, mardi, mercredi, jeudi, vendredi
+                personnes = maman, papa, Martin, Gabrielle, Julie
+                choix_dîner = une pizza, un tacos, des crêpes, une salade, des lasagnes
+                {for} jour {in} jours
+                    personne_choisie = personnes {at} {random}
+                    dîner_choisi = choix_dîner {at} {random}
+                    {print} jour " " personne_choisie " doit préparer " dîner_choisi
+                    {remove} personne_choisie {from} personnes
+                    {remove} dîner_choisi {from} choix_dîner
         2:
             story: |-
-                This make-over robot will decide your new hairstyle for you. If you do not agree with the first choice, you can try again.
-                **Mind** The variable people is defined in the first line. The variable hairstyles in the second.
+                Ce robot coiffeur va décider de ta nouvelle coupe de cheveux. Si tu n'es pas d'accord avec son premier choix, tu peux réessayer.
+                **Attention** La variable « personne » est définie à la première ligne. La variable « coupe_de_cheveux » à la seconde.
             code: |-
-                people = Betty, Amanda, Marc
-                hairstyles = a bald head, a mohawk, a ponytail, spikes
-                {for} person {in} people
-                    {print} person ' will get ' hairstyles {at} {random}
-                    happy = {ask} person ', are you happy with this choice?'
-                    {if} happy {is} yes
-                        {print} 'Great'
+                personnes = Betty, Amanda, Marc
+                coupe_de_cheveux = la tête rasée, une crête, une queue de cheval, des pointes
+                {for} personne {in} personnes
+                    {print} personne " aura " coupe_de_cheveux {at} {random}
+                    accord = {ask} personne ", cette coupe de cheveux te plaira-t-elle ?"
+                    {if} accord {is} oui
+                        {print} "Génial"
                     {else}
-                        {print} 'Lets try again... Then 'person ' will get ' hairstyles {at} {random}
+                        {print} " Essayons encore… " personne " aura " coupe_de_cheveux {at} {random}
     11:
         1:
             story: Create the count down clock for New Year's eve! The program should show the numbers from 10 to 1 for a second and then wish you a happy new year.

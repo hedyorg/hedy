@@ -167,7 +167,7 @@ strong {
 }
 
 
-.green-btn:hover:enabled, 
+.green-btn:hover:enabled,
 a.green-btn:hover {
   @apply bg-green-400 border-green-500;
   @apply active:bg-green-700 active:border-green-700;
@@ -762,7 +762,7 @@ input:checked ~ .toggle-path {
   height: 17px;
 }
 
-.switch input { 
+.switch input {
   opacity: 0;
   width: 0;
   height: 0;
@@ -793,7 +793,7 @@ input:checked ~ .toggle-path {
 }
 
 input:checked + .slider {
-  @apply bg-green-500  
+  @apply bg-green-500
 }
 
 input:checked + .slider:before {
@@ -846,3 +846,14 @@ div[class^="ace_incorrect_hedy_code"] {
 .student_adventure_checkbox:checked {
   @apply relative bg-green-300 rounded border-gray-500 !important
 }
+
+/* Make the CodeMirror editor take up the entire available height of its container
+   and add a scroll bar (source: https://discuss.codemirror.net/t/how-to-set-max-height-of-the-editor/2882)
+
+   But only for the editor page (readonly editors can be as high as is necessary)
+   */
+.fixed-editor-height .cm-editor { @apply h-full; }
+.fixed-editor-height .cm-scroller { @apply overflow-x-auto };
+
+/* Remove the margin between the scroll bar and the side of the container */
+.cm-editor { margin-right: 0px !important; }

@@ -1285,16 +1285,13 @@ levels:
             correct_answer: D
             question_score: '10'
         4:
-            question_text: Quel mot est incorrect dans ce code ?
+            question_text: Quel mot est incorrect dans ce code ?
             code: |-
                 {print} "J'aime le " couleur
                 {repeat} 7 {times} {print} "da ba di, da ba da"
             mp_choice_options:
-            -   option: |-
-                    ```
-                    couleur
-                    ```
-                feedback: C'est ça ! La variable est inconnue
+            -   option: '`couleur`'
+                feedback: C'est ça ! La variable est inconnue
             -   option: '`{print}`'
                 feedback: '`{print}` est écrit correctement'
             -   option: '`{repeat}`'
@@ -1322,24 +1319,32 @@ levels:
                 {repeat} 2 {times} {print} "Tournent tournent"
             mp_choice_options:
             -   option: |-
+                    ```
                     Les roues de l’autobus tournent tournent
                     Tournent tournent
+                    ```
                 feedback: La deuxième ligne est répétée 2 fois
             -   option: |-
+                    ```
                     Les roues de l’autobus tournent tournent
                     Les roues de l’autobus tournent tournent
                     Tournent tournent
+                    ```
                 feedback: C'est la deuxième ligne qui est répétée 2 fois
             -   option: |-
+                    ```
                     Les roues de l’autobus tournent tournent
                     Tournent tournent
                     Les roues de l’autobus tournent tournent
                     Tournent tournent
+                    ```
                 feedback: Seule la deuxième ligne est répétée 2 fois
             -   option: |-
+                    ```
                     Les roues de l’autobus tournent tournent
                     Tournent tournent
                     Tournent tournent
+                    ```
                 feedback: Dans toute la ville ! Parfait !
             hint: Seul « Tournent tournent » est répété 2 fois
             correct_answer: D
@@ -1417,14 +1422,14 @@ levels:
             correct_answer: A
             question_score: '10'
         9:
-            question_text: Quel code
+            question_text: Quel code faut-il pour afficher ça ?
             code: |-
                 Batman survolait Gotham.
                 Quand soudain, il a entendu quelqu'un crier…
-                Au secours !
-                Au secours !
-                Au secours !
-                S'il vous plait, aidez-moi !
+                Au secours !
+                Au secours !
+                Au secours !
+                S'il vous plait, aidez-moi !
             mp_choice_options:
             -   option: |-
                     ```
@@ -1464,37 +1469,37 @@ levels:
         10:
             question_text: Quel code faut-il pour afficher ça ?
             code: |-
-                Si tu es content tape dans tes mains !
-                Si tu es content tape dans tes mains !
-                Si tu es vraiment content tape dans tes mains !
-                Si tu es content tape dans tes mains !
+                Si tu es content, tape dans tes mains !
+                Si tu es content, tape dans tes mains !
+                Si tu es vraiment content, tape dans tes mains !
+                Si tu es content, tape dans tes mains !
             mp_choice_options:
             -   option: |-
                     ```
-                    {repeat} 2 {times} "Si tu es content tape dans tes mains !"
-                    {print} “Si tu es vraiment content tape dans tes mains !"
-                    {print} "Si tu es content tape dans tes mains !"
+                    {repeat} 2 {times} "Si tu es content, tape dans tes mains !"
+                    {print} “Si tu es vraiment content, tape dans tes mains !"
+                    {print} "Si tu es content, tape dans tes mains !"
                     ```
                 feedback: Presque ! La première ligne a besoins d'un mot supplémentaire
             -   option: |-
                     ```
-                    {repeat} 2 {times} {print} "Si tu es content tape dans tes mains !"
-                    {print} "Si tu es vraiment content tape dans tes mains !"
-                    {print} "Si tu es content tape dans tes mains !"
+                    {repeat} 2 {times} {print} "Si tu es content, tape dans tes mains !"
+                    {print} "Si tu es vraiment content, tape dans tes mains !"
+                    {print} "Si tu es content, tape dans tes mains !"
                     ```
                 feedback: Super !
             -   option: |-
                     ```
-                    {repeat} 3 {times} "Si tu es content tape dans tes mains !"
-                    {print} "Si tu es vraiment content tape dans tes mains !"
+                    {repeat} 3 {times} "Si tu es content, tape dans tes mains !"
+                    {print} "Si tu es vraiment content, tape dans tes mains !"
                     ```
                 feedback: Ce n'est pas le bon ordre.
             -   option: |-
                     ```
                     {repeat} 4 {times} "Si tu es "
-                    {repeat} 2 {times} "content tape dans tes mains !"
-                    {print} "vraiment content tape dans tes mains !"
-                    {print} "content tape dans tes mains !"
+                    {repeat} 2 {times} "content, tape dans tes mains !"
+                    {print} "vraiment content, tape dans tes mains !"
+                    {print} "content, tape dans tes mains !"
                     ```
                 feedback: Ce n'est pas le bon ordre.
             hint: Fais attention à l'ordre des phrases.
@@ -1502,776 +1507,849 @@ levels:
             question_score: '10'
     8:
         1:
-            question_text: Which output will be produced by this code?
+            question_text: Que va écrire ce code ?
             code: |-
                 {repeat} 2 {times}
-                    {print} 'Hello'
-                    {print} 'Im Hedy!'
+                    {print} "Bonjour"
+                    {print} "Je suis Hedy !"
             mp_choice_options:
             -   option: |-
-                    Hello
-                    Im Hedy!
-                feedback: Everything is printed twice.
+                    ```
+                    Bonjour
+                    Je suis Hedy !
+                    ```
+                feedback: Tout est écrit deux fois.
             -   option: |-
-                    Hello
-                    Hello
-                    Im Hedy
-                feedback: The second line is repeated twice as well.
+                    ```
+                    Bonjour
+                    Bonjour
+                    Je suis Hedy !
+                    ```
+                feedback: La deuxième ligne est répétée deux fois aussi.
             -   option: |-
-                    Hello
-                    Im Hedy!
-                    Hello
-                    Im Hedy!
-                feedback: Super!
+                    ```
+                    Bonjour
+                    Je suis Hedy !
+                    Bonjour
+                    Je suis Hedy !
+                    ```
+                feedback: Super !
             -   option: |-
-                    Hello
-                    Hello
-                    Im Hedy!
-                    Im Hedy!
-                feedback: Everything is printed twice
-            hint: Both lines are repeated twice.
+                    ```
+                    Bonjour
+                    Bonjour
+                    Je suis Hedy !
+                    Je suis Hedy !
+                    ```
+                feedback: L'ensemble est écrit deux fois.
+            hint: Les deux lignes sont répétées deux fois.
             correct_answer: C
             question_score: '10'
         2:
-            question_text: What is wrong with this code?
+            question_text: Qu'est-ce qui ne va pas avec ce code ?
             code: |-
                 {repeat} 5 {times}
-                {print} 'Hedy is cool!'
+                {print} "Hedy est cool !"
             mp_choice_options:
-            -   option: This should be only one line, not 2.
-                feedback: No it should be 2 lines.
-            -   option: This `{print}` command has to go
-                feedback: No, you need it.
-            -   option: There is a spelling mistake in the `{repeat}` command.
-                feedback: Nee, repeat is de goede spelling
-            -   option: The second line need to start with 4 spaces as indentation.
-                feedback: Correct!
-            hint: Something is missing in the second line?
+            -   option: Tout devrait être écrit sur une ligne et non deux.
+                feedback: Non, il faut bien écrire sur deux lignes.
+            -   option: La commande `{print}` doit être supprimée.
+                feedback: Non, tu dois la garder.
+            -   option: Il y a une faute de frappe à la commande `{repeat}`.
+                feedback: Non, `{repeat}` est bien orthographié.
+            -   option: La deuxième ligne doit démarrer avec une indentation de 4 espaces.
+                feedback: Correct !
+            hint: Quelque chose manque à la deuxième ligne ?
             correct_answer: D
             question_score: '10'
         3:
-            question_text: What output will be produced when you run this program?
+            question_text: Que va écrire ce programme si tu l'exécutes ?
             code: |-
                 {repeat} 3 {times}
-                    {print} 'Baby shark tututudutudu'
-                {print} 'Baby shark'
+                    {print} "Baby shark tututudutudu"
+                {print} "Baby shark"
             mp_choice_options:
             -   option: |-
+                    ```
                     Baby shark tututudutudu
                     Baby shark
-                feedback: Mind the `{repeat}` command!
+                    ```
+                feedback: Attention à la commande `{repeat}` !
             -   option: |-
+                    ```
                     Baby shark tututudutudu
                     Baby shark
                     Baby shark tututudutudu
                     Baby shark
                     Baby shark tututudutudu
                     Baby shark
-                feedback: The last line has no indentation, so it's not repeated.
+                    ```
+                feedback: La dernière ligne n'a pas d'indentation, elle n'est pas répétée.
             -   option: |-
+                    ```
                     Baby shark tututudutudu
                     Baby shark tututudutudu
                     Baby shark tututudutudu
                     Baby shark
-                feedback: Right!
+                    ```
+                feedback: C'est ça !
             -   option: |-
+                    ```
                     Baby shark tututudutudu
                     Baby shark
                     Baby shark
                     Baby shark
-                feedback: What is being repeated and what isn't.
-            hint: What is being repeated and what is not?.
+                    ```
+                feedback: Qu'est-ce qui est répété et qu'est-ce qui ne l'est pas ?
+            hint: Qu'est-ce qui est répété et qu'est-ce qui ne l'est pas ?
             correct_answer: C
             question_score: '10'
         4:
-            question_text: Which output is correct?
+            question_text: Quel sera le bon résultat ?
             code: |-
-                {print} 'The children went:'
+                {print} "Les enfants disaient :"
                 {repeat} 2 {times}
-                    {print} 'Yay!'
-                    {print} 'Were going on holiday!'
+                    {print} "Youpi !"
+                    {print} "C'est les vacances !"
             mp_choice_options:
             -   option: |-
-                    The children went:
-                    Yay!
-                    Were going on holiday!
-                feedback: Mind the `{repeat}` command !
+                    ```
+                    Les enfants disaient :
+                    Youpi !
+                    C'est les vacances !
+                    ```
+                feedback: Attention à la commande `{repeat}` !
             -   option: |-
-                    The children went:
-                    Yay!
-                    Were going on holiday!
-                    Yay!
-                    Were going on holiday!
-                feedback: Correct!
+                    ```
+                    Les enfants disaient :
+                    Youpi !
+                    C'est les vacances !
+                    Youpi !
+                    C'est les vacances !
+                    ```
+                feedback: Bien !
             -   option: |-
-                    The children went:
-                    Yay!
-                    Yay!
-                    Were going on holiday!
-                    Were going on holiday!
-                feedback: This order is incorrect.
+                    ```
+                    Les enfants disaient :
+                    Youpi !
+                    Youpi !
+                    C'est les vacances !
+                    C'est les vacances !
+                    ```
+                feedback: Ce n'est pas le bon ordre.
             -   option: |-
-                    The children went:
-                    Yay!
-                    Yay!
-                    Were going on holiday!
-                feedback: The last line is repeated too.
-            hint: The block under the `{repeat}` command is repeated twice.
+                    ```
+                    Les enfants disaient :
+                    Youpi !
+                    Youpi !
+                    C'est les vacances !
+                    ```
+                feedback: La dernière ligne est répétée aussi.
+            hint: Le bloc sous la commande `{repeat}` est répété deux fois.
             correct_answer: B
             question_score: '10'
         5:
-            question_text: What is wrong with this code?
+            question_text: Qu'est-ce qui ne va pas avec ce code ?
             code: |-
-                end = {ask} 'Do you want a happy or a sad ending?'
-                {if} end {is} happy {print} 'They lived happily ever after'
-                {else} {print} 'The world exploded. The end.'
+                fin = {ask} "Voulez-vous une fin heureuse ou triste ?"
+                {if} fin {is} heureuse {print} "Ils vécurent heureux jusqu'a la fin des temps"
+                {else} {print} "Le monde explosa. Fin."
             mp_choice_options:
-            -   option: The `{print}` commands on the last two lines should start on new lines en start with 4 spaces.
-                feedback: That's right!
-            -   option: '`{else}` is not a command!'
-                feedback: It is!
-            -   option: Lines that start with `{if}` should start with 4 spaces
-                feedback: That's not true
-            -   option: '`{ask}` is no longer a command'
-                feedback: That's not true
-            hint: Something is wrong with indentation
+            -   option: Les commandes `{print}` des deux dernières lignes devraient démarrer à la ligne suivante avec 4 espaces.
+                feedback: C'est exactement ça !
+            -   option: '`{else}` n''est pas une commande !'
+                feedback: Si c'en est une !
+            -   option: Les lignes qui commencent par `{if}` devraient commencer par 4 espaces.
+                feedback: Ce n'est pas vrai
+            -   option: '`{ask}` n''est plus une commande'
+                feedback: Ce n'est pas vrai
+            hint: Il y a un problème d'indentation
             correct_answer: A
             question_score: '10'
         6:
-            question_text: What will be the output of this code when we enter pancakes?
+            question_text: Que verra-t-on dans l'écran de sortie quand nous répondrons « Des crêpes » ?
             code: |-
-                {print} 'Welcome to restaurant Hedy'
+                {print} "Bienvenue au restaurant Chez Hedy"
                 {repeat} 2 {times}
-                    food {is} {ask} 'What do you want to eat?'
-                    {print} food
+                    plat {is} {ask} "Que voulez-vous manger ?"
+                    {print} plat
             mp_choice_options:
             -   option: |-
-                    Welcome to restaurant Hedy
-                    Pancakes
-                feedback: There is no repetition in this answer.
+                    ```
+                    Bienvenue au restaurant Chez Hedy
+                    Des crêpes
+                    ```
+                feedback: Il manque une répétition dans cette réponse.
             -   option: |-
-                    Welcome to restaurant Hedy
-                    Welcome to restaurant Hedy
-                    Pancakes
-                    Pancakes
-                feedback: This answer also repeats the welcome message
+                    ```
+                    Bienvenue au restaurant Chez Hedy
+                    Bienvenue au restaurant Chez Hedy
+                    Des crêpes
+                    Des crêpes
+                    ```
+                feedback: Cette réponse répète aussi le message de bienvenue !
             -   option: |-
-                    Welcome to restaurant Hedy
-                    What do you want to eat?
-                    What do you want to eat?
-                    Pancakes
-                    Pancakes
-                feedback: Almost! But look at the question, it is not repeated.
+                    ```
+                    Bienvenue au restaurant Chez Hedy
+                    Que voulez-vous manger ?
+                    Des crêpes
+                    Que voulez-vous manger ?
+                    Des crêpes
+                    ```
+                feedback: Presque ! Mais la question ne sera pas réécrite dans l'écran de sortie.
             -   option: |-
-                    Welcome to restaurant Hedy
-                    Pancakes
-                    Pancakes
-                feedback: Well done!
-            hint: The first sentence and question will not be repeated
+                    ```
+                    Bienvenue au restaurant Chez Hedy
+                    Des crêpes
+                    Des crêpes
+                    ```
+                feedback: Bien joué !
+            hint: La première phrase n'est pas répétée et la question n'apparait pas dans l'écran de sortie
             correct_answer: D
             question_score: '10'
         7:
-            question_text: What is wrong with this code?
+            question_text: Qu'est-ce qui ne va pas avec ce code ?
             code: |-
-                eten = {ask} 'What would you like to eat?'
-                {if} food {is} fries
-                sauce = {ask} 'What sauce would you like?'
-                    {print} 'One fries with ' sauce
-                {if} food {is} pizza
-                    topping = {ask} 'What topping would you like?'
-                    {print} 'One pizza with ' topping
-                {print} 'That you for your order'
+                plat = {ask} "Que voulez-vous manger ?"
+                {if} plat {is} frites
+                sauce = {ask} "Quelle sauce voulez-vous ?"
+                    {print} "Une frite avec " sauce
+                {if} plat {is} pizza
+                    garniture = {ask} "Que voulez-vous en garniture ?"
+                    {print} "Une pizza au " topping
+                {print} "Merci pour votre commande"
             mp_choice_options:
-            -   option: Nothing this code is correct!
-                feedback: Something is wrong!.
-            -   option: You're not allowed to use an `{if}` command after an `{ask}` command.
-                feedback: You are!.
-            -   option: You don't have to use indentation twice. Only in the first `{if}` command.
-                feedback: You always have to use indentation.
-            -   option: The indentation is wrong in the first `{if}` command.
-                feedback: That's right.
-            hint: Take a careful look at the indentation.
+            -   option: Rien, ce code est correct !
+                feedback: Quelque chose ne va pas !
+            -   option: Il n'est pas possible d'utiliser une commande `{if}` après une commande `{ask}`.
+                feedback: Si, c'est possible.
+            -   option: Il n'est pas nécessaire d'utiliser l'indentation deux fois. Seulement pour la première commande `{if}`.
+                feedback: Tu dois utiliser l'indentation à chaque fois.
+            -   option: L'indentation n'est pas bonne pour la première commande `{if}`.
+                feedback: C'est ça.
+            hint: Regarde attentivement les indentations.
             correct_answer: D
             question_score: '10'
         8:
-            question_text: In which of the codes is the indentation done right?
+            question_text: Dans lequel de ces codes les indentations sont-elles correctes ?
             mp_choice_options:
             -   option: |-
                     ```
-                    {if} answer is right
-                       {print} You are...
-                          sleep
-                              {print} right!
+                    {if} réponse {is} 32
+                       {print} "Tu as… "
+                          {sleep}
+                              {print} "raison !"
                           {else}
-                              {print} You are wrong!
+                              {print} "Mauvaise réponse !"
                     ```
-                feedback: You are wrong!
+                feedback: Mauvaise réponse !
             -   option: |-
                     ```
-                    {if} answer is right
-                    {print} You are...
-                    sleep
-                    {print} right!
+                    {if} réponse {is} 32
+                    {print} "Tu as… "
+                    {sleep}
+                    {print} "raison !"
                     {else}
-                    {print} You are wrong!
+                    {print} "Mauvaise réponse !"
                     ```
-                feedback: You are wrong!
+                feedback: Mauvaise réponse !
             -   option: |-
                     ```
-                    {if} answer is right
-                        {print} You are...
-                        sleep
-                        {print} right!
+                    {if} réponse {is} 32
+                         {print} "Tu as… "
+                         {sleep}
+                         {print} "raison !"
                     {else}
-                        {print} You are wrong!
+                        {print} "Mauvaise réponse !"
                     ```
-                feedback: You are... right!
+                feedback: Tu as… raison !
             -   option: |-
                     ```
-                    {if} answer is right
-                        {print} You are...
-                        sleep
-                    {print} right!
+                    {if} réponse {is} 32
+                         {print} "Tu as… "
+                         {sleep}
+                    {print} "raison !"
                     {else}
-                        {print} You are wrong!
+                        {print} "Mauvaise réponse !"
                     ```
-                feedback: You are wrong!
-            hint: What should happen if the person is right? And what else?
+                feedback: Mauvaise réponse !
+            hint: Que devrait-il se passer si la personne a raison ? Et sinon ?
             correct_answer: C
             question_score: '10'
         9:
-            question_text: What line(s) in this code should start with 4 spaces?
+            question_text: Quelles ligne(s) de ce code devraient commencer par 4 espaces ?
             code: |-
-                1 music = {ask} 'What is your favorite music genre?'
-                2 {if} music is rock
-                3 {print} '🤘'
+                1 genre = {ask} "Quel est votre genre de musique préféré ?"
+                2 {if} genre {is} rock
+                3 {print} "🤘"
                 4 {else}
-                5 {print} '👎'
+                5 {print} "👎"
             mp_choice_options:
-            -   option: Line 2 and 4
-                feedback: The lines after the `{if}` and `{else}` command should start with 4 spaces
-            -   option: Only line 3
-                feedback: Not only 3...
-            -   option: Line 3, 4 and 5
-                feedback: Line 4 shouldn't
-            -   option: Line 3 and 5
-                feedback: Excellent travail !
-            hint: The lines after an `{if}` or `{else}` command should start with 4 spaces.
+            -   option: Lignes 2 et 4
+                feedback: Les lignes après le `{if}` et le `{else}` doivent commencer par 4 espaces
+            -   option: Seulement la ligne 3
+                feedback: Pas seulement la 3…
+            -   option: Lignes 3, 4 et 5
+                feedback: La ligne 4 ne devrait pas
+            -   option: Lignes 3 et 5
+                feedback: Bon travail !
+            hint: Les lignes après un `{if}` ou un `{else}` doivent commencer par 4 espaces.
             correct_answer: D
             question_score: '10'
         10:
-            question_text: Which statement is true?
+            question_text: Quelle affirmation est vraie ?
             code: |-
                 1 niveau = {ask} "À quel niveau te trouves-tu ?"
                 2 {if} niveau {is} 8
-                3 {print} "Excellent travail !"
+                3 {print} "Bon travail !"
             mp_choice_options:
-            -   option: All lines should start with 4 spaces
-                feedback: That's not true
-            -   option: Line 2 and 3 should start with 4 spaces
-                feedback: That's not true
-            -   option: Line 2 should start with 4 spaces
-                feedback: That's not true
-            -   option: Line 3 should start with 4 spaces
-                feedback: You are correct!
-            hint: Only one line starts with 4 spaces, but which one...?
+            -   option: Toutes les lignes doivent commencer par 4 espaces
+                feedback: Ce n'est pas vrai
+            -   option: Les lignes 2 et 3 doivent commencer par 4 espaces
+                feedback: Ce n'est pas vrai
+            -   option: La ligne 2 doit commencer par 4 espaces
+                feedback: Ce n'est pas vrai
+            -   option: La ligne 3 doit commencer par 4 espaces
+                feedback: Tu as raison !
+            hint: Seule une ligne doit commencer par 4 espaces, mais laquelle… ?
             correct_answer: D
             question_score: '10'
     9:
         1:
-            question_text: What is wrong with this code?
+            question_text: Qu'est-ce qui ne va pas avec ce code ?
             code: |-
                 {repeat} 3 {times}
-                   eten = {ask} 'What would you like to eat?'
-                   {if} food {is} fries
-                       sauce = {ask} 'What sauce would you like?'
-                       {print} 'One fries with ' sauce
-                   {if} food {is} pizza
-                       topping = {ask} 'What topping would you like?'
-                       {print} 'One pizza with ' topping
-                {print} 'That you for your order'
+                   plat = {ask} "Que voulez-vous manger ?"
+                   {if} plat {is} frites
+                       sauce = {ask} "Quelle sauce voulez-vous ?"
+                       {print} "Une frite avec " sauce
+                   {if} plat {is} pizza
+                       garniture = {ask} "Quelle garniture voulez-vous ?"
+                       {print} "Une pizza avec " garniture
+                {print} "Merci pour votre commande"
             mp_choice_options:
-            -   option: Nothing this code is correct!
-                feedback: That's right!.
-            -   option: You're not allowed to use an `{if}` command after an `{ask}` command.
-                feedback: You are!.
-            -   option: You don't have to use indentation twice.
-                feedback: You always have to use indentation.
-            -   option: The indentation is wrong in the last `{if}` command.
-                feedback: It not, though.
-            hint: all the indentation is done correctly.
+            -   option: Rien, ce code est correct !
+                feedback: C'est vrai !
+            -   option: Il n'est pas possible d'utiliser une commande `{if}` après une commande `{ask}`.
+                feedback: Si, ça l'est !
+            -   option: Ce n'est pas nécessaire d'utiliser l'indentation deux fois.
+                feedback: Il faut toujours utiliser l'indentation.
+            -   option: L'indentation n'est pas bonne pour la dernière commande `{if}`.
+                feedback: Ce n'est pas un problème d'indentation.
+            hint: Toutes les indentations sont bonnes.
             correct_answer: A
             question_score: '10'
         2:
-            question_text: What will be printed after entering the correct password?
+            question_text: Qu'est-ce qui sera affiché après avoir entré le bon mot de passe ?
             code: |-
-                password = {ask} 'What is the password?'
-                correct_password = Hedy
-                {if} password {is} correct_password
+                mot_de_passe = {ask} "Quel est le mot de passe ?"
+                mot_de_passe_correct = Hedy
+                {if} mot_de_passe {is} mot_de_passe_correct
                     {repeat} 2 {times}
-                        {print} 'Good job!'
-                        {print} 'You can use the computer!'
+                        {print} "Bon travail !"
+                        {print} "Tu peux utiliser l'ordinateur !"
                 {else}
-                    {print} 'The computer will explode in 5... 4... 3... 2... 1...'
+                    {print} "L'ordinateur va exploser dans 5… 4… 3… 2… 1…"
             mp_choice_options:
             -   option: |-
-                    Good job!
-                    Good job!
-                feedback: That's not it!
-            -   option: The computer will explode in 5... 4... 3... 2... 1...
-                feedback: That's not it!
+                    ```
+                    Bon travail !
+                    Bon travail !
+                    ```
+                feedback: Ce n'est pas ça !
             -   option: |-
-                    Good job !
-                    Good job!
-                    You can use the computer!
-                feedback: That's not it!
+                    ```
+                    L'ordinateur va exploser dans 5… 4… 3… 2… 1…
+                    ```
+                feedback: Ce n'est pas ça !
             -   option: |-
-                    Good job!
-                    You can use the computer!
-                    Good job!
-                    You can use the computer!
-                feedback: Correct!
-            hint: Everything under the `{repeat}` command is repeated twice.
+                    ```
+                    Bon travail !
+                    Bon travail !
+                    Tu peux utiliser l'ordinateur !
+                    ```
+                feedback: Ce n'est pas ça !
+            -   option: |-
+                    ```
+                    Bon travail !
+                    Tu peux utiliser l'ordinateur !
+                    Bon travail !
+                    Tu peux utiliser l'ordinateur !
+                    ```
+                feedback: Correct !
+            hint: Tout ce qui se trouve sous la commande `{repeat}` est répété deux fois.
             correct_answer: D
             question_score: '10'
         3:
-            question_text: Which case should you choose to win a million dollars?
+            question_text: Quelle valise choisis-tu pour gagner un million d'euros ?
             code: |-
-                {print} 'Choose the right case and win!'
-                case = {ask} 'Which case will you pick? 1 or 2?'
-                {if} case {is} 1
-                     action = {ask} 'Open it or sell it?'
-                         {if} action {is} sell
-                             {print} 'You sell your case for 10 dollars'
-                         {if} action {is} open
-                             {print} 'You open the case and win an apple pie'
-                {if} case {is} 2
-                     action = {ask} 'Open it or sell it?'
-                         {if} action {is} sell
-                             {print} 'You sell the case for 500 dollars'
-                         {if} action {is} open
-                             {print} 'You open the case and win a million dollars!'
+                {print} "Choisis la bonne valise pour gagner !"
+                valise = {ask} "Quelle valise choisi-tu ? 1 ou 2 ?"
+                {if} valise {is} 1
+                     action = {ask} "Ouvrir ou vendre ?"
+                         {if} action {is} vendre
+                             {print} "Tu vends la valise pour 10 euros"
+                         {if} action {is} ouvrir
+                             {print} "Tu ouvres la valise et gagne une tarte aux pommes"
+                {if} valise {is} 2
+                     action = {ask} "Ouvrir ou vendre ?"
+                         {if} action {is} vendre
+                             {print} "Tu vends la valise pour 500 euros"
+                         {if} action {is} ouvrir
+                             {print} "Tu ouvres la valise et gagne un million d'euros !"
             mp_choice_options:
-            -   option: case 1, sell
-                feedback: You don't win a million!
-            -   option: case 1, open
-                feedback: You don't win a million
-            -   option: case 2, sell
-                feedback: You don't win a million
-            -   option: case 2, open
+            -   option: valise 1, vendre
+                feedback: Tu ne gagnes pas un million !
+            -   option: valise 1, ouvrir
+                feedback: Tu ne gagnes pas un million !
+            -   option: valise 2, vendre
+                feedback: Tu ne gagnes pas un million !
+            -   option: valise 2, ouvrir
                 feedback: Excellent travail ! C'est gagné !
-            hint: Follow the right path
+            hint: Parcours le bon chemin
             correct_answer: D
             question_score: '10'
         4:
-            question_text: Which statement is true?
+            question_text: Quelle affirmation est vraie ?
             code: |-
-                name = {ask} 'What is your name?'
-                size = {ask} 'What is your shoe size?'
-                {if} size {is} 38
-                    {if} name {is} Cinderella
-                        {print} 'I was looking for you!'
+                nom = {ask} "Quel est ton nom ?"
+                pointure = {ask} "Quelle est ta pointure ?"
+                {if} pointure {is} 38
+                    {if} nom {is} Cendrillon
+                        {print} "❤️❤️❤️"
                     {else}
-                        {print} 'You are not the one!'
+                        {print} "Ce n'est pas toi que je cherche !"
                 {else}
-                    {print} 'Ill keep looking'
+                    {print} "Je vais continuer à chercher"
             mp_choice_options:
-            -   option: Sleeping Beauty with shoe size 38 gets the output 'Ill keep looking'
-                feedback: No, she gets 'You are not the one!'
-            -   option: 'Cinderella with shoe size 40 gets the output: ''I was looking for you!'''
-                feedback: No, she gets 'Ill keep looking'
-            -   option: Sleeping Beauty with shoe size 40 gets the output 'Ill keep looking'
-                feedback: That's right!
-            -   option: Cinderella with shoe size 40 gets the output 'I was looking for you!'
-                feedback: No she gets 'Ill keep looking'
-            hint: No matter what your name is, if you have shoe size 40 you will get the message 'Ill keep looking'.
+            -   option: Belle au bois dormant avec une pointure 38 obtient « Je vais continuer à chercher »
+                feedback: 'Non, elle aura : « Ce n''est pas toi que je cherche ! »'
+            -   option: Cendrillon avec une pointure 40 obtient « ❤️❤️❤️ »
+                feedback: 'Non, elle aura : « Je vais continuer à chercher »'
+            -   option: Belle au bois dormant avec une pointure 40 obtient « Je vais continuer à chercher »
+                feedback: C'est juste !
+            -   option: Cendrillon avec une pointure 38 obtient « Je vais continuer à chercher »
+                feedback: 'Non, elle aura : « ❤️❤️❤️ »'
+            hint: Quel que soit ton nom, si tu chausses du 40, tu auras le message « Je vais continuer à chercher »
             correct_answer: C
             question_score: '10'
         5:
-            question_text: Which code produced this output?
+            question_text: Quel code affiche ce résultat ?
             output: |-
-                Icecream is the best!
-                Icecream is the best!
-                Icecream is the best!
+                Vive les glaces !
+                Vive les glaces !
+                Vive les glaces !
             mp_choice_options:
             -   option: |-
                     ```
-                    desert = {ask} 'What is your favorite type of desert?'
-                    {if} desert {is} icecream
+                    dessert = {ask} "Quel est ton dessert préféré ?"
+                    {if} dessert {is} glace
                         {repeat} 3 {times}
-                        {print} 'Icecream is the best!'
+                        {print} "Vive les glaces !"
                     ```
-                feedback: Don't forget the indentation after `{repeat}` commands.
+                feedback: N'oublie pas l'indentation après la commande `{repeat}`.
             -   option: |-
                     ```
-                    desert = {ask} 'What is your favorite type of desert?'
-                    {if} desert {is} icecream
+                    dessert = {ask} "Quel est ton dessert préféré ?"
+                    {if} dessert {is} glace
                     {repeat} 3 {times}
-                        {print} 'Icecream is the best!'
+                            {print} "Vive les glaces !"
                     ```
-                feedback: Use indentation after an `{if}` command
+                feedback: Utilise une indentation après une commande `{if}`
             -   option: |-
                     ```
-                    desert = {ask} 'What is your favorite type of desert?'
-                    {if} desert {is} icecream
+                    dessert = {ask} "Quel est ton dessert préféré ?"
+                    {if} dessert {is} glace
                         {repeat} 3 {times}
-                            {print} 'Icecream is the best!'
+                            {print} "Vive les glaces !"
                     ```
-                feedback: Perfect
+                feedback: Parfait
             -   option: |-
                     ```
                     {repeat} 3 {times}
-                        desert = {ask} 'What is your favorite type of desert?'
-                        {if} desert {is} icecream
+                        dessert = {ask} "Quel est ton dessert préféré ?"
+                        {if} dessert {is} glace
                             {repeat} 3 {times}
-                            {print} 'Icecream is the best!'
+                            {print} "Vive les glaces !"
                     ```
-                feedback: There are 2 `{repeat}` commands in this code.
-            hint: Watch the indentation
+                feedback: Il y a 2 commande `{repeat}` dans ce code.
+            hint: Attention à l'indentation
             correct_answer: C
             question_score: '10'
         6:
-            question_text: After which command(s) should you use indentation (starting the next line with 4 spaces)?
+            question_text: Après quelle commande(s) dois-tu utiliser une indentation (commencer la ligne suivante avec 4 espaces) ?
             mp_choice_options:
             -   option: '`{if}`'
-                feedback: Don't forget the others
+                feedback: N'oublie pas les autres
             -   option: '`{if}` `{repeat}`'
-                feedback: Don't forget `{else}`!
+                feedback: N'oublie pas `{else}` !
             -   option: '`{if}` `{else}` `{repeat}`'
-                feedback: Keep it up!
+                feedback: Continue comme ça !
             -   option: '`{if}` `{else}` `{repeat}` `{print}`'
-                feedback: Not with print
-            hint: Indentation happens on the line below some commands
+                feedback: Pas avec `{print}`
+            hint: Il faut une indentation pour les lignes en dessous de certaines commandes
             correct_answer: C
             question_score: '10'
         7:
-            question_text: "In this code from a pizza restaurant. \nYoull get a 5 dollar discount if you order a medium pizza with coke.\n What should you do to debug this code?"
+            question_text: Tu auras une réduction de 5 euros si tu commandes une pizza de taille moyenne avec un coca.<br>Mais ce code a une erreur ! Comment le débuggé ?
             code: |-
-                {if} food {is} pizza
-                {if} size {is} medium
-                {if} drink {is} coke
-                price = price - 2
+                {if} plat {is} pizza
+                {if} taille {is} moyenne
+                {if} boisson {is} coca
+                price = price - 5
             mp_choice_options:
             -   option: |-
                     ```
-                    {if} food {is} pizza
-                        {if} size {is} medium
-                            {if} drink {is} coke
-                                price = price - 2
+                    {if} plat {is} pizza
+                        {if} taille {is} moyenne
+                            {if} drink {is} coca
+                                prix = prix - 5
                     ```
-                feedback: Amazing!
+                feedback: Incroyable !
             -   option: |-
                     ```
-                    {if} food {is} pizza
-                        {if} size {is} medium
-                    {if} drink {is} coke
-                        price = price - 2
+                    {if} plat {is} pizza
+                        {if} taille {is} moyenne
+                    {if} boisson {is} coca
+                        prix = prix - 5
                     ```
-                feedback: Try again!
+                feedback: Le second `{if}` n'a pas de code !
             -   option: |-
                     ```
-                    {if} food {is} pizza
-                    {if} size {is} medium
-                    {if} drink {is} coke
-                            price = price - 2
+                    {if} plat {is} pizza
+                    {if} taille {is} moyenne
+                    {if} boisson {is} coca
+                            prix = prix - 5
                     ```
-                feedback: Try again
+                feedback: Ce n'est jamais correct d'avoir deux `{if}` consécutifs.
             -   option: |-
                     ```
-                    {if} food {is} pizza
-                        {if} size {is} medium
-                            {if} drink {is} coke
-                            price = price - 2
+                    {if} plat {is} pizza
+                        {if} taille {is} moyenne
+                            {if} boisson {is} coca
+                            prix = prix - 5
                     ```
-                feedback: Try again
-            hint: After each `{if}` command, the line below should indent
+                feedback: Presque. Regarde de nouveau la dernière ligne.
+            hint: Après chaque commande `{if}`, la ligne en dessous doit être indentée
             correct_answer: A
             question_score: '10'
         8:
-            question_text: What is wrong is this code?
+            question_text: Qu'est-ce qui ne va pas avec ce code ?
             code: |-
-                age = {ask} 'Happy Birthday! How old are you?'
-                singing = {ask} 'Would you like us to sing?'
-                    if singing {is} yes
-                        {repeat} years {times}
-                        {print} 'Hip Hip Hooray'
+                âge = {ask} "Joyeux anniversaire ! Quel âge as-tu ?"
+                chanter = {ask} "Veux-tu que nous chantions ?"
+                    if chanter {is} oui
+                        {repeat} années {times}
+                            {print} "Hip Hip Hip… Houra !"
             mp_choice_options:
-            -   option: You can't put two questions in a row
-                feedback: Yes you can.
-            -   option: The variable called 'age' is later on used as 'years'
-                feedback: Keen eye! Good job!
-            -   option: You're not allowed to start with 8 spaces, like line 4 and 5 do
-                feedback: You actually must start like that.
-            -   option: A code must always start with a `{print}` command in the first line
-                feedback: That's not true.
-            hint: The indentation is done right this time
+            -   option: On ne peut pas mettre deux questions à la suite
+                feedback: Si, on peut.
+            -   option: La variable appelée « âge » est nommée « années » quand elle est utilisée plus bas
+                feedback: Bien vu ! Bon travail !
+            -   option: On ne peut pas commencer une ligne avec 8 espaces, comme c'est le cas en ligne 5.
+                feedback: Tu es, en fait, obligé de commencer cette ligne comme ça.
+            -   option: Un code doit toujours commencer par une commande `{print}` en première ligne
+                feedback: Ce n'est pas vrai.
+            hint: L'indentation est bien faite cette fois.
             correct_answer: B
             question_score: '10'
         9:
-            question_text: How many `{if}` commands can be placed inside another `{if}` command?
+            question_text: Combien de commande `{if}` peut être placée à l'intérieur d'une autre commande `{if}` ?
             mp_choice_options:
-            -   option: None, that is not allowed
-                feedback: You are allowed to
-            -   option: Only 1
-                feedback: You could use more if you like
+            -   option: Aucune. Ce n'est pas autorisé
+                feedback: Tu as le droit de le faire
+            -   option: seulement 1
+                feedback: Tu peux en utiliser plus si tu veux
             -   option: '3'
-                feedback: You could use more if you like
-            -   option: Infinite, as long as you keep using indentation correctly
-                feedback: That is true
-            hint: You can put an `{if}` command inside an `{if}` command.
+                feedback: Tu peux en utiliser plus si tu veux
+            -   option: Infinie, tant que tu utilises bien l'indentation correctement
+                feedback: C'est vrai
+            hint: Tu peux mettre une commande `{if}` à l'intérieur d'une commande `{if}`.
             correct_answer: D
             question_score: '10'
         10:
-            question_text: Which statement is true?
+            question_text: Quelle affirmation est vraie ?
             code: |-
                 1 {repeat} 2 {times}
                 2 {if} niveau {is} 9
-                3 {print} Excellent travail !
+                3 {print} "Excellent travail !"
             mp_choice_options:
-            -   option: All lines should start with 4 spaces
-                feedback: Only line 2 and 3 start with spaces
-            -   option: Line 2 and 3 should start with 4 spaces
-                feedback: Line 3 should start with 8
-            -   option: Line 2 and 3 should start with 8 spaces
-                feedback: Line 2 should start with 4
-            -   option: line 2 should atart with 4 spaces and line 3 with 8
-                feedback: You are correct!
-            hint: The first line doens't start with any spaces
+            -   option: Toutes les lignes doivent commencer par 4 espaces
+                feedback: Seules les ligne 2 et 3 commencent par des espaces
+            -   option: Les lignes 2 et 3 doivent commencer par 4 espaces
+                feedback: La ligne 3 doit en avoir 8
+            -   option: Les lignes 2 et 3 doivent commencer par 8 espaces
+                feedback: La ligne 2 doit en avoir 4
+            -   option: La ligne 2 doit démarrer par 4 espaces et la ligne 3 par 8
+                feedback: Tu as raison !
+            hint: La première ligne ne doit pas commencer par des espaces
             correct_answer: D
             question_score: '10'
     10:
         1:
-            question_text: Quelle sera la sortie de ce code ?
+            question_text: Par quoi devons-nous remplacer le `_` si nous voulons afficher chaque compliment ?
             code: |-
-                for i in range 1 to 3
-                    print i
+                compliments = parfait, bon travail, incroyable
+                _
+                    {print} compliment
             mp_choice_options:
             -   option: |-
-                    1
-                    2
-                    3
-                feedback: Correct !
-            -   option: 1 2 3
-                feedback: Ce n'est pas ça !
-            -   option: 1, 2, 3
-                feedback: Ce n'est pas ça !
-            -   option: '123'
-                feedback: Ce n'est pas ça !
-            hint: '`{for}` chaque compliment dans les listes de compliments...'
-            correct_answer: A
+                    ```
+                    {for} tous compliment
+                    ```
+                feedback: Ce n'est pas ça
+            -   option: |-
+                    ```
+                    {for} compliment {in} compliments
+                    ```
+                feedback: Tu mérites tous ces compliments !
+            -   option: |-
+                    ```
+                    {if} compliment {in} compliments
+                    ```
+                feedback: Ce n'est pas ça !
+            -   option: |-
+                    ```
+                    {for} compliments {in} compliment
+                    ```
+                feedback: Tu y es presque !
+            hint: '`{for}` chaque compliment dans la liste des compliments…'
+            correct_answer: B
             question_score: '10'
         2:
-            question_text: Quel sera le code pour avoir cette sortie ?
+            question_text: Que va-t-il s'afficher ?
             code: |-
-                1
-                2
-                3
-                4
-                5
-                Je suis là !
+                plats = pizzas, pâtes, crêpes
+                {for} plat {in} plats
+                    {print} "J'aime les " plat
             mp_choice_options:
             -   option: |-
-                    for i in range 1 to 5
-                        print i
-                    print 'Je suis là !'
-                feedback: Parfait !
+                    ```
+                    J'aime les pizzas
+                    ```
+                feedback: La ligne 2 dit « pour chaque plat dans la liste des plats ». Donc chaque plat est affiché.
             -   option: |-
-                    for i in range 1 to 5
-                    print i
-                    print 'Je suis là !'
-                feedback: Ce code ne fonctionnera pas. Tu as besoin d'une indentation après for.
+                    ```
+                    J'aime les pâtes
+                    ```
+                feedback: La ligne 2 dit « pour chaque plat dans la liste des plats ». Donc chaque plat est affiché.
             -   option: |-
-                    for i in range 1 to 5
-                        print i
-                        print 'Je suis là !'
-                feedback: |-
-                    Hedy fera '1
-                    Je suis là !, 2
-                    Je suis là ! etc.
+                    ```
+                    J'aime les crêpes
+                    ```
+                feedback: La ligne 2 dit « pour chaque plat dans la liste des plats ». Donc chaque plat est affiché.
             -   option: |-
-                    for i in range 1 to 5
-                        print 'i'
-                    print 'Je suis là !'
-                feedback: '`i` est une variable et ne devrait pas avoir de guillemets'
-            hint: D'abord tous les nombres, puis la phrase !
-            correct_answer: A
+                    ```
+                    J'aime les pizzas
+                    J'aime les pâtes
+                    J'aime les crêpes
+                    ```
+                feedback: Super !
+            hint: La ligne 2 dit « pour chaque plat dans la liste des plats ». Donc chaque plat est affiché.
+            correct_answer: D
             question_score: '10'
         3:
-            question_text: Quel sera le code pour avoir cette sortie ?
+            question_text: Que va-t-il s'afficher ?
             code: |-
-                10
-                9
-                8
-                7
-                6
-                5
-                4
-                3
-                2
-                1
-                0
+                animaux = chiens, chats, hamsters, poulets
+                {for} animal {in} animaux
+                    {print} "Les " animal " sont d'adorables animaux de compagnie"
             mp_choice_options:
             -   option: |-
-                    for i in range 0 to 10
-                        print i
-                feedback: Les nombres ne seront pas dans le bon sens
+                    ```
+                    Les chiens sont d'adorables animaux de compagnie
+                    ```
+                feedback: La ligne 2 dit « pour chaque animal dans la liste des animaux ». Donc chaque animal est affiché.
             -   option: |-
-                    for i in range 0 to 10
-                        print - i
-                feedback: Les nombres seront négatifs
+                    ```
+                    Les chiens, chats, hamsters, poulets sont d'adorables animaux de compagnie
+                    ```
+                feedback: Chaque animal aura sa propre ligne.
             -   option: |-
-                    for i in range 10 to 0
-                        print i
-                feedback: Hélas, cela ne marchera pas
-            -   option: |-
-                    for i in range 0 to 10
-                        print 10 - i
-                feedback: Bien joué !
-            hint: Cela nécessite un peu de calcul..
-            correct_answer: D
+                    ```
+                    Les chiens sont d'adorables animaux de compagnie
+                    Les chats sont d'adorables animaux de compagnie
+                    Les hamsters sont d'adorables animaux de compagnie
+                    Les poulets sont d'adorables animaux de compagnie
+                    ```
+                feedback: Super !
+            -   option: Tu ne sais pas encore. Car le code choisi un animal au hasard
+                feedback: La ligne 2 dit « pour chaque animal dans la liste des animaux ». Donc chaque animal est affiché.
+            hint: La ligne 2 dit « pour chaque animal dans la liste des animaux ». Donc chaque animal est affiché.
+            correct_answer: C
             question_score: '10'
         4:
-            question_text: Quel est le problème avec ce code ?
+            question_text: Quel est le problème avec ce code ?
             code: |-
-                for i in range 1 to 10
-                print i
+                courses = pommes, pain, lait
+                {for} produit {in} courses
+                    {print} "Nous avons besoin de " courses
             mp_choice_options:
-            -   option: Le `i` de la dernière ligne a besoin de guillemets
-                feedback: Non, il n'y en a pas besoin
-            -   option: Tu ne peux pas utiliser 'range 1 to 5' mais seulement 'range 1 to 10'.
-                feedback: Tu peux choisir l'intervalle que tu veux
-            -   option: La ligne 1 doit commencer par un alinéa.
-                feedback: Pas sur la ligne 1...
-            -   option: La ligne 2 doit commencer par un alinéa.
-                feedback: Parfait !
-            hint: Il manque un alinéa..
-            correct_answer: D
+            -   option: La ligne 2 doit commencer par une indentation de 4 espaces
+                feedback: Non, ce n'est pas le cas. Seule la ligne 3 doit avoir une indentation et c'est le cas.
+            -   option: La ligne 3 ne doit pas commencer par une indentation de 4 espaces
+                feedback: La ligne 2 est une commande `{for}` donc la ligne 3 doit commencer par une indentation.
+            -   option: La ligne 3 doit dire « produit » à la place de « courses »
+                feedback: Bon travail !
+            -   option: La ligne 2 doit dire « produit » à la place de « courses »
+                feedback: Non, ce n'est pas le cas.
+            hint: La ligne 2 dit « Pour chaque produit de la liste de courses »
+            correct_answer: C
             question_score: '10'
         5:
-            question_text: Quel est la commande manquante ?
+            question_text: Quel mot doit être écrit à la place de `_` ?
             code: |-
-                for i in _?_ 1 to 10
-                    print i
+                {print} "Bienvenue aux dés numériques !"
+                joueurs = Anne, Jean, Julie
+                nombres = 1, 2, 3, 4, 5, 6
+                {for} joueur {in} joueurs
+                    {print} joueur " obtient " _ {at} {random}
             mp_choice_options:
-            -   option: rang
-                feedback: Non !
-            -   option: range
-                feedback: Correct !
-            -   option: ragne
-                feedback: Non !
-            -   option: ranch
-                feedback: Non !
+            -   option: joueurs
+                feedback: Cela afficherait « Anne obtient Julie », au lieu de « Anne obtient 6 ».
+            -   option: nombres
+                feedback: Correct !
+            -   option: nombre
+                feedback: Tu chauffes. Mais Hedy doit choisir au hasard dans la liste appelée « nombres » pas « nombre »…
+            -   option: dés
+                feedback: Regarde le nom des variables.
             hint: Hedy doit choisir un nombre `{at} {random}`
             correct_answer: B
             question_score: '10'
         6:
-            question_text: Combien de fois le mot 'Hello' apparaît-il sur ton écran lorsque tu exécutes le code ?
+            question_text: Laquelle des réponses ci-dessous est un affichage possible quand tu exécutes le code ?
             code: |-
-                for i in range 0 to 2
-                    print 'Hello'
-            mp_choice_options:
-            -   option: 1 fois
-                feedback: Non !
-            -   option: 2 fois
-                feedback: Non !
-            -   option: 3 fois
-                feedback: C'est ça !
-            -   option: 0 fois
-                feedback: Non !
-            hint: 0, 1, 2, cela fait 3 chiffres !
-            correct_answer: C
-            question_score: '10'
-        7:
-            question_text: Quel est la ligne manquante ?
-            code: |-
-                print 'Bienvenue chez Hedy'
-                gens is ask 'Combien de personnes vont manger ici ce soir ?'
-                _?_
-                    plat is ask 'Que voulez-vous commander ?'
-                    print plat
-            mp_choice_options:
-            -   option: for i in range 0 to 3
-                feedback: Il peut ne pas avoir 3 personnes
-            -   option: for i in range 1 to personnes
-                feedback: La variable `personnes` n'existe pas
-            -   option: for i in range 1 to gens
-                feedback: Bien !
-            -   option: for i in range 0 to gens
-                feedback: Il y aura une personne en trop !
-            hint: Il faut utiliser un for et la variable `gens`
-            correct_answer: C
-            question_score: '10'
-        8:
-            question_text: Quelle sera la sortie de ce code ?
-            code: |-
-                for i in range 23 to 25
-                    print 'hi'
+                choix = pierre, papier, ciseaux
+                joueuses = Nadine, Martine
+                {for} joueuse {in} joueuses
+                    {print} joueuse " choisi " choix {at}{random}
             mp_choice_options:
             -   option: |-
-                    23
-                    24
-                    25
-                feedback: Attention aux guillemets !
-            -   option: 23 hi 24 hi 25 hi
+                    ```
+                    Nadine choisi pierre
+                    ```
+                feedback: Martine veut jouer aussi !
+            -   option: |-
+                    ```
+                    Martine choisi ciseaux
+                    Nadine choisi pierre
+                    ```
+                feedback: Tu étais vraiment près ! Mais, Nadine est la première dans la liste, donc elle choisira en premier.
+            -   option: |-
+                    ```
+                    Martine choisi papier
+                    ```
+                feedback: Nadine veut jouer aussi !
+            -   option: |-
+                    ```
+                    Nadine choisi papier
+                    Martine choisi ciseaux
+                    ```
+                feedback: Génial !
+            hint: Chaque joueuse choisira un objet. La première joueuse dans la liste commence
+            correct_answer: D
+            question_score: '10'
+        7:
+            question_text: Quelle ligne doit être à la place de `_` dans ce code qui décide ce que les personnes vont manger pour dîner ?
+            code: |-
+                noms = Ronan, Lucile, Anne, André
+                plats = pâtes, frites, salade
+                _
+                    {print} nom " devra manger " plats {at} {random} " pour le dîner"
+            mp_choice_options:
+            -   option: |-
+                    ```
+                    {for} nom {in} noms
+                    ```
+                feedback: Bravo !
+            -   option: |-
+                    ```
+                    {for} noms {in} nom
+                    ```
+                feedback: Non, ce doit être pour chaque nom dans la liste nomS, donc dans l'autre sens
+            -   option: |-
+                    ```
+                    {for} plat {in} plats
+                    ```
+                feedback: Il faut dire à chaque nom ce qu'il doit manger pour dîner.
+            -   option: |-
+                    ```
+                    {for} nom {in} plats
+                    ```
+                feedback: Il faut dire à chaque nom ce qu'il doit manger pour dîner.
+            hint: Il faut dire à chaque nom ce qu'il doit manger pour dîner.
+            correct_answer: A
+            question_score: '10'
+        8:
+            question_text: Que doit-on écrire à la place du `_` dans ce code qui décide quelle couleur de T-shirt chacun recevra ?
+            code: |-
+                noms = Diane, Thomas, Benoit
+                couleurs = bleu, rouge, violet
+                {for} nom {in} noms
+                    {print} _
+            mp_choice_options:
+            -   option: |-
+                    ```
+                    "nom recevra un T-shirt couleur"
+                    ```
+                feedback: Attention aux guillemets !
+            -   option: |-
+                    ```
+                    nom " recevra un T-shirt " couleurs {at}{random}
+                    ```
                 feedback: Excellent travail ! C'était difficile !
             -   option: |-
                     ```
-                    noms 'obtient une chemise de ' couleur  {at} {random}
+                    noms " recevra un T-shirt " couleurs {at}{random}
                     ```
-                feedback: Correct
-            -   option: Le mot 'hi' apparaîtra 25 fois
-                feedback: Attention on part de 23 !
-            hint: On n'affiche pas 'i'
-            correct_answer: C
+                feedback: Tu veux que chaque nom soit affiché séparément. Donc le premier mot ne doit pas être « noms » mais…
+            -   option: |-
+                    ```
+                    chacun recevra un T-shirt de couleur
+                    ```
+                feedback: Il n'y a aucune variable qui s'appelle « chacun »
+            hint: Fais attention aux guillemets et aux noms des variables
+            correct_answer: B
             question_score: '10'
         9:
-            question_text: Combien de fois Hedy chante 'Hip hip Hourra !' ?
+            question_text: Quelle est la première question que Hedy te pose quand tu exécutes ce programme ?
             code: |-
-                âge is ask 'Quel âge as-tu ?'
-                for i in range 1 to âge
-                    print is 'Hip hip Hourra !'
+                services = apéritif, plat principal, dessert
+                noms = Simon, Olivier
+                {for}  nom {in} noms
+                    {for} service {in} services
+                        plat = {ask} nom ", que veux-tu manger pour ton " service " ?"
+                        {print} nom " a commandé " plat " en " service
             mp_choice_options:
-            -   option: Timon, que veux-tu manger en guise d'entrée ?
-                feedback: Hélas non !
-            -   option: Onno, que veux-tu manger en guise d'entrée ?
-                feedback: Hélas non !
-            -   option: Timon, que veux-tu manger comme dessert ?
-                feedback: Hélas non !
-            -   option: Cela dépend de ton âge.
-                feedback: C'est ça !
-            hint: for i in range 1 to âge
-            correct_answer: D
+            -   option: Simon, que veux-tu manger pour ton apéritif ?
+                feedback: Parfait !
+            -   option: Olivier, que veux-tu manger pour ton apéritif ?
+                feedback: Simon est en premier dans la liste !
+            -   option: Simon, que veux-tu manger pour ton dessert ?
+                feedback: Apéritif est en premier dans la liste
+            -   option: Tu ne sais pas. Hedy choisira `{at} {random}`
+                feedback: Il n'y a pas de `{at} {random}` dans ce code…
+            hint: Ce sera le premier élément de chaque liste.
+            correct_answer: A
             question_score: '10'
         10:
-            question_text: Qu'est-ce qui est vrai dans ce code ?
+            question_text: Quelle affirmation est vraie à propos de ce code ?
             code: |-
-                les_prix = Le million de dollars,La voiture,Le sandwich
+                les_prix = Le million de dollars, La voiture, Le sandwich
                 noms = Bob, Patrick, Sandy, Larry
                 {for} prix {in} les_prix
-                    {print} prix 'a été gagné par' noms {at} {random}
+                    {print} prix " a été gagné par " noms {at} {random}
             mp_choice_options:
-            -   option: |-
-                    for i in range 1 to 3
-                        print blablablabla
-                        print blabliblo
-                feedback: Hélas non !
-            -   option: |-
-                    for i in range 1 to 3
-                        print blablablabla
-                    print blabliblo
-                feedback: C'est ça !
-            -   option: |-
-                    for i in range 0 to 3
-                        print blablablabla
-                        print blabliblo
-                feedback: 0,1,2,3 cela fait 4 chiffres.
-            -   option: |-
-                    for i in range 0 to 3
-                        print blablablabla
-                    print blabliblo
-                feedback: 0,1,2,3 cela fait 4 chiffres.
-            hint: Fais attention aux indentations
-            correct_answer: B
+            -   option: Tout le monde gagne un prix.
+                feedback: Ce n'est pas vrai, il est possible de ne pas repartir avec un prix.
+            -   option: Chaque prix sera distribué à une seule personne.
+                feedback: Ce n'est pas vrai. Tous les prix sont distribués, mais a des personnes au hasard
+            -   option: Larry ne gagnera jamais aucun prix
+                feedback: Ce n'est pas vrai. Larry a autant de chance que les autres
+            -   option: Une personne peut gagner deux prix
+                feedback: Tu as bien compris !
+            hint: Essaye d'imaginer ce qui sera écrit.
+            correct_answer: D
             question_score: '10'
     11:
         1:
@@ -3798,4 +3876,331 @@ levels:
                 feedback: Fantastic!
             hint: You need to use the {remove} command
             correct_answer: D
+            question_score: '10'
+    17:
+        1:
+            question_text: What is the output of this code?
+            code: |-
+                minions = ['Bob', 'Kevin', 'Stuart']
+                {for} x in minions:
+                    {print} x
+            mp_choice_options:
+            -   option: |-
+                    ```
+                    m i n i o n s
+                    ```
+                feedback: This is not it.
+            -   option: |-
+                    ```
+                    Bob
+                    Kevin
+                    Stuart
+                    ```
+                feedback: Correct!
+            -   option: |-
+                    ```
+                    minions
+                    minions
+                    minions
+                    ```
+                feedback: Take a look at the content of your list.
+            -   option: |-
+                    ```
+                    B o b K e v i n S t u a r t
+                    ```
+                feedback: Do not loop through the letters.
+            hint: Loop through your list.
+            correct_answer: B
+            question_score: '10'
+        2:
+            question_text: What is wrong with this code?
+            code: |-
+                seconds_minute = 60
+                minute_hour = 60
+                hour_day = 24
+                leap_year = 366
+                no_leap_year = 365
+                years = ask 'what year is it?'
+                {if} years = 2024:
+                 print seconds_minute * minute_hour * hour_day * leap_year
+                {else}:
+                 print seconds_minute * minute_hour * hour_day * noleap_year
+            mp_choice_options:
+            -   option: You cannot have so many variables.
+                feedback: This is not it.
+            -   option: The way the variables are multiplied is incorrect.
+                feedback: Not true!
+            -   option: One of the variables `noleap_year` does not belong with the `{if}` statement.
+                feedback: Keep looking for the mistake.
+            -   option: The `noleap_year` has to be identical in both cases.
+                feedback: Correct!
+            hint: Read the code carefully.
+            correct_answer: D
+            question_score: '10'
+        3:
+            question_text: How many hedgehogs will this code print?
+            code: |-
+                {for} x in range 1 to 3:
+                  {for} y in range 1 to 2:
+                    {print} 🦔
+            mp_choice_options:
+            -   option: |-
+                    ```
+                    🦔
+                    🦔
+                    🦔
+                    ```
+                feedback: Try again.
+            -   option: |-
+                    ```
+                    🦔
+                    🦔
+                    ```
+                feedback: One more try.
+            -   option: |-
+                    ```
+                    🦔
+                    🦔
+                    🦔
+                    🦔
+                    🦔
+                    🦔
+                    ```
+                feedback: Well done!
+            -   option: |-
+                    ```
+                    🦔
+                    🦔
+                    🦔
+                    🦔
+                    🦔
+                    ```
+                feedback: That is not it.
+            hint: Think about how many times you need repeating.
+            correct_answer: C
+            question_score: '10'
+        4:
+            question_text: What is wrong with code?
+            code: |-
+                name_color = {ask} 'What is your favorite color?'
+                {if} name_color == 'red':
+                  {print} 'the color of a tomato'
+                {elif} name_color == 'green':
+                  {print} 'the color of an apple'
+                {elif} name_color == 'blue':
+                  {print} 'the color of a blueberry'
+                {elif} name_color == 'yellow':
+                  {print} 'the color of a banana'
+                {elif}:
+                  {print} 'this fruit-color does not exist'
+            mp_choice_options:
+            -   option: The first `{elif}` should be used before the `print` command
+                feedback: Try again.
+            -   option: '`{elif}` can only be used once'
+                feedback: From now on we can use elif multiple times.
+            -   option: '`==` used with `{elif}` should be replaced by `=`'
+                feedback: Not correct.
+            -   option: '`{elif}` in the last line should be replaced by `{else}`'
+                feedback: Great!
+            hint: Think about `{if}`, `{elif}`, `{else}`.
+            correct_answer: D
+            question_score: '10'
+        5:
+            question_text: What is the output of this code?
+            code: |-
+                numbers = [7, 19, 29, 41, 53, 71, 79, 97]
+                {for} prime in numbers:
+                  {if} prime <= 10：
+                    {print} prime
+                  {elif} prime >= 60:
+                    {print} prime
+                  {elif} prime >= 90:
+                    {print} prime
+                  {else}:
+                    {print} 'another number'
+            mp_choice_options:
+            -   option: |-
+                    ```
+                    7
+                    another number
+                    another number
+                    another number
+                    another number
+                    71
+                    79
+                    97
+                    ```
+                feedback: Well done!
+            -   option: |-
+                    ```
+                    another number
+                    19
+                    29
+                    41
+                    53
+                    71
+                    79
+                    97
+                    ```
+                feedback: Try again.
+            -   option: |-
+                    ```
+                    7
+                    19
+                    29
+                    41
+                    53
+                    71
+                    79
+                    another number
+                    ```
+                feedback: One more try.
+            -   option: |-
+                    ```
+                    7
+                    19
+                    29
+                    41
+                    53
+                    71
+                    79
+                    97
+                    ```
+                feedback: That is not it.
+            hint: Think about how many times you need repeating and the values of if and elif.
+            correct_answer: A
+            question_score: '10'
+        6:
+            question_text: What is wrong with code?
+            code: |-
+                name = {ask} 'What is your name?'
+                {if} name == 'Hedy':
+                password = {ask} 'What is your password?'
+                    {if} password =='turtle123':
+                        {print} 'Yey'
+                    {else}:
+                        {print} 'Access denied'
+                {else}:
+                 {print} 'Go fish'
+            mp_choice_options:
+            -   option: '`{elif}` is missing.'
+                feedback: Try again.
+            -   option: '`{else}` can only be used once.'
+                feedback: From now on we can use elif multiple times.
+            -   option: Nothing!
+                feedback: There is a mistake. Look carefully!
+            -   option: There is an indentation mistake in the last line.
+                feedback: Amazing!
+            hint: There is a mistake somewhere...
+            correct_answer: D
+            question_score: '10'
+        7:
+            question_text: Which of the following codes will print five times 'the result is 3' on the screen?
+            mp_choice_options:
+            -   option: |-
+                    ```
+                     numbers = [1, 2 , 3, 4, 5]
+                     {for} n in numbers：
+                         result = n * 1
+                     {print} 'The result is ' result
+                    ```
+                feedback: Try again!
+            -   option: |-
+                    ```
+                    numbers = [1, 2, 3, 4, 5]
+                     {for} u in numbers：
+                         number = u
+                     {print} 'The result is ' number
+                    ```
+                feedback: That is not it.
+            -   option: |-
+                    ```
+                    numbers = [1, 2, 3, 4, 5]
+                     {for} number in numbers：
+                         number = 3
+                     {print} 'The result is ' number
+                    ```
+                feedback: Very good!
+            -   option: |-
+                    ```
+                    numbers = [1, 2 , 3, 4, 5]
+                     {for} n in numbers：
+                         n = result
+                     {print} 'The result is ' result
+                    ```
+                feedback: That is not it.
+            hint: Think about mathematical symbols.
+            correct_answer: C
+            question_score: '10'
+        8:
+            question_text: What is wrong with code?
+            code: |-
+                insects = ['🐝', '🦋', '🕷', '🐞']
+                your_favorite = {ask} 'what is your favorite insect?'
+                {for} insect in insects:
+                 {if} your_favorite == '🐝' {or} your_favorite == '🐞':
+                  {print} 'very useful'
+                 {elif} your_favorite == '🕷':
+                  {print} 'it can catch mosquitoes'
+                 {else}:
+                  {print} 'almost all insects can be useful one way or another'
+            mp_choice_options:
+            -   option: '`{or}` cannot be used with `{if}`.'
+                feedback: Try again.
+            -   option: In the `{for}` command `insect` should be `insects`.
+                feedback: Not true.
+            -   option: Nothing!
+                feedback: Well done!
+            -   option: There is an indentation mistake in the last line.
+                feedback: Nope.
+            hint: Read the code carefully.
+            correct_answer: C
+            question_score: '10'
+        9:
+            question_text: Which one of the codes below gave this output?
+            code: |-
+                -5 is negative
+                -4 is negative
+                -3 is negative
+                -2 is negative
+                -1 is negative
+                0 is positive
+                1 is positive
+                2 is positive
+                3 is positive
+            mp_choice_options:
+            -   option: "```\n {for} number in range -5 to 3:\n     {if} number > 0: \n      {print} number ' is positive'\n     {elif} number < 0: \n      {print} number ' is negative' \n    {else}: \n     {print} number ' is zero'\n```"
+                feedback: Try again!
+            -   option: "```\n {for} number in range -5 to 3:\n     {if} number > 0: \n      {print} number ' is positive'\n     {elif} number <= 0: \n     {print} number ' is negative' \n    {else}: \n     {print} number ' is zero'\n```"
+                feedback: That is not it.
+            -   option: "```\n {for} number in range -5 to 3:\n     {if} number >= 0: \n     {print} number ' is positive'\n     {elif} number < 0: \n     {print} number ' is negative' \n     {else}: \n     {print} number ' is zero'\n```"
+                feedback: Very good!
+            -   option: "```\n {for} number in range -5 to 3:\n     {if} number < 0: \n      {print} number ' is positive'\n     {elif} number <=0: \n     {print} number ' is negative' \n     {else}: \n     {print} number ' is zero'\n```"
+                feedback: That is not it.
+            hint: Read the code carefully.
+            correct_answer: C
+            question_score: '10'
+        10:
+            question_text: What is wrong with this code?
+            code: |-
+                {for} number in range 1 to 5:
+                  volume_room = num * num * num
+                  {print} volume_room ' cubic meters'
+                    {if} volume_room > 100:
+                      {print} 'this is a large room'
+                    {elif} volume_room < 100:
+                      {print} 'small room but cosy'
+                    {else}:
+                      {print} 'i will look for something else'
+            mp_choice_options:
+            -   option: The word num needs quotation marks.
+                feedback: Try again.
+            -   option: The `{if}` command is not used correctly.
+                feedback: Not true.
+            -   option: Line 3 should be `volume_room = number * number * number`.
+                feedback: Well done!
+            -   option: There is an indentation mistake in the last line.
+                feedback: Nope.
+            hint: Read the code carefully.
+            correct_answer: C
             question_score: '10'

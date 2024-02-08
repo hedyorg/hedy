@@ -14,7 +14,7 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - uses: actions/checkout@v3
+    - uses: actions/checkout@v4
       name: Checkout branch (with token)
       if: github.event_name == 'push'
       with:
@@ -22,7 +22,7 @@ jobs:
 
         # We need to pass the token here -- the commit action below will not overwrite the token to push.
         token: ${{ secrets.FELIENNE_GITHUB_ACCESS_TOKEN }}
-    - uses: actions/checkout@v3
+    - uses: actions/checkout@v4
       name: Checkout branch (on pull requests)
       if: github.event_name != 'push'
       with:
@@ -40,14 +40,9 @@ jobs:
         python3 -m pip install --upgrade pip
         pip3 install -r requirements.txt
 
-    # This is necessary for the TypeScript to contain translations
-    # from Gettex.
-    - name: Compiling Babel translations
+    - name: Generating TypeScript
       run: |
-        pybabel compile -f -d translations
-
-    - name: Compile TypeScript to JavaScript
-      run: build-tools/heroku/generate-grammars-and-js
+        doit run typescript
 
     - name: Commit changed files
       uses: stefanzweifel/git-auto-commit-action@v2.3.0

@@ -3,21 +3,21 @@
 # This file is distributed under the same license as the PROJECT project.
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2023.
 #
-#, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2023-11-27 20:54+0100\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
-"Language: uk\n"
+"POT-Creation-Date: 2024-01-18 10:49+0100\n"
+"PO-Revision-Date: 2024-01-24 20:21+0000\n"
+"Last-Translator: Prefill add-on <noreply-addon-prefill@weblate.org>\n"
 "Language-Team: uk <LL@li.org>\n"
-"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
+"Language: uk\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Generated-By: Babel 2.11.0\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
+"X-Generator: Weblate 5.4-dev\n"
+"Generated-By: Babel 2.14.0\n"
 
 #, fuzzy
 msgid "Access Before Assign"
@@ -25,6 +25,10 @@ msgstr "You tried to use the variable {name} on line {access_line_number}, but y
 
 msgid "Cyclic Var Definition"
 msgstr "Ім'я {variable} повинно бути задане до того, як ви зможете використовувати її в правій частині команди {is}."
+
+#, fuzzy
+msgid "Function Undefined"
+msgstr "You tried to use the function {name}, but you didn't define it."
 
 msgid "Has Blanks"
 msgstr "Ваш код є неповним. Він містить пробіли, які необхідно замінити кодом."
@@ -62,6 +66,10 @@ msgstr "Ви використали {echo} перед {ask} або {echo} без
 msgid "Lonely Text"
 msgstr "Схоже, що ви забули використати команду з текстом, яка використовується в рядку {line_number}"
 
+#, fuzzy
+msgid "Missing Additional Command"
+msgstr "It looks like you forgot to complete writing {command} on line {line_number}."
+
 msgid "Missing Command"
 msgstr "Схоже, що ви забули використати команду в рядку {line_number}."
 
@@ -69,11 +77,19 @@ msgid "Missing Inner Command"
 msgstr "Схоже, що ви забули використати команду з оператором {command}, який ви використовували в рядку {line_number}."
 
 #, fuzzy
+msgid "Missing Variable"
+msgstr "It looks like your {command} is missing a variable at the start of the line."
+
+#, fuzzy
 msgid "Misspelled At Command"
 msgstr "It looks like you might have misspelled the {command} command, instead you wrote {invalid_argument} in line {line_number}."
 
 msgid "No Indentation"
 msgstr "У рядку {line_number} використано занадто мало пробілів. Ви використали {leading_spaces} пробілів, що недостатньо. Починайте кожен новий блок з {indent_size} пробілів більше, ніж у попередньому рядку."
+
+#, fuzzy
+msgid "Non Decimal Variable"
+msgstr "At line {line_number}, you might have tried using a number which Hedy does not like very much! Try changing it to a decimal number like 2."
 
 msgid "Parse"
 msgstr "Введений вами код не є дійсним кодом Hedy. У рядку {location[0]}, в позиції {location[1]}, помилка. Ви ввели {character_found}, але це не допустимо."
@@ -103,11 +119,19 @@ msgstr "Нецілі числа поки що не підтримуються, �
 msgid "Unsupported String Value"
 msgstr "Текстові значення не можуть містити {invalid_value}."
 
+#, fuzzy
+msgid "Unused Variable"
+msgstr "You defined the variable {variable_name} on line {line_number}, but you did not use it."
+
 msgid "Var Undefined"
 msgstr "Ви намагалися використати перемінну {name}, але не задали її. Також можливо, що ви намагалися використати слово {name}, але забули взяти лапки."
 
 msgid "Wrong Level"
 msgstr "Це був правильний код Hedy, але не на тому рівні. Ви написали {offending_keyword} для рівня {working_level}. Підказка: {tip}"
+
+#, fuzzy
+msgid "Wrong Number of Arguments"
+msgstr "Your function used the wrong number of arguments. You provided {used_number} but the function {name} needs {defined_number}"
 
 msgid "account_overview"
 msgstr "Огляд облікового запису"
@@ -149,6 +173,10 @@ msgstr "Перейдіть на рівень {level}"
 msgid "adventure"
 msgstr "Пригода"
 
+#, fuzzy
+msgid "adventure_cloned"
+msgstr "Adventure is cloned"
+
 msgid "adventure_duplicate"
 msgstr "У вас вже є пригода з такою назвою."
 
@@ -185,6 +213,10 @@ msgstr "Пригоду оновлено!"
 #, fuzzy
 msgid "adventures"
 msgstr "Available Adventures"
+
+#, fuzzy
+msgid "adventures_info"
+msgstr "Each Hedy level has built-in exercises for students, which we call adventures. You can create your own adventures and add them to your classes. With your own adventures you can create adventures that are relevant and interesting for your students. You can find more information about creating your own adventures <a href=\"https://hedy.org/for-teachers/manual/features\">here</a>."
 
 #, fuzzy
 msgid "adventures_restored"
@@ -228,6 +260,10 @@ msgstr "програми збережено"
 
 msgid "amount_submitted"
 msgstr "програми надіслані"
+
+#, fuzzy
+msgid "apply_filters"
+msgstr "Apply filters"
 
 msgid "are_you_sure"
 msgstr "Ви впевнені? Ви не можете відкликати цю операцію."
@@ -326,6 +362,18 @@ msgstr "What is the gender balance in your class?"
 #, fuzzy
 msgid "class_survey_question4"
 msgstr "What distinguishes your students from others?"
+
+#, fuzzy
+msgid "classes_info"
+msgstr "Create a class to follow the progress of each student in dashboard, and to customize the adventures your students see, and even adding your own! You can create as many classes as you like, and each class can have multiple teachers each one with different roles. You can also add as many students as you want, but mind that each student can only be in one class at a time. You can find more information about classes in the <a href=\"https://hedy.org/for-teachers/manual/preparations#for-teachers\">teacher manual</a>."
+
+#, fuzzy
+msgid "clone"
+msgstr "Clone"
+
+#, fuzzy
+msgid "cloned_times"
+msgstr "Clones"
 
 msgid "close"
 msgstr "Закрити"
@@ -518,6 +566,10 @@ msgid "echo_out"
 msgstr "Починаючи з рівня 2 команда {echo} більше не потрібна. Тепер ви можете повторити відповідь за допомогою {ask} і {print}. Приклад: ім'я - {ask} Як тебе звати? {print} привіт ім'я"
 
 #, fuzzy
+msgid "edit_adventure"
+msgstr "Edit adventure"
+
+#, fuzzy
 msgid "edit_code_button"
 msgstr "Edit code"
 
@@ -569,6 +621,10 @@ msgstr "That email is already in use."
 #, fuzzy
 msgid "exists_username"
 msgstr "That username is already in use."
+
+#, fuzzy
+msgid "exit_preview_mode"
+msgstr "Exit preview mode"
 
 #, fuzzy
 msgid "experience_invalid"
@@ -928,6 +984,9 @@ msgstr "Цей рівень ще не доступний у вашому кла�
 msgid "level_title"
 msgstr "Рівень"
 
+msgid "levels"
+msgstr ""
+
 #, fuzzy
 msgid "link"
 msgstr "Link"
@@ -1139,6 +1198,10 @@ msgstr "No account?"
 msgid "no_accounts"
 msgstr "There are no accounts to create."
 
+#, fuzzy
+msgid "no_adventures_yet"
+msgstr "There are no public adventures yet..."
+
 msgid "no_certificate"
 msgstr "Цей користувач не отримав сертифікат про завершення курсу Hedy"
 
@@ -1264,6 +1327,9 @@ msgstr "Another text language"
 msgid "overwrite_warning"
 msgstr "You already have a program with this name, saving this program will replace the old one. Are you sure?"
 
+msgid "owner"
+msgstr ""
+
 msgid "page"
 msgstr "сторінка"
 
@@ -1354,6 +1420,13 @@ msgstr "Preferred language"
 msgid "preview"
 msgstr "Переглянути"
 
+msgid "previewing_adventure"
+msgstr ""
+
+#, fuzzy
+msgid "previewing_class"
+msgstr "You are previewing class <em>{class_name}</em> as a teacher."
+
 #, fuzzy
 msgid "previous_campaigns"
 msgstr "View previous campaigns"
@@ -1423,6 +1496,9 @@ msgstr "Бажаєте приєднатися до цього класу?"
 #, fuzzy
 msgid "public"
 msgstr "Public"
+
+msgid "public_adventures"
+msgstr "Browse public adventures"
 
 #, fuzzy
 msgid "public_invalid"
@@ -1497,6 +1573,10 @@ msgstr "Confirm removing this user from the class."
 #, fuzzy
 msgid "repair_program_logo_alt"
 msgstr "Repair program icon"
+
+#, fuzzy
+msgid "repeat_dep"
+msgstr "Starting in level 8, {repeat} needs to be used with indentation. You can see examples on the {repeat} tab in level 8."
 
 #, fuzzy
 msgid "repeat_match_password"
@@ -1603,6 +1683,9 @@ msgstr "Search"
 msgid "second_teacher"
 msgstr "Second teacher"
 
+msgid "second_teacher_copy_prompt"
+msgstr ""
+
 #, fuzzy
 msgid "second_teacher_prompt"
 msgstr "Enter a teacher username to invite them."
@@ -1622,6 +1705,20 @@ msgstr "Select"
 #, fuzzy
 msgid "select_adventures"
 msgstr "Select adventures"
+
+msgid "select_all"
+msgstr ""
+
+#, fuzzy
+msgid "select_lang"
+msgstr "Select language"
+
+#, fuzzy
+msgid "select_tag"
+msgstr "Select tag"
+
+msgid "selected"
+msgstr ""
 
 #, fuzzy
 msgid "self_removal_prompt"
@@ -1673,6 +1770,14 @@ msgstr "a single quote"
 
 msgid "slash"
 msgstr "коса риска"
+
+#, fuzzy
+msgid "slides"
+msgstr "Slides"
+
+#, fuzzy
+msgid "slides_info"
+msgstr "For each level of Hedy, we have created slides to help you teach. The slides contain explanations of each level, and Hedy examples that you can run inside the slides. Just click the link and get started! the Introduction slides are a general explanation of Hedy before level 1 The slides were created using <a href=\"https://slides.com\">slides.com</a>. If you want to adapt them yourself, you can download them, and then upload the resulting zip file to <a href=\"https://slides.com\">slides.com</a>. You can find more information about the slides in the <a href=\"https://hedy.org/for-teachers/manual/features\">teacher's manual</a>."
 
 #, fuzzy
 msgid "social_media"
@@ -1738,6 +1843,9 @@ msgstr ""
 msgid "student_list"
 msgstr "Student list"
 
+msgid "student_not_allowed_in_class"
+msgstr ""
+
 #, fuzzy
 msgid "student_not_existing"
 msgstr "This username doesn't exist."
@@ -1787,12 +1895,22 @@ msgid "suggestion_color"
 msgstr "Try using another color"
 
 #, fuzzy
+msgid "suggestion_note"
+msgstr "Use a note between C0 and B9 or a number between 1 and 70"
+
+#, fuzzy
 msgid "suggestion_number"
 msgstr "Try changing the value to a number"
 
 #, fuzzy
 msgid "surname"
 msgstr "First Name"
+
+msgid "survey"
+msgstr ""
+
+msgid "survey_completed"
+msgstr ""
 
 #, fuzzy
 msgid "survey_skip"
@@ -1926,6 +2044,10 @@ msgstr "Hedy - Умови конфіденційності"
 msgid "title_programs"
 msgstr "Hedy - Мої програми"
 
+#, fuzzy
+msgid "title_public-adventures"
+msgstr "Hedy - Public adventures"
+
 msgid "title_recover"
 msgstr "Hedy - Відновити акаунт"
 
@@ -1946,8 +2068,9 @@ msgstr "Hedy - View adventure"
 msgid "token_invalid"
 msgstr "Your token is invalid."
 
+#, fuzzy
 msgid "tooltip_level_locked"
-msgstr ""
+msgstr "Your teacher disabled this level"
 
 msgid "translate_error"
 msgstr "Щось пішло не так під час виконання перекладу коду. Спробуйте запустити код на виконання, щоб перевірити, чи немає в ньому помилки. Код з помилками не може бути перекладений."
@@ -2255,4 +2378,3 @@ msgstr "Your program"
 
 #~ msgid "no_tags"
 #~ msgstr "No tags yet."
-

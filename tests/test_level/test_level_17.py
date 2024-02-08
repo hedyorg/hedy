@@ -5,7 +5,8 @@ from parameterized import parameterized
 import exceptions
 import hedy
 from hedy_sourcemap import SourceRange
-from tests.Tester import HedyTester, SkippedMapping
+# from hedy_sourcemap import SourceRange
+from tests.Tester import HedyTester, SkippedMapping  # , SkippedMapping
 
 
 class TestsLevel17(HedyTester):
@@ -148,15 +149,15 @@ class TestsLevel17(HedyTester):
         code = textwrap.dedent("""\
     a is 5
     if a is 1:
-        x is 2
+        a is 2
     else:
-        x is 222""")
+        a is 222""")
         expected = textwrap.dedent("""\
     a = 5
     if convert_numerals('Latin', a) == convert_numerals('Latin', '1'):
-      x = 2
+      a = 2
     else:
-      x = 222""")
+      a = 222""")
         self.single_level_tester(code=code, expected=expected)
 
     def test_forloop(self):
@@ -264,15 +265,15 @@ class TestsLevel17(HedyTester):
         code = textwrap.dedent("""\
       a is 5
       if a is 1:
-          x is 2
+          a is 2
       elif a is 2:
-          x is 222""")
+          a is 222""")
         expected = textwrap.dedent("""\
       a = 5
       if convert_numerals('Latin', a) == convert_numerals('Latin', '1'):
-        x = 2
+        a = 2
       elif convert_numerals('Latin', a) == convert_numerals('Latin', '2'):
-        x = 222""")
+        a = 222""")
 
         self.single_level_tester(code=code, expected=expected)
 
@@ -280,15 +281,15 @@ class TestsLevel17(HedyTester):
         code = textwrap.dedent("""\
       a est 5
       si a est 1:
-          x est 2
+          a est 2
       sinon si a est 2:
-          x est 222""")
+          a est 222""")
         expected = textwrap.dedent("""\
       a = 5
       if convert_numerals('Latin', a) == convert_numerals('Latin', '1'):
-        x = 2
+        a = 2
       elif convert_numerals('Latin', a) == convert_numerals('Latin', '2'):
-        x = 222""")
+        a = 222""")
 
         self.single_level_tester(code=code, expected=expected, lang='fr')
 
@@ -296,19 +297,19 @@ class TestsLevel17(HedyTester):
         code = textwrap.dedent("""\
       a is 5
       if a is 1:
-          x is 2
+          a is 2
       elif a is 4:
-          x is 3
+          a is 3
       elif a is 2:
-          x is 222""")
+          a is 222""")
         expected = textwrap.dedent("""\
       a = 5
       if convert_numerals('Latin', a) == convert_numerals('Latin', '1'):
-        x = 2
+        a = 2
       elif convert_numerals('Latin', a) == convert_numerals('Latin', '4'):
-        x = 3
+        a = 3
       elif convert_numerals('Latin', a) == convert_numerals('Latin', '2'):
-        x = 222""")
+        a = 222""")
 
         self.single_level_tester(
             code=code, expected=expected, expected_commands=[
@@ -330,17 +331,18 @@ class TestsLevel17(HedyTester):
       m is [1, 2]
       n is [1, 2]
       if m is n:
-          a is 1""")
+          print 'JA!'""")
 
         expected = textwrap.dedent("""\
       m = [1, 2]
       n = [1, 2]
       if convert_numerals('Latin', m) == convert_numerals('Latin', n):
-        a = 1""")
+        print(f'''JA!''')""")
 
         self.multi_level_tester(
             code=code,
-            expected=expected
+            expected=expected,
+            max_level=17
         )
 
     def test_equality_with_incompatible_types_gives_error(self):
@@ -474,7 +476,7 @@ class TestsLevel17(HedyTester):
         self.single_level_tester(
             code=code,
             exception=hedy.exceptions.ParseException,
-            extra_check_function=lambda c: c.exception.error_location[0] == 2 and c.exception.error_location[1] == 5
+            extra_check_function=lambda c: c.exception.error_location[0] == 2 and c.exception.error_location[1] == 31
         )
 
     def test_if_button_is_pressed_print(self):

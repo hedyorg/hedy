@@ -1,30 +1,23 @@
-Start the name of the PR with one of the relevant prefixed in the title of the PR:
+Please replace all _____ before you create a pull request!
 
-* [LANGUAGE] -> changes related to grammars or the transpiler
-* [FIX] -> solving a bug
-* [CHORE] -> things unrelated to the code, such as mergify scripts
-* [REFACTORING] -> should not change anything, cleanup of code
-* [UI] -> improvements and changes of the Hedy user interface
-* [TESTING] -> changes made to the test suite
-* [BACKEND] -> changes to the internal logic of the Hedy website
+Start the name of the PR with one of the relevant prefixes in the title of the PR:
 
-Finish the name of the PR with a clear description of the changes and delete the lines above from the description.
+* 🖊️ -> changes related to grammars or the transpiler
+* 🪲 -> solving a bug
+* 🚚 -> changes unrelated to shipping, such as mergify scripts
+* 🧹 -> refactorings (changes that do not change functionality and are only a cleanup of code)
+* 💻 -> improvements and changes of the Hedy website
+* 🧪 -> changes made to the test suite
+* 📜 -> changes related to content
 
-**Now fill out the remainder of this template by replacing all _italic_ content**
-
-**Description**
-
-_Changes in detail. For example: "**Adds** translations of levels 1 to 12 to Polish" (note the use of present tense!)_
-
-**Fixes _issue or discussion number_**
-
-Always link the number of the issue or of the discussion that your PR concerns.
-Tip, if you use the word `fixes` before the issue number in this description, the related issue will automatically close then the PR is merged!
+Fixes _______ (Always link the number of the issue or of the discussion that your PR concerns. If you use the word `fixes` before the issue number in this description, the related issue will automatically close then the PR is merged)
 
 **How to test**
 
-* If this is a UI change: _describe how to run your code to see it in action. See this https://github.com/hedyorg/hedy/pull/880#issue-1016304308 for an example_
-* If this is a language change: _add a few tests showing the difference_
+Follow these steps to verify this PR works as intended:
+
+* _____ (See this https://github.com/hedyorg/hedy/pull/880#issue-1016304308 for an example)
+* _____
 
 **Checklist**
 Done? Check if you have it all in place using this list: (mark with x if done)

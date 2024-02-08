@@ -15,21 +15,13 @@ COUNTRIES = static_babel_content.COUNTRIES
 ALL_LANGUAGES = {}
 ALL_KEYWORD_LANGUAGES = {}
 
-# Todo TB -> We create this list manually, but it would be nice if we find
-# a way to automate this as well
-NON_LATIN_LANGUAGES = ['ar', 'bg', 'bn', 'el', 'fa', 'hi', 'he', 'pa_PK', 'ru', 'zh_Hans']
-
 # Babel has a different naming convention than Weblate and doesn't support some languages -> fix this manually
 CUSTOM_BABEL_LANGUAGES = {'pa_PK': 'pa_Arab_PK',
                           'kmr': 'ku_TR',
-                          'tn': 'en',
-                          'pap': 'en',
                           'tl': 'en'}
 
 # For the non-existing language manually overwrite the display language to make sure it is displayed correctly
 CUSTOM_LANGUAGE_TRANSLATIONS = {'kmr': 'Kurdî (Tirkiye)',
-                                'tn': 'Setswana',
-                                'pap': 'Papiamentu',
                                 'tl': 'ᜆᜄᜎᜓᜄ᜔'}
 
 customize_babel_locale(CUSTOM_BABEL_LANGUAGES)
@@ -49,6 +41,7 @@ ADVENTURE_ORDER_PER_LEVEL = {
         'rock',
         'haunted',
         'story',
+        'music',
         'turtle',
         'turtle_draw_it',
         'restaurant',
@@ -65,6 +58,7 @@ ADVENTURE_ORDER_PER_LEVEL = {
         'sleep_command',
         'parrot',
         'story',
+        'music',
         'restaurant',
         'turtle',
         'turtle_draw_it',
@@ -75,6 +69,7 @@ ADVENTURE_ORDER_PER_LEVEL = {
         'random_command',
         'dice',
         'rock',
+        'music',
         'fortune',
         'restaurant',
         'add_remove_command',
@@ -96,6 +91,7 @@ ADVENTURE_ORDER_PER_LEVEL = {
         'turtle',
         'turtle_draw_it',
         'clear_command',
+        'music',
         'story',
         'haunted',
         'fortune',
@@ -105,6 +101,7 @@ ADVENTURE_ORDER_PER_LEVEL = {
     5: [
         'default',
         'if_command',
+        'music',
         'language',
         'dice',
         'dishes',
@@ -123,6 +120,7 @@ ADVENTURE_ORDER_PER_LEVEL = {
     6: [
         'default',
         'maths',
+        'music',
         'is_command',
         'songs',
         'dice',
@@ -139,6 +137,7 @@ ADVENTURE_ORDER_PER_LEVEL = {
         'repeat_command',
         'story',
         'songs',
+        'music',
         'dishes',
         'dice',
         'repeat_command_2',
@@ -154,6 +153,7 @@ ADVENTURE_ORDER_PER_LEVEL = {
         'fortune',
         'repeat_command_2',
         'songs',
+        'music',
         'if_command',
         'story',
         'haunted',
@@ -169,6 +169,7 @@ ADVENTURE_ORDER_PER_LEVEL = {
         'rock',
         'story',
         'calculator',
+        'music',
         'restaurant',
         'haunted',
         'pressit',
@@ -210,6 +211,7 @@ ADVENTURE_ORDER_PER_LEVEL = {
         'quotation_marks',
         'story',
         'fortune',
+        'music',
         'songs',
         'songs_2',
         'restaurant',
@@ -225,6 +227,7 @@ ADVENTURE_ORDER_PER_LEVEL = {
         'and_or_command',
         'secret',
         'functions',
+        'music',
         'story',
         'rock',
         'turtle_draw_it',
@@ -237,6 +240,7 @@ ADVENTURE_ORDER_PER_LEVEL = {
         'default',
         'is_command',
         'guess_my_number',
+        'music',
         'haunted',
         'functions',
         'turtle_draw_it',
@@ -506,8 +510,9 @@ class Adventures(StructuredDataFile):
     def get_adventure_keyname_name_levels(self):
         return {aid: {adv['name']: list(adv['levels'].keys())} for aid, adv in self.file.get('adventures', {}).items()}
 
-    def get_adventure_names(self):
-        return {aid: adv['name'] for aid, adv in self.file.get('adventures', {}).items()}
+    def get_adventure_names(self, keyword_lang):
+        return {aid: adv['name'] for aid, adv in deep_translate_keywords(
+            self.file.get('adventures'), keyword_lang).items()}
 
     def get_adventures(self, keyword_lang="en"):
         return deep_translate_keywords(self.file.get('adventures'), keyword_lang)

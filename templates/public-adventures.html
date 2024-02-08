@@ -1,0 +1,109 @@
+
+{% extends "auth.html" %}
+
+{% block regular_content %}
+
+    <div id="filters"
+        class="flex flex-col sm:flex-row items-center gap-2
+        justify-around bg-blue-400 shadow-md rounded-lg p-4 mb-4"
+        _="on load set $filtered to {}">
+        <div id="search" class="w-full sm:basis-1/2">
+            <input id="search_adventure"
+                type="search"
+                value="{{currentSearch}}"
+                placeholder="{{_('search')}}"
+                class="border text-black border-gray-500 rounded h-8 px-2 w-full"
+                >
+        </div>
+        <div class="flex w-full sm:basis-1/2 gap-2">
+            <div id="levels" class="flex-1">
+                <div class="dropdown relative" data-type="single" id="level-select" data-value="{{selectedLevel}}">
+                  <button class="toggle-button font-semibold rounded inline-flex justify-between 
+                     appearance-none w-full border border-gray-200 text-gray-700 p-2 rounded"
+                    onclick="$('#level_dropdown').slideToggle('medium');">
+                    <span class="label" data-value="{{_('select_lang')}}">{{selectedLevel or _('select_lang')}}</span>
+                    <svg id="keyword-arrow_level" class="fill-current h-6 w-6" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
+                      <path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z" />
+                    </svg>
+                  </button>
+                  <div class="dropdown-menu dropdown-blue z-30 mt-2 w-full" id="level_dropdown"
+                    style="display: none; width: 100%;"
+                    _="on mutation of @style
+                        set arrow to #keyword-arrow_level
+                        if *display == 'none'
+                            remove .rotate-180 from arrow
+                        else if not arrow.classList.contains('rotate-180')
+                            add .rotate-180 to arrow
+                        end">
+                    {% for level in customizations["available_levels"] %}
+                        <div class="option {% if selectedLevel|string == level|string %}selected{% endif %}"
+                            data-value="{{level}}"
+                        >{{ level }}</div>
+                    {% endfor %}
+                  </div>
+                </div>
+            </div>
+
+            <div id="languages" class="flex-1">
+                <div class="dropdown relative" data-type="single" id="language-select" data-value="{{selectedLang}}">
+                  <button class="toggle-button font-semibold rounded inline-flex justify-between 
+                     appearance-none w-full border border-gray-200 text-gray-700 p-2 rounded"
+                    onclick="$('#lang_dropdown').slideToggle('medium');">
+                    <span class="label" data-value="{{_('select_lang')}}">{{lang_to_sym(selectedLang) if selectedLang else _('select_lang')}}</span>
+                    <svg id="keyword-arrow_lang" class="fill-current h-6 w-6" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
+                      <path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z" />
+                    </svg>
+                  </button>
+                  <div class="dropdown-menu dropdown-blue z-30 mt-2 w-full" id="lang_dropdown"
+                    style="display: none; width: 100%;"
+                    _="on mutation of @style
+                        set arrow to #keyword-arrow_lang
+                        if *display == 'none'
+                            remove .rotate-180 from arrow
+                        else if not arrow.classList.contains('rotate-180')
+                            add .rotate-180 to arrow
+                        end">
+                    <div class="option default" value="">{{_('select_lang')}}</div>
+                    {% for lang in available_languages %}
+                        <div class="option {% if lang == selectedLang %}selected{% endif %}" data-value="{{lang}}">{{lang_to_sym(lang)}}</div>
+                    {% endfor %}
+                  </div>
+                </div>
+            </div>
+                
+            <div id="tags" class="flex-1">
+                <div class="dropdown relative" id="tag-select" data-value="{{selectedTag}}">
+                  <button class="toggle-button font-semibold rounded inline-flex justify-between 
+                     appearance-none w-full border border-gray-200 text-gray-700 p-2 rounded"
+                    onclick="$('#tags_dropdown').slideToggle('medium');">
+                    <span class="label" data-value="{{_('select_tag')}}">{{selectedTag or _('select_tag')}}</span>
+                    <svg id="keyword-arrow_tag" class="fill-current h-6 w-6" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
+                      <path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z" />
+                    </svg>
+                  </button>
+                  <div class="dropdown-menu dropdown-blue z-30 mt-2 w-full" id="tags_dropdown"
+                    style="display: none; width: 100%;"
+                    _="on mutation of @style
+                        set arrow to #keyword-arrow_tag
+                        if *display == 'none'
+                            remove .rotate-180 from arrow
+                        else if not arrow.classList.contains('rotate-180')
+                            add .rotate-180 to arrow
+                        end">
+                      {% for tag in available_tags %}
+                          <div class="option {% if tag in selectedTag %}selected{% endif %}" data-value="{{tag}}">{{tag}}</div>
+                      {% endfor %}
+                  </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- <div id="adventures" class="card-container gap-2"> -->
+      <div id="public-adventures-body">
+        {% include "public-adventures-body.html" %}
+      </div>
+
+
+{% endblock %}

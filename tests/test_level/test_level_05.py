@@ -37,7 +37,7 @@ class TestsLevel5(HedyTester):
         if naam == 'Hedy':
           {python}""")
 
-        self.single_level_tester(code=code, expected=expected)
+        self.single_level_tester(code=code, expected=expected, unused_allowed=True)
 
     def test_if_equality_trailing_space_linebreak_print(self):
         code = textwrap.dedent("""\
@@ -189,7 +189,7 @@ class TestsLevel5(HedyTester):
     def test_if_equality_unquoted_rhs_with_space_and_following_command_print_gives_error(self):
         code = textwrap.dedent("""\
         naam is James
-        if naam is James Bond print 'shaken' 
+        if naam is James Bond print 'shaken'
         print naam
         prind skipping""")
 
@@ -200,7 +200,7 @@ class TestsLevel5(HedyTester):
         pass""")
 
         skipped_mappings = [
-            SkippedMapping(SourceRange(2, 1, 2, 59), hedy.exceptions.UnquotedEqualityCheckException),
+            SkippedMapping(SourceRange(2, 1, 2, 58), hedy.exceptions.UnquotedEqualityCheckException),
             SkippedMapping(SourceRange(4, 1, 4, 15), hedy.exceptions.InvalidCommandException)
         ]
 
@@ -318,7 +318,7 @@ class TestsLevel5(HedyTester):
         if a == b:
           c = '1'""")
 
-        self.single_level_tester(code=code, expected=expected)
+        self.single_level_tester(code=code, expected=expected, unused_allowed=True)
 
     def test_quoted_ask(self):
         code = textwrap.dedent("""\
@@ -328,7 +328,8 @@ class TestsLevel5(HedyTester):
 
         self.multi_level_tester(code=code,
                                 expected=expected,
-                                max_level=11)
+                                max_level=11,
+                                unused_allowed=True)
 
     def test_equality_with_lists_gives_error(self):
         code = textwrap.dedent("""\
@@ -503,7 +504,7 @@ class TestsLevel5(HedyTester):
           x__x__x__x = '5'
         drink = 'water'""")
 
-        self.single_level_tester(code=code, expected=expected, translate=False)
+        self.single_level_tester(code=code, expected=expected, translate=False, unused_allowed=True)
 
     def test_two_ifs_assign_following(self):
         code = textwrap.dedent("""\
@@ -519,7 +520,7 @@ class TestsLevel5(HedyTester):
         drink = 'water'
         print(f'{drink}')""")
 
-        self.single_level_tester(code=code, expected=expected, translate=False)
+        self.single_level_tester(code=code, expected=expected, translate=False, unused_allowed=True)
 
     def test_if_equality_print_else_linebreak_print(self):
         # line break after else is allowed
@@ -743,7 +744,7 @@ class TestsLevel5(HedyTester):
         print(f'{eten}')""")
 
         self.single_level_tester(code=code,
-                                 expected=expected, translate=False)
+                                 expected=expected, translate=False, unused_allowed=True)
 
     def test_onno_3372_else(self):
         code = textwrap.dedent("""\
@@ -1545,3 +1546,44 @@ class TestsLevel5(HedyTester):
 
         self.single_level_tester(code, expected=expected_code)
         self.source_map_tester(code=code, expected_source_map=expected_source_map)
+
+    def test_turn_if_play(self):
+        code = textwrap.dedent("""\
+            answer is ask 'What is the capital of Zimbabwe?'
+            if answer is Harare play C6""")
+
+        expected = textwrap.dedent("""\
+        answer = input(f'What is the capital of Zimbabwe?')
+        if answer == 'Harare':
+          if 'C6' not in notes_mapping.keys() and 'C6' not in notes_mapping.values():
+              raise Exception('catch_value_exception')
+          play(notes_mapping.get(str('C6'), str('C6')))
+          time.sleep(0.5)""")
+
+        self.single_level_tester(
+            code=code,
+            skip_faulty=True,
+            expected=expected)
+
+    def test_turn_if_else_play(self):
+        code = textwrap.dedent("""\
+            answer is ask 'What is the capital of Zimbabwe?'
+            if answer is Harare play C6 else play C1""")
+
+        expected = textwrap.dedent("""\
+        answer = input(f'What is the capital of Zimbabwe?')
+        if answer == 'Harare':
+          if 'C6' not in notes_mapping.keys() and 'C6' not in notes_mapping.values():
+              raise Exception('catch_value_exception')
+          play(notes_mapping.get(str('C6'), str('C6')))
+          time.sleep(0.5)
+        else:
+          if 'C1' not in notes_mapping.keys() and 'C1' not in notes_mapping.values():
+              raise Exception('catch_value_exception')
+          play(notes_mapping.get(str('C1'), str('C1')))
+          time.sleep(0.5)""")
+
+        self.single_level_tester(
+            code=code,
+            skip_faulty=False,
+            expected=expected)

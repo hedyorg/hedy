@@ -3,27 +3,31 @@
 # This file is distributed under the same license as the PROJECT project.
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2023.
 #
-#, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2023-11-27 20:54+0100\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
-"Language: fr\n"
+"POT-Creation-Date: 2024-01-18 10:49+0100\n"
+"PO-Revision-Date: 2024-02-06 15:23+0000\n"
+"Last-Translator: Martin Constantino–Bodin <martin.bodin@ens-lyon.org>\n"
 "Language-Team: fr <LL@li.org>\n"
-"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+"Language: fr\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Generated-By: Babel 2.11.0\n"
+"Plural-Forms: nplurals=2; plural=n > 1;\n"
+"X-Generator: Weblate 5.4-dev\n"
+"Generated-By: Babel 2.14.0\n"
 
 msgid "Access Before Assign"
 msgstr "Tu as essayé d'utiliser la variable {name} à la ligne {access_line_number}, mais tu ne l'as défini qu'à la ligne {definition_line_number}. Défini ta variable avant de l'utiliser."
 
 msgid "Cyclic Var Definition"
 msgstr "Le nom {variable} doit être défini avant que tu puisses l’utiliser à droite de la commande `is`."
+
+#, fuzzy
+msgid "Function Undefined"
+msgstr "You tried to use the function {name}, but you didn't define it."
 
 msgid "Has Blanks"
 msgstr "Ton code est incomplet. Il contient des blancs que tu dois remplacer par du code."
@@ -61,6 +65,10 @@ msgstr "Tu as utilisé `echo` avant `ask`, ou bien `echo` sans `ask`. Il faut d�
 msgid "Lonely Text"
 msgstr "Il semble que tu as oublié de mettre une commande avec le texte de la ligne {line_number}"
 
+#, fuzzy
+msgid "Missing Additional Command"
+msgstr "It looks like you forgot to complete writing {command} on line {line_number}."
+
 msgid "Missing Command"
 msgstr "Il semble que vous avez oublié d'utiliser une commande à la ligne {line_number}."
 
@@ -68,11 +76,19 @@ msgid "Missing Inner Command"
 msgstr "Il semble que tu as oublié d'utiliser une commande avec la déclaration {command} que tu as utilisé à la ligne {line_number}."
 
 #, fuzzy
+msgid "Missing Variable"
+msgstr "It looks like your {command} is missing a variable at the start of the line."
+
+#, fuzzy
 msgid "Misspelled At Command"
 msgstr "It looks like you might have misspelled the {command} command, instead you wrote {invalid_argument} in line {line_number}."
 
 msgid "No Indentation"
 msgstr "Tu as utilisé trop peu d’espaces à la ligne {line_number}. Tu as utilisé {leading_spaces} espaces, ce qui n’est pas assez. Commence chaque bloc par {indent_size} espaces de plus qu’à la ligne précédente."
+
+#, fuzzy
+msgid "Non Decimal Variable"
+msgstr "At line {line_number}, you might have tried using a number which Hedy does not like very much! Try changing it to a decimal number like 2."
 
 msgid "Parse"
 msgstr "Le code que vous avez entré n'est pas un code Hedy valide. Il y a une erreur sur la ligne {location[0]}, à la position {location[1]}. Vous avez tapé {character_found}, mais ce n'est pas permis."
@@ -101,11 +117,19 @@ msgstr "Les nombres non-entiers ne sont pas encore disponible, mais ils le seron
 msgid "Unsupported String Value"
 msgstr "Les valeurs textes ne peuvent pas contenir {invalid_value}."
 
+#, fuzzy
+msgid "Unused Variable"
+msgstr "You defined the variable {variable_name} on line {line_number}, but you did not use it."
+
 msgid "Var Undefined"
 msgstr "Tu as essayé d’utiliser la variable {name}, mais tu ne l’as pas définie. Ou bien tu essayais d’utiliser le mot {name}, mais tu as oublié les guillemets."
 
 msgid "Wrong Level"
 msgstr "C'était un code Hedy correct, mais pas au bon niveau. Vous avez écrit {offending_keyword} pour le niveau {working_level}. Conseil : {tip}"
+
+#, fuzzy
+msgid "Wrong Number of Arguments"
+msgstr "Your function used the wrong number of arguments. You provided {used_number} but the function {name} needs {defined_number}"
 
 msgid "account_overview"
 msgstr "Aperçu du compte"
@@ -147,6 +171,10 @@ msgstr "Aller au niveau {level}"
 msgid "adventure"
 msgstr "Aventure"
 
+#, fuzzy
+msgid "adventure_cloned"
+msgstr "Adventure is cloned"
+
 msgid "adventure_duplicate"
 msgstr "Tu as déjà une aventure avec ce nom."
 
@@ -182,6 +210,10 @@ msgstr "L'aventure à été mise à jour !"
 
 msgid "adventures"
 msgstr "Aventures"
+
+#, fuzzy
+msgid "adventures_info"
+msgstr "Each Hedy level has built-in exercises for students, which we call adventures. You can create your own adventures and add them to your classes. With your own adventures you can create adventures that are relevant and interesting for your students. You can find more information about creating your own adventures <a href=\"https://hedy.org/for-teachers/manual/features\">here</a>."
 
 msgid "adventures_restored"
 msgstr "Les aventures par défaut ont été rétablies."
@@ -224,6 +256,10 @@ msgstr "programmes sauvegardés"
 
 msgid "amount_submitted"
 msgstr "programmes soumis"
+
+#, fuzzy
+msgid "apply_filters"
+msgstr "Apply filters"
 
 msgid "are_you_sure"
 msgstr "Êtes-vous sûr ? Vous ne pouvez pas annuler cette action."
@@ -321,6 +357,18 @@ msgstr "What is the gender balance in your class?"
 #, fuzzy
 msgid "class_survey_question4"
 msgstr "What distinguishes your students from others?"
+
+#, fuzzy
+msgid "classes_info"
+msgstr "Create a class to follow the progress of each student in dashboard, and to customize the adventures your students see, and even adding your own! You can create as many classes as you like, and each class can have multiple teachers each one with different roles. You can also add as many students as you want, but mind that each student can only be in one class at a time. You can find more information about classes in the <a href=\"https://hedy.org/for-teachers/manual/preparations#for-teachers\">teacher manual</a>."
+
+#, fuzzy
+msgid "clone"
+msgstr "Clone"
+
+#, fuzzy
+msgid "cloned_times"
+msgstr "Clones"
 
 msgid "close"
 msgstr "Fermer"
@@ -509,6 +557,10 @@ msgstr "`{echo}` et `{ask}` ne correspondent pas"
 msgid "echo_out"
 msgstr "À partir du niveau 2 `{echo}` n'est plus nécessaire. Tu peux répéter une réponse avec `{ask}` et `{print}` maintenant. Exemple : `nom is {ask} Quel est ton nom ? {print} bonjour nom`"
 
+#, fuzzy
+msgid "edit_adventure"
+msgstr "Edit adventure"
+
 msgid "edit_code_button"
 msgstr "Modifier le code"
 
@@ -550,6 +602,10 @@ msgstr "Cette adresse mail est déjà utilisée."
 
 msgid "exists_username"
 msgstr "Ce pseudo est déjà utilisé."
+
+#, fuzzy
+msgid "exit_preview_mode"
+msgstr "Exit preview mode"
 
 msgid "experience_invalid"
 msgstr "Sélectionnez une expérience valide, choisissez (Oui, Non)."
@@ -854,6 +910,9 @@ msgstr "Ce niveau n’a pas encore été rendu disponible dans votre classe"
 msgid "level_title"
 msgstr "Niveau"
 
+msgid "levels"
+msgstr ""
+
 msgid "link"
 msgstr "Lien"
 
@@ -1032,12 +1091,17 @@ msgstr "Pas encore de compte ?"
 msgid "no_accounts"
 msgstr "Il n'y a pas de compte à créer."
 
+#, fuzzy
+msgid "no_adventures_yet"
+msgstr "There are no public adventures yet..."
+
 msgid "no_certificate"
 msgstr "Cet utilisateur n'a pas reçu le certificat de complétion de Hedy"
 
 msgid "no_more_flat_if"
 msgstr "À partir du niveau 8, le code après {if} doit être placé sur une nouvelle ligne commençant avec 4 espaces."
 
+#, fuzzy
 msgid "no_programs"
 msgstr "Vous n'avez pas encore de programme."
 
@@ -1132,6 +1196,9 @@ msgstr "Un autre langage textuel"
 msgid "overwrite_warning"
 msgstr "Tu as déjà un programme avec ce nom, sauvegarder celui en cours remplacera l'ancien. Confirmer ?"
 
+msgid "owner"
+msgstr ""
+
 msgid "page"
 msgstr "page"
 
@@ -1204,6 +1271,13 @@ msgstr "Langue préferée"
 msgid "preview"
 msgstr "Aperçu"
 
+msgid "previewing_adventure"
+msgstr ""
+
+#, fuzzy
+msgid "previewing_class"
+msgstr "You are previewing class <em>{class_name}</em> as a teacher."
+
 msgid "previous_campaigns"
 msgstr "Voir les précédentes nouvelles"
 
@@ -1261,6 +1335,9 @@ msgstr "Veux tu rejoindre cette classe ?"
 
 msgid "public"
 msgstr "Public"
+
+msgid "public_adventures"
+msgstr "Browse public adventures"
 
 msgid "public_invalid"
 msgstr "Cette sélection d'accord est invalide"
@@ -1322,6 +1399,9 @@ msgstr "Confirm removing this user from the class."
 
 msgid "repair_program_logo_alt"
 msgstr "Corriger l'icône du programmer"
+
+msgid "repeat_dep"
+msgstr "À partir du niveau 8, {repeat} doit être utilisée avec de l'indentation. Des exemples sont montrés à l'onglet {repeat} du niveau 8."
 
 msgid "repeat_match_password"
 msgstr "Les mots de passes sont différents."
@@ -1407,6 +1487,9 @@ msgstr "Rechercher"
 msgid "second_teacher"
 msgstr "Second teacher"
 
+msgid "second_teacher_copy_prompt"
+msgstr ""
+
 #, fuzzy
 msgid "second_teacher_prompt"
 msgstr "Enter a teacher username to invite them."
@@ -1423,6 +1506,20 @@ msgstr "Sélectionner"
 
 msgid "select_adventures"
 msgstr "Choisissez les aventures"
+
+msgid "select_all"
+msgstr ""
+
+#, fuzzy
+msgid "select_lang"
+msgstr "Select language"
+
+#, fuzzy
+msgid "select_tag"
+msgstr "Select tag"
+
+msgid "selected"
+msgstr ""
 
 msgid "self_removal_prompt"
 msgstr "Voulez-vous vraiment quitter ce cours ?"
@@ -1462,6 +1559,14 @@ msgstr "une apostrophe"
 
 msgid "slash"
 msgstr "une barre oblique"
+
+#, fuzzy
+msgid "slides"
+msgstr "Slides"
+
+#, fuzzy
+msgid "slides_info"
+msgstr "For each level of Hedy, we have created slides to help you teach. The slides contain explanations of each level, and Hedy examples that you can run inside the slides. Just click the link and get started! the Introduction slides are a general explanation of Hedy before level 1 The slides were created using <a href=\"https://slides.com\">slides.com</a>. If you want to adapt them yourself, you can download them, and then upload the resulting zip file to <a href=\"https://slides.com\">slides.com</a>. You can find more information about the slides in the <a href=\"https://hedy.org/for-teachers/manual/features\">teacher's manual</a>."
 
 msgid "social_media"
 msgstr "Réseau social"
@@ -1516,6 +1621,9 @@ msgstr ""
 msgid "student_list"
 msgstr "Student list"
 
+msgid "student_not_allowed_in_class"
+msgstr ""
+
 msgid "student_not_existing"
 msgstr "Le pseudo n'existe pas."
 
@@ -1554,11 +1662,21 @@ msgid "suggestion_color"
 msgstr "Try using another color"
 
 #, fuzzy
+msgid "suggestion_note"
+msgstr "Use a note between C0 and B9 or a number between 1 and 70"
+
+#, fuzzy
 msgid "suggestion_number"
 msgstr "Try changing the value to a number"
 
 msgid "surname"
 msgstr "Prénom"
+
+msgid "survey"
+msgstr ""
+
+msgid "survey_completed"
+msgstr ""
 
 #, fuzzy
 msgid "survey_skip"
@@ -1677,6 +1795,10 @@ msgstr "Hedy - Conditions de confidentialité"
 msgid "title_programs"
 msgstr "Hedy - Mes programmes"
 
+#, fuzzy
+msgid "title_public-adventures"
+msgstr "Hedy - Public adventures"
+
 msgid "title_recover"
 msgstr "Hedy - Récupérer le compte"
 
@@ -1695,8 +1817,9 @@ msgstr "Hedy – Voir une aventure"
 msgid "token_invalid"
 msgstr "Votre clé n'est pas valide."
 
+#, fuzzy
 msgid "tooltip_level_locked"
-msgstr ""
+msgstr "Your teacher disabled this level"
 
 msgid "translate_error"
 msgstr "Quelque chose s'est mal passé lors de la traduction du code. Essayez d'exécuter le code pour voir s'il contient une erreur. Le code avec des erreurs ne peut pas être traduit."
@@ -1976,4 +2099,3 @@ msgstr "Ton programme"
 
 #~ msgid "no_tags"
 #~ msgstr "No tags yet."
-

@@ -88,7 +88,19 @@ learn-more-sections:
         * [Leiden University, Nisan 2020](https://www.universiteitleiden.nl/en/news/2020/03/looking-to-distract-the-kids-while-you-work-from-home-get-them-programming)
         * [Mare (Hollandaca), Nisan 2020](https://www.mareonline.nl/cultuur/computercode-voor-de-kids/)
         * [AG Connect (Hollandaca), Nisan 2020](https://www.agconnect.nl/artikel/stapsgewijs-python-leren-programmeren-met-nieuwe-taal-hedy)
-sections:
+start-sections:
+-   title: Hedy ile çalışmaya başlamak
+    text: '*Öğretmen hesapları, slaytlar vb. hakkında bir kaç şey*'
+-   title: Diğer öğretmenler Hedy hakkında ne diyor
+    text: "Bir süre önce birkaç kısa Hedy öğretmen anketi düzenledik.\nSorular, iyileştirme önerileri ile Hedy'nin en iyi özellikleri arasında gidip geliyor.\nAşağıda onların ne düşündükleri hakkında beyanları yer almaktadır:\n\nBasit arayüz ve iyi örnekler. *Öğretmen: 3. - 6. sınıflar (temel)*\n\nÇok\
+        \ dilli programlama ve kademeli programlama kavramının kendisi. - *US: ortaokul, 6-8. sınıf*\n\nProgramlamaya girişin aşamalı doğası. *Avustralya: Lise*\n\nYapılandırması çok iyi. *Hollanda: Ortaokul HAVO-VWO*\n\nSınıfın hızına ayak uydurabilirim. *Hollanda: grup 7 ve 8* \n\nOtomatik olarak devam\
+        \ ediyor. *Hollanda: 2 HAVO-VWO*\n\nHem açıklamanın Hollandaca (ve kodun İngilizce) olabilmesi hem de daha fazla \nve daha fazla olasılık. *Hollanda: Artı sınıf grubu 7*\n\nProgramlamanın 'gerçekliği', gerçekte nasıl olduğuna benziyor. *Hollanda: Artı sınıf grubu 4 ten 8 e*\n\nAdım adım aktiviteler.\
+        \ Eğlenceli aktiviteler. *Hollanda: 1e Tüm seviyeler, 2e VWO/HAVO 2e VWO +, 3e HAVO 3e VWO*\n\nAma Hedy ve kademeli seviyeleri... Ne fikir ama, \nBunu yarattığınız için size şahsen teşekkür etmek istedim. Size ne kadar teşekkür etsem azdır. Ayrıca, Hedy'de gördüğüm \nkadar öğrencilerimin katılım\
+        \ ve coşku düzeyini hiç görmemiştim. Seviye 5'e kadar işledik ve Python'a başlamadan önce \nsınıflarda ve laboratuvarlarda bir hafta daha geçirmeyi planlıyoruz.  *Pakistan*\n\nHedy'yi gerçekten çok beğendim ve aynı zamanda güzel bir şekilde kurulmuş, bu da onu ilkokulda kullanmak için iyi kılıyor.\n\
+        Hedy'nin kademeli yaklaşımı çok işe yarıyor.\nHer seviyenin başındaki kısa açıklama ve kısa örnek programlar, çocuklara seçilen seviyede neyin yeni olduğu konusunda \nhızlı bir fikir vermeye yardımcı oluyor.\nÇocukların seçebileceği farklı ödevler de çok işe yarıyor.\nÇocukların kendilerine hitap\
+        \ eden ödevleri seçtiklerini ve daha sonra seviyeler boyunca onlarla birlikte çalıştıklarını görüyorsunuz. \nHedy, programlamada iyi olan ve gerçek bir programlama dilinin tadına varmak isteyen çocuklar için çok eğlencelidir. Ortaokulda \ndaha fazla ICT eğitimi verilmeye başlanır başlanmaz, ortaokul\
+        \ için iyi bir hazırlıktır. *Netherlands: Oegstgeest Montessori school*\n\n<img width=\"500px\" src=\"static/images/teacherfeedback/Fkids1.JPG\"></img>"
+teacher-guide:
 -   title: Giriş
     key: tanıtım
     subsections:
@@ -148,6 +160,17 @@ sections:
         text: |-
             Bir öğretmen olarak, öğrencileriniz için bir sınıf oluşturabilirsiniz. Bu sınıfta öğrencilerin hesaplarını ve programlarını görebilir ve ilerlemelerini izleyebilirsiniz.
             Bu <a href="https://www.youtube.com/watch?v=Y3RTIWftJQg" target="_blank">video</a> Hedy'de nasıl hızlı bir şekilde sınıf oluşturacağınızı gösterir.
+    -   title: Duplicate a class
+        text: |-
+            Are you teaching multiple classes? Then you don't have to customize each class individually. Simply make a class, costumize the class (see "Customize your Class" to learn how) and then duplicate this class as many times as you want.
+            You can duplicate the class on the 'For Teachers' page. If you duplicate a class, all the class settings are duplicated as well. This means that all the levels and adventures you've mande unavailable for the first class will now be unavailable for the new class(es) as well.
+            The student accounts and second teacher accounts in your class will not be duplicated into the new class.
+    -   title: Add a second teacher
+        text: |-
+            Are you not the only teacher that teaches your class? Then you can now add another teacher to the class. Go to the 'For teachers' page and click on the class. Then choose 'Invite a teacher' and fill in the username of your colleague.
+            Your colleague will get an invitation on their account to join your class. They can see that invitation message by clicking on their username in the upper right corner of the screen and selecting 'My account'.
+            Once the other teacher accepts the invitation they can customize the class as well.
+            To remove a second teacher from your class, go to the class page and remove the second teacher. The teacher who's created the class cannot be removed.
     -   title: Sınıfınızı Özelleştirin
         text: |-
             Ayrıca, sınıfınızı özelleştirebilir ve onlar için hangi maceraların kullanılabilir olacağını seçebilirsiniz. Bu şekilde öğrencileriniz maceraların ve seviyelerin çokluğundan bunalmayacak ve özellikle pratik yapmalarını istediğiniz maceralara odaklanabilecekler.
@@ -1137,15 +1160,3 @@ sections:
                 solution_code: |-
                     sıcaklık = 25
                     yazdır('Şu anda hava dışarıda ', sıcaklık, ' derece')
-start-sections:
--   title: Hedy ile çalışmaya başlamak
-    text: '*Öğretmen hesapları, slaytlar vb. hakkında bir kaç şey*'
--   title: Diğer öğretmenler ne diyor
-    text: "Bir süre önce birkaç kısa Hedy öğretmen anketi düzenledik.\nSorular, iyileştirme önerileri ile Hedy'nin en iyi özellikleri arasında gidip geliyor.\nAşağıda onların ne düşündükleri hakkında beyanları yer almaktadır:\n\nBasit arayüz ve iyi örnekler. *Öğretmen: 3. - 6. sınıflar (temel)*\n\nÇok\
-        \ dilli programlama ve kademeli programlama kavramının kendisi. - *US: ortaokul, 6-8. sınıf*\n\nProgramlamaya girişin aşamalı doğası. *Avustralya: Lise*\n\nYapılandırması çok iyi. *Hollanda: Ortaokul HAVO-VWO*\n\nSınıfın hızına ayak uydurabilirim. *Hollanda: grup 7 ve 8* \n\nOtomatik olarak devam\
-        \ ediyor. *Hollanda: 2 HAVO-VWO*\n\nHem açıklamanın Hollandaca (ve kodun İngilizce) olabilmesi hem de daha fazla \nve daha fazla olasılık. *Hollanda: Artı sınıf grubu 7*\n\nProgramlamanın 'gerçekliği', gerçekte nasıl olduğuna benziyor. *Hollanda: Artı sınıf grubu 4 ten 8 e*\n\nAdım adım aktiviteler.\
-        \ Eğlenceli aktiviteler. *Hollanda: 1e Tüm seviyeler, 2e VWO/HAVO 2e VWO +, 3e HAVO 3e VWO*\n\nAma Hedy ve kademeli seviyeleri... Ne fikir ama, \nBunu yarattığınız için size şahsen teşekkür etmek istedim. Size ne kadar teşekkür etsem azdır. Ayrıca, Hedy'de gördüğüm \nkadar öğrencilerimin katılım\
-        \ ve coşku düzeyini hiç görmemiştim. Seviye 5'e kadar işledik ve Python'a başlamadan önce \nsınıflarda ve laboratuvarlarda bir hafta daha geçirmeyi planlıyoruz.  *Pakistan*\n\nHedy'yi gerçekten çok beğendim ve aynı zamanda güzel bir şekilde kurulmuş, bu da onu ilkokulda kullanmak için iyi kılıyor.\n\
-        Hedy'nin kademeli yaklaşımı çok işe yarıyor.\nHer seviyenin başındaki kısa açıklama ve kısa örnek programlar, çocuklara seçilen seviyede neyin yeni olduğu konusunda \nhızlı bir fikir vermeye yardımcı oluyor.\nÇocukların seçebileceği farklı ödevler de çok işe yarıyor.\nÇocukların kendilerine hitap\
-        \ eden ödevleri seçtiklerini ve daha sonra seviyeler boyunca onlarla birlikte çalıştıklarını görüyorsunuz. \nHedy, programlamada iyi olan ve gerçek bir programlama dilinin tadına varmak isteyen çocuklar için çok eğlencelidir. Ortaokulda \ndaha fazla ICT eğitimi verilmeye başlanır başlanmaz, ortaokul\
-        \ için iyi bir hazırlıktır. *Netherlands: Oegstgeest Montessori school*\n\n<img width=\"500px\" src=\"static/images/teacherfeedback/Fkids1.JPG\"></img>"

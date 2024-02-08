@@ -26,29 +26,26 @@ levels:
                 * Telefonunuzda kullanmak için kendi uygulamalarınızı oluşturabilirsiniz
         5:
             header: Hedy'de Programlama
-            text: |-
-                Hedy'de `{print}` gibi özel kodlar kullanırız.
-                <iframe class="embedded-hedy" src="/adventure/story/1/raw"></iframe>
+            text: Hedy'de `{print}` gibi özel kodlar kullanırız.
+            code: '{print} Welcome to Hedy!'
         6:
             header: Hedy'de Programlama
-            text: |-
-                Kod kelimeleri pembe renkte gösterilecektir.
-                <iframe class="embedded-hedy" src="/adventure/story/1/raw"></iframe>
+            text: Kod kelimeleri pembe renkte gösterilecektir.
+            code: '{print} Welcome to Hedy!'
         7:
             header: Hedy'de Programlama
-            text: |-
-                Kodun altındaki Kodu çalıştır düğmesi ile kodu başlatıyoruz.
-                <iframe class="embedded-hedy" src="/adventure/story/1/raw"></iframe>
+            text: Kodun altındaki Kodu çalıştır düğmesi ile kodu başlatıyoruz.
+            code: '{print} Welcome to Hedy!'
         8:
             header: Hedy'de Programlama
-            text: |-
-                Çıktısı sağ tarafta görünür.
-                <iframe class="embedded-hedy" src="/adventure/story/1/raw"></iframe>
+            text: Çıktısı sağ tarafta görünür.
+            code: '{print} Welcome to Hedy!'
         9:
             header: Hedy'de Programlama
-            text: |-
-                Çıktı bir çizim de olabilir.
-                <iframe class="embedded-hedy" src="/adventure/turtle/1/raw"></iframe>
+            text: Çıktı bir çizim de olabilir.
+            code: |-
+                {forward} 100
+                {turn} left
     1:
         1:
             header: 1. seviyeye hoş geldiniz!
@@ -62,21 +59,23 @@ levels:
                 Seviye 1'de kullanabileceğiniz ilk kod `{print}`.
 
                 `{print}` ekranda metin göstermek için kullanılır.
-            editor: <iframe class="fragment" src="/adventure/print_command/1/raw"></iframe>
+            code: '{print} Put text on the screen'
         3:
             header: '{print} komutu'
             text: |-
                 Yazdır komutundan sonraki metni istediğiniz şekilde değiştirebilirsiniz.
 
                 Ya da `{print}` ile başlayan başka bir kod satırı ekleyerek birden fazla satır yazdırabilirsiniz.
-            editor: <iframe class="fragment" src="/adventure/print_command/1/raw"></iframe>
+            code: '{print} Put text on the screen'
         4:
             header: '{ask}'
             text: |-
                 Seviye 1`de kullanabileceğiniz ikinci kod `{ask}`.
 
                 `{ask}` cevaplanabilecek bir soru sormak için kullanılır.
-            editor: <iframe class="fragment" src="/adventure/rock/1/raw"></iframe>
+            code: |-
+                {print} Welcome to your own rock scissors paper!
+                {ask} What will you choose?
         5:
             header: '{echo}'
             text: |-
@@ -87,32 +86,51 @@ levels:
                 Eğer cevabın gösterilmesini istiyorsanız, bu seviyenin son komutunu kullanabilirsiniz: `{echo}`.
 
                 `{echo}` bir `{ask}` cevabını tekrarlamak için kullanılır.
-            editor: <iframe class="fragment" src="/adventure/ask_command/1/raw"></iframe>
+            code: |-
+                {print} Hello!
+                {ask} What is your name?
+                {echo} hello
         6:
             header: Programlama!
             text: |-
                 `{print}`, `{ask}` ve `{echo}` ile artık küçük bir hikaye oluşturabilirsiniz.
                 Papağan, Masal, ve Taş, Kağıt, Makas maceralarını denemek için iyi bir zaman.
+            editor: /hedy/1
         7:
             header: Programlama!
             text: Maceralar, sekmeler halinde gösterilir.
-            editor: <iframe class="fragment" src="/hedy/1"></iframe>
+            editor: /hedy/1
         8:
             header: Programlama!
-            text: |-
-                Sarı ok düğmeleri örnekleri kopyalamak için kullanılabilir.
-                <iframe class="fragment" src="/hedy/1"></iframe>
+            text: Sarı ok düğmeleri örnekleri kopyalamak için kullanılabilir.
+            editor: /hedy/1
         9:
             header: Kaplumbağa ile çizim yapmak
             text: Metin ile kodlamayı gördüğümüze göre, şimdi çizim kodlarına bakacağız.
         10:
             header: 'Kaplumbağa ile çizim yapmak: {forward}'
             text: '`{forward}` kaplumbağayı ileri hareket ettirmek için kullanılır.'
-            editor: <iframe class="fragment" src="/adventure/turtle/1/raw"></iframe>
+            code: |-
+                {forward} 50
+                {turn} left
         11:
             header: 'Kaplumbağa ile çizim yapmak: {turn}'
             text: '`{turn}` kaplumbağanın sola veya sağa dönmesini sağlamak için kullanılır.'
-            editor: <iframe class="fragment" src="/adventure/turtle/1/raw"></iframe>
+            code: |-
+                {forward} 50
+                {turn} left
+        12:
+            header: Debugging
+            text: Debugging a code means getting rid of mistakes in the code. Let's debug this code together. Click the ladybug button to start the debugger.
+            code: |-
+                I am DJ Hedy
+                {print} What song would you like to hear?
+                {ask} I like that song too!
+                {print} Next up... {echo}
+            debug: true
+        13:
+            header: Let the programming fun begin!
+            text: Enjoy the adventures in level 1!
     2:
         1:
             header: Seviye 2'ye hoş geldiniz
@@ -125,7 +143,10 @@ levels:
         2:
             header: Değişkenler
             text: Bir değişken oluşturmak veya 'ayarlamak' için `{is}` komutunu kullanırız
-            editor: <iframe class="fragment" src="/adventure/is_command/2/raw"></iframe>
+            code: |-
+                name {is} Hedy
+                age {is} 15
+                {print} name is age years old
         3:
             header: Etkileşimli
             text: |-
@@ -134,23 +155,49 @@ levels:
                 Sorunun yanıtı değişkende saklanır.
 
                 Bu şekilde `{echo}` komutuna ihtiyaç duymayız.
-            editor: <iframe class="fragment" src="/adventure/ask_command/2/raw"></iframe>
+            code: |-
+                name {is} {ask} What is your name?
+                {print} Hello name
         4:
             header: Çoklu değişkenler
             text: Artık değişkenleri kullandığımıza göre, tek bir `{echo}` komutu yerine birden fazla değişken kullanabiliriz.
-            editor: <iframe class="fragment" src="/adventure/ask_command/2/raw"></iframe>
+            code: |-
+                name {is} {ask} What is your name?
+                {print} Hello name
+                age {is} {ask} How old are you?
+                {print} name is age years old.
         5:
             header: Uyku
             text: Kodu bir süreliğine duraklatmak için `{sleep}` komutunu da kullanabilirsiniz.
-            editor: <iframe class="fragment" src="/adventure/sleep_command/2/raw"></iframe>
+            code: |-
+                {print} My favorite colour is...
+                {sleep} 2
+                {print} green!
         6:
             header: Uyku 5
             text: |-
                 Duraklamanın daha uzun olmasını istiyorsanız `{sleep}` komutundan sonra bir sayı ekleyebilirsiniz.
 
                 İsterseniz, uyku komutunun süresine karar vermek için bir sayı yerine bir değişken bile kullanabilirsiniz.
-            editor: <iframe class="fragment" src="/adventure/sleep_command/2/raw"></iframe>
+            code: |-
+                pause {is} 10
+                {print} My favorite colour is...
+                {sleep} pause
+                {print} green!
         7:
+            header: Debugging
+            text: Debugging a code means getting rid of mistakes in the code. Let's debug this code together. Click the ladybug button to start the debugger.
+            code: |-
+                {print} Welcome to the donut shop!
+                filling {is} What kind of filling would you like?
+                {print} You have chosen... Filling! Yum!
+                topping {ask} What kind of topping would you like?
+                topping is delicious!
+                {print} I'll go get your donut. {sleep}
+                {print} Here you go! A filling donut with toping!
+                {ask} Have a nice day!
+            debug: true
+        8:
             header: Programlama eğlencesi başlasın!
             text: Seviye 2'deki maceraların tadını çıkarın!
     3:
@@ -163,18 +210,22 @@ levels:
                 Bir listeyi `{is}` ile yaparsınız.
 
                 Listenizdeki öğeleri virgülle ayırın.
-            editor: <iframe class="fragment" src="/adventure/random_command/3/raw"></iframe>
+            code: animals {is} dogs, cats, kangaroos
         3:
             header: Rastgele
             text: |-
                 Listeyi `{at}` `{random}` komutu ile kullanabilirsiniz.
                 Bilgisayar listeden rastgele bir öğe seçecektir.
                 Bu kodu her çalıştırdığınızda çıktı farklı olacaktır.
-            editor: <iframe class="fragment" src="/adventure/dice/3/raw"></iframe>
+            code: |-
+                animals {is} dogs, cats, kangaroos
+                {print} animals {at} {random}
         4:
             header: Cümle içinden rastgele
             text: Bir cümle için de `{at}` `{random}` komutunu kullanabilirsiniz.
-            editor: <iframe class="fragment" src="/adventure/random_command/3/raw"></iframe>
+            code: |-
+                animals {is} dogs, cats, kangaroos
+                {print} My favorite animal is animals {at} {random}
         5:
             header: Eklemek için
             text: |-
@@ -182,25 +233,50 @@ levels:
 
                 Listeye neyin ekleneceğini seçebilir veya `{add}` `{to}` komutunu `{ask}` komutuyla birlikte kullanabilirsiniz.
                 Bu şekilde, listeye ne ekleneceğine oyuncunun karar vermesine izin verebilirsiniz.
-            editor: <iframe class="fragment" src="/adventure/add_remove_command/3/raw"></iframe>
+            code: |-
+                animals {is} dog, cat, kangaroo
+                like {is} {ask} What is your favorite animal?
+                {add} like {to_list} animals
+                {print} I choose animals {at} {random}
         6:
             header: İçinden kaldırmak
             text: |-
                 `{add}` `{to}` komutunun tersi `{remove}` `{from}` komutudur.
                 Bu komut listeden bir öğeyi kaldırır.
-            editor: <iframe class="fragment" src="/adventure/add_remove_command/3/raw"></iframe>
-        9:
+            code: |-
+                animals {is} dog, cat, kangaroo
+                dislike {is} {ask} What animal do you not like?
+                {remove} dislike {from} animals
+                {print} I choose animals {at} {random}
+        7:
+            header: Debugging
+            text: Let's debug this code!
+            editor: |-
+                music_genres {is} rock, pop, metal, indie, jazz
+                chosen_genre is music {at} {random}
+                {print} Let's listen to chosen genre
+                nice {ask} Do you like that genre?
+                {remove} chosen_genre {from} chosen_genre
+                second_choice {is} music_genres
+                {print} or do you prefer... second_choice {at} {random}
+                {remove} second_choice {to} music_genres
+                {print} I like music_genre {random} best!
+            debug: true
+        8:
             header: Hadi işe koyulalım!
             text: Seviye 3'teki maceraların tadını çıkarın!
     4:
         1:
             header: 4. seviyeye hoş geldiniz
             text: Bu seviyede tırnak işaretlerini nasıl kullanacağınızı öğreneceksiniz.
-            editor: <iframe class="fragment" src="/adventure/quotation_marks/4/raw"></iframe>
+            code: '{print} ''print with quotes!'''
         2:
             header: Problem
             text: 'Önceki seviyelerde, bu sorunla karşılaşmış olabilirsiniz:'
-            editor: <iframe class="fragment" src="/adventure/default/4/raw"></iframe>
+            code: |-
+                name {is} Sophie
+                {print} My name is name
+            debug: true
         3:
             header: Bunu tırnak işaretleri ile düzeltmek
             text: |-
@@ -210,30 +286,35 @@ levels:
         4:
             header: Yazdır ile tırnak işaretleri
             text: '`{print}` komutunu her kullandığınızda, ekranda görünmesini istediğiniz metni tırnak içine almanız gerekir.'
-            editor: <iframe class="fragment" src="/adventure/quotation_marks/4/raw"></iframe>
+            code: '{print} ''print with quotes!'''
         5:
             header: Sor ile tırnak işaretleri
             text: Bu aynı zamanda `{ask}` komutu için de geçerlidir.
-            editor: <iframe class="fragment" src="/adventure/quotation_marks/4/raw"></iframe>
+            code: name {is} {ask} 'name please?'
         6:
             header: Tırnak işaretleri ve değişkenler
             text: |-
                 Değişken adlarının ekrana yazdırılmasını istemezsiniz.
                 Bu nedenle değişkenler tırnak işaretlerinin dışında bırakılmalıdır, bunun gibi:
-            editor: <iframe class="fragment" src="/adventure/quotation_marks/4/raw"></iframe>
+            code: |-
+                name {is} Harry
+                {print} 'Hello ' name
         7:
             header: Tırnak işaretleri ve değişkenler
             text: |-
                 Değişken adları bir cümlenin ortasında kullanıldığında, değişkenleri tırnak işaretlerinin dışında bırakmanız gerekir.
                 Ancak cümlenin geri kalanında tırnak işaretlerine ihtiyaç vardır. Bu şuna benziyor:
-            editor: <iframe class="fragment" src="/adventure/quotation_marks/4/raw"></iframe>
+            code: |-
+                name {is} Harry
+                {print} 'Hello ' name ', how are you?'
         8:
             header: Tırnak işaretleri ve kısaltmalar
             text: |-
                 Dikkatli olun! Artık tırnak işareti kullandığınıza göre, kısaltmalarda ve özel isimlerde kesme işareti kullanamazsınız.
 
                 Lütfen aşağıdaki ekranda "Hedy'nin" veya "TC'de" gibi bir özel isim veya kısaltma yazdırmayı deneyin ve ne olduğunu görün...
-            editor: <iframe class="fragment" src="/adventure/rock/4/raw"></iframe>
+            code: '{print} ''This won''t work!'''
+            debug: true
         9:
             header: Temizle
             text: |-
@@ -241,8 +322,29 @@ levels:
                 Bu komut ile çıktı ekranınızdaki tüm metni silebilirsiniz.
 
                 Her zaman uyku komutu kullanmaya da dikkat edin. Eğer bunu yapmazsanız bilgisayar siz okuyamadan tüm metni silecektir!
-            editor: <iframe class="fragment" src="/adventure/clear_command/4/raw"></iframe>
+            code: |-
+                {print} '3'
+                {clear}
+                {print} '2'
+                {clear}
+                {print} '1'
+                {clear}
+                {print} 'SURPRISE!'
         10:
+            header: Debugging
+            text: Let's debug this code!
+            code: |-
+                {clear}
+                {print} What a nice day to go to the beach!
+                {ask} 'Do you want to build a sandcastle or swim in the ocean?'
+                {print} 'You would like to activity '
+                {print} 'I'd like to do that too'
+                {print} 'Look at these beautiful seashells!'
+                colors {is} 'orange, silver, white, brown'
+                {print} 'I love the colors {at} {random} one!'
+                choice {is} {ask} Which one do you like?
+            debug: true
+        11:
             header: Hazır Ol, Ayarla, Başla!
             text: Seviye 4'teki maceraların tadını çıkarın!
     5:
@@ -255,25 +357,30 @@ levels:
                 `{if}` komutu iki seçenek arasında seçim yapmanızı sağlar.
                 Bu örnekte, verilen cevap Hedy ise bilgisayar 'güzel' yazdıracaktır.
                 Eğer cevap Hedy değilse, bilgisayar hiçbir şey yapmayacaktır.
-            editor: <iframe class="fragment" src="/adventure/if_command/5/raw"></iframe>
+            code: |-
+                name {is} {ask} 'what is your name?'
+                {if} name {is} Hedy {print} 'nice'
         3:
             header: Yazdırmayı unutmayın
             text: '`{if}` komutunu kullanırken, `{print}` komutunu kullanmayı unutmayın.'
-            editor: <iframe class="fragment" src="/adventure/if_command/5/raw"></iframe>
+            code: '{if} name {is} Hedy ''nice'''
+            debug: true
         4:
             header: değilse
             text: |-
                 Bir `{if}` komutu kullanırken, bir `{else}` komutu da ekleyebilirsiniz.
                 Eğer cevap Hedy ise, bilgisayar 'güzel' yazacaktır.
                 Ancak cevap başka bir şeyse bilgisayar 'böö' yazacaktır.
-            editor: <iframe class="fragment" src="/adventure/if_command/5/raw"></iframe>
+            code: '{if} name {is} Hedy {print} ''nice'' {else} {print} ''boo!'''
         5:
             header: Uzun satırlar
             text: |-
                 Hem `{if}` hem de `{else}` komutuna sahip olduğunuzda satırlarınızın çok uzun olabileceğini fark etmiş olabilirsiniz.
 
                 Komutları ayırmayı ve aşağıdaki gibi 2 satıra koymayı seçebilirsiniz:
-            editor: <iframe class="fragment" src="/adventure/if_command/5/raw"></iframe>
+            code: |-
+                {if} name {is} Hedy {print} 'nice'
+                {else} {print} 'boo!'
         6:
             header: Bir başka yeni komut
             text: |-
@@ -282,8 +389,29 @@ levels:
                 Örneğin `{in}` ile bilgisayarın bir öğenin bir listede olup olmadığını kontrol etmesini sağlayabilirsiniz:
 
                 Hedy'nin büyük/küçük harfe duyarlı olduğunu lütfen unutmayın. Bu, "yeşil" yerine "Yeşil" yanıtını verirseniz, Hedy'nin "eh işte" yazdıracağı anlamına gelir.
-            editor: <iframe class="fragment" src="/adventure/in_command/5/raw"></iframe>
+            code: |-
+                pretty_colors {is} green, yellow
+                favorite_color {is} {ask} 'What is your favorite color?'
+                {if} favorite_color {in} pretty_colors {print} 'pretty!'
+                {else} {print} 'meh'
         7:
+            header: Debugging
+            text: Let's debug this code!
+            code: |-
+                {print} Welcome to HedyAir Security!
+                boarding_pass {is} {ask} 'Do you have your boarding pass?'
+                {if} bording_pass yes {print} Great!
+                {else} Please, get your boarding pass ready.
+                passport {is} 'Can I see your passport, please?'
+                {if} passport {is} yes 'thank you'
+                {else} 'You can't fly without a passport'
+                declare {is} {ask} Do you have anything to declare?
+                {if} declare {is} yes
+                item_to_declare {is} {ask} 'What would you like to declare'
+                {else} Alright
+                {print} Thank you. Please head to gate A22.'
+            debug: true
+        8:
             header: Hadi başlayalım!
             text: Seviye 5'teki maceraların tadını çıkarın!
     6:
@@ -293,34 +421,62 @@ levels:
         2:
             header: Toplama
             text: Bir toplama işlemini hesaplamak istiyorsanız, artı işaretini kullanmanız yeterlidir.
-            editor: <iframe class="fragment" src="/adventure/maths/6/raw"></iframe>
+            code: '{print} ''5 plus 5 is '' 5 + 5'
         3:
             header: Çıkarma
             text: Çıkarma işlemi yapmak istiyorsanız, eksi işaretini kullanabilirsiniz.
-            editor: <iframe class="fragment" src="/adventure/maths/6/raw"></iframe>
+            code: '{print} ''5 minus 5 is '' 5 - 5'
         4:
             header: Çarpma
             text: Eğer çarpma işlemi yapmak istiyorsanız, yıldız işaretini kullanabilirsiniz.
-            editor: <iframe class="fragment" src="/adventure/maths/6/raw"></iframe>
+            code: '{print} ''5 times 5 is '' 5 * 5'
         5:
             header: Bölme
             text: Bölme işlemi için sağa eğik çizgiyi kullanabilirsiniz.
-            editor: <iframe class="fragment" src="/adventure/maths/6/raw"></iframe>
+            code: '{print} ''5 divided by 5 is '' 5 / 5'
         6:
             header: Özet
             text: Özetle, matematik yapmak için +, -, * ve / işaretlerini kullanabilirsiniz.
-            editor: <iframe class="fragment" src="/adventure/maths/6/raw"></iframe>
+            code: |-
+                {print} '5 plus 5 is ' 5 + 5
+                {print} '5 minus 5 is ' 5 - 5
+                {print} '5 times 5 is ' 5 * 5
+                {print} '5 divided by 5 is ' 5 / 5
         7:
             header: = sembolü
             text: |-
                 Şu andan itibaren `{is}` komutu yerine = sembolünü de kullanabilirsiniz.
                 Bu hem sayılar hem de kelimeler için geçerlidir ve ayrıca `{if}` veya `{else}` komutlarından sonra gelir.
-            editor: <iframe class="fragment" src="/adventure/is_command/6/raw"></iframe>
+            code: |-
+                name = Hedy
+                answer = 20 + 4
         8:
             header: Değişkenlerle hesaplamalar yapmak
             text: 'Hesaplamaları sayılarla yapabilirsiniz, ancak hesaplama yapmak için değişkenleri de kullanabilirsiniz, bunun gibi:'
-            editor: <iframe class="fragment" src="/adventure/calculator/6/raw"></iframe>
+            code: |-
+                number_1 = {ask} 'Fill in the first number:'
+                number_2 = {ask} 'Fill in the second number:'
+                correct_answer = number_1 * number_2
+                {print} number_1 ' times ' number_2 ' is ' correct_answer
         9:
+            header: Debugging
+            text: Let's debug this code!
+            code: |-
+                {print} 'This is the water park ticket machine'
+                {print} 'Price list: Children under 12 $3, Adults $5'
+                {print} 'Mondays are 25% off'
+                amount_of_children = 'How many kids tickets would you like?'
+                amount_of_adults = 'How many adult tickets would you like?'
+                day_of_the_week = {ask} 'What day is it?'
+                {clear}
+                child_price = amount of children * 3
+                adult_price = amount_of_adults + 5
+                total_price = adult_price * child_price
+                {if} day {is} monday
+                total_price = total_price * 0.25
+                {print} 'That will be total_price please'
+            debug: true
+        10:
             header: Hadi işe koyulalım!
             text: Seviye 6'daki maceraların tadını çıkarın!
     7:
@@ -334,16 +490,38 @@ levels:
                 Satırı daha fazla kez tekrarlamak istiyorsanız, sadece sayıyı değiştirin.
 
                 Örneğin: Karakterinizin 5 kez yardım için bağırdığı bir hikaye programlıyorsanız, bu şöyle görünebilir:
-            editor: <iframe class="fragment" src="/adventure/story/7/raw"></iframe>
+            code: |-
+                {print} 'The prince kept calling for help'
+                {repeat} 5 {times} {print} 'Help!'
+                {print} 'Why is nobody helping me?'
         3:
             header: Yazdır komutunu unutmayın
             text: tekrar komutunu kullanırken `{print}` komutunu unutmayın.
-            editor: <iframe class="fragment" src="/adventure/print/7/raw"></iframe>
+            code: '{repeat} 5 {times} ''Help!'''
+            debug: true
         4:
             header: Bir sor komutunu tekrarlayın
             text: Ayrıca bir `{ask}`, `{if}` veya `{else}` komutunu birden çok kez tekrarlayabilirsiniz.
-            editor: <iframe class="fragment" src="/adventure/repeat_command_2/7/raw"></iframe>
+            code: |-
+                {repeat} 2 {times} answer = {ask} 'Did you know you could ask a question multiple times?'
+                {if} answer {is} yes {repeat} 2 {times} {print} 'You knew that already!'
+                {else} {repeat} 3 {times} {print} 'You have learned something new!'
         5:
+            header: Debugging
+            text: Let's debug this code!
+            code: |-
+                {print} You gave stranded on a desert island.
+                {repeat} 3 'Help!'
+                rescued = {ask} Has anybody come to the rescue?
+                {if} rescued yes {is}
+                {print} Lucky!
+                {else} {repeat} 3 {times} 'HELP!'
+                rescued = 'What about now?'
+                {if} yes
+                {print} 'Hurray!
+                {else} 'That's a shame... Oh well... time to build a shelter and find some food.'
+            debug: true
+        6:
             header: Hazır ol Ayarla Başla!
             text: Seviye 7'deki maceraların tadını çıkarın!
     8:
@@ -356,7 +534,8 @@ levels:
                 Önceki seviyelerde, `{repeat}` komutu aşağıdaki gibi görünüyordu:
 
                 Yalnızca bir satır kodu tekrarlayabilirsiniz.
-            editor: <iframe class="fragment" src="/adventure/story/7/raw"></iframe>
+            code: '{repeat} 5 {times} {print} ''Help!'''
+            debug: true
         3:
             header: şimdiki {repeat} komutları
             text: |-
@@ -364,35 +543,72 @@ levels:
                 Bunu girinti kullanarak yaparsınız.
 
                 Tekrarlamak istediğiniz her satırın başında aşağıdaki gibi 4 boşluk (veya bir sekme) kullanın:
-            editor: <iframe class="fragment" src="/adventure/repeat_command/8/raw"></iframe>
+            code: |-
+                {repeat} 5 {times}
+                    {print} 'Hello everyone'
+                    {print} 'This will be printed 5 times'
         4:
             header: şimdiki {repeat} komutları
             text: |-
                 İsterseniz `{repeat}` komutundan sonra girinti yapmadan devam edebilirsiniz.
                 Girinti ile başlamayan satırlar tekrarlanmayacaktır.
-            editor: <iframe class="fragment" src="/adventure/repeat_command_2/8/raw"></iframe>
+            code: |-
+                {repeat} 3 {times}
+                    {print} 'Hello!'
+                {print} 'We are done repeating!'
         5:
             header: önceki eğer ve değilse
             text: |-
                 Aynı şey `{if}` ve `{else}` komutları için de geçerlidir.
                 Bunlar daha önceki komutlardı:
-            editor: <iframe class="fragment" src="/adventure/if_command/5/raw"></iframe>
+            code: |-
+                {if} name {is} Hedy {print} 'nice'
+                {else} {print} 'boo!'
+            debug: true
         6:
             header: şimdiki eğer ve değilse
             text: |-
                 Bunlar şimdiki `{if}` ve `{else}` komutlarıdır.
                 `{if}` ve `{else}` komutlarından sonraki her satır girinti ile başlar.
-            editor: <iframe class="fragment" src="/adventure/if_command/8/raw"></iframe>
+            code: |-
+                name = {ask} 'What is your name?'
+                {if} name {is} Hedy
+                    {print} 'Welcome Hedy'
+                {else}
+                    {print} 'Welcome programmer!'
         7:
             header: girintiyi durdurmak
             text: Tıpkı `{repeat}` komutunda olduğu gibi, girinti kullanmayı bırakırsanız satırlar her zaman gösterilecektir., sadece ifade doğru olunca değil.
-            editor: <iframe class="fragment" src="/adventure/if_command/8/raw"></iframe>
+            code: "name = {ask} 'What is your name?'\n{if} name {is} Hedy\n    {print} 'Welcome Hedy'\n{else}\n    {print} 'Welcome programmer!' \n{print} '3..2..1.. Start programming!'"
         8:
             header: eğer ifadeleri içinde eğer ifadeleri
             text: |-
                 Bir eğer komutunu bir tekrar komutunun içine ya da başka bir eğer komutunun içine koymayı düşünmüş olabilirsiniz.
                 Şimdilik, bu henüz mümkün değildir. Daha yüksek seviyelerde buna izin verilecektir, ancak şimdilik önce `{if}` `{else}` ve `{repeat}` komutlarını uygun girintilerle uygulamaya odaklanalım.
         9:
+            header: Debugging
+            text: Let's debug this code!
+            code: |-
+                {print} 'HedyWheels bus tickets machine'
+                zone_1 = Town Hall, Library, Campus, Market Place
+                zone_2 = Swimming Pool, Skate Park, Mall, Airport
+                destination = 'Where do you want to go?'
+                {if} destination {in} zone 1
+                {print} destination 'is in zone 1'
+                price = 3 euros
+                    {if} destination {is} zone_2
+                {print} destination 'is in zone 2'
+                price = 6
+                ticket_types = {ask} 'Press 1 for a single use ticket.
+                Press 2 for a round trip ticket:'
+                {if} ticket_type = 1
+                {print} 'You chose a single use ticket'
+                {else}
+                        {print} You chose a round trip ticket'
+                price * 2
+                {print} 'That will be ' price ' euros please'
+            debug: true
+        10:
             header: Hadi maceralara bir göz atalım!
             text: Seviye 8'deki maceraların tadını çıkarın!
     9:
@@ -405,30 +621,86 @@ levels:
         2:
             header: '`{repeat}`dan sonra çoklu satırlar'
             text: Artık `{repeat}` dan sonra birden fazla satır kullanmanıza izin var.
-            editor: <iframe class="fragment" src="/adventure/repeat_command/9/raw"></iframe>
+            code: |-
+                {repeat} 3 {times}
+                    food = {ask} 'What do you want?'
+                    {if} food {is} pizza
+                        {print} 'nice!'
+                    {else}
+                        {print} 'pizza is better'
         3:
             header: Girinti önemlidir!
             text: Girinti, bilgisayara hangi satırların tekrarlanması gerektiğini ve hangi satırların yalnızca bir kez çalıştırılması gerektiğini söylemek için çok önemlidir.
-            editor: <iframe class="fragment" src="/adventure/repeat_command_2/8/raw"></iframe>
+            code: |-
+                {repeat} 3 {times}
+                    {print} 'This line will be repeated...'
+                    {print} 'This one too...'
+                {print} 'but this one will not!'
         4:
             header: '`{if}` den sonra çoklu satırlar'
             text: '`{if}` den sonra da birden fazla satır kullanabilirsiniz'
-            editor: <iframe class="fragment" src="/adventure/if_command/9/raw"></iframe>
+            code: |-
+                continue = {ask} 'Do you want to continue?'
+                {if} continue = yes
+                    sure = {ask} 'Are you sure?'
+                    {if} sure {is} yes
+                        {print} 'We will continue'
+                    {else}
+                        {print} 'You are not sure'
+                {else}
+                    {print} 'You do not want to continue'
         5:
             header: Girinti önemlidir
             text: Tekrarlayalım, girinti hala çok önemlidir ve kodda büyük bir fark yaratabilir.
-            editor: <iframe class="fragment" src="/adventure/if_command/9/raw"></iframe>
+            code: |-
+                continue = {ask} 'Do you want to continue?'
+                {if} continue = yes
+                    sure = {ask} 'Are you sure?'
+                    {if} sure {is} yes
+                        {print} 'We will continue'
+                {else}
+                    {print} 'You are not sure'
         6:
             header: Bir `{repeat}` içinde bir `{if}`
             text: |-
                 Artık bu komutlardan sonra birden fazla kod satırı kullanabildiğinize göre, bunları birbirinin içine de koyabilirsiniz.
                 Şuna bir bakın:
-            editor: <iframe class="fragment" src="/adventure/repeat_command/9/raw"></iframe>
+            code: |-
+                {repeat} 3 {times}
+                    food = {ask} 'What do you want?'
+                    {if} food {is} pizza
+                        {print} 'nice!'
+                    {else}
+                        {print} 'pizza is better'
         7:
             header: Girintiye dikkat edin
             text: Bu kodun dördüncü ve altıncı satırlarının 8 boşluklu girinti ile başladığına dikkat edin.
-            editor: <iframe class="fragment" src="/adventure/repeat_command/9/raw"></iframe>
+            code: |-
+                {repeat} 3 {times}
+                    food = {ask} 'What do you want?'
+                    {if} food {is} pizza
+                        {print} 'nice!'
+                    {else}
+                        {print} 'pizza is better'
         8:
+            header: Debugging
+            text: Let's debug this code!
+            code: |-
+                {print} 'Welcome to HedyJumps, your parachute jump adventure!'
+                people = {ask} 'How many people are you jumping with today?
+                {print} 'We'll ask all of you some questions for safety reasons.'
+                extra_instructions_people = a, b
+                {repeat} 3 {times}
+                    name = {ask} 'What is your name?'
+                jumped_before = 'Have you ever done a parachute jump before, ' name '?'
+                {if} jumped_before  no
+                {print} 'No worries, you'll get an extra safety instruction in room 13'
+                {add} name {to} extra_instructions_people
+                {else}
+                {print} 'Fun!'
+                {print} 'Thanks for filling in the safety questions everyone. Enjoy your jump!'
+            debug: true
+        9:
             header: Hadi başlayalım!
             text: Seviye 9'daki maceraların tadını çıkarın!
     10:
@@ -438,12 +710,34 @@ levels:
         2:
             header: için komutu
             text: '"için" ile bir liste oluşturabilir ve bu listedeki tüm öğeleri kullanabilirsiniz. `{for}`, "tekrar" gibi bir blok oluşturur ve eğer öyleyse bloktaki tüm satırların girinti ile başlaması gerekir (4 boşluk).'
-            editor: <iframe class="fragment" src="/adventure/for_command/10/raw"></iframe>
+            code: |-
+                animals = dog, cat, blobfish
+                {for} animal {in} animals
+                    {print} 'I love ' animal
         3:
             header: için komutu
             text: 'Burada `{for}` komutunun başka bir örneğini görüyorsunuz:'
-            editor: <iframe class="fragment" src="/adventure/dishes/10/raw"></iframe>
+            code: |-
+                days = Monday, Tuesday, Wednesday, Thursday, Friday, Saturday, Sunday
+                names = mom, dad, Emma, Sophie
+                {for} day {in} days
+                    {print} names {at} {random} ' does the dishes on ' day
         4:
+            header: Debugging
+            text: Let's debug this code
+            code: |-
+                {print} 'Ladies and gentlemen!'
+                {print} 'For one night and one night only in circus Hedy!'
+                acts = shoot out of a canon, walk the tightrope, pack themself in a suitcase,
+                people = Iris the Incredible Achmed the Amazing Francis the Fantastic
+                    {for} people {in} acts
+                chosen_person {is} people {random}
+                    chosen_person ' will ' act
+                {add} chosen_person {from} people
+                {print} 'Come and watch our show tonight!'
+                {print} 'Tickets are only available at the counter
+            debug: true
+        5:
             header: Programlama zamanı!
             text: Seviye 10'daki maceraların tadını çıkarın!
     11:
@@ -456,7 +750,10 @@ levels:
         2:
             header: için komutu
             text: 'Yeni "için" komutu bu şekilde görünür:'
-            editor: <iframe class="fragment" src="/adventure/for_command/11/raw"></iframe>
+            code: |-
+                {for} counter {in} {range} 1 {to} 10
+                    {print} counter
+                {print} 'Ready or not. Here I come!'
         3:
             header: i değişkeni
             text: |-
@@ -464,8 +761,20 @@ levels:
                 Elbette değişken için istediğiniz herhangi bir ismi kullanabilirsiniz.
                 Python gibi programlama dillerinde bu durumdaki değişkenler için kullanılan standart isim 'i' dir.
                 Şuna benziyor:
-            editor: <iframe class="fragment" src="/adventure/calculator/11/raw"></iframe>
+            code: |-
+                number = 10
+                {for} i {in} {range} 1 {to} 10
+                    {print} i * number
         4:
+            header: Debugging
+            text: Let's debug this code!
+            code: |-
+                factor {is} {ask} 'Which table of multiplication do you need?'
+                {repeat} {for} numbers {in} {range} 1 {to} 10 {times}
+                    {print} This is the table of multiplications for factor
+                    {print} number ' x ' factor ' = ' i * factor
+            debug: true
+        5:
             header: Hadi programlamaya geçelim!
             text: Seviye 11'deki maceraların tadını çıkarın!
     12:
@@ -477,14 +786,18 @@ levels:
             text: |-
                 Bu seviye tırnak işaretlerinin kullanımında bazı değişiklikler yapar.
                 Şu andan itibaren, **tüm metinlerin** tırnak işareti içinde olması gerekmektedir. Buna değişkenlerin değerleri, listelerdeki öğeler ve {if} komutlarından sonraki metinler de dahildir.
-            editor: <iframe class="fragment" src="/adventure/quotation_marks/12/raw"></iframe>
+            code: |-
+                name = 'Hedy the Robot'
+                {print} 'Hello ' name
         3:
             header: Ondalık sayılar
             text: |-
                 Bu seviyeden itibaren ondalık sayıları kullanmanıza da izin verilir. Bu, restoranınız gibi programları daha da iyi hale getirebilir!
 
                 Sayılar tırnak içine alınmaz.
-            editor: <iframe class="fragment" src="/adventure/maths/12/raw"></iframe>
+            code: |-
+                {print} 'decimal numbers now need to use a dot'
+                {print} 2.5 + 2.5
         4:
             header: Functions!
             text: |-
@@ -496,11 +809,35 @@ levels:
             text: |-
                 In this program you see an example of a function.
                 Let's see what happens if you fill in the rest of the song!
-            editor: <iframe class="fragment" src="/adventure/songs_2/12/raw"></iframe>
+            code: |-
+                {define} twinkle
+                     {print} 'Twinkle'
+                     {print} '...'
+
+                {call} twinkle
+                {print} 'Up above the world so high'
+                {print} 'Like a diamond in the sky'
+                {call} twinkle
         6:
             header: Functions
             text: As you could see in the example a function is a block of code that can be called anytime. You use `{define}` to set the function and `{call}` to use it.
         7:
+            header: Debugging
+            text: Let's debug this code!
+            code: |-
+                {call} new_member
+                {print} 'Hi new member!'
+                username = {ask} 'What is your username?'
+                password = 'What is your password?'
+                {print} 'Welcome to our club!'
+
+                username = {ask} 'Please enter your username. Are you a new member? Type New Member'
+                {if} username = New Member
+                {call} new member
+                    {else}
+                        password = {ask} 'Please enter password'
+            debug: true
+        8:
             header: Ready to try it out?
             text: Enjoy the adventures in level 12!
     13:
@@ -512,14 +849,21 @@ levels:
             text: |-
                 `{and}` komutu her zaman {if} komutu ile birlikte kullanılır.
                 Bu şekilde 2 ifadenin doğru olup olmadığını kontrol edebilirsiniz. Örneğin:
-            editor: <iframe class="fragment" src="/adventure/and_or_command/13/raw"></iframe>
+            code: |-
+                name = {ask} 'what is your name?'
+                age = {ask} 'what is your age?'
+                {if} name {is} 'Hedy' {and} age {is} 2
+                    {print} 'You are the real Hedy!'
         3:
             header: '"veya" komutu'
             text: |-
                 `{veya}`, {ve}` komutuyla aynı şekilde çalışır, ancak iki ifadeden yalnızca birinin doğru olması gerekir.
 
                 Şimdi `{ve}` yerine `{veya}` yazdığınızda ne olacağını görelim.
-            editor: <iframe class="fragment" src="/adventure/and_or_command/13/raw"></iframe>
+            code: |-
+                name = {ask} 'what is your name?'
+                {if} name {is} 'Hedy' {or} name {is} 'hedy'
+                    {print} 'Welcome!!'
         4:
             header: Functions with arguments
             text: Now that you've learned how to use functions, you'll learn how to use a function with an **argument**. An argument is a variable that is used within a function. It is not used outside the function.
@@ -528,11 +872,17 @@ levels:
             text: |-
                 In this example you see how the argument 'place' is used in the function.
                 Run the code and change 'ocean' and 'sea' to something else, and see what happens.
-            editor: <iframe class="fragment" src="/adventure/functions/13/raw"></iframe>
+            code: |-
+                {define} song {with} place
+                    {print} 'My Bonnie is over the ' place
+
+                {call} song {with} 'ocean'
+                {call} song {with} 'sea'
+                {call} song {with} 'ocean'
         6:
             header: Example with variable
             text: |-
-                Now you've ssen how arguments work, you could also combine function with a question.
+                You can also combine functions with a question.
 
                 What happens if you make these changes:
                 ```
@@ -542,7 +892,13 @@ levels:
                 answer is ask 'Where is my Bonnie?'
                 call song with answer
                 ```
-            editor: <iframe class="fragment" src="/adventure/functions/13/raw"></iframe>
+            code: |-
+                {define} song {with} place
+                    {print} 'My Bonnie is over the ' place
+
+                {call} song {with} 'ocean'
+                {call} song {with} 'sea'
+                {call} song {with} 'ocean'
         7:
             header: Even more questions!
             text: |-
@@ -558,8 +914,38 @@ levels:
                 place is ask 'Where are they?'
                 call song with name, place
                 ```
-            editor: <iframe class="fragment" src="/adventure/functions/13/raw"></iframe>
+            code: |-
+                {define} song {with} place
+                    {print} 'My Bonnie is over the ' place
+
+                {call} song {with} 'ocean'
+                {call} song {with} 'sea'
+                {call} song {with} 'ocean'
         8:
+            header: Debugging
+            text: Let's debug this code!
+            code: |-
+                {define} happiness {with} name
+                    {print} '🥳'
+                {play} G
+                {play} A
+                {play} B
+                {print} 'Party on, ' name
+                {define} sadness
+                {print} '😞'
+                {play} E
+                {play} D
+                {play} C
+                {print} 'Hope you feel better, ' name
+
+                name = {ask} 'What is your' name '?'
+                mood = {ask} 'Are you happy or sad?'
+                {if} mood = happy
+                    {call} happiness {with} person
+                {else} mood = sad
+                    {define} sadness {to} name
+            debug: true
+        9:
             header: Let's go!
             text: Enjoy the adventures in level 13!
     14:
@@ -580,7 +966,12 @@ levels:
                   <= küçük veya eşittir anlamına gelir...
 
                 Bunları şu şekilde kullanabilirsiniz:
-            editor: <iframe class="fragment" src="/adventure/is_command/14/raw"></iframe>
+            code: |-
+                age = {ask} 'How old are you?'
+                {if} age < 13
+                    {print} 'You are younger than me!'
+                {else}
+                    {print} 'You are older than me!'
         3:
             header: Semboller
             text: |-
@@ -591,7 +982,12 @@ levels:
                 != benzer/eşit değil
 
                 == `{if}` ifadelerinde kullanılır.
-            editor: <iframe class="fragment" src="/adventure/default/14/raw"></iframe>
+            code: |-
+                answer = {ask} 'Do you want to learn more?'
+                {if} answer == 'yes'
+                    {print} 'Go to the next adventure!'
+                {if} answer != 'yes'
+                    {print} 'That is a shame!'
         4:
             header: Return value
             text: In the previous levels you have learned to create functions and use arguments with them. Another great use of a function is to let it calculate something for you. You can give the function a calculation and it will give you the answer of the calculation. This answer is called a **return
@@ -599,8 +995,40 @@ levels:
         5:
             header: Return value
             text: For example, in this code the function calculate_new_price will calculate the new price of any item. It will give you the new price as a return value.
-            editor: <iframe class="fragment" src="/adventure/functions/14/raw"></iframe>
+            code: |-
+                {define} calculate_new_price {with} amount, percentage
+                    percentage = percentage / 100
+                    discount_amount = amount * percentage
+                    {return} amount - discount_amount
+
+                old_price = {ask} 'How much is on the price tag?'
+                discount = {ask} 'What percentage is the discount?'
+
+                new_price = {call} calculate_new_price {with} old_price, discount
+                {print} 'The new price is ' new_price ' dollar'
         6:
+            header: Debugging
+            text: Let's debug this code!
+            code: |-
+                item = 'not bought'
+                {print} 'I would like to buy this item'
+                price == {ask} 'What is the price?'
+                {if} price less than or the same as 10
+                    {print} 'Thats a great deal!'
+                    item = 'bought'
+                {if} price is more than 10 {and} less than or the same as 20
+                    {print} 'Alright'
+                    item = 'bought'
+                {if} price is more than 20 {and} less than 50
+                    {print} 'That is a bit much!'
+                {if} price is more than or the same as 50
+                    {print} 'No way!'
+                {if} item =! bought
+                    {print} 'Shame.. I wont buy it'
+                {else}
+                    {print} 'I will buy it! Thank you!'
+            debug: true
+        7:
             header: Let's get to work!
             text: Enjoy the adventures in level 14!
     15:
@@ -613,7 +1041,11 @@ levels:
                 Yeni bir döngü öğreneceğiz, "iken" döngüsü! Döngü, ifade doğru olduğu sürece devam eder. Bu yüzden döngü içinde bu değeri değiştirmeyi unutmayın.
 
                 Bu örnek kodda, doğru bir cevap verilene kadar devam ediyoruz. Doğru cevap hiç verilmezse, döngü asla sona ermeyecektir!
-            editor: <iframe class="fragment" src="/adventure/while_command/15/raw"></iframe>
+            code: |-
+                answer = 0
+                {while} answer != 25
+                    answer = {ask} 'What is 5 times 5?'
+                {print} 'A correct answer has been given'
         3:
             header: Hadi deneyelim!
             text: Seviye 15'teki maceraların tadını çıkarın!
@@ -624,7 +1056,15 @@ levels:
         2:
             header: Köşeli parantezler
             text: Python yöntemiyle listeler yapacağız, ve bu listelerin etrafında köşeli parantezler olacak! Ayrıca önceki seviyelerde öğrendiğimiz gibi her öğenin etrafında tırnak işaretlerini tutuyoruz. Köşeli parantezleri listedeki bir yeri belirtmek için kullanıyoruz. "rastgele" komutu artık kullanılamaz.
-            editor: <iframe class="fragment" src="/adventure/random_command/16/raw"></iframe>
+            code: |-
+                friends = ['Ahmed', 'Ben', 'Cayden']
+                {print} friends[1] ' is the first friend on the list.'
+                {print} friends[2] ' is the second friend on the list.'
+                {print} friends[3] ' is the third friend on the list.'
+                #now we will match 2 lists using the variable i
+                lucky_numbers = [15, 18, 6]
+                {for} i {in} {range} 1 {to} 3
+                    {print} friends[i] 's lucky number is ' lucky_numbers[i]
         3:
             header: Hadi deneyelim!
             text: Seviye 16'daki maceraların tadını çıkarın!
@@ -635,11 +1075,27 @@ levels:
         2:
             header: İki nokta üstüste
             text: Şimdi girintilemeyi biraz değiştireceğiz. Girintiye ihtiyaç duyduğumuz her seferinde, girintiden önceki satırda ":" işaretine ihtiyacımız var.
-            editor: <iframe class="fragment" src="/adventure/print_command/17/raw"></iframe>
+            code: |-
+                prices = ['1 million dollars', 'an apple pie', 'nothing']
+                your_price = prices[{random}]
+                {print} 'You win ' your_price
+                {if} your_price == '1 million dollars' :
+                    {print} 'Yeah! You are rich!'
+                {else}:
+                    {print} 'Better luck next time..'
         3:
             header: değileğer
             text: 'Bu seviyede yeni bir komutu da kullanabilirsiniz: değileğer. değileğer, "değilse eğer" ''in kısaltmasıdır ve 3 (veya daha fazla!) seçenek yapmak istediğinizde buna ihtiyacınız vardır. Şuna bir göz atın!'
-            editor: <iframe class="fragment" src="/adventure/elif_command/17/raw"></iframe>
+            code: |-
+                prices = ['1 million dollars', 'an apple pie', 'nothing']
+                your_price = prices[{random}]
+                {print} 'You win ' your_price
+                {if} your_price == '1 million dollars' :
+                    {print} 'Yeah! You are rich!'
+                {elif} your_price == 'an apple pie' :
+                    {print} 'Lovely, an apple pie!'
+                {else}:
+                    {print} 'Better luck next time..'
         4:
             header: Hadi deneyelim!
             text: Seviye 17'deki maceraların tadını çıkarın!
@@ -658,7 +1114,7 @@ levels:
                 Python kodunu elde etmek için yapmamız gereken son değişiklik "sor" komutunu "girdi" komutu ile değiştirmek.
 
                 Tüm örnekler için 'yazdır' sekmesine tıklayın.
-            editor: <iframe class="fragment" src="/hedy/18"></iframe>
+            editor: /hedy/18
         3:
             header: En son maceralar!
             text: Seviye 18'de en son maceraların tadını çıkarın!

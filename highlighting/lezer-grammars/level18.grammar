@@ -1,7 +1,7 @@
 @top Program { eol* (Command eol+)* Command? }
 
 Command {
-    Assign | AssignList | Input | Clear | Print | Turtle | Sleep | Add | Remove | If | Else | Repeat | For | Define | Call | Return | While | Elif | ErrorInvalid
+    Assign | AssignList | Input | Clear | Print | Play | Turtle | Sleep | Add | Remove | If | Else | Repeat | For | Define | Call | Return | While | Elif | ErrorInvalid
 }
 
 @local tokens {    
@@ -29,18 +29,19 @@ Print { print+  Op<"("> Arguments? Op<")"> }
 AssignList { Text (is+ | Op<"=">) Op<"["> (String | Number ) ~ambig  (Comma (String | Number ))+ Op<"]">} // Comma doesn't really parse well if it is not separated by spaces
 Assign { (Text | ListAccess) (is+ | Op<"=">) (Expression ~ambig )+ }
 Input { Text (is+ | Op<"=">) input+ Op<"("> Arguments? Op<")"> }
-Sleep { sleep+ (Expression | Call)? }
+Sleep { sleep+ (Expression )? }
 
-ListAccess { Text Op<"["> (random+ | Text) Op<"]">}
+ListAccess { Text Op<"["> (random+ | Text | Number) Op<"]">}
+Play { play+ Text+ }
 
 Turtle[@isGroup=turtle] {
-    Forward { forward+ (Expression | Call) } |
-    Turn { turn+ (Expression | Call) } |
-    Color { color+ (Expression | Call)  }
+    Forward { forward+ (Expression ) } |
+    Turn { turn+ (Expression ) } |
+    Color { color+ (Expression )  }
 }   
 
-Add { add+ (Expression | Call ) toList+ Text }
-Remove { remove+ (Expression | Call) from+ Text }
+Add { add+ (Expression ) toList+ Text }
+Remove { remove+ (Expression ) from+ Text }
 Clear { clear+ }
 ErrorInvalid[@dynamicPrecedence=-10] { Text+ }
 
@@ -49,10 +50,10 @@ Else { elses+ Op<":"> }
 Elif { elif+ Condition ((and+| or+) Condition)* Op<":"> }
 Condition {    
     PressedCheck { Text ~cond is+ pressed+ } |
-    EqualityCheck { (Expression | Call) (is+ | Op<"="> Op<"=">? ) (Expression | Call) } |
-    NotEqualCheck { (Expression | Call) (Op<"!=">) (Expression | Call) } |
-    ComparisonCheck { (Expression | Call) (Op<">"> | Op<"<">) Op<"=">? (Expression | Call) } |
-    ListCheck { (Expression ~cond | Call) notIn+  Text }
+    EqualityCheck { (Expression ) (is+ | Op<"="> Op<"=">? ) (Expression ) } |
+    NotEqualCheck { (Expression ) (Op<"!=">) (Expression ) } |
+    ComparisonCheck { (Expression ) (Op<">"> | Op<"<">) Op<"=">? (Expression ) } |
+    ListCheck { (Expression ~cond ) notIn+  Text }
 }
 
 
@@ -65,8 +66,8 @@ Call { Text Op<"("> Arguments? Op<")"> }
 Return { returns+ (Call)+ }
 
 
-Arguments { argument (Comma argument)* }
-argument { Expression | Call}
+Arguments { argument !comma (Comma argument)* }
+argument { Expression }
 
 Op<expr> { expr }
 
@@ -75,18 +76,19 @@ binaryExpression {
     Expression !plus Op<"+" | "-"> Expression
 }
 
-// I should add Call here, but it works for now
 Expression {
     Number |
     Text |
     String |
     ListAccess |
+    Call |
     binaryExpression
 }
 
 @precedence {
     times @left,
-    plus @right
+    plus @right,
+    comma @left
 }
 
 
@@ -95,6 +97,7 @@ Expression {
     is[@name="is"],
     input[@name="input"],
     sleep[@name="sleep"],
+    play[@name="play"],
     random[@name="random"],
     forward[@name="forward"],
     turn[@name="turn"],
