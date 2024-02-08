@@ -56262,7 +56262,9 @@ notes_mapping = {
           $(this).find(":input").each(function() {
             account[$(this).attr("name")] = $(this).val();
           });
-          accounts.push(account);
+          if (account["password"].length !== 0 || account["username"].length !== 0) {
+            accounts.push(account);
+          }
         }
       });
       $.ajax({
