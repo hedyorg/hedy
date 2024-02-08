@@ -346,15 +346,15 @@ adventures:
         levels:
             1:
                 story_text: |
-                    ## The ask command
-                    Now that you can use the `{print}` command, you are ready to learn the next command: `{ask}`. With the `{ask}` command, you can ask a question. Check it out:
+                    ## Il comando per chiedere
+                    Ora che sai usare il comando `{print}`, sei pronto per imparare il prossimo comando: `{ask}`. Con il comando `{ask}`, puoi fare una domanda. Controlla:
                 example_code: |
                     ```
                     {print} Hello!
                     {ask} What is your name?
                     ```
                 story_text_2: |
-                    ## The echo command
+                    ## The  `{echo}` command
                     If you want the computer to repeat the answer, you can use the `{echo}` command. The answer will then be echoed back at the end of the sentence, so in this example after hello.
                 example_code_2: |
                     ```
@@ -533,14 +533,16 @@ adventures:
                     ```
                 story_text_3: |
                     **Extra** Puoi anche lasciare che il computer esegua somme casuali da solo utilizzando `{random}`.
-                example_code_3: |
+                example_code_3: |-
+                    ```
                     numbers = 1, 2, 3, 4, 5, 6, 7, 8, 9, 10
                     number_1 = _
                     number_2 = _
                     correct_answer = number_1 * number_2
-                    given_answer = 'What is ' number_1 ' times ' number_2 '?'
+                    given_answer = {ask} 'What is ' number_1 ' times ' number_2 '?'
                     {if} _
                     {else} _
+                    ```
             9:
                 story_text: |
                     Nel livello 6 hai creato una calcolatrice, in questo livello puoi espandere quel codice in modo che ponga più domande.
@@ -594,7 +596,7 @@ adventures:
                 example_code: |
                     ```
                     number = 10
-                    {for} i {in} {range} 1 to 10
+                    {for} i {in} {range} 1 {to} 10
                         {print} i * number
                     ```
             12:
@@ -872,7 +874,7 @@ adventures:
                 story_text: |-
                     ### Exercise
                     Debug this code. Good luck!
-                example_code: |
+                example_code: |-
                     **Warning! This code needs to be debugged!**
                     ```
                     {print} 'Welcome to Manicures and Pedicures by Hedy'
@@ -892,6 +894,7 @@ adventures:
                     {sleep} 5
                     {print} 'All done! That will be $' price ' please!'
                     {print} 'Thank you! Byebye!'
+                    ```
 
                             {print} That will be $25'
                             price = 25
@@ -929,7 +932,6 @@ adventures:
                     price = amount * 6
                     {print} 'That will be 'price dollar' please'
                     ```
-
                     price = amount * 6
                     {print} 'That will be 'price dollar' please'
             10:
@@ -942,7 +944,7 @@ adventures:
                     names = Muad Hasan Samira Noura
                     activities = fly a kite, go swimming, go hiking, catch tan in the sun
                     {for} name {is} names
-                    {print} At the beach name loves to activity at random
+                    {print} At the beach name loves to activity {at} {random}
                     ```
             11:
                 story_text: |-
@@ -1220,6 +1222,10 @@ adventures:
                     Prova tu stesso il codice con il pulsante verde "Esegui codice" sotto il campo di programmazione.
 
                     Puoi stampare il testo sullo schermo usando il comando `{print}`.
+                example_code: |
+                    ```
+                    {print} Ciao Mondo!
+                    ```
             2:
                 story_text: |
                     Nel livello 2 impariamo due nuovi comandi: `{is}` e `{sleep}`.
@@ -2449,12 +2455,12 @@ adventures:
             6:
                 story_text: |4
 
-                              In this level you learn something new: you can now also calculate.
+                                    In this level you learn something new: you can now also calculate.
 
-                              The plus is easy, you write it like with math: `5 + 5` for example. The minus also works fine, it is `5 - 5`.
+                                    The plus is easy, you write it like with math: `5 + 5` for example. The minus also works fine, it is `5 - 5`.
 
-                              The times is a bit different, because there is no times symbol on your keyboard. Just search, there really isn't!
-                              That is why we multiply with the asterisk above 8: `5 * 5`. Read that as "5 times 5" that helps you remember it best.
+                                    The times is a bit different, because there is no times symbol on your keyboard. Just search, there really isn't!
+                                    That is why we multiply with the asterisk above 8: `5 * 5`. Read that as "5 times 5" that helps you remember it best.
                 example_code: |
                     ```
                     {print} '5 plus 5 is ' 5 + 5
@@ -2781,11 +2787,13 @@ adventures:
                     {echo}
                     ```
                 story_text_2: |
-                    ### Exercise
-                    Can you make the parrot ask a different question? Fill in the blanks in the example!
+                    ### Esercizio
+                    Copia il codice di esempio nel tuo schermo di input clickando sul pulsante giallo.
+                    Fai in modo che il pappagallo faccia un'altra domanda. Riempi gli spazi bianchi nell'esempio!
+                    **Extra** Puoi anche fare in modo che il pappagallo faccia molte domande. Scrivi qualche riga in più sotto al tuo codice.
                 example_code_2: |
                     ```
-                    {print} Im Hedy the parrot
+                    {print} Sono Hedy il pappagallo
                     {ask} _
                     {echo}
                     {echo}
@@ -2953,20 +2961,20 @@ adventures:
         levels:
             1:
                 story_text: |
-                    ## The print command
-                    You can print text to the screen using the `{print}` command.
+                    ## Il comando `{print}`
+                    Puoi scrivere del testo sullo schermo usando il comando `{print}`.
                 example_code: |
                     ```
                     {print} Hi there, programmer!
                     {print} Welcome to Hedy!
                     ```
                 story_text_2: |
-                    ### Exercise
-                    In Hedy you will find exercises in every adventure. An exercise allows you to practise the new commands and concepts, and lets you give your own twist to the example codes.
-                    In this exercise you will see a pink blank space. You have to fill something in the place of the blank space before the code can be ran.
+                    ### Esercizio
+                    In Hedy troverai esercizi in ogni avventura. Un esercizio ti permettere di fare pratica con i nuovi comandi e concetti, e ti consente di dare il tuo tocco personalizzato al codice di esempio.
+                    In questo esercizio vedrai uno spazio bianco rosa. Devi scrivere qualcosa al posto dello spazio rosa prima che il codice possa essere avviato.
 
-                    Fill in the `{print}` command in the blank space and then add five more lines of code. Each line has to start with a `{print}` command.
-                    Have fun!
+                    Riempi il comando `{print}` nello spazio bianco e aggiungi cinque linee di codice aggiuntive. Ogni linea di codice deve iniziare con un comando `{print}`.
+                    Buon divertimento!
                 example_code_2: |
                     ```
                     _ Hello!
