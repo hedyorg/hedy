@@ -1175,6 +1175,10 @@ adventures:
                     Lekeletsa code kabowena kago tobetsa botala, fa go kwadilweng 'Run code' kotlase ga tsebe ya   programming.
 
                     O ka gatisa mokwalo mo sekerineng o dirisa  molao wa  `{print}`.
+                example_code: |
+                    ```
+                    {print} Hello world!
+                    ```
             2:
                 story_text: |
                     mo legatong la bobedi re ithuta ditaelo tse pedi tse disha: `{is}`.
@@ -2382,12 +2386,12 @@ adventures:
             6:
                 story_text: |4
 
-                        In this level you learn something new: you can now also calculate.
+                          In this level you learn something new: you can now also calculate.
 
-                        The plus is easy, you write it like with math: `5 + 5` for example. The minus also works fine, it is `5 - 5`.
+                          The plus is easy, you write it like with math: `5 + 5` for example. The minus also works fine, it is `5 - 5`.
 
-                        The times is a bit different, because there is no times symbol on your keyboard. Just search, there really isn't!
-                        That is why we multiply with the asterisk above 8: `5 * 5`. Read that as "5 times 5" that helps you remember it best.
+                          The times is a bit different, because there is no times symbol on your keyboard. Just search, there really isn't!
+                          That is why we multiply with the asterisk above 8: `5 * 5`. Read that as "5 times 5" that helps you remember it best.
                 example_code: |
                     ```
                     {print} '5 plus 5 is ' 5 + 5
@@ -3163,18 +3167,11 @@ adventures:
         levels:
             1:
                 story_text: |
-                    In level 1 you can make your own virtual restaurant and take your guests' orders.
-                example_code: |
-                    ```
-                    {print} Welcome to Hedy's restaurant 🍟
-                    {ask} What would you like to order?
-                    {echo} So you would like to order
-                    {print} Thanks you for your order!
-                    {print} It's on its way!
-                    ```
+                    In level 1 you can make your own app ya semausu kana tuckshop and get di orders tsa your customers.
+                example_code: "{printa}```\n{printa} Welcome to Mosaditshwene's semausu \U0001F35F\n{ask} O bata go reka eng?\n{echo} Good, so o bata \n{printa} Thanks you for your order!\n{printa} Dijo tsa gago di eta!\n```\n"
                 story_text_2: |
                     ### Exercise
-                    Can you think of more lines to add to your restaurant code? For example, can you {ask} the guests what they'd like to drink, tell them the price, or wish them a pleasant meal?
+                    Can you think of more lines go oketsa code ya gago ya semausu? For example, o ka botsa {ask} di customers gore ba bata go nwa eng, tell them  price ya teng, kana o ba bolelele gore dijo di monate?
             2:
                 story_text: |
                     In level 2 you could expand your restaurant by using variables. In level 1 Hedy could only {echo} the order once and only remember the last thing that was ordered.
