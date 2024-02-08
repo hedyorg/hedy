@@ -185,18 +185,11 @@ class Modal {
     });
   }
 
-  public feedback (confirmCb: (x: string) => void){
+  public feedback (){
       this.hide();
       $('#modal-feedback-text').text("What type of feedback do you want to provide?");
       this.show();
       $('#modal-feedback').show();
-
-      $('#modal-send-feedback-button').off('click').on('click', () => {
-          const value = $('#modal-feedback-input').val();
-          if (typeof value === 'string') {
-              confirmCb(value)
-          }
-      });
   }
 }
 

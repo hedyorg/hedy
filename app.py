@@ -21,7 +21,7 @@ import static_babel_content
 from markupsafe import Markup
 from flask import (Flask, Response, abort, after_this_request, g,
                    redirect, request, send_file, url_for, jsonify,
-                   send_from_directory, session)
+                   send_from_directory, session, make_response)
 from flask_babel import Babel, gettext
 from flask_commonmark import Commonmark
 from flask_compress import Compress
@@ -2222,13 +2222,14 @@ def store_parsons_order():
 
 @app.route('/teacher_feedback', methods=['POST'])
 def teacher_feedback():
-    email = ""
-    subject = ""
-    body_plain = ""
-    body_html = ""
 
-    send_email(email, subject, body_plain, body_html)
+    # Process the feedback
 
+    response = make_response('')
+    response.headers["HX-Push-URL"] = 'false'
+    response.headers["HX-Trigger"] = 'hideFeedbackModal'
+
+    return response
 
 @app.template_global()
 def current_language():
