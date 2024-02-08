@@ -2221,21 +2221,27 @@ def store_parsons_order():
 
 
 @app.route('/teacher_feedback', methods=['POST'])
-def teacher_feedback():
+@requires_teacher
+def teacher_feedback(user):
+    body = request.form
 
-    # Process the feedback
+    # Todo: Add some request validation
 
-    feedback = {};
+    feedback = {
+        'username': user.get('username'),
+        'message': body.get('message'),
+        'category': body.get('category'),
+        'timestamp': str(datetime.datetime.now())
+    }
 
-
-    DATABASE.store_feedback(feedback)
+    # Todo: Implement the table on Hedy alpha and production
+    # DATABASE.store_feedback(feedback)
 
     response = make_response('')
     response.headers["HX-Push-URL"] = 'false'
-    response.headers["HX-Trigger"] = 'hideFeedbackModal'
+    response.headers["HX-Trigger"] = json.dumps({"hideFeedbackModal": "success"})
 
     return response
-
 
 @app.template_global()
 def current_language():

@@ -27,7 +27,18 @@
           </div>
        </div>
 
-        <div id="modal-feedback" class = "hidden">
+        <div id="modal-feedback" class="hidden">
+            <script>
+                // Not really nice, but we have to listen to the back-end event on the HTMX post
+                document.body.addEventListener("hideFeedbackModal", function(evt) {
+                    hedyApp.modal.hide();
+                    if (evt.detail.value == 'success') {
+                        hedyApp.modal.notifySuccess('{{_('feedback_message_sent')}}');
+                    } else {
+                        hedyApp.modal.notifyError('{{_('feedback_message_error')}}');
+                    }
+                })
+            </script>
             <div id="modal-feedback-text" class="text-white mb-4 text-xl"></div>
             <div class="mx-auto flex flex-col gap-4">
                 <div class="mt-4 flex flex-row justify-between gap-x-2">
@@ -65,13 +76,6 @@
             <button id="modal-copy-button" class="green-btn block m-4 w-40 pb-4 pt-4">{{_('copy_link_to_share')}}</button>
           </div>
        </div>
-        <script>
-            document.body.addEventListener("hideFeedbackModal", function() {
-                hedyApp.modal.hide();
-                hedyApp.confetti_cannon();
-                hedyApp.modal.notifySuccess('Feedback successfully sent');
-            })
-        </script>
        <div id="modal-repair" class="hidden">
           <div class="absolute top-2 right-2">
               <svg class="fill-current h-12 w-12 ml-auto text-white cursor-pointer" id="modal-repair-button" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
