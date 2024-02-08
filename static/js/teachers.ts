@@ -32,6 +32,25 @@ export function create_class(class_name_prompt: string) {
   });
 }
 
+export function provide_feedback() {
+    modal.feedback(function(user_input ){
+     $.ajax({
+          type: 'POST',
+          url: '/teacher_feedback',
+          data: JSON.stringify({
+            user_message: user_input
+          }),
+          contentType: 'application/json',
+          dataType: 'json'
+        }).done(function(response) {
+          // Todo: Show a success popup
+         console.log(response);
+        }).fail(function(err) {
+          return modal.notifyError(err.responseText);
+        });
+    });
+}
+
 export function rename_class(id: string, class_name_prompt: string) {
     modal.prompt (class_name_prompt, '', function (class_name) {
         $.ajax({

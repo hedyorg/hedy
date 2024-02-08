@@ -46,7 +46,7 @@ from website import (ab_proxying, achievements, admin, auth_pages, aws_helpers,
                      translating, tags, surveys, public_adventures)
 from website.auth import (current_user, is_admin, is_teacher, is_second_teacher, has_public_profile,
                           login_user_from_token_cookie, requires_login, requires_login_redirect, requires_teacher,
-                          forget_current_user)
+                          forget_current_user, send_email)
 from website.log_fetcher import log_fetcher
 from website.frontend_types import Adventure, Program, ExtraStory, SaveInfo
 
@@ -2219,6 +2219,15 @@ def store_parsons_order():
     DATABASE.store_parsons(attempt)
     return jsonify({}), 200
 
+
+@app.route('/teacher_feedback' ,methods = ['POST'])
+def teacher_feedback():
+    email=""
+    subject=""
+    body_plain=""
+    body_html=""
+
+    send_email(email, subject, body_plain, body_html)
 
 @app.template_global()
 def current_language():

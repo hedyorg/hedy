@@ -26,9 +26,22 @@
             <button id="modal-no-button" class="red-btn block m-4 w-40 pb-4 pt-4">{{_('no')}}</button>
           </div>
        </div>
+
+        <div id="modal-feedback" class = "hidden">
+            <div id="modal-feedback-text" class="text-white mb-8 text-xl"></div>
+            <div class="mx-auto">
+                <div class="mt-4 flex flex-row justify-center">
+                    <button id="modal-bug-button" class="green-btn block m-4 w-40 pb-4 pt-4">{{_('BUG')}}</button>
+                    <button id="modal-feature-button" class="red-btn block m-4 w-40 pb-4 pt-4">{{_('FEATURE')}}</button>
+                    <button id="modal-feedback-button" class="red-btn block m-4 w-40 pb-4 pt-4">{{_('FEEDBACK')}}</button>
+                    <input id="modal-feedback-input" type="text" class="border border-green-400 rounded p-2 px-3 w-4/5 mt-1">
+                </div>
+            </div>
+        </div>
+
        <div id="modal-prompt" class="hidden">
           <div id="modal-prompt-text" class="text-white mb-8 text-xl"></div>
-          <div class="xm-auto">
+          <div class="mx-auto">
             <input id="modal-prompt-input" type="text" class="border border-green-400 rounded p-2 px-3 w-4/5 mt-1">
             <div class="mt-4 flex flex-row justify-center">
                 <button id="modal-ok-button" class="green-btn block m-4 w-40 pb-4 pt-4">{{_('ok')}}</button>
@@ -102,6 +115,10 @@
             <div id="achievement_reached_text" class="text-xl my-4">&lt;achievement_reached_text&gt;</div>
             <div id="achievement_reached_statics" class="text-sm text-gray-500" class="italic">&lt;achievement_reached_statics&gt;</div>
         </div>
+    </div>
+    <div class="z-50 sticky flex justify-end px-3 bottom-5">
+        <button onclick='hedyApp.provide_feedback()' class="blue-btn">Feedback</button>
+
     </div>
     {% block scripts %}
     <script src="{{static('/vendor/jquery.min.js')}}" type="text/javascript" crossorigin="anonymous"></script>
