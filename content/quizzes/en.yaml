@@ -187,7 +187,7 @@ levels:
             question_text: Which statement is true?
             mp_choice_options:
             -   option: You can use the `{print}` command to ask questions.
-                feedback: That is what ask is for
+                feedback: That is what `{ask}` is for
             -   option: You can use the `{ask}` command to echo answers.
                 feedback: That is not true
             -   option: With the `{print}` command you can make text appear
@@ -244,7 +244,7 @@ levels:
             question_text: What will you see on the output screen when you run this code?
             code: |-
                 name {is} Hedy
-                {print} Hi my name is name!
+                {print} Hi my name is name
             mp_choice_options:
             -   option: Hi my name is name
                 feedback: The variable name is replaced with Hedy
@@ -2156,7 +2156,7 @@ levels:
             correct_answer: C
             question_score: '10'
         5:
-            question_text: What word should be on the _ with these digital dice?
+            question_text: What word should be on the `_` with these digital dice?
             code: |-
                 {print} 'Welcome to the digital dice!'
                 players = Ann, John, Jesse
@@ -2183,23 +2183,33 @@ levels:
                 {for} player {in} players
                     {print} player ' chooses ' choices {at} {random}
             mp_choice_options:
-            -   option: Kelly chooses rock
+            -   option: |-
+                    ```
+                    Kelly chooses rock
+                    ```
                 feedback: Meredith wants to play too!
             -   option: |-
+                    ```
                     Meredith chooses scissors
                     Kelly chooses rock
+                    ```
                 feedback: So close! But Kelly is first in the list, so she goes first
-            -   option: Meredith chooses paper
+            -   option: |-
+                    ```
+                    Meredith chooses paper
+                    ```
                 feedback: Kelly wants to play too!
             -   option: |-
+                    ```
                     Kelly chooses paper
                     Meredith chooses scissors
+                    ```
                 feedback: Amazing!
             hint: Each player will pick an option. The player that's first on the list will go first.
             correct_answer: D
             question_score: '10'
         7:
-            question_text: What line should be on the _ in this code that decides what these people will have for dinner?
+            question_text: What line should be on the `_` in this code that decides what these people will have for dinner?
             code: |-
                 names = Ron, Leslie, April, Andy
                 food = pasta, fries, salad
@@ -2230,7 +2240,7 @@ levels:
             correct_answer: A
             question_score: '10'
         8:
-            question_text: What should be on the _ in this code that decides which color shirt you get?
+            question_text: What should be on the `_` in this code that decides which color shirt you get?
             code: |-
                 names = Donna, Tommy, Ben
                 colors = blue, red, purple

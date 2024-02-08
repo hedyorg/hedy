@@ -36,20 +36,51 @@ class TestsLevel16(HedyTester):
 
         self.multi_level_tester(
             code=code,
-            max_level=17,
             unused_allowed=True,
             expected=expected
         )
 
-    def test_create_with_single_item(self):
-        code = "friends = ['Ashli']"
-        expected = "friends = ['Ashli']"
+    @parameterized.expand([
+        ("'Ashli'", 'Ashli'),
+        ("'\"Ashli\"'", '"Ashli"'),
+        ('"Ashli"', 'Ashli'),
+        ('"Ashli\'s"', 'Ashli\'s'),
+        ('42', 42),
+        ('-1', -1),
+        ('1.5', 1.5),
+        ('-0.7', -0.7)
+    ])
+    def test_create_list_single_item(self, item_code, expected_value):
+        code = f"friends = [{item_code}]"
+        expected = f"friends = [{item_code}]"
 
-        check_in_list = (lambda x: HedyTester.run_code(x) == 'Ashli')
+        check_in_list = (lambda x: HedyTester.run_code(x) == expected_value)
 
         self.multi_level_tester(
             code=code,
-            max_level=17,
+            expected=expected,
+            unused_allowed=True,
+            extra_check_function=check_in_list
+        )
+
+    @parameterized.expand([
+        ("'Alice', 'Ben'", ['Alice', 'Ben']),
+        ("'\"a\"', '\"Ben\"'", ['"Alice"', '"Ben"']),
+        ('"Alice", "Ben"', ['Alice', 'Ben']),
+        ('"Alice\'s", "Ben\'s"', ["Alice's", "Ben's"]),
+        ('1, 3, 5', [1, 3, 5]),
+        ('-1, -2, -5', [-1, -2, -5]),
+        ('1.5, 2.6, 3.7', [1.5, 2.6, 3.7]),
+        ('-0.1, -5.6', [-0.1, -5.6])
+    ])
+    def test_create_list_multi_items(self, items_code, expected_items):
+        code = f"friends = [{items_code}]"
+        expected = f"friends = [{items_code}]"
+
+        check_in_list = (lambda x: HedyTester.run_code(x) in expected_items)
+
+        self.multi_level_tester(
+            code=code,
             expected=expected,
             unused_allowed=True,
             extra_check_function=check_in_list

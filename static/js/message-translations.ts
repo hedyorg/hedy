@@ -1427,7 +1427,7 @@ export const TRANSLATIONS: Record<string, Record<MessageKey, string>> = {
     "Transpile_success": "好样的！\n了不起！\n做的很好！\n棒极了！\n做的真棒！",
     "Transpile_warning": "警告！",
     "Unsaved_Changes": "你有一个未保存的程序。你想不保存就离开吗？",
-    "adventures_restored": "默认的冒险已经恢复！",
+    "adventures_restored": "默认的冒险已经恢复。",
     "copy_link_to_share": "复制链接以分享",
     "customization_deleted": "已成功删除自定义项。",
     "dice": "🎲",
@@ -1439,9 +1439,9 @@ export const TRANSLATIONS: Record<string, Record<MessageKey, string>> = {
     "restaurant": "🍣, 🍕, 🍔",
     "rock": "✂️, 📜, 🗻",
     "songs": "🎵,🎶",
-    "teacher_welcome": "Welcome to Hedy! Your are now the proud owner of a teachers account which allows you to create classes and invite students.",
+    "teacher_welcome": "欢迎来到海蒂！ 您现在是教师帐户的自豪拥有者，该帐户允许您创建课程并邀请学生。",
     "turtle": "🐢",
-    "unsaved_class_changes": "There are unsaved changes, are you sure you want to leave this page?"
+    "unsaved_class_changes": "有未保存的更改，您确定要离开此页面吗？"
   },
   "zh_Hant": {
     "CheckInternet": "Check whether your Internet connection is working.",
