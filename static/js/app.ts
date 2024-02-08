@@ -19,6 +19,7 @@ import { HedyEditor, EditorType } from './editor';
 import { stopDebug } from "./debugging";
 import { HedyCodeMirrorEditorCreator } from './cm-editor';
 import { initializeTranslation } from './lezer-parsers/tokens';
+import { initializeTracking } from './tracking';
 
 export let theGlobalDebugger: any;
 export let theGlobalEditor: HedyEditor;
@@ -179,6 +180,8 @@ export function initializeApp(options: InitializeAppOptions) {
   });
 
   initializeLoginLinks();
+
+  initializeTracking();
 }
 
 export interface InitializeCodePageOptions {
