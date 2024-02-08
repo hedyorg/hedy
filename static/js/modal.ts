@@ -187,14 +187,16 @@ class Modal {
 
   public feedback (confirmCb: (x: string) => void){
       this.hide();
-      $('#modal-feedback-text').text("Please provide a feedback");
+      $('#modal-feedback-text').text("What type of feedback do you want to provide?");
       this.show();
-      $('#modal-feedback-text').show();
+      $('#modal-feedback').show();
 
-      const value = $('#modal-feedback-input').val();
-      if (typeof value === 'string'){
-          confirmCb(value)
-      }
+      $('#modal-send-feedback-button').off('click').on('click', () => {
+          const value = $('#modal-feedback-input').val();
+          if (typeof value === 'string') {
+              confirmCb(value)
+          }
+      });
   }
 }
 

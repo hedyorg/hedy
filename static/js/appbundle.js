@@ -4135,6 +4135,7 @@ var hedyApp = (() => {
     modal: () => modal,
     modalStepOne: () => modalStepOne,
     preview_adventure: () => preview_adventure,
+    provide_feedback: () => provide_feedback,
     pushAchievement: () => pushAchievement,
     remove_student: () => remove_student,
     remove_student_invite: () => remove_student_invite,
@@ -18014,6 +18015,18 @@ var hedyApp = (() => {
         const value = $("#modal-prompt-input").val();
         if (typeof value === "string") {
           $("#modal-prompt-input").val("");
+          confirmCb(value);
+        }
+      });
+    }
+    feedback(confirmCb) {
+      this.hide();
+      $("#modal-feedback-text").text("What type of feedback do you want to provide?");
+      this.show();
+      $("#modal-feedback").show();
+      $("#modal-send-feedback-button").off("click").on("click", () => {
+        const value = $("#modal-feedback-input").val();
+        if (typeof value === "string") {
           confirmCb(value);
         }
       });
@@ -55810,6 +55823,23 @@ notes_mapping = {
         } else {
           window.location.pathname = "/for-teachers/customize-class/" + response.id;
         }
+      }).fail(function(err) {
+        return modal.notifyError(err.responseText);
+      });
+    });
+  }
+  function provide_feedback() {
+    modal.feedback(function(user_input) {
+      $.ajax({
+        type: "POST",
+        url: "/teacher_feedback",
+        data: JSON.stringify({
+          user_message: user_input
+        }),
+        contentType: "application/json",
+        dataType: "json"
+      }).done(function(response) {
+        console.log(response);
       }).fail(function(err) {
         return modal.notifyError(err.responseText);
       });
