@@ -1,3 +1,5 @@
+import { postJson } from "./comm";
+
 const ELEMENT_TO_TRACK = [
     // Debug and Developer buttons
     "debug_button",
@@ -115,4 +117,4 @@ function trackEvent(event: Event) {
 
     }
     console.log(clickCounts)
-}
+    await postJson('/tracking', clickCounts);
