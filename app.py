@@ -2243,6 +2243,7 @@ def teacher_feedback(user):
 
     return response
 
+
 @app.template_global()
 def current_language():
     return make_lang_obj(g.lang)
