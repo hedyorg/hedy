@@ -2220,14 +2220,15 @@ def store_parsons_order():
     return jsonify({}), 200
 
 
-@app.route('/teacher_feedback' ,methods = ['POST'])
+@app.route('/teacher_feedback', methods=['POST'])
 def teacher_feedback():
-    email=""
-    subject=""
-    body_plain=""
-    body_html=""
+    email = ""
+    subject = ""
+    body_plain = ""
+    body_html = ""
 
     send_email(email, subject, body_plain, body_html)
+
 
 @app.template_global()
 def current_language():
