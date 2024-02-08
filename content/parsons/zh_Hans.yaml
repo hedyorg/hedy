@@ -40,8 +40,7 @@ levels:
                 {print} 感谢您与我们一起购物！
     3:
         1:
-            story: "The new school year at Hogwarts is starting! \nIt is the job of the sorting hat to sort you into one of the houses.\nWhich house will you be sorted into? Are you a Gryffindor, Hufflepuff, Ravenclaw or Slytherin.\nBefore the sorting hat reveals your house, you can tell it to not pick\
-                \ one of the houses."
+            story: "The new school year at Hogwarts is starting! \nIt is the job of the sorting hat to sort you into one of the houses.\nWhich house will you be sorted into? Are you a Gryffindor, Hufflepuff, Ravenclaw or Slytherin.\nBefore the sorting hat reveals your house, you can tell it to not pick one of the houses."
             code: |-
                 {print} 分院帽已经准备好把你分到霍格沃茨的房子里了。
                 房子 {is} 格兰芬多、赫奇普夫、拉文克劳、斯莱特林
@@ -193,8 +192,8 @@ levels:
     10:
         1:
             story: |-
-                通过制定一个时间表来帮助这个家庭摆脱困境，确定谁在做饭以及他们本周应该做什么。 `{remove}` 命令确保没有人需要做饭两次，并且每天都有不同的晚餐。
-                **注意！** 变量顺序应该是第一天，然后是人，最后是晚餐选项。 这也适用于带有`{remove}` 命令的行。`{remove}`
+                通过制定一个时间表来帮助这个家庭摆脱困境，确定谁在做饭以及他们本周应该做什么。 `{remove}` 命令确保没有人需要做饭两次，这样每天都有不同的晚餐。
+                **注意！** 变量顺序应该是先是哪一天，然后是人，最后是晚餐选项。 这也适用于带有`{remove}` 命令的行。
             code: |-
                 days = Monday, Tuesday, Wednesday, Thursday, Friday
                 people = mom, dad, Martin, Abby, Jesse
