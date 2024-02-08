@@ -2225,6 +2225,11 @@ def teacher_feedback():
 
     # Process the feedback
 
+    feedback = {};
+
+
+    DATABASE.store_feedback(feedback)
+
     response = make_response('')
     response.headers["HX-Push-URL"] = 'false'
     response.headers["HX-Trigger"] = 'hideFeedbackModal'

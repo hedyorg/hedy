@@ -34,6 +34,8 @@ CLASSES = dynamo.Table(storage, "classes", "id", indexes=[
     dynamo.Index('link'),
 ])
 
+FEEDBACK = dynamo.Table(storage, "feedback_messages", partition_key="id")
+
 # A custom teacher adventure
 # - id (str): id of the adventure
 # - content (str): adventure text
@@ -338,6 +340,10 @@ class Database:
     def store_token(self, token):
         """Store a token in the database."""
         TOKENS.create(token)
+
+    def store_feedback(self, feedback):
+        """Store a feedback message in the database"""
+        FEEDBACK.create(feedback)
 
     def forget_token(self, token_id):
         """Forget a Token.
