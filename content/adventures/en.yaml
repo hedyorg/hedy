@@ -171,8 +171,7 @@ adventures:
                         {print} _
                     ```
             9:
-                story_text: "In this level you can use `{if}` and `{repeat}` commands inside other `{if}` and `{repeat}` commands. \nThis gives you many options and really helps you to make your story interactive.\n\n### Exercise 1\nFinish the code so the `{if}` works correctly.\n\n### Exercise 2\nAdd\
-                    \ an `{if}` and `{else}` for the part of the story where Robin goes home too.\n\n### Exercise 3\nGo back to your level 8 story and use at least two `{if}`s inside another `{if}`.\n"
+                story_text: "In this level you can use `{if}` and `{repeat}` commands inside other `{if}` and `{repeat}` commands. \nThis gives you many options and really helps you to make your story interactive.\n\n### Exercise 1\nFinish the code so the `{if}` works correctly.\n\n### Exercise 2\nAdd an `{if}` and `{else}` for the part of the story where Robin goes home too.\n\n### Exercise 3\nGo back to your level 8 story and use at least two `{if}`s inside another `{if}`.\n"
                 example_code: |
                     ```
                     {print} 'Robin is walking downtown'
@@ -932,11 +931,11 @@ adventures:
             11:
                 story_text: |-
                     ### Exercise
-                    Debug this calender program. The output of this program is supposed to look like a list of dates.
+                    Debug this calendar program. The output of this program is supposed to look like a list of dates.
                     For example:
 
                     ```
-                    Hedy calender
+                    Hedy calendar
                     Here are all the days of November
                     November 1
                     November 2
@@ -948,25 +947,25 @@ adventures:
                 example_code: |
                     **Warning! This code needs to be debugged!**
                     ```
-                    print 'Hedy calender'
+                    {print} 'Hedy calendar'
                     months_with_31 days = January, March, May, July, September, October, December
                     months_with_30_days = April, June, August, November
-                    month = ask 'Which month would you like to see?'
-                    if month in months_with_31_days
+                    month = {ask} 'Which month would you like to see?'
+                    {if} month {in} months_with_31_days
                         days = 31
-                        if month in months_with30_days
+                        {if} month {in} months_with30_days
                             days = 30
-                    if month = February
+                    {if} month = February
                         leap_years = 2020, 2024, 2028, 2036, 2040, 2044, 2028
-                        year = ask 'What year is it?'
-                    if year in leap_years
+                        year = {ask} 'What year is it?'
+                    {if} year {in} leap_years
                         days = 29
-                    else
+                    {else}
                         days = 28
 
-                    print 'Here are all the days of ' moth
-                    for i in range 1 to days
-                        print month i
+                    {print} 'Here are all the days of ' moth
+                    {for} i {in} {range} 1 {to} days
+                        {print} month i
                     ```
             12:
                 story_text: |-
@@ -975,26 +974,26 @@ adventures:
                 example_code: |
                     **Warning! This code needs to be debugged!**
                     ```
-                    define greet
+                    {define} greet
                     greetings = 'Hello', 'Hi there', 'Goodevening'
-                        print greetings at random
+                        {print} greetings {at} {random}
 
-                    define take_order
-                        food = ask 'What would you like to eat?'
-                        print 'One food'
+                    {define} take_order
+                        food = {ask} 'What would you like to eat?'
+                        {print} 'One food'
                         drink = 'What would you like to drink?'
-                        print 'One ' drink
-                        more = ask 'Would you like anything else?'
-                            if more is 'no'
-                        print 'Alright'
-                            else
-                            print 'And ' more
-                    print 'Thank you'
+                        {print} 'One ' drink
+                        more = {ask} 'Would you like anything else?'
+                            {if} more {is} 'no'
+                        {print} 'Alright'
+                            {else}
+                            {print} 'And ' more
+                    {print} 'Thank you'
 
-                    print 'Welcome to our restaurant'
-                    people = ask 'How many people are in your party tonight?'
-                    for i in range 0 to people
-                        call greet_costumer
+                    {print} 'Welcome to our restaurant'
+                    people = {ask} 'How many people are in your party tonight?'
+                    {for} i {in} {range} 0 {to} people
+                        {call} greet_costumer
                     ```
             13:
                 story_text: |-
@@ -1003,30 +1002,30 @@ adventures:
                 example_code: |
                     **Warning! This code needs to be debugged!**
                     ```
-                    defin movie_recommendation with name
+                    {define}movie_recommendation {with} name
                         action_movies == 'Die Hard', 'Fast and Furious', 'Inglorious Bastards'
                         romance_movies = 'Love Actually', 'The Notebook', 'Titanic'
                         comedy_movies = 'Mr Bean' 'Barbie''Deadpool'
                         kids_movies = 'Minions', 'Paddington', 'Encanto'
-                        if name is 'Camila' or name is 'Manuel'
-                            recommended_movie = kids_movie at random
-                        if name is 'Pedro' or 'Gabriella'
-                                mood = ask 'What you in the mood for?'
-                            if mood is 'action'
-                                recommended_movie = comedy_movies at random
-                            if mood is 'romance'
+                        {if} name {is} 'Camila' {or} name {is} 'Manuel'
+                            recommended_movie = kids_movie {at} {random}
+                        {if} name {is} 'Pedro' {or} 'Gabriella'
+                                mood = {ask} 'What you in the mood for?'
+                            {if} mood {is} 'action'
+                                recommended_movie = comedy_movies {at} {random}
+                            {if} mood {is} 'romance'
                                 recommended_movie = romance_movies
-                        if mood is 'comedy'
-                                recommended_movie = comedy_movies at random
+                        {if} mood {is} 'comedy'
+                                recommended_movie = comedy_movies {at} {random}
 
-                    print 'I would recommend ' recommended_movie ' for ' name
+                    {print} 'I would recommend ' recommended_movie ' for ' name
 
-                    name = ask 'Who is watching?'
-                    recommendation = ask 'Would you like a recommendation?'
-                    if recommendaion is 'yes'
-                    print movie_recommendation with name
-                    else
-                    print 'No problem!'
+                    name = {ask} 'Who is watching?'
+                    recommendation = {ask} 'Would you like a recommendation?'
+                    {if} recommendaion {is} 'yes'
+                    {print} movie_recommendation {with} name
+                    {else}
+                    {print} 'No problem!'
                     ```
             14:
                 story_text: |-
@@ -1035,48 +1034,28 @@ adventures:
                 example_code: |
                     **Warning! This code needs to be debugged!**
                     ```
-                    define calculate_heartbeat
-                        print 'Press your fingertips gently against the side of your neck'
-                        print '(just under your jawline)'
-                        print 'Count the number of beats you feel for 15 seconds'
-                        beats == ask 'How many beats do you feel in 15 seconds?'
+                    {define} calculate_heartbeat
+                        {print} 'Press your fingertips gently against the side of your neck'
+                        {print} '(just under your jawline)'
+                        {print} 'Count the number of beats you feel for 15 seconds'
+                        beats == {ask} 'How many beats do you feel in 15 seconds?'
                         heartbeat = beats*4
-                        print 'Your heartbeat is ' heartbeat
-                        if heartbeat >= 60 or heartbeat <= 100
-                            print 'Your heartbeat seems fine'
-                        else
-                            if heartbeat > 60
-                                print 'Your heartbeat seems to be too low'
-                            if heartbeat < 100
-                                print 'Your heartbeat seems to be too high'
-                            print 'You might want to contact a medical professional'
+                        {print} 'Your heartbeat is ' heartbeat
+                        {if} heartbeat >= 60 {or} heartbeat <= 100
+                            {print} 'Your heartbeat seems fine'
+                        {else}
+                            {if} heartbeat > 60
+                                {print} 'Your heartbeat seems to be too low'
+                            {if} heartbeat < 100
+                                {print} 'Your heartbeat seems to be too high'
+                            {print} 'You might want to contact a medical professional'
 
-                    measure_heartbeat = ask 'Would you like to measure your heartbeat?'
-                    if measure_heartbeat = 'yes'
-                        call measure_heartbeat
-                    else
+                    measure_heartbeat = {ask} 'Would you like to measure your heartbeat?'
+                    {if} measure_heartbeat = 'yes'
+                        {call} measure_heartbeat
+                    {else}
                         'no problem'
                     ```
-
-                        print '(just under your jawline)'
-                        print 'Count the number of beats you feel for 15 seconds'
-                        beats == ask 'How many beats do you feel in 15 seconds?'
-                        heartbeat = beats*4
-                        print 'Your heartbeat is ' heartbeat
-                        if heartbeat >= 60 or heartbeat <= 100
-                            print 'Your heartbeat seems fine'
-                        else
-                            if heartbeat > 60
-                                print 'Your heartbeat seems to be too low'
-                            if heartbeat < 100
-                                print 'Your heartbeat seems to be too high'
-                            print 'You might want to contact a medical professional'
-
-                    measure_heartbeat = ask 'Would you like to measure your heartbeat?'
-                    if measure_heartbeat = 'yes'
-                        call measure_heartbeat
-                    else
-                        'no problem'
             15:
                 story_text: |-
                     ### Exercise
@@ -1091,28 +1070,28 @@ adventures:
                     sounds = 'a trumpet', 'a car crash', 'thunder'
                     causes_of_noise = 'a television', 'a kid with firecrackers', 'a magic elephant', 'a dream'
 
-                    chosen_ name = names at random
-                    chosen_verb = verbs at random
-                    chosen_location = 'locations at random'
-                    chosen_sounds = noises at random
-                    chosen_spot = hiding_spots random
-                    chosen_causes = causes_of_noise at random
+                    chosen_ name = names {at} {random}
+                    chosen_verb = verbs {at} {random}
+                    chosen_location = 'locations {at} {random}'
+                    chosen_sounds = noises {at} {random}
+                    chosen_spot = hiding_spots {random}
+                    chosen_causes = causes_of_noise {at} {random}
 
-                    print chosen_name ' was ' chosen_verb ' ' chosen_location
-                    print 'when they suddenly heard a sound like ' sounds at random
-                    print chosen_name ' looked around, but they couldn't discover where the noise came from'
-                    print chosen_name ' hid ' chosen_spot'
-                    print 'They tried to look around, but couldn't see anything from there'
+                    {print} chosen_name ' was ' chosen_verb ' ' chosen_location
+                    {print} 'when they suddenly heard a sound like ' sounds {at} {random}
+                    {print} chosen_name ' looked around, but they couldn't discover where the noise came from'
+                    {print} chosen_name ' hid ' chosen_spot'
+                    {print} 'They tried to look around, but couldn't see anything from there'
                     hidden = 'yes'
-                    while hidden = 'yes'
-                        print chosen_name 'still didn't see anything'
-                    answer = ask 'does ' chosen_name ' move from their hiding spot?'
-                        if answer = 'yes'
+                    {while} hidden = 'yes'
+                        {print} chosen_name 'still didn't see anything'
+                    answer = {ask} 'does ' chosen_name ' move from their hiding spot?'
+                        {if} answer = 'yes'
                             hidden == 'no'
-                    print 'chosen_name moved from' chosen_spot
-                    print 'And then they saw it was just' chosen_cause
-                    print chosen_name 'laughed and went on with their day'
-                    print The End
+                    {print} 'chosen_name moved from' chosen_spot
+                    {print} 'And then they saw it was just' chosen_cause
+                    {print} chosen_name 'laughed and went on with their day'
+                    {print} The End
                     ```
             16:
                 story_text: |-
@@ -1125,15 +1104,15 @@ adventures:
                     country = ['The Netherlands', 'Poland', 'Turkey', 'Zimbabwe', 'Thailand', 'Brasil', 'Peru', 'Australia', 'India', 'Romania' ]
                     capitals = 'Amsterdam', 'Warshaw' 'Istanbul', 'Harare', 'Bangkok', 'Brasilia', 'Lima', 'Canberra', 'New Delhi', 'Bucharest'
                     score = 0
-                    for i in range 0 to 10
-                        answer = ask 'What's the capital of ' countries[i]
+                    {for} i {in} {range} 0 {to} 10
+                        answer = {ask} 'What's the capital of ' countries[i]
                         correct = capital[i]
-                        if answer = correct
-                            print 'Correct!'
+                        {if} answer = correct
+                            {print} 'Correct!'
                         score = score + 1
-                        else
-                            print 'Wrong,' capitals[i] 'in the capital of' countries[i]
-                        print 'You scored ' score ' out of 10'
+                        {else}
+                            {print} 'Wrong,' capitals[i] 'in the capital of' countries[i]
+                        {print} 'You scored ' score ' out of 10'
 
                     ```
             17:
@@ -1143,33 +1122,33 @@ adventures:
                 example_code: |
                     **Warning! This code needs to be debugged!**
                     ```
-                    define food_order
-                        toppings = ask 'pepperoni, tuna, veggie or cheese?'
-                        size = ask 'big, medium or small?'
-                        number_of_pizza = ask 'How many these pizzas would you like?'
+                    {define} food_order
+                        toppings = {ask} 'pepperoni, tuna, veggie or cheese?'
+                        size = {ask} 'big, medium or small?'
+                        number_of_pizza = {ask} 'How many these pizzas would you like?'
 
-                        print 'YOU ORDERED'
-                        print number_of_pizzas ' size  ' topping ' pizza'
+                        {print} 'YOU ORDERED'
+                        {print} number_of_pizzas ' size  ' topping ' pizza'
 
-                    define drinks_order
-                        drink = ask 'water, coke, icetea, lemonade or coffee?'
-                        number_of_drinks = ask 'How many of these drinks would you like?'
+                    {define} drinks_order
+                        drink = {ask} 'water, coke, icetea, lemonade or coffee?'
+                        number_of_drinks = {ask} 'How many of these drinks would you like?'
 
-                        print 'YOU ORDERED'
-                        print number_of_drinks ' ' drink
+                        {print} 'YOU ORDERED'
+                        {print} number_of_drinks ' ' drink
 
                     'Welcome to Hedy pizza'
-                    more_food = ask 'Would you like to order a pizza?'
-                    while more_food = 'yes'
-                        return food_order
-                        more_food = ask 'Would you like to order a pizza?'
-                    more_drinks = ask 'Would you like to order some drinks?'
-                    while more_drinks == 'yes'
-                        call drink_order
-                        more_drinks == ask 'Would you like to order more drinks?'
+                    more_food = {ask} 'Would you like to order a pizza?'
+                    {while} more_food = 'yes'
+                        {return} food_order
+                        more_food = {ask} 'Would you like to order a pizza?'
+                    more_drinks = {ask} 'Would you like to order some drinks?'
+                    {while} more_drinks == 'yes'
+                        {call} drink_order
+                        more_drinks == {ask} 'Would you like to order more drinks?'
 
 
-                    print 'Thanks for ordering!'
+                    {print} 'Thanks for ordering!'
                     ```
             18:
                 story_text: |-
@@ -1180,18 +1159,18 @@ adventures:
                     ```
                     animals = ['pig', 'dog', 'cow']
                     sounds = ['oink', 'woof', 'moo']
-                    for i in range 1 to 3
+                    {for} i {in} {range} 1 {to} 3
                         animal = animals[i]
                         sound = sounds[i]
-                        print 'Old McDonald had a farm'
-                        print 'E I E I O!'
-                        print 'and on that farm he had a ' animal
-                        print 'E I E I O!'
-                        print 'with a ' sound sound ' here'
-                        print 'and a ' sound sound ' there'
-                        print 'here a ' sound
-                        print 'there a ' sound
-                        print 'everywhere a ' sound sound
+                        {print} 'Old McDonald had a farm'
+                        {print} 'E I E I O!'
+                        {print} 'and on that farm he had a ' animal
+                        {print} 'E I E I O!'
+                        {print} 'with a ' sound sound ' here'
+                        {print} 'and a ' sound sound ' there'
+                        {print} 'here a ' sound
+                        {print} 'there a ' sound
+                        {print} 'everywhere a ' sound sound
                     ```
     default:
         name: Introduction
@@ -2148,8 +2127,7 @@ adventures:
                     {else} {print} 'Oh no! You are being eaten by a...' monsters {at} {random}
                     ```
             9:
-                story_text: "In this level you can use nesting, which allows you to make the haunted house even more interactive!\n\n### Exercise\nNow it's very hard to win this game, can you make it easier to win?\nChange your code so it only has one wrong door and two correct doors instead of one correct\
-                    \ door and two wrong ones? \nTip: This means changing the variable correct_door into wrong_door, and switching the `{if}` and `{else}` code.\nAnd of course you may also change the story and make it your own. Change the monsters or make it a happy game show where you get a gift!\n"
+                story_text: "In this level you can use nesting, which allows you to make the haunted house even more interactive!\n\n### Exercise\nNow it's very hard to win this game, can you make it easier to win?\nChange your code so it only has one wrong door and two correct doors instead of one correct door and two wrong ones? \nTip: This means changing the variable correct_door into wrong_door, and switching the `{if}` and `{else}` code.\nAnd of course you may also change the story and make it your own. Change the monsters or make it a happy game show where you get a gift!\n"
                 example_code: |
                     ```
                     {print} 'Escape from the Haunted House!'
@@ -2172,9 +2150,7 @@ adventures:
                         {print} 'Great! You survived!'
                     ```
             11:
-                story_text: "In this level we've changed the `{for}` command so we can tell the player where they are. \n\n### Exercise 1\nFinish the program so the player knows which room they are in.\n\n### Exercise 2\nMake the program into an adventure by following these steps:\n\n1. Make a list of\
-                    \ choices (like: fight or flight)\n2. Make sure the player can choose an option with `{ask}`\n3. Is answer correct? Then they may proceed to the next monster. Do they give a wrong answer? Let the player know with a `{print}`. \n\n**Extra** If you make a wrong choice, a monster is still\
-                    \ shown! How could you change that?\n"
+                story_text: "In this level we've changed the `{for}` command so we can tell the player where they are. \n\n### Exercise 1\nFinish the program so the player knows which room they are in.\n\n### Exercise 2\nMake the program into an adventure by following these steps:\n\n1. Make a list of choices (like: fight or flight)\n2. Make sure the player can choose an option with `{ask}`\n3. Is answer correct? Then they may proceed to the next monster. Do they give a wrong answer? Let the player know with a `{print}`. \n\n**Extra** If you make a wrong choice, a monster is still shown! How could you change that?\n"
                 example_code: |
                     ```
                     {print} 'Escape from the Haunted House!'
@@ -2636,8 +2612,7 @@ adventures:
                     _
                     ```
             6:
-                story_text: "Instead of playing notes, you can also play numbers now. Simply type `{play} 1` for the lowest note, `{play} 70` for the highest note, or anything in between.\n\n### Exercise\n This calls for musical maths! Try out the example code a couple of times with different starting\
-                    \ numbers. \nThen, see if you can compose a song using the numbers.\n"
+                story_text: "Instead of playing notes, you can also play numbers now. Simply type `{play} 1` for the lowest note, `{play} 70` for the highest note, or anything in between.\n\n### Exercise\n This calls for musical maths! Try out the example code a couple of times with different starting numbers. \nThen, see if you can compose a song using the numbers.\n"
                 example_code: |
                     ```
                     number = {ask} 'Say a starting number between 1 and 67'
@@ -3453,9 +3428,7 @@ adventures:
                     This code can be expanded with more items on the menu, for example offering drinks, and/or multiple courses or desserts. Add at least one more item.
                     **Extra** Add even more items, as many options as you like!
             9:
-                story_text: "In this level you can use nesting to make your restaurant more realistic and more fun!\n\n### Exercise\nThe indentation was removed in the example code. \nCan you figure out how much indentation each line needs in order for the code to work properly?\nIf the customer orders\
-                    \ pizza, Hedy shouldn't ask what sauce the costumer wants.\n\n**Extra** A restaurant does not stock all sauces. Make a list of available sauces and give a reply with each order whether you sell it. <br>\n**Extra** Pizzas have toppings. Ask customers what they want.<br>\n**Extra** Do\
-                    \ customers want a drink? Ask them too! <br>\n"
+                story_text: "In this level you can use nesting to make your restaurant more realistic and more fun!\n\n### Exercise\nThe indentation was removed in the example code. \nCan you figure out how much indentation each line needs in order for the code to work properly?\nIf the customer orders pizza, Hedy shouldn't ask what sauce the costumer wants.\n\n**Extra** A restaurant does not stock all sauces. Make a list of available sauces and give a reply with each order whether you sell it. <br>\n**Extra** Pizzas have toppings. Ask customers what they want.<br>\n**Extra** Do customers want a drink? Ask them too! <br>\n"
                 example_code: |
                     ```
                     {print} 'Welcome to Restaurant Chez Hedy!'
@@ -3658,8 +3631,7 @@ adventures:
 
                     Fill in the correct code on the blanks to see if it is a draw.
             9:
-                story_text: "In this level you can program the whole rock, paper, scissors game by nesting the `{if}` commands. \n\n### Exercise\nCan you finish the code? The program must tell who has won for every combination.\n\n**Extra** Want to play more than one game? Expand the code so that you\
-                    \ can play multiple rounds. You can even use an `{ask}` to ask the user how many rounds they want to play.\n"
+                story_text: "In this level you can program the whole rock, paper, scissors game by nesting the `{if}` commands. \n\n### Exercise\nCan you finish the code? The program must tell who has won for every combination.\n\n**Extra** Want to play more than one game? Expand the code so that you can play multiple rounds. You can even use an `{ask}` to ask the user how many rounds they want to play.\n"
                 example_code: |
                     ```
                     choices = rock, paper, scissors
@@ -4409,8 +4381,7 @@ adventures:
                     {turn} angle
                     ```
             8:
-                story_text: "Now that we can repeat several lines, we can make figures more easily.\nWe only have to set the angle once and then use that variable in the `{repeat}`.\n\n### Exercise 1\nThe example code creates a square. Change the code so that it create another figure, such as a triangle\
-                    \ or a hexagon. \nThis requires a change to two lines of code.\nTip: An entire circle is 360 degrees.\n\n### Exercise 2\nNow create a drawing consisting of at least two polygons.\n"
+                story_text: "Now that we can repeat several lines, we can make figures more easily.\nWe only have to set the angle once and then use that variable in the `{repeat}`.\n\n### Exercise 1\nThe example code creates a square. Change the code so that it create another figure, such as a triangle or a hexagon. \nThis requires a change to two lines of code.\nTip: An entire circle is 360 degrees.\n\n### Exercise 2\nNow create a drawing consisting of at least two polygons.\n"
                 example_code: |
                     ```
                     angle = 90
