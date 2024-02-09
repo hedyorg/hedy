@@ -36,6 +36,8 @@ if os.getenv('GITHUB_ACTION') and platform.system() == 'Windows':
     os.environ['PATH'] = msys_dir + ';' + os.environ['PATH']
     import subprocess
     subprocess.check_call(f'dir {msys_dir}')
+    subprocess.check_call(f'bash --version')
+    subprocess.check_call(f'gitbash --version')
 
 # The current Python interpreter, use to run other Python scripts as well
 python3 = sys.executable
