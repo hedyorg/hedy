@@ -31,11 +31,11 @@ from doit.tools import LongRunning
 print(os.environ)
 print(os.environ['PATH'])
 
-#if os.getenv('GITHUB_ACTION') and platform.system() == 'Windows':
+# if os.getenv('GITHUB_ACTION') and platform.system() == 'Windows':
 #    # From
 #    # https://github.com/actions/runner-images/blob/win22/20240204.1/images/windows/Windows2022-Readme.md
 #    bash = 'C:\\msys64\\usr\\bin\\bash.exe'
-#else:
+# else:
 #    bash = 'bash'
 
 # The current Python interpreter, use to run other Python scripts as well
