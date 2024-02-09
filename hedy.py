@@ -2005,19 +2005,16 @@ else:{self.add_debug_breakpoint()}
     def make_ifpressed_command(self, key, if_body, else_body):
         functions = f"""
 def if_body():
-    {ConvertToPython.indent(if_body)}
+{ConvertToPython.indent(if_body)}
 def else_body():
-    {ConvertToPython.indent(else_body)}
-            """
+{ConvertToPython.indent(else_body)}"""
 
         if_pressed_extension = f"""
-extensions.if_pressed('{key}', 'if_body', 'else_body')
-            """
+extensions.if_pressed('{key}', if_body, else_body)"""
 
         return (f"""
 {functions}
-{if_pressed_extension}
-            """)
+{if_pressed_extension}""")
 
     def ifpressed_else(self, meta, args):
         return self.make_ifpressed_command(args[0], args[1], args[2])

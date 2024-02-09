@@ -5,14 +5,24 @@ var $builtinmodule = function (name) {
         $('#output').text('');
     });
 
-    mod.if_pressed = new Sk.builtin.func(function (key, if_body, else_body) {
+    function keyBoardInputPromise(key, if_body, else_body) {
+      return new Promise((resolve, reject) => {
         window.addEventListener("keydown", (event) => {
-          if (event.key === key){
-            sk.misceval.callOrSuspend(if_body);
+          if (event.key === key.v){
+            Sk.misceval.callOrSuspend(if_body);
+            resolve();
           } else {
-            sk.misceval.callOrSuspend(else_body);
+            Sk.misceval.callOrSuspend(else_body);
+            resolve();
           }
         }, { once: true });
+      })
+    }
+
+    mod.if_pressed = new Sk.builtin.func(function (key, if_body, else_body) {
+        return new Sk.misceval.promiseToSuspension(keyBoardInputPromise(
+            key, if_body, else_body
+        ).then(() => Sk.builtin.none.none$));
     });
 
     return mod;
