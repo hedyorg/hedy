@@ -100,7 +100,8 @@ class TestsParsonsPrograms(HedyTester):
                             error_message = translate_error(E.error_code, E.arguments, 'en')
                             error_message = error_message.replace('<span class="command-highlighted">', '`')
                             error_message = error_message.replace('</span>', '`')
-                            print(f'\n----\n{snippet.code}\n----')
+                            print(f'\n----\n{snippet.code}')
+                            print(f'----\n{snippet.original_code}\n----')
                             print(f'in language {snippet.language} from level {snippet.level} gives error:')
                             print(f'{error_message} at line {location}')
                             raise E

@@ -460,6 +460,8 @@ class HedyTester(unittest.TestCase):
         # We replace the code snippet placeholders with actual keywords to the code is valid: {print} -> print
         # NOTE: .format() instead of safe_format() on purpose!
         for snippet in snippets:
+            # store original code
+            snippet[1].original_code = snippet[1].code
             try:
                 if snippet[1].language in ALL_KEYWORD_LANGUAGES.keys():
                     snippet[1].code = snippet[1].code.format(**keyword_dict[snippet[1].language])
