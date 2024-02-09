@@ -28,13 +28,12 @@ import platform
 
 from doit.tools import LongRunning
 
-print(os.environ)
-print(os.environ['PATH'])
+if os.getenv('GITHUB_ACTION') and platform.system() == 'Windows':
+    # From
+    # https://github.com/actions/runner-images/blob/win22/20240204.1/images/windows/Windows2022-Readme.md
+    print('Detected a Windows GitHub runner. Adding MSYS2 to the PATH.')
+    os.environ['PATH'] = 'C:\\msys64\\usr\\bin:' + os.environ['PATH']
 
-#if os.getenv('GITHUB_ACTION') and platform.system() == 'Windows':
-#    # From
-#    # https://github.com/actions/runner-images/blob/win22/20240204.1/images/windows/Windows2022-Readme.md
-#    bash = 'C:\\msys64\\usr\\bin\\bash.exe'
 #else:
 #    bash = 'bash'
 
