@@ -2,8 +2,6 @@ import os
 
 import utils
 from tests.Tester import HedyTester, Snippet
-from app import translate_error, app
-from flask_babel import force_locale
 import exceptions
 from parameterized import parameterized
 import hedy
