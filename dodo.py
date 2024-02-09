@@ -34,33 +34,14 @@ if os.getenv('GITHUB_ACTION') and platform.system() == 'Windows':
     print('Detected a Windows GitHub runner. Adding MSYS2 to the PATH.')
     msys_dir = 'C:\\msys64\\usr\\bin'
     os.environ['PATH'] = msys_dir + ';' + os.environ['PATH']
-    import subprocess
-    try:
-        print('C:\\Program Files\\Git\\bin\\bash.exe')
-        subprocess.check_call(['C:\\Program Files\\Git\\bin\\bash.exe', '--version'])
-    except Exception as e:
-        print(e)
-    try:
-        print('msys2bash.cmd')
-        subprocess.check_call(['msys2bash.cmd', '--version'])
-    except Exception as e:
-        print(e)
-    try:
-        print('gitbash.exe')
-        subprocess.check_call(['gitbash.exe', '--version'])
-    except Exception as e:
-        print(e)
-    try:
-        print('bash')
-        subprocess.check_call(f'bash --version')
-    except Exception as e:
-        print(e)
 
     # We need to explicitly invoke bash from this directory, otherwise
     # it will pick up a bash that requires WSL to run, which is not installed.
-    bash = 'C:\\Program Files\\Git\\bin\\bash.exe'
-else:
-    bash = 'bash'
+    # bash = 'C:\\Program Files\\Git\\bin\\bash.exe'
+    import subprocess
+    subprocess.check_call(['npx', '--help'])
+
+bash = 'bash'
 
 # The current Python interpreter, use to run other Python scripts as well
 python3 = sys.executable
