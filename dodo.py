@@ -34,19 +34,10 @@ if os.getenv('GITHUB_ACTION') and platform.system() == 'Windows':
     print('Detected a Windows GitHub runner. Adding MSYS2 to the PATH.')
     msys_dir = 'C:\\msys64\\usr\\bin'
     os.environ['PATH'] = msys_dir + ';' + os.environ['PATH']
-    print(os.environ)
 
     # We need to explicitly invoke bash from this directory, otherwise
     # it will pick up a bash that requires WSL to run, which is not installed.
-    # bash = 'C:\\Program Files\\Git\\bin\\bash.exe'
-    # import subprocess
-    # subprocess.check_call('dir C:\\hostedtoolcache\\windows\\node\\18.19.0\\x64')
-    # subprocess.check_call('npx.cmd --version')
-    # subprocess.check_call('npx --version')
-    # subprocess.check_call('C:\\hostedtoolcache\\windows\\node\\18.19.0\\x64\\npx.cmd --version')
-    # subprocess.check_call('C:\\hostedtoolcache\\windows\\node\\18.19.0\\x64\\npx --version')
-    # subprocess.check_call('npx --help')
-    # subprocess.check_call(['npx', '--help'])
+    # And npx must be invoked like this as well.
     npx = 'npx.cmd'
     bash = f'{msys_dir}\\bash.exe'
 else:
@@ -393,6 +384,9 @@ def task__offline():
             # We copy this here instead of in the 'spec' file so that we can rename
             # the file (spec file copies cannot do that).
             'cp data-for-testing.json dist/offlinehedy/_internal/dev_database.json',
+            # There are some research papers in the distribution that take up a lot
+            # of space.
+            'rm -rf dist/offlinehedy/_internal/content/research',
         ],
     )
 
