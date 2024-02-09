@@ -39,6 +39,7 @@ if os.getenv('GITHUB_ACTION') and platform.system() == 'Windows':
     # it will pick up a bash that requires WSL to run, which is not installed.
     # bash = 'C:\\Program Files\\Git\\bin\\bash.exe'
     import subprocess
+    subprocess.check_call('npx --help')
     subprocess.check_call(['npx', '--help'])
 
 bash = 'bash'
