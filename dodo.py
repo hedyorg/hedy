@@ -24,9 +24,16 @@ import os
 from os import path
 from glob import glob
 import sys
+import platform
 
 from doit.tools import LongRunning
 
+if os.getenv('GITHUB_ACTION') and platform.system() == 'Windows':
+    # From
+    # https://github.com/actions/runner-images/blob/win22/20240204.1/images/windows/Windows2022-Readme.md
+    bash = 'C:\\msys64\\usr\\bin\\bash.exe'
+else:
+    bash = 'bash'
 
 # The current Python interpreter, use to run other Python scripts as well
 python3 = sys.executable
@@ -100,7 +107,7 @@ def task_tailwind():
         title=lambda _: 'Generate Tailwind CSS',
         actions=[
             # Include 'bash' here so that this runs on Windows
-            ['bash', script],
+            [bash, script],
         ],
         targets=[target],
 
@@ -239,7 +246,7 @@ def task_prefixes():
             *glob('prefixes/*.py'),
         ],
         actions=[
-            [script],
+            [bash, script],
         ],
         targets=[
             'static/js/pythonPrefixes.ts'
@@ -265,7 +272,7 @@ def task_lezer_parsers():
         ],
         task_dep=['npm'],
         actions=[
-            [script],
+            [bash, script],
         ],
         targets=lezer_files,
     )
