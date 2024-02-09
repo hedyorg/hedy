@@ -34,9 +34,6 @@ if os.getenv('GITHUB_ACTION') and platform.system() == 'Windows':
     print('Detected a Windows GitHub runner. Adding MSYS2 to the PATH.')
     os.environ['PATH'] = 'C:\\msys64\\usr\\bin:' + os.environ['PATH']
 
-#else:
-#    bash = 'bash'
-
 # The current Python interpreter, use to run other Python scripts as well
 python3 = sys.executable
 
