@@ -41,6 +41,8 @@ if os.getenv('GITHUB_ACTION') and platform.system() == 'Windows':
     # bash = 'C:\\Program Files\\Git\\bin\\bash.exe'
     import subprocess
     subprocess.check_call('dir C:\\hostedtoolcache\\windows\\node\\18.19.0\\x64')
+    subprocess.check_call('C:\\hostedtoolcache\\windows\\node\\18.19.0\\x64\\npx.cmd --version')
+    subprocess.check_call('C:\\hostedtoolcache\\windows\\node\\18.19.0\\x64\\npx --version')
     subprocess.check_call('npx --help')
     subprocess.check_call(['npx', '--help'])
 
