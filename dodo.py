@@ -39,14 +39,14 @@ if os.getenv('GITHUB_ACTION') and platform.system() == 'Windows':
     # We need to explicitly invoke bash from this directory, otherwise
     # it will pick up a bash that requires WSL to run, which is not installed.
     # bash = 'C:\\Program Files\\Git\\bin\\bash.exe'
-    #import subprocess
-    #subprocess.check_call('dir C:\\hostedtoolcache\\windows\\node\\18.19.0\\x64')
-    #subprocess.check_call('npx.cmd --version')
-    #subprocess.check_call('npx --version')
-    #subprocess.check_call('C:\\hostedtoolcache\\windows\\node\\18.19.0\\x64\\npx.cmd --version')
-    #subprocess.check_call('C:\\hostedtoolcache\\windows\\node\\18.19.0\\x64\\npx --version')
-    #subprocess.check_call('npx --help')
-    #subprocess.check_call(['npx', '--help'])
+    # import subprocess
+    # subprocess.check_call('dir C:\\hostedtoolcache\\windows\\node\\18.19.0\\x64')
+    # subprocess.check_call('npx.cmd --version')
+    # subprocess.check_call('npx --version')
+    # subprocess.check_call('C:\\hostedtoolcache\\windows\\node\\18.19.0\\x64\\npx.cmd --version')
+    # subprocess.check_call('C:\\hostedtoolcache\\windows\\node\\18.19.0\\x64\\npx --version')
+    # subprocess.check_call('npx --help')
+    # subprocess.check_call(['npx', '--help'])
     npx = 'npx.cmd'
 else:
     npx = 'npx'
