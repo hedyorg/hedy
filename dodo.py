@@ -99,7 +99,8 @@ def task_tailwind():
         task_dep=['npm'],
         title=lambda _: 'Generate Tailwind CSS',
         actions=[
-            [script],
+            # Include 'bash' here so that this runs on Windows
+            ['bash', script],
         ],
         targets=[target],
 
