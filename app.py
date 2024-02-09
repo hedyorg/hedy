@@ -992,10 +992,11 @@ def programs_page(user):
     for item in result:
         date = utils.delta_timestamp(item['date'])
         # This way we only keep the first 4 lines to show as preview to the user
-        code = "\n".join(item['code'].split("\n")[:4])
+        preview_code = "\n".join(item['code'].split("\n")[:4])
         programs.append(
             {'id': item['id'],
-             'code': code,
+             'preview_code': preview_code,
+             'code': item['code'],
              'date': date,
              'level': item['level'],
              'name': item['name'],
