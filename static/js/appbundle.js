@@ -47426,7 +47426,7 @@ notes_mapping = {
   var theLocalSaveWarning = new LocalSaveWarning();
   var editorCreator2 = new HedyCodeMirrorEditorCreator();
   var last_code;
-  var pygameRunning = false;
+  var hasKeybinding = false;
   var askPromptOpen = false;
   var theAdventures = {};
   var theLevel = 0;
@@ -47721,12 +47721,10 @@ pygame.quit()
     return `ace/mode/level${level3}`;
   }
   function stopit() {
-    if (pygameRunning) {
-      Sk.insertPyGameEvent("quit");
-      Sk.unbindPygameListeners();
-      pygameRunning = false;
+    if (hasKeybinding) {
+      hasKeybinding = false;
       document.onkeydown = null;
-      $("#pygame-modal").hide();
+      $("#keybinding-modal").hide();
       $("#stopit").hide();
       $("#runit").show();
     } else {
@@ -47763,9 +47761,6 @@ pygame.quit()
       return;
     }
     theLocalSaveWarning.clickRun();
-    if (typeof Sk.unbindPygameListeners === "function") {
-      Sk.unbindPygameListeners();
-    }
     Sk.execLimit = 1;
     $("#runit").hide();
     $("#stopit").show();
@@ -48152,22 +48147,22 @@ pygame.quit()
       code_prefix += pygame_prefix;
       initSkulpt4Pygame();
       initCanvas4PyGame();
-      let pygameModal = $("#pygame-modal");
+      let keybindingModal = $("#keybinding-modal");
       const codeContainsInputFunctionBeforePygame = new RegExp("input\\([\\s\\S]*\\)[\\s\\S]*while not pygame_end", "gm").test(code);
       if (!codeContainsInputFunctionBeforePygame) {
-        pygameModal.show();
+        keybindingModal.show();
       }
       if (hasTurtle) {
-        pygameModal.addClass("absolute");
-        pygameModal.addClass("bottom-0");
-        pygameModal.addClass("w-full");
+        keybindingModal.addClass("absolute");
+        keybindingModal.addClass("bottom-0");
+        keybindingModal.addClass("w-full");
       } else {
-        pygameModal.removeClass("absolute");
-        pygameModal.removeClass("bottom-0");
-        pygameModal.removeClass("w-full");
+        keybindingModal.removeClass("absolute");
+        keybindingModal.removeClass("bottom-0");
+        keybindingModal.removeClass("w-full");
       }
       document.onkeydown = animateKeys;
-      pygameRunning = true;
+      hasKeybinding = true;
     }
     code = code_prefix + code;
     if (hasPygame)
@@ -48217,7 +48212,7 @@ pygame.quit()
         $("#runit").show();
         if (hasPygame) {
           document.onkeydown = null;
-          $("#pygame-modal").hide();
+          $("#keybinding-modal").hide();
         }
         if (hasTurtle) {
           $("#saveFilesContainer").show();
@@ -48281,7 +48276,7 @@ pygame.quit()
         stopDebug();
         if (hasPygame) {
           document.onkeydown = null;
-          $("#pygame-modal").hide();
+          $("#keybinding-modal").hide();
         }
         if (hasTurtle) {
           $("#saveFilesContainer").show();
@@ -48342,10 +48337,9 @@ pygame.quit()
       if (storage.getItem("prompt-" + prompt) == null) {
         Sk.execStart = new Date(new Date().getTime() + 1e3 * 60 * 60 * 24 * 365);
         $("#turtlecanvas").hide();
-        if (pygameRunning) {
-          Sk.unbindPygameListeners();
+        if (hasKeybinding) {
           document.onkeydown = null;
-          $("#pygame-modal").hide();
+          $("#keybinding-modal").hide();
         }
         return new Promise(function(ok) {
           askPromptOpen = true;
@@ -48364,11 +48358,10 @@ pygame.quit()
             if (hasTurtle) {
               $("#turtlecanvas").show();
             }
-            if (pygameRunning) {
-              Sk.bindPygameListeners();
+            if (hasKeybinding) {
               document.onkeydown = animateKeys;
               if (!hasTurtle) {
-                $("#pygame-modal").show();
+                $("#keybinding-modal").show();
               }
             }
             Sk.execStart = new Date();
