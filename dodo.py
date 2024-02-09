@@ -29,10 +29,10 @@ import platform
 from doit.tools import LongRunning
 
 if os.getenv('GITHUB_ACTION') and platform.system() == 'Windows':
-    # From
+    # Add MSYS2 to the path, so we can use commands like 'bash' and 'cp' and 'mv'.
     # https://github.com/actions/runner-images/blob/win22/20240204.1/images/windows/Windows2022-Readme.md
     print('Detected a Windows GitHub runner. Adding MSYS2 to the PATH.')
-    os.environ['PATH'] = 'C:\\msys64\\usr\\bin:' + os.environ['PATH']
+    os.environ['PATH'] = 'C:\\msys64\\usr\\bin;' + os.environ['PATH']
 
 # The current Python interpreter, use to run other Python scripts as well
 python3 = sys.executable
