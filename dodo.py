@@ -356,6 +356,7 @@ def task_devdb():
         targets=['dev_database.json'],
     )
 
+
 def task__offline():
     """Build the offline Hedy distribution."""
 
@@ -369,7 +370,6 @@ def task__offline():
             'cp data-for-testing.json dist/offlinehedy/_internal/dev_database.json',
         ],
     )
-
 
 
 ######################################################################################
