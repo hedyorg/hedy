@@ -13,6 +13,7 @@ import uuid
 import unicodedata
 import traceback
 
+from email_validator import EmailNotValidError, validate_email
 from flask_babel import gettext, format_date, format_datetime, format_timedelta
 from ruamel import yaml
 import commonmark
@@ -34,6 +35,10 @@ with open('prefixes/normal.py', encoding='utf-8') as f:
 # Define code that will be used if a pressed command is used
 with open('prefixes/pygame.py', encoding='utf-8') as f:
     PYGAME_PREFIX_CODE = f.read()
+
+# Define code that will be used if music code is used
+with open('prefixes/music.py', encoding='utf-8') as f:
+    MUSIC_PREFIX_CODE = f.read()
 
 
 class Timer:
@@ -177,7 +182,11 @@ def version():
 
 
 def valid_email(s):
-    return bool(re.match(r'^(([a-zA-Z0-9_+\.\-]+)@([\da-zA-Z\.\-]+)\.([a-zA-Z\.]{2,6})\s*)$', s))
+    try:
+        _ = validate_email(s, check_deliverability=False)
+        return True
+    except EmailNotValidError:
+        return False
 
 
 @contextlib.contextmanager
@@ -268,7 +277,7 @@ def markdown_to_html_tags(markdown):
 
 
 def error_page(error=404, page_error=None, ui_message=None, menu=True, iframe=None, exception=None):
-    if error not in [403, 404, 500]:
+    if error not in [400, 403, 404, 500]:
         error = 404
     default = gettext('default_404')
     if error == 403:
@@ -299,6 +308,10 @@ def session_id():
         else:
             session['session_id'] = uuid.uuid4().hex
     return session['session_id']
+
+
+def add_pending_achievement(data):
+    session['pending_achievements'] = session.get('pending_achievements', []) + [data]
 
 
 # https://github.com/python-babel/babel/issues/454
@@ -338,3 +351,45 @@ def base_url():
         url = request.host_url
 
     return url if not url.endswith('/') else url[:-1]
+
+
+def can_edit_class(user, Class):
+    """
+    Check if a given user has the permission to edit a class.
+
+    Returns:
+        bool: True if the user has edit permission, False otherwise.
+    """
+    return Class["teacher"] == user["username"] or \
+        any(second_teacher["username"] == user["username"] and second_teacher["role"] == "teacher"
+            for second_teacher in Class.get("second_teachers", []))
+
+
+def get_unanswered_questions(survey, new_questions):
+    unanswered_questions = []
+    db = survey.get('responses')
+
+    if not db:
+        return new_questions, ""
+
+    for key, value in db.items():
+        if value['answer'] == '':
+            unanswered_questions.append(new_questions[int(key)-1])
+
+    i = 0
+    for key, value in db.items():
+        if value['answer'] == '':
+            value['question'] = unanswered_questions[i]
+            i += 1
+
+    return unanswered_questions, db
+
+
+def find_prev_next_levels(level_list, target_level):
+    sorted_levels = level_list
+    index = sorted_levels.index(target_level)
+
+    prev_level = sorted_levels[index - 1] if index > 0 else None
+    next_level = sorted_levels[index + 1] if index < len(sorted_levels) - 1 else None
+
+    return prev_level, next_level

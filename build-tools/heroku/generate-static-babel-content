@@ -16,30 +16,37 @@ from os import path
 import os
 import iso3166
 from babel import Locale, languages, UnknownLocaleError
+import json
 
 
 def main():
-    root_dir = path.abspath(path.join(path.dirname(__file__), '..', '..'))
-    filename = path.join(root_dir, 'static_babel_content.py')
+    root_dir = path.abspath(path.join(path.dirname(__file__), "..", ".."))
+    filename = path.join(root_dir, "static_babel_content.json")
 
-    translated_languages = [lang for lang in os.listdir(path.join(root_dir, 'translations')) if path.isdir(
-        path.join(root_dir, 'translations', lang, 'LC_MESSAGES'))]
+    translated_languages = [
+        lang
+        for lang in os.listdir(path.join(root_dir, "translations"))
+        if path.isdir(path.join(root_dir, "translations", lang, "LC_MESSAGES"))
+    ]
 
-    with open(filename, 'w', encoding='utf-8') as f:
-        f.write('# coding=utf-8\n')
-        f.write('# flake8: noqa\n')
-        f.write('###################################################\n')
-        f.write('#\n')
-        f.write('# !!! THIS FILE HAS BEEN GENERATED. DO NOT EDIT !!!\n')
-        f.write('#\n')
-        f.write('# Run build-tools/heroku/generate-static-babel-content to regenerate.\n')
-        f.write('#\n')
-        f.write('###################################################\n')
-        f.write('\n')
-        f.write('COUNTRIES = %r\n' % countries())
-        f.write('LANGUAGE_NAMES = %r\n' % language_names(translated_languages))
-        f.write('TEXT_DIRECTIONS = %r\n' % text_directions(translated_languages))
-    print('Wrote', filename)
+    with open(filename, "w", encoding="utf-8") as f:
+        json.dump(
+            {
+                "000 __ help": (
+                    "!!! THIS FILE HAS BEEN GENERATED. DO NOT EDIT !!! "
+                    "Run build-tools/heroku/generate-static-babel-content to regenerate.",
+                ),
+                "COUNTRIES": countries(),
+                "LANGUAGE_NAMES": language_names(translated_languages),
+                "TEXT_DIRECTIONS": text_directions(translated_languages),
+            },
+            f,
+            sort_keys=True,
+            indent=4,
+        )
+        f.write("\n")
+
+    print("Wrote", filename)
 
 
 def countries():
@@ -86,5 +93,5 @@ def locale(lang):
         pass
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     main()

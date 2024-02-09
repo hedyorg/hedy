@@ -10,6 +10,14 @@
   white-space: pre-wrap;
 }
 
+.code-teacher {
+  background-color: #dddddd;
+  color: #000000;
+  padding: 0.25rem;
+  font-family: monospace;
+  border-radius: 0.25rem;
+}
+
 .command-highlighted {
   background-color: #272822;
   color: #ff6188;
@@ -187,4 +195,52 @@ body[dir='rtl'] #editor .ace_gutter-layer > * {
   position: absolute;
   bottom: 1px;
   right: 3px;
+}
+
+div[data-te-input-notch-ref] {
+  border-radius: 0.25rem;
+  border: 1px rgb(104 211 145 / var(--tw-border-opacity))  solid;
+}
+
+.group[data-te-input-focused] {
+  box-sizing: content-box;
+  border-radius: 0.25rem;
+  border: 2px black solid;
+}
+
+.group[data-te-input-focused] > * {
+  border: none !important;
+  outline: none !important;
+  box-shadow: none !important;
+}
+
+.card-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 350px));
+  grid-gap: 1.5rem;
+  justify-content: center;
+}
+
+.current {
+  font-weight: bold;
+  background-color: #edf2f7;
+}
+
+.option {
+  padding: 8px;
+  cursor: pointer;
+  
+  &.selected {
+    background-color: rgb(0 0 0 / 0.05);
+  }
+
+  &:not(.default).selected::after {
+    content: "✓";
+    margin: 1em;
+  }
+
+  &:hover {
+    background-color: rgb(0 0 0 / 0.05);
+  }
+  
 }

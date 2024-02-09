@@ -5,9 +5,10 @@
 set -eu
 scriptdir=$(cd $(dirname $0) && pwd)
 
-$scriptdir/validate-python
-$scriptdir/validate-typescript
-$scriptdir/validate-yaml
+# TODOs about extracting by JW 2023-10-03 for PR #4574
+$scriptdir/validate-python # TODO extract to separate parallel job
+$scriptdir/validate-typescript # TODO extract
+$scriptdir/validate-yaml # TODO extract
 if [[ "${1:-}" == "--all" ]]; then
   $scriptdir/validate-tests --all
 elif [[ "${1:-}" == "--weblate" ]]; then
@@ -15,7 +16,7 @@ elif [[ "${1:-}" == "--weblate" ]]; then
 else
   $scriptdir/validate-tests
 fi
-$scriptdir/validate-e2e
-python3 $scriptdir/validate-pofiles
+$scriptdir/validate-e2e # TODO extract
+python3 $scriptdir/validate-pofiles # TODO #extract
 
 echo "Everything is great! 🍰"

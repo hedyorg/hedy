@@ -77,28 +77,68 @@ class TestsLevel7(HedyTester):
         self.single_level_tester(code=code, exception=hedy.exceptions.UndefinedVarException)
 
     def test_missing_body(self):
-        code = "repeat 5 times"
+        code = textwrap.dedent("""\
+        prind skipping
+        repeat 5 times""")
 
-        self.multi_level_tester(code=code,
-                                exception=hedy.exceptions.MissingInnerCommandException,
-                                max_level=8)
+        expected = textwrap.dedent("""\
+        pass
+        pass""")
+
+        skipped_mappings = [
+            SkippedMapping(SourceRange(1, 1, 1, 15), hedy.exceptions.InvalidCommandException),
+            SkippedMapping(SourceRange(2, 1, 2, 15), hedy.exceptions.MissingInnerCommandException)
+        ]
+
+        self.multi_level_tester(
+            code=code,
+            expected=expected,
+            skipped_mappings=skipped_mappings,
+            max_level=8
+        )
 
     @parameterized.expand(HedyTester.quotes)
     def test_print_without_opening_quote_gives_error(self, q):
-        code = f"print hedy 123{q}"
+        code = textwrap.dedent(f"""\
+        print hedy 123{q}
+        prind skipping""")
+
+        expected = textwrap.dedent("""\
+        pass
+        pass""")
+
+        skipped_mappings = [
+            SkippedMapping(SourceRange(1, 1, 1, 16), hedy.exceptions.UnquotedTextException),
+            SkippedMapping(SourceRange(2, 1, 2, 15), hedy.exceptions.InvalidCommandException)
+        ]
+
         self.multi_level_tester(
-            code,
-            max_level=17,
-            exception=hedy.exceptions.UnquotedTextException
+            code=code,
+            expected=expected,
+            skipped_mappings=skipped_mappings,
+            max_level=17
         )
 
     @parameterized.expand(HedyTester.quotes)
     def test_print_without_closing_quote_gives_error(self, q):
-        code = f"print {q}hedy 123"
+        code = textwrap.dedent(f"""\
+        prind skipping
+        print {q}hedy 123""")
+
+        expected = textwrap.dedent("""\
+        pass
+        pass""")
+
+        skipped_mappings = [
+            SkippedMapping(SourceRange(1, 1, 1, 15), hedy.exceptions.InvalidCommandException),
+            SkippedMapping(SourceRange(2, 1, 2, 16), hedy.exceptions.UnquotedTextException)
+        ]
+
         self.multi_level_tester(
-            code,
-            max_level=17,
-            exception=hedy.exceptions.UnquotedTextException
+            code=code,
+            expected=expected,
+            skipped_mappings=skipped_mappings,
+            max_level=17
         )
 
     def test_repeat_with_string_variable_gives_type_error(self):
@@ -123,15 +163,24 @@ class TestsLevel7(HedyTester):
 
     def test_repeat_with_missing_print_gives_error(self):
         code = textwrap.dedent("""\
+        repeat 3 print 'x'""")
+
+        self.single_level_tester(
+            code=code,
+            exception=hedy.exceptions.IncompleteRepeatException
+        )
+
+    def test_repeat_with_missing_times_gives_error_skip(self):
+        code = textwrap.dedent("""\
         x is 3
-        repeat 3 times x""")
+        repeat 3 print 'x'""")
 
         expected = textwrap.dedent("""\
         x = '3'
         pass""")
 
         skipped_mappings = [
-            SkippedMapping(SourceRange(2, 1, 2, 17), hedy.exceptions.IncompleteRepeatException),
+            SkippedMapping(SourceRange(2, 1, 2, 19), hedy.exceptions.IncompleteRepeatException),
         ]
 
         self.single_level_tester(
@@ -142,15 +191,18 @@ class TestsLevel7(HedyTester):
 
     def test_repeat_with_missing_print_gives_lonely_text_exc(self):
         code = textwrap.dedent("""\
+        prind skipping
         repeat 3 times 'n'""")
 
         expected = textwrap.dedent("""\
+        pass
         for __i__ in range(int('3')):
           pass
           time.sleep(0.1)""")
 
         skipped_mappings = [
-            SkippedMapping(SourceRange(1, 16, 1, 19), hedy.exceptions.LonelyTextException),
+            SkippedMapping(SourceRange(1, 1, 1, 15), hedy.exceptions.InvalidCommandException),
+            SkippedMapping(SourceRange(2, 16, 2, 19), hedy.exceptions.LonelyTextException)
         ]
 
         self.single_level_tester(
@@ -161,18 +213,31 @@ class TestsLevel7(HedyTester):
 
     def test_repeat_with_missing_times_gives_error(self):
         code = textwrap.dedent("""\
+        prind skipping
         repeat 3 print 'n'""")
 
-        expected = "pass"
+        expected = textwrap.dedent("""\
+        pass
+        pass""")
 
         skipped_mappings = [
-            SkippedMapping(SourceRange(1, 1, 1, 19), hedy.exceptions.IncompleteRepeatException),
+            SkippedMapping(SourceRange(1, 1, 1, 15), hedy.exceptions.InvalidCommandException),
+            SkippedMapping(SourceRange(2, 1, 2, 19), hedy.exceptions.IncompleteRepeatException),
         ]
 
         self.single_level_tester(
             code=code,
             expected=expected,
             skipped_mappings=skipped_mappings,
+        )
+
+    def test_repeat_with_missing_times_gives_error_2(self):
+        code = "repeat 5"
+
+        self.multi_level_tester(
+            code=code,
+            max_level=8,
+            exception=hedy.exceptions.IncompleteRepeatException
         )
 
     def test_repeat_ask(self):
@@ -387,7 +452,7 @@ class TestsLevel7(HedyTester):
                 try:
                   __trtl = int(__trtl)
                 except ValueError:
-                  raise Exception(f'While running your program the command <span class="command-highlighted">forward</span> received the value <span class="command-highlighted">{__trtl}</span> which is not allowed. Try changing the value to a number.')
+                  raise Exception('catch_value_exception')
                 t.forward(min(600, __trtl) if __trtl > 0 else max(-600, __trtl))
                 time.sleep(0.1)
                 break
@@ -396,7 +461,7 @@ class TestsLevel7(HedyTester):
                 try:
                   __trtl = int(__trtl)
                 except ValueError:
-                  raise Exception(f'While running your program the command <span class="command-highlighted">forward</span> received the value <span class="command-highlighted">{__trtl}</span> which is not allowed. Try changing the value to a number.')
+                  raise Exception('catch_value_exception')
                 t.forward(min(600, __trtl) if __trtl > 0 else max(-600, __trtl))
                 time.sleep(0.1)
                 break
@@ -417,7 +482,7 @@ class TestsLevel7(HedyTester):
                 try:
                   __trtl = int(__trtl)
                 except ValueError:
-                  raise Exception(f'While running your program the command <span class="command-highlighted">forward</span> received the value <span class="command-highlighted">{__trtl}</span> which is not allowed. Try changing the value to a number.')
+                  raise Exception('catch_value_exception')
                 t.forward(min(600, __trtl) if __trtl > 0 else max(-600, __trtl))
                 time.sleep(0.1)
                 break
@@ -426,7 +491,7 @@ class TestsLevel7(HedyTester):
                 try:
                   __trtl = int(__trtl)
                 except ValueError:
-                  raise Exception(f'While running your program the command <span class="command-highlighted">forward</span> received the value <span class="command-highlighted">{__trtl}</span> which is not allowed. Try changing the value to a number.')
+                  raise Exception('catch_value_exception')
                 t.forward(min(600, __trtl) if __trtl > 0 else max(-600, __trtl))
                 time.sleep(0.1)
                 break
@@ -447,7 +512,7 @@ class TestsLevel7(HedyTester):
                 try:
                   __trtl = int(__trtl)
                 except ValueError:
-                  raise Exception(f'While running your program the command <span class="command-highlighted">forward</span> received the value <span class="command-highlighted">{__trtl}</span> which is not allowed. Try changing the value to a number.')
+                  raise Exception('catch_value_exception')
                 t.forward(min(600, __trtl) if __trtl > 0 else max(-600, __trtl))
                 time.sleep(0.1)
                 break
@@ -456,7 +521,7 @@ class TestsLevel7(HedyTester):
                 try:
                   __trtl = int(__trtl)
                 except ValueError:
-                  raise Exception(f'While running your program the command <span class="command-highlighted">forward</span> received the value <span class="command-highlighted">{__trtl}</span> which is not allowed. Try changing the value to a number.')
+                  raise Exception('catch_value_exception')
                 t.forward(min(600, __trtl) if __trtl > 0 else max(-600, __trtl))
                 time.sleep(0.1)
                 break
@@ -523,3 +588,50 @@ class TestsLevel7(HedyTester):
 
         self.single_level_tester(code, expected=expected_code)
         self.source_map_tester(code=code, expected_source_map=expected_source_map)
+
+# music tests
+
+    def test_play_repeat(self):
+        code = textwrap.dedent("""\
+            repeat 3 times play C4""")
+
+        expected = textwrap.dedent("""\
+            for __i__ in range(int('3')):
+              if 'C4' not in notes_mapping.keys() and 'C4' not in notes_mapping.values():
+                  raise Exception('catch_value_exception')
+              play(notes_mapping.get(str('C4'), str('C4')))
+              time.sleep(0.5)
+              time.sleep(0.1)""")
+
+        self.multi_level_tester(
+            code=code,
+            translate=False,
+            skip_faulty=False,
+            unused_allowed=True,
+            expected=expected,
+            max_level=7
+        )
+
+    def test_play_repeat_random(self):
+        code = textwrap.dedent("""\
+            notes is C4, E4, D4, F4, G4
+            repeat 3 times play notes at random""")
+
+        expected = textwrap.dedent("""\
+            notes = ['C4', 'E4', 'D4', 'F4', 'G4']
+            for __i__ in range(int('3')):
+              chosen_note = str(random.choice(notes)).upper()
+              if chosen_note not in notes_mapping.keys() and chosen_note not in notes_mapping.values():
+                  raise Exception('catch_value_exception')
+              play(notes_mapping.get(chosen_note, chosen_note))
+              time.sleep(0.5)
+              time.sleep(0.1)""")
+
+        self.multi_level_tester(
+            code=code,
+            translate=False,
+            skip_faulty=False,
+            unused_allowed=True,
+            expected=expected,
+            max_level=7
+        )

@@ -5,6 +5,8 @@ module.exports = defineConfig({
   watchForFileChanges: false,
   video: false,
   redirectionLimit: 100,
+  numTestsKeptInMemory: 0,
+  experimentalMemoryManagement: true,
   e2e: {
     baseUrl: 'http://localhost:8080',
     setupNodeEvents(on, config) {
@@ -21,6 +23,7 @@ module.exports = defineConfig({
     login_page: '/login',
     recover_page: '/recover',
     hedy_page: '/hedy',
+    hedy_english_keywords: '/hedy?keyword_language=en',
     hedy_level2_page: '/hedy/2',
     hedy_level5_page: '/hedy/5',
     adventure_page: '/hedy/1#print_command',
@@ -41,5 +44,7 @@ module.exports = defineConfig({
     admin_achievements_page: '/admin/achievements',
     admin_classes_page: '/admin/classes',
     programs_page: '/programs',
+    explore_programs_page: '/explore',
+    public_adventures: '/public-adventures',
   }
 });

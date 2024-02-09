@@ -157,5 +157,6 @@ class TestsLevel13(HedyTester):
             code=code,
             expected=expected,
             output=output,
+            unused_allowed=True,
             max_level=16
         )

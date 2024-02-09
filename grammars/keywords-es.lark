@@ -1,9 +1,10 @@
-_DEFINE: ("define" | "define") _SPACE?
-_CALL: ("call" | "call") _SPACE?
-_WITH: ("with" | "with") _SPACE?
+_DEFINE: ("definir" | "define") _SPACE?
+_CALL: ("llamar" | "call") _SPACE?
+_WITH: ("con" | "with") _SPACE?
 _DEF: ("def" | "def") _SPACE?
-_RETURN: ("return" | "return") _SPACE?
+_RETURN: ("retornar" | "return") _SPACE?
 _PRINT: ("imprimir" | "print") _SPACE?
+_PLAY: ("play" | "play") _SPACE
 _ASK: ("preguntar" | "ask") _SPACE?
 _ECHO: ("eco" | "echo") _SPACE?
 _FORWARD: ("adelante" | "forward") _SPACE?
@@ -22,6 +23,7 @@ red: ("rojo" | "red") _SPACE?
 white: ("blanco" | "white") _SPACE?
 yellow: ("amarillo" | "yellow") _SPACE?
 _IS: _SPACE ("es" | "is") _SPACE
+_STANDALONE_IS: ("es" | "is")
 _SLEEP: ("dormir" | "sleep") _SPACE?
 _ADD_LIST: ("añadir" | "add") _SPACE
 _TO_LIST: _SPACE ("a" | "to") _SPACE

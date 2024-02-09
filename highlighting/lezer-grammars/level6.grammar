@@ -1,0 +1,119 @@
+@top Program { eol* (Command eol+)* Command? }
+Command {
+    Assign | AssignList | Ask | Clear |Print | Play | Turtle | Sleep | Add | Remove| If | Else | ErrorInvalid
+}
+
+IfLessCommand {
+    Assign | AssignList | Ask | Clear |Print | Play | Turtle | Sleep | Add | Remove | ErrorInvalid
+}
+
+@local tokens {    
+    singleQuoteStringEnd { "'" | "\n" }
+    @else singleQuoteStringContent
+  }
+  
+  @skip {} {
+    singleQuotedString { "'" (singleQuoteStringContent)* singleQuoteStringEnd }
+}
+
+@local tokens {    
+    doubleQuoteStringEnd { '"' | "\n" }
+    @else doubleQuoteStringContent
+  }
+  
+  @skip {} {
+    doubleQuotedString { '"' (doubleQuoteStringContent)* doubleQuoteStringEnd }
+}
+
+String { doubleQuotedString | singleQuotedString }
+
+Print { print ( String | ListAccess | Expression )+ }
+Ask { Text (is+ | Op<"=">) ask+ ( String | ListAccess | Expression )+ }
+
+AssignList { Text (is+ | Op<"=">) (Text+ | Int ) ~ambig  (Comma (Text+ | Int ))+ } // comma doesn't really parse well if it is not separated by spaces
+Assign { Text (is+ | Op<"=">) (Expression ~ambig  | ListAccess)+ }
+Sleep { sleep+ (Expression | ListAccess )? }
+ListAccess { Text at+ (random+ | Text | Int) }
+Add { add+ Text toList+ Text }
+Remove { remove+ Text from+ Text }
+Clear { clear+ }
+Play { play+ Text+ }
+
+Turtle[@isGroup=turtle] {
+    Forward { forward+ (Expression | ListAccess ) } |
+    Turn { turn+ (Expression | ListAccess ) } |
+    Color { color+ (Expression | ListAccess)  }
+}   
+
+If { ifs+ Condition eol* IfLessCommand Else? }
+Else { !else elses+ eol* IfLessCommand }
+
+Condition { 
+    EqualityCheck { Text is+ (String | Expression | pressed+) } |
+    InListCheck { Text ins+  Text } |
+    NotInListCheck { Text not_in+  Text }
+}
+
+ErrorInvalid[@dynamicPrecedence=-10] { Text+ }
+
+Op<expr> { expr }
+
+binaryExpression {
+    Expression !times Op<"*" | "/"> Expression |
+    Expression !plus Op<"+" | "-"> Expression
+}
+
+Expression {
+    Int |
+    Text |
+    binaryExpression
+}
+
+@precedence {
+    times @left,
+    plus @right,
+
+    else
+}
+
+@external specialize { Text } specializeKeyword from "./tokens" {
+    ask[@name="ask"],
+    at[@name="at"],
+    random[@name="random"],
+    ifs[@name="if"],
+    elses[@name="else"],
+    pressed[@name="pressed"]
+}
+
+@external extend { Text } extendKeyword from "./tokens" {
+    print[@name="print"],
+    forward[@name="forward"],
+    turn[@name="turn"],
+    color[@name="color"],
+    sleep[@name="sleep"],
+    play[@name="play"],
+    is[@name="is"],
+    add[@name="add"],
+    from[@name="from"],
+    remove[@name="remove"],
+    toList[@name="toList"],
+    clear[@name="clear"],
+    ins[@name="in"],
+    not_in[@name="not_in"]
+}
+
+@tokens {
+    @precedence {
+        Int,
+        Text
+    }
+    Comment { "#" ![\n]* }
+    eol { "\n" }
+    Comma { $[,،，、] } // every language comma is valid here
+    Text { ![^\n,،，、 '"#+\-*/=]+ } // a little bit of a hack not to parse commas never, but lezer adds them as error nodes, so it still
+    space { " " }
+    digit { $[٠١٢٣٤٥٦٧٨٩۰۱۲۳۴۵۶۷۸۹0123456789] } // latin, arab and pa_PK (Panjabi) scripts
+    Int { digit+ }
+}
+
+@skip { Comment | space }

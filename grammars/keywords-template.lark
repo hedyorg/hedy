@@ -4,6 +4,7 @@ _WITH: ({with} | "with") _SPACE?
 _DEF: ({def} | "def") _SPACE?
 _RETURN: ({return} | "return") _SPACE?
 _PRINT: ({print} | "print") _SPACE?
+_PLAY: ({play} | "play") _SPACE
 _ASK: ({ask} | "ask") _SPACE?
 _ECHO: ({echo} | "echo") _SPACE?
 _FORWARD: ({forward} | "forward") _SPACE?
@@ -22,6 +23,7 @@ red: ({red} | "red") _SPACE?
 white: ({white} | "white") _SPACE?
 yellow: ({yellow} | "yellow") _SPACE?
 _IS: _SPACE ({is} | "is") _SPACE
+_STANDALONE_IS: ({is} | "is")
 _SLEEP: ({sleep} | "sleep") _SPACE?
 _ADD_LIST: ({add} | "add") _SPACE
 _TO_LIST: _SPACE ({to_list} | "to") _SPACE
@@ -30,7 +32,7 @@ _FROM: _SPACE ({from} | "from") _SPACE
 _AT: _SPACE ({at} | "at") _SPACE
 random: ({random} | "random") _SPACE?
 _IN: _SPACE ({in} | "in") _SPACE
-_NOT_IN: _SPACE ({not in} | "not in") _SPACE
+_NOT_IN: _SPACE ({not_in} | "not in") _SPACE
 _IF: ({if} | "if") _SPACE
 _ELSE: {else} | "else"
 _AND: _SPACE ({and} | "and") _SPACE

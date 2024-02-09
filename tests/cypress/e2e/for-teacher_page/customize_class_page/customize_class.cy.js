@@ -2,16 +2,19 @@ import { loginForTeacher, loginForStudent } from '../../tools/login/login.js'
 import { ensureClass } from "../../tools/classes/class";
 
 describe('customize class page', () => {
-    beforeEach(async () => {
+    beforeEach(() => {
       loginForTeacher();
-      await ensureClass();
+      ensureClass();
       cy.getBySel('view_class_link').first().click(); // Press on view class button
+      cy.get('body').then($b => $b.find("#survey")).then($s => $s.length && $s.hide())
       cy.getBySel('customize_class_button').click(); // Press customize class button
 
       // Remove any customizations that already exist to get the class into a predictable state
       // This always throws up a modal dialog
+      cy.intercept('/for-teachers/restore-customizations*').as('restoreCustomizations');      
       cy.getBySel('remove_customizations_button').click();
       cy.getBySel('modal_yes_button').click();
+      cy.wait('@restoreCustomizations');
     });
 
     it('checks the option checkboxes', () => {
@@ -246,7 +249,7 @@ describe('customize class page', () => {
 
         cy.getBySel('available_adventures_current_level').select(`${hiddenAdventure}`);
 
-        cy.get(`div[data-cy="${hiddenAdventure}"]`).should('be.visible');
+        cy.get(`div[data-cy="${hiddenAdventure}"]`).should('exist');
       });
 
       it('becomes invisible for the student', () => {

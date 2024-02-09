@@ -1,10 +1,10 @@
       {# TABS #}
       <div id="adventures">
-        {% macro adventure_tab(tabname, title, selected, id, tab_class) %}
+        {% macro adventure_tab(tabname, title, selected, id, tab_class, index) %}
             <div
                 class="tab {% if selected %}tab-selected{% endif %} flex items-center justify-center whitespace-nowrap {{ tab_class }}"
                 id="{{ id }}"
-                tabindex="0"
+                tabindex="{{ index }}"
                 data-tab="{{ tabname }}"
                 >
                 {{title}}
@@ -15,25 +15,25 @@
         <div class="flex flex-row w-min" id="adventures-buttons">
             {% for adventure in adventures %}
                 {% if adventure.is_teacher_adventure %}
-                    {{ adventure_tab(adventure.short_name, adventure.name, adventure.short_name == initial_tab, 'adventure' + loop.index|string, 'teacher_tab') }}
+                    {{ adventure_tab(adventure.short_name, adventure.name, adventure.short_name == initial_tab, 'adventure' + loop.index|string, 'teacher_tab', loop.index ) }}
                 {% elif adventure.is_command_adventure %}
-                    {{ adventure_tab(adventure.short_name, adventure.name, adventure.short_name == initial_tab, 'adventure' + loop.index|string, 'command_tab') }}
+                    {{ adventure_tab(adventure.short_name, adventure.name, adventure.short_name == initial_tab, 'adventure' + loop.index|string, 'command_tab', loop.index ) }}
                 {% else %}
-                    {{ adventure_tab(adventure.short_name, adventure.name, adventure.short_name == initial_tab, 'adventure' + loop.index|string, '') }}                    
+                    {{ adventure_tab(adventure.short_name, adventure.name, adventure.short_name == initial_tab, 'adventure' + loop.index|string, '', loop.index) }}
                 {% endif %}
             {% endfor %}
             <!-- Add the tab for the parsons problem (if it exists) -->
             {% if parsons %}
-                {{ adventure_tab('parsons', _('parsons_title'), False, 'parsons', 'special_tab') }}
+                {{ adventure_tab('parsons', _('parsons_title'), False, 'parsons', 'special_tab', adventures|length + 1 ) }}
             {% endif %}
             <!-- Add the tab for the quiz -->
             {% if quiz %}
-                {{ adventure_tab('quiz', _('quiz_tab'), False, 'quiz', 'special_tab') }}
+                {{ adventure_tab('quiz', _('quiz_tab'), False, 'quiz', 'special_tab', (adventures|length + (2 if parsons else 1)) ) }}
             {% endif %}
         </div>
       </div>
       {# PANES #}
-      <div id="adventures-tab" class="w-full overflow-auto bg-white mb-8 shadow-md">
+      <div id="adventures-tab" class="w-full overflow-auto bg-white mb-5 shadow-md">
         {% for adventure in adventures %}
             <div
                 data-tabtarget="{{adventure.short_name}}" class="
@@ -50,6 +50,11 @@
                       <div class="border"></div>
                       <div class="lg:w-1/2 w-full p-2 ltr:ml-2 rtl:mr-2">
                           {{ adventure.example_code|commonmark }}
+                      </div>
+                  {% endif %}
+                  {% if public_adventures_page %}
+                      <div class="lg:w-1/2 w-full p-2 ltr:ml-2 rtl:mr-2">
+                        {{ render_partial('htmx-adventure-card.html', user={"username": username}, adventure=adventure, level=level ) }}
                       </div>
                   {% endif %}
               </div>
@@ -71,7 +76,7 @@
           </div>
         {% endfor %}
         {% if parsons %}
-            <div data-tabtarget="parsons" class="hidden turn-pre-into-ace p-4">
+            <div data-tabtarget="parsons" class="hidden p-4">
                 <div>
                     {% include 'incl/parsons.html' %}
                 </div>

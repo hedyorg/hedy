@@ -1,3 +1,11 @@
+import inspect
+"""
+    Any exception added in this file must be also added to error-messages.txt
+    So we can translate the error message. The exception must also be assigned
+    an Exception Type in the exception_types dictionary in statistics.py
+"""
+
+
 class HedyException(Exception):
     def __init__(self, error_code, **arguments):
         """Create a new HedyException.
@@ -55,6 +63,16 @@ class InvalidSpaceException(WarningException):
                          level=level,
                          line_number=line_number,
                          fixed_code=fixed_code,
+                         fixed_result=fixed_result)  # what is the difference??
+
+
+class UnusedVariableException(WarningException):
+    def __init__(self, level, line_number, variable_name, fixed_code, fixed_result):
+        super().__init__('Unused Variable',
+                         level=level,
+                         line_number=line_number,
+                         variable_name=variable_name,
+                         fixed_code=fixed_code,
                          fixed_result=fixed_result)
 
 
@@ -72,14 +90,14 @@ class ParseException(HedyException):
         self.fixed_code = fixed_code
 
 
-class UnquotedEqualityCheck(HedyException):
+class UnquotedEqualityCheckException(HedyException):
     def __init__(self, line_number):
         super().__init__('Unquoted Equality Check',
                          line_number=line_number)
         self.location = [line_number]
 
 
-class AccessBeforeAssign(HedyException):
+class AccessBeforeAssignException(HedyException):
     def __init__(self, name, access_line_number, definition_line_number):
         super().__init__('Access Before Assign',
                          name=name,
@@ -91,6 +109,13 @@ class AccessBeforeAssign(HedyException):
 class UndefinedVarException(HedyException):
     def __init__(self, name, line_number):
         super().__init__('Var Undefined',
+                         name=name,
+                         line_number=line_number)
+
+
+class UndefinedFunctionException(HedyException):
+    def __init__(self, name, line_number):
+        super().__init__('Function Undefined',
                          name=name,
                          line_number=line_number)
 
@@ -182,6 +207,14 @@ class MissingInnerCommandException(HedyException):
                          line_number=line_number)
 
 
+class MissingVariableException(HedyException):
+    def __init__(self, command, level, line_number):
+        super().__init__('Missing Variable',
+                         command=command,
+                         level=level,
+                         line_number=line_number)
+
+
 class InvalidAtCommandException(HedyException):
     def __init__(self, command, level, line_number):
         super().__init__('Invalid At Command',
@@ -222,6 +255,28 @@ class UnquotedTextException(HedyException):
         super().__init__('Unquoted Text',
                          level=level,
                          unquotedtext=unquotedtext,
+                         line_number=line_number)
+
+
+class MissingAdditionalCommand(HedyException):
+    def __init__(self, command, missing_command, line_number):
+        super().__init__('Missing Additional Command',
+                         command=command,
+                         missing_command=missing_command,
+                         line_number=line_number)
+
+
+class MisspelledAtCommand(HedyException):
+    def __init__(self, command, arg1, line_number):
+        super().__init__('Misspelled At Command',
+                         command=command,
+                         invalid_argument=arg1,
+                         line_number=line_number)
+
+
+class NonDecimalVariable(HedyException):
+    def __init__(self, line_number):
+        super().__init__('Non Decimal Variable',
                          line_number=line_number)
 
 
@@ -284,3 +339,20 @@ class MissingElseForPressitException(HedyException):
 class NestedFunctionException(HedyException):
     def __init__(self):
         super().__init__('Nested Function')
+
+
+class WrongNumberofArguments(HedyException):
+    def __init__(self, name, defined_number, used_number, line_number):
+        super().__init__('Wrong Number of Arguments',
+                         name=name,
+                         defined_number=defined_number,
+                         used_number=used_number,
+                         line_number=line_number)
+
+
+class InvalidErrorSkippedException(HedyException):
+    def __init__(self):
+        super().__init__('Invalid Error Skipped')
+
+
+HEDY_EXCEPTIONS = {name: cls for name, cls in globals().items() if inspect.isclass(cls)}

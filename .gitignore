@@ -149,8 +149,9 @@ logs.txt
 .local
 node_modules
 
-# Ignore things that start with underscores
+# Ignore things that start with underscores (except __init__.py)
 _*
+!__init__.py
 # Ignore pickled versions of YAML files
 *.yaml.pickle
 dev_database.json
@@ -173,3 +174,9 @@ grammars-Total/*.lark
 
 # Prod css doesn't have to be checked in, only leads to merge conflicts
 ./static/css/generated.css
+
+# hedy test cache
+.test-cache
+
+.doit.db
+.doit.db.*

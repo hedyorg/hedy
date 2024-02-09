@@ -1,0 +1,11 @@
+#!/bin/bash
+set -eu
+scriptdir=$(cd $(dirname $0) && pwd)
+cd $scriptdir
+
+# Generate the lezer parsers from the grammars specified in  highlighting/lezer-grammars/
+for grammarFile in ../../highlighting/lezer-grammars/level*.grammar ; do
+    baseName=$(basename "$grammarFile")
+    tsFile=${baseName%.grammar}-parser.ts
+    npx lezer-generator --typeScript "$grammarFile" -o ../../static/js/lezer-parsers/$tsFile
+done

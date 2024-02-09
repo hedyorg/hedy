@@ -1,0 +1,42 @@
+<div id="error_modal"
+    _="on closeModal remove me">
+    <div _="on click trigger closeModal" class="fixed bg-black z-50 w-full h-full opacity-75"></div>
+    <div class="fixed flex justify-center z-50 p-12 px-16 w-full"         
+         style="top: 40%; left: 50%; transform: translate(-50%, -50%);">
+      <div class="w-1/3 p-2 rounded-lg bg-white shadow-lg opacity-100">
+        <a class="red-btn float-right cursor-pointer text-sm pt-0.5 pb-0 px-2 mr-2 mt-2"
+           _="on click trigger closeModal">
+           <i class="fa fa-times" aria-hidden="true"></i>
+        </a>
+          <div class="pt-5 px-4 pb-4 m-4">
+              <h2 class="text-center pb-6 text"> {{_(selected_item.label)}}</h2>
+              <div class="bg-red-200/50 rounded-lg p-5">
+                <h3>
+                    Flagged Student(s):
+                </h3>
+                <ul class="px-4">
+                  {% for student in selected_item.students %}
+                      <li>
+                          {% if dashboard_options.student %}
+                              <a hx-get="/live_stats/class/{{class_info.id}}/student?{{dashboard_options_args | replace('student='~dashboard_options.student, 'student='~student)}}" 
+                                 hx-target="#main_content"
+                                 _="on click trigger closeModal"
+                                 class="text-gray-800 no-underline hover:underline underline-offset-2 cursor-pointer">
+                                  {{student}}
+                              </a>
+                          {% else %}
+                              <a hx-get="/live_stats/class/{{class_info.id}}/student?{{dashboard_options_args | replace('student=None', 'student='~student)}}" 
+                                 hx-target="#main_content"
+                                 _="on click trigger closeModal"
+                                 class="text-gray-800 no-underline hover:underline underline-offset-2 cursor-pointer">
+                                  {{student}}
+                              </a>
+                          {% endif %}
+                      </li>
+                  {% endfor %}
+                </ul>
+              </div>
+          </div>
+      </div>
+  </div>
+</div>

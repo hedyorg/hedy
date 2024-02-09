@@ -4,14 +4,15 @@
   "additionalProperties": false,
   "properties": {
     "title": { "type": "string" },
-    "sections": { "type": "array", "items": { "$ref": "#/definitions/DocSection" } },
+    "teacher-guide": { "type": "array", "items": { "$ref": "#/definitions/DocSection" } },
 
     "learn-more-sections": { "$ref": "#/definitions/BasicSections" },
     "join-sections": { "$ref": "#/definitions/BasicSections" },
+    "home-sections": { "$ref": "#/definitions/BasicSections" },
     "start-sections": { "$ref": "#/definitions/BasicSections" }
   },
   "required": [
-    "title", "sections", "learn-more-sections", "join-sections", "start-sections"
+    "title", "teacher-guide", "learn-more-sections", "join-sections", "home-sections"
   ],
 
   "definitions": {

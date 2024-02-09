@@ -1,1151 +1,1144 @@
-title: Hedy documentation
-sections:
--   title: "Introduction"
-    key: "intro"
+title: Hedy 문서
+home-sections:
+-   title: 텍스트 프로그래밍이 쉬워졌습니다!
+    text: |-
+        전세계의 많은 학교들과 선생님들은 그들의 학생들에게 프로그래밍을 가르치기를 원합니다. 처음에 이것은 종종 비봇 로봇에서 부터 시작하여 장난기 많은 도구들로 이루어집니다
+        스크래치 주니어 또는 스크래치. 이러한 도구를 사용한 후 아이들은 종종 파이썬과 같은 더 강력한 텍스트 프로그래밍 언어로 이동하기를 원합니다.
+
+        그러나 파이썬은 영어로만 제공되기 때문에 어렵고 복잡한 프로그래밍 개념과 구문을 학습자가 한 번에 학습해야 하기 때문에 어렵다.
+        Hedy는 텍스트 프로그래밍 언어를 쉽게 시작할 수 있는 방법입니다! Hedy는 세 가지 면에서 자유롭게 사용할 수 있고, 오픈 소스이며, 다른 텍스트 프로그래밍 언어와는 다르게 세 가지 면에서 자유롭습니다.
+
+        1. Hedy는 여러 언어를 사용합니다. 당신은 자신의 언어로 Hedy를 사용할 수 있습니다
+        2. Hedy는 점진적이기 때문에, 당신은 한 번에 하나의 개념과 그것의 구문을 배울 수 있다
+        3. Hedy는 교실을 위해 만들어졌으며, 교사들이 그들의 학생의 경험을 완전히 맞춤화할 수 있게 해준다
+-   title: 다국어 프로그래밍
+    text: 거의 모든 텍스트 프로그래밍 언어에 영어 키워드 for나 repeat 등이 있지만, Hedy는 모든 언어에서 사용할 수 있습니다! 현재 네덜란드어, 스페인어, 아랍어, 터키어, 중국어, 힌디어 등 47개 언어를 지원하고 있습니다. 여러분의 언어를 사용할 수 없는 경우 언제든지 번역을 시작할 수 있습니다.
+-   title: 차근 차근 배우기
+    text: '학생들에게 프로그래밍 개념(예: if-else 또는 루프)과 구문(예: 따옴표 또는 둥근 괄호)을 동시에 알려줘야 하기 때문에 프로그래밍 언어를 가르치기 어려울 수 있습니다. 반면 Hedy는 비교적 간단한 문법으로 시작하여 점차 정교해집니다. 과학적으로 입증된 교육 방법이죠!'
+-   title: 수업을 위해 만든 언어
+    text: |-
+        Hedy는 10세 이상의 아이들에게 적합하며 수업에서 사용할 수 있도록 설계되었습니다.
+        교사들은 무료로 기본 제공되는 수업 계획서를 사용할 수도 있지만, 직접 수업을 설계해서 Hedy 사용자 인터페이스에 로드할 수도 있습니다.
+-   title: 상황에 맞는 프로그래밍
+    text: Hedy는 가능한 한 가장 넓은 방식으로 프로그래밍을 보여주며, 다양하고 흥미로운 방식으로 사용될 수 있습니다. Hedy는 디지털 반응형 이야기, 화면에 보여질 수 있지만 펜 플로터로 그릴 수도 있고 셔츠에 자수를 놓을 수도 있는 다양한 그림의 창조를 가능하게 하며, 버튼과 키보드 동작으로 게임이나 앱을 만드는 데 사용될 수 있습니다.
+-   title: Hedy는 무료인가요?
+    text: |-
+        네! Hedy는 '오픈 소스'이므로, 누구나 Hedy를 더 나아질 수 있도록 도와주실 수 있습니다.
+        저희 코드는 <a href="https://github.com/hedyorg/hedy" target="_blank">Github</a>에서 찾으실 수 있습니다.
+        Hedy를 좋아하시고 후원하기를 원하신다면 저희는 소정의 <a href="https://github.com/sponsors/hedyorg" target="_blank">후원금</a>을 받고 있습니다 (그리고 정말로 감사드립니다)!
+-   title: 프로그램을 설치해야 하나요?
+    text: 아니요. Hedy는 브라우저에서 동작 하는데, 이것은 여러분이 이 페이지를 보는 데 사용하고 있는 프로그램입니다. 대부분 Chrome이나 Edge 또는 Firefox일 것입니다. Hedy는 핸드폰과 태블릿에서도 사용 가능 합니다.
+-   title: Hedy와 함께 수업하려면 프로그래밍 경험이 필요한가요?
+    text: |-
+        아니요, 경험은 필요 없습니다. 모든 개념은 학습자를 위한 슬라이드와 인터페이스에서 설명됩니다.
+        무료 교사용 계정을 만들면 선생님용 설명서에서 수업 방법과 흔히 하는 실수에 대한 정보를 얻을 수 있습니다.
+join-sections:
+-   title: Hedy 지원하기
+    text: '# Hedy를 지원할 수 있는 방법은 세 가지가 있습니다!'
+-   title: 언어 향상
+    text: |-
+        Hedy의 점진적이고 다언어적인 특성은 많은 흥미로운 기술적인 도전들을 만든다.
+        이슈를 발견하면 <a href="https://github.com/hedyorg/hedy/issues?q=is%3Aopen+is%3Aissue+label%3Alanguage" target="_blank">Github</a>로 알려주세요.
+-   title: Hedy 번역
+    text: |-
+        프로그래머 아니에요? 문제없어요! Hedy를 지원하는 또 다른 방법은 <a href="https://github.com/hedyorg/hedy/wiki/Hedy-Translation-Tutorial" target="_blank">키워드, 오류 메시지, 모험</a>은 다른 내용을 번역하는 것이다.
+        현재 상태입니다. 언어를 완료하거나 새 언어를 추가할 수 있도록 도와주십시오!
+        <a href="https://hosted.weblate.org/engage/hedy/">
+        <img src="https://hosted.weblate.org/widgets/hedy/-/multi-auto.svg" alt="번역 상황" /></a>
+-   title: 선생님들이 시작할 수 있도록 도와주세요
+    text: |-
+        Hedy는 수업시간에 프로그래밍 수업을 제공할 때 선생님들을 지원하기 위해 고안되었습니다. 우리는 수업을 만들고, 수업을 맞춤화하고, 선생님의 학생들이 어떻게 하는지 볼 수 있는 옵션과 같은 구체적인 선생님 특징들을 가지고 있습니다.
+        만약 여러분이 Hedy를 좋아한다면, 선생님들이 시작하는 것을 돕기 위해 여러분이 알고 있는 학교에 연락할 수 있습니다! 우리는 <a href="https://discord.gg/8yY7dEme9r" target="_blank">discord</a>를 통해 여러분이 학교나 선생님을 찾는 것을 도울 수 있습니다.
+learn-more-sections:
+-   title: Hedy 커뮤니티 참여하기
+    text: |-
+        소식을 들으니 정말 기쁘네요! 저희와 연락할 수 있는 가장 좋은 방법은 <a href="https://discord.gg/8yY7dEme9r" target="_blank">디스코드 서버</a>에 가입하는 것입니다.
+
+        You can also [send us an email](mailto:hello@hedy.org "About Hedy").
+-   title: 더 자세히 알아보기!
+    text: |-
+        Hedy의 철학과 디자인에 대해 더 알고 싶으신가요? 2022년 Felienne가 StrangeLoop Conference에서 한 강연을 확인해보세요::
+
+        <iframe width="560" height="315" class="mx-auto mt-4" src="https://www.youtube.com/embed/fmF7HpU_-9k?wmode=opaque" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe>
+-   title: 뉴스속의 Hedy
+    text: |-
+        2020년 초 Hedy가 출시된 이후 일부 웹사이트와 신문들은 Hedy에 관해 글을 써왔다. 우리는 여기에 목록을 보관하고 있다:
+        * [Tech Optimism - A Solution to the IT Shortage (Dutch), August 2022](https://pom.show/2022/08/12/een-oplossing-voor-het-it-tekort/)
+        * [Codeweek Podcast, July 2022](https://codeweek.eu/podcast/26)
+        * [Heise.de (German), Januari 2022](https://www.heise.de/news/Hedy-die-mitwachsende-Programmiersprache-6336264.html)
+        * [Strumenta, November 2021](https://tomassetti.me/teaching-programming-with-hedy/)
+        * [Vives (Dutch), CodeWeek Special October 2021](images/Vives-174-Codeweek.pdf)
+        * [CodeWeek.eu - Haunted House Challenge, September 2021](https://codeweek.eu/2021/challenges/haunted-house)
+        * [Opensource.com, April 2021](https://opensource.com/article/21/4/hedy-teach-code)
+        * [IO Magazine, April 2021](https://ict-research.nl/wordpress/wp-content/uploads/2021/04/IO-magazine-NR1-2021_web.pdf)
+        * [Ingeniería De Software (Spanish), February 2021](https://ingenieriadesoftware.es/hedy-mejor-lenguaje-ensenar-programacion-ninos/)
+        * [Hello World Magazine, February 2021](images/Hello_World_15_Hedy.pdf)
+        * [Discoro, January 2021](https://discoro.wordpress.com/2021/01/09/hedy-gradually-learning-a-programming-language/)
+        * [Felienne wins the Dutch award for ICT research for Hedy, January 2021](https://www.nwo.nl/en/news/felienne-hermans-receives-dutch-prize-ict-research-2021)
+        * [SlashDot, August 2020](https://news.slashdot.org/story/20/08/17/024248/scientist-proposes-a-new-programming-language-for-teaching-coding-and-python)
+        * [GenBeta (Spanish), August 2020](https://www.genbeta.com/desarrollo/nuevo-lenguaje-para-ensenar-programacion-a-ninos-como-se-ensena-a-leer-escribir-forma-gradual-niveles)
+        * [Developpez (French), August 2020](https://programmation.developpez.com/actu/308095/Une-scientifique-propose-un-nouveau-langage-de-programmation-pour-enseigner-aux-enfants-le-codage-informatique-au-travers-d-une-approche-graduelle-implementee-en-Python-sur-13-paliers/)
+        * [Vives (Dutch), October 2020](images/artikel_vives.pdf) "Met Hedy stap voor stap leren programmeren"
+        * [Leiden University, April 2020](https://www.universiteitleiden.nl/en/news/2020/03/looking-to-distract-the-kids-while-you-work-from-home-get-them-programming)
+        * [Mare (Dutch), April 2020](https://www.mareonline.nl/cultuur/computercode-voor-de-kids/)
+        * [AG Connect (Dutch), April 2020](https://www.agconnect.nl/artikel/stapsgewijs-python-leren-programmeren-met-nieuwe-taal-hedy)
+start-sections:
+-   title: Hedy와 시작하기
+    text: '*Something about teachers accounts, slides etc*'
+-   title: What other teachers say
+    text: "A while ago we ran a few short Hedy teachers surveys. \nThe questions span between suggestions of improvement and Hedy’s best features. \nBelow is a testimony of their thoughts:\n\nSimple interface and good examples. *Teacher: 3rd - 6th grades (elementary)*\n\nMultilingual programming and just\
+        \ the gradual programming concept itself. - *US: middle school, 6th-8th grade*\n\nThe gradual nature of introducing programming. *Australia: High school*\n\nThe construction is so good. *Netherlands: Lower secondary school HAVO-VWO*\n\nI can keep the pace of the class. *Netherlands: group 7 en\
+        \ 8* \n\nContinues automatically. *Netherlands: 2 HAVO-VWO*\n\nBoth that the explanation can be in Dutch (and the code in English), and that it builds up with more \nand more possibilities. *Netherlands: Plus class group 7*\n\nThe 'realness' of programming, it resembles how it is in reality. *Netherlands:\
+        \ Plus class group 4 to 8*\n\nStep-by-step activities. Fun activities. *Netherlands: 1e All levels, 2e VWO/HAVO 2e VWO +, 3e HAVO 3e VWO*\n\nBut Hedy and its gradual levels... what an idea, \nI wanted to personally thank you for creating this. I cannot thank you enough. Also, I have never seen\
+        \ the level of engagement and enthusiasm of my \nstudents, as I have seen with Hedy. We have covered till level 5, and plan to spend one more week on it in classes and labs, \nbefore starting Python.  *Pakistan*\n\nI really like Hedy very much and it is also nicely set up, which makes it good\
+        \ to use in primary school. \nHedy's gradual approach works very well. \nThe short explanation at the beginning of each level and the short example programs help to give the children a quick insight into what is new in the chosen level. \nThe different assignments that the children can choose\
+        \ also work very well. \nYou see the children choose assignments that appeal to them and they then get to work with them, \nthrough the levels. Hedy is great fun for children who are good at programming and want to get a \ntaste of a real programming language. It is good preparation for secondary\
+        \ school as soon as more ICT \neducation is given there. *Netherlands: Oegstgeest Montessori school*\n\n<img width=\"500px\" src=\"static/images/teacherfeedback/Fkids1.JPG\"></img>"
+teacher-guide:
+-   title: 소개
+    key: intro
     subsections:
-    -   title: "What's Hedy?"
-        text: |
-            Hedy is a textual programming language, specifically developed for (pre-)teens (10 to 15 years old).
-            In contrast to programming languages for kids, like Scratch, Hedy doesn't use code blocks but textual code.
-            So with Hedy you'll learn how to type code like the real programmers do, but in small steps with playful exercises.
-            This way Hedy can function as a stepping stone to real programming languages like Python in an accessible and mostly fun way!
-            If you want to know more, you can watch this <a href="https://www.youtube.com/watch?v=EdqT313rM40&amp;t=2s" target="_blank">video</a> about the development of Hedy as a programming language.
-    -   title: "Target audience"
-        text: |
-            Hedy is developed with middle school and junior high school students in mind (ages 10 - 15).
-            It's important for the students to be able to read well. We recommend not to start with Hedy before the students have achieved at least a 3rd grade reading level.
-            Students (and teachers!) don't need any programming experience before starting with Hedy.
-    -   title: "How does Hedy work?"
-        text: |
-            Hedy is divided into levels, in which new commands are taught. Each level contains a variety of adventures to practice the newly learned commands.
-            As a teacher, you get to decide which adventures are available for your students. Will they be making a restaurant, a calculator or a haunted house this level? Within each level, the adventures are arranged from easiest to hardest.
-            So your students keep getting challenged. The adventures can be done by the students individually, or you can use them in a classical instruction.
+    -   title: Hedy는 무엇입니까?
+        text: |-
+            Hedy는 텍스트 프로그래밍 언어로, 10~15세 청소년을 위해 특별히 개발되었다.
+            스크래치와 같은 아이들을 위한 프로그래밍 언어와는 대조적으로, Hedy는 코드 블록을 사용하지 않고 텍스트 코드를 사용한다.
+            그래서 Hedy와 함께라면 실제 프로그래머들처럼 코드를 입력하는 방법을 배울 수 있을 것입니다. 하지만 작은 레벨로 장난기 많은 연습을 통해 말이죠.
+            이런 방식으로 Hedy는 파이썬과 같은 실제 프로그래밍 언어를 쉽게 접근할 수 있고 대부분 재미있는 방식으로 사용할 수 있다!
+            더 알고 싶다면 프로그래밍 언어로서의 Hedy의 개발 모습을 담은 <a href="https://www.youtube.com/watch?v=EdqT313rM40&amp;t=2s" target="_blank">이 영상</a>을 보면 된다.
+    -   title: 서비스를 이용하는 사용자
+        text: |-
+            Hedy는 중학생과 중학생(10~15세)을 염두에 두고 개발되었습니다.
+            학생들이 잘 읽을 수 있도록 하는 것이 중요합니다. 학생들이 적어도 3학년 읽기 레벨을 달성하기 전에는 Hedy부터 시작하지 않을 것을 권장드립니다.
+            학생들(그리고 선생님들!)은 Hedy와 함께 시작하기 전에 프로그래밍 경험이 필요하지 않습니다.
+    -   title: Hedy는 어떻게 작동하나요?
+        text: |-
+            Hedy는 새로운 명령어를 가르치는 레벨로 나뉜다. 각 레벨에는 새로 배운 명령어를 연습하기 위한 다양한 모험이 포함되어 있다.
+            선생님으로서 학생들에게 어떤 모험이 가능한지 결정하게 된다. 그들이 레스토랑, 계산기, 유령의 집을 이 레벨으로 만들 것인가? 각 레벨 내에서, 모험은 가장 쉬운 것부터 가장 어려운 것까지 배열된다.
+            그래서 여러분의 학생들은 계속해서 도전을 받게 됩니다. 모험은 학생들이 개별적으로 할 수도 있고, 고전적인 수업에 사용할 수도 있습니다.
 
-            The adventures also include a code example, to make sure the less digitally informed teachers are able to use Hedy too!
-            Of course Hedy also caters to the creative teachers that love to make their own lessonplans and adventures!
+            이 모험에는 정보가 부족한 교사들도 Hedy를 사용할 수 있도록 하기 위한 코드 예시도 포함되어 있습니다!
+            물론 Hedy는 또한 그들만의 수업 계획과 모험을 만드는 것을 좋아하는 창의적인 선생님들을 만족시켜요!
 
-            After programming all the adventures of a certain level, your students can test their knowledge in the quiz.
-            You can track your students' work and their progress on the class page.
-    -   title: "Devices"
-        text: |
-            Hedy is webbased, which means it works on any device with a browser (Google Chrome, Firefox, Edge etc), so laptops, chromebooks, tablets and even smartphones are suitable to use Hedy.
-            There's no need to download anything before working with Hedy, just go to the website and you're all set!
-    -   title: "The Hedy Community"
-        text: |
-            All Hedy teachers, programmers and other fans are welcome to join our [Discord server](https://discord.gg/8yY7dEme9r). This is the ideal place to chat about Hedy: we have channels where you can show your cool projects and lessons, channels to report bugs, and channels to chat with other teachers and with the Hedy team.
-            [Here](https://www.youtube.com/watch?v=Lyz_Lnd-_aI) you can find a video on how to join the dicord community.
--   title: "Tutorial"
-    key: "tutorial"
+            특정 레벨의 모든 모험을 프로그래밍한 후 학생들은 퀴즈에서 자신의 지식을 시험할 수 있다.
+            수업 페이지에서 학생들의 일과 진행 상황을 추적할 수 있습니다.
+    -   title: 기기
+        text: |-
+            Hedy는 웹 기반이므로 브라우저가 있는 모든 디바이스(구글 크롬, 파이어폭스, 엣지 등)에서 작동하므로 노트북, 크롬북, 태블릿, 심지어 스마트폰까지 Hedy를 사용하기에 적합하다.
+            Hedy와 함께 일하기 전에 아무것도 다운로드 할 필요가 없습니다. 웹사이트에 들어가시면 모든 준비가 완료됩니다!
+    -   title: Hedy 커뮤니티
+        text: |-
+            <a href="https://discord.gg/8yY7dEme9r " target="_blank">Discord 서버</a>에 가입하신 것을 환영합니다. 이곳은 멋진 프로젝트와 교훈을 보여줄 수 있는 채널, 버그를 보고할 수 있는 채널, 그리고 다른 선생님들과 그리고 Hedy 팀과 이야기할 수 있는 채널이 있습니다.
+            <a href="https://www.youtube.com/watch?v=Lyz_Lnd-_aI " target="_blank">여기서</a> 디스코드 커뮤니티 가입 방법에 대한 동영상을 확인할 수 있다.
+    -   title: Hedy and the GDPR
+        text: |-
+            Organizations in the EU have to comply with the GDPR (General Data Protection Regulation) when processing personal data.
+            Because this is a complex issue for many schools, you can use all Hedy programming functionalities without sharing personal data.
+            The easiest way to do this is to use Hedy without creating accounts for the teacher and students. Without accounts, all functionality is available, with the exception of personalizing levels, saving students' programs and viewing their progress. That is limiting, but there are schools that use Hedy in that way.
+
+            A second way is for a teacher to create an account with an email address without personal data, for example "docent25@email.com". Apart from an email address, which is only required to reset your password, you do not need to share any information when you create a teacher account.
+            With a teacher account, you can create anonymous accounts for students, e.g. rainbow-student1, rainbow-student2, etc (See 'Teaching preparations' for a detailed manual). This way you can use all functionality of Hedy, including saving progress, without sharing personal data of yourself or your students.
+
+            If the above is not sufficient for your context, we can sign a processing agreement for the processing of your personal data.
+-   title: 튜토리얼
+    key: Tutorial
     subsections:
-    -   title: "Tutorial"
-        text: |
-            Do you want to follow the tutorial (again)? Click [here](https://hedycode.com/tutorial)
--   title: "Teaching preparations"
-    key: "preparations"
+    -   title: 튜토리얼
+        text: (다시) 튜토리얼을 따르시겠습니까? <a href="https://hedy.org/tutorial" target="_blank">여기를 클릭</a> 하세요.
+-   title: 수업 준비
+    key: preparations
     subsections:
-    -   title: "Creating a Class"
-        text: |
-            As a teacher, you can create a class for your students. In this class you can see the students' accounts and their programs and you could monitor their progress.
-            This [video](https://www.youtube.com/watch?v=Y3RTIWftJQg) shows you how to quickly create a class in Hedy.
-    -   title: "Customize your Class"
-        text: |
-            You can also customize your class and choose which adventures are available for them. This way your students won't be overwhelmed by the amount of adventures and levels, and they can specifically focus on the adventures you'd like them to practice with.
-            This [video](https://www.youtube.com/watch?v=qva9gXBoUwY&t=10s) shows you how to customize your class.
-    -   title: "Student Accounts"
-        text: |
-            There are 2 ways to let your students join your class: You can create accounts for them, or they could create their own accounts.
+    -   title: For teachers
+        text: You can prepare your classes at the <a href="https://hedy.org/for-teachers" target="_blank">For Teachers page</a>. On this page you'll find everything you'll need to teach with Hedy, like your classes, your adventures and slides. All the functionalities of the for teachers page are explained
+            below.
+    -   title: 수업 만들기
+        text: |-
+            교사로서 학생들을 위한 수업을 만들 수 있다. 이 수업에서 학생들의 계정과 프로그램을 볼 수 있고 학생들의 진행 상황을 관찰할 수 있다.
+            <a href="https://www.youtube.com/watch?v=Y3RTIWftJQg" target="_blank">이 동영상</a> 은 Hedy에서 클래스를 빠르게 만드는 방법을 보여줍니다.
+    -   title: Duplicate a class
+        text: |-
+            Are you teaching multiple classes? Then you don't have to customize each class individually. Simply make a class, costumize the class (see "Customize your Class" to learn how) and then duplicate this class as many times as you want.
+            You can duplicate the class on the 'For Teachers' page. If you duplicate a class, all the class settings are duplicated as well. This means that all the levels and adventures you've mande unavailable for the first class will now be unavailable for the new class(es) as well.
+            The student accounts and second teacher accounts in your class will not be duplicated into the new class.
+    -   title: Add a second teacher
+        text: |-
+            Are you not the only teacher that teaches your class? Then you can now add another teacher to the class. Go to the 'For teachers' page and click on the class. Then choose 'Invite a teacher' and fill in the username of your colleague.
+            Your colleague will get an invitation on their account to join your class. They can see that invitation message by clicking on their username in the upper right corner of the screen and selecting 'My account'.
+            Once the other teacher accepts the invitation they can customize the class as well.
+            To remove a second teacher from your class, go to the class page and remove the second teacher. The teacher who's created the class cannot be removed.
+    -   title: 수업 커스터마이징
+        text: |-
+            You can customize your class and choose which adventures are available for your students. This way your students won't be overwhelmed by the amount of adventures and levels, and they can specifically focus on the adventures you'd like them to practice with.
+            Click on your class on the for teachers page and choose 'customize class'. On this page you can select levels, set opening dates, unlock level thresholds and more.
 
-            **You create accounts for your students**
-            The easiest way to add students to your class is by creating an account for them. This can be done by clicking the 'create student accounts' button and filling in the usernames and passwords for them.
-            The students can login with the username and password that you chose. Afterwards, they can change their username or password if they'd like and they'll still remain in your class.
-            This [video](https://www.youtube.com/watch?v=eEQvik-Ce5M) shows how to add students to your class in the quickest and easiest way.
+            **Select and order adventures**
+            <img src="https://github.com/hedyorg/hedy/assets/80678586/df38cbb2-468e-4317-ac67-92eaf4212adc" width="1000">
+            In this section you can select and order adventures. The pink tabs are adventures with new commands. The gray tabs are regular adventures. To rearrange the order of the adventures, you can drag the tabs. However, we do advise you to use the regular order of adventures as the Hedy team made sure the adventures go from easiest to hardest.
+            If you want to remove an adventure for your students, simply click the cross on the adventure's tab.
+            <img src="https://github.com/hedyorg/hedy/assets/80678586/0ddd10b5-ef60-4480-a0c4-fc9a0f323baa" width="300">
+            If you want to add adventures, for instance your own adventure or an adventure you accidentally removed, use this menu to add the adventure to your students' adventures. Simply click the adventure you want to add and it (re)appears in the line of adventures. To undo all your changes to the adventures, click 'Reset'.
 
-            **Students make their own accounts**
-            Your students can also go to the Hedy website and create their own accounts, just like you did. To get them into your class, they simply have to click the invite link.
-            You can find the invite link on the class page and send it to your students. Mind that your students have to be logged in to Hedy when they click the link, in order to make it work smoothly.
-            You can also manually invite a student to your class with the button 'Invite by username'.
+            **Opening dates**
+            <img src="https://github.com/hedyorg/hedy/assets/80678586/4e59acfa-4772-429f-8328-babb43c942d5" width="300">
+            With this feature you can set opening dates for the levels. This way you can make a lesson plan before your course begins and not worry about opening new levels each week. In the image above the first level is opened directly, the second will open the 23th of september, and the 3rd level the week after. The other levels are closed.
+            Don't want to set opening dates? No problem, just leave this section blank.
 
-    -   title: "Setting preferred language"
-        text: |
-            When students create profiles they are supposed to choose a 'preferred language'. Hedy will always be loaded in this selected language.
-            Changing this language can always be done later on by navigating to 'My account' and 'My personal settings' again.
-            From December 2021, setting a preferred language is obligatory for each Hedy account.
-            When your account or your students' accounts have been created earlier than this date, you will receive a message that a preferred language is missing.
-            Don't worry! Navigate to 'My profile' and set a language in your profile settings.
-            Until you set a language Hedy will be shown in your browser language and, when this language is not supported, in English.
+            **Unlock level thresholds**
+            <img src="https://github.com/hedyorg/hedy/assets/80678586/99a34dab-f112-459e-bfd1-07618be4715a" width = "1000">
+            This featue allows you to set a threshold for your students' quiz grade, before they can continue to the next level. For example, if you enter "80" your students have to score at least 80% on the quiz before they are allowed to go to the next level. If they haven't met the threshold, they are not allowed to continue and have to retake the quiz.
+            Don't want to use the threshold? No worries, just keep this section blank.
 
-            **For non-English speakers**
-            Not only can you change the language of the adventures to your own language. You can also choose which language the keywords (for example 'print' or 'ask') should be in.
-            This way you can teach your students to code with English keywords, but you can also let them program in their own language. For example, Dutch students can use the command 'vraag' instead of 'ask'.
 
-            **Video**
-            This [video](https://www.youtube.com/watch?v=QrVZETj4oLM) show you how to set a preferred language and change the keywords to you preferred language as well.
+            **Other settings**
+            <img src="https://github.com/hedyorg/hedy/assets/80678586/a8491d67-6d6e-42a7-b672-fd3d083a76f8"/>
+            There are some other setting that could be usefu to you aswell. Our first extra setting is 'Mandatory developer's mode'. In developers mode the students only see their input and output screens and the run button. The adventures are hidden and there are no cheatsheets available. This might come in handy in a test situation.
+            If this option is not selected the developer's mode is available for students too as a voluntary option.
 
-    -   title: "Storing programs"
-        text: |
-            When you are logged in, you'll see My programs next to your profile icon.
-            This option exists for your students too. In My programs you can find all the programs that you've worked on.
-            By default, programs will be saved to 'My programs' when you run the code, and every 10 seconds, under their default name
-            and their level (for example: Story 5). If you want to store a program under a new name, just type the new name in the name bar.
-            Currently, only one program can be saved per level, per tab.
+            If you want all your students to be visible in de class highscore, you can select the second option.
+            With all the other options you can choose to hide some functions or content for your students, this might help them focus more.
 
-            You (and your students) can also share programs using the share button next to program names.
-            These programs will be posted on our <a href="https://hedy.org/explore" target="_blank">explore page</a>, for everybody to see and use.
-            If you want to unshare your program, go to 'My programs' and click 'Unshare'.
+            **Save**
+            <img src="https://github.com/hedyorg/hedy/assets/80678586/df179df3-3073-4d15-bba6-62e58fb675be" width="300">
+            Don't forget to save your changes when you're done customizing your class.
+    -   title: Student Accounts
+        text: |-
+            To add students to your class go to the class page by clicking in the class name on the 'for teachers' page. Then click 'add students'. There are 2 ways to let your students join your class: You can create accounts for them, or they could create their own accounts.
+            **학생용 계정을 만듭니다**
+            여러분의 수업에 학생들을 추가하는 가장 쉬운 방법은 그들을 위한 계정을 만드는 것입니다. 이것은 '학생 계정 만들기' 버튼을 클릭하고 그들을 위한 사용자 이름과 비밀번호를 기입함으로써 이루어질 수 있습니다.
+            학생들은 여러분이 선택한 사용자 이름과 비밀번호로 로그인 할 수 있습니다. 그 후에, 그들이 원한다면 사용자 이름이나 비밀번호를 바꿀 수 있고 여러분의 반에 남아있을 것입니다.
+            <a href="https://www.youtube.com/watch?v=eEQvik-Ce5M" target="_blank">이 동영상</a>을 통해 가장 빠르고 쉬운 방법으로 학생을 수업에 추가하는 방법을 보여줍니다..
 
-            The paper plane icon can be used to hand in programs to the teacher of a class. Programs that have been handed is will no longer be editable.
+            **학생들이 직접 계정을 만듭니다**
+            학생들도 독자 분이 한 것처럼, Hedy 웹사이트에 가서 자신들만의 계정을 만들 수 있습니다. 그들을 수업에 참여시키기 위해서는 단순히 초대 링크를 클릭하기만 하면 됩니다.
+            수업 페이지에서 초대 링크를 찾아 학생들에게 보낼 수 있다. 학생들이 링크를 클릭할 때 반드시 Hedy에 로그인해야 원활하게 작동할 수 있음을 유의해야 한다.
+            'Invite by username' 버튼을 사용하여 수동으로 학생을 수업에 초대할 수도 있습니다.
+    -   title: 선호하는 언어
+        text: |-
+            학생들이 프로필을 만들 때 그들은 '선호하는 언어'를 선택하게 되어 있다. Hedy는 항상 이 선택된 언어로 채워질 것이다.
+            이 언어를 변경하려면 나중에 '내 계정'과 '내 개인 설정'으로 다시 이동해야 합니다.
 
--   title: "Teaching with Hedy"
-    key: "teaching"
+            **영어 외 사용자용**
+            모험의 언어를 자신의 언어로 바꿀 수 있을 뿐만 아니라 키워드(예: '인쇄' 또는 '묻다')가 어떤 언어로 되어 있어야 하는지도 선택할 수 있다.
+            이렇게 하면 학생들에게 영어 키워드로 코딩하는 법을 가르칠 수 있지만, 학생들이 자신의 언어로 프로그래밍하도록 할 수도 있습니다. 예를 들어, 네덜란드 학생들은 '질문' 대신 'vraag' 명령어를 사용할 수 있습니다.
+            If a student wants to switch languages, they can click the keyword switcher. It will switch the keywords from English to the preferred language and back.
+            Fun fact! Students are allowed program in both English and their own language at the same time! So, if they have trouble remembering some keywords in English, but easily remember other ones they can use both at the same time.
+            <img src="https://github.com/hedyorg/hedy/assets/80678586/0b3122e6-ff22-43d7-b8b6-62f47f485293" width="100">
+
+            **비디오**
+            <a href="https://www.youtube.com/watch?v=QrVZETj4oLM" target="_blank">이 동영상</a>에서는 선호 언어를 설정하고 키워드를 선호 언어로 변경하는 방법을 보여줍니다..
+    -   title: 프로그램 저장중
+        text: |-
+            로그인하면 프로필 아이콘 옆에 내 프로그램이 표시됩니다.
+            이 옵션은 학생들에게도 적용됩니다. 내 프로그램에서 작업한 모든 프로그램을 찾을 수 있습니다.
+            기본적으로 프로그램은 코드를 실행할 때 10초마다 기본 이름으로 '내 프로그램'에 저장됩니다
+            프로그램의 레벨(예: story 5)을 입력합니다. 프로그램을 새 이름으로 저장하려면 이름 표시줄에 새 이름을 입력합니다.
+            현재 탭당 레벨당 하나의 프로그램만 저장할 수 있습니다.
+
+            프로그램 이름 옆에 있는 공유 단추를 사용하여 프로그램을 공유할 수도 있습니다.
+            이 프로그램들은 모두가 보고 사용할 수 있도록 <a href="https://hedy.org/explore" target="_blank">탐색 페이지</a>에 게시될 것입니다.
+            프로그램을 공유 해제하려면 '내 프로그램'으로 이동하여 '공유 해제'를 클릭합니다.
+
+            종이 평면 아이콘은 프로그램들을 수업의 선생님에게 전달하는데 사용될 수 있다. 전달되었던 프로그램들은 더 이상 편집 가능하지 않을 것이다.
+-   title: Hedy와 수업하기
+    key: teaching
     subsections:
-    -   title: "Teaching with Hedy"
-        text: |
-            Hedy contains a lot of different levels that each teach a different new skill. We recommend to teach one level per lesson.
-            This gives your students the time to fully grasp a new command or concept and practice with it, before moving on to the next level.
-            We use this structure in our lessons: Introduction, New concepts and commands, let's get to work, puzzels and quizzes.
-    -   title: "Slides"
-        text: |
-            **COMING SOON** Here you'll soon find slides to use in your lessons.
-    -   title: "Introduction"
-        text: |
+    -   title: Hedy와 수업하기
+        text: |-
+            Hedy는 각각 다른 새로운 기술을 가르치는 많은 다른 레벨들을 포함하고 있다. 우리는 수업마다 한 레벨씩 가르치는 것을 추천드립니다.
+            이것은 학생들에게 다음 레벨로 넘어가기 전에 새로운 명령어나 개념을 완전히 파악하고 그것을 가지고 연습할 수 있는 시간을 줍니다.
+            우리는 이 구조를 수업에 사용합니다. 소개, 새로운 개념과 명령어, 어떻게 실행시키고, 퍼즐과 퀴즈 등입니다.
+    -   title: 슬라이드
+        text: |-
+            When giving instructions you might want to use our slides. Our slides are available on the 'For teachers' page. There is a set of slides for each level. In the slides all the new commands for that level are explained. We have aimed to explain why these changes are nessecary or how the new commands come in handy.
+            We also give some examples of how the new commands can be used. You could of course also use your own slides, or just open Hedy and show your students around the website. Whichever you prefer to give the best Hedy lessons!
+    -   title: Introduction
+        text: |-
             You can start your lessons by activating your students' prior knowledge: What do they already know about the subject, what did they learn in the previous lesson and which mistakes did they make that they've now learned from?
             This way all the previously learned commands and frequently made mistakes are fresh in your students' memories, when you start introducing the new lesson.
-    -   title: "Introduction of new concepts and commands"
-        text: |
+    -   title: 소개
+        text: |-
             The new concepts and commands can be very hard for some students to fully understand.
             That's why it's of importance to model the proper use of the new commands to your students.
             Especially in the lower levels, where some students have no experience whith programming at all, it can be hard for them to understand the new abstract concepts.
-            Showing a lot of examples makes an abstract concept (for instance: 'What is a variable?') more recognizable and easier to understand ('Look, the variable pet changed into dog').
-    -   title: "Let's get to work"
-        text: |
-            Each level contains different adventures that you can find in the pink tabs. The first pink tab explains the new commands in this level.
-            The following tabs are adventures that the students can try out and make their own.
-            The adventures are arranged from easiest to hardest, so we recommend to start on the left and your your way to the right.
-            The last tab 'what's next' gives a little teaser of what you'll learn in the next level. Of course, you can select the adventures you want your students to do for each level.
-            They don't always have to make every adventure. Every adventure contains an example code, that the students can try out with the green button.
-            The example code gets copied to the workfield, where the students can try out the code and adjust it to make it their own.
-            Stimulate your students to turn the example codes into their own projects by adding their own ideas and making their own variation of the adventure.
-    -   title: "Quizzes and puzzels"
-        text: |
-            To test whether your students have picked up all the new info in the level, you can let them make the quiz.
+            Showing a lot of examples makes an abstract concept (for instance: 'What is a variable?') more recognizable and easier to understand ('Look, the variable pet changed into dog'). Our slides could help you with that.
+    -   title: Let's get to work
+        text: |-
+            새로운 개념과 명령어는 일부 학생들이 완전히 이해하기 매우 어려울 수 있습니다.
+            그렇기 때문에 학생들에게 새로운 명령어를 적절하게 사용할 수 있도록 모델링하는 것이 중요합니다.
+            특히 일부 학생들이 프로그래밍에 대한 경험이 전혀 없는 하위 레벨에서는 새로운 추상적 개념을 이해하기 어려울 수 있다.
+            예를 많이 보여주면 추상적인 개념(예: '변수란 무엇인가?')이 더 잘 인식되고 이해하기 쉬워진다('봐, 변수가 강아지로 변했다').
+    -   title: Quizzes and puzzels
+        text: |-
+            To test whether your students have picked up all the new info in the level, you can let them take the quiz.
             The quiz contains 10 multiple choice questions about the new concepts and command to that level.
             Not every level has a quiz yet, as we are still building the quizzes.
-            Some levels also contain puzzels. Puzzels show the students a couple of line of code that the students have to put in the right order.
+            Some levels also contain puzzles. Puzzles show the students a couple of line of code that the students have to put in the right order.
 
-            This [video](https://www.youtube.com/watch?v=lNh5EdZVUwc) shows the quizzes and puzzels.
-    -   title: "Evaluation"
-        text: |
+            This <a href="https://www.youtube.com/watch?v=lNh5EdZVUwc" target="_blank">video</a> shows the quizzes and puzzles.
+    -   title: Evaluation
+        text: |-
             Round up your lesson by having a brief evaluation. What did the students learn? Which hardships did they come across?
             How did they learn from their mistakes? And of course: What did they create?
-            Students are often very proud of their own creations, so it's nice to save a little time and gove your students the opportunity to show their work to their classmates.
--   title: "Extra Hedy features"
-    key: "features"
+            Students are often very proud of their own creations, so it's nice to save a little time and give your students the opportunity to show their work to their classmates.
+-   title: Teacher Statistics
+    key: teacher_statistics
     subsections:
-    -   title: "Teacher Statistics"
-        text: |
-            This [video](https://www.youtube.com/watch?v=iwHVG4NRKI4&t=5s) shows you more information on how to use the teacher statistics in your class.
-    -   title: "Make your own adventure"
-        text: |
-            It is also possible for teachers to create your own adventure. [This video](https://www.youtube.com/watch?v=A0zbXpxX4q4) shows you how to create your own adventure as a teacher and add it to your class(es).
-    -   title: "Explore page"
-        text: |
-            On the [explore](https://hedycode.com/explore) page you can view the work of other Hedy users. You can try out their programs and use them as inspiration to create something cool yourself.
+    -   title: Live Dashboard
+        text: |-
+            If you would like to keep track of your students' progress, you can make use of the live dashboard. You can find the live dashboard by clicking 'Live statistics' on your class page.
+            <img src="https://github.com/hedyorg/hedy/assets/80678586/97a54679-b1d6-46b4-a633-ab0161114642" width="1000">
+            All the features of this dashboard are explained below.
+    -   title: Level Selection
+        text: |-
+            <img src="https://github.com/hedyorg/hedy/assets/80678586/94dc891d-cdd6-4311-91f2-51900eaf4c2a" width="500">
+            Firstly, you can select the levels you'd like to see on the dahsboard. Select the levels your students are currently working on by clicking on the number of that level. Deselect levels that you do not want to see by clicking them again.
+            In this example level 1 and 2 are selected. You can click on refresh to refresh the dashboard and get the most current stats.
+    -   title: Class Overview
+        text: |-
+            <img src="https://github.com/hedyorg/hedy/assets/80678586/b2c30ef9-6eba-4c02-92a3-9669504a54a8" width="1000">
+            In the class overview you can see which adventure your students are working on right now. You can see that one student is working on the 'Rock, Paper, Scissors' adventure in level 1, one is working on the 'Fortune Teller' in level 1 and one student is working on the 'Rock, Paper, Scissors' adventure in level 2.
+            If you'd like to know which of your students is working on the adventure, simply click the number and their accountnames will appear.
+            You can also see how many of your students have finished the quiz. In this case, one student finished the quiz in level 1. Again, you can click the 1 to see which of your students it is.
+
+            You can also see one of the students is 'missing' from this overview. That's because he's working on an adventure in level 4, which is not selected.
+    -   title: Student List
+        text: |-
+            <img src="https://github.com/hedyorg/hedy/assets/80678586/693e976c-199f-46f4-abae-3f18f9854cd0" width="1000">
+            Here you can find a list of your students and you can see their individual progress. The blue ring shows you what your students are currently working on.
+            <img src="https://github.com/hedyorg/hedy/assets/80678586/c7e2150f-60de-4ef7-8862-5901a7fb6609" width="150">
+            It is important to notice that the blue dots means that a students 'attempted' the adventure. This means that they ran a code in this adventure and went on to the next adventure, so this does not automatically mean that they did a good job!
+            If you want to see how an individual student is getting along, you can click their name in this overview. This is what you see if you click on marleen_h3a for example:
+            <img src="https://github.com/hedyorg/hedy/assets/80678586/f8c2480d-c724-46f9-a702-33532828de70" width="800">
+            You see that Marleen is having some trouble programming. She tried to run a program that contains blanks multiple times, so she probably doesn't know that she has to change something to the example codes before running them.
+            In this way this overview can give you a better understanding of what a student is struggling with.
+    -   title: Common Errors
+        text: |-
+            <img src="https://github.com/hedyorg/hedy/assets/80678586/e7af5ce3-ca74-48e7-9654-f17435596fbc" width="500">
+            If you're not only interested in individual struggles of your students, but you'd like to know what the whole class seems to be doing wrong, you can use this oversight of common errors.
+            The most common error messages that your students are recieving will appear in this oversight for you, so you could give some more instructions to the whole class if needed.
+            By clicking the error, you can see which students are having trouble with this error. By clicking resolve, you'll remove this error from the list.
+    -   title: Overview of programs per adventure
+        text: |-
+            <img src="https://github.com/hedyorg/hedy/assets/80678586/f07bf714-7250-4711-82a1-616f9f7b55e8" width="1000">
+            Another useful overview of all the programs your students made in a level can be found on your class page. Go to the class page and click 'Overview of programs per adventure'. Here you'll find this overview.
+            You could use this overview to check your students' work. If they have made a program in an adventure, an eye appears in your overview. Click the eye to view their work. Did you like it? Then you can check the box and a green tick will appear.
+            This way you create a nice overview for yourself of your students' results.
+-   title: Extra Hedy features
+    key: features
+    subsections:
+    -   title: Make your own adventure
+        text: It is also possible for teachers to create your own adventure. This <a href="https://www.youtube.com/watch?v=A0zbXpxX4q4" target="_blank">video</a> shows you how to create your own adventure as a teacher and add it to your class(es).
+    -   title: 실행 시켜보자
+        text: |-
+            On the [explore](https://hedy.org/explore) page you can view the work of other Hedy users. You can try out their programs and use them as inspiration to create something cool yourself.
             You can also add a program you've made to the explore page yourself by clicking 'Save and share code' in the coding screen or go to My Programs and click 'Share'.
             Don't want to share your work anymore? Simply go to 'My Programs' and click 'Unshare'.
             If you want more information about the explore page, check out this [video](https://www.youtube.com/watch?v=26boFjqvS5Q).
-    -   title: "My achievements"
-        text: |
-            If you click on your username in the topright corner of your screen, you can go to [My achievements](https://hedycode.com/my-achievements). On this page you achievements are collected. Your students have such a page as well.
-            When you hover over the badge with your mouse, you'll see how to earn the badge. There are hidden badges too, of which you'll have to find out yourself how to earn them.
-            If you want more information on the achievements, check out this [video](https://www.youtube.com/watch?v=-FjmKejukCs).
-    -   title: "High Scores"
-        text: |
-            On [this page](https://hedycode.com/highscores) you can see the high scores of all Hedy users.
-            In this [video](https://www.youtube.com/watch?v=IqTiUkBVTo8) you can learn some more about the high scores.
-    -   title: "Debugger"
-        text: |
-            Is your (student's) code not working? There must be a bug (coding mistake) in it! You can use the debugger to find the mistake.
-            The debugger is the ladybig button in your coding screen. If you press it, you can run your code line by line to find your mistake.
-            Have you found the mistake? Press the red stop button and the debugger will shut off.
-    -   title: "Read aloud"
-        text: |
-            Do you want the output of your program to be read aloud? Then you can use the read aloud function that is found under the 'run code' button in your coding screen.
-    -   title: "Programmers mode"
-        text: |
-            Distracted by all the adventures, or do you want to make a long program? Then check out the 'Programmers Mode' switch at the bottom of your coding screen.
-            Programmers mode allows you and your students to use a bigger coding screen.
-    -   title: "Cheat sheets"
-        text: |
-            In every level there is a button with this emoji 🤔. You and your students can find the "cheat sheets" there. On this cheat sheet, you can find all the commands that are usable in this level in their correct form.
-            So if you've forgotten how a command works, simply take a peek at the cheat sheet!
-    -   title: "Other useful features"
-        text: |
-            This [video](https://www.youtube.com/watch?v=c4MntPPgl1Y) shows you even more features of Hedy, like the cheatsheets and the keyboard switcher.
--   title: "Common mistakes"
-    key: "common_mistakes"
-    intro: |
-        You can learn from your mistakes, especially in coding!
-        Making mistakes is unavoidable, and a great opportunity to learn, but for teachers it can be a challenge to find the correct fix for a mistake!
-        Especially as the codes get longer and longer as the levels progress. That's why we've made a list with frequently made mistakes in each level, and their solutions.
+    -   title: 나의 업적
+        text: |-
+            화면 오른쪽 상단에 있는 사용자 이름을 클릭하면 내 업적으로 이동할 수 있습니다. 이 페이지에서는 <a href="https://hedycode.com/my-achievements" target="_blank">업적</a>이 수집됩니다. 학생들에게도 이러한 페이지가 있습니다.
+            마우스로 배지 위를 맴돌면 배지를 획득하는 방법이 나옵니다. 배지에도 숨겨진 배지가 있는데, 배지를 획득하는 방법을 스스로 찾아봐야 합니다.
+            성과에 대한 자세한 정보를 원하시면, 이 <a href="https://www.youtube.com/watch?v=-FjmKejukCs " target="_blank">비디오</a>를 확인하세요.
+    -   title: 하이 스코어
+        text: |-
+            <a href="www.https://hedy.org/high점수s" target="_blank">이 페이지</a> 에서는 모든 Hedy 사용자들의 하이 스코어를 볼 수 있습니다.
+             <a href="https://www.youtube.com/watch?v=IqTiUkBVTo8" target="_blank">이 비디오</a>에서 여러분은 고득점에 대해 더 많이 배울 수 있습니다.
+    -   title: 디버거
+        text: |-
+            학생 코드가 작동하지 않는 건가요? 오류가 있는 게 분명해요! 디버거를 사용해서 그 오류를 찾을 수 있어요.
+            디버거는 코딩 화면의 무당벌레 버튼입니다. 그걸 누르면 코드를 한 줄 한 줄로 실행해 실수를 찾을 수 있습니다.
+            실수를 발견했습니까? 빨간색 중지 버튼을 누르면 디버거가 종료됩니다.
+    -   title: 큰 소리로 읽기
+        text: 프로그램의 출력을 큰 소리로 읽으시길 원하시나요? 그러면 코딩 화면의 '코드 실행' 버튼 아래에 있는 큰 소리로 읽기 기능을 사용할 수 있습니다.
+    -   title: 프로그래머 모드
+        text: |-
+            모든 모험에 정신이 팔려있는 것일까요, 아니면 긴 프로그램을 만들고 싶나요? 그런 다음, 코딩 화면의 하단에 있는 '프로그래머 모드' 스위치를 확인하세요.
+            프로그래머 모드를 사용하면 학생과 함께 더 큰 코딩 화면을 사용할 수 있습니다.
+    -   title: 컨닝 페이퍼
+        text: |-
+            모든 레벨에는 이 이모티콘 🤔이 있는 버튼이 있다. 여러분과 여러분의 학생들은 거기서 "컨닝 페이퍼"을 찾을 수 있다. 이 컨닝 페이퍼에서 여러분은 이 레벨에서 사용할 수 있는 모든 명령어의 정확한 형태를 찾을 수 있다.
+            그래서 만약 여러분이 명령어가 어떻게 작동하는지 잊어버렸다면, 그냥 컨닝 페이퍼를 엿보기만 하면 됩니다!
+    -   title: 비디오
+        text: <a href="https://www.youtube.com/watch?v=c4MntPPgl1Y" target="_blank">이 동영상</a>은 당신에게 컨닝 페이퍼와 키워드 바꾸기과 같은 Hedy의 더 많은 특징들을 보여준다.
+-   title: After Hedy
+    key: after
+    subsections:
+    -   title: What to do after Hedy?
+        text: |-
+            Congratulations on reaching the end of Hedy! Your students have now learned how to create their own basic codes in the Python programming language.
+            Of course, you could keep programming in our Hedy compiler, but it might be more exciting for your students to transfer to a "real" Python interface.
+            Would you like to continue teaching Python? Then please visit <a href="https://www.python.org/about/gettingstarted/" target="_blank">the Python website</a> to learn how to get started in another compiler.
+
+            Now that your students have a basic knowledge of programming in general, you could also show them around in other textual programming languages. The language might change but the concepts do not, so Hedy will still give them a big advantage.
+-   title: 연습문제에 대한 답
+    key: 대답
+    intro: |-
+        모든 연습문제에 대한 답은 'Hedy_answers'라는 사용자 계정의 공개 프로필에서 찾을 수 있다. 우리는 종종 학생들이 자신의 창의성을 답안에 사용하도록 권장하기 때문에, 이러한 답안은 가능한 정답이 어떻게 생겼는지에 대한 지침일 뿐이다.
+
+        'Hedy_answers' 프로필로 이동하려면, <a href="https://hedy.org/user/hedy_answers " target="_blank">여기</a>를 클릭하십시오.
+-   title: 흔한 실수
+    key: 흔한_실수
+    intro: |-
+        여러분은 특히 코딩에서 여러분의 실수로부터 배울 수 있습니다!
+        실수를 하는 것은 피할 수 없는 것이고, 배울 수 있는 좋은 기회이지만, 선생님들에게는 실수에 대한 정확한 해결책을 찾는 것이 도전이 될 수 있습니다!
+        특히 레벨이 올라갈수록 코드가 점점 길어지기 때문에 레벨별로 실수가 자주 발생하는 리스트와 그 해결책을 만들어 보았습니다.
     levels:
     -   level: '1'
         sections:
-        -   title: "Students forget to type commandos"
+        -   title: 학생들이 명령어를 입력하는 것을 잊어버린다
             example:
-                error_text: |
-                    For example they type a sentence without using print.
-                error_code: |
-                    Hedy can't print this
-                solution_text: |
-                    Teach your students to always start a line of code with a command.
-                solution_code: |
-                    print Hedy can print this!
-        -   title: "Students use capitals when typing commands"
+                error_text: 예를 들어 학생들은 print 명령어를 사용하지 않고 문장을 타이핑한다.
+                error_code: Hedy 이것을 print할 수 없다
+                solution_text: 학생들에게 항상 명령어로 코드 줄을 시작하도록 가르쳐야 합니다.
+                solution_code: print Hedy는 이것을 print할 수 있다!
+        -   title: 학생들은 명령어를 처음 입력할 때 대문자를 사용하기도 한다
             example:
-                error_text: |
-                    Commands won't work if they are in capitals.
-                error_code: |
-                    Ask Why does my code fail?
-                    Print Because I'm using capitals.
-                solution_text: |
-                    Remove the capitals.
-                solution_code: |
-                    ask Why does my code work now?
-                    print Because I removed the capitals!
-        -   title: "Students use echo without ask"
+                error_text: 명령어가 대문자일 경우 작동하지 않습니다.
+                error_code: |-
+                    Ask 나의 코드가 왜 실행되지 않지?
+                    Print 왜냐하면 내가 대문자를 사용했기 때문이다.
+                solution_text: 대문자를 제거한다.
+                solution_code: |-
+                    ask 나의 코드가 왜 잘 실행되지?
+                    print 왜냐하면 내가 대문자를 제거해서이다!
+        -   title: 학생들은 ask 명령어 없이 echo 명령어를 사용하기도 한다
             example:
-                error_text: |
-                    Echo is made to repeat an answer after an ask command. Without ask echo won't do anything.
-                error_code: |
-                    echo Your name is
-                solution_text: |
-                    Add an ask command to make it work.
-                solution_code: |
-                    ask What's your name?
-                    echo Your name is
-        -   title: "Students want their echo word (variable) to be in the middle of a sentence"
+                error_text: echo 명령어는 ask 명령어 이 후에 대답을 반복하도록 되어 있다. ask 명령어를 사용하지 않으면 echo 명령어는 아무것도 할 수 없다.
+                error_code: echo 너의 이름은
+                solution_text: ask 명령어를 추가하여 작동시킵니다.
+                solution_code: |-
+                    ask 너의 이름은 무엇이니?
+                    echo 나의 이름은
+        -   title: 학생들은 그들의 echo 명령어로 만들어진 변수가 문장의 중간에 있기를 원한다
             example:
-                error_text: |
-                    And they are right! That's why they will learn to use proper variables in the next level.
-                error_code: |
-                    ask Which programming language is the most fun?
-                    echo is the best!
-                solution_text: |
-                    In level 1 we have to keep it at this:
-                solution_code: |
-                    ask Which programming language is the most fun?
-                    echo The best is...
-        -   title: "Turtle: Students let the turtle walk off of the screen"
+                error_text: 그리고 그들이 맞아요! 그래서 그들은 다음 레벨에서 적절한 변수를 사용하는 법을 배우게 될 것입니다.
+                error_code: |-
+                    ask 어떤 프로그래밍 언어가 재밌어?
+                    echo 가장 재밌는 언어는!
+                solution_text: '레벨 1에서는 이 상태를 유지해야 합니다:'
+                solution_code: |-
+                    ask 어떤 프로그래밍 언어가 재밌어?
+                    echo 최고는...
+        -   title: '거북이: 학생들은 거북이를 화면에서 걷게 했습니다'
             example:
-                error_text: |
-                    Often students love to try out big numbers when using the turtle, which causes the arrow to walk off the screen.
-                error_code: |
+                error_text: 학생들은 자주 거북이를 사용할 때 큰 숫자를 시도하는 것을 좋아하는데, 이것은 화살이 화면을 벗어나 걷게 만든다.
+                error_code: |-
                     forward 300
                     turn 90
-                solution_text: |
-                    In the example. students tend to think that the turn command doesn't work. Eventhough is does work, but you can't see it happening off screen. Use smaller numbers to prevent this from happening.
-                solution_code: |
+                solution_text: 예를 들어, 학생들은 명령어가 작동하지 않는다고 생각하는 경향이 있습니다. 작동하더라도 화면 밖에서는 그런 현상을 볼 수 없습니다. 이런 현상이 발생하지 않도록 작은 숫자를 사용하세요.
+                solution_code: |-
                     forward 100
                     turn 90
-        -   title: "Turtle: Students use the command backward, but that doesn't exist"
+        -   title: '거북이: 학생들은 명령어를 거꾸로 사용하지만, 그런 명령어는 존재하지 않습니다'
             example:
-                error_text: |
-                    Backward is not a command.
-                error_code: |
-                    backward 100
-                solution_text: |
-                    To make the turtle go backwards, you use the forward command and a negative number. For example:
-                solution_code: |
-                    forward -100
+                error_text: backward는 정확한 명령어가 아닙니다.
+                error_code: backward 100
+                solution_text: '거북이를 뒤로 가게 하려면 forward 명령어와 음수(마이너스)를 사용합니다. 예를 들어:'
+                solution_code: forward -100
     -   level: '2'
         sections:
-        -   title: "Students make typos in their commands"
+        -   title: 학생들은 가끔 잘못된 명령어를 입력한다
             example:
-                error_text: |
-                    Hedy can't recognize a command with a typo.
-                error_code: |
-                    prinnt Don't make typos!
-                solution_text: |
-                    Teach your students to read the error messages. This way they can find out themselves what went wrong.
-                solution_code: |
-                    print Don't make typos!
-        -   title: "Students forget that the ask command has changed"
+                error_text: Hedy는 타이핑하는 명령어를 인식하지 못한다.
+                error_code: prinnt 이 문장 타이핑 하지마!
+                solution_text: 학생들에게 오류 메시지를 읽는 법을 가르치세요. 이 방법으로 학생들은 무엇이 잘못되었는지 스스로 알아낼 수 있습니다.
+                solution_code: print 이 문장 타이핑 하지마!
+        -   title: 학생들은 ask 명령어가 바뀌었다는 것을 잊어버립니다
             example:
-                error_text: |
-                    In this level students learn about variables. The ask command requires a variable as well, but students forget this.
-                error_code: |
-                    ask what would you like to eat?
-                solution_text: |
-                    In this level you have to tell Hedy where to save your answer, so it can be used later on. This is called a variable.
-                solution_code: |
-                    order is ask What would you like to eat?
-        -   title: "Students try to use the echo command "
+                error_text: 이 레벨에서는 학생들은 변수에 대해 배운다. ask 명령어도 변수가 필요하지만 학생들은 이것을 잊어버린다.
+                error_code: ask 어떤거 드시겠어요?
+                solution_text: 이 레벨에서는 Hedy에게 답을 저장할 위치를 알려주어야 나중에 사용할 수 있다. 이를 변수라고 한다.
+                solution_code: order is ask 어떤거 드시겠어요?
+        -   title: 학생들은 echo 명령어를 사용하려고 한다
             example:
-                error_text: |
-                    For some students it might be frustrating to learn that the echo command doesn't work anymore. That's why it's very important to explain the advantages of using variables. For example you can use multiple variables in a code, and you can put them anywhere you like in a sentence!
-                error_code: |
-                    answer is ask Why doesn't echo work anymore?!
+                error_text: 일부 학생들에게는 echo 명령어가 더 이상 작동하지 않는다는 것을 알게 되면 실망할 수 있습니다. 그렇기 때문에 변수를 사용하는 것의 장점을 설명하는 것이 매우 중요합니다. 예를 들어, 코드에 여러 개의 변수를 사용할 수 있고, 문장에서 원하는 곳에 변수를 넣을 수 있습니다!
+                error_code: |-
+                    대답 is ask 왜 echo가 작동하지 않지?!
                     echo
-                solution_text: |
-                    Use a varible instead.
-                solution_code: |
-                    answer is ask Why doens't echo work anymore?!
-                    print answer
-        -   title: "Students use a variable name or as a normal word"
+                solution_text: 변수를 사용하세요.
+                solution_code: |-
+                    대답 is ask 왜 echo가 작동하지 않지?!
+                    print 대답
+        -   title: 학생들은 변수명을 사용하거나 일반적인 단어로 사용하는 경향이 있습니다
             example:
-                error_text: |
-                    In the example below the word 'name' is used a a variable, but also as a normal text. The output of this code will be 'Hi my Hedy is Hedy'.
-                error_code: |
-                    name is Hedy
-                    print Hi my name is name
-                solution_text: |
-                    So don't use a word you want to use in the text as a variable name. In level 4 this is solved with quotation marks.
-                solution_code: |
-                    name is Hedy
-                    print Hi I'm name
-        -   title: "Students use long variable names containing two words."
+                error_text: 아래 예제에서는 '이름'이라는 단어가 변수로 사용되지만 일반 단어로도 사용됩니다. 이 코드의 출력은 '안녕 내 Hedy 은 Hedy'가 될 것입니다.
+                error_code: |-
+                    이름 is Hedy
+                    print 안녕 내 이름 은 이름
+                solution_text: 그래서 본문에서 사용하고 싶은 단어를 변수 이름으로 사용하지 마세요. 4레벨에서는 따옴표'로 풀립니다.
+                solution_code: |-
+                    이름 is Hedy
+                    print 안녕 나는 이름 야
+        -   title: 학생들은 두 단어를 포함하는 긴 변수 이름을 사용합니다.
             example:
-                error_text: |
-                    A variable should be named with one word. You could use an underscore to connect two words. That counts as one.
-                error_code: |
-                    chosen door is ask Which door do you pick?
-                solution_text: |
-                    Add an underscore.
-                solution_code: |
-                    chosen_door is ask which door do you pick?
-        -   title: "Students might use two different names for the same variable"
+                error_text: 변수 이름은 하나의 단어로 지어져야 합니다. 두 단어를 연결하기 위해 언더바_를 사용할 수 있어요. 그것은 하나의 변수로 인식됩니다.
+                error_code: 선택된 문 is ask 어떤 문을 선택했니?
+                solution_text: 언더바_를 사용합시다.
+                solution_code: 선택된_문 is ask 어떤 문을 선택했니?
+        -   title: 학생들은 같은 변수에 대해 두 개의 다른 이름을 사용할 수 있습니다
             example:
-                error_text: |
-                    In this example the student has used 'horse' and 'name' for the same variables.
-                error_code: |
-                    horse is ask What is your horse called?
-                    print Your horse is called name
-                solution_text: |
-                    Always check wheter the variable has the same name throughout the code. Slight differences can be hard to spot (for example plurals) but they will interfere with the code.
-                solution_code: |
-                    name is ask What is your horse called?
-                    print Your horse is called name
+                error_text: 이 예제에서 학생은 동일한 변수에 대해 '강아지'와 '이름'을 사용했습니다.
+                error_code: |-
+                    강아지 is ask 너의 강아지는 뭐라고 부르니?
+                    print 너의 강아지 이름
+                solution_text: '코드 변수의 이름이 같은지 항상 확인해야 한다. 약간의 차이는 발견하기 어려울 수 있지만(예: 복수) 코드를 방해한다.'
+                solution_code: |-
+                    이름 is ask 너의 강아지는 뭐라고 부르니?
+                    print 너의 강아지 이름
     -   level: '3'
         sections:
-        -   title: "Students try to print whole lists"
+        -   title: 학생들은 전체 목록을 print하려고 한다
             example:
-                error_text: |
-                    A list can't be printed. You can only print one item from the list with at random.
-                error_code: |
-                    groceries is apples, milk, chocolate
-                    print groceries
-                solution_text: |
-                    To print a list of all the groceries, you simply need to put them after a print command. Else you can use the list to print one item with at random.
-                solution_code: |
-                    print apples, milk, chocolate
+                error_text: 목록을 인쇄할 수 없습니다. {at} {random}(으)로 목록에서 항목 하나만 인쇄할 수 있습니다.
+                error_code: |-
+                    식료품점 is 사과, 우유, 초콜렛
+                    print 식료품점
+                solution_text: 모든 식료품 목록을 인쇄하려면 {print} 명령 뒤에 입력하기만 하면 됩니다. 그렇지 않으면 목록을 사용하여 {at} {random}이(가) 포함된 하나의 품목을 인쇄할 수 있습니다.
+                solution_code: |-
+                    {print} 사과, 우유, 초콜렛
 
                     or
 
-                    groceries is apples, milk, chocolate
-                    print groceries at random
-        -   title: "Students use the name of a variable or list as regular text"
+                    식료품점 {is} 사과, 우유, 초콜렛
+                    {print} 식료품점 {at} {random}
+        -   title: 학생들은 변수 또는 목록의 이름을 일반 단어로 사용합니다
             example:
-                error_text: |
-                    This problem probably occured in level 2 as well. Now it can happen with lists too.
-                error_code: |
-                    name is Hedy
-                    print Hi my name is name
+                error_text: 이 문제는 레벨 2에서도 발생했을 것입니다. 이제 목록에서도 발생할 수 있어요.
+                error_code: |-
+                    이름 {is} Hedy
+                    {print} 나의 이름 은 이름 이다
 
-                    or
+                    또는
 
-                    animal is rhino, bee, swan
-                    print The best animal is... animal at random
-                solution_text: |
-                    Don't use the names of variables or lists in regular text to print. In level 4 this problem is solves with quotation marks.
-                solution_code: |
-                    name is Hedy
-                    print Hi I'm name
+                    동물 {is} 코뿔소, 꿀벌, 백조
+                    {print} 최고의 동물은... 동물 {at} {random}
+                solution_text: print할 때 일반 단어의 변수 이름이나 목록을 사용하지 마십시오. 레벨 4에서는 따옴표'로 이 문제를 해결합니다.
+                solution_code: |-
+                    이름 {is} Hedy
+                    {print} 안녕 나는 이름 이야
 
-                    or
+                    또는
 
-                    animals is rhino, bee, swan
-                    print The best animal is... animals at random
-        -   title: "Students forget at in at random"
+                    동물들 {is} 코뿔소, 꿀벌, 백조
+                    {print} 최고의 동물은... 동물들 {at} {random}
+        -   title: 학생들은 `{at}` `{random}`에서 `{at}`을 잊어버린다
             example:
-                error_text: |
-                    Like in the example
-                error_code: |
-                    birds is sparrow, seagull, robin
-                    print birds random
-                solution_text: |
-                    This problem is solved by adding the word at.
-                solution_code: |
-                    birds is sparrow, seagull, robin
-                    print birds at random
-        -   title: "Students forget to use the print command when also using the at random command"
+                error_text: 예를 들면
+                error_code: |-
+                    새들 is 참새, 갈매기, 벌새
+                    print 새들 random
+                solution_text: 이 문제는 단어를 추가하면 해결됩니다.
+                solution_code: |-
+                    새들 {is} 참새, 갈매기, 벌새
+                    {print} 새들 {at} {random}
+        -   title: 학생들은 `{at}` `{random}` 명령어를 사용할 때는 `{print}` 명령어를 사용하는 것을 잊어버린다
             example:
-                error_text: |
-                    Or they will sometimes put at random at the beginning of the line.
-                error_code: |
-                    fruit is apple, cherry, banana
-                    fruit at random
-                solution_text: |
-                    Emphasize to your students that you always need a print to print text.
-                solution_code: |
-                    fruit is apple, cherry, banana
-                    print fruit at random
-        -   title: "Students forget to use commas in their lists"
+                error_text: 맨 앞줄에 `{at}` '{random}'을 붙이기도 합니다.
+                error_code: |-
+                    과일 {is} 사과, 체리, 바나나
+                    과일 {at} {random}
+                solution_text: 텍스트를 print하려면 항상 print가 필요하다는 것을 학생들에게 강조합니다.
+                solution_code: |-
+                    과일 {is} 사과, 체리, 바나나
+                    {print} 과일 {at} {random}
+        -   title: 학생들은 그들의 목록에 쉼표,를 사용하는 것을 잊는다
             example:
-                error_text: |
-                    In a list items are seperated with a comma.
-                error_code: |
-                    pizzas is funghi tonno quattro stagioni
-                    print pizzas at random
-                solution_text: |
-                    After each item on your list, there should be a comma
-                solution_code: |
-                    pizzas is funghi, tonno, quattro stagioni
-                    print pizzas at random
-        -   title: "Students try to use at random without a list"
+                error_text: 목록에서 항목은 쉼표,로 구분됩니다.
+                error_code: |-
+                    피자들 {is} 버섯 양파 콤비네이션
+                    {print} 피자들 {at} {random}
+                solution_text: 목록의 각 항목 뒤에 쉼표,가 있어야 합니다
+                solution_code: |-
+                    피자들 is 버섯, 양파, 콤비네이션
+                    print 피자들 at 랜덤
+        -   title: 학생들은 리스트 없이 `{at}` `{random}`를 사용하려고 한다
             example:
-                error_text: |
-                    For example
-                error_code: |
-                    clubs is Manchester United
-                    print clubs at random
-                solution_text: |
-                    Hedy can't print anything at random, because there is no list to choose from.
-                solution_code: |
-                    clubs is Manchester United, Bayrn Munchen, FC Barcelona
-                    print clubs at random
-        -   title: "Students try to use add/remove without a list "
+                error_text: 예를 들면..
+                error_code: |-
+                    축구클럽들 {is} 맨체스터 유나이티드
+                    {print} 축구클럽들 {at} {random}
+                solution_text: Hedy는 아무 것도 임의로 인쇄할 수 없는데, 그 이유는 선택할 수 있는 목록이 없기 때문이다.
+                solution_code: |-
+                    축구클럽들 {is} 맨체스터 유나이티드, 바이에른 뮌헨, FC 바르셀로나
+                    {print} 축구클럽들 {at} {random}
+        -   title: 학생들은 목록 없이 추가/제거를 사용하려고 합니다
             example:
-                error_text: |
-                    In the example below 'names' is not a list, but a variable. You cannot add anything to it.
-                error_code: |
-                    names is Jake
-                    your_name is ask Who are you?
-                    add your_name to names
-                    print names at random
-                solution_text: |
-                    There has to be a list first, so you have to add a second name to turn names into a list, for example Amy. If you don't want amy on your list, you can use remove to remove it after.
-                solution_code: |
-                    names is Jake, Amy
-                    your_name is ask Who are you?
-                    add your_name to names
-                    print names at random
-        -   title: "Students forget to use to/from in add/remove"
+                error_text: 아래 예제의 '이름들'는 변수입니다. 여기에는 어떤 것도 추가할 수 없습니다.
+                error_code: |-
+                    이름들 {is} Jake
+                    너의_이름 {is} {ask} 너는 누구니?
+                    {add} 너의_이름 {to} 이름들
+                    {print} 이름들 {at} {random}
+                solution_text: 먼저 목록이 있어야 하기 때문에 에이미처럼 이름을 목록으로 바꾸기 위해 두 번째 이름을 추가해야 합니다. 에이미를 목록에 넣지 않으려면 그 다음에 제거를 사용하여 제거할 수 있습니다.
+                solution_code: |-
+                    이름들 {is} Jake, Amy
+                    너의_이름 {is} {ask} 너는 누구니?
+                    {add} 너의_이름 {to} 이름들
+                    {print} 이름들 {at} {random}
+        -   title: 학생들이 추가/제거할 때 사용하는 것을 잊어버림
             example:
-                error_text: |
-                    Without to/from the add/remove command won't work.
-                error_code: |
-                    adventures is story, parrot, dice
-                    choice is Which adventure do you like best?
-                    add choice
-                    remove dice
-                    print I love adventures at random
-                solution_text: |
-                    Hedy has to know which list the item should be added to/removed from.
-                solution_code: |
-                    adventures is story, parrot, dice
-                    choice is Which adventure do you like best?
-                    add choice to adventures
-                    remove dice from adventures
-                    print I love adventures at random
+                error_text: to/from add/remove 명령어가 없으면 작동하지 않습니다.
+                error_code: |-
+                    모험 {is} 스토리, 앵무새, 주사위
+                    선택 {is} 너는 어떤 모험을 좋아해?
+                    {add} 선택
+                    {remove} 주사위
+                    {print} 나는 모험 {at} {random}
+                solution_text: Hedy는 어떤 목록에 항목을 add/remove해야 하는지 알아야 한다.
+                solution_code: |-
+                    모험 is 스토리, 앵무새, 주사위
+                    선택 is 너는 어떤 모험을 좋아해?
+                    add 선택 to 모험
+                    remove dice from 모험
+                    print 나는 모험 at random
     -   level: '4'
         sections:
-        -   title: "Students forget to use quotation marks on both sides of the text"
+        -   title: 학생들은 본문 양쪽에 따옴표'를 사용하는 것을 잊는다
             example:
-                error_text: |
-                    In this level print and ask need a set of quotation marks. One before of the text and one after.
-                error_code: |
-                    print Hello
-                    mood is ask 'How are you?
-                solution_text: |
-                    Add the correct quotation marks.
-                solution_code: |
-                    print 'Hello'
-                    mood is ask 'How are you?'
-        -   title: "Students use the wrong quotation marks"
+                error_text: 이 레벨에서는 따옴표'가 필요하다. 본문 앞에 하나, 뒤에 하나.
+                error_code: |-
+                    print 안녕
+                    기분 is ask '너는 어때?
+                solution_text: 올바른 따옴표'를 추가한다.
+                solution_code: |-
+                    print '안녕'
+                    기분 is ask '너는 어때?'
+        -   title: 학생들은 잘못된 따옴표'를 사용한다
             example:
-                error_text: |
-                    It is important to start your lesson by checking if the students know how to type a quotation mark properly. Else they might use the "double quotes" or the skewed one `.
-                error_code: |
-                    print `Welcome to the restaurant`
-                    food is ask "What would you like to order?"
-                solution_text: |
-                    These are the correct quotation marks:
-                solution_code: |
-                    print 'Welcome to the restaurant'
-                    food is ask 'What would you like to order?'
-        -   title: "Students use an apostrophe in their text"
+                error_text: 학생들이 따옴표'를 제대로 치는 법을 알고 있는지 확인하면서 수업을 시작하는 것이 중요하다. 그렇지 않으면 그들은 "쌍따옴표"나 "다른문자"를 사용할 수도 있다 `.
+                error_code: |-
+                    print `식당에 어서오세요`
+                    음식 is ask "어떤거 드시겠어요?"
+                solution_text: '이것들이 정확한 따옴표''입니다:'
+                solution_code: |-
+                    print '식당에 어서오세요'
+                    음식 is ask '어떤거 드시겠어요?'
+        -   title: 학생들은 그들의 텍스트에 아포스트로피를 사용한다
             example:
-                error_text: |
-                    From this level on apostrophes are not allowed. They are often used in English when thyping contractions like you're, don't or what's.
-                error_code: |
-                    print 'You're not allowed to type this'
-                solution_text: |
-                    You can choose to use the wrong grammar and just leave the apostrophe out. Or you could use the ` as an apostrophe.
-                solution_code: |
+                error_text: 이 레벨부터는 따옴표'를 사용하실 수 없습니다. 영어에서는 you're, don't 또는 what's 같이 따옴표'를 자주 사용합니다.
+                error_code: print 'You're not allowed to type this'
+                solution_text: 따옴표'대시에 `문자를 사용하거나 문장에서 따옴표'를 제거하는 것이 좋습니다.
+                solution_code: |-
                     print 'Youre allowed to type this'
                     print 'And you`re able to do this'
     -   level: '5'
         sections:
-        -   title: "Students forget to use print in an if command"
+        -   title: 학생들이 {if} 명령어에서 {print}를 사용하는 것을 잊어버립니다
             example:
-                error_text: |
-                    After students use if or else they forget to use a second command like print or ask.
-                error_code: |
-                    if name is Hedy 'Great!'
-                    else 'Hedy is better!'
-                solution_text: |
-                    Add the print command to fix it.
-                solution_code: |
-                    if name is Hedy print 'Great!'
-                    else print 'Hedy is better!'
-        -   title: "Students might use two different names for the same variable"
+                error_text: 학생들이 `{if}`나 `{else}`를 사용한 후에는 `{print}`나 `{ask}` 같은 두 번째 명령어를 사용하는 것을 잊어버립니다.
+                error_code: |-
+                    if 이름 is Hedy '대단해!'
+                    else 'Hedy 는 괜찮네!'
+                solution_text: print 명령어을 추가하여 수정합니다.
+                solution_code: |-
+                    if 이름 is Hedy print '대단해!'
+                    else print 'Hedy 는 괜찮네!'
+        -   title: 학생들은 같은 변수에 대해 두 개의 다른 이름을 사용할 수 있습니다
             example:
-                error_text: |
-                    In this example the student has used 'horse' and 'name' for the same variables.
-                error_code: |
-                    horse is ask 'What is your horse called?'
-                    if name is Bonfire print 'cool'
-                    else print 'less cool!'
-                solution_text: |
-                    Always check wheter the variable has the same name throughout the code. Slight differences can be hard to spot (for example plurals) but they will interfere with the code.
-                solution_code: |
-                    horse is ask 'What is your horse called'
-                    if horse is Bonfire print 'cool!'
-                    else print 'less cool!'
-        -   title: "Students still forget the quotes on both sides"
+                error_text: 이 예제에서 학생은 동일한 변수에 대해 '강아지'과 '이름'을 사용했습니다.
+                error_code: |-
+                    강아지 is ask '강아지 이름이 뭐니?'
+                    if 이름 is 코코 print '멋진데'
+                    else print '별로야!'
+                solution_text: '코드 전체에 걸쳐 변수의 이름이 같은지 항상 확인해야 한다. 약간의 차이는 발견하기 어려울 수 있지만(예: 복수) 코드를 방해한다.'
+                solution_code: |-
+                    강아지 is ask '강아지 이름이 뭐니'
+                    if 강아지 is 코코 print '멋진데!'
+                    else print '별로야!'
+        -   title: 학생들은 여전히 양쪽의 인용문을 잊어버린다
             example:
-                error_text: |
-                    Codes using the `if` commando can get very long and students tend to forget to use quotes.
-                error_code: |
-                    if name is Hedy print fun
-                    else print 'meh!
-                solution_text: |
-                    Always use 2 quotes in a print command.
-                solution_code: |
-                    if name is Hedy print 'fun'
-                    else print 'meh!'
-        -   title: "Students use quotes around variable names"
+                error_text: '`if` 명령어를 사용하는 코드는 매우 길어질 수 있고 학생들은 따옴표''를 사용하는 것을 잊어버리는 경향이 있다.'
+                error_code: |-
+                    if 이름 is Hedy print 재밌다
+                    else print '그냥 그래!
+                solution_text: print 명령에는 항상 따옴표' 2개를 사용합니다..
+                solution_code: |-
+                    if 이름 is Hedy print '재밌다'
+                    else print '그냥 그래!'
+        -   title: 학생들은 변수 이름을 중심으로 따옴표'를 사용한다
             example:
-                error_text: |
-                    In this level there are no quotes around variable names.
-                error_code: |
-                    if 'name' is 'Hedy' print 'fun'
-                    else print 'meh!'
-                solution_text: |
-                    Remove the quotes to get the code to work.
-                solution_code: |
-                    if name is Hedy print 'fun'
-                    else print 'meh!
-        -   title: "Students use long variable names containing two words"
+                error_text: 이 레벨에서는 변수 이름 주위에 따옴표'가 없습니다.
+                error_code: |-
+                    if '이름' is 'Hedy' print '재밌다'
+                    else print '그냥 그래!'
+                solution_text: Remove the quotes to get the code to work.
+                solution_code: |-
+                    if 이름 is Hedy print '재밌다'
+                    else print '그냥 그래!
+        -   title: 학생들은 두 단어를 포함하는 긴 변수 이름을 사용한다
             example:
-                error_text: |
-                    A variable should be named with one word. You could use an underscore to connect two words. That counts as one.
-                error_code: |
-                    chosen door is ask 'Which door do you pick?'
-                solution_text: |
-                    Add an underscore.
-                solution_code: |
-                    chosen_door is ask 'which door do you pick?'
-        -   title: "Students want multiple answers to be correct"
+                error_text: 변수 이름은 하나의 단어로 지어져야 한다. 두 단어를 연결하기 위해 언더바_를 사용할 수 있다. 이 변수는 한개로 인식된다.
+                error_code: 선택된 문 is ask '너가 어떤 문을 골랐지?'
+                solution_text: Add an under점수.
+                solution_code: 선택된_문 is ask '너가 어떤 문을 골랐지?'
+        -   title: 학생들은 여러 개의 답이 맞길 원한다
             example:
-                error_text: |
-                    For example this student Hedy to tell all his friends that they are funny, but other classmates would be told that they are not.
-                error_code: |
-                    if name is Jesse, David, Souf print 'You are funny' else print 'You are not funny'
-                solution_text: |
-                    You could use the `in` command for that. It is explained in a higher level, but it does already work in level 5.
-                    Another solution is to use multiple if commands and no else command. The disadvantage is that it won't tell the other classmates that they are not funny.
-                solution_code: |
-                    friends is Jesse, David, Souf
-                    name is ask 'Who are you?'
-                    if name in friends print 'You are funny'
-                    else print 'You are not funny'
+                error_text: 예를 들어 이 학생 Hedy는 그의 모든 친구들에게는 재미있지만, 다른 반 친구들은 그렇지 않다고 말할 것이다.
+                error_code: if 이름 is 철수, 길동, 영희 print '너는 재미있어' else print '저는 재미없어'
+                solution_text: |-
+                    여기에서 `in` 명령어를 사용할 수 있다.. 더 높은 레벨에서 자세히 설명됩니다만, 5단계에서 사용 하실수 있습니다.
+                    다른 해결책은 if 명령어를 여러 개 사용하고 다른 명령어는 사용하지 않는 것이다. 단점은 다른 반 친구들에게 그들이 재미없다고 말하지 않는다는 것이다.
+                solution_code: |-
+                    친구들 is 철수, 길동, 영희
+                    이름 is ask '너는 누구니?'
+                    if 이름 in 친구들 print '너는 재미있어'
+                    else print '너는 재미없어'
 
-                    or
+                    또는
 
-                    name is ask 'Who are you?'
-                    if naam is Jesse print 'You are funny'
-                    if naam is David print 'You are funny'
-                    if naam is Souf print 'You are funny'
-        -   title: "The students make the variable name the same as the value in the if statement"
+                    이름 is ask '너는 누구니?'
+                    if 이름 is 철수 print '너는 재미있어'
+                    if 이름 is 길동 print '너는 재미있어'
+                    if 이름 is 영희 print '너는 재미있어'
+        -   title: 학생들은 변수 이름을 `{if}` 문의 값과 동일하게 만듭니다
             example:
-                error_text: |
-                    In the example below the password is 'password'. This will result in it always being correct.
-                error_code: |
-                    password is ask 'What is the password?'
-                    if password is password print 'Access granted'
-                    else print 'Acces denied!'
-                solution_text: |
-                    Pick a different name for your variable.
-                solution_code: |
-                    secret_password is ask 'What is the password'
-                    if secret_password is password print 'Access granted!'
-                    else print 'Access denied!'
+                error_text: 아래 예제에서 비밀번호는 '비밀번호'입니다. 그러면 항상 정확하게 됩니다.
+                error_code: |-
+                    비밀번호 is ask '이거 비밀번호가 뭐지?'
+                    if 비밀번호 is 비밀번호 print '승인 되었습니다'
+                    else print '거부 되었습니다!'
+                solution_text: 다른 변수 이름을 선택합니다.
+                solution_code: |-
+                    비밀_암호 {is} {ask} '이거 암호가 뭐지'
+                    {if} 비밀_암호 {is} 암호 {print} '승인 되었습니다!'
+                    {else} {print} '거부 되었습니다!'
     -   level: '6'
         sections:
-        -   title: "Students struggle with quotation marks"
+        -   title: 학생들은 따옴표' 때문에 어려움을 겪는다
             example:
-                error_text: |
-                    Some students struggle with adding quotattion marks or not. If you add quotation marks, the output screen will literally show '5+5'.
-                error_code: |
-                    print '5 + 5'
-                solution_text: |
-                    In this code the output screen will print '10'.
-                solution_code: |
-                    print 5 + 5
-        -   title: "Students struggle with the concept of doing maths with a variable"
+                error_text: 일부 학생들은 따옴표'를 붙이거나 붙이지 않기도 한다. 따옴표'를 추가하면 출력 화면에 문자 그대로 '5+5'가 표시됩니다.
+                error_code: print '5 + 5'
+                solution_text: 이 코드에서 출력 화면은 '10'으로 print됩니다.
+                solution_code: print 5 + 5
+        -   title: 학생들은 변수를 가지고 수학을 한다는 개념에 어려움을 겪는다
             example:
-                error_text: |
-                    Some students will find it hard to do maths with variables. Try to show them very simple examples, like:
-                error_code: |
-                    age = ask 'How old are you?'
-                    print 'Next year you will be ' age + 1
-                solution_text: |
-                    Or take it a step further like this.
-                solution_code: |
-                    price = 0
-                    print 'Welcome to our burger restaurant'
-                    burger = ask 'Would you like a burger?'
-                    if burger = yes price = price + 10
-                    drink = ask 'Would you like a drink?'
-                    if drink = yes price = price + 4
-                    print 'That will be ' price ' euros please'
+                error_text: '어떤 학생들은 변수를 가지고 수학을 하는 것을 어려워 할 것입니다. 그들에게 아주 간단한 예를, 보여주려고 노력하세요:'
+                error_code: |-
+                    나이 = ask '당신은 나이가 몇살이에요?'
+                    print '다음 연도 당신의 나이는 ' 나이 + 1
+                solution_text: 아니면 이렇게 해보세요.
+                solution_code: |-
+                    가격 = 0
+                    print '저희 햄버거 가게에 오신걸 환영합니다'
+                    햄버거 = ask '햄버거 드시겠어요?'
+                    if 햄버거 = 네 가격 = 가격 + 10
+                    음료수 = ask '음료수는 어떤거 드시겠어요?'
+                    if 음료수 = 네 가격 = 가격 + 4
+                    print '결제 금액은 ' 가격 ' 달러 입니다'
     -   level: '7'
         sections:
-        -   title: "Students forget one of the word of the repeat command, or they forget the print command"
+        -   title: 학생들은 repeat 명령어 중 하나를 잊어버리거나, print 명령어를 잊어버립니다
             example:
-                error_text: |
-                    Make sure that the students know to use both the full repeat command and the print command.
-                error_code: |
-                    repeat 3 times 'For he`s a jolly good fellow'
-                    repeat 3 print 'Which nobody can deny!'
-                solution_text: |
-                    This is the correct code:
-                solution_code: |
-                    repeat 3 times print 'For he`s a jolly good fellow'
-                    repeat 3 times print 'Which nobody can deny!'
-        -   title: "Students try to repeat multiple lines"
+                error_text: 학생들이 전체 repeat 명령어과 print 명령어를 모두 사용하는 것을 알고 있는지 확인합니다.
+                error_code: |-
+                    repeat 3 times '그는 쾌활한 좋은 친구니까'
+                    repeat 3 print '아무도 부인할 수 없는 것!'
+                solution_text: '이것이 정확한 코드입니다:'
+                solution_code: |-
+                    repeat 3 times print '그는 쾌활한 좋은 친구니까'
+                    repeat 3 times print '아무도 부인할 수 없는 것!'
+        -   title: 학생들은 여러 줄을 반복하려고 한다
             example:
-                error_text: |
-                    In this level you can only repeat one line of code multiple times. In this code the student wanted to print 3 different drinks, but it won't work. It will ask the question 3 times and only print the last answer.
-                error_code: |
-                    repeat 3 times drink = ask 'What would you like to drink?'
-                    print drink
-                solution_text: |
-                    You should go to the next level to be able to repeat multiple lines. So on this level you'll have to print everything seperately.
-                solution_code: |
-                    drink = ask 'What would you like to drink?'
-                    print drink
-                    drink = ask 'What would you like to drink?'
-                    print drink
-                    drink = ask 'What would you like to drink?'
-                    print drink
-        -   title: "Students make programs that take too long to run"
+                error_text: 이 레벨에서는 한 줄의 코드만 여러 번 반복할 수 있다. 이 코드에서 학생은 세 개의 다른 음료를 인쇄하기를 원했지만 작동하지 않는다. 질문을 3번 하고 마지막 답만 인쇄한다.
+                error_code: |-
+                    repeat 3 times 음료수 = ask '어떤거 드시겠어요?'
+                    print 음료수
+                solution_text: 여러 줄을 반복하려면 다음 단계로 넘어가야 합니다. 따라서 이 레벨에서는 모든 것을 따로 인쇄해야 합니다..
+                solution_code: |-
+                    음료수 = ask '어떤거 드시겠어요?'
+                    print 음료수
+                    음료수 = ask '어떤거 드시겠어요?'
+                    print 음료수
+                    음료수 = ask '어떤거 드시겠어요?'
+                    print 음료수
+        -   title: 학생들은 실행하는데 너무 오랜시간이 걸리는 프로그램을 만든다
             example:
-                error_text: |
-                    In this level it's very easy to make long codes. The students aren't allowed to make programs that take to long to load (to save our servers).
-                error_code: |
-                    repeat 100 times print 'How many times can I repeat this?'
-                solution_text: |
-                    Make sure the codes aren't too long
-                solution_code: |
-                    repeat 20 times print 'This is enough'
+                error_text: 이 레벨에서는 긴 코드를 만드는 것이 매우 쉽습니다. 학생들은 (서버를 저장하기 위해) 로딩하는 데 시간이 오래 걸리는 프로그램을 수 없습니다.
+                error_code: repeat 100 times print '몇 번이나 반복할 수 있나요?'
+                solution_text: 코드가 너무 길지 않은지 확인합니다
+                solution_code: repeat 20 times print '이정도면 충분해요'
     -   level: '8'
         sections:
-        -   title: "Students use the indentation wrong"
+        -   title: 학생들은 들여쓰기를 잘못 사용한다
             example:
-                error_text: |
-                    Indentation is a new concept in this level, that is hard to use for some students. Make sure they practise some simple codes before making a whole program with it.
-                error_code: |
+                error_text: 들여쓰기는 이 레벨의 새로운 개념이며, 일부 학생들에게는 사용하기 어려운 것이다. 전체 프로그램을 만들기 전에 간단한 코드를 연습해야 한다.
+                error_code: |-
                     repeat 3 times
-                    print 'hello'
-                solution_text: |
-                    This is the correct code:
-                solution_code: |
+                    print '안녕'
+                solution_text: '이것이 정확한 코드입니다:'
+                solution_code: |-
                     repeat 3 times
-                        print 'hello'
-        -   title: "Students only repeat 1 line when they wanted to repeat multiple lines"
+                        print '안녕'
+        -   title: 학생들은 여러 줄을 반복하고 싶을 때 한 줄만 반복한다
             example:
-                error_text: |
-                    For instance, in the code below the student wanted to take the drinks order of 3 people. But insted the program asked 3 times, but only wrote down one order.
-                error_code: |
+                error_text: 예를 들어, 아래 코드에서 학생은 3명의 음료수 주문을 받기를 원했지만, 대신 프로그램은 3번의 주문을 요청했지만, 1번의 주문만을 적었다..
+                error_code: |-
                     repeat 3 times
-                        drink = ask 'What would you like to drink?'
-                    print drink
-                solution_text: |
-                    In the correct code the third line starts with indentation too. This way it belongs to the repeat block and therefore it will be repeated 3 times.
-                    Showing your students these differences can help them understand why we need indentation to make our programs work.
-                solution_code: |
+                        음료수 = ask '어떤거 드시겠어요?'
+                    print 음료수
+                solution_text: |-
+                    올바른 코드에서 세 번째 줄도 들여쓰기로 시작한다. 이런 식으로 반복 블록에 속하므로 3번 반복한다.
+                    학생들에게 이러한 차이점을 보여주는 것은 학생들이 프로그램을 작동시키기 위해 들여쓰기가 필요한 이유를 이해하는 데 도움이 될 수 있습니다.
+                solution_code: |-
                     repeat 3 times
-                        drink = ask 'What would you like to drink?'
-                        print drink
-        -   title: "Students want to nest if statements, or put if statements inside a loop"
+                        음료수 = ask '어떤거 드시겠어요?'
+                        print 음료수
+        -   title: 학생들은 `{if}`개의 문장을 묶거나, `{if}`개의 문장을 고리 안에 넣으려고 한다
             example:
-                error_text: |
-                    In this level students aren't allowed yet to put if statements inside other if statements or inside repeat loops.
-                    In the next level this is allowed.
-                error_code: |
-                    birthday = ask 'Is it you birthday?'
-                    if birthday = yes
+                error_text: |-
+                    이 레벨에서 학생들은 다른 `{if}` 문장 안에 `{if}` 문장을 넣거나 반복 루프 안에 넣을 수 없다.
+                    다음 레벨에서는 이것이 허용됩니다.
+                error_code: |-
+                    birthday = ask '오늘 너 생일이니?'
+                    if birthday = 네
                         repeat 3 times
-                            print 'Hip Hip Hooray!'
-                solution_text: |
-                    This is the correct code for this level:
-                solution_code: |
-                    birthday = ask 'Is it you birthday?'
-                    if birthday = yes
-                        print 'Hip Hip Hooray!'
-                        print 'Hip Hip Hooray!'
-                        print 'Hip Hip Hooray!'
-        -   title: "Students make programs that take too long to run"
+                            print '축하해 축하해 축하해!'
+                solution_text: '이 레벨에 정확히 맞는 코드입니다:'
+                solution_code: |-
+                    생일 = ask '오늘 너 생일이니?'
+                    if 생일 = 네
+                        print '축하해 축하해 축하해!'
+                        print '축하해 축하해 축하해!'
+                        print '축하해 축하해 축하해!'
+        -   title: 학생들은 실행하는데 너무 오랜시간이 걸리는 프로그램을 만든다
             example:
-                error_text: |
-                    In this level it's very easy to make long codes. The students aren't allowed to make programs that take to long to load (to save our servers).
-                error_code: |
+                error_text: 이 레벨에서는 긴 코드를 만드는 것이 매우 쉽다. 학생들은 (서버를 저장하기 위해) 로딩하는 데 오래 걸리는 프로그램을 만드는 것이 허용되지 않는다.
+                error_code: |-
                     repeat 100 times
-                        print 'How many times can I repeat this?'
-                solution_text: |
-                    Make sure the codes aren't too long
-                solution_code: |
+                        print '이거 몇 번이나 반복할 수 있나요?'
+                solution_text: 코드가 너무 길지 않게 해주세요
+                solution_code: |-
                     repeat 20 times
-                        print 'This is enough'
-        -   title: "Students use the if command to check if the variable value is the same as the variable name"
+                        print '이정도면 충분해'
+        -   title: 학생들은 `{if}` 명령어를 사용하여 변수 값이 변수 이름과 동일한지 확인한다
             example:
-                error_text: |
-                    We have seen this mistake by some of our students. They make a password for their computer, but they make the password 'password'.
-                    In line 2 the computer is asked to check wheter the variable password is the same as the variable password, so itself. Which means the answer is alway yes.
-                    So with this code the answer will always be 'You can come in' no matter what the player fills in.
-                error_code: |
-                    password is ask 'What is the password?'
-                    if password is password
-                        print 'You can come in'
+                error_text: |-
+                    우리는 몇몇 학생들에 의해 이 실수를 본 적이 있다. 그들은 컴퓨터의 암호를 만들지만, 암호는 '암호'로 만든다.
+                    2행에서 컴퓨터는 가변 암호가 가변 암호와 동일한지, 확인하도록 요청된다. 그 말은 대답은 항상 네 라는 뜻이지.
+                    그래서 이 코드를 사용하면 플레이어가 무엇을 입력하든지 항상 '들어 오셔도 되요'으로 대답할 수 있습니다.
+                error_code: |-
+                    암호 is ask '이거 암호가 뭐지?'
+                    if 암호 is 암호
+                        print '들어 오셔도 되요'
                     else
-                        print 'You are not allowed'
-                solution_text: |
-                    You can fix this mistake by adding quotation marks. This way the computer knows that the second password in `if password is 'password'` is a string value (so normal text) and not the variable name.
-                solution_code: |
-                    password is ask 'What is the password?'
-                    if password is 'password'
-                        print 'You can come in'
+                        print '들어 오시면 안되요'
+                solution_text: 따옴표를' 추가하면 이 실수를 해결할 수 있습니다. 이 방법으로 컴퓨터는 `{if} 암호 {is} '암호'`의 두 번째 암호가 변수 이름이 아닌 문자열 값(따라서 일반 텍스트)임을 알 수 있습니다.
+                solution_code: |-
+                    암호 is ask '이거 암호가 뭐지?'
+                    if 암호 is '암호'
+                        print '들어 오셔도 되요'
                     else
-                        print 'You are not allowed'
+                        print '들어 오시면 안되요'
     -   level: '9'
         sections:
-        -   title: "Students make mistakes with indentation"
+        -   title: 학생들은 들여쓰기로 실수를 한다
             example:
-                error_text: |
-                    The hardest part about this level is getting the indentation right. Students love nesting if statements, sometimes even inside other nested if statements. Keeping track of indentation can get pretty tough.
-                error_code: |
-                    print 'Robin is walking downtown'
-                    location = ask 'Is Robin going into a shop, or does she go home?'
-                    if location is shop
-                        print 'She enters the shop.'
-                        print 'Robin sees an interesting looking book'
-                        book = ask 'Does Robin buy the book?'
-                            if book is yes
-                    print 'Robin buys the book and goes home'
+                error_text: 이 레벨에서 가장 어려운 점은 들여쓰기를 맞추는 것이다. 학생들은 `{if`} 문장을 묶는 것을 매우 좋아하는데, 때로는 다른 `{if}` 문장 안에 묶어서 쓰기도 한다. 들여쓰기를 추적하는 것은 상당히 어려워질 수 있다.
+                error_code: |-
+                    print '로빈은 시내를 걷고있다'
+                    위치 = ask '로빈은 가게에 들어가나요, 아니면 집에 가나요?'
+                    if 위치 is 가게
+                        print '로빈이 가게에 들어갔다.'
+                        print '로빈은 책을 찾아본다'
+                        책 = ask '로빈은 그 책을 사니요?'
+                            if 책 is 네
+                    print '로빈은 책을 사고 집으로 간다'
                     else
-                        print 'Robin leaves the shop and goes home'
+                        print '로빈은 가게를 떠나 집으로 간다'
                     else
-                        print 'Robin goes home'
-                solution_text: |
-                    This is the correct code. Try to keep track of all the different constructions when putting if statements inside other if statements.
-                solution_code: |
-                    print 'Robin is walking downtown'
-                    location = ask 'Is Robin going into a shop, or does she go home?'
-                    if location is shop
-                        print 'She enters the shop.'
-                        print 'Robin sees an interesting looking book'
-                        book = ask 'Does Robin buy the book?'
-                        if book is yes
-                            print 'Robin buys the book and goes home'
+                        print '로빈은 집에 간다'
+                solution_text: 이것이 정확한 코드이다. 다른 `{if}` 문들 안에 `{if}` 문들을 넣을 때 모든 다른 구성들을 추적하도록 하라.
+                solution_code: |-
+                    print '로빈은 시내를 걷고있다'
+                    위치 = ask '로빈은 가게에 들어가나요, 아니면 집에 가나요?'
+                    if 위치 is 가게
+                        print '로빈이 가게에 들어갔다.'
+                        print '로빈은 책을 찾아본다'
+                        책 = ask '로빈은 그 책을 사니요?'
+                        if 책 is 네
+                            print '로빈은 책을 사고 집으로 간다'
                         else
-                            print 'Robin leaves the shop and goes home'
+                            print '로빈은 가게를 떠나 집으로 간다'
                     else
-                        print 'Robin goes home'
-
+                        print '로빈은 집에 간다'
     -   level: '10'
         sections:
-        -   title: "Students so not use the for command correctly"
+        -   title: 학생들이 for 명령어을 올바르게 사용하지 않아요
             example:
-                error_text: |
-                    We often see that students try to print the list (in the example animals) instead of the items of the list.
-                error_code: |
-                    animals is dog, cat, blobfish
-                    for animal in animals
-                      print 'I love ' animals
-                solution_text: |
-                    The word animals in the last line should be changed into animal.
-                solution_code: |
-                    animals is dog, cat, blobfish
-                    for animal in animals
-                      print 'I love ' animal
-        -   title: "Students forget the indentation"
+                error_text: '우리는 종종 학생들이 목록의 항목 대신에 목록을 print하려고 노력하는 것을 봅니다. (예: 동물들).'
+                error_code: |-
+                    동물들 is 강아지, 고양이, 물고기
+                    for 동물 in 동물들
+                      print '나는 좋아해 ' 동물들
+                solution_text: 마지막 줄에 있는 동물들 은 동물로 바꿔야 한다..
+                solution_code: |-
+                    동물들 is 강아지, 고양이, 물고기
+                    for 동물 in 동물들
+                      print '나는 좋아해 ' 동물
+        -   title: 학생들은 들여쓰기를 잊어버립니다
             example:
-                error_text: |
-                    Students tend to forget to use indentation after a for command.
-                error_code: |
-                    animals is dog, cat, blobfish
-                    for animal in animals
-                    print 'I love ' animals
-                solution_text: |
-                    You should use indentation after a for command.
-                solution_code: |
-                    animals is dog, cat, blobfish
-                    for animal in animals
-                      print 'I love ' animal
+                error_text: 학생들은 명령어 뒤에 들여쓰기를 사용하는 것을 잊는 경향이 있다.
+                error_code: |-
+                    동물들 is 강아지, 고양이, 물고기
+                    for 동물 in 동물들
+                    print '나는 좋아해 ' 동물들
+                solution_text: for 명령어 뒤에 들여쓰기를 사용해야 합니다.
+                solution_code: |-
+                    동물들 is 강아지, 고양이, 물고기
+                    for 동물 in 동물들
+                      print '나는 좋아해 ' 동물
     -   level: '11'
         sections:
-        -   title: "Students forget to use indentation"
+        -   title: 학생들이 들여쓰기를 잊어버립니다
             example:
-                error_text: |
-                    Make sure that the students use indentation.
-                error_code: |
+                error_text: 학생들이 들여쓰기를 사용하는지 확인합니다.
+                error_code: |-
                     for i in range 1 to 5
                     print i
-                solution_text: |
-                    This is the correct code:
-                solution_code: |
+                solution_text: '이것이 정확한 코드입니다:'
+                solution_code: |-
                     for i in range 1 to 5
                         print i
-        -   title: "Students don't understand the i"
+        -   title: 학생들은 i를 이해하지 못한다
             example:
-                error_text: |
-                    Some students don't understand that i is a variable. i is chosen, because it is used in Python programming, but you could just as easily use a different variable name.
-                    For example, this code:
-                error_code: |
+                error_text: |-
+                    어떤 학생들은 i가 변수라는 것을 이해하지 못한다. i가 선택되는 이유는 파이썬 프로그래밍에서 사용되기 때문이지만, 다른 변수 이름을 쉽게 사용할 수 있기 때문이다.
+                    예를 들어, 이 코드는:
+                error_code: |-
                     for i in range 1 to 5
                     print i
-                solution_text: |
-                    Could just as well be replaced with this code. It works the same.
-                solution_code: |
-                    for banana in range 1 to 5
-                        print banana
+                solution_text: 이 코드로 대체할 수도 있어요. 똑같이 작동해요.
+                solution_code: |-
+                    for 바나나 in range 1 to 5
+                        print 바나나
     -   level: '12'
         sections:
-        -   title: "Students forget quotation marks"
+        -   title: 학생들은 따옴표'를 잊어버린다
             example:
-                error_text: |
-                    Students need more quotation marks now than in the previous levels. In this example quotation marks were forgotten in the list and in the if command.
-                error_code: |
-                    superheroes = Spiderman, Batman, Iron Man
-                    superhero = superheroes at random
-                    if superhero = Batman
-                        print 'IM BATMAN!'
-
-                solution_text: |
-                    This is the correct code:
-                solution_code: |
-                    superheroes = 'Spiderman', 'Batman', 'Iron Man'
-                    superhero = superheroes at random
-                    if superhero is 'Batman'
-                        print 'IM BATMAN!'
-        -   title: "Students use quotation marks on numbers they want to use for calculations"
+                error_text: 학생들은 이전 레벨보다 지금 더 많은 따옴표를 필요로 한다. 이 예제에서 따옴표는 목록과 `{if}` 명령에서 잊혀졌다.
+                error_code: |-
+                    슈퍼히어로모임 = 스파이더맨, 배트맨, 아이언맨
+                    슈퍼히어로 = 슈퍼히어로모임 {at} {random}
+                    {if} 슈퍼히어로 = 배트맨
+                        {print} '나는 배트맨이다!'
+                solution_text: '이것이 정확한 코드입니다:'
+                solution_code: |-
+                    슈퍼히어로모임 = '스파이더맨', '배트맨', '아이언맨'
+                    슈퍼히어로 = 슈퍼히어로모임 {at} {random}
+                    {if} 슈퍼히어로 {is} '배트맨'
+                        {print} '나는 배트맨이다!'
+        -   title: 학생들은 계산에 사용하기를 원하는 숫자에 따옴표'를 사용한다
             example:
-                error_text: |
-                    You can use quotation marks on numbers, but only if you want the computer to think of them as text. This means you can't do calculations with the number.
-                    In the example below, you can't do maths with the number 25, because it's in quotation marks.
-                error_code: |
-                    score = '25'
-                    answer is ask 'Do you want a point?'
-                    if answer is 'yes'
-                        score = score + 1
-                        print score
-                solution_text: |
-                    This is the correct code:
-                solution_code: |
-                    score = 25
-                    answer is ask 'Do you want a point?'
-                    if answer is 'yes'
-                        score = score + 1
-                        print score
-        -   title: "Students use commas instead of periods in decimal numbers"
+                error_text: |-
+                    당신은 숫자에 따옴표'를 사용할 수 있지만, 당신이 컴퓨터가 그것들을 텍스트로 생각하기를 원할 때만 그렇다. 이것은 당신이 숫자를 가지고 계산을 할 수 없다는 것을 의미한다.
+                    아래 예제에서 숫자 25는 따옴표'로 표시되어 있기 때문에 수학을 할 수 없습니다.
+                error_code: |-
+                    점수 = '25'
+                    대답 is ask '점수를 원하시나요?'
+                    if 대답 is '네'
+                        점수 = 점수 + 1
+                        print 점수
+                solution_text: '이것이 정확한 코드입니다:'
+                solution_code: |-
+                    점수 = 25
+                    대답 is ask '점수를 원하시나요?'
+                    if 대답 is '네'
+                        점수 = 점수 + 1
+                        print 점수
+        -   title: 학생들은 십진법 숫자의 마침표 대신 쉼표,를 사용한다
             example:
-                error_text: |
-                    Decimal numbers can be used from this level on, but you can't use commas.
-                error_code: |
-                    print 2,5 + 2,5
-                solution_text: |
-                    This is the correct code:
-                solution_code: |
-                    print 2.5 + 2.5
+                error_text: 이 레벨부터는 십진수를 사용할 수 있지만 쉼표는 사용할 수 없습니다.
+                error_code: print 2,5 + 2,5
+                solution_text: '이것이 정확한 코드입니다:'
+                solution_code: print 2.5 + 2.5
     -   level: '13'
         sections:
-        -   title: "Students confuse `and` with `or`"
+        -   title: 학생들은 `and`와 `or`를 혼동한다
             example:
-                error_text: |
-                    Both commands might appear similar, but their functions are very different.
-                error_code: |
-                    game is ask 'Do you want to play a game?'
-                    time is ask 'Do you have time to play?'
-                    if game is 'yes' or time is 'yes'
-                        print 'Lets play!'
-                solution_text: |
-                    In this case, the person should answer yes on both questions, so you should use `and`.
-                solution_code: |
-                    game is ask 'Do you want to play a game?'
-                    time is ask 'Do you have time to play?'
-                    if game is 'yes' and time is 'yes'
-                        print 'Lets play!'
+                error_text: 두 명령은 유사하게 보일 수 있지만 기능은 매우 다릅니다.
+                error_code: |-
+                    게임 is ask '너 나랑 같이 놀래?'
+                    시간 is ask '너 시간은 괜찮지?'
+                    if 게임 is '네' or 시간 is '네'
+                        print '놀자!'
+                solution_text: 이 경우에는, 두 질문 모두에 대해 예 라고 대답해야 하며, 그래서 당신은 `and`를 사용해야 한다.
+                solution_code: |-
+                    게임 is ask '너 나랑 같이 놀래?'
+                    시간 is ask '너 시간은 괜찮지?'
+                    if 게임 is '네' and 시간 is '네'
+                        print '놀자!'
     -   level: '14'
         sections:
-        -   title: "Students confuse the < and > signs"
+        -   title: 학생들은 < 및 > 기호를 혼동한다
             example:
-                error_text: |
-                    Often, students are already familiar with these signs from maths class. But if your students don't know these signs yet, they might have a challenge with it.
-                error_code: |
-                    age = ask 'How old are you?'
-                    if age < 12
-                        print 'You are older than I am!'
-                solution_text: |
-                    This is the correct code:
-                solution_code: |
-                    age = ask 'How old are you?'
-                    if age > 12
-                        print 'You are older than I am!'
-        -   title: "Students use the wrong signs for `!=` `<=` and `>=`"
+                error_text: 종종, 학생들은 이미 수학 수업에서 나온 이러한 기호들에 익숙합니다. 하지만 학생들이 아직 이러한 기호들을 모른다면, 그들은 그것에 대해 어려움을 겪을 수 있습니다.
+                error_code: |-
+                    나이 = ask '당신은 나이가 몇살이에요?'
+                    if 나이 < 12
+                        print '당신이 저보다 나이가 많네요!'
+                solution_text: '이것이 정확한 코드입니다:'
+                solution_code: |-
+                    나이 = ask '당신은 나이가 몇살이에요?'
+                    if 나이 > 12
+                        print '당신이 저보다 나이가 많네요!'
+        -   title: 학생들은 `!=` `<=` 그리고 `>=`를 잘못 표기한다
             example:
-                error_text: |
-                    These signs are probably new for most students. Make sure to explain these signs to your students.
-                error_code: |
-                    name = ask 'What is your name?'
-                    if name =< 'Hedy'
-                        print 'You are not Hedy'
-                solution_text: |
-                    This is the correct code:
-                solution_code: |
-                    name = ask 'What is your name?'
-                    if name != 'Hedy'
-                        print 'You are not Hedy'
-        -   title: "Students forget to use the == sign"
+                error_text: 이 기호들은 아마도 대부분의 학생들에게 새로운 기호일 것입니다. 반드시 이 기호들을 학생들에게 설명해주세요.
+                error_code: |-
+                    이름 = ask '너 이름이 뭐야?'
+                    if 이름 =< 'Hedy'
+                        print '너는 Hedy가 아니야'
+                solution_text: '이것이 정확한 코드입니다:'
+                solution_code: |-
+                    이름 = ask '너 이름이 뭐야?'
+                    if 이름 != 'Hedy'
+                        print '너는 Hedy가 아니야'
+        -   title: 학생들이 == 사인을 사용하는 것을 잊어버립니다
             example:
-                error_text: |
-                    In this level, students are still allowed to use = or is. But on other levels, or in python, they might get in trouble for that. So it is best to train them to use it.
-                error_code: |
-                    name = ask 'What is your name?'
-                    if name = 'Hedy'
-                        print 'You are cool!'
-                solution_text: |
-                    This is the correct code:
-                solution_code: |
-                    name = ask 'What is your name?'
-                    if name == 'Hedy'
-                        print 'You are cool!'
+                error_text: 이 레벨에서는 학생들이 =나 is를 사용할 수 있습니다. 하지만 다른 레벨 혹은 python에서 어려움에 처할지도 모릅니다. 그래서 미리 사용하도록 훈련시키는 것이 가장 좋습니다.
+                error_code: |-
+                    이름 = ask '너 이름이 뭐야?'
+                    if 이름 = 'Hedy'
+                        print '멋진데!'
+                solution_text: '이것이 정확한 코드입니다:'
+                solution_code: |-
+                    이름 = ask '너 이름이 뭐야?'
+                    if 이름 == 'Hedy'
+                        print '멋진데!'
     -   level: '15'
         sections:
-        -   title: "Students forget indentation in the while loop"
+        -   title: 학생들은 그 동안 들여쓰기를 잊어버립니다
             example:
-                error_text: |
-                    Indentation is often hard for students.
-                error_code: |
-                    answer = 0
-                    while answer != 25
-                    answer = ask 'What is 5 times 5?'
-                    print 'A correct answer has been given'
-                solution_text: |
-                    This is the correct code:
-                solution_code: |
-                    answer = 0
-                    while answer != 25
-                        answer = ask 'What is 5 times 5?'
-                    print 'A correct answer has been given'
+                error_text: 학생들은 보통 들여쓰기가 어렵다.
+                error_code: |-
+                    대답 = 0
+                    while 대답 != 25
+                    대답 = ask '5 곱하기 5 는 무엇이지?'
+                    print '정답은 '
+                solution_text: '이것이 정확한 코드입니다:'
+                solution_code: |-
+                    대답 = 0
+                    while 대답 != 25
+                        대답 = ask '5 곱하기 5 는 무엇이지?'
+                    print '정답은 '
     -   level: '16'
         sections:
-        -   title: "Students forget the brackets"
+        -   title: 학생들은 괄호를 잊어버린다
             example:
-                error_text: |
-                    From this level on lists should be in brackets.
-                error_code: |
-                    icecream = 'starwberry', 'chocolate'
-                    print 'I love ' icecream[random] ' icecream'
-                solution_text: |
-                    This is the correct code:
-                solution_code: |
-                    icecream = ['starwberry', 'chocolate']
-                    print 'I love ' icecream[random] ' icecream'
-        -   title: "Students use the wrong brackets"
+                error_text: 이 레벨부터 목록은 괄호 안에 있어야 한다.
+                error_code: |-
+                    아이스크림 = '딸기', '초콜렛'
+                    print '나는 좋아해 ' 아이스크림[random] ' 아이스크림'
+                solution_text: '이것이 정확한 코드입니다:'
+                solution_code: |-
+                    아이스크림 = ['딸기', '초콜렛']
+                    print '나는 좋아해 ' 아이스크림[random] ' 아이스크림'
+        -   title: 학생들은 잘못된 괄호를 사용한다
             example:
-                error_text: |
-                    From this level on lists should be in brackets.
-                error_code: |
-                    icecream = ('starwberry', 'chocolate'}
-                    print 'I love ' icecream[random] ' icecream'
-                solution_text: |
-                    This is the correct code:
-                solution_code: |
-                    icecream = ['starwberry', 'chocolate']
-                    print 'I love ' icecream[random] ' icecream'
-        -   title: "Students forget the quotation marks while focussing on the brackets"
+                error_text: 이 레벨부터 목록은 괄호 안에 있어야 한다.
+                error_code: |-
+                    아이스크림 = ('딸기', '초콜렛'}
+                    print '나는 좋아해 ' 아이스크림[random] ' 아이스크림'
+                solution_text: '이것이 정확한 코드입니다:'
+                solution_code: |-
+                    아이스크림 = ['딸기', '초콜렛']
+                    print '나는 좋아해 ' 아이스크림[random] ' 아이스크림'
+        -   title: 학생들은 괄호에 집중하면서 따옴표'를 잊어버린다
             example:
-                error_text: |
-                    Students are sometimes very focussed on the new aspect of the syntax, that they forget the quotation marks.
-                error_code: |
-                    icecream = [starwberry, chocolate]
-                    print 'I love ' icecream[random] ' icecream'
-                solution_text: |
-                    This is the correct code:
-                solution_code: |
-                    icecream = ['starwberry', 'chocolate']
-                    print 'I love ' icecream[random] ' icecream'
-        -   title: "Students still use the old at random command"
+                error_text: 학생들은 가끔 새로운 배운 구문에 집중하여 따옴표를 잊어버리기도 한다.
+                error_code: |-
+                    아이스크림 = [딸기, 초콜렛]
+                    print '나는 좋아해 ' 아이스크림[random] ' 아이스크림'
+                solution_text: '이것이 올바른 코드입니다:'
+                solution_code: |-
+                    아이스크림 = ['딸기', '초콜렛']
+                    print '나는 좋아해 ' 아이스크림[random] ' 아이스크림'
+        -   title: 학생들은 여전히 옛것을 임의의 명령으로 사용한다
             example:
-                error_text: |
-                    Students are sometimes very focussed on the new aspect of the syntax, that they forget the quotation marks.
-                error_code: |
-                    icecream = [starwberry, chocolate]
-                    print 'I love ' icecream at random ' icecream'
-                solution_text: |
-                    This is the correct code:
-                solution_code: |
-                    icecream = ['starwberry', 'chocolate']
-                    print 'I love ' icecream[random] ' icecream'
-        -   title: "Students forget the quotation marks while focussing on the brackets"
+                error_text: 학생들은 가끔 새로운 배운 구문에 집중하여 따옴표를 잊어버리기도 한다.
+                error_code: |-
+                    아이스크림 = [딸기, 초콜렛]
+                    print '나는 좋아해 ' 아이스크림 at 랜덤 ' 아이스크림'
+                solution_text: '이것이 정확한 코드입니다:'
+                solution_code: |-
+                    아이스크림 = ['딸기', '초콜렛']
+                    print '나는 좋아해 ' 아이스크림[random] ' 아이스크림'
+        -   title: 학생들은 괄호에 집중하면서 따옴표'를 잊어버린다
             example:
-                error_text: |
-                    Students are sometimes very focussed on the new aspect of the syntax, that they forget the quotation marks.
-                error_code: |
-                    icecream = [starwberry, chocolate]
-                    print 'I love ' icecream[random] ' icecream'
-                solution_text: |
-                    This is the correct code:
-                solution_code: |
-                    icecream = ['starwberry', 'chocolate']
-                    print 'I love ' icecream[random] ' icecream'
+                error_text: 학생들은 때로 문법의 새로운 면에 매우 집중하여 따옴표'를 잊어버리기도 한다.
+                error_code: |-
+                    아이스크림 = [딸기, 초콜렛]
+                    print '나는 좋아해 ' 아이스크림[random] ' 아이스크림'
+                solution_text: '이것이 정확한 코드입니다:'
+                solution_code: |-
+                    아이스크림 = ['딸기', '초콜렛']
+                    print '나는 ' 아이스크림[random] ' 아이스크림을 좋아해'
     -   level: '17'
         sections:
-        -   title: "Students use elif like else, so without a condition"
+        -   title: Students use `{elif}` like `{else}`, so without a condition
             example:
-                error_text: |
-                    The elif command needs a condition behind it. It cannot be used like else, without a condition.
-                error_code: |
-                    color = ask 'What is your favorite color?'
-                    if color == 'green':
-                        print 'green is nice'
-                    elif:
-                        print 'I like green'
-                solution_text: |
-                    This is the correct code:
-                solution_code: |
-                    color = ask 'What is your favorite color?'
-                    if color == 'green':
-                        print 'green is nice'
-                    elif color == yellow:
-                        print 'yellow is alright'
-                    else:
-                        print 'I like green'
-        -   title: "Students forget the colon"
+                error_text: '`{elif}` 명령어는 조건이 있어야 한다. 조건 없이는 `{else}`처럼 사용할 수 없다.'
+                error_code: |-
+                    색깔 = ask '너가 좋아하는 색깔은 무엇이니?'
+                    {if} 색깔 == '녹색':
+                        {print} '녹색은 멋있어'
+                    {elif}:
+                        {print} '나는 녹색을 좋아해'
+                solution_text: '이것이 정확한 코드입니다:'
+                solution_code: |-
+                    색깔 = {ask} '너가 좋아하는 색깔은 무엇이니?'
+                    {if} 색깔 == '녹색':
+                        {print} '녹색은 멋있어'
+                    {elif} 색깔 == 노랑:
+                        {print} '노랑 좋아'
+                    {else}:
+                        {print} '나는 녹색을 좋아해'
+        -   title: 학생들은 대장을 잊어버린다
             example:
-                error_text: |
-                    After each command that requires indentation, a colon should be used.
-                error_code: |
-                    answer = ask 'How are you doing?'
-                    if answer is 'great'
-                        print 'Me too!'
-                    elif answer is 'bad'
-                        print 'Let me cheer you up!'
-                    else
-                        print 'Im great!'
-                solution_text: |
-                    This is the correct code:
-                solution_code: |
-                    answer = ask 'How are you doing?'
-                    if answer is 'great':
-                        print 'Me too!'
-                    elif answer is 'bad':
-                        print 'Let me cheer you up!'
+                error_text: 들여쓰기가 필요한 각 명령 뒤에는 콜론:을 사용해야 합니다.
+                error_code: |-
+                    대답 = ask '잘 지내니?'
+                    {if} 대답 {is} '좋아'
+                        {print} '나도!'
+                    {elif} 대답 {is} '안좋아'
+                        {print} '힘내!'
+                    {else}
+                        {print} '나는 좋아!'
+                solution_text: '이것이 정확한 코드입니다:'
+                solution_code: |-
+                    대답 = ask '잘 지내니?'
+                    if 대답 is '좋아':
+                        print '나도!'
+                    elif 대답 is '안좋아':
+                        print '힘내!'
                     else:
-                        print 'Im great!'
+                        print '나는 좋아!'
     -   level: '18'
         sections:
-        -   title: "Students forget to use the brackets"
+        -   title: 학생들은 괄호를 사용하는 것을 잊는다
             example:
-                error_text: |
-                    Students will forget to put brackets around their text.
-                error_code: |
-                    print 'my name is Hedy!'
-                solution_text: |
-                    This is the correct code:
-                solution_code: |
-                    print('my name is Hedy!')
-        -   title: "Students will still use the ask command"
+                error_text: 학생들은 그들의 텍스트에서 괄호를 사용하는 것을 잊게 될 수 있다.
+                error_code: print '나의 이름은 Hedy야!'
+                solution_text: '이것이 정확한 코드입니다:'
+                solution_code: print('나의 이름은 Hedy이다!')
+        -   title: 학생들은 여전히 ask 명령어을 사용합니다
             example:
-                error_text: |
-                    The ask command has been used since level 1. So it might be hard for the students to switch to input instead of ask.
-                error_code: |
-                    print('My name is Hedy!')
-                    name = ask('What is your name?')
-                    print('So your name is ', name)
-                solution_text: |
-                    This is the correct code:
-                solution_code: |
-                    print('My name is Hedy!')
-                    name = input('What is your name?')
-                    print('So your name is ', name)
-        -   title: "Students might use the brackets as quotation marks"
+                error_text: ask 명령어는 레벨 1 부터 사용되어왔기 때문에 학생들이 ask 대신 입력으로 전환하기가 어려울 수 있습니다.
+                error_code: |-
+                    print('나의 이름은 Hedy이다!')
+                    이름 = ask('너 이름이 뭐야?')
+                    print('그래서 나의 이름은 ', 이름)
+                solution_text: '이것이 정확한 코드입니다:'
+                solution_code: |-
+                    print('나의 이름은 Hedy이다!')
+                    이름 = input('너 이름이 뭐야?')
+                    print('그래서 나의 이름은 ', 이름)
+        -   title: 학생들은 괄호를 따옴표'로 사용할 수 있다
             example:
-                error_text: |
-                    They have learned to keep the variables outside of the quotation marks, so they might do the same with the brackets. Which is not the correct way to use them.
-                error_code: |
-                    temperature = 25
-                    print('It is ') temperature ('degrees outside')
-                solution_text: |
-                    This is the correct code:
-                solution_code: |
-                    temperature = 25
-                    print('It is ', temperature, 'degrees outside')
-start-sections:
--   title: "Textual programming made easy!"
-    text: |
-        Many schools and teachers around the world want to teach their students programming. Initially this is often done with playful tools, ranging from the Beebot robot to
-        Scratch Junior or Scratch. After using such tools, kids often want to move to more powerful, textual programming languages, like Python.
-
-        Python however is hard, because it is only available in English, and requires learners to learn complex programming concepts and syntax at once.
-        Hedy is the easy way to get started with textual programming languages! Hedy is free to use, open source, and unlike any other textual programming language in three ways.
-
-        1. Hedy is multi-lingual, you can use Hedy in your own language
-        2. Hedy is gradual, so you can learn one concept and its syntax a time
-        3. Hedy is built for the classroom, allowing teachers to fully customize their student's experience
--   title: "Multi-lingual programming"
-    text: |
-        While almost all textual programming language have keywords in English, such as `for` or `repeat`, Hedy can be used in any language! We currently support 39 different languages, including Spanish, Arabic, Simplified Chinese and Hindi. If your language is not available you can always start a a new translation.
--   title: "Step by step learning"
-    text: |
-        Learning a programming language can be overwhelming, since learners have to learn concepts (for example if-else or loops) and syntax (like quotation marks or round brackets) at the same time. In Hedy, concepts are first introduced with little syntax and then refined. A scientifically proven way to learn!
--   title: "Built for the classroom"
-    text: |
-        Hedy is suitable for kids aged 10 and up and designed for classroom use.
-        Teachers can use our free, built-in lesson plans, but can also author their own lessons and load these into the Hedy user interface.
--   title: "Programming in context"
-    text: |
-        Hedy shows programming in the broadest way possible, and can be used in variety of exciting ways. Hedy allows for the creation of digital and interactive stories, colorful drawings that can be shown on the screen but also drawn with a pen plotter or embroidered on a shirt, and can be used to create games or apps with buttons and keyboard actions.
--   title: "Is Hedy free?"
-    text: |
-        Yes! Hedy is 'Open source', which means that everyone can help us make Hedy better.
-        You can find our code on [GitHub](https://github.com/hedyorg/hedy).
-        If you like Hedy and want to contribute, we accept (and are very grateful for) [donations](https://github.com/sponsors/hedyorg)!
-
--   title: "Do I need to install anything?"
-    text: |-
-        No. Hedy works in the browser, which is the program you are using to look at this page. Probably Chrome or Edge or Firefox. Hedy also works on phones and tablets.
--   title: "Do I need programming experience to teach with Hedy?"
-    text: |-
-        No, that is not needed. All concepts are explained in the slides and in the interface for learners.
-        If you create a free teacher's account, you also get access to the teacher's manual with information on how to teach
-        and frequently made mistakes.
-
-learn-more-sections:
--   title: Do you like Hedy?
-    text: "We love to hear from you!\n\n[Click here to send us a message](mailto:hello@hedy.org \"About Hedy\")\n"
--   title: Found a bug?
-    text: "[Let us know on GitHub](https://github.com/hedyorg/hedy/issues/new/choose)\n"
--   title: Want to help?
-    text: "The easiest way is to help with [translating Hedy](https://github.com/hedyorg/hedy/blob/main/TRANSLATING.md)\n\nBelow the current status, help us complete a language, or add a new one.\n<a href=\"https://hosted.weblate.org/engage/hedy/\">\n<img src=\"https://hosted.weblate.org/widgets/hedy/-/multi-auto.svg\" alt=\"Translation status\" /></a>\n"
-join-sections:
--   text: "# There are three ways in which you can support Hedy!\n"
-    title: Supporting Hedy
--   title: Improving the language
-    text: "The gradual and multi-lingual nature of Hedy create a lot of interesting technical challenges.\nFind those issues on [Github](https://github.com/hedyorg/hedy/issues?q=is%3Aopen+is%3Aissue+label%3Alanguage).\n"
--   title: Translating Hedy
-    text: "Not a programmer? No problem! Another way to support Hedy is by [translating keywords, error messages, adventures are other content](https://github.com/hedyorg/hedy/blob/main/TRANSLATING.md)\n\nThis is the current status, help us complete a language, or add a new one!\n<a href=\"https://hosted.weblate.org/engage/hedy/\">\n<img src=\"https://hosted.weblate.org/widgets/hedy/-/multi-auto.svg\" alt=\"Translation status\" /></a>\n"
--   title: Help teachers get started
-    text: "Hedy is designed to support teachers in providing programming lessons in class. We have specific teacher features like the option to create a class, customize it and see how your students are doing.\nIf you like Hedy, you can reach out to schools that you know to help teachers get started! We can help you find schools or teachers via [Discord](https://discord.gg/8yY7dEme9r).\n"
+                error_text: 그들은 변수를 따옴표'를 밖에 두는 법을 배웠기 때문에 괄호 안에서도 같은 일을 할 수 있다. 이것은 그 변수들을 사용하는 올바른 방법이 아니다.
+                error_code: |-
+                    온도 = 25
+                    print('지금 바깥은 ') 온도 ('도 이다')
+                solution_text: '이것이 정확한 코드입니다:'
+                solution_code: |-
+                    온도 = 25
+                    print('지금 바깥은 ', 온도, '도 이다')

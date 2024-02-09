@@ -3,7 +3,6 @@ import { initializeApp, initializeCodePage, InitializeCodePageOptions, initializ
 import { initializeFormSubmits } from './auth';
 import { setClientMessageLanguage } from './client-messages';
 import { logs } from './logs';
-import { InitializeAdminStatsOptions, InitializeClassStatsPageOptions, stats } from './statistics';
 import { initializeClassOverviewPage, InitializeClassOverviewPageOptions, initializeCustomizeClassPage, InitializeCustomizeClassPageOptions, initializeTeacherPage, InitializeTeacherPageOptions } from './teachers';
 import { initializeTutorial } from './tutorials/tutorial';
 
@@ -39,6 +38,11 @@ export interface InitializeOptions {
 
   readonly logs?: boolean;
 
+  /**
+   * The URL root where static content is hosted
+   */
+  readonly staticRoot?: string;
+
   readonly javascriptPageOptions?: InitializePageOptions;
 }
 
@@ -48,9 +52,7 @@ type InitializePageOptions =
   | InitializeTeacherPageOptions
   | InitializeViewProgramPageOptions
   | InitializeClassOverviewPageOptions
-  | InitializeAdminStatsOptions
   | InitializeAdminUsersPageOptions
-  | InitializeClassStatsPageOptions
   ;
 
 
@@ -63,6 +65,7 @@ export function initialize(options: InitializeOptions) {
   initializeApp({
     level: options.level,
     keywordLanguage: options.keyword_language,
+    staticRoot: options.staticRoot,
   });
   initializeFormSubmits();
   initializeTutorial();
@@ -87,14 +90,6 @@ export function initialize(options: InitializeOptions) {
 
     case 'view-program':
       initializeViewProgramPage(options.javascriptPageOptions);
-      break;
-
-    case 'admin-stats':
-      stats.initializeAdminStats();
-      break;
-
-    case 'class-stats':
-      stats.initializeClassStats();
       break;
 
     case 'admin-users':

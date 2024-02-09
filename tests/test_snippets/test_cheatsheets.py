@@ -77,7 +77,9 @@ class TestsCheatsheetPrograms(HedyTester):
                     code=snippet.code,
                     level=int(snippet.level),
                     lang=snippet.language,
-                    translate=False
+                    unused_allowed=True,
+                    translate=False,
+                    skip_faulty=False
                 )
 
             except hedy.exceptions.CodePlaceholdersPresentException:  # Code with blanks is allowed

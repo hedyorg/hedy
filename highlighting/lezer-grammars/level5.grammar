@@ -1,0 +1,100 @@
+@top Program { eol* (Command eol+)* Command? }
+Command {
+    Assign | AssignList | Ask | Clear |Print | Play | Turtle | Sleep | Add | Remove| If | Else | ErrorInvalid
+}
+
+IfLessCommand {
+    Assign | AssignList | Ask | Clear |Print | Play | Turtle | Sleep | Add | Remove | ErrorInvalid
+}
+
+@local tokens {    
+    singleQuoteStringEnd { "'" | "\n" }
+    @else singleQuoteStringContent
+  }
+  
+  @skip {} {
+    singleQuotedString { "'" (singleQuoteStringContent)* singleQuoteStringEnd }
+}
+
+@local tokens {    
+    doubleQuoteStringEnd { '"' | "\n" }
+    @else doubleQuoteStringContent
+  }
+  
+  @skip {} {
+    doubleQuotedString { '"' (doubleQuoteStringContent)* doubleQuoteStringEnd }
+}
+
+String { doubleQuotedString | singleQuotedString }
+
+Print { print+ ( String | Text | ListAccess )+ }
+Ask { Text is+ ask+ ( String | Text | ListAccess )+ }
+
+
+AssignList { Text is+ Text+ (Comma Text+)+ }
+Assign { Text is+ (Text+ | ListAccess) }
+Sleep { sleep+ (Text | ListAccess)? }
+ListAccess { Text at+ (random+ | Text) }
+Add { add+ Text toList+ Text }
+Remove { remove+ Text from+ Text }
+Clear { clear+ }
+Play { play+ Text+ }
+
+Turtle[@isGroup=turtle] {
+    Forward { forward+ (Text | ListAccess ) } |
+    Turn { turn+ (Text | ListAccess ) } |
+    Color { color+ (Text | ListAccess)  }
+}
+
+If { ifs+ Condition eol* IfLessCommand Else? }
+Else { !else elses+ eol* IfLessCommand }
+
+Condition { 
+    EqualityCheck { Text is+ (String | Text | pressed+) } |
+    InListCheck { Text ins+  Text } |
+    NotInListCheck { Text not_in+  Text }
+}
+
+ErrorInvalid[@dynamicPrecedence=-10] { Text+ }
+
+@precedence {
+    else,
+
+    command @cut
+}
+
+@external specialize { Text } specializeKeyword from "./tokens" {
+    ask[@name="ask"],
+    at[@name="at"],
+    random[@name="random"],
+    ifs[@name="if"],
+    elses[@name="else"],
+    pressed[@name="pressed"]
+}
+
+@external extend { Text } extendKeyword from "./tokens" {
+    print[@name="print"],
+    forward[@name="forward"],
+    turn[@name="turn"],
+    color[@name="color"],
+    sleep[@name="sleep"],
+    play[@name="play"],
+    is[@name="is"],
+    add[@name="add"],
+    from[@name="from"],
+    remove[@name="remove"],
+    toList[@name="toList"],
+    clear[@name="clear"],    
+    ins[@name="in"],
+    not_in[@name="not_in"]
+}
+
+@tokens {
+    Comment { "#" ![\n]* }
+    eol { "\n" }
+    Comma { $[,،，、] } // every language comma is valid here
+    Text { ![^\n,،，、 '"#]+ } // a little bit of a hack not to parse commas never, but lezer adds them as error nodes, so it still
+    space { " " }
+}
+
+@skip { Comment | space }
