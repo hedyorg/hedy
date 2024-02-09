@@ -85,4 +85,3 @@ class TestsSlidesPrograms(HedyTester):
                 return None  # programs with ask cannot be tested with output :(
             except exceptions.HedyException as E:
                 self.output_test_error(E, snippet)
-
