@@ -479,6 +479,7 @@ class HedyTester(unittest.TestCase):
         return snippets
 
     def output_test_error(self, E, snippet):
+        arrow = True # set to False if you want to remove the <---- in the output f.e. for easy copy-pasting
         try:
             location = E.error_location
         except BaseException:
@@ -491,7 +492,7 @@ class HedyTester(unittest.TestCase):
                 error_message = error_message.replace('<span class="command-highlighted">', '`')
                 error_message = error_message.replace('</span>', '`')
                 lines = snippet.code.split('\n')
-                lines_with_numbers = [lines[i] if i!=location[0] else lines[i] + " <-------" for i in range(len(lines)) ]
+                lines_with_numbers = [lines[i] + " <-------" if i+1 == location[0] and arrow else lines[i] for i in range(len(lines)) ]
                 code_with_numbers = '\n'.join(lines_with_numbers)
 
                 print(f'\n----\n{code_with_numbers}')
