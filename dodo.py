@@ -56,6 +56,12 @@ if os.getenv('GITHUB_ACTION') and platform.system() == 'Windows':
     except Exception as e:
         print(e)
 
+    # We need to explicitly invoke bash from this directory, otherwise
+    # it will pick up a bash that requires WSL to run, which is not installed.
+    bash = 'C:\\Program Files\\Git\\bin\\bash.exe'
+else:
+    bash = 'bash'
+
 # The current Python interpreter, use to run other Python scripts as well
 python3 = sys.executable
 
@@ -127,7 +133,7 @@ def task_tailwind():
         task_dep=['npm'],
         title=lambda _: 'Generate Tailwind CSS',
         actions=[
-            ['bash', script],
+            [bash, script],
         ],
         targets=[target],
 
@@ -266,7 +272,7 @@ def task_prefixes():
             *glob('prefixes/*.py'),
         ],
         actions=[
-            ['bash', script],
+            [bash, script],
         ],
         targets=[
             'static/js/pythonPrefixes.ts'
@@ -292,7 +298,7 @@ def task_lezer_parsers():
         ],
         task_dep=['npm'],
         actions=[
-            ['bash', script],
+            [bash, script],
         ],
         targets=lezer_files,
     )
