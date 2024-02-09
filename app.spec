@@ -25,7 +25,6 @@ data_files = [
 
     # Folders
     ('content', 'content'),
-    ('coursedata', 'coursedata'),
     ('grammars', 'grammars'),
     ('grammars-Total', 'grammars-Total'),
     ('prefixes', 'prefixes'),
