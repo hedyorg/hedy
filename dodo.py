@@ -36,22 +36,22 @@ if os.getenv('GITHUB_ACTION') and platform.system() == 'Windows':
     os.environ['PATH'] = msys_dir + ';' + os.environ['PATH']
     import subprocess
     try:
-        subprocess.check_call(f'dir {msys_dir}')
-    except Exception as e:
-        print(e)
-    try:
+        print('C:\\Program Files\\Git\\bin\\bash.exe')
         subprocess.check_call(['C:\\Program Files\\Git\\bin\\bash.exe', '--version'])
     except Exception as e:
         print(e)
     try:
+        print('msys2bash.cmd')
         subprocess.check_call(['msys2bash.cmd', '--version'])
     except Exception as e:
         print(e)
     try:
+        print('gitbash.exe')
         subprocess.check_call(['gitbash.exe', '--version'])
     except Exception as e:
         print(e)
     try:
+        print('bash')
         subprocess.check_call(f'bash --version')
     except Exception as e:
         print(e)
