@@ -5441,7 +5441,7 @@ var hedyApp = (() => {
             unicode: true
           },
           {
-            regex: "(^| )(not_in)(?![\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}_\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\xB7])",
+            regex: "(^| )(__not_in__)(?![\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}_\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\xB7])",
             token: [
               "text",
               "keyword"
@@ -5904,7 +5904,7 @@ var hedyApp = (() => {
             unicode: true
           },
           {
-            regex: "(^| )(not_in)(?![\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}_\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\xB7])",
+            regex: "(^| )(__not_in__)(?![\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}_\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\xB7])",
             token: [
               "text",
               "keyword"
@@ -6407,7 +6407,7 @@ var hedyApp = (() => {
             unicode: true
           },
           {
-            regex: "(^| )(not_in)(?![\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}_\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\xB7])",
+            regex: "(^| )(__not_in__)(?![\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}_\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\xB7])",
             token: [
               "text",
               "keyword"
@@ -6948,7 +6948,7 @@ var hedyApp = (() => {
             unicode: true
           },
           {
-            regex: "(^| )(not_in)(?![\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}_\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\xB7])",
+            regex: "(^| )(__not_in__)(?![\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}_\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\xB7])",
             token: [
               "text",
               "keyword"
@@ -7489,7 +7489,7 @@ var hedyApp = (() => {
             unicode: true
           },
           {
-            regex: "(^| )(not_in)(?![\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}_\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\xB7])",
+            regex: "(^| )(__not_in__)(?![\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}_\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\xB7])",
             token: [
               "text",
               "keyword"
@@ -8030,7 +8030,7 @@ var hedyApp = (() => {
             unicode: true
           },
           {
-            regex: "(^| )(not_in)(?![\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}_\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\xB7])",
+            regex: "(^| )(__not_in__)(?![\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}_\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\xB7])",
             token: [
               "text",
               "keyword"
@@ -8580,7 +8580,7 @@ var hedyApp = (() => {
             unicode: true
           },
           {
-            regex: "(^| )(not_in)(?![\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}_\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\xB7])",
+            regex: "(^| )(__not_in__)(?![\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}_\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\xB7])",
             token: [
               "text",
               "keyword"
@@ -9148,7 +9148,7 @@ var hedyApp = (() => {
             unicode: true
           },
           {
-            regex: "(^| )(not_in)(?![\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}_\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\xB7])",
+            regex: "(^| )(__not_in__)(?![\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}_\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\xB7])",
             token: [
               "text",
               "keyword"
@@ -9752,7 +9752,7 @@ var hedyApp = (() => {
             unicode: true
           },
           {
-            regex: "(^| )(not_in)(?![\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}_\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\xB7])",
+            regex: "(^| )(__not_in__)(?![\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}_\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\xB7])",
             token: [
               "text",
               "keyword"
@@ -10391,7 +10391,7 @@ var hedyApp = (() => {
             unicode: true
           },
           {
-            regex: "(^| )(not_in)(?![\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}_\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\xB7])",
+            regex: "(^| )(__not_in__)(?![\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}_\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\xB7])",
             token: [
               "text",
               "keyword"
@@ -11064,7 +11064,7 @@ var hedyApp = (() => {
             unicode: true
           },
           {
-            regex: "(^| )(not_in)(?![\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}_\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\xB7])",
+            regex: "(^| )(__not_in__)(?![\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}_\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\xB7])",
             token: [
               "text",
               "keyword"
@@ -11754,7 +11754,7 @@ var hedyApp = (() => {
             unicode: true
           },
           {
-            regex: "(^| )(not_in)(?![\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}_\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\xB7])",
+            regex: "(^| )(__not_in__)(?![\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}_\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\xB7])",
             token: [
               "text",
               "keyword"
@@ -12469,7 +12469,7 @@ var hedyApp = (() => {
             unicode: true
           },
           {
-            regex: "(^| )(not_in)(?![\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}_\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\xB7])",
+            regex: "(^| )(__not_in__)(?![\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}_\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\xB7])",
             token: [
               "text",
               "keyword"
@@ -13218,7 +13218,7 @@ var hedyApp = (() => {
             unicode: true
           },
           {
-            regex: "(^| )(not_in)(?![\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}_\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\xB7])",
+            regex: "(^| )(__not_in__)(?![\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}_\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\xB7])",
             token: [
               "text",
               "keyword"
@@ -13668,6 +13668,7 @@ var hedyApp = (() => {
     is: "\u0640*\u0647\u0640*\u0648\u0640*|\u0640*\u0647\u0640*\u064A\u0640*|is",
     left: "\u0640*\u064A\u0640*\u0633\u0640*\u0627\u0640*\u0631\u0640*|left",
     length: "\u0640*\u0637\u0640*\u0648\u0640*\u0644\u0640*|length",
+    not_in: "\u0640*n\u0640*o\u0640*t\u0640* \u0640*i\u0640*n\u0640*|not in",
     or: "\u0640*\u0623\u0640*\u0648\u0640*|or",
     orange: "\u0640*\u0628\u0640*\u0631\u0640*\u062A\u0640*\u0642\u0640*\u0627\u0640*\u0644\u0640*\u064A\u0640*|orange",
     pink: "\u0640*\u0632\u0640*\u0647\u0640*\u0631\u0640*\u064A\u0640*|pink",
@@ -13722,6 +13723,7 @@ var hedyApp = (() => {
     is: "\u0435|is",
     left: "\u043B\u044F\u0432\u043E|left",
     length: "\u0434\u044A\u043B\u0436\u0438\u043D\u0430|length",
+    not_in: "\u043D\u0435 \u0432/\u0432\u044A\u0432|not in",
     or: "\u0438\u043B\u0438|or",
     orange: "\u043E\u0440\u0430\u043D\u0436\u0435\u0432\u043E|orange",
     pink: "\u0440\u043E\u0437\u043E\u0432\u043E|pink",
@@ -13776,6 +13778,7 @@ var hedyApp = (() => {
     is: "is",
     left: "left",
     length: "length",
+    not_in: "not in",
     or: "or",
     orange: "orange",
     pink: "pink",
@@ -13830,6 +13833,7 @@ var hedyApp = (() => {
     is: "\xE9s|is",
     left: "esquerra|left",
     length: "mida|length",
+    not_in: "no dins|not in",
     or: "o|or",
     orange: "taronja|orange",
     pink: "rosa|pink",
@@ -13884,6 +13888,7 @@ var hedyApp = (() => {
     is: "is",
     left: "left",
     length: "length",
+    not_in: "not in",
     or: "or",
     orange: "orange",
     pink: "pink",
@@ -13938,6 +13943,7 @@ var hedyApp = (() => {
     is: "yw|is",
     left: "chwith|left",
     length: "hyd|length",
+    not_in: "dim mewn|not in",
     or: "neu|or",
     orange: "oren|orange",
     pink: "pinc|pink",
@@ -13992,6 +13998,7 @@ var hedyApp = (() => {
     is: "is",
     left: "left",
     length: "length",
+    not_in: "not in",
     or: "or",
     orange: "orange",
     pink: "lyser\xF8d|pink",
@@ -14046,6 +14053,7 @@ var hedyApp = (() => {
     is: "ist|is",
     left: "links|left",
     length: "l\xE4nge|length",
+    not_in: "nicht in|not in",
     or: "oder|or",
     orange: "Orange|orange",
     pink: "Pink|pink",
@@ -14100,6 +14108,7 @@ var hedyApp = (() => {
     is: "is",
     left: "left",
     length: "length",
+    not_in: "not in",
     or: "or",
     orange: "orange",
     pink: "pink",
@@ -14154,6 +14163,7 @@ var hedyApp = (() => {
     is: "is",
     left: "left",
     length: "length",
+    not_in: "not in",
     or: "or",
     orange: "orange",
     pink: "pink",
@@ -14184,7 +14194,7 @@ var hedyApp = (() => {
     add: "aldonu|add",
     and: "kaj|and",
     ask: "demandu|ask",
-    at: "la\u016D|at",
+    at: "la\u016D|lau|laux|at",
     black: "nigra|black",
     blue: "blua|blue",
     brown: "bruna|brown",
@@ -14194,11 +14204,11 @@ var hedyApp = (() => {
     comma: ",",
     def: "def",
     define: "define",
-    echo: "e\u0125u|echo",
+    echo: "e\u0125u|ehhu|ehxu|e^hu|eh^u|echo",
     elif: "alie se|elif",
     else: "alie|else",
     for: "por|for",
-    forward: "anta\u016Den|forward",
+    forward: "anta\u016Den|antauen|antauxen|forward",
     from: "el|from",
     gray: "griza|gray",
     green: "verda|green",
@@ -14208,8 +14218,9 @@ var hedyApp = (() => {
     is: "estas|is",
     left: "maldekstren|left",
     length: "longo|length",
-    or: "a\u016D|or",
-    orange: "oran\u011Da|orange",
+    not_in: "not in",
+    or: "a\u016D|au|aux|or",
+    orange: "oran\u011Da|orangha|orangxa|oran^ga|orang^a|orange",
     pink: "rozkolora|pink",
     play: "play",
     pressed: "pressed",
@@ -14217,15 +14228,15 @@ var hedyApp = (() => {
     purple: "purpura|purple",
     random: "hazardo|random",
     range: "intervalo|range",
-    red: "ru\u011Da|red",
+    red: "ru\u011Da|rugha|rugxa|ru^ga|rug^a|red",
     remove: "forigu|remove",
     repeat: "ripetu|repeat",
     return: "return",
     right: "dekstren|right",
     sleep: "dormu|sleep",
-    step: "pa\u015Do|step",
+    step: "pa\u015Do|pasho|pasxo|pa^so|pas^o|step",
     times: "fojojn|times",
-    to: "\u011Dis|to",
+    to: "\u011Dis|ghis|gxis|^gis|g^is|to",
     to_list: "al|to",
     turn: "turnu|turn",
     while: "dum|while",
@@ -14262,6 +14273,7 @@ var hedyApp = (() => {
     is: "es|is",
     left: "izquierda|left",
     length: "longitud|length",
+    not_in: "no en|not in",
     or: "o|or",
     orange: "naranja|orange",
     pink: "rosa|pink",
@@ -14316,6 +14328,7 @@ var hedyApp = (() => {
     is: "on|is",
     left: "vasakule|left",
     length: "pikkus|length",
+    not_in: "not in",
     or: "v\xF5i|or",
     orange: "oran\u017E|orange",
     pink: "roosa|pink",
@@ -14370,6 +14383,7 @@ var hedyApp = (() => {
     is: "is",
     left: "\u0686\u067E|left",
     length: "length",
+    not_in: "not in",
     or: "or",
     orange: "\u0646\u0627\u0631\u0646\u062C\u06CC|orange",
     pink: "\u0635\u0648\u0631\u062A\u06CC|pink",
@@ -14424,6 +14438,7 @@ var hedyApp = (() => {
     is: "on|is",
     left: "vasen|left",
     length: "pituus|length",
+    not_in: "ei kohteessa|not in",
     or: "tai|or",
     orange: "oranssi|orange",
     pink: "vaaleanpunainen|pink",
@@ -14478,6 +14493,7 @@ var hedyApp = (() => {
     is: "est|is",
     left: "gauche|left",
     length: "longueur|length",
+    not_in: "pas dans|not in",
     or: "ou|or",
     orange: "orange",
     pink: "rose|pink",
@@ -14532,6 +14548,7 @@ var hedyApp = (() => {
     is: "is",
     left: "left",
     length: "length",
+    not_in: "not in",
     or: "or",
     orange: "orange",
     pink: "pink",
@@ -14586,6 +14603,7 @@ var hedyApp = (() => {
     is: "\u05D4\u05D5\u05D0|is",
     left: "\u05E9\u05DE\u05D0\u05DC\u05D4|left",
     length: "\u05D0\u05D5\u05E8\u05DA|length",
+    not_in: "not in",
     or: "\u05D0\u05D5|or",
     orange: "\u05DB\u05EA\u05D5\u05DD|orange",
     pink: "\u05D5\u05E8\u05D5\u05D3|pink",
@@ -14640,6 +14658,7 @@ var hedyApp = (() => {
     is: "\u0939\u0948|is",
     left: "left",
     length: "\u0932\u0902\u092C\u093E\u0908|length",
+    not_in: "not in",
     or: "\u092F\u093E|or",
     orange: "orange",
     pink: "pink",
@@ -14694,6 +14713,7 @@ var hedyApp = (() => {
     is: "egyenl\u0151|is",
     left: "balra|left",
     length: "hossz|length",
+    not_in: "nem eleme|not in",
     or: "vagy|or",
     orange: "narancs|orange",
     pink: "pink",
@@ -14748,6 +14768,7 @@ var hedyApp = (() => {
     is: "adalah|is",
     left: "kiri|left",
     length: "panjang|length",
+    not_in: "not in",
     or: "atau|or",
     orange: "orange",
     pink: "pink",
@@ -14802,6 +14823,7 @@ var hedyApp = (() => {
     is: "is",
     left: "sinistra|left",
     length: "lunghezza|length",
+    not_in: "non quello|not in",
     or: "or",
     orange: "arancione|orange",
     pink: "rosa|pink",
@@ -14856,6 +14878,7 @@ var hedyApp = (() => {
     is: "is",
     left: "\u3072\u3060\u308A|left",
     length: "length",
+    not_in: "not in",
     or: "or",
     orange: "\u304A\u308C\u3093\u3058|orange",
     pink: "\u3074\u3093\u304F|pink",
@@ -14910,6 +14933,7 @@ var hedyApp = (() => {
     is: "is",
     left: "left",
     length: "length",
+    not_in: "not in",
     or: "or",
     orange: "orange",
     pink: "pink",
@@ -14964,6 +14988,7 @@ var hedyApp = (() => {
     is: "is",
     left: "left",
     length: "length",
+    not_in: "not in",
     or: "or",
     orange: "orange",
     pink: "pink",
@@ -15018,6 +15043,7 @@ var hedyApp = (() => {
     is: "is",
     left: "left",
     length: "length",
+    not_in: "not in",
     or: "or",
     orange: "orange",
     pink: "pink",
@@ -15072,6 +15098,7 @@ var hedyApp = (() => {
     is: "er|is",
     left: "venstre|left",
     length: "lengde|length",
+    not_in: "not in",
     or: "eller|or",
     orange: "orange",
     pink: "pink",
@@ -15126,6 +15153,7 @@ var hedyApp = (() => {
     is: "is",
     left: "links|left",
     length: "lengte|length",
+    not_in: "niet in|not in",
     or: "of|or",
     orange: "oranje|orange",
     pink: "roze|pink",
@@ -15180,6 +15208,7 @@ var hedyApp = (() => {
     is: "\u0633\u0645\u0627\u0646|is",
     left: "\u06A9\u06BE\u0628\u06D2|left",
     length: "\u0644\u0645\u0628\u0627\u0626\u06CC|length",
+    not_in: "not in",
     or: "\u06CC\u0627|or",
     orange: "\u0633\u0646\u062A\u0631\u0627|orange",
     pink: "\u06AF\u0644\u0627\u0628\u06CC|pink",
@@ -15234,6 +15263,7 @@ var hedyApp = (() => {
     is: "is",
     left: "left",
     length: "length",
+    not_in: "not in",
     or: "or",
     orange: "orange",
     pink: "pink",
@@ -15288,6 +15318,7 @@ var hedyApp = (() => {
     is: "to|is",
     left: "lewo|left",
     length: "d\u0142ugo\u015B\u0107|length",
+    not_in: "nie w|not in",
     or: "lub|or",
     orange: "pomara\u0144czowy|orange",
     pink: "r\xF3\u017Cowy|pink",
@@ -15322,12 +15353,12 @@ var hedyApp = (() => {
     black: "preto|black",
     blue: "azul|blue",
     brown: "marrom|brown",
-    call: "call",
-    clear: "limpar|clear",
+    call: "chame|call",
+    clear: "limpe|clear",
     color: "cor|color",
     comma: ",",
     def: "def",
-    define: "define",
+    define: "defina|define",
     echo: "eco|echo",
     elif: "sen\xE3ose|elif",
     else: "sen\xE3o|else",
@@ -15342,6 +15373,7 @@ var hedyApp = (() => {
     is: "\xE9|is",
     left: "esquerda|left",
     length: "comprimento|length",
+    not_in: "n\xE3o em|not in",
     or: "ou|or",
     orange: "laranja|orange",
     pink: "rosa|pink",
@@ -15354,17 +15386,17 @@ var hedyApp = (() => {
     red: "vermelho|red",
     remove: "remova|remove",
     repeat: "repita|repeat",
-    return: "return",
+    return: "retorne|return",
     right: "direita|right",
     sleep: "durma|sleep",
     step: "passo|step",
     times: "vezes|times",
     to: "para|to",
-    to_list: "at\xE9|to",
+    to_list: "a|to",
     turn: "gire|turn",
     while: "enquanto|while",
     white: "branco|white",
-    with: "with",
+    with: "com|with",
     yellow: "amarelo|yellow",
     DIGIT: "0123456789"
   };
@@ -15396,6 +15428,7 @@ var hedyApp = (() => {
     is: "is",
     left: "esquerda|left",
     length: "comprimento|length",
+    not_in: "not in",
     or: "or",
     orange: "cor de laranja|orange",
     pink: "cor de rosa|pink",
@@ -15450,6 +15483,7 @@ var hedyApp = (() => {
     is: "is",
     left: "st\xE2nga|left",
     length: "lungime|length",
+    not_in: "nu \xEEn|not in",
     or: "sau|or",
     orange: "portocaliu|orange",
     pink: "roz|pink",
@@ -15504,6 +15538,7 @@ var hedyApp = (() => {
     is: "\u044D\u0442\u043E|is",
     left: "\u043D\u0430\u043B\u0435\u0432\u043E|left",
     length: "\u0434\u043B\u0438\u043D\u0430|length",
+    not_in: "\u043D\u0435 \u0432|not in",
     or: "\u0438\u043B\u0438|or",
     orange: "\u043E\u0440\u0430\u043D\u0436\u0435\u0432\u044B\u0439|orange",
     pink: "\u0440\u043E\u0437\u043E\u0432\u044B\u0439|pink",
@@ -15558,6 +15593,7 @@ var hedyApp = (() => {
     is: "\xEBsht\xEB|is",
     left: "majtas|left",
     length: "gjat\xEBsia|length",
+    not_in: "jo n\xEB|not in",
     or: "ose|or",
     orange: "portokalli|orange",
     pink: "roz\xEB|pink",
@@ -15612,6 +15648,7 @@ var hedyApp = (() => {
     is: "je|is",
     left: "levo|left",
     length: "du\u017Eina|length",
+    not_in: "ne/nije u|not in",
     or: "ili|or",
     orange: "narand\u017Easta|orange",
     pink: "roze|pink",
@@ -15666,6 +15703,7 @@ var hedyApp = (() => {
     is: "\xE4r|is",
     left: "v\xE4nster|left",
     length: "l\xE4ngd|length",
+    not_in: "inte i|not in",
     or: "eller|or",
     orange: "orange",
     pink: "rosa|pink",
@@ -15720,6 +15758,7 @@ var hedyApp = (() => {
     is: "is",
     left: "left",
     length: "length",
+    not_in: "not in",
     or: "or",
     orange: "orange",
     pink: "pink",
@@ -15774,6 +15813,7 @@ var hedyApp = (() => {
     is: "\u0C09\u0C02\u0C26\u0C3F|is",
     left: "left",
     length: "\u0C2A\u0C4A\u0C21\u0C35\u0C41|length",
+    not_in: "not in",
     or: "\u0C32\u0C47\u0C26\u0C3E|or",
     orange: "orange",
     pink: "pink",
@@ -15828,6 +15868,7 @@ var hedyApp = (() => {
     is: "\u0E04\u0E37\u0E2D|is",
     left: "\u0E0B\u0E49\u0E32\u0E22|left",
     length: "\u0E04\u0E27\u0E32\u0E21\u0E22\u0E32\u0E27|length",
+    not_in: "\u0E44\u0E21\u0E48\u0E2D\u0E22\u0E39\u0E48\u0E43\u0E19|not in",
     or: "\u0E2B\u0E23\u0E37\u0E2D|or",
     orange: "\u0E2A\u0E49\u0E21|orange",
     pink: "\u0E0A\u0E21\u0E1E\u0E39|pink",
@@ -15882,6 +15923,7 @@ var hedyApp = (() => {
     is: "is",
     left: "left",
     length: "length",
+    not_in: "not in",
     or: "or",
     orange: "orange",
     pink: "pink",
@@ -15936,6 +15978,7 @@ var hedyApp = (() => {
     is: "ke|is",
     left: "left",
     length: "length",
+    not_in: "not in",
     or: "or",
     orange: "orange",
     pink: "pink",
@@ -15990,6 +16033,7 @@ var hedyApp = (() => {
     is: "e\u015Fit|is",
     left: "sol|left",
     length: "uzunluk|length",
+    not_in: "\u015Funda de\u011Fil|not in",
     or: "veya|or",
     orange: "turuncu|orange",
     pink: "pembe|pink",
@@ -16044,6 +16088,7 @@ var hedyApp = (() => {
     is: "\u0446\u0435|is",
     left: "\u0432\u043B\u0456\u0432\u043E|left",
     length: "\u0434\u043E\u0432\u0436\u0438\u043D\u0430|length",
+    not_in: "\u043D\u0435 \u0432|not in",
     or: "\u0430\u0431\u043E|or",
     orange: "\u043E\u0440\u0430\u043D\u0436\u0435\u0432\u0438\u0439|orange",
     pink: "\u0440\u043E\u0436\u0435\u0432\u0438\u0439|pink",
@@ -16098,6 +16143,7 @@ var hedyApp = (() => {
     is: "\u06C1\u06D2|is",
     left: "\u0628\u0627\u0626\u06CC\u06BA|left",
     length: "\u0644\u0645\u0628\u0627\u0626\u06CC|length",
+    not_in: "\u0646\u06C1\u06CC\u06BA \u06C1\u06D2|not in",
     or: "\u06CC\u0627|or",
     orange: "\u0627\u0648\u0631\u06CC\u0646\u062C|orange",
     pink: "\u06AF\u0644\u0627\u0628\u06CC|pink",
@@ -16152,6 +16198,7 @@ var hedyApp = (() => {
     is: "l\xE0|is",
     left: "tr\xE1i|left",
     length: "length",
+    not_in: "not in",
     or: "ho\u1EB7c|or",
     orange: "cam|orange",
     pink: "h\u1ED3ng|pink",
@@ -16186,12 +16233,12 @@ var hedyApp = (() => {
     black: "\u9ED1\u8272|black",
     blue: "\u84DD\u8272|blue",
     brown: "\u68D5\u8272|brown",
-    call: "call",
+    call: "\u8C03\u7528|call",
     clear: "\u6E05\u9664|clear",
     color: "\u989C\u8272|color",
-    comma: "\uFF0C|\u3001|,",
-    def: "def",
-    define: "define",
+    comma: "\uFF0C|,",
+    def: "\u5B9A\u4E49\u51FD\u6570|def",
+    define: "\u5B9A\u4E49|define",
     echo: "\u56DE\u58F0|echo",
     elif: "\u5426\u5219\u5982\u679C|elif",
     else: "\u5426\u5219|else",
@@ -16206,10 +16253,11 @@ var hedyApp = (() => {
     is: "\u662F|is",
     left: "\u5DE6|left",
     length: "\u957F\u5EA6|length",
+    not_in: "\u4E0D\u5728|not in",
     or: "\u6216|or",
     orange: "\u6A59\u8272|orange",
     pink: "\u7C89\u7EA2\u8272|pink",
-    play: "play",
+    play: "\u8FD0\u884C|play",
     pressed: "\u6309\u4E0B|pressed",
     print: "\u6253\u5370|print",
     purple: "\u7D2B\u8272|purple",
@@ -16218,7 +16266,7 @@ var hedyApp = (() => {
     red: "\u7EA2\u8272|red",
     remove: "\u79FB\u9664|remove",
     repeat: "\u91CD\u590D|repeat",
-    return: "return",
+    return: "\u8FD4\u56DE|return",
     right: "\u53F3|right",
     sleep: "\u7761\u7720|sleep",
     step: "\u6B65|step",
@@ -16226,9 +16274,9 @@ var hedyApp = (() => {
     to: "\u5230|to",
     to_list: "\u5230|to",
     turn: "\u65CB\u8F6C|turn",
-    while: "\u5F53\u7684\u65F6\u5019|while",
+    while: "\u5F53|while",
     white: "\u767D\u8272|white",
-    with: "with",
+    with: "\u5BF9|with",
     yellow: "\u9EC4\u8272|yellow",
     DIGIT: "0123456789"
   };
@@ -16260,6 +16308,7 @@ var hedyApp = (() => {
     is: "is",
     left: "left",
     length: "length",
+    not_in: "not in",
     or: "or",
     orange: "orange",
     pink: "pink",
@@ -17176,7 +17225,7 @@ var hedyApp = (() => {
       "unsaved_class_changes": "There are unsaved changes, are you sure you want to leave this page?"
     },
     "nl": {
-      "CheckInternet": "Controleer even of je internetverbinding het nog doet.",
+      "CheckInternet": "Controleer of jouw internetverbinding wel goed werkt.",
       "Connection_error": "We konden niet goed met de server praten.",
       "Empty_output": "Deze code werkt wel, maar print niks. Voeg een print commando toe aan je code of gebruik de schildpad om output te krijgen.",
       "Errors_found": "Je hebt een foutje gemaakt! Maak je geen zorgen, Hedy probeert de fouten te vinden",
@@ -17806,7 +17855,7 @@ var hedyApp = (() => {
       "unsaved_class_changes": "There are unsaved changes, are you sure you want to leave this page?"
     },
     "zh_Hans": {
-      "CheckInternet": "\u67E5\u770B\u4E00\u4E0B\u4F60\u7684\u7F51\u7EDC\u8FDE\u63A5\u662F\u5426\u6B63\u5E38.",
+      "CheckInternet": "\u68C0\u67E5\u60A8\u7684\u4E92\u8054\u7F51\u8FDE\u63A5\u662F\u5426\u6B63\u5E38\u3002",
       "Connection_error": "\u6211\u4EEC\u65E0\u6CD5\u8FDE\u63A5\u5230\u670D\u52A1\u5668\u3002",
       "Empty_output": "\u8FD9\u6BB5\u4EE3\u7801\u53EF\u4EE5\u5DE5\u4F5C\uFF0C\u4F46\u6CA1\u6709\u6253\u5370\u4EFB\u4F55\u4E1C\u897F\u3002\u5728\u4F60\u7684\u4EE3\u7801\u4E2D\u6DFB\u52A0\u4E00\u4E2A\u6253\u5370\u547D\u4EE4\uFF0C\u6216\u8005\u4F7F\u7528\u4E4C\u9F9F\u6765\u83B7\u5F97\u8F93\u51FA\u3002",
       "Errors_found": "\u4F60\u641E\u9519\u4E86\uFF01\u4E0D\u8981\u7740\u6025\uFF0C\u6211\u4EEC\u4ECD\u7136\u8FD0\u884C\u8BE5\u7A0B\u5E8F",
@@ -17819,7 +17868,7 @@ var hedyApp = (() => {
       "Transpile_success": "\u597D\u6837\u7684\uFF01\n\u4E86\u4E0D\u8D77\uFF01\n\u505A\u7684\u5F88\u597D\uFF01\n\u68D2\u6781\u4E86\uFF01\n\u505A\u7684\u771F\u68D2\uFF01",
       "Transpile_warning": "\u8B66\u544A\uFF01",
       "Unsaved_Changes": "\u4F60\u6709\u4E00\u4E2A\u672A\u4FDD\u5B58\u7684\u7A0B\u5E8F\u3002\u4F60\u60F3\u4E0D\u4FDD\u5B58\u5C31\u79BB\u5F00\u5417\uFF1F",
-      "adventures_restored": "\u9ED8\u8BA4\u7684\u5192\u9669\u5DF2\u7ECF\u6062\u590D\uFF01",
+      "adventures_restored": "\u9ED8\u8BA4\u7684\u5192\u9669\u5DF2\u7ECF\u6062\u590D\u3002",
       "copy_link_to_share": "\u590D\u5236\u94FE\u63A5\u4EE5\u5206\u4EAB",
       "customization_deleted": "\u5DF2\u6210\u529F\u5220\u9664\u81EA\u5B9A\u4E49\u9879\u3002",
       "dice": "\u{1F3B2}",
@@ -17831,9 +17880,9 @@ var hedyApp = (() => {
       "restaurant": "\u{1F363}, \u{1F355}, \u{1F354}",
       "rock": "\u2702\uFE0F, \u{1F4DC}, \u{1F5FB}",
       "songs": "\u{1F3B5},\u{1F3B6}",
-      "teacher_welcome": "Welcome to Hedy! Your are now the proud owner of a teachers account which allows you to create classes and invite students.",
+      "teacher_welcome": "\u6B22\u8FCE\u6765\u5230\u6D77\u8482\uFF01 \u60A8\u73B0\u5728\u662F\u6559\u5E08\u5E10\u6237\u7684\u81EA\u8C6A\u62E5\u6709\u8005\uFF0C\u8BE5\u5E10\u6237\u5141\u8BB8\u60A8\u521B\u5EFA\u8BFE\u7A0B\u5E76\u9080\u8BF7\u5B66\u751F\u3002",
       "turtle": "\u{1F422}",
-      "unsaved_class_changes": "There are unsaved changes, are you sure you want to leave this page?"
+      "unsaved_class_changes": "\u6709\u672A\u4FDD\u5B58\u7684\u66F4\u6539\uFF0C\u60A8\u786E\u5B9A\u8981\u79BB\u5F00\u6B64\u9875\u9762\u5417\uFF1F"
     },
     "zh_Hant": {
       "CheckInternet": "Check whether your Internet connection is working.",
@@ -51192,29 +51241,29 @@ notes_mapping = {
   var ifs7 = 4;
   var pressed7 = 5;
   var elses7 = 6;
-  var print11 = 7;
-  var forward11 = 8;
-  var turn11 = 9;
-  var color11 = 10;
-  var sleep10 = 11;
-  var play11 = 12;
-  var is10 = 13;
-  var add10 = 14;
-  var from9 = 15;
-  var remove10 = 16;
-  var toList9 = 17;
-  var clear8 = 18;
-  var ins7 = 19;
-  var not_in7 = 20;
-  var repeat5 = 21;
-  var times5 = 22;
-  var fors3 = 23;
-  var to2 = 24;
-  var range3 = 25;
-  var call = 26;
-  var define2 = 27;
-  var returns = 28;
-  var _with = 29;
+  var call = 7;
+  var _with = 8;
+  var print11 = 9;
+  var forward11 = 10;
+  var turn11 = 11;
+  var color11 = 12;
+  var sleep10 = 13;
+  var play11 = 14;
+  var is10 = 15;
+  var add10 = 16;
+  var from9 = 17;
+  var remove10 = 18;
+  var toList9 = 19;
+  var clear8 = 20;
+  var ins7 = 21;
+  var not_in7 = 22;
+  var repeat5 = 23;
+  var times5 = 24;
+  var fors3 = 25;
+  var to2 = 26;
+  var range3 = 27;
+  var define2 = 28;
+  var returns = 29;
 
   // static/js/lezer-parsers/level13-parser.terms.ts
   var ask12 = 1;
@@ -51225,29 +51274,29 @@ notes_mapping = {
   var elses8 = 6;
   var and = 7;
   var or = 8;
-  var print12 = 9;
-  var forward12 = 10;
-  var turn12 = 11;
-  var color12 = 12;
-  var sleep11 = 13;
-  var play12 = 14;
-  var is11 = 15;
-  var add11 = 16;
-  var from10 = 17;
-  var remove11 = 18;
-  var toList10 = 19;
-  var clear9 = 20;
-  var ins8 = 21;
-  var not_in8 = 22;
-  var repeat6 = 23;
-  var times6 = 24;
-  var fors4 = 25;
-  var to3 = 26;
-  var range4 = 27;
-  var call2 = 28;
-  var define3 = 29;
-  var returns2 = 30;
-  var _with2 = 31;
+  var call2 = 9;
+  var _with2 = 10;
+  var print12 = 11;
+  var forward12 = 12;
+  var turn12 = 13;
+  var color12 = 14;
+  var sleep11 = 15;
+  var play12 = 16;
+  var is11 = 17;
+  var add11 = 18;
+  var from10 = 19;
+  var remove11 = 20;
+  var toList10 = 21;
+  var clear9 = 22;
+  var ins8 = 23;
+  var not_in8 = 24;
+  var repeat6 = 25;
+  var times6 = 26;
+  var fors4 = 27;
+  var to3 = 28;
+  var range4 = 29;
+  var define3 = 30;
+  var returns2 = 31;
 
   // static/js/lezer-parsers/level14-parser.terms.ts
   var ask13 = 1;
@@ -51259,28 +51308,28 @@ notes_mapping = {
   var and2 = 7;
   var or2 = 8;
   var is12 = 9;
-  var print13 = 10;
-  var forward13 = 11;
-  var turn13 = 12;
-  var color13 = 13;
-  var sleep12 = 14;
-  var play13 = 15;
-  var add12 = 16;
-  var from11 = 17;
-  var remove12 = 18;
-  var toList11 = 19;
-  var clear10 = 20;
-  var ins9 = 21;
-  var not_in9 = 22;
-  var repeat7 = 23;
-  var times7 = 24;
-  var fors5 = 25;
-  var to4 = 26;
-  var range5 = 27;
-  var call3 = 28;
-  var define4 = 29;
-  var returns3 = 30;
-  var _with3 = 31;
+  var define4 = 10;
+  var _with3 = 11;
+  var print13 = 12;
+  var forward13 = 13;
+  var turn13 = 14;
+  var color13 = 15;
+  var sleep12 = 16;
+  var play13 = 17;
+  var add12 = 18;
+  var from11 = 19;
+  var remove12 = 20;
+  var toList11 = 21;
+  var clear10 = 22;
+  var ins9 = 23;
+  var not_in9 = 24;
+  var repeat7 = 25;
+  var times7 = 26;
+  var fors5 = 27;
+  var to4 = 28;
+  var range5 = 29;
+  var call3 = 30;
+  var returns3 = 31;
 
   // static/js/lezer-parsers/level15-parser.terms.ts
   var ask14 = 1;
@@ -51293,28 +51342,28 @@ notes_mapping = {
   var or3 = 8;
   var is13 = 9;
   var _while = 10;
-  var print14 = 11;
-  var forward14 = 12;
-  var turn14 = 13;
-  var color14 = 14;
-  var sleep13 = 15;
-  var play14 = 16;
-  var add13 = 17;
-  var from12 = 18;
-  var remove13 = 19;
-  var toList12 = 20;
-  var clear11 = 21;
-  var ins10 = 22;
-  var not_in10 = 23;
-  var repeat8 = 24;
-  var times8 = 25;
-  var fors6 = 26;
-  var to5 = 27;
-  var range6 = 28;
-  var call4 = 29;
-  var define5 = 30;
-  var returns4 = 31;
-  var _with4 = 32;
+  var define5 = 11;
+  var _with4 = 12;
+  var print14 = 13;
+  var forward14 = 14;
+  var turn14 = 15;
+  var color14 = 16;
+  var sleep13 = 17;
+  var play14 = 18;
+  var add13 = 19;
+  var from12 = 20;
+  var remove13 = 21;
+  var toList12 = 22;
+  var clear11 = 23;
+  var ins10 = 24;
+  var not_in10 = 25;
+  var repeat8 = 26;
+  var times8 = 27;
+  var fors6 = 28;
+  var to5 = 29;
+  var range6 = 30;
+  var call4 = 31;
+  var returns4 = 32;
 
   // static/js/lezer-parsers/level16-parser.terms.ts
   var ask15 = 1;
@@ -51326,28 +51375,28 @@ notes_mapping = {
   var or4 = 7;
   var is14 = 8;
   var _while2 = 9;
-  var print15 = 10;
-  var forward15 = 11;
-  var turn15 = 12;
-  var color15 = 13;
-  var sleep14 = 14;
-  var play15 = 15;
-  var add14 = 16;
-  var from13 = 17;
-  var remove14 = 18;
-  var toList13 = 19;
-  var clear12 = 20;
-  var ins11 = 21;
-  var not_in11 = 22;
-  var repeat9 = 23;
-  var times9 = 24;
-  var fors7 = 25;
-  var to6 = 26;
-  var range7 = 27;
-  var call5 = 28;
-  var define6 = 29;
-  var returns5 = 30;
-  var _with5 = 31;
+  var define6 = 10;
+  var _with5 = 11;
+  var print15 = 12;
+  var forward15 = 13;
+  var turn15 = 14;
+  var color15 = 15;
+  var sleep14 = 16;
+  var play15 = 17;
+  var add14 = 18;
+  var from13 = 19;
+  var remove14 = 20;
+  var toList13 = 21;
+  var clear12 = 22;
+  var ins11 = 23;
+  var not_in11 = 24;
+  var repeat9 = 25;
+  var times9 = 26;
+  var fors7 = 27;
+  var to6 = 28;
+  var range7 = 29;
+  var call5 = 30;
+  var returns5 = 31;
 
   // static/js/lezer-parsers/level17-parser.terms.ts
   var ask16 = 1;
@@ -51360,28 +51409,28 @@ notes_mapping = {
   var is15 = 8;
   var _while3 = 9;
   var elif = 10;
-  var print16 = 11;
-  var forward16 = 12;
-  var turn16 = 13;
-  var color16 = 14;
-  var sleep15 = 15;
-  var play16 = 16;
-  var add15 = 17;
-  var from14 = 18;
-  var remove15 = 19;
-  var toList14 = 20;
-  var clear13 = 21;
-  var ins12 = 22;
-  var not_in12 = 23;
-  var repeat10 = 24;
-  var times10 = 25;
-  var fors8 = 26;
-  var to7 = 27;
-  var range8 = 28;
-  var call6 = 29;
-  var define7 = 30;
-  var returns6 = 31;
-  var _with6 = 32;
+  var define7 = 11;
+  var _with6 = 12;
+  var print16 = 13;
+  var forward16 = 14;
+  var turn16 = 15;
+  var color16 = 16;
+  var sleep15 = 17;
+  var play16 = 18;
+  var add15 = 19;
+  var from14 = 20;
+  var remove15 = 21;
+  var toList14 = 22;
+  var clear13 = 23;
+  var ins12 = 24;
+  var not_in12 = 25;
+  var repeat10 = 26;
+  var times10 = 27;
+  var fors8 = 28;
+  var to7 = 29;
+  var range8 = 30;
+  var call6 = 31;
+  var returns6 = 32;
 
   // static/js/lezer-parsers/level18-parser.terms.ts
   var print17 = 1;
@@ -51703,9 +51752,7 @@ notes_mapping = {
         "to": to2,
         "range": range3,
         "return": returns,
-        "call": call,
-        "define": define2,
-        "with": _with
+        "define": define2
       },
       specialize: {
         "if": ifs7,
@@ -51713,7 +51760,9 @@ notes_mapping = {
         "ask": ask11,
         "at": at9,
         "random": random9,
-        "else": elses7
+        "else": elses7,
+        "call": call,
+        "with": _with
       }
     },
     13: {
@@ -51738,9 +51787,7 @@ notes_mapping = {
         "to": to3,
         "range": range4,
         "return": returns2,
-        "call": call2,
-        "define": define3,
-        "with": _with2
+        "define": define3
       },
       specialize: {
         "if": ifs8,
@@ -51750,7 +51797,9 @@ notes_mapping = {
         "random": random10,
         "else": elses8,
         "and": and,
-        "or": or
+        "or": or,
+        "call": call2,
+        "with": _with2
       }
     },
     14: {
@@ -51773,9 +51822,7 @@ notes_mapping = {
         "to": to4,
         "range": range5,
         "return": returns3,
-        "call": call3,
-        "define": define4,
-        "with": _with3
+        "define": define4
       },
       specialize: {
         "if": ifs9,
@@ -51787,7 +51834,9 @@ notes_mapping = {
         "and": and2,
         "or": or2,
         "in": ins9,
-        "is": is12
+        "is": is12,
+        "call": call3,
+        "with": _with3
       }
     },
     15: {
@@ -51811,9 +51860,7 @@ notes_mapping = {
         "to": to5,
         "range": range6,
         "return": returns4,
-        "call": call4,
-        "define": define5,
-        "with": _with4
+        "define": define5
       },
       specialize: {
         "if": ifs10,
@@ -51826,7 +51873,9 @@ notes_mapping = {
         "or": or3,
         "in": ins10,
         "is": is13,
-        "while": _while
+        "while": _while,
+        "call": call4,
+        "with": _with4
       }
     },
     16: {
@@ -51850,9 +51899,7 @@ notes_mapping = {
         "to": to6,
         "range": range7,
         "return": returns5,
-        "call": call5,
-        "define": define6,
-        "with": _with5
+        "define": define6
       },
       specialize: {
         "if": ifs11,
@@ -51864,7 +51911,9 @@ notes_mapping = {
         "or": or4,
         "in": ins11,
         "is": is14,
-        "while": _while2
+        "while": _while2,
+        "call": call5,
+        "with": _with5
       }
     },
     17: {
@@ -51888,9 +51937,7 @@ notes_mapping = {
         "to": to7,
         "range": range8,
         "return": returns6,
-        "call": call6,
-        "define": define7,
-        "with": _with6
+        "define": define7
       },
       specialize: {
         "if": ifs12,
@@ -51903,7 +51950,9 @@ notes_mapping = {
         "in": ins12,
         "is": is15,
         "while": _while3,
-        "elif": elif
+        "elif": elif,
+        "call": call6,
+        "with": _with6
       }
     },
     18: {
@@ -52230,148 +52279,148 @@ notes_mapping = {
   // static/js/lezer-parsers/level12-parser.ts
   var parser12 = LRParser.deserialize({
     version: 14,
-    states: "9tQYQPOOOOQO'#Dr'#DrQYQPOOO!dQPO'#DzO!xQPO'#C}O#QQPO'#DqOOQO'#EO'#EOO#]QPO'#DZOOQO'#EP'#EPO#yQPO'#D[OOQO'#ER'#ERO$QQPO'#D]OOQO'#EU'#EUO$YQPO'#D_OOQO'#EV'#EVO$bQPO'#DaOOQO'#EW'#EWO$iQPO'#DbOOQO'#EX'#EXO$pQPO'#DcOOQO'#D`'#D`OOQO'#EY'#EYO$wQPO'#DdOOQO'#EZ'#EZO%gQPO'#DeOOQO'#E]'#E]O%nQPO'#DfOOQO'#E_'#E_O%uQPO'#DgOOQO'#Ec'#EcO%}QPO'#DlOOQO'#Ed'#EdO&YQPO'#DmOOQO'#Ef'#EfO&eQPO'#DnOOQO'#Ei'#EiO&mQPO'#DoOOQO'#Ej'#EjO&uQPO'#DpOOQO'#C|'#C|Q!_QPO'#DsQ&|QPOOOOQO-E7p-E7pOOQO'#Dt'#DtO(TQPO,59kOOQO'#Dv'#DvO(tQPO,59iOOQO'#DR'#DRO(cQPO,59iO({QPO,59iO#kQPO,59iOOQO'#Dz'#DzOOQO-E7x-E7xOOQO-E7|-E7|O*RQPO'#DSO*cOSO'#EpO*kOQO'#EtOOQO'#DT'#DTO*sQPO'#EQOOQO'#DS'#DSOOQO-E7}-E7}OOQO'#EQ'#EQO+hQPO,59vOOQO-E8P-E8PO+rQPO,59wO,dQPO,59yOOQO-E8S-E8SO,oQPO,59{OOQO-E8T-E8TOOQO,59{,59{O-TQPO,59|OOQO-E8U-E8UOOQO,59|,59|O-iQPO,59}OOQO-E8V-E8VOOQO,59},59}O-}QPO,5:OOOQO-E8W-E8WOOQO,5:O,5:OO.cQPO,5:POOQO-E8X-E8XO.tQPO,5:PO.yQPO,5:QOOQO-E8Z-E8ZO/[QPO,5:QOOQO-E8]-E8]O/aQPO'#DiOOQO'#Dh'#DhOOQO,5:R,5:ROOQO-E8a-E8aOOQO-E8b-E8bO/oQPO,5:XOOQO-E8d-E8dO/tQPO,5:YOOQO-E8g-E8gO/yQPO,5:ZO0UQPO,5:[OOQO-E8h-E8hO0`QPO,5:_OOQO-E7q-E7qOOQO-E7r-E7rOOQO'#Du'#DuO1mQPO1G/VOOQO1G/V1G/VO2hQPO'#DSOOQO-E7t-E7tO2rQPO'#DwO3dQPO1G/^OOQO'#Dw'#DwO4XQPO1G/TO4mQPO1G/^OOQO'#D|'#D|O4uQPO1G/`OOOO'#Dx'#DxO5WOSO,5;[OOQO,5;[,5;[OOOO'#Dy'#DyO5`OQO,5;`OOQO,5;`,5;`OOQO'#DU'#DUOOQO'#DV'#DVO%XQPO,5;dO%XQPO,5;dOOQO-E8O-E8OOOQO'#ES'#ESO5hQPO1G/cOOQO'#E['#E[O5yQPO1G/kOOQO'#E^'#E^O6RQPO1G/lO6lQPO,5:TO6ZQPO,5:TOOQO'#Ea'#EaO6sQPO,5:UOOQO'#Eb'#EbO6{QPO,5:VOOQO'#Ee'#EeO7TQPO1G/sO7`QPO1G/tO5hQPO1G/uOOQO-E7s-E7sO7kQPO'#D{O7sQPO7+$xOOQO-E7u-E7uO8OQPO'#D}OOQO-E7z-E7zOOQO'#D}'#D}O8pQPO7+$zOOOO-E7v-E7vOOQO1G0v1G0vOOOO-E7w-E7wOOQO1G0z1G0zOOQO1G1O1G1OO9UQPO1G1OO:SQPO'#E}OOQO-E8Q-E8QOOQO'#E}'#E}O;QQPO'#D^OOQO7+$}7+$}OOQO-E8Y-E8YOOQO7+%V7+%VOOQO-E8[-E8[OOQO7+%W7+%WO;rQPO1G/oOOQO'#E`'#E`O<WQPO1G/oOOQO-E8_-E8_OOQO1G/p1G/pOOQO-E8`-E8`OOQO1G/q1G/qOOQO-E8c-E8cOOQO'#Eg'#EgO<cQPO7+%`OOQO7+%`7+%`OOQO7+%a7+%aO<nQPO,5:gOOQO,5:g,5:gOOQO-E7y-E7yOOQO-E7{-E7{O#kQPO'#ETO<|QPO,59xOOQO-E8^-E8^OOQO-E8e-E8eO=nQPO<<HzOOQO,5:o,5:oOOQO-E8R-E8ROOQO'#Eh'#EhO=sQPOAN>fOOQO-E8f-E8fOOQOG24QG24Q",
-    stateData: ">R~OnOS#aOS~OSkOUmOVWOW^OX`OYbOZeO[[O^gO`iObUOeoOgqOjYOksOluOrRO#bPO~OQ{O]}O#c!POr!nX#_!nX#b!nX~O]}O#c!PO~Or!TO#_!eX#b!eX~ObUO#_}X#b}X~OjYOr!WOt!]O#e!XO#i!YO~OVWO~P#hOjYOr!bO~O[[Or!TO~OW^O~P#hOX`O~P#hOYbO~P#hOZeO#_!WX#b!WX~P#hOjYOr!]Ot!]O#e!XO#i!YO~O^gO~P%UO`iO~P%UOSkOr!xO~OUmO#_!`X#b!`X~OeoOr!}Ot!}O~OgqOr#PO~OksOr#RO~OluO~P#hOSkOUmOVWOW^OX`OYbOZeO[[O^gO`iObUOeoOgqOjYOksOluOrRO~OQ{OR#XOr#ZOt#ZO~OP#cOr#[Ot#_O#e!XO#i!YO~O]}O~P(cO]}Or!WOt!]O#e!XO#i!YO~OQ{OrvXtvX#_vX#bvX#evX#ivX#mvX#nvX#ovX#pvX~OjvX{vXavX_vX~P)^O#f#eO#g#gO~O#j#hO#k#jO~O#m#kO#n#kO#o#lO#p#lOj!tXr!tXt!tX#_!tX#b!tX#e!tX#i!tX~O#_!Oa#b!Oa~P#hOm#pO#_!Pa#b!Paj!Par!Pat!Pa#e!Pa#i!Paa!Pa_!Pa~Or!TO#_!Ra#b!Ra~O#m#kO#n#kO#o#lO#p#lO#_!Ta#b!Ta~O#m#kO#n#kO#o#lO#p#lO#_!Ua#b!Ua~O#m#kO#n#kO#o#lO#p#lO#_!Va#b!Va~O#m#kO#n#kO#o#lO#p#lO#_!Wa#b!Wa~Oa#rO#m#kO#n#kO#o#lO#p#lO~Oa#rO~O_#tO#m#kO#n#kO#o#lO#p#lO~O_#tO~O]}Oc#xOd#zO#c!PO~Of#|O~Oc#xO~Om#pO#_!ca#b!ca~O#_!da#b!da~P#hO#bPOS!gaU!gaV!gaW!gaX!gaY!gaZ!ga[!ga^!ga`!gab!gae!gag!gaj!gak!gal!gar!ga#_!ga~OR#XO]si#csijsirsitsi#_si#bsi#esi#isi{siasi_si~Or!nX{!nX~P)^O#m#kO#n#kO#o#lO#p#lOr!kXt!kX#_!kX#b!kX#e!kX#i!kX~O{$ROrvXtvX#_vX#bvX#evX#ivX#mvX#nvX#ovX#pvX~Or!WOt!]O#e!XO#i!YO#_qi#bqi~Or!TO{$RO~OP#cOr!WOt!]O#e!XO#i!YO~O#f#eO#g$ZO~O#j#hO#k$]O~Om#pOr!WOt!]O#e!XO#i!YO~Oa#rOr$fO~O_#tOr$hO~OT$jOr!]Ot!]O#e!XO#i!YO~O]}O~P6ZOc#xOr$mO~Od#zOr$oO~Of#|O#_!ai#b!ai~Oc#xOi$qOr$sO~Or!TOt$vO~O{$RO#_zq#bzq~O#m#kO#n#kO#o#lO#p#lOr!qXt!qX#_!qX#b!qX#e!qX#i!qX~Or!WOt!]O#e!XO#i!YO#_|q#b|q~O#m#kO#n#kO#o#lO#p#lOj#lir#lit#li#_#li#b#li#e#li#i#lia#li_#li{#li~O#m#kO#n#kO#o#lO#p#lO{#qX#_#qX#b#qXj#qXr#qXt#qX#e#qX#i#qXa#qX_#qX~O{$yO#_!QX#b!QXj!QXr!QXt!QX#e!QX#i!QXa!QX_!QX~O#m#kO#n#kO#o#lO#p#lO#_!]i#b!]i~OT$jO#_!]i#b!]i~Oi$qOr$}Ot$}O~Or!TO{!oa#_!oa#b!oa~O{$yO#_!Qa#b!Qaj!Qar!Qat!Qa#e!Qa#i!Qaa!Qa_!Qa~Oh%QO~Oh%QOr%TOt%TO~Otr~",
-    goto: "0S#rPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPP#s#xP#}P$v%P&T&o&}#xP#x#x#x']'z#x#x(Q(Q(Q#x#x#x#x(V(Y(Y(Y#x#x#x#x#x#x(](g(n(v(|)[)e)k)q*W*_*f*l*t*|+W+j+t+z,S,[,d,l,t,|-T-]-d-l-s-}.T.].e.k.s.y/P/XPPPPP/aPPP/aPPP&TPPPP/{VxOQyVwOQyUSOQyW!_Xv!`#SQ!g_Q!jaQ!mcQ!pfY#`!O!Q!R!S#aS$W#d$XV$b#q$P$yQ!QRQ!SSR#w!xW![Xv!`#SQ!e_Q!haQ!kcQ!nfQ!qhQ!tjY#^!O!Q!R!S#aS$U#d$XQ$^#mQ$_#nU$`#q$P$yT$i#v#w!R!]X_acfhjv!O!Q!R!S!`#S#a#d#m#n#q#v#w$P$X$yi#m![!e!h!k!n!q!t#^$U$_$`$ii#n![!e!h!k!n!q!t#^$U$_$`$iUwOQyW!_Xv!`#SQ!g_Q!jaQ!mcQ!pfQ!shR!vjQ$d#qR$t$PVdOQyR!zlR!ylQQOSzQ#UR#UxSyOQR#VyU|R!W#[R#W|Q#Y|R$Q#YQ!ORQ!RSU#]!O!R#vR#v!xW#a!O!Q!R!SR$T#aQ#f!XR$Y#fQ#i!YR$[#iUTOQyW!UT!c#b$uQ!c]S#b!O!QR$u$RS$S#_#bR$w$SS#d!O!QR$V#dQ$X#dR$x$XUVOQyR!VVUXOQyR!^XQ!`XQ#SvT#o!`#SjZOQX_acfhjvy!`#SR!aZQ#q!bQ$P#RT$a#q$PQ$z$cR%P$zU]OQyR!d]U_OQyR!f_UaOQyR!iaUcOQyR!lcUfOQyR!ofUhOQyR!rhS#s!q!sR$e#sUjOQyR!ujS#u!t!vR$g#uUlOQyR!wlS$k#v#wR${$kQ#y!xQ$O#PT$l#y$OQ#{!xR$n#{UnOQyR!{nUpOQyR!|pQ#}!}R$p#}UrOQyR#OrQ$r$OR$|$rQ%R$}R%S%RUtOQyR#QtUvOQyR#Tv!R!ZX_acfhjv!O!Q!R!S!`#S#a#d#m#n#q#v#w$P$X$yS$c#q$PR%O$y",
-    nodeNames: "\u26A0 ask at random if pressed else print forward turn color sleep play is add from remove toList clear in not_in repeat times for to range call define return with Comment Program Command Assign Text ListAccess Number Op Expression String Op Op AssignList Comma Ask Clear Print Call Arguments Play Turtle Forward Turn Color Sleep Add Remove If Condition EqualityCheck InListCheck NotInListCheck Else Repeat For Define Return ErrorInvalid",
-    maxTerm: 125,
+    states: ":WQYQPOOOOQO'#Dr'#DrQYQPOOO!dQPO'#D}OOQO'#Dz'#DzO!xQPO'#DUO#QQPO'#C}O#YQPO'#DqOOQO'#ER'#ERO#eQPO'#D]OOQO'#ES'#ESO$RQPO'#D^OOQO'#ET'#ETO$YQPO'#D_OOQO'#EU'#EUO$bQPO'#DaOOQO'#EV'#EVO$iQPO'#DbOOQO'#EW'#EWO$pQPO'#DcOOQO'#D`'#D`OOQO'#EX'#EXO$wQPO'#DdOOQO'#EY'#EYO%gQPO'#DeOOQO'#E['#E[O%nQPO'#DfOOQO'#E^'#E^O%uQPO'#DgOOQO'#Eb'#EbO%}QPO'#DlOOQO'#Ec'#EcO&YQPO'#DmOOQO'#Ee'#EeO&eQPO'#DnOOQO'#Eh'#EhO&mQPO'#DoOOQO'#Ei'#EiO&uQPO'#DpOOQO'#C|'#C|Q!_QPO'#DsQ&|QPOOOOQO-E7p-E7pOOQO'#Dt'#DtO(TQPO,59kOOQO'#Dv'#DvO(wQPO,59iOOQO'#DR'#DRO(cQPO,59iOOQO-E7x-E7xO)OQPO,59pO)|QPO,59iO#pQPO,59iOOQO'#D}'#D}OOQO-E7{-E7{OOQO-E8P-E8PO*{QPO'#DSO+YOSO'#EoO+bOQO'#EsOOQO'#DT'#DTO+jQPO'#EQOOQO'#DS'#DSOOQO'#EQ'#EQO,_QPO,59xOOQO-E8Q-E8QO,iQPO,59yOOQO-E8R-E8RO,tQPO,59{OOQO-E8S-E8SOOQO,59{,59{O-YQPO,59|OOQO-E8T-E8TOOQO,59|,59|O-nQPO,59}OOQO-E8U-E8UOOQO,59},59}O.SQPO,5:OOOQO-E8V-E8VOOQO,5:O,5:OO.hQPO,5:POOQO-E8W-E8WO.yQPO,5:QOOQO-E8Y-E8YOOQO-E8[-E8[O/[QPO'#DiOOQO'#Dh'#DhOOQO,5:R,5:ROOQO-E8`-E8`OOQO-E8a-E8aO/jQPO,5:XOOQO-E8c-E8cO/oQPO,5:YOOQO-E8f-E8fO/tQPO,5:ZO0PQPO,5:[OOQO-E8g-E8gO0ZQPO,5:_OOQO-E7q-E7qOOQO-E7r-E7rOOQO'#Du'#DuO1hQPO1G/VOOQO1G/V1G/VO2oQPO'#DSOOQO-E7t-E7tO2yQPO'#DwO3nQPO1G/aOOQO'#Dw'#DwO4fQPO1G/TO4pQPO1G/aOOQO'#EP'#EPO4xQPO1G/bOOQO'#D{'#D{O5PQPO1G/[OOOO'#Dx'#DxO5WOSO,5;ZOOQO,5;Z,5;ZOOOO'#Dy'#DyO5`OQO,5;_OOQO,5;_,5;_OOQO'#DX'#DXOOQO'#DY'#DYO%UQPO,5;dO%UQPO,5;dOOQO-E8O-E8OOOQO'#EZ'#EZO5hQPO1G/kOOQO'#E]'#E]O5pQPO1G/lO5xQPO,5:TO6SQPO,5:TOOQO'#E`'#E`O6ZQPO,5:UOOQO'#Ea'#EaO6cQPO,5:VOOQO'#Ed'#EdO6kQPO1G/sO6vQPO1G/tO5PQPO1G/uOOQO-E7s-E7sO7RQPO'#EOO7ZQPO7+${OOQO-E7u-E7uOOQO-E7}-E7}O7fQPO7+$|OOQO-E7y-E7yO7pQPO'#EwOOQO'#Ew'#EwO8nQPO'#DVOOQO7+$v7+$vOOOO-E7v-E7vOOQO1G0u1G0uOOOO-E7w-E7wOOQO1G0y1G0yOOQO1G1O1G1OO9lQPO1G1OOOQO-E8X-E8XOOQO7+%V7+%VOOQO-E8Z-E8ZOOQO7+%W7+%WO:gQPO1G/oOOQO'#E_'#E_O:{QPO1G/oOOQO-E8^-E8^OOQO1G/p1G/pOOQO-E8_-E8_OOQO1G/q1G/qOOQO-E8b-E8bOOQO'#Ef'#EfO;WQPO7+%`OOQO7+%`7+%`OOQO7+%a7+%aO;cQPO,5:jOOQO,5:j,5:jOOQO-E7|-E7|O#pQPO'#D|O;qQPO,59qOOQO-E8]-E8]OOQO-E8d-E8dO<oQPO<<HzOOQO,5:h,5:hOOQO-E7z-E7zOOQO'#Eg'#EgO<tQPOAN>fOOQO'#DV'#DVOOQO-E8e-E8eOOQOG24QG24QPOQO,59q,59qO5PQPO1G/[O=PQPO,59pO=WQPO'#DUO%UQPO,5;dO%UQPO,5;dO=`QPO1G1O",
+    stateData: "=j~OnOS#`OS~OSkOUmOVSOXYOY^OZ`O[bO]eO^[O`gObiOdWOgoOiqOlsOmuOrRO#aPO~OQ{O_}O#b!POr!qX#^!qX#a!qX~OVSOr!SO~O_}O#b!PO~Or!VO#^!eX#a!eX~OdWO#^!PX#a!PX~OVSOr!YOt!_O#d!ZO#h![O~OXYO~P#pO^[Or!VO~OY^O~P#pOZ`O~P#pO[bO~P#pO]eO#^!WX#a!WX~P#pOVSOr!_Ot!_O#d!ZO#h![O~O`gO~P%UObiO~P%UOSkOr!vO~OUmO#^!`X#a!`X~OgoOr!{Ot!{O~OiqOr!}O~OlsOr#PO~OmuO~P#pOSkOUmOVSOXYOY^OZ`O[bO]eO^[O`gObiOdWOgoOiqOlsOmuOrRO~OQ{OR#VOr#XOt#XO~OP#aOVSOr#YOt#]O#d!ZO#h![O~O_}O~P(cOW#cO#^xa#axaVxarxatxa#dxa#hxa#mxa#nxa#oxa#pxacxaaxa~O_}O~P#pOQ{OVvXrvXtvX#^vX#avX#dvX#hvX#mvX#nvX#ovX#pvX~OzvXcvXavX~P*TO#e#eO#f#gO~O#i#hO#j#jO~O#m#kO#n#kO#o#lO#p#lOV!tXr!tXt!tX#^!tX#a!tX#d!tX#h!tX~O#^!Qa#a!Qa~P#pOr!VO#^!Ra#a!Ra~O#m#kO#n#kO#o#lO#p#lO#^!Ta#a!Ta~O#m#kO#n#kO#o#lO#p#lO#^!Ua#a!Ua~O#m#kO#n#kO#o#lO#p#lO#^!Va#a!Va~O#m#kO#n#kO#o#lO#p#lO#^!Wa#a!Wa~Oc#pO#m#kO#n#kO#o#lO#p#lO~Oa#rO#m#kO#n#kO#o#lO#p#lO~O_}Oe#vOf#xO#b!PO~Oh#zO~Oe#vO~OW#cO#^!ca#a!ca~O#^!da#a!da~P#pO#aPOS!gaU!gaV!gaX!gaY!gaZ!ga[!ga]!ga^!ga`!gab!gad!gag!gai!gal!gam!gar!ga#^!ga~OR#VO_si#bsiVsirsitsi#^si#asi#dsi#hsizsi#msi#nsi#osi#psicsiasi~Or!qXz!qX~P*TO#m#kO#n#kO#o#lO#p#lOV!kXr!kXt!kX#^!kX#a!kX#d!kX#h!kX~Oz$POVvXrvXtvX#^vX#avX#dvX#hvX#mvX#nvX#ovX#pvX~O#^qi#aqi~P#pOr!VOz$PO~OP#aO~P#pOW#cO~P#pO#e#eO#f$[O~O#i#hO#j$^O~Oc#pOr$bO~Oa#rOr$dO~OT$fO_}O~P%UOT$fO~P%UOe#vOr$iO~Of#xOr$kO~Oh#zO#^!ai#a!ai~Oe#vOk$mOr$oO~Or!VOt$rO~Oz$PO#^}q#a}q~O#^!Oq#a!Oq~P#pO#m#kO#n#kO#o#lO#p#lOz#kX#^#kX#a#kXV#kXr#kXt#kX#d#kX#h#kXc#kXa#kX~Oz$tO#^yX#ayXVyXryXtyX#dyX#hyX#myX#nyX#oyX#pyXcyXayX~O#m#kO#n#kO#o#lO#p#lOV#lir#lit#li#^#li#a#li#d#li#h#lic#lia#li~O#m#kO#n#kO#o#lO#p#lO#^!]i#a!]i~OT$fO#^!]i#a!]i~Ok$mOr$xOt$xO~Or!VOz!ra#^!ra#a!ra~Oz$tO#^ya#ayaVyaryatya#dya#hya#mya#nya#oya#pyacyaaya~Oj${O~Oj${Or%POt%PO~Ozxa~P)OOVSOr%SO~Oz#li~P9lOtr~",
+    goto: "0x#mPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPP#n#sP#xP$p$y&Q&o'cP'j'z#s#s#s#s#s#s([([([#s#s#s#s(a(d(d(d#s#s#s#s#s#s(g(q(x)Q)W)f)o)u){*s+R+X+n+u+|,[,d,l,t,|-U-^-f-n-t-|.S.[.c.m.s.{/T/Z/c/i/o/wPPPPP0PPPP0PPPP0n&QVxOQyVwOQyUUOQy[!`Zv!a#Q#b$TQ!g_Q!jaQ!mcQ!pfY#^!O!Q!T!U#_X$W#d#}$t%RQ!QRQ!UUR#u!v[!^Zv!a#Q#b$TQ!e_Q!haQ!kcQ!nfQ!qhQ!sjY#[!O!Q!T!U#_W$V#d#}$t%RS$_#m%UQ$`#nS$e#t#uR%W%V!X!_Z_acfhjv!O!Q!T!U!a#Q#_#b#d#m#n#t#u#}$T$t%R%U%VUwOQy!X!_Z_acfhjv!O!Q!T!U!a#Q#_#b#d#m#n#t#u#}$T$t%R%U%VS$Y#d%RR$p#}d#m!^!e!h!k!n!q!s#[$`$eT%U$V%Wd#n!^!e!h!k!n!q!s#[$`$eT%V$V%WVdOQyR!xlR!wlQQOSzQ#SR#SxSyOQR#TyU|R!Y#YR#U|Q#W|R$O#WQ!ORQ!TUU#Z!O!T#tR#t!vW#_!O!Q!T!UR$R#_Q#f!ZR$Z#fQ#i![R$]#i!QTOQZ_acfhjvy!O!Q!T!U!a#Q#_#b#m#n#t#u$TS!RT%T]%T#d#}$t%R%U%VQ#d!SQ#}#PU$U#d#}%RR%R%SQ$u$XR$z$uUVOQyW!WV!c#`$qQ!c]S#`!O!QR$q$PS$Q#]#`R$s$QS#b!O!QR$S#bQ!aZQ#QvU#o!a#Q$TR$T#bUXOQyR!XXUZOQyR!bZU]OQyR!d]U_OQyR!f_UaOQyR!iaUcOQyR!lcUfOQyR!ofUhOQyR!rhQ#q!qR$a#qUjOQyR!tjQ#s!sR$c#sUlOQyR!ulS$g#t#uR$v$gQ#w!vQ#|!}T$h#w#|Q#y!vR$j#yUnOQyR!ynUpOQyR!zpQ#{!{R$l#{UrOQyR!|rQ$n#|R$w$nQ$|$xR%O$|UtOQyR#OtUvOQyR#Rv!X!]Z_acfhjv!O!Q!T!U!a#Q#_#b#d#m#n#t#u#}$T$t%R%U%VS$X#d#}Q$y$tR$}%R",
+    nodeNames: "\u26A0 ask at random if pressed else call with print forward turn color sleep play is add from remove toList clear in not_in repeat times for to range define return Comment Program Command Assign Text ListAccess Number Op Expression String Call Arguments Comma Op Op AssignList Ask Clear Print Play Turtle Forward Turn Color Sleep Add Remove If Condition EqualityCheck InListCheck NotInListCheck Else Repeat For Define Return ErrorInvalid",
+    maxTerm: 124,
     nodeProps: [
       ["group", 50, "turtle"]
     ],
     skippedNodes: [0, 30],
-    repeatNodeCount: 39,
-    tokenData: "1U~R!^OY$}YZ&UZp$}pq&Zqr$}rs&`st&etw$}wx&|xz$}z{'R{|'W|}']}!O'b!O!P$}!P!Q'g!Q!R'l!R!S'l!S!T'l!T!U'l!U!V'l!V!W'l!W!X'l!X!Y'l!Y!Z'l!Z!['l![!_$}!_!`1P!`#Q$}#RBn$}BnBo']BoDf$}DfDg'lDgDh'lDhDi'lDiDj'lDjDk'lDkDl'lDlDm'lDmDn'lDnDo'lDoDp'lDpGl$}GlGm'lGmGn'lGnGo'lGoGp'lGpGq'lGqGr'lGrGs'lGsGt'lGtGu'lGuGv'lGv&FV$}&FV&FW']&FW;'S$};'S;=`&O<%l?Hb$}?Hb?Hc']?HcO$}~%S^r~OY$}Zp$}qr$}tw$}xz$}!O!P$}!Q!_$}!`#Q$}#RBn$}Bo&FV$}&FW;'S$};'S;=`&O<%l?Hb$}?HcO$}~&RP;=`<%l$}~&ZO#b~~&`O#a~~&eO#e~~&jSn~OY&eZ;'S&e;'S;=`&v<%lO&e~&yP;=`<%l&e~'RO#i~~'WO#m~~']O#o~~'bO{~~'gO#p~~'lO#n~~'s!Ot~r~OY$}Zp$}qr$}tw$}xz$}!O!P*s!Q!R'l!R!S'l!S!T'l!T!U'l!U!V'l!V!W'l!W!X'l!X!Y'l!Y!Z'l!Z!['l![!_$}!`#Q$}#RBn$}BoDf$}DfDg'lDgDh'lDhDi'lDiDj'lDjDk'lDkDl'lDlDm'lDmDn'lDnDo'lDoDp'lDpGl$}GlGm'lGmGn'lGnGo'lGoGp'lGpGq'lGqGr'lGrGs'lGsGt'lGtGu'lGuGv'lGv&FV$}&FW;'S$};'S;=`&O<%l?Hb$}?HcO$}~*x!Or~OY$}Zp$}qr$}tw$}xz$}!O!P$}!Q!R-x!R!S-x!S!T-x!T!U-x!U!V-x!V!W-x!W!X-x!X!Y-x!Y!Z-x!Z![-x![!_$}!`#Q$}#RBn$}BoDf$}DfDg-xDgDh-xDhDi-xDiDj-xDjDk-xDkDl-xDlDm-xDmDn-xDnDo-xDoDp-xDpGl$}GlGm-xGmGn-xGnGo-xGoGp-xGpGq-xGqGr-xGrGs-xGsGt-xGtGu-xGuGv-xGv&FV$}&FW;'S$};'S;=`&O<%l?Hb$}?HcO$}~.P!Ot~r~OY$}Zp$}qr$}tw$}xz$}!O!P$}!Q!R-x!R!S-x!S!T-x!T!U-x!U!V-x!V!W-x!W!X-x!X!Y-x!Y!Z-x!Z![-x![!_$}!`#Q$}#RBn$}BoDf$}DfDg-xDgDh-xDhDi-xDiDj-xDjDk-xDkDl-xDlDm-xDmDn-xDnDo-xDoDp-xDpGl$}GlGm-xGmGn-xGnGo-xGoGp-xGpGq-xGqGr-xGrGs-xGsGt-xGtGu-xGuGv-xGv&FV$}&FW;'S$};'S;=`&O<%l?Hb$}?HcO$}~1UO#c~",
-    tokenizers: [2, new LocalTokenGroup("_~RQYZXwxX~^O#k~~", 14, 118), new LocalTokenGroup("_~RQYZXrsX~^O#g~~", 14, 114)],
+    repeatNodeCount: 38,
+    tokenData: "1U~R!^OY$}YZ&UZp$}pq&Zqr$}rs&`st&etw$}wx&|xz$}z{'R{|'W|}']}!O'b!O!P$}!P!Q'g!Q!R'l!R!S'l!S!T'l!T!U'l!U!V'l!V!W'l!W!X'l!X!Y'l!Y!Z'l!Z!['l![!_$}!_!`1P!`#Q$}#RBn$}BnBo']BoDf$}DfDg'lDgDh'lDhDi'lDiDj'lDjDk'lDkDl'lDlDm'lDmDn'lDnDo'lDoDp'lDpGl$}GlGm'lGmGn'lGnGo'lGoGp'lGpGq'lGqGr'lGrGs'lGsGt'lGtGu'lGuGv'lGv&FV$}&FV&FW']&FW;'S$};'S;=`&O<%l?Hb$}?Hb?Hc']?HcO$}~%S^r~OY$}Zp$}qr$}tw$}xz$}!O!P$}!Q!_$}!`#Q$}#RBn$}Bo&FV$}&FW;'S$};'S;=`&O<%l?Hb$}?HcO$}~&RP;=`<%l$}~&ZO#a~~&`O#`~~&eO#d~~&jSn~OY&eZ;'S&e;'S;=`&v<%lO&e~&yP;=`<%l&e~'RO#h~~'WO#m~~']O#o~~'bOz~~'gO#p~~'lO#n~~'s!Ot~r~OY$}Zp$}qr$}tw$}xz$}!O!P*s!Q!R'l!R!S'l!S!T'l!T!U'l!U!V'l!V!W'l!W!X'l!X!Y'l!Y!Z'l!Z!['l![!_$}!`#Q$}#RBn$}BoDf$}DfDg'lDgDh'lDhDi'lDiDj'lDjDk'lDkDl'lDlDm'lDmDn'lDnDo'lDoDp'lDpGl$}GlGm'lGmGn'lGnGo'lGoGp'lGpGq'lGqGr'lGrGs'lGsGt'lGtGu'lGuGv'lGv&FV$}&FW;'S$};'S;=`&O<%l?Hb$}?HcO$}~*x!Or~OY$}Zp$}qr$}tw$}xz$}!O!P$}!Q!R-x!R!S-x!S!T-x!T!U-x!U!V-x!V!W-x!W!X-x!X!Y-x!Y!Z-x!Z![-x![!_$}!`#Q$}#RBn$}BoDf$}DfDg-xDgDh-xDhDi-xDiDj-xDjDk-xDkDl-xDlDm-xDmDn-xDnDo-xDoDp-xDpGl$}GlGm-xGmGn-xGnGo-xGoGp-xGpGq-xGqGr-xGrGs-xGsGt-xGtGu-xGuGv-xGv&FV$}&FW;'S$};'S;=`&O<%l?Hb$}?HcO$}~.P!Ot~r~OY$}Zp$}qr$}tw$}xz$}!O!P$}!Q!R-x!R!S-x!S!T-x!T!U-x!U!V-x!V!W-x!W!X-x!X!Y-x!Y!Z-x!Z![-x![!_$}!`#Q$}#RBn$}BoDf$}DfDg-xDgDh-xDhDi-xDiDj-xDjDk-xDkDl-xDlDm-xDmDn-xDnDo-xDoDp-xDpGl$}GlGm-xGmGn-xGnGo-xGoGp-xGpGq-xGqGr-xGrGs-xGsGt-xGtGu-xGuGv-xGv&FV$}&FW;'S$};'S;=`&O<%l?Hb$}?HcO$}~1UO#b~",
+    tokenizers: [2, new LocalTokenGroup("_~RQYZXwxX~^O#j~~", 14, 117), new LocalTokenGroup("_~RQYZXrsX~^O#f~~", 14, 113)],
     topRules: { "Program": [0, 31] },
     dynamicPrecedences: { "67": -10 },
     specialized: [{ term: 34, get: (value, stack) => specializeKeyword(value, stack) << 1, external: specializeKeyword }, { term: 34, get: (value, stack) => extendKeyword(value, stack) << 1 | 1, external: extendKeyword, extend: true }],
-    tokenPrec: 1334
+    tokenPrec: 1311
   });
 
   // static/js/lezer-parsers/level13-parser.ts
   var parser13 = LRParser.deserialize({
     version: 14,
-    states: ":|QYQPOOOOQO'#Dt'#DtQYQPOOO!dQPO'#D|O!xQPO'#DPO#QQPO'#DsOOQO'#EQ'#EQO#]QPO'#D]OOQO'#ER'#ERO#yQPO'#D^OOQO'#ET'#ETO$QQPO'#D_OOQO'#EW'#EWO$YQPO'#DaOOQO'#EX'#EXO$bQPO'#DcOOQO'#EY'#EYO$iQPO'#DdOOQO'#EZ'#EZO$pQPO'#DeOOQO'#Db'#DbOOQO'#E['#E[O$wQPO'#DfOOQO'#E]'#E]O%gQPO'#DgOOQO'#E_'#E_O%nQPO'#DhOOQO'#Ea'#EaO%uQPO'#DiOOQO'#Eh'#EhO%}QPO'#DnOOQO'#Ei'#EiO&YQPO'#DoOOQO'#Ek'#EkO&eQPO'#DpOOQO'#En'#EnO&mQPO'#DqOOQO'#Eo'#EoO&uQPO'#DrOOQO'#DO'#DOQ!_QPO'#DuQ&|QPOOOOQO-E7r-E7rOOQO'#Dv'#DvO(TQPO,59mOOQO'#Dx'#DxO(tQPO,59kOOQO'#DT'#DTO(cQPO,59kO({QPO,59kO#kQPO,59kOOQO'#D|'#D|OOQO-E7z-E7zOOQO-E8O-E8OO*RQPO'#DUO*cOSO'#EuO*kOQO'#EyOOQO'#DV'#DVO*sQPO'#ESOOQO'#DU'#DUOOQO-E8P-E8POOQO'#ES'#ESO+hQPO,59xOOQO-E8R-E8RO+rQPO,59yO,dQPO,59{OOQO-E8U-E8UO,oQPO,59}OOQO-E8V-E8VOOQO,59},59}O-TQPO,5:OOOQO-E8W-E8WOOQO,5:O,5:OO-iQPO,5:POOQO-E8X-E8XOOQO,5:P,5:PO-}QPO,5:QOOQO-E8Y-E8YOOQO,5:Q,5:QO.cQPO,5:ROOQO-E8Z-E8ZO.tQPO,5:RO.yQPO,5:SOOQO-E8]-E8]O/[QPO,5:SOOQO-E8_-E8_O/aQPO'#DkOOQO'#Dj'#DjO/oQPO,5:TOOQO-E8f-E8fOOQO-E8g-E8gO/}QPO,5:ZOOQO-E8i-E8iO0SQPO,5:[OOQO-E8l-E8lO0XQPO,5:]O0dQPO,5:^OOQO-E8m-E8mO0nQPO,5:aOOQO-E7s-E7sOOQO-E7t-E7tOOQO'#Dw'#DwO1{QPO1G/XOOQO1G/X1G/XO2vQPO'#DUOOQO-E7v-E7vO3QQPO'#DyO3rQPO1G/`OOQO'#Dy'#DyO4gQPO1G/VO4{QPO1G/`OOQO'#EO'#EOO5TQPO1G/bOOOO'#Dz'#DzO5fOSO,5;aOOQO,5;a,5;aOOOO'#D{'#D{O5nOQO,5;eOOQO,5;e,5;eOOQO'#DW'#DWOOQO'#DX'#DXO%XQPO,5;iO%XQPO,5;iOOQO-E8Q-E8QOOQO'#EU'#EUO5vQPO1G/eOOQO'#E^'#E^O6XQPO1G/mOOQO'#E`'#E`O6aQPO1G/nO6zQPO,5:VO6iQPO,5:VOOQO'#Ec'#EcO7RQPO,5:WOOQO'#Ed'#EdO7ZQPO,5:XOOQO'#Ef'#EfO7cQPO'#EeOOQO'#Eg'#EgO7kQPO'#EeO7sQPO1G/oOOQO'#Ej'#EjO8RQPO1G/uO8^QPO1G/vO5vQPO1G/wOOQO-E7u-E7uO8iQPO'#D}O8qQPO7+$zOOQO-E7w-E7wO8|QPO'#EPOOQO-E7|-E7|OOQO'#EP'#EPO9nQPO7+$|OOOO-E7x-E7xOOQO1G0{1G0{OOOO-E7y-E7yOOQO1G1P1G1POOQO1G1T1G1TO:SQPO1G1TO;WQPO'#FSOOQO-E8S-E8SOOQO'#FS'#FSO<UQPO'#D`OOQO7+%P7+%POOQO-E8[-E8[OOQO7+%X7+%XOOQO-E8^-E8^OOQO7+%Y7+%YO<vQPO1G/qOOQO'#Eb'#EbO=bQPO1G/qOOQO-E8a-E8aOOQO1G/r1G/rOOQO-E8b-E8bOOQO1G/s1G/sOOQO-E8d-E8dOOQO,5;P,5;POOQO-E8e-E8eOOQO-E8c-E8cOOQO-E8h-E8hOOQO'#El'#ElO=sQPO7+%bOOQO7+%b7+%bOOQO7+%c7+%cO>OQPO,5:iOOQO,5:i,5:iOOQO-E7{-E7{OOQO-E7}-E7}O#kQPO'#EVO>^QPO,59zOOQO-E8`-E8`OOQO-E8j-E8jO?OQPO<<H|OOQO,5:q,5:qOOQO-E8T-E8TOOQO'#Em'#EmO?TQPOAN>hOOQO-E8k-E8kOOQOG24SG24S",
-    stateData: "?c~OpOS#fOS~OSkOUmOXWOY^OZ`O[bO]eO^[O`gObiOdUOgoOiqOlYOmsOnuOtRO#gPO~OQ{O_}O#h!POt!pX#d!pX#g!pX~O_}O#h!PO~Ot!TO#d!gX#g!gX~OdUO#d!PX#g!PX~OlYOt!WOv!]O#j!XO#n!YO~OXWO~P#hOlYOt!bO~O^[Ot!TO~OY^O~P#hOZ`O~P#hO[bO~P#hO]eO#d!YX#g!YX~P#hOlYOt!]Ov!]O#j!XO#n!YO~O`gO~P%UObiO~P%UOSkOt!xO~OUmO#d!bX#g!bX~OgoOt!}Ov!}O~OiqOt#PO~OmsOt#RO~OnuO~P#hOSkOUmOXWOY^OZ`O[bO]eO^[O`gObiOdUOgoOiqOlYOmsOnuOtRO~OQ{OR#XOt#ZOv#ZO~OP#cOt#[Ov#_O#j!XO#n!YO~O_}O~P(cO_}Ot!WOv!]O#j!XO#n!YO~OQ{OtxXvxX#dxX#gxX#jxX#nxX#rxX#sxX#txX#uxX~OlxX}xXcxXaxX~P)^O#k#eO#l#gO~O#o#hO#p#jO~O#r#kO#s#kO#t#lO#u#lOl!vXt!vXv!vX#d!vX#g!vX#j!vX#n!vX~O#d!Qa#g!Qa~P#hOo#pO#d!Ra#g!Ral!Rat!Rav!Ra#j!Ra#n!Rac!Raa!Ra~Ot!TO#d!Ta#g!Ta~O#r#kO#s#kO#t#lO#u#lO#d!Va#g!Va~O#r#kO#s#kO#t#lO#u#lO#d!Wa#g!Wa~O#r#kO#s#kO#t#lO#u#lO#d!Xa#g!Xa~O#r#kO#s#kO#t#lO#u#lO#d!Ya#g!Ya~Oc#rO#r#kO#s#kO#t#lO#u#lO~Oc#rO~Oa#tO#r#kO#s#kO#t#lO#u#lO~Oa#tO~O_}Oe#xOf#zO#h!PO~OV#|OW$OO#d!]a#g!]a~Oh$RO~Oe#xO~Oo#pO#d!ea#g!ea~O#d!fa#g!fa~P#hO#gPOS!iaU!iaX!iaY!iaZ!ia[!ia]!ia^!ia`!iab!iad!iag!iai!ial!iam!ian!iat!ia#d!ia~OR#XO_ui#huiluituivui#dui#gui#jui#nui}uicuiaui~Ot!pX}!pX~P)^O#r#kO#s#kO#t#lO#u#lOt!mXv!mX#d!mX#g!mX#j!mX#n!mX~O}$WOtxXvxX#dxX#gxX#jxX#nxX#rxX#sxX#txX#uxX~Ot!WOv!]O#j!XO#n!YO#dsi#gsi~Ot!TO}$WO~OP#cOt!WOv!]O#j!XO#n!YO~O#k#eO#l$`O~O#o#hO#p$bO~Oo#pOt!WOv!]O#j!XO#n!YO~Oc#rOt$kO~Oa#tOt$mO~OT$oOt!]Ov!]O#j!XO#n!YO~O_}O~P6iOe#xOt$rO~Of#zOt$tO~OV#|Ot!xO~OW$OOt!xO~OV#|OW$OO#d!]i#g!]i~Oh$RO#d!ci#g!ci~Oe#xOk$zOt$|O~Ot!TOv%PO~O}$WO#d|q#g|q~O#r#kO#s#kO#t#lO#u#lOt!sXv!sX#d!sX#g!sX#j!sX#n!sX~Ot!WOv!]O#j!XO#n!YO#d!Oq#g!Oq~O#r#kO#s#kO#t#lO#u#lOl#qit#qiv#qi#d#qi#g#qi#j#qi#n#qic#qia#qi}#qiV#qiW#qi~O#r#kO#s#kO#t#lO#u#lO}#vX#d#vX#g#vXl#vXt#vXv#vX#j#vX#n#vXc#vXa#vX~O}%SO#d!SX#g!SXl!SXt!SXv!SX#j!SX#n!SXc!SXa!SX~O#r#kO#s#kO#t#lO#u#lOV!_iW!_i#d!_i#g!_i~OT$oOV!_iW!_i#d!_i#g!_i~Ok$zOt%WOv%WO~Ot!TO}!qa#d!qa#g!qa~O}%SO#d!Sa#g!Sal!Sat!Sav!Sa#j!Sa#n!Sac!Saa!Sa~Oj%ZO~Oj%ZOt%^Ov%^O~Ovt~",
-    goto: "0s#wPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPP#x#}P$SP${%U&Y&t'S#}P#}#}#}'b(P#}#}(V(V(V#}#}#}#}([(c(c(c#}#}#}#}#}#}(h(r(y)R)X)g)p)v)|*c*j*q*w+P+X+c+u,P,V,_,g,o,w-P-X-`-h-o-w.O.Y.`.f.m.t.|/U/[/d/j/p/xPPPPP0QPPP0QPPP&YPPPP0lVxOQyVwOQyUSOQyW!_Xv!`#SQ!g_Q!jaQ!mcQ!pfY#`!O!Q!R!S#aS$]#d$^V$g#q$U%SQ!QRQ!SSR#w!xW![Xv!`#SQ!e_Q!haQ!kcQ!nfQ!qhQ!tjY#^!O!Q!R!S#aS$Z#d$^Q$c#mQ$d#nU$e#q$U%ST$n#v#w!R!]X_acfhjv!O!Q!R!S!`#S#a#d#m#n#q#v#w$U$^%Si#m![!e!h!k!n!q!t#^$Z$d$e$ni#n![!e!h!k!n!q!t#^$Z$d$e$nUwOQyW!_Xv!`#SQ!g_Q!jaQ!mcQ!pfQ!shR!vjQ$i#qR$}$UVdOQyQ!zlT$v#}$PV!yl#}$PQQOSzQ#UR#UxSyOQR#VyU|R!W#[R#W|Q#Y|R$V#YQ!ORQ!RSU#]!O!R#vR#v!xW#a!O!Q!R!SR$Y#aQ#f!XR$_#fQ#i!YR$a#iUTOQyW!UT!c#b%OQ!c]S#b!O!QR%O$WS$X#_#bR%Q$XS#d!O!QR$[#dQ$^#dR%R$^UVOQyR!VVUXOQyR!^XQ!`XQ#SvT#o!`#SjZOQX_acfhjvy!`#SR!aZQ#q!bQ$U#RT$f#q$UQ%T$hR%Y%TU]OQyR!d]U_OQyR!f_UaOQyR!iaUcOQyR!lcUfOQyR!ofUhOQyR!rhS#s!q!sR$j#sUjOQyR!ujS#u!t!vR$l#uUlOQyR!wlS$p#v#wR%U$pQ#y!xQ$T#PT$q#y$TQ#{!xR$s#{Q$Q!zR$x$QS#}!z$QR$u#}S$P!z$QR$w$PUnOQyR!{nUpOQyR!|pQ$S!}R$y$SUrOQyR#OrQ${$TR%V${Q%[%WR%]%[UtOQyR#QtUvOQyR#Tv!R!ZX_acfhjv!O!Q!R!S!`#S#a#d#m#n#q#v#w$U$^%SS$h#q$UR%X%S",
-    nodeNames: "\u26A0 ask at random if pressed else and or print forward turn color sleep play is add from remove toList clear in not_in repeat times for to range call define return with Comment Program Command Assign Text ListAccess Number Op Expression String Op Op AssignList Comma Ask Clear Print Call Arguments Play Turtle Forward Turn Color Sleep Add Remove If Condition EqualityCheck InListCheck NotInListCheck Else Repeat For Define Return ErrorInvalid",
-    maxTerm: 130,
+    states: ";`QYQPOOOOQO'#Dt'#DtQYQPOOO!dQPO'#EPOOQO'#D|'#D|O!xQPO'#DWO#QQPO'#DPO#YQPO'#DsOOQO'#ET'#ETO#eQPO'#D_OOQO'#EU'#EUO$RQPO'#D`OOQO'#EV'#EVO$YQPO'#DaOOQO'#EW'#EWO$bQPO'#DcOOQO'#EX'#EXO$iQPO'#DdOOQO'#EY'#EYO$pQPO'#DeOOQO'#Db'#DbOOQO'#EZ'#EZO$wQPO'#DfOOQO'#E['#E[O%gQPO'#DgOOQO'#E^'#E^O%nQPO'#DhOOQO'#E`'#E`O%uQPO'#DiOOQO'#Eg'#EgO%}QPO'#DnOOQO'#Eh'#EhO&YQPO'#DoOOQO'#Ej'#EjO&eQPO'#DpOOQO'#Em'#EmO&mQPO'#DqOOQO'#En'#EnO&uQPO'#DrOOQO'#DO'#DOQ!_QPO'#DuQ&|QPOOOOQO-E7r-E7rOOQO'#Dv'#DvO(TQPO,59mOOQO'#Dx'#DxO(wQPO,59kOOQO'#DT'#DTO(cQPO,59kOOQO-E7z-E7zO)OQPO,59rO*SQPO,59kO#pQPO,59kOOQO'#EP'#EPOOQO-E7}-E7}OOQO-E8R-E8RO+RQPO'#DUO+fOSO'#EtO+nOQO'#ExOOQO'#DV'#DVO+vQPO'#ESOOQO'#DU'#DUOOQO'#ES'#ESO,kQPO,59zOOQO-E8S-E8SO,uQPO,59{OOQO-E8T-E8TO-QQPO,59}OOQO-E8U-E8UOOQO,59},59}O-fQPO,5:OOOQO-E8V-E8VOOQO,5:O,5:OO-zQPO,5:POOQO-E8W-E8WOOQO,5:P,5:PO.`QPO,5:QOOQO-E8X-E8XOOQO,5:Q,5:QO.tQPO,5:ROOQO-E8Y-E8YO/VQPO,5:SOOQO-E8[-E8[OOQO-E8^-E8^O/hQPO'#DkOOQO'#Dj'#DjO/vQPO,5:TOOQO-E8e-E8eOOQO-E8f-E8fO0UQPO,5:ZOOQO-E8h-E8hO0ZQPO,5:[OOQO-E8k-E8kO0`QPO,5:]O0kQPO,5:^OOQO-E8l-E8lO0uQPO,5:aOOQO-E7s-E7sOOQO-E7t-E7tOOQO'#Dw'#DwO2SQPO1G/XOOQO1G/X1G/XO3aQPO'#DUOOQO-E7v-E7vO3kQPO'#DyO4`QPO1G/cOOQO'#Dy'#DyO5WQPO1G/VO5bQPO1G/cOOQO'#ER'#ERO5jQPO1G/dOOQO'#D}'#D}O5qQPO1G/^OOOO'#Dz'#DzO5xOSO,5;`OOQO,5;`,5;`OOOO'#D{'#D{O6QOQO,5;dOOQO,5;d,5;dOOQO'#DZ'#DZOOQO'#D['#D[O%UQPO,5;iO%UQPO,5;iOOQO-E8Q-E8QOOQO'#E]'#E]O6YQPO1G/mOOQO'#E_'#E_O6bQPO1G/nO6jQPO,5:VO6tQPO,5:VOOQO'#Eb'#EbO6{QPO,5:WOOQO'#Ec'#EcO7TQPO,5:XOOQO'#Ee'#EeO7]QPO'#EdOOQO'#Ef'#EfO7eQPO'#EdO7mQPO1G/oOOQO'#Ei'#EiO7{QPO1G/uO8WQPO1G/vO5qQPO1G/wOOQO-E7u-E7uO8cQPO'#EQO8kQPO7+$}OOQO-E7w-E7wOOQO-E8P-E8PO8vQPO7+%OOOQO-E7{-E7{O9QQPO'#E|OOQO'#E|'#E|O:UQPO'#DXOOQO7+$x7+$xOOOO-E7x-E7xOOQO1G0z1G0zOOOO-E7y-E7yOOQO1G1O1G1OOOQO1G1T1G1TO;YQPO1G1TOOQO-E8Z-E8ZOOQO7+%X7+%XOOQO-E8]-E8]OOQO7+%Y7+%YO<ZQPO1G/qOOQO'#Ea'#EaO<uQPO1G/qOOQO-E8`-E8`OOQO1G/r1G/rOOQO-E8a-E8aOOQO1G/s1G/sOOQO-E8c-E8cOOQO,5;O,5;OOOQO-E8d-E8dOOQO-E8b-E8bOOQO-E8g-E8gOOQO'#Ek'#EkO=WQPO7+%bOOQO7+%b7+%bOOQO7+%c7+%cO=cQPO,5:lOOQO,5:l,5:lOOQO-E8O-E8OO#pQPO'#EOO=qQPO,59sOOQO-E8_-E8_OOQO-E8i-E8iO>uQPO<<H|OOQO,5:j,5:jOOQO-E7|-E7|OOQO'#El'#ElO>zQPOAN>hOOQO'#DX'#DXOOQO-E8j-E8jOOQOG24SG24SPOQO,59s,59sO5qQPO1G/^O?VQPO,59rO?^QPO'#DWO%UQPO,5;iO%UQPO,5;iO?fQPO1G1T",
+    stateData: "?p~OpOS#eOS~OSkOUmOXSOZYO[^O]`O^bO_eO`[ObgOdiOfWOioOkqOnsOouOtRO#fPO~OQ{Oa}O#g!POt!sX#c!sX#f!sX~OXSOt!SO~Oa}O#g!PO~Ot!VO#c!gX#f!gX~OfWO#c!RX#f!RX~OXSOt!YOv!_O#i!ZO#m![O~OZYO~P#pO`[Ot!VO~O[^O~P#pO]`O~P#pO^bO~P#pO_eO#c!YX#f!YX~P#pOXSOt!_Ov!_O#i!ZO#m![O~ObgO~P%UOdiO~P%UOSkOt!vO~OUmO#c!bX#f!bX~OioOt!{Ov!{O~OkqOt!}O~OnsOt#PO~OouO~P#pOSkOUmOXSOZYO[^O]`O^bO_eO`[ObgOdiOfWOioOkqOnsOouOtRO~OQ{OR#VOt#XOv#XO~OP#aOXSOt#YOv#]O#i!ZO#m![O~Oa}O~P(cOY#cO#cza#fzaXzatzavza#iza#mza#rza#sza#tza#uzaezaczaVzaWza~Oa}O~P#pOQ{OXxXtxXvxX#cxX#fxX#ixX#mxX#rxX#sxX#txX#uxX~O|xXexXcxXVxXWxX~P*ZO#j#eO#k#gO~O#n#hO#o#jO~O#r#kO#s#kO#t#lO#u#lOX!vXt!vXv!vX#c!vX#f!vX#i!vX#m!vX~O#c!Sa#f!Sa~P#pOt!VO#c!Ta#f!Ta~O#r#kO#s#kO#t#lO#u#lO#c!Va#f!Va~O#r#kO#s#kO#t#lO#u#lO#c!Wa#f!Wa~O#r#kO#s#kO#t#lO#u#lO#c!Xa#f!Xa~O#r#kO#s#kO#t#lO#u#lO#c!Ya#f!Ya~Oe#pO#r#kO#s#kO#t#lO#u#lO~Oc#rO#r#kO#s#kO#t#lO#u#lO~Oa}Og#vOh#xO#g!PO~OV#zOW#|O#c!]a#f!]a~Oj$PO~Og#vO~OY#cO#c!ea#f!ea~O#c!fa#f!fa~P#pO#fPOS!iaU!iaX!iaZ!ia[!ia]!ia^!ia_!ia`!iab!iad!iaf!iai!iak!ian!iao!iat!ia#c!ia~OR#VOaui#guiXuituivui#cui#fui#iui#mui|ui#rui#sui#tui#uuieuicuiVuiWui~Ot!sX|!sX~P*ZO#r#kO#s#kO#t#lO#u#lOX!mXt!mXv!mX#c!mX#f!mX#i!mX#m!mX~O|$UOXxXtxXvxX#cxX#fxX#ixX#mxX#rxX#sxX#txX#uxX~O#csi#fsi~P#pOt!VO|$UO~OP#aO~P#pOY#cO~P#pO#j#eO#k$aO~O#n#hO#o$cO~Oe#pOt$gO~Oc#rOt$iO~OT$kOa}O~P%UOT$kO~P%UOg#vOt$nO~Oh#xOt$pO~OV#zOt!vO~OW#|Ot!vO~OV#zOW#|O#c!]i#f!]i~Oj$PO#c!ci#f!ci~Og#vOm$vOt$xO~Ot!VOv${O~O|$UO#c!Pq#f!Pq~O#c!Qq#f!Qq~P#pO#r#kO#s#kO#t#lO#u#lO|#pX#c#pX#f#pXX#pXt#pXv#pX#i#pX#m#pXe#pXc#pXV#pXW#pX~O|$}O#c{X#f{XX{Xt{Xv{X#i{X#m{X#r{X#s{X#t{X#u{Xe{Xc{XV{XW{X~O#r#kO#s#kO#t#lO#u#lOX#qit#qiv#qi#c#qi#f#qi#i#qi#m#qie#qic#qiV#qiW#qi~O#r#kO#s#kO#t#lO#u#lOV!_iW!_i#c!_i#f!_i~OT$kOV!_iW!_i#c!_i#f!_i~Om$vOt%ROv%RO~Ot!VO|!ta#c!ta#f!ta~O|$}O#c{a#f{aX{at{av{a#i{a#m{a#r{a#s{a#t{a#u{ae{ac{aV{aW{a~Ol%UO~Ol%UOt%YOv%YO~O|za~P)OOXSOt%]O~O|#qi~P;YOvt~",
+    goto: "1i#rPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPP#s#xP#}P$u%O&V&t'hP'o(P#x#x#x#x#x#x(a(a(a#x#x#x#x(f(m(m(m#x#x#x#x#x#x(r(|)T)])c)q)z*Q*W+O+^+d+y,Q,X,g,o,w-P-X-a-i-q-y.P.X._.g.n.x/O/U/]/d/l/t/z0S0Y0`0hPPPPP0pPPP0pPPP1_&VVxOQyVwOQyUUOQy[!`Zv!a#Q#b$YQ!g_Q!jaQ!mcQ!pfY#^!O!Q!T!U#_X$]#d$S$}%[Q!QRQ!UUR#u!v[!^Zv!a#Q#b$YQ!e_Q!haQ!kcQ!nfQ!qhQ!sjY#[!O!Q!T!U#_W$[#d$S$}%[S$d#m%_Q$e#nS$j#t#uR%a%`!X!_Z_acfhjv!O!Q!T!U!a#Q#_#b#d#m#n#t#u$S$Y$}%[%_%`UwOQy!X!_Z_acfhjv!O!Q!T!U!a#Q#_#b#d#m#n#t#u$S$Y$}%[%_%`S$_#d%[R$y$Sd#m!^!e!h!k!n!q!s#[$e$jT%_$[%ad#n!^!e!h!k!n!q!s#[$e$jT%`$[%aVdOQyQ!xlT$r#{#}V!wl#{#}QQOSzQ#SR#SxSyOQR#TyU|R!Y#YR#U|Q#W|R$T#WQ!ORQ!TUU#Z!O!T#tR#t!vW#_!O!Q!T!UR$W#_Q#f!ZR$`#fQ#i![R$b#i!QTOQZ_acfhjvy!O!Q!T!U!a#Q#_#b#m#n#t#u$YS!RT%^]%^#d$S$}%[%_%`Q#d!SQ$S#PU$Z#d$S%[R%[%]Q%O$^R%T%OUVOQyW!WV!c#`$zQ!c]S#`!O!QR$z$US$V#]#`R$|$VS#b!O!QR$X#bQ!aZQ#QvU#o!a#Q$YR$Y#bUXOQyR!XXUZOQyR!bZU]OQyR!d]U_OQyR!f_UaOQyR!iaUcOQyR!lcUfOQyR!ofUhOQyR!rhQ#q!qR$f#qUjOQyR!tjQ#s!sR$h#sUlOQyR!ulS$l#t#uR%P$lQ#w!vQ$R!}T$m#w$RQ#y!vR$o#yQ$O!xR$t$OS#{!x$OR$q#{S#}!x$OR$s#}UnOQyR!ynUpOQyR!zpQ$Q!{R$u$QUrOQyR!|rQ$w$RR%Q$wQ%V%RR%X%VUtOQyR#OtUvOQyR#Rv!X!]Z_acfhjv!O!Q!T!U!a#Q#_#b#d#m#n#t#u$S$Y$}%[%_%`S$^#d$SQ%S$}R%W%[",
+    nodeNames: "\u26A0 ask at random if pressed else and or call with print forward turn color sleep play is add from remove toList clear in not_in repeat times for to range define return Comment Program Command Assign Text ListAccess Number Op Expression String Call Arguments Comma Op Op AssignList Ask Clear Print Play Turtle Forward Turn Color Sleep Add Remove If Condition EqualityCheck InListCheck NotInListCheck Else Repeat For Define Return ErrorInvalid",
+    maxTerm: 129,
     nodeProps: [
       ["group", 52, "turtle"]
     ],
     skippedNodes: [0, 32],
-    repeatNodeCount: 42,
-    tokenData: "1U~R!^OY$}YZ&UZp$}pq&Zqr$}rs&`st&etw$}wx&|xz$}z{'R{|'W|}']}!O'b!O!P$}!P!Q'g!Q!R'l!R!S'l!S!T'l!T!U'l!U!V'l!V!W'l!W!X'l!X!Y'l!Y!Z'l!Z!['l![!_$}!_!`1P!`#Q$}#RBn$}BnBo']BoDf$}DfDg'lDgDh'lDhDi'lDiDj'lDjDk'lDkDl'lDlDm'lDmDn'lDnDo'lDoDp'lDpGl$}GlGm'lGmGn'lGnGo'lGoGp'lGpGq'lGqGr'lGrGs'lGsGt'lGtGu'lGuGv'lGv&FV$}&FV&FW']&FW;'S$};'S;=`&O<%l?Hb$}?Hb?Hc']?HcO$}~%S^t~OY$}Zp$}qr$}tw$}xz$}!O!P$}!Q!_$}!`#Q$}#RBn$}Bo&FV$}&FW;'S$};'S;=`&O<%l?Hb$}?HcO$}~&RP;=`<%l$}~&ZO#g~~&`O#f~~&eO#j~~&jSp~OY&eZ;'S&e;'S;=`&v<%lO&e~&yP;=`<%l&e~'RO#n~~'WO#r~~']O#t~~'bO}~~'gO#u~~'lO#s~~'s!Ov~t~OY$}Zp$}qr$}tw$}xz$}!O!P*s!Q!R'l!R!S'l!S!T'l!T!U'l!U!V'l!V!W'l!W!X'l!X!Y'l!Y!Z'l!Z!['l![!_$}!`#Q$}#RBn$}BoDf$}DfDg'lDgDh'lDhDi'lDiDj'lDjDk'lDkDl'lDlDm'lDmDn'lDnDo'lDoDp'lDpGl$}GlGm'lGmGn'lGnGo'lGoGp'lGpGq'lGqGr'lGrGs'lGsGt'lGtGu'lGuGv'lGv&FV$}&FW;'S$};'S;=`&O<%l?Hb$}?HcO$}~*x!Ot~OY$}Zp$}qr$}tw$}xz$}!O!P$}!Q!R-x!R!S-x!S!T-x!T!U-x!U!V-x!V!W-x!W!X-x!X!Y-x!Y!Z-x!Z![-x![!_$}!`#Q$}#RBn$}BoDf$}DfDg-xDgDh-xDhDi-xDiDj-xDjDk-xDkDl-xDlDm-xDmDn-xDnDo-xDoDp-xDpGl$}GlGm-xGmGn-xGnGo-xGoGp-xGpGq-xGqGr-xGrGs-xGsGt-xGtGu-xGuGv-xGv&FV$}&FW;'S$};'S;=`&O<%l?Hb$}?HcO$}~.P!Ov~t~OY$}Zp$}qr$}tw$}xz$}!O!P$}!Q!R-x!R!S-x!S!T-x!T!U-x!U!V-x!V!W-x!W!X-x!X!Y-x!Y!Z-x!Z![-x![!_$}!`#Q$}#RBn$}BoDf$}DfDg-xDgDh-xDhDi-xDiDj-xDjDk-xDkDl-xDlDm-xDmDn-xDnDo-xDoDp-xDpGl$}GlGm-xGmGn-xGnGo-xGoGp-xGpGq-xGqGr-xGrGs-xGsGt-xGtGu-xGuGv-xGv&FV$}&FW;'S$};'S;=`&O<%l?Hb$}?HcO$}~1UO#h~",
-    tokenizers: [2, new LocalTokenGroup("_~RQYZXwxX~^O#p~~", 14, 123), new LocalTokenGroup("_~RQYZXrsX~^O#l~~", 14, 119)],
+    repeatNodeCount: 41,
+    tokenData: "1U~R!^OY$}YZ&UZp$}pq&Zqr$}rs&`st&etw$}wx&|xz$}z{'R{|'W|}']}!O'b!O!P$}!P!Q'g!Q!R'l!R!S'l!S!T'l!T!U'l!U!V'l!V!W'l!W!X'l!X!Y'l!Y!Z'l!Z!['l![!_$}!_!`1P!`#Q$}#RBn$}BnBo']BoDf$}DfDg'lDgDh'lDhDi'lDiDj'lDjDk'lDkDl'lDlDm'lDmDn'lDnDo'lDoDp'lDpGl$}GlGm'lGmGn'lGnGo'lGoGp'lGpGq'lGqGr'lGrGs'lGsGt'lGtGu'lGuGv'lGv&FV$}&FV&FW']&FW;'S$};'S;=`&O<%l?Hb$}?Hb?Hc']?HcO$}~%S^t~OY$}Zp$}qr$}tw$}xz$}!O!P$}!Q!_$}!`#Q$}#RBn$}Bo&FV$}&FW;'S$};'S;=`&O<%l?Hb$}?HcO$}~&RP;=`<%l$}~&ZO#f~~&`O#e~~&eO#i~~&jSp~OY&eZ;'S&e;'S;=`&v<%lO&e~&yP;=`<%l&e~'RO#m~~'WO#r~~']O#t~~'bO|~~'gO#u~~'lO#s~~'s!Ov~t~OY$}Zp$}qr$}tw$}xz$}!O!P*s!Q!R'l!R!S'l!S!T'l!T!U'l!U!V'l!V!W'l!W!X'l!X!Y'l!Y!Z'l!Z!['l![!_$}!`#Q$}#RBn$}BoDf$}DfDg'lDgDh'lDhDi'lDiDj'lDjDk'lDkDl'lDlDm'lDmDn'lDnDo'lDoDp'lDpGl$}GlGm'lGmGn'lGnGo'lGoGp'lGpGq'lGqGr'lGrGs'lGsGt'lGtGu'lGuGv'lGv&FV$}&FW;'S$};'S;=`&O<%l?Hb$}?HcO$}~*x!Ot~OY$}Zp$}qr$}tw$}xz$}!O!P$}!Q!R-x!R!S-x!S!T-x!T!U-x!U!V-x!V!W-x!W!X-x!X!Y-x!Y!Z-x!Z![-x![!_$}!`#Q$}#RBn$}BoDf$}DfDg-xDgDh-xDhDi-xDiDj-xDjDk-xDkDl-xDlDm-xDmDn-xDnDo-xDoDp-xDpGl$}GlGm-xGmGn-xGnGo-xGoGp-xGpGq-xGqGr-xGrGs-xGsGt-xGtGu-xGuGv-xGv&FV$}&FW;'S$};'S;=`&O<%l?Hb$}?HcO$}~.P!Ov~t~OY$}Zp$}qr$}tw$}xz$}!O!P$}!Q!R-x!R!S-x!S!T-x!T!U-x!U!V-x!V!W-x!W!X-x!X!Y-x!Y!Z-x!Z![-x![!_$}!`#Q$}#RBn$}BoDf$}DfDg-xDgDh-xDhDi-xDiDj-xDjDk-xDkDl-xDlDm-xDmDn-xDnDo-xDoDp-xDpGl$}GlGm-xGmGn-xGnGo-xGoGp-xGpGq-xGqGr-xGrGs-xGsGt-xGtGu-xGuGv-xGv&FV$}&FW;'S$};'S;=`&O<%l?Hb$}?HcO$}~1UO#g~",
+    tokenizers: [2, new LocalTokenGroup("_~RQYZXwxX~^O#o~~", 14, 122), new LocalTokenGroup("_~RQYZXrsX~^O#k~~", 14, 118)],
     topRules: { "Program": [0, 33] },
     dynamicPrecedences: { "69": -10 },
     specialized: [{ term: 36, get: (value, stack) => specializeKeyword(value, stack) << 1, external: specializeKeyword }, { term: 36, get: (value, stack) => extendKeyword(value, stack) << 1 | 1, external: extendKeyword, extend: true }],
-    tokenPrec: 1396
+    tokenPrec: 1409
   });
 
   // static/js/lezer-parsers/level14-parser.ts
   var parser14 = LRParser.deserialize({
     version: 14,
-    states: "=dQYQPOOOOQO'#Dz'#DzQYQPOOO!dQPO'#ESO!xQPO'#DPO#QQPO'#DyOOQO'#EW'#EWO#]QPO'#D]OOQO'#EX'#EXO#yQPO'#D^OOQO'#EZ'#EZO$QQPO'#D_OOQO'#E^'#E^O$YQPO'#DaOOQO'#E_'#E_O$bQPO'#DcOOQO'#E`'#E`O$iQPO'#DdOOQO'#Ea'#EaO$pQPO'#DeOOQO'#Db'#DbOOQO'#Eb'#EbO$wQPO'#DfOOQO'#Ec'#EcO%gQPO'#DgOOQO'#Ee'#EeO%nQPO'#DhOOQO'#Eg'#EgO&WQPO'#DiOOQO'#En'#EnO&_QPO'#DtOOQO'#Eo'#EoO&jQPO'#DuOOQO'#Eq'#EqO&uQPO'#DvOOQO'#Et'#EtO&}QPO'#DwOOQO'#Eu'#EuO'VQPO'#DxOOQO'#DO'#DOQ!_QPO'#D{Q'^QPOOOOQO-E7x-E7xOOQO'#D|'#D|O(eQPO,59mOOQO'#EO'#EOO)UQPO,59kOOQO'#DT'#DTO(sQPO,59kO)]QPO,59kO#kQPO,59kOOQO'#ES'#ESOOQO-E8Q-E8QOOQO-E8U-E8UO*cQPO'#DUO+`OSO'#E{O+hOQO'#FPOOQO'#DV'#DVO+pQPO'#EYOOQO'#DU'#DUOOQO-E8V-E8VOOQO'#EY'#EYO,eQPO,59xOOQO-E8X-E8XO,oQPO,59yO-|QPO,59{OOQO-E8[-E8[O.XQPO,59}OOQO-E8]-E8]OOQO,59},59}O.mQPO,5:OOOQO-E8^-E8^OOQO,5:O,5:OO/RQPO,5:POOQO-E8_-E8_OOQO,5:P,5:PO/gQPO,5:QOOQO-E8`-E8`OOQO,5:Q,5:QO/{QPO,5:ROOQO-E8a-E8aO0^QPO,5:RO0cQPO,5:SOOQO-E8c-E8cO0tQPO,5:SO1bQPO'#DlO1rQPO'#DUOOQO-E8e-E8eO0yQPO'#DlOOQO'#Dj'#DjO1yQPO,5:TOOQO-E8l-E8lOOQO-E8m-E8mO2XQPO,5:aOOQO-E8o-E8oO2^QPO,5:bOOQO-E8r-E8rO2cQPO,5:cO2nQPO,5:dOOQO-E8s-E8sO2xQPO,5:gOOQO-E7y-E7yOOQO-E7z-E7zOOQO'#D}'#D}O4VQPO1G/XOOQO1G/X1G/XO6XQPO'#DUOOQO-E7|-E7|O6fQPO'#EPO7WQPO1G/`OOQO'#EP'#EPO7_QPO1G/VO7sQPO1G/`OOQO'#EU'#EUO7{QPO1G/bOOOO'#EQ'#EQO8^OSO,5;gOOQO,5;g,5;gOOOO'#ER'#ERO8fOQO,5;kOOQO,5;k,5;kOOQO'#DW'#DWOOQO'#DX'#DXO%XQPO,5;oO%XQPO,5;oOOQO-E8W-E8WOOQO'#E['#E[O8nQPO1G/eOOQO'#Ed'#EdO9PQPO1G/mOOQO'#Ef'#EfO9XQPO1G/nO9aQPO,5:WO9hQPO,5:WOOQO'#Dn'#DnO%UQPO,5:XOOQO'#Dp'#DpOOQO'#Dq'#DqO9hQPO,5:ZOOQO'#Ei'#EiO9oQPO,5:^OOQO'#Ej'#EjO9wQPO,5:_O:PQPO,5:VOOQO'#El'#ElO:XQPO'#EkOOQO'#Em'#EmO:`QPO'#EkO:gQPO1G/oOOQO'#Ep'#EpO:uQPO1G/{O;QQPO1G/|O8nQPO1G/}OOQO-E7{-E7{O;]QPO'#ETO;eQPO7+$zOOQO-E7}-E7}O;pQPO'#EVOOQO-E8S-E8SOOQO'#EV'#EVO<bQPO7+$|OOOO-E8O-E8OOOQO1G1R1G1ROOOO-E8P-E8POOQO1G1V1G1VOOQO1G1Z1G1ZO<vQPO1G1ZO>aQPO'#FYOOQO-E8Y-E8YOOQO'#FY'#FYO?zQPO'#D`OOQO7+%P7+%POOQO-E8b-E8bOOQO7+%X7+%XOOQO-E8d-E8dOOQO7+%Y7+%YOAXQPO1G/rOOQO1G/r1G/rO%UQPO1G/rOAsQPO1G/sOOQO1G/s1G/sOB_QPO1G/uOOQO1G/u1G/uO%UQPO1G/uOOQO-E8g-E8gOOQO1G/x1G/xOOQO-E8h-E8hOOQO1G/y1G/yOOQO'#Eh'#EhOByQPO1G/qOOQO-E8j-E8jOOQO,5;V,5;VOOQO-E8k-E8kOOQO-E8i-E8iOOQO-E8n-E8nOOQO'#Er'#ErOC[QPO7+%hOOQO7+%h7+%hOOQO7+%i7+%iOCgQPO,5:oOOQO,5:o,5:oOOQO-E8R-E8ROOQO-E8T-E8TO#kQPO'#E]OCuQPO,59zOESQPO7+%^OOQO7+%^7+%^OEnQPO7+%aOOQO7+%a7+%aOOQO-E8f-E8fOOQO-E8p-E8pOFYQPO<<ISOOQO,5:w,5:wOOQO-E8Z-E8ZOOQO'#Es'#EsOF_QPOAN>nOOQO-E8q-E8qOOQOG24YG24Y",
-    stateData: "Fm~OpOS#lOS~OSkOUmOYWOZ^O[`O]bO^eO_[O`gObiOdUOgoOiqOlYOmsOnuOtRO#mPO~OQ{OX}O#n!POt!vX#j!vX#m!vX~OX}O#n!PO~Ot!TO#j!mX#m!mX~OdUO#j!PX#m!PX~OlYOt!WOv!]O#p!XO#t!YO~OYWO~P#hOlYOt!bO~O_[Ot!TO~OZ^O~P#hO[`O~P#hO]bO~P#hO^eO#j!YX#m!YX~P#hOlYOt!]Ov!]O#p!XO#t!YO~O`gO~P%UObiO~P%UOlYOt!xOv!]O#p!XO#t!YO~OSkO~P%uOUmO#j!hX#m!hX~OgoOt#POv#PO~OiqOt#RO~OmsOt#TO~OnuO~P#hOSkOUmOYWOZ^O[`O]bO^eO_[O`gObiOdUOgoOiqOlYOmsOnuOtRO~OQ{OR#ZOt#]Ov#]O~OP#eOt#^Ov#aO#p!XO#t!YO~OX}O~P(sOX}Ot!WOv!]O#p!XO#t!YO~O#xxX#yxX#zxX#{xXXxXexXfxX#nxX#}xX$OxX$PxX~OQ{OlxXtxXvxX#jxX#mxX#pxX#txX}xXcxXaxXVxXWxX~P)nO#q#gO#r#iO~O#u#jO#v#lO~O#x#mO#y#mO#z#nO#{#nOl!|Xt!|Xv!|X#j!|X#m!|X#p!|X#t!|X~O#j!Qa#m!Qa~P#hOo#rO#j!Ra#m!Ral!Rat!Rav!Ra#p!Ra#t!Rac!Raa!RaX!Rae!Raf!Ra#n!Ra#}!Ra$O!Ra$P!RaV!RaW!Ra~Ot!TO#j!Ta#m!Ta~O#x#mO#y#mO#z#nO#{#nO#j!Va#m!Va~O#x#mO#y#mO#z#nO#{#nO#j!Wa#m!Wa~O#x#mO#y#mO#z#nO#{#nO#j!Xa#m!Xa~O#x#mO#y#mO#z#nO#{#nO#j!Ya#m!Ya~Oc#tO#x#mO#y#mO#z#nO#{#nO~Oc#tO~Oa#vO#x#mO#y#mO#z#nO#{#nO~Oa#vO~OX}Oe$POf$RO#n!PO#}#zO$O#|O$P#}O~O#x#mO#y#mO#z#nO#{#nO~P0yOX}O~P)nOV$UOW$WO#j!]a#m!]a~Oh$ZO~Oe$PO~Oo#rO#j!ka#m!ka~O#j!la#m!la~P#hO#mPOS!oaU!oaY!oaZ!oa[!oa]!oa^!oa_!oa`!oab!oad!oag!oai!oal!oam!oan!oat!oa#j!oa~OR#ZOXui#nuiluituivui#jui#mui#pui#tui}uicuiauieuifui#}ui$Oui$PuiVuiWui~OtxXvxX#jxX#mxX#pxX#txX#xxX#yxX#zxX#{xX~OQ{Ot!vX}!vX~P5gO#x#mO#y#mO#z#nO#{#nOt!sXv!sX#j!sX#m!sX#p!sX#t!sX~O}$`O~P5gOt!WOv!]O#p!XO#t!YO#jsi#msi~Ot!TO}$`O~OP#eOt!WOv!]O#p!XO#t!YO~O#q#gO#r$hO~O#u#jO#v$jO~Oo#rOt!WOv!]O#p!XO#t!YO~Oc#tOt$sO~Oa#vOt$uO~OX}O~P%UO#n!PO~P%UOe$POt%PO~Of$ROt%RO~OT%SOX}O~OV$UO~P%uOW$WO~P%uOV$UOW$WO#j!]i#m!]i~Oh$ZO#j!ii#m!ii~Oe$POk%ZOt%]O~Ot!TOv%`O~O}$`O#j|q#m|q~O#x#mO#y#mO#z#nO#{#nOt!yXv!yX#j!yX#m!yX#p!yX#t!yX~Ot!WOv!]O#p!XO#t!YO#j!Oq#m!Oq~O#x#mO#y#mO#z#nO#{#nOl#wit#wiv#wi#j#wi#m#wi#p#wi#t#wic#wia#wiX#wie#wif#wi#n#wi#}#wi$O#wi$P#wi}#wiV#wiW#wi~O#x#mO#y#mO#z#nO#{#nO}#|X#j#|X#m#|Xl#|Xt#|Xv#|X#p#|X#t#|Xc#|Xa#|XX#|Xe#|Xf#|X#n#|X#}#|X$O#|X$P#|XV#|XW#|X~O}%cO#j!SX#m!SXl!SXt!SXv!SX#p!SX#t!SXc!SXa!SXX!SXe!SXf!SX#n!SX#}!SX$O!SX$P!SXV!SXW!SX~O#x#mO#y#mO#z#nO#{#nOV!`iW!`i#j!`i#m!`i~O#x#mO#y#mO#z#nO#{#nOV!aiW!ai#j!ai#m!ai~O#x#mO#y#mO#z#nO#{#nOV!ciW!ci#j!ci#m!ci~OT%SOV!_iW!_i#j!_i#m!_i~Ok%ZOt%kOv%kO~Ot!TO}!wa#j!wa#m!wa~O}%cO#j!Sa#m!Sal!Sat!Sav!Sa#p!Sa#t!Sac!Saa!SaX!Sae!Saf!Sa#n!Sa#}!Sa$O!Sa$P!SaV!SaW!Sa~O#x#mO#y#mO#z#nO#{#nOV!`qW!`q#j!`q#m!`q~O#x#mO#y#mO#z#nO#{#nOV!cqW!cq#j!cq#m!cq~Oj%nO~Oj%nOt%qOv%qO~Ovt~",
-    goto: "2y#}PPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPP$O$TP$YP%R%c&x'k(O$TP$T$T$T(c)g$T$T)m)m)m$T$T$T$T)r)y)y)y*O)y*S*S)y)y$T$T$T$T$T$T*W*b*i*q*w+[+e+k+q,W,_,f,l,t,|-W-s-}.T.].e.m.u.}/V/^/f/m/u/{0W0_0e0l0s0{1T1Z1c1i1o1wPPPPP2PPPP2PPPP&xPPPP2rVxOQyVwOQyUSOQyW!_Xv!`#UQ!g_Q!jaQ!mcQ!pfY#b!O!Q!R!S#cS$e#f$fV$o#s$^%cQ!QRQ!SSS#y!w!zQ$x#yR$}$OW![Xv!`#UQ!e_Q!haQ!kcQ!nfQ!qhQ!tjU!wl$V$XY#`!O!Q!R!S#cS$c#f$fQ$k#oQ$l#pU$m#s$^%cS$v#x#yQ$y#{Q${$OQ%e$xR%g$}!a!]X_acfhjlv!O!Q!R!S!`#U#c#f#o#p#s#x#y#{$O$V$X$^$f$x$}%cs#o![!e!h!k!n!q!t!w#`$c$l$m$v$y${%e%gs#p![!e!h!k!n!q!t!w#`$c$l$m$v$y${%e%gUwOQyW!_Xv!`#UQ!g_Q!jaQ!mcQ!pfQ!shQ!vjU!zl$V$XS$w#x#yQ$z#{Q$|$OQ%f$xR%h$}Q$q#sR%^$^VdOQyQ!|lT%V$V$XV!{l$V$XT#{!w!zT$O!w!zQQOSzQ#WR#WxSyOQR#XyU|R!W#^R#Y|Q#[|R$_#[Q!ORQ!RSW#_!O!R#x$TS#x!w!zR$T!xW#c!O!Q!R!SR$b#cQ#h!XR$g#hQ#k!YR$i#kUTOQyW!UT!c#d%_Q!c]S#d!O!QR%_$`S$a#a#dR%a$aS#f!O!QR$d#fQ$f#fR%b$fUVOQyR!VVUXOQyR!^XQ!`XQ#UvT#q!`#U|ZOQX_acfhjlvy!`#U#x#y#{$O$V$X$x$}R!aZQ#s!bQ$^#TT$n#s$^Q%d$pR%m%dU]OQyR!d]U_OQyR!f_UaOQyR!iaUcOQyR!lcUfOQyR!ofUhOQyR!rhS#u!q!sR$r#uUjOQyR!ujS#w!t!vR$t#wUlOQyR!ylQ%T$TR%i%TS$Q!w!zQ$]#RT%O$Q$]S$S!w!zR%Q$SQ$Y!|R%X$YS$V!|$YR%U$VS$X!|$YR%W$XUnOQyR!}nUpOQyR#OpQ$[#PR%Y$[UrOQyR#QrQ%[$]R%j%[Q%o%kR%p%oUtOQyR#StUvOQyR#Vv!a!ZX_acfhjlv!O!Q!R!S!`#U#c#f#o#p#s#x#y#{$O$V$X$^$f$x$}%cS$p#s$^R%l%c",
-    nodeNames: "\u26A0 ask at random if pressed else and or is print forward turn color sleep play add from remove toList clear in not_in repeat times for to range call define return with Comment Program Command Assign Text ListAccess Number Op Expression String Op Op AssignList Comma Ask Clear Print Call Arguments Play Turtle Forward Turn Color Sleep Add Remove If Condition PressedCheck EqualityCheck NotEqualCheck Op ComparisonCheck Op Op InListCheck NotInListCheck Else Repeat For Define Return ErrorInvalid",
-    maxTerm: 139,
+    states: "=QQYQPOOOOQO'#Dz'#DzQYQPOOO!dQPO'#EVOOQO'#ES'#ESO!xQPO'#DWO#QQPO'#DPO#YQPO'#DyOOQO'#EZ'#EZO#eQPO'#D_OOQO'#E['#E[O$RQPO'#D`OOQO'#E]'#E]O$YQPO'#DaOOQO'#E^'#E^O$bQPO'#DcOOQO'#E_'#E_O$iQPO'#DdOOQO'#E`'#E`O$pQPO'#DeOOQO'#Db'#DbOOQO'#Ea'#EaO$wQPO'#DfOOQO'#Eb'#EbO%gQPO'#DgOOQO'#Ed'#EdO%nQPO'#DhOOQO'#Ef'#EfO&WQPO'#DiOOQO'#Em'#EmO&_QPO'#DtOOQO'#En'#EnO&jQPO'#DuOOQO'#Ep'#EpO&uQPO'#DvOOQO'#Es'#EsO&}QPO'#DwOOQO'#Et'#EtO'VQPO'#DxOOQO'#DO'#DOQ!_QPO'#D{Q'^QPOOOOQO-E7x-E7xOOQO'#D|'#D|O(eQPO,59mOOQO'#EO'#EOO)XQPO,59kOOQO'#DT'#DTO(sQPO,59kOOQO-E8Q-E8QO)`QPO,59rO*yQPO,59kO#pQPO,59kOOQO'#EV'#EVOOQO-E8T-E8TOOQO-E8X-E8XO+xQPO'#DUO,rOSO'#EzO,zOQO'#FOOOQO'#DV'#DVO-SQPO'#EYOOQO'#DU'#DUOOQO'#EY'#EYO-wQPO,59zOOQO-E8Y-E8YO.RQPO,59{OOQO-E8Z-E8ZO.^QPO,59}OOQO-E8[-E8[OOQO,59},59}O.rQPO,5:OOOQO-E8]-E8]OOQO,5:O,5:OO/WQPO,5:POOQO-E8^-E8^OOQO,5:P,5:PO/lQPO,5:QOOQO-E8_-E8_OOQO,5:Q,5:QO0QQPO,5:ROOQO-E8`-E8`O0cQPO,5:SOOQO-E8b-E8bO0tQPO'#DlO1iQPO'#DUOOQO-E8d-E8dOOQO'#Dj'#DjO2aQPO,5:TOOQO-E8k-E8kOOQO-E8l-E8lO2oQPO,5:aOOQO-E8n-E8nO2tQPO,5:bOOQO-E8q-E8qO2yQPO,5:cO3UQPO,5:dOOQO-E8r-E8rO3`QPO,5:gOOQO-E7y-E7yOOQO-E7z-E7zOOQO'#D}'#D}O4mQPO1G/XOOQO1G/X1G/XO6ZQPO'#DUOOQO-E7|-E7|O6eQPO'#EPO7YQPO1G/cOOQO'#EP'#EPO8QQPO1G/VO8[QPO1G/cOOQO'#EX'#EXO8dQPO1G/dOOQO'#ET'#ETO8kQPO1G/^OOOO'#EQ'#EQO8rOSO,5;fOOQO,5;f,5;fOOOO'#ER'#ERO8zOQO,5;jOOQO,5;j,5;jOOQO'#DZ'#DZOOQO'#D['#D[O%UQPO,5;oO%UQPO,5;oOOQO-E8W-E8WOOQO'#Ec'#EcO9SQPO1G/mOOQO'#Ee'#EeO9[QPO1G/nO9dQPO,5:WO9kQPO,5:WOOQO'#Dn'#DnO%UQPO,5:XOOQO'#Dp'#DpOOQO'#Dq'#DqO9kQPO,5:ZOOQO'#Eh'#EhO9rQPO,5:^OOQO'#Ei'#EiO9zQPO,5:_O:SQPO,5:VOOQO'#Ek'#EkO:[QPO'#EjOOQO'#El'#ElO:cQPO'#EjO:jQPO1G/oOOQO'#Eo'#EoO:xQPO1G/{O;TQPO1G/|O8kQPO1G/}OOQO-E7{-E7{O;`QPO'#EWO;hQPO7+$}OOQO-E7}-E7}OOQO-E8V-E8VO;sQPO7+%OOOQO-E8R-E8RO;}QPO'#FSOOQO'#FS'#FSO=hQPO'#DXOOQO7+$x7+$xOOOO-E8O-E8OOOQO1G1Q1G1QOOOO-E8P-E8POOQO1G1U1G1UOOQO1G1Z1G1ZO?RQPO1G1ZOOQO-E8a-E8aOOQO7+%X7+%XOOQO-E8c-E8cOOQO7+%Y7+%YO@iQPO1G/rO%UQPO1G/rOATQPO1G/sOAoQPO1G/uO%UQPO1G/uOOQO-E8f-E8fOOQO1G/x1G/xOOQO-E8g-E8gOOQO1G/y1G/yOOQO'#Eg'#EgOBZQPO1G/qOOQO-E8i-E8iOOQO,5;U,5;UOOQO-E8j-E8jOOQO-E8h-E8hOOQO-E8m-E8mOOQO'#Eq'#EqOBlQPO7+%hOOQO7+%h7+%hOOQO7+%i7+%iOBwQPO,5:rOOQO,5:r,5:rOOQO-E8U-E8UO#pQPO'#EUOCVQPO,59sODpQPO7+%^OE[QPO7+%aOOQO-E8e-E8eOOQO-E8o-E8oOEvQPO<<ISOOQO,5:p,5:pOOQO-E8S-E8SOOQO'#Er'#ErOE{QPOAN>nOOQO'#DX'#DXOOQO-E8p-E8pOOQOG24YG24YPOQO,59s,59sO8kQPO1G/^OFWQPO,59rOF_QPO'#DWO%UQPO,5;oO%UQPO,5;oOFgQPO1G1Z",
+    stateData: "Fq~OpOS#kOS~OSkOUmOYsO[YO]^O^`O_bO`eOa[ObgOdiOfWOioOkqOnSOouOtRO#lPO~OQ{OX}O#m!POt!yX#i!yX#l!yX~OnSOt!SO~OX}O#m!PO~Ot!VO#i!mX#l!mX~OfWO#i!RX#l!RX~OnSOt!YOv!_O#o!ZO#s![O~O[YO~P#pOa[Ot!VO~O]^O~P#pO^`O~P#pO_bO~P#pO`eO#i!YX#l!YX~P#pOnSOt!_Ov!_O#o!ZO#s![O~ObgO~P%UOdiO~P%UOnSOt!vOv!_O#o!ZO#s![O~OSkO~P%uOUmO#i!hX#l!hX~OioOt!|Ov!|O~OkqOt#OO~OYsOt#QO~OouO~P#pOSkOUmOYsO[YO]^O^`O_bO`eOa[ObgOdiOfWOioOkqOnSOouOtRO~OQ{OR#WOt#YOv#YO~OP#bOnSOt#ZOv#^O#o!ZO#s![O~OX}O~P(sOZ#dO#iza#lzanzatzavza#oza#sza#xza#yza#zza#{zaezaczaXzagzahza#mza#|za#}za$OzaVzaWza~OX}O~P#pOQ{OnxXtxXvxX#ixX#lxX#oxX#sxX#xxX#yxX#zxX#{xX~O|xXexXcxXXxXgxXhxX#mxX#|xX#}xX$OxXVxXWxX~P+QO#p#fO#q#hO~O#t#iO#u#kO~O#x#lO#y#lO#z#mO#{#mOn!|Xt!|Xv!|X#i!|X#l!|X#o!|X#s!|X~O#i!Sa#l!Sa~P#pOt!VO#i!Ta#l!Ta~O#x#lO#y#lO#z#mO#{#mO#i!Va#l!Va~O#x#lO#y#lO#z#mO#{#mO#i!Wa#l!Wa~O#x#lO#y#lO#z#mO#{#mO#i!Xa#l!Xa~O#x#lO#y#lO#z#mO#{#mO#i!Ya#l!Ya~Oe#qO#x#lO#y#lO#z#mO#{#mO~Oc#sO#x#lO#y#lO#z#mO#{#mO~OX}Og#|Oh$OO#m!PO#x#lO#y#lO#z#mO#{#mO#|#wO#}#yO$O#zO~OX}OXxXgxXhxX#mxX#xxX#yxX#zxX#{xX#|xX#}xX$OxX~OV$ROW$TO#i!]a#l!]a~Oj$WO~Og#|O~OZ#dO#i!ka#l!ka~O#i!la#l!la~P#pO#lPOS!oaU!oaY!oa[!oa]!oa^!oa_!oa`!oaa!oab!oad!oaf!oai!oak!oan!oao!oat!oa#i!oa~OR#WOXui#muinuituivui#iui#lui#oui#sui|ui#xui#yui#zui#{uieuicuiguihui#|ui#}ui$OuiVuiWui~Ot!yX|!yX~P+QO#x#lO#y#lO#z#mO#{#mOn!sXt!sXv!sX#i!sX#l!sX#o!sX#s!sX~O|$]OnxXtxXvxX#ixX#lxX#oxX#sxX#xxX#yxX#zxX#{xX~O#isi#lsi~P#pOt!VO|$]O~OP#bO~P#pOZ#dO~P#pO#p#fO#q$hO~O#t#iO#u$jO~Oe#qOt$nO~Oc#sOt$pO~OX}O~P%UO#m!PO~P%UOg#|Ot$wO~Oh$OOt$yO~OT$zOX}O~OV$RO~P%uOW$TO~P%uOV$ROW$TO#i!]i#l!]i~Oj$WO#i!ii#l!ii~Og#|Om%ROt%TO~Ot!VOv%WO~O|$]O#i!Pq#l!Pq~O#i!Qq#l!Qq~P#pO#x#lO#y#lO#z#mO#{#mO|#vX#i#vX#l#vXn#vXt#vXv#vX#o#vX#s#vXe#vXc#vXX#vXg#vXh#vX#m#vX#|#vX#}#vX$O#vXV#vXW#vX~O|%YO#i{X#l{Xn{Xt{Xv{X#o{X#s{X#x{X#y{X#z{X#{{Xe{Xc{XX{Xg{Xh{X#m{X#|{X#}{X$O{XV{XW{X~O#x#lO#y#lO#z#mO#{#mOn#wit#wiv#wi#i#wi#l#wi#o#wi#s#wie#wic#wiX#wig#wih#wi#m#wi#|#wi#}#wi$O#wiV#wiW#wi~O#x#lO#y#lO#z#mO#{#mOV!`iW!`i#i!`i#l!`i~O#x#lO#y#lO#z#mO#{#mOV!aiW!ai#i!ai#l!ai~O#x#lO#y#lO#z#mO#{#mOV!ciW!ci#i!ci#l!ci~OT$zOV!_iW!_i#i!_i#l!_i~Om%ROt%`Ov%`O~Ot!VO|!za#i!za#l!za~O|%YO#i{a#l{an{at{av{a#o{a#s{a#x{a#y{a#z{a#{{ae{ac{aX{ag{ah{a#m{a#|{a#}{a$O{aV{aW{a~O#x#lO#y#lO#z#mO#{#mOV!`qW!`q#i!`q#l!`q~O#x#lO#y#lO#z#mO#{#mOV!cqW!cq#i!cq#l!cq~Ol%cO~Ol%cOt%gOv%gO~O|za~P)`OnSOt%jO~O|#wi~P?ROvt~",
+    goto: "3X#xPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPP#y$OP$TP${%[&t'j(eP(l)R$O$O$O$O$O$O)h)h)h$O$O$O$O)m)t)t)t)y)t)|)|)t)t$O$O$O$O$O$O*P*Z*b*j*p+S+]+c+i,h,v,|-c-j-q.P.X.a.i.q.y/R/Z/c/i/q/w0P0V0a0g0m0t0{1T1]1c1k1q1w2PPPPPP2XPPP2XPPP2}&tVxOQyVwOQyUUOQy[!`Zv!a#R#c$aQ!g_Q!jaQ!mcQ!pfY#_!O!Q!T!U#`X$d#e$Z%Y%iQ!QRQ!UUQ#v!uQ$r#vR$u#{[!^Zv!a#R#c$aQ!e_Q!haQ!kcQ!nfQ!qhQ!sjU!ul$S$UY#]!O!Q!T!U#`W$c#e$Z%Y%iS$k#n%lQ$l#oS$q#u#vQ$s#xQ$t#{Q%[$rQ%]$uR%n%m!g!_Z_acfhjlv!O!Q!T!U!a#R#`#c#e#n#o#u#v#x#{$S$U$Z$a$r$u%Y%i%l%mUwOQy!g!_Z_acfhjlv!O!Q!T!U!a#R#`#c#e#n#o#u#v#x#{$S$U$Z$a$r$u%Y%i%l%mS$f#e%iR%U$Zn#n!^!e!h!k!n!q!s!u#]$l$q$s$t%[%]T%l$c%nn#o!^!e!h!k!n!q!s!u#]$l$q$s$t%[%]T%m$c%nVdOQyQ!ylT$}$S$UV!xl$S$UR#x!uR#{!uQQOSzQ#TR#TxSyOQR#UyU|R!Y#ZR#V|Q#X|R$[#XQ!ORQ!TUW#[!O!T#u$QQ#u!uR$Q!vW#`!O!Q!T!UR$_#`Q#g!ZR$g#gQ#j![R$i#j!`TOQZ_acfhjlvy!O!Q!T!U!a#R#`#c#n#o#u#v#x#{$S$U$a$r$uS!RT%k]%k#e$Z%Y%i%l%mQ#e!SQ$Z#QU$b#e$Z%iR%i%jQ%Z$eR%b%ZUVOQyW!WV!c#a%VQ!c]S#a!O!QR%V$]S$^#^#aR%X$^S#c!O!QR$`#cQ!aZQ#RvU#p!a#R$aR$a#cUXOQyR!XXUZOQyR!bZU]OQyR!d]U_OQyR!f_UaOQyR!iaUcOQyR!lcUfOQyR!ofUhOQyR!rhQ#r!qR$m#rUjOQyR!tjQ#t!sR$o#tUlOQyR!wlQ${$QR%^${Q#}!uQ$Y#OT$v#}$YQ$P!uR$x$PQ$V!yR%P$VS$S!y$VR$|$SS$U!y$VR%O$UUnOQyR!znUpOQyR!{pQ$X!|R%Q$XUrOQyR!}rQ%S$YR%_%SQ%d%`R%f%dUtOQyR#PtUvOQyR#Sv!g!]Z_acfhjlv!O!Q!T!U!a#R#`#c#e#n#o#u#v#x#{$S$U$Z$a$r$u%Y%i%l%mS$e#e$ZQ%a%YR%e%i",
+    nodeNames: "\u26A0 ask at random if pressed else and or is define with print forward turn color sleep play add from remove toList clear in not_in repeat times for to range call return Comment Program Command Assign Text ListAccess Number Op Expression String Call Arguments Comma Op Op AssignList Ask Clear Print Play Turtle Forward Turn Color Sleep Add Remove If Condition PressedCheck EqualityCheck NotEqualCheck Op ComparisonCheck Op Op InListCheck NotInListCheck Else Repeat For Define Return ErrorInvalid",
+    maxTerm: 138,
     nodeProps: [
       ["group", 52, "turtle"]
     ],
     skippedNodes: [0, 32],
-    repeatNodeCount: 42,
-    tokenData: "1e~R!`OY%TYZ&XZp%Tpq&^qr&crs&nst&stw%Twx'[xz%Tz{'a{|'f|}'k}!O'p!O!P%T!P!Q'u!Q!R'z!R!S'z!S!T'z!T!U'z!U!V'z!V!W'z!W!X'z!X!Y'z!Y!Z'z!Z!['z![!^%T!^!_1U!_!`1Z!`!a1`!a#Q%T#RBn%TBnBo'kBoDf%TDfDg'zDgDh'zDhDi'zDiDj'zDjDk'zDkDl'zDlDm'zDmDn'zDnDo'zDoDp'zDpGl%TGlGm'zGmGn'zGnGo'zGoGp'zGpGq'zGqGr'zGrGs'zGsGt'zGtGu'zGuGv'zGv&FV%T&FV&FW'k&FW;'S%T;'S;=`&R<%l?Hb%T?Hb?Hc'k?HcO%T~%Y]t~OY%TZp%Ttw%Txz%T!O!P%T!Q!^%T!a#Q%T#RBn%TBo&FV%T&FW;'S%T;'S;=`&R<%l?Hb%T?HcO%T~&UP;=`<%l%T~&^O#m~~&cO#l~~&fP!_!`&i~&nO#}~~&sO#p~~&xSp~OY&sZ;'S&s;'S;=`'U<%lO&s~'XP;=`<%l&s~'aO#t~~'fO#x~~'kO#z~~'pO}~~'uO#{~~'zO#y~~(R}v~t~OY%TZp%Ttw%Txz%T!O!P+O!Q!R'z!R!S'z!S!T'z!T!U'z!U!V'z!V!W'z!W!X'z!X!Y'z!Y!Z'z!Z!['z![!^%T!a#Q%T#RBn%TBoDf%TDfDg'zDgDh'zDhDi'zDiDj'zDjDk'zDkDl'zDlDm'zDmDn'zDnDo'zDoDp'zDpGl%TGlGm'zGmGn'zGnGo'zGoGp'zGpGq'zGqGr'zGrGs'zGsGt'zGtGu'zGuGv'zGv&FV%T&FW;'S%T;'S;=`&R<%l?Hb%T?HcO%T~+T}t~OY%TZp%Ttw%Txz%T!O!P%T!Q!R.Q!R!S.Q!S!T.Q!T!U.Q!U!V.Q!V!W.Q!W!X.Q!X!Y.Q!Y!Z.Q!Z![.Q![!^%T!a#Q%T#RBn%TBoDf%TDfDg.QDgDh.QDhDi.QDiDj.QDjDk.QDkDl.QDlDm.QDmDn.QDnDo.QDoDp.QDpGl%TGlGm.QGmGn.QGnGo.QGoGp.QGpGq.QGqGr.QGrGs.QGsGt.QGtGu.QGuGv.QGv&FV%T&FW;'S%T;'S;=`&R<%l?Hb%T?HcO%T~.X}v~t~OY%TZp%Ttw%Txz%T!O!P%T!Q!R.Q!R!S.Q!S!T.Q!T!U.Q!U!V.Q!V!W.Q!W!X.Q!X!Y.Q!Y!Z.Q!Z![.Q![!^%T!a#Q%T#RBn%TBoDf%TDfDg.QDgDh.QDhDi.QDiDj.QDjDk.QDkDl.QDlDm.QDmDn.QDnDo.QDoDp.QDpGl%TGlGm.QGmGn.QGnGo.QGoGp.QGpGq.QGqGr.QGrGs.QGsGt.QGtGu.QGuGv.QGv&FV%T&FW;'S%T;'S;=`&R<%l?Hb%T?HcO%T~1ZO$P~~1`O#n~~1eO$O~",
-    tokenizers: [2, new LocalTokenGroup("_~RQYZXwxX~^O#v~~", 14, 129), new LocalTokenGroup("_~RQYZXrsX~^O#r~~", 14, 125)],
+    repeatNodeCount: 41,
+    tokenData: "1e~R!`OY%TYZ&XZp%Tpq&^qr&crs&nst&stw%Twx'[xz%Tz{'a{|'f|}'k}!O'p!O!P%T!P!Q'u!Q!R'z!R!S'z!S!T'z!T!U'z!U!V'z!V!W'z!W!X'z!X!Y'z!Y!Z'z!Z!['z![!^%T!^!_1U!_!`1Z!`!a1`!a#Q%T#RBn%TBnBo'kBoDf%TDfDg'zDgDh'zDhDi'zDiDj'zDjDk'zDkDl'zDlDm'zDmDn'zDnDo'zDoDp'zDpGl%TGlGm'zGmGn'zGnGo'zGoGp'zGpGq'zGqGr'zGrGs'zGsGt'zGtGu'zGuGv'zGv&FV%T&FV&FW'k&FW;'S%T;'S;=`&R<%l?Hb%T?Hb?Hc'k?HcO%T~%Y]t~OY%TZp%Ttw%Txz%T!O!P%T!Q!^%T!a#Q%T#RBn%TBo&FV%T&FW;'S%T;'S;=`&R<%l?Hb%T?HcO%T~&UP;=`<%l%T~&^O#l~~&cO#k~~&fP!_!`&i~&nO#|~~&sO#o~~&xSp~OY&sZ;'S&s;'S;=`'U<%lO&s~'XP;=`<%l&s~'aO#s~~'fO#x~~'kO#z~~'pO|~~'uO#{~~'zO#y~~(R}v~t~OY%TZp%Ttw%Txz%T!O!P+O!Q!R'z!R!S'z!S!T'z!T!U'z!U!V'z!V!W'z!W!X'z!X!Y'z!Y!Z'z!Z!['z![!^%T!a#Q%T#RBn%TBoDf%TDfDg'zDgDh'zDhDi'zDiDj'zDjDk'zDkDl'zDlDm'zDmDn'zDnDo'zDoDp'zDpGl%TGlGm'zGmGn'zGnGo'zGoGp'zGpGq'zGqGr'zGrGs'zGsGt'zGtGu'zGuGv'zGv&FV%T&FW;'S%T;'S;=`&R<%l?Hb%T?HcO%T~+T}t~OY%TZp%Ttw%Txz%T!O!P%T!Q!R.Q!R!S.Q!S!T.Q!T!U.Q!U!V.Q!V!W.Q!W!X.Q!X!Y.Q!Y!Z.Q!Z![.Q![!^%T!a#Q%T#RBn%TBoDf%TDfDg.QDgDh.QDhDi.QDiDj.QDjDk.QDkDl.QDlDm.QDmDn.QDnDo.QDoDp.QDpGl%TGlGm.QGmGn.QGnGo.QGoGp.QGpGq.QGqGr.QGrGs.QGsGt.QGtGu.QGuGv.QGv&FV%T&FW;'S%T;'S;=`&R<%l?Hb%T?HcO%T~.X}v~t~OY%TZp%Ttw%Txz%T!O!P%T!Q!R.Q!R!S.Q!S!T.Q!T!U.Q!U!V.Q!V!W.Q!W!X.Q!X!Y.Q!Y!Z.Q!Z![.Q![!^%T!a#Q%T#RBn%TBoDf%TDfDg.QDgDh.QDhDi.QDiDj.QDjDk.QDkDl.QDlDm.QDmDn.QDnDo.QDoDp.QDpGl%TGlGm.QGmGn.QGnGo.QGoGp.QGpGq.QGqGr.QGrGs.QGsGt.QGtGu.QGuGv.QGv&FV%T&FW;'S%T;'S;=`&R<%l?Hb%T?HcO%T~1ZO$O~~1`O#m~~1eO#}~",
+    tokenizers: [2, new LocalTokenGroup("_~RQYZXwxX~^O#u~~", 14, 128), new LocalTokenGroup("_~RQYZXrsX~^O#q~~", 14, 124)],
     topRules: { "Program": [0, 33] },
     dynamicPrecedences: { "75": -10 },
     specialized: [{ term: 36, get: (value, stack) => specializeKeyword(value, stack) << 1, external: specializeKeyword }, { term: 36, get: (value, stack) => extendKeyword(value, stack) << 1 | 1, external: extendKeyword, extend: true }],
-    tokenPrec: 1728
+    tokenPrec: 1732
   });
 
   // static/js/lezer-parsers/level15-parser.ts
   var parser15 = LRParser.deserialize({
     version: 14,
-    states: ">SQYQPOOOOQO'#D|'#D|QYQPOOO!gQPO'#EUO!{QPO'#DQO#TQPO'#D{OOQO'#EY'#EYO#`QPO'#D^OOQO'#EZ'#EZO#|QPO'#D_OOQO'#E]'#E]O$TQPO'#D`OOQO'#E`'#E`O$]QPO'#DbOOQO'#Ea'#EaO$eQPO'#DdOOQO'#Eb'#EbO$lQPO'#DeOOQO'#Ec'#EcO$sQPO'#DfOOQO'#Dc'#DcOOQO'#Ed'#EdO$zQPO'#DgOOQO'#Ee'#EeO%jQPO'#DhOOQO'#Eg'#EgO%qQPO'#DiOOQO'#Ei'#EiO&ZQPO'#DjOOQO'#Ep'#EpO&bQPO'#DuOOQO'#Eq'#EqO&mQPO'#DvOOQO'#Es'#EsO&xQPO'#DwOOQO'#Ev'#EvO'QQPO'#DxOOQO'#Ew'#EwO'YQPO'#DyOOQO'#Ex'#ExO'aQPO'#DzOOQO'#DP'#DPQ!bQPO'#D}Q'hQPOOOOQO-E7z-E7zOOQO'#EO'#EOO(rQPO,59nOOQO'#EQ'#EQO)cQPO,59lOOQO'#DU'#DUO)QQPO,59lO)jQPO,59lO#nQPO,59lOOQO'#EU'#EUOOQO-E8S-E8SOOQO-E8W-E8WO*pQPO'#DVO+mOSO'#FOO+uOQO'#FSOOQO'#DW'#DWO+}QPO'#E[OOQO'#DV'#DVOOQO-E8X-E8XOOQO'#E['#E[O,rQPO,59yOOQO-E8Z-E8ZO,|QPO,59zO.ZQPO,59|OOQO-E8^-E8^O.fQPO,5:OOOQO-E8_-E8_OOQO,5:O,5:OO.zQPO,5:POOQO-E8`-E8`OOQO,5:P,5:PO/`QPO,5:QOOQO-E8a-E8aOOQO,5:Q,5:QO/tQPO,5:ROOQO-E8b-E8bOOQO,5:R,5:RO0YQPO,5:SOOQO-E8c-E8cO0kQPO,5:SO0pQPO,5:TOOQO-E8e-E8eO1RQPO,5:TO1oQPO'#DmO2PQPO'#DVOOQO-E8g-E8gO1WQPO'#DmOOQO'#Dk'#DkO2WQPO,5:UOOQO-E8n-E8nOOQO-E8o-E8oO2fQPO,5:bOOQO-E8q-E8qO2kQPO,5:cOOQO-E8t-E8tO2pQPO,5:dO2{QPO,5:eOOQO-E8u-E8uOOQO-E8v-E8vO3VQPO,5:fO3eQPO,5:iOOQO-E7{-E7{OOQO-E7|-E7|OOQO'#EP'#EPO4uQPO1G/YOOQO1G/Y1G/YO6wQPO'#DVOOQO-E8O-E8OO7UQPO'#ERO7vQPO1G/aOOQO'#ER'#ERO7}QPO1G/WO8cQPO1G/aOOQO'#EW'#EWO8kQPO1G/cOOOO'#ES'#ESO8|OSO,5;jOOQO,5;j,5;jOOOO'#ET'#ETO9UOQO,5;nOOQO,5;n,5;nOOQO'#DX'#DXOOQO'#DY'#DYO%[QPO,5;rO%[QPO,5;rOOQO-E8Y-E8YOOQO'#E^'#E^O9^QPO1G/fOOQO'#Ef'#EfO9oQPO1G/nOOQO'#Eh'#EhO9wQPO1G/oO:PQPO,5:XO:WQPO,5:XOOQO'#Do'#DoO%XQPO,5:YOOQO'#Dq'#DqOOQO'#Dr'#DrO:WQPO,5:[OOQO'#Ek'#EkO:_QPO,5:_OOQO'#El'#ElO:gQPO,5:`O:oQPO,5:WOOQO'#En'#EnO:wQPO'#EmOOQO'#Eo'#EoO;OQPO'#EmO;VQPO1G/pOOQO'#Er'#ErO;eQPO1G/|O;pQPO1G/}O9^QPO1G0OO;{QPO1G0QOOQO-E7}-E7}O<ZQPO'#EVO<cQPO7+${OOQO-E8P-E8PO<nQPO'#EXOOQO-E8U-E8UOOQO'#EX'#EXO=`QPO7+$}OOOO-E8Q-E8QOOQO1G1U1G1UOOOO-E8R-E8ROOQO1G1Y1G1YOOQO1G1^1G1^O=tQPO1G1^O?_QPO'#F]OOQO-E8[-E8[OOQO'#F]'#F]O@xQPO'#DaOOQO7+%Q7+%QOOQO-E8d-E8dOOQO7+%Y7+%YOOQO-E8f-E8fOOQO7+%Z7+%ZOBVQPO1G/sOOQO1G/s1G/sO%XQPO1G/sOBqQPO1G/tOOQO1G/t1G/tOC]QPO1G/vOOQO1G/v1G/vO%XQPO1G/vOOQO-E8i-E8iOOQO1G/y1G/yOOQO-E8j-E8jOOQO1G/z1G/zOOQO'#Ej'#EjOCwQPO1G/rOOQO-E8l-E8lOOQO,5;X,5;XOOQO-E8m-E8mOOQO-E8k-E8kOOQO-E8p-E8pOOQO'#Et'#EtODYQPO7+%iOOQO7+%i7+%iOOQO7+%j7+%jODeQPO,5:qOOQO,5:q,5:qOOQO-E8T-E8TOOQO-E8V-E8VO#nQPO'#E_ODsQPO,59{OFQQPO7+%_OOQO7+%_7+%_OFlQPO7+%bOOQO7+%b7+%bOOQO-E8h-E8hOOQO-E8r-E8rOGWQPO<<ITOOQO,5:y,5:yOOQO-E8]-E8]OOQO'#Eu'#EuOG]QPOAN>oOOQO-E8s-E8sOOQOG24ZG24Z",
-    stateData: "Gk~OqOS#oOS~OSkOUmOYwOZWO[^O]`O^bO_eO`[OagOciOeUOhoOjqOmYOnsOouOuRO#pPO~OQ}OX!PO#q!ROu!xX#m!xX#p!xX~OX!PO#q!RO~Ou!VO#m!oX#p!oX~OeUO#m!QX#p!QX~OmYOu!YOw!_O#s!ZO#w![O~OZWO~P#kOmYOu!dO~O`[Ou!VO~O[^O~P#kO]`O~P#kO^bO~P#kO_eO#m!ZX#p!ZX~P#kOmYOu!_Ow!_O#s!ZO#w![O~OagO~P%XOciO~P%XOmYOu!zOw!_O#s!ZO#w![O~OSkO~P%xOUmO#m!iX#p!iX~OhoOu#ROw#RO~OjqOu#TO~OnsOu#VO~OouO~P#kOYwO~P%xOSkOUmOYwOZWO[^O]`O^bO_eO`[OagOciOeUOhoOjqOmYOnsOouOuRO~OQ}OR#_Ou#aOw#aO~OP#iOu#bOw#eO#s!ZO#w![O~OX!PO~P)QOX!POu!YOw!_O#s!ZO#w![O~O#{yX#|yX#}yX$OyXXyXfyXgyX#qyX$QyX$RyX$SyX~OQ}OmyXuyXwyX#myX#pyX#syX#wyX!OyXdyXbyXVyXWyX~P){O#t#kO#u#mO~O#x#nO#y#pO~O#{#qO#|#qO#}#rO$O#rOm#OXu#OXw#OX#m#OX#p#OX#s#OX#w#OX~O#m!Ra#p!Ra~P#kOp#vO#m!Sa#p!Sam!Sau!Saw!Sa#s!Sa#w!Sad!Sab!SaX!Saf!Sag!Sa#q!Sa$Q!Sa$R!Sa$S!SaV!SaW!Sa~Ou!VO#m!Ua#p!Ua~O#{#qO#|#qO#}#rO$O#rO#m!Wa#p!Wa~O#{#qO#|#qO#}#rO$O#rO#m!Xa#p!Xa~O#{#qO#|#qO#}#rO$O#rO#m!Ya#p!Ya~O#{#qO#|#qO#}#rO$O#rO#m!Za#p!Za~Od#xO#{#qO#|#qO#}#rO$O#rO~Od#xO~Ob#zO#{#qO#|#qO#}#rO$O#rO~Ob#zO~OX!POf$TOg$VO#q!RO$Q$OO$R$QO$S$RO~O#{#qO#|#qO#}#rO$O#rO~P1WOX!PO~P){OV$YOW$[O#m!^a#p!^a~Oi$_O~Of$TO~Op#vO#m!la#p!la~O#m!ma#p!ma~P#kOV$YOW$[O#m!na#p!na~O#pPOS!qaU!qaY!qaZ!qa[!qa]!qa^!qa_!qa`!qaa!qac!qae!qah!qaj!qam!qan!qao!qau!qa#m!qa~OR#_OXvi#qvimviuviwvi#mvi#pvi#svi#wvi!Ovidvibvifvigvi$Qvi$Rvi$SviVviWvi~OuyXwyX#myX#pyX#syX#wyX#{yX#|yX#}yX$OyX~OQ}Ou!xX!O!xX~P6VO#{#qO#|#qO#}#rO$O#rOu!uXw!uX#m!uX#p!uX#s!uX#w!uX~O!O$eO~P6VOu!YOw!_O#s!ZO#w![O#mti#pti~Ou!VO!O$eO~OP#iOu!YOw!_O#s!ZO#w![O~O#t#kO#u$mO~O#x#nO#y$oO~Op#vOu!YOw!_O#s!ZO#w![O~Od#xOu$xO~Ob#zOu$zO~OX!PO~P%XO#q!RO~P%XOf$TOu%UO~Og$VOu%WO~OT%XOX!PO~OV$YO~P%xOW$[O~P%xOV$YOW$[O#m!^i#p!^i~Oi$_O#m!ji#p!ji~Of$TOl%`Ou%bO~OV$YOW$[O#m!ni#p!ni~Ou!VOw%eO~O!O$eO#m}q#p}q~O#{#qO#|#qO#}#rO$O#rOu!{Xw!{X#m!{X#p!{X#s!{X#w!{X~Ou!YOw!_O#s!ZO#w![O#m!Pq#p!Pq~O#{#qO#|#qO#}#rO$O#rOm#ziu#ziw#zi#m#zi#p#zi#s#zi#w#zid#zib#ziX#zif#zig#zi#q#zi$Q#zi$R#zi$S#zi!O#ziV#ziW#zi~O#{#qO#|#qO#}#rO$O#rO!O$PX#m$PX#p$PXm$PXu$PXw$PX#s$PX#w$PXd$PXb$PXX$PXf$PXg$PX#q$PX$Q$PX$R$PX$S$PXV$PXW$PX~O!O%hO#m!TX#p!TXm!TXu!TXw!TX#s!TX#w!TXd!TXb!TXX!TXf!TXg!TX#q!TX$Q!TX$R!TX$S!TXV!TXW!TX~O#{#qO#|#qO#}#rO$O#rOV!aiW!ai#m!ai#p!ai~O#{#qO#|#qO#}#rO$O#rOV!biW!bi#m!bi#p!bi~O#{#qO#|#qO#}#rO$O#rOV!diW!di#m!di#p!di~OT%XOV!`iW!`i#m!`i#p!`i~Ol%`Ou%pOw%pO~Ou!VO!O!ya#m!ya#p!ya~O!O%hO#m!Ta#p!Tam!Tau!Taw!Ta#s!Ta#w!Tad!Tab!TaX!Taf!Tag!Ta#q!Ta$Q!Ta$R!Ta$S!TaV!TaW!Ta~O#{#qO#|#qO#}#rO$O#rOV!aqW!aq#m!aq#p!aq~O#{#qO#|#qO#}#rO$O#rOV!dqW!dq#m!dq#p!dq~Ok%sO~Ok%sOu%vOw%vO~Owu~",
-    goto: "3g$QPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPP$R$WP$]P%U%f&|'p(T$WP$W$W$W(h)m$W$W)s)s)s$W$W$W$W)x*S*S*S*Y*S*^*^*S*S$W$W$W$W$W$W$W*b*l*s*{+R+f+o+u+{,b,i,p,v-O-W-b.O.Y.`.h.p.x/Q/Y/b/i/q/x0Q0W0c0j0t0}1W1`1h1n1v1|2S2[2dPPPPP2lPPP2lPPP&|PPPP3`VzOQ{VyOQ{USOQ{W!aXv!b#WQ!i_Q!laQ!ocQ!rfY#f!Q!S!T!U#gS$j#j$kV$t#w$b%hQ!SRQ!USS#}!y!|Q$}#}R%S$SW!^Xv!b#WQ!g_Q!jaQ!mcQ!pfQ!shQ!vjW!ylx$Z$]Y#d!Q!S!T!U#gS$h#j$kQ$p#sQ$q#tU$r#w$b%hS${#|#}Q%O$PQ%Q$SQ%j$}R%l%S!c!_X_acfhjlvx!Q!S!T!U!b#W#g#j#s#t#w#|#}$P$S$Z$]$b$k$}%S%hs#s!^!g!j!m!p!s!v!y#d$h$q$r${%O%Q%j%ls#t!^!g!j!m!p!s!v!y#d$h$q$r${%O%Q%j%lUyOQ{W!aXv!b#WQ!i_Q!laQ!ocQ!rfQ!uhQ!xjW!|lx$Z$]S$|#|#}Q%P$PQ%R$SQ%k$}R%m%SQ$v#wR%c$bVdOQ{Q#OlQ#ZxT%[$Z$]X!}lx$Z$]T$P!y!|T$S!y!|QQOS|Q#[R#[zS{OQR#]{U!OR!Y#bR#^!OQ#`!OR$d#`Q!QRQ!TSW#c!Q!T#|$XS#|!y!|R$X!zW#g!Q!S!T!UR$g#gQ#l!ZR$l#lQ#o![R$n#oUTOQ{W!WT!e#h%dQ!e]S#h!Q!SR%d$eS$f#e#hR%f$fS#j!Q!SR$i#jQ$k#jR%g$kUVOQ{R!XVUXOQ{R!`XQ!bXQ#WvT#u!b#W!OZOQX_acfhjlvx{!b#W#|#}$P$S$Z$]$}%SR!cZQ#w!dQ$b#VT$s#w$bQ%i$uR%r%iU]OQ{R!f]U_OQ{R!h_UaOQ{R!kaUcOQ{R!ncUfOQ{R!qfUhOQ{R!thS#y!s!uR$w#yUjOQ{R!wjS#{!v!xR$y#{UlOQ{R!{lQ%Y$XR%n%YS$U!y!|Q$a#TT%T$U$aS$W!y!|R%V$WQ$^#OQ$c#ZT%^$^$cW$Z#O#Z$^$cR%Z$ZW$]#O#Z$^$cR%]$]UnOQ{R#PnUpOQ{R#QpQ$`#RR%_$`UrOQ{R#SrQ%a$aR%o%aQ%t%pR%u%tUtOQ{R#UtUvOQ{R#XvUxOQ{R#Yx!c!]X_acfhjlvx!Q!S!T!U!b#W#g#j#s#t#w#|#}$P$S$Z$]$b$k$}%S%hS$u#w$bR%q%h",
-    nodeNames: "\u26A0 ask at random if pressed else and or is while print forward turn color sleep play add from remove toList clear in not_in repeat times for to range call define return with Comment Program Command Assign Text ListAccess Number Op Expression String Op Op AssignList Comma Ask Clear Print Call Arguments Play Turtle Forward Turn Color Sleep Add Remove If Condition PressedCheck EqualityCheck NotEqualCheck Op ComparisonCheck Op Op InListCheck NotInListCheck Else Repeat For Define Return While ErrorInvalid",
-    maxTerm: 142,
+    states: "=pQYQPOOOOQO'#D|'#D|QYQPOOO!gQPO'#EXOOQO'#EU'#EUO!{QPO'#DXO#TQPO'#DQO#]QPO'#D{OOQO'#E]'#E]O#hQPO'#D`OOQO'#E^'#E^O$UQPO'#DaOOQO'#E_'#E_O$]QPO'#DbOOQO'#E`'#E`O$eQPO'#DdOOQO'#Ea'#EaO$lQPO'#DeOOQO'#Eb'#EbO$sQPO'#DfOOQO'#Dc'#DcOOQO'#Ec'#EcO$zQPO'#DgOOQO'#Ed'#EdO%jQPO'#DhOOQO'#Ef'#EfO%qQPO'#DiOOQO'#Eh'#EhO&ZQPO'#DjOOQO'#Eo'#EoO&bQPO'#DuOOQO'#Ep'#EpO&mQPO'#DvOOQO'#Er'#ErO&xQPO'#DwOOQO'#Eu'#EuO'QQPO'#DxOOQO'#Ev'#EvO'YQPO'#DyOOQO'#Ew'#EwO'aQPO'#DzOOQO'#DP'#DPQ!bQPO'#D}Q'hQPOOOOQO-E7z-E7zOOQO'#EO'#EOO(rQPO,59nOOQO'#EQ'#EQO)fQPO,59lOOQO'#DU'#DUO)QQPO,59lOOQO-E8S-E8SO)mQPO,59sO+WQPO,59lO#sQPO,59lOOQO'#EX'#EXOOQO-E8V-E8VOOQO-E8Z-E8ZO,VQPO'#DVO-POSO'#E}O-XOQO'#FROOQO'#DW'#DWO-aQPO'#E[OOQO'#DV'#DVOOQO'#E['#E[O.UQPO,59{OOQO-E8[-E8[O.`QPO,59|OOQO-E8]-E8]O.kQPO,5:OOOQO-E8^-E8^OOQO,5:O,5:OO/PQPO,5:POOQO-E8_-E8_OOQO,5:P,5:PO/eQPO,5:QOOQO-E8`-E8`OOQO,5:Q,5:QO/yQPO,5:ROOQO-E8a-E8aOOQO,5:R,5:RO0_QPO,5:SOOQO-E8b-E8bO0pQPO,5:TOOQO-E8d-E8dO1RQPO'#DmO1vQPO'#DVOOQO-E8f-E8fOOQO'#Dk'#DkO2nQPO,5:UOOQO-E8m-E8mOOQO-E8n-E8nO2|QPO,5:bOOQO-E8p-E8pO3RQPO,5:cOOQO-E8s-E8sO3WQPO,5:dO3cQPO,5:eOOQO-E8t-E8tOOQO-E8u-E8uO3mQPO,5:fO3{QPO,5:iOOQO-E7{-E7{OOQO-E7|-E7|OOQO'#EP'#EPO5]QPO1G/YOOQO1G/Y1G/YO6yQPO'#DVOOQO-E8O-E8OO7TQPO'#ERO7xQPO1G/dOOQO'#ER'#ERO8pQPO1G/WO8zQPO1G/dOOQO'#EZ'#EZO9SQPO1G/eOOQO'#EV'#EVO9ZQPO1G/_OOOO'#ES'#ESO9bOSO,5;iOOQO,5;i,5;iOOOO'#ET'#ETO9jOQO,5;mOOQO,5;m,5;mOOQO'#D['#D[OOQO'#D]'#D]O%XQPO,5;rO%XQPO,5;rOOQO-E8Y-E8YOOQO'#Ee'#EeO9rQPO1G/nOOQO'#Eg'#EgO9zQPO1G/oO:SQPO,5:XO:ZQPO,5:XOOQO'#Do'#DoO%XQPO,5:YOOQO'#Dq'#DqOOQO'#Dr'#DrO:ZQPO,5:[OOQO'#Ej'#EjO:bQPO,5:_OOQO'#Ek'#EkO:jQPO,5:`O:rQPO,5:WOOQO'#Em'#EmO:zQPO'#ElOOQO'#En'#EnO;RQPO'#ElO;YQPO1G/pOOQO'#Eq'#EqO;hQPO1G/|O;sQPO1G/}O9ZQPO1G0OO<OQPO1G0QOOQO-E7}-E7}O<^QPO'#EYO<fQPO7+%OOOQO-E8P-E8POOQO-E8X-E8XO<qQPO7+%POOQO-E8T-E8TO<{QPO'#FVOOQO'#FV'#FVO>fQPO'#DYOOQO7+$y7+$yOOOO-E8Q-E8QOOQO1G1T1G1TOOOO-E8R-E8ROOQO1G1X1G1XOOQO1G1^1G1^O@PQPO1G1^OOQO-E8c-E8cOOQO7+%Y7+%YOOQO-E8e-E8eOOQO7+%Z7+%ZOAgQPO1G/sO%XQPO1G/sOBRQPO1G/tOBmQPO1G/vO%XQPO1G/vOOQO-E8h-E8hOOQO1G/y1G/yOOQO-E8i-E8iOOQO1G/z1G/zOOQO'#Ei'#EiOCXQPO1G/rOOQO-E8k-E8kOOQO,5;W,5;WOOQO-E8l-E8lOOQO-E8j-E8jOOQO-E8o-E8oOOQO'#Es'#EsOCjQPO7+%iOOQO7+%i7+%iOOQO7+%j7+%jOCuQPO,5:tOOQO,5:t,5:tOOQO-E8W-E8WO#sQPO'#EWODTQPO,59tOEnQPO7+%_OFYQPO7+%bOOQO-E8g-E8gOOQO-E8q-E8qOFtQPO<<ITOOQO,5:r,5:rOOQO-E8U-E8UOOQO'#Et'#EtOFyQPOAN>oOOQO'#DY'#DYOOQO-E8r-E8rOOQOG24ZG24ZPOQO,59t,59tO9ZQPO1G/_OGUQPO,59sOG]QPO'#DXO%XQPO,5;rO%XQPO,5;rOGeQPO1G1^",
+    stateData: "Go~OqOS#nOS~OSkOUmOYwOZsO]YO^^O_`O`bOaeOb[OcgOeiOgWOjoOlqOoSOpuOuRO#oPO~OQ}OX!PO#p!ROu!{X#l!{X#o!{X~OoSOu!UO~OX!PO#p!RO~Ou!XO#l!oX#o!oX~OgWO#l!SX#o!SX~OoSOu![Ow!aO#r!]O#v!^O~O]YO~P#sOb[Ou!XO~O^^O~P#sO_`O~P#sO`bO~P#sOaeO#l!ZX#o!ZX~P#sOoSOu!aOw!aO#r!]O#v!^O~OcgO~P%XOeiO~P%XOoSOu!xOw!aO#r!]O#v!^O~OSkO~P%xOUmO#l!iX#o!iX~OjoOu#OOw#OO~OlqOu#QO~OZsOu#SO~OpuO~P#sOYwO~P%xOSkOUmOYwOZsO]YO^^O_`O`bOaeOb[OcgOeiOgWOjoOlqOoSOpuOuRO~OQ}OR#[Ou#^Ow#^O~OP#fOoSOu#_Ow#bO#r!]O#v!^O~OX!PO~P)QO[#hO#l{a#o{ao{au{aw{a#r{a#v{a#{{a#|{a#}{a$O{af{ad{aX{ah{ai{a#p{a$P{a$Q{a$R{aV{aW{a~OX!PO~P#sOQ}OoyXuyXwyX#lyX#oyX#ryX#vyX#{yX#|yX#}yX$OyX~O}yXfyXdyXXyXhyXiyX#pyX$PyX$QyX$RyXVyXWyX~P+_O#s#jO#t#lO~O#w#mO#x#oO~O#{#pO#|#pO#}#qO$O#qOo#OXu#OXw#OX#l#OX#o#OX#r#OX#v#OX~O#l!Ta#o!Ta~P#sOu!XO#l!Ua#o!Ua~O#{#pO#|#pO#}#qO$O#qO#l!Wa#o!Wa~O#{#pO#|#pO#}#qO$O#qO#l!Xa#o!Xa~O#{#pO#|#pO#}#qO$O#qO#l!Ya#o!Ya~O#{#pO#|#pO#}#qO$O#qO#l!Za#o!Za~Of#uO#{#pO#|#pO#}#qO$O#qO~Od#wO#{#pO#|#pO#}#qO$O#qO~OX!POh$QOi$SO#p!RO#{#pO#|#pO#}#qO$O#qO$P#{O$Q#}O$R$OO~OX!POXyXhyXiyX#pyX#{yX#|yX#}yX$OyX$PyX$QyX$RyX~OV$VOW$XO#l!^a#o!^a~Ok$[O~Oh$QO~O[#hO#l!la#o!la~O#l!ma#o!ma~P#sOV$VOW$XO#l!na#o!na~O#oPOS!qaU!qaY!qaZ!qa]!qa^!qa_!qa`!qaa!qab!qac!qae!qag!qaj!qal!qao!qap!qau!qa#l!qa~OR#[OXvi#pvioviuviwvi#lvi#ovi#rvi#vvi}vi#{vi#|vi#}vi$Ovifvidvihviivi$Pvi$Qvi$RviVviWvi~Ou!{X}!{X~P+_O#{#pO#|#pO#}#qO$O#qOo!uXu!uXw!uX#l!uX#o!uX#r!uX#v!uX~O}$bOoyXuyXwyX#lyX#oyX#ryX#vyX#{yX#|yX#}yX$OyX~O#lti#oti~P#sOu!XO}$bO~OP#fO~P#sO[#hO~P#sO#s#jO#t$mO~O#w#mO#x$oO~Of#uOu$sO~Od#wOu$uO~OX!PO~P%XO#p!RO~P%XOh$QOu$|O~Oi$SOu%OO~OT%POX!PO~OV$VO~P%xOW$XO~P%xOV$VOW$XO#l!^i#o!^i~Ok$[O#l!ji#o!ji~Oh$QOn%WOu%YO~OV$VOW$XO#l!ni#o!ni~Ou!XOw%]O~O}$bO#l!Qq#o!Qq~O#l!Rq#o!Rq~P#sO#{#pO#|#pO#}#qO$O#qO}#yX#l#yX#o#yXo#yXu#yXw#yX#r#yX#v#yXf#yXd#yXX#yXh#yXi#yX#p#yX$P#yX$Q#yX$R#yXV#yXW#yX~O}%_O#l|X#o|Xo|Xu|Xw|X#r|X#v|X#{|X#||X#}|X$O|Xf|Xd|XX|Xh|Xi|X#p|X$P|X$Q|X$R|XV|XW|X~O#{#pO#|#pO#}#qO$O#qOo#ziu#ziw#zi#l#zi#o#zi#r#zi#v#zif#zid#ziX#zih#zii#zi#p#zi$P#zi$Q#zi$R#ziV#ziW#zi~O#{#pO#|#pO#}#qO$O#qOV!aiW!ai#l!ai#o!ai~O#{#pO#|#pO#}#qO$O#qOV!biW!bi#l!bi#o!bi~O#{#pO#|#pO#}#qO$O#qOV!diW!di#l!di#o!di~OT%POV!`iW!`i#l!`i#o!`i~On%WOu%eOw%eO~Ou!XO}!|a#l!|a#o!|a~O}%_O#l|a#o|ao|au|aw|a#r|a#v|a#{|a#||a#}|a$O|af|ad|aX|ah|ai|a#p|a$P|a$Q|a$R|aV|aW|a~O#{#pO#|#pO#}#qO$O#qOV!aqW!aq#l!aq#o!aq~O#{#pO#|#pO#}#qO$O#qOV!dqW!dq#l!dq#o!dq~Om%hO~Om%hOu%lOw%lO~O}{a~P)mOoSOu%oO~O}#zi~P@POwu~",
+    goto: "3u#{PPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPP#|$RP$WP%O%_&x'o(kP(r)X$R$R$R$R$R$R)n)n)n$R$R$R$R)s)})})}*T)}*W*W)})}$R$R$R$R$R$R$R*Z*e*l*t*z+^+g+m+s,s-R-X-n-u-|.[.d.l.t.|/U/^/f/n/t/|0S0[0b0l0r0|1V1`1h1p1v2O2U2[2d2lPPPPP2tPPP2tPPP3k&xVzOQ{VyOQ{UUOQ{[!bZv!c#T#g$fQ!i_Q!laQ!ocQ!rfY#c!Q!S!V!W#dX$i#i$_%_%nQ!SRQ!WUQ#z!wQ$w#zR$z$P[!`Zv!c#T#g$fQ!g_Q!jaQ!mcQ!pfQ!shQ!ujW!wlx$W$YY#a!Q!S!V!W#dW$h#i$_%_%nS$p#r%qQ$q#sS$v#y#zQ$x#|Q$y$PQ%a$wQ%b$zR%s%r!i!aZ_acfhjlvx!Q!S!V!W!c#T#d#g#i#r#s#y#z#|$P$W$Y$_$f$w$z%_%n%q%rUyOQ{!i!aZ_acfhjlvx!Q!S!V!W!c#T#d#g#i#r#s#y#z#|$P$W$Y$_$f$w$z%_%n%q%rS$k#i%nR%Z$_n#r!`!g!j!m!p!s!u!w#a$q$v$x$y%a%bT%q$h%sn#s!`!g!j!m!p!s!u!w#a$q$v$x$y%a%bT%r$h%sVdOQ{Q!{lQ#WxT%S$W$YX!zlx$W$YR#|!wR$P!wQQOS|Q#XR#XzS{OQR#Y{U!OR![#_R#Z!OQ#]!OR$a#]Q!QRQ!VUW#`!Q!V#y$UQ#y!wR$U!xW#d!Q!S!V!WR$d#dQ#k!]R$l#kQ#n!^R$n#n!bTOQZ_acfhjlvx{!Q!S!V!W!c#T#d#g#r#s#y#z#|$P$W$Y$f$w$zS!TT%p]%p#i$_%_%n%q%rQ#i!UQ$_#SU$g#i$_%nR%n%oQ%`$jR%g%`UVOQ{W!YV!e#e%[Q!e]S#e!Q!SR%[$bS$c#b#eR%^$cS#g!Q!SR$e#gQ!cZQ#TvU#t!c#T$fR$f#gUXOQ{R!ZXUZOQ{R!dZU]OQ{R!f]U_OQ{R!h_UaOQ{R!kaUcOQ{R!ncUfOQ{R!qfUhOQ{R!thQ#v!sR$r#vUjOQ{R!vjQ#x!uR$t#xUlOQ{R!ylQ%Q$UR%c%QQ$R!wQ$^#QT${$R$^Q$T!wR$}$TQ$Z!{Q$`#WT%U$Z$`W$W!{#W$Z$`R%R$WW$Y!{#W$Z$`R%T$YUnOQ{R!|nUpOQ{R!}pQ$]#OR%V$]UrOQ{R#PrQ%X$^R%d%XQ%i%eR%k%iUtOQ{R#RtUvOQ{R#UvUxOQ{R#Vx!i!_Z_acfhjlvx!Q!S!V!W!c#T#d#g#i#r#s#y#z#|$P$W$Y$_$f$w$z%_%n%q%rS$j#i$_Q%f%_R%j%n",
+    nodeNames: "\u26A0 ask at random if pressed else and or is while define with print forward turn color sleep play add from remove toList clear in not_in repeat times for to range call return Comment Program Command Assign Text ListAccess Number Op Expression String Call Arguments Comma Op Op AssignList Ask Clear Print Play Turtle Forward Turn Color Sleep Add Remove If Condition PressedCheck EqualityCheck NotEqualCheck Op ComparisonCheck Op Op InListCheck NotInListCheck Else Repeat For Define Return While ErrorInvalid",
+    maxTerm: 141,
     nodeProps: [
       ["group", 53, "turtle"]
     ],
     skippedNodes: [0, 33],
-    repeatNodeCount: 43,
-    tokenData: "1e~R!`OY%TYZ&XZp%Tpq&^qr&crs&nst&stw%Twx'[xz%Tz{'a{|'f|}'k}!O'p!O!P%T!P!Q'u!Q!R'z!R!S'z!S!T'z!T!U'z!U!V'z!V!W'z!W!X'z!X!Y'z!Y!Z'z!Z!['z![!^%T!^!_1U!_!`1Z!`!a1`!a#Q%T#RBn%TBnBo'kBoDf%TDfDg'zDgDh'zDhDi'zDiDj'zDjDk'zDkDl'zDlDm'zDmDn'zDnDo'zDoDp'zDpGl%TGlGm'zGmGn'zGnGo'zGoGp'zGpGq'zGqGr'zGrGs'zGsGt'zGtGu'zGuGv'zGv&FV%T&FV&FW'k&FW;'S%T;'S;=`&R<%l?Hb%T?Hb?Hc'k?HcO%T~%Y]u~OY%TZp%Ttw%Txz%T!O!P%T!Q!^%T!a#Q%T#RBn%TBo&FV%T&FW;'S%T;'S;=`&R<%l?Hb%T?HcO%T~&UP;=`<%l%T~&^O#p~~&cO#o~~&fP!_!`&i~&nO$Q~~&sO#s~~&xSq~OY&sZ;'S&s;'S;=`'U<%lO&s~'XP;=`<%l&s~'aO#w~~'fO#{~~'kO#}~~'pO!O~~'uO$O~~'zO#|~~(R}w~u~OY%TZp%Ttw%Txz%T!O!P+O!Q!R'z!R!S'z!S!T'z!T!U'z!U!V'z!V!W'z!W!X'z!X!Y'z!Y!Z'z!Z!['z![!^%T!a#Q%T#RBn%TBoDf%TDfDg'zDgDh'zDhDi'zDiDj'zDjDk'zDkDl'zDlDm'zDmDn'zDnDo'zDoDp'zDpGl%TGlGm'zGmGn'zGnGo'zGoGp'zGpGq'zGqGr'zGrGs'zGsGt'zGtGu'zGuGv'zGv&FV%T&FW;'S%T;'S;=`&R<%l?Hb%T?HcO%T~+T}u~OY%TZp%Ttw%Txz%T!O!P%T!Q!R.Q!R!S.Q!S!T.Q!T!U.Q!U!V.Q!V!W.Q!W!X.Q!X!Y.Q!Y!Z.Q!Z![.Q![!^%T!a#Q%T#RBn%TBoDf%TDfDg.QDgDh.QDhDi.QDiDj.QDjDk.QDkDl.QDlDm.QDmDn.QDnDo.QDoDp.QDpGl%TGlGm.QGmGn.QGnGo.QGoGp.QGpGq.QGqGr.QGrGs.QGsGt.QGtGu.QGuGv.QGv&FV%T&FW;'S%T;'S;=`&R<%l?Hb%T?HcO%T~.X}w~u~OY%TZp%Ttw%Txz%T!O!P%T!Q!R.Q!R!S.Q!S!T.Q!T!U.Q!U!V.Q!V!W.Q!W!X.Q!X!Y.Q!Y!Z.Q!Z![.Q![!^%T!a#Q%T#RBn%TBoDf%TDfDg.QDgDh.QDhDi.QDiDj.QDjDk.QDkDl.QDlDm.QDmDn.QDnDo.QDoDp.QDpGl%TGlGm.QGmGn.QGnGo.QGoGp.QGpGq.QGqGr.QGrGs.QGsGt.QGtGu.QGuGv.QGv&FV%T&FW;'S%T;'S;=`&R<%l?Hb%T?HcO%T~1ZO$S~~1`O#q~~1eO$R~",
-    tokenizers: [2, new LocalTokenGroup("_~RQYZXwxX~^O#y~~", 14, 132), new LocalTokenGroup("_~RQYZXrsX~^O#u~~", 14, 128)],
+    repeatNodeCount: 42,
+    tokenData: "1e~R!`OY%TYZ&XZp%Tpq&^qr&crs&nst&stw%Twx'[xz%Tz{'a{|'f|}'k}!O'p!O!P%T!P!Q'u!Q!R'z!R!S'z!S!T'z!T!U'z!U!V'z!V!W'z!W!X'z!X!Y'z!Y!Z'z!Z!['z![!^%T!^!_1U!_!`1Z!`!a1`!a#Q%T#RBn%TBnBo'kBoDf%TDfDg'zDgDh'zDhDi'zDiDj'zDjDk'zDkDl'zDlDm'zDmDn'zDnDo'zDoDp'zDpGl%TGlGm'zGmGn'zGnGo'zGoGp'zGpGq'zGqGr'zGrGs'zGsGt'zGtGu'zGuGv'zGv&FV%T&FV&FW'k&FW;'S%T;'S;=`&R<%l?Hb%T?Hb?Hc'k?HcO%T~%Y]u~OY%TZp%Ttw%Txz%T!O!P%T!Q!^%T!a#Q%T#RBn%TBo&FV%T&FW;'S%T;'S;=`&R<%l?Hb%T?HcO%T~&UP;=`<%l%T~&^O#o~~&cO#n~~&fP!_!`&i~&nO$P~~&sO#r~~&xSq~OY&sZ;'S&s;'S;=`'U<%lO&s~'XP;=`<%l&s~'aO#v~~'fO#{~~'kO#}~~'pO}~~'uO$O~~'zO#|~~(R}w~u~OY%TZp%Ttw%Txz%T!O!P+O!Q!R'z!R!S'z!S!T'z!T!U'z!U!V'z!V!W'z!W!X'z!X!Y'z!Y!Z'z!Z!['z![!^%T!a#Q%T#RBn%TBoDf%TDfDg'zDgDh'zDhDi'zDiDj'zDjDk'zDkDl'zDlDm'zDmDn'zDnDo'zDoDp'zDpGl%TGlGm'zGmGn'zGnGo'zGoGp'zGpGq'zGqGr'zGrGs'zGsGt'zGtGu'zGuGv'zGv&FV%T&FW;'S%T;'S;=`&R<%l?Hb%T?HcO%T~+T}u~OY%TZp%Ttw%Txz%T!O!P%T!Q!R.Q!R!S.Q!S!T.Q!T!U.Q!U!V.Q!V!W.Q!W!X.Q!X!Y.Q!Y!Z.Q!Z![.Q![!^%T!a#Q%T#RBn%TBoDf%TDfDg.QDgDh.QDhDi.QDiDj.QDjDk.QDkDl.QDlDm.QDmDn.QDnDo.QDoDp.QDpGl%TGlGm.QGmGn.QGnGo.QGoGp.QGpGq.QGqGr.QGrGs.QGsGt.QGtGu.QGuGv.QGv&FV%T&FW;'S%T;'S;=`&R<%l?Hb%T?HcO%T~.X}w~u~OY%TZp%Ttw%Txz%T!O!P%T!Q!R.Q!R!S.Q!S!T.Q!T!U.Q!U!V.Q!V!W.Q!W!X.Q!X!Y.Q!Y!Z.Q!Z![.Q![!^%T!a#Q%T#RBn%TBoDf%TDfDg.QDgDh.QDhDi.QDiDj.QDjDk.QDkDl.QDlDm.QDmDn.QDnDo.QDoDp.QDpGl%TGlGm.QGmGn.QGnGo.QGoGp.QGpGq.QGqGr.QGrGs.QGsGt.QGtGu.QGuGv.QGv&FV%T&FW;'S%T;'S;=`&R<%l?Hb%T?HcO%T~1ZO$R~~1`O#p~~1eO$Q~",
+    tokenizers: [2, new LocalTokenGroup("_~RQYZXwxX~^O#x~~", 14, 131), new LocalTokenGroup("_~RQYZXrsX~^O#t~~", 14, 127)],
     topRules: { "Program": [0, 34] },
     dynamicPrecedences: { "77": -10 },
     specialized: [{ term: 37, get: (value, stack) => specializeKeyword(value, stack) << 1, external: specializeKeyword }, { term: 37, get: (value, stack) => extendKeyword(value, stack) << 1 | 1, external: extendKeyword, extend: true }],
-    tokenPrec: 1772
+    tokenPrec: 1776
   });
 
   // static/js/lezer-parsers/level16-parser.ts
   var parser16 = LRParser.deserialize({
     version: 14,
-    states: "=jQYQPOOOOQO'#D}'#D}QYQPOOO!gQPO'#E`O!{QPO'#DPOOQO'#EX'#EXO#TQPO'#D_OOQO'#EY'#EYO#qQPO'#D`OOQO'#E['#E[O#xQPO'#DaOOQO'#E_'#E_O$QQPO'#DcO$YQPO'#D|OOQO'#Ea'#EaO$eQPO'#DeOOQO'#Eb'#EbO$lQPO'#DfOOQO'#Ec'#EcO$sQPO'#DgOOQO'#Dd'#DdOOQO'#Ed'#EdO$zQPO'#DhOOQO'#Ee'#EeO%XQPO'#DiOOQO'#Eg'#EgO%`QPO'#DjOOQO'#Ei'#EiO%xQPO'#DkOOQO'#Ep'#EpO&PQPO'#DvOOQO'#Eq'#EqO&[QPO'#DwOOQO'#Es'#EsO&gQPO'#DxOOQO'#Ev'#EvO&oQPO'#DyOOQO'#Ew'#EwO&wQPO'#DzOOQO'#Ex'#ExO'OQPO'#D{OOQO'#DO'#DOQ!bQPO'#EOQ'VQPOOOOQO-E7{-E7{OOQO'#DS'#DSO(aQPO,59mOOQO'#EQ'#EQO)QQPO,59kOOQO'#DV'#DVO(lQPO,59kO)XQPO,59kO#cQPO,59kOOQO-E8V-E8VO*bQPO'#DWO+[OSO'#FQO+dOQO'#FUOOQO'#DX'#DXO+lQPO'#EZOOQO'#DW'#DWOOQO-E8W-E8WOOQO'#EZ'#EZO,aQPO,59zOOQO-E8Y-E8YO,kQPO,59{OOQO-E8]-E8]OOQO'#E`'#E`O-xQPO,59}OOQO-E8^-E8^O.TQPO,5:POOQO-E8_-E8_OOQO,5:P,5:PO.iQPO,5:QOOQO-E8`-E8`OOQO,5:Q,5:QO.}QPO,5:ROOQO-E8a-E8aOOQO,5:R,5:RO/cQPO,5:SOOQO-E8b-E8bOOQO,5:S,5:SO/wQPO,5:TOOQO-E8c-E8cO0YQPO,5:TO0_QPO,5:UOOQO-E8e-E8eO0pQPO,5:UO0uQPO'#DWO1eQPO'#DnOOQO-E8g-E8gO0|QPO'#DnOOQO'#Dl'#DlO1uQPO,5:VOOQO-E8n-E8nOOQO-E8o-E8oO2TQPO,5:cOOQO-E8q-E8qO2YQPO,5:dOOQO-E8t-E8tO2_QPO,5:eO2jQPO,5:fOOQO-E8u-E8uOOQO-E8v-E8vO2tQPO,5:gO3SQPO,5:jOOQO-E7|-E7|OOQO'#EP'#EPO4dQPO1G/XO4gQPO1G/XOOQO-E8O-E8OO4lQPO'#ERO5^QPO1G/VO5rQPO1G/bOOQO'#EV'#EVO5}QPO1G/dOOOO'#ES'#ESO6`OSO,5;lOOQO,5;l,5;lOOOO'#ET'#ETO6hOQO,5;pOOQO,5;p,5;pOOQO'#DY'#DYOOQO'#DZ'#DZO#cQPO,5;tO#cQPO,5;tOOQO-E8X-E8XOOQO'#E]'#E]O6pQPO1G/gOOQO'#Ef'#EfO7RQPO1G/oOOQO'#Eh'#EhO7ZQPO1G/pO7cQPO,5:XO7kQPO,5:YO7rQPO,5:YOOQO'#Dp'#DpO#`QPO,5:ZOOQO'#Dr'#DrOOQO'#Ds'#DsO7rQPO,5:]OOQO'#Ek'#EkO7yQPO,5:`OOQO'#El'#ElO8RQPO,5:aOOQO'#En'#EnO8ZQPO'#EmOOQO'#Eo'#EoO8bQPO'#EmO8iQPO1G/qOOQO'#Er'#ErO8wQPO1G/}O9SQPO1G0OO6pQPO1G0PO9_QPO1G0ROOQO-E7}-E7}OOQO'#DU'#DUOOQO7+$s7+$sOOQO-E8P-E8PO9mQPO7+$|O9rQPO'#EWOOQO-E8T-E8TO:dQPO7+%OOOOO-E8Q-E8QOOQO1G1W1G1WOOOO-E8R-E8ROOQO1G1[1G1[OOQO1G1`1G1`O:xQPO1G1`O<cQPO'#DbOOQO-E8Z-E8ZOOQO7+%R7+%ROOQO-E8d-E8dOOQO7+%Z7+%ZOOQO-E8f-E8fOOQO7+%[7+%[OOQO'#Ej'#EjO=|QPO1G/sO>_QPO1G/tOOQO1G/t1G/tO#`QPO1G/tO>yQPO1G/uOOQO1G/u1G/uO?eQPO1G/wOOQO1G/w1G/wO#`QPO1G/wOOQO-E8i-E8iOOQO1G/z1G/zOOQO-E8j-E8jOOQO1G/{1G/{OOQO-E8l-E8lOOQO,5;X,5;XOOQO-E8m-E8mOOQO-E8k-E8kOOQO-E8p-E8pOOQO'#Et'#EtO@PQPO7+%jOOQO7+%j7+%jOOQO7+%k7+%kO@[QPO'#EUO@gQPO<<HhOOQO-E8U-E8UO@oQPO,59|O#cQPO'#E^OOQO-E8h-E8hOA|QPO7+%`OOQO7+%`7+%`OBhQPO7+%cOOQO7+%c7+%cOOQO-E8r-E8rOCSQPO<<IUOOQO,5:p,5:pOOQO-E8S-E8SOOQOAN>SAN>SOOQO-E8[-E8[OCXQPO,5:xOOQO'#Eu'#EuODrQPOAN>pOOQO-E8s-E8sOOQOG24[G24[",
-    stateData: "EQ~OpOS#oOS~ORkOTmOXwOYVOZ^O[`O]bO^eO_ZO`gObiOdTOgoOiqOlXOmsOnuOtRO#pPO~OW!PO#q}O#s!ROt#SX#m#SX#p#SX~OW!PO#s!RO~OdTO#m!RX#p!RX~OlXOt!WOw!]O#u!XO#y!YO~OYVO~P#`OlXOt!bO~O_ZOt!dO~Ot!dO#m!pX#p!pX~OZ^O~P#`O[`O~P#`O]bO~P#`O^eO#m![X#p![X~P#`O`gO~P#`ObiO~P#`OlXOt!yOw!]O#u!XO#y!YO~ORkO~P%gOTmO#m!jX#p!jX~OgoOt#ROw#RO~OiqOt#TO~OmsOt#VO~OnuO~P#`OXwO~P%gORkOTmOXwOYVOZ^O[`O]bO^eO_ZO`gObiOdTOgoOiqOlXOmsOnuOtRO~OQ#^Ot#`Ow#`O~OP#eOt!WOw!]O#q}O#u!XO#y!YO~OW!PO~P(lOW!POt!WOw!]O#u!XO#y!YO~O#q}O#}zX$OzX$PzX$QzXWzXezXfzX#szX$RzX$SzX$TzX~OlzXtzXwzX#mzX#pzX#uzX#yzXczXazX!PzXUzXVzX~P)jO#v#gO#w#iO~O#z#jO#{#lO~O#}#mO$O#mO$P#nO$Q#nOl!}Xt!}Xw!}X#m!}X#p!}X#u!}X#y!}X~O#m!Sa#p!Sa~P#`Oo#rO#m!Ta#p!Tal!Tat!Taw!Ta#u!Ta#y!Tac!Taa!TaW!Tae!Taf!Ta#s!Ta$R!Ta$S!Ta$T!TaU!TaV!Ta~Ot!dO#m!Va#p!Va~O#}#mO$O#mO$P#nO$Q#nO#m!Xa#p!Xa~O#}#mO$O#mO$P#nO$Q#nO#m!Ya#p!Ya~O#}#mO$O#mO$P#nO$Q#nO#m!Za#p!Za~O#}#mO$O#mO$P#nO$Q#nO#m![a#p![a~Oc#tO#}#mO$O#mO$P#nO$Q#nO~Oc#tO~Oa#vO#}#mO$O#mO$P#nO$Q#nO~Oa#vO~OW!PO~P)jOW!POe$QOf$SO#s!RO$R#{O$S#}O$T$OO~O#}#mO$O#mO$P#nO$Q#nO~P0|OU$UOV$WO#m!_a#p!_a~Oh$ZO~Oe$QO~Oo#rO#m!ma#p!ma~O#m!na#p!na~P#`OU$UOV$WO#m!oa#p!oa~O#pPOR!raT!raX!raY!raZ!ra[!ra]!ra^!ra_!ra`!rab!rad!rag!rai!ral!ram!ran!rat!ra#m!ra~OQ#^O#r$aO~O#}#mO$O#mO$P#nO$Q#nOt!uXw!uX#m!uX#p!uX#u!uX#y!uX~Ot!WOw!]O#u!XO#y!YO#msi#psi~Ow$dO#u!XO#y!YO~OP#eOt!WOw!]O#u!XO#y!YO~O#v#gO#w$iO~O#z#jO#{$kO~Oo#rOt!WOw!]O#u!XO#y!YO~Oc#tOt$rO~Oa#vOt$tO~OS$uOW!PO~OW!PO~P#`O#s!RO~P#`Oe$QOt%QO~Of$SOt%SO~OU$UO~P%gOV$WO~P%gOU$UOV$WO#m!_i#p!_i~Oh$ZO#m!ki#p!ki~Oe$QOk%YOt%[O~OU$UOV$WO#m!oi#p!oi~O!P%^O~O#}#mO$O#mO$P#nO$Q#nOt!zXw!zX#m!zX#p!zX#u!zX#y!zX~Ot!WOw!]O#u!XO#y!YO#m!Qq#p!Qq~O#}#mO$O#mO$P#nO$Q#nOl#|it#|iw#|i#m#|i#p#|i#u#|i#y#|ic#|ia#|iW#|ie#|if#|i#s#|i$R#|i$S#|i$T#|i!P#|iU#|iV#|i~O!P%bO#}#mO$O#mO$P#nO$Q#nO#m!UX#p!UXl!UXt!UXw!UX#u!UX#y!UXc!UXa!UXW!UXe!UXf!UX#s!UX$R!UX$S!UX$T!UXU!UXV!UX~OS$uOU!aiV!ai#m!ai#p!ai~O#}#mO$O#mO$P#nO$Q#nOU!biV!bi#m!bi#p!bi~O#}#mO$O#mO$P#nO$Q#nOU!ciV!ci#m!ci#p!ci~O#}#mO$O#mO$P#nO$Q#nOU!eiV!ei#m!ei#p!ei~Ok%YOt%iOw%iO~Ow%jO#u!XO#y!YO~O!P%^O#r$aO~O!P%bO#m!Ua#p!Ual!Uat!Uaw!Ua#u!Ua#y!Uac!Uaa!UaW!Uae!Uaf!Ua#s!Ua$R!Ua$S!Ua$T!UaU!UaV!Ua~O#}#mO$O#mO$P#nO$Q#nOU!bqV!bq#m!bq#p!bq~O#}#mO$O#mO$P#nO$Q#nOU!eqV!eq#m!eq#p!eq~Oj%oO~O#}#mO$O#mO$P#nO$Q#nO!P#Qa#m#Qa#p#Qal#Qat#Qaw#Qa#u#Qa#y#Qac#Qaa#QaW#Qae#Qaf#Qa#s#Qa$R#Qa$S#Qa$T#QaU#QaV#Qa~Oj%oOt%rOw%rO~Owt~",
-    goto: "3g#}PPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPP$O$TP$Y%RP%[%c%s'](V(k$TP$T$T$T)P*U$T$T*[*[*[$T$T$T$T*a*k*k*k*q*k*u*u*k*k$T$T$T$T$T$T$T*y+T+[+b+u,O,U,[,b,i,o,w-P-Z-w.R.X.a.m.u.}/V/_/g/n/v/}0V0]0h0o0y1S1]1e1m1s1{2R2X2a2iPPPPPPP2qPPP2qPPP$_VzOQ{VyOQ{USOQ{!c!]W_acfhjlvx!Q!S!T!U!`#W#c#f#o#p#s#y#z#|$P$V$X$^$g$y%O%bU!OR!W!yT#d!Q!SS$b#_#`R%l%_Q!SRQ!USS#z!z!|Q$y#zR%O$PW![Wv!`#WQ!g_Q!jaQ!mcQ!pfQ!shQ!vjW!zlx$V$XY#b!Q!S!T!U#cS$e#f$gQ$l#oQ$m#pS$n#s$^S$w#y#zQ$z#|Q$|$PQ%d$yQ%f%OR%n%b!b!]W_acfhjlvx!Q!S!T!U!`#W#c#f#o#p#s#y#z#|$P$V$X$^$g$y%O%bQ$d#dR%j%^u#o![!g!j!m!p!s!v!z#b$e$m$n$w$z$|%d%f%nu#p![!g!j!m!p!s!v!z#b$e$m$n$w$z$|%d%f%nUyOQ{W!_Wv!`#WQ!i_Q!laQ!ocQ!rfQ!uhQ!xjW!|lx$V$XS$x#y#zQ${#|Q$}$PQ%e$yR%g%OQ$p#sR%]$^VdOQ{Q#OlQ#ZxT%U$V$XX!}lx$V$XT#|!z!|T$P!z!|QQOS|Q#[R#[zS{OQR#]{Q#_!OR$`#_Q!QRQ!TSW#a!Q!T#x#yQ#x!yT#y!z!|W#c!Q!S!T!UR$c#cQ#h!XR$h#hQ#k!YR$j#kQ%_$dR%k%_S#f!Q!SR$f#fQ$g#fR%`$gUUOQ{R!VUUWOQ{R!^WQ!`WQ#WvT#q!`#W!OYOQW_acfhjlvx{!`#W#y#z#|$P$V$X$y%OR!aYQ#s!bQ$^#VT$o#s$^Q%a$nR%m%aU[OQ{R!c[U]OQ{Q!e[T!f]!eU_OQ{R!h_UaOQ{R!kaUcOQ{R!ncUfOQ{R!qfUhOQ{R!thS#u!s!uR$q#uUjOQ{R!wjS#w!v!xR$s#wUlOQ{R!{lQ$v#xR%c$vS$R!z!|Q$]#TT%P$R$]S$T!z!|R%R$TQ$Y#OQ$_#ZT%W$Y$_W$V#O#Z$Y$_R%T$VW$X#O#Z$Y$_R%V$XUnOQ{R#PnUpOQ{R#QpQ$[#RR%X$[UrOQ{R#SrQ%Z$]R%h%ZQ%p%iR%q%pUtOQ{R#UtUvOQ{R#XvUxOQ{R#Yx!g!ZW_acfhjlvx!Q!S!T!U!`#W#c#d#f#o#p#s#y#z#|$P$V$X$^$g$y%O%^%b",
-    nodeNames: "\u26A0 ask random if pressed else and or is while print forward turn color sleep play add from remove toList clear in not_in repeat times for to range call define return with Comment Program Command Assign Text ListAccess Op Number Op Op Expression String Op Op AssignList Comma Ask Clear Print Call Arguments Play Turtle Forward Turn Color Sleep Add Remove If Condition PressedCheck EqualityCheck NotEqualCheck Op ComparisonCheck Op Op InListCheck NotInListCheck Else Repeat For Define Return While ErrorInvalid",
-    maxTerm: 143,
+    states: "<nQYQPOOOOQO'#D}'#D}QYQPOOO!gQPO'#E_OOQO'#EU'#EUO!{QPO'#DYO#TQPO'#DPOOQO'#E['#E[O#]QPO'#DaOOQO'#E]'#E]O#yQPO'#DbOOQO'#E^'#E^O$QQPO'#DcO$YQPO'#D|OOQO'#E`'#E`O$eQPO'#DeOOQO'#Ea'#EaO$lQPO'#DfOOQO'#Eb'#EbO$sQPO'#DgOOQO'#Dd'#DdOOQO'#Ec'#EcO$zQPO'#DhOOQO'#Ed'#EdO%XQPO'#DiOOQO'#Ef'#EfO%`QPO'#DjOOQO'#Eh'#EhO%xQPO'#DkOOQO'#Eo'#EoO&PQPO'#DvOOQO'#Ep'#EpO&[QPO'#DwOOQO'#Er'#ErO&gQPO'#DxOOQO'#Eu'#EuO&oQPO'#DyOOQO'#Ev'#EvO&wQPO'#DzOOQO'#Ew'#EwO'OQPO'#D{OOQO'#DO'#DOQ!bQPO'#EOQ'VQPOOOOQO-E7{-E7{OOQO'#DS'#DSO(aQPO,59mOOQO'#EQ'#EQO(lQPO,59kOOQO'#DV'#DVO(yQPO,59kOOQO-E8S-E8SO)TQPO,59tO*nQPO,59kO#hQPO,59kOOQO-E8Y-E8YO+mQPO'#DWO,gOSO'#FPO,oOQO'#FTOOQO'#DX'#DXO,wQPO'#EZOOQO'#DW'#DWO-lQPO,59|OOQO-E8Z-E8ZOOQO-E8[-E8[OOQO'#E_'#E_O-vQPO,59}OOQO-E8]-E8]O.RQPO,5:POOQO-E8^-E8^O.gQPO,5:QOOQO-E8_-E8_O.{QPO,5:ROOQO-E8`-E8`O/aQPO,5:SOOQO-E8a-E8aO/uQPO,5:TOOQO-E8b-E8bO0WQPO,5:UOOQO-E8d-E8dO0iQPO'#DWO0pQPO'#DnOOQO-E8f-E8fOOQO'#Dl'#DlO1eQPO,5:VOOQO-E8m-E8mOOQO-E8n-E8nO1sQPO,5:cOOQO-E8p-E8pO1xQPO,5:dOOQO-E8s-E8sO1}QPO,5:eO2YQPO,5:fOOQO-E8t-E8tOOQO-E8u-E8uO2dQPO,5:gO2rQPO,5:jOOQO-E7|-E7|OOQO'#EP'#EPO4SQPO1G/XO4VQPO1G/XOOQO-E8O-E8OO4[QPO'#ERO5PQPO1G/VO5ZQPO1G/eOOQO'#EY'#EYO5fQPO1G/fOOQO'#EV'#EVO5mQPO1G/`OOOO'#ES'#ESO5tOSO,5;kOOQO,5;k,5;kOOOO'#ET'#ETO5|OQO,5;oOOQO,5;o,5;oOOQO'#D]'#D]OOQO'#D^'#D^O#hQPO,5;sO#hQPO,5;sOOQO-E8X-E8XOOQO'#Ee'#EeO6UQPO1G/oOOQO'#Eg'#EgO6^QPO1G/pO6fQPO,5:XO*nQPO,5:YO6nQPO,5:YOOQO'#Dp'#DpO#hQPO,5:ZOOQO'#Dr'#DrOOQO'#Ds'#DsO6nQPO,5:]OOQO'#Ej'#EjO6uQPO,5:`OOQO'#Ek'#EkO6}QPO,5:aOOQO'#Em'#EmO7VQPO'#ElOOQO'#En'#EnO7^QPO'#ElO7eQPO1G/qOOQO'#Eq'#EqO7sQPO1G/}O8OQPO1G0OO5mQPO1G0PO8ZQPO1G0ROOQO-E7}-E7}OOQO'#DU'#DUOOQO7+$s7+$sOOQO-E8P-E8PO8iQPO7+%POOQO-E8W-E8WO8nQPO7+%QOOQO-E8T-E8TOOQO7+$z7+$zO:`QPO'#DZOOOO-E8Q-E8QOOQO1G1V1G1VOOOO-E8R-E8ROOQO1G1Z1G1ZOOQO1G1_1G1_O:gQPO1G1_OOQO-E8c-E8cOOQO7+%Z7+%ZOOQO-E8e-E8eOOQO7+%[7+%[OOQO'#Ei'#EiO;}QPO1G/sO<`QPO1G/tO#hQPO1G/tO<zQPO1G/uO=fQPO1G/wO#hQPO1G/wOOQO-E8h-E8hOOQO1G/z1G/zOOQO-E8i-E8iOOQO1G/{1G/{OOQO-E8k-E8kOOQO,5;W,5;WOOQO-E8l-E8lOOQO-E8j-E8jOOQO-E8o-E8oOOQO'#Es'#EsO>QQPO7+%jOOQO7+%j7+%jOOQO7+%k7+%kO>]QPO'#EXO>hQPO<<HkO>pQPO,59uO#hQPO'#EWOOQO-E8g-E8gO@ZQPO7+%`O@uQPO7+%cOOQO-E8q-E8qOAaQPO<<IUOOQO,5:s,5:sOOQO-E8V-E8VOOQOAN>VAN>VOOQO-E8U-E8UOAfQPO,5:rOOQO'#Et'#EtOCPQPOAN>pOOQO-E8r-E8rOOQOG24[G24[POQO,59u,59uOC[QPO'#DZO5mQPO1G/`OCcQPO,59tOCjQPO'#DYO#hQPO,5;sO#hQPO,5;sOCrQPO1G1_",
+    stateData: "C|~OpOS#nOS~ORkOTmOXwOYsO[XO]^O^`O_bO`eOaZObgOdiOfVOioOkqOnSOouOtRO#oPO~OW!PO#p}O#r!ROt#RX#l#RX#o#RX~OnSOt!UO~OW!PO#r!RO~OfVO#l!TX#o!TX~OnSOt!YOw!_O#t!ZO#x![O~O[XO~P#hOaZOt!cO~Ot!cO#l!pX#o!pX~O]^O~P#hO^`O~P#hO_bO~P#hO`eO#l![X#o![X~P#hObgO~P#hOdiO~P#hOnSOt!rOw!_O#t!ZO#x![O~ORkO~P%gOTmO#l!jX#o!jX~OioOt!yOw!yO~OkqOt!{O~OYsOt!}O~OouO~P#hOXwO~P%gORkOTmOXwOYsO[XO]^O^`O_bO`eOaZObgOdiOfVOioOkqOnSOouOtRO~OQ#UOt#WOw#WO~OP#]OW!PO#p}O~P#hOP#]O#p}O~P#hOZ#_O#l|a#o|an|at|aw|a#t|a#x|a#||a#}|a$O|a$P|ae|ac|aW|ag|ah|a#r|a$Q|a$R|a$S|aU|aV|a~OW!PO~P#hO#p}O#|zX#}zX$OzX$PzXWzXgzXhzX#rzX$QzX$RzX$SzX~OnzXtzXwzX#lzX#ozX#tzX#xzXezXczX!OzXUzXVzX~P*uO#u#aO#v#cO~O#y#dO#z#fO~O#|#gO#}#gO$O#hO$P#hOn!}Xt!}Xw!}X#l!}X#o!}X#t!}X#x!}X~O#l!Ua#o!Ua~P#hOt!cO#l!Va#o!Va~O#|#gO#}#gO$O#hO$P#hO#l!Xa#o!Xa~O#|#gO#}#gO$O#hO$P#hO#l!Ya#o!Ya~O#|#gO#}#gO$O#hO$P#hO#l!Za#o!Za~O#|#gO#}#gO$O#hO$P#hO#l![a#o![a~Oe#lO#|#gO#}#gO$O#hO$P#hO~Oc#nO#|#gO#}#gO$O#hO$P#hO~OW!PO~P*uOW!POg#xOh#zO#r!RO#|#gO#}#gO$O#hO$P#hO$Q#sO$R#uO$S#vO~OU#|OV$OO#l!_a#o!_a~Oj$RO~Og#xO~OZ#_O#l!ma#o!ma~O#l!na#o!na~P#hOU#|OV$OO#l!oa#o!oa~O#oPOR!raT!raX!raY!ra[!ra]!ra^!ra_!ra`!raa!rab!rad!raf!rai!rak!ran!rao!rat!ra#l!ra~OQ#UO#q$XO~O#|#gO#}#gO$O#hO$P#hOn!uXt!uXw!uX#l!uX#o!uX#t!uX#x!uX~O#lsi#osi~P#hOw$[O#t!ZO#x![O~OP#]O~P#hOZ#_O~P#hO#u#aO#v$cO~O#y#dO#z$eO~Oe#lOt$iO~Oc#nOt$kO~OS$lOW!PO~O#r!RO~P#hOg#xOt$tO~Oh#zOt$vO~OU#|O~P%gOV$OO~P%gOU#|OV$OO#l!_i#o!_i~Oj$RO#l!ki#o!ki~Og#xOm$|Ot%OO~OU#|OV$OO#l!oi#o!oi~O!O%QO~O#l!Sq#o!Sq~P#hO#|#gO#}#gO$O#hO$P#hO#l}X#o}Xn}Xt}Xw}X#t}X#x}Xe}Xc}XW}Xg}Xh}X#r}X$Q}X$R}X$S}XU}XV}X~O!O%TO~P8xO#|#gO#}#gO$O#hO$P#hOn#{it#{iw#{i#l#{i#o#{i#t#{i#x#{ie#{ic#{iW#{ig#{ih#{i#r#{i$Q#{i$R#{i$S#{iU#{iV#{i~OS$lOU!aiV!ai#l!ai#o!ai~O#|#gO#}#gO$O#hO$P#hOU!biV!bi#l!bi#o!bi~O#|#gO#}#gO$O#hO$P#hOU!ciV!ci#l!ci#o!ci~O#|#gO#}#gO$O#hO$P#hOU!eiV!ei#l!ei#o!ei~Om$|Ot%YOw%YO~Ow%ZO#t!ZO#x![O~O!O%QO#q$XO~O!O%TO#l}a#o}an}at}aw}a#t}a#x}a#|}a#}}a$O}a$P}ae}ac}aW}ag}ah}a#r}a$Q}a$R}a$S}aU}aV}a~O#|#gO#}#gO$O#hO$P#hOU!bqV!bq#l!bq#o!bq~O#|#gO#}#gO$O#hO$P#hOU!eqV!eq#l!eq#o!eq~Ol%`O~O#|#gO#}#gO$O#hO$P#hO!O!za#l!za#o!zan!zat!zaw!za#t!za#x!zae!zac!zaW!zag!zah!za#r!za$Q!za$R!za$S!zaU!zaV!za~Ol%`Ot%cOw%cO~O!O}X~P8xO!O|a~P)TOnSOt%gO~O!O#{i~P:gOwt~",
+    goto: "4O#|PPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPP#}$SP$X%TP%^%e%t'c(`)[P)c)z$S$S$S$S$S$S*c*c*c$S$S$S$S*h*r*r*r*x*r*{*{*r*r$S$S$S$S$S$S$S+O+Y+a+g+y,S,Y,`-`-n-t-z.R.a.i.q.y/V/_/g/o/w0P0V0_0e0m0s0}1T1_1h1q1y2R2X2a2g2m2u2}PPPPPPP3VPPP3VPPP$^VzOQ{VyOQ{UUOQ{!i!_Y_acfhjlvx!Q!S!V!W!`#O#Z#^#`#i#j#q#r#t#w#}$P$U$^$o$r%T%f%i%jU!OR!Y!rT#[!Q!SS$Y#V#WR%]%RQ!SRQ!WUQ#r!sQ$o#rR$r#w[!^Yv!`#O#^$^Q!f_Q!haQ!jcQ!lfQ!nhQ!pjW!slx#}$PY#Y!Q!S!V!W#ZS$a#`$US$f#i%iQ$g#jS$n#q#rQ$p#tQ$q#wQ%V$oQ%W$rQ%_%TQ%e%fR%k%j!h!_Y_acfhjlvx!Q!S!V!W!`#O#Z#^#`#i#j#q#r#t#w#}$P$U$^$o$r%T%f%i%jQ$[#[R%Z%QUyOQ{!i!_Y_acfhjlvx!Q!S!V!W!`#O#Z#^#`#i#j#q#r#t#w#}$P$U$^$o$r%T%f%i%jS$`#`%fR%P$Un#i!^!f!h!j!l!n!p!s#Y$g$n$p$q%V%WX%i$a%_%e%kn#j!^!f!h!j!l!n!p!s#Y$g$n$p$q%V%WX%j$a%_%e%kVdOQ{Q!vlQ#RxT$x#}$PX!ulx#}$PR#t!sR#w!sQQOS|Q#SR#SzS{OQR#T{Q#V!OR$W#VQ!QRQ!VUW#X!Q!V#p#qQ#p!rR#q!sW#Z!Q!S!V!WR$Z#ZQ#b!ZR$b#bQ#e![R$d#e!bTOQY_acfhjlvx{!Q!S!V!W!`#O#Z#^#i#j#q#r#t#w#}$P$^$o$rS!TT%h]%h#`$U%T%f%i%jQ#`!UQ$U!}U$_#`$U%fR%f%gQ%S$aR%^%SQ%R$[R%[%RS#^!Q!SR$]#^Q!`YQ#OvU#k!`#O$^R$^#^UWOQ{R!XWUYOQ{R!aYU[OQ{R!b[U]OQ{Q!d[T!e]!dU_OQ{R!g_UaOQ{R!iaUcOQ{R!kcUfOQ{R!mfUhOQ{R!ohQ#m!nR$h#mUjOQ{R!qjQ#o!pR$j#oUlOQ{R!tlQ$m#pR%U$mQ#y!sQ$T!{T$s#y$TQ#{!sR$u#{Q$Q!vQ$V#RT$z$Q$VW#}!v#R$Q$VR$w#}W$P!v#R$Q$VR$y$PUnOQ{R!wnUpOQ{R!xpQ$S!yR${$SUrOQ{R!zrQ$}$TR%X$}Q%a%YR%b%aUtOQ{R!|tUvOQ{R#PvUxOQ{R#Qx!m!]Y_acfhjlvx!Q!S!V!W!`#O#Z#[#^#`#i#j#q#r#t#w#}$P$U$^$o$r%Q%T%f%i%j",
+    nodeNames: "\u26A0 ask random if pressed else and or is while define with print forward turn color sleep play add from remove toList clear in not_in repeat times for to range call return Comment Program Command Assign Text ListAccess Op Number Op Op Expression String Call Arguments Comma Op Op AssignList Ask Clear Print Play Turtle Forward Turn Color Sleep Add Remove If Condition PressedCheck EqualityCheck NotEqualCheck Op ComparisonCheck Op Op InListCheck NotInListCheck Else Repeat For Define Return While ErrorInvalid",
+    maxTerm: 142,
     nodeProps: [
       ["group", 54, "turtle"]
     ],
     skippedNodes: [0, 32],
-    repeatNodeCount: 42,
-    tokenData: "2U~R!cOY%^YZ&eZp%^pq&jqr&ors&zst'Ptw%^wx'hxz%^z{'m{|'r|}'w}!O'|!O!P%^!P!Q(R!Q!R(W!R!S(W!S!T(W!T!U(W!U!V(W!V!W(W!W!X(W!X!Y(W!Y!Z(W!Z![(W![!^%^!^!_1k!_!`1p!`!a1u!a!}%^!}#O1z#O#P%^#P#Q2P#QBn%^BnBo'wBoDf%^DfDg(WDgDh(WDhDi(WDiDj(WDjDk(WDkDl(WDlDm(WDmDn(WDnDo(WDoDp(WDpGl%^GlGm(WGmGn(WGnGo(WGoGp(WGpGq(WGqGr(WGrGs(WGsGt(WGtGu(WGuGv(WGv&FV%^&FV&FW'w&FW;'S%^;'S;=`&_<%l?Hb%^?Hb?Hc'w?HcO%^~%c^t~OY%^Zp%^tw%^xz%^!O!P%^!Q!^%^!a!}%^#O#P%^#QBn%^Bo&FV%^&FW;'S%^;'S;=`&_<%l?Hb%^?HcO%^~&bP;=`<%l%^~&jO#p~~&oO#o~~&rP!_!`&u~&zO$R~~'PO#u~~'USp~OY'PZ;'S'P;'S;=`'b<%lO'P~'eP;=`<%l'P~'mO#y~~'rO#}~~'wO$P~~'|O!P~~(RO$Q~~(WO$O~~(_!Ow~t~OY%^Zp%^tw%^xz%^!O!P+_!Q!R(W!R!S(W!S!T(W!T!U(W!U!V(W!V!W(W!W!X(W!X!Y(W!Y!Z(W!Z![(W![!^%^!a!}%^#O#P%^#QBn%^BoDf%^DfDg(WDgDh(WDhDi(WDiDj(WDjDk(WDkDl(WDlDm(WDmDn(WDnDo(WDoDp(WDpGl%^GlGm(WGmGn(WGnGo(WGoGp(WGpGq(WGqGr(WGrGs(WGsGt(WGtGu(WGuGv(WGv&FV%^&FW;'S%^;'S;=`&_<%l?Hb%^?HcO%^~+d!Ot~OY%^Zp%^tw%^xz%^!O!P%^!Q!R.d!R!S.d!S!T.d!T!U.d!U!V.d!V!W.d!W!X.d!X!Y.d!Y!Z.d!Z![.d![!^%^!a!}%^#O#P%^#QBn%^BoDf%^DfDg.dDgDh.dDhDi.dDiDj.dDjDk.dDkDl.dDlDm.dDmDn.dDnDo.dDoDp.dDpGl%^GlGm.dGmGn.dGnGo.dGoGp.dGpGq.dGqGr.dGrGs.dGsGt.dGtGu.dGuGv.dGv&FV%^&FW;'S%^;'S;=`&_<%l?Hb%^?HcO%^~.k!Ow~t~OY%^Zp%^tw%^xz%^!O!P%^!Q!R.d!R!S.d!S!T.d!T!U.d!U!V.d!V!W.d!W!X.d!X!Y.d!Y!Z.d!Z![.d![!^%^!a!}%^#O#P%^#QBn%^BoDf%^DfDg.dDgDh.dDhDi.dDiDj.dDjDk.dDkDl.dDlDm.dDmDn.dDnDo.dDoDp.dDpGl%^GlGm.dGmGn.dGnGo.dGoGp.dGpGq.dGqGr.dGrGs.dGsGt.dGtGu.dGuGv.dGv&FV%^&FW;'S%^;'S;=`&_<%l?Hb%^?HcO%^~1pO$T~~1uO#s~~1zO$S~~2PO#q~~2UO#r~",
-    tokenizers: [2, new LocalTokenGroup("_~RQYZXwxX~^O#{~~", 14, 134), new LocalTokenGroup("_~RQYZXrsX~^O#w~~", 14, 130)],
+    repeatNodeCount: 41,
+    tokenData: "2U~R!cOY%^YZ&eZp%^pq&jqr&ors&zst'Ptw%^wx'hxz%^z{'m{|'r|}'w}!O'|!O!P%^!P!Q(R!Q!R(W!R!S(W!S!T(W!T!U(W!U!V(W!V!W(W!W!X(W!X!Y(W!Y!Z(W!Z![(W![!^%^!^!_1k!_!`1p!`!a1u!a!}%^!}#O1z#O#P%^#P#Q2P#QBn%^BnBo'wBoDf%^DfDg(WDgDh(WDhDi(WDiDj(WDjDk(WDkDl(WDlDm(WDmDn(WDnDo(WDoDp(WDpGl%^GlGm(WGmGn(WGnGo(WGoGp(WGpGq(WGqGr(WGrGs(WGsGt(WGtGu(WGuGv(WGv&FV%^&FV&FW'w&FW;'S%^;'S;=`&_<%l?Hb%^?Hb?Hc'w?HcO%^~%c^t~OY%^Zp%^tw%^xz%^!O!P%^!Q!^%^!a!}%^#O#P%^#QBn%^Bo&FV%^&FW;'S%^;'S;=`&_<%l?Hb%^?HcO%^~&bP;=`<%l%^~&jO#o~~&oO#n~~&rP!_!`&u~&zO$Q~~'PO#t~~'USp~OY'PZ;'S'P;'S;=`'b<%lO'P~'eP;=`<%l'P~'mO#x~~'rO#|~~'wO$O~~'|O!O~~(RO$P~~(WO#}~~(_!Ow~t~OY%^Zp%^tw%^xz%^!O!P+_!Q!R(W!R!S(W!S!T(W!T!U(W!U!V(W!V!W(W!W!X(W!X!Y(W!Y!Z(W!Z![(W![!^%^!a!}%^#O#P%^#QBn%^BoDf%^DfDg(WDgDh(WDhDi(WDiDj(WDjDk(WDkDl(WDlDm(WDmDn(WDnDo(WDoDp(WDpGl%^GlGm(WGmGn(WGnGo(WGoGp(WGpGq(WGqGr(WGrGs(WGsGt(WGtGu(WGuGv(WGv&FV%^&FW;'S%^;'S;=`&_<%l?Hb%^?HcO%^~+d!Ot~OY%^Zp%^tw%^xz%^!O!P%^!Q!R.d!R!S.d!S!T.d!T!U.d!U!V.d!V!W.d!W!X.d!X!Y.d!Y!Z.d!Z![.d![!^%^!a!}%^#O#P%^#QBn%^BoDf%^DfDg.dDgDh.dDhDi.dDiDj.dDjDk.dDkDl.dDlDm.dDmDn.dDnDo.dDoDp.dDpGl%^GlGm.dGmGn.dGnGo.dGoGp.dGpGq.dGqGr.dGrGs.dGsGt.dGtGu.dGuGv.dGv&FV%^&FW;'S%^;'S;=`&_<%l?Hb%^?HcO%^~.k!Ow~t~OY%^Zp%^tw%^xz%^!O!P%^!Q!R.d!R!S.d!S!T.d!T!U.d!U!V.d!V!W.d!W!X.d!X!Y.d!Y!Z.d!Z![.d![!^%^!a!}%^#O#P%^#QBn%^BoDf%^DfDg.dDgDh.dDhDi.dDiDj.dDjDk.dDkDl.dDlDm.dDmDn.dDnDo.dDoDp.dDpGl%^GlGm.dGmGn.dGnGo.dGoGp.dGpGq.dGqGr.dGrGs.dGsGt.dGtGu.dGuGv.dGv&FV%^&FW;'S%^;'S;=`&_<%l?Hb%^?HcO%^~1pO$S~~1uO#r~~1zO$R~~2PO#p~~2UO#q~",
+    tokenizers: [2, new LocalTokenGroup("_~RQYZXwxX~^O#z~~", 14, 133), new LocalTokenGroup("_~RQYZXrsX~^O#v~~", 14, 129)],
     topRules: { "Program": [0, 33] },
     dynamicPrecedences: { "78": -10 },
     specialized: [{ term: 36, get: (value, stack) => specializeKeyword(value, stack) << 1, external: specializeKeyword }, { term: 36, get: (value, stack) => extendKeyword(value, stack) << 1 | 1, external: extendKeyword, extend: true }],
-    tokenPrec: 1655
+    tokenPrec: 1605
   });
 
   // static/js/lezer-parsers/level17-parser.ts
   var parser17 = LRParser.deserialize({
     version: 14,
-    states: "?tQYQPOOOOQO'#EQ'#EQQYQPOOO!jQPO'#EcO#OQPO'#DQOOQO'#E['#E[O#WQPO'#D`OOQO'#E]'#E]O#tQPO'#DaOOQO'#E_'#E_O#{QPO'#DbOOQO'#Eb'#EbO$TQPO'#DdO$]QPO'#EPOOQO'#Ed'#EdO$hQPO'#DfOOQO'#Ee'#EeO$oQPO'#DgOOQO'#Ef'#EfO$vQPO'#DhOOQO'#De'#DeOOQO'#Eg'#EgO$}QPO'#DiOOQO'#Eh'#EhO%[QPO'#DjOOQO'#Ej'#EjO%cQPO'#DkOOQO'#El'#ElO%{QPO'#DlOOQO'#Es'#EsO&SQPO'#DxOOQO'#Et'#EtO&[QPO'#DyOOQO'#Ev'#EvO&gQPO'#DzOOQO'#Ey'#EyO&oQPO'#D{OOQO'#Ez'#EzO&wQPO'#D|OOQO'#E{'#E{O'OQPO'#D}OOQO'#E|'#E|O'VQPO'#EOOOQO'#DP'#DPQ!eQPO'#ERQ'^QPOOOOQO-E8O-E8OOOQO'#DT'#DTO(kQPO,59nOOQO'#ET'#ETO)[QPO,59lOOQO'#DW'#DWO(vQPO,59lO)cQPO,59lO#fQPO,59lOOQO-E8Y-E8YO*lQPO'#DXO+iOSO'#FUO+qOQO'#FYOOQO'#DY'#DYO+yQPO'#E^OOQO'#DX'#DXOOQO-E8Z-E8ZOOQO'#E^'#E^O,nQPO,59{OOQO-E8]-E8]O,xQPO,59|OOQO-E8`-E8`OOQO'#Ec'#EcO.YQPO,5:OOOQO-E8a-E8aO.eQPO,5:QOOQO-E8b-E8bOOQO,5:Q,5:QO.yQPO,5:ROOQO-E8c-E8cOOQO,5:R,5:RO/_QPO,5:SOOQO-E8d-E8dOOQO,5:S,5:SO/sQPO,5:TOOQO-E8e-E8eOOQO,5:T,5:TO0XQPO,5:UOOQO-E8f-E8fO0jQPO,5:UO0oQPO,5:VOOQO-E8h-E8hO1QQPO,5:VO1VQPO'#DXO1uQPO'#DoOOQO-E8j-E8jO1^QPO'#DoOOQO'#Dm'#DmO2VQPO,5:WOOQO'#Dw'#DwOOQO-E8q-E8qOOQO,5:d,5:dOOQO-E8r-E8rO2bQPO,5:eOOQO-E8t-E8tO2gQPO,5:fOOQO-E8w-E8wO2lQPO,5:gO2tQPO,5:hOOQO-E8x-E8xOOQO-E8y-E8yO2VQPO,5:iOOQO-E8z-E8zO2VQPO,5:jO3OQPO,5:mOOQO-E8P-E8POOQO'#ES'#ESO4cQPO1G/YO4fQPO1G/YOOQO-E8R-E8RO4kQPO'#EUO5]QPO1G/WO5qQPO1G/cOOQO'#EY'#EYO5|QPO1G/eOOOO'#EV'#EVO6_OSO,5;pOOQO,5;p,5;pOOOO'#EW'#EWO6gOQO,5;tOOQO,5;t,5;tOOQO'#DZ'#DZOOQO'#D['#D[O#fQPO,5;xO#fQPO,5;xOOQO-E8[-E8[OOQO'#E`'#E`O6oQPO1G/hOOQO'#Ei'#EiO7QQPO1G/pOOQO'#Ek'#EkO7YQPO1G/qO7bQPO,5:YO7jQPO,5:ZO7qQPO,5:ZOOQO'#Dq'#DqO#cQPO,5:[OOQO'#Ds'#DsOOQO'#Dt'#DtO7qQPO,5:^OOQO'#En'#EnO7xQPO,5:aOOQO'#Eo'#EoO8QQPO,5:bOOQO'#Eq'#EqO8YQPO'#EpOOQO'#Er'#ErO8aQPO'#EpO2VQPO1G/rOOQO1G/r1G/rOOQO'#Eu'#EuO8hQPO1G0PO8sQPO1G0QO6oQPO1G0ROOQO1G0R1G0RO2VQPO1G0TOOQO1G0T1G0TO2VQPO1G0UOOQO1G0U1G0UOOQO-E8Q-E8QOOQO'#DV'#DVOOQO7+$t7+$tOOQO-E8S-E8SO9OQPO7+$}O9TQPO'#EZOOQO-E8W-E8WO9uQPO7+%POOOO-E8T-E8TOOQO1G1[1G1[OOOO-E8U-E8UOOQO1G1`1G1`OOQO1G1d1G1dO:ZQPO1G1dO;wQPO'#DcOOQO-E8^-E8^OOQO7+%S7+%SOOQO-E8g-E8gOOQO7+%[7+%[OOQO-E8i-E8iOOQO7+%]7+%]OOQO'#Em'#EmO=eQPO1G/tO=sQPO1G/uOOQO1G/u1G/uO#cQPO1G/uO>[QPO1G/vOOQO1G/v1G/vO>sQPO1G/xOOQO1G/x1G/xO#cQPO1G/xOOQO-E8l-E8lOOQO1G/{1G/{OOQO-E8m-E8mOOQO1G/|1G/|OOQO-E8o-E8oOOQO,5;[,5;[OOQO-E8p-E8pOOQO-E8n-E8nOOQO7+%^7+%^OOQO-E8s-E8sOOQO'#Ew'#EwO?[QPO7+%lO&VQPO7+%lO&VQPO7+%mOOQO7+%o7+%oOOQO7+%p7+%pO?gQPO'#EXO?rQPO<<HiOOQO-E8X-E8XO?zQPO,59}O#fQPO'#EaOOQO-E8k-E8kOA[QPO7+%aOOQO7+%a7+%aOAsQPO7+%dOOQO7+%d7+%dOOQO-E8u-E8uOB[QPO<<IWOOQO<<IW<<IWOOQO<<IX<<IXOOQO,5:s,5:sOOQO-E8V-E8VOOQOAN>TAN>TOOQO-E8_-E8_OBaQPO,5:{OOQO'#Ex'#ExOC}QPOAN>rOOQO-E8v-E8vO&VQPOG24^OOQOLD)xLD)x",
-    stateData: "D]~OqOS#sOS~ORkOTmOXwOYyOZVO[^O]`O^bO_eO`ZOagOciOeTOhoOjqOmXOnsOouOuRO#tPO~OW!RO#u!PO#w!TOu#VX#q#VX#t#VX~OW!RO#w!TO~OeTO#q!SX#t!SX~OmXOu!YOx!_O#y!ZO#}![O~OZVO~P#cOmXOu!dO~O`ZOu!fO~Ou!fO#q!sX#t!sX~O[^O~P#cO]`O~P#cO^bO~P#cO_eO#q!]X#t!]X~P#cOagO~P#cOciO~P#cOmXOu!{Ox!_O#y!ZO#}![O~ORkO~P%jOTmO$Y#RO~OhoOu#VOx#VO~OjqOu#XO~OnsOu#ZO~OouO~P#cOXwO~P%jOYyO~P%jORkOTmOXwOYyOZVO[^O]`O^bO_eO`ZOagOciOeTOhoOjqOmXOnsOouOuRO~OQ#dOu#fOx#fO~OP#kOu!YOx!_O#u!PO#y!ZO#}![O~OW!RO~P(vOW!ROu!YOx!_O#y!ZO#}![O~O#u!PO$R{X$S{X$T{X$U{XW{Xf{Xg{X#w{X$V{X$W{X$X{X~Om{Xu{Xx{X#q{X#t{X#y{X#}{Xd{Xb{X!Q{XU{XV{X$Y{X~P)tO#z#mO#{#oO~O$O#pO$P#rO~O$R#sO$S#sO$T#tO$U#tOm#QXu#QXx#QX#q#QX#t#QX#y#QX#}#QX~O#q!Ta#t!Ta~P#cOp#xO#q!Ua#t!Uam!Uau!Uax!Ua#y!Ua#}!Uad!Uab!UaW!Uaf!Uag!Ua#w!Ua$V!Ua$W!Ua$X!UaU!UaV!Ua$Y!Ua~Ou!fO#q!Wa#t!Wa~O$R#sO$S#sO$T#tO$U#tO#q!Ya#t!Ya~O$R#sO$S#sO$T#tO$U#tO#q!Za#t!Za~O$R#sO$S#sO$T#tO$U#tO#q![a#t![a~O$R#sO$S#sO$T#tO$U#tO#q!]a#t!]a~Od#zO$R#sO$S#sO$T#tO$U#tO~Od#zO~Ob#|O$R#sO$S#sO$T#tO$U#tO~Ob#|O~OW!RO~P)tOW!ROf$WOg$YO#w!TO$V$RO$W$TO$X$UO~O$R#sO$S#sO$T#tO$U#tO~P1^OU$[OV$^O$Y#RO~Oi$bO~Of$WO~Op#xO$Y#RO~O#q!pa#t!pa~P#cO#tPOR!uaT!uaX!uaY!uaZ!ua[!ua]!ua^!ua_!ua`!uaa!uac!uae!uah!uaj!uam!uan!uao!uau!ua#q!ua~OQ#dO#v$lO~O$R#sO$S#sO$T#tO$U#tOu!xXx!xX#q!xX#t!xX#y!xX#}!xX~Ou!YOx!_O#y!ZO#}![O#qti#tti~Ox$oO#y!ZO#}![O~OP#kOu!YOx!_O#y!ZO#}![O~O#z#mO#{$tO~O$O#pO$P$vO~Op#xOu!YOx!_O#y!ZO#}![O~Od#zOu$}O~Ob#|Ou%PO~OS%QOW!RO~OW!RO~P#cO#w!TO~P#cOf$WOu%]O~Og$YOu%_O~OU$[O~P%jOV$^O~P%jOi$bO#q!mi#t!mi~Of$WOl%fOu%hO~O!Q%lO~O$R#sO$S#sO$T#tO$U#tOu!}Xx!}X#q!}X#t!}X#y!}X#}!}X~Ou!YOx!_O#y!ZO#}![O#q!Rq#t!Rq~O$R#sO$S#sO$T#tO$U#tOm$Qiu$Qix$Qi#q$Qi#t$Qi#y$Qi#}$Qid$Qib$QiW$Qif$Qig$Qi#w$Qi$V$Qi$W$Qi$X$Qi!Q$QiU$QiV$Qi$Y$Qi~O!Q%pO$R#sO$S#sO$T#tO$U#tO#q!VX#t!VX$Y!VXm!VXu!VXx!VX#y!VX#}!VXd!VXb!VXW!VXf!VXg!VX#w!VX$V!VX$W!VX$X!VXU!VXV!VX~OS%QOU!biV!bi$Y!bi~O$R#sO$S#sO$T#tO$U#tOU!ciV!ci$Y!ci~O$R#sO$S#sO$T#tO$U#tOU!diV!di$Y!di~O$R#sO$S#sO$T#tO$U#tOU!fiV!fi$Y!fi~Ol%fOu%wOx%wO~Ox%zO#y!ZO#}![O~O!Q%lO#v$lO~O!Q%pO#q!Va#t!Va$Y!Vam!Vau!Vax!Va#y!Va#}!Vad!Vab!VaW!Vaf!Vag!Va#w!Va$V!Va$W!Va$X!VaU!VaV!Va~O$R#sO$S#sO$T#tO$U#tOU!cqV!cq$Y!cq~O$R#sO$S#sO$T#tO$U#tOU!fqV!fq$Y!fq~Ok&PO~O$R#sO$S#sO$T#tO$U#tO!Q#Ta#q#Ta#t#Ta$Y#Tam#Tau#Tax#Ta#y#Ta#}#Tad#Tab#TaW#Taf#Tag#Ta#w#Ta$V#Ta$W#Ta$X#TaU#TaV#Ta~Ok&POu&SOx&SO~Oxu~",
-    goto: "4x$RPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPP$S$XP$^%WP%a%h%x'c(^(r$XP$X$X$X)W*^$X$X*d*d*d$X$X$X$X*i*v*v*v*}*v+R+R*v*v+V$X$X$X$X$X$X$X$X+x,S,Z,a,t,}-T-Z-a-h-n-v.O.Y.w/R/X/a/m/u/}0V0_0g0n0v0}1V1]1h1o1}2Y2e2m2u2{3T3Z3a3i3q3yPPPPPPP4RPPP4RPPP$cV|OQ}V{OQ}USOQ}!e!_W_acfhjlvxz!S!U!V!W!b#[#i#l#u#v#y$P$Q$S$V$]$_$e$r%U%Z%pU!QR!Y!{T#j!S!US$m#e#fR%|%mQ!URQ!WSS$Q!|#OQ%U$QR%Z$VW!^Wv!b#[Q!i_Q!laQ!ocQ!rfQ!uhQ!xjY!|lxz$]$_Y#h!S!U!V!W#iS$p#l$rQ$w#uQ$x#vS$y#y$eS%S$P$QQ%V$SQ%X$VQ%r%UQ%t%ZR&O%p!d!_W_acfhjlvxz!S!U!V!W!b#[#i#l#u#v#y$P$Q$S$V$]$_$e$r%U%Z%pQ$o#jR%z%lu#u!^!i!l!o!r!u!x!|#h$p$x$y%S%V%X%r%t&Ou#v!^!i!l!o!r!u!x!|#h$p$x$y%S%V%X%r%t&OU{OQ}W!aWv!b#[Q!k_Q!naQ!qcQ!tfQ!whQ!zjY#Olxz$]$_S%T$P$QQ%W$SQ%Y$VQ%s%UR%u%ZQ${#yR%i$eVdOQ}Q#QlQ#_xQ#azT%a$]$_Z#Plxz$]$_T$S!|#OT$V!|#OQ#TnQ$a#QQ$f#ZQ$h#_Q$j#aQ%d$`Q%j$gQ%k$iQ%x%hQ%y%iR&T&SQQOS!OQ#bR#b|S}OQR#c}Q#e!QR$k#eQ!SRQ!VSW#g!S!V$O$PQ$O!{T$P!|#OW#i!S!U!V!WR$n#iQ#n!ZR$s#nQ#q![R$u#qQ%m$oR%{%mS#l!S!UR$q#lQ$r#lR%n$rUUOQ}R!XUUWOQ}R!`WQ!bWQ#[vT#w!b#[!QYOQW_acfhjlvxz}!b#[$P$Q$S$V$]$_%U%ZR!cYQ#y!dQ$e#ZT$z#y$eQ%o$yR%}%oU[OQ}R!e[U]OQ}Q!g[T!h]!gU_OQ}R!j_UaOQ}R!maUcOQ}R!pcUfOQ}R!sfUhOQ}R!vhS#{!u!wR$|#{UjOQ}R!yjS#}!x!zR%O#}UlOQ}R!}lQ%R$OR%q%RS$X!|#OQ$d#XT%[$X$dS$Z!|#OR%^$ZQ$`#QQ$g#_Q$i#aV%c$`$g$i[$]#Q#_#a$`$g$iR%`$][$_#Q#_#a$`$g$iR%b$_UnOQ}R#SnUpOQ}R#UpQ$c#VR%e$cUrOQ}R#WrQ%g$dR%v%gQ&Q%wR&R&QUtOQ}R#YtUvOQ}R#]vUxOQ}R#^xUzOQ}R#`z!i!]W_acfhjlvxz!S!U!V!W!b#[#i#j#l#u#v#y$P$Q$S$V$]$_$e$r%U%Z%l%p",
-    nodeNames: "\u26A0 ask random if pressed else and or is while elif print forward turn color sleep play add from remove toList clear in not_in repeat times for to range call define return with Comment Program Command Assign Text ListAccess Op Number Op Op Expression String Op Op AssignList Comma Ask Clear Print Call Arguments Play Turtle Forward Turn Color Sleep Add Remove If Condition PressedCheck EqualityCheck NotEqualCheck Op ComparisonCheck Op Op InListCheck NotInListCheck Op Else Repeat For Define Return While Elif ErrorInvalid",
-    maxTerm: 148,
+    states: ">xQYQPOOOOQO'#EQ'#EQQYQPOOO!jQPO'#EbOOQO'#EX'#EXO#OQPO'#DZO#WQPO'#DQOOQO'#E_'#E_O#`QPO'#DbOOQO'#E`'#E`O#|QPO'#DcOOQO'#Ea'#EaO$TQPO'#DdO$]QPO'#EPOOQO'#Ec'#EcO$hQPO'#DfOOQO'#Ed'#EdO$oQPO'#DgOOQO'#Ee'#EeO$vQPO'#DhOOQO'#De'#DeOOQO'#Ef'#EfO$}QPO'#DiOOQO'#Eg'#EgO%[QPO'#DjOOQO'#Ei'#EiO%cQPO'#DkOOQO'#Ek'#EkO%{QPO'#DlOOQO'#Er'#ErO&SQPO'#DxOOQO'#Es'#EsO&[QPO'#DyOOQO'#Eu'#EuO&gQPO'#DzOOQO'#Ex'#ExO&oQPO'#D{OOQO'#Ey'#EyO&wQPO'#D|OOQO'#Ez'#EzO'OQPO'#D}OOQO'#E{'#E{O'VQPO'#EOOOQO'#DP'#DPQ!eQPO'#ERQ'^QPOOOOQO-E8O-E8OOOQO'#DT'#DTO(kQPO,59nOOQO'#ET'#ETO(vQPO,59lOOQO'#DW'#DWO)TQPO,59lOOQO-E8V-E8VO)_QPO,59uO*{QPO,59lO#kQPO,59lOOQO-E8]-E8]O+zQPO'#DXO,wOSO'#FTO-POQO'#FXOOQO'#DY'#DYO-XQPO'#E^OOQO'#DX'#DXO-|QPO,59}OOQO-E8^-E8^OOQO-E8_-E8_OOQO'#Eb'#EbO.WQPO,5:OOOQO-E8`-E8`O.cQPO,5:QOOQO-E8a-E8aO.wQPO,5:ROOQO-E8b-E8bO/]QPO,5:SOOQO-E8c-E8cO/qQPO,5:TOOQO-E8d-E8dO0VQPO,5:UOOQO-E8e-E8eO0hQPO,5:VOOQO-E8g-E8gO0yQPO'#DXO1QQPO'#DoOOQO-E8i-E8iOOQO'#Dm'#DmO1uQPO,5:WOOQO'#Dw'#DwOOQO-E8p-E8pOOQO,5:d,5:dOOQO-E8q-E8qO2QQPO,5:eOOQO-E8s-E8sO2VQPO,5:fOOQO-E8v-E8vO2[QPO,5:gO2dQPO,5:hOOQO-E8w-E8wOOQO-E8x-E8xO1uQPO,5:iOOQO-E8y-E8yO1uQPO,5:jO2nQPO,5:mOOQO-E8P-E8POOQO'#ES'#ESO4RQPO1G/YO4UQPO1G/YOOQO-E8R-E8RO4ZQPO'#EUO5OQPO1G/WO5YQPO1G/fOOQO'#E]'#E]O5eQPO1G/gOOQO'#EY'#EYO5lQPO1G/aOOOO'#EV'#EVO5sOSO,5;oOOQO,5;o,5;oOOOO'#EW'#EWO5{OQO,5;sOOQO,5;s,5;sOOQO'#D^'#D^OOQO'#D_'#D_O#kQPO,5;wO#kQPO,5;wOOQO-E8[-E8[OOQO'#Eh'#EhO6TQPO1G/pOOQO'#Ej'#EjO6]QPO1G/qO6eQPO,5:YO*{QPO,5:ZO6mQPO,5:ZOOQO'#Dq'#DqO#kQPO,5:[OOQO'#Ds'#DsOOQO'#Dt'#DtO6mQPO,5:^OOQO'#Em'#EmO6tQPO,5:aOOQO'#En'#EnO6|QPO,5:bOOQO'#Ep'#EpO7UQPO'#EoOOQO'#Eq'#EqO7]QPO'#EoO1uQPO1G/rOOQO1G/r1G/rOOQO'#Et'#EtO7dQPO1G0PO7oQPO1G0QO5lQPO1G0ROOQO1G0R1G0RO1uQPO1G0TOOQO1G0T1G0TO1uQPO1G0UOOQO1G0U1G0UOOQO-E8Q-E8QOOQO'#DV'#DVOOQO7+$t7+$tOOQO-E8S-E8SO7zQPO7+%QOOQO-E8Z-E8ZO8PQPO7+%ROOQO-E8W-E8WOOQO7+${7+${O9tQPO'#D[OOOO-E8T-E8TOOQO1G1Z1G1ZOOOO-E8U-E8UOOQO1G1_1G1_OOQO1G1c1G1cO9{QPO1G1cOOQO-E8f-E8fOOQO7+%[7+%[OOQO-E8h-E8hOOQO7+%]7+%]OOQO'#El'#ElO;fQPO1G/tO;tQPO1G/uO#kQPO1G/uO<]QPO1G/vO<tQPO1G/xO#kQPO1G/xOOQO-E8k-E8kOOQO1G/{1G/{OOQO-E8l-E8lOOQO1G/|1G/|OOQO-E8n-E8nOOQO,5;Z,5;ZOOQO-E8o-E8oOOQO-E8m-E8mOOQO7+%^7+%^OOQO-E8r-E8rOOQO'#Ev'#EvO=]QPO7+%lO&VQPO7+%lO&VQPO7+%mOOQO7+%o7+%oOOQO7+%p7+%pO=hQPO'#E[O=sQPO<<HlO={QPO,59vO#kQPO'#EZOOQO-E8j-E8jO?iQPO7+%aO@QQPO7+%dOOQO-E8t-E8tO@iQPO<<IWOOQO<<IW<<IWOOQO<<IX<<IXOOQO,5:v,5:vOOQO-E8Y-E8YOOQOAN>WAN>WOOQO-E8X-E8XO@nQPO,5:uOOQO'#Ew'#EwOB[QPOAN>rOOQO-E8u-E8uO&VQPOG24^POQO,59v,59vOOQOLD)xLD)xOBgQPO'#D[O5lQPO1G/aOBnQPO,59uOBuQPO'#DZO#kQPO,5;wO#kQPO,5;wOB}QPO1G1c",
+    stateData: "CX~OqOS#rOS~ORkOTmOXwOYyOZsO]XO^^O_`O`bOaeObZOcgOeiOgVOjoOlqOoSOpuOuRO#sPO~OW!RO#t!PO#v!TOu#UX#p#UX#s#UX~OoSOu!WO~OW!RO#v!TO~OgVO#p!UX#s!UX~OoSOu![Ox!aO#x!]O#|!^O~O]XO~P#kObZOu!eO~Ou!eO#p!sX#s!sX~O^^O~P#kO_`O~P#kO`bO~P#kOaeO#p!]X#s!]X~P#kOcgO~P#kOeiO~P#kOoSOu!tOx!aO#x!]O#|!^O~ORkO~P%jOTmO$X!yO~OjoOu!}Ox!}O~OlqOu#PO~OZsOu#RO~OpuO~P#kOXwO~P%jOYyO~P%jORkOTmOXwOYyOZsO]XO^^O_`O`bOaeObZOcgOeiOgVOjoOlqOoSOpuOuRO~OQ#[Ou#^Ox#^O~OP#cOW!RO#t!PO~P#kOP#cO#t!PO~P#kO[#eO#p}a#s}ao}au}ax}a#x}a#|}a$Q}a$R}a$S}a$T}af}ad}aW}ah}ai}a#v}a$U}a$V}a$W}aU}aV}a$X}a~OW!RO~P#kO#t!PO$Q{X$R{X$S{X$T{XW{Xh{Xi{X#v{X$U{X$V{X$W{X~Oo{Xu{Xx{X#p{X#s{X#x{X#|{Xf{Xd{X!P{XU{XV{X$X{X~P+SO#y#gO#z#iO~O#}#jO$O#lO~O$Q#mO$R#mO$S#nO$T#nOo#QXu#QXx#QX#p#QX#s#QX#x#QX#|#QX~O#p!Va#s!Va~P#kOu!eO#p!Wa#s!Wa~O$Q#mO$R#mO$S#nO$T#nO#p!Ya#s!Ya~O$Q#mO$R#mO$S#nO$T#nO#p!Za#s!Za~O$Q#mO$R#mO$S#nO$T#nO#p![a#s![a~O$Q#mO$R#mO$S#nO$T#nO#p!]a#s!]a~Of#rO$Q#mO$R#mO$S#nO$T#nO~Od#tO$Q#mO$R#mO$S#nO$T#nO~OW!RO~P+SOW!ROh$OOi$QO#v!TO$Q#mO$R#mO$S#nO$T#nO$U#yO$V#{O$W#|O~OU$SOV$UO$X!yO~Ok$YO~Oh$OO~O[#eO$X!yO~O#p!pa#s!pa~P#kO#sPOR!uaT!uaX!uaY!uaZ!ua]!ua^!ua_!ua`!uaa!uab!uac!uae!uag!uaj!ual!uao!uap!uau!ua#p!ua~OQ#[O#u$dO~O$Q#mO$R#mO$S#nO$T#nOo!xXu!xXx!xX#p!xX#s!xX#x!xX#|!xX~O#pti#sti~P#kOx$gO#x!]O#|!^O~OP#cO~P#kO[#eO~P#kO#y#gO#z$nO~O#}#jO$O$pO~Of#rOu$tO~Od#tOu$vO~OS$wOW!RO~O#v!TO~P#kOh$OOu%PO~Oi$QOu%RO~OU$SO~P%jOV$UO~P%jOk$YO#p!mi#s!mi~Oh$OOn%YOu%[O~O!P%`O~O#p!Tq#s!Tq~P#kO$Q#mO$R#mO$S#nO$T#nO#p!OX#s!OX$X!OXo!OXu!OXx!OX#x!OX#|!OXf!OXd!OXW!OXh!OXi!OX#v!OX$U!OX$V!OX$W!OXU!OXV!OX~O!P%cO~P8ZO$Q#mO$R#mO$S#nO$T#nOo$Piu$Pix$Pi#p$Pi#s$Pi#x$Pi#|$Pif$Pid$PiW$Pih$Pii$Pi#v$Pi$U$Pi$V$Pi$W$PiU$PiV$Pi$X$Pi~OS$wOU!biV!bi$X!bi~O$Q#mO$R#mO$S#nO$T#nOU!ciV!ci$X!ci~O$Q#mO$R#mO$S#nO$T#nOU!diV!di$X!di~O$Q#mO$R#mO$S#nO$T#nOU!fiV!fi$X!fi~On%YOu%hOx%hO~Ox%kO#x!]O#|!^O~O!P%`O#u$dO~O!P%cO#p!Oa#s!Oa$X!Oao!Oau!Oax!Oa#x!Oa#|!Oa$Q!Oa$R!Oa$S!Oa$T!Oaf!Oad!OaW!Oah!Oai!Oa#v!Oa$U!Oa$V!Oa$W!OaU!OaV!Oa~O$Q#mO$R#mO$S#nO$T#nOU!cqV!cq$X!cq~O$Q#mO$R#mO$S#nO$T#nOU!fqV!fq$X!fq~Om%pO~O$Q#mO$R#mO$S#nO$T#nO!P!}a#p!}a#s!}a$X!}ao!}au!}ax!}a#x!}a#|!}af!}ad!}aW!}ah!}ai!}a#v!}a$U!}a$V!}a$W!}aU!}aV!}a~Om%pOu%sOx%sO~O!P!OX~P8ZO!P}a~P)_OoSOu%xO~O!P$Pi~P9{Oxu~",
+    goto: "5a$QPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPP$R$WP$]%YP%c%j%y'i(g)dP)k*S$W$W$W$W$W$W*k*k*k$W$W$W$W*p*}*}*}+U*}+X+X*}*}+[$W$W$W$W$W$W$W$W+},X,`,f,x-R-X-_.`.n.t.z/R/a/i/q/y0V0_0g0o0w1P1V1_1e1m1s1}2T2c2n2y3R3Z3a3i3o3u3}4V4_PPPPPPP4gPPP4gPPP$bV|OQ}V{OQ}UUOQ}!k!aY_acfhjlvxz!S!U!X!Y!b#S#a#d#f#o#p#w#x#z#}$T$V$]$i$z$}%c%w%z%{U!QR![!tT#b!S!US$e#]#^R%m%aQ!URQ!YUQ#x!uQ$z#xR$}#}[!`Yv!b#S#d$iQ!h_Q!jaQ!lcQ!nfQ!phQ!rjY!ulxz$T$VY#`!S!U!X!Y#aS$l#f$]S$q#o%zQ$r#pS$y#w#xQ${#zQ$|#}Q%e$zQ%f$}Q%o%cQ%v%wR%|%{!j!aY_acfhjlvxz!S!U!X!Y!b#S#a#d#f#o#p#w#x#z#}$T$V$]$i$z$}%c%w%z%{Q$g#bR%k%`U{OQ}!k!aY_acfhjlvxz!S!U!X!Y!b#S#a#d#f#o#p#w#x#z#}$T$V$]$i$z$}%c%w%z%{S$k#f%wR%]$]n#o!`!h!j!l!n!p!r!u#`$r$y${$|%e%fX%z$l%o%v%|n#p!`!h!j!l!n!p!r!u#`$r$y${$|%e%fX%{$l%o%v%|VdOQ}Q!xlQ#VxQ#XzT%T$T$VZ!wlxz$T$VR#z!uR#}!uQ!{nQ$X!xQ$^#RQ$`#VQ$b#XQ%W$WQ%^$_Q%_$aQ%i%[Q%j%]R%u%sQQOS!OQ#YR#Y|S}OQR#Z}Q#]!QR$c#]Q!SRQ!XUW#_!S!X#v#wQ#v!tR#w!uW#a!S!U!X!YR$f#aQ#h!]R$m#hQ#k!^R$o#k!dTOQY_acfhjlvxz}!S!U!X!Y!b#S#a#d#o#p#w#x#z#}$T$V$i$z$}S!VT%y]%y#f$]%c%w%z%{Q#f!WQ$]#RU$j#f$]%wR%w%xQ%b$lR%n%bQ%a$gR%l%aS#d!S!UR$h#dQ!bYQ#SvU#q!b#S$iR$i#dUWOQ}R!ZWUYOQ}R!cYU[OQ}R!d[U]OQ}Q!f[T!g]!fU_OQ}R!i_UaOQ}R!kaUcOQ}R!mcUfOQ}R!ofUhOQ}R!qhQ#s!pR$s#sUjOQ}R!sjQ#u!rR$u#uUlOQ}R!vlQ$x#vR%d$xQ$P!uQ$[#PT%O$P$[Q$R!uR%Q$RQ$W!xQ$_#VQ$a#XV%V$W$_$a[$T!x#V#X$W$_$aR%S$T[$V!x#V#X$W$_$aR%U$VUnOQ}R!znUpOQ}R!|pQ$Z!}R%X$ZUrOQ}R#OrQ%Z$[R%g%ZQ%q%hR%r%qUtOQ}R#QtUvOQ}R#TvUxOQ}R#UxUzOQ}R#Wz!o!_Y_acfhjlvxz!S!U!X!Y!b#S#a#b#d#f#o#p#w#x#z#}$T$V$]$i$z$}%`%c%w%z%{",
+    nodeNames: "\u26A0 ask random if pressed else and or is while elif define with print forward turn color sleep play add from remove toList clear in not_in repeat times for to range call return Comment Program Command Assign Text ListAccess Op Number Op Op Expression String Call Arguments Comma Op Op AssignList Ask Clear Print Play Turtle Forward Turn Color Sleep Add Remove If Condition PressedCheck EqualityCheck NotEqualCheck Op ComparisonCheck Op Op InListCheck NotInListCheck Op Else Repeat For Define Return While Elif ErrorInvalid",
+    maxTerm: 147,
     nodeProps: [
       ["group", 55, "turtle"]
     ],
     skippedNodes: [0, 33],
-    repeatNodeCount: 43,
-    tokenData: "2a~R!dOY%aYZ&kZp%apq&pqr&urs'Qst'Vtw%awx'nxz%az{'s{|'x|}'}}!O(S!O!P%a!P!Q(X!Q!R(^!R!S(^!S!T(^!T!U(^!U!V(^!V!W(^!W!X(^!X!Y(^!Y!Z(^!Z![(^![!]1q!]!^%a!^!_1v!_!`1{!`!a2Q!a!}%a!}#O2V#O#P%a#P#Q2[#QBn%aBnBo'}BoDf%aDfDg(^DgDh(^DhDi(^DiDj(^DjDk(^DkDl(^DlDm(^DmDn(^DnDo(^DoDp(^DpGl%aGlGm(^GmGn(^GnGo(^GoGp(^GpGq(^GqGr(^GrGs(^GsGt(^GtGu(^GuGv(^Gv&FV%a&FV&FW'}&FW;'S%a;'S;=`&e<%l?Hb%a?Hb?Hc'}?HcO%a~%f_u~OY%aZp%atw%axz%a!O!P%a!Q![%a!]!^%a!a!}%a#O#P%a#QBn%aBo&FV%a&FW;'S%a;'S;=`&e<%l?Hb%a?HcO%a~&hP;=`<%l%a~&pO#t~~&uO#s~~&xP!_!`&{~'QO$V~~'VO#y~~'[Sq~OY'VZ;'S'V;'S;=`'h<%lO'V~'kP;=`<%l'V~'sO#}~~'xO$R~~'}O$T~~(SO!Q~~(XO$U~~(^O$S~~(e!Ox~u~OY%aZp%atw%axz%a!O!P+e!Q!R(^!R!S(^!S!T(^!T!U(^!U!V(^!V!W(^!W!X(^!X!Y(^!Y!Z(^!Z![(^!]!^%a!a!}%a#O#P%a#QBn%aBoDf%aDfDg(^DgDh(^DhDi(^DiDj(^DjDk(^DkDl(^DlDm(^DmDn(^DnDo(^DoDp(^DpGl%aGlGm(^GmGn(^GnGo(^GoGp(^GpGq(^GqGr(^GrGs(^GsGt(^GtGu(^GuGv(^Gv&FV%a&FW;'S%a;'S;=`&e<%l?Hb%a?HcO%a~+j!Ou~OY%aZp%atw%axz%a!O!P%a!Q!R.j!R!S.j!S!T.j!T!U.j!U!V.j!V!W.j!W!X.j!X!Y.j!Y!Z.j!Z![.j!]!^%a!a!}%a#O#P%a#QBn%aBoDf%aDfDg.jDgDh.jDhDi.jDiDj.jDjDk.jDkDl.jDlDm.jDmDn.jDnDo.jDoDp.jDpGl%aGlGm.jGmGn.jGnGo.jGoGp.jGpGq.jGqGr.jGrGs.jGsGt.jGtGu.jGuGv.jGv&FV%a&FW;'S%a;'S;=`&e<%l?Hb%a?HcO%a~.q!Ox~u~OY%aZp%atw%axz%a!O!P%a!Q!R.j!R!S.j!S!T.j!T!U.j!U!V.j!V!W.j!W!X.j!X!Y.j!Y!Z.j!Z![.j!]!^%a!a!}%a#O#P%a#QBn%aBoDf%aDfDg.jDgDh.jDhDi.jDiDj.jDjDk.jDkDl.jDlDm.jDmDn.jDnDo.jDoDp.jDpGl%aGlGm.jGmGn.jGnGo.jGoGp.jGpGq.jGqGr.jGrGs.jGsGt.jGtGu.jGuGv.jGv&FV%a&FW;'S%a;'S;=`&e<%l?Hb%a?HcO%a~1vO$Y~~1{O$X~~2QO#w~~2VO$W~~2[O#u~~2aO#v~",
-    tokenizers: [2, new LocalTokenGroup("_~RQYZXwxX~^O$P~~", 14, 138), new LocalTokenGroup("_~RQYZXrsX~^O#{~~", 14, 134)],
+    repeatNodeCount: 42,
+    tokenData: "2a~R!dOY%aYZ&kZp%apq&pqr&urs'Qst'Vtw%awx'nxz%az{'s{|'x|}'}}!O(S!O!P%a!P!Q(X!Q!R(^!R!S(^!S!T(^!T!U(^!U!V(^!V!W(^!W!X(^!X!Y(^!Y!Z(^!Z![(^![!]1q!]!^%a!^!_1v!_!`1{!`!a2Q!a!}%a!}#O2V#O#P%a#P#Q2[#QBn%aBnBo'}BoDf%aDfDg(^DgDh(^DhDi(^DiDj(^DjDk(^DkDl(^DlDm(^DmDn(^DnDo(^DoDp(^DpGl%aGlGm(^GmGn(^GnGo(^GoGp(^GpGq(^GqGr(^GrGs(^GsGt(^GtGu(^GuGv(^Gv&FV%a&FV&FW'}&FW;'S%a;'S;=`&e<%l?Hb%a?Hb?Hc'}?HcO%a~%f_u~OY%aZp%atw%axz%a!O!P%a!Q![%a!]!^%a!a!}%a#O#P%a#QBn%aBo&FV%a&FW;'S%a;'S;=`&e<%l?Hb%a?HcO%a~&hP;=`<%l%a~&pO#s~~&uO#r~~&xP!_!`&{~'QO$U~~'VO#x~~'[Sq~OY'VZ;'S'V;'S;=`'h<%lO'V~'kP;=`<%l'V~'sO#|~~'xO$Q~~'}O$S~~(SO!P~~(XO$T~~(^O$R~~(e!Ox~u~OY%aZp%atw%axz%a!O!P+e!Q!R(^!R!S(^!S!T(^!T!U(^!U!V(^!V!W(^!W!X(^!X!Y(^!Y!Z(^!Z![(^!]!^%a!a!}%a#O#P%a#QBn%aBoDf%aDfDg(^DgDh(^DhDi(^DiDj(^DjDk(^DkDl(^DlDm(^DmDn(^DnDo(^DoDp(^DpGl%aGlGm(^GmGn(^GnGo(^GoGp(^GpGq(^GqGr(^GrGs(^GsGt(^GtGu(^GuGv(^Gv&FV%a&FW;'S%a;'S;=`&e<%l?Hb%a?HcO%a~+j!Ou~OY%aZp%atw%axz%a!O!P%a!Q!R.j!R!S.j!S!T.j!T!U.j!U!V.j!V!W.j!W!X.j!X!Y.j!Y!Z.j!Z![.j!]!^%a!a!}%a#O#P%a#QBn%aBoDf%aDfDg.jDgDh.jDhDi.jDiDj.jDjDk.jDkDl.jDlDm.jDmDn.jDnDo.jDoDp.jDpGl%aGlGm.jGmGn.jGnGo.jGoGp.jGpGq.jGqGr.jGrGs.jGsGt.jGtGu.jGuGv.jGv&FV%a&FW;'S%a;'S;=`&e<%l?Hb%a?HcO%a~.q!Ox~u~OY%aZp%atw%axz%a!O!P%a!Q!R.j!R!S.j!S!T.j!T!U.j!U!V.j!V!W.j!W!X.j!X!Y.j!Y!Z.j!Z![.j!]!^%a!a!}%a#O#P%a#QBn%aBoDf%aDfDg.jDgDh.jDhDi.jDiDj.jDjDk.jDkDl.jDlDm.jDmDn.jDnDo.jDoDp.jDpGl%aGlGm.jGmGn.jGnGo.jGoGp.jGpGq.jGqGr.jGrGs.jGsGt.jGtGu.jGuGv.jGv&FV%a&FW;'S%a;'S;=`&e<%l?Hb%a?HcO%a~1vO$X~~1{O$W~~2QO#v~~2VO$V~~2[O#t~~2aO#u~",
+    tokenizers: [2, new LocalTokenGroup("_~RQYZXwxX~^O$O~~", 14, 137), new LocalTokenGroup("_~RQYZXrsX~^O#z~~", 14, 133)],
     topRules: { "Program": [0, 34] },
     dynamicPrecedences: { "81": -10 },
     specialized: [{ term: 37, get: (value, stack) => specializeKeyword(value, stack) << 1, external: specializeKeyword }, { term: 37, get: (value, stack) => extendKeyword(value, stack) << 1 | 1, external: extendKeyword, extend: true }],
-    tokenPrec: 1620
+    tokenPrec: 1570
   });
 
   // static/js/lezer-parsers/level18-parser.ts
   var parser18 = LRParser.deserialize({
     version: 14,
-    states: "@|QYQPOOOOQO'#EO'#EOQYQPOOO!gQPO'#E]O#OQPO'#C}OOQO'#EY'#EYO#WQPO'#DaOOQO'#EZ'#EZO#cQPO'#DbOOQO'#E['#E[O#kQPO'#DcO#sQPO'#D}OOQO'#E^'#E^O$OQPO'#DeOOQO'#E_'#E_O$aQPO'#DfOOQO'#E`'#E`O$rQPO'#DgOOQO'#Dd'#DdOOQO'#Ea'#EaO%TQPO'#DhOOQO'#Eb'#EbO%lQPO'#DiOOQO'#Ed'#EdO%}QPO'#DjOOQO'#Ef'#EfO&`QPO'#DkOOQO'#El'#ElO&qQPO'#DvOOQO'#Em'#EmO&yQPO'#DwOOQO'#Eo'#EoO'UQPO'#DxOOQO'#Er'#ErO'^QPO'#DyOOQO'#Es'#EsO'fQPO'#DzOOQO'#Eu'#EuO'nQPO'#D{OOQO'#Ev'#EvO(PQPO'#D|OOQO'#C|'#C|Q!bQPO'#EPQ(bQPOOOOQO-E7|-E7|OOQO'#DQ'#DQO)lQPO,59kOOQO'#ER'#ERO*]QPO,59iOOQO'#DT'#DTO)wQPO,59iOOQO'#D]'#D]O*dQPO,59yO*uQPO,59iO*xQPO,59iOOQO-E8W-E8WOOQO-E8X-E8XO*dQPO,59|OOQO-E8Y-E8YOOQO'#E]'#E]O+WQPO,59}OOQO-E8Z-E8ZO,aQPO'#DUO,hOSO'#FOO,pOQO'#FSOOQO'#DV'#DVO,xQPO,5:POOQO'#DU'#DUOOQO-E8[-E8[OOQO,5:P,5:PO-^QPO,5:QOOQO-E8]-E8]OOQO,5:Q,5:QO-rQPO,5:ROOQO-E8^-E8^OOQO,5:R,5:RO.WQPO,5:SOOQO-E8_-E8_OOQO,5:S,5:SO.lQPO,5:TOOQO-E8`-E8`O.}QPO,5:TO/SQPO,5:UOOQO-E8b-E8bO/eQPO,5:UO0_QPO'#DUO0}QPO'#DnOOQO-E8d-E8dO0iQPO'#DnOOQO'#Dl'#DlO1_QPO,5:VOOQO'#Du'#DuOOQO-E8j-E8jOOQO,5:b,5:bOOQO-E8k-E8kO1jQPO,5:cOOQO-E8m-E8mO1oQPO,5:dOOQO-E8p-E8pO#fQPO,5:eO#fQPO'#D_OOQO-E8q-E8qOOQO'#Et'#EtO1tQPO,5:fOOQO-E8s-E8sO1_QPO,5:gOOQO-E8t-E8tO1_QPO,5:hO2PQPO,5:kOOQO-E7}-E7}OOQO'#EQ'#EQO3aQPO1G/VO3dQPO1G/VO3iQPO'#DUOOQO-E8P-E8PO4]QPO'#ESO4}QPO1G/TO5cQPO1G/`OOQO'#EW'#EWO5nQPO1G/bO5vQPO'#F^OOQO'#D`'#D`OOQO1G/e1G/eO*pQPO1G/eOOQO'#F^'#F^O6[QPO'#D^OOQO1G/h1G/hO*pQPO1G/hOOOO'#ET'#ETO6dOSO,5;jOOQO,5;j,5;jOOOO'#EU'#EUO6lOQO,5;nOOQO,5;n,5;nOOQO'#DW'#DWOOQO'#DX'#DXO*xQPO,5;rO*xQPO,5;rOOQO'#Ec'#EcO6tQPO1G/oOOQO'#Ee'#EeO6|QPO1G/pO7UQPO,5:XO7^QPO,5:YO7oQPO,5:YOOQO'#Dp'#DpO$RQPO,5:ZOOQO'#Dr'#DrOOQO'#Ds'#DsO7oQPO,5:]OOQO'#Eh'#EhO8QQPO,5:`OOQO'#Ej'#EjO8YQPO'#EiOOQO'#Ek'#EkO8kQPO'#EiO1_QPO1G/qOOQO1G/q1G/qOOQO'#En'#EnO8|QPO1G/}OOQO'#Ep'#EpO9XQPO1G0OO*dQPO1G0POOQO-E8r-E8rO1_QPO1G0ROOQO1G0R1G0RO1_QPO1G0SOOQO1G0S1G0SOOQO-E8O-E8OOOQO'#DS'#DSOOQO7+$q7+$qOOQO-E8Q-E8QO9dQPO7+$zOOQO-E8U-E8UO*dQPO7+$|OOQO7+%P7+%PO$RQPO'#EXO9iQPO,59xOOQO7+%S7+%SOOOO-E8R-E8ROOQO1G1U1G1UOOOO-E8S-E8SOOQO1G1Y1G1YOOQO1G1^1G1^O9qQPO1G1^OOQO-E8a-E8aOOQO7+%Z7+%ZOOQO-E8c-E8cOOQO7+%[7+%[OOQO'#Eg'#EgO;[QPO1G/sO;jQPO1G/tOOQO1G/t1G/tO$RQPO1G/tO<RQPO1G/uOOQO1G/u1G/uO<jQPO1G/wOOQO1G/w1G/wO$RQPO1G/wOOQO-E8f-E8fOOQO1G/z1G/zOOQO-E8h-E8hOOQO,5;T,5;TOOQO-E8i-E8iOOQO-E8g-E8gOOQO7+%]7+%]OOQO-E8l-E8lOOQO-E8n-E8nOOQO'#Eq'#EqO=RQPO7+%jO&tQPO7+%jO&tQPO7+%kO*pQPO7+%kOOQO7+%m7+%mOOQO7+%n7+%nO=ZQPO'#EVO=fQPO<<HfOOQO<<Hh<<HhO*pQPO<<HhOOQO,5:s,5:sOOQO-E8V-E8VOOQO-E8e-E8eO=nQPO7+%`OOQO7+%`7+%`O>VQPO7+%cOOQO7+%c7+%cOOQO-E8o-E8oO>nQPO<<IUOOQO<<IU<<IUOOQO<<IV<<IVO&tQPO<<IVOOQO,5:q,5:qOOQO-E8T-E8TOOQOAN>QAN>QOOQOAN>SAN>SO>vQPOAN>pOOQOAN>qAN>qO>{QPOG24[O?TQPOLD)vO&tQPO!$'MbO?]QPO!$'MbOOQO!)9B|!)9B|O*pQPO!)9B|O&tQPO!.K8hOOQO!4/.S!4/.S",
-    stateData: "?h~OnOS#mOS~OPVOScOTXOV[OW^OX`OYeOZgO]TO^iO_kOemOhuOiqOjsOkoOmwOrRO#nPO~OQ!PO#o}O#q!RO$P!TOr#PX#k#PX#n#PX~OQ!PO#q!RO~O]TO#k!TX#n!TX~OPVO$P!TO~OTXOr!]O~Or!]O#k!qX#n!qX~OV[Or!`Ou!eO#s!aO#w!bO~OW^Or!`Ou!eO#s!aO#w!bO~OX`Or!`Ou!eO#s!aO#w!bO~OScOr!`Ou!eO#s!aO#w!bO#k![X#n![X~OYeOr!`Ou!eO#s!aO#w!bO~OZgOr!`Ou!eO#s!aO#w!bO~O^iOr!wOu!eO#s!aO#w!bO~O_kO$V!}O~OemOr#ROu#RO~OkoOr#TO~OiqOr#VO~OjsOr#WO~OhuOr!wOu!eO#s!aO#w!bO~OmwOr!wOu!eO#s!aO#w!bO~OPVOScOTXOV[OW^OX`OYeOZgO]TO^iO_kOemOhuOiqOjsOkoOmwOrRO~OU#bOr#dOu#dO~OR#jOr#eOu!eO#o}O#s!aO#w!bO~OQ!PO~P)wOr!`Ou!eO#s!aO#w!bO$R#mO~OQ!POr#eOu!eO#s!aO#w!bO~Or!]O#k!Va#n!Va~O#o}O#kxX#nxX#{xX#|xX#}xX$OxXlxX[xX}xX$RxX`xXaxX$VxX~O$P!TO~P+cO#t#tO#u#vO~O#x#wO#y#yO~O#{#zO#|#zO#}#{O$O#{O#k!Xa#n!Xa~O#{#zO#|#zO#}#{O$O#{O#k!Ya#n!Ya~O#{#zO#|#zO#}#{O$O#{O#k!Za#n!Za~O#{#zO#|#zO#}#{O$O#{O#k![a#n![a~Ol$OO#{#zO#|#zO#}#{O$O#{O~Ol$OO~O[$QO#{#zO#|#zO#}#{O$O#{O~O[$QO~O#o}OQxXcxX#qxX#{xX#|xX#}xX$OxX$SxX$TxX$UxX~OQ!PO$P!TO~P/jOQ!POc$[O#q!RO$S$VO$T$XO$U$YO~O#{#zO#|#zO#}#{O$O#{O~P0iO`$^Oa$`O$V!}O~Of$dO~Od$fO~Or#WO#k!na#n!na~O#nPOP!saS!saT!saV!saW!saX!saY!saZ!sa]!sa^!sa_!sae!sah!sai!saj!sak!sam!sar!sa#k!sa~OU#bO#p$oO~OrxXuxX#sxX#wxXQxXcxX#qxX$SxX$TxX$UxX~P+cO#{#zO#|#zO#}#{O$O#{Or!vXu!vX#k!vX#n!vX#s!vX#w!vX~Or#eOu!eO#s!aO#w!bO#kqi#nqi~Ou$rO#s!aO#w!bO~OR#jO$P!TO~O#{#zO#|#zO#}#{O$O#{O}$QX$R$QX~O}$vO$R!QX~O#t#tO#u$zO~O#x#wO#y$|O~Ol$OOr%QO~O[$QOr%SO~OQ!POb%TO~OQ!POr!`Ou!eO#s!aO#w!bO~Or!`Ou!eO#q!RO#s!aO#w!bO~Oc$[Or%`O~O`$^Or!wOu!eO#s!aO#w!bO~Oa$`Or!wOu!eO#s!aO#w!bO~Of$dO#k!ki#n!ki~Od$fOg%hOr%jO~O}%oO~O}$vO$R!Qa~O#{#zO#|#zO#}#{O$O#{O#k#zi#n#zil#zi[#ziQ#zic#zi#q#zi$S#zi$T#zi$U#zir#ziu#zi#s#zi#w#zi}#zi$R#zi`#zia#zi$V#zi~Ob%TO`!aia!ai$V!ai~O#{#zO#|#zO#}#{O$O#{O`!bia!bi$V!bi~O#{#zO#|#zO#}#{O$O#{O`!cia!ci$V!ci~O#{#zO#|#zO#}#{O$O#{O`!eia!ei$V!ei~Og%hO$P!TO~Ou&PO#s!aO#w!bO~O}%oO#p$oO~O#{#zO#|#zO#}#{O$O#{O`!bqa!bq$V!bq~O#{#zO#|#zO#}#{O$O#{O`!eqa!eq$V!eq~Or&TOu&TO~O}&VO~Or&WOu&WO~O}&YO$R#mO~Or&[Ou&[O~Our~",
-    goto: "4h$RPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPP$S$XP$^%SP%^%e%u'U'{(^$XP$X(o)R)_*j$X$X$X$X+Y+Y+Y$X$X$X$X+_+l+l+l+s+l+w+w+l+{$X$X$X$X$X$X$X$X,q,{-S-Y-m-v-|.S.Y.a.g.o.w/P/]/e/m/u/}0V0^0f0m0u0{1S1b1m1x2Q2Y2`2h2n2t2|3U3[3dPPPPPPP3lPPP3lPPP$cPPPPP4_VzOQ{VyOQ{USOQ{!]!e]_adfhjvx!Q!S!U!V!W!Z#h#|#}$T$U$W$Z$_$a$h$t$v%X%^W!OR!`!w#eT#i!Q!SS$p#c#dR&R%pQ!SRQ!WSS$U!x!zQ%X$UR%^$ZQ!d]Q!h_Q!kaQ!ndQ!qfQ!thY!xjvx$_$aY#g!Q!S!V!W#hY#l!U!Z$h$t$vQ$}#|Q%O#}S%V$T$UQ%Y$WQ%[$ZQ%v%XR%x%^![!e]_adfhjvx!Q!S!U!V!W!Z#h#|#}$T$U$W$Z$_$a$h$t$v%X%^Q$r#iR&P%oo#|!d!h!k!n!q!t!x#g#l%O%V%Y%[%v%xo#}!d!h!k!n!q!t!x#g#l%O%V%Y%[%v%xW!UR!`!w#WQ!ZWQ$h#VQ$t#kR%{%iQ#o!UQ#s!ZQ%l$hR%r$tUyOQ{Q!g]Q!j_Q!maQ!pdQ!sfQ!vhY!zjvx$_$aS#Yt#ZY#p!U!Z$h$t$vS%W$T$UQ%Z$WQ%]$ZQ%w%XR%y%^Q#n!UQ#r!ZQ$u#oQ$x#sQ%k$hQ%q$tQ&O%lQ&S%rQ&X&WR&]&[VbOQ{Q!|jQ#]vQ#_xT%b$_$aZ!{jvx$_$aT$W!x!zT$Z!x!zQ#PlQ$c!|Q$k#]Q$m#_Q%e$bQ%m$jQ%n$lQ%|%jQ%}%kQ&U&OQ&Z&XR&^&]QQOS|Q#`R#`zS{OQR#a{Q#c!OR$n#cQ!QRQ!VSW#f!Q!V$S$TQ$S!wT$T!x!zW#h!Q!S!V!WR$q#hQ#u!aR$y#uQ#x!bR${#xQ%p$rR&Q%pS#k!Q!SR$s#kQ$w#qR%t$wUUOQ{R!XUUWOQ{R!YWUYOQ{R![YUZOQ{Q!^YT!_Z!^U]OQ{R!f]U_OQ{R!i_UaOQ{R!laUdOQ{R!odUfOQ{R!rfS$P!q!sR%P$PUhOQ{R!uhS$R!t!vR%R$RUjOQ{R!yjQ%U$SR%u%US$]!x!zR%_$]Q$b!|Q$j#]Q$l#_V%d$b$j$l[$_!|#]#_$b$j$lR%a$_[$a!|#]#_$b$j$lR%c$aUlOQ{R#OlUnOQ{R#QnQ$e#RR%f$eUpOQ{R#SpQ$g#TR%g$gQ%i$gR%z%iUrOQ{R#UrUtOQ{R#XtQ#ZtR$i#ZUvOQ{R#[vUxOQ{R#^x!a!c]_adfhjvx!Q!S!U!V!W!Z#h#i#|#}$T$U$W$Z$_$a$h$t$v%X%^%oW#q!U!Z$h$tR%s$v",
-    nodeNames: "\u26A0 print is input sleep play random forward turn color add remove from clear if else and or pressed notIn in repeat times range while def return for toList elif Comment Program Command Assign Text ListAccess Op Number Op Op Expression String Op Op AssignList Comma Input Op Arguments Call Op Clear Print Play Turtle Forward Turn Color Sleep Add Remove If Condition PressedCheck EqualityCheck NotEqualCheck Op ComparisonCheck Op Op ListCheck Op Else Repeat For Define Return While Elif ErrorInvalid",
-    maxTerm: 145,
+    states: "?OQYQPOOOOQO'#EO'#EOQYQPOOO!gQPO'#E]O#OQPO'#C}OOQO'#EY'#EYO#WQPO'#DaOOQO'#EZ'#EZO#cQPO'#DbOOQO'#E['#E[O#kQPO'#DcO#sQPO'#D}OOQO'#E^'#E^O$OQPO'#DeOOQO'#E_'#E_O$aQPO'#DfOOQO'#E`'#E`O$rQPO'#DgOOQO'#Dd'#DdOOQO'#Ea'#EaO%TQPO'#DhOOQO'#Eb'#EbO%lQPO'#DiOOQO'#Ed'#EdO%}QPO'#DjOOQO'#Ef'#EfO&`QPO'#DkOOQO'#El'#ElO&qQPO'#DvOOQO'#Em'#EmO&yQPO'#DwOOQO'#Eo'#EoO'UQPO'#DxOOQO'#Er'#ErO'^QPO'#DyOOQO'#Es'#EsO'fQPO'#DzOOQO'#Eu'#EuO'nQPO'#D{OOQO'#Ev'#EvO(PQPO'#D|OOQO'#C|'#C|Q!bQPO'#EPQ(bQPOOOOQO-E7|-E7|OOQO'#DQ'#DQO)lQPO,59kOOQO'#ER'#ERO*]QPO,59iOOQO'#DT'#DTOOQO'#DX'#DXO*dQPO,59rO)wQPO,59iO*uQPO,59iO$RQPO,59iOOQO-E8W-E8WOOQO-E8X-E8XO*dQPO,59|OOQO-E8Y-E8YOOQO'#E]'#E]O+WQPO,59}OOQO-E8Z-E8ZO,ZQPO'#DUO-WOSO'#FOO-`OQO'#FSOOQO'#DV'#DVO-hQPO,5:POOQO'#DU'#DUOOQO-E8[-E8[O-|QPO,5:QOOQO-E8]-E8]O.bQPO,5:ROOQO-E8^-E8^O.vQPO,5:SOOQO-E8_-E8_O/[QPO,5:TOOQO-E8`-E8`O/mQPO,5:UOOQO-E8b-E8bO0OQPO'#DUO0VQPO'#DnOOQO-E8d-E8dOOQO'#Dl'#DlO0wQPO,5:VOOQO'#Du'#DuOOQO-E8j-E8jOOQO,5:b,5:bOOQO-E8k-E8kO1SQPO,5:cOOQO-E8m-E8mO1XQPO,5:dOOQO-E8p-E8pO#fQPO,5:eO#fQPO'#DWOOQO-E8q-E8qOOQO'#Et'#EtO1^QPO,5:fOOQO-E8s-E8sO0wQPO,5:gOOQO-E8t-E8tO0wQPO,5:hO1iQPO,5:kOOQO-E7}-E7}OOQO'#EQ'#EQO2yQPO1G/VO2|QPO1G/VOOQO-E8P-E8PO3RQPO'#ESO3sQPO1G/TO4XQPO1G/eOOQO'#EX'#EXO4dQPO1G/fOOQO'#D['#D[OOQO1G/^1G/^O*pQPO1G/^O4lQPO'#DYOOQO1G/h1G/hO*pQPO1G/hOOOO'#ET'#ETO5QOSO,5;jOOQO,5;j,5;jOOOO'#EU'#EUO5YOQO,5;nOOQO,5;n,5;nOOQO'#D]'#D]OOQO'#D^'#D^O$RQPO,5;tO$RQPO,5;tOOQO'#Ec'#EcO5bQPO1G/oOOQO'#Ee'#EeO5jQPO1G/pO5rQPO,5:XO*uQPO,5:YO5zQPO,5:YOOQO'#Dp'#DpO$RQPO,5:ZOOQO'#Dr'#DrOOQO'#Ds'#DsO5zQPO,5:]OOQO'#Eh'#EhO6]QPO,5:`OOQO'#Ej'#EjO6eQPO'#EiOOQO'#Ek'#EkO6vQPO'#EiO0wQPO1G/qOOQO1G/q1G/qOOQO'#En'#EnO7XQPO1G/}OOQO'#Ep'#EpO7dQPO1G0OO*dQPO1G0POOQO-E8r-E8rO0wQPO1G0ROOQO1G0R1G0RO0wQPO1G0SOOQO1G0S1G0SOOQO-E8O-E8OOOQO'#DS'#DSOOQO7+$q7+$qOOQO-E8Q-E8QO7oQPO7+%POOQO-E8V-E8VO*dQPO7+%QOOQO7+$x7+$xO7tQPO,59tO$RQPO'#EVOOQO7+%S7+%SOOOO-E8R-E8ROOQO1G1U1G1UOOOO-E8S-E8SOOQO1G1Y1G1YOOQO1G1`1G1`O7|QPO1G1`OOQO-E8a-E8aOOQO7+%Z7+%ZOOQO-E8c-E8cOOQO7+%[7+%[OOQO'#Eg'#EgO9gQPO1G/sO9uQPO1G/tO$RQPO1G/tO:^QPO1G/uO:uQPO1G/wO$RQPO1G/wOOQO-E8f-E8fOOQO1G/z1G/zOOQO-E8h-E8hOOQO,5;T,5;TOOQO-E8i-E8iOOQO-E8g-E8gOOQO7+%]7+%]OOQO-E8l-E8lOOQO-E8n-E8nOOQO'#Eq'#EqO;^QPO7+%jO&tQPO7+%jO&tQPO7+%kO*pQPO7+%kOOQO7+%m7+%mOOQO7+%n7+%nO;fQPO'#EWO;qQPO<<HkOOQO<<Hl<<HlO*pQPO<<HlOOQO-E8T-E8TO;yQPO,5:qOOQO-E8e-E8eO<_QPO7+%`O<vQPO7+%cOOQO-E8o-E8oO=_QPO<<IUOOQO<<IU<<IUOOQO<<IV<<IVO&tQPO<<IVOOQO,5:r,5:rOOQO-E8U-E8UOOQOAN>VAN>VOOQOAN>WAN>WO=gQPOAN>pOOQOAN>qAN>qO=lQPOG24[O=tQPOLD)vO&tQPO!$'MbO=|QPO!$'MbOOQO!)9B|!)9B|O*pQPO!)9B|O&tQPO!.K8hOOQO!4/.S!4/.S",
+    stateData: ">X~OnOS#mOS~OPVOScOTXOV[OW^OX`OYeOZgO]TO^iO_kOemOhuOiqOjsOkoOmwOrRO#nPO~OQ!PO#o}O#q!RO#z!SOr#PX#k#PX#n#PX~OQ!PO#q!RO~O]TO#k!TX#n!TX~OPVO#z!SO~OTXOr!]O~Or!]O#k!qX#n!qX~OV[Or!`Ou!eO#s!aO#w!bO~OW^Or!`Ou!eO#s!aO#w!bO~OX`Or!`Ou!eO#s!aO#w!bO~OScOr!`Ou!eO#s!aO#w!bO#k![X#n![X~OYeOr!`Ou!eO#s!aO#w!bO~OZgOr!`Ou!eO#s!aO#w!bO~O^iOr!qOu!eO#s!aO#w!bO~O_kO$U!vO~OemOr!zOu!zO~OkoOr!|O~OiqOr#OO~OjsOr#PO~OhuOr!qOu!eO#s!aO#w!bO~OmwOr!qOu!eO#s!aO#w!bO~OPVOScOTXOV[OW^OX`OYeOZgO]TO^iO_kOemOhuOiqOjsOkoOmwOrRO~OU#ZOr#]Ou#]O~OR#bOr!`Ou!eO#o}O#s!aO#w!bO~OQ!PO~P)wOr!`Ou!eO#s!aO#w!bO#{#dO~OQ!POr!`Ou!eO#s!aO#w!bO~Or!]O#k!Va#n!Va~O#o}O#z!SO#}xX$OxX$PxX$QxXQxXcxX#qxX$RxX$SxX$TxX~O#kxX#nxXlxX[xXrxXuxX#sxX#wxX}xX#{xX`xXaxX$UxX~P+cO#t#jO#u#lO~O#x#mO#y#oO~O#}#pO$O#pO$P#qO$Q#qO#k!Xa#n!Xa~O#}#pO$O#pO$P#qO$Q#qO#k!Ya#n!Ya~O#}#pO$O#pO$P#qO$Q#qO#k!Za#n!Za~O#}#pO$O#pO$P#qO$Q#qO#k![a#n![a~Ol#tO#}#pO$O#pO$P#qO$Q#qO~O[#vO#}#pO$O#pO$P#qO$Q#qO~OQ!PO~P+cOQ!POc$QO#q!RO#}#pO$O#pO$P#qO$Q#qO$R#{O$S#}O$T$OO~O`$SOa$UO$U!vO~Of$YO~Od$[O~Or#PO#k!na#n!na~O#nPOP!saS!saT!saV!saW!saX!saY!saZ!sa]!sa^!sa_!sae!sah!sai!saj!sak!sam!sar!sa#k!sa~OU#ZO#p$eO~O#}#pO$O#pO$P#qO$Q#qOr!vXu!vX#k!vX#n!vX#s!vX#w!vX~Or!`Ou!eO#s!aO#w!bO#kqi#nqi~Ou$hO#s!aO#w!bO~OR#bO#z!SO~O}$mO#}#pO$O#pO$P#qO$Q#qO#{|X~O#t#jO#u$pO~O#x#mO#y$rO~Ol#tOr$vO~O[#vOr$xO~OQ!POb$yO~Or!`Ou!eO#q!RO#s!aO#w!bO~Oc$QOr%RO~O`$SOr!qOu!eO#s!aO#w!bO~Oa$UOr!qOu!eO#s!aO#w!bO~Of$YO#k!ki#n!ki~Od$[Og%ZOr%]O~O}%bO~O}$mO#{|a~O#}#pO$O#pO$P#qO$Q#qO#k#|i#n#|il#|i[#|iQ#|ic#|i#q#|i$R#|i$S#|i$T#|ir#|iu#|i#s#|i#w#|i}#|i#{#|i`#|ia#|i$U#|i~Ob$yO`!aia!ai$U!ai~O#}#pO$O#pO$P#qO$Q#qO`!bia!bi$U!bi~O#}#pO$O#pO$P#qO$Q#qO`!cia!ci$U!ci~O#}#pO$O#pO$P#qO$Q#qO`!eia!ei$U!ei~Og%ZO#z!SO~Ou%pO#s!aO#w!bO~O}%bO#p$eO~O#}#pO$O#pO$P#qO$Q#qO}!ya#{!ya~O#}#pO$O#pO$P#qO$Q#qO`!bqa!bq$U!bq~O#}#pO$O#pO$P#qO$Q#qO`!eqa!eq$U!eq~Or%tOu%tO~O}%vO~Or%wOu%wO~O}%yO#{#dO~Or%{Ou%{O~Our~",
+    goto: "3t#}PPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPP$O$TP$Y%OP%X%`%o'Q'w(q)TP)a*P*c$T$T$T$T$T$T*u*u*u$T$T$T$T*z+X+X+X+`+X+c+c+X+f$T$T$T$T$T$T$T$T,[,f,m,s-V-`-f-l-r-x.P.X.a.i.u.}/V/_/g/o/u/}0T0]0c0i0w1S1_1g1o1u1}2T2Z2c2k2q2yPPPPPPP3RPPP3RPPPPP$_VzOQ{VyOQ{USOQ{!]!e]_adfhjvx!Q!T!U!V!W!Z#`#r#s#y#z#|$P$T$V$^$j$m$|%PU!OR!`!qT#a!Q!US$f#[#]R%r%cQ!URQ!WSQ#z!rQ$|#zR%P$PQ!d]Q!g_Q!iaQ!kdQ!mfQ!ohY!rjvx$T$VY#_!Q!U!V!W#`W#g!T!Z$^$jQ$s#rQ$t#sS${#y#zQ$}#|Q%O$PQ%g$mQ%i$|R%j%P![!e]_adfhjvx!Q!T!U!V!W!Z#`#r#s#y#z#|$P$T$V$^$j$m$|%PQ$h#aR%p%bUyOQ{![!e]_adfhjvx!Q!T!U!V!W!Z#`#r#s#y#z#|$P$T$V$^$j$m$|%PT#Rt#SW!TR!`!q#PQ!ZWQ$^#OQ$j#cR%l%[Q#f!TQ#i!ZQ%_$^R%e$jQ#e!TQ#h!ZQ$k#fQ$n#iQ%^$^Q%d$jQ%o%_Q%s%eQ%x%wR%|%{q#r!d!g!i!k!m!o!r#_#g$t${$}%O%g%i%jq#s!d!g!i!k!m!o!r#_#g$t${$}%O%g%i%jVbOQ{Q!ujQ#UvQ#WxT%T$T$VZ!tjvx$T$VR#|!rR$P!rQ!xlQ$X!uQ$a#UQ$c#WQ%W$WQ%`$`Q%a$bQ%m%]Q%n%^Q%u%oQ%z%xR%}%|QQOS|Q#XR#XzS{OQR#Y{Q#[!OR$d#[Q!QRQ!VSW#^!Q!V#x#yQ#x!qR#y!rW#`!Q!U!V!WR$g#`Q#k!aR$o#kQ#n!bR$q#nQ$l#gR%f$lQ%c$hR%q%cS#c!Q!UR$i#cUUOQ{R!XUUWOQ{R!YWUYOQ{R![YUZOQ{Q!^YT!_Z!^U]OQ{R!f]U_OQ{R!h_UaOQ{R!jaUdOQ{R!ldUfOQ{R!nfQ#u!mR$u#uUhOQ{R!phQ#w!oR$w#wUjOQ{R!sjQ$z#xR%h$zQ$R!rR%Q$RQ$W!uQ$`#UQ$b#WV%V$W$`$b[$T!u#U#W$W$`$bR%S$T[$V!u#U#W$W$`$bR%U$VUlOQ{R!wlUnOQ{R!ynQ$Z!zR%X$ZUpOQ{R!{pQ$]!|R%Y$]Q%[$]R%k%[UrOQ{R!}rUtOQ{R#QtQ#StR$_#SUvOQ{R#TvUxOQ{R#Vx!a!c]_adfhjvx!Q!T!U!V!W!Z#`#a#r#s#y#z#|$P$T$V$^$j$m$|%P%b",
+    nodeNames: "\u26A0 print is input sleep play random forward turn color add remove from clear if else and or pressed notIn in repeat times range while def return for toList elif Comment Program Command Assign Text ListAccess Op Number Op Op Expression String Call Op Arguments Comma Op Op Op AssignList Input Clear Print Play Turtle Forward Turn Color Sleep Add Remove If Condition PressedCheck EqualityCheck NotEqualCheck Op ComparisonCheck Op Op ListCheck Op Else Repeat For Define Return While Elif ErrorInvalid",
+    maxTerm: 144,
     nodeProps: [
       ["group", 54, "turtle"]
     ],
     skippedNodes: [0, 30],
     repeatNodeCount: 39,
-    tokenData: "2b~R!eOY%dYZ&kZp%dpq&pqr&urs'Qst'Vtw%dwx'nxy'syz'xz{'}{|(S|}(X}!O(^!O!P%d!P!Q(c!Q!R(h!R!S(h!S!T(h!T!U(h!U!V(h!V!W(h!W!X(h!X!Y(h!Y!Z(h!Z![(h![!]1r!]!^%d!^!_1w!_!`1|!`!a2R!a!}%d!}#O2W#O#P%d#P#Q2]#QBn%dBnBo(XBoDf%dDfDg(hDgDh(hDhDi(hDiDj(hDjDk(hDkDl(hDlDm(hDmDn(hDnDo(hDoDp(hDpGl%dGlGm(hGmGn(hGnGo(hGoGp(hGpGq(hGqGr(hGrGs(hGsGt(hGtGu(hGuGv(hGv&FV%d&FV&FW(X&FW;'S%d;'S;=`&e<%l?Hb%d?Hb?Hc(X?HcO%d~%i^r~OY%dZp%dtw%d!O!P%d!Q![%d!]!^%d!a!}%d#O#P%d#QBn%dBo&FV%d&FW;'S%d;'S;=`&e<%l?Hb%d?HcO%d~&hP;=`<%l%d~&pO#n~~&uO#m~~&xP!_!`&{~'QO$S~~'VO#s~~'[Sn~OY'VZ;'S'V;'S;=`'h<%lO'V~'kP;=`<%l'V~'sO#w~~'xO$P~~'}O$R~~(SO#{~~(XO#}~~(^O}~~(cO$O~~(hO#|~~(o}u~r~OY%dZp%dtw%d!O!P+l!Q!R(h!R!S(h!S!T(h!T!U(h!U!V(h!V!W(h!W!X(h!X!Y(h!Y!Z(h!Z![(h!]!^%d!a!}%d#O#P%d#QBn%dBoDf%dDfDg(hDgDh(hDhDi(hDiDj(hDjDk(hDkDl(hDlDm(hDmDn(hDnDo(hDoDp(hDpGl%dGlGm(hGmGn(hGnGo(hGoGp(hGpGq(hGqGr(hGrGs(hGsGt(hGtGu(hGuGv(hGv&FV%d&FW;'S%d;'S;=`&e<%l?Hb%d?HcO%d~+q}r~OY%dZp%dtw%d!O!P%d!Q!R.n!R!S.n!S!T.n!T!U.n!U!V.n!V!W.n!W!X.n!X!Y.n!Y!Z.n!Z![.n!]!^%d!a!}%d#O#P%d#QBn%dBoDf%dDfDg.nDgDh.nDhDi.nDiDj.nDjDk.nDkDl.nDlDm.nDmDn.nDnDo.nDoDp.nDpGl%dGlGm.nGmGn.nGnGo.nGoGp.nGpGq.nGqGr.nGrGs.nGsGt.nGtGu.nGuGv.nGv&FV%d&FW;'S%d;'S;=`&e<%l?Hb%d?HcO%d~.u}u~r~OY%dZp%dtw%d!O!P%d!Q!R.n!R!S.n!S!T.n!T!U.n!U!V.n!V!W.n!W!X.n!X!Y.n!Y!Z.n!Z![.n!]!^%d!a!}%d#O#P%d#QBn%dBoDf%dDfDg.nDgDh.nDhDi.nDiDj.nDjDk.nDkDl.nDlDm.nDmDn.nDnDo.nDoDp.nDpGl%dGlGm.nGmGn.nGnGo.nGoGp.nGpGq.nGqGr.nGrGs.nGsGt.nGtGu.nGuGv.nGv&FV%d&FW;'S%d;'S;=`&e<%l?Hb%d?HcO%d~1wO$V~~1|O$U~~2RO#q~~2WO$T~~2]O#o~~2bO#p~",
+    tokenData: "2b~R!eOY%dYZ&kZp%dpq&pqr&urs'Qst'Vtw%dwx'nxy'syz'xz{'}{|(S|}(X}!O(^!O!P%d!P!Q(c!Q!R(h!R!S(h!S!T(h!T!U(h!U!V(h!V!W(h!W!X(h!X!Y(h!Y!Z(h!Z![(h![!]1r!]!^%d!^!_1w!_!`1|!`!a2R!a!}%d!}#O2W#O#P%d#P#Q2]#QBn%dBnBo(XBoDf%dDfDg(hDgDh(hDhDi(hDiDj(hDjDk(hDkDl(hDlDm(hDmDn(hDnDo(hDoDp(hDpGl%dGlGm(hGmGn(hGnGo(hGoGp(hGpGq(hGqGr(hGrGs(hGsGt(hGtGu(hGuGv(hGv&FV%d&FV&FW(X&FW;'S%d;'S;=`&e<%l?Hb%d?Hb?Hc(X?HcO%d~%i^r~OY%dZp%dtw%d!O!P%d!Q![%d!]!^%d!a!}%d#O#P%d#QBn%dBo&FV%d&FW;'S%d;'S;=`&e<%l?Hb%d?HcO%d~&hP;=`<%l%d~&pO#n~~&uO#m~~&xP!_!`&{~'QO$R~~'VO#s~~'[Sn~OY'VZ;'S'V;'S;=`'h<%lO'V~'kP;=`<%l'V~'sO#w~~'xO#z~~'}O#{~~(SO#}~~(XO$P~~(^O}~~(cO$Q~~(hO$O~~(o}u~r~OY%dZp%dtw%d!O!P+l!Q!R(h!R!S(h!S!T(h!T!U(h!U!V(h!V!W(h!W!X(h!X!Y(h!Y!Z(h!Z![(h!]!^%d!a!}%d#O#P%d#QBn%dBoDf%dDfDg(hDgDh(hDhDi(hDiDj(hDjDk(hDkDl(hDlDm(hDmDn(hDnDo(hDoDp(hDpGl%dGlGm(hGmGn(hGnGo(hGoGp(hGpGq(hGqGr(hGrGs(hGsGt(hGtGu(hGuGv(hGv&FV%d&FW;'S%d;'S;=`&e<%l?Hb%d?HcO%d~+q}r~OY%dZp%dtw%d!O!P%d!Q!R.n!R!S.n!S!T.n!T!U.n!U!V.n!V!W.n!W!X.n!X!Y.n!Y!Z.n!Z![.n!]!^%d!a!}%d#O#P%d#QBn%dBoDf%dDfDg.nDgDh.nDhDi.nDiDj.nDjDk.nDkDl.nDlDm.nDmDn.nDnDo.nDoDp.nDpGl%dGlGm.nGmGn.nGnGo.nGoGp.nGpGq.nGqGr.nGrGs.nGsGt.nGtGu.nGuGv.nGv&FV%d&FW;'S%d;'S;=`&e<%l?Hb%d?HcO%d~.u}u~r~OY%dZp%dtw%d!O!P%d!Q!R.n!R!S.n!S!T.n!T!U.n!U!V.n!V!W.n!W!X.n!X!Y.n!Y!Z.n!Z![.n!]!^%d!a!}%d#O#P%d#QBn%dBoDf%dDfDg.nDgDh.nDhDi.nDiDj.nDjDk.nDkDl.nDlDm.nDmDn.nDnDo.nDoDp.nDpGl%dGlGm.nGmGn.nGnGo.nGoGp.nGpGq.nGqGr.nGrGs.nGsGt.nGtGu.nGuGv.nGv&FV%d&FW;'S%d;'S;=`&e<%l?Hb%d?HcO%d~1wO$U~~1|O$T~~2RO#q~~2WO$S~~2]O#o~~2bO#p~",
     tokenizers: [2, new LocalTokenGroup("_~RQYZXwxX~^O#y~~", 14, 132), new LocalTokenGroup("_~RQYZXrsX~^O#u~~", 14, 128)],
     topRules: { "Program": [0, 31] },
     dynamicPrecedences: { "79": -10 },
     specialized: [{ term: 34, get: (value, stack) => specializeKeyword(value, stack) << 1, external: specializeKeyword }],
-    tokenPrec: 1401
+    tokenPrec: 1340
   });
 
   // static/js/lezer-parsers/language-packages.ts
@@ -52687,7 +52736,7 @@ notes_mapping = {
       const language2 = languagePerLevel[level3];
       const hedyStyleTags = {
         "print forward turn play color ask is echo sleep Comma": tags.keyword,
-        "at random remove from add to if else in not Op": tags.keyword,
+        "at random remove from add to if else in not_in Op": tags.keyword,
         "repeat times for range with return and or while": tags.keyword,
         "elif def input toList": tags.keyword,
         Comment: tags.lineComment,
@@ -58032,11 +58081,9 @@ pygame.quit()
       if (response.succes) {
         const queryString = window.location.search;
         const urlParams = new URLSearchParams(queryString);
-        if (urlParams.get("keyword_language") !== null) {
-          urlParams.set("keyword_language", "en");
-        }
-        if (urlParams.get("language") !== null) {
+        if (lang === "en" || urlParams.get("language") !== null) {
           urlParams.set("language", lang);
+          urlParams.set("keyword_language", lang);
           window.location.search = urlParams.toString();
         } else {
           location.reload();
