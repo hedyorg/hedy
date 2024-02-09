@@ -1,3 +1,10 @@
+#----------------------------------------------------------
+# PyInstaller configuration file
+#
+# This file controls how we build a standalone distribution of
+# Hedy that can run in environments where Internet access might
+# be spotty.
+#----------------------------------------------------------
 # -*- mode: python ; coding: utf-8 -*-
 from os import path
 import sys
