@@ -87,19 +87,4 @@ class TestsCheatsheetPrograms(HedyTester):
             except OSError:
                 return None  # programs with ask cannot be tested with output :(
             except exceptions.HedyException as E:
-                try:
-                    location = E.error_location
-                except BaseException:
-                    location = 'No Location Found'
-
-                # Must run this in the context of the Flask app, because FlaskBabel requires that.
-                with app.app_context():
-                    with force_locale('en'):
-                        error_message = translate_error(E.error_code, E.arguments, 'en')
-                        error_message = error_message.replace('<span class="command-highlighted">', '`')
-                        error_message = error_message.replace('</span>', '`')
-                        print(f'\n----\n{snippet.code}')
-                        print(f'----\n{snippet.original_code}\n----')
-                        print(f'in language {snippet.language} from level {snippet.level} gives error:')
-                        print(f'{error_message} at line {location}')
-                        raise E
+                self.output_test_error(E, snippet)

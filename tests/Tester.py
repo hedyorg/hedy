@@ -17,6 +17,8 @@ from hedy_content import ALL_KEYWORD_LANGUAGES, KEYWORDS
 from hedy_sourcemap import SourceRange
 from functools import cache
 
+from app import translate_error, app
+from flask_babel import force_locale
 
 ROOT_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
@@ -475,6 +477,24 @@ class HedyTester(unittest.TestCase):
                 print(snippet[1].code)
 
         return snippets
+
+    def output_test_error(self, E, snippet):
+        try:
+            location = E.error_location
+        except BaseException:
+            location = 'No Location Found'
+
+        # Must run this in the context of the Flask app, because FlaskBabel requires that.
+        with app.app_context():
+            with force_locale('en'):
+                error_message = translate_error(E.error_code, E.arguments, 'en')
+                error_message = error_message.replace('<span class="command-highlighted">', '`')
+                error_message = error_message.replace('</span>', '`')
+                print(f'\n----\n{snippet.code}')
+                print(f'----\n{snippet.original_code}\n----')
+                print(f'in language {snippet.language} from level {snippet.level} gives error:')
+                print(f'{error_message} at line {location}')
+                raise E
 
 
 def create_hash(hedy_language, test_hash):
