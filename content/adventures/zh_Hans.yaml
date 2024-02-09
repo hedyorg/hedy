@@ -284,13 +284,13 @@ adventures:
                     在这个虚拟餐厅中尝试新命令。将玩家想要的口味添加到列表中，并删除他们过敏的口味。
                 example_code_3: |
                     ```
-                    {print} 神秘奶昔
-                    口味 {is} 草莓,巧克力,香草
-                    想要的口味{is} {ask}什么口味你想要?
-                    ＿
-                    过敏的口味{is} {ask}你对什么口味过敏吗?
-                    ＿
-                    {print}你得到一个 口味{at}{random}的奶昔
+                    {print} Mystery milkshake
+                    flavors {is} strawberry, chocolate, vanilla
+                    hope {is} {ask} What flavor are you hoping for?
+                    _
+                    allergies {is} {ask} Are you allergic to any flavors?
+                    _
+                    {print} You get a flavors {at} {random} milkshake
                     ```
     and_or_command:
         name: '{and} & {or}'
@@ -884,8 +884,7 @@ adventures:
                 story_text: |-
                     ### 练习
                     调试这段代码。 祝你好运！
-                example_code: "**警告！ 这段代码需要调试！**\n```\n{print} '欢迎来到我们的三明治店'\n个数 “您想买多少个三明治？”\n{repeat}个数{times}\n{ask} {is} {ask} '您想要什么类型的三明治或面包？'\n面包刀种类 {is} 白面包、小麦面包、黑麦面包、大蒜面包、无麸质面包\n{if}  选中的面包  in 面包的种类 \n{print}“美妙！”\n{else}\n“抱歉我们不卖那个”\n蘸料 {is} {ask} '您想要什么类型的配料？'\n沙司{is} {ask}“您想要什么类型的酱？”\n{print}\
-                    \ 一份 选中的面包，配上配料和酱汁。\n价格 =数量*6\n{print} '这将是' 价格 '美元'\n```\n"
+                example_code: "**警告！ 这段代码需要调试！**\n```\n{print} '欢迎来到我们的三明治店'\n个数 “您想买多少个三明治？”\n{repeat}个数{times}\n{ask} {is} {ask} '您想要什么类型的三明治或面包？'\n面包刀种类 {is} 白面包、小麦面包、黑麦面包、大蒜面包、无麸质面包\n{if}  选中的面包  in 面包的种类 \n{print}“美妙！”\n{else}\n“抱歉我们不卖那个”\n蘸料 {is} {ask} '您想要什么类型的配料？'\n沙司{is} {ask}“您想要什么类型的酱？”\n{print} 一份 选中的面包，配上配料和酱汁。\n价格 =数量*6\n{print} '这将是' 价格 '美元'\n```\n"
             10:
                 story_text: |-
                     ### 练习
@@ -941,8 +940,7 @@ adventures:
                 story_text: |-
                     ### 练习
                     调试这段代码。 祝你好运！
-                example_code: "**警告！ 这段代码需要调试！**\n```\n{define} 问候\n问候语 = 'Hello', 'Hi there', 'Goodevening'\n    {print} 问候语 {at} {random}\n\n{define} 点单\n    食物 = {ask} '您想吃什么?'\n    {print} '一份食物'\n    饮料 = '您想喝什么?'\n    {print} '一份饮料' \n    更多 = {ask} '您还要点别的吗?'\n        {if} 更多 {is} ' 不'\n    {print}\
-                    \ '好的'\n        {else}\n        {print} '和 ' 更多\n{print} '谢谢你'\n\n{print} '欢迎来到我的餐馆'\n人数 = {ask} '你们今晚有多少人?'\n{for} i {in} {range} 0 {to} 人数\n    {call} 欢迎顾客\n```\n"
+                example_code: "**警告！ 这段代码需要调试！**\n```\n{define} 问候\n问候语 = 'Hello', 'Hi there', 'Goodevening'\n    {print} 问候语 {at} {random}\n\n{define} 点单\n    食物 = {ask} '您想吃什么?'\n    {print} '一份食物'\n    饮料 = '您想喝什么?'\n    {print} '一份饮料' \n    更多 = {ask} '您还要点别的吗?'\n        {if} 更多 {is} ' 不'\n    {print} '好的'\n        {else}\n        {print} '和 ' 更多\n{print} '谢谢你'\n\n{print} '欢迎来到我的餐馆'\n人数 = {ask} '你们今晚有多少人?'\n{for} i {in} {range} 0 {to} 人数\n    {call} 欢迎顾客\n```\n"
             13:
                 story_text: |-
                     ### 练习
@@ -1101,8 +1099,7 @@ adventures:
                 story_text: |-
                     ### 练习
                     从第 16 级开始调试这个 Old MacDonald 程序。祝你好运！
-                example_code: "**警告！ 这段代码需要调试！**\n```\nanimals = ['pig', 'dog', 'cow']\nsounds = ['oink', 'woof', 'moo']\n{for} i {in} {range} 1 {to} 3\n    animal = animals[i]\n    sound = sounds[i]\n    {print} '老麦当劳有一个农场'\n    {print} 'E I E I O!'\n    {print} '在那个农场他有一只' animal\n    {print} 'E I E\
-                    \ I O!'\n    {print} '这里有‘sound sound\n    {print} '以及那也有' sound sound \n    {print} '这里有 ' sound\n    {print} '那也有 ' sound\n    {print} '到处有 ' sound sound\n```\n"
+                example_code: "**警告！ 这段代码需要调试！**\n```\nanimals = ['pig', 'dog', 'cow']\nsounds = ['oink', 'woof', 'moo']\n{for} i {in} {range} 1 {to} 3\n    animal = animals[i]\n    sound = sounds[i]\n    {print} '老麦当劳有一个农场'\n    {print} 'E I E I O!'\n    {print} '在那个农场他有一只' animal\n    {print} 'E I E I O!'\n    {print} '这里有‘sound sound\n    {print} '以及那也有' sound sound \n    {print} '这里有 ' sound\n    {print} '那也有 ' sound\n    {print} '到处有 ' sound sound\n```\n"
     default:
         name: 介绍
         default_save_name: 介绍
@@ -3295,10 +3292,10 @@ adventures:
                     尝试在代码中的每个`{ask}`命令之后添加一个`{if}`，以使代码尽可能具有交互性!
                 example_code: |
                     ```
-                    饮料存货 {is}水、柠檬水、可乐、橙汁
-                    饮料 {is} {ask} '你想喝点什么?'
-                    {if} 饮料 {in} 饮料存货 {print} '一瓶 ' 饮料 '马上到!'
-                    {else} {print} '对不起，我们不卖这个'
+                    drinks_in_stock {is} water, lemonade, cola, orange juice
+                    drink {is} {ask} 'What would you like to drink?'
+                    {if} drink {in} drinks_in_stock {print} 'One ' drink 'coming up!'
+                    {else} {print} 'Sorry, we do not sell that'
                     ```
             6:
                 story_text: |
@@ -3560,19 +3557,19 @@ adventures:
                      **另外** 想玩多玩几个游戏吗？拓展代码，以便您可以多玩几个回合。您甚至可以使用 `{ask}` 询问用户他们想玩多少回合。
                 example_code: |
                     ```
-                    选项 = 石头，剪刀，布
-                    你选择 {is} {ask} '你选择什么？'
-                    {print} '你选择了' 你选择
-                    计算机选择 {is}选项 {at} {random}
-                    {print} '计算机选择了' 计算机选择
-                    {if} 计算机选择 {is} 你选择
-                        {print} '平手'
-                    {if} 计算机选择 {is} 石头
-                        {if} 你选择 {is} 布
-                            {print} '你赢了！'
-                        {if} 你选择 {is} 剪刀
-                            {print} '你输了！'
-                    # 完成这段代码
+                    choices = rock, paper, scissors
+                    your_choice {is} {ask} 'What do you choose?'
+                    {print} 'You choose ' your_choice
+                    computer_choice {is} choices {at} {random}
+                    {print} 'The computer chooses ' computer_choice
+                    {if} computer_choice {is} your_choice
+                        {print} 'Tie'
+                    {if} computer_choice {is} rock
+                        {if} your_choice {is} paper
+                            {print} 'You win!'
+                        {if} your_choice {is} scissors
+                            {print} 'You lose!'
+                    # finish this code
                     ```
             10:
                 story_text: |
@@ -3811,15 +3808,15 @@ adventures:
                     在这个例子中，我们改变了“我的邦妮”程序，使其具有互动性。你现在要问的是邦妮在哪里。
                 example_code: |
                     ```
-                    {define} 歌曲{with} 地方
-                        {print} '我的Bonnie在' 地方
+                    {define} song {with} place
+                        {print} 'My Bonnie is ' place
 
-                    选择的地方 = {ask} '你希望bonnie在哪?'
-                    同义词 = {ask} '那里也叫什么?'
+                    chosen_place = {ask} 'Where do you want Bonnie to be?'
+                    synonym = {ask} 'What is another word for that?'
 
-                    {call} 歌曲 {with} 选择的地方
-                    {call} 歌曲 {with} 同义词
-                    {call} 歌曲 {with} 选择的地方
+                    {call} song {with} chosen_place
+                    {call} song {with} synonym
+                    {call} song {with} chosen_place
                     ```
             16:
                 story_text: |
@@ -4489,20 +4486,20 @@ adventures:
                     旗子 <img src="https://github.com/hedyorg/hedy/assets/80678586/877fc337-df80-4185-8005-a6c28904f66e" width="300">
                     </div>
                 example_code: |
-                    画层叠正方形的提示:
+                    Hint for the nested squares:
                     ```
-                    颜色=红、蓝、橙、黄、粉、紫、绿、棕、黑
-                    距离= 120
-                    重复5次
+                    colors = red, blue, orange, yellow, pink, purple, green, brown, black
+                    distance = 120
+                    repeat 5 times
                     _
                     ```
-                    画旗帜的提示:
+                    Hint for the flags:
                     ```
-                    国家=ask“你想看到哪个国家的国旗?”
-                    如果这个国家是“荷兰”
-                        color_1 = 红
-                        color_2 = 白
-                        color_3 = 蓝
+                    country = ask 'which country would you like to see the flag of?'
+                    if country is 'the Netherlands'
+                        color_1 = red
+                        color_2 = white
+                        color_3 = blue
                     ```
             10:
                 story_text: |
