@@ -108,7 +108,7 @@ def task_tailwind():
         task_dep=['npm'],
         title=lambda _: 'Generate Tailwind CSS',
         actions=[
-            [script],
+            ['bash', script],
         ],
         targets=[target],
 
@@ -247,7 +247,7 @@ def task_prefixes():
             *glob('prefixes/*.py'),
         ],
         actions=[
-            [script],
+            ['bash', script],
         ],
         targets=[
             'static/js/pythonPrefixes.ts'
@@ -273,7 +273,7 @@ def task_lezer_parsers():
         ],
         task_dep=['npm'],
         actions=[
-            [script],
+            ['bash', script],
         ],
         targets=lezer_files,
     )
