@@ -20,6 +20,7 @@ const fullLineCommands = [
   'add',
   'remove',
   'ask',
+  'play',
   'command', // the turtle and clear commands get put in the source map as 'command'
 ]
 
