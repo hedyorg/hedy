@@ -491,7 +491,8 @@ class HedyTester(unittest.TestCase):
                 error_message = error_message.replace('<span class="command-highlighted">', '`')
                 error_message = error_message.replace('</span>', '`')
                 lines = snippet.code.split('\n')
-                lines_with_numbers = [lines[i] if i!=location[0] else lines[i] + " <-------" for i in range(len(lines)) ]
+                lines_with_numbers = [lines[i] if i != location[0]
+                                      else lines[i] + " <-------" for i in range(len(lines))]
                 code_with_numbers = '\n'.join(lines_with_numbers)
 
                 print(f'\n----\n{code_with_numbers}')
