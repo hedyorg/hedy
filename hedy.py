@@ -2219,7 +2219,7 @@ class ConvertToPython_8_9(ConvertToPython_7):
     def command(self, meta, args):
         return "".join(args)
 
-    def repeat(self, meta, args):
+    def repeat_8(self, meta, args):
         # todo fh, may 2022, could be merged with 7 if we make
         # indent a boolean parameter?
 
