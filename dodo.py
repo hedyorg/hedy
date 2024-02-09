@@ -34,6 +34,7 @@ if os.getenv('GITHUB_ACTION') and platform.system() == 'Windows':
     print('Detected a Windows GitHub runner. Adding MSYS2 to the PATH.')
     msys_dir = 'C:\\msys64\\usr\\bin'
     os.environ['PATH'] = msys_dir + ';' + os.environ['PATH']
+    print(os.environ['PATH'])
 
     # We need to explicitly invoke bash from this directory, otherwise
     # it will pick up a bash that requires WSL to run, which is not installed.
