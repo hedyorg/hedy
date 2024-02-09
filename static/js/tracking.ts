@@ -1,5 +1,6 @@
 import { postJson } from "./comm";
 
+const WAITING_TIME = 1000; // in milliseconds
 const ELEMENT_TO_TRACK = [
     // Debug and Developer buttons
     "debug_button",
@@ -77,15 +78,37 @@ const ELEMENT_TO_TRACK = [
     "explore_page_adventure",
     "explore_page_level"
 ];
+const CLICK_COUNTS = "clickCounts";
+const LAST_ACTIVE = "lastActiveTime";
+
+function handleLocalStorage(item: string, value=Object()) {
+    const retrievedItem = window.localStorage.getItem(item);
+    if (!retrievedItem || JSON.stringify(value) !== retrievedItem) {
+        window.localStorage.setItem(item, JSON.stringify(value));
+    }
+
+    if (retrievedItem) {
+        if (item === CLICK_COUNTS) {
+            value = JSON.parse(retrievedItem);
+        } else if (item === LAST_ACTIVE) {
+            value = parseInt(retrievedItem);
+        }
+    }
+    return value;
+}
+
+const clickCounts = handleLocalStorage("clickCounts");
+let lastActiveTime = handleLocalStorage("lastActiveTime", Date.now());
+
+
 export function initializeTracking() {
     document.addEventListener('click', trackEvent);
     document.addEventListener('change', trackEvent);
 }
 
-const clickCounts = Object();
-function trackEvent(event: Event) {
+async function trackEvent(event: Event) {
     const target = event.target as HTMLElement;
-    console.log(target, event.type)
+    // console.log(target, event.type)
     if (target.matches('button') || target.matches('a') || target.matches('input') || target.matches('select') || target.matches("div")) {
         let elementIdOrName = target.id;
 
@@ -95,26 +118,80 @@ function trackEvent(event: Event) {
 
         if (ELEMENT_TO_TRACK.includes(elementIdOrName)) {
             
-
-            if (clickCounts[elementIdOrName]) {
-                clickCounts[elementIdOrName] = clickCounts[elementIdOrName] + 1;
-            } 
-            else {
-                clickCounts[elementIdOrName] = 0;
+            const page = window.location.pathname;
+            if (clickCounts.hasOwnProperty(page)) {
+                clickCounts[page].push({time: Date.now(), id: elementIdOrName});
+            } else {
+                clickCounts[page] = [{time: Date.now(), id: elementIdOrName}];
             }
             
 
-            console.log(target)
-            console.log(`Event: ${event.type}, Element ID or Name: ${elementIdOrName}, Click Count: ${clickCounts[elementIdOrName]}`);
-           
-
-
-            
-            
+            console.log(target, clickCounts)
+            console.log(`Event: ${event.type}, Element ID or Name: ${elementIdOrName}, Click Count: ${clickCounts[page]}`);
+            handleUserActivity();
+            changesSent = false;
             // You can perform additional tracking or send the data to your server here
         } 
-
-
     }
-    console.log(clickCounts)
-    await postJson('/tracking', clickCounts);
+}
+
+// Set interval to check user activity every 5 minutes
+let interval = setInterval(checkUserActivity, WAITING_TIME);
+let intervalCanceled = false;
+let changesSent = false;
+
+
+// Function to send request to the server
+async function sendRequestToServer() {
+    console.log('Sending request to server...', clickCounts);
+    // Your code to send a request to the server goes here
+    try {
+        await postJson('/tracking', clickCounts);
+    } catch (error) {
+        console.error(error)
+        
+    }
+    changesSent = true;
+}
+
+
+// Function to handle user activity
+function handleUserActivity() {
+    lastActiveTime = Date.now();
+    handleLocalStorage(LAST_ACTIVE, lastActiveTime);
+    handleLocalStorage(CLICK_COUNTS, clickCounts);
+    if (intervalCanceled) {
+        console.log('set an interval again!')
+        interval = setInterval(checkUserActivity, WAITING_TIME);
+    }
+}
+
+// Function to check user activity and send request if inactive for 5 minutes
+function checkUserActivity() {
+    if (changesSent) {
+        return;
+    }
+    const currentTime = Date.now();
+    const inactiveDuration = currentTime - lastActiveTime;
+    if (inactiveDuration >= WAITING_TIME) {
+        sendRequestToServer();
+        // clearInterval(interval)
+        // intervalCanceled = true;
+    }
+}
+
+
+// Event listener for visibility change
+document.addEventListener('visibilitychange', () => {
+    if (!document.hidden) { // Page becomes visible
+        console.log("visibility changed: VISIBLE")
+        handleUserActivity();
+    } else {
+        console.log("visibility changed: NOT VISIBLE")
+        sendRequestToServer();
+        clearInterval(interval)
+        intervalCanceled = true;
+    }
+});
+
+

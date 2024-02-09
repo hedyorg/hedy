@@ -1,4 +1,5 @@
 import logging
+import csv
 
 from . import aws_helpers, log_queue
 
@@ -8,8 +9,32 @@ logger = logging.getLogger(__name__)
 class NullLogger:
     """A logger that doesn't actually do anything."""
 
-    def log(self, obj):
-        pass
+    def __init__(self):
+        self.data = {}
+
+    def log(self, obj, filename):
+
+        username = obj['username']
+        if username not in self.data:
+            self.data[username] = obj
+        else:
+            self.data[username].update(obj)
+
+        self._write_to_csv(filename)
+
+    def _write_to_csv(self, filename):
+        """
+        Write the data to the CSV file.
+        """
+        with open(filename, 'w', newline='') as file:
+            # fieldnames = self.data.keys()
+            fieldnames = ['username', 'class_id', 'gender', 'data']
+
+            writer = csv.DictWriter(file, fieldnames=fieldnames)
+
+            writer.writeheader()
+            for username, data in self.data.items():
+                writer.writerow(data)
 
 
 class S3ParseLogger:
