@@ -6,15 +6,17 @@ var $builtinmodule = function (name) {
     });
 
     function keyBoardInputPromise(key, if_body, else_body) {
+      $('#keybinding-modal').show();
       return new Promise((resolve, reject) => {
         window.addEventListener("keydown", (event) => {
           if (event.key === key.v){
             Sk.misceval.callOrSuspend(if_body);
-            resolve();
           } else {
             Sk.misceval.callOrSuspend(else_body);
-            resolve();
           }
+
+          $('#keybinding-modal').hide();
+          resolve();
         }, { once: true });
       })
     }

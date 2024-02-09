@@ -20812,24 +20812,6 @@ t.pendown()
 t.speed(3)
 t.showturtle()
 `;
-  var pygame_prefix = `# coding=utf8
-
-import pygame  # noqa F401
-import buttons  # noqa F401
-
-pygame.init()
-canvas = pygame.display.set_mode((711, 300))
-canvas.fill(pygame.Color(247, 250, 252, 255))
-
-pygame_end = False
-button_list = []
-
-
-def create_button(name):
-    if name not in button_list:
-        button_list.append(name)
-        buttons.add(name)
-`;
   var normal_prefix = `# coding=utf8
 
 import random  # noqa F401
@@ -47436,10 +47418,6 @@ notes_mapping = {
   var currentTab;
   var theUserIsLoggedIn;
   var synth = new PolySynth(Synth).toDestination();
-  var pygame_suffix = `# coding=utf8
-pygame_end = True
-pygame.quit()
-`;
   var slides_template = `
 <!DOCTYPE html>
 <html class="sl-root decks export offline loaded">
@@ -47840,7 +47818,7 @@ pygame.quit()
       } else {
         program_data = theGlobalDebugger.get_program_data();
       }
-      runPythonProgram(program_data.Code, program_data.source_map, program_data.has_turtle, program_data.has_pygame, program_data.has_sleep, program_data.has_clear, program_data.has_music, program_data.Warning, cb2, run_type).catch(function(err) {
+      runPythonProgram(program_data.Code, program_data.source_map, program_data.has_turtle, program_data.has_sleep, program_data.has_clear, program_data.has_music, program_data.Warning, cb2, run_type).catch(function(err) {
         if (err != null) {
           error.show(ClientMessages["Execute_error"], err.message);
           reportClientError(level3, code, err.message);
@@ -48043,7 +48021,7 @@ pygame.quit()
       user_agent: navigator.userAgent
     });
   };
-  function runPythonProgram(code, sourceMap, hasTurtle, hasPygame, hasSleep, hasClear, hasMusic, hasWarnings, cb2, run_type) {
+  function runPythonProgram(code, sourceMap, hasTurtle, hasSleep, hasClear, hasMusic, hasWarnings, cb2, run_type) {
     let outputDiv = $("#output");
     let skip_faulty_found_errors = false;
     let warning_box_shown = false;
@@ -48088,85 +48066,19 @@ pygame.quit()
     turtleConfig.width = outputDiv.width();
     turtleConfig.worldWidth = outputDiv.width();
     let code_prefix = normal_prefix;
-    if (!hasTurtle && !hasPygame) {
+    if (!hasTurtle) {
       $("#turtlecanvas").empty();
     }
     if (hasTurtle) {
       code_prefix += turtle_prefix;
+      resetTurtleTarget();
       $("#turtlecanvas").show();
     }
     if (hasMusic) {
       code_prefix += music_prefix;
       $("#turtlecanvas").show();
     }
-    if (hasPygame) {
-      skulptExternalLibraries = {
-        "./extensions.js": {
-          path: theStaticRoot + "/vendor/skulpt-stdlib-extensions.js"
-        },
-        "./pygame.js": {
-          path: theStaticRoot + "/vendor/pygame_4_skulpt/init.js"
-        },
-        "./display.js": {
-          path: theStaticRoot + "/vendor/pygame_4_skulpt/display.js"
-        },
-        "./draw.js": {
-          path: theStaticRoot + "/vendor/pygame_4_skulpt/draw.js"
-        },
-        "./event.js": {
-          path: theStaticRoot + "/vendor/pygame_4_skulpt/event.js"
-        },
-        "./font.js": {
-          path: theStaticRoot + "/vendor/pygame_4_skulpt/font.js"
-        },
-        "./image.js": {
-          path: theStaticRoot + "/vendor/pygame_4_skulpt/image.js"
-        },
-        "./key.js": {
-          path: theStaticRoot + "/vendor/pygame_4_skulpt/key.js"
-        },
-        "./mouse.js": {
-          path: theStaticRoot + "/vendor/pygame_4_skulpt/mouse.js"
-        },
-        "./transform.js": {
-          path: theStaticRoot + "/vendor/pygame_4_skulpt/transform.js"
-        },
-        "./locals.js": {
-          path: theStaticRoot + "/vendor/pygame_4_skulpt/locals.js"
-        },
-        "./time.js": {
-          path: theStaticRoot + "/vendor/pygame_4_skulpt/time.js"
-        },
-        "./version.js": {
-          path: theStaticRoot + "/vendor/pygame_4_skulpt/version.js"
-        },
-        "./buttons.js": {
-          path: theStaticRoot + "/js/buttons.js"
-        }
-      };
-      code_prefix += pygame_prefix;
-      initSkulpt4Pygame();
-      initCanvas4PyGame();
-      let keybindingModal = $("#keybinding-modal");
-      const codeContainsInputFunctionBeforePygame = new RegExp("input\\([\\s\\S]*\\)[\\s\\S]*while not pygame_end", "gm").test(code);
-      if (!codeContainsInputFunctionBeforePygame) {
-        keybindingModal.show();
-      }
-      if (hasTurtle) {
-        keybindingModal.addClass("absolute");
-        keybindingModal.addClass("bottom-0");
-        keybindingModal.addClass("w-full");
-      } else {
-        keybindingModal.removeClass("absolute");
-        keybindingModal.removeClass("bottom-0");
-        keybindingModal.removeClass("w-full");
-      }
-      document.onkeydown = animateKeys;
-      hasKeybinding = true;
-    }
     code = code_prefix + code;
-    if (hasPygame)
-      code += pygame_suffix;
     if (run_type === "run") {
       Sk.configure({
         output: outf,
@@ -48188,7 +48100,7 @@ pygame.quit()
         },
         execLimit: function() {
           const level3 = theLevel;
-          if (hasTurtle || hasPygame || hasMusic) {
+          if (hasTurtle || hasMusic) {
             return 6e6;
           }
           if (level3 < 7) {
@@ -48210,10 +48122,8 @@ pygame.quit()
         load_variables(pythonVariables);
         $("#stopit").hide();
         $("#runit").show();
-        if (hasPygame) {
-          document.onkeydown = null;
-          $("#keybinding-modal").hide();
-        }
+        document.onkeydown = null;
+        $("#keybinding-modal").hide();
         if (hasTurtle) {
           $("#saveFilesContainer").show();
         }
@@ -48263,7 +48173,6 @@ pygame.quit()
         Code: code,
         source_map: sourceMap,
         has_turtle: hasTurtle,
-        has_pygame: hasPygame,
         has_clear: hasClear,
         has_music: hasMusic,
         Warning: hasWarnings
@@ -48274,10 +48183,8 @@ pygame.quit()
         $("#stopit").hide();
         $("#runit").show();
         stopDebug();
-        if (hasPygame) {
-          document.onkeydown = null;
-          $("#keybinding-modal").hide();
-        }
+        document.onkeydown = null;
+        $("#keybinding-modal").hide();
         if (hasTurtle) {
           $("#saveFilesContainer").show();
         }
@@ -48315,17 +48222,13 @@ pygame.quit()
     function builtinRead(x) {
       if (x in skulptExternalLibraries) {
         const tmpPath = skulptExternalLibraries[x]["path"];
-        if (x === "./pygame.js") {
-          return Sk.misceval.promiseToSuspension(fetch(tmpPath).then((r) => r.text()));
-        } else {
-          let request = new XMLHttpRequest();
-          request.open("GET", tmpPath, false);
-          request.send();
-          if (request.status !== 200) {
-            return void 0;
-          }
-          return request.responseText;
+        let request = new XMLHttpRequest();
+        request.open("GET", tmpPath, false);
+        request.send();
+        if (request.status !== 200) {
+          return void 0;
         }
+        return request.responseText;
       }
       if (Sk.builtinFiles === void 0 || Sk.builtinFiles["files"][x] === void 0)
         throw "File not found: '" + x + "'";
@@ -48360,9 +48263,6 @@ pygame.quit()
             }
             if (hasKeybinding) {
               document.onkeydown = animateKeys;
-              if (!hasTurtle) {
-                $("#keybinding-modal").show();
-              }
             }
             Sk.execStart = new Date();
             setTimeout(function() {
@@ -48410,49 +48310,6 @@ pygame.quit()
         keyElement.remove();
       }, 1500);
     }
-  }
-  function initCanvas4PyGame() {
-    let currentTarget = resetTurtleTarget();
-    let div1 = document.createElement("div");
-    if (currentTarget !== null) {
-      currentTarget.appendChild(div1);
-      $(div1).addClass("modal");
-      $(div1).css("text-align", "center");
-      $(div1).css("display", "none");
-      let div2 = document.createElement("div");
-      $(div2).addClass("modal-dialog modal-lg");
-      $(div2).css("display", "inline-block");
-      $(div2).width(void 0 + 42);
-      $(div2).attr("role", "document");
-      div1.appendChild(div2);
-      let div3 = document.createElement("div");
-      $(div3).addClass("modal-content");
-      div2.appendChild(div3);
-      let div4 = document.createElement("div");
-      $(div4).addClass("modal-header d-flex justify-content-between");
-      let div5 = document.createElement("div");
-      $(div5).addClass("modal-body");
-      let div6 = document.createElement("div");
-      $(div6).addClass("modal-footer");
-      let div7 = document.createElement("div");
-      $(div7).addClass("col-md-8");
-      let div8 = document.createElement("div");
-      $(div8).addClass("col-md-4");
-      div3.appendChild(div4);
-      div3.appendChild(div5);
-      div3.appendChild(div6);
-      $(Sk.main_canvas).css("border", "none");
-      $(Sk.main_canvas).css("display", "none");
-      div5.appendChild(Sk.main_canvas);
-    }
-  }
-  function initSkulpt4Pygame() {
-    Sk.main_canvas = document.createElement("canvas");
-    Sk.configure({
-      killableWhile: true,
-      killableFor: true,
-      __future__: Sk.python3
-    });
   }
   function speak(text) {
     var selectedURI = $("#speak_dropdown").val();
