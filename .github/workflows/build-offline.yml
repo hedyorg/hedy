@@ -7,10 +7,16 @@ jobs:
     runs-on: windows-latest
     steps:
     - uses: actions/checkout@v4
-    - uses: actions/setup-python@v2
+    - name: Set up Python 3.9
+      uses: actions/setup-python@v4
       with:
         python-version: 3.9
-
+        cache: 'pip'
+    - name: Set up NodeJS 18
+      uses: actions/setup-node@v3
+      with:
+        node-version: 18
+        cache: 'npm'
     - run: pip install -r requirements.txt
     - run: doit run _offline
     - uses: actions/upload-artifact@v2
