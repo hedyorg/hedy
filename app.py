@@ -971,6 +971,10 @@ def programs_page(user):
     if not from_user:
         public_profile = DATABASE.get_public_profile_settings(username)
 
+    keyword_lang = g.keyword_lang
+    adventure_names = hedy_content.Adventures(g.lang).get_adventure_names(keyword_lang)
+    swapped_adventure_names = {value: key for key, value in adventure_names.items()}
+
     level = request.args.get('level', default=None, type=str) or None
     adventure = request.args.get('adventure', default=None, type=str) or None
     page = request.args.get('page', default=None, type=str)
@@ -979,7 +983,7 @@ def programs_page(user):
 
     result = DATABASE.filtered_programs_for_user(from_user or username,
                                                  level=level,
-                                                 adventure=adventure,
+                                                 adventure=swapped_adventure_names.get(adventure),
                                                  submitted=submitted,
                                                  pagination_token=page,
                                                  limit=10)
@@ -1003,8 +1007,30 @@ def programs_page(user):
              }
         )
 
-    keyword_lang = g.keyword_lang
-    adventure_names = hedy_content.Adventures(g.lang).get_adventure_names(keyword_lang)
+    all_programs = DATABASE.filtered_programs_for_user(from_user or username,
+                                                       submitted=submitted,
+                                                       pagination_token=page)
+
+    programs_by_level = []
+    for item in all_programs:
+        programs_by_level.append(
+            {'level': item['level'],
+             'adventure_name': item.get('adventure_name'),
+             }
+        )
+
+    programs_by_adventure = []
+    for item in all_programs:
+        programs_by_adventure.append(
+            {'adventure_name': adventure_names.get(item.get('adventure_name')),
+             'level': item['level'],
+             }
+        )
+
+    sorted_level_programs = hedy_content.Adventures(
+        g.lang).get_sorted_level_programs(programs_by_level, adventure_names)
+    sorted_adventure_programs = hedy_content.Adventures(
+        g.lang).get_sorted_adventure_programs(programs_by_adventure)
 
     next_page_url = url_for('programs_page', **dict(request.args, page=result.next_page_token)
                             ) if result.next_page_token else None
@@ -1016,6 +1042,8 @@ def programs_page(user):
         current_page='programs',
         from_user=from_user,
         public_profile=public_profile,
+        sorted_level_programs=sorted_level_programs,
+        sorted_adventure_programs=sorted_adventure_programs,
         adventure_names=adventure_names,
         max_level=hedy.HEDY_MAX_LEVEL,
         next_page_url=next_page_url)
@@ -2500,14 +2528,49 @@ def public_user_page(username):
         return utils.error_page(error=404, ui_message=gettext('user_not_private'))
     user_public_info = DATABASE.get_public_profile_settings(username)
     page = request.args.get('page', default=None, type=str)
+
+    keyword_lang = g.keyword_lang
+    adventure_names = hedy_content.Adventures(g.lang).get_adventure_names(keyword_lang)
+    swapped_adventure_names = {value: key for key, value in adventure_names.items()}
+
+    level = request.args.get('level', default=None, type=str) or None
+    adventure = request.args.get('adventure', default=None, type=str) or None
+
     if user_public_info:
         user_programs = DATABASE.filtered_programs_for_user(username,
+                                                            level=level,
+                                                            adventure=swapped_adventure_names.get(adventure),
                                                             public=True,
                                                             limit=10,
                                                             pagination_token=page)
         next_page_token = user_programs.next_page_token
         user_programs = normalize_public_programs(user_programs)
         user_achievements = DATABASE.progress_by_username(username) or {}
+
+        all_programs = DATABASE.filtered_programs_for_user(username,
+                                                           public=True,
+                                                           pagination_token=page)
+
+        programs_by_level = []
+        for item in all_programs:
+            programs_by_level.append(
+                {'level': item['level'],
+                 'adventure_name': item.get('adventure_name'),
+                 }
+            )
+
+        programs_by_adventure = []
+        for item in all_programs:
+            programs_by_adventure.append(
+                {'adventure_name': adventure_names.get(item.get('adventure_name')),
+                 'level': item['level'],
+                 }
+            )
+
+        sorted_level_programs = hedy_content.Adventures(
+            g.lang).get_sorted_level_programs(programs_by_level, adventure_names)
+        sorted_adventure_programs = hedy_content.Adventures(
+            g.lang).get_sorted_adventure_programs(programs_by_adventure)
 
         favourite_program = None
         if 'favourite_program' in user_public_info and user_public_info['favourite_program']:
@@ -2532,7 +2595,10 @@ def public_user_page(username):
             last_achieved=last_achieved,
             user_achievements=user_achievements,
             certificate_message=certificate_message,
-            next_page_url=next_page_url)
+            next_page_url=next_page_url,
+            sorted_level_programs=sorted_level_programs,
+            sorted_adventure_programs=sorted_adventure_programs
+        )
     return utils.error_page(error=404, ui_message=gettext('user_not_private'))
 
 
