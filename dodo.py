@@ -48,10 +48,10 @@ if os.getenv('GITHUB_ACTION') and platform.system() == 'Windows':
     # subprocess.check_call('npx --help')
     # subprocess.check_call(['npx', '--help'])
     npx = 'npx.cmd'
+    bash = f'{msys_dir}\\bash.exe'
 else:
     npx = 'npx'
-
-bash = 'bash'
+    bash = 'bash'
 
 # The current Python interpreter, use to run other Python scripts as well
 python3 = sys.executable
