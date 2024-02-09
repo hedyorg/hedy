@@ -49,6 +49,7 @@ from website.auth import (current_user, is_admin, is_teacher, is_second_teacher,
                           forget_current_user, send_email)
 from website.log_fetcher import log_fetcher
 from website.frontend_types import Adventure, Program, ExtraStory, SaveInfo
+from website.database import FEEDBACK
 
 
 logConfig(LOGGING_CONFIG)
@@ -2224,25 +2225,30 @@ def store_parsons_order():
 @requires_teacher
 def teacher_feedback(user):
     body = request.form
-
-    # Todo: Add some request validation
+    print(body)
+    # Request validation
+    if 'message'not in body:
+        return make_response(jsonify({'error': 'Missing required fields'}), 400)
 
     feedback = {
+        'id': user.get('id'),
         'username': user.get('username'),
         'message': body.get('message'),
         'category': body.get('category'),
         'timestamp': str(datetime.datetime.now())
     }
 
-    # Todo: Implement the table on Hedy alpha and production
-    # DATABASE.store_feedback(feedback)
+    try:
+        DATABASE.store_feedback(feedback)  
+    except Exception as e:  
+        print(e) 
+        return make_response(jsonify({'error': 'Failed to store feedback'}), 500)
 
-    response = make_response('')
+    response = make_response(jsonify({'success': 'Feedback submitted successfully'}))
     response.headers["HX-Push-URL"] = 'false'
     response.headers["HX-Trigger"] = json.dumps({"hideFeedbackModal": "success"})
 
     return response
-
 
 @app.template_global()
 def current_language():
