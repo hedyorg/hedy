@@ -2663,7 +2663,7 @@ if __name__ == '__main__':
             os.environ[key] = value
 
     if getattr(sys, 'frozen', False) and hasattr(sys, '_MEIPASS'):
-        # We are running in PyInstaller. Cwd to the directory that has the data files.
+        # We are running via PyInstaller. Cd to the directory that has the data files.
         os.chdir(sys._MEIPASS)
 
     # For local debugging, fetch all static files on every request
