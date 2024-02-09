@@ -10,7 +10,7 @@ import utils
 from tests.Tester import HedyTester, Snippet
 from website.yaml_file import YamlFile
 
-fix_error = True
+fix_error = False
 # set this to True to revert broken snippets to their en counterpart automatically
 # this is useful for large Weblate PRs that need to go through, this fixes broken snippets
 if os.getenv('fix_for_weblate'):
