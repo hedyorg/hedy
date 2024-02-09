@@ -39,14 +39,17 @@ if os.getenv('GITHUB_ACTION') and platform.system() == 'Windows':
     # We need to explicitly invoke bash from this directory, otherwise
     # it will pick up a bash that requires WSL to run, which is not installed.
     # bash = 'C:\\Program Files\\Git\\bin\\bash.exe'
-    import subprocess
-    subprocess.check_call('dir C:\\hostedtoolcache\\windows\\node\\18.19.0\\x64')
-    subprocess.check_call('npx.cmd --version')
-    subprocess.check_call('npx --version')
-    subprocess.check_call('C:\\hostedtoolcache\\windows\\node\\18.19.0\\x64\\npx.cmd --version')
-    subprocess.check_call('C:\\hostedtoolcache\\windows\\node\\18.19.0\\x64\\npx --version')
-    subprocess.check_call('npx --help')
-    subprocess.check_call(['npx', '--help'])
+    #import subprocess
+    #subprocess.check_call('dir C:\\hostedtoolcache\\windows\\node\\18.19.0\\x64')
+    #subprocess.check_call('npx.cmd --version')
+    #subprocess.check_call('npx --version')
+    #subprocess.check_call('C:\\hostedtoolcache\\windows\\node\\18.19.0\\x64\\npx.cmd --version')
+    #subprocess.check_call('C:\\hostedtoolcache\\windows\\node\\18.19.0\\x64\\npx --version')
+    #subprocess.check_call('npx --help')
+    #subprocess.check_call(['npx', '--help'])
+    npx = 'npx.cmd'
+else:
+    npx = 'npx'
 
 bash = 'bash'
 
@@ -216,10 +219,10 @@ def task_typescript():
             # Use tsc to do type checking of the .ts files, but don't actually emit.
             # We will bundle using `esbuild`, which will properly handle including the `tw-elements`
             # library (which is ESM-only) from otherwise CommonJS packages.
-            ['npx', 'tsc', '--noEmit'],
+            [npx, 'tsc', '--noEmit'],
 
             # Then bundle JavaScript into a single bundle
-            ['npx', 'esbuild', 'static/js/index.ts',
+            [npx, 'esbuild', 'static/js/index.ts',
              '--bundle', '--sourcemap', '--target=es2017',
              '--global-name=hedyApp', '--platform=browser',
              '--outfile=static/js/appbundle.js'],
