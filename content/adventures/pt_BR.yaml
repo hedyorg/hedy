@@ -1032,37 +1032,37 @@ adventures:
                     ### Exercício
                     Depure este gerador de histórias aleatórias. Boa sorte!
                 example_code: |
-                    **Warning! This code needs to be debugged!**
+                    **Atenção! Este código precisa ser depurado!**
                     ```
-                    names = 'Tanya', 'Romy', 'Kayla', 'Aldrin', 'Ali'
-                    verbs='walking', 'skipping', 'cycling', 'driving', 'running'
-                    locations = 'on a mountaintop', 'in the supermarket', 'to the swimming pool'
-                    hiding_spots = 'behind a tree', under a table', in a box'
-                    sounds = 'a trumpet', 'a car crash', 'thunder'
-                    causes_of_noise = 'a television', 'a kid with firecrackers', 'a magic elephant', 'a dream'
+                    nomes = 'Tanya', 'Romy', 'Kayla', 'Aldrin', 'Ali'
+                    verbos='andando', 'pulando', 'andando de bicicleta', 'dirigindo', 'correndo'
+                    lugares = 'numa montanha', 'no supermercado', 'à piscina'
+                    esconderijos = 'atrás de uma árvore', debaixo de uma mesa', em uma caixa'
+                    sons = 'um trompete', 'um carro batendo', 'trovão'
+                    causas_do_barulho = 'uma televisão', 'uma criança com fogos de artifício', 'um elefante mágico', 'um sonho'
 
-                    chosen_ name = names at random
-                    chosen_verb = verbs at random
-                    chosen_location = 'locations at random'
-                    chosen_sounds = noises at random
-                    chosen_spot = hiding_spots random
-                    chosen_causes = causes_of_noise at random
+                    nome_ escolhido = nomes {at} {random}
+                    verbo_escolhido = verbos {at} {random}
+                    lugar_escolhido = 'lugares {at} {random}'
+                    sons_escolhidos = barulhos {at} {random}
+                    esconderijo_escolhido = esconderijos {random}
+                    causas_escolhidas = causas_do_barulho {at} {random}
 
-                    print chosen_name ' was ' chosen_verb ' ' chosen_location
-                    print 'when they suddenly heard a sound like ' sounds at random
-                    print chosen_name ' looked around, but they couldn't discover where the noise came from'
-                    print chosen_name ' hid ' chosen_spot'
-                    print 'They tried to look around, but couldn't see anything from there'
-                    hidden = 'yes'
-                    while hidden = 'yes'
-                        print chosen_name 'still didn't see anything'
-                    answer = ask 'does ' chosen_name ' move from their hiding spot?'
-                        if answer = 'yes'
-                            hidden == 'no'
-                    print 'chosen_name moved from' chosen_spot
-                    print 'And then they saw it was just' chosen_cause
-                    print chosen_name 'laughed and went on with their day'
-                    print The End
+                    {print} nome_escolhido ' estava ' verbo_escolhido ' ' lugar_escolhido
+                    {print} 'quando, de repente, ouviu o som de ' sons {at} {random}
+                    {print} nome_escolhido ' olhou em volta, mas não conseguiu descobrir de onde veio o barulho.'
+                    {print} nome_escolhido ' se escondeu ' esconderijo_escolhido'
+                    {print} 'e tentou olhar em volta, mas não conseguia ver nada de lá'
+                    escondido = 'sim'
+                    {while} escondido = 'sim'
+                        {print} nome_escolhido 'ainda não via nada.'
+                    resposta = {ask} 'Devia ' nome_escolhido ' sair de seu esconderijo?'
+                        {if} resposta = 'sim'
+                            escondido == 'não'
+                    {print} 'nome_escolhido saiu de seu esconderijo' esconderijo_escolhido
+                    {print} 'E então viu que era só' causa_escolhida
+                    {print} nome_escolhido 'riu e continuou seu dia'
+                    {print} Fim
                     ```
             16:
                 story_text: |-
@@ -1070,20 +1070,20 @@ adventures:
                     Depure este código. Boa sorte!
                     Dica: Certifique-se de mostrar a pontuação só uma vez, no fim.
                 example_code: |
-                    **Warning! This code needs to be debugged!**
+                    **Atenção! Este código precisa ser depurado!**
                     ```
-                    country = ['The Netherlands', 'Poland', 'Turkey', 'Zimbabwe', 'Thailand', 'Brasil', 'Peru', 'Australia', 'India', 'Romania' ]
-                    capitals = 'Amsterdam', 'Warshaw' 'Istanbul', 'Harare', 'Bangkok', 'Brasilia', 'Lima', 'Canberra', 'New Delhi', 'Bucharest'
-                    score = 0
-                    for i in range 0 to 10
-                        answer = ask 'What's the capital of ' countries[i]
-                        correct = capital[i]
-                        if answer = correct
-                            print 'Correct!'
-                        score = score + 1
-                        else
-                            print 'Wrong,' capitals[i] 'in the capital of' countries[i]
-                        print 'You scored ' score ' out of 10'
+                    país = ['Países Baixos', 'Polônia', 'Turquia', 'Zimbábue', 'Tailândia', 'Brasil', 'Peru', 'Austrália', 'Índia', 'Romênia' ]
+                    capitais = 'Amsterdã', 'Varsóvia' 'Istambul', 'Harare', 'Bangkok', 'Brasília', 'Lima', 'Camberra', 'Nova Delhi', 'Bucareste'
+                    pontuação = 0
+                    {for} i {in} {range} 0 {to} 10
+                        resposta = {ask} 'Qual é a capital de ' países[i]
+                        correta = capital[i]
+                        {if} resposta = correta
+                            {print} 'Correto!'
+                        pontuação = pontuação + 1
+                        {else}
+                            {print} 'Errado,' capitais[i] 'é a capital de' países[i]
+                        {print} 'Você pontuou ' pontuação ' de 10'
 
                     ```
             17:
@@ -1091,35 +1091,35 @@ adventures:
                     ### Exercício
                     Depure este código. Boa sorte!
                 example_code: |
-                    **Warning! This code needs to be debugged!**
+                    **Atenção! Este código precisa ser depurado!**
                     ```
-                    define food_order
-                        toppings = ask 'pepperoni, tuna, veggie or cheese?'
-                        size = ask 'big, medium or small?'
-                        number_of_pizza = ask 'How many these pizzas would you like?'
+                    {define} pedido_de_comida
+                        coberturas = {ask} 'calabresa, atum, vegetais ou queijo?'
+                        tamanho = {ask} 'grande, média ou pequena?'
+                        número_de_pizza = {ask} 'Quantas dessa pizza você vai querer?'
 
-                        print 'YOU ORDERED'
-                        print number_of_pizzas ' size  ' topping ' pizza'
+                        {print} 'VOCÊ PEDIU'
+                        {print} número_de_pizzas ' pizzas de  ' recheio ' tamanho ' tamanho
 
-                    define drinks_order
-                        drink = ask 'water, coke, icetea, lemonade or coffee?'
-                        number_of_drinks = ask 'How many of these drinks would you like?'
+                    {define} pedido_de_bebida
+                        bebida = {ask} 'água, coca, guaraná, limonada ou café?'
+                        número_de_bebidas = {ask} 'Quantas dessa bebida você vai querer?'
 
-                        print 'YOU ORDERED'
-                        print number_of_drinks ' ' drink
+                        {print} 'VOCÊ PEDIU'
+                        {print} número_de_bebidas ' ' bebida
 
-                    'Welcome to Hedy pizza'
-                    more_food = ask 'Would you like to order a pizza?'
-                    while more_food = 'yes'
-                        return food_order
-                        more_food = ask 'Would you like to order a pizza?'
-                    more_drinks = ask 'Would you like to order some drinks?'
-                    while more_drinks == 'yes'
-                        call drink_order
-                        more_drinks == ask 'Would you like to order more drinks?'
+                    'Bem-vindo(a) à pizzaria Hedy'
+                    mais_comida = {ask} 'Gostaria de pedir uma pizza?'
+                    {while} mais_comida = 'sim'
+                        {return} pedido_de_comida
+                        mais_comida = {ask} 'Gostaria de pedir uma pizza?'
+                    mais_bebidas = {ask} 'Gostaria de pedir bebidas?'
+                    {while} mais_bebidas == 'sim'
+                        {call} pedido_de_bebida
+                        mais_bebidas == {ask} 'Gostaria de pedir mais bebidas?'
 
 
-                    print 'Thanks for ordering!'
+                    {print} 'Agradecemos pelo pedido!'
                     ```
             18:
                 story_text: |-
@@ -1157,7 +1157,7 @@ adventures:
                     Preparado? Então vá para a próxima aba para aprender o seu primeiro comando!
                 example_code: |
                     ```
-                    {print} Hello world!
+                    {print} Olá mundo!
                     ```
             2:
                 story_text: |
@@ -1268,12 +1268,12 @@ adventures:
                     ```
             11:
                 story_text: |
-                    You have reached level 11, you're doing great! In the higher levels, Hedy is focussing more and more on teaching you the programming language Python.
-                    In Python there is no `{repeat}` command, but there is a command that works like {repeat}. Are you curious to find out how to say `{repeat}` in Python language? Quickly go on to find out!
+                    Você chegou ao nível 11, está indo muito bem! Conforme os níveis aumentam, Hedy foca cada vez mais em te ensinar a linguagem de programação Python.
+                    Em Python, não há um comando `{repeat}`, mas existe um comando que funciona da mesma forma que `{repeat}`. Ficou curioso(a) para saber como dizer `{repeat}` na linguagem Python? Rápido, vamos descobrir!
             12:
-                story_text: |-
-                    **Números decimais**
-                    Até agora, a Hedy não permitia números decimais como 1,5, mas agora permitimos isso. Observe que os computadores usam o `.` para números decimais.
+                story_text: |
+                    Talvez você tenha tentado usar números decimais na sua aventura do restaurante. Se sim, você provavelmente notou que Hedy não os entendia ainda e sempre os arredondava.
+                    A partir deste nível, você pode usar números decimais.
                 example_code: |
                     ```
                     {print} 'Dois e meio mais dois e meio é...'
@@ -2353,12 +2353,12 @@ adventures:
             6:
                 story_text: |2
 
-                                              In this level you learn something new: you can now also calculate.
+                                                In this level you learn something new: you can now also calculate.
 
-                                              The plus is easy, you write it like with math: `5 + 5` for example. The minus also works fine, it is `5 - 5`.
+                                                The plus is easy, you write it like with math: `5 + 5` for example. The minus also works fine, it is `5 - 5`.
 
-                                              The times is a bit different, because there is no times symbol on your keyboard. Just search, there really isn't!
-                                              That is why we multiply with the asterisk above 8: `5 * 5`. Read that as "5 times 5" that helps you remember it best.
+                                                The times is a bit different, because there is no times symbol on your keyboard. Just search, there really isn't!
+                                                That is why we multiply with the asterisk above 8: `5 * 5`. Read that as "5 times 5" that helps you remember it best.
                 example_code: |
                     ```
                     {print} '5 plus 5 is ' 5 + 5
