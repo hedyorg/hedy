@@ -1,0 +1,19 @@
+on:
+  workflow_dispatch: {}
+  pull_request: {}
+
+jobs:
+  build:
+    runs-on: windows-latest
+    steps:
+    - uses: actions/checkout@v4
+    - uses: actions/setup-python@v2
+      with:
+        python-version: 3.8
+
+    - run: pip install -r requirements.txt
+    - run: doit run _offline
+    - uses: actions/upload-artifact@v2
+      with:
+        path: dist/*
+      # TODO: Create and upload to release

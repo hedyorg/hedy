@@ -2653,6 +2653,19 @@ if __name__ == '__main__':
     # own file loading routines also hot-reload.
     utils.set_debug_mode(not os.getenv('NO_DEBUG_MODE'))
 
+    # Set some default environment variables for development mode
+    env_defaults = dict(
+        BASE_URL=f"http://localhost:{config['port']}/",
+        ADMIN_USER="admin",
+    )
+    for key, value in env_defaults.items():
+        if key not in os.environ:
+            os.environ[key] = value
+
+    if getattr(sys, 'frozen', False) and hasattr(sys, '_MEIPASS'):
+        # We are running in PyInstaller. Cwd to the directory that has the data files.
+        os.chdir(sys._MEIPASS)
+
     # For local debugging, fetch all static files on every request
     app.config['SEND_FILE_MAX_AGE_DEFAULT'] = None
 

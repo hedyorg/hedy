@@ -356,6 +356,21 @@ def task_devdb():
         targets=['dev_database.json'],
     )
 
+def task__offline():
+    """Build the offline Hedy distribution."""
+
+    return dict(
+        title=lambda _: 'Build offline Hedy',
+        task_dep=['backend', 'frontend'],
+        actions=[
+            'pyinstaller -y app.spec',
+            # We copy this here instead of in the 'spec' file so that we can rename
+            # the file (spec file copies cannot do that).
+            'cp data-for-testing.json dist/offlinehedy/_internal/dev_database.json',
+        ],
+    )
+
+
 
 ######################################################################################
 # Below this line are helpers for the task definitions
