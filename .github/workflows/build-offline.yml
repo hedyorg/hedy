@@ -17,7 +17,10 @@ jobs:
       with:
         node-version: 18
         cache: 'npm'
+    - name: 'Install npx'
+      run: npm install -g npx
     - run: pip install -r requirements.txt
+      name: 'Python requirements'
     - run: doit run _offline
     - uses: actions/upload-artifact@v2
       with:
