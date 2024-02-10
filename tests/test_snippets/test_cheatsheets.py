@@ -61,7 +61,7 @@ if lang:
 
 # This allows filtering out languages locally, but will throw an error
 # on GitHub Actions (or other CI system) so nobody accidentally commits this.
-if os.getenv('CI') and (lang):
+if os.getenv('CI') and (lang or fix_error == True):
     raise RuntimeError('Whoops, it looks like you left a snippet filter in!')
 
 
