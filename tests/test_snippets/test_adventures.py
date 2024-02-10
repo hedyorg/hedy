@@ -84,7 +84,7 @@ Hedy_snippets = [(s.name, s) for s in collect_snippets(path='../../content/adven
 
 # This allows filtering out languages locally, but will throw an error
 # on GitHub Actions (or other CI system) so nobody accidentally commits this.
-if os.getenv('CI') and (filtered_language or level or fix_error == True):
+if os.getenv('CI') and (filtered_language or level or fix_error is True):
     raise RuntimeError('Whoops, it looks like you left a snippet filter in!')
 
 Hedy_snippets = HedyTester.translate_keywords_in_snippets(Hedy_snippets)
