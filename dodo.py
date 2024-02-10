@@ -383,7 +383,7 @@ def task__offline():
             'pyinstaller -y app.spec',
             # We copy this here instead of in the 'spec' file so that we can rename
             # the file (spec file copies cannot do that).
-            'cp data-for-testing.json dist/offlinehedy/_internal/dev_database.json',
+            'cp data-for-testing.json dist/offlinehedy/database.json',
             # There are some research papers in the distribution that take up a lot
             # of space.
             'rm -rf dist/offlinehedy/_internal/content/research/*',

@@ -24,7 +24,26 @@ jobs:
     - run: doit run _offline
     - name: Smoke test the build
       run: cd dist && offlinehedy/run-hedy-server --smoketest
-    - uses: actions/upload-artifact@v2
+
+    - uses: fregante/daily-version-action@v2
+      name: Create tag if necessary
+      id: daily-version
+
+    - name: Create zip file
+      run: |
+        cd dist/offlinehedy && zip -r ../../offlinehedy-${{ steps.daily-version.outputs.version }}.zip .
+
+    - if: steps.daily-version.outputs.created
+      name: Create Release
+      uses: shogo82148/actions-create-release@v1
+      id: create_release
       with:
-        path: dist/*
-      # TODO: Create and upload to release
+        tag_name: ${{ steps.daily-version.outputs.version }}
+        generate_release_notes: true
+
+    - name: Upload Assets
+      if: steps.daily-version.outputs.created
+      uses: shogo82148/actions-upload-release-asset@v1
+      with:
+        upload_url: ${{ steps.create_release.outputs.upload_url }}
+        asset_path: '*.zip'
