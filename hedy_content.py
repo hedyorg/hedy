@@ -1,5 +1,6 @@
 import logging
 import os
+from os import path
 
 import static_babel_content
 
@@ -392,9 +393,11 @@ HOUR_OF_CODE_ADVENTURES = {
     ]
 }
 
+content_dir = path.join(path.dirname(__file__), 'content')
+translations_dir = path.join(path.dirname(__file__), 'translations')
 
 RESEARCH = {}
-for paper in sorted(os.listdir('content/research'),
+for paper in sorted(os.listdir(f'{content_dir}/research'),
                     key=lambda x: int(x.split("_")[-1][:-4]),
                     reverse=True):
     # An_approach_to_describing_the_semantics_of_Hedy_2022.pdf -> 2022, An
@@ -403,16 +406,18 @@ for paper in sorted(os.listdir('content/research'),
     name = name[-4:] + ". " + name[:-5]
     RESEARCH[name] = paper
 
+
+
 # load all available languages in dict
 # list_translations of babel does about the same, but without territories.
 languages = {}
-if not os.path.isdir('translations'):
+if not os.path.isdir(translations_dir):
     # should not be possible, but if it's moved someday, EN would still be working.
     ALL_LANGUAGES['en'] = 'English'
     ALL_KEYWORD_LANGUAGES['en'] = 'EN'
 
-for folder in os.listdir('translations'):
-    locale_dir = os.path.join('translations', folder, 'LC_MESSAGES')
+for folder in os.listdir(translations_dir):
+    locale_dir = os.path.join(translations_dir, folder, 'LC_MESSAGES')
     if not os.path.isdir(locale_dir):
         continue
     if filter(lambda x: x.endswith('.mo'), os.listdir(locale_dir)):

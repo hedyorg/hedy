@@ -6,6 +6,7 @@ import datetime
 import time
 import functools
 import os
+from os import path
 import re
 import string
 import random
@@ -23,21 +24,23 @@ commonmark_renderer = commonmark.HtmlRenderer()
 
 IS_WINDOWS = os.name == 'nt'
 
+prefixes_dir = path.join(path.dirname(__file__), 'prefixes')
+
 # Define code that will be used if some turtle command is present
-with open('prefixes/turtle.py', encoding='utf-8') as f:
+with open(f'{prefixes_dir}/turtle.py', encoding='utf-8') as f:
     TURTLE_PREFIX_CODE = f.read()
 
 # Preamble that will be used for non-Turtle programs
 # numerals list generated from: https://replit.com/@mevrHermans/multilangnumerals
-with open('prefixes/normal.py', encoding='utf-8') as f:
+with open(f'{prefixes_dir}/normal.py', encoding='utf-8') as f:
     NORMAL_PREFIX_CODE = f.read()
 
 # Define code that will be used if a pressed command is used
-with open('prefixes/pygame.py', encoding='utf-8') as f:
+with open(f'{prefixes_dir}/pygame.py', encoding='utf-8') as f:
     PYGAME_PREFIX_CODE = f.read()
 
 # Define code that will be used if music code is used
-with open('prefixes/music.py', encoding='utf-8') as f:
+with open(f'{prefixes_dir}/music.py', encoding='utf-8') as f:
     MUSIC_PREFIX_CODE = f.read()
 
 

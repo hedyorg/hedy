@@ -2648,10 +2648,20 @@ def split_at(n, xs):
 
 
 if __name__ == '__main__':
+    is_offline = getattr(sys, 'frozen', False) and hasattr(sys, '_MEIPASS')
+
+    if is_offline:
+        # We are running in a standalone build made using pyinstaller.
+        # cd to the directory that has the data files, disable debug mode, and
+        # use port 80 (unless overridden)
+        os.chdir(sys._MEIPASS)
+        config['port'] = int(os.environ.get('PORT', 80))
+
     # Start the server on a developer machine. Flask is initialized in DEBUG mode, so it
     # hot-reloads files. We also flip our own internal "debug mode" flag to True, so our
     # own file loading routines also hot-reload.
-    utils.set_debug_mode(not os.getenv('NO_DEBUG_MODE'))
+    no_debug_mode_requested = os.getenv('NO_DEBUG_MODE')
+    utils.set_debug_mode(not no_debug_mode_requested)
 
     # Set some default environment variables for development mode
     env_defaults = dict(
@@ -2662,12 +2672,9 @@ if __name__ == '__main__':
         if key not in os.environ:
             os.environ[key] = value
 
-    if getattr(sys, 'frozen', False) and hasattr(sys, '_MEIPASS'):
-        # We are running via PyInstaller. Cd to the directory that has the data files.
-        os.chdir(sys._MEIPASS)
-
-    # For local debugging, fetch all static files on every request
-    app.config['SEND_FILE_MAX_AGE_DEFAULT'] = None
+    if not is_offline:
+        # For local debugging, fetch all static files on every request
+        app.config['SEND_FILE_MAX_AGE_DEFAULT'] = None
 
     # If we are running in a Python debugger, don't use flasks reload mode. It creates
     # subprocesses which make debugging harder.
@@ -2682,9 +2689,12 @@ if __name__ == '__main__':
         start_snapshot = tracemalloc.take_snapshot()
 
     on_server_start()
-    logger.debug('app starting in debug mode')
+    debug = not (is_in_debugger or profile_memory or is_offline)
+    if debug:
+        logger.debug('app starting in debug mode')
+
     # Threaded option enables multiple instances for multiple user access support
-    app.run(threaded=True, debug=not is_in_debugger and not profile_memory,
+    app.run(threaded=True, debug=debug,
             port=config['port'], host="0.0.0.0")
 
     # See `Procfile` for how the server is started on Heroku.

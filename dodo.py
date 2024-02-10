@@ -386,7 +386,7 @@ def task__offline():
             'cp data-for-testing.json dist/offlinehedy/_internal/dev_database.json',
             # There are some research papers in the distribution that take up a lot
             # of space.
-            'rm -rf dist/offlinehedy/_internal/content/research',
+            'rm -rf dist/offlinehedy/_internal/content/research/*',
         ],
     )
 
