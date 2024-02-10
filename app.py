@@ -2657,6 +2657,15 @@ if __name__ == '__main__':
         os.chdir(sys._MEIPASS)
         config['port'] = int(os.environ.get('PORT', 80))
 
+        # We have this option for testing the offline build. A lot of modules read
+        # files upon import, and those happen before the offline build 'cd' we do
+        # here and need to be written to use __file__. During the offline build,
+        # we want to run the actual code to see that nobody added file accesses that
+        # crash, but we don't actually want to start the server.
+        smoke_test = '--smoketest' in sys.argv
+        if smoke_test:
+            sys.exit(0)
+
     # Start the server on a developer machine. Flask is initialized in DEBUG mode, so it
     # hot-reloads files. We also flip our own internal "debug mode" flag to True, so our
     # own file loading routines also hot-reload.

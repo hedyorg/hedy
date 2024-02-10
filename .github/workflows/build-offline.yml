@@ -22,6 +22,8 @@ jobs:
     - run: pip install -r requirements.txt
       name: 'Python requirements'
     - run: doit run _offline
+    - name: Smoke test the build
+      run: cd dist && offlinehedy/run-hedy-server --smoketest
     - uses: actions/upload-artifact@v2
       with:
         path: dist/*
