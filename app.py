@@ -955,6 +955,9 @@ def programs_page(user):
         return redirect(url, code=302)
 
     from_user = request.args.get('user') or None
+    if from_user and from_user == "None":
+        from_user = None
+
     # If from_user -> A teacher is trying to view the user programs
     if from_user and not is_admin(user):
         if not is_teacher(user):
@@ -968,6 +971,10 @@ def programs_page(user):
     if not from_user:
         public_profile = DATABASE.get_public_profile_settings(username)
 
+    keyword_lang = g.keyword_lang
+    adventure_names = hedy_content.Adventures(g.lang).get_adventure_names(keyword_lang)
+    swapped_adventure_names = {value: key for key, value in adventure_names.items()}
+
     level = request.args.get('level', default=None, type=str) or None
     adventure = request.args.get('adventure', default=None, type=str) or None
     page = request.args.get('page', default=None, type=str)
@@ -976,7 +983,7 @@ def programs_page(user):
 
     result = DATABASE.filtered_programs_for_user(from_user or username,
                                                  level=level,
-                                                 adventure=adventure,
+                                                 adventure=swapped_adventure_names.get(adventure),
                                                  submitted=submitted,
                                                  pagination_token=page,
                                                  limit=10)
@@ -985,10 +992,11 @@ def programs_page(user):
     for item in result:
         date = utils.delta_timestamp(item['date'])
         # This way we only keep the first 4 lines to show as preview to the user
-        code = "\n".join(item['code'].split("\n")[:4])
+        preview_code = "\n".join(item['code'].split("\n")[:4])
         programs.append(
             {'id': item['id'],
-             'code': code,
+             'preview_code': preview_code,
+             'code': item['code'],
              'date': date,
              'level': item['level'],
              'name': item['name'],
@@ -999,8 +1007,30 @@ def programs_page(user):
              }
         )
 
-    keyword_lang = g.keyword_lang
-    adventure_names = hedy_content.Adventures(g.lang).get_adventure_names(keyword_lang)
+    all_programs = DATABASE.filtered_programs_for_user(from_user or username,
+                                                       submitted=submitted,
+                                                       pagination_token=page)
+
+    programs_by_level = []
+    for item in all_programs:
+        programs_by_level.append(
+            {'level': item['level'],
+             'adventure_name': item.get('adventure_name'),
+             }
+        )
+
+    programs_by_adventure = []
+    for item in all_programs:
+        programs_by_adventure.append(
+            {'adventure_name': adventure_names.get(item.get('adventure_name')),
+             'level': item['level'],
+             }
+        )
+
+    sorted_level_programs = hedy_content.Adventures(
+        g.lang).get_sorted_level_programs(programs_by_level, adventure_names)
+    sorted_adventure_programs = hedy_content.Adventures(
+        g.lang).get_sorted_adventure_programs(programs_by_adventure)
 
     next_page_url = url_for('programs_page', **dict(request.args, page=result.next_page_token)
                             ) if result.next_page_token else None
@@ -1012,6 +1042,8 @@ def programs_page(user):
         current_page='programs',
         from_user=from_user,
         public_profile=public_profile,
+        sorted_level_programs=sorted_level_programs,
+        sorted_adventure_programs=sorted_adventure_programs,
         adventure_names=adventure_names,
         max_level=hedy.HEDY_MAX_LEVEL,
         next_page_url=next_page_url)
@@ -1174,6 +1206,8 @@ def hour_of_code(level, program_id=None):
                     print("Error: there is an openings date without a level")
 
     if 'levels' in customizations and level not in available_levels:
+        if available_levels:
+            return index(available_levels[0], program_id)
         return utils.error_page(error=403, ui_message=gettext('level_not_class'))
 
     # At this point we can have the following scenario:
@@ -1189,7 +1223,7 @@ def hour_of_code(level, program_id=None):
             # Todo: How can we fix this without a re-load?
             quiz_stats = DATABASE.get_quiz_stats([current_user()['username']])
             # Only check the quiz threshold if there is a quiz to obtain a score on the previous level
-            if level > 1 and QUIZZES[g.lang].get_quiz_data_for_level(level - 1):
+            if level - 1 in available_levels and level > 1 and QUIZZES[g.lang].get_quiz_data_for_level(level - 1):
                 scores = [x.get('scores', []) for x in quiz_stats if x.get('level') == level - 1]
                 scores = [score for week_scores in scores for score in week_scores]
                 max_score = 0 if len(scores) < 1 else max(scores)
@@ -1258,6 +1292,8 @@ def hour_of_code(level, program_id=None):
 
     max_level = hedy.HEDY_MAX_LEVEL
     level_number = int(level)
+    prev_level, next_level = utils.find_prev_next_levels(
+        list(available_levels), level_number)
 
     commands = hedy.commands_per_level.get(level)
     return render_template(
@@ -1265,8 +1301,9 @@ def hour_of_code(level, program_id=None):
         level_nr=str(level_number),
         level=level_number,
         current_page='Hour of Code',
-        prev_level=level_number - 1 if level_number > 1 else None,
-        next_level=level_number + 1 if level_number < max_level else None,
+        max_level=max_level,
+        prev_level=prev_level,
+        next_level=next_level,
         HOC_tracking_pixel=True,
         customizations=customizations,
         hide_cheatsheet=hide_cheatsheet,
@@ -1281,7 +1318,6 @@ def hour_of_code(level, program_id=None):
         tutorial=tutorial,
         latest=version(),
         quiz=quiz,
-        max_level=hedy.HEDY_MAX_LEVEL,
         quiz_questions=quiz_questions,
         cheatsheet=cheatsheet,
         blur_button_available=False,
@@ -1343,6 +1379,8 @@ def index(level, program_id):
                     print("Error: there is an openings date without a level")
 
     if 'levels' in customizations and level not in available_levels:
+        if available_levels:
+            return index(available_levels[0], program_id)
         return utils.error_page(error=403, ui_message=gettext('level_not_class'))
 
     # At this point we can have the following scenario:
@@ -1361,7 +1399,8 @@ def index(level, program_id):
             quiz_stats = DATABASE.get_quiz_stats([current_user()['username']])
             # Not current leve-quiz's data because some levels may have no data for quizes,
             # but we still need to check for the threshold.
-            if level > 1 and (not level_quiz_data or QUIZZES[g.lang].get_quiz_data_for_level(level - 1)):
+            if level - 1 in available_levels and level > 1 and \
+                    (not level_quiz_data or QUIZZES[g.lang].get_quiz_data_for_level(level - 1)):
                 scores = [x.get('scores', []) for x in quiz_stats if x.get('level') == level - 1]
                 scores = [score for week_scores in scores for score in week_scores]
                 max_score = 0 if len(scores) < 1 else max(scores)
@@ -1436,6 +1475,8 @@ def index(level, program_id):
 
     max_level = hedy.HEDY_MAX_LEVEL
     level_number = int(level)
+    prev_level, next_level = utils.find_prev_next_levels(
+        list(available_levels), level_number)
 
     commands = hedy.commands_per_level.get(level)
     return render_template(
@@ -1443,9 +1484,9 @@ def index(level, program_id):
         level_nr=str(level_number),
         level=level_number,
         current_page='hedy',
-        prev_level=level_number - 1 if level_number > 1 else None,
-        next_level=level_number + 1 if level_number < max_level else None,
-        max_level=hedy.HEDY_MAX_LEVEL,
+        max_level=max_level,
+        prev_level=prev_level,
+        next_level=next_level,
         customizations=customizations,
         hide_cheatsheet=hide_cheatsheet,
         enforce_developers_mode=enforce_developers_mode,
@@ -1548,11 +1589,14 @@ def view_program(user, id):
                            **arguments_dict)
 
 
-@app.route('/render_code/<level>/<code>', methods=['GET'])
-def render_code_in_editor(level, code):
+@app.route('/render_code/<level>/', methods=['GET'])
+def render_code_in_editor(level):
+    code = request.args['code']
 
     try:
         level = int(level)
+        if level == 0:  # in level 0, the intro slides, we use codes from level 1
+            level = 1
     except BaseException:
         return utils.error_page(error=404, ui_message=gettext('no_such_level'))
 
@@ -2484,14 +2528,49 @@ def public_user_page(username):
         return utils.error_page(error=404, ui_message=gettext('user_not_private'))
     user_public_info = DATABASE.get_public_profile_settings(username)
     page = request.args.get('page', default=None, type=str)
+
+    keyword_lang = g.keyword_lang
+    adventure_names = hedy_content.Adventures(g.lang).get_adventure_names(keyword_lang)
+    swapped_adventure_names = {value: key for key, value in adventure_names.items()}
+
+    level = request.args.get('level', default=None, type=str) or None
+    adventure = request.args.get('adventure', default=None, type=str) or None
+
     if user_public_info:
         user_programs = DATABASE.filtered_programs_for_user(username,
+                                                            level=level,
+                                                            adventure=swapped_adventure_names.get(adventure),
                                                             public=True,
                                                             limit=10,
                                                             pagination_token=page)
         next_page_token = user_programs.next_page_token
         user_programs = normalize_public_programs(user_programs)
         user_achievements = DATABASE.progress_by_username(username) or {}
+
+        all_programs = DATABASE.filtered_programs_for_user(username,
+                                                           public=True,
+                                                           pagination_token=page)
+
+        programs_by_level = []
+        for item in all_programs:
+            programs_by_level.append(
+                {'level': item['level'],
+                 'adventure_name': item.get('adventure_name'),
+                 }
+            )
+
+        programs_by_adventure = []
+        for item in all_programs:
+            programs_by_adventure.append(
+                {'adventure_name': adventure_names.get(item.get('adventure_name')),
+                 'level': item['level'],
+                 }
+            )
+
+        sorted_level_programs = hedy_content.Adventures(
+            g.lang).get_sorted_level_programs(programs_by_level, adventure_names)
+        sorted_adventure_programs = hedy_content.Adventures(
+            g.lang).get_sorted_adventure_programs(programs_by_adventure)
 
         favourite_program = None
         if 'favourite_program' in user_public_info and user_public_info['favourite_program']:
@@ -2516,7 +2595,10 @@ def public_user_page(username):
             last_achieved=last_achieved,
             user_achievements=user_achievements,
             certificate_message=certificate_message,
-            next_page_url=next_page_url)
+            next_page_url=next_page_url,
+            sorted_level_programs=sorted_level_programs,
+            sorted_adventure_programs=sorted_adventure_programs
+        )
     return utils.error_page(error=404, ui_message=gettext('user_not_private'))
 
 

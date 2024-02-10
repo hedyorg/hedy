@@ -15,8 +15,8 @@ levels:
             correct_answer: A
             question_score: '10'
         2:
-            question_text: Qual comando faz o texto ser mostrado?
-            code: ___ Hello!
+            question_text: O que deve ser colocado na lacuna para que o texto Olá! apareça na tela?
+            code: _ Olá!
             mp_choice_options:
             -   option: |-
                     ```
@@ -38,7 +38,7 @@ levels:
                     {ask}
                     ```
                 feedback: Com `{ask}`, você pode fazer uma pergunta.
-            hint: _?_ Olá mundo!
+            hint: _ Olá mundo!
             correct_answer: B
             question_score: '10'
         3:
@@ -76,8 +76,8 @@ levels:
             mp_choice_options:
             -   option: O `{print}` na linha 1 está faltando.
                 feedback: Correto!
-            -   option: A linha 1 está escrita errado.
-                feedback: A linha 1 está escrita de propósito; Hedy ainda não sabe usar apóstrofos.
+            -   option: O comando na linha 2 está escrito errado.
+                feedback: O comando está escrito corretamente.
             -   option: '`{echo}` não é um comando.'
                 feedback: '`{echo}` é um comando, há um outro erro.'
             -   option: Nada! Este é um código perfeito!
@@ -88,8 +88,8 @@ levels:
         5:
             question_text: Qual comando está faltando na linha 2?
             code: |-
-                {ask} Qual é seu bichinho de estimação favorito?
-                _?_ Então seu bichinho de estimação favorito é...
+                {ask} Qual é o seu bichinho de estimação favorito?
+                _ Então o seu bichinho de estimação favorito é...
             mp_choice_options:
             -   option: |-
                     ```
@@ -117,9 +117,9 @@ levels:
         6:
             question_text: O que está errado com este código?
             code: |-
-                {print} Oi sou a Hedy!
-                {print} Qual time de futebol você torce?
-                {echo} Você apoia...
+                {print} Oi, sou a Hedy!
+                {print} Para que time de futebol você torce?
+                {echo} Você torce para...
                 {print} Legal! Eu também!
             mp_choice_options:
             -   option: Na linha 1, `{print}` deve ser substituído por `{ask}`.
@@ -153,11 +153,11 @@ levels:
             correct_answer: D
             question_score: '10'
         8:
-            question_text: Como você usa o comando `{echo}`?
+            question_text: Como se usa o comando `{echo}`?
             mp_choice_options:
             -   option: Você pode usá-lo para fazer uma pergunta com `{ask}`.
                 feedback: É para isso que serve `{ask}`!
-            -   option: Você pode usar para imprimir texto.
+            -   option: Você pode usá-lo exatamente da mesma forma que o comando `{print}`.
                 feedback: É para isso que serve `{print}`!
             -   option: Você pode usá-lo para repetir uma resposta.
                 feedback: Bom trabalho!
@@ -185,40 +185,40 @@ levels:
             correct_answer: B
             question_score: '10'
         10:
-            question_text: Which output will be in your outputscreen after you've run this code?
+            question_text: O que vai aparecer na sua tela de saída depois de executar este código?
             code: |-
-                {ask} Are you ready to go to level 2?
+                {ask} Você está pronto(a) para ir ao nível 2?
                 {echo}
                 {echo}
             mp_choice_options:
-            -   option: Are you ready to go to level 2?
-                feedback: There are two echo commands
+            -   option: Você está pronto(a) para ir ao nível 2?
+                feedback: Há dois comandos `{echo}`
             -   option: |-
                     Yes!
                     Yes!
                 feedback: Great job!
-            -   option: Yes!
-                feedback: There are two echo commands
+            -   option: Sim!
+                feedback: Há dois comandos `{echo}`
             -   option: |-
-                    Are you ready to go to level 2?
-                    Yes!
-                feedback: There are two echo commands
-            hint: Let's go!
+                    Você está pronto(a) para ir ao nível 2?
+                    Sim!
+                feedback: Há dois comandos `{echo}`
+            hint: Vamos lá!
             correct_answer: B
             question_score: '10'
     2:
         1:
-            question_text: Which statement is true?
+            question_text: Qual das afirmações é verdadeira?
             mp_choice_options:
-            -   option: In level 2 the `{print}` command doesn't exist anymore
-                feedback: '`{print}` still works'
-            -   option: In level 2 the `{ask}` command doesn't exist anymore
-                feedback: '`{ask}` still works!'
-            -   option: In level 2 the `{echo}` command doesn't exist anymore
-                feedback: Good
-            -   option: In level 2 all the level 1 commands still work
-                feedback: No one command doesn't work anymore.
-            hint: '`{print}` and `{ask}` still exist.'
+            -   option: Você pode usar o comando `{print}` para fazer perguntas.
+                feedback: É para isso que serve o `{ask}`
+            -   option: Você pode usar o comando `{ask}` para repetir respostas.
+                feedback: Não é verdade
+            -   option: Com o comando `{print}` você pode fazer o texto aparecer na tela
+                feedback: Boa
+            -   option: Com o comando `{sleep}`, você pode remover texto da tela.
+                feedback: Não é assim que o `{sleep}` funciona.
+            hint: '`{print}` ainda funciona da mesma forma que no nível 1'
             correct_answer: C
             question_score: '10'
         2:
@@ -226,22 +226,22 @@ levels:
             mp_choice_options:
             -   option: |-
                     ```
-                    name {is} {ask} What is your name?
+                    nome {is} {ask} Qual é o seu nome?
                     ```
                 feedback: Super!
             -   option: |-
                     ```
-                    {ask} {is} name What is your name
+                    {ask} {is} nome Qual é o seu nome
                     ```
                 feedback: The words are right, the order is not!
             -   option: |-
                     ```
-                    {ask} What is your name?
+                    {ask} Qual é o seu nome?
                     ```
                 feedback: This worked in level 1, but in level 2 and up it works differently.
             -   option: |-
                     ```
-                    {ask} What is your name? {is} name
+                    {ask} Qual é o seu nome? {is} nome
                     ```
                 feedback: The words are right, the order isn't!
             hint: '`{ask}` doesn''t work like in level 1'
@@ -258,7 +258,7 @@ levels:
             -   option: Marleen goes to the market.
                 feedback: The second part of the sentence isn't left out!
             -   option: Marleen goes to the market and she buys an apple.
-                feedback: Right on!
+                feedback: Na mosca!
             -   option: Marleen goes to the market and Marleen buys an apple.
                 feedback: She is not replaced with the name
             hint: The word name is replaced with Marleen
@@ -267,16 +267,16 @@ levels:
         4:
             question_text: What will you see on the output screen when you run this code?
             code: |-
-                name {is} Hedy
-                {print} Hi my name is name!
+                nome {is} Hedy
+                {print} Oi, meu nome é nome!
             mp_choice_options:
-            -   option: Hi my name is name
+            -   option: Oi, meu nome é nome
                 feedback: The variable name is replaced with Hedy
-            -   option: Hi my name is Hedy
+            -   option: Oi, meu nome é Hedy
                 feedback: The variable name is replaced with Hedy
-            -   option: Hi my Hedy is name
+            -   option: Oi, meu Hedy é nome
                 feedback: The variable name is replaced with Hedy
-            -   option: Hi my Hedy is Hedy
+            -   option: Oi, meu Hedy é Hedy
                 feedback: Correct, this mistake will be fixed in level 4!
             hint: '''name'' is being replaced with ''Hedy'' in both places'
             correct_answer: D
@@ -363,24 +363,24 @@ levels:
             mp_choice_options:
             -   option: |-
                     ```
-                    age {ask} {is} How old are you?
+                    idade {ask} {is} Quantos anos você tem?
                     ```
                 feedback: That is the wrong order
             -   option: |-
                     ```
-                    {ask} {is} age How old are you?
+                    {ask} {is} idade Quantos anos você tem?
                     ```
                 feedback: That is the wrong order
             -   option: |-
                     ```
-                    age {is} {ask} How old are you?
+                    idade {is} {ask} Quantos anos você tem?
                     ```
                 feedback: You get it!
             -   option: |-
                     ```
-                    age {is} How old are you?
+                    idade {is} Quantos anos você tem?
                     ```
-                feedback: Where is the `{ask}` command?
+                feedback: Cadê o comando `{ask}`?
             hint: The variable name should come first
             correct_answer: C
             question_score: '10'
@@ -393,7 +393,7 @@ levels:
             -   option: 'Line 1 should say: dogs `{is}` animals'
                 feedback: The variable name is animal
             -   option: 'Line 1 should say: animal `{is}` dogs'
-                feedback: Great!
+                feedback: Ótimo!
             -   option: 'Line 2 should say: `{print}` I love animals'
                 feedback: The variable name is animal
             -   option: 'Line 2 should say: `{sleep}` I love animals'
@@ -416,17 +416,17 @@ levels:
                 feedback: You want to know the favorite flavor!
             -   option: |-
                     ```
-                    {print} strawberries
+                    {print} morango
                     ```
                 feedback: You do not want a `{print}` command at the middle of the line...
             -   option: |-
                     ```
-                    strawberries, chocolate, vanilla
+                    morango, chocolate, baunilha
                     ```
                 feedback: This way you are making a list. You don't want that now.
             -   option: |-
                     ```
-                    {ask} What flavor icecream do you like?
+                    {ask} De que sabor de sorvete você gosta?
                     ```
                 feedback: That's right!
             hint: You want to `{ask}` a question
@@ -477,7 +477,7 @@ levels:
             correct_answer: A
             question_score: '10'
         3:
-            question_text: How do you fix the mistake in line 2 of this code?
+            question_text: Como se conserta o erro na linha 2?
             code: |-
                 options {is} rock, paper, scissors
                 {print} rock, paper, scissors {at} {random}

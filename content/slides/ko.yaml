@@ -122,6 +122,7 @@ levels:
                 {print} What song would you like to hear?
                 {ask} I like that song too!
                 {print} Next up... {echo}
+            debug: true
         13:
             header: Let the programming fun begin!
             text: Enjoy the adventures in level 1!
@@ -185,6 +186,7 @@ levels:
                 {print} I'll go get your donut. {sleep}
                 {print} Here you go! A filling donut with toping!
                 {ask} Have a nice day!
+            debug: true
         8:
             header: 프로그래밍의 재미를 시작합시다!
             text: 레벨 2의 모험을 즐기세요!
@@ -195,9 +197,7 @@ levels:
         2:
             header: 목록 만들기
             text: "{is}로 목록을 작성합니다. \n\n목록의 항목을 쉼표로 구분합니다."
-            code: |-
-                animals {is} dogs, cats, kangaroos
-                ```
+            code: animals {is} dogs, cats, kangaroos
         3:
             header: At random
             text: |-
@@ -207,14 +207,12 @@ levels:
             code: |-
                 animals {is} dogs, cats, kangaroos
                 {print} animals {at} {random}
-                ```
         4:
             header: At random in a sentence (문장에서 랜덤)
             text: 문장에서도 '{at}' '{random}' 명령을 사용할 수 있습니다.
             code: |-
                 animals {is} dogs, cats, kangaroos
                 {print} My favorite animal is animals {at} {random}
-                ```
         5:
             header: Add to
             text: "{add} {to} 명령을 사용하여 목록에 항목을 추가할 수 있습니다. \n\n목록에 추가할 항목을 선택하거나 {add} {to} 명령을 {ask} 명령과 함께 사용할 수 있습니다. \n이렇게 하면 플레이어가 목록에 추가할 항목을 결정할 수 있습니다."
@@ -246,6 +244,7 @@ levels:
                 {print} or do you prefer... second_choice {at} {random}
                 {remove} second_choice {to} music_genres
                 {print} I like music_genre {random} best!
+            debug: true
         8:
             header: 일을 시작하자!
             text: 레벨 3의 모험을 즐기세요!
@@ -260,6 +259,7 @@ levels:
             code: |-
                 name {is} Sophie
                 {print} My name is name
+            debug: true
         3:
             header: 따옴표로 고정하기
             text: "이 레벨에서 우리는 따옴표를 사용하여 이 문제를 해결할 것이다. \n\n이것은 또한 우리의 코드를 '진짜' 파이썬 코드처럼 보이게 한다."
@@ -287,6 +287,7 @@ levels:
             header: 따옴표 및 축약
             text: "주의하세요! 따옴표를 사용하고 계시기 때문에 축약할 때 따옴표'를 사용할 수 없습니다. \n\n아래 화면에서 \"당신은\" 또는 \"나는\"과 같은 축약을 인쇄하고 어떻게 되는지 확인해보세요..."
             code: '{print} ''This won''t work!'''
+            debug: true
         9:
             header: 분명한
             text: "이 레벨에서는 {clear} 명령어도 배울 것이다. \n이 명령어를 사용하면 출력 화면에서 모든 텍스트를 지울 수 있다. \n\n항상 sleep 명령어를 사용하도록 주의해야 한다. 그렇지 않으면 컴퓨터가 읽기 전에 모든 텍스트를 지울 것이다!"
@@ -311,6 +312,7 @@ levels:
                 colors {is} 'orange, silver, white, brown'
                 {print} 'I love the colors {at} {random} one!'
                 choice {is} {ask} Which one do you like?
+            debug: true
         11:
             header: 자, 준비, 시작!
             text: 레벨 4의 모험을 즐기세요!
@@ -328,6 +330,7 @@ levels:
             header: 인쇄하는 것을 잊지 마세요
             text: '''{if}'' 명령을 사용할 때는 ''{print}'' 명령을 사용하는 것을 잊지 마십시오.'
             code: '{if} name {is} Hedy ''nice'''
+            debug: true
         4:
             header: else
             text: "'{if}' 명령어를 사용할 때는 '{else}' 명령어를 추가할 수도 있다. \n만약 그 답이 Hedy이면 컴퓨터는 nice를 출력할 것이다. \n그러나 만약 그 답이 다른 것이라면 컴퓨터는 boo를 출력할 것이다"
@@ -362,6 +365,7 @@ levels:
                 item_to_declare {is} {ask} 'What would you like to declare'
                 {else} Alright
                 {print} Thank you. Please head to gate A22.'
+            debug: true
         8:
             header: 가자!
             text: 레벨 5의 모험을 즐기세요!
@@ -424,6 +428,7 @@ levels:
                 {if} day {is} monday
                 total_price = total_price * 0.25
                 {print} 'That will be total_price please'
+            debug: true
         10:
             header: 일을 시작하자!
             text: 레벨 6의 모험을 즐기세요!
@@ -442,6 +447,7 @@ levels:
             header: 인쇄 명령을 잊지 마십시오
             text: repeat 명령을 사용할 때 '{print}' 명령을 잊지 마십시오.
             code: '{repeat} 5 {times} ''Help!'''
+            debug: true
         4:
             header: 질문 명령 반복
             text: 또한 '{ask}', '{if}' 또는 '{else}' 명령을 여러 번 반복할 수 있습니다.
@@ -463,6 +469,7 @@ levels:
                 {if} yes
                 {print} 'Hurray!
                 {else} 'That's a shame... Oh well... time to build a shelter and find some food.'
+            debug: true
         6:
             header: 준비완료!
             text: 레벨 7의 모험을 즐기세요!
@@ -474,6 +481,7 @@ levels:
             header: '{messages}개 이전의 명령'
             text: "이전 레벨에서 '{repeat}' 명령어는 다음과 같이 보였습니다. \n\n코드 한 줄만 반복할 수 있습니다."
             code: '{repeat} 5 {times} {print} ''Help!'''
+            debug: true
         3:
             header: 지금 {messages}개의 명령
             text: "이 레벨에서는 여러 줄의 코드를 반복할 수 있다. \n이를 위해서는 어떤 줄이 함께 속하므로 반복해야 하는지 컴퓨터에 말해야 한다. \n\n들여쓰기를 사용하여 이 작업을 수행한다. 반복할 각 줄의 맨 앞에 있는 4개의 공백(또는 하나의 탭)을 다음과 같이 사용한다:"
@@ -494,6 +502,7 @@ levels:
             code: |-
                 {if} name {is} Hedy {print} 'nice'
                 {else} {print} 'boo!'
+            debug: true
         6:
             header: if and else now
             text: "이제 {if} 명령어와 {else} 명령어는 다음과 같다. \n{if} 명령어와 {else} 명령어 뒤의 각 행은 들여쓰기로 시작한다."
@@ -511,6 +520,29 @@ levels:
             header: if statements inside if statements
             text: "repeat 명령어 안에 if 명령어를 넣거나, 다른 if 명령어 안에 if 명령어를 넣으려고 생각해봤을 것이다. \n지금으로서는 아직 불가능하다. 상위 단계에서는 가능하겠지만, 일단 적절한 들여쓰기를 가진 {if} {else} 명령어와 {repeat} 명령어를 연습하는 것에 집중하자."
         9:
+            header: Debugging
+            text: Let's debug this code!
+            code: |-
+                {print} 'HedyWheels bus tickets machine'
+                zone_1 = Town Hall, Library, Campus, Market Place
+                zone_2 = Swimming Pool, Skate Park, Mall, Airport
+                destination = 'Where do you want to go?'
+                {if} destination {in} zone 1
+                {print} destination 'is in zone 1'
+                price = 3 euros
+                    {if} destination {is} zone_2
+                {print} destination 'is in zone 2'
+                price = 6
+                ticket_types = {ask} 'Press 1 for a single use ticket.
+                Press 2 for a round trip ticket:'
+                {if} ticket_type = 1
+                {print} 'You chose a single use ticket'
+                {else}
+                        {print} You chose a round trip ticket'
+                price * 2
+                {print} 'That will be ' price ' euros please'
+            debug: true
+        10:
             header: 모험을 확인해 봅시다!
             text: 레벨 8의 모험을 즐기세요!
     9:
@@ -580,6 +612,24 @@ levels:
                     {else}
                         {print} 'pizza is better'
         8:
+            header: Debugging
+            text: Let's debug this code!
+            code: |-
+                {print} 'Welcome to HedyJumps, your parachute jump adventure!'
+                people = {ask} 'How many people are you jumping with today?
+                {print} 'We'll ask all of you some questions for safety reasons.'
+                extra_instructions_people = a, b
+                {repeat} 3 {times}
+                    name = {ask} 'What is your name?'
+                jumped_before = 'Have you ever done a parachute jump before, ' name '?'
+                {if} jumped_before  no
+                {print} 'No worries, you'll get an extra safety instruction in room 13'
+                {add} name {to} extra_instructions_people
+                {else}
+                {print} 'Fun!'
+                {print} 'Thanks for filling in the safety questions everyone. Enjoy your jump!'
+            debug: true
+        9:
             header: 가자!
             text: 레벨 9의 모험을 즐기세요!
     10:
@@ -602,6 +652,21 @@ levels:
                 {for} day {in} days
                     {print} names {at} {random} ' does the dishes on ' day
         4:
+            header: Debugging
+            text: Let's debug this code
+            code: |-
+                {print} 'Ladies and gentlemen!'
+                {print} 'For one night and one night only in circus Hedy!'
+                acts = shoot out of a canon, walk the tightrope, pack themself in a suitcase,
+                people = Iris the Incredible Achmed the Amazing Francis the Fantastic
+                    {for} people {in} acts
+                chosen_person {is} people {random}
+                    chosen_person ' will ' act
+                {add} chosen_person {from} people
+                {print} 'Come and watch our show tonight!'
+                {print} 'Tickets are only available at the counter
+            debug: true
+        5:
             header: 프로그램 할 시간!
             text: 레벨 10의 모험을 즐기세요!
     11:
@@ -623,6 +688,15 @@ levels:
                 {for} i {in} {range} 1 {to} 10
                     {print} i * number
         4:
+            header: Debugging
+            text: Let's debug this code!
+            code: |-
+                factor {is} {ask} 'Which table of multiplication do you need?'
+                {repeat} {for} numbers {in} {range} 1 {to} 10 {times}
+                    {print} This is the table of multiplications for factor
+                    {print} number ' x ' factor ' = ' i * factor
+            debug: true
+        5:
             header: 프로그래밍 시작!
             text: 레벨 11의 모험을 즐기세요!
     12:
@@ -657,14 +731,30 @@ levels:
                      {print} 'Twinkle'
                      {print} '...'
 
-                 {call} twinkle
-                 {print} 'Up above the world so high'
-                 {print} 'Like a diamond in the sky'
-                 {call} twinkle
+                {call} twinkle
+                {print} 'Up above the world so high'
+                {print} 'Like a diamond in the sky'
+                {call} twinkle
         6:
             header: Functions
             text: As you could see in the example a function is a block of code that can be called anytime. You use `{define}` to set the function and `{call}` to use it.
         7:
+            header: Debugging
+            text: Let's debug this code!
+            code: |-
+                {call} new_member
+                {print} 'Hi new member!'
+                username = {ask} 'What is your username?'
+                password = 'What is your password?'
+                {print} 'Welcome to our club!'
+
+                username = {ask} 'Please enter your username. Are you a new member? Type New Member'
+                {if} username = New Member
+                {call} new member
+                    {else}
+                        password = {ask} 'Please enter password'
+            debug: true
+        8:
             header: Ready to try it out?
             text: Enjoy the adventures in level 12!
     13:
@@ -744,6 +834,30 @@ levels:
                 {call} song {with} 'sea'
                 {call} song {with} 'ocean'
         8:
+            header: Debugging
+            text: Let's debug this code!
+            code: |-
+                {define} happiness {with} name
+                    {print} '🥳'
+                {play} G
+                {play} A
+                {play} B
+                {print} 'Party on, ' name
+                {define} sadness
+                {print} '😞'
+                {play} E
+                {play} D
+                {play} C
+                {print} 'Hope you feel better, ' name
+
+                name = {ask} 'What is your' name '?'
+                mood = {ask} 'Are you happy or sad?'
+                {if} mood = happy
+                    {call} happiness {with} person
+                {else} mood = sad
+                    {define} sadness {to} name
+            debug: true
+        9:
             header: Let's go!
             text: Enjoy the adventures in level 13!
     14:
@@ -797,7 +911,7 @@ levels:
                 {define} calculate_new_price {with} amount, percentage
                     percentage = percentage / 100
                     discount_amount = amount * percentage
-                    return amount - discount_amount
+                    {return} amount - discount_amount
 
                 old_price = {ask} 'How much is on the price tag?'
                 discount = {ask} 'What percentage is the discount?'
@@ -805,6 +919,28 @@ levels:
                 new_price = {call} calculate_new_price {with} old_price, discount
                 {print} 'The new price is ' new_price ' dollar'
         6:
+            header: Debugging
+            text: Let's debug this code!
+            code: |-
+                item = 'not bought'
+                {print} 'I would like to buy this item'
+                price == {ask} 'What is the price?'
+                {if} price less than or the same as 10
+                    {print} 'Thats a great deal!'
+                    item = 'bought'
+                {if} price is more than 10 {and} less than or the same as 20
+                    {print} 'Alright'
+                    item = 'bought'
+                {if} price is more than 20 {and} less than 50
+                    {print} 'That is a bit much!'
+                {if} price is more than or the same as 50
+                    {print} 'No way!'
+                {if} item =! bought
+                    {print} 'Shame.. I wont buy it'
+                {else}
+                    {print} 'I will buy it! Thank you!'
+            debug: true
+        7:
             header: Let's get to work!
             text: Enjoy the adventures in level 14!
     15:
