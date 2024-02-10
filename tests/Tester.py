@@ -17,6 +17,8 @@ from hedy_content import ALL_KEYWORD_LANGUAGES, KEYWORDS
 from hedy_sourcemap import SourceRange
 from functools import cache
 
+from app import translate_error, app
+from flask_babel import force_locale
 
 ROOT_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
@@ -460,6 +462,8 @@ class HedyTester(unittest.TestCase):
         # We replace the code snippet placeholders with actual keywords to the code is valid: {print} -> print
         # NOTE: .format() instead of safe_format() on purpose!
         for snippet in snippets:
+            # store original code
+            snippet[1].original_code = snippet[1].code
             try:
                 if snippet[1].language in ALL_KEYWORD_LANGUAGES.keys():
                     snippet[1].code = snippet[1].code.format(**keyword_dict[snippet[1].language])
@@ -473,6 +477,30 @@ class HedyTester(unittest.TestCase):
                 print(snippet[1].code)
 
         return snippets
+
+    def output_test_error(self, E, snippet):
+        arrow = True  # set to False if you want to remove the <---- in the output f.e. for easy copy-pasting
+        try:
+            location = E.error_location
+        except BaseException:
+            location = 'No Location Found'
+
+        # Must run this in the context of the Flask app, because FlaskBabel requires that.
+        with app.app_context():
+            with force_locale('en'):
+                error_message = translate_error(E.error_code, E.arguments, 'en')
+                error_message = error_message.replace('<span class="command-highlighted">', '`')
+                error_message = error_message.replace('</span>', '`')
+                lines = snippet.code.split('\n')
+                lines_with_numbers = [lines[i] + " <-------" if i+1 == location[0]
+                                      and arrow else lines[i] for i in range(len(lines))]
+                code_with_numbers = '\n'.join(lines_with_numbers)
+
+                print(f'\n----\n{code_with_numbers}')
+                print(f'----\n{snippet.original_code}\n----')
+                print(f'in language {snippet.language} from level {snippet.level} gives error:')
+                print(f'{error_message} at line {location}')
+                raise E
 
 
 def create_hash(hedy_language, test_hash):
