@@ -5441,7 +5441,7 @@ var hedyApp = (() => {
             unicode: true
           },
           {
-            regex: "(^| )(not_in)(?![\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}_\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\xB7])",
+            regex: "(^| )(__not_in__)(?![\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}_\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\xB7])",
             token: [
               "text",
               "keyword"
@@ -5904,7 +5904,7 @@ var hedyApp = (() => {
             unicode: true
           },
           {
-            regex: "(^| )(not_in)(?![\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}_\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\xB7])",
+            regex: "(^| )(__not_in__)(?![\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}_\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\xB7])",
             token: [
               "text",
               "keyword"
@@ -6407,7 +6407,7 @@ var hedyApp = (() => {
             unicode: true
           },
           {
-            regex: "(^| )(not_in)(?![\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}_\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\xB7])",
+            regex: "(^| )(__not_in__)(?![\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}_\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\xB7])",
             token: [
               "text",
               "keyword"
@@ -6948,7 +6948,7 @@ var hedyApp = (() => {
             unicode: true
           },
           {
-            regex: "(^| )(not_in)(?![\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}_\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\xB7])",
+            regex: "(^| )(__not_in__)(?![\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}_\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\xB7])",
             token: [
               "text",
               "keyword"
@@ -7489,7 +7489,7 @@ var hedyApp = (() => {
             unicode: true
           },
           {
-            regex: "(^| )(not_in)(?![\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}_\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\xB7])",
+            regex: "(^| )(__not_in__)(?![\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}_\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\xB7])",
             token: [
               "text",
               "keyword"
@@ -8030,7 +8030,7 @@ var hedyApp = (() => {
             unicode: true
           },
           {
-            regex: "(^| )(not_in)(?![\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}_\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\xB7])",
+            regex: "(^| )(__not_in__)(?![\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}_\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\xB7])",
             token: [
               "text",
               "keyword"
@@ -8580,7 +8580,7 @@ var hedyApp = (() => {
             unicode: true
           },
           {
-            regex: "(^| )(not_in)(?![\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}_\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\xB7])",
+            regex: "(^| )(__not_in__)(?![\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}_\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\xB7])",
             token: [
               "text",
               "keyword"
@@ -9148,7 +9148,7 @@ var hedyApp = (() => {
             unicode: true
           },
           {
-            regex: "(^| )(not_in)(?![\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}_\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\xB7])",
+            regex: "(^| )(__not_in__)(?![\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}_\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\xB7])",
             token: [
               "text",
               "keyword"
@@ -9752,7 +9752,7 @@ var hedyApp = (() => {
             unicode: true
           },
           {
-            regex: "(^| )(not_in)(?![\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}_\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\xB7])",
+            regex: "(^| )(__not_in__)(?![\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}_\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\xB7])",
             token: [
               "text",
               "keyword"
@@ -10391,7 +10391,7 @@ var hedyApp = (() => {
             unicode: true
           },
           {
-            regex: "(^| )(not_in)(?![\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}_\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\xB7])",
+            regex: "(^| )(__not_in__)(?![\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}_\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\xB7])",
             token: [
               "text",
               "keyword"
@@ -11064,7 +11064,7 @@ var hedyApp = (() => {
             unicode: true
           },
           {
-            regex: "(^| )(not_in)(?![\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}_\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\xB7])",
+            regex: "(^| )(__not_in__)(?![\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}_\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\xB7])",
             token: [
               "text",
               "keyword"
@@ -11754,7 +11754,7 @@ var hedyApp = (() => {
             unicode: true
           },
           {
-            regex: "(^| )(not_in)(?![\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}_\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\xB7])",
+            regex: "(^| )(__not_in__)(?![\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}_\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\xB7])",
             token: [
               "text",
               "keyword"
@@ -12469,7 +12469,7 @@ var hedyApp = (() => {
             unicode: true
           },
           {
-            regex: "(^| )(not_in)(?![\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}_\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\xB7])",
+            regex: "(^| )(__not_in__)(?![\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}_\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\xB7])",
             token: [
               "text",
               "keyword"
@@ -13218,7 +13218,7 @@ var hedyApp = (() => {
             unicode: true
           },
           {
-            regex: "(^| )(not_in)(?![\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}_\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\xB7])",
+            regex: "(^| )(__not_in__)(?![\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}_\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\xB7])",
             token: [
               "text",
               "keyword"
@@ -13668,6 +13668,7 @@ var hedyApp = (() => {
     is: "\u0640*\u0647\u0640*\u0648\u0640*|\u0640*\u0647\u0640*\u064A\u0640*|is",
     left: "\u0640*\u064A\u0640*\u0633\u0640*\u0627\u0640*\u0631\u0640*|left",
     length: "\u0640*\u0637\u0640*\u0648\u0640*\u0644\u0640*|length",
+    not_in: "\u0640*n\u0640*o\u0640*t\u0640* \u0640*i\u0640*n\u0640*|not in",
     or: "\u0640*\u0623\u0640*\u0648\u0640*|or",
     orange: "\u0640*\u0628\u0640*\u0631\u0640*\u062A\u0640*\u0642\u0640*\u0627\u0640*\u0644\u0640*\u064A\u0640*|orange",
     pink: "\u0640*\u0632\u0640*\u0647\u0640*\u0631\u0640*\u064A\u0640*|pink",
@@ -13722,6 +13723,7 @@ var hedyApp = (() => {
     is: "\u0435|is",
     left: "\u043B\u044F\u0432\u043E|left",
     length: "\u0434\u044A\u043B\u0436\u0438\u043D\u0430|length",
+    not_in: "\u043D\u0435 \u0432/\u0432\u044A\u0432|not in",
     or: "\u0438\u043B\u0438|or",
     orange: "\u043E\u0440\u0430\u043D\u0436\u0435\u0432\u043E|orange",
     pink: "\u0440\u043E\u0437\u043E\u0432\u043E|pink",
@@ -13776,6 +13778,7 @@ var hedyApp = (() => {
     is: "is",
     left: "left",
     length: "length",
+    not_in: "not in",
     or: "or",
     orange: "orange",
     pink: "pink",
@@ -13830,6 +13833,7 @@ var hedyApp = (() => {
     is: "\xE9s|is",
     left: "esquerra|left",
     length: "mida|length",
+    not_in: "no dins|not in",
     or: "o|or",
     orange: "taronja|orange",
     pink: "rosa|pink",
@@ -13884,6 +13888,7 @@ var hedyApp = (() => {
     is: "is",
     left: "left",
     length: "length",
+    not_in: "not in",
     or: "or",
     orange: "orange",
     pink: "pink",
@@ -13938,6 +13943,7 @@ var hedyApp = (() => {
     is: "yw|is",
     left: "chwith|left",
     length: "hyd|length",
+    not_in: "dim mewn|not in",
     or: "neu|or",
     orange: "oren|orange",
     pink: "pinc|pink",
@@ -13992,6 +13998,7 @@ var hedyApp = (() => {
     is: "is",
     left: "left",
     length: "length",
+    not_in: "not in",
     or: "or",
     orange: "orange",
     pink: "lyser\xF8d|pink",
@@ -14046,6 +14053,7 @@ var hedyApp = (() => {
     is: "ist|is",
     left: "links|left",
     length: "l\xE4nge|length",
+    not_in: "nicht in|not in",
     or: "oder|or",
     orange: "Orange|orange",
     pink: "Pink|pink",
@@ -14100,6 +14108,7 @@ var hedyApp = (() => {
     is: "is",
     left: "left",
     length: "length",
+    not_in: "not in",
     or: "or",
     orange: "orange",
     pink: "pink",
@@ -14154,6 +14163,7 @@ var hedyApp = (() => {
     is: "is",
     left: "left",
     length: "length",
+    not_in: "not in",
     or: "or",
     orange: "orange",
     pink: "pink",
@@ -14208,6 +14218,7 @@ var hedyApp = (() => {
     is: "estas|is",
     left: "maldekstren|left",
     length: "longo|length",
+    not_in: "not in",
     or: "a\u016D|au|aux|or",
     orange: "oran\u011Da|orangha|orangxa|oran^ga|orang^a|orange",
     pink: "rozkolora|pink",
@@ -14262,6 +14273,7 @@ var hedyApp = (() => {
     is: "es|is",
     left: "izquierda|left",
     length: "longitud|length",
+    not_in: "no en|not in",
     or: "o|or",
     orange: "naranja|orange",
     pink: "rosa|pink",
@@ -14316,6 +14328,7 @@ var hedyApp = (() => {
     is: "on|is",
     left: "vasakule|left",
     length: "pikkus|length",
+    not_in: "not in",
     or: "v\xF5i|or",
     orange: "oran\u017E|orange",
     pink: "roosa|pink",
@@ -14370,6 +14383,7 @@ var hedyApp = (() => {
     is: "is",
     left: "\u0686\u067E|left",
     length: "length",
+    not_in: "not in",
     or: "or",
     orange: "\u0646\u0627\u0631\u0646\u062C\u06CC|orange",
     pink: "\u0635\u0648\u0631\u062A\u06CC|pink",
@@ -14424,6 +14438,7 @@ var hedyApp = (() => {
     is: "on|is",
     left: "vasen|left",
     length: "pituus|length",
+    not_in: "ei kohteessa|not in",
     or: "tai|or",
     orange: "oranssi|orange",
     pink: "vaaleanpunainen|pink",
@@ -14478,6 +14493,7 @@ var hedyApp = (() => {
     is: "est|is",
     left: "gauche|left",
     length: "longueur|length",
+    not_in: "pas dans|not in",
     or: "ou|or",
     orange: "orange",
     pink: "rose|pink",
@@ -14532,6 +14548,7 @@ var hedyApp = (() => {
     is: "is",
     left: "left",
     length: "length",
+    not_in: "not in",
     or: "or",
     orange: "orange",
     pink: "pink",
@@ -14586,6 +14603,7 @@ var hedyApp = (() => {
     is: "\u05D4\u05D5\u05D0|is",
     left: "\u05E9\u05DE\u05D0\u05DC\u05D4|left",
     length: "\u05D0\u05D5\u05E8\u05DA|length",
+    not_in: "not in",
     or: "\u05D0\u05D5|or",
     orange: "\u05DB\u05EA\u05D5\u05DD|orange",
     pink: "\u05D5\u05E8\u05D5\u05D3|pink",
@@ -14640,6 +14658,7 @@ var hedyApp = (() => {
     is: "\u0939\u0948|is",
     left: "left",
     length: "\u0932\u0902\u092C\u093E\u0908|length",
+    not_in: "not in",
     or: "\u092F\u093E|or",
     orange: "orange",
     pink: "pink",
@@ -14694,6 +14713,7 @@ var hedyApp = (() => {
     is: "egyenl\u0151|is",
     left: "balra|left",
     length: "hossz|length",
+    not_in: "nem eleme|not in",
     or: "vagy|or",
     orange: "narancs|orange",
     pink: "pink",
@@ -14748,6 +14768,7 @@ var hedyApp = (() => {
     is: "adalah|is",
     left: "kiri|left",
     length: "panjang|length",
+    not_in: "not in",
     or: "atau|or",
     orange: "orange",
     pink: "pink",
@@ -14802,6 +14823,7 @@ var hedyApp = (() => {
     is: "is",
     left: "sinistra|left",
     length: "lunghezza|length",
+    not_in: "non quello|not in",
     or: "or",
     orange: "arancione|orange",
     pink: "rosa|pink",
@@ -14856,6 +14878,7 @@ var hedyApp = (() => {
     is: "is",
     left: "\u3072\u3060\u308A|left",
     length: "length",
+    not_in: "not in",
     or: "or",
     orange: "\u304A\u308C\u3093\u3058|orange",
     pink: "\u3074\u3093\u304F|pink",
@@ -14910,6 +14933,7 @@ var hedyApp = (() => {
     is: "is",
     left: "left",
     length: "length",
+    not_in: "not in",
     or: "or",
     orange: "orange",
     pink: "pink",
@@ -14964,6 +14988,7 @@ var hedyApp = (() => {
     is: "is",
     left: "left",
     length: "length",
+    not_in: "not in",
     or: "or",
     orange: "orange",
     pink: "pink",
@@ -15018,6 +15043,7 @@ var hedyApp = (() => {
     is: "is",
     left: "left",
     length: "length",
+    not_in: "not in",
     or: "or",
     orange: "orange",
     pink: "pink",
@@ -15072,6 +15098,7 @@ var hedyApp = (() => {
     is: "er|is",
     left: "venstre|left",
     length: "lengde|length",
+    not_in: "not in",
     or: "eller|or",
     orange: "orange",
     pink: "pink",
@@ -15126,6 +15153,7 @@ var hedyApp = (() => {
     is: "is",
     left: "links|left",
     length: "lengte|length",
+    not_in: "niet in|not in",
     or: "of|or",
     orange: "oranje|orange",
     pink: "roze|pink",
@@ -15180,6 +15208,7 @@ var hedyApp = (() => {
     is: "\u0633\u0645\u0627\u0646|is",
     left: "\u06A9\u06BE\u0628\u06D2|left",
     length: "\u0644\u0645\u0628\u0627\u0626\u06CC|length",
+    not_in: "not in",
     or: "\u06CC\u0627|or",
     orange: "\u0633\u0646\u062A\u0631\u0627|orange",
     pink: "\u06AF\u0644\u0627\u0628\u06CC|pink",
@@ -15234,6 +15263,7 @@ var hedyApp = (() => {
     is: "is",
     left: "left",
     length: "length",
+    not_in: "not in",
     or: "or",
     orange: "orange",
     pink: "pink",
@@ -15288,6 +15318,7 @@ var hedyApp = (() => {
     is: "to|is",
     left: "lewo|left",
     length: "d\u0142ugo\u015B\u0107|length",
+    not_in: "nie w|not in",
     or: "lub|or",
     orange: "pomara\u0144czowy|orange",
     pink: "r\xF3\u017Cowy|pink",
@@ -15322,12 +15353,12 @@ var hedyApp = (() => {
     black: "preto|black",
     blue: "azul|blue",
     brown: "marrom|brown",
-    call: "call",
-    clear: "limpar|clear",
+    call: "chame|call",
+    clear: "limpe|clear",
     color: "cor|color",
     comma: ",",
     def: "def",
-    define: "define",
+    define: "defina|define",
     echo: "eco|echo",
     elif: "sen\xE3ose|elif",
     else: "sen\xE3o|else",
@@ -15342,6 +15373,7 @@ var hedyApp = (() => {
     is: "\xE9|is",
     left: "esquerda|left",
     length: "comprimento|length",
+    not_in: "n\xE3o em|not in",
     or: "ou|or",
     orange: "laranja|orange",
     pink: "rosa|pink",
@@ -15354,7 +15386,7 @@ var hedyApp = (() => {
     red: "vermelho|red",
     remove: "remova|remove",
     repeat: "repita|repeat",
-    return: "return",
+    return: "retorne|return",
     right: "direita|right",
     sleep: "durma|sleep",
     step: "passo|step",
@@ -15364,7 +15396,7 @@ var hedyApp = (() => {
     turn: "gire|turn",
     while: "enquanto|while",
     white: "branco|white",
-    with: "with",
+    with: "com|with",
     yellow: "amarelo|yellow",
     DIGIT: "0123456789"
   };
@@ -15396,6 +15428,7 @@ var hedyApp = (() => {
     is: "is",
     left: "esquerda|left",
     length: "comprimento|length",
+    not_in: "not in",
     or: "or",
     orange: "cor de laranja|orange",
     pink: "cor de rosa|pink",
@@ -15450,6 +15483,7 @@ var hedyApp = (() => {
     is: "is",
     left: "st\xE2nga|left",
     length: "lungime|length",
+    not_in: "nu \xEEn|not in",
     or: "sau|or",
     orange: "portocaliu|orange",
     pink: "roz|pink",
@@ -15504,6 +15538,7 @@ var hedyApp = (() => {
     is: "\u044D\u0442\u043E|is",
     left: "\u043D\u0430\u043B\u0435\u0432\u043E|left",
     length: "\u0434\u043B\u0438\u043D\u0430|length",
+    not_in: "\u043D\u0435 \u0432|not in",
     or: "\u0438\u043B\u0438|or",
     orange: "\u043E\u0440\u0430\u043D\u0436\u0435\u0432\u044B\u0439|orange",
     pink: "\u0440\u043E\u0437\u043E\u0432\u044B\u0439|pink",
@@ -15558,6 +15593,7 @@ var hedyApp = (() => {
     is: "\xEBsht\xEB|is",
     left: "majtas|left",
     length: "gjat\xEBsia|length",
+    not_in: "jo n\xEB|not in",
     or: "ose|or",
     orange: "portokalli|orange",
     pink: "roz\xEB|pink",
@@ -15612,6 +15648,7 @@ var hedyApp = (() => {
     is: "je|is",
     left: "levo|left",
     length: "du\u017Eina|length",
+    not_in: "ne/nije u|not in",
     or: "ili|or",
     orange: "narand\u017Easta|orange",
     pink: "roze|pink",
@@ -15666,6 +15703,7 @@ var hedyApp = (() => {
     is: "\xE4r|is",
     left: "v\xE4nster|left",
     length: "l\xE4ngd|length",
+    not_in: "inte i|not in",
     or: "eller|or",
     orange: "orange",
     pink: "rosa|pink",
@@ -15720,6 +15758,7 @@ var hedyApp = (() => {
     is: "is",
     left: "left",
     length: "length",
+    not_in: "not in",
     or: "or",
     orange: "orange",
     pink: "pink",
@@ -15774,6 +15813,7 @@ var hedyApp = (() => {
     is: "\u0C09\u0C02\u0C26\u0C3F|is",
     left: "left",
     length: "\u0C2A\u0C4A\u0C21\u0C35\u0C41|length",
+    not_in: "not in",
     or: "\u0C32\u0C47\u0C26\u0C3E|or",
     orange: "orange",
     pink: "pink",
@@ -15828,6 +15868,7 @@ var hedyApp = (() => {
     is: "\u0E04\u0E37\u0E2D|is",
     left: "\u0E0B\u0E49\u0E32\u0E22|left",
     length: "\u0E04\u0E27\u0E32\u0E21\u0E22\u0E32\u0E27|length",
+    not_in: "\u0E44\u0E21\u0E48\u0E2D\u0E22\u0E39\u0E48\u0E43\u0E19|not in",
     or: "\u0E2B\u0E23\u0E37\u0E2D|or",
     orange: "\u0E2A\u0E49\u0E21|orange",
     pink: "\u0E0A\u0E21\u0E1E\u0E39|pink",
@@ -15882,6 +15923,7 @@ var hedyApp = (() => {
     is: "is",
     left: "left",
     length: "length",
+    not_in: "not in",
     or: "or",
     orange: "orange",
     pink: "pink",
@@ -15936,6 +15978,7 @@ var hedyApp = (() => {
     is: "ke|is",
     left: "left",
     length: "length",
+    not_in: "not in",
     or: "or",
     orange: "orange",
     pink: "pink",
@@ -15990,6 +16033,7 @@ var hedyApp = (() => {
     is: "e\u015Fit|is",
     left: "sol|left",
     length: "uzunluk|length",
+    not_in: "\u015Funda de\u011Fil|not in",
     or: "veya|or",
     orange: "turuncu|orange",
     pink: "pembe|pink",
@@ -16044,6 +16088,7 @@ var hedyApp = (() => {
     is: "\u0446\u0435|is",
     left: "\u0432\u043B\u0456\u0432\u043E|left",
     length: "\u0434\u043E\u0432\u0436\u0438\u043D\u0430|length",
+    not_in: "\u043D\u0435 \u0432|not in",
     or: "\u0430\u0431\u043E|or",
     orange: "\u043E\u0440\u0430\u043D\u0436\u0435\u0432\u0438\u0439|orange",
     pink: "\u0440\u043E\u0436\u0435\u0432\u0438\u0439|pink",
@@ -16098,6 +16143,7 @@ var hedyApp = (() => {
     is: "\u06C1\u06D2|is",
     left: "\u0628\u0627\u0626\u06CC\u06BA|left",
     length: "\u0644\u0645\u0628\u0627\u0626\u06CC|length",
+    not_in: "\u0646\u06C1\u06CC\u06BA \u06C1\u06D2|not in",
     or: "\u06CC\u0627|or",
     orange: "\u0627\u0648\u0631\u06CC\u0646\u062C|orange",
     pink: "\u06AF\u0644\u0627\u0628\u06CC|pink",
@@ -16152,6 +16198,7 @@ var hedyApp = (() => {
     is: "l\xE0|is",
     left: "tr\xE1i|left",
     length: "length",
+    not_in: "not in",
     or: "ho\u1EB7c|or",
     orange: "cam|orange",
     pink: "h\u1ED3ng|pink",
@@ -16206,6 +16253,7 @@ var hedyApp = (() => {
     is: "\u662F|is",
     left: "\u5DE6|left",
     length: "\u957F\u5EA6|length",
+    not_in: "\u4E0D\u5728|not in",
     or: "\u6216|or",
     orange: "\u6A59\u8272|orange",
     pink: "\u7C89\u7EA2\u8272|pink",
@@ -16260,6 +16308,7 @@ var hedyApp = (() => {
     is: "is",
     left: "left",
     length: "length",
+    not_in: "not in",
     or: "or",
     orange: "orange",
     pink: "pink",
@@ -17819,7 +17868,7 @@ var hedyApp = (() => {
       "Transpile_success": "\u597D\u6837\u7684\uFF01\n\u4E86\u4E0D\u8D77\uFF01\n\u505A\u7684\u5F88\u597D\uFF01\n\u68D2\u6781\u4E86\uFF01\n\u505A\u7684\u771F\u68D2\uFF01",
       "Transpile_warning": "\u8B66\u544A\uFF01",
       "Unsaved_Changes": "\u4F60\u6709\u4E00\u4E2A\u672A\u4FDD\u5B58\u7684\u7A0B\u5E8F\u3002\u4F60\u60F3\u4E0D\u4FDD\u5B58\u5C31\u79BB\u5F00\u5417\uFF1F",
-      "adventures_restored": "\u9ED8\u8BA4\u7684\u5192\u9669\u5DF2\u7ECF\u6062\u590D\uFF01",
+      "adventures_restored": "\u9ED8\u8BA4\u7684\u5192\u9669\u5DF2\u7ECF\u6062\u590D\u3002",
       "copy_link_to_share": "\u590D\u5236\u94FE\u63A5\u4EE5\u5206\u4EAB",
       "customization_deleted": "\u5DF2\u6210\u529F\u5220\u9664\u81EA\u5B9A\u4E49\u9879\u3002",
       "dice": "\u{1F3B2}",
@@ -52687,7 +52736,7 @@ notes_mapping = {
       const language2 = languagePerLevel[level3];
       const hedyStyleTags = {
         "print forward turn play color ask is echo sleep Comma": tags.keyword,
-        "at random remove from add to if else in not Op": tags.keyword,
+        "at random remove from add to if else in not_in Op": tags.keyword,
         "repeat times for range with return and or while": tags.keyword,
         "elif def input toList": tags.keyword,
         Comment: tags.lineComment,
@@ -56262,7 +56311,9 @@ notes_mapping = {
           $(this).find(":input").each(function() {
             account[$(this).attr("name")] = $(this).val();
           });
-          accounts.push(account);
+          if (account["password"].length !== 0 || account["username"].length !== 0) {
+            accounts.push(account);
+          }
         }
       });
       $.ajax({

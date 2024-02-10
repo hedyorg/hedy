@@ -344,10 +344,11 @@ class TestsLevel5(HedyTester):
             exception=hedy.exceptions.InvalidArgumentTypeException
         )
 
-    def test_if_in_list_with_string_var_gives_type_error(self):
-        code = textwrap.dedent("""\
+    @parameterized.expand(HedyTester.in_not_in_list_commands)
+    def test_if_not_in_and_in_list_with_string_var_gives_type_error(self, operator):
+        code = textwrap.dedent(f"""\
         items is red
-        if red in items print 'found!'""")
+        if red {operator} items print 'found!'""")
         self.multi_level_tester(
             max_level=7,
             code=code,
@@ -355,10 +356,11 @@ class TestsLevel5(HedyTester):
             exception=hedy.exceptions.InvalidArgumentTypeException
         )
 
-    def test_if_in_list_with_input_gives_type_error(self):
-        code = textwrap.dedent("""\
+    @parameterized.expand(HedyTester.in_not_in_list_commands)
+    def test_if_not_in_and_in_list_with_input_gives_type_error(self, operator):
+        code = textwrap.dedent(f"""\
         items is ask 'What are the items?'
-        if red in items print 'found!'""")
+        if red {operator} items print 'found!'""")
         self.multi_level_tester(
             max_level=7,
             code=code,
