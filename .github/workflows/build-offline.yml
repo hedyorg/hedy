@@ -1,6 +1,13 @@
 on:
+  # Can be run on-demand
   workflow_dispatch: {}
-  pull_request: {}
+
+  # Runs when 'deploy to prod' runs
+  workflow_run:
+    workflows: ["Deploy to hedy.org"]
+    types: [requested]
+    branches:
+      - 'main'
 
 jobs:
   build:
