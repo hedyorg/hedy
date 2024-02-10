@@ -7,15 +7,22 @@ import uflash
 #   (uflash Micro-bit/Micro-bit.py C:\Users\Teodor\Desktop\hex).
 # Saving the hex file to a specific location is not nessesary at the moment but
 #   if we want to emulate the Micro:bit we need it.
+#
+# Managed to find a way to save a .hex file.
+
+# def flash_hex(input_file):
+#     try:
+#         uflash.flash(input_file)
+#         print("Hex file created successfully")
+#     except Exception as e:
+#         print(f"Error creating hex file: {e}")
+#
+#
+# input_py_script = 'Micro-bit.py'
+# flash_hex(input_py_script)
 
 
-def create_hex(input_file):
-    try:
-        uflash.flash(input_file)
-        print("Hex file created successfully")
-    except Exception as e:
-        print(f"Error creating hex file: {e}")
-
-
-input_py_script = 'Micro-bit/Micro-bit.py'
-create_hex(input_py_script)
+import subprocess
+python_script_path = 'Micro-bit.py'
+hex_file_path = ''
+subprocess.run(['uflash', python_script_path, hex_file_path])
