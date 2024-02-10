@@ -407,7 +407,6 @@ for paper in sorted(os.listdir(f'{content_dir}/research'),
     RESEARCH[name] = paper
 
 
-
 # load all available languages in dict
 # list_translations of babel does about the same, but without territories.
 languages = {}
