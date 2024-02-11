@@ -355,9 +355,14 @@ if utils.is_heroku():
 
 Compress(app)
 Commonmark(app)
-parse_logger = s3_logger.S3ParseLogger.from_env_vars()
-querylog.LOG_QUEUE.set_transmitter(
-    aws_helpers.s3_querylog_transmitter_from_env())
+
+# We don't need to log in offline mode
+if utils.is_offline_mode():
+    parse_logger = s3_logger.NullLogger()
+else:
+    parse_logger = s3_logger.S3ParseLogger.from_env_vars()
+    querylog.LOG_QUEUE.set_transmitter(
+        aws_helpers.s3_querylog_transmitter_from_env())
 
 
 @app.before_request
@@ -2648,9 +2653,13 @@ def split_at(n, xs):
 
 
 if __name__ == '__main__':
-    is_offline = getattr(sys, 'frozen', False) and hasattr(sys, '_MEIPASS')
+    # Start the server on a developer machine. Flask is initialized in DEBUG mode, so it
+    # hot-reloads files. We also flip our own internal "debug mode" flag to True, so our
+    # own file loading routines also hot-reload.
+    no_debug_mode_requested = os.getenv('NO_DEBUG_MODE')
+    utils.set_debug_mode(not no_debug_mode_requested)
 
-    if is_offline:
+    if utils.is_offline_mode():
         # We are running in a standalone build made using pyinstaller.
         # cd to the directory that has the data files, disable debug mode, and
         # use port 80 (unless overridden).
@@ -2660,6 +2669,14 @@ if __name__ == '__main__':
         config['port'] = int(os.environ.get('PORT', 80))
         if not os.getenv('TEACHER_INVITE_CODES'):
             os.environ['TEACHER_INVITE_CODES'] = 'newteacher'
+        utils.set_debug_mode(False)
+
+        # Disable logging of all requests: overwrite the function that logs with a function
+        # that does nothing. If we filter the log messages away by severity, we also lose the
+        # messages that tell us about the IP address, which we do need.
+        from werkzeug import serving
+        def do_nothing(*args, **kwargs): pass
+        serving.WSGIRequestHandler.log_request = do_nothing
 
         # We have this option for testing the offline build. A lot of modules read
         # files upon import, and those happen before the offline build 'cd' we do
@@ -2670,12 +2687,6 @@ if __name__ == '__main__':
         if smoke_test:
             sys.exit(0)
 
-    # Start the server on a developer machine. Flask is initialized in DEBUG mode, so it
-    # hot-reloads files. We also flip our own internal "debug mode" flag to True, so our
-    # own file loading routines also hot-reload.
-    no_debug_mode_requested = os.getenv('NO_DEBUG_MODE')
-    utils.set_debug_mode(not no_debug_mode_requested)
-
     # Set some default environment variables for development mode
     env_defaults = dict(
         BASE_URL=f"http://localhost:{config['port']}/",
@@ -2685,7 +2696,7 @@ if __name__ == '__main__':
         if key not in os.environ:
             os.environ[key] = value
 
-    if not is_offline:
+    if utils.is_debug_mode():
         # For local debugging, fetch all static files on every request
         app.config['SEND_FILE_MAX_AGE_DEFAULT'] = None
 
@@ -2702,7 +2713,7 @@ if __name__ == '__main__':
         start_snapshot = tracemalloc.take_snapshot()
 
     on_server_start()
-    debug = not (is_in_debugger or profile_memory or is_offline)
+    debug = utils.is_debug_mode() and not (is_in_debugger or profile_memory)
     if debug:
         logger.debug('app starting in debug mode')
 

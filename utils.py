@@ -12,6 +12,7 @@ import string
 import random
 import uuid
 import unicodedata
+import sys
 import traceback
 
 from email_validator import EmailNotValidError, validate_email
@@ -94,6 +95,15 @@ def is_debug_mode():
     We do more expensive things that are better for development in debug mode.
     """
     return DEBUG_MODE
+
+
+def is_offline_mode():
+    """Return whether or not we're in offline mode.
+
+    Offline mode is a special build of Hedy that teachers can download and run
+    on their own computers.
+    """
+    return getattr(sys, 'frozen', False) and hasattr(sys, '_MEIPASS')
 
 
 def set_debug_mode(debug_mode):
