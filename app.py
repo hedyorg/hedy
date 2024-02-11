@@ -2667,19 +2667,20 @@ def on_offline_mode():
 
     # Disable logging, so Werkzeug doesn't log all requests and tell users with big red
     # letters they're running a non-production server.
-    #from werkzeug import serving
-    #def do_nothing(*args, **kwargs): pass
-    #serving.WSGIRequestHandler.log_request = do_nothing
+    # from werkzeug import serving
+    # def do_nothing(*args, **kwargs): pass
+    # serving.WSGIRequestHandler.log_request = do_nothing
     log = logging.getLogger('werkzeug')
     log.setLevel(logging.ERROR)
 
     # Get our IP addresses so we can print a helpful hint
     import socket
-    ip_addresses = [addr[4][0] for addr in socket.getaddrinfo(socket.gethostname(), None, socket.AF_INET, socket.SOCK_STREAM)]
+    ip_addresses = [addr[4][0] for addr in socket.getaddrinfo(
+        socket.gethostname(), None, socket.AF_INET, socket.SOCK_STREAM)]
     ip_addresses = [i for i in ip_addresses if i != '127.0.0.1']
 
     from colorama import Fore, Back, Style
-    #just_fix_windows_console()
+    # just_fix_windows_console()
     lines = [
         ('', ''),
         ('', ''),
@@ -2701,7 +2702,6 @@ def on_offline_mode():
     smoke_test = '--smoketest' in sys.argv
     if smoke_test:
         sys.exit(0)
-
 
 
 if __name__ == '__main__':
