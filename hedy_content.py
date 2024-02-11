@@ -393,8 +393,13 @@ HOUR_OF_CODE_ADVENTURES = {
     ]
 }
 
-content_dir = path.join(path.dirname(__file__), 'content')
-translations_dir = path.join(path.dirname(__file__), 'translations')
+# We must find our data relative to this .py file. This will give the
+# correct answer both for when Hedy is run as a webserver on Heroku, as well
+# as when it has been bundled using pyinstaller.
+data_root = path.dirname(__file__)
+
+content_dir = path.join(data_root, 'content')
+translations_dir = path.join(data_root, 'translations')
 
 RESEARCH = {}
 for paper in sorted(os.listdir(f'{content_dir}/research'),
@@ -426,13 +431,13 @@ for folder in os.listdir(translations_dir):
 
 for lang in sorted(languages):
     ALL_LANGUAGES[lang] = languages[lang]
-    if os.path.exists('./grammars/keywords-' + lang + '.lark'):
+    if os.path.exists(path.join(data_root, './grammars/keywords-' + lang + '.lark')):
         ALL_KEYWORD_LANGUAGES[lang] = lang[0:2].upper()  # first two characters
 
 # Load and cache all keyword yamls
 KEYWORDS = {}
 for lang in ALL_KEYWORD_LANGUAGES.keys():
-    KEYWORDS[lang] = YamlFile.for_file(f'content/keywords/{lang}.yaml').to_dict()
+    KEYWORDS[lang] = YamlFile.for_file(f'{content_dir}/keywords/{lang}.yaml').to_dict()
     for k, v in KEYWORDS[lang].items():
         if isinstance(v, str) and "|" in v:
             # when we have several options, pick the first one as default
@@ -458,7 +463,7 @@ class StructuredDataFile:
 class Commands(StructuredDataFile):
     def __init__(self, language):
         self.language = language
-        super().__init__(f'content/cheatsheets/{self.language}.yaml')
+        super().__init__(f'{content_dir}/cheatsheets/{self.language}.yaml')
 
     def get_commands_for_level(self, level, keyword_lang):
         return deep_translate_keywords(self.file.get(int(level), {}), keyword_lang)
@@ -497,7 +502,7 @@ class NoSuchCommand:
 class Adventures(StructuredDataFile):
     def __init__(self, language):
         self.language = language
-        super().__init__(f'content/adventures/{self.language}.yaml')
+        super().__init__(f'{content_dir}/adventures/{self.language}.yaml')
 
     def get_adventure_keyname_name_levels(self):
         return {aid: {adv['name']: list(adv['levels'].keys())} for aid, adv in self.file.get('adventures', {}).items()}
@@ -525,7 +530,7 @@ class NoSuchAdventure:
 class ParsonsProblem(StructuredDataFile):
     def __init__(self, language):
         self.language = language
-        super().__init__(f'content/parsons/{self.language}.yaml')
+        super().__init__(f'{content_dir}/parsons/{self.language}.yaml')
 
     def get_highest_exercise_level(self, level):
         return max(int(lnum) for lnum in self.file.get('levels', {}).get(level, {}).keys())
@@ -540,7 +545,7 @@ class ParsonsProblem(StructuredDataFile):
 class Quizzes(StructuredDataFile):
     def __init__(self, language):
         self.language = language
-        super().__init__(f'content/quizzes/{self.language}.yaml')
+        super().__init__(f'{content_dir}/quizzes/{self.language}.yaml')
 
     def get_highest_question_level(self, level):
         return max(int(k) for k in self.file.get('levels', {}).get(level, {}))
@@ -562,7 +567,7 @@ class Tutorials(StructuredDataFile):
     # action on server start
     def __init__(self, language):
         self.language = language
-        super().__init__(f'content/tutorials/{self.language}.yaml')
+        super().__init__(f'{content_dir}/tutorials/{self.language}.yaml')
 
     def get_tutorial_for_level(self, level, keyword_lang="en"):
         if level not in ["intro", "teacher"]:
@@ -583,7 +588,7 @@ class NoSuchTutorial:
 class Slides(StructuredDataFile):
     def __init__(self, language):
         self.language = language
-        super().__init__(f'content/slides/{self.language}.yaml')
+        super().__init__(f'{content_dir}/slides/{self.language}.yaml')
 
     def get_slides_for_level(self, level, keyword_lang="en"):
         return deep_translate_keywords(self.file.get('levels', {}).get(level), keyword_lang)
@@ -602,7 +607,7 @@ class NoSuchTags:
 class Tags(StructuredDataFile):
     def __init__(self, language):
         self.language = language
-        super().__init__(f'content/tags/{self.language}.yaml')
+        super().__init__(f'{content_dir}/tags/{self.language}.yaml')
 
     def get_tags_names(self):
         return {tid: tags['items'] for tid, tags in self.file.get('tags', {}).items()}

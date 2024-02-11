@@ -2653,9 +2653,13 @@ if __name__ == '__main__':
     if is_offline:
         # We are running in a standalone build made using pyinstaller.
         # cd to the directory that has the data files, disable debug mode, and
-        # use port 80 (unless overridden)
+        # use port 80 (unless overridden).
+        # There will be a standard teacher invite code that everyone can use
+        # by going to `http://localhost/invite/newteacher`.
         os.chdir(sys._MEIPASS)
         config['port'] = int(os.environ.get('PORT', 80))
+        if not os.getenv('TEACHER_INVITE_CODES'):
+            os.environ['TEACHER_INVITE_CODES'] = 'newteacher'
 
         # We have this option for testing the offline build. A lot of modules read
         # files upon import, and those happen before the offline build 'cd' we do
