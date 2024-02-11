@@ -46,7 +46,7 @@ jobs:
 
     - name: Create zip file
       run: |
-        cd dist/offlinehedy && zip -r ../../offlinehedy-${{ steps.daily-version.outputs.version }}.zip .
+        cd dist/offlinehedy && C:/msys64/usr/bin/zip -r ../../offlinehedy-${{ steps.daily-version.outputs.version }}.zip .
 
     - if: steps.daily-version.outputs.created
       name: Create Release
