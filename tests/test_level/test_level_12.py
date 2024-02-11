@@ -1306,18 +1306,41 @@ class TestsLevel12(HedyTester):
     #
     #     self.multi_level_tester(max_level=18, code=code, expected=expected)
 
-    def test_if_equality_lists(self):
+    def test_if_in_list_print(self):
         code = textwrap.dedent("""\
-        m is 1, 2
-        n is 1, 2
-        if m is n
-            print 'success!'""")
-        # FH, Mar 2023 why should this fail?
+         letters is 'a', 'b', 'c'
+         if 'a' in letters
+             print 'Found'""")
+
+        expected = textwrap.dedent("""\
+         letters = ['a', 'b', 'c']
+         if 'a' in letters:
+           print(f'''Found''')""")
+
         self.multi_level_tester(
-            max_level=13,
+            max_level=15,
             code=code,
-            extra_check_function=lambda c: c.exception.arguments['line_number'] == 3,
-            exception=hedy.exceptions.InvalidArgumentTypeException)
+            expected=expected,
+            output='Found'
+        )
+
+    def test_if_not_in_list_print(self):
+        code = textwrap.dedent("""\
+         letters = 1, 2, 3
+         if 5 not in letters
+             print 'Not found'""")
+
+        expected = textwrap.dedent("""\
+         letters = [1, 2, 3]
+         if '5' not in letters:
+           print(f'''Not found''')""")
+
+        self.multi_level_tester(
+            max_level=15,
+            code=code,
+            expected=expected,
+            output='Not found'
+        )
 
     @parameterized.expand(HedyTester.quotes)
     def test_if_in_list_with_string_var_gives_type_error(self, q):
@@ -1331,6 +1354,32 @@ class TestsLevel12(HedyTester):
             extra_check_function=lambda c: c.exception.arguments['line_number'] == 2,
             exception=hedy.exceptions.InvalidArgumentTypeException
         )
+
+    @parameterized.expand(HedyTester.in_not_in_list_commands)
+    def test_if_not_in_and_in_list_with_input_gives_type_error(self, operator):
+        code = textwrap.dedent(f"""\
+            items is ask 'What are the items?'
+            if 'red' {operator} items
+              print 'found!'""")
+        self.multi_level_tester(
+            max_level=16,
+            code=code,
+            extra_check_function=lambda c: c.exception.arguments['line_number'] == 2,
+            exception=hedy.exceptions.InvalidArgumentTypeException
+        )
+
+    # Lists can be compared for equality starting with level 14
+    def test_if_equality_lists(self):
+        code = textwrap.dedent("""\
+         m is 1, 2
+         n is 1, 2
+         if m is n
+             print 'success!'""")
+        self.multi_level_tester(
+            max_level=13,
+            code=code,
+            extra_check_function=lambda c: c.exception.arguments['line_number'] == 3,
+            exception=hedy.exceptions.InvalidArgumentTypeException)
 
     def test_if_equality_with_list_gives_error(self):
         code = textwrap.dedent("""\
