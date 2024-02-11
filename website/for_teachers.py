@@ -233,7 +233,7 @@ class ForTeachersModule(WebsiteModule):
                 'level': '1'
             }
         )
-    
+
     def get_grid_info(self, user, class_id, level):
         class_ = self.db.get_class(class_id)
         if hedy_content.Adventures(g.lang).has_adventures():
@@ -1120,6 +1120,7 @@ class ForTeachersModule(WebsiteModule):
         self.db.store_adventure(adventure)
         return adventure["id"], 200
 
+
 def get_customizations(db, class_id):
     """
     Retrieves the customizations for a specific class from the database.
@@ -1145,6 +1146,7 @@ def get_customizations(db, class_id):
         # Create a new default customizations object in case it doesn't have one
         customizations = _create_customizations(db, class_id)
     return customizations
+
 
 def _create_customizations(db, class_id):
     """
