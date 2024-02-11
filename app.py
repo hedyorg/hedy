@@ -2652,6 +2652,58 @@ def split_at(n, xs):
     return xs[:n], xs[n:]
 
 
+def on_offline_mode():
+    """Prepare for running in offline mode."""
+    # We are running in a standalone build made using pyinstaller.
+    # cd to the directory that has the data files, disable debug mode, and
+    # use port 80 (unless overridden).
+    # There will be a standard teacher invite code that everyone can use
+    # by going to `http://localhost/invite/newteacher`.
+    os.chdir(sys._MEIPASS)
+    config['port'] = int(os.environ.get('PORT', 80))
+    if not os.getenv('TEACHER_INVITE_CODES'):
+        os.environ['TEACHER_INVITE_CODES'] = 'newteacher'
+    utils.set_debug_mode(False)
+
+    # Disable logging, so Werkzeug doesn't log all requests and tell users with big red
+    # letters they're running a non-production server.
+    #from werkzeug import serving
+    #def do_nothing(*args, **kwargs): pass
+    #serving.WSGIRequestHandler.log_request = do_nothing
+    log = logging.getLogger('werkzeug')
+    log.setLevel(logging.ERROR)
+
+    # Get our IP addresses so we can print a helpful hint
+    import socket
+    ip_addresses = [addr[4][0] for addr in socket.getaddrinfo(socket.gethostname(), None, socket.AF_INET, socket.SOCK_STREAM)]
+    ip_addresses = [i for i in ip_addresses if i != '127.0.0.1']
+
+    from colorama import Fore, Back, Style
+    #just_fix_windows_console()
+    lines = [
+        ('', ''),
+        ('', ''),
+        ('',  'To use offline Hedy, use a web browser to'),
+        ('',  'visit the following website:'),
+        ('', ''),
+        *[(Fore.BLUE, f'   http://{ip}/') for ip in ip_addresses],
+        ('', ''),
+        ('', ''),
+    ]
+    for style, text in lines:
+        print(Back.WHITE + Fore.BLACK + ''.ljust(10) + style + text.ljust(60) + Style.RESET_ALL)
+
+    # We have this option for testing the offline build. A lot of modules read
+    # files upon import, and those happen before the offline build 'cd' we do
+    # here and need to be written to use __file__. During the offline build,
+    # we want to run the actual code to see that nobody added file accesses that
+    # crash, but we don't actually want to start the server.
+    smoke_test = '--smoketest' in sys.argv
+    if smoke_test:
+        sys.exit(0)
+
+
+
 if __name__ == '__main__':
     # Start the server on a developer machine. Flask is initialized in DEBUG mode, so it
     # hot-reloads files. We also flip our own internal "debug mode" flag to True, so our
@@ -2660,32 +2712,7 @@ if __name__ == '__main__':
     utils.set_debug_mode(not no_debug_mode_requested)
 
     if utils.is_offline_mode():
-        # We are running in a standalone build made using pyinstaller.
-        # cd to the directory that has the data files, disable debug mode, and
-        # use port 80 (unless overridden).
-        # There will be a standard teacher invite code that everyone can use
-        # by going to `http://localhost/invite/newteacher`.
-        os.chdir(sys._MEIPASS)
-        config['port'] = int(os.environ.get('PORT', 80))
-        if not os.getenv('TEACHER_INVITE_CODES'):
-            os.environ['TEACHER_INVITE_CODES'] = 'newteacher'
-        utils.set_debug_mode(False)
-
-        # Disable logging of all requests: overwrite the function that logs with a function
-        # that does nothing. If we filter the log messages away by severity, we also lose the
-        # messages that tell us about the IP address, which we do need.
-        from werkzeug import serving
-        def do_nothing(*args, **kwargs): pass
-        serving.WSGIRequestHandler.log_request = do_nothing
-
-        # We have this option for testing the offline build. A lot of modules read
-        # files upon import, and those happen before the offline build 'cd' we do
-        # here and need to be written to use __file__. During the offline build,
-        # we want to run the actual code to see that nobody added file accesses that
-        # crash, but we don't actually want to start the server.
-        smoke_test = '--smoketest' in sys.argv
-        if smoke_test:
-            sys.exit(0)
+        on_offline_mode()
 
     # Set some default environment variables for development mode
     env_defaults = dict(
