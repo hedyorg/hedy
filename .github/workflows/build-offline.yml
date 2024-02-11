@@ -45,8 +45,10 @@ jobs:
       id: daily-version
 
     - name: Create zip file
+      # Because we're on Windows
       run: |
-        cd dist/offlinehedy && C:/msys64/usr/bin/zip -r ../../offlinehedy-${{ steps.daily-version.outputs.version }}.zip .
+        cd dist/offlinehedy &&  Compress-Archive -Path . -Destination ../../offlinehedy-${{ steps.daily-version.outputs.version }}.zip
+
 
     - if: steps.daily-version.outputs.created
       name: Create Release
