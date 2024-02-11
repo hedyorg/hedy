@@ -188,6 +188,22 @@ class ForTeachersModule(WebsiteModule):
                 }
             )
 
+            """
+            class_info=class_info, GOT IT
+                    max_level=max_level, 
+                    adventure_names=adventure_names, 
+                    adventures_default_order=adventures_default_order,
+                    class_id=class_id, GOT IT 
+                    level='1', 
+                    class_adventures=class_adventures,
+                    ticked_adventures=ticked_adventures,
+                    student_adventures=student_adventures,
+                    matrix_values=matrix_values
+            """
+
+        student_overview_table, class_, class_adventures_formatted, ticked_adventures, \
+            adventure_names, student_adventures = self.get_grid_info(user, class_id, 1)
+
         teacher = user if Class["teacher"] == user["username"] else self.db.user_by_username(Class["teacher"])
         second_teachers = [teacher] + Class.get("second_teachers", [])
         return render_template(
@@ -210,7 +226,73 @@ class ForTeachersModule(WebsiteModule):
             questions=questions,
             total_questions=total_questions,
             survey_later=survey_later,
+            adventure_table={
+                'students': student_overview_table,
+                'adventures': class_adventures_formatted,
+                'student_adventures': student_adventures,
+                'level': '1'
+            }
         )
+    
+    def get_grid_info(self, user, class_id, level):
+        class_ = self.db.get_class(class_id)
+        if hedy_content.Adventures(g.lang).has_adventures():
+            adventures = hedy_content.Adventures(g.lang).get_adventure_keyname_name_levels()
+        else:
+            adventures = hedy_content.Adventures("en").get_adventure_keyname_name_levels()
+
+        students = sorted(class_.get("students", []))
+        teacher_adventures = self.db.get_teacher_adventures(user["username"])
+
+        class_info = get_customizations(self.db, class_id)
+        class_adventures = class_info.get('sorted_adventures')
+
+        adventure_names = {}
+        for adv_key, adv_dic in adventures.items():
+            for name, _ in adv_dic.items():
+                adventure_names[adv_key] = hedy_content.get_localized_name(name, g.keyword_lang)
+
+        for adventure in teacher_adventures:
+            adventure_names[adventure['id']] = adventure['name']
+
+        class_adventures_formatted = {}
+        for key, value in class_adventures.items():
+            adventure_list = []
+            for adventure in value:
+                # if the adventure is not in adventure names it means that the data in the customizations is bad
+                if not adventure['name'] == 'next' and adventure['name'] in adventure_names:
+                    adventure_list.append(adventure_names[adventure['name']])
+            class_adventures_formatted[key] = adventure_list
+
+        ticked_adventures = {}
+        student_adventures = {}
+        for student in students:
+            programs = self.db.last_level_programs_for_user(student, level)
+            if programs:
+                ticked_adventures[student] = []
+                current_program = {}
+                for _, program in programs.items():
+                    # Old programs sometimes don't have adventures associated to them
+                    # So skip them
+                    if 'adventure_name' not in program:
+                        continue
+                    name = adventure_names.get(program['adventure_name'], program['adventure_name'])
+                    customized_level = class_adventures_formatted.get(str(program['level']))
+                    if name in customized_level:
+                        student_adventure_id = f"{student}-{program['adventure_name']}-{level}"
+                        current_adventure = self.db.student_adventure_by_id(student_adventure_id)
+                        if not current_adventure:
+                            # store the adventure in case it's not in the table
+                            current_adventure = self.db.store_student_adventure(
+                                dict(id=f"{student_adventure_id}", ticked=False, program_id=program['id']))
+
+                        current_program = dict(id=program['id'], level=str(program['level']),
+                                               name=name, ticked=current_adventure['ticked'])
+
+                        student_adventures[student_adventure_id] = program['id']
+                        ticked_adventures[student].append(current_program)
+
+        return students, class_, class_adventures_formatted, ticked_adventures, adventure_names, student_adventures
 
     @route("/class/<class_id>/preview", methods=["GET"])
     @requires_login
@@ -1037,3 +1119,57 @@ class ForTeachersModule(WebsiteModule):
         }
         self.db.store_adventure(adventure)
         return adventure["id"], 200
+
+def get_customizations(db, class_id):
+    """
+    Retrieves the customizations for a specific class from the database.
+
+    Args:
+        db (Database): The database object used to retrieve the customizations.
+        class_id (string): The ID of the class for which to retrieve the customizations.
+
+    Returns:
+        customizations (dict): A dictionary containing the customizations for the class.
+    """
+    customizations = db.get_class_customizations(class_id)
+    if customizations and 'adventures' in customizations:
+        # it uses the old way so convert it to the new one
+        customizations['sorted_adventures'] = {str(i): [] for i in range(1, hedy.HEDY_MAX_LEVEL + 1)}
+        for adventure, levels in customizations['adventures'].items():
+            for level in levels:
+                customizations['sorted_adventures'][str(level)].append(
+                    {"name": adventure, "from_teacher": False})
+
+        db.update_class_customizations(customizations)
+    elif not customizations:
+        # Create a new default customizations object in case it doesn't have one
+        customizations = _create_customizations(db, class_id)
+    return customizations
+
+def _create_customizations(db, class_id):
+    """
+    Create customizations for a given class.
+
+    Args:
+        db (Database): The database object.
+        class_id (int): The ID of the class.
+
+    Returns:
+        customizations (dict): The customizations for the class.
+    """
+    sorted_adventures = {}
+    for lvl, adventures in hedy_content.ADVENTURE_ORDER_PER_LEVEL.items():
+        sorted_adventures[str(lvl)] = [{'name': adventure, 'from_teacher': False} for adventure in adventures]
+    customizations = {
+        "id": class_id,
+        "levels": [i for i in range(1, hedy.HEDY_MAX_LEVEL + 1)],
+        "opening_dates": {},
+        "other_settings": [],
+        "level_thresholds": {},
+        "sorted_adventures": sorted_adventures,
+        "dashboard_customization": {
+            "selected_levels": [1]
+        },
+    }
+    db.update_class_customizations(customizations)
+    return customizations

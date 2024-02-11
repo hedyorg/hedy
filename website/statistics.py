@@ -9,12 +9,18 @@ import exceptions as hedy_exceptions
 from hedy import check_program_size_is_valid, parse_input, is_program_valid, process_input_string, HEDY_MAX_LEVEL
 import hedy
 import jinja_partials
+import logging
+from logging.config import dictConfig as logConfig
+from logging_config import LOGGING_CONFIG
 from website.flask_helpers import render_template
 from website import querylog
-from website.auth import is_admin, is_teacher, requires_admin, requires_login
+from website.auth import is_admin, is_teacher, requires_admin, requires_login, requires_teacher
 
 from .database import Database
 from .website_module import WebsiteModule, route
+
+logConfig(LOGGING_CONFIG)
+logger = logging.getLogger(__name__)
 
 """The Key tuple is used to aggregate the raw data by level, time or username."""
 Key = namedtuple("Key", ["name", "class_"])
@@ -85,49 +91,6 @@ class StatisticsModule(WebsiteModule):
                                              student_adventures=student_adventures,
                                              page_title=gettext("title_class grid_overview"),
                                              )
-
-    @route("/grid_overview/class/<class_id>/level", methods=["POST"])
-    @requires_login
-    def change_checkbox(self, user, class_id):
-        level = request.args.get('level')
-        student_index = request.args.get('student_index', type=int)
-        adventure_index = request.args.get('adventure_index', type=int)
-        students, class_, class_adventures_formatted, ticked_adventures, adventure_names, _ = self.get_grid_info(
-            user, class_id, level)
-        matrix_values = self.get_matrix_values(students, class_adventures_formatted, ticked_adventures, level)
-
-        adventure_names = {value: key for key, value in adventure_names.items()}
-        current_adventure_name = class_adventures_formatted[level][adventure_index]
-        student_adventure_id = f"{students[student_index]}-{adventure_names[current_adventure_name]}-{level}"
-
-        self.db.update_student_adventure(student_adventure_id, matrix_values[student_index][adventure_index])
-        _, _, _, ticked_adventures, _, student_adventures = self.get_grid_info(user, class_id, level)
-        matrix_values[student_index][adventure_index] = not matrix_values[student_index][adventure_index]
-
-        return jinja_partials.render_partial("customize-grid/partial-grid-levels.html",
-                                             level=level,
-                                             class_info={"id": class_id, "students": students, "name": class_["name"]},
-                                             current_page="grid_overview",
-                                             max_level=hedy.HEDY_MAX_LEVEL,
-                                             class_adventures=class_adventures_formatted,
-                                             ticked_adventures=ticked_adventures,
-                                             adventure_names=adventure_names,
-                                             student_adventures=student_adventures,
-                                             matrix_values=matrix_values,
-                                             page_title=gettext("title_class grid_overview"),
-                                             )
-
-    def get_matrix_values(self, students, class_adventures_formatted, ticked_adventures, level):
-        rendered_adventures = class_adventures_formatted.get(level)
-        matrix = [[None for _ in range(len(class_adventures_formatted[level]))] for _ in range(len(students))]
-        for student_index in range(len(students)):
-            student_list = ticked_adventures.get(students[student_index])
-            if student_list and rendered_adventures:
-                for program in student_list:
-                    if program['level'] == level:
-                        index = rendered_adventures.index(program['name'])
-                        matrix[student_index][index] = 1 if program['ticked'] else 0
-        return matrix
 
     @route("/program-stats", methods=["GET"])
     @requires_admin
@@ -266,6 +229,60 @@ class LiveStatisticsModule(WebsiteModule):
         self.MAX_COMMON_ERRORS = 10
         self.MAX_FEED_SIZE = 4
 
+    def get_grid_info(self, user, class_id, level):
+        class_ = self.db.get_class(class_id)
+        if hedy_content.Adventures(g.lang).has_adventures():
+            adventures = hedy_content.Adventures(g.lang).get_adventure_keyname_name_levels()
+        else:
+            adventures = hedy_content.Adventures("en").get_adventure_keyname_name_levels()
+
+        students = sorted(class_.get("students", []))
+        teacher_adventures = self.db.get_teacher_adventures(user["username"])
+
+        class_info = get_customizations(self.db, class_id)
+        class_adventures = class_info.get('sorted_adventures')[str(level)]
+
+        adventure_names = {}
+        for adv_key, adv_dic in adventures.items():
+            for name, _ in adv_dic.items():
+                adventure_names[adv_key] = hedy_content.get_localized_name(name, g.keyword_lang)
+
+        for adventure in teacher_adventures:
+            adventure_names[adventure['id']] = adventure['name']
+
+        class_adventures_formatted = []
+        for adventure in class_adventures:
+            # if the adventure is not in adventure names it means that the data in the customizations is bad
+            if not adventure['name'] == 'next' and adventure['name'] in adventure_names:
+                class_adventures_formatted.append({
+                    'name': adventure_names[adventure['name']],
+                    'id': adventure['name']
+                })
+
+        student_adventures = {}
+        for student in students:
+            programs = self.db.last_level_programs_for_user(student, level)
+            if programs:
+                for _, program in programs.items():
+                    # Old programs sometimes don't have adventures associated to them
+                    # So skip them
+                    if 'adventure_name' not in program:
+                        continue
+                    name = adventure_names.get(program['adventure_name'], program['adventure_name'])
+                    adventure = {'name': name, 'id': program['adventure_name']}
+                    if adventure in class_adventures_formatted:
+                        student_adventure_id = f"{student}-{program['adventure_name']}-{level}"
+                        current_adventure = self.db.student_adventure_by_id(student_adventure_id)
+                        if not current_adventure:
+                            # store the adventure in case it's not in the table
+                            current_adventure = self.db.store_student_adventure(
+                                dict(id=f"{student_adventure_id}", ticked=False, program_id=program['id']))
+
+                        student_adventures[student_adventure_id] = {
+                            'program': program['id'], 'ticked': current_adventure['ticked']}
+
+        return students, class_adventures_formatted, student_adventures
+
     def __selected_levels(self, class_id):
         class_customization = get_customizations(self.db, class_id)
         class_overview = class_customization.get('dashboard_customization')
@@ -346,30 +363,66 @@ class LiveStatisticsModule(WebsiteModule):
         student = _check_student_arg()
         dashboard_options_args = _build_url_args(student=student)
 
-        students, common_errors, selected_levels, quiz_info, attempted_adventures, \
-            adventures = self.get_class_live_stats(user, class_)
+        common_errors, quiz_info = self.get_class_live_stats(user, class_)
+
+        students, class_adventures_formatted, student_adventures = self.get_grid_info(user, class_id, '1')
 
         return render_template(
             "class-live-stats.html",
             class_info={
                 "id": class_id,
-                "students": students,
                 "common_errors": common_errors['errors']
             },
             class_overview={
-                "selected_levels": selected_levels,
                 "quiz_info": quiz_info
             },
             dashboard_options={
                 "student": student
             },
-            attempted_adventures=attempted_adventures,
+            adventure_table={
+                'students': students,
+                'adventures': class_adventures_formatted,
+                'student_adventures': student_adventures,
+                'level': '1'
+            },
             dashboard_options_args=dashboard_options_args,
-            adventures=adventures,
             max_level=HEDY_MAX_LEVEL,
             current_page="my-profile",
-            page_title=gettext("title_class live_statistics")
+            page_title=gettext("title_class live_statistics"),
         )
+
+    @route("/grid_overview/class/<class_id>/level", methods=["POST"])
+    @requires_teacher
+    def change_checkbox(self, user, class_id):
+        class_ = self.db.get_class(class_id)
+        teachers = {teacher['username'] for teacher in class_.get(
+            "second_teachers", [])}  # CHECK IF STUDENT BELONGS TO THIS CLASS
+        if not class_ or class_["teacher"] != user["username"] \
+                or (user['username'] not in teachers and class_["teacher"] != user["username"]):
+            return utils.error_page(error=404, ui_message=gettext("no_such_class"))
+
+        level = request.args.get('level')
+        student = request.args.get('student', type=str)
+        adventure_id = request.args.get('adventure', type=str)
+        student_adventure_id = f'{student}-{adventure_id}-{level}'
+        student_adventure = self.db.student_adventure_by_id(student_adventure_id)
+        if not student_adventure:
+            logging.error(f"Could not find student_adventure with id {student_adventure_id}")
+            # TODO: How to gracefully recover from an error with HTMX
+
+        self.db.update_student_adventure(student_adventure_id, student_adventure['ticked'])
+        students, class_adventures_formatted, student_adventures = self.get_grid_info(user, class_id, level)
+
+        return jinja_partials.render_partial("customize-grid/partial-grid-levels.html",
+                                             class_info={
+                                                 "id": class_id,
+                                             },
+                                             adventure_table={
+                                                 'students': students,
+                                                 'adventures': class_adventures_formatted,
+                                                 'student_adventures': student_adventures,
+                                                 'level': level
+                                             })
 
     def get_class_live_stats(self, user, class_):
         # Retrieve common errors and selected levels in class overview from the database for class
@@ -380,9 +433,6 @@ class LiveStatisticsModule(WebsiteModule):
 
         # identifies common errors in the class
         common_errors = self.common_exception_detection(class_['id'], user)
-
-        students = self.__all_students(class_)
-        adventures = self.__get_adventures_for_overview(user, class_['id'])
 
         quiz_stats = []
         for student_username in class_.get("students", []):
@@ -399,23 +449,13 @@ class LiveStatisticsModule(WebsiteModule):
             )
         quiz_info = _get_quiz_info(quiz_stats)
 
-        attempted_adventures = {}
-        for level in range(1, HEDY_MAX_LEVEL+1):
-            programs_for_student = {}
-            for _student in class_.get("students", []):
-                adventures_for_student = [x['adventure_name'] for x in self.db.level_programs_for_user(_student, level)]
-                if adventures_for_student:
-                    programs_for_student[_student] = adventures_for_student
-            if programs_for_student != []:
-                attempted_adventures[level] = programs_for_student
+        return common_errors, quiz_info
 
-        return students, common_errors, selected_levels, quiz_info, attempted_adventures, adventures
-
-    @route("/live_stats/class/<class_id>/select_level", methods=["GET"])
+    @route("/live_stats/class/<class_id>/level/<level>", methods=["GET"])
     @requires_login
-    def choose_level(self, user, class_id):
+    def select_level(self, user, class_id, level):
         """
-        Adds or remove the current level from the UI
+        Change the level of the grid overview
         """
         if not is_teacher(user) and not is_admin(user):
             return utils.error_page(error=403, ui_message=gettext("retrieve_class_error"))
@@ -424,47 +464,18 @@ class LiveStatisticsModule(WebsiteModule):
         if not class_ or (class_["teacher"] != user["username"] and not is_admin(user)):
             return utils.error_page(error=404, ui_message=gettext("no_such_class"))
 
-        selected_levels = self.__selected_levels(class_id)
-        chosen_level = request.args.get("level")
+        students, class_adventures_formatted, student_adventures = self.get_grid_info(user, class_id, level)
 
-        if int(chosen_level) in selected_levels:
-            selected_levels.remove(int(chosen_level))
-        else:
-            selected_levels.append(int(chosen_level))
-
-        customization = get_customizations(self.db, class_id)
-        dashboard_customization = customization.get('dashboard_customization', {})
-        dashboard_customization['selected_levels'] = selected_levels
-        customization['dashboard_customization'] = dashboard_customization
-        self.db.update_class_customizations(customization)
-
-        students, common_errors, selected_levels, quiz_info, attempted_adventures, \
-            adventures = self.get_class_live_stats(user, class_)
-
-        student = _check_student_arg()
-        dashboard_options_args = _build_url_args(student=student)
-
-        return jinja_partials.render_partial(
-            "partial-class-live-stats.html",
-            class_info={
-                "id": class_id,
-                "students": students,
-                "common_errors": common_errors['errors']
-            },
-            class_overview={
-                "selected_levels": selected_levels,
-                "quiz_info": quiz_info
-            },
-            dashboard_options={
-                "student": student
-            },
-            attempted_adventures=attempted_adventures,
-            dashboard_options_args=dashboard_options_args,
-            adventures=adventures,
-            max_level=HEDY_MAX_LEVEL,
-            current_page="my-profile",
-            page_title=gettext("title_class live_statistics")
-        )
+        return jinja_partials.render_partial("customize-grid/partial-grid-levels.html",
+                                             class_info={
+                                                 "id": class_id,
+                                             },
+                                             adventure_table={
+                                                 'students': students,
+                                                 'adventures': class_adventures_formatted,
+                                                 'student_adventures': student_adventures,
+                                                 'level': level
+                                             })
 
     @route("/live_stats/class/<class_id>/refresh", methods=["GET"])
     @requires_login
@@ -744,7 +755,14 @@ class LiveStatisticsModule(WebsiteModule):
         """
         class_ = self.db.get_class(class_id)
         exceptions_per_user = {}
+        exceptions_per_user_1 = {}
         students = sorted(class_.get("students", []))
+
+        level_1 = self.db.get_program_stats_for_level(students, 1)
+        for program_data in level_1:
+            exceptions = {k: v for k, v in program_data.items() if k.lower().endswith("exception")}
+            exceptions_per_user_1[program_data['id']] = exceptions
+
         for student_username in students:
             program_stats = self.db.get_program_stats([student_username], None, None)
             if program_stats:
@@ -794,6 +812,9 @@ class LiveStatisticsModule(WebsiteModule):
         labels = [x['label'] for x in common_errors['errors']]
         exception_type_counts = {}
 
+        print('*'*100)
+        print(f'Exceptions per user: {exceptions_per_user}')
+        print('*'*100)
         # Iterate over each error and its corresponding username in the current session group
         for username, exception_count in exceptions_per_user.items():
             for exception_name, count in exception_count.items():
