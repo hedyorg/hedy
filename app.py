@@ -1011,26 +1011,10 @@ def programs_page(user):
                                                        submitted=submitted,
                                                        pagination_token=page)
 
-    programs_by_level = []
-    for item in all_programs:
-        programs_by_level.append(
-            {'level': item['level'],
-             'adventure_name': item.get('adventure_name'),
-             }
-        )
-
-    programs_by_adventure = []
-    for item in all_programs:
-        programs_by_adventure.append(
-            {'adventure_name': adventure_names.get(item.get('adventure_name')),
-             'level': item['level'],
-             }
-        )
-
     sorted_level_programs = hedy_content.Adventures(
-        g.lang).get_sorted_level_programs(programs_by_level, adventure_names)
+        g.lang).get_sorted_level_programs(all_programs, adventure_names)
     sorted_adventure_programs = hedy_content.Adventures(
-        g.lang).get_sorted_adventure_programs(programs_by_adventure)
+        g.lang).get_sorted_adventure_programs(all_programs, adventure_names)
 
     next_page_url = url_for('programs_page', **dict(request.args, page=result.next_page_token)
                             ) if result.next_page_token else None
@@ -2551,26 +2535,10 @@ def public_user_page(username):
                                                            public=True,
                                                            pagination_token=page)
 
-        programs_by_level = []
-        for item in all_programs:
-            programs_by_level.append(
-                {'level': item['level'],
-                 'adventure_name': item.get('adventure_name'),
-                 }
-            )
-
-        programs_by_adventure = []
-        for item in all_programs:
-            programs_by_adventure.append(
-                {'adventure_name': adventure_names.get(item.get('adventure_name')),
-                 'level': item['level'],
-                 }
-            )
-
         sorted_level_programs = hedy_content.Adventures(
-            g.lang).get_sorted_level_programs(programs_by_level, adventure_names)
+            g.lang).get_sorted_level_programs(all_programs, adventure_names)
         sorted_adventure_programs = hedy_content.Adventures(
-            g.lang).get_sorted_adventure_programs(programs_by_adventure)
+            g.lang).get_sorted_adventure_programs(all_programs, adventure_names)
 
         favourite_program = None
         if 'favourite_program' in user_public_info and user_public_info['favourite_program']:
