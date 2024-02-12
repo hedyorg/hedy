@@ -27,64 +27,30 @@ class TrackingModule(WebsiteModule):
         self.db = db
         self.activity_id = None
 
-    def index_teacher(self, user):
-        return {}
-
     @route("/", methods=["POST"])
     @requires_login
     def index(self, user):
         # /tracking/
         user = self.db.user_by_username(user["username"])
-        # if user.get("is_teacher"):
-        #     return self.index_teacher(user)
-
         print("\n\n\n TRACKING index \n\n")
         body = request.json
-        data = {}
+        data = []
 
         class_id = session["class_id"]
-        data["class_id"] = class_id
-        data["username"] = user["username"]
-        data["gender"] = user["gender"]
-        # print(data)
-        # counts = data.counts
-        # page = data.page
-        # page_title = data.pageTitle
 
-        data["data"] = body
+        for row in body:
+            data_row = {}
+            data_row["class_id"] = class_id
+            data_row["username"] = user["username"]
+            data_row["gender"] = user.get("gender", 'm')
+            for key in row.keys():
+                data_row[key] = row[key]
+            data.append(data_row)
 
-        parse_logger.log(data, filename="data_track.csv")
-        return {}
+        print(data)
 
-        # hits = body.get("hits", {})
-        # pages = {body.get("page")}
-        # page_titles = {body.get("pageTitle")}
-
-        # data["pages"] = pages
-        # data["page_titles"] = page_titles
-
-        # activity = self.db.get_activity(user["username"])
-        # if activity:
-        #     activity.get("hits").update(hits)
-        #     hits = activity.get("hits")
-
-        #     activity.get("pages").update(pages)
-        #     pages = activity.get("pages")
-
-        #     activity.get("page_titles").update(page_titles)
-        #     page_titles = activity.get("page_titles")
-
-        #     self.activity_id = activity.get("id")
-
-        # data["hits"] = hits
-        # data["pages"] = pages
-        # data["page_titles"] = page_titles
-
-        # if self.activity_id:
-        #     self.db.log_activity(data, self.activity_id)
-        # else:
-        #     self.activity_id = uuid.uuid4().hex
-        #     data["id"] = self.activity_id
-        #     self.db.log_activity(data)
-
-        # return {}
+        try:
+            parse_logger.log(data)
+            return {}, 200
+        except IOError:
+            return "Not logged", 400

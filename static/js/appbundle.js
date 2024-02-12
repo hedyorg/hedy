@@ -4121,6 +4121,7 @@ var hedyApp = (() => {
     initializeHighlightedCodeBlocks: () => initializeHighlightedCodeBlocks,
     initializeLoginLinks: () => initializeLoginLinks,
     initializeTeacherPage: () => initializeTeacherPage,
+    initializeTracking: () => initializeTracking,
     initializeTutorial: () => initializeTutorial,
     initializeViewProgramPage: () => initializeViewProgramPage,
     invite_student: () => invite_student,
@@ -56773,6 +56774,168 @@ notes_mapping = {
     }
   };
 
+  // static/js/tracking.ts
+  var WAITING_TIME = 1e3;
+  var ELEMENT_TO_TRACK = [
+    "debug_button",
+    "developers_toggle",
+    "dropdown_chetsheet_button",
+    "try_button1",
+    "try_button2",
+    "try_button3",
+    "try_button4",
+    "try_button5",
+    "try_button6",
+    "speak_dropdown",
+    "language-dropdown",
+    "commands_dropdown",
+    "keyword_toggle",
+    "level_button_1",
+    "level_button_2",
+    "level_button_3",
+    "level_button_4",
+    "level_button_5",
+    "level_button_6",
+    "level_button_7",
+    "level_button_8",
+    "level_button_9",
+    "level_button_10",
+    "level_button_11",
+    "level_button_12",
+    "level_button_13",
+    "level_button_14",
+    "level_button_15",
+    "level_button_16",
+    "level_button_17",
+    "level_button_18",
+    "create_class_button",
+    "create_adventure_button",
+    "public-adventures-link",
+    "to_class_button",
+    "customize_class_button",
+    "go_back_to_teacher_page_button",
+    "live_stats_button",
+    "grid_overview_button",
+    "classes_info",
+    "adventures_info",
+    "slides_info",
+    "download-slides-2",
+    "download-slides-3",
+    "download-slides-4",
+    "download-slides-5",
+    "download-slides-6",
+    "download-slides-7",
+    "download-slides-8",
+    "download-slides-9",
+    "download-slides-10",
+    "download-slides-11",
+    "download-slides-12",
+    "download-slides-13",
+    "download-slides-14",
+    "download-slides-15",
+    "download-slides-16",
+    "download-slides-17",
+    "download-slides-18",
+    "explore_page_adventure",
+    "explore_page_level"
+  ];
+  var CLICK_COUNTS = "clickCounts";
+  var LAST_ACTIVE = "lastActiveTime";
+  var INTERVAL_KEY = "interval";
+  var clickCounts = [];
+  var lastActiveTime = Date.now();
+  var changesSent = false;
+  function initializeTracking() {
+    document.addEventListener("DOMContentLoaded", documentLoaded);
+  }
+  function documentLoaded() {
+    document.addEventListener("click", trackEvent);
+    document.addEventListener("change", trackEvent);
+    clickCounts = handleLocalStorage(CLICK_COUNTS);
+    lastActiveTime = handleLocalStorage(LAST_ACTIVE, Date.now());
+    resumeTrackingInterval();
+  }
+  function resumeTrackingInterval() {
+    const storedData = localStorage.getItem(INTERVAL_KEY);
+    if (storedData) {
+      try {
+        const parsedData = JSON.parse(storedData);
+        clearInterval(parsedData.id);
+      } catch (error2) {
+        console.error("Error parsing tracking interval data:", error2);
+      }
+    }
+    setTrackingInterval();
+  }
+  function setTrackingInterval() {
+    const timerId = setInterval(checkUserActivity, WAITING_TIME);
+    localStorage.setItem(INTERVAL_KEY, JSON.stringify({ id: timerId, timestamp: Date.now() }));
+  }
+  async function trackEvent(event2) {
+    const currentTime = Date.now();
+    const inactiveDuration = currentTime - lastActiveTime;
+    if (inactiveDuration <= 200) {
+      return;
+    }
+    const target = event2.target;
+    if (target.matches("button") || target.matches("a") || target.matches("input") || target.matches("select") || target.matches("div")) {
+      let elementIdOrName = target.id;
+      if (!elementIdOrName && target.hasAttribute("name")) {
+        elementIdOrName = target.getAttribute("name") || "";
+      }
+      if (ELEMENT_TO_TRACK.includes(elementIdOrName)) {
+        clickCounts = handleLocalStorage(CLICK_COUNTS);
+        const page = window.location.pathname;
+        clickCounts.push({ time: currentTime, id: elementIdOrName, page });
+        console.log(target, clickCounts);
+        console.log(`Event: ${event2.type}, Element ID or Name: ${elementIdOrName}, Click Count: ${clickCounts}`);
+        handleUserActivity(clickCounts);
+      }
+    }
+  }
+  function handleUserActivity(clickCounts2) {
+    lastActiveTime = handleLocalStorage(LAST_ACTIVE, Date.now());
+    clickCounts2 = handleLocalStorage(CLICK_COUNTS, clickCounts2);
+    changesSent = false;
+  }
+  function handleLocalStorage(item, value = void 0) {
+    const retrievedItem = window.localStorage.getItem(item);
+    if (!retrievedItem || value !== void 0) {
+      window.localStorage.setItem(item, JSON.stringify(value));
+    } else {
+      if (item === CLICK_COUNTS) {
+        value = JSON.parse(retrievedItem);
+      } else if (item === LAST_ACTIVE) {
+        value = parseInt(retrievedItem);
+      }
+    }
+    return value;
+  }
+  async function checkUserActivity() {
+    if (changesSent) {
+      return;
+    }
+    const currentTime = Date.now();
+    const inactiveDuration = currentTime - lastActiveTime;
+    if (inactiveDuration >= WAITING_TIME) {
+      sendRequestToServer();
+    }
+  }
+  async function sendRequestToServer() {
+    console.log("Sending request to server...", clickCounts);
+    try {
+      const data = localStorage.getItem(CLICK_COUNTS);
+      console.log(data);
+      if (data) {
+        await postJson("/tracking", JSON.parse(data));
+        handleUserActivity([]);
+        changesSent = true;
+      }
+    } catch (error2) {
+      console.error(error2);
+    }
+  }
+
   // static/js/app.ts
   var theGlobalDebugger;
   var theGlobalEditor;
@@ -56893,6 +57056,7 @@ pygame.quit()
       $(ev.target).closest("form").trigger("submit");
     });
     initializeLoginLinks();
+    initializeTracking();
   }
   function initializeCodePage(options) {
     var _a3;
