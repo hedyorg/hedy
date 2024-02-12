@@ -2659,7 +2659,7 @@ def on_offline_mode():
     # use port 80 (unless overridden).
     # There will be a standard teacher invite code that everyone can use
     # by going to `http://localhost/invite/newteacher`.
-    os.chdir(sys._MEIPASS)
+    os.chdir(utils.offline_data_dir())
     config['port'] = int(os.environ.get('PORT', 80))
     if not os.getenv('TEACHER_INVITE_CODES'):
         os.environ['TEACHER_INVITE_CODES'] = 'newteacher'
@@ -2679,8 +2679,7 @@ def on_offline_mode():
         socket.gethostname(), None, socket.AF_INET, socket.SOCK_STREAM)]
     ip_addresses = [i for i in ip_addresses if i != '127.0.0.1']
 
-    from colorama import Fore, Back, Style
-    # just_fix_windows_console()
+    from colorama import colorama_text, Fore, Back, Style
     lines = [
         ('', ''),
         ('', ''),
@@ -2691,8 +2690,11 @@ def on_offline_mode():
         ('', ''),
         ('', ''),
     ]
-    for style, text in lines:
-        print(Back.WHITE + Fore.BLACK + ''.ljust(10) + style + text.ljust(60) + Style.RESET_ALL)
+    # This is necessary to make ANSI color codes work on Windows.
+    # Init and deinit so we don't mess with Werkzeug's use of this library later on.
+    with colorama_text():
+        for style, text in lines:
+            print(Back.WHITE + Fore.BLACK + ''.ljust(10) + style + text.ljust(60) + Style.RESET_ALL)
 
     # We have this option for testing the offline build. A lot of modules read
     # files upon import, and those happen before the offline build 'cd' we do

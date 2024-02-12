@@ -103,7 +103,12 @@ def is_offline_mode():
     Offline mode is a special build of Hedy that teachers can download and run
     on their own computers.
     """
-    return getattr(sys, 'frozen', False) and hasattr(sys, '_MEIPASS')
+    return getattr(sys, 'frozen', False) and offline_data_dir() is not None
+
+
+def offline_data_dir():
+    """Return the data directory in offline mode."""
+    return getattr(sys, '_MEIPASS')
 
 
 def set_debug_mode(debug_mode):
