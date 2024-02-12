@@ -2680,11 +2680,20 @@ def on_offline_mode():
     ip_addresses = [i for i in ip_addresses if i != '127.0.0.1']
 
     from colorama import colorama_text, Fore, Back, Style
+    g = Fore.GREEN
     lines = [
         ('', ''),
         ('', ''),
-        ('',  'To use offline Hedy, use a web browser to'),
-        ('',  'visit the following website:'),
+        (g, ' _    _          _       '),
+        (g, '| |  | |        | |      '),
+        (g, '| |__| | ___  __| |_   _ '),
+        (g, '|  __  |/ _ \/ _` | | | |'),
+        (g, '| |  | |  __/ (_| | |_| |'),
+        (g, '|_|  |_|\___|\__,_|\__, |'),
+        (g, '                    __/ |'),
+        (g, '                   |___/ '),
+        ('', ''),
+        ('', 'Use a web browser to visit the following website:'),
         ('', ''),
         *[(Fore.BLUE, f'   http://{ip}/') for ip in ip_addresses],
         ('', ''),

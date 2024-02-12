@@ -384,6 +384,7 @@ def task__offline():
             # We copy this here instead of in the 'spec' file so that we can rename
             # the file (spec file copies cannot do that).
             'cp data-for-testing.json dist/offlinehedy/database.json',
+            'cp OFFLINE_README.txt dist/offlinehedy/README.txt',
             # There are some research papers in the distribution that take up a lot
             # of space.
             'rm -rf dist/offlinehedy/_internal/content/research/*',
