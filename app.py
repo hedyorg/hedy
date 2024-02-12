@@ -2691,7 +2691,7 @@ def on_offline_mode():
         (g, '| |  | |  __/ (_| | |_| |'),
         (g, '|_|  |_|\___|\__,_|\__, |'),
         (g, '                    __/ |'),
-        (g, '                   |___/ '),
+        (g, '   o f f l i n e   |___/ '),
         ('', ''),
         ('', 'Use a web browser to visit the following website:'),
         ('', ''),

@@ -5,7 +5,7 @@
    | |  | |  __/ (_| | |_| |
    |_|  |_|\___|\__,_|\__, |
                        __/ |
-                      |___/
+      o f f l i n e   |___/
 
 Welcome to offline Hedy! You can use offline Hedy to run Hedy on your own
 computer, and it can be used by anyone on the same network.
@@ -20,11 +20,15 @@ happen:
 - Windows Firewall will ask you whether or not to allow network connections.
   You should click "Allow".
 - Windows Defender may say that Hedy is a dangerous program and ask you whether
-  or not it should be run. You should clikc "Allow".
+  or not it should be run. You should click "More Info" and then "Run Anyway".
 
-You can create a teacher account for yourself by visiting the following link:
+You can create a teacher account for yourself by visiting the following link
+and then clicking "Create Account".
 
     http://localhost/invite/newteacher
+
+You can also use one of the built-in accounts, which is named "teacher1"
+with password "123456".
 
 
 For students
