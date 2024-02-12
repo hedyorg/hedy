@@ -132,7 +132,7 @@
             <div class="border rounded-lg border-yellow-500 mb-4 py-2 w-full">
                 <h3 class="text-center z-10 font-bold pb-0 mb-0 text-2xl">{{_('favorite_program')}}</h3>
                 <div class="flex flex-wrap mx-auto justify-center gap-4 turn-pre-into-ace" id="user_favourite_program">
-                    {{ render_partial('htmx-adventure-card.html', user={}, adventure=favorite_program, is_program=true, is_admin=is_admin, is_favorite=true) }}
+                    {{ render_partial('htmx-adventure-card.html', user={}, adventure=favourite_program, is_program=true, is_admin=is_admin, is_favorite=true) }}
                 </div>
             </div>            
         {% endif %}
