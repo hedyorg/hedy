@@ -922,41 +922,42 @@ adventures:
             11:
                 story_text: |-
                     ### Ejercicio
-                    Depura este programa de calendario. Se supone que el resultado de este programa parezca una lista de fechas.
+                    Depura este programa de calendario. Se supone que la salida de este programa debe parecerse a una lista de fechas.
                     Por ejemplo:
 
                     ```
                     Calendario Hedy
-                    Aqué están todos los dias de noviembre
-                    1 de noviembre
+                    Aquí están todos los días de noviembre
+                    1 de Noviembre
                     2 de noviembre
                     3 de noviembre
                     ```
                     Y así sucesivamente.
 
-                    Ten en cuenta que tienes que probar tu código con mucho cuidado para el mes de febrero, porque la cantidad de días en este mes cambia en los años bisiestos.
+                    Ten en cuenta que tienes que probar tu código con mucho cuidado para el mes de febrero, porque la cantidad de días de este mes cambia en los años bisiestos.
                 example_code: |
-                    **¡Atención! ¡Este código necesita ser depurado!**
+                    **¡Atención! Este código necesita ser depurado.
                     ```
-                    imprimir 'Calendario Hedy'
-                    meses_con_31 dias = enero, marzo, mayo, julio, septiembre, octubre, diciembre
-                    meses_con_30_dias = abril, junio, agosto, noviembre
-                    mes = preguntar '¿Qué mes quieres ver?'
-                    si mes en meses_con_31_dias
-                        dias = 31
-                        si mes en meses_con30_dias
-                            dias = 30
-                    si mes = febrero
-                        años_bisiestos = 2020, 2024, 2028, 2036, 2040, 2044, 2028
-                        año = preguntar '¿Qué año es?'
-                    si año en años_bisiestos
-                        dias = 29
-                    sino
-                        dias = 28
+                    {print} 'Calendario Hedy'
+                    meses_con_31_dias = Enero, Marzo, Mayo, Julio, Septiembre, Octubre, Diciembre
+                    months_with_30_days = Abril, Junio, Agosto, Noviembre
+                    mes = {ask} ¿Qué mes le gustaría ver?
+                    {if} mes {in} meses_con_31_días
+                        días = 31
+                        {if} mes {in} meses_con_30_días
+                            días = 30
+                    {if} mes = febrero
+                        años bisiestos = 2020, 2024, 2028, 2036, 2040, 2044, 2028
+                        año = {ask} ¿Qué año es?
+                    {if} año {in} bisiestos
+                        días = 29
+                    {else}
+                        días = 28
 
-                    imprimir 'Aquí tienes los días de ' me
-                    para i en rango 1 a dias
-                        imprimir mes i
+                    {print} 'Aquí están todos los días de '
+                    mes
+                    {for} i {in} {range} 1 {to} días
+                        {print} mes i
                     ```
             12:
                 story_text: |-

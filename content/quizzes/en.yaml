@@ -2338,15 +2338,26 @@ levels:
                     {print} i
             mp_choice_options:
             -   option: |-
+                    ```
                     1
                     2
                     3
+                    ```
                 feedback: Correct!
-            -   option: 1 2 3
+            -   option: |-
+                    ```
+                    1 2 3
+                    ```
                 feedback: That's not it
-            -   option: 1, 2, 3
+            -   option: |-
+                    ```
+                    1, 2, 3
+                    ```
                 feedback: That's not it
-            -   option: '123'
+            -   option: |-
+                    ```
+                    123
+                    ```
                 feedback: That's not it
             hint: How do the numbers appear in the screen?
             correct_answer: A
@@ -2416,13 +2427,13 @@ levels:
             -   option: |-
                     ```
                     {for} i {in} {range} 0 {to} 10
-                        {print} - i
+                        {print} -1 * i
                     ```
                 feedback: Hedy would print negative numbers in this case.
             -   option: |-
                     ```
-                    {for} i {in} {range} 10 to 0
-                        {print} 10 9 8 7 6 5 4 3 2 1 0
+                    {for} i {in} {range} 10 {to} 0
+                        {print} i
                     ```
                 feedback: Unfortunately this does not exist.
             -   option: |-
@@ -2431,7 +2442,7 @@ levels:
                         {print} 10 - i
                     ```
                 feedback: That's right!
-            hint: It has to be a calculation...
+            hint: It has to be a calculation…
             correct_answer: D
             question_score: '10'
         5:
@@ -2507,16 +2518,23 @@ levels:
                     {print} 'hi'
             mp_choice_options:
             -   option: |-
+                    ```
                     23
                     24
                     25
+                    ```
                 feedback: The numbers don't appear. It doesn't say `{print}` i.
-            -   option: 23 hi 24 hi 25 hi
+            -   option: |-
+                    ```
+                    23 hi 24 hi 25 hi
+                    ```
                 feedback: The numbers don't appear. It doesn't say `{print}` i
             -   option: |-
+                    ```
                     hi
                     hi
                     hi
+                    ```
                 feedback: Correct
             -   option: The word 'hi' will appear 25 times in a row.
                 feedback: No it will only appear 3 times.
@@ -2555,7 +2573,7 @@ levels:
                         {print} Baby shark tututudutudu
                         {print} Baby shark
                     ```
-                feedback: Mind the indention
+                feedback: Mind the indentation
             -   option: |-
                     ```
                     {for} i {in} {range} 1 {to} 3
@@ -2577,7 +2595,7 @@ levels:
                         {print} Baby shark
                     ```
                 feedback: '`{range}` 0 `{to}` 3 is 4 times.'
-            hint: Mind the indention
+            hint: Mind the indentation
             correct_answer: B
             question_score: '10'
     12:
