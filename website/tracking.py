@@ -6,7 +6,7 @@ from flask import request, session
 
 # import utils
 from config import config
-from website.auth import requires_login
+from website.auth import requires_login, is_teacher
 
 from .database import Database
 from .website_module import WebsiteModule, route
@@ -39,12 +39,13 @@ class TrackingModule(WebsiteModule):
         class_id = session["class_id"]
 
         for row in body:
-            data_row = {}
-            data_row["class_id"] = class_id
-            data_row["username"] = user["username"]
-            data_row["gender"] = user.get("gender", 'm')
-            for key in row.keys():
-                data_row[key] = row[key]
+            data_row = []
+            data_row.append(class_id)
+            data_row.append(user["username"])
+            data_row.append(is_teacher(user))
+            data_row.append(user.get("gender", 'm'))
+            for value in row.values():
+                data_row.append(value)
             data.append(data_row)
 
         print(data)

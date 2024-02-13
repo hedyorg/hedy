@@ -9,32 +9,31 @@ logger = logging.getLogger(__name__)
 class NullLogger:
     """A logger that doesn't actually do anything."""
 
-    def __init__(self):
-        self.data = {}
+    def __init__(self, file_path="tracking_data.csv"):
+        self.file_path = file_path
+        self.open_file()
 
-    def log(self, obj, filename):
+    def open_file(self):
+        """Opens the CSV file in append mode, creating it if it doesn't exist."""
+        try:
+            with open(self.file_path, 'a', newline='') as f:
+                header = ['class_id', 'username', 'is_teacher', 'gender', 'time', 'id', 'page']
+                writer = csv.writer(f)
+                # Write header only if file is empty
+                if f.tell() == 0:
+                    writer.writerow(header)
+        except IOError as e:
+            print(f"Error opening CSV file: {e}")
 
-        username = obj['username']
-        if username not in self.data:
-            self.data[username] = obj
-        else:
-            self.data[username].update(obj)
-
-        self._write_to_csv(filename)
-
-    def _write_to_csv(self, filename):
-        """
-        Write the data to the CSV file.
-        """
-        with open(filename, 'w', newline='') as file:
-            # fieldnames = self.data.keys()
-            fieldnames = ['username', 'class_id', 'gender', 'data']
-
-            writer = csv.DictWriter(file, fieldnames=fieldnames)
-
-            writer.writeheader()
-            for username, data in self.data.items():
-                writer.writerow(data)
+    def log(self, data):
+        """Logs an event with its type and data to the CSV file."""
+        try:
+            with open(self.file_path, 'a') as f:
+                writer = csv.writer(f)
+                # data should be a list of lists whose values correspond with the headers we set in self.open_file
+                writer.writerows(data)
+        except IOError as e:
+            print(f"Error logging to CSV file: {e}")
 
 
 class S3ParseLogger:

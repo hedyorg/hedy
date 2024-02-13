@@ -1,6 +1,7 @@
 import { postJson } from "./comm";
 
 const WAITING_TIME = 5 * 60 * 1000; // 5min in milliseconds
+// const WAITING_TIME = 3000; // 3s for testing
 const ELEMENT_TO_TRACK = [
     // Debug and Developer buttons
     "debug_button",
@@ -101,23 +102,22 @@ function documentLoaded() {
     clickCounts = handleLocalStorage(CLICK_COUNTS);
     lastActiveTime = handleLocalStorage(LAST_ACTIVE, Date.now());
 
-    resumeTrackingInterval();
-
+    removeTrackingInterval(); // Possibly removing lingering ones.
+    setTrackingInterval(); // Resume with fresh timer
 }
 
-// Initializing interval and removing lingering ones.
-function resumeTrackingInterval() {
+function removeTrackingInterval() {
     const storedData = localStorage.getItem(INTERVAL_KEY);
     if (storedData) {
         try {
             const parsedData = JSON.parse(storedData);
             clearInterval(parsedData.id); // Clear any potentially lingering timer
+            console.log(parsedData.id, " interval was removed")
         } catch (error) {
             console.error("Error parsing tracking interval data:", error);
         }
     }
 
-    setTrackingInterval(); // Resume with fresh timer
 }
 
 function setTrackingInterval() {
@@ -181,6 +181,11 @@ function handleLocalStorage(item: string, value: any = undefined) {
 // Function to check user activity and send request if inactive for 5 minutes
 async function checkUserActivity() {
     if (changesSent) {
+        // Perhaps add current page with no action by the user.
+        // clickCounts = handleLocalStorage(CLICK_COUNTS);
+        // const page = window.location.pathname;
+        // clickCounts.push({time: lastActiveTime, id: '', page});
+        // handleUserActivity(clickCounts);
         return;
     }
     const currentTime = Date.now();
@@ -206,3 +211,12 @@ async function sendRequestToServer() {
     }
 }
 
+
+
+// If not focused on current document, remove interval. Otherwise initialize a new one.
+document.addEventListener('visibilitychange', () => {
+    removeTrackingInterval();
+    if (!document.hidden) {
+        setTrackingInterval();
+    }
+});
