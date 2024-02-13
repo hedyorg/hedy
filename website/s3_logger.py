@@ -9,19 +9,20 @@ logger = logging.getLogger(__name__)
 class NullLogger:
     """A logger that doesn't actually do anything."""
 
-    def __init__(self, file_path="tracking_data.csv"):
+    def __init__(self, file_path="tracking_data.csv", header=[], **kwargs):
+        print('\n\n\n', header, kwargs)
         self.file_path = file_path
+        self.file_header = header
         self.open_file()
 
     def open_file(self):
         """Opens the CSV file in append mode, creating it if it doesn't exist."""
         try:
             with open(self.file_path, 'a', newline='') as f:
-                header = ['class_id', 'username', 'is_teacher', 'gender', 'time', 'id', 'page']
                 writer = csv.writer(f)
                 # Write header only if file is empty
                 if f.tell() == 0:
-                    writer.writerow(header)
+                    writer.writerow(self.file_header)
         except IOError as e:
             print(f"Error opening CSV file: {e}")
 
@@ -41,10 +42,10 @@ class S3ParseLogger:
     """
 
     @staticmethod
-    def from_env_vars():
+    def from_env_vars(**kwargs):
         transmitter = aws_helpers.s3_parselog_transmitter_from_env()
         if not transmitter:
-            return NullLogger()
+            return NullLogger(**kwargs)
 
         S3_LOG_QUEUE.set_transmitter(transmitter)
         return S3ParseLogger()

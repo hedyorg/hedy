@@ -17,15 +17,14 @@ cookie_name = config["session"]["cookie_name"]
 invite_length = config["session"]["invite_length"] * 60
 
 
-parse_logger = s3_logger.S3ParseLogger.from_env_vars()
+HEADER = ["class_id", "username", "is_teacher", "gender", "time", "id", "page", "extra"]
+parse_logger = s3_logger.S3ParseLogger.from_env_vars(header=HEADER)
 
 
 class TrackingModule(WebsiteModule):
     def __init__(self, db: Database):
         super().__init__("tracking", __name__, url_prefix="/tracking")
-
         self.db = db
-        self.activity_id = None
 
     @route("/", methods=["POST"])
     @requires_login
@@ -39,13 +38,18 @@ class TrackingModule(WebsiteModule):
         class_id = session["class_id"]
 
         for row in body:
+            # Values in data_row should be consistent with the header.
             data_row = []
             data_row.append(class_id)
             data_row.append(user["username"])
             data_row.append(is_teacher(user))
             data_row.append(user.get("gender", 'm'))
-            for value in row.values():
-                data_row.append(value)
+            # Date from front-end
+            data_row.append(row["time"])
+            data_row.append(row["id"])
+            data_row.append(row["page"])
+            data_row.append(row["extra"])
+
             data.append(data_row)
 
         print(data)

@@ -1,7 +1,7 @@
 import { postJson } from "./comm";
 
-const WAITING_TIME = 5 * 60 * 1000; // 5min in milliseconds
-// const WAITING_TIME = 3000; // 3s for testing
+// const WAITING_TIME = 5 * 60 * 1000; // 5min in milliseconds
+const WAITING_TIME = 3000; // 3s for testing
 const ELEMENT_TO_TRACK = [
     // Debug and Developer buttons
     "debug_button",
@@ -147,8 +147,10 @@ async function trackEvent(event: Event) {
             
             const page = window.location.pathname;
 
-            clickCounts.push({time: currentTime, id: elementIdOrName, page});
+            const value = (target as HTMLInputElement).value || "";
 
+            clickCounts.push({time: currentTime, id: elementIdOrName, page, extra: value});
+            
             console.log(target, clickCounts)
             console.log(`Event: ${event.type}, Element ID or Name: ${elementIdOrName}, Click Count: ${clickCounts}`);
             handleUserActivity(clickCounts);
@@ -167,6 +169,7 @@ function handleUserActivity(clickCounts: any) {
 function handleLocalStorage(item: string, value: any = undefined) {
     const retrievedItem = window.localStorage.getItem(item);
     if (!retrievedItem || value !== undefined) {
+        value = value || [];
         window.localStorage.setItem(item, JSON.stringify(value));
     } else {
         if (item === CLICK_COUNTS) {
@@ -197,12 +200,11 @@ async function checkUserActivity() {
 
 // Function to send request to the server
 async function sendRequestToServer() {
-    console.log('Sending request to server...', clickCounts);
     try {
-        const data = localStorage.getItem(CLICK_COUNTS)
-        console.log(data)
-        if (data) {
-            await postJson('/tracking', JSON.parse(data));
+        const data = handleLocalStorage(CLICK_COUNTS)
+        if (data.length) {
+            console.log('Sending request to server...');
+            await postJson('/tracking', data);
             handleUserActivity([]);
             changesSent = true;
         }
