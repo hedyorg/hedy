@@ -511,8 +511,16 @@ class Adventures(StructuredDataFile):
         return {aid: {adv['name']: list(adv['levels'].keys())} for aid, adv in self.file.get('adventures', {}).items()}
 
     def get_sorted_level_programs(self, programs, adventure_names):
+        programs_by_level = []
+        for item in programs:
+            programs_by_level.append(
+                {'level': item['level'],
+                 'adventure_name': item.get('adventure_name'),
+                 }
+            )
+
         sort = {}
-        for program in programs:
+        for program in programs_by_level:
             if program['level'] in sort:
                 sort[program['level']].append(adventure_names.get(program['adventure_name']))
             else:
@@ -522,9 +530,17 @@ class Adventures(StructuredDataFile):
 
         return dict(sorted(sort.items(), key=lambda item: item[0]))
 
-    def get_sorted_adventure_programs(self, programs):
+    def get_sorted_adventure_programs(self, programs, adventure_names):
+        programs_by_adventure = []
+        for item in programs:
+            programs_by_adventure.append(
+                {'adventure_name': adventure_names.get(item.get('adventure_name')),
+                 'level': item['level'],
+                 }
+            )
+
         sort = {}
-        for program in programs:
+        for program in programs_by_adventure:
             if program['adventure_name'] in sort:
                 sort[program['adventure_name']].append(program['level'])
             else:
