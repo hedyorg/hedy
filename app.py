@@ -256,7 +256,6 @@ def load_customized_adventures(level, customizations, into_adventures):
 def get_locale():
     return session.get("lang", request.accept_languages.best_match(ALL_LANGUAGES.keys(), 'en'))
 
-
 cdn.Cdn(app, os.getenv('CDN_PREFIX'), os.getenv('HEROKU_SLUG_COMMIT', 'dev'))
 
 @app.before_request
