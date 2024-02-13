@@ -10,7 +10,6 @@ class NullLogger:
     """A logger that doesn't actually do anything."""
 
     def __init__(self, file_path="tracking_data.csv", header=[], **kwargs):
-        print('\n\n\n', header, kwargs)
         self.file_path = file_path
         self.file_header = header
         self.open_file()

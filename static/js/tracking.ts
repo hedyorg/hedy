@@ -93,17 +93,25 @@ export function initializeTracking() {
     document.addEventListener("DOMContentLoaded", documentLoaded);
 }
 
+function isLoggedIn() {
+    const a = document.querySelector("a[href='/my-profile']");
+    return !!a;
+}
+
 function documentLoaded() {
     // attach events
     document.addEventListener('click', trackEvent);
     document.addEventListener('change', trackEvent);
-
+    
+    
     // initialize variables
     clickCounts = handleLocalStorage(CLICK_COUNTS);
     lastActiveTime = handleLocalStorage(LAST_ACTIVE, Date.now());
-
-    removeTrackingInterval(); // Possibly removing lingering ones.
-    setTrackingInterval(); // Resume with fresh timer
+    
+    if (isLoggedIn()) {
+        removeTrackingInterval(); // Possibly removing lingering ones.
+        setTrackingInterval(); // Resume with fresh timer
+    }
 }
 
 function removeTrackingInterval() {
@@ -217,8 +225,10 @@ async function sendRequestToServer() {
 
 // If not focused on current document, remove interval. Otherwise initialize a new one.
 document.addEventListener('visibilitychange', () => {
-    removeTrackingInterval();
-    if (!document.hidden) {
-        setTrackingInterval();
+    if (isLoggedIn()) {
+        removeTrackingInterval();
+        if (!document.hidden) {
+            setTrackingInterval();
+        }
     }
 });
