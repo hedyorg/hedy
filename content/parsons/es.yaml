@@ -40,8 +40,7 @@ levels:
                 {print} ¡Gracias por comprar con nosotros!
     3:
         1:
-            story: "¡Comienza el nuevo curso escolar en Hogwarts! \nEl sombrero seleccionador es el encargado de clasificarte en una de las casas.\n¿En qué casa te van a clasificar? ¿Serás Gryffindor, Hufflepuff, Ravenclaw o Slytherin?\nAntes de que el sombrero clasificador revele tu casa, puedes decirle\
-                \ que no elija una de las casas."
+            story: "¡Comienza el nuevo curso escolar en Hogwarts! \nEl sombrero seleccionador es el encargado de clasificarte en una de las casas.\n¿En qué casa te van a clasificar? ¿Serás Gryffindor, Hufflepuff, Ravenclaw o Slytherin?\nAntes de que el sombrero clasificador revele tu casa, puedes decirle que no elija una de las casas."
             code: |-
                 {print} El sombrero seleccionador está listo para clasificarte en una casa de Hogwarts.
                 casas {is} Gryffindor, Hufflepuf, Ravenclaw, Slytherin
@@ -187,8 +186,8 @@ levels:
     10:
         1:
             story: |-
-                Ayude a esta familia creando un cronograma de quién cocinará y qué deberían preparar esta semana. Los comandos `{remove}` aseguran que nadie tenga que cocinar dos veces y que tengan una cena diferente cada día.
-                **¡Cuidado!** el orden de las variables debe ser primero días, luego personas y, por último, opciones cena. Esto también se aplica a las líneas con los comandos `{remove}` .
+                Ayuda a esta familia creando un horario de quién cocina y qué debe preparar esta semana. Los comandos `{remove}`` aseguran que nadie tenga que cocinar dos veces y que tengan una cena diferente cada día.
+                **Recuerda que el orden de las variables debe ser primero días, luego personas y por último opciones_de_cena. Esto va para las líneas con los comandos `{remove}` también.
             code: |-
                 días = Lunes, Martes, Miércoles, Jueves, Viernes
                 gente = mamá, papá, Martin, Abby, Jesse
