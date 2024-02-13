@@ -2358,18 +2358,14 @@ levels:
                 {for} i {in} _ 1 {to} 10
                     {print} i
             mp_choice_options:
-            -   option: |-
-                    `compteur`
-                feedback: 'Non'
-            -   option: |-
-                    `{range}`
+            -   option: '`compteur`'
+                feedback: Non
+            -   option: '`{range}`'
                 feedback: Correct
-            -   option: |-
-                    `{if}`
-                feedback: 'Non'
-            -   option: |-
-                    `{for}`
-                feedback: 'Non'
+            -   option: '`{if}`'
+                feedback: Non
+            -   option: '`{for}`'
+                feedback: Non
             hint: Qu'as-tu appris à ce niveau ?
             correct_answer: B
             question_score: '10'
@@ -2386,15 +2382,20 @@ levels:
                     3
                     ```
                 feedback: Correct !
-            -   option: "```\n1 2 3\n```"
+            -   option: |-
+                    ```
+                    1 2 3
+                    ```
                 feedback: Ce n'est pas ça
-            -   option: "```\n1, 2, 3\n```"
+            -   option: |-
+                    ```
+                    1, 2, 3
+                    ```
                 feedback: Ce n'est pas ça
-            -   option: '```
-
+            -   option: |-
+                    ```
                     123
-
-                    ```'
+                    ```
                 feedback: Ce n'est pas ça
             hint: Comment les nombres vont-ils apparaitre à l'écran ?
             correct_answer: A
@@ -2506,13 +2507,13 @@ levels:
                     {print} "Hello"
             mp_choice_options:
             -   option: 1 fois
-                feedback: 'Non'
+                feedback: Non
             -   option: 2 fois
-                feedback: 'Non'
+                feedback: Non
             -   option: 3 fois
                 feedback: C'est ça !
             -   option: Jamais
-                feedback: 'Non'
+                feedback: Non
             hint: Le 0 conte aussi. Donc 0, 1, 2, ça fait 3 fois.
             correct_answer: C
             question_score: '10'
@@ -2561,7 +2562,10 @@ levels:
                     25
                     ```
                 feedback: Les nombres ne seront pas affichés. Ça ne dit pas « `{print}` i »
-            -   option: "```\n23 Salut 24 Salut 25 Salut\n```"
+            -   option: |-
+                    ```
+                    23 Salut 24 Salut 25 Salut
+                    ```
                 feedback: Les nombres ne seront pas affichés. Ça ne dit pas « `{print}` i »
             -   option: |-
                     ```
