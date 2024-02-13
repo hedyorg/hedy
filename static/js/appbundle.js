@@ -57144,7 +57144,6 @@ pygame.quit()
       $("#stopit").hide();
       $("#runit").show();
       if ($("#ask-modal").is(":visible")) {
-        $("#ask-modal form").submit();
         $("#ask-modal").hide();
       }
     }
