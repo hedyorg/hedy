@@ -1,4 +1,4 @@
-import uflash
+# import uflash
 
 # The uflash module takes a Micro:bit script and converts it to a hex file(its not saved) and then
 #   flashes it to the Micro:bit automatically.
