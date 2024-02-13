@@ -6,11 +6,13 @@ import datetime
 import time
 import functools
 import os
+from os import path
 import re
 import string
 import random
 import uuid
 import unicodedata
+import sys
 import traceback
 
 from email_validator import EmailNotValidError, validate_email
@@ -23,21 +25,23 @@ commonmark_renderer = commonmark.HtmlRenderer()
 
 IS_WINDOWS = os.name == 'nt'
 
+prefixes_dir = path.join(path.dirname(__file__), 'prefixes')
+
 # Define code that will be used if some turtle command is present
-with open('prefixes/turtle.py', encoding='utf-8') as f:
+with open(f'{prefixes_dir}/turtle.py', encoding='utf-8') as f:
     TURTLE_PREFIX_CODE = f.read()
 
 # Preamble that will be used for non-Turtle programs
 # numerals list generated from: https://replit.com/@mevrHermans/multilangnumerals
-with open('prefixes/normal.py', encoding='utf-8') as f:
+with open(f'{prefixes_dir}/normal.py', encoding='utf-8') as f:
     NORMAL_PREFIX_CODE = f.read()
 
 # Define code that will be used if a pressed command is used
-with open('prefixes/pygame.py', encoding='utf-8') as f:
+with open(f'{prefixes_dir}/pygame.py', encoding='utf-8') as f:
     PYGAME_PREFIX_CODE = f.read()
 
 # Define code that will be used if music code is used
-with open('prefixes/music.py', encoding='utf-8') as f:
+with open(f'{prefixes_dir}/music.py', encoding='utf-8') as f:
     MUSIC_PREFIX_CODE = f.read()
 
 
@@ -91,6 +95,20 @@ def is_debug_mode():
     We do more expensive things that are better for development in debug mode.
     """
     return DEBUG_MODE
+
+
+def is_offline_mode():
+    """Return whether or not we're in offline mode.
+
+    Offline mode is a special build of Hedy that teachers can download and run
+    on their own computers.
+    """
+    return getattr(sys, 'frozen', False) and offline_data_dir() is not None
+
+
+def offline_data_dir():
+    """Return the data directory in offline mode."""
+    return getattr(sys, '_MEIPASS')
 
 
 def set_debug_mode(debug_mode):
