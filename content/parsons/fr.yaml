@@ -219,19 +219,19 @@ levels:
                         {print} " Essayons encore… " personne " aura " coupe_de_cheveux {at} {random}
     11:
         1:
-            story: Create the count down clock for New Year's eve! The program should show the numbers from 10 to 1 for a second and then wish you a happy new year.
+            story: Crée le compte à rebours pour le réveillon du Nouvel An ! Le programme devrait afficher les nombres de 10 à 1 pendant une seconde, puis te souhaiter une bonne année.
             code: |-
-                {for} number {in} {range} 10 {to} 1
-                    {print} number
+                {for} nombre {in} {range} 10 {to} 1
+                    {print} nombre
                     {sleep}
                     {clear}
-                {print} 'Happy New Year!'
+                {print} "Bonne année !"
         2:
             story: |-
                 Create a program that tells us the final results of the science fair. Firstly define the variable contestants, then the variable place.
                 **Hint** Line 5 should be the sleep command, and you should end with saying congratulations.
             code: |-
-                {print} 'And now we will reveal the results of the science fair'
+                {print} "Et maintenant vont être révélé les résultats du concours scientifique"
                 contestants = Vivienne, Paul, Trixy, Bianca, Katya
                 place = 5
                 {for} contestant {in} contestants
