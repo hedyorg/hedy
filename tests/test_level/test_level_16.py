@@ -36,20 +36,51 @@ class TestsLevel16(HedyTester):
 
         self.multi_level_tester(
             code=code,
-            max_level=17,
             unused_allowed=True,
             expected=expected
         )
 
-    def test_create_with_single_item(self):
-        code = "friends = ['Ashli']"
-        expected = "friends = ['Ashli']"
+    @parameterized.expand([
+        ("'Ashli'", 'Ashli'),
+        ("'\"Ashli\"'", '"Ashli"'),
+        ('"Ashli"', 'Ashli'),
+        ('"Ashli\'s"', 'Ashli\'s'),
+        ('42', 42),
+        ('-1', -1),
+        ('1.5', 1.5),
+        ('-0.7', -0.7)
+    ])
+    def test_create_list_single_item(self, item_code, expected_value):
+        code = f"friends = [{item_code}]"
+        expected = f"friends = [{item_code}]"
 
-        check_in_list = (lambda x: HedyTester.run_code(x) == 'Ashli')
+        check_in_list = (lambda x: HedyTester.run_code(x) == expected_value)
 
         self.multi_level_tester(
             code=code,
-            max_level=17,
+            expected=expected,
+            unused_allowed=True,
+            extra_check_function=check_in_list
+        )
+
+    @parameterized.expand([
+        ("'Alice', 'Ben'", ['Alice', 'Ben']),
+        ("'\"a\"', '\"Ben\"'", ['"Alice"', '"Ben"']),
+        ('"Alice", "Ben"', ['Alice', 'Ben']),
+        ('"Alice\'s", "Ben\'s"', ["Alice's", "Ben's"]),
+        ('1, 3, 5', [1, 3, 5]),
+        ('-1, -2, -5', [-1, -2, -5]),
+        ('1.5, 2.6, 3.7', [1.5, 2.6, 3.7]),
+        ('-0.1, -5.6', [-0.1, -5.6])
+    ])
+    def test_create_list_multi_items(self, items_code, expected_items):
+        code = f"friends = [{items_code}]"
+        expected = f"friends = [{items_code}]"
+
+        check_in_list = (lambda x: HedyTester.run_code(x) in expected_items)
+
+        self.multi_level_tester(
+            code=code,
             expected=expected,
             unused_allowed=True,
             extra_check_function=check_in_list
@@ -540,6 +571,40 @@ class TestsLevel16(HedyTester):
             extra_check_function=self.is_turtle(),
         )
 
+    def test_if_in_list_print(self):
+        code = textwrap.dedent("""\
+            letters = ['a', 'b', 'c']
+            if 'a' in letters
+              print 'Found'""")
+
+        expected = textwrap.dedent("""\
+            letters = ['a', 'b', 'c']
+            if 'a' in letters:
+              print(f'''Found''')""")
+
+        self.single_level_tester(
+            code=code,
+            expected=expected,
+            output='Found'
+        )
+
+    def test_if_not_in_list_print(self):
+        code = textwrap.dedent("""\
+            letters = ['a', 'b', 'c']
+            if 'd' not in letters
+              print 'Not found'""")
+
+        expected = textwrap.dedent("""\
+            letters = ['a', 'b', 'c']
+            if 'd' not in letters:
+              print(f'''Not found''')""")
+
+        self.single_level_tester(
+            code=code,
+            expected=expected,
+            output='Not found'
+        )
+
     #
     # forward tests
     #
@@ -664,10 +729,10 @@ class TestsLevel16(HedyTester):
 
         expected = textwrap.dedent("""\
         notes = ['C4', 'E4', 'D4', 'F4', 'G4']
-        chosen_note = random.choice(notes).upper()
+        chosen_note = str(random.choice(notes)).upper()
         if chosen_note not in notes_mapping.keys() and chosen_note not in notes_mapping.values():
             raise Exception('catch_value_exception')
-        play(notes_mapping.get(str(chosen_note), str(chosen_note)))
+        play(notes_mapping.get(chosen_note, chosen_note))
         time.sleep(0.5)""")
 
         self.multi_level_tester(

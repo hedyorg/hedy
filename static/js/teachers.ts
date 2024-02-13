@@ -547,7 +547,11 @@ export function create_accounts(prompt: string) {
                 $(this).find(':input').each(function () {
                     account[$(this).attr("name") as string] = $(this).val() as string;
                 });
-                accounts.push(account);
+
+                // Only push an account to the accounts object if it contains data
+                if (account['password'].length !== 0 || account['username'].length !== 0) {
+                    accounts.push(account);
+                }
             }
         });
         $.ajax({
