@@ -115,34 +115,34 @@
         </form>
 
 
-        <!-- <div id="explanation" class="hidden"> -->
-        <div id="explanation">
+        <div id="explanation" class="hidden">
             <hr
             class="my-12 mx-16 h-2 border-t-4 bg-neutral-100" />
 
             <div class="flex">
-                <div class="w-1/2">
-                    <h3>{{_('adventure_exp_classes')}}</h3>
-                    
-                    <div class="flex gap-2 flex-wrap">
-                        {% for cls in adventure_classes %}
-                            {{ render_partial('htmx-class-card.html', class=cls, username=username,) }}
-                        {% endfor %}
+                {% set usedInClasses = adventure_classes|length %}
+                {% if usedInClasses > 0 %}
+                    <div class="w-1/2">
+                        <h3>{{_('adventure_exp_classes')}}</h3>
+                        
+                        <div class="flex gap-2 flex-wrap">
+                            {% for cls in adventure_classes %}
+                                {{ render_partial('htmx-class-card.html', class=cls, username=username,) }}
+                            {% endfor %}
+                        </div>
+                        
                     </div>
-                    
-                </div>
-                <div class="border border-black rounded-lg p-4 text-sm w-1/2 h-full">
+                {% endif %}
+                <div class="flex flex-col gap-2 border border-black rounded-lg p-4 text-sm h-full w-1/2">
                     <div>
-                        <button class="ck ck-button" disabled type="button"><svg class="ck ck-icon ck-reset_all-excluded ck-icon_inherit-color ck-button__icon" viewBox="0 0 20 20"><path d="m12.5 5.7 5.2 3.9v1.3l-5.6 4c-.1.2-.3.2-.5.2-.3-.1-.6-.7-.6-1l.3-.4 4.7-3.5L11.5 7l-.2-.2c-.1-.3-.1-.6 0-.8.2-.2.5-.4.8-.4a.8.8 0 0 1 .4.1zm-5.2 0L2 9.6v1.3l5.6 4c.1.2.3.2.5.2.3-.1.7-.7.6-1 0-.1 0-.3-.2-.4l-5-3.5L8.2 7l.2-.2c.1-.3.1-.6 0-.8-.2-.2-.5-.4-.8-.4a.8.8 0 0 0-.3.1z"></path></svg><span class="ck ck-button__label" id="ck-editor__aria-label_e0626e093592188450d58a9d030a1430d">Code</span></button>
+                        <button class="ck ck-button ck-off" type="button" tabindex="-1" aria-labelledby="ck-editor__aria-label_e0626e093592188450d58a9d030a1430d" aria-pressed="false" data-cke-tooltip-text="Code" data-cke-tooltip-position="s"><svg class="ck ck-icon ck-reset_all-excluded ck-icon_inherit-color ck-button__icon" viewBox="0 0 20 20"><path d="m12.5 5.7 5.2 3.9v1.3l-5.6 4c-.1.2-.3.2-.5.2-.3-.1-.6-.7-.6-1l.3-.4 4.7-3.5L11.5 7l-.2-.2c-.1-.3-.1-.6 0-.8.2-.2.5-.4.8-.4a.8.8 0 0 1 .4.1zm-5.2 0L2 9.6v1.3l5.6 4c.1.2.3.2.5.2.3-.1.7-.7.6-1 0-.1 0-.3-.2-.4l-5-3.5L8.2 7l.2-.2c.1-.3.1-.6 0-.8-.2-.2-.5-.4-.8-.4a.8.8 0 0 0-.3.1z"></path></svg><span class="ck ck-button__label" id="ck-editor__aria-label_e0626e093592188450d58a9d030a1430d">Code</span></button>
                         {{_('adventure_code_button')}}
-                        <!-- <code class="text-base">{{parse_keyword('print')}}</code> -->
                     </div>
 
                     <div>
-                        <button class="ck ck-button ck-splitbutton__action" disabled type="button"><svg class="ck ck-icon ck-reset_all-excluded ck-icon_inherit-color ck-button__icon" viewBox="0 0 20 20"><path d="M12.87 12.61a.75.75 0 0 1-.089.976l-.085.07-3.154 2.254 3.412 2.414a.75.75 0 0 1 .237.95l-.057.095a.75.75 0 0 1-.95.237l-.096-.058-4.272-3.022-.003-1.223 4.01-2.867a.75.75 0 0 1 1.047.174zm2.795-.231.095.057 4.011 2.867-.003 1.223-4.272 3.022-.095.058a.75.75 0 0 1-.88-.151l-.07-.086-.058-.095a.75.75 0 0 1 .15-.88l.087-.07 3.412-2.414-3.154-2.253-.085-.071a.75.75 0 0 1 .862-1.207zM16 0a2 2 0 0 1 2 2v9.354l-.663-.492-.837-.001V2a.5.5 0 0 0-.5-.5H2a.5.5 0 0 0-.5.5v15a.5.5 0 0 0 .5.5h3.118L7.156 19H2a2 2 0 0 1-2-2V2a2 2 0 0 1 2-2h14zM5.009 15l.003 1H3v-1h2.009zm2.188-2-1.471 1H5v-1h2.197zM10 11v.095L8.668 12H7v-1h3zm4-2v1H7V9h7zm0-2v1H7V7h7zm-4-2v1H5V5h5zM6 3v1H3V3h3z"></path></svg></button>
+                        <button class="ck ck-button ck-off ck-splitbutton__action" type="button" tabindex="-1" aria-labelledby="ck-editor__aria-label_e0cf21e456f5ca9fde674c9cbb2192bef" aria-pressed="false" data-cke-tooltip-text="Insert code block" data-cke-tooltip-position="s"><svg class="ck ck-icon ck-reset_all-excluded ck-icon_inherit-color ck-button__icon" viewBox="0 0 20 20"><path d="M12.87 12.61a.75.75 0 0 1-.089.976l-.085.07-3.154 2.254 3.412 2.414a.75.75 0 0 1 .237.95l-.057.095a.75.75 0 0 1-.95.237l-.096-.058-4.272-3.022-.003-1.223 4.01-2.867a.75.75 0 0 1 1.047.174zm2.795-.231.095.057 4.011 2.867-.003 1.223-4.272 3.022-.095.058a.75.75 0 0 1-.88-.151l-.07-.086-.058-.095a.75.75 0 0 1 .15-.88l.087-.07 3.412-2.414-3.154-2.253-.085-.071a.75.75 0 0 1 .862-1.207zM16 0a2 2 0 0 1 2 2v9.354l-.663-.492-.837-.001V2a.5.5 0 0 0-.5-.5H2a.5.5 0 0 0-.5.5v15a.5.5 0 0 0 .5.5h3.118L7.156 19H2a2 2 0 0 1-2-2V2a2 2 0 0 1 2-2h14zM5.009 15l.003 1H3v-1h2.009zm2.188-2-1.471 1H5v-1h2.197zM10 11v.095L8.668 12H7v-1h3zm4-2v1H7V9h7zm0-2v1H7V7h7zm-4-2v1H5V5h5zM6 3v1H3V3h3z"></path></svg></button>
                         {{_('adventure_codeblock_button')}}
                     </div>
-
                     <div class="flex flex-row items-center">
                         {{_('adventure_exp_3')}}
                     </div>
