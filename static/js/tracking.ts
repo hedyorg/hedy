@@ -1,4 +1,5 @@
 import { postJson } from "./comm";
+import { isLoggedIn } from "./utils";
 
 // const WAITING_TIME = 5 * 60 * 1000; // 5min in milliseconds
 const WAITING_TIME = 3000; // 3s for testing
@@ -93,10 +94,6 @@ export function initializeTracking() {
     document.addEventListener("DOMContentLoaded", documentLoaded);
 }
 
-function isLoggedIn() {
-    const a = document.querySelector("a[href='/my-profile']");
-    return !!a;
-}
 
 function documentLoaded() {
     // attach events
