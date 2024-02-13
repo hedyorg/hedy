@@ -589,7 +589,7 @@ class TestAuth(AuthHelper):
         # WHEN retrieving the user profile with the same cookie
         # THEN first receive a redirect response code from the server, and the next
         # page load will be a 403
-        self.get_data('profile', expect_http_code=200)  # This is the redirect
+        self.get_data('profile', expect_http_code=302)
         self.get_data('profile', expect_http_code=403)
 
     def test_destroy_account(self):
@@ -603,7 +603,7 @@ class TestAuth(AuthHelper):
         # WHEN retrieving the profile of the user
         # THEN first receive a redirect response response code from the server, and
         # the next page load will be a forbidden
-        self.get_data('profile', expect_http_code=200)  # This is the redirect
+        self.get_data('profile', expect_http_code=302)
         self.get_data('profile', expect_http_code=403)
 
     def test_invalid_change_password(self):
