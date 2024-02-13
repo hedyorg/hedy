@@ -27,6 +27,9 @@ from flask_commonmark import Commonmark
 from flask_compress import Compress
 from urllib.parse import quote_plus
 
+from flask_limiter import Limiter
+from flask_limiter.util import get_remote_address
+
 import hedy
 import hedy_content
 import hedy_translation
@@ -69,6 +72,14 @@ os.chdir(os.path.join(os.getcwd(), __file__.replace(
 app = Flask(__name__, static_url_path='')
 app.url_map.strict_slashes = False  # Ignore trailing slashes in URLs
 app.json = JinjaCompatibleJsonProvider(app)
+
+# Implement the rate limiter
+limiter = Limiter(
+    get_remote_address,
+    app=app,
+    storage_uri="memory://",
+)
+
 
 # Most files should be loaded through the CDN which has its own caching period and invalidation.
 # Use 5 minutes as a reasonable default for all files we load elsewise.
