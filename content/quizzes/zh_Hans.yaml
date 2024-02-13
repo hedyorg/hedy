@@ -3060,8 +3060,7 @@ levels:
             question_score: '10'
         10:
             question_text: 哪个命令需要出现在第8行???的地方？
-            code: "{print} '欢迎来到本超市的商品查找机'\n项目 = {ask} '你来找什么商品?'\n烘焙 = 'bread', 'buns', 'muffins'\n饮料= 'soda', 'water', 'lemonade'\n零食= 'chips', 'nuts', 'dips'\n冷冻= 'fries', 'icecream', 'pizza'\n水果= 'bananas', 'apples', 'oranges'\n{if} 项目 {in} 零食??? 项目 {in} 饮料\n    {print} '在第三通道'\n{if} 项目 {in} 烘焙 {or}\
-                \ 项目  {in} 烘焙 \n    {print} '这件东西放在商店的后面'\n{if} 项目  {in} 水果\n    {print} '水果在收银台附近出售'"
+            code: "{print} '欢迎来到本超市的商品查找机'\n项目 = {ask} '你来找什么商品?'\n烘焙 = 'bread', 'buns', 'muffins'\n饮料= 'soda', 'water', 'lemonade'\n零食= 'chips', 'nuts', 'dips'\n冷冻= 'fries', 'icecream', 'pizza'\n水果= 'bananas', 'apples', 'oranges'\n{if} 项目 {in} 零食??? 项目 {in} 饮料\n    {print} '在第三通道'\n{if} 项目 {in} 烘焙 {or} 项目  {in} 烘焙 \n    {print} '这件东西放在商店的后面'\n{if} 项目  {in} 水果\n    {print} '水果在收银台附近出售'"
             mp_choice_options:
             -   option: '`{and}`'
                 feedback: 没有同时出现在零食清单和饮料清单上的东西

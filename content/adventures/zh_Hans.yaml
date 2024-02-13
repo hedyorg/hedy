@@ -884,8 +884,7 @@ adventures:
                 story_text: |-
                     ### 练习
                     调试这段代码。 祝你好运！
-                example_code: "**警告！ 这段代码需要调试！**\n```\n{print} '欢迎来到我们的三明治店'\n个数 “您想买多少个三明治？”\n{repeat}个数{times}\n{ask} {is} {ask} '您想要什么类型的三明治或面包？'\n面包刀种类 {is} 白面包、小麦面包、黑麦面包、大蒜面包、无麸质面包\n{if}  选中的面包  in 面包的种类 \n{print}“美妙！”\n{else}\n“抱歉我们不卖那个”\n蘸料 {is} {ask} '您想要什么类型的配料？'\n沙司{is} {ask}“您想要什么类型的酱？”\n{print}\
-                    \ 一份 选中的面包，配上配料和酱汁。\n价格 =数量*6\n{print} '这将是' 价格 '美元'\n```\n"
+                example_code: "**警告！ 这段代码需要调试！**\n```\n{print} '欢迎来到我们的三明治店'\n个数 “您想买多少个三明治？”\n{repeat}个数{times}\n{ask} {is} {ask} '您想要什么类型的三明治或面包？'\n面包刀种类 {is} 白面包、小麦面包、黑麦面包、大蒜面包、无麸质面包\n{if}  选中的面包  in 面包的种类 \n{print}“美妙！”\n{else}\n“抱歉我们不卖那个”\n蘸料 {is} {ask} '您想要什么类型的配料？'\n沙司{is} {ask}“您想要什么类型的酱？”\n{print} 一份 选中的面包，配上配料和酱汁。\n价格 =数量*6\n{print} '这将是' 价格 '美元'\n```\n"
             10:
                 story_text: |-
                     ### 练习
@@ -941,8 +940,7 @@ adventures:
                 story_text: |-
                     ### 练习
                     调试这段代码。 祝你好运！
-                example_code: "**警告！ 这段代码需要调试！**\n```\n{define} 问候\n问候语 = 'Hello', 'Hi there', 'Goodevening'\n    {print} 问候语 {at} {random}\n\n{define} 点单\n    食物 = {ask} '您想吃什么?'\n    {print} '一份食物'\n    饮料 = '您想喝什么?'\n    {print} '一份饮料' \n    更多 = {ask} '您还要点别的吗?'\n        {if} 更多 {is} ' 不'\n    {print}\
-                    \ '好的'\n        {else}\n        {print} '和 ' 更多\n{print} '谢谢你'\n\n{print} '欢迎来到我的餐馆'\n人数 = {ask} '你们今晚有多少人?'\n{for} i {in} {range} 0 {to} 人数\n    {call} 欢迎顾客\n```\n"
+                example_code: "**警告！ 这段代码需要调试！**\n```\n{define} 问候\n问候语 = 'Hello', 'Hi there', 'Goodevening'\n    {print} 问候语 {at} {random}\n\n{define} 点单\n    食物 = {ask} '您想吃什么?'\n    {print} '一份食物'\n    饮料 = '您想喝什么?'\n    {print} '一份饮料' \n    更多 = {ask} '您还要点别的吗?'\n        {if} 更多 {is} ' 不'\n    {print} '好的'\n        {else}\n        {print} '和 ' 更多\n{print} '谢谢你'\n\n{print} '欢迎来到我的餐馆'\n人数 = {ask} '你们今晚有多少人?'\n{for} i {in} {range} 0 {to} 人数\n    {call} 欢迎顾客\n```\n"
             13:
                 story_text: |-
                     ### 练习
@@ -1101,8 +1099,7 @@ adventures:
                 story_text: |-
                     ### 练习
                     从第 16 级开始调试这个 Old MacDonald 程序。祝你好运！
-                example_code: "**警告！ 这段代码需要调试！**\n```\nanimals = ['pig', 'dog', 'cow']\nsounds = ['oink', 'woof', 'moo']\n{for} i {in} {range} 1 {to} 3\n    animal = animals[i]\n    sound = sounds[i]\n    {print} '老麦当劳有一个农场'\n    {print} 'E I E I O!'\n    {print} '在那个农场他有一只' animal\n    {print} 'E I E\
-                    \ I O!'\n    {print} '这里有‘sound sound\n    {print} '以及那也有' sound sound \n    {print} '这里有 ' sound\n    {print} '那也有 ' sound\n    {print} '到处有 ' sound sound\n```\n"
+                example_code: "**警告！ 这段代码需要调试！**\n```\nanimals = ['pig', 'dog', 'cow']\nsounds = ['oink', 'woof', 'moo']\n{for} i {in} {range} 1 {to} 3\n    animal = animals[i]\n    sound = sounds[i]\n    {print} '老麦当劳有一个农场'\n    {print} 'E I E I O!'\n    {print} '在那个农场他有一只' animal\n    {print} 'E I E I O!'\n    {print} '这里有‘sound sound\n    {print} '以及那也有' sound sound \n    {print} '这里有 ' sound\n    {print} '那也有 ' sound\n    {print} '到处有 ' sound sound\n```\n"
     default:
         name: 介绍
         default_save_name: 介绍
