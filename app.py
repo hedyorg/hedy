@@ -2556,9 +2556,9 @@ def public_user_page(username):
         sorted_adventure_programs = hedy_content.Adventures(
             g.lang).get_sorted_adventure_programs(all_programs, adventure_names)
 
-        favourite_program = None
+        favorite_program = None
         if 'favourite_program' in user_public_info and user_public_info['favourite_program']:
-            favourite_program = DATABASE.program_by_id(
+            favorite_program = DATABASE.program_by_id(
                 user_public_info['favourite_program'])
 
         last_achieved = None
@@ -2574,7 +2574,7 @@ def public_user_page(username):
             user_info=user_public_info,
             achievements=ACHIEVEMENTS_TRANSLATIONS.get_translations(
                 g.lang).get('achievements'),
-            favourite_program=favourite_program,
+            favorite_program=favorite_program,
             programs=user_programs,
             last_achieved=last_achieved,
             user_achievements=user_achievements,
