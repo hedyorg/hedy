@@ -258,6 +258,7 @@ def get_locale():
 
 cdn.Cdn(app, os.getenv('CDN_PREFIX'), os.getenv('HEROKU_SLUG_COMMIT', 'dev'))
 
+
 @app.before_request
 def before_request_begin_logging():
     """Initialize the query logging.
