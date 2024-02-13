@@ -6,7 +6,6 @@ set -eu
 scriptdir=$(cd $(dirname $0) && pwd)
 
 # TODOs about extracting by JW 2023-10-03 for PR #4574
-$scriptdir/validate-python # TODO extract to separate parallel job
 $scriptdir/validate-typescript # TODO extract
 $scriptdir/validate-yaml # TODO extract
 if [[ "${1:-}" == "--all" ]]; then
