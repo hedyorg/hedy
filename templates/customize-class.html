@@ -105,22 +105,22 @@
             </div>
 
             <div class="flex flex-col w-1/2">
-                <h3 class="px-4 cursor-pointer"
+                <h3 id="opening_date_label" class="px-4 cursor-pointer"
                     _="on click
-                        set t to the next <div />
+                        set t to #opening_date_container
                         toggle .rotate-180 on #opening-dates-arrow
                         if t.classList.contains('hidden')
                             toggle .hidden on t
-                            transition the next <div />'s opacity to 1
+                            transition the #opening_date_container's opacity to 1
                         else
-                            transition the next <div />'s opacity to 0
+                            transition the #opening_date_container's opacity to 0
                             toggle .hidden on t
                         end">
                     <u>{{_('opening_dates')}}
                         <svg id="opening-dates-arrow" class="fill-current inline h-6 w-6" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"/></svg>
                     </u>
                 </h3>
-                <div class="border border-gray-400 w-full py-2 px-4 rounded-lg hidden opacity-0">
+                <div id="opening_date_container" class="border border-gray-400 w-full py-2 px-4 rounded-lg hidden opacity-0">
                     <table class="table-auto text-center opening_dates_overview">
                         <thead>
                             <tr>

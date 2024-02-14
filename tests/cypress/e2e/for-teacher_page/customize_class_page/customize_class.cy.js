@@ -8,6 +8,9 @@ describe('customize class page', () => {
       cy.getBySel('view_class_link').first().click(); // Press on view class button
       cy.get('body').then($b => $b.find("#survey")).then($s => $s.length && $s.hide())
       cy.getBySel('customize_class_button').click(); // Press customize class button
+      cy.get("#opening_date_container").should("not.be.visible")
+      cy.get("#opening_date_label").click();
+      cy.get("#opening_date_container").should("be.visible")
 
       // Remove any customizations that already exist to get the class into a predictable state
       // This always throws up a modal dialog
@@ -213,6 +216,7 @@ describe('customize class page', () => {
       cy.getBySel('level-1').should('be.visible');
       cy.get('#state-disabled').should('not.be.visible');
 
+      cy.get("#opening_date_label").click();
       cy.get('#enable_level_1').parent('.switch').click();
       cy.get('#state-disabled').should('be.visible');
     });
