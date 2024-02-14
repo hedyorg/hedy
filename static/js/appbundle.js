@@ -56825,8 +56825,16 @@ notes_mapping = {
     }
   };
 
+  // static/js/utils.ts
+  function isLoggedIn() {
+    if (document.body.dataset["loggedIn"]) {
+      return parseInt(document.body.dataset["loggedIn"]);
+    }
+    return false;
+  }
+
   // static/js/tracking.ts
-  var WAITING_TIME = 1e3;
+  var WAITING_TIME = 3e3;
   var ELEMENT_TO_TRACK = [
     "debug_button",
     "developers_toggle",
@@ -56904,19 +56912,22 @@ notes_mapping = {
     document.addEventListener("change", trackEvent);
     clickCounts = handleLocalStorage(CLICK_COUNTS);
     lastActiveTime = handleLocalStorage(LAST_ACTIVE, Date.now());
-    resumeTrackingInterval();
+    if (isLoggedIn()) {
+      removeTrackingInterval();
+      setTrackingInterval();
+    }
   }
-  function resumeTrackingInterval() {
+  function removeTrackingInterval() {
     const storedData = localStorage.getItem(INTERVAL_KEY);
     if (storedData) {
       try {
         const parsedData = JSON.parse(storedData);
         clearInterval(parsedData.id);
+        console.log(parsedData.id, " interval was removed");
       } catch (error2) {
         console.error("Error parsing tracking interval data:", error2);
       }
     }
-    setTrackingInterval();
   }
   function setTrackingInterval() {
     const timerId = setInterval(checkUserActivity, WAITING_TIME);
@@ -56937,7 +56948,8 @@ notes_mapping = {
       if (ELEMENT_TO_TRACK.includes(elementIdOrName)) {
         clickCounts = handleLocalStorage(CLICK_COUNTS);
         const page = window.location.pathname;
-        clickCounts.push({ time: currentTime, id: elementIdOrName, page });
+        const value = target.value || "";
+        clickCounts.push({ time: currentTime, id: elementIdOrName, page, extra: value });
         console.log(target, clickCounts);
         console.log(`Event: ${event2.type}, Element ID or Name: ${elementIdOrName}, Click Count: ${clickCounts}`);
         handleUserActivity(clickCounts);
@@ -56952,6 +56964,7 @@ notes_mapping = {
   function handleLocalStorage(item, value = void 0) {
     const retrievedItem = window.localStorage.getItem(item);
     if (!retrievedItem || value !== void 0) {
+      value = value || [];
       window.localStorage.setItem(item, JSON.stringify(value));
     } else {
       if (item === CLICK_COUNTS) {
@@ -56973,12 +56986,11 @@ notes_mapping = {
     }
   }
   async function sendRequestToServer() {
-    console.log("Sending request to server...", clickCounts);
     try {
-      const data = localStorage.getItem(CLICK_COUNTS);
-      console.log(data);
-      if (data) {
-        await postJson("/tracking", JSON.parse(data));
+      const data = handleLocalStorage(CLICK_COUNTS);
+      if (data.length) {
+        console.log("Sending request to server...");
+        await postJson("/tracking", data);
         handleUserActivity([]);
         changesSent = true;
       }
@@ -56986,6 +56998,14 @@ notes_mapping = {
       console.error(error2);
     }
   }
+  document.addEventListener("visibilitychange", () => {
+    if (isLoggedIn()) {
+      removeTrackingInterval();
+      if (!document.hidden) {
+        setTrackingInterval();
+      }
+    }
+  });
 
   // static/js/app.ts
   var theGlobalDebugger;
