@@ -48,6 +48,7 @@ def request(method, path, headers={}, body='', cookies=None):
     start = utils.timems()
 
     response = getattr(requests, method)(HOST + path, headers=headers, data=body, cookies=cookies)
+    print(path, response.headers, 'Cookies updated', response.cookies)
 
     # Remember all cookies in the cookie jar
     if cookies is not None:

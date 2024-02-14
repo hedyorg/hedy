@@ -217,7 +217,9 @@ def requires_login(f):
 
     @wraps(f)
     def inner(*args, **kws):
+        print('session before', session)
         just_logged_out = session.pop(JUST_LOGGED_OUT, False)
+        print('session after', session)
         if not is_user_logged_in():
             return redirect('/') if just_logged_out else utils.error_page(error=403)
         # The reason we pass by keyword argument is to make this
