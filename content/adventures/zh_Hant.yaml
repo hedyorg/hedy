@@ -1187,6 +1187,10 @@ adventures:
         levels:
             1:
                 story_text: "在關卡 1 中，您可以使用命令 `{print}`、`{ask}` 和 `{echo}`。\n在編程字段中輸入您的代碼。 或者按下示例代碼塊中的綠色按鈕，代碼將輸入！\n使用編程字段下方的綠色“運行代碼”按鈕自行嘗試代碼。\n\n您可以使用 `{print}` 命令將文本打印到屏幕上。     \n"
+                example_code: |
+                    ```
+                    {print} Hello world!
+                    ```
             2:
                 story_text: |
                     在級別 2 中，我們學習了兩個新命令：`{is}` 和 `{sleep}`。
@@ -2413,14 +2417,13 @@ adventures:
         description: Introducing maths
         levels:
             6:
-                story_text: |4
+                story_text: |
+                    In this level you learn something new: you can now also calculate.
 
-                      In this level you learn something new: you can now also calculate.
+                    The plus is easy, you write it like with math: `5 + 5` for example. The minus also works fine, it is `5 - 5`.
 
-                      The plus is easy, you write it like with math: `5 + 5` for example. The minus also works fine, it is `5 - 5`.
-
-                      The times is a bit different, because there is no times symbol on your keyboard. Just search, there really isn't!
-                      That is why we multiply with the asterisk above 8: `5 * 5`. Read that as "5 times 5" that helps you remember it best.
+                    The times is a bit different, because there is no times symbol on your keyboard. Just search, there really isn't!
+                    That is why we multiply with the asterisk above 8: `5 * 5`. Read that as "5 times 5" that helps you remember it best.
                 example_code: |
                     ```
                     {print} '5 plus 5 is ' 5 + 5

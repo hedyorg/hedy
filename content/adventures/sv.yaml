@@ -724,8 +724,7 @@ adventures:
                     {clear}
                     {print} '1'
                     {clear}
-                    {print} '
-                             vänta...'
+                    {print} 'wait for it...'
                     {sleep} 3
                     {clear}
                     {print} 'SURPRISE!'
@@ -1217,6 +1216,14 @@ adventures:
                     Prova koden själv med den gröna 'Kör kod'-knappen under programmeringsfältet.
 
                     Är du klar? Gå då till nästa flik och lär dig ditt första kommando!
+                example_code: |
+                    ```
+                    {print} Hello world!
+                    ```
+                    example_code: |
+                        ```
+                        {print} Hello world!
+                        ```
             2:
                 story_text: |
                     Grattis! Du har nått nivå 2. Förhoppningsvis har du redan gjort lite fantastisk kod!
@@ -2492,14 +2499,13 @@ adventures:
         description: Introduktion till matte
         levels:
             6:
-                story_text: |4
+                story_text: |
+                    In this level you learn something new: you can now also calculate.
 
-                          På den här nivån lär du dig något nytt: du kan nu också räkna ut saker.
+                    The plus is easy, you write it like with math: `5 + 5` for example. The minus also works fine, it is `5 - 5`.
 
-                          Plus är enkelt, du skriver det som med matematik: `5 + 5` till exempel. Minus fungerar också bra, det är `5 - 5`.
-
-                          Gånger är lite annorlunda, eftersom det inte finns någon gångersymbol på tangentbordet. Sök bara, det finns verkligen inte!
-                          Det är därför vi multiplicerar med asterisken till vänster om ä: `5 * 5`. Läs det som '5 gånger 5' – det är bästa minnesregeln.
+                    The times is a bit different, because there is no times symbol on your keyboard. Just search, there really isn't!
+                    That is why we multiply with the asterisk above 8: `5 * 5`. Read that as "5 times 5" that helps you remember it best.
                 example_code: |
                     ```
                     {print} '5 plus 5 är ' 5 + 5

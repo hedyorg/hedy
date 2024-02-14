@@ -510,6 +510,47 @@ class Adventures(StructuredDataFile):
     def get_adventure_keyname_name_levels(self):
         return {aid: {adv['name']: list(adv['levels'].keys())} for aid, adv in self.file.get('adventures', {}).items()}
 
+    def get_sorted_level_programs(self, programs, adventure_names):
+        programs_by_level = []
+        for item in programs:
+            programs_by_level.append(
+                {'level': item['level'],
+                 'adventure_name': item.get('adventure_name'),
+                 }
+            )
+
+        sort = {}
+        for program in programs_by_level:
+            if program['level'] in sort:
+                sort[program['level']].append(adventure_names.get(program['adventure_name']))
+            else:
+                sort[program['level']] = [adventure_names.get(program['adventure_name'])]
+        for level, adventures in sort.copy().items():
+            sort[level] = sorted(adventures, key=lambda s: s.lower())
+
+        return dict(sorted(sort.items(), key=lambda item: item[0]))
+
+    def get_sorted_adventure_programs(self, programs, adventure_names):
+        programs_by_adventure = []
+        for item in programs:
+            programs_by_adventure.append(
+                {'adventure_name': adventure_names.get(item.get('adventure_name')),
+                 'level': item['level'],
+                 }
+            )
+
+        sort = {}
+        for program in programs_by_adventure:
+            if program['adventure_name'] in sort:
+                sort[program['adventure_name']].append(program['level'])
+            else:
+                sort[program['adventure_name']] = [program['level']]
+        for adventure, levels in sort.copy().items():
+            sort[adventure] = sorted(levels, key=lambda item: item)
+
+        return {key: sort[key]
+                for key in sorted(sort.keys(), key=lambda s: s.lower())}
+
     def get_adventure_names(self, keyword_lang):
         return {aid: adv['name'] for aid, adv in deep_translate_keywords(
             self.file.get('adventures'), keyword_lang).items()}
