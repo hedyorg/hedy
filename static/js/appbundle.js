@@ -56923,7 +56923,6 @@ notes_mapping = {
       try {
         const parsedData = JSON.parse(storedData);
         clearInterval(parsedData.id);
-        console.log(parsedData.id, " interval was removed");
       } catch (error2) {
         console.error("Error parsing tracking interval data:", error2);
       }
@@ -56950,8 +56949,6 @@ notes_mapping = {
         const page = window.location.pathname;
         const value = target.value || "";
         clickCounts.push({ time: currentTime, id: elementIdOrName, page, extra: value });
-        console.log(target, clickCounts);
-        console.log(`Event: ${event2.type}, Element ID or Name: ${elementIdOrName}, Click Count: ${clickCounts}`);
         handleUserActivity(clickCounts);
       }
     }
@@ -56989,7 +56986,6 @@ notes_mapping = {
     try {
       const data = handleLocalStorage(CLICK_COUNTS);
       if (data.length) {
-        console.log("Sending request to server...");
         await postJson("/tracking", data);
         handleUserActivity([]);
         changesSent = true;

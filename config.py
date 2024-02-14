@@ -37,6 +37,13 @@ config = {
         'postfix': ('-' + dyno if dyno else '') + '-' + str(os.getpid()),
         'region': 'eu-west-1'
     },
+    's3-parse-tracking-logs': {
+        'bucket': 'hedy-parse-tracking-logs',
+        'prefix': app_name + '/',
+        # Make logs from different instances/processes unique
+        'postfix': ('-' + dyno if dyno else '') + '-' + str(os.getpid()),
+        'region': 'eu-west-1'
+    },
     'athena': {
         'region': 'eu-west-1',
         'database': 'hedy-logs',

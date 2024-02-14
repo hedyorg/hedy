@@ -18,7 +18,7 @@ invite_length = config["session"]["invite_length"] * 60
 
 
 HEADER = ["class_id", "username", "is_teacher", "gender", "time", "id", "page", "extra"]
-parse_logger = s3_logger.S3ParseLogger.from_env_vars(header=HEADER)
+parse_logger = s3_logger.S3ParseLogger.from_env_vars(header=HEADER, tracking=True)
 
 
 class TrackingModule(WebsiteModule):
@@ -31,11 +31,13 @@ class TrackingModule(WebsiteModule):
     def index(self, user):
         # /tracking/
         user = self.db.user_by_username(user["username"])
-        print("\n\n\n TRACKING index \n\n")
+        if not user:
+            return {}, 304
+        print("\n\n TRACKING index \n\n")
         body = request.json
         data = []
 
-        class_id = session["class_id"]
+        class_id = session.get("class_id")
 
         for row in body:
             # Values in data_row should be consistent with the header.
