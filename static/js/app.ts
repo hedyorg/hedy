@@ -750,19 +750,21 @@ export async function delete_program(id: string, index: number, prompt: string) 
   });
 }
 
-function set_favourite(index: number) {
+function set_favourite(index: number, set: boolean) {
     $('.favourite_program_container').removeClass('text-yellow-400');
     $('.favourite_program_container').addClass('text-white');
 
-    $('#favourite_program_container_' + index).removeClass('text-white');
-    $('#favourite_program_container_' + index).addClass('text-yellow-400');
+    if (set) {
+        $('#favourite_program_container_' + index).removeClass('text-white');
+        $('#favourite_program_container_' + index).addClass('text-yellow-400');
+    }
 }
 
-export async function set_favourite_program(id: string, index: number, prompt: string) {
-  await modal.confirmP(prompt);
+export async function set_favourite_program(id: string, index: number, set: boolean, promptSet: string, promptUnset: string) {
+  await modal.confirmP(set ? promptSet : promptUnset);
   await tryCatchPopup(async () => {
-    const response = await postJsonWithAchievements('/programs/set_favourite', { id });
-    set_favourite(index)
+    const response = await postJsonWithAchievements('/programs/set_favourite', { id, set });
+    set_favourite(index, set)
     modal.notifySuccess(response.message);
   });
 }

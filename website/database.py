@@ -881,11 +881,11 @@ class Database:
         if data:
             PUBLIC_PROFILES.update({"username": username}, {"country": country})
 
-    def set_favourite_program(self, username, program_id):
+    def set_favourite_program(self, username, program_id, set_favourite):
         # We can only set a favourite program is there is already a public profile
         data = PUBLIC_PROFILES.get({"username": username})
         if data:
-            data["favourite_program"] = program_id
+            data["favourite_program"] = program_id if set_favourite else None
             self.update_public_profile(username, data)
             return True
         return False

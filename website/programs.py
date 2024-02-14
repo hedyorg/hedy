@@ -279,13 +279,16 @@ class ProgramsModule(WebsiteModule):
             return "body must be an object", 400
         if not isinstance(body.get("id"), str):
             return "id must be a string", 400
+        if not isinstance(body.get("set"), bool):
+            return "set must be a bool", 400
 
         result = self.db.program_by_id(body["id"])
         if not result or result["username"] != user["username"]:
             return "No such program!", 404
 
-        if self.db.set_favourite_program(user["username"], body["id"]):
-            return jsonify({"message": gettext("favourite_success")})
+        if self.db.set_favourite_program(user["username"], body["id"], body["set"]):
+            message = gettext("favourite_success") if body["set"] else gettext("unfavourite_success")
+            return jsonify({"message": message})
         else:
             return "You can't set a favourite program without a public profile", 400
 

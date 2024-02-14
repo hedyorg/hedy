@@ -80,8 +80,9 @@
             </tbody>
             </table>
             {% if public_profile and not second_teachers_programs %}
-                <div class="ml-auto favourite_program_container {% if public_profile.favourite_program and public_profile.favourite_program == program.id %}text-yellow-400{% else %}text-white{% endif %} text-2xl{% if not program.public %} hidden{% endif %}" id="favourite_program_container_{{ loop.index }}">
-                    <i class="fa fa-star p-4 bg-blue-300 rounded-full cursor-pointer hover:bg-blue-600" onclick="hedyApp.set_favourite_program('{{ program.id }}', {{ loop.index }}, '{{_('favourite_confirm')}}');" aria-hidden="true"></i>
+                {% set favourite_program = (public_profile.favourite_program and public_profile.favourite_program == program.id) %}
+                <div class="ml-auto favourite_program_container {% if favourite_program %}text-yellow-400{% else %}text-white{% endif %} text-2xl{% if not program.public %} hidden{% endif %}" id="favourite_program_container_{{ loop.index }}">
+                    <i class="fa fa-star p-4 bg-blue-300 rounded-full cursor-pointer hover:bg-blue-600" onclick="hedyApp.set_favourite_program('{{ program.id }}', {{ loop.index }}, {{ not favourite_program }}, '{{_('favourite_confirm')}}', '{{_('unfavourite_confirm')}}');" aria-hidden="true"></i>
                 </div>
             {% endif %}
         </div>
