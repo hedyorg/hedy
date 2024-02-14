@@ -466,7 +466,6 @@ export function stopit() {
       // This gets a bit complex: if we do have some input modal waiting, fake submit it and hide it
       // This way the Promise is no longer "waiting" and can no longer mess with our next program
       if ($('#ask-modal').is(":visible")) {
-        $('#ask-modal form').submit();
         $('#ask-modal').hide();
       }
   }

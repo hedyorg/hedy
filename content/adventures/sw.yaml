@@ -1169,6 +1169,10 @@ adventures:
             1:
                 story_text: "##Karibu  Hedy! \nKwa hiki kiwango cha kwanza, unaweza kutumia amri `{print}`, `{ask}` na `{echo}`. \nBonyeza kitufe(button) chenye rangi ya kijani kibichi ili kuanza! Jaribu kutekeleza msimbo(mpango) kwa kutumia kitufe chenye rangi ya kijani 'Run the code' kilicho upande\
                     \ wa kushoto.\n \nUnaweza kupiga chapa maneno iliyatokelezee kwenye kiwambo kwa kutumia amri ya `{print}`.     \n"
+                example_code: |
+                    ```
+                    {print} Hello world!
+                    ```
             2:
                 story_text: '`ask` na `print` mabadiliko katika kiwango cha 3. Hizi mabadiliko, kinamaanisha neno `echo` haitakiwi tena kuchapisha maneno.'
                 example_code: |
@@ -2443,14 +2447,13 @@ adventures:
         description: Introducing maths
         levels:
             6:
-                story_text: |4
+                story_text: |
+                    In this level you learn something new: you can now also calculate.
 
-                        In this level you learn something new: you can now also calculate.
+                    The plus is easy, you write it like with math: `5 + 5` for example. The minus also works fine, it is `5 - 5`.
 
-                        The plus is easy, you write it like with math: `5 + 5` for example. The minus also works fine, it is `5 - 5`.
-
-                        The times is a bit different, because there is no times symbol on your keyboard. Just search, there really isn't!
-                        That is why we multiply with the asterisk above 8: `5 * 5`. Read that as "5 times 5" that helps you remember it best.
+                    The times is a bit different, because there is no times symbol on your keyboard. Just search, there really isn't!
+                    That is why we multiply with the asterisk above 8: `5 * 5`. Read that as "5 times 5" that helps you remember it best.
                 example_code: |
                     ```
                     {print} '5 plus 5 is ' 5 + 5
