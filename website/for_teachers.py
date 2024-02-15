@@ -554,6 +554,10 @@ class ForTeachersModule(WebsiteModule):
 
             # in case this class has thew new way to select adventures
             if 'sorted_adventures' in customizations:
+                # TODO: what happens to existing classes? If they show quiz and parsons, we needt show
+                # these in the tabs too. # Add quiz and parsons in each level in existing class customization.
+                # if 'other_settings' in customizations and 'hide_quiz' not in customizations['other_settings']:
+
                 # remove from customizations adventures that we have removed
                 self.purge_customizations(customizations['sorted_adventures'], default_adventures, teacher_adventures)
             # it uses the old way so convert it to the new one
@@ -563,6 +567,11 @@ class ForTeachersModule(WebsiteModule):
                     for level in levels:
                         customizations['sorted_adventures'][str(level)].append(
                             {"name": adventure, "from_teacher": False})
+
+                        customizations['sorted_adventures'][str(level)].append(
+                            {"name": "quiz", "from_teacher": False})
+                        customizations['sorted_adventures'][str(level)].append(
+                            {"name": "parsons", "from_teacher": False})
             customizations["updated_by"] = user["username"]
             self.db.update_class_customizations(customizations)
             min_level = 1 if customizations['levels'] == [] else min(customizations['levels'])
