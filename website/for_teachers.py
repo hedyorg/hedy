@@ -418,6 +418,15 @@ class ForTeachersModule(WebsiteModule):
                                            is_command_adventure=adventure_id in hedy_content.KEYWORDS_ADVENTURES)
 
         adventures[int(level)].append(sorted_adventure)
+
+        # Remove hide_quiz or hide_parsons if the added adv. is quiz or parsons
+        if adventure_id == "quiz" and 'other_settings' in customizations \
+            and 'hide_quiz' in customizations['other_settings']:
+            customizations["other_settings"].remove("hide_quiz")
+        if adventure_id == "parsons" and 'other_settings' in customizations \
+            and 'hide_parsons' in customizations['other_settings']:
+            customizations["other_settings"].remove("hide_parsons")
+
         self.db.update_class_customizations(customizations)
         available_adventures = self.get_unused_adventures(adventures, teacher_adventures, adventure_names)
 
