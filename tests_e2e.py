@@ -47,7 +47,8 @@ def request(method, path, headers={}, body='', cookies=None, follow_redirects=Tr
 
     start = utils.timems()
 
-    response = getattr(requests, method)(HOST + path, headers=headers, data=body, cookies=cookies, allow_redirects=follow_redirects)
+    response = getattr(requests, method)(HOST + path, headers=headers, data=body,
+                                         cookies=cookies, allow_redirects=follow_redirects)
 
     # Remember all cookies in the cookie jar
     if cookies is not None:
