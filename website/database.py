@@ -2,13 +2,21 @@ import functools
 import operator
 import itertools
 from datetime import date, timedelta
+import sys
+from os import path
 
 from utils import timems, times
 
 from . import dynamo, auth
 from . import querylog
 
-storage = dynamo.AwsDynamoStorage.from_env() or dynamo.MemoryStorage("dev_database.json")
+is_offline = getattr(sys, 'frozen', False) and hasattr(sys, '_MEIPASS')
+if is_offline:
+    # Offline mode. Store data 1 directory upwards from `_internal`
+    storage = dynamo.MemoryStorage(path.join(sys._MEIPASS, "..", "database.json"))
+else:
+    # Production or dev: use environment variables or dev storage
+    storage = dynamo.AwsDynamoStorage.from_env() or dynamo.MemoryStorage("dev_database.json")
 
 USERS = dynamo.Table(storage, "users", "username", indexes=[
     dynamo.Index("email"),
