@@ -49,9 +49,9 @@ If { ifs+ Condition eol* IfLessCommand Else? }
 Else { !else elses+ eol* IfLessCommand }
 
 Condition { 
-    EqualityCheck { Text is+ (String | Expression | pressed+) } |
-    InListCheck { Text ins+  Text } |
-    NotInListCheck { Text not_in+  Text }
+    EqualityCheck { (Text | Int) is+ (String | Expression | pressed+) } |
+    InListCheck { (Text | Int) ins+ Text } |
+    NotInListCheck { (Text | Int) not_in+ Text }
 }
 
 Repeat { repeat+ (Int | Text) times+ Command? }
