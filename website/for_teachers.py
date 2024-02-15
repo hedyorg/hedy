@@ -801,6 +801,14 @@ class ForTeachersModule(WebsiteModule):
             "updated_by": user["username"]
         }
 
+        # Remove quiz and parsons if we need to hide them  all
+        hide_quiz = 'hide_quiz' in customizations['other_settings']
+        hide_parsons = 'hide_parsons' in customizations['other_settings']
+        for level, adventures in customizations["sorted_adventures"].items():
+            customizations["sorted_adventures"][level] = [adventure for adventure in adventures
+                                                          if (hide_quiz and adventure["name"] != "quiz") or
+                                                          (hide_parsons and adventure["name"] != "parsons")]
+
         self.db.update_class_customizations(customizations)
 
         achievement = self.achievements.add_single_achievement(user["username"], "my_class_my_rules")
