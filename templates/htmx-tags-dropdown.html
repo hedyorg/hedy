@@ -7,6 +7,8 @@
         transition my *opacity to 1 over 500ms end
         ">
     {% for tag in tags %}
-        {{ render_partial('htmx-tags-dropdown-item.html', tag=tag, adventure_id=adventure_id) }}
+        {% if loop.index < 10 %}
+            {{ render_partial('htmx-tags-dropdown-item.html', tag=tag, adventure_id=adventure_id) }}
+        {% endif %}
     {% endfor %}
 </div>
