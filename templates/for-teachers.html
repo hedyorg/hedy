@@ -89,7 +89,7 @@
             <tbody>
               {% for adventure in teacher_adventures %}
                 <tr>
-                  <td class="px-4 py-2"><a href="for-teachers/customize-adventure/{{adventure.id}}" class="no-underline" data-cy="edit-link">{{adventure.name|e}}</a></td>
+                  <td class="px-4 py-2"><a href="for-teachers/customize-adventure/{{adventure.id}}/for-teachers" class="no-underline" data-cy="edit-link">{{adventure.name|e}}</a></td>
                   <td class="owner_username_cell">{{adventure.author or adventure.creator}}</td>
                   <td class="username_cell">{{adventure.creator}}</td>
                   <td class="text-center p-2">
@@ -117,7 +117,7 @@
             hx-post="/for-teachers/create-adventure"
             hx-swap="none"
             _="on htmx:afterRequest if detail.xhr.response
-            window.open('/for-teachers/customize-adventure/' + detail.xhr.response, '_self')"
+            window.open('/for-teachers/customize-adventure/' + detail.xhr.response + '/for-teachers', '_self')"
             data-cy="edit-link"{% if second_teacher and role == 'viewer' %}disabled{% endif %}>{{_('create_adventure')}}</button>
           <a href="/public-adventures" id="public-adventures-link" class="white-btn mt-4">{{_('public_adventures')}}</a>
         </div>

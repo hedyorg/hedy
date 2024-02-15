@@ -119,7 +119,7 @@
                 hx-post="/for-teachers/create-adventure"
                 hx-swap="none"
                 _="on htmx:afterRequest if detail.xhr.response
-                window.open('/for-teachers/customize-adventure/' + detail.xhr.response, '_self')"
+                window.open('/for-teachers/customize-adventure/' + detail.xhr.response + '/{{class_info.id}}', '_self')"
                 data-cy="edit-link"{% if second_teacher and role == 'viewer' %}disabled{% endif %}>{{_('create_adventure')}}</button>
         </div>
         <div class="flex ltr:ml-auto rtl:mr-auto">
