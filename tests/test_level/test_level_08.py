@@ -240,6 +240,50 @@ class TestsLevel8(HedyTester):
             expected_commands=['is', 'is', 'if', 'in', 'print']
         )
 
+    def test_if_not_in_list_print(self):
+        code = textwrap.dedent("""\
+         letters is a, b, c
+         if d not in letters
+             print 'Not found'""")
+
+        expected = textwrap.dedent("""\
+         letters = ['a', 'b', 'c']
+         if 'd' not in letters:
+           print(f'Not found')""")
+
+        self.multi_level_tester(
+            max_level=11,
+            code=code,
+            expected=expected,
+            output='Not found'
+        )
+
+    @parameterized.expand(HedyTester.in_not_in_list_commands)
+    def test_if_not_in_and_in_list_with_string_var_gives_type_error(self, operator):
+        code = textwrap.dedent(f"""\
+        items is red
+        if red {operator} items
+          print 'found!'""")
+        self.multi_level_tester(
+            max_level=11,
+            code=code,
+            extra_check_function=lambda c: c.exception.arguments['line_number'] == 2,
+            exception=hedy.exceptions.InvalidArgumentTypeException
+        )
+
+    @parameterized.expand(HedyTester.in_not_in_list_commands)
+    def test_if_not_in_and_in_list_with_input_gives_type_error(self, operator):
+        code = textwrap.dedent(f"""\
+            items is ask 'What are the items?'
+            if red {operator} items
+              print 'found!'""")
+        self.multi_level_tester(
+            max_level=11,
+            code=code,
+            extra_check_function=lambda c: c.exception.arguments['line_number'] == 2,
+            exception=hedy.exceptions.InvalidArgumentTypeException
+        )
+
     def test_if_equality_assign_calc(self):
         code = textwrap.dedent("""\
         cmp is 1
@@ -1204,10 +1248,10 @@ class TestsLevel8(HedyTester):
                 raise Exception('catch_index_exception')
               note = random.choice(notes)
               print(f'{note}')
-              chosen_note = note.upper()
+              chosen_note = str(note).upper()
               if chosen_note not in notes_mapping.keys() and chosen_note not in notes_mapping.values():
                   raise Exception('catch_value_exception')
-              play(notes_mapping.get(str(chosen_note), str(chosen_note)))
+              play(notes_mapping.get(chosen_note, chosen_note))
               time.sleep(0.5)
               time.sleep(0.1)""")
 
@@ -1230,10 +1274,10 @@ class TestsLevel8(HedyTester):
         expected = textwrap.dedent("""\
         notes = ['1', '2', '3']
         for i in range(int('10')):
-          chosen_note = random.choice(notes).upper()
+          chosen_note = str(random.choice(notes)).upper()
           if chosen_note not in notes_mapping.keys() and chosen_note not in notes_mapping.values():
               raise Exception('catch_value_exception')
-          play(notes_mapping.get(str(chosen_note), str(chosen_note)))
+          play(notes_mapping.get(chosen_note, chosen_note))
           time.sleep(0.5)
           time.sleep(0.1)""")
 

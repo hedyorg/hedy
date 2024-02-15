@@ -42,6 +42,7 @@ ADVENTURE_ORDER_PER_LEVEL = {
         'rock',
         'haunted',
         'story',
+        'music',
         'turtle',
         'turtle_draw_it',
         'restaurant',
@@ -58,6 +59,7 @@ ADVENTURE_ORDER_PER_LEVEL = {
         'sleep_command',
         'parrot',
         'story',
+        'music',
         'restaurant',
         'turtle',
         'turtle_draw_it',
@@ -68,6 +70,7 @@ ADVENTURE_ORDER_PER_LEVEL = {
         'random_command',
         'dice',
         'rock',
+        'music',
         'fortune',
         'restaurant',
         'add_remove_command',
@@ -89,6 +92,7 @@ ADVENTURE_ORDER_PER_LEVEL = {
         'turtle',
         'turtle_draw_it',
         'clear_command',
+        'music',
         'story',
         'haunted',
         'fortune',
@@ -98,6 +102,7 @@ ADVENTURE_ORDER_PER_LEVEL = {
     5: [
         'default',
         'if_command',
+        'music',
         'language',
         'dice',
         'dishes',
@@ -116,6 +121,7 @@ ADVENTURE_ORDER_PER_LEVEL = {
     6: [
         'default',
         'maths',
+        'music',
         'is_command',
         'songs',
         'dice',
@@ -132,6 +138,7 @@ ADVENTURE_ORDER_PER_LEVEL = {
         'repeat_command',
         'story',
         'songs',
+        'music',
         'dishes',
         'dice',
         'repeat_command_2',
@@ -147,6 +154,7 @@ ADVENTURE_ORDER_PER_LEVEL = {
         'fortune',
         'repeat_command_2',
         'songs',
+        'music',
         'if_command',
         'story',
         'haunted',
@@ -162,6 +170,7 @@ ADVENTURE_ORDER_PER_LEVEL = {
         'rock',
         'story',
         'calculator',
+        'music',
         'restaurant',
         'haunted',
         'pressit',
@@ -203,6 +212,7 @@ ADVENTURE_ORDER_PER_LEVEL = {
         'quotation_marks',
         'story',
         'fortune',
+        'music',
         'songs',
         'songs_2',
         'restaurant',
@@ -218,6 +228,7 @@ ADVENTURE_ORDER_PER_LEVEL = {
         'and_or_command',
         'secret',
         'functions',
+        'music',
         'story',
         'rock',
         'turtle_draw_it',
@@ -230,6 +241,7 @@ ADVENTURE_ORDER_PER_LEVEL = {
         'default',
         'is_command',
         'guess_my_number',
+        'music',
         'haunted',
         'functions',
         'turtle_draw_it',
@@ -506,6 +518,47 @@ class Adventures(StructuredDataFile):
 
     def get_adventure_keyname_name_levels(self):
         return {aid: {adv['name']: list(adv['levels'].keys())} for aid, adv in self.file.get('adventures', {}).items()}
+
+    def get_sorted_level_programs(self, programs, adventure_names):
+        programs_by_level = []
+        for item in programs:
+            programs_by_level.append(
+                {'level': item['level'],
+                 'adventure_name': item.get('adventure_name'),
+                 }
+            )
+
+        sort = {}
+        for program in programs_by_level:
+            if program['level'] in sort:
+                sort[program['level']].append(adventure_names.get(program['adventure_name']))
+            else:
+                sort[program['level']] = [adventure_names.get(program['adventure_name'])]
+        for level, adventures in sort.copy().items():
+            sort[level] = sorted(adventures, key=lambda s: s.lower())
+
+        return dict(sorted(sort.items(), key=lambda item: item[0]))
+
+    def get_sorted_adventure_programs(self, programs, adventure_names):
+        programs_by_adventure = []
+        for item in programs:
+            programs_by_adventure.append(
+                {'adventure_name': adventure_names.get(item.get('adventure_name')),
+                 'level': item['level'],
+                 }
+            )
+
+        sort = {}
+        for program in programs_by_adventure:
+            if program['adventure_name'] in sort:
+                sort[program['adventure_name']].append(program['level'])
+            else:
+                sort[program['adventure_name']] = [program['level']]
+        for adventure, levels in sort.copy().items():
+            sort[adventure] = sorted(levels, key=lambda item: item)
+
+        return {key: sort[key]
+                for key in sorted(sort.keys(), key=lambda s: s.lower())}
 
     def get_adventure_names(self, keyword_lang):
         return {aid: adv['name'] for aid, adv in deep_translate_keywords(

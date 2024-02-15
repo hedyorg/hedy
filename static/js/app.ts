@@ -463,7 +463,6 @@ export function stopit() {
       // This gets a bit complex: if we do have some input modal waiting, fake submit it and hide it
       // This way the Promise is no longer "waiting" and can no longer mess with our next program
       if ($('#ask-modal').is(":visible")) {
-        $('#ask-modal form').submit();
         $('#ask-modal').hide();
       }
   }
@@ -1678,23 +1677,14 @@ export async function change_language(lang: string) {
     if (response.succes) {
       const queryString = window.location.search;
       const urlParams = new URLSearchParams(queryString);
-      if (urlParams.get('keyword_language') !== null) {
-        urlParams.set('keyword_language', 'en');
-      }
-      if (urlParams.get("language") !== null) {
+
+      if (lang === 'en' || urlParams.get("language") !== null) {
         urlParams.set("language", lang)
+        urlParams.set('keyword_language', lang);
         window.location.search = urlParams.toString();
       } else {
         location.reload();
       }
-      // What's the logic behind this? what happens the keyword_language=en and we want to change the language to arabic? params?
-      // Check if keyword_language is set to change it to English
-      // if (urlParams.get('keyword_language') !== null) {
-      //   urlParams.set('keyword_language', 'en');
-      //   window.location.search = urlParams.toString();
-      // } else {
-      //   location.reload();
-      // }
     }
   });
 }
