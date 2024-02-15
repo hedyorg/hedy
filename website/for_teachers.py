@@ -421,10 +421,10 @@ class ForTeachersModule(WebsiteModule):
 
         # Remove hide_quiz or hide_parsons if the added adv. is quiz or parsons
         if adventure_id == "quiz" and 'other_settings' in customizations \
-            and 'hide_quiz' in customizations['other_settings']:
+                and 'hide_quiz' in customizations['other_settings']:
             customizations["other_settings"].remove("hide_quiz")
         if adventure_id == "parsons" and 'other_settings' in customizations \
-            and 'hide_parsons' in customizations['other_settings']:
+                and 'hide_parsons' in customizations['other_settings']:
             customizations["other_settings"].remove("hide_parsons")
 
         self.db.update_class_customizations(customizations)
@@ -540,7 +540,18 @@ class ForTeachersModule(WebsiteModule):
         for adventure in teacher_adventures:
             adventure_names[adventure['id']] = adventure['name']
 
+        # Add quiz and parsons as adventure names so that we can show them as tabs.
+        adventure_names["quiz"] = gettext("quiz_tab")
+        adventure_names["parsons"] = gettext("parsons_title")
+        default_adventures["quiz"] = {}
+        default_adventures["parsons"] = {}
+
         if customizations:
+            if 'other_settings' in customizations and 'hide_quiz' in customizations['other_settings']:
+                del default_adventures["quiz"]
+            if 'other_settings' in customizations and 'hide_parsons' in customizations['other_settings']:
+                del default_adventures["parsons"]
+
             # in case this class has thew new way to select adventures
             if 'sorted_adventures' in customizations:
                 # remove from customizations adventures that we have removed
