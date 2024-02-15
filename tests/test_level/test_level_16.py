@@ -571,38 +571,109 @@ class TestsLevel16(HedyTester):
             extra_check_function=self.is_turtle(),
         )
 
-    def test_if_in_list_print(self):
-        code = textwrap.dedent("""\
+    #
+    # in/not-in list commands
+    #
+    @parameterized.expand([
+        ('in', 'Found'),
+        ('not in', 'Not found')
+    ])
+    def test_if_in_not_in_list_with_strings(self, command, expected_output):
+        code = textwrap.dedent(f"""\
             letters = ['a', 'b', 'c']
-            if 'a' in letters
-              print 'Found'""")
-
-        expected = textwrap.dedent("""\
-            letters = ['a', 'b', 'c']
-            if 'a' in letters:
-              print(f'''Found''')""")
-
-        self.single_level_tester(
-            code=code,
-            expected=expected,
-            output='Found'
-        )
-
-    def test_if_not_in_list_print(self):
-        code = textwrap.dedent("""\
-            letters = ['a', 'b', 'c']
-            if 'd' not in letters
+            if 'a' {command} letters
+              print 'Found'
+            else
               print 'Not found'""")
 
-        expected = textwrap.dedent("""\
+        expected = textwrap.dedent(f"""\
             letters = ['a', 'b', 'c']
-            if 'd' not in letters:
+            if 'a' {command} letters:
+              print(f'''Found''')
+            else:
               print(f'''Not found''')""")
 
         self.single_level_tester(
             code=code,
             expected=expected,
-            output='Not found'
+            output=expected_output
+        )
+
+    @parameterized.expand([
+        ('in', 'True'),
+        ('not in', 'False')
+    ])
+    def test_if_number_in_not_in_list_with_numbers(self, operator, expected_output):
+        code = textwrap.dedent(f"""\
+        items is [1, 2, 3]
+        if 1 {operator} items
+          print 'True'
+        else
+          print 'False'""")
+
+        expected = textwrap.dedent(f"""\
+        items = [1, 2, 3]
+        if 1 {operator} items:
+          print(f'''True''')
+        else:
+          print(f'''False''')""")
+
+        self.single_level_tester(
+            code=code,
+            expected=expected,
+            output=expected_output
+        )
+
+    @parameterized.expand([
+        ('in', 'False'),
+        ('not in', 'True')
+    ])
+    def test_if_text_in_not_in_list_with_numbers(self, operator, expected_output):
+        code = textwrap.dedent(f"""\
+            items is [1, 2, 3]
+            if '1' {operator} items
+              print 'True'
+            else
+              print 'False'""")
+
+        expected = textwrap.dedent(f"""\
+            items = [1, 2, 3]
+            if '1' {operator} items:
+              print(f'''True''')
+            else:
+              print(f'''False''')""")
+
+        self.single_level_tester(
+            code=code,
+            expected=expected,
+            output=expected_output
+        )
+
+    @parameterized.expand(['in', 'not in'])
+    def test_unquoted_lhs_in_not_in_list_gives_error(self, operator):
+        code = textwrap.dedent(f"""\
+            items is [1, 2, 3]
+            if a {operator} items
+              print 'True'""")
+
+        self.single_level_tester(
+            code=code,
+            skip_faulty=False,
+            exception=hedy.exceptions.UnquotedAssignTextException,
+            extra_check_function=lambda c: c.exception.arguments['line_number'] == 2
+        )
+
+    @parameterized.expand(['in', 'not in'])
+    def test_undefined_rhs_in_not_in_list_gives_error(self, operator):
+        code = textwrap.dedent(f"""\
+            items is [1, 2, 3]
+            if 1 {operator} list
+              print 'True'""")
+
+        self.single_level_tester(
+            code=code,
+            exception=hedy.exceptions.UndefinedVarException,
+            extra_check_function=lambda c: c.exception.arguments['line_number'] == 2
         )
 
     #

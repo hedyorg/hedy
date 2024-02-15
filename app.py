@@ -371,9 +371,14 @@ if utils.is_heroku():
 
 Compress(app)
 Commonmark(app)
-parse_logger = s3_logger.S3ParseLogger.from_env_vars()
-querylog.LOG_QUEUE.set_transmitter(
-    aws_helpers.s3_querylog_transmitter_from_env())
+
+# We don't need to log in offline mode
+if utils.is_offline_mode():
+    parse_logger = s3_logger.NullLogger()
+else:
+    parse_logger = s3_logger.S3ParseLogger.from_env_vars()
+    querylog.LOG_QUEUE.set_transmitter(
+        aws_helpers.s3_querylog_transmitter_from_env())
 
 
 @app.before_request
@@ -2710,14 +2715,91 @@ def split_at(n, xs):
     return xs[:n], xs[n:]
 
 
+def on_offline_mode():
+    """Prepare for running in offline mode."""
+    # We are running in a standalone build made using pyinstaller.
+    # cd to the directory that has the data files, disable debug mode, and
+    # use port 80 (unless overridden).
+    # There will be a standard teacher invite code that everyone can use
+    # by going to `http://localhost/invite/newteacher`.
+    os.chdir(utils.offline_data_dir())
+    config['port'] = int(os.environ.get('PORT', 80))
+    if not os.getenv('TEACHER_INVITE_CODES'):
+        os.environ['TEACHER_INVITE_CODES'] = 'newteacher'
+    utils.set_debug_mode(False)
+
+    # Disable logging, so Werkzeug doesn't log all requests and tell users with big red
+    # letters they're running a non-production server.
+    # from werkzeug import serving
+    # def do_nothing(*args, **kwargs): pass
+    # serving.WSGIRequestHandler.log_request = do_nothing
+    log = logging.getLogger('werkzeug')
+    log.setLevel(logging.ERROR)
+
+    # Get our IP addresses so we can print a helpful hint
+    import socket
+    ip_addresses = [addr[4][0] for addr in socket.getaddrinfo(
+        socket.gethostname(), None, socket.AF_INET, socket.SOCK_STREAM)]
+    ip_addresses = [i for i in ip_addresses if i != '127.0.0.1']
+
+    from colorama import colorama_text, Fore, Back, Style
+    g = Fore.GREEN
+    lines = [
+        ('', ''),
+        ('', ''),
+        (g, r' _    _          _       '),
+        (g, r'| |  | |        | |      '),
+        (g, r'| |__| | ___  __| |_   _ '),
+        (g, r'|  __  |/ _ \/ _` | | | |'),
+        (g, r'| |  | |  __/ (_| | |_| |'),
+        (g, r'|_|  |_|\___|\__,_|\__, |'),
+        (g, r'                    __/ |'),
+        (g, r'   o f f l i n e   |___/ '),
+        ('', ''),
+        ('', 'Use a web browser to visit the following website:'),
+        ('', ''),
+        *[(Fore.BLUE, f'   http://{ip}/') for ip in ip_addresses],
+        ('', ''),
+        ('', ''),
+    ]
+    # This is necessary to make ANSI color codes work on Windows.
+    # Init and deinit so we don't mess with Werkzeug's use of this library later on.
+    with colorama_text():
+        for style, text in lines:
+            print(Back.WHITE + Fore.BLACK + ''.ljust(10) + style + text.ljust(60) + Style.RESET_ALL)
+
+    # We have this option for testing the offline build. A lot of modules read
+    # files upon import, and those happen before the offline build 'cd' we do
+    # here and need to be written to use __file__. During the offline build,
+    # we want to run the actual code to see that nobody added file accesses that
+    # crash, but we don't actually want to start the server.
+    smoke_test = '--smoketest' in sys.argv
+    if smoke_test:
+        sys.exit(0)
+
+
 if __name__ == '__main__':
     # Start the server on a developer machine. Flask is initialized in DEBUG mode, so it
     # hot-reloads files. We also flip our own internal "debug mode" flag to True, so our
     # own file loading routines also hot-reload.
-    utils.set_debug_mode(not os.getenv('NO_DEBUG_MODE'))
+    no_debug_mode_requested = os.getenv('NO_DEBUG_MODE')
+    utils.set_debug_mode(not no_debug_mode_requested)
 
-    # For local debugging, fetch all static files on every request
-    app.config['SEND_FILE_MAX_AGE_DEFAULT'] = None
+    if utils.is_offline_mode():
+        on_offline_mode()
+
+    # Set some default environment variables for development mode
+    env_defaults = dict(
+        BASE_URL=f"http://localhost:{config['port']}/",
+        ADMIN_USER="admin",
+    )
+    for key, value in env_defaults.items():
+        if key not in os.environ:
+            os.environ[key] = value
+
+    if utils.is_debug_mode():
+        # For local debugging, fetch all static files on every request
+        app.config['SEND_FILE_MAX_AGE_DEFAULT'] = None
 
     # If we are running in a Python debugger, don't use flasks reload mode. It creates
     # subprocesses which make debugging harder.
@@ -2732,9 +2814,12 @@ if __name__ == '__main__':
         start_snapshot = tracemalloc.take_snapshot()
 
     on_server_start()
-    logger.debug('app starting in debug mode')
+    debug = utils.is_debug_mode() and not (is_in_debugger or profile_memory)
+    if debug:
+        logger.debug('app starting in debug mode')
+
     # Threaded option enables multiple instances for multiple user access support
-    app.run(threaded=True, debug=not is_in_debugger and not profile_memory,
+    app.run(threaded=True, debug=debug,
             port=config['port'], host="0.0.0.0")
 
     # See `Procfile` for how the server is started on Heroku.
