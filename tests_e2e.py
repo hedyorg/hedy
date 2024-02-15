@@ -588,7 +588,8 @@ class TestAuth(AuthHelper):
 
         # WHEN retrieving the user profile with the same cookie
         # THEN first receive a redirect response code from the server, and the next
-        # page load will be a 403
+        # page load will be a 403. Need to have 'follow_redirects=False' or we won't see
+        # the 302 code.
         self.get_data('profile', expect_http_code=302, follow_redirects=False)
         self.get_data('profile', expect_http_code=403)
 
