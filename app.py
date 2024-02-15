@@ -261,6 +261,22 @@ cdn.Cdn(app, os.getenv('CDN_PREFIX'), os.getenv('HEROKU_SLUG_COMMIT', 'dev'))
 
 
 @app.before_request
+def redirect_outdated_domains():
+    """If Hedy is being loaded from a domain we no longer use or advertise,
+    do a 301 redirect to the official 'hedy.org' domain.
+
+    If we keep this up for long enough, eventually Google will update its index
+    to forget about the old domains.
+    """
+    # request.host looks like 'hostname[:port]'
+    host = request.host.split(':')[0]
+
+    if host in ['hedycode.com', 'hedy-beta.herokuapp.com']:
+        # full_path starts with '/' and has everything
+        return redirect(f'https://hedy.org{request.full_path}', code=301)
+
+
+@app.before_request
 def before_request_begin_logging():
     """Initialize the query logging.
 
@@ -2540,9 +2556,9 @@ def public_user_page(username):
         sorted_adventure_programs = hedy_content.Adventures(
             g.lang).get_sorted_adventure_programs(all_programs, adventure_names)
 
-        favourite_program = None
+        favorite_program = None
         if 'favourite_program' in user_public_info and user_public_info['favourite_program']:
-            favourite_program = DATABASE.program_by_id(
+            favorite_program = DATABASE.program_by_id(
                 user_public_info['favourite_program'])
 
         last_achieved = None
@@ -2558,7 +2574,7 @@ def public_user_page(username):
             user_info=user_public_info,
             achievements=ACHIEVEMENTS_TRANSLATIONS.get_translations(
                 g.lang).get('achievements'),
-            favourite_program=favourite_program,
+            favorite_program=favorite_program,
             programs=user_programs,
             last_achieved=last_achieved,
             user_achievements=user_achievements,
