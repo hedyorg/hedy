@@ -885,6 +885,14 @@ class TestsLevel8(HedyTester):
             max_level=11
         )
 
+    def test_repeat_without_body_gives_error(self):
+        code = "repeat 5 times"
+
+        self.multi_level_tester(
+            code=code,
+            exception=hedy.exceptions.MissingInnerCommandException,
+        )
+
     #
     # negative tests
     #
