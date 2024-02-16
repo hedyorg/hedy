@@ -1306,68 +1306,6 @@ class TestsLevel12(HedyTester):
     #
     #     self.multi_level_tester(max_level=18, code=code, expected=expected)
 
-    def test_if_in_list_print(self):
-        code = textwrap.dedent("""\
-         letters is 'a', 'b', 'c'
-         if 'a' in letters
-             print 'Found'""")
-
-        expected = textwrap.dedent("""\
-         letters = ['a', 'b', 'c']
-         if 'a' in letters:
-           print(f'''Found''')""")
-
-        self.multi_level_tester(
-            max_level=15,
-            code=code,
-            expected=expected,
-            output='Found'
-        )
-
-    def test_if_not_in_list_print(self):
-        code = textwrap.dedent("""\
-         letters = 1, 2, 3
-         if 5 not in letters
-             print 'Not found'""")
-
-        expected = textwrap.dedent("""\
-         letters = [1, 2, 3]
-         if '5' not in letters:
-           print(f'''Not found''')""")
-
-        self.multi_level_tester(
-            max_level=15,
-            code=code,
-            expected=expected,
-            output='Not found'
-        )
-
-    @parameterized.expand(HedyTester.quotes)
-    def test_if_in_list_with_string_var_gives_type_error(self, q):
-        code = textwrap.dedent(f"""\
-        items is {q}red{q}
-        if {q}red{q} in items
-            print {q}found!{q}""")
-        self.multi_level_tester(
-            max_level=16,
-            code=code,
-            extra_check_function=lambda c: c.exception.arguments['line_number'] == 2,
-            exception=hedy.exceptions.InvalidArgumentTypeException
-        )
-
-    @parameterized.expand(HedyTester.in_not_in_list_commands)
-    def test_if_not_in_and_in_list_with_input_gives_type_error(self, operator):
-        code = textwrap.dedent(f"""\
-            items is ask 'What are the items?'
-            if 'red' {operator} items
-              print 'found!'""")
-        self.multi_level_tester(
-            max_level=16,
-            code=code,
-            extra_check_function=lambda c: c.exception.arguments['line_number'] == 2,
-            exception=hedy.exceptions.InvalidArgumentTypeException
-        )
-
     # Lists can be compared for equality starting with level 14
     def test_if_equality_lists(self):
         code = textwrap.dedent("""\
@@ -1404,6 +1342,142 @@ class TestsLevel12(HedyTester):
             code=code,
             exception=hedy.exceptions.InvalidTypeCombinationException,
             extra_check_function=lambda c: c.exception.arguments['line_number'] == 3
+        )
+
+    #
+    # in/not-in list commands
+    #
+    @parameterized.expand([
+        ('in', 'Found'),
+        ('not in', 'Not found')
+    ])
+    def test_if_in_not_in_list_with_strings(self, command, expected_output):
+        code = textwrap.dedent(f"""\
+         letters is 'a', 'b', 'c'
+         if 'a' {command} letters
+           print 'Found'
+         else
+           print 'Not found'""")
+
+        expected = textwrap.dedent(f"""\
+         letters = ['a', 'b', 'c']
+         if 'a' {command} letters:
+           print(f'''Found''')
+         else:
+           print(f'''Not found''')""")
+
+        self.multi_level_tester(
+            max_level=15,
+            code=code,
+            expected=expected,
+            output=expected_output
+        )
+
+    @parameterized.expand([
+        ('in', 'True'),
+        ('not in', 'False')
+    ])
+    def test_if_number_in_not_in_list_with_numbers(self, operator, expected_output):
+        code = textwrap.dedent(f"""\
+        items is 1, 2, 3
+        if 1 {operator} items
+          print 'True'
+        else
+          print 'False'""")
+
+        expected = textwrap.dedent(f"""\
+        items = [1, 2, 3]
+        if 1 {operator} items:
+          print(f'''True''')
+        else:
+          print(f'''False''')""")
+
+        self.multi_level_tester(
+            max_level=15,
+            code=code,
+            expected=expected,
+            output=expected_output
+        )
+
+    @parameterized.expand([
+        ('in', 'False'),
+        ('not in', 'True')
+    ])
+    def test_if_text_in_not_in_list_with_numbers(self, operator, expected_output):
+        code = textwrap.dedent(f"""\
+            items is 1, 2, 3
+            if '1' {operator} items
+              print 'True'
+            else
+              print 'False'""")
+
+        expected = textwrap.dedent(f"""\
+            items = [1, 2, 3]
+            if '1' {operator} items:
+              print(f'''True''')
+            else:
+              print(f'''False''')""")
+
+        self.multi_level_tester(
+            max_level=15,
+            code=code,
+            expected=expected,
+            output=expected_output
+        )
+
+    @parameterized.expand(['in', 'not in'])
+    def test_unquoted_lhs_in_not_in_list_gives_error(self, operator):
+        code = textwrap.dedent(f"""\
+            items is 1, 2, 3
+            if a {operator} items
+              print 'True'""")
+
+        self.multi_level_tester(
+            code=code,
+            max_level=15,
+            skip_faulty=False,
+            exception=hedy.exceptions.UnquotedAssignTextException,
+            extra_check_function=lambda c: c.exception.arguments['line_number'] == 2
+        )
+
+    @parameterized.expand(['in', 'not in'])
+    def test_undefined_rhs_in_not_in_list_gives_error(self, operator):
+        code = textwrap.dedent(f"""\
+            items is 1, 2, 3
+            if 1 {operator} list
+              print 'True'""")
+
+        self.multi_level_tester(
+            code=code,
+            max_level=15,
+            exception=hedy.exceptions.UndefinedVarException,
+            extra_check_function=lambda c: c.exception.arguments['line_number'] == 2
+        )
+
+    @parameterized.expand([(c, q) for c in HedyTester.in_not_in_list_commands for q in HedyTester.quotes])
+    def test_if_in_not_in_list_with_string_var_gives_type_error(self, c, q):
+        code = textwrap.dedent(f"""\
+        items is {q}red{q}
+        if {q}red{q} {c} items
+            print {q}found!{q}""")
+        self.multi_level_tester(
+            max_level=16,
+            code=code,
+            extra_check_function=lambda c: c.exception.arguments['line_number'] == 2,
+            exception=hedy.exceptions.InvalidArgumentTypeException
+        )
+
+    @parameterized.expand(HedyTester.in_not_in_list_commands)
+    def test_if_not_in_and_in_list_with_input_gives_type_error(self, operator):
+        code = textwrap.dedent(f"""\
+            items is ask 'What are the items?'
+            if 'red' {operator} items
+              print 'found!'""")
+        self.multi_level_tester(
+            max_level=16,
+            code=code,
+            extra_check_function=lambda c: c.exception.arguments['line_number'] == 2,
+            exception=hedy.exceptions.InvalidArgumentTypeException
         )
 
     #
