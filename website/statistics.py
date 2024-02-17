@@ -15,6 +15,7 @@ from website.auth import is_admin, is_teacher, requires_admin, requires_login
 
 from .database import Database
 from .website_module import WebsiteModule, route
+from bs4 import BeautifulSoup
 
 """The Key tuple is used to aggregate the raw data by level, time or username."""
 Key = namedtuple("Key", ["name", "class_"])
@@ -153,9 +154,10 @@ class StatisticsModule(WebsiteModule):
         class_ = self.db.get_class(class_id)
         if hedy_content.Adventures(g.lang).has_adventures():
             adventures = hedy_content.Adventures(g.lang).get_adventure_keyname_name_levels()
+            full_adventures = hedy_content.Adventures(g.lang).get_adventures(g.keyword_lang)
         else:
+            full_adventures = hedy_content.Adventures("en").get_adventures(g.keyword_lang)
             adventures = hedy_content.Adventures("en").get_adventure_keyname_name_levels()
-        full_adventures = hedy_content.Adventures(g.lang).get_adventures(g.keyword_lang)
         students = sorted(class_.get("students", []))
         teacher_adventures = self.db.get_teacher_adventures(user["username"])
 
@@ -185,7 +187,6 @@ class StatisticsModule(WebsiteModule):
             programs = self.db.last_level_programs_for_user(student, level)
             if programs:
                 ticked_adventures[student] = []
-                current_program = {}
                 for _, program in programs.items():
                     # Old programs sometimes don't have adventures associated to them
                     # So skip them
@@ -237,6 +238,13 @@ class StatisticsModule(WebsiteModule):
                                 elif char != '`' and previous_char == '`':
                                     consecutive_backticks = 0
                                 previous_char = char
+
+                        for adventure in teacher_adventures:
+                            if program['adventure_name'] == adventure["id"]:
+                                content = adventure['content']                                
+                                soup = BeautifulSoup(content, features="html.parser")
+                                for pre in soup.find_all('pre'):
+                                    adventure_snippets.append(pre.contents[0].replace('\n', ''))
 
                         student_code = program['code']
                         student_code = student_code.replace('\n', '')
