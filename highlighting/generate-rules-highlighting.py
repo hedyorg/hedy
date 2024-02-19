@@ -12,6 +12,7 @@ OUTPUT_PATH_TRANSLATION = "highlighting/highlighting-trad.json"
 KEYWORDS_PATH = 'content/keywords/'
 KEYWORDS_PATTERN = '(\\w+).yaml$'
 
+
 def main():
     os.chdir(os.path.dirname(__file__) + "/..")
 
@@ -21,6 +22,7 @@ def main():
     with open(OUTPUT_PATH_TRANSLATION, "w", encoding='utf8') as file_lang:
         file_lang.write(json.dumps(language_keywords, indent=4, ensure_ascii=False))
     print(" Done !")
+
 
 def get_yaml_content(file_name):
     """Recover the content of YAML files
