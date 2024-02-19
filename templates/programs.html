@@ -90,14 +90,7 @@
                   <span>{{_('more_options')}}</span>
                 </button>
                 <div class="dropdown-menu z-30 min-w-full" id="program_options_dropdown_{{ loop.index }}"
-                  style="display: none; padding: 0px !important; margin: 0px; margin-top: 0.25rem;"
-                  _="on mutation of @style
-                      set arrow to #share-arrow_{{ loop.index }}
-                      if *display == 'none'
-                          remove .rotate-180 from arrow
-                      else if not arrow.classList.contains('rotate-180')
-                          add .rotate-180 to arrow
-                      end">
+                  style="display: none; padding: 0px !important; margin: 0px; margin-top: 0.25rem;">
                     <button class="gray-btn text-blue-500 min-w-full flex justify-between items-center gap-2 border-b border-gray-500" onclick="hedyApp.copy_to_clipboard(`{{program.code}}`, '{{_('copy_clipboard')}}')">{{_('copy_code')}}</button>
                     {% if program.public %}
                         <button class="gray-btn text-blue-500 min-w-full flex justify-between items-center gap-2 border-b border-gray-500" onclick="hedyApp.copy_to_clipboard(hedyApp.viewProgramLink('{{program.id}}'), '{{_('copy_clipboard')}}')">{{_('copy_link_to_share')}}</button>
