@@ -195,7 +195,7 @@ class StatisticsModule(WebsiteModule):
                     name = adventure_names.get(program['adventure_name'], program['adventure_name'])
                     customized_level = class_adventures_formatted.get(str(program['level']))
                     if name in customized_level\
-                          and self.is_program_modified(program, full_adventures, teacher_adventures):
+                            and self.is_program_modified(program, full_adventures, teacher_adventures):
                         student_adventure_id = f"{student}-{program['adventure_name']}-{level}"
                         current_adventure = self.db.student_adventure_by_id(student_adventure_id)
                         if not current_adventure:
