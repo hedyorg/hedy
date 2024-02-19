@@ -194,7 +194,8 @@ class StatisticsModule(WebsiteModule):
                         continue
                     name = adventure_names.get(program['adventure_name'], program['adventure_name'])
                     customized_level = class_adventures_formatted.get(str(program['level']))
-                    if name in customized_level and self.is_program_modified(program, full_adventures, teacher_adventures):
+                    if name in customized_level\
+                          and self.is_program_modified(program, full_adventures, teacher_adventures):
                         student_adventure_id = f"{student}-{program['adventure_name']}-{level}"
                         current_adventure = self.db.student_adventure_by_id(student_adventure_id)
                         if not current_adventure:
@@ -223,7 +224,7 @@ class StatisticsModule(WebsiteModule):
         # e.g: example_code, example_code_2, etc.
         example_codes.append(adventure_info.get('example_code', ''))
         i = 2
-        while adventure_info.get(f'example_code_{i}') != None:
+        while adventure_info.get(f'example_code_{i}') is not None:
             example_codes.append(adventure_info[f'example_code_{i}'])
             i += 1
         # Examples codes sometimes are not single code sections
