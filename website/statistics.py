@@ -203,21 +203,20 @@ class StatisticsModule(WebsiteModule):
                                 dict(id=f"{student_adventure_id}", ticked=False, program_id=program['id']))
 
                         current_program = dict(id=program['id'], level=str(program['level']),
-                                            name=name, ticked=current_adventure['ticked'])
+                                               name=name, ticked=current_adventure['ticked'])
 
                         student_adventures[student_adventure_id] = program['id']
                         ticked_adventures[student].append(current_program)
-                    
 
         return students, class_, class_adventures_formatted, ticked_adventures, adventure_names, student_adventures
 
-    def is_program_modified(self, program, full_adventures, teacher_adventures):        
+    def is_program_modified(self, program, full_adventures, teacher_adventures):
         # a single adventure migh have several code snippets, formatted using markdown
         # we need to get them individually
         adventure_info = full_adventures.get(program['adventure_name'], {})\
             .get('levels', {})\
             .get(program['level'], {})
-        
+
         example_codes = []
         # for what I can see the examples codes start with no index, and then jump to two
         # e.g: example_code, example_code_2, etc.
@@ -237,7 +236,7 @@ class StatisticsModule(WebsiteModule):
             code_start = -1
             for index, char in enumerate(code):
                 if char == '`':
-                    consecutive_backticks  += 1
+                    consecutive_backticks += 1
                     if consecutive_backticks == 3:
                         # We've already finished the code section, which means
                         # we can add it to the example_codes array
@@ -275,6 +274,7 @@ class StatisticsModule(WebsiteModule):
             if abs(len(snippet) - len(student_code)) <= 10 and char_diff <= 10:
                 can_save = False
         return can_save
+
 
 class LiveStatisticsModule(WebsiteModule):
     def __init__(self, db: Database):
