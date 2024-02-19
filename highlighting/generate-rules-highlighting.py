@@ -6,15 +6,11 @@ import yaml
 from definition import TRANSLATE_WORDS
 
 # destinations of files containing syntax highlighting rules
-OUTPUT_PATH_HIGHLIGHT = "highlighting/highlighting.json"
 OUTPUT_PATH_TRANSLATION = "highlighting/highlighting-trad.json"
 
 # Files containing translations of keywords
 KEYWORDS_PATH = 'content/keywords/'
 KEYWORDS_PATTERN = '(\\w+).yaml$'
-
-# Functions that collect all the rules, for all levels, of a given language
-
 
 def main():
     os.chdir(os.path.dirname(__file__) + "/..")
