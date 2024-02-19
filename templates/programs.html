@@ -80,7 +80,7 @@
             </tbody>
             </table>
             {% if public_profile and not second_teachers_programs %}
-                <div class="ml-auto favourite_program_container {% if public_profile.favourite_program and public_profile.favourite_program == program.id %}text-yellow-400{% else %}text-white{% endif %} text-2xl{% if not program.public %} hidden{% endif %}" id="favourite_program_container_{{ loop.index }}">
+                <div class="ml-36 favourite_program_container {% if public_profile.favourite_program and public_profile.favourite_program == program.id %}text-yellow-400{% else %}text-white{% endif %} text-2xl{% if not program.public %} hidden{% endif %}" id="favourite_program_container_{{ loop.index }}">
                     <i class="fa fa-star p-4 bg-blue-300 rounded-full cursor-pointer hover:bg-blue-600" onclick="hedyApp.set_favourite_program('{{ program.id }}', {{ loop.index }}, '{{_('favourite_confirm')}}');" aria-hidden="true"></i>
                 </div>
                 {% endif %}
@@ -119,14 +119,14 @@
             <button class="blue-btn" onclick="window.open (hedyApp.viewProgramLink('{{program.id}}'))">{{_('open')}}</button>
         </div>
         <div id="non_submitted_button_container_{{ loop.index }}" class="flex flex-row w-full gap-2 {% if program.submitted %} hidden {% endif %}">
-            <button class="blue-btn" oncick="/hedy/{{program.level|string}}/{{program.id}}">{{_('open')}}</button>
+            <a href="/hedy/{{program.level|string}}/{{program.id}}"><button class="blue-btn">{{_('open')}}</button></a>
             <button class="green-btn" {% if not program.public %} style="display: none;" {% endif %} onclick="hedyApp.modal.confirm ('{{_('submit_warning')}}', function () {hedyApp.submit_program ('{{program.id}}', {{ loop.index }})})">{{_('submit_program')}}</button>
             {% if not second_teachers_programs %}
             <div class="dropdown relative">
-                <button class="white-btn px-4 rounded inline-flex items-center gap-2"
+                <button class="white-btn inline-flex items-center gap-2"
                   onclick="$('#share_dropdown_{{ loop.index }}').slideToggle('medium');">
                   <span class="fa fa-{% if program.public %}globe{% else %}lock{% endif %}"></span>
-                  <span>&nbsp;{% if program.public %}{{_('public')}}{% else %}{{_('private')}}{% endif %}</span>
+                  <span>{% if program.public %}{{_('public')}}{% else %}{{_('private')}}{% endif %}</span>
                   <svg id="share-arrow_{{ loop.index }}" class="fill-current h-6 w-6" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
                     <path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z" />
                   </svg>
@@ -140,14 +140,14 @@
                       else if not arrow.classList.contains('rotate-180')
                           add .rotate-180 to arrow
                       end">
-                      <button id="share_button_{{ loop.index }}" class="white-btn min-w-full flex justify-between items-center gap-2"
+                      <button id="share_button_{{ loop.index }}" class="gray-btn text-blue-500 min-w-full inline-flex items-center gap-2"
                       {% if program.public %}
                       onclick="hedyApp.share_program('{{program.id}}', {{ loop.index }},  false, '{{_('unshare_confirm')}}')"
                       {% else %}
                       onclick="hedyApp.share_program('{{program.id}}', {{ loop.index }},  true, '{{_('share_confirm')}}')"
                       {% endif %}>
                         <span class="fa fa-{% if program.public %}lock{% else %}globe{% endif %}"></span>
-                        <div class="flex-grow h-min min-w-80" tabindex=0>
+                        <div class="mr-auto" tabindex=0>
                             {% if program.public %}{{_('private')}}{% else %}{{_('public')}}{% endif %}
                         </div>
                       </button>
