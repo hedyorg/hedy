@@ -20,6 +20,8 @@ Hedy is a gradual programming language aimed at teaching programming and teachin
 
 The latest version of Hedy can be found at [hedy.org](https://hedy.org).
 
+> You can also download Hedy and run it on your own machine. For more information, see [Offline Hedy](https://github.com/hedyorg/hedy/wiki/Offline-Hedy).
+
 # Repo stats
 
 ![Repo Beats statistics](https://repobeats.axiom.co/api/embed/a3206e7c42293ee71446a7081b9c98636953501c.svg "Repobeats analytics image")
