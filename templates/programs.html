@@ -84,35 +84,31 @@
                     <i class="fa fa-star p-4 bg-blue-300 rounded-full cursor-pointer hover:bg-blue-600" onclick="hedyApp.set_favourite_program('{{ program.id }}', {{ loop.index }}, '{{_('favourite_confirm')}}');" aria-hidden="true"></i>
                 </div>
                 {% endif %}
-            <!-- <div id="non_public_button_container_{{ loop.index }}" class="ml-auto">
-                <button class="white-btn" onclick="$('#cheatsheet_dropdown').slideToggle('medium');">{{_('more_options')}}</button>
-            </div> -->
-            <div class="dropdown relative ml-auto">
-                <button class="white-btn font-semibold rounded inline-flex items-center gap-2" id="program_options"
+              <div class="ml-auto dropdown relative">
+                <button class="gray-btn text-gray-500 border border-gray-600 font-semibold rounded inline-flex items-center gap-2"
                   onclick="$('#program_options_dropdown_{{ loop.index }}').slideToggle('medium');">
                   <span>{{_('more_options')}}</span>
                 </button>
-                <div class="dropdown-menu dropdown-green z-30 mt-2" id="program_options_dropdown_{{ loop.index }}"
-                style="display: none; padding: 0px !important;">
-                        <div class="h-30 w-min" tabindex=0>
-                            <button class="white-btn" onclick="hedyApp.copy_to_clipboard(`{{program.code}}`, '{{_('copy_clipboard')}}')">{{_('copy_code')}}</button>
-                        </div>
-                        {% if program.public %}
-                        <div class="h-30 w-min" tabindex=0>
-                            <button class="white-btn" onclick="hedyApp.copy_to_clipboard(hedyApp.viewProgramLink('{{program.id}}'), '{{_('copy_clipboard')}}')">{{_('copy_link_to_share')}}</button>
-                        </div>
+                <div class="dropdown-menu z-30 min-w-full" id="program_options_dropdown_{{ loop.index }}"
+                  style="display: none; padding: 0px !important; margin: 0px; margin-top: 0.25rem;"
+                  _="on mutation of @style
+                      set arrow to #share-arrow_{{ loop.index }}
+                      if *display == 'none'
+                          remove .rotate-180 from arrow
+                      else if not arrow.classList.contains('rotate-180')
+                          add .rotate-180 to arrow
+                      end">
+                    <button class="gray-btn text-blue-500 min-w-full flex justify-between items-center gap-2 border-b border-gray-500" onclick="hedyApp.copy_to_clipboard(`{{program.code}}`, '{{_('copy_clipboard')}}')">{{_('copy_code')}}</button>
+                    {% if program.public %}
+                        <button class="gray-btn text-blue-500 min-w-full flex justify-between items-center gap-2 border-b border-gray-500" onclick="hedyApp.copy_to_clipboard(hedyApp.viewProgramLink('{{program.id}}'), '{{_('copy_clipboard')}}')">{{_('copy_link_to_share')}}</button>
+                    {% endif %}
+                    {% if not program.submitted %}
+                    <button class="gray-btn text-red-500 min-w-full flex justify-between items-center gap-2" data-cy="delete_non_submitted_program_{{ loop.index }}" onclick="hedyApp.delete_program('{{ program.id }}', {{ loop.index }}, '{{_('delete_confirm')}}')">{{_('delete')}}</button>
+                    {% else %}
+                        {% if not second_teachers_programs %}
+                            <button class="gray-btn text-red-500 min-w-full flex justify-between items-center gap-2" data-cy="delete_submitted_program_{{ loop.index }}" onclick="hedyApp.delete_program('{{ program.id }}', {{ loop.index }}, '{{_('delete_confirm')}}')">{{_('delete')}}</button>
                         {% endif %}
-                        {% if not program.submitted %}
-                        <div class="h-30 w-min" tabindex=0>
-                            <button class="white-btn ltr:ml-auto rtl:mr-auto" data-cy="delete_non_submitted_program_{{ loop.index }}" onclick="hedyApp.delete_program('{{ program.id }}', {{ loop.index }}, '{{_('delete_confirm')}}')">{{_('delete')}}</button>
-                        </div>
-                            {% else %}
-                            {% if not second_teachers_programs %}
-                            <div class="h-30 w-min" tabindex=0>
-                                <button class="white-btn text-red-500" data-cy="delete_submitted_program_{{ loop.index }}" onclick="hedyApp.delete_program('{{ program.id }}', {{ loop.index }}, '{{_('delete_confirm')}}')">{{_('delete')}}</button>
-                            </div>
-                            {% endif %}
-                        {% endif %}
+                    {% endif %}
                 </div>
               </div>
         </div>
@@ -157,34 +153,6 @@
                       </button>
                 </div>
               </div>
-
-
-            <!-- <div id="public_button_container_{{ loop.index }}">
-                <button class="green-btn" onclick="hedyApp.modal.confirm ('{{_('submit_warning')}}', function () {hedyApp.submit_program ('{{program.id}}', {{ loop.index }})})">{{_('submit_program')}}</button>
-                <div class="dropdown relative"> -->
-                    <!-- <button class="white-btn" data-cy="unshare_program_{{ loop.index }}" onclick="hedyApp.share_program('{{program.id}}', {{ loop.index }}, false, '{{_('unshare_confirm')}}')"> -->
-                    <!-- <button class="white-btn" data-cy="unshare_program_{{ loop.index }}"
-                    onclick="$('#share_dropdown').slideToggle('medium');"></button>
-                        <div class="items-center"> <!-- Added container with flex properties -->
-                            <!-- <span class="fa fa-lock"></span>
-                            <span>&nbsp;{{_('private')}}</span> <!-- Moved text inside span for better manipulation -->
-                            <!-- <svg id="share-arrow" class="fill-current h-6 w-6 ml-auto" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"> <!-- Removed unnecessary flex classes -->
-                                <!-- <path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z" />
-                            </svg> -->
-                        <!-- </div>
-                    </button> -->
-                    <!-- <div class="dropdown-menu dropdown-green z-30 mt-2" id="share_dropdown"
-                    style="display: none; padding: 0px !important;"
-                    _="on mutation of @style
-                        set arrow to #share-arrow
-                        if *display == 'none'
-                            remove .rotate-180 from arrow
-                        else if not arrow.classList.contains('rotate-180')
-                            add .rotate-180 to arrow
-                        end"> -->
-                    <!-- <button class="white-btn" onclick="hedyApp.share_program ('{{program.id}}', {{ loop.index }}, true, '{{_('share_confirm')}}')"><span class="fa fa-globe"></span> {{_('public')}}</button> -->
-                <!-- </div> --> 
-            <!-- </div> -->
             {% endif %}
         </div>
     </div>
