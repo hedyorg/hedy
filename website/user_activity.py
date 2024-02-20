@@ -1,8 +1,5 @@
 
 from flask import request, session
-# from flask_babel import gettext
-# import jinja_partials
-# import uuid
 
 # import utils
 from config import config
@@ -18,7 +15,7 @@ invite_length = config["session"]["invite_length"] * 60
 
 
 HEADER = ["class_id", "username", "is_teacher", "gender", "time", "id", "page", "extra"]
-parse_logger = s3_logger.S3ParseLogger.from_env_vars(header=HEADER, tracking=True)
+logger = s3_logger.S3Logger(name="activity", header=HEADER, tracking=True)
 
 
 class UserActivityModule(WebsiteModule):
@@ -40,24 +37,24 @@ class UserActivityModule(WebsiteModule):
         class_id = session.get("class_id")
 
         for row in body:
-            # Values in data_row should be consistent with the header.
-            data_row = []
-            data_row.append(class_id)
-            data_row.append(user["username"])
-            data_row.append(is_teacher(user))
-            data_row.append(user.get("gender", 'm'))
-            # Date from front-end
-            data_row.append(row["time"])
-            data_row.append(row["id"])
-            data_row.append(row["page"])
-            data_row.append(row["extra"])
+            data_row = {
+                "class_id": class_id,
+                "username": user["username"],
+                "is_teacher": is_teacher(user),
+                "gender": user.get("gender", "o"),
+                # Data from front-end
+                "time": row["time"],
+                "id": row["id"],
+                "page": row["page"],
+                "extra": row["extra"]
+            }
 
             data.append(data_row)
 
         print(data)
 
         try:
-            parse_logger.log(data)
+            logger.log(data)
             return {}, 200
         except IOError:
             return "Not logged", 400

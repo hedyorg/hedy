@@ -86,7 +86,7 @@ const INTERVAL_KEY = "interval";
 
 
 let changesSent = false;
-let amoundOfActivitiesSent = 0;
+let amountOfSentActivities = 0;
 
 
 export function initializeActivity() {
@@ -210,11 +210,11 @@ async function sendRequestToServer() {
         let data = handleLocalStorage(CLICK_COUNTS)
         if (data.length) {
             // console.log('Sending request to server...');
-            amoundOfActivitiesSent = data.length;
+            amountOfSentActivities = data.length;
             await postJson('/activity', data);
             // get again since other events may have been registered in the meantime.
             data = handleLocalStorage(CLICK_COUNTS)
-            data.splice(0, amoundOfActivitiesSent);
+            data.splice(0, amountOfSentActivities);
             handleUserActivity(data);
             changesSent = true;
         }

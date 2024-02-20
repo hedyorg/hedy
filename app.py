@@ -371,7 +371,7 @@ if utils.is_heroku():
 
 Compress(app)
 Commonmark(app)
-parse_logger = s3_logger.S3ParseLogger.from_env_vars()
+parse_logger = s3_logger.S3Logger(name="parse")
 querylog.LOG_QUEUE.set_transmitter(
     aws_helpers.s3_querylog_transmitter_from_env())
 

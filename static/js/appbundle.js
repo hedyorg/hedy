@@ -56902,7 +56902,7 @@ notes_mapping = {
   var LAST_ACTIVE = "lastActiveTime";
   var INTERVAL_KEY = "interval";
   var changesSent = false;
-  var amoundOfActivitiesSent = 0;
+  var amountOfSentActivities = 0;
   function initializeActivity() {
     document.addEventListener("DOMContentLoaded", documentLoaded);
   }
@@ -56987,10 +56987,10 @@ notes_mapping = {
     try {
       let data = handleLocalStorage(CLICK_COUNTS);
       if (data.length) {
-        amoundOfActivitiesSent = data.length;
+        amountOfSentActivities = data.length;
         await postJson("/activity", data);
         data = handleLocalStorage(CLICK_COUNTS);
-        data.splice(0, amoundOfActivitiesSent);
+        data.splice(0, amountOfSentActivities);
         handleUserActivity(data);
         changesSent = true;
       }
