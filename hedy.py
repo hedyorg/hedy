@@ -1492,6 +1492,17 @@ class ConvertToPython(Transformer):
                     ConvertToPython.is_random(arg)):
                 raise exceptions.UnquotedAssignTextException(text=arg, line_number=meta.line)
 
+    def code_to_ensure_variable_type(self, arg, expected_type, command, suggested_type):
+        if not self.is_variable(arg):
+            return ""
+        exception = translate_value_error(command, f'{{{arg}}}', suggested_type)
+        return textwrap.dedent(f"""\
+            try:
+              {expected_type}({arg})
+            except ValueError:
+              raise Exception(f{exception})
+            """)
+
     # static methods
 
     @staticmethod
@@ -2226,7 +2237,8 @@ class ConvertToPython_7(ConvertToPython_6):
         command = args[1]
         # in level 7, repeats can only have 1 line as their arguments
         command = add_sleep_to_command(command, False, self.is_debug, location="after")
-        return f"""for {var_name} in range(int({str(times)})):{self.add_debug_breakpoint()}
+        type_check = self.code_to_ensure_variable_type(times, 'int', Command.repeat, 'number')
+        return f"""{type_check}for {var_name} in range(int({str(times)})):{self.add_debug_breakpoint()}
 {ConvertToPython.indent(command)}"""
 
 
@@ -2250,8 +2262,8 @@ class ConvertToPython_8_9(ConvertToPython_7):
         all_lines = [ConvertToPython.indent(x) for x in args[1:]]
         body = "\n".join(all_lines)
         body = add_sleep_to_command(body, indent=True, is_debug=self.is_debug, location="after")
-
-        return f"for {var_name} in range(int({times})):{self.add_debug_breakpoint()}\n{body}"
+        type_check = self.code_to_ensure_variable_type(times, 'int', Command.repeat, 'number')
+        return f"""{type_check}for {var_name} in range(int({times})):{self.add_debug_breakpoint()}\n{body}"""
 
     def ifs(self, meta, args):
         all_lines = [ConvertToPython.indent(x) for x in args[1:]]
