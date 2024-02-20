@@ -116,7 +116,7 @@
             <button class="green-btn" {% if not program.public %} style="display: none;" {% endif %} onclick="hedyApp.modal.confirm ('{{_('submit_warning')}}', function () {hedyApp.submit_program ('{{program.id}}', {{ loop.index }})})">{{_('submit_program')}}</button>
             {% if not second_teachers_programs %}
             <div class="dropdown relative">
-                <button class="white-btn inline-flex items-center gap-2"
+                <button class="white-btn inline-flex items-center gap-2" id="share_option_dropdown_{{ loop.index }}"
                   onclick="$('#share_dropdown_{{ loop.index }}').slideToggle('medium');">
                   <span class="fa fa-{% if program.public %}globe{% else %}lock{% endif %}"></span>
                   <span>{% if program.public %}{{_('public')}}{% else %}{{_('private')}}{% endif %}</span>
@@ -139,7 +139,6 @@
                       data-cy="unshare_program_{{ loop.index }}"
                       {% else %}
                       onclick="hedyApp.share_program('{{program.id}}', {{ loop.index }},  true, '{{_('share_confirm')}}')"
-                      id="non_public_button_container_{{ loop.index }}"
                       {% endif %}>
                         <span class="fa fa-{% if program.public %}lock{% else %}globe{% endif %}"></span>
                         <div class="mr-auto" tabindex=0>

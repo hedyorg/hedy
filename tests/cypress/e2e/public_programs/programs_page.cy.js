@@ -34,13 +34,13 @@ describe('Is able to share and unshare programs', () => {
     });
 
     it('Clicking the share program button shows the confirm modal and the unshare button, and vice versa', () => {
-        cy.get('#non_public_button_container_1 > button').click();
+        cy.get('#share_option_dropdown_1').click();
+        cy.get('#share_button_1').click();
         cy.get('#modal-confirm').should('be.visible');
         cy.getBySel('modal_yes_button').click();
         cy.get('#modal_alert_text').should('be.visible');
-        cy.get('#non_public_button_container_1').should('not.be.visible');
-        cy.get('#public_button_container_1').should('be.visible');
-
+        cy.get('#share_option_dropdown_1').should('contain.text', 'Public');
+        
         // Wait until the achievement is gone
         cy.get('#achievement_pop-up', {timeout: 8_000}).should('not.be.visible');
 
@@ -49,7 +49,6 @@ describe('Is able to share and unshare programs', () => {
         cy.get('#modal-confirm').should('be.visible');
         cy.getBySel('modal_yes_button').click();
         cy.get('#modal_alert_text').should('be.visible');
-        cy.get('#non_public_button_container_1').should('be.visible');
-        cy.get('#public_button_container_1').should('not.be.visible');
+        cy.get('#share_option_dropdown_1').should('contain.text', 'Private');
     });
 });
