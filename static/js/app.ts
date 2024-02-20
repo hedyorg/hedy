@@ -728,7 +728,7 @@ export function tryPaletteCode(exampleCode: string) {
     return;
   }
 
-  theGlobalEditor.contents = exampleCode + '\n';
+  theGlobalEditor.contents += '\n' + exampleCode;
   //As the commands try-it buttons only contain english code -> make sure the selected language is english
   if (!($('#editor').attr('lang') == 'en')) {
       $('#editor').attr('lang', 'en');

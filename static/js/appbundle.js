@@ -57350,7 +57350,7 @@ pygame.quit()
     if (theGlobalEditor == null ? void 0 : theGlobalEditor.isReadOnly) {
       return;
     }
-    theGlobalEditor.contents = exampleCode + "\n";
+    theGlobalEditor.contents += "\n" + exampleCode;
     if (!($("#editor").attr("lang") == "en")) {
       $("#editor").attr("lang", "en");
       update_view("main_editor_keyword_selector", "en");
