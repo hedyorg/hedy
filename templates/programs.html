@@ -139,6 +139,7 @@
                       data-cy="unshare_program_{{ loop.index }}"
                       {% else %}
                       onclick="hedyApp.share_program('{{program.id}}', {{ loop.index }},  true, '{{_('share_confirm')}}')"
+                      id="non_public_button_container_{{ loop.index }}"
                       {% endif %}>
                         <span class="fa fa-{% if program.public %}lock{% else %}globe{% endif %}"></span>
                         <div class="mr-auto" tabindex=0>
