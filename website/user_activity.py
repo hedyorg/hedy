@@ -21,15 +21,15 @@ HEADER = ["class_id", "username", "is_teacher", "gender", "time", "id", "page", 
 parse_logger = s3_logger.S3ParseLogger.from_env_vars(header=HEADER, tracking=True)
 
 
-class TrackingModule(WebsiteModule):
+class UserActivityModule(WebsiteModule):
     def __init__(self, db: Database):
-        super().__init__("tracking", __name__, url_prefix="/tracking")
+        super().__init__("activity", __name__, url_prefix="/activity")
         self.db = db
 
     @route("/", methods=["POST"])
     @requires_login
     def index(self, user):
-        # /tracking/
+        # /tracking activity/
         user = self.db.user_by_username(user["username"])
         if not user:
             return {}, 304

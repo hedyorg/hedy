@@ -46,7 +46,7 @@ class S3ParseLogger:
     @staticmethod
     def from_env_vars(**kwargs):
         if kwargs.get("tracking"):
-            transmitter = aws_helpers.s3_parselog_transmitter_from_env(config_key="s3-parse-tracking-logs")
+            transmitter = aws_helpers.s3_parselog_transmitter_from_env(config_key="s3-activity-logs")
         else:
             transmitter = aws_helpers.s3_parselog_transmitter_from_env()
 

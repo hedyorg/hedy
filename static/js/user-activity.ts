@@ -85,12 +85,11 @@ const LAST_ACTIVE = "lastActiveTime";
 const INTERVAL_KEY = "interval";
 
 
-let clickCounts: any = [];
-let lastActiveTime = Date.now();
 let changesSent = false;
+let amoundOfActivitiesSent = 0;
 
 
-export function initializeTracking() {
+export function initializeActivity() {
     document.addEventListener("DOMContentLoaded", documentLoaded);
 }
 
@@ -101,17 +100,17 @@ function documentLoaded() {
     document.addEventListener('change', trackEvent);
     
     
-    // initialize variables
-    clickCounts = handleLocalStorage(CLICK_COUNTS);
-    lastActiveTime = handleLocalStorage(LAST_ACTIVE, Date.now());
+    // initialize variables in localStorage
+    handleLocalStorage(CLICK_COUNTS);
+    handleLocalStorage(LAST_ACTIVE, Date.now());
     
     if (isLoggedIn()) {
-        removeTrackingInterval(); // Possibly removing lingering ones.
-        setTrackingInterval(); // Resume with fresh timer
+        removeActivityInterval(); // Possibly removing lingering ones.
+        setActivityInterval(); // Resume with fresh timer
     }
 }
 
-function removeTrackingInterval() {
+function removeActivityInterval() {
     const storedData = localStorage.getItem(INTERVAL_KEY);
     if (storedData) {
         try {
@@ -119,13 +118,13 @@ function removeTrackingInterval() {
             clearInterval(parsedData.id); // Clear any potentially lingering timer
             // console.log(parsedData.id, " interval was removed")
         } catch (error) {
-            console.error("Error parsing tracking interval data:", error);
+            console.error("Error parsing activity interval data:", error);
         }
     }
 
 }
 
-function setTrackingInterval() {
+function setActivityInterval() {
   const timerId = setInterval(checkUserActivity, WAITING_TIME);
   localStorage.setItem(INTERVAL_KEY, JSON.stringify({ id: timerId, timestamp: Date.now() }));
 }
@@ -134,6 +133,7 @@ function setTrackingInterval() {
 async function trackEvent(event: Event) {
     // the following check is necessary since some elements issue click and change events.
     const currentTime = Date.now();
+    const lastActiveTime = handleLocalStorage(LAST_ACTIVE);
     const inactiveDuration = currentTime - lastActiveTime;
     if (inactiveDuration <= 200) {
         return;
@@ -148,7 +148,7 @@ async function trackEvent(event: Event) {
         }
 
         if (ELEMENT_TO_TRACK.includes(elementIdOrName)) {
-            clickCounts = handleLocalStorage(CLICK_COUNTS);
+            const clickCounts = handleLocalStorage(CLICK_COUNTS);
             
             const page = window.location.pathname;
 
@@ -165,8 +165,8 @@ async function trackEvent(event: Event) {
 
 // Function to handle user activity
 function handleUserActivity(clickCounts: any) {
-    lastActiveTime = handleLocalStorage(LAST_ACTIVE, Date.now());
-    clickCounts = handleLocalStorage(CLICK_COUNTS, clickCounts);
+    handleLocalStorage(LAST_ACTIVE, Date.now());
+    handleLocalStorage(CLICK_COUNTS, clickCounts);
     changesSent = false;
 }
 
@@ -197,6 +197,7 @@ async function checkUserActivity() {
         return;
     }
     const currentTime = Date.now();
+    const lastActiveTime = handleLocalStorage(LAST_ACTIVE);
     const inactiveDuration = currentTime - lastActiveTime;
     if (inactiveDuration >= WAITING_TIME) {
         sendRequestToServer();
@@ -206,11 +207,15 @@ async function checkUserActivity() {
 // Function to send request to the server
 async function sendRequestToServer() {
     try {
-        const data = handleLocalStorage(CLICK_COUNTS)
+        let data = handleLocalStorage(CLICK_COUNTS)
         if (data.length) {
             // console.log('Sending request to server...');
-            await postJson('/tracking', data);
-            handleUserActivity([]);
+            amoundOfActivitiesSent = data.length;
+            await postJson('/activity', data);
+            // get again since other events may have been registered in the meantime.
+            data = handleLocalStorage(CLICK_COUNTS)
+            data.splice(0, amoundOfActivitiesSent);
+            handleUserActivity(data);
             changesSent = true;
         }
     } catch (error) {
@@ -223,9 +228,11 @@ async function sendRequestToServer() {
 // If not focused on current document, remove interval. Otherwise initialize a new one.
 document.addEventListener('visibilitychange', () => {
     if (isLoggedIn()) {
-        removeTrackingInterval();
+        removeActivityInterval();
         if (!document.hidden) {
-            setTrackingInterval();
+            setActivityInterval();
+        } else {
+            sendRequestToServer();
         }
     }
 });
