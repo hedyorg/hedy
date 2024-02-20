@@ -30,7 +30,7 @@ USERS = {}
 # *** HELPERS ***
 
 
-def request(method, path, headers={}, body='', cookies=None):
+def request(method, path, headers={}, body='', cookies=None, follow_redirects=True):
 
     if method not in ['get', 'post', 'put', 'delete']:
         raise Exception('request - Invalid method: ' + str(method))
@@ -47,7 +47,8 @@ def request(method, path, headers={}, body='', cookies=None):
 
     start = utils.timems()
 
-    response = getattr(requests, method)(HOST + path, headers=headers, data=body, cookies=cookies)
+    response = getattr(requests, method)(HOST + path, headers=headers, data=body,
+                                         cookies=cookies, allow_redirects=follow_redirects)
 
     # Remember all cookies in the cookie jar
     if cookies is not None:
@@ -218,9 +219,9 @@ class AuthHelper(unittest.TestCase):
 
         return response['headers'] if return_headers else response['body']
 
-    def get_data(self, path, expect_http_code=200, no_cookie=False, return_headers=False):
+    def get_data(self, path, expect_http_code=200, no_cookie=False, return_headers=False, follow_redirects=True):
         cookies = self.user_cookies[self.username] if self.username and not no_cookie else None
-        response = request('get', path, body='', cookies=cookies)
+        response = request('get', path, body='', cookies=cookies, follow_redirects=follow_redirects)
 
         self.assertEqual(
             response['code'],
@@ -587,7 +588,10 @@ class TestAuth(AuthHelper):
         self.post_data('auth/logout', '')
 
         # WHEN retrieving the user profile with the same cookie
-        # THEN receive a forbidden response code from the server
+        # THEN first receive a redirect response code from the server, and the next
+        # page load will be a 403. Need to have 'follow_redirects=False' or we won't see
+        # the 302 code.
+        self.get_data('profile', expect_http_code=302, follow_redirects=False)
         self.get_data('profile', expect_http_code=403)
 
     def test_destroy_account(self):
@@ -599,7 +603,9 @@ class TestAuth(AuthHelper):
         self.destroy_current_user()
 
         # WHEN retrieving the profile of the user
-        # THEN receive a forbidden response code from the server
+        # THEN first receive a redirect response response code from the server, and
+        # the next page load will be a forbidden
+        self.get_data('profile', expect_http_code=302, follow_redirects=False)
         self.get_data('profile', expect_http_code=403)
 
     def test_invalid_change_password(self):
