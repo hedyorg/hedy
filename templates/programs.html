@@ -136,6 +136,7 @@
                       <button id="share_button_{{ loop.index }}" class="gray-btn text-blue-500 min-w-full inline-flex items-center gap-2"
                       {% if program.public %}
                       onclick="hedyApp.share_program('{{program.id}}', {{ loop.index }},  false, '{{_('unshare_confirm')}}')"
+                      data-cy="unshare_program_{{ loop.index }}"
                       {% else %}
                       onclick="hedyApp.share_program('{{program.id}}', {{ loop.index }},  true, '{{_('share_confirm')}}')"
                       {% endif %}>
