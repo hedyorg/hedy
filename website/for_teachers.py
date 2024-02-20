@@ -113,7 +113,7 @@ class ForTeachersModule(WebsiteModule):
             level['title'] = gettext('level') + ' ' + str(level['level'])
 
         subsection_titles = [x.get('title', '') for x in subsections + levels]
-
+        levels = hedy_content.deep_translate_keywords(levels, g.keyword_lang)
         return render_template("teacher-manual.html",
                                current_page="teacher-manual",
                                page_title=page_title,
