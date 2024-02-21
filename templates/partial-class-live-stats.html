@@ -1,8 +1,11 @@
 <div id="main_content">
     <!--  Back to class button  -->
-    <button class="green-btn float-right" id="to_class_button" onclick="window.location.href='/for-teachers/class/{{class_info.id}}'" target="_blank">
-      {{_('back_to_class')}}
+    <button id='to_class_button' class="gray-btn text-blue-500 inline-flex items-center gap-2"
+    onclick="window.location.href='/for-teachers/class/{{class_info.id}}'" target="_blank">
+        <span class="fa fa-arrow-left"></span>
+        <span>{{_('go_back')}}</span>
     </button>
+    <br><br>
 
     <!-- Title  -->
     <div class="flex flex-col gap-4">

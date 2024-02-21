@@ -1,6 +1,12 @@
 {% extends "auth.html" %}
 
 {% block regular_content %}
+<button id='go_back_button' class="gray-btn text-blue-500 inline-flex items-center gap-2"
+onclick="window.open('/for-teachers', '_self');">
+    <span class="fa fa-arrow-left"></span>
+    <span>{{_('go_back')}}</span>
+</button>
+<br><br>
 <div class="flex flex-col gap-2">
     <h2>{{_('customize_adventure')}}</h2>
     <div class="border-gray-400 border rounded-lg p-4">
@@ -119,9 +125,6 @@
                 <button type="reset" class="red-btn" id="remove_adventure_button" onclick="hedyApp.delete_adventure('{{ adventure.id }}', '{{_('delete_adventure_prompt')}}')">{{_('remove')}}</button>
             </div>
         </form>
-    </div>
-    <div>
-        <button class="blue-btn" id="go_back_button" onclick="window.open('/for-teachers', '_self');">{{_('back_to_teachers_page')}}</button>
     </div>
 </div>
 {% endblock %}

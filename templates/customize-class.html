@@ -1,5 +1,10 @@
 {% extends "auth.html" %}
 {% block regular_content %}
+<button id='back_to_class' class="gray-btn text-blue-500 inline-flex items-center gap-2" data-cy="back_to_class">
+    <span class="fa fa-arrow-left"></span>
+    <span>{{_('go_back')}}</span>
+</button>
+<br><br>
 <div class="flex flex-col gap-2">
     <h2>{{_('customize_class')}}: {{class_info.name}}</h2>
     <div class="flex flex-col mt-2 border border-gray-400 rounded-lg">
@@ -194,7 +199,6 @@
                         onclick='hedyApp.restore_customization_to_default({{_('remove_customizations_prompt')|default(None)|tojson}})'>
                             {{_('remove_customization')}}
                     </button>
-                    <button id='back_to_class' class="green-btn" data-cy="back_to_class">{{_('back_to_class')}}</button>
                 </div>
             </div>
             {% endif %}
