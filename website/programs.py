@@ -229,19 +229,8 @@ class ProgramsModule(WebsiteModule):
             public = 1
         program = self.db.set_program_public_by_id(program_id, public)
         achievement = self.achievements.add_single_achievement(user["username"], "sharing_is_caring")
-
-        resp = {
-            "id": program_id,
-            "public": public,
-            "save_info": SaveInfo.from_program(Program.from_database_row(program)),
-        }
-
-        if public:
-            resp["message"] = gettext("share_success_detail")
-        else:
-            resp["message"] = gettext("unshare_success_detail")
         if achievement:
-            resp["achievement"] = achievement
+            utils.add_pending_achievement({"achievement": achievement, "redirect": "/programs"})
 
         keyword_lang = g.keyword_lang
         adventure_names = hedy_content.Adventures(g.lang).get_adventure_names(keyword_lang)
