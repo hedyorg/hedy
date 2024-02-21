@@ -237,7 +237,7 @@ class ProgramsModule(WebsiteModule):
         program["date"] = utils.delta_timestamp(program["date"])
         program["preview_code"] = "\n".join(program["code"].split("\n")[:4])
         program["number_lines"] = program["code"].count('\n') + 1
-        return jinja_partials.render_partial('htmx-program-buttons.html', 
+        return jinja_partials.render_partial('htmx-program-buttons.html',
                                              program=program, adventure_names=adventure_names, public_profile=public_profile, loop_index=loop_index)
 
     @route("/submit", methods=["POST"])
