@@ -51,74 +51,8 @@
     {% if programs|length == 0 %}
         <p class="text-xl" >{{_('no_programs')}}</p>
     {% endif %}
-  {% for program in programs %}
-    <div id="program_{{ loop.index }}" class="program w-full border-solid border-2 {% if program.submitted %} border-gray-400 bg-gray-400 {% else %} border-orange-400 {% endif %} rounded p-4 mb-4">
-        <h3 id="submitted_header_{{ loop.index }}" class="mt-0 mb-4 text-red-500 text-center {% if not program.submitted %} hidden{% endif %}">{{_('submitted_header')}}</h3>
-        <div class="flex flex-row">
-            <table class="table-auto mb-4">
-            <thead>
-                <tr class="text-left">
-                    <th class="w-64 text-blue-600">{{_('title')}}</th>
-                    <th class="w-24 text-blue-600">{{_('level')}}</th>
-                    <th class="w-32 text-blue-600">{{_('adventure')}}</th>
-                    <th class="w-64 text-blue-600">{{_('number_lines')}}</th>
-                    <th class="text-blue-600">{{_('last_edited')}}</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td>{{program.name|truncate(30)}}</td>
-                    <td>{{_('level')}} {{ program.level }}</td>
-                    {% if program.adventure_name %}
-                        <td>{{adventure_names.get(program.adventure_name)}}</td>
-                    {% else %}
-                        <td>-</td>
-                    {% endif %}
-                    <td>{{ program.number_lines }}</td>
-                    <td>{{_('ago')|replace("{timestamp}", program.date)}}</td>
-                </tr>
-            </tbody>
-            </table>
-            {% if public_profile and not second_teachers_programs %}
-                <div class="ml-36 favourite_program_container {% if public_profile.favourite_program and public_profile.favourite_program == program.id %}text-yellow-400{% else %}text-white{% endif %} text-2xl{% if not program.public %} hidden{% endif %}" id="favourite_program_container_{{ loop.index }}">
-                    <i class="fa fa-star p-4 bg-blue-300 rounded-full cursor-pointer hover:bg-blue-600" onclick="hedyApp.set_favourite_program('{{ program.id }}', {{ loop.index }}, '{{_('favourite_confirm')}}');" aria-hidden="true"></i>
-                </div>
-                {% endif %}
-              <div class="ml-auto dropdown relative">
-                <button class="gray-btn text-gray-500 border border-gray-600 font-semibold rounded inline-flex items-center gap-2"
-                  onclick="$('#program_options_dropdown_{{ loop.index }}').slideToggle('medium');">
-                  <span>{{_('more_options')}}</span>
-                </button>
-                <div class="dropdown-menu z-30 min-w-full" id="program_options_dropdown_{{ loop.index }}"
-                  style="display: none; padding: 0px !important; margin: 0px; margin-top: 0.25rem;">
-                    <button class="gray-btn text-blue-500 min-w-full flex justify-between items-center gap-2 border-b border-gray-500" onclick="hedyApp.copy_to_clipboard(`{{program.code}}`, '{{_('copy_clipboard')}}')">{{_('copy_code')}}</button>
-                    {% if program.public %}
-                        <button class="gray-btn text-blue-500 min-w-full flex justify-between items-center gap-2 border-b border-gray-500" onclick="hedyApp.copy_to_clipboard(hedyApp.viewProgramLink('{{program.id}}'), '{{_('copy_clipboard')}}')">{{_('copy_link_to_share')}}</button>
-                    {% endif %}
-                    {% if not program.submitted %}
-                    <button class="gray-btn text-red-500 min-w-full flex justify-between items-center gap-2" data-cy="delete_non_submitted_program_{{ loop.index }}" onclick="hedyApp.delete_program('{{ program.id }}', {{ loop.index }}, '{{_('delete_confirm')}}')">{{_('delete')}}</button>
-                    {% else %}
-                        {% if not second_teachers_programs %}
-                            <button class="gray-btn text-red-500 min-w-full flex justify-between items-center gap-2" data-cy="delete_submitted_program_{{ loop.index }}" onclick="hedyApp.delete_program('{{ program.id }}', {{ loop.index }}, '{{_('delete_confirm')}}')">{{_('delete')}}</button>
-                        {% endif %}
-                    {% endif %}
-                </div>
-              </div>
-        </div>
-        <div class="w-3/4 turn-pre-into-ace mb-4">
-          <pre level="{{ program.level }}">{{program.preview_code }}</pre>
-        </div>
-        <div id="submitted_button_container_{{ loop.index }}" class="flex flex-row gap-2" {% if not program.submitted %} style="display: none;" {% endif %}>
-            <button class="blue-btn" onclick="window.open (hedyApp.viewProgramLink('{{program.id}}'))">{{_('open')}}</button>
-        </div>
-        <div id="non_submitted_button_container_{{ loop.index }}" class="flex flex-row w-full gap-2 {% if program.submitted %} hidden {% endif %}">
-            <a href="/hedy/{{program.level|string}}/{{program.id}}"><button class="blue-btn">{{_('open')}}</button></a>
-            <button class="green-btn" {% if not program.public %} style="display: none;" {% endif %} onclick="hedyApp.modal.confirm ('{{_('submit_warning')}}', function () {hedyApp.submit_program ('{{program.id}}', {{ loop.index }})})">{{_('submit_program')}}</button>
-            {% if not second_teachers_programs %}
-                {{ render_partial('htmx-program-buttons.html', program=program, loop_index=loop.index) }}
-            {% endif %}
-        </div>
-    </div>
+    {% for program in programs %}
+        {{ render_partial('htmx-program-buttons.html', program=program, adventure_names=adventure_names, public_profile=public_profile, loop_index=loop.index) }}
     {% endfor %}
 
     {% if second_teachers_programs %}

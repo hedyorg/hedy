@@ -4,6 +4,7 @@ from typing import Optional
 from flask import g, request, jsonify
 from flask_babel import gettext
 import jinja_partials
+import hedy_content
 
 import hedy
 import utils
@@ -241,7 +242,13 @@ class ProgramsModule(WebsiteModule):
             resp["message"] = gettext("unshare_success_detail")
         if achievement:
             resp["achievement"] = achievement
-        return jinja_partials.render_partial('htmx-program-buttons.html', program=program, loop_index=loop_index)
+
+        keyword_lang = g.keyword_lang
+        adventure_names = hedy_content.Adventures(g.lang).get_adventure_names(keyword_lang)
+        program["date"] = utils.delta_timestamp(program["date"])
+        program["preview_code"] = "\n".join(program["code"].split("\n")[:4])
+        program["number_lines"] = program["code"].count('\n') + 1
+        return jinja_partials.render_partial('htmx-program-buttons.html', program=program, adventure_names=adventure_names, public_profile=public_profile, loop_index=loop_index)
 
     @route("/submit", methods=["POST"])
     @requires_login
