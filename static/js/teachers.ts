@@ -217,10 +217,7 @@ function update_db_adventure(adventure_id: string) {
 
    const adventure_name = $('#custom_adventure_name').val();
    const levels = $('#custom_adventure_levels').val();
-   let content = DOMPurify.sanitize(<string>$('#custom_adventure_content').val());
-    if (!content) {
-      content = window.ckEditor.getData();
-    }
+   const content = DOMPurify.sanitize(window.ckEditor.getData());
    const agree_public = $('#agree_public').prop('checked');
    const language = $('#language').val();
 

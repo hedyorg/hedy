@@ -101,7 +101,8 @@
                         </button>
                     </h3>
                     <div class="flex">
-                        <textarea id="adventure-editor" class="hidden">{% if adventure.content|length > 0 %}{{ adventure.content }}{% else %}{{_('template_code')}}{% endif %}</textarea>
+                        {% set content = prepare_content_for_ckeditor(adventure.content) if adventure.content|length > 0 else prepare_content_for_ckeditor(_('template_code')) %}
+                        <textarea id="adventure-editor" class="hidden">{{content}}</textarea>
                     </div>
                     
                     <div class="mt-2 mb-0 flex flex-row items-center text-center border-gray-500 border p-4 rounded-lg">
