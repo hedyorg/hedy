@@ -31,7 +31,7 @@
             </div>
             {% endif %}
           <div class="ml-auto dropdown relative">
-            <button class="gray-btn text-gray-500 border border-gray-600 font-semibold rounded inline-flex items-center gap-2"
+            <button class="gray-btn text-gray-500 border border-gray-600 font-semibold rounded inline-flex items-center gap-2" id="more_options_{{ loop_index }}"
               onclick="$('#program_options_dropdown_{{ loop_index }}').slideToggle('medium');">
               <span>{{_('more_options')}}</span>
             </button>
