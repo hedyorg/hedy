@@ -817,6 +817,24 @@ class ForTeachersModule(WebsiteModule):
         dashboard = customizations.get('dashboard_customization', {})
         live_statistics_levels = dashboard.get('selected_levels', [1])
 
+        # Remove quiz and parsons if we need to hide them  all.
+        hide_quiz = 'hide_quiz' in body['other_settings']
+        hide_parsons = 'hide_parsons' in body['other_settings']
+        for level, adventures in customizations["sorted_adventures"].items():
+            if hide_parsons:
+                customizations["sorted_adventures"][level] = [adventure for adventure in adventures
+                                                              if adventure["name"] != "parsons"]
+            elif 'other_settings' in customizations \
+                    and 'hide_parsons' in customizations['other_settings']:  # if so, we should toggle parsons.
+                customizations["sorted_adventures"][level].append({'name': 'parsons', 'from_teacher': False})
+
+            if hide_quiz:
+                customizations["sorted_adventures"][level] = [adventure for adventure in adventures
+                                                              if adventure["name"] != "quiz"]
+            elif 'other_settings' in customizations \
+                    and 'hide_quiz' in customizations['other_settings']:  # if so, we should toggle quizes.
+                customizations["sorted_adventures"][level].append({'name': 'quiz', 'from_teacher': False})
+
         customizations = {
             "id": class_id,
             "levels": levels,
@@ -829,14 +847,6 @@ class ForTeachersModule(WebsiteModule):
             },
             "updated_by": user["username"]
         }
-
-        # Remove quiz and parsons if we need to hide them  all
-        hide_quiz = 'hide_quiz' in customizations['other_settings']
-        hide_parsons = 'hide_parsons' in customizations['other_settings']
-        for level, adventures in customizations["sorted_adventures"].items():
-            customizations["sorted_adventures"][level] = [adventure for adventure in adventures
-                                                          if (hide_quiz and adventure["name"] != "quiz") or
-                                                          (hide_parsons and adventure["name"] != "parsons")]
 
         self.db.update_class_customizations(customizations)
 
