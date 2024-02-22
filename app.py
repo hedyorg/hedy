@@ -1478,6 +1478,17 @@ def index(level, program_id):
     if 'other_settings' in customizations and 'hide_quiz' in customizations['other_settings']:
         quiz = False
 
+    if customizations.get("sorted_adventures") and len(customizations["sorted_adventures"]) > 2:
+        parsons_in_level = [adv for adv in customizations["sorted_adventures"][str(level)][-2:]
+                            if adv.get("name") == "parsons"]
+        quiz_in_level = [adv for adv in customizations["sorted_adventures"][str(level)][-2:]
+                         if adv.get("name") == "quiz"]
+
+        if not parsons_in_level:
+            parsons = False
+        if not quiz_in_level:
+            quiz = False
+
     max_level = hedy.HEDY_MAX_LEVEL
     level_number = int(level)
     prev_level, next_level = utils.find_prev_next_levels(
