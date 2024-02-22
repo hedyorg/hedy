@@ -46,6 +46,34 @@ describe('Lezer parser tests for level 3', () => {
                 multiLevelTester('Assign with list access', code, expectedTree, 3, 5);
             })
         });
+        describe('Add tests', () => {
+            describe('Add single word to list', () => {
+                const code = 'add word to list'
+                const expectedTree = 'Program(Command(Add(add,Text,toList,Text)))'
 
+                multiLevelTester('Add single word to list', code, expectedTree, 3, 11)
+            });
+
+            describe('Add multiple words to list', () => {
+                const code = 'add sour cream to sauces'
+                const expectedTree = 'Program(Command(Add(add,Text,Text,toList,Text)))'
+
+                multiLevelTester('Add multiple words to list', code, expectedTree, 3, 11)
+            });
+
+            describe('Remove single word from list', () => {
+                const code = 'remove word from list'
+                const expectedTree = 'Program(Command(Remove(remove,Text,from,Text)))'
+
+                multiLevelTester('Remove single word from list', code, expectedTree, 3, 11)
+            });
+
+            describe('Remove multiple words from list', () => {
+                const code = 'remove sour cream from sauces'
+                const expectedTree = 'Program(Command(Remove(remove,Text,Text,from,Text)))'
+
+                multiLevelTester('Remove multiple words from list', code, expectedTree, 3, 11)
+            });
+        })
     });
 })

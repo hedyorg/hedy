@@ -30,8 +30,8 @@ AssignList { Text (is+ | Op<"=">) (Text+ | Int ) ~ambig  (Comma (Text+ | Int ))+
 Assign { Text (is+ | Op<"=">) (Expression ~ambig  | ListAccess)+ }
 Sleep { sleep+ (Expression | ListAccess )? }
 ListAccess { Text at+ (random+ | Text | Int) }
-Add { add+ Text toList+ Text }
-Remove { remove+ Text from+ Text }
+Add { add+ Text+ toList+ Text }
+Remove { remove+ Text+ from+ Text }
 Clear { clear+ }
 Play { play+ Text+ }
 
