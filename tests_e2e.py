@@ -1091,7 +1091,7 @@ class TestProgram(AuthHelper):
 
         # WHEN making a program public
         # THEN receive an OK response code from the server
-        self.post_data('programs/share', {'id': program_id, 'loop_index': 1 })
+        self.post_data('programs/share', {'id': program_id, 'loop_index': 1})
 
         saved_programs = self.get_data('programs/list')['programs']
         for program in saved_programs:
