@@ -1074,14 +1074,13 @@ class TestProgram(AuthHelper):
         # WHEN sharing a program without being logged in
         # THEN receive a forbidden response code from the server
         self.post_data('programs/share',
-                       {'id': '123456',
-                        'loop_index': '1'},
+                       {'id': '123456'},
                        expect_http_code=403,
                        no_cookie=True)
 
         # WHEN sharing a program that does not exist
         # THEN receive a not found response code from the server
-        self.post_data('programs/share', {'id': '123456', 'loop_index': '1'}, expect_http_code=404)
+        self.post_data('programs/share', {'id': '123456'}, expect_http_code=404)
 
     def test_valid_make_program_public(self):
         # GIVEN a logged in user with at least one program
@@ -1091,7 +1090,7 @@ class TestProgram(AuthHelper):
 
         # WHEN making a program public
         # THEN receive an OK response code from the server
-        self.post_data('programs/share', {'id': program_id, 'loop_index': '1' })
+        self.post_data('programs/share', {'id': program_id})
 
         saved_programs = self.get_data('programs/list')['programs']
         for program in saved_programs:
@@ -1111,11 +1110,11 @@ class TestProgram(AuthHelper):
         self.given_user_is_logged_in()
         program = {'code': 'hello world', 'name': 'program 1', 'level': 1, 'shared': False}
         program_id = self.post_data('programs', program)['id']
-        self.post_data('programs/share', {'id': program_id, 'loop_index': '1'})
+        self.post_data('programs/share', {'id': program_id})
 
         # WHEN making a program private
         # THEN receive an OK response code from the server
-        self.post_data('programs/share', {'id': program_id, 'loop_index': '1'})
+        self.post_data('programs/share', {'id': program_id})
 
         saved_programs = self.get_data('programs/list')['programs']
         for program in saved_programs:
@@ -1382,7 +1381,7 @@ class TestClasses(AuthHelper):
         # GIVEN a student with two programs, one public and one private
         public_program = {'code': 'hello world', 'name': 'program 1', 'level': 1, 'shared': False}
         public_program_id = self.post_data('programs', public_program)['id']
-        self.post_data('programs/share', {'id': public_program_id, 'loop_index': '1'})
+        self.post_data('programs/share', {'id': public_program_id})
         private_program = {'code': 'hello world', 'name': 'program 2', 'level': 2, 'shared': False}
         self.post_data('programs', private_program)['id']
 
