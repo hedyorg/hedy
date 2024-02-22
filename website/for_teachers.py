@@ -394,6 +394,25 @@ class ForTeachersModule(WebsiteModule):
                               available_adventures=available_adventures,
                               class_id=session['class_id'])
 
+    @staticmethod
+    def reorder_adventures(adventures: list, sorted_adv=False):
+        """This method ensures that the last two adventures are puzzle and quiz, if they exist."""
+        quiz_adv = None
+        parsons_adv = None
+        for i, adv in enumerate(adventures):
+            name = adv.short_name if sorted_adv else adv.get("name")
+            if name == "parsons":
+                parsons_adv = adv
+            if name == "quiz":
+                quiz_adv = adv
+
+        if parsons_adv:
+            adventures.remove(parsons_adv)
+            adventures.append(parsons_adv)
+        if quiz_adv:
+            adventures.remove(quiz_adv)
+            adventures.append(quiz_adv)
+
     @route("/add-adventure/level/<level>", methods=["POST"])
     @requires_login
     def add_adventure(self, user, level):
@@ -418,14 +437,19 @@ class ForTeachersModule(WebsiteModule):
                                            is_command_adventure=adventure_id in hedy_content.KEYWORDS_ADVENTURES)
 
         adventures[int(level)].append(sorted_adventure)
+        # Always keep the last two puzzle and quize, if exist.
+        self.reorder_adventures(adventures[int(level)], sorted_adv=True)
+        self.reorder_adventures(customizations['sorted_adventures'][level])
 
         # Remove hide_quiz or hide_parsons if the added adv. is quiz or parsons
         if adventure_id == "quiz" and 'other_settings' in customizations \
                 and 'hide_quiz' in customizations['other_settings']:
             customizations["other_settings"].remove("hide_quiz")
+        print("\n\n\n", customizations["other_settings"])
         if adventure_id == "parsons" and 'other_settings' in customizations \
                 and 'hide_parsons' in customizations['other_settings']:
             customizations["other_settings"].remove("hide_parsons")
+        print("\n\n\n", customizations["other_settings"])
 
         self.db.update_class_customizations(customizations)
         available_adventures = self.get_unused_adventures(adventures, teacher_adventures, adventure_names)
@@ -504,6 +528,9 @@ class ForTeachersModule(WebsiteModule):
                                                is_command_adventure=adventure in hedy_content.KEYWORDS_ADVENTURES)
             adventures[int(level)].append(sorted_adventure)
 
+        # Always keep the last two puzzle and quize, if exist.
+        self.reorder_adventures(adventures[int(level)], sorted_adv=True)
+        self.reorder_adventures(customizations['sorted_adventures'][level])
         self.db.update_class_customizations(customizations)
 
         return render_partial('customize-class/partial-sortable-adventures.html',
