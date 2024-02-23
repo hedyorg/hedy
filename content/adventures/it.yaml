@@ -36,12 +36,12 @@ adventures:
                     Puoi quindi inserire quel nome ovunque in una frase.
                 example_code: |-
                     ```
-                    name {is} {ask} Qual è il nome del personaggio principale?
-                    Il nome {print} ora verrà eseguito nel bosco
-                    Il nome {print} è un po' spaventato
-                    {print} All'improvviso sente un rumore pazzesco...
+                    name {is} {ask} What is the name of the main character?
+                    {print} name is now going to run in the woods
+                    {print} name is a bit scared
+                    {print} Suddenly he hears a crazy noise...
                     {sleep}
-                    Il nome di {print} teme che questa sia una foresta infestata
+                    {print} name is afraid this is a haunted forest
                     ```
                 story_text_2: |
                     ### Esercizio
@@ -75,7 +75,7 @@ adventures:
 
                     ### Esercizio
                     Copia la tua storia dai livelli precedenti a questo livello.
-                    In questo livello hai imparato 3 nuovi comandi `{at} {random}`, `{add} {to}` e `{remove} {from}`.
+                    In questo livello hai imparato 3 nuovi comandi `{at} {random}`, `{add} {to_list}` e `{remove} {from}`.
                     Aggiungi nuove righe di codice alla tua storia, in modo che tutti i nuovi comandi siano presenti almeno una volta nella tua storia.
                 example_code_3: |
                     ```
@@ -1217,75 +1217,108 @@ adventures:
         levels:
             1:
                 story_text: |
-                    Nel Livello 1 puoi usare i comandi `{print}`, `{ask}` e `{echo}`.
-                    Digita il tuo codice nel campo di programmazione, oppure premi il pulsante verde nel blocco di codice di esempio, e il codice verrà digitato per te!
-                    Prova tu stesso il codice con il pulsante verde "Esegui codice" sotto il campo di programmazione.
+                    Benvenuto a Hedy! Nel Livello 1 puoi iniziare stampando un testo.
 
-                    Puoi stampare il testo sullo schermo usando il comando `{print}`.
+                    Prova tu stesso il codice! Il pulsante giallo copia il codice di esempio nel campo di programmazione.
+                    Quindi premere il pulsante verde "Esegui codice" sotto il campo di programmazione per eseguire il codice.
+
+                    Pronto? Quindi vai alla scheda successiva per scoprire come creare i tuoi codici!
                 example_code: |
                     ```
                     {print} Ciao Mondo!
                     ```
             2:
                 story_text: |
-                    Nel livello 2 impariamo due nuovi comandi: `{is}` e `{sleep}`.
-                    Puoi dare un nome ad una parola con `{is}`. Si dice variabile. In questo esempio creiamo una variabile chiamata nome e una variabile chiamata età. Puoi usare la parola nome ovunque nel tuo codice e verrà sostituita da Hedy, in questo modo:
-
-                    In questo modo non hai più bisogno del comando `{echo}`!
+                    Congratulazioni! Hai raggiunto il livello 2. Spero che tu abbia già creato dei codici fantastici!
+                    Nel primo livello potresti aver notato che il comando `{echo}` può salvare solo un bit di informazione alla volta.
+                    Ad esempio, nell'avventura del ristorante, potresti ripetere ciò che il cliente voleva mangiare o ciò che voleva bere, ma non entrambi in una frase.
                 example_code: |
+                    **Avvertimento! Questo codice non funziona!**
+                    In Hedy i comandi cambieranno a volte. `{echo}` ad esempio funziona solo nel livello 1. In questo livello imparerai un modo migliore per riprodurre le risposte.
                     ```
-                    nome {is} Hedy
-                    età {is} 15
-                    {print} nome ha età anni
+                    {print} Benvenuto da Hedy
+                    {ask} Cosa vorresti mangiare?
+                    {echo} Quindi vuoi
+                    {ask} cosa vorresti bere?
+                    {echo} Quindi vuoi
                     ```
                 story_text_2: |
-                    `{print}` funziona sempre nello stesso modo, ma il comando `{ask}` è cambiato. Devi usare anche una variabile nel comando `{ask}`. In questo modo:
+                    Se il giocatore digita un hamburger e una coca cola, non puoi dire "allora vorresti un hamburger e una coca cola", ma devi fare due righe separate.
+                    Inoltre, il comando `{echo}` fa risuonare solo la parola alla fine della frase. Quindi non puoi dire "il tuo hamburger sta arrivando!".
+
+                    Ciò cambia nel livello 2. Nel livello 2 imparerai a lavorare con le variabili, che ti consentono di salvare più informazioni e stamparle dove preferisci.
+                    Quindi passiamo alla scheda successiva!
             3:
                 story_text: |
-                    Nel livello 3 puoi fare una lista. Puoi lasciare che il computer scelga una cosa a caso dalla lista. Lo fai con `{at} {random}` (dici: et ren-dom).
+                    Nel livello precedente hai imparato cos'è una variabile e come puoi usarla per rendere le tue avventure più interattive.
+                    Ma... non è l'unica cosa che puoi fare con le variabili! Puoi anche utilizzare le variabili per creare elenchi.
+                    E puoi anche lasciare che Hedy scelga una parola a caso da un elenco, così potrai creare veri e propri giochi!
+                    Dai una rapida occhiata alla scheda successiva!
             4:
                 story_text: |
-                    `{print}` e `{ask}` cambiano al livello 4.
-                    È necessario inserire il testo che si desidera stampare tra virgolette.
-                    Questo è utile, perché ora puoi stampare tutte le parole che desideri. Anche le parole che hai usato per memorizzare qualcosa con `{is}`.
-                    La maggior parte dei linguaggi di programmazione utilizza anche le virgolette durante la stampa, quindi ci stiamo avvicinando anche alla programmazione reale!
+                    Nei livelli precedenti ti sei esercitato con le variabili, ma potresti aver riscontrato questo problema.
+                    Potresti aver provato a eseguire un codice come questo:
+
+                    Ovviamente volevi stampare
+
+                    "Mi chiamo Sophie".
+
+                    ma Hedy stampa
+
+                    "La mia Sophie è Sophie".
+
+                    In questo livello questo problema viene risolto utilizzando le virgolette.
                 example_code: |
                     ```
-                    {print} "D'ora in poi dovrai usare le virgolette"
-                    risposta {is} {ask} "Cosa dobbiamo fare d'ora in poi?"
-                    {print} 'Dobbiamo usare ' risposta
+                    nome {is} Sophie
+                    {print} Il mio nome è nome
+                    ```
             5:
                 story_text: |
-                    Nel livello 5 c'è qualcosa di nuovo, il `{if}`! Con il `{if}` puoi scegliere tra due diverse opzioni.
-                    Questo codice stampa "che bello" se inserisci Hedy come nome, invece stampa "buu!" se inserisci un altro nome.
-                    `{ask}` e `{print}` funzionano nello stesso modo in cui funzionavano nel livello 4.
+                    Nei livelli precedenti hai già imparato a usare `{at} {random}` che rendeva i tuoi giochi diversi ogni volta che eseguivi il codice.
+                    Ma non è realmente interattivo, il giocatore non ha alcuna influenza su ciò che accade nel gioco.
+
+                    In questo livello imparerai il comando `{if}`, che ti permette di dare risposte diverse nel tuo programma. In questo modo puoi programmare ad esempio una password segreta per il tuo computer.
+                    Quindi passiamo alla scheda successiva per il nuovo comando!
                 example_code: |
                     ```
-                    nome {is} {ask} 'come ti chiami?'
-                    {if} nome {is} Hedy {print} 'carino' {else} {print} 'meno divertente!'
+                    password {is} {ask} 'Qual è la password corretta?'
                     ```
             6:
                 story_text: |
-                    In questo livello imparerai qualcosa di nuovo: ora puoi anche calcolare.
+                    Nel livello precedente ti sei esercitato con `{ask}` e `{if}`. Ad esempio puoi chiedere agli ospiti cosa vorrebbero mangiare.
+                    Quello che però non puoi ancora fare è calcolare il prezzo della cena per tutti.
 
-                    Il più è facile, lo scrivi come in matematica: `5 + 5` per esempio. Anche il segno meno funziona, come in `5 - 5`.
-
-                    Il per è un po' diverso, perché non c'è il simbolo per sulla tastiera. Basta cercare, non c'è davvero!
-                    Questo è il motivo per cui eseguiamo le moltiplicazioni con l'asterisco: `5 * 5`. Leggilo come "5 per 5", lo ricorderai più semplicemente.
-                example_code: |-
+                    Il livello successivo rende possibile utilizzare addizioni, sottrazioni e moltiplicazioni nei tuoi programmi. In questo modo potrai calcolare i prezzi del tuo ristorante, ma potrai anche aggiungere un codice segreto per concedere uno sconto ai tuoi amici e familiari.
+                    Un'altra opzione nel livello successivo è programmare il tuo gioco di matematica, affinché il tuo fratellino o la tua sorellina possano esercitarsi con le moltiplicazioni.
+                    Vai a vedere di persona!
+                example_code: |
                     ```
-                    print '5 più 5 è ' 5 + 5
-                    print '5 meno 5 è ' 5 - 5
-                    print '5 per 5 è ' 5 * 5
+                    prezzo_cibo {is} 0
+                    drink_price {is} 0
+                    prezzo_totale {is} 0
+                    {print} 'Benvenuti a McHedy'
+                    ordina {is} {chiedi} 'Cosa vorresti mangiare?'
+                    {if} ordina {is} hamburger food_price {is} 5
+                    {if} ordina {is} patatine fritte food_price {is} 2
+                    bere {is} {ask} 'Cosa vorresti bere?'
+                    {if} drink {è} acqua drink_price {is} 0
+                    {else} drink_price {is} 3
+                    prezzo_totale {is} prezzo_cibo + prezzo_bevanda
+                    {print} "Saranno ' total_price ' dollari, per favore"
                     ```
             7:
                 story_text: |
-                    `ask`, `print` e `if` funzionano esattamente come funzionavano nel livello 6.
-                    Il 7 livello introduce il comando `repeat`.
-                    `repeat` può essere usato per ripetere una parte di codice 'x' volte.
-                example_code: |-
+                    Ottimo lavoro! Hai raggiunto il livello successivo, il che significa che ti sei esercitato con `{if}`e `{else}`. Probabilmente hai notato che i tuoi codici diventano sempre più lunghi.
+                    Ad esempio se si desidera programmare 'Buon Compleanno'.
+
+                    Si tratta di un sacco di codice che contiene principalmente le stesse parole più e più volte. Fortunatamente nella scheda successiva imparerai una soluzione con il comando `{repeat}`, che ti consente di ripetere una riga di codice più volte.
+                example_code: |
                     ```
-                    {repeat} 3 {times} {print} 'Hedy è divertente!'
+                    {print} 'buon compleanno a te'
+                    {print} 'buon compleanno a te'
+                    {stampa} 'buon compleanno cara Hedy'
+                    {print} 'buon compleanno a te'
                     ```
             8:
                 story_text: |
@@ -1845,8 +1878,11 @@ adventures:
                         {sleep}
                     ```
             12:
-                story_text: |
-                    In this level you can make your fortunes multiple words. Like in this example below:
+                story_text: |-
+                    Dal livello 12 in poi, dovrai usare le virgolette anche negli elenchi, prima e dopo ogni elemento.
+
+                    ### Esercizio
+                    Aggiungi due previsioni all'elenco
                 example_code: |
                     ```
                     fortunes = 'you will be rich', 'you will fall in love', 'you will slip on a banana peel'
@@ -2453,14 +2489,13 @@ adventures:
         description: Introducing maths
         levels:
             6:
-                story_text: |4
+                story_text: |
+                    In this level you learn something new: you can now also calculate.
 
-                                    In this level you learn something new: you can now also calculate.
+                    The plus is easy, you write it like with math: `5 + 5` for example. The minus also works fine, it is `5 - 5`.
 
-                                    The plus is easy, you write it like with math: `5 + 5` for example. The minus also works fine, it is `5 - 5`.
-
-                                    The times is a bit different, because there is no times symbol on your keyboard. Just search, there really isn't!
-                                    That is why we multiply with the asterisk above 8: `5 * 5`. Read that as "5 times 5" that helps you remember it best.
+                    The times is a bit different, because there is no times symbol on your keyboard. Just search, there really isn't!
+                    That is why we multiply with the asterisk above 8: `5 * 5`. Read that as "5 times 5" that helps you remember it best.
                 example_code: |
                     ```
                     {print} '5 plus 5 is ' 5 + 5
@@ -3522,10 +3557,10 @@ adventures:
             2:
                 story_text: |
                     In this level you can practise using the variables, so that you can make the rock, paper, scissors game in the next level!
-                example_code: |
+                example_code: |-
                     ```
-                    choice {is} _
-                    {print} I choose choice
+                    la scelta {is} rock
+                    {print} Scelgo _
                     ```
             3:
                 story_text: |

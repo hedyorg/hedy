@@ -71,12 +71,12 @@ adventures:
                     {print} 它 是 动物们 {at} {random}
                     ```
                 story_text_3: |
-                    这是一个在故事里使用`{remove}`命令的例子
+                    这是您的故事中`{remove}`命令的一个示例
 
                     ### 练习
-                    将你在前几级的故事复制到这一级。
-                    在此级中，你已经学会了3个新命令`{at} {random}` , `{add} {to}` 和 `{remove} {from}`.
-                    在你的故事中添加新的代码行，让所有的新命令在你的故事中至少出现一次。
+                    将您的故事从以前的关卡复制到此关卡。
+                    在这个级别中，您学习了3个新命令`{at} {random}`、`{add} {to_list}`和`{remove} {from}`。
+                    将新的代码行添加到您的故事中，以便所有新命令在故事中至少出现一次。
                 example_code_3: |
                     ```
                     {print} 他的背包太重了。
@@ -191,7 +191,7 @@ adventures:
                 example_code: |
                     ```
                     名字 = '英国女王'
-                    {print} 名字'正在吃一块蛋糕，突然......'
+                    {print} 名字'正在吃一块蛋糕，突然...'
                     ```
             13:
                 story_text: |
@@ -254,9 +254,9 @@ adventures:
                     {print}('欢迎来到这个故事！')
                     ```
     add_remove_command:
-        name: '{add} {to} & {remove} {from}'
+        name: '{add} {to_list} & {remove} {from}'
         default_save_name: 添加_删除_命令
-        description: 简介 添加和删除
+        description: 简介 {add}{to_list}和{remove}{from}
         levels:
             3:
                 story_text: |
@@ -284,18 +284,18 @@ adventures:
                     在这个虚拟餐厅中尝试新命令。将玩家想要的口味添加到列表中，并删除他们过敏的口味。
                 example_code_3: |
                     ```
-                    {print} 神秘奶昔
-                    口味 {is} 草莓,巧克力,香草
-                    想要的口味{is} {ask}什么口味你想要?
-                    ＿
-                    过敏的口味{is} {ask}你对什么口味过敏吗?
-                    ＿
-                    {print}你得到一个 口味{at}{random}的奶昔
+                    {print} Mystery milkshake
+                    flavors {is} strawberry, chocolate, vanilla
+                    hope {is} {ask} What flavor are you hoping for?
+                    _
+                    allergies {is} {ask} Are you allergic to any flavors?
+                    _
+                    {print} You get a flavors {at} {random} milkshake
                     ```
     and_or_command:
         name: '{and} & {or}'
         default_save_name: 与和或
-        description: 介绍与和或
+        description: 介绍{and}和{or}
         levels:
             13:
                 story_text: |-
@@ -312,7 +312,7 @@ adventures:
     ask_command:
         name: '{ask}'
         default_save_name: 提问命令
-        description: 提问命令介绍
+        description: '{ask}命令介绍'
         levels:
             1:
                 story_text: |
@@ -686,7 +686,7 @@ adventures:
     clear_command:
         name: '{clear}'
         default_save_name: 清屏命令
-        description: 清屏命令
+        description: '{clear}命令'
         levels:
             4:
                 story_text: |
@@ -762,7 +762,7 @@ adventures:
                     {print} 今晚我们将观看 选定中电影
                     喜欢的电影 {ask}你喜欢那部电影吗？
                     {print} 明天我们会看别的东西。
-                    {add} 选中的电影 {to} 可选的电影
+                    {add} 选中的电影{to_list}可选的电影
                     {print} 明天我们看 明天的电影
                     明天的电影 {is} 可选的电影 {at} {random}
                     我去买爆米花！ {print}
@@ -1061,6 +1061,7 @@ adventures:
                         {else}
                             {print}'错误，'capitals[i] '是首都' countries[i]
                         {print} '你得分 ' score' 满分 10 分'
+
                     ```
             17:
                 story_text: |-
@@ -1110,11 +1111,12 @@ adventures:
         levels:
             1:
                 story_text: |
-                    欢迎来到海蒂！在第1关你将从打印一个故事开始。
+                    欢迎来到海蒂!在第一级，你可以从打印文本开始。
 
-                    试着自己编写代码，使用绿色的“运行代码”按钮运行代码。
+                    自己试试代码吧!黄色按钮将示例代码复制到编程字段中。
+                    然后按下编程字段下的绿色“运行代码”按钮来运行代码。
 
-                    准备好了吗？试着在下一个标签页开始你的第一行命令！
+                    准备好了吗?然后转到下一个选项卡学习如何制作自己的代码!
                 example_code: |
                     ```
                     {print} Hello world!
@@ -1569,7 +1571,7 @@ adventures:
     elif_command:
         name: '{elif}'
         default_save_name: elif
-        description: elif
+        description: '{elif}'
         levels:
             17:
                 story_text: |
@@ -1577,12 +1579,12 @@ adventures:
                     试试看！
                 example_code: |
                     ```
-                    prices = ['一百万美元', '一个苹果派', '什么都没有']
-                    your_price = prices[{random}]
-                    {print} '你赢得' your_price
-                    {if} your_price == '一百万美元' :
+                    奖品 = ['一百万美元', '一个苹果派', '什么都没有']
+                    你的_奖品 = 奖品[{random}]
+                    {print} '你赢得' 你的_奖品
+                    {if} 你的_奖品 == '一百万美元' :
                         {print} '太棒了!你是个富翁!'
-                    {elif} your_price == '一个苹果派' :
+                    {elif} 你的_奖品 == '一个苹果派' :
                         {print} '不错呦，一个苹果派!'
                     {else}:
                         {print} '祝你下次好运..'
@@ -1590,7 +1592,7 @@ adventures:
     for_command:
         name: '{for}'
         default_save_name: for
-        description: for 指令
+        description: '{for}指令'
         levels:
             10:
                 story_text: |-
@@ -2203,7 +2205,7 @@ adventures:
     if_command:
         name: '{if} & {else}'
         default_save_name: if_命令
-        description: 介绍if命令
+        description: 介绍{if}命令
         levels:
             5:
                 story_text: |
@@ -2267,7 +2269,7 @@ adventures:
     in_command:
         name: '{in}'
         default_save_name: in_命令
-        description: 介绍 in 命令
+        description: 介绍{in}命令
         levels:
             5:
                 story_text: |
@@ -2295,7 +2297,7 @@ adventures:
     is_command:
         name: '{is}'
         default_save_name: is_命令
-        description: 介绍 is 命令
+        description: 介绍 {is}命令
         levels:
             2:
                 story_text: |
@@ -2440,8 +2442,6 @@ adventures:
                     b = 'world!'
                     {print} a + b
                     ```
-
-                    {print} 2.5 + 2.5
     music:
         name: 音乐
         default_save_name: 音乐
@@ -3109,7 +3109,7 @@ adventures:
     repeat_command:
         name: '{repeat}'
         default_save_name: repeat_命令
-        description: repeat 命令
+        description: '{repeat}命令'
         levels:
             7:
                 story_text: |
@@ -3152,7 +3152,7 @@ adventures:
     repeat_command_2:
         name: '{repeat} 2'
         default_save_name: repeat_命令_2
-        description: repeat 命令 2
+        description: '{repeat} 命令 2'
         levels:
             7:
                 story_text: |
@@ -3295,10 +3295,10 @@ adventures:
                     尝试在代码中的每个`{ask}`命令之后添加一个`{if}`，以使代码尽可能具有交互性!
                 example_code: |
                     ```
-                    饮料存货 {is}水、柠檬水、可乐、橙汁
-                    饮料 {is} {ask} '你想喝点什么?'
-                    {if} 饮料 {in} 饮料存货 {print} '一瓶 ' 饮料 '马上到!'
-                    {else} {print} '对不起，我们不卖这个'
+                    drinks_in_stock {is} water, lemonade, cola, orange juice
+                    drink {is} {ask} 'What would you like to drink?'
+                    {if} drink {in} drinks_in_stock {print} 'One ' drink 'coming up!'
+                    {else} {print} 'Sorry, we do not sell that'
                     ```
             6:
                 story_text: |
@@ -3560,19 +3560,19 @@ adventures:
                      **另外** 想玩多玩几个游戏吗？拓展代码，以便您可以多玩几个回合。您甚至可以使用 `{ask}` 询问用户他们想玩多少回合。
                 example_code: |
                     ```
-                    选项 = 石头，剪刀，布
-                    你选择 {is} {ask} '你选择什么？'
-                    {print} '你选择了' 你选择
-                    计算机选择 {is}选项 {at} {random}
-                    {print} '计算机选择了' 计算机选择
-                    {if} 计算机选择 {is} 你选择
-                        {print} '平手'
-                    {if} 计算机选择 {is} 石头
-                        {if} 你选择 {is} 布
-                            {print} '你赢了！'
-                        {if} 你选择 {is} 剪刀
-                            {print} '你输了！'
-                    # 完成这段代码
+                    choices = rock, paper, scissors
+                    your_choice {is} {ask} 'What do you choose?'
+                    {print} 'You choose ' your_choice
+                    computer_choice {is} choices {at} {random}
+                    {print} 'The computer chooses ' computer_choice
+                    {if} computer_choice {is} your_choice
+                        {print} 'Tie'
+                    {if} computer_choice {is} rock
+                        {if} your_choice {is} paper
+                            {print} 'You win!'
+                        {if} your_choice {is} scissors
+                            {print} 'You lose!'
+                    # finish this code
                     ```
             10:
                 story_text: |
@@ -3693,7 +3693,7 @@ adventures:
     sleep_command:
         name: '{sleep}'
         default_save_name: sleep_命令
-        description: 介绍 sleep 命令
+        description: 介绍 {sleep} 命令
         levels:
             2:
                 story_text: |
@@ -3811,15 +3811,15 @@ adventures:
                     在这个例子中，我们改变了“我的邦妮”程序，使其具有互动性。你现在要问的是邦妮在哪里。
                 example_code: |
                     ```
-                    {define} 歌曲{with} 地方
-                        {print} '我的Bonnie在' 地方
+                    {define} song {with} place
+                        {print} 'My Bonnie is ' place
 
-                    选择的地方 = {ask} '你希望bonnie在哪?'
-                    同义词 = {ask} '那里也叫什么?'
+                    chosen_place = {ask} 'Where do you want Bonnie to be?'
+                    synonym = {ask} 'What is another word for that?'
 
-                    {call} 歌曲 {with} 选择的地方
-                    {call} 歌曲 {with} 同义词
-                    {call} 歌曲 {with} 选择的地方
+                    {call} song {with} chosen_place
+                    {call} song {with} synonym
+                    {call} song {with} chosen_place
                     ```
             16:
                 story_text: |
@@ -4489,20 +4489,20 @@ adventures:
                     旗子 <img src="https://github.com/hedyorg/hedy/assets/80678586/877fc337-df80-4185-8005-a6c28904f66e" width="300">
                     </div>
                 example_code: |
-                    画层叠正方形的提示:
+                    Hint for the nested squares:
                     ```
-                    颜色=红、蓝、橙、黄、粉、紫、绿、棕、黑
-                    距离= 120
-                    重复5次
+                    colors = red, blue, orange, yellow, pink, purple, green, brown, black
+                    distance = 120
+                    repeat 5 times
                     _
                     ```
-                    画旗帜的提示:
+                    Hint for the flags:
                     ```
-                    国家=ask“你想看到哪个国家的国旗?”
-                    如果这个国家是“荷兰”
-                        color_1 = 红
-                        color_2 = 白
-                        color_3 = 蓝
+                    country = ask 'which country would you like to see the flag of?'
+                    if country is 'the Netherlands'
+                        color_1 = red
+                        color_2 = white
+                        color_3 = blue
                     ```
             10:
                 story_text: |
@@ -4680,7 +4680,7 @@ adventures:
     while_command:
         name: '{while}'
         default_save_name: while_命令
-        description: while
+        description: '{while}'
         levels:
             15:
                 story_text: |-
@@ -4711,5 +4711,6 @@ adventures:
                     ```
                     {for} 数字{in} {range} _{to} _
                         {print} 数字
+                        {sleep}
                     {print} '新年快乐！'
                     ```
