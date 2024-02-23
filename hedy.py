@@ -2035,7 +2035,7 @@ else:{self.add_debug_breakpoint()}
         return f"""create_button({button_name})"""
 
     def make_ifpressed_if_body(self, body):
-            return (f"""
+        return (f"""
 def if_body():
 {ConvertToPython.indent(body)}""")
 
