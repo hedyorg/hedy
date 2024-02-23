@@ -1,6 +1,4 @@
 import os
-from app import translate_error, app
-from flask_babel import force_locale
 
 from parameterized import parameterized
 
@@ -10,7 +8,7 @@ import utils
 from tests.Tester import HedyTester, Snippet
 from website.yaml_file import YamlFile
 
-fix_error = True
+fix_error = False
 # set this to True to revert broken snippets to their en counterpart automatically
 # this is useful for large Weblate PRs that need to go through, this fixes broken snippets
 if os.getenv('fix_for_weblate'):
@@ -86,7 +84,7 @@ Hedy_snippets = [(s.name, s) for s in collect_snippets(path='../../content/adven
 
 # This allows filtering out languages locally, but will throw an error
 # on GitHub Actions (or other CI system) so nobody accidentally commits this.
-if os.getenv('CI') and (filtered_language or level):
+if os.getenv('CI') and (filtered_language or level or fix_error is True):
     raise RuntimeError('Whoops, it looks like you left a snippet filter in!')
 
 Hedy_snippets = HedyTester.translate_keywords_in_snippets(Hedy_snippets)
@@ -127,19 +125,4 @@ class TestsAdventurePrograms(HedyTester):
                         file.write(utils.dump_yaml_rt(broken_yaml))
 
                 else:
-                    try:
-                        location = E.error_location
-                    except BaseException:
-                        location = 'No Location Found'
-
-                    # Must run this in the context of the Flask app, because FlaskBabel requires that.
-                    with app.app_context():
-                        with force_locale('en'):
-                            error_message = translate_error(E.error_code, E.arguments, 'en')
-                            error_message = error_message.replace('<span class="command-highlighted">', '`')
-                            error_message = error_message.replace('</span>', '`')
-                            print(f'\n----\n{snippet.code}\n----')
-                            print(f'from adventure {snippet.adventure_name}')
-                            print(f'in language {snippet.language} from level {snippet.level} gives error:')
-                            print(f'{error_message} at line {location}')
-                            raise E
+                    self.output_test_error(E, snippet)
