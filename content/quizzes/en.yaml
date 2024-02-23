@@ -3408,13 +3408,13 @@ levels:
                     tries = tries + 1
                 {print} 'Yes! You have thrown 6 in ' tries ' tries.'
             mp_choice_options:
-            -   option: In line 1 == should be used instead of =
+            -   option: In line 1 `==` should be used instead of `=`
                 feedback: No that's not it
             -   option: Line 2 misses quotation marks
                 feedback: That's not right
-            -   option: In line 5 {if} should have been used instead of {while}
+            -   option: In line 5 `{if}` should have been used instead of `{while}`
                 feedback: That's not it
-            -   option: In line 5 != should have been used instead of ==
+            -   option: In line 5 `!=` should have been used instead of `==`
                 feedback: You are correct
             hint: There is something wrong in line 5
             correct_answer: D
@@ -3431,13 +3431,25 @@ levels:
 
                 {print} 'All dry!'
             mp_choice_options:
-            -   option: = wetness
+            -   option: |-
+                    ```
+                       = wetness
+                    ```
                 feedback: That will not change anything
-            -   option: = wetness = 1
+            -   option: |-
+                    ```
+                       = wetness = 1
+                    ```
                 feedback: You can't have two times = in one line
-            -   option: = wetness - 1
+            -   option: |-
+                    ```
+                       = wetness - 1
+                    ```
                 feedback: You are correct!
-            -   option: = wetness + 1
+            -   option: |-
+                    ```
+                       = wetness + 1
+                    ```
                 feedback: The program should count down
             hint: wetness should get less each time
             correct_answer: C
@@ -3451,9 +3463,9 @@ levels:
                     {if} answer == 'yes'
                         lives = lives - 1
             mp_choice_options:
-            -   option: '{while} should be {if}'
+            -   option: '`{while}` should be`{if}`'
                 feedback: No that is not right
-            -   option: '{if} should be {while}'
+            -   option: '`{if}` should be `{while}`'
                 feedback: No that is not right
             -   option: Line 3 should start with more indentation
                 feedback: No that's not right
@@ -3479,13 +3491,13 @@ levels:
                         {print} _
                         game = 'over'
             mp_choice_options:
-            -   option: '... change the first {if} into a {while}'
+            -   option: '... change the first `{if}` into a `{while}`'
                 feedback: Perfect!
-            -   option: '... change the second {if} into a {while}'
+            -   option: '... change the second `{if}` into a `{while}`'
                 feedback: That's not quite right.
-            -   option: '... change the third {if} into a {while}'
+            -   option: '... change the third `{if}` into a `{while}`'
                 feedback: That's not quite right.
-            -   option: '... change the fourth {if} into a {while}'
+            -   option: '... change the fourth `{if}` into a `{while}`'
                 feedback: That's not quite right.
             hint: The last one should say you win.
             correct_answer: A
@@ -3524,7 +3536,7 @@ levels:
             mp_choice_options:
             -   option: Nothing. 1600 is not programmed into the app.
                 feedback: 'No'
-            -   option: you could eat some more
+            -   option: You could eat some more
                 feedback: 'No'
             -   option: That is alright
                 feedback: Yes!
@@ -3541,13 +3553,25 @@ levels:
                 {while} points_player_1 > points_player_2
                     {print} _ ' is in the lead right now!'
             mp_choice_options:
-            -   option: name_player_1
+            -   option: |-
+                    ```
+                       name_player_1
+                    ```
                 feedback: You are right!
-            -   option: name_player_2
+            -   option: |-
+                    ```
+                       name_player_2
+                    ```
                 feedback: No they are losing!
-            -   option: points_player_1
+            -   option: |-
+                    ```
+                       points_player_1
+                    ```
                 feedback: You should fill in a name, not a number
-            -   option: points_player_2
+            -   option: |-
+                    ```
+                       points_player_2
+                    ```
                 feedback: You should fill in a name, not a number
             hint: You win the game by having the most points. Your name should appear on the screen
             correct_answer: A
@@ -3572,9 +3596,9 @@ levels:
             question_score: '10'
         2:
             question_text: What should be filled in on the blanks if you want a list of what chores are done by whom?
-            code: |-
+            code: |- 
                 friends = ['Wesley', 'Eric', 'Kaylee']
-                chores = [the cooking, the cleaning, nothing]
+                chores = ['the cooking', 'the cleaning', 'nothing']
                 {for} i {in} {range} 1 {to} 3
                     {print}  _
             mp_choice_options:
@@ -3605,7 +3629,7 @@ levels:
             question_text: What is a possible output for this program?
             code: |-
                 friends = ['Wesley', 'Eric', 'Kaylee']
-                chore = [the cooking, the cleaning, nothing]
+                chore = ['the cooking', 'the cleaning', 'nothing']
                 {for} i {in} {range} 1 {to} 3
                     {print}  friends[i] has to do chores[i]
             mp_choice_options:
@@ -3649,9 +3673,9 @@ levels:
                     print 'the lucky number of ' friends[i]
                     print 'is ' lucky_numbers[i]
             mp_choice_options:
-            -   option: The variable in line 4 should be 'friend[i]', not 'friends[i]'
+            -   option: The variable in line 4 should be `friend[i]`, not `friends[i]`
                 feedback: That is not right.
-            -   option: Line 3 should say 'in range 1 to 3' not 'in range 0 to 3'
+            -   option: Line 3 should say `in range 1 to 3` not `in range 0 to 3`
                 feedback: Good catch!
             -   option: Line 4 should say 'lucky_number', not 'lucky number
                 feedback: It's not a variable, it's just text.
@@ -3668,13 +3692,25 @@ levels:
                 {for} i {in} {range} 1 {to} 3
                     {print} 'the ' animals[i] ' says ' sounds[i]
             mp_choice_options:
-            -   option: noises = ['moo', 'woof', 'neigh']
+            -   option: |-
+                    ```
+                       noises = ['moo', 'woof', 'neigh']
+                    ```
                 feedback: Mind the variable name and the order of the sounds.
-            -   option: sounds = '[woof], [moo], [neigh]'.
+            -   option: |-
+                    ```
+                       sounds = '[woof], [moo], [neigh]'
+                    ```
                 feedback: Look at line one to see how brackets are supposed to be used.
-            -   option: sounds = [woof, moo, neigh]
+            -   option: |-
+                    ```
+                       sounds = [woof, moo, neigh]
+                    ```
                 feedback: Don't forget the quotation marks!
-            -   option: sounds = ['woof', 'moo', 'neigh']
+            -   option: |-
+                    ```
+                       sounds = ['woof', 'moo', 'neigh']
+                    ```
                 feedback: Great job!
             hint: Look at line 1 to see proper use of brackets and quotation marks.
             correct_answer: D
