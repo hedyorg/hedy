@@ -143,9 +143,9 @@ adventures:
                     Ajoute une répétition à ta propre histoire. Retourne en arrière dans tes programmes sauvegardés, choisi une histoire que tu as programmée à un niveau précédent, trouve une ligne contenant `{print}` et répète là !
                 example_code: |
                     ```
-                    {print} 'Le prince appelait à l'aide sans arrêt'
+                    {print} "Le prince appelait à l'aide sans arrêt"
                     {repeat} 5 {times} {print} 'Au secours !'
-                    {print} 'Pourquoi personne ne vient m'aider ?'
+                    {print} "Pourquoi personne ne vient m'aider ?"
                     ```
             8:
                 story_text: |
@@ -244,12 +244,12 @@ adventures:
                     {print} 'Where do you want to look for them ?'
                     {print} 'You can choose : tree, flowerbed, rock, postbox'
                     {while} keys == 'lost'
-                    …location = {ask} 'Where do you want to look ?'
-                    …{if} location == 'flowerbed'
-                    ……{print} 'Here they are !'
-                    ……keys = 'found'
-                    …{else}
-                    ……{print} 'Nope they are not at the ' location
+                        location = {ask} 'Where do you want to look ?'
+                        {if} location == 'flowerbed'
+                            {print} 'Here they are !'
+                            keys = 'found'
+                        {else}
+                            {print} 'Nope they are not at the ' location
                     {print} 'Now you can enter the house !'
                     ```
             18:
@@ -1655,11 +1655,11 @@ adventures:
                     prix = ["1 million d'euros", "une tarte aux pommes", "rien"]
                     ton_prix = prix[{random}]
                     {print} "Tu as gagné " ton_prix
-                    {if} ton_prix == "1 million d'euros" :
+                    {if} ton_prix == "1 million d'euros":
                         {print} "Oui ! Tu es riche !"
-                    {elif} ton_prix == "une tarte aux pommes" :
+                    {elif} ton_prix == "une tarte aux pommes":
                         {print} "Magnifique, une tarte aux pommes"
-                    {else} :
+                    {else}:
                         {print} "Plus de chance la prochaine fois.."
                     ```
     for_command:
@@ -1932,7 +1932,7 @@ adventures:
                 example_code: |
                     ```
                     {define} chanson {with} place
-                    	{print} "Ma Bonnie est à " place
+                        {print} "Ma Bonnie est à " place
 
                     {call} chanson {with} 'ocean'
                     {call} chanson {with} 'mer'
@@ -2543,14 +2543,14 @@ adventures:
                     In the next level you'll learn how to play some existing songs.
                 example_code: |-
                     ```
-                    joue C4
-                    joue D4
-                    joue E4
-                    joue F4
-                    joue G4
-                    joue A4
-                    joue B4
-                    joue C5
+                    {play} C4
+                    {play} D4
+                    {play} E4
+                    {play} F4
+                    {play} G4
+                    {play} A4
+                    {play} B4
+                    {play} C5
                     ```
             2:
                 story_text: Terminez les chansons ! Nous avons commencé les codes pour certaines mélodies.
