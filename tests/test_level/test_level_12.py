@@ -1610,11 +1610,13 @@ class TestsLevel12(HedyTester):
         repeat n times
             print 'me wants a cookie!'""")
 
-        expected = textwrap.dedent("""\
-        n = 5
-        for i in range(int(n)):
-          print(f'''me wants a cookie!''')
-          time.sleep(0.1)""")
+        expected = HedyTester.dedent(
+            "n = 5",
+            self.variable_type_check_transpiled('n', 'int'),
+            "for i in range(int(n)):",
+            ("print(f'''me wants a cookie!''')", '  '),
+            ("time.sleep(0.1)", '  ')
+        )
 
         output = textwrap.dedent("""\
         me wants a cookie!
