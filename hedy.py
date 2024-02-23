@@ -2035,16 +2035,16 @@ else:{self.add_debug_breakpoint()}
         return f"""create_button({button_name})"""
 
     def make_ifpressed_command(self, key, if_body, else_body):
-        functions = f"""
+        functions = f"""\
 def if_body():
 {ConvertToPython.indent(if_body)}
 def else_body():
 {ConvertToPython.indent(else_body)}"""
 
-        if_pressed_extension = f"""
+        if_pressed_extension = f"""\
 extensions.if_pressed('{key}', if_body, else_body)"""
 
-        return (f"""
+        return (f"""\
 {functions}
 {if_pressed_extension}""")
 
