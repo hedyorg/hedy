@@ -222,7 +222,7 @@ levels:
             correct_answer: C
             question_score: '10'
         2:
-            question_text: Which code is correct?
+            question_text: Qual código está correto?
             mp_choice_options:
             -   option: |-
                     ```
@@ -233,66 +233,66 @@ levels:
                     ```
                     {ask} {is} nome Qual é o seu nome
                     ```
-                feedback: The words are right, the order is not!
+                feedback: As palavras estão corretas, a ordem não!
             -   option: |-
                     ```
                     {ask} Qual é o seu nome?
                     ```
-                feedback: This worked in level 1, but in level 2 and up it works differently.
+                feedback: Funcionou assim no nível 1, mas a partir do nível 2 funciona de forma diferente.
             -   option: |-
                     ```
                     {ask} Qual é o seu nome? {is} nome
                     ```
-                feedback: The words are right, the order isn't!
-            hint: '`{ask}` doesn''t work like in level 1'
+                feedback: As palavras estão certas, a ordem não!
+            hint: '`{ask}` não funciona da mesma forma que no nível 1'
             correct_answer: A
             question_score: '10'
         3:
-            question_text: What appears on your output screen when you run this code?
+            question_text: O que aparece na tela de saída ao executar este código?
             code: |-
-                name {is} Marleen
-                {print} name goes to the market and she buys an apple.
+                nome {is} Marlene
+                {print} nome vai ao supermercado e compra uma maçã.
             mp_choice_options:
-            -   option: name goes to the market and she buys an apple.
-                feedback: The word name is replaced with Marleen
-            -   option: Marleen goes to the market.
-                feedback: The second part of the sentence isn't left out!
-            -   option: Marleen goes to the market and she buys an apple.
+            -   option: nome vai ao supermercado e compra uma maçã.
+                feedback: A palavra nome é substituída por Marlene
+            -   option: Marlene vai ao supermercado.
+                feedback: A segunda parte da frase não é deixada de fora!
+            -   option: Marlene vai ao supermercado e compra uma maçã.
                 feedback: Na mosca!
-            -   option: Marleen goes to the market and Marleen buys an apple.
-                feedback: She is not replaced with the name
-            hint: The word name is replaced with Marleen
+            -   option: Marlene vai ao supermercado e Marlene compra uma maçã.
+                feedback: O nome dela não é repetido na segunda parte
+            hint: A palavra nome é substituída por Marlene
             correct_answer: C
             question_score: '10'
         4:
-            question_text: What will you see on the output screen when you run this code?
+            question_text: O que você verá na tela de saída quando executar este código?
             code: |-
                 nome {is} Hedy
-                {print} Oi, meu nome é nome!
+                {print} Oi, meu nome é nome
             mp_choice_options:
             -   option: Oi, meu nome é nome
-                feedback: The variable name is replaced with Hedy
+                feedback: A variável nome é substituída por Hedy
             -   option: Oi, meu nome é Hedy
-                feedback: The variable name is replaced with Hedy
+                feedback: A variável nome é substituída por Hedy
             -   option: Oi, meu Hedy é nome
-                feedback: The variable name is replaced with Hedy
+                feedback: A variável nome é substituída por Hedy
             -   option: Oi, meu Hedy é Hedy
-                feedback: Correct, this mistake will be fixed in level 4!
-            hint: '''name'' is being replaced with ''Hedy'' in both places'
+                feedback: Correto, esse problema será resolvido no nível 4!
+            hint: '''nome'' está sendo substituído por ''Hedy'' nos dois lugares'
             correct_answer: D
             question_score: '10'
         5:
-            question_text: What happens when you use the `{sleep}` command?
+            question_text: O que acontece quando você usa o comando `{sleep}`?
             mp_choice_options:
-            -   option: It slows down your computer
-                feedback: fortunately not!
-            -   option: It closes down Hedy
-                feedback: fortunately not!
-            -   option: Your program pauses for a second and then continues
-                feedback: That's right!
-            -   option: You put it at the end so Hedy knows your program is finished
-                feedback: No it would be useless at the end of your code
-            hint: The computer waits for a second at the `{sleep}` command
+            -   option: Ele deixa seu computador mais lento
+                feedback: felizmente não!
+            -   option: Ele fecha a Hedy
+                feedback: felizmente não!
+            -   option: O programa pausa por um segundo e então continua
+                feedback: Isso mesmo!
+            -   option: Você o coloca no final para que Hedy saiba que seu programa terminou
+                feedback: Não, ele seria inútil no fim do seu código
+            hint: O computador espera um segundo no comando `{sleep}`
             correct_answer: C
             question_score: '10'
         6:

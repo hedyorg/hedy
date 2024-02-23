@@ -1,4 +1,3 @@
-import { initializeSyntaxHighlighter } from './syntaxModesRules';
 import { ClientMessages } from './client-messages';
 import { modal, error, success, tryCatchPopup } from './modal';
 import JSZip from "jszip";
@@ -131,9 +130,6 @@ export function initializeApp(options: InitializeAppOptions) {
   theStaticRoot = options.staticRoot ?? '';
   // When we are in Alpha or in dev the static root already points to an internal directory
   theStaticRoot = theStaticRoot === '/' ? '' : theStaticRoot;
-  initializeSyntaxHighlighter({
-    keywordLanguage: options.keywordLanguage,
-  });
   initializeCopyToClipboard();
 
   // Close the dropdown menu if the user clicks outside of it
@@ -453,7 +449,6 @@ export function stopit() {
       // This gets a bit complex: if we do have some input modal waiting, fake submit it and hide it
       // This way the Promise is no longer "waiting" and can no longer mess with our next program
       if ($('#ask-modal').is(":visible")) {
-        $('#ask-modal form').submit();
         $('#ask-modal').hide();
       }
   }

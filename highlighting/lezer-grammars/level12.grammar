@@ -47,9 +47,9 @@ If { ifs+ Condition }
 Else { elses+ } 
 
 Condition { 
-    EqualityCheck { Text (is+ | Op<"=">) (Expression | pressed+) } |
-    InListCheck { Text ins+  Text } |
-    NotInListCheck { Text not_in+  Text }
+    EqualityCheck { (String | Text | Number) (is+ | Op<"=">) (Expression | pressed+) } |
+    InListCheck { (String | Text | Number) ins+ Text } |
+    NotInListCheck { (String | Text | Number) not_in+ Text }
 }
 
 Repeat { repeat+ (Number | Text) times+ }
