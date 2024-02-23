@@ -206,11 +206,11 @@ adventures:
                     Regarde <a href="https://fr.slideshare.net/smt786/our-brun-dismoi">l'histoire</a> si tu ne la connais pas et assure-toi ensuite de la programmer comme dans le livre.
                 example_code: "```\nanimaux = _ , _ , _ \n{print} \"Ours brun, Ours brun\"\n{print} \"Que vois-tu ?\"\n```\n"
             12:
-                story_text: "Dans ce niveau des guillemets sont nécessaires pour enregistrer plusieurs mots dans une variable.\n\n### Exercice\n\nPrenez une histoire de l'un des niveaux précédents, n'importe lequel. Faites en sorte que les guillemets soient bien placées."
+                story_text: "À ce niveau des guillemets sont nécessaires pour enregistrer plusieurs mots dans une variable.\n\n### Exercice\n\nPrends une histoire de l'un des niveaux précédents, n'importe laquelle. Fait en sorte que les guillemets soient bien placés."
                 example_code: |
                     ```
-                    name = 'The Queen of England'
-                    {print} name ' was eating a piece of cake, when suddenly...'
+                    nom = "La reine d'Angleterre"
+                    {print} nom " était en train de manger une part de gâteau, quand soudain…"
                     ```
             13:
                 story_text: |
@@ -1859,17 +1859,17 @@ adventures:
                     ```
             12:
                 story_text: |-
-                    A partir du niveau 12, vous devrez également utiliser les guillemets dans les listes, avant et après chaque élément.
+                    À partir du niveau 12, tu dois également utiliser les guillemets dans les listes, autour de chaque élément.
 
                     ### Exercice
-                    Ajoutez deux prédictions à la liste
+                    Ajoute deux prédictions à la liste
                 example_code: |
                     ```
-                    fortunes = 'you will be rich', 'you will fall in love', 'you will slip on a banana peel'
-                    {print} 'I will take a look in my crystall ball for your future.'
-                    {print} 'I see... I see...'
+                    prédictions = "Tu vas glisser sur une peau de banane", _
+                    {print} "Je regarde le futur dans ma boule de cristal"
+                    {print} 'Je vois… je vois…'
                     {sleep}
-                    {print} fortunes {at} {random}
+                    {print} prédictions {at} {random}
                     ```
     functions:
         name: fonctions
@@ -1878,36 +1878,36 @@ adventures:
         levels:
             12:
                 story_text: |
-                    Dans ce niveau, vous apprendrez à utiliser les **fonctions**. Une fonction est un bloc de code que vous pouvez facilement utiliser plusieurs fois. L'utilisation de fonctions nous aide à organiser des morceaux de code que nous pouvons utiliser encore et encore.
-                    Pour créer une fonction, utilisez `{define}` et donnez un nom à la fonction. Mettez ensuite toutes les lignes souhaitées dans la fonction dans un bloc en retrait sous la ligne `{define}`.
-                    Laissez une ligne vide dans votre code pour le rendre joli et soigné. Bon travail ! Vous avez créé une fonction !
+                    À ce niveau, tu vas apprendre comment utiliser les **fonctions**. Une fonction est un bloc de code que tu peux facilement réutiliser. Utiliser les fonctions nous aide à organiser du code que nous pouvons réutiliser encore et encore.
+                    Pour créer une fonction, utilise `{define}` et donne un nom à la fonction. Ensuite, ajoute toutes les lignes que tu veux dans la fonction dans un bloc indenté, sous la ligne du `{define}`.
+                    Laisse une ligne vide après le bloc pour rendre ton code beau et propre. Bon travail ! tu as créé une fonction !
 
-                    Désormais, chaque fois que nous avons besoin de ce bloc de code, nous utilisons simplement <code>{call}</code> avec le nom de la fonction pour l'appeler ! Nous n’avons pas besoin de retaper ce bloc de code.
+                    Maintenant, quand nous aurons besoin de ce bloc de code, nous pourrons juste appeler la fonction avec `{call}` suivi du nom de la fonction ! Nous n'aurons plus besoins d'écrire ce bloc a nouveau.
 
-                    Découvrez cet exemple de code d'un jeu de Twister. La fonction 'tourne' contient un bloc de code qui choisit quel membre doit aller où.
+                    Regarde cet exemple de code du jeu Twister. La fonction « joue_un_tour » contient un bloc de code qui choisi quel membre doit aller où.
 
-                    ### Exercice 1
-                    Terminez ce code en définissant les deux variables membre_choisi et couleur_choisie
-                    Ensuite, choisissez combien de fois, vous souhaitez appeler la fonction pour faire tourner le twister.
+                    ### Exercice
+                    Termine ce code en complétant les lignes des deux variables `membre_choisi` et `couleur_choisi`.
+                    Ensuite, choisi combien de fois tu veux appeler la fonction pour faire des tours de Twister.
 
                     ### Exercice 2
-                    Améliorez votre code en ajoutant une variable appelée « personnes ». Utilisez la variable pour donner à tous les joueurs leur propre commande dans le jeu.
-                    Par exemple : « Ahmed, main droite sur vert » ou « Jessica, pied gauche sur jaune ».
+                    Améliore ton code en ajoutant une variable « personnes ». Utilise la variable pour distribuer aux joueurs et joueuses leur instruction de jeu personnelle.
+                    Par exemple : « Ahmed, main droit`{define}`e sur vert » ou « Jessica, pied gauche sur jaune ».
                 example_code: |
                     ```
-                    cotes = 'gauche', 'droite'
-                    membres = 'main', 'pied'
-                    couleurs = 'rouge', 'bleu', 'vert', 'jaune'
+                    cotés = "gauche", "droit(e)"
+                    membres = "main", "pied"
+                    couleurs = "rouge", "bleu", "vert", "jaune"
 
-                    {define} tourne
-                        cote _choisi = cotes {at} {random}
-                        membre_choisi = membres {at} {random}
-                        couleur_choisie = couleurs {at} {random}
-                        {print} cote_choisi ' ' membre_choisi ' sur ' couleur_choisie
+                    {define} joue_un_tour
+                        coté_choisi = cotés {at} {random}
+                        membre_choisi = membres _
+                        couleur_choisie = couleurs _
+                        {print} membre_choisi " " coté_choisi " sur " couleur_choisie
 
-                    {print} "Jouons à une partie de Twister !"
+                    {print} "Jouons au Twister !"
                     {for} i {in} {range} 1 to _
-                        {call} tourne
+                        {call} joue_un_tour
                         {sleep} 2
                     ```
             13:
@@ -3133,7 +3133,7 @@ adventures:
                 example_code_4: |
                     ```
                     score = 25
-                    {print} "Tu as " score
+                    {print} "Tu as eu " score " points"
                     ```
     random_command:
         name: '{random}'
