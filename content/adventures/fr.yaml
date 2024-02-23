@@ -2508,19 +2508,19 @@ adventures:
             12:
                 story_text: |-
                     **Nombres décimaux**
-                    Jusqu'à présent, Hedy ne te permettait pas d'utiliser les nombres décimaux comme 1.5, mais maintenant nous les autorisons. Attention, les langages de programmation utilisent le point pour les nombres décimaux et non la virgule.
+                    Jusqu'à présent, Hedy ne te permettait pas d'utiliser les nombres décimaux comme 1.5, mais maintenant nous les autorisons. Attention, les langages de programmation utilisent le point `.` pour les nombres décimaux et non la virgule.
                 example_code: |
                     ```
-                    {print} "Deux et demi plus deux et demi fait…"
+                    {print} "Deux et demi plus deux et demi font…"
                     {print} 2.5 + 2.5
                     ```
                 story_text_2: |-
-                    **Maths with words**
-                    In this level you can also do addition with words like this:
+                    **Les maths avec des mots**
+                    À ce niveau, tu peux aussi additionner les mots comme ceci :
                 example_code_2: |
                     ```
-                    a = 'Hello '
-                    b = 'world!'
+                    a = "Salut "
+                    b = "le monde !"
                     {print} a + b
                     ```
     music:
@@ -4721,21 +4721,21 @@ adventures:
 
                     <div class="w-full flex flex-row gap-2">
                     Ruche (6) <img src="https://github.com/hedyorg/hedy/assets/80678586/ec02469c-907b-4695-9382-d39a8f3c00ec" width="200">
-                    Fan (5)  <img src="https://github.com/hedyorg/hedy/assets/80678586/a032ab35-c70c-4e67-9b4e-036a03ecce87" width="200">
+                    VAentilateur (5)  <img src="https://github.com/hedyorg/hedy/assets/80678586/a032ab35-c70c-4e67-9b4e-036a03ecce87" width="200">
                     </div>
                 example_code: |
-                    Hint Beehive:
+                    Aide pour la ruche :
                     ```
-                    {for} amount_of_combs {in} {range} 1 {to} _
-                        {for} walls_of_one_comb {in} {range} 1 {to} _
+                    {for} nombre_d_alveole {in} {range} 1 {to} _
+                        {for} mur_d_une_alveole {in} {range} 1 {to} _
                             {forward} _
                             {turn} _
                         {forward} _
                         {turn} _
                     ```
 
-                    Hint Fan:
-                    Start out like the fan you made in level 7. Or take a peak at the hint for the beehive, because the codes are very similar.
+                    Aide pour le ventilateur :
+                    Commence comme pour le ventilateur que tu as fait au niveau 7. Ou inspire-toi de l'aide pour la ruche, le code est très similaire.
             12:
                 story_text: |
                     ### Exercice
