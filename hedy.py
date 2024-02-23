@@ -2034,50 +2034,22 @@ else:{self.add_debug_breakpoint()}
         button_name = self.process_variable(args[0], meta.line)
         return f"""create_button({button_name})"""
 
-    def make_ifpressed_command(self, command, button=False, add_command_prefix=True):
-        if button:
-            command = f"""\
-  if event.type == pygame.USEREVENT:
-{ConvertToPython.indent(command, 4)}
-    # End of PyGame Event Handler"""
-        else:
-            command = f"""\
-  if event.type == pygame.KEYDOWN:
-{ConvertToPython.indent(command, 4)}
-    # End of PyGame Event Handler"""
+    def make_ifpressed_command(self, key, if_body, else_body):
+        functions = f"""\
+def if_body():
+{ConvertToPython.indent(if_body)}
+def else_body():
+{ConvertToPython.indent(else_body)}"""
 
-        if add_command_prefix:
-            return UsesPyGame.command_prefix + "\n" + command
-        else:
-            return "\n" + command
+        if_pressed_extension = f"""\
+extensions.if_pressed('{key}', if_body, else_body)"""
+
+        return (f"""\
+{functions}
+{if_pressed_extension}""")
 
     def ifpressed_else(self, meta, args):
-        var_or_button = args[0]
-        if self.is_variable(var_or_button, meta.line):
-            return self.make_ifpressed_command(f"""\
-if event.key == {var_or_button}:
-{ConvertToPython.indent(args[1])}
-  break
-else:
-{ConvertToPython.indent(args[2])}
-  break""", button=False)
-        elif len(var_or_button) > 1:
-            button_name = self.process_variable(args[0], meta.line)
-            return self.make_ifpressed_command(f"""\
-if event.key == {button_name}:
-{ConvertToPython.indent(args[1])}
-  break
-else:
-{ConvertToPython.indent(args[2])}
-  break""", button=True)
-        else:
-            return self.make_ifpressed_command(f"""\
-if event.unicode == '{args[0]}':
-{ConvertToPython.indent(args[1])}
-  break
-else:
-{ConvertToPython.indent(args[2])}
-  break""", button=False)
+        return self.make_ifpressed_command(args[0], args[1], args[2])
 
 
 @v_args(meta=True)
