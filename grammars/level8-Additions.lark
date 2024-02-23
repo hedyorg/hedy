@@ -14,7 +14,7 @@ error_ifpressed_missing_else: ifpressed
 
 // from level 8 on if is implemented slightly differently
 elses: _EOL (_SPACE)* _ELSE (_SPACE)* _EOL (_SPACE command) (_EOL _SPACE command)* _EOL? _END_BLOCK
-ifpressed_elses: elses
+ifpressed_elses: _EOL (_SPACE)* _ELSE (_SPACE)* _EOL (_SPACE command) (_EOL _SPACE command)* _EOL? _END_BLOCK
 //'if' cannot be used in Python, hence the name of the rule is 'ifs'
 ifs: _IF condition _EOL (_SPACE command) (_EOL _SPACE command)* _EOL? _END_BLOCK
 
