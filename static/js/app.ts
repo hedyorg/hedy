@@ -1,4 +1,3 @@
-import { initializeSyntaxHighlighter } from './syntaxModesRules';
 import { ClientMessages } from './client-messages';
 import { modal, error, success, tryCatchPopup } from './modal';
 import JSZip from "jszip";
@@ -137,9 +136,6 @@ export function initializeApp(options: InitializeAppOptions) {
   theStaticRoot = options.staticRoot ?? '';
   // When we are in Alpha or in dev the static root already points to an internal directory
   theStaticRoot = theStaticRoot === '/' ? '' : theStaticRoot;
-  initializeSyntaxHighlighter({
-    keywordLanguage: options.keywordLanguage,
-  });
   initializeCopyToClipboard();
 
   // Close the dropdown menu if the user clicks outside of it
