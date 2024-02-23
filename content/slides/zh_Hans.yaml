@@ -45,7 +45,7 @@ levels:
             text: 输出也可以是一个图形。
             code: |-
                 {forward} 100
-                {turn} 左
+                {turn} {left}
     1:
         1:
             header: 欢迎来到第1级!
@@ -116,7 +116,7 @@ levels:
             text: '`{turn}` 用于让海龟向左或向右转。'
             code: |-
                 {forward} 50
-                {turn} 左
+                {turn} {left}
         12:
             header: 调试
             text: 调试代码意味着消除代码中的错误。 我们一起调试一下这段代码。 单击瓢虫按钮启动调试器。
@@ -1016,8 +1016,8 @@ levels:
                 new_price = {call} calculate_new_price {with} old_price, discount
                 {print} '新价格为 ' new_price ' 美元'
         6:
-            header: Debugging
-            text: Let's debug this code!
+            header: 调试
+            text: 让我们调试这段代码！
             code: |-
                 item = 'not bought'
                 {print} '我想买这件商品'

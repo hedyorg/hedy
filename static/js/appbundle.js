@@ -4087,6 +4087,7 @@ var hedyApp = (() => {
     closeContainingModal: () => closeContainingModal,
     comeBackHereAfterLogin: () => comeBackHereAfterLogin,
     confetti_cannon: () => confetti_cannon,
+    convert: () => convert2,
     copy_join_link: () => copy_join_link,
     copy_to_clipboard: () => copy_to_clipboard,
     create_accounts: () => create_accounts,
@@ -4188,12259 +4189,6 @@ var hedyApp = (() => {
     update_user_tags: () => update_user_tags,
     viewProgramLink: () => viewProgramLink
   });
-
-  // highlighting/highlighting.json
-  var highlighting_default = [
-    {
-      name: "level1",
-      rules: {
-        start: [
-          {
-            regex: "(^| )(_)(?= |$)",
-            token: [
-              "text",
-              "invalid"
-            ],
-            next: "start"
-          },
-          {
-            regex: "_\\?_",
-            token: "invalid",
-            next: "start"
-          },
-          {
-            regex: "#.*$",
-            token: "comment",
-            next: "start"
-          },
-          {
-            regex: "(^ *)(__ask__)",
-            token: [
-              "text",
-              "keyword"
-            ],
-            next: "value",
-            unicode: true
-          },
-          {
-            regex: "(^ *)(__print__)",
-            token: [
-              "text",
-              "keyword"
-            ],
-            next: "value",
-            unicode: true
-          },
-          {
-            regex: "(^ *)(__echo__)",
-            token: [
-              "text",
-              "keyword"
-            ],
-            next: "value",
-            unicode: true
-          },
-          {
-            regex: "(^ *)(__play__)",
-            token: [
-              "text",
-              "keyword"
-            ],
-            next: "value",
-            unicode: true
-          },
-          {
-            regex: "(^ *)(__forward__)",
-            token: [
-              "text",
-              "keyword"
-            ],
-            next: "value",
-            unicode: true
-          },
-          {
-            regex: "(^ *)(__turn__)",
-            token: [
-              "text",
-              "keyword"
-            ],
-            next: "direction",
-            unicode: true
-          },
-          {
-            regex: "(^ *)(__color__)",
-            token: [
-              "text",
-              "keyword"
-            ],
-            next: "color",
-            unicode: true
-          }
-        ],
-        value: [
-          {
-            regex: "(^| )(_)(?= |$)",
-            token: [
-              "text",
-              "invalid"
-            ],
-            next: "value"
-          },
-          {
-            regex: "_\\?_",
-            token: "invalid",
-            next: "value"
-          },
-          {
-            regex: "#.*$",
-            token: "comment",
-            next: "start"
-          },
-          {
-            regex: "(^|$)",
-            token: [
-              "text"
-            ],
-            next: "start"
-          }
-        ],
-        color: [
-          {
-            regex: "(^| )(_)(?= |$)",
-            token: [
-              "text",
-              "invalid"
-            ],
-            next: "color"
-          },
-          {
-            regex: "_\\?_",
-            token: "invalid",
-            next: "color"
-          },
-          {
-            regex: "#.*$",
-            token: "comment",
-            next: "start"
-          },
-          {
-            regex: "(^|$)",
-            token: [
-              "text"
-            ],
-            next: "start"
-          },
-          {
-            regex: "(__black__|__gray__|__white__|__green__|__blue__|__purple__|__brown__|__pink__|__red__|__orange__|__yellow__)",
-            token: [
-              "text"
-            ],
-            unicode: true
-          }
-        ],
-        direction: [
-          {
-            regex: "(^| )(_)(?= |$)",
-            token: [
-              "text",
-              "invalid"
-            ],
-            next: "direction"
-          },
-          {
-            regex: "_\\?_",
-            token: "invalid",
-            next: "direction"
-          },
-          {
-            regex: "#.*$",
-            token: "comment",
-            next: "start"
-          },
-          {
-            regex: "(^|$)",
-            token: [
-              "text"
-            ],
-            next: "start"
-          },
-          {
-            regex: "(__right__|__left__)",
-            token: [
-              "text"
-            ],
-            unicode: true
-          }
-        ]
-      }
-    },
-    {
-      name: "level2",
-      rules: {
-        start: [
-          {
-            regex: "(^| )(_)(?= |$)",
-            token: [
-              "text",
-              "invalid"
-            ],
-            next: "start"
-          },
-          {
-            regex: "_\\?_",
-            token: "invalid",
-            next: "start"
-          },
-          {
-            regex: "#.*$",
-            token: "comment",
-            next: "start"
-          },
-          {
-            regex: "(^ *)(__print__)",
-            token: [
-              "text",
-              "keyword"
-            ],
-            next: "value",
-            unicode: true
-          },
-          {
-            regex: "(^ *)([\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}_\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\xB7]+)( +)(__is__)( +)(__ask__)",
-            token: [
-              "text",
-              "text",
-              "text",
-              "keyword",
-              "text",
-              "keyword"
-            ],
-            next: "value",
-            unicode: true
-          },
-          {
-            regex: "(^ *)([\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}_\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\xB7]+)( +)(__is__)",
-            token: [
-              "text",
-              "text",
-              "text",
-              "keyword"
-            ],
-            next: "value",
-            unicode: true
-          },
-          {
-            regex: "(^ *)(__sleep__)",
-            token: [
-              "text",
-              "keyword"
-            ],
-            next: "value",
-            unicode: true
-          },
-          {
-            regex: "(^ *)(__forward__)",
-            token: [
-              "text",
-              "keyword"
-            ],
-            next: "value",
-            unicode: true
-          },
-          {
-            regex: "(^ *)(__turn__)",
-            token: [
-              "text",
-              "keyword"
-            ],
-            next: "value",
-            unicode: true
-          },
-          {
-            regex: "(^ *)(__color__)",
-            token: [
-              "text",
-              "keyword"
-            ],
-            next: "value",
-            unicode: true
-          }
-        ],
-        value: [
-          {
-            regex: "(^| )(_)(?= |$)",
-            token: [
-              "text",
-              "invalid"
-            ],
-            next: "value"
-          },
-          {
-            regex: "_\\?_",
-            token: "invalid",
-            next: "value"
-          },
-          {
-            regex: "#.*$",
-            token: "comment",
-            next: "start"
-          },
-          {
-            regex: "(^|$)",
-            token: [
-              "text"
-            ],
-            next: "start"
-          },
-          {
-            regex: "(__black__|__blue__|__brown__|__gray__|__green__|__orange__|__pink__|__purple__|__red__|__white__|__yellow__)",
-            token: [
-              "text"
-            ],
-            unicode: true
-          }
-        ]
-      }
-    },
-    {
-      name: "level3",
-      rules: {
-        start: [
-          {
-            regex: "(^| )(_)(?= |$)",
-            token: [
-              "text",
-              "invalid"
-            ],
-            next: "start"
-          },
-          {
-            regex: "_\\?_",
-            token: "invalid",
-            next: "start"
-          },
-          {
-            regex: "#.*$",
-            token: "comment",
-            next: "start"
-          },
-          {
-            regex: "(^ *)([\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}_\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\xB7]+)( +)(__is__)( *)(__ask__)",
-            token: [
-              "text",
-              "text",
-              "text",
-              "keyword",
-              "text",
-              "keyword"
-            ],
-            next: "valueExpr",
-            unicode: true
-          },
-          {
-            regex: "(^ *)([\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}_\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\xB7]+)( +)(__is__)",
-            token: [
-              "text",
-              "text",
-              "text",
-              "keyword"
-            ],
-            next: "value",
-            unicode: true
-          },
-          {
-            regex: "(^ *)(__print__)",
-            token: [
-              "text",
-              "keyword"
-            ],
-            next: "valueExpr",
-            unicode: true
-          },
-          {
-            regex: "(^ *)(__turn__)",
-            token: [
-              "text",
-              "keyword"
-            ],
-            next: "valueExpr",
-            unicode: true
-          },
-          {
-            regex: "(^ *)(__sleep__)",
-            token: [
-              "text",
-              "keyword"
-            ],
-            next: "valueExpr",
-            unicode: true
-          },
-          {
-            regex: "(^ *)(__forward__)",
-            token: [
-              "text",
-              "keyword"
-            ],
-            next: "valueExpr",
-            unicode: true
-          },
-          {
-            regex: "(^ *)(__add__)",
-            token: [
-              "text",
-              "keyword"
-            ],
-            next: "valAdd",
-            unicode: true
-          },
-          {
-            regex: "(^ *)(__remove__)",
-            token: [
-              "text",
-              "keyword"
-            ],
-            next: "valRemove",
-            unicode: true
-          },
-          {
-            regex: "(^ *)(__color__)",
-            token: [
-              "text",
-              "keyword"
-            ],
-            next: "value",
-            unicode: true
-          }
-        ],
-        value: [
-          {
-            regex: "(^| )(_)(?= |$)",
-            token: [
-              "text",
-              "invalid"
-            ],
-            next: "value"
-          },
-          {
-            regex: "_\\?_",
-            token: "invalid",
-            next: "value"
-          },
-          {
-            regex: "#.*$",
-            token: "comment",
-            next: "start"
-          },
-          {
-            regex: "(^|$)",
-            token: [
-              "text"
-            ],
-            next: "start"
-          },
-          {
-            regex: "(^| )(__at__)( +)(__random__)",
-            token: [
-              "text",
-              "keyword",
-              "keyword",
-              "keyword"
-            ],
-            unicode: true
-          },
-          {
-            regex: "(^| )(__at__)(?![\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}_\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\xB7])",
-            token: [
-              "text",
-              "keyword"
-            ],
-            unicode: true
-          },
-          {
-            regex: "(__comma__)",
-            token: [
-              "keyword"
-            ],
-            unicode: true
-          },
-          {
-            regex: "(__black__|__blue__|__brown__|__gray__|__green__|__orange__|__pink__|__purple__|__red__|__white__|__yellow__)",
-            token: [
-              "text"
-            ],
-            unicode: true
-          }
-        ],
-        valueExpr: [
-          {
-            regex: "(^| )(_)(?= |$)",
-            token: [
-              "text",
-              "invalid"
-            ],
-            next: "valueExpr"
-          },
-          {
-            regex: "_\\?_",
-            token: "invalid",
-            next: "valueExpr"
-          },
-          {
-            regex: "#.*$",
-            token: "comment",
-            next: "start"
-          },
-          {
-            regex: "(^|$)",
-            token: [
-              "text"
-            ],
-            next: "start"
-          },
-          {
-            regex: "(^| )(__at__)( +)(__random__)",
-            token: [
-              "text",
-              "keyword",
-              "keyword",
-              "keyword"
-            ],
-            unicode: true
-          },
-          {
-            regex: "(^| )(__at__)(?![\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}_\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\xB7])",
-            token: [
-              "text",
-              "keyword"
-            ],
-            unicode: true
-          }
-        ],
-        valAdd: [
-          {
-            regex: "(^| )(_)(?= |$)",
-            token: [
-              "text",
-              "invalid"
-            ],
-            next: "valAdd"
-          },
-          {
-            regex: "_\\?_",
-            token: "invalid",
-            next: "valAdd"
-          },
-          {
-            regex: "#.*$",
-            token: "comment",
-            next: "start"
-          },
-          {
-            regex: "(^|$)",
-            token: [
-              "text"
-            ],
-            next: "start"
-          },
-          {
-            regex: "(^| )(__to_list__)(?![\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}_\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\xB7])",
-            token: [
-              "text",
-              "keyword"
-            ],
-            next: "valueTo",
-            unicode: true
-          },
-          {
-            regex: "(__black__|__blue__|__brown__|__gray__|__green__|__orange__|__pink__|__purple__|__red__|__white__|__yellow__)",
-            token: [
-              "text"
-            ],
-            unicode: true
-          }
-        ],
-        valueTo: [
-          {
-            regex: "(^| )(_)(?= |$)",
-            token: [
-              "text",
-              "invalid"
-            ],
-            next: "valueTo"
-          },
-          {
-            regex: "_\\?_",
-            token: "invalid",
-            next: "valueTo"
-          },
-          {
-            regex: "#.*$",
-            token: "comment",
-            next: "start"
-          },
-          {
-            regex: "(^|$)",
-            token: [
-              "text"
-            ],
-            next: "start"
-          }
-        ],
-        valRemove: [
-          {
-            regex: "(^| )(_)(?= |$)",
-            token: [
-              "text",
-              "invalid"
-            ],
-            next: "valRemove"
-          },
-          {
-            regex: "_\\?_",
-            token: "invalid",
-            next: "valRemove"
-          },
-          {
-            regex: "#.*$",
-            token: "comment",
-            next: "start"
-          },
-          {
-            regex: "(^|$)",
-            token: [
-              "text"
-            ],
-            next: "start"
-          },
-          {
-            regex: "(^| )(__from__)(?![\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}_\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\xB7])",
-            token: [
-              "text",
-              "keyword"
-            ],
-            next: "valueFrom",
-            unicode: true
-          },
-          {
-            regex: "(__black__|__blue__|__brown__|__gray__|__green__|__orange__|__pink__|__purple__|__red__|__white__|__yellow__)",
-            token: [
-              "text"
-            ],
-            unicode: true
-          }
-        ],
-        valueFrom: [
-          {
-            regex: "(^| )(_)(?= |$)",
-            token: [
-              "text",
-              "invalid"
-            ],
-            next: "valueFrom"
-          },
-          {
-            regex: "_\\?_",
-            token: "invalid",
-            next: "valueFrom"
-          },
-          {
-            regex: "#.*$",
-            token: "comment",
-            next: "start"
-          },
-          {
-            regex: "(^|$)",
-            token: [
-              "text"
-            ],
-            next: "start"
-          }
-        ]
-      }
-    },
-    {
-      name: "level4",
-      rules: {
-        start: [
-          {
-            regex: "(^| )(_)(?= |$)",
-            token: [
-              "text",
-              "invalid"
-            ],
-            next: "start"
-          },
-          {
-            regex: "_\\?_",
-            token: "invalid",
-            next: "start"
-          },
-          {
-            regex: "#.*$",
-            token: "comment",
-            next: "start"
-          },
-          {
-            regex: "(^ *)([\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}_\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\xB7]+)( +)(__is__)( *)(__ask__)",
-            token: [
-              "text",
-              "text",
-              "text",
-              "keyword",
-              "text",
-              "keyword"
-            ],
-            next: "valueExpr",
-            unicode: true
-          },
-          {
-            regex: "(^ *)([\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}_\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\xB7]+)( +)(__is__)",
-            token: [
-              "text",
-              "text",
-              "text",
-              "keyword"
-            ],
-            next: "value",
-            unicode: true
-          },
-          {
-            regex: "(^ *)(__print__)",
-            token: [
-              "text",
-              "keyword"
-            ],
-            next: "valueExpr",
-            unicode: true
-          },
-          {
-            regex: "(^ *)(__turn__)",
-            token: [
-              "text",
-              "keyword"
-            ],
-            next: "valueSimple",
-            unicode: true
-          },
-          {
-            regex: "(^ *)(__sleep__)",
-            token: [
-              "text",
-              "keyword"
-            ],
-            next: "valueSimple",
-            unicode: true
-          },
-          {
-            regex: "(^ *)(__forward__)",
-            token: [
-              "text",
-              "keyword"
-            ],
-            next: "valueSimple",
-            unicode: true
-          },
-          {
-            regex: "(^ *)(__color__)",
-            token: [
-              "text",
-              "keyword"
-            ],
-            next: "valueSimple",
-            unicode: true
-          },
-          {
-            regex: "(^ *)(__add__)",
-            token: [
-              "text",
-              "keyword"
-            ],
-            next: "valAdd",
-            unicode: true
-          },
-          {
-            regex: "(^ *)(__remove__)",
-            token: [
-              "text",
-              "keyword"
-            ],
-            next: "valRemove",
-            unicode: true
-          },
-          {
-            regex: "(^ *)(__clear__)",
-            token: [
-              "text",
-              "event"
-            ],
-            unicode: true
-          }
-        ],
-        value: [
-          {
-            regex: "(^| )(_)(?= |$)",
-            token: [
-              "text",
-              "invalid"
-            ],
-            next: "value"
-          },
-          {
-            regex: "_\\?_",
-            token: "invalid",
-            next: "value"
-          },
-          {
-            regex: "#.*$",
-            token: "comment",
-            next: "start"
-          },
-          {
-            regex: "(^|$)",
-            token: [
-              "text"
-            ],
-            next: "start"
-          },
-          {
-            regex: "(^| )(__at__)( +)(__random__)",
-            token: [
-              "text",
-              "keyword",
-              "keyword",
-              "keyword"
-            ],
-            unicode: true
-          },
-          {
-            regex: "(^| )(__at__)(?![\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}_\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\xB7])",
-            token: [
-              "text",
-              "keyword"
-            ],
-            unicode: true
-          },
-          {
-            regex: "(__comma__)",
-            token: [
-              "keyword"
-            ],
-            unicode: true
-          },
-          {
-            regex: "(__black__|__blue__|__brown__|__gray__|__green__|__orange__|__pink__|__purple__|__red__|__white__|__yellow__)",
-            token: [
-              "text"
-            ],
-            unicode: true
-          }
-        ],
-        valueExpr: [
-          {
-            regex: "(^| )(_)(?= |$)",
-            token: [
-              "text",
-              "invalid"
-            ],
-            next: "valueExpr"
-          },
-          {
-            regex: "_\\?_",
-            token: "invalid",
-            next: "valueExpr"
-          },
-          {
-            regex: "#.*$",
-            token: "comment",
-            next: "start"
-          },
-          {
-            regex: "(^|$)",
-            token: [
-              "text"
-            ],
-            next: "start"
-          },
-          {
-            regex: "(^| )(__at__)( +)(__random__)",
-            token: [
-              "text",
-              "keyword",
-              "keyword",
-              "keyword"
-            ],
-            unicode: true
-          },
-          {
-            regex: "(^| )(__at__)(?![\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}_\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\xB7])",
-            token: [
-              "text",
-              "keyword"
-            ],
-            unicode: true
-          },
-          {
-            regex: '"[^"]*"',
-            token: "constant.character",
-            unicode: true
-          },
-          {
-            regex: "'[^']*'",
-            token: "constant.character",
-            unicode: true
-          },
-          {
-            regex: "\xAB[^\xBB]*\xBB",
-            token: "constant.character",
-            unicode: true
-          },
-          {
-            regex: '"[^"]*$',
-            token: "text",
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "'[^']*$",
-            token: "text",
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "\xAB[^\xBB]*$",
-            token: "text",
-            next: "start",
-            unicode: true
-          }
-        ],
-        valueSimple: [
-          {
-            regex: "(^| )(_)(?= |$)",
-            token: [
-              "text",
-              "invalid"
-            ],
-            next: "valueSimple"
-          },
-          {
-            regex: "_\\?_",
-            token: "invalid",
-            next: "valueSimple"
-          },
-          {
-            regex: "#.*$",
-            token: "comment",
-            next: "start"
-          },
-          {
-            regex: "(^|$)",
-            token: [
-              "text"
-            ],
-            next: "start"
-          },
-          {
-            regex: "(^| )(__at__)( +)(__random__)",
-            token: [
-              "text",
-              "keyword",
-              "keyword",
-              "keyword"
-            ],
-            unicode: true
-          },
-          {
-            regex: "(^| )(__at__)(?![\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}_\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\xB7])",
-            token: [
-              "text",
-              "keyword"
-            ],
-            unicode: true
-          },
-          {
-            regex: "(__black__|__blue__|__brown__|__gray__|__green__|__orange__|__pink__|__purple__|__red__|__white__|__yellow__)",
-            token: [
-              "text"
-            ],
-            unicode: true
-          }
-        ],
-        valAdd: [
-          {
-            regex: "(^| )(_)(?= |$)",
-            token: [
-              "text",
-              "invalid"
-            ],
-            next: "valAdd"
-          },
-          {
-            regex: "_\\?_",
-            token: "invalid",
-            next: "valAdd"
-          },
-          {
-            regex: "#.*$",
-            token: "comment",
-            next: "start"
-          },
-          {
-            regex: "(^|$)",
-            token: [
-              "text"
-            ],
-            next: "start"
-          },
-          {
-            regex: "(^| )(__to_list__)(?![\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}_\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\xB7])",
-            token: [
-              "text",
-              "keyword"
-            ],
-            next: "valueTo",
-            unicode: true
-          },
-          {
-            regex: "(__black__|__blue__|__brown__|__gray__|__green__|__orange__|__pink__|__purple__|__red__|__white__|__yellow__)",
-            token: [
-              "text"
-            ],
-            unicode: true
-          }
-        ],
-        valueTo: [
-          {
-            regex: "(^| )(_)(?= |$)",
-            token: [
-              "text",
-              "invalid"
-            ],
-            next: "valueTo"
-          },
-          {
-            regex: "_\\?_",
-            token: "invalid",
-            next: "valueTo"
-          },
-          {
-            regex: "#.*$",
-            token: "comment",
-            next: "start"
-          },
-          {
-            regex: "(^|$)",
-            token: [
-              "text"
-            ],
-            next: "start"
-          }
-        ],
-        valRemove: [
-          {
-            regex: "(^| )(_)(?= |$)",
-            token: [
-              "text",
-              "invalid"
-            ],
-            next: "valRemove"
-          },
-          {
-            regex: "_\\?_",
-            token: "invalid",
-            next: "valRemove"
-          },
-          {
-            regex: "#.*$",
-            token: "comment",
-            next: "start"
-          },
-          {
-            regex: "(^|$)",
-            token: [
-              "text"
-            ],
-            next: "start"
-          },
-          {
-            regex: "(^| )(__from__)(?![\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}_\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\xB7])",
-            token: [
-              "text",
-              "keyword"
-            ],
-            next: "valueFrom",
-            unicode: true
-          },
-          {
-            regex: "(__black__|__blue__|__brown__|__gray__|__green__|__orange__|__pink__|__purple__|__red__|__white__|__yellow__)",
-            token: [
-              "text"
-            ],
-            unicode: true
-          }
-        ],
-        valueFrom: [
-          {
-            regex: "(^| )(_)(?= |$)",
-            token: [
-              "text",
-              "invalid"
-            ],
-            next: "valueFrom"
-          },
-          {
-            regex: "_\\?_",
-            token: "invalid",
-            next: "valueFrom"
-          },
-          {
-            regex: "#.*$",
-            token: "comment",
-            next: "start"
-          },
-          {
-            regex: "(^|$)",
-            token: [
-              "text"
-            ],
-            next: "start"
-          }
-        ]
-      }
-    },
-    {
-      name: "level5",
-      rules: {
-        start: [
-          {
-            regex: "(^| )(__is__)( +)(__ask__)",
-            token: [
-              "text",
-              "keyword",
-              "text",
-              "keyword"
-            ]
-          },
-          {
-            regex: "#.*$",
-            token: "comment",
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: '"[^"]*"',
-            token: "constant.character",
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "'[^']*'",
-            token: "constant.character",
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "\xAB[^\xBB]*\xBB",
-            token: "constant.character",
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: '"[^"]*$',
-            token: "text",
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "'[^']*$",
-            token: "text",
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "\xAB[^\xBB]*$",
-            token: "text",
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "_\\?_",
-            token: "invalid",
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(^| )(_)(?= |$)",
-            token: [
-              "text",
-              "invalid"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(^| )(__is__)(?![\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}_\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\xB7])",
-            token: [
-              "text",
-              "keyword"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(^| )(__at__)(?![\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}_\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\xB7])",
-            token: [
-              "text",
-              "keyword"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(^| )(__add__)(?![\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}_\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\xB7])",
-            token: [
-              "text",
-              "keyword"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(^| )(__to_list__)(?![\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}_\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\xB7])",
-            token: [
-              "text",
-              "keyword"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(^| )(__remove__)(?![\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}_\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\xB7])",
-            token: [
-              "text",
-              "keyword"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(^| )(__from__)(?![\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}_\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\xB7])",
-            token: [
-              "text",
-              "keyword"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(^| )(__in__)(?![\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}_\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\xB7])",
-            token: [
-              "text",
-              "keyword"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(^| )(__not_in__)(?![\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}_\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\xB7])",
-            token: [
-              "text",
-              "keyword"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(^| )(__if__)(?![\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}_\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\xB7])",
-            token: [
-              "text",
-              "keyword"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(^| )(__else__)(?![\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}_\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\xB7])",
-            token: [
-              "text",
-              "keyword"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(^| )(__color__)(?![\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}_\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\xB7])",
-            token: [
-              "text",
-              "keyword"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(__comma__)",
-            token: [
-              "keyword"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(^| )(__print__)",
-            token: [
-              "text",
-              "keyword"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(^| )(__sleep__)",
-            token: [
-              "text",
-              "keyword"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(^| )(__forward__)",
-            token: [
-              "text",
-              "keyword"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(^| )(__turn__)",
-            token: [
-              "text",
-              "keyword"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(^| )(__random__)",
-            token: [
-              "text",
-              "keyword"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(^| )(__black__)(?![\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}_\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\xB7])",
-            token: [
-              "text",
-              "text"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(^| )(__blue__)(?![\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}_\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\xB7])",
-            token: [
-              "text",
-              "text"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(^| )(__brown__)(?![\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}_\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\xB7])",
-            token: [
-              "text",
-              "text"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(^| )(__gray__)(?![\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}_\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\xB7])",
-            token: [
-              "text",
-              "text"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(^| )(__green__)(?![\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}_\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\xB7])",
-            token: [
-              "text",
-              "text"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(^| )(__orange__)(?![\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}_\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\xB7])",
-            token: [
-              "text",
-              "text"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(^| )(__pink__)(?![\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}_\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\xB7])",
-            token: [
-              "text",
-              "text"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(^| )(__purple__)(?![\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}_\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\xB7])",
-            token: [
-              "text",
-              "text"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(^| )(__red__)(?![\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}_\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\xB7])",
-            token: [
-              "text",
-              "text"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(^| )(__white__)(?![\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}_\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\xB7])",
-            token: [
-              "text",
-              "text"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(^| )(__yellow__)(?![\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}_\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\xB7])",
-            token: [
-              "text",
-              "text"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(^| )(__pressed__)(?![\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}_\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\xB7])",
-            token: [
-              "text",
-              "event"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(^| )(__clear__)(?![\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}_\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\xB7])",
-            token: [
-              "text",
-              "event"
-            ],
-            next: "start",
-            unicode: true
-          }
-        ]
-      }
-    },
-    {
-      name: "level6",
-      rules: {
-        start: [
-          {
-            regex: "(^| )(__is__)( +)(__ask__)",
-            token: [
-              "text",
-              "keyword",
-              "text",
-              "keyword"
-            ]
-          },
-          {
-            regex: "(=)( +)(__ask__)",
-            token: [
-              "keyword",
-              "text",
-              "keyword"
-            ]
-          },
-          {
-            regex: "#.*$",
-            token: "comment",
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: '"[^"]*"',
-            token: "constant.character",
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "'[^']*'",
-            token: "constant.character",
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "\xAB[^\xBB]*\xBB",
-            token: "constant.character",
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: '"[^"]*$',
-            token: "text",
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "'[^']*$",
-            token: "text",
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "\xAB[^\xBB]*$",
-            token: "text",
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "_\\?_",
-            token: "invalid",
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(^| )(_)(?= |$)",
-            token: [
-              "text",
-              "invalid"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(^| )([__DIGIT__]+)(?![\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}_\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\xB7])",
-            token: [
-              "text",
-              "variable"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(^| )(__print__)([__DIGIT__]+)(?![\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}_\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\xB7])",
-            token: [
-              "text",
-              "keyword",
-              "variable"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(^| )(__sleep__)([__DIGIT__]+)(?![\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}_\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\xB7])",
-            token: [
-              "text",
-              "keyword",
-              "variable"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(^| )(__forward__)([__DIGIT__]+)(?![\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}_\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\xB7])",
-            token: [
-              "text",
-              "keyword",
-              "variable"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(^| )(__turn__)([__DIGIT__]+)(?![\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}_\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\xB7])",
-            token: [
-              "text",
-              "keyword",
-              "variable"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(^| )(__random__)([__DIGIT__]+)(?![\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}_\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\xB7])",
-            token: [
-              "text",
-              "keyword",
-              "variable"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(__comma__)([__DIGIT__]+)(?![\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}_\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\xB7])",
-            token: [
-              "keyword",
-              "variable"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(-)([__DIGIT__]+)(?![\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}_\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\xB7])",
-            token: [
-              "keyword",
-              "variable"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(=)([__DIGIT__]+)(?![\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}_\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\xB7])",
-            token: [
-              "keyword",
-              "variable"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(/)([__DIGIT__]+)(?![\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}_\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\xB7])",
-            token: [
-              "keyword",
-              "variable"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(\\*)([__DIGIT__]+)(?![\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}_\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\xB7])",
-            token: [
-              "keyword",
-              "variable"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(\\+)([__DIGIT__]+)(?![\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}_\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\xB7])",
-            token: [
-              "keyword",
-              "variable"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(^| )(__is__)(?![\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}_\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\xB7])",
-            token: [
-              "text",
-              "keyword"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(^| )(__at__)(?![\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}_\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\xB7])",
-            token: [
-              "text",
-              "keyword"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(^| )(__add__)(?![\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}_\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\xB7])",
-            token: [
-              "text",
-              "keyword"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(^| )(__to_list__)(?![\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}_\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\xB7])",
-            token: [
-              "text",
-              "keyword"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(^| )(__remove__)(?![\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}_\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\xB7])",
-            token: [
-              "text",
-              "keyword"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(^| )(__from__)(?![\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}_\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\xB7])",
-            token: [
-              "text",
-              "keyword"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(^| )(__in__)(?![\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}_\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\xB7])",
-            token: [
-              "text",
-              "keyword"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(^| )(__not_in__)(?![\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}_\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\xB7])",
-            token: [
-              "text",
-              "keyword"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(^| )(__if__)(?![\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}_\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\xB7])",
-            token: [
-              "text",
-              "keyword"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(^| )(__else__)(?![\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}_\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\xB7])",
-            token: [
-              "text",
-              "keyword"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(^| )(__color__)(?![\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}_\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\xB7])",
-            token: [
-              "text",
-              "keyword"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(__comma__)",
-            token: [
-              "keyword"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(-)",
-            token: [
-              "keyword"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(=)",
-            token: [
-              "keyword"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(/)",
-            token: [
-              "keyword"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(\\*)",
-            token: [
-              "keyword"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(\\+)",
-            token: [
-              "keyword"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(^| )(__print__)",
-            token: [
-              "text",
-              "keyword"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(^| )(__sleep__)",
-            token: [
-              "text",
-              "keyword"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(^| )(__forward__)",
-            token: [
-              "text",
-              "keyword"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(^| )(__turn__)",
-            token: [
-              "text",
-              "keyword"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(^| )(__random__)",
-            token: [
-              "text",
-              "keyword"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(^| )(__black__)(?![\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}_\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\xB7])",
-            token: [
-              "text",
-              "text"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(^| )(__blue__)(?![\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}_\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\xB7])",
-            token: [
-              "text",
-              "text"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(^| )(__brown__)(?![\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}_\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\xB7])",
-            token: [
-              "text",
-              "text"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(^| )(__gray__)(?![\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}_\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\xB7])",
-            token: [
-              "text",
-              "text"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(^| )(__green__)(?![\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}_\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\xB7])",
-            token: [
-              "text",
-              "text"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(^| )(__orange__)(?![\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}_\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\xB7])",
-            token: [
-              "text",
-              "text"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(^| )(__pink__)(?![\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}_\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\xB7])",
-            token: [
-              "text",
-              "text"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(^| )(__purple__)(?![\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}_\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\xB7])",
-            token: [
-              "text",
-              "text"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(^| )(__red__)(?![\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}_\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\xB7])",
-            token: [
-              "text",
-              "text"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(^| )(__white__)(?![\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}_\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\xB7])",
-            token: [
-              "text",
-              "text"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(^| )(__yellow__)(?![\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}_\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\xB7])",
-            token: [
-              "text",
-              "text"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(^| )(__pressed__)(?![\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}_\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\xB7])",
-            token: [
-              "text",
-              "event"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(^| )(__clear__)(?![\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}_\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\xB7])",
-            token: [
-              "text",
-              "event"
-            ],
-            next: "start",
-            unicode: true
-          }
-        ]
-      }
-    },
-    {
-      name: "level7",
-      rules: {
-        start: [
-          {
-            regex: "(^| )(__is__)( +)(__ask__)",
-            token: [
-              "text",
-              "keyword",
-              "text",
-              "keyword"
-            ]
-          },
-          {
-            regex: "(=)( +)(__ask__)",
-            token: [
-              "keyword",
-              "text",
-              "keyword"
-            ]
-          },
-          {
-            regex: "#.*$",
-            token: "comment",
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: '"[^"]*"',
-            token: "constant.character",
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "'[^']*'",
-            token: "constant.character",
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "\xAB[^\xBB]*\xBB",
-            token: "constant.character",
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: '"[^"]*$',
-            token: "text",
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "'[^']*$",
-            token: "text",
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "\xAB[^\xBB]*$",
-            token: "text",
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "_\\?_",
-            token: "invalid",
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(^| )(_)(?= |$)",
-            token: [
-              "text",
-              "invalid"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(^| )([__DIGIT__]+)(?![\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}_\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\xB7])",
-            token: [
-              "text",
-              "variable"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(^| )(__print__)([__DIGIT__]+)(?![\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}_\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\xB7])",
-            token: [
-              "text",
-              "keyword",
-              "variable"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(^| )(__sleep__)([__DIGIT__]+)(?![\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}_\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\xB7])",
-            token: [
-              "text",
-              "keyword",
-              "variable"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(^| )(__forward__)([__DIGIT__]+)(?![\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}_\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\xB7])",
-            token: [
-              "text",
-              "keyword",
-              "variable"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(^| )(__turn__)([__DIGIT__]+)(?![\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}_\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\xB7])",
-            token: [
-              "text",
-              "keyword",
-              "variable"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(^| )(__random__)([__DIGIT__]+)(?![\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}_\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\xB7])",
-            token: [
-              "text",
-              "keyword",
-              "variable"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(__comma__)([__DIGIT__]+)(?![\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}_\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\xB7])",
-            token: [
-              "keyword",
-              "variable"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(-)([__DIGIT__]+)(?![\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}_\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\xB7])",
-            token: [
-              "keyword",
-              "variable"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(=)([__DIGIT__]+)(?![\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}_\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\xB7])",
-            token: [
-              "keyword",
-              "variable"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(/)([__DIGIT__]+)(?![\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}_\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\xB7])",
-            token: [
-              "keyword",
-              "variable"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(\\*)([__DIGIT__]+)(?![\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}_\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\xB7])",
-            token: [
-              "keyword",
-              "variable"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(\\+)([__DIGIT__]+)(?![\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}_\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\xB7])",
-            token: [
-              "keyword",
-              "variable"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(^| )(__is__)(?![\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}_\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\xB7])",
-            token: [
-              "text",
-              "keyword"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(^| )(__at__)(?![\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}_\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\xB7])",
-            token: [
-              "text",
-              "keyword"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(^| )(__add__)(?![\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}_\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\xB7])",
-            token: [
-              "text",
-              "keyword"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(^| )(__to_list__)(?![\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}_\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\xB7])",
-            token: [
-              "text",
-              "keyword"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(^| )(__remove__)(?![\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}_\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\xB7])",
-            token: [
-              "text",
-              "keyword"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(^| )(__from__)(?![\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}_\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\xB7])",
-            token: [
-              "text",
-              "keyword"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(^| )(__in__)(?![\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}_\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\xB7])",
-            token: [
-              "text",
-              "keyword"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(^| )(__not_in__)(?![\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}_\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\xB7])",
-            token: [
-              "text",
-              "keyword"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(^| )(__if__)(?![\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}_\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\xB7])",
-            token: [
-              "text",
-              "keyword"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(^| )(__else__)(?![\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}_\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\xB7])",
-            token: [
-              "text",
-              "keyword"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(^| )(__repeat__)(?![\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}_\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\xB7])",
-            token: [
-              "text",
-              "keyword"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(^| )(__times__)(?![\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}_\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\xB7])",
-            token: [
-              "text",
-              "keyword"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(^| )(__color__)(?![\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}_\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\xB7])",
-            token: [
-              "text",
-              "keyword"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(__comma__)",
-            token: [
-              "keyword"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(-)",
-            token: [
-              "keyword"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(=)",
-            token: [
-              "keyword"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(/)",
-            token: [
-              "keyword"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(\\*)",
-            token: [
-              "keyword"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(\\+)",
-            token: [
-              "keyword"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(^| )(__print__)",
-            token: [
-              "text",
-              "keyword"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(^| )(__sleep__)",
-            token: [
-              "text",
-              "keyword"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(^| )(__forward__)",
-            token: [
-              "text",
-              "keyword"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(^| )(__turn__)",
-            token: [
-              "text",
-              "keyword"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(^| )(__random__)",
-            token: [
-              "text",
-              "keyword"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(^| )(__black__)(?![\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}_\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\xB7])",
-            token: [
-              "text",
-              "text"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(^| )(__blue__)(?![\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}_\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\xB7])",
-            token: [
-              "text",
-              "text"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(^| )(__brown__)(?![\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}_\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\xB7])",
-            token: [
-              "text",
-              "text"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(^| )(__gray__)(?![\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}_\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\xB7])",
-            token: [
-              "text",
-              "text"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(^| )(__green__)(?![\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}_\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\xB7])",
-            token: [
-              "text",
-              "text"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(^| )(__orange__)(?![\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}_\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\xB7])",
-            token: [
-              "text",
-              "text"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(^| )(__pink__)(?![\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}_\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\xB7])",
-            token: [
-              "text",
-              "text"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(^| )(__purple__)(?![\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}_\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\xB7])",
-            token: [
-              "text",
-              "text"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(^| )(__red__)(?![\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}_\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\xB7])",
-            token: [
-              "text",
-              "text"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(^| )(__white__)(?![\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}_\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\xB7])",
-            token: [
-              "text",
-              "text"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(^| )(__yellow__)(?![\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}_\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\xB7])",
-            token: [
-              "text",
-              "text"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(^| )(__pressed__)(?![\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}_\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\xB7])",
-            token: [
-              "text",
-              "event"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(^| )(__clear__)(?![\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}_\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\xB7])",
-            token: [
-              "text",
-              "event"
-            ],
-            next: "start",
-            unicode: true
-          }
-        ]
-      }
-    },
-    {
-      name: "level8",
-      rules: {
-        start: [
-          {
-            regex: "(^| )(__is__)( +)(__ask__)",
-            token: [
-              "text",
-              "keyword",
-              "text",
-              "keyword"
-            ]
-          },
-          {
-            regex: "(=)( +)(__ask__)",
-            token: [
-              "keyword",
-              "text",
-              "keyword"
-            ]
-          },
-          {
-            regex: "#.*$",
-            token: "comment",
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: '"[^"]*"',
-            token: "constant.character",
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "'[^']*'",
-            token: "constant.character",
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "\xAB[^\xBB]*\xBB",
-            token: "constant.character",
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: '"[^"]*$',
-            token: "text",
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "'[^']*$",
-            token: "text",
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "\xAB[^\xBB]*$",
-            token: "text",
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "_\\?_",
-            token: "invalid",
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(^| )(_)(?= |$)",
-            token: [
-              "text",
-              "invalid"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(^| )([__DIGIT__]+)(?![\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}_\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\xB7])",
-            token: [
-              "text",
-              "variable"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(^| )(__print__)([__DIGIT__]+)(?![\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}_\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\xB7])",
-            token: [
-              "text",
-              "keyword",
-              "variable"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(^| )(__sleep__)([__DIGIT__]+)(?![\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}_\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\xB7])",
-            token: [
-              "text",
-              "keyword",
-              "variable"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(^| )(__forward__)([__DIGIT__]+)(?![\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}_\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\xB7])",
-            token: [
-              "text",
-              "keyword",
-              "variable"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(^| )(__turn__)([__DIGIT__]+)(?![\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}_\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\xB7])",
-            token: [
-              "text",
-              "keyword",
-              "variable"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(^| )(__random__)([__DIGIT__]+)(?![\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}_\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\xB7])",
-            token: [
-              "text",
-              "keyword",
-              "variable"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(^| )(__else__)([__DIGIT__]+)(?![\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}_\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\xB7])",
-            token: [
-              "text",
-              "keyword",
-              "variable"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(^| )(__times__)([__DIGIT__]+)(?![\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}_\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\xB7])",
-            token: [
-              "text",
-              "keyword",
-              "variable"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(__comma__)([__DIGIT__]+)(?![\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}_\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\xB7])",
-            token: [
-              "keyword",
-              "variable"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(-)([__DIGIT__]+)(?![\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}_\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\xB7])",
-            token: [
-              "keyword",
-              "variable"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(=)([__DIGIT__]+)(?![\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}_\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\xB7])",
-            token: [
-              "keyword",
-              "variable"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(/)([__DIGIT__]+)(?![\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}_\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\xB7])",
-            token: [
-              "keyword",
-              "variable"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(\\*)([__DIGIT__]+)(?![\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}_\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\xB7])",
-            token: [
-              "keyword",
-              "variable"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(\\+)([__DIGIT__]+)(?![\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}_\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\xB7])",
-            token: [
-              "keyword",
-              "variable"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(^| )(__is__)(?![\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}_\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\xB7])",
-            token: [
-              "text",
-              "keyword"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(^| )(__at__)(?![\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}_\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\xB7])",
-            token: [
-              "text",
-              "keyword"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(^| )(__add__)(?![\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}_\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\xB7])",
-            token: [
-              "text",
-              "keyword"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(^| )(__to_list__)(?![\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}_\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\xB7])",
-            token: [
-              "text",
-              "keyword"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(^| )(__remove__)(?![\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}_\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\xB7])",
-            token: [
-              "text",
-              "keyword"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(^| )(__from__)(?![\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}_\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\xB7])",
-            token: [
-              "text",
-              "keyword"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(^| )(__in__)(?![\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}_\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\xB7])",
-            token: [
-              "text",
-              "keyword"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(^| )(__not_in__)(?![\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}_\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\xB7])",
-            token: [
-              "text",
-              "keyword"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(^| )(__if__)(?![\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}_\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\xB7])",
-            token: [
-              "text",
-              "keyword"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(^| )(__repeat__)(?![\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}_\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\xB7])",
-            token: [
-              "text",
-              "keyword"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(^| )(__color__)(?![\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}_\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\xB7])",
-            token: [
-              "text",
-              "keyword"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(__comma__)",
-            token: [
-              "keyword"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(-)",
-            token: [
-              "keyword"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(=)",
-            token: [
-              "keyword"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(/)",
-            token: [
-              "keyword"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(\\*)",
-            token: [
-              "keyword"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(\\+)",
-            token: [
-              "keyword"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(^| )(__print__)",
-            token: [
-              "text",
-              "keyword"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(^| )(__sleep__)",
-            token: [
-              "text",
-              "keyword"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(^| )(__forward__)",
-            token: [
-              "text",
-              "keyword"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(^| )(__turn__)",
-            token: [
-              "text",
-              "keyword"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(^| )(__random__)",
-            token: [
-              "text",
-              "keyword"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(^| )(__else__)",
-            token: [
-              "text",
-              "keyword"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(^| )(__times__)",
-            token: [
-              "text",
-              "keyword"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(^| )(__black__)(?![\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}_\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\xB7])",
-            token: [
-              "text",
-              "text"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(^| )(__blue__)(?![\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}_\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\xB7])",
-            token: [
-              "text",
-              "text"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(^| )(__brown__)(?![\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}_\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\xB7])",
-            token: [
-              "text",
-              "text"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(^| )(__gray__)(?![\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}_\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\xB7])",
-            token: [
-              "text",
-              "text"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(^| )(__green__)(?![\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}_\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\xB7])",
-            token: [
-              "text",
-              "text"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(^| )(__orange__)(?![\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}_\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\xB7])",
-            token: [
-              "text",
-              "text"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(^| )(__pink__)(?![\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}_\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\xB7])",
-            token: [
-              "text",
-              "text"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(^| )(__purple__)(?![\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}_\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\xB7])",
-            token: [
-              "text",
-              "text"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(^| )(__red__)(?![\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}_\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\xB7])",
-            token: [
-              "text",
-              "text"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(^| )(__white__)(?![\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}_\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\xB7])",
-            token: [
-              "text",
-              "text"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(^| )(__yellow__)(?![\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}_\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\xB7])",
-            token: [
-              "text",
-              "text"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(^| )(__pressed__)(?![\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}_\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\xB7])",
-            token: [
-              "text",
-              "event"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(^| )(__clear__)(?![\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}_\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\xB7])",
-            token: [
-              "text",
-              "event"
-            ],
-            next: "start",
-            unicode: true
-          }
-        ]
-      }
-    },
-    {
-      name: "level9",
-      rules: {
-        start: [
-          {
-            regex: "(^| )(__is__)( +)(__ask__)",
-            token: [
-              "text",
-              "keyword",
-              "text",
-              "keyword"
-            ]
-          },
-          {
-            regex: "(=)( +)(__ask__)",
-            token: [
-              "keyword",
-              "text",
-              "keyword"
-            ]
-          },
-          {
-            regex: "#.*$",
-            token: "comment",
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: '"[^"]*"',
-            token: "constant.character",
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "'[^']*'",
-            token: "constant.character",
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "\xAB[^\xBB]*\xBB",
-            token: "constant.character",
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: '"[^"]*$',
-            token: "text",
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "'[^']*$",
-            token: "text",
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "\xAB[^\xBB]*$",
-            token: "text",
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "_\\?_",
-            token: "invalid",
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(^| )(_)(?= |$)",
-            token: [
-              "text",
-              "invalid"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(^| )([__DIGIT__]+)(?![\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}_\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\xB7])",
-            token: [
-              "text",
-              "variable"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(^| )(__print__)([__DIGIT__]+)(?![\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}_\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\xB7])",
-            token: [
-              "text",
-              "keyword",
-              "variable"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(^| )(__sleep__)([__DIGIT__]+)(?![\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}_\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\xB7])",
-            token: [
-              "text",
-              "keyword",
-              "variable"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(^| )(__forward__)([__DIGIT__]+)(?![\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}_\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\xB7])",
-            token: [
-              "text",
-              "keyword",
-              "variable"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(^| )(__turn__)([__DIGIT__]+)(?![\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}_\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\xB7])",
-            token: [
-              "text",
-              "keyword",
-              "variable"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(^| )(__random__)([__DIGIT__]+)(?![\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}_\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\xB7])",
-            token: [
-              "text",
-              "keyword",
-              "variable"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(^| )(__else__)([__DIGIT__]+)(?![\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}_\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\xB7])",
-            token: [
-              "text",
-              "keyword",
-              "variable"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(^| )(__times__)([__DIGIT__]+)(?![\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}_\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\xB7])",
-            token: [
-              "text",
-              "keyword",
-              "variable"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(__comma__)([__DIGIT__]+)(?![\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}_\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\xB7])",
-            token: [
-              "keyword",
-              "variable"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(-)([__DIGIT__]+)(?![\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}_\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\xB7])",
-            token: [
-              "keyword",
-              "variable"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(=)([__DIGIT__]+)(?![\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}_\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\xB7])",
-            token: [
-              "keyword",
-              "variable"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(/)([__DIGIT__]+)(?![\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}_\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\xB7])",
-            token: [
-              "keyword",
-              "variable"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(\\*)([__DIGIT__]+)(?![\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}_\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\xB7])",
-            token: [
-              "keyword",
-              "variable"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(\\+)([__DIGIT__]+)(?![\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}_\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\xB7])",
-            token: [
-              "keyword",
-              "variable"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(^| )(__is__)(?![\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}_\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\xB7])",
-            token: [
-              "text",
-              "keyword"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(^| )(__at__)(?![\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}_\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\xB7])",
-            token: [
-              "text",
-              "keyword"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(^| )(__add__)(?![\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}_\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\xB7])",
-            token: [
-              "text",
-              "keyword"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(^| )(__to_list__)(?![\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}_\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\xB7])",
-            token: [
-              "text",
-              "keyword"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(^| )(__remove__)(?![\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}_\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\xB7])",
-            token: [
-              "text",
-              "keyword"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(^| )(__from__)(?![\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}_\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\xB7])",
-            token: [
-              "text",
-              "keyword"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(^| )(__in__)(?![\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}_\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\xB7])",
-            token: [
-              "text",
-              "keyword"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(^| )(__not_in__)(?![\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}_\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\xB7])",
-            token: [
-              "text",
-              "keyword"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(^| )(__if__)(?![\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}_\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\xB7])",
-            token: [
-              "text",
-              "keyword"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(^| )(__repeat__)(?![\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}_\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\xB7])",
-            token: [
-              "text",
-              "keyword"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(^| )(__color__)(?![\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}_\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\xB7])",
-            token: [
-              "text",
-              "keyword"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(__comma__)",
-            token: [
-              "keyword"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(-)",
-            token: [
-              "keyword"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(=)",
-            token: [
-              "keyword"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(/)",
-            token: [
-              "keyword"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(\\*)",
-            token: [
-              "keyword"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(\\+)",
-            token: [
-              "keyword"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(^| )(__print__)",
-            token: [
-              "text",
-              "keyword"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(^| )(__sleep__)",
-            token: [
-              "text",
-              "keyword"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(^| )(__forward__)",
-            token: [
-              "text",
-              "keyword"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(^| )(__turn__)",
-            token: [
-              "text",
-              "keyword"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(^| )(__random__)",
-            token: [
-              "text",
-              "keyword"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(^| )(__else__)",
-            token: [
-              "text",
-              "keyword"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(^| )(__times__)",
-            token: [
-              "text",
-              "keyword"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(^| )(__black__)(?![\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}_\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\xB7])",
-            token: [
-              "text",
-              "text"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(^| )(__blue__)(?![\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}_\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\xB7])",
-            token: [
-              "text",
-              "text"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(^| )(__brown__)(?![\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}_\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\xB7])",
-            token: [
-              "text",
-              "text"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(^| )(__gray__)(?![\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}_\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\xB7])",
-            token: [
-              "text",
-              "text"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(^| )(__green__)(?![\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}_\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\xB7])",
-            token: [
-              "text",
-              "text"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(^| )(__orange__)(?![\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}_\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\xB7])",
-            token: [
-              "text",
-              "text"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(^| )(__pink__)(?![\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}_\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\xB7])",
-            token: [
-              "text",
-              "text"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(^| )(__purple__)(?![\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}_\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\xB7])",
-            token: [
-              "text",
-              "text"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(^| )(__red__)(?![\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}_\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\xB7])",
-            token: [
-              "text",
-              "text"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(^| )(__white__)(?![\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}_\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\xB7])",
-            token: [
-              "text",
-              "text"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(^| )(__yellow__)(?![\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}_\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\xB7])",
-            token: [
-              "text",
-              "text"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(^| )(__pressed__)(?![\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}_\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\xB7])",
-            token: [
-              "text",
-              "event"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(^| )(__clear__)(?![\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}_\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\xB7])",
-            token: [
-              "text",
-              "event"
-            ],
-            next: "start",
-            unicode: true
-          }
-        ]
-      }
-    },
-    {
-      name: "level10",
-      rules: {
-        start: [
-          {
-            regex: "(^| )(__is__)( +)(__ask__)",
-            token: [
-              "text",
-              "keyword",
-              "text",
-              "keyword"
-            ]
-          },
-          {
-            regex: "(=)( +)(__ask__)",
-            token: [
-              "keyword",
-              "text",
-              "keyword"
-            ]
-          },
-          {
-            regex: "#.*$",
-            token: "comment",
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: '"[^"]*"',
-            token: "constant.character",
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "'[^']*'",
-            token: "constant.character",
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "\xAB[^\xBB]*\xBB",
-            token: "constant.character",
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: '"[^"]*$',
-            token: "text",
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "'[^']*$",
-            token: "text",
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "\xAB[^\xBB]*$",
-            token: "text",
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "_\\?_",
-            token: "invalid",
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(^| )(_)(?= |$)",
-            token: [
-              "text",
-              "invalid"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(^| )([__DIGIT__]+)(?![\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}_\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\xB7])",
-            token: [
-              "text",
-              "variable"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(^| )(__print__)([__DIGIT__]+)(?![\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}_\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\xB7])",
-            token: [
-              "text",
-              "keyword",
-              "variable"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(^| )(__sleep__)([__DIGIT__]+)(?![\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}_\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\xB7])",
-            token: [
-              "text",
-              "keyword",
-              "variable"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(^| )(__forward__)([__DIGIT__]+)(?![\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}_\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\xB7])",
-            token: [
-              "text",
-              "keyword",
-              "variable"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(^| )(__turn__)([__DIGIT__]+)(?![\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}_\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\xB7])",
-            token: [
-              "text",
-              "keyword",
-              "variable"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(^| )(__random__)([__DIGIT__]+)(?![\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}_\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\xB7])",
-            token: [
-              "text",
-              "keyword",
-              "variable"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(^| )(__else__)([__DIGIT__]+)(?![\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}_\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\xB7])",
-            token: [
-              "text",
-              "keyword",
-              "variable"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(^| )(__times__)([__DIGIT__]+)(?![\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}_\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\xB7])",
-            token: [
-              "text",
-              "keyword",
-              "variable"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(__comma__)([__DIGIT__]+)(?![\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}_\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\xB7])",
-            token: [
-              "keyword",
-              "variable"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(-)([__DIGIT__]+)(?![\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}_\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\xB7])",
-            token: [
-              "keyword",
-              "variable"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(=)([__DIGIT__]+)(?![\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}_\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\xB7])",
-            token: [
-              "keyword",
-              "variable"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(/)([__DIGIT__]+)(?![\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}_\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\xB7])",
-            token: [
-              "keyword",
-              "variable"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(\\*)([__DIGIT__]+)(?![\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}_\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\xB7])",
-            token: [
-              "keyword",
-              "variable"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(\\+)([__DIGIT__]+)(?![\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}_\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\xB7])",
-            token: [
-              "keyword",
-              "variable"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(^| )(__is__)(?![\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}_\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\xB7])",
-            token: [
-              "text",
-              "keyword"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(^| )(__at__)(?![\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}_\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\xB7])",
-            token: [
-              "text",
-              "keyword"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(^| )(__add__)(?![\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}_\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\xB7])",
-            token: [
-              "text",
-              "keyword"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(^| )(__to_list__)(?![\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}_\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\xB7])",
-            token: [
-              "text",
-              "keyword"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(^| )(__remove__)(?![\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}_\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\xB7])",
-            token: [
-              "text",
-              "keyword"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(^| )(__from__)(?![\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}_\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\xB7])",
-            token: [
-              "text",
-              "keyword"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(^| )(__in__)(?![\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}_\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\xB7])",
-            token: [
-              "text",
-              "keyword"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(^| )(__not_in__)(?![\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}_\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\xB7])",
-            token: [
-              "text",
-              "keyword"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(^| )(__if__)(?![\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}_\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\xB7])",
-            token: [
-              "text",
-              "keyword"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(^| )(__repeat__)(?![\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}_\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\xB7])",
-            token: [
-              "text",
-              "keyword"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(^| )(__for__)(?![\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}_\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\xB7])",
-            token: [
-              "text",
-              "keyword"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(^| )(__color__)(?![\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}_\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\xB7])",
-            token: [
-              "text",
-              "keyword"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(__comma__)",
-            token: [
-              "keyword"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(-)",
-            token: [
-              "keyword"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(=)",
-            token: [
-              "keyword"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(/)",
-            token: [
-              "keyword"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(\\*)",
-            token: [
-              "keyword"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(\\+)",
-            token: [
-              "keyword"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(^| )(__print__)",
-            token: [
-              "text",
-              "keyword"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(^| )(__sleep__)",
-            token: [
-              "text",
-              "keyword"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(^| )(__forward__)",
-            token: [
-              "text",
-              "keyword"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(^| )(__turn__)",
-            token: [
-              "text",
-              "keyword"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(^| )(__random__)",
-            token: [
-              "text",
-              "keyword"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(^| )(__else__)",
-            token: [
-              "text",
-              "keyword"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(^| )(__times__)",
-            token: [
-              "text",
-              "keyword"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(^| )(__black__)(?![\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}_\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\xB7])",
-            token: [
-              "text",
-              "text"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(^| )(__blue__)(?![\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}_\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\xB7])",
-            token: [
-              "text",
-              "text"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(^| )(__brown__)(?![\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}_\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\xB7])",
-            token: [
-              "text",
-              "text"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(^| )(__gray__)(?![\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}_\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\xB7])",
-            token: [
-              "text",
-              "text"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(^| )(__green__)(?![\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}_\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\xB7])",
-            token: [
-              "text",
-              "text"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(^| )(__orange__)(?![\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}_\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\xB7])",
-            token: [
-              "text",
-              "text"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(^| )(__pink__)(?![\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}_\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\xB7])",
-            token: [
-              "text",
-              "text"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(^| )(__purple__)(?![\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}_\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\xB7])",
-            token: [
-              "text",
-              "text"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(^| )(__red__)(?![\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}_\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\xB7])",
-            token: [
-              "text",
-              "text"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(^| )(__white__)(?![\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}_\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\xB7])",
-            token: [
-              "text",
-              "text"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(^| )(__yellow__)(?![\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}_\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\xB7])",
-            token: [
-              "text",
-              "text"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(^| )(__pressed__)(?![\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}_\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\xB7])",
-            token: [
-              "text",
-              "event"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(^| )(__clear__)(?![\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}_\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\xB7])",
-            token: [
-              "text",
-              "event"
-            ],
-            next: "start",
-            unicode: true
-          }
-        ]
-      }
-    },
-    {
-      name: "level11",
-      rules: {
-        start: [
-          {
-            regex: "(^| )(__is__)( +)(__ask__)",
-            token: [
-              "text",
-              "keyword",
-              "text",
-              "keyword"
-            ]
-          },
-          {
-            regex: "(=)( +)(__ask__)",
-            token: [
-              "keyword",
-              "text",
-              "keyword"
-            ]
-          },
-          {
-            regex: "#.*$",
-            token: "comment",
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: '"[^"]*"',
-            token: "constant.character",
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "'[^']*'",
-            token: "constant.character",
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "\xAB[^\xBB]*\xBB",
-            token: "constant.character",
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: '"[^"]*$',
-            token: "text",
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "'[^']*$",
-            token: "text",
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "\xAB[^\xBB]*$",
-            token: "text",
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "_\\?_",
-            token: "invalid",
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(^| )(_)(?= |$)",
-            token: [
-              "text",
-              "invalid"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(^| )([__DIGIT__]+)(?![\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}_\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\xB7])",
-            token: [
-              "text",
-              "variable"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(^| )(__print__)([__DIGIT__]+)(?![\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}_\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\xB7])",
-            token: [
-              "text",
-              "keyword",
-              "variable"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(^| )(__sleep__)([__DIGIT__]+)(?![\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}_\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\xB7])",
-            token: [
-              "text",
-              "keyword",
-              "variable"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(^| )(__forward__)([__DIGIT__]+)(?![\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}_\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\xB7])",
-            token: [
-              "text",
-              "keyword",
-              "variable"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(^| )(__turn__)([__DIGIT__]+)(?![\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}_\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\xB7])",
-            token: [
-              "text",
-              "keyword",
-              "variable"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(^| )(__random__)([__DIGIT__]+)(?![\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}_\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\xB7])",
-            token: [
-              "text",
-              "keyword",
-              "variable"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(^| )(__else__)([__DIGIT__]+)(?![\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}_\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\xB7])",
-            token: [
-              "text",
-              "keyword",
-              "variable"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(^| )(__times__)([__DIGIT__]+)(?![\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}_\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\xB7])",
-            token: [
-              "text",
-              "keyword",
-              "variable"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(__comma__)([__DIGIT__]+)(?![\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}_\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\xB7])",
-            token: [
-              "keyword",
-              "variable"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(-)([__DIGIT__]+)(?![\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}_\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\xB7])",
-            token: [
-              "keyword",
-              "variable"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(=)([__DIGIT__]+)(?![\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}_\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\xB7])",
-            token: [
-              "keyword",
-              "variable"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(/)([__DIGIT__]+)(?![\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}_\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\xB7])",
-            token: [
-              "keyword",
-              "variable"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(\\*)([__DIGIT__]+)(?![\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}_\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\xB7])",
-            token: [
-              "keyword",
-              "variable"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(\\+)([__DIGIT__]+)(?![\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}_\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\xB7])",
-            token: [
-              "keyword",
-              "variable"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(^| )(__is__)(?![\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}_\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\xB7])",
-            token: [
-              "text",
-              "keyword"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(^| )(__at__)(?![\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}_\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\xB7])",
-            token: [
-              "text",
-              "keyword"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(^| )(__add__)(?![\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}_\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\xB7])",
-            token: [
-              "text",
-              "keyword"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(^| )(__to_list__)(?![\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}_\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\xB7])",
-            token: [
-              "text",
-              "keyword"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(^| )(__remove__)(?![\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}_\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\xB7])",
-            token: [
-              "text",
-              "keyword"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(^| )(__from__)(?![\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}_\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\xB7])",
-            token: [
-              "text",
-              "keyword"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(^| )(__in__)(?![\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}_\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\xB7])",
-            token: [
-              "text",
-              "keyword"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(^| )(__not_in__)(?![\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}_\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\xB7])",
-            token: [
-              "text",
-              "keyword"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(^| )(__if__)(?![\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}_\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\xB7])",
-            token: [
-              "text",
-              "keyword"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(^| )(__for__)(?![\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}_\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\xB7])",
-            token: [
-              "text",
-              "keyword"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(^| )(__range__)(?![\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}_\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\xB7])",
-            token: [
-              "text",
-              "keyword"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(^| )(__to__)(?![\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}_\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\xB7])",
-            token: [
-              "text",
-              "keyword"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(^| )(__repeat__)(?![\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}_\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\xB7])",
-            token: [
-              "text",
-              "keyword"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(^| )(__color__)(?![\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}_\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\xB7])",
-            token: [
-              "text",
-              "keyword"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(__comma__)",
-            token: [
-              "keyword"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(-)",
-            token: [
-              "keyword"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(=)",
-            token: [
-              "keyword"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(/)",
-            token: [
-              "keyword"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(\\*)",
-            token: [
-              "keyword"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(\\+)",
-            token: [
-              "keyword"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(^| )(__print__)",
-            token: [
-              "text",
-              "keyword"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(^| )(__sleep__)",
-            token: [
-              "text",
-              "keyword"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(^| )(__forward__)",
-            token: [
-              "text",
-              "keyword"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(^| )(__turn__)",
-            token: [
-              "text",
-              "keyword"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(^| )(__random__)",
-            token: [
-              "text",
-              "keyword"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(^| )(__else__)",
-            token: [
-              "text",
-              "keyword"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(^| )(__times__)",
-            token: [
-              "text",
-              "keyword"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(^| )(__black__)(?![\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}_\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\xB7])",
-            token: [
-              "text",
-              "text"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(^| )(__blue__)(?![\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}_\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\xB7])",
-            token: [
-              "text",
-              "text"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(^| )(__brown__)(?![\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}_\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\xB7])",
-            token: [
-              "text",
-              "text"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(^| )(__gray__)(?![\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}_\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\xB7])",
-            token: [
-              "text",
-              "text"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(^| )(__green__)(?![\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}_\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\xB7])",
-            token: [
-              "text",
-              "text"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(^| )(__orange__)(?![\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}_\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\xB7])",
-            token: [
-              "text",
-              "text"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(^| )(__pink__)(?![\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}_\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\xB7])",
-            token: [
-              "text",
-              "text"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(^| )(__purple__)(?![\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}_\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\xB7])",
-            token: [
-              "text",
-              "text"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(^| )(__red__)(?![\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}_\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\xB7])",
-            token: [
-              "text",
-              "text"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(^| )(__white__)(?![\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}_\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\xB7])",
-            token: [
-              "text",
-              "text"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(^| )(__yellow__)(?![\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}_\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\xB7])",
-            token: [
-              "text",
-              "text"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(^| )(__pressed__)(?![\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}_\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\xB7])",
-            token: [
-              "text",
-              "event"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(^| )(__clear__)(?![\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}_\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\xB7])",
-            token: [
-              "text",
-              "event"
-            ],
-            next: "start",
-            unicode: true
-          }
-        ]
-      }
-    },
-    {
-      name: "level12",
-      rules: {
-        start: [
-          {
-            regex: "(^| )(__is__)( +)(__ask__)",
-            token: [
-              "text",
-              "keyword",
-              "text",
-              "keyword"
-            ]
-          },
-          {
-            regex: "(=)( +)(__ask__)",
-            token: [
-              "keyword",
-              "text",
-              "keyword"
-            ]
-          },
-          {
-            regex: "#.*$",
-            token: "comment",
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: '"[^"]*"',
-            token: "constant.character",
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "'[^']*'",
-            token: "constant.character",
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "\xAB[^\xBB]*\xBB",
-            token: "constant.character",
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: '"[^"]*$',
-            token: "text",
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "'[^']*$",
-            token: "text",
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "\xAB[^\xBB]*$",
-            token: "text",
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "_\\?_",
-            token: "invalid",
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(^| )(_)(?= |$)",
-            token: [
-              "text",
-              "invalid"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(^| )([__DIGIT__]*\\.?[__DIGIT__]+)(?![\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}_\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\xB7])",
-            token: [
-              "text",
-              "variable"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(^| )(__print__)([__DIGIT__]*\\.?[__DIGIT__]+)(?![\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}_\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\xB7])",
-            token: [
-              "text",
-              "keyword",
-              "variable"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(^| )(__sleep__)([__DIGIT__]*\\.?[__DIGIT__]+)(?![\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}_\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\xB7])",
-            token: [
-              "text",
-              "keyword",
-              "variable"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(^| )(__forward__)([__DIGIT__]*\\.?[__DIGIT__]+)(?![\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}_\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\xB7])",
-            token: [
-              "text",
-              "keyword",
-              "variable"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(^| )(__turn__)([__DIGIT__]*\\.?[__DIGIT__]+)(?![\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}_\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\xB7])",
-            token: [
-              "text",
-              "keyword",
-              "variable"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(^| )(__random__)([__DIGIT__]*\\.?[__DIGIT__]+)(?![\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}_\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\xB7])",
-            token: [
-              "text",
-              "keyword",
-              "variable"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(^| )(__else__)([__DIGIT__]*\\.?[__DIGIT__]+)(?![\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}_\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\xB7])",
-            token: [
-              "text",
-              "keyword",
-              "variable"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(^| )(__times__)([__DIGIT__]*\\.?[__DIGIT__]+)(?![\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}_\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\xB7])",
-            token: [
-              "text",
-              "keyword",
-              "variable"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(__comma__)([__DIGIT__]*\\.?[__DIGIT__]+)(?![\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}_\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\xB7])",
-            token: [
-              "keyword",
-              "variable"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(-)([__DIGIT__]*\\.?[__DIGIT__]+)(?![\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}_\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\xB7])",
-            token: [
-              "keyword",
-              "variable"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(=)([__DIGIT__]*\\.?[__DIGIT__]+)(?![\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}_\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\xB7])",
-            token: [
-              "keyword",
-              "variable"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(/)([__DIGIT__]*\\.?[__DIGIT__]+)(?![\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}_\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\xB7])",
-            token: [
-              "keyword",
-              "variable"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(\\*)([__DIGIT__]*\\.?[__DIGIT__]+)(?![\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}_\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\xB7])",
-            token: [
-              "keyword",
-              "variable"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(\\+)([__DIGIT__]*\\.?[__DIGIT__]+)(?![\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}_\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\xB7])",
-            token: [
-              "keyword",
-              "variable"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(^| )(__is__)(?![\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}_\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\xB7])",
-            token: [
-              "text",
-              "keyword"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(^| )(__at__)(?![\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}_\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\xB7])",
-            token: [
-              "text",
-              "keyword"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(^| )(__add__)(?![\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}_\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\xB7])",
-            token: [
-              "text",
-              "keyword"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(^| )(__to_list__)(?![\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}_\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\xB7])",
-            token: [
-              "text",
-              "keyword"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(^| )(__remove__)(?![\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}_\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\xB7])",
-            token: [
-              "text",
-              "keyword"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(^| )(__from__)(?![\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}_\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\xB7])",
-            token: [
-              "text",
-              "keyword"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(^| )(__in__)(?![\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}_\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\xB7])",
-            token: [
-              "text",
-              "keyword"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(^| )(__not_in__)(?![\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}_\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\xB7])",
-            token: [
-              "text",
-              "keyword"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(^| )(__if__)(?![\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}_\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\xB7])",
-            token: [
-              "text",
-              "keyword"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(^| )(__for__)(?![\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}_\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\xB7])",
-            token: [
-              "text",
-              "keyword"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(^| )(__range__)(?![\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}_\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\xB7])",
-            token: [
-              "text",
-              "keyword"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(^| )(__to__)(?![\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}_\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\xB7])",
-            token: [
-              "text",
-              "keyword"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(^| )(__repeat__)(?![\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}_\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\xB7])",
-            token: [
-              "text",
-              "keyword"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(^| )(__color__)(?![\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}_\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\xB7])",
-            token: [
-              "text",
-              "keyword"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(^| )(__define__)(?![\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}_\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\xB7])",
-            token: [
-              "text",
-              "support.function"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(^| )(__call__)(?![\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}_\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\xB7])",
-            token: [
-              "text",
-              "support.function"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(^| )(__with__)(?![\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}_\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\xB7])",
-            token: [
-              "text",
-              "keyword"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(^| )(__return__)(?![\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}_\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\xB7])",
-            token: [
-              "text",
-              "keyword"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(__comma__)",
-            token: [
-              "keyword"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(-)",
-            token: [
-              "keyword"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(=)",
-            token: [
-              "keyword"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(/)",
-            token: [
-              "keyword"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(\\*)",
-            token: [
-              "keyword"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(\\+)",
-            token: [
-              "keyword"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(^| )(__print__)",
-            token: [
-              "text",
-              "keyword"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(^| )(__sleep__)",
-            token: [
-              "text",
-              "keyword"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(^| )(__forward__)",
-            token: [
-              "text",
-              "keyword"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(^| )(__turn__)",
-            token: [
-              "text",
-              "keyword"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(^| )(__random__)",
-            token: [
-              "text",
-              "keyword"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(^| )(__else__)",
-            token: [
-              "text",
-              "keyword"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(^| )(__times__)",
-            token: [
-              "text",
-              "keyword"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(^| )(__black__)(?![\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}_\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\xB7])",
-            token: [
-              "text",
-              "text"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(^| )(__blue__)(?![\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}_\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\xB7])",
-            token: [
-              "text",
-              "text"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(^| )(__brown__)(?![\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}_\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\xB7])",
-            token: [
-              "text",
-              "text"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(^| )(__gray__)(?![\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}_\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\xB7])",
-            token: [
-              "text",
-              "text"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(^| )(__green__)(?![\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}_\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\xB7])",
-            token: [
-              "text",
-              "text"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(^| )(__orange__)(?![\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}_\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\xB7])",
-            token: [
-              "text",
-              "text"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(^| )(__pink__)(?![\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}_\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\xB7])",
-            token: [
-              "text",
-              "text"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(^| )(__purple__)(?![\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}_\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\xB7])",
-            token: [
-              "text",
-              "text"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(^| )(__red__)(?![\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}_\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\xB7])",
-            token: [
-              "text",
-              "text"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(^| )(__white__)(?![\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}_\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\xB7])",
-            token: [
-              "text",
-              "text"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(^| )(__yellow__)(?![\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}_\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\xB7])",
-            token: [
-              "text",
-              "text"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(^| )(__pressed__)(?![\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}_\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\xB7])",
-            token: [
-              "text",
-              "event"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(^| )(__clear__)(?![\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}_\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\xB7])",
-            token: [
-              "text",
-              "event"
-            ],
-            next: "start",
-            unicode: true
-          }
-        ]
-      }
-    },
-    {
-      name: "level13",
-      rules: {
-        start: [
-          {
-            regex: "(^| )(__is__)( +)(__ask__)",
-            token: [
-              "text",
-              "keyword",
-              "text",
-              "keyword"
-            ]
-          },
-          {
-            regex: "(=)( +)(__ask__)",
-            token: [
-              "keyword",
-              "text",
-              "keyword"
-            ]
-          },
-          {
-            regex: "#.*$",
-            token: "comment",
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: '"[^"]*"',
-            token: "constant.character",
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "'[^']*'",
-            token: "constant.character",
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "\xAB[^\xBB]*\xBB",
-            token: "constant.character",
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: '"[^"]*$',
-            token: "text",
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "'[^']*$",
-            token: "text",
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "\xAB[^\xBB]*$",
-            token: "text",
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "_\\?_",
-            token: "invalid",
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(^| )(_)(?= |$)",
-            token: [
-              "text",
-              "invalid"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(^| )([__DIGIT__]*\\.?[__DIGIT__]+)(?![\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}_\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\xB7])",
-            token: [
-              "text",
-              "variable"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(^| )(__print__)([__DIGIT__]*\\.?[__DIGIT__]+)(?![\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}_\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\xB7])",
-            token: [
-              "text",
-              "keyword",
-              "variable"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(^| )(__sleep__)([__DIGIT__]*\\.?[__DIGIT__]+)(?![\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}_\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\xB7])",
-            token: [
-              "text",
-              "keyword",
-              "variable"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(^| )(__forward__)([__DIGIT__]*\\.?[__DIGIT__]+)(?![\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}_\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\xB7])",
-            token: [
-              "text",
-              "keyword",
-              "variable"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(^| )(__turn__)([__DIGIT__]*\\.?[__DIGIT__]+)(?![\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}_\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\xB7])",
-            token: [
-              "text",
-              "keyword",
-              "variable"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(^| )(__random__)([__DIGIT__]*\\.?[__DIGIT__]+)(?![\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}_\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\xB7])",
-            token: [
-              "text",
-              "keyword",
-              "variable"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(^| )(__else__)([__DIGIT__]*\\.?[__DIGIT__]+)(?![\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}_\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\xB7])",
-            token: [
-              "text",
-              "keyword",
-              "variable"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(^| )(__times__)([__DIGIT__]*\\.?[__DIGIT__]+)(?![\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}_\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\xB7])",
-            token: [
-              "text",
-              "keyword",
-              "variable"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(__comma__)([__DIGIT__]*\\.?[__DIGIT__]+)(?![\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}_\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\xB7])",
-            token: [
-              "keyword",
-              "variable"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(-)([__DIGIT__]*\\.?[__DIGIT__]+)(?![\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}_\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\xB7])",
-            token: [
-              "keyword",
-              "variable"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(=)([__DIGIT__]*\\.?[__DIGIT__]+)(?![\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}_\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\xB7])",
-            token: [
-              "keyword",
-              "variable"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(/)([__DIGIT__]*\\.?[__DIGIT__]+)(?![\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}_\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\xB7])",
-            token: [
-              "keyword",
-              "variable"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(\\*)([__DIGIT__]*\\.?[__DIGIT__]+)(?![\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}_\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\xB7])",
-            token: [
-              "keyword",
-              "variable"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(\\+)([__DIGIT__]*\\.?[__DIGIT__]+)(?![\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}_\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\xB7])",
-            token: [
-              "keyword",
-              "variable"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(^| )(__is__)(?![\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}_\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\xB7])",
-            token: [
-              "text",
-              "keyword"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(^| )(__at__)(?![\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}_\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\xB7])",
-            token: [
-              "text",
-              "keyword"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(^| )(__add__)(?![\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}_\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\xB7])",
-            token: [
-              "text",
-              "keyword"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(^| )(__to_list__)(?![\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}_\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\xB7])",
-            token: [
-              "text",
-              "keyword"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(^| )(__remove__)(?![\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}_\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\xB7])",
-            token: [
-              "text",
-              "keyword"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(^| )(__from__)(?![\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}_\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\xB7])",
-            token: [
-              "text",
-              "keyword"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(^| )(__in__)(?![\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}_\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\xB7])",
-            token: [
-              "text",
-              "keyword"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(^| )(__not_in__)(?![\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}_\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\xB7])",
-            token: [
-              "text",
-              "keyword"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(^| )(__if__)(?![\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}_\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\xB7])",
-            token: [
-              "text",
-              "keyword"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(^| )(__for__)(?![\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}_\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\xB7])",
-            token: [
-              "text",
-              "keyword"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(^| )(__range__)(?![\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}_\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\xB7])",
-            token: [
-              "text",
-              "keyword"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(^| )(__to__)(?![\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}_\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\xB7])",
-            token: [
-              "text",
-              "keyword"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(^| )(__and__)(?![\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}_\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\xB7])",
-            token: [
-              "text",
-              "keyword"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(^| )(__or__)(?![\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}_\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\xB7])",
-            token: [
-              "text",
-              "keyword"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(^| )(__repeat__)(?![\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}_\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\xB7])",
-            token: [
-              "text",
-              "keyword"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(^| )(__color__)(?![\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}_\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\xB7])",
-            token: [
-              "text",
-              "keyword"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(^| )(__define__)(?![\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}_\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\xB7])",
-            token: [
-              "text",
-              "support.function"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(^| )(__call__)(?![\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}_\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\xB7])",
-            token: [
-              "text",
-              "support.function"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(^| )(__with__)(?![\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}_\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\xB7])",
-            token: [
-              "text",
-              "keyword"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(^| )(__return__)(?![\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}_\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\xB7])",
-            token: [
-              "text",
-              "keyword"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(__comma__)",
-            token: [
-              "keyword"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(-)",
-            token: [
-              "keyword"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(=)",
-            token: [
-              "keyword"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(/)",
-            token: [
-              "keyword"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(\\*)",
-            token: [
-              "keyword"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(\\+)",
-            token: [
-              "keyword"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(^| )(__print__)",
-            token: [
-              "text",
-              "keyword"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(^| )(__sleep__)",
-            token: [
-              "text",
-              "keyword"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(^| )(__forward__)",
-            token: [
-              "text",
-              "keyword"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(^| )(__turn__)",
-            token: [
-              "text",
-              "keyword"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(^| )(__random__)",
-            token: [
-              "text",
-              "keyword"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(^| )(__else__)",
-            token: [
-              "text",
-              "keyword"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(^| )(__times__)",
-            token: [
-              "text",
-              "keyword"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(^| )(__black__)(?![\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}_\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\xB7])",
-            token: [
-              "text",
-              "text"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(^| )(__blue__)(?![\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}_\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\xB7])",
-            token: [
-              "text",
-              "text"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(^| )(__brown__)(?![\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}_\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\xB7])",
-            token: [
-              "text",
-              "text"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(^| )(__gray__)(?![\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}_\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\xB7])",
-            token: [
-              "text",
-              "text"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(^| )(__green__)(?![\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}_\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\xB7])",
-            token: [
-              "text",
-              "text"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(^| )(__orange__)(?![\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}_\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\xB7])",
-            token: [
-              "text",
-              "text"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(^| )(__pink__)(?![\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}_\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\xB7])",
-            token: [
-              "text",
-              "text"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(^| )(__purple__)(?![\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}_\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\xB7])",
-            token: [
-              "text",
-              "text"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(^| )(__red__)(?![\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}_\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\xB7])",
-            token: [
-              "text",
-              "text"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(^| )(__white__)(?![\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}_\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\xB7])",
-            token: [
-              "text",
-              "text"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(^| )(__yellow__)(?![\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}_\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\xB7])",
-            token: [
-              "text",
-              "text"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(^| )(__pressed__)(?![\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}_\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\xB7])",
-            token: [
-              "text",
-              "event"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(^| )(__clear__)(?![\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}_\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\xB7])",
-            token: [
-              "text",
-              "event"
-            ],
-            next: "start",
-            unicode: true
-          }
-        ]
-      }
-    },
-    {
-      name: "level14",
-      rules: {
-        start: [
-          {
-            regex: "(^| )(__is__)( +)(__ask__)",
-            token: [
-              "text",
-              "keyword",
-              "text",
-              "keyword"
-            ]
-          },
-          {
-            regex: "(=)( +)(__ask__)",
-            token: [
-              "keyword",
-              "text",
-              "keyword"
-            ]
-          },
-          {
-            regex: "#.*$",
-            token: "comment",
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: '"[^"]*"',
-            token: "constant.character",
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "'[^']*'",
-            token: "constant.character",
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "\xAB[^\xBB]*\xBB",
-            token: "constant.character",
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: '"[^"]*$',
-            token: "text",
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "'[^']*$",
-            token: "text",
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "\xAB[^\xBB]*$",
-            token: "text",
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "_\\?_",
-            token: "invalid",
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(^| )(_)(?= |$)",
-            token: [
-              "text",
-              "invalid"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(^| )([__DIGIT__]*\\.?[__DIGIT__]+)(?![\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}_\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\xB7])",
-            token: [
-              "text",
-              "variable"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(^| )(__print__)([__DIGIT__]*\\.?[__DIGIT__]+)(?![\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}_\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\xB7])",
-            token: [
-              "text",
-              "keyword",
-              "variable"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(^| )(__sleep__)([__DIGIT__]*\\.?[__DIGIT__]+)(?![\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}_\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\xB7])",
-            token: [
-              "text",
-              "keyword",
-              "variable"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(^| )(__forward__)([__DIGIT__]*\\.?[__DIGIT__]+)(?![\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}_\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\xB7])",
-            token: [
-              "text",
-              "keyword",
-              "variable"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(^| )(__turn__)([__DIGIT__]*\\.?[__DIGIT__]+)(?![\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}_\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\xB7])",
-            token: [
-              "text",
-              "keyword",
-              "variable"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(^| )(__random__)([__DIGIT__]*\\.?[__DIGIT__]+)(?![\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}_\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\xB7])",
-            token: [
-              "text",
-              "keyword",
-              "variable"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(^| )(__times__)([__DIGIT__]*\\.?[__DIGIT__]+)(?![\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}_\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\xB7])",
-            token: [
-              "text",
-              "keyword",
-              "variable"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(__comma__)([__DIGIT__]*\\.?[__DIGIT__]+)(?![\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}_\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\xB7])",
-            token: [
-              "keyword",
-              "variable"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(-)([__DIGIT__]*\\.?[__DIGIT__]+)(?![\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}_\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\xB7])",
-            token: [
-              "keyword",
-              "variable"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(=)([__DIGIT__]*\\.?[__DIGIT__]+)(?![\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}_\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\xB7])",
-            token: [
-              "keyword",
-              "variable"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(/)([__DIGIT__]*\\.?[__DIGIT__]+)(?![\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}_\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\xB7])",
-            token: [
-              "keyword",
-              "variable"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(\\*)([__DIGIT__]*\\.?[__DIGIT__]+)(?![\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}_\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\xB7])",
-            token: [
-              "keyword",
-              "variable"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(\\+)([__DIGIT__]*\\.?[__DIGIT__]+)(?![\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}_\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\xB7])",
-            token: [
-              "keyword",
-              "variable"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(<)([__DIGIT__]*\\.?[__DIGIT__]+)(?![\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}_\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\xB7])",
-            token: [
-              "keyword",
-              "variable"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(>)([__DIGIT__]*\\.?[__DIGIT__]+)(?![\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}_\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\xB7])",
-            token: [
-              "keyword",
-              "variable"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(!)([__DIGIT__]*\\.?[__DIGIT__]+)(?![\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}_\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\xB7])",
-            token: [
-              "keyword",
-              "variable"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(^| )(__is__)(?![\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}_\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\xB7])",
-            token: [
-              "text",
-              "keyword"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(^| )(__at__)(?![\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}_\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\xB7])",
-            token: [
-              "text",
-              "keyword"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(^| )(__add__)(?![\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}_\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\xB7])",
-            token: [
-              "text",
-              "keyword"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(^| )(__to_list__)(?![\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}_\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\xB7])",
-            token: [
-              "text",
-              "keyword"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(^| )(__remove__)(?![\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}_\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\xB7])",
-            token: [
-              "text",
-              "keyword"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(^| )(__from__)(?![\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}_\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\xB7])",
-            token: [
-              "text",
-              "keyword"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(^| )(__in__)(?![\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}_\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\xB7])",
-            token: [
-              "text",
-              "keyword"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(^| )(__not_in__)(?![\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}_\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\xB7])",
-            token: [
-              "text",
-              "keyword"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(^| )(__if__)(?![\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}_\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\xB7])",
-            token: [
-              "text",
-              "keyword"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(^| )(__for__)(?![\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}_\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\xB7])",
-            token: [
-              "text",
-              "keyword"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(^| )(__range__)(?![\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}_\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\xB7])",
-            token: [
-              "text",
-              "keyword"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(^| )(__to__)(?![\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}_\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\xB7])",
-            token: [
-              "text",
-              "keyword"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(^| )(__and__)(?![\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}_\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\xB7])",
-            token: [
-              "text",
-              "keyword"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(^| )(__or__)(?![\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}_\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\xB7])",
-            token: [
-              "text",
-              "keyword"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(^| )(__else__)(?![\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}_\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\xB7])",
-            token: [
-              "text",
-              "keyword"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(^| )(__repeat__)(?![\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}_\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\xB7])",
-            token: [
-              "text",
-              "keyword"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(^| )(__color__)(?![\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}_\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\xB7])",
-            token: [
-              "text",
-              "keyword"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(^| )(__define__)(?![\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}_\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\xB7])",
-            token: [
-              "text",
-              "support.function"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(^| )(__call__)(?![\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}_\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\xB7])",
-            token: [
-              "text",
-              "support.function"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(^| )(__with__)(?![\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}_\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\xB7])",
-            token: [
-              "text",
-              "keyword"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(^| )(__return__)(?![\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}_\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\xB7])",
-            token: [
-              "text",
-              "keyword"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(__comma__)",
-            token: [
-              "keyword"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(-)",
-            token: [
-              "keyword"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(=)",
-            token: [
-              "keyword"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(/)",
-            token: [
-              "keyword"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(\\*)",
-            token: [
-              "keyword"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(\\+)",
-            token: [
-              "keyword"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(<)",
-            token: [
-              "keyword"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(>)",
-            token: [
-              "keyword"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(!)",
-            token: [
-              "keyword"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(^| )(__print__)",
-            token: [
-              "text",
-              "keyword"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(^| )(__sleep__)",
-            token: [
-              "text",
-              "keyword"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(^| )(__forward__)",
-            token: [
-              "text",
-              "keyword"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(^| )(__turn__)",
-            token: [
-              "text",
-              "keyword"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(^| )(__random__)",
-            token: [
-              "text",
-              "keyword"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(^| )(__times__)",
-            token: [
-              "text",
-              "keyword"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(^| )(__black__)(?![\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}_\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\xB7])",
-            token: [
-              "text",
-              "text"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(^| )(__blue__)(?![\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}_\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\xB7])",
-            token: [
-              "text",
-              "text"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(^| )(__brown__)(?![\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}_\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\xB7])",
-            token: [
-              "text",
-              "text"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(^| )(__gray__)(?![\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}_\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\xB7])",
-            token: [
-              "text",
-              "text"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(^| )(__green__)(?![\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}_\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\xB7])",
-            token: [
-              "text",
-              "text"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(^| )(__orange__)(?![\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}_\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\xB7])",
-            token: [
-              "text",
-              "text"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(^| )(__pink__)(?![\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}_\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\xB7])",
-            token: [
-              "text",
-              "text"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(^| )(__purple__)(?![\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}_\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\xB7])",
-            token: [
-              "text",
-              "text"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(^| )(__red__)(?![\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}_\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\xB7])",
-            token: [
-              "text",
-              "text"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(^| )(__white__)(?![\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}_\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\xB7])",
-            token: [
-              "text",
-              "text"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(^| )(__yellow__)(?![\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}_\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\xB7])",
-            token: [
-              "text",
-              "text"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(^| )(__pressed__)(?![\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}_\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\xB7])",
-            token: [
-              "text",
-              "event"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(^| )(__clear__)(?![\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}_\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\xB7])",
-            token: [
-              "text",
-              "event"
-            ],
-            next: "start",
-            unicode: true
-          }
-        ]
-      }
-    },
-    {
-      name: "level15",
-      rules: {
-        start: [
-          {
-            regex: "(^| )(__is__)( +)(__ask__)",
-            token: [
-              "text",
-              "keyword",
-              "text",
-              "keyword"
-            ]
-          },
-          {
-            regex: "(=)( +)(__ask__)",
-            token: [
-              "keyword",
-              "text",
-              "keyword"
-            ]
-          },
-          {
-            regex: "#.*$",
-            token: "comment",
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: '"[^"]*"',
-            token: "constant.character",
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "'[^']*'",
-            token: "constant.character",
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "\xAB[^\xBB]*\xBB",
-            token: "constant.character",
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: '"[^"]*$',
-            token: "text",
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "'[^']*$",
-            token: "text",
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "\xAB[^\xBB]*$",
-            token: "text",
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "_\\?_",
-            token: "invalid",
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(^| )(_)(?= |$)",
-            token: [
-              "text",
-              "invalid"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(^| )([__DIGIT__]*\\.?[__DIGIT__]+)(?![\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}_\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\xB7])",
-            token: [
-              "text",
-              "variable"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(^| )(__print__)([__DIGIT__]*\\.?[__DIGIT__]+)(?![\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}_\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\xB7])",
-            token: [
-              "text",
-              "keyword",
-              "variable"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(^| )(__sleep__)([__DIGIT__]*\\.?[__DIGIT__]+)(?![\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}_\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\xB7])",
-            token: [
-              "text",
-              "keyword",
-              "variable"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(^| )(__forward__)([__DIGIT__]*\\.?[__DIGIT__]+)(?![\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}_\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\xB7])",
-            token: [
-              "text",
-              "keyword",
-              "variable"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(^| )(__turn__)([__DIGIT__]*\\.?[__DIGIT__]+)(?![\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}_\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\xB7])",
-            token: [
-              "text",
-              "keyword",
-              "variable"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(^| )(__random__)([__DIGIT__]*\\.?[__DIGIT__]+)(?![\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}_\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\xB7])",
-            token: [
-              "text",
-              "keyword",
-              "variable"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(^| )(__else__)([__DIGIT__]*\\.?[__DIGIT__]+)(?![\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}_\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\xB7])",
-            token: [
-              "text",
-              "keyword",
-              "variable"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(^| )(__times__)([__DIGIT__]*\\.?[__DIGIT__]+)(?![\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}_\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\xB7])",
-            token: [
-              "text",
-              "keyword",
-              "variable"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(__comma__)([__DIGIT__]*\\.?[__DIGIT__]+)(?![\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}_\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\xB7])",
-            token: [
-              "keyword",
-              "variable"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(-)([__DIGIT__]*\\.?[__DIGIT__]+)(?![\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}_\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\xB7])",
-            token: [
-              "keyword",
-              "variable"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(=)([__DIGIT__]*\\.?[__DIGIT__]+)(?![\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}_\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\xB7])",
-            token: [
-              "keyword",
-              "variable"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(/)([__DIGIT__]*\\.?[__DIGIT__]+)(?![\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}_\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\xB7])",
-            token: [
-              "keyword",
-              "variable"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(\\*)([__DIGIT__]*\\.?[__DIGIT__]+)(?![\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}_\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\xB7])",
-            token: [
-              "keyword",
-              "variable"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(\\+)([__DIGIT__]*\\.?[__DIGIT__]+)(?![\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}_\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\xB7])",
-            token: [
-              "keyword",
-              "variable"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(<)([__DIGIT__]*\\.?[__DIGIT__]+)(?![\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}_\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\xB7])",
-            token: [
-              "keyword",
-              "variable"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(>)([__DIGIT__]*\\.?[__DIGIT__]+)(?![\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}_\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\xB7])",
-            token: [
-              "keyword",
-              "variable"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(!)([__DIGIT__]*\\.?[__DIGIT__]+)(?![\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}_\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\xB7])",
-            token: [
-              "keyword",
-              "variable"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(^| )(__is__)(?![\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}_\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\xB7])",
-            token: [
-              "text",
-              "keyword"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(^| )(__at__)(?![\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}_\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\xB7])",
-            token: [
-              "text",
-              "keyword"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(^| )(__add__)(?![\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}_\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\xB7])",
-            token: [
-              "text",
-              "keyword"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(^| )(__to_list__)(?![\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}_\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\xB7])",
-            token: [
-              "text",
-              "keyword"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(^| )(__remove__)(?![\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}_\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\xB7])",
-            token: [
-              "text",
-              "keyword"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(^| )(__from__)(?![\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}_\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\xB7])",
-            token: [
-              "text",
-              "keyword"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(^| )(__in__)(?![\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}_\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\xB7])",
-            token: [
-              "text",
-              "keyword"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(^| )(__not_in__)(?![\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}_\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\xB7])",
-            token: [
-              "text",
-              "keyword"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(^| )(__if__)(?![\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}_\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\xB7])",
-            token: [
-              "text",
-              "keyword"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(^| )(__for__)(?![\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}_\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\xB7])",
-            token: [
-              "text",
-              "keyword"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(^| )(__range__)(?![\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}_\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\xB7])",
-            token: [
-              "text",
-              "keyword"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(^| )(__to__)(?![\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}_\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\xB7])",
-            token: [
-              "text",
-              "keyword"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(^| )(__and__)(?![\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}_\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\xB7])",
-            token: [
-              "text",
-              "keyword"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(^| )(__or__)(?![\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}_\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\xB7])",
-            token: [
-              "text",
-              "keyword"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(^| )(__while__)(?![\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}_\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\xB7])",
-            token: [
-              "text",
-              "keyword"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(^| )(__repeat__)(?![\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}_\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\xB7])",
-            token: [
-              "text",
-              "keyword"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(^| )(__color__)(?![\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}_\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\xB7])",
-            token: [
-              "text",
-              "keyword"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(^| )(__define__)(?![\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}_\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\xB7])",
-            token: [
-              "text",
-              "support.function"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(^| )(__call__)(?![\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}_\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\xB7])",
-            token: [
-              "text",
-              "support.function"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(^| )(__with__)(?![\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}_\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\xB7])",
-            token: [
-              "text",
-              "keyword"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(^| )(__return__)(?![\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}_\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\xB7])",
-            token: [
-              "text",
-              "keyword"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(__comma__)",
-            token: [
-              "keyword"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(-)",
-            token: [
-              "keyword"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(=)",
-            token: [
-              "keyword"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(/)",
-            token: [
-              "keyword"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(\\*)",
-            token: [
-              "keyword"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(\\+)",
-            token: [
-              "keyword"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(<)",
-            token: [
-              "keyword"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(>)",
-            token: [
-              "keyword"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(!)",
-            token: [
-              "keyword"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(^| )(__print__)",
-            token: [
-              "text",
-              "keyword"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(^| )(__sleep__)",
-            token: [
-              "text",
-              "keyword"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(^| )(__forward__)",
-            token: [
-              "text",
-              "keyword"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(^| )(__turn__)",
-            token: [
-              "text",
-              "keyword"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(^| )(__random__)",
-            token: [
-              "text",
-              "keyword"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(^| )(__else__)",
-            token: [
-              "text",
-              "keyword"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(^| )(__times__)",
-            token: [
-              "text",
-              "keyword"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(^| )(__black__)(?![\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}_\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\xB7])",
-            token: [
-              "text",
-              "text"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(^| )(__blue__)(?![\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}_\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\xB7])",
-            token: [
-              "text",
-              "text"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(^| )(__brown__)(?![\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}_\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\xB7])",
-            token: [
-              "text",
-              "text"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(^| )(__gray__)(?![\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}_\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\xB7])",
-            token: [
-              "text",
-              "text"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(^| )(__green__)(?![\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}_\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\xB7])",
-            token: [
-              "text",
-              "text"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(^| )(__orange__)(?![\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}_\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\xB7])",
-            token: [
-              "text",
-              "text"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(^| )(__pink__)(?![\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}_\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\xB7])",
-            token: [
-              "text",
-              "text"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(^| )(__purple__)(?![\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}_\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\xB7])",
-            token: [
-              "text",
-              "text"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(^| )(__red__)(?![\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}_\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\xB7])",
-            token: [
-              "text",
-              "text"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(^| )(__white__)(?![\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}_\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\xB7])",
-            token: [
-              "text",
-              "text"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(^| )(__yellow__)(?![\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}_\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\xB7])",
-            token: [
-              "text",
-              "text"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(^| )(__pressed__)(?![\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}_\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\xB7])",
-            token: [
-              "text",
-              "event"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(^| )(__clear__)(?![\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}_\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\xB7])",
-            token: [
-              "text",
-              "event"
-            ],
-            next: "start",
-            unicode: true
-          }
-        ]
-      }
-    },
-    {
-      name: "level16",
-      rules: {
-        start: [
-          {
-            regex: "(^| )(__is__)( +)(__ask__)",
-            token: [
-              "text",
-              "keyword",
-              "text",
-              "keyword"
-            ]
-          },
-          {
-            regex: "(=)( +)(__ask__)",
-            token: [
-              "keyword",
-              "text",
-              "keyword"
-            ]
-          },
-          {
-            regex: "#.*$",
-            token: "comment",
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: '"[^"]*"',
-            token: "constant.character",
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "'[^']*'",
-            token: "constant.character",
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "\xAB[^\xBB]*\xBB",
-            token: "constant.character",
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: '"[^"]*$',
-            token: "text",
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "'[^']*$",
-            token: "text",
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "\xAB[^\xBB]*$",
-            token: "text",
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "_\\?_",
-            token: "invalid",
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(^| )(_)(?= |$)",
-            token: [
-              "text",
-              "invalid"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(^| )([__DIGIT__]*\\.?[__DIGIT__]+)(?![\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}_\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\xB7])",
-            token: [
-              "text",
-              "variable"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(^| )(__print__)([__DIGIT__]*\\.?[__DIGIT__]+)(?![\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}_\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\xB7])",
-            token: [
-              "text",
-              "keyword",
-              "variable"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(^| )(__sleep__)([__DIGIT__]*\\.?[__DIGIT__]+)(?![\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}_\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\xB7])",
-            token: [
-              "text",
-              "keyword",
-              "variable"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(^| )(__forward__)([__DIGIT__]*\\.?[__DIGIT__]+)(?![\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}_\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\xB7])",
-            token: [
-              "text",
-              "keyword",
-              "variable"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(^| )(__turn__)([__DIGIT__]*\\.?[__DIGIT__]+)(?![\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}_\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\xB7])",
-            token: [
-              "text",
-              "keyword",
-              "variable"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(^| )(__random__)([__DIGIT__]*\\.?[__DIGIT__]+)(?![\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}_\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\xB7])",
-            token: [
-              "text",
-              "keyword",
-              "variable"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(^| )(__times__)([__DIGIT__]*\\.?[__DIGIT__]+)(?![\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}_\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\xB7])",
-            token: [
-              "text",
-              "keyword",
-              "variable"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(__comma__)([__DIGIT__]*\\.?[__DIGIT__]+)(?![\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}_\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\xB7])",
-            token: [
-              "keyword",
-              "variable"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(-)([__DIGIT__]*\\.?[__DIGIT__]+)(?![\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}_\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\xB7])",
-            token: [
-              "keyword",
-              "variable"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(=)([__DIGIT__]*\\.?[__DIGIT__]+)(?![\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}_\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\xB7])",
-            token: [
-              "keyword",
-              "variable"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(/)([__DIGIT__]*\\.?[__DIGIT__]+)(?![\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}_\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\xB7])",
-            token: [
-              "keyword",
-              "variable"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(\\*)([__DIGIT__]*\\.?[__DIGIT__]+)(?![\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}_\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\xB7])",
-            token: [
-              "keyword",
-              "variable"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(\\+)([__DIGIT__]*\\.?[__DIGIT__]+)(?![\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}_\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\xB7])",
-            token: [
-              "keyword",
-              "variable"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(<)([__DIGIT__]*\\.?[__DIGIT__]+)(?![\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}_\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\xB7])",
-            token: [
-              "keyword",
-              "variable"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(>)([__DIGIT__]*\\.?[__DIGIT__]+)(?![\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}_\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\xB7])",
-            token: [
-              "keyword",
-              "variable"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(!)([__DIGIT__]*\\.?[__DIGIT__]+)(?![\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}_\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\xB7])",
-            token: [
-              "keyword",
-              "variable"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(\\[)([__DIGIT__]*\\.?[__DIGIT__]+)(?![\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}_\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\xB7])",
-            token: [
-              "keyword",
-              "variable"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(\\])([__DIGIT__]*\\.?[__DIGIT__]+)(?![\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}_\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\xB7])",
-            token: [
-              "keyword",
-              "variable"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(^| )(__is__)(?![\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}_\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\xB7])",
-            token: [
-              "text",
-              "keyword"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(^| )(__at__)(?![\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}_\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\xB7])",
-            token: [
-              "text",
-              "keyword"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(^| )(__add__)(?![\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}_\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\xB7])",
-            token: [
-              "text",
-              "keyword"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(^| )(__to_list__)(?![\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}_\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\xB7])",
-            token: [
-              "text",
-              "keyword"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(^| )(__remove__)(?![\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}_\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\xB7])",
-            token: [
-              "text",
-              "keyword"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(^| )(__from__)(?![\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}_\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\xB7])",
-            token: [
-              "text",
-              "keyword"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(^| )(__in__)(?![\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}_\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\xB7])",
-            token: [
-              "text",
-              "keyword"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(^| )(__not_in__)(?![\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}_\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\xB7])",
-            token: [
-              "text",
-              "keyword"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(^| )(__if__)(?![\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}_\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\xB7])",
-            token: [
-              "text",
-              "keyword"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(^| )(__else__)(?![\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}_\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\xB7])",
-            token: [
-              "text",
-              "keyword"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(^| )(__for__)(?![\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}_\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\xB7])",
-            token: [
-              "text",
-              "keyword"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(^| )(__range__)(?![\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}_\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\xB7])",
-            token: [
-              "text",
-              "keyword"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(^| )(__to__)(?![\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}_\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\xB7])",
-            token: [
-              "text",
-              "keyword"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(^| )(__and__)(?![\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}_\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\xB7])",
-            token: [
-              "text",
-              "keyword"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(^| )(__or__)(?![\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}_\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\xB7])",
-            token: [
-              "text",
-              "keyword"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(^| )(__while__)(?![\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}_\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\xB7])",
-            token: [
-              "text",
-              "keyword"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(^| )(__repeat__)(?![\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}_\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\xB7])",
-            token: [
-              "text",
-              "keyword"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(^| )(__color__)(?![\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}_\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\xB7])",
-            token: [
-              "text",
-              "keyword"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(^| )(__define__)(?![\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}_\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\xB7])",
-            token: [
-              "text",
-              "support.function"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(^| )(__call__)(?![\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}_\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\xB7])",
-            token: [
-              "text",
-              "support.function"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(^| )(__with__)(?![\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}_\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\xB7])",
-            token: [
-              "text",
-              "keyword"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(^| )(__return__)(?![\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}_\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\xB7])",
-            token: [
-              "text",
-              "keyword"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(__comma__)",
-            token: [
-              "keyword"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(-)",
-            token: [
-              "keyword"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(=)",
-            token: [
-              "keyword"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(/)",
-            token: [
-              "keyword"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(\\*)",
-            token: [
-              "keyword"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(\\+)",
-            token: [
-              "keyword"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(<)",
-            token: [
-              "keyword"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(>)",
-            token: [
-              "keyword"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(!)",
-            token: [
-              "keyword"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(\\[)",
-            token: [
-              "keyword"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(\\])",
-            token: [
-              "keyword"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(^| )(__print__)",
-            token: [
-              "text",
-              "keyword"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(^| )(__sleep__)",
-            token: [
-              "text",
-              "keyword"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(^| )(__forward__)",
-            token: [
-              "text",
-              "keyword"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(^| )(__turn__)",
-            token: [
-              "text",
-              "keyword"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(^| )(__random__)",
-            token: [
-              "text",
-              "keyword"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(^| )(__times__)",
-            token: [
-              "text",
-              "keyword"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(^| )(__black__)(?![\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}_\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\xB7])",
-            token: [
-              "text",
-              "text"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(^| )(__blue__)(?![\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}_\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\xB7])",
-            token: [
-              "text",
-              "text"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(^| )(__brown__)(?![\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}_\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\xB7])",
-            token: [
-              "text",
-              "text"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(^| )(__gray__)(?![\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}_\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\xB7])",
-            token: [
-              "text",
-              "text"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(^| )(__green__)(?![\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}_\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\xB7])",
-            token: [
-              "text",
-              "text"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(^| )(__orange__)(?![\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}_\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\xB7])",
-            token: [
-              "text",
-              "text"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(^| )(__pink__)(?![\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}_\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\xB7])",
-            token: [
-              "text",
-              "text"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(^| )(__purple__)(?![\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}_\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\xB7])",
-            token: [
-              "text",
-              "text"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(^| )(__red__)(?![\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}_\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\xB7])",
-            token: [
-              "text",
-              "text"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(^| )(__white__)(?![\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}_\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\xB7])",
-            token: [
-              "text",
-              "text"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(^| )(__yellow__)(?![\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}_\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\xB7])",
-            token: [
-              "text",
-              "text"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(^| )(__pressed__)(?![\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}_\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\xB7])",
-            token: [
-              "text",
-              "event"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(^| )(__clear__)(?![\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}_\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\xB7])",
-            token: [
-              "text",
-              "event"
-            ],
-            next: "start",
-            unicode: true
-          }
-        ]
-      }
-    },
-    {
-      name: "level17",
-      rules: {
-        start: [
-          {
-            regex: "(^| )(__is__)( +)(__ask__)",
-            token: [
-              "text",
-              "keyword",
-              "text",
-              "keyword"
-            ]
-          },
-          {
-            regex: "(=)( +)(__ask__)",
-            token: [
-              "keyword",
-              "text",
-              "keyword"
-            ]
-          },
-          {
-            regex: "#.*$",
-            token: "comment",
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: '"[^"]*"',
-            token: "constant.character",
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "'[^']*'",
-            token: "constant.character",
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "\xAB[^\xBB]*\xBB",
-            token: "constant.character",
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: '"[^"]*$',
-            token: "text",
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "'[^']*$",
-            token: "text",
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "\xAB[^\xBB]*$",
-            token: "text",
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "_\\?_",
-            token: "invalid",
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(^| )(_)(?= |$)",
-            token: [
-              "text",
-              "invalid"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(^| )([__DIGIT__]*\\.?[__DIGIT__]+)(?![\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}_\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\xB7])",
-            token: [
-              "text",
-              "variable"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(^| )(__print__)([__DIGIT__]*\\.?[__DIGIT__]+)(?![\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}_\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\xB7])",
-            token: [
-              "text",
-              "keyword",
-              "variable"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(^| )(__sleep__)([__DIGIT__]*\\.?[__DIGIT__]+)(?![\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}_\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\xB7])",
-            token: [
-              "text",
-              "keyword",
-              "variable"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(^| )(__forward__)([__DIGIT__]*\\.?[__DIGIT__]+)(?![\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}_\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\xB7])",
-            token: [
-              "text",
-              "keyword",
-              "variable"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(^| )(__turn__)([__DIGIT__]*\\.?[__DIGIT__]+)(?![\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}_\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\xB7])",
-            token: [
-              "text",
-              "keyword",
-              "variable"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(^| )(__random__)([__DIGIT__]*\\.?[__DIGIT__]+)(?![\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}_\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\xB7])",
-            token: [
-              "text",
-              "keyword",
-              "variable"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(^| )(__times__)([__DIGIT__]*\\.?[__DIGIT__]+)(?![\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}_\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\xB7])",
-            token: [
-              "text",
-              "keyword",
-              "variable"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(__comma__)([__DIGIT__]*\\.?[__DIGIT__]+)(?![\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}_\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\xB7])",
-            token: [
-              "keyword",
-              "variable"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(-)([__DIGIT__]*\\.?[__DIGIT__]+)(?![\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}_\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\xB7])",
-            token: [
-              "keyword",
-              "variable"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(=)([__DIGIT__]*\\.?[__DIGIT__]+)(?![\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}_\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\xB7])",
-            token: [
-              "keyword",
-              "variable"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(/)([__DIGIT__]*\\.?[__DIGIT__]+)(?![\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}_\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\xB7])",
-            token: [
-              "keyword",
-              "variable"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(\\*)([__DIGIT__]*\\.?[__DIGIT__]+)(?![\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}_\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\xB7])",
-            token: [
-              "keyword",
-              "variable"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(\\+)([__DIGIT__]*\\.?[__DIGIT__]+)(?![\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}_\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\xB7])",
-            token: [
-              "keyword",
-              "variable"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(<)([__DIGIT__]*\\.?[__DIGIT__]+)(?![\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}_\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\xB7])",
-            token: [
-              "keyword",
-              "variable"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(>)([__DIGIT__]*\\.?[__DIGIT__]+)(?![\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}_\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\xB7])",
-            token: [
-              "keyword",
-              "variable"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(!)([__DIGIT__]*\\.?[__DIGIT__]+)(?![\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}_\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\xB7])",
-            token: [
-              "keyword",
-              "variable"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(\\[)([__DIGIT__]*\\.?[__DIGIT__]+)(?![\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}_\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\xB7])",
-            token: [
-              "keyword",
-              "variable"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(\\])([__DIGIT__]*\\.?[__DIGIT__]+)(?![\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}_\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\xB7])",
-            token: [
-              "keyword",
-              "variable"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(:)([__DIGIT__]*\\.?[__DIGIT__]+)(?![\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}_\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\xB7])",
-            token: [
-              "keyword",
-              "variable"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(^| )(__is__)(?![\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}_\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\xB7])",
-            token: [
-              "text",
-              "keyword"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(^| )(__at__)(?![\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}_\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\xB7])",
-            token: [
-              "text",
-              "keyword"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(^| )(__add__)(?![\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}_\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\xB7])",
-            token: [
-              "text",
-              "keyword"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(^| )(__to_list__)(?![\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}_\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\xB7])",
-            token: [
-              "text",
-              "keyword"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(^| )(__remove__)(?![\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}_\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\xB7])",
-            token: [
-              "text",
-              "keyword"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(^| )(__from__)(?![\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}_\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\xB7])",
-            token: [
-              "text",
-              "keyword"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(^| )(__in__)(?![\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}_\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\xB7])",
-            token: [
-              "text",
-              "keyword"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(^| )(__not_in__)(?![\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}_\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\xB7])",
-            token: [
-              "text",
-              "keyword"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(^| )(__if__)(?![\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}_\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\xB7])",
-            token: [
-              "text",
-              "keyword"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(^| )(__else__)(?![\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}_\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\xB7])",
-            token: [
-              "text",
-              "keyword"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(^| )(__for__)(?![\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}_\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\xB7])",
-            token: [
-              "text",
-              "keyword"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(^| )(__range__)(?![\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}_\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\xB7])",
-            token: [
-              "text",
-              "keyword"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(^| )(__to__)(?![\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}_\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\xB7])",
-            token: [
-              "text",
-              "keyword"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(^| )(__and__)(?![\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}_\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\xB7])",
-            token: [
-              "text",
-              "keyword"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(^| )(__or__)(?![\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}_\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\xB7])",
-            token: [
-              "text",
-              "keyword"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(^| )(__while__)(?![\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}_\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\xB7])",
-            token: [
-              "text",
-              "keyword"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(^| )(__repeat__)(?![\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}_\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\xB7])",
-            token: [
-              "text",
-              "keyword"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(^| )(__color__)(?![\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}_\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\xB7])",
-            token: [
-              "text",
-              "keyword"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(^| )(__define__)(?![\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}_\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\xB7])",
-            token: [
-              "text",
-              "support.function"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(^| )(__call__)(?![\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}_\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\xB7])",
-            token: [
-              "text",
-              "support.function"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(^| )(__with__)(?![\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}_\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\xB7])",
-            token: [
-              "text",
-              "keyword"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(^| )(__return__)(?![\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}_\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\xB7])",
-            token: [
-              "text",
-              "keyword"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(__comma__)",
-            token: [
-              "keyword"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(-)",
-            token: [
-              "keyword"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(=)",
-            token: [
-              "keyword"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(/)",
-            token: [
-              "keyword"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(\\*)",
-            token: [
-              "keyword"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(\\+)",
-            token: [
-              "keyword"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(<)",
-            token: [
-              "keyword"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(>)",
-            token: [
-              "keyword"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(!)",
-            token: [
-              "keyword"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(\\[)",
-            token: [
-              "keyword"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(\\])",
-            token: [
-              "keyword"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(:)",
-            token: [
-              "keyword"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(^| )(__print__)",
-            token: [
-              "text",
-              "keyword"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(^| )(__sleep__)",
-            token: [
-              "text",
-              "keyword"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(^| )(__forward__)",
-            token: [
-              "text",
-              "keyword"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(^| )(__turn__)",
-            token: [
-              "text",
-              "keyword"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(^| )(__random__)",
-            token: [
-              "text",
-              "keyword"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(^| )(__times__)",
-            token: [
-              "text",
-              "keyword"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(__elif__)(?![\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}_\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\xB7])",
-            token: [
-              "keyword"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(^| )(__black__)(?![\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}_\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\xB7])",
-            token: [
-              "text",
-              "text"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(^| )(__blue__)(?![\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}_\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\xB7])",
-            token: [
-              "text",
-              "text"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(^| )(__brown__)(?![\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}_\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\xB7])",
-            token: [
-              "text",
-              "text"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(^| )(__gray__)(?![\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}_\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\xB7])",
-            token: [
-              "text",
-              "text"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(^| )(__green__)(?![\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}_\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\xB7])",
-            token: [
-              "text",
-              "text"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(^| )(__orange__)(?![\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}_\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\xB7])",
-            token: [
-              "text",
-              "text"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(^| )(__pink__)(?![\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}_\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\xB7])",
-            token: [
-              "text",
-              "text"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(^| )(__purple__)(?![\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}_\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\xB7])",
-            token: [
-              "text",
-              "text"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(^| )(__red__)(?![\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}_\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\xB7])",
-            token: [
-              "text",
-              "text"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(^| )(__white__)(?![\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}_\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\xB7])",
-            token: [
-              "text",
-              "text"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(^| )(__yellow__)(?![\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}_\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\xB7])",
-            token: [
-              "text",
-              "text"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(^| )(__pressed__)(?![\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}_\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\xB7])",
-            token: [
-              "text",
-              "event"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(^| )(__clear__)(?![\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}_\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\xB7])",
-            token: [
-              "text",
-              "event"
-            ],
-            next: "start",
-            unicode: true
-          }
-        ]
-      }
-    },
-    {
-      name: "level18",
-      rules: {
-        start: [
-          {
-            regex: "(^| )(__is__)( +)(__ask__)",
-            token: [
-              "text",
-              "keyword",
-              "text",
-              "keyword"
-            ]
-          },
-          {
-            regex: "(=)( +)(__ask__)",
-            token: [
-              "keyword",
-              "text",
-              "keyword"
-            ]
-          },
-          {
-            regex: "#.*$",
-            token: "comment",
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: '"[^"]*"',
-            token: "constant.character",
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "'[^']*'",
-            token: "constant.character",
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "\xAB[^\xBB]*\xBB",
-            token: "constant.character",
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: '"[^"]*$',
-            token: "text",
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "'[^']*$",
-            token: "text",
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "\xAB[^\xBB]*$",
-            token: "text",
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "_\\?_",
-            token: "invalid",
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(^| )(_)(?= |$)",
-            token: [
-              "text",
-              "invalid"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(^| )([__DIGIT__]*\\.?[__DIGIT__]+)(?![\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}_\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\xB7])",
-            token: [
-              "text",
-              "variable"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(^| )(__print__)([__DIGIT__]*\\.?[__DIGIT__]+)(?![\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}_\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\xB7])",
-            token: [
-              "text",
-              "keyword",
-              "variable"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(^| )(__sleep__)([__DIGIT__]*\\.?[__DIGIT__]+)(?![\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}_\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\xB7])",
-            token: [
-              "text",
-              "keyword",
-              "variable"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(^| )(__forward__)([__DIGIT__]*\\.?[__DIGIT__]+)(?![\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}_\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\xB7])",
-            token: [
-              "text",
-              "keyword",
-              "variable"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(^| )(__turn__)([__DIGIT__]*\\.?[__DIGIT__]+)(?![\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}_\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\xB7])",
-            token: [
-              "text",
-              "keyword",
-              "variable"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(^| )(__random__)([__DIGIT__]*\\.?[__DIGIT__]+)(?![\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}_\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\xB7])",
-            token: [
-              "text",
-              "keyword",
-              "variable"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(^| )(__times__)([__DIGIT__]*\\.?[__DIGIT__]+)(?![\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}_\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\xB7])",
-            token: [
-              "text",
-              "keyword",
-              "variable"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(__comma__)([__DIGIT__]*\\.?[__DIGIT__]+)(?![\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}_\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\xB7])",
-            token: [
-              "keyword",
-              "variable"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(-)([__DIGIT__]*\\.?[__DIGIT__]+)(?![\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}_\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\xB7])",
-            token: [
-              "keyword",
-              "variable"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(=)([__DIGIT__]*\\.?[__DIGIT__]+)(?![\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}_\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\xB7])",
-            token: [
-              "keyword",
-              "variable"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(/)([__DIGIT__]*\\.?[__DIGIT__]+)(?![\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}_\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\xB7])",
-            token: [
-              "keyword",
-              "variable"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(\\*)([__DIGIT__]*\\.?[__DIGIT__]+)(?![\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}_\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\xB7])",
-            token: [
-              "keyword",
-              "variable"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(\\+)([__DIGIT__]*\\.?[__DIGIT__]+)(?![\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}_\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\xB7])",
-            token: [
-              "keyword",
-              "variable"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(<)([__DIGIT__]*\\.?[__DIGIT__]+)(?![\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}_\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\xB7])",
-            token: [
-              "keyword",
-              "variable"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(>)([__DIGIT__]*\\.?[__DIGIT__]+)(?![\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}_\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\xB7])",
-            token: [
-              "keyword",
-              "variable"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(!)([__DIGIT__]*\\.?[__DIGIT__]+)(?![\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}_\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\xB7])",
-            token: [
-              "keyword",
-              "variable"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(\\[)([__DIGIT__]*\\.?[__DIGIT__]+)(?![\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}_\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\xB7])",
-            token: [
-              "keyword",
-              "variable"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(\\])([__DIGIT__]*\\.?[__DIGIT__]+)(?![\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}_\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\xB7])",
-            token: [
-              "keyword",
-              "variable"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(:)([__DIGIT__]*\\.?[__DIGIT__]+)(?![\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}_\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\xB7])",
-            token: [
-              "keyword",
-              "variable"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(\\()([__DIGIT__]*\\.?[__DIGIT__]+)(?![\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}_\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\xB7])",
-            token: [
-              "keyword",
-              "variable"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(\\))([__DIGIT__]*\\.?[__DIGIT__]+)(?![\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}_\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\xB7])",
-            token: [
-              "keyword",
-              "variable"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(^| )(__is__)(?![\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}_\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\xB7])",
-            token: [
-              "text",
-              "keyword"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(^| )(__at__)(?![\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}_\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\xB7])",
-            token: [
-              "text",
-              "keyword"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(^| )(__add__)(?![\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}_\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\xB7])",
-            token: [
-              "text",
-              "keyword"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(^| )(__to_list__)(?![\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}_\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\xB7])",
-            token: [
-              "text",
-              "keyword"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(^| )(__remove__)(?![\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}_\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\xB7])",
-            token: [
-              "text",
-              "keyword"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(^| )(__from__)(?![\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}_\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\xB7])",
-            token: [
-              "text",
-              "keyword"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(^| )(__in__)(?![\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}_\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\xB7])",
-            token: [
-              "text",
-              "keyword"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(^| )(__not_in__)(?![\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}_\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\xB7])",
-            token: [
-              "text",
-              "keyword"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(^| )(__if__)(?![\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}_\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\xB7])",
-            token: [
-              "text",
-              "keyword"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(^| )(__else__)(?![\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}_\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\xB7])",
-            token: [
-              "text",
-              "keyword"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(^| )(__for__)(?![\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}_\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\xB7])",
-            token: [
-              "text",
-              "keyword"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(^| )(__range__)(?![\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}_\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\xB7])",
-            token: [
-              "text",
-              "keyword"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(^| )(__to__)(?![\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}_\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\xB7])",
-            token: [
-              "text",
-              "keyword"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(^| )(__and__)(?![\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}_\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\xB7])",
-            token: [
-              "text",
-              "keyword"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(^| )(__or__)(?![\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}_\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\xB7])",
-            token: [
-              "text",
-              "keyword"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(^| )(__while__)(?![\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}_\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\xB7])",
-            token: [
-              "text",
-              "keyword"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(^| )(__input__)(?![\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}_\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\xB7])",
-            token: [
-              "text",
-              "keyword"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(^| )(__repeat__)(?![\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}_\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\xB7])",
-            token: [
-              "text",
-              "keyword"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(^| )(__color__)(?![\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}_\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\xB7])",
-            token: [
-              "text",
-              "keyword"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(^| )(__def__)(?![\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}_\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\xB7])",
-            token: [
-              "text",
-              "support.function"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(^| )(__return__)(?![\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}_\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\xB7])",
-            token: [
-              "text",
-              "keyword"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(__comma__)",
-            token: [
-              "keyword"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(-)",
-            token: [
-              "keyword"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(=)",
-            token: [
-              "keyword"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(/)",
-            token: [
-              "keyword"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(\\*)",
-            token: [
-              "keyword"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(\\+)",
-            token: [
-              "keyword"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(<)",
-            token: [
-              "keyword"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(>)",
-            token: [
-              "keyword"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(!)",
-            token: [
-              "keyword"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(\\[)",
-            token: [
-              "keyword"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(\\])",
-            token: [
-              "keyword"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(:)",
-            token: [
-              "keyword"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(\\()",
-            token: [
-              "keyword"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(\\))",
-            token: [
-              "keyword"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(^| )(__print__)",
-            token: [
-              "text",
-              "keyword"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(^| )(__sleep__)",
-            token: [
-              "text",
-              "keyword"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(^| )(__forward__)",
-            token: [
-              "text",
-              "keyword"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(^| )(__turn__)",
-            token: [
-              "text",
-              "keyword"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(^| )(__random__)",
-            token: [
-              "text",
-              "keyword"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(^| )(__times__)",
-            token: [
-              "text",
-              "keyword"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(__elif__)(?![\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}_\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\xB7])",
-            token: [
-              "keyword"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(^| )(__black__)(?![\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}_\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\xB7])",
-            token: [
-              "text",
-              "text"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(^| )(__blue__)(?![\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}_\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\xB7])",
-            token: [
-              "text",
-              "text"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(^| )(__brown__)(?![\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}_\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\xB7])",
-            token: [
-              "text",
-              "text"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(^| )(__gray__)(?![\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}_\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\xB7])",
-            token: [
-              "text",
-              "text"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(^| )(__green__)(?![\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}_\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\xB7])",
-            token: [
-              "text",
-              "text"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(^| )(__orange__)(?![\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}_\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\xB7])",
-            token: [
-              "text",
-              "text"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(^| )(__pink__)(?![\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}_\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\xB7])",
-            token: [
-              "text",
-              "text"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(^| )(__purple__)(?![\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}_\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\xB7])",
-            token: [
-              "text",
-              "text"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(^| )(__red__)(?![\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}_\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\xB7])",
-            token: [
-              "text",
-              "text"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(^| )(__white__)(?![\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}_\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\xB7])",
-            token: [
-              "text",
-              "text"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(^| )(__yellow__)(?![\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}_\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\xB7])",
-            token: [
-              "text",
-              "text"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(^| )(__pressed__)(?![\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}_\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\xB7])",
-            token: [
-              "text",
-              "event"
-            ],
-            next: "start",
-            unicode: true
-          },
-          {
-            regex: "(^| )(__clear__)(?![\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}_\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\xB7])",
-            token: [
-              "text",
-              "event"
-            ],
-            next: "start",
-            unicode: true
-          }
-        ]
-      }
-    }
-  ];
-
-  // highlighting/highlighting-trad.json
-  var ar = {
-    add: "\u0640*\u0627\u0640*\u0636\u0640*\u0641\u0640*|add",
-    and: "\u0640*\u0648\u0640*|and",
-    ask: "\u0640*\u0627\u0640*\u0633\u0640*\u0623\u0640*\u0644\u0640*|ask",
-    at: "\u0640*\u0628\u0640*\u0634\u0640*\u0643\u0640*\u0644\u0640*|at",
-    black: "\u0640*\u0627\u0640*\u0633\u0640*\u0648\u0640*\u062F\u0640*|black",
-    blue: "\u0640*\u0627\u0640*\u0632\u0640*\u0631\u0640*\u0642\u0640*|blue",
-    brown: "\u0640*\u0628\u0640*\u0646\u0640*\u064A\u0640*|brown",
-    call: "\u0640*c\u0640*a\u0640*l\u0640*l\u0640*|call",
-    clear: "\u0640*\u0645\u0640*\u0633\u0640*\u062D\u0640*|clear",
-    color: "\u0640*\u0644\u0640*\u0648\u0640*\u0646\u0640*|color",
-    comma: "\u0640*\u060C\u0640*|,",
-    def: "\u0640*d\u0640*e\u0640*f\u0640*|def",
-    define: "\u0640*d\u0640*e\u0640*f\u0640*i\u0640*n\u0640*e\u0640*|define",
-    echo: "\u0640*\u0631\u0640*\u062F\u0640*\u062F\u0640*|echo",
-    elif: "\u0640*\u0648\u0640*\u0625\u0640*\u0644\u0640*\u0627\u0640* \u0640*\u0627\u0640*\u0630\u0640*\u0627\u0640*|elif",
-    else: "\u0640*\u0648\u0640*\u0625\u0640*\u0644\u0640*\u0627\u0640*|else",
-    for: "\u0640*\u0644\u0640*\u0643\u0640*\u0644\u0640*|for",
-    forward: "\u0640*\u062A\u0640*\u0642\u0640*\u062F\u0640*\u0645\u0640*|forward",
-    from: "\u0640*\u0645\u0640*\u0646\u0640*|from",
-    gray: "\u0640*\u0631\u0640*\u0645\u0640*\u0627\u0640*\u062F\u0640*\u064A\u0640*|gray",
-    green: "\u0640*\u0627\u0640*\u062E\u0640*\u0636\u0640*\u0631\u0640*|green",
-    if: "\u0640*\u0627\u0640*\u0630\u0640*\u0627\u0640*|if",
-    in: "\u0640*\u0641\u0640*\u064A\u0640*|in",
-    input: "\u0640*\u0627\u0640*\u062F\u0640*\u062E\u0640*\u0644\u0640*|input",
-    is: "\u0640*\u0647\u0640*\u0648\u0640*|\u0640*\u0647\u0640*\u064A\u0640*|is",
-    left: "\u0640*\u064A\u0640*\u0633\u0640*\u0627\u0640*\u0631\u0640*|left",
-    length: "\u0640*\u0637\u0640*\u0648\u0640*\u0644\u0640*|length",
-    not_in: "\u0640*n\u0640*o\u0640*t\u0640* \u0640*i\u0640*n\u0640*|not in",
-    or: "\u0640*\u0623\u0640*\u0648\u0640*|or",
-    orange: "\u0640*\u0628\u0640*\u0631\u0640*\u062A\u0640*\u0642\u0640*\u0627\u0640*\u0644\u0640*\u064A\u0640*|orange",
-    pink: "\u0640*\u0632\u0640*\u0647\u0640*\u0631\u0640*\u064A\u0640*|pink",
-    play: "\u0640*p\u0640*l\u0640*a\u0640*y\u0640*|play",
-    pressed: "\u0640*\u0645\u0640*\u0636\u0640*\u063A\u0640*\u0648\u0640*\u0637\u0640*|pressed",
-    print: "\u0640*\u0642\u0640*\u0648\u0640*\u0644\u0640*|print",
-    purple: "\u0640*\u0628\u0640*\u0646\u0640*\u0641\u0640*\u0633\u0640*\u062C\u0640*\u064A\u0640*|purple",
-    random: "\u0640*\u0639\u0640*\u0634\u0640*\u0648\u0640*\u0627\u0640*\u0626\u0640*\u064A\u0640*|random",
-    range: "\u0640*\u0646\u0640*\u0637\u0640*\u0627\u0640*\u0642\u0640*|range",
-    red: "\u0640*\u0627\u0640*\u062D\u0640*\u0645\u0640*\u0631\u0640*|red",
-    remove: "\u0640*\u0627\u0640*\u0632\u0640*\u0644\u0640*|remove",
-    repeat: "\u0640*\u0643\u0640*\u0631\u0640*\u0631\u0640*|repeat",
-    return: "\u0640*r\u0640*e\u0640*t\u0640*u\u0640*r\u0640*n\u0640*|return",
-    right: "\u0640*\u064A\u0640*\u0645\u0640*\u064A\u0640*\u0646\u0640*|right",
-    sleep: "\u0640*\u0627\u0640*\u0646\u0640*\u062A\u0640*\u0638\u0640*\u0631\u0640*|sleep",
-    step: "\u0640*\u062E\u0640*\u0637\u0640*\u0648\u0640*\u0629\u0640*|step",
-    times: "\u0640*\u0645\u0640*\u0631\u0640*\u0629\u0640*|times",
-    to: "\u0640*\u0627\u0640*\u0644\u0640*\u0649\u0640*|to",
-    to_list: "\u0640*\u0627\u0640*\u0644\u0640*\u0649\u0640*|to",
-    turn: "\u0640*\u0627\u0640*\u0633\u0640*\u062A\u0640*\u062F\u0640*\u0631\u0640*|turn",
-    while: "\u0640*\u0628\u0640*\u064A\u0640*\u0646\u0640*\u0645\u0640*\u0627\u0640*|while",
-    white: "\u0640*\u0627\u0640*\u0628\u0640*\u064A\u0640*\u0636\u0640*|white",
-    with: "\u0640*w\u0640*i\u0640*t\u0640*h\u0640*|with",
-    yellow: "\u0640*\u0627\u0640*\u0635\u0640*\u0641\u0640*\u0631\u0640*|yellow",
-    DIGIT: "0\u06601\u06612\u06623\u06634\u06645\u06656\u06667\u06678\u06689\u0669"
-  };
-  var bg = {
-    add: "\u0434\u043E\u0431\u0430\u0432\u0438|add",
-    and: "\u0438|and",
-    ask: "\u043F\u043E\u043F\u0438\u0442\u0430\u0439|ask",
-    at: "\u0432|at",
-    black: "\u0447\u0435\u0440\u043D\u043E|black",
-    blue: "\u0441\u0438\u043D\u044C\u043E|blue",
-    brown: "\u043A\u0430\u0444\u044F\u0432\u043E|brown",
-    call: "\u0438\u0437\u0432\u0438\u043A\u0430\u0439|call",
-    clear: "\u0438\u0437\u0447\u0438\u0441\u0442\u0438|clear",
-    color: "\u0446\u0432\u044F\u0442|color",
-    comma: ",",
-    def: "\u0434\u0435\u0444|def",
-    define: "\u0434\u0435\u0444\u0438\u043D\u0438\u0440\u0430\u0439|define",
-    echo: "\u043F\u043E\u043A\u0430\u0436\u0438|echo",
-    elif: "\u0438\u043D\u0430\u0447\u0435 \u0430\u043A\u043E|elif",
-    else: "\u0438\u043D\u0430\u0447\u0435|else",
-    for: "\u0437\u0430|for",
-    forward: "\u043D\u0430\u043F\u0440\u0435\u0434|forward",
-    from: "\u043E\u0442|from",
-    gray: "\u0441\u0438\u0432\u043E|gray",
-    green: "\u0437\u0435\u043B\u0435\u043D\u043E|green",
-    if: "\u0430\u043A\u043E|if",
-    in: "\u0432|in",
-    input: "\u0432\u044A\u0432\u0435\u0436\u0434\u0430\u043D\u0435|input",
-    is: "\u0435|is",
-    left: "\u043B\u044F\u0432\u043E|left",
-    length: "\u0434\u044A\u043B\u0436\u0438\u043D\u0430|length",
-    not_in: "\u043D\u0435 \u0432/\u0432\u044A\u0432|not in",
-    or: "\u0438\u043B\u0438|or",
-    orange: "\u043E\u0440\u0430\u043D\u0436\u0435\u0432\u043E|orange",
-    pink: "\u0440\u043E\u0437\u043E\u0432\u043E|pink",
-    play: "play",
-    pressed: "\u043D\u0430\u0442\u0438\u0441\u043D\u0430\u0442|pressed",
-    print: "\u043F\u0440\u0438\u043D\u0442\u0438\u0440\u0430\u0439|print",
-    purple: "\u043B\u0438\u043B\u0430\u0432\u043E|purple",
-    random: "\u043F\u0440\u043E\u0438\u0437\u0432\u043E\u043B\u043D\u043E|random",
-    range: "\u043E\u0431\u0445\u0432\u0430\u0442|range",
-    red: "\u0447\u0435\u0440\u0432\u0435\u043D\u043E|red",
-    remove: "\u043F\u0440\u0435\u043C\u0430\u0445\u043D\u0438|remove",
-    repeat: "\u043F\u043E\u0432\u0442\u043E\u0440\u0438|repeat",
-    return: "\u0432\u044A\u0440\u043D\u0438|return",
-    right: "\u0434\u044F\u0441\u043D\u043E|right",
-    sleep: "\u0441\u043F\u0438|sleep",
-    step: "\u0441\u0442\u044A\u043F\u043A\u0430|step",
-    times: "\u043F\u044A\u0442\u0438|times",
-    to: "\u0434\u043E|to",
-    to_list: "\u0434\u043E|to",
-    turn: "\u0437\u0430\u0432\u0438\u0439|turn",
-    while: "\u0434\u043E\u043A\u0430\u0442\u043E|while",
-    white: "\u0431\u044F\u043B\u043E|white",
-    with: "\u0441/\u0441\u044A\u0441|with",
-    yellow: "\u0436\u044A\u043B\u0442\u043E|yellow",
-    DIGIT: "0123456789"
-  };
-  var bn = {
-    add: "add",
-    and: "and",
-    ask: "ask",
-    at: "at",
-    black: "black",
-    blue: "blue",
-    brown: "brown",
-    call: "call",
-    clear: "clear",
-    color: "color",
-    comma: ",",
-    def: "def",
-    define: "define",
-    echo: "echo",
-    elif: "elif",
-    else: "else",
-    for: "for",
-    forward: "forward",
-    from: "from",
-    gray: "gray",
-    green: "green",
-    if: "if",
-    in: "in",
-    input: "input",
-    is: "is",
-    left: "left",
-    length: "length",
-    not_in: "not in",
-    or: "or",
-    orange: "orange",
-    pink: "pink",
-    play: "play",
-    pressed: "pressed",
-    print: "print",
-    purple: "purple",
-    random: "random",
-    range: "range",
-    red: "red",
-    remove: "remove",
-    repeat: "repeat",
-    return: "return",
-    right: "right",
-    sleep: "sleep",
-    step: "step",
-    times: "times",
-    to: "to",
-    to_list: "to",
-    turn: "turn",
-    while: "while",
-    white: "white",
-    with: "with",
-    yellow: "yellow",
-    DIGIT: "0123456789"
-  };
-  var ca = {
-    add: "afegeix|add",
-    and: "i|and",
-    ask: "pregunta|ask",
-    at: "a|at",
-    black: "negre|black",
-    blue: "blau|blue",
-    brown: "marr\xF3|brown",
-    call: "crida|call",
-    clear: "neteja|clear",
-    color: "color",
-    comma: ",",
-    def: "def",
-    define: "defineix|define",
-    echo: "eco|echo",
-    elif: "sinosi|elif",
-    else: "sino|else",
-    for: "per|for",
-    forward: "avan\xE7a|forward",
-    from: "de|from",
-    gray: "gris|gray",
-    green: "verd|green",
-    if: "si|if",
-    in: "dins|in",
-    input: "entra|input",
-    is: "\xE9s|is",
-    left: "esquerra|left",
-    length: "mida|length",
-    not_in: "no dins|not in",
-    or: "o|or",
-    orange: "taronja|orange",
-    pink: "rosa|pink",
-    play: "play",
-    pressed: "pressionat|pressed",
-    print: "imprimeix|print",
-    purple: "lila|purple",
-    random: "aleatori|random",
-    range: "rang|range",
-    red: "vermell|red",
-    remove: "esborra|remove",
-    repeat: "repeteix|repeat",
-    return: "retorna|return",
-    right: "dreta|right",
-    sleep: "dorm|sleep",
-    step: "pas|step",
-    times: "vegades|times",
-    to: "fins|to",
-    to_list: "a|to",
-    turn: "gira|turn",
-    while: "mentre|while",
-    white: "blanc|white",
-    with: "amb|with",
-    yellow: "groc|yellow",
-    DIGIT: "0123456789"
-  };
-  var cs = {
-    add: "add",
-    and: "and",
-    ask: "ask",
-    at: "at",
-    black: "black",
-    blue: "blue",
-    brown: "brown",
-    call: "call",
-    clear: "clear",
-    color: "color",
-    comma: ",",
-    def: "def",
-    define: "define",
-    echo: "echo",
-    elif: "elif",
-    else: "else",
-    for: "for",
-    forward: "forward",
-    from: "from",
-    gray: "gray",
-    green: "green",
-    if: "if",
-    in: "in",
-    input: "input",
-    is: "is",
-    left: "left",
-    length: "length",
-    not_in: "not in",
-    or: "or",
-    orange: "orange",
-    pink: "pink",
-    play: "play",
-    pressed: "pressed",
-    print: "print",
-    purple: "purple",
-    random: "random",
-    range: "range",
-    red: "red",
-    remove: "remove",
-    repeat: "repeat",
-    return: "return",
-    right: "right",
-    sleep: "sleep",
-    step: "step",
-    times: "times",
-    to: "to",
-    to_list: "to",
-    turn: "turn",
-    while: "while",
-    white: "white",
-    with: "with",
-    yellow: "yellow",
-    DIGIT: "0123456789"
-  };
-  var cy = {
-    add: "adio|add",
-    and: "a|and",
-    ask: "gofyn|ask",
-    at: "ar|at",
-    black: "du|black",
-    blue: "glas|blue",
-    brown: "brown",
-    call: "call",
-    clear: "clear",
-    color: "lliw|color",
-    comma: ",",
-    def: "def",
-    define: "define",
-    echo: "adleisio|echo",
-    elif: "elif",
-    else: "arall|else",
-    for: "ar gyfer|for",
-    forward: "ymlaen|forward",
-    from: "o|from",
-    gray: "llwyd|gray",
-    green: "gwyrdd|green",
-    if: "os|if",
-    in: "mewn|in",
-    input: "mewnbwn|input",
-    is: "yw|is",
-    left: "chwith|left",
-    length: "hyd|length",
-    not_in: "dim mewn|not in",
-    or: "neu|or",
-    orange: "oren|orange",
-    pink: "pinc|pink",
-    play: "play",
-    pressed: "gwasgu|pressed",
-    print: "argraffu|print",
-    purple: "porffor|purple",
-    random: "hap|random",
-    range: "ystod|range",
-    red: "coch|red",
-    remove: "dileu|remove",
-    repeat: "ailadrodd|repeat",
-    return: "return",
-    right: "dde|right",
-    sleep: "cysgu|sleep",
-    step: "cam|step",
-    times: "gwaith|times",
-    to: "i|to",
-    to_list: "i|to",
-    turn: "troi|turn",
-    while: "tra|while",
-    white: "gwyn|white",
-    with: "with",
-    yellow: "melyn|yellow",
-    DIGIT: "0123456789"
-  };
-  var da = {
-    add: "add",
-    and: "and",
-    ask: "sp\xF8rg|ask",
-    at: "at",
-    black: "sort|black",
-    blue: "bl\xE5|blue",
-    brown: "brun|brown",
-    call: "call",
-    clear: "clear",
-    color: "farve|color",
-    comma: ",",
-    def: "def",
-    define: "define",
-    echo: "ekko|echo",
-    elif: "elif",
-    else: "else",
-    for: "for",
-    forward: "fremad|forward",
-    from: "from",
-    gray: "gr\xE5|gray",
-    green: "gr\xF8n|green",
-    if: "if",
-    in: "in",
-    input: "input",
-    is: "is",
-    left: "left",
-    length: "length",
-    not_in: "not in",
-    or: "or",
-    orange: "orange",
-    pink: "lyser\xF8d|pink",
-    play: "play",
-    pressed: "pressed",
-    print: "print",
-    purple: "lila|purple",
-    random: "random",
-    range: "range",
-    red: "red",
-    remove: "remove",
-    repeat: "repeat",
-    return: "return",
-    right: "right",
-    sleep: "sleep",
-    step: "step",
-    times: "times",
-    to: "to",
-    to_list: "to",
-    turn: "drej|turn",
-    while: "while",
-    white: "white",
-    with: "with",
-    yellow: "yellow",
-    DIGIT: "0123456789"
-  };
-  var de = {
-    add: "addiere|add",
-    and: "und|and",
-    ask: "frage|ask",
-    at: "an|at",
-    black: "Schwarz|black",
-    blue: "Blau|blue",
-    brown: "Braun|brown",
-    call: "call",
-    clear: "abwischen|clear",
-    color: "farbe|color",
-    comma: ",",
-    def: "def",
-    define: "define",
-    echo: "echo",
-    elif: "sofalls|elif",
-    else: "sonst|else",
-    for: "f\xFCr|for",
-    forward: "vorw\xE4rts|forward",
-    from: "aus|from",
-    gray: "Grau|gray",
-    green: "Gr\xFCn|green",
-    if: "falls|if",
-    in: "in",
-    input: "eingabe|input",
-    is: "ist|is",
-    left: "links|left",
-    length: "l\xE4nge|length",
-    not_in: "nicht in|not in",
-    or: "oder|or",
-    orange: "Orange|orange",
-    pink: "Pink|pink",
-    play: "play",
-    pressed: "gedr\xFCckt|pressed",
-    print: "drucke|print",
-    purple: "Lila|purple",
-    random: "zuf\xE4llig|random",
-    range: "bereich|range",
-    red: "Rot|red",
-    remove: "entferne|remove",
-    repeat: "wiederhole|repeat",
-    return: "return",
-    right: "rechts|right",
-    sleep: "schlafe|sleep",
-    step: "schritt|step",
-    times: "mal|times",
-    to: "bis|to",
-    to_list: "zu|to",
-    turn: "drehe|turn",
-    while: "solange|while",
-    white: "Wei\xDF|white",
-    with: "with",
-    yellow: "Gelb|yellow",
-    DIGIT: "0123456789"
-  };
-  var el = {
-    add: "add",
-    and: "and",
-    ask: "ask",
-    at: "at",
-    black: "black",
-    blue: "blue",
-    brown: "brown",
-    call: "call",
-    clear: "clear",
-    color: "color",
-    comma: ",",
-    def: "def",
-    define: "define",
-    echo: "echo",
-    elif: "elif",
-    else: "else",
-    for: "for",
-    forward: "forward",
-    from: "from",
-    gray: "gray",
-    green: "green",
-    if: "if",
-    in: "in",
-    input: "input",
-    is: "is",
-    left: "left",
-    length: "length",
-    not_in: "not in",
-    or: "or",
-    orange: "orange",
-    pink: "pink",
-    play: "play",
-    pressed: "pressed",
-    print: "print",
-    purple: "purple",
-    random: "random",
-    range: "range",
-    red: "red",
-    remove: "remove",
-    repeat: "repeat",
-    return: "return",
-    right: "right",
-    sleep: "sleep",
-    step: "step",
-    times: "times",
-    to: "to",
-    to_list: "to",
-    turn: "turn",
-    while: "while",
-    white: "white",
-    with: "with",
-    yellow: "yellow",
-    DIGIT: "0123456789"
-  };
-  var en = {
-    add: "add",
-    and: "and",
-    ask: "ask",
-    at: "at",
-    black: "black",
-    blue: "blue",
-    brown: "brown",
-    call: "call",
-    clear: "clear",
-    color: "color",
-    comma: ",",
-    def: "def",
-    define: "define",
-    echo: "echo",
-    elif: "elif",
-    else: "else",
-    for: "for",
-    forward: "forward",
-    from: "from",
-    gray: "gray",
-    green: "green",
-    if: "if",
-    in: "in",
-    input: "input",
-    is: "is",
-    left: "left",
-    length: "length",
-    not_in: "not in",
-    or: "or",
-    orange: "orange",
-    pink: "pink",
-    play: "play",
-    pressed: "pressed",
-    print: "print",
-    purple: "purple",
-    random: "random",
-    range: "range",
-    red: "red",
-    remove: "remove",
-    repeat: "repeat",
-    return: "return",
-    right: "right",
-    sleep: "sleep",
-    step: "step",
-    times: "times",
-    to: "to",
-    to_list: "to",
-    turn: "turn",
-    while: "while",
-    white: "white",
-    with: "with",
-    yellow: "yellow",
-    DIGIT: "0123456789"
-  };
-  var eo = {
-    add: "aldonu|add",
-    and: "kaj|and",
-    ask: "demandu|ask",
-    at: "la\u016D|lau|laux|at",
-    black: "nigra|black",
-    blue: "blua|blue",
-    brown: "bruna|brown",
-    call: "call",
-    clear: "clear",
-    color: "koloro|color",
-    comma: ",",
-    def: "def",
-    define: "define",
-    echo: "e\u0125u|ehhu|ehxu|e^hu|eh^u|echo",
-    elif: "alie se|elif",
-    else: "alie|else",
-    for: "por|for",
-    forward: "anta\u016Den|antauen|antauxen|forward",
-    from: "el|from",
-    gray: "griza|gray",
-    green: "verda|green",
-    if: "se|if",
-    in: "en|in",
-    input: "enigu|input",
-    is: "estas|is",
-    left: "maldekstren|left",
-    length: "longo|length",
-    not_in: "not in",
-    or: "a\u016D|au|aux|or",
-    orange: "oran\u011Da|orangha|orangxa|oran^ga|orang^a|orange",
-    pink: "rozkolora|pink",
-    play: "play",
-    pressed: "pressed",
-    print: "presu|print",
-    purple: "purpura|purple",
-    random: "hazardo|random",
-    range: "intervalo|range",
-    red: "ru\u011Da|rugha|rugxa|ru^ga|rug^a|red",
-    remove: "forigu|remove",
-    repeat: "ripetu|repeat",
-    return: "return",
-    right: "dekstren|right",
-    sleep: "dormu|sleep",
-    step: "pa\u015Do|pasho|pasxo|pa^so|pas^o|step",
-    times: "fojojn|times",
-    to: "\u011Dis|ghis|gxis|^gis|g^is|to",
-    to_list: "al|to",
-    turn: "turnu|turn",
-    while: "dum|while",
-    white: "blanka|white",
-    with: "with",
-    yellow: "flava|yellow",
-    DIGIT: "0123456789"
-  };
-  var es = {
-    add: "a\xF1adir|add",
-    and: "y|and",
-    ask: "preguntar|ask",
-    at: "en|at",
-    black: "negro|black",
-    blue: "azul|blue",
-    brown: "marr\xF3n|brown",
-    call: "llamar|call",
-    clear: "limpiar|clear",
-    color: "color",
-    comma: ",",
-    def: "def",
-    define: "definir|define",
-    echo: "eco|echo",
-    elif: "sinosi|elif",
-    else: "sino|else",
-    for: "para|for",
-    forward: "adelante|forward",
-    from: "de|from",
-    gray: "gris|gray",
-    green: "verde|green",
-    if: "si|if",
-    in: "en|in",
-    input: "entrada|input",
-    is: "es|is",
-    left: "izquierda|left",
-    length: "longitud|length",
-    not_in: "no en|not in",
-    or: "o|or",
-    orange: "naranja|orange",
-    pink: "rosa|pink",
-    play: "play",
-    pressed: "presionada|pressed",
-    print: "imprimir|print",
-    purple: "p\xFArpura|purple",
-    random: "aleatorio|random",
-    range: "rango|range",
-    red: "rojo|red",
-    remove: "borrar|remove",
-    repeat: "repetir|repeat",
-    return: "retornar|return",
-    right: "derecha|right",
-    sleep: "dormir|sleep",
-    step: "paso|step",
-    times: "veces|times",
-    to: "a|to",
-    to_list: "a|to",
-    turn: "girar|turn",
-    while: "mientras|while",
-    white: "blanco|white",
-    with: "con|with",
-    yellow: "amarillo|yellow",
-    DIGIT: "0123456789"
-  };
-  var et = {
-    add: "lisa|add",
-    and: "ja|and",
-    ask: "k\xFCsi|ask",
-    at: "t\xE4itsa|at",
-    black: "must|black",
-    blue: "sinine|blue",
-    brown: "pruun|brown",
-    call: "call",
-    clear: "clear",
-    color: "v\xE4rv|color",
-    comma: ",",
-    def: "def",
-    define: "define",
-    echo: "peegelda|echo",
-    elif: "muidukui|elif",
-    else: "muidu|else",
-    for: "jaoks|for",
-    forward: "edasi|forward",
-    from: "nimistust|from",
-    gray: "hall|gray",
-    green: "roheline|green",
-    if: "kui|if",
-    in: "nimistus|in",
-    input: "sisesta|input",
-    is: "on|is",
-    left: "vasakule|left",
-    length: "pikkus|length",
-    not_in: "not in",
-    or: "v\xF5i|or",
-    orange: "oran\u017E|orange",
-    pink: "roosa|pink",
-    play: "play",
-    pressed: "pressed",
-    print: "prindi|print",
-    purple: "lilla|purple",
-    random: "juhuslikult|random",
-    range: "vahemik|range",
-    red: "punane|red",
-    remove: "kustuta|remove",
-    repeat: "korda|repeat",
-    return: "return",
-    right: "paremale|right",
-    sleep: "oota|sleep",
-    step: "sammuga|step",
-    times: "korda|times",
-    to: "kuni|to",
-    to_list: "nimistusse|to",
-    turn: "p\xF6\xF6ra|turn",
-    while: "senikui|while",
-    white: "valge|white",
-    with: "with",
-    yellow: "kollane|yellow",
-    DIGIT: "0123456789"
-  };
-  var fa = {
-    add: "add",
-    and: "and",
-    ask: "\u0628\u067E\u0631\u0633|ask",
-    at: "at",
-    black: "\u0633\u06CC\u0627\u0647|black",
-    blue: "\u0622\u0628\u06CC|blue",
-    brown: "\u0642\u0647\u0648\u0647 \u0627\u06CC|brown",
-    call: "call",
-    clear: "clear",
-    color: "\u0631\u0646\u06AF|color",
-    comma: ",",
-    def: "def",
-    define: "define",
-    echo: "echo",
-    elif: "elif",
-    else: "else",
-    for: "for",
-    forward: "\u0628\u0647 \u062C\u0644\u0648|forward",
-    from: "from",
-    gray: "\u062E\u0627\u06A9\u0633\u062A\u0631\u06CC|gray",
-    green: "\u0633\u0628\u0632|green",
-    if: "if",
-    in: "in",
-    input: "input",
-    is: "is",
-    left: "\u0686\u067E|left",
-    length: "length",
-    not_in: "not in",
-    or: "or",
-    orange: "\u0646\u0627\u0631\u0646\u062C\u06CC|orange",
-    pink: "\u0635\u0648\u0631\u062A\u06CC|pink",
-    play: "play",
-    pressed: "pressed",
-    print: "\u0686\u0627\u067E|print",
-    purple: "\u0628\u0646\u0641\u0634|purple",
-    random: "random",
-    range: "range",
-    red: "\u0642\u0631\u0645\u0632|red",
-    remove: "remove",
-    repeat: "repeat",
-    return: "return",
-    right: "\u0631\u0627\u0633\u062A|right",
-    sleep: "sleep",
-    step: "step",
-    times: "times",
-    to: "to",
-    to_list: "to",
-    turn: "\u062F\u0648\u0631 \u0628\u0632\u0646|turn",
-    while: "while",
-    white: "\u0633\u0641\u06CC\u062F|white",
-    with: "with",
-    yellow: "\u0632\u0631\u062F|yellow",
-    DIGIT: "0123456789"
-  };
-  var fi = {
-    add: "lis\xE4\xE4|add",
-    and: "ja|and",
-    ask: "kysy|ask",
-    at: "ota|at",
-    black: "musta|black",
-    blue: "sininen|blue",
-    brown: "ruskea|brown",
-    call: "call",
-    clear: "nollaa|clear",
-    color: "v\xE4ri|color",
-    comma: ",",
-    def: "def",
-    define: "define",
-    echo: "kaiku|echo",
-    elif: "muutenjos|elif",
-    else: "muuten|else",
-    for: "jokaiselle|for",
-    forward: "eteenp\xE4in|forward",
-    from: "listasta|from",
-    gray: "harmaa|gray",
-    green: "vihre\xE4|green",
-    if: "jos|if",
-    in: "listassa|in",
-    input: "sy\xF6te|input",
-    is: "on|is",
-    left: "vasen|left",
-    length: "pituus|length",
-    not_in: "ei kohteessa|not in",
-    or: "tai|or",
-    orange: "oranssi|orange",
-    pink: "vaaleanpunainen|pink",
-    play: "play",
-    pressed: "painettu|pressed",
-    print: "tulosta|print",
-    purple: "violetti|purple",
-    random: "satunnainen|random",
-    range: "v\xE4li|range",
-    red: "punainen|red",
-    remove: "poista|remove",
-    repeat: "toista|repeat",
-    return: "return",
-    right: "oikea|right",
-    sleep: "nuku|sleep",
-    step: "askel|step",
-    times: "kertaa|times",
-    to: "asti|to",
-    to_list: "listaksi|to",
-    turn: "k\xE4\xE4nny|turn",
-    while: "kun|while",
-    white: "valkoinen|white",
-    with: "with",
-    yellow: "keltainen|yellow",
-    DIGIT: "0123456789"
-  };
-  var fr = {
-    add: "ajoute|add",
-    and: "et|and",
-    ask: "demande|ask",
-    at: "au|at",
-    black: "noir|black",
-    blue: "bleu|blue",
-    brown: "marron|brown",
-    call: "call",
-    clear: "effacer|clear",
-    color: "couleur|color",
-    comma: ",",
-    def: "def",
-    define: "define",
-    echo: "r\xE9ponds|echo",
-    elif: "sinon si|elif",
-    else: "sinon|else",
-    for: "pour|for",
-    forward: "avance|forward",
-    from: "de|from",
-    gray: "gris|gray",
-    green: "vert|green",
-    if: "si|if",
-    in: "dans|in",
-    input: "demande|input",
-    is: "est|is",
-    left: "gauche|left",
-    length: "longueur|length",
-    not_in: "pas dans|not in",
-    or: "ou|or",
-    orange: "orange",
-    pink: "rose|pink",
-    play: "play",
-    pressed: "press\xE9|pressed",
-    print: "affiche|print",
-    purple: "violet|purple",
-    random: "hasard|random",
-    range: "intervalle|range",
-    red: "rouge|red",
-    remove: "supprime|remove",
-    repeat: "r\xE9p\xE8te|repete|repeat",
-    return: "return",
-    right: "droite|right",
-    sleep: "dors|sleep",
-    step: "pas|step",
-    times: "fois|times",
-    to: "\xE0|to",
-    to_list: "\xE0|to",
-    turn: "tourne|turn",
-    while: "tant que|while",
-    white: "blanc|white",
-    with: "with",
-    yellow: "jaune|yellow",
-    DIGIT: "0123456789"
-  };
-  var fy = {
-    add: "add",
-    and: "and",
-    ask: "ask",
-    at: "at",
-    black: "black",
-    blue: "blue",
-    brown: "brown",
-    call: "call",
-    clear: "clear",
-    color: "color",
-    comma: ",",
-    def: "def",
-    define: "define",
-    echo: "echo",
-    elif: "elif",
-    else: "else",
-    for: "for",
-    forward: "forward",
-    from: "from",
-    gray: "gray",
-    green: "green",
-    if: "if",
-    in: "in",
-    input: "input",
-    is: "is",
-    left: "left",
-    length: "length",
-    not_in: "not in",
-    or: "or",
-    orange: "orange",
-    pink: "pink",
-    play: "play",
-    pressed: "pressed",
-    print: "print",
-    purple: "purple",
-    random: "random",
-    range: "range",
-    red: "red",
-    remove: "remove",
-    repeat: "repeat",
-    return: "return",
-    right: "right",
-    sleep: "sleep",
-    step: "step",
-    times: "times",
-    to: "to",
-    to_list: "to",
-    turn: "turn",
-    while: "while",
-    white: "white",
-    with: "with",
-    yellow: "yellow",
-    DIGIT: "0123456789"
-  };
-  var he = {
-    add: "\u05D4\u05D5\u05E1\u05E3|add",
-    and: "\u05D5\u05D2\u05DD|and",
-    ask: "\u05E9\u05D0\u05DC|ask",
-    at: "\u05D1|at",
-    black: "\u05E9\u05D7\u05D5\u05E8|black",
-    blue: "\u05DB\u05D7\u05D5\u05DC|blue",
-    brown: "\u05D7\u05D5\u05DD|brown",
-    call: "call",
-    clear: "clear",
-    color: "\u05E6\u05D1\u05E2|color",
-    comma: ",",
-    def: "def",
-    define: "define",
-    echo: "\u05D4\u05D3\u05D4\u05D3|echo",
-    elif: "\u05D0\u05D7\u05E8\u05EA\u05D0\u05DD|elif",
-    else: "\u05D0\u05D7\u05E8\u05EA|else",
-    for: "\u05DC\u05DB\u05DC|for",
-    forward: "\u05E7\u05D3\u05D9\u05DE\u05D4|forward",
-    from: "\u05DE|from",
-    gray: "\u05D0\u05E4\u05D5\u05E8|gray",
-    green: "\u05D9\u05E8\u05D5\u05E7|green",
-    if: "\u05D0\u05DD|if",
-    in: "\u05D1\u05EA\u05D5\u05DA|in",
-    input: "\u05E7\u05DC\u05D8|input",
-    is: "\u05D4\u05D5\u05D0|is",
-    left: "\u05E9\u05DE\u05D0\u05DC\u05D4|left",
-    length: "\u05D0\u05D5\u05E8\u05DA|length",
-    not_in: "not in",
-    or: "\u05D0\u05D5|or",
-    orange: "\u05DB\u05EA\u05D5\u05DD|orange",
-    pink: "\u05D5\u05E8\u05D5\u05D3|pink",
-    play: "play",
-    pressed: "pressed",
-    print: "\u05D4\u05D3\u05E4\u05E1|print",
-    purple: "\u05E1\u05D2\u05D5\u05DC|purple",
-    random: "\u05D0\u05E7\u05E8\u05D0\u05D9|random",
-    range: "\u05D8\u05D5\u05D5\u05D7|range",
-    red: "\u05D0\u05D3\u05D5\u05DD|red",
-    remove: "\u05D4\u05E1\u05E8|remove",
-    repeat: "\u05D7\u05D6\u05D5\u05E8|repeat",
-    return: "return",
-    right: "\u05D9\u05DE\u05D9\u05E0\u05D4|right",
-    sleep: "\u05D4\u05DE\u05EA\u05DF|sleep",
-    step: "\u05E6\u05E2\u05D3|step",
-    times: "\u05E4\u05E2\u05DE\u05D9\u05DD|times",
-    to: "\u05E2\u05D3|to",
-    to_list: "\u05D0\u05DC|to",
-    turn: "\u05E4\u05E0\u05D4|turn",
-    while: "\u05DB\u05DC\u05E2\u05D5\u05D3|while",
-    white: "\u05DC\u05D1\u05DF|white",
-    with: "with",
-    yellow: "\u05E6\u05D4\u05D5\u05D1|yellow",
-    DIGIT: "0123456789"
-  };
-  var hi = {
-    add: "\u091C\u094B\u0921\u093C\u0928\u093E|add",
-    and: "\u0914\u0930|and",
-    ask: "\u092A\u0942\u091B\u0947\u0902|ask",
-    at: "\u092A\u0930|at",
-    black: "black",
-    blue: "blue",
-    brown: "brown",
-    call: "call",
-    clear: "clear",
-    color: "color",
-    comma: ",",
-    def: "def",
-    define: "define",
-    echo: "\u0917\u0942\u0902\u091C|echo",
-    elif: "\u090F\u0932\u093F\u092B|elif",
-    else: "\u0905\u0928\u094D\u092F\u0925\u093E|else",
-    for: "\u0915\u0947 \u0932\u093F\u092F\u0947|for",
-    forward: "\u0906\u0917\u0947|forward",
-    from: "\u0938\u0947|from",
-    gray: "gray",
-    green: "green",
-    if: "\u0905\u0917\u0930|if",
-    in: "\u092E\u0947\u0902|in",
-    input: "\u0907\u0928\u092A\u0941\u091F|input",
-    is: "\u0939\u0948|is",
-    left: "left",
-    length: "\u0932\u0902\u092C\u093E\u0908|length",
-    not_in: "not in",
-    or: "\u092F\u093E|or",
-    orange: "orange",
-    pink: "pink",
-    play: "play",
-    pressed: "pressed",
-    print: "\u092A\u094D\u0930\u093F\u0902\u091F|print",
-    purple: "purple",
-    random: "\u0905\u0928\u093F\u092F\u092E\u093F\u0924|random",
-    range: "\u0936\u094D\u0930\u0947\u0923\u0940|range",
-    red: "red",
-    remove: "\u0939\u091F\u093E\u0928\u093E|remove",
-    repeat: "\u0926\u094B\u0939\u0930\u093E\u0928\u093E|repeat",
-    return: "return",
-    right: "right",
-    sleep: "\u0928\u0940\u0902\u0926|sleep",
-    step: "\u0915\u093C\u0926\u092E|step",
-    times: "\u092C\u093E\u0930|times",
-    to: "\u0938\u0947|to",
-    to_list: "\u0938\u0947|to",
-    turn: "\u092E\u094B\u0921\u093C|turn",
-    while: "\u0935\u094D\u0939\u093E\u0907\u0932|while",
-    white: "white",
-    with: "with",
-    yellow: "yellow",
-    DIGIT: "0123456789"
-  };
-  var hu = {
-    add: "besz\xFAr|add",
-    and: "\xE9s|and",
-    ask: "k\xE9rdez|ask",
-    at: "list\xE1b\xF3l|at",
-    black: "fekete|black",
-    blue: "k\xE9k|blue",
-    brown: "barna|brown",
-    call: "call",
-    clear: "t\xF6rl\xE9s|clear",
-    color: "sz\xEDn|color",
-    comma: ",",
-    def: "def",
-    define: "define",
-    echo: "ut\xE1noz|echo",
-    elif: "egybk-ha|elif",
-    else: "egy\xE9bk\xE9nt|else",
-    for: "minden|for",
-    forward: "el\u0151re|forward",
-    from: "ebb\u0151l|from",
-    gray: "sz\xFCrke|gray",
-    green: "z\xF6ld|green",
-    if: "ha|if",
-    in: "eleme|in",
-    input: "bek\xE9r|input",
-    is: "egyenl\u0151|is",
-    left: "balra|left",
-    length: "hossz|length",
-    not_in: "nem eleme|not in",
-    or: "vagy|or",
-    orange: "narancs|orange",
-    pink: "pink",
-    play: "play",
-    pressed: "lenyomva|pressed",
-    print: "ki\xEDr|print",
-    purple: "lila|purple",
-    random: "random",
-    range: "szakasz|range",
-    red: "piros|red",
-    remove: "kivesz|remove",
-    repeat: "ism\xE9teld|repeat",
-    return: "return",
-    right: "jobbra|right",
-    sleep: "szundi|sleep",
-    step: "l\xE9p\xE9senk\xE9nt|step",
-    times: "alkalommal|times",
-    to: "t\u0151l|to",
-    to_list: "ebbe|to",
-    turn: "fordul|turn",
-    while: "am\xEDg|while",
-    white: "feh\xE9r|white",
-    with: "with",
-    yellow: "s\xE1rga|yellow",
-    DIGIT: "0123456789"
-  };
-  var id = {
-    add: "tambah|add",
-    and: "dan|and",
-    ask: "tanya|ask",
-    at: "secara|at",
-    black: "black",
-    blue: "blue",
-    brown: "brown",
-    call: "call",
-    clear: "clear",
-    color: "warna|color",
-    comma: ",",
-    def: "def",
-    define: "define",
-    echo: "gaungkan|echo",
-    elif: "lain_jika|elif",
-    else: "lainnya|else",
-    for: "untuk|for",
-    forward: "maju|forward",
-    from: "dari|from",
-    gray: "gray",
-    green: "green",
-    if: "jika|if",
-    in: "dalam|in",
-    input: "masukan|input",
-    is: "adalah|is",
-    left: "kiri|left",
-    length: "panjang|length",
-    not_in: "not in",
-    or: "atau|or",
-    orange: "orange",
-    pink: "pink",
-    play: "play",
-    pressed: "pressed",
-    print: "cetak|print",
-    purple: "purple",
-    random: "acak|random",
-    range: "batasan|range",
-    red: "red",
-    remove: "hapus|remove",
-    repeat: "ulangi|repeat",
-    return: "return",
-    right: "kanan|right",
-    sleep: "tidur|sleep",
-    step: "langkah|step",
-    times: "kali|times",
-    to: "ke|to",
-    to_list: "ke|to",
-    turn: "belok|turn",
-    while: "selama|while",
-    white: "white",
-    with: "with",
-    yellow: "yellow",
-    DIGIT: "0123456789"
-  };
-  var it = {
-    add: "add",
-    and: "e|and",
-    ask: "chiedi|ask",
-    at: "at",
-    black: "nero|black",
-    blue: "blu|blue",
-    brown: "marrone|brown",
-    call: "call",
-    clear: "Elimina|clear",
-    color: "colore|color",
-    comma: ",",
-    def: "def",
-    define: "define",
-    echo: "eco|echo",
-    elif: "altrimenti se|elif",
-    else: "altrimenti|else",
-    for: "for",
-    forward: "avanti|forward",
-    from: "da|from",
-    gray: "grigio|gray",
-    green: "verde|green",
-    if: "if",
-    in: "in",
-    input: "input",
-    is: "is",
-    left: "sinistra|left",
-    length: "lunghezza|length",
-    not_in: "non quello|not in",
-    or: "or",
-    orange: "arancione|orange",
-    pink: "rosa|pink",
-    play: "play",
-    pressed: "Premuto|pressed",
-    print: "stampa|print",
-    purple: "viola|purple",
-    random: "a caso|random",
-    range: "intervallo|range",
-    red: "rosso|red",
-    remove: "rimuovi|remove",
-    repeat: "ripeti|repeat",
-    return: "return",
-    right: "right",
-    sleep: "dormi|sleep",
-    step: "passo|step",
-    times: "volte|times",
-    to: "to",
-    to_list: "to",
-    turn: "gira|turn",
-    while: "mentre|while",
-    white: "bianco|white",
-    with: "with",
-    yellow: "giallo|yellow",
-    DIGIT: "0123456789"
-  };
-  var ja = {
-    add: "\u305F\u3059|add",
-    and: "and",
-    ask: "\u304D\u3051|ask",
-    at: "at",
-    black: "\u304F\u308D|black",
-    blue: "\u3042\u304A|blue",
-    brown: "\u3061\u3083\u3044\u308D|brown",
-    call: "call",
-    clear: "clear",
-    color: "\u3044\u308D|color",
-    comma: ",",
-    def: "def",
-    define: "define",
-    echo: "\u307E\u306D|echo",
-    elif: "elif",
-    else: "else",
-    for: "for",
-    forward: "\u3059\u3059\u3081|forward",
-    from: "from",
-    gray: "\u306F\u3044\u3044\u308D|gray",
-    green: "\u307F\u3069\u308A|green",
-    if: "if",
-    in: "in",
-    input: "input",
-    is: "is",
-    left: "\u3072\u3060\u308A|left",
-    length: "length",
-    not_in: "not in",
-    or: "or",
-    orange: "\u304A\u308C\u3093\u3058|orange",
-    pink: "\u3074\u3093\u304F|pink",
-    play: "play",
-    pressed: "pressed",
-    print: "\u304B\u3051|print",
-    purple: "\u3080\u3089\u3055\u304D|purple",
-    random: "random",
-    range: "range",
-    red: "\u3042\u304B|red",
-    remove: "remove",
-    repeat: "repeat",
-    return: "return",
-    right: "\u307F\u304E|right",
-    sleep: "\u3084\u3059\u3081|sleep",
-    step: "step",
-    times: "\u304B\u3044|times",
-    to: "to",
-    to_list: "to",
-    turn: "\u307E\u308F\u308C|turn",
-    while: "while",
-    white: "\u3057\u308D|white",
-    with: "with",
-    yellow: "\u304D\u3044\u308D|yellow",
-    DIGIT: "0123456789"
-  };
-  var kmr = {
-    add: "add",
-    and: "and",
-    ask: "ask",
-    at: "at",
-    black: "black",
-    blue: "blue",
-    brown: "brown",
-    call: "call",
-    clear: "clear",
-    color: "color",
-    comma: ",",
-    def: "def",
-    define: "define",
-    echo: "echo",
-    elif: "elif",
-    else: "else",
-    for: "for",
-    forward: "forward",
-    from: "from",
-    gray: "gray",
-    green: "green",
-    if: "if",
-    in: "in",
-    input: "input",
-    is: "is",
-    left: "left",
-    length: "length",
-    not_in: "not in",
-    or: "or",
-    orange: "orange",
-    pink: "pink",
-    play: "play",
-    pressed: "pressed",
-    print: "print",
-    purple: "purple",
-    random: "random",
-    range: "range",
-    red: "red",
-    remove: "remove",
-    repeat: "repeat",
-    return: "return",
-    right: "right",
-    sleep: "sleep",
-    step: "step",
-    times: "times",
-    to: "to",
-    to_list: "to",
-    turn: "turn",
-    while: "while",
-    white: "white",
-    with: "with",
-    yellow: "yellow",
-    DIGIT: "0123456789"
-  };
-  var ko = {
-    add: "add",
-    and: "and",
-    ask: "ask",
-    at: "at",
-    black: "black",
-    blue: "blue",
-    brown: "brown",
-    call: "call",
-    clear: "clear",
-    color: "color",
-    comma: ",",
-    def: "def",
-    define: "define",
-    echo: "echo",
-    elif: "elif",
-    else: "else",
-    for: "for",
-    forward: "forward",
-    from: "from",
-    gray: "gray",
-    green: "green",
-    if: "if",
-    in: "in",
-    input: "input",
-    is: "is",
-    left: "left",
-    length: "length",
-    not_in: "not in",
-    or: "or",
-    orange: "orange",
-    pink: "pink",
-    play: "play",
-    pressed: "pressed",
-    print: "print",
-    purple: "purple",
-    random: "random",
-    range: "range",
-    red: "red",
-    remove: "remove",
-    repeat: "repeat",
-    return: "return",
-    right: "right",
-    sleep: "sleep",
-    step: "step",
-    times: "times",
-    to: "to",
-    to_list: "to",
-    turn: "turn",
-    while: "while",
-    white: "white",
-    with: "with",
-    yellow: "yellow",
-    DIGIT: "0123456789"
-  };
-  var mi = {
-    add: "add",
-    and: "and",
-    ask: "ask",
-    at: "at",
-    black: "black",
-    blue: "blue",
-    brown: "brown",
-    call: "call",
-    clear: "clear",
-    color: "color",
-    comma: ",",
-    def: "def",
-    define: "define",
-    echo: "echo",
-    elif: "elif",
-    else: "else",
-    for: "for",
-    forward: "forward",
-    from: "from",
-    gray: "gray",
-    green: "green",
-    if: "if",
-    in: "in",
-    input: "input",
-    is: "is",
-    left: "left",
-    length: "length",
-    not_in: "not in",
-    or: "or",
-    orange: "orange",
-    pink: "pink",
-    play: "play",
-    pressed: "pressed",
-    print: "print",
-    purple: "purple",
-    random: "random",
-    range: "range",
-    red: "red",
-    remove: "remove",
-    repeat: "repeat",
-    return: "return",
-    right: "right",
-    sleep: "sleep",
-    step: "step",
-    times: "times",
-    to: "to",
-    to_list: "to",
-    turn: "turn",
-    while: "while",
-    white: "white",
-    with: "with",
-    yellow: "yellow",
-    DIGIT: "0123456789"
-  };
-  var nb_NO = {
-    add: "legg|add",
-    and: "og|and",
-    ask: "sp\xF8r|ask",
-    at: "p\xE5|at",
-    black: "black",
-    blue: "blue",
-    brown: "brown",
-    call: "call",
-    clear: "clear",
-    color: "color",
-    comma: ",",
-    def: "def",
-    define: "define",
-    echo: "ekko|echo",
-    elif: "elhvis|elif",
-    else: "ellers|else",
-    for: "for",
-    forward: "frem|forward",
-    from: "fra|from",
-    gray: "gray",
-    green: "green",
-    if: "hvis|if",
-    in: "i|in",
-    input: "inndata|input",
-    is: "er|is",
-    left: "venstre|left",
-    length: "lengde|length",
-    not_in: "not in",
-    or: "eller|or",
-    orange: "orange",
-    pink: "pink",
-    play: "play",
-    pressed: "pressed",
-    print: "skriv|print",
-    purple: "purple",
-    random: "tilfeldig|random",
-    range: "sekvens|range",
-    red: "red",
-    remove: "fjern|remove",
-    repeat: "gjenta|repeat",
-    return: "return",
-    right: "h\xF8yre|right",
-    sleep: "sov|sleep",
-    step: "steg|step",
-    times: "ganger|times",
-    to: "til|to",
-    to_list: "til|to",
-    turn: "snu|turn",
-    while: "mens|while",
-    white: "white",
-    with: "with",
-    yellow: "yellow",
-    DIGIT: "0123456789"
-  };
-  var nl = {
-    add: "voeg|add",
-    and: "en|and",
-    ask: "vraag|ask",
-    at: "op|at",
-    black: "zwart|black",
-    blue: "blauw|blue",
-    brown: "bruin|brown",
-    call: "roep|call",
-    clear: "wis|clear",
-    color: "kleur|color",
-    comma: ",",
-    def: "def",
-    define: "definieer|define",
-    echo: "echo",
-    elif: "alsanders|elif",
-    else: "anders|else",
-    for: "voor|for",
-    forward: "vooruit|forward",
-    from: "uit|from",
-    gray: "grijs|gray",
-    green: "groen|green",
-    if: "als|if",
-    in: "in",
-    input: "invoer|input",
-    is: "is",
-    left: "links|left",
-    length: "lengte|length",
-    not_in: "niet in|not in",
-    or: "of|or",
-    orange: "oranje|orange",
-    pink: "roze|pink",
-    play: "speel|play",
-    pressed: "ingedrukt|pressed",
-    print: "print",
-    purple: "paars|purple",
-    random: "willekeurig|random",
-    range: "bereik|range",
-    red: "rood|red",
-    remove: "verwijder|remove",
-    repeat: "herhaal|repeat",
-    return: "return",
-    right: "rechts|right",
-    sleep: "slaap|sleep",
-    step: "stap|step",
-    times: "keer|times",
-    to: "tot|to",
-    to_list: "toe aan|to",
-    turn: "draai|turn",
-    while: "zolang|while",
-    white: "wit|white",
-    with: "met|with",
-    yellow: "geel|yellow",
-    DIGIT: "0123456789"
-  };
-  var pa_PK = {
-    add: "\u062F\u06BE\u0646|add",
-    and: "\u062A\u06D2|and",
-    ask: "\u0633\u0648\u0627\u0644|ask",
-    at: "\u0633\u062A\u06BE\u062A\u06CC|at",
-    black: "\u06A9\u0627\u0644\u0627|black",
-    blue: "\u0646\u06CC\u0644\u0627|blue",
-    brown: "\u0628\u06BE\u0648\u0631\u0627|brown",
-    call: "call",
-    clear: "clear",
-    color: "\u0631\u0646\u06AF|color",
-    comma: "\u060C|,",
-    def: "def",
-    define: "define",
-    echo: "\u0641\u06CC\u0631|echo",
-    elif: "\u06C1\u0648\u0631|elif",
-    else: "\u0648\u06A9\u06BE\u0631\u0627|else",
-    for: "\u062C\u062F\u0648\u06BA|for",
-    forward: "\u0627\u06AF\u06D2|forward",
-    from: "\u0633\u0631\u0648\u062A|from",
-    gray: "\u0633\u0644\u06CC\u0679\u06CC|gray",
-    green: "\u06C1\u0631\u0627|green",
-    if: "\u062C\u06D2|if",
-    in: "\u0627\u0646\u062F\u0631|in",
-    input: "\u0627\u06CC\u0646\u067E\u0679|input",
-    is: "\u0633\u0645\u0627\u0646|is",
-    left: "\u06A9\u06BE\u0628\u06D2|left",
-    length: "\u0644\u0645\u0628\u0627\u0626\u06CC|length",
-    not_in: "not in",
-    or: "\u06CC\u0627|or",
-    orange: "\u0633\u0646\u062A\u0631\u0627|orange",
-    pink: "\u06AF\u0644\u0627\u0628\u06CC|pink",
-    play: "play",
-    pressed: "pressed",
-    print: "\u0686\u067E\u0627\u0626\u06CC|print",
-    purple: "\u062C\u0627\u0645\u0646\u06CC|purple",
-    random: "\u0631\u0644\u0648\u0627\u0646|random",
-    range: "\u0633\u0644\u0633\u0644\u06C1|range",
-    red: "\u0644\u0627\u0644|red",
-    remove: "\u0645\u0679\u0627\u06A9\u06D2|remove",
-    repeat: "\u062F\u06C1\u0631\u0627|repeat",
-    return: "return",
-    right: "\u0633\u062C\u06D2|right",
-    sleep: "\u0646\u06CC\u0646\u062F|sleep",
-    step: "\u0633\u0637\u0631|step",
-    times: "\u0636\u0631\u0628|times",
-    to: "\u0645\u0646\u0632\u0644|to",
-    to_list: "\u0645\u0646\u0632\u0644|to",
-    turn: "\u0645\u0648\u0691\u0646|turn",
-    while: "\u062C\u062F\u06A9\u06C1|while",
-    white: "\u0686\u0679\u0627|white",
-    with: "with",
-    yellow: "\u067E\u06CC\u0644\u0627|yellow",
-    DIGIT: "0\u06F01\u06F12\u06F23\u06F34\u06F45\u06F56\u06F67\u06F78\u06F89\u06F9"
-  };
-  var pap = {
-    add: "add",
-    and: "and",
-    ask: "ask",
-    at: "at",
-    black: "black",
-    blue: "blue",
-    brown: "brown",
-    call: "call",
-    clear: "clear",
-    color: "color",
-    comma: ",",
-    def: "def",
-    define: "define",
-    echo: "echo",
-    elif: "elif",
-    else: "else",
-    for: "for",
-    forward: "forward",
-    from: "from",
-    gray: "gray",
-    green: "green",
-    if: "if",
-    in: "in",
-    input: "input",
-    is: "is",
-    left: "left",
-    length: "length",
-    not_in: "not in",
-    or: "or",
-    orange: "orange",
-    pink: "pink",
-    play: "play",
-    pressed: "pressed",
-    print: "print",
-    purple: "purple",
-    random: "random",
-    range: "range",
-    red: "red",
-    remove: "remove",
-    repeat: "repeat",
-    return: "return",
-    right: "right",
-    sleep: "sleep",
-    step: "step",
-    times: "times",
-    to: "to",
-    to_list: "to",
-    turn: "turn",
-    while: "while",
-    white: "white",
-    with: "with",
-    yellow: "yellow",
-    DIGIT: "0123456789"
-  };
-  var pl = {
-    add: "dodaj|add",
-    and: "i|and",
-    ask: "zapytaj|ask",
-    at: "pozycja|at",
-    black: "czarny|black",
-    blue: "niebieski|blue",
-    brown: "br\u0105zowy|brown",
-    call: "call",
-    clear: "wyczy\u015B\u0107|clear",
-    color: "kolor|color",
-    comma: ",",
-    def: "def",
-    define: "define",
-    echo: "do\u0142\u0105cz|echo",
-    elif: "albo|elif",
-    else: "inaczej|else",
-    for: "dla|for",
-    forward: "naprz\xF3d|forward",
-    from: "z|from",
-    gray: "szary|gray",
-    green: "zielony|green",
-    if: "je\u017Celi|if",
-    in: "w|in",
-    input: "wprowad\u017A|input",
-    is: "to|is",
-    left: "lewo|left",
-    length: "d\u0142ugo\u015B\u0107|length",
-    not_in: "nie w|not in",
-    or: "lub|or",
-    orange: "pomara\u0144czowy|orange",
-    pink: "r\xF3\u017Cowy|pink",
-    play: "play",
-    pressed: "naci\u015Bni\u0119ty|pressed",
-    print: "napisz|print",
-    purple: "fioletowy|purple",
-    random: "losowa|random",
-    range: "zakres|range",
-    red: "czerwony|red",
-    remove: "usu\u0144|remove",
-    repeat: "powt\xF3rz|repeat",
-    return: "return",
-    right: "prawo|right",
-    sleep: "\u015Bpij|sleep",
-    step: "krok|step",
-    times: "razy|times",
-    to: "do|to",
-    to_list: "do|to",
-    turn: "obr\xF3\u0107|turn",
-    while: "dop\xF3ki|while",
-    white: "bia\u0142y|white",
-    with: "with",
-    yellow: "\u017C\xF3\u0142ty|yellow",
-    DIGIT: "0123456789"
-  };
-  var pt_BR = {
-    add: "some|add",
-    and: "e|and",
-    ask: "pergunte|ask",
-    at: "em|at",
-    black: "preto|black",
-    blue: "azul|blue",
-    brown: "marrom|brown",
-    call: "chame|call",
-    clear: "limpe|clear",
-    color: "cor|color",
-    comma: ",",
-    def: "def",
-    define: "defina|define",
-    echo: "eco|echo",
-    elif: "sen\xE3o se|elif",
-    else: "sen\xE3o|else",
-    for: "para|for",
-    forward: "adiante|forward",
-    from: "de|from",
-    gray: "cinza|gray",
-    green: "verde|green",
-    if: "se|if",
-    in: "em|in",
-    input: "entrada|input",
-    is: "\xE9|is",
-    left: "esquerda|left",
-    length: "comprimento|length",
-    not_in: "n\xE3o em|not in",
-    or: "ou|or",
-    orange: "laranja|orange",
-    pink: "rosa|pink",
-    play: "toque|play",
-    pressed: "apertado|pressed",
-    print: "imprima|print",
-    purple: "roxo|purple",
-    random: "aleat\xF3rio|random",
-    range: "intervalo|range",
-    red: "vermelho|red",
-    remove: "remova|remove",
-    repeat: "repita|repeat",
-    return: "retorne|return",
-    right: "direita|right",
-    sleep: "durma|sleep",
-    step: "passo|step",
-    times: "vezes|times",
-    to: "para|to",
-    to_list: "a|to",
-    turn: "gire|turn",
-    while: "enquanto|while",
-    white: "branco|white",
-    with: "com|with",
-    yellow: "amarelo|yellow",
-    DIGIT: "0123456789"
-  };
-  var pt_PT = {
-    add: "adicionar|add",
-    and: "e|and",
-    ask: "perguntar|ask",
-    at: "em|at",
-    black: "preto|black",
-    blue: "azul|blue",
-    brown: "castanho|brown",
-    call: "call",
-    clear: "clear",
-    color: "cor|color",
-    comma: ",",
-    def: "def",
-    define: "define",
-    echo: "eco|echo",
-    elif: "elif",
-    else: "else",
-    for: "for",
-    forward: "avan\xE7ar|forward",
-    from: "de|from",
-    gray: "cinzento|gray",
-    green: "verde|green",
-    if: "if",
-    in: "in",
-    input: "input",
-    is: "is",
-    left: "esquerda|left",
-    length: "comprimento|length",
-    not_in: "not in",
-    or: "or",
-    orange: "cor de laranja|orange",
-    pink: "cor de rosa|pink",
-    play: "play",
-    pressed: "pressed",
-    print: "imprimir|print",
-    purple: "roxo|purple",
-    random: "random",
-    range: "intervalo|range",
-    red: "vermelho|red",
-    remove: "remover|remove",
-    repeat: "repetir|repeat",
-    return: "return",
-    right: "direita|right",
-    sleep: "dormir|sleep",
-    step: "passo|step",
-    times: "vezes|times",
-    to: "to",
-    to_list: "para|to",
-    turn: "virar|turn",
-    while: "enquanto|while",
-    white: "branco|white",
-    with: "with",
-    yellow: "amarelo|yellow",
-    DIGIT: "0123456789"
-  };
-  var ro = {
-    add: "adun\u0103|add",
-    and: "si|and",
-    ask: "\xEEntreab\u0103|ask",
-    at: "la|at",
-    black: "negru|black",
-    blue: "albastru|blue",
-    brown: "maro|brown",
-    call: "call",
-    clear: "\u0219terge|clear",
-    color: "culoare|color",
-    comma: ",",
-    def: "def",
-    define: "define",
-    echo: "echo",
-    elif: "altfel dac\u0103|elif",
-    else: "else",
-    for: "pentru|for",
-    forward: "\xEEnainte|forward",
-    from: "de la|from",
-    gray: "gri|gray",
-    green: "verde|green",
-    if: "if",
-    in: "in",
-    input: "intrare|input",
-    is: "is",
-    left: "st\xE2nga|left",
-    length: "lungime|length",
-    not_in: "nu \xEEn|not in",
-    or: "sau|or",
-    orange: "portocaliu|orange",
-    pink: "roz|pink",
-    play: "play",
-    pressed: "ap\u0103sat|pressed",
-    print: "print",
-    purple: "mov|purple",
-    random: "aleatoriu|random",
-    range: "interval|range",
-    red: "ro\u0219u|red",
-    remove: "elimin\u0103|remove",
-    repeat: "repet\u0103|repeat",
-    return: "return",
-    right: "dreapta|right",
-    sleep: "sleep",
-    step: "pas|step",
-    times: "inmul\u021Bit|times",
-    to: "c\u0103tre|to",
-    to_list: "c\u0103tre|to",
-    turn: "intoarce|turn",
-    while: "\xEEn timp ce|while",
-    white: "alb|white",
-    with: "with",
-    yellow: "galben|yellow",
-    DIGIT: "0123456789"
-  };
-  var ru = {
-    add: "\u0434\u043E\u0431\u0430\u0432\u0438\u0442\u044C|add",
-    and: "\u0438|and",
-    ask: "\u0437\u0430\u043F\u0440\u043E\u0441\u0438\u0442\u044C|ask",
-    at: "\u0432|at",
-    black: "\u0447\u0451\u0440\u043D\u044B\u0439|black",
-    blue: "\u0441\u0438\u043D\u0438\u0439|blue",
-    brown: "\u043A\u043E\u0440\u0438\u0447\u043D\u0435\u0432\u044B\u0439|brown",
-    call: "call",
-    clear: "\u043E\u0447\u0438\u0441\u0442\u0438\u0442\u044C|clear",
-    color: "\u0446\u0432\u0435\u0442|color",
-    comma: ",",
-    def: "def",
-    define: "define",
-    echo: "\u043F\u043E\u0432\u0442\u043E\u0440\u0438\u0442\u044C|echo",
-    elif: "\u0438\u043D\u0430\u0447\u0435, \u0435\u0441\u043B\u0438|elif",
-    else: "\u0438\u043D\u0430\u0447\u0435|else",
-    for: "\u0434\u043B\u044F|for",
-    forward: "\u0432\u043F\u0435\u0440\u0451\u0434|forward",
-    from: "\u0438\u0437|from",
-    gray: "\u0441\u0435\u0440\u044B\u0439|gray",
-    green: "\u0437\u0435\u043B\u0451\u043D\u044B\u0439|green",
-    if: "\u0435\u0441\u043B\u0438|if",
-    in: "\u0432|in",
-    input: "\u0432\u0432\u043E\u0434|input",
-    is: "\u044D\u0442\u043E|is",
-    left: "\u043D\u0430\u043B\u0435\u0432\u043E|left",
-    length: "\u0434\u043B\u0438\u043D\u0430|length",
-    not_in: "\u043D\u0435 \u0432|not in",
-    or: "\u0438\u043B\u0438|or",
-    orange: "\u043E\u0440\u0430\u043D\u0436\u0435\u0432\u044B\u0439|orange",
-    pink: "\u0440\u043E\u0437\u043E\u0432\u044B\u0439|pink",
-    play: "play",
-    pressed: "\u043D\u0430\u0436\u043C\u0438\u0442\u0435|pressed",
-    print: "\u043F\u0435\u0447\u0430\u0442\u0430\u0442\u044C|print",
-    purple: "\u043F\u0443\u0440\u043F\u0443\u0440\u043D\u044B\u0439|purple",
-    random: "\u0441\u043B\u0443\u0447\u0430\u0439\u043D\u043E\u043C|random",
-    range: "\u043F\u0440\u043E\u043C\u0435\u0436\u0443\u0442\u043E\u043A|range",
-    red: "\u043A\u0440\u0430\u0441\u043D\u044B\u0439|red",
-    remove: "\u0443\u0434\u0430\u043B\u0438\u0442\u044C|remove",
-    repeat: "\u043F\u043E\u0432\u0442\u043E\u0440\u0438\u0442\u044C|repeat",
-    return: "return",
-    right: "\u043D\u0430\u043F\u0440\u0430\u0432\u043E|right",
-    sleep: "\u0437\u0430\u0441\u043D\u0443\u0442\u044C|sleep",
-    step: "\u0448\u0430\u0433|step",
-    times: "\u0440\u0430\u0437|times",
-    to: "\u0434\u043E|to",
-    to_list: "\u0432|to",
-    turn: "\u043F\u043E\u0432\u0435\u0440\u043D\u0443\u0442\u044C|turn",
-    while: "\u043F\u043E\u043A\u0430|while",
-    white: "\u0431\u0435\u043B\u044B\u0439|white",
-    with: "with",
-    yellow: "\u0436\u0451\u043B\u0442\u044B\u0439|yellow",
-    DIGIT: "0123456789"
-  };
-  var sq = {
-    add: "shtoni|add",
-    and: "dhe|and",
-    ask: "pyet|ask",
-    at: "n\xEB|at",
-    black: "zez\xEB|black",
-    blue: "blu|blue",
-    brown: "kafe|brown",
-    call: "thirr|call",
-    clear: "pastro|clear",
-    color: "ngjyr\xEB|color",
-    comma: ",",
-    def: "def",
-    define: "defino|define",
-    echo: "p\xEBrs\xEBrit|echo",
-    elif: "nendryshe|elif",
-    else: "ndryshe|else",
-    for: "p\xEBr|for",
-    forward: "p\xEBrpara|forward",
-    from: "nga|from",
-    gray: "gri|gray",
-    green: "jeshile|green",
-    if: "n\xEBse|if",
-    in: "n\xEB|in",
-    input: "hyrje|input",
-    is: "\xEBsht\xEB|is",
-    left: "majtas|left",
-    length: "gjat\xEBsia|length",
-    not_in: "jo n\xEB|not in",
-    or: "ose|or",
-    orange: "portokalli|orange",
-    pink: "roz\xEB|pink",
-    play: "play",
-    pressed: "shtypur|pressed",
-    print: "printo|print",
-    purple: "vjollc\xEB|purple",
-    random: "rast\xEBsi|random",
-    range: "varg|range",
-    red: "kuqe|red",
-    remove: "hiqni|remove",
-    repeat: "p\xEBrs\xEBrit|repeat",
-    return: "rikthe|return",
-    right: "drejt\xEB|right",
-    sleep: "fle|sleep",
-    step: "hap|step",
-    times: "her|times",
-    to: "deri|to",
-    to_list: "deri|to",
-    turn: "kthes\xEB|turn",
-    while: "derisa|while",
-    white: "bardh\xEB|white",
-    with: "me|with",
-    yellow: "verdh\xEB|yellow",
-    DIGIT: "0123456789"
-  };
-  var sr = {
-    add: "dodaj|add",
-    and: "i|and",
-    ask: "pitaj|ask",
-    at: "na|at",
-    black: "crna|black",
-    blue: "plava|blue",
-    brown: "braon|brown",
-    call: "call",
-    clear: "o\u010Disti|clear",
-    color: "boja|color",
-    comma: ",",
-    def: "def",
-    define: "defini\u0161i|define",
-    echo: "poka\u017Ei|echo",
-    elif: "ina\u010De ako|elif",
-    else: "ina\u010De|else",
-    for: "za|for",
-    forward: "napred|forward",
-    from: "od|from",
-    gray: "siva|gray",
-    green: "zelena|green",
-    if: "ako|if",
-    in: "u|in",
-    input: "ulaz|input",
-    is: "je|is",
-    left: "levo|left",
-    length: "du\u017Eina|length",
-    not_in: "ne/nije u|not in",
-    or: "ili|or",
-    orange: "narand\u017Easta|orange",
-    pink: "roze|pink",
-    play: "play",
-    pressed: "pritisnuto|pressed",
-    print: "\u0161tampaj|print",
-    purple: "ljubi\u010Dasta|purple",
-    random: "nasumi\u010Dno|random",
-    range: "opseg|range",
-    red: "crvena|red",
-    remove: "obri\u0161i|remove",
-    repeat: "ponovi|repeat",
-    return: "vrati|return",
-    right: "desno|right",
-    sleep: "spavanje|sleep",
-    step: "korak|step",
-    times: "vremena|times",
-    to: "u|to",
-    to_list: "u|to",
-    turn: "okreni|turn",
-    while: "dok|while",
-    white: "bela|white",
-    with: "sa|with",
-    yellow: "\u017Euta|yellow",
-    DIGIT: "0123456789"
-  };
-  var sv = {
-    add: "addera|add",
-    and: "och|and",
-    ask: "fr\xE5ga|ask",
-    at: "vid|at",
-    black: "svart|black",
-    blue: "bl\xE5|blue",
-    brown: "brun|brown",
-    call: "anropa|call",
-    clear: "rensa|clear",
-    color: "f\xE4rg|color",
-    comma: ",",
-    def: "def",
-    define: "definiera|define",
-    echo: "eko|echo",
-    elif: "anom|elif",
-    else: "annars|else",
-    for: "f\xF6r|for",
-    forward: "fram\xE5t|forward",
-    from: "fr\xE5n|from",
-    gray: "gr\xE5|gray",
-    green: "gr\xF6n|green",
-    if: "om|if",
-    in: "i|in",
-    input: "inmatning|input",
-    is: "\xE4r|is",
-    left: "v\xE4nster|left",
-    length: "l\xE4ngd|length",
-    not_in: "inte i|not in",
-    or: "eller|or",
-    orange: "orange",
-    pink: "rosa|pink",
-    play: "play",
-    pressed: "nedtryckt|pressed",
-    print: "skriv|print",
-    purple: "lila|purple",
-    random: "slump|random",
-    range: "intervall|range",
-    red: "r\xF6d|red",
-    remove: "radera|remove",
-    repeat: "upprepa|repeat",
-    return: "returnera|return",
-    right: "h\xF6ger|right",
-    sleep: "sov|sleep",
-    step: "steg|step",
-    times: "g\xE5nger|times",
-    to: "till|to",
-    to_list: "till|to",
-    turn: "sv\xE4ng|turn",
-    while: "medan|while",
-    white: "vit|white",
-    with: "med|with",
-    yellow: "gul|yellow",
-    DIGIT: "0123456789"
-  };
-  var sw = {
-    add: "add",
-    and: "and",
-    ask: "ask",
-    at: "at",
-    black: "black",
-    blue: "blue",
-    brown: "brown",
-    call: "call",
-    clear: "clear",
-    color: "color",
-    comma: ",",
-    def: "def",
-    define: "define",
-    echo: "echo",
-    elif: "elif",
-    else: "else",
-    for: "for",
-    forward: "forward",
-    from: "from",
-    gray: "gray",
-    green: "green",
-    if: "if",
-    in: "in",
-    input: "input",
-    is: "is",
-    left: "left",
-    length: "length",
-    not_in: "not in",
-    or: "or",
-    orange: "orange",
-    pink: "pink",
-    play: "play",
-    pressed: "pressed",
-    print: "print",
-    purple: "purple",
-    random: "random",
-    range: "range",
-    red: "red",
-    remove: "remove",
-    repeat: "repeat",
-    return: "return",
-    right: "right",
-    sleep: "sleep",
-    step: "step",
-    times: "times",
-    to: "to",
-    to_list: "to",
-    turn: "turn",
-    while: "while",
-    white: "white",
-    with: "with",
-    yellow: "yellow",
-    DIGIT: "0123456789"
-  };
-  var te = {
-    add: "\u0C1C\u0C4B\u0C21\u0C3F\u0C02\u0C1A\u0C41|add",
-    and: "\u0C2E\u0C30\u0C3F\u0C2F\u0C41|and",
-    ask: "\u0C05\u0C21\u0C17\u0C02\u0C21\u0C3F|ask",
-    at: "\u0C35\u0C26\u0C4D\u0C26|at",
-    black: "black",
-    blue: "blue",
-    brown: "brown",
-    call: "call",
-    clear: "\u0C24\u0C41\u0C21\u0C3F\u0C1A\u0C3F\u0C35\u0C47\u0C2F\u0C3F|clear",
-    color: "color",
-    comma: ",",
-    def: "def",
-    define: "define",
-    echo: "\u0C2A\u0C4D\u0C30\u0C24\u0C3F\u0C27\u0C4D\u0C35\u0C28\u0C3F|echo",
-    elif: "\u0C2E\u0C30\u0C4A\u0C15\u0C1F\u0C3F \u0C09\u0C02\u0C1F\u0C47|elif",
-    else: "\u0C32\u0C47\u0C15\u0C2A\u0C4B\u0C24\u0C47|else",
-    for: "\u0C15\u0C4B\u0C38\u0C02|for",
-    forward: "\u0C2E\u0C41\u0C02\u0C26\u0C41\u0C15\u0C41|forward",
-    from: "\u0C28\u0C41\u0C02\u0C21\u0C3F|from",
-    gray: "gray",
-    green: "green",
-    if: "\u0C09\u0C02\u0C1F\u0C47|if",
-    in: "\u092E\u0947\u0C32\u0C4B|in",
-    input: "\u0C07\u0C28\u0C4D\u0C2A\u0C41\u0C1F\u0C4D|input",
-    is: "\u0C09\u0C02\u0C26\u0C3F|is",
-    left: "left",
-    length: "\u0C2A\u0C4A\u0C21\u0C35\u0C41|length",
-    not_in: "not in",
-    or: "\u0C32\u0C47\u0C26\u0C3E|or",
-    orange: "orange",
-    pink: "pink",
-    play: "play",
-    pressed: "pressed",
-    print: "\u0C2E\u0C41\u0C26\u0C4D\u0C30\u0C23|print",
-    purple: "purple",
-    random: "\u0C2F\u0C3E\u0C26\u0C43\u0C1A\u0C4D\u0C1B\u0C3F\u0C15\u0C02\u0C17\u0C3E|random",
-    range: "\u0C2A\u0C30\u0C3F\u0C27\u0C3F|range",
-    red: "red",
-    remove: "\u0C24\u0C4A\u0C32\u0C17\u0C3F\u0C02\u0C1A\u0C41|remove",
-    repeat: "\u0C2A\u0C41\u0C28\u0C30\u0C3E\u0C35\u0C43\u0C24\u0C02|repeat",
-    return: "return",
-    right: "right",
-    sleep: "\u0C28\u0C3F\u0C26\u0C4D\u0C30|sleep",
-    step: "\u0C05\u0C21\u0C41\u0C17\u0C41|step",
-    times: "\u0C38\u0C3E\u0C30\u0C4D\u0C32\u0C41|times",
-    to: "\u0C15\u0C41|to",
-    to_list: "\u0C15\u0C41|to",
-    turn: "\u0C2E\u0C32\u0C41\u0C2A\u0C41|turn",
-    while: "\u0C05\u0C2F\u0C3F\u0C24\u0C47|while",
-    white: "white",
-    with: "with",
-    yellow: "yellow",
-    DIGIT: "0123456789"
-  };
-  var th = {
-    add: "\u0E40\u0E1E\u0E34\u0E48\u0E21|add",
-    and: "\u0E41\u0E25\u0E30|and",
-    ask: "\u0E16\u0E32\u0E21\u0E27\u0E48\u0E32|ask",
-    at: "\u0E41\u0E1A\u0E1A|at",
-    black: "\u0E14\u0E33|black",
-    blue: "\u0E19\u0E49\u0E33\u0E40\u0E07\u0E34\u0E19|blue",
-    brown: "\u0E19\u0E49\u0E33\u0E15\u0E32\u0E25|brown",
-    call: "call",
-    clear: "\u0E25\u0E1A\u0E01\u0E23\u0E30\u0E14\u0E32\u0E19|clear",
-    color: "\u0E2A\u0E35|color",
-    comma: ",",
-    def: "def",
-    define: "define",
-    echo: "\u0E1E\u0E39\u0E14|echo",
-    elif: "\u0E2B\u0E23\u0E37\u0E2D\u0E16\u0E49\u0E32|elif",
-    else: "\u0E44\u0E21\u0E48\u0E2D\u0E22\u0E48\u0E32\u0E07\u0E19\u0E31\u0E49\u0E19|else",
-    for: "\u0E43\u0E2B\u0E49|for",
-    forward: "\u0E40\u0E14\u0E34\u0E19\u0E2B\u0E19\u0E49\u0E32|forward",
-    from: "\u0E08\u0E32\u0E01|from",
-    gray: "\u0E40\u0E17\u0E32|gray",
-    green: "\u0E40\u0E02\u0E35\u0E22\u0E27|green",
-    if: "\u0E16\u0E49\u0E32|if",
-    in: "\u0E2D\u0E22\u0E39\u0E48\u0E43\u0E19|in",
-    input: "\u0E23\u0E31\u0E1A\u0E02\u0E49\u0E2D\u0E21\u0E39\u0E25|input",
-    is: "\u0E04\u0E37\u0E2D|is",
-    left: "\u0E0B\u0E49\u0E32\u0E22|left",
-    length: "\u0E04\u0E27\u0E32\u0E21\u0E22\u0E32\u0E27|length",
-    not_in: "\u0E44\u0E21\u0E48\u0E2D\u0E22\u0E39\u0E48\u0E43\u0E19|not in",
-    or: "\u0E2B\u0E23\u0E37\u0E2D|or",
-    orange: "\u0E2A\u0E49\u0E21|orange",
-    pink: "\u0E0A\u0E21\u0E1E\u0E39|pink",
-    play: "play",
-    pressed: "\u0E1B\u0E38\u0E48\u0E21\u0E17\u0E35\u0E48\u0E16\u0E39\u0E01\u0E01\u0E14|pressed",
-    print: "\u0E41\u0E2A\u0E14\u0E07|print",
-    purple: "\u0E21\u0E48\u0E27\u0E07|purple",
-    random: "\u0E2A\u0E38\u0E48\u0E21|random",
-    range: "\u0E0A\u0E48\u0E27\u0E07|range",
-    red: "\u0E41\u0E14\u0E07|red",
-    remove: "\u0E25\u0E1A|remove",
-    repeat: "\u0E17\u0E33\u0E0B\u0E49\u0E33|repeat",
-    return: "return",
-    right: "\u0E02\u0E27\u0E32|right",
-    sleep: "\u0E23\u0E2D|sleep",
-    step: "\u0E40\u0E14\u0E34\u0E19|step",
-    times: "\u0E04\u0E23\u0E31\u0E49\u0E07|times",
-    to: "\u0E08\u0E19\u0E16\u0E36\u0E07|to",
-    to_list: "\u0E44\u0E1B\u0E22\u0E31\u0E07|to",
-    turn: "\u0E40\u0E25\u0E35\u0E49\u0E22\u0E27|turn",
-    while: "\u0E40\u0E21\u0E37\u0E48\u0E2D\u0E44\u0E2B\u0E23\u0E48\u0E01\u0E47\u0E15\u0E32\u0E21\u0E17\u0E35\u0E48|while",
-    white: "\u0E02\u0E32\u0E27|white",
-    with: "with",
-    yellow: "\u0E40\u0E2B\u0E25\u0E37\u0E2D\u0E07|yellow",
-    DIGIT: "0123456789"
-  };
-  var tl = {
-    add: "add",
-    and: "and",
-    ask: "ask",
-    at: "at",
-    black: "black",
-    blue: "blue",
-    brown: "brown",
-    call: "call",
-    clear: "clear",
-    color: "color",
-    comma: ",",
-    def: "def",
-    define: "define",
-    echo: "echo",
-    elif: "elif",
-    else: "else",
-    for: "for",
-    forward: "forward",
-    from: "from",
-    gray: "gray",
-    green: "green",
-    if: "if",
-    in: "in",
-    input: "input",
-    is: "is",
-    left: "left",
-    length: "length",
-    not_in: "not in",
-    or: "or",
-    orange: "orange",
-    pink: "pink",
-    play: "play",
-    pressed: "pressed",
-    print: "print",
-    purple: "purple",
-    random: "random",
-    range: "range",
-    red: "red",
-    remove: "remove",
-    repeat: "repeat",
-    return: "return",
-    right: "right",
-    sleep: "sleep",
-    step: "step",
-    times: "times",
-    to: "to",
-    to_list: "to",
-    turn: "turn",
-    while: "while",
-    white: "white",
-    with: "with",
-    yellow: "yellow",
-    DIGIT: "0123456789"
-  };
-  var tn = {
-    add: "tsenya|add",
-    and: "and",
-    ask: "ask",
-    at: "at",
-    black: "black",
-    blue: "blue",
-    brown: "brown",
-    call: "call",
-    clear: "clear",
-    color: "color",
-    comma: ",",
-    def: "def",
-    define: "define",
-    echo: "echo",
-    elif: "elif",
-    else: "else",
-    for: "for",
-    forward: "forward",
-    from: "from",
-    gray: "gray",
-    green: "green",
-    if: "if",
-    in: "in",
-    input: "input",
-    is: "is",
-    left: "left",
-    length: "length",
-    not_in: "not in",
-    or: "or",
-    orange: "orange",
-    pink: "pink",
-    play: "play",
-    pressed: "pressed",
-    print: "print",
-    purple: "purple",
-    random: "random",
-    range: "range",
-    red: "red",
-    remove: "remove",
-    repeat: "repeat",
-    return: "return",
-    right: "right",
-    sleep: "sleep",
-    step: "step",
-    times: "times",
-    to: "to",
-    to_list: "to",
-    turn: "turn",
-    while: "while",
-    white: "white",
-    with: "with",
-    yellow: "yellow",
-    DIGIT: "0123456789"
-  };
-  var tr = {
-    add: "ekle|add",
-    and: "ve|and",
-    ask: "sor|ask",
-    at: "i\xE7inden|at",
-    black: "siyah|black",
-    blue: "mavi|blue",
-    brown: "kahverengi|brown",
-    call: "\xE7a\u011F\u0131r|call",
-    clear: "temizle|clear",
-    color: "renk|color",
-    comma: ",",
-    def: "tan\u0131|def",
-    define: "tan\u0131mla|define",
-    echo: "yank\u0131la|echo",
-    elif: "de\u011File\u011Fer|elif",
-    else: "de\u011Filse|else",
-    for: "\u015Funun i\xE7in|for",
-    forward: "ileri|forward",
-    from: "\u015Furadan|from",
-    gray: "gri|gray",
-    green: "ye\u015Fil|green",
-    if: "e\u011Fer|if",
-    in: "\u015Funda|in",
-    input: "girdi|input",
-    is: "e\u015Fit|is",
-    left: "sol|left",
-    length: "uzunluk|length",
-    not_in: "\u015Funda de\u011Fil|not in",
-    or: "veya|or",
-    orange: "turuncu|orange",
-    pink: "pembe|pink",
-    play: "play",
-    pressed: "bas\u0131l\u0131|pressed",
-    print: "yazd\u0131r|print",
-    purple: "mor|purple",
-    random: "rastgele|random",
-    range: "aral\u0131k|range",
-    red: "k\u0131rm\u0131z\u0131|red",
-    remove: "kald\u0131r|remove",
-    repeat: "tekrarla|repeat",
-    return: "gerid\xF6n|return",
-    right: "sa\u011F|right",
-    sleep: "uyu|sleep",
-    step: "ad\u0131m|step",
-    times: "kere|times",
-    to: "\u015Furaya|to",
-    to_list: "\u015Furaya|to",
-    turn: "d\xF6nd\xFCr|turn",
-    while: "\u015Fu iken|while",
-    white: "beyaz|white",
-    with: "ile|with",
-    yellow: "sar\u0131|yellow",
-    DIGIT: "0123456789"
-  };
-  var uk = {
-    add: "\u0434\u043E\u0434\u0430\u0439|add",
-    and: "\u0456|and",
-    ask: "\u0437\u0430\u043F\u0438\u0442\u0430\u0439|ask",
-    at: "\u043D\u0430 \u043F\u043E\u0437\u0438\u0446\u0456\u0457|at",
-    black: "\u0447\u043E\u0440\u043D\u0438\u0439|black",
-    blue: "\u0441\u0438\u043D\u0456\u0439|blue",
-    brown: "\u043A\u043E\u0440\u0438\u0447\u043D\u0435\u0432\u0438\u0439|brown",
-    call: "call",
-    clear: "\u043E\u0447\u0438\u0441\u0442\u0438\u0442\u0438|clear",
-    color: "\u043A\u043E\u043B\u0456\u0440|color",
-    comma: ",",
-    def: "def",
-    define: "define",
-    echo: "\u0435\u0445\u043E|echo",
-    elif: "\u0456\u043D\u0430\u043A\u0448\u0435 \u044F\u043A\u0449\u043E|elif",
-    else: "\u0456\u043D\u0430\u043A\u0448\u0435|else",
-    for: "\u0434\u043B\u044F|for",
-    forward: "\u0432\u043F\u0435\u0440\u0435\u0434|forward",
-    from: "i\u0437|\u0437|from",
-    gray: "\u0441\u0456\u0440\u0438\u0439|gray",
-    green: "\u0437\u0435\u043B\u0435\u043D\u0438\u0439|green",
-    if: "\u044F\u043A\u0449\u043E|if",
-    in: "\u0432|in",
-    input: "\u0432\u0432\u0435\u0434\u0438|input",
-    is: "\u0446\u0435|is",
-    left: "\u0432\u043B\u0456\u0432\u043E|left",
-    length: "\u0434\u043E\u0432\u0436\u0438\u043D\u0430|length",
-    not_in: "\u043D\u0435 \u0432|not in",
-    or: "\u0430\u0431\u043E|or",
-    orange: "\u043E\u0440\u0430\u043D\u0436\u0435\u0432\u0438\u0439|orange",
-    pink: "\u0440\u043E\u0436\u0435\u0432\u0438\u0439|pink",
-    play: "play",
-    pressed: "\u043D\u0430\u0442\u0438\u0441\u043D\u0443\u0432|pressed",
-    print: "\u0434\u0440\u0443\u043A\u0443\u0439|print",
-    purple: "\u0444\u0456\u043E\u043B\u0435\u0442\u043E\u0432\u0438\u0439|purple",
-    random: "\u0432\u0438\u043F\u0430\u0434\u043A\u043E\u0432\u0438\u0439|\u0432\u0438\u043F\u0430\u0434\u043A\u043E\u0432\u0456\u0439|random",
-    range: "\u0434\u0456\u0430\u043F\u0430\u0437\u043E\u043D|\u0434\u0456\u0430\u043F\u0430\u0437\u043E\u043Di|range",
-    red: "\u0447\u0435\u0440\u0432\u043E\u043D\u0438\u0439|red",
-    remove: "\u0432\u0438\u0434\u0430\u043B\u0438|remove",
-    repeat: "\u043F\u043E\u0432\u0442\u043E\u0440\u0438|repeat",
-    return: "return",
-    right: "\u0432\u043F\u0440\u0430\u0432\u043E|right",
-    sleep: "\u043F\u043E\u0447\u0435\u043A\u0430\u0439|sleep",
-    step: "\u043A\u0440\u043E\u043A|step",
-    times: "\u0440\u0430\u0437\u0456\u0432|\u0440\u0430\u0437\u0438|\u0440\u0430\u0437|times",
-    to: "\u0434\u043E|to",
-    to_list: "\u0434\u043E|to",
-    turn: "\u043F\u043E\u0432\u0435\u0440\u043D\u0438|turn",
-    while: "\u0442\u043E\u0434\u0456 \u044F\u043A|while",
-    white: "\u0431\u0456\u043B\u0438\u0439|white",
-    with: "with",
-    yellow: "\u0436\u043E\u0432\u0442\u0438\u0439|yellow",
-    DIGIT: "0123456789"
-  };
-  var ur = {
-    add: "\u0634\u0627\u0645\u0644|add",
-    and: "\u0627\u0648\u0631|and",
-    ask: "\u0628\u062A\u0627\u0624|ask",
-    at: "\u06A9\u0648\u0626\u06CC|at",
-    black: "\u06A9\u0627\u0644\u0627|black",
-    blue: "\u0646\u06CC\u0644\u0627|blue",
-    brown: "\u0628\u0631\u0627\u0624\u0646|brown",
-    call: "call",
-    clear: "\u0635\u0627\u0641|clear",
-    color: "\u0631\u0646\u06AF|color",
-    comma: "\u060C|,",
-    def: "def",
-    define: "define",
-    echo: "\u067E\u06A9\u0627\u0631|echo",
-    elif: "\u06CC\u0627\u0627\u06AF\u0631|elif",
-    else: "\u0648\u0631\u0646\u06C1|else",
-    for: "\u0641\u06CC|for",
-    forward: "\u0622\u06AF\u06D2|forward",
-    from: "\u0633\u06D2|from",
-    gray: "\u06AF\u0631\u06D2|gray",
-    green: "\u0633\u0628\u0632|green",
-    if: "\u0627\u06AF\u0631|if",
-    in: "\u0645\u06CC\u06BA|in",
-    input: "\u0628\u062A\u0627\u0624|input",
-    is: "\u06C1\u06D2|is",
-    left: "\u0628\u0627\u0626\u06CC\u06BA|left",
-    length: "\u0644\u0645\u0628\u0627\u0626\u06CC|length",
-    not_in: "\u0646\u06C1\u06CC\u06BA \u06C1\u06D2|not in",
-    or: "\u06CC\u0627|or",
-    orange: "\u0627\u0648\u0631\u06CC\u0646\u062C|orange",
-    pink: "\u06AF\u0644\u0627\u0628\u06CC|pink",
-    play: "play",
-    pressed: "\u062F\u0628\u0627 \u06C1\u0648\u0627|pressed",
-    print: "\u062F\u06A9\u06BE\u0627\u0624|print",
-    purple: "\u062C\u0627\u0645\u0646\u06CC|purple",
-    random: "\u0633\u0627|random",
-    range: "\u062D\u062F|range",
-    red: "\u0633\u0631\u062E|red",
-    remove: "\u0646\u06A9\u0627\u0644\u0648|remove",
-    repeat: "\u0645\u06A9\u0631\u0631|repeat",
-    return: "return",
-    right: "\u062F\u0627\u0626\u06CC\u06BA|right",
-    sleep: "\u0622\u0631\u0627\u0645|sleep",
-    step: "\u0642\u062F\u0645|step",
-    times: "\u062F\u0641\u0639\u06C1|times",
-    to: "\u0633\u06D2|to",
-    to_list: "\u0627\u0646\u062F\u0631|to",
-    turn: "\u0645\u0691\u0648|turn",
-    while: "\u062C\u0628\u062A\u06A9|while",
-    white: "\u0633\u0641\u06CC\u062F|white",
-    with: "with",
-    yellow: "\u067E\u06CC\u0644\u0627|yellow",
-    DIGIT: "0123456789"
-  };
-  var vi = {
-    add: "add",
-    and: "v\xE0|and",
-    ask: "h\u1ECFi|ask",
-    at: "at",
-    black: "\u0111en|black",
-    blue: "lam|blue",
-    brown: "n\xE2u|brown",
-    call: "call",
-    clear: "clear",
-    color: "m\xE0u|color",
-    comma: ",",
-    def: "def",
-    define: "define",
-    echo: "\u0111\xE1p|echo",
-    elif: "elif",
-    else: "else",
-    for: "for",
-    forward: "ti\u1EBFn|forward",
-    from: "from",
-    gray: "x\xE1m|gray",
-    green: "l\u1EE5c|green",
-    if: "n\u1EBFu|if",
-    in: "in",
-    input: "input",
-    is: "l\xE0|is",
-    left: "tr\xE1i|left",
-    length: "length",
-    not_in: "not in",
-    or: "ho\u1EB7c|or",
-    orange: "cam|orange",
-    pink: "h\u1ED3ng|pink",
-    play: "play",
-    pressed: "pressed",
-    print: "xu\u1EA5t|print",
-    purple: "t\xEDm|purple",
-    random: "ng\u1EABu_nhi\xEAn|random",
-    range: "range",
-    red: "\u0111\u1ECF|red",
-    remove: "remove",
-    repeat: "repeat",
-    return: "return",
-    right: "ph\u1EA3i|right",
-    sleep: "sleep",
-    step: "step",
-    times: "times",
-    to: "to",
-    to_list: "to",
-    turn: "quay|turn",
-    while: "while",
-    white: "tr\u1EAFng|white",
-    with: "with",
-    yellow: "v\xE0ng|yellow",
-    DIGIT: "0123456789"
-  };
-  var zh_Hans = {
-    add: "\u52A0|add",
-    and: "\u5E76\u4E14|and",
-    ask: "\u63D0\u95EE|ask",
-    at: "\u5728|at",
-    black: "\u9ED1\u8272|black",
-    blue: "\u84DD\u8272|blue",
-    brown: "\u68D5\u8272|brown",
-    call: "\u8C03\u7528|call",
-    clear: "\u6E05\u9664|clear",
-    color: "\u989C\u8272|color",
-    comma: "\uFF0C|,",
-    def: "\u5B9A\u4E49\u51FD\u6570|def",
-    define: "\u5B9A\u4E49|define",
-    echo: "\u56DE\u58F0|echo",
-    elif: "\u5426\u5219\u5982\u679C|elif",
-    else: "\u5426\u5219|else",
-    for: "\u53D6|for",
-    forward: "\u5411\u524D|forward",
-    from: "\u4ECE|from",
-    gray: "\u7070\u8272|gray",
-    green: "\u7EFF\u8272|green",
-    if: "\u5982\u679C|if",
-    in: "\u5728\u91CC\u9762|in",
-    input: "\u8F93\u5165|input",
-    is: "\u662F|is",
-    left: "\u5DE6|left",
-    length: "\u957F\u5EA6|length",
-    not_in: "\u4E0D\u5728|not in",
-    or: "\u6216|or",
-    orange: "\u6A59\u8272|orange",
-    pink: "\u7C89\u7EA2\u8272|pink",
-    play: "\u8FD0\u884C|play",
-    pressed: "\u6309\u4E0B|pressed",
-    print: "\u6253\u5370|print",
-    purple: "\u7D2B\u8272|purple",
-    random: "\u968F\u673A|random",
-    range: "\u8303\u56F4|range",
-    red: "\u7EA2\u8272|red",
-    remove: "\u79FB\u9664|remove",
-    repeat: "\u91CD\u590D|repeat",
-    return: "\u8FD4\u56DE|return",
-    right: "\u53F3|right",
-    sleep: "\u7761\u7720|sleep",
-    step: "\u6B65|step",
-    times: "\u6B21|times",
-    to: "\u5230|to",
-    to_list: "\u5230|to",
-    turn: "\u65CB\u8F6C|turn",
-    while: "\u5F53|while",
-    white: "\u767D\u8272|white",
-    with: "\u5BF9|with",
-    yellow: "\u9EC4\u8272|yellow",
-    DIGIT: "0123456789"
-  };
-  var zh_Hant = {
-    add: "add",
-    and: "and",
-    ask: "ask",
-    at: "at",
-    black: "black",
-    blue: "blue",
-    brown: "brown",
-    call: "call",
-    clear: "clear",
-    color: "color",
-    comma: ",",
-    def: "def",
-    define: "define",
-    echo: "echo",
-    elif: "elif",
-    else: "else",
-    for: "for",
-    forward: "forward",
-    from: "from",
-    gray: "gray",
-    green: "green",
-    if: "if",
-    in: "in",
-    input: "input",
-    is: "is",
-    left: "left",
-    length: "length",
-    not_in: "not in",
-    or: "or",
-    orange: "orange",
-    pink: "pink",
-    play: "play",
-    pressed: "pressed",
-    print: "print",
-    purple: "purple",
-    random: "random",
-    range: "range",
-    red: "red",
-    remove: "remove",
-    repeat: "repeat",
-    return: "return",
-    right: "right",
-    sleep: "sleep",
-    step: "step",
-    times: "times",
-    to: "to",
-    to_list: "to",
-    turn: "turn",
-    while: "while",
-    white: "white",
-    with: "with",
-    yellow: "yellow",
-    DIGIT: "0123456789"
-  };
-  var highlighting_trad_default = {
-    ar,
-    bg,
-    bn,
-    ca,
-    cs,
-    cy,
-    da,
-    de,
-    el,
-    en,
-    eo,
-    es,
-    et,
-    fa,
-    fi,
-    fr,
-    fy,
-    he,
-    hi,
-    hu,
-    id,
-    it,
-    ja,
-    kmr,
-    ko,
-    mi,
-    nb_NO,
-    nl,
-    pa_PK,
-    pap,
-    pl,
-    pt_BR,
-    pt_PT,
-    ro,
-    ru,
-    sq,
-    sr,
-    sv,
-    sw,
-    te,
-    th,
-    tl,
-    tn,
-    tr,
-    uk,
-    ur,
-    vi,
-    zh_Hans,
-    zh_Hant
-  };
-
-  // static/js/syntaxModesRules.ts
-  function initializeSyntaxHighlighter(options) {
-    let TRADUCTIONS = convert(highlighting_trad_default);
-    let lang = options.keywordLanguage;
-    if (!TRADUCTIONS.has(lang)) {
-      lang = "en";
-    }
-    var TRADUCTION3 = TRADUCTIONS.get(lang);
-    var data = JSON.stringify(highlighting_default);
-    var data_tr = convertReg(data, TRADUCTION3);
-    var LEVELS = JSON.parse(data_tr);
-    if (window.define) {
-      for (const level3 of LEVELS) {
-        define("ace/mode/" + level3.name, [], function(require2, exports, _module) {
-          var oop = require2("ace/lib/oop");
-          var TextMode = require2("ace/mode/text").Mode;
-          var TextHighlightRules = require2("ace/mode/text_highlight_rules").TextHighlightRules;
-          function ThisLevelHighlightRules() {
-            this.$rules = level3.rules;
-            this.normalizeRules();
-          }
-          ;
-          oop.inherits(ThisLevelHighlightRules, TextHighlightRules);
-          function Mode() {
-            this.HighlightRules = ThisLevelHighlightRules;
-          }
-          ;
-          oop.inherits(Mode, TextMode);
-          exports.Mode = Mode;
-        });
-      }
-    }
-  }
-  function convert(o) {
-    if (typeof o === "object") {
-      let tmp = new Map(Object.entries(o));
-      let ret = new Map();
-      tmp.forEach((value, key) => {
-        ret.set(key, convert(value));
-      });
-      return ret;
-    } else {
-      return o;
-    }
-  }
-  function convertReg(oldReg, TRAD) {
-    var newReg = oldReg;
-    TRAD.forEach((value, key) => {
-      key = key;
-      var reg = new RegExp("__" + key + "__", "g");
-      newReg = newReg.replace(reg, value);
-    });
-    return newReg;
-  }
 
   // static/js/message-translations.ts
   var TRANSLATIONS = {
@@ -16655,7 +4403,7 @@ var hedyApp = (() => {
       "unsaved_class_changes": "There are unsaved changes, are you sure you want to leave this page?"
     },
     "de": {
-      "CheckInternet": "Funktioniert deine Internetverbindung.",
+      "CheckInternet": "\xDCberpr\xFCfe, ob deine Internetverbindung funktioniert.",
       "Connection_error": "Wir konnten den Server nicht erreichen.",
       "Empty_output": "Dieses Programm funktioniert aber gibt nichts aus. F\xFCge ein `print` Befehl hinzu oder benutz die Schildkr\xF6t um eine Ausgabe zu bekommen.",
       "Errors_found": "Du hast einen Fehler gemacht! Keine Sorge, wir haben das Programm trotzdem ausgef\xFChrt",
@@ -17044,6 +4792,36 @@ var hedyApp = (() => {
       "turtle": "\u{1F422}",
       "unsaved_class_changes": "Biztosan elhagyod ezt az oldalt? Mentetlen v\xE1ltoztat\xE1said vannak, amik \xEDgy elveszhetnek."
     },
+    "ia": {
+      "CheckInternet": "Check whether your Internet connection is working.",
+      "Connection_error": "We couldn't reach the server.",
+      "Empty_output": "This code works but does not print anything. Add a print command to your code or use the turtle to get output.",
+      "Errors_found": "You made a mistake! Don't worry, we still ran the program",
+      "Execute_error": "Something went wrong while running the program.",
+      "Other_error": "Oops! Maybe we made a little mistake.",
+      "Program_repair": "This could be the correct code, can you fix it?",
+      "Program_too_long": "Your program takes too long to run.",
+      "ServerError": "You wrote a program we weren't expecting. If you want to help, send us an email with the level and your program at hello@hedy.org. In the meantime, try something a little different and take another look at the examples. Thanks!",
+      "Transpile_error": "We can't run your program.",
+      "Transpile_success": "Good job!\nAmazing!\nWell done!\nExcellent!\nYou did great!",
+      "Transpile_warning": "Warning!",
+      "Unsaved_Changes": "You have an unsaved program. Do you want to leave without saving it?",
+      "adventures_restored": "The default adventures have been restored.",
+      "copy_link_to_share": "Copy link to share",
+      "customization_deleted": "Customizations successfully deleted.",
+      "dice": "\u{1F3B2}",
+      "directly_available": "Directly open",
+      "disabled": "Disabled",
+      "fortune": "\u{1F52E}, \u2728",
+      "haunted": "\u{1F987}, \u{1F47B}, \u{1F383}",
+      "level_title": "Level",
+      "restaurant": "\u{1F363}, \u{1F355}, \u{1F354}",
+      "rock": "\u2702\uFE0F, \u{1F4DC}, \u{1F5FB}",
+      "songs": "\u{1F3B5},\u{1F3B6}",
+      "teacher_welcome": "Welcome to Hedy! Your are now the proud owner of a teachers account which allows you to create classes and invite students.",
+      "turtle": "\u{1F422}",
+      "unsaved_class_changes": "There are unsaved changes, are you sure you want to leave this page?"
+    },
     "id": {
       "CheckInternet": "Cobalah cek apakah internet kamu berjalan dengan baik.",
       "Connection_error": "Kami tidak bisa terhubung dengan server.",
@@ -17380,7 +5158,7 @@ var hedyApp = (() => {
       "Empty_output": "Este c\xF3digo funciona mas n\xE3o imprime nada. Adicione um comando de impress\xE3o ou use a tartaruga para ter alguma sa\xEDda.",
       "Errors_found": "Voc\xEA cometeu um erro! N\xE3o se preocupe, ainda executamos o programa",
       "Execute_error": "Alguma coisa deu errado enquanto o programa era executado.",
-      "Other_error": "Opa! Talvez n\xF3s fizemos alguma coisa errada.",
+      "Other_error": "Opa! Talvez tenhamos feito alguma coisa errada.",
       "Program_repair": "Este poderia ser o c\xF3digo correto, voc\xEA poderia corrigir ele?",
       "Program_too_long": "O seu programa leva muito tempo para executar.",
       "ServerError": "Voc\xEA escreveu um programa que n\xE3o est\xE1vamos esperando. Se voc\xEA quiser ajudar, envie-nos um email com o n\xEDvel e seu programa para hello@hedy.org. Enquanto isso, tente algo um pouco diferente e d\xEA uma outra olhada nos exemplos. Obrigado!",
@@ -17388,12 +5166,12 @@ var hedyApp = (() => {
       "Transpile_success": "Bom trabalho!\nImpressionante!\nMuito bem!\nExcelente!\n\xD3timo!",
       "Transpile_warning": "Aviso!",
       "Unsaved_Changes": "Voc\xEA tem um programa n\xE3o salvo. Voc\xEA deseja sair sem salv\xE1-lo?",
-      "adventures_restored": "The default adventures have been restored!",
+      "adventures_restored": "As aventuras padr\xE3o foram restauradas.",
       "copy_link_to_share": "Copiar link para compartilhar",
-      "customization_deleted": "Customizations successfully deleted.",
+      "customization_deleted": "Personaliza\xE7\xF5es deletadas com sucesso.",
       "dice": "\u{1F3B2}",
       "directly_available": "Directly open",
-      "disabled": "Disabled",
+      "disabled": "Desativado",
       "fortune": "\u{1F52E}, \u2728",
       "haunted": "\u{1F987}, \u{1F47B}, \u{1F383}",
       "level_title": "N\xEDvel",
@@ -17402,7 +5180,7 @@ var hedyApp = (() => {
       "songs": "\u{1F3B5},\u{1F3B6}",
       "teacher_welcome": "Welcome to Hedy! Your are now the proud owner of a teachers account which allows you to create classes and invite students.",
       "turtle": "\u{1F422}",
-      "unsaved_class_changes": "There are unsaved changes, are you sure you want to leave this page?"
+      "unsaved_class_changes": "H\xE1 altera\xE7\xF5es n\xE3o salvas, tem certeza de que quer sair desta p\xE1gina?"
     },
     "pt_PT": {
       "CheckInternet": "Verifica se a tua liga\xE7\xE3o de Internet est\xE1 a funcionar correctamente.",
@@ -51463,6 +39241,2810 @@ notes_mapping = {
   var toList15 = 28;
   var elif2 = 29;
 
+  // highlighting/highlighting-trad.json
+  var ar = {
+    add: "\u0640*\u0627\u0640*\u0636\u0640*\u0641\u0640*|add",
+    and: "\u0640*\u0648\u0640*|and",
+    ask: "\u0640*\u0627\u0640*\u0633\u0640*\u0623\u0640*\u0644\u0640*|ask",
+    at: "\u0640*\u0628\u0640*\u0634\u0640*\u0643\u0640*\u0644\u0640*|at",
+    black: "\u0640*\u0627\u0640*\u0633\u0640*\u0648\u0640*\u062F\u0640*|black",
+    blue: "\u0640*\u0627\u0640*\u0632\u0640*\u0631\u0640*\u0642\u0640*|blue",
+    brown: "\u0640*\u0628\u0640*\u0646\u0640*\u064A\u0640*|brown",
+    call: "\u0640*c\u0640*a\u0640*l\u0640*l\u0640*|call",
+    clear: "\u0640*\u0645\u0640*\u0633\u0640*\u062D\u0640*|clear",
+    color: "\u0640*\u0644\u0640*\u0648\u0640*\u0646\u0640*|color",
+    comma: "\u0640*\u060C\u0640*|,",
+    def: "\u0640*d\u0640*e\u0640*f\u0640*|def",
+    define: "\u0640*d\u0640*e\u0640*f\u0640*i\u0640*n\u0640*e\u0640*|define",
+    echo: "\u0640*\u0631\u0640*\u062F\u0640*\u062F\u0640*|echo",
+    elif: "\u0640*\u0648\u0640*\u0625\u0640*\u0644\u0640*\u0627\u0640* \u0640*\u0627\u0640*\u0630\u0640*\u0627\u0640*|elif",
+    else: "\u0640*\u0648\u0640*\u0625\u0640*\u0644\u0640*\u0627\u0640*|else",
+    for: "\u0640*\u0644\u0640*\u0643\u0640*\u0644\u0640*|for",
+    forward: "\u0640*\u062A\u0640*\u0642\u0640*\u062F\u0640*\u0645\u0640*|forward",
+    from: "\u0640*\u0645\u0640*\u0646\u0640*|from",
+    gray: "\u0640*\u0631\u0640*\u0645\u0640*\u0627\u0640*\u062F\u0640*\u064A\u0640*|gray",
+    green: "\u0640*\u0627\u0640*\u062E\u0640*\u0636\u0640*\u0631\u0640*|green",
+    if: "\u0640*\u0627\u0640*\u0630\u0640*\u0627\u0640*|if",
+    in: "\u0640*\u0641\u0640*\u064A\u0640*|in",
+    input: "\u0640*\u0627\u0640*\u062F\u0640*\u062E\u0640*\u0644\u0640*|input",
+    is: "\u0640*\u0647\u0640*\u0648\u0640*|\u0640*\u0647\u0640*\u064A\u0640*|is",
+    left: "\u0640*\u064A\u0640*\u0633\u0640*\u0627\u0640*\u0631\u0640*|left",
+    length: "\u0640*\u0637\u0640*\u0648\u0640*\u0644\u0640*|length",
+    not_in: "\u0640*n\u0640*o\u0640*t\u0640* \u0640*i\u0640*n\u0640*|not in",
+    or: "\u0640*\u0623\u0640*\u0648\u0640*|or",
+    orange: "\u0640*\u0628\u0640*\u0631\u0640*\u062A\u0640*\u0642\u0640*\u0627\u0640*\u0644\u0640*\u064A\u0640*|orange",
+    pink: "\u0640*\u0632\u0640*\u0647\u0640*\u0631\u0640*\u064A\u0640*|pink",
+    play: "\u0640*p\u0640*l\u0640*a\u0640*y\u0640*|play",
+    pressed: "\u0640*\u0645\u0640*\u0636\u0640*\u063A\u0640*\u0648\u0640*\u0637\u0640*|pressed",
+    print: "\u0640*\u0642\u0640*\u0648\u0640*\u0644\u0640*|print",
+    purple: "\u0640*\u0628\u0640*\u0646\u0640*\u0641\u0640*\u0633\u0640*\u062C\u0640*\u064A\u0640*|purple",
+    random: "\u0640*\u0639\u0640*\u0634\u0640*\u0648\u0640*\u0627\u0640*\u0626\u0640*\u064A\u0640*|random",
+    range: "\u0640*\u0646\u0640*\u0637\u0640*\u0627\u0640*\u0642\u0640*|range",
+    red: "\u0640*\u0627\u0640*\u062D\u0640*\u0645\u0640*\u0631\u0640*|red",
+    remove: "\u0640*\u0627\u0640*\u0632\u0640*\u0644\u0640*|remove",
+    repeat: "\u0640*\u0643\u0640*\u0631\u0640*\u0631\u0640*|repeat",
+    return: "\u0640*r\u0640*e\u0640*t\u0640*u\u0640*r\u0640*n\u0640*|return",
+    right: "\u0640*\u064A\u0640*\u0645\u0640*\u064A\u0640*\u0646\u0640*|right",
+    sleep: "\u0640*\u0627\u0640*\u0646\u0640*\u062A\u0640*\u0638\u0640*\u0631\u0640*|sleep",
+    step: "\u0640*\u062E\u0640*\u0637\u0640*\u0648\u0640*\u0629\u0640*|step",
+    times: "\u0640*\u0645\u0640*\u0631\u0640*\u0629\u0640*|times",
+    to: "\u0640*\u0627\u0640*\u0644\u0640*\u0649\u0640*|to",
+    to_list: "\u0640*\u0627\u0640*\u0644\u0640*\u0649\u0640*|to",
+    turn: "\u0640*\u0627\u0640*\u0633\u0640*\u062A\u0640*\u062F\u0640*\u0631\u0640*|turn",
+    while: "\u0640*\u0628\u0640*\u064A\u0640*\u0646\u0640*\u0645\u0640*\u0627\u0640*|while",
+    white: "\u0640*\u0627\u0640*\u0628\u0640*\u064A\u0640*\u0636\u0640*|white",
+    with: "\u0640*w\u0640*i\u0640*t\u0640*h\u0640*|with",
+    yellow: "\u0640*\u0627\u0640*\u0635\u0640*\u0641\u0640*\u0631\u0640*|yellow",
+    DIGIT: "0\u06601\u06612\u06623\u06634\u06645\u06656\u06667\u06678\u06689\u0669"
+  };
+  var bg = {
+    add: "\u0434\u043E\u0431\u0430\u0432\u0438|add",
+    and: "\u0438|and",
+    ask: "\u043F\u043E\u043F\u0438\u0442\u0430\u0439|ask",
+    at: "\u0432|at",
+    black: "\u0447\u0435\u0440\u043D\u043E|black",
+    blue: "\u0441\u0438\u043D\u044C\u043E|blue",
+    brown: "\u043A\u0430\u0444\u044F\u0432\u043E|brown",
+    call: "\u0438\u0437\u0432\u0438\u043A\u0430\u0439|call",
+    clear: "\u0438\u0437\u0447\u0438\u0441\u0442\u0438|clear",
+    color: "\u0446\u0432\u044F\u0442|color",
+    comma: ",",
+    def: "\u0434\u0435\u0444|def",
+    define: "\u0434\u0435\u0444\u0438\u043D\u0438\u0440\u0430\u0439|define",
+    echo: "\u043F\u043E\u043A\u0430\u0436\u0438|echo",
+    elif: "\u0438\u043D\u0430\u0447\u0435 \u0430\u043A\u043E|elif",
+    else: "\u0438\u043D\u0430\u0447\u0435|else",
+    for: "\u0437\u0430|for",
+    forward: "\u043D\u0430\u043F\u0440\u0435\u0434|forward",
+    from: "\u043E\u0442|from",
+    gray: "\u0441\u0438\u0432\u043E|gray",
+    green: "\u0437\u0435\u043B\u0435\u043D\u043E|green",
+    if: "\u0430\u043A\u043E|if",
+    in: "\u0432|in",
+    input: "\u0432\u044A\u0432\u0435\u0436\u0434\u0430\u043D\u0435|input",
+    is: "\u0435|is",
+    left: "\u043B\u044F\u0432\u043E|left",
+    length: "\u0434\u044A\u043B\u0436\u0438\u043D\u0430|length",
+    not_in: "\u043D\u0435 \u0432/\u0432\u044A\u0432|not in",
+    or: "\u0438\u043B\u0438|or",
+    orange: "\u043E\u0440\u0430\u043D\u0436\u0435\u0432\u043E|orange",
+    pink: "\u0440\u043E\u0437\u043E\u0432\u043E|pink",
+    play: "play",
+    pressed: "\u043D\u0430\u0442\u0438\u0441\u043D\u0430\u0442|pressed",
+    print: "\u043F\u0440\u0438\u043D\u0442\u0438\u0440\u0430\u0439|print",
+    purple: "\u043B\u0438\u043B\u0430\u0432\u043E|purple",
+    random: "\u043F\u0440\u043E\u0438\u0437\u0432\u043E\u043B\u043D\u043E|random",
+    range: "\u043E\u0431\u0445\u0432\u0430\u0442|range",
+    red: "\u0447\u0435\u0440\u0432\u0435\u043D\u043E|red",
+    remove: "\u043F\u0440\u0435\u043C\u0430\u0445\u043D\u0438|remove",
+    repeat: "\u043F\u043E\u0432\u0442\u043E\u0440\u0438|repeat",
+    return: "\u0432\u044A\u0440\u043D\u0438|return",
+    right: "\u0434\u044F\u0441\u043D\u043E|right",
+    sleep: "\u0441\u043F\u0438|sleep",
+    step: "\u0441\u0442\u044A\u043F\u043A\u0430|step",
+    times: "\u043F\u044A\u0442\u0438|times",
+    to: "\u0434\u043E|to",
+    to_list: "\u0434\u043E|to",
+    turn: "\u0437\u0430\u0432\u0438\u0439|turn",
+    while: "\u0434\u043E\u043A\u0430\u0442\u043E|while",
+    white: "\u0431\u044F\u043B\u043E|white",
+    with: "\u0441/\u0441\u044A\u0441|with",
+    yellow: "\u0436\u044A\u043B\u0442\u043E|yellow",
+    DIGIT: "0123456789"
+  };
+  var bn = {
+    add: "add",
+    and: "and",
+    ask: "ask",
+    at: "at",
+    black: "black",
+    blue: "blue",
+    brown: "brown",
+    call: "call",
+    clear: "clear",
+    color: "color",
+    comma: ",",
+    def: "def",
+    define: "define",
+    echo: "echo",
+    elif: "elif",
+    else: "else",
+    for: "for",
+    forward: "forward",
+    from: "from",
+    gray: "gray",
+    green: "green",
+    if: "if",
+    in: "in",
+    input: "input",
+    is: "is",
+    left: "left",
+    length: "length",
+    not_in: "not in",
+    or: "or",
+    orange: "orange",
+    pink: "pink",
+    play: "play",
+    pressed: "pressed",
+    print: "print",
+    purple: "purple",
+    random: "random",
+    range: "range",
+    red: "red",
+    remove: "remove",
+    repeat: "repeat",
+    return: "return",
+    right: "right",
+    sleep: "sleep",
+    step: "step",
+    times: "times",
+    to: "to",
+    to_list: "to",
+    turn: "turn",
+    while: "while",
+    white: "white",
+    with: "with",
+    yellow: "yellow",
+    DIGIT: "0123456789"
+  };
+  var ca = {
+    add: "afegeix|add",
+    and: "i|and",
+    ask: "pregunta|ask",
+    at: "a|at",
+    black: "negre|black",
+    blue: "blau|blue",
+    brown: "marr\xF3|brown",
+    call: "crida|call",
+    clear: "neteja|clear",
+    color: "color",
+    comma: ",",
+    def: "def",
+    define: "defineix|define",
+    echo: "eco|echo",
+    elif: "sinosi|elif",
+    else: "sino|else",
+    for: "per|for",
+    forward: "avan\xE7a|forward",
+    from: "de|from",
+    gray: "gris|gray",
+    green: "verd|green",
+    if: "si|if",
+    in: "dins|in",
+    input: "entra|input",
+    is: "\xE9s|is",
+    left: "esquerra|left",
+    length: "mida|length",
+    not_in: "no dins|not in",
+    or: "o|or",
+    orange: "taronja|orange",
+    pink: "rosa|pink",
+    play: "play",
+    pressed: "pressionat|pressed",
+    print: "imprimeix|print",
+    purple: "lila|purple",
+    random: "aleatori|random",
+    range: "rang|range",
+    red: "vermell|red",
+    remove: "esborra|remove",
+    repeat: "repeteix|repeat",
+    return: "retorna|return",
+    right: "dreta|right",
+    sleep: "dorm|sleep",
+    step: "pas|step",
+    times: "vegades|times",
+    to: "fins|to",
+    to_list: "a|to",
+    turn: "gira|turn",
+    while: "mentre|while",
+    white: "blanc|white",
+    with: "amb|with",
+    yellow: "groc|yellow",
+    DIGIT: "0123456789"
+  };
+  var cs = {
+    add: "add",
+    and: "and",
+    ask: "ask",
+    at: "at",
+    black: "black",
+    blue: "blue",
+    brown: "brown",
+    call: "call",
+    clear: "clear",
+    color: "color",
+    comma: ",",
+    def: "def",
+    define: "define",
+    echo: "echo",
+    elif: "elif",
+    else: "else",
+    for: "for",
+    forward: "forward",
+    from: "from",
+    gray: "gray",
+    green: "green",
+    if: "if",
+    in: "in",
+    input: "input",
+    is: "is",
+    left: "left",
+    length: "length",
+    not_in: "not in",
+    or: "or",
+    orange: "orange",
+    pink: "pink",
+    play: "play",
+    pressed: "pressed",
+    print: "print",
+    purple: "purple",
+    random: "random",
+    range: "range",
+    red: "red",
+    remove: "remove",
+    repeat: "repeat",
+    return: "return",
+    right: "right",
+    sleep: "sleep",
+    step: "step",
+    times: "times",
+    to: "to",
+    to_list: "to",
+    turn: "turn",
+    while: "while",
+    white: "white",
+    with: "with",
+    yellow: "yellow",
+    DIGIT: "0123456789"
+  };
+  var cy = {
+    add: "adio|add",
+    and: "a|and",
+    ask: "gofyn|ask",
+    at: "ar|at",
+    black: "du|black",
+    blue: "glas|blue",
+    brown: "brown",
+    call: "call",
+    clear: "clear",
+    color: "lliw|color",
+    comma: ",",
+    def: "def",
+    define: "define",
+    echo: "adleisio|echo",
+    elif: "elif",
+    else: "arall|else",
+    for: "ar gyfer|for",
+    forward: "ymlaen|forward",
+    from: "o|from",
+    gray: "llwyd|gray",
+    green: "gwyrdd|green",
+    if: "os|if",
+    in: "mewn|in",
+    input: "mewnbwn|input",
+    is: "yw|is",
+    left: "chwith|left",
+    length: "hyd|length",
+    not_in: "dim mewn|not in",
+    or: "neu|or",
+    orange: "oren|orange",
+    pink: "pinc|pink",
+    play: "play",
+    pressed: "gwasgu|pressed",
+    print: "argraffu|print",
+    purple: "porffor|purple",
+    random: "hap|random",
+    range: "ystod|range",
+    red: "coch|red",
+    remove: "dileu|remove",
+    repeat: "ailadrodd|repeat",
+    return: "return",
+    right: "dde|right",
+    sleep: "cysgu|sleep",
+    step: "cam|step",
+    times: "gwaith|times",
+    to: "i|to",
+    to_list: "i|to",
+    turn: "troi|turn",
+    while: "tra|while",
+    white: "gwyn|white",
+    with: "with",
+    yellow: "melyn|yellow",
+    DIGIT: "0123456789"
+  };
+  var da = {
+    add: "add",
+    and: "and",
+    ask: "sp\xF8rg|ask",
+    at: "at",
+    black: "sort|black",
+    blue: "bl\xE5|blue",
+    brown: "brun|brown",
+    call: "call",
+    clear: "clear",
+    color: "farve|color",
+    comma: ",",
+    def: "def",
+    define: "define",
+    echo: "ekko|echo",
+    elif: "elif",
+    else: "else",
+    for: "for",
+    forward: "fremad|forward",
+    from: "from",
+    gray: "gr\xE5|gray",
+    green: "gr\xF8n|green",
+    if: "if",
+    in: "in",
+    input: "input",
+    is: "is",
+    left: "left",
+    length: "length",
+    not_in: "not in",
+    or: "or",
+    orange: "orange",
+    pink: "lyser\xF8d|pink",
+    play: "play",
+    pressed: "pressed",
+    print: "print",
+    purple: "lila|purple",
+    random: "random",
+    range: "range",
+    red: "red",
+    remove: "remove",
+    repeat: "repeat",
+    return: "return",
+    right: "right",
+    sleep: "sleep",
+    step: "step",
+    times: "times",
+    to: "to",
+    to_list: "to",
+    turn: "drej|turn",
+    while: "while",
+    white: "white",
+    with: "with",
+    yellow: "yellow",
+    DIGIT: "0123456789"
+  };
+  var de = {
+    add: "addiere|add",
+    and: "und|and",
+    ask: "frage|ask",
+    at: "an|at",
+    black: "Schwarz|black",
+    blue: "Blau|blue",
+    brown: "Braun|brown",
+    call: "call",
+    clear: "abwischen|clear",
+    color: "farbe|color",
+    comma: ",",
+    def: "def",
+    define: "define",
+    echo: "echo",
+    elif: "sofalls|elif",
+    else: "sonst|else",
+    for: "f\xFCr|for",
+    forward: "vorw\xE4rts|forward",
+    from: "aus|from",
+    gray: "Grau|gray",
+    green: "Gr\xFCn|green",
+    if: "falls|if",
+    in: "in",
+    input: "eingabe|input",
+    is: "ist|is",
+    left: "links|left",
+    length: "l\xE4nge|length",
+    not_in: "nicht in|not in",
+    or: "oder|or",
+    orange: "Orange|orange",
+    pink: "Pink|pink",
+    play: "play",
+    pressed: "gedr\xFCckt|pressed",
+    print: "drucke|print",
+    purple: "Lila|purple",
+    random: "zuf\xE4llig|random",
+    range: "bereich|range",
+    red: "Rot|red",
+    remove: "entferne|remove",
+    repeat: "wiederhole|repeat",
+    return: "return",
+    right: "rechts|right",
+    sleep: "schlafe|sleep",
+    step: "schritt|step",
+    times: "mal|times",
+    to: "bis|to",
+    to_list: "zu|to",
+    turn: "drehe|turn",
+    while: "solange|while",
+    white: "Wei\xDF|white",
+    with: "with",
+    yellow: "Gelb|yellow",
+    DIGIT: "0123456789"
+  };
+  var el = {
+    add: "add",
+    and: "and",
+    ask: "ask",
+    at: "at",
+    black: "black",
+    blue: "blue",
+    brown: "brown",
+    call: "call",
+    clear: "clear",
+    color: "color",
+    comma: ",",
+    def: "def",
+    define: "define",
+    echo: "echo",
+    elif: "elif",
+    else: "else",
+    for: "for",
+    forward: "forward",
+    from: "from",
+    gray: "gray",
+    green: "green",
+    if: "if",
+    in: "in",
+    input: "input",
+    is: "is",
+    left: "left",
+    length: "length",
+    not_in: "not in",
+    or: "or",
+    orange: "orange",
+    pink: "pink",
+    play: "play",
+    pressed: "pressed",
+    print: "print",
+    purple: "purple",
+    random: "random",
+    range: "range",
+    red: "red",
+    remove: "remove",
+    repeat: "repeat",
+    return: "return",
+    right: "right",
+    sleep: "sleep",
+    step: "step",
+    times: "times",
+    to: "to",
+    to_list: "to",
+    turn: "turn",
+    while: "while",
+    white: "white",
+    with: "with",
+    yellow: "yellow",
+    DIGIT: "0123456789"
+  };
+  var en = {
+    add: "add",
+    and: "and",
+    ask: "ask",
+    at: "at",
+    black: "black",
+    blue: "blue",
+    brown: "brown",
+    call: "call",
+    clear: "clear",
+    color: "color",
+    comma: ",",
+    def: "def",
+    define: "define",
+    echo: "echo",
+    elif: "elif",
+    else: "else",
+    for: "for",
+    forward: "forward",
+    from: "from",
+    gray: "gray",
+    green: "green",
+    if: "if",
+    in: "in",
+    input: "input",
+    is: "is",
+    left: "left",
+    length: "length",
+    not_in: "not in",
+    or: "or",
+    orange: "orange",
+    pink: "pink",
+    play: "play",
+    pressed: "pressed",
+    print: "print",
+    purple: "purple",
+    random: "random",
+    range: "range",
+    red: "red",
+    remove: "remove",
+    repeat: "repeat",
+    return: "return",
+    right: "right",
+    sleep: "sleep",
+    step: "step",
+    times: "times",
+    to: "to",
+    to_list: "to",
+    turn: "turn",
+    while: "while",
+    white: "white",
+    with: "with",
+    yellow: "yellow",
+    DIGIT: "0123456789"
+  };
+  var eo = {
+    add: "aldonu|add",
+    and: "kaj|and",
+    ask: "demandu|ask",
+    at: "la\u016D|lau|laux|at",
+    black: "nigra|black",
+    blue: "blua|blue",
+    brown: "bruna|brown",
+    call: "call",
+    clear: "clear",
+    color: "koloro|color",
+    comma: ",",
+    def: "def",
+    define: "define",
+    echo: "e\u0125u|ehhu|ehxu|e^hu|eh^u|echo",
+    elif: "alie se|elif",
+    else: "alie|else",
+    for: "por|for",
+    forward: "anta\u016Den|antauen|antauxen|forward",
+    from: "el|from",
+    gray: "griza|gray",
+    green: "verda|green",
+    if: "se|if",
+    in: "en|in",
+    input: "enigu|input",
+    is: "estas|is",
+    left: "maldekstren|left",
+    length: "longo|length",
+    not_in: "not in",
+    or: "a\u016D|au|aux|or",
+    orange: "oran\u011Da|orangha|orangxa|oran^ga|orang^a|orange",
+    pink: "rozkolora|pink",
+    play: "play",
+    pressed: "pressed",
+    print: "presu|print",
+    purple: "purpura|purple",
+    random: "hazardo|random",
+    range: "intervalo|range",
+    red: "ru\u011Da|rugha|rugxa|ru^ga|rug^a|red",
+    remove: "forigu|remove",
+    repeat: "ripetu|repeat",
+    return: "return",
+    right: "dekstren|right",
+    sleep: "dormu|sleep",
+    step: "pa\u015Do|pasho|pasxo|pa^so|pas^o|step",
+    times: "fojojn|times",
+    to: "\u011Dis|ghis|gxis|^gis|g^is|to",
+    to_list: "al|to",
+    turn: "turnu|turn",
+    while: "dum|while",
+    white: "blanka|white",
+    with: "with",
+    yellow: "flava|yellow",
+    DIGIT: "0123456789"
+  };
+  var es = {
+    add: "a\xF1adir|add",
+    and: "y|and",
+    ask: "preguntar|ask",
+    at: "en|at",
+    black: "negro|black",
+    blue: "azul|blue",
+    brown: "marr\xF3n|brown",
+    call: "llamar|call",
+    clear: "limpiar|clear",
+    color: "color",
+    comma: ",",
+    def: "def",
+    define: "definir|define",
+    echo: "eco|echo",
+    elif: "sinosi|elif",
+    else: "sino|else",
+    for: "para|for",
+    forward: "adelante|forward",
+    from: "de|from",
+    gray: "gris|gray",
+    green: "verde|green",
+    if: "si|if",
+    in: "en|in",
+    input: "entrada|input",
+    is: "es|is",
+    left: "izquierda|left",
+    length: "longitud|length",
+    not_in: "no en|not in",
+    or: "o|or",
+    orange: "naranja|orange",
+    pink: "rosa|pink",
+    play: "play",
+    pressed: "presionada|pressed",
+    print: "imprimir|print",
+    purple: "p\xFArpura|purple",
+    random: "aleatorio|random",
+    range: "rango|range",
+    red: "rojo|red",
+    remove: "borrar|remove",
+    repeat: "repetir|repeat",
+    return: "retornar|return",
+    right: "derecha|right",
+    sleep: "dormir|sleep",
+    step: "paso|step",
+    times: "veces|times",
+    to: "a|to",
+    to_list: "a|to",
+    turn: "girar|turn",
+    while: "mientras|while",
+    white: "blanco|white",
+    with: "con|with",
+    yellow: "amarillo|yellow",
+    DIGIT: "0123456789"
+  };
+  var et = {
+    add: "lisa|add",
+    and: "ja|and",
+    ask: "k\xFCsi|ask",
+    at: "t\xE4itsa|at",
+    black: "must|black",
+    blue: "sinine|blue",
+    brown: "pruun|brown",
+    call: "call",
+    clear: "clear",
+    color: "v\xE4rv|color",
+    comma: ",",
+    def: "def",
+    define: "define",
+    echo: "peegelda|echo",
+    elif: "muidukui|elif",
+    else: "muidu|else",
+    for: "jaoks|for",
+    forward: "edasi|forward",
+    from: "nimistust|from",
+    gray: "hall|gray",
+    green: "roheline|green",
+    if: "kui|if",
+    in: "nimistus|in",
+    input: "sisesta|input",
+    is: "on|is",
+    left: "vasakule|left",
+    length: "pikkus|length",
+    not_in: "not in",
+    or: "v\xF5i|or",
+    orange: "oran\u017E|orange",
+    pink: "roosa|pink",
+    play: "play",
+    pressed: "pressed",
+    print: "prindi|print",
+    purple: "lilla|purple",
+    random: "juhuslikult|random",
+    range: "vahemik|range",
+    red: "punane|red",
+    remove: "kustuta|remove",
+    repeat: "korda|repeat",
+    return: "return",
+    right: "paremale|right",
+    sleep: "oota|sleep",
+    step: "sammuga|step",
+    times: "korda|times",
+    to: "kuni|to",
+    to_list: "nimistusse|to",
+    turn: "p\xF6\xF6ra|turn",
+    while: "senikui|while",
+    white: "valge|white",
+    with: "with",
+    yellow: "kollane|yellow",
+    DIGIT: "0123456789"
+  };
+  var fa = {
+    add: "add",
+    and: "and",
+    ask: "\u0628\u067E\u0631\u0633|ask",
+    at: "at",
+    black: "\u0633\u06CC\u0627\u0647|black",
+    blue: "\u0622\u0628\u06CC|blue",
+    brown: "\u0642\u0647\u0648\u0647 \u0627\u06CC|brown",
+    call: "call",
+    clear: "clear",
+    color: "\u0631\u0646\u06AF|color",
+    comma: ",",
+    def: "def",
+    define: "define",
+    echo: "echo",
+    elif: "elif",
+    else: "else",
+    for: "for",
+    forward: "\u0628\u0647 \u062C\u0644\u0648|forward",
+    from: "from",
+    gray: "\u062E\u0627\u06A9\u0633\u062A\u0631\u06CC|gray",
+    green: "\u0633\u0628\u0632|green",
+    if: "if",
+    in: "in",
+    input: "input",
+    is: "is",
+    left: "\u0686\u067E|left",
+    length: "length",
+    not_in: "not in",
+    or: "or",
+    orange: "\u0646\u0627\u0631\u0646\u062C\u06CC|orange",
+    pink: "\u0635\u0648\u0631\u062A\u06CC|pink",
+    play: "play",
+    pressed: "pressed",
+    print: "\u0686\u0627\u067E|print",
+    purple: "\u0628\u0646\u0641\u0634|purple",
+    random: "random",
+    range: "range",
+    red: "\u0642\u0631\u0645\u0632|red",
+    remove: "remove",
+    repeat: "repeat",
+    return: "return",
+    right: "\u0631\u0627\u0633\u062A|right",
+    sleep: "sleep",
+    step: "step",
+    times: "times",
+    to: "to",
+    to_list: "to",
+    turn: "\u062F\u0648\u0631 \u0628\u0632\u0646|turn",
+    while: "while",
+    white: "\u0633\u0641\u06CC\u062F|white",
+    with: "with",
+    yellow: "\u0632\u0631\u062F|yellow",
+    DIGIT: "0123456789"
+  };
+  var fi = {
+    add: "lis\xE4\xE4|add",
+    and: "ja|and",
+    ask: "kysy|ask",
+    at: "ota|at",
+    black: "musta|black",
+    blue: "sininen|blue",
+    brown: "ruskea|brown",
+    call: "call",
+    clear: "nollaa|clear",
+    color: "v\xE4ri|color",
+    comma: ",",
+    def: "def",
+    define: "define",
+    echo: "kaiku|echo",
+    elif: "muutenjos|elif",
+    else: "muuten|else",
+    for: "jokaiselle|for",
+    forward: "eteenp\xE4in|forward",
+    from: "listasta|from",
+    gray: "harmaa|gray",
+    green: "vihre\xE4|green",
+    if: "jos|if",
+    in: "listassa|in",
+    input: "sy\xF6te|input",
+    is: "on|is",
+    left: "vasen|left",
+    length: "pituus|length",
+    not_in: "ei kohteessa|not in",
+    or: "tai|or",
+    orange: "oranssi|orange",
+    pink: "vaaleanpunainen|pink",
+    play: "play",
+    pressed: "painettu|pressed",
+    print: "tulosta|print",
+    purple: "violetti|purple",
+    random: "satunnainen|random",
+    range: "v\xE4li|range",
+    red: "punainen|red",
+    remove: "poista|remove",
+    repeat: "toista|repeat",
+    return: "return",
+    right: "oikea|right",
+    sleep: "nuku|sleep",
+    step: "askel|step",
+    times: "kertaa|times",
+    to: "asti|to",
+    to_list: "listaksi|to",
+    turn: "k\xE4\xE4nny|turn",
+    while: "kun|while",
+    white: "valkoinen|white",
+    with: "with",
+    yellow: "keltainen|yellow",
+    DIGIT: "0123456789"
+  };
+  var fr = {
+    add: "ajoute|add",
+    and: "et|and",
+    ask: "demande|ask",
+    at: "au|at",
+    black: "noir|black",
+    blue: "bleu|blue",
+    brown: "marron|brown",
+    call: "appelle|call",
+    clear: "effacer|clear",
+    color: "couleur|color",
+    comma: ",",
+    def: "def",
+    define: "d\xE9finis|define",
+    echo: "r\xE9ponds|echo",
+    elif: "sinon si|elif",
+    else: "sinon|else",
+    for: "pour|for",
+    forward: "avance|forward",
+    from: "de|from",
+    gray: "gris|gray",
+    green: "vert|green",
+    if: "si|if",
+    in: "dans|in",
+    input: "demande|input",
+    is: "est|is",
+    left: "gauche|left",
+    length: "longueur|length",
+    not_in: "pas dans|not in",
+    or: "ou|or",
+    orange: "orange",
+    pink: "rose|pink",
+    play: "play",
+    pressed: "press\xE9|pressed",
+    print: "affiche|print",
+    purple: "violet|purple",
+    random: "hasard|random",
+    range: "intervalle|range",
+    red: "rouge|red",
+    remove: "supprime|remove",
+    repeat: "r\xE9p\xE8te|repete|repeat",
+    return: "return",
+    right: "droite|right",
+    sleep: "dors|sleep",
+    step: "pas|step",
+    times: "fois|times",
+    to: "\xE0|to",
+    to_list: "\xE0|to",
+    turn: "tourne|turn",
+    while: "tant que|while",
+    white: "blanc|white",
+    with: "with",
+    yellow: "jaune|yellow",
+    DIGIT: "0123456789"
+  };
+  var fy = {
+    add: "add",
+    and: "and",
+    ask: "ask",
+    at: "at",
+    black: "black",
+    blue: "blue",
+    brown: "brown",
+    call: "call",
+    clear: "clear",
+    color: "color",
+    comma: ",",
+    def: "def",
+    define: "define",
+    echo: "echo",
+    elif: "elif",
+    else: "else",
+    for: "for",
+    forward: "forward",
+    from: "from",
+    gray: "gray",
+    green: "green",
+    if: "if",
+    in: "in",
+    input: "input",
+    is: "is",
+    left: "left",
+    length: "length",
+    not_in: "not in",
+    or: "or",
+    orange: "orange",
+    pink: "pink",
+    play: "play",
+    pressed: "pressed",
+    print: "print",
+    purple: "purple",
+    random: "random",
+    range: "range",
+    red: "red",
+    remove: "remove",
+    repeat: "repeat",
+    return: "return",
+    right: "right",
+    sleep: "sleep",
+    step: "step",
+    times: "times",
+    to: "to",
+    to_list: "to",
+    turn: "turn",
+    while: "while",
+    white: "white",
+    with: "with",
+    yellow: "yellow",
+    DIGIT: "0123456789"
+  };
+  var he = {
+    add: "\u05D4\u05D5\u05E1\u05E3|add",
+    and: "\u05D5\u05D2\u05DD|and",
+    ask: "\u05E9\u05D0\u05DC|ask",
+    at: "\u05D1|at",
+    black: "\u05E9\u05D7\u05D5\u05E8|black",
+    blue: "\u05DB\u05D7\u05D5\u05DC|blue",
+    brown: "\u05D7\u05D5\u05DD|brown",
+    call: "call",
+    clear: "clear",
+    color: "\u05E6\u05D1\u05E2|color",
+    comma: ",",
+    def: "def",
+    define: "define",
+    echo: "\u05D4\u05D3\u05D4\u05D3|echo",
+    elif: "\u05D0\u05D7\u05E8\u05EA\u05D0\u05DD|elif",
+    else: "\u05D0\u05D7\u05E8\u05EA|else",
+    for: "\u05DC\u05DB\u05DC|for",
+    forward: "\u05E7\u05D3\u05D9\u05DE\u05D4|forward",
+    from: "\u05DE|from",
+    gray: "\u05D0\u05E4\u05D5\u05E8|gray",
+    green: "\u05D9\u05E8\u05D5\u05E7|green",
+    if: "\u05D0\u05DD|if",
+    in: "\u05D1\u05EA\u05D5\u05DA|in",
+    input: "\u05E7\u05DC\u05D8|input",
+    is: "\u05D4\u05D5\u05D0|is",
+    left: "\u05E9\u05DE\u05D0\u05DC\u05D4|left",
+    length: "\u05D0\u05D5\u05E8\u05DA|length",
+    not_in: "not in",
+    or: "\u05D0\u05D5|or",
+    orange: "\u05DB\u05EA\u05D5\u05DD|orange",
+    pink: "\u05D5\u05E8\u05D5\u05D3|pink",
+    play: "play",
+    pressed: "pressed",
+    print: "\u05D4\u05D3\u05E4\u05E1|print",
+    purple: "\u05E1\u05D2\u05D5\u05DC|purple",
+    random: "\u05D0\u05E7\u05E8\u05D0\u05D9|random",
+    range: "\u05D8\u05D5\u05D5\u05D7|range",
+    red: "\u05D0\u05D3\u05D5\u05DD|red",
+    remove: "\u05D4\u05E1\u05E8|remove",
+    repeat: "\u05D7\u05D6\u05D5\u05E8|repeat",
+    return: "return",
+    right: "\u05D9\u05DE\u05D9\u05E0\u05D4|right",
+    sleep: "\u05D4\u05DE\u05EA\u05DF|sleep",
+    step: "\u05E6\u05E2\u05D3|step",
+    times: "\u05E4\u05E2\u05DE\u05D9\u05DD|times",
+    to: "\u05E2\u05D3|to",
+    to_list: "\u05D0\u05DC|to",
+    turn: "\u05E4\u05E0\u05D4|turn",
+    while: "\u05DB\u05DC\u05E2\u05D5\u05D3|while",
+    white: "\u05DC\u05D1\u05DF|white",
+    with: "with",
+    yellow: "\u05E6\u05D4\u05D5\u05D1|yellow",
+    DIGIT: "0123456789"
+  };
+  var hi = {
+    add: "\u091C\u094B\u0921\u093C\u0928\u093E|add",
+    and: "\u0914\u0930|and",
+    ask: "\u092A\u0942\u091B\u0947\u0902|ask",
+    at: "\u092A\u0930|at",
+    black: "black",
+    blue: "blue",
+    brown: "brown",
+    call: "call",
+    clear: "clear",
+    color: "color",
+    comma: ",",
+    def: "def",
+    define: "define",
+    echo: "\u0917\u0942\u0902\u091C|echo",
+    elif: "\u090F\u0932\u093F\u092B|elif",
+    else: "\u0905\u0928\u094D\u092F\u0925\u093E|else",
+    for: "\u0915\u0947 \u0932\u093F\u092F\u0947|for",
+    forward: "\u0906\u0917\u0947|forward",
+    from: "\u0938\u0947|from",
+    gray: "gray",
+    green: "green",
+    if: "\u0905\u0917\u0930|if",
+    in: "\u092E\u0947\u0902|in",
+    input: "\u0907\u0928\u092A\u0941\u091F|input",
+    is: "\u0939\u0948|is",
+    left: "left",
+    length: "\u0932\u0902\u092C\u093E\u0908|length",
+    not_in: "not in",
+    or: "\u092F\u093E|or",
+    orange: "orange",
+    pink: "pink",
+    play: "play",
+    pressed: "pressed",
+    print: "\u092A\u094D\u0930\u093F\u0902\u091F|print",
+    purple: "purple",
+    random: "\u0905\u0928\u093F\u092F\u092E\u093F\u0924|random",
+    range: "\u0936\u094D\u0930\u0947\u0923\u0940|range",
+    red: "red",
+    remove: "\u0939\u091F\u093E\u0928\u093E|remove",
+    repeat: "\u0926\u094B\u0939\u0930\u093E\u0928\u093E|repeat",
+    return: "return",
+    right: "right",
+    sleep: "\u0928\u0940\u0902\u0926|sleep",
+    step: "\u0915\u093C\u0926\u092E|step",
+    times: "\u092C\u093E\u0930|times",
+    to: "\u0938\u0947|to",
+    to_list: "\u0938\u0947|to",
+    turn: "\u092E\u094B\u0921\u093C|turn",
+    while: "\u0935\u094D\u0939\u093E\u0907\u0932|while",
+    white: "white",
+    with: "with",
+    yellow: "yellow",
+    DIGIT: "0123456789"
+  };
+  var hu = {
+    add: "besz\xFAr|add",
+    and: "\xE9s|and",
+    ask: "k\xE9rdez|ask",
+    at: "list\xE1b\xF3l|at",
+    black: "fekete|black",
+    blue: "k\xE9k|blue",
+    brown: "barna|brown",
+    call: "call",
+    clear: "t\xF6rl\xE9s|clear",
+    color: "sz\xEDn|color",
+    comma: ",",
+    def: "def",
+    define: "define",
+    echo: "ut\xE1noz|echo",
+    elif: "egybk-ha|elif",
+    else: "egy\xE9bk\xE9nt|else",
+    for: "minden|for",
+    forward: "el\u0151re|forward",
+    from: "ebb\u0151l|from",
+    gray: "sz\xFCrke|gray",
+    green: "z\xF6ld|green",
+    if: "ha|if",
+    in: "eleme|in",
+    input: "bek\xE9r|input",
+    is: "egyenl\u0151|is",
+    left: "balra|left",
+    length: "hossz|length",
+    not_in: "nem eleme|not in",
+    or: "vagy|or",
+    orange: "narancs|orange",
+    pink: "pink",
+    play: "play",
+    pressed: "lenyomva|pressed",
+    print: "ki\xEDr|print",
+    purple: "lila|purple",
+    random: "random",
+    range: "szakasz|range",
+    red: "piros|red",
+    remove: "kivesz|remove",
+    repeat: "ism\xE9teld|repeat",
+    return: "return",
+    right: "jobbra|right",
+    sleep: "szundi|sleep",
+    step: "l\xE9p\xE9senk\xE9nt|step",
+    times: "alkalommal|times",
+    to: "t\u0151l|to",
+    to_list: "ebbe|to",
+    turn: "fordul|turn",
+    while: "am\xEDg|while",
+    white: "feh\xE9r|white",
+    with: "with",
+    yellow: "s\xE1rga|yellow",
+    DIGIT: "0123456789"
+  };
+  var ia = {
+    add: "add",
+    and: "and",
+    ask: "ask",
+    at: "at",
+    black: "black",
+    blue: "blue",
+    brown: "brown",
+    call: "call",
+    clear: "clear",
+    color: "color",
+    comma: ",",
+    def: "def",
+    define: "define",
+    echo: "echo",
+    elif: "elif",
+    else: "else",
+    for: "for",
+    forward: "forward",
+    from: "from",
+    gray: "gray",
+    green: "green",
+    if: "if",
+    in: "in",
+    input: "input",
+    is: "is",
+    left: "left",
+    length: "length",
+    not_in: "not in",
+    or: "or",
+    orange: "orange",
+    pink: "pink",
+    play: "play",
+    pressed: "pressed",
+    print: "print",
+    purple: "purple",
+    random: "random",
+    range: "range",
+    red: "red",
+    remove: "remove",
+    repeat: "repeat",
+    return: "return",
+    right: "right",
+    sleep: "sleep",
+    step: "step",
+    times: "times",
+    to: "to",
+    to_list: "to",
+    turn: "turn",
+    while: "while",
+    white: "white",
+    with: "with",
+    yellow: "yellow",
+    DIGIT: "0123456789"
+  };
+  var id = {
+    add: "tambah|add",
+    and: "dan|and",
+    ask: "tanya|ask",
+    at: "secara|at",
+    black: "black",
+    blue: "blue",
+    brown: "brown",
+    call: "call",
+    clear: "clear",
+    color: "warna|color",
+    comma: ",",
+    def: "def",
+    define: "define",
+    echo: "gaungkan|echo",
+    elif: "lain_jika|elif",
+    else: "lainnya|else",
+    for: "untuk|for",
+    forward: "maju|forward",
+    from: "dari|from",
+    gray: "gray",
+    green: "green",
+    if: "jika|if",
+    in: "dalam|in",
+    input: "masukan|input",
+    is: "adalah|is",
+    left: "kiri|left",
+    length: "panjang|length",
+    not_in: "not in",
+    or: "atau|or",
+    orange: "orange",
+    pink: "pink",
+    play: "play",
+    pressed: "pressed",
+    print: "cetak|print",
+    purple: "purple",
+    random: "acak|random",
+    range: "batasan|range",
+    red: "red",
+    remove: "hapus|remove",
+    repeat: "ulangi|repeat",
+    return: "return",
+    right: "kanan|right",
+    sleep: "tidur|sleep",
+    step: "langkah|step",
+    times: "kali|times",
+    to: "ke|to",
+    to_list: "ke|to",
+    turn: "belok|turn",
+    while: "selama|while",
+    white: "white",
+    with: "with",
+    yellow: "yellow",
+    DIGIT: "0123456789"
+  };
+  var it = {
+    add: "add",
+    and: "e|and",
+    ask: "chiedi|ask",
+    at: "at",
+    black: "nero|black",
+    blue: "blu|blue",
+    brown: "marrone|brown",
+    call: "call",
+    clear: "Elimina|clear",
+    color: "colore|color",
+    comma: ",",
+    def: "def",
+    define: "define",
+    echo: "eco|echo",
+    elif: "altrimenti se|elif",
+    else: "altrimenti|else",
+    for: "for",
+    forward: "avanti|forward",
+    from: "da|from",
+    gray: "grigio|gray",
+    green: "verde|green",
+    if: "if",
+    in: "in",
+    input: "input",
+    is: "is",
+    left: "sinistra|left",
+    length: "lunghezza|length",
+    not_in: "non quello|not in",
+    or: "or",
+    orange: "arancione|orange",
+    pink: "rosa|pink",
+    play: "play",
+    pressed: "Premuto|pressed",
+    print: "stampa|print",
+    purple: "viola|purple",
+    random: "a caso|random",
+    range: "intervallo|range",
+    red: "rosso|red",
+    remove: "rimuovi|remove",
+    repeat: "ripeti|repeat",
+    return: "return",
+    right: "right",
+    sleep: "dormi|sleep",
+    step: "passo|step",
+    times: "volte|times",
+    to: "to",
+    to_list: "to",
+    turn: "gira|turn",
+    while: "mentre|while",
+    white: "bianco|white",
+    with: "with",
+    yellow: "giallo|yellow",
+    DIGIT: "0123456789"
+  };
+  var ja = {
+    add: "\u305F\u3059|add",
+    and: "and",
+    ask: "\u304D\u3051|ask",
+    at: "at",
+    black: "\u304F\u308D|black",
+    blue: "\u3042\u304A|blue",
+    brown: "\u3061\u3083\u3044\u308D|brown",
+    call: "call",
+    clear: "clear",
+    color: "\u3044\u308D|color",
+    comma: ",",
+    def: "def",
+    define: "define",
+    echo: "\u307E\u306D|echo",
+    elif: "elif",
+    else: "else",
+    for: "for",
+    forward: "\u3059\u3059\u3081|forward",
+    from: "from",
+    gray: "\u306F\u3044\u3044\u308D|gray",
+    green: "\u307F\u3069\u308A|green",
+    if: "if",
+    in: "in",
+    input: "input",
+    is: "is",
+    left: "\u3072\u3060\u308A|left",
+    length: "length",
+    not_in: "not in",
+    or: "or",
+    orange: "\u304A\u308C\u3093\u3058|orange",
+    pink: "\u3074\u3093\u304F|pink",
+    play: "play",
+    pressed: "pressed",
+    print: "\u304B\u3051|print",
+    purple: "\u3080\u3089\u3055\u304D|purple",
+    random: "random",
+    range: "range",
+    red: "\u3042\u304B|red",
+    remove: "remove",
+    repeat: "repeat",
+    return: "return",
+    right: "\u307F\u304E|right",
+    sleep: "\u3084\u3059\u3081|sleep",
+    step: "step",
+    times: "\u304B\u3044|times",
+    to: "to",
+    to_list: "to",
+    turn: "\u307E\u308F\u308C|turn",
+    while: "while",
+    white: "\u3057\u308D|white",
+    with: "with",
+    yellow: "\u304D\u3044\u308D|yellow",
+    DIGIT: "0123456789"
+  };
+  var kmr = {
+    add: "add",
+    and: "and",
+    ask: "ask",
+    at: "at",
+    black: "black",
+    blue: "blue",
+    brown: "brown",
+    call: "call",
+    clear: "clear",
+    color: "color",
+    comma: ",",
+    def: "def",
+    define: "define",
+    echo: "echo",
+    elif: "elif",
+    else: "else",
+    for: "for",
+    forward: "forward",
+    from: "from",
+    gray: "gray",
+    green: "green",
+    if: "if",
+    in: "in",
+    input: "input",
+    is: "is",
+    left: "left",
+    length: "length",
+    not_in: "not in",
+    or: "or",
+    orange: "orange",
+    pink: "pink",
+    play: "play",
+    pressed: "pressed",
+    print: "print",
+    purple: "purple",
+    random: "random",
+    range: "range",
+    red: "red",
+    remove: "remove",
+    repeat: "repeat",
+    return: "return",
+    right: "right",
+    sleep: "sleep",
+    step: "step",
+    times: "times",
+    to: "to",
+    to_list: "to",
+    turn: "turn",
+    while: "while",
+    white: "white",
+    with: "with",
+    yellow: "yellow",
+    DIGIT: "0123456789"
+  };
+  var ko = {
+    add: "add",
+    and: "and",
+    ask: "ask",
+    at: "at",
+    black: "black",
+    blue: "blue",
+    brown: "brown",
+    call: "call",
+    clear: "clear",
+    color: "color",
+    comma: ",",
+    def: "def",
+    define: "define",
+    echo: "echo",
+    elif: "elif",
+    else: "else",
+    for: "for",
+    forward: "forward",
+    from: "from",
+    gray: "gray",
+    green: "green",
+    if: "if",
+    in: "in",
+    input: "input",
+    is: "is",
+    left: "left",
+    length: "length",
+    not_in: "not in",
+    or: "or",
+    orange: "orange",
+    pink: "pink",
+    play: "play",
+    pressed: "pressed",
+    print: "print",
+    purple: "purple",
+    random: "random",
+    range: "range",
+    red: "red",
+    remove: "remove",
+    repeat: "repeat",
+    return: "return",
+    right: "right",
+    sleep: "sleep",
+    step: "step",
+    times: "times",
+    to: "to",
+    to_list: "to",
+    turn: "turn",
+    while: "while",
+    white: "white",
+    with: "with",
+    yellow: "yellow",
+    DIGIT: "0123456789"
+  };
+  var mi = {
+    add: "add",
+    and: "and",
+    ask: "ask",
+    at: "at",
+    black: "black",
+    blue: "blue",
+    brown: "brown",
+    call: "call",
+    clear: "clear",
+    color: "color",
+    comma: ",",
+    def: "def",
+    define: "define",
+    echo: "echo",
+    elif: "elif",
+    else: "else",
+    for: "for",
+    forward: "forward",
+    from: "from",
+    gray: "gray",
+    green: "green",
+    if: "if",
+    in: "in",
+    input: "input",
+    is: "is",
+    left: "left",
+    length: "length",
+    not_in: "not in",
+    or: "or",
+    orange: "orange",
+    pink: "pink",
+    play: "play",
+    pressed: "pressed",
+    print: "print",
+    purple: "purple",
+    random: "random",
+    range: "range",
+    red: "red",
+    remove: "remove",
+    repeat: "repeat",
+    return: "return",
+    right: "right",
+    sleep: "sleep",
+    step: "step",
+    times: "times",
+    to: "to",
+    to_list: "to",
+    turn: "turn",
+    while: "while",
+    white: "white",
+    with: "with",
+    yellow: "yellow",
+    DIGIT: "0123456789"
+  };
+  var nb_NO = {
+    add: "legg|add",
+    and: "og|and",
+    ask: "sp\xF8r|ask",
+    at: "p\xE5|at",
+    black: "black",
+    blue: "blue",
+    brown: "brown",
+    call: "call",
+    clear: "clear",
+    color: "color",
+    comma: ",",
+    def: "def",
+    define: "define",
+    echo: "ekko|echo",
+    elif: "elhvis|elif",
+    else: "ellers|else",
+    for: "for",
+    forward: "frem|forward",
+    from: "fra|from",
+    gray: "gray",
+    green: "green",
+    if: "hvis|if",
+    in: "i|in",
+    input: "inndata|input",
+    is: "er|is",
+    left: "venstre|left",
+    length: "lengde|length",
+    not_in: "not in",
+    or: "eller|or",
+    orange: "orange",
+    pink: "pink",
+    play: "play",
+    pressed: "pressed",
+    print: "skriv|print",
+    purple: "purple",
+    random: "tilfeldig|random",
+    range: "sekvens|range",
+    red: "red",
+    remove: "fjern|remove",
+    repeat: "gjenta|repeat",
+    return: "return",
+    right: "h\xF8yre|right",
+    sleep: "sov|sleep",
+    step: "steg|step",
+    times: "ganger|times",
+    to: "til|to",
+    to_list: "til|to",
+    turn: "snu|turn",
+    while: "mens|while",
+    white: "white",
+    with: "with",
+    yellow: "yellow",
+    DIGIT: "0123456789"
+  };
+  var nl = {
+    add: "voeg|add",
+    and: "en|and",
+    ask: "vraag|ask",
+    at: "op|at",
+    black: "zwart|black",
+    blue: "blauw|blue",
+    brown: "bruin|brown",
+    call: "roep|call",
+    clear: "wis|clear",
+    color: "kleur|color",
+    comma: ",",
+    def: "def",
+    define: "definieer|define",
+    echo: "echo",
+    elif: "alsanders|elif",
+    else: "anders|else",
+    for: "voor|for",
+    forward: "vooruit|forward",
+    from: "uit|from",
+    gray: "grijs|gray",
+    green: "groen|green",
+    if: "als|if",
+    in: "in",
+    input: "invoer|input",
+    is: "is",
+    left: "links|left",
+    length: "lengte|length",
+    not_in: "niet in|not in",
+    or: "of|or",
+    orange: "oranje|orange",
+    pink: "roze|pink",
+    play: "speel|play",
+    pressed: "ingedrukt|pressed",
+    print: "print",
+    purple: "paars|purple",
+    random: "willekeurig|random",
+    range: "bereik|range",
+    red: "rood|red",
+    remove: "verwijder|remove",
+    repeat: "herhaal|repeat",
+    return: "return",
+    right: "rechts|right",
+    sleep: "slaap|sleep",
+    step: "stap|step",
+    times: "keer|times",
+    to: "tot|to",
+    to_list: "toe aan|to",
+    turn: "draai|turn",
+    while: "zolang|while",
+    white: "wit|white",
+    with: "met|with",
+    yellow: "geel|yellow",
+    DIGIT: "0123456789"
+  };
+  var pa_PK = {
+    add: "\u062F\u06BE\u0646|add",
+    and: "\u062A\u06D2|and",
+    ask: "\u0633\u0648\u0627\u0644|ask",
+    at: "\u0633\u062A\u06BE\u062A\u06CC|at",
+    black: "\u06A9\u0627\u0644\u0627|black",
+    blue: "\u0646\u06CC\u0644\u0627|blue",
+    brown: "\u0628\u06BE\u0648\u0631\u0627|brown",
+    call: "call",
+    clear: "clear",
+    color: "\u0631\u0646\u06AF|color",
+    comma: "\u060C|,",
+    def: "def",
+    define: "define",
+    echo: "\u0641\u06CC\u0631|echo",
+    elif: "\u06C1\u0648\u0631|elif",
+    else: "\u0648\u06A9\u06BE\u0631\u0627|else",
+    for: "\u062C\u062F\u0648\u06BA|for",
+    forward: "\u0627\u06AF\u06D2|forward",
+    from: "\u0633\u0631\u0648\u062A|from",
+    gray: "\u0633\u0644\u06CC\u0679\u06CC|gray",
+    green: "\u06C1\u0631\u0627|green",
+    if: "\u062C\u06D2|if",
+    in: "\u0627\u0646\u062F\u0631|in",
+    input: "\u0627\u06CC\u0646\u067E\u0679|input",
+    is: "\u0633\u0645\u0627\u0646|is",
+    left: "\u06A9\u06BE\u0628\u06D2|left",
+    length: "\u0644\u0645\u0628\u0627\u0626\u06CC|length",
+    not_in: "not in",
+    or: "\u06CC\u0627|or",
+    orange: "\u0633\u0646\u062A\u0631\u0627|orange",
+    pink: "\u06AF\u0644\u0627\u0628\u06CC|pink",
+    play: "play",
+    pressed: "pressed",
+    print: "\u0686\u067E\u0627\u0626\u06CC|print",
+    purple: "\u062C\u0627\u0645\u0646\u06CC|purple",
+    random: "\u0631\u0644\u0648\u0627\u0646|random",
+    range: "\u0633\u0644\u0633\u0644\u06C1|range",
+    red: "\u0644\u0627\u0644|red",
+    remove: "\u0645\u0679\u0627\u06A9\u06D2|remove",
+    repeat: "\u062F\u06C1\u0631\u0627|repeat",
+    return: "return",
+    right: "\u0633\u062C\u06D2|right",
+    sleep: "\u0646\u06CC\u0646\u062F|sleep",
+    step: "\u0633\u0637\u0631|step",
+    times: "\u0636\u0631\u0628|times",
+    to: "\u0645\u0646\u0632\u0644|to",
+    to_list: "\u0645\u0646\u0632\u0644|to",
+    turn: "\u0645\u0648\u0691\u0646|turn",
+    while: "\u062C\u062F\u06A9\u06C1|while",
+    white: "\u0686\u0679\u0627|white",
+    with: "with",
+    yellow: "\u067E\u06CC\u0644\u0627|yellow",
+    DIGIT: "0\u06F01\u06F12\u06F23\u06F34\u06F45\u06F56\u06F67\u06F78\u06F89\u06F9"
+  };
+  var pap = {
+    add: "add",
+    and: "and",
+    ask: "ask",
+    at: "at",
+    black: "black",
+    blue: "blue",
+    brown: "brown",
+    call: "call",
+    clear: "clear",
+    color: "color",
+    comma: ",",
+    def: "def",
+    define: "define",
+    echo: "echo",
+    elif: "elif",
+    else: "else",
+    for: "for",
+    forward: "forward",
+    from: "from",
+    gray: "gray",
+    green: "green",
+    if: "if",
+    in: "in",
+    input: "input",
+    is: "is",
+    left: "left",
+    length: "length",
+    not_in: "not in",
+    or: "or",
+    orange: "orange",
+    pink: "pink",
+    play: "play",
+    pressed: "pressed",
+    print: "print",
+    purple: "purple",
+    random: "random",
+    range: "range",
+    red: "red",
+    remove: "remove",
+    repeat: "repeat",
+    return: "return",
+    right: "right",
+    sleep: "sleep",
+    step: "step",
+    times: "times",
+    to: "to",
+    to_list: "to",
+    turn: "turn",
+    while: "while",
+    white: "white",
+    with: "with",
+    yellow: "yellow",
+    DIGIT: "0123456789"
+  };
+  var pl = {
+    add: "dodaj|add",
+    and: "i|and",
+    ask: "zapytaj|ask",
+    at: "pozycja|at",
+    black: "czarny|black",
+    blue: "niebieski|blue",
+    brown: "br\u0105zowy|brown",
+    call: "call",
+    clear: "wyczy\u015B\u0107|clear",
+    color: "kolor|color",
+    comma: ",",
+    def: "def",
+    define: "define",
+    echo: "do\u0142\u0105cz|echo",
+    elif: "albo|elif",
+    else: "inaczej|else",
+    for: "dla|for",
+    forward: "naprz\xF3d|forward",
+    from: "z|from",
+    gray: "szary|gray",
+    green: "zielony|green",
+    if: "je\u017Celi|if",
+    in: "w|in",
+    input: "wprowad\u017A|input",
+    is: "to|is",
+    left: "lewo|left",
+    length: "d\u0142ugo\u015B\u0107|length",
+    not_in: "nie w|not in",
+    or: "lub|or",
+    orange: "pomara\u0144czowy|orange",
+    pink: "r\xF3\u017Cowy|pink",
+    play: "play",
+    pressed: "naci\u015Bni\u0119ty|pressed",
+    print: "napisz|print",
+    purple: "fioletowy|purple",
+    random: "losowa|random",
+    range: "zakres|range",
+    red: "czerwony|red",
+    remove: "usu\u0144|remove",
+    repeat: "powt\xF3rz|repeat",
+    return: "return",
+    right: "prawo|right",
+    sleep: "\u015Bpij|sleep",
+    step: "krok|step",
+    times: "razy|times",
+    to: "do|to",
+    to_list: "do|to",
+    turn: "obr\xF3\u0107|turn",
+    while: "dop\xF3ki|while",
+    white: "bia\u0142y|white",
+    with: "with",
+    yellow: "\u017C\xF3\u0142ty|yellow",
+    DIGIT: "0123456789"
+  };
+  var pt_BR = {
+    add: "some|add",
+    and: "e|and",
+    ask: "pergunte|ask",
+    at: "em|at",
+    black: "preto|black",
+    blue: "azul|blue",
+    brown: "marrom|brown",
+    call: "chame|call",
+    clear: "limpe|clear",
+    color: "cor|color",
+    comma: ",",
+    def: "def",
+    define: "defina|define",
+    echo: "eco|echo",
+    elif: "sen\xE3o se|elif",
+    else: "sen\xE3o|else",
+    for: "para|for",
+    forward: "adiante|forward",
+    from: "de|from",
+    gray: "cinza|gray",
+    green: "verde|green",
+    if: "se|if",
+    in: "em|in",
+    input: "entrada|input",
+    is: "\xE9|is",
+    left: "esquerda|left",
+    length: "comprimento|length",
+    not_in: "n\xE3o em|not in",
+    or: "ou|or",
+    orange: "laranja|orange",
+    pink: "rosa|pink",
+    play: "toque|play",
+    pressed: "apertado|pressed",
+    print: "imprima|print",
+    purple: "roxo|purple",
+    random: "aleat\xF3rio|random",
+    range: "intervalo|range",
+    red: "vermelho|red",
+    remove: "remova|remove",
+    repeat: "repita|repeat",
+    return: "retorne|return",
+    right: "direita|right",
+    sleep: "durma|sleep",
+    step: "passo|step",
+    times: "vezes|times",
+    to: "para|to",
+    to_list: "a|to",
+    turn: "gire|turn",
+    while: "enquanto|while",
+    white: "branco|white",
+    with: "com|with",
+    yellow: "amarelo|yellow",
+    DIGIT: "0123456789"
+  };
+  var pt_PT = {
+    add: "adicionar|add",
+    and: "e|and",
+    ask: "perguntar|ask",
+    at: "em|at",
+    black: "preto|black",
+    blue: "azul|blue",
+    brown: "castanho|brown",
+    call: "call",
+    clear: "clear",
+    color: "cor|color",
+    comma: ",",
+    def: "def",
+    define: "define",
+    echo: "eco|echo",
+    elif: "elif",
+    else: "else",
+    for: "for",
+    forward: "avan\xE7ar|forward",
+    from: "de|from",
+    gray: "cinzento|gray",
+    green: "verde|green",
+    if: "if",
+    in: "in",
+    input: "input",
+    is: "is",
+    left: "esquerda|left",
+    length: "comprimento|length",
+    not_in: "not in",
+    or: "or",
+    orange: "cor de laranja|orange",
+    pink: "cor de rosa|pink",
+    play: "play",
+    pressed: "pressed",
+    print: "imprimir|print",
+    purple: "roxo|purple",
+    random: "random",
+    range: "intervalo|range",
+    red: "vermelho|red",
+    remove: "remover|remove",
+    repeat: "repetir|repeat",
+    return: "return",
+    right: "direita|right",
+    sleep: "dormir|sleep",
+    step: "passo|step",
+    times: "vezes|times",
+    to: "to",
+    to_list: "para|to",
+    turn: "virar|turn",
+    while: "enquanto|while",
+    white: "branco|white",
+    with: "with",
+    yellow: "amarelo|yellow",
+    DIGIT: "0123456789"
+  };
+  var ro = {
+    add: "adun\u0103|add",
+    and: "si|and",
+    ask: "\xEEntreab\u0103|ask",
+    at: "la|at",
+    black: "negru|black",
+    blue: "albastru|blue",
+    brown: "maro|brown",
+    call: "call",
+    clear: "\u0219terge|clear",
+    color: "culoare|color",
+    comma: ",",
+    def: "def",
+    define: "define",
+    echo: "echo",
+    elif: "altfel dac\u0103|elif",
+    else: "else",
+    for: "pentru|for",
+    forward: "\xEEnainte|forward",
+    from: "de la|from",
+    gray: "gri|gray",
+    green: "verde|green",
+    if: "if",
+    in: "in",
+    input: "intrare|input",
+    is: "is",
+    left: "st\xE2nga|left",
+    length: "lungime|length",
+    not_in: "nu \xEEn|not in",
+    or: "sau|or",
+    orange: "portocaliu|orange",
+    pink: "roz|pink",
+    play: "play",
+    pressed: "ap\u0103sat|pressed",
+    print: "print",
+    purple: "mov|purple",
+    random: "aleatoriu|random",
+    range: "interval|range",
+    red: "ro\u0219u|red",
+    remove: "elimin\u0103|remove",
+    repeat: "repet\u0103|repeat",
+    return: "return",
+    right: "dreapta|right",
+    sleep: "sleep",
+    step: "pas|step",
+    times: "inmul\u021Bit|times",
+    to: "c\u0103tre|to",
+    to_list: "c\u0103tre|to",
+    turn: "intoarce|turn",
+    while: "\xEEn timp ce|while",
+    white: "alb|white",
+    with: "with",
+    yellow: "galben|yellow",
+    DIGIT: "0123456789"
+  };
+  var ru = {
+    add: "\u0434\u043E\u0431\u0430\u0432\u0438\u0442\u044C|add",
+    and: "\u0438|and",
+    ask: "\u0437\u0430\u043F\u0440\u043E\u0441\u0438\u0442\u044C|ask",
+    at: "\u0432|at",
+    black: "\u0447\u0451\u0440\u043D\u044B\u0439|black",
+    blue: "\u0441\u0438\u043D\u0438\u0439|blue",
+    brown: "\u043A\u043E\u0440\u0438\u0447\u043D\u0435\u0432\u044B\u0439|brown",
+    call: "call",
+    clear: "\u043E\u0447\u0438\u0441\u0442\u0438\u0442\u044C|clear",
+    color: "\u0446\u0432\u0435\u0442|color",
+    comma: ",",
+    def: "def",
+    define: "define",
+    echo: "\u043F\u043E\u0432\u0442\u043E\u0440\u0438\u0442\u044C|echo",
+    elif: "\u0438\u043D\u0430\u0447\u0435, \u0435\u0441\u043B\u0438|elif",
+    else: "\u0438\u043D\u0430\u0447\u0435|else",
+    for: "\u0434\u043B\u044F|for",
+    forward: "\u0432\u043F\u0435\u0440\u0451\u0434|forward",
+    from: "\u0438\u0437|from",
+    gray: "\u0441\u0435\u0440\u044B\u0439|gray",
+    green: "\u0437\u0435\u043B\u0451\u043D\u044B\u0439|green",
+    if: "\u0435\u0441\u043B\u0438|if",
+    in: "\u0432|in",
+    input: "\u0432\u0432\u043E\u0434|input",
+    is: "\u044D\u0442\u043E|is",
+    left: "\u043D\u0430\u043B\u0435\u0432\u043E|left",
+    length: "\u0434\u043B\u0438\u043D\u0430|length",
+    not_in: "\u043D\u0435 \u0432|not in",
+    or: "\u0438\u043B\u0438|or",
+    orange: "\u043E\u0440\u0430\u043D\u0436\u0435\u0432\u044B\u0439|orange",
+    pink: "\u0440\u043E\u0437\u043E\u0432\u044B\u0439|pink",
+    play: "play",
+    pressed: "\u043D\u0430\u0436\u043C\u0438\u0442\u0435|pressed",
+    print: "\u043F\u0435\u0447\u0430\u0442\u0430\u0442\u044C|print",
+    purple: "\u043F\u0443\u0440\u043F\u0443\u0440\u043D\u044B\u0439|purple",
+    random: "\u0441\u043B\u0443\u0447\u0430\u0439\u043D\u043E\u043C|random",
+    range: "\u043F\u0440\u043E\u043C\u0435\u0436\u0443\u0442\u043E\u043A|range",
+    red: "\u043A\u0440\u0430\u0441\u043D\u044B\u0439|red",
+    remove: "\u0443\u0434\u0430\u043B\u0438\u0442\u044C|remove",
+    repeat: "\u043F\u043E\u0432\u0442\u043E\u0440\u0438\u0442\u044C|repeat",
+    return: "return",
+    right: "\u043D\u0430\u043F\u0440\u0430\u0432\u043E|right",
+    sleep: "\u0437\u0430\u0441\u043D\u0443\u0442\u044C|sleep",
+    step: "\u0448\u0430\u0433|step",
+    times: "\u0440\u0430\u0437|times",
+    to: "\u0434\u043E|to",
+    to_list: "\u0432|to",
+    turn: "\u043F\u043E\u0432\u0435\u0440\u043D\u0443\u0442\u044C|turn",
+    while: "\u043F\u043E\u043A\u0430|while",
+    white: "\u0431\u0435\u043B\u044B\u0439|white",
+    with: "with",
+    yellow: "\u0436\u0451\u043B\u0442\u044B\u0439|yellow",
+    DIGIT: "0123456789"
+  };
+  var sq = {
+    add: "shtoni|add",
+    and: "dhe|and",
+    ask: "pyet|ask",
+    at: "n\xEB|at",
+    black: "zez\xEB|black",
+    blue: "blu|blue",
+    brown: "kafe|brown",
+    call: "thirr|call",
+    clear: "pastro|clear",
+    color: "ngjyr\xEB|color",
+    comma: ",",
+    def: "def",
+    define: "defino|define",
+    echo: "p\xEBrs\xEBrit|echo",
+    elif: "nendryshe|elif",
+    else: "ndryshe|else",
+    for: "p\xEBr|for",
+    forward: "p\xEBrpara|forward",
+    from: "nga|from",
+    gray: "gri|gray",
+    green: "jeshile|green",
+    if: "n\xEBse|if",
+    in: "n\xEB|in",
+    input: "hyrje|input",
+    is: "\xEBsht\xEB|is",
+    left: "majtas|left",
+    length: "gjat\xEBsia|length",
+    not_in: "jo n\xEB|not in",
+    or: "ose|or",
+    orange: "portokalli|orange",
+    pink: "roz\xEB|pink",
+    play: "play",
+    pressed: "shtypur|pressed",
+    print: "printo|print",
+    purple: "vjollc\xEB|purple",
+    random: "rast\xEBsi|random",
+    range: "varg|range",
+    red: "kuqe|red",
+    remove: "hiqni|remove",
+    repeat: "p\xEBrs\xEBrit|repeat",
+    return: "rikthe|return",
+    right: "drejt\xEB|right",
+    sleep: "fle|sleep",
+    step: "hap|step",
+    times: "her|times",
+    to: "deri|to",
+    to_list: "deri|to",
+    turn: "kthes\xEB|turn",
+    while: "derisa|while",
+    white: "bardh\xEB|white",
+    with: "me|with",
+    yellow: "verdh\xEB|yellow",
+    DIGIT: "0123456789"
+  };
+  var sr = {
+    add: "dodaj|add",
+    and: "i|and",
+    ask: "pitaj|ask",
+    at: "na|at",
+    black: "crna|black",
+    blue: "plava|blue",
+    brown: "braon|brown",
+    call: "call",
+    clear: "o\u010Disti|clear",
+    color: "boja|color",
+    comma: ",",
+    def: "def",
+    define: "defini\u0161i|define",
+    echo: "poka\u017Ei|echo",
+    elif: "ina\u010De ako|elif",
+    else: "ina\u010De|else",
+    for: "za|for",
+    forward: "napred|forward",
+    from: "od|from",
+    gray: "siva|gray",
+    green: "zelena|green",
+    if: "ako|if",
+    in: "u|in",
+    input: "ulaz|input",
+    is: "je|is",
+    left: "levo|left",
+    length: "du\u017Eina|length",
+    not_in: "ne/nije u|not in",
+    or: "ili|or",
+    orange: "narand\u017Easta|orange",
+    pink: "roze|pink",
+    play: "play",
+    pressed: "pritisnuto|pressed",
+    print: "\u0161tampaj|print",
+    purple: "ljubi\u010Dasta|purple",
+    random: "nasumi\u010Dno|random",
+    range: "opseg|range",
+    red: "crvena|red",
+    remove: "obri\u0161i|remove",
+    repeat: "ponovi|repeat",
+    return: "vrati|return",
+    right: "desno|right",
+    sleep: "spavanje|sleep",
+    step: "korak|step",
+    times: "vremena|times",
+    to: "u|to",
+    to_list: "u|to",
+    turn: "okreni|turn",
+    while: "dok|while",
+    white: "bela|white",
+    with: "sa|with",
+    yellow: "\u017Euta|yellow",
+    DIGIT: "0123456789"
+  };
+  var sv = {
+    add: "addera|add",
+    and: "och|and",
+    ask: "fr\xE5ga|ask",
+    at: "vid|at",
+    black: "svart|black",
+    blue: "bl\xE5|blue",
+    brown: "brun|brown",
+    call: "anropa|call",
+    clear: "rensa|clear",
+    color: "f\xE4rg|color",
+    comma: ",",
+    def: "def",
+    define: "definiera|define",
+    echo: "eko|echo",
+    elif: "anom|elif",
+    else: "annars|else",
+    for: "f\xF6r|for",
+    forward: "fram\xE5t|forward",
+    from: "fr\xE5n|from",
+    gray: "gr\xE5|gray",
+    green: "gr\xF6n|green",
+    if: "om|if",
+    in: "i|in",
+    input: "inmatning|input",
+    is: "\xE4r|is",
+    left: "v\xE4nster|left",
+    length: "l\xE4ngd|length",
+    not_in: "inte i|not in",
+    or: "eller|or",
+    orange: "orange",
+    pink: "rosa|pink",
+    play: "play",
+    pressed: "nedtryckt|pressed",
+    print: "skriv|print",
+    purple: "lila|purple",
+    random: "slump|random",
+    range: "intervall|range",
+    red: "r\xF6d|red",
+    remove: "radera|remove",
+    repeat: "upprepa|repeat",
+    return: "returnera|return",
+    right: "h\xF6ger|right",
+    sleep: "sov|sleep",
+    step: "steg|step",
+    times: "g\xE5nger|times",
+    to: "till|to",
+    to_list: "till|to",
+    turn: "sv\xE4ng|turn",
+    while: "medan|while",
+    white: "vit|white",
+    with: "med|with",
+    yellow: "gul|yellow",
+    DIGIT: "0123456789"
+  };
+  var sw = {
+    add: "add",
+    and: "and",
+    ask: "ask",
+    at: "at",
+    black: "black",
+    blue: "blue",
+    brown: "brown",
+    call: "call",
+    clear: "clear",
+    color: "color",
+    comma: ",",
+    def: "def",
+    define: "define",
+    echo: "echo",
+    elif: "elif",
+    else: "else",
+    for: "for",
+    forward: "forward",
+    from: "from",
+    gray: "gray",
+    green: "green",
+    if: "if",
+    in: "in",
+    input: "input",
+    is: "is",
+    left: "left",
+    length: "length",
+    not_in: "not in",
+    or: "or",
+    orange: "orange",
+    pink: "pink",
+    play: "play",
+    pressed: "pressed",
+    print: "print",
+    purple: "purple",
+    random: "random",
+    range: "range",
+    red: "red",
+    remove: "remove",
+    repeat: "repeat",
+    return: "return",
+    right: "right",
+    sleep: "sleep",
+    step: "step",
+    times: "times",
+    to: "to",
+    to_list: "to",
+    turn: "turn",
+    while: "while",
+    white: "white",
+    with: "with",
+    yellow: "yellow",
+    DIGIT: "0123456789"
+  };
+  var te = {
+    add: "\u0C1C\u0C4B\u0C21\u0C3F\u0C02\u0C1A\u0C41|add",
+    and: "\u0C2E\u0C30\u0C3F\u0C2F\u0C41|and",
+    ask: "\u0C05\u0C21\u0C17\u0C02\u0C21\u0C3F|ask",
+    at: "\u0C35\u0C26\u0C4D\u0C26|at",
+    black: "black",
+    blue: "blue",
+    brown: "brown",
+    call: "call",
+    clear: "\u0C24\u0C41\u0C21\u0C3F\u0C1A\u0C3F\u0C35\u0C47\u0C2F\u0C3F|clear",
+    color: "color",
+    comma: ",",
+    def: "def",
+    define: "define",
+    echo: "\u0C2A\u0C4D\u0C30\u0C24\u0C3F\u0C27\u0C4D\u0C35\u0C28\u0C3F|echo",
+    elif: "\u0C2E\u0C30\u0C4A\u0C15\u0C1F\u0C3F \u0C09\u0C02\u0C1F\u0C47|elif",
+    else: "\u0C32\u0C47\u0C15\u0C2A\u0C4B\u0C24\u0C47|else",
+    for: "\u0C15\u0C4B\u0C38\u0C02|for",
+    forward: "\u0C2E\u0C41\u0C02\u0C26\u0C41\u0C15\u0C41|forward",
+    from: "\u0C28\u0C41\u0C02\u0C21\u0C3F|from",
+    gray: "gray",
+    green: "green",
+    if: "\u0C09\u0C02\u0C1F\u0C47|if",
+    in: "\u092E\u0947\u0C32\u0C4B|in",
+    input: "\u0C07\u0C28\u0C4D\u0C2A\u0C41\u0C1F\u0C4D|input",
+    is: "\u0C09\u0C02\u0C26\u0C3F|is",
+    left: "left",
+    length: "\u0C2A\u0C4A\u0C21\u0C35\u0C41|length",
+    not_in: "not in",
+    or: "\u0C32\u0C47\u0C26\u0C3E|or",
+    orange: "orange",
+    pink: "pink",
+    play: "play",
+    pressed: "pressed",
+    print: "\u0C2E\u0C41\u0C26\u0C4D\u0C30\u0C23|print",
+    purple: "purple",
+    random: "\u0C2F\u0C3E\u0C26\u0C43\u0C1A\u0C4D\u0C1B\u0C3F\u0C15\u0C02\u0C17\u0C3E|random",
+    range: "\u0C2A\u0C30\u0C3F\u0C27\u0C3F|range",
+    red: "red",
+    remove: "\u0C24\u0C4A\u0C32\u0C17\u0C3F\u0C02\u0C1A\u0C41|remove",
+    repeat: "\u0C2A\u0C41\u0C28\u0C30\u0C3E\u0C35\u0C43\u0C24\u0C02|repeat",
+    return: "return",
+    right: "right",
+    sleep: "\u0C28\u0C3F\u0C26\u0C4D\u0C30|sleep",
+    step: "\u0C05\u0C21\u0C41\u0C17\u0C41|step",
+    times: "\u0C38\u0C3E\u0C30\u0C4D\u0C32\u0C41|times",
+    to: "\u0C15\u0C41|to",
+    to_list: "\u0C15\u0C41|to",
+    turn: "\u0C2E\u0C32\u0C41\u0C2A\u0C41|turn",
+    while: "\u0C05\u0C2F\u0C3F\u0C24\u0C47|while",
+    white: "white",
+    with: "with",
+    yellow: "yellow",
+    DIGIT: "0123456789"
+  };
+  var th = {
+    add: "\u0E40\u0E1E\u0E34\u0E48\u0E21|add",
+    and: "\u0E41\u0E25\u0E30|and",
+    ask: "\u0E16\u0E32\u0E21\u0E27\u0E48\u0E32|ask",
+    at: "\u0E41\u0E1A\u0E1A|at",
+    black: "\u0E14\u0E33|black",
+    blue: "\u0E19\u0E49\u0E33\u0E40\u0E07\u0E34\u0E19|blue",
+    brown: "\u0E19\u0E49\u0E33\u0E15\u0E32\u0E25|brown",
+    call: "call",
+    clear: "\u0E25\u0E1A\u0E01\u0E23\u0E30\u0E14\u0E32\u0E19|clear",
+    color: "\u0E2A\u0E35|color",
+    comma: ",",
+    def: "def",
+    define: "define",
+    echo: "\u0E1E\u0E39\u0E14|echo",
+    elif: "\u0E2B\u0E23\u0E37\u0E2D\u0E16\u0E49\u0E32|elif",
+    else: "\u0E44\u0E21\u0E48\u0E2D\u0E22\u0E48\u0E32\u0E07\u0E19\u0E31\u0E49\u0E19|else",
+    for: "\u0E43\u0E2B\u0E49|for",
+    forward: "\u0E40\u0E14\u0E34\u0E19\u0E2B\u0E19\u0E49\u0E32|forward",
+    from: "\u0E08\u0E32\u0E01|from",
+    gray: "\u0E40\u0E17\u0E32|gray",
+    green: "\u0E40\u0E02\u0E35\u0E22\u0E27|green",
+    if: "\u0E16\u0E49\u0E32|if",
+    in: "\u0E2D\u0E22\u0E39\u0E48\u0E43\u0E19|in",
+    input: "\u0E23\u0E31\u0E1A\u0E02\u0E49\u0E2D\u0E21\u0E39\u0E25|input",
+    is: "\u0E04\u0E37\u0E2D|is",
+    left: "\u0E0B\u0E49\u0E32\u0E22|left",
+    length: "\u0E04\u0E27\u0E32\u0E21\u0E22\u0E32\u0E27|length",
+    not_in: "\u0E44\u0E21\u0E48\u0E2D\u0E22\u0E39\u0E48\u0E43\u0E19|not in",
+    or: "\u0E2B\u0E23\u0E37\u0E2D|or",
+    orange: "\u0E2A\u0E49\u0E21|orange",
+    pink: "\u0E0A\u0E21\u0E1E\u0E39|pink",
+    play: "play",
+    pressed: "\u0E1B\u0E38\u0E48\u0E21\u0E17\u0E35\u0E48\u0E16\u0E39\u0E01\u0E01\u0E14|pressed",
+    print: "\u0E41\u0E2A\u0E14\u0E07|print",
+    purple: "\u0E21\u0E48\u0E27\u0E07|purple",
+    random: "\u0E2A\u0E38\u0E48\u0E21|random",
+    range: "\u0E0A\u0E48\u0E27\u0E07|range",
+    red: "\u0E41\u0E14\u0E07|red",
+    remove: "\u0E25\u0E1A|remove",
+    repeat: "\u0E17\u0E33\u0E0B\u0E49\u0E33|repeat",
+    return: "return",
+    right: "\u0E02\u0E27\u0E32|right",
+    sleep: "\u0E23\u0E2D|sleep",
+    step: "\u0E40\u0E14\u0E34\u0E19|step",
+    times: "\u0E04\u0E23\u0E31\u0E49\u0E07|times",
+    to: "\u0E08\u0E19\u0E16\u0E36\u0E07|to",
+    to_list: "\u0E44\u0E1B\u0E22\u0E31\u0E07|to",
+    turn: "\u0E40\u0E25\u0E35\u0E49\u0E22\u0E27|turn",
+    while: "\u0E40\u0E21\u0E37\u0E48\u0E2D\u0E44\u0E2B\u0E23\u0E48\u0E01\u0E47\u0E15\u0E32\u0E21\u0E17\u0E35\u0E48|while",
+    white: "\u0E02\u0E32\u0E27|white",
+    with: "with",
+    yellow: "\u0E40\u0E2B\u0E25\u0E37\u0E2D\u0E07|yellow",
+    DIGIT: "0123456789"
+  };
+  var tl = {
+    add: "add",
+    and: "and",
+    ask: "ask",
+    at: "at",
+    black: "black",
+    blue: "blue",
+    brown: "brown",
+    call: "call",
+    clear: "clear",
+    color: "color",
+    comma: ",",
+    def: "def",
+    define: "define",
+    echo: "echo",
+    elif: "elif",
+    else: "else",
+    for: "for",
+    forward: "forward",
+    from: "from",
+    gray: "gray",
+    green: "green",
+    if: "if",
+    in: "in",
+    input: "input",
+    is: "is",
+    left: "left",
+    length: "length",
+    not_in: "not in",
+    or: "or",
+    orange: "orange",
+    pink: "pink",
+    play: "play",
+    pressed: "pressed",
+    print: "print",
+    purple: "purple",
+    random: "random",
+    range: "range",
+    red: "red",
+    remove: "remove",
+    repeat: "repeat",
+    return: "return",
+    right: "right",
+    sleep: "sleep",
+    step: "step",
+    times: "times",
+    to: "to",
+    to_list: "to",
+    turn: "turn",
+    while: "while",
+    white: "white",
+    with: "with",
+    yellow: "yellow",
+    DIGIT: "0123456789"
+  };
+  var tn = {
+    add: "tsenya|add",
+    and: "and",
+    ask: "ask",
+    at: "at",
+    black: "black",
+    blue: "blue",
+    brown: "brown",
+    call: "call",
+    clear: "clear",
+    color: "color",
+    comma: ",",
+    def: "def",
+    define: "define",
+    echo: "echo",
+    elif: "elif",
+    else: "else",
+    for: "for",
+    forward: "forward",
+    from: "from",
+    gray: "gray",
+    green: "green",
+    if: "if",
+    in: "in",
+    input: "input",
+    is: "is",
+    left: "left",
+    length: "length",
+    not_in: "not in",
+    or: "or",
+    orange: "orange",
+    pink: "pink",
+    play: "play",
+    pressed: "pressed",
+    print: "print",
+    purple: "purple",
+    random: "random",
+    range: "range",
+    red: "red",
+    remove: "remove",
+    repeat: "repeat",
+    return: "return",
+    right: "right",
+    sleep: "sleep",
+    step: "step",
+    times: "times",
+    to: "to",
+    to_list: "to",
+    turn: "turn",
+    while: "while",
+    white: "white",
+    with: "with",
+    yellow: "yellow",
+    DIGIT: "0123456789"
+  };
+  var tr = {
+    add: "ekle|add",
+    and: "ve|and",
+    ask: "sor|ask",
+    at: "i\xE7inden|at",
+    black: "siyah|black",
+    blue: "mavi|blue",
+    brown: "kahverengi|brown",
+    call: "\xE7a\u011F\u0131r|call",
+    clear: "temizle|clear",
+    color: "renk|color",
+    comma: ",",
+    def: "tan\u0131|def",
+    define: "tan\u0131mla|define",
+    echo: "yank\u0131la|echo",
+    elif: "de\u011File\u011Fer|elif",
+    else: "de\u011Filse|else",
+    for: "\u015Funun i\xE7in|for",
+    forward: "ileri|forward",
+    from: "\u015Furadan|from",
+    gray: "gri|gray",
+    green: "ye\u015Fil|green",
+    if: "e\u011Fer|if",
+    in: "\u015Funda|in",
+    input: "girdi|input",
+    is: "e\u015Fit|is",
+    left: "sol|left",
+    length: "uzunluk|length",
+    not_in: "\u015Funda de\u011Fil|not in",
+    or: "veya|or",
+    orange: "turuncu|orange",
+    pink: "pembe|pink",
+    play: "play",
+    pressed: "bas\u0131l\u0131|pressed",
+    print: "yazd\u0131r|print",
+    purple: "mor|purple",
+    random: "rastgele|random",
+    range: "aral\u0131k|range",
+    red: "k\u0131rm\u0131z\u0131|red",
+    remove: "kald\u0131r|remove",
+    repeat: "tekrarla|repeat",
+    return: "gerid\xF6n|return",
+    right: "sa\u011F|right",
+    sleep: "uyu|sleep",
+    step: "ad\u0131m|step",
+    times: "kere|times",
+    to: "\u015Furaya|to",
+    to_list: "\u015Furaya|to",
+    turn: "d\xF6nd\xFCr|turn",
+    while: "\u015Fu iken|while",
+    white: "beyaz|white",
+    with: "ile|with",
+    yellow: "sar\u0131|yellow",
+    DIGIT: "0123456789"
+  };
+  var uk = {
+    add: "\u0434\u043E\u0434\u0430\u0439|add",
+    and: "\u0456|and",
+    ask: "\u0437\u0430\u043F\u0438\u0442\u0430\u0439|ask",
+    at: "\u043D\u0430 \u043F\u043E\u0437\u0438\u0446\u0456\u0457|at",
+    black: "\u0447\u043E\u0440\u043D\u0438\u0439|black",
+    blue: "\u0441\u0438\u043D\u0456\u0439|blue",
+    brown: "\u043A\u043E\u0440\u0438\u0447\u043D\u0435\u0432\u0438\u0439|brown",
+    call: "call",
+    clear: "\u043E\u0447\u0438\u0441\u0442\u0438\u0442\u0438|clear",
+    color: "\u043A\u043E\u043B\u0456\u0440|color",
+    comma: ",",
+    def: "def",
+    define: "define",
+    echo: "\u0435\u0445\u043E|echo",
+    elif: "\u0456\u043D\u0430\u043A\u0448\u0435 \u044F\u043A\u0449\u043E|elif",
+    else: "\u0456\u043D\u0430\u043A\u0448\u0435|else",
+    for: "\u0434\u043B\u044F|for",
+    forward: "\u0432\u043F\u0435\u0440\u0435\u0434|forward",
+    from: "i\u0437|\u0437|from",
+    gray: "\u0441\u0456\u0440\u0438\u0439|gray",
+    green: "\u0437\u0435\u043B\u0435\u043D\u0438\u0439|green",
+    if: "\u044F\u043A\u0449\u043E|if",
+    in: "\u0432|in",
+    input: "\u0432\u0432\u0435\u0434\u0438|input",
+    is: "\u0446\u0435|is",
+    left: "\u0432\u043B\u0456\u0432\u043E|left",
+    length: "\u0434\u043E\u0432\u0436\u0438\u043D\u0430|length",
+    not_in: "\u043D\u0435 \u0432|not in",
+    or: "\u0430\u0431\u043E|or",
+    orange: "\u043E\u0440\u0430\u043D\u0436\u0435\u0432\u0438\u0439|orange",
+    pink: "\u0440\u043E\u0436\u0435\u0432\u0438\u0439|pink",
+    play: "play",
+    pressed: "\u043D\u0430\u0442\u0438\u0441\u043D\u0443\u0432|pressed",
+    print: "\u0434\u0440\u0443\u043A\u0443\u0439|print",
+    purple: "\u0444\u0456\u043E\u043B\u0435\u0442\u043E\u0432\u0438\u0439|purple",
+    random: "\u0432\u0438\u043F\u0430\u0434\u043A\u043E\u0432\u0438\u0439|\u0432\u0438\u043F\u0430\u0434\u043A\u043E\u0432\u0456\u0439|random",
+    range: "\u0434\u0456\u0430\u043F\u0430\u0437\u043E\u043D|\u0434\u0456\u0430\u043F\u0430\u0437\u043E\u043Di|range",
+    red: "\u0447\u0435\u0440\u0432\u043E\u043D\u0438\u0439|red",
+    remove: "\u0432\u0438\u0434\u0430\u043B\u0438|remove",
+    repeat: "\u043F\u043E\u0432\u0442\u043E\u0440\u0438|repeat",
+    return: "return",
+    right: "\u0432\u043F\u0440\u0430\u0432\u043E|right",
+    sleep: "\u043F\u043E\u0447\u0435\u043A\u0430\u0439|sleep",
+    step: "\u043A\u0440\u043E\u043A|step",
+    times: "\u0440\u0430\u0437\u0456\u0432|\u0440\u0430\u0437\u0438|\u0440\u0430\u0437|times",
+    to: "\u0434\u043E|to",
+    to_list: "\u0434\u043E|to",
+    turn: "\u043F\u043E\u0432\u0435\u0440\u043D\u0438|turn",
+    while: "\u0442\u043E\u0434\u0456 \u044F\u043A|while",
+    white: "\u0431\u0456\u043B\u0438\u0439|white",
+    with: "with",
+    yellow: "\u0436\u043E\u0432\u0442\u0438\u0439|yellow",
+    DIGIT: "0123456789"
+  };
+  var ur = {
+    add: "\u0634\u0627\u0645\u0644|add",
+    and: "\u0627\u0648\u0631|and",
+    ask: "\u0628\u062A\u0627\u0624|ask",
+    at: "\u06A9\u0648\u0626\u06CC|at",
+    black: "\u06A9\u0627\u0644\u0627|black",
+    blue: "\u0646\u06CC\u0644\u0627|blue",
+    brown: "\u0628\u0631\u0627\u0624\u0646|brown",
+    call: "call",
+    clear: "\u0635\u0627\u0641|clear",
+    color: "\u0631\u0646\u06AF|color",
+    comma: "\u060C|,",
+    def: "def",
+    define: "define",
+    echo: "\u067E\u06A9\u0627\u0631|echo",
+    elif: "\u06CC\u0627\u0627\u06AF\u0631|elif",
+    else: "\u0648\u0631\u0646\u06C1|else",
+    for: "\u0641\u06CC|for",
+    forward: "\u0622\u06AF\u06D2|forward",
+    from: "\u0633\u06D2|from",
+    gray: "\u06AF\u0631\u06D2|gray",
+    green: "\u0633\u0628\u0632|green",
+    if: "\u0627\u06AF\u0631|if",
+    in: "\u0645\u06CC\u06BA|in",
+    input: "\u0628\u062A\u0627\u0624|input",
+    is: "\u06C1\u06D2|is",
+    left: "\u0628\u0627\u0626\u06CC\u06BA|left",
+    length: "\u0644\u0645\u0628\u0627\u0626\u06CC|length",
+    not_in: "\u0646\u06C1\u06CC\u06BA \u06C1\u06D2|not in",
+    or: "\u06CC\u0627|or",
+    orange: "\u0627\u0648\u0631\u06CC\u0646\u062C|orange",
+    pink: "\u06AF\u0644\u0627\u0628\u06CC|pink",
+    play: "play",
+    pressed: "\u062F\u0628\u0627 \u06C1\u0648\u0627|pressed",
+    print: "\u062F\u06A9\u06BE\u0627\u0624|print",
+    purple: "\u062C\u0627\u0645\u0646\u06CC|purple",
+    random: "\u0633\u0627|random",
+    range: "\u062D\u062F|range",
+    red: "\u0633\u0631\u062E|red",
+    remove: "\u0646\u06A9\u0627\u0644\u0648|remove",
+    repeat: "\u0645\u06A9\u0631\u0631|repeat",
+    return: "return",
+    right: "\u062F\u0627\u0626\u06CC\u06BA|right",
+    sleep: "\u0622\u0631\u0627\u0645|sleep",
+    step: "\u0642\u062F\u0645|step",
+    times: "\u062F\u0641\u0639\u06C1|times",
+    to: "\u0633\u06D2|to",
+    to_list: "\u0627\u0646\u062F\u0631|to",
+    turn: "\u0645\u0691\u0648|turn",
+    while: "\u062C\u0628\u062A\u06A9|while",
+    white: "\u0633\u0641\u06CC\u062F|white",
+    with: "with",
+    yellow: "\u067E\u06CC\u0644\u0627|yellow",
+    DIGIT: "0123456789"
+  };
+  var vi = {
+    add: "add",
+    and: "v\xE0|and",
+    ask: "h\u1ECFi|ask",
+    at: "at",
+    black: "\u0111en|black",
+    blue: "lam|blue",
+    brown: "n\xE2u|brown",
+    call: "call",
+    clear: "clear",
+    color: "m\xE0u|color",
+    comma: ",",
+    def: "def",
+    define: "define",
+    echo: "\u0111\xE1p|echo",
+    elif: "elif",
+    else: "else",
+    for: "for",
+    forward: "ti\u1EBFn|forward",
+    from: "from",
+    gray: "x\xE1m|gray",
+    green: "l\u1EE5c|green",
+    if: "n\u1EBFu|if",
+    in: "in",
+    input: "input",
+    is: "l\xE0|is",
+    left: "tr\xE1i|left",
+    length: "length",
+    not_in: "not in",
+    or: "ho\u1EB7c|or",
+    orange: "cam|orange",
+    pink: "h\u1ED3ng|pink",
+    play: "play",
+    pressed: "pressed",
+    print: "xu\u1EA5t|print",
+    purple: "t\xEDm|purple",
+    random: "ng\u1EABu_nhi\xEAn|random",
+    range: "range",
+    red: "\u0111\u1ECF|red",
+    remove: "remove",
+    repeat: "repeat",
+    return: "return",
+    right: "ph\u1EA3i|right",
+    sleep: "sleep",
+    step: "step",
+    times: "times",
+    to: "to",
+    to_list: "to",
+    turn: "quay|turn",
+    while: "while",
+    white: "tr\u1EAFng|white",
+    with: "with",
+    yellow: "v\xE0ng|yellow",
+    DIGIT: "0123456789"
+  };
+  var zh_Hans = {
+    add: "\u52A0|add",
+    and: "\u5E76\u4E14|and",
+    ask: "\u63D0\u95EE|ask",
+    at: "\u5728|at",
+    black: "\u9ED1\u8272|black",
+    blue: "\u84DD\u8272|blue",
+    brown: "\u68D5\u8272|brown",
+    call: "\u8C03\u7528|call",
+    clear: "\u6E05\u9664|clear",
+    color: "\u989C\u8272|color",
+    comma: "\uFF0C|,",
+    def: "\u5B9A\u4E49\u51FD\u6570|def",
+    define: "\u5B9A\u4E49|define",
+    echo: "\u56DE\u58F0|echo",
+    elif: "\u5426\u5219\u5982\u679C|elif",
+    else: "\u5426\u5219|else",
+    for: "\u53D6|for",
+    forward: "\u5411\u524D|forward",
+    from: "\u4ECE|from",
+    gray: "\u7070\u8272|gray",
+    green: "\u7EFF\u8272|green",
+    if: "\u5982\u679C|if",
+    in: "\u5728\u91CC\u9762|in",
+    input: "\u8F93\u5165|input",
+    is: "\u662F|is",
+    left: "\u5DE6|left",
+    length: "\u957F\u5EA6|length",
+    not_in: "\u4E0D\u5728|not in",
+    or: "\u6216|or",
+    orange: "\u6A59\u8272|orange",
+    pink: "\u7C89\u7EA2\u8272|pink",
+    play: "\u8FD0\u884C|play",
+    pressed: "\u6309\u4E0B|pressed",
+    print: "\u6253\u5370|print",
+    purple: "\u7D2B\u8272|purple",
+    random: "\u968F\u673A|random",
+    range: "\u8303\u56F4|range",
+    red: "\u7EA2\u8272|red",
+    remove: "\u79FB\u9664|remove",
+    repeat: "\u91CD\u590D|repeat",
+    return: "\u8FD4\u56DE|return",
+    right: "\u53F3|right",
+    sleep: "\u7761\u7720|sleep",
+    step: "\u6B65|step",
+    times: "\u6B21|times",
+    to: "\u5230|to",
+    to_list: "\u5230|to",
+    turn: "\u65CB\u8F6C|turn",
+    while: "\u5F53|while",
+    white: "\u767D\u8272|white",
+    with: "\u5BF9|with",
+    yellow: "\u9EC4\u8272|yellow",
+    DIGIT: "0123456789"
+  };
+  var zh_Hant = {
+    add: "add",
+    and: "and",
+    ask: "ask",
+    at: "at",
+    black: "black",
+    blue: "blue",
+    brown: "brown",
+    call: "call",
+    clear: "clear",
+    color: "color",
+    comma: ",",
+    def: "def",
+    define: "define",
+    echo: "echo",
+    elif: "elif",
+    else: "else",
+    for: "for",
+    forward: "forward",
+    from: "from",
+    gray: "gray",
+    green: "green",
+    if: "if",
+    in: "in",
+    input: "input",
+    is: "is",
+    left: "left",
+    length: "length",
+    not_in: "not in",
+    or: "or",
+    orange: "orange",
+    pink: "pink",
+    play: "play",
+    pressed: "pressed",
+    print: "print",
+    purple: "purple",
+    random: "random",
+    range: "range",
+    red: "red",
+    remove: "remove",
+    repeat: "repeat",
+    return: "return",
+    right: "right",
+    sleep: "sleep",
+    step: "step",
+    times: "times",
+    to: "to",
+    to_list: "to",
+    turn: "turn",
+    while: "while",
+    white: "white",
+    with: "with",
+    yellow: "yellow",
+    DIGIT: "0123456789"
+  };
+  var highlighting_trad_default = {
+    ar,
+    bg,
+    bn,
+    ca,
+    cs,
+    cy,
+    da,
+    de,
+    el,
+    en,
+    eo,
+    es,
+    et,
+    fa,
+    fi,
+    fr,
+    fy,
+    he,
+    hi,
+    hu,
+    ia,
+    id,
+    it,
+    ja,
+    kmr,
+    ko,
+    mi,
+    nb_NO,
+    nl,
+    pa_PK,
+    pap,
+    pl,
+    pt_BR,
+    pt_PT,
+    ro,
+    ru,
+    sq,
+    sr,
+    sv,
+    sw,
+    te,
+    th,
+    tl,
+    tn,
+    tr,
+    uk,
+    ur,
+    vi,
+    zh_Hans,
+    zh_Hant
+  };
+
   // static/js/lezer-parsers/tokens.ts
   var TRADUCTION;
   var level2;
@@ -51993,7 +42575,7 @@ notes_mapping = {
   var specializeTranslations;
   var extendTranslations;
   function initializeTranslation(options) {
-    const TRADUCTIONS = convert2(highlighting_trad_default);
+    const TRADUCTIONS = convert(highlighting_trad_default);
     level2 = options.level;
     let lang = options.keywordLanguage;
     if (!TRADUCTIONS.has(lang)) {
@@ -52032,12 +42614,12 @@ notes_mapping = {
     }
     return -1;
   }
-  function convert2(o) {
+  function convert(o) {
     if (typeof o === "object") {
       let tmp = new Map(Object.entries(o));
       let ret = new Map();
       tmp.forEach((value, key) => {
-        ret.set(key, convert2(value));
+        ret.set(key, convert(value));
       });
       return ret;
     } else {
@@ -55608,7 +46190,7 @@ notes_mapping = {
     theGlobalEditor2 = options.editor;
     theLevel2 = options.level;
     theLanguage = options.language;
-    let TRADUCTIONS = convert(highlighting_trad_default);
+    let TRADUCTIONS = convert2(highlighting_trad_default);
     let lang = options.keywordLanguage;
     if (!TRADUCTIONS.has(lang)) {
       lang = "en";
@@ -55812,6 +46394,18 @@ notes_mapping = {
   }
   function getBreakpoints(editor) {
     return editor.session.getBreakpoints();
+  }
+  function convert2(o) {
+    if (typeof o === "object") {
+      let tmp = new Map(Object.entries(o));
+      let ret = new Map();
+      tmp.forEach((value, key) => {
+        ret.set(key, convert2(value));
+      });
+      return ret;
+    } else {
+      return o;
+    }
   }
 
   // static/js/local.ts
@@ -56912,9 +47506,6 @@ pygame.quit()
     theKeywordLanguage = options.keywordLanguage;
     theStaticRoot = (_a3 = options.staticRoot) != null ? _a3 : "";
     theStaticRoot = theStaticRoot === "/" ? "" : theStaticRoot;
-    initializeSyntaxHighlighter({
-      keywordLanguage: options.keywordLanguage
-    });
     initializeCopyToClipboard();
     $(document).on("click", function(event2) {
       if (!$(event2.target).closest(".dropdown").length) {
