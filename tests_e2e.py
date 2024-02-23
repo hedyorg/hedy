@@ -1089,7 +1089,7 @@ class TestProgram(AuthHelper):
 
         # WHEN making a program public
         # THEN receive an OK response code from the server
-        self.post_data('programs/share/' + program_id, + '/1' {'id': program_id})
+        self.post_data('programs/share/' + program_id, + '/1', {'id': program_id})
 
         saved_programs = self.get_data('programs/list')['programs']
         for program in saved_programs:
@@ -1113,7 +1113,7 @@ class TestProgram(AuthHelper):
 
         # WHEN making a program private
         # THEN receive an OK response code from the server
-        self.post_data('programs/share/' + program_id, {'id': program_id})
+        self.post_data('programs/share/{program_id}/1', {'id': program_id})
 
         saved_programs = self.get_data('programs/list')['programs']
         for program in saved_programs:
