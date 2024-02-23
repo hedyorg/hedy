@@ -211,10 +211,8 @@ class ProgramsModule(WebsiteModule):
     @requires_login
     def share_unshare_program(self, user, program_id, loop_index):
         program = self.db.program_by_id(program_id)
-        if not program:
-            return "No such program!", 404
-        if program["username"] != user["username"]:
-            return "No your program!", 404
+        if not program or program["username"] != user["username"]:
+            return "No such program!" + id, 404
 
         # This only happens in the situation were a user un-shares their favourite program -> Delete from public profile
         public_profile = self.db.get_public_profile_settings(current_user()["username"])
