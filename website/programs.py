@@ -237,7 +237,7 @@ class ProgramsModule(WebsiteModule):
         program["date"] = utils.delta_timestamp(program["date"])
         program["preview_code"] = "\n".join(program["code"].split("\n")[:4])
         program["number_lines"] = program["code"].count('\n') + 1
-        if second_teachers_programs == True:
+        if second_teachers_programs is True:
             result = True
         else:
             result = False
