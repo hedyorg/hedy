@@ -223,7 +223,7 @@ class ProgramsModule(WebsiteModule):
         ):
             self.db.set_favourite_program(user["username"], None)
 
-        if bool(program["public"]) is True:
+        if program.get("public"):
             public = 0
         else:
             public = 1
