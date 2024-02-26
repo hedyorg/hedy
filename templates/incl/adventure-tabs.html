@@ -43,7 +43,7 @@
             {% set text_length = adventure.text|length %}
             {% set midpoint = text_length // 2 %}
               <div class="lg:flex lg:flex-row">
-                  <div class="{% if adventure.example_code or adventure.text|length > 750 %}lg:w-1/2 {% endif %}w-full p-2 ltr:mr-2 rtl:ml-2">
+                  <div class="{% if adventure.example_code or (adventure.is_teacher_adventure and adventure.text|length > 750) %}lg:w-1/2 {% endif %}w-full p-2 ltr:mr-2 rtl:ml-2">
                     <div class="max-w-prose">
                     {% if adventure.is_teacher_adventure and adventure.text|length > 750 %}
                         {{ adventure.text[:midpoint]|commonmark }}
