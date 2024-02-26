@@ -2606,7 +2606,9 @@ class TestsLevel12(HedyTester):
             max_level=16
         )
 
-# music tests
+    #
+    # music tests
+    #
     def test_play_random(self):
         code = textwrap.dedent("""\
         notes = 'C4', 'E4', 'D4', 'F4', 'G4'
@@ -2653,4 +2655,24 @@ class TestsLevel12(HedyTester):
             unused_allowed=True,
             expected=expected,
             max_level=15
+        )
+
+    @parameterized.expand(HedyTester.arithmetic_operations)
+    def test_play_calculation(self, op):
+        code = textwrap.dedent(f"""\
+            note is 34
+            play note {op} 1""")
+        expected = textwrap.dedent(f"""\
+            note = 34
+            chosen_note = str(note {op} 1).upper()
+            if chosen_note not in notes_mapping.keys() and chosen_note not in notes_mapping.values():
+                raise Exception('catch_value_exception')
+            play(notes_mapping.get(chosen_note, chosen_note))
+            time.sleep(0.5)""")
+
+        self.multi_level_tester(
+            code=code,
+            translate=False,
+            expected=expected,
+            # max_level=11
         )
