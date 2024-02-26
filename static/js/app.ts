@@ -1937,8 +1937,6 @@ export function closeContainingModal(target: HTMLElement) {
 function initializeShareProgramButtons() {
   $('input[type="radio"][name="public"]').on('change', (ev) => {
     if ((ev.target as HTMLInputElement).checked) {
-      const isPublic = $(ev.target).val() === '1' ? true : false;
-
       // Async-safe copy of current tab
       const adventure = theAdventures[currentTab];
 
@@ -1951,8 +1949,7 @@ function initializeShareProgramButtons() {
         }
 
         const response = await postJsonWithAchievements('/programs/share', {
-          id: saveInfo.id,
-          public: isPublic,
+          id: saveInfo.id
         });
 
         modal.notifySuccess(response.message);
