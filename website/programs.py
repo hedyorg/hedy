@@ -230,7 +230,7 @@ class ProgramsModule(WebsiteModule):
         program = self.db.set_program_public_by_id(program_id, public)
         achievement = self.achievements.add_single_achievement(user["username"], "sharing_is_caring")
         if achievement:
-            utils.add_pending_achievement({"achievement": achievement, "redirect": "/programs"})
+            utils.add_pending_achievement({"achievement": achievement})
 
         keyword_lang = g.keyword_lang
         adventure_names = hedy_content.Adventures(g.lang).get_adventure_names(keyword_lang)
