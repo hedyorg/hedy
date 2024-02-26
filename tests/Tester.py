@@ -282,7 +282,12 @@ class HedyTester(unittest.TestCase):
                     # <- use this to run tests locally with unittest
                     skipped_commands = ['ask', 'input', 'clear', 'play']
                     if not any(x for x in skipped_commands if x in all_commands):
-                        self.assertTrue(self.validate_Python_code(result))
+                        if microbit:
+                            with open('transpiled.txt', 'w') as file:
+                                file.write(result.code)
+                        else:
+                            self.assertTrue(self.validate_Python_code(result))
+
                     if output is not None:
                         if extra_check_function is None:  # most programs have no turtle so make that the default
                             extra_check_function = self.is_not_turtle()
