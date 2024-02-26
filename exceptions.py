@@ -285,6 +285,12 @@ class UnquotedAssignTextException(HedyException):
         super().__init__('Unquoted Assignment', text=text, line_number=line_number)
 
 
+class MissingBracketsException(HedyException):
+    def __init__(self, level, line_number):
+        super().__init__('Missing Brackets',
+                         line_number=line_number)
+
+
 class LonelyEchoException(HedyException):
     def __init__(self):
         super().__init__('Lonely Echo')
