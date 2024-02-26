@@ -52,7 +52,7 @@
         <p class="text-xl" >{{_('no_programs')}}</p>
     {% endif %}
     {% for program in programs %}
-        {{ render_partial('htmx-program-buttons.html', program=program, adventure_names=adventure_names, public_profile=public_profile, loop_index=loop.index, second_teachers_programs=second_teachers_programs) }}
+        {{ render_partial('htmx-program.html', program=program, adventure_names=adventure_names, public_profile=public_profile, loop_index=loop.index, second_teachers_programs=second_teachers_programs) }}
     {% endfor %}
 
     {% if second_teachers_programs %}

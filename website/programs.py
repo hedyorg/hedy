@@ -207,12 +207,12 @@ class ProgramsModule(WebsiteModule):
             "achievements": self.achievements.get_earned_achievements(),
         })
 
-    @route("/share/<program_id>/<loop_index>", methods=["POST"])
+    @route("/share/<program_id>/<loop_index>/<second_teachers_programs>", methods=["POST"])
     @requires_login
-    def share_unshare_program(self, user, program_id, loop_index):
+    def share_unshare_program(self, user, program_id, loop_index, second_teachers_programs):
         program = self.db.program_by_id(program_id)
         if not program or program["username"] != user["username"]:
-            return "No such program!" + program_id + loop_index, 404
+            return "No such program!", 404
 
         # This only happens in the situation were a user un-shares their favourite program -> Delete from public profile
         public_profile = self.db.get_public_profile_settings(current_user()["username"])
@@ -237,11 +237,16 @@ class ProgramsModule(WebsiteModule):
         program["date"] = utils.delta_timestamp(program["date"])
         program["preview_code"] = "\n".join(program["code"].split("\n")[:4])
         program["number_lines"] = program["code"].count('\n') + 1
-        return jinja_partials.render_partial('htmx-program-buttons.html',
+        if second_teachers_programs == True:
+            result = True
+        else:
+            result = False
+        return jinja_partials.render_partial('htmx-program.html',
                                              program=program,
                                              adventure_names=adventure_names,
                                              public_profile=public_profile,
-                                             loop_index=loop_index)
+                                             loop_index=loop_index,
+                                             second_teachers_programs=result)
 
     @route("/submit", methods=["POST"])
     @requires_login
