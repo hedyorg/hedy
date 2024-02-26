@@ -244,7 +244,7 @@ levels:
             question_text: 如果你运行这段代码，它会输出什么？
             code: |-
                 名字 {is} 海蒂
-                {print} 你好，我的 名字 是 名字！
+                {print} 你好，我的 名字 是 名字
             mp_choice_options:
             -   option: 你好，我的 名字 是 名字
                 feedback: 变量“名字”会被替换成海蒂
@@ -2312,15 +2312,26 @@ levels:
                     {print} i
             mp_choice_options:
             -   option: |-
+                    ```
                     1
                     2
                     3
+                    ```
                 feedback: 正确！
-            -   option: 1 2 3
+            -   option: |-
+                    ```
+                    1 2 3
+                    ```
                 feedback: 不是这个
-            -   option: 1, 2, 3
+            -   option: |-
+                    ```
+                    1, 2, 3
+                    ```
                 feedback: 不是这个
-            -   option: '123'
+            -   option: |-
+                    ```
+                    123
+                    ```
                 feedback: 不是这个
             hint: 这些数字会如何显示在屏幕上？
             correct_answer: A
@@ -2390,13 +2401,13 @@ levels:
             -   option: |-
                     ```
                     {for} i {in} {range} 0 {to} 10
-                        {print} - i
+                        {print} - 1 * i
                     ```
                 feedback: 这样海蒂会打印负数。
             -   option: |-
                     ```
-                    {for} i {in} {range}10到0
-                        {print} 10 9 8 7 6 5 4 3 2 1 0
+                    {for} i {in} {range}10 {to} 0
+                        {print} i
                     ```
                 feedback: 不幸的是这样并不对。
             -   option: |-
@@ -2405,7 +2416,7 @@ levels:
                         {print} 10 - i
                     ```
                 feedback: 对！
-            hint: 这里需要用到计算……
+            hint: 这里需要用到计算…
             correct_answer: D
             question_score: '10'
         5:
@@ -2476,16 +2487,23 @@ levels:
                     {print} 'hi'
             mp_choice_options:
             -   option: |-
+                    ```
                     23
                     24
                     25
+                    ```
                 feedback: 数字没有出现。 它没有说`{print}`i.
-            -   option: 23 hi 24 hi 25 hi
+            -   option: |-
+                    ```
+                    23 hi 24 hi 25 hi
+                    ```
                 feedback: 数字没有出现。 它没有说`{print}` i
             -   option: |-
+                    ```
                     hi
                     hi
                     hi
+                    ```
                 feedback: 正确
             -   option: '''hi''这个词会连续出现 25 次。'
                 feedback: 不，它只会出现 3 次。
