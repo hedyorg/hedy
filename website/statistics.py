@@ -1,6 +1,6 @@
 from collections import namedtuple
 from enum import Enum
-
+from difflib import SequenceMatcher
 from flask import g, jsonify, request
 from flask_babel import gettext
 import utils
@@ -266,13 +266,8 @@ class StatisticsModule(WebsiteModule):
         # now we have to calculate the differences between the student code and the code snippets
         can_save = True
         for snippet in adventure_snippets:
-            char_diff = 0
-            for i, char in enumerate(snippet):
-                if i > len(student_code) - 1:
-                    break
-                if char != student_code[i]:
-                    char_diff += 1
-            if abs(len(snippet) - len(student_code)) <= 10 and char_diff <= 10:
+            seq_match = SequenceMatcher(None, snippet, student_code)
+            if seq_match.ratio() > 0.95:
                 can_save = False
         return can_save
 
