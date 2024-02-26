@@ -29,7 +29,7 @@
             <div class="ml-36 favourite_program_container {% if public_profile.favourite_program and public_profile.favourite_program == program.id %}text-yellow-400{% else %}text-white{% endif %} text-2xl{% if not program.public %} hidden{% endif %}" id="favourite_program_container_{{ loop_index }}">
                 <i class="fa fa-star p-4 bg-blue-300 rounded-full cursor-pointer hover:bg-blue-600" onclick="hedyApp.set_favourite_program('{{ program.id }}', {{ loop_index }}, '{{_('favourite_confirm')}}');" aria-hidden="true"></i>
             </div>
-            {% endif %}
+        {% endif %}
           <div class="ml-auto dropdown relative">
             <button class="gray-btn text-gray-500 border border-gray-600 font-semibold rounded inline-flex items-center gap-2" id="more_options_{{ loop_index }}"
               onclick="$('#program_options_dropdown_{{ loop_index }}').slideToggle('medium');">
@@ -80,7 +80,7 @@
                     add .rotate-180 to arrow
                 end">
                 <button id="share_button_{{ loop_index }}" class="gray-btn text-blue-500 min-w-full inline-flex items-center gap-2"
-                hx-post="/programs/share/{{program.id}}/{{loop_index}}"
+                hx-post="/programs/share/{{program.id}}/{{loop_index}}/{{second_teachers_programs}}"
                 data-cy="unshare_program_{{ loop_index }}"
                 hx-swap="outerHTML"
                 hx-target="#program_{{ loop_index }}"
