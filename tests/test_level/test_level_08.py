@@ -240,6 +240,50 @@ class TestsLevel8(HedyTester):
             expected_commands=['is', 'is', 'if', 'in', 'print']
         )
 
+    def test_if_not_in_list_print(self):
+        code = textwrap.dedent("""\
+         letters is a, b, c
+         if d not in letters
+             print 'Not found'""")
+
+        expected = textwrap.dedent("""\
+         letters = ['a', 'b', 'c']
+         if 'd' not in letters:
+           print(f'Not found')""")
+
+        self.multi_level_tester(
+            max_level=11,
+            code=code,
+            expected=expected,
+            output='Not found'
+        )
+
+    @parameterized.expand(HedyTester.in_not_in_list_commands)
+    def test_if_not_in_and_in_list_with_string_var_gives_type_error(self, operator):
+        code = textwrap.dedent(f"""\
+        items is red
+        if red {operator} items
+          print 'found!'""")
+        self.multi_level_tester(
+            max_level=11,
+            code=code,
+            extra_check_function=lambda c: c.exception.arguments['line_number'] == 2,
+            exception=hedy.exceptions.InvalidArgumentTypeException
+        )
+
+    @parameterized.expand(HedyTester.in_not_in_list_commands)
+    def test_if_not_in_and_in_list_with_input_gives_type_error(self, operator):
+        code = textwrap.dedent(f"""\
+            items is ask 'What are the items?'
+            if red {operator} items
+              print 'found!'""")
+        self.multi_level_tester(
+            max_level=11,
+            code=code,
+            extra_check_function=lambda c: c.exception.arguments['line_number'] == 2,
+            exception=hedy.exceptions.InvalidArgumentTypeException
+        )
+
     def test_if_equality_assign_calc(self):
         code = textwrap.dedent("""\
         cmp is 1
@@ -604,11 +648,13 @@ class TestsLevel8(HedyTester):
         repeat n times
             print 'me wants a cookie!'""")
 
-        expected = textwrap.dedent("""\
-        n = '5'
-        for i in range(int(n)):
-          print(f'me wants a cookie!')
-          time.sleep(0.1)""")
+        expected = HedyTester.dedent(
+            "n = '5'",
+            self.variable_type_check_transpiled('n', 'int'),
+            "for i in range(int(n)):",
+            ("print(f'me wants a cookie!')", '  '),
+            ("time.sleep(0.1)", '  ')
+        )
 
         output = textwrap.dedent("""\
         me wants a cookie!
@@ -637,11 +683,13 @@ class TestsLevel8(HedyTester):
         repeat n times
             print 'me wants a cookie!'""")
 
-        expected = textwrap.dedent("""\
-        n = '٥'
-        for i in range(int(n)):
-          print(f'me wants a cookie!')
-          time.sleep(0.1)""")
+        expected = HedyTester.dedent(
+            "n = '٥'",
+            self.variable_type_check_transpiled('n', 'int'),
+            "for i in range(int(n)):",
+            ("print(f'me wants a cookie!')", '  '),
+            ("time.sleep(0.1)", '  ')
+        )
 
         output = textwrap.dedent("""\
         me wants a cookie!
@@ -658,11 +706,13 @@ class TestsLevel8(HedyTester):
         repeat állatok times
             print 'me wants a cookie!'""")
 
-        expected = textwrap.dedent("""\
-        állatok = '5'
-        for i in range(int(állatok)):
-          print(f'me wants a cookie!')
-          time.sleep(0.1)""")
+        expected = HedyTester.dedent(
+            "állatok = '5'",
+            self.variable_type_check_transpiled('állatok', 'int'),
+            "for i in range(int(állatok)):",
+            ("print(f'me wants a cookie!')", '  '),
+            ("time.sleep(0.1)", '  ')
+        )
 
         output = textwrap.dedent("""\
         me wants a cookie!
@@ -752,11 +802,13 @@ class TestsLevel8(HedyTester):
         repeat n times
             print 'n'""")
 
-        expected = textwrap.dedent("""\
-        n = input(f'How many times?')
-        for i in range(int(n)):
-          print(f'n')
-          time.sleep(0.1)""")
+        expected = HedyTester.dedent(
+            "n = input(f'How many times?')",
+            self.variable_type_check_transpiled('n', 'int'),
+            'for i in range(int(n)):',
+            ("print(f'n')", '  '),
+            ('time.sleep(0.1)', '  ')
+        )
 
         self.multi_level_tester(code=code, expected=expected, max_level=11)
 
@@ -1157,16 +1209,18 @@ class TestsLevel8(HedyTester):
         print 'Thank you for ordering!'
         print 'Enjoy your meal!'""")
 
-        expected_code = textwrap.dedent("""\
-        print(f'Welcome to Restaurant Chez Hedy!')
-        people = input(f'How many people will be joining us today?')
-        print(f'Great!')
-        for i in range(int(people)):
-          food = input(f'What would you like to order?')
-          print(f'{food}')
-          time.sleep(0.1)
-        print(f'Thank you for ordering!')
-        print(f'Enjoy your meal!')""")
+        expected_code = HedyTester.dedent(
+            "print(f'Welcome to Restaurant Chez Hedy!')",
+            "people = input(f'How many people will be joining us today?')",
+            "print(f'Great!')",
+            self.variable_type_check_transpiled('people', 'int'),
+            "for i in range(int(people)):",
+            ("food = input(f'What would you like to order?')", '  '),
+            ("print(f'{food}')", '  '),
+            ("time.sleep(0.1)", '  '),
+            "print(f'Thank you for ordering!')",
+            "print(f'Enjoy your meal!')"
+        )
 
         expected_source_map = {
             '1/1-1/41': '1/1-1/43',
@@ -1174,14 +1228,14 @@ class TestsLevel8(HedyTester):
             '2/1-2/57': '2/1-2/61',
             '3/1-3/15': '3/1-3/17',
             '4/8-4/14': '2/27-2/33',
-            '5/5-5/9': '5/1-5/5',
-            '5/5-5/47': '5/1-5/47',
+            '5/5-5/9': '9/1-9/5',
+            '5/5-5/47': '9/1-9/47',
             '6/11-6/15': '1/1-1/5',
-            '6/5-6/15': '6/1-6/17',
-            '4/1-6/24': '4/1-7/18',
-            '7/1-7/32': '8/1-8/34',
-            '8/1-8/25': '9/1-9/27',
-            '1/1-8/26': '1/1-9/27',
+            '6/5-6/15': '10/1-10/17',
+            '4/1-6/24': '4/1-11/18',
+            '7/1-7/32': '12/1-12/34',
+            '8/1-8/25': '13/1-13/27',
+            '1/1-8/26': '1/1-13/27',
         }
 
         self.single_level_tester(code, expected=expected_code)
@@ -1204,10 +1258,10 @@ class TestsLevel8(HedyTester):
                 raise Exception('catch_index_exception')
               note = random.choice(notes)
               print(f'{note}')
-              chosen_note = note.upper()
+              chosen_note = str(note).upper()
               if chosen_note not in notes_mapping.keys() and chosen_note not in notes_mapping.values():
                   raise Exception('catch_value_exception')
-              play(notes_mapping.get(str(chosen_note), str(chosen_note)))
+              play(notes_mapping.get(chosen_note, chosen_note))
               time.sleep(0.5)
               time.sleep(0.1)""")
 
@@ -1230,10 +1284,10 @@ class TestsLevel8(HedyTester):
         expected = textwrap.dedent("""\
         notes = ['1', '2', '3']
         for i in range(int('10')):
-          chosen_note = random.choice(notes).upper()
+          chosen_note = str(random.choice(notes)).upper()
           if chosen_note not in notes_mapping.keys() and chosen_note not in notes_mapping.values():
               raise Exception('catch_value_exception')
-          play(notes_mapping.get(str(chosen_note), str(chosen_note)))
+          play(notes_mapping.get(chosen_note, chosen_note))
           time.sleep(0.5)
           time.sleep(0.1)""")
 

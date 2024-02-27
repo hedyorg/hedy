@@ -1,5 +1,6 @@
 import logging
 import os
+from os import path
 
 import static_babel_content
 
@@ -41,6 +42,7 @@ ADVENTURE_ORDER_PER_LEVEL = {
         'rock',
         'haunted',
         'story',
+        'music',
         'turtle',
         'turtle_draw_it',
         'restaurant',
@@ -57,6 +59,7 @@ ADVENTURE_ORDER_PER_LEVEL = {
         'sleep_command',
         'parrot',
         'story',
+        'music',
         'restaurant',
         'turtle',
         'turtle_draw_it',
@@ -67,6 +70,7 @@ ADVENTURE_ORDER_PER_LEVEL = {
         'random_command',
         'dice',
         'rock',
+        'music',
         'fortune',
         'restaurant',
         'add_remove_command',
@@ -88,6 +92,7 @@ ADVENTURE_ORDER_PER_LEVEL = {
         'turtle',
         'turtle_draw_it',
         'clear_command',
+        'music',
         'story',
         'haunted',
         'fortune',
@@ -97,6 +102,7 @@ ADVENTURE_ORDER_PER_LEVEL = {
     5: [
         'default',
         'if_command',
+        'music',
         'language',
         'dice',
         'dishes',
@@ -115,6 +121,7 @@ ADVENTURE_ORDER_PER_LEVEL = {
     6: [
         'default',
         'maths',
+        'music',
         'is_command',
         'songs',
         'dice',
@@ -131,6 +138,7 @@ ADVENTURE_ORDER_PER_LEVEL = {
         'repeat_command',
         'story',
         'songs',
+        'music',
         'dishes',
         'dice',
         'repeat_command_2',
@@ -146,6 +154,7 @@ ADVENTURE_ORDER_PER_LEVEL = {
         'fortune',
         'repeat_command_2',
         'songs',
+        'music',
         'if_command',
         'story',
         'haunted',
@@ -161,6 +170,7 @@ ADVENTURE_ORDER_PER_LEVEL = {
         'rock',
         'story',
         'calculator',
+        'music',
         'restaurant',
         'haunted',
         'pressit',
@@ -202,6 +212,7 @@ ADVENTURE_ORDER_PER_LEVEL = {
         'quotation_marks',
         'story',
         'fortune',
+        'music',
         'songs',
         'songs_2',
         'restaurant',
@@ -217,6 +228,7 @@ ADVENTURE_ORDER_PER_LEVEL = {
         'and_or_command',
         'secret',
         'functions',
+        'music',
         'story',
         'rock',
         'turtle_draw_it',
@@ -229,6 +241,7 @@ ADVENTURE_ORDER_PER_LEVEL = {
         'default',
         'is_command',
         'guess_my_number',
+        'music',
         'haunted',
         'functions',
         'turtle_draw_it',
@@ -392,9 +405,16 @@ HOUR_OF_CODE_ADVENTURES = {
     ]
 }
 
+# We must find our data relative to this .py file. This will give the
+# correct answer both for when Hedy is run as a webserver on Heroku, as well
+# as when it has been bundled using pyinstaller.
+data_root = path.dirname(__file__)
+
+content_dir = path.join(data_root, 'content')
+translations_dir = path.join(data_root, 'translations')
 
 RESEARCH = {}
-for paper in sorted(os.listdir('content/research'),
+for paper in sorted(os.listdir(f'{content_dir}/research'),
                     key=lambda x: int(x.split("_")[-1][:-4]),
                     reverse=True):
     # An_approach_to_describing_the_semantics_of_Hedy_2022.pdf -> 2022, An
@@ -403,16 +423,17 @@ for paper in sorted(os.listdir('content/research'),
     name = name[-4:] + ". " + name[:-5]
     RESEARCH[name] = paper
 
+
 # load all available languages in dict
 # list_translations of babel does about the same, but without territories.
 languages = {}
-if not os.path.isdir('translations'):
+if not os.path.isdir(translations_dir):
     # should not be possible, but if it's moved someday, EN would still be working.
     ALL_LANGUAGES['en'] = 'English'
     ALL_KEYWORD_LANGUAGES['en'] = 'EN'
 
-for folder in os.listdir('translations'):
-    locale_dir = os.path.join('translations', folder, 'LC_MESSAGES')
+for folder in os.listdir(translations_dir):
+    locale_dir = os.path.join(translations_dir, folder, 'LC_MESSAGES')
     if not os.path.isdir(locale_dir):
         continue
     if filter(lambda x: x.endswith('.mo'), os.listdir(locale_dir)):
@@ -422,13 +443,13 @@ for folder in os.listdir('translations'):
 
 for lang in sorted(languages):
     ALL_LANGUAGES[lang] = languages[lang]
-    if os.path.exists('./grammars/keywords-' + lang + '.lark'):
+    if os.path.exists(path.join(data_root, './grammars/keywords-' + lang + '.lark')):
         ALL_KEYWORD_LANGUAGES[lang] = lang[0:2].upper()  # first two characters
 
 # Load and cache all keyword yamls
 KEYWORDS = {}
 for lang in ALL_KEYWORD_LANGUAGES.keys():
-    KEYWORDS[lang] = YamlFile.for_file(f'content/keywords/{lang}.yaml').to_dict()
+    KEYWORDS[lang] = YamlFile.for_file(f'{content_dir}/keywords/{lang}.yaml').to_dict()
     for k, v in KEYWORDS[lang].items():
         if isinstance(v, str) and "|" in v:
             # when we have several options, pick the first one as default
@@ -454,7 +475,7 @@ class StructuredDataFile:
 class Commands(StructuredDataFile):
     def __init__(self, language):
         self.language = language
-        super().__init__(f'content/cheatsheets/{self.language}.yaml')
+        super().__init__(f'{content_dir}/cheatsheets/{self.language}.yaml')
 
     def get_commands_for_level(self, level, keyword_lang):
         return deep_translate_keywords(self.file.get(int(level), {}), keyword_lang)
@@ -493,10 +514,51 @@ class NoSuchCommand:
 class Adventures(StructuredDataFile):
     def __init__(self, language):
         self.language = language
-        super().__init__(f'content/adventures/{self.language}.yaml')
+        super().__init__(f'{content_dir}/adventures/{self.language}.yaml')
 
     def get_adventure_keyname_name_levels(self):
         return {aid: {adv['name']: list(adv['levels'].keys())} for aid, adv in self.file.get('adventures', {}).items()}
+
+    def get_sorted_level_programs(self, programs, adventure_names):
+        programs_by_level = []
+        for item in programs:
+            programs_by_level.append(
+                {'level': item['level'],
+                 'adventure_name': item.get('adventure_name'),
+                 }
+            )
+
+        sort = {}
+        for program in programs_by_level:
+            if program['level'] in sort:
+                sort[program['level']].append(adventure_names.get(program['adventure_name']))
+            else:
+                sort[program['level']] = [adventure_names.get(program['adventure_name'])]
+        for level, adventures in sort.copy().items():
+            sort[level] = sorted(adventures, key=lambda s: s.lower())
+
+        return dict(sorted(sort.items(), key=lambda item: item[0]))
+
+    def get_sorted_adventure_programs(self, programs, adventure_names):
+        programs_by_adventure = []
+        for item in programs:
+            programs_by_adventure.append(
+                {'adventure_name': adventure_names.get(item.get('adventure_name')),
+                 'level': item['level'],
+                 }
+            )
+
+        sort = {}
+        for program in programs_by_adventure:
+            if program['adventure_name'] in sort:
+                sort[program['adventure_name']].append(program['level'])
+            else:
+                sort[program['adventure_name']] = [program['level']]
+        for adventure, levels in sort.copy().items():
+            sort[adventure] = sorted(levels, key=lambda item: item)
+
+        return {key: sort[key]
+                for key in sorted(sort.keys(), key=lambda s: s.lower())}
 
     def get_adventure_names(self, keyword_lang):
         return {aid: adv['name'] for aid, adv in deep_translate_keywords(
@@ -521,7 +583,7 @@ class NoSuchAdventure:
 class ParsonsProblem(StructuredDataFile):
     def __init__(self, language):
         self.language = language
-        super().__init__(f'content/parsons/{self.language}.yaml')
+        super().__init__(f'{content_dir}/parsons/{self.language}.yaml')
 
     def get_highest_exercise_level(self, level):
         return max(int(lnum) for lnum in self.file.get('levels', {}).get(level, {}).keys())
@@ -536,7 +598,7 @@ class ParsonsProblem(StructuredDataFile):
 class Quizzes(StructuredDataFile):
     def __init__(self, language):
         self.language = language
-        super().__init__(f'content/quizzes/{self.language}.yaml')
+        super().__init__(f'{content_dir}/quizzes/{self.language}.yaml')
 
     def get_highest_question_level(self, level):
         return max(int(k) for k in self.file.get('levels', {}).get(level, {}))
@@ -558,7 +620,7 @@ class Tutorials(StructuredDataFile):
     # action on server start
     def __init__(self, language):
         self.language = language
-        super().__init__(f'content/tutorials/{self.language}.yaml')
+        super().__init__(f'{content_dir}/tutorials/{self.language}.yaml')
 
     def get_tutorial_for_level(self, level, keyword_lang="en"):
         if level not in ["intro", "teacher"]:
@@ -579,7 +641,7 @@ class NoSuchTutorial:
 class Slides(StructuredDataFile):
     def __init__(self, language):
         self.language = language
-        super().__init__(f'content/slides/{self.language}.yaml')
+        super().__init__(f'{content_dir}/slides/{self.language}.yaml')
 
     def get_slides_for_level(self, level, keyword_lang="en"):
         return deep_translate_keywords(self.file.get('levels', {}).get(level), keyword_lang)
@@ -598,7 +660,7 @@ class NoSuchTags:
 class Tags(StructuredDataFile):
     def __init__(self, language):
         self.language = language
-        super().__init__(f'content/tags/{self.language}.yaml')
+        super().__init__(f'{content_dir}/tags/{self.language}.yaml')
 
     def get_tags_names(self):
         return {tid: tags['items'] for tid, tags in self.file.get('tags', {}).items()}

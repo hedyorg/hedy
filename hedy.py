@@ -224,6 +224,7 @@ class Command:
     remove_from_list = 'remove from list'
     list_access = 'at random'
     in_list = 'in list'
+    not_in_list = 'not in list'
     equality = 'is (equality)'
     repeat = 'repeat'
     for_list = 'for in'
@@ -255,6 +256,7 @@ translatable_commands = {Command.print: ['print'],
                          Command.remove_from_list: ['remove', 'from'],
                          Command.list_access: ['at', 'random'],
                          Command.in_list: ['in'],
+                         Command.not_in_list: ['not in'],
                          Command.equality: ['is', '=', '=='],
                          Command.repeat: ['repeat', 'times'],
                          Command.for_list: ['for', 'in'],
@@ -299,20 +301,20 @@ commands_per_level = {
     2: ['print', 'ask', 'is', 'turn', 'forward', 'color', 'sleep', 'play'],
     3: ['ask', 'is', 'print', 'forward', 'turn', 'color', 'sleep', 'at', 'random', 'add', 'to', 'remove', 'from', 'play'],
     4: ['ask', 'is', 'print', 'forward', 'turn', 'color', 'sleep', 'at', 'random', 'add', 'to', 'remove', 'from', 'clear', 'play'],
-    5: ['ask', 'is', 'print', 'forward', 'turn', 'color', 'sleep', 'at', 'random', 'add', 'to', 'remove', 'from', 'in', 'not in', 'if', 'else', 'ifpressed', 'assign_button', 'clear', 'play'],
-    6: ['ask', 'is', 'print', 'forward', 'turn', 'color', 'sleep', 'at', 'random', 'add', 'to', 'remove', 'from', 'in', 'not in', 'if', 'else', 'ifpressed', 'assign_button', 'clear', 'play'],
-    7: ['ask', 'is', 'print', 'forward', 'turn', 'color', 'sleep', 'at', 'random', 'add', 'to', 'remove', 'from', 'in', 'not in', 'if', 'else', 'ifpressed', 'assign_button', 'repeat', 'times', 'clear', 'play'],
-    8: ['ask', 'is', 'print', 'forward', 'turn', 'color', 'sleep', 'at', 'random', 'add', 'to', 'remove', 'from', 'in', 'not in', 'if', 'else', 'ifpressed', 'assign_button', 'repeat', 'times', 'clear', 'play'],
-    9: ['ask', 'is', 'print', 'forward', 'turn', 'color', 'sleep', 'at', 'random', 'add', 'to', 'remove', 'from', 'in', 'not in', 'if', 'else', 'ifpressed', 'assign_button', 'repeat', 'times', 'clear', 'play'],
-    10: ['ask', 'is', 'print', 'forward', 'turn', 'color', 'sleep', 'at', 'random', 'add', 'to', 'remove', 'from', 'in', 'not in', 'if', 'else', 'ifpressed', 'assign_button', 'repeat', 'times', 'for', 'clear', 'play'],
-    11: ['ask', 'is', 'print', 'forward', 'turn', 'color', 'sleep', 'at', 'random', 'add', 'to', 'remove', 'from', 'in', 'not in', 'if', 'else', 'ifpressed', 'assign_button', 'for', 'range', 'repeat', 'clear', 'play'],
-    12: ['ask', 'is', 'print', 'forward', 'turn', 'color', 'sleep', 'at', 'random', 'add', 'to', 'remove', 'from', 'in', 'not in', 'if', 'else', 'ifpressed', 'assign_button', 'for', 'range', 'repeat', 'clear', 'define', 'call', 'play'],
-    13: ['ask', 'is', 'print', 'forward', 'turn', 'color', 'sleep', 'at', 'random', 'add', 'to', 'remove', 'from', 'in', 'not in', 'if', 'else', 'ifpressed', 'assign_button', 'for', 'range', 'repeat', 'and', 'or', 'clear', 'define', 'call', 'play'],
-    14: ['ask', 'is', 'print', 'forward', 'turn', 'color', 'sleep', 'at', 'random', 'add', 'to', 'remove', 'from', 'in', 'not in', 'if', 'else', 'ifpressed', 'assign_button', 'for', 'range', 'repeat', 'and', 'or', 'clear', 'define', 'call', 'play'],
-    15: ['ask', 'is', 'print', 'forward', 'turn', 'color', 'sleep', 'at', 'random', 'add', 'to', 'remove', 'from', 'in', 'not in', 'if', 'else', 'ifpressed', 'assign_button', 'for', 'range', 'repeat', 'and', 'or', 'while', 'clear', 'define', 'call', 'play'],
-    16: ['ask', 'is', 'print', 'forward', 'turn', 'color', 'sleep', 'at', 'random', 'add', 'to', 'remove', 'from', 'in', 'not in', 'if', 'else', 'ifpressed', 'assign_button', 'for', 'range', 'repeat', 'and', 'or', 'while', 'clear', 'define', 'call', 'play'],
-    17: ['ask', 'is', 'print', 'forward', 'turn', 'color', 'sleep', 'at', 'random', 'add', 'to', 'remove', 'from', 'in', 'not in', 'if', 'else', 'ifpressed', 'assign_button', 'for', 'range', 'repeat', 'and', 'or', 'while', 'elif', 'clear', 'define', 'call', 'play'],
-    18: ['is', 'print', 'forward', 'turn', 'color', 'sleep', 'at', 'random', 'add', 'to', 'remove', 'from', 'in', 'if', 'not in', 'else', 'for', 'ifpressed', 'assign_button', 'range', 'repeat', 'and', 'or', 'while', 'elif', 'input', 'clear', 'define', 'call', 'play'],
+    5: ['ask', 'is', 'print', 'forward', 'turn', 'color', 'sleep', 'at', 'random', 'add', 'to', 'remove', 'from', 'in', 'not_in', 'if', 'else', 'ifpressed', 'assign_button', 'clear', 'play'],
+    6: ['ask', 'is', 'print', 'forward', 'turn', 'color', 'sleep', 'at', 'random', 'add', 'to', 'remove', 'from', 'in', 'not_in', 'if', 'else', 'ifpressed', 'assign_button', 'clear', 'play'],
+    7: ['ask', 'is', 'print', 'forward', 'turn', 'color', 'sleep', 'at', 'random', 'add', 'to', 'remove', 'from', 'in', 'not_in', 'if', 'else', 'ifpressed', 'assign_button', 'repeat', 'times', 'clear', 'play'],
+    8: ['ask', 'is', 'print', 'forward', 'turn', 'color', 'sleep', 'at', 'random', 'add', 'to', 'remove', 'from', 'in', 'not_in', 'if', 'else', 'ifpressed', 'assign_button', 'repeat', 'times', 'clear', 'play'],
+    9: ['ask', 'is', 'print', 'forward', 'turn', 'color', 'sleep', 'at', 'random', 'add', 'to', 'remove', 'from', 'in', 'not_in', 'if', 'else', 'ifpressed', 'assign_button', 'repeat', 'times', 'clear', 'play'],
+    10: ['ask', 'is', 'print', 'forward', 'turn', 'color', 'sleep', 'at', 'random', 'add', 'to', 'remove', 'from', 'in', 'not_in', 'if', 'else', 'ifpressed', 'assign_button', 'repeat', 'times', 'for', 'clear', 'play'],
+    11: ['ask', 'is', 'print', 'forward', 'turn', 'color', 'sleep', 'at', 'random', 'add', 'to', 'remove', 'from', 'in', 'not_in', 'if', 'else', 'ifpressed', 'assign_button', 'for', 'range', 'repeat', 'clear', 'play'],
+    12: ['ask', 'is', 'print', 'forward', 'turn', 'color', 'sleep', 'at', 'random', 'add', 'to', 'remove', 'from', 'in', 'not_in', 'if', 'else', 'ifpressed', 'assign_button', 'for', 'range', 'repeat', 'clear', 'define', 'call', 'play'],
+    13: ['ask', 'is', 'print', 'forward', 'turn', 'color', 'sleep', 'at', 'random', 'add', 'to', 'remove', 'from', 'in', 'not_in', 'if', 'else', 'ifpressed', 'assign_button', 'for', 'range', 'repeat', 'and', 'or', 'clear', 'define', 'call', 'play'],
+    14: ['ask', 'is', 'print', 'forward', 'turn', 'color', 'sleep', 'at', 'random', 'add', 'to', 'remove', 'from', 'in', 'not_in', 'if', 'else', 'ifpressed', 'assign_button', 'for', 'range', 'repeat', 'and', 'or', 'clear', 'define', 'call', 'play'],
+    15: ['ask', 'is', 'print', 'forward', 'turn', 'color', 'sleep', 'at', 'random', 'add', 'to', 'remove', 'from', 'in', 'not_in', 'if', 'else', 'ifpressed', 'assign_button', 'for', 'range', 'repeat', 'and', 'or', 'while', 'clear', 'define', 'call', 'play'],
+    16: ['ask', 'is', 'print', 'forward', 'turn', 'color', 'sleep', 'at', 'random', 'add', 'to', 'remove', 'from', 'in', 'not_in', 'if', 'else', 'ifpressed', 'assign_button', 'for', 'range', 'repeat', 'and', 'or', 'while', 'clear', 'define', 'call', 'play'],
+    17: ['ask', 'is', 'print', 'forward', 'turn', 'color', 'sleep', 'at', 'random', 'add', 'to', 'remove', 'from', 'in', 'not_in', 'if', 'else', 'ifpressed', 'assign_button', 'for', 'range', 'repeat', 'and', 'or', 'while', 'elif', 'clear', 'define', 'call', 'play'],
+    18: ['is', 'print', 'forward', 'turn', 'color', 'sleep', 'at', 'random', 'add', 'to', 'remove', 'from', 'in', 'if', 'not_in', 'else', 'for', 'ifpressed', 'assign_button', 'range', 'repeat', 'and', 'or', 'while', 'elif', 'input', 'clear', 'define', 'call', 'play'],
 }
 
 command_turn_literals = ['right', 'left']
@@ -357,6 +359,7 @@ commands_and_types_per_level = {
                        },
     Command.list_access: {1: [HedyType.list]},
     Command.in_list: {1: [HedyType.list]},
+    Command.not_in_list: {1: [HedyType.list]},
     Command.add_to_list: {1: [HedyType.list]},
     Command.remove_from_list: {1: [HedyType.list]},
     Command.equality: {1: [HedyType.string, HedyType.integer, HedyType.input, HedyType.float],
@@ -754,6 +757,10 @@ class TypeValidator(Transformer):
         self.validate_args_type_allowed(Command.in_list, tree.children[1], tree.meta)
         return self.to_typed_tree(tree, HedyType.boolean)
 
+    def not_in_list_check(self, tree):
+        self.validate_args_type_allowed(Command.not_in_list, tree.children[1], tree.meta)
+        return self.to_typed_tree(tree, HedyType.boolean)
+
     def equality_check(self, tree):
         if self.level < 12:
             rules = [int_to_float, int_to_string, float_to_string, input_to_string, input_to_int, input_to_float]
@@ -832,7 +839,7 @@ class TypeValidator(Transformer):
         return self.to_sum_typed_tree(tree, Command.division)
 
     def to_sum_typed_tree(self, tree, command):
-        rules = [int_to_float, input_to_int, input_to_float]
+        rules = [int_to_float, input_to_int, input_to_float, input_to_string]
         prom_left_type, prom_right_type = self.validate_binary_command_args_type(command, tree, rules)
         return TypedTree(tree.data, tree.children, tree.meta, prom_left_type)
 
@@ -1404,6 +1411,13 @@ class ConvertToPython(Transformer):
             arg = arg[1:-1]
         return f"'{process_characters_needing_escape(arg)}'"
 
+    def process_variable_without_quotes(self, arg, access_line_number=100):
+        if self.is_variable(arg, access_line_number):
+            # add this access line to the lookup table
+            self.add_variable_access_location(arg, access_line_number)
+            return escape_var(arg)
+        return arg
+
     def process_variable_for_fstring(self, variable_name, access_line_number=100):
         self.add_variable_access_location(variable_name, access_line_number)
 
@@ -1436,8 +1450,9 @@ class ConvertToPython(Transformer):
         return name
 
     def check_var_usage(self, args, var_access_linenumber=100):
-        # this function checks whether arguments are valid
-        # we can proceed if all arguments are either quoted OR all variables
+        # This function should be used up until level 11 where quotes around strings are NOT required
+        # It succeeds if all args are valid. An arg is valid if it is either quoted or a variable
+        # If an unquoted arg is not present in the lookup table, an UndefinedVarException is raised
 
         def is_var_candidate(arg) -> bool:
             return not isinstance(arg, Tree) and \
@@ -1463,6 +1478,30 @@ class ConvertToPython(Transformer):
                 if current_arg is None:
                     first_unquoted_var = a
                     raise exceptions.UndefinedVarException(name=first_unquoted_var, line_number=var_access_linenumber)
+
+    def check_var_usage_when_quotes_are_required(self, arg, meta):
+        # This method should be used from level 12 and up where quotes around strings are required
+        # The arg is valid if it is either an int, a float, the 'random' operator, a quoted string,
+        # or a variable. If the arg is an unquoted string which is not in the lookup table, an
+        # UnquotedAssignTextException is raised. Most likely the real is that the kid forgot to add quotes.
+        try:
+            self.check_var_usage([arg], meta.line)
+        except exceptions.UndefinedVarException:
+            if not (ConvertToPython.is_int(arg) or
+                    ConvertToPython.is_float(arg) or
+                    ConvertToPython.is_random(arg)):
+                raise exceptions.UnquotedAssignTextException(text=arg, line_number=meta.line)
+
+    def code_to_ensure_variable_type(self, arg, expected_type, command, suggested_type):
+        if not self.is_variable(arg):
+            return ""
+        exception = translate_value_error(command, f'{{{arg}}}', suggested_type)
+        return textwrap.dedent(f"""\
+            try:
+              {expected_type}({arg})
+            except ValueError:
+              raise Exception(f{exception})
+            """)
 
     # static methods
 
@@ -1617,10 +1656,10 @@ class ConvertToPython_1(ConvertToPython):
         self.check_var_usage([note], meta.line)
 
         return textwrap.dedent(f"""\
-                chosen_note = {note}.upper()
+                chosen_note = str({note}).upper()
                 if chosen_note not in notes_mapping.keys() and chosen_note not in notes_mapping.values():
                     raise Exception({exception_text})
-                play(notes_mapping.get(str(chosen_note), str(chosen_note)))
+                play(notes_mapping.get(chosen_note, chosen_note))
                 time.sleep(0.5)""")
 
     def make_color(self, parameter, language):
@@ -2198,7 +2237,8 @@ class ConvertToPython_7(ConvertToPython_6):
         command = args[1]
         # in level 7, repeats can only have 1 line as their arguments
         command = add_sleep_to_command(command, False, self.is_debug, location="after")
-        return f"""for {var_name} in range(int({str(times)})):{self.add_debug_breakpoint()}
+        type_check = self.code_to_ensure_variable_type(times, 'int', Command.repeat, 'number')
+        return f"""{type_check}for {var_name} in range(int({str(times)})):{self.add_debug_breakpoint()}
 {ConvertToPython.indent(command)}"""
 
 
@@ -2222,8 +2262,8 @@ class ConvertToPython_8_9(ConvertToPython_7):
         all_lines = [ConvertToPython.indent(x) for x in args[1:]]
         body = "\n".join(all_lines)
         body = add_sleep_to_command(body, indent=True, is_debug=self.is_debug, location="after")
-
-        return f"for {var_name} in range(int({times})):{self.add_debug_breakpoint()}\n{body}"
+        type_check = self.code_to_ensure_variable_type(times, 'int', Command.repeat, 'number')
+        return f"""{type_check}for {var_name} in range(int({times})):{self.add_debug_breakpoint()}\n{body}"""
 
     def ifs(self, meta, args):
         all_lines = [ConvertToPython.indent(x) for x in args[1:]]
@@ -2447,24 +2487,25 @@ class ConvertToPython_12(ConvertToPython_11):
         values = args[1:]
         return parameter + " = [" + ", ".join(values) + "]" + self.add_debug_breakpoint()
 
+    def in_list_check(self, meta, args):
+        left_hand_side = args[0]
+        right_hand_side = args[1]
+        self.check_var_usage_when_quotes_are_required(left_hand_side, meta)
+        self.check_var_usage_when_quotes_are_required(right_hand_side, meta)
+        return f"{left_hand_side} in {right_hand_side}"
+
+    def not_in_list_check(self, meta, args):
+        left_hand_side = args[0]
+        right_hand_side = args[1]
+        self.check_var_usage_when_quotes_are_required(left_hand_side, meta)
+        self.check_var_usage_when_quotes_are_required(right_hand_side, meta)
+        return f"{left_hand_side} not in {right_hand_side}"
+
     def assign(self, meta, args):
         right_hand_side = args[1]
         left_hand_side = args[0]
 
-        # we now need to check if the right hand side of te assign is
-        # either a var or quoted, if it is not (and undefined var is raised)
-        # the real issue is probably that the kid forgot quotes
-        try:
-            # check_var_usage expects a list of arguments so place this one in a list.
-            self.check_var_usage([right_hand_side], meta.line)
-        except exceptions.UndefinedVarException:
-            # is the text a number? then no quotes are fine. if not, raise maar!
-
-            if not (ConvertToPython.is_int(right_hand_side) or ConvertToPython.is_float(
-                    right_hand_side) or ConvertToPython.is_random(right_hand_side)):
-                raise exceptions.UnquotedAssignTextException(
-                    text=args[1],
-                    line_number=meta.line)
+        self.check_var_usage_when_quotes_are_required(right_hand_side, meta)
 
         if isinstance(right_hand_side, Tree):
             exception = self.make_catch_exception([right_hand_side.children[0]])
