@@ -103,12 +103,12 @@ levels:
             header: Desenhando com a tartaruga
             text: '`{forward}` is used to move the turtle forward.'
         10:
-            header: 'Drawing with the turtle: {forward}'
-            text: '`{forward}` is used to move the turtle forward.'
+            header: 'Desenhando com a tartaruga: {forward}'
+            text: '`{forward}` é usado para mover a tartaruga adiante.'
             code: '{forward} 50'
         11:
             header: 'Desenhando com a tartaruga: {turn}'
-            text: '`{turn}` is used to make the turtle turn left or right.'
+            text: '`{turn}` é usado para fazer a tartaruga virar à direita ou à esquerda.'
             code: |-
                 {forward} 50
                 {turn} {left}
@@ -128,14 +128,14 @@ levels:
         1:
             header: Bem-vindo(a) ao nível 2
             text: |-
-                In this level you will learn to use variables.
+                Neste nível, você irá aprender a usar variáveis.
 
-                A variable is a word that can be used to store information.
+                Uma variável é uma palavra que pode ser usada para guardar uma informação.
 
-                For example: a name, age or favorite sports team.
+                Por exemplo: um nome, uma idade ou um time favorito.
         2:
             header: Variáveis
-            text: To make or 'set' a variable we use the `{is}` command
+            text: Para criar ou 'definir' uma variável, usamos o comando `{is}`
             code: |-
                 nome {is} Hedy
                 idade {is} 15
@@ -149,18 +149,18 @@ levels:
 
                 This way we don't need the `{echo}`  command.
             code: |-
-                name {is} {ask} What is your name?
-                {print} Hello name
+                nome {is} {ask} Qual é o seu nome?
+                {print} Olá nome
         4:
-            header: Multiple variables
-            text: Now that we use variables, we can use multiple variables instead of just one `{echo}`command.
+            header: Múltiplas variáveis
+            text: Agora que nós usamos variáveis, podemos usar várias delas ao invés de ter um só comando `{echo}`.
             code: |-
-                name {is} {ask} What is your name?
-                {print} Hello name
-                age {is} {ask} How old are you?
-                {print} name is age years old.
+                nome {is} {ask} Qual é o seu nome?
+                {print} Olá nome
+                idade {is} {ask} Quantos anos você tem?
+                {print} nome tem idade anos.
         5:
-            header: Sleep
+            header: Durma
             text: You can also use the `{sleep}` command to pause the code for a while.
             code: |-
                 {print} My favorite colour is...
@@ -985,8 +985,7 @@ levels:
                     {print} 'That is a shame!'
         4:
             header: Return value
-            text: In the previous levels you have learned to create functions and use arguments with them. Another great use of a function is to let it calculate something for you. You can give the function a calculation and it will give you the answer of the calculation. This answer is called a **return
-                value**.
+            text: In the previous levels you have learned to create functions and use arguments with them. Another great use of a function is to let it calculate something for you. You can give the function a calculation and it will give you the answer of the calculation. This answer is called a **return value**.
         5:
             header: Return value
             text: For example, in this code the function calculate_new_price will calculate the new price of any item. It will give you the new price as a return value.
@@ -1097,8 +1096,7 @@ levels:
     18:
         1:
             header: Bem-vindo(a) ao nível 18
-            text: Congratulations! You have reached the last level of Hedy! The code you have created here can be copied to real Python environments like replit or PyCharm, and you can continue learning there! Note however that Python can only read English commands, so if you have been using other languages,
-                you will need to switch to English now.
+            text: Congratulations! You have reached the last level of Hedy! The code you have created here can be copied to real Python environments like replit or PyCharm, and you can continue learning there! Note however that Python can only read English commands, so if you have been using other languages, you will need to switch to English now.
         2:
             header: The Python way
             text: |-
