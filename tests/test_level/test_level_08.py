@@ -1307,3 +1307,30 @@ class TestsLevel8(HedyTester):
             expected=expected,
             max_level=11
         )
+
+    def test_play_repeat_with_calc(self):
+        code = textwrap.dedent("""\
+        note is 34
+        repeat 3 times
+            play note
+            note is note + 1""")
+
+        expected = textwrap.dedent("""\
+        note = '34'
+        for i in range(int('3')):
+          chosen_note = str(note).upper()
+          if chosen_note not in notes_mapping.keys() and chosen_note not in notes_mapping.values():
+              raise Exception('catch_value_exception')
+          play(notes_mapping.get(chosen_note, chosen_note))
+          time.sleep(0.5)
+          note = int(note) + int(1)
+          time.sleep(0.1)""")
+
+        self.multi_level_tester(
+            code=code,
+            translate=False,
+            skip_faulty=False,
+            unused_allowed=True,
+            expected=expected,
+            max_level=11
+        )

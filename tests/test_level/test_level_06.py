@@ -137,6 +137,34 @@ class TestsLevel6(HedyTester):
         )
 
     #
+    # music tests
+    #
+    @parameterized.expand([
+        ('*', '*'),
+        ('/', '//'),
+        ('+', '+'),
+        ('-', '-')
+    ])
+    def test_play_calculation(self, op, expected_op):
+        code = textwrap.dedent(f"""\
+            note is 34
+            play note {op} 1""")
+        expected = textwrap.dedent(f"""\
+            note = '34'
+            chosen_note = str(int(note) {expected_op} int(1)).upper()
+            if chosen_note not in notes_mapping.keys() and chosen_note not in notes_mapping.values():
+                raise Exception('catch_value_exception')
+            play(notes_mapping.get(chosen_note, chosen_note))
+            time.sleep(0.5)""")
+
+        self.multi_level_tester(
+            code=code,
+            translate=False,
+            expected=expected,
+            max_level=11
+        )
+
+    #
     # if tests
     #
     def test_if_equality_linebreak_print(self):
