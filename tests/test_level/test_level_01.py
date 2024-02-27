@@ -286,6 +286,21 @@ class TestsLevel1(HedyTester):
             translate=False  # we are trying a Dutch keyword in en, can't be translated
         )
 
+    def test_play_no_args(self):
+        code = "play "
+        expected = textwrap.dedent("""\
+        if 'C4' not in notes_mapping.keys() and 'C4' not in notes_mapping.values():
+            raise Exception('catch_value_exception')
+        play(notes_mapping.get(str('C4'), str('C4')))
+        time.sleep(0.5)""")
+
+        self.multi_level_tester(
+            code=code,
+            translate=False,
+            expected=expected,
+            max_level=2
+        )
+
     def test_play(self):
         code = "play A"
         expected = textwrap.dedent("""\
@@ -297,8 +312,7 @@ class TestsLevel1(HedyTester):
         self.multi_level_tester(
             code=code,
             translate=False,
-            expected=expected,
-            max_level=17
+            expected=expected
         )
 
     def test_print_microbit(self):
@@ -328,8 +342,21 @@ class TestsLevel1(HedyTester):
         self.multi_level_tester(
             code=code,
             translate=False,
-            expected=expected,
-            max_level=17
+            expected=expected
+        )
+
+    def test_play_int(self):
+        code = "play 34"
+        expected = textwrap.dedent("""\
+        if '34' not in notes_mapping.keys() and '34' not in notes_mapping.values():
+            raise Exception('catch_value_exception')
+        play(notes_mapping.get(str('34'), str('34')))
+        time.sleep(0.5)""")
+
+        self.multi_level_tester(
+            code=code,
+            translate=False,
+            expected=expected
         )
 
     def test_mixes_languages_nl_en(self):
