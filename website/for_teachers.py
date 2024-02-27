@@ -733,11 +733,13 @@ class ForTeachersModule(WebsiteModule):
         modal_text = gettext('reset_adventure_prompt')
         htmx_endpoint = f'/for-teachers/restore-adventures/level/{level}'
         htmx_target = "#adventure-dragger"
+        htmx_swap = "outerHTML"
         htmx_indicator = "#indicator"
         return render_partial('modal/htmx-modal-confirm.html',
                               modal_text=modal_text,
                               htmx_endpoint=htmx_endpoint,
                               htmx_target=htmx_target,
+                              htmx_swap=htmx_swap,
                               htmx_indicator=htmx_indicator)
 
     @route("/customize-class/<class_id>", methods=["POST"])
