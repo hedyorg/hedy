@@ -1304,6 +1304,9 @@ class IsValid(Filter):
     def error_for_missing_command(self, meta, args):
         raise exceptions.IncompleteCommandException(incomplete_command='for', level=self.level, line_number=meta.line)
 
+    def error_assign_list_missing_brackets(self, meta, args):
+        raise exceptions.MissingBracketsException(level=self.level, line_number=meta.line)
+
     def error_nested_define(self, meta, args):
         raise exceptions.NestedFunctionException()
 

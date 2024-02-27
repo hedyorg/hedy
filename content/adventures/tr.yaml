@@ -75,7 +75,7 @@ adventures:
 
                     ### Alıştırma
                     Önceki seviyelerdeki hikayenizi bu seviyeye kopyalayın.
-                    Bu seviyede, 3 yeni komut öğrendiniz `{at} {random}` , `{add} {to}` ve `{remove} {from}`.
+                    Bu seviyede, 3 yeni komut öğrendiniz `{at} {random}` , `{add} {to_list}` ve `{remove} {from}`.
                     Hikayenize yeni kod satırları ekleyin, böylece tüm yeni komutlar hikayenizde en az bir kez yer alsın.
                 example_code_3: |
                     ```
@@ -286,7 +286,7 @@ adventures:
             3:
                 story_text: |
                     ## ekle şuraya
-                    Listeye `{add} {to}` komutu ile yeni öğeler ekleyebilirsiniz. Listeye bir öğe eklemek için sadece şunu yazın: `{add} penguen {to} hayvanlar` , ya da örnek koddaki gibi `{ask}` komutunu kullanabilirsiniz.
+                    Listeye `{add} {to_list}` komutu ile yeni öğeler ekleyebilirsiniz. Listeye bir öğe eklemek için sadece şunu yazın: `{add} penguen {to} hayvanlar` , ya da örnek koddaki gibi `{ask}` komutunu kullanabilirsiniz.
                 example_code: |
                     ```
                     hayvanlar {is} köpek, kedi, kanguru
@@ -1442,7 +1442,7 @@ adventures:
                 story_text: |
                     Şimdi girintilemeyi biraz değiştireceğiz. Her girintiye ihtiyaç duyduğumuzda, girintiden önceki satırda `:` işaretine ihtiyacımız var.
 
-                    Bu seviyede yeni bir komut da kullanabilirsiniz: `{elif}`. `{elif}` {else} {if}'in kısaltmasıdır ve 3 (veya daha fazla!) seçenek arasından seçim yapmak istediğinizde buna ihtiyacınız vardır.
+                    Bu seviyede yeni bir komut da kullanabilirsiniz: `{elif}`. `{elif}` `{else} {if}`'in kısaltmasıdır ve 3 (veya daha fazla!) seçenek arasından seçim yapmak istediğinizde buna ihtiyacınız vardır.
                     Şuna bir bakın!
             18:
                 story_text: |
@@ -2566,7 +2566,7 @@ adventures:
                     C1 is the lowest note you can play, C10 is the highest.
 
                     ### Exercise
-                    Try out the example code and thenplay around with it! Can you create your own melody?
+                    Try out the example code and then play around with it! Can you create your own melody?
                     In the next level you'll learn how to play some existing songs.
                 example_code: |-
                     ```
@@ -2885,7 +2885,7 @@ adventures:
                 story_text: |
                     Papağanınıza `{add}` ile yeni bir kelime öğretin.
                     ### Alıştırma
-                    Kodun çalışması için `{add} {to}` komutunu ekleyebilir misiniz?
+                    Kodun çalışması için `{add} {to_list}` komutunu ekleyebilir misiniz?
                 example_code: |
                     ```
                     kelimeler {is} gaak, Hedy
