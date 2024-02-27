@@ -821,7 +821,8 @@ def translate_error(code, arguments, keyword_lang):
         'echo',
         'is',
         'if',
-        'repeat']
+        'repeat',
+        '[]']
 
     # Todo TB -> We have to find a more delicate way to fix this: returns some gettext() errors
     error_template = gettext('' + str(code))
@@ -2441,6 +2442,8 @@ def get_user_messages():
         return session.get('messages')
     return None
 
+
+app.add_template_global(utils.prepare_content_for_ckeditor, name="prepare_content_for_ckeditor")
 
 # Todo TB: Re-write this somewhere sometimes following the line below
 # We only store this @app.route here to enable the use of achievements ->
