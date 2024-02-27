@@ -1783,14 +1783,14 @@ adventures:
                     In the next example you can have your fortune teller {ask} 3 questions and also print them!
                 example_code: |
                     ```
-                    {print} 'I am Hedy the fortune teller!'
-                    {print} 'You can ask me 3 questions.'
-                    answers = yes, no, maybe
+                    {print} 'Eu sou Hedy, a vidente!'
+                    {print} 'Você pode me fazer 3 perguntas.'
+                    respostas = sim, não, talvez
                     _ _ _
-                       question = {ask} 'What do you want to know?'
-                       {print} question
+                       pergunta = {ask} 'O que você quer saber?'
+                       {print} pergunta
                        {sleep}
-                       {print} 'My crystal ball says...' answers {at} {random}
+                       {print} 'Minha bola de cristal diz... ' answers {at} {random}
                     ```
             10:
                 story_text: |
@@ -1984,31 +1984,24 @@ adventures:
                     {print} ...?
                     ```
                 story_text_2: |
-                    Você pode terminar a história assustadora? Ou inventar sua própria história de casa mal-assombrada?
+                    ### Exercício
+                    Copie o código exemplo à sua tela de entrada clicando no botão amarelo.
+                    Agora termine a história adicionando pelo menos 5 linhas de código.
+                    Lembre-se de começar cada linha com um comando `{print}`.
             2:
                 story_text: |
-                    In this haunted house you can choose your monsters with emojis. Of course you could also use words.
-
-                    ```
-                    monster1 {is} 👻
-                    monster2 {is} 🤡
-                    monster3 {is} 👶
-                    {print} You enter the haunted house.
-                    {print} Suddenly you see a monster1
-                    {print} You run into the other room, but a monster2 is waiting there for you!
-                    {print} Oh no! Quickly get to the kitchen.
-                    {print} But as you enter monster3 attacks you!
-                    ```
+                    Nesta casa mal-assombrada, você pode escolher seus montros com emojis. Mas claro, você também poderia usar palavras.
                 example_code: |
                     ```
-                    monster_1 {is} 👻
-                    monster_2 {is} 🤡
-                    monster_3 {is} 👶
-                    {print} You enter the haunted house.
-                    {print} Suddenly you see a monster_1
-                    {print} You run into the other room, but a monster_2 is waiting there for you!
-                    {print} Oh no! Quickly get to the kitchen.
-                    {print} But as you enter monster_3 attacks you!
+                    monstro_1 {is} 👻
+                    monstro_2 {is} 🤡
+                    monstro_3 {is} 👶
+                    {print} Você entra na casa mal-assombrada.
+                    {print} De repente, você vê um monstro_1
+                    {print} Você corre para a outra sala...
+                    {print} Mas um monstro_2 está lá te esperando!
+                    {print} Oh não! Você vai depressa até a cozinha.
+                    {print} Mas ao entrar, um monstro_3 te ataca!
                     ```
                 story_text_2: |
                     ### Exercise
@@ -2016,14 +2009,15 @@ adventures:
                     Can you add `{ask}` commands to make the haunted house interactive and have the players choose the monsters they come across?
                 example_code_2: |
                     ```
-                    monster_1 {is} _
-                    monster_2 {is} _
-                    monster_3 {is} _
-                    {print} You enter the haunted house.
-                    {print} Suddenly you see a monster_1
-                    {print} You run into the other room, but a monster_2 is waiting there for you!
-                    {print} Oh no! Quickly get to the kitchen.
-                    {print} But as you enter monster_3 attacks you!
+                    monstro_1 {is} _
+                    monstro_2 {is} _
+                    monstro_3 {is} _
+                    {print} Você entra na casa mal-assombrada.
+                    {print} De repente, você vê um monstro_1
+                    {print} Você corre para a outra sala...
+                    {print} Mas um monstro_2 está lá te esperando!
+                    {print} Oh não! Você vai depressa até a cozinha.
+                    {print} Mas ao entrar, um monstro_3 te ataca!
                     ```
             3:
                 story_text: |
@@ -2213,31 +2207,31 @@ adventures:
         levels:
             5:
                 story_text: |
-                    ## If... else....
-                    In level 5 there is something new, the `{if}`! With the `{if}` you can choose between two different options.
-                    This code prints nice if you enter Hedy as a name, and boo! if you enter something else.
-                    `{ask}` and `{print}` still work like they did in level 4.
+                    ## Se... senão....
+                    No nível 5, há um comando novo: o `{if}`! Com o `{if}` você pode escolher entre duas opções diferentes.
+                    Este código imprime 'legal' se você digita Hedy como nome, e 'meh!' se você digita outra coisa.
+                    `{ask}` e `{print}` ainda funcionam da mesma forma que no nível 4.
                 example_code: |
                     ```
-                    name {is} {ask} 'what is your name?'
-                    {if} name {is} Hedy {print} 'nice' {else} {print} 'boo!'
+                    nome {is} {ask} 'qual é o seu nome?'
+                    {if} nome {is} Hedy {print} 'legal' {else} {print} 'meh!'
                     ```
                 story_text_2: |
-                    Sometimes code with an `{if}` gets really long and does not fit on the line well. <br> You may also divide the code over two lines, starting the second line at the `{else}` like this:
+                    Às vezes, códigos com um `{if}` ficam bem longos e não cabem direito na linha. <br> Você também pode dividir o código em duas linhas, começando a segunda linha com o `{else}`, assim:
                 example_code_2: |
                     ```
-                    name {is} {ask} 'what is your name?'
-                    {if} name {is} Hedy {print} 'nice'
-                    {else} {print} 'boo!'
+                    nome {is} {ask} 'qual é o seu nome?'
+                    {if} nome {is} Hedy {print} 'legal'
+                    {else} {print} 'meh!'
                     ```
                 story_text_3: |
-                    ### Exercise
-                    Try to create your own code with `{if}` and `{else}`. You can use the example code if you want.
+                    ### Exercício
+                    Tente criar seu próprio código com `{if}` e `{else}`. Você pode usar o código exemplo se quiser.
                 example_code_3: |
                     ```
-                    answer {is} {ask} '2 + 2 = ?'
-                    _ _ _ 4 _ 'Great job!'
-                    _ _ 'No 2 + 2 = 4'
+                    resposta {is} {ask} '2 + 2 = ?'
+                    _ _ _ 4 _ 'Ótimo trabalho!'
+                    _ _ 'Não, 2 + 2 = 4'
                     ```
             8:
                 story_text: |
@@ -2437,45 +2431,43 @@ adventures:
                     In this level you can also do addition with words like this:
                 example_code_2: |
                     ```
-                    a = 'Hello '
-                    b = 'world!'
+                    a = 'Olá '
+                    b = 'mundo!'
                     {print} a + b
                     ```
-
-                    {print} 2.5 + 2.5
     music:
-        name: music
-        default_save_name: music
-        description: Play a tune!
+        name: música
+        default_save_name: música
+        description: Toque uma música!
         levels:
             1:
                 story_text: |-
-                    In this level you'll learn how to use the `{play}` command to play a tune!
+                    Neste nível, você irá aprender a usar o comando `{play}` para tocar uma melodia!
 
-                    Type `{play}` followed by the note you want to play. The scale goes C-D-E-F-G-A-B.
-                    As you can see there are 7 different letters, but we can play more than just 7 notes.
-                    Type a number between 1 and 10 behind the letter to choose the scale, for example after B4 comes C5.
-                    C1 is the lowest note you can play, C10 is the highest.
+                    Digite `{play}` seguido da nota que você quer tocar. A escala vai assim: C-D-E-F-G-A-B (no lugar de Dó, Ré, Mi, Fá, Sol, Lá, Si; nessa ordem)
+                    Como pode ver, há 7 letras diferentes, mas podemos tocar mais do que apenas 7 notas.
+                    Digite um número entre 1 e 10 depois da letra para escolher a escala. Por exemplo, depois de B4 vem C5.
+                    C1 é a nota mais grave que você pode tocar, e C10, a mais aguda.
 
-                    ### Exercise
-                    Try out the example code and thenplay around with it! Can you create your own melody?
-                    In the next level you'll learn how to play some existing songs.
+                    ### Exercício
+                    Experimente o código exemplo e então brinque com ele! Você consegue criar sua própria melodia?
+                    No próximo nível, você aprenderá a tocar algumas músicas já existentes.
                 example_code: |-
                     ```
-                    play C4
-                    play D4
-                    play E4
-                    play F4
-                    play G4
-                    play A4
-                    play B4
-                    play C5
+                    {play} C4
+                    {play} D4
+                    {play} E4
+                    {play} F4
+                    {play} G4
+                    {play} A4
+                    {play} B4
+                    {play} C5
                     ```
             2:
-                story_text: Finish the songs! We have started the codes for some melodies.
+                story_text: Termine as canções! Nós começamos os códigos para algumas melodias.
                 example_code: |
                     ```
-                    {print} Old Mac Donald had a farm
+                    {print} O Velho MacDonald tinha uma fazenda
                     {play} C5
                     {play} C5
                     {play} C5
@@ -2484,10 +2476,10 @@ adventures:
                     {play} A4
                     {play} G4
                     ```
-                story_text_2: As you can see, you can also use the `{sleep}` command to add a little pause in the song.
+                story_text_2: Como pode ver, você também pode usar o comando `{sleep}` para dar uma pequena pausa na música.
                 example_code_2: |
                     ```
-                    {print} Twinkle Twinkle Little Star
+                    {print} Brilha Brilha Estrelinha
                     {play} C
                     {play} C
                     {play} G
@@ -2501,17 +2493,17 @@ adventures:
                     ```
             3:
                 story_text: |
-                    Create a random melody!
+                    Crie uma melodia aleatória!
 
-                    ### Exercise
-                    The example code creates a random melody, but it's very short and not many notes are used.
-                    Add more notes to the list and create a longer melody by copying the last line a couple more times.
+                    ### Exercício
+                    O código exemplo cria uma melodia aleatória, mas ela é bem curta e não usa muitas notas.
+                    Adicione mais notas à lista e crie uma meloda mais longa copiando a última linha mais algumas vezes.
                 example_code: |
                     ```
-                    notes {is} A4, B4, C4
-                    {play} notes {at} {random}
-                    {play} notes {at} {random}
-                    {play} notes {at} {random}
+                    notas {is} A4, B4, C4
+                    {play} notas {at} {random}
+                    {play} notas {at} {random}
+                    {play} notas {at} {random}
                     ```
             4:
                 story_text: |
@@ -2552,8 +2544,8 @@ adventures:
                     Then think of 3 more questions to add to this quiz.
                 example_code: |
                     ```
-                    answer {is} {ask} 'What is the capital of Zimbabwe?'
-                    {if} answer {is} Harare {play} C6
+                    resposta {is} {ask} 'Qual é a capital do Zimbábue?'
+                    {if} resposta {is} Harare {play} C6
                     _
                     ```
             6:
@@ -2580,7 +2572,7 @@ adventures:
                     Then go back to the songs you've made in the previous levels. Can you shorten those codes too?
                 example_code: |
                     ```
-                    {print} 'Twinkle Twinkle Little Star'
+                    {print} 'Brilha Brilha Estrelinha'
                     {repeat} 2 {times} {play} C4
                     {repeat} 2 {times} {play} G4
                     _
@@ -2737,17 +2729,19 @@ adventures:
                     Crie seu próprio papagaio de estimação online que irá copiar você!
                 example_code: |
                     ```
-                    {print} Eu sou Hedy a papagaio
+                    {print} Sou Hedy, a papagaia
                     {ask} qual é o seu nome?
                     {echo}
                     {echo}
                     ```
                 story_text_2: |
-                    ### Exercise
-                    Can you make the parrot ask a different question? Fill in the blanks in the example!
+                    ### Exercício
+                    Copie o código exemplo à sua tela de entrada clicando no botão amarelo.
+                    Faça o papagaio perguntar outra coisa. Preencha as lacunas no exemplo!
+                    **Extra** Você também pode deixar o papagaio fazer múltiplas perguntas. Escreva mais algumas linhas de código embaixo de seu programa.
                 example_code_2: |
                     ```
-                    {print} Im Hedy the parrot
+                    {print} Sou Hedy, a papagaia
                     {ask} _
                     {echo}
                     {echo}
@@ -2756,12 +2750,12 @@ adventures:
                     Crie seu próprio papagaio de estimação online que irá copiar você!
                 example_code: |
                     ```
-                    {print} Eu sou Hedy a papagaio
-                    nome {is} {ask} qual é o seu nome?
+                    {print} Sou Hedy, a papagaia
+                    nome _ _ qual é o seu nome?
                     {print} nome
-                    {sleep}
-                    {print} grasnar
-                    {sleep}
+                    _
+                    {print} crrác
+                    _
                     {print} nome
                     ```
                 story_text_2: |
@@ -2770,13 +2764,15 @@ adventures:
             3:
                 story_text: |
                     Ensine ao seu papagaio uma nova palavra com `{add}`.
+                    ### Exercício
+                    Você consegue adicionar o comando `{add} {to_list}` de modo a fazer o código funcionar?
                 example_code: |
                     ```
-                    palavras {is} grasnar, Hedy
-                    {print} Treine seu papagaio!
-                    nova_palavra {is} {ask} Qual palavra você quer ensinar a ele?
-                    {add} nova_palavra {to_list} palavras
-                    {print} 🧒 Diga nova_palavra , Hedy!
+                    palavras {is} crrác, Hedy
+                    {print} Treine sua papagaia!
+                    nova_palavra {is} {ask} Qual palavra você quer ensinar a ela?
+                    _ nova_palavra _ palavras
+                    {print} 🧒 Diga nova_palavra, Hedy!
                     {print} 🦜 palavras {at} {random}
                     ```
             4:
