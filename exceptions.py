@@ -287,7 +287,7 @@ class UnquotedAssignTextException(HedyException):
 
 class MissingBracketsException(HedyException):
     def __init__(self, level, line_number):
-        super().__init__('Missing Brackets',
+        super().__init__('Missing Square Brackets',
                          line_number=line_number)
 
 
