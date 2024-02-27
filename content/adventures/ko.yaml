@@ -75,7 +75,7 @@ adventures:
 
                     ### 연습문제
                     이전 레벨에서 이 레벨로 스토리를 복사합니다.
-                    이 레벨에서는 `{at} {random}`, `{add} {to}` 및 `{remove} {from}` 명령 3개를 새로 배웠습니다.
+                    이 레벨에서는 `{at} {random}`, `{add} {to_list}` 및 `{remove} {from}` 명령 3개를 새로 배웠습니다.
                     스토리에 새 코드 줄을 추가하여 모든 새 명령이 스토리에 한 번 이상 포함되도록 합니다.
                 example_code_3: |
                     ```
@@ -274,7 +274,7 @@ adventures:
         description: introducing add to and remove from
         levels:
             3:
-                story_text: "## Add to \n`{add} {to}` 명령을 사용하여 항목을 목록에 추가할 수 있습니다. 항목을 목록에 추가하려면 간단히 `{add} penguin {to} animals`를 입력하거나 예제 코드처럼 `{ask}` 명령을 사용합니다.\n"
+                story_text: "## Add to \n`{add} {to_list}` 명령을 사용하여 항목을 목록에 추가할 수 있습니다. 항목을 목록에 추가하려면 간단히 `{add} penguin {to} animals`를 입력하거나 예제 코드처럼 `{ask}` 명령을 사용합니다.\n"
                 example_code: |
                     ```
                     animals {is} dog, cat, kangaroo
@@ -2533,7 +2533,7 @@ adventures:
                     C1 is the lowest note you can play, C10 is the highest.
 
                     ### Exercise
-                    Try out the example code and thenplay around with it! Can you create your own melody?
+                    Try out the example code and then play around with it! Can you create your own melody?
                     In the next level you'll learn how to play some existing songs.
                 example_code: |-
                     ```
@@ -2852,7 +2852,7 @@ adventures:
                 story_text: |
                     앵무새에게 `{add}`로 새로운 단어를 가르쳐라.
                     ### 연습문제
-                    코드를 작동시키기 위해 `{add} {to}` 명령을 추가할 수 있습니까?
+                    코드를 작동시키기 위해 `{add} {to_list}` 명령을 추가할 수 있습니까?
                 example_code: |
                     ```
                     words {is} squawk, Hedy

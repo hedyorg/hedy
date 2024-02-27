@@ -34,8 +34,8 @@ AssignList { Text (is+ | Op<"=">) (Text+ | Int ) ~ambig  (Comma (Text+ | Int ))+
 Assign { Text (is+ | Op<"=">) (Expression ~ambig  | ListAccess)+ }
 Sleep { sleep+ (Expression | ListAccess )? }
 ListAccess { Text at+ (random+ | Text | Int) }
-Add { add+ Text toList+ Text }
-Remove { remove+ Text from+ Text }
+Add { add+ Text+ toList+ Text }
+Remove { remove+ Text+ from+ Text }
 Clear { clear+ }
 Play { play+ Text+ }
 
@@ -49,9 +49,9 @@ If { ifs+ Condition eol* IfLessCommand Else? }
 Else { !else elses+ eol* IfLessCommand }
 
 Condition { 
-    EqualityCheck { Text is+ (String | Expression | pressed+) } |
-    InListCheck { Text ins+  Text } |
-    NotInListCheck { Text not_in+  Text }
+    EqualityCheck { (Text | Int)  (is+ | Op<"=">) (String | Expression | pressed+) } |
+    InListCheck { (Text | Int) ins+ Text } |
+    NotInListCheck { (Text | Int) not_in+ Text }
 }
 
 ErrorInvalid[@dynamicPrecedence=-10] { Text+ }

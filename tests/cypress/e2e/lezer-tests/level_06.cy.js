@@ -207,5 +207,52 @@ describe('Lezer parser tets for level 6', () => {
 
             multiLevelTester('Test assignment with expression', code, expectedTree, 6, 11);
         })
+
+        describe('Test if number in list print', () => {
+            const code = `if 5 in list print 'in'`
+            const expectedTree =
+            `Program(
+                Command(
+                    If(
+                        if,
+                        Condition(InListCheck(Int,in,Text)),
+                        IfLessCommand(Print(print,String))
+                    )
+                )
+            )`
+
+            multiLevelTester('Test if number in list print', code, expectedTree, 6, 7);
+        })
+
+        describe('Test if number not in list print', () => {
+            const code = `if 5 not in list print 'in'`
+            const expectedTree =
+            `Program(
+                Command(
+                    If(
+                        if,
+                        Condition(NotInListCheck(Int,not_in,not_in,Text)),
+                        IfLessCommand(Print(print,String))
+                    )
+                )
+            )`
+
+            multiLevelTester('Test if number not in list print', code, expectedTree, 6, 7);
+        })
+
+        describe('Test equality check equal sign', () => {
+            const code = 'if order = burger price is 5'
+            const expectedTree = 
+                `Program(
+                    Command(
+                        If(if,
+                           Condition(EqualityCheck(Text,Op,Expression(Text))),
+                           IfLessCommand(Assign(Text,is,Expression(Int)))
+                        )
+                    )
+                )`
+            
+            multiLevelTester('Test equality check equal sign', code, expectedTree, 6, 7);
+        })
     })
 });

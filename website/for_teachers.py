@@ -815,11 +815,13 @@ class ForTeachersModule(WebsiteModule):
         modal_text = gettext('reset_adventure_prompt')
         htmx_endpoint = f'/for-teachers/restore-adventures/level/{level}'
         htmx_target = "#adventure-dragger"
+        htmx_swap = "outerHTML"
         htmx_indicator = "#indicator"
         return render_partial('modal/htmx-modal-confirm.html',
                               modal_text=modal_text,
                               htmx_endpoint=htmx_endpoint,
                               htmx_target=htmx_target,
+                              htmx_swap=htmx_swap,
                               htmx_indicator=htmx_indicator)
 
     @route("/customize-class/<class_id>", methods=["POST"])
@@ -986,21 +988,31 @@ class ForTeachersModule(WebsiteModule):
         Classes = self.db.get_teacher_classes(user["username"])
         class_data = []
         for Class in Classes:
-            temp = {"name": Class.get("name"), "id": Class.get("id"), "checked": False}
             customizations = self.db.get_class_customizations(Class.get("id"))
-            if customizations and adventure_id in customizations.get("teacher_adventures", []):
-                temp["checked"] = True
-            class_data.append(temp)
+            for level in adventure.get("levels", []):
+                # TODO: change name to id in sorted_adventures (probably it's only teachers' adventures!)
+                if customizations and any(adv for adv in customizations.get("sorted_adventures", {}).get(level)
+                                          if adv.get("name") == adventure.get("id")):
+                    temp = {"name": Class.get("name"), "id": Class.get("id"),
+                            "teacher": Class.get("teacher"), "students": Class.get("students", []),
+                            "date": Class.get("date")}
+                    class_data.append(temp)
+                    break
 
         return render_template(
             "customize-adventure.html",
             page_title=gettext("title_customize-adventure"),
             adventure=adventure,
-            class_data=class_data,
+            adventure_classes=class_data,
+            username=user["username"],
             max_level=hedy.HEDY_MAX_LEVEL,
             current_page="for-teachers",
             # TODO: update tags to be {name, canEdit} where canEdit is true if currentUser is the creator.
             adventure_tags=adventure.get("tags", []),
+            js=dict(
+                content=adventure.get("content"),
+                lang=g.lang,
+            )
         )
 
     @route("/customize-adventure", methods=["POST"])
