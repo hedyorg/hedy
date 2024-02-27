@@ -734,13 +734,6 @@ adventures:
                     {sleep}
                     Alsjeblieft! Goede reis!
                     ```
-
-                    {print} De vlucht naar bstemming vertrekt om 15:00 uur.
-                    {ask} Heb je jouw bagage al ingecheckt?
-                    {echo}
-                    {print} Ik ga nu je vliegticket printen.
-                    {sleep}
-                    Alsjeblieft! Goede reis!
             3:
                 story_text: |-
                     Welkom bij het debugging avontuur. Een code debuggen betekent dat je alle fouten eruit gaat halen.
@@ -1205,8 +1198,8 @@ adventures:
                     Ga maar snel naar het volgende avontuur!
             4:
                 story_text: |
-                    In de vorige levels heb je geoefend met variabelen, maar misschien ben je dit probleem tegengekomen.
-                    Als je deze code wil programmeren:
+                    In de vorige levels heb je geoefend met variabelen. Misschien ben je dit probleem tegengekomen,
+                    als je deze code wil programmeren:
 
                     Je wilde natuurlijk printen:
 
@@ -1227,7 +1220,7 @@ adventures:
                     In de voorgaande levels heb je geleerd om met `{at} {random}`  te werken. Hierdoor kun je spelletjes maken waarbij er steeds een andere uitkomst is.
                     Maar echt interactief is het niet... De speler heeft namelijk geen invloed op wat er gebeurt in het spel.
 
-                    In dit level leer je het `{if}` commando, waarmee je verschillende reacties kunt programmeren. Zo leer je bijvoorbeeld een wachtwoord instellen.
+                    In dit level leer je het `{if}` commando, waarmee je verschillende reacties kunt programmeren. Zo kan je bijvoorbeeld een wachtwoord instellen.
                     Ga maar snel naar het nieuwe avontuur!
                 example_code: |
                     ```
@@ -2041,7 +2034,7 @@ adventures:
             3:
                 story_text: |
                     In het vorige level heb je een spannende intro bedacht voor je spookhuis, maar een echt spel is het nog niet: Het loopt namelijk altijd hetzelfde af.
-                    In level twee kun je je verhaal interactiever maken door verschillende eindes te bedenken: soms word je opgepeuzeld door een verschrikkelijk monster en soms ontsnap je!
+                    In dit level kun je je verhaal interactiever maken door verschillende eindes te bedenken: soms word je opgepeuzeld door een verschrikkelijk monster en soms ontsnap je!
                     Hedy kiest willekeurig of je overleeft of niet...
                 example_code: |
                     ```
@@ -2453,7 +2446,7 @@ adventures:
                 story_text: |
                     In level 6 is er iets nieuws: je kunt nu ook rekenen. De plus is makkelijk, die schrijf je zoals bij rekenen: `5 + 5` bijvoorbeeld. De min gaat ook goed, dat is `5 - 5`.
                     De keer is een beetje anders, want er zit namelijk geen keer op je toetsenbord. Zoek maar eens, die is er echt niet!
-                    Daarom doen we de keer met het sterretje boven de 8: `5 * 5`. Lees dat maar als "5 keer 5", dan onthoud je dat het makkelijkst.
+                    Daarom doen we de keer met het sterretje boven de 8: `5 * 5`, en je leert ook hoe moet delen: `5 / 5`. Lees dat maar als "5 keer 5", dan onthoud je dat het makkelijkst.
                 example_code: |
                     ```
                     {print} '5 plus 5 is ' 5 + 5
@@ -3341,7 +3334,7 @@ adventures:
                     ### Opdracht
                     De voorbeeldcode laat zien wat je kunt doen als een gerecht op is.
                     Pak jouw eigen restaurant code van een vorig level en bedenk een probleem en lost het op zoals in het voorbeeld.
-                    Je kunt bijvoorbeeld ook een gerecht hebben dat op is, of je accepteert geen creditkaart, of de ijsmachine is kapot.
+                    Je kunt bijvoorbeeld ook een gerecht hebben dat op is, geen creditkaart accepteren, of een kapote ijsmachine hebben.
 
                     **Extra** Klaar? Programmeer nog meer `{if}` en `{else}` commando's in jouw programma.
                     Probeer een `{if}` toe te voegen na ieder `{ask}` commando, waardoor jouw programma zo interactief mogelijk wordt.
@@ -4255,10 +4248,12 @@ adventures:
                 story_text_2: "Daarnaast kon je in level 1 alleen maar linksaf of rechtsaf slaan. Dat is een beetje saai!\nIn level 2 kun je de neus van de schildpad naar elke richting laten wijzen. \n\nGebruik 90 graden om een kwartslag te draaien. Een heel rondje draaien is 360 graden. \nKun jij een\
                     \ figuurtje tekenen met deze code? Misschien een driehoek of een cirkel?\n"
                 example_code_2: |-
+                    ```
                     {print} Schildpaddenrace!
                     hoek {is} 90
                     {turn} hoek
                     {forward} 25
+                    ```
             3:
                 story_text: |
                     Ook bij je teken-schildpad kun je `{at} {random}` gebruiken! Dan loopt hij steeds een ander pad.
