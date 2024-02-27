@@ -47,7 +47,7 @@ class TestsLevel4(HedyTester):
             translate=False,
             skip_faulty=False,
             expected=expected,
-            max_level=11,  # teodor, set this to 17, see the test fail and moke sure that it then does not fail anymore!
+            max_level=11,
             microbit=True
         )
 
