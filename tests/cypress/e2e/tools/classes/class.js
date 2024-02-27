@@ -71,6 +71,9 @@ export function addCustomizations(classname){
 
     cy.get(".view_class").contains(classname).click();
     cy.get('#customize-class-button').click();
+    cy.get("#opening_date_container").should("not.be.visible")
+    cy.get("#opening_date_label").click();
+    cy.get("#opening_date_container").should("be.visible")
     cy.get('#enable_level_7').parent('.switch').click();
     cy.getBySel("save_customizations").click();
     cy.get("#back_to_class").click();
