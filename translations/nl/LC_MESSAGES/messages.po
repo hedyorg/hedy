@@ -7,22 +7,23 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2024-02-26 13:05+0100\n"
-"PO-Revision-Date: 2024-02-19 01:12+0000\n"
-"Last-Translator: Snoring Parrot <snoring_parrot@users.noreply.hosted.weblate.org>\n"
-"Language: nl\n"
+"POT-Creation-Date: 2024-01-18 10:49+0100\n"
+"PO-Revision-Date: 2024-02-25 20:30+0000\n"
+"Last-Translator: Dklfajsjfi49wefklsf32 <nlincus@users.noreply.hosted.weblate.org>\n"
 "Language-Team: nl <LL@li.org>\n"
-"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"Language: nl\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 5.5-dev\n"
 "Generated-By: Babel 2.14.0\n"
 
 msgid "Access Before Assign"
 msgstr "Je probeerde de variabele {name} te gebruiken op regel {access_line_number}, maar stelt de variabele in op regel {definition_line_number}. Stel een variabele in voor je die gebruikt."
 
 msgid "Cyclic Var Definition"
-msgstr "De variabele {variable} moet worden ingesteld voor je die aan de rechterkant van een is mag gebruiken."
+msgstr "De variabele {variable} moet worden ingesteld voor je die aan de rechterkant van een {is} mag gebruiken."
 
 msgid "Function Undefined"
 msgstr "Je gebruikt de functie {name} te gebruiken, maar je hebt die niet gedefinieerd."
@@ -40,13 +41,13 @@ msgid "Invalid"
 msgstr "{invalid_command} is geen commando in Hedy level {level}. Bedoelde je {guessed_command}?"
 
 msgid "Invalid Argument"
-msgstr "Je kan {command} niet gebruiken met {invalid_argument}. Je kan {command} wel gebruiken met {allowed_types}."
+msgstr "Je kan commando {command} niet gebruiken met {invalid_argument}. Probeer {invalid_argument} te vervangen door iets uit {allowed_types}."
 
 msgid "Invalid Argument Type"
-msgstr "Je kan {command} niet gebruiken met {invalid_argument} omdat dat {invalid_type} is. Je kan {command} wel gebruiken met {allowed_types}."
+msgstr "Je kan {command} niet gebruiken met {invalid_argument} omdat dat {invalid_type} is. Je kan {{invalid_argument}} wel gebruiken met {allowed_types}."
 
 msgid "Invalid At Command"
-msgstr "Het {at} commando mag niet gebruikt worden van af level 16. Je kunt blokhaken gebruiken om een element uit een lijst te gebruiken, bijvoorbeeld `vrienden[i]`, `geluksnummers[{random}]`."
+msgstr "Het {command} commando mag niet gebruikt worden van af level 16. Je kunt blokhaken gebruiken om een element uit een lijst te gebruiken, bijvoorbeeld `vrienden[i]`, `geluksnummers[{random}]`."
 
 msgid "Invalid Space"
 msgstr "Oeps! Regel {line_number} begint met een spatie. Computers kunnen niet zo goed tegen spaties, kun je 'm weghalen?"
@@ -66,9 +67,6 @@ msgstr "Het lijkt erop dat je bent vergeten bent een commando te gebruiken in de
 msgid "Missing Additional Command"
 msgstr "Het lijkt erop dat je {command} niet volledig hebt geschreven op regel {line_number}. Probeer {missing_command} toe te voegen aan je code."
 
-msgid "Missing Square Brackets"
-msgstr ""
-
 msgid "Missing Command"
 msgstr "Het lijkt erop dat je vergeten bent om een commando te gebruiken op regel {line_number}."
 
@@ -84,9 +82,8 @@ msgstr "Je hebt {command} verkeerd geschreven, jij schreef {invalid_argument} op
 msgid "No Indentation"
 msgstr "Je hebt te weinig spaties voor regel {line_number} gebruikt. Er staan {leading_spaces} spaties, maar dat is te weinig. Begin een blok steeds met {indent_size} meer spaties dan de regel ervoor."
 
-#, fuzzy
 msgid "Non Decimal Variable"
-msgstr "At line {line_number}, you might have tried using a number which Hedy does not like very much! Try changing it to a decimal number like 2."
+msgstr "Op regel {line_number}, heb jij misschien geprobeerd om een nummer te gebruiken, iets dat Hedy niet leuk vindt! Probeer het te veranderen in een decimaal nummer, zoals 2."
 
 msgid "Parse"
 msgstr "De code die jij intypte is geen geldige Hedy code. Er zit een foutje op regel {location[0]}, op positie {location[1]}. Jij typte {character_found}, maar dat mag op die plek niet."
@@ -115,9 +112,8 @@ msgstr "Helaas, Hedy ondersteunt nog geen kommagetallen. Verander {value} in een
 msgid "Unsupported String Value"
 msgstr "Tekst waarden mogen geen {invalid_value} bevatten."
 
-#, fuzzy
 msgid "Unused Variable"
-msgstr "You defined the variable {variable_name} on line {line_number}, but you did not use it."
+msgstr "Jij definieerde de variable {variable_name} op regel {line_number}, maar die heb jij helemaal niet gebruikt."
 
 msgid "Var Undefined"
 msgstr "Je gebruikt de variabele {name}, maar die heb je niet ingesteld. Het kan ook zijn dat je het woord {name} wilde gebruiken en aanhalingstekens vergeten bent."
@@ -125,16 +121,14 @@ msgstr "Je gebruikt de variabele {name}, maar die heb je niet ingesteld. Het kan
 msgid "Wrong Level"
 msgstr "Dat was goede code hoor, maar niet op het goede level. Je schreef een {offending_keyword} voor level {working_level}. Tip: {tip}"
 
-#, fuzzy
 msgid "Wrong Number of Arguments"
-msgstr "Your function used the wrong number of arguments. You provided {used_number} but the function {name} needs {defined_number}"
+msgstr "Jouw functie gebruikt een verkeerd aantal argumenten. Jij gaf {used_number} argumenten, maar de functie {name} heeft er nodig: {defined_number}"
 
 msgid "account_overview"
 msgstr "Account overzicht"
 
-#, fuzzy
 msgid "accounts_created"
-msgstr "Account succesvol aangemaakt."
+msgstr "Accounts waren succesvol aangemaakt."
 
 msgid "accounts_intro"
 msgstr "Op deze pagina kun je accounts aan maken voor meerdere studenten tegelijkertijd. Ze worden automatisch toegevoegd aan de huidige klas, controleer of dit klopt! Door op het groene kruisje rechtsonderin te klikken kun je meer rijen toevoegen. Met het rode kruisje kun je een rij weer verwijderen. Zorg ervoor dat alle rijen gevuld zijn voordat je klikt op \"Accounts aanmaken\". Denk eraan dat elke gebruikersnaam uniek moet zijn. Ook moet het wachtwoord <b>minimaal</b> 6 tekens zijn."
@@ -151,9 +145,8 @@ msgstr "Badges check icon"
 msgid "achievements_logo_alt"
 msgstr "Badges logo"
 
-#, fuzzy
 msgid "add"
-msgstr "Add"
+msgstr "Toevoegen"
 
 msgid "add_students"
 msgstr "Leerlingen toevoegen"
@@ -170,9 +163,8 @@ msgstr "Ga naar level {level}"
 msgid "adventure"
 msgstr "Avontuur"
 
-#, fuzzy
 msgid "adventure_cloned"
-msgstr "Adventure is cloned"
+msgstr "Avontuur is gekloond"
 
 msgid "adventure_duplicate"
 msgstr "Je hebt al een avontuur met deze naam."
@@ -210,9 +202,8 @@ msgstr "Jouw avontuur is bijgewerkt!"
 msgid "adventures"
 msgstr "Beschikbare avonturen"
 
-#, fuzzy
 msgid "adventures_info"
-msgstr "Each Hedy level has built-in exercises for students, which we call adventures. You can create your own adventures and add them to your classes. With your own adventures you can create adventures that are relevant and interesting for your students. You can find more information about creating your own adventures <a href=\"https://hedy.org/for-teachers/manual/features\">here</a>."
+msgstr "Elk Hedy level heeft ingebouwde oefeningen voor leerlingen, wat wij noemen adventures. Jij kan ook jouw eigen adventures maken en toevoegen aan jouw eigen lessen. Met jouw eigen adventures kan je dus adventures maken die relevant en interessant zijn voor jouw leerlingen. Meer informatie over het creëren van eigen adventures: <a href=\"https://hedy.org/for-teachers/manual/features\">klik hier</a>."
 
 msgid "adventures_restored"
 msgstr "De standaardavonturen zijn terug gezet."
@@ -286,9 +277,8 @@ msgstr "We konden het programma niet lezen"
 msgid "catch_index_exception"
 msgstr "Je hebt geprobeerd de lijst {list_name} te gebruiken, maar deze is óf leeg óf de index bestaat niet."
 
-#, fuzzy
 msgid "catch_value_exception"
-msgstr "While running your program the command {command} received the value {value} which is not allowed. {suggestion}."
+msgstr "Tijdens het runnen van jouw programma heeft het commando {command} een waarde gekregen {value} wat niet is toegestaan. {suggestion}."
 
 msgid "certificate"
 msgstr "Certificaat van voltooiing"
@@ -326,41 +316,32 @@ msgstr "Vul de naam in van de nieuwe klas"
 msgid "class_overview"
 msgstr "Klas overzicht"
 
-#, fuzzy
 msgid "class_survey_description"
-msgstr "We would like to get a better overview of our Hedy users. By providing these answers, you would help improve Hedy. Thank you!"
+msgstr "Wij willen graag een beter inzicht hebben van onze Hedy gebruikers. Door het beantwoorden van de volgende vragen, help je ons om Hedy nog beter te maken. Alvast dank!"
 
-#, fuzzy
 msgid "class_survey_later"
-msgstr "Remind me tomorrow"
+msgstr "Herinner mij morgen"
 
-#, fuzzy
 msgid "class_survey_question1"
-msgstr "What is the age range in your class?"
+msgstr "Wat is de leeftijdsgroep in jouw klas?"
 
-#, fuzzy
 msgid "class_survey_question2"
-msgstr "What is the spoken language in your class?"
+msgstr "Wat is de voertaal in jouw klas?"
 
-#, fuzzy
 msgid "class_survey_question3"
-msgstr "What is the gender balance in your class?"
+msgstr "Wat is de verhouding in aantal tussen meisjes en jongens in jouw klas?"
 
-#, fuzzy
 msgid "class_survey_question4"
-msgstr "What distinguishes your students from others?"
+msgstr "Wat onderscheid jouw studenten van anderen?"
 
-#, fuzzy
 msgid "classes_info"
-msgstr "Create a class to follow the progress of each student in dashboard, and to customize the adventures your students see, and even adding your own! You can create as many classes as you like, and each class can have multiple teachers each one with different roles. You can also add as many students as you want, but mind that each student can only be in one class at a time. You can find more information about classes in the <a href=\"https://hedy.org/for-teachers/manual/preparations#for-teachers\">teacher manual</a>."
+msgstr "Creëer een klas om de progressie van elke student te kunnen volgen op het dashboard, en om aanpassingen te maken aan adventures die de studenten kunnen zien, maar ook het toevoegen van jouw eigen adventures! Je kunt zoveel klassen creëren als je wilt, en elke klas kan meerdere leraren hebben met ieder een verschillende rol. Je kunt ook zoveel studenten toevoegen als je wilt, maar houd in gedachten dat elke student alleen maar in 1 klas kan zijn. Je kan meer informatie over klassen vinden in de <a href=\"https://hedy.org/for-teachers/manual/preparations#for-teachers\">Leraar handleiding</a>."
 
-#, fuzzy
 msgid "clone"
-msgstr "Clone"
+msgstr "Kloon"
 
-#, fuzzy
 msgid "cloned_times"
-msgstr "Clones"
+msgstr "Klonen"
 
 msgid "close"
 msgstr "Close"
@@ -392,9 +373,8 @@ msgstr "Hedy helper"
 msgid "copy_clipboard"
 msgstr "De link is gekopieerd"
 
-#, fuzzy
 msgid "copy_code"
-msgstr "Copy code"
+msgstr "Kopieer de code"
 
 msgid "copy_join_link"
 msgstr "Kopieer inschrijflink"
@@ -547,11 +527,10 @@ msgid "echo_and_ask_mismatch_exception"
 msgstr "Echo en vraag kloppen niet met elkaar"
 
 msgid "echo_out"
-msgstr "Vanaf level 2 heb je geen {echo} meer nodig! Je kunt een variabele gebruiken om iets te herhalen. Voorbeeld: naam is {ask} Hoe heet jij? {print} hallo naam"
+msgstr "Vanaf level 2 heb je geen {echo} meer nodig! Je kunt een variabele gebruiken om iets te herhalen, met {ask} en {print}. Voorbeeld: naam {is} {ask} Hoe heet jij? {print} hallo naam"
 
-#, fuzzy
 msgid "edit_adventure"
-msgstr "Edit adventure"
+msgstr "Aanpassen adventure"
 
 msgid "edit_code_button"
 msgstr "Pas de code aan"
@@ -595,9 +574,8 @@ msgstr "Dit emailadres is al in gebruik."
 msgid "exists_username"
 msgstr "Deze gebruikersnaam is al in gebruik."
 
-#, fuzzy
 msgid "exit_preview_mode"
-msgstr "Exit preview mode"
+msgstr "Beëindig de preview modus"
 
 msgid "experience_invalid"
 msgstr "Dit is geen geldige programmeerervaring, kies uit (Ja, Nee)."
@@ -717,7 +695,7 @@ msgid "hedy_tutorial_logo_alt"
 msgstr "Hedy tutorial icon"
 
 msgid "hello_logo"
-msgstr "hallo!"
+msgstr "hallo"
 
 msgid "hello_world"
 msgstr "Hallo wereld!"
@@ -758,7 +736,6 @@ msgstr "Hint?"
 msgid "ill_work_some_more"
 msgstr "Ik werk er nog even aan verder"
 
-#, fuzzy
 msgid "image_invalid"
 msgstr "Jouw gekozen profielfoto is ongeldig."
 
@@ -778,7 +755,7 @@ msgid "indentation_exception"
 msgstr "Inspringen niet goed gebruikt"
 
 msgid "input"
-msgstr "invoer van een ask"
+msgstr "invoer van {ask}"
 
 msgid "integer"
 msgstr "een getal"
@@ -789,27 +766,23 @@ msgstr "Ongeldige klassenlink."
 msgid "invalid_command_exception"
 msgstr "Ongeldig commando"
 
-#, fuzzy
 msgid "invalid_keyword_language_comment"
-msgstr "# The provided keyword language is invalid, keyword language is set to English"
+msgstr "# De gegeven keyword taal is ongeldig, keyword taal is naar Engels gezet"
 
-#, fuzzy
 msgid "invalid_language_comment"
-msgstr "# The provided language is invalid, language set to English"
+msgstr "# De gegeven taal is ongeldig, de taal is naar Engels gezet"
 
-#, fuzzy
 msgid "invalid_level_comment"
-msgstr "# The provided level is invalid, level is set to level 1"
+msgstr "# Het gegeven level is ongeldig, het level is naar level 1 gezet"
 
-#, fuzzy
 msgid "invalid_program_comment"
-msgstr "# The provided program is invalid, please try again"
+msgstr "# Het gegeven programma is ongeldig, graag nogmaals proberen"
 
 msgid "invalid_teacher_invitation_code"
 msgstr "Deze leerkrachtenuitnodigingscode is niet geldig. Als je een nieuwe uitnodiging nodig hebt, neem dan contact op met hello@hedy.org."
 
 msgid "invalid_tutorial_step"
-msgstr "Dit is geen geldige tutorial stap, probeer het opnieuw."
+msgstr "Dit is geen geldige tutorial stap, probeer het opnieuw"
 
 msgid "invalid_username_password"
 msgstr "Ongeldige gebruikersnaam/wachtwoord combinatie."
@@ -826,9 +799,8 @@ msgstr "Je hebt een uitnodiging ontvangen voor de klas"
 msgid "invite_prompt"
 msgstr "Vul een gebruikersnaam in"
 
-#, fuzzy
 msgid "invite_teacher"
-msgstr "Invite a teacher"
+msgstr "Nodig een leraar/lerares uit"
 
 msgid "join_class"
 msgstr "Inschrijven voor klas"
@@ -882,7 +854,7 @@ msgid "level_disabled"
 msgstr "Level staat nog uit"
 
 msgid "level_future"
-msgstr "Dit level gaat na de aangegeven datum vanzelf open"
+msgstr "Dit level gaat automatisch open op "
 
 msgid "level_invalid"
 msgstr "Dit Hedy level is ongeldig."
@@ -893,7 +865,6 @@ msgstr "Je zit in een klas waar dit level nog niet beschikbaar is gemaakt"
 msgid "level_title"
 msgstr "Level"
 
-#, fuzzy
 msgid "levels"
 msgstr "levels"
 
@@ -976,7 +947,7 @@ msgstr ""
 "<strong>Hoe krijg ik hulp</strong>\n"
 "Als iets niet helemaal duidelijk is kun je dit posten in de <a href=\"https://github.com/hedyorg/hedy/discussions/categories/q-a\">Q&A discussion</a>, of <a href=\"mailto: hello@hedy.org\">stuur ons een mail</a>.\n"
 "\n"
-"Blijf programmeren!"
+"\"Blijf programmeren!\"\n"
 
 msgid "mail_welcome_teacher_subject"
 msgstr "Jouw Hedy leerkrachtenaccount is klaar"
@@ -1070,9 +1041,8 @@ msgstr "Nog geen account?"
 msgid "no_accounts"
 msgstr "Er zijn geen accounts om aan te maken."
 
-#, fuzzy
 msgid "no_adventures_yet"
-msgstr "There are no public adventures yet..."
+msgstr "Er zijn nog geen publieke avonturen..."
 
 msgid "no_certificate"
 msgstr "Deze gebruiker heeft het Hedy certificaat voor afronden niet behaald"
@@ -1080,9 +1050,8 @@ msgstr "Deze gebruiker heeft het Hedy certificaat voor afronden niet behaald"
 msgid "no_more_flat_if"
 msgstr "Vanaf level 8 moet de code na {if} op de volgende regel komen en beginnen met 4 spaties."
 
-#, fuzzy
 msgid "no_programs"
-msgstr "Nog geen programma's."
+msgstr "Er zijn geen programma's."
 
 msgid "no_public_profile"
 msgstr "Je hebt nog geen openbaar profiel..."
@@ -1105,9 +1074,8 @@ msgstr "Dit level bestaat niet!"
 msgid "no_such_program"
 msgstr "Dit programma bestaat niet!"
 
-#, fuzzy
 msgid "no_tag"
-msgstr "No tag provided!"
+msgstr "Geen kenmerk (tag) gegeven!"
 
 msgid "not_enrolled"
 msgstr "Jij zit niet in deze klas!"
@@ -1175,9 +1143,8 @@ msgstr "Een andere teksttaal"
 msgid "overwrite_warning"
 msgstr "Je hebt al een programma met deze naam, opslaan met deze naam overschrijft het oude programma. Weet je het zeker?"
 
-#, fuzzy
 msgid "owner"
-msgstr "Owner"
+msgstr "Eigenaar"
 
 msgid "page"
 msgstr "pagina"
@@ -1251,13 +1218,11 @@ msgstr "Voorkeurstaal"
 msgid "preview"
 msgstr "Voorbeeld"
 
-#, fuzzy
 msgid "previewing_adventure"
-msgstr "Previewing adventure"
+msgstr "Voorvertoning avontuur"
 
-#, fuzzy
 msgid "previewing_class"
-msgstr "You are previewing class <em>{class_name}</em> as a teacher."
+msgstr "Jij kijkt naar een voorvertoning van klas <em>{class_name}</em> als een leraar/lerares."
 
 msgid "previous_campaigns"
 msgstr "Bekijk het nieuwsbrief archief"
@@ -1272,7 +1237,7 @@ msgid "private"
 msgstr "Privé"
 
 msgid "profile_logo_alt"
-msgstr "Profiel icon"
+msgstr "Profiel icoon."
 
 msgid "profile_picture"
 msgstr "Profielfoto"
@@ -1373,9 +1338,8 @@ msgstr "Weet je zeker dat je de personalisatie van deze klas wilt verwijderen?"
 msgid "remove_student_prompt"
 msgstr "Weet je zeker dat je deze leerling uit de klas wilt verwijderen?"
 
-#, fuzzy
 msgid "remove_user_prompt"
-msgstr "Confirm removing this user from the class."
+msgstr "Bevestig de verwijdering van deze gebruiker (user) van deze klas."
 
 msgid "repair_program_logo_alt"
 msgstr "Repareer programma icon"
@@ -1428,13 +1392,11 @@ msgstr "Jij mag dit avontuur niet bekijken!"
 msgid "retrieve_class_error"
 msgstr "Alleen leerkrachten mogen klassen openen"
 
-#, fuzzy
 msgid "retrieve_tag_error"
-msgstr "Error retrieving tags"
+msgstr "Fout bij het ophalen van kenmerken (tags)"
 
-#, fuzzy
 msgid "role"
-msgstr "Role"
+msgstr "Rol"
 
 msgid "run_code_button"
 msgstr "Voer de code uit"
@@ -1463,21 +1425,17 @@ msgstr "Zoeken..."
 msgid "search_button"
 msgstr "Zoeken"
 
-#, fuzzy
 msgid "second_teacher"
-msgstr "Second teacher"
+msgstr "Tweede leraar/lerares"
 
-#, fuzzy
 msgid "second_teacher_copy_prompt"
-msgstr "Are you sure you want to copy this teacher?"
+msgstr "Weet je zeker dat je deze leraar/lerares wilt kopiëren?"
 
-#, fuzzy
 msgid "second_teacher_prompt"
-msgstr "Enter a teacher username to invite them."
+msgstr "Geef een naam van een leraar/lerares om uit te nodigen."
 
-#, fuzzy
 msgid "second_teacher_warning"
-msgstr "All teachers in this class can customize it."
+msgstr "Alle leraren/leraressen in deze klas kunnen het aanpassen."
 
 msgid "see_certificate"
 msgstr "Zie {username} certificaat!"
@@ -1488,21 +1446,17 @@ msgstr "Kies"
 msgid "select_adventures"
 msgstr "Avonturen selecteren"
 
-#, fuzzy
 msgid "select_all"
-msgstr "Select all"
+msgstr "Selecteer alles"
 
-#, fuzzy
 msgid "select_lang"
-msgstr "Select language"
+msgstr "Selecteer taal"
 
-#, fuzzy
 msgid "select_tag"
-msgstr "Select tag"
+msgstr "Selecteer kenmerk (tag)"
 
-#, fuzzy
 msgid "selected"
-msgstr "Selected"
+msgstr "Geselecteerd"
 
 msgid "self_removal_prompt"
 msgstr "Weet je zeker dat je deze klas wilt verlaten?"
@@ -1543,13 +1497,11 @@ msgstr "een hoge komma"
 msgid "slash"
 msgstr "een schuin streepje"
 
-#, fuzzy
 msgid "slides"
-msgstr "Slides"
+msgstr "Dia's"
 
-#, fuzzy
 msgid "slides_info"
-msgstr "For each level of Hedy, we have created slides to help you teach. The slides contain explanations of each level, and Hedy examples that you can run inside the slides. Just click the link and get started! the Introduction slides are a general explanation of Hedy before level 1 The slides were created using <a href=\"https://slides.com\">slides.com</a>. If you want to adapt them yourself, you can download them, and then upload the resulting zip file to <a href=\"https://slides.com\">slides.com</a>. You can find more information about the slides in the <a href=\"https://hedy.org/for-teachers/manual/features\">teacher's manual</a>."
+msgstr "Voor elk niveau (level) in Hedy hebben we dia's (slides) gemaakt om jou te helpen. Deze dia's (slides) bevatten uitleg over elk level, en Hedy voorbeelden die je in dia's (slides) kan tonen/draaien. Klik op de link en begin! De introductie dia's (slides) zijn een generieke uitleg van Hedy, dus voor je begint aan level 1. De dia's (slides) zijn gemaakt met <a href=\"https://slides.com\">slides.com</a>. Als je deze dia's (slides) wilt aanpassen kan je deze downloaden, en daarna uploaden in een zip bestand, naar <a href=\"https://slides.com\">slides.com</a>. Meer informatie over dia's (slides) kan je vinden in de <a href=\"https://hedy.org/for-teachers/manual/features\">Leraren Handleiding (for-teachers manual)</a>."
 
 msgid "social_media"
 msgstr "Sociale media"
@@ -1587,9 +1539,8 @@ msgstr "Stop programma"
 msgid "string"
 msgstr "tekst"
 
-#, fuzzy
 msgid "student"
-msgstr "Student"
+msgstr "Leerling"
 
 msgid "student_already_in_class"
 msgstr "Deze leerling zit al in jouw klas."
@@ -1597,16 +1548,14 @@ msgstr "Deze leerling zit al in jouw klas."
 msgid "student_already_invite"
 msgstr "Deze leerling heeft al een openstaande uitnodiging."
 
-#, fuzzy
 msgid "student_details"
-msgstr "Student details"
+msgstr "Leerling details"
 
 msgid "student_list"
 msgstr "Studenten lijst"
 
-#, fuzzy
 msgid "student_not_allowed_in_class"
-msgstr "Student not allowed in class"
+msgstr "Leerling is niet toegestaan in de klas"
 
 msgid "student_not_existing"
 msgstr "Deze gebruikersnaam bestaat niet."
@@ -1641,48 +1590,38 @@ msgstr "Schrijf je in"
 msgid "subscribe_newsletter"
 msgstr "Schrijf je in voor de nieuwsbrief"
 
-#, fuzzy
 msgid "suggestion_color"
-msgstr "Try using another color"
+msgstr "Probeer een andere kleur"
 
-#, fuzzy
 msgid "suggestion_note"
-msgstr "Use a note between C0 and B9 or a number between 1 and 70"
+msgstr "Gebruik een noot tussen C0 en B9 of een nummer tussen 1 en 70"
 
-#, fuzzy
 msgid "suggestion_number"
-msgstr "Try changing the value to a number"
+msgstr "Probeer de waarde te veranderen in een nummer"
 
 msgid "surname"
 msgstr "Voornaam"
 
-#, fuzzy
 msgid "survey"
-msgstr "Survey"
+msgstr "Enquête"
 
-#, fuzzy
 msgid "survey_completed"
-msgstr "Survey completed"
+msgstr "Enquête afgerond"
 
-#, fuzzy
 msgid "survey_skip"
-msgstr "Don't show this again"
+msgstr "Laat dit niet meer zien"
 
-#, fuzzy
 msgid "survey_submit"
-msgstr "Submit"
+msgstr "Indienen"
 
-#, fuzzy
 msgid "tag_in_adventure"
-msgstr "Tag in adventure"
+msgstr "Keyword (tag) in avontuur"
 
-#, fuzzy
 msgid "tag_input_placeholder"
-msgstr "Enter a new tag"
+msgstr "Geef een nieuw keyword (tag)"
 
-#, fuzzy
 msgid "tags"
-msgstr "Tags"
+msgstr "Keywords (Tags)"
 
 msgid "teacher"
 msgstr "Leraren"
@@ -1711,9 +1650,8 @@ msgstr "Leraren tutorial icon"
 msgid "teacher_welcome"
 msgstr "Welkom bij Hedy! Jouw account is omgezet naar een leerkrachtenaccount. Je kan nu klassen maken en er leerlingen in uitnodigen."
 
-#, fuzzy
 msgid "teachers"
-msgstr "Teachers"
+msgstr "Leraren"
 
 msgid "template_code"
 msgstr ""
@@ -1822,14 +1760,14 @@ msgstr "Tutorial"
 
 msgid "tutorial_code_snippet"
 msgstr ""
-"print Hallo wereld!\n"
-"print Ik volg de Hedy tutorial"
+"{print} Hallo wereld!\n"
+"{print} Ik leer Hedy met deze tutorial!"
 
 msgid "tutorial_message_not_found"
 msgstr "Het lijkt erop dat we de volgende stap voor de tutorial niet kunnen ophalen, probeer het later opnieuw."
 
 msgid "tutorial_title_not_found"
-msgstr "Oeps! Er gaat iets mis..."
+msgstr "Oeps, Tutorial stap niet gevonden"
 
 msgid "unauthorized"
 msgstr "Jij hebt geen rechten voor deze pagina"
@@ -2079,4 +2017,3 @@ msgstr "Jouw programma"
 
 #~ msgid "write_first_program"
 #~ msgstr "Schrijf je eerste programma!"
-
