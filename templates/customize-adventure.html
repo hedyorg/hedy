@@ -6,8 +6,8 @@
     <div class="border-gray-400 border rounded-lg p-4">
         <form onsubmit="event.preventDefault (); hedyApp.update_adventure('{{ adventure.id }}', {% if adventure.content|length > 0 %}false{% else %}true{% endif %}, '{{_('update_adventure_prompt')}}')"
             data-te-validation-init>
-            <div class="flex flex-col lg:flex-row gap-4">
-                <div class="flex flex-col w-full lg:w-1/2">
+            <div class="flex  gap-4">
+                <div class="flex flex-col w-full">
                     <h3 class="text-center mt-0 mb-4">{{_('general_settings')}}</h3>
                     <div class="flex flex-row items-center mb-4">
                         <label for="name" class="inline-block w-40 text-xl">{{_('name')}}</label>
@@ -35,7 +35,8 @@
                                 >
                                 {% for i in range(1, (max_level + 1)) %}
                                     <option value="{{ i }}"
-                                        {% if i|string in adventure.levels or i|string == adventure.level|string %}selected{% endif %}>
+                                        {% set adv_levels = adventure.levels if adventure.get("levels") else [adventure.level|string] %}
+                                        {% if i|string in adv_levels %}selected{% endif %}>
                                         {{ i }}
                                     </option>
                                 {% endfor %}
@@ -83,29 +84,27 @@
                         </div>
                     </div>
                     {{ render_partial('htmx-tags-list.html', tags=adventure_tags, adventure_id=adventure.id, creator=adventure.creator) }}
-                    
-
-                    <div class="border border-black rounded-lg p-4 text-sm">
-                        {{_('adventure_exp_1')}}
-                        <div class="flex flex-row my-2 items-center">
-                            <pre class="code-teacher">&lt;code&gt;&#123;{{parse_keyword('print')}}&#125;&lt;/code&gt;</pre>
-                            <b class="mx-4">&rarr;</b>
-                            <code class="text-base">{{parse_keyword('print')}}</code>
-                        </div>
-                        {{_('adventure_exp_2')}}
-                        <div class="flex flex-row items-center">
-                            <pre class="code-teacher">&lt;pre&gt;<br>&#123;{{parse_keyword('print')}}&#125; {{_('hello_world')}}<br>&lt;/pre&gt;</pre>
-                            <b class="mx-4">&rarr;</b>
-                            <div class="turn-pre-into-ace w-64" style="white-space: pre-wrap;">
-                                <pre level="1">{{parse_keyword('print')}} {{_('hello_world')}}</pre>
-                            </div>
-                        </div>
-                        {{_('adventure_exp_3')}}
-                    </div>
                 </div>
-                <div class="flex flex-col w-full lg:w-1/2">
-                    <h3 class="text-center mt-0 mb-4">{{ _('adventure') }}</h3>
-                    <textarea id="custom_adventure_content" class="block appearance-none w-full h-96 bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 rounded">{% if adventure.content|length > 0 %}{{ adventure.content }}{% else %}{{_('template_code')}}{% endif %}</textarea>
+
+                <div class="flex flex-col w-full">
+                    <h3 class="text-center mt-0 mb-4">{{ _('adventure') }}
+                        <button type="button" _="on click event.stopPropagation()
+                            go to the top of #explanation
+                            add .animate-pulse to #explanation
+                            wait 5s
+                            remove .animate-pulse from #explanation
+                            ">
+                            <svg class="fill-current h-4 w-4 text-blue-500 cursor-pointer !m-0 !p-0" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
+                                <path
+                                d="M2.93 17.07A10 10 0 1 1 17.07 2.93 10 10 0 0 1 2.93 17.07zm12.73-1.41A8 8 0 1 0 4.34 4.34a8 8 0 0 0 11.32 11.32zM9 11V9h2v6H9v-4zm0-6h2v2H9V5z" />
+                            </svg>
+                        </button>
+                    </h3>
+                    <div class="flex">
+                        {% set content = prepare_content_for_ckeditor(adventure.content) if adventure.content|length > 0 else prepare_content_for_ckeditor(_('template_code')) %}
+                        <textarea id="adventure-editor" class="hidden">{{content}}</textarea>
+                    </div>
+                    
                     <div class="mt-2 mb-0 flex flex-row items-center text-center border-gray-500 border p-4 rounded-lg">
                         <input type="checkbox" name="agree_public" id="agree_public" class="mr-4" {% if adventure.public %}checked{% endif %}>
                         <label for="agree_public" class="text-sm italic w-full">{{_('adventure_terms')}}</label>
@@ -118,6 +117,42 @@
                 <button type="reset" class="red-btn" id="remove_adventure_button" onclick="hedyApp.delete_adventure('{{ adventure.id }}', '{{_('delete_adventure_prompt')}}')">{{_('remove')}}</button>
             </div>
         </form>
+
+
+        <div>
+            <hr
+            class="my-12 mx-16 h-2 border-t-4 bg-neutral-100" />
+
+            <div class="flex">
+                {% set usedInClasses = adventure_classes|length %}
+                {% if usedInClasses > 0 %}
+                    <div class="w-1/2">
+                        <h3>{{_('adventure_exp_classes')}}</h3>
+                        
+                        <div class="flex gap-2 flex-wrap">
+                            {% for cls in adventure_classes %}
+                                {{ render_partial('htmx-class-card.html', class=cls, username=username,) }}
+                            {% endfor %}
+                        </div>
+                        
+                    </div>
+                {% endif %}
+                <div id="explanation" class="flex flex-col gap-2 border border-black rounded-lg p-4 text-sm h-full w-1/2">
+                    <div>
+                        <button class="ck ck-button ck-off" type="button" tabindex="-1" aria-labelledby="ck-editor__aria-label_e0626e093592188450d58a9d030a1430d" aria-pressed="false" data-cke-tooltip-text="Code" data-cke-tooltip-position="s"><svg class="ck ck-icon ck-reset_all-excluded ck-icon_inherit-color ck-button__icon" viewBox="0 0 20 20"><path d="m12.5 5.7 5.2 3.9v1.3l-5.6 4c-.1.2-.3.2-.5.2-.3-.1-.6-.7-.6-1l.3-.4 4.7-3.5L11.5 7l-.2-.2c-.1-.3-.1-.6 0-.8.2-.2.5-.4.8-.4a.8.8 0 0 1 .4.1zm-5.2 0L2 9.6v1.3l5.6 4c.1.2.3.2.5.2.3-.1.7-.7.6-1 0-.1 0-.3-.2-.4l-5-3.5L8.2 7l.2-.2c.1-.3.1-.6 0-.8-.2-.2-.5-.4-.8-.4a.8.8 0 0 0-.3.1z"></path></svg><span class="ck ck-button__label" id="ck-editor__aria-label_e0626e093592188450d58a9d030a1430d">Code</span></button>
+                        {{_('adventure_code_button')}}
+                    </div>
+
+                    <div>
+                        <button class="ck ck-button ck-off ck-splitbutton__action" type="button" tabindex="-1" aria-labelledby="ck-editor__aria-label_e0cf21e456f5ca9fde674c9cbb2192bef" aria-pressed="false" data-cke-tooltip-text="Insert code block" data-cke-tooltip-position="s"><svg class="ck ck-icon ck-reset_all-excluded ck-icon_inherit-color ck-button__icon" viewBox="0 0 20 20"><path d="M12.87 12.61a.75.75 0 0 1-.089.976l-.085.07-3.154 2.254 3.412 2.414a.75.75 0 0 1 .237.95l-.057.095a.75.75 0 0 1-.95.237l-.096-.058-4.272-3.022-.003-1.223 4.01-2.867a.75.75 0 0 1 1.047.174zm2.795-.231.095.057 4.011 2.867-.003 1.223-4.272 3.022-.095.058a.75.75 0 0 1-.88-.151l-.07-.086-.058-.095a.75.75 0 0 1 .15-.88l.087-.07 3.412-2.414-3.154-2.253-.085-.071a.75.75 0 0 1 .862-1.207zM16 0a2 2 0 0 1 2 2v9.354l-.663-.492-.837-.001V2a.5.5 0 0 0-.5-.5H2a.5.5 0 0 0-.5.5v15a.5.5 0 0 0 .5.5h3.118L7.156 19H2a2 2 0 0 1-2-2V2a2 2 0 0 1 2-2h14zM5.009 15l.003 1H3v-1h2.009zm2.188-2-1.471 1H5v-1h2.197zM10 11v.095L8.668 12H7v-1h3zm4-2v1H7V9h7zm0-2v1H7V7h7zm-4-2v1H5V5h5zM6 3v1H3V3h3z"></path></svg></button>
+                        {{_('adventure_codeblock_button')}}
+                    </div>
+                    <div class="flex flex-row items-center">
+                        {{_('adventure_exp_3')}}
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
     <div>
         <button class="blue-btn" id="go_back_button" onclick="window.open('/for-teachers', '_self');">{{_('back_to_teachers_page')}}</button>

@@ -1,6 +1,6 @@
 @top Program { eol* (Command eol+)* Command? }
 Command {
-    Assign | AssignList | Ask | Clear |Print | Turtle | Sleep | Add | Remove | ErrorInvalid
+    Assign | AssignList | Ask | Clear |Print | Play | Turtle | Sleep | Add | Remove | ErrorInvalid
 }
 
 @local tokens {    
@@ -30,9 +30,10 @@ AssignList { Text is+ Text+ (Comma Text+)+ }
 Assign { Text is+ (Text+ | ListAccess) }
 Sleep { sleep+ (Text | ListAccess)? }
 ListAccess { Text at+ (random+ | Text) }
-Add { add+ Text toList+ Text }
-Remove { remove+ Text from+ Text }
+Add { add+ Text+ toList+ Text }
+Remove { remove+ Text+ from+ Text }
 Clear { clear+ }
+Play { play+ Text+ }
 
 Turtle[@isGroup=turtle] {
     Forward { forward+ (Text | ListAccess ) } |
@@ -54,6 +55,7 @@ ErrorInvalid[@dynamicPrecedence=-10] { Text+ }
     turn[@name="turn"],
     color[@name="color"],
     sleep[@name="sleep"],
+    play[@name="play"],
     is[@name="is"],
     add[@name="add"],
     from[@name="from"],

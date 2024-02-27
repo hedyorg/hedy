@@ -7,15 +7,16 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2023-12-19 19:41+0100\n"
-"PO-Revision-Date: 2023-12-18 20:12+0000\n"
-"Last-Translator: Prefill add-on <noreply-addon-prefill@weblate.org>\n"
-"Language: el\n"
+"POT-Creation-Date: 2024-01-18 10:49+0100\n"
+"PO-Revision-Date: 2024-02-19 01:12+0000\n"
+"Last-Translator: Snoring Parrot <snoring_parrot@users.noreply.hosted.weblate.org>\n"
 "Language-Team: el <LL@li.org>\n"
-"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"Language: el\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 5.4\n"
 "Generated-By: Babel 2.14.0\n"
 
 #, fuzzy
@@ -24,6 +25,10 @@ msgstr "You tried to use the variable {name} on line {access_line_number}, but y
 
 msgid "Cyclic Var Definition"
 msgstr "Το όνομα {variable} πρέπει να οριστεί για να μπορέσεις να το χρησιμοποιήσεις στη δεξιά πλευρά της εντολής is"
+
+#, fuzzy
+msgid "Function Undefined"
+msgstr "You tried to use the function {name}, but you didn't define it."
 
 msgid "Has Blanks"
 msgstr "Ο κώδικάς σου δεν είναι πλήρης. Περιέχει κενά που πρέπει να αντικαταστήσεις με κώδικα."
@@ -64,12 +69,20 @@ msgstr "Χρησιμοποίησες μια echo πριν από μια ask, ή 
 msgid "Lonely Text"
 msgstr "It looks like you forgot to use a command with the text you put in line {line_number}"
 
+#, fuzzy
+msgid "Missing Additional Command"
+msgstr "It looks like you forgot to complete writing {command} on line {line_number}."
+
 msgid "Missing Command"
 msgstr "Φαίνεται ότι ξέχασες να χρησιμοποιήσεις μια εντολή στη γραμμή {line_number}."
 
 #, fuzzy
 msgid "Missing Inner Command"
 msgstr "Φαίνεται ότι ξέχασες να χρησιμοποιήσεις μια εντολή στη γραμμή {line_number}."
+
+#, fuzzy
+msgid "Missing Variable"
+msgstr "It looks like your {command} is missing a variable at the start of the line."
 
 #, fuzzy
 msgid "Misspelled At Command"
@@ -121,9 +134,14 @@ msgstr "Προσπάθησες να εμφανίσεις τη μεταβλητή
 msgid "Wrong Level"
 msgstr "Αυτός ήταν σωστός κώδικας Hedy, αλλά όχι στο σωστό επίπεδο. Έγραψες {offending_keyword} για το επίπεδο {working_level}. Υπόδειξη:{tip}"
 
+#, fuzzy
+msgid "Wrong Number of Arguments"
+msgstr "Your function used the wrong number of arguments. You provided {used_number} but the function {name} needs {defined_number}"
+
 msgid "account_overview"
 msgstr "Σύνοψη λογαριασμού"
 
+#, fuzzy
 msgid "accounts_created"
 msgstr "Οι λογαριασμοί δημιουργήθηκαν με επιτυχία."
 
@@ -262,10 +280,6 @@ msgstr "αποθηκευμένα προγράμματα"
 
 msgid "amount_submitted"
 msgstr "υποβληθέντα προγράμματα"
-
-#, fuzzy
-msgid "apply_filters"
-msgstr "Apply filters"
 
 msgid "are_you_sure"
 msgstr "Είσαι σίγουρος/η; Δεν μπορείς να αναιρέσεις αυτήν την ενέργεια."
@@ -419,6 +433,10 @@ msgstr "Contributor"
 
 msgid "copy_clipboard"
 msgstr "Αντιγράφηκε με επιτυχία στο πρόχειρο"
+
+#, fuzzy
+msgid "copy_code"
+msgstr "Copy code"
 
 #, fuzzy
 msgid "copy_join_link"
@@ -842,6 +860,7 @@ msgstr "Υπόδειξη?"
 msgid "ill_work_some_more"
 msgstr "I'll work on it a little longer"
 
+#, fuzzy
 msgid "image_invalid"
 msgstr "Η εικόνα σου δεν είναι έγκυρη"
 
@@ -990,8 +1009,9 @@ msgstr "Είσαι σε μια τάξη στην οποία δεν είναι α
 msgid "level_title"
 msgstr "Επίπεδο"
 
+#, fuzzy
 msgid "levels"
-msgstr ""
+msgstr "levels"
 
 #, fuzzy
 msgid "link"
@@ -1190,6 +1210,7 @@ msgstr "This user hasn't earned the Hedy Certificate of Completion"
 msgid "no_more_flat_if"
 msgstr "Starting in level 8, the line after {if} needs to start with 4 spaces."
 
+#, fuzzy
 msgid "no_programs"
 msgstr "Δεν έχεις προγράμματα ακόμα."
 
@@ -1293,6 +1314,10 @@ msgstr "Άλλη γλώσσα με κείμενο"
 msgid "overwrite_warning"
 msgstr "Έχεις ήδη ένα πρόγραμμα με αυτό το όνομα, η αποθήκευση αυτού του προγράμματος θα αντικαταστήσει το παλιό. Είσαι σίγουρος/η?"
 
+#, fuzzy
+msgid "owner"
+msgstr "Owner"
+
 msgid "page"
 msgstr "σελίδα"
 
@@ -1371,6 +1396,10 @@ msgid "preview"
 msgstr "Προεπισκόπηση"
 
 #, fuzzy
+msgid "previewing_adventure"
+msgstr "Previewing adventure"
+
+#, fuzzy
 msgid "previewing_class"
 msgstr "You are previewing class <em>{class_name}</em> as a teacher."
 
@@ -1437,6 +1466,9 @@ msgstr "Θέλεις να συμμετάσχεις στην τάξη;"
 #, fuzzy
 msgid "public"
 msgstr "Public"
+
+msgid "public_adventures"
+msgstr "Browse public adventures"
 
 msgid "public_invalid"
 msgstr "Αυτή η επιλογή συμφωνίας δεν είναι έγκυρη"
@@ -1505,6 +1537,10 @@ msgstr "Confirm removing this user from the class."
 msgid "repair_program_logo_alt"
 msgstr "Repair program icon"
 
+#, fuzzy
+msgid "repeat_dep"
+msgstr "Starting in level 8, {repeat} needs to be used with indentation. You can see examples on the {repeat} tab in level 8."
+
 msgid "repeat_match_password"
 msgstr "Το συνθηματικό που επανέλαβες δεν ταιριάζει."
 
@@ -1555,8 +1591,9 @@ msgstr "Δεν επιτρέπεται να δεις αυτήν την περιπ
 msgid "retrieve_class_error"
 msgstr "Μόνο οι καθηγητές μπορούν να ανακτήσουν τις τάξεις"
 
+#, fuzzy
 msgid "retrieve_tag_error"
-msgstr ""
+msgstr "Error retrieving tags"
 
 #, fuzzy
 msgid "role"
@@ -1597,6 +1634,10 @@ msgid "second_teacher"
 msgstr "Second teacher"
 
 #, fuzzy
+msgid "second_teacher_copy_prompt"
+msgstr "Are you sure you want to copy this teacher?"
+
+#, fuzzy
 msgid "second_teacher_prompt"
 msgstr "Enter a teacher username to invite them."
 
@@ -1614,8 +1655,9 @@ msgstr "Επίλεξε"
 msgid "select_adventures"
 msgstr "Επίλεξε περιπέτειες"
 
+#, fuzzy
 msgid "select_all"
-msgstr ""
+msgstr "Select all"
 
 #, fuzzy
 msgid "select_lang"
@@ -1625,8 +1667,9 @@ msgstr "Select language"
 msgid "select_tag"
 msgstr "Select tag"
 
+#, fuzzy
 msgid "selected"
-msgstr ""
+msgstr "Selected"
 
 msgid "self_removal_prompt"
 msgstr "Είστε βέβαιος/α ότι θέλεις να αποχωρήσεις από αυτήν την τάξη;"
@@ -1731,15 +1774,17 @@ msgstr "Αυτός ο μαθητής είναι ήδη στη τάξη σου"
 msgid "student_already_invite"
 msgstr "Αυτός ο μαθητής έχει ήδη μια πρόσκληση σε αναμονή"
 
+#, fuzzy
 msgid "student_details"
-msgstr ""
+msgstr "Student details"
 
 #, fuzzy
 msgid "student_list"
 msgstr "Student list"
 
+#, fuzzy
 msgid "student_not_allowed_in_class"
-msgstr ""
+msgstr "Student not allowed in class"
 
 msgid "student_not_existing"
 msgstr "Αυτό το όνομα χρήστη δεν υπάρχει"
@@ -1782,11 +1827,23 @@ msgid "suggestion_color"
 msgstr "Try using another color"
 
 #, fuzzy
+msgid "suggestion_note"
+msgstr "Use a note between C0 and B9 or a number between 1 and 70"
+
+#, fuzzy
 msgid "suggestion_number"
 msgstr "Try changing the value to a number"
 
 msgid "surname"
 msgstr "Μικρό Όνομα"
+
+#, fuzzy
+msgid "survey"
+msgstr "Survey"
+
+#, fuzzy
+msgid "survey_completed"
+msgstr "Survey completed"
 
 #, fuzzy
 msgid "survey_skip"
@@ -1796,8 +1853,9 @@ msgstr "Don't show this again"
 msgid "survey_submit"
 msgstr "Submit"
 
+#, fuzzy
 msgid "tag_in_adventure"
-msgstr ""
+msgstr "Tag in adventure"
 
 #, fuzzy
 msgid "tag_input_placeholder"
@@ -1926,8 +1984,9 @@ msgstr "Hedy - Privacy terms"
 msgid "title_programs"
 msgstr "Hedy - My programs"
 
+#, fuzzy
 msgid "title_public-adventures"
-msgstr ""
+msgstr "Hedy - Public adventures"
 
 #, fuzzy
 msgid "title_recover"
@@ -2090,9 +2149,6 @@ msgstr "What should my code do?"
 #, fuzzy
 msgid "whole_world"
 msgstr "The world"
-
-msgid "write_first_program"
-msgstr "Γράψε το πρώτο σου πρόγραμμα!"
 
 msgid "year_invalid"
 msgstr "Παρακαλώ να εισάγεις ένα έτος ανάμεσα στο 1900 και {current_year}"
@@ -2260,6 +2316,8 @@ msgstr "Your program"
 #~ msgid "no_tags"
 #~ msgstr "No tags yet."
 
-#~ msgid "public_adventures"
-#~ msgstr "Public adventures"
+#~ msgid "apply_filters"
+#~ msgstr "Apply filters"
 
+#~ msgid "write_first_program"
+#~ msgstr "Γράψε το πρώτο σου πρόγραμμα!"

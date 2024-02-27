@@ -1,5 +1,4 @@
 {% extends "auth.html" %}
-{% import "macros/public-programs.html" as public_programs %}
 {% block regular_content %}
     <div id="general_info" class="flex flex-col md:flex-row gap-4 md:gap-8 justify-between md:items-center mt-8 mx-2 md:h-64">
         <div class="h-full flex items-center justify-center">
@@ -84,13 +83,56 @@
         {% endif %}
     </div>
     <h2 class="ml-4 text-3xl">{{_('programs')}}</h2>
-    {% if favourite_program or programs %}
+    <div class="w-full mb-8" id="program_filter">
+        <form>
+            <input type="hidden" name="page" value=""> <!-- Submitting the form resets the page -->
+            <input type="hidden" name="user" value="{{ from_user }}">
+            <div class="flex flex-row px-4 w-full items-center border border-gray-400 py-2 rounded-lg gap-4">
+                <select name="level" class="block appearance-none w-1/3 bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 ltr:pr-8 rtl:pl-8 rounded" data-autosubmit="true">
+                    <option selected value="">&mdash; {{_('level')}} &mdash;</option>
+                    {% if not request.args.get('adventure') %}
+                        {% for i in sorted_level_programs %}
+                            <option value="{{ i }}" {% if request.args.get('level') == i|string %}selected{% endif %}>{{ i }}</option>
+                        {% endfor %}
+                    {% else %}
+                        {% for i in sorted_adventure_programs[request.args.get('adventure')] %}
+                            <option value="{{ i }}" {% if request.args.get('level') == i|string %}selected{% endif %}>{{ i }}</option>
+                        {% endfor %}
+                    {% endif %}
+                </select>
+                <select name="adventure" class="block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 ltr:pr-8 rtl:pl-8 rounded" data-autosubmit="true">
+                    <option selected value="">&mdash; {{ _('adventure') }} &mdash;</option>
+                    {% if request.args.get('level') %}
+                        {% for name in sorted_level_programs[request.args.get('level')|int] %}
+                            <option value="{{ name }}" {% if request.args.get('adventure') == name %}selected{% endif %}>{{ name }}</option>
+                        {% endfor %}
+                    {% else %}
+                        {% for name in sorted_adventure_programs %}
+                            <option value="{{ name }}" {% if request.args.get('adventure') == name %}selected{% endif %}>{{ name }}</option>
+                        {% endfor %}
+                    {% endif %}
+                </select>
+                <div class="flex flex-col mx-2">
+                    <div class="flex flex-row items-center gap-2">
+                        <input type="radio" name="filter" value="all" {% if request.args.get('filter') != "submitted" %}checked{% endif %} data-autosubmit="true">
+                        <label for="all">{{_('all')}}</label>
+                    </div>
+                    <div class="flex flex-row items-center gap-2">
+                        <input type="radio" name="filter" value="submitted" {% if request.args.get('filter') == "submitted" %}checked{% endif %} data-autosubmit="true">
+                        <label for="submitted">{{_('submitted')}}</label>
+                    </div>
+                </div>
+                <button type="submit" class="green-btn">{{_('search_button')}}</button>
+            </div>
+        </form>
+      </div>
+    {% if favorite_program or programs %}
         <div class="flex flex-wrap w-full turn-pre-into-ace">
-        {% if favourite_program %}
+        {% if favorite_program %}
             <div class="border rounded-lg border-yellow-500 mb-4 py-2 w-full">
                 <h3 class="text-center z-10 font-bold pb-0 mb-0 text-2xl">{{_('favorite_program')}}</h3>
                 <div class="flex flex-wrap mx-auto justify-center gap-4 turn-pre-into-ace" id="user_favourite_program">
-                    {{ public_programs.program_box(favourite_program, true) }}                    
+                    {{ render_partial('htmx-adventure-card.html', user={}, adventure=favorite_program, is_program=true, is_admin=is_admin, is_favorite=true) }}
                 </div>
             </div>            
         {% endif %}
@@ -100,7 +142,7 @@
                         {{_('no_programs')}}
                     {% else %}
                         {% for program in programs %}
-                            {{ public_programs.program_box(program, false) }}                            
+                            {{ render_partial('htmx-adventure-card.html', user={}, adventure=program, is_program=true, is_admin=is_admin) }}
                         {% endfor %}
                     {% endif %}
                 </div>

@@ -3,20 +3,20 @@ import {LRParser, LocalTokenGroup} from "@lezer/lr"
 import {specializeKeyword, extendKeyword} from "./tokens"
 export const parser = LRParser.deserialize({
   version: 14,
-  states: "-[QYQPOOOOQO'#DP'#DPQYQPOOOzQPO'#DSO!YQPO'#DOOOQO'#D['#D[O!eQPO'#CuOOQO'#D]'#D]O!pQPO'#CvOOQO'#D^'#D^O#OQPO'#CxOOQO'#D_'#D_O#WQPO'#CyOOQO'#D`'#D`O#`QPO'#CzOOQO'#Cw'#CwOOQO'#Da'#DaO#hQPO'#C{OOQO'#Db'#DbO#vQPO'#C|OOQO'#Dd'#DdO$OQPO'#C}OOQO'#Cm'#CmQuQPO'#DQQ$WQPOOOOQO-E6}-E6}OOQO'#DR'#DRO$uQPO,59YOOQO'#DS'#DSOOQO-E7Q-E7QOOQO-E7Y-E7YO%QQPO'#DXO%fOSO'#DjO%nOQO'#DnOOQO'#Ct'#CtOOQO'#DX'#DXO%vQPO,59bOOQO-E7Z-E7ZO&XQPO,59dOOQO-E7[-E7[OOQO,59d,59dO&dQPO,59eOOQO-E7]-E7]OOQO,59e,59eO&oQPO,59fOOQO-E7^-E7^OOQO,59f,59fO&zQPO,59gOOQO-E7_-E7_OOQO,59g,59gOOQO-E7`-E7`O'VQPO,59hOOQO-E7b-E7bO'[QPO,59iO'aQPO,59lOOQO-E7O-E7OOOQO-E7P-E7PO(UQPO'#DSO(gQPO1G.tOOQO1G.t1G.tOOQO'#DW'#DWO(uQPO1G.yOOQO'#DT'#DTO)TQPO,59[OOOO'#DY'#DYO)`OSO,5:UOOQO,5:U,5:UOOOO'#DZ'#DZO)hOQO,5:YOOQO,5:Y,5:YOOQO-E7V-E7VOOQO'#Dc'#DcO)pQPO1G/SOOQO'#De'#DeO)xQPO1G/TO*QQPO'#DVO*VQPO7+$cOOQO-E7U-E7UO*bQPO7+$eOOQO-E7R-E7ROOQO'#DU'#DUO*sQPO1G.vOOQO1G.v1G.vOOOO-E7W-E7WOOQO1G/p1G/pOOOO-E7X-E7XOOQO1G/t1G/tOOQO-E7a-E7aOOQO7+$n7+$nOOQO-E7c-E7cOOQO7+$o7+$oO+XQPO,59qOOQO-E7T-E7TOOQO-E7S-E7S",
-  stateData: "+g~O_OS![OS~OSVOTXOUZOV]OW`OYbO[dO^TOcRO!]PO~OXjOcvX!YvX!]vX~OclO!YrX!]rX~O^TO!YiX!]iX~OSVOcoO!_pO!cqO~OTXOcvO~OUZOcyO~OV]Oc|O~OW`Oc!PO!YoX!]oX~OYbOc!TO~O[dOc!VO~OSVOTXOUZOV]OW`OYbO[dO^TOcRO~OP!^OXjOc!ZO~OQ!`Oc{X!Y{X!]{X!_{X!c{X~O!`!bO!a!dO~O!d!eO!e!gO~OcoO!_pO!cqO!Yja!]ja~OQ!`O!Yla!]la~OQ!`O!Yma!]ma~OQ!`O!Yna!]na~OQ!`O!Yoa!]oa~O]!iO~OZ!kO~O!]POStaTtaUtaVtaWtaYta[ta^tacta!Yta~OQ!`OcvXfvX!YvX!]vX~OclOf!mO!Ybi!]bi~OP!^OcoO!_pO!cqO~OQ!`OR!rOc!tO~O!`!bO!a!vO~O!d!eO!e!xO~O]!iOc!zO~OZ!kOc!|O~OclO~Of!mO!Yeq!]eq~OcoO!_pO!cqO!Ygq!]gq~OR!rOcdi!Ydi!]di!_di!cdi~OclOfya!Yya!]ya~O",
-  goto: "'S!cPPPPPPPPPPPPPPPPP!d!iP!n!iP!i#T!i!i!i#Z#Z#Z!i!i!i!i#`#j#q#w$X$d$j$p$v%Q%W%^%f%n%v&O&W&`&h&n&vPPPP&|PPP&|VgOQhVfOQhWsWt!_!pQxYQ{[Q!O^Q!RaR!]kXsWt!_!pV_OQhQQOSiQ!WR!WgShOQR!XhQkRR!YkUSOQhUmS![!}Q![kR!}!m[!aovy|!P!ZR!q!aQ!s!aR#P!sQ!n![R#O!nQ!_kR!o!_QtWS!ht!pR!p!_Q!cpR!u!cQ!fqR!w!fUUOQhRnUUWOQhRuWUYOQhRwYU[OQhRz[U^OQhR}^UaOQhR!QaUcOQhR!ScQ!j!TR!y!jUeOQhR!UeQ!l!VR!{!lXrWt!_!p",
-  nodeNames: "⚠ ask at random print forward turn color sleep is add from remove toList clear Comment Program Command Assign Text ListAccess AssignList Comma Ask String Clear Print Turtle Forward Turn Color Sleep Add Remove ErrorInvalid",
-  maxTerm: 67,
+  states: "-tQYQPOOOOQO'#DR'#DRQYQPOOO}QPO'#DUO!]QPO'#DQOOQO'#D^'#D^O!hQPO'#CvOOQO'#D_'#D_O!sQPO'#CwOOQO'#D`'#D`O#RQPO'#CxOOQO'#Da'#DaO#ZQPO'#CzOOQO'#Db'#DbO#cQPO'#C{OOQO'#Dc'#DcO#kQPO'#C|OOQO'#Cy'#CyOOQO'#Dd'#DdO#sQPO'#C}OOQO'#De'#DeO$RQPO'#DOOOQO'#Dg'#DgO$ZQPO'#DPOOQO'#Cn'#CnQxQPO'#DSQ$cQPOOOOQO-E7P-E7POOQO'#DT'#DTO%TQPO,59ZOOQO'#DU'#DUOOQO-E7S-E7SOOQO-E7[-E7[O%`QPO'#DZO%tOSO'#DmO%|OQO'#DqOOQO'#Cu'#CuOOQO'#DZ'#DZO&UQPO,59cOOQO-E7]-E7]O&gQPO,59dOOQO-E7^-E7^O&rQPO,59fOOQO-E7_-E7_OOQO,59f,59fO&}QPO,59gOOQO-E7`-E7`OOQO,59g,59gO'YQPO,59hOOQO-E7a-E7aOOQO,59h,59hO'eQPO,59iOOQO-E7b-E7bOOQO,59i,59iO'pQPO,59jOOQO-E7c-E7cO'xQPO,59kOOQO-E7e-E7eO(QQPO,59nOOQO-E7Q-E7QOOQO-E7R-E7RO(xQPO'#DUO)ZQPO1G.uOOQO1G.u1G.uOOQO'#DY'#DYO)iQPO1G.zOOQO'#DV'#DVO)wQPO,59]OOOO'#D['#D[O*SOSO,5:XOOQO,5:X,5:XOOOO'#D]'#D]O*[OQO,5:]OOQO,5:],5:]OOQO-E7X-E7XOOQO'#Df'#DfO*dQPO1G/UOOQO'#Dh'#DhO*lQPO1G/VO#UQPO'#DXO*tQPO7+$dOOQO-E7W-E7WO+PQPO7+$fOOQO-E7T-E7TOOQO'#DW'#DWO+bQPO1G.wOOQO1G.w1G.wOOOO-E7Y-E7YOOQO1G/s1G/sOOOO-E7Z-E7ZOOQO1G/w1G/wOOQO-E7d-E7dOOQO7+$p7+$pOOQO-E7f-E7fOOQO7+$q7+$qO+vQPO,59sOOQO-E7V-E7VOOQO-E7U-E7U",
+  stateData: ",U~O`OS!_OS~OSVOTZOU]OV_OWbOXXOZdO]fO_TOdRO!`PO~OYlOdxX!]xX!`xX~OdnO!]tX!`tX~O_TO!]jX!`jX~OSVOdqO!brO!fsO~OXXOdnO~OTZOdzO~OU]Od}O~OV_Od!QO~OWbOd!TO!]qX!`qX~OZdOdnO~O]fOdnO~OSVOTZOU]OV_OWbOXXOZdO]fO_TOdRO~OP!bOYlOd!_O~OQ!dOd}X!]}X!`}X!b}X!f}X~O!c!fO!d!hO~O!g!iO!h!kO~OdqO!brO!fsO!]ka!`ka~OdnO!]la!`la~OQ!dO!]na!`na~OQ!dO!]oa!`oa~OQ!dO!]pa!`pa~OQ!dO!]qa!`qa~O^!mOdnO~O[!oOdnO~O!`POSvaTvaUvaVvaWvaXvaZva]va_vadva!]va~OQ!dOdxXgxX!]xX!`xX~OdnOg!qO!]ci!`ci~OP!bOdqO!brO!fsO~OQ!dOR!vOd!xO~O!c!fO!d!zO~O!g!iO!h!|O~O^!mOd#OO~O[!oOd#QO~Og!qO!]fq!`fq~OdqO!brO!fsO!]hq!`hq~OR!vOdei!]ei!`ei!bei!fei~OdnOg{a!]{a!`{a~O",
+  goto: "'k!fPPPPPPPPPPPPPPPPPP!g!lP!q!lP!l#W!l!l!l!l#^#^#^!l!l!l!l#c#m#t#z$h$s$y%P%V%a%g%m%u%}&V&_&g&o&w'P'V'_PPPP'ePPP'eViOQjVhOQjWuWv!c!tQ|[Q!P^Q!S`Q!VcR!amXuWv!c!tVaOQjQQOSkQ![R![iSjOQR!]jQmRR!^mUSOQj[oSx!W!Y!`#RQxYQ!WeQ!YgQ!`mR#R!q[!eqz}!Q!T!_R!u!eQ!w!eR#T!wQ!r!`R#S!rQ!cmR!s!cQvWS!lv!tR!t!cQ!grR!y!gQ!jsR!{!jUUOQjRpUUWOQjRwWUYOQjRyYU[OQjR{[U^OQjR!O^U`OQjR!R`UcOQjR!UcUeOQjR!XeQ!n!WR!}!nUgOQjR!ZgQ!p!YR#P!pXtWv!c!t",
+  nodeNames: "⚠ ask at random print forward turn color sleep play is add from remove toList clear Comment Program Command Assign Text ListAccess AssignList Comma Ask String Clear Print Play Turtle Forward Turn Color Sleep Add Remove ErrorInvalid",
+  maxTerm: 70,
   nodeProps: [
-    ["group", 27,"turtle"]
+    ["group", 29,"turtle"]
   ],
-  skippedNodes: [0,15],
-  repeatNodeCount: 21,
-  tokenData: "$g~ReOY!dYZ#eZp!dpq#jqr!drs#ost#ttw!dwx$]x|!d|}$b}#Q!d#RBn!dBnBo$bBo&FV!d&FV&FW$b&FW;'S!d;'S;=`#_<%l?Hb!d?Hb?Hc$b?HcO!d~!i[c~OY!dZp!dqr!dtw!dx|!d}#Q!d#RBn!dBo&FV!d&FW;'S!d;'S;=`#_<%l?Hb!d?HcO!d~#bP;=`<%l!d~#jO!]~~#oO![~~#tO!_~~#yS_~OY#tZ;'S#t;'S;=`$V<%lO#t~$YP;=`<%l#t~$bO!c~~$gOf~",
-  tokenizers: [2, new LocalTokenGroup("_~RQYZXwxX~^O!e~~", 14, 66), new LocalTokenGroup("_~RQYZXrsX~^O!a~~", 14, 62)],
-  topRules: {"Program":[0,16]},
-  dynamicPrecedences: {"34":-10},
-  specialized: [{term: 19, get: (value: any, stack: any) => (specializeKeyword(value, stack) << 1), external: specializeKeyword},{term: 19, get: (value: any, stack: any) => (extendKeyword(value, stack) << 1) | 1, external: extendKeyword, extend: true}],
+  skippedNodes: [0,16],
+  repeatNodeCount: 22,
+  tokenData: "$g~ReOY!dYZ#eZp!dpq#jqr!drs#ost#ttw!dwx$]x|!d|}$b}#Q!d#RBn!dBnBo$bBo&FV!d&FV&FW$b&FW;'S!d;'S;=`#_<%l?Hb!d?Hb?Hc$b?HcO!d~!i[d~OY!dZp!dqr!dtw!dx|!d}#Q!d#RBn!dBo&FV!d&FW;'S!d;'S;=`#_<%l?Hb!d?HcO!d~#bP;=`<%l!d~#jO!`~~#oO!_~~#tO!b~~#yS`~OY#tZ;'S#t;'S;=`$V<%lO#t~$YP;=`<%l#t~$bO!f~~$gOg~",
+  tokenizers: [2, new LocalTokenGroup("_~RQYZXwxX~^O!h~~", 14, 69), new LocalTokenGroup("_~RQYZXrsX~^O!d~~", 14, 65)],
+  topRules: {"Program":[0,17]},
+  dynamicPrecedences: {"36":-10},
+  specialized: [{term: 20, get: (value: any, stack: any) => (specializeKeyword(value, stack) << 1), external: specializeKeyword},{term: 20, get: (value: any, stack: any) => (extendKeyword(value, stack) << 1) | 1, external: extendKeyword, extend: true}],
   tokenPrec: 0
 })

@@ -650,6 +650,26 @@ class TestsLevel12(HedyTester):
 
         self.multi_level_tester(code=code, unused_allowed=True, expected=expected, max_level=17)
 
+    def test_play(self):
+        code = textwrap.dedent("""\
+            n = 'C4' #
+            play n""")
+
+        expected = textwrap.dedent("""\
+            n = 'C4'
+            chosen_note = str(n).upper()
+            if chosen_note not in notes_mapping.keys() and chosen_note not in notes_mapping.values():
+                raise Exception('catch_value_exception')
+            play(notes_mapping.get(chosen_note, chosen_note))
+            time.sleep(0.5)""")
+
+        self.multi_level_tester(
+            code=code,
+            translate=False,
+            expected=expected,
+            max_level=17
+        )
+
     def test_ask_with_list_var(self):
         code = textwrap.dedent("""\
         colors is 'orange', 'blue', 'green'
@@ -1286,31 +1306,18 @@ class TestsLevel12(HedyTester):
     #
     #     self.multi_level_tester(max_level=18, code=code, expected=expected)
 
+    # Lists can be compared for equality starting with level 14
     def test_if_equality_lists(self):
         code = textwrap.dedent("""\
-        m is 1, 2
-        n is 1, 2
-        if m is n
-            print 'success!'""")
-        # FH, Mar 2023 why should this fail?
+         m is 1, 2
+         n is 1, 2
+         if m is n
+             print 'success!'""")
         self.multi_level_tester(
             max_level=13,
             code=code,
             extra_check_function=lambda c: c.exception.arguments['line_number'] == 3,
             exception=hedy.exceptions.InvalidArgumentTypeException)
-
-    @parameterized.expand(HedyTester.quotes)
-    def test_if_in_list_with_string_var_gives_type_error(self, q):
-        code = textwrap.dedent(f"""\
-        items is {q}red{q}
-        if {q}red{q} in items
-            print {q}found!{q}""")
-        self.multi_level_tester(
-            max_level=16,
-            code=code,
-            extra_check_function=lambda c: c.exception.arguments['line_number'] == 2,
-            exception=hedy.exceptions.InvalidArgumentTypeException
-        )
 
     def test_if_equality_with_list_gives_error(self):
         code = textwrap.dedent("""\
@@ -1335,6 +1342,142 @@ class TestsLevel12(HedyTester):
             code=code,
             exception=hedy.exceptions.InvalidTypeCombinationException,
             extra_check_function=lambda c: c.exception.arguments['line_number'] == 3
+        )
+
+    #
+    # in/not-in list commands
+    #
+    @parameterized.expand([
+        ('in', 'Found'),
+        ('not in', 'Not found')
+    ])
+    def test_if_in_not_in_list_with_strings(self, command, expected_output):
+        code = textwrap.dedent(f"""\
+         letters is 'a', 'b', 'c'
+         if 'a' {command} letters
+           print 'Found'
+         else
+           print 'Not found'""")
+
+        expected = textwrap.dedent(f"""\
+         letters = ['a', 'b', 'c']
+         if 'a' {command} letters:
+           print(f'''Found''')
+         else:
+           print(f'''Not found''')""")
+
+        self.multi_level_tester(
+            max_level=15,
+            code=code,
+            expected=expected,
+            output=expected_output
+        )
+
+    @parameterized.expand([
+        ('in', 'True'),
+        ('not in', 'False')
+    ])
+    def test_if_number_in_not_in_list_with_numbers(self, operator, expected_output):
+        code = textwrap.dedent(f"""\
+        items is 1, 2, 3
+        if 1 {operator} items
+          print 'True'
+        else
+          print 'False'""")
+
+        expected = textwrap.dedent(f"""\
+        items = [1, 2, 3]
+        if 1 {operator} items:
+          print(f'''True''')
+        else:
+          print(f'''False''')""")
+
+        self.multi_level_tester(
+            max_level=15,
+            code=code,
+            expected=expected,
+            output=expected_output
+        )
+
+    @parameterized.expand([
+        ('in', 'False'),
+        ('not in', 'True')
+    ])
+    def test_if_text_in_not_in_list_with_numbers(self, operator, expected_output):
+        code = textwrap.dedent(f"""\
+            items is 1, 2, 3
+            if '1' {operator} items
+              print 'True'
+            else
+              print 'False'""")
+
+        expected = textwrap.dedent(f"""\
+            items = [1, 2, 3]
+            if '1' {operator} items:
+              print(f'''True''')
+            else:
+              print(f'''False''')""")
+
+        self.multi_level_tester(
+            max_level=15,
+            code=code,
+            expected=expected,
+            output=expected_output
+        )
+
+    @parameterized.expand(['in', 'not in'])
+    def test_unquoted_lhs_in_not_in_list_gives_error(self, operator):
+        code = textwrap.dedent(f"""\
+            items is 1, 2, 3
+            if a {operator} items
+              print 'True'""")
+
+        self.multi_level_tester(
+            code=code,
+            max_level=15,
+            skip_faulty=False,
+            exception=hedy.exceptions.UnquotedAssignTextException,
+            extra_check_function=lambda c: c.exception.arguments['line_number'] == 2
+        )
+
+    @parameterized.expand(['in', 'not in'])
+    def test_undefined_rhs_in_not_in_list_gives_error(self, operator):
+        code = textwrap.dedent(f"""\
+            items is 1, 2, 3
+            if 1 {operator} list
+              print 'True'""")
+
+        self.multi_level_tester(
+            code=code,
+            max_level=15,
+            exception=hedy.exceptions.UndefinedVarException,
+            extra_check_function=lambda c: c.exception.arguments['line_number'] == 2
+        )
+
+    @parameterized.expand([(c, q) for c in HedyTester.in_not_in_list_commands for q in HedyTester.quotes])
+    def test_if_in_not_in_list_with_string_var_gives_type_error(self, c, q):
+        code = textwrap.dedent(f"""\
+        items is {q}red{q}
+        if {q}red{q} {c} items
+            print {q}found!{q}""")
+        self.multi_level_tester(
+            max_level=16,
+            code=code,
+            extra_check_function=lambda c: c.exception.arguments['line_number'] == 2,
+            exception=hedy.exceptions.InvalidArgumentTypeException
+        )
+
+    @parameterized.expand(HedyTester.in_not_in_list_commands)
+    def test_if_not_in_and_in_list_with_input_gives_type_error(self, operator):
+        code = textwrap.dedent(f"""\
+            items is ask 'What are the items?'
+            if 'red' {operator} items
+              print 'found!'""")
+        self.multi_level_tester(
+            max_level=16,
+            code=code,
+            extra_check_function=lambda c: c.exception.arguments['line_number'] == 2,
+            exception=hedy.exceptions.InvalidArgumentTypeException
         )
 
     #
@@ -1467,11 +1610,13 @@ class TestsLevel12(HedyTester):
         repeat n times
             print 'me wants a cookie!'""")
 
-        expected = textwrap.dedent("""\
-        n = 5
-        for i in range(int(n)):
-          print(f'''me wants a cookie!''')
-          time.sleep(0.1)""")
+        expected = HedyTester.dedent(
+            "n = 5",
+            self.variable_type_check_transpiled('n', 'int'),
+            "for i in range(int(n)):",
+            ("print(f'''me wants a cookie!''')", '  '),
+            ("time.sleep(0.1)", '  ')
+        )
 
         output = textwrap.dedent("""\
         me wants a cookie!
@@ -1903,6 +2048,72 @@ class TestsLevel12(HedyTester):
             extra_check_function=lambda c: c.exception.arguments['line_number'] == 1,
             exception=hedy.exceptions.InvalidArgumentTypeException)
 
+    def test_concat_promotes_ask_input_to_string(self):
+        code = textwrap.dedent("""\
+            answer is ask 'Yes or No?'
+            print 'The answer is ' + answer""")
+
+        expected = textwrap.dedent("""\
+            answer = input(f'''Yes or No?''')
+            try:
+              answer = int(answer)
+            except ValueError:
+              try:
+                answer = float(answer)
+              except ValueError:
+                pass
+            print(f'''{'The answer is ' + answer}''')""")
+
+        self.multi_level_tester(
+            code=code,
+            max_level=17,
+            expected=expected
+        )
+
+    def test_concat_promotes_ask_input_to_int(self):
+        code = textwrap.dedent("""\
+            answer is ask '1 or 2?'
+            print 5 + answer""")
+
+        expected = textwrap.dedent("""\
+            answer = input(f'''1 or 2?''')
+            try:
+              answer = int(answer)
+            except ValueError:
+              try:
+                answer = float(answer)
+              except ValueError:
+                pass
+            print(f'''{5 + answer}''')""")
+
+        self.multi_level_tester(
+            code=code,
+            max_level=17,
+            expected=expected
+        )
+
+    def test_concat_promotes_ask_input_to_float(self):
+        code = textwrap.dedent("""\
+            answer is ask '1 or 2?'
+            print 0.5 + answer""")
+
+        expected = textwrap.dedent("""\
+            answer = input(f'''1 or 2?''')
+            try:
+              answer = int(answer)
+            except ValueError:
+              try:
+                answer = float(answer)
+              except ValueError:
+                pass
+            print(f'''{0.5 + answer}''')""")
+
+        self.multi_level_tester(
+            code=code,
+            max_level=17,
+            expected=expected
+        )
+
     # def test_access_variable_before_definition(self):
     #   code = textwrap.dedent("""\
     #           a is b
@@ -2170,6 +2381,28 @@ class TestsLevel12(HedyTester):
             expected=expected
         )
 
+    def test_undefined_function_without_params(self):
+        code = textwrap.dedent("""\
+        call func""")
+
+        self.multi_level_tester(
+            code=code,
+            max_level=16,
+            skip_faulty=False,
+            exception=hedy.exceptions.UndefinedFunctionException
+        )
+
+    def test_undefined_function_with_params(self):
+        code = textwrap.dedent("""\
+        print call func with 1, 2""")
+
+        self.multi_level_tester(
+            code=code,
+            max_level=16,
+            skip_faulty=False,
+            exception=hedy.exceptions.UndefinedFunctionException
+        )
+
     def test_function_use_builtin_name(self):
         code = textwrap.dedent("""\
         define sum with n1, n2
@@ -2187,6 +2420,34 @@ class TestsLevel12(HedyTester):
             max_level=16,
             skip_faulty=False,
             expected=expected
+        )
+
+    def test_too_many_parameters(self):
+        code = textwrap.dedent("""\
+        define func with n1, n2
+            return n1 + n2
+
+        print call func with 1, 2, 3""")
+
+        self.multi_level_tester(
+            code=code,
+            max_level=16,
+            skip_faulty=False,
+            exception=hedy.exceptions.WrongNumberofArguments
+        )
+
+    def test_too_few_parameters(self):
+        code = textwrap.dedent("""\
+        define func with n1, n2
+            return n1 + n2
+
+        print call func with 1""")
+
+        self.multi_level_tester(
+            code=code,
+            max_level=16,
+            skip_faulty=False,
+            exception=hedy.exceptions.WrongNumberofArguments
         )
 
     def test_unused_function_use_builtin_name(self):
@@ -2343,4 +2604,53 @@ class TestsLevel12(HedyTester):
             unused_allowed=True,
             skipped_mappings=skipped_mappings,
             max_level=16
+        )
+
+# music tests
+    def test_play_random(self):
+        code = textwrap.dedent("""\
+        notes = 'C4', 'E4', 'D4', 'F4', 'G4'
+        play notes at random""")
+
+        expected = textwrap.dedent("""\
+        notes = ['C4', 'E4', 'D4', 'F4', 'G4']
+        chosen_note = str(random.choice(notes)).upper()
+        if chosen_note not in notes_mapping.keys() and chosen_note not in notes_mapping.values():
+            raise Exception('catch_value_exception')
+        play(notes_mapping.get(chosen_note, chosen_note))
+        time.sleep(0.5)""")
+
+        self.multi_level_tester(
+            code=code,
+            translate=False,
+            skip_faulty=False,
+            unused_allowed=True,
+            expected=expected,
+            max_level=15
+        )
+
+    def test_play_integers(self):
+        code = textwrap.dedent("""\
+        notes = 1, 2, 3
+
+        repeat 10 times
+            play notes at random""")
+
+        expected = textwrap.dedent("""\
+        notes = [1, 2, 3]
+        for i in range(int('10')):
+          chosen_note = str(random.choice(notes)).upper()
+          if chosen_note not in notes_mapping.keys() and chosen_note not in notes_mapping.values():
+              raise Exception('catch_value_exception')
+          play(notes_mapping.get(chosen_note, chosen_note))
+          time.sleep(0.5)
+          time.sleep(0.1)""")
+
+        self.multi_level_tester(
+            code=code,
+            translate=False,
+            skip_faulty=False,
+            unused_allowed=True,
+            expected=expected,
+            max_level=15
         )

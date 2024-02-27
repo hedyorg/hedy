@@ -7,18 +7,31 @@
   <div class="w-full mb-8" id="program_filter">
     <form>
         <input type="hidden" name="page" value=""> <!-- Submitting the form resets the page -->
+        <input type="hidden" name="user" value="{{ from_user }}">
         <div class="flex flex-row px-4 w-full items-center border border-gray-400 py-2 rounded-lg gap-4">
             <select name="level" class="block appearance-none w-1/3 bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 ltr:pr-8 rtl:pl-8 rounded" data-autosubmit="true">
                 <option selected value="">&mdash; {{_('level')}} &mdash;</option>
-                {% for i in range(1, (max_level + 1)) %}
-                    <option value="{{ i }}" {% if request.args.get('level') == i|string %}selected{% endif %}>{{ i }}</option>
-                {% endfor %}
+                {% if not request.args.get('adventure') %}
+                    {% for i in sorted_level_programs %}
+                        <option value="{{ i }}" {% if request.args.get('level') == i|string %}selected{% endif %}>{{ i }}</option>
+                    {% endfor %}
+                {% else %}
+                    {% for i in sorted_adventure_programs[request.args.get('adventure')] %}
+                        <option value="{{ i }}" {% if request.args.get('level') == i|string %}selected{% endif %}>{{ i }}</option>
+                    {% endfor %}
+                {% endif %}
             </select>
             <select name="adventure" class="block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 ltr:pr-8 rtl:pl-8 rounded" data-autosubmit="true">
                 <option selected value="">&mdash; {{ _('adventure') }} &mdash;</option>
-                {% for adventure_key, name in adventure_names.items() %}
-                    <option value="{{ adventure_key }}" {% if request.args.get('adventure') == adventure_key %}selected{% endif %}>{{ name }}</option>
-                {% endfor %}
+                {% if request.args.get('level') %}
+                    {% for name in sorted_level_programs[request.args.get('level')|int] %}
+                        <option value="{{ name }}" {% if request.args.get('adventure') == name %}selected{% endif %}>{{ name }}</option>
+                    {% endfor %}
+                {% else %}
+                    {% for name in sorted_adventure_programs %}
+                        <option value="{{ name }}" {% if request.args.get('adventure') == name %}selected{% endif %}>{{ name }}</option>
+                    {% endfor %}
+                {% endif %}
             </select>
             <div class="flex flex-col mx-2">
                 <div class="flex flex-row items-center gap-2">
@@ -35,6 +48,9 @@
     </form>
   </div>
   <div class="programs w-full">
+    {% if programs|length == 0 %}
+        <p class="text-xl" >{{_('no_programs')}}</p>
+    {% endif %}
   {% for program in programs %}
     <div id="program_{{ loop.index }}" class="program w-full border-solid border-2 {% if program.submitted %} border-gray-400 bg-gray-400 {% else %} border-orange-400 {% endif %} rounded p-4 mb-4">
         <h3 id="submitted_header_{{ loop.index }}" class="mt-0 mb-4 text-red-500 text-center {% if not program.submitted %} hidden{% endif %}">{{_('submitted_header')}}</h3>
@@ -70,7 +86,7 @@
             {% endif %}
         </div>
         <div class="w-3/4 turn-pre-into-ace mb-4">
-          <pre level="{{ program.level }}">{{program.code }}</pre>
+          <pre level="{{ program.level }}">{{program.preview_code }}</pre>
         </div>
         <div id="submitted_button_container_{{ loop.index }}" class="flex flex-row gap-2" {% if not program.submitted %} style="display: none;" {% endif %}>
             <button class="green-btn" onclick="window.open (hedyApp.viewProgramLink('{{program.id}}'))">{{_('open')}}</button>
@@ -82,19 +98,20 @@
         <div id="non_submitted_button_container_{{ loop.index }}" class="flex flex-row w-full gap-2 {% if program.submitted %} hidden {% endif %}">
             <a href="/hedy/{{program.level|string}}/{{program.id}}"><button class="green-btn">{{_('open')}}</button></a>
             {% if not second_teachers_programs %}
-            <button class="red-btn" data-cy="delete_non_submitted_program_{{ loop.index }}" onclick="hedyApp.delete_program('{{ program.id }}', {{ loop.index }}, '{{_('delete_confirm')}}')">{{_('delete')}}</button>
-            <div id="public_button_container_{{ loop.index }}" class="flex flex-row w-full gap-2" {% if not program.public %}style="display: none;"{% endif %}> <!-- ml-auto alignment doesn't work with hidden but does with display: none; -->
+            <div id="public_button_container_{{ loop.index }}" {% if not program.public %}style="display: none;"{% endif %}> <!-- ml-auto alignment doesn't work with hidden but does with display: none; -->
+                <button class="green-btn" onclick="hedyApp.modal.confirm ('{{_('submit_warning')}}', function () {hedyApp.submit_program ('{{program.id}}', {{ loop.index }})})">{{_('submit_program')}}</button>
                 <button class="blue-btn" data-cy="unshare_program_{{ loop.index }}" onclick="hedyApp.share_program('{{program.id}}', {{ loop.index }}, false, '{{_('unshare_confirm')}}')">{{_('unshare')}}</button>
                 <button class="blue-btn" onclick="hedyApp.copy_to_clipboard(hedyApp.viewProgramLink('{{program.id}}'), '{{_('copy_clipboard')}}')">{{_('copy_link_to_share')}}</button>
-                <button class="green-btn ltr:ml-auto rtl:mr-auto" onclick="hedyApp.modal.confirm ('{{_('submit_warning')}}', function () {hedyApp.submit_program ('{{program.id}}', {{ loop.index }})})">{{_('submit_program')}}</button>
             </div>
             <div id="non_public_button_container_{{ loop.index }}" class="{% if program.public %} hidden {% endif %}">
                 <button class="blue-btn" onclick="hedyApp.share_program ('{{program.id}}', {{ loop.index }}, true, '{{_('share_confirm')}}')">{{_('share')}}</button>
             </div>
+            <button class="blue-btn" onclick="hedyApp.copy_to_clipboard(`{{program.code}}`, '{{_('copy_clipboard')}}')">{{_('copy_code')}}</button>
+            <button class="red-btn ltr:ml-auto rtl:mr-auto" data-cy="delete_non_submitted_program_{{ loop.index }}" onclick="hedyApp.delete_program('{{ program.id }}', {{ loop.index }}, '{{_('delete_confirm')}}')">{{_('delete')}}</button>
             {% endif %}
         </div>
     </div>
-  {% endfor %}
+    {% endfor %}
 
     {% if second_teachers_programs %}
     {% if programs|length == 0 %}
@@ -105,12 +122,6 @@
         </div>
     {% endif %}
 
-  {% if programs|length == 0 and not from_user and not filtered_level and not filtered_adventure %}
-    <p>{{_('no_programs')}}
-        <br><br>
-        <button class="btn block flex-none self-end" onclick="window.open ('/hedy', '_self')">{{_('write_first_program')}}</button>
-    </p>
-  {% endif %}
   {% if next_page_url %}
     <p>
         <a href="{{next_page_url}}" class="btn green-btn">{{_('next_page')}}</a>

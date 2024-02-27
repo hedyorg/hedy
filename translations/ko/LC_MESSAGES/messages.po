@@ -7,15 +7,16 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2023-12-19 19:41+0100\n"
-"PO-Revision-Date: 2023-12-18 20:12+0000\n"
+"POT-Creation-Date: 2024-02-13 11:36+0100\n"
+"PO-Revision-Date: 2024-02-26 20:10+0000\n"
 "Last-Translator: Prefill add-on <noreply-addon-prefill@weblate.org>\n"
-"Language: ko\n"
 "Language-Team: ko <LL@li.org>\n"
-"Plural-Forms: nplurals=1; plural=0;\n"
+"Language: ko\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"X-Generator: Weblate 5.5-dev\n"
 "Generated-By: Babel 2.14.0\n"
 
 #, fuzzy
@@ -25,6 +26,10 @@ msgstr "{access_line_number} 라인에서 {name} 변수를 사용하려고 했�
 #, fuzzy
 msgid "Cyclic Var Definition"
 msgstr "{is} 명령어의 오른쪽에서 이름 {variable}을(를) 설정해야 사용할 수 있습니다."
+
+#, fuzzy
+msgid "Function Undefined"
+msgstr "You tried to use the function {name}, but you didn't define it."
 
 #, fuzzy
 msgid "Has Blanks"
@@ -75,12 +80,20 @@ msgid "Lonely Text"
 msgstr "{line_number} 행에서 사용한 텍스트에 명령을 사용하지 않은 것 같습니다"
 
 #, fuzzy
+msgid "Missing Additional Command"
+msgstr "It looks like you forgot to complete writing {command} on line {line_number}."
+
+#, fuzzy
 msgid "Missing Command"
 msgstr "{line_number} 라인에서 명령을 사용하는 것을 잊어버린 것 같습니다."
 
 #, fuzzy
 msgid "Missing Inner Command"
 msgstr "{line_number} 라인에서 사용한 {command} 문에 명령을 사용하지 않은 것 같습니다."
+
+#, fuzzy
+msgid "Missing Variable"
+msgstr "It looks like your {command} is missing a variable at the start of the line."
 
 #, fuzzy
 msgid "Misspelled At Command"
@@ -141,6 +154,10 @@ msgstr "{name} 변수를 사용하려고 했지만 설정하지 않았습니다.
 #, fuzzy
 msgid "Wrong Level"
 msgstr "올바른 Hedy 코드이지만 올바른 레벨은 아닙니다. {working_level} 레벨에 대해 {offending_keyword}을(를) 작성했습니다. 팁: {tip}"
+
+#, fuzzy
+msgid "Wrong Number of Arguments"
+msgstr "Your function used the wrong number of arguments. You provided {used_number} but the function {name} needs {defined_number}"
 
 #, fuzzy
 msgid "account_overview"
@@ -205,14 +222,6 @@ msgstr "당신은 이미 동일한 모험 이름을 사용하고 있습니다."
 #, fuzzy
 msgid "adventure_empty"
 msgstr "모험 이름을 입력하지 않으셨군요!"
-
-#, fuzzy
-msgid "adventure_exp_1"
-msgstr "선택한 모험을 오른쪽에 입력합니다. 모험을 만든 후에는 \"사용자 지정\" 아래의 수업 중 하나에 모험을 포함시킬 수 있습니다. 모험에 명령어를 포함시키고 싶다면 다음과 같은 코드 앵커를 사용하십시오:"
-
-#, fuzzy
-msgid "adventure_exp_2"
-msgstr "예를 들어 학생에게 템플릿이나 코드 예제를 제공하는 등 실제 코드 조각을 보여주고 싶다면 다음과 같이 프리앵커를 사용하십시오:"
 
 #, fuzzy
 msgid "adventure_exp_3"
@@ -305,10 +314,6 @@ msgstr "프로그램이 저장 되었어요"
 #, fuzzy
 msgid "amount_submitted"
 msgstr "프로그램이 제출 되었어요"
-
-#, fuzzy
-msgid "apply_filters"
-msgstr "Apply filters"
 
 #, fuzzy
 msgid "are_you_sure"
@@ -477,6 +482,10 @@ msgstr "기여자"
 #, fuzzy
 msgid "copy_clipboard"
 msgstr "클립보드에 성공적으로 복사되었습니다"
+
+#, fuzzy
+msgid "copy_code"
+msgstr "Copy code"
 
 #, fuzzy
 msgid "copy_join_link"
@@ -907,10 +916,6 @@ msgid "hello_logo"
 msgstr "안녕하세요"
 
 #, fuzzy
-msgid "hello_world"
-msgstr "안녕하세요!"
-
-#, fuzzy
 msgid "hidden"
 msgstr "숨기기"
 
@@ -1130,8 +1135,9 @@ msgstr "이 레벨은 아직 수업에서 사용할 수 없습니다"
 msgid "level_title"
 msgstr "레벨"
 
+#, fuzzy
 msgid "levels"
-msgstr ""
+msgstr "levels"
 
 #, fuzzy
 msgid "link"
@@ -1494,6 +1500,10 @@ msgid "overwrite_warning"
 msgstr "You already have a program with this name, saving this program will replace the old one. Are you sure?"
 
 #, fuzzy
+msgid "owner"
+msgstr "Owner"
+
+#, fuzzy
 msgid "page"
 msgstr "page"
 
@@ -1590,6 +1600,10 @@ msgid "preview"
 msgstr "Preview"
 
 #, fuzzy
+msgid "previewing_adventure"
+msgstr "Previewing adventure"
+
+#, fuzzy
 msgid "previewing_class"
 msgstr "You are previewing class <em>{class_name}</em> as a teacher."
 
@@ -1668,6 +1682,9 @@ msgstr "Do you want to join this class?"
 #, fuzzy
 msgid "public"
 msgstr "Public"
+
+msgid "public_adventures"
+msgstr "Browse public adventures"
 
 #, fuzzy
 msgid "public_invalid"
@@ -1749,6 +1766,10 @@ msgid "repair_program_logo_alt"
 msgstr "Repair program icon"
 
 #, fuzzy
+msgid "repeat_dep"
+msgstr "Starting in level 8, {repeat} needs to be used with indentation. You can see examples on the {repeat} tab in level 8."
+
+#, fuzzy
 msgid "repeat_match_password"
 msgstr "The repeated password does not match."
 
@@ -1808,8 +1829,9 @@ msgstr "이 모험을 볼 수 없습니다!"
 msgid "retrieve_class_error"
 msgstr "선생님들만이 수업을 다시 들을 수 있다"
 
+#, fuzzy
 msgid "retrieve_tag_error"
-msgstr ""
+msgstr "Error retrieving tags"
 
 #, fuzzy
 msgid "role"
@@ -1856,6 +1878,10 @@ msgid "second_teacher"
 msgstr "Second teacher"
 
 #, fuzzy
+msgid "second_teacher_copy_prompt"
+msgstr "Are you sure you want to copy this teacher?"
+
+#, fuzzy
 msgid "second_teacher_prompt"
 msgstr "Enter a teacher username to invite them."
 
@@ -1875,8 +1901,9 @@ msgstr "선택하기"
 msgid "select_adventures"
 msgstr "모험 선택 및 주문"
 
+#, fuzzy
 msgid "select_all"
-msgstr ""
+msgstr "Select all"
 
 #, fuzzy
 msgid "select_lang"
@@ -1886,8 +1913,9 @@ msgstr "Select language"
 msgid "select_tag"
 msgstr "Select tag"
 
+#, fuzzy
 msgid "selected"
-msgstr ""
+msgstr "Selected"
 
 #, fuzzy
 msgid "self_removal_prompt"
@@ -2009,15 +2037,17 @@ msgstr "이 학생은 이미 당신의 반에 소속되어 있어요."
 msgid "student_already_invite"
 msgstr "이 학생은 이미 초대 대기 중입니다."
 
+#, fuzzy
 msgid "student_details"
-msgstr ""
+msgstr "Student details"
 
 #, fuzzy
 msgid "student_list"
 msgstr "\"학생 목록\""
 
+#, fuzzy
 msgid "student_not_allowed_in_class"
-msgstr ""
+msgstr "Student not allowed in class"
 
 #, fuzzy
 msgid "student_not_existing"
@@ -2068,12 +2098,24 @@ msgid "suggestion_color"
 msgstr "Try using another color"
 
 #, fuzzy
+msgid "suggestion_note"
+msgstr "Use a note between C0 and B9 or a number between 1 and 70"
+
+#, fuzzy
 msgid "suggestion_number"
 msgstr "Try changing the value to a number"
 
 #, fuzzy
 msgid "surname"
 msgstr "First Name"
+
+#, fuzzy
+msgid "survey"
+msgstr "Survey"
+
+#, fuzzy
+msgid "survey_completed"
+msgstr "Survey completed"
 
 #, fuzzy
 msgid "survey_skip"
@@ -2083,8 +2125,9 @@ msgstr "Don't show this again"
 msgid "survey_submit"
 msgstr "Submit"
 
+#, fuzzy
 msgid "tag_in_adventure"
-msgstr ""
+msgstr "Tag in adventure"
 
 #, fuzzy
 msgid "tag_input_placeholder"
@@ -2219,8 +2262,9 @@ msgstr "Hedy - 개인 정보 보호 약관"
 msgid "title_programs"
 msgstr "Hedy - 내 프로그램"
 
+#, fuzzy
 msgid "title_public-adventures"
-msgstr ""
+msgstr "Hedy - Public adventures"
 
 #, fuzzy
 msgid "title_recover"
@@ -2405,10 +2449,6 @@ msgid "whole_world"
 msgstr "The world"
 
 #, fuzzy
-msgid "write_first_program"
-msgstr "Write your first program!"
-
-#, fuzzy
 msgid "year_invalid"
 msgstr "Please enter a year between 1900 and {current_year}."
 
@@ -2454,6 +2494,20 @@ msgstr "Your program"
 #~ msgid "no_tags"
 #~ msgstr "No tags yet."
 
-#~ msgid "public_adventures"
-#~ msgstr "Public adventures"
+#~ msgid "apply_filters"
+#~ msgstr "Apply filters"
 
+#~ msgid "write_first_program"
+#~ msgstr "Write your first program!"
+
+#, fuzzy
+msgid "adventure_exp_2"
+msgstr "If you want to show actual code snippets, for example to give student a template or example of the code. Please use pre anchors like this:"
+
+#, fuzzy
+msgid "hello_world"
+msgstr "Hello world!"
+
+#, fuzzy
+msgid "adventure_exp_1"
+msgstr "Type your adventure of choice on the right-hand side. After creating your adventure you can include it in one of your classes under \"customizations\". If you want to include a command in your adventure please use code anchors like this:"

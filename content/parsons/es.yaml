@@ -147,7 +147,7 @@ levels:
                 {repeat} 5 {times}
                   {print} 'Haz sido seleccionado en el equipo... '
                   {print} equipos {at} {random}
-                  dormir 2
+                  {sleep} 2
         2:
             story: Imprime la cuenta regresiva para un juego de escondidas.
             code: |-
@@ -187,8 +187,8 @@ levels:
     10:
         1:
             story: |-
-                Ayuda a esta familia creando un cronograma de quién cocinará y qué deberían preparar esta semana. Los comandos borrar garantizan que nadie tenga que cocinar dos veces y que tengan una cena diferente todos los días.
-                **¡Cuidado!** el orden de las variables debe ser primero días, luego personas y, por último, opciones_cena. Esto también se aplica a las líneas con los comandos borrar.
+                Ayuda a esta familia creando un horario de quién cocina y qué debe preparar esta semana. Los comandos `{remove}`` aseguran que nadie tenga que cocinar dos veces y que tengan una cena diferente cada día.
+                **Recuerda que el orden de las variables debe ser primero días, luego personas y por último opciones_de_cena. Esto va para las líneas con los comandos `{remove}` también.
             code: |-
                 días = Lunes, Martes, Miércoles, Jueves, Viernes
                 gente = mamá, papá, Martin, Abby, Jesse

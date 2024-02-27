@@ -29,7 +29,7 @@ levels:
                 {print} Wir schauen film
                 {print} Viel Spaß!
         2:
-            story: This is the webshop of a toy store. Create a program where costumers can add an item to their shopping cart.
+            story: Das hier ist der Webshop eines Spielzeugladens. Erstelle ein Programm, mit dem Kunden einen Artikel in den Einkaufswagen legen können.
             code: |-
                 {print} Willkommen in unserem Spielzeugladen
                 spielzeug {is} {ask} Was möchtest du kaufen?
@@ -37,8 +37,11 @@ levels:
                 {print} Danke für deinen Einkauf bei uns!
     3:
         1:
-            story: "The new school year at Hogwarts is starting! \nIt is the job of the sorting hat to sort you into one of the houses.\nWhich house will you be sorted into? Are you a Gryffindor, Hufflepuff, Ravenclaw or Slytherin.\nBefore the sorting hat reveals your house, you can tell it to not pick\
-                \ one of the houses."
+            story: |-
+                Das neue Schuljahr in Hogwarts beginnt!
+                Es ist die Aufgabe des Sortierhutes, dich in eines der Häuser zu sortieren.
+                In welches Haus wirst du einsortiert werden? Bist du ein Gryffindor, Hufflepuff, Ravenclaw oder Slytherin.
+                Bevor der Sortierhut dein Haus verrät, kannst du ihm sagen, dass er keines der Häuser auswählen soll.
             code: |-
                 {print} Der Sortierhut ist bereit dich in eines der Hogwarts Häuser einzuteilen.
                 häuser {is} Gryffindor, Hufflepuf, Ravenclaw, Slytherin
@@ -46,7 +49,7 @@ levels:
                 {remove} abneigung {from} häuser
                 {print} Wohl nicht abneigung, was? Besser ein... houses {at} {random}
         2:
-            story: Create a program that chooses a random meal for you. Make a list of food and a list of toppings and let the program decide what you'll have!
+            story: Erstelle ein Programm, das eine zufällige Mahlzeit für dich auswählt. Erstelle eine Essensliste und eine Liste von Garnierungen und lasse das Programm entscheiden, was du essen wirst!
             code: |-
                 Essen {is} Pizza, Eis, Salat, Sandwich
                 Belag {is} Schokolade, Käse, Thunfisch, Streusel
@@ -55,9 +58,9 @@ levels:
                 {print} Essen {at} {random} mit Belag {at} {random}
         3:
             story: |-
-                In a chess tournament there are three players left.
-                Create a program that decides which two players have to play against each other first.
-                Start by printing the two players who play the first match, then print against which player the winner will play.
+                Bei einem Schachturnier sind noch drei Spieler übrig.
+                Erstelle ein Programm, das entscheidet, welche beiden Spieler zuerst gegeneinander spielen müssen.
+                Drucke zunächst die beiden Spieler aus, die das erste Spiel bestreiten, und drucke dann aus, gegen welchen Spieler der Gewinner spielen wird.
             code: |-
                 spieler {is} Liam, Noah, Sophie
                 spieler_1 {is} spieler {at} {random}
@@ -120,7 +123,7 @@ levels:
             code: |-
                 {print} 'Du hast Geburtstag!'
                 leute = {ask} 'Wie vielen Leuten möchtest du ein Stück Torte geben?'
-                kuchen_anzahl {is} leute/8
+                kuchen_anzahl = leute/8
                 {print} 'Du musst ' kuchen_anzahl ' Torten kaufen'
     7:
         1:
@@ -190,8 +193,8 @@ levels:
     10:
         1:
             story: |-
-                Help this family out by creating a schedule of who is cooking and what they should be making this week. The remove commands make sure nobody has to cook twice and they have a differnet dinner every day.
-                **Mind!** the variable order should be first days, then people, and lastly dinner_options. This goes for the lines with the remove commands too.
+                Hilf dieser Familie, indem du einen Plan erstellst, wer kocht und was sie diese Woche kochen sollten. Die `{remove}` Befehle stellen sicher, dass niemand zwei Mal kochen muss und dass es jeden Tag ein anderes Abendessen gibt.
+                **Beachte!** Die Reihenfolge der Variablen sollte zuerst Tage, dann Leute und dann Essensoption sein. Dies gilt auch für die Zeilen mit den `{remove}` Befehlen.
             code: |-
                 days = Monday, Tuesday, Wednesday, Thursday, Friday
                 people = mom, dad, Martin, Abby, Jesse
@@ -227,8 +230,8 @@ levels:
                 {print} 'Happy New Year!'
         2:
             story: |-
-                Create a program that tells us the final results of the science fair. Firstly define the variable contestants, then the variable place.
-                **Hint** Line 5 should be the sleep command, and you should end with saying congratulations.
+                Erstelle ein Programm, das uns die Ergebnisse der Wissenschaftsschau sagt. Definiere zuerst die Variable Teilnehmer, dann die Variable Platzierung.
+                **Hinweis** Zeile 5 sollte der Schlafbefehl sein und du solltest am Ende Glückwunsch sagen.
             code: |-
                 {print} 'And now we will reveal the results of the science fair'
                 contestants = Vivienne, Paul, Trixy, Bianca, Katya

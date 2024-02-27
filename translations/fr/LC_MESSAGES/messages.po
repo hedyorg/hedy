@@ -7,15 +7,16 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2023-12-19 19:41+0100\n"
-"PO-Revision-Date: 2023-12-18 20:12+0000\n"
-"Last-Translator: Prefill add-on <noreply-addon-prefill@weblate.org>\n"
-"Language: fr\n"
+"POT-Creation-Date: 2024-01-18 10:49+0100\n"
+"PO-Revision-Date: 2024-02-19 01:12+0000\n"
+"Last-Translator: Snoring Parrot <snoring_parrot@users.noreply.hosted.weblate.org>\n"
 "Language-Team: fr <LL@li.org>\n"
-"Plural-Forms: nplurals=2; plural=n > 1;\n"
+"Language: fr\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n > 1;\n"
+"X-Generator: Weblate 5.4\n"
 "Generated-By: Babel 2.14.0\n"
 
 msgid "Access Before Assign"
@@ -23,6 +24,10 @@ msgstr "Tu as essayé d'utiliser la variable {name} à la ligne {access_line_num
 
 msgid "Cyclic Var Definition"
 msgstr "Le nom {variable} doit être défini avant que tu puisses l’utiliser à droite de la commande `is`."
+
+#, fuzzy
+msgid "Function Undefined"
+msgstr "You tried to use the function {name}, but you didn't define it."
 
 msgid "Has Blanks"
 msgstr "Ton code est incomplet. Il contient des blancs que tu dois remplacer par du code."
@@ -60,11 +65,19 @@ msgstr "Tu as utilisé `echo` avant `ask`, ou bien `echo` sans `ask`. Il faut d�
 msgid "Lonely Text"
 msgstr "Il semble que tu as oublié de mettre une commande avec le texte de la ligne {line_number}"
 
+#, fuzzy
+msgid "Missing Additional Command"
+msgstr "It looks like you forgot to complete writing {command} on line {line_number}."
+
 msgid "Missing Command"
 msgstr "Il semble que vous avez oublié d'utiliser une commande à la ligne {line_number}."
 
 msgid "Missing Inner Command"
 msgstr "Il semble que tu as oublié d'utiliser une commande avec la déclaration {command} que tu as utilisé à la ligne {line_number}."
+
+#, fuzzy
+msgid "Missing Variable"
+msgstr "It looks like your {command} is missing a variable at the start of the line."
 
 #, fuzzy
 msgid "Misspelled At Command"
@@ -114,9 +127,14 @@ msgstr "Tu as essayé d’utiliser la variable {name}, mais tu ne l’as pas dé
 msgid "Wrong Level"
 msgstr "C'était un code Hedy correct, mais pas au bon niveau. Vous avez écrit {offending_keyword} pour le niveau {working_level}. Conseil : {tip}"
 
+#, fuzzy
+msgid "Wrong Number of Arguments"
+msgstr "Your function used the wrong number of arguments. You provided {used_number} but the function {name} needs {defined_number}"
+
 msgid "account_overview"
 msgstr "Aperçu du compte"
 
+#, fuzzy
 msgid "accounts_created"
 msgstr "Les comptes ont été créés."
 
@@ -239,10 +257,6 @@ msgstr "programmes sauvegardés"
 
 msgid "amount_submitted"
 msgstr "programmes soumis"
-
-#, fuzzy
-msgid "apply_filters"
-msgstr "Apply filters"
 
 msgid "are_you_sure"
 msgstr "Êtes-vous sûr ? Vous ne pouvez pas annuler cette action."
@@ -385,6 +399,10 @@ msgstr "Contributeur"
 
 msgid "copy_clipboard"
 msgstr "Copié avec succès dans le presse-papiers"
+
+#, fuzzy
+msgid "copy_code"
+msgstr "Copy code"
 
 msgid "copy_join_link"
 msgstr "Copie le lien d'accès"
@@ -750,6 +768,7 @@ msgstr "Un indice ?"
 msgid "ill_work_some_more"
 msgstr "Je vais le travailler encore un peu"
 
+#, fuzzy
 msgid "image_invalid"
 msgstr "L’image que vous avez choisie n’est pas valide."
 
@@ -893,8 +912,9 @@ msgstr "Ce niveau n’a pas encore été rendu disponible dans votre classe"
 msgid "level_title"
 msgstr "Niveau"
 
+#, fuzzy
 msgid "levels"
-msgstr ""
+msgstr "levels"
 
 msgid "link"
 msgstr "Lien"
@@ -1084,6 +1104,7 @@ msgstr "Cet utilisateur n'a pas reçu le certificat de complétion de Hedy"
 msgid "no_more_flat_if"
 msgstr "À partir du niveau 8, le code après {if} doit être placé sur une nouvelle ligne commençant avec 4 espaces."
 
+#, fuzzy
 msgid "no_programs"
 msgstr "Vous n'avez pas encore de programme."
 
@@ -1178,6 +1199,10 @@ msgstr "Un autre langage textuel"
 msgid "overwrite_warning"
 msgstr "Tu as déjà un programme avec ce nom, sauvegarder celui en cours remplacera l'ancien. Confirmer ?"
 
+#, fuzzy
+msgid "owner"
+msgstr "Owner"
+
 msgid "page"
 msgstr "page"
 
@@ -1251,6 +1276,10 @@ msgid "preview"
 msgstr "Aperçu"
 
 #, fuzzy
+msgid "previewing_adventure"
+msgstr "Previewing adventure"
+
+#, fuzzy
 msgid "previewing_class"
 msgstr "You are previewing class <em>{class_name}</em> as a teacher."
 
@@ -1311,6 +1340,9 @@ msgstr "Veux tu rejoindre cette classe ?"
 
 msgid "public"
 msgstr "Public"
+
+msgid "public_adventures"
+msgstr "Browse public adventures"
 
 msgid "public_invalid"
 msgstr "Cette sélection d'accord est invalide"
@@ -1373,6 +1405,9 @@ msgstr "Confirm removing this user from the class."
 msgid "repair_program_logo_alt"
 msgstr "Corriger l'icône du programmer"
 
+msgid "repeat_dep"
+msgstr "À partir du niveau 8, {repeat} doit être utilisée avec de l'indentation. Des exemples sont montrés à l'onglet {repeat} du niveau 8."
+
 msgid "repeat_match_password"
 msgstr "Les mots de passes sont différents."
 
@@ -1418,8 +1453,9 @@ msgstr "Tu n'as pas accès à cette aventure !"
 msgid "retrieve_class_error"
 msgstr "Seulement les professeurs peuvent consulter les classes"
 
+#, fuzzy
 msgid "retrieve_tag_error"
-msgstr ""
+msgstr "Error retrieving tags"
 
 #, fuzzy
 msgid "role"
@@ -1458,6 +1494,10 @@ msgid "second_teacher"
 msgstr "Second teacher"
 
 #, fuzzy
+msgid "second_teacher_copy_prompt"
+msgstr "Are you sure you want to copy this teacher?"
+
+#, fuzzy
 msgid "second_teacher_prompt"
 msgstr "Enter a teacher username to invite them."
 
@@ -1474,8 +1514,9 @@ msgstr "Sélectionner"
 msgid "select_adventures"
 msgstr "Choisissez les aventures"
 
+#, fuzzy
 msgid "select_all"
-msgstr ""
+msgstr "Select all"
 
 #, fuzzy
 msgid "select_lang"
@@ -1485,8 +1526,9 @@ msgstr "Select language"
 msgid "select_tag"
 msgstr "Select tag"
 
+#, fuzzy
 msgid "selected"
-msgstr ""
+msgstr "Selected"
 
 msgid "self_removal_prompt"
 msgstr "Voulez-vous vraiment quitter ce cours ?"
@@ -1581,15 +1623,17 @@ msgstr "L'élève est déjà dans votre classe."
 msgid "student_already_invite"
 msgstr "L'élève a déjà une invitation en attente."
 
+#, fuzzy
 msgid "student_details"
-msgstr ""
+msgstr "Student details"
 
 #, fuzzy
 msgid "student_list"
 msgstr "Student list"
 
+#, fuzzy
 msgid "student_not_allowed_in_class"
-msgstr ""
+msgstr "Student not allowed in class"
 
 msgid "student_not_existing"
 msgstr "Le pseudo n'existe pas."
@@ -1629,11 +1673,23 @@ msgid "suggestion_color"
 msgstr "Try using another color"
 
 #, fuzzy
+msgid "suggestion_note"
+msgstr "Use a note between C0 and B9 or a number between 1 and 70"
+
+#, fuzzy
 msgid "suggestion_number"
 msgstr "Try changing the value to a number"
 
 msgid "surname"
 msgstr "Prénom"
+
+#, fuzzy
+msgid "survey"
+msgstr "Survey"
+
+#, fuzzy
+msgid "survey_completed"
+msgstr "Survey completed"
 
 #, fuzzy
 msgid "survey_skip"
@@ -1643,8 +1699,9 @@ msgstr "Don't show this again"
 msgid "survey_submit"
 msgstr "Submit"
 
+#, fuzzy
 msgid "tag_in_adventure"
-msgstr ""
+msgstr "Tag in adventure"
 
 #, fuzzy
 msgid "tag_input_placeholder"
@@ -1752,8 +1809,9 @@ msgstr "Hedy - Conditions de confidentialité"
 msgid "title_programs"
 msgstr "Hedy - Mes programmes"
 
+#, fuzzy
 msgid "title_public-adventures"
-msgstr ""
+msgstr "Hedy - Public adventures"
 
 msgid "title_recover"
 msgstr "Hedy - Récupérer le compte"
@@ -1896,9 +1954,6 @@ msgstr "Que devrait faire mon code ?"
 
 msgid "whole_world"
 msgstr "Le monde"
-
-msgid "write_first_program"
-msgstr "Écrivez votre premier programme !"
 
 msgid "year_invalid"
 msgstr "Veuillez entrer une année entre 1900 et {current_year}."
@@ -2056,6 +2111,8 @@ msgstr "Ton programme"
 #~ msgid "no_tags"
 #~ msgstr "No tags yet."
 
-#~ msgid "public_adventures"
-#~ msgstr "Public adventures"
+#~ msgid "apply_filters"
+#~ msgstr "Apply filters"
 
+#~ msgid "write_first_program"
+#~ msgstr "Écrivez votre premier programme !"

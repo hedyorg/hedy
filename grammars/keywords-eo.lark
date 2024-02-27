@@ -4,9 +4,10 @@ _WITH: ("with" | "with") _SPACE?
 _DEF: ("def" | "def") _SPACE?
 _RETURN: ("return" | "return") _SPACE?
 _PRINT: ("presu" | "print") _SPACE?
+_PLAY: ("play" | "play") _SPACE
 _ASK: ("demandu" | "ask") _SPACE?
-_ECHO: ("eĥu" | "echo") _SPACE?
-_FORWARD: ("antaŭen" | "forward") _SPACE?
+_ECHO: ("eĥu" | "ehhu" | "ehxu" | "e^hu" | "eh^u" | "echo") _SPACE?
+_FORWARD: ("antaŭen" | "antauen" | "antauxen" | "forward") _SPACE?
 _TURN: ("turnu" | "turn") _SPACE?
 left: ("maldekstren" | "left") _SPACE?
 right: ("dekstren" | "right") _SPACE?
@@ -15,19 +16,20 @@ blue: ("blua" | "blue") _SPACE?
 brown: ("bruna" | "brown") _SPACE?
 gray: ("griza" | "gray") _SPACE?
 green: ("verda" | "green") _SPACE?
-orange: ("oranĝa" | "orange") _SPACE?
+orange: ("oranĝa" | "orangha" | "orangxa" | "oran^ga" | "orang^a" | "orange") _SPACE?
 pink: ("rozkolora" | "pink") _SPACE?
 purple: ("purpura" | "purple") _SPACE?
-red: ("ruĝa" | "red") _SPACE?
+red: ("ruĝa" | "rugha" | "rugxa" | "ru^ga" | "rug^a" | "red") _SPACE?
 white: ("blanka" | "white") _SPACE?
 yellow: ("flava" | "yellow") _SPACE?
 _IS: _SPACE ("estas" | "is") _SPACE
+_STANDALONE_IS: ("estas" | "is")
 _SLEEP: ("dormu" | "sleep") _SPACE?
 _ADD_LIST: ("aldonu" | "add") _SPACE
 _TO_LIST: _SPACE ("al" | "to") _SPACE
 _REMOVE: ("forigu" | "remove") _SPACE
 _FROM: _SPACE ("el" | "from") _SPACE
-_AT: _SPACE ("laŭ" | "at") _SPACE
+_AT: _SPACE ("laŭ" | "lau" | "laux" | "at") _SPACE
 random: ("hazardo" | "random") _SPACE?
 _IN: _SPACE ("en" | "in") _SPACE
 _NOT_IN: _SPACE ("not in" | "not in") _SPACE
@@ -38,11 +40,11 @@ _REPEAT: ("ripetu" | "repeat") _SPACE
 _TIMES: _SPACE ("fojojn" | "times")
 _FOR: ("por" | "for") _SPACE
 _RANGE: ("intervalo" | "range") _SPACE?
-_TO: _SPACE ("ĝis" | "to") _SPACE
-_STEP: "paŝo" | "step"
+_TO: _SPACE ("ĝis" | "ghis" | "gxis" | "^gis" | "g^is" | "to") _SPACE
+_STEP: "paŝo" | "pasho" | "pasxo" | "pa^so" | "pas^o" | "step"
 _ELIF: _SPACE? ("alie se" | "elif") _SPACE
 _INPUT: ("enigu" | "input")
-_OR: _SPACE ("aŭ" | "or") _SPACE
+_OR: _SPACE ("aŭ" | "au" | "aux" | "or") _SPACE
 _WHILE: ("dum" | "while") _SPACE
 _LENGTH: "longo" | "length"
 _COLOR : ("koloro" | "color") _SPACE?

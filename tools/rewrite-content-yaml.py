@@ -49,7 +49,6 @@ PREFERRED_KEY_ORDER = [
     "example_code_5",
     "story_text_6",
     "example_code_6",
-    "start_code",
     # cheatsheets
     "name",
     "explanation",

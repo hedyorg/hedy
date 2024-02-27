@@ -1,13 +1,13 @@
-import { initializeSyntaxHighlighter } from './syntaxModesRules';
 import { ClientMessages } from './client-messages';
 import { modal, error, success, tryCatchPopup } from './modal';
 import JSZip from "jszip";
+import * as Tone from 'tone'
 import { Tabs } from './tabs';
 import { MessageKey } from './message-translations';
-import { turtle_prefix, pygame_prefix, normal_prefix } from './pythonPrefixes'
+import { turtle_prefix, pygame_prefix, normal_prefix, music_prefix } from './pythonPrefixes'
 import { Achievement, Adventure, isServerSaveInfo, ServerSaveInfo } from './types';
 import { startIntroTutorial } from './tutorials/tutorial';
-import { loadParsonsExercise } from './parsons';
+import { get_parsons_code, initializeParsons, loadParsonsExercise } from './parsons';
 import { checkNow, onElementBecomesVisible } from './browser-helpers/on-element-becomes-visible';
 import { incrementDebugLine, initializeDebugger, load_variables, startDebug } from './debugging';
 import { localDelete, localLoad, localSave } from './local';
@@ -19,7 +19,6 @@ import { postJson } from './comm';
 import { LocalSaveWarning } from './local-save-warning';
 import { HedyEditor, EditorType } from './editor';
 import { stopDebug } from "./debugging";
-import { HedyAceEditorCreator } from './ace-editor';
 import { HedyCodeMirrorEditorCreator } from './cm-editor';
 import { initializeTranslation } from './lezer-parsers/tokens';
 
@@ -29,7 +28,6 @@ export let theModalEditor: HedyEditor;
 export let theGlobalSourcemap: { [x: string]: any; };
 export const theLocalSaveWarning = new LocalSaveWarning();
 const editorCreator: HedyCodeMirrorEditorCreator = new HedyCodeMirrorEditorCreator();
-const aceEditorCreator: HedyAceEditorCreator = new HedyAceEditorCreator();
 let last_code: string;
 
 /**
@@ -46,10 +44,15 @@ let askPromptOpen = false;
 let theAdventures: Record<string, Adventure> = {};
 export let theLevel: number = 0;
 export let theLanguage: string = '';
-let theKeywordLanguage: string = 'en';
+export let theKeywordLanguage: string = 'en';
 let theStaticRoot: string = '';
 let currentTab: string;
 let theUserIsLoggedIn: boolean;
+//create a synth and connect it to the main output (your speakers)
+//const synth = new Tone.Synth().toDestination();
+
+const synth = new Tone.PolySynth(Tone.Synth).toDestination();
+
 
 const pygame_suffix =
 `# coding=utf8
@@ -136,10 +139,6 @@ export function initializeApp(options: InitializeAppOptions) {
   theStaticRoot = options.staticRoot ?? '';
   // When we are in Alpha or in dev the static root already points to an internal directory
   theStaticRoot = theStaticRoot === '/' ? '' : theStaticRoot;
-  initializeSyntaxHighlighter({
-    keywordLanguage: options.keywordLanguage,
-  });
-  initializeHighlightedCodeBlocks(document.body);
   initializeCopyToClipboard();
 
   // Close the dropdown menu if the user clicks outside of it
@@ -248,7 +247,7 @@ export function initializeCodePage(options: InitializeCodePageOptions) {
       const programFromLs = localLoad(currentTabLsKey());
       // if we are in raw (used in slides) we don't want to load from local storage, we always want to show startcode
       if (programFromLs && adventure) {
-        adventure.start_code = programFromLs.code;
+        adventure.editor_contents = programFromLs.code;
         adventure.save_name = programFromLs.saveName;
         adventure.save_info = 'local-storage';
       }
@@ -370,27 +369,45 @@ export function initializeViewProgramPage(options: InitializeViewProgramPageOpti
 
 export function initializeHighlightedCodeBlocks(where: Element) {
   const dir = $("body").attr("dir");
-
+  initializeParsons();
+  if (theLevel) {
+    initializeTranslation({
+      keywordLanguage: theKeywordLanguage,
+      level: theLevel
+    })
+  }
   // Any code blocks we find inside 'turn-pre-into-ace' get turned into
   // read-only editors (for syntax highlighting)
   for (const container of $(where).find('.turn-pre-into-ace').get()) {
     for (const preview of $(container).find('pre').get()) {
       $(preview)
-        .addClass('text-lg rounded overflow-x-hidden')
+        .addClass('relative text-lg rounded overflow-x-hidden')
         // We set the language of the editor to the current keyword_language -> needed when copying to main editor
         .attr('lang', theKeywordLanguage);
 
       // Only turn into an editor if the editor scrolls into view
       // Otherwise, the teacher manual Frequent Mistakes page is SUPER SLOW to load.
       onElementBecomesVisible(preview, () => {
+        const codeNode = preview.querySelector('code')
+        let code: string;
+        // In case it has a child <code> node
+        if(codeNode) {
+          codeNode.hidden = true
+          code = codeNode.innerText
+        } else {
+          code = preview.textContent || "";
+          preview.textContent = "";
+        }
+
         // Create this example editor
-        const exampleEditor = aceEditorCreator.initializeReadOnlyEditor(preview, dir);
+        const exampleEditor = editorCreator.initializeReadOnlyEditor(preview, dir);
         // Strip trailing newline, it renders better
-        exampleEditor.contents = exampleEditor.contents.trimRight();
+        exampleEditor.contents = code;
+        exampleEditor.contents = exampleEditor.contents.trimEnd();
         // And add an overlay button to the editor if requested via a show-copy-button class, either
         // on the <pre> itself OR on the element that has the '.turn-pre-into-ace' class.
         if ($(preview).hasClass('show-copy-button') || $(container).hasClass('show-copy-button')) {
-          const buttonContainer = $('<div>').addClass('absolute ltr:-right-1 rtl:left-2 w-16').css({top: 5}).appendTo(preview);
+          const buttonContainer = $('<div>').addClass('absolute ltr:right-0 rtl:left-0 top-0 mx-1 mt-1').appendTo(preview);
           let symbol = "⇥";
           if (dir === "rtl") {
             symbol = "⇤";
@@ -404,9 +421,13 @@ export function initializeHighlightedCodeBlocks(where: Element) {
             clearOutput();
           });
         }
-
         const levelStr = $(preview).attr('level');
-        if (levelStr) {
+        const lang = $(preview).attr('lang');
+        if (levelStr && lang) {
+          initializeTranslation({
+            keywordLanguage: lang,
+            level: parseInt(levelStr, 10),
+          })
           exampleEditor.setHighlighterForLevel(parseInt(levelStr, 10));
         }
       });
@@ -441,7 +462,6 @@ export function stopit() {
       // This gets a bit complex: if we do have some input modal waiting, fake submit it and hide it
       // This way the Promise is no longer "waiting" and can no longer mess with our next program
       if ($('#ask-modal').is(":visible")) {
-        $('#ask-modal form').submit();
         $('#ask-modal').hide();
       }
   }
@@ -561,7 +581,7 @@ export async function runit(level: number, lang: string, disabled_prompt: string
         showAchievements(response.achievements, false, "");
         if (adventure && response.save_info) {
           adventure.save_info = response.save_info;
-          adventure.start_code = code;
+          adventure.editor_contents = code;
         }
 
         if (response.Error) {
@@ -587,7 +607,7 @@ export async function runit(level: number, lang: string, disabled_prompt: string
       program_data = theGlobalDebugger.get_program_data();
     }
 
-    runPythonProgram(program_data.Code, program_data.source_map, program_data.has_turtle, program_data.has_pygame, program_data.has_sleep, program_data.has_clear, program_data.Warning, cb, run_type).catch(function(err: any) {
+    runPythonProgram(program_data.Code, program_data.source_map, program_data.has_turtle, program_data.has_pygame, program_data.has_sleep, program_data.has_clear, program_data.has_music, program_data.Warning, cb, run_type).catch(function(err: any) {
       // The err is null if we don't understand it -> don't show anything
       if (err != null) {
         error.show(ClientMessages['Execute_error'], err.message);
@@ -839,7 +859,7 @@ window.onerror = function reportClientException(message, source, line_number, co
   });
 }
 
-export function runPythonProgram(this: any, code: string, sourceMap: any, hasTurtle: boolean, hasPygame: boolean, hasSleep: boolean, hasClear: boolean, hasWarnings: boolean, cb: () => void, run_type: "run" | "debug" | "continue") {
+export function runPythonProgram(this: any, code: string, sourceMap: any, hasTurtle: boolean, hasPygame: boolean, hasSleep: boolean, hasClear: boolean, hasMusic: boolean, hasWarnings: boolean, cb: () => void, run_type: "run" | "debug" | "continue") {
   // If we are in the Parsons problem -> use a different output
   let outputDiv = $('#output');
   let skip_faulty_found_errors = false;
@@ -906,6 +926,11 @@ export function runPythonProgram(this: any, code: string, sourceMap: any, hasTur
 
   if (hasTurtle) {
     code_prefix += turtle_prefix;
+    $('#turtlecanvas').show();
+  }
+
+  if (hasMusic) {
+    code_prefix += music_prefix;
     $('#turtlecanvas').show();
   }
 
@@ -998,6 +1023,7 @@ export function runPythonProgram(this: any, code: string, sourceMap: any, hasTur
         // If the timeout is 1 this is due to us stopping the program: don't show "too long" warning
         $('#stopit').hide();
         $('#runit').show();
+        $('#runit').show();
         if (Sk.execLimit != 1) {
           pushAchievement("hedy_hacking");
           return ClientMessages ['Program_too_long'];
@@ -1007,11 +1033,11 @@ export function runPythonProgram(this: any, code: string, sourceMap: any, hasTur
       },
       // We want to make the timeout function a bit more sophisticated that simply setting a value
       // In levels 1-6 users are unable to create loops and programs with a lot of lines are caught server-sided
-      // So: a very large limit in these levels, keep the limit on other onces.
+      // So: a very large limit in these levels, keep the limit on other ones.
       execLimit: (function () {
         const level = theLevel;
-        if (hasTurtle || hasPygame) {
-          // We don't want a timeout when using the turtle or pygame -> just set one for 10 minutes
+        if (hasTurtle || hasPygame || hasMusic) {
+          // We don't want a timeout when using the turtle or pygame or music -> just set one for 10 minutes
           return (6000000);
         }
         if (level < 7) {
@@ -1027,7 +1053,16 @@ export function runPythonProgram(this: any, code: string, sourceMap: any, hasTur
       const ret = fetchText(url_text);
       return new Sk.misceval.promiseToSuspension(ret.then(Sk.ffi.remapToPy));
     });
-  
+
+    (Sk as any).builtins.play = new Sk.builtin.func((notes:any) => {
+        //const now = Tone.now()
+        const note_name = notes.v;
+
+        //play note_name for the duration of an 16th note
+        synth.triggerAttackRelease(note_name, "16n");
+
+    });
+
     return Sk.misceval.asyncToPromise(() =>
       Sk.importMainWithBody("<stdin>", false, code, true), {
         "*": () => {
@@ -1109,6 +1144,7 @@ export function runPythonProgram(this: any, code: string, sourceMap: any, hasTur
       has_turtle: hasTurtle,
       has_pygame: hasPygame, //here too: where is hassleep?
       has_clear: hasClear,
+      has_music: hasMusic,
       Warning: hasWarnings
     });
 
@@ -1458,7 +1494,7 @@ export function showVariableView() {
   }
 }
 
-async function store_parsons_attempt(order: Array<string>, correct: boolean) {
+export async function store_parsons_attempt(order: Array<string>, correct: boolean) {
   try {
     await postJsonWithAchievements('/store_parsons_order', {
       level: theLevel,
@@ -1470,44 +1506,6 @@ async function store_parsons_attempt(order: Array<string>, correct: boolean) {
     // Let's do nothing: saving is not a user relevant action -> no feedback required
     console.error(e);
   };
-}
-
-// Todo: As the parsons functionality will rapidly increase, we should probably all store this in a dedicated file (?)
-function get_parsons_code() {
-    let code = "";
-    let count = 1;
-    let order = new Array();
-    let mistake = false;
-
-    $('.compiler-parsons-box').each(function() {
-      // We are only interested in the visible code lines
-      if ($(this).parent().is(':visible')) {
-        // When the value is 0 there is no code box in the expected spot
-        let text = $(this).attr('code') || "";
-        if (text.length > 1) {
-          // Also add a newline as we removed this from the YAML structure
-          code += text + "\n";
-        }
-        $(this).parents().removeClass('border-black');
-        let index = $(this).attr('index') || 999;
-        if (index == count) {
-          $(this).parents().addClass('border-green-500');
-        } else {
-          mistake = true;
-          $(this).parents().addClass('border-red-500');
-        }
-        order.push(index);
-        count += 1;
-      }
-    });
-    // Before returning the code we want to a-sync store the attempt in the database
-    // We only have to set the order and level, rest is handled by the back-end
-    store_parsons_attempt(order, !mistake);
-    if (mistake) {
-      return "";
-    }
-
-    return code.replace(/ +$/mg, '');
 }
 
 export function get_active_and_trimmed_code() {
@@ -1613,6 +1611,8 @@ export function toggleDevelopersMode(event='click', enforceDevMode: boolean) {
   // (Driving from HTML attributes is more flexible on what gets resized, and avoids duplicating
   // size literals between HTML and JavaScript).
   $('#adventures').toggle(!enable);
+  // Parsons dont need a fixed height
+  if (currentTab === 'parsons') return
   $('[data-devmodeheight]').each((_, el) => {
     const heights = $(el).data('devmodeheight').split(',') as string[];
     $(el).css('height', heights[enable ? 1 : 0]);
@@ -1683,23 +1683,14 @@ export async function change_language(lang: string) {
     if (response.succes) {
       const queryString = window.location.search;
       const urlParams = new URLSearchParams(queryString);
-      if (urlParams.get('keyword_language') !== null) {
-        urlParams.set('keyword_language', 'en');
-      }
-      if (urlParams.get("language") !== null) {
+
+      if (lang === 'en' || urlParams.get("language") !== null) {
         urlParams.set("language", lang)
+        urlParams.set('keyword_language', lang);
         window.location.search = urlParams.toString();
       } else {
         location.reload();
       }
-      // What's the logic behind this? what happens the keyword_language=en and we want to change the language to arabic? params?
-      // Check if keyword_language is set to change it to English
-      // if (urlParams.get('keyword_language') !== null) {
-      //   urlParams.set('keyword_language', 'en');
-      //   window.location.search = urlParams.toString();
-      // } else {
-      //   location.reload();
-      // }
     }
   });
 }
@@ -1922,16 +1913,23 @@ function reconfigurePageBasedOnTab() {
   resetWindow();
 
   updatePageElements();
-
   if (currentTab === 'parsons') {
     loadParsonsExercise(theLevel, 1);
+    // remove the fixed height from the editor
+    document.getElementById('code_editor')!.style.height = '100%'
+    document.getElementById('code_output')!.style.height = '100%'
     return;
+  } else {
+    $('[data-devmodeheight]').each((_, el) => {
+      const heights = $(el).data('devmodeheight').split(',') as string[];
+      $(el).css('height', heights[0]);
+    });
   }
 
   const adventure = theAdventures[currentTab];
   if (adventure) {
     $ ('#program_name').val(adventure.save_name);
-    theGlobalEditor.contents = adventure.start_code;
+    theGlobalEditor.contents = adventure.editor_contents;
   }
 }
 
@@ -2030,7 +2028,7 @@ function programNeedsSaving(adventureName: string) {
   // We need to save if the content changed, OR if we have the opportunity to
   // save a program that was loaded from local storage to the server.
   // (Submitted programs are never saved again).
-  const programChanged = theGlobalEditor.contents !== adventure.start_code;
+  const programChanged = theGlobalEditor.contents !== adventure.editor_contents;
   const nameChanged = $('#program_name').val() !== adventure.save_name;
   const localStorageCanBeSavedToServer = theUserIsLoggedIn && adventure.save_info === 'local-storage';
   const isUnchangeable = isServerSaveInfo(adventure.save_info) ? adventure.save_info.submitted : false;
@@ -2040,7 +2038,7 @@ function programNeedsSaving(adventureName: string) {
   // "Run" button will always save regardless of size.
   const wasSavedBefore = adventure.save_info !== undefined;
   const suspiciouslySmallFraction = 0.5;
-  const programSuspiciouslyShrunk = wasSavedBefore && theGlobalEditor.contents.length < adventure.start_code.length * suspiciouslySmallFraction;
+  const programSuspiciouslyShrunk = wasSavedBefore && theGlobalEditor.contents.length < adventure.editor_contents.length * suspiciouslySmallFraction;
 
   return (programChanged || nameChanged || localStorageCanBeSavedToServer) && !isUnchangeable && !programSuspiciouslyShrunk;
 }
@@ -2086,7 +2084,7 @@ async function saveIfNecessary() {
   const saveName = saveNameFromInput();
 
 
-  if (theUserIsLoggedIn) {
+  if (theUserIsLoggedIn && saveName) {
     const saveInfo = isServerSaveInfo(adventure.save_info) ? adventure.save_info : undefined;
     const response = await postJsonWithAchievements('/programs', {
       level: theLevel,
@@ -2100,14 +2098,14 @@ async function saveIfNecessary() {
     });
 
     // Record that we saved successfully
-    adventure.start_code = code;
+    adventure.editor_contents = code;
     if (response.save_info) {
       adventure.save_info = response.save_info;
     }
     localDelete(currentTabLsKey());
   } else {
     localSave(currentTabLsKey(), { saveName, code });
-    adventure.start_code = code;
+    adventure.editor_contents = code;
   }
 }
 
@@ -2153,10 +2151,11 @@ function change_shared (shared: boolean, index: number) {
 }
 
 export function goToLevel(level: any) {
-  window.location.hash = '' // the hash will be set to the first adventure.
-  let newPath = window.location.pathname.replace(/\d+/, level);
+  const hash = window.location.hash
+  let newPath = window.location.pathname.replace(/\/\d+/, `/${level}`);
   if (!newPath.includes(level)) {
     newPath = window.location.pathname + `/${level}`
   }
   window.location.pathname = newPath
+  window.location.hash = hash
 }

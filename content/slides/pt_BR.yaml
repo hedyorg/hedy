@@ -1,14 +1,14 @@
 levels:
     0:
         1:
-            header: Bem-Vindo a  Hedy!
+            header: Bem-vindo(a) à Hedy!
             text: Hedy é uma linguagem de programação.
         2:
             header: Programação
             text: |-
-                Programação é dar instruções para um computador, usando o idioma do computador
+                Programar é dar instruções para um computador, num idioma especial dele.
 
-                Um idioma desses é chamado de uma "linguagem de programação"
+                Um idioma desse tipo é chamado de uma "linguagem de programação".
         3:
             header: Linguagem de Programação
             text: |-
@@ -20,35 +20,35 @@ levels:
         4:
             header: Programação
             text: |-
-                Se você pode programar, você pode fazer muitas coisas legais:
+                Se você pode programar, pode fazer muitas coisas legais:
                 * Construir histórias interativas
-                * Criar desenhos digitais e desenha-los no papel ou em tecido
+                * Criar desenhos digitais e desenhá-los no papel ou em tecido
                 * Criar seus próprios aplicativos para usar no seu celular
         5:
             header: Programando em Hedy
             text: Em Hedy nós usamos códigos especiais, como `{print}`.
-            code: '{print} Welcome to Hedy!'
+            code: '{print} Bem-vindo(a) à Hedy!'
         6:
             header: Programando em Hedy
             text: Palavras de código vão ser mostradas em rosa.
-            code: '{print} Welcome to Hedy!'
+            code: '{print} Bem-vindo(a) à Hedy!'
         7:
             header: Programando em Hedy
-            text: Nós rodamos o código com o botão de Rodar embaixo do código.
-            code: '{print} Welcome to Hedy!'
+            text: Nós executamos o código com o botão de Executar embaixo do código.
+            code: '{print} Bem-vindo(a) à Hedy!'
         8:
             header: Programando em Hedy
             text: O resultado do programa aparece no lado direito.
-            code: '{print} Welcome to Hedy!'
+            code: '{print} Bem-vindo(a) à Hedy!'
         9:
             header: Programando em Hedy
             text: O resultado do programa também pode ser um desenho.
             code: |-
                 {forward} 100
-                {turn} left
+                {turn} {left}
     1:
         1:
-            header: Bem-vindo ao nível 1!
+            header: Bem-vindo(a) ao nível 1!
             text: |-
                 Vamos começar o nível 1 fazendo uma história em Hedy!
 
@@ -59,85 +59,87 @@ levels:
                 O primeiro código que você pode usar no nível 1 é `{print}`.
 
                 `{print}` é usado para mostrar texto na tela.
-            code: '{print} Put text on the screen'
+            code: '{print} Mostrar texto na tela'
         3:
             header: O comando {print}
             text: |-
                 Você pode mudar o texto depois do comando de imprimir para o que você quiser.
 
-                Ou você pode imprimir várias linhas adicionando outra linha de códugo que também começa com `{print}`.
-            code: '{print} Put text on the screen'
+                Ou você pode imprimir várias linhas adicionando outra linha de código que também começa com `{print}`.
+            code: |-
+                {print} Bem-vindo(a) à Hedy!
+                {print} Comece agora a programar!
         4:
             header: '{ask}'
             text: |-
-                The final text code that you can use in level 1 is `{echo}`.
+                O segundo código que você pode usar no nível 1 é `{ask}`.
 
-                `{echo}` is used to repeat the answer of an `{ask}`.
+                `{ask}` é usado para fazer uma pergunta que pode ser respondida.
             code: |-
-                {print} Hello!
-                {ask} What is your name?
-                {echo} hello
+                {print} Bem-vindo(a) a seu próprio jogo de pedra, papel e tesoura!
+                {ask} O que você escolhe?
         5:
-            header: Programming!
+            header: '{echo}'
             text: |-
                 with `{print}`, `{ask}` and `{echo}` you can already create a little story.
                 This is a good time to try the Parrot, Story and Rock, Paper Scissors adventures.
             code: |-
-                {print} Hello!
-                {ask} What is your name?
-                {echo} hello
+                {print} Olá!
+                {ask} Qual é o seu nome?
+                {echo} olá
         6:
-            header: Programming!
+            header: Programando!
             text: Adventures are shown in tabs.
             editor: /hedy/1
         7:
-            header: Programming!
+            header: Programando!
             text: The yellow arrow buttons can be used to copy examples.
-            editor: /hedy#print_command
+            editor: /hedy/1
         8:
-            header: Drawing with the turtle
-            text: Now that we have seen at text codes, we will now look at drawing codes next.
+            header: Programando!
+            text: Os botões amarelos com setas podem ser usados para copiar exemplos.
             editor: /hedy#print_command
         9:
-            header: 'Drawing with the turtle: {forward}'
+            header: Desenhando com a tartaruga
             text: '`{forward}` is used to move the turtle forward.'
         10:
-            header: 'Drawing with the turtle: {forward}'
-            text: '`{forward}` is used to move the turtle forward.'
+            header: 'Desenhando com a tartaruga: {forward}'
+            text: '`{forward}` é usado para mover a tartaruga adiante.'
             code: '{forward} 50'
         11:
-            header: 'Drawing with the turtle: {turn}'
-            text: '`{turn}` is used to make the turtle turn left or right.'
+            header: 'Desenhando com a tartaruga: {turn}'
+            text: '`{turn}` é usado para fazer a tartaruga virar à direita ou à esquerda.'
             code: |-
                 {forward} 50
-                {turn} left
+                {turn} {left}
         12:
-            header: Debugging
-            text: Debugging a code means getting rid of mistakes in the code. Let's debug this code together. Click the ladybug button to start the debugger.
+            header: Depurando
+            text: Depurar código significa se livrar de erros e problemas no programa. Vamos depurar este código juntos. Clique na joaninha para iniciar o depurador.
             code: |-
-                I am DJ Hedy
-                {print} What song would you like to hear?
-                {ask} I like that song too!
-                {print} Next up... {echo}
+                Sou a DJ Hedy
+                {print} Que música você gostaria de escutar?
+                {ask} Eu também gosto dessa música!
+                {print} A seguir... {echo}
+            debug: 'True'
         13:
-            header: Let the programming fun begin!
-            text: Enjoy the adventures in level 1!
+            header: Que a diversão de programar comece!
+            text: Aproveite as aventuras do nível 1!
     2:
         1:
-            header: Welcome to level 2
+            header: Bem-vindo(a) ao nível 2
             text: |-
-                In this level you will learn to use variables.
+                Neste nível, você irá aprender a usar variáveis.
 
-                A variable is a word that can be used to store information.
+                Uma variável é uma palavra que pode ser usada para guardar uma informação.
 
-                For example: a name, age or favorite sports team.
+                Por exemplo: um nome, uma idade ou um time favorito.
         2:
-            header: Variables
-            text: To make or 'set' a variable we use the `{is}` command
+            header: Variáveis
+            text: Para criar ou 'definir' uma variável, usamos o comando `{is}`
             code: |-
-                name {is} Hedy
-                age {is} 15
-                {print} name is age years old
+                nome {is} Hedy
+                idade {is} 15
+                {print} nome tem idade anos
         3:
             header: Interactive
             text: |-
@@ -147,18 +149,18 @@ levels:
 
                 This way we don't need the `{echo}`  command.
             code: |-
-                name {is} {ask} What is your name?
-                {print} Hello name
+                nome {is} {ask} Qual é o seu nome?
+                {print} Olá nome
         4:
-            header: Multiple variables
-            text: Now that we use variables, we can use multiple variables instead of just one `{echo}`command.
+            header: Múltiplas variáveis
+            text: Agora que nós usamos variáveis, podemos usar várias delas ao invés de ter um só comando `{echo}`.
             code: |-
-                name {is} {ask} What is your name?
-                {print} Hello name
-                age {is} {ask} How old are you?
-                {print} name is age years old.
+                nome {is} {ask} Qual é o seu nome?
+                {print} Olá nome
+                idade {is} {ask} Quantos anos você tem?
+                {print} nome tem idade anos.
         5:
-            header: Sleep
+            header: Durma
             text: You can also use the `{sleep}` command to pause the code for a while.
             code: |-
                 {print} My favorite colour is...
@@ -187,12 +189,13 @@ levels:
                 {print} I'll go get your donut. {sleep}
                 {print} Here you go! A filling donut with toping!
                 {ask} Have a nice day!
+            debug: 'True'
         8:
             header: Let the programming fun begin!
-            text: Enjoy the adventures in level 3!
+            text: Enjoy the adventures in level 2!
     3:
         1:
-            header: Welcome to level 3
+            header: Bem-vindo(a) ao nível 3
             text: In this level you'll learn how to make a list, add and remove items form your lists and pick a random item off that list.
         2:
             header: Making a list
@@ -200,9 +203,7 @@ levels:
                 You make a list with `{is}`.
 
                 Separate the items on your list with a comma.
-            code: |-
-                animals {is} dogs, cats, kangaroos
-                ```
+            code: animals {is} dogs, cats, kangaroos
         3:
             header: At random
             text: |-
@@ -212,14 +213,12 @@ levels:
             code: |-
                 animals {is} dogs, cats, kangaroos
                 {print} animals {at} {random}
-                ```
         4:
             header: At random in a sentence
             text: You can use the `{at}` `{random}` command in a sentence as well.
             code: |-
                 animals {is} dogs, cats, kangaroos
                 {print} My favorite animal is animals {at} {random}
-                ```
         5:
             header: Add to
             text: |-
@@ -255,12 +254,13 @@ levels:
                 {print} or do you prefer... second_choice {at} {random}
                 {remove} second_choice {to} music_genres
                 {print} I like music_genre {random} best!
+            debug: 'True'
         8:
             header: Let's get to work!
-            text: Enjoy the adventures in level 3!
+            text: Aproveite as aventuras do nível 3!
     4:
         1:
-            header: Welcome to level 4
+            header: Bem-vindo(a) ao nível 4
             text: In this level you will learn how to use quotation marks.
             code: '{print} ''print with quotes!'''
         2:
@@ -269,6 +269,7 @@ levels:
             code: |-
                 name {is} Sophie
                 {print} My name is name
+            debug: 'True'
         3:
             header: Fixing it with quotation marks
             text: |-
@@ -306,6 +307,7 @@ levels:
 
                 Please try to print a contraction like "you're" or "I'm" in the screen below and see what happens....
             code: '{print} ''This won''t work!'''
+            debug: 'True'
         9:
             header: Ready, Set, Go!
             text: Enjoy the adventures in level 4!
@@ -330,12 +332,13 @@ levels:
                 colors {is} 'orange, silver, white, brown'
                 {print} 'I love the colors {at} {random} one!'
                 choice {is} {ask} Which one do you like?
+            debug: 'True'
         11:
             header: Ready, Set, Go!
-            text: Enjoy the adventures in level 4!
+            text: Aproveite as aventuras do nível 4!
     5:
         1:
-            header: Welcome to level 5
+            header: Bem-vindo(a) ao nível 5
             text: 'In this level you will learn to use 3 new commands: `{if}`, `{else}` and `{in}`.'
         2:
             header: if
@@ -352,6 +355,7 @@ levels:
                 When using the `{if}` command, don't forget to use the `{print}` command.
                 This code will not work!
             code: '{if} name {is} Hedy ''nice'''
+            debug: 'True'
         4:
             header: else
             text: |-
@@ -397,37 +401,38 @@ levels:
                 item_to_declare {is} {ask} 'What would you like to declare'
                 {else} Alright
                 {print} Thank you. Please head to gate A22.'
+            debug: 'True'
         8:
             header: Let's go!
-            text: Enjoy the adventures in level 5!
+            text: Aproveite as aventuras do nível 5!
     6:
         1:
-            header: Welcome to level 6
+            header: Bem-vindo(a) ao nível 6
             text: In this level we are adding maths to our codes.
         2:
-            header: Addition
+            header: Adição
             text: If you want to calculate an addition, simply use the plus sign.
-            code: '{print} ''5 plus 5 is '' 5 + 5'
+            code: '{print} ''5 mais 5 é '' 5 + 5'
         3:
-            header: Subtraction
+            header: Subtração
             text: If you want to subtract, you can use the minus sign.
-            code: '{print} ''5 minus 5 is '' 5 - 5'
+            code: '{print} ''5 menos 5 é '' 5 - 5'
         4:
-            header: Multiplication
+            header: Multiplicação
             text: If you want to do multiplications, you can use the asterisk.
-            code: '{print} ''5 times 5 is '' 5 * 5'
+            code: '{print} ''5 vezes 5 é '' 5 * 5'
         5:
-            header: Division
+            header: Divisão
             text: You can use the slash for division.
-            code: '{print} ''5 divided by 5 is '' 5 / 5'
+            code: '{print} ''5 dividido por 5 é '' 5 / 5'
         6:
-            header: Summary
+            header: Resumo
             text: In summary, you can use +, -, * and / to do maths.
             code: |-
-                {print} '5 plus 5 is ' 5 + 5
-                {print} '5 minus 5 is ' 5 - 5
-                {print} '5 times 5 is ' 5 * 5
-                {print} '5 divided by 5 is ' 5 / 5
+                {print} '5 mais 5 é ' 5 + 5
+                {print} '5 menos 5 é ' 5 - 5
+                {print} '5 vezes 5 é ' 5 * 5
+                {print} '5 dividido por 5 é ' 5 / 5
         7:
             header: The = symbol
             text: |-
@@ -461,12 +466,13 @@ levels:
                 {if} day {is} monday
                 total_price = total_price * 0.25
                 {print} 'That will be total_price please'
+            debug: 'True'
         10:
             header: Let's get to work!
-            text: Enjoy the adventures in level 6!
+            text: Aproveite as aventuras do nível 6!
     7:
         1:
-            header: Welcome to level 7
+            header: Bem-vindo(a) ao nível 7
             text: In this level you will learn how to repeat a line of code as many times a you'd like.
         2:
             header: repeat 3 times
@@ -483,6 +489,7 @@ levels:
             header: Don't forget the print command
             text: When using the repeat command, do not forget the `{print}` command.
             code: '{repeat} 5 {times} ''Help!'''
+            debug: 'True'
         4:
             header: Repeat an ask command
             text: You can also repeat an `{ask}`, `{if}` or `{else}` command multiple times.
@@ -504,12 +511,13 @@ levels:
                 {if} yes
                 {print} 'Hurray!
                 {else} 'That's a shame... Oh well... time to build a shelter and find some food.'
+            debug: 'True'
         6:
             header: Ready Set Go!
-            text: Enjoy the adventures in level 7!
+            text: Aproveite as aventuras do nível 7!
     8:
         1:
-            header: Welcome to level 8
+            header: Bem-vindo(a) ao nível 8
             text: In this level you will learn to use indentation to make the `{repeat}`, `{if}` and `{else}` commands work for multiple lines of code.
         2:
             header: '{repeat} commands before'
@@ -518,6 +526,7 @@ levels:
 
                 You could only repeat one line of code.
             code: '{repeat} 5 {times} {print} ''Help!'''
+            debug: 'True'
         3:
             header: '{repeat} commands now'
             text: |-
@@ -546,32 +555,56 @@ levels:
             code: |-
                 {if} name {is} Hedy {print} 'nice'
                 {else} {print} 'boo!'
+            debug: 'True'
         6:
             header: if and else now
             text: |-
                 These are the `{if}` and `{else}` commands now.
                 Each line after the `{if}` and `{else}` commands start with indentation.
             code: |-
-                name = {ask} 'What is your name?'
-                {if} name {is} Hedy
-                    {print} 'Welcome Hedy'
+                nome = {ask} 'Qual é o seu nome?'
+                {if} nome {is} Hedy
+                    {print} 'Bem-vinda Hedy'
                 {else}
-                    {print} 'Welcome programmer!'
+                    {print} 'Bem-vindo(a) programador(a)!'
         7:
             header: stopping the indentation
             text: Just like with the `{repeat}` command, you can stop using indentation and the lines will always be shown. Not just if the statement is true.
-            code: "name = {ask} 'What is your name?'\n{if} name {is} Hedy\n    {print} 'Welcome Hedy'\n{else}\n    {print} 'Welcome programmer!' \n{print} '3..2..1.. Start programming!'"
+            code: "nome = {ask} 'Qual é o seu nome?'\n{if} nome {is} Hedy\n    {print} 'Bem-vinda Hedy'\n{else}\n    {print} 'Bem-vindo(a) programador(a)!' \n{print} '3..2..1.. Comece a programar!'"
         8:
             header: if statements inside if statements
             text: |-
                 You might have thought of trying to put an if command inside a repeat command, or inside another if command.
                 For now, this is not possible yet. In the higher levels, it will be allowed, but for now let's focus on practising the `{if}` `{else}` and `{repeat}` commands with proper indentation first.
         9:
+            header: Debugging
+            text: Let's debug this code!
+            code: |-
+                {print} 'HedyWheels bus tickets machine'
+                zone_1 = Town Hall, Library, Campus, Market Place
+                zone_2 = Swimming Pool, Skate Park, Mall, Airport
+                destination = 'Where do you want to go?'
+                {if} destination {in} zone 1
+                {print} destination 'is in zone 1'
+                price = 3 euros
+                    {if} destination {is} zone_2
+                {print} destination 'is in zone 2'
+                price = 6
+                ticket_types = {ask} 'Press 1 for a single use ticket.
+                Press 2 for a round trip ticket:'
+                {if} ticket_type = 1
+                {print} 'You chose a single use ticket'
+                {else}
+                        {print} You chose a round trip ticket'
+                price * 2
+                {print} 'That will be ' price ' euros please'
+            debug: 'True'
+        10:
             header: Let's check out the adventures!
-            text: Enjoy the adventures in level 8!
+            text: Aproveite as aventuras do nível 8!
     9:
         1:
-            header: Welcome to level 9
+            header: Bem-vindo(a) ao nível 9
             text: |-
                 In this level you can use multiple lines of code after an `{if}` or after a `{repeat}` command.
 
@@ -641,11 +674,29 @@ levels:
                     {else}
                         {print} 'pizza is better'
         8:
+            header: Debugging
+            text: Let's debug this code!
+            code: |-
+                {print} 'Welcome to HedyJumps, your parachute jump adventure!'
+                people = {ask} 'How many people are you jumping with today?
+                {print} 'We'll ask all of you some questions for safety reasons.'
+                extra_instructions_people = a, b
+                {repeat} 3 {times}
+                    name = {ask} 'What is your name?'
+                jumped_before = 'Have you ever done a parachute jump before, ' name '?'
+                {if} jumped_before  no
+                {print} 'No worries, you'll get an extra safety instruction in room 13'
+                {add} name {to} extra_instructions_people
+                {else}
+                {print} 'Fun!'
+                {print} 'Thanks for filling in the safety questions everyone. Enjoy your jump!'
+            debug: 'True'
+        9:
             header: Let's go!
-            text: Enjoy the adventures in level 9!
+            text: Aproveite as aventuras do nível 9!
     10:
         1:
-            header: Welcome to level 10
+            header: Bem-vindo(a) ao nível 10
             text: 'In this level you will learn a new command: `{for}`.'
         2:
             header: The for command
@@ -663,52 +714,76 @@ levels:
                 {for} day {in} days
                     {print} names {at} {random} ' does the dishes on ' day
         4:
+            header: Debugging
+            text: Let's debug this code
+            code: |-
+                {print} 'Ladies and gentlemen!'
+                {print} 'For one night and one night only in circus Hedy!'
+                acts = shoot out of a canon, walk the tightrope, pack themself in a suitcase,
+                people = Iris the Incredible Achmed the Amazing Francis the Fantastic
+                    {for} people {in} acts
+                chosen_person {is} people {random}
+                    chosen_person ' will ' act
+                {add} chosen_person {from} people
+                {print} 'Come and watch our show tonight!'
+                {print} 'Tickets are only available at the counter
+            debug: 'True'
+        5:
             header: Time to program!
-            text: Enjoy the adventures in level 10!
+            text: Aproveite as aventuras do nível 10!
     11:
         1:
-            header: Welcome to level 11
+            header: Bem-vindo(a) ao nível 11
             text: |-
                 In this level, we add a new form of the `{for}` command. In earlier levels, we used for with a list, but we can also use for with numbers.
 
                 This way we don't need the `{repeat}` command anymore.
         2:
-            header: The for command
+            header: O comando para
             text: 'This is what the new for command looks like:'
             code: |-
-                {for} counter {in} {range} 1 {to} 10
-                    {print} counter
-                {print} 'Ready or not. Here I come!'
+                {for} contador {in} {range} 1 {to} 10
+                    {print} contador
+                {print} 'Prontos ou não, lá vou eu!'
         3:
-            header: the variable i
+            header: a variável i
             text: |-
                 In the previous slide the variable was named 'counter', because it was counting down.
                 You can of course use any name for the variable you want.
                 The standard name  for variables in this situation that is used in programming languages like Python is 'i'.
                 That looks like this:
             code: |-
-                number = 10
+                número = 10
                 {for} i {in} {range} 1 {to} 10
-                    {print} i * number
+                    {print} i * número
         4:
+            header: Debugging
+            text: Let's debug this code!
+            code: |-
+                factor {is} {ask} 'Which table of multiplication do you need?'
+                {repeat} {for} numbers {in} {range} 1 {to} 10 {times}
+                    {print} This is the table of multiplications for factor
+                    {print} number ' x ' factor ' = ' i * factor
+            debug: 'True'
+        5:
             header: Let's start programming!
-            text: Enjoy the adventures in level 11!
+            text: Aproveite as aventuras do nível 11!
     12:
         1:
-            header: Welcome to level 12
+            header: Bem-vindo(a) ao nível 12
             text: |-
                 From this level on you are allowed to use decimal numbers and there are some changes to the quotation marks.
                 You can also use functions from this level on!
         2:
-            header: Quotation marks
+            header: Aspas
             text: |-
                 This level makes some changes to the usage of quotation marks.
                 From now on, **all texts** need to be in quotation marks. This includes values of variables, items on lists and text after {if} commands.
             code: |-
-                name = 'Hedy the Robot'
-                {print} 'Hello ' name
+                nome = 'Hedy a Robô'
+                {print} 'Olá ' nome
         3:
-            header: Decimal numbers
+            header: Números decimais
             text: |-
                 From this level on you are also allowed to use decimal numbers. This can make programs like your restaurant even better!
 
@@ -732,19 +807,35 @@ levels:
                      {print} 'Twinkle'
                      {print} '...'
 
-                 {call} twinkle
-                 {print} 'Up above the world so high'
-                 {print} 'Like a diamond in the sky'
-                 {call} twinkle
+                {call} twinkle
+                {print} 'Up above the world so high'
+                {print} 'Like a diamond in the sky'
+                {call} twinkle
         6:
-            header: Functions
+            header: Funções
             text: As you could see in the example a function is a block of code that can be called anytime. You use `{define}` to set the function and `{call}` to use it.
         7:
+            header: Debugging
+            text: Let's debug this code!
+            code: |-
+                {call} new_member
+                {print} 'Hi new member!'
+                username = {ask} 'What is your username?'
+                password = 'What is your password?'
+                {print} 'Welcome to our club!'
+
+                username = {ask} 'Please enter your username. Are you a new member? Type New Member'
+                {if} username = New Member
+                {call} new member
+                    {else}
+                        password = {ask} 'Please enter password'
+            debug: 'True'
+        8:
             header: Ready to try it out?
-            text: Enjoy the adventures in level 12!
+            text: Aproveite as aventuras do nível 12!
     13:
         1:
-            header: Welcome to level 13
+            header: Bem-vindo(a) ao nível 13
             text: |-
                 We are now going to learn `{and}` and `{or}`! If you want to check two statements, you don't have to use two ifs but can use and and or.
                 From now on you could also use arguments in your functions.
@@ -765,9 +856,9 @@ levels:
 
                 Let's see what happens when you change the `{and}` for `{or}`.
             code: |-
-                name = {ask} 'what is your name?'
-                {if} name {is} 'Hedy' {or} name {is} 'hedy'
-                    {print} 'Welcome!!'
+                nome = {ask} 'qual é o seu nome?'
+                {if} nome {is} 'Hedy' {or} nome {is} 'hedy'
+                    {print} 'Bem-vinda!!'
         4:
             header: Functions with arguments
             text: Now that you've learned how to use functions, you'll learn how to use a function with an **argument**. An argument is a variable that is used within a function. It is not used outside the function.
@@ -826,11 +917,35 @@ levels:
                 {call} song {with} 'sea'
                 {call} song {with} 'ocean'
         8:
+            header: Debugging
+            text: Let's debug this code!
+            code: |-
+                {define} happiness {with} name
+                    {print} '🥳'
+                {play} G
+                {play} A
+                {play} B
+                {print} 'Party on, ' name
+                {define} sadness
+                {print} '😞'
+                {play} E
+                {play} D
+                {play} C
+                {print} 'Hope you feel better, ' name
+
+                name = {ask} 'What is your' name '?'
+                mood = {ask} 'Are you happy or sad?'
+                {if} mood = happy
+                    {call} happiness {with} person
+                {else} mood = sad
+                    {define} sadness {to} name
+            debug: 'True'
+        9:
             header: Let's go!
-            text: Enjoy the adventures in level 13!
+            text: Aproveite as aventuras do nível 13!
     14:
         1:
-            header: Welcome to level 14
+            header: Bem-vindo(a) ao nível 14
             text: In this level you'll learn some new symbols that can help you improve your programs, like >. You will also learn to work with return values of a function.
         2:
             header: Symbols
@@ -879,7 +994,7 @@ levels:
                 {define} calculate_new_price {with} amount, percentage
                     percentage = percentage / 100
                     discount_amount = amount * percentage
-                    return amount - discount_amount
+                    {return} amount - discount_amount
 
                 old_price = {ask} 'How much is on the price tag?'
                 discount = {ask} 'What percentage is the discount?'
@@ -887,11 +1002,33 @@ levels:
                 new_price = {call} calculate_new_price {with} old_price, discount
                 {print} 'The new price is ' new_price ' dollar'
         6:
+            header: Debugging
+            text: Let's debug this code!
+            code: |-
+                item = 'not bought'
+                {print} 'I would like to buy this item'
+                price == {ask} 'What is the price?'
+                {if} price less than or the same as 10
+                    {print} 'Thats a great deal!'
+                    item = 'bought'
+                {if} price is more than 10 {and} less than or the same as 20
+                    {print} 'Alright'
+                    item = 'bought'
+                {if} price is more than 20 {and} less than 50
+                    {print} 'That is a bit much!'
+                {if} price is more than or the same as 50
+                    {print} 'No way!'
+                {if} item =! bought
+                    {print} 'Shame.. I wont buy it'
+                {else}
+                    {print} 'I will buy it! Thank you!'
+            debug: 'True'
+        7:
             header: Let's get to work!
-            text: Enjoy the adventures in level 14!
+            text: Aproveite as aventuras do nível 14!
     15:
         1:
-            header: Welcome to level 15
+            header: Bem-vindo(a) ao nível 15
             text: In this level you will learn about the `{while}` loop.
         2:
             header: '{while}'
@@ -909,7 +1046,7 @@ levels:
             text: Enjoy the adventures in level 15!
     16:
         1:
-            header: Welcome to level 16
+            header: Bem-vindo(a) ao nível 16
             text: In this level you will learn about the [square brackets] and how to use them.
         2:
             header: Square brackets
@@ -928,7 +1065,7 @@ levels:
             text: Enjoy the adventures in level 16!
     17:
         1:
-            header: Welcome to level 17
+            header: Bem-vindo(a) ao nível 17
             text: in this level you will learn how to use a colon and you will learn the elif command.
         2:
             header: Colon
@@ -959,7 +1096,7 @@ levels:
             text: Enjoy the adventures in level 17!
     18:
         1:
-            header: Welcome to level 18
+            header: Bem-vindo(a) ao nível 18
             text: Congratulations! You have reached the last level of Hedy! The code you have created here can be copied to real Python environments like replit or PyCharm, and you can continue learning there! Note however that Python can only read English commands, so if you have been using other languages,
                 you will need to switch to English now.
         2:

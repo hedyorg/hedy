@@ -1,10 +1,10 @@
-command:+= error_ifelse | error_ifpressed_missing_else | ifpressed ifpressed_elses? | ifs elses?-= error_invalid_space | ifelse
+command:+= error_repeat_dep_8 | error_ifelse | error_ifpressed_missing_else | ifpressed ifpressed_elses? | ifs elses?-= error_invalid_space | ifelse
 
 repeat: _REPEAT (INT | var_access) _TIMES _SPACE? _EOL (_SPACE command) (_EOL _SPACE command)* _EOL? _END_BLOCK
+error_repeat_dep_8: _REPEAT (INT | var_access) _TIMES _SPACE command
 
 // FH jan 2022 (#1817) we can allow unquoted rhs's again cause there now is a line break after
 // not sure of we want it, but we could
-condition: equality_check | in_list_check
 equality_check: (textwithoutspaces | NUMBER) (_IS | _EQUALS) (textwithoutspaces | NUMBER) (_SPACE | textwithoutspaces | NUMBER)*
 
 // from level 8 on ifpressed is implemented slightly differently

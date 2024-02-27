@@ -1,7 +1,7 @@
 @top Program { eol* (Command eol+)* Command? }
 
 Command {
-    Assign | AssignList | Ask | Clear |Print | Turtle | Sleep | Add | Remove | If | Else | Repeat | For | Define | Call | Return | While | ErrorInvalid
+    Assign | AssignList | Ask | Clear |Print | Play | Turtle | Sleep | Add | Remove | If | Else | Repeat | For | Define | Call | Return | While | ErrorInvalid
 }
 
 @local tokens {    
@@ -25,21 +25,22 @@ Command {
 String { doubleQuotedString | singleQuotedString }
 
 
-Print { print+ ( ListAccess | Expression | Call )+ }
+Print { print+ ( ListAccess | Expression )+ }
 Ask { Text (is+ | Op<"=">) ask+ ( ListAccess | Expression )+ }
 
 AssignList { Text (is+ | Op<"=">) (Text+ | Number ) ~ambig  (Comma (Text+ | Number ))+ }
 Assign { (Text | ListAccess) (is+ | Op<"=">) (Expression ~ambig  | ListAccess)+ }
-Sleep { sleep+ (Expression | ListAccess | Call)? }
+Sleep { sleep+ (Expression | ListAccess )? }
 ListAccess { Text at+ (random+ | Text | Number) }
-Add { add+ (Expression | Call ) toList+ Text }
-Remove { remove+ (Expression | Call) from+ Text }
+Add { add+ (Expression ) toList+ Text }
+Remove { remove+ (Expression ) from+ Text }
 Clear { clear+ }
+Play { play+ Text+ }
 
 Turtle[@isGroup=turtle] {
-    Forward { forward+ (Expression | ListAccess | Call) } |
-    Turn { turn+ (Expression | ListAccess | Call) } |
-    Color { color+ (Expression | ListAccess | Call)  }
+    Forward { forward+ (Expression | ListAccess ) } |
+    Turn { turn+ (Expression | ListAccess ) } |
+    Color { color+ (Expression | ListAccess )  }
 }
 
 If { ifs+ Condition ((and+ | or+) Condition)* }
@@ -47,11 +48,11 @@ Else { elses+ }
 
 Condition {
     PressedCheck { Text ~cond is+ pressed+ } |
-    EqualityCheck { (Expression | Call) (is+ | Op<"="> Op<"=">? ) (Expression | Call) } |
-    NotEqualCheck { (Expression | Call) (Op<"!=">) (Expression | Call) } |
-    ComparisonCheck { (Expression | Call) (Op<">"> | Op<"<">) Op<"=">? (Expression | Call) } |
-    InListCheck { (Expression ~cond | Call) ins+  Text } |
-    NotInListCheck { (Expression ~cond | Call) not_in+  Text }
+    EqualityCheck { (Expression ) (is+ | Op<"="> Op<"=">? ) (Expression ) } |
+    NotEqualCheck { (Expression ) (Op<"!=">) (Expression ) } |
+    ComparisonCheck { (Expression ) (Op<">"> | Op<"<">) Op<"=">? (Expression ) } |
+    InListCheck { (Expression ~cond ) ins+  Text } |
+    NotInListCheck { (Expression ~cond ) not_in+  Text }
 }
 
 Repeat { repeat+ (Number | Text) times+ }
@@ -62,9 +63,9 @@ While { while+ Condition ((and+ | or+) Condition)* }
 
 Define { define+ Text (with+  Arguments)? }
 Call { call+ Text (with+ Arguments)? }
-Return { returns+ ( ListAccess | Expression | Call)+ }
+Return { returns+ ( ListAccess | Expression )+ }
 
-Arguments { argument (Comma argument)* }
+Arguments { argument !comma (Comma argument)* }
 argument { Expression | ListAccess }
 
 ErrorInvalid[@dynamicPrecedence=-10] { Text+ }
@@ -76,17 +77,18 @@ binaryExpression {
     Expression !plus Op<"+" | "-"> Expression
 }
 
-// I should add Call here, but it works for now
 Expression {
     Number |
     Text |
     String |
+    Call |
     binaryExpression
 }
 
 @precedence {
     times @left,
-    plus @right
+    plus @right,
+    comma @left
 }
 
 @external specialize { Text } specializeKeyword from "./tokens" {
@@ -99,7 +101,9 @@ Expression {
     and[@name="and"],
     or[@name="or"],
     is[@name="is"],
-    while[@name="while"]
+    while[@name="while"],
+    define[@name="define"],
+    with[@name="with"]
 }
 
 @external extend { Text } extendKeyword from "./tokens" {
@@ -108,6 +112,7 @@ Expression {
     turn[@name="turn"],
     color[@name="color"],
     sleep[@name="sleep"],
+    play[@name="play"],
     add[@name="add"],
     from[@name="from"],
     remove[@name="remove"],
@@ -121,9 +126,7 @@ Expression {
     to[@name="to"],
     range[@name="range"],
     call[@name="call"],
-    define[@name="define"],
-    returns[@name="return"],
-    with[@name="with"]
+    returns[@name="return"]  
 }
 
 @tokens {

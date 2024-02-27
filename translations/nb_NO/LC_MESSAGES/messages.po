@@ -7,15 +7,16 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2023-12-19 19:41+0100\n"
-"PO-Revision-Date: 2023-12-18 20:12+0000\n"
-"Last-Translator: Prefill add-on <noreply-addon-prefill@weblate.org>\n"
-"Language: nb_NO\n"
+"POT-Creation-Date: 2024-01-18 10:49+0100\n"
+"PO-Revision-Date: 2024-02-19 01:12+0000\n"
+"Last-Translator: Snoring Parrot <snoring_parrot@users.noreply.hosted.weblate.org>\n"
 "Language-Team: nb_NO <LL@li.org>\n"
-"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"Language: nb_NO\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 5.4\n"
 "Generated-By: Babel 2.14.0\n"
 
 #, fuzzy
@@ -24,6 +25,10 @@ msgstr "You tried to use the variable {name} on line {access_line_number}, but y
 
 msgid "Cyclic Var Definition"
 msgstr "Variabelen {variable} må opprettes og gis en verdi før du kan bruke den på høyre siden av hvis-kommandoen"
+
+#, fuzzy
+msgid "Function Undefined"
+msgstr "You tried to use the function {name}, but you didn't define it."
 
 msgid "Has Blanks"
 msgstr "Koden din er uferdig. Den inneholder tomrom du må erstatte med kode."
@@ -64,12 +69,20 @@ msgstr "Du brukte ekko før spør-kommandoen, eller ekko uten å bruke spør-kom
 msgid "Lonely Text"
 msgstr "It looks like you forgot to use a command with the text you put in line {line_number}"
 
+#, fuzzy
+msgid "Missing Additional Command"
+msgstr "It looks like you forgot to complete writing {command} on line {line_number}."
+
 msgid "Missing Command"
 msgstr "Det ser ut som du glemte å bruke en kommando på linje line {line_number}."
 
 #, fuzzy
 msgid "Missing Inner Command"
 msgstr "Det ser ut som du glemte å bruke en kommando på linje line {line_number}."
+
+#, fuzzy
+msgid "Missing Variable"
+msgstr "It looks like your {command} is missing a variable at the start of the line."
 
 #, fuzzy
 msgid "Misspelled At Command"
@@ -121,9 +134,14 @@ msgstr "Du prøvde å bruke variabelen {name}, men den finnes ikke. Det kan ogs�
 msgid "Wrong Level"
 msgstr "Det var korrekt Hedy kode, men det var feil nivå. Du skrev {offending_keyword} for nivå {working_level}. Tips: {tip}"
 
+#, fuzzy
+msgid "Wrong Number of Arguments"
+msgstr "Your function used the wrong number of arguments. You provided {used_number} but the function {name} needs {defined_number}"
+
 msgid "account_overview"
 msgstr "Kontooversikt"
 
+#, fuzzy
 msgid "accounts_created"
 msgstr "Kontoene ble opprettet."
 
@@ -259,10 +277,6 @@ msgstr "programmer lagret"
 
 msgid "amount_submitted"
 msgstr "programmer sendt inn"
-
-#, fuzzy
-msgid "apply_filters"
-msgstr "Apply filters"
 
 msgid "are_you_sure"
 msgstr "Er du sikker? Du kan ikke angre på denne handlingen."
@@ -413,6 +427,10 @@ msgstr "Contributor"
 
 msgid "copy_clipboard"
 msgstr "Kopiert til utklippstavlen"
+
+#, fuzzy
+msgid "copy_code"
+msgstr "Copy code"
 
 #, fuzzy
 msgid "copy_join_link"
@@ -830,6 +848,7 @@ msgstr "Hint?"
 msgid "ill_work_some_more"
 msgstr "I'll work on it a little longer"
 
+#, fuzzy
 msgid "image_invalid"
 msgstr "Bildet du valgte er ugyldig."
 
@@ -978,8 +997,9 @@ msgstr "Klassen din har ikke tilgang til dette nivået enda"
 msgid "level_title"
 msgstr "Nivå"
 
+#, fuzzy
 msgid "levels"
-msgstr ""
+msgstr "levels"
 
 #, fuzzy
 msgid "link"
@@ -1178,6 +1198,7 @@ msgstr "This user hasn't earned the Hedy Certificate of Completion"
 msgid "no_more_flat_if"
 msgstr "Starting in level 8, the code after {if} needs to be placed on the next line and start with 4 spaces."
 
+#, fuzzy
 msgid "no_programs"
 msgstr "Du har ingen programmer enda."
 
@@ -1281,6 +1302,10 @@ msgstr "Et annet tekstspråk"
 msgid "overwrite_warning"
 msgstr "Du har allerede et program med dette navnet. Hvis du lagrer programmet vil det overskrive det gamle, er du sikker?"
 
+#, fuzzy
+msgid "owner"
+msgstr "Owner"
+
 msgid "page"
 msgstr "side"
 
@@ -1359,6 +1384,10 @@ msgid "preview"
 msgstr "Forhåndsvis"
 
 #, fuzzy
+msgid "previewing_adventure"
+msgstr "Previewing adventure"
+
+#, fuzzy
 msgid "previewing_class"
 msgstr "You are previewing class <em>{class_name}</em> as a teacher."
 
@@ -1422,6 +1451,9 @@ msgstr "Vil du bli med i denne klassen?"
 #, fuzzy
 msgid "public"
 msgstr "Public"
+
+msgid "public_adventures"
+msgstr "Browse public adventures"
 
 msgid "public_invalid"
 msgstr "Dette avtale valget er ugyldig"
@@ -1490,6 +1522,10 @@ msgstr "Confirm removing this user from the class."
 msgid "repair_program_logo_alt"
 msgstr "Repair program icon"
 
+#, fuzzy
+msgid "repeat_dep"
+msgstr "Starting in level 8, {repeat} needs to be used with indentation. You can see examples on the {repeat} tab in level 8."
+
 msgid "repeat_match_password"
 msgstr "Passordene du fylte inn er ikke like."
 
@@ -1540,8 +1576,9 @@ msgstr "Du har ikke lov til å se dette eventyret!"
 msgid "retrieve_class_error"
 msgstr "Kun lærere kan hente info om klasser"
 
+#, fuzzy
 msgid "retrieve_tag_error"
-msgstr ""
+msgstr "Error retrieving tags"
 
 #, fuzzy
 msgid "role"
@@ -1581,6 +1618,10 @@ msgid "second_teacher"
 msgstr "Second teacher"
 
 #, fuzzy
+msgid "second_teacher_copy_prompt"
+msgstr "Are you sure you want to copy this teacher?"
+
+#, fuzzy
 msgid "second_teacher_prompt"
 msgstr "Enter a teacher username to invite them."
 
@@ -1598,8 +1639,9 @@ msgstr "Velg"
 msgid "select_adventures"
 msgstr "Velg eventyr"
 
+#, fuzzy
 msgid "select_all"
-msgstr ""
+msgstr "Select all"
 
 #, fuzzy
 msgid "select_lang"
@@ -1609,8 +1651,9 @@ msgstr "Select language"
 msgid "select_tag"
 msgstr "Select tag"
 
+#, fuzzy
 msgid "selected"
-msgstr ""
+msgstr "Selected"
 
 msgid "self_removal_prompt"
 msgstr "Er du sikker på at du vil forlate denne klassen?"
@@ -1716,15 +1759,17 @@ msgstr "Denne eleven er allerede del av klassen din."
 msgid "student_already_invite"
 msgstr "Denne eleven har allerede fått en invitasjon. Har de glemt å svare?"
 
+#, fuzzy
 msgid "student_details"
-msgstr ""
+msgstr "Student details"
 
 #, fuzzy
 msgid "student_list"
 msgstr "Student list"
 
+#, fuzzy
 msgid "student_not_allowed_in_class"
-msgstr ""
+msgstr "Student not allowed in class"
 
 msgid "student_not_existing"
 msgstr "Dette brukernavnet eksisterer ikke."
@@ -1767,11 +1812,23 @@ msgid "suggestion_color"
 msgstr "Try using another color"
 
 #, fuzzy
+msgid "suggestion_note"
+msgstr "Use a note between C0 and B9 or a number between 1 and 70"
+
+#, fuzzy
 msgid "suggestion_number"
 msgstr "Try changing the value to a number"
 
 msgid "surname"
 msgstr "Fornavn"
+
+#, fuzzy
+msgid "survey"
+msgstr "Survey"
+
+#, fuzzy
+msgid "survey_completed"
+msgstr "Survey completed"
 
 #, fuzzy
 msgid "survey_skip"
@@ -1781,8 +1838,9 @@ msgstr "Don't show this again"
 msgid "survey_submit"
 msgstr "Submit"
 
+#, fuzzy
 msgid "tag_in_adventure"
-msgstr ""
+msgstr "Tag in adventure"
 
 #, fuzzy
 msgid "tag_input_placeholder"
@@ -1897,8 +1955,9 @@ msgstr "Hedy - Personvernsvilkår"
 msgid "title_programs"
 msgstr "Hedy - Mine programmer"
 
+#, fuzzy
 msgid "title_public-adventures"
-msgstr ""
+msgstr "Hedy - Public adventures"
 
 msgid "title_recover"
 msgstr "Hedy - Gjennopprett konto"
@@ -2054,9 +2113,6 @@ msgstr "What should my code do?"
 #, fuzzy
 msgid "whole_world"
 msgstr "The world"
-
-msgid "write_first_program"
-msgstr "Lag ditt første program!"
 
 msgid "year_invalid"
 msgstr "Vennligst fyll inn et år mellom 1900 og {current_year}."
@@ -2224,6 +2280,8 @@ msgstr "Your program"
 #~ msgid "no_tags"
 #~ msgstr "No tags yet."
 
-#~ msgid "public_adventures"
-#~ msgstr "Public adventures"
+#~ msgid "apply_filters"
+#~ msgstr "Apply filters"
 
+#~ msgid "write_first_program"
+#~ msgstr "Lag ditt første program!"

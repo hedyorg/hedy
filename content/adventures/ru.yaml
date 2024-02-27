@@ -69,7 +69,7 @@ adventures:
                 story_text_3: |
                     Вот пример команды `{remove}` в вашей истории
 
-                    Можете ли вы использовать 3 новые команды `{at} {random}`, `{add} {to}` и `{remove} {from}` в своей собственной истории?
+                    Можете ли вы использовать 3 новые команды `{at} {random}`, `{add} {to_list}` и `{remove} {from}` в своей собственной истории?
                 example_code_3: |
                     ```
                     {print} His backpack got way too heavy.
@@ -127,9 +127,11 @@ adventures:
             7:
                 story_text: |
                     В рассказе кто-то произносит слова несколько раз. Например, когда кто-то зовет на помощь или поет песню.
-                    Вы можете вставить такие повторы в свой рассказ, на этом уровне с `{repeat}`.
+                    Вы можете вставить такие повторы в свой рассказ, на этом уровне с помощью `{repeat}`.
 
-                    Можете ли вы создать свою собственную историю с повторами?
+                    ### Упражнение
+                    Добавьте повторы в свою собственную историю. Вернитесь к сохраненным программам, выберите свою программу рассказа с предыдущего уровня и
+                    найдите строку, содержащую `{print}`, и повторите ее!
                 example_code: |
                     ```
                     {print} 'The prince kept calling for help'
@@ -150,17 +152,14 @@ adventures:
                     Вернитесь к своим сохраненным программам, выберите свою программу истории из уровня 5. Теперь напишите хорошую и плохую концовку длиной не менее трех строк каждая!
                 example_code: |
                     ```
-                    {print} 'О НЕТ! Т-Рекс приближается!'
-                    end = {ask} 'Вы хотите счастливую или плохую концовку?'
+                    {print} 'О НЕТ! Т-рекс приближается!'
+                    end = {ask} 'Вы хотите счастливый или грустный конец?'
                     {if} end {is} happy
-                        {print} 'Как раз вовремя Ричард запрыгивает в машину времени!'
-                        {print} 'Майкл водит код и...'
-                        {print} '💥ЗАП!💥'
-                        {print} 'Они снова в своём гараже'
+                        {print} 'Как раз вовремя Ричард запрыгивает обратно в машину времени!
+                        {print} _
                     {else}
-                        {print} 'Майкл кричит ДАВАЙ РИЧАРД! БЕЖИ БЫСТРЕЕ!'
-                        {print} 'Но Ричард очень медленный...'
-                        {print} 'И Т-Рекс приближается и с одного укуса сьедает его!🦖'
+                        {print} 'О нет! Ричард слишком медленный...
+                        {print} _
                     ```
             9:
                 story_text: |
@@ -187,19 +186,7 @@ adventures:
                     ### Задание
 
                     Посмотрите на  <a href="https://www.yonkerspublicschools.org/cms/lib/NY01814060/Centricity/Domain/1621/Brown%20Bear%20Book.pdf">рассказ</a> если вы его не видели раньше и убедитесь что ваш рассказ напечатан так же как и в книге.
-                example_code: |
-                    ```
-                    animals = red bird, black sheep, green frog, yellow duck, little child
-                    {print} 'brown bear'
-                    {print} 'brown bear'
-                    {print} 'What do you see?'
-                    {for} animal {in} animals
-                        {print} 'I see a ' animal ' looking at me'
-                        {print} animal
-                        {print} animal
-                        {print} 'What do you see?'
-                    {print} 'I see all the animals looking at me!'
-                    ```
+                example_code: "```\nanimals = _ , _ , _ \n{print} 'Brown bear, Brown bear'\n{print} 'What do you see?'\n```\n"
             12:
                 story_text: На этом уровне вы можете использовать кавычки для сохранения нескольких слов в переменной.
                 example_code: |
@@ -214,29 +201,12 @@ adventures:
                     Сможете ли вы создать свою собственную приключенческую мини-игру, подобную этой?
                 example_code: |
                     ```
-                    sword = 'lost'
-                    game = 'on'
-                    {print} 'Our hero is walking through the forest'
-                    {print} 'The path splits two ways'
-                    {for} i {in} {range} 0 {to} 2
-                        {if} game {is} 'on'
-                            path = {ask} 'Which path should she choose?'
-                            {if} path {is} 'left' {and} sword {is} 'found'
-                                {print} 'Our hero comes across a dragon!'
-                                {print} 'Luckily our hero has a sword to defeat the beast!'
-                                game = 'over'
-                            {if} path {is} 'left' {and} sword {is} 'lost'
-                                {print} 'Our hero finds a dragon, but she doesnt have any weapons!'
-                                {print} 'Our hero is beaten by the dragon...'
-                                {print} 'Try again'
-                                game = 'over'
-                            {if} path {is} 'right' {and} sword {is} 'found'
-                                {print} 'You have already found the sword. There is nothing left here.'
-                                {print} 'She walks back'
-                            {if} path {is} 'right' {and} sword {is} 'lost'
-                                {print} 'Our hero finds a sword'
-                                {print} 'This could come in very handy'
-                                sword = 'found'
+                    {print} 'Наш герой идет через лес'
+                    {print} 'Путь расходится в две стороны'
+                    path = {ask} 'Какой путь она должна выбрать?'
+                    weapon = {ask} 'Какое оружие она нарисует?'
+                    {if} path {is} 'налево' {and} weapon {is} 'меч'
+                        _
                     ```
             15:
                 story_text: |
@@ -268,7 +238,7 @@ adventures:
                     Create a story of at least 5 sentences. You don't have to use 'name' just yet.
                 example_code: |
                     ```
-                    {print}('Welcome to this story!')
+                    {print}('Добро пожаловать в историю!')
                     ```
                 story_text_2: |
                     ### Exercise 2
@@ -288,7 +258,7 @@ adventures:
             3:
                 story_text: |
                     ## Add to
-                    You can add items to the list with the `{add} {to}` command. To add an item to a list you can simply type: `{add} penguin {to} animals` or you can use the `{ask}` command like in the example code.
+                    You can add items to the list with the `{add} {to_list}` command. To add an item to a list you can simply type: `{add} penguin {to} animals` or you can use the `{ask}` command like in the example code.
                 example_code: |
                     ```
                     animals {is} dog, cat, kangaroo
@@ -703,19 +673,19 @@ adventures:
             4:
                 story_text: |
                     Time for a new command! With `{clear}` you can clear all the text form your output screen. This way you can prevent your screen getting too full of text.
-                    Beware! If you are using a `{clear}` command, remember to use a `{sleep}` above it. Otherwise Hedy will clear your screen without giving you the time to read!
+                    Beware! If you are using a `{clear}` command, you might need to use a `{sleep}` above it. Otherwise Hedy will clear your screen without giving you the time to read as you can see in the example!
                 example_code: |
                     ```
-                    print '3'
-                    sleep
-                    clear
-                    print '2'
-                    sleep
-                    clear
-                    print '1'
-                    sleep
-                    clear
-                    print 'SURPRISE!'
+                    {print} '3'
+                    {clear}
+                    {print} '2'
+                    {clear}
+                    {print} '1'
+                    {clear}
+                    {print} 'wait for it...'
+                    {sleep} 3
+                    {clear}
+                    {print} 'SURPRISE!'
                     ```
     debugging:
         name: debugging
@@ -803,23 +773,17 @@ adventures:
                     {print} Welcome to Swimming Pool Hedy!
                     class {is} {ask} 'Are you here to join a class today?'
                     {if} class yes
-                        {print} 'Great! You are joining a class!'
-                        {print} {else} 'You will not be joining a class'
-                    discount {is} {ask} 'Do you have a discount code?'
+                    {print} 'Great! You're joining a class!
+                    {print} {else} 'You will not be joining a class'
+                    discount {is} 'Do you have a discount code?'
                     {if} discount {is} yes
-                    discount_answer {is} {ask} 'What is your discount code?'
+                    discount_answer {is} {ask} 'What's your discount code?'
                     discount_codes = Senior4231, Student8786, NewMember6709
-                    {if} discount_answer {is} {in} discount_codes
-                        {print} 'That will be $3,50'
-                            {else} 'That code is not valid'
-                    {else} 'That will be $5,50'
+                    {if} discount_answer {is} {in} discount_cods
+                    {print} 'That will be $3,50'
+                    'That will be $5,50'
                     {print} 'Have a nice swim!'
                     ```
-
-                        {print} 'That will be $3,50'
-                            {else} 'That code is not valid'
-                    {else} 'That will be $5,50'
-                    {print} 'Have a nice swim!'
             6:
                 story_text: |-
                     ### Exercise
@@ -1210,6 +1174,10 @@ adventures:
                     Попробуйте выполнить код самостоятельно с помощью зеленой кнопки "Выполнить код" под полем программирования.
 
                     Вы Готовы? Тогда перейдите на следующую вкладку чтобы выучить вашу первую команду!
+                example_code: |
+                    ```
+                    {print} Hello world!
+                    ```
             2:
                 story_text: |
                     In level 2 we learn two new commands: `{is}` and `{sleep}`.
@@ -1397,7 +1365,7 @@ adventures:
                 story_text: |-
                     Now we are going to change indentation a little bit. Every time that we need an indentation, we need `:` at the line before the indentation.
 
-                    In this level you can also use a new command: `{elif}`. `{elif}` is short for {else} {if} and you need it when you want to make 3 (or more!) options.
+                    In this level you can also use a new command: `{elif}`. `{elif}` is short for `{else} {if}` and you need it when you want to make 3 (or more!) options.
                     Check it out!
             18:
                 story_text: |-
@@ -2342,8 +2310,6 @@ adventures:
                     name = Hedy
                     answer = 20 + 4
                     ```
-
-                    answer = 20 + 4
             14:
                 story_text: |
                     We are going to learn more new items. You might know them already from mathematics, the `<` and `>`.
@@ -2426,7 +2392,6 @@ adventures:
         levels:
             6:
                 story_text: |
-                    ## 1 + 1
                     In this level you learn something new: you can now also calculate.
 
                     The plus is easy, you write it like with math: `5 + 5` for example. The minus also works fine, it is `5 - 5`.
@@ -2459,6 +2424,290 @@ adventures:
                     ```
 
                     {print} 2.5 + 2.5
+    music:
+        name: music
+        default_save_name: music
+        description: Play a tune!
+        levels:
+            1:
+                story_text: |-
+                    In this level you'll learn how to use the `{play}` command to play a tune!
+
+                    Type `{play}` followed by the note you want to play. The scale goes C-D-E-F-G-A-B.
+                    As you can see there are 7 different letters, but we can play more than just 7 notes.
+                    Type a number between 1 and 10 behind the letter to choose the scale, for example after B4 comes C5.
+                    C1 is the lowest note you can play, C10 is the highest.
+
+                    ### Exercise
+                    Try out the example code and then play around with it! Can you create your own melody?
+                    In the next level you'll learn how to play some existing songs.
+                example_code: |-
+                    ```
+                    play C4
+                    play D4
+                    play E4
+                    play F4
+                    play G4
+                    play A4
+                    play B4
+                    play C5
+                    ```
+            2:
+                story_text: Finish the songs! We have started the codes for some melodies.
+                example_code: |
+                    ```
+                    {print} Old Mac Donald had a farm
+                    {play} C5
+                    {play} C5
+                    {play} C5
+                    {play} G4
+                    {play} A4
+                    {play} A4
+                    {play} G4
+                    ```
+                story_text_2: As you can see, you can also use the `{sleep}` command to add a little pause in the song.
+                example_code_2: |
+                    ```
+                    {print} Twinkle Twinkle Little Star
+                    {play} C
+                    {play} C
+                    {play} G
+                    {play} G
+                    {play} A
+                    {play} A
+                    {play} G
+                    {sleep} 1
+                    {play} F
+                    {play} F
+                    ```
+            3:
+                story_text: |
+                    Create a random melody!
+
+                    ### Exercise
+                    The example code creates a random melody, but it's very short and not many notes are used.
+                    Add more notes to the list and create a longer melody by copying the last line a couple more times.
+                example_code: |
+                    ```
+                    notes {is} A4, B4, C4
+                    {play} notes {at} {random}
+                    {play} notes {at} {random}
+                    {play} notes {at} {random}
+                    ```
+            4:
+                story_text: |
+                    Use the `{clear}` command to create a karaokemachine!
+
+                    ### Exercise
+                    Finish the karaoke version of 'Mary had a little lamb'.
+                    Then, create a karaoke version of any song you'd like!
+                example_code: |
+                    ```
+                    {print} 'Mary had a little lamb'
+                    {play} E
+                    {play} D
+                    {play} C
+                    {play} D
+                    {play} E
+                    {play} E
+                    {play} E
+                    {clear}
+                    {print} 'Little lamb, little lamb'
+                    {play} D
+                    {play} D
+                    {play} D
+                    {play} E
+                    {play} E
+                    {play} E
+                    {clear}
+                    {print} 'Mary had a little lamb'
+                    {play} E
+                    ```
+            5:
+                story_text: |
+                    You don't always have to use the `{play}` command to play a whole song, sometimes you just want to play one note.
+                    For example, if you want to make a quiz, you can play a happy high note if the answer is right and a sad low note if the answer is wrong.
+
+                    ### Exercise
+                    Finish the first question by adding a line of code that plays a C3 note if the wrong answer is given.
+                    Then think of 3 more questions to add to this quiz.
+                example_code: |
+                    ```
+                    answer {is} {ask} 'What is the capital of Zimbabwe?'
+                    {if} answer {is} Harare {play} C6
+                    _
+                    ```
+            6:
+                story_text: "Instead of playing notes, you can also play numbers now. Simply type `{play} 1` for the lowest note, `{play} 70` for the highest note, or anything in between.\n\n### Exercise\n This calls for musical maths! Try out the example code a couple of times with different starting\
+                    \ numbers. \nThen, see if you can compose a song using the numbers.\n"
+                example_code: |
+                    ```
+                    number = {ask} 'Say a starting number between 1 and 67'
+                    {print} number
+                    {play} number
+                    number = number + 1
+                    {print} number
+                    {play} number
+                    number = number + 1
+                    {print} number
+                    {play} number
+                    ```
+            7:
+                story_text: |
+                    Using the `{repeat}` command can make your codes for melodies a lot shorter!
+
+                    ### Exercise
+                    Finish the code for Twinkle Twinkle Little Star by using the `{repeat}`command.
+                    Then go back to the songs you've made in the previous levels. Can you shorten those codes too?
+                example_code: |
+                    ```
+                    {print} 'Twinkle Twinkle Little Star'
+                    {repeat} 2 {times} {play} C4
+                    {repeat} 2 {times} {play} G4
+                    _
+                    ```
+            8:
+                story_text: |
+                    Now that we can use the `{repeat}` command for multiple lines, we can make songs even more easily!
+
+                    ### Exercise
+                    Finish the song of Brother John (Frère Jacques). Don't forget to use `{repeat}`!
+                example_code: |
+                    ```
+                    {print} 'Brother John'
+                    {repeat} 2 {times}
+                        {play} C
+                        {play} D
+                        {play} E
+                        {play} C
+                    {repeat} 2 {times}
+                        {play} E
+                        {play} F
+                        {play} G
+                        {sleep} 1
+                    ```
+            9:
+                story_text: |
+                    From this level on you can - among other things - use a {repeat} command inside a {repeat} command.
+                    That makes songs like 'Happy birthday' even shorter!
+
+                    ### Exercise
+                    Finish the song!
+                example_code: |
+                    ```
+                    first_time = yes
+                    {repeat} 2 {times}
+                        {repeat} 2 {times}
+                            {play} C
+                        {play} D
+                        {play} C
+                        {if} first_time {is} yes
+                            {play} F
+                            {play} E
+                            first_time {is} no
+                        {else}
+                            _
+                    ```
+            12:
+                story_text: |
+                    Use functions in you songs! As you can see in the example code, you can make a function for each line of Twinkle Twinkle little star. Once you've programmed the first three lines, all you have to do is call the functions in the order you want them played in.
+
+                    ### Exercise
+                    Finish the song of Twinkle Twinkle little star.
+                    Then look back at all the songs you've programmed in the levels before, can you make those codes better and shorter using functions too?
+                example_code: |
+                    ```
+                    {define} first_line
+                        {play} C
+                        {play} C
+                        {play} G
+                        {play} G
+                        {play} A
+                        {play} A
+                        {play} G
+                        {sleep}
+
+                    {define} second_line
+                        {play} F
+                        {play} F
+                        {play} E
+                        {play} E
+                        {play} D
+                        {play} D
+                        {play} C
+                        {sleep}
+
+                    {define} third_line
+                        {play} G
+                        {play} G
+                        {play} F
+                        {play} F
+                        {play} E
+                        {play} E
+                        {play} D
+                        {sleep}
+
+                    {call} _
+                    {call} _
+                    {call} _
+                    {call} _
+                    {call} _
+                    {call} _
+                    ```
+            13:
+                story_text: |
+                    You can use a function with an argument for songs that have line taht are almost the same, but slightly different each time.
+                    One example is the song 'Yankee Doodle'. The first 4 notes of the first lines are the same, buyt each time they are followed by a different couple of notes.
+
+                    ### Exercise
+                    Can you finish the song of Yankee Doodle?
+                    Can you think of another song to programm this way?
+                example_code: |
+                    ```
+                    {print} 'Yankee Doodle'
+                    {define} _ {with} note_1, note_2, note_3
+                        {play} C4
+                        {play} C4
+                        {play} D4
+                        {play} E4
+                        {play} _
+                        {play} _
+                        {play} _
+
+                    {call} line_1 {with} 29, 31, 30
+                    {call} line_1 {with} 29, 28, 0
+                    {call} line_1 {with} 32, 31, 30
+
+                    {play} C4
+                    {play} B3
+                    {play} G3
+                    {play} A3
+                    {play} B3
+                    {play} C4
+                    {play} C4
+                    ```
+            14:
+                story_text: |
+                    You can programm music for fun, but you can also use the musical notes to make something useful like a fire alarm!
+
+                    ### Exercise
+                    Make sure the fire alarm rings when there is a fire!
+                example_code: |
+                    ```
+                    {define} fire_alarm
+                        {print} 'FIRE!'
+                        note = 40
+                        {for} i {in} {range} 1 {to} 100
+                            {if} note _ 50
+                                note = note + 5
+                                {play} _
+                            {else}
+                                note = 40
+
+                    fire = {ask} 'Is there a fire?'
+                    {if} fire _ 'yes'
+                        {call} fire_alarm
+                    ```
     parrot:
         name: Попугай
         default_save_name: Попугай

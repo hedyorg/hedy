@@ -2,13 +2,21 @@ import functools
 import operator
 import itertools
 from datetime import date, timedelta
+import sys
+from os import path
 
 from utils import timems, times
 
 from . import dynamo, auth
 from . import querylog
 
-storage = dynamo.AwsDynamoStorage.from_env() or dynamo.MemoryStorage("dev_database.json")
+is_offline = getattr(sys, 'frozen', False) and hasattr(sys, '_MEIPASS')
+if is_offline:
+    # Offline mode. Store data 1 directory upwards from `_internal`
+    storage = dynamo.MemoryStorage(path.join(sys._MEIPASS, "..", "database.json"))
+else:
+    # Production or dev: use environment variables or dev storage
+    storage = dynamo.AwsDynamoStorage.from_env() or dynamo.MemoryStorage("dev_database.json")
 
 USERS = dynamo.Table(storage, "users", "username", indexes=[
     dynamo.Index("email"),
@@ -43,7 +51,9 @@ CLASSES = dynamo.Table(storage, "classes", "id", indexes=[
 # - name (str): adventure name
 # - public (int): 1 or 0 whether it can be shared
 # - tags_id (str): id of tags that describe this adventure.
-ADVENTURES = dynamo.Table(storage, "adventures", "id", indexes=[dynamo.Index("creator"), dynamo.Index("public")])
+ADVENTURES = dynamo.Table(storage, "adventures", "id", indexes=[
+                          dynamo.Index("creator"), dynamo.Index("public"),
+                          dynamo.Index("name", sort_key="creator", index_name="name-creator-index")])
 INVITATIONS = dynamo.Table(
     storage, "invitations", partition_key="username#class_id",
     indexes=[dynamo.Index("username"), dynamo.Index("class_id")],

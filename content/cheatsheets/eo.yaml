@@ -35,7 +35,7 @@
         koloro {is} {ask} Kio estas via plej ŝatata koloro?
         {print} koloro estas via plej ŝatata!
 -   name: '{sleep}'
-    explanation: Paŭzigi Hedy dum kelkaj sekundoj.
+    explanation: Per `{sleep}`, vi povas paŭzigi Hedy dum kelkaj sekundoj.
     demo_code: |-
         {print} Lasu min pensi dum unu sekundo...
         {sleep}
@@ -98,13 +98,13 @@
         respondo {is} {ask} 'Kiel longe mi iru?'
         {if} respondo {is} malproksimen {forward} 100 {else} {forward} 5
 -   name: '{in}'
-    explanation: Kontrolu elementojn per `{in}`.
+    explanation: Rekoni elementojn per `{in}`.
     demo_code: |-
         belaj_koloroj {is} verda, flava
-        koloro {is} {ask} 'Kio {is} via plej ŝatata koloro?'
+        koloro {is} {ask} 'Kio estas via plej ŝatata koloro?'
         {if} koloro {in} belaj_koloroj {print} 'bela!' {else} {print} 'ba!'
 -   name: '{pressed}'
-    explanation: Check whether a given key on the keyboard is `{pressed}`.
+    explanation: Kontroli ĉu klavo estas `{pressed}` en la klavaro.
     demo_code: '{if} a {is} {pressed} {print} ''You pressed A!'' {else} {print} ''You pressed another key!'''
 6:
 -   name: '{print}'

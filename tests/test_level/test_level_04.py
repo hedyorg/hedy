@@ -35,6 +35,14 @@ class TestsLevel4(HedyTester):
             max_level=11,
             expected=expected)
 
+    def test_print_bulgarian_quoted_text(self):
+        code = "print „Здравейте!“"
+        expected = "print(f'Здравейте!')"
+        self.multi_level_tester(
+            code=code,
+            max_level=11,
+            expected=expected)
+
     def test_print_french_quoted_text(self):
         code = "print «bonjour tous le monde!»"
         expected = "print(f'bonjour tous le monde!')"

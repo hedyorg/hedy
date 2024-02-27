@@ -7,15 +7,16 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2023-12-19 19:41+0100\n"
-"PO-Revision-Date: 2023-12-18 20:12+0000\n"
-"Last-Translator: Prefill add-on <noreply-addon-prefill@weblate.org>\n"
-"Language: uk\n"
+"POT-Creation-Date: 2024-01-29 20:23-0800\n"
+"PO-Revision-Date: 2024-02-19 01:12+0000\n"
+"Last-Translator: Snoring Parrot <snoring_parrot@users.noreply.hosted.weblate.org>\n"
 "Language-Team: uk <LL@li.org>\n"
-"Plural-Forms: nplurals=3; plural=n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
+"Language: uk\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
+"X-Generator: Weblate 5.4\n"
 "Generated-By: Babel 2.14.0\n"
 
 #, fuzzy
@@ -24,6 +25,10 @@ msgstr "You tried to use the variable {name} on line {access_line_number}, but y
 
 msgid "Cyclic Var Definition"
 msgstr "Ім'я {variable} повинно бути задане до того, як ви зможете використовувати її в правій частині команди {is}."
+
+#, fuzzy
+msgid "Function Undefined"
+msgstr "You tried to use the function {name}, but you didn't define it."
 
 msgid "Has Blanks"
 msgstr "Ваш код є неповним. Він містить пробіли, які необхідно замінити кодом."
@@ -61,11 +66,19 @@ msgstr "Ви використали {echo} перед {ask} або {echo} без
 msgid "Lonely Text"
 msgstr "Схоже, що ви забули використати команду з текстом, яка використовується в рядку {line_number}"
 
+#, fuzzy
+msgid "Missing Additional Command"
+msgstr "It looks like you forgot to complete writing {command} on line {line_number}."
+
 msgid "Missing Command"
 msgstr "Схоже, що ви забули використати команду в рядку {line_number}."
 
 msgid "Missing Inner Command"
 msgstr "Схоже, що ви забули використати команду з оператором {command}, який ви використовували в рядку {line_number}."
+
+#, fuzzy
+msgid "Missing Variable"
+msgstr "It looks like your {command} is missing a variable at the start of the line."
 
 #, fuzzy
 msgid "Misspelled At Command"
@@ -116,9 +129,14 @@ msgstr "Ви намагалися використати перемінну {nam
 msgid "Wrong Level"
 msgstr "Це був правильний код Hedy, але не на тому рівні. Ви написали {offending_keyword} для рівня {working_level}. Підказка: {tip}"
 
+#, fuzzy
+msgid "Wrong Number of Arguments"
+msgstr "Your function used the wrong number of arguments. You provided {used_number} but the function {name} needs {defined_number}"
+
 msgid "account_overview"
 msgstr "Огляд облікового запису"
 
+#, fuzzy
 msgid "accounts_created"
 msgstr "Облікові записи успішно створено."
 
@@ -243,10 +261,6 @@ msgstr "програми збережено"
 
 msgid "amount_submitted"
 msgstr "програми надіслані"
-
-#, fuzzy
-msgid "apply_filters"
-msgstr "Apply filters"
 
 msgid "are_you_sure"
 msgstr "Ви впевнені? Ви не можете відкликати цю операцію."
@@ -391,6 +405,10 @@ msgstr "Дописувач"
 
 msgid "copy_clipboard"
 msgstr "Успішно скопійовано до буфера обміну"
+
+#, fuzzy
+msgid "copy_code"
+msgstr "Copy code"
 
 msgid "copy_join_link"
 msgstr "Скопіювати посилання для вступу"
@@ -808,6 +826,7 @@ msgstr "Hint?"
 msgid "ill_work_some_more"
 msgstr "I'll work on it a little longer"
 
+#, fuzzy
 msgid "image_invalid"
 msgstr "Обрана вами картинка є невірною."
 
@@ -967,8 +986,9 @@ msgstr "Цей рівень ще не доступний у вашому кла�
 msgid "level_title"
 msgstr "Рівень"
 
+#, fuzzy
 msgid "levels"
-msgstr ""
+msgstr "levels"
 
 #, fuzzy
 msgid "link"
@@ -1310,6 +1330,10 @@ msgstr "Another text language"
 msgid "overwrite_warning"
 msgstr "You already have a program with this name, saving this program will replace the old one. Are you sure?"
 
+#, fuzzy
+msgid "owner"
+msgstr "Owner"
+
 msgid "page"
 msgstr "сторінка"
 
@@ -1401,6 +1425,10 @@ msgid "preview"
 msgstr "Переглянути"
 
 #, fuzzy
+msgid "previewing_adventure"
+msgstr "Previewing adventure"
+
+#, fuzzy
 msgid "previewing_class"
 msgstr "You are previewing class <em>{class_name}</em> as a teacher."
 
@@ -1473,6 +1501,9 @@ msgstr "Бажаєте приєднатися до цього класу?"
 #, fuzzy
 msgid "public"
 msgstr "Public"
+
+msgid "public_adventures"
+msgstr "Browse public adventures"
 
 #, fuzzy
 msgid "public_invalid"
@@ -1549,6 +1580,10 @@ msgid "repair_program_logo_alt"
 msgstr "Repair program icon"
 
 #, fuzzy
+msgid "repeat_dep"
+msgstr "Starting in level 8, {repeat} needs to be used with indentation. You can see examples on the {repeat} tab in level 8."
+
+#, fuzzy
 msgid "repeat_match_password"
 msgstr "The repeated password does not match."
 
@@ -1607,8 +1642,9 @@ msgstr "You're not allowed to view this adventure!"
 msgid "retrieve_class_error"
 msgstr "Only teachers can retrieve classes"
 
+#, fuzzy
 msgid "retrieve_tag_error"
-msgstr ""
+msgstr "Error retrieving tags"
 
 #, fuzzy
 msgid "role"
@@ -1654,6 +1690,10 @@ msgid "second_teacher"
 msgstr "Second teacher"
 
 #, fuzzy
+msgid "second_teacher_copy_prompt"
+msgstr "Are you sure you want to copy this teacher?"
+
+#, fuzzy
 msgid "second_teacher_prompt"
 msgstr "Enter a teacher username to invite them."
 
@@ -1673,8 +1713,9 @@ msgstr "Select"
 msgid "select_adventures"
 msgstr "Select adventures"
 
+#, fuzzy
 msgid "select_all"
-msgstr ""
+msgstr "Select all"
 
 #, fuzzy
 msgid "select_lang"
@@ -1684,8 +1725,9 @@ msgstr "Select language"
 msgid "select_tag"
 msgstr "Select tag"
 
+#, fuzzy
 msgid "selected"
-msgstr ""
+msgstr "Selected"
 
 #, fuzzy
 msgid "self_removal_prompt"
@@ -1803,15 +1845,17 @@ msgstr "This student is already in your class."
 msgid "student_already_invite"
 msgstr "This student already has a pending invitation."
 
+#, fuzzy
 msgid "student_details"
-msgstr ""
+msgstr "Student details"
 
 #, fuzzy
 msgid "student_list"
 msgstr "Student list"
 
+#, fuzzy
 msgid "student_not_allowed_in_class"
-msgstr ""
+msgstr "Student not allowed in class"
 
 #, fuzzy
 msgid "student_not_existing"
@@ -1862,12 +1906,24 @@ msgid "suggestion_color"
 msgstr "Try using another color"
 
 #, fuzzy
+msgid "suggestion_note"
+msgstr "Use a note between C0 and B9 or a number between 1 and 70"
+
+#, fuzzy
 msgid "suggestion_number"
 msgstr "Try changing the value to a number"
 
 #, fuzzy
 msgid "surname"
 msgstr "First Name"
+
+#, fuzzy
+msgid "survey"
+msgstr "Survey"
+
+#, fuzzy
+msgid "survey_completed"
+msgstr "Survey completed"
 
 #, fuzzy
 msgid "survey_skip"
@@ -1877,8 +1933,9 @@ msgstr "Don't show this again"
 msgid "survey_submit"
 msgstr "Submit"
 
+#, fuzzy
 msgid "tag_in_adventure"
-msgstr ""
+msgstr "Tag in adventure"
 
 #, fuzzy
 msgid "tag_input_placeholder"
@@ -2001,8 +2058,9 @@ msgstr "Hedy - Умови конфіденційності"
 msgid "title_programs"
 msgstr "Hedy - Мої програми"
 
+#, fuzzy
 msgid "title_public-adventures"
-msgstr ""
+msgstr "Hedy - Public adventures"
 
 msgid "title_recover"
 msgstr "Hedy - Відновити акаунт"
@@ -2173,10 +2231,6 @@ msgid "whole_world"
 msgstr "The world"
 
 #, fuzzy
-msgid "write_first_program"
-msgstr "Write your first program!"
-
-#, fuzzy
 msgid "year_invalid"
 msgstr "Please enter a year between 1900 and {current_year}."
 
@@ -2335,6 +2389,8 @@ msgstr "Your program"
 #~ msgid "no_tags"
 #~ msgstr "No tags yet."
 
-#~ msgid "public_adventures"
-#~ msgstr "Public adventures"
+#~ msgid "apply_filters"
+#~ msgstr "Apply filters"
 
+#~ msgid "write_first_program"
+#~ msgstr "Write your first program!"

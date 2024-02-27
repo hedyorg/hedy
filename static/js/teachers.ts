@@ -1,14 +1,16 @@
 import { modal } from './modal';
-import { showAchievements } from "./app";
+import { showAchievements, theKeywordLanguage } from "./app";
 import { markUnsavedChanges, clearUnsavedChanges, hasUnsavedChanges } from './browser-helpers/unsaved-changes';
 import { ClientMessages } from './client-messages';
-
 import DOMPurify from 'dompurify'
 import { startTeacherTutorial } from './tutorials/tutorial';
-import { HedyAceEditorCreator } from './ace-editor';
+import { HedyCodeMirrorEditorCreator } from './cm-editor';
+import { initializeTranslation } from './lezer-parsers/tokens';
+import { CustomWindow } from './custom-window';
 
 declare const htmx: typeof import('./htmx');
-const editorCreator = new HedyAceEditorCreator();
+declare let window: CustomWindow;
+const editorCreator = new HedyCodeMirrorEditorCreator();
 
 export function create_class(class_name_prompt: string) {
   modal.prompt (class_name_prompt, '', function (class_name) {
@@ -215,7 +217,7 @@ function update_db_adventure(adventure_id: string) {
 
    const adventure_name = $('#custom_adventure_name').val();
    const levels = $('#custom_adventure_levels').val();
-   const content = DOMPurify.sanitize(<string>$('#custom_adventure_content').val());
+   const content = DOMPurify.sanitize(window.ckEditor.getData());
    const agree_public = $('#agree_public').prop('checked');
    const language = $('#language').val();
 
@@ -266,9 +268,23 @@ function show_preview(content: string) {
     for (const preview of $('.preview pre').get()) {
         $(preview).addClass('text-lg rounded');
         const dir = $("body").attr("dir");
+        const codeNode = preview.querySelector('code')
+        let code: string;
+        // In case it has a child <code> node
+        if(codeNode) {
+          codeNode.hidden = true
+          code = codeNode.innerText          
+        } else {
+          code = preview.textContent || "";
+          preview.textContent = "";
+        }
         const exampleEditor = editorCreator.initializeReadOnlyEditor(preview, dir);
-        exampleEditor.contents = exampleEditor.contents.replace(/\n+$/, '');
+        exampleEditor.contents = code.trimEnd();        
         for (const level of levels) {
+          initializeTranslation({
+            keywordLanguage: theKeywordLanguage,
+            level: parseInt(level, 10),
+          })
           exampleEditor.setHighlighterForLevel(parseInt(level, 10));                
         }
     }
@@ -276,6 +292,9 @@ function show_preview(content: string) {
 
 export function preview_adventure() {
     let content = DOMPurify.sanitize(<string>$('#custom_adventure_content').val());
+    if (!content) {
+      content = window.ckEditor.getData();
+    }
     // We get the content, send it to the server to parse the keywords and then show dynamically
     $.ajax({
       type: 'POST',
@@ -525,7 +544,11 @@ export function create_accounts(prompt: string) {
                 $(this).find(':input').each(function () {
                     account[$(this).attr("name") as string] = $(this).val() as string;
                 });
-                accounts.push(account);
+
+                // Only push an account to the accounts object if it contains data
+                if (account['password'].length !== 0 || account['username'].length !== 0) {
+                    accounts.push(account);
+                }
             }
         });
         $.ajax({

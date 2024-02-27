@@ -138,7 +138,7 @@ levels:
                 Jij en je vrienden spelen Pokémon Go! Maak een programma dat bepaalt in welke kleur alle teams komen:
                 rood, geel of blauw! Pauzeer na iedere indeling eventjes.
             code: |-
-                teams = rood, blauw, geel
+                teams = rood, geel, blauw
                 {print} 'Rood, geel of blauw?'
                 {repeat} 5 {times}
                     {print} 'Jij komt bij team...'
@@ -168,7 +168,7 @@ levels:
                         {print} 'Nee! Het antwoord is ' correct_antwoord
         2:
             story: |-
-                Deze code vraagt aan klanten in een restaurant of ze een toetje willen bestellen. Als ze dat willen wordt er gevraagd welk toetje. Willen ze tiramisu, dan wordt er gezegd dat dat helaas op is.
+                Deze code vraagt aan klanten in een restaurant of ze een toetje willen bestellen. Als ze dat willen, wordt er gevraagd welk toetje. Willen ze tiramisu bestellen, dan wordt er verteld dat de tiramisu uitverkocht is.
                 Kun jij de volgorde van de regels bepalen?
             code: |-
                 bestelling = {ask} 'Wilt u een toetje?'
@@ -183,8 +183,8 @@ levels:
     10:
         1:
             story: |-
-                Help deze familie een schema te maken voor wie wanneer wat moet koken. Zorg met de {remove} commando's dat er nooit twee dagen hetzelfde wordt gegeten en dat iedereen maar één keer hoeft te koken.
-                **Let op!** De volgorde van de variabelen is eerst dagen, daarna mensen en als laatste diner_opties. Deze volgorde geldt ook bij de {remove} commando's.
+                Help deze familie een schema te maken voor wie er moet koken en wat ze moeten maken. Met de `{remove}`-commando's zorgen er voor dat niemand twee keer moet koken en dat er altijd een ander menu is voor elke dag.
+                **Let op!** De variabele volgorde zou moeten zijn: als eerste de dagen, dan de personen en als laatste de diner_opties. Deze volgorde geldt ook voor de `{remove}`-commando's.
             code: |-
                 dagen = maandag, dinsdag, woensdag, donderdag, vrijdag
                 mensen = mama, papa, Martin, Abby, Jesse
@@ -221,14 +221,14 @@ levels:
         2:
             story: |-
                 Maak een programma dat ons de uitslag van de wetenschapswedstrijd kan vertellen. Definieer eerst de variabele deelnemers en daarna de variabele plek.
-                **Tip** Regel 5 is het {sleep} commando en je eindigt met een felicitatie naar de deelnemers.
+                **Tip** Regel 5 zou het sleep (slaap) commando moeten zijn, en op het laatst geef je de felicitaties.
             code: |-
                 {print} 'En dan nu.. de resultaten van de wetenschapswedstrijd'
                 deelnemers = Vivienne, Paul, Trixy, Bianca, Katya
                 plek = 5
                 {for} deelnemer {in} deelnemers
                     {sleep} 2
-                    {print} 'Op plek ' plek ' is geëindigd... ' deelnemer
+                    {print} 'Op nummer ' plek ' is geëindigd... ' deelnemer
                     plek = plek - 1
                 {print} 'Gefeliciteerd!'
     12:

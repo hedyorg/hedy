@@ -7,15 +7,16 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2023-12-19 19:41+0100\n"
-"PO-Revision-Date: 2023-12-18 20:12+0000\n"
-"Last-Translator: Prefill add-on <noreply-addon-prefill@weblate.org>\n"
-"Language: id\n"
+"POT-Creation-Date: 2024-01-18 10:49+0100\n"
+"PO-Revision-Date: 2024-02-19 01:12+0000\n"
+"Last-Translator: Snoring Parrot <snoring_parrot@users.noreply.hosted.weblate.org>\n"
 "Language-Team: id <LL@li.org>\n"
-"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"Language: id\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 5.4\n"
 "Generated-By: Babel 2.14.0\n"
 
 msgid "Access Before Assign"
@@ -35,6 +36,10 @@ msgstr ""
 
 msgid "Cyclic Var Definition"
 msgstr "Nama {variable} perlu disetel sebelum Anda dapat menggunakannya di sisi kanan perintah {is}."
+
+#, fuzzy
+msgid "Function Undefined"
+msgstr "You tried to use the function {name}, but you didn't define it."
 
 msgid "Has Blanks"
 msgstr "Kode Anda tidak lengkap. Ini berisi bagian kosong yang harus Anda ganti dengan kode."
@@ -72,11 +77,19 @@ msgstr "Anda menggunakan {echo} sebelum {ask}, atau {echo} tanpa {ask}. Tempatka
 msgid "Lonely Text"
 msgstr "Sepertinya Anda lupa menggunakan perintah dengan teks yang Anda gunakan di baris {line_number}"
 
+#, fuzzy
+msgid "Missing Additional Command"
+msgstr "It looks like you forgot to complete writing {command} on line {line_number}."
+
 msgid "Missing Command"
 msgstr "Sepertinya Anda lupa menggunakan perintah pada baris {line_number}."
 
 msgid "Missing Inner Command"
 msgstr "Sepertinya Anda lupa menggunakan perintah dengan pernyataan {command} yang Anda gunakan pada baris {line_number}."
+
+#, fuzzy
+msgid "Missing Variable"
+msgstr "It looks like your {command} is missing a variable at the start of the line."
 
 #, fuzzy
 msgid "Misspelled At Command"
@@ -126,9 +139,14 @@ msgstr "Kamu mencoba untuk menampilkan variabel {name}, tapi kamu belum mengisin
 msgid "Wrong Level"
 msgstr "Itu adalah kode Hedy yang benar, namun tidak pada level yang tepat. Kamu menulis kode {offending_keyword} untuk level {working_level}. Tip: {tip}"
 
+#, fuzzy
+msgid "Wrong Number of Arguments"
+msgstr "Your function used the wrong number of arguments. You provided {used_number} but the function {name} needs {defined_number}"
+
 msgid "account_overview"
 msgstr "Ikhtisar akun"
 
+#, fuzzy
 msgid "accounts_created"
 msgstr "Akun yang berhasil dibuat."
 
@@ -250,10 +268,6 @@ msgstr "program disimpan"
 
 msgid "amount_submitted"
 msgstr "program yang diajukan"
-
-#, fuzzy
-msgid "apply_filters"
-msgstr "Apply filters"
 
 msgid "are_you_sure"
 msgstr "Apakah kamu yakin? Kamu tidak dapat membatalkan aksi ini."
@@ -390,6 +404,10 @@ msgstr "Penyumbang"
 
 msgid "copy_clipboard"
 msgstr "Berhasil disalin ke clipboard"
+
+#, fuzzy
+msgid "copy_code"
+msgstr "Copy code"
 
 msgid "copy_join_link"
 msgstr "Salin tautan bergabung"
@@ -753,6 +771,7 @@ msgstr "Petunjuk?"
 msgid "ill_work_some_more"
 msgstr "Saya akan mengerjakannya sedikit lebih lama"
 
+#, fuzzy
 msgid "image_invalid"
 msgstr "Gambar yang Anda pilih tidak valid."
 
@@ -882,8 +901,9 @@ msgstr "Level ini belum tersedia di kelas Anda"
 msgid "level_title"
 msgstr "Level"
 
+#, fuzzy
 msgid "levels"
-msgstr ""
+msgstr "levels"
 
 msgid "link"
 msgstr "Tautan"
@@ -1070,6 +1090,7 @@ msgstr "Pengguna ini belum mendapatkan Sertifikat Penyelesaian Hedy"
 msgid "no_more_flat_if"
 msgstr "Mulai dari level 8, kode setelah {if} perlu ditempatkan pada baris berikutnya dan dimulai dengan 4 spasi."
 
+#, fuzzy
 msgid "no_programs"
 msgstr "Kamu belum memiliki program."
 
@@ -1163,6 +1184,10 @@ msgstr "Bahasa teks lainnya"
 msgid "overwrite_warning"
 msgstr "Anda sudah mempunyai program dengan nama ini, menyimpan program ini akan menggantikan program lama. Apa kamu yakin?"
 
+#, fuzzy
+msgid "owner"
+msgstr "Owner"
+
 msgid "page"
 msgstr "halaman"
 
@@ -1236,6 +1261,10 @@ msgid "preview"
 msgstr "Pratinjau"
 
 #, fuzzy
+msgid "previewing_adventure"
+msgstr "Previewing adventure"
+
+#, fuzzy
 msgid "previewing_class"
 msgstr "You are previewing class <em>{class_name}</em> as a teacher."
 
@@ -1295,6 +1324,9 @@ msgstr "Apakah kamu ingin bergabung dengan kelas ini?"
 
 msgid "public"
 msgstr "Publik"
+
+msgid "public_adventures"
+msgstr "Browse public adventures"
 
 msgid "public_invalid"
 msgstr "Pilihan perjanjian ini tidak valid"
@@ -1356,6 +1388,10 @@ msgstr "Konfirmasikan penghapusan pengguna ini dari kelas."
 msgid "repair_program_logo_alt"
 msgstr "Ikon program perbaikan"
 
+#, fuzzy
+msgid "repeat_dep"
+msgstr "Starting in level 8, {repeat} needs to be used with indentation. You can see examples on the {repeat} tab in level 8."
+
 msgid "repeat_match_password"
 msgstr "Password yang dimasukkan ulang tidak sesuai."
 
@@ -1401,8 +1437,9 @@ msgstr "Anda tidak diperbolehkan melihat petualangan ini!"
 msgid "retrieve_class_error"
 msgstr "Hanya guru yang dapat mengambil kelas"
 
+#, fuzzy
 msgid "retrieve_tag_error"
-msgstr ""
+msgstr "Error retrieving tags"
 
 msgid "role"
 msgstr "Peran"
@@ -1437,6 +1474,10 @@ msgstr "Mencari"
 msgid "second_teacher"
 msgstr "Guru kedua"
 
+#, fuzzy
+msgid "second_teacher_copy_prompt"
+msgstr "Are you sure you want to copy this teacher?"
+
 msgid "second_teacher_prompt"
 msgstr "Masukkan nama pengguna guru untuk mengundang mereka."
 
@@ -1452,8 +1493,9 @@ msgstr "Pilih"
 msgid "select_adventures"
 msgstr "Pilih dan pesan petualangan"
 
+#, fuzzy
 msgid "select_all"
-msgstr ""
+msgstr "Select all"
 
 #, fuzzy
 msgid "select_lang"
@@ -1463,8 +1505,9 @@ msgstr "Select language"
 msgid "select_tag"
 msgstr "Select tag"
 
+#, fuzzy
 msgid "selected"
-msgstr ""
+msgstr "Selected"
 
 msgid "self_removal_prompt"
 msgstr "Apakah Anda yakin ingin keluar dari kelas ini?"
@@ -1558,14 +1601,16 @@ msgstr "Siswa ini sudah ada di kelas Anda."
 msgid "student_already_invite"
 msgstr "Siswa ini sudah memiliki undangan yang menunggu keputusan."
 
+#, fuzzy
 msgid "student_details"
-msgstr ""
+msgstr "Student details"
 
 msgid "student_list"
 msgstr "Daftar siswa"
 
+#, fuzzy
 msgid "student_not_allowed_in_class"
-msgstr ""
+msgstr "Student not allowed in class"
 
 msgid "student_not_existing"
 msgstr "Nama pengguna ini tidak ada."
@@ -1605,11 +1650,23 @@ msgid "suggestion_color"
 msgstr "Try using another color"
 
 #, fuzzy
+msgid "suggestion_note"
+msgstr "Use a note between C0 and B9 or a number between 1 and 70"
+
+#, fuzzy
 msgid "suggestion_number"
 msgstr "Try changing the value to a number"
 
 msgid "surname"
 msgstr "Nama Depan"
+
+#, fuzzy
+msgid "survey"
+msgstr "Survey"
+
+#, fuzzy
+msgid "survey_completed"
+msgstr "Survey completed"
 
 #, fuzzy
 msgid "survey_skip"
@@ -1619,8 +1676,9 @@ msgstr "Don't show this again"
 msgid "survey_submit"
 msgstr "Submit"
 
+#, fuzzy
 msgid "tag_in_adventure"
-msgstr ""
+msgstr "Tag in adventure"
 
 msgid "tag_input_placeholder"
 msgstr "Masukkan tag baru"
@@ -1724,8 +1782,9 @@ msgstr "Hedy - Persyaratan privasi"
 msgid "title_programs"
 msgstr "Hedy - Program saya"
 
+#, fuzzy
 msgid "title_public-adventures"
-msgstr ""
+msgstr "Hedy - Public adventures"
 
 msgid "title_recover"
 msgstr "Hedy - Pulihkan akun"
@@ -1864,9 +1923,6 @@ msgstr "Apa yang seharusnya dilakukan oleh kode saya?"
 
 msgid "whole_world"
 msgstr "Dunia"
-
-msgid "write_first_program"
-msgstr "Tulis program pertamamu!"
 
 msgid "year_invalid"
 msgstr "Silakan masukkan tahun antara 1900 dan {current_year}."
@@ -2024,6 +2080,8 @@ msgstr "Program Anda"
 #~ msgid "no_tags"
 #~ msgstr "Belum ada tag."
 
-#~ msgid "public_adventures"
-#~ msgstr "Public adventures"
+#~ msgid "apply_filters"
+#~ msgstr "Apply filters"
 
+#~ msgid "write_first_program"
+#~ msgstr "Tulis program pertamamu!"

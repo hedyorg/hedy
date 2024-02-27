@@ -5,7 +5,7 @@ module.exports = defineConfig({
   watchForFileChanges: false,
   video: false,
   redirectionLimit: 100,
-  numTestsKeptInMemory: 0,
+  // numTestsKeptInMemory: 0,
   experimentalMemoryManagement: true,
   e2e: {
     baseUrl: 'http://localhost:8080',
@@ -45,5 +45,6 @@ module.exports = defineConfig({
     admin_classes_page: '/admin/classes',
     programs_page: '/programs',
     explore_programs_page: '/explore',
+    public_adventures: '/public-adventures',
   }
 });
