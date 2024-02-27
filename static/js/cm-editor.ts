@@ -243,7 +243,6 @@ export class HedyCodeMirrorEditor implements HedyEditor {
         const effect = StateEffect.appendConfig.of(hedy());
 
         this.view.dispatch({ effects: effect });
-
     }
     /**
     * @returns the string of the current program in the editor
