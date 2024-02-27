@@ -71,12 +71,12 @@ adventures:
                     {print} fue un animales {at} {random}
                     ```
                 story_text_3: |
-                    Este es un ejemplo del comando `{remove}` en tu historia
+                    Este es un ejemplo del comando `{remove}` en su historia
 
-                    ### Desafío
+                    ### Ejercicio
                     Copia tu historia de los niveles anteriores en este nivel.
-                    En este nivel aprendiste tres nuevos comandos `{at} {random}` , `{add} {to}` y `{remove} {from}`.
-                    Añade nuevas líneas de código a tu historia para que todos los nuevos comandos estén por lo menos una vez en tu código.
+                    En este nivel has aprendido 3 nuevos comandos `{at} {random}`, `{add} {to_list}` y `{remove} {from}`.
+                    Añade nuevas líneas de código a tu historia, de forma que todos los nuevos comandos aparezcan al menos una vez en tu historia.
                 example_code_3: |
                     ```
                     {print} Su mochila se hizo muy pesada.
@@ -272,9 +272,9 @@ adventures:
                     {print}('Bienvenido a esta historia!')
                     ```
     add_remove_command:
-        name: '{add} {to} & {remove} {from}'
+        name: '{add} {to_list} y {remove} {from}'
         default_save_name: comando_añadir_borrar
-        description: introducción a añadir a y borrar de
+        description: introduciendo {add} {to_list} y {remove} {from}
         levels:
             3:
                 story_text: |
@@ -313,7 +313,7 @@ adventures:
     and_or_command:
         name: '{and} & {or}'
         default_save_name: y o
-        description: introducción a y o
+        description: introduciendo {and} y {or}
         levels:
             13:
                 story_text: |-
@@ -330,7 +330,7 @@ adventures:
     ask_command:
         name: '{ask}'
         default_save_name: comando_preguntar
-        description: Introducción al comando preguntar
+        description: Introducción al comando {ask}
         levels:
             1:
                 story_text: |
@@ -691,7 +691,7 @@ adventures:
     clear_command:
         name: '{clear}'
         default_save_name: comando_limpiar
-        description: comando limpiar
+        description: Comando {clear}
         levels:
             4:
                 story_text: |
@@ -760,16 +760,16 @@ adventures:
                     ### Ejercicio
                     Depura este código. ¡Buena suerte!
                 example_code: |
-                    **¡Atención! ¡Este código necesita ser depurado!**
+                    **¡Atención! Este código necesita ser depurado.
                     ```
-                    opciones_peliculas {is} Dracula, Fast and furious, Solo en casa, Barbie
-                    pelicula_escogida {is} opciones_peliculas {at} {random}
-                    {print} Esta noche veremos pelicula _escogida
-                    gustar {ask} ¿Te gusta esa película?
+                    movie_choices {is} dracula, fast and furious, home alone, barbie
+                    pelicula_escogida {is} peliculas {at} {random}
+                    {print} Esta noche veremos _películas_elegidas
+                    like {ask} ¿Te gusta esa película?
                     {print} Mañana veremos otra.
-                    {add} pelicula_escogida {to} opciones_peliculas
-                    {print} Mañana veremos pelicula_mañana
-                    pelicula_mañana {is} opciones_peliculas {at} {random}
+                    {add} película_escogida {to_list} películas_escogidas
+                    {print} Mañana veremos la película de mañana
+                    película_mañana {is} película_elegida {at} {random}
                     ¡Voy a por las palomitas! {print}
                     ```
             4:
@@ -922,41 +922,42 @@ adventures:
             11:
                 story_text: |-
                     ### Ejercicio
-                    Depura este programa de calendario. Se supone que el resultado de este programa parezca una lista de fechas.
+                    Depura este programa de calendario. Se supone que la salida de este programa debe parecerse a una lista de fechas.
                     Por ejemplo:
 
                     ```
                     Calendario Hedy
-                    Aqué están todos los dias de noviembre
-                    1 de noviembre
+                    Aquí están todos los días de noviembre
+                    1 de Noviembre
                     2 de noviembre
                     3 de noviembre
                     ```
                     Y así sucesivamente.
 
-                    Ten en cuenta que tienes que probar tu código con mucho cuidado para el mes de febrero, porque la cantidad de días en este mes cambia en los años bisiestos.
+                    Ten en cuenta que tienes que probar tu código con mucho cuidado para el mes de febrero, porque la cantidad de días de este mes cambia en los años bisiestos.
                 example_code: |
-                    **¡Atención! ¡Este código necesita ser depurado!**
+                    **¡Atención! Este código necesita ser depurado.
                     ```
-                    imprimir 'Calendario Hedy'
-                    meses_con_31 dias = enero, marzo, mayo, julio, septiembre, octubre, diciembre
-                    meses_con_30_dias = abril, junio, agosto, noviembre
-                    mes = preguntar '¿Qué mes quieres ver?'
-                    si mes en meses_con_31_dias
-                        dias = 31
-                        si mes en meses_con30_dias
-                            dias = 30
-                    si mes = febrero
-                        años_bisiestos = 2020, 2024, 2028, 2036, 2040, 2044, 2028
-                        año = preguntar '¿Qué año es?'
-                    si año en años_bisiestos
-                        dias = 29
-                    sino
-                        dias = 28
+                    {print} 'Calendario Hedy'
+                    meses_con_31_dias = Enero, Marzo, Mayo, Julio, Septiembre, Octubre, Diciembre
+                    months_with_30_days = Abril, Junio, Agosto, Noviembre
+                    mes = {ask} ¿Qué mes le gustaría ver?
+                    {if} mes {in} meses_con_31_días
+                        días = 31
+                        {if} mes {in} meses_con_30_días
+                            días = 30
+                    {if} mes = febrero
+                        años bisiestos = 2020, 2024, 2028, 2036, 2040, 2044, 2028
+                        año = {ask} ¿Qué año es?
+                    {if} año {in} bisiestos
+                        días = 29
+                    {else}
+                        días = 28
 
-                    imprimir 'Aquí tienes los días de ' me
-                    para i en rango 1 a dias
-                        imprimir mes i
+                    {print} 'Aquí están todos los días de '
+                    mes
+                    {for} i {in} {range} 1 {to} días
+                        {print} mes i
                     ```
             12:
                 story_text: |-
@@ -1195,6 +1196,10 @@ adventures:
                     Prueba el código por ti mismo con el botón verde 'Ejecutar código' bajo el bloque de programación.
 
                     ¿Preparado? ¡Entonces ve a la siguiente pestaña para aprender tu primer comando!
+                example_code: |
+                    ```
+                    {print} Hola Mundo!
+                    ```
             2:
                 story_text: |
                     ¡Enhorabuena! Has alcanzado el nivel 2. ¡Espero que ya hayas hecho algunos códigos increíbles!
@@ -1418,7 +1423,7 @@ adventures:
                 story_text: |
                     Ahora vamos a cambiar un poco la indentación. Cada vez que necesitemos una sangría, necesitaremos `:` en la línea anterior a la sangría.
 
-                    En este nivel también se puede utilizar un nuevo comando: `{elif}`. `{elif}` es la abreviatura de {else} {if} y lo necesitas cuando quieres hacer 3 (¡o más!) opciones.
+                    En este nivel también se puede utilizar un nuevo comando: `{elif}`. `{elif}` es la abreviatura de `{else} {if}` y lo necesitas cuando quieres hacer 3 (¡o más!) opciones.
                     ¡Compruébalo!
             18:
                 story_text: |
@@ -2504,7 +2509,7 @@ adventures:
                     C1 is the lowest note you can play, C10 is the highest.
 
                     ### Exercise
-                    Try out the example code and thenplay around with it! Can you create your own melody?
+                    Try out the example code and then play around with it! Can you create your own melody?
                     In the next level you'll learn how to play some existing songs.
                 example_code: |-
                     ```
@@ -2547,11 +2552,11 @@ adventures:
                     ```
             3:
                 story_text: |
-                    Create a random melody!
+                    Crea una melodía al azar!
 
-                    ### Exercise
-                    The example code creates a random melody, but it's very short and not many notes are used.
-                    Add more notes to the list and create a longer melody by copying the last line a couple more times.
+                    ### Ejercicio
+                    El codigo de ejemplo crea una melodía al azar, pero es bastante corta y no usa muchas notas.
+                    Agrega más notas a la lista y crea una melodía más larga copiando la última linea un par de veces más.
                 example_code: |
                     ```
                     notas {is} A4, B4, C4
@@ -2823,7 +2828,7 @@ adventures:
                 story_text: |
                     Enseña a tu loro una nueva palabra con `{add}`.
                     ### Ejercicio
-                    ¿Puedes añadir el comando`{add} {to}` para hacer que el código funcione?
+                    ¿Puedes añadir el comando`{add} {to_list}` para hacer que el código funcione?
                 example_code: |
                     ```
                     palabras {is} graznido, Hedy

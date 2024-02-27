@@ -66,7 +66,7 @@ adventures:
 
                     ### Exercise
                     Copy your story from the previous levels into this level.
-                    In this level you've learned 3 new commands `{at} {random}` , `{add} {to}` and `{remove} {from}`.
+                    In this level you've learned 3 new commands `{at} {random}` , `{add} {to_list}` and `{remove} {from}`.
                     Add new lines of code to your story, so that all of the new commands are featured at least once in your story.
                 example_code_3: |
                     ```
@@ -278,7 +278,7 @@ adventures:
             3:
                 story_text: |
                     ## Add to
-                    You can add items to the list with the `{add} {to}` command. To add an item to a list you can simply type: `{add} penguin {to} animals` or you can use the `{ask}` command like in the example code.
+                    You can add items to the list with the `{add} {to_list}` command. To add an item to a list you can simply type: `{add} penguin {to} animals` or you can use the `{ask}` command like in the example code.
                 example_code: |
                     ```
                     animals {is} dog, cat, kangaroo
@@ -1195,6 +1195,10 @@ adventures:
                     Încearcă singur codul cu butonul verde 'Rulează codul' sub câmpul de programare.
 
                     Poți afișa text pe ecran folosind comanda `{print}`.
+                example_code: |
+                    ```
+                    {print} Hello world!
+                    ```
             2:
                 story_text: |
                     În nivelul 2 învățăm două comenzi noi: `{is}` și `{sleep}`.
@@ -2421,14 +2425,13 @@ adventures:
         description: Introducing maths
         levels:
             6:
-                story_text: |4
+                story_text: |
+                    In this level you learn something new: you can now also calculate.
 
-                      In this level you learn something new: you can now also calculate.
+                    The plus is easy, you write it like with math: `5 + 5` for example. The minus also works fine, it is `5 - 5`.
 
-                      The plus is easy, you write it like with math: `5 + 5` for example. The minus also works fine, it is `5 - 5`.
-
-                      The times is a bit different, because there is no times symbol on your keyboard. Just search, there really isn't!
-                      That is why we multiply with the asterisk above 8: `5 * 5`. Read that as "5 times 5" that helps you remember it best.
+                    The times is a bit different, because there is no times symbol on your keyboard. Just search, there really isn't!
+                    That is why we multiply with the asterisk above 8: `5 * 5`. Read that as "5 times 5" that helps you remember it best.
                 example_code: |
                     ```
                     {print} '5 plus 5 is ' 5 + 5
@@ -2470,7 +2473,7 @@ adventures:
                     C1 is the lowest note you can play, C10 is the highest.
 
                     ### Exercise
-                    Try out the example code and thenplay around with it! Can you create your own melody?
+                    Try out the example code and then play around with it! Can you create your own melody?
                     In the next level you'll learn how to play some existing songs.
                 example_code: |-
                     ```
@@ -3996,7 +3999,7 @@ adventures:
                     ```
             14:
                 story_text: |
-                    In the previous levels you've made a tic tac toe game. Now you've learned how to use the = sign, the == sign and the != sign.
+                    In the previous levels you've made a tic tac toe game. Now you've learned how to use the `=` sign, the `==` sign and the `!=` sign.
                     You can use this knowledge in your new Tic Tac Toe game, like this:
                 example_code: |
                     ```

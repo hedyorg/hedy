@@ -45,7 +45,7 @@ adventures:
                     في المستوى الثالث يمكنك جعل القصة أكثر متعة. يمكنك إستخدام الإختيار بطريقة عشوائية لأي وحش أو حيوان أو حتى عائق، مثل:
                 example_code: |
                     ```
-                    الحيوانات هي 🦔, 🐿, 🦉, 🦇
+                    الحيوانات {is} 🦔، 🐿، 🦉، 🦇
                     {print} إنه يسمع الآن صوت ... الحيوانات {at} {random}
                     ```
                 story_text_2: |
@@ -61,7 +61,7 @@ adventures:
                 story_text_3: |
                     هذا مثال لإستخدام الأمر `{remove}` في قصتك
 
-                    هل يمكنك إستخدام الأوامر الثلاثة الجُدد `{at} {random}` ، `{add} {to}` ، `{remove} {from}` في قصتك؟
+                    هل يمكنك إستخدام الأوامر الثلاثة الجُدد `{at} {random}` ، `{add} {to_list}` ، `{remove} {from}` في قصتك؟
                 example_code_3: |
                     ```
                     {print} حقيبة الظهر خاصته أصبحت ثقيلة للغاية.
@@ -245,7 +245,7 @@ adventures:
             3:
                 story_text: |
                     ## Add to
-                    You can add items to the list with the `{add} {to}` command. To add an item to a list you can simply type: `{add} penguin {to} animals` or you can use the `{ask}` command like in the example code.
+                    You can add items to the list with the `{add} {to_list}` command. To add an item to a list you can simply type: `{add} penguin {to} animals` or you can use the `{ask}` command like in the example code.
                 example_code: |
                     ```
                     animals {is} dog, cat, kangaroo
@@ -1158,6 +1158,10 @@ adventures:
                     جرب الكود بنفسك من خلال الضغط على الزر الأخضر "تنفيذ البرنامج" الموجود تحت المساحة البرمجية.
 
                     بامكانك اظهار/طباعة الكلام على الشاشة من خلال استعمال الأمر `{print}` .
+                example_code: |
+                    ```
+                    {print} Hello world!
+                    ```
             2:
                 story_text: "في المستوى 2 نتعلم الأوامر الجديدة `{is}` و `{sleep}`.\nيمكنك أن تعطي اسما لشيء ما باستخدام `{is}`. هذا ما يسمى ب \"متغير\". في المثال الموجود قمنا بانشاء متغير يسمى الاسم ومتغير آخر يسمى العمر. يمكنك أن تستخدم كلمة الاسم في أي مكان في البرنامج الخاص بك وسيتم استبدالها ب هيدي،\
                     \ كما في المثال التوضيحي: \n\nبهذا الشكل لم تعد الان بحاجة للأمر `{echo}`.\n"
@@ -2288,14 +2292,13 @@ adventures:
         description: Introducing maths
         levels:
             6:
-                story_text: |4
+                story_text: |
+                    In this level you learn something new: you can now also calculate.
 
-                      In this level you learn something new: you can now also calculate.
+                    The plus is easy, you write it like with math: `5 + 5` for example. The minus also works fine, it is `5 - 5`.
 
-                      The plus is easy, you write it like with math: `5 + 5` for example. The minus also works fine, it is `5 - 5`.
-
-                      The times is a bit different, because there is no times symbol on your keyboard. Just search, there really isn't!
-                      That is why we multiply with the asterisk above 8: `5 * 5`. Read that as "5 times 5" that helps you remember it best.
+                    The times is a bit different, because there is no times symbol on your keyboard. Just search, there really isn't!
+                    That is why we multiply with the asterisk above 8: `5 * 5`. Read that as "5 times 5" that helps you remember it best.
                 example_code: |
                     ```
                     {print} '5 plus 5 is ' 5 + 5
@@ -2337,7 +2340,7 @@ adventures:
                     C1 is the lowest note you can play, C10 is the highest.
 
                     ### Exercise
-                    Try out the example code and thenplay around with it! Can you create your own melody?
+                    Try out the example code and then play around with it! Can you create your own melody?
                     In the next level you'll learn how to play some existing songs.
                 example_code: |-
                     ```
@@ -3871,7 +3874,7 @@ adventures:
                     ```
             14:
                 story_text: |
-                    In the previous levels you've made a tic tac toe game. Now you've learned how to use the = sign, the == sign and the != sign.
+                    In the previous levels you've made a tic tac toe game. Now you've learned how to use the `=` sign, the `==` sign and the `!=` sign.
                     You can use this knowledge in your new Taic Tac Toe game, like this:
                 example_code: |
                     ```

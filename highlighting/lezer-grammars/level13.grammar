@@ -25,31 +25,31 @@ Command {
 String { doubleQuotedString | singleQuotedString }
 
 
-Print { print+ ( ListAccess | Expression | Call )+ }
+Print { print+ ( ListAccess | Expression )+ }
 Ask { Text (is+ | Op<"=">) ask+ ( ListAccess | Expression )+ }
 
 AssignList { Text (is+ | Op<"=">) (Text+ | Number ) ~ambig  (Comma (Text+ | Number ))+ }
 Assign { (Text | ListAccess) (is+ | Op<"=">) (Expression ~ambig  | ListAccess)+ }
-Sleep { sleep+ (Expression | ListAccess | Call)? }
+Sleep { sleep+ (Expression | ListAccess )? }
 ListAccess { Text at+ (random+ | Text | Number) }
-Add { add+ (Expression | Call ) toList+ Text }
-Remove { remove+ (Expression | Call) from+ Text }
+Add { add+ (Expression ) toList+ Text }
+Remove { remove+ (Expression ) from+ Text }
 Clear { clear+ }
 Play { play+ Text+ }
 
 Turtle[@isGroup=turtle] {
-    Forward { forward+ (Expression | ListAccess | Call) } |
-    Turn { turn+ (Expression | ListAccess | Call) } |
-    Color { color+ (Expression | ListAccess | Call)  }
+    Forward { forward+ (Expression | ListAccess ) } |
+    Turn { turn+ (Expression | ListAccess ) } |
+    Color { color+ (Expression | ListAccess )  }
 }
 
 If { ifs+ Condition ((and+ | or+) Condition)* }
 Else { elses+ } 
 
 Condition { 
-    EqualityCheck { Text (is+ | Op<"=">) (Expression | pressed+) } |
-    InListCheck { Text ins+  Text } |
-    NotInListCheck { Text not_in+  Text }
+    EqualityCheck { (String | Text | Number) (is+ | Op<"=">) (Expression | pressed+) } |
+    InListCheck { (String | Text | Number) ins+ Text } |
+    NotInListCheck { (String | Text | Number) not_in+ Text }
 }
 
 Repeat { repeat+ (Number | Text) times+ }
@@ -58,9 +58,9 @@ For { fors+ Text ins+ (Text | range+ (Text | Number) to+ (Text | Number)) }
 
 Define { define+ Text (with+  Arguments)? }
 Call { call+ Text (with+ Arguments)? }
-Return { returns+ ( ListAccess | Expression | Call)+ }
+Return { returns+ ( ListAccess | Expression )+ }
 
-Arguments { argument (Comma argument)* }
+Arguments { argument !comma (Comma argument)* }
 argument { Expression | ListAccess }
 
 ErrorInvalid[@dynamicPrecedence=-10] { Text+ }
@@ -72,17 +72,18 @@ binaryExpression {
     Expression !plus Op<"+" | "-"> Expression
 }
 
-// I should add Call here, but it works for now
 Expression {
     Number |
     Text |
     String |
+    Call |
     binaryExpression
 }
 
 @precedence {
     times @left,
-    plus @right
+    plus @right,
+    comma @left
 }
 
 @external specialize { Text } specializeKeyword from "./tokens" {
@@ -93,7 +94,9 @@ Expression {
     pressed[@name="pressed"],
     elses[@name="else"],
     and[@name="and"],
-    or[@name="or"]
+    or[@name="or"],
+    call[@name="call"],
+    with[@name="with"]
 }
 
 @external extend { Text } extendKeyword from "./tokens" {
@@ -116,10 +119,8 @@ Expression {
     fors[@name="for"],
     to[@name="to"],
     range[@name="range"],
-    call[@name="call"],
     define[@name="define"],
-    returns[@name="return"],
-    with[@name="with"]
+    returns[@name="return"]
 }
 @tokens {
     @precedence {

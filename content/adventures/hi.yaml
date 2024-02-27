@@ -71,7 +71,7 @@ adventures:
 
                     ### व्यायाम
                     अपनी कहानी को पिछले स्तरों से इस स्तर पर कॉपी करें।
-                    इस स्तर पर आपने 3 नए कमांड `{at} {random}` , `{add} {to}` और `{remove} {from}` सीखे हैं।
+                    इस स्तर पर आपने 3 नए कमांड `{at} {random}` , `{add} {to_list}` और `{remove} {from}` सीखे हैं।
                     अपनी कहानी में कोड की नई पंक्तियाँ जोड़ें, ताकि सभी नए कमांड आपकी कहानी में कम से कम एक बार प्रदर्शित हों।
                 example_code_3: |
                     ```
@@ -274,7 +274,7 @@ adventures:
             3:
                 story_text: |
                     ## Add to
-                    You can add items to the list with the `{add} {to}` command. To add an item to a list you can simply type: `{add} penguin {to} animals` or you can use the `{ask}` command like in the example code.
+                    You can add items to the list with the `{add} {to_list}` command. To add an item to a list you can simply type: `{add} penguin {to} animals` or you can use the `{ask}` command like in the example code.
                 example_code: |
                     ```
                     animals {is} dog, cat, kangaroo
@@ -1192,6 +1192,10 @@ adventures:
 
                     कोड ब्लॉक में हरा बटन दबाएं, और कोड आपके लिए टाइप हो जाएगा!
                     प्रोग्रामिंग फील्ड के नीचे हरे 'रन कोड' बटन के साथ कोड को स्वयं आज़माएं।
+                example_code: |
+                    ```
+                    {print} Hello world!
+                    ```
             2:
                 story_text: |-
                     स्तर २ में हम कुछ नया सीखते हैं। आप `{is}` वाले शब्द को नाम दे सकते हैं। आप अपने कोड में कहीं भी नाम का उपयोग कर सकते हैं और इसे हेडी से बदल दिया जाएगा, जैसे:
@@ -1387,7 +1391,7 @@ adventures:
                 story_text: |-
                     अब हम इंडेंटेशन के साथ थोड़ा बदलने जा रहे हैं। हर बार जब हमें इंडेंटेशन की आवश्यकता होती है, तो हमें इंडेंटेशन से पहले लाइन पर `:` की आवश्यकता होती है।
 
-                    इस स्तर में आप एक नई कमांड का भी उपयोग कर सकते हैं: `{elif}`। {elif}` {else} {if} के लिए आशुलिपि है और जब आप 3 (या अधिक!) विकल्प बनाना चाहते हैं तो आपको इसकी आवश्यकता होती है।
+                    इस स्तर में आप एक नई कमांड का भी उपयोग कर सकते हैं: `{elif}`। {elif}` `{else} {if}` के लिए आशुलिपि है और जब आप 3 (या अधिक!) विकल्प बनाना चाहते हैं तो आपको इसकी आवश्यकता होती है।
                     इसकी जांच - पड़ताल करें!
             18:
                 story_text: |-
@@ -2432,14 +2436,13 @@ adventures:
         description: Introducing maths
         levels:
             6:
-                story_text: |4
+                story_text: |
+                    In this level you learn something new: you can now also calculate.
 
-                        In this level you learn something new: you can now also calculate.
+                    The plus is easy, you write it like with math: `5 + 5` for example. The minus also works fine, it is `5 - 5`.
 
-                        The plus is easy, you write it like with math: `5 + 5` for example. The minus also works fine, it is `5 - 5`.
-
-                        The times is a bit different, because there is no times symbol on your keyboard. Just search, there really isn't!
-                        That is why we multiply with the asterisk above 8: `5 * 5`. Read that as "5 times 5" that helps you remember it best.
+                    The times is a bit different, because there is no times symbol on your keyboard. Just search, there really isn't!
+                    That is why we multiply with the asterisk above 8: `5 * 5`. Read that as "5 times 5" that helps you remember it best.
                 example_code: |
                     ```
                     {print} '5 plus 5 is ' 5 + 5
@@ -2481,7 +2484,7 @@ adventures:
                     C1 is the lowest note you can play, C10 is the highest.
 
                     ### Exercise
-                    Try out the example code and thenplay around with it! Can you create your own melody?
+                    Try out the example code and then play around with it! Can you create your own melody?
                     In the next level you'll learn how to play some existing songs।
                 example_code: |-
                     ```
@@ -3993,7 +3996,7 @@ adventures:
                     ```
             14:
                 story_text: |
-                    In the previous levels you've made a tic tac toe game. Now you've learned how to use the = sign, the == sign and the != sign.
+                    In the previous levels you've made a tic tac toe game. Now you've learned how to use the `=` sign, the `==` sign and the `!=` sign.
                     You can use this knowledge in your new Taic Tac Toe game, like this:
                 example_code: |
                     ```

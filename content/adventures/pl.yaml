@@ -68,7 +68,7 @@ adventures:
 
                     ### Ćwiczenie
                     Skopiuj swoją opowieść z poprzednich poziomów na ten poziom.
-                    Na tym poziomie nauczyłeś się 3 nowych komend `{at} {random}`, `{add} {to}` i `{remove} {from}`.
+                    Na tym poziomie nauczyłeś się 3 nowych komend `{at} {random}`, `{add} {to_list}` i `{remove} {from}`.
                     Dodaj nowe wiersze kodu do swojej historii, aby wszystkie nowe polecenia znalazły się w niej przynajmniej raz.
                 example_code_3: |
                     ```
@@ -1140,6 +1140,10 @@ adventures:
                     Witaj w Hedy! Na Poziomie 1 nauczysz się pisać historię.
                     Wypróbuj kod, naciskając zielony przycisk pod polem programowania.
                     Gotowe? Świetnie, możesz udać się do następnej zakładki i nauczyć pierwszej komendy!
+                example_code: |
+                    ```
+                    {print} Hello world!
+                    ```
             2:
                 story_text: |
                     Gratulację! Witamy na poziomie 2. Już stworzyliśmy trochę kodu za ciebie ;).
@@ -2352,14 +2356,13 @@ adventures:
         description: Introducing maths
         levels:
             6:
-                story_text: |4
+                story_text: |
+                    In this level you learn something new: you can now also calculate.
 
-                            In this level you learn something new: you can now also calculate.
+                    The plus is easy, you write it like with math: `5 + 5` for example. The minus also works fine, it is `5 - 5`.
 
-                            The plus is easy, you write it like with math: `5 + 5` for example. The minus also works fine, it is `5 - 5`.
-
-                            The times is a bit different, because there is no times symbol on your keyboard. Just search, there really isn't!
-                            That is why we multiply with the asterisk above 8: `5 * 5`. Read that as "5 times 5" that helps you remember it best.
+                    The times is a bit different, because there is no times symbol on your keyboard. Just search, there really isn't!
+                    That is why we multiply with the asterisk above 8: `5 * 5`. Read that as "5 times 5" that helps you remember it best.
                 example_code: |
                     ```
                     {print} '5 plus 5 is ' 5 + 5
@@ -2401,7 +2404,7 @@ adventures:
                     C1 is the lowest note you can play, C10 is the highest.
 
                     ### Exercise
-                    Try out the example code and thenplay around with it! Can you create your own melody?
+                    Try out the example code and then play around with it! Can you create your own melody?
                     In the next level you'll learn how to play some existing songs.
                 example_code: |-
                     ```
