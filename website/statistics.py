@@ -1,6 +1,7 @@
 from collections import namedtuple
 from enum import Enum
 from difflib import SequenceMatcher
+import re
 from flask import g, jsonify, request
 from flask_babel import gettext
 import utils
@@ -267,9 +268,13 @@ class StatisticsModule(WebsiteModule):
         can_save = True
         for snippet in adventure_snippets:
             seq_match = SequenceMatcher(None, snippet, student_code)
-            if seq_match.ratio() > 0.95:
+            # Allowing a difference of more than 10% or the student filled the placeholders
+            if seq_match.ratio() > 0.95 or (not self.has_placeholder(student_code) and self.has_placeholder(snippet)):
                 can_save = False
         return can_save
+
+    def has_placeholder(code):
+        return re.search(r'(?<![^ \n])(_)(?= |$)', code, re.M) is not None
 
 
 class LiveStatisticsModule(WebsiteModule):
