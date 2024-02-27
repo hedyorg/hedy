@@ -1392,9 +1392,20 @@ def index(level, program_id):
     # - The level is allowed and available
     # - But, if there is a quiz threshold we have to check again if the user has reached it
 
+    parsons_in_level = True
+    quiz_in_level = True
+    if customizations.get("sorted_adventures") and len(customizations["sorted_adventures"]) > 2:
+        parsons_in_level = [adv for adv in customizations["sorted_adventures"][str(level)][-2:]
+                            if adv.get("name") == "parsons"]
+        quiz_in_level = [adv for adv in customizations["sorted_adventures"][str(level)][-2:]
+                         if adv.get("name") == "quiz"]
+
     if 'level_thresholds' in customizations:
-        show_quiz = 'other_settings' in customizations and 'hide_quiz' not in customizations['other_settings']
-        if show_quiz and 'quiz' in customizations.get('level_thresholds'):
+        # If quiz in level and in some of the previous levels, then we check the threshold level.
+        check_threshold = 'other_settings' in customizations and 'hide_quiz' not in customizations['other_settings']
+
+        if check_threshold and 'quiz' in customizations.get('level_thresholds'):
+
             # Temporary store the threshold
             threshold = customizations.get('level_thresholds').get('quiz')
             level_quiz_data = QUIZZES[g.lang].get_quiz_data_for_level(level)
@@ -1402,29 +1413,53 @@ def index(level, program_id):
             # A bit out-of-scope, but we want to enable the next level button directly after finishing the quiz
             # Todo: How can we fix this without a re-load?
             quiz_stats = DATABASE.get_quiz_stats([current_user()['username']])
+
+            previous_quiz_level = level
+            for _prev_level in range(level - 1, 0, -1):
+                if _prev_level in available_levels and \
+                        customizations["sorted_adventures"][str(_prev_level)][-1].get("name") == "quiz" and \
+                        not any(x.get("scores") for x in quiz_stats if x.get("level") == _prev_level):
+                    previous_quiz_level = _prev_level
+                    break
+
             # Not current leve-quiz's data because some levels may have no data for quizes,
             # but we still need to check for the threshold.
             if level - 1 in available_levels and level > 1 and \
                     (not level_quiz_data or QUIZZES[g.lang].get_quiz_data_for_level(level - 1)):
-                scores = [x.get('scores', []) for x in quiz_stats if x.get('level') == level - 1]
-                scores = [score for week_scores in scores for score in week_scores]
-                max_score = 0 if len(scores) < 1 else max(scores)
-                if max_score < threshold:
-                    return utils.error_page(
-                        error=403, ui_message=gettext('quiz_threshold_not_reached'))
+
+                # Only if we have found a quiz in previous levels with quiz data, we check the threshold.
+                if previous_quiz_level < level:
+                    # Instead of sending this level isn't available, we could send them to the right level?!
+                    # return redirect(f"/hedy/{previous_quiz_level}")
+                    scores = [x.get('scores', []) for x in quiz_stats if x.get('level') == level - 1]
+                    scores = [score for week_scores in scores for score in week_scores]
+                    max_score = 0 if len(scores) < 1 else max(scores)
+                    if max_score < threshold:
+                        return utils.error_page(
+                            error=403, ui_message=gettext('quiz_threshold_not_reached'))
 
             # We also have to check if the next level should be removed from the available_levels
             # Only check the quiz threshold if there is a quiz to obtain a score on the current level
             if level <= hedy.HEDY_MAX_LEVEL and level_quiz_data:
-                scores = [x.get('scores', []) for x in quiz_stats if x.get('level') == level]
+                next_level_with_quiz = level
+
+                for _next_level in range(level, hedy.HEDY_MAX_LEVEL):
+                    # find the next level whose quiz isn't answered.
+                    if _next_level in available_levels and \
+                            customizations["sorted_adventures"][str(_next_level)][-1].get("name") == "quiz" and \
+                            not any(x.get("scores") for x in quiz_stats if x.get("level") == _next_level):
+                        next_level_with_quiz = _next_level
+                        break
+
+                scores = [x.get('scores', []) for x in quiz_stats if x.get('level') == next_level_with_quiz]
                 scores = [score for week_scores in scores for score in week_scores]
                 max_score = 0 if len(scores) < 1 else max(scores)
                 # We don't have the score yet for the next level -> remove all upcoming
                 # levels from 'available_levels'
                 if max_score < threshold:
                     # if this level is currently available, but score is below max score
-                    customizations["below_threshold"] = (level + 1 in available_levels)
-                    available_levels = available_levels[:available_levels.index(level) + 1]
+                    customizations["below_threshold"] = (next_level_with_quiz + 1 in available_levels)
+                    available_levels = available_levels[:available_levels.index(next_level_with_quiz) + 1]
 
     # Add the available levels to the customizations dict -> simplify
     # implementation on the front-end
@@ -1473,21 +1508,12 @@ def index(level, program_id):
     if parsons:
         parson_exercises = len(PARSONS[g.lang].get_parsons_data_for_level(level))
 
-    if 'other_settings' in customizations and 'hide_parsons' in customizations['other_settings']:
+    if not parsons_in_level or 'other_settings' in customizations and \
+            'hide_parsons' in customizations['other_settings']:
         parsons = False
-    if 'other_settings' in customizations and 'hide_quiz' in customizations['other_settings']:
+    if not quiz_in_level or 'other_settings' in customizations and \
+            'hide_quiz' in customizations['other_settings']:
         quiz = False
-
-    if customizations.get("sorted_adventures") and len(customizations["sorted_adventures"]) > 2:
-        parsons_in_level = [adv for adv in customizations["sorted_adventures"][str(level)][-2:]
-                            if adv.get("name") == "parsons"]
-        quiz_in_level = [adv for adv in customizations["sorted_adventures"][str(level)][-2:]
-                         if adv.get("name") == "quiz"]
-
-        if not parsons_in_level:
-            parsons = False
-        if not quiz_in_level:
-            quiz = False
 
     max_level = hedy.HEDY_MAX_LEVEL
     level_number = int(level)
