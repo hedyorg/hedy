@@ -330,6 +330,18 @@ class TestsLevel4(HedyTester):
             exception=hedy.exceptions.CodePlaceholdersPresentException
         )
 
+    def test_underscore_var(self):
+    # same as print for level 4
+        code = textwrap.dedent("""\
+            var_ is Hedy
+            _var is Hedy""")
+
+        expected = textwrap.dedent("""\
+            var_ = 'Hedy'
+            _var = 'Hedy'""")
+
+        self.multi_level_tester(code=code, expected=expected, max_level=11, unused_allowed=True)
+
     def test_ask_without_quotes_gives_error_from_transpiler(self):
         # same as print
         code = "antwoord is ask hallo wereld"

@@ -3254,8 +3254,9 @@ def preprocess_blocks(code, level, lang):
     indent_size_adapted = False  # FH We can remove this now since we changed in indenter a bit in Nov 2022
     line_number = 0
     next_line_needs_indentation = False
+    underscore_regex = re.compile(r'(?<![^ ])(_)(?= |$)')
     for line in lines:
-        if ' _ ' in line or line == '_':
+        if underscore_regex.search(line):
             raise hedy.exceptions.CodePlaceholdersPresentException(line_number=line_number+1)
 
         leading_spaces = find_indent_length(line)
@@ -3441,11 +3442,10 @@ def location_of_first_blank(code_snippet):
     # returns 0 if the code does not contain _
     # otherwise returns the first location (line) of the blank
     lines = code_snippet.split('\n')
-    for i in range(len(lines)):
-        code = lines[i]
-        if len(code) > 0:
-            if (" _" in code) or ("_ " in code) or (code[-1] == "_"):
-                return i+1
+    underscore_regex = re.compile(r'(?<![^ ])(_)(?= |$)')
+    for i, line in enumerate(lines):        
+        if underscore_regex.search(line):
+            return i+1
     return 0
 
 
