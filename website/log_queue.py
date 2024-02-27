@@ -134,9 +134,6 @@ class LogQueue:
     def _save_records(self, timestamp, records):
         if self.transmitter:
             return self.transmitter(timestamp, records)
-        else:
-            count = len(records)
-            logger.warning(f"No querylog transmitter configured, {count} records dropped")
 
     def _write_thread(self):
         """Background thread which will wake up every batch_window_s seconds

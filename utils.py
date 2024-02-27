@@ -6,11 +6,13 @@ import datetime
 import time
 import functools
 import os
+from os import path
 import re
 import string
 import random
 import uuid
 import unicodedata
+import sys
 import traceback
 
 from email_validator import EmailNotValidError, validate_email
@@ -23,21 +25,23 @@ commonmark_renderer = commonmark.HtmlRenderer()
 
 IS_WINDOWS = os.name == 'nt'
 
+prefixes_dir = path.join(path.dirname(__file__), 'prefixes')
+
 # Define code that will be used if some turtle command is present
-with open('prefixes/turtle.py', encoding='utf-8') as f:
+with open(f'{prefixes_dir}/turtle.py', encoding='utf-8') as f:
     TURTLE_PREFIX_CODE = f.read()
 
 # Preamble that will be used for non-Turtle programs
 # numerals list generated from: https://replit.com/@mevrHermans/multilangnumerals
-with open('prefixes/normal.py', encoding='utf-8') as f:
+with open(f'{prefixes_dir}/normal.py', encoding='utf-8') as f:
     NORMAL_PREFIX_CODE = f.read()
 
 # Define code that will be used if a pressed command is used
-with open('prefixes/pygame.py', encoding='utf-8') as f:
+with open(f'{prefixes_dir}/pygame.py', encoding='utf-8') as f:
     PYGAME_PREFIX_CODE = f.read()
 
 # Define code that will be used if music code is used
-with open('prefixes/music.py', encoding='utf-8') as f:
+with open(f'{prefixes_dir}/music.py', encoding='utf-8') as f:
     MUSIC_PREFIX_CODE = f.read()
 
 
@@ -91,6 +95,20 @@ def is_debug_mode():
     We do more expensive things that are better for development in debug mode.
     """
     return DEBUG_MODE
+
+
+def is_offline_mode():
+    """Return whether or not we're in offline mode.
+
+    Offline mode is a special build of Hedy that teachers can download and run
+    on their own computers.
+    """
+    return getattr(sys, 'frozen', False) and offline_data_dir() is not None
+
+
+def offline_data_dir():
+    """Return the data directory in offline mode."""
+    return getattr(sys, '_MEIPASS')
 
 
 def set_debug_mode(debug_mode):
@@ -393,3 +411,60 @@ def find_prev_next_levels(level_list, target_level):
     next_level = sorted_levels[index + 1] if index < len(sorted_levels) - 1 else None
 
     return prev_level, next_level
+
+
+def preserve_html_tags(content):
+    """
+    Transforms HTML tags in the content.
+    """
+    # Define patterns to match target tags
+    tag_pattern = r"&lt;(?P<tag_name>[^>]+)(?P<attributes>.*?)&gt;(?P<inner_content>.*?)&lt;/(?P=tag_name)&gt;"
+
+    def replace(match):
+        tag_name = match.group("tag_name")
+        attributes = match.group("attributes")
+        inner_content = match.group("inner_content")
+        return f"<{tag_name}{attributes}>{inner_content}</{tag_name}>"
+
+    return re.sub(tag_pattern, replace, content, flags=re.DOTALL)
+
+
+def transform_encoded_tags_secure(content):
+    """
+    Transforms encoded HTML tags in adventure content, removing any script tags.
+    This is an extra step on top of the DOMPurify when saving an adventure.
+    """
+
+    def pre_process(content):
+        # Remove script tags and their content using regular expression
+        script_pattern = r"<script(?:\s[^>]*?)?>(?P<content>.*?)</script>"
+        return re.sub(script_pattern, "", content, flags=re.DOTALL)
+
+    # Pre-process the input to remove scripts
+    processed_content = pre_process(content)
+
+    transformed_content = preserve_html_tags(processed_content)
+
+    return transformed_content
+
+
+def prepare_content_for_ckeditor(content):
+    """
+    Adds code tags to pre blocks that don't have them, reserving existing attributes as well.
+    """
+    pattern = r"<pre(?P<attributes>.*?)>(?P<inner_content>.*?)</pre>"
+
+    def replace(match):
+        attributes = match.group("attributes")
+        inner_content = match.group("inner_content").strip()  # Strip leading/trailing whitespaces
+        if not inner_content.startswith("<code>"):
+            inner_content = f"<code>{inner_content}</code>"
+        return f"<pre{attributes}>{inner_content}</pre>"
+
+    content = transform_encoded_tags_secure(content)
+    content = re.sub(pattern, replace, content, flags=re.DOTALL)
+    # Add "<p>&nbsp;</p>" (an extra line) if not exists
+    if len(content) and not content.endswith("<p>&nbsp;</p>"):
+        content += "<p>&nbsp;</p>"
+
+    return content

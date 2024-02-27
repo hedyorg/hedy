@@ -153,7 +153,7 @@ levels:
                 {repeat} 5 {times}
                   {print} “你被选入了团队...'
                   {print} 团队 {at} {random}
-                  睡眠 2
+                  {sleep} 2
         2:
             story: Print the countdown for a  game of hide and seek.
             code: |-
@@ -221,7 +221,7 @@ levels:
                         {print} 'Lets try again... Then 'person ' will get ' hairstyles {at} {random}
     11:
         1:
-            story: 为除夕夜创建倒计时时钟！该程序应该显示从 10 到 1 的数字一秒钟，然后祝您新年快乐。
+            story: 创建除夕倒计时！程序应该在一秒钟内显示从10到1的数字，然后祝你新年快乐。
             code: |-
                 {for} 数字 {in} {range} 10 {to} 1
                     {print} 数字
@@ -230,8 +230,8 @@ levels:
                 {print}“新年快乐！”
         2:
             story: |-
-                创建一个程序，告诉我们科学博览会的最终结果。首先定义可变参赛者，然后定义可变位置。
-                **提示** 第 5 行应该是睡眠命令，您应该以表示祝贺结束。
+                创建一个程序，告诉我们科学集市的最终结果。首先定义变量参赛者，然后定义变量位置。
+                **提示** 第 5 行应该是睡眠命令，而且你应该以表示祝贺结束。
             code: |-
                 {print} 'And now we will reveal the results of the science fair'
                 contestants = Vivienne, Paul, Trixy, Bianca, Katya
