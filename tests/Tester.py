@@ -283,8 +283,7 @@ class HedyTester(unittest.TestCase):
                     skipped_commands = ['ask', 'input', 'clear', 'play']
                     if not any(x for x in skipped_commands if x in all_commands):
                         if microbit:
-                            with open('transpiled.txt', 'w') as file:
-                                file.write(result.code)
+                            return
                         else:
                             self.assertTrue(self.validate_Python_code(result))
 
