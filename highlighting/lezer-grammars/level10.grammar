@@ -45,7 +45,7 @@ If { ifs+ Condition }
 Else { elses+ }
 
 Condition { 
-    EqualityCheck { (Text | Int) is+ (String | Expression | pressed+) } |
+    EqualityCheck { (Text | Int) (is+ | Op<"=">) (String | Expression | pressed+) } |
     InListCheck { (Text | Int) ins+ Text } |
     NotInListCheck { (Text | Int) not_in+ Text }
 }

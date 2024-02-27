@@ -96,5 +96,19 @@ describe('Tests level 12', () => {
 
             multiLevelTester('Test if quoted text not in list print', code, expectedTree, 12, 13);
         })
+
+        describe('Test equality check equal sign', () => {
+            const code = 
+                `if order = burger
+                    price is 5`
+            const expectedTree = 
+                `Program(
+                    Command(If(if,Condition(EqualityCheck(Text,Op,Expression(Text))))),
+                    Command(Assign(Text,is,Expression(Number)))
+                )
+                `
+            
+            multiLevelTester('Test equality check equal sign', code, expectedTree, 12, 13);
+        })
     })
 })

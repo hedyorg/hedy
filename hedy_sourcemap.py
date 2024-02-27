@@ -88,6 +88,12 @@ class SourceCode:
         return self.__str__()
 
 
+def strip_priority_suffix(rule):
+    if re.match(r"\w+\.\d+", rule):
+        return rule.split('.')[0]
+    return rule
+
+
 class SourceMap:
     """
     A class used to represent the Hedy - Python source map.
@@ -189,9 +195,10 @@ class SourceMap:
             with open(path.join(script_dir, "grammars", f'level{i}-Additions.lark'), "r", encoding="utf-8") as file:
                 grammar_text += '\n' + file.read()
 
-        self.grammar_rules = re.findall(r"(\w+):", grammar_text)
+        self.grammar_rules = re.findall(r"([\w.]+):", grammar_text)
         self.grammar_rules = [rule for rule in self.grammar_rules if 'text' not in rule]  # exclude text from mapping
         self.grammar_rules = list(set(self.grammar_rules))  # remove duplicates
+        self.grammar_rules = [strip_priority_suffix(r) for r in self.grammar_rules]
 
     def add_source(self, hedy_code: SourceCode, python_code: SourceCode):
         self.map[hedy_code] = python_code

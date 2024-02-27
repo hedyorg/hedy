@@ -49,7 +49,7 @@ If { ifs+ Condition eol* IfLessCommand Else? }
 Else { !else elses+ eol* IfLessCommand }
 
 Condition { 
-    EqualityCheck { (Text | Int) is+ (String | Expression | pressed+) } |
+    EqualityCheck { (Text | Int) (is+ | Op<"=">) (String | Expression | pressed+) } |
     InListCheck { (Text | Int) ins+ Text } |
     NotInListCheck { (Text | Int) not_in+ Text }
 }
