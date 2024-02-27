@@ -331,7 +331,7 @@ class TestsLevel4(HedyTester):
         )
 
     def test_underscore_var(self):
-    # same as print for level 4
+        # same as print for level 4
         code = textwrap.dedent("""\
             var_ is Hedy
             _var is Hedy""")

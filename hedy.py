@@ -3443,7 +3443,7 @@ def location_of_first_blank(code_snippet):
     # otherwise returns the first location (line) of the blank
     lines = code_snippet.split('\n')
     underscore_regex = re.compile(r'(?<![^ ])(_)(?= |$)')
-    for i, line in enumerate(lines):        
+    for i, line in enumerate(lines):
         if underscore_regex.search(line):
             return i+1
     return 0
