@@ -723,8 +723,12 @@ export function tryPaletteCode(exampleCode: string) {
   if (theGlobalEditor?.isReadOnly) {
     return;
   }
-
-  theGlobalEditor.contents += '\n' + exampleCode;
+  const lines = theGlobalEditor.contents.split('\n')
+  if (lines[lines.length-1] !== '') {
+    theGlobalEditor.contents += '\n' + exampleCode;
+  } else {
+    theGlobalEditor.contents += exampleCode;
+  }
   //As the commands try-it buttons only contain english code -> make sure the selected language is english
   if (!($('#editor').attr('lang') == 'en')) {
       $('#editor').attr('lang', 'en');
