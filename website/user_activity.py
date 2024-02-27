@@ -1,4 +1,5 @@
 
+import os
 from flask import request, session
 
 # import utils
@@ -14,8 +15,10 @@ cookie_name = config["session"]["cookie_name"]
 invite_length = config["session"]["invite_length"] * 60
 
 
-HEADER = ["class_id", "username", "is_teacher", "gender", "time", "id", "page", "extra"]
-logger = s3_logger.S3Logger(name="activity", header=HEADER, tracking=True)
+# Add LOG_USER_ACTIVITY=True to your env. to log the data for testing
+write_to_file = os.getenv("LOG_USER_ACTIVITY")
+logger = s3_logger.S3Logger(name="activity", config_key="s3-activity-logs",
+                            write_to_file=write_to_file,)
 
 
 class UserActivityModule(WebsiteModule):

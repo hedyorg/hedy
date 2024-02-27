@@ -376,7 +376,7 @@ Commonmark(app)
 if utils.is_offline_mode():
     parse_logger = s3_logger.NullLogger()
 else:
-    parse_logger = s3_logger.S3Logger(name="parse")
+    parse_logger = s3_logger.S3Logger(name="parse", config_key="s3-parse-logs")
     querylog.LOG_QUEUE.set_transmitter(
         aws_helpers.s3_querylog_transmitter_from_env())
 
