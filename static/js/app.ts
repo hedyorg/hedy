@@ -1,4 +1,3 @@
-import { initializeSyntaxHighlighter } from './syntaxModesRules';
 import { ClientMessages } from './client-messages';
 import { modal, error, success, tryCatchPopup } from './modal';
 import JSZip from "jszip";
@@ -137,9 +136,6 @@ export function initializeApp(options: InitializeAppOptions) {
   theStaticRoot = options.staticRoot ?? '';
   // When we are in Alpha or in dev the static root already points to an internal directory
   theStaticRoot = theStaticRoot === '/' ? '' : theStaticRoot;
-  initializeSyntaxHighlighter({
-    keywordLanguage: options.keywordLanguage,
-  });
   initializeCopyToClipboard();
 
   // Close the dropdown menu if the user clicks outside of it
@@ -727,8 +723,12 @@ export function tryPaletteCode(exampleCode: string) {
   if (theGlobalEditor?.isReadOnly) {
     return;
   }
-
-  theGlobalEditor.contents = exampleCode + '\n';
+  const lines = theGlobalEditor.contents.split('\n')
+  if (lines[lines.length-1] !== '') {
+    theGlobalEditor.contents += '\n' + exampleCode;
+  } else {
+    theGlobalEditor.contents += exampleCode;
+  }
   //As the commands try-it buttons only contain english code -> make sure the selected language is english
   if (!($('#editor').attr('lang') == 'en')) {
       $('#editor').attr('lang', 'en');

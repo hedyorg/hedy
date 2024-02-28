@@ -71,12 +71,12 @@ adventures:
                     {print} 它 是 动物们 {at} {random}
                     ```
                 story_text_3: |
-                    这是一个在故事里使用`{remove}`命令的例子
+                    这是您的故事中`{remove}`命令的一个示例
 
                     ### 练习
-                    将你在前几级的故事复制到这一级。
-                    在此级中，你已经学会了3个新命令`{at} {random}` , `{add} {to}` 和 `{remove} {from}`.
-                    在你的故事中添加新的代码行，让所有的新命令在你的故事中至少出现一次。
+                    将您的故事从以前的关卡复制到此关卡。
+                    在这个级别中，您学习了3个新命令`{at} {random}`、`{add} {to_list}`和`{remove} {from}`。
+                    将新的代码行添加到您的故事中，以便所有新命令在故事中至少出现一次。
                 example_code_3: |
                     ```
                     {print} 他的背包太重了。
@@ -191,7 +191,7 @@ adventures:
                 example_code: |
                     ```
                     名字 = '英国女王'
-                    {print} 名字'正在吃一块蛋糕，突然......'
+                    {print} 名字'正在吃一块蛋糕，突然...'
                     ```
             13:
                 story_text: |
@@ -254,9 +254,9 @@ adventures:
                     {print}('欢迎来到这个故事！')
                     ```
     add_remove_command:
-        name: '{add} {to} & {remove} {from}'
+        name: '{add} {to_list} & {remove} {from}'
         default_save_name: 添加_删除_命令
-        description: 简介 添加和删除
+        description: 简介 {add}{to_list}和{remove}{from}
         levels:
             3:
                 story_text: |
@@ -295,7 +295,7 @@ adventures:
     and_or_command:
         name: '{and} & {or}'
         default_save_name: 与和或
-        description: 介绍与和或
+        description: 介绍{and}和{or}
         levels:
             13:
                 story_text: |-
@@ -312,7 +312,7 @@ adventures:
     ask_command:
         name: '{ask}'
         default_save_name: 提问命令
-        description: 提问命令介绍
+        description: '{ask}命令介绍'
         levels:
             1:
                 story_text: |
@@ -686,7 +686,7 @@ adventures:
     clear_command:
         name: '{clear}'
         default_save_name: 清屏命令
-        description: 清屏命令
+        description: '{clear}命令'
         levels:
             4:
                 story_text: |
@@ -762,7 +762,7 @@ adventures:
                     {print} 今晚我们将观看 选定中电影
                     喜欢的电影 {ask}你喜欢那部电影吗？
                     {print} 明天我们会看别的东西。
-                    {add} 选中的电影 {to} 可选的电影
+                    {add} 选中的电影{to_list}可选的电影
                     {print} 明天我们看 明天的电影
                     明天的电影 {is} 可选的电影 {at} {random}
                     我去买爆米花！ {print}
@@ -1061,6 +1061,7 @@ adventures:
                         {else}
                             {print}'错误，'capitals[i] '是首都' countries[i]
                         {print} '你得分 ' score' 满分 10 分'
+
                     ```
             17:
                 story_text: |-
@@ -1110,11 +1111,12 @@ adventures:
         levels:
             1:
                 story_text: |
-                    欢迎来到海蒂！在第1关你将从打印一个故事开始。
+                    欢迎来到海蒂!在第一级，你可以从打印文本开始。
 
-                    试着自己编写代码，使用绿色的“运行代码”按钮运行代码。
+                    自己试试代码吧!黄色按钮将示例代码复制到编程字段中。
+                    然后按下编程字段下的绿色“运行代码”按钮来运行代码。
 
-                    准备好了吗？试着在下一个标签页开始你的第一行命令！
+                    准备好了吗?然后转到下一个选项卡学习如何制作自己的代码!
                 example_code: |
                     ```
                     {print} Hello world!
@@ -1342,7 +1344,7 @@ adventures:
                 story_text: |
                     现在我们要稍微改变一下缩进。 每次我们需要缩进时，我们都需要在缩进之前的行添加`:`。
 
-                    在此级别中，您还可以使用新命令：`{elif}`。 `{elif}` 是 {else} {if} 的缩写，当您想要创建 3 个（或更多！）选项时需要它。
+                    在此级别中，您还可以使用新命令：`{elif}`。 `{elif}` 是 `{else} {if}` 的缩写，当您想要创建 3 个（或更多！）选项时需要它。
                     一探究竟！
             18:
                 story_text: |
@@ -1569,7 +1571,7 @@ adventures:
     elif_command:
         name: '{elif}'
         default_save_name: elif
-        description: elif
+        description: '{elif}'
         levels:
             17:
                 story_text: |
@@ -1577,12 +1579,12 @@ adventures:
                     试试看！
                 example_code: |
                     ```
-                    prices = ['一百万美元', '一个苹果派', '什么都没有']
-                    your_price = prices[{random}]
-                    {print} '你赢得' your_price
-                    {if} your_price == '一百万美元' :
+                    奖品 = ['一百万美元', '一个苹果派', '什么都没有']
+                    你的_奖品 = 奖品[{random}]
+                    {print} '你赢得' 你的_奖品
+                    {if} 你的_奖品 == '一百万美元' :
                         {print} '太棒了!你是个富翁!'
-                    {elif} your_price == '一个苹果派' :
+                    {elif} 你的_奖品 == '一个苹果派' :
                         {print} '不错呦，一个苹果派!'
                     {else}:
                         {print} '祝你下次好运..'
@@ -1590,7 +1592,7 @@ adventures:
     for_command:
         name: '{for}'
         default_save_name: for
-        description: for 指令
+        description: '{for}指令'
         levels:
             10:
                 story_text: |-
@@ -2203,7 +2205,7 @@ adventures:
     if_command:
         name: '{if} & {else}'
         default_save_name: if_命令
-        description: 介绍if命令
+        description: 介绍{if}命令
         levels:
             5:
                 story_text: |
@@ -2267,7 +2269,7 @@ adventures:
     in_command:
         name: '{in}'
         default_save_name: in_命令
-        description: 介绍 in 命令
+        description: 介绍{in}命令
         levels:
             5:
                 story_text: |
@@ -2295,7 +2297,7 @@ adventures:
     is_command:
         name: '{is}'
         default_save_name: is_命令
-        description: 介绍 is 命令
+        description: 介绍 {is}命令
         levels:
             2:
                 story_text: |
@@ -2440,8 +2442,6 @@ adventures:
                     b = 'world!'
                     {print} a + b
                     ```
-
-                    {print} 2.5 + 2.5
     music:
         name: 音乐
         default_save_name: 音乐
@@ -2461,14 +2461,14 @@ adventures:
                     在下一关，你将学习如何播放一些现有的歌曲。
                 example_code: |-
                     ```
-                    play C4
-                    play D4
-                    play E4
-                    play F4
-                    play G4
-                    play A4
-                    play B4
-                    play C5
+                    {play} C4
+                    {play} D4
+                    {play} E4
+                    {play} F4
+                    {play} G4
+                    {play} A4
+                    {play} B4
+                    {play} C5
                     ```
             2:
                 story_text: 把歌唱完!我们已经开始为一些旋律编码。
@@ -2780,7 +2780,7 @@ adventures:
                 story_text: |
                     用`{add}`教你的鹦鹉一个新单词。
                     ### 练习
-                    您可以添加`{add} {to}`命令来让代码工作吗?
+                    您可以添加`{add} {to_list}`命令来让代码工作吗?
                 example_code: |
                     ```
                     词汇表 {is} 叽叽喳喳, 海蒂
@@ -3109,7 +3109,7 @@ adventures:
     repeat_command:
         name: '{repeat}'
         default_save_name: repeat_命令
-        description: repeat 命令
+        description: '{repeat}命令'
         levels:
             7:
                 story_text: |
@@ -3152,7 +3152,7 @@ adventures:
     repeat_command_2:
         name: '{repeat} 2'
         default_save_name: repeat_命令_2
-        description: repeat 命令 2
+        description: '{repeat} 命令 2'
         levels:
             7:
                 story_text: |
@@ -3693,7 +3693,7 @@ adventures:
     sleep_command:
         name: '{sleep}'
         default_save_name: sleep_命令
-        description: 介绍 sleep 命令
+        description: 介绍 {sleep} 命令
         levels:
             2:
                 story_text: |
@@ -4680,7 +4680,7 @@ adventures:
     while_command:
         name: '{while}'
         default_save_name: while_命令
-        description: while
+        description: '{while}'
         levels:
             15:
                 story_text: |-
@@ -4711,5 +4711,6 @@ adventures:
                     ```
                     {for} 数字{in} {range} _{to} _
                         {print} 数字
+                        {sleep}
                     {print} '新年快乐！'
                     ```

@@ -6,8 +6,10 @@ import DOMPurify from 'dompurify'
 import { startTeacherTutorial } from './tutorials/tutorial';
 import { HedyCodeMirrorEditorCreator } from './cm-editor';
 import { initializeTranslation } from './lezer-parsers/tokens';
+import { CustomWindow } from './custom-window';
 
 declare const htmx: typeof import('./htmx');
+declare let window: CustomWindow;
 const editorCreator = new HedyCodeMirrorEditorCreator();
 
 export function create_class(class_name_prompt: string) {
@@ -215,7 +217,7 @@ function update_db_adventure(adventure_id: string) {
 
    const adventure_name = $('#custom_adventure_name').val();
    const levels = $('#custom_adventure_levels').val();
-   const content = DOMPurify.sanitize(<string>$('#custom_adventure_content').val());
+   const content = DOMPurify.sanitize(window.ckEditor.getData());
    const agree_public = $('#agree_public').prop('checked');
    const language = $('#language').val();
 
@@ -290,6 +292,9 @@ function show_preview(content: string) {
 
 export function preview_adventure() {
     let content = DOMPurify.sanitize(<string>$('#custom_adventure_content').val());
+    if (!content) {
+      content = window.ckEditor.getData();
+    }
     // We get the content, send it to the server to parse the keywords and then show dynamically
     $.ajax({
       type: 'POST',

@@ -239,5 +239,43 @@ describe('Lezer parser tets for level 6', () => {
 
             multiLevelTester('Test if number not in list print', code, expectedTree, 6, 7);
         })
+
+        describe('Test equality check equal sign', () => {
+            const code = 'if order = burger price is 5'
+            const expectedTree =
+                `Program(
+                    Command(
+                        If(if,
+                           Condition(EqualityCheck(Text,Op,Expression(Text))),
+                           IfLessCommand(Assign(Text,is,Expression(Int)))
+                        )
+                    )
+                )`
+
+            multiLevelTester('Test equality check equal sign', code, expectedTree, 6, 7);
+        })
+
+        describe('Play tests', () => {
+            describe('Play note', () => {
+                const code = 'play G4'
+                const expectedTree = 'Program(Command(Play(play,Expression(Text))))'
+
+                multiLevelTester('Play note', code, expectedTree, 6, 18)
+            });
+
+            describe('Play int', () => {
+                const code = 'play 34'
+                const expectedTree = 'Program(Command(Play(play,Expression(Int))))'
+
+                multiLevelTester('Play note', code, expectedTree, 6, 11)
+            });
+
+            describe('Play list access index', () => {
+                const code = 'play list at 1'
+                const expectedTree = 'Program(Command(Play(play,ListAccess(Text,at,Int))))'
+
+                multiLevelTester('Play note', code, expectedTree, 6, 11)
+            })
+        })
     })
 });
