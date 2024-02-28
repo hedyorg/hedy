@@ -23,7 +23,7 @@ def s3_querylog_transmitter_from_env():
     return make_s3_transmitter(config.config["s3-query-logs"])
 
 
-def s3_parselog_transmitter_from_env():
+def s3_parselog_transmitter_from_env(config_key="s3-parse-logs"):
     """Return an S3 transmitter, or return None."""
     have_aws_creds = os.getenv("AWS_ACCESS_KEY_ID") and os.getenv("AWS_SECRET_ACCESS_KEY")
 
@@ -31,7 +31,7 @@ def s3_parselog_transmitter_from_env():
         logger.warning("Unable to initialize S3 parse logger (missing AWS_ACCESS_KEY_ID or AWS_SECRET_ACCESS_KEY)")
         return None
 
-    return make_s3_transmitter(config.config["s3-parse-logs"])
+    return make_s3_transmitter(config.config[config_key])
 
 
 # The 'boto3.client' method is not thread safe: https://github.com/boto/boto3/issues/1592

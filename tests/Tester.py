@@ -431,6 +431,14 @@ class HedyTester(unittest.TestCase):
         except IndexError:
           raise Exception('catch_index_exception')""")
 
+    @staticmethod
+    def variable_type_check_transpiled(variable, type_,):
+        return textwrap.dedent(f"""\
+        try:
+          {type_}({variable})
+        except ValueError:
+          raise Exception(f'catch_value_exception')""")
+
     # Used to overcome indentation issues when the above code is inserted
     # in test cases which use different indentation style (e.g. 2 or 4 spaces)
     @staticmethod

@@ -21,6 +21,9 @@ describe('Duplicate class tests', () => {
 
     cy.get(".view_class").contains(duplicate_class).click();
     cy.get("#customize-class-button").click();
+    cy.get("#opening_date_container").should("not.be.visible")
+    cy.get("#opening_date_label").click();
+    cy.get("#opening_date_container").should("be.visible")
     cy.get("#enable_level_7").should('be.enabled');
     logout();
   })
@@ -48,6 +51,9 @@ describe('Duplicate class tests', () => {
     cy.get(".view_class").contains(duplicate_class).click();
     cy.get("#invites-block").should('be.visible');
     cy.get("#customize-class-button").click();
+    cy.get("#opening_date_container").should("not.be.visible")
+    cy.get("#opening_date_label").click();
+    cy.get("#opening_date_container").should("be.visible")
     cy.get("#enable_level_7").should('be.enabled');
   })
 })

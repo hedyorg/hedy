@@ -9,9 +9,9 @@ Assign { Text is+ (Text+ | ListAccess) }
 Ask { Text is+ ask+ (Text)+ }
 Sleep { sleep+ (Text | ListAccess)? }
 ListAccess { Text at+ (random+ | Text) }
-Add { add+ Text toList+ Text }
-Remove { remove+ Text from+ Text }
-Play { play+ Text+ }
+Add { add+ Text+ toList+ Text }
+Remove { remove+ Text+ from+ Text }
+Play { play+ (ListAccess | Text+) }
 
 Turtle[@isGroup=turtle] {
     Forward { forward+ (Text | ListAccess ) } |
