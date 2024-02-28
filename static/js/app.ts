@@ -1955,7 +1955,7 @@ function initializeShareProgramButtons() {
           throw new Error('This program does not have an id');
         }
 
-        const response = await postJsonWithAchievements(`/programs/share/${saveInfo.id}/{}`)
+        const response = await postJsonWithAchievements(`/programs/share/${saveInfo.id}/0`)
 
         modal.notifySuccess(response.message);
         if (response.save_info) {
