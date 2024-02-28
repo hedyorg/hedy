@@ -1,3 +1,4 @@
+import hedy
 import textwrap
 
 from tests.Tester import HedyTester
@@ -210,6 +211,30 @@ class TestsLevel9(HedyTester):
           time.sleep(0.1)""")
 
         self.multi_level_tester(code=code, expected=expected, max_level=11)
+
+    def test_repeat_without_body_nested_in_if_gives_error(self):
+        code = textwrap.dedent("""\
+        if 1 is 1
+          repeat 5 times""")
+
+        self.multi_level_tester(
+            code=code,
+            exception=hedy.exceptions.MissingInnerCommandException,
+            max_level=16,
+            skip_faulty=False)
+
+    def test_repeat_without_body_nested_in_else_gives_error(self):
+        code = textwrap.dedent("""\
+        if 1 is 1
+          print 'test'
+        else
+          repeat 5 times""")
+
+        self.multi_level_tester(
+            code=code,
+            exception=hedy.exceptions.MissingInnerCommandException,
+            max_level=16,
+            skip_faulty=False)
 
     #
     # if pressed repeat tests

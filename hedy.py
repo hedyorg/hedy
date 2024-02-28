@@ -1279,6 +1279,9 @@ class IsValid(Filter):
     def error_for_missing_command(self, meta, args):
         raise exceptions.IncompleteCommandException(incomplete_command='for', level=self.level, line_number=meta.line)
 
+    def error_assign_list_missing_brackets(self, meta, args):
+        raise exceptions.MissingBracketsException(level=self.level, line_number=meta.line)
+
     def error_nested_define(self, meta, args):
         raise exceptions.NestedFunctionException()
 
@@ -1654,9 +1657,10 @@ class ConvertToPython_1(ConvertToPython):
     def make_play_var(self, note, meta):
         exception_text = translate_value_error('play', note, 'note')
         self.check_var_usage([note], meta.line)
+        chosen_note = note.children[0] if isinstance(note, Tree) else note
 
         return textwrap.dedent(f"""\
-                chosen_note = str({note}).upper()
+                chosen_note = str({chosen_note}).upper()
                 if chosen_note not in notes_mapping.keys() and chosen_note not in notes_mapping.values():
                     raise Exception({exception_text})
                 play(notes_mapping.get(chosen_note, chosen_note))
@@ -1820,9 +1824,10 @@ class ConvertToPython_2(ConvertToPython_1):
         # if not an int, then it is a variable
 
         note = args[0]
-        uppercase_note = note.upper()
-        if uppercase_note in list(notes_mapping.values()) + list(notes_mapping.keys()):  # this is a supported note
-            return self.make_play(uppercase_note, meta)
+        if isinstance(note, str):
+            uppercase_note = note.upper()
+            if uppercase_note in list(notes_mapping.values()) + list(notes_mapping.keys()):  # this is a supported note
+                return self.make_play(uppercase_note, meta)
 
         # no note? it must be a variable!
         self.add_variable_access_location(note, meta.line)

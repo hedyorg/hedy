@@ -821,7 +821,8 @@ def translate_error(code, arguments, keyword_lang):
         'echo',
         'is',
         'if',
-        'repeat']
+        'repeat',
+        '[]']
 
     # Todo TB -> We have to find a more delicate way to fix this: returns some gettext() errors
     error_template = gettext('' + str(code))
