@@ -1343,6 +1343,7 @@ def hour_of_code(level, program_id=None):
 @app.route('/ontrack', methods=['GET'], defaults={'level': '1', 'program_id': None})
 @app.route('/onlinemasters', methods=['GET'], defaults={'level': '1', 'program_id': None})
 @app.route('/onlinemasters/<int:level>', methods=['GET'], defaults={'program_id': None})
+@app.route('/hedy', methods=['GET'], defaults={'program_id': None, 'level': '1'})
 @app.route('/hedy/<int:level>', methods=['GET'], defaults={'program_id': None})
 @app.route('/hedy/<int:level>/<program_id>', methods=['GET'])
 def index(level, program_id):
@@ -1429,20 +1430,20 @@ def index(level, program_id):
 
                 # Only if we have found a quiz in previous levels with quiz data, we check the threshold.
                 if previous_quiz_level < level:
-                    # Instead of sending this level isn't available, we could send them to the right level?!
-                    # return redirect(f"/hedy/{previous_quiz_level}")
-                    scores = [x.get('scores', []) for x in quiz_stats if x.get('level') == level - 1]
+                    # scores = [x.get('scores', []) for x in quiz_stats if x.get('level') == level - 1]
+                    scores = [x.get('scores', []) for x in quiz_stats if x.get('level') == previous_quiz_level]
                     scores = [score for week_scores in scores for score in week_scores]
                     max_score = 0 if len(scores) < 1 else max(scores)
                     if max_score < threshold:
+                        # Instead of sending this level isn't available, we could send them to the right level?!
+                        # return redirect(f"/hedy/{previous_quiz_level}")
                         return utils.error_page(
                             error=403, ui_message=gettext('quiz_threshold_not_reached'))
 
             # We also have to check if the next level should be removed from the available_levels
             # Only check the quiz threshold if there is a quiz to obtain a score on the current level
             if level <= hedy.HEDY_MAX_LEVEL and level_quiz_data:
-                next_level_with_quiz = level
-
+                next_level_with_quiz = level - 1
                 for _next_level in range(level, hedy.HEDY_MAX_LEVEL):
                     # find the next level whose quiz isn't answered.
                     if _next_level in available_levels and \
@@ -1451,15 +1452,21 @@ def index(level, program_id):
                         next_level_with_quiz = _next_level
                         break
 
-                scores = [x.get('scores', []) for x in quiz_stats if x.get('level') == next_level_with_quiz]
-                scores = [score for week_scores in scores for score in week_scores]
-                max_score = 0 if len(scores) < 1 else max(scores)
-                # We don't have the score yet for the next level -> remove all upcoming
-                # levels from 'available_levels'
-                if max_score < threshold:
-                    # if this level is currently available, but score is below max score
-                    customizations["below_threshold"] = (next_level_with_quiz + 1 in available_levels)
-                    available_levels = available_levels[:available_levels.index(next_level_with_quiz) + 1]
+                # If the next quiz is in the current or upcoming level,
+                # we attempt to adjust available levels beginning from that level.
+                # e.g., student2 completed quiz 2, levels 3,4 and 5 have not quizes, 6 does.
+                # We should start from that level. If next_level_with_quiz >= level,
+                # meaning we don't need to adjust available levels ~ all available/quizes done!
+                if next_level_with_quiz >= level:
+                    scores = [x.get('scores', []) for x in quiz_stats if x.get('level') == next_level_with_quiz]
+                    scores = [score for week_scores in scores for score in week_scores]
+                    max_score = 0 if len(scores) < 1 else max(scores)
+                    # We don't have the score yet for the next level -> remove all upcoming
+                    # levels from 'available_levels'
+                    if max_score < threshold:
+                        # if this level is currently available, but score is below max score
+                        customizations["below_threshold"] = (next_level_with_quiz + 1 in available_levels)
+                        available_levels = available_levels[:available_levels.index(next_level_with_quiz) + 1]
 
     # Add the available levels to the customizations dict -> simplify
     # implementation on the front-end
