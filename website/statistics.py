@@ -243,7 +243,7 @@ class StatisticsModule(WebsiteModule):
                         # We've already finished the code section, which means
                         # we can add it to the example_codes array
                         if inside_code:
-                            adventure_snippets.append(code[code_start:index-3].replace('\n', ''))
+                            adventure_snippets.append(code[code_start:index-3])
                             inside_code = False
                         # We are starting a code section, therefore we need to save this index
                         else:
@@ -260,20 +260,20 @@ class StatisticsModule(WebsiteModule):
                 content = adventure['content']
                 soup = BeautifulSoup(content, features="html.parser")
                 for pre in soup.find_all('pre'):
-                    adventure_snippets.append(pre.contents[0].replace('\n', ''))
+                    adventure_snippets.append(pre.contents[0])
 
         student_code = program['code']
-        student_code = student_code.replace('\n', '')
+        student_code = student_code
         # now we have to calculate the differences between the student code and the code snippets
         can_save = True
         for snippet in adventure_snippets:
             seq_match = SequenceMatcher(None, snippet, student_code)
             # Allowing a difference of more than 10% or the student filled the placeholders
-            if seq_match.ratio() > 0.95 or (not self.has_placeholder(student_code) and self.has_placeholder(snippet)):
+            if seq_match.ratio() > 0.95 and (self.has_placeholder(student_code) or not self.has_placeholder(snippet)):
                 can_save = False
         return can_save
 
-    def has_placeholder(code):
+    def has_placeholder(self, code):
         return re.search(r'(?<![^ \n])(_)(?= |$)', code, re.M) is not None
 
 
