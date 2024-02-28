@@ -216,6 +216,7 @@ function update_db_adventure(adventure_id: string) {
    // Todo TB: It would be nice if we improve this with the formToJSON() function once #3077 is merged
 
    const adventure_name = $('#custom_adventure_name').val();
+   const classes = $('#custom_adventure_classes').val();
    const levels = $('#custom_adventure_levels').val();
    const content = DOMPurify.sanitize(window.ckEditor.getData());
    const agree_public = $('#agree_public').prop('checked');
@@ -230,6 +231,7 @@ function update_db_adventure(adventure_id: string) {
         content: content,
         public: agree_public,
         language,
+        classes,
         levels,
       }),
       contentType: 'application/json',

@@ -116,7 +116,7 @@
             <button class="green-btn" id="grid_overview_button" onclick="window.location.href = '/grid_overview/class/{{class_info.id}}'">{{_('grid_overview')}}</button>
               <button id="create_adventure_button" class="green-btn" 
                 hx-trigger="click"
-                hx-post="/for-teachers/create-adventure"
+                hx-post="/for-teachers/create-adventure/{{class_info.id}}"
                 hx-swap="none"
                 _="on htmx:afterRequest if detail.xhr.response
                 window.open('/for-teachers/customize-adventure/' + detail.xhr.response + '/{{class_info.id}}', '_self')"

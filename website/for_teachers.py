@@ -915,8 +915,9 @@ class ForTeachersModule(WebsiteModule):
                                           if adv.get("name") == adventure.get("id")):
                     temp = {"name": Class.get("name"), "id": Class.get("id"),
                             "teacher": Class.get("teacher"), "students": Class.get("students", []),
-                            "date": Class.get("date")}
+                            "date": Class.get("date"), "classes": Class.get("classes")}
                     class_data.append(temp)
+                    # Class["from_teacher"] = True
                     break
 
         return render_template(
@@ -924,6 +925,7 @@ class ForTeachersModule(WebsiteModule):
             page_title=gettext("title_customize-adventure"),
             adventure=adventure,
             adventure_classes=class_data,
+            all_classes=Classes,
             username=user["username"],
             max_level=hedy.HEDY_MAX_LEVEL,
             current_page=current_page,
@@ -947,6 +949,8 @@ class ForTeachersModule(WebsiteModule):
             return gettext("adventure_id_invalid"), 400
         if not isinstance(body.get("name"), str):
             return gettext("adventure_name_invalid"), 400
+        if not body.get("classes"):
+            return body, 400
         if not isinstance(body.get("levels"), list) or (isinstance(body.get("levels"), list) and not body["levels"]):
             return gettext("level_invalid"), 400
         if not isinstance(body.get("content"), str):
@@ -984,6 +988,7 @@ class ForTeachersModule(WebsiteModule):
             "date": utils.timems(),
             "creator": user["username"],
             "name": body["name"],
+            "classes": body["classes"],
             "level": body["levels"][0],  # TODO: this should be removed gradually.
             "levels": body["levels"],
             "content": body["content"],
@@ -1029,9 +1034,9 @@ class ForTeachersModule(WebsiteModule):
             return gettext("something_went_wrong_keyword_parsing"), 400
         return {"code": code}, 200
 
-    @route("/create-adventure", methods=["POST"])
+    @route("/create-adventure/<class_id>", methods=["POST"])
     @requires_teacher
-    def create_adventure(self, user):
+    def create_adventure(self, user, class_id):
         adventure_id = uuid.uuid4().hex
         name = "AdventureX"
         adventures = self.db.get_teacher_adventures(user["username"])
@@ -1046,6 +1051,7 @@ class ForTeachersModule(WebsiteModule):
             "date": utils.timems(),
             "creator": user["username"],
             "name": name,
+            "classes": class_id,
             "level": 1,
             "content": "",
             "language": g.lang,
