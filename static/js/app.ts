@@ -18,6 +18,7 @@ import { HedyEditor, EditorType } from './editor';
 import { stopDebug } from "./debugging";
 import { HedyCodeMirrorEditorCreator } from './cm-editor';
 import { initializeTranslation } from './lezer-parsers/tokens';
+import { initializeActivity } from './user-activity';
 
 export let theGlobalDebugger: any;
 export let theGlobalEditor: HedyEditor;
@@ -175,6 +176,8 @@ export function initializeApp(options: InitializeAppOptions) {
   });
 
   initializeLoginLinks();
+
+  initializeActivity();
 }
 
 export interface InitializeCodePageOptions {
