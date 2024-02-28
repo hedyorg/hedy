@@ -1344,7 +1344,7 @@ adventures:
                 story_text: |
                     现在我们要稍微改变一下缩进。 每次我们需要缩进时，我们都需要在缩进之前的行添加`:`。
 
-                    在此级别中，您还可以使用新命令：`{elif}`。 `{elif}` 是 {else} {if} 的缩写，当您想要创建 3 个（或更多！）选项时需要它。
+                    在此级别中，您还可以使用新命令：`{elif}`。 `{elif}` 是 `{else} {if}` 的缩写，当您想要创建 3 个（或更多！）选项时需要它。
                     一探究竟！
             18:
                 story_text: |
@@ -2461,14 +2461,14 @@ adventures:
                     在下一关，你将学习如何播放一些现有的歌曲。
                 example_code: |-
                     ```
-                    play C4
-                    play D4
-                    play E4
-                    play F4
-                    play G4
-                    play A4
-                    play B4
-                    play C5
+                    {play} C4
+                    {play} D4
+                    {play} E4
+                    {play} F4
+                    {play} G4
+                    {play} A4
+                    {play} B4
+                    {play} C5
                     ```
             2:
                 story_text: 把歌唱完!我们已经开始为一些旋律编码。
@@ -2780,7 +2780,7 @@ adventures:
                 story_text: |
                     用`{add}`教你的鹦鹉一个新单词。
                     ### 练习
-                    您可以添加`{add} {to}`命令来让代码工作吗?
+                    您可以添加`{add} {to_list}`命令来让代码工作吗?
                 example_code: |
                     ```
                     词汇表 {is} 叽叽喳喳, 海蒂
