@@ -1709,20 +1709,22 @@ adventures:
                     ### Exercises
                     Now, Hedy can only answer yes, no or maybe. Can you give Hedy more answer options, like 'definitely' or '{ask} again'.
             4:
-                story_text: |-
-                    Level 3 tidak menambahkan fitur baru, namun memungkinkan kamu untuk berlatih menggunakan kutip satu. Kamu dapat membuat ulang kode level 2, dan memastikan untuk menggunakan kutip satu di tempat yang benar!
+                story_text: |
+                    ### Exercise
+                    We have removed all the quotation marks from this example code, can you add them in all the right places?
 
-                    Ingatlah bahwa pada level 2, kamu tidak bisa menggunakan kata 'pertanyaan' sebagai nama variabel dan kata yang akan ditampilkan.
-                    Tanda kutip satu pada level 3 memungkinkan hal ini!
-
-                    Penting! Ingat juga bahwa karena kita mulai menggunakan tanda kutip satu, Hedy akan bingung ketika kamu menampilkan tanda kutip satu. Pastikan kamu tidak menggunakan karakter tersebut untuk ditampilkan dalam teks.
+                    ### Exercise 2
+                    Go back to the previous level and copy your fortune teller code. Make the code work in this level by adding quotation marks in the right spots.
                 example_code: |
                     ```
-                    print 'Aku Hedy sang peramal!'
-                    pertanyaan is ask 'Apa yang ingin kamu tahu?'
-                    print 'Ini apa yang ingin kamu tahu: ' pertanyaan
-                    jawaban is ya, tidak, mungkin
-                    print 'Bola kristal ku menyatakan.. ' jawaban at random
+                    _ Add the quotation marks to this code _
+                    {print} Im Hedy the fortune teller!
+                    question {is} {ask} What do you want to know?
+                    {print} This is your question:  question
+                    answers {is} yes, no, maybe
+                    {print} My crystal ball says...
+                    {sleep} 2
+                    {print} answers {at} {random}
                     ```
             5:
                 story_text: |-

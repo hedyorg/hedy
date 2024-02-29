@@ -1601,16 +1601,22 @@ adventures:
                 story_text_2: |
                     الان هيدي العرافة تستطيع الإجابة بنعم، لا او ربما فقط. هل يمكنك أن تعطيها خيارات لإجابات أخرى مثل "بالتأكيد" او "{ask} مرة أخرى".
             4:
-                story_text: "في هذا المستوى لن تتعلم أوامر جديدة، لكنك ستتدرب على استخدام علامات الاقتباس. \nتستطيع إعادة كتابة الكود الخاص بك في المستوى الثالث، ولا تنسَ أن تضع علامات الاقتباس في الأماكن الصحيحة.\n\nفي المستوى الثالث, لم نستطع استخدام كلمة ’السؤال‘ اسمًا للمتغير وإعادة استخدامها في النص\
-                    \ مرة أخرى ككلمة عادية.\nلا تقلق! علامات الاقتباس ستجعل هذا الأمر ممكنًا!\n"
+                story_text: |
+                    ### Exercise
+                    We have removed all the quotation marks from this example code, can you add them in all the right places?
+
+                    ### Exercise 2
+                    Go back to the previous level and copy your fortune teller code. Make the code work in this level by adding quotation marks in the right spots.
                 example_code: |
-                    ```{print} 'انا العرافة هيدي!'
-                    السؤال {is} {ask} 'ماذا تريد ان تعرف ؟'
-                    {print} 'هذا هو السؤال : ' السؤال
-                    الاجابات {is} نعم، لا، ربما
-                    {print} 'تقول الكرة السحرية الخاصة بي...'
+                    ```
+                    _ Add the quotation marks to this code _
+                    {print} Im Hedy the fortune teller!
+                    question {is} {ask} What do you want to know?
+                    {print} This is your question:  question
+                    answers {is} yes, no, maybe
+                    {print} My crystal ball says...
                     {sleep} 2
-                    {print} الاجابات {at} {random}
+                    {print} answers {at} {random}
                     ```
             5:
                 story_text: |

@@ -1685,23 +1685,21 @@ adventures:
                     Nun, Hedy povas respondi nur «jes», «ne» aŭ «eble». Ĉu vi povas doni al Hedy pliajn eblajn respondojn, kiel «certe» aŭ «demandu denove»? <!--{ask}-->
             4:
                 story_text: |
-                    Ĉi tiu nivelo ne havas novajn funkciojn, sed permesas al vi ekzerci vin al uzado de la citiloj.
-                    Vi povas refari vian kodon de Nivelo 3; nepre aldonu la citilojn en la ĝustaj lokoj!
+                    ### Exercise
+                    We have removed all the quotation marks from this example code, can you add them in all the right places?
 
-                    Atentu, ke en Nivelo 3 oni ne povis uzi la vorton «demando» kiel kaj la nomo de la variablo kaj ordinara presebla vorto.
-                    La citiloj en Nivelo 4 ebligas tion!
-
-                    Ankaŭ atentu, ke nun, pro la devigo de citiloj, Hedy konfuziĝas, kiam oni uzas la apostrofon por mallongigoj kiel «l' espero» aŭ «dank' al».
-                    Nepre forigu tiajn apostrofojn kaj ŝanĝu la literumadon al «lespero» aŭ «dankal».
+                    ### Exercise 2
+                    Go back to the previous level and copy your fortune teller code. Make the code work in this level by adding quotation marks in the right spots.
                 example_code: |
                     ```
-                    {print} 'Mi estas Hedy la aŭguristo!'
-                    demando {is} {ask} 'Kion vi volas ekscii?'
-                    {print} 'Jen via demando: ' demando
-                    respondoj {is} jes, ne, eble
-                    {print} 'Laŭ mia kristala globo…'
+                    _ Add the quotation marks to this code _
+                    {print} Im Hedy the fortune teller!
+                    question {is} {ask} What do you want to know?
+                    {print} This is your question:  question
+                    answers {is} yes, no, maybe
+                    {print} My crystal ball says...
                     {sleep} 2
-                    {print} respondoj {at} {random}
+                    {print} answers {at} {random}
                     ```
             5:
                 story_text: |

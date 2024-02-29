@@ -1708,21 +1708,22 @@ adventures:
                     ### Exercises
                     Now, Hedy can only answer yes, no or maybe. Can you give Hedy more answer options, like 'definitely' or '{ask} again'.
             4:
-                story_text: |-
-                    A 3. szint nem tartalmaz új funkciókat, de lehetővé teszi az idézőjelek használatának gyakorlását.
-                    Újra elkészítheted a 2. szintű kódot, és ügyelj arra, hogy az idézőjeleket a megfelelő helyre írd!
+                story_text: |
+                    ### Exercise
+                    We have removed all the quotation marks from this example code, can you add them in all the right places?
 
-                    Ne feledd, hogy a 2. szinten nem használhattuk a „kerdes” szót a változó nevének és egy normál kiíratható szónak sem.
-                    A 3. szintű idézőjelek lehetővé teszik ezt!
-
-                    Fontos! Ne feledd, hogy most, amikor idézőjeleket használunk, Hedy összezavarodik, amikor az aposztrófot más szövegösszefüggésben használod.
+                    ### Exercise 2
+                    Go back to the previous level and copy your fortune teller code. Make the code work in this level by adding quotation marks in the right spots.
                 example_code: |
                     ```
-                    print 'Szia, Hedy, a jósnő vagyok!'
-                    kerdes is ask 'Mit akarsz tudni?'
-                    print 'Ez az amit tudni akarsz: ' kerdes
-                    valasz is igen, nem, talan
-                    print 'A kristálygömböm azt mondja... ' valasz at random
+                    _ Add the quotation marks to this code _
+                    {print} Im Hedy the fortune teller!
+                    question {is} {ask} What do you want to know?
+                    {print} This is your question:  question
+                    answers {is} yes, no, maybe
+                    {print} My crystal ball says...
+                    {sleep} 2
+                    {print} answers {at} {random}
                     ```
             5:
                 story_text: |-
