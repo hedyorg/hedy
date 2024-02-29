@@ -29,7 +29,7 @@ describe('customize class page', () => {
     });
 
     it('goes back to the view class page', () => {
-      cy.getBySel('back_to_class')
+      cy.getBySel('go_back_button')
       .should('be.visible')
       .should('not.be.disabled')
       .click();

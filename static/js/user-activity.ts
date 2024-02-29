@@ -47,9 +47,8 @@ const ELEMENT_TO_TRACK = [
     "create_class_button",
     "create_adventure_button",
     "public-adventures-link",
-    "to_class_button",
+    "go_back_button",
     "customize_class_button",
-    "go_back_to_teacher_page_button",
     "live_stats_button",
     "grid_overview_button",
     

@@ -76,7 +76,7 @@ export function addCustomizations(classname){
     cy.get("#opening_date_container").should("be.visible")
     cy.get('#enable_level_7').parent('.switch').click();
     cy.getBySel("save_customizations").click();
-    cy.get("#back_to_class").click();
+    cy.get("#go_back_button").click();
 }
 
 export function createClassAndAddStudents(){

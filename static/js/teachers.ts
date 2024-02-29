@@ -678,7 +678,7 @@ export function initializeCustomizeClassPage(options: InitializeCustomizeClassPa
         markUnsavedChanges();
       });
 
-      $('#back_to_class').on('click', () => {
+      $('#go_back_button').on('click', () => {
         function backToClass() {
             window.location.href = `/for-teachers/class/${options.class_id}`;
         }

@@ -59,9 +59,10 @@
     {% if programs|length == 0 %}
         <div class="my-8">{{ from_user }} {{_('no_shared_programs')}}</div>
     {% endif %}
-        <div class="flex flex-row ml-auto gap-2">
-            <button id='back_to_class' class="green-btn" _="on click window.open('/for-teachers/class/{{class_id}}', '_self')" data-cy="back_to_class">{{_('back_to_class')}}</button>
-        </div>
+        <button id='go_back_button' class="back-btn" _="on click window.open('/for-teachers/class/{{class_id}}', '_self')" data-cy="go_back_button">
+            <span class="fa fa-arrow-left">&nbsp;</span>
+            {{_('go_back')}}
+        </button>
     {% endif %}
 
   {% if next_page_url %}

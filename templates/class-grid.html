@@ -1,7 +1,7 @@
 {% extends "auth.html" %}
 {% block regular_content %}
 <div class="flex flex-col gap-2">
-  <button class="back-btn" id="to_class_button" onclick="window.location.href='/for-teachers/class/{{class_info.id}}'">
+  <button class="back-btn" id="go_back_button" onclick="window.location.href='/for-teachers/class/{{class_info.id}}'">
     <span class="fa fa-arrow-left">&nbsp;</span>
     {{_('go_back')}}
   </button>
