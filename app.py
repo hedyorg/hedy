@@ -43,7 +43,7 @@ from utils import dump_yaml_rt, is_debug_mode, load_yaml_rt, timems, version, st
 from website import (ab_proxying, achievements, admin, auth_pages, aws_helpers,
                      cdn, classes, database, for_teachers, s3_logger, parsons,
                      profile, programs, querylog, quiz, statistics,
-                     translating, tags, surveys, public_adventures)
+                     translating, tags, surveys, public_adventures, user_activity)
 from website.auth import (current_user, is_admin, is_teacher, is_second_teacher, has_public_profile,
                           login_user_from_token_cookie, requires_login, requires_login_redirect, requires_teacher,
                           forget_current_user)
@@ -376,7 +376,7 @@ Commonmark(app)
 if utils.is_offline_mode():
     parse_logger = s3_logger.NullLogger()
 else:
-    parse_logger = s3_logger.S3ParseLogger.from_env_vars()
+    parse_logger = s3_logger.S3Logger(name="parse", config_key="s3-parse-logs")
     querylog.LOG_QUEUE.set_transmitter(
         aws_helpers.s3_querylog_transmitter_from_env())
 
@@ -821,7 +821,8 @@ def translate_error(code, arguments, keyword_lang):
         'echo',
         'is',
         'if',
-        'repeat']
+        'repeat',
+        '[]']
 
     # Todo TB -> We have to find a more delicate way to fix this: returns some gettext() errors
     error_template = gettext('' + str(code))
@@ -2662,6 +2663,7 @@ app.register_blueprint(quiz.QuizModule(DATABASE, ACHIEVEMENTS, QUIZZES))
 app.register_blueprint(parsons.ParsonsModule(PARSONS))
 app.register_blueprint(statistics.StatisticsModule(DATABASE))
 app.register_blueprint(statistics.LiveStatisticsModule(DATABASE))
+app.register_blueprint(user_activity.UserActivityModule(DATABASE))
 app.register_blueprint(tags.TagsModule(DATABASE, ACHIEVEMENTS))
 app.register_blueprint(public_adventures.PublicAdventuresModule(DATABASE, ACHIEVEMENTS))
 app.register_blueprint(surveys.SurveysModule(DATABASE))

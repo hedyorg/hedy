@@ -18,6 +18,7 @@ import { HedyEditor, EditorType } from './editor';
 import { stopDebug } from "./debugging";
 import { HedyCodeMirrorEditorCreator } from './cm-editor';
 import { initializeTranslation } from './lezer-parsers/tokens';
+import { initializeActivity } from './user-activity';
 
 export let theGlobalDebugger: any;
 export let theGlobalEditor: HedyEditor;
@@ -175,6 +176,8 @@ export function initializeApp(options: InitializeAppOptions) {
   });
 
   initializeLoginLinks();
+
+  initializeActivity();
 }
 
 export interface InitializeCodePageOptions {
@@ -723,8 +726,12 @@ export function tryPaletteCode(exampleCode: string) {
   if (theGlobalEditor?.isReadOnly) {
     return;
   }
-
-  theGlobalEditor.contents = exampleCode + '\n';
+  const lines = theGlobalEditor.contents.split('\n')
+  if (lines[lines.length-1] !== '') {
+    theGlobalEditor.contents += '\n' + exampleCode;
+  } else {
+    theGlobalEditor.contents += exampleCode;
+  }
   //As the commands try-it buttons only contain english code -> make sure the selected language is english
   if (!($('#editor').attr('lang') == 'en')) {
       $('#editor').attr('lang', 'en');
@@ -1948,9 +1955,7 @@ function initializeShareProgramButtons() {
           throw new Error('This program does not have an id');
         }
 
-        const response = await postJsonWithAchievements('/programs/share', {
-          id: saveInfo.id
-        });
+        const response = await postJsonWithAchievements(`/programs/share/${saveInfo.id}`, {})
 
         modal.notifySuccess(response.message);
         if (response.save_info) {

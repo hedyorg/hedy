@@ -207,7 +207,7 @@ class ProgramsModule(WebsiteModule):
             "achievements": self.achievements.get_earned_achievements(),
         })
 
-    @route('/share', methods=['POST'], defaults={'loop_index': 0, 'second_teachers_programs': False })
+    @route('/share/{program_id}', methods=['POST'], defaults={'loop_index': 0, 'second_teachers_programs': False})
     @route("/share/<program_id>/<loop_index>/<second_teachers_programs>", methods=["POST"])
     @requires_login
     def share_unshare_program(self, user, program_id, loop_index, second_teachers_programs):
@@ -243,7 +243,7 @@ class ProgramsModule(WebsiteModule):
                                              adventure_names=adventure_names,
                                              public_profile=public_profile,
                                              loop_index=loop_index,
-                                             second_teachers_programs = second_teachers_programs == 'True')
+                                             second_teachers_programs=second_teachers_programs == 'True')
 
     @route("/submit", methods=["POST"])
     @requires_login
