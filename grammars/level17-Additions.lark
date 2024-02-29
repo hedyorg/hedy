@@ -1,12 +1,13 @@
 // We add the : at the end of if and else and elif and for/while
 
-command:+= ifpressed (ifpressed_elifs)* ifpressed_elses? | ifs (elifs)* elses? -= ifs elses?
+command:+= if_pressed (if_pressed_elifs)* if_pressed_elses? | ifs (elifs)* elses? -= ifs elses?
 
 // These will be handled by the preprocessor step in the merger
 // It will find the appropiate function for this anotation and modify it accordingly
-ifpressed_else<needs_colon>
-ifpressed<needs_colon>
-ifpressed_elifs: _EOL _ELIF (LETTER_OR_NUMERAL | NAME) _IS _PRESSED _COLON _EOL (_SPACE command) (_EOL _SPACE command)* _EOL? _END_BLOCK
+if_pressed<needs_colon>
+if_pressed_else<needs_colon>
+if_pressed_elses<needs_colon>
+if_pressed_elifs: _EOL _ELIF (LETTER_OR_NUMERAL | NAME) _IS _PRESSED _COLON _EOL (_SPACE command) (_EOL _SPACE command)* _EOL? _END_BLOCK
 
 ifs<needs_colon>
 elses<needs_colon>
