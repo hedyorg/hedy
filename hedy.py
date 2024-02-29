@@ -2024,8 +2024,8 @@ else:{self.add_debug_breakpoint()}
         button_name = self.process_variable(args[0], meta.line)
         return f"""create_button({button_name})"""
 
-    def make_function_name(self):
-        return f"if_pressed_{str(uuid.uuid4()).replace('-', '_')}"
+    def make_function_name(self, key_name):
+        return f"if_pressed_{key_name}_"
 
     def make_function(self, function_name, body):
         return (
@@ -2054,10 +2054,10 @@ else:{self.add_debug_breakpoint()}
         key = args[0]
 
         if_code = args[1]
-        if_function_name = self.make_function_name()
+        if_function_name = self.make_function_name(key)
 
         else_code = args[2]
-        else_function_name = self.make_function_name()
+        else_function_name = self.make_function_name('else')
 
         return (
             self.clear_key_mapping() + '\n' +
@@ -2261,11 +2261,11 @@ class ConvertToPython_8_9(ConvertToPython_7):
     def if_pressed(self, meta, args):
         args = [a for a in args if a != ""]  # filter out in|dedent tokens
 
+        key = args[0]
+
         if_code = '\n'.join([x for x in args[1:]])
         if_code = ConvertToPython.indent(if_code)
-        if_function_name = self.make_function_name()
-
-        key = args[0]
+        if_function_name = self.make_function_name(key)
 
         return (
             self.clear_key_mapping() + '\n' +
@@ -2277,7 +2277,7 @@ class ConvertToPython_8_9(ConvertToPython_7):
         args = [a for a in args if a != ""]  # filter out in|dedent tokens
         else_code = '\n'.join([x for x in args[0:]])
         else_code = ConvertToPython.indent(else_code)
-        else_function_name = self.make_function_name()
+        else_function_name = self.make_function_name('else')
 
         return (
             self.add_else_key_mapping(else_function_name) + '\n' +
@@ -2581,11 +2581,12 @@ class ConvertToPython_15(ConvertToPython_14):
 
     def if_pressed(self, meta, args):
         args = [a for a in args if a != ""]  # filter out in|dedent tokens
-        if_code = '\n'.join([x for x in args[1:]])
-        if_code = ConvertToPython.indent(if_code)
-        if_function_name = self.make_function_name()
 
         key = args[0]
+
+        if_code = '\n'.join([x for x in args[1:]])
+        if_code = ConvertToPython.indent(if_code)
+        if_function_name = self.make_function_name(key)
 
         return (
             self.clear_key_mapping() + '\n' +
@@ -2632,11 +2633,11 @@ class ConvertToPython_17(ConvertToPython_16):
     def if_pressed_elifs(self, meta, args):
         args = [a for a in args if a != ""]  # filter out in|dedent tokens
 
+        key = args[0]
+
         elif_code = '\n'.join([x for x in args[1:]])
         elif_code = ConvertToPython.indent(elif_code)
-        elif_function_name = self.make_function_name()
-
-        key = args[0]
+        elif_function_name = self.make_function_name(key)
 
         return (
             self.add_if_key_mapping(key, elif_function_name) + '\n' +
