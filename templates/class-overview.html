@@ -10,12 +10,10 @@
     </script>
     {% endif %}
     <div class="flex flex-col gap-4">
-      <div class="inline-flex items-center gap-2">
-        <button class="gray-btn text-blue-500" id="go_back_to_teacher_page_button" onclick="window.location.href = '/for-teachers'">
-          <span class="fa fa-arrow-left"></span>
+        <button class="back-btn" id="go_back_to_teacher_page_button" onclick="window.location.href = '/for-teachers'">
+          <span class="fa fa-arrow-left">&nbsp;</span>
           {{_('go_back')}}
         </button>
-    </div>
       <div id="survey" class="hidden"></div>
       {% if second_teacher %}<h1>{{_('role')}}: {{role}}</h1>{% endif %}
         <div class="flex flex-row items-center gap-2">
