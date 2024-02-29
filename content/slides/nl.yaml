@@ -45,7 +45,7 @@ levels:
             text: De uitvoer kan ook een tekening zijn.
             code: |-
                 {forward} 100
-                {turn} links
+                {turn} {left}
     1:
         1:
             header: Welkom bij level 1!
@@ -116,7 +116,7 @@ levels:
             text: '`{turn}` wordt gebruikt om de schildpad links of rechtsom te laten draaien.'
             code: |-
                 {forward} 50
-                {turn} links
+                {turn} {left}
         12:
             header: Debugging (foutzoeken)
             text: Debugging van de code betekent het oplossen van fouten in de code. Laten we deze code samen debuggen. Klik op de ladybug knop (lieveheersbeestje) om de debugger te starten.
@@ -125,7 +125,7 @@ levels:
                 {print} Welk liedje wil je horen?
                 {ask} Ik vind dat ook een leuk liedje!
                 {print} Volgende... {echo}
-            debug: 'True'
+            debug: Waar
         13:
             header: Laat het programmeerfeest beginnen!
             text: Veel plezier met de avonturen in level 1!
@@ -133,11 +133,11 @@ levels:
         1:
             header: Welkom bij level 2
             text: |-
-                In dit level leer je variabelen te gebruiken.
+                In dit level leer je gebruik te maken van variabelen.
 
                 Een variabele is een woord waarin je informatie kunt opslaan.
 
-                Bijvoorbeeld: jouw naam, leeftijd of favoriete sportteam.
+                Zoals: een naam, leeftijd of favoriete sportteam.
         2:
             header: Variabelen
             text: Om een variabele te maken of 'in te stellen' gebruiken we het `{is}` commando
@@ -190,7 +190,7 @@ levels:
                 {print} Ik ga je donut.halen {sleep}
                 {print} Asjeblieft! Een vulling donut met topping!
                 {ask} Fijne dag nog!
-            debug: 'True'
+            debug: Waar
         8:
             header: Veel programmeerplezier!
             text: Veel plezier met de avonturen in level 2!
@@ -203,7 +203,7 @@ levels:
             text: |-
                 Je maakt een lijst met `{is}`.
 
-                Scheid de items op de lijst met een komma.
+                Scheid de elementen in de lijst met komma's.
             code: dieren {is} honden, katten, kangoeroes
         3:
             header: '{at} {random}'
@@ -255,9 +255,9 @@ levels:
                 {print} of houd je meer van... tweede_keus {at} {random}
                 {remove} tweede_keus {to} muziek_genres
                 {print} Ik houd het meest van muziek_genre {random} !
-            debug: 'True'
+            debug: Waar
         8:
-            header: Aan de slag!
+            header: Laten we aan het werk gaan!
             text: Veel plezier met de avonturen in level 3!
     4:
         1:
@@ -270,7 +270,7 @@ levels:
             code: |-
                 naam {is} Sophie
                 {print} Mijn naam is naam
-            debug: 'True'
+            debug: Waar
         3:
             header: Aanhalingstekens zijn de oplossing
             text: |-
@@ -308,7 +308,7 @@ levels:
 
                 Kijk maar eens wat er gebeurt als je een hoge komma voor auto's, of voor 's middags, deze maken Hedy in de war....
             code: '{print} ''De oma''s rijden in de auto''s.'''
-            debug: 'True'
+            debug: Waar
         9:
             header: '{clear}'
             text: |-
@@ -323,7 +323,7 @@ levels:
                 {clear}
                 {print} '1'
                 {clear}
-                {print} 'SURPRISE!'
+                {print} 'VERRASSING!'
         10:
             header: Debugging (foutzoeken)
             text: Laten we deze code debuggen!
@@ -697,7 +697,7 @@ levels:
                 {print} 'Bedankt voor het invullen allemaal! Veel plezier vandaag!'
             debug: 'True'
         9:
-            header: Aan de slag!
+            header: Doen!
             text: Veel plezier met de avonturen in level 9!
     10:
         1:
@@ -720,7 +720,7 @@ levels:
                     {print} namen {at} {random} ' doet de afwas on ' dag
         4:
             header: Debugging (foutzoeken)
-            text: Laten we deze code debuggen!
+            text: Laten we deze code debuggen
             code: |-
                 {print} 'Dames en heren!'
                 {print} 'Komt dat zien! Vanavond in circus Hedy!'
@@ -937,7 +937,7 @@ levels:
                     {define} verdriet {to} naam
             debug: 'True'
         9:
-            header: Aan de slag!
+            header: Doen!
             text: Veel plezier met de avonturen in level 13!
     14:
         1:
@@ -1017,9 +1017,9 @@ levels:
                     {print} 'Jammer... ik koop het niet'
                 {else}
                     {print} 'Ik koop het! Bedankt!'
-            debug: true
+            debug: 'True'
         7:
-            header: Aan de slag!
+            header: Aan het werk!!
             text: Veel plezier met de avonturen in level 14!
     15:
         1:

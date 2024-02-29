@@ -34,10 +34,10 @@ AssignList { Text (is+ | Op<"=">) (Text+ | Int ) ~ambig  (Comma (Text+ | Int ))+
 Assign { Text (is+ | Op<"=">) (Expression ~ambig  | ListAccess)+ }
 Sleep { sleep+ (Expression | ListAccess )? }
 ListAccess { Text at+ (random+ | Text | Int) }
-Add { add+ Text toList+ Text }
-Remove { remove+ Text from+ Text }
+Add { add+ Text+ toList+ Text }
+Remove { remove+ Text+ from+ Text }
 Clear { clear+ }
-Play { play+ Text+ }
+Play { play+ (ListAccess | Expression) }
 
 Turtle[@isGroup=turtle] {
     Forward { forward+ (Expression | ListAccess ) } |
@@ -49,7 +49,7 @@ If { ifs+ Condition eol* IfLessCommand Else? }
 Else { !else elses+ eol* IfLessCommand }
 
 Condition { 
-    EqualityCheck { (Text | Int)  is+ (String | Expression | pressed+) } |
+    EqualityCheck { (Text | Int)  (is+ | Op<"=">) (String | Expression | pressed+) } |
     InListCheck { (Text | Int) ins+ Text } |
     NotInListCheck { (Text | Int) not_in+ Text }
 }
