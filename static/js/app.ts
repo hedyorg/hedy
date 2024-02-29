@@ -12,6 +12,9 @@ import { checkNow, onElementBecomesVisible } from './browser-helpers/on-element-
 import { incrementDebugLine, initializeDebugger, load_variables, startDebug } from './debugging';
 import { localDelete, localLoad, localSave } from './local';
 import { initializeLoginLinks } from './auth';
+
+import { postJson, fetchText } from './comm';
+
 import { postJson } from './comm';
 import { LocalSaveWarning } from './local-save-warning';
 import { HedyEditor, EditorType } from './editor';
@@ -1052,6 +1055,11 @@ export function runPythonProgram(this: any, code: string, sourceMap: any, hasTur
         return ((hasSleep) ? 20000 : 5000);
       }) ()
     });
+    
+    (Sk as any).builtins.load_url = new Sk.builtin.func((url_text:any) => {
+      const ret = fetchText(url_text);
+      return new Sk.misceval.promiseToSuspension(ret.then(Sk.ffi.remapToPy));
+    });
 
     (Sk as any).builtins.play = new Sk.builtin.func((notes:any) => {
         //const now = Tone.now()
@@ -1090,11 +1098,13 @@ export function runPythonProgram(this: any, code: string, sourceMap: any, hasTur
         error.showWarning(ClientMessages['Transpile_warning'], ClientMessages['Empty_output']);
         return;
       }
+
       if (!hasWarnings && code !== last_code) {
           showSuccesMessage(); //FH nov 2023: typo in success :)
           last_code = code;
       }
       if (cb) cb ();
+      
     }).catch(function(err) {
       const errorMessage = errorMessageFromSkulptError(err) || null;
       if (!errorMessage) {

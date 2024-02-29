@@ -567,7 +567,12 @@ def parse():
                 exception = ex
 
         try:
-            response['Code'] = transpile_result.code
+            t = textwrap.dedent("""\
+            print(load_url('https://raw.githubusercontent.com/ebertmi/skulpt/epy_build/src/file.js'))
+            """)
+            response['Code'] = t + transpile_result.code
+
+            # response['Code'] = transpile_result.code
             source_map_result = transpile_result.source_map.get_result()
 
             for i, mapping in source_map_result.items():

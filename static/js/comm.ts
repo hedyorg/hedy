@@ -103,3 +103,24 @@ function ajaxError(err: any) {
     internetError: err.readyState < 4,
   });
 }
+
+/**
+ * Fetch a text file from a URL (hopefully it supports cross-origin calls)
+ */
+export function fetchText(url: string): Promise<string> {
+  // Use the fetch API, if available (TODO)
+//   if (window.fetch !== undefined) {
+//     return postJsonUsingFetch(url, data);
+//   }
+
+  return new Promise((ok, ko) => {
+    $.ajax({
+      type: 'GET',
+      url,
+    }).done((response: any) => {
+      ok(response);
+    }).fail((err) => {
+      ko(ajaxError(err));
+    });
+  });
+}
