@@ -1055,7 +1055,8 @@ def programs_page(user):
         sorted_adventure_programs=sorted_adventure_programs,
         adventure_names=adventure_names,
         max_level=hedy.HEDY_MAX_LEVEL,
-        next_page_url=next_page_url)
+        next_page_url=next_page_url,
+        second_teachers_programs=False)
 
 
 @app.route('/logs/query', methods=['POST'])
