@@ -1954,14 +1954,7 @@ function initializeShareProgramButtons() {
         if (!saveInfo) {
           throw new Error('This program does not have an id');
         }
-
-        const response = await postJsonWithAchievements(`/programs/share/${saveInfo.id}`, {})
-
-        modal.notifySuccess(response.message);
-        if (response.save_info) {
-          adventure.save_info = response.save_info;
-        }
-        updatePageElements();
+        postJson(`/programs/share/${saveInfo.id}`, {})
       });
     }
   })
