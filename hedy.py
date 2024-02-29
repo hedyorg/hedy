@@ -2066,7 +2066,7 @@ else:{self.add_debug_breakpoint()}
             self.add_else_key_mapping(else_function_name) + '\n' +
             self.make_function(if_function_name, if_code) + '\n' +
             self.make_function(else_function_name, else_code) + '\n' +
-            self.make_extension_call() + '\n'
+            self.make_extension_call()
         )
 
 
@@ -2284,7 +2284,8 @@ class ConvertToPython_8_9(ConvertToPython_7):
         return (
             self.add_else_key_mapping(else_function_name) + '\n' +
             self.make_function(else_function_name, else_code) + '\n' +
-            self.make_extension_call() + '\n'
+            self.make_extension_call()
+
         )
 
     def elses(self, meta, args):
@@ -2578,7 +2579,7 @@ class ConvertToPython_15(ConvertToPython_14):
         code = args[0]
 
         return (
-            code + self.make_extension_call() + '\n'
+            code + self.make_extension_call()
         )
 
     def if_pressed(self, meta, args):
@@ -3548,7 +3549,6 @@ def transpile_inner(input_string, level, lang="en", populate_source_map=False, i
     try:
         abstract_syntax_tree, lookup_table, commands = create_AST(input_string, level, lang)
 
-        print(abstract_syntax_tree)
         # grab the right transpiler from the lookup
         convertToPython = TRANSPILER_LOOKUP[level]
         python = convertToPython(lookup_table, lang, numerals_language, is_debug).transform(abstract_syntax_tree)
