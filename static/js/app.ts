@@ -4,7 +4,7 @@ import JSZip from "jszip";
 import * as Tone from 'tone'
 import { Tabs } from './tabs';
 import { MessageKey } from './message-translations';
-import { turtle_prefix, normal_prefix, music_prefix } from './pythonPrefixes'
+import { turtle_prefix, pressed_prefix, normal_prefix, music_prefix } from './pythonPrefixes'
 import { Achievement, Adventure, isServerSaveInfo, ServerSaveInfo } from './types';
 import { startIntroTutorial } from './tutorials/tutorial';
 import { get_parsons_code, initializeParsons, loadParsonsExercise } from './parsons';
@@ -589,7 +589,7 @@ export async function runit(level: number, lang: string, disabled_prompt: string
       program_data = theGlobalDebugger.get_program_data();
     }
 
-    runPythonProgram(program_data.Code, program_data.source_map, program_data.has_turtle, program_data.has_sleep, program_data.has_clear, program_data.has_music, program_data.Warning, cb, run_type).catch(function(err: any) {
+    runPythonProgram(program_data.Code, program_data.source_map, program_data.has_turtle, program_data.has_pressed, program_data.has_sleep, program_data.has_clear, program_data.has_music, program_data.Warning, cb, run_type).catch(function(err: any) {
       // The err is null if we don't understand it -> don't show anything
       if (err != null) {
         error.show(ClientMessages['Execute_error'], err.message);
@@ -841,7 +841,7 @@ window.onerror = function reportClientException(message, source, line_number, co
   });
 }
 
-export function runPythonProgram(this: any, code: string, sourceMap: any, hasTurtle: boolean, hasSleep: boolean, hasClear: boolean, hasMusic: boolean, hasWarnings: boolean, cb: () => void, run_type: "run" | "debug" | "continue") {
+export function runPythonProgram(this: any, code: string, sourceMap: any, hasTurtle: boolean, hasPressed: boolean, hasSleep: boolean, hasClear: boolean, hasMusic: boolean, hasWarnings: boolean, cb: () => void, run_type: "run" | "debug" | "continue") {
   // If we are in the Parsons problem -> use a different output
   let outputDiv = $('#output');
   let skip_faulty_found_errors = false;
@@ -912,6 +912,9 @@ export function runPythonProgram(this: any, code: string, sourceMap: any, hasTur
     $('#turtlecanvas').show();
   }
 
+  if (hasPressed) {
+    code_prefix += pressed_prefix;
+  }
 
   if (hasMusic) {
     code_prefix += music_prefix;

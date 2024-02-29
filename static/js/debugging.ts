@@ -25,16 +25,16 @@ const fullLineCommands = [
 const blockCommands = [
   'ifs',
   'ifelse',
-  'ifpressed_else',
+  'if_pressed_else',
   'repeat',
-  'ifpressed',
+  'if_pressed',
   'elses',
-  'ifpressed_elses',
+  'if_pressed_elses',
   'for_list',
   'for_loop',
   'while_loop',
   'elifs',
-  'ifpressed_elifs',
+  'if_pressed_elifs',
 ]
 
 const ifRegex = "((__if__) *[^\n ]+ *((__is__)|(__in__)) *[^\n ]+) *.*";

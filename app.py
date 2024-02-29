@@ -580,8 +580,8 @@ def parse():
 
             response['source_map'] = source_map_result
 
-            if transpile_result.has_pygame:
-                response['has_pygame'] = True
+            if transpile_result.has_pressed:
+                response['has_pressed'] = True
 
             if transpile_result.has_turtle:
                 response['has_turtle'] = True

@@ -37,8 +37,8 @@ with open(f'{prefixes_dir}/normal.py', encoding='utf-8') as f:
     NORMAL_PREFIX_CODE = f.read()
 
 # Define code that will be used if a pressed command is used
-with open(f'{prefixes_dir}/pygame.py', encoding='utf-8') as f:
-    PYGAME_PREFIX_CODE = f.read()
+with open(f'{prefixes_dir}/pressed.py', encoding='utf-8') as f:
+    PRESSSED_PREFIX_CODE = f.read()
 
 # Define code that will be used if music code is used
 with open(f'{prefixes_dir}/music.py', encoding='utf-8') as f:

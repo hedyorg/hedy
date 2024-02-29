@@ -5,14 +5,21 @@ var $builtinmodule = function (name) {
         $('#output').text('');
     });
 
-    function keyBoardInputPromise(key, if_body, else_body) {
+    function keyBoardInputPromise(if_pressed_mapping) {
       $('#keybinding-modal').show();
       return new Promise((resolve, reject) => {
         window.addEventListener("keydown", (event) => {
-          if (event.key === key.v){
-            Sk.misceval.callOrSuspend(if_body);
-          } else {
-            Sk.misceval.callOrSuspend(else_body);
+          let pressed_mapped_key = false;
+
+          for (const [key, value] of Object.entries(if_pressed_mapping.entries)) {
+            if (event.key === key){
+              pressed_mapped_key = true;
+              Sk.misceval.callOrSuspend(Sk.globals[value[1].v]);
+            }
+          }
+
+          if (!pressed_mapped_key){
+            Sk.misceval.callOrSuspend(Sk.globals[if_pressed_mapping.entries['else'][1].v]);
           }
 
           $('#keybinding-modal').hide();
@@ -21,9 +28,9 @@ var $builtinmodule = function (name) {
       })
     }
 
-    mod.if_pressed = new Sk.builtin.func(function (key, if_body, else_body) {
+    mod.if_pressed = new Sk.builtin.func(function (if_pressed_mapping) {
         return new Sk.misceval.promiseToSuspension(keyBoardInputPromise(
-            key, if_body, else_body
+            if_pressed_mapping
         ).then(() => Sk.builtin.none.none$));
     });
 

@@ -20812,6 +20812,13 @@ t.pendown()
 t.speed(3)
 t.showturtle()
 `;
+  var pressed_prefix = `# coding=utf8
+
+def if_pressed_default_else():
+    pass
+
+if_pressed_mapping = {"else": "if_pressed_default_else"}
+`;
   var normal_prefix = `# coding=utf8
 
 import random  # noqa F401
@@ -46092,16 +46099,16 @@ notes_mapping = {
   var blockCommands = [
     "ifs",
     "ifelse",
-    "ifpressed_else",
+    "if_pressed_else",
     "repeat",
-    "ifpressed",
+    "if_pressed",
     "elses",
-    "ifpressed_elses",
+    "if_pressed_elses",
     "for_list",
     "for_loop",
     "while_loop",
     "elifs",
-    "ifpressed_elifs"
+    "if_pressed_elifs"
   ];
   var ifRegex = "((__if__) *[^\n ]+ *((__is__)|(__in__)) *[^\n ]+) *.*";
   var repeatRegex = "((__repeat__) *[^\n ]+ *(__times__)) *[^\n ]+ *.+";
@@ -47818,7 +47825,7 @@ notes_mapping = {
       } else {
         program_data = theGlobalDebugger.get_program_data();
       }
-      runPythonProgram(program_data.Code, program_data.source_map, program_data.has_turtle, program_data.has_sleep, program_data.has_clear, program_data.has_music, program_data.Warning, cb2, run_type).catch(function(err) {
+      runPythonProgram(program_data.Code, program_data.source_map, program_data.has_turtle, program_data.has_pressed, program_data.has_sleep, program_data.has_clear, program_data.has_music, program_data.Warning, cb2, run_type).catch(function(err) {
         if (err != null) {
           error.show(ClientMessages["Execute_error"], err.message);
           reportClientError(level3, code, err.message);
@@ -48021,7 +48028,7 @@ notes_mapping = {
       user_agent: navigator.userAgent
     });
   };
-  function runPythonProgram(code, sourceMap, hasTurtle, hasSleep, hasClear, hasMusic, hasWarnings, cb2, run_type) {
+  function runPythonProgram(code, sourceMap, hasTurtle, hasPressed, hasSleep, hasClear, hasMusic, hasWarnings, cb2, run_type) {
     let outputDiv = $("#output");
     let skip_faulty_found_errors = false;
     let warning_box_shown = false;
@@ -48073,6 +48080,9 @@ notes_mapping = {
       code_prefix += turtle_prefix;
       resetTurtleTarget();
       $("#turtlecanvas").show();
+    }
+    if (hasPressed) {
+      code_prefix += pressed_prefix;
     }
     if (hasMusic) {
       code_prefix += music_prefix;

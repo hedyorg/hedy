@@ -2,7 +2,7 @@
 *
 * !!! THIS FILE HAS BEEN GENERATED. DO NOT EDIT !!!
 *
-* Make desired changes to prefixes/{normal,pygame,turtle,music}.py
+* Make desired changes to prefixes/{normal,pressed,turtle,music}.py
 *
 * Add/edit tests for those changes in tests/test_python_prefixes.py
 *
@@ -27,24 +27,13 @@ t.speed(3)
 t.showturtle()
 `;
 
-export const pygame_prefix = 
+export const pressed_prefix = 
 `# coding=utf8
 
-import pygame  # noqa F401
-import buttons  # noqa F401
+def if_pressed_default_else():
+    pass
 
-pygame.init()
-canvas = pygame.display.set_mode((711, 300))
-canvas.fill(pygame.Color(247, 250, 252, 255))
-
-pygame_end = False
-button_list = []
-
-
-def create_button(name):
-    if name not in button_list:
-        button_list.append(name)
-        buttons.add(name)
+if_pressed_mapping = {"else": "if_pressed_default_else"}
 `;
 
 export const normal_prefix = 
