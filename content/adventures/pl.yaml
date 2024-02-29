@@ -1651,27 +1651,21 @@ adventures:
                     Teraz Hedy może odpowiedzieć tylko tak, nie lub może. Czy możesz dać Hedy więcej opcji odpowiedzi, np. 'zdecydowanie' lub 'zapytaj ponownie'.
             4:
                 story_text: |
-                    Ten poziom nie ma żadnych nowych funkcji, ale pozwala poćwiczyć używanie cudzysłowów.
-                    Możesz przerobić swój kod poziomu 3 i pamiętaj o dodaniu cudzysłowów we właściwych miejscach!
+                    ### Exercise
+                    We have removed all the quotation marks from this example code, can you add them in all the right places?
 
-                    Pamiętaj, że na poziomie 3 nie mogliśmy użyć słowa „pytanie” zarówno jako nazwy zmiennej, jak i zwykłego słowa, które można wydrukować.
-                    Umożliwiają to cudzysłowy na poziomie 3!
-
-                    Ważny! Pamiętaj, że teraz, gdy używamy cudzysłowów, Hedy będzie zdezorientowana, gdy użyjesz apostrofu do skrótów typu I'm lub What's.
-                    Pamiętaj, aby usunąć te apostrofy i zmienić pisownię na Im lub Whats.
-
-                    ### Ćwiczenie
-                    Usunęliśmy wszystkie cudzysłowy z tego przykładowego kodu, czy możesz dodać je we wszystkich właściwych miejscach?
+                    ### Exercise 2
+                    Go back to the previous level and copy your fortune teller code. Make the code work in this level by adding quotation marks in the right spots.
                 example_code: |
                     ```
-                    _ Dodaj cudzysłów do tego kodu _
-                    {print} Jestem Hedy - wróżka!
-                    pytanie {is} {ask} Co chcesz wiedzieć?
-                    {print} To jest twoje pytanie: pytanie
-                    odpowiedzi {is} tak, nie, może
-                    {print} Moja kryształowa kula mówi...
+                    _ Add the quotation marks to this code _
+                    {print} Im Hedy the fortune teller!
+                    question {is} {ask} What do you want to know?
+                    {print} This is your question:  question
+                    answers {is} yes, no, maybe
+                    {print} My crystal ball says...
                     {sleep} 2
-                    {print} odpowiedzi {at} {random}
+                    {print} answers {at} {random}
                     ```
             5:
                 story_text: |
