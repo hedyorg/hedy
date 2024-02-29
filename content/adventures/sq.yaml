@@ -3195,6 +3195,8 @@ adventures:
             1:
                 story_text: |
                     Në nivelin 1 ju mund të bëni restorantin tuaj virtual dhe të merrni porosi nga klientët.
+                story_text_2: |
+                    A mendoni rreshta tjerë që mund të shtoni në kodin e restorantit? Si për shembull, a mund ta {ask}(pyesni) klientit se çfarë do të pijë, tregojuni çmimin, ose uroj atyre një vakt të këndshëm?
                 example_code_2: |
                     ```
                     {print} Mirë se erdhët në Restorantin e Hedy-it🍟
@@ -3203,8 +3205,6 @@ adventures:
                     {print} Faleminderit për porosinë tuaj!
                     {print} Është duke u bërë!
                     ```
-                story_text_2: |
-                    A mendoni rreshta tjerë që mund të shtoni në kodin e restorantit? Si për shembull, a mund ta {ask}(pyesni) klientit se çfarë do të pijë, tregojuni çmimin, ose uroj atyre një vakt të këndshëm?
             2:
                 story_text: |
                     Në nivelin 2 mund ta zmadhoni kodin e restorantin duke përdorur variabla. Në nivelin 1 Hedy vetëm mund të përdorte komandën {echo} dhe të shfaq porosinë një herë dhe vetëm e mban mend porosinë e fundit.
@@ -4218,15 +4218,14 @@ adventures:
                     Duke përdorur komandën `{forward}` ju vizatoni një vijë përpara. Numri pas komandës përcakton sa larg do të ecë breshka. `{turn} {right}` kthen një çerek drejt akrepave të orës, `{turn} {left}` kthen kundër akrepave të orës.
 
                     Nëse do të shkosh mbrapa, duhet ta përdorni komandën `{forward}` por me numër negativ. Si për shembull `{forward} -100`
-
-                story_text_2: |
-                    ### Sfidë
-                    Ky është fillimi e një shkalle të vogël. A mund ta bëni të ketë 5 hapa?
                 example_code: |
                     ```
                     {forward} 100
                     {turn} {left}
                     ```
+                story_text_2: |
+                    ### Sfidë
+                    Ky është fillimi e një shkalle të vogël. A mund ta bëni të ketë 5 hapa?
                 example_code_2: |
                     ```
                     {forward} 20

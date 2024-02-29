@@ -3281,6 +3281,13 @@ adventures:
             1:
                 story_text: |
                     레벨 1에서는 가상의 식당을 직접 만들어 손님들의 주문을 받아볼 수 있다.
+                story_text_2: |
+                    ### 연습문제
+                    노란색 버튼을 클릭하여 예제 코드를 입력 화면에 복사합니다.
+                    먼저 빈칸에 정확한 명령어를 입력하여 코드가 제대로 작동하도록 합니다.
+                    그러면 식당 프로그램에 최소 4줄의 코드를 추가해주세요.
+                    고객에게 무엇을 마시고 싶은지 물어보고 현금이나 카드로 지불하고 싶은지 물어봅니다.
+                    마지막으로 고객과 작별할 수 있는 좋은 방법을 생각해 보세요.
                 example_code_2: |
                     ```
                     {print} Welcome to Hedy's restaurant 🍟
@@ -3289,13 +3296,6 @@ adventures:
                     {print} Thank you for your order!
                     {print} It's on its way!
                     ```
-                story_text_2: |
-                    ### 연습문제
-                    노란색 버튼을 클릭하여 예제 코드를 입력 화면에 복사합니다.
-                    먼저 빈칸에 정확한 명령어를 입력하여 코드가 제대로 작동하도록 합니다.
-                    그러면 식당 프로그램에 최소 4줄의 코드를 추가해주세요.
-                    고객에게 무엇을 마시고 싶은지 물어보고 현금이나 카드로 지불하고 싶은지 물어봅니다.
-                    마지막으로 고객과 작별할 수 있는 좋은 방법을 생각해 보세요.
             2:
                 story_text: |
                     In level 2 you could expand your restaurant by using variables. In level 1 Hedy could only `{echo}` the order once and only remember the last thing that was ordered.
@@ -4267,15 +4267,14 @@ adventures:
                     `{forward}`을 사용하면 앞으로 선을 그립니다. 뒤에 있는 숫자에 따라 거북이가 걸어갈 거리가 결정됩니다.`{turn} {right}`는 시계 방향으로 1/4회전, `{turn} {left}`는 시계 반대 방향으로 회전합니다.
 
                     뒤로 가려면 `{forward}` 명령을 사용하지만 음수가 됩니다. 따라서 예를 들어 `{forward} -100`
-
-                story_text_2: |
-                    ### 연습문제
-                    작은 시작 단계입니다. 계단을 5개로 만들 수 있나요?
                 example_code: |
                     ```
                     {forward} 100
                     {turn} {left}
                     ```
+                story_text_2: |
+                    ### 연습문제
+                    작은 시작 단계입니다. 계단을 5개로 만들 수 있나요?
                 example_code_2: |
                     ```
                     {forward} 20

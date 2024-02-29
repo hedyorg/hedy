@@ -3128,7 +3128,6 @@ adventures:
             1:
                 story_text: |
                     Na poziomie 1 możesz stworzyć swoją własną wirtualną restaurację i przyjmować zamówienia gości.
-                example_code_2: "``` \n{print} Witaj w restauracji Hedy \U0001F35F\n_ Co chcesz zamówić?\n {echo} A więc chcesz zamówić\n{print} Dziękuje za zamówienie!\n{print} Zaraz podamy!\n```\n"
                 story_text_2: |
                     ### Ćwiczenie
                     Skopiuj przykładowy kod na ekran wejściowy, klikając żółty przycisk.
@@ -3136,6 +3135,7 @@ adventures:
                     Następnie dodaj co najmniej 4 kolejne linie kodu do programu restauracji.
                     Zapytaj klienta, co chciałby wypić i czy chce zapłacić gotówką, czy kartą.
                     Na koniec wymyśl jakiś miły sposób pożegnania się z klientem.
+                example_code_2: "``` \n{print} Witaj w restauracji Hedy \U0001F35F\n_ Co chcesz zamówić?\n {echo} A więc chcesz zamówić\n{print} Dziękuje za zamówienie!\n{print} Zaraz podamy!\n```\n"
             2:
                 story_text: |
                     Na poziomie 2 możesz rozbudować swoją restaurację za pomocą zmiennych. Na poziomie 1 Hedy mogła wyświetlić {echo} zamówienie tylko raz i pamiętała tylko ostatnią zamówioną rzecz.
@@ -4043,15 +4043,14 @@ adventures:
                     Pisząć `{forward}` możesz narysować linie. Liczba zaraz po komendzie mówi o tym ile ma przejść żółw rysując linie..`{turn} {right}` obraca żółwia o ćwierć obrotu w prawo (zgodnie z ruchem wskazówek zegara), `{turn} {left}` obraca w lewo (przeciwnie do ruchu wskazówek zegara).
 
                     Jeśli chcesz przesunąć żółwia do tył, możesz wykorzystać komendę `{forward}` ale z ujemną liczba. Na przykład `{forward} -100`
-
-                story_text_2: |
-                    ### Ćwiczenie
-                    To jest początek schodków. Możesz sprawić aby miały 5 stopni?
                 example_code: |
                     ```
                     {forward} 100
                     {turn} {left}
                     ```
+                story_text_2: |
+                    ### Ćwiczenie
+                    To jest początek schodków. Możesz sprawić aby miały 5 stopni?
                 example_code_2: |
                     ```
                     {forward} 20

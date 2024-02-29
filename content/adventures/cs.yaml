@@ -3218,6 +3218,8 @@ adventures:
             1:
                 story_text: |
                     V levelu 1 si můžete vytvořit svou vlastní virtuální restauraci a přijímat objednávky svých hostů..
+                story_text_2: |
+                    Napadá vás více řádků, které můžete přidat do kódu restaurace? Můžete se například hostů {ask}, co by si přáli k pití, říct jim cenu nebo jim popřát dobrou chuť?
                 example_code_2: |
                     ```
                     {print} Vítejte v restauraci Hedy 🍟
@@ -3226,8 +3228,6 @@ adventures:
                     {print} Děkujeme za Vaši objednávku!
                     {print} Je to na cestě!
                     ```
-                story_text_2: |
-                    Napadá vás více řádků, které můžete přidat do kódu restaurace? Můžete se například hostů {ask}, co by si přáli k pití, říct jim cenu nebo jim popřát dobrou chuť?
             2:
                 story_text: |
                     In level 2 you could expand your restaurant by using variables. In level 1 Hedy could only {echo} the order once and only remember the last thing that was ordered.
@@ -4250,14 +4250,14 @@ adventures:
                     V úrovni 1 můžete také použít Hedy ke kreslení. Kombinací zatáček a linií můžete vytvořit čtverec nebo schod!
 
                     Pomocí `{forward}` nakreslíte čáru vpřed. Číslo za ním určuje, jak daleko želva dojde. `{turn} vpravo` se otočí o čtvrt otáčky ve směru hodinových ručiček, `{turn} left` otočí proti směru hodinových ručiček.
-                story_text_2: |
-                    ### Exercise
-                    Toto je začátek malého schodiště. Dokážete udělat 5 kroků?
                 example_code: |
                     ```
                     {forward} 100
                     {turn} {left}
                     ```
+                story_text_2: |
+                    ### Exercise
+                    Toto je začátek malého schodiště. Dokážete udělat 5 kroků?
                 example_code_2: |
                     ```
                     {forward} 20
