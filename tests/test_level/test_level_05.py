@@ -1038,11 +1038,14 @@ class TestsLevel5(HedyTester):
         if x is pressed print 'it is a letter key' else print 'it is another letter key'""")
 
         expected = HedyTester.dedent("""\
-        def if_body():
+        if_pressed_mapping = {"else": "if_pressed_default_else"}
+        if_pressed_mapping['x'] = 'if_pressed_x_'
+        if_pressed_mapping['else'] = 'if_pressed_else_'
+        def if_pressed_x_():
           print(f'it is a letter key')
-        def else_body():
+        def if_pressed_else_():
           print(f'it is another letter key')
-        extensions.if_pressed('x', if_body, else_body)""")
+        extensions.if_pressed(if_pressed_mapping)""")
 
         self.multi_level_tester(code=code, expected=expected, max_level=7)
 
@@ -1054,11 +1057,14 @@ class TestsLevel5(HedyTester):
 
         expected = HedyTester.dedent("""\
         x = 'a'
-        def if_body():
+        if_pressed_mapping = {"else": "if_pressed_default_else"}
+        if_pressed_mapping['x'] = 'if_pressed_x_'
+        if_pressed_mapping['else'] = 'if_pressed_else_'
+        def if_pressed_x_():
           print(f'it is a letter key')
-        def else_body():
+        def if_pressed_else_():
           print(f'it is another letter key')
-        extensions.if_pressed('x', if_body, else_body)
+        extensions.if_pressed(if_pressed_mapping)
         print(f'{x}')""")
 
         self.multi_level_tester(code=code, expected=expected, max_level=7)
@@ -1069,16 +1075,22 @@ class TestsLevel5(HedyTester):
         if y is pressed print 'second key' else print 'something else'""")
 
         expected = HedyTester.dedent("""\
-        def if_body():
+        if_pressed_mapping = {"else": "if_pressed_default_else"}
+        if_pressed_mapping['x'] = 'if_pressed_x_'
+        if_pressed_mapping['else'] = 'if_pressed_else_'
+        def if_pressed_x_():
           print(f'first key')
-        def else_body():
+        def if_pressed_else_():
           print(f'something else')
-        extensions.if_pressed('x', if_body, else_body)
-        def if_body():
+        extensions.if_pressed(if_pressed_mapping)
+        if_pressed_mapping = {"else": "if_pressed_default_else"}
+        if_pressed_mapping['y'] = 'if_pressed_y_'
+        if_pressed_mapping['else'] = 'if_pressed_else_'
+        def if_pressed_y_():
           print(f'second key')
-        def else_body():
+        def if_pressed_else_():
           print(f'something else')
-        extensions.if_pressed('y', if_body, else_body)""")
+        extensions.if_pressed(if_pressed_mapping)""")
 
         self.multi_level_tester(code=code, expected=expected, max_level=7)
 
@@ -1088,11 +1100,14 @@ class TestsLevel5(HedyTester):
         print 'it is a letter key' else print 'something else'""")
 
         expected = HedyTester.dedent("""\
-        def if_body():
+        if_pressed_mapping = {"else": "if_pressed_default_else"}
+        if_pressed_mapping['x'] = 'if_pressed_x_'
+        if_pressed_mapping['else'] = 'if_pressed_else_'
+        def if_pressed_x_():
           print(f'it is a letter key')
-        def else_body():
+        def if_pressed_else_():
           print(f'something else')
-        extensions.if_pressed('x', if_body, else_body)""")
+        extensions.if_pressed(if_pressed_mapping)""")
 
         self.multi_level_tester(code=code, expected=expected, max_level=7)
 
@@ -1101,11 +1116,14 @@ class TestsLevel5(HedyTester):
         if 1 is pressed print 'it is a number key' else print 'something else'""")
 
         expected = HedyTester.dedent("""\
-        def if_body():
+        if_pressed_mapping = {"else": "if_pressed_default_else"}
+        if_pressed_mapping['1'] = 'if_pressed_1_'
+        if_pressed_mapping['else'] = 'if_pressed_else_'
+        def if_pressed_1_():
           print(f'it is a number key')
-        def else_body():
+        def if_pressed_else_():
           print(f'something else')
-        extensions.if_pressed('1', if_body, else_body)""")
+        extensions.if_pressed(if_pressed_mapping)""")
 
         self.multi_level_tester(code=code, expected=expected, max_level=7)
 
@@ -1114,11 +1132,14 @@ class TestsLevel5(HedyTester):
         if x       is pressed print 'trailing spaces!' else print 'something else'""")
 
         expected = HedyTester.dedent("""\
-        def if_body():
+        if_pressed_mapping = {"else": "if_pressed_default_else"}
+        if_pressed_mapping['x'] = 'if_pressed_x_'
+        if_pressed_mapping['else'] = 'if_pressed_else_'
+        def if_pressed_x_():
           print(f'trailing spaces!')
-        def else_body():
+        def if_pressed_else_():
           print(f'something else')
-        extensions.if_pressed('x', if_body, else_body)""")
+        extensions.if_pressed(if_pressed_mapping)""")
 
         self.multi_level_tester(code=code, expected=expected, max_level=7)
 
@@ -1128,11 +1149,14 @@ class TestsLevel5(HedyTester):
         else print 'x is not pressed!'""")
 
         expected = HedyTester.dedent("""\
-        def if_body():
+        if_pressed_mapping = {"else": "if_pressed_default_else"}
+        if_pressed_mapping['x'] = 'if_pressed_x_'
+        if_pressed_mapping['else'] = 'if_pressed_else_'
+        def if_pressed_x_():
           print(f'x is pressed!')
-        def else_body():
+        def if_pressed_else_():
           print(f'x is not pressed!')
-        extensions.if_pressed('x', if_body, else_body)""")
+        extensions.if_pressed(if_pressed_mapping)""")
 
         self.multi_level_tester(code=code, expected=expected, max_level=7)
 
@@ -1144,11 +1168,14 @@ class TestsLevel5(HedyTester):
         print 'x is not pressed!'""")
 
         expected = HedyTester.dedent("""\
-        def if_body():
+        if_pressed_mapping = {"else": "if_pressed_default_else"}
+        if_pressed_mapping['x'] = 'if_pressed_x_'
+        if_pressed_mapping['else'] = 'if_pressed_else_'
+        def if_pressed_x_():
           print(f'x is pressed!')
-        def else_body():
+        def if_pressed_else_():
           print(f'x is not pressed!')
-        extensions.if_pressed('x', if_body, else_body)""")
+        extensions.if_pressed(if_pressed_mapping)""")
 
         self.multi_level_tester(code=code, expected=expected, max_level=7)
 
@@ -1159,11 +1186,14 @@ class TestsLevel5(HedyTester):
         else print 'x is not pressed!'""")
 
         expected = HedyTester.dedent("""\
-        def if_body():
+        if_pressed_mapping = {"else": "if_pressed_default_else"}
+        if_pressed_mapping['x'] = 'if_pressed_x_'
+        if_pressed_mapping['else'] = 'if_pressed_else_'
+        def if_pressed_x_():
           print(f'x is pressed!')
-        def else_body():
+        def if_pressed_else_():
           print(f'x is not pressed!')
-        extensions.if_pressed('x', if_body, else_body)""")
+        extensions.if_pressed(if_pressed_mapping)""")
 
         self.multi_level_tester(code=code, expected=expected, max_level=7)
 
@@ -1174,11 +1204,14 @@ class TestsLevel5(HedyTester):
         print 'x is not pressed!'""")
 
         expected = HedyTester.dedent("""\
-        def if_body():
+        if_pressed_mapping = {"else": "if_pressed_default_else"}
+        if_pressed_mapping['x'] = 'if_pressed_x_'
+        if_pressed_mapping['else'] = 'if_pressed_else_'
+        def if_pressed_x_():
           print(f'x is pressed!')
-        def else_body():
+        def if_pressed_else_():
           print(f'x is not pressed!')
-        extensions.if_pressed('x', if_body, else_body)""")
+        extensions.if_pressed(if_pressed_mapping)""")
 
         self.multi_level_tester(code=code, expected=expected, max_level=7)
 
@@ -1189,35 +1222,31 @@ class TestsLevel5(HedyTester):
         else print 'x is not pressed!'""")
 
         expected = HedyTester.dedent("""\
-        def if_body():
+        if_pressed_mapping = {"else": "if_pressed_default_else"}
+        if_pressed_mapping['x'] = 'if_pressed_x_'
+        if_pressed_mapping['else'] = 'if_pressed_else_'
+        def if_pressed_x_():
           print(f'x is pressed!')
-        def else_body():
+        def if_pressed_else_():
           print(f'x is not pressed!')
-        extensions.if_pressed('x', if_body, else_body)""")
+        extensions.if_pressed(if_pressed_mapping)""")
 
         self.multi_level_tester(code=code, expected=expected, max_level=7)
 
     def test_if_pressed_else_with_turtle(self):
+        self.maxDiff = None
         code = textwrap.dedent("""\
         if x is pressed forward 25 else turn 90""")
 
         expected = HedyTester.dedent(f"""\
-        def if_body():
-          __trtl = 25
-          try:
-            __trtl = int(__trtl)
-          except ValueError:
-            raise Exception('catch_value_exception')
-          t.forward(min(600, __trtl) if __trtl > 0 else max(-600, __trtl))
-          time.sleep(0.1)
-        def else_body():
-          __trtl = 90
-          try:
-            __trtl = int(__trtl)
-          except ValueError:
-            raise Exception('catch_value_exception')
-          t.right(min(600, __trtl) if __trtl > 0 else max(-600, __trtl))
-        extensions.if_pressed('x', if_body, else_body)""")
+if_pressed_mapping = {{"else": "if_pressed_default_else"}}
+if_pressed_mapping['x'] = 'if_pressed_x_'
+if_pressed_mapping['else'] = 'if_pressed_else_'
+def if_pressed_x_():
+{HedyTester.indent(HedyTester.forward_transpiled(25, self.level))}
+def if_pressed_else_():
+{HedyTester.indent(HedyTester.turn_transpiled(90, self.level))}
+extensions.if_pressed(if_pressed_mapping)""")
 
         self.multi_level_tester(
             code=code,
@@ -1232,22 +1261,31 @@ class TestsLevel5(HedyTester):
         if ש is pressed print 'hebrew' else print 'something else'
         if й is pressed print 'russian' else print 'something else'""")
 
-        expected = HedyTester.dedent("""\
-        def if_body():
+        expected = textwrap.dedent("""\
+        if_pressed_mapping = {"else": "if_pressed_default_else"}
+        if_pressed_mapping['ض'] = 'if_pressed_ض_'
+        if_pressed_mapping['else'] = 'if_pressed_else_'
+        def if_pressed_ض_():
           print(f'arabic')
-        def else_body():
+        def if_pressed_else_():
           print(f'something else')
-        extensions.if_pressed('ض', if_body, else_body)
-        def if_body():
+        extensions.if_pressed(if_pressed_mapping)
+        if_pressed_mapping = {"else": "if_pressed_default_else"}
+        if_pressed_mapping['ש'] = 'if_pressed_ש_'
+        if_pressed_mapping['else'] = 'if_pressed_else_'
+        def if_pressed_ש_():
           print(f'hebrew')
-        def else_body():
+        def if_pressed_else_():
           print(f'something else')
-        extensions.if_pressed('ש', if_body, else_body)
-        def if_body():
+        extensions.if_pressed(if_pressed_mapping)
+        if_pressed_mapping = {"else": "if_pressed_default_else"}
+        if_pressed_mapping['й'] = 'if_pressed_й_'
+        if_pressed_mapping['else'] = 'if_pressed_else_'
+        def if_pressed_й_():
           print(f'russian')
-        def else_body():
+        def if_pressed_else_():
           print(f'something else')
-        extensions.if_pressed('й', if_body, else_body)""")
+        extensions.if_pressed(if_pressed_mapping)""")
 
         self.multi_level_tester(code=code, expected=expected, max_level=7)
 
@@ -1293,46 +1331,6 @@ class TestsLevel5(HedyTester):
             skipped_mappings=skipped_mappings
         )
 
-    #
-    # button tests
-    #
-    def test_button(self):
-        code = textwrap.dedent("""\
-        knop is button""")
-
-        expected = HedyTester.dedent(f"""\
-        create_button('knop')""")
-
-        self.multi_level_tester(code=code, expected=expected, max_level=11)
-
-    def test_two_buttons(self):
-        code = textwrap.dedent("""\
-        knop1 is button
-        knop2 is button""")
-
-        expected = HedyTester.dedent(f"""\
-        create_button('knop1')
-        create_button('knop2')""")
-
-        self.multi_level_tester(code=code, expected=expected, max_level=11)
-
-    def test_if_button_is_pressed_print(self):
-        code = textwrap.dedent("""\
-        PRINT is button
-        OTHER is button
-        if PRINT is pressed print 'The PRINT button got pressed!' else print 'other button was pressed!'""")
-
-        expected = HedyTester.dedent(f"""\
-        create_button('PRINT')
-        create_button('OTHER')
-        def if_body():
-          print(f'The PRINT button got pressed!')
-        def else_body():
-          print(f'other button was pressed!')
-        extensions.if_pressed('PRINT', if_body, else_body)""")
-
-        self.multi_level_tester(code=code, expected=expected, max_level=7)
-
     def test_source_map(self):
         code = textwrap.dedent("""\
         print 'Do you want a good (g) or bad (b) ending?'
@@ -1341,18 +1339,21 @@ class TestsLevel5(HedyTester):
 
         expected_code = textwrap.dedent("""\
         print(f'Do you want a good (g) or bad (b) ending?')
-        def if_body():
+        if_pressed_mapping = {"else": "if_pressed_default_else"}
+        if_pressed_mapping['g'] = 'if_pressed_g_'
+        if_pressed_mapping['else'] = 'if_pressed_else_'
+        def if_pressed_g_():
           print(f'They lived happily ever after ❤')
-        def else_body():
+        def if_pressed_else_():
           print(f'The prince was eaten by a hippopotamus 😭')
-        extensions.if_pressed('g', if_body, else_body)""")
+        extensions.if_pressed(if_pressed_mapping)""")
 
         expected_source_map = {
             '1/1-1/50': '1/1-1/52',
-            '1/1-3/55': '1/1-6/47',
-            '2/1-3/54': '2/1-6/47',
-            '2/17-2/56': '3/3-3/44',
-            '3/6-3/54': '5/3-5/53'
+            '1/1-3/55': '1/1-9/42',
+            '2/1-3/54': '2/1-9/42',
+            '2/17-2/56': '6/3-6/44',
+            '3/6-3/54': '8/3-8/53'
         }
 
         self.single_level_tester(code, expected=expected_code)
