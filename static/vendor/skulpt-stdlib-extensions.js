@@ -12,7 +12,7 @@ var $builtinmodule = function (name) {
           let pressed_mapped_key = false;
 
           for (const [key, value] of Object.entries(if_pressed_mapping.entries)) {
-            if (event.key === key){
+            if (event.key === value[0].v){
               pressed_mapped_key = true;
               Sk.misceval.callOrSuspend(Sk.globals[value[1].v]);
             }
