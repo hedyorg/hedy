@@ -867,21 +867,6 @@ adventures:
                     {print} 'Todo hecho! ¡Serán ' precio '€ por favor!'
                     {print} '¡Gracias! ¡Adiós!'
                     ```
-
-                            {print} Serán 25€'
-                            precio = 25
-                        {else}
-                            {print} Serán 18€'
-                            precio = 18
-                    color = {ask} ¿Qué color quieres?
-                    purpurina = {ask} '¿Quieres algo de purpurina con esto?'
-                    {if} purpurina {is} sí
-                        {print} 'Son 3€ extra por la purpurina'
-                    precio = precio + 3
-                    {else} {print} 'No purpurina' {print} 'No cobramos extra'
-                    {sleep} 5
-                    {print} 'Todo hecho! ¡Serán ' precio '€ por favor!'
-                    {print} '¡Gracias! ¡Adiós!'
             9:
                 story_text: |-
                     ### Ejercicio

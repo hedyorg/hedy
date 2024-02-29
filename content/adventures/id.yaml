@@ -860,21 +860,7 @@ adventures:
                     {sleep} 5
                     {print} 'Semua selesai! Harganya $' harga ' tolong!'
                     {print} 'Terima kasih! Selamat tinggal!'
-
-                            {print} Harganya $25'
-                            harga = 25
-                        {else}
-                            {print} Harganya $18'
-                            harga = 18
-                    warna = {ask} Kamu mau warna apa?
-                    berkilau = {ask} 'Apakah Anda ingin kilauan dengan itu?'
-                    {if} berkilau {is} ya
-                        {print} 'Kami mengenakan biaya tambahan $3 untuk itu'
-                    harga = harga + 3
-                    {else} {print} 'Tanpa kilauan' {print} 'Jadi tanpa biaya tambahan'
-                    {sleep} 5
-                    {print} 'Selesai! Itu akan menjadi $' harga ' tolong!'
-                    {print} 'Terima kasih! Sampai jumpa!'
+                    ```
             9:
                 story_text: |-
                     ### Latihan
