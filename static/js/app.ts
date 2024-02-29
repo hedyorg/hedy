@@ -12,7 +12,7 @@ import { checkNow, onElementBecomesVisible } from './browser-helpers/on-element-
 import { incrementDebugLine, initializeDebugger, load_variables, startDebug } from './debugging';
 import { localDelete, localLoad, localSave } from './local';
 import { initializeLoginLinks } from './auth';
-import { postJson } from './comm';
+import { postJson, postNoResponse } from './comm';
 import { LocalSaveWarning } from './local-save-warning';
 import { HedyEditor, EditorType } from './editor';
 import { stopDebug } from "./debugging";
@@ -1954,7 +1954,7 @@ function initializeShareProgramButtons() {
         if (!saveInfo) {
           throw new Error('This program does not have an id');
         }
-        postJson(`/programs/share/${saveInfo.id}`, {})
+        await postNoResponse(`/programs/share/${saveInfo.id}`, {})
       });
     }
   })
