@@ -411,3 +411,60 @@ def find_prev_next_levels(level_list, target_level):
     next_level = sorted_levels[index + 1] if index < len(sorted_levels) - 1 else None
 
     return prev_level, next_level
+
+
+def preserve_html_tags(content):
+    """
+    Transforms HTML tags in the content.
+    """
+    # Define patterns to match target tags
+    tag_pattern = r"&lt;(?P<tag_name>[^>]+)(?P<attributes>.*?)&gt;(?P<inner_content>.*?)&lt;/(?P=tag_name)&gt;"
+
+    def replace(match):
+        tag_name = match.group("tag_name")
+        attributes = match.group("attributes")
+        inner_content = match.group("inner_content")
+        return f"<{tag_name}{attributes}>{inner_content}</{tag_name}>"
+
+    return re.sub(tag_pattern, replace, content, flags=re.DOTALL)
+
+
+def transform_encoded_tags_secure(content):
+    """
+    Transforms encoded HTML tags in adventure content, removing any script tags.
+    This is an extra step on top of the DOMPurify when saving an adventure.
+    """
+
+    def pre_process(content):
+        # Remove script tags and their content using regular expression
+        script_pattern = r"<script(?:\s[^>]*?)?>(?P<content>.*?)</script>"
+        return re.sub(script_pattern, "", content, flags=re.DOTALL)
+
+    # Pre-process the input to remove scripts
+    processed_content = pre_process(content)
+
+    transformed_content = preserve_html_tags(processed_content)
+
+    return transformed_content
+
+
+def prepare_content_for_ckeditor(content):
+    """
+    Adds code tags to pre blocks that don't have them, reserving existing attributes as well.
+    """
+    pattern = r"<pre(?P<attributes>.*?)>(?P<inner_content>.*?)</pre>"
+
+    def replace(match):
+        attributes = match.group("attributes")
+        inner_content = match.group("inner_content").strip()  # Strip leading/trailing whitespaces
+        if not inner_content.startswith("<code>"):
+            inner_content = f"<code>{inner_content}</code>"
+        return f"<pre{attributes}>{inner_content}</pre>"
+
+    content = transform_encoded_tags_secure(content)
+    content = re.sub(pattern, replace, content, flags=re.DOTALL)
+    # Add "<p>&nbsp;</p>" (an extra line) if not exists
+    if len(content) and not content.endswith("<p>&nbsp;</p>"):
+        content += "<p>&nbsp;</p>"
+
+    return content

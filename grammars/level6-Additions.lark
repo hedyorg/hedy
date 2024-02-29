@@ -8,6 +8,8 @@ _if_less_command: print | turtle | play | add | remove | sleep | error_print_no_
 //splitting  these commands into two rules, one for equals and one for is so they can be properly handled in the translator
 ask: var (_IS | _EQUALS) _ASK (_print_argument)?
 
+play: _PLAY (list_access | expression | textwithoutspaces)
+
 equality_check: (textwithoutspaces | INT) (_IS | _EQUALS) (quoted_text| textwithoutspaces | INT)
 
 condition:+=  in_list_check | not_in_list_check | equality_check

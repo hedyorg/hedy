@@ -35,7 +35,7 @@ ListAccess { Text at+ (random+ | Text | Number) }
 Add { add+ (Expression ) toList+ Text }
 Remove { remove+ (Expression ) from+ Text }
 Clear { clear+ }
-Play { play+ Text+ }
+Play { play+ (ListAccess | Expression) }
 
 Turtle[@isGroup=turtle] {
     Forward { forward+ (Expression | ListAccess ) } |

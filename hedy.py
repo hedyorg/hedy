@@ -1264,6 +1264,9 @@ class IsValid(Filter):
     def error_for_missing_command(self, meta, args):
         raise exceptions.IncompleteCommandException(incomplete_command='for', level=self.level, line_number=meta.line)
 
+    def error_assign_list_missing_brackets(self, meta, args):
+        raise exceptions.MissingBracketsException(level=self.level, line_number=meta.line)
+
     def error_nested_define(self, meta, args):
         raise exceptions.NestedFunctionException()
 
@@ -1639,9 +1642,10 @@ class ConvertToPython_1(ConvertToPython):
     def make_play_var(self, note, meta):
         exception_text = translate_value_error('play', note, 'note')
         self.check_var_usage([note], meta.line)
+        chosen_note = note.children[0] if isinstance(note, Tree) else note
 
         return textwrap.dedent(f"""\
-                chosen_note = str({note}).upper()
+                chosen_note = str({chosen_note}).upper()
                 if chosen_note not in notes_mapping.keys() and chosen_note not in notes_mapping.values():
                     raise Exception({exception_text})
                 play(notes_mapping.get(chosen_note, chosen_note))
@@ -1805,9 +1809,10 @@ class ConvertToPython_2(ConvertToPython_1):
         # if not an int, then it is a variable
 
         note = args[0]
-        uppercase_note = note.upper()
-        if uppercase_note in list(notes_mapping.values()) + list(notes_mapping.keys()):  # this is a supported note
-            return self.make_play(uppercase_note, meta)
+        if isinstance(note, str):
+            uppercase_note = note.upper()
+            if uppercase_note in list(notes_mapping.values()) + list(notes_mapping.keys()):  # this is a supported note
+                return self.make_play(uppercase_note, meta)
 
         # no note? it must be a variable!
         self.add_variable_access_location(note, meta.line)
@@ -2673,7 +2678,8 @@ def merge_grammars(grammar_text_1, grammar_text_2):
     # rules that are new in the second file are added (remaining_rules_grammar_2)
     merged_grammar = []
 
-    deletables = []   # this list collects rules we no longer need,
+    deletables = []
+    # this list collects rules we no longer need,
     # they will be removed when we encounter them
 
     rules_grammar_1 = grammar_text_1.split('\n')
@@ -2707,8 +2713,7 @@ def merge_grammars(grammar_text_1, grammar_text_2):
                 if definition_1.strip() == definition_2.strip():
                     warn_message = f"The rule {name_1} is duplicated: {definition_1} and {definition_2}. Please check!"
                     warnings.warn(warn_message)
-                # Used to compute the rules that use the merge operators in the grammar
-                # namely +=, -= and >
+                # Used to compute the rules that use the merge operators in the grammar, namely +=, -= and >>
                 new_rule, new_deletables = merge_rules_operator(definition_1, definition_2, name_1, line_2_processed)
                 if new_deletables:
                     deletables += new_deletables
@@ -2733,51 +2738,53 @@ def merge_grammars(grammar_text_1, grammar_text_2):
     return '\n'.join(rules_to_keep)
 
 
+ADD_GRAMMAR_MERGE_OP = '+='
+REMOVE_GRAMMAR_MERGE_OP = '-='
+LAST_GRAMMAR_MERGE_OP = '>>'
+GRAMMAR_MERGE_OPERATORS = [ADD_GRAMMAR_MERGE_OP, REMOVE_GRAMMAR_MERGE_OP, LAST_GRAMMAR_MERGE_OP]
+
+
 def merge_rules_operator(prev_definition, new_definition, name, complete_line):
-    # Check if the rule is adding or substracting new rules
-    has_add_op = new_definition.startswith('+=')
-    has_remove_op = has_add_op and '-=' in new_definition
-    has_last_op = has_add_op and '>' in new_definition
-    deletables = None
-    if has_remove_op:
-        # Get the rules we need to substract
-        part_list = new_definition.split('-=')
-        add_list, commands_after_minus = (part_list[0], part_list[1]) if has_remove_op else (part_list[0], '')
-        add_list = add_list[3:]
+    op_to_arg = get_operator_to_argument(new_definition)
 
-        # Get the rules that need to be last
-        split_on_greater_than = commands_after_minus.split('>')
-        commands_to_be_removed, last_list = (
-            split_on_greater_than[0], split_on_greater_than[1]) if has_last_op else (split_on_greater_than[0], '')
-        commands_after_minus = commands_to_be_removed + '|' + last_list
-        result_cmd_list = get_remaining_rules(prev_definition, commands_after_minus)
-        deletables = commands_to_be_removed.strip().split('|')
-    elif has_add_op:
-        # Get the rules that need to be last
-        part_list = new_definition.split('>')
-        add_list, commands_after_minus = (part_list[0], part_list[1]) if has_last_op else (part_list[0], '')
-        add_list = add_list[3:]
-        last_list = commands_after_minus
-        result_cmd_list = get_remaining_rules(prev_definition, commands_after_minus)
-    else:
-        result_cmd_list = prev_definition
+    add_arg = op_to_arg.get(ADD_GRAMMAR_MERGE_OP, '')
+    remove_arg = op_to_arg.get(REMOVE_GRAMMAR_MERGE_OP, '')
+    last_arg = op_to_arg.get(LAST_GRAMMAR_MERGE_OP, '')
+    remaining_commands = get_remaining_rules(prev_definition, remove_arg, last_arg)
+    ordered_commands = split_rule(remaining_commands, add_arg, last_arg)
 
-    if has_last_op:
-        new_rule = f"{name}: {result_cmd_list} | {add_list} | {last_list}"
-    elif has_add_op:
-        new_rule = f"{name}: {result_cmd_list} | {add_list}"
-    else:
-        new_rule = complete_line
-
-    return new_rule, deletables
+    new_rule = f"{name}: {' | '.join(ordered_commands)}" if bool(op_to_arg) else complete_line
+    deletable = split_rule(remove_arg)
+    return new_rule, deletable
 
 
-def get_remaining_rules(orig_def, sub_def):
-    original_commands = [command.strip() for command in orig_def.split('|')]
-    commands_after_minus = [command.strip() for command in sub_def.split('|')]
+def get_operator_to_argument(definition):
+    # Creates a map of all used operators and their respective arguments e.g. {'+=': 'print | play', '>>': 'echo'}
+    operator_to_index = [(op, definition.find(op)) for op in GRAMMAR_MERGE_OPERATORS if op in definition]
+    result = {}
+    for i, (op, index) in enumerate(operator_to_index):
+        start_index = index + len(op)
+        if i + 1 < len(operator_to_index):
+            _, next_index = operator_to_index[i + 1]
+            result[op] = definition[start_index:next_index].strip()
+        else:
+            result[op] = definition[start_index:].strip()
+    return result
+
+
+def get_remaining_rules(orig_def, *sub_def):
+    original_commands = split_rule(orig_def)
+    commands_after_minus = split_rule(*sub_def)
+    misses = [c for c in commands_after_minus if c not in original_commands]
+    if misses:
+        raise Exception(f"Command(s) {'|'.join(misses)} do not exist in the previous definition")
     remaining_commands = [cmd for cmd in original_commands if cmd not in commands_after_minus]
     remaining_commands = ' | '.join(remaining_commands)  # turn the result list into a string
     return remaining_commands
+
+
+def split_rule(*rules):
+    return [c.strip() for rule in rules for c in rule.split('|') if c.strip() != '']
 
 
 # this is only a couple of MB in total, safe to cache

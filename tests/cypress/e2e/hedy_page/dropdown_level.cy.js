@@ -16,6 +16,9 @@ describe('Go to level dropdown', () => {
     cy.get(".view_class").contains(new RegExp(`^${classname}$`)).click();
     cy.get('body').then($b => $b.find("#survey")).then($s => $s.length && $s.hide());
     cy.getBySel('customize_class_button').click();
+    cy.get("#opening_date_container").should("not.be.visible")
+    cy.get("#opening_date_label").click();
+    cy.get("#opening_date_container").should("be.visible")
     cy.get('#enable_level_5').parent('.switch').click();
     cy.getBySel('save_customizations').click();
 

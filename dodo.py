@@ -316,7 +316,7 @@ def task_devserver():
                 os.environ,
                 # These are required to make some local features work.
                 BASE_URL="http://localhost:8080/",
-                ADMIN_USER="admin"))
+                ADMIN_USER="admin",))
         ],
         verbosity=2,  # show everything live
     )

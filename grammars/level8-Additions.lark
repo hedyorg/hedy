@@ -1,6 +1,6 @@
-command:+= error_repeat_dep_8 | error_ifelse | if_pressed_without_else | if_pressed if_pressed_elses? | ifs elses?-= error_invalid_space | ifelse
+command: += error_repeat_dep_8 | error_ifelse | if_pressed_without_else | if_pressed if_pressed_elses? | ifs elses? -= error_invalid_space | ifelse
 
-repeat: _REPEAT (INT | var_access) _TIMES _SPACE? _EOL (_SPACE command) (_EOL _SPACE command)* _EOL? _END_BLOCK
+repeat.1: _REPEAT (INT | var_access) _TIMES _SPACE? _EOL (_SPACE command) (_EOL _SPACE command)* _EOL? _END_BLOCK
 error_repeat_dep_8: _REPEAT (INT | var_access) _TIMES _SPACE command
 
 // FH jan 2022 (#1817) we can allow unquoted rhs's again cause there now is a line break after
@@ -18,7 +18,6 @@ if_pressed_elses: _EOL (_SPACE)* _ELSE (_SPACE)* _EOL (_SPACE command) (_EOL _SP
 //'if' cannot be used in Python, hence the name of the rule is 'ifs'
 ifs: _IF condition _EOL (_SPACE command) (_EOL _SPACE command)* _EOL? _END_BLOCK
 
-
 //old 'flat' ifelse:
-error_ifelse : ifelse
+error_ifelse : _if_clause (_SPACE+ _EOL* | _SPACE* _EOL+) _ELSE (_SPACE+ _EOL* | _SPACE* _EOL+) _if_less_command
 
