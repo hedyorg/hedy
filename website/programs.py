@@ -207,7 +207,7 @@ class ProgramsModule(WebsiteModule):
             "achievements": self.achievements.get_earned_achievements(),
         })
 
-    @route('/share/{program_id}', methods=['POST'], defaults={'loop_index': 0, 'second_teachers_programs': False})
+    @route("/share/<program_id>", methods=['POST'], defaults={'loop_index': 0, 'second_teachers_programs': False})
     @route("/share/<program_id>/<loop_index>/<second_teachers_programs>", methods=["POST"])
     @requires_login
     def share_unshare_program(self, user, program_id, loop_index, second_teachers_programs):
