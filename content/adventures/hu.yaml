@@ -3289,19 +3289,24 @@ adventures:
                     {print} You get a flavors {at} {random} milkshake
                     ```
             4:
-                story_text: "A 3. szinten idézőjeleket fogunk alkalmazni, amikor a `print` parancsot használjuk.\nTudod-e idézőjelek hozzáadásával működtetni a 2. szintű kódodat a 3. szinten?\n\nLégy óvatos! A 2. szinten aposztrófokat engedélyeztek a szövegben, de a 3. szinten Hedy összetéveszti őket\
-                    \ idézőjelekkel, és a kód nem fog működni!\nTehát ahelyett, hogy beírnád a `print ma pizzát szolgálunk fel` kifejezést, írd be a `print` \n ma pizzát szolgálunk fel` parancsot."
+                story_text: |
+                    ### Exercise
+                    Add the quotation marks to this code to make it work! Be careful: variables should not be in quotation marks.
+                    Then, use the `{clear}` command to only show one line at a time in your output screen.
+
+                    ### Exercise 2
+                    Go back to the previous level and copy your restaurant code. Make the code work in this level by adding quotation marks in the right spots and add some `{clear}` commands.
                 example_code: |-
                     ```
-                    print 'Üdvözlünk a Hedy Étteremben!'
-                    print 'Ma pizzát vagy lasagnat szolgálunk fel.'
-                    etel is ask 'Mit szeretnél enni?'
-                    print 'Jó választás! A(z) ' etel ' nekem is kedvencem!'
-                    feltet is ask 'Szeretnél hús vagy zöldséget rá?'
-                    print etel ' , rajta a(z) ' feltet ' már úton van!'
-                    ital is ask 'Mit szeretnél inni hozzá?'
-                    print 'Köszönjük a rendelésedet.'
-                    print 'A(z) ' etel ' és a(z) ' ital ' mindjárt itt lesz!'
+                    print Üdvözlünk a Hedy Étteremben!
+                    print Ma pizzát vagy lasagnat szolgálunk fel.
+                    etel is ask Mit szeretnél enni?
+                    print Jó választás! A(z)  etel  nekem is kedvencem!
+                    feltet is ask 'Szeretnél hús vagy zöldséget rá?
+                    print etel  , rajta a(z)  feltet  már úton van!
+                    ital is ask Mit szeretnél inni hozzá?
+                    print Köszönjük a rendelésedet.
+                    print 'A(z)  etel  és a(z)  ital  mindjárt itt lesz!
                     ```
             5:
                 story_text: |-

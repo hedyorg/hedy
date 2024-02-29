@@ -3242,22 +3242,23 @@ adventures:
                     ```
             4:
                 story_text: |
-                    En ĉi tiu nivelo, oni devas uzi citilojn kiam oni uzas la komandon `{print}`.
-                    Ĉu vi povas igi vian kodon de la antaŭaj niveloj funkcii ankaŭ en ĉi tiu nivelo aldonante la citilojn?
+                    ### Exercise
+                    Add the quotation marks to this code to make it work! Be careful: variables should not be in quotation marks.
+                    Then, use the `{clear}` command to only show one line at a time in your output screen.
 
-                    Atentu! En la antaŭaj niveloj apostrofoj estis permesitaj en la teksto, sed en ĉi tiu nivelo Hedy konfuzos ilin por citiloj kaj la kodo ne funkcios!
-                    Do anstataŭ tajpi `{print} Today we're serving pizza` , oni tajpu `{print} 'Today we are serving pizza'`
+                    ### Exercise 2
+                    Go back to the previous level and copy your restaurant code. Make the code work in this level by adding quotation marks in the right spots and add some `{clear}` commands.
                 example_code: |
                     ```
-                    {print} 'Bonvenon al Restoracio Hedy!'
-                    {print} 'Hodiaŭ ni havas picon kaj lasanjojn.'
-                    manĝaĵo {is} {ask} 'Kion vi volas manĝi?'
-                    {print} 'Great choice! The ' manĝaĵo ' is my favorite!'
-                    topping {is} {ask} 'Would you like meat or veggies on that?'
-                    {print} manĝaĵo ' with ' topping ' is on its way!'
-                    trinkaĵo {is} {ask} 'Kion vi volas trinki por via manĝo?'
-                    {print} 'Dankon pro via mendo.'
-                    {print} 'Your ' manĝaĵo ' and ' trinkaĵo ' will be right there!'
+                    {print} Bonvenon al Restoracio Hedy!
+                    {print} Hodiaŭ ni havas picon kaj lasanjojn.
+                    manĝaĵo {is} {ask} Kion vi volas manĝi?
+                    {print} Great choice! The  manĝaĵo  is my favorite!
+                    topping {is} {ask} Would you like meat or veggies on that?
+                    {print} manĝaĵo  with  topping  is on its way!
+                    trinkaĵo {is} {ask} Kion vi volas trinki por via manĝo?
+                    {print} Dankon pro via mendo.
+                    {print} Your  manĝaĵo  and  trinkaĵo  will be right there!
                     ```
             5:
                 story_text: |

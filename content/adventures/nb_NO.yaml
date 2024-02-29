@@ -3241,22 +3241,23 @@ adventures:
                     ```
             4:
                 story_text: |
-                    På dette nivået må du bruke fnutter når du bruker `{print}`-kommandoen.
-                    Kan du gjøre sånn at koden fra forrige nivå også fungerer ved å legge til fnutter?
+                    ### Exercise
+                    Add the quotation marks to this code to make it work! Be careful: variables should not be in quotation marks.
+                    Then, use the `{clear}` command to only show one line at a time in your output screen.
 
-                    Vær forsiktig! I forrige nivå var fnutter lov i tekst, men på dette nivået vil det forvirre Hedy om du har fnutter i teksten din.
-                    Så istedenfor å skrive `{print} I dag serverer vi pizza`, må du nå skrive `{print} 'I dag serverer vi pizza'`
+                    ### Exercise 2
+                    Go back to the previous level and copy your restaurant code. Make the code work in this level by adding quotation marks in the right spots and add some `{clear}` commands.
                 example_code: |
                     ```
-                    {print} 'Velkommen til Hedys Restaurant!'
-                    {print} 'I dag er det pizza og lasagne på menyen.'
-                    maten {is} {ask} 'Hva har du lyst til å spise?'
-                    {print} 'Godt valg! ' maten ' er min favoritt!'
-                    tilbehør {is} {ask} 'Foretrekker du vegetar eller med kjøtt?'
-                    {print} maten ' med ' tilbehør ' skal bli!'
-                    drikken {is} {ask} 'Vil du ha noe å drikke til?'
-                    {print} 'Takk for bestillingen.'
-                    {print} maten ' og ' drikken ' kommer snart!'
+                    {print} Velkommen til Hedys Restaurant!
+                    {print} I dag er det pizza og lasagne på menyen.
+                    maten {is} {ask} Hva har du lyst til å spise?
+                    {print} Godt valg!  maten  er min favoritt!
+                    tilbehør {is} {ask} Foretrekker du vegetar eller med kjøtt?
+                    {print} maten  med  tilbehør  skal bli!
+                    drikken {is} {ask} Vil du ha noe å drikke til?
+                    {print} Takk for bestillingen.
+                    {print} maten 'og  drikken ' kommer snart!
                     ```
             5:
                 story_text: |
