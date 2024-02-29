@@ -29,27 +29,19 @@ describe('Is able to share and unshare programs', () => {
     });
 
     afterEach(() => {
+        cy.get('#more_options_1').click();
         cy.getBySel('delete_non_submitted_program_1').click();
         cy.getBySel('modal_yes_button').click();
     });
 
     it('Clicking the share program button shows the confirm modal and the unshare button, and vice versa', () => {
-        cy.get('#non_public_button_container_1 > button').click();
-        cy.get('#modal-confirm').should('be.visible');
-        cy.getBySel('modal_yes_button').click();
-        cy.get('#modal_alert_text').should('be.visible');
-        cy.get('#non_public_button_container_1').should('not.be.visible');
-        cy.get('#public_button_container_1').should('be.visible');
-
-        // Wait until the achievement is gone
-        cy.get('#achievement_pop-up', {timeout: 8_000}).should('not.be.visible');
+        cy.get('#share_option_dropdown_1').click();
+        cy.get('#share_button_1').click();
+        cy.get('#share_option_dropdown_1').should('contain.text', 'Public');
 
         // Make the program private again
-        cy.getBySel('unshare_program_1').click();
-        cy.get('#modal-confirm').should('be.visible');
-        cy.getBySel('modal_yes_button').click();
-        cy.get('#modal_alert_text').should('be.visible');
-        cy.get('#non_public_button_container_1').should('be.visible');
-        cy.get('#public_button_container_1').should('not.be.visible');
+        cy.get('#share_option_dropdown_1').click();
+        cy.get('#share_button_1').click();
+        cy.get('#share_option_dropdown_1').should('contain.text', 'Private');
     });
 });
