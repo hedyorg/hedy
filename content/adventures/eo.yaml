@@ -3312,20 +3312,22 @@ adventures:
                     ```
             8:
                 story_text: |
-                    En ĉi tiu nivelo, vi povas plu ellabori vian virtualan restoracion ripetante plurajn liniojn da kodo. Jen:
+                    In this level you can make your virtual restaurant more elaborate by repeating multiple lines of code. Like this:
+
+                    ### Exercise
+                    This code can be expanded with more items on the menu, for example offering drinks, and/or multiple courses or desserts. Add at least one more item.
+                    **Extra** Add even more items, as many options as you like!
                 example_code: |
                     ```
-                    {print} 'Bonvenon al Restoracio Hedy!'
-                    homoj = {ask} 'Kiom da gastoj hodiaŭ?'
-                    {print} 'Bonege!'
-                    {repeat} homoj {times}
-                        mendo = {ask} 'Kion vi volas mendi?'
-                        {print} mendo
-                    {print} 'Dankon pro via mendo!'
-                    {print} 'Ĝuu vian manĝon!'
+                    {print} 'Welcome to Restaurant Chez Hedy!'
+                    people = {ask} 'How many people will be joining us today?'
+                    {print} 'Great!'
+                    {repeat} people {times}
+                        food = {ask} 'What would you like to order?'
+                        {print} food
+                    {print} 'Thank you for ordering!'
+                    {print} 'Enjoy your meal!'
                     ```
-                story_text_2: |
-                    Kompreneble, ĉi tiu kodo povas esti vastigita kun pli da eroj en la menuo, proponante trinkaĵojn, kaj/aŭ plurajn kursojn, do bonvolu aldoni tiom da ebloj kiel vi volas!
             9:
                 story_text: |
                     In this level you can use nesting to make your restaurant more realistic and more fun!
