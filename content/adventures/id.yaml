@@ -1196,16 +1196,23 @@ adventures:
                     {print} Hello world!
                     ```
             2:
-                story_text: "Pada level 2 kita akan belajar perintah baru yaitu: `{is}` dan `{sleep}`.\nKamu bisa menamakan kata dengan `{is}`. Ini disebut dengan variabel. Dalam contoh variabel yang kami buat, variabel nama dan variabel umur. Kamu bisa gunakan kata nama dimana saja dalam kode kamu dan\
-                    \ mengganti kata Hedy, seperti ini \n\nDisini kamu tidak perlu lagi  menggunakan perintah `{echo}`\n"
+                story_text: |
+                    Congratulations! You've reached level 2. Hopefully you've already made some awesome codes!
+                    In the first level you might've notice that the `{echo}` command can only save one bit of information at a time.
+                    For example in the restaurant adventure, you could echo what the costumer wanted to eat, or what they wanted to drink, but not both in one sentence.
+
+                    That changes in level 2. In level 2 you'll learn to work with variables, that allow you to save multiple pieces of information and print them in any place you want.
+                    So let's go to the next tab!
                 example_code: |
+                    **Warning! This code does not work!**
+                    In Hedy commands will change sometimes. `{echo}` for example only works in level 1. In this level you'll learn a better way to echo answers back.
                     ```
-                    nama {is} Hedy
-                    umur {is} 15
-                    {print} nama adalah umur
+                    {print} Welcome at Hedy's
+                    {ask} What would you like to eat?
+                    {echo} So you want
+                    {ask} what would you like to drink?
+                    {echo} So you want
                     ```
-                story_text_2: |
-                    `{print}` masih berfungsi sama, tetapi perintah `{ask}` telah berubah. Kamu juga perlu menggunakan variabel dalam perintah `{ask}`. Maka akan terlihat seperti ini:
             3:
                 story_text: |-
                     Pada level 3 kamu juga dapat membuat list. Kamu dapat meminta komputer memilih sesuatu secara acak dari list tersebut. Kamu dapat melakukan itu dengan `at random`.

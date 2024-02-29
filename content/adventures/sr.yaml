@@ -1184,18 +1184,22 @@ adventures:
                     ```
             2:
                 story_text: |
-                    U Nivou 2 ćemo učiti dve nove komande: `{is}` i `{sleep}`.
-                    Možeš nazvati reč sa `{is}`. Ona se zove promenljiva. U ovom primeru smo napravili promenljivu koja se zove Ime i promenljivu koja se zove Uzrast. Možeš koristiti reč Ime bilo gde u svom kodu i ona će biti zamenjena sa Hedy, ovako:
+                    Congratulations! You've reached level 2. Hopefully you've already made some awesome codes!
+                    In the first level you might've notice that the `{echo}` command can only save one bit of information at a time.
+                    For example in the restaurant adventure, you could echo what the costumer wanted to eat, or what they wanted to drink, but not both in one sentence.
 
-                    Na ovaj način ti više ne treba komanda `{echo}`!
+                    That changes in level 2. In level 2 you'll learn to work with variables, that allow you to save multiple pieces of information and print them in any place you want.
+                    So let's go to the next tab!
                 example_code: |
+                    **Warning! This code does not work!**
+                    In Hedy commands will change sometimes. `{echo}` for example only works in level 1. In this level you'll learn a better way to echo answers back.
                     ```
-                    ime {is} Hedy
-                    uzrast {is} 15
-                    {print} ime ima uzrast godina.
+                    {print} Welcome at Hedy's
+                    {ask} What would you like to eat?
+                    {echo} So you want
+                    {ask} what would you like to drink?
+                    {echo} So you want
                     ```
-                story_text_2: |
-                    `{print}` i dalje radi na isti način, ali komanda `{ask}` je promenjena. Treba takodje da koristiš promenljivu i u komandi `{ask}` . To izgleda ovako:
             3:
                 story_text: |
                     U nivou 3 možeš napraviti listu. Možeš dozvoliti da kompjuter odabere nasumično iz liste. To postižeš sa `{at} {random}`.

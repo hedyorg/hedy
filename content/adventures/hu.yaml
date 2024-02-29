@@ -1178,18 +1178,22 @@ adventures:
                     ```
             2:
                 story_text: |
-                    A 2. szinten két új parancsot tanulunk: `{is}` és `{sleep}`.
-                    Nevet adhatsz egy szónak az `{is}` paranccsal. Ezt a nevet változónak nevezzük. Ebben a példában létrehoztunk két változót, az egyik neve név, a másiké kor. Bárhol használhatod a név szót a kódodban, és a Hedy kicseréli, valahogy így:
+                    Congratulations! You've reached level 2. Hopefully you've already made some awesome codes!
+                    In the first level you might've notice that the `{echo}` command can only save one bit of information at a time.
+                    For example in the restaurant adventure, you could echo what the costumer wanted to eat, or what they wanted to drink, but not both in one sentence.
 
-                    Így már nincs szükség az `{echo}` parancsra.
+                    That changes in level 2. In level 2 you'll learn to work with variables, that allow you to save multiple pieces of information and print them in any place you want.
+                    So let's go to the next tab!
                 example_code: |
+                    **Warning! This code does not work!**
+                    In Hedy commands will change sometimes. `{echo}` for example only works in level 1. In this level you'll learn a better way to echo answers back.
                     ```
-                    név {is} Hedy
-                    kor {is} 15
-                    {print} név ma lesz kor éves
+                    {print} Welcome at Hedy's
+                    {ask} What would you like to eat?
+                    {echo} So you want
+                    {ask} what would you like to drink?
+                    {echo} So you want
                     ```
-                story_text_2: |
-                    A `{print}` ugyanúgy működik, de a `{ask}` parancs megváltozott. Használnod kell egy változót a `{ask}` paranccsal is. Így néz ki:
             3:
                 story_text: |
                     A 3. szinten készíthetsz listát is. Kérheted a számítógépet, hogy véletlenszerűen válasszon valamit a listából. Ezt a `{at} {random}` paranccsal teheted meg.

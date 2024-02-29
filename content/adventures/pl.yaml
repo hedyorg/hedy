@@ -1146,21 +1146,22 @@ adventures:
                     ```
             2:
                 story_text: |
-                    Gratulację! Witamy na poziomie 2. Już stworzyliśmy trochę kodu za ciebie ;).
+                    Congratulations! You've reached level 2. Hopefully you've already made some awesome codes!
+                    In the first level you might've notice that the `{echo}` command can only save one bit of information at a time.
+                    For example in the restaurant adventure, you could echo what the costumer wanted to eat, or what they wanted to drink, but not both in one sentence.
 
-                    W pierwszym poziomie mogłeś zauważyć, że komenda `{echo}` potrafi zapisywać tylko 1 bit informacji na raz.
-
-                    Na przykład, w przygodzie "restauracja", możesz użyć echo, kiedy klient chce coś pić, lub zjeść, ale nie dwie rzeczy równocześnie.
+                    That changes in level 2. In level 2 you'll learn to work with variables, that allow you to save multiple pieces of information and print them in any place you want.
+                    So let's go to the next tab!
                 example_code: |
+                    **Warning! This code does not work!**
+                    In Hedy commands will change sometimes. `{echo}` for example only works in level 1. In this level you'll learn a better way to echo answers back.
                     ```
-                    {print} Witamy w Hedy's
-                    {ask} Co chciałbyś/chciałabyś zjeść?
-                    {echo} Czyli chcesz
-                    {ask} Czego chciałbyś/chciałabyś się napić?
-                    {echo} Czyli chcesz
+                    {print} Welcome at Hedy's
+                    {ask} What would you like to eat?
+                    {echo} So you want
+                    {ask} what would you like to drink?
+                    {echo} So you want
                     ```
-                story_text_2: |
-                    `{print}` wciąż działa tak samo, ale komenda `{ask}` zmieniła się. Musisz użyć zmiennej również w komendzie `{ask}`. Wygląda to tak:
             3:
                 story_text: "Na poprzednim poziomie nauczyliśmy się czym są zmienna i jak możemy ich używać, żeby nasze przygody były bardziej interaktywne. \nAle... to nie jedyna rzecz, którą możemy zrobić ze zmiennymi! Zmienne mogą też być listami. \nA nawet możemy pozwolić Hedy, aby wybrała losowe\
                     \ słowo z listy, co pozwoli Ci stworzyć prawdziwe gry!\nSpójrzmy na kolejną zakładkę!\n"

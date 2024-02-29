@@ -1201,18 +1201,22 @@ adventures:
                     ```
             2:
                 story_text: |
-                    În nivelul 2 învățăm două comenzi noi: `{is}` și `{sleep}`.
-                    Poți să dai un nume unui cuvânt cu `{is}`. Aceasta se numește o variabilă. În acest exemplu am creat o variabilă numită nume si o variabilă numită vârstă. Poți folosi cuvântul nume oriunde în programul tău și va fi înlocuit de Hedy, astfel:
+                    Congratulations! You've reached level 2. Hopefully you've already made some awesome codes!
+                    In the first level you might've notice that the `{echo}` command can only save one bit of information at a time.
+                    For example in the restaurant adventure, you could echo what the costumer wanted to eat, or what they wanted to drink, but not both in one sentence.
 
-                    Acum nu mai ai nevoie de comanda `{echo}`!
+                    That changes in level 2. In level 2 you'll learn to work with variables, that allow you to save multiple pieces of information and print them in any place you want.
+                    So let's go to the next tab!
                 example_code: |
+                    **Warning! This code does not work!**
+                    In Hedy commands will change sometimes. `{echo}` for example only works in level 1. In this level you'll learn a better way to echo answers back.
                     ```
-                    nume {is} Hedy
-                    vârstă {is} 15
-                    {print} nume are vârstă ani
+                    {print} Welcome at Hedy's
+                    {ask} What would you like to eat?
+                    {echo} So you want
+                    {ask} what would you like to drink?
+                    {echo} So you want
                     ```
-                story_text_2: |
-                    `{print}` funcționează în continuare la fel, dar comanda `{ask}` s-a schimbat. Trebuie să folosiți o variabilă și în comanda `{ask}`. Arată așa:
             3:
                 story_text: |
                     În nivelul 3 poți face o listă. Poți lăsa calculatorul să aleagă ceva aleatoriu din listă. Faci acest lucru cu `{at} {random}`.

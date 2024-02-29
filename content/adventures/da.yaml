@@ -1195,18 +1195,22 @@ adventures:
                     ```
             2:
                 story_text: |
-                    På niveau 2 lærer vi to nye kommandoer: `{is}` og `{sleep}`.
-                    Du kan navngive et ord med `{is}`. Dette kaldes en variabel. I dette eksempel lavede vi en variabel der hedder navn og en variabel der hedder alder. Du kan bruge ordet navn i din kode og det vil blive erstattet af Hedy, som her:
+                    Congratulations! You've reached level 2. Hopefully you've already made some awesome codes!
+                    In the first level you might've notice that the `{echo}` command can only save one bit of information at a time.
+                    For example in the restaurant adventure, you could echo what the costumer wanted to eat, or what they wanted to drink, but not both in one sentence.
 
-                    På denne måde har du ikke længere brug for `{echo}` kommandoen!
+                    That changes in level 2. In level 2 you'll learn to work with variables, that allow you to save multiple pieces of information and print them in any place you want.
+                    So let's go to the next tab!
                 example_code: |
+                    **Warning! This code does not work!**
+                    In Hedy commands will change sometimes. `{echo}` for example only works in level 1. In this level you'll learn a better way to echo answers back.
                     ```
-                    navn {is} Hedy
-                    alder {is} 15
-                    {print} navn er alder år gammel
+                    {print} Welcome at Hedy's
+                    {ask} What would you like to eat?
+                    {echo} So you want
+                    {ask} what would you like to drink?
+                    {echo} So you want
                     ```
-                story_text_2: |
-                    `{print}` virker stadig på samme måde, men `{ask}` kommandoen har ændret sig. Du skal bruge en variabel sammen med `{ask}` kommandoen. Det ser sådan ud:
             3:
                 story_text: |
                     På niveau 3 kan du lave en liste. Du kan lade computeren vælge noget tilfældigt fra listen. Det kan du gøre med `{at} {random}`.

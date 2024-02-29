@@ -1193,18 +1193,22 @@ adventures:
                     ```
             2:
                 story_text: |
-                    在級別 2 中，我們學習了兩個新命令：`{is}` 和 `{sleep}`。
-                    你可以用 `{is}`來命名一個詞。 這稱為變量。 在這個例子中，我們創建了一個名為 name 的變量和一個名為 age 的變量。 您可以在代碼中的任何地方使用單詞名稱，它將被 Hedy 替換，如下所示：
+                    Congratulations! You've reached level 2. Hopefully you've already made some awesome codes!
+                    In the first level you might've notice that the `{echo}` command can only save one bit of information at a time.
+                    For example in the restaurant adventure, you could echo what the costumer wanted to eat, or what they wanted to drink, but not both in one sentence.
 
-                    這樣你就不再需要 `{echo}` 命令了！
+                    That changes in level 2. In level 2 you'll learn to work with variables, that allow you to save multiple pieces of information and print them in any place you want.
+                    So let's go to the next tab!
                 example_code: |
+                    **Warning! This code does not work!**
+                    In Hedy commands will change sometimes. `{echo}` for example only works in level 1. In this level you'll learn a better way to echo answers back.
                     ```
-                    名字 {is} Hedy
-                    年齡 {is} 15
-                    {print} 名字 今年 年齡 歲
+                    {print} Welcome at Hedy's
+                    {ask} What would you like to eat?
+                    {echo} So you want
+                    {ask} what would you like to drink?
+                    {echo} So you want
                     ```
-                story_text_2: |
-                    `{print}` 仍然可以正常執行，但 `{ask}` 命令已更改。 您還需要在 `{ask}` 命令中使用變數，像這樣：
             3:
                 story_text: |
                     In level 3 you can make a list. You can let the computer choose something random from the list. You do that with `{at} {random}`.

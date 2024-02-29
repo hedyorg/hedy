@@ -1177,18 +1177,22 @@ adventures:
                     ```
             2:
                 story_text: |
-                    ในเลเวล 2 เราจะเรียนคำสั่งใหม่สองคำสั่งคือ `{is}` และ `{sleep}`.
-                    คำสั่ง `{is}` ใช้ในการตั้งชื่อให้กับคำศัพท์ โดยกระบวนการนี้เรียกว่า การสร้างตัวแปร. ในตัวอย่างนี้เราจะสร้างตัวแปร 2 ตัวคือ ชื่อ และ อายุ เมื่อตั้งชื่อตัวแปรเสร็จแล้วเราจะสามารถใช้ชื่อนั้นในโค้ดได้ทันที และ Hedy จะเปลี่ยนชื่อเหล่านั้นเป็นค่าที่ถูกกำหนดไว้
+                    Congratulations! You've reached level 2. Hopefully you've already made some awesome codes!
+                    In the first level you might've notice that the `{echo}` command can only save one bit of information at a time.
+                    For example in the restaurant adventure, you could echo what the costumer wanted to eat, or what they wanted to drink, but not both in one sentence.
 
-                    นั่นแปลว่าเราจะไม่ต้องใช้คำสั่ง `{echo}` อีกต่อไป
+                    That changes in level 2. In level 2 you'll learn to work with variables, that allow you to save multiple pieces of information and print them in any place you want.
+                    So let's go to the next tab!
                 example_code: |
+                    **Warning! This code does not work!**
+                    In Hedy commands will change sometimes. `{echo}` for example only works in level 1. In this level you'll learn a better way to echo answers back.
                     ```
-                    ชื่อ {is} เฮดี้
-                    อายุ {is} 15
-                    {print} ตอนนี้ ชื่อ อายุ ขวบแล้ว!
+                    {print} Welcome at Hedy's
+                    {ask} What would you like to eat?
+                    {echo} So you want
+                    {ask} what would you like to drink?
+                    {echo} So you want
                     ```
-                story_text_2: |
-                    คำสั่ง `{print}` ใช้ได้เหมือนเดิม แต่คำสั่ง  `{ask}` จะเปลี่ยนไปเล็กน้อยแล้ว ตอนนี้เราต้องกำหนดตัวแปรให้กับคำสั่ง `{ask}` ด้วย เหมือนตัวอย่างนี้
             3:
                 story_text: |
                     ในเลเวล 3 นี้ เราจะสร้างลิสท์ และให้คอมพิวเตอร์เลือกของจากลิสท์ได้แบบสุ่ม โดยใช้คำสั่ง `{at} {random}`.
