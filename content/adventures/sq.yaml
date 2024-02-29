@@ -83,17 +83,24 @@ adventures:
                     ```
             4:
                 story_text: |
-                    Mund ta keni vërejtur se ka një problem në nivelet e mëparshëm. A provuat të printoni një fjali që ka fjalën emri në të? P.sh `{print}` emri im është emri.
-                    Mund ta zgjidhni problemin në këtë nivel. Domosdo duhet të përdorni thonjëza për të printuar.
+                    ### Exercise
+                    Copy the example code and finish it by adding quotation marks on the blanks in lines 1 and 2.
+                    The blanks in line 3 and 4 should not be replaced by quotation marks, but a `{sleep}` and a `{clear}` command. Can you make it work?
+
+                    ### Exercise 2
+                    Go back to the previous level and copy your story code. Make the code work in this level by adding quotation marks in the right spots.
+                    Mind: The variables in your own story should be outside of the quotation marks. Just like the second line of the example code. In that line the variable name is placed outside of the quotation marks.
                 example_code: |
                     ```
-                    emri {is} Hans
-                    {print} _ Emri i personazhit kryesor është _ emri
-                    {print} emri _ tani to dë ecë në pyll _
-                    {print} emri _ është pak i frikësuar _
-                    kafshët {is} 🦔, 🐿, 🦉, 🦇
-                    {print} _ Ai dëgjon një zë të _ kafshët {at} {random}
-                    {print} emri _ është i frikësuar sepse ky është një pyll me fantazma _
+                    name {is} {ask} _ What is your name? _
+                    {print}  _ The main character is called _ name
+                    _
+                    _
+                    {print} name  _ is now going to walk in the woods _
+                    {print} name _ is a bit scared _
+                    animals {is} 🦔, 🐿, 🦉, 🦇
+                    {print} _ He hears the sound of a _ animals {at} {random}
+                    {print} name _ is afraid this is a haunted forest _
                     ```
             5:
                 story_text: |

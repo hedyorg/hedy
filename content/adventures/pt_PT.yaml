@@ -73,22 +73,24 @@ adventures:
                     ```
             4:
                 story_text: |
-                    Podes ter notado que ainda existe um erro no nível 2.
+                    ### Exercise
+                    Copy the example code and finish it by adding quotation marks on the blanks in lines 1 and 2.
+                    The blanks in line 3 and 4 should not be replaced by quotation marks, but a `{sleep}` and a `{clear}` command. Can you make it work?
 
-                    Por acaso, tentaste construir uma frase que continha a palavra nome? E.g. `print o meu nome é nome`.
-
-                    Não funciona nada bem! O que obténs: o meu Manuel é Manuel. Podes consertar isto no nível 3.
-
-                    Precisas usar aspas simples para tudo aquilo que queres escrever.
-                example_code: |-
+                    ### Exercise 2
+                    Go back to the previous level and copy your story code. Make the code work in this level by adding quotation marks in the right spots.
+                    Mind: The variables in your own story should be outside of the quotation marks. Just like the second line of the example code. In that line the variable name is placed outside of the quotation marks.
+                example_code: |
                     ```
-                    nome is Ricardo
-                    print 'O nome da personagem principal é' nome
-                    print nome 'vai passear pela floresta'
-                    print nome 'está um pouco assustado'
-                    animais is coruja, cobra, raposa
-                    print 'Ele ouve um som de uma' animais at random
-                    print nome 'tem medo que a floresta seja assombrada'
+                    name {is} {ask} _ What is your name? _
+                    {print}  _ The main character is called _ name
+                    _
+                    _
+                    {print} name  _ is now going to walk in the woods _
+                    {print} name _ is a bit scared _
+                    animals {is} 🦔, 🐿, 🦉, 🦇
+                    {print} _ He hears the sound of a _ animals {at} {random}
+                    {print} name _ is afraid this is a haunted forest _
                     ```
             5:
                 story_text: |

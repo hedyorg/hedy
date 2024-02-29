@@ -84,17 +84,24 @@ adventures:
                     ```
             4:
                 story_text: |
-                    Du har måske lagt mærke til at der stadig er et problem i de tidligere niveauer. Prøvede du at printe en sætning med ordet navn? i.e. `{print}` mit navn er navn.
-                    Dette kan du løse på dette niveau. Du skal bruge anførselstegn om alt det du vil printe.
+                    ### Exercise
+                    Copy the example code and finish it by adding quotation marks on the blanks in lines 1 and 2.
+                    The blanks in line 3 and 4 should not be replaced by quotation marks, but a `{sleep}` and a `{clear}` command. Can you make it work?
+
+                    ### Exercise 2
+                    Go back to the previous level and copy your story code. Make the code work in this level by adding quotation marks in the right spots.
+                    Mind: The variables in your own story should be outside of the quotation marks. Just like the second line of the example code. In that line the variable name is placed outside of the quotation marks.
                 example_code: |
                     ```
-                    navn {is} Hans
-                    {print}  _ Hovedpersonens navn er _ navn
-                    {print} navn  _ går nu ind i skoven _
-                    {print} navn _ er en smule bange _
-                    dyr {is} 🦔, 🐿, 🦉, 🦇
-                    {print} _ Han hører lyden af _ dyr {at} {random}
-                    {print} navn _ er bange for at det er en hjemsøgt skov _
+                    name {is} {ask} _ What is your name? _
+                    {print}  _ The main character is called _ name
+                    _
+                    _
+                    {print} name  _ is now going to walk in the woods _
+                    {print} name _ is a bit scared _
+                    animals {is} 🦔, 🐿, 🦉, 🦇
+                    {print} _ He hears the sound of a _ animals {at} {random}
+                    {print} name _ is afraid this is a haunted forest _
                     ```
             5:
                 story_text: |

@@ -82,17 +82,24 @@ adventures:
                     ```
             4:
                 story_text: |
-                    Vi eble rimarkis, ke ankoraŭ ekzistas problemo en la antaŭaj niveloj. Ĉu vi provis presi frazon, kiu enhavis la vorton nomon?
-                    Vi povas solvi tion en ĉi tiu nivelo. Vi devas uzi citilojn por ĉio, kion vi presigos.
+                    ### Exercise
+                    Copy the example code and finish it by adding quotation marks on the blanks in lines 1 and 2.
+                    The blanks in line 3 and 4 should not be replaced by quotation marks, but a `{sleep}` and a `{clear}` command. Can you make it work?
+
+                    ### Exercise 2
+                    Go back to the previous level and copy your story code. Make the code work in this level by adding quotation marks in the right spots.
+                    Mind: The variables in your own story should be outside of the quotation marks. Just like the second line of the example code. In that line the variable name is placed outside of the quotation marks.
                 example_code: |
                     ```
-                    nomo {is} Hanso
-                    {print} 'La nomo de la ĉefrolulo estas' nomo
-                    {print} nomo 'nun promenas en la arbaro'
-                    {print} nomo 'estas iom timigita'
-                    bestoj {is} 🦔, 🐿, 🦉, 🦇
-                    {print} 'Li aŭdas la sonon de' bestoj {at} {random}
-                    {print} nomo 'timas, ke ĉi tiu arbaro estas hantita'
+                    name {is} {ask} _ What is your name? _
+                    {print}  _ The main character is called _ name
+                    _
+                    _
+                    {print} name  _ is now going to walk in the woods _
+                    {print} name _ is a bit scared _
+                    animals {is} 🦔, 🐿, 🦉, 🦇
+                    {print} _ He hears the sound of a _ animals {at} {random}
+                    {print} name _ is afraid this is a haunted forest _
                     ```
             5:
                 story_text: |
