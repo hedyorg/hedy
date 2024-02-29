@@ -12,7 +12,12 @@ var $builtinmodule = function (name) {
           let pressed_mapped_key = false;
 
           for (const [key, value] of Object.entries(if_pressed_mapping.entries)) {
-            if (event.key === value[0].v){
+            // If mapped key is a variable (not char), we retrieve variable value and use that
+            // otherwise if char, use that.
+            const charOrVar = value[0].v;
+            let mapLetterKey = Object.hasOwn(Sk.globals, charOrVar) ? Sk.globals[charOrVar].v : charOrVar;
+
+            if (event.key === `${mapLetterKey}`){
               pressed_mapped_key = true;
               Sk.misceval.callOrSuspend(Sk.globals[value[1].v]);
             }

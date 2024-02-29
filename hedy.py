@@ -2051,6 +2051,7 @@ else:{self.add_debug_breakpoint()}
         )
 
     def if_pressed_else(self, meta, args):
+        self.process_variable(args[0], meta.line)
         key = args[0]
 
         if_code = args[1]
@@ -2259,6 +2260,7 @@ class ConvertToPython_8_9(ConvertToPython_7):
         return "if " + args[0] + ":" + self.add_debug_breakpoint() + "\n" + "\n".join(all_lines)
 
     def if_pressed(self, meta, args):
+        self.process_variable(args[0], meta.line)
         args = [a for a in args if a != ""]  # filter out in|dedent tokens
 
         key = args[0]
@@ -2580,6 +2582,7 @@ class ConvertToPython_15(ConvertToPython_14):
         )
 
     def if_pressed(self, meta, args):
+        self.process_variable(args[0], meta.line)
         args = [a for a in args if a != ""]  # filter out in|dedent tokens
 
         key = args[0]
@@ -2631,6 +2634,7 @@ class ConvertToPython_17(ConvertToPython_16):
         return "\nelif " + args[0] + ":" + self.add_debug_breakpoint() + "\n" + "\n".join(all_lines)
 
     def if_pressed_elifs(self, meta, args):
+        self.process_variable(args[0], meta.line)
         args = [a for a in args if a != ""]  # filter out in|dedent tokens
 
         key = args[0]
