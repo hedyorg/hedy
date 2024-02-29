@@ -3597,7 +3597,12 @@ adventures:
                 story_text: |
                     In dit level kunnen we steen, papier, schaar verder programmeren. Maar als je er tekst bij wilt, moet je ook hier nu aanhalingstekens gebruiken.
                     ### Opdracht
-                    Kopieer je code uit het vorige level en maak hem werkend in dit level door bij elk `{print}` en `{ask}` commando aanhalingstekens te gebruiken.
+                    Vul aanhalingstekens in op de streepjes. Let op, de variabele `keuzes` moet buiten de aanhalingstekens blijven.
+                example_code: |
+                    ```
+                    keuzes {is} steen, papier, schaar
+                    {print} _De computer kiest..._ keuzes {at} {random}
+                    ```
             5:
                 story_text: |
                     In dit level kunnen we gaan bepalen of het gelijkspel is. Daarvoor heb je de nieuwe `{if}` code nodig.

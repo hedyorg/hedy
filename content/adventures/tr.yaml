@@ -3668,7 +3668,12 @@ adventures:
                 story_text: |
                     Bu seviyede, taş, kağıt, makas programını daha da geliştirebiliriz. Ancak metin eklemek istiyorsanız, burada da tırnak işareti kullanmanız gerekir.
                     ### Alıştırma
-                    Kodunuzu önceki seviyeden kopyalayın ve her `{print}` veya `{ask}` komutundan sonra tırnak işareti kullanarak çalışmasını sağlayın.
+                    Fill in quotation marks on the blanks. Mind that the variable `choices` should be outside the quotes.
+                example_code: |
+                    ```
+                    choices is rock, paper, scissors
+                    print _The computer chooses..._ choices at random
+                    ```
             5:
                 story_text: |
                     Bu seviyede beraberlik olup olmadığını belirleyebiliriz. Bunun için yeni `{if}` koduna ihtiyacınız var.

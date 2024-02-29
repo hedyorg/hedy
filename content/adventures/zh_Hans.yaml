@@ -3526,7 +3526,12 @@ adventures:
                 story_text: |
                     在这一级，我们可以进一步对石头剪刀布游戏编程。但是如果你想要添加文字，你同样需要使用引号。
                     ### 练习
-                    复制上一级的代码并在每个`{print}` 或`{ask}` 命令后使用引号使其正常工作。
+                    Fill in quotation marks on the blanks. Mind that the variable `choices` should be outside the quotes.
+                example_code: |
+                    ```
+                    choices is rock, paper, scissors
+                    print _The computer chooses..._ choices at random
+                    ```
             5:
                 story_text: |
                     在这一阶段，我们可以决定胜负。为此，您需要新的`{if}`代码。
