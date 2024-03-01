@@ -1992,9 +1992,11 @@ def main_page():
     custom_logo = False
     if os.path.isfile(f'static/images/hero-graphic/hero-graphic-{g.lang}.png'):
         custom_logo = True
+    
+    user = current_user()
 
     return render_template('main-page.html', page_title=gettext('title_start'), custom_logo=custom_logo,
-                           current_page='start', content=content)
+                           current_page='start', content=content, user=user)
 
 
 @app.route('/subscribe')

@@ -3,14 +3,14 @@
 <div class="text-xl flex flex-col">
     <div class="bg-blue-200 mt-8 mb-8 border-b-8 border-blue-300">
         <div class="copy-container px-8 py-8 md:py-16 md:px-16 mb-8 flex flex-col gap-16 md:flex-row justify-between items-stretch">
-            <div class="flex flex-col gap-2">
+            <div class="flex flex-col gap-4">
                 <h1 class="font-bold font-slab text-sky-600 text-6xl tracking-wide">{{_('main_title')}}</h1>
                 <h2 class="py-0 my-0 font-sans font-light text-black tracking-wide">{{_('main_subtitle')}}</h2>
-                <div class="flex flex-row gap-2">
-                    <button id="tryitbutton" class="green-btn text-white px-8 py-4" onclick="window.location.href='/hedy'">{{_('start_learning')}}</button>
-                    <button id="tryitbutton" class="white-btn text-blue-500 px-8 py-4" onclick="window.location.href='signup?teacher=true'">{{_('start_teaching')}}</button>
+                <div class="flex flex-row gap-4 min-w-full">
+                    <button id="try_learning_button" class="green-btn text-white w-64 py-4" onclick="window.location.href='/hedy'">{{_('start_learning')}}</button>
+                    <button id="try_teaching_button" class="white-btn text-blue-500 w-64 py-4" onclick="window.location.href={% if not user.is_teacher %}'signup?teacher=true'{% else %}'for-teachers'{% endif %}">{{_('start_teaching')}}</button>
                 </div>
-            </div>            
+            </div>
             {# image for large screens #}
             <div class="hidden md:block overflow-visible relative flex-none" style="width: 500px">
                 {% if not custom_logo %}
