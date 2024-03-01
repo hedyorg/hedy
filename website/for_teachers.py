@@ -1037,13 +1037,13 @@ class ForTeachersModule(WebsiteModule):
         except BaseException:
             return gettext("something_went_wrong_keyword_parsing"), 400
         return {"code": code}, 200
-    
+
     def add_adventure_to_class_level(self, user, class_id, adventure_id, level):
         Class = self.db.get_class(class_id)
         if not Class or (not utils.can_edit_class(user, Class) and not is_admin(user)):
             return utils.error_page(error=404, ui_message=gettext("no_such_class"))
 
-        customizations, adventures, adventure_names, _ , _ = self.get_class_info(
+        customizations, adventures, adventure_names, _, _ = self.get_class_info(
             user, class_id)
 
         teacher_adventures = list(self.db.get_teacher_adventures(user["username"]))
