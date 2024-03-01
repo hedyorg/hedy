@@ -1013,9 +1013,9 @@ class ForTeachersModule(WebsiteModule):
                     self.add_adventure_to_class_level(user, old_class, body["id"], level, True)
 
         for class_id in body["classes"]:
-            if class_id != '0': 
-                    for level in body["levels"]:
-                        self.add_adventure_to_class_level(user, class_id, body["id"], level, False)
+            if class_id != '0':
+                for level in body["levels"]:
+                    self.add_adventure_to_class_level(user, class_id, body["id"], level, False)
 
         return {"success": gettext("adventure_updated")}, 200
 
@@ -1059,11 +1059,13 @@ class ForTeachersModule(WebsiteModule):
         is_teacher_adventure = self.is_adventure_from_teacher(adventure_id, teacher_adventures)
 
         if not remove and any(adventure['name'] == adventure_id for adventure in customizations['sorted_adventures'][level]):
-                return
+            return
         if not remove:
-            customizations['sorted_adventures'][level].append({'name': adventure_id, 'from_teacher': is_teacher_adventure})
+            customizations['sorted_adventures'][level].append(
+                {'name': adventure_id, 'from_teacher': is_teacher_adventure})
         else:
-            customizations['sorted_adventures'][level].remove({'name': adventure_id, 'from_teacher': is_teacher_adventure})
+            customizations['sorted_adventures'][level].remove(
+                {'name': adventure_id, 'from_teacher': is_teacher_adventure})
         sorted_adventure = SortedAdventure(short_name=adventure_id,
                                            long_name=adventure_names[adventure_id],
                                            is_teacher_adventure=is_teacher_adventure,
