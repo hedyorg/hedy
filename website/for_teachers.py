@@ -1006,9 +1006,6 @@ class ForTeachersModule(WebsiteModule):
                     tag_adventure["language"] = body["language"]
             self.db.update_tag(tag["id"], {"tagged_in": tag["tagged_in"]})
 
-        print("HAAI")
-        print(current_levels)
-        print(body["levels"])
         for old_class in current_classes:
             for level in current_levels:
                 if old_class not in body["classes"] or level not in body["levels"]:
