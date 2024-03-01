@@ -949,8 +949,6 @@ class ForTeachersModule(WebsiteModule):
             return gettext("adventure_id_invalid"), 400
         if not isinstance(body.get("name"), str):
             return gettext("adventure_name_invalid"), 400
-        if not body.get("classes"):
-            return body, 400
         if not isinstance(body.get("levels"), list) or (isinstance(body.get("levels"), list) and not body["levels"]):
             return gettext("level_invalid"), 400
         if not isinstance(body.get("content"), str):
@@ -965,6 +963,7 @@ class ForTeachersModule(WebsiteModule):
             # return gettext("language_invalid"), 400
 
         current_adventure = self.db.get_adventure(body["id"])
+        current_classes = current_adventure["classes"]
         if not current_adventure:
             return utils.error_page(error=404, ui_message=gettext("no_such_adventure"))
         # TODO: instead of not allowing the teacher, let them update the adventure in their relevant classes only.
@@ -1006,9 +1005,17 @@ class ForTeachersModule(WebsiteModule):
                     tag_adventure["language"] = body["language"]
             self.db.update_tag(tag["id"], {"tagged_in": tag["tagged_in"]})
 
+        for old_class in current_classes:
+            if old_class not in body["classes"]:
+                print("its removed...")
+                for level in current_adventure["levels"]:
+                    print(level)
+                    self.add_adventure_to_class_level(user, old_class, body["id"], level, True)
+
         for class_id in body["classes"]:
-            for level in body["levels"]:
-                self.add_adventure_to_class_level(user, class_id, body["id"], level)
+            if class_id != '0': 
+                    for level in body["levels"]:
+                        self.add_adventure_to_class_level(user, class_id, body["id"], level, False)
 
         return {"success": gettext("adventure_updated")}, 200
 
@@ -1038,7 +1045,7 @@ class ForTeachersModule(WebsiteModule):
             return gettext("something_went_wrong_keyword_parsing"), 400
         return {"code": code}, 200
 
-    def add_adventure_to_class_level(self, user, class_id, adventure_id, level):
+    def add_adventure_to_class_level(self, user, class_id, adventure_id, level, remove):
         Class = self.db.get_class(class_id)
         if not Class or (not utils.can_edit_class(user, Class) and not is_admin(user)):
             return utils.error_page(error=404, ui_message=gettext("no_such_class"))
@@ -1051,15 +1058,21 @@ class ForTeachersModule(WebsiteModule):
         teacher_adventures += second_teacher_adventures
         is_teacher_adventure = self.is_adventure_from_teacher(adventure_id, teacher_adventures)
 
-        if any(adventure['name'] == adventure_id for adventure in customizations['sorted_adventures'][level]):
+        if not remove and any(adventure['name'] == adventure_id for adventure in customizations['sorted_adventures'][level]):
                 return
-        customizations['sorted_adventures'][level].append({'name': adventure_id, 'from_teacher': is_teacher_adventure})
+        if not remove:
+            customizations['sorted_adventures'][level].append({'name': adventure_id, 'from_teacher': is_teacher_adventure})
+        else:
+            customizations['sorted_adventures'][level].remove({'name': adventure_id, 'from_teacher': is_teacher_adventure})
         sorted_adventure = SortedAdventure(short_name=adventure_id,
                                            long_name=adventure_names[adventure_id],
                                            is_teacher_adventure=is_teacher_adventure,
                                            is_command_adventure=adventure_id in hedy_content.KEYWORDS_ADVENTURES)
 
-        adventures[int(level)].append(sorted_adventure)
+        if not remove:
+            adventures[int(level)].append(sorted_adventure)
+        else:
+            adventures[int(level)].remove(sorted_adventure)
         self.db.update_class_customizations(customizations)
 
     @route("/create-adventure/<class_id>", methods=["POST"])
@@ -1087,6 +1100,7 @@ class ForTeachersModule(WebsiteModule):
             "language": g.lang,
         }
         self.db.store_adventure(adventure)
-        self.add_adventure_to_class_level(user, class_id, adventure_id, "1")
+        if class_id != '0':
+            self.add_adventure_to_class_level(user, class_id, adventure_id, "1")
 
         return adventure["id"], 200

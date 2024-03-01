@@ -114,7 +114,7 @@
         <div class="flex gap-4">
           <button id="create_adventure_button" class="green-btn mt-4" 
             hx-trigger="click"
-            hx-post="/for-teachers/create-adventure"
+            hx-post="/for-teachers/create-adventure/0"
             hx-swap="none"
             _="on htmx:afterRequest if detail.xhr.response
             window.open('/for-teachers/customize-adventure/' + detail.xhr.response + '/for-teachers', '_self')"
