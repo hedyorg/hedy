@@ -55512,7 +55512,7 @@ notes_mapping = {
   var theLevel2;
   var theLanguage;
   var TRADUCTION2;
-  var variable_view = false;
+  var variable_view = true;
   var step_debugger = false;
   var fullLineCommands = [
     "print",
@@ -55545,8 +55545,10 @@ notes_mapping = {
   function hide_if_no_variables() {
     if ($("#variables #variable-list li").length == 0) {
       $("#variable_button").hide();
+      $("#variables").hide();
     } else {
       $("#variable_button").show();
+      $("#variables").show();
     }
   }
   function show_variables() {
@@ -55567,6 +55569,7 @@ notes_mapping = {
           variableList.append(`<li style=color:${variables[i][2]}>${variables[i][0]}: ${variables[i][1]}</li>`);
         }
       }
+      show_variables();
       hide_if_no_variables();
     }
   }
@@ -55617,6 +55620,9 @@ notes_mapping = {
     if (!variable_view) {
       $("#variables").hide();
       $("#variable_button").hide();
+    } else {
+      $("#variables").show();
+      $("#variable_button").show();
     }
     if (options.level > 0) {
       let level3 = options.level;
@@ -55628,6 +55634,7 @@ notes_mapping = {
     if (options.level != 0) {
       let level3 = options.level;
       variable_view = level3 >= 2;
+      show_variables();
       hide_if_no_variables();
     }
     initializeBreakpoints(options.editor);
