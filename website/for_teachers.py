@@ -1008,28 +1008,7 @@ class ForTeachersModule(WebsiteModule):
 
         for class_id in body["classes"]:
             for level in body["levels"]:
-                Class = self.db.get_class(class_id)
-                if not Class or (not utils.can_edit_class(user, Class) and not is_admin(user)):
-                    return utils.error_page(error=404, ui_message=gettext("no_such_class"))
-
-                customizations, adventures, adventure_names, _ , _ = self.get_class_info(
-                    user, class_id)
-
-                teacher_adventures = list(self.db.get_teacher_adventures(user["username"]))
-                second_teacher_adventures = self.db.get_second_teacher_adventures([Class], user["username"])
-                teacher_adventures += second_teacher_adventures
-                is_teacher_adventure = self.is_adventure_from_teacher(body["id"], teacher_adventures)
-
-                if any(adventure['name'] == body["id"] for adventure in customizations['sorted_adventures'][level]):
-                    continue
-                customizations['sorted_adventures'][level].append({'name': body["id"], 'from_teacher': is_teacher_adventure})
-                sorted_adventure = SortedAdventure(short_name=body["id"],
-                                                long_name=adventure_names[body["id"]],
-                                                is_teacher_adventure=is_teacher_adventure,
-                                                is_command_adventure=body["id"] in hedy_content.KEYWORDS_ADVENTURES)
-
-                adventures[int(level)].append(sorted_adventure)
-                self.db.update_class_customizations(customizations)
+                self.add_adventure_to_class_level(user, class_id, body["id"], level)
 
         return {"success": gettext("adventure_updated")}, 200
 
@@ -1058,26 +1037,27 @@ class ForTeachersModule(WebsiteModule):
         except BaseException:
             return gettext("something_went_wrong_keyword_parsing"), 400
         return {"code": code}, 200
-
-    def update_class_customizations(self, user, class_id, adventure_id, adventure_names):
+    
+    def add_adventure_to_class_level(self, user, class_id, adventure_id, level):
         Class = self.db.get_class(class_id)
         if not Class or (not utils.can_edit_class(user, Class) and not is_admin(user)):
             return utils.error_page(error=404, ui_message=gettext("no_such_class"))
 
-        customizations, adventures, _, _, _ = self.get_class_info(user, class_id)
+        customizations, adventures, adventure_names, _ , _ = self.get_class_info(
+            user, class_id)
 
         teacher_adventures = list(self.db.get_teacher_adventures(user["username"]))
         second_teacher_adventures = self.db.get_second_teacher_adventures([Class], user["username"])
         teacher_adventures += second_teacher_adventures
         is_teacher_adventure = self.is_adventure_from_teacher(adventure_id, teacher_adventures)
 
-        customizations['sorted_adventures']["1"].append({'name': adventure_id, 'from_teacher': is_teacher_adventure})
+        customizations['sorted_adventures'][level].append({'name': adventure_id, 'from_teacher': is_teacher_adventure})
         sorted_adventure = SortedAdventure(short_name=adventure_id,
-                                        long_name=adventure_names[adventure_id],
-                                        is_teacher_adventure=is_teacher_adventure,
-                                        is_command_adventure=adventure_id in hedy_content.KEYWORDS_ADVENTURES)
+                                           long_name=adventure_names[adventure_id],
+                                           is_teacher_adventure=is_teacher_adventure,
+                                           is_command_adventure=adventure_id in hedy_content.KEYWORDS_ADVENTURES)
 
-        adventures[int("1")].append(sorted_adventure)
+        adventures[int(level)].append(sorted_adventure)
         self.db.update_class_customizations(customizations)
 
 
@@ -1106,8 +1086,6 @@ class ForTeachersModule(WebsiteModule):
             "language": g.lang,
         }
         self.db.store_adventure(adventure)
-
-        # Call the new method to handle updating class customizations
-        self.update_class_customizations(user, class_id, adventure_id, adventure_names)
+        self.add_adventure_to_class_level(user, class_id, adventure_id, "1")
 
         return adventure["id"], 200
