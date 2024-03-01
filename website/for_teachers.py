@@ -1051,6 +1051,8 @@ class ForTeachersModule(WebsiteModule):
         teacher_adventures += second_teacher_adventures
         is_teacher_adventure = self.is_adventure_from_teacher(adventure_id, teacher_adventures)
 
+        if any(adventure['name'] == adventure_id for adventure in customizations['sorted_adventures'][level]):
+                return
         customizations['sorted_adventures'][level].append({'name': adventure_id, 'from_teacher': is_teacher_adventure})
         sorted_adventure = SortedAdventure(short_name=adventure_id,
                                            long_name=adventure_names[adventure_id],
