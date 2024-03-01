@@ -1012,7 +1012,7 @@ class ForTeachersModule(WebsiteModule):
                 if not Class or (not utils.can_edit_class(user, Class) and not is_admin(user)):
                     return utils.error_page(error=404, ui_message=gettext("no_such_class"))
 
-                customizations, adventures, adventure_names, _ , _ = self.get_class_info(
+                customizations, adventures, adventure_names, _, _ = self.get_class_info(
                     user, class_id)
 
                 teacher_adventures = list(self.db.get_teacher_adventures(user["username"]))
@@ -1022,11 +1022,12 @@ class ForTeachersModule(WebsiteModule):
 
                 if any(adventure['name'] == body["id"] for adventure in customizations['sorted_adventures'][level]):
                     continue
-                customizations['sorted_adventures'][level].append({'name': body["id"], 'from_teacher': is_teacher_adventure})
+                customizations['sorted_adventures'][level].append(
+                    {'name': body["id"], 'from_teacher': is_teacher_adventure})
                 sorted_adventure = SortedAdventure(short_name=body["id"],
-                                                long_name=adventure_names[body["id"]],
-                                                is_teacher_adventure=is_teacher_adventure,
-                                                is_command_adventure=body["id"] in hedy_content.KEYWORDS_ADVENTURES)
+                                                   long_name=adventure_names[body["id"]],
+                                                   is_teacher_adventure=is_teacher_adventure,
+                                                   is_command_adventure=body["id"] in hedy_content.KEYWORDS_ADVENTURES)
 
                 adventures[int(level)].append(sorted_adventure)
                 self.db.update_class_customizations(customizations)
@@ -1073,13 +1074,12 @@ class ForTeachersModule(WebsiteModule):
 
         customizations['sorted_adventures']["1"].append({'name': adventure_id, 'from_teacher': is_teacher_adventure})
         sorted_adventure = SortedAdventure(short_name=adventure_id,
-                                        long_name=adventure_names[adventure_id],
-                                        is_teacher_adventure=is_teacher_adventure,
-                                        is_command_adventure=adventure_id in hedy_content.KEYWORDS_ADVENTURES)
+                                           long_name=adventure_names[adventure_id],
+                                           is_teacher_adventure=is_teacher_adventure,
+                                           is_command_adventure=adventure_id in hedy_content.KEYWORDS_ADVENTURES)
 
         adventures[int("1")].append(sorted_adventure)
         self.db.update_class_customizations(customizations)
-
 
     @route("/create-adventure/<class_id>", methods=["POST"])
     @requires_teacher
