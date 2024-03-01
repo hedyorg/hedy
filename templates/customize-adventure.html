@@ -33,7 +33,7 @@
                                 >
                                 {% for class in all_classes %}
                                 <option value="{{ class.id }}"
-                                    {% if class["id"] == adventure.classes %}
+                                    {% if class.id in adventure.classes %}
                                     selected
                                     {% endif %}>
                                     {{ class.name }}
@@ -44,7 +44,7 @@
                     </div>
                     <div class="flex flex-row items-center mb-4">
                         <label for="custom_adventure_levels" class="inline-block w-40 text-xl"  data-te-select-label-ref>{{_('levels')}}</label>
-                                <!-- data-te-class-notch-trailing-normal="!border-gray-200" -->
+                                <!-- data-te-class-notch-trailing-normal="!border-gray-200"-->
                         <div
                             id="custom_adventure_levels_container"
                             data-te-input-wrapper-init
