@@ -1060,7 +1060,6 @@ class ForTeachersModule(WebsiteModule):
         adventures[int(level)].append(sorted_adventure)
         self.db.update_class_customizations(customizations)
 
-
     @route("/create-adventure/<class_id>", methods=["POST"])
     @requires_teacher
     def create_adventure(self, user, class_id):
