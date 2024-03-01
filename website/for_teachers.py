@@ -964,6 +964,7 @@ class ForTeachersModule(WebsiteModule):
 
         current_adventure = self.db.get_adventure(body["id"])
         current_classes = current_adventure["classes"]
+        current_levels = current_adventure["levels"]
         if not current_adventure:
             return utils.error_page(error=404, ui_message=gettext("no_such_adventure"))
         # TODO: instead of not allowing the teacher, let them update the adventure in their relevant classes only.
@@ -1005,11 +1006,12 @@ class ForTeachersModule(WebsiteModule):
                     tag_adventure["language"] = body["language"]
             self.db.update_tag(tag["id"], {"tagged_in": tag["tagged_in"]})
 
+        print("HAAI")
+        print(current_levels)
+        print(body["levels"])
         for old_class in current_classes:
-            if old_class not in body["classes"]:
-                print("its removed...")
-                for level in current_adventure["levels"]:
-                    print(level)
+            for level in current_levels:
+                if old_class not in body["classes"] or level not in body["levels"]:
                     self.add_adventure_to_class_level(user, old_class, body["id"], level, True)
 
         for class_id in body["classes"]:
