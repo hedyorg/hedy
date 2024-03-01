@@ -1,6 +1,6 @@
 {% extends "auth.html" %}
 {% block regular_content %}
-<button id='go_back_button' class="back-btn" data-cy="go_back_button">
+<button id="back_to_class" class="back-btn" data-cy="back_to_class">
     <span class="fa fa-arrow-{% if g.dir == "ltr" %}left{% else %}right{% endif %}">&nbsp;</span>
     <span>{{_('go_back')}}</span>
 </button>
