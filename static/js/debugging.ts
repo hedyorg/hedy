@@ -62,7 +62,10 @@ function hide_if_no_variables(){ //this shows just the button, not the list itse
   }
   else{
     $('#variable_button').show();
-    $('#variables').show();
+    if(variable_view){
+      $('#variables').show();
+    }
+    
   }
 }
 
@@ -86,8 +89,8 @@ export function load_variables(variables: any) {
         variableList.append(`<li style=color:${variables[i][2]}>${variables[i][0]}: ${variables[i][1]}</li>`);
       }
     }
-    show_variables(); //show list itself
-    hide_if_no_variables(); //only the button to show/hide list
+    show_variables(); 
+    hide_if_no_variables(); 
   }
 }
 
@@ -159,9 +162,6 @@ export function initializeDebugger(options: InitializeDebuggerOptions) {
   if (!variable_view) {
     $('#variables').hide();
     $('#variable_button').hide();
-  } else {
-    $('#variables').show();
-    $('#variable_button').show();
   }
 
   //Feature flag for step by step debugger. Becomes true automatically for level 7 and below.

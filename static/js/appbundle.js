@@ -55548,7 +55548,9 @@ notes_mapping = {
       $("#variables").hide();
     } else {
       $("#variable_button").show();
-      $("#variables").show();
+      if (variable_view) {
+        $("#variables").show();
+      }
     }
   }
   function show_variables() {
@@ -55620,9 +55622,6 @@ notes_mapping = {
     if (!variable_view) {
       $("#variables").hide();
       $("#variable_button").hide();
-    } else {
-      $("#variables").show();
-      $("#variable_button").show();
     }
     if (options.level > 0) {
       let level3 = options.level;
@@ -57933,9 +57932,11 @@ pygame.quit()
     const variables = $("#variables");
     if (variables.is(":hidden")) {
       variables.show();
+      variable_view = true;
       $("#variables").trigger("click");
     } else {
       variables.hide();
+      variable_view = false;
     }
   }
   async function store_parsons_attempt(order, correct) {
