@@ -2,7 +2,7 @@
 {% block regular_content %}
 <div class="flex flex-col gap-2">
   <button class="back-btn" id="go_back_button" onclick="window.location.href='/for-teachers/class/{{class_info.id}}'">
-    <span class="fa fa-arrow-left">&nbsp;</span>
+    <span class="fa fa-arrow-{% if g.dir == "ltr" %}left{% else %}right{% endif %}">&nbsp;</span>
     {{_('go_back')}}
   </button>
   <h2>{{_('grid_overview')}}: {{class_info.name}}</h2>

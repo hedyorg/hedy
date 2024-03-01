@@ -3,7 +3,7 @@
 {% block regular_content %}
 <button id='go_back_button' class="back-btn"
 onclick="window.open('/for-teachers', '_self');">
-    <span class="fa fa-arrow-left">&nbsp;</span>
+    <span class="fa fa-arrow-{% if g.dir == "ltr" %}left{% else %}right{% endif %}">&nbsp;</span>
     <span>{{_('go_back')}}</span>
 </button>
 <br><br>

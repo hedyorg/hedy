@@ -11,7 +11,7 @@
     {% endif %}
     <div class="flex flex-col gap-4">
         <button class="back-btn" id="go_back_button" onclick="window.location.href = '/for-teachers'">
-          <span class="fa fa-arrow-left">&nbsp;</span>
+          <span class="fa fa-arrow-{% if g.dir == "ltr" %}left{% else %}right{% endif %}">&nbsp;</span>
           {{_('go_back')}}
         </button>
       <div id="survey" class="hidden"></div>

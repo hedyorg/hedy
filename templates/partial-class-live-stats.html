@@ -2,7 +2,7 @@
     <!--  Back to class button  -->
     <button id='go_back_button' class="back-btn"
     onclick="window.location.href='/for-teachers/class/{{class_info.id}}'" target="_blank">
-        <span class="fa fa-arrow-left">&nbsp;</span>
+        <span class="fa fa-arrow-{% if g.dir == "ltr" %}left{% else %}right{% endif %}">&nbsp;</span>
         <span>{{_('go_back')}}</span>
     </button>
     <br><br>

@@ -60,7 +60,7 @@
         <div class="my-8">{{ from_user }} {{_('no_shared_programs')}}</div>
     {% endif %}
         <button id='go_back_button' class="back-btn" _="on click window.open('/for-teachers/class/{{class_id}}', '_self')" data-cy="go_back_button">
-            <span class="fa fa-arrow-left">&nbsp;</span>
+            <span class="fa fa-arrow-{% if g.dir == "ltr" %}left{% else %}right{% endif %}">&nbsp;</span>
             {{_('go_back')}}
         </button>
     {% endif %}
