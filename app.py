@@ -756,6 +756,33 @@ def download_machine_file(filename, extension="zip"):
     return send_file("machine_files/" + filename + "." + extension, as_attachment=True)
 
 
+@app.route('/generate_microbit_file', methods=['POST'])
+def generate_microbit_file():
+    # Extract variables from request body
+    body = request.json
+    code = body.get("code")
+    level = body.get("level")
+
+    # Call transpile function with microbit=True
+    transpile_result = hedy.transpile_and_return_python(code, level, )
+
+    # Logic to save the transpiled code for the microbit
+    save_transpiled_code_for_microbit(transpile_result)
+
+    # Return the filename for the microbit file and a boolean indicating that it is meant for a microbit
+    return jsonify({'filename': 'Micro-bit.py', 'microbit': True}), 200
+
+
+def save_transpiled_code_for_microbit(transpiled_python_code):
+    folder = 'Micro-bit'
+    filepath = os.path.join(folder, 'Micro-bit.py')
+
+    if not os.path.exists(folder):
+        os.makedirs(folder)
+    with open(filepath, 'w') as file:
+        file.write(transpiled_python_code)
+
+
 @app.route('/download_microbit_files/', methods=['GET'])
 def download_microbit_file(filename, extension="hex"):
     # https://stackoverflow.com/questions/24612366/delete-an-uploaded-file-after-downloading-it-from-flask
@@ -770,7 +797,7 @@ def download_microbit_file(filename, extension="hex"):
             print("Error removing one of the generated files!")
         return response
 
-    return send_file("/Micro-bit/" + filename + "." + extension, as_attachment=True)
+    return send_file("Micro-bit/" + filename + "." + extension, as_attachment=True)
 
 
 def transpile_add_stats(code, level, lang_, is_debug):
