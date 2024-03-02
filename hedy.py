@@ -1613,10 +1613,7 @@ class ConvertToPython_1(ConvertToPython):
         if not self.microbit:
             return f"print('" + argument + "')" + self.add_debug_breakpoint()
         else:
-            return textwrap.dedent(f"""\
-            from microbit import *
-            while True:
-                display.scroll('{argument}')""")
+            return textwrap.dedent(f"""{' ' * 4}display.scroll('{argument}')""")
 
     def ask(self, meta, args):
         argument = process_characters_needing_escape(args[0])
