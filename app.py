@@ -50,7 +50,6 @@ from website.auth import (current_user, is_admin, is_teacher, is_second_teacher,
 from website.log_fetcher import log_fetcher
 from website.frontend_types import Adventure, Program, ExtraStory, SaveInfo
 
-
 logConfig(LOGGING_CONFIG)
 logger = logging.getLogger(__name__)
 
@@ -604,7 +603,7 @@ def parse():
 
         try:
             if username and not body.get('tutorial') and ACHIEVEMENTS.verify_run_achievements(
-                    username, code, level, response, transpile_result.commands):
+                username, code, level, response, transpile_result.commands):
                 response['achievements'] = ACHIEVEMENTS.get_earned_achievements()
         except Exception as E:
             print(f"error determining achievements for {code} with {E}")
@@ -757,6 +756,23 @@ def download_machine_file(filename, extension="zip"):
     return send_file("machine_files/" + filename + "." + extension, as_attachment=True)
 
 
+@app.route('/download_microbit_files/', methods=['GET'])
+def download_microbit_file(filename, extension="hex"):
+    # https://stackoverflow.com/questions/24612366/delete-an-uploaded-file-after-downloading-it-from-flask
+
+    # Once the file is downloaded -> remove it
+    @after_this_request
+    def remove_file(response):
+        try:
+            os.remove("Micro-bit/" + filename + ".hex")
+
+        except BaseException:
+            print("Error removing one of the generated files!")
+        return response
+
+    return send_file("/Micro-bit/" + filename + "." + extension, as_attachment=True)
+
+
 def transpile_add_stats(code, level, lang_, is_debug):
     username = current_user()['username'] or None
     number_of_lines = code.count('\n')
@@ -872,8 +888,8 @@ def translate_list(args):
 
     if len(translated_args) > 1:
         return f"{', '.join(translated_args[0:-1])}" \
-            f" {gettext('or')} " \
-            f"{translated_args[-1]}"
+               f" {gettext('or')} " \
+               f"{translated_args[-1]}"
     return ''.join(translated_args)
 
 
@@ -1041,10 +1057,10 @@ def programs_page(user):
              }
         )
 
-    sorted_level_programs = hedy_content.Adventures(g.lang)\
-                                        .get_sorted_level_programs(all_programs, adventure_names)
-    sorted_adventure_programs = hedy_content.Adventures(g.lang)\
-                                            .get_sorted_adventure_programs(all_programs, adventure_names)
+    sorted_level_programs = hedy_content.Adventures(g.lang) \
+        .get_sorted_level_programs(all_programs, adventure_names)
+    sorted_adventure_programs = hedy_content.Adventures(g.lang) \
+        .get_sorted_adventure_programs(all_programs, adventure_names)
 
     next_page_url = url_for('programs_page', **dict(request.args, page=result.next_page_token)
                             ) if result.next_page_token else None
@@ -1173,6 +1189,7 @@ def teacher_tutorial(user):
                                page='for-teachers',
                                tutorial=True,
                            ))
+
 
 # routing to index.html
 
@@ -1415,7 +1432,7 @@ def index(level, program_id):
             # Not current leve-quiz's data because some levels may have no data for quizes,
             # but we still need to check for the threshold.
             if level - 1 in available_levels and level > 1 and \
-                    (not level_quiz_data or QUIZZES[g.lang].get_quiz_data_for_level(level - 1)):
+                (not level_quiz_data or QUIZZES[g.lang].get_quiz_data_for_level(level - 1)):
                 scores = [x.get('scores', []) for x in quiz_stats if x.get('level') == level - 1]
                 scores = [score for week_scores in scores for score in week_scores]
                 max_score = 0 if len(scores) < 1 else max(scores)
@@ -1776,11 +1793,11 @@ def get_embedded_code_editor(level):
     return render_template("embedded-editor.html", fullWidth=fullWidth, run=run, language=language,
                            keyword_language=keyword_language, readOnly=readOnly,
                            level=level, javascript_page_options=dict(
-                               page='view-program',
-                               lang=language,
-                               level=level,
-                               code=program
-                           ))
+            page='view-program',
+            lang=language,
+            level=level,
+            code=program
+        ))
 
 
 @app.route('/cheatsheet/', methods=['GET'], defaults={'level': 1})
@@ -2273,6 +2290,11 @@ def store_parsons_order():
     return jsonify({}), 200
 
 
+@app.route('/generate_microbit_file', methods=['GET'])
+def gen():
+    return
+
+
 @app.template_global()
 def current_language():
     return make_lang_obj(g.lang)
@@ -2454,6 +2476,7 @@ def get_user_messages():
 
 app.add_template_global(utils.prepare_content_for_ckeditor, name="prepare_content_for_ckeditor")
 
+
 # Todo TB: Re-write this somewhere sometimes following the line below
 # We only store this @app.route here to enable the use of achievements ->
 # might want to re-write this in the future
@@ -2585,7 +2608,7 @@ def public_user_page(username):
         print(user_programs)
         # Todo: TB -> In the near future: add achievement for user visiting their own profile
         next_page_url = url_for('public_user_page', username=username, **dict(request.args,
-                                page=next_page_token)) if next_page_token else None
+                                                                              page=next_page_token)) if next_page_token else None
         return render_template(
             'public-page.html',
             user_info=user_public_info,
@@ -2823,6 +2846,7 @@ if __name__ == '__main__':
     start_snapshot = None
     if profile_memory:
         import tracemalloc
+
         tracemalloc.start()
         start_snapshot = tracemalloc.take_snapshot()
 
@@ -2841,6 +2865,7 @@ if __name__ == '__main__':
     if profile_memory:
         print('⏳ Taking memory snapshot. This may take a moment.')
         import gc
+
         gc.collect()
         end_snapshot = tracemalloc.take_snapshot()
         analyze_memory_snapshot(start_snapshot, end_snapshot)
