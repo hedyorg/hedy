@@ -87,9 +87,6 @@ adventures:
                     ```
             4:
                 story_text: |
-                    Mogłeś zauważyć, że w poprzednich poziomach ciągle jest pewnie problem. Czy próbowałeś napisać zdanie które zawierało słowo “imię”? Na przykład: `{print}` moje imię to imię.
-                    W tym poziomie możesz rozwiązać ten problem. Wystarczy, że użyjesz cudzysłowu dookoła tekstu, który chciałbyś wyświetlić.
-
                     ### Ćwiczenie
                     Skopiuj przykładowy kod i popraw go dodając cudzysłowy do linii.
 
@@ -781,9 +778,6 @@ adventures:
                     total = price + amount_of_product
                     {print} 'That will be $' price 'please'
                     ```
-
-                    total = price + amount_of_product
-                    {print} 'That will be $' price 'please'
             7:
                 story_text: |-
                     ### Exercise
@@ -821,21 +815,7 @@ adventures:
                     {sleep} 5
                     {print} 'All done! That will be $' price ' please!'
                     {print} 'Thank you! Byebye!'
-
-                            {print} That will be $25'
-                            price = 25
-                        {else}
-                            {print} That will be $18'
-                            price = 18
-                    color = {ask} What color would you like?
-                    sparkles = {ask} 'Would you like some sparkles with that?'
-                    {if} sparkles {is} yes
-                        {print} 'We charge $3 extra for that'
-                    price = price + 3
-                    {else} {print} 'No sparkles' {print} 'So no extra charge'
-                    {sleep} 5
-                    {print} 'All done! That will be $' price ' please!'
-                    {print} 'Thank you! Byebye!'
+                    ```
             9:
                 story_text: |-
                     ### Exercise
@@ -1153,21 +1133,22 @@ adventures:
                     ```
             2:
                 story_text: |
-                    Gratulację! Witamy na poziomie 2. Już stworzyliśmy trochę kodu za ciebie ;).
+                    Congratulations! You've reached level 2. Hopefully you've already made some awesome codes!
+                    In the first level you might've notice that the `{echo}` command can only save one bit of information at a time.
+                    For example in the restaurant adventure, you could echo what the costumer wanted to eat, or what they wanted to drink, but not both in one sentence.
 
-                    W pierwszym poziomie mogłeś zauważyć, że komenda `{echo}` potrafi zapisywać tylko 1 bit informacji na raz.
-
-                    Na przykład, w przygodzie "restauracja", możesz użyć echo, kiedy klient chce coś pić, lub zjeść, ale nie dwie rzeczy równocześnie.
+                    That changes in level 2. In level 2 you'll learn to work with variables, that allow you to save multiple pieces of information and print them in any place you want.
+                    So let's go to the next tab!
                 example_code: |
+                    **Warning! This code does not work!**
+                    In Hedy commands will change sometimes. `{echo}` for example only works in level 1. In this level you'll learn a better way to echo answers back.
                     ```
-                    {print} Witamy w Hedy's
-                    {ask} Co chciałbyś/chciałabyś zjeść?
-                    {echo} Czyli chcesz
-                    {ask} Czego chciałbyś/chciałabyś się napić?
-                    {echo} Czyli chcesz
+                    {print} Welcome at Hedy's
+                    {ask} What would you like to eat?
+                    {echo} So you want
+                    {ask} what would you like to drink?
+                    {echo} So you want
                     ```
-                story_text_2: |
-                    `{print}` wciąż działa tak samo, ale komenda `{ask}` zmieniła się. Musisz użyć zmiennej również w komendzie `{ask}`. Wygląda to tak:
             3:
                 story_text: "Na poprzednim poziomie nauczyliśmy się czym są zmienna i jak możemy ich używać, żeby nasze przygody były bardziej interaktywne. \nAle... to nie jedyna rzecz, którą możemy zrobić ze zmiennymi! Zmienne mogą też być listami. \nA nawet możemy pozwolić Hedy, aby wybrała losowe\
                     \ słowo z listy, co pozwoli Ci stworzyć prawdziwe gry!\nSpójrzmy na kolejną zakładkę!\n"
@@ -1660,27 +1641,21 @@ adventures:
                     Teraz Hedy może odpowiedzieć tylko tak, nie lub może. Czy możesz dać Hedy więcej opcji odpowiedzi, np. 'zdecydowanie' lub 'zapytaj ponownie'.
             4:
                 story_text: |
-                    Ten poziom nie ma żadnych nowych funkcji, ale pozwala poćwiczyć używanie cudzysłowów.
-                    Możesz przerobić swój kod poziomu 3 i pamiętaj o dodaniu cudzysłowów we właściwych miejscach!
+                    ### Exercise
+                    We have removed all the quotation marks from this example code, can you add them in all the right places?
 
-                    Pamiętaj, że na poziomie 3 nie mogliśmy użyć słowa „pytanie” zarówno jako nazwy zmiennej, jak i zwykłego słowa, które można wydrukować.
-                    Umożliwiają to cudzysłowy na poziomie 3!
-
-                    Ważny! Pamiętaj, że teraz, gdy używamy cudzysłowów, Hedy będzie zdezorientowana, gdy użyjesz apostrofu do skrótów typu I'm lub What's.
-                    Pamiętaj, aby usunąć te apostrofy i zmienić pisownię na Im lub Whats.
-
-                    ### Ćwiczenie
-                    Usunęliśmy wszystkie cudzysłowy z tego przykładowego kodu, czy możesz dodać je we wszystkich właściwych miejscach?
+                    ### Exercise 2
+                    Go back to the previous level and copy your fortune teller code. Make the code work in this level by adding quotation marks in the right spots.
                 example_code: |
                     ```
-                    _ Dodaj cudzysłów do tego kodu _
-                    {print} Jestem Hedy - wróżka!
-                    pytanie {is} {ask} Co chcesz wiedzieć?
-                    {print} To jest twoje pytanie: pytanie
-                    odpowiedzi {is} tak, nie, może
-                    {print} Moja kryształowa kula mówi...
+                    _ Add the quotation marks to this code _
+                    {print} Im Hedy the fortune teller!
+                    question {is} {ask} What do you want to know?
+                    {print} This is your question:  question
+                    answers {is} yes, no, maybe
+                    {print} My crystal ball says...
                     {sleep} 2
-                    {print} odpowiedzi {at} {random}
+                    {print} answers {at} {random}
                     ```
             5:
                 story_text: |
@@ -2425,7 +2400,9 @@ adventures:
                     play C5
                     ```
             2:
-                story_text: Finish the songs! We have started the codes for some melodies.
+                story_text: |
+                    ### Exercise
+                    Finish the songs! We have started the codes for some melodies.
                 example_code: |
                     ```
                     {print} Old Mac Donald had a farm
@@ -2468,7 +2445,7 @@ adventures:
                     ```
             4:
                 story_text: |
-                    Use the `{clear}` command to create a karaokemachine!
+                    Use the `{clear}` command to create a karaoke machine!
 
                     ### Exercise
                     Finish the karaoke version of 'Mary had a little lamb'.
@@ -3134,7 +3111,6 @@ adventures:
             1:
                 story_text: |
                     Na poziomie 1 możesz stworzyć swoją własną wirtualną restaurację i przyjmować zamówienia gości.
-                example_code: "``` \n{print} Witaj w restauracji Hedy \U0001F35F\n_ Co chcesz zamówić?\n {echo} A więc chcesz zamówić\n{print} Dziękuje za zamówienie!\n{print} Zaraz podamy!\n```\n"
                 story_text_2: |
                     ### Ćwiczenie
                     Skopiuj przykładowy kod na ekran wejściowy, klikając żółty przycisk.
@@ -3142,6 +3118,7 @@ adventures:
                     Następnie dodaj co najmniej 4 kolejne linie kodu do programu restauracji.
                     Zapytaj klienta, co chciałby wypić i czy chce zapłacić gotówką, czy kartą.
                     Na koniec wymyśl jakiś miły sposób pożegnania się z klientem.
+                example_code_2: "``` \n{print} Witaj w restauracji Hedy \U0001F35F\n_ Co chcesz zamówić?\n {echo} A więc chcesz zamówić\n{print} Dziękuje za zamówienie!\n{print} Zaraz podamy!\n```\n"
             2:
                 story_text: |
                     Na poziomie 2 możesz rozbudować swoją restaurację za pomocą zmiennych. Na poziomie 1 Hedy mogła wyświetlić {echo} zamówienie tylko raz i pamiętała tylko ostatnią zamówioną rzecz.
@@ -3195,10 +3172,12 @@ adventures:
                     ```
             4:
                 story_text: |
-                    W tym poziomie musisz używać cudzysłowu, gdy używasz polecenia `{print}` lub `{ask}`.
+                    ### Exercise
+                    Add the quotation marks to this code to make it work! Be careful: variables should not be in quotation marks.
+                    Then, use the `{clear}` command to only show one line at a time in your output screen.
 
-                    ### Ćwiczenie
-                    Dodaj cudzysłów do tego kodu, aby działał! Uważaj: zmienne nie powinny być wewnątrz cudzysłowu.
+                    ### Exercise 2
+                    Go back to the previous level and copy your restaurant code. Make the code work in this level by adding quotation marks in the right spots and add some `{clear}` commands.
                 example_code: |
                     ```
                     _ Dodaj cudzysłów do tego kodu _
@@ -3266,6 +3245,10 @@ adventures:
             8:
                 story_text: |
                     Na tym poziomie możesz rozbudować swoją wirtualną restaurację, powtarzając wiele linii kodu. W ten sposób:
+
+                    ### Ćwiczenie
+                    Ten kod można rozszerzyć o więcej pozycji w menu, na przykład oferując napoje i/lub wiele dań, lub deserów. Dodaj jeszcze co najmniej jeden element.
+                    **Dodatkowo** Dodaj jeszcze więcej elementów, tyle opcji, ile chcesz!
                 example_code: |
                     ```
                     {print} 'Witamy w Restauracji Chez Hedy!'
@@ -3277,10 +3260,6 @@ adventures:
                     {print} 'Dziękuję za zamówienie!'
                     {print} 'Smacznego!'
                     ```
-                story_text_2: |
-                    ### Ćwiczenie
-                    Ten kod można rozszerzyć o więcej pozycji w menu, na przykład oferując napoje i/lub wiele dań, lub deserów. Dodaj jeszcze co najmniej jeden element.
-                    **Dodatkowo** Dodaj jeszcze więcej elementów, tyle opcji, ile chcesz!
             9:
                 story_text: "Na tym poziomie możesz użyć wcięć, aby Twoja restauracja była bardziej realistyczna i zabawniejsza!\n\n### Ćwiczenie\nWcięcie zostało usunięte z przykładowego kodu.\nCzy potrafisz określić, ile wcięć potrzebuje każda linia, aby kod działał poprawnie?\nJeśli klient zamawia\
                     \ pizzę, Hedy nie powinna pytać, jakiego sosu chce klient.\n\n**Dodatkowo** Restauracja nie posiada wszystkich sosów. Sporządź listę dostępnych sosów i przy każdym zamówieniu napisz, czy je sprzedajesz. <br>\n**Dodatkowo** Pizze mają dodatki. Zapytaj klientów, czego chcą.<br>\n**Dodatkowo**\
@@ -3418,8 +3397,12 @@ adventures:
                     Na tym poziomie możemy dodatkowo zaprogramować kamień, papier, nożyce. Jeśli chcesz dodać tekst, tutaj również musisz użyć cudzysłowów.
 
                     ### Ćwiczenie
-
-                    Przekopiuj swój kod z poprzedniego poziomu i spraw, żeby zadziałał używając cudzysłowów w każdej komendzie `{print}` i `{ask}`.
+                    Fill in quotation marks on the blanks. Mind that the variable `choices` should be outside the quotes.
+                example_code: |
+                    ```
+                    choices {is} rock, paper, scissors
+                    {print} _The computer chooses..._ choices {at} {random}
+                    ```
             5:
                 story_text: |
                     Na tym poziomie możemy ustalić, kto wygrał.
@@ -4049,10 +4032,15 @@ adventures:
                     Pisząć `{forward}` możesz narysować linie. Liczba zaraz po komendzie mówi o tym ile ma przejść żółw rysując linie..`{turn} {right}` obraca żółwia o ćwierć obrotu w prawo (zgodnie z ruchem wskazówek zegara), `{turn} {left}` obraca w lewo (przeciwnie do ruchu wskazówek zegara).
 
                     Jeśli chcesz przesunąć żółwia do tył, możesz wykorzystać komendę `{forward}` ale z ujemną liczba. Na przykład `{forward} -100`
-
+                example_code: |
+                    ```
+                    {forward} 100
+                    {turn} {left}
+                    ```
+                story_text_2: |
                     ### Ćwiczenie
                     To jest początek schodków. Możesz sprawić aby miały 5 stopni?
-                example_code: |
+                example_code_2: |
                     ```
                     {forward} 20
                     {turn} {right}

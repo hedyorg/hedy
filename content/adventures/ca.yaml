@@ -87,9 +87,6 @@ adventures:
                     ```
             4:
                 story_text: |
-                    Potser has notat que hi ha un problema als nivells anteriors. Has intentat imprimir una frase que contingui la paraula nom? Per exemple, `{print}` el meu nom és nom.
-                    Pots resoldre-ho en aquest nivell. Has d'utilitzar cometes per a tot el que vulguis imprimir.
-
                     ### Exercici
                     Copia el codi d'exemple i acaba'l afegint cometes als espais en blanc de les línies 1 i 2.
                     Els espais en blanc de la línia 3 i 4 no s'han de substituir per cometes, sinó per una comanda `{sleep}` i una comanda `{clear}`. Pots fer-ho funcionar?
@@ -823,9 +820,6 @@ adventures:
                     total = price + amount_of_product
                     {print} 'That will be $' price 'please'
                     ```
-
-                    total = price + amount_of_product
-                    {print} 'That will be $' price 'please'
             7:
                 story_text: |-
                     ### Exercise
@@ -863,21 +857,7 @@ adventures:
                     {sleep} 5
                     {print} 'All done! That will be $' price ' please!'
                     {print} 'Thank you! Byebye!'
-
-                            {print} That will be $25'
-                            price = 25
-                        {else}
-                            {print} That will be $18'
-                            price = 18
-                    color = {ask} What color would you like?
-                    sparkles = {ask} 'Would you like some sparkles with that?'
-                    {if} sparkles {is} yes
-                        {print} 'We charge $3 extra for that'
-                    price = price + 3
-                    {else} {print} 'No sparkles' {print} 'So no extra charge'
-                    {sleep} 5
-                    {print} 'All done! That will be $' price ' please!'
-                    {print} 'Thank you! Byebye!'
+                    ```
             9:
                 story_text: |-
                     ### Exercise
@@ -1200,6 +1180,8 @@ adventures:
                     Enhorabona! Has arribat al nivell 2. Segurament ja has fet codis genials!
                     Durant el primer nivell t'hauràs adonat que la comanda `{echo}` només pot guardar una peça d'informació cada vegada.
                     Per exemple, a l'aventura del restaurant podies repetir el que el client volia menjar, o el que volia beure, però no tot d'una vegada.
+                    Això canvia al nivell 2. Al nivell 2 aprendràs a treballar amb variable que et permetran guardar múltiples peces d'informació i imprimir-les a qualsevol lloc que vulguis.
+                    om-hi!, anem a la següent pestanya!
                 example_code: |
                     **Alerta! Aquest codi no funciona!**
                     A Hedy les comandes van canviant. Per exemple la comanda `{echo}` només funciona al nivell 1. En aquest nivell aprendràs una millor manera de respondre.
@@ -1211,12 +1193,6 @@ adventures:
                     {ask} Què voldria per beure?
                     {echo} Vosté vol
                     ```
-                story_text_2: |
-                    Si el jugador escriu una hamburguesa i una Coca-Cola, no pots contestar-li "Vostè vol una hamburguesa i una Coca-Cola", per fer-ho hauries d'utilitzar dues línies.
-                    Per altra banda, la comanda `{echo}` només repeteix la paraula al final de la frase i no pots dir: "La teva hamburguesa ja està a punt!".
-
-                    Això canvia al nivell 2. Al nivell 2 aprendràs a treballar amb variable que et permetran guardar múltiples peces d'informació i imprimir-les a qualsevol lloc que vulguis.
-                    Som-hi!, anem a la següent pestanya!
             3:
                 story_text: |
                     Al nivell anterior has après què és una variable i com la pots utilitzar per fer les teves aventures de forma més interactiva.
@@ -1726,17 +1702,11 @@ adventures:
                     Now, Hedy can only answer yes, no or maybe. Can you give Hedy more answer options, like 'definitely' or 'ask again'.
             4:
                 story_text: |
-                    This level has no new functions, but allows you to practice with using the quotation marks.
-                    You can remake your level 3 code, and make sure to add the quotation marks in the right places!
-
-                    Mind that in level 3, we couldn't use the word 'question' as both the name of the variable and a normal word that could be printed.
-                    The quotation marks in level 3 make this possible!
-
-                    Important! Mind that now that we're using quotation marks, Hedy will get confused when you use the apostrophe for contractions like I'm or What's.
-                    Make sure to remove those apostrophes and change the spelling to Im or Whats.
-
                     ### Exercise
                     We have removed all the quotation marks from this example code, can you add them in all the right places?
+
+                    ### Exercise 2
+                    Go back to the previous level and copy your fortune teller code. Make the code work in this level by adding quotation marks in the right spots.
                 example_code: |
                     ```
                     _ Add the quotation marks to this code _
@@ -2517,7 +2487,9 @@ adventures:
                     play C5
                     ```
             2:
-                story_text: Finish the songs! We have started the codes for some melodies.
+                story_text: |
+                    ### Exercise
+                    Finish the songs! We have started the codes for some melodies.
                 example_code: |
                     ```
                     {print} Old Mac Donald had a farm
@@ -2560,7 +2532,7 @@ adventures:
                     ```
             4:
                 story_text: |
-                    Use the `{clear}` command to create a karaokemachine!
+                    Use the `{clear}` command to create a karaoke machine!
 
                     ### Exercise
                     Finish the karaoke version of 'Mary had a little lamb'.
@@ -3242,7 +3214,10 @@ adventures:
             1:
                 story_text: |
                     In level 1 you can make your own virtual restaurant and take your guests' orders.
-                example_code: |
+                story_text_2: |
+                    ### Exercise
+                    Can you think of more lines to add to your restaurant code? For example, can you {ask} the guests what they'd like to drink, tell them the price, or wish them a pleasant meal?
+                example_code_2: |
                     ```
                     {print} Welcome to Hedy's restaurant 🍟
                     {ask} What would you like to order?
@@ -3250,9 +3225,6 @@ adventures:
                     {print} Thanks you for your order!
                     {print} It's on its way!
                     ```
-                story_text_2: |
-                    ### Exercise
-                    Can you think of more lines to add to your restaurant code? For example, can you {ask} the guests what they'd like to drink, tell them the price, or wish them a pleasant meal?
             2:
                 story_text: |
                     In level 2 you could expand your restaurant by using variables. In level 1 Hedy could only {echo} the order once and only remember the last thing that was ordered.
@@ -3304,8 +3276,6 @@ adventures:
                     ```
             4:
                 story_text: |
-                    In this level you have to use quotation marks when using the `{print}` or `{ask}` command.
-
                     ### Exercise
                     Add the quotation marks to this code to make it work! Be careful: variables should not be in quotation marks.
                 example_code: |
@@ -3376,9 +3346,13 @@ adventures:
             8:
                 story_text: |
                     In this level you can make your virtual restaurant more elaborate by repeating multiple lines of code. Like this:
+
+                    ### Exercise
+                    This code can be expanded with more items on the menu, for example offering drinks, and/or multiple courses or desserts. Add at least one more item.
+                    **Extra** Add even more items, as many options as you like!
                 example_code: |
                     ```
-                    {print} 'Welcome to Hedys restaurant!'
+                    {print} 'Welcome to Restaurant Chez Hedy!'
                     people = {ask} 'How many people will be joining us today?'
                     {print} 'Great!'
                     {repeat} people {times}
@@ -3387,9 +3361,6 @@ adventures:
                     {print} 'Thank you for ordering!'
                     {print} 'Enjoy your meal!'
                     ```
-                story_text_2: |
-                    ### Exercise
-                    Of course, this code can be expanded with more items on the menu, offering drinks, and/or multiple courses, so feel free to add as many options as you like!
             9:
                 story_text: |
                     In this level you can use nesting to make your restaurant more realistic and more fun!
@@ -3577,7 +3548,13 @@ adventures:
             4:
                 story_text: |
                     In this level we can further program rock, paper, scissors. But if you want to add text, you have to use quotation marks here too.
-                    Do you complete the code by entering the correct commands or characters on the underscores?
+                    ### Exercise
+                    Fill in quotation marks on the blanks. Mind that the variable `choices` should be outside the quotes.
+                example_code: |
+                    ```
+                    choices {is} rock, paper, scissors
+                    {print} _The computer chooses..._ choices {at} {random}
+                    ```
             5:
                 story_text: |
                     In this level we can determine who won.
@@ -4280,10 +4257,15 @@ adventures:
                     Using `{forward}` you draw a line forwards. The number behind it determines how far the turtle will walk. `{turn} {right}` turns a quarter turn in clockwise direction, `{turn} {left}` turns counter clockwise.
 
                     If you want to go backwards, you use the `{forward}` command but with a negative number. So for example `{forward} -100`
-
+                example_code: |
+                    ```
+                    {forward} 100
+                    {turn} {left}
+                    ```
+                story_text_2: |
                     ### Exercise
                     This is the start of a little staircase. Can you make it have 5 steps?
-                example_code: |
+                example_code_2: |
                     ```
                     {forward} 20
                     {turn} {right}
