@@ -8,7 +8,7 @@ let theLanguage: string;
 let TRADUCTION: Map<string,string>;
 
 //Feature flag for variable and values view
-let variable_view = false;
+let variable_view = true;
 let step_debugger = false;
 const fullLineCommands = [
   'print',
@@ -54,12 +54,17 @@ interface GutterMouseDownEvent {
   stop(): void;
 }
 
-function hide_if_no_variables(){
+function hide_if_no_variables(){ //this shows just the button, not the list itself
   if($('#variables #variable-list li').length == 0){
     $('#variable_button').hide();
+    $('#variables').hide();
   }
   else{
     $('#variable_button').show();
+    if(variable_view){
+      $('#variables').show();
+    }
+    
   }
 }
 
@@ -83,7 +88,8 @@ export function load_variables(variables: any) {
         variableList.append(`<li style=color:${variables[i][2]}>${variables[i][0]}: ${variables[i][1]}</li>`);
       }
     }
-    hide_if_no_variables();
+    show_variables(); 
+    hide_if_no_variables(); 
   }
 }
 
@@ -171,6 +177,7 @@ export function initializeDebugger(options: InitializeDebuggerOptions) {
   if(options.level != 0){
     let level = options.level;
     variable_view = level >= 2;
+    show_variables();
     hide_if_no_variables();
   }
 
