@@ -544,10 +544,10 @@ export const TRANSLATIONS: Record<string, Record<MessageKey, string>> = {
     "unsaved_class_changes": "There are unsaved changes, are you sure you want to leave this page?"
   },
   "hi": {
-    "CheckInternet": "देखें कि आपका इंटरनेट कनेक्शन ठीक से काम कर रहा है या नहीं.",
+    "CheckInternet": "जांचें कि आपका इंटरनेट कनेक्शन काम कर रहा है या नहीं।",
     "Connection_error": "हम सर्वर तक नहीं पहुंच सके|",
     "Empty_output": "यह कोड काम करता है लेकिन कुछ भी प्रिंट नहीं करता है। अपने कोड में एक प्रिंट कमांड जोड़ें या आउटपुट प्राप्त करने के लिए टर्टल का उपयोग करें|",
-    "Errors_found": "You made a mistake! Don't worry, Hedy is trying to find the mistakes",
+    "Errors_found": "आपने एक गलती कर दी! चिंता न करें, हमने अभी भी प्रोग्राम चलाया",
     "Execute_error": "प्रोग्राम चलाते समय कुछ गलत हो गया|",
     "Other_error": "उफ़! शायद हमने थोड़ी सी गलती कर दी।",
     "Program_repair": "यह सही कोड हो सकता है, क्या आप इसे ठीक कर सकते हैं?",
@@ -839,9 +839,9 @@ export const TRANSLATIONS: Record<string, Record<MessageKey, string>> = {
     "restaurant": "🍣, 🍕, 🍔",
     "rock": "✂️, 📜, 🗻",
     "songs": "🎵,🎶",
-    "teacher_welcome": "Welkom bij Hedy! Jouw account is omgezet naar een leerkrachtenaccount. Je kan nu klassen maken en er leerlingen in uitnodigen.",
+    "teacher_welcome": "Welkom bij Hedy! Jouw account is omgezet naar een leerkrachtenaccount. Je \"kan nu klassen maken en er leerlingen in uitnodigen.",
     "turtle": "🐢",
-    "unsaved_class_changes": "Er zijn wijzigingen nog niet opgeslagen, weet je zeker dat je terug wilt gaan?"
+    "unsaved_class_changes": "Er zijn wijzigingen nog niet opgeslagen, weet je zeker dat je terug wilt \"gaan?"
   },
   "no_NB": {
     "CheckInternet": "Sjekk internetttilkoblingen din, fungerer den.",
