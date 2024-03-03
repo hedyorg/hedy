@@ -3180,7 +3180,14 @@ adventures:
             1:
                 story_text: |
                     In level 1 you can make your own virtual restaurant and take your guests' orders.
-                example_code: "{print}```\n{print} Re a go amogela mo semausung sa Mosaditshwene \U0001F35F\n{ask} O bata go reka eng?\n{echo} Good, so o bata go reka \n{print} Thanks you for your order!\n{printa} Dijo tsa gago di eta!\n```\n"
+                example_code: |
+                    ```
+                    {print} Re a go amogela mo semausung sa Mosaditshwene 🍟
+                    _ O bata go reka eng?
+                    {echo} Good, so o bata go reka
+                    {print} Thanks you for your order!
+                    {print} Dijo tsa gago di eta!
+                    ```
                 story_text_2: |
                     ### Exercise
                     Copy the example code into your input screen by clicking the yellow button.
@@ -3361,7 +3368,10 @@ adventures:
                     ```
             10:
                 story_text: |
-                    In this level you'll learn how to easily {ask} your guests' orders in a short code.
+                    In this level you'll learn how to easily ask orders for different courses.
+
+                    ### Exercise 1
+                    Finish the code with an `{ask}` on the blanks such that the customer is asked what they want to eat for each course.
                 example_code: |
                     ```
                     courses = appetizer, main course, dessert
