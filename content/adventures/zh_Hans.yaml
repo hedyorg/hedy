@@ -2310,6 +2310,13 @@ adventures:
                     {if} age > 12
                         {print} '你比我大!'
                     ```
+                    ```
+                    age = {ask} '你多大了?'
+                    {if} age < 12
+                        {print} '你比我小!'
+                    {else}
+                        {print} '你比我大!'
+                    ```
                 story_text_2: |
                     从这一关开始，如果你想精确地比较，你可以使用两个等号。这是大多数编程语言所做的:
                 example_code_2: |
@@ -2326,11 +2333,6 @@ adventures:
                     {if} name != 'Hedy'
                         {print} '你不是Hedy'
                     ```
-
-                    {if} age < 13
-                        {print} '你比我小!'
-                    {else}
-                        {print} '你比我大!'
     language:
         name: 语言
         default_save_name: 语言
@@ -2923,10 +2925,12 @@ adventures:
                 example_code_2: |
                     ```
                     温度 = 25
-                    {print}('现在 ', 温度, ' 户外文段')
+                    {print}('现在 ', ' 户外温度', 温度)
                     ```
-
+                    ```
+                    名字= 'Hedy'
                     {print}('我的名字是 ', 名字)
+                    ```
     quizmaster:
         name: 测验命题人员
         default_save_name: 测验命题人员
@@ -3909,7 +3913,7 @@ adventures:
                     ```
             14:
                 story_text: |
-                    在之前的关卡中，你制作了一款井字游戏。现在您已经学习了如何使用=号、==号和!=号。
+                    在之前的关卡中，你制作了一款井字游戏。现在您已经学习了如何使用`=`号、`==`号和`!=`号。
                     你可以在你的新井字游戏中使用这些知识，就像这样:
                 example_code: |
                     ```
