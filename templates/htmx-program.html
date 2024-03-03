@@ -16,7 +16,7 @@
                 <td>{{program.name|truncate(30)}}</td>
                 <td>{{_('level')}} {{ program.level }}</td>
                 {% if program.adventure_name %}
-                    <td>{{adventure_names.get(program.adventure_name)}}</td>
+                    <td>{{adventure_names.get(program.adventure_name, program.adventure_name)}}</td>
                 {% else %}
                     <td>-</td>
                 {% endif %}
