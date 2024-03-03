@@ -43,7 +43,7 @@ adventures:
                     {sleep}
                     {print} imię obawia się, że las może być nawiedzony
                     ```
-                story_text_2: "### Ćwiczenie\nTeraz nadszedł czas, aby dodać zmienne do opowieści, którą stworzyłeś na poprzednim poziomie. \nPrzejdź do „Moje programy”, poszukaj przygody fabularnej poziomu 1 i skopiuj kod. Wklej kod na ekranie wprowadzania na tym poziomie. \n\nTen kod nie zadziała na tym poziomie, ponieważ nie używałeś jeszcze zmiennych. \nZmień polecenia `{ask}` i `{echo}` w swoim kodzie na poprawną formę, której nauczyłeś się na tym poziomie. \n\n**Dodatkowo** Dodaj polecenie uśpienia do swojego kodu, aby zbudować napięcie w swojej historii.\n"
+                story_text_2: "### Ćwiczenie\nTeraz nadszedł czas, aby dodać zmienne do opowieści, którą stworzyłeś na poprzednim poziomie.\nPrzejdź do „Moje programy”, poszukaj przygody fabularnej poziomu 1 i skopiuj kod. Wklej kod na ekranie wprowadzania na tym poziomie.\n\nTen kod nie zadziała na tym poziomie, ponieważ nie używałeś jeszcze zmiennych.\nZmień polecenia `{ask}` i `{echo}` w swoim kodzie na poprawną formę, której nauczyłeś się na tym poziomie.\n\n**Dodatkowo** Dodaj polecenie `{sleep}` do swojego kodu, aby zbudować napięcie w swojej historii.\n"
             3:
                 story_text: |
                     Na poziomie 3. Twoja historyjka może być jeszcze zabawniejsza. Możesz wybrać losowo potwora, zwierzę oraz inne utrudnienia, tak jak w przykładzie:
@@ -58,9 +58,9 @@ adventures:
                     ```
                     {print} On słyszy odgłos
                     zwierzęta {is} 🐿, 🦔, 🦇, 🦉
-                    zwierzę {is} {ask} Co to było?
+                    zwierzę {is} {ask} Co myślisz że to było?
                     {add} zwierzę {to_list} zwierzęta
-                    {print} To był odgłos zwierzęta {at} {random}
+                    {print} To był odgłos zwierząt {at} {random}
                     ```
                 story_text_3: |
                     To jest przykład polecenia `{remove}` w twojej opowieści.
