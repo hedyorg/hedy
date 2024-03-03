@@ -30,7 +30,7 @@ USERS = {}
 # *** HELPERS ***
 
 
-def request(method, path, headers={}, body='', cookies=None):
+def request(method, path, headers={}, body='', cookies=None, follow_redirects=True):
 
     if method not in ['get', 'post', 'put', 'delete']:
         raise Exception('request - Invalid method: ' + str(method))
@@ -47,7 +47,8 @@ def request(method, path, headers={}, body='', cookies=None):
 
     start = utils.timems()
 
-    response = getattr(requests, method)(HOST + path, headers=headers, data=body, cookies=cookies)
+    response = getattr(requests, method)(HOST + path, headers=headers, data=body,
+                                         cookies=cookies, allow_redirects=follow_redirects)
 
     # Remember all cookies in the cookie jar
     if cookies is not None:
@@ -218,9 +219,9 @@ class AuthHelper(unittest.TestCase):
 
         return response['headers'] if return_headers else response['body']
 
-    def get_data(self, path, expect_http_code=200, no_cookie=False, return_headers=False):
+    def get_data(self, path, expect_http_code=200, no_cookie=False, return_headers=False, follow_redirects=True):
         cookies = self.user_cookies[self.username] if self.username and not no_cookie else None
-        response = request('get', path, body='', cookies=cookies)
+        response = request('get', path, body='', cookies=cookies, follow_redirects=follow_redirects)
 
         self.assertEqual(
             response['code'],
@@ -587,7 +588,10 @@ class TestAuth(AuthHelper):
         self.post_data('auth/logout', '')
 
         # WHEN retrieving the user profile with the same cookie
-        # THEN receive a forbidden response code from the server
+        # THEN first receive a redirect response code from the server, and the next
+        # page load will be a 403. Need to have 'follow_redirects=False' or we won't see
+        # the 302 code.
+        self.get_data('profile', expect_http_code=302, follow_redirects=False)
         self.get_data('profile', expect_http_code=403)
 
     def test_destroy_account(self):
@@ -599,7 +603,9 @@ class TestAuth(AuthHelper):
         self.destroy_current_user()
 
         # WHEN retrieving the profile of the user
-        # THEN receive a forbidden response code from the server
+        # THEN first receive a redirect response response code from the server, and
+        # the next page load will be a forbidden
+        self.get_data('profile', expect_http_code=302, follow_redirects=False)
         self.get_data('profile', expect_http_code=403)
 
     def test_invalid_change_password(self):
@@ -1047,35 +1053,15 @@ class TestProgram(AuthHelper):
         # GIVEN a logged in user
         self.given_user_is_logged_in()
 
-        # WHEN attempting to share a program with an invalid body
-        invalid_bodies = [
-            '',
-            [],
-            {},
-            {'code': 1},
-            {'code': ['1']},
-            {'code': 'hello world'},
-            {'code': 'hello world', 'name': 1},
-            {'code': 'hello world', 'name': 'program 1'},
-            {'code': 'hello world', 'name': 'program 1', 'level': '1'},
-            {'code': 'hello world', 'name': 'program 1', 'level': 1, 'adventure_name': 1},
-        ]
-
-        for invalid_body in invalid_bodies:
-            # THEN receive an invalid response code from the server
-            self.post_data('programs/share', invalid_body, expect_http_code=400)
-
         # WHEN sharing a program without being logged in
         # THEN receive a forbidden response code from the server
-        self.post_data('programs/share',
-                       {'id': '123456',
-                        'public': True},
+        self.post_data('programs/share/123456/1/False', {'id': '123456'},
                        expect_http_code=403,
                        no_cookie=True)
 
         # WHEN sharing a program that does not exist
         # THEN receive a not found response code from the server
-        self.post_data('programs/share', {'id': '123456', 'public': True}, expect_http_code=404)
+        self.post_data('programs/share/123456/1/0', {'id': '123456'}, expect_http_code=404)
 
     def test_valid_make_program_public(self):
         # GIVEN a logged in user with at least one program
@@ -1085,7 +1071,7 @@ class TestProgram(AuthHelper):
 
         # WHEN making a program public
         # THEN receive an OK response code from the server
-        self.post_data('programs/share', {'id': program_id, 'public': True, })
+        self.post_data('programs/share/' + program_id + '/1' + '/False', {'id': program_id})
 
         saved_programs = self.get_data('programs/list')['programs']
         for program in saved_programs:
@@ -1105,11 +1091,11 @@ class TestProgram(AuthHelper):
         self.given_user_is_logged_in()
         program = {'code': 'hello world', 'name': 'program 1', 'level': 1, 'shared': False}
         program_id = self.post_data('programs', program)['id']
-        self.post_data('programs/share', {'id': program_id, 'public': True})
+        self.post_data('programs/share/' + program_id + '/1' + '/0', {'id': program_id})
 
         # WHEN making a program private
         # THEN receive an OK response code from the server
-        self.post_data('programs/share', {'id': program_id, 'public': False})
+        self.post_data('programs/share/' + program_id + '/1' + '/False', {'id': program_id})
 
         saved_programs = self.get_data('programs/list')['programs']
         for program in saved_programs:
@@ -1376,7 +1362,7 @@ class TestClasses(AuthHelper):
         # GIVEN a student with two programs, one public and one private
         public_program = {'code': 'hello world', 'name': 'program 1', 'level': 1, 'shared': False}
         public_program_id = self.post_data('programs', public_program)['id']
-        self.post_data('programs/share', {'id': public_program_id, 'public': True})
+        self.post_data('programs/share/' + public_program_id + '/1' + '/False', {'id': public_program_id})
         private_program = {'code': 'hello world', 'name': 'program 2', 'level': 2, 'shared': False}
         self.post_data('programs', private_program)['id']
 

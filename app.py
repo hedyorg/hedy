@@ -43,7 +43,7 @@ from utils import dump_yaml_rt, is_debug_mode, load_yaml_rt, timems, version, st
 from website import (ab_proxying, achievements, admin, auth_pages, aws_helpers,
                      cdn, classes, database, for_teachers, s3_logger, parsons,
                      profile, programs, querylog, quiz, statistics,
-                     translating, tags, surveys, public_adventures)
+                     translating, tags, surveys, public_adventures, user_activity)
 from website.auth import (current_user, is_admin, is_teacher, is_second_teacher, has_public_profile,
                           login_user_from_token_cookie, requires_login, requires_login_redirect, requires_teacher,
                           forget_current_user)
@@ -371,9 +371,14 @@ if utils.is_heroku():
 
 Compress(app)
 Commonmark(app)
-parse_logger = s3_logger.S3ParseLogger.from_env_vars()
-querylog.LOG_QUEUE.set_transmitter(
-    aws_helpers.s3_querylog_transmitter_from_env())
+
+# We don't need to log in offline mode
+if utils.is_offline_mode():
+    parse_logger = s3_logger.NullLogger()
+else:
+    parse_logger = s3_logger.S3Logger(name="parse", config_key="s3-parse-logs")
+    querylog.LOG_QUEUE.set_transmitter(
+        aws_helpers.s3_querylog_transmitter_from_env())
 
 
 @app.before_request
@@ -816,7 +821,8 @@ def translate_error(code, arguments, keyword_lang):
         'echo',
         'is',
         'if',
-        'repeat']
+        'repeat',
+        '[]']
 
     # Todo TB -> We have to find a more delicate way to fix this: returns some gettext() errors
     error_template = gettext('' + str(code))
@@ -866,8 +872,8 @@ def translate_list(args):
 
     if len(translated_args) > 1:
         return f"{', '.join(translated_args[0:-1])}" \
-               f" {gettext('or')} " \
-               f"{translated_args[-1]}"
+            f" {gettext('or')} " \
+            f"{translated_args[-1]}"
     return ''.join(translated_args)
 
 
@@ -988,15 +994,27 @@ def programs_page(user):
         public_profile = DATABASE.get_public_profile_settings(username)
 
     keyword_lang = g.keyword_lang
-    adventure_names = hedy_content.Adventures(g.lang).get_adventure_names(keyword_lang)
-    swapped_adventure_names = {value: key for key, value in adventure_names.items()}
 
+    adventure_names = hedy_content.Adventures(g.lang).get_adventure_names(keyword_lang)
     level = request.args.get('level', default=None, type=str) or None
     adventure = request.args.get('adventure', default=None, type=str) or None
     page = request.args.get('page', default=None, type=str)
     filter = request.args.get('filter', default=None, type=str)
     submitted = True if filter == 'submitted' else None
 
+    all_programs = DATABASE.filtered_programs_for_user(from_user or username,
+                                                       submitted=submitted,
+                                                       pagination_token=page)
+    ids_to_fetch = []
+    for program in all_programs:
+        if 'adventure_name' in program and program['adventure_name'] not in adventure_names:
+            ids_to_fetch.append(program['adventure_name'])
+
+    teacher_adventures = DATABASE.batch_get_adventures(ids_to_fetch)
+    for id, teacher_adventure in teacher_adventures.items():
+        if teacher_adventure is not None:
+            adventure_names[id] = teacher_adventure['name']
+    swapped_adventure_names = {value: key for key, value in adventure_names.items()}
     result = DATABASE.filtered_programs_for_user(from_user or username,
                                                  level=level,
                                                  adventure=swapped_adventure_names.get(adventure),
@@ -1023,14 +1041,10 @@ def programs_page(user):
              }
         )
 
-    all_programs = DATABASE.filtered_programs_for_user(from_user or username,
-                                                       submitted=submitted,
-                                                       pagination_token=page)
-
-    sorted_level_programs = hedy_content.Adventures(
-        g.lang).get_sorted_level_programs(all_programs, adventure_names)
-    sorted_adventure_programs = hedy_content.Adventures(
-        g.lang).get_sorted_adventure_programs(all_programs, adventure_names)
+    sorted_level_programs = hedy_content.Adventures(g.lang)\
+                                        .get_sorted_level_programs(all_programs, adventure_names)
+    sorted_adventure_programs = hedy_content.Adventures(g.lang)\
+                                            .get_sorted_adventure_programs(all_programs, adventure_names)
 
     next_page_url = url_for('programs_page', **dict(request.args, page=result.next_page_token)
                             ) if result.next_page_token else None
@@ -1046,7 +1060,8 @@ def programs_page(user):
         sorted_adventure_programs=sorted_adventure_programs,
         adventure_names=adventure_names,
         max_level=hedy.HEDY_MAX_LEVEL,
-        next_page_url=next_page_url)
+        next_page_url=next_page_url,
+        second_teachers_programs=False)
 
 
 @app.route('/logs/query', methods=['POST'])
@@ -2437,6 +2452,8 @@ def get_user_messages():
     return None
 
 
+app.add_template_global(utils.prepare_content_for_ckeditor, name="prepare_content_for_ckeditor")
+
 # Todo TB: Re-write this somewhere sometimes following the line below
 # We only store this @app.route here to enable the use of achievements ->
 # might want to re-write this in the future
@@ -2556,9 +2573,9 @@ def public_user_page(username):
         sorted_adventure_programs = hedy_content.Adventures(
             g.lang).get_sorted_adventure_programs(all_programs, adventure_names)
 
-        favourite_program = None
+        favorite_program = None
         if 'favourite_program' in user_public_info and user_public_info['favourite_program']:
-            favourite_program = DATABASE.program_by_id(
+            favorite_program = DATABASE.program_by_id(
                 user_public_info['favourite_program'])
 
         last_achieved = None
@@ -2574,7 +2591,7 @@ def public_user_page(username):
             user_info=user_public_info,
             achievements=ACHIEVEMENTS_TRANSLATIONS.get_translations(
                 g.lang).get('achievements'),
-            favourite_program=favourite_program,
+            favorite_program=favorite_program,
             programs=user_programs,
             last_achieved=last_achieved,
             user_achievements=user_achievements,
@@ -2654,6 +2671,7 @@ app.register_blueprint(quiz.QuizModule(DATABASE, ACHIEVEMENTS, QUIZZES))
 app.register_blueprint(parsons.ParsonsModule(PARSONS))
 app.register_blueprint(statistics.StatisticsModule(DATABASE))
 app.register_blueprint(statistics.LiveStatisticsModule(DATABASE))
+app.register_blueprint(user_activity.UserActivityModule(DATABASE))
 app.register_blueprint(tags.TagsModule(DATABASE, ACHIEVEMENTS))
 app.register_blueprint(public_adventures.PublicAdventuresModule(DATABASE, ACHIEVEMENTS))
 app.register_blueprint(surveys.SurveysModule(DATABASE))
@@ -2710,14 +2728,91 @@ def split_at(n, xs):
     return xs[:n], xs[n:]
 
 
+def on_offline_mode():
+    """Prepare for running in offline mode."""
+    # We are running in a standalone build made using pyinstaller.
+    # cd to the directory that has the data files, disable debug mode, and
+    # use port 80 (unless overridden).
+    # There will be a standard teacher invite code that everyone can use
+    # by going to `http://localhost/invite/newteacher`.
+    os.chdir(utils.offline_data_dir())
+    config['port'] = int(os.environ.get('PORT', 80))
+    if not os.getenv('TEACHER_INVITE_CODES'):
+        os.environ['TEACHER_INVITE_CODES'] = 'newteacher'
+    utils.set_debug_mode(False)
+
+    # Disable logging, so Werkzeug doesn't log all requests and tell users with big red
+    # letters they're running a non-production server.
+    # from werkzeug import serving
+    # def do_nothing(*args, **kwargs): pass
+    # serving.WSGIRequestHandler.log_request = do_nothing
+    log = logging.getLogger('werkzeug')
+    log.setLevel(logging.ERROR)
+
+    # Get our IP addresses so we can print a helpful hint
+    import socket
+    ip_addresses = [addr[4][0] for addr in socket.getaddrinfo(
+        socket.gethostname(), None, socket.AF_INET, socket.SOCK_STREAM)]
+    ip_addresses = [i for i in ip_addresses if i != '127.0.0.1']
+
+    from colorama import colorama_text, Fore, Back, Style
+    g = Fore.GREEN
+    lines = [
+        ('', ''),
+        ('', ''),
+        (g, r' _    _          _       '),
+        (g, r'| |  | |        | |      '),
+        (g, r'| |__| | ___  __| |_   _ '),
+        (g, r'|  __  |/ _ \/ _` | | | |'),
+        (g, r'| |  | |  __/ (_| | |_| |'),
+        (g, r'|_|  |_|\___|\__,_|\__, |'),
+        (g, r'                    __/ |'),
+        (g, r'   o f f l i n e   |___/ '),
+        ('', ''),
+        ('', 'Use a web browser to visit the following website:'),
+        ('', ''),
+        *[(Fore.BLUE, f'   http://{ip}/') for ip in ip_addresses],
+        ('', ''),
+        ('', ''),
+    ]
+    # This is necessary to make ANSI color codes work on Windows.
+    # Init and deinit so we don't mess with Werkzeug's use of this library later on.
+    with colorama_text():
+        for style, text in lines:
+            print(Back.WHITE + Fore.BLACK + ''.ljust(10) + style + text.ljust(60) + Style.RESET_ALL)
+
+    # We have this option for testing the offline build. A lot of modules read
+    # files upon import, and those happen before the offline build 'cd' we do
+    # here and need to be written to use __file__. During the offline build,
+    # we want to run the actual code to see that nobody added file accesses that
+    # crash, but we don't actually want to start the server.
+    smoke_test = '--smoketest' in sys.argv
+    if smoke_test:
+        sys.exit(0)
+
+
 if __name__ == '__main__':
     # Start the server on a developer machine. Flask is initialized in DEBUG mode, so it
     # hot-reloads files. We also flip our own internal "debug mode" flag to True, so our
     # own file loading routines also hot-reload.
-    utils.set_debug_mode(not os.getenv('NO_DEBUG_MODE'))
+    no_debug_mode_requested = os.getenv('NO_DEBUG_MODE')
+    utils.set_debug_mode(not no_debug_mode_requested)
 
-    # For local debugging, fetch all static files on every request
-    app.config['SEND_FILE_MAX_AGE_DEFAULT'] = None
+    if utils.is_offline_mode():
+        on_offline_mode()
+
+    # Set some default environment variables for development mode
+    env_defaults = dict(
+        BASE_URL=f"http://localhost:{config['port']}/",
+        ADMIN_USER="admin",
+    )
+    for key, value in env_defaults.items():
+        if key not in os.environ:
+            os.environ[key] = value
+
+    if utils.is_debug_mode():
+        # For local debugging, fetch all static files on every request
+        app.config['SEND_FILE_MAX_AGE_DEFAULT'] = None
 
     # If we are running in a Python debugger, don't use flasks reload mode. It creates
     # subprocesses which make debugging harder.
@@ -2732,9 +2827,12 @@ if __name__ == '__main__':
         start_snapshot = tracemalloc.take_snapshot()
 
     on_server_start()
-    logger.debug('app starting in debug mode')
+    debug = utils.is_debug_mode() and not (is_in_debugger or profile_memory)
+    if debug:
+        logger.debug('app starting in debug mode')
+
     # Threaded option enables multiple instances for multiple user access support
-    app.run(threaded=True, debug=not is_in_debugger and not profile_memory,
+    app.run(threaded=True, debug=debug,
             port=config['port'], host="0.0.0.0")
 
     # See `Procfile` for how the server is started on Heroku.
