@@ -3699,6 +3699,6 @@ def execute(input_string, level):
     exec(python.code)
 
 
-# def transpile_and_return_python(input_string, level):
-#     python = transpile(input_string, level, microbit=True)
-#     return str(python.code)
+def transpile_and_return_python(input_string, level, microbit=True):
+    python = transpile(input_string, level, microbit=True)
+    return str(python.code)
