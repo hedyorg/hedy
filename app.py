@@ -13,6 +13,7 @@ import traceback
 import textwrap
 import zipfile
 import jinja_partials
+import subprocess
 from typing import Optional
 from logging.config import dictConfig as logConfig
 from os import path
@@ -757,14 +758,13 @@ def download_machine_file(filename, extension="zip"):
 
 
 @app.route('/generate_microbit_file', methods=['POST'])
-def generate_microbit_file():
+def generate_microbit_file(input_string, level):
     # Extract variables from request body
     body = request.json
     code = body.get("code")
     level = body.get("level")
 
-    # Call transpile function with microbit=True
-    transpile_result = hedy.transpile_and_return_python(code, level, )
+    transpile_result = str(hedy.transpile(input_string, level, microbit=True))
 
     # Logic to save the transpiled code for the microbit
     save_transpiled_code_for_microbit(transpile_result)
@@ -781,42 +781,36 @@ def save_transpiled_code_for_microbit(transpiled_python_code):
         os.makedirs(folder)
 
     with open(filepath, 'w') as file:
-        # Insert custom string
         custom_string = "from microbit import *\nwhile True:"
         file.write(custom_string + "\n")
-
-        # Add space before every display.scroll call
         indented_code = transpiled_python_code.replace("display.scroll(", "    display.scroll(")
-
-        # Append the indented transpiled code
         file.write(indented_code)
 
 
-# app = Flask(__name__)
-#
-#
-# @app.route('/download_microbit_file/', methods=['GET'])
-# def download_microbit_file():
-#     # Get the filename from the request
-#     filename = request.args.get('filename')
-#
-#     # Set the folder path and the filepath for the requested file
-#     folder = 'Micro-bit'
-#     filepath = os.path.join(app.root_path, folder, filename)
-#
-#     # Ensure that the file exists
-#     if not os.path.isfile(filepath):
-#         return jsonify({'error': 'File not found.'}), 404
-#
-#     # Remove the file
-#     os.remove(filepath)
-#
-#     # Serve the file as an attachment
-#     return send_file(filepath, as_attachment=True)
-#
-#
-# if __name__ == '__main__':
-#     app.run(debug=True)
+@app.route('/download_microbit_file/', methods=['GET'])
+def download_microbit_file(filename, ):
+    convert_to_hex()
+
+    # https://stackoverflow.com/questions/24612366/delete-an-uploaded-file-after-downloading-it-from-flask
+
+    # Once the file is downloaded -> remove it
+    @after_this_request
+    def remove_file(response):
+        try:
+            os.remove("Micro-bit/Micro-bit.py")
+            os.remove("Micro-bit/micropython.hex")
+        except BaseException:
+            print("Error removing one of the generated files!")
+        return response
+
+    return send_file("Micro-bit/micropython.hex", as_attachment=True)
+
+
+def convert_to_hex():
+    python_script_path = 'Micro-bit/hex-converter.py'
+    hex_file_path = 'Micro-bit/'
+    convert= subprocess.run(['uflash', python_script_path, hex_file_path])
+    return convert
 
 
 def transpile_add_stats(code, level, lang_, is_debug):
