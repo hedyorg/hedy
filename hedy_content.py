@@ -542,11 +542,12 @@ class Adventures(StructuredDataFile):
     def get_sorted_adventure_programs(self, programs, adventure_names):
         programs_by_adventure = []
         for item in programs:
-            programs_by_adventure.append(
-                {'adventure_name': adventure_names.get(item.get('adventure_name'), item.get('adventure_name')),
-                 'level': item['level'],
-                 }
-            )
+            if item.get('adventure_name') != '':
+                programs_by_adventure.append(
+                    {'adventure_name': adventure_names.get(item.get('adventure_name'), item.get('adventure_name')),
+                     'level': item['level'],
+                     }
+                )
 
         sort = {}
         for program in programs_by_adventure:
