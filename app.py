@@ -809,7 +809,7 @@ def download_microbit_file(filename, ):
 def convert_to_hex():
     python_script_path = 'Micro-bit/hex-converter.py'
     hex_file_path = 'Micro-bit/'
-    convert= subprocess.run(['uflash', python_script_path, hex_file_path])
+    convert = subprocess.run(['uflash', python_script_path, hex_file_path])
     return convert
 
 
