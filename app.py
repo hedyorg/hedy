@@ -604,7 +604,7 @@ def parse():
 
         try:
             if username and not body.get('tutorial') and ACHIEVEMENTS.verify_run_achievements(
-                username, code, level, response, transpile_result.commands):
+                    username, code, level, response, transpile_result.commands):
                 response['achievements'] = ACHIEVEMENTS.get_earned_achievements()
         except Exception as E:
             print(f"error determining achievements for {code} with {E}")
@@ -812,7 +812,6 @@ def save_transpiled_code_for_microbit(transpiled_python_code):
 #     hex_file_path = 'Micro-bit/'
 #     convert= subprocess.run(['uflash', python_script_path, hex_file_path])
 #     return convert
-
 
 
 def transpile_add_stats(code, level, lang_, is_debug):
@@ -1474,7 +1473,7 @@ def index(level, program_id):
             # Not current leve-quiz's data because some levels may have no data for quizes,
             # but we still need to check for the threshold.
             if level - 1 in available_levels and level > 1 and \
-                (not level_quiz_data or QUIZZES[g.lang].get_quiz_data_for_level(level - 1)):
+                    (not level_quiz_data or QUIZZES[g.lang].get_quiz_data_for_level(level - 1)):
                 scores = [x.get('scores', []) for x in quiz_stats if x.get('level') == level - 1]
                 scores = [score for week_scores in scores for score in week_scores]
                 max_score = 0 if len(scores) < 1 else max(scores)
@@ -1835,11 +1834,11 @@ def get_embedded_code_editor(level):
     return render_template("embedded-editor.html", fullWidth=fullWidth, run=run, language=language,
                            keyword_language=keyword_language, readOnly=readOnly,
                            level=level, javascript_page_options=dict(
-            page='view-program',
-            lang=language,
-            level=level,
-            code=program
-        ))
+                               page='view-program',
+                               lang=language,
+                               level=level,
+                               code=program
+                           ))
 
 
 @app.route('/cheatsheet/', methods=['GET'], defaults={'level': 1})
