@@ -1832,10 +1832,7 @@ class ConvertToPython_2(ConvertToPython_1):
         if not self.microbit:
             return exception + f"print(f'{argument_string}'){self.add_debug_breakpoint()}"
         else:
-            return textwrap.dedent(f"""\
-                from microbit import *
-                while True:
-                    display.scroll('{argument_string}')""")
+            return textwrap.dedent(f"""{' ' * 4}display.scroll('{argument_string}')""")
 
     def ask(self, meta, args):
         var = args[0]
@@ -2011,10 +2008,7 @@ class ConvertToPython_4(ConvertToPython_3):
         if not self.microbit:
             return exceptions + f"print(f'{argument_string}'){self.add_debug_breakpoint()}"
         else:
-            return textwrap.dedent(f"""\
-                from microbit import *
-                while True:
-                    display.scroll('{argument_string}')""")
+            return textwrap.dedent(f"""{' ' * 4}display.scroll('{argument_string}')""")
 
     def ask(self, meta, args):
         var = args[0]
@@ -2524,10 +2518,7 @@ class ConvertToPython_12(ConvertToPython_11):
         if not self.microbit:
             return exception + f"print(f'''{argument_string}''')" + self.add_debug_breakpoint()
         else:
-            return textwrap.dedent(f"""\
-                from microbit import *
-                while True:
-                    display.scroll('{argument_string}')""")
+            return textwrap.dedent(f"""{' ' * 4}display.scroll('{argument_string}')""")
 
     def ask(self, meta, args):
         var = args[0]
