@@ -13,6 +13,7 @@ import traceback
 import textwrap
 import zipfile
 import jinja_partials
+import subprocess
 from typing import Optional
 from logging.config import dictConfig as logConfig
 from os import path
@@ -49,7 +50,6 @@ from website.auth import (current_user, is_admin, is_teacher, is_second_teacher,
                           forget_current_user)
 from website.log_fetcher import log_fetcher
 from website.frontend_types import Adventure, Program, ExtraStory, SaveInfo
-
 
 logConfig(LOGGING_CONFIG)
 logger = logging.getLogger(__name__)
@@ -604,7 +604,7 @@ def parse():
 
         try:
             if username and not body.get('tutorial') and ACHIEVEMENTS.verify_run_achievements(
-                    username, code, level, response, transpile_result.commands):
+                username, code, level, response, transpile_result.commands):
                 response['achievements'] = ACHIEVEMENTS.get_earned_achievements()
         except Exception as E:
             print(f"error determining achievements for {code} with {E}")
@@ -757,6 +757,52 @@ def download_machine_file(filename, extension="zip"):
     return send_file("machine_files/" + filename + "." + extension, as_attachment=True)
 
 
+@app.route('/generate_microbit_file', methods=['POST'])
+def generate_microbit_file():
+    # Extract variables from request body
+    body = request.json
+    code = body.get("code")
+    level = body.get("level")
+
+    # Call transpile function with microbit=True
+    transpile_result = hedy.transpile_and_return_python(code, level, )
+
+    # Logic to save the transpiled code for the microbit
+    save_transpiled_code_for_microbit(transpile_result)
+
+    # Return the filename for the microbit file and a boolean indicating that it is meant for a microbit
+    return jsonify({'filename': 'Micro-bit.py', 'microbit': True}), 200
+
+
+def save_transpiled_code_for_microbit(transpiled_python_code):
+    folder = 'Micro-bit'
+    filepath = os.path.join(folder, 'Micro-bit.py')
+
+    if not os.path.exists(folder):
+        os.makedirs(folder)
+    with open(filepath, 'w') as file:
+        custom_string = "from microbit import *\nwhile True:"
+        file.write(custom_string + "\n")
+
+        # Add space before every display.scroll call
+        indented_code = transpiled_python_code.replace("display.scroll(", "    display.scroll(")
+
+        # Append the indented transpiled code
+        file.write(indented_code)
+
+
+@app.route('/download_microbit_files/', methods=['GET'])
+def convert_to_hex_and_download():
+    flash_micro_bit()
+    current_directory = os.path.dirname(os.path.abspath(__file__))
+    micro_bit_directory = os.path.join(current_directory, 'Micro-bit')
+    return send_file(os.path.join(micro_bit_directory, "micropython.hex"), as_attachment=True)
+
+
+def flash_micro_bit():
+    subprocess.run(['uflash', "Micro-bit/Micro-bit.py", "Micro-bit/"])
+
+
 def transpile_add_stats(code, level, lang_, is_debug):
     username = current_user()['username'] or None
     number_of_lines = code.count('\n')
@@ -872,8 +918,8 @@ def translate_list(args):
 
     if len(translated_args) > 1:
         return f"{', '.join(translated_args[0:-1])}" \
-            f" {gettext('or')} " \
-            f"{translated_args[-1]}"
+               f" {gettext('or')} " \
+               f"{translated_args[-1]}"
     return ''.join(translated_args)
 
 
@@ -1006,10 +1052,8 @@ def programs_page(user):
                                                        submitted=submitted,
                                                        pagination_token=page)
     ids_to_fetch = []
-    # Some old programs don't have adventure_name in them, or the field is emtpy.
     for program in all_programs:
-        if 'adventure_name' in program and program['adventure_name'] and\
-                program['adventure_name'] not in adventure_names:
+        if 'adventure_name' in program and program['adventure_name'] not in adventure_names:
             ids_to_fetch.append(program['adventure_name'])
 
     teacher_adventures = DATABASE.batch_get_adventures(ids_to_fetch)
@@ -1043,10 +1087,10 @@ def programs_page(user):
              }
         )
 
-    sorted_level_programs = hedy_content.Adventures(g.lang)\
-                                        .get_sorted_level_programs(all_programs, adventure_names)
-    sorted_adventure_programs = hedy_content.Adventures(g.lang)\
-                                            .get_sorted_adventure_programs(all_programs, adventure_names)
+    sorted_level_programs = hedy_content.Adventures(g.lang) \
+        .get_sorted_level_programs(all_programs, adventure_names)
+    sorted_adventure_programs = hedy_content.Adventures(g.lang) \
+        .get_sorted_adventure_programs(all_programs, adventure_names)
 
     next_page_url = url_for('programs_page', **dict(request.args, page=result.next_page_token)
                             ) if result.next_page_token else None
@@ -1175,6 +1219,7 @@ def teacher_tutorial(user):
                                page='for-teachers',
                                tutorial=True,
                            ))
+
 
 # routing to index.html
 
@@ -1417,7 +1462,7 @@ def index(level, program_id):
             # Not current leve-quiz's data because some levels may have no data for quizes,
             # but we still need to check for the threshold.
             if level - 1 in available_levels and level > 1 and \
-                    (not level_quiz_data or QUIZZES[g.lang].get_quiz_data_for_level(level - 1)):
+                (not level_quiz_data or QUIZZES[g.lang].get_quiz_data_for_level(level - 1)):
                 scores = [x.get('scores', []) for x in quiz_stats if x.get('level') == level - 1]
                 scores = [score for week_scores in scores for score in week_scores]
                 max_score = 0 if len(scores) < 1 else max(scores)
@@ -1778,11 +1823,11 @@ def get_embedded_code_editor(level):
     return render_template("embedded-editor.html", fullWidth=fullWidth, run=run, language=language,
                            keyword_language=keyword_language, readOnly=readOnly,
                            level=level, javascript_page_options=dict(
-                               page='view-program',
-                               lang=language,
-                               level=level,
-                               code=program
-                           ))
+            page='view-program',
+            lang=language,
+            level=level,
+            code=program
+        ))
 
 
 @app.route('/cheatsheet/', methods=['GET'], defaults={'level': 1})
@@ -2275,6 +2320,11 @@ def store_parsons_order():
     return jsonify({}), 200
 
 
+@app.route('/generate_microbit_file', methods=['GET'])
+def gen():
+    return
+
+
 @app.template_global()
 def current_language():
     return make_lang_obj(g.lang)
@@ -2456,6 +2506,7 @@ def get_user_messages():
 
 app.add_template_global(utils.prepare_content_for_ckeditor, name="prepare_content_for_ckeditor")
 
+
 # Todo TB: Re-write this somewhere sometimes following the line below
 # We only store this @app.route here to enable the use of achievements ->
 # might want to re-write this in the future
@@ -2587,7 +2638,7 @@ def public_user_page(username):
         print(user_programs)
         # Todo: TB -> In the near future: add achievement for user visiting their own profile
         next_page_url = url_for('public_user_page', username=username, **dict(request.args,
-                                page=next_page_token)) if next_page_token else None
+                                                                              page=next_page_token)) if next_page_token else None
         return render_template(
             'public-page.html',
             user_info=user_public_info,
@@ -2825,6 +2876,7 @@ if __name__ == '__main__':
     start_snapshot = None
     if profile_memory:
         import tracemalloc
+
         tracemalloc.start()
         start_snapshot = tracemalloc.take_snapshot()
 
@@ -2843,6 +2895,7 @@ if __name__ == '__main__':
     if profile_memory:
         print('⏳ Taking memory snapshot. This may take a moment.')
         import gc
+
         gc.collect()
         end_snapshot = tracemalloc.take_snapshot()
         analyze_memory_snapshot(start_snapshot, end_snapshot)

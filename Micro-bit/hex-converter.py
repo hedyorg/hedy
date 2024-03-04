@@ -23,6 +23,11 @@
 
 
 import subprocess
-python_script_path = 'Micro-bit.py'
-hex_file_path = ''
-subprocess.run(['uflash', python_script_path, hex_file_path])
+
+
+# python_script_path = 'Micro-bit.py'
+# hex_file_path = ''
+# subprocess.run(['uflash', python_script_path, hex_file_path])
+
+def flash_micro_bit(python_script_path, hex_file_path):
+    subprocess.run(['uflash', python_script_path, hex_file_path])

@@ -1,6 +1,8 @@
-# from microbit import *
-# while True:
-#     display.scroll('Hedy is the best! :)')
-#     sleep(200)
-#     display.show(Image.SAD)
-#     sleep(2000)
+from microbit import *
+while True:
+    display.scroll('Holdy is hard')
+    display.scroll('I am going to dye!!!')
+    display.scroll('send help')
+    display.scroll('i think its working')
+    display.scroll('does it')
+    display.scroll('???')
