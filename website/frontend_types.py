@@ -125,7 +125,8 @@ class Adventure:
     @staticmethod
     def from_teacher_adventure_database_row(row):
         return Adventure(
-            short_name=row['id'],
+            # short_name=row['id'],
+            short_name=row['name'],
             name=row['name'],
             save_name=row['name'],
             editor_contents='',  # Teacher adventures don't seem to have this
