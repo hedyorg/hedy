@@ -1006,8 +1006,10 @@ def programs_page(user):
                                                        submitted=submitted,
                                                        pagination_token=page)
     ids_to_fetch = []
+    # Some old programs don't have adventure_name in them, or the field is emtpy.
     for program in all_programs:
-        if 'adventure_name' in program and program['adventure_name'] not in adventure_names:
+        if 'adventure_name' in program and program['adventure_name'] and\
+                program['adventure_name'] not in adventure_names:
             ids_to_fetch.append(program['adventure_name'])
 
     teacher_adventures = DATABASE.batch_get_adventures(ids_to_fetch)
