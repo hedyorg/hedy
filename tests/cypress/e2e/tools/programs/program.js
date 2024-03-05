@@ -2,7 +2,7 @@
 export function executeHelloWorldProgram(name) {
     cy.visit(`${Cypress.env('hedy_page')}#${name}`);
     // make sure to navigate to the wanted program tab.
-    cy.get(`[data-tab="${name}"]`)
+    cy.get(`[data-cy="${name}"]`)
         .click();
     // Execute program to save it
     cy.get('#editor .cm-content').click();
