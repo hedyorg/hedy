@@ -15,4 +15,16 @@ export function createAdventure(name="")
     cy.wait(500);
 }
 
+export function deleteAdventure(name) {
+    // Delete that adventure
+    goToTeachersPage();
+    cy.get("#teacher_adventures tbody tr")
+    .each(($tr, i) => {
+        if ($tr.text().includes(name)) {
+            cy.get(`tbody :nth-child(${i+1}) [data-cy="delete-adventure"]`).click();
+            cy.get('#modal-yes-button').should('be.enabled').click();
+        }
+    })
+}
+
 export default {createAdventure};
