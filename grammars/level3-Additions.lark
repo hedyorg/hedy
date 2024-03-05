@@ -1,4 +1,4 @@
-command:+= assign_list | add | remove | error_add_missing_to | error_remove_missing_from > error_invalid
+command:+= assign_list | add | remove | error_add_missing_to | error_remove_missing_from >> error_invalid
 _print_argument: (_SPACE | (list_access textwithoutspaces?) | textwithoutspaces)*
 ask: var _IS _ASK ((_SPACE | text_ask)*)?
 

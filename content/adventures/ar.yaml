@@ -72,8 +72,13 @@ adventures:
                     ```
             4:
                 story_text: |
-                    ربما لاحظت أنه لا زال هناك مشكلة في المستويات السابقة عند محاولة طباعة جملة تحتوي على كلمة -الاسم-؟ مثل: `{print}` الاسم هو الاسم.
-                    ستتمكن من حل هذه المشكلة في هذا المستوى. يجب أن تضع علامات الاقتباس حول أي نص تريد طباعته.
+                    ### Exercise
+                    Copy the example code and finish it by adding quotation marks on the blanks in lines 1 and 2.
+                    The blanks in line 3 and 4 should not be replaced by quotation marks, but a `{sleep}` and a `{clear}` command. Can you make it work?
+
+                    ### Exercise 2
+                    Go back to the previous level and copy your story code. Make the code work in this level by adding quotation marks in the right spots.
+                    Mind: The variables in your own story should be outside of the quotation marks. Just like the second line of the example code. In that line the variable name is placed outside of the quotation marks.
                 example_code: "```\nالاسم {is} حسن  \n{print} _الاسم الأول للشخصية الرئيسية في القصة هو_ الاسم\n{print} الاسم _ذاهبٌ الآن للسير في الغابة_\n{print} الاسم _خائفٌ قليلًا_\nالحيوانات {is} \U0001F994, \U0001F43F, \U0001F989, \U0001F987\n{print} _لقد سمع صوت_ الحيوانات {at} {random}\n{print}\
                     \ الاسم _خائفٌ أن تكون هذه الغابة مسكونة_\n```\n"
             5:
@@ -790,9 +795,6 @@ adventures:
                     total = price + amount_of_product
                     {print} 'That will be $' price 'please'
                     ```
-
-                    total = price + amount_of_product
-                    {print} 'That will be $' price 'please'
             7:
                 story_text: |-
                     ### Exercise
@@ -830,21 +832,7 @@ adventures:
                     {sleep} 5
                     {print} 'All done! That will be $' price ' please!'
                     {print} 'Thank you! Byebye!'
-
-                            {print} That will be $25'
-                            price = 25
-                        {else}
-                            {print} That will be $18'
-                            price = 18
-                    color = {ask} What color would you like?
-                    sparkles = {ask} 'Would you like some sparkles with that?'
-                    {if} sparkles {is} yes
-                        {print} 'We charge $3 extra for that'
-                    price = price + 3
-                    {else} {print} 'No sparkles' {print} 'So no extra charge'
-                    {sleep} 5
-                    {print} 'All done! That will be $' price ' please!'
-                    {print} 'Thank you! Byebye!'
+                    ```
             9:
                 story_text: |-
                     ### Exercise
@@ -1171,8 +1159,6 @@ adventures:
                     العمر {is} ١٥
                     {print} الاسم وعمرها الان العمر سنة
                     ```
-                story_text_2: |
-                    الأمر `{print}` لا زال يعمل بنفس الطريقة، ولكن الأمر `{ask}` قد تغير ،عليك الان ان تحتفظ بالاجابة على `{ask}` في متغير من خلال اعطاء الاجابة اسما معينا كما في المثال التوضيحي:
             3:
                 story_text: |
                     في المستوى 3 يمكنك أن تنشأ قائمة. يمكنك بعدها أن تجعل الحاسوب يختار لك شيئا من القائمة بشكل عشوائي - يمكنك القيام بذك من خلال الأمر `{at} {random}`.
@@ -1598,16 +1584,22 @@ adventures:
                 story_text_2: |
                     الان هيدي العرافة تستطيع الإجابة بنعم، لا او ربما فقط. هل يمكنك أن تعطيها خيارات لإجابات أخرى مثل "بالتأكيد" او "{ask} مرة أخرى".
             4:
-                story_text: "في هذا المستوى لن تتعلم أوامر جديدة، لكنك ستتدرب على استخدام علامات الاقتباس. \nتستطيع إعادة كتابة الكود الخاص بك في المستوى الثالث، ولا تنسَ أن تضع علامات الاقتباس في الأماكن الصحيحة.\n\nفي المستوى الثالث, لم نستطع استخدام كلمة ’السؤال‘ اسمًا للمتغير وإعادة استخدامها في النص\
-                    \ مرة أخرى ككلمة عادية.\nلا تقلق! علامات الاقتباس ستجعل هذا الأمر ممكنًا!\n"
+                story_text: |
+                    ### Exercise
+                    We have removed all the quotation marks from this example code, can you add them in all the right places?
+
+                    ### Exercise 2
+                    Go back to the previous level and copy your fortune teller code. Make the code work in this level by adding quotation marks in the right spots.
                 example_code: |
-                    ```{print} 'انا العرافة هيدي!'
-                    السؤال {is} {ask} 'ماذا تريد ان تعرف ؟'
-                    {print} 'هذا هو السؤال : ' السؤال
-                    الاجابات {is} نعم، لا، ربما
-                    {print} 'تقول الكرة السحرية الخاصة بي...'
+                    ```
+                    _ Add the quotation marks to this code _
+                    {print} Im Hedy the fortune teller!
+                    question {is} {ask} What do you want to know?
+                    {print} This is your question:  question
+                    answers {is} yes, no, maybe
+                    {print} My crystal ball says...
                     {sleep} 2
-                    {print} الاجابات {at} {random}
+                    {print} answers {at} {random}
                     ```
             5:
                 story_text: |
@@ -2354,7 +2346,9 @@ adventures:
                     play C5
                     ```
             2:
-                story_text: Finish the songs! We have started the codes for some melodies.
+                story_text: |
+                    ### Exercise
+                    Finish the songs! We have started the codes for some melodies.
                 example_code: |
                     ```
                     {print} Old Mac Donald had a farm
@@ -2397,7 +2391,7 @@ adventures:
                     ```
             4:
                 story_text: |
-                    Use the `{clear}` command to create a karaokemachine!
+                    Use the `{clear}` command to create a karaoke machine!
 
                     ### Exercise
                     Finish the karaoke version of 'Mary had a little lamb'.
@@ -2804,7 +2798,7 @@ adventures:
                 story_text_2: |
                     ### Exercise
                     In Hedy you will find exercises in every adventure. An exercise allows you to practise the new commands and concepts, and lets you give your own twist to the example codes.
-                    In this exercise you will see a pink blank space. You have to fill something in the place of the blank space before the code can be ran.
+                    In this exercise you will see a pink blank space. You have to fill something in the place of the blank space before the code can be run.
 
                     Fill in the `{print}` command in the blank space and then add five more lines of code. Each line has to start with a `{print}` command.
                     Have fun!
@@ -3072,9 +3066,9 @@ adventures:
             1:
                 story_text: |
                     في المستوى ١ ستتمكن من صنع مطعم افتراضي وتأخذ طلبات الطعام الخاصة بضيوفك.
-                example_code: "```{print} \U0001F35F اهلاً بكم في مطعم هيدي \n{ask} ماذا تود ان تطلب؟\n{echo} اذاً، طلبك هو \n{print} شكرًا لطلبكم من مطعمنا!\n{print} طلبك في طريقه إليك!\n ```\n"
                 story_text_2: |
                     هل يمكنك التفكير في عدة سطور اخرى تضيفها لتطور كود مطعمك؟ على سبيل المثال، هل يمكنك استخدام `{ask}` لسؤال الضيوف ماذا يفضلون كشراب بجانب وجبتهم، وبعد ذلك اخبارهم بسعر طلبهم، و ان تتمنى لهم وجبة هنيئة؟
+                example_code_2: "```{print} \U0001F35F اهلاً بكم في مطعم هيدي \n{ask} ماذا تود ان تطلب؟\n{echo} اذاً، طلبك هو \n{print} شكرًا لطلبكم من مطعمنا!\n{print} طلبك في طريقه إليك!\n ```\n"
             2:
                 story_text: |
                     في المستوى 2 ستتمكن من تطوير مطعمك باستخدام المتغيرات، في المستوى الأول، كانت هيدي تستطيع فقط أن تردد طلبك باستخدام الأمر `{echo} ` وكان باستطاعتها أخذ طلب واحد فقط.
@@ -3127,7 +3121,6 @@ adventures:
                     ```
             4:
                 story_text: |
-                    في هذا المستوى عليك استخدام علامات الاقتباس مع الأمر `{print}` .
                     هل تستطيع أن تجعل الكود الخاص بك من المستويات السابقة أن يعمل بالشكل الصحيح بإضافة علامات الاقتباس؟
                 example_code: |
                     ```
@@ -3201,9 +3194,13 @@ adventures:
             8:
                 story_text: |
                     In this level you can make your virtual restaurant more elaborate by repeating multiple lines of code. Like this:
+
+                    ### Exercise
+                    This code can be expanded with more items on the menu, for example offering drinks, and/or multiple courses or desserts. Add at least one more item.
+                    **Extra** Add even more items, as many options as you like!
                 example_code: |
                     ```
-                    {print} 'Welcome to Hedys restaurant!'
+                    {print} 'Welcome to Restaurant Chez Hedy!'
                     people = {ask} 'How many people will be joining us today?'
                     {print} 'Great!'
                     {repeat} people {times}
@@ -3212,11 +3209,6 @@ adventures:
                     {print} 'Thank you for ordering!'
                     {print} 'Enjoy your meal!'
                     ```
-
-                    ### Exercise
-                    Of course, this code can be expanded with more items on the menu, offering drinks, and/or multiple courses, so feel free to add as many options as you like!
-                story_text_2: |
-                    Of course, this code can be expanded with more items on the menu, offering drinks, and/or multiple courses, so feel free to add as many options as you like!
             9:
                 story_text: |
                     In this level you can use nesting to make your restaurant more realistic and more fun!
@@ -3386,9 +3378,14 @@ adventures:
                     ```
             4:
                 story_text: |
-                    ##حجر،ورقة،مقص
-                    في هذا المستوى أيضًا يمكنك برمجة لعبة حجر،ورقة،مقص. لكن إذا أردت كتابة نص يجب عليك استخدام علامات الإقتباس.
-                    هل يمكنك إكمال الكود بوضع الأوامر أو علامات الترقيم المناسبة في الفراغات؟
+                    In this level we can further program rock, paper, scissors. But if you want to add text, you have to use quotation marks here too.
+                    ### Exercise
+                    Fill in quotation marks on the blanks. Mind that the variable `choices` should be outside the quotes.
+                example_code: |
+                    ```
+                    choices {is} rock, paper, scissors
+                    {print} _The computer chooses..._ choices {at} {random}
+                    ```
             5:
                 story_text: |
                     في هذا المستوى يمكننا تحديد من فاز.
@@ -4093,9 +4090,15 @@ adventures:
                     بإستخدام `{forward}` يمكنك رسم خط ممتد للامام، والرقم بعده يحدد لك الي اي مدى سيتقدم المؤشر الى الامام ليرسم الخط (طول الخط). اما بإستخدام `{turn} {right}` سيستدير المؤشر ربع دورة بإتجاه عقارب الساعة، `{turn} {left}` سيستدير المؤشر ربع دورة بعكس اتجاه عقارب الساعة.
 
                     وإذا اردنا الرجوع للخلف يمكنك استخدام الأمر `{forward}` ايضًا ولكن هذه المره نطرح منه عدد الخطوات التي نريد رجوعها للخلف. علي سبيل المثال اذا اردنا الرجوع 100 نستخدم `{forward} -100`
-
-                    الكود في المثال التوضيحي هو بداية رسم سُلم صغير. هل يمكنك جعل السُلم يتكون من خمس خطوات اخرى؟
                 example_code: |
+                    ```
+                    {forward} 100
+                    {turn} {left}
+                    ```
+                story_text_2: |
+                    ### Exercise
+                    الكود في المثال التوضيحي هو بداية رسم سُلم صغير. هل يمكنك جعل السُلم يتكون من خمس خطوات اخرى؟
+                example_code_2: |
                     ```
                     {forward} 50
                     {turn} {right}
