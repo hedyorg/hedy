@@ -80,9 +80,6 @@ adventures:
                     ```
             4:
                 story_text: |
-                    Você deve ter notado que ainda há um problema nos níveis anteriores. Você tentou imprimir uma frase que continha a palavra nome? (por exemplo: `{print}` meu nome é nome).
-                    Você pode resolver isso neste nível. Você deve usar aspas simples para tudo que for imprimir.
-
                     ### Exercício
                     Copie o código exemplo e o complete adicionando aspas nas lacunas das linhas 1 e 2.
                     As lacunas das linhas 3 e 4 não devem ser preenchidas com aspas, mas sim com os comandos `{sleep}` e `{clear}`. Você consegue fazer ele funcionar?
@@ -811,9 +808,6 @@ adventures:
                     total = price + amount_of_product
                     {print} 'That will be $' price 'please'
                     ```
-
-                    total = price + amount_of_product
-                    {print} 'That will be $' price 'please'
             7:
                 story_text: |-
                     ### Exercício
@@ -851,21 +845,7 @@ adventures:
                     {sleep} 5
                     {print} 'All done! That will be $' price ' please!'
                     {print} 'Thank you! Byebye!'
-
-                            {print} That will be $25'
-                            price = 25
-                        {else}
-                            {print} That will be $18'
-                            price = 18
-                    color = {ask} What color would you like?
-                    sparkles = {ask} 'Would you like some sparkles with that?'
-                    {if} sparkles {is} yes
-                        {print} 'We charge $3 extra for that'
-                    price = price + 3
-                    {else} {print} 'No sparkles' {print} 'So no extra charge'
-                    {sleep} 5
-                    {print} 'All done! That will be $' price ' please!'
-                    {print} 'Thank you! Byebye!'
+                    ```
             9:
                 story_text: |-
                     ### Exercício
@@ -1166,6 +1146,8 @@ adventures:
                     Parabéns! Você chegou ao nível 2.Você provavelmente já fez alguns códigos incríveis!
                     No primeiro nível você pode ter notado que o comando `{echo}` só pode salvar um pouco de informação de cada vez.
                     Por exemplo, na aventura no restaurante, você podia ecoar o que o cliente queria comer, ou o que ele queria beber, mas não os dois em uma mesma frase.
+                    Isso muda no nível 2. No nível 2 você vai aprender a trabalhar com variáveis, que lhe permitem salvar múltiplos pedaços de informações e imprimi-los onde você quiser.
+                    Então vamos para a próxima aba!
                 example_code: |
                     **Atenção! Este código não irá funcionar!**
                     Na Hedy, comandos vão mudar às vezes. `{echo}`, por exemplo, só funciona no nível 1. Nesse nível, você aprenderá uma maneira melhor de repetir as respostas.
@@ -1176,12 +1158,6 @@ adventures:
                     {ask} O que gostaria de beber?
                     {echo} Então você quer
                     ```
-                story_text_2: |
-                    Se o jogador digitar um hambúrguer e um refrigerante, você não pode dizer "então você quer um hambúrguer e um refrigerante", mas sim tem que fazer duas linhas separadas.
-                    Além disso, o comando `{echo}` somente ecoa a palavra no final da frase. Então você não pode dizer "o seu hambúrguer vai estar pronto daqui a pouco!".
-
-                    Isso muda no nível 2. No nível 2 você vai aprender a trabalhar com variáveis, que lhe permitem salvar múltiplos pedaços de informações e imprimi-los onde você quiser.
-                    Então vamos para a próxima aba!
             3:
                 story_text: |
                     No último nível você aprendeu o que é uma variável e como usá-las para fazer sua aventura mais interativa.
@@ -1702,12 +1678,6 @@ adventures:
                     Now, Hedy can only answer yes, no or maybe. Can you give Hedy more answer options, like 'definitely' or '{ask} again'.
             4:
                 story_text: |
-                    Este nível não tem funções novas, mas permite que você pratique usar aspas.
-                    Você pode refazer o seu código do nível 3. Certifique-se de usar aspas nos lugares certos!
-
-                    Note que, no nível 3, não podíamos usar a palavra 'pergunta' como nome de variável e como palavra normal ao mesmo tempo.
-                    As aspas do nível 4 fazem isso possível!
-
                     ### Exercício
                     Nós removemos todas as aspas deste código exemplo, você consegue adicioná-las nos lugares certos?
 
@@ -2464,7 +2434,9 @@ adventures:
                     {play} C5
                     ```
             2:
-                story_text: Termine as canções! Nós começamos os códigos para algumas melodias.
+                story_text: |
+                    ### Exercise
+                    Termine as canções! Nós começamos os códigos para algumas melodias.
                 example_code: |
                     ```
                     {print} O Velho MacDonald tinha uma fazenda
@@ -2507,7 +2479,7 @@ adventures:
                     ```
             4:
                 story_text: |
-                    Use the `{clear}` command to create a karaokemachine!
+                    Use the `{clear}` command to create a karaoke machine!
 
                     ### Exercise
                     Finish the karaoke version of 'Mary had a little lamb'.
@@ -2921,7 +2893,7 @@ adventures:
                 story_text_2: |
                     ### Exercise
                     In Hedy you will find exercises in every adventure. An exercise allows you to practise the new commands and concepts, and lets you give your own twist to the example codes.
-                    In this exercise you will see a pink blank space. You have to fill something in the place of the blank space before the code can be ran.
+                    In this exercise you will see a pink blank space. You have to fill something in the place of the blank space before the code can be run.
 
                     Fill in the `{print}` command in the blank space and then add five more lines of code. Each line has to start with a `{print}` command.
                     Have fun!
@@ -3189,7 +3161,9 @@ adventures:
             1:
                 story_text: |
                     No nível 1 você pode fazer seu próprio restaurante virtual e receber os pedidos de seus convidados.
-                example_code: |
+                story_text_2: |
+                    Você consegue pensar em mais linhas para adicionar ao código do seu restaurante? Por exemplo, você pode usar {ask} para perguntar aos convidados o que eles gostariam de beber, dizer o preço ou desejar uma refeição agradável?
+                example_code_2: |
                     ```
                     {print} Bem-vindo(a) ao restaurante da Hedy 🍟
                     _ O que você gostaria de pedir?
@@ -3197,8 +3171,6 @@ adventures:
                     {print} Obrigado pelo seu pedido!
                     {print} Está a caminho!
                     ```
-                story_text_2: |
-                    Você consegue pensar em mais linhas para adicionar ao código do seu restaurante? Por exemplo, você pode usar {ask} para perguntar aos convidados o que eles gostariam de beber, dizer o preço ou desejar uma refeição agradável?
             2:
                 story_text: |
                     In level 2 you could expand your restaurant by using variables. In level 1 Hedy could only {echo} the order once and only remember the last thing that was ordered.
@@ -3240,23 +3212,25 @@ adventures:
                     _
                     ```
             4:
-                story_text: |-
-                    In this level you have to use quotation marks when using the `{print}` command.
-                    Can you make your code from the previous levels work in this level too by adding the quotation marks?
+                story_text: |
+                    ### Exercise
+                    Add the quotation marks to this code to make it work! Be careful: variables should not be in quotation marks.
+                    Then, use the `{clear}` command to only show one line at a time in your output screen.
 
-                    Be careful! In the previous levels apostrophes were allowed in the text, but in this level Hedy will confuse them for quotation marks and the code will not work!
-                    So instead of typing  `{print} Today we're serving pizza` , you should type `{print} 'Today we are serving pizza'`.
+                    ### Exercise 2
+                    Go back to the previous level and copy your restaurant code. Make the code work in this level by adding quotation marks in the right spots and add some `{clear}` commands.
                 example_code: |
                     ```
-                    {print} 'Welcome to Hedys restaurant!'
-                    {print} 'Today we are serving pizza or lasagna.'
-                    food {is} {ask} 'What would you like to eat?'
-                    {print} 'Great choice! The ' food ' is my favorite!'
-                    topping {is} {ask} 'Would you like meat or veggies on that?'
-                    {print} food ' with ' topping ' is on its way!'
-                    drinks {is} {ask} 'What would you like to drink with that?'
-                    {print} 'Thank you for your order.'
-                    {print} 'Your ' food ' and ' drinks ' will be right there!'
+                    _ Add the quotation marks to this code _
+                    {print} Welcome to Restaurant Chez Hedy!
+                    {print} Today we are serving pizza or lasagna.
+                    food {is} {ask} What would you like to eat?
+                    {print} Great choice! The  food  is my favorite!
+                    topping {is} {ask} Would you like meat or veggies on that?
+                    {print} food  with  topping  is on its way!
+                    drinks {is} {ask} What would you like to drink with that?
+                    {print} Thank you for your order.
+                    {print} Your  food  and  drinks  will be right there!
                     ```
             5:
                 story_text: |
@@ -3308,9 +3282,13 @@ adventures:
             8:
                 story_text: |
                     In this level you can make your virtual restaurant more elaborate by repeating multiple lines of code. Like this:
+
+                    ### Exercise
+                    This code can be expanded with more items on the menu, for example offering drinks, and/or multiple courses or desserts. Add at least one more item.
+                    **Extra** Add even more items, as many options as you like!
                 example_code: |
                     ```
-                    {print} 'Welcome to Hedys restaurant!'
+                    {print} 'Welcome to Restaurant Chez Hedy!'
                     people = {ask} 'How many people will be joining us today?'
                     {print} 'Great!'
                     {repeat} people {times}
@@ -3319,12 +3297,6 @@ adventures:
                     {print} 'Thank you for ordering!'
                     {print} 'Enjoy your meal!'
                     ```
-
-                    ### Exercise
-                    Of course, this code can be expanded with more items on the menu, offering drinks, and/or multiple courses, so feel free to add as many options as you like!
-                story_text_2: |
-                    ### Exercise
-                    Of course, this code can be expanded with more items on the menu, offering drinks, and/or multiple courses, so feel free to add as many options as you like!
             9:
                 story_text: |
                     In this level you can use nesting to make your restaurant more realistic and more fun!
@@ -3482,8 +3454,14 @@ adventures:
                     ```
             4:
                 story_text: |
-                    In this level we can further program rock, paper, scissors. But {if} you want to add text, you have to use quotation marks here too.
-                    Do you complete the code by entering the correct commands or characters on the underscores?
+                    In this level we can further program rock, paper, scissors. But if you want to add text, you have to use quotation marks here too.
+                    ### Exercise
+                    Fill in quotation marks on the blanks. Mind that the variable `choices` should be outside the quotes.
+                example_code: |
+                    ```
+                    choices {is} rock, paper, scissors
+                    {print} _The computer chooses..._ choices {at} {random}
+                    ```
             5:
                 story_text: |
                     In this level we can determine who won.
@@ -4156,9 +4134,15 @@ adventures:
 
                     Usando `{forward}` você desenha uma linha para frente. O número depois dele determina o quão longe a tartaruga vai andar. `{turn} {right}` gira um quarto de volta no sentido horário, `{turn} {left}` gira no sentido anti-horário.
                     Se você quiser voltar, você usa o comando `{forward}` mas com um número negativo. Por exemplo, `{forward} -100`
-
-                    Este é o início de uma pequena escada. Você pode fazê-la ter 5 passos?
                 example_code: |
+                    ```
+                    {forward} 100
+                    {turn} {left}
+                    ```
+                story_text_2: |
+                    ### Exercise
+                    Este é o início de uma pequena escada. Você pode fazê-la ter 5 passos?
+                example_code_2: |
                     ```
                     {forward} 20
                     {turn} {right}

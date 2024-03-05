@@ -1005,10 +1005,15 @@ def programs_page(user):
     all_programs = DATABASE.filtered_programs_for_user(from_user or username,
                                                        submitted=submitted,
                                                        pagination_token=page)
-
+    ids_to_fetch = []
     for program in all_programs:
-        adventure_names[program['adventure_name']] = program['name']
+        if 'adventure_name' in program and program['adventure_name'] not in adventure_names:
+            ids_to_fetch.append(program['adventure_name'])
 
+    teacher_adventures = DATABASE.batch_get_adventures(ids_to_fetch)
+    for id, teacher_adventure in teacher_adventures.items():
+        if teacher_adventure is not None:
+            adventure_names[id] = teacher_adventure['name']
     swapped_adventure_names = {value: key for key, value in adventure_names.items()}
     result = DATABASE.filtered_programs_for_user(from_user or username,
                                                  level=level,
@@ -1055,7 +1060,8 @@ def programs_page(user):
         sorted_adventure_programs=sorted_adventure_programs,
         adventure_names=adventure_names,
         max_level=hedy.HEDY_MAX_LEVEL,
-        next_page_url=next_page_url)
+        next_page_url=next_page_url,
+        second_teachers_programs=False)
 
 
 @app.route('/logs/query', methods=['POST'])
