@@ -59,7 +59,7 @@
     </div>
     <div id="non_submitted_button_container_{{ loop_index }}" class="flex flex-row w-full gap-2 {% if program.submitted %} hidden {% endif %}">
         <a href="/hedy/{{program.level|string}}/{{program.id}}"><button class="blue-btn">{{_('open')}}</button></a>
-        <button class="green-btn" {% if not program.public %} style="display: none;" {% endif %} onclick="hedyApp.modal.confirm ('{{_('submit_warning')}}', function () {hedyApp.submit_program ('{{program.id}}', {{ loop_index }})})">{{_('submit_program')}}</button>
+        <button class="green-btn" data-cy="submit-btn" {% if not program.public %} style="display: none;" {% endif %} onclick="hedyApp.modal.confirm ('{{_('submit_warning')}}', function () {hedyApp.submit_program ('{{program.id}}', {{ loop_index }})})">{{_('submit_program')}}</button>
         {% if not second_teachers_programs %}
         <div class="dropdown relative">
             <button class="white-btn inline-flex items-center gap-2" id="share_option_dropdown_{{ loop_index }}"
