@@ -199,6 +199,7 @@ class PublicAdventuresModule(WebsiteModule):
                 page="code",
                 lang=g.lang,
                 level=level,
+                tags=tags,
                 adventures=adventures,
                 initial_tab=initial_tab,
                 current_user_name=user['username'],)
