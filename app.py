@@ -2642,7 +2642,8 @@ def public_user_page(username):
         print(user_programs)
         # Todo: TB -> In the near future: add achievement for user visiting their own profile
         next_page_url = url_for('public_user_page', username=username, **dict(request.args,
-                                                                              page=next_page_token)) if next_page_token else None
+                                                                              page=next_page_token))\
+            if next_page_token else None
         return render_template(
             'public-page.html',
             user_info=user_public_info,
