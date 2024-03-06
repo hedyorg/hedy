@@ -143,6 +143,15 @@
           <button id="runit" class="green-btn" onclick="hedyApp.saveMicrobit();">{{_('Save Microbit code ')}}<img src="{{static('/images/microbit_logo_icon_248480.png')}}"  style="width: 25px; height: 25px; margin-left: 1px; display: inline;"  alt=""/></button>
             <button id="stopit" class="red-btn" onclick="hedyApp.stopit()" style="display: none;">{{_('stop_code_button')}}</button>
         </div>
+      <div id="saveMicrobitFilesContainer" class="hidden">
+          <button id="runMicrobit" class="green-btn" onclick="hedyApp.saveMicrobit();">{{_('Save Microbit code ')}}<img src="{{static('/images/microbit_logo_icon_248480.png')}}"  style="width: 25px; height: 25px; margin-left: 1px; display: inline;"  alt=""/></button>
+      </div>
+      <div id="saveMicrobitFilesContainer" class="hidden">
+        <button id="runMicrobit" class="green-btn" onclick="hedyApp.saveMicrobit();" {% if microbit_feature_enabled %} {% else %} disabled {% endif %}> {{ _('Save Microbit code ') }}
+            <img src="{{ static('/images/microbit_logo_icon_248480.png') }}" style="width: 25px; height: 25px; margin-left: 1px; display: inline;" alt=""/>
+        </button>
+      </div>
+
         <div id="saveFilesContainer" class="hidden">
           <button id="saveFiles" class="green-btn" onclick="hedyApp.saveMachineFiles();">💾</button>
         </div>
