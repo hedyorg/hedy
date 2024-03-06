@@ -796,6 +796,16 @@ def convert_to_hex_and_download():
     flash_micro_bit()
     current_directory = os.path.dirname(os.path.abspath(__file__))
     micro_bit_directory = os.path.join(current_directory, 'Micro-bit')
+
+    @after_this_request
+    def remove_file(response):
+        try:
+            os.remove("Micro-bit/micropython.hex")
+            os.remove("Micro-bit/Micro-bit.py")
+        except BaseException:
+            print("Error removing one of the generated files!")
+        return response
+
     return send_file(os.path.join(micro_bit_directory, "micropython.hex"), as_attachment=True)
 
 
