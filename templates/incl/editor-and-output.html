@@ -140,7 +140,7 @@
       <div class="flex justify-between gap-2 items-start h-12 overflow-visible">
         <div id="runButtonContainer">
           <button id="runit" class="green-btn" onclick='hedyApp.runit({{ level }}, "{{ g.lang }}", {{_('already_program_running')|default(None)|tojson}}, "run")'>{{_('run_code_button')}} </button>
-          <button id="runit" class="green-btn" onclick="hedyApp.saveMicrobit();">{{_('Save Microbit code ')}}<img src="https://shorturl.at/fhuQ9" alt="" style="width: 25px; height: 25px; margin-left: 1px; display: inline;" /></button>
+          <button id="runit" class="green-btn" onclick="hedyApp.saveMicrobit();">{{_('Save Microbit code ')}}<img src="{{static('/images/microbit_logo_icon_248480.png')}}"  style="width: 25px; height: 25px; margin-left: 1px; display: inline;"  alt=""/></button>
             <button id="stopit" class="red-btn" onclick="hedyApp.stopit()" style="display: none;">{{_('stop_code_button')}}</button>
         </div>
         <div id="saveFilesContainer" class="hidden">
