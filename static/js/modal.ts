@@ -184,6 +184,13 @@ class Modal {
       }
     });
   }
+
+    public feedback(message: string) {
+      this.hide();
+      $('#modal-prompt-text').text(message);
+      this.show();
+      $('#modal-feedback').show();
+    }
 }
 
 /**
