@@ -3692,4 +3692,4 @@ def execute(input_string, level):
 
 def transpile_and_return_python(input_string, level, microbit=True):
     python = transpile(input_string, level, microbit=True)
-    return python
+    return str(python.code)

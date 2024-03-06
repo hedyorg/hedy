@@ -757,7 +757,7 @@ def download_machine_file(filename, extension="zip"):
     return send_file("machine_files/" + filename + "." + extension, as_attachment=True)
 
 
-@app.route('/generate_microbit_file', methods=['POST'])
+@app.route('/generate_microbit_files', methods=['POST'])
 def generate_microbit_file():
     # Extract variables from request body
     body = request.json
@@ -792,20 +792,19 @@ def convert_to_hex_and_download():
     current_directory = os.path.dirname(os.path.abspath(__file__))
     micro_bit_directory = os.path.join(current_directory, 'Micro-bit')
 
-    # @after_this_request
-    # def remove_file(response):
-    #     try:
-    #         os.remove("Micro-bit/micropython.hex")
-    #         os.remove("Micro-bit/Micro-bit.py")
-    #     except BaseException:
-    #         print("Error removing one of the generated files!")
-    #     return response
-
+    @after_this_request
+    def remove_file(response):
+        try:
+            os.remove("Micro-bit/micropython.hex")
+            os.remove("Micro-bit/Micro-bit.py")
+        except BaseException:
+            print("Error removing one of the generated files!")
+        return response
     return send_file(os.path.join(micro_bit_directory, "micropython.hex"), as_attachment=True)
 
 
 def flash_micro_bit():
-    subprocess.run(['uflash', "Micro-bit/Micro-bit.py", "Micro-bit/"])
+    subprocess.run(['uflash', "Micro-bit/Micro-bit.py", "Micro-bit"])
 
 
 def transpile_add_stats(code, level, lang_, is_debug):
