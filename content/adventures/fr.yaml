@@ -987,7 +987,10 @@ adventures:
                 story_text: |-
                     ### Exercice
                     Déboguez ce code. Bonne chance !
-                example_code: "**Attention ! Ce code doit être débogué !**\n```\n{define}movie_recommendation {with} name\n\taction_movies == 'Die Hard', 'Fast and Furious', 'Inglorious Bastards'\n\tromance_movies = 'Love Actually', 'The Notebook', 'Titanic'\n\tcomedy_movies = 'Mr Bean' 'Barbie''Deadpool'\n\tkids_movies = 'Minions', 'Paddington', 'Encanto'\n\t{if} name {is} 'Camila' {or} name {is} 'Manuel'\n\t\trecommended_movie = kids_movie {at} {random}\n\t{if} name {is} 'Pedro' {or} 'Gabriella'\n\t\tmood = {ask} 'What you in the mood for?'\n\t{if} mood {is} 'action'\n\t\trecommended_movie = comedy_movies {at} {random}\n\t{if} mood {is} 'romance'\n\t\trecommended_movie = romance_movies\n\t{if} mood {is} 'comedy'\n\t\trecommended_movie = comedy_movies {at} {random}\n\n{print} 'Je recommande ' recommended_movie ' pour ' name\n\nname = {ask} 'Qui regarde ?'\nrecommendation = {ask} 'Voulez-vous une recommandation?'\n{if} recommendation {is} 'yes'\n\t{print} movie_recommendation {with} name\n{else}\n\t{print} 'Pas de problème!'\n```\n"
+                example_code: "**Attention ! Ce code doit être débogué !**\n```\n{define}movie_recommendation {with} name\n\taction_movies == 'Die Hard', 'Fast and Furious', 'Inglorious Bastards'\n\tromance_movies = 'Love Actually', 'The Notebook', 'Titanic'\n\tcomedy_movies = 'Mr Bean' 'Barbie''Deadpool'\n\
+                    \tkids_movies = 'Minions', 'Paddington', 'Encanto'\n\t{if} name {is} 'Camila' {or} name {is} 'Manuel'\n\t\trecommended_movie = kids_movie {at} {random}\n\t{if} name {is} 'Pedro' {or} 'Gabriella'\n\t\tmood = {ask} 'What you in the mood for?'\n\t{if} mood {is} 'action'\n\t\trecommended_movie\
+                    \ = comedy_movies {at} {random}\n\t{if} mood {is} 'romance'\n\t\trecommended_movie = romance_movies\n\t{if} mood {is} 'comedy'\n\t\trecommended_movie = comedy_movies {at} {random}\n\n{print} 'Je recommande ' recommended_movie ' pour ' name\n\nname = {ask} 'Qui regarde ?'\nrecommendation\
+                    \ = {ask} 'Voulez-vous une recommandation?'\n{if} recommendation {is} 'yes'\n\t{print} movie_recommendation {with} name\n{else}\n\t{print} 'Pas de problème!'\n```\n"
             14:
                 story_text: |-
                     ### Exercice
@@ -2605,7 +2608,8 @@ adventures:
                     _
                     ```
             6:
-                story_text: "Instead of playing notes, you can also play numbers now. Simply type `{play} 1` for the lowest note, `{play} 70` for the highest note, or anything in between.\n\n### Exercise\n This calls for musical maths! Try out the example code a couple of times with different starting numbers. \nThen, see if you can compose a song using the numbers.\n"
+                story_text: "Instead of playing notes, you can also play numbers now. Simply type `{play} 1` for the lowest note, `{play} 70` for the highest note, or anything in between.\n\n### Exercise\n This calls for musical maths! Try out the example code a couple of times with different starting\
+                    \ numbers. \nThen, see if you can compose a song using the numbers.\n"
                 example_code: |
                     ```
                     number = {ask} 'Say a starting number between 1 and 67'

@@ -3584,13 +3584,25 @@ levels:
                 {while} points_player_1 > points_player_2
                     {print} _ ' is in the lead right now!'
             mp_choice_options:
-            -   option: "```\n   name_player_1\n```"
+            -   option: |-
+                    ```
+                       name_player_1
+                    ```
                 feedback: You are right!
-            -   option: "```\n   name_player_2\n```"
+            -   option: |-
+                    ```
+                       name_player_2
+                    ```
                 feedback: No they are losing!
-            -   option: "```\n   points_player_1\n```"
+            -   option: |-
+                    ```
+                       points_player_1
+                    ```
                 feedback: You should fill in a name, not a number
-            -   option: "```\n   points_player_2\n```"
+            -   option: |-
+                    ```
+                       points_player_2
+                    ```
                 feedback: You should fill in a name, not a number
             hint: You win the game by having the most points. Your name should appear on the screen
             correct_answer: A
@@ -3711,13 +3723,25 @@ levels:
                 {for} i {in} {range} 1 {to} 3
                     {print} 'the ' animals[i] ' says ' sounds[i]
             mp_choice_options:
-            -   option: "```\n   noises = ['moo', 'woof', 'neigh']\n```"
+            -   option: |-
+                    ```
+                       noises = ['moo', 'woof', 'neigh']
+                    ```
                 feedback: Mind the variable name and the order of the sounds.
-            -   option: "```\n   sounds = '[woof], [moo], [neigh]'\n```"
+            -   option: |-
+                    ```
+                       sounds = '[woof], [moo], [neigh]'
+                    ```
                 feedback: Look at line one to see how brackets are supposed to be used.
-            -   option: "```\n   sounds = [woof, moo, neigh]\n```"
+            -   option: |-
+                    ```
+                       sounds = [woof, moo, neigh]
+                    ```
                 feedback: Don't forget the quotation marks!
-            -   option: "```\n   sounds = ['woof', 'moo', 'neigh']\n```"
+            -   option: |-
+                    ```
+                       sounds = ['woof', 'moo', 'neigh']
+                    ```
                 feedback: Great job!
             hint: Look at line 1 to see proper use of brackets and quotation marks.
             correct_answer: D

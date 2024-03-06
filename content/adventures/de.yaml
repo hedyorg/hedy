@@ -2613,7 +2613,8 @@ adventures:
                     _
                     ```
             6:
-                story_text: "Instead of playing notes, you can also play numbers now. Simply type `{play} 1` for the lowest note, `{play} 70` for the highest note, or anything in between.\n\n### Exercise\n This calls for musical maths! Try out the example code a couple of times with different starting numbers. \nThen, see if you can compose a song using the numbers.\n"
+                story_text: "Instead of playing notes, you can also play numbers now. Simply type `{play} 1` for the lowest note, `{play} 70` for the highest note, or anything in between.\n\n### Exercise\n This calls for musical maths! Try out the example code a couple of times with different starting\
+                    \ numbers. \nThen, see if you can compose a song using the numbers.\n"
                 example_code: |
                     ```
                     number = {ask} 'Say a starting number between 1 and 67'
@@ -2956,7 +2957,8 @@ adventures:
                     {if} x {is} {pressed} {forward} 15 {else} {turn} 90
                     ```
             9:
-                story_text: "Da du jetzt weißt wie man Befehle kombiniert, kannst du mit Hilfe von `{pressed}` ein Touch-Type-Tool erstellen. \n\n### Übung\nVervollständige den Code. Jedes Mal soll ein zufälliger Buchstabe ausgewählt werden. Diesen muss man drücken. Du bekommst einen Punkt für die richtige Taste und zwei Punkte Abzug für die falsche Taste.\n**(extra)** Lösche den Bildschirm nach jedem Buchstaben und zeige dem Benutzer, wie viele Punkte er erreicht hat.\n"
+                story_text: "Da du jetzt weißt wie man Befehle kombiniert, kannst du mit Hilfe von `{pressed}` ein Touch-Type-Tool erstellen. \n\n### Übung\nVervollständige den Code. Jedes Mal soll ein zufälliger Buchstabe ausgewählt werden. Diesen muss man drücken. Du bekommst einen Punkt für die richtige\
+                    \ Taste und zwei Punkte Abzug für die falsche Taste.\n**(extra)** Lösche den Bildschirm nach jedem Buchstaben und zeige dem Benutzer, wie viele Punkte er erreicht hat.\n"
                 example_code: "```\nPunkte = 0\nBuchstaben = a, b, c, d, e\n{repeat} 10 {times}\n    Buchstabe = _ _ _ \n    {print} 'Drück den Buchstaben ' Buchstabe\n    {if} Buchstabe {is} {pressed}\n    _\n    _\n    _\n```\n"
     print_command:
         name: '{print}'
@@ -3398,7 +3400,9 @@ adventures:
                     {print} 'Guten Appetit!'
                     ```
             9:
-                story_text: "In diesem Level kannst du Verschachtelung benutzen, um dein Restaurant realistischer und spaßiger zu machen!\n\n### Übung\nDie Einrückung im Beispiel-Code wurde entfernt.\nKannst du herausfinden wie viel Einrückung jede Zeile benötigt, damit der Code ordentlich funktioniert?\nFalls der Kunde Pizza bestellt, sollte Hedy nicht fragen, welche Soße der Kunde möchte.\n\n**(extra)** Ein Restaurant lagert nicht alle möglichen Soßen. Erstelle eine Liste mit verfügbaren Soßen und gib eine Antwort bei jeder Bestellung, ob du sie auf Lager hast. <br>\n**(extra)** Pizzen haben Beläge. Frag die Kunden, was sie möchten.<br>\n **(extra)** Möchten die Kunden etwas trinken? Frag sie! <br>                    \n"
+                story_text: "In diesem Level kannst du Verschachtelung benutzen, um dein Restaurant realistischer und spaßiger zu machen!\n\n### Übung\nDie Einrückung im Beispiel-Code wurde entfernt.\nKannst du herausfinden wie viel Einrückung jede Zeile benötigt, damit der Code ordentlich funktioniert?\n\
+                    Falls der Kunde Pizza bestellt, sollte Hedy nicht fragen, welche Soße der Kunde möchte.\n\n**(extra)** Ein Restaurant lagert nicht alle möglichen Soßen. Erstelle eine Liste mit verfügbaren Soßen und gib eine Antwort bei jeder Bestellung, ob du sie auf Lager hast. <br>\n**(extra)**\
+                    \ Pizzen haben Beläge. Frag die Kunden, was sie möchten.<br>\n **(extra)** Möchten die Kunden etwas trinken? Frag sie! <br>                    \n"
                 example_code: |
                     ```
                     {print} 'Willkommen im Restaurant Chez Hedy!'
@@ -3805,7 +3809,8 @@ adventures:
                     {sleep}
                     ```
             7:
-                story_text: "In Liedern wiederholt sich oft einiges. So auch im Lied \"Baby Hai\"! Wenn du es singst, singst du eigentlich immer das gleiche:\n\nBaby Hai tututudutudu <br>\nBaby Hai tututudutudu <br>\nBaby Hai tututudutudu <br>\nBaby Hai \n\n### Übung\nKannst du das Lied mit Hilfe des `{repeat}` Befehls ausgeben? Vervollständige den Code, indem du die Lücken füllst!\n **Extra** Nach dem Baby-Hai kannst du natürlich auch andere Lieder programmieren. Es gibt viele Lieder mit Wiederholung!\nKannst du an ein weiteres Lied denken und es ausgeben?\n"
+                story_text: "In Liedern wiederholt sich oft einiges. So auch im Lied \"Baby Hai\"! Wenn du es singst, singst du eigentlich immer das gleiche:\n\nBaby Hai tututudutudu <br>\nBaby Hai tututudutudu <br>\nBaby Hai tututudutudu <br>\nBaby Hai \n\n### Übung\nKannst du das Lied mit Hilfe des\
+                    \ `{repeat}` Befehls ausgeben? Vervollständige den Code, indem du die Lücken füllst!\n **Extra** Nach dem Baby-Hai kannst du natürlich auch andere Lieder programmieren. Es gibt viele Lieder mit Wiederholung!\nKannst du an ein weiteres Lied denken und es ausgeben?\n"
                 example_code: |
                     ```
                     {repeat} _ _ {print} 'Baby Hai tututudutudu'
