@@ -110,31 +110,31 @@
                     <label class="signup-label" for="heard_about">{{_('heard_about_hedy')}}</label>
                     <ul class="signup-input appearance-none">
                         <li class="flex">
-                            <div class="flex flex-row items-center gap-2">
+                            <div class="flex items-center gap-2">
                                 <input type="checkbox" name="heard_about" value="from_another_teacher">
                                 <label>{{_('from_another_teacher')}}</label>
                             </div>
                         </li>
                         <li class="flex">
-                            <div class="flex flex-row items-center gap-2">
+                            <div class="flex items-center gap-2">
                                 <input type="checkbox" name="heard_about" value="social_media">
                                 <label>{{_('social_media')}}</label>
                             </div>
                         </li>
                         <li class="flex">
-                            <div class="flex flex-row items-center gap-2">
+                            <div class="flex items-center gap-2">
                                 <input type="checkbox" name="heard_about" value="from_video">
                                 <label>{{_('from_video')}}</label>
                             </div>
                         </li>
                         <li class="flex">
-                            <div class="flex flex-row items-center gap-2">
+                            <div class="flex items-center gap-2">
                                 <input type="checkbox" name="heard_about" value="from_magazine_website">
                                 <label>{{_('from_magazine_website')}}</label>
                             </div>
                         </li>
                         <li class="flex">
-                            <div class="flex flex-row items-center gap-2">
+                            <div class="flex items-center gap-2">
                                 <input type="checkbox" name="heard_about" value="other_source">
                                 <label>{{_('other_source')}}</label>
                             </div>
@@ -146,42 +146,42 @@
                 <div class="signup-container">
                     <label class="signup-label" for="prog_experience">{{_('programming_experience')}}</label>
                     <ul class="signup-input" style="margin-top: -0.3em">
-                        <div class="flex flex-row gap-2">
-                            <li class="flex flex-row items-center mr-5">
+                        <div class="flex gap-2">
+                            <li class="flex items-center mr-5">
                                 <input type="radio" name="prog_experience" value="yes" onclick="$('#languages').show()" class="ltr:mr-2 rtl: ml-2" id="prog_experience_yes">
                                 <label for="prog_experience"> {{_('yes')}}</label>
                             </li>
-                            <li class="flex flex-row items-center">
+                            <li class="flex items-center">
                                 <input type="radio" name="prog_experience" value="no" onclick="$('#languages').hide()" class="ltr:mr-2 rtl:ml-2" id="prog_experience_no">
                                 <label for="prog_experience"> {{_('no')}}</label>
                             </li>
                         </div>
                     </ul>
                 </div>
-                <div class="border border-gray-400 rounded-lg mx-4 px-4 md:px-8 flex flex-row items-center justify-between gap-2 py-2" style="display: none;" id="languages">
+                <div class="border border-gray-400 rounded-lg mx-4 px-4 md:px-8 flex items-center justify-between gap-2 py-2" style="display: none;" id="languages">
                     <!-- For some reason the Tailwind 'hidden' class messes up the layout, therefore we "brute"-style it within the element -->
                     <label class="signup-label" for="experience_languages">{{_('languages')}}</label>
                     <ul class="mt-0">
                         <li class="flex">
-                            <div class="flex flex-row items-center gap-2">
+                            <div class="flex items-center gap-2">
                                 <input type="checkbox" name="experience_languages" value="scratch">
                                 <label style>Scratch</label>
                             </div>
                         </li>
                         <li class="flex">
-                            <div class="flex flex-row items-center gap-2">
+                            <div class="flex items-center gap-2">
                                 <input type="checkbox" name="experience_languages" value="other_block">
                                 <label>{{_('other_block')}}</label>
                             </div>
                         </li>
                         <li class="flex">
-                            <div class="flex flex-row items-center gap-2">
+                            <div class="flex items-center gap-2">
                                 <input type="checkbox" name="experience_languages" value="python" id="experience_language_python">
                                 <label>Python</label>
                             </div>
                         </li>
                         <li class="flex">
-                            <div class="flex flex-row items-center gap-2">
+                            <div class="flex items-center gap-2">
                                 <input type="checkbox" name="experience_languages" value="other_text">
                                 <label>{{_('other_text')}}</label>
                             </div>
@@ -190,26 +190,26 @@
                 </div>
                 <!-- The extra check options -->
                 <div class="border border-gray-400 rounded-lg mx-4 px-4 md:px-8 flex flex-col gap-1 py-2">
-                    <div class="flex flex-row justify-between items-center hidden">
+                    <div class="flex justify-between items-center hidden">
                         <label for="is_teacher">{{_('request_teacher')}}</label>
                         <input type="checkbox" id="is_teacher" name="is_teacher" {% if is_teacher %}checked{% endif %}>
                     </div>
                     {% if is_teacher %}
-                        <div class="flex flex-row justify-between items-center">
+                        <div class="flex justify-between items-center">
                             <label for="subscribe">{{_('subscribe_newsletter')}}</label>
                             <input type="checkbox" id="subscribe" name="subscribe">
                         </div>
-                        <div class="flex flex-row justify-between items-center">
+                        <div class="flex justify-between items-center">
                             <label for="pair_with_teacher">{{_('pair_with_teacher')}}</label>
                             <input type="checkbox" id="pair_with_teacher" name="pair_with_teacher">
                         </div>
                     {% endif %}
-                    <div class="flex flex-row justify-between items-center">
+                    <div class="flex justify-between items-center">
                         <label for="agree_terms">{{_('agree_with')}} <a href="/privacy" target="_blank">{{_('privacy_terms')}}</a></label>
                         <input type="checkbox" id="agree_terms" name="agree_terms" required>
                     </div>
                 </div>
-                <div class="flex flex-row items-center justify-center px-4 md:px-8 gap-4">
+                <div class="flex items-center justify-center px-4 md:px-8 gap-4">
 
                 </div>
                 <div class="flex">
@@ -219,7 +219,7 @@
         </div>
     {% endif %}
 
-    <form onsubmit="event.preventDefault (); window.location.href='/login'" class="flex flex-row gap-4 items-center">
+    <form onsubmit="event.preventDefault (); window.location.href='/login'" class="flex gap-4 items-center">
         <label>{{_('already_account')}}</label>
         <button type="submit" class="btn">{{_('login')}}</button>
     </form>
