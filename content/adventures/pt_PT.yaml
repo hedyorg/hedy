@@ -1108,7 +1108,7 @@ adventures:
         description: Explicação do nível
         levels:
             1:
-                story_text: "No nível 1 pode usar os comandos `{print}`, `{ask}` e `{echo}`. \nEscreve o teu código no painel de programação. Ou pressiona o botão verde no bloco do código exemplo, e o código será digitado para ti! \nExperimenta o código com o botão verde 'Executar código', por baixo do painel de programação. \n \nPodes imprimir o texto no ecrã usando o comando `{print}`.     \n"
+                story_text: "Bem-vindo à Hedy! Aqui podes aprender a programar passo a passo.\n\nExperimente o código você mesmo! O botão amarelo copia o código de exemplo para o seu campo de programação.\nDepois carregue no botão verde 'Executar código' por baixo do campo de programação para executar o código.\n\nJá está pronto? Então, passa ao separador seguinte para aprenderes a criar os teus próprios códigos!\n"
                 example_code: |
                     ```
                     {print} Hello world!
@@ -1171,15 +1171,12 @@ adventures:
                     ```
             6:
                 story_text: |
-                    `ask`, `print` e `if` ainda funcionam como nos nível 5.
-                     Mas no nível 6 temos algo novo, também podes fazer cálculos.
+                    No nível anterior praticou com `{ask}` e `{if}`. Por exemplo, pode perguntar aos convidados o que eles gostariam de comer.
+                    O que ainda não pode fazer é calcular o preço do jantar de todos.
 
-                     No nível 6 acrescentamos novos símbolos e agora tu podes fazer cálculos dentro do teu código.
-
-                     A soma é fácil, escreves tal como fazes em Matemática: `5 + 5`, por exemplo. A subtração também funciona na perfeição, é `5 - 5`.
-
-                     A multiplicação é um pouco diferente, porque não existe o símbolo de multiplicar no teu teclado. Podes procurar à vontade, não existe mesmo!
-                     Por esse motivo, multiplicamos utilizando o asterisco: `5 * 5`. Lê isto como 5 vezes 5 e assim será mais fácil memorizar.
+                    Este nível permite utilizar a adição, a subtração e a multiplicação nos seus programas. Desta forma, podes calcular os preços no teu restaurante, mas também podes acrescentar um código secreto para fazeres um desconto aos teus amigos e familiares.
+                    Outra opção neste nível é programar o teu próprio jogo de matemática, para o teu irmão ou irmã mais novos praticarem as multiplicações.
+                    Vê por ti próprio!
                 example_code: |-
                     ```
                     print '5 mais 5 é ' 5 + 5
@@ -2250,11 +2247,6 @@ adventures:
                     {if} name != 'Hedy'
                         {print} 'You are not Hedy'
                     ```
-
-                    {if} age < 13
-                        {print} 'You are younger than me!'
-                    {else}
-                        {print} 'You are older than me!'
     language:
         name: Language
         default_save_name: Language
@@ -2839,8 +2831,10 @@ adventures:
                     temperature = 25
                     {print}('It is ', temperature, ' degrees outside')
                     ```
-
+                    ```
+                    name = 'Hedy'
                     {print}('My name is ', name)
+                    ```
     quizmaster:
         name: Quizmaster
         default_save_name: Quizmaster

@@ -3567,7 +3567,7 @@ levels:
             mp_choice_options:
             -   option: Nothing. 1600 is not programmed into the app.
                 feedback: 'No'
-            -   option: you could eat some more
+            -   option: You could eat some more
                 feedback: 'No'
             -   option: That is alright
                 feedback: Yes!
@@ -3584,13 +3584,13 @@ levels:
                 {while} points_player_1 > points_player_2
                     {print} _ ' is in the lead right now!'
             mp_choice_options:
-            -   option: name_player_1
+            -   option: "```\n   name_player_1\n```"
                 feedback: You are right!
-            -   option: name_player_2
+            -   option: "```\n   name_player_2\n```"
                 feedback: No they are losing!
-            -   option: points_player_1
+            -   option: "```\n   points_player_1\n```"
                 feedback: You should fill in a name, not a number
-            -   option: points_player_2
+            -   option: "```\n   points_player_2\n```"
                 feedback: You should fill in a name, not a number
             hint: You win the game by having the most points. Your name should appear on the screen
             correct_answer: A
@@ -3617,7 +3617,7 @@ levels:
             question_text: What should be filled in on the blanks if you want a list of what chores are done by whom?
             code: |-
                 friends = ['Wesley', 'Eric', 'Kaylee']
-                chores = [the cooking, the cleaning, nothing]
+                chores = ['the cooking', 'the cleaning', 'nothing']
                 {for} i {in} {range} 1 {to} 3
                     {print}  _
             mp_choice_options:
@@ -3648,7 +3648,7 @@ levels:
             question_text: What is a possible output for this program?
             code: |-
                 friends = ['Wesley', 'Eric', 'Kaylee']
-                chore = [the cooking, the cleaning, nothing]
+                chore = ['the cooking', 'the cleaning', 'nothing']
                 {for} i {in} {range} 1 {to} 3
                     {print}  friends[i] has to do chores[i]
             mp_choice_options:
@@ -3692,9 +3692,9 @@ levels:
                     print 'the lucky number of ' friends[i]
                     print 'is ' lucky_numbers[i]
             mp_choice_options:
-            -   option: The variable in line 4 should be 'friend[i]', not 'friends[i]'
+            -   option: A variável na linha 4 deveria ser `friend[i]` e não `friends[i]`
                 feedback: That is not right.
-            -   option: Line 3 should say 'in range 1 to 3' not 'in range 0 to 3'
+            -   option: A linha 3 deveria dizer `in range 1 to 3` e não `in range 0 to 3`
                 feedback: Good catch!
             -   option: Line 4 should say 'lucky_number', not 'lucky number
                 feedback: It's not a variable, it's just text.
@@ -3711,13 +3711,13 @@ levels:
                 {for} i {in} {range} 1 {to} 3
                     {print} 'the ' animals[i] ' says ' sounds[i]
             mp_choice_options:
-            -   option: noises = ['moo', 'woof', 'neigh']
+            -   option: "```\n   noises = ['moo', 'woof', 'neigh']\n```"
                 feedback: Mind the variable name and the order of the sounds.
-            -   option: sounds = '[woof], [moo], [neigh]'.
+            -   option: "```\n   sounds = '[woof], [moo], [neigh]'\n```"
                 feedback: Look at line one to see how brackets are supposed to be used.
-            -   option: sounds = [woof, moo, neigh]
+            -   option: "```\n   sounds = [woof, moo, neigh]\n```"
                 feedback: Don't forget the quotation marks!
-            -   option: sounds = ['woof', 'moo', 'neigh']
+            -   option: "```\n   sounds = ['woof', 'moo', 'neigh']\n```"
                 feedback: Great job!
             hint: Look at line 1 to see proper use of brackets and quotation marks.
             correct_answer: D
