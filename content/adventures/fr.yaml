@@ -560,20 +560,31 @@ adventures:
                     ```
             10:
                 story_text: |
-                    Ce jeu de la calculatrice t'aide à apprendre tes tables de multiplication !
-                    ### Exercice
-                    Peux-tu ajouter d'autres nombres à la liste, pour t'entrainer aux multiplications jusqu'à la table de 10 ?
+                    This calculator game helps you practise your tables of multiplication!
+                    ### Exercise
+                    Fill in the blanks. We want this program to ask the player these questions:
+                    ```
+                    How much is 1 times 1?
+                    How much is 1 times 2?
+                    How much is 1 times 3?
+                    How much is 2 times 1?
+                    How much is 2 times 2?
+                    How much is 2 times 3?
+                    How much is 3 times 1?
+                    How much is 3 times 2?
+                    How much is 3 times 3?
+                    ```
                 example_code: |
                     ```
-                    nombres = 1, 2, 3
-                    {for} nombre1 {in} nombres
-                        {for} nombre2 {in} nombres
-                            réponse = {ask} "Combien font " nombre2 " fois " nombre1 " ?"
-                            correcte = nombre1 * nombre2
-                            {if} réponse {is} correcte
-                                {print} "Bon travail !"
+                    numbers = 1, 2, 3
+                    {for} _
+                        {for} _
+                            answer = {ask} _
+                            correct = number_1 * number_2
+                            {if} answer {is} correct
+                                {print} 'Great job!'
                             {else}
-                                {print} "C'est faut, la bonne réponse est " correcte
+                                {print} 'That is wrong. The right answer is ' correct
                     ```
             11:
                 story_text: |

@@ -558,20 +558,31 @@ adventures:
                     ```
             10:
                 story_text: |
-                    Dieses Taschenrechnerspiel hilft dir deine Multiplikationstabellen zu üben!
-                    ### Übung
-                    Kannst du mehr Nummern zur Liste hinzufügen, um alle Malfolgen bis 10 zu üben?
+                    This calculator game helps you practise your tables of multiplication!
+                    ### Exercise
+                    Fill in the blanks. We want this program to ask the player these questions:
+                    ```
+                    How much is 1 times 1?
+                    How much is 1 times 2?
+                    How much is 1 times 3?
+                    How much is 2 times 1?
+                    How much is 2 times 2?
+                    How much is 2 times 3?
+                    How much is 3 times 1?
+                    How much is 3 times 2?
+                    How much is 3 times 3?
+                    ```
                 example_code: |
                     ```
-                    nummern = 1, 2, 3
-                    {for} nummer1 {in} nummern
-                        {for} nummer2 {in} nummern
-                            antwort = {ask} 'Wie viel ist ' nummer2 ' mal ' nummer1 '?'
-                            richtig = nummer1 * nummer2
-                            {if} antwort {is} richtig
-                                {print} 'Gut gemacht!'
+                    numbers = 1, 2, 3
+                    {for} _
+                        {for} _
+                            answer = {ask} _
+                            correct = number_1 * number_2
+                            {if} answer {is} correct
+                                {print} 'Great job!'
                             {else}
-                                {print} 'Das ist falsch. Die richtige Antwort ist ' richtig
+                                {print} 'That is wrong. The right answer is ' correct
                     ```
             11:
                 story_text: |

@@ -1334,17 +1334,31 @@ adventures:
                         {print} 'Maybe you should practice some more in the previous level'
             10:
                 story_text: |
-                    Stai andando alla grande! Nei livelli precedenti abbiamo ancora dovuto affrontare un piccolo problema. Hai imparato a ripetere le righe, ma cosa succederebbe se volessi modificarle leggermente?
-                    Ad esempio se vuoi cantare la canzone "se sei felice e lo sai". Sarebbe simile a questo:
-
-                    Se vuoi che anche il verso successivo "calpesti i piedi", e quello successivo, e quello successivo, dovresti cambiare completamente il codice.
-                    In questo livello imparerai il comando `{for}`, che ti permette di creare un elenco di azioni e ripetere il codice con un'altra azione ogni volta!
-                    Per favore dai un'occhiata!
+                    This calculator game helps you practise your tables of multiplication!
+                    ### Exercise
+                    Fill in the blanks. We want this program to ask the player these questions:
+                    ```
+                    How much is 1 times 1?
+                    How much is 1 times 2?
+                    How much is 1 times 3?
+                    How much is 2 times 1?
+                    How much is 2 times 2?
+                    How much is 2 times 3?
+                    How much is 3 times 1?
+                    How much is 3 times 2?
+                    How much is 3 times 3?
+                    ```
                 example_code: |
                     ```
-                    animals {is} dog, cat, blobfish
-                    {for} animal {in} animals
-                      {print} 'I love ' animal
+                    numbers = 1, 2, 3
+                    {for} _
+                        {for} _
+                            answer = {ask} _
+                            correct = number_1 * number_2
+                            {if} answer {is} correct
+                                {print} 'Great job!'
+                            {else}
+                                {print} 'That is wrong. The right answer is ' correct
                     ```
             11:
                 story_text: |

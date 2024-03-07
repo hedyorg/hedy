@@ -541,20 +541,31 @@ adventures:
                     \   respuesta = {ask} 'Escriba su respuesta aquí...'\n    {print} 'Tu respuesta es' respuesta\n    {if}_{is}_ \n        puntuación = puntuación + 1\n{print} '¡Buen trabajo! Tu puntuación es... 'puntuación' sobre 10!'\n```\n"
             10:
                 story_text: |
-                    ¡Este juego de cálculo te ayuda a practicar las tablas de multiplicar!
-                    ### Ejercicio
-                    ¿Puedes añadir más números a la lista para practicar las tablas de multiplicar hasta el 10?
+                    This calculator game helps you practise your tables of multiplication!
+                    ### Exercise
+                    Fill in the blanks. We want this program to ask the player these questions:
+                    ```
+                    How much is 1 times 1?
+                    How much is 1 times 2?
+                    How much is 1 times 3?
+                    How much is 2 times 1?
+                    How much is 2 times 2?
+                    How much is 2 times 3?
+                    How much is 3 times 1?
+                    How much is 3 times 2?
+                    How much is 3 times 3?
+                    ```
                 example_code: |
                     ```
-                    números = 1, 2, 3
-                    {for} número1 {in} números
-                        {for} número2 {in} números
-                            respuesta = {ask} '¿Cuánto es ' número2 ' por ' número1 '?'
-                            correcta = número1 * número2
-                            {if} respuesta {is} correcta
-                                {print} '¡Muy bien!'
+                    numbers = 1, 2, 3
+                    {for} _
+                        {for} _
+                            answer = {ask} _
+                            correct = number_1 * number_2
+                            {if} answer {is} correct
+                                {print} 'Great job!'
                             {else}
-                                {print} 'Te equivocas. La respuesta correcta es ' correcta
+                                {print} 'That is wrong. The right answer is ' correct
                     ```
             11:
                 story_text: |

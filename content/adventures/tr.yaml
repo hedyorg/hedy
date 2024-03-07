@@ -559,20 +559,31 @@ adventures:
                     ```
             10:
                 story_text: |
-                    Bu hesap makinesi oyunu, çarpım tablosu alıştırması yapmanıza yardımcı olur!
-                    ### Alıştırma
-                    Listeye daha fazla sayı ekleyebilir misiniz, böylece 10'a kadar sayıların çarpım tablosunu çalışabilirsiniz?
+                    This calculator game helps you practise your tables of multiplication!
+                    ### Exercise
+                    Fill in the blanks. We want this program to ask the player these questions:
+                    ```
+                    How much is 1 times 1?
+                    How much is 1 times 2?
+                    How much is 1 times 3?
+                    How much is 2 times 1?
+                    How much is 2 times 2?
+                    How much is 2 times 3?
+                    How much is 3 times 1?
+                    How much is 3 times 2?
+                    How much is 3 times 3?
+                    ```
                 example_code: |
                     ```
-                    sayılar = 1, 2, 3
-                    {for} sayı1 {in} sayılar
-                        {for} sayı2 {in} sayılar
-                            cevap = {ask} 'Söyle bakalım, ' sayı2 ' kere ' sayı1 ' kaç eder?'
-                            doğrucevap = sayı1 * sayı2
-                            {if} cevap {is} doğrucevap
-                                {print} 'Aferin!'
+                    numbers = 1, 2, 3
+                    {for} _
+                        {for} _
+                            answer = {ask} _
+                            correct = number_1 * number_2
+                            {if} answer {is} correct
+                                {print} 'Great job!'
                             {else}
-                                {print} 'Bu yanlış. Doğru cevap ' doğrucevap
+                                {print} 'That is wrong. The right answer is ' correct
                     ```
             11:
                 story_text: |
