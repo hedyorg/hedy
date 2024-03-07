@@ -38,27 +38,25 @@
        </div>
 
         <div id="modal-feedback" class="hidden">                                                                                                                                                            
-            <script>                                                                                                                                                                                        
-                // Not really nice, but we have to listen to the back-end event on the HTMX post                                                                                                            
-                document.body.addEventListener("hideFeedbackModal", function(evt) {                                                                                                                         
-                    hedyApp.modal.hide();                                                                                                                                                                   
-                    if (evt.detail.value == 'success') {                                                                                                                                                    
-                        hedyApp.modal.notifySuccess('{{_('feedback_message_sent')}}');                                                                                                                      
-                        hedyApp.confetti_cannon()                                                                                                                                                           
-                    } else {                                                                                                                                                                                
-                        hedyApp.modal.notifyError('{{_('feedback_message_error')}}');                                                                                                                       
-                    }                                                                                                                                                                                       
-                })                                                                                                                                                                                          
-            </script>                                                                                                                                                                                       
             <div id="modal-feedback-text" class="text-white mb-4 text-xl"></div>                                                                                                                            
             <div class="mx-auto flex flex-col gap-4">                                                                                                                                                       
                 <div class="mt-4 flex flex-row justify-between gap-x-2">                                                                                                                                    
                     <form                                                                                                                                                                                   
                         hx-post="/feedback" 
                         hx-swap="none"
-                        _="on hideFeedbackModal log 'got event'"
+                        _="on htmx:beforeRequest
+                            set detail.requestConfig.parameters.pathname to window.location.pathname
+                          on hideFeedbackModal
+                            if detail.value then
+                                hedyApp.modal.notifySuccess('{{_('feedback_message_sent')}}')
+                                detail.elt.reset()
+                                hedyApp.modal.hide()
+                            else
+                                hedyApp.modal.notifyError('{{_('feedback_message_error')}}')
+                            end"
                     >
                       <fieldset>
+                        <input type="text" name="pathname" id="pathname" hidden>
                         <div>
                           <input type="radio" id="bug" name="category" value="bug" />
                           <label for="bug">{{_('bug')}}</label>
@@ -79,7 +77,7 @@
                             <button
                                 id="modal-send-feedback-button"
                                 class="green-btn block m-4 w-40 pb-4 pt-4">{{_('send')}}</button>
-                            <button type="reset" id="modal-cancel-button" class="red-btn block m-4 w-40 pb-4 pt-4">{{_('cancel')}}</button>
+                            <button type="button" _="on click call hedyApp.modal.hide()" class="red-btn block m-4 w-40 pb-4 pt-4">{{_('cancel')}}</button>
                         </div>
                       </fieldset>
                     </form>
