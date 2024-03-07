@@ -16,9 +16,9 @@ adventures:
                     ```
                     {ask} The main character of this story is
                     {print} The main character is now going to walk in the forest
-                    {echo} He's a bit scared,
-                    {print} He hears crazy noises everywhere
-                    {print} He's afraid this is a haunted forest
+                    {echo} They're a bit scared,
+                    {print} They hear crazy noises everywhere
+                    {print} They're afraid this is a haunted forest
                     ```
                 story_text_2: |
                     ### Exercise
@@ -38,7 +38,7 @@ adventures:
                     name {is} {ask} What is the name of the main character?
                     {print} name is now going to run in the woods
                     {print} name is a bit scared
-                    {print} Suddenly he hears a crazy noise...
+                    {print} Suddenly she hears a crazy noise...
                     {sleep}
                     {print} name is afraid this is a haunted forest
                     ```
@@ -57,13 +57,13 @@ adventures:
                 example_code: |
                     ```
                     animals {is} 🦔, 🐿, 🦉, 🦇
-                    {print} He now hears the sound of an animals {at} {random}
+                    {print} They now hear the sound of an animals {at} {random}
                     ```
                 story_text_2: |
                     The command `{add}` can also come in handy in your story.
                 example_code_2: |
                     ```
-                    {print} He hears a sound
+                    {print} They hear a sound
                     animals {is} 🐿, 🦔, 🦇, 🦉
                     animal {is} {ask} What do you think it is?
                     {add} animal {to_list} animals
