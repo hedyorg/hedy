@@ -1828,10 +1828,10 @@ def get_embedded_code_editor(level):
     return render_template("embedded-editor.html", fullWidth=fullWidth, run=run, language=language,
                            keyword_language=keyword_language, readOnly=readOnly,
                            level=level, javascript_page_options=dict(
-                                        page='view-program',
-                                        lang=language,
-                                        level=level,
-                                        code=program
+                             page='view-program',
+                             lang=language,
+                             level=level,
+                             code=program
                            ))
 
 
