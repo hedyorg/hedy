@@ -1641,6 +1641,20 @@ adventures:
                     {for} animal {in} animals
                         {print} 'I love ' animal
                     ```
+                story_text_2: |
+                    ### Exercise
+                    Finish this code by adding `{for} action {in} actions` to line 2.
+                example_code_2: |
+                    ```
+                    actions = clap your hands, stomp your feet, shout Hurray!
+                    _
+                        {repeat} 2 {times}
+                            {print} 'If youre happy and you know it, ' action
+                            {sleep} 2
+                        {print} 'If youre happy and you know it, and you really want to show it'
+                        {print} 'If youre happy and you know it, ' action
+                        {sleep} 3
+                    ```
             11:
                 story_text: |-
                     In this level, we add a new form of the `{for}`. In earlier levels, we used `{for}` with a list, but we can also use `{for}` with numbers.
