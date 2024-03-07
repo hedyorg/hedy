@@ -382,13 +382,13 @@ adventures:
                     {print} 'VINTE-E-UM'
                     cartas = [2, 3, 4, 5, 6, 7, 8, 9, 10, 'Valete', 'Dama','Rei', 'Ás']
                     pontos = 0
-                    dealer_pontos = 0
+                    oponente_pontos = 0
                     carta_1 = cartas[{random}]
                     carta_2 = cartas[{random}]
                     carta_3 = cartas [{random}]
-                    dealer_carta_1 = cartas[{random}]
-                    dealer_carta_2 = cartas[{random}]
-                    dealer_carta_3 = cartas[{random}]
+                    oponente_carta_1 = cartas[{random}]
+                    oponente_carta_2 = cartas[{random}]
+                    oponente_carta_3 = cartas[{random}]
                     # Pontos para a carta 1
                     {if} carta_1 == 'Valete' {or} carta_1 == 'Dama' {or} carta_1 == 'Rei':
                         pontos = pontos + 10
@@ -403,28 +403,28 @@ adventures:
                         pontos = pontos + 11
                     {else}:
                         pontos = pontos + carta_2
-                    # Pontos para a carta 1 do dealer
-                    {if} dealer_carta_1 == 'Valete' {or} dealer_carta_1 == 'Dama' {or} dealer_carta_1 == 'Rei':
-                        dealer_pontos = dealer_pontos + 10
-                    {elif} dealer_carta_1 == 'Ás':
-                        dealer_pontos = dealer_pontos + 11
+                    # Pontos para a carta 1 do oponente
+                    {if} oponente_carta_1 == 'Valete' {or} oponente_carta_1 == 'Dama' {or} oponente_carta_1 == 'Rei':
+                        oponente_pontos = oponente_pontos + 10
+                    {elif} oponente_carta_1 == 'Ás':
+                        oponente_pontos = oponente_pontos + 11
                     {else}:
-                        dealer_pontos = dealer_pontos + dealer_carta_1
-                    # Pontos para a carta 2 do dealer
-                    {if} dealer_carta_2 == 'Valete' {or} dealer_carta_2 == 'Dama' {or} dealer_carta_2 == 'Rei':
-                        dealer_pontos = dealer_pontos + 10
-                    {elif} dealer_carta_2 == 'Ás':
-                        dealer_pontos = dealer_pontos + 11
+                        oponente_pontos = oponente_pontos + oponente_carta_1
+                    # Pontos para a carta 2 do oponente
+                    {if} oponente_carta_2 == 'Valete' {or} oponente_carta_2 == 'Dama' {or} oponente_carta_2 == 'Rei':
+                        oponente_pontos = oponente_pontos + 10
+                    {elif} oponente_carta_2 == 'Ás':
+                        oponente_pontos = oponente_pontos + 11
                     {else}:
-                        dealer_pontos = dealer_pontos + dealer_carta_2
+                        oponente_pontos = oponente_pontos + oponente_carta_2
                     # Dois Ases
                     {if} carta_1 == 'Ás' {and} carta_2 == 'Ás':
                         pontos = 12
-                    {if} dealer_carta_1 == 'Ás' {and} dealer_carta_2 == 'Ás':
-                        dealer_pontos = 12
+                    {if} oponente_carta_1 == 'Ás' {and} oponente_carta_2 == 'Ás':
+                        oponente_pontos = 12
                     # Placar
-                    {print} 'Você tem um(a) ' carta_1 ' e um(a) ' carta_2 ' (' pontos ' pontos)'
-                    {print} 'O dealer tem um(a) ' dealer_carta_1 ' e um(a) ' dealer_carta_2 ' (' dealer_pontos ' pontos)'
+                    {print} 'Você tem um ' carta_1 ' e um ' carta_2 ' (' pontos ' pontos)'
+                    {print} 'O oponente tem um ' oponente_carta_1 ' e um ' oponente_carta_2 ' (' oponente_pontos ' pontos)'
                     # Carta extra para o jogador
                     hit = {ask} 'Você quer uma carta extra?'
                     {if} hit == 'sim':
@@ -441,25 +441,25 @@ adventures:
                     {else}:
                         {print} 'Sem cartas extra'
                     # Vencedor
-                    {if} pontos > 21 {or} dealer_pontos > pontos {or} dealer_pontos == 21:
+                    {if} pontos > 21 {or} oponente_pontos > pontos {or} oponente_pontos == 21:
                         {print} 'Você perdeu'
-                    {elif} dealer_pontos < 17:
-                        {print} 'O dealer compra uma carta extra. E ela é... ' dealer_carta_3
-                        {if} dealer_carta_3 == 'Valete' {or} dealer_carta_3 == 'Dama' {or} dealer_carta_3 == 'Rei':
-                            dealer_pontos = dealer_pontos + 10
-                        {elif} dealer_carta_3 == 'Ás':
-                            {if} dealer_pontos < 11:
-                                dealer_pontos = dealer_pontos + 11
+                    {elif} oponente_pontos < 17:
+                        {print} 'O oponente compra uma carta extra. E ela é... ' oponente_carta_3
+                        {if} oponente_carta_3 == 'Valete' {or} oponente_carta_3 == 'Dama' {or} oponente_carta_3 == 'Rei':
+                            oponente_pontos = oponente_pontos + 10
+                        {elif} oponente_carta_3 == 'Ás':
+                            {if} oponente_pontos < 11:
+                                oponente_pontos = oponente_pontos + 11
                             {else}:
-                                dealer_pontos = dealer_pontos + 1
+                                oponente_pontos = oponente_pontos + 1
                         {else}:
-                            dealer_pontos = dealer_pontos + dealer_carta_3
-                        {print} 'O dealer tem ' dealer_pontos ' pontos agora'
-                        {if} dealer_pontos < 21 {and} dealer_pontos > pontos:
+                            oponente_pontos = oponente_pontos + oponente_carta_3
+                        {print} 'O oponente tem ' oponente_pontos ' pontos agora'
+                        {if} oponente_pontos < 21 {and} oponente_pontos > pontos:
                             {print} 'Você perdeu'
                         {else}:
                             {print} 'Você ganhou'
-                    {elif} pontos > dealer_pontos {and} pontos < 21:
+                    {elif} pontos > oponente_pontos {and} pontos < 21:
                         {print} 'Você ganhou!'
                     ```
     calculator:
