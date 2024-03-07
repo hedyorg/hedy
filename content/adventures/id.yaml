@@ -1154,7 +1154,7 @@ adventures:
                     for i in range 1 to 3
                         animal = animals[i]
                         sound = sounds[i]
-                        print 'Old McDonald had a farm'
+                        print 'Old MacDonald had a farm'
                         print 'E I E I O!'
                         print 'and on that farm he had a ' animal
                         print 'E I E I O!'
@@ -2739,6 +2739,34 @@ adventures:
                         {call} song
                         {print} '🥳'
                     ```
+            16:
+                story_text: |
+                    Upgrade your Old MacDonald code!
+
+                    ### Exercise
+                    Take your code from the 'Sing a Song' adventure and add musical notes to it!
+                    You can make a function for each line in the song and call that function after the line is printed.
+                    We defined the first line for you and called it in the code. Can you finish the whole song?
+                example_code: |
+                    ```
+                    {define} line_1
+                        {for} i {in} {range} 1 {to} 3
+                            {play} G
+                        {play} D
+                        {for} i {in} {range} 1 {to} 2
+                            {play} E
+                        {play} D
+
+                    animals = ['pig', 'dog', 'cow']
+                    sounds = ['oink', 'woof', 'moo']
+                    for i in range 1 to 3
+                        animal = animals[i]
+                        sound = sounds[i]
+                        print 'Old MacDonald had a farm'
+                        call line_1
+                        print 'E I E I O!'
+                        _
+                    ```
     parrot:
         name: Parrot
         default_save_name: Parrot
@@ -3777,7 +3805,7 @@ adventures:
                 story_text: |
                     In this level you can easily make the childrens' song 'Five little monkeys'. Can you make the last chorus?
                     You can also make the whole baby shark song (including all the other sharks in the family) in only 6 lines!
-                    Or you can make Old McDonald with all the different animals.
+                    Or you can make Old MacDonald with all the different animals.
                 example_code: |
                     ```
                     keluarga = bayi, ibu, ayah, nenek, kakek
@@ -3843,7 +3871,7 @@ adventures:
                     Pelaut Mabuk juga dengan cepat dibuat di level ini. Anda hanya membutuhkan 8 baris untuk keseluruhan lagu, lihatlah!
 
                     ### Latihan
-                    Selesaikan lagu Old McDonald dengan mengatur variabel `animal` menjadi `animals[i]` dan `sound` menjadi `sounds[i]`.
+                    Selesaikan lagu Old MacDonald dengan mengatur variabel `animal` menjadi `animals[i]` dan `sound` menjadi `sounds[i]`.
                 example_code: |
                     ```
                     animals = ['pig', 'dog', 'cow']
@@ -3851,7 +3879,7 @@ adventures:
                     {for} i {in} {range} 1 {to} 3
                         animal = _
                         sound = _
-                        {print} 'Old McDonald had a farm'
+                        {print} 'Old MacDonald had a farm'
                         {print} 'E I E I O!'
                         {print} 'and on that farm he had a ' animal
                         {print} 'E I E I O!'

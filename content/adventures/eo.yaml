@@ -1148,7 +1148,7 @@ adventures:
                     for i in range 1 to 3
                         animal = animals[i]
                         sound = sounds[i]
-                        print 'Old McDonald had a farm'
+                        print 'Old MacDonald had a farm'
                         print 'E I E I O!'
                         print 'and on that farm he had a ' animal
                         print 'E I E I O!'
@@ -2714,6 +2714,34 @@ adventures:
                         {call} song
                         {print} '🥳'
                     ```
+            16:
+                story_text: |
+                    Upgrade your Old MacDonald code!
+
+                    ### Exercise
+                    Take your code from the 'Sing a Song' adventure and add musical notes to it!
+                    You can make a function for each line in the song and call that function after the line is printed.
+                    We defined the first line for you and called it in the code. Can you finish the whole song?
+                example_code: |
+                    ```
+                    {define} line_1
+                        {for} i {in} {range} 1 {to} 3
+                            {play} G
+                        {play} D
+                        {for} i {in} {range} 1 {to} 2
+                            {play} E
+                        {play} D
+
+                    animals = ['pig', 'dog', 'cow']
+                    sounds = ['oink', 'woof', 'moo']
+                    for i in range 1 to 3
+                        animal = animals[i]
+                        sound = sounds[i]
+                        print 'Old MacDonald had a farm'
+                        call line_1
+                        print 'E I E I O!'
+                        _
+                    ```
     parrot:
         name: Papago
         default_save_name: Papago
@@ -3727,7 +3755,7 @@ adventures:
                 story_text: |
                     En ĉi tiu nivelo vi povas facile fari la infanan kanton "Kvin simietoj". Ĉu vi povas fari la lastan koruson?
                     Vi ankaŭ povas fari la tutan beban ŝarkan kanton (inkluzive de ĉiuj aliaj ŝarkoj en la familio) en nur 6 linioj!
-                    Aŭ vi povas fari Old McDonald kun ĉiuj malsamaj bestoj.
+                    Aŭ vi povas fari Old MacDonald kun ĉiuj malsamaj bestoj.
                 example_code: |
                     ```
                     simioj = 5, 4, 3, 2
@@ -3755,7 +3783,7 @@ adventures:
                             sono = boj
                         {if} besto {is} bovo
                             sono = muĝ
-                        {print} 'Maljuna McDonald havis bienon'
+                        {print} 'Maljuna MacDonald havis bienon'
                         {print} 'I Aj I Aj O!'
                         {print} 'kaj en la bieno estis ' besto
                         {print} 'I Aj I Aj O!'
@@ -3829,7 +3857,7 @@ adventures:
                     {for} i {in} {range} 1 {to} 3
                         besto = _
                         sono = _
-                        {print} 'Old McDonald had a farm'
+                        {print} 'Old MacDonald had a farm'
                         {print} 'E I E I O!'
                         {print} 'and on that farm he had a ' besto
                         {print} 'E I E I O!'

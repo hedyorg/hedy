@@ -1153,7 +1153,7 @@ adventures:
                     para i en rango 1 a 3
                         animal = animales[i]
                         sonido = sonidos[i]
-                        imprimir 'Old McDonald tenia una granja'
+                        imprimir 'Old MacDonald tenia una granja'
                         imprimir 'E I E I O!'
                         imprimir 'y en esa granja tenía un ' animal
                         imprimir 'E I E I O!'
@@ -2767,6 +2767,34 @@ adventures:
                         {call} song
                         {print} '🥳'
                     ```
+            16:
+                story_text: |
+                    Upgrade your Old MacDonald code!
+
+                    ### Exercise
+                    Take your code from the 'Sing a Song' adventure and add musical notes to it!
+                    You can make a function for each line in the song and call that function after the line is printed.
+                    We defined the first line for you and called it in the code. Can you finish the whole song?
+                example_code: |
+                    ```
+                    {define} line_1
+                        {for} i {in} {range} 1 {to} 3
+                            {play} G
+                        {play} D
+                        {for} i {in} {range} 1 {to} 2
+                            {play} E
+                        {play} D
+
+                    animals = ['pig', 'dog', 'cow']
+                    sounds = ['oink', 'woof', 'moo']
+                    for i in range 1 to 3
+                        animal = animals[i]
+                        sound = sounds[i]
+                        print 'Old MacDonald had a farm'
+                        call line_1
+                        print 'E I E I O!'
+                        _
+                    ```
     parrot:
         name: Loro
         default_save_name: Loro
@@ -3912,11 +3940,11 @@ adventures:
                     ```
             16:
                 story_text: |
-                    En este nivel puedes programar una canción como OldMcDonald incluso más rápido. Puedes conectar el animal correcto con el sonido correcto simplemente poniéndolos en el mismo lugar en la lista.
+                    En este nivel puedes programar una canción como OldMacDonald incluso más rápido. Puedes conectar el animal correcto con el sonido correcto simplemente poniéndolos en el mismo lugar en la lista.
                     El Marinero Borracho también se puede hacer rápidamente en este nivel. Solo necesitas 8 líneas de código para toda la canción, ¡compruébalo!
 
                     ### Ejercicio
-                    Completa la canción Old McDonald estableciendo la variable `animal` a `animals[i]` y `sound` a `sounds[i]`.
+                    Completa la canción Old MacDonald estableciendo la variable `animal` a `animals[i]` y `sound` a `sounds[i]`.
                 example_code: |
                     ```
                     animales = ['cerdo', 'perro', 'vaca']
@@ -3924,7 +3952,7 @@ adventures:
                     {for} i {in} {range} 1 {to} 3
                         animal = _
                         sonido = _
-                        {print} 'Old McDonald tenía una granja'
+                        {print} 'Old MacDonald tenía una granja'
                         {print} 'E I E I O!'
                         {print} 'y en esa granja él tenía ' animal
                         {print} 'E I E I O!'

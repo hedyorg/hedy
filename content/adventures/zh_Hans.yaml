@@ -2720,6 +2720,34 @@ adventures:
                         {call} song
                         {print} '🥳'
                     ```
+            16:
+                story_text: |
+                    Upgrade your Old MacDonald code!
+
+                    ### Exercise
+                    Take your code from the 'Sing a Song' adventure and add musical notes to it!
+                    You can make a function for each line in the song and call that function after the line is printed.
+                    We defined the first line for you and called it in the code. Can you finish the whole song?
+                example_code: |
+                    ```
+                    {define} line_1
+                        {for} i {in} {range} 1 {to} 3
+                            {play} G
+                        {play} D
+                        {for} i {in} {range} 1 {to} 2
+                            {play} E
+                        {play} D
+
+                    animals = ['pig', 'dog', 'cow']
+                    sounds = ['oink', 'woof', 'moo']
+                    for i in range 1 to 3
+                        animal = animals[i]
+                        sound = sounds[i]
+                        print 'Old MacDonald had a farm'
+                        call line_1
+                        print 'E I E I O!'
+                        _
+                    ```
     parrot:
         name: 鹦鹉
         default_save_name: 鹦鹉
@@ -3822,7 +3850,7 @@ adventures:
                     醉酒的水手也是在这个关卡中快速制作出来的。整首歌只需要8行代码，看看吧!
 
                     ### 练习
-                    通过将变量`animal`设置为`animals[i]`，将变量`sound`设置为`sounds[i]`，完成Old McDonald歌曲。
+                    通过将变量`animal`设置为`animals[i]`，将变量`sound`设置为`sounds[i]`，完成Old MacDonald歌曲。
                 example_code: |
                     ```
                     动物们 = ['猪', '狗', '牛']
