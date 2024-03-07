@@ -560,20 +560,31 @@ adventures:
                     ```
             10:
                 story_text: |
-                    Det här räknespelet hjälper dig att öva på multiplikationstabellerna!
-                    ### Övning
-                    Kan du lägga till fler tal i listan så du kan öva multiplikationstabellerna upp till 10?
+                    This calculator game helps you practise your tables of multiplication!
+                    ### Exercise
+                    Fill in the blanks. We want this program to ask the player these questions:
+                    ```
+                    How much is 1 times 1?
+                    How much is 1 times 2?
+                    How much is 1 times 3?
+                    How much is 2 times 1?
+                    How much is 2 times 2?
+                    How much is 2 times 3?
+                    How much is 3 times 1?
+                    How much is 3 times 2?
+                    How much is 3 times 3?
+                    ```
                 example_code: |
                     ```
-                    tal = 1, 2, 3
-                    {for} tal1 {in} tal
-                        {for} tal2 {in} tal
-                            svar = {ask} 'Hur mycket är ' tal2 ' gånger ' tal1 '?'
-                            rätt = tal1 * tal2
-                            {if} svar {is} rätt
-                                {print} 'Bra jobbat!'
+                    numbers = 1, 2, 3
+                    {for} _
+                        {for} _
+                            answer = {ask} _
+                            correct = number_1 * number_2
+                            {if} answer {is} correct
+                                {print} 'Great job!'
                             {else}
-                                {print} 'Det är fel. Rätt svar är ' rätt
+                                {print} 'That is wrong. The right answer is ' correct
                     ```
             11:
                 story_text: |

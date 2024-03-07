@@ -535,19 +535,31 @@ adventures:
                     ```
             10:
                 story_text: |
-                    Dette kalkulatorspillet hjelper med å øve på multiplikasjonstabeller!
-                    Om du legger til flere tall på listen så kan du øve på alle gangetabellene.
+                    This calculator game helps you practise your tables of multiplication!
+                    ### Exercise
+                    Fill in the blanks. We want this program to ask the player these questions:
+                    ```
+                    How much is 1 times 1?
+                    How much is 1 times 2?
+                    How much is 1 times 3?
+                    How much is 2 times 1?
+                    How much is 2 times 2?
+                    How much is 2 times 3?
+                    How much is 3 times 1?
+                    How much is 3 times 2?
+                    How much is 3 times 3?
+                    ```
                 example_code: |
                     ```
-                    tallene = 1, 2, 3
-                    {for} tall1 {in} tallene
-                        {for} tall2 {in} tallene
-                            ditt_svar = {ask} 'Hvor mye er ' tall1 ' ganger ' tall2 '?'
-                            riktig_svar = tall1 * tall2
-                            {if} ditt_svar {is} riktig_svar
-                                {print} 'Godt jobbet!'
+                    numbers = 1, 2, 3
+                    {for} _
+                        {for} _
+                            answer = {ask} _
+                            correct = number_1 * number_2
+                            {if} answer {is} correct
+                                {print} 'Great job!'
                             {else}
-                                {print} 'Det er feil. Det riktige svaret er ' riktig_svar
+                                {print} 'That is wrong. The right answer is ' correct
                     ```
             11:
                 story_text: |

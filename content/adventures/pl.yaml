@@ -511,11 +511,32 @@ adventures:
                     \ 'Wpisz tutaj swoją odpowiedź...'\n    {print} 'Twoja odpowiedź to'  odpowiedź\n    {if} _ {is} _\n        wynik = wynik + 1\n{print} 'Świetna robota! Twój wynik to... ' wynik ' na 10!\n```\n"
             10:
                 story_text: |
-                    Ta gra w kalkulator pomoże Ci przećwiczyć tabliczkę mnożenia!
-                    ### Ćwiczenie
-                    Czy możesz dodać więcej liczb do listy, aby ćwiczyć tabliczkę mnożenia do 10?
-                example_code: "```\nliczby = 1, 2, 3\n{for} liczba1 {in} liczby\n    {for} liczba2 {in} liczby\n        odpowiedź = {ask} 'Ile wynosi ' liczba2 ' razy ' liczba1 '?'\n        poprawna_odpowiedź = liczba1 * liczba2\n        {if} odpowiedź {is} poprawna_odpowiedź\n            {print} 'Świetna\
-                    \ robota!'\n        {else}\n            {print} 'To nieprawidłowa odpowiedź. Prawidłowa odpowiedź to ' poprawna_odpowiedź  \n```\n"
+                    This calculator game helps you practise your tables of multiplication!
+                    ### Exercise
+                    Fill in the blanks. We want this program to ask the player these questions:
+                    ```
+                    How much is 1 times 1?
+                    How much is 1 times 2?
+                    How much is 1 times 3?
+                    How much is 2 times 1?
+                    How much is 2 times 2?
+                    How much is 2 times 3?
+                    How much is 3 times 1?
+                    How much is 3 times 2?
+                    How much is 3 times 3?
+                    ```
+                example_code: |
+                    ```
+                    numbers = 1, 2, 3
+                    {for} _
+                        {for} _
+                            answer = {ask} _
+                            correct = number_1 * number_2
+                            {if} answer {is} correct
+                                {print} 'Great job!'
+                            {else}
+                                {print} 'That is wrong. The right answer is ' correct
+                    ```
             11:
                 story_text: |
                     Dzięki `{for}` można uprościć program ćwiczeniowy tabliczki mnożenia.

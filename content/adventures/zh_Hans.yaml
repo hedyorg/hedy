@@ -536,20 +536,31 @@ adventures:
                     ```
             10:
                 story_text: |
-                    这个计算器游戏帮助您练习你的乘法口诀表！ 
-                    ### 练习
-                    你能在列表中加入更多的数字，这样你就可以练习乘法表直到10？
+                    This calculator game helps you practise your tables of multiplication!
+                    ### Exercise
+                    Fill in the blanks. We want this program to ask the player these questions:
+                    ```
+                    How much is 1 times 1?
+                    How much is 1 times 2?
+                    How much is 1 times 3?
+                    How much is 2 times 1?
+                    How much is 2 times 2?
+                    How much is 2 times 3?
+                    How much is 3 times 1?
+                    How much is 3 times 2?
+                    How much is 3 times 3?
+                    ```
                 example_code: |
                     ```
-                    数字 = 1, 2, 3
-                    {for} 数一 {in} 数字
-                        {for} 数二 {in} 数字
-                            答案 = {ask} 数一 '乘以' 数二 '是多少？'
-                            正确答案 = 数一 * 数二
-                            {if} 答案 {is} 正确答案
-                                {print} '做得好！'
+                    numbers = 1, 2, 3
+                    {for} _
+                        {for} _
+                            answer = {ask} _
+                            correct = number_1 * number_2
+                            {if} answer {is} correct
+                                {print} 'Great job!'
                             {else}
-                                {print} '回答错误。正确答案是' 正确答案
+                                {print} 'That is wrong. The right answer is ' correct
                     ```
             11:
                 story_text: |

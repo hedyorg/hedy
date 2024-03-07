@@ -521,21 +521,31 @@ adventures:
                     ```
             10:
                 story_text: |
-                    Met dit rekenspelletje kun je de tafels oefenen.
-                    Hoe meer getallen je aan de lijst toevoegt, hoe meer tafels je kunt oefenen.
+                    Oefen de tafelsommen met dit programma!
                     ### Opdracht
-                    Kun jij meer getallen toevoegen aan de lijst, zodat je alle tafels tot 10 kunt oefenen?
+                    Vul de lege plekken in. We willen dat het programma deze vragen stelt aan de speler:
+                    ```
+                    Wat is 1 keer 1?
+                    Wat is 1 keer 2?
+                    Wat is 1 keer 3?
+                    Wat is 2 keer 1?
+                    Wat is 2 keer 2?
+                    Wat is 2 keer 3?
+                    Wat is 3 keer 1?
+                    Wat is 3 keer 2?
+                    Wat is 3 keer 3?
+                    ```
                 example_code: |
                     ```
-                    nummers = 1, 2, 3
-                    {for} nummer1 {in} nummers
-                        {for} nummer2 {in} nummers
-                            antwoord = {ask} 'Hoeveel is ' nummer2 ' keer ' nummer1 '?'
-                            goed = nummer1 * nummer2
-                            {if} antwoord {is} goed
-                                {print} 'Goedzo!'
+                    getallen = 1, 2, 3
+                    {for} _
+                        {for} _
+                            antwoord = {ask} _
+                            correct = getal_1 * getal_2
+                            {if} antwoord {is} correct
+                                {print} 'Fantastisch!'
                             {else}
-                                {print} 'Foutje! Het was... ' goed
+                                {print} 'Fout! Het antwoord is ' correct
                     ```
             11:
                 story_text: |

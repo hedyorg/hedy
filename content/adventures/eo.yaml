@@ -543,19 +543,31 @@ adventures:
                     ```
             10:
                 story_text: |
-                    Ĉi tiu kalkulilo-ludo helpas vin praktiki tabelojn de multipliko!
-                    Se vi aldonus pliajn nombrojn al la listo, vi povus ekzerci vin pri pliaj multiplikoj.
+                    This calculator game helps you practise your tables of multiplication!
+                    ### Exercise
+                    Fill in the blanks. We want this program to ask the player these questions:
+                    ```
+                    How much is 1 times 1?
+                    How much is 1 times 2?
+                    How much is 1 times 3?
+                    How much is 2 times 1?
+                    How much is 2 times 2?
+                    How much is 2 times 3?
+                    How much is 3 times 1?
+                    How much is 3 times 2?
+                    How much is 3 times 3?
+                    ```
                 example_code: |
                     ```
-                    nombroj = 1, 2, 3
-                    {for} nombro1 {in} nombroj
-                        {for} nombro2 {in} nombroj
-                            respondo = {ask} 'Kiom estas ' nombro2 ' multiplikite per ' nombro1 '?'
-                            ĝusta = nombro1 * nombro2
-                            {if} respondo {is} ĝusta
-                                {print} 'Bonege!'
+                    numbers = 1, 2, 3
+                    {for} _
+                        {for} _
+                            answer = {ask} _
+                            correct = number_1 * number_2
+                            {if} answer {is} correct
+                                {print} 'Great job!'
                             {else}
-                                {print} 'Via respondo ne estas ĝusta. Jen la ĝusta respondo: ' ĝusta
+                                {print} 'That is wrong. The right answer is ' correct
                     ```
             11:
                 story_text: |
