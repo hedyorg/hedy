@@ -2789,6 +2789,29 @@ adventures:
                         print 'E I E I O!'
                         _
                     ```
+            17:
+                story_text: |
+                    You can use the {elif} to create different options.
+
+                    ### Exercise
+                    Firstly, add colons to get the code to work.
+                    Then finish this code by adding at least 2 other songs for other moods. For example a happy song and an angry song.
+                example_code: |
+                    ```
+                    {define} scary_song
+                        {for} i {in} {range} 1 {to} 3
+                            {play} G
+                        {play} E
+                        {sleep} 2
+                        {for} i {in} {range} 1 {to} 3
+                            {play} F
+                        {play} D
+
+                    mood = {ask} 'Which emotion are you feeling?'
+                    {if} mood {is} 'fear'
+                        {call} scary_song
+                    {elif} _
+                    ```
     parrot:
         name: Lloro
         default_save_name: Parrot
