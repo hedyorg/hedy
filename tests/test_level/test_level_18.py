@@ -162,19 +162,19 @@ class TestsLevel18(HedyTester):
 
     def test_for_loop(self):
         code = textwrap.dedent("""\
-      a is 2
-      b is 3
-      for a in range(2, 4):
-          a is a + 2
-          b is b + 2""")
-        expected = textwrap.dedent("""\
-      a = 2
-      b = 3
-      step = 1 if 2 < 4 else -1
-      for a in range(2, 4 + step, step):
-        a = a + 2
-        b = b + 2
-        time.sleep(0.1)""")
+            a is 2
+            b is 3
+            for a in range(2, 4):
+                a is a + 2
+                b is b + 2""")
+        expected = textwrap.dedent(f"""\
+            a = 2
+            b = 3
+            step = 1 if 2 < 4 else -1
+            for a in range(2, 4 + step, step):
+              a = {self.addition_transpiled('a', 2)}
+              b = {self.addition_transpiled('b', 2)}
+              time.sleep(0.1)""")
 
         self.multi_level_tester(
             code=code,
