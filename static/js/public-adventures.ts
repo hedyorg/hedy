@@ -151,6 +151,11 @@ async function updateDOM() {
         initialize({lang: js.lang, level: js.level, keyword_language: js.lang,
             javascriptPageOptions: js})
 
+        // reset data values for each filter.
+        levelSelect.setAttribute("data-value", js.level);
+        languageSelect.setAttribute("data-value", js.lang);
+        tagsSelect.setAttribute("data-value", js.tags);
+
         initializeHighlightedCodeBlocks(publicAdventuresBody)
         
         const cloneBtn = document.getElementById(`clone_adventure_btn_${level}`);
