@@ -33,6 +33,13 @@ Cypress.Commands.add('getBySelLike', (selector, ...args) => {
 })
 
 Cypress.Commands.add("checkForPlaceholders", () => {
+  // cy.get('div').invoke('text').each((text) => {
+  //   // if (text.includes('{{') || text.includes('}_')) {
+  //   if (text.includes("_")) {
+  //     expect(text.trim()).not.to.include('_'); // Fail if placeholder found
+  //   }
+  // });
+
   // Check elements that could include placeholders.
   cy.get("h1, h2, h3, p, label, input, button, option").each(($el) => {
     const text = $el.text().trim();
