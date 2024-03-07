@@ -41,10 +41,10 @@
                 {% if program.public %}
                     <button class="gray-btn text-blue-500 min-w-full flex justify-between items-center gap-2 border-b border-gray-500" onclick="hedyApp.copy_to_clipboard(hedyApp.viewProgramLink('{{program.id}}'), '{{_('copy_clipboard')}}')">{{_('copy_link_to_share')}}</button>
                 {% endif %}
-                {% if not program.submitted %}
-                <button class="gray-btn text-red-500 min-w-full flex justify-between items-center gap-2" data-cy="delete_non_submitted_program_{{ loop_index }}" onclick="hedyApp.delete_program('{{ program.id }}', {{ loop_index }}, '{{_('delete_confirm')}}')">{{_('delete')}}</button>
-                {% else %}
-                    {% if not second_teachers_programs %}
+                {% if not second_teachers_programs %}
+                    {% if not program.submitted %}
+                    <button class="gray-btn text-red-500 min-w-full flex justify-between items-center gap-2" data-cy="delete_non_submitted_program_{{ loop_index }}" onclick="hedyApp.delete_program('{{ program.id }}', {{ loop_index }}, '{{_('delete_confirm')}}')">{{_('delete')}}</button>
+                    {% else %}
                         <button class="gray-btn text-red-500 min-w-full flex justify-between items-center gap-2" data-cy="delete_submitted_program_{{ loop_index }}" onclick="hedyApp.delete_program('{{ program.id }}', {{ loop_index }}, '{{_('delete_confirm')}}')">{{_('delete')}}</button>
                     {% endif %}
                 {% endif %}
@@ -59,7 +59,7 @@
     </div>
     <div id="non_submitted_button_container_{{ loop_index }}" class="flex flex-row w-full gap-2 {% if program.submitted %} hidden {% endif %}">
         <a href="/hedy/{{program.level|string}}/{{program.id}}"><button class="blue-btn">{{_('open')}}</button></a>
-        <button class="green-btn" {% if not program.public %} style="display: none;" {% endif %} onclick="hedyApp.modal.confirm ('{{_('submit_warning')}}', function () {hedyApp.submit_program ('{{program.id}}', {{ loop_index }})})">{{_('submit_program')}}</button>
+        <button class="green-btn" data-cy="submit-btn" {% if not program.public or second_teachers_programs %} style="display: none;" {% endif %} onclick="hedyApp.modal.confirm ('{{_('submit_warning')}}', function () {hedyApp.submit_program ('{{program.id}}', {{ loop_index }})})">{{_('submit_program')}}</button>
         {% if not second_teachers_programs %}
         <div class="dropdown relative">
             <button class="white-btn inline-flex items-center gap-2" id="share_option_dropdown_{{ loop_index }}"
