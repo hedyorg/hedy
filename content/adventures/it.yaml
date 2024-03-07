@@ -1320,18 +1320,18 @@ adventures:
                     ```
             9:
                 story_text: |
-                    In this level you can not only use multiple lines with `{if}` and `{repeat}`, but you can also put them together!
-                    In the example you see an `{if}` command within a `{repeat}` command. It is also allowed the other way around, and an `{if}` is also allowed in an `{if}` and a `{repeat}` in a `{repeat}`.
-                    Give it a try!
+                    Great job! You've reached another new level! In the previous level you've learned to use multiple lines of code in an {if} or {repeat} command. But you can't yet combine the two...
+                    Good news! In this level you will be allowed to put an {if} inside an {if}, or inside a {repeat} command. Putting a block of code inside another block of code is called nesting.                     ``` Putting a block of code inside another block of code is called nesting.
                 example_code: |
                     ```
-                    {repeat} 3 {times}
-                        food = {ask} 'What do you want?'
-                        {if} food {is} pizza
-                            {print} 'nice!'
-                        {else}
-                            {print} 'pizza is better'
-                    ```
+                    answer = {ask} 'Are you ready to learn something new?'
+                    {if} answer {is} yes
+                        {print} 'Great! You can learn to use the repeat command in the if command!'
+                        {print} 'Hooray!'
+                        {print} 'Hooray!'
+                        {print} 'Hooray!'
+                    {else}
+                        {print} 'Maybe you should practice some more in the previous level'
             10:
                 story_text: |
                     Stai andando alla grande! Nei livelli precedenti abbiamo ancora dovuto affrontare un piccolo problema. Hai imparato a ripetere le righe, ma cosa succederebbe se volessi modificarle leggermente?
@@ -3186,18 +3186,18 @@ adventures:
                     ```
             9:
                 story_text: |
-                    In this level you can not only use multiple lines with `{if}` and `{repeat}`, but you can also put them together!
-                    In the example you see an `{if}` command within a `{repeat}` command. It is also allowed the other way around, and an `{if}` is also allowed in an `{if}` and a `{repeat}` in a `{repeat}`.
-                    Give it a try!
+                    Great job! You've reached another new level! In the previous level you've learned to use multiple lines of code in an {if} or {repeat} command. But you can't yet combine the two...
+                    Good news! In this level you will be allowed to put an {if} inside an {if}, or inside a {repeat} command. Putting a block of code inside another block of code is called nesting.                     ``` Putting a block of code inside another block of code is called nesting.
                 example_code: |
                     ```
-                    {repeat} 3 {times}
-                        food = {ask} 'What do you want?'
-                        {if} food {is} pizza
-                            {print} 'nice!'
-                        {else}
-                            {print} 'pizza is better'
-                    ```
+                    answer = {ask} 'Are you ready to learn something new?'
+                    {if} answer {is} yes
+                        {print} 'Great! You can learn to use the repeat command in the if command!'
+                        {print} 'Hooray!'
+                        {print} 'Hooray!'
+                        {print} 'Hooray!'
+                    {else}
+                        {print} 'Maybe you should practice some more in the previous level'
     repeat_command_2:
         name: '{repeat} 2'
         default_save_name: repeat_command_2
