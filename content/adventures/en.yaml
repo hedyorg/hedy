@@ -527,24 +527,24 @@ adventures:
                     ```
             9:
                 story_text: |
-                    In level 6 you created a calculator, in this level you can expand that code so it asks multiple questions.
+                    In a previous level you've created a calculator, in this level you can expand that code so it asks multiple questions.
 
                     ### Exercise 1
-                    Can you finish line 10 to make to program work?
+                    Can you finish line 10 to get the code to work?
 
                     ### Exercise 2
-                    Give the player feedback when the enter a right or wrong answer. To achieve that, expand your program with an `{else}`.
+                    Give the player feedback when the enter an answer, like `{print} 'Correct!'` or `{print} 'Wrong! The correct answer is ' correct_answer`.
                 example_code: |
                     ```
                     score = 0
                     {repeat} 10 {times}
                         numbers = 1, 2, 3, 4, 5, 6, 7, 8, 9, 10
-                        number1 = numbers {at} {random}
-                        number2 = numbers {at} {random}
-                        correct_answer = number1 * number2
-                        {print} 'What is ' number1 ' times ' number2 '?'
+                        number_1 = numbers {at} {random}
+                        number_2 = numbers {at} {random}
+                        correct_answer = number_1 * number_2
+                        {print} 'What is ' number_1 ' times ' number_2 '?'
                         answer = {ask} 'Type your answer here...'
-                        {print} 'Your answer is' answer
+                        {print} 'Your answer is ' answer
                         {if} _ {is} _
                             score = score + 1
                     {print} 'Great job! Your score is... ' score ' out of 10!'

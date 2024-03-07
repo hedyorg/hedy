@@ -497,22 +497,22 @@ adventures:
                     ```
             9:
                 story_text: |
-                    In dit level kunnen we de rekenmachine van level 6 uitbreiden en meerdere sommen achter elkaar vragen.
+                    In dit level kunnen we de rekenmachine van een vorig level uitbreiden en meerdere sommen achter elkaar vragen.
 
                     ### Opdracht 1
                     Kun jij regel 10 afmaken zodat het programma werkt?
 
                     ### Opdracht 2
-                    Geef de speler feedback over een goed en over een fout antwoord. Breid je programma daarvoor uit met een `{else}`.
+                    Geef de speler feedback over een goed en over een fout antwoord, zoals `{print} 'Super!'` of `{print} 'Helaas, het goede antwoord was ' goede_antwoord`.
                 example_code: |
                     ```
                     score = 0
                     {repeat} 10 {times}
                         getallen = 1, 2, 3, 4, 5, 6, 7, 8, 9, 10
-                        getal1 = getallen {at} {random}
-                        getal2 = getallen {at} {random}
-                        goede_antwoord = getal1 * getal2
-                        {print} 'Hoeveel is ' getal1 ' keer ' getal2 '?'
+                        getal_1 = getallen {at} {random}
+                        getal_2 = getallen {at} {random}
+                        goede_antwoord = getal_1 * getal_2
+                        {print} 'Hoeveel is ' getal_1 ' keer ' getal_2 '?'
                         antwoord = {ask} 'Vul hier het antwoord in:'
                         {print} 'Jouw antwoord is ' antwoord
                         {if} _ {is} _
