@@ -604,7 +604,7 @@ def parse():
 
         try:
             if username and not body.get('tutorial') and ACHIEVEMENTS.verify_run_achievements(
-                username, code, level, response, transpile_result.commands):
+                    username, code, level, response, transpile_result.commands):
                 response['achievements'] = ACHIEVEMENTS.get_earned_achievements()
         except Exception as E:
             print(f"error determining achievements for {code} with {E}")
@@ -1467,7 +1467,7 @@ def index(level, program_id):
             # Not current leve-quiz's data because some levels may have no data for quizes,
             # but we still need to check for the threshold.
             if level - 1 in available_levels and level > 1 and \
-                (not level_quiz_data or QUIZZES[g.lang].get_quiz_data_for_level(level - 1)):
+                    (not level_quiz_data or QUIZZES[g.lang].get_quiz_data_for_level(level - 1)):
                 scores = [x.get('scores', []) for x in quiz_stats if x.get('level') == level - 1]
                 scores = [score for week_scores in scores for score in week_scores]
                 max_score = 0 if len(scores) < 1 else max(scores)
