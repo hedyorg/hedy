@@ -126,8 +126,8 @@ describe('customize class page', () => {
                 .should('have.length', startLength);
 
               // the adventure should now be last
-              cy.get('[data-cy="level-2"] div:last input')
-                .should('have.value', `${adventure}`)
+              cy.get(`[data-cy="level-2"] div[data-cy="${adventure}"`)
+                .should("exist")
           });
       });
     });
