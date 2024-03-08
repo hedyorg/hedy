@@ -3,23 +3,31 @@ import { initialize } from "./initialize";
 import { initializeHighlightedCodeBlocks } from "./app";
 import { postJson } from "./comm";
 
-// Get and initialize needed variables
-const levelSelect = document.getElementById("level-select") as Element;
-const languageSelect = document.getElementById("language-select") as Element;
-const tagsSelect = document.getElementById("tag-select") as Element;
+let levelSelect: HTMLElement;
+let languageSelect: HTMLElement;
+let tagsSelect: HTMLElement;
+function initializeVariables() {
+    // Get and initialize needed variables
+    levelSelect = document.getElementById("level-select") as HTMLElement;
+    languageSelect = document.getElementById("language-select") as HTMLElement;
+    tagsSelect = document.getElementById("tag-select") as HTMLElement;
+}
 
 const searchInput = document.getElementById('search_adventure') as HTMLInputElement | null;
 let searchTimeout: NodeJS.Timeout;
 
 searchInput?.addEventListener('input', handleSearchInput);
 
-document.addEventListener("DOMContentLoaded", () => {
+document.addEventListener("DOMContentLoaded", prepareDropdowns);
 
+function prepareDropdowns() {
     const options = document.querySelectorAll('.option');
 
     options.forEach(function (option) {
         option.addEventListener('click', function () {
+            console.log("clicked now", option)
             const dropdown = option.closest(".dropdown") as Element;
+            console.log(dropdown)
             if (!dropdown) {
                 return;
             }
@@ -48,27 +56,28 @@ document.addEventListener("DOMContentLoaded", () => {
                 nextValue =  option.getAttribute("data-value") || "";
             }
             dropdown.setAttribute("data-value", nextValue)
+            console.log('set it now', nextValue)
             option.classList.toggle('selected');
 
             updateLabelText(dropdown);
-            updateDOM()
         });
     });
+}
     
     
     
     
-    updateDOM()
-    setTimeout(() => {
-        if (!levelSelect)
-            return
-        // Since we render html as a string, the js is lost and thus any js needed
-        // has to be applied again.
-        const level = levelSelect.getAttribute("data-value") || "";
-        const cloneBtn = document.getElementById(`clone_adventure_btn_${level}`);
-        cloneBtn?.addEventListener('click', handleCloning);
-    }, 500)
-})
+//     updateDOM()
+//     setTimeout(() => {
+//         if (!levelSelect)
+//             return
+//         // Since we render html as a string, the js is lost and thus any js needed
+//         // has to be applied again.
+//         const level = levelSelect.getAttribute("data-value") || "";
+//         const cloneBtn = document.getElementById(`clone_adventure_btn_${level}`);
+//         cloneBtn?.addEventListener('click', handleCloning);
+//     }, 500)
+// })
 
 
 function getSelectedOptions(_options: NodeListOf<Element>) {
@@ -83,6 +92,7 @@ function updateLabelText(dropdown: Element) {
     const relativeOptions = dropdown.querySelectorAll(".option") as NodeListOf<Element>;
     const label = toggleButton.querySelector(".label") as Element;
     const selectedOptions = getSelectedOptions(relativeOptions);
+    console.log(selectedOptions)
     label.textContent = selectedOptions.length === 0 ? label.getAttribute("data-value") : selectedOptions.join(', ');
 }
 
@@ -112,6 +122,7 @@ function updateURL() {
     const level = levelSelect.getAttribute("data-value") || "";
     const lanugage = languageSelect.getAttribute("data-value") || "";
     const tags = tagsSelect.getAttribute("data-value") || "";
+    console.log(level, lanugage, tags, urlParams)
     urlParams.set('level', level)
     urlParams.set('lang', lanugage)
     urlParams.set('tag', tags)
@@ -123,6 +134,7 @@ function updateURL() {
 }
 
 async function updateDOM() {
+    return
     if (!levelSelect || !languageSelect || !tagsSelect)
         return
     // Since the select has no default values, we don't want to pass undefined to the backend.
@@ -142,7 +154,7 @@ async function updateDOM() {
     const { html, js } = await response.json()
     updateURL()
 
-    const publicAdventuresBody = document.getElementById('public-adventures-body') ;
+    const publicAdventuresBody = document.getElementById('public-adventures-body') as HTMLElement;
     if (publicAdventuresBody) {
         publicAdventuresBody.innerHTML = html
 
@@ -162,3 +174,23 @@ async function updateDOM() {
         cloneBtn?.addEventListener('click', handleCloning);
     }
 }
+document.addEventListener("updateTSCode", (e: any) => {
+    initializeVariables();
+    updateURL();
+    const js = e.detail;
+
+    const level = levelSelect.getAttribute("data-value") || "";
+    const lanugage = languageSelect.getAttribute("data-value") || "";
+    console.log('updatingnowwww', js, level, lanugage)
+    // const tags = tagsSelect.getAttribute("data-value") || "";
+    setTimeout(() => {
+        
+    prepareDropdowns();
+    initialize({lang: js.lang, level: parseInt(js.level), keyword_language: js.lang,
+        javascriptPageOptions: js
+        });
+    }, 500);
+
+    // const publicAdventuresBody = document.getElementById('public-adventures-body') as HTMLElement;
+    // initializeHighlightedCodeBlocks(publicAdventuresBody)
+})
