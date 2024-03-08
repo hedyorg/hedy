@@ -536,20 +536,32 @@ adventures:
                     ```
             10:
                 story_text: |
-                    这个计算器游戏帮助您练习你的乘法口诀表！ 
-                    ### 练习
-                    你能在列表中加入更多的数字，这样你就可以练习乘法表直到10？
+                    This calculator game helps you practise your tables of multiplication!
+                    ### Exercise
+                    Fill in the blanks. We want this program to ask the player these questions:
+                    ```
+                    How much is 1 times 1?
+                    How much is 1 times 2?
+                    How much is 1 times 3?
+                    How much is 2 times 1?
+                    How much is 2 times 2?
+                    How much is 2 times 3?
+                    How much is 3 times 1?
+                    How much is 3 times 2?
+                    How much is 3 times 3?
+                    _
+                    ```
                 example_code: |
                     ```
-                    数字 = 1, 2, 3
-                    {for} 数一 {in} 数字
-                        {for} 数二 {in} 数字
-                            答案 = {ask} 数一 '乘以' 数二 '是多少？'
-                            正确答案 = 数一 * 数二
-                            {if} 答案 {is} 正确答案
-                                {print} '做得好！'
+                    numbers = 1, 2, 3
+                    {for} _
+                        {for} _
+                            answer = {ask} _
+                            correct = number_1 * number_2
+                            {if} answer {is} correct
+                                {print} 'Great job!'
                             {else}
-                                {print} '回答错误。正确答案是' 正确答案
+                                {print} 'That is wrong. The right answer is ' correct
                     ```
             11:
                 story_text: |
@@ -1090,7 +1102,7 @@ adventures:
         levels:
             1:
                 story_text: |
-                    欢迎来到海蒂!在第一级，你可以从打印文本开始。
+                    欢迎来到海蒂!在第一级，你可逐步开始编程。
 
                     自己试试代码吧!黄色按钮将示例代码复制到编程字段中。
                     然后按下编程字段下的绿色“运行代码”按钮来运行代码。
@@ -1158,8 +1170,8 @@ adventures:
                     在上一级别中，您已经练习了`{ask}`和`{if}`。 例如，您可以询问客人想吃什么。
                     但您还不能做的是计算每个人晚餐的价格。
 
-                    下一级别使您可以在程序中使用加法、减法和乘法。 通过这种方式，您可以计算餐厅的价格，但您也可以添加密码，为您的朋友和家人提供折扣。
-                    下一级别的另一个选择是编写您自己的数学游戏，供您的弟弟或妹妹练习乘法。
+                    当前级别使您可以在程序中使用加法、减法和乘法。 通过这种方式，您可以计算餐厅的价格，但您也可以添加密码，为您的朋友和家人提供折扣。
+                    当前级别的另一个选择是编写您自己的数学游戏，供您的弟弟或妹妹练习乘法。
                     你自己去看看吧！
                 example_code: |
                     ```
@@ -1579,6 +1591,20 @@ adventures:
                     animals = 狗, 猫, 鱼
                     {for} animal {in} animals
                         {print} '我喜欢' animal
+                    ```
+                story_text_2: |
+                    ### Exercise
+                    Finish this code by adding `{for} action {in} actions` to line 2.
+                example_code_2: |
+                    ```
+                    actions = clap your hands, stomp your feet, shout Hurray!
+                    _
+                        {repeat} 2 {times}
+                            {print} 'If youre happy and you know it, ' action
+                            {sleep} 2
+                        {print} 'If youre happy and you know it, and you really want to show it'
+                        {print} 'If youre happy and you know it, ' action
+                        {sleep} 3
                     ```
             11:
                 story_text: |-
@@ -2703,6 +2729,106 @@ adventures:
                     {if} 着火 _ 'yes'
                         {call} 火警
                     ```
+            15:
+                story_text: |
+                    **Warning** This adventure can become extremely annoying!
+                    We can also use the {while} command to repeat a song forever.
+
+                    ### Exercise
+                    Finish the never-ending song.
+                example_code: |
+                    ```
+                    {define} song
+                        {play} _
+
+                    yes_or_no = {ask} 'Do you want to hear my never-ending song?'
+                    {while} yes_or_no = 'yes'
+                        {call} song
+                        {print} '🥳'
+                    ```
+            16:
+                story_text: |
+                    Upgrade your Old MacDonald code!
+
+                    ### Exercise
+                    Take your code from the 'Sing a Song' adventure and add musical notes to it!
+                    You can make a function for each line in the song and call that function after the line is printed.
+                    We defined the first line for you and called it in the code. Can you finish the whole song?
+                example_code: |
+                    ```
+                    {define} line_1
+                        {for} i {in} {range} 1 {to} 3
+                            {play} G
+                        {play} D
+                        {for} i {in} {range} 1 {to} 2
+                            {play} E
+                        {play} D
+
+                    animals = ['pig', 'dog', 'cow']
+                    sounds = ['oink', 'woof', 'moo']
+                    for i in range 1 to 3
+                        animal = animals[i]
+                        sound = sounds[i]
+                        print 'Old MacDonald had a farm'
+                        call line_1
+                        print 'E I E I O!'
+                        _
+                    ```
+            17:
+                story_text: |
+                    You can use the {elif} to create different options.
+
+                    ### Exercise
+                    Firstly, add colons to get the code to work.
+                    Then finish this code by adding at least 2 other songs for other moods. For example a happy song and an angry song.
+                example_code: |
+                    ```
+                    {define} scary_song
+                        {for} i {in} {range} 1 {to} 3
+                            {play} G
+                        {play} E
+                        {sleep} 2
+                        {for} i {in} {range} 1 {to} 3
+                            {play} F
+                        {play} D
+
+                    mood = {ask} 'Which emotion are you feeling?'
+                    {if} mood {is} 'fear'
+                        {call} scary_song
+                    {elif} _
+                    ```
+            18:
+                story_text: |
+                    ### Exercise
+                    Even in this last level of Hedy we can make some music! Be careful of all the syntax that is needed now.
+                    Take a good look at how the functions are defined and called upon in the example code.
+                    Finish the song!
+                example_code: |
+                    ```
+                    {def} line_1():
+                        {for} i {in} {range}(1, 5):
+                            {play} A
+                        {play} D
+                        {play} F
+                        {play} A
+
+                    {def} line_2():
+                        {for} i {in} {range}(1, 5):
+                            {play} G
+                        {play} C
+                        {play} E
+                        {play} G
+
+                    {def} line_3():
+                    _
+
+                    {print} ('The drunken sailor')
+                    {print} ('What shall we do with the drunken sailor?')
+                    line_1()
+                    line_2()
+                    line_3()
+                    {print} ('Early in the morning')
+                    ```
     parrot:
         name: 鹦鹉
         default_save_name: 鹦鹉
@@ -2902,8 +3028,8 @@ adventures:
                     ```
                 story_text_2: |
                     ### 练习
-                    在Hedy中，你会在每一次冒险中找到练习。练习允许您练习新的命令和概念，并允许您对示例代码进行自己的修改。
-                    在这个练习中，你会看到一个粉红色的空白区域。在运行代码之前，您必须在空白的地方填充一些东西。
+                    在海蒂中，你会在每一次冒险中找到练习。练习允许您练习新的命令和概念，并允许您对示例代码进行自己的修改。
+                    在这个练习中，你会看到一个粉红色的空白区域。在运行能代码之前，必须在空白处填充一些东西。
 
                     在空格中填写`{print}`命令，然后再添加5行代码。每行必须以`{print}`命令开头。
                     玩得开心!
@@ -3805,7 +3931,7 @@ adventures:
                     醉酒的水手也是在这个关卡中快速制作出来的。整首歌只需要8行代码，看看吧!
 
                     ### 练习
-                    通过将变量`animal`设置为`animals[i]`，将变量`sound`设置为`sounds[i]`，完成Old McDonald歌曲。
+                    通过将变量`animal`设置为`animals[i]`，将变量`sound`设置为`sounds[i]`，完成Old MacDonald歌曲。
                 example_code: |
                     ```
                     动物们 = ['猪', '狗', '牛']
@@ -4279,9 +4405,9 @@ adventures:
                     **另外**我们现在还可以改进之前的能画不同图案的程序。完成这段代码，你就能画出任何你想要的多边形！
                 example_code_2: |
                     ```
-                    边数 = {ask} '你想要几边形？'
-                    角度 = 360 / 边数
-                    {repeat} 边数 {times}
+                    figure = {ask} 'How many angles should I draw?'
+                    angle = 360 / figure
+                    {repeat} figure {times}
                         {turn} _
                         {forward} _
                     ```

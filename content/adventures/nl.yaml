@@ -39,7 +39,7 @@ adventures:
                     naam {is} {ask} Hoe heet de hoofdpersoon?
                     {print} naam gaat nu in het bos lopen
                     {print} naam is wel een beetje bang
-                    {print} ineens hoort hij een vreemd geluid
+                    {print} ineens hoort zij een vreemd geluid
                     {sleep} 2
                     {print} naam is bang dat dit een spookbos is
                     ```
@@ -58,13 +58,13 @@ adventures:
                 example_code: |
                     ```
                     dieren {is} 🦇, 🐿, 🦉, 🦔
-                    {print} Hij hoort nu het geluid van een dieren {at} {random}
+                    {print} Ze hoort nu het geluid van een dieren {at} {random}
                     ```
                 story_text_2: |
                     Het `{add}`commando kun je misschien ook in je verhaal gebruiken.
                 example_code_2: |
                     ```
-                    {print} Hij hoort een geluid...
+                    {print} Ze hoort een geluid...
                     dieren {is} 🐿, 🦔, 🦇, 🦉
                     dier {is} {ask} Wat denk jij dat het is?
                     {add} dier {to_list} dieren
@@ -128,7 +128,7 @@ adventures:
                     {print} naam ' loopt door het bos'
                     {print} naam ' komt een monster tegen'
                     einde {is} {ask} 'Wil je een goed of slecht einde?'
-                    {if} einde {is} goed {print} naam ' pakt het zwaard en het monster rent snel weg'
+                    {if} einde {is} goed {print} naam ' pakt haar zwaard en het monster rent snel weg'
                     {else} {print} 'Het monster eet ' naam ' op'
                     ```
             7:
@@ -497,22 +497,22 @@ adventures:
                     ```
             9:
                 story_text: |
-                    In dit level kunnen we de rekenmachine van level 6 uitbreiden en meerdere sommen achter elkaar vragen.
+                    In dit level kunnen we de rekenmachine van een vorig level uitbreiden en meerdere sommen achter elkaar vragen.
 
                     ### Opdracht 1
                     Kun jij regel 10 afmaken zodat het programma werkt?
 
                     ### Opdracht 2
-                    Geef de speler feedback over een goed en over een fout antwoord. Breid je programma daarvoor uit met een `{else}`.
+                    Geef de speler feedback over een goed en over een fout antwoord, zoals `{print} 'Super!'` of `{print} 'Helaas, het goede antwoord was ' goede_antwoord`.
                 example_code: |
                     ```
                     score = 0
                     {repeat} 10 {times}
                         getallen = 1, 2, 3, 4, 5, 6, 7, 8, 9, 10
-                        getal1 = getallen {at} {random}
-                        getal2 = getallen {at} {random}
-                        goede_antwoord = getal1 * getal2
-                        {print} 'Hoeveel is ' getal1 ' keer ' getal2 '?'
+                        getal_1 = getallen {at} {random}
+                        getal_2 = getallen {at} {random}
+                        goede_antwoord = getal_1 * getal_2
+                        {print} 'Hoeveel is ' getal_1 ' keer ' getal_2 '?'
                         antwoord = {ask} 'Vul hier het antwoord in:'
                         {print} 'Jouw antwoord is ' antwoord
                         {if} _ {is} _
@@ -521,21 +521,32 @@ adventures:
                     ```
             10:
                 story_text: |
-                    Met dit rekenspelletje kun je de tafels oefenen.
-                    Hoe meer getallen je aan de lijst toevoegt, hoe meer tafels je kunt oefenen.
+                    Oefen de tafelsommen met dit programma!
                     ### Opdracht
-                    Kun jij meer getallen toevoegen aan de lijst, zodat je alle tafels tot 10 kunt oefenen?
+                    Vul de lege plekken in. We willen dat het programma deze vragen stelt aan de speler:
+                    ```
+                    Wat is 1 keer 1?
+                    Wat is 1 keer 2?
+                    Wat is 1 keer 3?
+                    Wat is 2 keer 1?
+                    Wat is 2 keer 2?
+                    Wat is 2 keer 3?
+                    Wat is 3 keer 1?
+                    Wat is 3 keer 2?
+                    Wat is 3 keer 3?
+                    _
+                    ```
                 example_code: |
                     ```
-                    nummers = 1, 2, 3
-                    {for} nummer1 {in} nummers
-                        {for} nummer2 {in} nummers
-                            antwoord = {ask} 'Hoeveel is ' nummer2 ' keer ' nummer1 '?'
-                            goed = nummer1 * nummer2
-                            {if} antwoord {is} goed
-                                {print} 'Goedzo!'
+                    getallen = 1, 2, 3
+                    {for} _
+                        {for} _
+                            antwoord = {ask} _
+                            correct = getal_1 * getal_2
+                            {if} antwoord {is} correct
+                                {print} 'Fantastisch!'
                             {else}
-                                {print} 'Foutje! Het was... ' goed
+                                {print} 'Fout! Het antwoord is ' correct
                     ```
             11:
                 story_text: |
@@ -1124,7 +1135,7 @@ adventures:
                     for i in range 1 to 3
                         dier = dieren[i]
                         geluid = geluiden[i]
-                        print 'Old McDonald had een wei'
+                        print 'Old MacDonald had een wei'
                         print 'hi ja hi ja ho!'
                         print 'en in die wei daar stond een ' dier
                         print 'hi ja hi ja ho!'
@@ -1249,7 +1260,7 @@ adventures:
             9:
                 story_text: |
                     Fantastisch! Je bent alweer bij een nieuw level! In de vorige levels leerde je meerdere regels code in een blokje zetten met een {if} of {repeat} commando. Maar je kon ze nog niet allebei tegelijk gebruiken...
-                    Goed nieuws! In dit level mag je een {if} in een {if} of in een {repeat} zetten. Kijk maar!
+                    Goed nieuws! In dit level mag je een {if} in een {if} of in een {repeat} zetten. Dit noemen we 'nesting'. Kijk maar!
                 example_code: |
                     ```
                     antwoord = {ask} 'Ben je klaar om iets nieuws te leren?'
@@ -1623,6 +1634,20 @@ adventures:
                     dieren = hond, kat, papegaai
                     {for} dier {in} dieren
                       {print} dier ' is een leuk dier!'
+                    ```
+                story_text_2: |
+                    ### Opdracht
+                    Maak het liedje af door `{for} actie {in} acties` toe te voegen op regel 2.
+                example_code_2: |
+                    ```
+                    acties = clap your hands, stomp your feet, shout Hurray!
+                    _
+                        {repeat} 2 {times}
+                            {print} 'If youre happy and you know it, ' actie
+                            {sleep} 2
+                        {print} 'If youre happy and you know it, and you really want to show it'
+                        {print} 'If youre happy and you know it, ' actie
+                        {sleep} 3
                     ```
             11:
                 story_text: |-
@@ -2714,7 +2739,7 @@ adventures:
                     ```
             14:
                 story_text: |
-                    You can programm music for fun, but you can also use the musical notes to make something useful like a fire alarm!
+                    You can program music for fun, but you can also use the musical notes to make something useful like a fire alarm!
 
                     ### Exercise
                     Make sure the fire alarm rings when there is a fire!
@@ -2733,6 +2758,106 @@ adventures:
                     fire = {ask} 'Is there a fire?'
                     {if} fire _ 'yes'
                         {call} fire_alarm
+                    ```
+            15:
+                story_text: |
+                    **Warning** This adventure can become extremely annoying!
+                    We can also use the {while} command to repeat a song forever.
+
+                    ### Exercise
+                    Finish the never-ending song.
+                example_code: |
+                    ```
+                    {define} song
+                        {play} _
+
+                    yes_or_no = {ask} 'Do you want to hear my never-ending song?'
+                    {while} yes_or_no = 'yes'
+                        {call} song
+                        {print} '🥳'
+                    ```
+            16:
+                story_text: |
+                    Upgrade your Old MacDonald code!
+
+                    ### Exercise
+                    Take your code from the 'Sing a Song' adventure and add musical notes to it!
+                    You can make a function for each line in the song and call that function after the line is printed.
+                    We defined the first line for you and called it in the code. Can you finish the whole song?
+                example_code: |
+                    ```
+                    {define} line_1
+                        {for} i {in} {range} 1 {to} 3
+                            {play} G
+                        {play} D
+                        {for} i {in} {range} 1 {to} 2
+                            {play} E
+                        {play} D
+
+                    animals = ['pig', 'dog', 'cow']
+                    sounds = ['oink', 'woof', 'moo']
+                    for i in range 1 to 3
+                        animal = animals[i]
+                        sound = sounds[i]
+                        print 'Old MacDonald had a farm'
+                        call line_1
+                        print 'E I E I O!'
+                        _
+                    ```
+            17:
+                story_text: |
+                    You can use the {elif} to create different options.
+
+                    ### Exercise
+                    Firstly, add colons to get the code to work.
+                    Then finish this code by adding at least 2 other songs for other moods. For example a happy song and an angry song.
+                example_code: |
+                    ```
+                    {define} scary_song
+                        {for} i {in} {range} 1 {to} 3
+                            {play} G
+                        {play} E
+                        {sleep} 2
+                        {for} i {in} {range} 1 {to} 3
+                            {play} F
+                        {play} D
+
+                    mood = {ask} 'Which emotion are you feeling?'
+                    {if} mood {is} 'fear'
+                        {call} scary_song
+                    {elif} _
+                    ```
+            18:
+                story_text: |
+                    ### Exercise
+                    Even in this last level of Hedy we can make some music! Be careful of all the syntax that is needed now.
+                    Take a good look at how the functions are defined and called upon in the example code.
+                    Finish the song!
+                example_code: |
+                    ```
+                    {def} line_1():
+                        {for} i {in} {range}(1, 5):
+                            {play} A
+                        {play} D
+                        {play} F
+                        {play} A
+
+                    {def} line_2():
+                        {for} i {in} {range}(1, 5):
+                            {play} G
+                        {play} C
+                        {play} E
+                        {play} G
+
+                    {def} line_3():
+                    _
+
+                    {print} ('The drunken sailor')
+                    {print} ('What shall we do with the drunken sailor?')
+                    line_1()
+                    line_2()
+                    line_3()
+                    {print} ('Early in the morning')
                     ```
     parrot:
         name: Papegaai
@@ -3039,10 +3164,10 @@ adventures:
                 story_text_2: |
                     **Tekst moet ook in lijstjes met aanhalingstekens**
                     Ook bij lijstjes gebruik je nu aanhalingstekens. Let op: elk item op je lijstje moet los tussen aanhalingstekens staan!
-                    Hierdoor kun je nu ook twee woorden opslaan als 1 item op je lijstje, bijvoorbeeld 'Iron Man'.
+                    Hierdoor kun je nu ook twee woorden opslaan als 1 item op je lijstje, bijvoorbeeld 'Black Widow'.
                 example_code_2: |
                     ```
-                    superhelden = 'Spiderman', 'Batman', 'Iron Man'
+                    superhelden = 'Spiderman', 'Batman', 'Black Widow'
                     {print} superhelden {at} {random}
                     ```
                 story_text_3: |
