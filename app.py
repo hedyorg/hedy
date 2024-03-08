@@ -776,41 +776,41 @@ def generate_microbit_file():
 
 
 def save_transpiled_code_for_microbit(transpiled_python_code):
-    if MICROBIT_FEATURE:
-        folder = 'Micro-bit'
-        filepath = os.path.join(folder, 'Micro-bit.py')
+    folder = 'Micro-bit'
+    filepath = os.path.join(folder, 'Micro-bit.py')
 
-        if not os.path.exists(folder):
-            os.makedirs(folder)
-        with open(filepath, 'w') as file:
-            custom_string = "from microbit import *\nwhile True:"
-            file.write(custom_string + "\n")
+    if not os.path.exists(folder):
+        os.makedirs(folder)
+    with open(filepath, 'w') as file:
+        custom_string = "from microbit import *\nwhile True:"
+        file.write(custom_string + "\n")
 
-            # Add space before every display.scroll call
-            indented_code = transpiled_python_code.replace("display.scroll(", "    display.scroll(")
+        # Add space before every display.scroll call
+        indented_code = transpiled_python_code.replace("display.scroll(", "    display.scroll(")
 
-            # Append the indented transpiled code
-            file.write(indented_code)
-    else:
-        return print("Microbit feature is not enabled. Skipping saving transpiled code.")
+        # Append the indented transpiled code
+        file.write(indented_code)
 
 
 @app.route('/download_microbit_files/', methods=['GET'])
 def convert_to_hex_and_download():
-    flash_micro_bit()
-    current_directory = os.path.dirname(os.path.abspath(__file__))
-    micro_bit_directory = os.path.join(current_directory, 'Micro-bit')
+    if MICROBIT_FEATURE:
+        flash_micro_bit()
+        current_directory = os.path.dirname(os.path.abspath(__file__))
+        micro_bit_directory = os.path.join(current_directory, 'Micro-bit')
 
-    @after_this_request
-    def remove_file(response):
-        try:
-            os.remove("Micro-bit/micropython.hex")
-            os.remove("Micro-bit/Micro-bit.py")
-        except BaseException:
-            print("Error removing one of the generated files!")
-        return response
+        @after_this_request
+        def remove_file(response):
+            try:
+                os.remove("Micro-bit/micropython.hex")
+                os.remove("Micro-bit/Micro-bit.py")
+            except BaseException:
+                print("Error removing one of the generated files!")
+            return response
 
-    return send_file(os.path.join(micro_bit_directory, "micropython.hex"), as_attachment=True)
+        return send_file(os.path.join(micro_bit_directory, "micropython.hex"), as_attachment=True)
+    else:
+        return jsonify({'message': 'Microbit feature is disabled'}), 403
 
 
 def flash_micro_bit():
