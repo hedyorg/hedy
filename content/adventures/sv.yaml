@@ -560,20 +560,32 @@ adventures:
                     ```
             10:
                 story_text: |
-                    Det här räknespelet hjälper dig att öva på multiplikationstabellerna!
-                    ### Övning
-                    Kan du lägga till fler tal i listan så du kan öva multiplikationstabellerna upp till 10?
+                    This calculator game helps you practise your tables of multiplication!
+                    ### Exercise
+                    Fill in the blanks. We want this program to ask the player these questions:
+                    ```
+                    How much is 1 times 1?
+                    How much is 1 times 2?
+                    How much is 1 times 3?
+                    How much is 2 times 1?
+                    How much is 2 times 2?
+                    How much is 2 times 3?
+                    How much is 3 times 1?
+                    How much is 3 times 2?
+                    How much is 3 times 3?
+                    _
+                    ```
                 example_code: |
                     ```
-                    tal = 1, 2, 3
-                    {for} tal1 {in} tal
-                        {for} tal2 {in} tal
-                            svar = {ask} 'Hur mycket är ' tal2 ' gånger ' tal1 '?'
-                            rätt = tal1 * tal2
-                            {if} svar {is} rätt
-                                {print} 'Bra jobbat!'
+                    numbers = 1, 2, 3
+                    {for} _
+                        {for} _
+                            answer = {ask} _
+                            correct = number_1 * number_2
+                            {if} answer {is} correct
+                                {print} 'Great job!'
                             {else}
-                                {print} 'Det är fel. Rätt svar är ' rätt
+                                {print} 'That is wrong. The right answer is ' correct
                     ```
             11:
                 story_text: |
@@ -1677,6 +1689,20 @@ adventures:
                     djur = hund, katt, marulk
                     {for} djuret {in} djur
                         {print} 'Jag älskar ' djuret
+                    ```
+                story_text_2: |
+                    ### Exercise
+                    Finish this code by adding `{for} action {in} actions` to line 2.
+                example_code_2: |
+                    ```
+                    actions = clap your hands, stomp your feet, shout Hurray!
+                    _
+                        {repeat} 2 {times}
+                            {print} 'If youre happy and you know it, ' action
+                            {sleep} 2
+                        {print} 'If youre happy and you know it, and you really want to show it'
+                        {print} 'If youre happy and you know it, ' action
+                        {sleep} 3
                     ```
             11:
                 story_text: |-
@@ -3198,10 +3224,10 @@ adventures:
                 story_text_2: |
                     **Alla element i listor behöver också citattecken**.
                     Listor är texter, så de behöver också citattecken. Tänk på att varje element i listan ska ha citattecken.
-                    Detta gör att du kan spara två ord som ett element i listan, till exempel 'Iron Man'.
+                    Detta gör att du kan spara två ord som ett element i listan, till exempel 'Black Widow'.
                 example_code_2: |
                     ```
-                    superhjältar = 'Spiderman', 'Batman', 'Iron Man'
+                    superhjältar = 'Spiderman', 'Batman', 'Black Widow'
                     {print} superhjältar {at} {random}
                     ```
                 story_text_3: |

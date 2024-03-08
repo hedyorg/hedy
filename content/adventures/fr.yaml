@@ -560,20 +560,32 @@ adventures:
                     ```
             10:
                 story_text: |
-                    Ce jeu de la calculatrice t'aide à apprendre tes tables de multiplication !
-                    ### Exercice
-                    Peux-tu ajouter d'autres nombres à la liste, pour t'entrainer aux multiplications jusqu'à la table de 10 ?
+                    This calculator game helps you practise your tables of multiplication!
+                    ### Exercise
+                    Fill in the blanks. We want this program to ask the player these questions:
+                    ```
+                    How much is 1 times 1?
+                    How much is 1 times 2?
+                    How much is 1 times 3?
+                    How much is 2 times 1?
+                    How much is 2 times 2?
+                    How much is 2 times 3?
+                    How much is 3 times 1?
+                    How much is 3 times 2?
+                    How much is 3 times 3?
+                    _
+                    ```
                 example_code: |
                     ```
-                    nombres = 1, 2, 3
-                    {for} nombre1 {in} nombres
-                        {for} nombre2 {in} nombres
-                            réponse = {ask} "Combien font " nombre2 " fois " nombre1 " ?"
-                            correcte = nombre1 * nombre2
-                            {if} réponse {is} correcte
-                                {print} "Bon travail !"
+                    numbers = 1, 2, 3
+                    {for} _
+                        {for} _
+                            answer = {ask} _
+                            correct = number_1 * number_2
+                            {if} answer {is} correct
+                                {print} 'Great job!'
                             {else}
-                                {print} "C'est faut, la bonne réponse est " correcte
+                                {print} 'That is wrong. The right answer is ' correct
                     ```
             11:
                 story_text: |
@@ -1651,6 +1663,20 @@ adventures:
                     animaux = chiens, chats, méduses
                     {for} animal {in} animaux
                         {print} "J'aime les " animal
+                    ```
+                story_text_2: |
+                    ### Exercise
+                    Finish this code by adding `{for} action {in} actions` to line 2.
+                example_code_2: |
+                    ```
+                    actions = clap your hands, stomp your feet, shout Hurray!
+                    _
+                        {repeat} 2 {times}
+                            {print} 'If youre happy and you know it, ' action
+                            {sleep} 2
+                        {print} 'If youre happy and you know it, and you really want to show it'
+                        {print} 'If youre happy and you know it, ' action
+                        {sleep} 3
                     ```
             11:
                 story_text: |-
@@ -3184,10 +3210,10 @@ adventures:
                 story_text_2: |
                     **Tous les éléments des listes ont aussi besoins des guillemets**
                     Les listes, c'est du texte ! Donc, elles ont aussi besoins des guillemets. Attention que chaque élément de la liste à besoins de ses guillemets individuellement.
-                    Cela te permet d'avoir un élément de deux mots dans une liste. Par exemple "Iron Man".
+                    Cela te permet d'avoir un élément de deux mots dans une liste. Par exemple "Black Widow".
                 example_code_2: |
                     ```
-                    superhéros = "Spiderman", "Batman", "Iron Man"
+                    superhéros = "Spiderman", "Batman", "Black Widow"
                     {print} superhéros {at} {random}
                     ```
                 story_text_3: |

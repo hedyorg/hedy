@@ -559,20 +559,32 @@ adventures:
                     ```
             10:
                 story_text: |
-                    Bu hesap makinesi oyunu, çarpım tablosu alıştırması yapmanıza yardımcı olur!
-                    ### Alıştırma
-                    Listeye daha fazla sayı ekleyebilir misiniz, böylece 10'a kadar sayıların çarpım tablosunu çalışabilirsiniz?
+                    This calculator game helps you practise your tables of multiplication!
+                    ### Exercise
+                    Fill in the blanks. We want this program to ask the player these questions:
+                    ```
+                    How much is 1 times 1?
+                    How much is 1 times 2?
+                    How much is 1 times 3?
+                    How much is 2 times 1?
+                    How much is 2 times 2?
+                    How much is 2 times 3?
+                    How much is 3 times 1?
+                    How much is 3 times 2?
+                    How much is 3 times 3?
+                    _
+                    ```
                 example_code: |
                     ```
-                    sayılar = 1, 2, 3
-                    {for} sayı1 {in} sayılar
-                        {for} sayı2 {in} sayılar
-                            cevap = {ask} 'Söyle bakalım, ' sayı2 ' kere ' sayı1 ' kaç eder?'
-                            doğrucevap = sayı1 * sayı2
-                            {if} cevap {is} doğrucevap
-                                {print} 'Aferin!'
+                    numbers = 1, 2, 3
+                    {for} _
+                        {for} _
+                            answer = {ask} _
+                            correct = number_1 * number_2
+                            {if} answer {is} correct
+                                {print} 'Great job!'
                             {else}
-                                {print} 'Bu yanlış. Doğru cevap ' doğrucevap
+                                {print} 'That is wrong. The right answer is ' correct
                     ```
             11:
                 story_text: |
@@ -1678,6 +1690,20 @@ adventures:
                     hayvanlar = köpek, kedi, balık
                     {for} hayvan {in} hayvanlar
                         {print} 'Benim sevdiğim ' hayvan
+                    ```
+                story_text_2: |
+                    ### Exercise
+                    Finish this code by adding `{for} action {in} actions` to line 2.
+                example_code_2: |
+                    ```
+                    actions = clap your hands, stomp your feet, shout Hurray!
+                    _
+                        {repeat} 2 {times}
+                            {print} 'If youre happy and you know it, ' action
+                            {sleep} 2
+                        {print} 'If youre happy and you know it, and you really want to show it'
+                        {print} 'If youre happy and you know it, ' action
+                        {sleep} 3
                     ```
             11:
                 story_text: |-
@@ -3217,10 +3243,10 @@ adventures:
                 story_text_2: |
                     **Listelerdeki tüm öğelerin de tırnak işaretine ihtiyacı vardır**
                     Listeler metindir, bu nedenle onlarında tırnak işaretlerine ihtiyaçları vardır. Listedeki her bir öğenin tırnak işaretine sahip olduğuna dikkat edin.
-                    Bu, örneğin 'Iron Man' gibi iki kelimeyi listeye 1 öğe olarak kaydetmenizi sağlar.
+                    Bu, örneğin 'Black Widow' gibi iki kelimeyi listeye 1 öğe olarak kaydetmenizi sağlar.
                 example_code_2: |
                     ```
-                    süperkahramanlar = 'Spiderman', 'Batman', 'Iron Man'
+                    süperkahramanlar = 'Spiderman', 'Batman', 'Black Widow'
                     {print} süperkahramanlar {at} {random}
                     ```
                 story_text_3: |
