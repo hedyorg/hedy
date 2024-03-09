@@ -841,7 +841,7 @@ export const TRANSLATIONS: Record<string, Record<MessageKey, string>> = {
     "songs": "🎵,🎶",
     "teacher_welcome": "Welkom bij Hedy! Jouw account is omgezet naar een leerkrachtenaccount. Je \"kan nu klassen maken en er leerlingen in uitnodigen.",
     "turtle": "🐢",
-    "unsaved_class_changes": "Er zijn wijzigingen nog niet opgeslagen, weet je zeker dat je terug wilt \"gaan?"
+    "unsaved_class_changes": "Er zijn wijzigingen nog niet opgeslagen, weet je zeker dat je terug wilt gaan?"
   },
   "no_NB": {
     "CheckInternet": "Sjekk internetttilkoblingen din, fungerer den.",
