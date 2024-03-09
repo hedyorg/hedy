@@ -763,7 +763,6 @@ MICROBIT_FEATURE = True
 @app.route('/generate_microbit_files', methods=['POST'])
 def generate_microbit_file():
     if MICROBIT_FEATURE:
-        # Extract variables from request body
         body = request.json
         code = body.get("code")
         level = body.get("level")
@@ -784,11 +783,8 @@ def save_transpiled_code_for_microbit(transpiled_python_code):
     with open(filepath, 'w') as file:
         custom_string = "from microbit import *\nwhile True:"
         file.write(custom_string + "\n")
-
         # Add space before every display.scroll call
         indented_code = transpiled_python_code.replace("display.scroll(", "    display.scroll(")
-
-        # Append the indented transpiled code
         file.write(indented_code)
 
 
@@ -799,6 +795,9 @@ def convert_to_hex_and_download():
         current_directory = os.path.dirname(os.path.abspath(__file__))
         micro_bit_directory = os.path.join(current_directory, 'Micro-bit')
 
+        # https://stackoverflow.com/questions/24612366/delete-an-uploaded-file-after-downloading-it-from-flask
+
+        # Once the file is downloaded -> remove it
         @after_this_request
         def remove_file(response):
             try:
